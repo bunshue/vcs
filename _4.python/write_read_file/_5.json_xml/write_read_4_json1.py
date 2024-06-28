@@ -7,23 +7,51 @@ dumps
 loads
 dump
 load
+
+
+json常用的方法(6)
+
+load()
+loads()
+dump()
+dumps()
+JSONDecoder()
+JSONEncoder()
+
+json轉dict : json.loads()
+
+dict轉json : json.dumps()
+
+json模塊主要有四個比較重要的函數，分別是：
+
+    dump - 將Python對象按照JSON格式序列化到文件中
+    dumps - 將Python對象處理成JSON格式的字符串
+    load - 將文件中的JSON數據反序列化成對象
+    loads - 將字符串的內容反序列化成Python對象
+
 """
 
+import os
 import sys
 import json
+import datetime
 
 print("------------------------------------------------------------")  # 60個
 
+print('字典 轉 json')
 data = {
    "name": "Joe Chen", 
    "grade": 95, 
    "tel": "0933123456"   
 }
 
+print(type(data))
 json_str = json.dumps(data)
 print(json_str)
 data2 = json.loads(json_str)
 print(data2)
+
+sys.exit()
 
 
 jsonfile = "Student2.json"
@@ -334,8 +362,6 @@ print(numbers)
 
 print("------------------------------------------------------------")  # 60個
 
-import datetime
-
 filename = 'C:/_git/vcs/_1.data/______test_files1/_json/data_earthquake.json'
 fp = open(filename, 'r')
 earthquakes = json.load(fp)
@@ -362,7 +388,7 @@ print('------------------------------------------------------------')	#60個
 
 #抓取地震資料 用json拆解
 
-import requests, datetime
+import requests
 
 url = 'http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_week.geojson'
 html = requests.get(url)
@@ -387,7 +413,7 @@ for data in dataset:
 
 print('------------------------------------------------------------')	#60個
 
-import requests, hashlib, datetime, os.path
+import requests, hashlib, os.path
 
 url = 'http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_week.geojson'
 html = requests.get(url)
@@ -477,7 +503,6 @@ print('------------------------------------------------------------')	#60個
 
 # 批次檔案讀取
 
-import os, json
 from collections import defaultdict
 
 def print_scores(filename):
@@ -515,19 +540,12 @@ with open(filename, "w", encoding = 'utf-8') as fp:
     print(filename + " is dumping...")
     json.dump(titles, fp)
 """
-
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python-100-Days-zh_TW-master\Day01-15\code\Day11\json1.py
 
 """
 讀取JSON數據
 
 """
-
-import json
 
 json_str = '{"name": "駱昊", "age": 38, "title": "叫獸"}'
 result = json.loads(json_str)
@@ -599,14 +617,9 @@ print(result['age'])
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python-100-Days-zh_TW-master\Day01-15\code\Day11\json2.py
-
 """
 寫入JSON文件
 """
-
-import json
-
 teacher_dict = {'name': '白元芳', 'age': 25, 'title': '講師'}
 json_str = json.dumps(teacher_dict)
 print(json_str)
@@ -619,8 +632,6 @@ print(type(json_str))
 print("------------------------------------------------------------")  # 60個
 
 print('讀取一個JSON字典')
-
-import json
 
 from difflib import get_close_matches
 
@@ -643,7 +654,7 @@ else:
 
 print("------------------------------------------------------------")  # 60個
 
-import json
+print('串列 轉 json')
 
 listProduct = [
     {"編號": "P01", "品名": "五香豆干", "單價": 89},
@@ -656,8 +667,6 @@ f.close()
 print("JSON產品資料存檔成功")
 
 print("------------------------------------------------------------")  # 60個
-
-import json
 
 listScore = [89, 100, 23, 78, 89]
 print("listScore串列：", listScore)
@@ -677,16 +686,12 @@ print("jsonEmp型別：", type(jsonEmp))
 
 print("------------------------------------------------------------")  # 60個
 
-import json
-
 fruit = {"banana": "香蕉", "papaya": "木瓜", "apple": "蘋果"}
 print(json.dumps(fruit, ensure_ascii=False))
 print(json.dumps(fruit, ensure_ascii=False, sort_keys=True))
 print(json.dumps(fruit, ensure_ascii=False, sort_keys=True, indent=4))
 
 print("------------------------------------------------------------")  # 60個
-
-import json
 
 f = open("tmp_product.json", "r", encoding="utf_8")
 pObj = json.load(f)
@@ -698,8 +703,6 @@ for product in pObj:
     print("=" * 20)
 
 print("------------------------------------------------------------")  # 60個
-
-import json
 
 jsonStr = """
 {"編號":"E01","姓名": "王小明",
@@ -715,9 +718,6 @@ for key in pObj:
     print(key, ":", pObj[key], " value的型別：", type(pObj[key]))
 
 print("------------------------------------------------------------")  # 60個
-
-import json
-
 
 # 新增員工記錄函式
 def fnCreate():
@@ -884,8 +884,8 @@ for meal in listMeal:
 
 print("------------------------------------------------------------")  # 60個
 
-import os
 import matplotlib.pyplot as plt  	# 引用圖表使用套件
+
 # 讀取109年9月臺中市10大易肇事路口.json資料並放入listTrafficEvent串列物件
 f=open("data/109年9月臺中市10大易肇事路口.json", "r",       encoding="utf_8")
 listTrafficEvent = json.load(f)
@@ -934,16 +934,11 @@ print("圖表建置成成功")
 
 print("------------------------------------------------------------")  # 60個
 
-
-
-
 print("------------------------------------------------------------")  # 60個
-
-
-
 
 
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
+

@@ -563,3 +563,46 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+
+
+
+def checkbutton_select8():
+    print("你的選項是 :", var.get())
+
+
+tk.Label(window, text="請問您的最高學歷: ", justify=tk.LEFT, padx=20).pack()
+place = [("博士", 1), ("碩士", 2), ("大學", 3), ("高中", 4)]
+var = tk.IntVar()
+var.set(2)
+for item, val in place:
+    tk.Radiobutton(
+        window, text=item, value=val, variable=var, padx=20, command=checkbutton_select8
+    ).pack()
+
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
+print("------------------------------------------------------------")  # 60個
+
+
+def checkbutton_select9():
+    print("你的選項是 :", var.get())
+
+
+tk.Label(window, text="請選擇精通的程式語言: ", justify=tk.LEFT, padx=20).pack()
+place = [("Python語言", 1), ("C語言", 2), ("C++語言", 3), ("Java語言", 4)]
+var = tk.IntVar()
+var.set(3)
+
+for item, val in place:
+    tk.Radiobutton(
+        window, text=item, value=val, variable=var, padx=20, command=checkbutton_select9
+    ).pack()
+
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
+print("------------------------------------------------------------")  # 60個
+
+
+

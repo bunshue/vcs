@@ -1,3 +1,4 @@
+import sys
 import pickle
 
 print('使用 pickle 模組 寫讀二進位檔案')
@@ -136,13 +137,6 @@ print(new_data)
 
 print('------------------------------------------------------------')	#60個
 '''
-
-
-print('------------------------------------------------------------')	#60個
-
-
-import pickle
-
 print("寫入資料給pickle")
 outfile = open("tmp_pickle_file.dat", "wb")
 
@@ -185,4 +179,58 @@ with open('tmp_pickle_example.pickle', 'rb') as file:
 print(a_dict1)
 
 print('------------------------------------------------------------')	#60個
+
+import os
+
+print('製作 pickle 檔案')
+
+print('看似只能一次寫入 不能附加 所以要用二維陣列 一次寫入')
+
+filename = "tmp_pickle.dat"
+outfile = open(filename, "wb")
+
+addressList = [[5, "aaa", "bbb", "ccc", "ddd"], [15, "aaa", "bbb", "ccc", "ddd"], [25, "aaa", "bbb", "ccc", "ddd"]]
+
+pickle.dump(addressList, outfile)
+
+outfile.close()
+
+
+print('讀取 pickle 檔案')
+
+addressList = []
+
+if not os.path.isfile(filename):
+    addressList = []
+else:
+    print("使用 pickle 讀取檔案")
+    try:
+        infile = open(filename, "rb")
+        addressList = pickle.load(infile)
+        print(type(addressList))
+        print(len(addressList))
+    except EOFError:
+        addressList = []
+
+    infile.close()
+    print(addressList)
+
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
 

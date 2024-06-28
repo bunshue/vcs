@@ -2,18 +2,28 @@
 csv檔 逗號分隔值(comma-seperated values)
 
 預設使用','分隔, 也可以使用其他分隔符號
-csvWriter = csv.writer(csvFile, delimiter='\t') # 建立Writer物件, 使用TAB區分項目 不使用逗號
+csv_writer = csv.writer(csvFile, delimiter='\t') # 建立Writer物件, 使用TAB區分項目 不使用逗號
 
 先寫後讀
 
-csv.writer()
-csv.DictWriter(csvfile, fieldnames=fieldnames)  # 建立Writer物件
-writer = csv.writer(csvfile)
-writer.writerows(np.array(animals))
+1. csv_writer = csv.writer() + writerows()
 
-1. csv.reader()
-2. csv.DictReader()
+2. csv_dict_writer = csv.DictWriter() + writerows()
 
+3. csv.reader()
+
+4. csv.DictReader()
+
+5. pandas
+
+6. 其他 & 新進
+
+csv常用的方法(4)
+
+reader()	讀取CSV檔案 串列形式
+writer()	寫入CSV檔案 串列形式
+DictReader()	讀取CSV檔案 字典形式
+DictWriter()	寫入CSV檔案 字典形式
 
 """
 print("------------------------------------------------------------")  # 60個
@@ -23,31 +33,24 @@ import csv
 import random
 import numpy as np
 import pandas as pd
-'''
-print("------------------------------------------------------------")  # 60個
 
-print("寫入CSV檔 1 writer")
+
+print("------------------------------------------------------------")  # 60個
+print("1. csv_writer = csv.writer() + writerows()")
+print("------------------------------------------------------------")  # 60個
 
 filename = "tmp_write_read_csv01.csv"
 
 csvfile = open(filename, "w+", newline="")
 try:
-    writer = csv.writer(csvfile)
+    csv_writer = csv.writer(csvfile)
     # 寫入欄位名稱
-    writer.writerow(("中文名", "英文名", "體重", "全名"))
+    csv_writer.writerow(("中文名", "英文名", "體重", "全名"))
     # 寫入資料(12筆)
-    writer.writerow(("鼠", "mouse", 3, "米老鼠"))
-    writer.writerow(("牛", "ox", 48, "班尼牛"))
-    writer.writerow(("虎", "tiger", 33, "跳跳虎"))
-    writer.writerow(("兔", "rabbit", 8, "彼得兔"))
-    writer.writerow(("龍", "dragon", 38, "逗逗龍"))
-    writer.writerow(("蛇", "snake", 16, "貪吃蛇"))
-    writer.writerow(("馬", "horse", 36, "草泥馬"))
-    writer.writerow(("羊", "goat", 29, "喜羊羊"))
-    writer.writerow(("猴", "monkey", 22, "山道猴"))
-    writer.writerow(("雞", "chicken", 6, "肯德雞"))
-    writer.writerow(("狗", "dog", 12, "貴賓狗"))
-    writer.writerow(("豬", "pig", 42, "佩佩豬"))
+    csv_writer.writerow(("鼠", "mouse", 3, "米老鼠"))
+    csv_writer.writerow(("牛", "ox", 48, "班尼牛"))
+    csv_writer.writerow(("虎", "tiger", 33, "跳跳虎"))
+    csv_writer.writerow(("兔", "rabbit", 8, "彼得兔"))
 finally:
     csvfile.close()
 
@@ -55,10 +58,149 @@ print("寫入檔案 " + filename + " 完成, 檔案 :", filename)
 
 print("------------------------------------------------------------")  # 60個
 
-print("寫入CSV檔 2 DictWriter")
+print("寫入CSV檔 一維串列資料 一次寫入")
+
+filename = "tmp_write_read_csv03.csv"
+
+# 建立csv一維串列資料
+
+print("一維 串列")
+animals = ["鼠", "牛", "虎", "兔", "龍"]  # 串列
+
+# 開啟輸出的 csv 檔案
+# with open(filename, 'w', encoding='utf-8', newline='') as csvfile:  # 開啟csv檔案
+with open(filename, "w", newline="") as csvfile:  # 開啟csv檔案
+    # 建立 csv 檔寫入物件
+    csv_writer = csv.writer(csvfile)
+
+    # 寫入一維串列資料
+    csv_writer.writerows(np.array(animals))
+
+print("寫入檔案 " + filename + " 完成, 檔案 :", filename)
+
+print("寫入CSV檔 二維串列資料 一次寫入")
+
+print("------------------------------------------------------------")  # 60個
+
+filename = "tmp_write_read_csv04.csv"
+
+# 建立csv二維串列資料
+csvtable = [
+    ["中文名", "英文名", "體重", "全名"],
+    ["鼠", "mouse", 3, "米老鼠"],
+    ["牛", "ox", 48, "班尼牛"],
+    ["虎", "tiger", 33, "跳跳虎"],
+    ["兔", "rabbit", 8, "彼得兔"],
+]
+
+# with open(filename, 'w', encoding='utf-8', newline='') as csvfile:  # 開啟csv檔案
+with open(filename, "w", newline="") as csvfile:  # 開啟csv檔案
+    # 建立 csv 檔寫入物件
+    csv_writer = csv.writer(csvfile)
+
+    # 寫入二維串列資料
+    csv_writer.writerows(csvtable)
+
+print("寫入檔案 " + filename + " 完成, 檔案 :", filename)
+
+print("寫入CSV檔 二維串列資料 一次寫一行(row)")
+
+filename = "tmp_write_read_csv05.csv"
+
+with open(filename, "w+", newline="") as csvfile:  # 開啟csv檔案
+    csv_writer = csv.writer(csvfile)
+    for row in csvtable:
+        csv_writer.writerow(row)
+
+print("寫入檔案 " + filename + " 完成, 檔案 :", filename)
+
+print("------------------------------------------------------------")  # 60個
+
+csvfile = open("tmp_writerProduct.csv", "w", newline="")  # 開啟writerProduct.csv檔案
+csv_writer = csv.writer(csvfile)  # 建立writer物件，物件名稱為csv_writer
+# 建立listProduct二維串列有兩筆產品
+listProduct = [["B01", "小林煎餅", "78"], ["B02", "五香豆干", "90"]]
+# 寫入一維串列當做標題
+csv_writer.writerow(["編號", "品名", "單價"])
+csv_writer.writerows(listProduct)  # 將二維串列的兩筆產品寫入csv內
+csvfile.close()  # 關閉檔案
+
+print("------------------------------------------------------------")  # 60個
+
+listProduct=["","",""] # 建立listProduct串列，用來存放一筆產品記錄
+
+# 以附加模式開啟tProduct.csv檔案
+f=open('tProduct.csv','a', newline='') 
+csv_writer = csv.writer(f) 
+listProduct[0] = "A123"   #listProduct[0]存放編號
+listProduct[1] = "王子麵"   #listProduct[1]存放品名
+listProduct[2] = "10"   #listProduct[2]存放單價
+csv_writer.writerow(listProduct)
+print("新增成功")
+f.close()
+
+print("------------------------------------------------------------")  # 60個
+
+filename = "tmp_write_read_csv08.csv"
+
+with open(filename, "w", newline="", encoding="utf-8") as csvfile:  # 開啟csv檔案
+    csv_writer = csv.writer(csvfile)  # 建立Writer物件
+    csv_writer.writerow(["姓名", "年齡", "城市"])
+    csv_writer.writerow(["Hung", "35", "Taipei"])
+    csv_writer.writerow(["James", "40", "Chicago"])
+
+print("------------------------------------------------------------")  # 60個
+
+filename = "data/Example2.csv"
+list1 = [[10, 33, 45], [5, 25, 56]]
+with open(filename, "w+", newline="") as csvfile:  # 開啟csv檔案
+    csv_writer = csv.writer(csvfile)
+    csv_writer.writerow(["Data1", "Data2", "Data3"])
+    for row in list1:
+        csv_writer.writerow(row)
+
+"""
+print('寫入 csv 檔案')   一讀一寫
+with open(outfilename,'w',newline='') as csvfile:    # 開啟csv檔案
+    csv_writer = csv.writer(csvfile)    # 建立Writer物件   
+    for row in listReport:              # 將串列寫入
+        csv_writer.writerow(row)
+"""
+
+
+"""
+outfilename = "tmp_write_read_csv09.csv"  # 目的檔案
+with open(outfilename, "w", newline="", encoding="utf-8") as csvfile:  # 開啟csv檔案
+    csv_writer = csv.writer(csvfile)  # 建立Writer物件
+    for row in listReport:  # 將串列寫入
+        csv_writer.writerow(row)
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+filename = "tmp_write_read_csv10.csv"
+with open(filename, "w", newline="") as csvfile:  # 開啟csv檔案
+    csv_writer = csv.writer(csvfile, delimiter="\t")  # 建立Writer物件
+    csv_writer.writerow(["Name", "Age", "City"])
+    csv_writer.writerow(["Hung", "35", "Taipei"])
+    csv_writer.writerow(["James", "40", "Chicago"])
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("2. csv_dict_writer = csv.DictWriter() + writerows()")
+print("------------------------------------------------------------")  # 60個
+
+print("寫入CSV檔 DictWriter")
 
 filename = "tmp_write_read_csv02.csv"
-with open(filename, "w", newline="") as csvfile:
+
+with open(filename, "w", newline="") as csvfile:  # 開啟csv檔案
     # 定義欄位
     fieldnames = ["中文名", "英文名", "體重", "全名"]
 
@@ -71,105 +213,71 @@ with open(filename, "w", newline="") as csvfile:
     csv_dict_writer.writerow({"中文名": "牛", "英文名": "ox", "體重": 48, "全名": "班尼牛"})
     csv_dict_writer.writerow({"中文名": "虎", "英文名": "tiger", "體重": 33, "全名": "跳跳虎"})
     csv_dict_writer.writerow({"中文名": "兔", "英文名": "rabbit", "體重": 8, "全名": "彼得兔"})
-    csv_dict_writer.writerow({"中文名": "龍", "英文名": "dragon", "體重": 38, "全名": "逗逗龍"})
-    csv_dict_writer.writerow({"中文名": "蛇", "英文名": "snake", "體重": 16, "全名": "貪吃蛇"})
-    csv_dict_writer.writerow({"中文名": "馬", "英文名": "horse", "體重": 36, "全名": "草泥馬"})
-    csv_dict_writer.writerow({"中文名": "羊", "英文名": "goat", "體重": 29, "全名": "喜羊羊"})
-    csv_dict_writer.writerow({"中文名": "猴", "英文名": "monkey", "體重": 22, "全名": "山道猴"})
-    csv_dict_writer.writerow({"中文名": "雞", "英文名": "chicken", "體重": 6, "全名": "肯德雞"})
-    csv_dict_writer.writerow({"中文名": "狗", "英文名": "dog", "體重": 12, "全名": "貴賓狗"})
-    csv_dict_writer.writerow({"中文名": "豬", "英文名": "pig", "體重": 42, "全名": "佩佩豬"})
 
 print("寫入檔案 " + filename + " 完成, 檔案 :", filename)
 
 print("------------------------------------------------------------")  # 60個
 
-print("寫入CSV檔 3a 一維串列資料 一次寫入")
+csvfile = open("tmp_dictWriterProduct.csv", "w", newline="")
+# 建立writer物件，同時指定欄位名稱
+csv_dict_writer = csv.DictWriter(csvfile, fieldnames=["產品編號", "品名", "單價"])
+csv_dict_writer.writeheader()  # 寫入欄位名稱
+csv_dict_writer.writerow({"產品編號": "A02", "品名": "黑松沙士", "單價": 90})
+# 寫入兩筆產品記錄到csv檔中
+csv_dict_writer.writerow({"產品編號": "A02", "品名": "草苺蛋糕", "單價": 120})
+csvfile.close()
 
-filename = "tmp_write_read_csv03.csv"
+print("------------------------------------------------------------")  # 60個
 
-# 建立csv一維串列資料
+filename = "tmp_write_read_csv11.csv"
+with open(filename, "w", newline="") as csvfile:  # 開啟csv檔案
+    fields = ["Name", "Age", "City"]
+    csv_dict_writer = csv.DictWriter(csvfile, fieldnames=fields)  # 建立Writer物件
 
-print("一維 串列")
-animals = ["鼠", "牛", "虎", "兔", "龍"]  # 串列
+    csv_dict_writer.writeheader()  # 寫入標題
+    csv_dict_writer.writerow({"Name": "Hung", "Age": "35", "City": "Taipei"})
+    csv_dict_writer.writerow({"Name": "James", "Age": "40", "City": "Chicago"})
 
-# 開啟輸出的 csv 檔案
-# with open(filename, 'w', encoding='utf-8', newline='') as csvfile:
-with open(filename, "w", newline="") as csvfile:
-    # 建立 csv 檔寫入物件
-    csv_writer = csv.writer(csvfile)
+print("------------------------------------------------------------")  # 60個
 
-    # 寫入一維串列資料
-    csv_writer.writerows(np.array(animals))
-
-print("寫入檔案 " + filename + " 完成, 檔案 :", filename)
-
-print("寫入CSV檔 3b 二維串列資料 一次寫入")
-
-filename = "tmp_write_read_csv04.csv"
-
-# 建立csv二維串列資料
-csvtable = [
-    ["中文名", "英文名", "體重", "全名"],
-    ["鼠", "mouse", 3, "米老鼠"],
-    ["牛", "ox", 48, "班尼牛"],
-    ["虎", "tiger", 33, "跳跳虎"],
-    ["兔", "rabbit", 8, "彼得兔"],
-    ["龍", "dragon", 38, "逗逗龍"],
-    ["蛇", "snake", 16, "貪吃蛇"],
-    ["馬", "horse", 36, "草泥馬"],
-    ["羊", "goat", 29, "喜羊羊"],
-    ["猴", "monkey", 22, "山道猴"],
-    ["雞", "chicken", 6, "肯德雞"],
-    ["狗", "dog", 12, "貴賓狗"],
-    ["豬", "pig", 42, "佩佩豬"],
+# 定義串列,元素是字典
+dictList = [
+    {"姓名": "Hung", "年齡": "35", "城市": "臺北"},
+    {"姓名": "James", "年齡": "40", "城市": "芝加哥"},
 ]
 
-# 開啟輸出的 csv 檔案
-# with open(filename, 'w', encoding='utf-8', newline='') as csvfile:
-with open(filename, "w", newline="") as csvfile:
-    # 建立 csv 檔寫入物件
-    csv_writer = csv.writer(csvfile)
-
-    # 寫入二維串列資料
-    csv_writer.writerows(csvtable)
-
-print("寫入檔案 " + filename + " 完成, 檔案 :", filename)
-
-print("寫入CSV檔 3c 二維串列資料 一次寫一行(row)")
-
-filename = "tmp_write_read_csv05.csv"
-
-with open(filename, "w+", newline="") as csvfile:
-    csv_writer = csv.writer(csvfile)
-    for row in csvtable:
-        csv_writer.writerow(row)
-
-print("寫入檔案 " + filename + " 完成, 檔案 :", filename)
+filename = "tmp_write_read_csv12.csv"
+with open(filename, "w", newline="", encoding="utf-8") as csvfile:  # 開啟csv檔案
+    fields = ["姓名", "年齡", "城市"]
+    csv_dict_writer = csv.DictWriter(csvfile, fieldnames=fields)  # 建立Writer物件
+    csv_dict_writer.writeheader()  # 寫入標題
+    for row in dictList:  # 寫入內容
+        csv_dict_writer.writerow(row)
 
 print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
+
+
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
-print("1. csv.reader()")
-print("------------------------------------------------------------")  # 60個
 
-print("python讀寫CSV檔 1 讀取")
+print("------------------------------------------------------------")  # 60個
+print("3. csv.reader()")
+print("------------------------------------------------------------")  # 60個
 
 filename = "data/animals.csv"
 
 # 讀取方法相同 印出資料方法1
-#with open(filename, newline="") as csvfile:
-with open(filename, 'r', encoding='utf-8') as csvfile:
+#with open(filename, newline="") as csvfile:  # 開啟csv檔案
+with open(filename, 'r', encoding='utf-8') as csvfile:  # 開啟csv檔案
     csv_reader = csv.reader(csvfile)  # 讀取 csv 檔案內容
     # 以迴圈顯示每一列
     for row in csv_reader:
         print(row)
 
 # 讀取方法相同 印出資料方法2, 完整地讀取每一個元素
-#with open(filename, newline="") as csvfile:
-with open(filename, 'r', encoding='utf-8') as csvfile:
+#with open(filename, newline="") as csvfile:  # 開啟csv檔案
+with open(filename, 'r', encoding='utf-8') as csvfile:  # 開啟csv檔案
     csv_reader = csv.reader(csvfile)  # 讀取 csv 檔案內容
 
     datas = list(csv_reader)  # 將資料轉成list
@@ -181,19 +289,16 @@ with open(filename, 'r', encoding='utf-8') as csvfile:
 
 print("------------------------------------------------------------")  # 60個
 
-print("python讀寫CSV檔 7 讀取")
-
 filename = "data/animals.csv"
-with open(filename, "r", encoding="UTF-8-sig") as csvfile:
+with open(filename, "r", encoding="UTF-8-sig") as csvfile:  # 開啟csv檔案
     for line in csvfile:
         print(line)
 
 print("------------------------------------------------------------")  # 60個
-print("python讀寫CSV檔 8 讀取")
 
 filename = "data/animals.csv"
 
-with open(filename, "rt", encoding="UTF-8-sig") as csvfile:
+with open(filename, "rt", encoding="UTF-8-sig") as csvfile:  # 開啟csv檔案
     #將所有資料讀出來變成一個一維串列
     data = csvfile.readlines()
 print(type(data))
@@ -201,14 +306,12 @@ print(data)
 
 print("------------------------------------------------------------")  # 60個
 
-print("python讀寫CSV檔 11 讀取")
-
 filename = "data/python_ReadWrite_CSV1.csv"
 
 import pprint as pp
 
 data_list = list()
-with open(filename, "rt") as csvfile:
+with open(filename, "rt") as csvfile:  # 開啟csv檔案
     columns = csvfile.readline().split(",")
     for item in csvfile.readlines():
         temp = dict()
@@ -219,7 +322,6 @@ pp.pprint(data_list)
 
 print("------------------------------------------------------------")  # 60個
 
-print("讀取 csv 檔案")
 filename = "./data/csvReport.csv"
 
 with open(filename, encoding="utf-8") as csvfile:  # 開啟csv檔案
@@ -235,16 +337,17 @@ print(listReport[2][3], listReport[2][6])
 
 print("------------------------------------------------------------")  # 60個
 
-print("讀取 csv 檔案")
 infilename = "./data/csvReport.csv"  # 來源檔案
 outfilename = "out19_6.csv"  # 目的檔案
-with open(infilename, encoding="utf-8") as csvfile:  # 開啟csv檔案供讀取
+
+with open(infilename, encoding="utf-8") as csvfile:  # 開啟csv檔案
     csv_reader = csv.reader(csvfile)  # 讀檔案建立Reader物件
     listReport = list(csv_reader)  # 將資料轉成串列
 
 print("------------------------------------------------------------")  # 60個
 
 filename = "./data/csvReport2.csv"
+
 with open(filename) as csvfile:  # 開啟csv檔案
     csv_reader = csv.reader(csvfile)  # 讀檔案建立Reader物件
     listReport = list(csv_reader)  # 將資料轉成串列
@@ -262,43 +365,14 @@ print("Steveis Total Revenue of 2026 = ", total2026)
 
 print("------------------------------------------------------------")  # 60個
 
-""" many
-filename_r = 'data/workfile.csv'
-filename_w = 'tmp_write_read_csv06.csv'
-
-#一讀一寫
-print('讀取csv檔, 檔案 :', filename_r)
-
-with open(filename_r, 'r') as csvfile1:
-    with open(filename_w, 'w') as csvfile2:
-        csv_reader = csv.reader(csvfile1, delimiter=',')
-        csv_writer = csv.writer(csvfile2, delimiter=',')
-        header = next(csv_reader)
-        print(header)
-        # get number of columns
-        #array = header.split(',')
-        first_item = header[0]
-        csv_writer.writerow(header)
-        for row in csv_reader:
-            print(','.join(row))
-            csv_writer.writerow(row)
-            print(row[2])
-
-print('寫入csv檔, 檔案 :', filename_w)
-"""
-
-print("------------------------------------------------------------")  # 60個
-
-print("讀取csv檔")
-
 filename = "data/pl.csv"
-with open(filename, "r") as csvfile:
+with open(filename, "r") as csvfile:  # 開啟csv檔案
     csv_reader = csv.reader(csvfile)
     for row in csv_reader:
         print(",".join(row))
-
 print()
-with open(filename, "r") as csvfile:
+
+with open(filename, "r") as csvfile:  # 開啟csv檔案
     csv_reader = csv.reader(csvfile)
     for row in csv_reader:
         print(row)
@@ -307,8 +381,51 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-print("2. csv.DictReader()")
+print("4. csv.DictReader()")
 print("------------------------------------------------------------")  # 60個
+
+filename = "data/animals_big5.csv"
+
+data_list = list()
+with open(filename, newline="") as csvfile:  # 開啟csv檔案
+    csv_dict_reader = csv.DictReader(csvfile)  # 讀取 csv 檔內容，將每一列轉成 dictionary
+    # 以迴圈顯示每一列
+    for row in csv_dict_reader:  # 列出DictReader各列內容
+        print(row)
+        data_list.append(dict(row))
+
+print(type(data_list))
+print(len(data_list))
+print(data_list)
+
+print("------------------------------------------------------------")  # 60個
+
+filename = "data/animals_big5.csv"
+
+import pprint as pp
+
+data_list = list()
+with open(filename, "rt") as csvfile:  # 開啟csv檔案
+    csv_dict_reader = csv.DictReader(csvfile)  # 讀取 csv 檔內容，將每一列轉成 dictionary
+    for row in csv_dict_reader:  # 列出DictReader各列內容
+        data_list.append(dict(row))
+pp.pprint(data_list)
+
+print("------------------------------------------------------------")  # 60個
+
+filename = "data/animals_big5.csv"
+
+# with open(filename, newline="", encoding="utf-8") as csvfile:  # 開啟csv檔案
+with open(filename) as csvfile:  # 開啟csv檔案
+    csv_dict_reader = csv.DictReader(csvfile)  # 讀取 csv 檔內容，將每一列轉成 dictionary
+    for row in csv_dict_reader:  # 列出DictReader各列內容
+        print(row)
+        #print(row["中文名"], row["英文名"])
+
+print("------------------------------------------------------------")  # 60個
+
+
+
 
 
 import pathlib
@@ -337,6 +454,7 @@ except:
 print("------------------------------------------------------------")  # 60個
 
 filename = "data/csvReport2.csv"
+
 with open(filename) as csvfile:  # 開啟csv檔案
     csv_reader = csv.reader(csvfile)  # 讀檔案建立Reader物件
     listReport = list(csv_reader)  # 將資料轉成串列
@@ -357,7 +475,8 @@ print("------------------------------------------------------------")  # 60個
 print("2025年1月臺北天氣報告")
 
 filename = "data/TaipeiWeatherJan.csv"
-with open(filename) as csvfile:
+
+with open(filename) as csvfile:  # 開啟csv檔案
     csv_reader = csv.reader(csvfile)
     headerRow = next(csv_reader)  # 讀取文件下一列
     highTemps, meanTemps, lowTemps = [], [], []
@@ -377,59 +496,17 @@ import ast
 filename = "C:/_git/vcs/_1.data/______test_files1/__RW/_csv/scores.csv"
 
 scores = dict()
-with open(filename, "r") as csvfile:
+with open(filename, "r") as csvfile:  # 開啟csv檔案
     filedata = csvfile.read()
     # scores = ast.literal_eval(filedata)
 print("以下是{}成績檔的字典型態資料:".format(filename))
 
 print("------------------------------------------------------------")  # 60個
 
-# 擷取登入帳號資訊
-
-
-def passwd_to_dict(filename):
-    users = {}
-    with open(filename) as csvfile:
-        for line in csvfile:
-            user_info = line.split(":")
-            users.update({user_info[0]: user_info[2]})
-    return users
-
-
-print(passwd_to_dict(r".\data\passwd.cfg"))
-
-# 擷取登入帳號資訊（生成版）
-
-
-def passwd_to_dict_2(filename):
-    with open(filename) as csvfile:
-        d = {words[0]: words[2] for words in [line.split(":") for line in csvfile]}
-    return d
-
-
-print(passwd_to_dict_2(r".\data\passwd.cfg"))
-
-
-def passwd_to_csv(passwd_filename, csv_filename):
-    with open(passwd_filename, "r") as csvfile1, open(
-        csv_filename, "w", newline=""
-    ) as csvfile2:
-        csv_reader = csv.reader(csvfile1, delimiter=":")
-        csv_writer = csv.writer(csvfile2, delimiter="\t", lineterminator="\n")
-        for line in csv_reader:
-            csv_writer.writerow([line[0], line[2]])
-
-
-filename = "tmp_write_read_csv07_password.csv"
-
-passwd_to_csv(r".\data\passwd.cfg", filename)
-
-print("------------------------------------------------------------")  # 60個
-
 filename = "data/animals.csv"
 
 try:
-    with open(filename, encoding="utf-8") as csvfile:
+    with open(filename, encoding="utf-8") as csvfile:  # 開啟csv檔案
         csv_reader = csv.reader(csvfile)
         data = list(csv_reader)
 except FileNotFoundError:
@@ -441,7 +518,7 @@ else:
 print("------------------------------------------------------------")  # 60個
 
 filename = "data/Example.csv"
-with open(filename, "r") as csvfile:
+with open(filename, "r") as csvfile:  # 開啟csv檔案
     csv_reader = csv.reader(csvfile)
     for row in csv_reader:
         print(",".join(row))
@@ -469,12 +546,13 @@ print(listReport[2][3], listReport[2][6])
 print("------------------------------------------------------------")  # 60個
 
 infilename = "data/csvReport.csv"  # 來源檔案
-with open(infilename, encoding="utf-8") as csvfile:  # 開啟csv檔案供讀取
+with open(infilename, encoding="utf-8") as csvfile:  # 開啟csv檔案
     csv_reader = csv.reader(csvfile)  # 讀檔案建立Reader物件
     listReport = list(csv_reader)  # 將資料轉成串列
 
 filename = "data/TaipeiWeatherJan.csv"
-with open(filename) as csvfile:
+
+with open(filename) as csvfile:  # 開啟csv檔案
     csv_reader = csv.reader(csvfile)
     headerRow = next(csv_reader)  # 讀取文件下一列
 print(headerRow)
@@ -485,7 +563,8 @@ for i, header in enumerate(headerRow):
 print("------------------------------------------------------------")  # 60個
 
 filename = "data/TaipeiWeatherJan.csv"
-with open(filename) as csvfile:
+
+with open(filename) as csvfile:  # 開啟csv檔案
     csv_reader = csv.reader(csvfile)
     headerRow = next(csv_reader)  # 讀取文件下一列
     highTemps, lowTemps = [], []  # 設定空串列
@@ -502,7 +581,8 @@ import matplotlib.pyplot as plt
 
 plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 filename = "data/TaipeiWeatherJan.csv"
-with open(filename) as csvfile:
+
+with open(filename) as csvfile:  # 開啟csv檔案
     csv_reader = csv.reader(csvfile)
     headerRow = next(csv_reader)  # 讀取文件下一列
     highTemps = []  # 設定空串列
@@ -521,7 +601,8 @@ from datetime import datetime
 
 plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 filename = "data/TaipeiWeatherJan.csv"
-with open(filename) as csvfile:
+
+with open(filename) as csvfile:  # 開啟csv檔案
     csv_reader = csv.reader(csvfile)
     headerRow = next(csv_reader)  # 讀取文件下一列
     dates, highTemps = [], []  # 設定空串列
@@ -543,7 +624,8 @@ from datetime import datetime
 
 plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 filename = "data/TaipeiWeatherJan.csv"
-with open(filename) as csvfile:
+
+with open(filename) as csvfile:  # 開啟csv檔案
     csv_reader = csv.reader(csvfile)
     headerRow = next(csv_reader)  # 讀取文件下一列
     dates, highTemps = [], []  # 設定空串列
@@ -566,7 +648,8 @@ from datetime import datetime
 
 plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 filename = "data/TaipeiWeatherJan.csv"
-with open(filename) as csvfile:
+
+with open(filename) as csvfile:  # 開啟csv檔案
     csv_reader = csv.reader(csvfile)
     headerRow = next(csv_reader)  # 讀取文件下一列
     dates, highTemps = [], []  # 設定空串列
@@ -589,7 +672,8 @@ from datetime import datetime
 
 plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 filename = "data/TaipeiWeatherJan.csv"
-with open(filename) as csvfile:
+
+with open(filename) as csvfile:  # 開啟csv檔案
     csv_reader = csv.reader(csvfile)
     headerRow = next(csv_reader)  # 讀取文件下一列
     dates, highTemps, lowTemps = [], [], []  # 設定空串列
@@ -631,7 +715,8 @@ def convert_tw_date_to_ad(tw_date):
 
 plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 filename = "data/ST43_3479_202310.csv"
-with open(filename) as csvfile:
+
+with open(filename) as csvfile:  # 開啟csv檔案
     csv_reader = csv.reader(csvfile)
     for _ in range(5):  # 跳過前 5 列
         next(csv_reader)
@@ -685,7 +770,8 @@ def convert_tw_date_to_ad(tw_date):
 
 plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 filename = "data/ST43_3479_202310.csv"
-with open(filename) as csvfile:
+
+with open(filename) as csvfile:  # 開啟csv檔案
     csv_reader = csv.reader(csvfile)
     all_rows = list(csv_reader)
     data_row = all_rows[5:-1]  # 切片
@@ -724,8 +810,8 @@ print("------------------------------------------------------------")  # 60個
 
 csvfile = open("data/tScore.csv")  # 建立檔案物件f，此物件操作StudentScore.csv
 csv_reader = csv.reader(csvfile, delimiter="\t")  # 建立reader物件使用 '\t' 當分隔符號
-listData = list(csv_reader)  # 使用list()函數將data轉成串列再指定給Reader
-for row in listData:  # 使用巢狀迴圈將ListData串列逐欄印出
+data_list = list(csv_reader)  # 使用list()函數將data轉成串列再指定給Reader
+for row in data_list:  # 使用巢狀迴圈將data_list串列逐欄印出
     for col in row:
         print(col, "   ", end="")
     print()
@@ -733,21 +819,10 @@ csvfile.close()
 
 print("------------------------------------------------------------")  # 60個
 
-csvfile = open("tmp_dictWriterProduct.csv", "w", newline="")
-# 建立writer物件，同時指定欄位名稱
-csv_dict_writer = csv.DictWriter(csvfile, fieldnames=["產品編號", "品名", "單價"])
-csv_dict_writer.writeheader()  # 寫入欄位名稱
-csv_dict_writer.writerow({"產品編號": "A02", "品名": "黑松沙士", "單價": 90})
-# 寫入兩筆產品記錄到csv檔中
-csv_dict_writer.writerow({"產品編號": "A02", "品名": "草苺蛋糕", "單價": 120})
-csvfile.close()
-
-print("------------------------------------------------------------")  # 60個
-
 csvfile = open("data/StudentScore.csv")  # 建立檔案物件f，此物件操作StudentScore.csv
 csv_reader = csv.reader(csvfile)  # 使用csv的reader()方法取得檔案物件f的資料並傳回Reader物件
-listData = list(csv_reader)  # 使用list()函數將data轉換串列再指定給listData
-for row in listData:  # 將二維串列listData 逐列印出
+data_list = list(csv_reader)  # 使用list()函數將data轉換串列再指定給data_list
+for row in data_list:  # 將二維串列data_list 逐列印出
     print(row)
 csvfile.close()  # 關閉檔案
 
@@ -755,8 +830,8 @@ print("------------------------------------------------------------")  # 60個
 
 csvfile = open("data/StudentScore.csv")  # 建立檔案物件f，此物件操作StudentScore.csv
 csv_reader = csv.reader(csvfile)  # 使用csv的reader()方法取得檔案物件f的資料並傳回Reader物件
-listData = list(csv_reader)  # 使用list()函數將csv_reader轉成串列再指定給listData
-for row in listData:  # 使用巢狀迴圈將ListData串列逐欄印出
+data_list = list(csv_reader)  # 使用list()函數將csv_reader轉成串列再指定給data_list
+for row in data_list:  # 使用巢狀迴圈將data_list串列逐欄印出
     for col in row:
         print(col, "  ", end="")
     print()
@@ -764,21 +839,7 @@ csvfile.close()
 
 print("------------------------------------------------------------")  # 60個
 
-csvfile = open("tmp_writerProduct.csv", "w", newline="")  # 開啟writerProduct.csv檔案
-csvWriter = csv.writer(csvfile)  # 建立writer物件，物件名稱為csvWriter
-# 建立listProduct二維串列有兩筆產品
-listProduct = [["B01", "小林煎餅", "78"], ["B02", "五香豆干", "90"]]
-# 寫入一維串列當做標題
-csvWriter.writerow(["編號", "品名", "單價"])
-csvWriter.writerows(listProduct)  # 將二維串列的兩筆產品寫入csv內
-csvfile.close()  # 關閉檔案
-
 print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("python讀寫CSV檔 3 讀取")
 
 from io import StringIO
 
@@ -798,10 +859,8 @@ for row in csv_reader:
     print('The album "' + row[0] + '" was released in ' + str(row[1]))
 
 print("------------------------------------------------------------")  # 60個
-print("使用pd")
+print("5. pandas")
 print("------------------------------------------------------------")  # 60個
-
-print("python讀寫CSV檔 12 讀取 pandas")
 
 filename = "data/twstock_all.csv"
 
@@ -1035,79 +1094,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-filename = "tmp_write_read_csv08.csv"
 
-with open(filename, "w", newline="", encoding="utf-8") as csvfile:  # 開啟csv檔案
-    csvWriter = csv.writer(csvfile)  # 建立Writer物件
-    csvWriter.writerow(["姓名", "年齡", "城市"])
-    csvWriter.writerow(["Hung", "35", "Taipei"])
-    csvWriter.writerow(["James", "40", "Chicago"])
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-filename = "data/Example2.csv"
-list1 = [[10, 33, 45], [5, 25, 56]]
-with open(filename, "w+", newline="") as csvfile:
-    writer = csv.writer(csvfile)
-    writer.writerow(["Data1", "Data2", "Data3"])
-    for row in list1:
-        writer.writerow(row)
-
-"""
-print('寫入 csv 檔案')   一讀一寫
-with open(outfilename,'w',newline='') as csvfile:  
-    csvWriter = csv.writer(csvfile)    # 建立Writer物件   
-    for row in listReport:              # 將串列寫入
-        csvWriter.writerow(row)
-"""
-
-
-
-outfilename = "tmp_write_read_csv09.csv"  # 目的檔案
-with open(outfilename, "w", newline="", encoding="utf-8") as csvfile:
-    csvWriter = csv.writer(csvfile)  # 建立Writer物件
-    for row in listReport:  # 將串列寫入
-        csvWriter.writerow(row)
-
-print("------------------------------------------------------------")  # 60個
-
-filename = "tmp_write_read_csv10.csv"
-with open(filename, "w", newline="") as csvfile:  # 開啟csv檔案
-    csvWriter = csv.writer(csvfile, delimiter="\t")  # 建立Writer物件
-    csvWriter.writerow(["Name", "Age", "City"])
-    csvWriter.writerow(["Hung", "35", "Taipei"])
-    csvWriter.writerow(["James", "40", "Chicago"])
-
-print("------------------------------------------------------------")  # 60個
-
-filename = "tmp_write_read_csv11.csv"
-with open(filename, "w", newline="") as csvfile:  # 開啟csv檔案
-    fields = ["Name", "Age", "City"]
-    csv_dict_writer = csv.DictWriter(csvfile, fieldnames=fields)  # 建立Writer物件
-
-    csv_dict_writer.writeheader()  # 寫入標題
-    csv_dict_writer.writerow({"Name": "Hung", "Age": "35", "City": "Taipei"})
-    csv_dict_writer.writerow({"Name": "James", "Age": "40", "City": "Chicago"})
-
-print("------------------------------------------------------------")  # 60個
-
-# 定義串列,元素是字典
-dictList = [
-    {"姓名": "Hung", "年齡": "35", "城市": "臺北"},
-    {"姓名": "James", "年齡": "40", "城市": "芝加哥"},
-]
-
-filename = "tmp_write_read_csv12.csv"
-with open(filename, "w", newline="", encoding="utf-8") as csvfile:
-    fields = ["姓名", "年齡", "城市"]
-    csv_dict_writer = csv.DictWriter(csvfile, fieldnames=fields)  # 建立Writer物件
-    csv_dict_writer.writeheader()  # 寫入標題
-    for row in dictList:  # 寫入內容
-        csv_dict_writer.writerow(row)
-
-print("------------------------------------------------------------")  # 60個
 
 
 
@@ -1126,192 +1113,141 @@ print("------------------------------------------------------------")  # 60個
 
 
 
-'''
 
 
 
 
+print("------------------------------------------------------------")  # 60個
 
+print('OK')
 
 
 
 
 
 print("------------------------------------------------------------")  # 60個
-print("2. csv.DictReader()")
+print("6. 其他 & 新進")
 print("------------------------------------------------------------")  # 60個
 
-'''
-filename = "data/animals_big5.csv"
+""" many
+filename_r = 'data/workfile.csv'
+filename_w = 'tmp_write_read_csv06.csv'
 
-data = list()
-with open(filename, newline="") as csvfile:
-    csv_dict_reader = csv.DictReader(csvfile)  # 讀取 csv 檔內容，將每一列轉成 dictionary
-    print(type(csv_dict_reader))
+#一讀一寫
 
-    # 以迴圈顯示每一列
-    for row in csv_dict_reader:
-        print(row)
-        data.append(dict(row))
+with open(filename_r, 'r') as csvfile1:  # 開啟csv檔案
+    with open(filename_w, 'w') as csvfile2:  # 開啟csv檔案
+        csv_reader = csv.reader(csvfile1, delimiter=',')
+        csv_writer = csv.writer(csvfile2, delimiter=',')
+        header = next(csv_reader)
+        print(header)
+        # get number of columns
+        #array = header.split(',')
+        first_item = header[0]
+        csv_writer.writerow(header)
+        for row in csv_reader:
+            print(','.join(row))
+            csv_writer.writerow(row)
+            print(row[2])
 
-print(type(data))
-print(len(data))
+print('寫入csv檔, 檔案 :', filename_w)
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+
+# 擷取登入帳號資訊
+
+
+def passwd_to_dict(filename):
+    users = {}
+    with open(filename) as csvfile:  # 開啟csv檔案
+        for line in csvfile:
+            user_info = line.split(":")
+            users.update({user_info[0]: user_info[2]})
+    return users
+
+
+print(passwd_to_dict(r".\data\passwd.cfg"))
+
+# 擷取登入帳號資訊（生成版）
+
+
+def passwd_to_dict_2(filename):
+    with open(filename) as csvfile:  # 開啟csv檔案
+        d = {words[0]: words[2] for words in [line.split(":") for line in csvfile]}
+    return d
+
+
+print(passwd_to_dict_2(r".\data\passwd.cfg"))
+
+
+def passwd_to_csv(passwd_filename, csv_filename):
+    with open(passwd_filename, "r") as csvfile1, open(
+        csv_filename, "w", newline=""
+    ) as csvfile2:
+        csv_reader = csv.reader(csvfile1, delimiter=":")
+        csv_writer = csv.writer(csvfile2, delimiter="\t", lineterminator="\n")
+        for line in csv_reader:
+            csv_writer.writerow([line[0], line[2]])
+
+
+filename = "tmp_write_read_csv07_password.csv"
+
+passwd_to_csv(r".\data\passwd.cfg", filename)
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+
+
+
+
+filename = 'C:/_git/vcs/_4.python/_data/animals2.csv'
+csvfile = open(filename)  # 開啟 CSV 檔案
+raw_data = csv.reader(csvfile)  # 讀取 CSV 檔案
+data = list(raw_data)  # 轉換成二維串列
 print(data)
 
-print("------------------------------------------------------------")  # 60個
-
-filename = "data/animals_big5.csv"
-
-import pprint as pp
-
-data = list()
-with open(filename, "rt") as csvfile:
-    csv_dict_reader = csv.DictReader(csvfile)  # 讀取 csv 檔內容，將每一列轉成 dictionary
-    print(type(csv_dict_reader))
-    for row in csv_dict_reader:
-        data.append(dict(row))
-pp.pprint(data)
-
-print("------------------------------------------------------------")  # 60個
-
-filename = "data/animals_big5.csv"
-
-import pprint as pp
-
-with open(filename, "rt") as csvfile:
-    csv_dict_reader = csv.DictReader(csvfile)  # 讀取 csv 檔內容，將每一列轉成 dictionary
-    data = [dict(row) for row in csv_dict_reader]
-pp.pprint(data)
 
 
-'''
-
-print("------------------------------------------------------------")  # 60個
-
-filename = "data/animals_big5.csv"
-
-filename = "data/csvPeople.csv"
-filename = "data/animals_big5.csv"
-
-print("讀取CSV檔 4 DictReader, 檔案 :", filename)
-
-with open(filename) as csvfile:  # 開啟csv檔案
-    csv_dict_reader = csv.DictReader(csvfile)  # 讀檔案建立DictReader物件
-    for row in csv_dict_reader:  # 列出DictReader各列內容
-        print(row)
-
-    for row in csv_dict_reader:  # 列出DictReader各列內容
-        print(row["first_name"], row["last_name"])
-
-print("------------------------------------------------------------")  # 60個
-
-filename = "data/animals.csv"
-
-print("讀取CSV檔 5 DictReader, 檔案 :", filename)
-
-with open(filename, newline="", encoding="utf-8") as csvfile:
-    csv_dict_reader = csv.DictReader(csvfile)
-    for row in csv_dict_reader:
-        # print(row['姓名'], end = "\t")   #不能用
-        print(row["中文名"], end="\t")
-        print(row["英文名"])
-
-print("------------------------------------------------------------")  # 60個
-
-filename = "data/animals_big5.csv"
-
-with open(filename) as csvfile:  # 開啟csv檔案
-    csv_dict_reader = csv.DictReader(csvfile)  # 讀檔案建立DictReader物件
-    for row in csv_dict_reader:  # 列出DictReader各列內容
-        print(row)
-
-print("------------------------------------------------------------")  # 60個
-
-filename = "data/animals_big5.csv"
-
-with open(filename) as csvfile:  # 開啟csv檔案
-    csv_dict_reader = csv.DictReader(csvfile)  # 讀檔案建立DictReader物件
-    for row in csv_dict_reader:  # 列出DictReader各列內容
-        print(row["中文名"], row["英文名"])
-
-print("------------------------------------------------------------")  # 60個
-
-filename = "data/animals_big5.csv"
-
-csvfile = open(filename)
-csv_dict_reader = csv.DictReader(csvfile)  # 使用DictReader ()方法取得csv檔資料並傳回data字典型別
-for row in csv_dict_reader:  # 逐一印出字典的內容
-    print(row)
-csvfile.close()
-
-print("------------------------------------------------------------")  # 60個
-
-filename = "data/animals_big5.csv"
-
-csvfile = open(filename)
-csv_dict_reader = csv.DictReader(csvfile)  # 使用DictReader ()方法取得csv檔資料並傳回data字典型別
-print("中文名\t英文名\t體重\t全名")
-for row in csv_dict_reader:  # 逐一印出字典的內容，並計算總分
-    print(
-        "{}\t{}\t{}\t{}".format(
-            row["中文名"],
-            row["英文名"],
-            row["體重"],
-            row["全名"],
-        )
-    )
-csvfile.close()
-
-print("------------------------------------------------------------")  # 60個
-
-# searchName=input('請輸入學生姓名進行查詢成績：') #輸入查詢姓名
-searchName = "david"
-
-csvfile = open("data/StudentScore.csv")
-csv_dict_reader = csv.DictReader(csvfile)  # 使用DictReader ()方法取得csv檔資料並傳回data字典型別
-for row in csv_dict_reader:  # 逐一比對姓名是否符合searchName
-    if row["姓名"] == searchName:
-        print("{}成績資訊如下：".format(row["姓名"]))
-        print("學號：{}".format(row["學號"]))
-        print("國文：{}".format(row["國文"]))
-        print("英語：{}".format(row["英語"]))
-        print("數學：{}".format(row["數學"]))
-        print("總分：{}".format((int(row["國文"]) + int(row["英語"]) + int(row["數學"]))))
-        break  # 離開迴圈
-else:  # 當迴圈沒有執行break，即會執行else區域，表示沒有找到符合姓名
-    print("查無{}成績".format(searchName))
-csvfile.close()
-
-print("------------------------------------------------------------")  # 60個
 
 
 
 """
-listProduct=["","",""] # 建立listProduct串列，用來存放一筆產品記錄
-while True:
-     option = input("功能選單：1.新增 2.查詢 3.離開：")
-     if option=="1":
-         # 以附加模式開啟tProduct.csv檔案
-         f=open('tProduct.csv','a', newline='') 
-         csvWriter=csv.writer(f) 
-         listProduct[0] = input("編號：")   #listProduct[0]存放編號
-         listProduct[1] = input("品名：")   #listProduct[1]存放品名
-         listProduct[2] = input("單價：")   #listProduct[2]存放單價
-         csvWriter.writerow(listProduct)
-         print("新增成功")
-         f.close()
-     elif option=="2" :
-         # 以讀檔模式開啟tProduct.csv檔案
-         f=open ('tProduct.csv')
-         csvdictreader=csv.DictReader(f)  
-         print("編號\t品名\t單價")
-         for row in csvdictreader:   		
-             print("{}\t{}\t{}".format(row['編號'],row['品名'],row['單價']))
-         f.close()
-     else:
-         break
+import csv
+
+with open('songs.csv', 'w', newline='', encoding="big5") as csvfile:
+    # 建立 CSV 檔寫入器
+    writer = csv.writer(csvfile)
+    # 寫入一列資料
+    writer.writerow(["排名", "歌名", "作者", "發行日期", "連結"])
+    
+    ...
+    
+    writer.writerow([song_rank, song_name, song_artist, song_date, song_url])
+
+
+
+        self.load_rules(os.path.join(os.path.dirname(__file__), '..',
+                                     'susp-ignored.csv'))
+
+
+            self.warn('[%s:%d] "%s" found in "%-.120s"' %
+                      (self.docname, lineno, issue, text))
+
+
+
+            f = open(self.log_file_name, 'a')
+            writer = csv.writer(f, dialect)
+            writer.writerow([self.docname, lineno, issue, text.strip()])
+            f.close()
+
+
 """
-print("------------------------------------------------------------")  # 60個
-
-
-

@@ -1,3 +1,10 @@
+"""
+
+Text 放入多行輸入框
+
+
+"""
+
 import sys
 import time
 import tkinter as tk
@@ -32,6 +39,99 @@ window = tk.Tk()
 window.geometry("600x800")
 window.title("Text 1")
 
+text3 = tk.Text(window, width=30, height=5)
+text3.insert(tk.INSERT, "最簡單 W=30, H = 5\n")
+text3.insert(tk.INSERT, "故人西辭黃鶴樓，\n")
+text3.insert(tk.INSERT, "煙花三月下揚州。\n")
+text3.insert(tk.INSERT, "孤帆遠影碧空盡，\n")
+text3.insert(tk.END, "唯見長江天際流。\n")
+
+text3.config(state=tk.DISABLED)  # 設定Text內容不可改變
+
+text3.pack()
+
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
+print("------------------------------------------------------------")  # 60個
+
+
+text2 = tk.Text(window, width=30, height=5)
+text2.pack()
+text2.insert(tk.END, "越王勾踐破吳歸，戰士還家盡錦衣。\n")
+text2.insert(tk.INSERT, "宮女如花滿春殿，只今唯有鷓鴣飛。")
+
+
+
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
+print("------------------------------------------------------------")  # 60個
+
+sentences = "玉階生白露，夜久侵羅襪。\n卻下水晶簾，玲瓏望秋月。"
+text7 = tk.Text(window, width=30, height=5, bg="yellow", wrap=tk.WORD)
+text7.insert(tk.END, sentences)
+text7.pack()
+
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
+print("------------------------------------------------------------")  # 60個
+
+
+text4 = tk.Text(window, width=30, height=5)
+text4.insert(tk.END, "望廬山瀑布\n李白\n")
+str = """日照香爐生紫煙，
+遙看瀑布挂前川。
+飛流直下三千尺，
+疑是銀河落九天。"""
+text4.insert(tk.END, str)
+text4.pack()
+
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
+print("------------------------------------------------------------")  # 60個
+
+text5 = tk.Text(window, width=30, height=5)
+text5.pack()
+
+str = """誰家玉笛暗飛聲，散入春風滿洛城。
+此夜曲中聞折柳，何人不起故園情。
+"""
+text5.insert(tk.END, str)
+
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
+print("------------------------------------------------------------")  # 60個
+
+text7 = tk.Text(window, width=30, height=5)
+text7.pack()
+
+text7.insert(tk.INSERT, "功蓋三分國\n")
+text7.insert(tk.CURRENT, "名成八陣圖\n")
+text7.insert(tk.CURRENT, "江流石不轉\n")
+text7.insert(tk.END, "遺恨失吞吳")
+
+
+
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+window.mainloop()
+
+
+sys.exit()
+
+
+
+
 # 像是richTextBox
 text1 = tk.Text(window, width=80, height=6)  # 放入多行輸入框
 text1.pack()
@@ -41,20 +141,6 @@ bt_set_data = tk.Button(window, text="set data", command=set_data)  # 放入清�
 bt_set_data.pack()
 bt_clear = tk.Button(window, text="clear", command=clear)  # 放入清空按鈕
 bt_clear.pack()
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
-    fill=tk.X, padx=5, pady=5
-)  # 分隔線
-print("------------------------------------------------------------")  # 60個
-
-text2 = tk.Text(window, width=80, height=6)  # 放入多行輸入框
-text2.insert(tk.INSERT, "黃鶴樓送孟浩然之廣陵\t李白\n")
-text2.insert(tk.INSERT, "故人西辭黃鶴樓，\n")
-text2.insert(tk.INSERT, "煙花三月下揚州。\n")
-text2.insert(tk.INSERT, "孤帆遠影碧空盡，\n")
-text2.insert(tk.END, "唯見長江天際流。\n")
-text2.pack()
-text2.config(state=tk.DISABLED)  # 此行設定Text內容不可改變
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
     fill=tk.X, padx=5, pady=5
@@ -171,93 +257,7 @@ print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
 window.geometry("600x800")
-window.title("Text 2")
-
-text6 = tk.Text(window)
-text6.insert(tk.INSERT, "床前明月光\n")
-text6.insert(tk.INSERT, "疑是地上霜\n")
-text6.insert(tk.INSERT, "舉頭望明月\n")
-text6.insert(tk.INSERT, "低頭思故鄉\n")
-text6.pack()
-text6.config(state=tk.DISABLED)
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
-    fill=tk.X, padx=5, pady=5
-)  # 分隔線
-print("------------------------------------------------------------")  # 60個
-
-print("Text多行文字")
-sentences = "玉階生白露，夜久侵羅襪。\n卻下水晶簾，玲瓏望秋月。"
-
-text7 = tk.Text(window, width=30, height=14, bg="yellow", wrap=tk.WORD)
-text7.insert(tk.END, sentences)
-text7.pack()
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
-    fill=tk.X, padx=5, pady=5
-)  # 分隔線
-print("------------------------------------------------------------")  # 60個
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-window.geometry("600x800")
 window.title("Text 3")
-
-text8 = tk.Text(window, width=30, height=5)
-text8.pack()
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
-    fill=tk.X, padx=5, pady=5
-)  # 分隔線
-print("------------------------------------------------------------")  # 60個
-
-text2 = tk.Text(window, width=30, height=5)
-text2.pack()
-text2.insert(tk.END, "越王勾踐破吳歸，戰士還家盡錦衣。\n")
-text2.insert(tk.INSERT, "宮女如花滿春殿，只今唯有鷓鴣飛。")
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
-    fill=tk.X, padx=5, pady=5
-)  # 分隔線
-print("------------------------------------------------------------")  # 60個
-
-text3 = tk.Text(window, width=30, height=5)
-text3.insert(tk.END, "黃鶴樓送孟浩然之廣陵\n李白\n")
-text3.insert(tk.END, "故人西辭黃鶴樓，\n")
-text3.insert(tk.END, "煙花三月下揚州。\n")
-text3.insert(tk.END, "孤帆遠影碧空盡，\n")
-text3.insert(tk.END, "唯見長江天際流。\n")
-text3.pack()
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
-    fill=tk.X, padx=5, pady=5
-)  # 分隔線
-print("------------------------------------------------------------")  # 60個
-
-text4 = tk.Text(window, width=30, height=5)
-text4.insert(tk.END, "望廬山瀑布\n李白\n")
-str = """日照香爐生紫煙，
-遙看瀑布挂前川。
-飛流直下三千尺，
-疑是銀河落九天。"""
-text4.insert(tk.END, str)
-text4.pack()
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
-    fill=tk.X, padx=5, pady=5
-)  # 分隔線
-print("------------------------------------------------------------")  # 60個
-
-text5 = tk.Text(window, width=30, height=5)
-text5.pack()
-
-str = """誰家玉笛暗飛聲，散入春風滿洛城。
-此夜曲中聞折柳，何人不起故園情。
-"""
-text5.insert(tk.END, str)
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
     fill=tk.X, padx=5, pady=5
@@ -276,20 +276,6 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
-text7 = tk.Text(window, width=30, height=5)
-text7.pack()
-
-text7.insert(tk.INSERT, "功蓋三分國\n")
-text7.insert(tk.CURRENT, "名成八陣圖\n")
-text7.insert(tk.CURRENT, "江流石不轉\n")
-text7.insert(tk.END, "遺恨失吞吳")
-
-text7.config(state=tk.DISABLED)
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
-    fill=tk.X, padx=5, pady=5
-)  # 分隔線
-print("------------------------------------------------------------")  # 60個
 """
 # 產生多行文字框元件
 text9 = tk.Text(window,	selectbackground = 'red', selectforeground = 'gray')
@@ -450,7 +436,6 @@ text.grid(
     row=1, column=0, columnspan=2, padx=3, pady=5, sticky=tk.N + tk.S + tk.W + tk.E
 )
 
-text.insert(tk.END, "黃鶴樓送孟浩然之廣陵\n李白\n")
 text.insert(tk.END, "故人西辭黃鶴樓，\n")
 text.insert(tk.END, "煙花三月下揚州。\n")
 text.insert(tk.END, "孤帆遠影碧空盡，\n")
@@ -504,7 +489,7 @@ clrButton.pack(side=tk.LEFT, padx=5, pady=5)
 # 建立Text
 text = tk.Text(window, undo=True)
 text.pack(fill=tk.BOTH, expand=True)
-text.insert(tk.END, "黃鶴樓送孟浩然之廣陵\n李白\n")
+
 text.insert(tk.END, "故人西辭黃鶴樓，\n")
 text.insert(tk.END, "煙花三月下揚州。\n")
 text.insert(tk.END, "孤帆遠影碧空盡，\n")
@@ -532,7 +517,6 @@ window.geometry("600x400")
 text = tk.Text(window, undo=True)
 text.pack(fill=tk.BOTH, expand=True)
 
-text.insert(tk.END, "黃鶴樓送孟浩然之廣陵\n李白\n")
 text.insert(tk.END, "故人西辭黃鶴樓，\n")
 text.insert(tk.END, "煙花三月下揚州。\n")
 text.insert(tk.END, "孤帆遠影碧空盡，\n")

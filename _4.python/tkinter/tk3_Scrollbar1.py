@@ -216,3 +216,25 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+
+
+
+
+print("ScrollBar捲軸")
+
+text = tk.Text(window, width="30", height="5")
+text.pack()
+
+scrollbar = tk.Scrollbar(command=text.yview, orient=tk.VERTICAL)
+scrollbar.pack()
+
+text.configure(yscrollcommand=scrollbar.set)
+
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
+print("------------------------------------------------------------")  # 60個
+
+
+
+

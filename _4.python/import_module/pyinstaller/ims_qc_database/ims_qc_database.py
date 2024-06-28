@@ -461,71 +461,7 @@ main_message1.set(message)
 
 window.mainloop()
 
-
-"""
-
-stage_no = [
-'402除菌區', '403包裝區', '404組裝區', '405燒機測試區',
-'406電信測試區', '407原料除菌區', '408清洗區', '409無塵室'
-]
-
-
-    print('新建資料庫, 清除記憶體資料')
-    clear_csv_data()
-
-    button01_text.set("開啟資料庫")
-    print('開啟資料庫, 清除記憶體資料')
-    clear_csv_data()
-
-
-
-old 或許沒有用了
-
-def precheck_csv_data():
-    print('預先檢查這些csv檔案是否皆可用')
-    
-    #1. 無舊資料
-    #2. 有舊資料 要考慮序號是否
-    #3. 第一站資料必定要先存在
-    
-    source_dir = 'QC/csv'
-    target_dir = 'QC/csv_old'
-
-    if flag_debug_mode == True:
-        source_dir = 'QC_debug/csv'
-        target_dir = 'QC_debug/csv_old'
-
-    #準備輸出資料夾 若不存在, 則建立
-    if not os.path.exists(target_dir):
-            os.mkdir(target_dir)
-            #os.makedirs(target_dir, exist_ok = True)
-
-def export_data():
-    global csv_data
-    length = len(csv_data)
-    print('資料長度 : ', length)
-    if length == 0:
-        message = '無資料, 離開'
-        print(message)
-        text1.insert('end', message)
-        main_message2.set(message)
-        return
-    else:
-        # 開啟輸出的 csv 檔案
-        filename_w = '匯出資料範例.csv'
-        with open(filename_w, 'w', newline = '') as csvfile:
-            # 建立 csv 檔寫入物件
-            writer = csv.writer(csvfile)
-
-            # 寫入二維串列資料
-            writer.writerows(csv_data)
-
-        message = '匯出資料 完成'
-        #print(message)
-        #text1.insert('end', message)
-
-"""
-
-
-
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
 

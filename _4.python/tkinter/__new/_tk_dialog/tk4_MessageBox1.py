@@ -151,6 +151,12 @@ tk.messagebox.asktrycancel(title='Hi', message='hahahaha')
 tk.messagebox.askokcancel(title='Hi', message='hahahaha')
 tk.messagebox.askyesnocancel(title="Hi", message="haha")
 
+tk.messagebox.showinfo("顯示類對話方塊", "「顯示」類是以「show」開頭，只會顯示一個「確定」鈕。")
+tk.messagebox.askretrycancel("詢問類對話方塊", "「詢問」類是以「ask」為開頭，伴隨2~3個按鈕來產生互動。")
+
 
 
 """
+
+
+

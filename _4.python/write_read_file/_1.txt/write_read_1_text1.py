@@ -25,7 +25,7 @@ a - 資料附加到舊檔案後面(游標指在EOF)
 
 7. 應用
 
-8. 其他  & 新進
+8. 其他 & 新進
 
 
 所有的 開啟檔案
@@ -81,7 +81,6 @@ f = open(filename, "r", encoding="cp950")
 f = open(filename, "r", encoding="UTF-8")
 f = open(filename, "rt")
 
-
 """
 
 import os
@@ -94,7 +93,6 @@ poem_text = """黃河遠上白雲間\n
 羌笛何須怨楊柳\n
 春風不度玉門關\n
 """
-
 
 print("------------------------------------------------------------")  # 60個
 print("1. write()")
@@ -336,36 +334,14 @@ with open("data/temperature.txt") as f:
 print("取得溫度資料 :\n", temperatures)
 
 print("------------------------------------------------------------")  # 60個
-
 print("------------------------------------------------------------")  # 60個
 
-"""
-print('一種寫入檔案的方法')
-filename = 'tmp_write_text18.txt'
-
-f = open(filename,'w')
-print('[OPTIONS]', file=f)
-print('Auto Index=Yes', file=f)
-print('Binary TOC=No', file=f)
-print('Binary Index=Yes', file=f)
-print('Compatibility=1.1', file=f)
-print('Error log file=ErrorLog.log', file=f)
-print('Display compile progress=Yes', file=f)
-print('Full-text search=Yes', file=f)
-print('Default window=main', file=f)
-print('', file=f)  #寫一個空白列
-print('[WINDOWS]', file=f)
-print('main=,"' + '","'
-+ '","","",,,,,0x23520,222,0x1046,[10,10,780,560],'
-'0xB0000,,,,,,0', file=f)
-print('', file=f)
-print('[FILES]', file=f)
-print('', file=f)
-f.close()
-"""
-print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
+print("7. 應用")
+print("------------------------------------------------------------")  # 60個
+
+
 
 # 統計檔案的字元數、字數與行數
 
@@ -1156,10 +1132,12 @@ print(f.read())  # read(無參數), 從目前檔案位置讀到檔尾
 
 print("------------------------------------------------------------")  # 60個
 
+print("------------------------------------------------------------")  # 60個
+print("8. 其他 & 新進")
+print("------------------------------------------------------------")  # 60個
 
-print("------------------------------------------------------------")  # 60個
-print("8. 其他  & 新進")
-print("------------------------------------------------------------")  # 60個
+
+
 
 
 print("------------------------------------------------------------")  # 60個
@@ -1192,3 +1170,38 @@ data = data.split()
 for d in data:
     d.strip()
 print(data)
+
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+"""
+print('一種寫入檔案的方法')
+filename = 'tmp_write_text18.txt'
+
+f = open(filename,'w')
+print('[OPTIONS]', file=f)
+print('Auto Index=Yes', file=f)
+print('Binary TOC=No', file=f)
+print('Binary Index=Yes', file=f)
+print('Compatibility=1.1', file=f)
+print('Error log file=ErrorLog.log', file=f)
+print('Display compile progress=Yes', file=f)
+print('Full-text search=Yes', file=f)
+print('Default window=main', file=f)
+print('', file=f)  #寫一個空白列
+print('[WINDOWS]', file=f)
+print('main=,"' + '","'
++ '","","",,,,,0x23520,222,0x1046,[10,10,780,560],'
+'0xB0000,,,,,,0', file=f)
+print('', file=f)
+print('[FILES]', file=f)
+print('', file=f)
+f.close()
+"""
+print("------------------------------------------------------------")  # 60個
+
+
+

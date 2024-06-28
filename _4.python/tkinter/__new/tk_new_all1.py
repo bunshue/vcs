@@ -11,7 +11,7 @@ w = 12
 h = 2
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 window = tk.Tk()
 window.geometry("600x800")
 window.title("new all 2")
@@ -412,10 +412,11 @@ tl.geometry("300x180")
 tk.Label(tl, text="I am a Toplevel").pack()
 
 window.mainloop()
-'''
+
 print("------------------------------------------------------------")  # 60個
 
-#開啟新視窗
+
+# 開啟新視窗
 class MyDialog:  # 定義交談視窗類別
     def __init__(self, root):
         self.top = tk.Toplevel(root)  # 產生Toplevel元件
@@ -439,12 +440,14 @@ window = tk.Tk()
 window.geometry("600x800")
 window.title("new all 6")
 
+
 def CreateNewWindow1():  # 建立對話方塊
     labTxt = "開啟新視窗1\n開啟新視窗2\n開啟新視窗3\nToplevel"
     tl = tk.Toplevel()  # 建立Toplevel視窗
     tl.geometry("300x180")  # 建立對話方塊大小
     tl.title("開啟新視窗")
     tk.Label(tl, text=labTxt).pack(fill=tk.BOTH, expand=True)
+
 
 button1 = tk.Button(window, text="開啟新視窗", command=CreateNewWindow1)
 button1.pack()
@@ -460,7 +463,10 @@ def CreateNewWindow2():  # Create按鈕的事件處理函數
     button2.wait_window(d.top)  # 等待交談視窗結束
     print("你輸入了 :" + d.get())  # 取得交談視窗中輸入值，並輸出
 
-button2 = tk.Button(window, text="開啟新視窗取得資料", command=CreateNewWindow2)  # 設定Create按鈕的事件處理函數
+
+button2 = tk.Button(
+    window, text="開啟新視窗取得資料", command=CreateNewWindow2
+)  # 設定Create按鈕的事件處理函數
 button2.pack()
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
@@ -498,7 +504,9 @@ button2.pack()
 button2 = tk.Button(window, text="Input Float", command=InFlo)
 button2.pack()
 
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
 var = tk.StringVar()
@@ -524,7 +532,9 @@ def hit_me():
 b = tk.Button(window, text="hit me", width=15, height=2, command=hit_me)
 b.pack()
 
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
 
@@ -535,22 +545,23 @@ def get_entry_data():
     cc = a.get()
     print("你取得了 :", cc)
 
+
 a = tk.Variable(window, value="123")
 e = tk.Entry(window, textvariable=a)
 b = tk.Button(window, text="獲取", command=get_entry_data)
 e.pack()
 b.pack()
 
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
 print("------------------------------------------------------------")  # 60個
-
 
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
     fill=tk.X, padx=5, pady=5
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
-
 
 
 window.mainloop()
@@ -596,7 +607,9 @@ tk.Label(frm_l, text="on the frm_l1").pack()
 tk.Label(frm_l, text="on the frm_l2").pack()
 tk.Label(frm_r, text="on the frm_r1").pack()
 
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
 
@@ -624,7 +637,9 @@ t = tk.Text(window, height=2)
 t.pack()
 
 
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
 frame1 = tk.Frame(window)
@@ -660,15 +675,17 @@ button2.pack()
 # 為了看到按鍵值使用Lable控件顯示下按鍵的值
 tk.Label(frame1, textvariable=button2val).pack()
 
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
-#jpg fail
-#filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg' fail
+# jpg fail
+# filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg' fail
 
-#gif/png ok
-#filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_gif/SpongeBob.gif'
-filename = 'C:/_git/vcs/_4.python/_data/logo1.png'
+# gif/png ok
+# filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_gif/SpongeBob.gif'
+filename = "C:/_git/vcs/_4.python/_data/logo1.png"
 
 label1 = tk.Label(window)
 # 創建一個位圖
@@ -678,7 +695,7 @@ label1.x = bm
 # 設置顯示的圖片是bm
 label1["image"] = bm
 label1.pack()
-        
+
 window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
@@ -756,7 +773,6 @@ WidgetsDemo()  # Create GUI
 print("------------------------------------------------------------")  # 60個
 
 
-
 class ChangeLabelDemo:
     def __init__(self):
         window = tk.Tk()  # Create a window
@@ -814,7 +830,6 @@ class ChangeLabelDemo:
 ChangeLabelDemo()  # Create GUI
 
 
-
 print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
@@ -840,7 +855,6 @@ window.mainloop()
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
 
 
@@ -848,7 +862,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-print('使用 grid')
+print("使用 grid")
 window = tk.Tk()
 window.title("Python圖形界面")
 
@@ -886,9 +900,7 @@ window.mainloop()
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-

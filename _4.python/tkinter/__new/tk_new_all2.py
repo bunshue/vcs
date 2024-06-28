@@ -5,7 +5,7 @@ from tkinter import ttk
 
 from PIL import ImageTk, Image
 
-'''
+"""
 print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
@@ -39,7 +39,7 @@ for col in range(3):
     curRad.pack()
 
 window.mainloop()
-'''
+"""
 print("------------------------------------------------------------")  # 60個
 
 from tkinter import scrolledtext  # 導入滾動文本框的模塊
@@ -56,10 +56,6 @@ scr = scrolledtext.ScrolledText(window, width=scrolW, height=scrolH, wrap=tk.WOR
 scr.grid(column=0, columnspan=3)
 
 
-
 window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
-
-
-

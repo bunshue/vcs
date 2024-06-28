@@ -7,76 +7,6 @@ from tkinter import ttk
 
 print("------------------------------------------------------------")  # 60個
 
-
-def choose():
-    str = "選擇："
-    for i in range(0, len(choice)):
-        if choice[i].get() == 1:
-            str = str + stage_no[i] + " "
-    print(str)
-    msg.set(str)
-
-
-window = tk.Tk()
-window.geometry("600x800")
-window.title("Checkbutton 0")
-
-x_st = 50
-y_st = 50
-dx = 120
-dy = 80
-w = 12
-h = 3
-
-choice = []
-
-stage_no = [
-    "第1站",
-    "第2站",
-    "第3站",
-    "第4站",
-    "第5站",
-    "第6站",
-    "第7站",
-    "第8站",
-    "第9站",
-    "第10站",
-    "第11站",
-    "第12站",
-    "第13站",
-    "第14站 ",
-    "第15站",
-    "第16站",
-]
-
-msg = tk.StringVar()
-label1 = tk.Label(window, text="選擇顯示站別：")
-label1.pack()
-label1.place(x=x_st + dx * 0, y=y_st + dy * 2 - 20)
-label2 = tk.Label(window, fg="red", textvariable=msg)
-label2.pack()
-label2.place(x=x_st + dx * 0, y=y_st + dy * 2 + 80)
-
-
-# 加入 Checkbutton
-dx2 = dx * 4 / 4  # 為了微調距離用
-for i in range(0, len(stage_no)):
-    item = tk.IntVar()
-    choice.append(item)
-    item = tk.Checkbutton(window, text=stage_no[i], variable=choice[i], command=choose)
-    item.pack()
-    item.place(x=x_st + dx2 * (i % 6), y=y_st + dy * 2 + int(i / 6) * 25)
-
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
-    fill=tk.X, padx=5, pady=5
-)  # 分隔線
-print("------------------------------------------------------------")  # 60個
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
 def checkbutton_select1():
     str = "你喜歡的球類運動："
     for i in range(0, len(choice)):
@@ -352,7 +282,7 @@ l = tk.Label(window, bg="yellow", width=20, text="empty")
 l.pack()
 
 
-def print_selection():
+def checkbutton_select8():
     if (var1.get() == 1) & (var2.get() == 0):
         l.config(text="I love only Python ")
     elif (var1.get() == 0) & (var2.get() == 1):
@@ -366,10 +296,10 @@ def print_selection():
 var1 = tk.IntVar()
 var2 = tk.IntVar()
 c1 = tk.Checkbutton(
-    window, text="Python", variable=var1, onvalue=1, offvalue=0, command=print_selection
+    window, text="Python", variable=var1, onvalue=1, offvalue=0, command=checkbutton_select8
 )
 c2 = tk.Checkbutton(
-    window, text="C++", variable=var2, onvalue=1, offvalue=0, command=print_selection
+    window, text="C++", variable=var2, onvalue=1, offvalue=0, command=checkbutton_select8
 )
 c1.pack()
 c2.pack()
@@ -380,7 +310,60 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
+def checkbutton_select9():
+    str = "選擇："
+    for i in range(0, len(choice)):
+        if choice[i].get() == 1:
+            str = str + stage_no[i] + " "
+    print(str)
+    msg.set(str)
 
+
+x_st = 20
+y_st = 500
+dx = 100
+dy = 80
+w = 12
+h = 3
+
+choice = []
+
+stage_no = [
+    "第1站",
+    "第2站",
+    "第3站",
+    "第4站",
+    "第5站",
+    "第6站",
+    "第7站",
+    "第8站",
+    "第9站",
+    "第10站",
+    "第11站",
+    "第12站",
+    "第13站",
+    "第14站 ",
+    "第15站",
+    "第16站",
+]
+
+msg = tk.StringVar()
+label1 = tk.Label(window, text="選擇顯示站別：")
+label1.pack()
+label1.place(x=x_st + dx * 0, y=y_st + dy * 2 - 20)
+label2 = tk.Label(window, fg="red", textvariable=msg)
+label2.pack()
+label2.place(x=x_st + dx * 0, y=y_st + dy * 2 + 80)
+
+
+# 加入 Checkbutton
+dx2 = dx * 4 / 4  # 為了微調距離用
+for i in range(0, len(stage_no)):
+    item = tk.IntVar()
+    choice.append(item)
+    item = tk.Checkbutton(window, text=stage_no[i], variable=choice[i], command=checkbutton_select9)
+    item.pack()
+    item.place(x=x_st + dx2 * (i % 6), y=y_st + dy * 2 + int(i / 6) * 25)
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
     fill=tk.X, padx=5, pady=5
@@ -389,96 +372,11 @@ print("------------------------------------------------------------")  # 60個
 
 window.mainloop()
 
-sys.exit()
-
-
 print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
 window.geometry("600x800")
 window.title("Checkbutton 3")
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
-    fill=tk.X, padx=5, pady=5
-)  # 分隔線
-print("------------------------------------------------------------")  # 60個
-
-
-def checkbutton_select8():
-    print("你的選項是 :", var.get())
-
-
-tk.Label(window, text="請問您的最高學歷: ", justify=tk.LEFT, padx=20).pack()
-place = [("博士", 1), ("碩士", 2), ("大學", 3), ("高中", 4)]
-var = tk.IntVar()
-var.set(2)
-for item, val in place:
-    tk.Radiobutton(
-        window, text=item, value=val, variable=var, padx=20, command=checkbutton_select8
-    ).pack()
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
-    fill=tk.X, padx=5, pady=5
-)  # 分隔線
-print("------------------------------------------------------------")  # 60個
-
-
-def first():
-    tk.messagebox.showinfo("顯示類對話方塊", "「顯示」類是以「show」開頭，只會顯示一個「確定」鈕。")
-
-
-def second():
-    tk.messagebox.askretrycancel("詢問類對話方塊", "「詢問」類是以「ask」為開頭，伴隨2~3個按鈕來產生互動。")
-
-
-tk.Button(window, text="顯示類對話方塊", command=first).pack()
-tk.Button(window, text="詢問類對話方塊", command=second).pack()
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
-    fill=tk.X, padx=5, pady=5
-)  # 分隔線
-print("------------------------------------------------------------")  # 60個
-
-sentences = "玉階生白露，夜久侵羅襪。\n卻下水晶簾，玲瓏望秋月。"
-
-text = tk.Text(window, width=30, height=14, bg="yellow", wrap=tk.WORD)
-text.insert(tk.END, sentences)
-text.pack()
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
-    fill=tk.X, padx=5, pady=5
-)  # 分隔線
-print("------------------------------------------------------------")  # 60個
-
-print("ScrollBar捲軸")
-
-text = tk.Text(window, width="30", height="5")
-text.pack()
-
-scrollbar = tk.Scrollbar(command=text.yview, orient=tk.VERTICAL)
-scrollbar.pack()
-
-text.configure(yscrollcommand=scrollbar.set)
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
-    fill=tk.X, padx=5, pady=5
-)  # 分隔線
-print("------------------------------------------------------------")  # 60個
-
-
-def checkbutton_select9():
-    print("你的選項是 :", var.get())
-
-
-tk.Label(window, text="請選擇精通的程式語言: ", justify=tk.LEFT, padx=20).pack()
-place = [("Python語言", 1), ("C語言", 2), ("C++語言", 3), ("Java語言", 4)]
-var = tk.IntVar()
-var.set(3)
-
-for item, val in place:
-    tk.Radiobutton(
-        window, text=item, value=val, variable=var, padx=20, command=checkbutton_select9
-    ).pack()
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
     fill=tk.X, padx=5, pady=5
