@@ -16,7 +16,6 @@ print("多執行緒")
 print("------------------------------------------------------------")  # 60個
 
 
-"""
 def t1():
     for i in range(10):
         print('A', end = '')
@@ -54,7 +53,7 @@ tt3.join()
 
 print('主執行緒結束')
 
-"""
+
 print("------------------------------------------------------------")  # 60個
 
 
@@ -75,13 +74,7 @@ thread1.start()
 thread2 = threading.Thread(target=display, args=("執行緒", 2))
 thread2.start()
 
-
 print("------------------------------------------------------------")  # 60個
-
-
-import threading
-import time
-
 
 def aa():
     i = 0
@@ -117,14 +110,7 @@ B: 40
 A: 5
 """
 
-
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch09\code003.py
-
-import threading
-import time
-
 
 def aa():
     i = 0
@@ -181,7 +167,7 @@ C: 500
 
 print("------------------------------------------------------------")  # 60個
 
-import time
+
 
 
 def aa():
@@ -243,10 +229,6 @@ B: 100
 
 print("------------------------------------------------------------")  # 60個
 
-import threading
-import time
-
-
 def aa():
     lock.acquire()  # 鎖定
     i = 0
@@ -291,10 +273,6 @@ B: 50
 print("------------------------------------------------------------")  # 60個
 
 
-import threading
-import time
-
-
 def aa():
     event.wait()  # 等待事件被觸發
     event.clear()  # 觸發後將事件回歸原本狀態
@@ -333,10 +311,6 @@ A: 5
 
 
 print("------------------------------------------------------------")  # 60個
-
-
-import threading
-import time
 
 
 def aa():
@@ -382,14 +356,9 @@ b.start()
 輸入任意內容
 """
 
-
-print("------------------------------------------------------------")  # 60個
-
 print("------------------------------------------------------------")  # 60個
 
 from threading import Thread
-import time
-
 
 # 模擬兔子賽跑的狀況
 def rabbitRun():
@@ -419,13 +388,9 @@ thr2 = Thread(target=turtleRun)
 thr1.start()
 thr2.start()
 
-
 print("------------------------------------------------------------")  # 60個
 
 from threading import Thread
-import random
-import time
-
 
 class RaceHorse(Thread):
     # 建構式
@@ -463,10 +428,7 @@ horse3.start()
 print("------------------------------------------------------------")  # 60個
 
 from threading import Thread
-import time
 import math
-import random
-
 
 # 模擬網路爬蟲執行的狀況
 def run(name, minDelay, maxDelay):
@@ -494,8 +456,6 @@ thr2.start()
 
 print("------------------------------------------------------------")  # 60個
 
-import threading
-
 
 def wakeUp(mytime, note, job):
     print(job, " 開始")
@@ -518,8 +478,6 @@ time.sleep(1)  # 主執行緒休息1秒
 print("程式階段2,正常工作")
 
 print("------------------------------------------------------------")  # 60個
-
-import threading
 
 a = input("按下任意鍵開始")
 b = True
@@ -552,7 +510,6 @@ print("------------------------------------------------------------")  # 60個
 
 # LifoQueue - 可用於多執行緒的堆疊
 
-import threading
 import queue
 
 # 要進行的工作
@@ -599,7 +556,6 @@ print("------------------------------------------------------------")  # 60個
 
 # Queue - 可用於多執行緒的佇列
 
-import threading
 import queue
 
 # 要進行的工作
@@ -644,7 +600,6 @@ print("------------------------------------------------------------")  # 60個
 
 # PriorityQueue - 可用於多執行緒的 heapq
 
-import threading
 import queue
 
 # 要進行的工作
@@ -689,8 +644,6 @@ print("主程式結束")
 
 print("------------------------------------------------------------")  # 60個
 
-import threading
-
 
 def wakeUp():
     print("threadObj執行緒開始")
@@ -707,9 +660,6 @@ print("程式階段2")
 
 print("------------------------------------------------------------")  # 60個
 
-import threading
-
-
 def wakeUp(name, blessingWord):
     print("threadObj執行緒開始")
     time.sleep(10)  # threadObj執行緒休息10秒
@@ -725,10 +675,6 @@ print("程式階段2")
 
 print("------------------------------------------------------------")  # 60個
 
-import threading
-import time
-
-
 def worker():
     print(threading.current_thread().name, "Starting")
     time.sleep(2)
@@ -743,13 +689,11 @@ def manager():
 
 m = threading.Thread(target=manager)
 w = threading.Thread(target=worker)
+
 m.start()
 w.start()
 
 print("------------------------------------------------------------")  # 60個
-
-import threading
-import time
 
 
 def worker():
@@ -773,13 +717,7 @@ w2.start()
 
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-
-
-import threading
-
-
+print('啟動 thread 無參數')
 def run():
     print("啟動了！")
     for i in range(100):
@@ -794,10 +732,7 @@ thr2.start()
 
 print("------------------------------------------------------------")  # 60個
 
-
-import threading
-
-
+print('啟動 thread 有參數')
 def run(which):
     print(which, "啟動了！")
     for i in range(100):
@@ -811,10 +746,6 @@ thr1.start()
 thr2.start()
 
 print("------------------------------------------------------------")  # 60個
-
-import threading
-import time
-
 
 def childThread(name):
     for i in range(7):
@@ -835,9 +766,6 @@ print("Child thread stopped")
 
 print("------------------------------------------------------------")  # 60個
 
-import threading
-import time
-
 
 class MyThread(threading.Thread):
     def __init__(self, idnum):
@@ -857,10 +785,6 @@ thr1.start()
 thr2.start()
 
 print("------------------------------------------------------------")  # 60個
-
-
-import threading
-import time
 
 
 def thread1(lock):
@@ -901,10 +825,6 @@ print("All threads stop")
 
 
 print("------------------------------------------------------------")  # 60個
-
-import random
-import time
-
 
 class BankAccount:
     def __init__(self, deposit):
@@ -969,12 +889,7 @@ p1.start()
 p2.start()
 p3.start()
 
-
 print("------------------------------------------------------------")  # 60個
-
-import threading
-import random
-import time
 
 
 class SafeBankAccount:
@@ -1027,11 +942,7 @@ p3.start()
 
 print("------------------------------------------------------------")  # 60個
 
-import threading
 from threading import Thread
-import random
-import time
-
 
 # 消費者thread
 def threadConsumer(cond):
@@ -1093,12 +1004,9 @@ thr2.join()
 
 print("All threads stop")
 
-
 print("------------------------------------------------------------")  # 60個
 
 from threading import Thread
-import time
-
 
 class Rabbit(Thread):
     def __init__(self, name):
@@ -1130,8 +1038,6 @@ turtle1.start()
 
 print("------------------------------------------------------------")  # 60個
 
-import threading
-
 
 def job(num):
     print("子執行緒", num)
@@ -1149,7 +1055,6 @@ for i in threads:
     i.join()
 
 print("結束")
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1216,12 +1121,8 @@ print("現在時間 :", now)
 record_time_elapsed = time.time() - record_time_st
 print('作業時間 :', format(record_time_elapsed, ".2f"), '秒')
 
-
 print("------------------------------------------------------------")  # 60個
 
-import time
-import random
-import threading
 
 # 定義下載漫畫的函數
 def do_my_thread(idx, cnt):

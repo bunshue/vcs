@@ -5374,17 +5374,22 @@ namespace vcs_Draw_Example1
         {
             richTextBox1.Text += "測試Pattern\n";
 
-            int W = 256 * 6 + 200;
-            int H = 300 + 200;
+            int x_ratio = 6;
+            int y_ratio = 8;
+            int W = 256 * x_ratio;
+            int H = 800;
 
-            bitmap1 = new Bitmap(W, H);
+            int pic_width = W + 200;
+            int pic_height = H + 200;
+
+            bitmap1 = new Bitmap(pic_width, pic_height);
             g = Graphics.FromImage(bitmap1);
 
             int i;
             int j;
-            for (j = 0; j < H; j++)
+            for (j = 0; j < pic_height; j++)
             {
-                for (i = 0; i < W; i++)
+                for (i = 0; i < pic_width; i++)
                 {
                     bitmap1.SetPixel(i, j, Color.FromArgb(255, 0x80, 0x80, 0x80));
                 }
@@ -5392,24 +5397,23 @@ namespace vcs_Draw_Example1
 
             int x_st = 100;
             int y_st = 100;
-            int w = 256 * 6;
-            int h = 300;
             int k = 0;
             int cc = 0;
-            for (j = 0; j < h; j++)
+            for (j = 0; j < H; j++)
             {
                 for (i = 0; i < 264; i++)
                 {
                     for (k = 0; k < 6; k++)
                     {
-                        cc = (i / 8) * 8;
-                        if (cc == 256)
+                        int dd = (int)(j / (H / y_ratio));
+                        cc = (i / 8) * 8 + dd;
+                        if (cc >= 256)
                             cc = 255;
                         if (j == 5)
                         {
                             //richTextBox1.Text += cc.ToString() + " ";
                         }
-                        bitmap1.SetPixel(x_st + i * 6 + k, y_st + j, Color.FromArgb(255, cc, cc, cc));
+                        bitmap1.SetPixel(x_st + i * x_ratio + k, y_st + j, Color.FromArgb(255, cc, cc, cc));
                     }
                 }
             }
@@ -5419,13 +5423,30 @@ namespace vcs_Draw_Example1
                 cc = i * 8;
                 if (cc == 256)
                     cc = 255;
-                g.DrawString(cc.ToString(), new Font("細明體", 18), new SolidBrush(Color.Red), new PointF(x_st + i * 8 * 6 + 5, y_st - 25));
+                g.DrawString(cc.ToString(), new Font("細明體", 18), new SolidBrush(Color.Red), new PointF(x_st + i * 8 * x_ratio + 5, y_st - 25));
             }
+            for (i = 0; i < 8; i++)
+            {
+                g.DrawString(i.ToString(), new Font("細明體", 18), new SolidBrush(Color.Red), new PointF(x_st - 20, y_st + i * (H / y_ratio) + 30));
+            }
+
+            //畫垂直線
+            for (i = 0; i <= W; i += (256 * 6 / 32))
+            {
+                g.DrawLine(new Pen(Brushes.Green, 3), x_st + i, y_st, x_st + i, y_st + H);
+            }
+            //畫水平線
+            for (i = 0; i <= H; i += (H / y_ratio))
+            {
+                g.DrawLine(new Pen(Brushes.Green, 3), x_st, y_st + i, x_st + W, y_st + i);
+
+            }
+
 
             pictureBox1.Image = bitmap1;
 
-            string filename = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
-            bitmap1.Save(filename, ImageFormat.Bmp);
+            string filename = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".png";
+            bitmap1.Save(filename, ImageFormat.Png);
         }
 
         private void button34_Click(object sender, EventArgs e)

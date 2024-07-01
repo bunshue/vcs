@@ -24,16 +24,16 @@ def do_select1():
         print('你選擇了 :', selection)
 
 # 建立音樂選項鈕內容的串列
-musics = [('AAAA', 1),                            # 音樂選單串列
-          ('BBBB', 2),
-          ('CCCC', 3)]
+musics = [('AAA', 1),                            # 音樂選單串列
+          ('BBB', 2),
+          ('CCC', 3)]
 
 # 建立選項紐Radiobutton
 var = tk.StringVar()                                       # 設定以字串表示選單編號
 var.set('1')                                            # 預設音樂是1
 for music, num in musics:                               # 建立系列選項紐
-    radioB = ttk.Radiobutton(window, text=music, variable=var, value=num)
-    radioB.pack()
+    rb = ttk.Radiobutton(window, text=music, variable=var, value=num)
+    rb.pack()
 
 tk.Button(window, text='選擇', command=do_select1).pack()
 
@@ -43,24 +43,24 @@ print("------------------------------------------------------------")  # 60個
 
 rb1 = ttk.Radiobutton(
 	window,
-	text = 'AAAA',
+	text = 'AAA',
 	value = 1,
 	variable = 'this is a lion-mouse',
-	command = lambda: print('你按了 AAAA'))
+	command = lambda: print('你按了 AAA'))
 rb1.pack()
 
-rb2 = ttk.Radiobutton(window, text = 'BBBB', value = 1, variable = 'aaaaaa')
+rb2 = ttk.Radiobutton(window, text = 'BBB', value = 1, variable = 'aaaaaa')
 rb2.pack()
 
 def radio_func():
-        print('你按了 CCCC/DDDD')
+        print('你按了 CCC/DDD')
 # data
 radio_string = tk.StringVar()
 
 # widgets
 rb3 = ttk.Radiobutton(
 	window, 
-	text = 'CCCC', 
+	text = 'CCC', 
 	value = 'C', 
 	command = radio_func, 
 	variable = radio_string)
@@ -68,7 +68,7 @@ rb3.pack()
 
 rb4 = ttk.Radiobutton(
 	window, 
-	text = 'DDDD', 
+	text = 'DDD', 
 	value = 'D', 
 	command = radio_func, 
 	variable = radio_string)
@@ -79,20 +79,22 @@ print("------------------------------------------------------------")  # 60個
 
 
 def choose1():
-    msg.set("你最喜歡的球類運動：" + choice1.get())
+    msg.set("你選擇了 :" + choice1.get())
 
 choice1 = tk.StringVar()
 msg = tk.StringVar()
-item1 = tk.Radiobutton(window, text="足球", value="足球", variable=choice1, command=choose1)
-item1.pack()
-item2 = tk.Radiobutton(window, text="籃球", value="籃球", variable=choice1, command=choose1)
-item2.pack()
-item3 = tk.Radiobutton(window, text="棒球", value="棒球", variable=choice1, command=choose1)
-item3.pack()
+
+rb1 = tk.Radiobutton(window, text="AAA", value="aaa", variable=choice1, command=choose1)
+rb1.pack()
+rb2 = tk.Radiobutton(window, text="BBB", value="bbb", variable=choice1, command=choose1)
+rb2.pack()
+rb3 = tk.Radiobutton(window, text="CCC", value="ccc", variable=choice1, command=choose1)
+rb3.pack()
+
 lblmsg = tk.Label(window, fg="red", textvariable=msg)
 lblmsg.pack()
 
-item1.select()
+rb1.select()#預設項目
 
 choose1()
 
@@ -114,11 +116,11 @@ index = 0
 choice2 = tk.StringVar()
 
 for mp3 in mp3files:  #建立歌曲選項按鈕
-    rbtem = tk.Radiobutton(frame1, text = mp3, variable = choice2, value = mp3, command = choose2)
+    rb = tk.Radiobutton(frame1, text = mp3, variable = choice2, value = mp3, command = choose2)
     if(index == 0):  #選取第1個選項按鈕
-        rbtem.select()
+        rb.select()
         playsong = preplaysong = mp3
-    rbtem.grid(row = index, column = 0, sticky = 'w')
+    rb.grid(row = index, column = 0, sticky = 'w')
     index += 1
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
@@ -126,9 +128,10 @@ print("------------------------------------------------------------")  # 60個
 
 def do_select2():
         value = radio_value.get()
-        print(lunch[value])
+        ##print(lunch[value])
+        print('你選擇了 : ' + lunch[value])
 
-lunch = {0:'AAAA',1:'BBBB',2:'CCCC'}
+lunch = {0:'AAA',1:'BBB',2:'CCC'}
 
 radio_value = tk.IntVar()
 radio_value.set(2)  # 預選第2項
@@ -146,19 +149,22 @@ v = tk.IntVar()
 tk.Radiobutton(window, text="One", variable=v, value=1).pack()
 tk.Radiobutton(window, text="Two", variable=v, value=2).pack()
 
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
+
 MODES = [
-    ("Monochrome", "1"),
-    ("Grayscale", "L"),
-    ("True color", "RGB"),
-    ("Color separation", "CMYK"),
+    ("AAA", "aaa"),
+    ("BBB", "bbb"),
+    ("CCC", "ccc"),
+    ("DDD", "ddd"),
 ]
 
 v = tk.StringVar()
 v.set("L") # initialize
 
 for text, mode in MODES:
-    b = tk.Radiobutton(window, text=text, variable=v, value=mode)
-    b.pack()
+    rb = tk.Radiobutton(window, text=text, variable=v, value=mode)
+    rb.pack()
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
@@ -172,17 +178,17 @@ window.geometry("600x800")
 window.title("Radiobutton 2")
 
 
-def radbut_click():
+def rb_click():
     selected_item = area.get()
     lab_result.config(text=AREA_OPTIONS[selected_item][0])
 
-AREA_OPTIONS=(('AAAA',0),('BBBB',1),('CCCC',2))
+AREA_OPTIONS=(('AAA',0),('BBB',1),('CCC',2))
 area = tk.IntVar()
 area.set(0)
 
 for item, value in AREA_OPTIONS:
-    radbut = tk.Radiobutton(window, text=item, variable=area, value=value, command=radbut_click)
-    radbut.pack()
+    rb = tk.Radiobutton(window, text=item, variable=area, value=value, command=rb_click)
+    rb.pack()
 
 lab_result = tk.Label(window, fg='black')
 lab_result.pack()
@@ -195,7 +201,7 @@ def select():
     print('你的選項是 :', var.get())
 
 
-place = [('AAAA', 1), ('BBBB', 2), ('CCCC', 3),('DDDD', 4)]
+place = [('AAA', 1), ('BBB', 2), ('CCC', 3),('DDD', 4)]
 
 var = tk.IntVar()
 var.set(3)
@@ -208,9 +214,9 @@ separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, p
 print("------------------------------------------------------------")  # 60個
 
 def select():
-    print('你的選項是 :', var.get())
+    print('你選擇了 :', var.get())
 
-place = [('AAAA', 1), ('BBBB', 2),('CCCC', 3), ('DDDD', 4)]
+place = [('AAA', 1), ('BBB', 2),('CCC', 3), ('DDD', 4)]
 
 var = tk.IntVar()
 var.set(2)
@@ -246,7 +252,7 @@ print("------------------------------------------------------------")  # 60個
 def printSelection2():
     print(cities[var.get()])
 
-cities = {0:"AAAA",1:"BBBB",2:"CCCC",3:"DDDD"}
+cities = {0:"AAA", 1:"BBB", 2:"CCC",3:"DDD"}
 
 var = tk.IntVar()
 var.set(0)                              # 預設選項                       
@@ -263,7 +269,7 @@ print("------------------------------------------------------------")  # 60個
 def printSelection3():
     print(cities[var.get()])            # 列出所選城市
 
-cities = {0:"AAAA",1:"BBBB",2:"CCCC",3:"DDDD"}
+cities = {0:"AAA",1:"BBB",2:"CCC",3:"DDD"}
 
 var = tk.IntVar()
 var.set(0)                              # 預設選項                       
@@ -292,7 +298,7 @@ def select():
     print('你的選項是 :', var.get())
 
 
-place = [('AAAA', 1), ('BBBB', 2), ('CCCC', 3)]
+place = [('AAA', 1), ('BBB', 2), ('CCC', 3)]
 
 var = tk.IntVar()
 var.set(3)
@@ -307,7 +313,7 @@ print("------------------------------------------------------------")  # 60個
 def select():
     print('你的選項是 :', var.get())
 
-place = [('AAAA', 1), ('BBBB', 2), ('CCCC', 3)]
+place = [('AAA', 1), ('BBB', 2), ('CCC', 3)]
 
 var = tk.IntVar()
 var.set(3)
@@ -344,7 +350,7 @@ print("------------------------------------------------------------")  # 60個
 def printSelection5():
     print(cities[var.get()])            # 列出所選城市
 
-cities = {0:"AAAA",1:"BBBB",2:"CCCC",3:"DDDD"}
+cities = {0:"AAA",1:"BBB",2:"CCC",3:"DDD"}
 
 var = tk.IntVar()
 var.set(0)                              # 預設選項                       
@@ -363,7 +369,7 @@ def printSelection6():
     print(cities[var.get()])            # 列出所選城市
 
 
-cities = {0:"AAAA",1:"BBBB",2:"CCCC",3:"DDDD"}
+cities = {0:"AAA",1:"BBB",2:"CCC",3:"DDD"}
 
 var = tk.IntVar()
 var.set(0)                              # 預設選項                       
@@ -405,20 +411,20 @@ var.set("星星")  # 預設選項是男生
 label = tk.Label(window, text="這是預設,尚未選擇", bg="lightyellow", width=30)
 label.pack()
 
-rbStar = tk.Radiobutton(
+rb1 = tk.Radiobutton(
     window, image=tk_image1, variable=var, value="星星", command=printSelection7  # 星星選項鈕
 )
-rbStar.pack()
+rb1.pack()
 
-rbMoon = tk.Radiobutton(
+rb2 = tk.Radiobutton(
     window, image=tk_image2, variable=var, value="月亮", command=printSelection7  # 月亮選項鈕
 )
-rbMoon.pack()
+rb2.pack()
 
-rbSun = tk.Radiobutton(
+rb3 = tk.Radiobutton(
     window, image=tk_image3, variable=var, value="太陽", command=printSelection7  # 太陽選項鈕
 )
-rbSun.pack()
+rb3.pack()
 
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
@@ -439,7 +445,7 @@ var.set("星星")  # 預設選項是男生
 label = tk.Label(window, text="這是預設,尚未選擇", bg="lightyellow", width=30)
 label.pack()
 
-rbStar = tk.Radiobutton(
+rb1 = tk.Radiobutton(
     window,
     image=tk_image1,  # 星星選項鈕
     text="星星",
@@ -448,9 +454,9 @@ rbStar = tk.Radiobutton(
     value="星星",
     command=printSelection8,
 )
-rbStar.pack()
+rb1.pack()
 
-rbMoon = tk.Radiobutton(
+rb2 = tk.Radiobutton(
     window,
     image=tk_image2,  # 月亮選項鈕
     text="月亮",
@@ -459,9 +465,9 @@ rbMoon = tk.Radiobutton(
     value="月亮",
     command=printSelection8,
 )
-rbMoon.pack()
+rb2.pack()
 
-rbSun = tk.Radiobutton(
+rb3 = tk.Radiobutton(
     window,
     image=tk_image3,  # 太陽選項鈕
     text="太陽",
@@ -470,7 +476,7 @@ rbSun = tk.Radiobutton(
     value="太陽",
     command=printSelection8,
 )
-rbSun.pack()
+rb3.pack()
 
 window.mainloop()
 
@@ -520,19 +526,20 @@ def print_selection():
     l.config(text="you have selected " + var.get())
 
 
-r1 = tk.Radiobutton(
+rb1 = tk.Radiobutton(
     window, text="Option A", variable=var, value="A", command=print_selection
 )
-r1.pack()
-r2 = tk.Radiobutton(
+rb1.pack()
+
+rb2 = tk.Radiobutton(
     window, text="Option B", variable=var, value="B", command=print_selection
 )
-r2.pack()
-r3 = tk.Radiobutton(
+rb2.pack()
+
+rb3 = tk.Radiobutton(
     window, text="Option C", variable=var, value="C", command=print_selection
 )
-r3.pack()
-
+rb3.pack()
 
 window.mainloop()
 

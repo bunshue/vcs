@@ -98,7 +98,7 @@ print("------------------------------------------------------------")  # 60個
 
 window.mainloop()
 
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
@@ -128,11 +128,61 @@ button1.pack()
 window.mainloop()
 
 sys.exit()
+'''
+print("------------------------------------------------------------")  # 60個
+
+
+import tkinter as tk
+
+def validate():
+    """
+    # Get the numbers from the entries
+    values = [[print(x.get()) 
+               for x in cells[i]] for i in range(9)]
+
+    print('ok')
+    """
+    for i in range(9):
+        for j in range(9):
+            cc = cells[i][j].get()
+            if cc == "":
+                print('X', end = " ")
+            else:
+                print(cc, end = " ")
+        print()
+
+        
+window = tk.Tk() # Create a window
+
+frame = tk.Frame(window) # Hold entries 
+frame.pack()
+
+cells = [] # A list of variables tied to entries
+for i in range(9):
+    cells.append([])
+    for j in range(9):
+        cells[i].append(tk.StringVar())
+        
+for i in range(9):
+    for j in range(9):
+        tk.Entry(frame, width = 2, justify = tk.RIGHT,
+            textvariable = cells[i][j]).grid(
+                row = i, column = j)
+        
+tk.Button(window, text = "Validate",  command = validate).pack()
+
+for i in range(9):
+    for j in range(9):
+        cells[i][j].set('1')
+        
+window.mainloop()
+
+
+sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 
 
-print("------------------------------------------------------------")  # 60個
 
 
 

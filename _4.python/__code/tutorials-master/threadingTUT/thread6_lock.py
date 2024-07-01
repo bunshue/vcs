@@ -1,8 +1,4 @@
-# View more python learning tutorial on my Youtube and Youku channel!!!
-
-# Youtube video tutorial: https://www.youtube.com/channel/UCdyjiB5H8Pu7aDTNVXTTpcg
-# Youku video tutorial: http://i.youku.com/pythontutorial
-
+import time
 import threading
 
 def job1():
@@ -28,5 +24,7 @@ if __name__ == '__main__':
     t2 = threading.Thread(target=job2)
     t1.start()
     t2.start()
+    time.sleep(5)
     t1.join()
     t2.join()
+    print('完成')

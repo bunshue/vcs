@@ -73,10 +73,14 @@ def mouse_up4(event):
 def mouse_up5(event):
     print('up5', end = ' ')
 
-def mouse_motion(event):
+def mouse_motion(event):             # Mouse移動
     #print(f'x: {event.x} y: {event.y}')
     #print('滑鼠位置: (%s, %s)' % (event.x, event.y), end = ' ')
     window.title('滑鼠位置: (%s, %s)' % (event.x, event.y))
+    x = event.x
+    y = event.y
+    message = "滑鼠位置 : x:{}, y:{}".format(x,y)
+    mouse_position.set(message)
 
 def mouse_wheel_event(event):
     if event.delta > 0:
@@ -116,7 +120,8 @@ window.bind('<ButtonRelease-3>', mouse_up3) #滑鼠右鍵 放開
 window.bind('<ButtonRelease-4>', mouse_up4) #滑鼠上一頁 放開
 window.bind('<ButtonRelease-5>', mouse_up5) #滑鼠下一頁 放開
 
-window.bind('<Motion>', mouse_motion)  #滑鼠鼠標位置
+window.bind("<Motion>", mouse_motion)  #滑鼠鼠標位置
+
 window.bind('<MouseWheel>', mouse_wheel_event)  #滾輪事件
 
 #鍵盤事件
@@ -126,76 +131,48 @@ window.focus_set()
 window.bind('<KeyPress>', lambda event: print(f'KeyPress ({event.char})'))
 window.bind('<Alt-KeyPress-a>', lambda event: print('你按了Alt+A ', event))
 
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-def mouseMotion(event):             # Mouse移動
-    x = event.x
-    y = event.y
-    textvar = "滑鼠位置 : x:{}, y:{}".format(x,y)
-    var.set(textvar)
-
-window = tk.Tk()
-window.geometry("600x800")
-window.title("綁定鍵盤滑鼠事件 Window")
-
 x, y = 0, 0                         # x,y座標
-var = tk.StringVar()
-text = "Mouse location - x:{}, y:{}".format(x,y)
-var.set(text)
+mouse_position = tk.StringVar()
+text = "滑鼠位置 - x:{}, y:{}".format(x,y)
+mouse_position.set(text)
 
-lab = tk.Label(window,textvariable=var)  # 建立標籤
-lab.pack(anchor=tk.S,side=tk.RIGHT,padx=10,pady=10)
-
-window.bind("<Motion>",mouseMotion)   # 增加事件處理程式
+label1 = tk.Label(window,textvariable=mouse_position)  # 建立標籤
+label1.pack(anchor=tk.S,side=tk.RIGHT,padx=10,pady=10)
 
 window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-def mouseMotion(event):             # Mouse移動
-    x = event.x
-    y = event.y
-    textvar = "滑鼠位置 : x:{}, y:{}".format(x,y)
-    var.set(textvar)
-    
-
-window = tk.Tk()
-window.geometry("600x800")
-window.title("綁定鍵盤滑鼠事件 Window")
-
-x, y = 0, 0                         # x,y座標
-var = tk.StringVar()
-text = "Mouse location - x:{}, y:{}".format(x,y)
-var.set(text)
-
-lab = tk.Label(window,textvariable=var)  # 建立標籤
-lab.pack(anchor=tk.S,side=tk.RIGHT,padx=10,pady=10)
-
-window.bind("<Motion>",mouseMotion)   # 增加事件處理程式
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-def leave(event):                       # <Esc>事件處理程式
+def do_exit(event):                       # <Esc>事件處理程式
     print('你按了 ESC')
    
 window = tk.Tk()
 window.geometry("600x800")
 window.title("綁定鍵盤滑鼠事件 Window")
 
-window.bind("<Escape>",leave)             # Esc鍵綁定leave函數
-lab = tk.Label(window,text="測試Esc鍵",      # 標籤區域
-            bg="yellow",fg="blue",
-            height = 4, width=15,
-            font="Times 12 bold")
-lab.pack(padx=30,pady=30)
+window.bind("<Escape>", do_exit)             # Esc鍵綁定 do_exit 函數
+label2 = tk.Label(window,text="測試Esc鍵")
+label2.pack()
 
 window.mainloop()
 
 print('------------------------------------------------------------')	#60個
+
+# 事件
+def do_exit(even):
+    from tkinter import messagebox
+    if messagebox.askokcancel('Exit','Confirm to exit?'):
+        window.destroy()
+
+window = tk.Tk()
+window.geometry('300x200')
+
+#綁定事件到Esc鍵，當按下Esc鍵就會調用sys_out函數，彈出對話框
+window.bind("<Escape>", do_exit)
+
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
 
 def key(event):                     # 處理鍵盤按a ... z
     print("按了 " + repr(event.char) + " 鍵") 
@@ -209,22 +186,6 @@ window.bind("<Key>",key)              # <Key>鍵綁定key函數
 window.mainloop()
 
 print('------------------------------------------------------------')	#60個
-
-# 事件
-def sys_out(even):
-    from tkinter import messagebox
-    if messagebox.askokcancel('Exit','Confirm to exit?'):
-        window.destroy()
-
-window = tk.Tk()
-window.geometry('300x200')
-
-#綁定事件到Esc鍵，當按下Esc鍵就會調用sys_out函數，彈出對話框
-window.bind('<Escape>',sys_out)
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
 
 
 

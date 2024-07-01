@@ -43,10 +43,10 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
 print("------------------------------------------------------------")  # 60個
 
 
-def callback():  # 列印所選的項目
+def get_listbox_data1():  # 列印所選的項目
     indexs = listbox1.curselection()
     for index in indexs:  # 取得索引值
-        print(listbox1.get(index))  # 列印所選的項目
+        print("你選取了 :", listbox1.get(index))  # 列印所選的項目
 
 
 listbox1 = tk.Listbox(window, width=30, height=5, selectmode=tk.MULTIPLE)
@@ -56,14 +56,14 @@ listbox1.insert(tk.END, "鼠")
 listbox1.insert(tk.END, "牛")
 listbox1.insert(tk.END, "虎")
 
-button1 = tk.Button(window, text="Print", command=callback)
+button1 = tk.Button(window, text="取得選取資料", command=get_listbox_data1)
 button1.pack()
 
 print("------------------------------------------------------------")  # 60個
 
 
-def callback():  # 列印檢查結果
-    print(listbox1.selection_includes(3))
+def get_listbox_data2():  # 列印檢查結果
+    print("選取是否包含第3項 :", listbox1.selection_includes(3))
 
 
 listbox1 = tk.Listbox(window, width=30, height=5, selectmode=tk.MULTIPLE)
@@ -72,8 +72,10 @@ listbox1.pack()
 listbox1.insert(tk.END, "鼠")
 listbox1.insert(tk.END, "牛")
 listbox1.insert(tk.END, "虎")
+listbox1.insert(tk.END, "兔")
+listbox1.insert(tk.END, "龍")
 
-button1 = tk.Button(window, text="Check", command=callback)
+button1 = tk.Button(window, text="選取是否包含第3項", command=get_listbox_data2)
 button1.pack()
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
@@ -81,13 +83,17 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
-window.mainloop()
 
+
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
-
 def itemsSorted():  # 排序
-    if var.get() == True:  # 如果設定
+    print('Checkbutton選取狀態 :', checkbutton_var.get())
+    
+    if checkbutton_var.get() == True:  # 如果設定
         revBool = True  # 大到小排序是True
     else:
         revBool = False  # 大到小排序是False
@@ -97,10 +103,6 @@ def itemsSorted():  # 排序
     for item in sortedList:  # 將排序結果插入Listbox
         listbox1.insert(tk.END, item)
 
-
-window = tk.Tk()
-window.geometry("600x800")
-window.title("Listbox 3")
 
 listbox1 = tk.Listbox(window, width=30, height=5)
 listbox1.pack()
@@ -114,17 +116,25 @@ button1 = tk.Button(window, text="排序", command=itemsSorted)
 button1.pack()
 
 # 建立排序設定核取方塊
-var = tk.BooleanVar()
-cb = tk.Checkbutton(window, text="大到小排序", variable=var)
+checkbutton_var = tk.BooleanVar()
+cb = tk.Checkbutton(window, text="大到小排序", variable=checkbutton_var)
 cb.pack()
+
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+
+window = tk.Tk()
+window.geometry("600x800")
+window.title("Listbox 2")
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
     fill=tk.X, padx=5, pady=5
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
-
-def itemSelected(event):  # 列出所選單一項目
+def get_listbox_data3(event):  # 列出所選單一項目
     obj = event.widget  # 取得事件的物件
     index = obj.curselection()  # 取得索引
     var.set(obj.get(index))  # 設定標籤內容
@@ -141,7 +151,7 @@ listbox1.insert(tk.END, "鼠")
 listbox1.insert(tk.END, "牛")
 listbox1.insert(tk.END, "虎")
 
-listbox1.bind("<<ListboxSelect>>", itemSelected)  # 點選綁定
+listbox1.bind("<<ListboxSelect>>", get_listbox_data3)  # 點選綁定
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
     fill=tk.X, padx=5, pady=5
@@ -149,13 +159,13 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
 print("------------------------------------------------------------")  # 60個
 
 
-def itemSelected(event):  # 列出所選單一項目
+def get_listbox_data3(event):  # 列出所選單一項目
     index = listbox1.curselection()  # 取得索引
     var.set(listbox1.get(index))  # 設定標籤內容
 
 
 var = tk.StringVar()  # 建立標籤
-lab = tk.Label(window, text="", textvariable=var)
+lab = tk.Label(window, width=30, height=5, text="", textvariable=var)
 lab.pack()
 
 listbox1 = tk.Listbox(window, width=30, height=5)
@@ -165,20 +175,21 @@ listbox1.insert(tk.END, "鼠")
 listbox1.insert(tk.END, "牛")
 listbox1.insert(tk.END, "虎")
 
-listbox1.bind("<<ListboxSelect>>", itemSelected)  # 點選綁定
+listbox1.bind("<<ListboxSelect>>", get_listbox_data3)  # 點選綁定
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
     fill=tk.X, padx=5, pady=5
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
-def itemSelected(event):  # 列出所選單一項目
+def get_listbox_data3(event):  # 列出所選單一項目
     obj = event.widget  # 取得事件的物件
     index = obj.curselection()  # 取得索引
     var.set(obj.get(index))  # 設定標籤內容
 
-var = tk.StringVar()
-lab = tk.Label(window, text="", textvariable=var)
+
+var = tk.StringVar()  # 建立標籤
+lab = tk.Label(window, width=30, height=5, text="", textvariable=var)
 lab.pack()
 
 listbox1 = tk.Listbox(window, width=30, height=5)
@@ -188,7 +199,7 @@ listbox1.insert(tk.END, "鼠")
 listbox1.insert(tk.END, "牛")
 listbox1.insert(tk.END, "虎")
 
-listbox1.bind("<Double-Button-1>", itemSelected)  # 連按2下綁定
+listbox1.bind("<Double-Button-1>", get_listbox_data3)  # 連按2下綁定
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
     fill=tk.X, padx=5, pady=5
@@ -196,7 +207,7 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
 print("------------------------------------------------------------")  # 60個
 
 
-def itemsSelected(event):  # 列印所選結果
+def get_listbox_data4(event):  # 列印所選結果
     obj = event.widget  # 取得事件的物件
     indexs = obj.curselection()  # 取得索引
     for index in indexs:  # 將元組內容列出
@@ -215,7 +226,7 @@ listbox1.insert(tk.END, "鼠")
 listbox1.insert(tk.END, "牛")
 listbox1.insert(tk.END, "虎")
 
-listbox1.bind("<<ListboxSelect>>", itemsSelected)  # 點選綁定
+listbox1.bind("<<ListboxSelect>>", get_listbox_data4)  # 點選綁定
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
     fill=tk.X, padx=5, pady=5
@@ -258,7 +269,7 @@ print("Listbox + Scrollbar")
 
 window = tk.Tk()
 window.geometry("600x800")
-window.title("Listbox 4")
+window.title("Listbox 3")
 
 scrollbar = tk.Scrollbar(window)
 scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
@@ -318,7 +329,7 @@ buttonDel.grid(row=2,column=0,padx=5,pady=5,sticky=tk.W)
 
 
 window = tk.Tk()
-window.title("Listbox 5")
+window.title("Listbox 4")
 
 # 單選
 LB1 = tk.Listbox(window, width=30, height=5)
@@ -349,20 +360,20 @@ print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
 window.geometry("200x200")
-window.title("Listbox 6")
+window.title("Listbox 5")
 
 var1 = tk.StringVar()
 l = tk.Label(window, bg="yellow", width=4, textvariable=var1)
 l.pack()
 
 
-def print_selection():
+def get_listbox_data6():
     value = listbox1.get(listbox1.curselection())
     var1.set(value)
 
 
 b1 = tk.Button(
-    window, text="print selection", width=15, height=2, command=print_selection
+    window, text="print selection", width=15, height=2, command=get_listbox_data6
 )
 b1.pack()
 

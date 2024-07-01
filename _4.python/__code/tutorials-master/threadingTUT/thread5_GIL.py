@@ -1,8 +1,3 @@
-# View more python learning tutorial on my Youtube and Youku channel!!!
-
-# Youtube video tutorial: https://www.youtube.com/channel/UCdyjiB5H8Pu7aDTNVXTTpcg
-# Youku video tutorial: http://i.youku.com/pythontutorial
-
 import threading
 from queue import Queue
 import copy
@@ -29,11 +24,12 @@ def normal(l):
     total = sum(l)
     print(total)
 
-if __name__ == '__main__':
-    l = list(range(1000000))
-    s_t = time.time()
-    normal(l*4)
-    print('normal: ',time.time()-s_t)
-    s_t = time.time()
-    multithreading(l)
-    print('multithreading: ', time.time()-s_t)
+
+l = list(range(1000000))
+s_t = time.time()
+normal(l*4)
+print('normal: ',time.time()-s_t)
+s_t = time.time()
+multithreading(l)
+print('multithreading: ', time.time()-s_t)
+

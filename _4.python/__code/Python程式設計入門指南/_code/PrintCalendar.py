@@ -106,10 +106,5 @@ def isLeapYear(year):
     return year % 400 == 0 or (year % 4 == 0 and year % 100 != 0)
 
 
-# Prompt the user to enter year and month 
-year = 2024
-month = 5
-
-# Print calendar for the month of the year
-printMonth(year, month)
+printMonth(2024, 7)
  

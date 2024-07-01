@@ -1,12 +1,14 @@
 def getMatrix(): 
     matrix = [] # Create an empty list
 
-    numberOfRows = eval(input("Enter the number of rows: "))
-    numberOfColumns = eval(input("Enter the number of columns: "))
+    numberOfRows = 3
+    numberOfColumns = 3
     for row in range(numberOfRows): 
         matrix.append([]) # Add an empty new row 
         for column in range(numberOfColumns): 
-            value = eval(input("Enter a value and press Enter: "))
+            #value = eval(input("Enter a value and press Enter: "))
+            value = row + column
+            value = 5
             matrix[row].append(value) 
 
     return matrix
@@ -18,13 +20,9 @@ def accumulate(m):
 
     return total
 
-def main():
-    m = getMatrix() # Get an list
-    print(m)
+m = getMatrix() # Get an list
+print(m)
 
-    # Display sum of elements
-    print("\nSum of all elements is", accumulate(m))
+# Display sum of elements
+print("\nSum of all elements is", accumulate(m))
 
-main() # Invoke main function
-
-#改成建立一個matrix

@@ -120,20 +120,17 @@ print("------------------------------------------------------------")  # 60個
 def choose():
     print('你點選了 :', choice.get())
 
-def loadmp3():
+def add_radiobutton_controls():
     global choice
     frame1 = tk.Frame(window)
     frame1.pack()
 
-    foldername = "C:/_git/vcs/_1.data/______test_files1/_mp3/"
-    mp3files = []
-    mp3files = glob.glob(foldername+"*.mp3")
+    list_data = ["aaa", "bbb", "ccc", "ddd", "eee"]
     
     index = 0
     choice = tk.StringVar()    
-    for mp3 in mp3files:
-        #print('找到檔案 ', mp3)
-        prbutton = tk.Radiobutton(frame1,text=mp3,variable=choice,value=mp3,command=choose)
+    for line in list_data:
+        prbutton = tk.Radiobutton(frame1,text=line,variable=choice,value=line,command=choose)
         if(index==0):     
             prbutton.select()
         prbutton.grid(row=index, column=0, sticky="w")
@@ -143,13 +140,13 @@ import tkinter as tk
 import glob
 
 window=tk.Tk()
-window.geometry("640x380")
-window.title("MP3播放程式")
+window.geometry("640x480")
+window.title("")
 
 frame0 = tk.Frame(window)
 frame0.pack()
 
-button7 = tk.Button(frame0, text="讀取檔案", width=8,command=loadmp3)
+button7 = tk.Button(frame0, text="讀取檔案", width=8,command=add_radiobutton_controls)
 button7.grid(row=1, column=0, padx=5, pady=5)
 
 window.mainloop()
