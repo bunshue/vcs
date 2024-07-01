@@ -9,7 +9,7 @@ import random
 import datetime
 import tkinter as tk
 from tkinter import ttk
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
@@ -178,7 +178,7 @@ def printSelection0():
 
 
 print("串列作成選項")
-select_items = [(0, "AAAA"), (1, "BBBB"), (2, "CCCC")]
+select_items = [(0, "AAA"), (1, "BBB"), (2, "CCC")]
 
 variable_int0.set(1)  # 預設選項
 
@@ -199,11 +199,11 @@ print("------------------------------------------------------------")  # 60個
 
 
 def printSelection1():
-    print(select_items[variable_int1.get()])
+    print("你的選擇是 :", variable_int1.get(), select_items[variable_int1.get()])
 
 
 print("字典作成選項1, 一般選項紐")
-select_items = {0: "東京", 1: "紐約", 2: "巴黎"}
+select_items = {0: "AAA", 1: "BBB", 2: "CCC"}
 
 variable_int1.set(1)  # 預設選項
 
@@ -224,7 +224,7 @@ def printSelection2():
 
 
 print("字典作成選項2, 用盒子取代選項紐")
-select_items = {0: "東京", 1: "紐約", 2: "巴黎"}
+select_items = {0: "AAA", 1: "BBB", 2: "CCC"}
 
 variable_int2.set(1)  # 預設選項
 
@@ -315,7 +315,7 @@ radio = tk.Radiobutton(
     variable=variable_string,  # 設定單選框關聯的變數
     value="1",  # 設定勾選單選框時其所關聯的變數的值，即r的值
     indicatoron=0,  # 將單選框繪製成按鈕型態
-    text="Radio1",
+    text="AAA",
 )  # 設定單選框顯示的文字
 radio.pack()
 
@@ -324,7 +324,7 @@ radio = tk.Radiobutton(
     variable=variable_string,
     value="2",  # 當勾選該單選框時r的值為2
     indicatoron=0,
-    text="Radio2",
+    text="BBB",
 )
 radio.pack()
 
@@ -333,7 +333,7 @@ radio = tk.Radiobutton(
     variable=variable_string,
     value="3",  # 當勾選該單選框時r的值為3
     indicatoron=0,
-    text="Radio3",
+    text="CCC",
 )
 radio.pack()
 
@@ -342,7 +342,7 @@ radio = tk.Radiobutton(
     variable=variable_string,
     value="4",  # 當勾選該單選框時r的值為4
     indicatoron=0,
-    text="Radio4",
+    text="DDD",
 )
 radio.pack()
 
@@ -369,22 +369,22 @@ radio = tk.Radiobutton(
     window,  # 產生單選框元件
     variable=variable_string,  # 設定單選框關聯的變數
     value="1",  # 設定勾選單選框時其所關聯的變數的值，即r的值
-    text="Radio1",
+    text="AAA",
 )  # 設定單選框顯示的文字
 radio.pack()
 
 radio = tk.Radiobutton(
-    window, variable=variable_string, value="2", text="Radio2"  # 當勾選該單選框時r的值為2
+    window, variable=variable_string, value="2", text="BBB"  # 當勾選該單選框時r的值為2
 )
 radio.pack()
 
 radio = tk.Radiobutton(
-    window, variable=variable_string, value="3", text="Radio3"  # 當勾選該單選框時r的值為3
+    window, variable=variable_string, value="3", text="CCC"  # 當勾選該單選框時r的值為3
 )
 radio.pack()
 
 radio = tk.Radiobutton(
-    window, variable=variable_string, value="4", text="Radio4"  # 當勾選該單選框時r的值為4
+    window, variable=variable_string, value="4", text="DDD"  # 當勾選該單選框時r的值為4
 )
 radio.pack()
 
@@ -555,17 +555,7 @@ button.pack()
 		buttontext.set('askyesno')
 		buttontext.set('skquestion')						# 變更按鈕上的文字
 
-
-
-
-
-
-
 """
-
-'''
-
-
 
 
 
@@ -731,15 +721,28 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
 print("------------------------------------------------------------")  # 60個
 
 
-
-
 window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
 
+print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個
 
-print("------------------------------------------------------------")  # 60個
+"""
+print('字串變數之 set 與 get')
+foldername = tk.StringVar()
+foldername.set('C:/_git/vcs/_1.data/______test_files1/_mp3/')
+print(foldername.get())
+
+
+
+
+   
+
+
+
+"""
 

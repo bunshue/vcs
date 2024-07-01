@@ -7,7 +7,7 @@
 import sys
 import random
 import tkinter as tk
-
+'''
 print("------------------------------------------------------------")  # 60個
 
 print("用 Entry 和 grid 做 表格")
@@ -98,7 +98,7 @@ print("------------------------------------------------------------")  # 60個
 
 window.mainloop()
 
-
+'''
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
@@ -108,6 +108,26 @@ print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
+window = tk.Tk()
+window.geometry("600x800")
+window.title("Entry 測試")
+
+def get_data():
+    print('取得資料(變數) :', pdir.get())
+    print('取得資料(控件) :', entry1.get())
+    
+pdir = tk.StringVar()
+pdir.set('C:/_git/vcs/_1.data/______test_files1/_mp3/')
+
+entry1 = tk.Entry(window, textvariable=pdir, width=30)
+entry1.pack()
+
+button1 = tk.Button(window, text="取得資料", command=get_data)
+button1.pack()
+
+window.mainloop()
+
+sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 

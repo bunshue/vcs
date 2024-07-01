@@ -85,6 +85,7 @@ def stopmp3():  # 停止播放
 
 
 def exitmp3():  # 結束
+    print('離開mp3播放器 要先stop再關閉window')
     pygame.mixer.music.stop() # 停止播放
     window.destroy()  # 關閉視窗
 
@@ -114,7 +115,7 @@ def button00Click():
 def button01Click():
     print("你按了 播放")
     playmp3()
-
+    main_message2.set("正在播放 {}".format(mp3_filename))
 
 def button02Click():
     print("你按了 暫停")
@@ -268,12 +269,20 @@ window.title("mp3播放器")
 icon_filename = "C:/_git/vcs/_1.data/______test_files1/_icon/唐.ico"
 window.iconbitmap(icon_filename)  # 更改圖示
 
-x_st = 50
-y_st = 50
+x_st = 80
+y_st = 100
 dx = 120
 dy = 80
 w = 12
 h = 3
+
+def setVolume(val):
+    volume = float(scale1.get())
+    pygame.mixer.music.set_volume(volume / 100)
+
+scale1 = tk.Scale(window, from_=100, to=0, command=setVolume)
+scale1.place(x=x_st-70 + dx * 0, y=y_st + dy * 0)
+scale1.set(100)
 
 button00_text = tk.StringVar()
 button00 = tk.Button(
@@ -284,19 +293,13 @@ button00 = tk.Button(
     command=button00Click,
     text="",
 )
-button00.pack(side=tk.LEFT, ipadx=25, ipady=25, expand=tk.YES)
 button00_text.set("選取檔案")
 
 button01 = tk.Button(window, width=w, height=h, command=button01Click, text="播放")
-button01.pack(side=tk.LEFT, ipadx=25, ipady=25, expand=tk.YES)
 button02 = tk.Button(window, width=w, height=h, command=button02Click, text="暫停")
-button02.pack(side=tk.LEFT, ipadx=25, ipady=25, expand=tk.YES)
 button03 = tk.Button(window, width=w, height=h, command=button03Click, text="音量調大")
-button03.pack(side=tk.LEFT, ipadx=25, ipady=25, expand=tk.YES)
 button04 = tk.Button(window, width=w, height=h, command=button04Click, text="音量調小")
-button04.pack(side=tk.LEFT, ipadx=25, ipady=25, expand=tk.YES)
 button05 = tk.Button(window, width=w, height=h, command=button05Click, text="停止")
-button05.pack(side=tk.LEFT, ipadx=25, ipady=25, expand=tk.YES)
 button00.place(x=x_st + dx * 0, y=y_st + dy * 0)
 button01.place(x=x_st + dx * 1, y=y_st + dy * 0)
 button02.place(x=x_st + dx * 2, y=y_st + dy * 0)
@@ -305,19 +308,13 @@ button04.place(x=x_st + dx * 4, y=y_st + dy * 0)
 button05.place(x=x_st + dx * 5, y=y_st + dy * 0)
 
 button10 = tk.Button(window, width=w, height=h, command=button10Click, text="循環播放")
-button10.pack(side=tk.LEFT, ipadx=25, ipady=25, expand=tk.YES)
 button11 = tk.Button(window, width=w, height=h, command=button11Click, text="選取資料夾")
-button11.pack(side=tk.LEFT, ipadx=25, ipady=25, expand=tk.YES)
 button12 = tk.Button(window, width=w, height=h, command=button12Click, text="上一首")
-button12.pack(side=tk.LEFT, ipadx=25, ipady=25, expand=tk.YES)
 button13 = tk.Button(window, width=w, height=h, command=button13Click, text="下一首")
-button13.pack(side=tk.LEFT, ipadx=25, ipady=25, expand=tk.YES)
 button14 = tk.Button(
     window, width=w, height=h, command=button14Click, text="Set/Clear Data"
 )
-button14.pack(side=tk.LEFT, ipadx=25, ipady=25, expand=tk.YES)
 button15 = tk.Button(window, width=w, height=h, command=button15Click, text="離開")
-button15.pack(side=tk.LEFT, ipadx=25, ipady=25, expand=tk.YES)
 
 button10.place(x=x_st + dx * 0, y=y_st + dy * 1)
 button11.place(x=x_st + dx * 1, y=y_st + dy * 1)
@@ -327,17 +324,11 @@ button14.place(x=x_st + dx * 4, y=y_st + dy * 1)
 button15.place(x=x_st + dx * 5, y=y_st + dy * 1)
 
 button20 = tk.Button(window, width=w, height=h, command=button20Click, text="測試0")
-button20.pack(side=tk.LEFT, ipadx=25, ipady=25, expand=tk.YES)
 button21 = tk.Button(window, width=w, height=h, command=button21Click, text="播放 wav/midi")
-button21.pack(side=tk.LEFT, ipadx=25, ipady=25, expand=tk.YES)
 button22 = tk.Button(window, width=w, height=h, command=button22Click, text="測試2")
-button22.pack(side=tk.LEFT, ipadx=25, ipady=25, expand=tk.YES)
 button23 = tk.Button(window, width=w, height=h, command=button23Click, text="測試3")
-button23.pack(side=tk.LEFT, ipadx=25, ipady=25, expand=tk.YES)
 button24 = tk.Button(window, width=w, height=h, command=button24Click, text="測試4")
-button24.pack(side=tk.LEFT, ipadx=25, ipady=25, expand=tk.YES)
 button25 = tk.Button(window, width=w, height=h, command=button25Click, text="測試5")
-button25.pack(side=tk.LEFT, ipadx=25, ipady=25, expand=tk.YES)
 
 button20.place(x=x_st + dx * 0, y=y_st + dy * 2)
 button21.place(x=x_st + dx * 1, y=y_st + dy * 2)
@@ -352,20 +343,17 @@ font_size = 20
 label_message1 = tk.Label(
     window, font=("標楷體", font_size), fg="red", textvariable=main_message1
 )
-label_message1.pack()
 label_message1.place(x=5, y=0 + 10)
 main_message1.set("")
 
 label_message2 = tk.Label(
     window, font=("標楷體", font_size), fg="red", textvariable=main_message2
 )
-label_message2.pack()
-label_message2.place(x=5 + W * 3 / 4, y=0 + 10)
+label_message2.place(x=5, y=0 + 10+40)
 main_message2.set("")
 
 # 加入 Text
 text1 = tk.Text(window, width=100, height=30)  # 放入多行輸入框
-text1.pack()
 text1.place(x=x_st + dx * 0, y=y_st + dy * 3 + 20)
 
 # mp3_foldername = 'C:/_git/vcs/_1.data/______test_files1/_mp3/'
@@ -684,3 +672,62 @@ while True:
 
 
 print("程式執行完畢！")
+
+
+
+""" 待搬出
+
+mp3_filename = "找到檔案  C:/_git/vcs/_1.data/______test_files1/_mp3\16.監獄風雲.mp3"
+
+
+#播放mp3檔案, 要先stop, 再load, 再play
+    mixer.music.stop()
+    mixer.music.load(playsong)   
+    mixer.music.play(loops=-1)  
+
+停止
+    mixer.music.stop()
+
+    #暫停
+    mixer.music.pause()
+
+大小聲
+    volume +=0.1
+    if volume>=1.0:
+        volume=1.0
+    mixer.music.set_volume(volume) 
+
+    volume -=0.1
+    if volume<=0.2:
+        volume=0.2
+    mixer.music.set_volume(volume)  
+
+
+        if not mixer.music.get_busy():
+            mixer.music.load(playsong)
+            mixer.music.play(loops=-1) 
+        else:
+            mixer.music.unpause() 
+
+pygame.init()
+pygame.mixer.music.load(mp3_filename)
+
+started = False
+playing = False
+    
+    global playing, started
+    if not playing:
+        if not started:
+            pygame.mixer.music.play(-1)
+            started = True
+        else:
+            pygame.mixer.music.unpause()
+        button.config(text="Pause")
+    else:
+        pygame.mixer.music.pause()
+        button.config(text="Play")
+    playing = not playing
+
+
+"""
+

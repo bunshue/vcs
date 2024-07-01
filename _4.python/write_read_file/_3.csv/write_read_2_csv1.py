@@ -34,6 +34,7 @@ print("------------------------------------------------------------")  # 60個
 import sys
 import csv
 import random
+import pathlib
 import numpy as np
 import pandas as pd
 
@@ -41,52 +42,15 @@ print("------------------------------------------------------------")  # 60個
 print("1. csv_writer = csv.writer() + writerows()")
 print("------------------------------------------------------------")  # 60個
 
-filename = "tmp_write_read_csv01.csv"
+print("寫入CSV檔 一維/2維 串列資料")
 
-csvfile = open(filename, "w+", newline="")
-try:
-    csv_writer = csv.writer(csvfile)
-    # 寫入欄位名稱
-    csv_writer.writerow(("中文名", "英文名", "體重", "全名"))
-    # 寫入資料(12筆)
-    csv_writer.writerow(("鼠", "mouse", 3, "米老鼠"))
-    csv_writer.writerow(("牛", "ox", 48, "班尼牛"))
-    csv_writer.writerow(("虎", "tiger", 33, "跳跳虎"))
-    csv_writer.writerow(("兔", "rabbit", 8, "彼得兔"))
-finally:
-    csvfile.close()
+filename = "tmp_write_read_csv01aaba.csv"
 
-print("寫入檔案 " + filename + " 完成, 檔案 :", filename)
-
-print("------------------------------------------------------------")  # 60個
-
-print("寫入CSV檔 一維串列資料 一次寫入")
-
-filename = "tmp_write_read_csv03.csv"
-
-# 建立csv一維串列資料
-
+# 建立 一維串列資料
 print("一維 串列")
 animals = ["鼠", "牛", "虎", "兔", "龍"]  # 串列
 
-# 開啟輸出的 csv 檔案
-# with open(filename, 'w', encoding='utf-8', newline='') as csvfile:  # 開啟csv檔案
-with open(filename, "w", newline="") as csvfile:  # 開啟csv檔案
-    # 建立 csv 檔寫入物件
-    csv_writer = csv.writer(csvfile)
-
-    # 寫入一維串列資料
-    csv_writer.writerows(np.array(animals))
-
-print("寫入檔案 " + filename + " 完成, 檔案 :", filename)
-
-print("寫入CSV檔 二維串列資料 一次寫入")
-
-print("------------------------------------------------------------")  # 60個
-
-filename = "tmp_write_read_csv04.csv"
-
-# 建立csv二維串列資料
+# 建立 二維串列資料
 csvtable = [
     ["中文名", "英文名", "體重", "全名"],
     ["鼠", "mouse", 3, "米老鼠"],
@@ -95,92 +59,43 @@ csvtable = [
     ["兔", "rabbit", 8, "彼得兔"],
 ]
 
+# 開啟輸出的 csv 檔案
 # with open(filename, 'w', encoding='utf-8', newline='') as csvfile:  # 開啟csv檔案
-with open(filename, "w", newline="") as csvfile:  # 開啟csv檔案
+with open(filename, "w+", newline="") as csvfile:  # 開啟csv檔案
     # 建立 csv 檔寫入物件
-    csv_writer = csv.writer(csvfile)
+    csv_writer = csv.writer(csvfile)  # 建立Writer物件
 
+    # 寫入欄位名稱
+    csv_writer.writerow(("中文名", "英文名", "體重", "全名"))
+
+    # 寫入一維串列當做標題
+    csv_writer.writerow(["中文名", "英文名", "體重"])
+
+    # 寫入一維串列資料
+    csv_writer.writerow(animals)
+
+    # 寫入一維串列資料
+    csv_writer.writerows(np.array(animals))
+    
+    # 寫入資料 writerow (一次一列資料, 寫入一維串列)
+    csv_writer.writerow(["鼠", "mouse", 3, "米老鼠"])
+    csv_writer.writerow(("鼠", "mouse", 3, "米老鼠"))
+    csv_writer.writerow(("牛", "ox", 48, "班尼牛"))
+    csv_writer.writerow(("虎", "tiger", 33, "跳跳虎"))
+    csv_writer.writerow(["兔", "rabbit", 8, "彼得兔"])
+    
+    # 寫入資料 writerows (一次多列資料, 寫入二維串列)
+
+    print("寫入CSV檔 二維串列資料 一次寫入")
     # 寫入二維串列資料
     csv_writer.writerows(csvtable)
 
-print("寫入檔案 " + filename + " 完成, 檔案 :", filename)
-
-print("寫入CSV檔 二維串列資料 一次寫一行(row)")
-
-filename = "tmp_write_read_csv05.csv"
-
-with open(filename, "w+", newline="") as csvfile:  # 開啟csv檔案
-    csv_writer = csv.writer(csvfile)
+    print("寫入CSV檔 二維串列資料 一次寫一行(row)")
     for line in csvtable:
         csv_writer.writerow(line)
 
 print("寫入檔案 " + filename + " 完成, 檔案 :", filename)
-
 print("------------------------------------------------------------")  # 60個
-
-csvfile = open("tmp_writerProduct.csv", "w", newline="")  # 開啟writerProduct.csv檔案
-csv_writer = csv.writer(csvfile)  # 建立writer物件，物件名稱為csv_writer
-# 建立listProduct二維串列有兩筆產品
-listProduct = [["B01", "小林煎餅", "78"], ["B02", "五香豆干", "90"]]
-# 寫入一維串列當做標題
-csv_writer.writerow(["編號", "品名", "單價"])
-csv_writer.writerows(listProduct)  # 將二維串列的兩筆產品寫入csv內
-csvfile.close()  # 關閉檔案
-
-print("------------------------------------------------------------")  # 60個
-
-listProduct=["","",""] # 建立listProduct串列，用來存放一筆產品記錄
-
-# 以附加模式開啟tProduct.csv檔案
-f=open('tmp_tProduct.csv','a', newline='') 
-csv_writer = csv.writer(f) 
-listProduct[0] = "A123"   #listProduct[0]存放編號
-listProduct[1] = "王子麵"   #listProduct[1]存放品名
-listProduct[2] = "10"   #listProduct[2]存放單價
-csv_writer.writerow(listProduct)
-print("新增成功")
-f.close()
-
-print("------------------------------------------------------------")  # 60個
-
-filename = "tmp_write_read_csv08.csv"
-
-with open(filename, "w", newline="", encoding="utf-8") as csvfile:  # 開啟csv檔案
-    csv_writer = csv.writer(csvfile)  # 建立Writer物件
-    csv_writer.writerow(["姓名", "年齡", "城市"])
-    csv_writer.writerow(["Hung", "35", "Taipei"])
-    csv_writer.writerow(["James", "40", "Chicago"])
-
-print("------------------------------------------------------------")  # 60個
-
-filename = "data/Example2.csv"
-list1 = [[10, 33, 45], [5, 25, 56]]
-with open(filename, "w+", newline="") as csvfile:  # 開啟csv檔案
-    csv_writer = csv.writer(csvfile)
-    csv_writer.writerow(["Data1", "Data2", "Data3"])
-    for line in list1:
-        csv_writer.writerow(line)
-
-"""
-filename = "tmp_write_read_csv10.csv"  # 目的檔案
-#with open(filename, "w", newline="", encoding="utf-8") as csvfile:  # 開啟csv檔案
-with open(filename,'w',newline='') as csvfile:    # 開啟csv檔案
-    csv_writer = csv.writer(csvfile)    # 建立Writer物件   
-    for line in list_data:              # 將串列寫入
-        csv_writer.writerow(line)
-"""
-
-print("------------------------------------------------------------")  # 60個
-
-filename = "tmp_write_read_csv10.csv"
-with open(filename, "w", newline="") as csvfile:  # 開啟csv檔案
-    csv_writer = csv.writer(csvfile, delimiter="\t")  # 建立Writer物件
-    csv_writer.writerow(["Name", "Age", "City"])
-    csv_writer.writerow(["Hung", "35", "Taipei"])
-    csv_writer.writerow(["James", "40", "Chicago"])
-
-print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -214,42 +129,43 @@ print("------------------------------------------------------------")  # 60個
 
 csvfile = open("tmp_dictWriterProduct.csv", "w", newline="")
 # 建立writer物件，同時指定欄位名稱
-csv_dict_writer = csv.DictWriter(csvfile, fieldnames=["產品編號", "品名", "單價"])
+csv_dict_writer = csv.DictWriter(csvfile, fieldnames=["中文名", "英文名", "體重"])
 csv_dict_writer.writeheader()  # 寫入欄位名稱
-csv_dict_writer.writerow({"產品編號": "A02", "品名": "黑松沙士", "單價": 90})
+csv_dict_writer.writerow({"中文名": "鼠", "英文名": "mouse", "體重": 3})
+
 # 寫入兩筆產品記錄到csv檔中
-csv_dict_writer.writerow({"產品編號": "A02", "品名": "草苺蛋糕", "單價": 120})
+csv_dict_writer.writerow({"中文名": "牛", "英文名": "ox", "體重": 48})
+
 csvfile.close()
 
 print("------------------------------------------------------------")  # 60個
 
 filename = "tmp_write_read_csv11.csv"
 with open(filename, "w", newline="") as csvfile:  # 開啟csv檔案
-    fields = ["Name", "Age", "City"]
+    fields = ["中文名", "英文名", "體重"]
     csv_dict_writer = csv.DictWriter(csvfile, fieldnames=fields)  # 建立Writer物件
 
     csv_dict_writer.writeheader()  # 寫入標題
-    csv_dict_writer.writerow({"Name": "Hung", "Age": "35", "City": "Taipei"})
-    csv_dict_writer.writerow({"Name": "James", "Age": "40", "City": "Chicago"})
+    csv_dict_writer.writerow({"中文名": "鼠", "英文名": "mouse", "體重": "3"})
+    csv_dict_writer.writerow({"中文名": "牛", "英文名": "ox", "體重": "48"})
 
 print("------------------------------------------------------------")  # 60個
 
 # 定義串列,元素是字典
 dictList = [
-    {"姓名": "Hung", "年齡": "35", "城市": "臺北"},
-    {"姓名": "James", "年齡": "40", "城市": "芝加哥"},
+    {"中文名": "鼠", "英文名": "mouse", "體重": "3"},
+    {"中文名": "牛", "英文名": "ox", "體重": "48"},
 ]
 
 filename = "tmp_write_read_csv12.csv"
 with open(filename, "w", newline="", encoding="utf-8") as csvfile:  # 開啟csv檔案
-    fields = ["姓名", "年齡", "城市"]
+    fields = ["中文名", "英文名", "體重"]
     csv_dict_writer = csv.DictWriter(csvfile, fieldnames=fields)  # 建立Writer物件
     csv_dict_writer.writeheader()  # 寫入標題
     for line in dictList:  # 寫入內容
         csv_dict_writer.writerow(line)
 
 print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -334,50 +250,6 @@ except FileNotFoundError:
 else:
     for line in list_data:
         print("%-20s%-20s%-10s%-20s" % (line[0], line[1], line[2], line[3]))
-
-print("------------------------------------------------------------")  # 60個
-
-filename = "data/pl.csv"
-with open(filename, "r") as csvfile:  # 開啟csv檔案
-    csv_reader = csv.reader(csvfile)
-    for line in csv_reader:
-        print(line)
-print()
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-filename = "data/Example.csv"
-with open(filename, "r") as csvfile:  # 開啟csv檔案
-    csv_reader = csv.reader(csvfile)
-    for line in csv_reader:
-        print(line)
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-import pathlib
-
-filename = "data/namelist.csv"
-csvfile = pathlib.Path(filename).open(encoding="UTF-8")
-csv_reader = csv.reader(csvfile)
-for line in csv_reader:
-    print(line)
-
-print("------------------------------------------------------------")  # 60個
-
-import pathlib
-
-filename = "xxxxx.csv"
-try:
-    csvfile = pathlib.Path(filename).open(encoding="UTF-8")
-    csv_reader = csv.reader(csvfile)
-    for line in csv_reader:
-        print(line)
-except:
-    print("無法載入檔案。")
 
 print("------------------------------------------------------------")  # 60個
 
@@ -911,10 +783,10 @@ with open('songs.csv', 'w', newline='', encoding="big5") as csvfile:
 
 
 
-            f = open(self.log_file_name, 'a')
-            writer = csv.writer(f, dialect)
+            csvfile = open(self.log_file_name, 'a')
+            writer = csv.writer(csvfile, dialect)
             writer.writerow([self.docname, lineno, issue, text.strip()])
-            f.close()
+            csvfile.close()
 
 
         # 開啟輸出的 csv 檔案
@@ -927,3 +799,55 @@ with open('songs.csv', 'w', newline='', encoding="big5") as csvfile:
             writer.writerows(csv_data)
 
 """
+
+
+
+
+"""
+    ["中文名", "英文名", "體重", "全名"],
+    ["鼠", "mouse", 3, "米老鼠"],
+    ["牛", "ox", 48, "班尼牛"],
+    ["虎", "tiger", 33, "跳跳虎"],
+    ["兔", "rabbit", 8, "彼得兔"],
+"""
+
+
+"""
+
+
+應該重複
+with open(filename, "r") as csvfile:  # 開啟csv檔案
+    csv_reader = csv.reader(csvfile)
+    for line in csv_reader:
+        print(line)
+
+
+
+
+csvfile = pathlib.Path(filename).open(encoding="UTF-8")
+csvfile = pathlib.Path(filename).open(encoding="UTF-8")
+
+with pathlib.Path(filename).open(encoding="big5") as csvfile:  # 開啟csv檔案
+    csv_reader = csv.reader(csvfile)
+    for line in csv_reader:
+        print(line)
+
+
+
+csvfile = open(filename, "w", newline="")
+
+# 以附加模式開啟檔案
+csvfile=open(filename, 'a', newline='') 
+
+
+with open(filename, "w", newline="", encoding="utf-8") as csvfile:  # 開啟csv檔案
+with open(filename, "w+", newline="") as csvfile:  # 開啟csv檔案
+#with open(filename, "w", newline="", encoding="utf-8") as csvfile:  # 開啟csv檔案
+with open(filename, 'w', newline='') as csvfile:    # 開啟csv檔案
+with open(filename, "w", newline="") as csvfile:  # 開啟csv檔案
+    csv_writer = csv.writer(csvfile, delimiter="\t")  # 建立Writer物件
+    
+
+
+"""
+

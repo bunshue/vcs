@@ -383,4 +383,26 @@ window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
+window = tk.Tk()
+window.geometry("600x400")
+window.title("Listbox + Scrollbar use window")
+
+yscrollbar = tk.Scrollbar(window)  # y軸scrollbar物件
+yscrollbar.pack(side=tk.RIGHT, fill=tk.Y)# 靠右安置與父物件高度相同
+
+# 建立Listbox, yscrollcommand指向yscrollbar.set方法
+listbox1 = tk.Listbox(window, yscrollcommand=yscrollbar.set)
+listbox1.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+#listbox1.pack(side=tk.LEFT, fill=tk.BOTH)
+
+for i in range(50):  # 建立50筆項目
+    listbox1.insert(tk.END, "第" + str(i) + "列")
+
+yscrollbar.config(command=listbox1.yview)
+
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+
 

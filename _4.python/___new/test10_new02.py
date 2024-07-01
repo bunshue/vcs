@@ -873,10 +873,6 @@ kernel_settings = {
 with open(kernel_fn, "w") as f:
     json.dump(kernel_settings, f, indent=4)
 
-
-'''
-
-
 print("------------------------------------------------------------")  # 60個
 
 import numpy as np
@@ -891,8 +887,19 @@ from sympy import symbols, integrate, sqrt
 x = symbols("x")
 cc = integrate(sqrt(1-x**2), (x, -1, 1)) * 2
 print(cc)
-
+'''
 print("------------------------------------------------------------")  # 60個
+
+print('撈出一層')
+import glob
+
+foldername = 'C:/_git/vcs/_1.data/______test_files1/_mp3/'
+
+mp3files = []
+mp3files = glob.glob(foldername+"*.mp3")
+for mp3 in mp3files:
+    print('找到檔案 ', mp3)
+
 
 
 print("------------------------------------------------------------")  # 60個

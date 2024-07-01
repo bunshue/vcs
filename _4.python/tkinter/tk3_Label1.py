@@ -3,7 +3,7 @@ import tkinter as tk
 from tkinter import ttk
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 window = tk.Tk()
 window.geometry("600x800")
 window.title("Label 1")
@@ -618,14 +618,28 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-
+'''
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
-
 print("------------------------------------------------------------")  # 60個
 
+window = tk.Tk()
+window.geometry("600x800")
+window.title("Label 1")
+
+message = tk.StringVar()
+message.set("播放歌曲：")
+
+label1 = tk.Label(window, textvariable=message,fg="blue",font=("標楷體",10))
+label1.pack()
+
+label2 = tk.Label(window, text="\nMP3播放程式", fg="blue",font=("標楷體",12))
+label2.pack()
+
+
+window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
