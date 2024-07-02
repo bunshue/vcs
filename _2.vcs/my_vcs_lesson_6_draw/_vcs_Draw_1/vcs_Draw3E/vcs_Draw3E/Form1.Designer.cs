@@ -66,7 +66,7 @@
             // 
             // pictureBox9
             // 
-            this.pictureBox9.BackColor = System.Drawing.Color.Black;
+            this.pictureBox9.BackColor = System.Drawing.Color.White;
             this.pictureBox9.Location = new System.Drawing.Point(320, 82);
             this.pictureBox9.Name = "pictureBox9";
             this.pictureBox9.Size = new System.Drawing.Size(50, 50);

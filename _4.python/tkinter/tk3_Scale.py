@@ -15,13 +15,13 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
-slider = tk.Scale(window, from_=0, to=10)
-slider.pack()
+scale1 = tk.Scale(window, from_=0, to=10)
+scale1.pack()
 
 label = tk.Label(window)
 label.pack()
 
-# slider.set(clicks)
+# scale1.set(clicks)
 # label.config(text="Time: " + str(score))
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
@@ -29,33 +29,114 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
-slider = tk.Scale(window, from_=0, to=100)
-slider.pack()
+scale2 = tk.Scale(window, from_=0, to=100)
+scale2.pack()
 
-slider = tk.Scale(window, from_=0, to=100, resolution=0.1)
-slider.pack()
+scale3 = tk.Scale(window, from_=0, to=100, resolution=0.1)
+scale3.pack()
+
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
+print("------------------------------------------------------------")  # 60個
+
+scale4 = tk.Scale(window, from_=0, to=200, orient=tk.HORIZONTAL)
+scale4.pack()
+print(scale4.get())
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
     fill=tk.X, padx=5, pady=5
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
-slider = tk.Scale(window, from_=0, to=200, orient=tk.HORIZONTAL)
-slider.pack()
-print(slider.get())
+def fnRead():
+    n = str(scale_Num.get())
+    print(n)
 
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
-    fill=tk.X, padx=5, pady=5
-)  # 分隔線
-print("------------------------------------------------------------")  # 60個
+
+print("讀數值")
+
+scale_Num = tk.Scale(window, label="數值：", orient="horizontal", from_=1, to=99, length=200)
+scale_Num.pack(pady=10)
+btnRead = tk.Button(window, text=" 確定 ", command=fnRead)
+btnRead.pack(pady=20)
 
 window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
+
+def get_slider_data2():
+    print("垂直捲軸值 = %d, 水平捲軸值 = %d" % (scale_V.get(), scale_H.get()))
+
+
 window = tk.Tk()
 window.geometry("600x800")
 window.title("Scale 測試 2")
+
+scale_V = tk.Scale(window, label="垂直", from_=0, to=10)  # 建立垂直卷軸
+scale_V.set(5)  # 設定垂直卷軸初值是5
+scale_V.pack()
+
+scale_H = tk.Scale(
+    window, label="水平", from_=0, to=10, length=300, orient=tk.HORIZONTAL  # 建立水平卷軸
+)
+scale_H.set(3)  # 設定水平捲軸初值是3
+scale_H.pack()
+
+tk.Button(window, text="取得Slider資料2", command=get_slider_data2).pack()
+
+
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
+print("------------------------------------------------------------")  # 60個
+
+
+def get_slider_data1():
+    print(scale11.get(), scale12.get())
+
+scale11 = tk.Scale(window, from_=0, to=10)
+scale11.pack()
+
+scale12 = tk.Scale(window, from_=0, to=10, length=300, orient=tk.HORIZONTAL)
+scale12.set(3)  # 設定水平尺度值
+scale12.pack()
+
+tk.Button(window, text="取得Slider資料1", command=get_slider_data1).pack()
+
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
+print("------------------------------------------------------------")  # 60個
+
+scale13 = tk.Scale(window, from_=0, to=10).pack()
+
+scale14 = tk.Scale(window, from_=0, to=10, length=300, orient=tk.HORIZONTAL).pack()
+
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
+print("------------------------------------------------------------")  # 60個
+
+scale15 = tk.Scale(window, from_=0, to=10).pack()
+
+scale16 = tk.Scale(window, from_=0, to=10, length=300, orient=tk.HORIZONTAL).pack()
+
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
+print("------------------------------------------------------------")  # 60個
+
+
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+
+window = tk.Tk()
+window.geometry("600x800")
+window.title("Scale 測試 3")
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
     fill=tk.X, padx=5, pady=5
@@ -63,7 +144,7 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
 print("------------------------------------------------------------")  # 60個
 
 scale_float = tk.DoubleVar(value=15)
-scale = ttk.Scale(
+scale5 = ttk.Scale(
     window,
     command=lambda value: progress.stop(),
     from_=0,
@@ -72,7 +153,7 @@ scale = ttk.Scale(
     orient="horizontal",
     variable=scale_float,
 )
-scale.pack()
+scale5.pack()
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
     fill=tk.X, padx=5, pady=5
@@ -116,8 +197,8 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
 label = ttk.Label(window, textvariable=exercise_int)
 label.pack()
 
-exercise_scale = ttk.Scale(window, variable=exercise_int, from_=0, to=100)
-exercise_scale.pack()
+scale6 = ttk.Scale(window, variable=exercise_int, from_=0, to=100)
+scale6.pack()
 
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
@@ -126,25 +207,86 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
 print("------------------------------------------------------------")  # 60個
 
 
-def fnRead():
-    n = str(sclNum.get())
-    print(n)
-
-
-print("讀數值")
-
-sclNum = tk.Scale(window, label="數值：", orient="horizontal", from_=1, to=99, length=200)
-sclNum.pack(pady=10)
-btnRead = tk.Button(window, text=" 確定 ", command=fnRead)
-btnRead.pack(pady=20)
-
 window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-print("調色盤")
-# palette.py
 
+window = tk.Tk()
+window.geometry("600x800")
+window.title("Scale 測試 4")
+
+scale8 = tk.Scale(
+    window,
+    from_=0,  # 起點值
+    to=10,  # 終點值
+    troughcolor="yellow",  # 槽的顏色
+    width="30",  # 槽的高度
+    tickinterval=2,  # 刻度
+    label="My Scale",  # Scale標籤
+    length=300,  # Scale長度
+    orient=tk.HORIZONTAL,
+)  # 水平
+scale8.pack()
+
+
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
+print("------------------------------------------------------------")  # 60個
+
+label1 = tk.Label(window, bg="yellow", width=20, text="empty")
+label1.pack()
+
+
+def print_selection1(v):
+    label1.config(text="you have selected " + v)
+
+
+scale17 = tk.Scale(
+    window,
+    label="try me",
+    from_=5,
+    to=11,
+    orient=tk.HORIZONTAL,
+    length=200,
+    showvalue=0,
+    tickinterval=2,
+    resolution=0.01,
+    command=print_selection1,
+)
+scale17.pack()
+
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
+print("------------------------------------------------------------")  # 60個
+
+
+label2 = tk.Label(window, bg="yellow", width=20, height=2, text="未選擇")
+label2.pack()
+
+
+def print_selection2(V):
+    label2.config(text="你已選擇" + V)
+
+scale18 = tk.Scale(
+    window,
+    label="進行選擇",
+    from_=5,
+    to=11,
+    orient=tk.HORIZONTAL,
+    length=200,
+    showvalue=1,
+    tickinterval=3,
+    resolution=0.01,
+    command=print_selection2,
+)
+scale18.pack()  # 顯示名字,條方向;長度（像素），是否直接顯示值，標簽的單位長度，保留精度，定義功能
+
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
 
 def fnBg(e):
     red = r.get()  # 用get()方法讀取刻度值
@@ -164,113 +306,31 @@ frmColor = tk.Frame(
 frmColor.pack(side="left", padx=10)
 frmRGB = tk.Frame(window, width=200, height=200)
 frmRGB.pack(side="left")
+
 r = tk.IntVar()
-sclR = tk.Scale(
+scale_R = tk.Scale(
     frmRGB, label="紅：", orient="horizontal", variable=r, from_=0, to=255, command=fnBg
 )
 r.set(255)  # 用set()方法設定刻度值
-sclR.pack()
+scale_R.pack()
+
 g = tk.IntVar()
-sclG = tk.Scale(
+scale_G = tk.Scale(
     frmRGB, label="綠：", orient="horizontal", variable=g, from_=0, to=255, command=fnBg
 )
-sclG.pack()
+scale_G.pack()
 g.set(255)
+
 b = tk.IntVar()
-sclB = tk.Scale(
+scale_B = tk.Scale(
     frmRGB, label="藍：", orient="horizontal", variable=b, from_=0, to=255, command=fnBg
 )
-sclB.pack()
+scale_B.pack()
 b.set(255)
 
 window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-window.geometry("600x800")
-window.title("Scale 測試 4")
-
-slider = tk.Scale(
-    window,
-    from_=0,  # 起點值
-    to=10,  # 終點值
-    troughcolor="yellow",  # 槽的顏色
-    width="30",  # 槽的高度
-    tickinterval=2,  # 刻度
-    label="My Scale",  # Scale標籤
-    length=300,  # Scale長度
-    orient=tk.HORIZONTAL,
-)  # 水平
-slider.pack()
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-
-def get_slider_data2():
-    print("垂直捲軸值 = %d, 水平捲軸值 = %d" % (sV.get(), sH.get()))
-
-
-window = tk.Tk()
-window.geometry("600x800")
-window.title("Scale 測試 5")
-
-sV = tk.Scale(window, label="垂直", from_=0, to=10)  # 建立垂直卷軸
-sV.set(5)  # 設定垂直卷軸初值是5
-sV.pack()
-
-sH = tk.Scale(
-    window, label="水平", from_=0, to=10, length=300, orient=tk.HORIZONTAL  # 建立水平卷軸
-)
-sH.set(3)  # 設定水平捲軸初值是3
-sH.pack()
-
-tk.Button(window, text="取得Slider資料2", command=get_slider_data2).pack()
-
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
-    fill=tk.X, padx=5, pady=5
-)  # 分隔線
-print("------------------------------------------------------------")  # 60個
-
-
-def get_slider_data1():
-    print(slider1.get(), slider2.get())
-
-
-slider1 = tk.Scale(window, from_=0, to=10)
-slider1.pack()
-slider2 = tk.Scale(window, from_=0, to=10, length=300, orient=tk.HORIZONTAL)
-slider2.set(3)  # 設定水平尺度值
-slider2.pack()
-tk.Button(window, text="取得Slider資料1", command=get_slider_data1).pack()
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
-    fill=tk.X, padx=5, pady=5
-)  # 分隔線
-print("------------------------------------------------------------")  # 60個
-
-slider1 = tk.Scale(window, from_=0, to=10).pack()
-slider2 = tk.Scale(window, from_=0, to=10, length=300, orient=tk.HORIZONTAL).pack()
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
-    fill=tk.X, padx=5, pady=5
-)  # 分隔線
-print("------------------------------------------------------------")  # 60個
-
-slider1 = tk.Scale(window, from_=0, to=10).pack()
-slider2 = tk.Scale(window, from_=0, to=10, length=300, orient=tk.HORIZONTAL).pack()
-
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
-    fill=tk.X, padx=5, pady=5
-)  # 分隔線
-print("------------------------------------------------------------")  # 60個
-
-
-window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -287,7 +347,8 @@ def bgUpdate(source):
 
 window = tk.Tk()
 window.geometry("600x800")
-window.title("Scale 測試 6")
+window.title("Scale 測試 更改視窗背景顏色 1")
+
 
 rSlider = tk.Scale(window, from_=0, to=255, command=bgUpdate)
 gSlider = tk.Scale(window, from_=0, to=255, command=bgUpdate)
@@ -314,7 +375,7 @@ def bgUpdate(source):
 
 window = tk.Tk()
 window.geometry("600x800")
-window.title("Scale 測試 7")
+window.title("Scale 測試 更改視窗背景顏色 2")
 
 frame1 = tk.Frame(window)  # 建立框架
 frame1.pack()  # 自動安置在上方中央
@@ -345,7 +406,7 @@ def bgUpdate(source):
 
 window = tk.Tk()
 window.geometry("600x800")
-window.title("Scale 測試 3")
+window.title("Scale 測試 更改視窗背景顏色 3")
 
 canvas = tk.Canvas(window, width=640, height=240)  # 初始化背景
 rSlider = tk.Scale(window, from_=0, to=255, command=bgUpdate)
@@ -361,65 +422,6 @@ window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-window = tk.Tk()
-window.title("my window")
-window.geometry("200x200")
-
-l = tk.Label(window, bg="yellow", width=20, text="empty")
-l.pack()
-
-
-def print_selection(v):
-    l.config(text="you have selected " + v)
-
-
-s = tk.Scale(
-    window,
-    label="try me",
-    from_=5,
-    to=11,
-    orient=tk.HORIZONTAL,
-    length=200,
-    showvalue=0,
-    tickinterval=2,
-    resolution=0.01,
-    command=print_selection,
-)
-s.pack()
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()  # 實例化一個窗口
-window.title("Scale組件")  # 定義窗口標題
-window.geometry("400x600")  # 定義窗口大小
-
-l = tk.Label(window, bg="yellow", width=20, height=2, text="未選擇")
-l.pack()
-
-
-def print_selection(V):
-    l.config(text="你已選擇" + V)
-
-
-s = tk.Scale(
-    window,
-    label="進行選擇",
-    from_=5,
-    to=11,
-    orient=tk.HORIZONTAL,
-    length=200,
-    showvalue=1,
-    tickinterval=3,
-    resolution=0.01,
-    command=print_selection,
-)
-s.pack()  # 顯示名字,條方向;長度（像素），是否直接顯示值，標簽的單位長度，保留精度，定義功能
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
@@ -434,3 +436,5 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+
+

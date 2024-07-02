@@ -51,7 +51,6 @@ with open(filename, "r") as f:
 with open(filename) as f:  # 用預設mode=r開啟檔案,傳回檔案物件f
 with open(filename, "r", encoding ="cp950") as f:
 with open(filename, "r", encoding ="UTF-8-sig") as f:
-with open(filename, "r", encoding="UTF-8") as f:
 with open(filename, "r", encoding="cp950") as f:
 with open(filename, encoding="utf-8") as f:
 with open(filename, encoding="utf-8-sig") as f:
@@ -116,8 +115,8 @@ print("附加模式寫檔案")
 f = open(filename, "a")
 f.write("UVWXYZ")
 
-num = f.write(poem_text)
-print("總共寫了 ", num, " 拜")
+count = f.write(poem_text)
+print("總共寫了 ", count, " 字元")
 
 f.close()
 
@@ -183,9 +182,9 @@ string1 = f.read(5)  # read(N), 讀N字元
 print(string1)
 
 print("從目前檔案位置讀到檔尾")
-read_data = f.read()  # read(無參數), 從目前檔案位置讀到檔尾
+cc = f.read()  # read(無參數), 從目前檔案位置讀到檔尾
 f.close()
-print("檔案內容: ", read_data)
+print("檔案內容: ", cc)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -213,24 +212,6 @@ with open(filename, "rb") as f:
 
 print("------------------------------------------------------------")  # 60個
 
-filename = "tmp_read_text11.txt"
-
-# 開啟檔案
-f = open(filename, "w")
-for i in range(10):
-    f.write(str(random.randint(0, 9)) + " ")
-f.close()  # Close the file
-
-# 開啟檔案
-f = open(filename, "r")
-
-s = f.read()  # read(無參數), 從目前檔案位置讀到檔尾
-numbers = [eval(x) for x in s.split()]
-for number in numbers:
-    print(number, end=" ")
-f.close()
-
-print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
@@ -510,56 +491,6 @@ f.close()
 print("------------------------------------------------------------")  # 60個
 
 
-def distinctNN(n):
-    set1 = set()
-    for i in range(2, n + 1):
-        for j in range(1, n + 1):
-            set1.add(i * j)
-    return set1
-
-
-def doOutput(filename, outlist):
-    f = open(filename, "w")
-
-    count = 0
-    for num in outlist:
-        f.write(str(num) + " ")
-        count += 1
-        if count % 5 == 0:
-            f.write("\n")
-
-    f.close()
-    print(filename + " created")
-
-
-setNN = distinctNN(19)
-list1 = sorted(list(setNN))
-# print(list1)
-
-filename = "tmp_write_text20.txt"
-
-doOutput(filename, list1)
-
-print("------------------------------------------------------------")  # 60個
-
-"""
-filename = 'tmp_write_read_text21.txt'
-filename = 'myfile.txt'
-f = open(filename, "r")
-outfilename = filename[:-4]+'2.txt'
-f = open(outfilename, 'w')
-
-for line in f:           # 讀進來的line字串是有包含檔案內的換行字元哦！
-    string1 = line.strip()    # 移除line的多餘空白
-    if len(string1)>0:        # 如果移除完還有內容，寫進輸出檔
-        f.write(string1+'\n')
-f.close()
-f.close()
-"""
-
-print("------------------------------------------------------------")  # 60個
-
-
 # 處理劇本中的單一句子，去除標點並切割
 def processString(str1):
     tup1 = (",", ".", ";", "?", "!", "'", "-", ":")
@@ -775,33 +706,6 @@ print("程式執行完畢！")
 
 print("------------------------------------------------------------")  # 60個
 
-obj = """五福臨門
-十全十美
-"""
-# 建立新檔
-filename1 = "tmp_write_read_text16a.txt"
-filename2 = "tmp_write_read_text16b.txt"
-
-f = open(filename1, "w")
-f.write(obj)  # 將字串寫入檔案
-f.close()  # 關閉檔案
-
-f = open(filename1, "r")
-for line in f:
-    print(line, end="")
-f.close()
-
-print("檔案複製")
-f1 = open(filename1, "r")  # 讀取模式
-f2 = open(filename2, "w")  # 寫入模式
-text = f1.read()  # read(無參數), 從目前檔案位置讀到檔尾
-text = f2.write(text)  # 寫入檔案
-print("檔案複製成功")
-f1.close()
-f2.close()
-
-print("------------------------------------------------------------")  # 60個
-
 
 def modifySong(songStr):  # 將歌曲的標點符號用空字元取代
     for ch in songStr:
@@ -988,10 +892,6 @@ f.close()
 
 print("------------------------------------------------------------")  # 60個
 
-# 一次性读取整个文件内容
-with open("data/致橡树.txt", "r", encoding="utf-8") as f:
-    print(f.read())  # read(無參數), 從目前檔案位置讀到檔尾
-
 print("------------------------------------------------------------")  # 60個
 
 filename = "../data/en-us2.log"
@@ -1009,22 +909,6 @@ f.close()
 
 print("------------------------------------------------------------")  # 60個
 
-
-"""
-製作 log 檔
-每執行一次, 存一筆資料在log檔
-"""
-with open("tmp_my_logfile1.log", "a") as f:
-    f.write(f'{time.strftime("%Y-%m-%d %H:%M:%S")} - 寫了一筆工作紀錄\n')
-
-
-# 製作log檔的範例
-print("存檔紀念")
-
-f = open("tmp_my_logfile2.txt", "w")
-f.write("# BUILD INFO\n")
-f.write("# Date: %s\n" % time.ctime())
-f.close()
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
@@ -1128,7 +1012,8 @@ print("擷取至位置26")
 f.truncate(26)
 
 print("讀出來")
-print(f.read())  # read(無參數), 從目前檔案位置讀到檔尾
+cc = f.read()  # read(無參數), 從目前檔案位置讀到檔尾
+print(cc)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1172,9 +1057,6 @@ for d in data:
 print(data)
 
 
-
-
-
 print("------------------------------------------------------------")  # 60個
 
 """
@@ -1201,5 +1083,29 @@ print('[FILES]', file=f)
 print('', file=f)
 f.close()
 """
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+"""
+filename = 'tmp_write_read_text21.txt'
+filename = 'myfile.txt'
+f = open(filename, "r")
+outfilename = filename[:-4]+'2.txt'
+f = open(outfilename, 'w')
+
+for line in f:           # 讀進來的line字串是有包含檔案內的換行字元哦！
+    string1 = line.strip()    # 移除line的多餘空白
+    if len(string1)>0:        # 如果移除完還有內容，寫進輸出檔
+        f.write(string1+'\n')
+f.close()
+f.close()
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+
 print("------------------------------------------------------------")  # 60個
 

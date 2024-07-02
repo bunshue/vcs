@@ -1,3 +1,9 @@
+"""
+tk 之 Canvas 畫圖
+
+無 canvas.create_image()
+
+"""
 import sys
 import math
 import random
@@ -5,13 +11,12 @@ import tkinter as tk
 
 print("------------------------------------------------------------")  # 60個
 
-W = 900
-H = 800
+W = 1200
+H = 900
 
 window = tk.Tk()
-window.geometry("900x800")
-title = "tk畫圖大集合"
-window.title(title)
+window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(W, H, 0, 0))
+window.title("tk畫圖大集合")
 
 print("建立畫布")
 width = W - 20
@@ -19,8 +24,11 @@ height = H - 20
 canvas1 = tk.Canvas(window, bg="pink", width=width, height=height)
 canvas1.pack()
 
-canvas1.create_line(0, H // 2, W, H // 2)
-canvas1.create_line(W // 2, 0, W // 2, H)
+#基準線
+canvas1.create_line(0, H // 3 * 1, W, H // 3 * 1)
+canvas1.create_line(0, H // 3 * 2, W, H // 3 * 2)
+canvas1.create_line(W // 3 * 1, 0, W // 3 * 1, H)
+canvas1.create_line(W // 3 * 2, 0, W // 3 * 2, H)
 
 # create_line 繪製直線 (x1, y1)-(x2, y2)
 x1, y1, x2, y2 = 20, 20, 120, 20
@@ -254,7 +262,7 @@ canvas1.create_rectangle(x_st-10, y_st-10, x_sp+10, y_sp+10,					# 使用create_
 
 xWidth = 350
 yHeight = 220
-x_st, y_st, x_sp, y_sp = 470, H//2+20+200-50, 750, H//2+20+150+200  # 左上-右下
+x_st, y_st, x_sp, y_sp = 500+300, H//2-250, 780+300, H//2-200  # 左上-右下
 
 for i in range(20):
     canvas1.create_oval(x_st+10+i*5, y_st+10+i*5, x_st+xWidth-10-i*5, y_st+yHeight-10-i*5)
@@ -264,7 +272,7 @@ print("------------------------------------------------------------")  # 60個
 xWidth = 400
 yHeight = 250
 
-x_center, y_center, r = 770, 260, 100
+x_center, y_center, r = 1050, 100, 100
 x, y = [], []
 for i in range(12):         # 建立圓外圍12個點
     x.append(x_center + r * math.cos(30*i*math.pi/180))
@@ -280,61 +288,6 @@ window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-# Display a rectangle
-def displayRect():
-    create_rectangle(10, 10, 190, 90, tags = "rect")
-
-# Display an oval
-def displayOval():
-    canvas.create_oval(10, 10, 190, 90, fill = "red", tags = "oval")
-
-# Display an arc
-def displayArc():
-    canvas.create_arc(10, 10, 190, 90, start = 0, extent = 90, width = 8, fill = "red", tags = "arc")
-
-# Display a polygon
-def displayPolygon():
-    canvas.create_polygon(10, 10, 190, 90, 30, 50, tags = "polygon")
-
-# Display a line
-def displayLine():
-    canvas.create_line(10, 10, 190, 90, fill = "red", tags = "line")
-    canvas.create_line(10, 90, 190, 10, width = 9, arrow = "last", activefill = "blue", tags = "line")
-
-# Display a string
-def displayString():
-    canvas.create_text(60, 40, text = "Hi, I am a string", font = "Times 10 bold underline", tags = "string")
-
-# Clear drawings
-def clearCanvas():
-    canvas.delete("rect", "oval", "arc", "polygon", "line", "string")
-
-window = tk.Tk()
-window.geometry("800x800")
-title = "tk畫圖大集合"
-window.title(title)
-
-canvas = tk.Canvas(window, width = 400, height = 400, bg = "white")
-canvas.pack()
-
-btRectangle = tk.Button(window, text = "Rectangle", command = displayRect)
-btOval = tk.Button(window, text = "Oval", command = displayOval)
-btArc = tk.Button(window, text = "Arc", command = displayArc)
-btPolygon = tk.Button(window, text = "Polygon", command = displayPolygon)
-btLine = tk.Button(window, text = "Line", command = displayLine)
-btString = tk.Button(window, text = "String", command = displayString)
-btClear = tk.Button(window, text = "Clear", command = clearCanvas)
-
-btRectangle.pack()
-btOval.pack()
-btArc.pack()
-btPolygon.pack()
-btLine.pack()
-btString.pack()
-btClear.pack()
-
-window.mainloop()
-
 print("------------------------------------------------------------")  # 60個
 
 
@@ -344,6 +297,61 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
+
+W, H = 600, 800
+
+window = tk.Tk()
+window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(W, H, 0, 0))
+window.title("tk畫圖大集合 新進測試")
+
+print("建立畫布")
+width = W - 20
+height = H - 20
+canvas1 = tk.Canvas(window, bg="pink", width=width, height=height)
+canvas1.pack()
+
+
+canvas1.create_line(100,100,500,100)
+canvas1.create_line(100,125,500,125,width=5)
+canvas1.create_line(100,150,500,150,width=10,fill='blue')
+canvas1.create_line(100,175,500,175,dash=(10,2,2,2))
+
+print("------------------------------------------------------------")  # 60個
+
+canvas1.create_line(30,30,500,30,265,100,30,30,
+                   width=20,joinstyle=tk.ROUND)
+canvas1.create_line(30,130,500,130,265,200,30,130,
+                   width=20,joinstyle=tk.BEVEL)
+canvas1.create_line(30,230,500,230,265,300,30,230,
+                   width=20,joinstyle=tk.MITER)
+
+print("------------------------------------------------------------")  # 60個
+
+canvas1.create_line(30,30,500,30,width=10,capstyle=tk.BUTT)
+canvas1.create_line(30,130,500,130,width=10,capstyle=tk.ROUND)
+canvas1.create_line(30,230,500,230,width=10,capstyle=tk.PROJECTING)
+
+canvas1.create_line(30,30,500,30,width=10,stipple="gray25")
+canvas1.create_line(30,130,500,130,width=40,stipple="questhead")
+canvas1.create_line(30,230,500,230,width=10,stipple="info")
+
+print("------------------------------------------------------------")  # 60個
+
+print('製作格線')
+for i in range(19):
+    canvas1.create_line(10, 10+10*i, xWidth - 10, 10+10*i)
+    canvas1.create_line(10+10*i, 10, 10+10*i, yHeight - 10)
+        
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+
+
+window.mainloop()
+
+sys.exit()
 
 
 """
@@ -405,39 +413,6 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-canvas1.create_line(100,100,500,100)
-canvas1.create_line(100,125,500,125,width=5)
-canvas1.create_line(100,150,500,150,width=10,fill='blue')
-canvas1.create_line(100,175,500,175,dash=(10,2,2,2))
-
-print("------------------------------------------------------------")  # 60個
-
-canvas1.create_line(30,30,500,30,265,100,30,30,
-                   width=20,joinstyle=ROUND)
-canvas1.create_line(30,130,500,130,265,200,30,130,
-                   width=20,joinstyle=BEVEL)
-canvas1.create_line(30,230,500,230,265,300,30,230,
-                   width=20,joinstyle=MITER)
-
-print("------------------------------------------------------------")  # 60個
-
-canvas1.create_line(30,30,500,30,width=10,capstyle=BUTT)
-canvas1.create_line(30,130,500,130,width=10,capstyle=ROUND)
-canvas1.create_line(30,230,500,230,width=10,capstyle=PROJECTING)
-
-canvas1.create_line(30,30,500,30,width=10,stipple="gray25")
-canvas1.create_line(30,130,500,130,width=40,stipple="questhead")
-canvas1.create_line(30,230,500,230,width=10,stipple="info")
-
-print("------------------------------------------------------------")  # 60個
-
-print('製作格線')
-for i in range(19):
-    canvas1.create_line(10, 10+10*i, xWidth - 10, 10+10*i)
-    canvas1.create_line(10+10*i, 10, 10+10*i, yHeight - 10)
-        
-print("------------------------------------------------------------")  # 60個
-
 for i in range(50):                 # 隨機繪50個不同位置與大小的矩形
     x1, y1 = random.randint(1, 640), random.randint(1, 480)
     x2, y2 = random.randint(1, 640), random.randint(1, 480)
@@ -459,23 +434,23 @@ for i in range(20):
 print("------------------------------------------------------------")  # 60個
 
 # 以下以圓形為基礎
-canvas1.create_arc(10, 10, 110, 110, extent=45, style=ARC)
-canvas1.create_arc(210, 10, 310, 110, extent=90, style=ARC)
+canvas1.create_arc(10, 10, 110, 110, extent=45, style=tk.ARC)
+canvas1.create_arc(210, 10, 310, 110, extent=90, style=tk.ARC)
 canvas1.create_arc(410, 10, 510, 110, extent=180, fill='yellow')
-canvas1.create_arc(10, 110, 110, 210, extent=270, style=ARC)
-canvas1.create_arc(210, 110, 310, 210, extent=359, style=ARC, width=5)
+canvas1.create_arc(10, 110, 110, 210, extent=270, style=tk.ARC)
+canvas1.create_arc(210, 110, 310, 210, extent=359, style=tk.ARC, width=5)
 # 以下以橢圓形為基礎
-canvas1.create_arc(10, 250, 310, 350, extent=90, style=ARC, start=90)
-canvas1.create_arc(320, 250, 620, 350, extent=180, style=ARC)
-canvas1.create_arc(10, 360, 310, 460, extent=270, style=ARC, outline='blue')
-canvas1.create_arc(320, 360, 620, 460, extent=359, style=ARC)
+canvas1.create_arc(10, 250, 310, 350, extent=90, style=tk.ARC, start=90)
+canvas1.create_arc(320, 250, 620, 350, extent=180, style=tk.ARC)
+canvas1.create_arc(10, 360, 310, 460, extent=270, style=tk.ARC, outline='blue')
+canvas1.create_arc(320, 360, 620, 460, extent=359, style=tk.ARC)
 
 print("------------------------------------------------------------")  # 60個
 
 # 以下以圓形為基礎
-canvas1.create_arc(10, 10, 110, 110, extent=180, style=ARC)
-canvas1.create_arc(210, 10, 310, 110, extent=180, style=CHORD)
-canvas1.create_arc(410, 10, 510, 110, start=30, extent=120, style=PIESLICE)
+canvas1.create_arc(10, 10, 110, 110, extent=180, style=tk.ARC)
+canvas1.create_arc(210, 10, 310, 110, extent=180, style=tk.CHORD)
+canvas1.create_arc(410, 10, 510, 110, start=30, extent=120, style=tk.PIESLICE)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -513,8 +488,7 @@ print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
 window.geometry("800x800")
-title = "tk畫圖大集合"
-window.title(title)
+window.title("tk畫圖大集合")
 
 print("------------------------------------------------------------")  # 60個
 
@@ -621,8 +595,8 @@ class FigureCanvas(tk.Canvas):
                         start = 0, extent = 145)
 
 
-window = tk.Tk() # Create a window
-window.title("Display Figures") # Set title
+window = tk.Tk()
+window.title("Display Figures")
 
 figure1 = FigureCanvas(window, "line", width = 100, height = 100) 
 figure1.grid(row = 1, column = 1)
@@ -640,4 +614,45 @@ figure7 = FigureCanvas(window, "arc", True, 100, 100)
 figure7.grid(row = 1, column = 7)
 
 window.mainloop()
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+print('使用tags')
+
+window = tk.Tk()
+window.geometry("800x800")
+window.title("tk畫圖大集合")
+
+canvas = tk.Canvas(window, width = 400, height = 400, bg = "white")
+canvas.pack()
+
+canvas.create_rectangle(10, 10, 190, 90, tags = "rect")
+
+canvas.create_oval(10, 10, 190, 90, fill = "red", tags = "oval")
+
+canvas.create_arc(10, 10, 190, 90, start = 0, extent = 90, width = 8, fill = "red", tags = "arc")
+
+canvas.create_polygon(10, 10, 190, 90, 30, 50, tags = "polygon")
+
+canvas.create_line(10, 10, 190, 90, fill = "red", tags = "line")
+canvas.create_line(10, 90, 190, 10, width = 9, arrow = "last", activefill = "blue", tags = "line")
+
+canvas.create_text(60, 40, text = "Hi, I am a string", font = "Times 10 bold underline", tags = "string")
+
+
+# Clear drawings
+canvas.delete("rect", "oval", "arc", "polygon", "line", "string")
+
+window.mainloop()
+
 
