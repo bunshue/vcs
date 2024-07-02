@@ -7,7 +7,7 @@
 import sys
 import random
 import tkinter as tk
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 print("用 Entry 和 grid 做 表格")
@@ -34,7 +34,7 @@ def get_numbers2():
 
 
 window = tk.Tk()
-window.geometry("600x800")
+window.geometry("700x800")
 window.title("Entry 測試")
 
 frame = tk.Frame(window, height=0, width=0, bg="pink", bd=5)  # Hold entries
@@ -90,28 +90,6 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
 print("------------------------------------------------------------")  # 60個
 
 
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
-    fill=tk.X, padx=5, pady=5
-)  # 分隔線
-print("------------------------------------------------------------")  # 60個
-
-
-window.mainloop()
-
-
-print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("作業完成")
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-window.geometry("600x800")
-window.title("Entry 測試")
-
 def get_data():
     print('取得資料(變數) :', pdir.get())
     print('取得資料(控件) :', entry1.get())
@@ -119,20 +97,17 @@ def get_data():
 pdir = tk.StringVar()
 pdir.set('C:/_git/vcs/_1.data/______test_files1/_mp3/')
 
-entry1 = tk.Entry(window, textvariable=pdir, width=30)
+entry1 = tk.Entry(window, textvariable=pdir, width=50)
 entry1.pack()
 
 button1 = tk.Button(window, text="取得資料", command=get_data)
 button1.pack()
 
-window.mainloop()
-
-sys.exit()
-'''
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
-
-import tkinter as tk
 
 def validate():
     """
@@ -142,8 +117,8 @@ def validate():
 
     print('ok')
     """
-    for i in range(9):
-        for j in range(9):
+    for i in range(ROW):
+        for j in range(COLUMN):
             cc = cells[i][j].get()
             if cc == "":
                 print('X', end = " ")
@@ -151,47 +126,48 @@ def validate():
                 print(cc, end = " ")
         print()
 
+ROW = 8
+COLUMN = 12
         
-window = tk.Tk() # Create a window
+frame = tk.Frame(window, bg = 'pink')
 
-frame = tk.Frame(window) # Hold entries 
 frame.pack()
 
 cells = [] # A list of variables tied to entries
-for i in range(9):
+for i in range(ROW):
     cells.append([])
-    for j in range(9):
+    for j in range(COLUMN):
         cells[i].append(tk.StringVar())
         
-for i in range(9):
-    for j in range(9):
+for i in range(ROW):
+    for j in range(COLUMN):
         tk.Entry(frame, width = 2, justify = tk.RIGHT,
             textvariable = cells[i][j]).grid(
                 row = i, column = j)
         
 tk.Button(window, text = "Validate",  command = validate).pack()
 
-for i in range(9):
-    for j in range(9):
+for i in range(ROW):
+    for j in range(COLUMN):
         cells[i][j].set('1')
         
 window.mainloop()
 
+print("------------------------------------------------------------")  # 60個
 
-sys.exit()
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
 
 
-
+""" 新進
 
 print("密碼資料")
 label = tk.Label(window, text="請輸入密碼: ").pack()
 entry = tk.Entry(window, bg="yellow", fg="red", show="*").pack()
-
-
-
 
 
 #entry內的文字靠右對齊
@@ -200,3 +176,4 @@ Entry(frame1, width = 5, justify = RIGHT).pack(side = LEFT)
 Entry(frame1, width = 5, justify = RIGHT).pack(side = LEFT)
 
 
+"""

@@ -3,7 +3,7 @@ import tkinter as tk
 from tkinter import ttk
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 window = tk.Tk()
 window.geometry("600x800")
 window.title("Label 1")
@@ -618,7 +618,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-'''
+
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
@@ -804,4 +804,26 @@ result = "第" + str(count) + "次取得數字:" + str(number)
 label2.config(text=result)
 
 
+label2 = tk.Label(window,text="測試Esc鍵",      # 標籤區域
+            bg="yellow",fg="blue",
+            height = 4, width=15,
+            font="Times 12 bold")
+
+
+
+
+#設定Label上的文字
+label4 =tk.Label(window,text="尚未按下按鈕")
+label4.pack()
+label4.config(text="你是男生")
+label4.config(text='do '+ str(counter))
+----
+cal = tk.Label(window, text="Calender",bg='grey',font=("times", 28, "bold"))
+----
+
+
+
 """
+
+
+

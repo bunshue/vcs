@@ -897,9 +897,11 @@ foldername = 'C:/_git/vcs/_1.data/______test_files1/_mp3/'
 
 mp3files = []
 mp3files = glob.glob(foldername+"*.mp3")
-for mp3 in mp3files:
-    print('找到檔案 ', mp3)
 
+for mp3 in mp3files:
+    print('找到檔案 :', mp3)
+
+print('找到 mp3files', len(mp3files), '個')
 
 
 print("------------------------------------------------------------")  # 60個

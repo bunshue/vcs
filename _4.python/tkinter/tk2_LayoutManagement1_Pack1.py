@@ -329,5 +329,200 @@ kaohsiung.pack(side="top")
 
 
 
+button1 = tk.Button(window, text="pack置中", width=20).pack()
+button2 = tk.Button(window, text="pack左", width=20).pack(side=tk.LEFT)
+button3 = tk.Button(window, text="pack右", width=20).pack(side=tk.RIGHT)
+
+# 將4個鈕包裝定位在右下方
+button4.pack(anchor=tk.S,side=tk.RIGHT,padx=5,pady=5)
+button3.pack(anchor=tk.S,side=tk.RIGHT,padx=5,pady=5)
+button2.pack(anchor=tk.S,side=tk.RIGHT,padx=5,pady=5)
+button1.pack(anchor=tk.S,side=tk.RIGHT,padx=5,pady=5)
+
+print("pack版面佈局的示範")
+
+plus = tk.Button(window, width=20, text="加法範例")
+plus.pack(side="left")
+minus = tk.Button(window, width=20, text="減法範例")
+minus.pack(side="left")
+multiply = tk.Button(window, width=20, text="乘法範例")
+multiply.pack(side="left")
+divide = tk.Button(window, width=20, text="除法範例")
+divide.pack(side="left")
+
+label1 = tk.Label(window, text="歡迎來到美國", bg="lightyellow")
+label2 = tk.Label(window, text="歡迎來到美國", bg="lightgreen")
+label3 = tk.Label(window, text="歡迎來到美國", bg="lightblue")
+label1.pack(fill=tk.X)  # 填滿X軸包裝與定位元件
+label2.pack(pady=10)  # y軸增加10像素
+label3.pack(fill=tk.X)  # 填滿X軸包裝與定位元件
+
+label1 = tk.Label(window, text="歡迎來到美國", bg="lightyellow")
+label2 = tk.Label(window, text="歡迎來到美國", bg="lightgreen")
+label3 = tk.Label(window, text="歡迎來到美國", bg="lightblue")  # 標籤背景是淺藍色
+label1.pack(fill=tk.X, pady=10)  # 填滿X軸,Y軸增加10像素
+label2.pack(pady=10)  # Y軸增加10像素
+label3.pack(fill=tk.X)  # 填滿X軸包裝與定位元件
+
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
+print("------------------------------------------------------------")  # 60個
+
+label1 = tk.Label(
+    window, text="歡迎來到美國", bg="lightyellow", width=15  # 標籤背景是淺黃色
+)  # 標籤寬度是15
+label2 = tk.Label(
+    window, text="歡迎來到美國", bg="lightgreen", width=15  # 標籤背景是淺綠色
+)  # 標籤寬度是15
+label3 = tk.Label(window, text="歡迎來到美國", bg="lightblue", width=15)  # 標籤寬度是15
+label1.pack(padx=50)  # 左右邊界間距是50像素
+label2.pack(padx=50)  # 左右邊界間距是50像素
+label3.pack(padx=50)  # 左右邊界間距是50像素
+
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
+print("------------------------------------------------------------")  # 60個
+
+label1 = tk.Label(
+    window, text="歡迎來到美國", bg="lightyellow", width=15  # 標籤背景是淺黃色
+)  # 標籤寬度是15
+label2 = tk.Label(
+    window, text="歡迎來到美國", bg="lightgreen", width=15  # 標籤背景是淺綠色
+)  # 標籤寬度是15
+label3 = tk.Label(window, text="歡迎來到美國", bg="lightblue", width=15)  # 標籤寬度是15
+label1.pack(side=tk.LEFT)
+label2.pack(side=tk.LEFT, padx=10)  # 左右間距padx=10
+label3.pack(side=tk.LEFT)
+
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
+print("------------------------------------------------------------")  # 60個
+
+label1 = tk.Label(window, text="歡迎來到美國", bg="lightyellow")
+label2 = tk.Label(window, text="歡迎來到美國", bg="lightgreen")
+label3 = tk.Label(window, text="歡迎來到美國", bg="lightblue")
+label1.pack()
+label2.pack(ipadx=10)  # ipadx=10包裝與定位元件
+label3.pack()
+
+
+
+
+label1 = tk.Label(window, text="歡迎來到美國", bg="lightyellow")  # 標籤背景是淺黃色
+label2 = tk.Label(window, text="歡迎來到美國", bg="lightgreen")
+label3 = tk.Label(window, text="歡迎來到美國", bg="lightblue")
+label1.pack()
+label2.pack(ipadx=10)  # ipadx=10包裝與定位元件
+label3.pack(ipady=10)  # ipady=10包裝與定位元件
+
+label1 = tk.Label(window, text="歡迎來到美國", bg="lightyellow")
+label2 = tk.Label(window, text="歡迎來到美國", bg="lightgreen")
+label3 = tk.Label(window, text="歡迎來到美國", bg="lightblue")
+label1.pack(fill=tk.X)  # 填滿X軸包裝與定位元件
+label2.pack()
+label3.pack(fill=tk.X)  # 填滿X軸包裝與定位元件
+
+
+label1 = tk.Label(window, text="歡迎來到美國", bg="lightyellow")
+label2 = tk.Label(window, text="歡迎來到美國", bg="lightgreen")
+label3 = tk.Label(window, text="歡迎來到美國", bg="lightblue")
+label1.pack(fill=tk.X)  # 填滿X軸包裝與定位元件
+label2.pack(fill=tk.Y)  # 填滿Y軸包裝與定位元件
+label3.pack(fill=tk.X)  # 填滿X軸包裝與定位元件
+
+
+label1 = tk.Label(window, text="歡迎來到美國", bg="lightyellow")
+label2 = tk.Label(window, text="歡迎來到美國", bg="lightgreen")
+label3 = tk.Label(window, text="歡迎來到美國", bg="lightblue")
+label1.pack(side=tk.LEFT)  # 從左配置控件
+label2.pack()  # 預設從上開始配置控件
+label3.pack()  # 預設從上開始配置控件
+
+print("------------------------------------------------------------")  # 60個
+
+label1 = tk.Label(window, text="歡迎來到美國", bg="lightyellow")
+label2 = tk.Label(window, text="歡迎來到美國", bg="lightgreen")
+label3 = tk.Label(window, text="歡迎來到美國", bg="lightblue")
+label1.pack(side=tk.LEFT, fill=tk.Y)  # 從左配置控件fill=tk.Y
+label2.pack(fill=tk.X)  # 預設從上開始配置控件fill=tk.X
+label3.pack()  # 預設從上開始配置控件
+
+print("------------------------------------------------------------")  # 60個
+
+label1 = tk.Label(window, text="歡迎來到美國", bg="lightyellow")
+label2 = tk.Label(window, text="歡迎來到美國", bg="lightgreen")
+label3 = tk.Label(window, text="歡迎來到美國", bg="lightblue")
+label1.pack(side=tk.LEFT, fill=tk.Y)  # 從左配置控件fill=tk.Y
+label2.pack(fill=tk.X)  # 預設從上開始配置控件fill=tk.X
+label3.pack(fill=tk.X)  # 預設從上開始配置控件fill=tk.X
+
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
+print("------------------------------------------------------------")  # 60個
+
+label1 = tk.Label(window, text="歡迎來到美國", bg="lightyellow")
+label2 = tk.Label(window, text="歡迎來到美國", bg="lightgreen")
+label3 = tk.Label(window, text="歡迎來到美國", bg="lightblue")
+label1.pack(side=tk.LEFT, fill=tk.Y)  # 從左配置控件fill=tk.Y
+label2.pack(fill=tk.X)  # 預設從上開始配置控件fill=tk.X
+label3.pack(fill=tk.BOTH)  # 預設從上開始配置控件fill=tk.BOTH
+
+
+
 
 """
+
+
+
+
+window = tk.Tk()
+window.geometry("600x800")
+window.title("new all 4")
+
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
+print("------------------------------------------------------------")  # 60個
+
+label1 = tk.Label(window, text="歡迎來到美國", bg="lightyellow")
+label2 = tk.Label(window, text="歡迎來到美國", bg="lightgreen")
+label3 = tk.Label(window, text="歡迎來到美國", bg="lightblue")
+label1.pack(side=tk.LEFT, fill=tk.Y)  # 從左配置控件fill=tk.Y
+label2.pack(fill=tk.X)  # 預設從上開始配置控件fill=tk.X
+label3.pack(fill=tk.BOTH, expand=True)  # fill=tk.BOTH,expand=True
+
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
+print("------------------------------------------------------------")  # 60個
+
+tk.Label(window, text="Mississippi", bg="red", fg="white", font="Times 24 bold").pack(
+    fill=tk.X
+)
+tk.Label(
+    window, text="Kentucky", bg="green", fg="white", font="Arial 24 bold italic"
+).pack(fill=tk.BOTH, expand=True)
+tk.Label(window, text="Purdue", bg="blue", fg="white", font="Times 24 bold").pack(
+    fill=tk.X
+)
+
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
+print("------------------------------------------------------------")  # 60個
+
+tk.Label(window, text="Mississippi", bg="red", fg="white", font="Times 20 bold").pack(
+    side=tk.LEFT, fill=tk.Y
+)
+tk.Label(
+    window, text="Kentucky", bg="green", fg="white", font="Arial 20 bold italic"
+).pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+tk.Label(window, text="Purdue", bg="blue", fg="white", font="Times 20 bold").pack(
+    side=tk.LEFT, fill=tk.Y
+)
+
+window.mainloop()

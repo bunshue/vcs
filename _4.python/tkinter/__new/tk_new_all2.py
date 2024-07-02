@@ -120,3 +120,23 @@ messagebox.showinfo("New File", "開新檔案")
 
 
 """
+
+window = tk.Tk()
+window.geometry("600x800")
+window.title("Label 1")
+
+canvas1 = tk.Canvas(window, width=500, height=150, bg='pink')
+canvas1.pack()
+
+canvas1.create_window(500, 100, window = ttk.Button(window, text= 'this is text in a canvas'))
+
+label1 = tk.Label(window, text = "Blue", bg = "blue").pack()
+canvas1.create_window(500, 100, anchor="nw", window = label1)
+
+
+
+window.mainloop()
+
+
+
+
