@@ -2629,6 +2629,47 @@ print("------------------------------------------------------------")  # 60個
 
 
 
+print('撈出一層')
+import glob
+
+foldername = 'C:/_git/vcs/_1.data/______test_files1/_mp3/'
+
+mp3files = []
+#mp3files = glob.glob(foldername+"*.mp3")
+mp3files = glob.glob(foldername+"*")
+
+for mp3 in mp3files:
+    print('找到檔案 :', mp3)
+    if os.path.isdir(mp3):
+        print('資料夾')
+    else:
+        print('檔案')
+
+print('找到 mp3files', len(mp3files), '個')
+
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+"""
+import glob
+import pathlib
+
+print('touch當前目錄下所有檔案')
+files = glob.glob("*.*") 
+for filename in files:
+    print(filename)
+    pathlib.Path(filename).touch()
+"""
+print("------------------------------------------------------------")  # 60個
+
+
+
 print("------------------------------------------------------------")  # 60個
 
 

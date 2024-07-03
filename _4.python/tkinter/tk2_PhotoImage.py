@@ -8,13 +8,13 @@ PhotoImage
 """
 
 import sys
-
+'''
 import tkinter as tk
 from tkinter import ttk
 from PIL import ImageTk, Image
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 window = tk.Tk()
 window.geometry("600x800")
 window.title("ImageTk 12")
@@ -431,7 +431,7 @@ button1 = tk.Button(labelframe1, text="Login", command=printInfo)
 button1.grid(row=2, column=0, sticky=tk.W, pady=5)
 
 window.mainloop()
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 """ 缺檔案
@@ -902,3 +902,115 @@ canvas.create_image(300, 250, image = tkimage)# 使用create_image將圖片新�
 window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
+
+'''
+
+import tkinter as tk
+
+window = tk.Tk()
+window.geometry("600x920")
+window.title("ImageTk tk顯示圖片 在label上 new")
+
+
+from PIL import ImageTk, Image
+
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+img = ImageTk.PhotoImage(Image.open(filename))
+label1 = tk.Label(window, image=img).pack()
+
+
+print("Label使用圖片")
+filename = "C:/_git/vcs/_1.data/______test_files1/__pic/_gif/cloud.gif"
+image = tk.PhotoImage(file=filename)
+tk.Label(window, image=image).place(x=0, y=150, width=150, height=150)
+
+
+
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+
+"""
+使用 label 顯示圖片 jpg + gif
+"""
+
+from PIL import Image, ImageTk
+
+window = tk.Tk()
+window.geometry("700x900")
+window.title("Label 5")
+
+filename = "C:/_git/vcs/_1.data/______test_files1/__pic/_書畫字圖/_peony3/原來奼紫嫣紅開遍.jpg"
+im = Image.open(filename)
+
+"""
+#case 1 bitmap image
+# bitmap image
+image = ImageTk.BitmapImage(im, foreground = "white")
+tk.Label(window, image = image, bg = "blue", bd = 0).pack()
+"""
+
+# case 2 picture image
+# photo image
+image = ImageTk.PhotoImage(im)
+
+label1 = tk.Label(window, text="多人圖片", image=image, bd=20, bg="red")
+label1.pack()
+# tk.Label(window, text = '多人圖片', image = image, bd = 0, bg = 'red', width = 1200).pack()
+
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
+print("------------------------------------------------------------")  # 60個
+
+print("用 Label 顯示一張圖片")
+filename = "C:/_git/vcs/_1.data/______test_files1/__pic/_書畫字圖/_peony3/原來奼紫嫣紅開遍.jpg"
+
+image2 = Image.open(filename)
+image2 = ImageTk.PhotoImage(image2)
+label2 = tk.Label(window, image=image2)  # 用Label顯示圖片
+label2.image = image
+label2.pack()
+
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
+print("------------------------------------------------------------")  # 60個
+
+import random
+
+
+# Choose four random cards
+def shuffle():
+    random.shuffle(imageList)
+    for i in range(4):
+        labelList[i]["image"] = imageList[i]
+
+
+imageList = []  # Store images for cards
+for i in range(1, 53):
+    imageList.append(
+        tk.PhotoImage(
+            file="C:/_git/vcs/_1.data/______test_files1/__pic/_poker_card/card/"
+            + str(i)
+            + ".gif"
+        )
+    )
+
+frame = tk.Frame(window)  # Hold four labels for cards
+frame.pack()
+
+labelList = []  # A list of four labels
+for i in range(4):
+    labelList.append(tk.Label(frame, image=imageList[i]))
+    labelList[i].pack(side=tk.LEFT)
+
+tk.Button(window, text="任選四張牌", command=shuffle).pack()
+
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+

@@ -11,12 +11,11 @@ import tkinter as tk
 
 print("------------------------------------------------------------")  # 60個
 
-W = 1200
-H = 900
+W, H = 1200, 900
 
 window = tk.Tk()
 window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(W, H, 0, 0))
-window.title("tk畫圖大集合")
+window.title("tk畫圖大集合 1")
 
 print("建立畫布")
 width = W - 20
@@ -265,7 +264,9 @@ yHeight = 220
 x_st, y_st, x_sp, y_sp = 500+300, H//2-250, 780+300, H//2-200  # 左上-右下
 
 for i in range(20):
-    canvas1.create_oval(x_st+10+i*5, y_st+10+i*5, x_st+xWidth-10-i*5, y_st+yHeight-10-i*5)
+    obj = canvas1.create_oval(x_st+10+i*5, y_st+10+i*5, x_st+xWidth-10-i*5, y_st+yHeight-10-i*5)
+    obj_coord = canvas1.coords(obj)
+    print("此物件座標 :", obj_coord)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -283,26 +284,39 @@ for i in range(12):         # 執行12個點彼此連線
 
 print("------------------------------------------------------------")  # 60個
 
+print('製作格線 NXN')
+
+x_st = 810
+y_st = 10
+w = 10
+h = 10
+COLUMN = 10
+ROW = 10
+W = (COLUMN-1)*w
+H = (ROW-1)*h
+
+
+for i in range(COLUMN):
+    #垂直線
+    canvas1.create_line(x_st+h*i, y_st, x_st+h*i, y_st+H)
+
+for i in range(ROW):
+    #水平線
+    canvas1.create_line(x_st, y_st+h*i, x_st+W, y_st+h*i)
+        
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
 
 window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("作業完成")
-print("------------------------------------------------------------")  # 60個
-
-W, H = 600, 800
+W, H = 1200, 900
 
 window = tk.Tk()
 window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(W, H, 0, 0))
-window.title("tk畫圖大集合 新進測試")
+window.title("tk畫圖大集合 2")
 
 print("建立畫布")
 width = W - 20
@@ -310,39 +324,86 @@ height = H - 20
 canvas1 = tk.Canvas(window, bg="pink", width=width, height=height)
 canvas1.pack()
 
-
+"""
+#零點黑線
 canvas1.create_line(100,100,500,100)
+#粗線
 canvas1.create_line(100,125,500,125,width=5)
+#顏色線
 canvas1.create_line(100,150,500,150,width=10,fill='blue')
+#點線
 canvas1.create_line(100,175,500,175,dash=(10,2,2,2))
 
 print("------------------------------------------------------------")  # 60個
 
+#多點連線
 canvas1.create_line(30,30,500,30,265,100,30,30,
-                   width=20,joinstyle=tk.ROUND)
+                   width=10,joinstyle=tk.ROUND)
+#多點連線
 canvas1.create_line(30,130,500,130,265,200,30,130,
-                   width=20,joinstyle=tk.BEVEL)
+                   width=10,joinstyle=tk.BEVEL)
+#多點連線
 canvas1.create_line(30,230,500,230,265,300,30,230,
-                   width=20,joinstyle=tk.MITER)
+                   width=10,joinstyle=tk.MITER)
 
 print("------------------------------------------------------------")  # 60個
 
+#直線 線條樣式
 canvas1.create_line(30,30,500,30,width=10,capstyle=tk.BUTT)
 canvas1.create_line(30,130,500,130,width=10,capstyle=tk.ROUND)
 canvas1.create_line(30,230,500,230,width=10,capstyle=tk.PROJECTING)
 
+
+#直線 線條樣式
 canvas1.create_line(30,30,500,30,width=10,stipple="gray25")
 canvas1.create_line(30,130,500,130,width=40,stipple="questhead")
 canvas1.create_line(30,230,500,230,width=10,stipple="info")
+"""
+
+x_st, y_st = 700, 50
+
+for i in range(30):                 # 隨機繪50個不同位置與大小的矩形
+    x1, y1 = random.randint(1, 320), random.randint(1, 240)
+    x2, y2 = random.randint(1, 320), random.randint(1, 240)
+    if x1 > x2: x1,x2 = x2,x1       # 確保左上角x座標小於右下角x座標
+    if y1 > y2: y1,y2 = y2,y1       # 確保左上角y座標小於右下角y座標
+    canvas1.create_rectangle(x_st+x1, y_st+y1, x_st+x2, y_st+y2)
 
 print("------------------------------------------------------------")  # 60個
 
-print('製作格線')
-for i in range(19):
-    canvas1.create_line(10, 10+10*i, xWidth - 10, 10+10*i)
-    canvas1.create_line(10+10*i, 10, 10+10*i, yHeight - 10)
+canvas1.create_rectangle(10, 10, 120, 60, fill='red')
+canvas1.create_rectangle(130, 10, 200, 80, fill='yellow', outline='blue')
+canvas1.create_rectangle(210, 10, 300, 60, fill='green', outline='grey')
+
+print("------------------------------------------------------------")  # 60個
+
+xWidth = 350
+yHeight = 220
+
+x_st, y_st = 700, 300
+for i in range(20):
+    canvas1.create_rectangle(x_st+10 + i * 5, y_st+10 + i * 5, x_st+xWidth - 10 - i * 5, y_st+yHeight - 10 - i * 5)
         
 print("------------------------------------------------------------")  # 60個
+
+# 以下以圓形為基礎
+canvas1.create_arc(10, 10, 110, 110, extent=45, style=tk.ARC)
+canvas1.create_arc(210, 10, 310, 110, extent=90, style=tk.ARC)
+canvas1.create_arc(410, 10, 510, 110, extent=180, fill='yellow')
+canvas1.create_arc(10, 110, 110, 210, extent=270, style=tk.ARC)
+canvas1.create_arc(210, 110, 310, 210, extent=359, style=tk.ARC, width=5)
+# 以下以橢圓形為基礎
+canvas1.create_arc(10, 250, 310, 350, extent=90, style=tk.ARC, start=90)
+canvas1.create_arc(320, 250, 620, 350, extent=180, style=tk.ARC)
+canvas1.create_arc(10, 360, 310, 460, extent=270, style=tk.ARC, outline='blue')
+canvas1.create_arc(320, 360, 620, 460, extent=359, style=tk.ARC)
+
+print("------------------------------------------------------------")  # 60個
+
+# 以下以圓形為基礎
+canvas1.create_arc(10, 10, 110, 110, extent=180, style=tk.ARC)
+canvas1.create_arc(210, 10, 310, 110, extent=180, style=tk.CHORD)
+canvas1.create_arc(410, 10, 510, 110, start=30, extent=120, style=tk.PIESLICE)
 
 
 
@@ -353,19 +414,7 @@ window.mainloop()
 
 sys.exit()
 
-
 """
-
-id = canvas1.create_oval(10,50,60,100,fill='yellow', outline='lightgray')
-ballPos = canvas1.coords(id)
-print(ballPos)
-
-
-"""
-
-
-"""
-
 
 #新建一個Frame, row, column重新計算, 控件要依附新的Frame
 frame4 = tk.Frame(window)
@@ -412,46 +461,6 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
-for i in range(50):                 # 隨機繪50個不同位置與大小的矩形
-    x1, y1 = random.randint(1, 640), random.randint(1, 480)
-    x2, y2 = random.randint(1, 640), random.randint(1, 480)
-    if x1 > x2: x1,x2 = x2,x1       # 確保左上角x座標小於右下角x座標
-    if y1 > y2: y1,y2 = y2,y1       # 確保左上角y座標小於右下角y座標
-    canvas1.create_rectangle(x1, y1, x2, y2)
-
-print("------------------------------------------------------------")  # 60個
-
-canvas1.create_rectangle(10, 10, 120, 60, fill='red')
-canvas1.create_rectangle(130, 10, 200, 80, fill='yellow', outline='blue')
-canvas1.create_rectangle(210, 10, 300, 60, fill='green', outline='grey')
-
-print("------------------------------------------------------------")  # 60個
-
-for i in range(20):
-    canvas1.create_rectangle(10 + i * 5, 10 + i * 5, xWidth - 10 - i * 5, yHeight - 10 - i * 5)
-        
-print("------------------------------------------------------------")  # 60個
-
-# 以下以圓形為基礎
-canvas1.create_arc(10, 10, 110, 110, extent=45, style=tk.ARC)
-canvas1.create_arc(210, 10, 310, 110, extent=90, style=tk.ARC)
-canvas1.create_arc(410, 10, 510, 110, extent=180, fill='yellow')
-canvas1.create_arc(10, 110, 110, 210, extent=270, style=tk.ARC)
-canvas1.create_arc(210, 110, 310, 210, extent=359, style=tk.ARC, width=5)
-# 以下以橢圓形為基礎
-canvas1.create_arc(10, 250, 310, 350, extent=90, style=tk.ARC, start=90)
-canvas1.create_arc(320, 250, 620, 350, extent=180, style=tk.ARC)
-canvas1.create_arc(10, 360, 310, 460, extent=270, style=tk.ARC, outline='blue')
-canvas1.create_arc(320, 360, 620, 460, extent=359, style=tk.ARC)
-
-print("------------------------------------------------------------")  # 60個
-
-# 以下以圓形為基礎
-canvas1.create_arc(10, 10, 110, 110, extent=180, style=tk.ARC)
-canvas1.create_arc(210, 10, 310, 110, extent=180, style=tk.CHORD)
-canvas1.create_arc(410, 10, 510, 110, start=30, extent=120, style=tk.PIESLICE)
-
 print("------------------------------------------------------------")  # 60個
 
 for i in range(20):
@@ -654,5 +663,15 @@ canvas.create_text(60, 40, text = "Hi, I am a string", font = "Times 10 bold und
 canvas.delete("rect", "oval", "arc", "polygon", "line", "string")
 
 window.mainloop()
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
 
 

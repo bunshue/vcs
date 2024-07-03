@@ -740,6 +740,13 @@ print(foldername.get())
 
 
 
+entry_data = tk.StringVar()
+entry_data.set("test")
+
+entry1 = tk.Entry(window, textvariable=entry_data, width=8)
+entry1.pack()
+
+
    
 
 

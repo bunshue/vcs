@@ -907,7 +907,7 @@ james = [23, 19, 22, 31, 18]  # 定義james串列
 print("列印james第1-3場得分", james[0:3])
 print("列印james第2-4場得分", james[1:4])
 print("列印james第1,3,5場得分", james[0:6:2])
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 print('抽象方法(abstract method)')
@@ -9370,95 +9370,6 @@ plt.plot(x, y, marker='d',ms=10, mfc='r', mec='b')
 
 print('------------------------------------------------------------')	#60個
 
-import traceback
-
-def passWord(pwd):
-    """檢查密碼長度必須是5到8個字元"""
-    pwdlen = len(pwd)  # 密碼長度
-    if pwdlen < 5:  # 密碼長度不足
-        raise Exception("密碼長度不足")
-    if pwdlen > 8:  # 密碼長度太長
-        raise Exception("密碼長度太長")
-    print("密碼長度正確")
-
-
-for pwd in ("aaabbbccc", "aaa", "aaabbb"):  # 測試系列密碼值
-    try:
-        passWord(pwd)
-    except Exception as err:
-        errlog = open("tmp_errch15_16.txt", "a")  # 開啟錯誤檔案
-        errlog.write(traceback.format_exc())  # 寫入錯誤檔案
-        errlog.close()  # 關閉錯誤檔案
-        print("將Traceback寫入錯誤檔案errch15_16.txt完成")
-        print("密碼長度檢查異常發生: ", str(err))
-
-print("------------------------------------------------------------")  # 60個
-
-import traceback
-
-
-def division(x, y):
-    try:  # try - except指令
-        return x / y
-    except:  # 捕捉所有異常
-        errlog = open("tmp_errch15_17.txt", "a")  # 開啟錯誤檔案
-        errlog.write(traceback.format_exc())  # 寫入錯誤檔案
-        errlog.close()  # 關閉錯誤檔案
-        print("將Traceback寫入錯誤檔案errch15_17.txt完成")
-        print("異常發生")
-
-
-print(division(10, 2))  # 列出10/2
-print(division(5, 0))  # 列出5/0
-print(division("a", "b"))  # 列出'a' / 'b'
-print(division(6, 3))  # 列出6/3
-
-print("------------------------------------------------------------")  # 60個
-
-
-import traceback                            # 導入taceback
-
-def passWord(pwd):
-    #檢查密碼長度必須是5到8個字元
-    pwdlen = len(pwd)                       # 密碼長度
-    if pwdlen < 5:                          # 密碼長度不足            
-        raise Exception('密碼長度不足')
-    if pwdlen > 8:                          # 密碼長度太長
-        raise Exception('密碼長度太長')
-    print('密碼長度正確')
-
-for pwd in ('aaabbbccc', 'aaa', 'aaabbb'):  # 測試系列密碼值
-    try:
-        passWord(pwd)
-    except Exception as err:
-        errlog = open('tmp_error_text1.txt', 'a')   # 開啟錯誤檔案
-        errlog.write(traceback.format_exc())   # 寫入錯誤檔案
-        errlog.close()                         # 關閉錯誤檔案
-        print("將Traceback寫入錯誤檔案 tmp_error_text1.txt 完成")
-        print("密碼長度檢查異常發生: ", str(err))
-
-print("------------------------------------------------------------")  # 60個
-
-import traceback
-
-def division(x, y):
-    try:                        # try - except指令
-        return x / y
-    except:                     # 捕捉所有異常
-        errlog = open('tmp_error_text2.txt', 'a')   # 開啟錯誤檔案
-        errlog.write(traceback.format_exc())   # 寫入錯誤檔案
-        errlog.close()                         # 關閉錯誤檔案
-        print("將Traceback寫入錯誤檔案 tmp_error_text2.txt 完成")
-        print("異常發生")
-
-print(division(10, 2))          # 列出10/2
-print(division(5, 0))           # 列出5/0
-print(division('a', 'b'))       # 列出'a' / 'b'
-print(division(6, 3))           # 列出6/3
-
-print('------------------------------------------------------------')	#60個
-
-
 data = b'wxy\x7a'
 print(data)               # b'wxyz'，以ASCII字元輸出
 
@@ -9495,410 +9406,6 @@ inn()
 """
 
 print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-
-"""
-std_data = dict()
-with open(filename, encoding='utf-8') as fp:
-    alldata = fp.readlines()
-    for item in alldata:
-        no, name = item.rstrip('\n').split(',')
-        std_data[no] = name
-print(std_data)
-"""
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-"""
-def modifySong(songStr):            # 將歌曲的標點符號用空字元取代       
-    for ch in songStr:
-        if ch in ".,?":
-            songStr = songStr.replace(ch,'')
-    return songStr                  # 傳回取代結果
-
-def wordCount(songCount):
-    global mydict
-    songList = songCount.split()    # 將歌曲字串轉成串列
-    mydict = {wd:songList.count(wd) for wd in set(songList)}
-
-filename = "AreYouSleeping.txt"
-with open(filename) as file_Obj:          # 開啟歌曲檔案
-    data = file_Obj.read()          # 讀取歌曲檔案
-
-mydict = {}                         # 空字典未來儲存單字計數結果
-song = modifySong(data.lower())
-
-wordCount(song)                     # 執行歌曲單字計數
-
-dictList = sorted(mydict.items(), key=lambda item:item[1], reverse=True)
-for key, val in dictList:
-    print(key,':',val)
-"""
-
-print("------------------------------------------------------------")  # 60個
-
-
-fobj1 = open("tmp_out24w.txt", mode="w")  # 取代先前資料
-print("Testing mode=w, using utf-8 format", file=fobj1)
-fobj1.close()
-fobj2 = open("tmp_out24a.txt", mode="a")  # 附加資料後面
-print("測試 mode=a 參數, 預設 ANSI 編碼", file=fobj2)
-fobj2.close()
-
-print("------------------------------------------------------------")  # 60個
-
-fobj1 = open("tmp_out25w.txt", mode="w", encoding="utf-8")
-print("Testing mode=w, using utf-8 format", file=fobj1)
-fobj1.close()
-fobj2 = open("tmp_out25a.txt", mode="a", encoding="cp950")
-print("測試 mode=a 參數, 預設 ANSI 編碼", file=fobj2)
-fobj2.close()
-
-print("------------------------------------------------------------")  # 60個
-
-
-def compareString(string):
-    #檢查是否是搜尋的字串
-    if string == searchStr:
-        return True
-    else:
-        return False
-
-def parseString(string):
-    global num
-    # notFoundSignal = True     # 註記沒有找到電話號碼為True
-    for i in range(len(data)):  # 用迴圈逐步抽取字串長度做測試
-        msg = data[i:i+len(string)]
-        if compareString(msg):
-            num += 1
-
-#filename = 'C:/_git/vcs/_4.python/_data/射鵰英雄傳.big5.txt'
-filename = 'C:/_git/vcs/_4.python/_data/python_word_count1.txt'
-#filename = 'data/ex16_2.txt'
-with open(filename) as file_obj:      # 讀取ex21_2.txt
-    data = file_obj.read()
-    #print(data)
-
-searchStr = "包含"
-num = 0
-parseString(searchStr)
-print("所搜尋字串 %s 共出現 %d 次" % (searchStr, num))
-
-print("------------------------------------------------------------")  # 60個
-
-
-def wordsNum(fn):
-    """適用英文文件, 輸入文章的檔案名稱,可以計算此文章的字數"""
-    try:
-        with open(fn) as file_Obj:  # 用預設"r"傳回檔案
-            data = file_Obj.read()  # 讀取檔案到變數data
-    except Exception:
-        print(f"Exception找不到 {fn} 檔案")
-    else:
-        wordList = data.split()  # 將文章轉成串列
-        print(f"{fn} 文章的字數是 {len(wordList)}")  # 文章字數
-
-
-files = ["data1.txt", "data2.txt", "data3.txt"]  # 檔案串列
-for file in files:
-    wordsNum(file)
-
-print("------------------------------------------------------------")  # 60個
-
-
-try:
-    # 嘗試打開一個不存在的檔案
-    with open("non_existent_file.txt", "r") as f:
-        data = f.read()
-except FileNotFoundError:
-    # 如果文件不存在, 捕獲異常
-    print("The file was not found")
-except IOError:
-    # 處理 I/O 錯誤, 例如:讀取錯誤
-    print("An I/O error occurred")
-
-print("------------------------------------------------------------")  # 60個
-
-
-fn = "data15_4.txt"  # 設定欲開啟的檔案
-try:
-    with open(fn) as file_Obj:  # 預設mode=r開啟檔案
-        data = file_Obj.read()  # 讀取檔案到變數data
-except FileNotFoundError:
-    print(f"找不到 {fn} 檔案")
-else:
-    print(data)  # 輸出變數data
-
-
-print("------------------------------------------------------------")  # 60個
-
-fn = "data15_5.txt"  # 設定欲開啟的檔案
-try:
-    with open(fn) as file_Obj:  # 用預設mode=r開啟檔案
-        data = file_Obj.read()  # 讀取檔案到變數data
-except FileNotFoundError:
-    print("找不到 %s 檔案" % fn)
-else:
-    print(data)  # 輸出變數data
-
-print("------------------------------------------------------------")  # 60個
-
-fn = "data15_6.txt"  # 設定欲開啟的檔案
-try:
-    with open(fn) as file_Obj:  # 用預設mode=r開啟檔案
-        data = file_Obj.read()  # 讀取檔案到變數data
-except FileNotFoundError:
-    print(f"找不到 {fn} 檔案")
-else:
-    wordList = data.split()  # 將文章轉成串列
-    print(f"{fn} 文章的字數是 {len(wordList)}")  # 列印文章字數
-
-print("------------------------------------------------------------")  # 60個
-
-
-def wordsNum(fn):
-    """適用英文文件, 輸入文章的檔案名稱,可以計算此文章的字數"""
-    try:
-        with open(fn) as file_Obj:  # 用預設mode=r開啟檔案
-            data = file_Obj.read()  # 讀取檔案到變數data
-    except FileNotFoundError:
-        print(f"找不到 {fn} 檔案")
-    else:
-        wordList = data.split()  # 將文章轉成串列
-        print(f"{fn} 文章的字數是 {len(wordList)}")  # 文章字數
-
-
-file = "data15_6.txt"  # 設定欲開啟的檔案
-wordsNum(file)
-
-print("------------------------------------------------------------")  # 60個
-
-
-def wordsNum(fn):
-    """適用英文文件, 輸入文章的檔案名稱,可以計算此文章的字數"""
-    try:
-        with open(fn) as file_Obj:  # 用預設mode=r開啟檔案
-            data = file_Obj.read()  # 讀取檔案到變數data
-    except FileNotFoundError:
-        print(f"找不到 {fn} 檔案")
-    else:
-        wordList = data.split()  # 將文章轉成串列
-        print(f"{fn} 文章的字數是 {len(wordList)}")  # 文章字數
-
-
-files = ["data1.txt", "data2.txt", "data3.txt"]  # 檔案串列
-for file in files:
-    wordsNum(file)
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-def wordsNum(filename):
-    """適用英文文件, 輸入文章的檔案名稱,可以計算此文章的字數"""
-    try:
-        with open(filename) as file_Obj:  # 用預設"r"傳回檔案物件file_Obj
-            data = file_Obj.read()  # 讀取檔案到變數data
-    except FileNotFoundError:
-        print("找不到 %s 檔案" % filename)
-    else:
-        wordList = data.split()  # 將文章轉成串列
-        print(filename, " 文章的字數是 ", len(wordList))  # 列印文章字數
-
-
-"""
-files = []
-for i in range(5):
-    filename = input("請輸入檔案名稱 : ")
-    files.append(filename)
-    
-for file in files:
-    wordsNum(file)
-"""
-
-print("------------------------------------------------------------")  # 60個
-
-
-def wordsNum(filename):
-    """適用英文文件, 輸入文章的檔案名稱,可以計算此文章的字數"""
-    try:
-        with open(filename) as file_Obj:  # 用預設"r"傳回檔案物件file_Obj
-            data = file_Obj.read()  # 讀取檔案到變數data
-    except FileNotFoundError:
-        print("找不到 %s 檔案" % filename)
-    else:
-        wordList = data.split()  # 將文章轉成串列
-        print(filename, " 文章的字數是 ", len(wordList))  # 列印文章字數
-        return len(wordList)
-
-
-def lenWord(filename):
-    """檢查檔案長度必須是10到35個字元"""
-    wdlen = wordsNum(filename)  # 檔案長度
-    if wdlen < 10:  # 檔案長度不足
-        raise Exception("檔案長度不足")
-    if wdlen > 35:  # 檔案長度太長
-        raise Exception("檔案長度太長")
-    print("檔案長度正確")
-
-
-for file in (
-    "data/d1.txt",
-    "data/d2.txt",
-    "data/d3.txt",
-    "data/d4.txt",
-    "data/d5.txt",
-):  # 測試系列檔案
-    try:
-        lenWord(file)
-    except Exception as err:
-        print("檔案長度檢查異常發生: ", str(err))
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-print("計算字數")
-
-
-def count_words(filename):
-    """Count the approximate number of words in a file."""
-    try:
-        with open(filename, encoding="utf-8") as f:
-            contents = f.read()
-    except FileNotFoundError:
-        pass
-    else:
-        words = contents.split()
-        num_words = len(words)
-        print(f"The file {filename} has about {num_words} words.")
-
-
-filename1 = "C:/_git/vcs/_1.data/______test_files1/__RW/_txt/english_book/alice.txt"
-filename2 = (
-    "C:/_git/vcs/_1.data/______test_files1/__RW/_txt/english_book/siddhartha.txt"
-)
-filename3 = "C:/_git/vcs/_1.data/______test_files1/__RW/_txt/english_book/moby_dick.txt"
-filename4 = (
-    "C:/_git/vcs/_1.data/______test_files1/__RW/_txt/english_book/little_women.txt"
-)
-
-filenames = [filename1, filename2, filename3, filename4]
-
-filename = "C:/_git/vcs/_1.data/______test_files1/poetry2.txt"
-
-for filename in filenames:
-    count_words(filename)
-
-print("------------------------------------------------------------")  # 60個
-
-print("統計一個檔案的字數")
-
-filename = "C:/_git/vcs/_1.data/______test_files1/__RW/_txt/english_book/alice.txt"
-
-try:
-    with open(filename, encoding="utf-8") as f:
-        contents = f.read()
-except FileNotFoundError:
-    print(f"Sorry, the file {filename} does not exist.")
-else:
-    # Count the approximate number of words in the file.
-    words = contents.split()
-    num_words = len(words)
-    print(f"The file {filename} has about {num_words} words.")
-
-
-print("------------------------------------------------------------")  # 60個
-
-print("字串的處理")
-
-# 北美獨立宣言
-text = (
-    "Resolved: That these United Colonies are, and of right ought to be, "
-    + "free and independent States, that they are absolved from all allegiance "
-    + "to the British Crown, and that all political connection between them and "
-    + "the State of Great Britain is, and ought to be, totally dissolved."
-)
-
-print(text)
-
-print("依以下符號split字串")
-
-seplist = [":", ",", "."]
-for i in range(len(seplist) - 1):
-    text = text.replace(seplist[i], seplist[-1])
-
-slist = text.split(seplist[-1])
-print(slist)
-
-with open("tmp_resolution.txt", "wt") as outf:
-    for s in slist:
-        outf.write("-------------------------\n")
-        outf.write(s.strip() + "\n")
-
-print("------------------------------------------------------------")  # 60個
-
-# 九九乘法表就應該是2..9 而不是 1..9
-set99 = set()
-outf = open("tmp_99.txt", "wt")
-for i in range(2, 9 + 1):
-    for j in range(1, 9 + 1):
-        prod = i * j
-        # 判斷乘積數字是否出現過
-        if prod not in set99:
-            outf.write(str(prod) + " ")
-            # 沒出現過，加入set99
-            set99.add(prod)
-    outf.write("\n")
-outf.close()
-
-print("------------------------------------------------------------")  # 60個
-
-
-file_a = open("tmp_book.txt", "a")
-file_a.write("Python程式設計")
-file_a.writelines(["\n資料結構與演算法", "\n網路行銷與電子商務"])
-file_a.close()
-
-file_r = open("tmp_book.txt", "r")
-print("讀取檔案(read)：", file_r.read())
-file_r.seek(0)
-print("讀取檔案(readline)：", file_r.readline())
-file_r.seek(0)
-print("讀取檔案(readlines)：", file_r.readlines())
-file_r.close()
-
-print('------------------------------------------------------------')	#60個
-
-file = open("tmp_RelatedFunctions.bin", "w+")
-file.write("HIHI!!! I like Program, Do you like this?")
-
-file.flush()
-
-print("寫入之後的游標位置：", file.tell())
-
-file.seek(8, 0)
-file.truncate(22)
-
-print(file.read())
-
-print('------------------------------------------------------------')	#60個
 
 """
 #按 ctrl + c 離開程式
@@ -9973,63 +9480,6 @@ print(abc)
 print('------------------------------------------------------------')	#60個
 
 """
-def batch_resize_images(input_folder, output_folder, size=(300, 300)):
-    # 確保輸出資料夾存在
-    if not os.path.exists(output_folder):
-        os.makedirs(output_folder)
-    
-    # 遍歷輸入資料夾中的所有影像檔案
-    for filename in os.listdir(input_folder):
-        if filename.endswith(('.jpg', '.png')):
-            # 打開影像
-            image = Image.open(os.path.join(input_folder, filename))
-            # 調整影像尺寸
-            image = image.resize(size, Image.ANTIALIAS)
-            # 保存調整尺寸後的影像到輸出資料夾
-            #image.save(os.path.join(output_folder, filename))
-
-# 假設有一個包含原始圖片的資料夾 'input_images' 和
-# 一個用於存放調整後圖片的資料夾 'output_images'
-input_folder = 'input_images'
-output_folder = 'output_images'
-
-# 呼叫函數，將所有圖片調整為300x300大小
-batch_resize_images(input_folder, output_folder)
-"""
-
-print("------------------------------------------------------------")  # 60個
-
-"""
-def batch_convert_images(directory, target_format='.jpg'):
-    for filename in os.listdir(directory):
-        if filename.endswith('.png'):
-            path = os.path.join(directory, filename)
-            image = Image.open(path)
-            image_rgb = image.convert('RGB')  # 轉換為RGB模式以便保存為JPEG
-            #image_rgb.save(path.replace('.png', target_format), quality=95)
-
-# 呼叫批次更改函數
-batch_convert_images('images_directory')
-"""
-
-print("------------------------------------------------------------")  # 60個
-
-"""
-#pitems = ps.split()
-pfile = input("請輸入讀取檔案名稱：").strip()
-
-pfile = input("請輸入讀取檔案名稱：").strip()
-pinfile = open(pfile, "r")
-ps = pinfile.read()  
-print(str(len(ps)) + " 字元數") 
-print(str(len(ps.split())) + " 單字數") 
-print(str(len(ps.split('\n'))) + " 行數") 
-pinfile.close()
-"""
-print("------------------------------------------------------------")  # 60個
-
-
-"""
 #print
 #print("當半徑為%d時，圓面積為%6.2f，圓周長為%6.2f"%(pvalue, result1, result2))
 print("當半徑為%d時，圓面積為%6.2f，圓周長為%6.2f"%(pvalue, result1, result2))
@@ -10037,38 +9487,6 @@ print("圓柱的半徑%6.2f長度%6.2f體積為%6.2f"%(pradius,plength,pvolume))
 """
 
 print("------------------------------------------------------------")  # 60個
-
-"""
-f=open('data/file_u8.txt','r',encoding='UTF-8-sig')
-str=f.readlines()
-print(str)
-f.close()
-
-f=open('data/file_u8.txt','r',encoding='UTF-8-sig')
-str1=f.read(7)
-print(str1)
-f.close()
-
-print("------------------------------------------------------------")  # 60個
-
-#讀出前7拜
-f=open('file.txt','r')
-str1=f.read(7)
-print(str1)
-f.close()
-
-
-# Filename: ex08_14.py
-while True:
-    try:
-        x = int(input("請輸入一個數字: "))
-        break
-    except ValueError:
-        print("抱歉!!您所輸入並非是有效的數字，請再輸入一次...")
-"""
-
-print("------------------------------------------------------------")  # 60個
-
 import numpy as np
 
 # 數據處理
@@ -10262,43 +9680,6 @@ func = my_menu()
 print(func())
 
 print('------------------------------------------------------------')	#60個
-
-"""
-import glob
-import pathlib
-
-print('touch當前目錄下所有檔案')
-files = glob.glob("*.*") 
-for filename in files:
-    print(filename)
-    pathlib.Path(filename).touch()
-"""
-print("------------------------------------------------------------")  # 60個
-
-# Count each letter in the string 
-def countLetters(line, counts): 
-    for ch in line:
-        if ch.isalpha():
-            counts[ord(ch) - ord('a')] += 1
-
-filename = 'data/engnews.txt'
-
-infile = open(filename, "r") # Open the file, 格式要unicode轉ascii
-
-counts = 26 * [0] # Create and initialize counts
-for line in infile:
-    # Invoke the countLetters function to count each letter
-    countLetters(line.lower(), counts)
-    
-# Display results
-for i in range(len(counts)):
-    if counts[i] != 0:
-        print(chr(ord('a') + i) + " appears " + str(counts[i])
-          + (" time" if counts[i] == 1 else " times"))
-
-infile.close() # Close file
-  
-print("------------------------------------------------------------")  # 60個
 
 name = '鼠'
 weight = 3
@@ -10800,23 +10181,499 @@ for animal, legs in d1.items():
 print("------------------------------------------------------------")  # 60個
 
 
-
-
-
 print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-
 
 
 print("------------------------------------------------------------")  # 60個
 print("python 語法 搬出")
 print("------------------------------------------------------------")  # 60個
 
+'''
+
+
+
+
+
+
+
+"""
+std_data = dict()
+with open(filename, encoding='utf-8') as fp:
+    alldata = fp.readlines()
+    for item in alldata:
+        no, name = item.rstrip('\n').split(',')
+        std_data[no] = name
+print(std_data)
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+"""
+def modifySong(songStr):            # 將歌曲的標點符號用空字元取代       
+    for ch in songStr:
+        if ch in ".,?":
+            songStr = songStr.replace(ch,'')
+    return songStr                  # 傳回取代結果
+
+def wordCount(songCount):
+    global mydict
+    songList = songCount.split()    # 將歌曲字串轉成串列
+    mydict = {wd:songList.count(wd) for wd in set(songList)}
+
+filename = "AreYouSleeping.txt"
+with open(filename) as file_Obj:          # 開啟歌曲檔案
+    data = file_Obj.read()          # 讀取歌曲檔案
+
+mydict = {}                         # 空字典未來儲存單字計數結果
+song = modifySong(data.lower())
+
+wordCount(song)                     # 執行歌曲單字計數
+
+dictList = sorted(mydict.items(), key=lambda item:item[1], reverse=True)
+for key, val in dictList:
+    print(key,':',val)
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+
+fobj1 = open("tmp_out24w.txt", mode="w")  # 取代先前資料
+print("Testing mode=w, using utf-8 format", file=fobj1)
+fobj1.close()
+fobj2 = open("tmp_out24a.txt", mode="a")  # 附加資料後面
+print("測試 mode=a 參數, 預設 ANSI 編碼", file=fobj2)
+fobj2.close()
+
+print("------------------------------------------------------------")  # 60個
+
+fobj1 = open("tmp_out25w.txt", mode="w", encoding="utf-8")
+print("Testing mode=w, using utf-8 format", file=fobj1)
+fobj1.close()
+fobj2 = open("tmp_out25a.txt", mode="a", encoding="cp950")
+print("測試 mode=a 參數, 預設 ANSI 編碼", file=fobj2)
+fobj2.close()
+
+print("------------------------------------------------------------")  # 60個
+
+
+def compareString(string):
+    #檢查是否是搜尋的字串
+    if string == searchStr:
+        return True
+    else:
+        return False
+
+def parseString(string):
+    global num
+    # notFoundSignal = True     # 註記沒有找到電話號碼為True
+    for i in range(len(data)):  # 用迴圈逐步抽取字串長度做測試
+        msg = data[i:i+len(string)]
+        if compareString(msg):
+            num += 1
+
+#filename = 'C:/_git/vcs/_4.python/_data/射鵰英雄傳.big5.txt'
+filename = 'C:/_git/vcs/_4.python/_data/python_word_count1.txt'
+#filename = 'data/ex16_2.txt'
+with open(filename) as file_obj:      # 讀取ex21_2.txt
+    data = file_obj.read()
+    #print(data)
+
+searchStr = "包含"
+num = 0
+parseString(searchStr)
+print("所搜尋字串 %s 共出現 %d 次" % (searchStr, num))
+
+print("------------------------------------------------------------")  # 60個
+
+
+def wordsNum(fn):
+    """適用英文文件, 輸入文章的檔案名稱,可以計算此文章的字數"""
+    try:
+        with open(fn) as file_Obj:  # 用預設"r"傳回檔案
+            data = file_Obj.read()  # 讀取檔案到變數data
+    except Exception:
+        print(f"Exception找不到 {fn} 檔案")
+    else:
+        wordList = data.split()  # 將文章轉成串列
+        print(f"{fn} 文章的字數是 {len(wordList)}")  # 文章字數
+
+
+files = ["data1.txt", "data2.txt", "data3.txt"]  # 檔案串列
+for file in files:
+    wordsNum(file)
+
+print("------------------------------------------------------------")  # 60個
+
+
+try:
+    # 嘗試打開一個不存在的檔案
+    with open("non_existent_file.txt", "r") as f:
+        data = f.read()
+except FileNotFoundError:
+    # 如果文件不存在, 捕獲異常
+    print("The file was not found")
+except IOError:
+    # 處理 I/O 錯誤, 例如:讀取錯誤
+    print("An I/O error occurred")
+
+print("------------------------------------------------------------")  # 60個
+
+
+fn = "data15_4.txt"  # 設定欲開啟的檔案
+try:
+    with open(fn) as file_Obj:  # 預設mode=r開啟檔案
+        data = file_Obj.read()  # 讀取檔案到變數data
+except FileNotFoundError:
+    print(f"找不到 {fn} 檔案")
+else:
+    print(data)  # 輸出變數data
+
+
+print("------------------------------------------------------------")  # 60個
+
+fn = "data15_5.txt"  # 設定欲開啟的檔案
+try:
+    with open(fn) as file_Obj:  # 用預設mode=r開啟檔案
+        data = file_Obj.read()  # 讀取檔案到變數data
+except FileNotFoundError:
+    print("找不到 %s 檔案" % fn)
+else:
+    print(data)  # 輸出變數data
+
+print("------------------------------------------------------------")  # 60個
+
+fn = "data15_6.txt"  # 設定欲開啟的檔案
+try:
+    with open(fn) as file_Obj:  # 用預設mode=r開啟檔案
+        data = file_Obj.read()  # 讀取檔案到變數data
+except FileNotFoundError:
+    print(f"找不到 {fn} 檔案")
+else:
+    wordList = data.split()  # 將文章轉成串列
+    print(f"{fn} 文章的字數是 {len(wordList)}")  # 列印文章字數
+
+print("------------------------------------------------------------")  # 60個
+
+
+def wordsNum(fn):
+    """適用英文文件, 輸入文章的檔案名稱,可以計算此文章的字數"""
+    try:
+        with open(fn) as file_Obj:  # 用預設mode=r開啟檔案
+            data = file_Obj.read()  # 讀取檔案到變數data
+    except FileNotFoundError:
+        print(f"找不到 {fn} 檔案")
+    else:
+        wordList = data.split()  # 將文章轉成串列
+        print(f"{fn} 文章的字數是 {len(wordList)}")  # 文章字數
+
+
+file = "data15_6.txt"  # 設定欲開啟的檔案
+wordsNum(file)
+
+print("------------------------------------------------------------")  # 60個
+
+
+def wordsNum(fn):
+    """適用英文文件, 輸入文章的檔案名稱,可以計算此文章的字數"""
+    try:
+        with open(fn) as file_Obj:  # 用預設mode=r開啟檔案
+            data = file_Obj.read()  # 讀取檔案到變數data
+    except FileNotFoundError:
+        print(f"找不到 {fn} 檔案")
+    else:
+        wordList = data.split()  # 將文章轉成串列
+        print(f"{fn} 文章的字數是 {len(wordList)}")  # 文章字數
+
+
+files = ["data1.txt", "data2.txt", "data3.txt"]  # 檔案串列
+for file in files:
+    wordsNum(file)
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+def wordsNum(filename):
+    """適用英文文件, 輸入文章的檔案名稱,可以計算此文章的字數"""
+    try:
+        with open(filename) as file_Obj:  # 用預設"r"傳回檔案物件file_Obj
+            data = file_Obj.read()  # 讀取檔案到變數data
+    except FileNotFoundError:
+        print("找不到 %s 檔案" % filename)
+    else:
+        wordList = data.split()  # 將文章轉成串列
+        print(filename, " 文章的字數是 ", len(wordList))  # 列印文章字數
+
+
+"""
+files = []
+for i in range(5):
+    filename = input("請輸入檔案名稱 : ")
+    files.append(filename)
+    
+for file in files:
+    wordsNum(file)
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+
+def wordsNum(filename):
+    """適用英文文件, 輸入文章的檔案名稱,可以計算此文章的字數"""
+    try:
+        with open(filename) as file_Obj:  # 用預設"r"傳回檔案物件file_Obj
+            data = file_Obj.read()  # 讀取檔案到變數data
+    except FileNotFoundError:
+        print("找不到 %s 檔案" % filename)
+    else:
+        wordList = data.split()  # 將文章轉成串列
+        print(filename, " 文章的字數是 ", len(wordList))  # 列印文章字數
+        return len(wordList)
+
+
+def lenWord(filename):
+    """檢查檔案長度必須是10到35個字元"""
+    wdlen = wordsNum(filename)  # 檔案長度
+    if wdlen < 10:  # 檔案長度不足
+        raise Exception("檔案長度不足")
+    if wdlen > 35:  # 檔案長度太長
+        raise Exception("檔案長度太長")
+    print("檔案長度正確")
+
+
+for file in (
+    "data/d1.txt",
+    "data/d2.txt",
+    "data/d3.txt",
+    "data/d4.txt",
+    "data/d5.txt",
+):  # 測試系列檔案
+    try:
+        lenWord(file)
+    except Exception as err:
+        print("檔案長度檢查異常發生: ", str(err))
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("計算字數")
+
+
+def count_words(filename):
+    """Count the approximate number of words in a file."""
+    try:
+        with open(filename, encoding="utf-8") as f:
+            contents = f.read()
+    except FileNotFoundError:
+        pass
+    else:
+        words = contents.split()
+        num_words = len(words)
+        print(f"The file {filename} has about {num_words} words.")
+
+
+filename1 = "C:/_git/vcs/_1.data/______test_files1/__RW/_txt/english_book/alice.txt"
+filename2 = (
+    "C:/_git/vcs/_1.data/______test_files1/__RW/_txt/english_book/siddhartha.txt"
+)
+filename3 = "C:/_git/vcs/_1.data/______test_files1/__RW/_txt/english_book/moby_dick.txt"
+filename4 = (
+    "C:/_git/vcs/_1.data/______test_files1/__RW/_txt/english_book/little_women.txt"
+)
+
+filenames = [filename1, filename2, filename3, filename4]
+
+filename = "C:/_git/vcs/_1.data/______test_files1/poetry2.txt"
+
+for filename in filenames:
+    count_words(filename)
+
+print("------------------------------------------------------------")  # 60個
+
+print("統計一個檔案的字數")
+
+filename = "C:/_git/vcs/_1.data/______test_files1/__RW/_txt/english_book/alice.txt"
+
+try:
+    with open(filename, encoding="utf-8") as f:
+        contents = f.read()
+except FileNotFoundError:
+    print(f"Sorry, the file {filename} does not exist.")
+else:
+    # Count the approximate number of words in the file.
+    words = contents.split()
+    num_words = len(words)
+    print(f"The file {filename} has about {num_words} words.")
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("字串的處理")
+
+# 北美獨立宣言
+text = (
+    "Resolved: That these United Colonies are, and of right ought to be, "
+    + "free and independent States, that they are absolved from all allegiance "
+    + "to the British Crown, and that all political connection between them and "
+    + "the State of Great Britain is, and ought to be, totally dissolved."
+)
+
+print(text)
+
+print("依以下符號split字串")
+
+seplist = [":", ",", "."]
+for i in range(len(seplist) - 1):
+    text = text.replace(seplist[i], seplist[-1])
+
+slist = text.split(seplist[-1])
+print(slist)
+
+with open("tmp_resolution.txt", "wt") as outf:
+    for s in slist:
+        outf.write("-------------------------\n")
+        outf.write(s.strip() + "\n")
+
+print("------------------------------------------------------------")  # 60個
+
+
+# 九九乘法表就應該是2..9 而不是 1..9
+set99 = set()
+outf = open("tmp_99.txt", "wt")
+for i in range(2, 9 + 1):
+    for j in range(1, 9 + 1):
+        prod = i * j
+        # 判斷乘積數字是否出現過
+        if prod not in set99:
+            outf.write(str(prod) + " ")
+            # 沒出現過，加入set99
+            set99.add(prod)
+    outf.write("\n")
+outf.close()
+
+print("------------------------------------------------------------")  # 60個
+
+
+file_a = open("tmp_book.txt", "a")
+file_a.write("Python程式設計")
+file_a.writelines(["\n資料結構與演算法", "\n網路行銷與電子商務"])
+file_a.close()
+
+file_r = open("tmp_book.txt", "r")
+print("讀取檔案(read)：", file_r.read())
+file_r.seek(0)
+print("讀取檔案(readline)：", file_r.readline())
+file_r.seek(0)
+print("讀取檔案(readlines)：", file_r.readlines())
+file_r.close()
+
+print('------------------------------------------------------------')	#60個
+
+file = open("tmp_RelatedFunctions.bin", "w+")
+file.write("HIHI!!! I like Program, Do you like this?")
+
+file.flush()
+
+print("寫入之後的游標位置：", file.tell())
+
+file.seek(8, 0)
+file.truncate(22)
+
+print(file.read())
+
+print('------------------------------------------------------------')	#60個
+
+
+
+"""
+def batch_resize_images(input_folder, output_folder, size=(300, 300)):
+    # 確保輸出資料夾存在
+    if not os.path.exists(output_folder):
+        os.makedirs(output_folder)
+    
+    # 遍歷輸入資料夾中的所有影像檔案
+    for filename in os.listdir(input_folder):
+        if filename.endswith(('.jpg', '.png')):
+            # 打開影像
+            image = Image.open(os.path.join(input_folder, filename))
+            # 調整影像尺寸
+            image = image.resize(size, Image.ANTIALIAS)
+            # 保存調整尺寸後的影像到輸出資料夾
+            #image.save(os.path.join(output_folder, filename))
+
+# 假設有一個包含原始圖片的資料夾 'input_images' 和
+# 一個用於存放調整後圖片的資料夾 'output_images'
+input_folder = 'input_images'
+output_folder = 'output_images'
+
+# 呼叫函數，將所有圖片調整為300x300大小
+batch_resize_images(input_folder, output_folder)
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+"""
+def batch_convert_images(directory, target_format='.jpg'):
+    for filename in os.listdir(directory):
+        if filename.endswith('.png'):
+            path = os.path.join(directory, filename)
+            image = Image.open(path)
+            image_rgb = image.convert('RGB')  # 轉換為RGB模式以便保存為JPEG
+            #image_rgb.save(path.replace('.png', target_format), quality=95)
+
+# 呼叫批次更改函數
+batch_convert_images('images_directory')
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+"""
+#pitems = ps.split()
+pfile = input("請輸入讀取檔案名稱：").strip()
+
+pfile = input("請輸入讀取檔案名稱：").strip()
+pinfile = open(pfile, "r")
+ps = pinfile.read()  
+print(str(len(ps)) + " 字元數") 
+print(str(len(ps.split())) + " 單字數") 
+print(str(len(ps.split('\n'))) + " 行數") 
+pinfile.close()
+"""
+print("------------------------------------------------------------")  # 60個
+
+
+
+"""
+f=open('data/file_u8.txt','r',encoding='UTF-8-sig')
+str=f.readlines()
+print(str)
+f.close()
+
+f=open('data/file_u8.txt','r',encoding='UTF-8-sig')
+str1=f.read(7)
+print(str1)
+f.close()
+
+print("------------------------------------------------------------")  # 60個
+
+#讀出前7拜
+f=open('file.txt','r')
+str1=f.read(7)
+print(str1)
+f.close()
+
+
+# Filename: ex08_14.py
+while True:
+    try:
+        x = int(input("請輸入一個數字: "))
+        break
+    except ValueError:
+        print("抱歉!!您所輸入並非是有效的數字，請再輸入一次...")
+"""
+
+print("------------------------------------------------------------")  # 60個
 

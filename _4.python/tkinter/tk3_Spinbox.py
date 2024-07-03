@@ -14,6 +14,21 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
+def get_spinbox_data():
+    print('你選擇了 :', spinbox3a.get())
+
+spinbox3a = tk.Spinbox(window, values=["AAA", "BBB", "CCC", "DDD"], width=10)
+spinbox3a.pack()
+
+button4 = tk.Button(window, text="取得Spinbox資料", command=get_spinbox_data)
+button4.pack()
+
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
+print("------------------------------------------------------------")  # 60個
+
+
 def show_spinbox_selection():
     print("你選擇了 :", spinbox1.get()) #取得選取資料
     cc = spinbox1.get() #取得選取資料

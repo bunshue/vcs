@@ -8,9 +8,9 @@ from tkinter import ttk
 print("------------------------------------------------------------")  # 60個
 
 def checkbutton_select1():
-    str = "你喜歡的動物："
-    for i in range(0, len(choice)):
-        if choice[i].get() == 1:
+    str = "你選擇了動物："
+    for i in range(0, len(check_value1)):
+        if check_value1[i].get() == 1:
             str = str + ball[i] + " "
     print(str)
     msg.set(str)
@@ -20,7 +20,7 @@ window = tk.Tk()
 window.geometry("600x800")
 window.title("Checkbutton 1")
 
-choice = []
+check_value1 = []
 ball = ["鼠", "牛", "虎", "兔"]
 msg = tk.StringVar()
 label2 = tk.Label(window, fg="red", textvariable=msg)
@@ -28,21 +28,11 @@ label2.pack()
 
 for i in range(0, len(ball)):
     item = tk.IntVar()
-    choice.append(item)
+    check_value1.append(item)
     item = tk.Checkbutton(
-        window, text=ball[i], variable=choice[i], command=checkbutton_select1
+        window, text=ball[i], variable=check_value1[i], command=checkbutton_select1
     )
     item.pack()
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
-    fill=tk.X, padx=5, pady=5
-)  # 分隔線
-print("------------------------------------------------------------")  # 60個
-
-var = tk.IntVar()
-
-c = tk.Checkbutton(window, text="CheckButton", variable=var)
-c.pack()
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
     fill=tk.X, padx=5, pady=5
@@ -64,13 +54,13 @@ def checkbutton_select2():
             print(topping[i])
 
 
-tk.Button(window, text="點菜", command=checkbutton_select2).pack()
+tk.Button(window, text="選擇", command=checkbutton_select2).pack()
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
     fill=tk.X, padx=5, pady=5
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
-
+'''
 topping = {0: "鼠", 1: "牛", 2: "虎", 3: "兔"}
 
 check_value = {}
@@ -103,8 +93,6 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
     fill=tk.X, padx=5, pady=5
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
-
-print("試題與測驗分析程式")
 
 
 def checkbutton_select6():
@@ -176,31 +164,7 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
 print("------------------------------------------------------------")  # 60個
 
 
-def checkbutton_select7():  # 回應核取方塊變數狀態
-    print("這學期預定選修的科目包括:", var1.get(), var2.get(), var3.get())
-
-
-lb1 = tk.Label(window, text="選修的科目：").pack()
-item1 = "鼠"
-var1 = tk.StringVar()
-chk1 = tk.Checkbutton(window, text=item1, variable=var1, onvalue=item1, offvalue="")
-chk1.pack()
-item2 = "牛"
-var2 = tk.StringVar()
-chk2 = tk.Checkbutton(window, text=item2, variable=var2, onvalue=item2, offvalue="")
-chk2.pack()
-item3 = "虎"
-var3 = tk.StringVar()
-chk3 = tk.Checkbutton(window, text=item3, variable=var3, onvalue=item3, offvalue="")
-chk3.pack()
-btnShow = tk.Button(window, text="列出選修結果", command=checkbutton_select7)
-btnShow.pack()
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
-    fill=tk.X, padx=5, pady=5
-)  # 分隔線
-print("------------------------------------------------------------")  # 60個
-
+'''
 window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
@@ -263,18 +227,6 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
-var1 = tk.IntVar()
-tk.Checkbutton(window, text="鼠", variable=var1).pack()
-var2 = tk.IntVar()
-tk.Checkbutton(window, text="牛", variable=var2).pack()
-var3 = tk.IntVar()
-tk.Checkbutton(window, text="虎", variable=var3).pack()
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
-    fill=tk.X, padx=5, pady=5
-)  # 分隔線
-print("------------------------------------------------------------")  # 60個
-
 
 def checkbutton_select4():
     selection = ""
@@ -298,41 +250,10 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
-label1 = tk.Label(window, bg="yellow", width=20, text="empty")
-label1.pack()
-
-
-def checkbutton_select8():
-    if (var1.get() == 1) & (var2.get() == 0):
-        label1.config(text="I love only Python ")
-    elif (var1.get() == 0) & (var2.get() == 1):
-        label1.config(text="I love only C++")
-    elif (var1.get() == 0) & (var2.get() == 0):
-        label1.config(text="I do not love either")
-    else:
-        label1.config(text="I love both")
-
-
-var1 = tk.IntVar()
-var2 = tk.IntVar()
-c1 = tk.Checkbutton(
-    window, text="Python", variable=var1, onvalue=1, offvalue=0, command=checkbutton_select8
-)
-c2 = tk.Checkbutton(
-    window, text="C++", variable=var2, onvalue=1, offvalue=0, command=checkbutton_select8
-)
-c1.pack()
-c2.pack()
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
-    fill=tk.X, padx=5, pady=5
-)  # 分隔線
-print("------------------------------------------------------------")  # 60個
-
 def checkbutton_select9():
     str = "選擇："
-    for i in range(0, len(choice)):
-        if choice[i].get() == 1:
+    for i in range(0, len(check_value9)):
+        if check_value9[i].get() == 1:
             str = str + animals_list[i] + " "
     print(str)
     msg.set(str)
@@ -345,7 +266,7 @@ dy = 80
 w = 12
 h = 3
 
-choice = []
+check_value9 = []
 
 animals_list = [
     "鼠",
@@ -363,9 +284,9 @@ animals_list = [
 ]
 
 msg = tk.StringVar()
-label1 = tk.Label(window, text="選擇動物 :")
-label1.pack()
-label1.place(x=x_st + dx * 0, y=y_st + dy * 2 - 20)
+label_mesg5 = tk.Label(window, text="選擇動物 :")
+label_mesg5.pack()
+label_mesg5.place(x=x_st + dx * 0, y=y_st + dy * 2 - 20)
 label2 = tk.Label(window, fg="red", textvariable=msg)
 label2.pack()
 label2.place(x=x_st + dx * 0, y=y_st + dy * 2 + 80)
@@ -375,8 +296,8 @@ label2.place(x=x_st + dx * 0, y=y_st + dy * 2 + 80)
 dx2 = dx * 4 / 4  # 為了微調距離用
 for i in range(0, len(animals_list)):
     item = tk.IntVar()
-    choice.append(item)
-    item = tk.Checkbutton(window, text=animals_list[i], variable=choice[i], command=checkbutton_select9)
+    check_value9.append(item)
+    item = tk.Checkbutton(window, text=animals_list[i], variable=check_value9[i], command=checkbutton_select9)
     item.pack()
     item.place(x=x_st + dx2 * (i % 4), y=y_st + dy * 2 + int(i / 4) * 25)
 
@@ -398,33 +319,6 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
-
-def check():  # 回應核取方塊變數狀態
-    print("選取項目 :", var1.get(), var2.get(), var3.get())
-
-
-item1 = "鼠"
-var1 = tk.StringVar()
-chk = tk.Checkbutton(window, text=item1, variable=var1, onvalue=item1, offvalue="")
-chk.pack()
-
-item2 = "牛"
-var2 = tk.StringVar()
-chk2 = tk.Checkbutton(window, text=item2, variable=var2, onvalue=item2, offvalue="")
-chk2.pack()
-
-item3 = "虎"
-var3 = tk.StringVar()
-chk3 = tk.Checkbutton(window, text=item3, variable=var3, onvalue=item3, offvalue="")
-chk3.pack()
-
-buttonShow = tk.Button(window, text="選取項目", command=check)
-buttonShow.pack()
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
-    fill=tk.X, padx=5, pady=5
-)  # 分隔線
-print("------------------------------------------------------------")  # 60個
 
 
 def fnOk():
@@ -484,16 +378,16 @@ print("------------------------------------------------------------")  # 60個
 
 def command_checkbutton1():
     if var_checkbutton1.get():
-        label1.config(text="選取cb1")
+        label_mesg2.config(text="選取cb1")
     else:
-        label1.config(text="取消選取cb1")
+        label_mesg2.config(text="取消選取cb1")
 
 
 def command_checkbutton2():
     if var_checkbutton2.get():
-        label1.config(text="選取cb2")
+        label_mesg2.config(text="選取cb2")
     else:
-        label1.config(text="取消選取cb2")
+        label_mesg2.config(text="取消選取cb2")
 
 
 var_checkbutton1 = tk.BooleanVar()
@@ -514,8 +408,8 @@ checkbutton2 = tk.Checkbutton(
 )
 checkbutton2.pack()
 
-label1 = tk.Label(window, bg="yellow", fg="blue", width=12, height=2)
-label1.pack()
+label_mesg2 = tk.Label(window, bg="yellow", fg="blue", width=12, height=2)
+label_mesg2.pack()
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
     fill=tk.X, padx=5, pady=5
@@ -576,19 +470,8 @@ btGetName.grid(row=1, column=3)
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
     fill=tk.X, padx=5, pady=5
 )  # 分隔線
+print("------------------------------------------------------------")  # 60個
 
-
-var1 = tk.IntVar()
-checkbutton1 = tk.Checkbutton(window, text="鼠", variable=var1)
-checkbutton1.pack()
-
-var2 = tk.IntVar()
-checkbutton2 = tk.Checkbutton(window, text="牛", variable=var2)
-checkbutton2.pack()
-
-var3 = tk.IntVar()
-checkbutton3 = tk.Checkbutton(window, text="虎", variable=var3)
-checkbutton3.pack()
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
     fill=tk.X, padx=5, pady=5
@@ -625,8 +508,69 @@ print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
+items = ("鼠", "牛", "虎")
 
 print("------------------------------------------------------------")  # 60個
 
 
-items = ("鼠", "牛", "虎")
+var1 = tk.IntVar()
+checkbutton1 = tk.Checkbutton(window, text="鼠", variable=var1)
+checkbutton1.pack()
+
+var2 = tk.IntVar()
+checkbutton2 = tk.Checkbutton(window, text="牛", variable=var2)
+checkbutton2.pack()
+
+var3 = tk.IntVar()
+checkbutton3 = tk.Checkbutton(window, text="虎", variable=var3)
+checkbutton3.pack()
+
+print("------------------------------------------------------------")  # 60個
+
+def checkbutton_select7():  # 回應核取方塊變數狀態
+    print("目前選取的動物 :", var1.get(), var2.get(), var3.get())
+
+item1 = "鼠"
+var1 = tk.StringVar()
+chk1 = tk.Checkbutton(window, text=item1, variable=var1, onvalue=item1, offvalue="")
+chk1.pack()
+
+item2 = "牛"
+var2 = tk.StringVar()
+chk2 = tk.Checkbutton(window, text=item2, variable=var2, onvalue=item2, offvalue="")
+chk2.pack()
+
+item3 = "虎"
+var3 = tk.StringVar()
+chk3 = tk.Checkbutton(window, text=item3, variable=var3, onvalue=item3, offvalue="")
+chk3.pack()
+
+buttonShow = tk.Button(window, text="選取項目", command=checkbutton_select7)
+buttonShow.pack()
+
+print("------------------------------------------------------------")  # 60個
+
+label_mesg = tk.Label(window, bg="yellow", width=20, text="empty")
+label_mesg.pack()
+
+def checkbutton_select8():
+    if (var1.get() == 1) & (var2.get() == 0):
+        label_mesg.config(text="鼠")
+    elif (var1.get() == 0) & (var2.get() == 1):
+        label_mesg.config(text="牛")
+    elif (var1.get() == 0) & (var2.get() == 0):
+        label_mesg.config(text="皆無")
+    else:
+        label_mesg.config(text="鼠 + 牛")
+
+
+var1 = tk.IntVar()
+c1 = tk.Checkbutton(window, text="鼠", variable=var1, onvalue=1, offvalue=0, command=checkbutton_select8)
+c1.pack()
+
+var2 = tk.IntVar()
+c2 = tk.Checkbutton(window, text="牛", variable=var2, onvalue=1, offvalue=0, command=checkbutton_select8)
+c2.pack()
+
+print("------------------------------------------------------------")  # 60個
+

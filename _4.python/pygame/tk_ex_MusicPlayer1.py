@@ -1,5 +1,10 @@
 """
+Python 聲音處理 pygame
+
 mp3 播放器
+
+用pygame播放mp3檔案
+用pygame播放wav檔案
 
 """
 
@@ -29,10 +34,11 @@ def pausemp3():  # 暫停
     if flag_pause_mode == False:
         flag_pause_mode = True
         pygame.mixer.music.pause() #暫停播放
+        button02.config(text="恢復")
     else:
         flag_pause_mode = False
         pygame.mixer.music.unpause() #恢復播放
-
+        button02.config(text="暫停")
 
 def increase():  # 音量大
     global volume
@@ -67,7 +73,7 @@ def playmp3():  # 播放
 
 def playNewmp3a():  # 播放新曲
     global mp3_filename
-    pygame.mixer.music.stop() # 停止播放
+    pygame.mixer.music.stop() # 停止播放, 要先stop, 才不會冒出一個雜音
     pygame.mixer.music.load(mp3_filename)
     pygame.mixer.music.play(loops=-1)  # -1: 循環播放
 
@@ -190,15 +196,41 @@ def button20Click():
     pygame.mixer.music.play()
 
 def button21Click():
-    print('你按了button21 測試1')
+    print('你按了button21 測試1 wave / midi')
+
+    print('播放wav檔')
+    filename = 'C:/_git/vcs/_1.data/______test_files1/_wav/hit.wav'
+    filename = 'test_wave.wav'
+    filename = "C:/_git/vcs/_1.data/______test_files1/_wav/harumi99.wav"
+    filename = r'C:\Windows\Media\notify.wav'
+    
+    print('使用 mixer.sound 播放 wave')
+    sound = pygame.mixer.Sound(filename)      # 建立Sound物件
+    print('此檔案之長度 :', sound.get_length(), '秒')
+    sound.play()#播放一次
+    #sound.play(5)#播放N次
+
+    pygame.time.wait(int(sound.get_length()) * 1000)
+
+    print('使用 mixer.music 播放 wave')
+    pygame.mixer.init()
+    pygame.mixer.music.load(filename)
+    #print('此檔案之長度 :', pygame.mixer.music.get_length(), '秒') 無
+    pygame.mixer.music.play()
+
+
+    """
+    mymidi = r'C:\Windows\Media\town.mid'
+    pygame.mixer.music.load(mymidi)
     mymidi = r'_data\town.mid'
-    pygame.time.delay(1000)                     # 先給聲音初始化工作
+    pygame.time.delay(10)                     # 先給聲音初始化工作 msec
     pygame.mixer.music.load(mymidi)             # 下載 midi 音樂檔案
     pygame.mixer.music.play()                   # 播放 midi 音樂檔案
 
-    time.sleep(5)                               # 程式休息
+    onestop = r'C:\Windows\Media\onestop.mid'
+    pygame.mixer.music.load(onestop)                # 撥放選項3音樂
+    """
     print('完成')
-
 
 def button22Click():
     print('你按了button22 測試2')
@@ -324,7 +356,7 @@ button14.place(x=x_st + dx * 4, y=y_st + dy * 1)
 button15.place(x=x_st + dx * 5, y=y_st + dy * 1)
 
 button20 = tk.Button(window, width=w, height=h, command=button20Click, text="測試0")
-button21 = tk.Button(window, width=w, height=h, command=button21Click, text="播放 wav/midi")
+button21 = tk.Button(window, width=w, height=h, command=button21Click, text="播放 wave/midi")
 button22 = tk.Button(window, width=w, height=h, command=button22Click, text="測試2")
 button23 = tk.Button(window, width=w, height=h, command=button23Click, text="測試3")
 button24 = tk.Button(window, width=w, height=h, command=button24Click, text="測試4")
@@ -365,7 +397,7 @@ mp3_foldername = "D:/vcs/astro/_DATA2/_mp3/japanese/昭和の歌--演歌系列1/
 
 mp3files = glob.glob(mp3_foldername + "*.mp3")
 index = 0
-print(mp3files)
+#print(mp3files)
 
 # mp3_filename = 'C:/_git/vcs/_1.data/______test_files1/_mp3/02 渡り鳥仁義(1984.07.01-候鳥仁義).mp3'
 mp3_filename = mp3files[index]
@@ -373,7 +405,7 @@ mp3_filename = mp3files[index]
 message = mp3_filename
 main_message1.set(message)
 
-pygame.mixer.init()  # 最初化mixer
+pygame.mixer.init()  # 初始化 mixer
 
 volume = 0.6  # 起始音量
 
@@ -381,38 +413,88 @@ window.protocol("WM_DELETE_WINDOW", exitmp3)
 
 window.mainloop()
 
-sys.exit()
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+"""
+pygame提供的模組
+
+color	提供色彩的設定
+display	顯示螢幕
+event	處理事件
+image	處理圖片
+key	處理鍵盤的按鈕
+mouse	處理滑鼠訊息
+movie	處理視訊播放
+mixer	用來播放聲音
+time	處理時間
+
+pygame.display.set_mode()	建立視窗並初始化
+pygame.display.set_caption()	在標題列顯示文字
+pygame.display.flip()		將Surface全部更新後並顯示於畫面上
+pygame.display.update()		依據軟體做部分畫面的更新
+
+
+"""
+
+
+"""
+# https://gamedevacademy.org/pygame-time-clock-tutorial-complete-guide/
+#Tracking Frames Per Second (FPS)
+
+import pygame
+pygame.init()
+clock = pygame.time.Clock()
+cnt = 0
+while True:
+    clock.tick(60)
+    cnt += 1
+    if cnt % 60 == 0:
+        print('a')
+    if cnt > 1000:
+        break
+
+
+print("程式執行完畢！")
+"""
+
+
+""" 待搬出
+
+mp3_filename = "找到檔案  C:/_git/vcs/_1.data/______test_files1/_mp3\16.監獄風雲.mp3"
+
+#播放mp3檔案, 要先stop, 再load, 再play
+    mixer.music.stop()
+    mixer.music.load(playsong)   
+    mixer.music.play(loops=-1)  
+
+停止
+    mixer.music.stop()
+
+        if not mixer.music.get_busy():
+            mixer.music.load(playsong)
+
+"""
+
+
+
 
 print("------------------------------------------------------------")  # 60個
 
 """
-
-Python 聲音處理 pygame
-
-"""
-
-print("------------------------------------------------------------")  # 60個
-
-
-def playmp3(filename):  # 播放新曲
-    pygame.mixer.music.stop()  # 要先stop, 才不會冒出一個雜音
-    pygame.mixer.music.load(filename)
-    pygame.mixer.music.play(loops=-1)  # -1: 循環播放
-
-
-filename1 = "C:/_git/vcs/_1.data/______test_files1/_mp3/02 渡り鳥仁義(1984.07.01-候鳥仁義).mp3"
-filename2 = "C:/_git/vcs/_1.data/______test_files1/_mp3/16.監獄風雲.mp3"
-filename3 = "C:/_git/vcs/_1.data/______test_files1/_wav/harumi99.wav"
-filename4 = "C:/_git/vcs/_1.data/______test_files1/_mp3/mario.mp3"
-
-pygame.mixer.init()
-
-playmp3(filename2)
-
-# mixer.music.stop()
-
-print("------------------------------------------------------------")  # 60個
-
 pygame.init()
 windowSize = [400, 300]
 pygame.display.set_mode(windowSize)
@@ -420,7 +502,8 @@ pygame.display.set_mode(windowSize)
 
 filename1 = "C:/_git/vcs/_1.data/______test_files1/_mp3/02 渡り鳥仁義(1984.07.01-候鳥仁義).mp3"
 filename2 = "C:/_git/vcs/_1.data/______test_files1/_mp3/16.監獄風雲.mp3"
-filename3 = "C:/_git/vcs/_1.data/______test_files1/_wav/harumi99.wav"
+
+"""
 
 """
 file1 = pygame.mixer.Sound(filename1)
@@ -452,46 +535,11 @@ while not done:
 pygame.quit()
 """
 
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("作業完成")
-print("------------------------------------------------------------")  # 60個
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-pygame.init()
-
+'''
 windowSize = [400, 300]
 pygame.display.set_mode(windowSize)
 
-volume = 0.3
-while pygame.mixer.music.get_busy():#讀取播放狀態
-    pygame.mixer.music.set_volume(volume)
-    print('設定音量 :', volume)
-    volume += 0.1
-    if volume > 1.0:
-        volume = 0.3
-    pygame.time.delay(1000)
-
-#button20
-
 filename = 'C:/_git/vcs/_1.data/______test_files1/_mp3/02 渡り鳥仁義(1984.07.01-候鳥仁義).mp3'
-
-filename = 'test_wave.wav'
 
 pygame.init()
 pygame.mixer.init()
@@ -499,235 +547,18 @@ pygame.mixer.music.load(filename)
 pygame.mixer.music.play()
 
 while pygame.mixer.music.get_busy():#讀取播放狀態, True:正在播放, False:不在播放中
-    pygame.time.delay(1000)
+    pygame.time.delay(10)  # msec
     print('.')
 
 print('結束播放')
+
+# mixer.music.stop()
    
-print("------------------------------------------------------------")  # 60個
-
-filename = 'test_wave.wav'
-
-pygame.mixer.init()
-sound = pygame.mixer.Sound(filename)
-sound.play()
-
-sound = pygame.mixer.Sound(r'C:\Windows\Media\notify.wav')
-sound.play()
-
-
-pygame.mixer.music.load(mp3_filename)
-pygame.mixer.music.play()
-
-print("------------------------------------------------------------")  # 60個
-
-sound = pygame.mixer.Sound(wav_filename)
-sound.play()
-
-pygame.time.wait(int(sound.get_length()) * 1000)
-
-print('結束播放')
-
-print("------------------------------------------------------------")  # 60個
-
-pygame.mixer.init()
-
 filename = "C:/_git/vcs/_1.data/______test_files1/_mp3/16.監獄風雲.mp3"
 sound = pygame.mixer.Sound(filename)
 sound.play(loops=0) # 0: 播放一次
 
 #sound.stop()
 print("程式執行完畢！")
-
-
-
-
-
-
-
-
-
-"""
-pygame提供的模組
-
-color	提供色彩的設定
-display	顯示螢幕
-event	處理事件
-image	處理圖片
-key	處理鍵盤的按鈕
-mouse	處理滑鼠訊息
-movie	處理視訊播放
-mixer	用來播放聲音
-time	處理時間
-
-pygame.display.set_mode()	建立視窗並初始化
-pygame.display.set_caption()	在標題列顯示文字
-pygame.display.flip()		將Surface全部更新後並顯示於畫面上
-pygame.display.update()		依據軟體做部分畫面的更新
-
-
-"""
-
-
-
-"""
-pygame 測試大全
-
-用pygame播放mp3檔案
-用pygame播放wav檔案
-
-"""
-
-mp3_filename = 'C:/_git/vcs/_1.data/______test_files1/_mp3/16.監獄風雲.mp3'
-wav_filename = 'C:/_git/vcs/_1.data/______test_files1/_wav/hit.wav'
-
-print("------------------------------------------------------------")  # 60個
-
-print('用 pygame 播放音效1')
-
-mysound = r'C:\Windows\Media\notify.wav'
-sound = pygame.mixer.Sound(mysound)      # 建立Sound物件
-sound.play()                             # 撥放一次
-pygame.time.delay(3000)                     # 休息3秒
-sound.play(2)                            # 播放3次
-
-time.sleep(5)                               # 程式休息
-
-print("------------------------------------------------------------")  # 60個
-
-print('用 pygame 播放音效2')
-
-mysound = r'C:\Windows\Media\notify.wav'
-pygame.time.delay(1000)                     # 先給聲音初始化工作
-
-sound = pygame.mixer.Sound(mysound)      # 建立Sound物件
-sound.play()                             # 撥放一次
-pygame.time.delay(3000)                     # 休息3秒
-sound.set_volume(0.1)                    # 聲音變小
-sound.play(2)                            # 播放3次
-
-time.sleep(5)                               # 程式休息
-
-print("------------------------------------------------------------")  # 60個
-
-print('用 pygame 播放音效3')
-
-#mywav = r'C:Windows\Media\notify.wav'
-mywav = r'_data\notify.wav'
-
-pygame.time.delay(1000)                     # 先給聲音初始化工作
-pygame.mixer.music.load(mywav)              # 下載 wav 音樂檔案
-pygame.mixer.music.play()                   # 播放 wav 音樂檔案
-
-time.sleep(5)                               # 程式休息
-
-print('用 pygame 播放音效4')
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-
-
-
-""" 新進
-
-# 撥放音樂
-def playmusic():                                        # 處理按撥放紐
-
-    pygame.mixer.music.load('notify.mp3')           # 撥放選項1音樂
-    
-    town = r'C:\Windows\Media\town.mid'
-    pygame.mixer.music.load(town)                   # 撥放選項2音樂
-
-pygame.mixer.music.load(r'C:\Windows\Media\town.mid')
-
-    onestop = r'C:\Windows\Media\onestop.mid'
-    pygame.mixer.music.load(onestop)                # 撥放選項3音樂
-
-# 停止撥放音樂
-def stopmusic():                                        # 處理按結束紐
-
-"""
-
-print("程式執行完畢！")
-
-
-
-# https://gamedevacademy.org/pygame-time-clock-tutorial-complete-guide/
-#Tracking Frames Per Second (FPS)
-
-import pygame
-pygame.init()
-clock = pygame.time.Clock()
-cnt = 0
-while True:
-    clock.tick(60)
-    cnt += 1
-    if cnt % 60 == 0:
-        print('a')
-    if cnt > 1000:
-        break
-
-
-print("程式執行完畢！")
-
-
-
-""" 待搬出
-
-mp3_filename = "找到檔案  C:/_git/vcs/_1.data/______test_files1/_mp3\16.監獄風雲.mp3"
-
-
-#播放mp3檔案, 要先stop, 再load, 再play
-    mixer.music.stop()
-    mixer.music.load(playsong)   
-    mixer.music.play(loops=-1)  
-
-停止
-    mixer.music.stop()
-
-    #暫停
-    mixer.music.pause()
-
-大小聲
-    volume +=0.1
-    if volume>=1.0:
-        volume=1.0
-    mixer.music.set_volume(volume) 
-
-    volume -=0.1
-    if volume<=0.2:
-        volume=0.2
-    mixer.music.set_volume(volume)  
-
-
-        if not mixer.music.get_busy():
-            mixer.music.load(playsong)
-            mixer.music.play(loops=-1) 
-        else:
-            mixer.music.unpause() 
-
-pygame.init()
-pygame.mixer.music.load(mp3_filename)
-
-started = False
-playing = False
-    
-    global playing, started
-    if not playing:
-        if not started:
-            pygame.mixer.music.play(-1)
-            started = True
-        else:
-            pygame.mixer.music.unpause()
-        button.config(text="Pause")
-    else:
-        pygame.mixer.music.pause()
-        button.config(text="Play")
-    playing = not playing
-
-
-"""
+'''
 

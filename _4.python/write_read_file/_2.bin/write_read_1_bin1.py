@@ -37,8 +37,8 @@ print('------------------------------------------------------------')	#60個
 
 print('複製binary檔案')
 
-filename1 = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-filename2 = 'tmp_write_read_bin02_picture1_copied.jpg'
+filename1 = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+filename2 = 'tmp_write_read_bin02_picture1_copied_a.jpg'
 
 tmp = ''
 
@@ -49,18 +49,17 @@ with open(filename1, 'rb') as f1:
 
 print('------------------------------------------------------------')	#60個
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 
-""" many
+print('一次一拜讀取一個圖檔(二進位檔案)')
 inf = open(filename, "rb")    # jpeg圖檔就是二進位檔案
 
 byte = inf.read(1)               # 一次讀一個byte
 while byte:
-    print(byte)
+    #print(byte)
     byte = inf.read(1)           # 繼續讀下一個byte
 
 inf.close()
-"""
 
 print("------------------------------------------------------------")  # 60個
 
@@ -71,7 +70,7 @@ def b4_2_int(bytes1):
 def b2_2_int(bytes1):
     return (bytes1[0] | bytes1[1]<<8)
 
-filename = '../data/Medrust3.bmp'
+filename = '../../_data/logo1.bmp'
 infile = open(filename, 'rb')
 
 # 'B' 'M'
@@ -120,7 +119,10 @@ print('------------------------------------------------------------')	#60個
 """
 import base64
 
-with open('../data/mm.jpg', 'rb') as f:
+filename1 = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+filename2 = 'tmp_write_read_bin02_picture1_copied_b.jpg'
+
+with open(filename1, 'rb') as f:
     data = f.read()
     # print(type(data))
     # print(data)
@@ -128,15 +130,13 @@ with open('../data/mm.jpg', 'rb') as f:
     # 将图片处理成BASE-64编码
     print(base64.b64encode(data))
 
-filename = 'tmp_write_read_bin04_girl.jpg'
-
-with open(filename, 'wb') as f:
+with open(filename2, 'wb') as f:
     f.write(data)
 print('写入完成!')
 
 print('------------------------------------------------------------')	#60個
 
-# BMP解析程式
+print("BMP解析程式")
 
 # Little Endian的 4 bytes處理函數
 def b4_2_int(b4):
@@ -149,7 +149,8 @@ def b2_2_int(b2):
     ii = b2[0] | b2[1]<<8
     return ii
 
-filename = '../data/Lenna.bmp'       # 786554 bytes, 512x512
+filename = '../../_data/logo1.bmp'
+
 infile = open(filename, 'rb')
 
 # 標頭識別碼：'B'和'M'

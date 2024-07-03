@@ -291,107 +291,6 @@ window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-from PIL import ImageTk, Image
-
-window = tk.Tk()
-window.geometry("600x800")
-window.title("Label 4")
-
-filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
-img = ImageTk.PhotoImage(Image.open(filename))
-label1 = tk.Label(window, image=img).pack()
-
-
-print("Label使用圖片")
-filename = "C:/_git/vcs/_1.data/______test_files1/__pic/_gif/cloud.gif"
-image = tk.PhotoImage(file=filename)
-tk.Label(window, image=image).place(x=0, y=150, width=150, height=150)
-
-print("------------------------------------------------------------")  # 60個
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-"""
-使用 label 顯示圖片 jpg + gif
-"""
-
-from PIL import Image, ImageTk
-
-window = tk.Tk()
-window.geometry("700x900")
-window.title("Label 5")
-
-filename = "C:/_git/vcs/_1.data/______test_files1/__pic/_書畫字圖/_peony3/原來奼紫嫣紅開遍.jpg"
-im = Image.open(filename)
-
-"""
-#case 1 bitmap image
-# bitmap image
-image = ImageTk.BitmapImage(im, foreground = "white")
-tk.Label(window, image = image, bg = "blue", bd = 0).pack()
-"""
-
-# case 2 picture image
-# photo image
-image = ImageTk.PhotoImage(im)
-
-label1 = tk.Label(window, text="多人圖片", image=image, bd=20, bg="red")
-label1.pack()
-# tk.Label(window, text = '多人圖片', image = image, bd = 0, bg = 'red', width = 1200).pack()
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
-    fill=tk.X, padx=5, pady=5
-)  # 分隔線
-print("------------------------------------------------------------")  # 60個
-
-print("用 Label 顯示一張圖片")
-filename = "C:/_git/vcs/_1.data/______test_files1/__pic/_書畫字圖/_peony3/原來奼紫嫣紅開遍.jpg"
-
-image2 = Image.open(filename)
-image2 = ImageTk.PhotoImage(image2)
-label2 = tk.Label(window, image=image2)  # 用Label顯示圖片
-label2.image = image
-label2.pack()
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
-    fill=tk.X, padx=5, pady=5
-)  # 分隔線
-print("------------------------------------------------------------")  # 60個
-
-import random
-
-
-# Choose four random cards
-def shuffle():
-    random.shuffle(imageList)
-    for i in range(4):
-        labelList[i]["image"] = imageList[i]
-
-
-imageList = []  # Store images for cards
-for i in range(1, 53):
-    imageList.append(
-        tk.PhotoImage(
-            file="C:/_git/vcs/_1.data/______test_files1/__pic/_poker_card/card/"
-            + str(i)
-            + ".gif"
-        )
-    )
-
-frame = tk.Frame(window)  # Hold four labels for cards
-frame.pack()
-
-labelList = []  # A list of four labels
-for i in range(4):
-    labelList.append(tk.Label(frame, image=imageList[i]))
-    labelList[i].pack(side=tk.LEFT)
-
-tk.Button(window, text="任選四張牌", command=shuffle).pack()
-
-window.mainloop()
-
 print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
@@ -635,10 +534,6 @@ message.set("播放歌曲：")
 label1 = tk.Label(window, textvariable=message,fg="blue",font=("標楷體",10))
 label1.pack()
 
-label2 = tk.Label(window, text="\nMP3播放程式", fg="blue",font=("標楷體",12))
-label2.pack()
-
-
 window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
@@ -824,6 +719,13 @@ cal = tk.Label(window, text="Calender",bg='grey',font=("times", 28, "bold"))
 
 
 """
+
+
+
+
+
+label2 = tk.Label(window, text="\nMP3播放程式", fg="blue",font=("標楷體",12))
+label2.pack()
 
 
 

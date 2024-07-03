@@ -43,7 +43,7 @@ image2 遮罩過後
 """
 import cv2
 
-#測試圖片
+# 測試圖片
 filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
 filename = "C:/_git/vcs/_4.python/_data/eq1.bmp"
 filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
@@ -81,7 +81,7 @@ filename = "C:/_git/vcs/_4.python/_data/ims01.bmp"
 filename = "C:/_git/vcs/_4.python/_data/eq1.bmp"  # 560X400
 
 print("一張彩圖")
-print('彩圖 image0')
+print("彩圖 image0")
 # 檔案 => cv2影像
 image0 = cv2.imread(filename)
 
@@ -90,10 +90,12 @@ plt.title("原圖")
 
 plt.show()
 
-print("測試 01 ravel() 的用法----------------------------------------------------------")  # 60個
+print(
+    "測試 01 ravel() 的用法----------------------------------------------------------"
+)  # 60個
 
 print("一張彩圖的RGB與灰度的統計資料1")
-      
+
 print("直接把影像的 灰階值 或 RGB值 用直方圖統計出來")
 
 plt.figure(
@@ -106,11 +108,11 @@ plt.figure(
     frameon=True,
 )
 
-print('彩圖 image0')
+print("彩圖 image0")
 # 檔案 => cv2影像
 image0 = cv2.imread(filename)
 
-print('灰階 image1')
+print("灰階 image1")
 # 檔案 => cv2影像 => 灰階
 image1 = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
 
@@ -124,21 +126,21 @@ plt.title("灰階")
 
 plt.subplot(223)
 b, g, r = cv2.split(image0)
-bb = b.ravel()  #拉成一維
-gg = g.ravel()  #拉成一維
-rr = r.ravel()  #拉成一維
-plt.hist(bb, num_bins, [0, 256], color="b", label = 'B', alpha = 0.5)
-plt.hist(gg, num_bins, [0, 256], color="g", label = 'G', alpha = 0.5)
-plt.hist(rr, num_bins, [0, 256], color="r", label = 'R', alpha = 1.0)
+bb = b.ravel()  # 拉成一維
+gg = g.ravel()  # 拉成一維
+rr = r.ravel()  # 拉成一維
+plt.hist(bb, num_bins, [0, 256], color="b", label="B", alpha=0.5)
+plt.hist(gg, num_bins, [0, 256], color="g", label="G", alpha=0.5)
+plt.hist(rr, num_bins, [0, 256], color="r", label="R", alpha=1.0)
 
 cc = image1.ravel()  # 拉成一維
-plt.hist(cc, num_bins, [0, 256], color="gray", label = '灰階', alpha = 0.5)
+plt.hist(cc, num_bins, [0, 256], color="gray", label="灰階", alpha=0.5)
 
 plt.xlim(0 - 10, 256 + 10)  # 設定 x 軸座標範圍
 plt.ylim(0, 8000)  # 設定 y 軸座標範圍
 plt.title("原圖的直方圖 RGB值 3通道分開畫")
 
-#plt.title("灰階後的直方圖 灰階值 變成1通道")
+# plt.title("灰階後的直方圖 灰階值 變成1通道")
 
 print("使用 calcHist")
 
@@ -150,8 +152,8 @@ print(hist.size)
 
 plt.subplot(224)
 plt.plot(hist, color="b", label="plot", lw=2)
-plt.plot(np.arange(0, 256), hist.ravel(), color='gold', label="plot", lw=2) #同上
-plt.bar(np.arange(0, 256), hist.ravel(), color='gray', label="bar", lw=2) # 要這麼寫
+plt.plot(np.arange(0, 256), hist.ravel(), color="gold", label="plot", lw=2)  # 同上
+plt.bar(np.arange(0, 256), hist.ravel(), color="gray", label="bar", lw=2)  # 要這麼寫
 plt.xlim(0 - 10, 256 + 10)  # 設定 x 軸座標範圍
 plt.ylim(0, 8000)  # 設定 y 軸座標範圍
 plt.title("用 plot 和 bar 顯示 calcHist 的結果")
@@ -166,12 +168,12 @@ print("一張彩圖的RGB與灰度的統計資料2")
 # 可以用 OpenCV 的 calcHist 函數分別計算統計值，
 # 並畫出 RGB 三種顏色的分佈圖
 
-print('彩圖 image0')
+print("彩圖 image0")
 # 檔案 => cv2影像(彩圖)
 image0 = cv2.imread(filename)
 
 # ---------使用cv2.calcHist()函數繪圖----
-#這個函數可以傳入彩圖，因為它還有一個channel參數，就把通道分開了
+# 這個函數可以傳入彩圖，因為它還有一個channel參數，就把通道分開了
 # 計算直方圖每個 bin 的數值, 將彩圖的RGB通道分離出來
 
 # 生成圖像之直方圖, 256束, 彩圖之第0通道
@@ -183,14 +185,14 @@ hist_r = cv2.calcHist([image0], [2], None, [256], [0, 256])
 
 # RGB畫在一起
 # 使用 ravel 將所有的像素資料轉為一維的陣列
-plt.hist(image0.ravel(), num_bins, [0, 256], color="gray", alpha = 0.3, density=False)
-#plt.hist(image0.ravel(), bins = num_bins, color="gray", alpha = 0.3, density=False)
+plt.hist(image0.ravel(), num_bins, [0, 256], color="gray", alpha=0.3, density=False)
+# plt.hist(image0.ravel(), bins = num_bins, color="gray", alpha = 0.3, density=False)
 
 # RGB分開畫
 # 畫出 RGB 三種顏色的分佈圖
-plt.plot(hist_r, color="r", label="R", lw =3)
-plt.plot(hist_g, color="g", label="G", lw =2)
-plt.plot(hist_b, color="b", label="B", lw =1)
+plt.plot(hist_r, color="r", label="R", lw=3)
+plt.plot(hist_g, color="g", label="G", lw=2)
+plt.plot(hist_b, color="b", label="B", lw=1)
 
 plt.xlim(0 - 10, 256 + 10)  # 設定 x 軸座標範圍
 plt.ylim(0, 8000)  # 設定 y 軸座標範圍
@@ -203,7 +205,7 @@ print("測試 04 calcHist-------------------------------------------------------
 print("一張彩圖的RGB與灰度的統計資料3 使用mask")
 print("使用mask, 因為目前mask只能用1維的 所以圖片要先轉成灰階")
 
-print('灰階 image1')
+print("灰階 image1")
 # 檔案 => cv2影像 => 灰階
 image1 = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
 
@@ -232,8 +234,8 @@ hist1 = cv2.calcHist([image1], [0], None, [256], [0, 256])
 # 灰階 部分圖
 hist2 = cv2.calcHist([image1], [0], mask, [256], [0, 256])
 
-plt.plot(hist1, "r", label="全圖", lw =3)
-plt.plot(hist2, "g", label="部分圖", lw =2)
+plt.plot(hist1, "r", label="全圖", lw=3)
+plt.plot(hist2, "g", label="部分圖", lw=2)
 
 plt.xlim(0 - 10, 256 + 10)  # 設定 x 軸座標範圍
 plt.legend(loc="best")
@@ -254,7 +256,7 @@ plt.figure(
 
 print("使用mask, 因為目前mask只能用1維的 所以圖片要先轉成灰階")
 
-print('灰階 image1')
+print("灰階 image1")
 # 檔案 => cv2影像 => 灰階
 image1 = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
 
@@ -289,15 +291,17 @@ plt.subplot(223)
 plt.imshow(cv2.cvtColor(masked_gray, cv2.COLOR_BGR2RGB), "gray")
 
 plt.subplot(224)
-plt.plot(hist_full, "r", label="全圖", lw =3)
-plt.plot(hist_mask, "g", label="部分圖", lw =2)
+plt.plot(hist_full, "r", label="全圖", lw=3)
+plt.plot(hist_mask, "g", label="部分圖", lw=2)
 
 plt.xlim(0 - 10, 256 + 10)  # 設定 x 軸座標範圍
 plt.legend(loc="best")
 
 plt.show()
 
-print("測試 06 將一圖分解成 藍 綠 紅 三通道------------------------------------------------------------")  # 60個
+print(
+    "測試 06 將一圖分解成 藍 綠 紅 三通道------------------------------------------------------------"
+)  # 60個
 
 plt.figure(
     num="將一圖分解成 藍 綠 紅 三通道",
@@ -309,7 +313,7 @@ plt.figure(
     frameon=True,
 )
 
-print('彩圖 image0')
+print("彩圖 image0")
 # 檔案 => cv2影像
 image0 = cv2.imread(filename)
 
@@ -348,11 +352,11 @@ plt.show()
 
 print("測試 07 calcHist----------------------------------------------------------")  # 60個
 
-print('彩圖 image0')
+print("彩圖 image0")
 # 檔案 => cv2影像
 image0 = cv2.imread(filename)
 
-print('灰階 image1')
+print("灰階 image1")
 # 轉灰階
 image1 = cv2.cvtColor(image0, cv2.COLOR_BGR2GRAY)
 
@@ -368,10 +372,10 @@ hist_r = cv2.calcHist([image0], [2], None, [256], [0, 256])
 # 生成圖像之直方圖, 256束, 灰階圖只有第0通道
 hist_gray = cv2.calcHist([image1], [0], None, [256], [0, 256])
 
-plt.plot(hist_gray, color="gray", label="灰", lw =3)
-plt.plot(hist_r, color="r", label="R", lw =3)
-plt.plot(hist_g, color="g", label="G", lw =2)
-plt.plot(hist_b, color="b", label="B", lw =1)
+plt.plot(hist_gray, color="gray", label="灰", lw=3)
+plt.plot(hist_r, color="r", label="R", lw=3)
+plt.plot(hist_g, color="g", label="G", lw=2)
+plt.plot(hist_b, color="b", label="B", lw=1)
 
 plt.plot(hist_gray, color="gray")
 plt.xlim(0 - 10, 256 + 10)  # 設定 x 軸座標範圍
@@ -384,7 +388,7 @@ print("測試 08 calcHist-------------------------------------------------------
 
 # 使用 mask 繪製直方圖
 
-print('彩圖 image0')
+print("彩圖 image0")
 # 檔案 => cv2影像
 image0 = cv2.imread(filename)
 
@@ -426,9 +430,9 @@ plt.title("原圖mask後")
 
 plt.subplot(223)
 # 畫出 RGB 三種顏色的分佈圖
-plt.plot(hist_r, color="r", label="R", lw =3)
-plt.plot(hist_g, color="g", label="G", lw =2)
-plt.plot(hist_b, color="b", label="B", lw =1)
+plt.plot(hist_r, color="r", label="R", lw=3)
+plt.plot(hist_g, color="g", label="G", lw=2)
+plt.plot(hist_b, color="b", label="B", lw=1)
 plt.xlim(0 - 10, 256 + 10)  # 設定 x 軸座標範圍
 
 plt.subplot(224)
@@ -446,7 +450,7 @@ print("測試 09 calcHist-------------------------------------------------------
 
 filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
 
-print('彩圖 image0')
+print("彩圖 image0")
 # 檔案 => cv2影像
 image0 = cv2.imread(filename)
 
@@ -454,23 +458,29 @@ image0 = cv2.imread(filename)
 bgr_planes = cv2.split(image0)
 
 hist_r = cv2.calcHist([image0], [2], None, [256], [0, 256])
-histRange = (0, 256) # the upper boundary is exclusive
+histRange = (0, 256)  # the upper boundary is exclusive
 accumulate = False
 
 histSize = 256
 # 生成圖像之直方圖, 256束, B bgr_planes 之 第0通道
-b_hist = cv2.calcHist(bgr_planes, [0], None, [histSize], histRange, accumulate=accumulate)
+b_hist = cv2.calcHist(
+    bgr_planes, [0], None, [histSize], histRange, accumulate=accumulate
+)
 
 # 生成圖像之直方圖, 256束, G bgr_planes 之 第1通道
-g_hist = cv2.calcHist(bgr_planes, [1], None, [histSize], histRange, accumulate=accumulate)
+g_hist = cv2.calcHist(
+    bgr_planes, [1], None, [histSize], histRange, accumulate=accumulate
+)
 
 # 生成圖像之直方圖, 256束, R bgr_planes 之 第2通道
-r_hist = cv2.calcHist(bgr_planes, [2], None, [histSize], histRange, accumulate=accumulate)
+r_hist = cv2.calcHist(
+    bgr_planes, [2], None, [histSize], histRange, accumulate=accumulate
+)
 
 ## [Draw the histograms for B, G and R]
 hist_w = 512
 hist_h = 400
-bin_w = int(round( hist_w/histSize ))
+bin_w = int(round(hist_w / histSize))
 
 histImage = np.zeros((hist_h, hist_w, 3), dtype=np.uint8)
 ## [Draw the histograms for B, G and R]
@@ -483,15 +493,27 @@ cv2.normalize(r_hist, r_hist, alpha=0, beta=hist_h, norm_type=cv2.NORM_MINMAX)
 
 ## [Draw for each channel]
 for i in range(1, histSize):
-    cv2.line(histImage, ( bin_w*(i-1), hist_h - int(b_hist[i-1]) ),
-            ( bin_w*(i), hist_h - int(b_hist[i]) ),
-            ( 255, 0, 0), thickness=2)
-    cv2.line(histImage, ( bin_w*(i-1), hist_h - int(g_hist[i-1]) ),
-            ( bin_w*(i), hist_h - int(g_hist[i]) ),
-            ( 0, 255, 0), thickness=2)
-    cv2.line(histImage, ( bin_w*(i-1), hist_h - int(r_hist[i-1]) ),
-            ( bin_w*(i), hist_h - int(r_hist[i]) ),
-            ( 0, 0, 255), thickness=2)
+    cv2.line(
+        histImage,
+        (bin_w * (i - 1), hist_h - int(b_hist[i - 1])),
+        (bin_w * (i), hist_h - int(b_hist[i])),
+        (255, 0, 0),
+        thickness=2,
+    )
+    cv2.line(
+        histImage,
+        (bin_w * (i - 1), hist_h - int(g_hist[i - 1])),
+        (bin_w * (i), hist_h - int(g_hist[i])),
+        (0, 255, 0),
+        thickness=2,
+    )
+    cv2.line(
+        histImage,
+        (bin_w * (i - 1), hist_h - int(r_hist[i - 1])),
+        (bin_w * (i), hist_h - int(r_hist[i])),
+        (0, 0, 255),
+        thickness=2,
+    )
 ## [Draw for each channel]
 
 plt.subplot(121)
@@ -506,7 +528,9 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-print("測試 10 equalizeHist----------------------------------------------------------")  # 60個
+print(
+    "測試 10 equalizeHist----------------------------------------------------------"
+)  # 60個
 
 plt.figure(
     num="直方圖均衡化處理",
@@ -521,7 +545,7 @@ plt.figure(
 # 影像分析工具
 # 影像直方圖
 
-print('灰階 image1')
+print("灰階 image1")
 # 檔案 => cv2影像 => 灰階
 image1 = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
 
@@ -535,7 +559,7 @@ plt.title("影像直方圖")
 
 # 直方圖均衡化處理
 
-print('灰階 image1')
+print("灰階 image1")
 # 檔案 => cv2影像 => 灰階
 image1 = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
 equa = cv2.equalizeHist(image1)  # 直方圖均衡化處理, 只能處理灰階圖
@@ -552,7 +576,9 @@ plt.title("均衡化後的灰度直方圖分布")
 
 plt.show()
 
-print("測試 11 equalizeHist------------------------------------------------------------")  # 60個
+print(
+    "測試 11 equalizeHist------------------------------------------------------------"
+)  # 60個
 
 plt.figure(
     num="直方圖均衡化處理",
@@ -564,7 +590,7 @@ plt.figure(
     frameon=True,
 )
 
-print('灰階 image1')
+print("灰階 image1")
 # 檔案 => cv2影像 => 灰階
 image1 = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
 
@@ -582,18 +608,20 @@ plt.title("均衡化之圖")
 # -----------顯示均衡化前後的直方圖---------------
 
 plt.subplot(223)
-plt.hist(image1.ravel(), num_bins, color="r") #拉成一維
+plt.hist(image1.ravel(), num_bins, color="r")  # 拉成一維
 plt.xlim(0 - 10, 256 + 10)  # 設定 x 軸座標範圍
 plt.title("原圖的直方圖")
 
 plt.subplot(224)
-plt.hist(equ.ravel(), num_bins, color="g") #拉成一維
+plt.hist(equ.ravel(), num_bins, color="g")  # 拉成一維
 plt.xlim(0 - 10, 256 + 10)  # 設定 x 軸座標範圍
 plt.title("均衡化之圖的直方圖")
 
 plt.show()
 
-print("測試 12 equalizeHist------------------------------------------------------------")  # 60個
+print(
+    "測試 12 equalizeHist------------------------------------------------------------"
+)  # 60個
 
 plt.figure(
     num="直方圖均衡化處理",
@@ -605,25 +633,27 @@ plt.figure(
     frameon=True,
 )
 
-print('灰階 image1')
+print("灰階 image1")
 # 檔案 => cv2影像 => 灰階
 image1 = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
 
 equ = cv2.equalizeHist(image1)  # 直方圖均衡化處理, 只能處理灰階圖
 
 plt.subplot(121)
-plt.hist(image1.ravel(), num_bins, color="r") #拉成一維
+plt.hist(image1.ravel(), num_bins, color="r")  # 拉成一維
 plt.xlim(0 - 10, 256 + 10)  # 設定 x 軸座標範圍
 
 plt.subplot(122)
-plt.hist(equ.ravel(), num_bins, color="g") #拉成一維
+plt.hist(equ.ravel(), num_bins, color="g")  # 拉成一維
 plt.xlim(0 - 10, 256 + 10)  # 設定 x 軸座標範圍
 
 plt.show()
 
-print("測試 13 equalizeHist----------------------------------------------------------")  # 60個
+print(
+    "測試 13 equalizeHist----------------------------------------------------------"
+)  # 60個
 
-print('彩圖 image0')
+print("彩圖 image0")
 # 檔案 => cv2影像
 image0 = cv2.imread(filename)
 
@@ -664,16 +694,18 @@ plt.plot(hist_equ)
 plt.xlim(0 - 10, 256 + 10)  # 設定 x 軸座標範圍
 
 plt.subplot(223)
-plt.hist(image1.ravel(), num_bins, color="r")#拉成一維
+plt.hist(image1.ravel(), num_bins, color="r")  # 拉成一維
 plt.xlim(0 - 10, 256 + 10)  # 設定 x 軸座標範圍
 
 plt.subplot(224)
-plt.hist(equ.ravel(), num_bins, color="r")#拉成一維
+plt.hist(equ.ravel(), num_bins, color="r")  # 拉成一維
 plt.xlim(0 - 10, 256 + 10)  # 設定 x 軸座標範圍
 
 plt.show()
 
-print("測試 14 equalizeHist----------------------------------------------------------")  # 60個
+print(
+    "測試 14 equalizeHist----------------------------------------------------------"
+)  # 60個
 
 # 檔案 => cv2影像 => 灰階
 image1 = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
@@ -701,7 +733,9 @@ plt.title("直方圖均衡化處理")
 
 plt.show()
 
-print("測試 15 calcHist equalizeHist----------------------------------------------------------")  # 60個
+print(
+    "測試 15 calcHist equalizeHist----------------------------------------------------------"
+)  # 60個
 
 """
 opencv之影像直方圖均衡化 直方圖均衡化處理 cv2.equalizeHist
@@ -715,7 +749,7 @@ range為像素值範圍，為[0,255]
 返回值為hist，直方圖
 """
 
-print('灰階 image1')
+print("灰階 image1")
 # 檔案 => cv2影像 => 灰階
 image1 = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
 
@@ -779,30 +813,30 @@ print("------------------------------------------------------------")  # 60個
 
 ESC = 27
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 print("把 直方圖均衡化處理 套用在webcam上 黑白")
 
 cap = cv2.VideoCapture(0)
 
 if not cap.isOpened():
-    print('開啟攝影機失敗')
+    print("開啟攝影機失敗")
     sys.exit()
 else:
-    print('Video device opened')
+    print("Video device opened")
 
 while True:
-    ret, frame = cap.read()   # 從攝影機擷取一張影像
+    ret, frame = cap.read()  # 從攝影機擷取一張影像
 
     if ret == False:
-      print('無影像, 離開')
-      break
+        print("無影像, 離開")
+        break
 
     # 原圖
-    cv2.imshow('WebCam1', frame)
+    cv2.imshow("WebCam1", frame)
 
     gray1 = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-    cv2.imshow('WebCam2', gray1)
+    cv2.imshow("WebCam2", gray1)
 
     # 裁切圖片
     # 裁切區域的 x 與 y 座標（左上角）
@@ -811,12 +845,12 @@ while True:
     w, h = 640 - x_st * 2, 480 - y_st * 2
 
     gray2 = gray1[y_st : y_st + h, x_st : x_st + w]
-    cv2.imshow('WebCam3', gray2)
+    cv2.imshow("WebCam3", gray2)
 
     gray3 = cv2.equalizeHist(gray2)
-    cv2.imshow('WebCam4', gray3)
+    cv2.imshow("WebCam4", gray3)
 
-    k = cv2.waitKey(1) # 等待按鍵輸入
+    k = cv2.waitKey(1)  # 等待按鍵輸入
     if k == ESC:
         break
 
@@ -830,20 +864,20 @@ print("把 直方圖均衡化處理 套用在webcam上 彩色")
 cap = cv2.VideoCapture(0)
 
 if not cap.isOpened():
-    print('開啟攝影機失敗')
+    print("開啟攝影機失敗")
     sys.exit()
 else:
-    print('Video device opened')
+    print("Video device opened")
 
 while True:
-    ret, frame = cap.read()   # 從攝影機擷取一張影像
+    ret, frame = cap.read()  # 從攝影機擷取一張影像
 
     if ret == False:
-      print('無影像, 離開')
-      break
+        print("無影像, 離開")
+        break
 
     # 原圖
-    cv2.imshow('WebCam1', frame)
+    cv2.imshow("WebCam1", frame)
     # 裁切圖片
     # 裁切區域的 x 與 y 座標（左上角）
     x_st, y_st = 100, 100
@@ -859,10 +893,10 @@ while True:
     rr = cv2.equalizeHist(r)
 
     frame3 = cv2.merge([bb, gg, rr])
-    
-    cv2.imshow('WebCam4', frame3)
 
-    k = cv2.waitKey(1) # 等待按鍵輸入
+    cv2.imshow("WebCam4", frame3)
+
+    k = cv2.waitKey(1)  # 等待按鍵輸入
     if k == ESC:
         break
 
