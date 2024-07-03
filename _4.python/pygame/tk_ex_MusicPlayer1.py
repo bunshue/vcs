@@ -71,7 +71,7 @@ def playmp3():  # 播放
     flag_new_mp3_file = False
 
 
-def playNewmp3a():  # 播放新曲
+def playNewmp3a():  # 播放mp3檔案, 要先stop, 再load, 再play
     global mp3_filename
     pygame.mixer.music.stop() # 停止播放, 要先stop, 才不會冒出一個雜音
     pygame.mixer.music.load(mp3_filename)
@@ -198,6 +198,7 @@ def button20Click():
 def button21Click():
     print('你按了button21 測試1 wave / midi')
 
+    """
     print('播放wav檔')
     filename = 'C:/_git/vcs/_1.data/______test_files1/_wav/hit.wav'
     filename = 'test_wave.wav'
@@ -208,6 +209,7 @@ def button21Click():
     sound = pygame.mixer.Sound(filename)      # 建立Sound物件
     print('此檔案之長度 :', sound.get_length(), '秒')
     sound.play()#播放一次
+    #sound.play(loops=0) # 0: 播放一次
     #sound.play(5)#播放N次
 
     pygame.time.wait(int(sound.get_length()) * 1000)
@@ -218,18 +220,14 @@ def button21Click():
     #print('此檔案之長度 :', pygame.mixer.music.get_length(), '秒') 無
     pygame.mixer.music.play()
 
-
     """
     mymidi = r'C:\Windows\Media\town.mid'
+    #mymidi = r'C:\Windows\Media\onestop.mid'
+    
     pygame.mixer.music.load(mymidi)
-    mymidi = r'_data\town.mid'
-    pygame.time.delay(10)                     # 先給聲音初始化工作 msec
-    pygame.mixer.music.load(mymidi)             # 下載 midi 音樂檔案
-    pygame.mixer.music.play()                   # 播放 midi 音樂檔案
+    
+    pygame.mixer.music.play()
 
-    onestop = r'C:\Windows\Media\onestop.mid'
-    pygame.mixer.music.load(onestop)                # 撥放選項3音樂
-    """
     print('完成')
 
 def button22Click():
@@ -312,7 +310,7 @@ def setVolume(val):
     volume = float(scale1.get())
     pygame.mixer.music.set_volume(volume / 100)
 
-scale1 = tk.Scale(window, from_=100, to=0, command=setVolume)
+scale1 = tk.Scale(window, from_=100, to=0, command=setVolume, length=200)
 scale1.place(x=x_st-70 + dx * 0, y=y_st + dy * 0)
 scale1.set(100)
 
@@ -422,125 +420,9 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-
-"""
-pygame提供的模組
-
-color	提供色彩的設定
-display	顯示螢幕
-event	處理事件
-image	處理圖片
-key	處理鍵盤的按鈕
-mouse	處理滑鼠訊息
-movie	處理視訊播放
-mixer	用來播放聲音
-time	處理時間
-
-pygame.display.set_mode()	建立視窗並初始化
-pygame.display.set_caption()	在標題列顯示文字
-pygame.display.flip()		將Surface全部更新後並顯示於畫面上
-pygame.display.update()		依據軟體做部分畫面的更新
-
-
-"""
-
-
-"""
-# https://gamedevacademy.org/pygame-time-clock-tutorial-complete-guide/
-#Tracking Frames Per Second (FPS)
-
-import pygame
-pygame.init()
-clock = pygame.time.Clock()
-cnt = 0
-while True:
-    clock.tick(60)
-    cnt += 1
-    if cnt % 60 == 0:
-        print('a')
-    if cnt > 1000:
-        break
-
-
-print("程式執行完畢！")
-"""
-
-
-""" 待搬出
-
-mp3_filename = "找到檔案  C:/_git/vcs/_1.data/______test_files1/_mp3\16.監獄風雲.mp3"
-
-#播放mp3檔案, 要先stop, 再load, 再play
-    mixer.music.stop()
-    mixer.music.load(playsong)   
-    mixer.music.play(loops=-1)  
-
-停止
-    mixer.music.stop()
-
-        if not mixer.music.get_busy():
-            mixer.music.load(playsong)
-
-"""
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
 """
-pygame.init()
-windowSize = [400, 300]
-pygame.display.set_mode(windowSize)
-
-
-filename1 = "C:/_git/vcs/_1.data/______test_files1/_mp3/02 渡り鳥仁義(1984.07.01-候鳥仁義).mp3"
-filename2 = "C:/_git/vcs/_1.data/______test_files1/_mp3/16.監獄風雲.mp3"
-
-"""
-
-"""
-file1 = pygame.mixer.Sound(filename1)
-file2 = pygame.mixer.Sound(filename2)
-file3 = pygame.mixer.Sound(filename3)
-
-done = False
-while not done:
-    keys = pygame.key.get_pressed()
-
-    if keys[pygame.K_1]:
-        file1.play()
-        file2.stop()
-        file3.stop()
-
-    if keys[pygame.K_2]:
-        file1.stop()
-        file2.play()
-        file3.stop()
-
-    if keys[pygame.K_3]:
-        file1.stop()
-        file2.stop()
-        file3.play()
-
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            done = True
-pygame.quit()
-"""
-
-'''
-windowSize = [400, 300]
-pygame.display.set_mode(windowSize)
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/_mp3/02 渡り鳥仁義(1984.07.01-候鳥仁義).mp3'
-
 pygame.init()
 pygame.mixer.init()
 pygame.mixer.music.load(filename)
@@ -552,13 +434,5 @@ while pygame.mixer.music.get_busy():#讀取播放狀態, True:正在播放, Fals
 
 print('結束播放')
 
-# mixer.music.stop()
-   
-filename = "C:/_git/vcs/_1.data/______test_files1/_mp3/16.監獄風雲.mp3"
-sound = pygame.mixer.Sound(filename)
-sound.play(loops=0) # 0: 播放一次
-
-#sound.stop()
-print("程式執行完畢！")
-'''
+"""
 

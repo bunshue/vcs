@@ -9,6 +9,27 @@ pygame 測試大全
 
 """
 
+
+"""
+pygame提供的模組
+
+color	提供色彩的設定
+display	顯示螢幕
+event	處理事件
+image	處理圖片
+key	處理鍵盤的按鈕
+mouse	處理滑鼠訊息
+movie	處理視訊播放
+mixer	用來播放聲音
+time	處理時間
+
+pygame.display.set_mode()	建立視窗並初始化
+pygame.display.set_caption()	在標題列顯示文字
+pygame.display.flip()		將Surface全部更新後並顯示於畫面上
+pygame.display.update()		依據軟體做部分畫面的更新
+
+"""
+
 import sys
 import time
 import math
@@ -1037,6 +1058,54 @@ pygame.quit()  #關閉繪圖視窗
 
 print("------------------------------------------------------------")  # 60個
 
+
+
+
+"""
+# https://gamedevacademy.org/pygame-time-clock-tutorial-complete-guide/
+#Tracking Frames Per Second (FPS)
+
+import pygame
+pygame.init()
+clock = pygame.time.Clock()
+cnt = 0
+while True:
+    clock.tick(60)
+    cnt += 1
+    if cnt % 60 == 0:
+        print('a')
+    if cnt > 1000:
+        break
+
+
+print("程式執行完畢！")
+"""
+
+
+print('pygame 讀取 鍵盤輸入')
+
+pygame.init()
+
+windowSize = [400, 300]
+pygame.display.set_mode(windowSize)
+
+done = False
+while not done:
+    keys = pygame.key.get_pressed()
+
+    if keys[pygame.K_1]:
+        print('你按了鍵盤 1')
+
+    if keys[pygame.K_2]:
+        print('你按了鍵盤 2')
+
+    if keys[pygame.K_3]:
+        print('你按了鍵盤 3')
+
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            done = True
+pygame.quit()
 
 
         
