@@ -44,42 +44,29 @@ f = open(filename, "w")
 後讀
 # 使用with, 不需要f.close()
 
-with open(filename, "rt", encoding= "utf8") as f:
-with open(filename, "r", encoding="UTF-8-sig") as f:
-with open(filename, "r", encoding="UTF-8") as f:
 with open(filename, "r") as f:
 with open(filename) as f:  # 用預設mode=r開啟檔案,傳回檔案物件f
-with open(filename, "r", encoding ="cp950") as f:
-with open(filename, "r", encoding ="UTF-8-sig") as f:
+with open(filename, mode="r") as f:
+with open(filename, "rt", encoding="utf8") as f:
+with open(filename, "r", encoding="UTF-8-sig") as f:
+with open(filename, "r", encoding="UTF-8") as f:
 with open(filename, "r", encoding="cp950") as f:
 with open(filename, encoding="utf-8") as f:
 with open(filename, encoding="utf-8-sig") as f:
 
-with open(filename, mode="r") as f:
-
-with open(filename, "r") as f:
-
 # 不使用with
-f = open(filename, "r+", encoding="utf8")
+f = open(filename)
+f = open(filename, "r")
+f = open(filename, "rt")
 f = open(filename, "r+")
+f = open(filename, "r+", encoding="utf8")
 f = open(filename, "r", encoding="utf8")
 f = open(filename, "r", encoding="UTF-8")
 f = open(filename, "r", encoding="UTF-8-sig")
-f = open(filename, encoding="cp950")
 f = open(filename, "r", encoding="cp950")
 f = open(filename, "r+", encoding="utf8")
 f = open(filename, encoding="utf-8")
-f = open(filename)
-f = open(filename, "r")
-f = open(filename, "r", encoding="utf8")
-f = open(filename, "r", encoding="utf8")
-f = open(filename, "r", encoding="UTF-8")
-f = open(filename, "r", encoding="utf8")
-f = open(filename, "r", encoding="UTF-8")
-f = open(filename, "r", encoding="cp950")
-f = open(filename, "r", encoding="UTF-8")
-f = open(filename, "rt")
-
+f = open(filename, encoding="cp950")
 """
 
 import os
@@ -94,20 +81,18 @@ poem_text = """黃河遠上白雲間\n
 """
 
 print("------------------------------------------------------------")  # 60個
-print("1. write()")
+print("1. write() 一次寫入一個字串")
 print("------------------------------------------------------------")  # 60個
 
 filename = "tmp_write_text01.txt"
 
-# 開啟檔案
 f = open(filename, "a")
 
 f.write(poem_text)
-f.write("ABC")
-f.write("DEF")
-
-f.write("Bill Clinton\n")
-f.write("Barack Obama")
+f.write("ABC ")
+f.write("DEF ")
+f.write("Bill Clinton ")
+f.write("Barack Obama ")
 
 f.close()
 
@@ -116,7 +101,7 @@ f = open(filename, "a")
 f.write("UVWXYZ")
 
 count = f.write(poem_text)
-print("總共寫了 ", count, " 字元")
+print("這個 f.write() 指令 寫了", count, "個字元")
 
 f.close()
 
@@ -124,25 +109,24 @@ print("------------------------------------------------------------")  # 60個
 
 poem_text = "黃河遠上白雲間一片孤城萬仞山羌笛何須怨楊柳春風不度玉門關"
 
-filename = "tmp_write_text17_poem.cp950b.txt"
+filename = "tmp_write_text02_poem.cp950.txt"
 print("用cp950編碼 分段寫檔, 檔名 :", filename)
 size = len(poem_text)
 offset = 0
 chunk = 5  # 每次寫入的單位
+
 with open(filename, "w", encoding="cp950") as f:
     while True:
         if offset > size:
             break
-        print(f.write(poem_text[offset : offset + chunk]))
+        count=f.write(poem_text[offset : offset + chunk])
+        print("這個 f.write() 指令 寫了", count, "個字元")
         offset += chunk
 
 print("------------------------------------------------------------")  # 60個
 
-
 print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-print("2. writelines()")
+print("2. writelines() 一次寫入一個字串串列")
 print("------------------------------------------------------------")  # 60個
 
 string1 = "黃河遠上白雲間\n"
@@ -151,20 +135,11 @@ string3 = "羌笛何須怨楊柳\n"
 string4 = "春風不度玉門關"
 strings = [string1, string2, string3, string4]
 
-filename = "tmp_write_text17_poem.cp936.txt"
-print("用cp936編碼寫一檔, 檔名 :", filename)
-with open(filename, "w", encoding="cp936") as f:
+filename = "tmp_write_text03_poem.cp950.txt"
+
+print("用cp950編碼寫一檔, 檔名 :", filename)
+with open(filename, "w", encoding="cp950") as f:
     f.writelines(strings)
-
-print("------------------------------------------------------------")  # 60個
-
-filename = "tmp_write_text17_poem.utf-8.txt"
-print("用utf-8編碼寫一檔, 檔名 :", filename)
-with open(filename, "w", encoding="utf-8") as f:
-    f.writelines(strings)
-
-print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------------------------------------")  # 60個
 print("3. read() read(N)")
@@ -172,14 +147,13 @@ print("3. read() read(N)")
 # read(N), 讀N字元
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_1.data/______test_files1/file2.txt"
+filename = "data/abc.txt"
 
-# 開啟檔案
 f = open(filename, "r")
 
-print("讀取N字元")
-string1 = f.read(5)  # read(N), 讀N字元
-print(string1)
+print("讀取N字元 => 字串")
+cc = f.read(5)  # read(N), 讀N字元
+print(cc)
 
 print("從目前檔案位置讀到檔尾")
 cc = f.read()  # read(無參數), 從目前檔案位置讀到檔尾
@@ -189,21 +163,22 @@ print("檔案內容: ", cc)
 print("------------------------------------------------------------")  # 60個
 
 # 設定一次讀取的數量
-filename = "tmp_read_text17_poem.utf-8.txt"
-chunk = 100
+filename = "data/poem.utf-8.txt"
+chunk = 10
 msg = ""
-# with open(filename, "r", encoding="cp950") as f:
 with open(filename, "r", encoding="utf-8") as f:
     while True:
-        txt = f.read(chunk)  # 一次讀取chunk數量
-        if not txt:
+        print('讀N個字元出來')
+        cc = f.read(chunk)  # 一次讀取chunk數量
+        #print(cc)
+        if not cc:
             break
-        msg += txt
+        msg += cc
 print(msg)
 
 print("------------------------------------------------------------")  # 60個
 
-filename = "tmp_read_text03.bin"
+filename = "data/poem.utf-8.txt"
 
 print("讀取一個檔案 binary, 檔名 : " + filename)
 with open(filename, "rb") as f:
@@ -213,25 +188,52 @@ with open(filename, "rb") as f:
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
 print("4. readline() 一次讀一行")
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_1.data/______test_files1/file2.txt"
+filename = "data/poem.utf-8.txt"
 
-# 開啟檔案
 f = open(filename, "r", encoding="UTF-8-sig")
 
 print("讀出1行")
 line = f.readline()
 print(line)
+print("目前檔案指標位置 :", f.tell())  # 0
 
+print('跳回檔頭')
 f.seek(0)
+print("目前檔案指標位置 :", f.tell())  # 0
 
-# print("讀出3行")??
-print(f.readline(3))
+print("讀出5個字元 readline(N)")
+print(f.readline(5))
+print("目前檔案指標位置 :", f.tell())  # 0
+
 f.close()
+
+"""
+
+f = open("tmp_text_file.txt", "w+")
+f.write("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+f.flush()
+
+print("寫入之後的檔案指標位置：", f.tell())
+
+print("往後跳16拜")
+f.seek(16, 0)
+
+print("擷取至位置26")
+f.truncate(26)
+
+print("讀出來")
+cc = f.read()  # read(無參數), 從目前檔案位置讀到檔尾
+print(cc)
+
+
+
+"""
+
+
 
 print("------------------------------------------------------------")  # 60個
 
@@ -239,31 +241,26 @@ print("用 while + readline() 一次讀一行 讀到完")
 
 filename = "C:/_git/vcs/_4.python/_data/王之渙_涼州詞.big5.txt"
 
-# 開啟檔案
 f = open(filename, "r")
 
-i = 0
 while True:
-    print("讀出1行")
+    #print("讀出1行")
     line = f.readline()
     if len(line) == 0:  # Zero length indicates EOF
         break
-    # print(line.strip())
-    i = i + 1
-    # print(str(i), line),    # Notice comma to avoid automatic newline added by Python
-    print(line),
-
+    print(line.strip())
 f.close()
 
-"""
-print("讀出1行")
+# 一樣
+
+f = open(filename, "r")
+#print("讀出1行")
 line = f.readline()
 while line != "":
-    print(line, end="")
-    print("讀出1行")
+    print(line.strip())
     line = f.readline()
 f.close()
-"""
+
 print("------------------------------------------------------------")  # 60個
 
 
@@ -273,18 +270,14 @@ print("用readlines()一次讀完全檔 至一個 list")
 # readlines()可以依照行讀取整個檔案，回傳是一個List，每一個element就是一行字。
 print("------------------------------------------------------------")  # 60個
 
-filename = "tmp_read_text04.txt"
+filename = "C:/_git/vcs/_4.python/_data/王之渙_涼州詞.big5.txt"
 
-# 開啟檔案
 f = open(filename)
 
 lines = f.readlines()
 print(lines)
-f.close()
 
-for line in lines:
-    print(line)
-f.close
+f.close()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -293,10 +286,8 @@ print("------------------------------------------------------------")  # 60個
 print("6. for line in f:")
 print("------------------------------------------------------------")  # 60個
 
+filename = "C:/_git/vcs/_4.python/_data/王之渙_涼州詞.big5.txt"
 
-filename = "tmp_read_text04.txt"
-
-# 開啟檔案
 f = open(filename, "r")
 
 # 通過迭代器訪問
@@ -315,13 +306,12 @@ with open("data/temperature.txt") as f:
 print("取得溫度資料 :\n", temperatures)
 
 print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
 
+print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 print("7. 應用範例")
 print("------------------------------------------------------------")  # 60個
-
 
 
 # 統計檔案的字元數、字數與行數
@@ -468,7 +458,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("直接 print 到檔案")
 
-filename = "tmp_write_text19.txt"
+filename = "tmp_write_text04_print.txt"
 
 with open(filename, "wt") as f:
     print("Hello World!", file=f)
@@ -563,7 +553,10 @@ for k, v in stat.items():
 print("------------------------------------------------------------")  # 60個
 
 print("寫入檔案")
-f = open("tmp_write_text25.txt", "w")
+
+filename = "tmp_write_text05.txt"
+
+f = open(filename, "w")
 print("用print的方法寫入檔案", file=f)
 f.close()
 
@@ -694,7 +687,7 @@ print("================")
 for key in data:
     print("{}\t{}".format(key, data[key]))
 
-filename = "tmp_write_read_text15_password.txt"
+filename = "tmp_write_text06_password.txt"
 
 print("將字典寫為檔案")
 with open(filename, "w", encoding="UTF-8-sig") as f:
@@ -872,21 +865,21 @@ print("------------------------------------------------------------")  # 60個
 
 """ many
 
-filename = 'C:/_git/vcs/_4.python/_data/Romeo&Juliet.txt'
+filename = "C:/_git/vcs/_4.python/_data/Romeo&Juliet.txt"
 f = open(filename, "r")
 
 count = 0
-print('讀出1行')
-string1 = f.readline()
-len1 = len(string1)
+print("讀出1行")
+line = f.readline()
+len1 = len(line)
 while len1>0:
     count += 1
-    print(count, string1.strip())
-    string1 = f.readline()
-    len1 = len(string1)
+    print(count, line.strip())
+    line = f.readline()
+    len1 = len(line)
     
 
-print('total', count, 'lines')
+print("total", count, "lines")
 f.close()
 """
 
@@ -927,14 +920,14 @@ print("------------------------------------------------------------")  # 60個
 print("測試fseek")
 
 f = open(filename, "rb")
-print("目前文件索引位置：", f.tell())  # 0
+print("目前檔案指標位置 :", f.tell())  # 0
 f.seek(6)  # 移到索引第 6 (第7個字元)位置
 string1 = f.read(7)  # 讀取 7 個字元
 print(string1)  # b'Python\n'
-print("目前文件索引位置：", f.tell())  # 13
+print("目前檔案指標位置 :", f.tell())  # 13
 
 f.seek(0)  # 回文件最前端
-print("目前文件索引位置：", f.tell())  # 0
+print("目前檔案指標位置 :", f.tell())  # 0
 string2 = f.read(5)  # 讀取 5 個字元
 print(string2)  # b'Hello'
 
@@ -987,7 +980,8 @@ with open(filename, "r", encoding="cp950") as f:
 
 print("------------------------------------------------------------")  # 60個
 
-filename = "tmp_write_read_text17_poem.cp950b.txt"
+filename = "tmp_write_text02_poem.cp950.txt"
+
 with open(filename, "r", encoding="cp950") as f:
     print(f"目前指針位置 {f.tell()}")
     string1 = f.read(7)
@@ -999,30 +993,13 @@ with open(filename, "r", encoding="cp950") as f:
 
 print("------------------------------------------------------------")  # 60個
 
-f = open("tmp_text_file.txt", "w+")
-f.write("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
-f.flush()
 
-print("寫入之後的游標位置：", f.tell())
-
-print("往後跳16拜")
-f.seek(16, 0)
-
-print("擷取至位置26")
-f.truncate(26)
-
-print("讀出來")
-cc = f.read()  # read(無參數), 從目前檔案位置讀到檔尾
-print(cc)
 
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 print("8. 其他 & 新進")
 print("------------------------------------------------------------")  # 60個
-
-
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -1040,8 +1017,8 @@ text = open(filename).read().strip()
 print(text)
 
 
-# print(string.decode('utf-8')) # 這是什麼？
-# print(string.decode('utf-8').encode('utf-8')) # 這是什麼？
+# print(string.decode("utf-8")) # 這是什麼？
+# print(string.decode("utf-8").encode("utf-8")) # 這是什麼？
 
 
 stops = f.read().split("\n")
@@ -1060,10 +1037,10 @@ print(data)
 print("------------------------------------------------------------")  # 60個
 
 """
-print('一種寫入檔案的方法')
-filename = 'tmp_write_text18.txt'
+print("一種寫入檔案的方法")
+filename = "tmp_write_text18.txt"
 
-f = open(filename,'w')
+f = open(filename,"w")
 print('[OPTIONS]', file=f)
 print('Auto Index=Yes', file=f)
 print('Binary TOC=No', file=f)
@@ -1084,7 +1061,6 @@ print('', file=f)
 f.close()
 """
 print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -1108,4 +1084,3 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-

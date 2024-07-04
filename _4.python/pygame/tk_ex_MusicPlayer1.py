@@ -25,6 +25,8 @@ import pygame
 count = 0
 flag_pause_mode = False
 flag_new_mp3_file = False
+mp3_foldernames = []
+mp3_filenames = []
 
 print("------------------------------------------------------------")  # 60個
 
@@ -81,9 +83,9 @@ def playNewmp3a():  # 播放mp3檔案, 要先stop, 再load, 再play
 def playNewmp3b(song):
     global status
     pygame.mixer.music.stop() # 停止播放
-    pygame.mixer.music.load(mp3files[index])
+    pygame.mixer.music.load(mp3_filenames[index])
     pygame.mixer.music.play() # 無參數, 單次播放
-    status = "正在播放 {}".format(mp3files[index])
+    status = "正在播放 {}".format(mp3_filenames[index])
 
 
 def stopmp3():  # 停止播放
@@ -159,9 +161,9 @@ def button12Click():
     global index
     index -= 1
     if index < 0:
-        index = len(mp3files) - 1
-    playNewmp3b(mp3files[index])
-    mp3_filename = mp3files[index]
+        index = len(mp3_filenames) - 1
+    playNewmp3b(mp3_filenames[index])
+    mp3_filename = mp3_filenames[index]
     main_message1.set(mp3_filename)
 
 
@@ -169,10 +171,10 @@ def button13Click():
     print("你按了  下一首")
     global index
     index += 1
-    if index == len(mp3files):
+    if index == len(mp3_filenames):
         index = 0
-    playNewmp3b(mp3files[index])
-    mp3_filename = mp3files[index]
+    playNewmp3b(mp3_filenames[index])
+    mp3_filename = mp3_filenames[index]
     main_message1.set(mp3_filename)
 
 
@@ -231,7 +233,13 @@ def button21Click():
     print('完成')
 
 def button22Click():
-    print('你按了button22 測試2')
+    print('你按了button22 測試 看list')
+    print('資料夾')
+    for _ in mp3_foldernames:
+        print(_)
+    print('檔案')
+    for _ in mp3_filenames:
+        print(_)
 
 def button23Click():
     print('你按了button23 測試3')
@@ -355,7 +363,7 @@ button15.place(x=x_st + dx * 5, y=y_st + dy * 1)
 
 button20 = tk.Button(window, width=w, height=h, command=button20Click, text="測試0")
 button21 = tk.Button(window, width=w, height=h, command=button21Click, text="播放 wave/midi")
-button22 = tk.Button(window, width=w, height=h, command=button22Click, text="測試2")
+button22 = tk.Button(window, width=w, height=h, command=button22Click, text="測試 看list")
 button23 = tk.Button(window, width=w, height=h, command=button23Click, text="測試3")
 button24 = tk.Button(window, width=w, height=h, command=button24Click, text="測試4")
 button25 = tk.Button(window, width=w, height=h, command=button25Click, text="測試5")
@@ -386,19 +394,41 @@ main_message2.set("")
 text1 = tk.Text(window, width=100, height=30)  # 放入多行輸入框
 text1.place(x=x_st + dx * 0, y=y_st + dy * 3 + 20)
 
-# mp3_foldername = 'C:/_git/vcs/_1.data/______test_files1/_mp3/'
+def get_mp3_filenames():
+    global mp3_filenames
+    """
+    mp3_foldername = "D:/vcs/astro/_DATA2/_mp3/japanese/昭和の歌--演歌系列1/"
+    mp3_filenames = glob.glob(mp3_foldername + "*.mp3")
+    """
 
-# 日文資料夾名稱有問題
-# mp3_foldername = 'D:/vcs/astro/_DATA2/_mp3/japanese/美空ひばり(美空云雀).-.[美空ひばり全曲集1].专辑.(MP3)/'
+    filename = "tk_ex_MusicPlayer1.txt"
+    with open(filename, "r") as f:
+        lines = f.readlines()
+        #print(lines)
+        mp3_foldernames = []
+        for line in lines:
+            print(line)
+            if os.path.isdir(line.strip()):
+                mp3_foldernames.append(line.strip())
+            else:
+                print('不是資料夾')
+        for _ in mp3_foldernames:
+            mp3_filenames += glob.glob(_ + "*.mp3")
+            #print(_)
+            #print(mp3_filenames)
+            
+print("aaaaaaaaaaa")
 
-mp3_foldername = "D:/vcs/astro/_DATA2/_mp3/japanese/昭和の歌--演歌系列1/"
+#print(mp3_foldernames)
 
-mp3files = glob.glob(mp3_foldername + "*.mp3")
+get_mp3_filenames()
+
+print("aaaaaaaaaaa")
+
+#print(mp3_filenames)
+
 index = 0
-#print(mp3files)
-
-# mp3_filename = 'C:/_git/vcs/_1.data/______test_files1/_mp3/02 渡り鳥仁義(1984.07.01-候鳥仁義).mp3'
-mp3_filename = mp3files[index]
+mp3_filename = mp3_filenames[index]
 
 message = mp3_filename
 main_message1.set(message)
@@ -435,4 +465,35 @@ while pygame.mixer.music.get_busy():#讀取播放狀態, True:正在播放, Fals
 print('結束播放')
 
 """
+
+
+
+"""
+mp3_foldername1 = 'C:/_git/vcs/_1.data/______test_files1/_mp3/'
+mp3_foldername2 = 'D:/vcs/astro/_DATA2/_mp3/陳一郎_台語精選集6CD/disc2/'
+mp3_foldername3 = 'D:/vcs/astro/_DATA2/_mp3/japanese/昭和の歌--演歌系列9/'
+
+mp3_foldernames = [mp3_foldername1, mp3_foldername2, mp3_foldername3]
+
+print(mp3_foldernames)
+
+filename = "tk_ex_MusicPlayer1.txt"
+
+print("檔名 :", filename)
+with open(filename, "w") as f:
+    for _ in mp3_foldernames:
+        f.write(_)
+        f.write("\n")
+
+"""
+
+
+
+
+
+# mp3_foldername = 'C:/_git/vcs/_1.data/______test_files1/_mp3/'
+
+# 日文資料夾名稱有問題
+# mp3_foldername = 'D:/vcs/astro/_DATA2/_mp3/japanese/美空ひばり(美空云雀).-.[美空ひばり全曲集1].专辑.(MP3)/'
+
 

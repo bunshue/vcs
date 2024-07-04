@@ -31,28 +31,33 @@ canvas1.create_line(W // 3 * 2, 0, W // 3 * 2, H)
 
 # create_line 繪製直線 (x1, y1)-(x2, y2)
 x1, y1, x2, y2 = 20, 20, 120, 20
-canvas1.create_line(x1, y1, x2, y2)
+canvas1.create_line(x1, y1, x2, y2) #零點黑線
 x1, y1, x2, y2 = x1, y1 + 20, x2, y2 + 20
 canvas1.create_line(x1, y1, x2, y2, fill="gray50")
 x1, y1, x2, y2 = x1, y1 + 20, x2, y2 + 20
 canvas1.create_line(x1, y1, x2, y2, fill="red", dash=(4, 4))
 x1, y1, x2, y2 = x1, y1 + 20, x2, y2 + 20
-canvas1.create_line(x1, y1, x2, y2, width=5)
+canvas1.create_line(x1, y1, x2, y2, width=5)#粗線
 x1, y1, x2, y2 = x1, y1 + 20, x2, y2 + 20
-canvas1.create_line(x1, y1, x2, y2, width=10, fill="blue")
+canvas1.create_line(x1, y1, x2, y2, width=10, fill="blue")#顏色線
 x1, y1, x2, y2 = x1, y1 + 20, x2, y2 + 20
-canvas1.create_line(x1, y1, x2, y2, dash=(10, 2, 2, 2))
+canvas1.create_line(x1, y1, x2, y2, dash=(10, 2, 2, 2)) #點線
 x1, y1, x2, y2 = x1, y1 + 20, x2, y2 + 20
 canvas1.create_line(x1, y1, x2, y2, fill="#FF0000")
 
 """ 直線連線
-x1, y1, x2, y2, x3, y3, x1, y1 = 30,30,500,30,265,100,30,30
-canvas1.create_line(x1, y1, x2, y2, x3, y3, x1, y1,width=5,joinstyle=tk.ROUND)
-x1, y1, x2, y2, x3, y3, x1, y1 = 30,130,500,130,265,200,30,130
-canvas1.create_line(x1, y1, x2, y2, x3, y3, x1, y1,width=5,joinstyle=tk.BEVEL)
-x1, y1, x2, y2, x3, y3, x1, y1 = 30,230,500,230,265,300,30,230
-canvas1.create_line(x1, y1, x2, y2, x3, y3, x1, y1,width=5,joinstyle=tk.MITER)
 
+#多點連線
+x1, y1, x2, y2, x3, y3, x1, y1 = 30,30,500,30,265,100,30,30
+canvas1.create_line(x1, y1, x2, y2, x3, y3, x1, y1,width=10,joinstyle=tk.ROUND)
+#多點連線
+x1, y1, x2, y2, x3, y3, x1, y1 = 30,130,500,130,265,200,30,130
+canvas1.create_line(x1, y1, x2, y2, x3, y3, x1, y1,width=10,joinstyle=tk.BEVEL)
+#多點連線
+x1, y1, x2, y2, x3, y3, x1, y1 = 30,230,500,230,265,300,30,230
+canvas1.create_line(x1, y1, x2, y2, x3, y3, x1, y1,width=10,joinstyle=tk.MITER)
+
+#直線 線條樣式
 x1, y1, x2, y2 = 230,30,500,30
 canvas1.create_line(x1, y1, x2, y2,width=5,capstyle=tk.BUTT)
 x1, y1, x2, y2 = 230,130,500,130
@@ -60,12 +65,13 @@ canvas1.create_line(x1, y1, x2, y2,width=5,capstyle=tk.ROUND)
 x1, y1, x2, y2 = 230,230,500,230
 canvas1.create_line(x1, y1, x2, y2,width=5,capstyle=tk.PROJECTING)
 
+#直線 線條樣式
 x1, y1, x2, y2 = 230,30,500,30
-canvas1.create_line(x1, y1, x2, y2,width=5,stipple="gray25")
+canvas1.create_line(x1, y1, x2, y2,width=20,stipple="gray25")
 x1, y1, x2, y2 = 230,130,500,130
-canvas1.create_line(x1, y1, x2, y2,width=5,stipple="questhead")
+canvas1.create_line(x1, y1, x2, y2,width=20,stipple="questhead")
 x1, y1, x2, y2 = 30,230,500,230
-canvas1.create_line(x1, y1, x2, y2,width=5,stipple="info")
+canvas1.create_line(x1, y1, x2, y2,width=20,stipple="info")
 """
 # create_rectangle 繪製矩形
 x_st, y_st, x_sp, y_sp = 150, 20, 250, 60
@@ -306,6 +312,31 @@ for i in range(ROW):
         
 print("------------------------------------------------------------")  # 60個
 
+xWidth = 350
+yHeight = 220
+
+x_st, y_st = 800, 410
+for i in range(20):
+    canvas1.create_rectangle(x_st+10 + i * 5, y_st+10 + i * 5, x_st+xWidth - 10 - i * 5, y_st+yHeight - 10 - i * 5)
+        
+print("------------------------------------------------------------")  # 60個
+
+x_st, y_st = 800, 640
+
+for i in range(30):                 # 隨機繪50個不同位置與大小的矩形
+    x1, y1 = random.randint(1, 320), random.randint(1, 240)
+    x2, y2 = random.randint(1, 320), random.randint(1, 240)
+    if x1 > x2: x1,x2 = x2,x1       # 確保左上角x座標小於右下角x座標
+    if y1 > y2: y1,y2 = y2,y1       # 確保左上角y座標小於右下角y座標
+    canvas1.create_rectangle(x_st+x1, y_st+y1, x_st+x2, y_st+y2)
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
 print("------------------------------------------------------------")  # 60個
 
 window.mainloop()
@@ -324,67 +355,8 @@ height = H - 20
 canvas1 = tk.Canvas(window, bg="pink", width=width, height=height-120)
 canvas1.pack()
 
-"""
-#零點黑線
-canvas1.create_line(100,100,500,100)
-#粗線
-canvas1.create_line(100,125,500,125,width=5)
-#顏色線
-canvas1.create_line(100,150,500,150,width=10,fill='blue')
-#點線
-canvas1.create_line(100,175,500,175,dash=(10,2,2,2))
-
 print("------------------------------------------------------------")  # 60個
 
-#多點連線
-canvas1.create_line(30,30,500,30,265,100,30,30,
-                   width=10,joinstyle=tk.ROUND)
-#多點連線
-canvas1.create_line(30,130,500,130,265,200,30,130,
-                   width=10,joinstyle=tk.BEVEL)
-#多點連線
-canvas1.create_line(30,230,500,230,265,300,30,230,
-                   width=10,joinstyle=tk.MITER)
-
-print("------------------------------------------------------------")  # 60個
-
-#直線 線條樣式
-canvas1.create_line(30,30,500,30,width=10,capstyle=tk.BUTT)
-canvas1.create_line(30,130,500,130,width=10,capstyle=tk.ROUND)
-canvas1.create_line(30,230,500,230,width=10,capstyle=tk.PROJECTING)
-
-
-#直線 線條樣式
-canvas1.create_line(30,30,500,30,width=10,stipple="gray25")
-canvas1.create_line(30,130,500,130,width=40,stipple="questhead")
-canvas1.create_line(30,230,500,230,width=10,stipple="info")
-"""
-
-x_st, y_st = 700, 50
-
-for i in range(30):                 # 隨機繪50個不同位置與大小的矩形
-    x1, y1 = random.randint(1, 320), random.randint(1, 240)
-    x2, y2 = random.randint(1, 320), random.randint(1, 240)
-    if x1 > x2: x1,x2 = x2,x1       # 確保左上角x座標小於右下角x座標
-    if y1 > y2: y1,y2 = y2,y1       # 確保左上角y座標小於右下角y座標
-    canvas1.create_rectangle(x_st+x1, y_st+y1, x_st+x2, y_st+y2)
-
-print("------------------------------------------------------------")  # 60個
-
-canvas1.create_rectangle(10, 10, 120, 60, fill='red')
-canvas1.create_rectangle(130, 10, 200, 80, fill='yellow', outline='blue')
-canvas1.create_rectangle(210, 10, 300, 60, fill='green', outline='grey')
-
-print("------------------------------------------------------------")  # 60個
-
-xWidth = 350
-yHeight = 220
-
-x_st, y_st = 700, 300
-for i in range(20):
-    canvas1.create_rectangle(x_st+10 + i * 5, y_st+10 + i * 5, x_st+xWidth - 10 - i * 5, y_st+yHeight - 10 - i * 5)
-        
-print("------------------------------------------------------------")  # 60個
 
 # 以下以圓形為基礎
 canvas1.create_arc(10, 10, 110, 110, extent=45, style=tk.ARC)
@@ -405,9 +377,8 @@ canvas1.create_arc(10, 10, 110, 110, extent=180, style=tk.ARC)
 canvas1.create_arc(210, 10, 310, 110, extent=180, style=tk.CHORD)
 canvas1.create_arc(410, 10, 510, 110, start=30, extent=120, style=tk.PIESLICE)
 
-
 print("------------------------------------------------------------")  # 60個
-"""
+
 #新建一個Frame, row, column重新計算, 控件要依附新的Frame
 frame4 = tk.Frame(window)
 frame4.pack()
@@ -443,7 +414,7 @@ canvas6.grid(row = 3, column = 6)
 canvas7 = tk.Canvas(frame4, width = width, height = height)
 canvas7.create_arc(10, 10, width - 10, height - 10, start = 0, extent = 145, fill = "red")
 canvas7.grid(row = 3, column = 7)
-"""
+
 print("------------------------------------------------------------")  # 60個
 
 # 以下是圓形
@@ -462,19 +433,11 @@ canvas1.create_polygon(400,10,600,10,450,80,width=5,outline='blue',fill='yellow'
 
 print("------------------------------------------------------------")  # 60個
 
-canvas1.create_text(200, 50, text='Welcome to the United States')
-canvas1.create_text(200, 80, text='Welcome to the United States', fill='blue')
-canvas1.create_text(300, 120, text='Welcome to the United States', fill='blue',
-                   font=('Old English Text MT',20))
-canvas1.create_text(300, 160, text='Welcome to the United States', fill='blue',
-                   font=('華康新綜藝體 Std W7',20))
-canvas1.create_text(300, 200, text='歡迎來到美國', fill='blue',
-                   font=('華康新綜藝體 Std W7',20))
-
-
 print("------------------------------------------------------------")  # 60個
 
 window.mainloop()
+
+sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 

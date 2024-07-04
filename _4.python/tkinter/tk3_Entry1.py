@@ -10,26 +10,27 @@ import tkinter as tk
 
 print("------------------------------------------------------------")  # 60個
 
-print("用 Entry 和 grid 做 表格")
+print("用 Entry 和 grid 做 表格 1")
 
-COLUMN = 10
-ROW = 8
+COLUMN1 = 10
+ROW1 = 8
 
 
 def set_numbers():
-    for i in range(ROW):
-        for j in range(COLUMN):
-            cells[i][j].set(random.randint(0, 9))
+    for i in range(ROW1):
+        for j in range(COLUMN1):
+            cells1[i][j].set(random.randint(0, 9))
 
 
 def get_numbers1():
-    for i in range(ROW):
-        for j in range(COLUMN):
-            print(cells[i][j].get())
+    for i in range(ROW1):
+        for j in range(COLUMN1):
+            print(cells1[i][j].get(), end = " ")
+        print()
 
 
 def get_numbers2():
-    values = [[eval(x.get()) for x in cells[i]] for i in range(ROW)]
+    values = [[eval(x.get()) for x in cells1[i]] for i in range(ROW1)]
     print(values)
 
 
@@ -40,15 +41,15 @@ window.title("Entry 測試")
 frame = tk.Frame(window, height=0, width=0, bg="pink", bd=5)  # Hold entries
 frame.pack()
 
-cells = []
-for i in range(ROW):
-    cells.append([])
-    for j in range(COLUMN):
-        cells[i].append(tk.StringVar())
+cells1 = []
+for i in range(ROW1):
+    cells1.append([])
+    for j in range(COLUMN1):
+        cells1[i].append(tk.StringVar())
 
-for i in range(ROW):
-    for j in range(COLUMN):
-        tk.Entry(frame, width=8, justify=tk.RIGHT, textvariable=cells[i][j]).grid(
+for i in range(ROW1):
+    for j in range(COLUMN1):
+        tk.Entry(frame, width=8, justify=tk.RIGHT, textvariable=cells1[i][j]).grid(
             row=i, column=j
         )
 
@@ -62,6 +63,58 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
     fill=tk.X, padx=5, pady=5
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
+
+
+print("用 Entry 和 grid 做 表格 2")
+
+
+def get_numbers3():
+    """
+    # Get the numbers from the entries
+    values = [[print(x.get()) 
+               for x in cells2[i]] for i in range(9)]
+
+    print('ok')
+    """
+    for i in range(ROW2):
+        for j in range(COLUMN2):
+            cc = cells2[i][j].get()
+            if cc == "":
+                print('X', end = " ")
+            else:
+                print(cc, end = " ")
+        print()
+
+ROW2 = 8
+COLUMN2 = 12
+        
+frame = tk.Frame(window, bg = 'pink')
+
+frame.pack()
+
+cells2 = [] # A list of variables tied to entries
+for i in range(ROW2):
+    cells2.append([])
+    for j in range(COLUMN2):
+        cells2[i].append(tk.StringVar())
+        
+for i in range(ROW2):
+    for j in range(COLUMN2):
+        tk.Entry(frame, width = 2, justify = tk.RIGHT,
+            textvariable = cells2[i][j]).grid(
+                row = i, column = j)
+        
+tk.Button(window, text = "取得數字",  command = get_numbers3).pack()
+
+for i in range(ROW2):
+    for j in range(COLUMN2):
+        cells2[i][j].set('1')
+
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
+print("------------------------------------------------------------")  # 60個
+
 
 # 輸入文字框中的字元被顯示為“*”
 entry11 = tk.Entry(window, show="*", width=30)
@@ -107,49 +160,6 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
     fill=tk.X, padx=5, pady=5
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
-
-
-def validate():
-    """
-    # Get the numbers from the entries
-    values = [[print(x.get()) 
-               for x in cells[i]] for i in range(9)]
-
-    print('ok')
-    """
-    for i in range(ROW):
-        for j in range(COLUMN):
-            cc = cells[i][j].get()
-            if cc == "":
-                print('X', end = " ")
-            else:
-                print(cc, end = " ")
-        print()
-
-ROW = 8
-COLUMN = 12
-        
-frame = tk.Frame(window, bg = 'pink')
-
-frame.pack()
-
-cells = [] # A list of variables tied to entries
-for i in range(ROW):
-    cells.append([])
-    for j in range(COLUMN):
-        cells[i].append(tk.StringVar())
-        
-for i in range(ROW):
-    for j in range(COLUMN):
-        tk.Entry(frame, width = 2, justify = tk.RIGHT,
-            textvariable = cells[i][j]).grid(
-                row = i, column = j)
-        
-tk.Button(window, text = "Validate",  command = validate).pack()
-
-for i in range(ROW):
-    for j in range(COLUMN):
-        cells[i][j].set('1')
         
 window.mainloop()
 
