@@ -321,7 +321,7 @@ window.title("tk畫圖大集合 2")
 print("建立畫布")
 width = W - 20
 height = H - 20
-canvas1 = tk.Canvas(window, bg="pink", width=width, height=height)
+canvas1 = tk.Canvas(window, bg="pink", width=width, height=height-120)
 canvas1.pack()
 
 """
@@ -406,16 +406,8 @@ canvas1.create_arc(210, 10, 310, 110, extent=180, style=tk.CHORD)
 canvas1.create_arc(410, 10, 510, 110, start=30, extent=120, style=tk.PIESLICE)
 
 
-
-
-
-
-window.mainloop()
-
-sys.exit()
-
+print("------------------------------------------------------------")  # 60個
 """
-
 #新建一個Frame, row, column重新計算, 控件要依附新的Frame
 frame4 = tk.Frame(window)
 frame4.pack()
@@ -451,21 +443,7 @@ canvas6.grid(row = 3, column = 6)
 canvas7 = tk.Canvas(frame4, width = width, height = height)
 canvas7.create_arc(10, 10, width - 10, height - 10, start = 0, extent = 145, fill = "red")
 canvas7.grid(row = 3, column = 7)
-
-
 """
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-for i in range(20):
-    canvas1.create_oval(10+i*5, 10+i*5, xWidth-10-i*5, yHeight-10-i*5)
-        
 print("------------------------------------------------------------")  # 60個
 
 # 以下是圓形
@@ -493,17 +471,26 @@ canvas1.create_text(300, 160, text='Welcome to the United States', fill='blue',
 canvas1.create_text(300, 200, text='歡迎來到美國', fill='blue',
                    font=('華康新綜藝體 Std W7',20))
 
+
 print("------------------------------------------------------------")  # 60個
+
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+W, H = 1200, 900
 
 window = tk.Tk()
-window.geometry("800x800")
-window.title("tk畫圖大集合")
+window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(W, H, 0, 0))
+window.title("tk畫圖大集合 3 使用 tags")
+
+print("建立畫布")
+width = W - 20
+height = H - 20
+canvas1 = tk.Canvas(window, bg="pink", width=width, height=height//2)
+canvas1.pack()
 
 print("------------------------------------------------------------")  # 60個
-
-color = "#FF0000"
-canvas = tk.Canvas(window, width=500, height=150, bg=color)
-canvas.pack()
 
 def drawCanvas():
     print("draw")
@@ -511,19 +498,27 @@ def drawCanvas():
     y_st = 0
     radius = 50
     for i in range(0, 10):
-        canvas.create_oval(
+        canvas1.create_oval(
             x_st + 50 * i, y_st, x_st + 50 * i + radius, y_st + radius, tags="oval"
         )
-        canvas.create_oval(
+        canvas1.create_oval(
             x_st + 50 * i, y_st + 75, x_st + 50 * i + radius, y_st + 75 + radius
         )
+
+    canvas1.create_rectangle(10, 10, 190, 90, tags = "rect")
+    canvas1.create_oval(10, 10, 190, 90, fill = "red", tags = "oval")
+    canvas1.create_arc(10, 10, 190, 90, start = 0, extent = 90, width = 8, fill = "red", tags = "arc")
+    canvas1.create_polygon(10, 10, 190, 90, 30, 50, tags = "polygon")
+    canvas1.create_line(10, 10, 190, 90, fill = "red", tags = "line")
+    canvas1.create_line(10, 90, 190, 10, width = 9, arrow = "last", activefill = "blue", tags = "line")
+    canvas1.create_text(60, 40, text = "Hi, I am a string", font = "Times 10 bold underline", tags = "string")
 
 
 def deleteCanvas():
     print("delete")
-    canvas.delete("oval")
-    canvas.delete("rect", "oval", "line")
-
+    canvas1.delete("oval")
+    canvas1.delete("rect", "oval", "line")
+    canvas1.delete("rect", "oval", "arc", "polygon", "line", "string")
 
 button2 = tk.Button(window, text="在 Canvas 上畫一些東西", command=drawCanvas)
 button2.pack()
@@ -624,7 +619,6 @@ figure7.grid(row = 1, column = 7)
 
 window.mainloop()
 
-
 print("------------------------------------------------------------")  # 60個
 
 
@@ -632,39 +626,6 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
-
-
-
-print('使用tags')
-
-window = tk.Tk()
-window.geometry("800x800")
-window.title("tk畫圖大集合")
-
-canvas = tk.Canvas(window, width = 400, height = 400, bg = "white")
-canvas.pack()
-
-canvas.create_rectangle(10, 10, 190, 90, tags = "rect")
-
-canvas.create_oval(10, 10, 190, 90, fill = "red", tags = "oval")
-
-canvas.create_arc(10, 10, 190, 90, start = 0, extent = 90, width = 8, fill = "red", tags = "arc")
-
-canvas.create_polygon(10, 10, 190, 90, 30, 50, tags = "polygon")
-
-canvas.create_line(10, 10, 190, 90, fill = "red", tags = "line")
-canvas.create_line(10, 90, 190, 10, width = 9, arrow = "last", activefill = "blue", tags = "line")
-
-canvas.create_text(60, 40, text = "Hi, I am a string", font = "Times 10 bold underline", tags = "string")
-
-
-# Clear drawings
-canvas.delete("rect", "oval", "arc", "polygon", "line", "string")
-
-window.mainloop()
-
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -674,4 +635,11 @@ print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
+"""
+
+color = "#FF0000"
+canvas = tk.Canvas(window, width=500, height=150, bg=color)
+canvas.pack()
+
+"""
 

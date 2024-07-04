@@ -95,46 +95,8 @@ def getSobelKernel(winSize):
     )
     return (sobelKernel_x, sobelKernel_y)
 
-
 print("------------------------------------------------------------")  # 60個
-
-print("測試cv2視窗的Trackbar")
-
-filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
-image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
-image = cv2.imread(filename)
-
-# 調整對比度後，圖像的效果顯示窗口
-cv2.namedWindow("TrackbarTest", cv2.WND_PROP_AUTOSIZE)
-
-cv2.imshow("TrackbarTest", image)
-
-MAX_VALUE = 80
-MIN_VALUE = 30  # 無效，看起來最小值一定要0
-initial_value = 40
-
-
-# 調整系數，觀察圖像的變化
-def callback_trackbar_test(_value):
-    print(_value, end=" ")
-
-
-callback_trackbar_test(initial_value)  # 做一次
-
-# cv2.createTrackbar('滑桿名稱', '視窗名稱', min, max, fn)
-# min 最小值 ( 最小為 0，不可為負值 )
-# max 最大值
-# fn 滑桿數值改變時要執行的函式
-cv2.createTrackbar(
-    "value", "TrackbarTest", MIN_VALUE, MAX_VALUE, callback_trackbar_test
-)  # callback function
-cv2.setTrackbarPos("value", "TrackbarTest", initial_value)
-
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
+'''
 filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
 img = cv2.imread(filename)
 cv2.imshow("ImageProcessing", img)
@@ -215,53 +177,17 @@ cv2.imshow("dst", dst)
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()
-
+'''
 print("------------------------------------------------------------")  # 60個
 
-print("空間變換 極座標變換 Polar")
+print("flip")
 
+I = cv2.imread(filename)
 
-# 極坐標變換
-def polar(I, center, r, theta=(0, 360), rstep=1.0, thetastep=360.0 / (180 * 8)):
-    # 得到距離的最小最大范圍
-    minr, maxr = r
-    # 角度的最小范圍
-    mintheta, maxtheta = theta
-    # 輸出圖像的高，寬
-    H = int((maxr - minr) / rstep) + 1
-    W = int((maxtheta - mintheta) / thetastep) + 1
-    O = np.zeros((H, W), I.dtype)
-    # 極坐標變換
-    r = np.linspace(minr, maxr, H)
-    r = np.tile(r, (W, 1))
-    r = np.transpose(r)
-    theta = np.linspace(mintheta, maxtheta, W)
-    theta = np.tile(theta, (H, 1))
-    x, y = cv2.polarToCart(r, theta, angleInDegrees=True)
-    # 最近鄰插值
-    for i in range(H):
-        for j in range(W):
-            px = int(round(x[i][j]) + cx)
-            py = int(round(y[i][j]) + cy)
-            if px > w - 1 or py > h - 1:
-                O[i][j] = 125  # 灰色
-            else:
-                O[i][j] = I[py][px]
-    return O
+O = I.copy()
 
-
-I = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
-# 圖像的寬高
-h, w = I.shape[:2]
-print(w, h)
-# 極左標變換的中心
-cx, cy = w / 2.0, h / 2.0 + 10
-print(cx, cy)
-cv2.circle(I, (int(cx), int(cy)), 10, (255.0, 0, 0), 3)
-# 距離的最小最大半徑 #200 550 270,340
-O = polar(I, (cx, cy), (270, 340))
 # 旋轉
-O = cv2.flip(O, 0)
+O = cv2.flip(O, 1)
 
 # 顯示原圖和輸出圖像
 cv2.imshow("I", I)
@@ -276,6 +202,7 @@ print("對比度增強1")
 
 image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
 image = cv2.imread(filename)
+
 MAX_VALUE = 120
 value = 120
 
@@ -294,7 +221,8 @@ def callback_contrast(_value):
     cv2.imshow("contrast", contrastImage)
 
 
-callback_contrast(value)
+callback_contrast(value)#套用一次設定值
+
 cv2.createTrackbar("value", "contrast", value, MAX_VALUE, callback_contrast)
 
 cv2.waitKey(0)
@@ -464,7 +392,8 @@ def callback_contrast(_value):
     contrastImage = contrastImage.astype(np.uint8)
 
 
-callback_contrast(value)
+callback_contrast(value)#套用一次設定值
+
 cv2.createTrackbar("value", "gamma_contrast", value, MAX_VALUE, callback_contrast)
 
 cv2.waitKey(0)
@@ -553,10 +482,13 @@ print("對比度增強6 CLAHE")
 
 # 第一步：讀入圖像
 src = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
+
 # 創建 CLAHE  對象
 clahe = cv2.createCLAHE(clipLimit=1.0, tileGridSize=(28, 28))
+
 # 限制對比度的自適應閾值均衡化
 dst = clahe.apply(src)
+
 # 顯示
 cv2.imshow("src", src)
 cv2.imshow("clahe", dst)
