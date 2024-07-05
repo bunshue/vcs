@@ -103,7 +103,7 @@ print("------------------------------------------------------------")  # 60個
 import PIL
 from PIL import Image
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 
 print("------------------------------------------------------------")  # 60個
 
@@ -123,7 +123,7 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 # 設定負號
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
-
+'''
 print('------------------------------------------------------------')	#60個
 
 filename1 = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/red_300X300.bmp'
@@ -173,7 +173,7 @@ else:
 
 print('------------------------------------------------------------')	#60個
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 font_filename = 'C:/_git/vcs/_1.data/______test_files5/taipei_sans_tc_beta.ttf'
 
 print('------------------------------------------------------------')	#60個
@@ -357,4 +357,108 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
+'''
 
+"""
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+
+from PIL import Image
+
+chiling = Image.open(filename)
+chiling.show()
+
+#使用濾鏡。
+
+from PIL import ImageFilter
+
+chiling.filter(ImageFilter.EMBOSS).show()
+chiling.filter(ImageFilter.CONTOUR).show()
+
+#圖像剪裁和粘貼。
+
+rect = 220, 690, 265, 740 
+watch = chiling.crop(rect)
+watch.show()
+blured_watch = watch.filter(ImageFilter.GaussianBlur(4))
+chiling.paste(blured_watch, (220, 690))
+chiling.show()
+
+#生成鏡像。
+
+chiling2 = chiling.transpose(Image.FLIP_LEFT_RIGHT)
+chiling2.show()
+
+#生成縮略圖。
+
+width, height = chiling.size
+width, height = int(width * 0.4), int(height * 0.4)
+chiling.thumbnail((width, height))
+
+#合成圖片。
+
+frame = Image.open(filename)
+frame.show()
+frame.paste(chiling, (210, 150))
+frame.paste(chiling2, (522, 150))
+frame.show()
+
+"""
+
+
+print('------------------------------------------------------------')	#60個
+
+
+from PIL import Image
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_image_processing/pic6_childrenb.png'
+
+image_width = 800
+
+img = Image.open(filename)
+w, h = img.size
+print(img.size)
+
+img = img.resize((image_width,int(image_width / float(w) * h)))
+
+img.save('aaaaa.png')
+print("<{}> resize 完成!".format(filename))
+img.close()
+
+print('------------------------------------------------------------')	#60個
+
+"""
+import glob
+import os
+import threading
+
+from PIL import Image
+
+PREFIX = 'thumbnails'
+
+def generate_thumbnail(infile, size, format='PNG'):
+    #生成指定圖片文件的縮略圖
+	file, ext = os.path.splitext(infile)
+	file = file[file.rfind('/') + 1:]
+	outfile = f'{PREFIX}/{file}_{size[0]}_{size[1]}.{ext}'
+	img = Image.open(infile)
+	img.thumbnail(size, Image.ANTIALIAS)
+	img.save(outfile, format)
+
+def main():
+	if not os.path.exists(PREFIX):
+		os.mkdir(PREFIX)
+	for infile in glob.glob('images/*.png'):
+		for size in (32, 64, 128):
+            # 創建並啟動線程
+			threading.Thread(
+				target=generate_thumbnail, 
+				args=(infile, (size, size))
+			).start()
+			
+
+if __name__ == '__main__':
+	main()
+
+"""
+
+print('------------------------------------------------------------')	#60個
