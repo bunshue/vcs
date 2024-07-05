@@ -27,20 +27,35 @@ flag_pause_mode = False
 flag_new_mp3_file = False
 mp3_foldernames = []
 mp3_filenames = []
+mp3_play_index = 0
+total_mp3_files = 0
+current_playing_mp3_filename = ""#現正播放檔案
+
+STATUS_STOP = 0
+STATUS_PLAY = 1
+STATUS_PAUSE = 2
+STATUS_OTHER = 3
+
+flag_play_status = STATUS_STOP
 
 print("------------------------------------------------------------")  # 60個
 
 
 def pausemp3():  # 暫停
     global flag_pause_mode
+    global flag_play_status
     if flag_pause_mode == False:
         flag_pause_mode = True
         pygame.mixer.music.pause() #暫停播放
         button02.config(text="恢復")
+        flag_play_status = STATUS_PAUSE
     else:
         flag_pause_mode = False
         pygame.mixer.music.unpause() #恢復播放
         button02.config(text="暫停")
+        flag_play_status = STATUS_PLAY
+    show_play_status()
+
 
 def increase():  # 音量大
     global volume
@@ -48,7 +63,7 @@ def increase():  # 音量大
     if volume >= 1:
         volume = 1
     pygame.mixer.music.set_volume(volume)
-
+    show_play_status()
 
 def decrease():  # 音量小
     global volume
@@ -56,17 +71,15 @@ def decrease():  # 音量小
     if volume <= 0.2:
         volume = 0.2
     pygame.mixer.music.set_volume(volume)
-
+    show_play_status()
 
 def playmp3():  # 播放
-    print(mp3_filename)
-    global status
     global flag_new_mp3_file
     if flag_new_mp3_file == True:  # 更換歌曲
         playNewmp3a()
     else:
         if not pygame.mixer.music.get_busy():
-            pygame.mixer.music.load(mp3_filename)
+            pygame.mixer.music.load(current_playing_mp3_filename)
             pygame.mixer.music.play(loops=-1)  # -1: 循環播放
         else:
             print("沒事")
@@ -74,18 +87,19 @@ def playmp3():  # 播放
 
 
 def playNewmp3a():  # 播放mp3檔案, 要先stop, 再load, 再play
-    global mp3_filename
+    global current_playing_mp3_filename
     pygame.mixer.music.stop() # 停止播放, 要先stop, 才不會冒出一個雜音
-    pygame.mixer.music.load(mp3_filename)
+    pygame.mixer.music.load(current_playing_mp3_filename)
     pygame.mixer.music.play(loops=-1)  # -1: 循環播放
 
 
 def playNewmp3b(song):
-    global status
+    current_playing_mp3_filename = mp3_filenames[mp3_play_index]
     pygame.mixer.music.stop() # 停止播放
-    pygame.mixer.music.load(mp3_filenames[index])
+    pygame.mixer.music.load(current_playing_mp3_filename)
     pygame.mixer.music.play() # 無參數, 單次播放
-    status = "正在播放 {}".format(mp3_filenames[index])
+    mp3_index.set(str(mp3_play_index+1)+"/"+str(total_mp3_files))
+    main_message1.set("{}".format(current_playing_mp3_filename))
 
 
 def stopmp3():  # 停止播放
@@ -93,9 +107,42 @@ def stopmp3():  # 停止播放
 
 
 def exitmp3():  # 結束
+    global mp3_play_index
+    global mp3_foldernames
+
+    filename = "tk_ex_MusicPlayer1.txt"
+    print("檔名 :", filename)
+    
+    with open(filename, "w", encoding="utf-8") as f:
+        f.write(str(mp3_play_index))
+        f.write("\n")
+
+        for _ in mp3_foldernames:
+            print(_)
+            f.write(_)
+            f.write("\n")
+
     print('離開mp3播放器 要先stop再關閉window')
     pygame.mixer.music.stop() # 停止播放
     window.destroy()  # 關閉視窗
+
+def show_play_status():
+    mesg = ""
+    global flag_play_status
+   
+    if flag_play_status == STATUS_STOP:
+        mesg += "停止 "
+    elif flag_play_status == STATUS_PLAY:
+        mesg += "播放 "
+    elif flag_play_status == STATUS_PAUSE:
+        mesg += "暫停 "
+    else:
+        mesg += "其他 "
+
+    global volume
+    mesg += "音量 :" + str(volume)
+
+    main_message2.set(mesg)
 
 
 def button00Click():
@@ -105,14 +152,14 @@ def button00Click():
         parent=window, mode="rb", title="選取mp3", filetypes=[("mp3檔案", "*.mp3")]
     )
     if file:
-        global mp3_filename
+        global current_playing_mp3_filename
         global flag_new_mp3_file
-        mp3_filename_old = mp3_filename
+        current_playing_mp3_filename_old = current_playing_mp3_filename
         flag_new_mp3_file = False
-        if mp3_filename != file.name:
+        if current_playing_mp3_filename != file.name:
             flag_new_mp3_file = True
-            mp3_filename = file.name
-            message = "檔案 : " + mp3_filename
+            current_playing_mp3_filename = file.name
+            message = "檔案 : " + current_playing_mp3_filename
             print(message)
             text1.insert("end", message)
             main_message1.set(message)
@@ -121,9 +168,12 @@ def button00Click():
 
 
 def button01Click():
-    print("你按了 播放")
+    #print("你按了 播放")
     playmp3()
-    main_message2.set("正在播放 {}".format(mp3_filename))
+    main_message1.set("{}".format(current_playing_mp3_filename))
+    global flag_play_status
+    flag_play_status = STATUS_PLAY
+    show_play_status()
 
 def button02Click():
     print("你按了 暫停")
@@ -131,18 +181,21 @@ def button02Click():
 
 
 def button03Click():
-    print("你按了 音量調大")
+    #print("你按了 音量調大")
     increase()
 
 
 def button04Click():
-    print("你按了 音量調小")
+    #print("你按了 音量調小")
     decrease()
 
 
 def button05Click():
     print("你按了 停止")
     stopmp3()
+    global flag_play_status
+    flag_play_status = STATUS_STOP
+    show_play_status()
 
 
 def button10Click():
@@ -157,26 +210,28 @@ def button11Click():
 
 
 def button12Click():
-    print("你按了 上一首")
-    global index
-    index -= 1
-    if index < 0:
-        index = len(mp3_filenames) - 1
-    playNewmp3b(mp3_filenames[index])
-    mp3_filename = mp3_filenames[index]
-    main_message1.set(mp3_filename)
+    #print("你按了 上一首")
+    global mp3_play_index
+    mp3_play_index -= 1
+    if mp3_play_index < 0:
+        mp3_play_index = len(mp3_filenames) - 1
+    current_playing_mp3_filename = mp3_filenames[mp3_play_index]
+    playNewmp3b(current_playing_mp3_filename)
+    mp3_index.set(str(mp3_play_index+1)+"/"+str(total_mp3_files))
+    main_message1.set("{}".format(current_playing_mp3_filename))
 
 
 def button13Click():
-    print("你按了  下一首")
-    global index
-    index += 1
-    if index == len(mp3_filenames):
-        index = 0
-    playNewmp3b(mp3_filenames[index])
-    mp3_filename = mp3_filenames[index]
-    main_message1.set(mp3_filename)
-
+    #print("你按了  下一首")
+    global mp3_play_index
+    mp3_play_index += 1
+    if mp3_play_index == len(mp3_filenames):
+        mp3_play_index = 0
+    current_playing_mp3_filename = mp3_filenames[mp3_play_index]
+    playNewmp3b(current_playing_mp3_filename)
+    mp3_index.set(str(mp3_play_index+1)+"/"+str(total_mp3_files))
+    main_message1.set("{}".format(current_playing_mp3_filename))
+    
 
 def button14Click():
     # print('你按了button14')
@@ -234,12 +289,18 @@ def button21Click():
 
 def button22Click():
     print('你按了button22 測試 看list')
+    print('目前位置')
+    print(mp3_play_index)
+    
     print('資料夾')
     for _ in mp3_foldernames:
         print(_)
+        
     print('檔案')
+    cnt = 1
     for _ in mp3_filenames:
-        print(_)
+        print(str(cnt), _)
+        cnt += 1
 
 def button23Click():
     print('你按了button23 測試3')
@@ -273,8 +334,9 @@ def clear_text1():
 window = tk.Tk()
 window.geometry("600x800")
 
-main_message1 = tk.StringVar()
-main_message2 = tk.StringVar()
+main_message1 = tk.StringVar() # 放 現正播放檔案
+main_message2 = tk.StringVar() # 放 播放狀態 播放 / 暫停 / 停止 播放時間 單次 循環 聲量......
+mp3_index = tk.StringVar()
 
 # 設定主視窗大小
 W = 800
@@ -319,7 +381,7 @@ def setVolume(val):
     pygame.mixer.music.set_volume(volume / 100)
 
 scale1 = tk.Scale(window, from_=100, to=0, command=setVolume, length=200)
-scale1.place(x=x_st-70 + dx * 0, y=y_st + dy * 0)
+scale1.place(x=x_st-70 + dx * 0, y=y_st + dy * 0+30)
 scale1.set(100)
 
 button00_text = tk.StringVar()
@@ -375,9 +437,8 @@ button23.place(x=x_st + dx * 3, y=y_st + dy * 2)
 button24.place(x=x_st + dx * 4, y=y_st + dy * 2)
 button25.place(x=x_st + dx * 5, y=y_st + dy * 2)
 
-font_size = 20
-
 # 加入 Label
+font_size = 18
 label_message1 = tk.Label(
     window, font=("標楷體", font_size), fg="red", textvariable=main_message1
 )
@@ -390,57 +451,77 @@ label_message2 = tk.Label(
 label_message2.place(x=5, y=0 + 10+40)
 main_message2.set("")
 
+font_size = 16
+label_index = tk.Label(
+    window, font=("標楷體", font_size), fg="red", textvariable=mp3_index
+)
+label_index.place(x=10, y=0 + 10+40+40)
+mp3_index.set("AAA")
+
+
 # 加入 Text
 text1 = tk.Text(window, width=100, height=30)  # 放入多行輸入框
 text1.place(x=x_st + dx * 0, y=y_st + dy * 3 + 20)
 
 def get_mp3_filenames():
     global mp3_filenames
+    global total_mp3_files
+    global mp3_play_index
+    global mp3_foldernames
     """
     mp3_foldername = "D:/vcs/astro/_DATA2/_mp3/japanese/昭和の歌--演歌系列1/"
     mp3_filenames = glob.glob(mp3_foldername + "*.mp3")
     """
 
     filename = "tk_ex_MusicPlayer1.txt"
-    with open(filename, "r") as f:
+    if not os.path.exists(filename):
+        print("檔案不存在")
+    else:
+        print("檔案存在")
+
+    with open(filename, "r", encoding="utf-8") as f:
         lines = f.readlines()
-        #print(lines)
+        print(lines)
         mp3_foldernames = []
+        cnt = 0
         for line in lines:
-            print(line)
-            if os.path.isdir(line.strip()):
-                mp3_foldernames.append(line.strip())
+            #print('第', cnt, '行 :', line.strip())
+            if cnt == 0:
+                mp3_play_index = int(line.strip())
+                print('取得 mp3_play_index =', mp3_play_index)
             else:
-                print('不是資料夾')
+                if os.path.isdir(line.strip()):
+                    mp3_foldernames.append(line.strip())
+                else:
+                    print('不是資料夾')
+            cnt += 1
         for _ in mp3_foldernames:
             mp3_filenames += glob.glob(_ + "*.mp3")
             #print(_)
             #print(mp3_filenames)
-            
-print("aaaaaaaaaaa")
-
-#print(mp3_foldernames)
-
-get_mp3_filenames()
-
-print("aaaaaaaaaaa")
-
-#print(mp3_filenames)
-
-index = 0
-mp3_filename = mp3_filenames[index]
-
-message = mp3_filename
-main_message1.set(message)
-
-pygame.mixer.init()  # 初始化 mixer
+    total_mp3_files = len(mp3_filenames)
+    print('共有', total_mp3_files, '個mp3檔案')
 
 volume = 0.6  # 起始音量
+
+show_play_status()
+
+mp3_play_index = 0
+
+get_mp3_filenames()
+#print(mp3_filenames)
+
+current_playing_mp3_filename = mp3_filenames[mp3_play_index]#現正播放檔案
+
+mp3_index.set(str(mp3_play_index+1)+"/"+str(total_mp3_files))
+
+main_message1.set(current_playing_mp3_filename)
+
+pygame.mixer.init()  # 初始化 mixer
 
 window.protocol("WM_DELETE_WINDOW", exitmp3)
 
 window.mainloop()
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -451,6 +532,7 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
+
 
 """
 pygame.init()
@@ -469,31 +551,34 @@ print('結束播放')
 
 
 """
+
+#要能夠順利讀取各種奇怪的檔名中日文字
+
+print("測試寫檔")
 mp3_foldername1 = 'C:/_git/vcs/_1.data/______test_files1/_mp3/'
 mp3_foldername2 = 'D:/vcs/astro/_DATA2/_mp3/陳一郎_台語精選集6CD/disc2/'
 mp3_foldername3 = 'D:/vcs/astro/_DATA2/_mp3/japanese/昭和の歌--演歌系列9/'
+mp3_foldername4 = 'D:/vcs/astro/_DATA2/_________整理_mp3/_mp3_日本_new/(アルバム)演歌 八代亜紀 -[全曲集(Disc1-2)](全24曲)/渕_辙 - [葢轿瘅(Disc1)]'
+mp3_foldername5 = 'D:/vcs/astro/_DATA2/_mp3/japanese/美空ひばり(美空云雀).-.[美空ひばり全曲集1].专辑.(MP3)/'
 
-mp3_foldernames = [mp3_foldername1, mp3_foldername2, mp3_foldername3]
+mp3_foldernames = [mp3_foldername1, mp3_foldername2, mp3_foldername3, mp3_foldername4, mp3_foldername5]
 
 print(mp3_foldernames)
 
 filename = "tk_ex_MusicPlayer1.txt"
 
 print("檔名 :", filename)
-with open(filename, "w") as f:
+with open(filename, "w", encoding="utf-8") as f:
     for _ in mp3_foldernames:
         f.write(_)
         f.write("\n")
 
+print("測試讀檔")
+filename = "tk_ex_MusicPlayer1.txt"
+
+with open(filename, "r", encoding="utf-8") as f:
+    lines = f.readlines()
+    print(lines)
+
 """
-
-
-
-
-
-# mp3_foldername = 'C:/_git/vcs/_1.data/______test_files1/_mp3/'
-
-# 日文資料夾名稱有問題
-# mp3_foldername = 'D:/vcs/astro/_DATA2/_mp3/japanese/美空ひばり(美空云雀).-.[美空ひばり全曲集1].专辑.(MP3)/'
-
 

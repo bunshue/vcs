@@ -44,12 +44,41 @@ def get_soup_from_url(url):
     
 print('------------------------------------------------------------')	#60個
 
+print('BeautifulSoup 測試 12')
 
- 
+html_doc = """
+<html><head><title>網頁標題</title></head>
 
+<p class="title"><b>文件標題</b></p>
 
-print('------------------------------------------------------------')	#60個
+<p class="story">Once upon a time there were three little sisters; and their names were
+<a href="http://example.com/elsie" class="sister" id="link1">Elsie</a>,
+<a href="http://example.com/lacie" class="sister" id="link2">Lacie</a> and
+<a href="http://example.com/tillie" class="sister" id="link3">Tillie</a>;
+and they lived at the bottom of a well.</p>
 
+<p class="story">...</p>
+"""
+
+soup = BeautifulSoup(html_doc, 'html.parser') 
+
+print(soup.find('b')) # <b>文件標題</b>
+print(soup.find_all('a'))
+print(soup.find_all("a", {"class":"sister"}))
+
+data1 = soup.find("a", {"href":"http://example.com/elsie"})
+print(data1.text) # Elsie
+
+data2 = soup.find("a", {"id":"link2"}) 
+print(data2.text) # Lacie
+
+data3 = soup.select("#link3") 
+print(data3[0].text) # Tillie
+print(soup.find_all(['title','a'])) 
+
+data1 = soup.find("a", {"id":"link1"}) 
+print(data1.get("href")) # http://example.com/elsie
+print(data1["href"])     # http://example.com/elsie
 
 print('------------------------------------------------------------')	#60個
 print('BeautifulSoup 測試 1')
@@ -245,13 +274,13 @@ for img in all_imgs:
             print(full_path)
             image = urlopen(full_path) #問題在此
             print('aaaaaaaaaaaa')
-            '''
+            """
             with open(os.path.join(images_dir, filename),'wb') as f:
                 f.write(image.read())  
             n+=1
             if n>=1000: # 最多下載 1000 張
                 break
-            '''
+            """
         except:
             print("{} 無法讀取!".format(filename))
             
@@ -294,7 +323,7 @@ for img in imglist:
 print('------------------------------------------------------------')	#60個
 print('BeautifulSoup 測試 3')
 
-html = '''
+html = """
 <html>
   <head><meta charset="UTF-8"><title>我是網頁標題</title></head>
   <body>
@@ -302,20 +331,20 @@ html = '''
       <p id="p2" class='red'>我是段落二</p>
   </body>
 </html>
-'''
+"""
 
-sp = BeautifulSoup(html, 'lxml')
+soup = BeautifulSoup(html, 'lxml')
 
-print(sp.find('p'))
-print(sp.find_all('p'))
-print(sp.find('p', {'id':'p2', 'class':'red'}))
-print(sp.find('p', id='p2', class_= 'red'))
+print(soup.find('p'))
+print(soup.find_all('p'))
+print(soup.find('p', {'id':'p2', 'class':'red'}))
+print(soup.find('p', id='p2', class_= 'red'))
 
 
 print('------------------------------------------------------------')	#60個
 print('BeautifulSoup 測試 4')
 
-html = '''
+html = """
 <html>
   <head><meta charset="UTF-8"><title>我是網頁標題</title></head>
   <body>
@@ -323,18 +352,18 @@ html = '''
       <p id="p2" class='red'>我是段落二</p>
   </body>
 </html>
-'''
-sp = BeautifulSoup(html, 'lxml')
+"""
+soup = BeautifulSoup(html, 'lxml')
 
-print(sp.select('title'))
-print(sp.select('p'))
-print(sp.select('#p1'))
-print(sp.select('.red'))
+print(soup.select('title'))
+print(soup.select('p'))
+print(soup.select('#p1'))
+print(soup.select('.red'))
 
 print('------------------------------------------------------------')	#60個
 print('BeautifulSoup 測試 5')
 
-html = '''
+html = """
 <html>
   <head><meta charset="UTF-8"><title>我是網頁標題</title></head>
   <body>
@@ -342,14 +371,13 @@ html = '''
       <a href="http://www.e-happy.com.tw">超連結</a>
   </body>
 </html>
-'''
-sp = BeautifulSoup(html, 'lxml')
+"""
+soup = BeautifulSoup(html, 'lxml')
 
-print(sp.select('img')[0].get('src'))
-print(sp.select('a')[0].get('href'))
-print(sp.select('img')[0]['src'])
-print(sp.select('a')[0]['href'])
-
+print(soup.select('img')[0].get('src'))
+print(soup.select('a')[0].get('href'))
+print(soup.select('img')[0]['src'])
+print(soup.select('a')[0]['href'])
 
 print('------------------------------------------------------------')	#60個
 print('BeautifulSoup 測試 6')
@@ -368,35 +396,25 @@ html = """
 </div>
 """
 
-sp = BeautifulSoup(html,'lxml') 
+soup = BeautifulSoup(html,'lxml') 
 
-print(sp.title) # <title>網頁標題</title>
+print(soup.title) # <title>網頁標題</title>
+print(soup.find('h1')) # <h1>文件標題</h1>
+print(soup.find_all('a')) 
+print(soup.find_all("a", {"class":"red"}))
 
-print(sp.find('h1')) # <h1>文件標題</h1>
-
-print(sp.find_all('a')) 
-print(sp.find_all("a", {"class":"red"}))
-
-data1=sp.find("a", {"href":"http://example.com/one"})
+data1=soup.find("a", {"href":"http://example.com/one"})
 print(data1.text) # First
 
-data2 = sp.select("#link1") 
+data2 = soup.select("#link1") 
 print(data2[0].text) # First
 print(data2[0].get("href")) # http://example.com/one
 print(data2[0]["href"])     # http://example.com/one
 
-print(sp.find_all(['title','h1'])) # [<title>網頁標題</title>, <h1>文件標題</h1>]
+print(soup.find_all(['title','h1'])) # [<title>網頁標題</title>, <h1>文件標題</h1>]
 
-print(sp.select('div img')[0]['src']) # http://example.com/three.jpg
-
-
-
-
-
-
-print('BeautifulSoup 測試 作業完成')
-
-    
+print(soup.select('div img')[0]['src']) # http://example.com/three.jpg
+  
 print('------------------------------------------------------------')	#60個
 print('BeautifulSoup 測試 1')
 
@@ -718,10 +736,10 @@ for link in all_links:
 print('------------------------------------------------------------')	#60個
 print('BeautifulSoup 測試 20')
 
-post_html = '''
+post_html = """
 </body>
 </html>
-'''
+"""
 
 domain = "{}://{}".format(urllib.parse.urlparse(url).scheme, urllib.parse.urlparse(url).hostname)
 print('domain : ', domain)
@@ -818,11 +836,11 @@ for link in all_links:
             </div>
             """.format(carousel_part1, carousel_part2)
 
-'''
+"""
 fp = open('index.html', 'w')
 fp.write(pre_html+html_body+post_html)
 fp.close()            
-'''
+"""
 
 print('------------------------------------------------------------')	#60個
 print('BeautifulSoup 測試 21')
@@ -892,42 +910,6 @@ for plate_number in plate_numbers:
 
 print('------------------------------------------------------------')	#60個
 print('BeautifulSoup 測試 23')
-
-
-
-
-print('\n\nBeautifulSoup 測試 作業完成\n')
-
-
-
-'''
-
-
-url = 'http://ehappy.tw/bsdemo1.htm'
-html = requests.get(url)
-html.encoding = 'UTF-8'
-sp = BeautifulSoup(html.text, 'lxml')
-
-print(sp.title)
-print(sp.title.text)
-print(sp.h1)
-print(sp.p)
-
-
-
-'''
-
-
-
-
-
-
-
-print('------------------------------------------------------------')	#60個
-
-print('------------------------------------------------------------')	#60個
-print('BeautifulSoup 測試 1')
-'''
 
 # Python 測試 BeautifulSoup Yahoo電影 台北票房榜
 
@@ -1060,6 +1042,7 @@ context = ssl._create_unverified_context()
 # 給好樂迪的網址建立 Request
 url = 'https://www.holiday.com.tw/SongInfo/SongList.aspx'
 req_obj = request.Request(url)
+
 """ 有問題
 song_list = []
 # 發送 request
@@ -1090,7 +1073,6 @@ print('BeautifulSoup 測試 4')
     
 """
 參考 https://ithelp.ithome.com.tw/articles/10186119
-
 BeautifulSoup 套件 是 Python 上的 網頁解析工具
 requests 套件允許我們發送與接收有機及草飼的 HTTP/1.1 請求（這真的是美式幽默。）
 """
@@ -1331,8 +1313,7 @@ ptt_nba_dict = {"author": author_ids,
 ptt_nba_df = pd.DataFrame(ptt_nba_dict)
 ptt_nba_df
 
-"""
-old
+""" old
 
 print('BeautifulSoup 測試 4')
 
@@ -1435,21 +1416,6 @@ if html_data:
 else:
         print('無法取得網頁資料')
 
-
-
-print('BeautifulSoup 測試 作業完成')
-
-
-
-
-
-
-
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
 print('BeautifulSoup 測試 7')
 
@@ -1497,7 +1463,7 @@ url = 'https://www.dreamstime.com/free-images_pg1'
 html = requests.get(url)
 html.encoding="utf-8"
 
-sp = BeautifulSoup(html.text, 'html.parser')
+soup = BeautifulSoup(html.text, 'html.parser')
 
 # 建立 images 目錄儲存圖片
 images_dir="images/"
@@ -1505,7 +1471,7 @@ if not os.path.exists(images_dir):
     os.mkdir(images_dir)
     
 # 取得所有 <a> 和 <img> 標籤
-all_links=sp.find_all(['a','img']) 
+all_links=soup.find_all(['a','img']) 
 for link in all_links:
     # 讀取 src 和　href 屬性內容
     src=link.get('src')
@@ -1668,7 +1634,7 @@ with open("tmp_教育部全球資訊網即時新聞.txt", "wt", encoding="utf-8"
 print("Done!")
 
 print('------------------------------------------------------------')	#60個
-"""
+
 print('抓取網頁 bs分析 10')
 
 import dominate
@@ -1739,7 +1705,6 @@ for item in items:
 print('------------------------------------------------------------')	#60個
 
 """
-
 print('抓取網頁 bs分析 13')
 
 url = 'https://www.ptt.cc/bbs/gossiping/index.html'
@@ -1750,7 +1715,7 @@ titles = soup.find_all('div', class_='title')
 for title in titles:
     print(title.a.text)
 
-'''
+"""
 print('------------------------------------------------------------')	#60個
 print('BeautifulSoup 測試 12')
 
@@ -1915,37 +1880,24 @@ for listRight in soup.select('.focus-news'):
 
 print('------------------------------------------------------------')	#60個
 
-import bs4
-
 htmlFile = requests.get('https://deepmind.com.tw')
-objSoup = bs4.BeautifulSoup(htmlFile.text, 'lxml')
-print("列印BeautifulSoup物件資料型態 ", type(objSoup))
+soup = BeautifulSoup(htmlFile.text, 'lxml')
+print("列印BeautifulSoup物件資料型態 ", type(soup))
 
 print('------------------------------------------------------------')	#60個
 
 htmlFile = open('myhtml.html', encoding='utf-8')
-objSoup = bs4.BeautifulSoup(htmlFile, 'lxml')
-print("列印BeautifulSoup物件資料型態 ", type(objSoup))
+soup = BeautifulSoup(htmlFile, 'lxml')
+print("列印BeautifulSoup物件資料型態 ", type(soup))
+print("物件類型  = ", type(soup.title))
+print("列印title = ", soup.title)
+print("title內容 = ", soup.title.text)
 
 print('------------------------------------------------------------')	#60個
 
 htmlFile = open('myhtml.html', encoding='utf-8')
-objSoup = bs4.BeautifulSoup(htmlFile, 'lxml')
-print("物件類型  = ", type(objSoup.title))
-print("列印title = ", objSoup.title)
-
-print('------------------------------------------------------------')	#60個
-
-htmlFile = open('myhtml.html', encoding='utf-8')
-objSoup = bs4.BeautifulSoup(htmlFile, 'lxml')
-print("列印title = ", objSoup.title)
-print("title內容 = ", objSoup.title.text)
-
-print('------------------------------------------------------------')	#60個
-
-htmlFile = open('myhtml.html', encoding='utf-8')
-objSoup = bs4.BeautifulSoup(htmlFile, 'lxml')
-objTag = objSoup.find('h1')
+soup = BeautifulSoup(htmlFile, 'lxml')
+objTag = soup.find('h1')
 print("資料型態       = ", type(objTag))
 print("列印Tag        = ", objTag)
 print("Text屬性內容   = ", objTag.text)
@@ -1954,8 +1906,8 @@ print("String屬性內容 = ", objTag.string)
 print('------------------------------------------------------------')	#60個
 
 htmlFile = open('myhtml.html', encoding='utf-8')
-objSoup = bs4.BeautifulSoup(htmlFile, 'lxml')
-objTag = objSoup.find_all('h1')
+soup = BeautifulSoup(htmlFile, 'lxml')
+objTag = soup.find_all('h1')
 print("資料型態    = ", type(objTag))     # 列印資料型態
 print("列印Tag串列 = ", objTag)           # 列印串列
 print("以下是列印串列元素 : ")
@@ -1965,16 +1917,16 @@ for data in objTag:                       # 列印串列元素內容
 print('------------------------------------------------------------')	#60個
 
 htmlFile = open('myhtml.html', encoding='utf-8')
-objSoup = bs4.BeautifulSoup(htmlFile, 'lxml')
-objTag = objSoup.find_all('h1', limit=2)
+soup = BeautifulSoup(htmlFile, 'lxml')
+objTag = soup.find_all('h1', limit=2)
 for data in objTag:                       # 列印串列元素內容
     print(data.text)
 
 print('------------------------------------------------------------')	#60個
 
 htmlFile = open('myhtml.html', encoding='utf-8')
-objSoup = bs4.BeautifulSoup(htmlFile, 'lxml')
-objTag = objSoup.find_all('h1')
+soup = BeautifulSoup(htmlFile, 'lxml')
+objTag = soup.find_all('h1')
 print("資料型態    = ", type(objTag))     # 列印資料型態
 print("列印Tag串列 = ", objTag)           # 列印串列
 print("\n使用Text屬性列印串列元素 : ")
@@ -1987,16 +1939,16 @@ for data in objTag:
 print('------------------------------------------------------------')	#60個
 
 htmlFile = open('myhtml.html', encoding='utf-8')
-objSoup = bs4.BeautifulSoup(htmlFile, 'lxml')
-objTag = objSoup.find(id='author')
+soup = BeautifulSoup(htmlFile, 'lxml')
+objTag = soup.find(id='author')
 print(objTag)
 print(objTag.text)
 
 print('------------------------------------------------------------')	#60個
 
 htmlFile = open('myhtml.html', encoding='utf-8')
-objSoup = bs4.BeautifulSoup(htmlFile, 'lxml')
-objTag = objSoup.find_all(id='content')
+soup = BeautifulSoup(htmlFile, 'lxml')
+objTag = soup.find_all(id='content')
 for tag in objTag:
     print(tag)
     print(tag.text)
@@ -2004,8 +1956,8 @@ for tag in objTag:
 print('------------------------------------------------------------')	#60個
 
 htmlFile = open('myhtml.html', encoding='utf-8')
-objSoup = bs4.BeautifulSoup(htmlFile, 'lxml')
-objTag = objSoup.select('#author')
+soup = BeautifulSoup(htmlFile, 'lxml')
+objTag = soup.select('#author')
 print("資料型態     = ", type(objTag))          # 列印資料型態
 print("串列長度     = ", len(objTag))           # 列印串列長度
 print("元素資料型態 = ", type(objTag[0]))       # 列印元素資料型態
@@ -2014,8 +1966,8 @@ print("元素內容     = ", objTag[0].getText())   # 列印元素內容
 print('------------------------------------------------------------')	#60個
 
 htmlFile = open('myhtml.html', encoding='utf-8')
-objSoup = bs4.BeautifulSoup(htmlFile, 'lxml')
-objTag = objSoup.select('#author')
+soup = BeautifulSoup(htmlFile, 'lxml')
+objTag = soup.select('#author')
 print("列出串列元素的資料型態    = ", type(objTag[0]))
 print(objTag[0])
 print("列出str()轉換過的資料型態 = ", type(str(objTag[0])))
@@ -2024,15 +1976,15 @@ print(str(objTag[0]))
 print('------------------------------------------------------------')	#60個
 
 htmlFile = open('myhtml.html', encoding='utf-8')
-objSoup = bs4.BeautifulSoup(htmlFile, 'lxml')
-objTag = objSoup.select('#author')
+soup = BeautifulSoup(htmlFile, 'lxml')
+objTag = soup.select('#author')
 print(str(objTag[0].attrs))
 
 print('------------------------------------------------------------')	#60個
 
 htmlFile = open('myhtml.html', encoding='utf-8')
-objSoup = bs4.BeautifulSoup(htmlFile, 'lxml')
-pObjTag = objSoup.select('p')
+soup = BeautifulSoup(htmlFile, 'lxml')
+pObjTag = soup.select('p')
 print("含<p>標籤的串列長度 = ", len(pObjTag))
 for pObj in pObjTag:
     print(str(pObjTag))         # 內部有子標籤<strong>字串
@@ -2042,8 +1994,8 @@ for pObj in pObjTag:
 print('------------------------------------------------------------')	#60個
 
 htmlFile = open('myhtml.html', encoding='utf-8')
-objSoup = bs4.BeautifulSoup(htmlFile, 'lxml')
-imgTag = objSoup.select('img')
+soup = BeautifulSoup(htmlFile, 'lxml')
+imgTag = soup.select('img')
 print("含<img>標籤的串列長度 = ", len(imgTag))
 for img in imgTag:              
     print(img)   
@@ -2051,8 +2003,8 @@ for img in imgTag:
 print('------------------------------------------------------------')	#60個
 
 htmlFile = open('myhtml.html', encoding='utf-8')
-objSoup = bs4.BeautifulSoup(htmlFile, 'lxml')
-imgTag = objSoup.select('img')
+soup = BeautifulSoup(htmlFile, 'lxml')
+imgTag = soup.select('img')
 print("含<img>標籤的串列長度 = ", len(imgTag))
 for img in imgTag:              
     print("列印標籤串列 = ", img)
@@ -2062,8 +2014,8 @@ print('------------------------------------------------------------')	#60個
 
 url = 'http://www.xzw.com/fortune/'
 htmlfile = requests.get(url)
-objSoup = bs4.BeautifulSoup(htmlfile.text, 'lxml')      # 取得物件
-constellation = objSoup.find('div', id='list')
+soup = BeautifulSoup(htmlfile.text, 'lxml')      # 取得物件
+constellation = soup.find('div', id='list')
 cons = constellation.find('div', 'alb').find_all('div')
 
 pict_url = 'http://www.xzw.com'
@@ -2248,9 +2200,11 @@ print('已存檔到 : ', filename)
 
 print("------------------------------------------------------------")  # 60個
 
+print('將網頁上的資料存成csv檔')
+
 print("新北市不動產仲介經紀商業同業公會網站")
 
-file_name = "tmp_新北市仲介.csv" #設定csv寫入檔名
+file_name = "tmp_新北市仲介.csv"
 
 f = open(file_name, "w", encoding = 'utf8')
 w = csv.writer(f)
@@ -2258,12 +2212,18 @@ httphead = 'http://www.tcr.org.tw/a/table_blogs/index/21654'
 
 # 根據新北市不動產仲介經紀商業同業公會網站會員介紹首頁
 # 與其後各頁差異，根據頁面規則涵蓋需要抓取頁面
-for i in range(1,17):
+# 資料抓前 N 頁
+N = 3
+for i in range(1, N+1):
+    print("第", i, '頁')
     if i==1:
         htmlname=httphead
     else:
         htmlname=httphead+"?page="+str(i)
+
+    print(htmlname)
     html = urlopen(htmlname)
+    
     # 以BeautifulSoup的"lxml"模式解析網頁，設定為bsObj物件
     bsObj = BeautifulSoup(html, "lxml")
     count=0
@@ -2286,42 +2246,18 @@ for i in range(1,17):
             F4 = cell[4].a.string
         #print(F0,F1,F2,F3,F4)
         data = [[F0,F1,F2,F3,F4]]
-        if i>1 and count>0:
+
+        if i == 1:
             w.writerows(data) # 逐行寫入csv檔案
+        elif i>1 and count>0:
+            w.writerows(data) # 逐行寫入csv檔案
+
         count=count+1
+        
+        if count > 20:
+            break
 
 f.close()
-
-print("------------------------------------------------------------")  # 60個
-
-# 政府資料開放平臺 XML格式資料擷取與應用
-
-url = "https://apiservice.mol.gov.tw/OdService/download/A17000000J-000007-yrg"
-
-with urllib.request.urlopen(url) as response:
-    get_xml = response.read()
-
-data = BeautifulSoup(get_xml, "xml")
-HandlingUnit = data.find_all("辦理單位")
-ContactPerson = data.find_all("聯絡人")
-DuringTraining = data.find_all("訓練期間")
-ContactNumber = data.find_all("聯絡電話")
-CourseTitle = data.find_all("課程名稱")
-
-csv_str = ""
-for i in range(0, len(HandlingUnit)):
-    csv_str += "{},{},{},{},{}\n".format(
-        HandlingUnit[i].get_text(),
-        ContactPerson[i].get_text(),
-        ContactNumber[i].get_text(),
-        DuringTraining[i].get_text(),
-        CourseTitle[i].get_text(),
-    )
-
-with open("tmp_course_xml.csv", "w") as f:
-    story = f.write(csv_str)  # 寫入檔案
-
-print("XML格式資料擷取與應用,已將資料寫入 tmp_course_xml.csv")
 
 print("------------------------------------------------------------")  # 60個
 
@@ -2749,13 +2685,11 @@ print(bs.select('#footer a')[0]['href'])
 print('------------------------------------------------------------')	#60個
 
 """
-import bs4
-
 # 馬丁路德 I have a dream
 url = 'http://www.analytictech.com/mb021/mlk.htm'
 page = requests.get(url)
 page.raise_for_status()
-soup = bs4.BeautifulSoup(page.text, 'html.parser')
+soup = BeautifulSoup(page.text, 'html.parser')
 p_elems = [element.text for element in soup.find_all('p')]
 
 speech = ' '.join(p_elems)  # 將段落內容串在一起
@@ -2945,9 +2879,9 @@ for i, book in enumerate(books):
 """
 print('------------------------------------------------------------')	#60個
 
-
 # 博客來寵物電子書
 url = "https://www.books.com.tw/web/sys_cebbotm/cebook/1003/?loc=P_0001_2_003"
+
 response = requests.get(url)  # 使用requests的get()方法傳回可擷取網頁資訊response物件
 response.encoding = "utf-8"  # 設定編碼模式避免亂碼
 # 使用BeautifulSoup()函式取得解析網頁的BeautifulSoup物件bs
@@ -2964,6 +2898,7 @@ print("------------------------------------------------------------")  # 60個
 
 # 博客來寵物電子書
 url = "https://www.books.com.tw/web/sys_cebbotm/cebook/1003/?loc=P_0001_2_003"
+
 response = requests.get(url)  # 使用requests的get()方法傳回可擷取網頁資訊response物件
 response.encoding = "utf-8"  # 設定編碼模式避免亂碼
 # 使用BeautifulSoup()函式取得解析網頁的BeautifulSoup物件bs
@@ -2977,8 +2912,9 @@ print("------------------------------------------------------------")  # 60個
 
 # html to csv
 
-# 指定url變數為「博客來電子寵物書」網頁的網址
+# 博客來寵物電子書
 url = "https://www.books.com.tw/web/sys_cebbotm/cebook/1003/?loc=P_0001_2_003"
+
 # 建立取得網頁資訊的Response物件，物件名稱為response
 response = requests.get(url)
 # 建立解析網頁的BeautifulSoup物件，物件名稱為bs
@@ -2987,8 +2923,32 @@ bs = BeautifulSoup(response.text, "lxml")
 listName = bs.select("div.item>div.msg>h4>a")
 listPress = bs.select("li.info>span>a")
 listPrice = bs.select("li.set2")
+
+print('------------')
+print(len(listName))
+print('------------')
+print(type(listName))
+print('------------')
+print(listName)
+print('------------')
+
+print('書名')
+for i in range(0, len(listName)//10):
+    print(listName[i].text)
+
+print('\n出版社')
+for i in range(0, len(listName)//10):
+    print(listPress[i].text)
+
+print('\n價格')
+for i in range(0, len(listName)//10):
+    print(listPrice[i].text)
+    Price = listPrice[i].text.split("：")[1].split("元")[0].split("折")[-1]
+    print(Price)
+
+    
 # 將listName與listPirce串列的資料依序存入booklist.csv檔中
-f = open("tmp_booklist.csv", "w", encoding="utf-8-sig", newline="")
+f = open("tmp_booklist.csv", "w", encoding="utf-8-sig", newline="")#這樣才不會多一行空白
 write = csv.writer(f)
 write.writerow(["書名", "出版社", "價格"])
 for i in range(0, len(listName)):
@@ -2996,30 +2956,37 @@ for i in range(0, len(listName)):
     Price = listPrice[i].text.split("：")[1].split("元")[0].split("折")[-1]
     # 使用text屬性，將標籤內的資料寫入csv檔中
     write.writerow([listName[i].text, listPress[i].text, Price])
-    print(listName[i].text, listPress[i].text, Price)
+    #print(listName[i].text, listPress[i].text, Price)
 f.close()
 
 print("------------------------------------------------------------")  # 60個
 
-""" OK many
 print('下載網站圖片')
-#抓 博客來電子寵物書 圖片 OK
 
-# 指定url變數為「博客來電子寵物書」網頁的網址
-url='https://www.books.com.tw/web/sys_cebbotm/cebook/1003/?loc=P_0001_2_003'
+#抓 博客來電子寵物書 圖片
+
+# 博客來寵物電子書
+url = "https://www.books.com.tw/web/sys_cebbotm/cebook/1003/?loc=P_0001_2_003"
+
 response=requests.get(url)# 建立取得網頁資訊的Response物件，物件名稱為response
 response.encoding = 'utf-8'    #設定編碼模式避免亂碼
+
 #使用BeautifulSoup()函式取得解析網頁的BeautifulSoup物件bs
 bs=BeautifulSoup(response.text,'lxml')
 Img=bs.select('div.item>a>img')  #擷取有圖片網址的<img>標籤
-for link in Img:     
+
+print('共找到有圖片網址的連結 :', len(Img), '個')
+
+cnt = 0
+for link in Img:
+    print('圖片連結 :', link)
     #使用split()方法解析網址
     src=link.get('src') 
     ImgUrl=src.split('=')[1].split('&')[0]
     #網址用'/'分隔取最後一筆資料 => *.jpg
     filename=ImgUrl.split('/')[-1]
-    print('圖片網址:', ImgUrl)
-    print('圖片檔名:', filename)
+    print('圖片網址 :', ImgUrl)
+    print('圖片檔名 :', filename)
 
     try:  #下載圖片
         response=requests.get(ImgUrl) #建立下載圖片的Response物件 response
@@ -3030,53 +2997,37 @@ for link in Img:
     except:
         print('下載失敗')
         f.close()
+    cnt += 1
+    if cnt > 5:
+        break
 
 print('執行完畢')
-"""
 
 print("------------------------------------------------------------")  # 60個
-# taiwanlottery
+# taiwanlottery ST
 print("------------------------------------------------------------")  # 60個
-
-print('BeautifulSoup 測試 12')
 
 #台灣彩券官網首頁
 url = 'http://www.taiwanlottery.com.tw/'
-soup = get_soup_from_url(url)
+html = requests.get(url)
 
-html_doc = """
-<html><head><title>網頁標題</title></head>
+soup = BeautifulSoup(html.text, 'lxml')      # 建立BeautifulSoup物件
 
-<p class="title"><b>文件標題</b></p>
+dataTag = soup.select('.contents_box02')         # 尋找class是contents_box02
+        
+# 找尋開出順序與大小順序的球
+balls = dataTag[2].find_all('div', {'class':'ball_tx ball_yellow'})
+print("開出順序 : ", end='')
+for i in range(6):                                  # 前6球是開出順序
+    print(balls[i].text, end='   ')
 
-<p class="story">Once upon a time there were three little sisters; and their names were
-<a href="http://example.com/elsie" class="sister" id="link1">Elsie</a>,
-<a href="http://example.com/lacie" class="sister" id="link2">Lacie</a> and
-<a href="http://example.com/tillie" class="sister" id="link3">Tillie</a>;
-and they lived at the bottom of a well.</p>
+print("\n大小順序 : ", end='')
+for i in range(6,len(balls)):                       # 第7球以後是大小順序
+    print(balls[i].text, end='   ')
 
-<p class="story">...</p>
-"""
-
-soup = BeautifulSoup(html_doc, 'html.parser') 
-
-print(soup.find('b')) # <b>文件標題</b>
-print(soup.find_all('a'))
-print(soup.find_all("a", {"class":"sister"}))
-
-data1 = soup.find("a", {"href":"http://example.com/elsie"})
-print(data1.text) # Elsie
-
-data2 = soup.find("a", {"id":"link2"}) 
-print(data2.text) # Lacie
-
-data3 = soup.select("#link3") 
-print(data3[0].text) # Tillie
-print(soup.find_all(['title','a'])) 
-
-data1 = soup.find("a", {"id":"link1"}) 
-print(data1.get("href")) # http://example.com/elsie
-print(data1["href"])     # http://example.com/elsie
+# 找出第二區的紅球                   
+redball = dataTag[2].find_all('div', {'class':'ball_red'})
+print("\n特別號   :", redball[0].text)
 
 print('------------------------------------------------------------')	#60個
 print('BeautifulSoup 測試 13')
@@ -3120,17 +3071,15 @@ for n in range(6,len(data3)):
 red = data2.find('div', {'class':'ball_red'})
 print("\n第二區：{}".format(red.text)) 
 
-
-
 url = 'http://www.taiwanlottery.com.tw'
 html = requests.get(url)
 print("網頁下載中 ...")
 html.raise_for_status()                         # 驗證網頁是否下載成功                      
 print("網頁下載完成")
 
-objSoup = bs4.BeautifulSoup(html.text, 'lxml')  # 建立BeautifulSoup物件
+soup = BeautifulSoup(html.text, 'lxml')  # 建立BeautifulSoup物件
 
-dataTag = objSoup.select('.contents_box02')     # 尋找class是contents_box02
+dataTag = soup.select('.contents_box02')     # 尋找class是contents_box02
 print("串列長度", len(dataTag))
 for i in range(len(dataTag)):                   # 列出含contents_box02的串列                 
     print(dataTag[i])
@@ -3149,56 +3098,25 @@ for i in range(6,len(balls)):                   # 第7球以後是大小順序
 redball = dataTag[0].find_all('div', {'class':'ball_red'})
 print("\n第二區   :", redball[0].text)
 
+
 print('------------------------------------------------------------')	#60個
 
-url = 'http://www.taiwanlottery.com.tw'
+print("------------------------------------------------------------")  # 60個
+# taiwanlottery SP
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+
+url = 'http://ehappy.tw/bsdemo1.htm'
 html = requests.get(url)
+html.encoding = 'UTF-8'
+soup = BeautifulSoup(html.text, 'lxml')
 
-objSoup = bs4.BeautifulSoup(html.text, 'lxml')      # 建立BeautifulSoup物件
-
-dataTag = objSoup.select('.contents_box02')         # 尋找class是contents_box02
-        
-# 找尋開出順序與大小順序的球
-balls = dataTag[2].find_all('div', {'class':'ball_tx ball_yellow'})
-print("開出順序 : ", end='')
-for i in range(6):                                  # 前6球是開出順序
-    print(balls[i].text, end='   ')
-
-print("\n大小順序 : ", end='')
-for i in range(6,len(balls)):                       # 第7球以後是大小順序
-    print(balls[i].text, end='   ')
-
-# 找出第二區的紅球                   
-redball = dataTag[2].find_all('div', {'class':'ball_red'})
-print("\n特別號   :", redball[0].text)
-
-print('------------------------------------------------------------')	#60個
-
-
-
-import bs4
-
-url = 'http://www.taiwanlottery.com.tw'
-html = requests.get(url)
-
-objSoup = bs4.BeautifulSoup(html.text, 'lxml')      # 建立BeautifulSoup物件
-
-dataTag = objSoup.select('.contents_box02')         # 尋找class是contents_box02
-        
-# 找尋開出順序與大小順序的球
-balls = dataTag[2].find_all('div', {'class':'ball_tx ball_yellow'})
-print("開出順序 : ", end='')
-for i in range(6):                                  # 前6球是開出順序
-    print(balls[i].text, end='   ')
-
-print("\n大小順序 : ", end='')
-for i in range(6,len(balls)):                       # 第7球以後是大小順序
-    print(balls[i].text, end='   ')
-
-# 找出第二區的紅球                   
-redball = dataTag[2].find_all('div', {'class':'ball_red'})
-print("\n特別號   :", redball[0].text)
-
-print('------------------------------------------------------------')	#60個
+print(soup.title)
+print(soup.title.text)
+print(soup.h1)
+print(soup.p)
 
 

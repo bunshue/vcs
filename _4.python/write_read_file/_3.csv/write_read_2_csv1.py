@@ -39,7 +39,7 @@ import random
 import pathlib
 import numpy as np
 import pandas as pd
-
+'''
 print("------------------------------------------------------------")  # 60個
 print("1. csv_writer = csv.writer() + writerow() + writerows()")
 print("------------------------------------------------------------")  # 60個
@@ -188,7 +188,7 @@ filename = "data/animals.csv"
 #with open(filename, newline="") as csvfile:  # 開啟csv檔案
 with open(filename, 'r', encoding='utf-8') as csvfile:  # 開啟csv檔案
     csv_reader = csv.reader(csvfile)  # 讀取 csv 檔案內容
-    # 以迴圈顯示每一列
+    # 以迴圈讀取每一列
     for line in csv_reader:
         print(line)
 
@@ -262,7 +262,7 @@ filename = "data/animals_big5.csv"
 list_data = list()
 with open(filename, newline="") as csvfile:  # 開啟csv檔案
     csv_dict_reader = csv.DictReader(csvfile)  # 讀取 csv 檔內容，將每一列轉成 dictionary
-    # 以迴圈顯示每一列
+    # 以迴圈讀取每一列
     for line in csv_dict_reader:  # 列出DictReader各列內容
         print(line)
         list_data.append(dict(line))
@@ -489,7 +489,54 @@ with open(filename_r, 'r') as csvfile:  # 開啟csv檔案
         print(','.join(line))
         print(line[2])
 """
-
+'''
 print("------------------------------------------------------------")  # 60個
 
+filename = "data/新竹縣日出日落2024.csv" #格式是 UTF-16LE BOM
 
+list_data = list()
+list_data_sun_rise = list()
+list_data_sun_fall = list()
+
+with open(filename, encoding="utf-16le") as csvfile:  # 開啟csv檔案
+    csv_dict_reader = csv.DictReader(csvfile)  # 讀取 csv 檔內容，將每一列轉成 dictionary
+    cnt = 0
+    # 以迴圈讀取每一列
+    for line in csv_dict_reader:  # 列出DictReader各列內容
+        #print(line)
+        list_data.append(dict(line))
+        list_data_sun_rise.append(line["日出時刻"])
+        list_data_sun_fall.append(line["日沒時刻"])
+
+        #print(line["中文名"], line["英文名"])
+
+print(type(list_data))
+print(len(list_data))
+
+
+sys.exit()
+
+"""
+cnt = 0
+for dd in list_data:
+    #print(dd)
+    print(dd["地點"])
+    print(dd["日出時刻"])
+    print(dd["日沒時刻"])
+    cnt += 1
+    if cnt > 10:
+        break
+"""
+
+
+#print(list_data_sun_rise)
+print(max(list_data_sun_rise))
+print(min(list_data_sun_rise))
+print()
+#print(list_data_sun_fall)
+print(max(list_data_sun_fall))
+print(min(list_data_sun_fall))
+print()
+
+
+#地點,日期,天文曙光始,航海曙光始,民用曙光始,日出時刻,方位,過中天,仰角,日沒時刻,方位,民用暮光終,航海暮光終,天文暮光終

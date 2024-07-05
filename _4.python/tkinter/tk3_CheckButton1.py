@@ -3,28 +3,39 @@
 import sys
 import tkinter as tk
 import tkinter.messagebox
-from tkinter import ttk
 
 print("------------------------------------------------------------")  # 60個
-
-def checkbutton_select1():
-    str = "你選擇了動物："
-    for i in range(0, len(check_value1)):
-        if check_value1[i].get() == 1:
-            str = str + animals[i] + " "
-    print(str)
-    msg.set(str)
-
 
 window = tk.Tk()
 window.geometry("600x800")
 window.title("Checkbutton 1")
 
+print("------------------------------------------------------------")  # 60個
+
+def checkbutton_select1():
+    text = "你選擇了 ："
+    for i in range(0, len(check_value1)):
+        if check_value1[i].get() == 1:
+            text += animals[i] + " "
+    var_string1.set(text)
+
+    if var_int1.get():
+        text += checkbutton1.cget("text")
+    if var_int2.get():
+        text += checkbutton2.cget("text")
+    label6.config(text=text)
+    print(text)
+
 check_value1 = []
-animals = ["鼠", "牛", "虎", "兔"]
-msg = tk.StringVar()
-label2 = tk.Label(window, fg="red", textvariable=msg)
+animals = ["鼠", "牛"]
+
+var_string1 = tk.StringVar()
+label2 = tk.Label(window, fg="red", textvariable=var_string1)
 label2.pack()
+
+label6 = tk.Label(window)
+label6.pack()
+label6.config(text="尚未選擇")
 
 for i in range(0, len(animals)):
     item = tk.IntVar()
@@ -34,179 +45,139 @@ for i in range(0, len(animals)):
     )
     item.pack()
 
+var_int1 = tk.IntVar()
+checkbutton1 = tk.Checkbutton(window, text="虎", variable=var_int1, command=checkbutton_select1)
+checkbutton1.pack()
+
+var_int2 = tk.IntVar()
+checkbutton2 = tk.Checkbutton(window, text="兔", variable=var_int2, command=checkbutton_select1)
+checkbutton2.pack()
+
+but = tk.Button(window, text="選擇1", command=checkbutton_select1)
+but.pack()
+
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
     fill=tk.X, padx=5, pady=5
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
-
-topping = {0: "鼠", 1: "牛", 2: "虎", 3: "兔"}
-
-check_value = {}
-
-for i in range(len(topping)):
-    check_value[i] = tk.BooleanVar()
-    tk.Checkbutton(window, variable=check_value[i], text=topping[i]).pack()
-
 
 def checkbutton_select2():
     for i in check_value:
         if check_value[i].get() == True:
             print(topping[i])
 
+#字典
+topping = {0: "鼠", 1: "牛", 2: "虎"}
+check_value = {}
 
-tk.Button(window, text="選擇", command=checkbutton_select2).pack()
+for i in range(len(topping)):
+    check_value[i] = tk.BooleanVar()
+    tk.Checkbutton(window, variable=check_value[i], text=topping[i]).pack()
 
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
-    fill=tk.X, padx=5, pady=5
-)  # 分隔線
-print("------------------------------------------------------------")  # 60個
-
-
-def checkbutton_select6():
-    selected_options = ""
-    if var_int1.get():
-        selected_options += checkbutton1.cget("text")
-    if var_int2.get():
-        selected_options += checkbutton2.cget("text")
-    if var_int3.get():
-        selected_options += checkbutton3.cget("text")
-    lab_result.config(text=selected_options)
-
-
-var_int1 = tk.IntVar()
-checkbutton1 = tk.Checkbutton(window, text="鼠", variable=var_int1)
-checkbutton1.pack()
-
-var_int2 = tk.IntVar()
-checkbutton2 = tk.Checkbutton(window, text="牛", variable=var_int2)
-checkbutton2.pack()
-
-var_int3 = tk.IntVar()
-checkbutton3 = tk.Checkbutton(window, text="虎", variable=var_int3)
-checkbutton3.pack()
-
-but = tk.Button(window, text="選擇", command=checkbutton_select6)
-but.pack()
-
-lab_result = tk.Label(window)
-lab_result.pack()
+tk.Button(window, text="選擇2", command=checkbutton_select2).pack()
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
     fill=tk.X, padx=5, pady=5
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
-checkbutton4 = ttk.Checkbutton(
+print('使用 lambda')
+tk.Checkbutton(
     window,
     text="鼠",
     variable="ccccc",
     onvalue=10,
     offvalue=5,
     command=lambda: print("你選擇了 鼠"),
-)
-checkbutton4.pack()
-
-checkbutton5 = ttk.Checkbutton(window, text="牛", command=lambda: print("你選擇了 牛"))
-checkbutton5.pack()
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
-    fill=tk.X, padx=5, pady=5
-)  # 分隔線
-print("------------------------------------------------------------")  # 60個
+).pack()
 
 var_boolean3 = tk.BooleanVar()
 
-checkbutton6 = ttk.Checkbutton(
+tk.Checkbutton(
     window,
     text="鼠",
     variable=var_boolean3,
     command=lambda: print("你按了 鼠 ", var_boolean3.get()),
-)
-checkbutton6.pack()
+).pack()
+
+tk.Checkbutton(window, text="牛", command=lambda: print("你選擇了 牛")).pack()
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
     fill=tk.X, padx=5, pady=5
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-window.geometry("600x800")
-window.title("Checkbutton 2")
 
 """
 請問迴圈裡面 check_value [i] = tk.BooleanVar() 這一行，能否舉個例子，假設第 0 個按鈕被勾選，check_value 長怎樣；假設第 0、1 個按鈕被勾選，check_value 長怎樣 ... 依此類推
 """
 
-
 def checkbutton_select5():
-    selection = ""
-    for i in checkboxes:  # 檢查此字典
-        if checkboxes[i].get() == True:  # 被選取則執行
-            selection = selection + sports[i] + " "
-    x.set(selection)
+    text = ""
+    for i in checkboxes5:  # 檢查此字典
+        if checkboxes5[i].get() == True:  # 被選取則執行
+            text += sports[i] + " "
+    var_string5.set(text)
+    print(text)
 
-sports = {0: "鼠", 1: "牛", 2: "虎", 3: "兔"}  # 動物字典
+var_string5 = tk.StringVar()
+label5 = tk.Label(window, textvariable=var_string5, fg="blue", bg="lightyellow", width=30)
+label5.pack()
 
-checkboxes = {}  # 字典存放被選取項目
+sports = {0: "鼠", 1: "牛", 2: "虎"}  # 動物字典
+
+checkboxes5 = {}  # 字典存放被選取項目
 for i in range(len(sports)):  # 將動物字典轉成核取方塊
-    checkboxes[i] = tk.BooleanVar()  # 布林變數物件
-    tk.Checkbutton(window, text=sports[i], variable=checkboxes[i]).pack()
+    checkboxes5[i] = tk.BooleanVar()  # 布林變數物件
+    tk.Checkbutton(window, text=sports[i], variable=checkboxes5[i]).pack()
 
-tk.Button(window, text="確定", width=10, command=checkbutton_select5).pack()
-
-x = tk.StringVar()
-display = tk.Label(window, textvariable=x, bg="lightgreen", width=30)
-display.pack()
+tk.Button(window, text="選擇3", width=10, command=checkbutton_select5).pack()
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
     fill=tk.X, padx=5, pady=5
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
-
-def printInfo1():
-    selection = ""
-    for i in checkboxes:  # 檢查此字典
-        if checkboxes[i].get() == True:  # 被選取則執行
-            selection = selection + sports[i] + "\t"
-    print(selection)
-
-tk.Label(window, text="請選擇喜歡的動物", fg="blue", bg="lightyellow", width=30).pack()
-
-sports = {0: "鼠", 1: "牛", 2: "虎", 3: "兔"}  # 動物字典
-checkboxes = {}  # 字典存放被選取項目
-for i in range(len(sports)):  # 將動物字典轉成核取方塊
-    checkboxes[i] = tk.BooleanVar()  # 布林變數物件
-    tk.Checkbutton(window, text=sports[i], variable=checkboxes[i]).pack()
-
-button1 = tk.Button(window, text="選取", width=10, command=printInfo1)
-button1.pack()
-
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
-    fill=tk.X, padx=5, pady=5
-)  # 分隔線
-print("------------------------------------------------------------")  # 60個
-
 
 def checkbutton_select4():
-    selection = ""
-    for i in checkboxes:  # 檢查此字典
-        if checkboxes[i].get() == True:  # 被選取則執行
-            selection = selection + sports[i] + "\t"
-    print(selection)
+    text = ""
+    for i in checkboxes4:  # 檢查此字典
+        if checkboxes4[i].get() == True:  # 被選取則執行
+            text += sports[i] + "\t"
+    var_string4.set(text)
+    print(text)
 
-sports = {0: "鼠", 1: "牛", 2: "虎", 3: "兔"}  # 動物字典
+var_string4 = tk.StringVar()
+label4 = tk.Label(window, textvariable=var_string4, fg="blue", bg="lightyellow", width=30)
+label4.pack()
 
-checkboxes = {}  # 字典存放被選取項目
+sports = {0: "鼠", 1: "牛", 2: "虎"}  # 動物字典
+checkboxes4 = {}  # 字典存放被選取項目
 for i in range(len(sports)):  # 將動物字典轉成核取方塊
-    checkboxes[i] = tk.BooleanVar()  # 布林變數物件
-    tk.Checkbutton(window, text=sports[i], variable=checkboxes[i]).pack()
+    checkboxes4[i] = tk.BooleanVar()  # 布林變數物件
+    tk.Checkbutton(window, text=sports[i], variable=checkboxes4[i]).pack()
 
-tk.Button(window, text="確定", width=10, command=checkbutton_select4).pack()
+button1 = tk.Button(window, text="選擇4", width=10, command=checkbutton_select4)
+button1.pack()
+
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
+print("------------------------------------------------------------")  # 60個
+
+def checkbutton_select4b():
+    text = ""
+    for i in checkboxes4b:  # 檢查此字典
+        if checkboxes4b[i].get() == True:  # 被選取則執行
+            text += sports[i] + "\t"
+    print(text)
+
+sports = {0: "鼠", 1: "牛", 2: "虎"}  # 動物字典
+
+checkboxes4b = {}  # 字典存放被選取項目
+for i in range(len(sports)):  # 將動物字典轉成核取方塊
+    checkboxes4b[i] = tk.BooleanVar()  # 布林變數物件
+    tk.Checkbutton(window, text=sports[i], variable=checkboxes4b[i]).pack()
+
+tk.Button(window, text="選擇5", width=10, command=checkbutton_select4b).pack()
 
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
@@ -256,7 +227,7 @@ checkbutton6 = tk.Checkbutton(window, text="參加選擇", variable=var_boolean6
 animals = ["鼠", "牛", "虎"]
 check = {}
 
-buttonSend = tk.Button(window, text=" 送出 ", command=fnMsg).pack(pady=5)
+buttonSend = tk.Button(window, text="選擇6", command=fnMsg).pack(pady=5)
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
     fill=tk.X, padx=5, pady=5
@@ -371,17 +342,17 @@ print("------------------------------------------------------------")  # 60個
 
 
 def checkbutton_select9():
-    str = "選擇："
+    text = "選擇："
     for i in range(0, len(check_value9)):
         if check_value9[i].get() == 1:
-            str = str + animals_list[i] + " "
-    print(str)
-    msg.set(str)
+            text += animals_list[i] + " "
+    msg.set(text)
+    print(text)
 
 
 x_st = 20
 y_st = 500
-dx = 140
+dx = 120
 dy = 80
 w = 12
 h = 3
@@ -405,12 +376,10 @@ animals_list = [
 
 msg = tk.StringVar()
 label_mesg5 = tk.Label(window, text="選擇動物 :")
-label_mesg5.pack()
 label_mesg5.place(x=x_st + dx * 0, y=y_st + dy * 2 - 20)
-label2 = tk.Label(window, fg="red", textvariable=msg)
-label2.pack()
-label2.place(x=x_st + dx * 0, y=y_st + dy * 2 + 80)
 
+label2 = tk.Label(window, fg="red", textvariable=msg)
+label2.place(x=x_st + dx * 0, y=y_st + dy * 2 + 80)
 
 # 加入 Checkbutton
 dx2 = dx * 4 / 4  # 為了微調距離用
@@ -478,7 +447,7 @@ var3 = tk.StringVar()
 chk3 = tk.Checkbutton(window, text=item3, variable=var3, onvalue=item3, offvalue="")
 chk3.pack()
 
-buttonShow = tk.Button(window, text="選取項目", command=checkbutton_select7)
+buttonShow = tk.Button(window, text="選擇7", command=checkbutton_select7)
 buttonShow.pack()
 
 print("------------------------------------------------------------")  # 60個
