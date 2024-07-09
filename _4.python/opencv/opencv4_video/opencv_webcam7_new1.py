@@ -1,17 +1,24 @@
-import cv2
+"""
+
+新進  未歸類
+
+
+"""
+
+import os
+import sys
+import time
+import math
+import random
+
+print("------------------------------------------------------------")  # 60個
 
 ESC = 27
 SPACE = 32
 
-print("------------------------------------------------------------")  # 60個
-
-import os
-import sys
-import math
-import random
+import cv2
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
 
 print("------------------------------------------------------------")  # 60個
 
@@ -778,6 +785,430 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
+print("OpenCV_ai_63 偵測人臉")
+
+cap = cv2.VideoCapture(0)
+if not cap.isOpened():
+    print("開啟攝影機失敗")
+    sys.exit()
+else:
+    print("Video device opened")
+
+xml_filename = (
+    "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascade_frontalface_default.xml"
+)
+
+face_cascade_classifier = cv2.CascadeClassifier(xml_filename)
+# faces = face_cascade_classifier.detectMultiScale(gray)
+
+while True:
+    ret, frame = cap.read()
+
+    #frame = cv2.resize(frame, (640//2, 480//2))  # 縮小尺寸，避免尺寸過大導致效能不好
+    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)  # 將鏡頭影像轉換成灰階
+    faces = face_cascade_classifier.detectMultiScale(gray)  # 偵測人臉
+    for x, y, w, h in faces:
+        cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)  # 標記人臉
+
+    cv2.imshow("WebCam", frame)
+
+    k = cv2.waitKey(1)
+    if k == ESC:
+        break
+
+cap.release()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+print("OpenCV_ai_65 偵測人臉 將其馬賽克")
+
+cap = cv2.VideoCapture(0)
+if not cap.isOpened():
+    print("開啟攝影機失敗")
+    sys.exit()
+else:
+    print("Video device opened")
+
+xml_filename = (
+    "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascade_frontalface_default.xml"
+)
+
+face_cascade_classifier = cv2.CascadeClassifier(xml_filename)
+
+while True:
+    ret, frame = cap.read()
+    #frame = cv2.resize(frame, (640//2, 480//2))  # 縮小尺寸，避免尺寸過大導致效能不好
+    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)  # 影像轉轉灰階
+    faces = face_cascade_classifier.detectMultiScale(gray)  # 偵測人臉
+    for x, y, w, h in faces:
+        mosaic = frame[y : y + h, x : x + w]
+        level = 15
+        mh = int(h / level)
+        mw = int(w / level)
+        mosaic = cv2.resize(mosaic, (mw, mh), interpolation=cv2.INTER_LINEAR)
+        mosaic = cv2.resize(mosaic, (w, h), interpolation=cv2.INTER_NEAREST)
+        frame[y : y + h, x : x + w] = mosaic
+
+    cv2.imshow("WebCam", frame)
+
+    k = cv2.waitKey(1)
+    if k == ESC:
+        break
+
+cap.release()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+eye_xml_filename = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascade_eye.xml"
+nose_xml_filename = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascade_mcs_nose.xml"
+mouth_xml_filename = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascade_mcs_mouth.xml"
+
+print("OpenCV_ai_67 偵測眼睛R鼻子G嘴巴B")
+
+cap = cv2.VideoCapture(0)
+if not cap.isOpened():
+    print("開啟攝影機失敗")
+    sys.exit()
+else:
+    print("Video device opened")
+
+eye_cascade = cv2.CascadeClassifier(eye_xml_filename)  # 使用眼睛模型
+nose_cascade = cv2.CascadeClassifier(nose_xml_filename)  # 使用鼻子模型
+mouth_cascade = cv2.CascadeClassifier(mouth_xml_filename)  # 使用嘴巴模型
+
+while True:
+    ret, frame = cap.read()
+
+    #img = cv2.resize(frame, (640//2, 480//2))
+    img = frame
+    
+    gray = cv2.medianBlur(img, 1)
+    gray = cv2.cvtColor(gray, cv2.COLOR_BGR2GRAY)
+    gray = cv2.medianBlur(gray, 5)
+
+    eyes = eye_cascade.detectMultiScale(gray)  # 偵測眼睛R
+    for x, y, w, h in eyes:
+        cv2.rectangle(img, (x, y), (x + w, y + h), (0, 0, 255), 2)
+
+    noses = nose_cascade.detectMultiScale(gray)  # 偵測鼻子G
+    for x, y, w, h in noses:
+        cv2.rectangle(img, (x, y), (x + w, y + h), (0, 255, 0), 2)
+
+    mouths = mouth_cascade.detectMultiScale(gray)  # 偵測嘴巴B
+    for x, y, w, h in mouths:
+        cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)
+
+    cv2.imshow("WebCam", img)
+    k = cv2.waitKey(1)
+    if k == ESC:
+        break
+
+cap.release()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+""" # 缺檔案 face.yml 人臉模型檔
+print("OpenCV_ai_71")
+
+recognizer = cv2.face.LBPHFaceRecognizer_create()  # 啟用訓練人臉模型方法
+
+# 缺檔案
+# recognizer.read('face.yml')                               # 讀取人臉模型檔
+
+xml_filename = (
+    "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascade_frontalface_default.xml"
+)
+
+face_cascade_classifier = cv2.CascadeClassifier(xml_filename)  # 啟用人臉追蹤
+
+cap = cv2.VideoCapture(0)
+if not cap.isOpened():
+    print("開啟攝影機失敗")
+    sys.exit()
+else:
+    print("Video device opened")
+
+while True:
+    ret, img = cap.read()
+
+    #img = cv2.resize(img, (640//2, 480//2))  # 縮小尺寸，加快辨識效率
+    
+    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # 轉換成黑白
+    faces = face_cascade_classifier.detectMultiScale(gray)  # 追蹤人臉 ( 目的在於標記出外框 )
+
+    # 建立姓名和 id 的對照表
+    name = {"1": "David", "2": "John", "3": "Chris"}
+
+    # 依序判斷每張臉屬於哪個 id
+    for x, y, w, h in faces:
+        cv2.rectangle(img, (x, y), (x + w, y + h), (0, 255, 0), 2)  # 標記人臉外框
+        idnum, confidence = recognizer.predict(
+            gray[y : y + h, x : x + w]
+        )  # 取出 id 號碼以及信心指數 confidence
+        if confidence < 60:
+            text = name[str(idnum)]  # 如果信心指數小於 60，取得對應的名字
+        else:
+            text = "???"  # 不然名字就是 ???
+        # 在人臉外框旁加上名字
+        cv2.putText(
+            img,
+            text,
+            (x, y - 5),
+            cv2.FONT_HERSHEY_SIMPLEX,
+            1,
+            (0, 255, 0),
+            2,
+            cv2.LINE_AA,
+        )
+
+    cv2.imshow("WebCam", img)
+    k = cv2.waitKey(1)
+    if k == ESC:
+        break
+
+cap.release()
+cv2.destroyAllWindows()
+"""
+
+print("------------------------------------------------------------")  # 60個
+print("OpenCV_ai_72 追蹤功能 按a開始 選取ROI, 按Enter確定")
+
+tracker = cv2.TrackerCSRT_create()  # 創建追蹤器
+tracking = False  # 設定 False 表示尚未開始追蹤
+
+cap = cv2.VideoCapture(0)
+if not cap.isOpened():
+    print("開啟攝影機失敗")
+    sys.exit()
+else:
+    print("Video device opened")
+
+while True:
+    ret, frame = cap.read()
+    #frame = cv2.resize(frame, (640//2, 480//2))  # 縮小尺寸，加快速度
+
+    k = cv2.waitKey(1)
+    if k == ESC:
+        break
+
+    # 按下 a 開始選取
+    if k == ord("a"):
+        # 選取區域
+        area = cv2.selectROI("ImageShow", frame, showCrosshair=False, fromCenter=False)
+        print('選取區域 :', area)
+        tracker.init(frame, area)  # 初始化追蹤器
+        tracking = True  # 設定可以開始追蹤
+    if tracking:
+        success, point = tracker.update(frame)  # 追蹤成功後，不斷回傳左上和右下的座標
+        if success:
+            p1 = [int(point[0]), int(point[1])]
+            p2 = [int(point[0] + point[2]), int(point[1] + point[3])]
+            cv2.rectangle(frame, p1, p2, (0, 0, 255), 3)  # 根據座標，繪製四邊形，框住要追蹤的物件
+
+    cv2.imshow("WebCam", frame)
+
+cap.release()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+"""
+print("OpenCV_ai_74 影片")
+
+video_filename = "C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4"
+
+tracker_list = []
+for i in range(3):
+    tracker = cv2.TrackerCSRT_create()  # 創建三組追蹤器
+    tracker_list.append(tracker)
+colors = [(0, 0, 255), (0, 255, 255), (255, 255, 0)]  # 設定三個外框顏色
+tracking = False  # 設定 False 表示尚未開始追蹤
+
+cap = cv2.VideoCapture(video_filename)  # 讀取某個影片
+if not cap.isOpened():
+    print("開啟影片失敗")
+    sys.exit()
+else:
+    print("Video file opened")
+
+a = 0  # 刪減影片影格使用
+
+while True:
+    ret, frame = cap.read()
+    #frame = cv2.resize(frame, (640//2, 480//2))  # 縮小尺寸，加快速度
+
+    k = cv2.waitKey(1)
+    if k == ESC:
+        break
+
+    # 為了避免影片影格太多，所以採用 10 格取一格，加快處理速度
+    if a % 10 == 0:
+        if tracking == False:
+            # 如果尚未開始追蹤，就開始標記追蹤物件的外框
+            for i in tracker_list:
+                area = cv2.selectROI(
+                    "ImageShow", frame, showCrosshair=False, fromCenter=False
+                )
+                i.init(frame, area)  # 初始化追蹤器
+            tracking = True  # 設定可以開始追蹤
+        if tracking:
+            for i in range(len(tracker_list)):
+                success, point = tracker_list[i].update(frame)  # 追蹤成功後，不斷回傳左上和右下的座標
+                if success:
+                    p1 = [int(point[0]), int(point[1])]
+                    p2 = [int(point[0] + point[2]), int(point[1] + point[3])]
+                    cv2.rectangle(frame, p1, p2, colors[i], 3)  # 根據座標，繪製四邊形，框住要追蹤的物件
+
+        cv2.imshow("WebCam", frame)
+    a = a + 1
+
+cap.release()
+cv2.destroyAllWindows()
+
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+print("OpenCV_ai_75")
+
+multiTracker = cv2.legacy.MultiTracker_create()  # 建立多物件追蹤器
+tracking = False  # 設定追蹤尚未開始
+colors = [(0, 0, 255), (0, 255, 255)]  # 建立外框色彩清單
+
+cap = cv2.VideoCapture(0)
+if not cap.isOpened():
+    print("開啟攝影機失敗")
+    sys.exit()
+else:
+    print("Video device opened")
+
+while True:
+    ret, frame = cap.read()
+    #frame = cv2.resize(frame, (640//2, 480//2))  # 縮小尺寸加快速度
+
+    k = cv2.waitKey(1)
+    if k == ESC:
+        break
+
+    # 按下 a 的時候開始標記物件外框
+    if k == ord("a"):
+        for i in range(2):
+            area = cv2.selectROI(
+                "ImageShow", frame, showCrosshair=False, fromCenter=False
+            )
+            # 標記外框後設定該物件的追蹤演算法
+            tracker = cv2.legacy.TrackerCSRT_create()
+            # 將該物件加入 multiTracker
+            multiTracker.add(tracker, frame, area)
+        # 設定 True 開始追蹤
+        tracking = True
+    if tracking:
+        # 更新 multiTracker
+        success, points = multiTracker.update(frame)
+        a = 0
+        if success:
+            for i in points:
+                p1 = (int(i[0]), int(i[1]))
+                p2 = (int(i[0] + i[2]), int(i[1] + i[3]))
+                # 標記物件外框
+                cv2.rectangle(frame, p1, p2, colors[a], 3)
+                a = a + 1
+    cv2.imshow("WebCam", frame)
+
+cap.release()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+# simple color
+"""
+色彩辨識與追蹤
+"""
+color = ((16, 59, 0), (47, 255, 255))
+lower = np.array(color[0], dtype="uint8")
+upper = np.array(color[1], dtype="uint8")
+
+cap = cv2.VideoCapture(0)
+
+# 取得影像的尺寸大小
+w = cap.get(cv2.CAP_PROP_FRAME_WIDTH)
+h = cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
+print("Image Size: %d x %d" % (w, h))
+
+if not cap.isOpened():
+    print("Could not open video device")
+    sys.exit()
+else:
+    print("Video device opened")
+
+ratio = w / h
+WIDTH = 320
+HEIGHT = int(WIDTH / ratio)
+
+while True:
+    ret, frame = cap.read()
+    frame = cv2.resize(frame, (WIDTH, HEIGHT))
+    frame = cv2.flip(frame, 1)
+
+    #### 在while中
+    hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+    hsv = cv2.GaussianBlur(hsv, (11, 11), 0)  # 執行高斯模糊化
+
+    #### 在while中
+    mask = cv2.inRange(hsv, lower, upper)
+    mask = cv2.erode(mask, None, iterations=2)
+    mask = cv2.dilate(mask, None, iterations=2)
+
+    #### 在while中
+    contours, hierarchy = cv2.findContours(
+        mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE
+    )
+
+    if len(contours) > 0:
+        cnt = max(contours, key=cv2.contourArea)
+        if cv2.contourArea(cnt) < 100:
+            continue
+        x, y, w, h = cv2.boundingRect(cnt)
+        p1 = (x - 2, y - 2)
+        p2 = (x + w + 4, y + h + 4)
+
+        out = cv2.bitwise_and(hsv, hsv, mask=mask)
+
+        cv2.rectangle(frame, p1, p2, (0, 0, 255), 2)  # B G R
+        cv2.rectangle(hsv, p1, p2, (0, 255, 0), 2)
+        cv2.rectangle(out, p1, p2, (255, 0, 0), 2)
+
+        frame = cv2.hconcat([frame, hsv, out])
+
+    #### 在while中
+    cv2.imshow("frame", frame)
+
+    k = cv2.waitKey(1)
+    if k == ESC:  # ESC
+        break
+
+# 釋放所有資源
+cap.release()  # 釋放攝影機
+cv2.destroyAllWindows()  # 關閉所有 OpenCV 視窗
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+
+
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
@@ -787,7 +1218,3 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個

@@ -6,26 +6,6 @@ import math
 
 print("------------------------------------------------------------")  # 60個
 
-print("按 ESC 離開")
-
-x_st = 150
-y_st = 150
-x_sp = x_st + 300
-y_sp = y_st + 200
-
-RECT = ((x_st, y_st), (x_sp, y_sp))
-(left, top), (right, bottom) = RECT
-
-
-def roiarea(frame):
-    return frame[top:bottom, left:right]
-
-
-def replaceroi(frame, roi):
-    frame[top:bottom, left:right] = roi
-    return frame
-
-
 def image_process(roi):
     """
     print(type(roi))
@@ -47,6 +27,12 @@ def image_process(roi):
             roi[j][i][2] = 255  # R
     return roi
 
+print('擷取畫面的某一塊 做灰階處理 再貼回主畫面')
+
+x_st, y_st = 0, 0
+w, h = 100, 100
+RECT = ((x_st, y_st), (x_st + w, y_st + h))
+(left, top), (right, bottom) = RECT
 
 cap = cv2.VideoCapture(0)
 
@@ -54,19 +40,24 @@ while True:
     ret, frame = cap.read()
     frame = cv2.flip(frame, 1)
 
-    roi1 = roiarea(frame)  # 取出子畫面
+    # 取出子畫面
+    roi1 = frame[top:bottom, left:right]
+
+    
     # roi2 = cv2.cvtColor(roi1, cv2.COLOR_BGR2HSV) #做影像處理1
     roi2 = image_process(roi1)  # 做影像處理2
-    frame = replaceroi(frame, roi2)  # 貼回原畫面
-    cv2.rectangle(frame, RECT[0], RECT[1], (0, 255, 0), 2)  # 畫一個框 (BGR), linewidth
+
+    
+    # 貼回原畫面
+    frame[top:bottom, left:right] = roi2
+
+    #標示出來    
+    cv2.rectangle(frame, RECT[0], RECT[1], (0, 255, 0), 2)
 
     cv2.imshow("frame", frame)
-
     if cv2.waitKey(1) == 27:
-        roi2 = image_process(roi1)  # 做影像處理
         cv2.destroyAllWindows()
         break
-
 
 print("------------------------------------------------------------")  # 60個
 

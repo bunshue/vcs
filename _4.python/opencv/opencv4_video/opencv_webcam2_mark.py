@@ -31,6 +31,12 @@ if not cap.isOpened():
 else:
     print("Video device opened")
 
+
+# 解析 Fourcc 格式資料的函數
+def decode_fourcc(v):
+  v = int(v)
+  return "".join([chr((v >> 8 * i) & 0xFF) for i in range(4)])
+
 # 取得 Codec 名稱
 fourcc = cap.get(cv2.CAP_PROP_FOURCC)
 codec = decode_fourcc(fourcc)

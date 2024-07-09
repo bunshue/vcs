@@ -9,8 +9,8 @@ from selenium.webdriver.common.by import By
 from bs4 import BeautifulSoup
 
 # 建立瀏覽器物件
-driver = webdriver.Chrome()    #使用Chrome
-#driver = webdriver.Firefox()   #使用Firefox
+#driver = webdriver.Chrome()    #使用Chrome
+driver = webdriver.Firefox()   #使用Firefox
 driver.set_window_position(0, 0)	#設定視窗位置
 driver.set_window_size(800, 600)	#設定視窗大小
 driver.maximize_window()    #全螢幕顯示

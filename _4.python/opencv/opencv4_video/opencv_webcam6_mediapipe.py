@@ -19,627 +19,25 @@ import cv2
 import numpy as np
 
 print("------------------------------------------------------------")  # 60個
-
-print("OpenCV_ai_63")
-
-cap = cv2.VideoCapture(0)
-
-xml_filename = (
-    "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascade_frontalface_default.xml"
-)
-
-face_cascade_classifier = cv2.CascadeClassifier(xml_filename)
-# faces = face_cascade_classifier.detectMultiScale(gray)
-
-if not cap.isOpened():
-    print("Cannot open camera")
-    exit()
-while True:
-    ret, frame = cap.read()
-    if not ret:
-        print("Cannot receive frame")
-        break
-    frame = cv2.resize(frame, (540, 320))  # 縮小尺寸，避免尺寸過大導致效能不好
-    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)  # 將鏡頭影像轉換成灰階
-    faces = face_cascade_classifier.detectMultiScale(gray)  # 偵測人臉
-    for x, y, w, h in faces:
-        cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)  # 標記人臉
-
-    cv2.imshow("ImageShow", frame)
-
-    k = cv2.waitKey(1)  # 等待按鍵輸入
-    if k == ESC:
-        break
-
-cap.release()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-print("OpenCV_ai_65")
-
-cap = cv2.VideoCapture(0)
-
-xml_filename = (
-    "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascade_frontalface_default.xml"
-)
-
-face_cascade_classifier = cv2.CascadeClassifier(xml_filename)
-if not cap.isOpened():
-    print("Cannot open camera")
-    exit()
-while True:
-    ret, frame = cap.read()
-    if not ret:
-        print("Cannot receive frame")
-        break
-    frame = cv2.resize(frame, (480, 300))  # 縮小尺寸，避免尺寸過大導致效能不好
-    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)  # 影像轉轉灰階
-    faces = face_cascade_classifier.detectMultiScale(gray)  # 偵測人臉
-    for x, y, w, h in faces:
-        mosaic = frame[y : y + h, x : x + w]
-        level = 15
-        mh = int(h / level)
-        mw = int(w / level)
-        mosaic = cv2.resize(mosaic, (mw, mh), interpolation=cv2.INTER_LINEAR)
-        mosaic = cv2.resize(mosaic, (w, h), interpolation=cv2.INTER_NEAREST)
-        frame[y : y + h, x : x + w] = mosaic
-
-    cv2.imshow("ImageShow", frame)
-
-    k = cv2.waitKey(1)  # 等待按鍵輸入
-    if k == ESC:
-        break
-
-cap.release()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-
-eye_xml_filename = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascade_eye.xml"
-mouth_xml_filename = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascade_mcs_mouth.xml"
-nose_xml_filename = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascade_mcs_nose.xml"
-
-print("OpenCV_ai_67")
-
-cap = cv2.VideoCapture(0)
-eye_cascade = cv2.CascadeClassifier(eye_xml_filename)  # 使用眼睛模型
-mouth_cascade = cv2.CascadeClassifier(mouth_xml_filename)  # 使用嘴巴模型
-nose_cascade = cv2.CascadeClassifier(nose_xml_filename)  # 使用鼻子模型
-if not cap.isOpened():
-    print("Cannot open camera")
-    exit()
-while True:
-    ret, frame = cap.read()
-    if not ret:
-        print("Cannot receive frame")
-        break
-    img = cv2.resize(frame, (540, 320))
-    gray = cv2.medianBlur(img, 1)
-    gray = cv2.cvtColor(gray, cv2.COLOR_BGR2GRAY)
-    gray = cv2.medianBlur(gray, 5)
-
-    eyes = eye_cascade.detectMultiScale(gray)  # 偵測眼睛
-    for x, y, w, h in eyes:
-        cv2.rectangle(img, (x, y), (x + w, y + h), (0, 255, 0), 2)
-
-    mouths = mouth_cascade.detectMultiScale(gray)  # 偵測嘴巴
-    for x, y, w, h in mouths:
-        cv2.rectangle(img, (x, y), (x + w, y + h), (0, 0, 255), 2)
-
-    noses = nose_cascade.detectMultiScale(gray)  # 偵測鼻子
-    for x, y, w, h in noses:
-        cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)
-
-    cv2.imshow("ImageShow", img)
-    k = cv2.waitKey(1)  # 等待按鍵輸入
-    if k == ESC:
-        break
-
-cap.release()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-print("OpenCV_ai_71")
-
-recognizer = cv2.face.LBPHFaceRecognizer_create()  # 啟用訓練人臉模型方法
-
-# 缺檔案
-# recognizer.read('face.yml')                               # 讀取人臉模型檔
-
-xml_filename = (
-    "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascade_frontalface_default.xml"
-)
-
-face_cascade_classifier = cv2.CascadeClassifier(xml_filename)  # 啟用人臉追蹤
-
-cap = cv2.VideoCapture(0)  # 開啟攝影機
-if not cap.isOpened():
-    print("Cannot open camera")
-    exit()
-while True:
-    ret, img = cap.read()
-    if not ret:
-        print("Cannot receive frame")
-        break
-    img = cv2.resize(img, (540, 300))  # 縮小尺寸，加快辨識效率
-    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # 轉換成黑白
-    faces = face_cascade_classifier.detectMultiScale(gray)  # 追蹤人臉 ( 目的在於標記出外框 )
-
-    # 建立姓名和 id 的對照表
-    name = {"1": "David", "2": "John", "3": "Chris"}
-
-    # 依序判斷每張臉屬於哪個 id
-    for x, y, w, h in faces:
-        cv2.rectangle(img, (x, y), (x + w, y + h), (0, 255, 0), 2)  # 標記人臉外框
-        idnum, confidence = recognizer.predict(
-            gray[y : y + h, x : x + w]
-        )  # 取出 id 號碼以及信心指數 confidence
-        if confidence < 60:
-            text = name[str(idnum)]  # 如果信心指數小於 60，取得對應的名字
-        else:
-            text = "???"  # 不然名字就是 ???
-        # 在人臉外框旁加上名字
-        cv2.putText(
-            img,
-            text,
-            (x, y - 5),
-            cv2.FONT_HERSHEY_SIMPLEX,
-            1,
-            (0, 255, 0),
-            2,
-            cv2.LINE_AA,
-        )
-
-    cv2.imshow("ImageShow", img)
-
-    k = cv2.waitKey(1)  # 等待按鍵輸入
-    if k == ESC:
-        break
-
-cap.release()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-print("OpenCV_ai_72")
-
-cap = cv2.VideoCapture(0)
-if not cap.isOpened():
-    print("Cannot open camera")
-    exit()
-while True:
-    ret, frame = cap.read()
-    if not ret:
-        print("Cannot receive frame")
-        break
-
-    k = cv2.waitKey(1)  # 等待按鍵輸入
-    if k == ESC:
-        break
-    # 按下 a 開始選取
-    if k == ord("a"):
-        # 選取區域
-        area = cv2.selectROI("ImageShow", frame, showCrosshair=False, fromCenter=False)
-        print(area)
-
-    cv2.imshow("ImageShow", frame)
-
-cap.release()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-print("OpenCV_ai_73")
-
-tracker = cv2.TrackerCSRT_create()  # 創建追蹤器
-tracking = False  # 設定 False 表示尚未開始追蹤
-
-cap = cv2.VideoCapture(0)
-if not cap.isOpened():
-    print("Cannot open camera")
-    exit()
-
-while True:
-    ret, frame = cap.read()
-    if not ret:
-        print("Cannot receive frame")
-        break
-    frame = cv2.resize(frame, (540, 300))  # 縮小尺寸，加快速度
-
-    k = cv2.waitKey(1)  # 等待按鍵輸入
-    if k == ESC:
-        break
-
-    if k == ord("a"):
-        area = cv2.selectROI("ImageShow", frame, showCrosshair=False, fromCenter=False)
-        tracker.init(frame, area)  # 初始化追蹤器
-        tracking = True  # 設定可以開始追蹤
-    if tracking:
-        success, point = tracker.update(frame)  # 追蹤成功後，不斷回傳左上和右下的座標
-        if success:
-            p1 = [int(point[0]), int(point[1])]
-            p2 = [int(point[0] + point[2]), int(point[1] + point[3])]
-            cv2.rectangle(frame, p1, p2, (0, 0, 255), 3)  # 根據座標，繪製四邊形，框住要追蹤的物件
-
-    cv2.imshow("ImageShow", frame)
-
-cap.release()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-print("OpenCV_ai_74 影片")
-
-video_filename = "C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4"
-
-tracker_list = []
-for i in range(3):
-    tracker = cv2.TrackerCSRT_create()  # 創建三組追蹤器
-    tracker_list.append(tracker)
-colors = [(0, 0, 255), (0, 255, 255), (255, 255, 0)]  # 設定三個外框顏色
-tracking = False  # 設定 False 表示尚未開始追蹤
-
-cap = cv2.VideoCapture(video_filename)  # 讀取某個影片
-a = 0  # 刪減影片影格使用
-if not cap.isOpened():
-    print("Cannot open camera")
-    exit()
-
-while True:
-    ret, frame = cap.read()
-    if not ret:
-        print("Cannot receive frame")
-        break
-    frame = cv2.resize(frame, (400, 230))  # 縮小尺寸，加快速度
-
-    k = cv2.waitKey(1)  # 等待按鍵輸入
-    if k == ESC:
-        break
-
-    # 為了避免影片影格太多，所以採用 10 格取一格，加快處理速度
-    if a % 10 == 0:
-        if tracking == False:
-            # 如果尚未開始追蹤，就開始標記追蹤物件的外框
-            for i in tracker_list:
-                area = cv2.selectROI(
-                    "ImageShow", frame, showCrosshair=False, fromCenter=False
-                )
-                i.init(frame, area)  # 初始化追蹤器
-            tracking = True  # 設定可以開始追蹤
-        if tracking:
-            for i in range(len(tracker_list)):
-                success, point = tracker_list[i].update(frame)  # 追蹤成功後，不斷回傳左上和右下的座標
-                if success:
-                    p1 = [int(point[0]), int(point[1])]
-                    p2 = [int(point[0] + point[2]), int(point[1] + point[3])]
-                    cv2.rectangle(frame, p1, p2, colors[i], 3)  # 根據座標，繪製四邊形，框住要追蹤的物件
-
-        cv2.imshow("ImageShow", frame)
-    a = a + 1
-
-cap.release()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-print("OpenCV_ai_75")
-
-multiTracker = cv2.legacy.MultiTracker_create()  # 建立多物件追蹤器
-tracking = False  # 設定追蹤尚未開始
-colors = [(0, 0, 255), (0, 255, 255)]  # 建立外框色彩清單
-
-cap = cv2.VideoCapture(0)  # 讀取攝影鏡頭
-if not cap.isOpened():
-    print("Cannot open camera")
-    exit()
-
-while True:
-    ret, frame = cap.read()
-    if not ret:
-        print("Cannot receive frame")
-        break
-    frame = cv2.resize(frame, (400, 230))  # 縮小尺寸加快速度
-
-    k = cv2.waitKey(1)  # 等待按鍵輸入
-    if k == ESC:
-        break
-
-    # 按下 a 的時候開始標記物件外框
-    if k == ord("a"):
-        for i in range(2):
-            area = cv2.selectROI(
-                "ImageShow", frame, showCrosshair=False, fromCenter=False
-            )
-            # 標記外框後設定該物件的追蹤演算法
-            tracker = cv2.legacy.TrackerCSRT_create()
-            # 將該物件加入 multiTracker
-            multiTracker.add(tracker, frame, area)
-        # 設定 True 開始追蹤
-        tracking = True
-    if tracking:
-        # 更新 multiTracker
-        success, points = multiTracker.update(frame)
-        a = 0
-        if success:
-            for i in points:
-                p1 = (int(i[0]), int(i[1]))
-                p2 = (int(i[0] + i[2]), int(i[1] + i[3]))
-                # 標記物件外框
-                cv2.rectangle(frame, p1, p2, colors[a], 3)
-                a = a + 1
-    cv2.imshow("ImageShow", frame)
-
-cap.release()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-print("OpenCV_ai_77")
-
-lower = np.array([30, 40, 200])  # 轉換成 NumPy 陣列，範圍稍微變小 ( 55->30, 70->40, 252->200 )
-upper = np.array([90, 100, 255])  # 轉換成 NumPy 陣列，範圍稍微加大 ( 70->90, 80->100, 252->255 )
-cap = cv2.VideoCapture(0)
-if not cap.isOpened():
-    print("Cannot open camera")
-    exit()
-while True:
-    ret, frame = cap.read()
-    if not ret:
-        print("Cannot receive frame")
-        break
-    mask = cv2.inRange(frame, lower, upper)  # 使用 inRange
-    output = cv2.bitwise_and(frame, frame, mask=mask)  # 套用影像遮罩
-
-    cv2.imshow("ImageShow", output)
-
-    k = cv2.waitKey(1)  # 等待按鍵輸入
-    if k == ESC:
-        break
-
-cap.release()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-print("OpenCV_ai_78")
-
-lower = np.array([30, 40, 200])  # 轉換成 NumPy 陣列，範圍稍微變小 ( 55->30, 70->40, 252->200 )
-upper = np.array([90, 100, 255])  # 轉換成 NumPy 陣列，範圍稍微加大 ( 70->90, 80->100, 252->255 )
-cap = cv2.VideoCapture(0)
-if not cap.isOpened():
-    print("Cannot open camera")
-    exit()
-while True:
-    ret, img = cap.read()
-    if not ret:
-        print("Cannot receive frame")
-        break
-    img = cv2.resize(img, (640, 360))  # 縮小尺寸，加快處理速度
-    output = cv2.inRange(img, lower, upper)  # 取得顏色範圍的顏色
-    kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (11, 11))  # 設定膨脹與侵蝕的參數
-    output = cv2.dilate(output, kernel)  # 膨脹影像，消除雜訊
-    output = cv2.erode(output, kernel)  # 縮小影像，還原大小
-
-    cv2.imshow("ImageShow", output)
-    k = cv2.waitKey(1)  # 等待按鍵輸入
-    if k == ESC:
-        break
-
-cap.release()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-print("OpenCV_ai_79")
-
-lower = np.array([30, 40, 200])
-upper = np.array([90, 100, 255])
-cap = cv2.VideoCapture(0)
-if not cap.isOpened():
-    print("Cannot open camera")
-    exit()
-while True:
-    ret, img = cap.read()
-    if not ret:
-        print("Cannot receive frame")
-        break
-    img = cv2.resize(img, (640, 360))
-    output = cv2.inRange(img, lower, upper)
-    kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (11, 11))
-    output = cv2.dilate(output, kernel)
-    output = cv2.erode(output, kernel)
-
-    # cv2.findContours 抓取顏色範圍的輪廓座標
-    # cv2.RETR_EXTERNAL 表示取得範圍的外輪廓座標串列，cv2.CHAIN_APPROX_SIMPLE 為取值的演算法
-    contours, hierarchy = cv2.findContours(
-        output, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE
-    )
-
-    """
-    # 使用 for 迴圈印出座標長相
-    for contour in contours:
-        print(contour)
-    """
-
-    cv2.imshow("ImageShow", output)
-    k = cv2.waitKey(1)  # 等待按鍵輸入
-    if k == ESC:
-        break
-
-cap.release()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-print("OpenCV_ai_80")
-
-lower = np.array([30, 40, 200])
-upper = np.array([90, 100, 255])
-cap = cv2.VideoCapture(0)
-if not cap.isOpened():
-    print("Cannot open camera")
-    exit()
-while True:
-    ret, img = cap.read()
-    if not ret:
-        print("Cannot receive frame")
-        break
-    img = cv2.resize(img, (640, 360))
-    output = cv2.inRange(img, lower, upper)
-    kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (11, 11))
-    output = cv2.dilate(output, kernel)
-    output = cv2.erode(output, kernel)
-
-    contours, hierarchy = cv2.findContours(
-        output, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE
-    )
-    for contour in contours:
-        area = cv2.contourArea(contour)  # 取得範圍內的面積
-        color = (0, 0, 255)  # 設定外框顏色
-        # 如果面積大於 300 再標記，避免標記到背景中太小的東西
-        if area > 300:
-            for i in range(len(contour)):
-                if i > 0 and i < len(contour) - 1:
-                    # 從第二個點開始畫線
-                    img = cv2.line(
-                        img,
-                        (contour[i - 1][0][0], contour[i - 1][0][1]),
-                        (contour[i][0][0], contour[i][0][1]),
-                        color,
-                        3,
-                    )
-                elif i == len(contour) - 1:
-                    # 如果是最後一個點，與第一個點連成一線
-                    img = cv2.line(
-                        img,
-                        (contour[i][0][0], contour[i][0][1]),
-                        (contour[0][0][0], contour[0][0][1]),
-                        color,
-                        3,
-                    )
-
-    cv2.imshow("ImageShow", img)
-    k = cv2.waitKey(1)  # 等待按鍵輸入
-    if k == ESC:
-        break
-
-cap.release()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-print("OpenCV_ai_81")
-
-lower = np.array([30, 40, 200])  # 轉換成 NumPy 陣列，範圍稍微變小 ( 55->30, 70->40, 252->200 )
-upper = np.array([90, 100, 255])  # 轉換成 NumPy 陣列，範圍稍微加大 ( 70->90, 80->100, 252->255 )
-cap = cv2.VideoCapture(0)
-if not cap.isOpened():
-    print("Cannot open camera")
-    exit()
-while True:
-    ret, img = cap.read()
-    if not ret:
-        print("Cannot receive frame")
-        break
-    img = cv2.resize(img, (640, 360))
-    output = cv2.inRange(img, lower, upper)
-    kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (11, 11))
-    output = cv2.dilate(output, kernel)
-    output = cv2.erode(output, kernel)
-    contours, hierarchy = cv2.findContours(
-        output, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE
-    )
-
-    for contour in contours:
-        area = cv2.contourArea(contour)
-        color = (0, 0, 255)
-        if area > 300:
-            x, y, w, h = cv2.boundingRect(contour)  # 取得座標與長寬尺寸
-            img = cv2.rectangle(img, (x, y), (x + w, y + h), color, 3)  # 繪製四邊形
-
-    cv2.imshow("ImageShow", img)
-    k = cv2.waitKey(1)  # 等待按鍵輸入
-    if k == ESC:
-        break
-
-cap.release()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-print("OpenCV_ai_82")
-
-lower = np.array([30, 40, 200])
-upper = np.array([90, 100, 255])
-
-blue_lower = np.array([90, 100, 0])  # 設定藍色最低值範圍
-blue_upper = np.array([200, 160, 100])  # 設定藍色最高值範圍
-
-cap = cv2.VideoCapture(0)
-if not cap.isOpened():
-    print("Cannot open camera")
-    exit()
-while True:
-    ret, img = cap.read()
-    if not ret:
-        print("Cannot receive frame")
-        break
-    img = cv2.resize(img, (640, 360))
-    output = cv2.inRange(img, lower, upper)
-    kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (11, 11))
-    output = cv2.dilate(output, kernel)
-    output = cv2.erode(output, kernel)
-    contours, hierarchy = cv2.findContours(
-        output, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE
-    )
-
-    for contour in contours:
-        area = cv2.contourArea(contour)
-        color = (0, 0, 255)
-        if area > 300:
-            x, y, w, h = cv2.boundingRect(contour)
-            img = cv2.rectangle(img, (x, y), (x + w, y + h), color, 3)
-
-    # 設定選取藍色的程式
-    blue_output = cv2.inRange(img, blue_lower, blue_upper)
-    kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (11, 11))
-    blue_output = cv2.dilate(blue_output, kernel)
-    blue_output = cv2.erode(blue_output, kernel)
-    contours, hierarchy = cv2.findContours(
-        blue_output, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE
-    )
-
-    for contour in contours:
-        area = cv2.contourArea(contour)
-        color = (255, 255, 0)
-        if area > 300:
-            x, y, w, h = cv2.boundingRect(contour)
-            img = cv2.rectangle(img, (x, y), (x + w, y + h), color, 3)
-
-    cv2.imshow("ImageShow", img)
-    k = cv2.waitKey(1)  # 等待按鍵輸入
-    if k == ESC:
-        break
-
-cap.release()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
 print("OpenCV_ai_83")
 
 import mediapipe as mp
 
 cap = cv2.VideoCapture(0)
+if not cap.isOpened():
+    print("開啟攝影機失敗")
+    sys.exit()
+else:
+    print("Video device opened")
+
 mp_face_detection = mp.solutions.face_detection
 mp_drawing = mp.solutions.drawing_utils
 
 with mp_face_detection.FaceDetection(
     model_selection=0, min_detection_confidence=0.5
 ) as face_detection:
-    if not cap.isOpened():
-        print("Cannot open camera")
-        exit()
     while True:
         ret, img = cap.read()
-        if not ret:
-            print("Cannot receive frame")
-            break
 
         img.flags.writeable = False
         img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
@@ -652,8 +50,8 @@ with mp_face_detection.FaceDetection(
             for detection in results.detections:
                 mp_drawing.draw_detection(img, detection)
 
-        cv2.imshow("ImageShow", img)
-        k = cv2.waitKey(1)  # 等待按鍵輸入
+        cv2.imshow("WebCam", img)
+        k = cv2.waitKey(1)
         if k == ESC:
             break
 
@@ -666,20 +64,20 @@ print("OpenCV_ai_84")
 import mediapipe as mp
 
 cap = cv2.VideoCapture(0)
+if not cap.isOpened():
+    print("開啟攝影機失敗")
+    sys.exit()
+else:
+    print("Video device opened")
+
 mp_face_detection = mp.solutions.face_detection  # 建立偵測方法
 mp_drawing = mp.solutions.drawing_utils  # 建立繪圖方法
 
 with mp_face_detection.FaceDetection(  # 開始偵測人臉
     model_selection=0, min_detection_confidence=0.5
 ) as face_detection:
-    if not cap.isOpened():
-        print("Cannot open camera")
-        exit()
     while True:
         ret, img = cap.read()
-        if not ret:
-            print("Cannot receive frame")
-            break
         img2 = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)  # 將 BGR 顏色轉換成 RGB
         results = face_detection.process(img2)  # 偵測人臉
 
@@ -687,8 +85,8 @@ with mp_face_detection.FaceDetection(  # 開始偵測人臉
             for detection in results.detections:
                 mp_drawing.draw_detection(img, detection)  # 標記人臉
 
-        cv2.imshow("ImageShow", img)
-        k = cv2.waitKey(1)  # 等待按鍵輸入
+        cv2.imshow("WebCam", img)
+        k = cv2.waitKey(1)
         if k == ESC:
             break
 
@@ -701,20 +99,20 @@ print("OpenCV_ai_85")
 import mediapipe as mp
 
 cap = cv2.VideoCapture(0)
+if not cap.isOpened():
+    print("開啟攝影機失敗")
+    sys.exit()
+else:
+    print("Video device opened")
+
 mp_face_detection = mp.solutions.face_detection
 mp_drawing = mp.solutions.drawing_utils
 
 with mp_face_detection.FaceDetection(
     model_selection=0, min_detection_confidence=0.5
 ) as face_detection:
-    if not cap.isOpened():
-        print("Cannot open camera")
-        exit()
     while True:
         ret, img = cap.read()
-        if not ret:
-            print("Cannot receive frame")
-            break
         size = img.shape  # 取得攝影機影像尺寸
         w = size[1]  # 取得畫面寬度
         h = size[0]  # 取得畫面高度
@@ -730,6 +128,7 @@ with mp_face_detection.FaceDetection(
                 b = detection.location_data.relative_keypoints[1]  # 取得右眼座標
                 ax, ay = int(a.x * w), int(a.y * h)  # 計算左眼真正的座標
                 bx, by = int(b.x * w), int(b.y * h)  # 計算右眼真正的座標
+                """
                 cv2.circle(
                     img, (ax, ay), (eye + 10), (255, 255, 255), -1
                 )  # 畫左眼白色大圓 ( 白眼球 )
@@ -744,9 +143,10 @@ with mp_face_detection.FaceDetection(
                 cv2.circle(
                     img, (bx - 8, by - 8), (eye - 15), (255, 255, 255), -1
                 )  # 畫右眼白色小圓 ( 反光 )
+                """
 
-        cv2.imshow("ImageShow", img)
-        k = cv2.waitKey(1)  # 等待按鍵輸入
+        cv2.imshow("WebCam", img)
+        k = cv2.waitKey(1)
         if k == ESC:
             break
 
@@ -764,6 +164,11 @@ mp_face_mesh = mp.solutions.face_mesh  # mediapipe 人臉網格方法
 drawing_spec = mp_drawing.DrawingSpec(thickness=1, circle_radius=1)  # 繪圖參數設定
 
 cap = cv2.VideoCapture(0)
+if not cap.isOpened():
+    print("開啟攝影機失敗")
+    sys.exit()
+else:
+    print("Video device opened")
 
 # 啟用人臉網格偵測，設定相關參數
 with mp_face_mesh.FaceMesh(
@@ -772,14 +177,8 @@ with mp_face_mesh.FaceMesh(
     min_detection_confidence=0.5,
     min_tracking_confidence=0.5,
 ) as face_mesh:
-    if not cap.isOpened():
-        print("Cannot open camera")
-        exit()
     while True:
         ret, img = cap.read()
-        if not ret:
-            print("Cannot receive frame")
-            break
         img2 = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)  # 顏色 BGR 轉換為 RGB
         results = face_mesh.process(img2)  # 取得人臉網格資訊
         if results.multi_face_landmarks:
@@ -809,8 +208,8 @@ with mp_face_mesh.FaceMesh(
                     connection_drawing_spec=mp_drawing_styles.get_default_face_mesh_iris_connections_style(),
                 )
 
-        cv2.imshow("ImageShow", img)
-        k = cv2.waitKey(1)  # 等待按鍵輸入
+        cv2.imshow("WebCam", img)
+        k = cv2.waitKey(1)
         if k == ESC:
             break
 
@@ -828,6 +227,11 @@ mp_face_mesh = mp.solutions.face_mesh
 drawing_spec = mp_drawing.DrawingSpec(thickness=1, circle_radius=1)
 
 cap = cv2.VideoCapture(0)
+if not cap.isOpened():
+    print("開啟攝影機失敗")
+    sys.exit()
+else:
+    print("Video device opened")
 
 with mp_face_mesh.FaceMesh(
     max_num_faces=1,
@@ -835,15 +239,9 @@ with mp_face_mesh.FaceMesh(
     min_detection_confidence=0.5,
     min_tracking_confidence=0.5,
 ) as face_mesh:
-    if not cap.isOpened():
-        print("Cannot open camera")
-        exit()
     while True:
         ret, img = cap.read()
-        if not ret:
-            print("Cannot receive frame")
-            break
-        img = cv2.resize(img, (480, 320))  # 調整影像尺寸為 480x320
+        #img = cv2.resize(img, (640//2, 480//2))  # 調整影像尺寸
         output = np.zeros((320, 480, 3), dtype="uint8")  # 繪製 480x320 的黑色畫布
         img2 = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
         results = face_mesh.process(img2)
@@ -874,8 +272,8 @@ with mp_face_mesh.FaceMesh(
                     connection_drawing_spec=mp_drawing_styles.get_default_face_mesh_iris_connections_style(),
                 )
 
-        cv2.imshow("ImageShow", output)  # 顯示 output
-        k = cv2.waitKey(1)  # 等待按鍵輸入
+        cv2.imshow("WebCam", output)
+        k = cv2.waitKey(1)
         if k == ESC:
             break
 
@@ -892,6 +290,11 @@ mp_drawing_styles = mp.solutions.drawing_styles  # mediapipe 繪圖樣式
 mp_hands = mp.solutions.hands  # mediapipe 偵測手掌方法
 
 cap = cv2.VideoCapture(0)
+if not cap.isOpened():
+    print("開啟攝影機失敗")
+    sys.exit()
+else:
+    print("Video device opened")
 
 # mediapipe 啟用偵測手掌
 with mp_hands.Hands(
@@ -900,14 +303,8 @@ with mp_hands.Hands(
     min_detection_confidence=0.5,
     min_tracking_confidence=0.5,
 ) as hands:
-    if not cap.isOpened():
-        print("Cannot open camera")
-        exit()
     while True:
         ret, img = cap.read()
-        if not ret:
-            print("Cannot receive frame")
-            break
         img2 = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)  # 將 BGR 轉換成 RGB
         results = hands.process(img2)  # 偵測手掌
         if results.multi_hand_landmarks:
@@ -921,8 +318,8 @@ with mp_hands.Hands(
                     mp_drawing_styles.get_default_hand_connections_style(),
                 )
 
-        cv2.imshow("ImageShow", img)
-        k = cv2.waitKey(1)  # 等待按鍵輸入
+        cv2.imshow("WebCam", img)
+        k = cv2.waitKey(1)
         if k == ESC:
             break
 
@@ -939,22 +336,21 @@ mp_drawing_styles = mp.solutions.drawing_styles  # mediapipe 繪圖樣式
 mp_hands = mp.solutions.hands  # mediapipe 偵測手掌方法
 
 cap = cv2.VideoCapture(0)
+if not cap.isOpened():
+    print("開啟攝影機失敗")
+    sys.exit()
+else:
+    print("Video device opened")
 
 # mediapipe 啟用偵測手掌
 with mp_hands.Hands(
     model_complexity=0, min_detection_confidence=0.5, min_tracking_confidence=0.5
 ) as hands:
-    if not cap.isOpened():
-        print("Cannot open camera")
-        exit()
 
     run = True  # 設定是否更動觸碰區位置
     while True:
         ret, img = cap.read()
-        if not ret:
-            print("Cannot receive frame")
-            break
-        img = cv2.resize(img, (540, 320))  # 調整畫面尺寸
+        #img = cv2.resize(img, (640//2, 480//2))  # 調整畫面尺寸
         size = img.shape  # 取得攝影機影像尺寸
         w = size[1]  # 取得畫面寬度
         h = size[0]  # 取得畫面高度
@@ -982,8 +378,8 @@ with mp_hands.Hands(
                 )
 
         cv2.rectangle(img, (rx, ry), (rx + 80, ry + 80), (0, 0, 255), 5)  # 畫出觸碰區
-        cv2.imshow("ImageShow", img)
-        k = cv2.waitKey(1)  # 等待按鍵輸入
+        cv2.imshow("WebCam", img)
+        k = cv2.waitKey(1)
         if k == ESC:
             break
 
@@ -1000,18 +396,17 @@ mp_drawing_styles = mp.solutions.drawing_styles  # mediapipe 繪圖樣式
 mp_pose = mp.solutions.pose  # mediapipe 姿勢偵測
 
 cap = cv2.VideoCapture(0)
+if not cap.isOpened():
+    print("開啟攝影機失敗")
+    sys.exit()
+else:
+    print("Video device opened")
 
 # 啟用姿勢偵測
 with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as pose:
-    if not cap.isOpened():
-        print("Cannot open camera")
-        exit()
     while True:
         ret, img = cap.read()
-        if not ret:
-            print("Cannot receive frame")
-            break
-        img = cv2.resize(img, (520, 300))  # 縮小尺寸，加快演算速度
+        #img = cv2.resize(img, (640//2, 480//2))  # 縮小尺寸，加快演算速度
         img2 = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)  # 將 BGR 轉換成 RGB
         results = pose.process(img2)  # 取得姿勢偵測結果
         # 根據姿勢偵測結果，標記身體節點和骨架
@@ -1022,8 +417,8 @@ with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as 
             landmark_drawing_spec=mp_drawing_styles.get_default_pose_landmarks_style(),
         )
 
-        cv2.imshow("ImageShow", img)
-        k = cv2.waitKey(1)  # 等待按鍵輸入
+        cv2.imshow("WebCam", img)
+        k = cv2.waitKey(1)
         if k == ESC:
             break
 
@@ -1040,6 +435,12 @@ mp_drawing_styles = mp.solutions.drawing_styles
 mp_pose = mp.solutions.pose
 
 cap = cv2.VideoCapture(0)
+if not cap.isOpened():
+    print("開啟攝影機失敗")
+    sys.exit()
+else:
+    print("Video device opened")
+
 bg = cv2.imread("windows-bg.jpg")  # 載入 windows 經典背景
 
 with mp_pose.Pose(
@@ -1047,15 +448,9 @@ with mp_pose.Pose(
     enable_segmentation=True,  # 額外設定 enable_segmentation 參數
     min_tracking_confidence=0.5,
 ) as pose:
-    if not cap.isOpened():
-        print("Cannot open camera")
-        exit()
     while True:
         ret, img = cap.read()
-        if not ret:
-            print("Cannot receive frame")
-            break
-        img = cv2.resize(img, (520, 300))
+        #img = cv2.resize(img, (640//2, 480//2))
         img2 = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
         results = pose.process(img2)
         try:
@@ -1073,8 +468,8 @@ with mp_pose.Pose(
             landmark_drawing_spec=mp_drawing_styles.get_default_pose_landmarks_style(),
         )
 
-        cv2.imshow("ImageShow", img)
-        k = cv2.waitKey(1)  # 等待按鍵輸入
+        cv2.imshow("WebCam", img)
+        k = cv2.waitKey(1)
         if k == ESC:
             break
 
@@ -1091,20 +486,19 @@ mp_drawing_styles = mp.solutions.drawing_styles  # mediapipe 繪圖樣式
 mp_holistic = mp.solutions.holistic  # mediapipe 全身偵測方法
 
 cap = cv2.VideoCapture(0)
+if not cap.isOpened():
+    print("開啟攝影機失敗")
+    sys.exit()
+else:
+    print("Video device opened")
 
 # mediapipe 啟用偵測全身
 with mp_holistic.Holistic(
     min_detection_confidence=0.5, min_tracking_confidence=0.5
 ) as holistic:
-    if not cap.isOpened():
-        print("Cannot open camera")
-        exit()
     while True:
         ret, img = cap.read()
-        if not ret:
-            print("Cannot receive frame")
-            break
-        img = cv2.resize(img, (520, 300))
+        #img = cv2.resize(img, (640//2, 480//2))
         img2 = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)  # 將 BGR 轉換成 RGB
         results = holistic.process(img2)  # 開始偵測全身
         # 面部偵測，繪製臉部網格
@@ -1123,8 +517,8 @@ with mp_holistic.Holistic(
             landmark_drawing_spec=mp_drawing_styles.get_default_pose_landmarks_style(),
         )
 
-        cv2.imshow("ImageShow", img)
-        k = cv2.waitKey(1)  # 等待按鍵輸入
+        cv2.imshow("WebCam", img)
+        k = cv2.waitKey(1)
         if k == ESC:
             break
 
@@ -1141,6 +535,11 @@ mp_drawing = mp.solutions.drawing_utils  # mediapipe 繪圖方法
 mp_objectron = mp.solutions.objectron    # mediapipe 物體偵測
 
 cap = cv2.VideoCapture(0)
+if not cap.isOpened():
+    print("開啟攝影機失敗")
+    sys.exit()
+else:
+    print("Video device opened")
 
 # 啟用物體偵測，偵測鞋子 Shoe
 with mp_objectron.Objectron(static_image_mode=False,
@@ -1148,16 +547,9 @@ with mp_objectron.Objectron(static_image_mode=False,
                             min_detection_confidence=0.5,
                             min_tracking_confidence=0.99,
                             model_name='Shoe') as objectron:
-
-    if not cap.isOpened():
-        print("Cannot open camera")
-        exit()
     while True:
         ret, img = cap.read()
-        if not ret:
-            print("Cannot receive frame")
-            break
-        img = cv2.resize(img,(520,300))               # 縮小尺寸，加快演算速度
+        #img = cv2.resize(img,(640//2, 480//2))               # 縮小尺寸，加快演算速度
         img2 = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)   # 將 BGR 轉換成 RGB
         results = objectron.process(img2)             # 取得物體偵測結果
         # 標記所偵測到的物體
@@ -1169,7 +561,7 @@ with mp_objectron.Objectron(static_image_mode=False,
                                     detected_object.translation)
 
         cv2.imshow('ImageShow', img)
-        k = cv2.waitKey(1) # 等待按鍵輸入
+        k = cv2.waitKey(1)
         if k == ESC:
             break
 
@@ -1187,21 +579,21 @@ mp_drawing = mp.solutions.drawing_utils                    # mediapipe 繪圖功
 mp_selfie_segmentation = mp.solutions.selfie_segmentation  # mediapipe 自拍分割方法
 
 cap = cv2.VideoCapture(0)
+if not cap.isOpened():
+    print("開啟攝影機失敗")
+    sys.exit()
+else:
+    print("Video device opened")
+
 bg = cv2.imread('windows-bg.jpg')   # 載入 windows 經典背景
 
 # mediapipe 啟用自拍分割
 with mp_selfie_segmentation.SelfieSegmentation(
     model_selection=1) as selfie_segmentation:
 
-    if not cap.isOpened():
-        print("Cannot open camera")
-        exit()
     while True:
         ret, img = cap.read()
-        if not ret:
-            print("Cannot receive frame")
-            break
-        img = cv2.resize(img,(520,300))               # 縮小尺寸，加快演算速度
+        #img = cv2.resize(img,(640//2, 480//2))               # 縮小尺寸，加快演算速度
         img2 = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)   # 將 BGR 轉換成 RGB
         results = selfie_segmentation.process(img2)   # 取得自拍分割結果
         condition = np.stack((results.segmentation_mask,) * 3, axis=-1) > 0.1 # 如果滿足模型判斷條件 ( 表示要換成背景 )，回傳 True
@@ -1209,7 +601,7 @@ with mp_selfie_segmentation.SelfieSegmentation(
         # 將主體與背景合成，如果滿足背景條件，就更換為 bg 的像素，不然維持原本的 img 的像素
 
         cv2.imshow('ImageShow', output_image)
-        k = cv2.waitKey(1) # 等待按鍵輸入
+        k = cv2.waitKey(1)
         if k == ESC:
             break
 
@@ -1344,7 +736,13 @@ def hand_pos(finger_angle):
         return ""
 
 
-cap = cv2.VideoCapture(0)  # 讀取攝影機
+cap = cv2.VideoCapture(0)
+if not cap.isOpened():
+    print("開啟攝影機失敗")
+    sys.exit()
+else:
+    print("Video device opened")
+
 fontFace = cv2.FONT_HERSHEY_SIMPLEX  # 印出文字的字型
 lineType = cv2.LINE_AA  # 印出文字的邊框
 
@@ -1352,16 +750,10 @@ lineType = cv2.LINE_AA  # 印出文字的邊框
 with mp_hands.Hands(
     model_complexity=0, min_detection_confidence=0.5, min_tracking_confidence=0.5
 ) as hands:
-    if not cap.isOpened():
-        print("Cannot open camera")
-        exit()
-    w, h = 540, 310  # 影像尺寸
+    w, h = 640//2, 480//2  # 影像尺寸
     while True:
         ret, img = cap.read()
-        img = cv2.resize(img, (w, h))  # 縮小尺寸，加快處理效率
-        if not ret:
-            print("Cannot receive frame")
-            break
+        #img = cv2.resize(img, (w, h))  # 縮小尺寸，加快處理效率
         img2 = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)  # 轉換成 RGB 色彩
         results = hands.process(img2)  # 偵測手勢
         if results.multi_hand_landmarks:
@@ -1380,8 +772,8 @@ with mp_hands.Hands(
                         img, text, (30, 120), fontFace, 5, (255, 255, 255), 10, lineType
                     )  # 印出文字
 
-        cv2.imshow("ImageShow", img)
-        k = cv2.waitKey(1)  # 等待按鍵輸入
+        cv2.imshow("WebCam", img)
+        k = cv2.waitKey(1)
         if k == ESC:
             break
 
@@ -1515,7 +907,13 @@ def hand_pos(finger_angle):
         return ""
 
 
-cap = cv2.VideoCapture(0)  # 讀取攝影機
+cap = cv2.VideoCapture(0)
+if not cap.isOpened():
+    print("開啟攝影機失敗")
+    sys.exit()
+else:
+    print("Video device opened")
+
 fontFace = cv2.FONT_HERSHEY_SIMPLEX  # 印出文字的字型
 lineType = cv2.LINE_AA  # 印出文字的邊框
 
@@ -1523,16 +921,10 @@ lineType = cv2.LINE_AA  # 印出文字的邊框
 with mp_hands.Hands(
     model_complexity=0, min_detection_confidence=0.5, min_tracking_confidence=0.5
 ) as hands:
-    if not cap.isOpened():
-        print("Cannot open camera")
-        exit()
-    w, h = 540, 310  # 影像尺寸
+    w, h = 640//2, 480//2  # 影像尺寸
     while True:
         ret, img = cap.read()
-        img = cv2.resize(img, (w, h))  # 縮小尺寸，加快處理效率
-        if not ret:
-            print("Cannot receive frame")
-            break
+        #img = cv2.resize(img, (w, h))  # 縮小尺寸，加快處理效率
         img2 = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)  # 轉換成 RGB 色彩
         results = hands.process(img2)
         if results.multi_hand_landmarks:
@@ -1588,8 +980,8 @@ with mp_hands.Hands(
                             lineType,
                         )  # 印出文字
 
-        cv2.imshow("ImageShow", img)
-        k = cv2.waitKey(1)  # 等待按鍵輸入
+        cv2.imshow("WebCam", img)
+        k = cv2.waitKey(1)
         if k == ESC:
             break
 
@@ -1693,7 +1085,13 @@ def hand_pos(finger_angle):
         return ""
 
 
-cap = cv2.VideoCapture(0)  # 讀取攝影機
+cap = cv2.VideoCapture(0)
+if not cap.isOpened():
+    print("開啟攝影機失敗")
+    sys.exit()
+else:
+    print("Video device opened")
+
 fontFace = cv2.FONT_HERSHEY_SIMPLEX  # 印出文字的字型
 lineType = cv2.LINE_AA  # 印出文字的邊框
 
@@ -1701,10 +1099,7 @@ lineType = cv2.LINE_AA  # 印出文字的邊框
 with mp_hands.Hands(
     model_complexity=0, min_detection_confidence=0.5, min_tracking_confidence=0.5
 ) as hands:
-    if not cap.isOpened():
-        print("Cannot open camera")
-        exit()
-    w, h = 540, 310  # 影像尺寸
+    w, h = 640//2, 480//2  # 影像尺寸
     draw = np.zeros((h, w, 4), dtype="uint8")  # 繪製全黑背景，尺寸和影像相同
     dots = []  # 使用 dots 空串列記錄繪圖座標點
     cv2.rectangle(draw, (20, 20), (60, 60), (0, 0, 255, 255), -1)  # 在畫面上方放入紅色正方形
@@ -1713,11 +1108,8 @@ with mp_hands.Hands(
     color = (0, 0, 255, 255)  # 設定預設顏色為紅色
     while True:
         ret, img = cap.read()
-        img = cv2.resize(img, (w, h))  # 縮小尺寸，加快處理效率
+        #img = cv2.resize(img, (w, h))  # 縮小尺寸，加快處理效率
         img = cv2.flip(img, 1)
-        if not ret:
-            print("Cannot receive frame")
-            break
         img2 = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)  # 偵測手勢的影像轉換成 RGB 色彩
         img = cv2.cvtColor(img, cv2.COLOR_BGR2BGRA)  # 畫圖的影像轉換成 BGRA 色彩
         results = hands.process(img2)  # 偵測手勢
@@ -1767,9 +1159,9 @@ with mp_hands.Hands(
                 draw[:, j, 3] / 255
             )
 
-        cv2.imshow("ImageShow", img)
+        cv2.imshow("WebCam", img)
 
-        k = cv2.waitKey(1)  # 等待按鍵輸入
+        k = cv2.waitKey(1)
         if k == ESC:
             break
 
@@ -1791,7 +1183,13 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("OpenCV_ai_98")
 
-cap = cv2.VideoCapture(0)  # 讀取攝影鏡頭
+cap = cv2.VideoCapture(0)
+if not cap.isOpened():
+    print("開啟攝影機失敗")
+    sys.exit()
+else:
+    print("Video device opened")
+
 width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))  # 取得影像寬度
 height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))  # 取得影像高度
 
@@ -1803,15 +1201,8 @@ mask_b[80:280, 220:420] = 0  # 設定黑色遮罩哪個區域是黑色
 mask_w = np.zeros((height, width, 3), dtype="uint8")  # 產生白色遮罩 -> 套用模糊影像
 mask_w[80:280, 220:420] = 255  # 設定白色遮罩哪個區域是白色
 
-if not cap.isOpened():
-    print("Cannot open camera")
-    exit()
 while True:
     ret, img = cap.read()
-    if not ret:
-        print("Cannot receive frame")
-        break
-
     img = cv2.flip(img, 1)  # 翻轉影像
     img = cv2.cvtColor(img, cv2.COLOR_BGR2BGRA)  # 轉換顏色為 BGRA ( 計算時需要用到 Alpha 色版 )
     img2 = img.copy()  # 複製影像
@@ -1825,8 +1216,8 @@ while True:
 
     output = cv2.add(img, img2)  # 合併影像
 
-    cv2.imshow("ImageShow", output)
-    k = cv2.waitKey(1)  # 等待按鍵輸入
+    cv2.imshow("WebCam", output)
+    k = cv2.waitKey(1)
     if k == ESC:
         break
 
@@ -1841,18 +1232,20 @@ mp_drawing = mp.solutions.drawing_utils
 mp_drawing_styles = mp.solutions.drawing_styles
 mp_hands = mp.solutions.hands
 
-cap = cv2.VideoCapture(0)  # 讀取攝影機
+cap = cv2.VideoCapture(0)
+if not cap.isOpened():
+    print("開啟攝影機失敗")
+    sys.exit()
+else:
+    print("Video device opened")
 
 # mediapipe 啟用偵測手掌
 with mp_hands.Hands(
     model_complexity=0, min_detection_confidence=0.5, min_tracking_confidence=0.5
 ) as hands:
-    if not cap.isOpened():
-        print("Cannot open camera")
-        exit()
 
-    w = 640  # 定義影片寬度
-    h = 360  # 定義影像高度
+    w = 640//2  # 定義影片寬度
+    h = 480//2  # 定義影像高度
     dots = []  # 記錄座標
     mask_b = np.zeros((h, w, 3), dtype="uint8")  # 產生黑色遮罩 -> 套用清楚影像
     mask_w = np.zeros((h, w, 3), dtype="uint8")  # 產生白色遮罩 -> 套用模糊影像
@@ -1860,16 +1253,13 @@ with mp_hands.Hands(
 
     while True:
         ret, img = cap.read()
-        img = cv2.resize(img, (w, h))  # 縮小尺寸，加快處理效率
+        #img = cv2.resize(img, (w, h))  # 縮小尺寸，加快處理效率
         img = cv2.flip(img, 1)  # 翻轉影像
         img_hand = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)  # 偵測手勢使用
         img = cv2.cvtColor(img, cv2.COLOR_BGR2BGRA)  # 轉換顏色為 BGRA ( 計算時需要用到 Alpha 色版 )
         img2 = img.copy()  # 複製影像
         img2 = cv2.blur(img, (55, 55))  # 套用模糊
 
-        if not ret:
-            print("Cannot receive frame")
-            break
         results = hands.process(img_hand)  # 偵測手勢
         if results.multi_hand_landmarks:
             for hand_landmarks in results.multi_hand_landmarks:
@@ -1910,9 +1300,9 @@ with mp_hands.Hands(
 
         output = cv2.add(img, img2)  # 合併影像
 
-        cv2.imshow("ImageShow", output)
+        cv2.imshow("WebCam", output)
 
-        k = cv2.waitKey(1)  # 等待按鍵輸入
+        k = cv2.waitKey(1)
         if k == ESC:
             break
 
@@ -1924,10 +1314,16 @@ print("------------------------------------------------------------")  # 60個
 """ 缺檔案
 import mediapipe as mp
 
-cap = cv2.VideoCapture(0)                          # 讀取攝影鏡頭
+cap = cv2.VideoCapture(0)
+if not cap.isOpened():
+    print("開啟攝影機失敗")
+    sys.exit()
+else:
+    print("Video device opened")
+
 mp_face_detection = mp.solutions.face_detection    # 使用人臉偵測方法
 
-h, w = 360, 640                                    # 輸出時的影像長寬
+h, w = 480//2, 640//2                                    # 輸出時的影像長寬
 mask = np.zeros((h, w, 3), dtype='uint8')          # 建立遮罩
 cv2.ellipse(mask, (260,100),(55,35),0,0,360,(255,255,255),-1)   # 繪製左眼的橢圓形遮罩
 cv2.ellipse(mask, (380,100),(55,35),0,0,360,(255,255,255),-1)   # 繪製右眼的橢圓形遮罩
@@ -1941,15 +1337,9 @@ orange = cv2.imread('orange.jpg')                  # 讀取橘子圖片背景
 with mp_face_detection.FaceDetection(
     model_selection=0, min_detection_confidence=0.5) as face_detection:
 
-    if not cap.isOpened():
-        print("Cannot open camera")
-        exit()
     while True:
         ret, img = cap.read()                        # 讀取攝影機畫面
-        if not ret:
-            print("Cannot receive frame")
-            break
-        img = cv2.resize(img, (w, h))                # 縮小尺寸加快速度
+        #img = cv2.resize(img, (w, h))                # 縮小尺寸加快速度
         img2 = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)  # 轉換成 RGB 才能夠在 mediapipe 中使用
         results = face_detection.process(img2)       # 讀取人臉偵測資訊
 
@@ -1988,7 +1378,7 @@ with mp_face_detection.FaceDetection(
                 out = (out * 255).astype('uint8')          # 轉換成數字
 
         cv2.imshow('ImageShow', out)
-        k = cv2.waitKey(1) # 等待按鍵輸入
+        k = cv2.waitKey(1)
         if k == ESC:
             break
 
@@ -1997,347 +1387,3 @@ cv2.destroyAllWindows()
 
 """
 
-print("------------------------------------------------------------")  # 60個
-
-
-""" 缺檔案
-import tensorflow as tf
-
-model = tf.keras.models.load_model('keras_model.h5', compile=False)   # 載入 model
-data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)           # 設定資料陣列
-
-cap = cv2.VideoCapture(0)         # 設定攝影機鏡頭
-if not cap.isOpened():
-    print("Cannot open camera")
-    exit()
-while True:
-    ret, frame = cap.read()       # 讀取攝影機影像
-    if not ret:
-        print("Cannot receive frame")
-        break
-    img = cv2.resize(frame , (398, 224))   # 改變尺寸
-    img = img[0:224, 80:304]               # 裁切為正方形，符合 model 大小
-    image_array = np.asarray(img)          # 去除換行符號和結尾空白，產生文字陣列
-    normalized_image_array = (image_array.astype(np.float32) / 127.0) - 1  # 轉換成預測陣列
-    data[0] = normalized_image_array
-    prediction = model.predict(data)       # 預測結果
-    a,b= prediction[0]                     # 取得預測結果
-    if a>0.9:
-        print('oxxo')
-    if b>0.9:
-        print('維他命')
-        
-    cv2.imshow('ImageShow', img)
-    k = cv2.waitKey(1) # 等待按鍵輸入
-    if k == ESC:
-        break
-
-cap.release()
-cv2.destroyAllWindows()
-"""
-print("------------------------------------------------------------")  # 60個
-
-
-""" 缺檔案
-import tensorflow as tf
-
-model = tf.keras.models.load_model('keras_model.h5', compile=False)  # 載入模型
-data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)          # 設定資料陣列
-
-def text(text):      # 建立顯示文字的函式
-    global img       # 設定 img 為全域變數
-    org = (0,50)     # 文字位置
-    fontFace = cv2.FONT_HERSHEY_SIMPLEX  # 文字字型
-    fontScale = 2.5                      # 文字尺寸
-    color = (255,255,255)                # 顏色
-    thickness = 5                        # 文字外框線條粗細
-    lineType = cv2.LINE_AA               # 外框線條樣式
-    cv2.putText(img, text, org, fontFace, fontScale, color, thickness, lineType) # 放入文字
-
-cap = cv2.VideoCapture(0)
-if not cap.isOpened():
-    print("Cannot open camera")
-    exit()
-while True:
-    ret, frame = cap.read()
-    if not ret:
-        print("Cannot receive frame")
-        break
-    img = cv2.resize(frame , (398, 224))
-    img = img[0:224, 80:304]
-    image_array = np.asarray(img)
-    normalized_image_array = (image_array.astype(np.float32) / 127.0) - 1
-    data[0] = normalized_image_array
-    prediction = model.predict(data)
-    a,b,c,bg= prediction[0]
-    if a>0.9:
-        text('a')  # 使用 text() 函式，顯示文字
-    if b>0.9:
-        text('b')
-    if c>0.9:
-        text('c')
-        
-    cv2.imshow('ImageShow', img)
-    
-    k = cv2.waitKey(1) # 等待按鍵輸入
-    if k == ESC:
-        break
-
-cap.release()
-cv2.destroyAllWindows()
-"""
-
-print("------------------------------------------------------------")  # 60個
-
-""" 缺檔案
-import tensorflow as tf
-
-from PIL import ImageFont, ImageDraw, Image  # 載入 PIL 相關函式庫
-
-fontpath = 'NotoSansTC-Regular.otf'          # 設定字型路徑
-
-model = tf.keras.models.load_model('keras_model.h5', compile=False)  # 載入模型
-data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)          # 設定資料陣列
-
-def text(text):   # 建立顯示文字的函式
-    global img    # 設定 img 為全域變數
-    font = ImageFont.truetype(fontpath, 50)  # 設定字型與文字大小
-    imgPil = Image.fromarray(img)            # 將 img 轉換成 PIL 影像
-    draw = ImageDraw.Draw(imgPil)            # 準備開始畫畫
-    draw.text((0, 0), text, fill=(255, 255, 255), font=font)  # 寫入文字
-    img = np.array(imgPil)                   # 將 PIL 影像轉換成 numpy 陣列
-
-cap = cv2.VideoCapture(0)
-if not cap.isOpened():
-    print("Cannot open camera")
-    exit()
-while True:
-    ret, frame = cap.read()
-    if not ret:
-        print("Cannot receive frame")
-        break
-    img = cv2.resize(frame , (398, 224))
-    img = img[0:224, 80:304]
-    image_array = np.asarray(img)
-    normalized_image_array = (image_array.astype(np.float32) / 127.0) - 1
-    data[0] = normalized_image_array
-    prediction = model.predict(data)
-    a,b,c,bg= prediction[0]
-    if a>0.9:
-        text('剪刀')  # 使用 text() 函式，顯示文字
-    if b>0.9:
-        text('石頭')
-    if c>0.9:
-        text('布')
-
-    cv2.imshow('ImageShow', img)
-    k = cv2.waitKey(1) # 等待按鍵輸入
-    if k == ESC:
-        break
-
-cap.release()
-cv2.destroyAllWindows()
-"""
-print("------------------------------------------------------------")  # 60個
-
-""" 缺檔案
-import tensorflow as tf
-
-model = tf.keras.models.load_model('keras_model.h5', compile=False)  # 載入模型
-data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)          # 設定資料陣列
-
-def text(text):      # 建立顯示文字的函式
-    global img       # 設定 img 為全域變數
-    org = (0,50)     # 文字位置
-    fontFace = cv2.FONT_HERSHEY_SIMPLEX  # 文字字型
-    fontScale = 1                        # 文字尺寸
-    color = (255,255,255)                # 顏色
-    thickness = 2                        # 文字外框線條粗細
-    lineType = cv2.LINE_AA               # 外框線條樣式
-    cv2.putText(img, text, org, fontFace, fontScale, color, thickness, lineType) # 放入文字
-
-cap = cv2.VideoCapture(0)
-if not cap.isOpened():
-    print("Cannot open camera")
-    exit()
-while True:
-    ret, frame = cap.read()
-    if not ret:
-        print("Cannot receive frame")
-        break
-    img = cv2.resize(frame , (398, 224))
-    img = img[0:224, 80:304]
-    image_array = np.asarray(img)
-    normalized_image_array = (image_array.astype(np.float32) / 127.0) - 1
-    data[0] = normalized_image_array
-    prediction = model.predict(data)
-    a,b,bg= prediction[0]    # 印出每個項目的數值資訊
-    print(a,b,bg)
-    if a>0.999:              # 判斷有戴口罩
-        text('ok~')
-    if b>0.001:              # 判斷沒戴口罩
-        text('no mask!!')
-
-    cv2.imshow('ImageShow', img)
-    k = cv2.waitKey(1) # 等待按鍵輸入
-    if k == ESC:
-        break
-
-cap.release()
-cv2.destroyAllWindows()
-"""
-
-print("------------------------------------------------------------")  # 60個
-
-""" 缺檔案
-import tensorflow as tf
-
-from PIL import ImageFont, ImageDraw, Image  # 載入 PIL 相關函式庫
-
-fontpath = 'NotoSansTC-Regular.otf'          # 設定字型路徑
-
-model = tf.keras.models.load_model('keras_model_3.h5', compile=False)  # 載入模型
-data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)          # 設定資料陣列
-
-def text(text):   # 建立顯示文字的函式
-    global img    # 設定 img 為全域變數
-    font = ImageFont.truetype(fontpath, 30)  # 設定字型與文字大小
-    imgPil = Image.fromarray(img)            # 將 img 轉換成 PIL 影像
-    draw = ImageDraw.Draw(imgPil)            # 準備開始畫畫
-    draw.text((0, 0), text, fill=(255, 255, 255), font=font)  # 寫入文字
-    img = np.array(imgPil)                   # 將 PIL 影像轉換成 numpy 陣列
-
-cap = cv2.VideoCapture(0)
-if not cap.isOpened():
-    print("Cannot open camera")
-    exit()
-while True:
-    ret, frame = cap.read()
-    if not ret:
-        print("Cannot receive frame")
-        break
-    img = cv2.resize(frame , (398, 224))
-    img = img[0:224, 80:304]
-    image_array = np.asarray(img)
-    normalized_image_array = (image_array.astype(np.float32) / 127.0) - 1
-    data[0] = normalized_image_array
-    prediction = model.predict(data)
-    a,b,bg= prediction[0]
-    print(a,b,bg)
-    if a>0.999:
-        text('很乖')
-    if b>0.001:
-        text('沒戴口罩!!')
-
-    cv2.imshow('ImageShow', img)
-    k = cv2.waitKey(1) # 等待按鍵輸入
-    if k == ESC:
-        break
-
-cap.release()
-cv2.destroyAllWindows()
-"""
-print("------------------------------------------------------------")  # 60個
-
-from keras.datasets import mnist
-from keras import utils
-
-(x_train, y_train), (x_test, y_test) = mnist.load_data()  # 載入訓練集
-
-# 訓練集資料
-x_train = x_train.reshape(x_train.shape[0], -1)  # 轉換資料形狀
-x_train = x_train.astype("float32") / 255  # 轉換資料型別
-y_train = y_train.astype(np.float32)
-
-# 測試集資料
-x_test = x_test.reshape(x_test.shape[0], -1)  # 轉換資料形狀
-x_test = x_test.astype("float32") / 255  # 轉換資料型別
-y_test = y_test.astype(np.float32)
-
-knn = cv2.ml.KNearest_create()  # 建立 KNN 訓練方法
-knn.setDefaultK(5)  # 參數設定
-knn.setIsClassifier(True)
-
-print("training...")
-knn.train(x_train, cv2.ml.ROW_SAMPLE, y_train)  # 開始訓練
-knn.save("mnist_knn.xml")  # 儲存訓練模型
-print("ok")
-
-print("testing...")
-test_pre = knn.predict(x_test)  # 讀取測試集並進行辨識
-test_ret = test_pre[1]
-test_ret = test_ret.reshape(
-    -1,
-)
-test_sum = test_ret == y_test
-acc = test_sum.mean()  # 得到準確率
-print(acc)
-
-print("------------------------------------------------------------")  # 60個
-
-cap = cv2.VideoCapture(0)  # 啟用攝影鏡頭
-print("loading...")
-knn = cv2.ml.KNearest_load("mnist_knn.xml")  # 載入模型
-print("start...")
-if not cap.isOpened():
-    print("Cannot open camera")
-    exit()
-while True:
-    ret, img = cap.read()
-    if not ret:
-        print("Cannot receive frame")
-        break
-    img = cv2.resize(img, (540, 300))  # 改變影像尺寸，加快處理效率
-    x, y, w, h = 400, 200, 60, 60  # 定義擷取數字的區域位置和大小
-    img_num = img.copy()  # 複製一個影像作為辨識使用
-    img_num = img_num[y : y + h, x : x + w]  # 擷取辨識的區域
-
-    img_num = cv2.cvtColor(img_num, cv2.COLOR_BGR2GRAY)  # 顏色轉成灰階
-    # 針對白色文字，做二值化黑白轉換，轉成黑底白字
-    ret, img_num = cv2.threshold(img_num, 127, 255, cv2.THRESH_BINARY_INV)
-    output = cv2.cvtColor(img_num, cv2.COLOR_GRAY2BGR)  # 顏色轉成彩色
-    img[0:60, 480:540] = output  # 將轉換後的影像顯示在畫面右上角
-
-    img_num = cv2.resize(img_num, (28, 28))  # 縮小成 28x28，和訓練模型對照
-    img_num = img_num.astype(np.float32)  # 轉換格式
-    img_num = img_num.reshape(
-        -1,
-    )  # 打散成一維陣列資料，轉換成辨識使用的格式
-    img_num = img_num.reshape(1, -1)
-    img_num = img_num / 255
-    img_pre = knn.predict(img_num)  # 進行辨識
-    num = str(int(img_pre[1][0][0]))  # 取得辨識結果
-
-    text = num  # 印出的文字內容
-    org = (x, y - 20)  # 印出的文字位置
-    fontFace = cv2.FONT_HERSHEY_SIMPLEX  # 印出的文字字體
-    fontScale = 2  # 印出的文字大小
-    color = (0, 0, 255)  # 印出的文字顏色
-    thickness = 2  # 印出的文字邊框粗細
-    lineType = cv2.LINE_AA  # 印出的文字邊框樣式
-    cv2.putText(img, text, org, fontFace, fontScale, color, thickness, lineType)  # 印出文字
-
-    cv2.rectangle(img, (x, y), (x + w, y + h), (0, 0, 255), 3)  # 標記辨識的區域
-
-    cv2.imshow("ImageShow", img)
-    k = cv2.waitKey(1)  # 等待按鍵輸入
-    if k == ESC:
-        break
-
-cap.release()
-cv2.destroyAllWindows()
-
-
-print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("作業完成")
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
