@@ -33,9 +33,6 @@ scale1.set(60)  # 預設值
 scale2 = tk.Scale(window, label="scale2", orient=tk.HORIZONTAL, from_=0, to=100, length=150, resolution=0.1, command=scale_event)
 scale2.pack()
 
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
-    fill=tk.X, padx=5, pady=5
-)  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
 scale3 = tk.Scale(
@@ -52,10 +49,6 @@ scale3 = tk.Scale(
 )
 scale3.pack()
 
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
-    fill=tk.X, padx=5, pady=5
-)  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
 scale4 = tk.Scale(
@@ -72,15 +65,9 @@ scale4 = tk.Scale(
 )
 scale4.pack()  # 顯示名字,條方向;長度（像素），是否直接顯示值，標簽的單位長度，保留精度，定義功能
 
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
-    fill=tk.X, padx=5, pady=5
-)  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
-
-
-button1 = tk.Button(window, text="取值", width=10, height=3, command=get_slider_data)
+button1 = tk.Button(window, text="取值", width=8, height=2, command=get_slider_data)
 button1.pack(pady=20)
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(

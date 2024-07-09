@@ -6,38 +6,16 @@ print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
 window.geometry("600x800")
-window.title("Label 1")
+window.title("Label 1 標籤基本使用")
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
     fill=tk.X, padx=5, pady=5
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
-print("Label的文字使用字型")
-font1 = ("Courier", 36, "bold")
-label1 = tk.Label(window, text="label之字型", font=font1)
-label1.pack()
-
-label2a = tk.Label(window, text="不使用label1之字型")
-label2a.pack()
-
-label2b = tk.Label(window, text="使用label1之字型")
-label2b.pack()
-
-font2 = label1["font"]  # 將label1的字型讀出來
-# label2a.config(font = font2)  #label2a 不使用
-label2b.config(font=font2)  # label2b 使用
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
-    fill=tk.X, padx=5, pady=5
-)  # 分隔線
-print("------------------------------------------------------------")  # 60個
-
-print("Label測試")
-tk.Label(text="有背景色的Label測試", font="Raleway").pack()
-tk.Label(text="有背景色的Label測試").pack()
-tk.Label(window, text="有背景色的Label 紅", bg="red", width=20, height=2).pack()
-tk.Label(text="有背景色的Label 綠", bg="green", width=30, height=2).pack()
+tk.Label(window, text="無背景色無大小的Label").pack()
+tk.Label(window, text="有背景色無大小的Label 紅", bg="red").pack()
+tk.Label(window, text="有背景色的Label 綠", bg="green", width=30, height=3).pack()
 tk.Label(window, text="有背景色的Label 藍", bg="blue", width=20, height=2).pack()
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
@@ -46,32 +24,27 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
 print("------------------------------------------------------------")  # 60個
 
 # 前後移動控件
-label1 = tk.Label(window, text="Label 1", background="red")
-label2 = tk.Label(window, text="Label 2", background="green")
-label3 = tk.Label(window, text="Label 3", background="blue")
+label1 = tk.Label(window, text="紅色", background="red")
+label2 = tk.Label(window, text="綠色", background="green")
+label3 = tk.Label(window, text="藍色", background="blue")
 
 # 有寬高的Label
 x_st = 30
-y_st = 300
+y_st = 100
 dd = 20
 label1.place(x=x_st + dd * 0, y=y_st + dd * 0, width=100, height=100)
 label2.place(x=x_st + dd * 1, y=y_st + dd * 1, width=100, height=100)
 label3.place(x=x_st + dd * 2, y=y_st + dd * 2, width=100, height=100)
 
 button1 = tk.Button(
-    window, text="Label 1 (R) 向上移動", command=lambda: label1.lift(aboveThis=label2)
+    window, text="紅色上移一層?", command=lambda: label1.lift(aboveThis=label2)
 )
-button2 = tk.Button(window, text="Label 2 (G) 向上移動", command=lambda: label2.tkraise())
-button3 = tk.Button(window, text="Label 1 (B) 向上移動", command=lambda: label3.tkraise())
+button2 = tk.Button(window, text="綠色移至最上", command=lambda: label2.tkraise())
+button3 = tk.Button(window, text="藍色移至最上", command=lambda: label3.tkraise())
 
 # label1.lift()
 # label2.lower()
 
-"""
-button1.place(rely = 1, relx = 0.8, anchor = 'se')
-button2.place(rely = 1, relx = 1, anchor = 'se')
-button3.place(rely = 1, relx = 0.6, anchor = 'se')
-"""
 button1.pack()
 button2.pack()
 button3.pack()
@@ -81,72 +54,14 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
-tk.Label(window, text="Red", bg="red").pack()
-# tk.Label(window, text = "Green", bg = "green").pack(fill = tk.BOTH, expand = 1)
-tk.Label(window, text="Green", bg="green").pack(fill=tk.BOTH)
-tk.Label(window, text="Blue", bg="blue").pack(fill=tk.BOTH)
+print('凸起的Label')
+tk.Label(window, text="凸起的Label, 歡迎來到美國", relief="raised").pack()
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
     fill=tk.X, padx=5, pady=5
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
-tk.Label(window, text="Red", bg="red").pack(side=tk.LEFT)
-# tk.Label(window, text = "Green", bg = "green").pack(side = tk.LEFT, fill = tk.BOTH, expand = 1)
-tk.Label(window, text="Green", bg="green").pack(side=tk.LEFT, fill=tk.BOTH)
-tk.Label(window, text="Blue", bg="blue").pack(side=tk.LEFT, fill=tk.BOTH)
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
-    fill=tk.X, padx=5, pady=5
-)  # 分隔線
-print("------------------------------------------------------------")  # 60個
-
-# label的寫法
-label3 = tk.Label(text="Created by David Wang", font=("Times", 22), fg="brown")
-label3.pack()
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
-    fill=tk.X, padx=5, pady=5
-)  # 分隔線
-print("------------------------------------------------------------")  # 60個
-
-tk.Label(window, text="紅", bg="red", width=20).pack()
-tk.Label(window, text="綠", bg="green", width=20).pack()
-tk.Label(window, text="藍", bg="blue", width=20).pack()
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
-    fill=tk.X, padx=5, pady=5
-)  # 分隔線
-print("------------------------------------------------------------")  # 60個
-
-print("Label元件的參數設定")
-
-label = tk.Label(
-    window,
-    bg="#ff00ff",
-    fg="#ffff00",
-    font=("標楷體", 14, "bold", "italic"),
-    padx=5,
-    pady=30,
-    text="生日快樂",
-)
-label.pack()
-
-label = tk.Label(
-    window,
-    bg="#ff00ff",
-    fg="#ffff00",
-    font="新細明體 14 bold italic",
-    padx=20,
-    pady=5,
-    text="生日快樂",
-)
-label.pack()
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
-    fill=tk.X, padx=5, pady=5
-)  # 分隔線
-print("------------------------------------------------------------")  # 60個
 
 window.mainloop()
 
@@ -154,150 +69,7 @@ print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
 window.geometry("600x800")
-window.title("Label 2")
-
-font_size = 18
-w = 18
-h = 16
-x_st = 50
-y_st = 20
-dx = 100
-dy = 80
-
-
-"""
-width = 200
-height = 100
-frame = tk.Frame(window, bg = 'pink', width = width, height = height)
-"""
-frame = ttk.Frame(window)
-
-x_st = 200
-y_st = 20
-
-# 設定 Label
-label1b = tk.Label(
-    window,
-    text="這是標籤元件 b",
-    fg="red",
-    bg="yellow",
-    font=("標楷體", font_size),
-    padx=w,
-    pady=h,
-)
-label1b.place(x=x_st + dx * 0, y=y_st + dy * 0)
-
-cnt = 1
-
-
-def changeLabelText1b():
-    global cnt
-    cnt += 1
-    label1b.config(text="這是標籤元件 " + str(cnt))
-
-
-button1b = tk.Button(
-    window,
-    text="修改標籤之Text b",
-    foreground="blue",
-    font=("標楷體", font_size),
-    padx=w / 3,
-    pady=h / 3,
-    command=changeLabelText1b,
-)
-button1b.place(x=x_st + dx * 0, y=y_st + dy * 1)
-
-
-def changeLabelText2b():
-    global cnt
-    cnt += 1
-    labelb_text.set("這是標籤元件 " + str(cnt))
-    print()
-
-
-def toggleLabelVisible_b():
-    print("你按了Button Toggle b")
-    global labelb_visible, x_st, y_st, dx, dy
-
-    if labelb_visible:
-        labelb_visible = False
-        label1b.place_forget()
-        label2b.place_forget()
-    else:
-        labelb_visible = True
-        label1b.place(x=x_st + dx * 0, y=y_st + dy * 0)
-        label2b.place(x=x_st + dx * 0, y=y_st + dy * 2)
-
-
-labelb_visible = True
-
-labelb_text = tk.StringVar()
-labelb_text.set("這是標籤元件")
-# 設定 Label
-
-label2b = tk.Label(
-    window,
-    textvariable=labelb_text,
-    fg="red",
-    bg="yellow",
-    font=("標楷體", font_size),
-    padx=w,
-    pady=h,
-)
-label2b.place(x=x_st + dx * 0, y=y_st + dy * 2)
-
-button2b = tk.Button(
-    window,
-    text="修改標籤之Text b",
-    foreground="blue",
-    font=("標楷體", font_size),
-    padx=w / 3,
-    pady=h / 3,
-    command=changeLabelText2b,
-)
-button2b.place(x=x_st + dx * 0, y=y_st + dy * 3)
-
-button3b = tk.Button(
-    window,
-    text="切換標籤顯示與隱藏 b",
-    foreground="blue",
-    font=("標楷體", font_size),
-    padx=w / 3,
-    pady=h / 3,
-    command=toggleLabelVisible_b,
-)
-button3b.place(x=x_st + dx * 0, y=y_st + dy * 4)
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-window.geometry("600x800")
-window.title("Label 3")
-
-label1 = tk.Label(window, text="Hello World!")
-label1.pack()
-label2 = tk.Label(window, bg="yellow", text="Hello No2!", fg="red")
-label2.pack()
-label3 = tk.Label(window, text="Hello No3!")
-label3.pack(side="top", anchor="w")
-label4 = tk.Label(window, text="Hello No4!")
-label4.place(x=120, y=160)
-label5 = tk.Label(window, text="Powen Ko", bg="#ff0000")
-label5.place(x=120, y=140)
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-window.geometry("600x800")
-window.title("Label 6")
-
-print("Label設定")
+window.title("Label 2 字型設定")
 
 label1 = tk.Label(window, text="BMI 計算", font=("微軟正黑體", 16), fg="white", bg="blue")
 label1.pack(pady=10, fill="x")  # 整個橫條填滿
@@ -362,15 +134,6 @@ print("------------------------------------------------------------")  # 60個
 lab = tk.Label(window, bg="yellow", fg="blue", height=2, width=12, font="Times 16 bold")
 lab.pack()
 
-label = tk.Label(
-    window,
-    text="歡迎來到美國2",
-    bg="lightyellow",  # 標籤背景是淺黃色
-    width=15,  # 標籤寬度是15
-    font="Helvetica 16 bold italic",
-)
-label.pack()
-
 label1_data = tk.StringVar()
 label1 = tk.Label(
     window,
@@ -389,34 +152,8 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
-tk.Label(window, text="Blue", bg="blue").pack()
-tk.Label(window, text="Red", bg="red").pack()
-tk.Label(window, text="Green", bg="green").pack()
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
-    fill=tk.X, padx=5, pady=5
-)  # 分隔線
-print("------------------------------------------------------------")  # 60個
-
-w, h = 20, 3
-
-label = tk.Label(
-    window,
-    text="Label做成方形\n改變鼠標外形",
-    relief="raised",
-    width=w,
-    height=h,
-    bg="lightyellow",
-    padx=5,
-    pady=10,
-    cursor="heart",
-)  # 滑鼠外形
-label.pack()
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
-    fill=tk.X, padx=5, pady=5
-)  # 分隔線
-print("------------------------------------------------------------")  # 60個
+w = 18
+h = 16
 
 font_size = 20
 label1a = tk.Label(
@@ -451,6 +188,32 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
+label = tk.Label(window,text="歡迎來到美國",
+              bg="lightyellow",     # 標籤背景是淺黃色
+              width=15,             # 標籤寬度是15
+              font="Helvetica 16 bold italic")
+label.pack()
+
+
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+
+window = tk.Tk()
+window.geometry("600x800")
+window.title("Label 3")
+
+label1 = tk.Label(window, text="Hello World!")
+label1.pack()
+label2 = tk.Label(window, bg="yellow", text="Hello No2!", fg="red")
+label2.pack()
+label3 = tk.Label(window, text="Hello No3!")
+label3.pack(side="top", anchor="w")
+label4 = tk.Label(window, text="Hello No4!")
+label4.place(x=120, y=160)
+label5 = tk.Label(window, text="Powen Ko", bg="#ff0000")
+label5.place(x=120, y=140)
 
 window.mainloop()
 
@@ -524,17 +287,6 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-window = tk.Tk()
-window.geometry("600x800")
-window.title("Label 1")
-
-message = tk.StringVar()
-message.set("播放歌曲：")
-
-label1 = tk.Label(window, textvariable=message,fg="blue",font=("標楷體",10))
-label1.pack()
-
-window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -563,20 +315,6 @@ label.grid(column = 1, row = 0)
 
 
 """
-
-Label 參數
-label = tk.Label(window,text="歡迎來到美國",
-              bg="lightyellow",     # 標籤背景是淺黃色
-              width=15,             # 標籤寬度是15
-              font="Helvetica 16 bold italic")
-label.pack()
-
-
-label = tk.Label(window,text="歡迎來到美國",
-              bg="lightyellow",     # 標籤背景是淺黃色
-              width=15,             # 標籤寬度是15
-              font="Helvetica 16 bold italic")
-
 
 
 
@@ -662,25 +400,11 @@ button2a.pack()
 button2a.place(x = x_st + dx * 0, y = y_st + dy * 3)
 
 
-
-"""
-
-
 label = tk.Label(
     window, text="美國SE", fg="blue", bg="yellow", height=3, width=15, anchor="se"
 )
 label.pack()
 
-
-
-
-
-"""
-
-
-print('凸起的Label')
-label1 = tk.Label(window, text="歡迎來到美國", relief="raised")
-label3 = tk.Label(window, text="歡迎來到美國", relief="raised")
 
 
 """
@@ -718,14 +442,265 @@ cal = tk.Label(window, text="Calender",bg='grey',font=("times", 28, "bold"))
 
 
 
-"""
-
-
-
-
-
 label2 = tk.Label(window, text="\nMP3播放程式", fg="blue",font=("標楷體",12))
 label2.pack()
 
 
+
+window = tk.Tk()
+window.geometry("600x800")
+window.title("Label fill test")
+
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
+print("------------------------------------------------------------")  # 60個
+
+tk.Label(window, text="Red", bg="red").pack()
+# tk.Label(window, text = "Green", bg = "green").pack(fill = tk.BOTH, expand = 1)
+tk.Label(window, text="Green", bg="green").pack(fill=tk.BOTH)
+tk.Label(window, text="Blue", bg="blue").pack(fill=tk.BOTH)
+
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
+print("------------------------------------------------------------")  # 60個
+
+tk.Label(window, text="Red", bg="red").pack(side=tk.LEFT)
+# tk.Label(window, text = "Green", bg = "green").pack(side = tk.LEFT, fill = tk.BOTH, expand = 1)
+tk.Label(window, text="Green", bg="green").pack(side=tk.LEFT, fill=tk.BOTH)
+tk.Label(window, text="Blue", bg="blue").pack(side=tk.LEFT, fill=tk.BOTH)
+
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+
+
+#字型的寫法
+# label的寫法
+label3 = tk.Label(text="Created by David Wang", font=("Times", 22), fg="brown")
+label3.pack()
+
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+
+def toggleLabelVisible_b():
+    print("你按了Button Toggle b")
+    global labelb_visible, x_st, y_st, dx, dy
+
+    if labelb_visible:
+        labelb_visible = False
+        label1b.place_forget()
+        label2b.place_forget()
+    else:
+        labelb_visible = True
+        label1b.place(x=x_st + dx * 0, y=y_st + dy * 0)
+        label2b.place(x=x_st + dx * 0, y=y_st + dy * 2)
+
+
+labelb_visible = True
+
+
+
+button3b = tk.Button(
+    window,
+    text="切換標籤顯示與隱藏 b",
+    foreground="blue",
+    font=("標楷體", font_size),
+    padx=w / 3,
+    pady=h / 3,
+    command=toggleLabelVisible_b,
+)
+button3b.pack()
+
+
+
+
+
+
+
+window = tk.Tk()
+window.geometry("600x800")
+window.title("Label 字型設定")
+
+print("Label 字型設定")
+
+print("Label的文字使用字型")
+font1 = ("Courier", 36, "bold")
+label1 = tk.Label(window, text="label之字型", font=font1)
+label1.pack()
+
+label2a = tk.Label(window, text="不使用label1之字型")
+label2a.pack()
+
+label2b = tk.Label(window, text="使用label1之字型")
+label2b.pack()
+
+font2 = label1["font"]  # 將label1的字型讀出來
+# label2a.config(font = font2)  #label2a 不使用
+label2b.config(font=font2)  # label2b 使用
+
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+tk.Label(text="有背景色的Label測試", font="Raleway").pack()
+
+
+
+
+
+
+print("Label元件的參數設定")
+
+label = tk.Label(
+    window,
+    bg="#ff00ff",
+    fg="#ffff00",
+    font=("標楷體", 14, "bold", "italic"),
+    padx=5,
+    pady=30,
+    text="生日快樂",
+)
+label.pack()
+
+label = tk.Label(
+    window,
+    bg="#ff00ff",
+    fg="#ffff00",
+    font="新細明體 14 bold italic",
+    padx=20,
+    pady=5,
+    text="生日快樂",
+)
+label.pack()
+
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+
+
+
+font_size = 18
+w = 18
+h = 16
+
+width = 200
+height = 100
+frame = tk.Frame(window, bg = 'pink', width = width, height = height)
+
+# 設定 Label
+label1b = tk.Label(
+    window,
+    text="這是標籤元件 b",
+    fg="red",
+    bg="yellow",
+    font=("標楷體", font_size),
+    padx=w,
+    pady=h,
+)
+label1b.pack()
+
+cnt = 1
+
+
+def changeLabelText1b():
+    global cnt
+    cnt += 1
+    label1b.config(text="這是標籤元件 " + str(cnt))
+    #labelb_text.set("這是標籤元件 " + str(cnt))
+
+
+button1b = tk.Button(
+    window,
+    text="修改標籤之Text b",
+    foreground="blue",
+    font=("標楷體", font_size),
+    padx=w / 3,
+    pady=h / 3,
+    command=changeLabelText1b,
+)
+button1b.pack()
+
+labelb_text = tk.StringVar()
+labelb_text.set("這是標籤元件")
+
+label2b = tk.Label(
+    window,
+    textvariable=labelb_text,
+    fg="red",
+    bg="yellow",
+    font=("標楷體", font_size),
+    padx=w,
+    pady=h,
+)
+label2b.pack()
+
+
+
+
+
+window = tk.Tk()
+window.geometry("600x800")
+window.title("Label 1")
+
+message = tk.StringVar()
+message.set("播放歌曲：")
+
+label1 = tk.Label(window, textvariable=message,fg="blue",font=("標楷體",10))
+label1.pack()
+
+window.mainloop()
+
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+
+w, h = 20, 3
+
+label = tk.Label(
+    window,
+    text="Label做成方形\n改變鼠標外形",
+    relief="raised",
+    width=w,
+    height=h,
+    bg="lightyellow",
+    padx=5,
+    pady=10,
+    cursor="heart",
+)  # 滑鼠外形
+label.pack()
+
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
+print("------------------------------------------------------------")  # 60個
+
+
+
+"""
 
