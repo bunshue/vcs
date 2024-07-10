@@ -69,21 +69,22 @@ def Match(img, temp):
     print ("val: %f"%val)
     return (x, y)
 
-def main():
-    img = cv2.imread('jianzhu.png', cv2.IMREAD_GRAYSCALE)
-    temp = cv2.imread('building.png', cv2.IMREAD_GRAYSCALE)
 
-    tempHt, tempWd = temp.shape
-    (x, y) = Match(img, temp)
-    cv2.rectangle(img, (x, y), (x+tempWd, y+tempHt), (0,0,0), 2)
-    cv2.imshow("temp", temp)
-    cv2.imshow("result", img)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
+start = time.time()
 
-if __name__ == '__main__':
-    start = time.time()
-    main()
-    end = time.time()
-    print("总花费时间为：", str((end - start) / 60)[0:6] + "分钟")
+img = cv2.imread('jianzhu.png', cv2.IMREAD_GRAYSCALE)
+temp = cv2.imread('building.png', cv2.IMREAD_GRAYSCALE)
+
+tempHt, tempWd = temp.shape
+(x, y) = Match(img, temp)
+cv2.rectangle(img, (x, y), (x+tempWd, y+tempHt), (0,0,0), 2)
+cv2.imshow("temp", temp)
+cv2.imshow("result", img)
+
+end = time.time()
+print("总花费时间为：", str((end - start) / 60)[0:6] + "分钟")
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
 

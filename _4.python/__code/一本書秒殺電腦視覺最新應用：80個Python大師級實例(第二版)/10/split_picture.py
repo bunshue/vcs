@@ -1,8 +1,8 @@
 import cv2
 
-def split_picture(imagepath):
+def split_picture(filename):
     # 以灰度模式读取图片
-    gray = cv2.imread(imagepath, 0)
+    gray = cv2.imread(filename, 0)
     # 将图片的边缘变为白色
     height, width = gray.shape
     for i in range(width):
@@ -15,7 +15,7 @@ def split_picture(imagepath):
     blur = cv2.medianBlur(gray, 3) #模板大小3*3   
     # 二值化
     ret,thresh1 = cv2.threshold(blur, 200, 255, cv2.THRESH_BINARY)  
-    image, contours, hierarchy = cv2.findContours(thresh1, 2, 2)
+    contours, hierarchy = cv2.findContours(thresh1, 2, 2)
     flag = 1
     for cnt in contours:
         # 最小的外接矩形
@@ -25,8 +25,6 @@ def split_picture(imagepath):
             # 显示图片
             cv2.imwrite('tmp_char%s.jpg'%flag, thresh1[y:y+h, x:x+w])
             flag += 1
-def main():
-    imagepath = '8a.jpg'
-    split_picture(imagepath)
 
-main()
+filename = '8a.jpg'
+split_picture(filename)

@@ -15,14 +15,19 @@ print("------------------------------------------------------------")  # 60個
 
 ESC = 27
 
+red = (0, 0, 255)
+green = (0, 255, 0)
+blue = (255, 0, 0)
+linewidth = 5
+
 import cv2
 import numpy as np
-
-print("------------------------------------------------------------")  # 60個
-print("OpenCV_ai_83")
-
 import mediapipe as mp
 
+print("------------------------------------------------------------")  # 60個
+print("OpenCV_ai_83 人臉偵測")
+
+'''
 cap = cv2.VideoCapture(0)
 if not cap.isOpened():
     print("開啟攝影機失敗")
@@ -30,25 +35,25 @@ if not cap.isOpened():
 else:
     print("Video device opened")
 
-mp_face_detection = mp.solutions.face_detection
-mp_drawing = mp.solutions.drawing_utils
+mp_face_detection = mp.solutions.face_detection  # 建立偵測方法
+mp_drawing = mp.solutions.drawing_utils  # 建立繪圖方法
 
-with mp_face_detection.FaceDetection(
+with mp_face_detection.FaceDetection(  # 開始偵測人臉
     model_selection=0, min_detection_confidence=0.5
 ) as face_detection:
     while True:
         ret, img = cap.read()
 
         img.flags.writeable = False
-        img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-        results = face_detection.process(img)
+        img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)  # BGR 轉 RGB
+        results = face_detection.process(img)  # 偵測人臉
 
         img.flags.writeable = True
         img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
         if results.detections:
-            print(len(results.detections))
+            #print(len(results.detections))
             for detection in results.detections:
-                mp_drawing.draw_detection(img, detection)
+                mp_drawing.draw_detection(img, detection)  # 標記人臉
 
         cv2.imshow("WebCam", img)
         k = cv2.waitKey(1)
@@ -59,9 +64,7 @@ cap.release()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
-print("OpenCV_ai_84")
-
-import mediapipe as mp
+print("OpenCV_ai_84 人臉偵測")
 
 cap = cv2.VideoCapture(0)
 if not cap.isOpened():
@@ -78,7 +81,7 @@ with mp_face_detection.FaceDetection(  # 開始偵測人臉
 ) as face_detection:
     while True:
         ret, img = cap.read()
-        img2 = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)  # 將 BGR 顏色轉換成 RGB
+        img2 = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)  # BGR 轉 RGB
         results = face_detection.process(img2)  # 偵測人臉
 
         if results.detections:
@@ -94,9 +97,7 @@ cap.release()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
-print("OpenCV_ai_85")
-
-import mediapipe as mp
+print("OpenCV_ai_85 人臉偵測")
 
 cap = cv2.VideoCapture(0)
 if not cap.isOpened():
@@ -105,10 +106,10 @@ if not cap.isOpened():
 else:
     print("Video device opened")
 
-mp_face_detection = mp.solutions.face_detection
-mp_drawing = mp.solutions.drawing_utils
+mp_face_detection = mp.solutions.face_detection  # 建立偵測方法
+mp_drawing = mp.solutions.drawing_utils  # 建立繪圖方法
 
-with mp_face_detection.FaceDetection(
+with mp_face_detection.FaceDetection(  # 開始偵測人臉
     model_selection=0, min_detection_confidence=0.5
 ) as face_detection:
     while True:
@@ -116,12 +117,12 @@ with mp_face_detection.FaceDetection(
         size = img.shape  # 取得攝影機影像尺寸
         w = size[1]  # 取得畫面寬度
         h = size[0]  # 取得畫面高度
-        img2 = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-        results = face_detection.process(img2)
+        img2 = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)  # BGR 轉 RGB
+        results = face_detection.process(img2)  # 偵測人臉
 
         if results.detections:
             for detection in results.detections:
-                mp_drawing.draw_detection(img, detection)
+                mp_drawing.draw_detection(img, detection)  # 標記人臉
                 s = detection.location_data.relative_bounding_box  # 取得人臉尺寸
                 eye = int(s.width * w * 0.1)  # 計算眼睛大小 ( 人臉尺寸*0.1 )
                 a = detection.location_data.relative_keypoints[0]  # 取得左眼座標
@@ -152,15 +153,14 @@ with mp_face_detection.FaceDetection(
 
 cap.release()
 cv2.destroyAllWindows()
-
+'''
 print("------------------------------------------------------------")  # 60個
-print("OpenCV_ai_86")
+print("OpenCV_ai_87 人臉網格")
 
-import mediapipe as mp
-
-mp_drawing = mp.solutions.drawing_utils  # mediapipe 繪圖方法
+mp_drawing = mp.solutions.drawing_utils  # 建立繪圖方法
 mp_drawing_styles = mp.solutions.drawing_styles  # mediapipe 繪圖樣式
 mp_face_mesh = mp.solutions.face_mesh  # mediapipe 人臉網格方法
+
 drawing_spec = mp_drawing.DrawingSpec(thickness=1, circle_radius=1)  # 繪圖參數設定
 
 cap = cv2.VideoCapture(0)
@@ -179,10 +179,14 @@ with mp_face_mesh.FaceMesh(
 ) as face_mesh:
     while True:
         ret, img = cap.read()
-        img2 = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)  # 顏色 BGR 轉換為 RGB
+        only_face_canvas = np.zeros((480, 640, 3), dtype="uint8")  # 繪製 640x480 的黑色畫布
+        img2 = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)  # BGR 轉 RGB
         results = face_mesh.process(img2)  # 取得人臉網格資訊
         if results.multi_face_landmarks:
             for face_landmarks in results.multi_face_landmarks:
+
+                # 將人臉網格化
+
                 # 繪製網格
                 mp_drawing.draw_landmarks(
                     image=img,
@@ -208,48 +212,11 @@ with mp_face_mesh.FaceMesh(
                     connection_drawing_spec=mp_drawing_styles.get_default_face_mesh_iris_connections_style(),
                 )
 
-        cv2.imshow("WebCam", img)
-        k = cv2.waitKey(1)
-        if k == ESC:
-            break
+                #僅顯示人臉網格
 
-cap.release()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-print("OpenCV_ai_87")
-
-import mediapipe as mp
-
-mp_drawing = mp.solutions.drawing_utils
-mp_drawing_styles = mp.solutions.drawing_styles
-mp_face_mesh = mp.solutions.face_mesh
-drawing_spec = mp_drawing.DrawingSpec(thickness=1, circle_radius=1)
-
-cap = cv2.VideoCapture(0)
-if not cap.isOpened():
-    print("開啟攝影機失敗")
-    sys.exit()
-else:
-    print("Video device opened")
-
-with mp_face_mesh.FaceMesh(
-    max_num_faces=1,
-    refine_landmarks=True,
-    min_detection_confidence=0.5,
-    min_tracking_confidence=0.5,
-) as face_mesh:
-    while True:
-        ret, img = cap.read()
-        #img = cv2.resize(img, (640//2, 480//2))  # 調整影像尺寸
-        output = np.zeros((320, 480, 3), dtype="uint8")  # 繪製 480x320 的黑色畫布
-        img2 = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-        results = face_mesh.process(img2)
-        if results.multi_face_landmarks:
-            for face_landmarks in results.multi_face_landmarks:
                 # 繪製網格
                 mp_drawing.draw_landmarks(
-                    image=output,  # 繪製到 output
+                    image=only_face_canvas,  # 繪製到 only_face_canvas
                     landmark_list=face_landmarks,
                     connections=mp_face_mesh.FACEMESH_TESSELATION,
                     landmark_drawing_spec=None,
@@ -257,7 +224,7 @@ with mp_face_mesh.FaceMesh(
                 )
                 # 繪製輪廓
                 mp_drawing.draw_landmarks(
-                    image=output,  # 繪製到 output
+                    image=only_face_canvas,  # 繪製到 only_face_canvas
                     landmark_list=face_landmarks,
                     connections=mp_face_mesh.FACEMESH_CONTOURS,
                     landmark_drawing_spec=None,
@@ -265,14 +232,14 @@ with mp_face_mesh.FaceMesh(
                 )
                 # 繪製眼睛
                 mp_drawing.draw_landmarks(
-                    image=output,  # 繪製到 output
+                    image=only_face_canvas,  # 繪製到 only_face_canvas
                     landmark_list=face_landmarks,
                     connections=mp_face_mesh.FACEMESH_IRISES,
                     landmark_drawing_spec=None,
                     connection_drawing_spec=mp_drawing_styles.get_default_face_mesh_iris_connections_style(),
                 )
-
-        cv2.imshow("WebCam", output)
+        cv2.imshow("Mask Face", img)
+        cv2.imshow("Only Face", only_face_canvas)
         k = cv2.waitKey(1)
         if k == ESC:
             break
@@ -281,11 +248,9 @@ cap.release()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
-print("OpenCV_ai_88")
+print("OpenCV_ai_88 偵測手掌")
 
-import mediapipe as mp
-
-mp_drawing = mp.solutions.drawing_utils  # mediapipe 繪圖方法
+mp_drawing = mp.solutions.drawing_utils  # 建立繪圖方法
 mp_drawing_styles = mp.solutions.drawing_styles  # mediapipe 繪圖樣式
 mp_hands = mp.solutions.hands  # mediapipe 偵測手掌方法
 
@@ -305,7 +270,7 @@ with mp_hands.Hands(
 ) as hands:
     while True:
         ret, img = cap.read()
-        img2 = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)  # 將 BGR 轉換成 RGB
+        img2 = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)  # BGR 轉 RGB
         results = hands.process(img2)  # 偵測手掌
         if results.multi_hand_landmarks:
             for hand_landmarks in results.multi_hand_landmarks:
@@ -329,9 +294,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("OpenCV_ai_89")
 
-import mediapipe as mp
-
-mp_drawing = mp.solutions.drawing_utils  # mediapipe 繪圖方法
+mp_drawing = mp.solutions.drawing_utils  # 建立繪圖方法
 mp_drawing_styles = mp.solutions.drawing_styles  # mediapipe 繪圖樣式
 mp_hands = mp.solutions.hands  # mediapipe 偵測手掌方法
 
@@ -350,7 +313,6 @@ with mp_hands.Hands(
     run = True  # 設定是否更動觸碰區位置
     while True:
         ret, img = cap.read()
-        #img = cv2.resize(img, (640//2, 480//2))  # 調整畫面尺寸
         size = img.shape  # 取得攝影機影像尺寸
         w = size[1]  # 取得畫面寬度
         h = size[0]  # 取得畫面高度
@@ -359,7 +321,7 @@ with mp_hands.Hands(
             rx = random.randint(50, w - 50)  # 隨機 x 座標
             ry = random.randint(50, h - 100)  # 隨機 y 座標
             print(rx, ry)
-        img2 = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)  # 將 BGR 轉換成 RGB
+        img2 = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)  # BGR 轉 RGB
         results = hands.process(img2)  # 偵測手掌
         if results.multi_hand_landmarks:
             for hand_landmarks in results.multi_hand_landmarks:
@@ -377,7 +339,7 @@ with mp_hands.Hands(
                     mp_drawing_styles.get_default_hand_connections_style(),
                 )
 
-        cv2.rectangle(img, (rx, ry), (rx + 80, ry + 80), (0, 0, 255), 5)  # 畫出觸碰區
+        cv2.rectangle(img, (rx, ry), (rx + 80, ry + 80), red, linewidth)  # 畫出觸碰區
         cv2.imshow("WebCam", img)
         k = cv2.waitKey(1)
         if k == ESC:
@@ -389,9 +351,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("OpenCV_ai_90")
 
-import mediapipe as mp
-
-mp_drawing = mp.solutions.drawing_utils  # mediapipe 繪圖方法
+mp_drawing = mp.solutions.drawing_utils  # 建立繪圖方法
 mp_drawing_styles = mp.solutions.drawing_styles  # mediapipe 繪圖樣式
 mp_pose = mp.solutions.pose  # mediapipe 姿勢偵測
 
@@ -406,8 +366,7 @@ else:
 with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as pose:
     while True:
         ret, img = cap.read()
-        #img = cv2.resize(img, (640//2, 480//2))  # 縮小尺寸，加快演算速度
-        img2 = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)  # 將 BGR 轉換成 RGB
+        img2 = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)  # BGR 轉 RGB
         results = pose.process(img2)  # 取得姿勢偵測結果
         # 根據姿勢偵測結果，標記身體節點和骨架
         mp_drawing.draw_landmarks(
@@ -428,11 +387,9 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("OpenCV_ai_91")
 
-import mediapipe as mp
-
-mp_drawing = mp.solutions.drawing_utils
-mp_drawing_styles = mp.solutions.drawing_styles
-mp_pose = mp.solutions.pose
+mp_drawing = mp.solutions.drawing_utils  # 建立繪圖方法
+mp_drawing_styles = mp.solutions.drawing_styles# mediapipe 繪圖樣式
+mp_pose = mp.solutions.pose  # mediapipe 姿勢偵測
 
 cap = cv2.VideoCapture(0)
 if not cap.isOpened():
@@ -450,8 +407,7 @@ with mp_pose.Pose(
 ) as pose:
     while True:
         ret, img = cap.read()
-        #img = cv2.resize(img, (640//2, 480//2))
-        img2 = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+        img2 = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)  # BGR 轉 RGB
         results = pose.process(img2)
         try:
             # 使用 try 避免抓不到姿勢時發生錯誤
@@ -479,9 +435,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("OpenCV_ai_92")
 
-import mediapipe as mp
-
-mp_drawing = mp.solutions.drawing_utils  # mediapipe 繪圖方法
+mp_drawing = mp.solutions.drawing_utils  # 建立繪圖方法
 mp_drawing_styles = mp.solutions.drawing_styles  # mediapipe 繪圖樣式
 mp_holistic = mp.solutions.holistic  # mediapipe 全身偵測方法
 
@@ -498,8 +452,7 @@ with mp_holistic.Holistic(
 ) as holistic:
     while True:
         ret, img = cap.read()
-        #img = cv2.resize(img, (640//2, 480//2))
-        img2 = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)  # 將 BGR 轉換成 RGB
+        img2 = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)  # BGR 轉 RGB
         results = holistic.process(img2)  # 開始偵測全身
         # 面部偵測，繪製臉部網格
         mp_drawing.draw_landmarks(
@@ -529,9 +482,7 @@ print("------------------------------------------------------------")  # 60個
 print("OpenCV_ai_93")
 
 """ fail
-import mediapipe as mp
-
-mp_drawing = mp.solutions.drawing_utils  # mediapipe 繪圖方法
+mp_drawing = mp.solutions.drawing_utils  # 建立繪圖方法
 mp_objectron = mp.solutions.objectron    # mediapipe 物體偵測
 
 cap = cv2.VideoCapture(0)
@@ -549,8 +500,7 @@ with mp_objectron.Objectron(static_image_mode=False,
                             model_name='Shoe') as objectron:
     while True:
         ret, img = cap.read()
-        #img = cv2.resize(img,(640//2, 480//2))               # 縮小尺寸，加快演算速度
-        img2 = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)   # 將 BGR 轉換成 RGB
+        img2 = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)  # BGR 轉 RGB
         results = objectron.process(img2)             # 取得物體偵測結果
         # 標記所偵測到的物體
         if results.detected_objects:
@@ -573,9 +523,7 @@ print("------------------------------------------------------------")  # 60個
 print("OpenCV_ai_94")
 
 """ 缺檔案
-import mediapipe as mp
-
-mp_drawing = mp.solutions.drawing_utils                    # mediapipe 繪圖功能
+mp_drawing = mp.solutions.drawing_utils  # 建立繪圖方法
 mp_selfie_segmentation = mp.solutions.selfie_segmentation  # mediapipe 自拍分割方法
 
 cap = cv2.VideoCapture(0)
@@ -593,8 +541,7 @@ with mp_selfie_segmentation.SelfieSegmentation(
 
     while True:
         ret, img = cap.read()
-        #img = cv2.resize(img,(640//2, 480//2))               # 縮小尺寸，加快演算速度
-        img2 = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)   # 將 BGR 轉換成 RGB
+        img2 = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)  # BGR 轉 RGB
         results = selfie_segmentation.process(img2)   # 取得自拍分割結果
         condition = np.stack((results.segmentation_mask,) * 3, axis=-1) > 0.1 # 如果滿足模型判斷條件 ( 表示要換成背景 )，回傳 True
         output_image = np.where(condition, img, bg)
@@ -612,12 +559,9 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("OpenCV_ai_95")
 
-import mediapipe as mp
-
-mp_drawing = mp.solutions.drawing_utils
-mp_drawing_styles = mp.solutions.drawing_styles
-mp_hands = mp.solutions.hands
-
+mp_drawing = mp.solutions.drawing_utils  # 建立繪圖方法
+mp_drawing_styles = mp.solutions.drawing_styles  # mediapipe 繪圖樣式
+mp_hands = mp.solutions.hands  # mediapipe 偵測手掌方法
 
 # 根據兩點的座標，計算角度
 def vector_2d_angle(v1, v2):
@@ -753,8 +697,7 @@ with mp_hands.Hands(
     w, h = 640//2, 480//2  # 影像尺寸
     while True:
         ret, img = cap.read()
-        #img = cv2.resize(img, (w, h))  # 縮小尺寸，加快處理效率
-        img2 = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)  # 轉換成 RGB 色彩
+        img2 = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)  # BGR 轉 RGB
         results = hands.process(img2)  # 偵測手勢
         if results.multi_hand_landmarks:
             for hand_landmarks in results.multi_hand_landmarks:
@@ -783,11 +726,9 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("OpenCV_ai_96")
 
-import mediapipe as mp
-
-mp_drawing = mp.solutions.drawing_utils
-mp_drawing_styles = mp.solutions.drawing_styles
-mp_hands = mp.solutions.hands
+mp_drawing = mp.solutions.drawing_utils  # 建立繪圖方法
+mp_drawing_styles = mp.solutions.drawing_styles  # mediapipe 繪圖樣式
+mp_hands = mp.solutions.hands  # mediapipe 偵測手掌方法
 
 
 # 根據兩點的座標，計算角度
@@ -924,8 +865,7 @@ with mp_hands.Hands(
     w, h = 640//2, 480//2  # 影像尺寸
     while True:
         ret, img = cap.read()
-        #img = cv2.resize(img, (w, h))  # 縮小尺寸，加快處理效率
-        img2 = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)  # 轉換成 RGB 色彩
+        img2 = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)  # BGR 轉 RGB
         results = hands.process(img2)
         if results.multi_hand_landmarks:
             for hand_landmarks in results.multi_hand_landmarks:
@@ -991,12 +931,9 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("OpenCV_ai_97")
 
-import mediapipe as mp
-
-mp_drawing = mp.solutions.drawing_utils
-mp_drawing_styles = mp.solutions.drawing_styles
-mp_hands = mp.solutions.hands
-
+mp_drawing = mp.solutions.drawing_utils  # 建立繪圖方法
+mp_drawing_styles = mp.solutions.drawing_styles  # mediapipe 繪圖樣式
+mp_hands = mp.solutions.hands  # mediapipe 偵測手掌方法
 
 # 根據兩點的座標，計算角度
 def vector_2d_angle(v1, v2):
@@ -1108,9 +1045,8 @@ with mp_hands.Hands(
     color = (0, 0, 255, 255)  # 設定預設顏色為紅色
     while True:
         ret, img = cap.read()
-        #img = cv2.resize(img, (w, h))  # 縮小尺寸，加快處理效率
         img = cv2.flip(img, 1)
-        img2 = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)  # 偵測手勢的影像轉換成 RGB 色彩
+        img2 = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)  # BGR 轉 RGB
         img = cv2.cvtColor(img, cv2.COLOR_BGR2BGRA)  # 畫圖的影像轉換成 BGRA 色彩
         results = hands.process(img2)  # 偵測手勢
         if results.multi_hand_landmarks:
@@ -1226,11 +1162,9 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-import mediapipe as mp
-
-mp_drawing = mp.solutions.drawing_utils
-mp_drawing_styles = mp.solutions.drawing_styles
-mp_hands = mp.solutions.hands
+mp_drawing = mp.solutions.drawing_utils  # 建立繪圖方法
+mp_drawing_styles = mp.solutions.drawing_styles  # mediapipe 繪圖樣式
+mp_hands = mp.solutions.hands  # mediapipe 偵測手掌方法
 
 cap = cv2.VideoCapture(0)
 if not cap.isOpened():
@@ -1253,9 +1187,8 @@ with mp_hands.Hands(
 
     while True:
         ret, img = cap.read()
-        #img = cv2.resize(img, (w, h))  # 縮小尺寸，加快處理效率
         img = cv2.flip(img, 1)  # 翻轉影像
-        img_hand = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)  # 偵測手勢使用
+        img_hand = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)  # BGR 轉 RGB
         img = cv2.cvtColor(img, cv2.COLOR_BGR2BGRA)  # 轉換顏色為 BGRA ( 計算時需要用到 Alpha 色版 )
         img2 = img.copy()  # 複製影像
         img2 = cv2.blur(img, (55, 55))  # 套用模糊
@@ -1312,7 +1245,6 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 
 """ 缺檔案
-import mediapipe as mp
 
 cap = cv2.VideoCapture(0)
 if not cap.isOpened():
@@ -1321,7 +1253,7 @@ if not cap.isOpened():
 else:
     print("Video device opened")
 
-mp_face_detection = mp.solutions.face_detection    # 使用人臉偵測方法
+mp_face_detection = mp.solutions.face_detection  # 建立偵測方法
 
 h, w = 480//2, 640//2                                    # 輸出時的影像長寬
 mask = np.zeros((h, w, 3), dtype='uint8')          # 建立遮罩
@@ -1334,14 +1266,13 @@ mask = mask/255                                    # 轉換成比例
 orange = cv2.imread('orange.jpg')                  # 讀取橘子圖片背景
 
 # 人臉偵測模組啟用成功後，執行相關內容
-with mp_face_detection.FaceDetection(
+with mp_face_detection.FaceDetection(  # 開始偵測人臉
     model_selection=0, min_detection_confidence=0.5) as face_detection:
 
     while True:
         ret, img = cap.read()                        # 讀取攝影機畫面
-        #img = cv2.resize(img, (w, h))                # 縮小尺寸加快速度
-        img2 = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)  # 轉換成 RGB 才能夠在 mediapipe 中使用
-        results = face_detection.process(img2)       # 讀取人臉偵測資訊
+        img2 = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)  # BGR 轉 RGB
+        results = face_detection.process(img2)  # 偵測人臉
 
         if results.detections:
             for detection in results.detections:
@@ -1387,3 +1318,7 @@ cv2.destroyAllWindows()
 
 """
 
+#img = cv2.resize(img, (640//2, 480//2))  # 調整畫面尺寸
+#img = cv2.resize(img, (640//2, 480//2))  # 縮小尺寸，加快演算速度
+#img = cv2.resize(img,(640//2, 480//2))       # 縮小尺寸，加快演算速度
+#img = cv2.resize(img, (w, h))  # 縮小尺寸，加快處理效率

@@ -14,16 +14,20 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microso
 plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 warnings.filterwarnings('ignore')
-original = mpl.image.imread('frog.jpg') 
+#original = mpl.image.imread('frog.jpg')
+original = plt.imread('frog.jpg')
 width,height,depth = original.shape
 temp = original.reshape(width*height,depth)
 temp = np.array(temp, dtype=np.float64) / 255
 
 original_sample = shuffle(temp, random_state=0)[:1000] #随机取1000个RGB值作为训练集
+
+
 def cluster(k):
     estimator = KMeans(n_clusters=k,n_jobs=8,random_state=0)#构造聚类器
     kmeans = estimator.fit(original_sample)#聚类   
     return kmeans
+
     
 def recreate_image(codebook, labels, w, h):
     d = codebook.shape[1]
@@ -34,6 +38,7 @@ def recreate_image(codebook, labels, w, h):
             image[i][j] = codebook[labels[label_idx]]
             label_idx += 1
     return image
+
 
 kmeans = cluster(32)
 labels = kmeans.predict(temp)

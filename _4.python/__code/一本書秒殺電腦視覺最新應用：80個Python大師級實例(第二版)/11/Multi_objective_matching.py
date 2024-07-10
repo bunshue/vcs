@@ -1,10 +1,15 @@
 #opencv模板匹配----多目标匹配
 import cv2
 import numpy
+red = (0, 0, 255)
+linewidth = 3
+
 #读取目标图片
 target = cv2.imread("target.jpg")
+
 #读取模板图片
 template = cv2.imread("template.jpg")
+
 #获得模板图片的高宽尺寸
 theight, twidth = template.shape[:2]
 #执行模板匹配，采用的匹配方式cv2.TM_SQDIFF_NORMED
@@ -37,8 +42,12 @@ for other_loc in zip(*loc[::-1]):
         temp_loc = other_loc
         cv2.rectangle(target,other_loc,(other_loc[0]+twidth,other_loc[1]+theight),(0,0,225),2)
 str_numOfloc = str(numOfloc)
+
 #显示结果,并将匹配值显示在标题栏上
 strText = "MatchResult----MatchingValue="+strmin_val+"----NumberOfPosition="+str_numOfloc
+
+print('匹配值 :', strmin_val)
+
 cv2.imshow(strText,target)
 cv2.waitKey()
 cv2.destroyAllWindows()

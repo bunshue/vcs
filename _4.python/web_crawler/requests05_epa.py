@@ -1,4 +1,4 @@
-'''
+"""
 AQI綜合指標（Air Quality Index 空氣品質指標）
 
 空氣品質指標值(AQI)
@@ -11,7 +11,7 @@ AQI綜合指標（Air Quality Index 空氣品質指標）
 
 空氣品質指標(AQI)(歷史資料)
 資料集代碼 	AQX_P_488
-'''
+"""
 
 import requests
 import urllib.request   #用來建立請求
@@ -65,21 +65,21 @@ offset = '0'
 limit = '100'
 api_key = epa_key
 
-'''
+"""
 #無查詢條件
 url = 'https://data.epa.gov.tw/api/v2/%s?format=%s&offset=%s&limit=%s&api_key=%s' % (DataID, format, offset, limit, api_key)
 print(url)
 r = requests.get(url)
 print(r.text)
-'''
+"""
 
-'''
+"""
 #無查詢條件
 url = 'https://data.epa.gov.tw/api/v2/%s?format=%s&year_month=%s&offset=%s&limit=%s&api_key=%s' % (DataID, format, year_month, offset, limit, api_key)
 print(url)
 r = requests.get(url)
 print(r.text)
-'''
+"""
 
 #有查詢條件
 #條件查詢方式是使用filters參數加在API網址後：&filters='{資料字典英文欄位}',EQ,'{搜尋值}‘
@@ -97,20 +97,24 @@ print(url)
 url = 'https://data.epa.gov.tw/api/v2/%s?format=%s&year_month=%s&offset=%s&limit=%s&api_key=%s&filters=%s' % (DataID, format, year_month, offset, limit, api_key, filters3)
 print(url)
 
-'''
+"""
 r = requests.get(url)
 print(r.text)
-'''
+"""
 
 print('------------------------------------------------------------')	#60個
 
-time.sleep(3)
 
+time.sleep(3)
+""" fail SSL
 print('讀取遠端 json 檔案')
 format = 'json'
 url = 'https://data.epa.gov.tw/api/v2/%s?format=%s&offset=%s&limit=%s&api_key=%s' % (DataID, format, offset, limit, api_key)
 filename = 'C:/_git/vcs/_1.data/______test_files2/AQI_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.json';   #json檔案名稱
 urllib.request.urlretrieve(url, filename) #下載遠端 json 檔案
+
+
+"""
 
 print('------------------------------------------------------------')	#60個
 
@@ -219,10 +223,10 @@ conn = sqlite3.connect(db_filename) # 建立資料庫連線
 cursor = conn.cursor() # 建立 cursor 物件
 
 # 建立一個資料表
-sqlstr='''
+sqlstr="""
 CREATE TABLE IF NOT EXISTS TablePM25 ("no" INTEGER PRIMARY KEY AUTOINCREMENT 
 NOT NULL UNIQUE ,"SiteName" TEXT NOT NULL ,"PM25" INTEGER)
-'''
+"""
 cursor.execute(sqlstr)
 
 print('以md5檢查網站內容是否更新')
@@ -285,7 +289,7 @@ if md5 != old_md5:
     # 欄位都是小寫的
     jsondata = html.json()['records']
 
-    '''
+    """
     # debug
     #print(jsondata)
     print(len(jsondata))
@@ -298,7 +302,7 @@ if md5 != old_md5:
         n += 1
         if n == 10:
             break;
-    '''
+    """
     
     n = 1
     for site in jsondata:

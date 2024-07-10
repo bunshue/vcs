@@ -6,17 +6,22 @@ import math
 print('Angular Point')
 
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+#filename = 'C:/_git/vcs/_1.data/______test_files1/ims01.24.bmp'
 
 #根据一阶锐化算子，求x，y的梯度，显示锐化图像
 #读取图片
 tu = cv2.imread(filename)
+
 #转换为灰度图
 gray = cv2.cvtColor(tu, cv2.COLOR_RGB2GRAY)
+
 #获取图像属性
 print ('获取图像大小: ',gray.shape)
 print ('\n')
+
 #打印数组gray
 print('灰度图像数组：\n %s \n \n' % (gray))
+
 #转换为矩阵
 m = np.matrix(gray)
 #计算x方向的梯度的函数（水平方向锐化算子）
@@ -38,6 +43,7 @@ def grad_x(h):
                 delta_h[i,j] = 0
     print ('x方向的梯度：\n %s \n' %delta_h)
     return delta_h
+
 ##计算y方向的梯度的函数（水平方向锐化算子）
 def grad_y(h):
     a = int(h.shape[0])
@@ -55,6 +61,7 @@ def grad_y(h):
                 delta_h[i,j] = 0
     print ('y方向的梯度：\n %s \n' %delta_h)
     return delta_h
+
 #Laplace 算子  
 img_laplace = cv2.Laplacian(gray, cv2.CV_64F, ksize=3)  
 

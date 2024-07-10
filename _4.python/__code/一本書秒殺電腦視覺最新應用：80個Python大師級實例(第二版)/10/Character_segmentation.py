@@ -3,6 +3,8 @@ import numpy as np
 from PIL import Image
 import os.path
 from skimage import io,data
+
+
 def stretch(img):
     '''
     图像拉伸函数
@@ -45,7 +47,8 @@ def locate_license(img,afterimg):
     '''
     定位车牌号
     '''
-    img,contours,hierarchy=cv2.findContours(img,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
+    #contours, hierarchy = cv2.findContours(binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
+    contours,hierarchy=cv2.findContours(img,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
 
     #找出最大的三个区域
     block=[]
@@ -183,7 +186,10 @@ def find_end(start,arg,black,white,width,black_max,white_max):
 
 
 if __name__=='__main__':
-    img=cv2.imread('car001.jpg',cv2.IMREAD_COLOR)
+
+    filename = 'C:/_git/vcs/_4.python/PIL/data/ocr/carPlate02.jpg'
+    filename = 'car.png'
+    img=cv2.imread(filename, cv2.IMREAD_COLOR)
     #预处理图像
     rect,afterimg=find_license(img)
 
@@ -226,8 +232,8 @@ if __name__=='__main__':
         black_max=max(black_max,line_black)
         white.append(line_white)
         black.append(line_black)
-        print('white',white)
-        print('black',black)
+        #print('white',white)
+        #print('black',black)
     #arg为true表示黑底白字，False为白底黑字
     arg=True
     if black_max<white_max:
@@ -248,10 +254,10 @@ if __name__=='__main__':
             if end-start>5:
                 cj=thresh[1:height,start:end]
 
-                print("result/%s.jpg" % (n))
-                #保存分割的图片 by cayden
+                print("tmp_%s.jpg" % (n))
+                #保存分割的图片
     
-                infile="result/%s.jpg" % (n)
+                infile="tmp_%s.jpg" % (n)
                 io.imsave(infile,cj)
 
                 cv2.imshow('cutlicense',cj)
