@@ -23,7 +23,7 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 print("------------------------------------------------------------")  # 60個
 
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg"
-
+'''
 # == Parameters =======================================================================
 BLUR = 21
 CANNY_THRESH_1 = 10
@@ -890,41 +890,7 @@ plt.show()
 
 cv2.waitKey()
 cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-image = cv2.imread("data/cc.bmp")
-print("顯示原圖")
-
-cv2.imshow("original", image)
-
-plt.figure("影像處理10", figsize=(16, 12))
-plt.subplot(121)
-plt.title("原圖")
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-
-gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-ret, binary = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
-contours, hierarchy = cv2.findContours(binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
-rect = cv2.minAreaRect(contours[0])
-print("返回值rect:\n", rect)
-points = cv2.boxPoints(rect)
-print("\n轉換后的points：\n", points)
-points = np.int0(points)  # 取整
-image = cv2.drawContours(image, [points], 0, (0, 0, 255), 2)
-
-cv2.imshow("result", image)
-
-plt.subplot(122)
-plt.title("result")
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-
-plt.tight_layout()
-plt.show()
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
+'''
 print("------------------------------------------------------------")  # 60個
 
 image = cv2.imread("data/cc.bmp")

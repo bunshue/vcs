@@ -250,11 +250,92 @@ while(1):
   break
 
 cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+#boxPoints返回四个点顺序：右下→左下→左上→右上
+
+import cv2
+import numpy as np
+
+image = cv2.imread("data/cc.bmp")
+
+imagegray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+
+contours, hierarchy = cv2.findContours(imagegray,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)  
+rect = cv2.minAreaRect(contours[0]) # 得到最小外接矩形的（中心(x,y), (宽,高), 旋转角度）
+print(rect)
+points = cv2.boxPoints(rect) # 获取最小外接矩形的4个顶点坐标
+print(points)  # 
+points = np.int0(points)
+
+# 畫出來
+cv2.drawContours(image, [points], 0, (0, 0, 255), 3)
+
+cv2.imshow("image", image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+  
+print("------------------------------------------------------------")  # 60個
+
+image = cv2.imread("data/cc.bmp")
+print("顯示原圖")
+
+cv2.imshow("original", image)
+
+gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+ret, binary = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
+contours, hierarchy = cv2.findContours(binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
+rect = cv2.minAreaRect(contours[0])
+print("返回值rect:\n", rect)
+points = cv2.boxPoints(rect)
+print("\n轉換后的points：\n", points)
+points = np.int0(points)  # 取整
+
+# 畫出來
+cv2.drawContours(image, [points], 0, (0, 0, 255), 3)
+
+cv2.imshow("result", image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
 '''
 print("------------------------------------------------------------")  # 60個
 
-   
-print("------------------------------------------------------------")  # 60個
+rotating_angle = 0#順時針
+# 旋轉矩形
+
+W, H = 400, 400
+cx, cy = 200, 200
+points = cv2.boxPoints(((cx, cy), (350, 100), rotating_angle))
+# 四個頂點
+print(points.dtype)  # 打印數據類型
+print(points)  # 打印四個頂點
+
+# 根據四個頂點在黑色畫板上畫出該矩形
+image = np.zeros((H, W), np.uint8)
+
+for i in range(4):
+    # 相鄰的點
+    p1 = points[i, :]
+    j = (i + 1) % 4
+    p2 = points[j, :]
+    # 畫出直線
+    cv2.line(
+        image,
+        (int(p1[0]), int(p1[1])),
+        (int(p2[0]), int(p2[1])),
+        (255, 255, 255),
+        5,
+        lineType=cv2.LINE_AA,
+    )
+
+cv2.circle(image, (100,100), 100, (255, 255, 255), 5)
+#cv2.circle(image, (cx, cy), radius, color, line_width)  # 繪製圓形
+
+cv2.imshow("image", image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
 
 print("------------------------------------------------------------")  # 60個
 

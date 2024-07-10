@@ -50,7 +50,7 @@ def get_html_data_from_url(url):
     return html_data.text
 
 print('------------------------------------------------------------')	#60個
-
+'''
 print('Response 物件資訊')
 url = "https://www.books.com.tw/web/sys_cebbotm/cebook/1003/?loc=P_0001_2_003"  # 博客來網址
 response = requests.get(url)
@@ -169,54 +169,6 @@ for line in lines:
         n+=1
 
 print("找到 {} 次!".format(n))
-
-print('------------------------------------------------------------')	#60個
-print('擷取網頁圖片, 保存檔名1')
-
-# 圖片網址
-url = "https://zh.wikipedia.org/static/images/icons/wikipedia.png"
-url = "https://upload.wikimedia.org/wikipedia/commons/8/8b/%E8%A5%BF%E8%9E%BA%E5%A4%A7%E6%A9%8B_%28cropped%29.jpg"
-
-response = requests.get(url)
-
-filename = "tmp_" + os.path.basename(url)
-with open(filename, "wb") as f:
-    f.write(response.content)  # 將response.content二進位內容寫入檔案
-print('存檔檔案 :', filename)
-
-print("------------------------------------------------------------")  # 60個
-
-print('擷取網頁圖片, 保存檔名2')
-
-import base64
-from io import BytesIO
-from PIL import Image
-
-url = 'https://upload.wikimedia.org/wikipedia/commons/3/3d/Uranus2.jpg'
-response = requests.get(url)
-image = Image.open(BytesIO(response.content))
-
-filename="tmp_"+url.split('/')[-1]
-print('圖片檔名:', filename)
-
-image.save(filename)
-
-#print(base64.b64encode(response.content))
-
-print("------------------------------------------------------------")  # 60個
-
-def download_pic(url, path):
-    print(path)
-    pic = requests.get(url)     #使用 GET 對圖片連結發出請求
-    path += url[url.rfind('.'):]     #將路徑加上圖片的副檔名
-    print(path)
-    f = open(path,'wb')     #以指定的路徑建立一個檔案
-    f.write(pic.content)     #將 HTTP Response 物件的 content寫入檔案中
-    f.close()     #關閉檔案
-    
-url = "http://i.epochtimes.com/assets/uploads/2015/05/1502192113172483-600x400.jpg"  #貼上src屬性中的路徑
-pic_path = "tmp_download_picture" #設定圖片的儲存名稱和路徑
-download_pic(url, pic_path)
 
 print('------------------------------------------------------------')	#60個
 print('requests 測試 13 讀取網頁上的csv檔')
@@ -535,9 +487,9 @@ except Exception as err:
 
 # 儲存網頁內容
 fn = 'tmp_html_text1.html'
-with open(fn, 'wb') as file_Obj:                     # 以二進位儲存
+with open(fn, 'wb') as f:                     # 以二進位儲存
     for diskStorage in response.iter_content(10240): # Response物件處理
-        size = file_Obj.write(diskStorage)           # Response物件寫入
+        size = f.write(diskStorage)           # Response物件寫入
         print(size)                                  # 列出每次寫入大小
     print("以 %s 儲存網頁HTML檔案成功" % fn)
 
@@ -1297,125 +1249,6 @@ pprint.pprint(r.text)
 
 
 """
-
-print('將網頁上的檔案存成本地檔案')
-    print("口罩資料下載中...")
-    # 健保特約機構口罩剩餘數量明細清單資料來源的Url
-    maskdataUrl = "https://data.nhi.gov.tw/resource/mask/maskdata.csv"
-    # 下載健保特約機構口罩剩餘數量明細清單資料並儲存成Masks.csv
-    r = requests.get(maskdataUrl)
-    filename = "tmp_Masks.csv"
-    f = open(filename, "wb")
-    f.write(r.content)
-    f.close()
-    print("口罩資料下載完成, 存檔檔案 :", filename)
-
-
-
-
-    # csv 轉 html
-    # 將資料轉成data字典物件
-    f = open("tmp_Masks.csv", encoding="utf-8")
-    data = csv.DictReader(f)
-    # 若有 tmp_Masks.html 網頁即刪除
-    if os.path.exists("tmp_Masks.html"):
-        os.remove("tmp_Masks.html")
-    # 使用附加模式建立tmp_Masks.html網頁
-    fH = open("tmp_Masks.html", "a", encoding="utf-8")
-    # 寫入網頁表格標題
-    fH.write('<meta charset="utf-8" /><table border="1">')
-    fH.write(
-        "<tr>\
-                 <th>醫事機構名稱</th>\
-                 <th>醫事機構地址</th>\
-                 <th>醫事機構電話</th>\
-                 <th>成人口罩剩餘數</th>\
-                 <th>兒童口罩剩餘數</th>\
-                 <th>路線規劃</th>\
-              </tr>"
-    )
-    # 印出查詢的健保特約機構口罩剩餘數量明細資料
-    for row in data:
-        address = row["醫事機構地址"]
-        # 判斷地址與搜尋地址是否吻合
-        if search in address:
-            # 不顯示成人以及兒童口罩賣完的診所
-            if row["成人口罩剩餘數"] != 0 and row["兒童口罩剩餘數"] != 0:
-                print("藥局名稱:", row["醫事機構名稱"])
-                print("藥局地址:", row["醫事機構地址"])
-                print("藥局電話:", row["醫事機構電話"])
-                print("成人口罩剩餘數:", row["成人口罩剩餘數"])
-                print("兒童口罩剩餘數:", row["兒童口罩剩餘數"])
-                print("=" * 50)
-                # 將資料寫入 tmp_Masks.html
-                fH.write("<tr>")
-                fH.write("<td>" + row["醫事機構名稱"] + "</td>")
-                fH.write("<td>" + row["醫事機構地址"] + "</td>")
-                fH.write("<td>" + row["醫事機構電話"] + "</td>")
-                fH.write("<td>" + row["成人口罩剩餘數"] + "</td>")
-                fH.write("<td>" + row["兒童口罩剩餘數"] + "</td>")
-                fH.write(
-                    '<td><a href="https://www.google.com/'
-                    + "maps/search/"
-                    + row["醫事機構地址"]
-                    + '">路線規劃</a></td>'
-                )
-                fH.write("</tr>")
-    fH.write("</table>")
-    # 關閉檔案
-    fH.close()
-    f.close()
-    # os.system('tmp_Masks.html')    # 開啟網頁
-
-
-
-import shutil
-    
-image_foldername = 'tmp_images'
-filename = 'tmp_countryfood2222.html'
-print('存檔檔案 :', filename)
-if os.path.exists(filename):  
-    os.remove(filename)     # 若有 tmp_countryfood.html 網頁即刪除
-if os.path.exists(image_foldername): 
-    shutil.rmtree(image_foldername)    # 若有images目錄即刪除
-else:
-    os.mkdir(image_foldername)        # 若無images目錄即刪除
-
-
-    #從網址取得檔名
-    imgUrl=col['PicURL']
-    print(cnt)
-    #網址用'/'分隔取最後一筆資料 => *.jpg
-    filename = imgUrl.split('/')[-1] #擷取圖片名稱
-    print('圖片網址：', imgUrl)
-    print('圖片檔名：', filename)
-
-    #網址用'/'分隔取最後一筆資料 => *.jpg
-    picName=row['PicURL'].split('/')[-1]
-    print('圖片網址：', row['PicURL'])
-    print('圖片檔名：', picName)
-    
-
-        #建立取得圖片的 response 物件
-        response=requests.get(imgUrl) 
-        f=open((image_foldername+'/'+filename),'wb')    #開啟圖片檔案                    
-        f.write(response.content)     #下載圖片
-        print(filename,'下載完畢')
-
-
-
-filename = 'aaaaa.html'
-
-#os.system(filename)  # 開啟網頁
-print("%s 網頁建置完成" % (filename))
-
-
-"""
-
-
-
-
-"""
 import socket
 
 socket.socket(family, type, proto)
@@ -1975,9 +1808,9 @@ time.sleep(1)
 for i in range(1, 7):
     img = driver.find_element_by_xpath(
         '//*[@id="content-grid"]/ul/li[' + str(i) + ']/a[1]/div/img')
-    rep = requests.get(img.get_attribute('src'))
+    response = requests.get(img.get_attribute('src'))
     with open('demo/test'+str(i)+'.jpg', 'wb') as f:
-        f.write(rep.content)
+        f.write(response.content)  # 將response.content二進位內容寫入檔案
 driver.close()
 
 print("------------------------------------------------------------")  # 60個
@@ -2065,9 +1898,9 @@ for i in range(1, 6):
     if(str(src) != 'None'):
       if('.jpg' in src):
           filename = src.split('/')[-1]
-          rep = requests.get(src)
+          response = requests.get(src)
           with open('demo/'+str(filename), 'wb') as f:
-              f.write(rep.content)
+              f.write(response.content)  # 將response.content二進位內容寫入檔案
               closeBtn = driver.find_element_by_xpath('//*[@id="irc_ccbc"]')
               closeBtn.click()
       else:
@@ -2941,6 +2774,58 @@ drive.mount('/content/drive', force_remount=True)
 !cp /drive/ngrok-ssh/ngrok /ngrok
 !chmod +x /ngrok
 """
+print("------------------------------------------------------------")  # 60個
+
+'''
+
+print('將網頁上的檔案存成本地檔案')
+
+print('1. csv : 教育部統計處資料')
+url = 'https://stats.moe.gov.tw/files/detail/111/111_student.csv'
+response = requests.get(url)
+
+filename = "tmp_" + os.path.basename(url)
+with open(filename, "wb") as f:
+    f.write(response.content)  # 將response.content二進位內容寫入檔案
+print('存檔檔案 :', filename)
+
+print("------------------------------------------------------------")  # 60個
+
+print('2. pic')
+
+# 圖片網址
+url = "http://i.epochtimes.com/assets/uploads/2015/05/1502192113172483-600x400.jpg"  #貼上src屬性中的路徑
+url = "https://zh.wikipedia.org/static/images/icons/wikipedia.png"
+url = "https://upload.wikimedia.org/wikipedia/commons/8/8b/%E8%A5%BF%E8%9E%BA%E5%A4%A7%E6%A9%8B_%28cropped%29.jpg"
+
+response = requests.get(url) #使用 GET 對圖片連結發出請求
+filename = "tmp_" + os.path.basename(url)
+with open(filename, "wb") as f:
+    f.write(response.content)  # 將response.content二進位內容寫入檔案
+print('存檔檔案 :', filename)
+
+print("------------------------------------------------------------")  # 60個
+
+print('擷取網頁圖片, 保存檔名2')
+
+import base64
+from io import BytesIO
+from PIL import Image
+
+url = 'https://upload.wikimedia.org/wikipedia/commons/3/3d/Uranus2.jpg'
+response = requests.get(url)
+image = Image.open(BytesIO(response.content))
+
+filename="tmp_"+url.split('/')[-1]
+print('圖片檔名:', filename)
+
+image.save(filename)
+print('存檔檔案 :', filename)
+#print(base64.b64encode(response.content))
+
+print("------------------------------------------------------------")  # 60個
+
+
 print("------------------------------------------------------------")  # 60個
 
 
