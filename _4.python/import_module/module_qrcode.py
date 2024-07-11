@@ -25,6 +25,7 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
+'''
 print("------------------------------------------------------------")  # 60個
 
 print("qrcode：qrcode產生器")
@@ -357,6 +358,29 @@ button2 = tk.Button(input_area, text="Save", command=save).pack(
 # 描繪框線
 input_area.pack(pady=5)
 image_area.pack(padx=3, pady=1)
+
+window.mainloop()
+'''
+print("------------------------------------------------------------")  # 60個
+
+#使用中文沒有很順利
+
+import pyqrcode
+import tkinter as tk
+
+code = pyqrcode.create('白日依山盡白日依山盡')
+code_xbm = code.xbm(scale=5)
+
+window = tk.Tk()
+window.title("QRcode Generator")
+
+print("紅色碼、藍色背景")
+code_bmp = tk.BitmapImage(data=code_xbm)
+code_bmp.config(foreground="red")
+code_bmp.config(background="blue")
+
+label1 = tk.Label(image=code_bmp)
+label1.pack()
 
 window.mainloop()
 

@@ -2,7 +2,6 @@ import sys
 import time
 import tkinter as tk
 from tkinter import ttk
-from tkinter import scrolledtext
 
 print("------------------------------------------------------------")  # 60個
 
@@ -75,14 +74,6 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-window.geometry("600x800")
-window.title("Scale 測試 2")
-
 scale6_value_double = tk.DoubleVar(value=15)
 scale6 = ttk.Scale(
     window,
@@ -126,15 +117,6 @@ label7.pack()
 scale7 = ttk.Scale(window, from_=0, to=100, variable=scale7_value_int)
 scale7.pack()
 
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
-    fill=tk.X, padx=5, pady=5
-)  # 分隔線
-print("------------------------------------------------------------")  # 60個
-
-# Scrolledtext
-scrolled_text = scrolledtext.ScrolledText(window, width=100, height=5)
-scrolled_text.pack()
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
     fill=tk.X, padx=5, pady=5
@@ -239,4 +221,5 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+
 

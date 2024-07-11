@@ -450,6 +450,20 @@ text1.insert(tk.END, text)
 
 window.mainloop()
 
+print("------------------------------------------------------------")  # 60個
+
+from tkinter import scrolledtext
+
+window = tk.Tk()
+window.geometry("600x800")
+window.title("ScrolledText 測試")
+
+scrolled_text = scrolledtext.ScrolledText(window, width=100, height=5)
+scrolled_text.pack()
+
+window.mainloop()
+
+
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")

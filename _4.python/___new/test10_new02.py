@@ -892,3 +892,87 @@ print("------------------------------------------------------------")  # 60個
 
 
 
+
+"""
+from google.colab import drive
+drive.mount('/content/drive', force_remount=True)
+
+!mkdir -p /drive
+#umount /drive
+!mount --bind /content/drive/My\ Drive /drive
+!mkdir -p /drive/ngrok-ssh
+!mkdir -p ~/.ssh
+
+----
+
+!mkdir -p /drive/ngrok-ssh
+%cd /drive/ngrok-ssh
+!wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip -O ngrok-stable-linux-amd64.zip
+!unzip -u ngrok-stable-linux-amd64.zip
+!cp /drive/ngrok-ssh/ngrok /ngrok
+!chmod +x /ngrok
+"""
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+print('網址編碼解碼')
+
+from urllib.request import quote, unquote
+
+print('網址編碼 utf-8')
+
+url = "https://www.baidu.com/s?wd=中国"
+
+# utf8编码，指定安全字符
+ret1 = quote(url, safe=";/?:@&=+$,", encoding="utf-8")
+print(ret1)
+
+print('網址編碼 gbk')
+# https://www.baidu.com/s?wd=%E4%B8%AD%E5%9B%BD
+ret2 = quote(url, encoding="gbk")
+print(ret2)
+# https%3A//www.baidu.com/s%3Fwd%3D%D6%D0%B9%FA
+
+print('網址解碼 utf-8')
+url = "https://www.baidu.com/s?wd=%E4%B8%AD%E5%9B%BD"
+ret3 = unquote(url, encoding='utf-8')
+print(ret3)
+# https://www.baidu.com/s?wd=中国
+
+print('網址編碼 預設')
+cc = quote('中文測試')
+#'%E4%B8%AD%E6%96%87%E6%B8%AC%E8%A9%A6'
+print(cc)
+
+print('網址編碼 utf-8')
+cc = quote(u'中文測試'.encode('utf-8'))
+#'%E4%B8%AD%E6%96%87%E6%B8%AC%E8%A9%A6'
+print(cc)
+
+print('網址編碼 big5')
+cc = quote(u'中文測試'.encode('big5'))
+#'%E4%B8%AD%E6%96%87%E6%B8%AC%E8%A9%A6'
+print(cc)
+
+print('網址編碼 gbk')
+cc = quote(u'中文測試'.encode('gbk'))
+#'%E4%B8%AD%E6%96%87%E6%B8%AC%E8%A9%A6'
+print(cc)
+
+print('網址解碼 utf-8')
+url = "https://upload.wikimedia.org/wikipedia/commons/8/8b/%E8%A5%BF%E8%9E%BA%E5%A4%A7%E6%A9%8B_%28cropped%29.jpg"
+ret3 = unquote(url, encoding='utf-8')
+print(ret3)
+# https://www.baidu.com/s?wd=中国
+
+
+
+print('網址再解碼 utf-8')
+url = "https://upload.wikimedia.org/wikipedia/commons/8/8b/西螺大橋_(cropped).jpg"
+ret3 = unquote(url, encoding='utf-8')
+print(ret3)
+# https://www.baidu.com/s?wd=中国
+
+

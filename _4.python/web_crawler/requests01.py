@@ -2751,54 +2751,23 @@ print("------------------------------------------------------------")  # 60個
 print("openai SP")
 print("------------------------------------------------------------")  # 60個
 
-
-
-
-
-"""
-from google.colab import drive
-drive.mount('/content/drive', force_remount=True)
-
-!mkdir -p /drive
-#umount /drive
-!mount --bind /content/drive/My\ Drive /drive
-!mkdir -p /drive/ngrok-ssh
-!mkdir -p ~/.ssh
-
-----
-
-!mkdir -p /drive/ngrok-ssh
-%cd /drive/ngrok-ssh
-!wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip -O ngrok-stable-linux-amd64.zip
-!unzip -u ngrok-stable-linux-amd64.zip
-!cp /drive/ngrok-ssh/ngrok /ngrok
-!chmod +x /ngrok
-"""
-print("------------------------------------------------------------")  # 60個
-
 '''
+print('將網頁上的檔案存成本地檔案 csv / jpg / png')
 
-print('將網頁上的檔案存成本地檔案')
-
-print('1. csv : 教育部統計處資料')
 url = 'https://stats.moe.gov.tw/files/detail/111/111_student.csv'
-response = requests.get(url)
-
-filename = "tmp_" + os.path.basename(url)
-with open(filename, "wb") as f:
-    f.write(response.content)  # 將response.content二進位內容寫入檔案
-print('存檔檔案 :', filename)
-
-print("------------------------------------------------------------")  # 60個
-
-print('2. pic')
-
-# 圖片網址
 url = "http://i.epochtimes.com/assets/uploads/2015/05/1502192113172483-600x400.jpg"  #貼上src屬性中的路徑
 url = "https://zh.wikipedia.org/static/images/icons/wikipedia.png"
-url = "https://upload.wikimedia.org/wikipedia/commons/8/8b/%E8%A5%BF%E8%9E%BA%E5%A4%A7%E6%A9%8B_%28cropped%29.jpg"
+url = "https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Alliance_of_Sahel_States.svg/800px-Alliance_of_Sahel_States.svg.png"
 
-response = requests.get(url) #使用 GET 對圖片連結發出請求
+#response = requests.get(url) #使用 GET 對檔案連結發出請求
+
+from urllib.request import unquote
+print('網址解碼 utf-8')
+url = unquote(url, encoding='utf-8')
+print(url)
+
+response = requests.get(url) #使用 GET 對檔案連結發出請求
+
 filename = "tmp_" + os.path.basename(url)
 with open(filename, "wb") as f:
     f.write(response.content)  # 將response.content二進位內容寫入檔案
@@ -2829,4 +2798,5 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
+print("------------------------------------------------------------")  # 60個
 

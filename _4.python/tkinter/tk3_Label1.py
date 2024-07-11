@@ -1,3 +1,10 @@
+"""
+Label之使用
+
+影像在 tk2_PhotoImage.py
+
+"""
+
 import sys
 import tkinter as tk
 from tkinter import ttk
