@@ -16,20 +16,20 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
-# GroupBox測試
+# LabelFrame 測試
 tk.Label(text="LabelFrame 測試").pack()
 
-# GroupBox之大小, 若小於內附控件大小, 則會撐大
+# LabelFrame 之 大小, 若小於內附控件大小, 則會撐大
 w = 10
 h = 10
 labelframe1 = tk.LabelFrame(window, text="LabelFrame", padx=w, pady=h)
 
-# GroupBox之位置, 相較於目前表單位置
+# LabelFrame 之 位置, 相較於目前表單位置
 x_st = 0
 y_st = 0
 labelframe1.pack(padx=x_st, pady=y_st)
 
-# GroupBox內 放幾個控件
+# LabelFrame 內 放幾個控件
 w = tk.Entry(labelframe1).pack()
 w = tk.Entry(labelframe1).pack()
 w = tk.Entry(labelframe1).pack()

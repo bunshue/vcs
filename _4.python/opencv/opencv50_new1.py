@@ -26,6 +26,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
+'''
 
 """
 print('練習組合成一張大圖 picasa效果')
@@ -2095,9 +2096,11 @@ while True:
     cv2.imshow("ImageShow", show)
 
 cv2.destroyAllWindows()
+'''
 
 print("------------------------------------------------------------")  # 60個
-print("OpenCV_41")
+
+print("OpenCV_41 Trackbar之使用")
 
 filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
 
@@ -2106,61 +2109,25 @@ image = cv2.imread(filename)
 
 cv2.imshow("ImageShow", image)
 
+def apply_function(val):
+    print('數值 :', val, end = " ")
 
-def test(val):
-    print(val)
 
-
-cv2.createTrackbar("test", "ImageShow", 0, 255, test)
-cv2.setTrackbarPos("test", "ImageShow", 50)
+# cv2.createTrackbar('滑桿名稱', '視窗名稱', min, max, fn)
+# min 最小值 ( 最小為 0，不可為負值 )
+# max 最大值
+# fn 滑桿數值改變時要執行的函式
+# 加入滑桿 0 ~ 200, 預設 100
+cv2.createTrackbar("test", "ImageShow", 0, 200, apply_function)
+cv2.setTrackbarPos("test", "ImageShow", 100)
 
 keycode = cv2.waitKey(0)
 cv2.destroyAllWindows()
 
+sys.exit()
 print("------------------------------------------------------------")  # 60個
 print("OpenCV_42")
 
-filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
-
-# 檔案 => cv2影像
-image = cv2.imread(filename)
-
-cv2.imshow("ImageShow", image)
-
-contrast = 0  # 初始化要調整對比度的數值
-brightness = 0  # 初始化要調整亮度的數值
-cv2.imshow("ImageShow", image)
-
-
-# 定義調整亮度對比的函式
-def adjust(i, c, b):
-    output = i * (c / 100 + 1) - c + b  # 轉換公式
-    output = np.clip(output, 0, 255)
-    output = np.uint8(output)
-    cv2.imshow("ImageShow", output)
-
-
-# 定義調整亮度函式
-def brightness_fn(val):
-    global image, contrast, brightness
-    brightness = val - 100
-    adjust(image, contrast, brightness)
-
-
-# 定義調整對比度函式
-def contrast_fn(val):
-    global image, contrast, brightness
-    contrast = val - 100
-    adjust(image, contrast, brightness)
-
-
-cv2.createTrackbar("brightness", "ImageShow", 0, 200, brightness_fn)  # 加入亮度調整滑桿
-cv2.setTrackbarPos("brightness", "ImageShow", 100)
-cv2.createTrackbar("contrast", "ImageShow", 0, 200, contrast_fn)  # 加入對比度調整滑桿
-cv2.setTrackbarPos("contrast", "ImageShow", 100)
-
-keycode = cv2.waitKey(0)
-cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 

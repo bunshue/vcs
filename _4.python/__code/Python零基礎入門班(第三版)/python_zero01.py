@@ -1,234 +1,169 @@
-
-
-sum = 0
-
-def show(n):
-    print("第 " + str(n) + " 次執行迴圈")
-    
-for i in range(1,11):
-    show(i)
-    sum += i
-print("1+2+...+10 = " + str(sum))
-
-
-
-
-#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\各章範例\ch02\arith.py
-
-top = float(input("請輸入梯形上底長度："))
-bottom = float(input("請輸入梯形下底長度："))
-height = float(input("請輸入梯形高度："))
-area = (top + bottom) * height / 2
-print("梯形的面積為：" + str(area))
+import sys
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\各章範例\ch02\complex.py
+""" fail
+import time as t
 
-deposit = int(input("請輸入本金存款金額："))
-times = 1.02 ** 6
-deposit *= times
-print("6 年後存款為：" + str(deposit))
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\各章範例\ch02\format.py
-
-print("姓名   座號  國文  數學  英文")
-print("%3s  %2d   %3d   %3d   %3d" % ("林大明", 1, 100, 87, 79))
-print("%3s  %2d   %3d   %3d   %3d" % ("陳阿中", 2, 74, 88, 100))
-print("%3s  %2d   %3d   %3d   %3d" % ("張小英", 11, 82, 65, 8))
+timestart = t.clock()
+for i in range (0,1000):
+    for j in range (0,1000):
+        n = i * j
+timeend = t.clock()
+print("執行一百萬次整數運算的時間：" + str(timeend-timestart) + " 秒")
+"""
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\各章範例\ch02\input.py
+import time as t
 
-chinese = int(input("請輸入國文成績: "))
-math = int(input("請輸入數學成績: "))
-english = int(input("請輸入英文成績: "))
-total = chinese + math + english
-print("你的成績總分為：" + str(total))
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\各章範例\ch03\discount.py
-
-money = int(input("請輸入購物金額："))
-if(money >= 10000):
-    if(money >= 100000):
-        print(money * 0.8, end=" 元\n")  #八折
-    elif(money >= 50000):
-        print(money * 0.85, end=" 元\n")  #八五折
-    elif(money >= 30000):
-        print(money * 0.9, end=" 元\n")  #九折
-    else:
-        print(money * 0.95, end=" 元\n")  #九五折
-else:
-    print(money, end=" 元\n")  #未打折
+week = ["一", "二", "三", "四", "五", "六", "日"]
+dst = ["無日光節約時間", "有日光節約時間"]
+time1 = t.localtime()
+show = "現在時刻：中華民國 " + str(int(time1.tm_year)-1911) +" 年 "
+show += str(time1.tm_mon) + " 月 " + str(time1.tm_mday) + " 日 "
+show += str(time1.tm_hour) + " 點 " + str(time1.tm_min) + " 分 "
+show += str(time1.tm_sec) + " 秒 星期" + week[time1.tm_wday] + "\n"
+show += "今天是今年的第 " + str(time1.tm_yday) + " 天，此地" + dst[time1.tm_isdst]
+print(show)
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\各章範例\ch03\grade.py
+#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\各章範例\ch07\pcounter.py
 
-score = input("請輸入成績：")
-if(int(score) >= 90):
-    print("優等")
-elif(int(score) >= 80):
-    print("甲等")
-elif(int(score) >= 70):
-    print("乙等")
-elif(int(score) >= 60):
-    print("丙等")
-else:
-    print("丁等")
+import time as t
+
+timestart = t.perf_counter() 
+for i in range (0,1000):
+    for j in range (0,1000):
+        n = i * j
+timeend = t.perf_counter() 
+print("執行一百萬次整數運算的時間：" + str(timeend-timestart) + " 秒")
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\各章範例\ch03\password1.py
+import time as t
 
-pw = input("請輸入密碼：")
-if(pw=="1234"):
-    print("歡迎光臨！")
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\各章範例\ch03\password2.py
-
-pw = input("請輸入密碼：")
-if(pw=="1234"):
-    print("歡迎光臨！")
-else:
-    print("密碼錯誤！")
+timestart = t.clock()
+for i in range (0,1000):
+    for j in range (0,1000):
+        n = float(i) * float(j)
+timeend = t.clock()
+print("執行一百萬次浮點數運算的時間：" + str(timeend-timestart) + " 秒")
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\各章範例\ch04\except5.py
 
-n = int(input("請輸入正整數："))
-for i in range(1, n+1):
-    if i % 5 ==0:
-        continue
-    print(i,end=" ")
+#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\各章範例\ch07\randint.py
 
-print("------------------------------------------------------------")  # 60個
+import random as r
 
-#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\各章範例\ch04\fornest.py
-
-for i in range(1,6): #外部迴圈，共執行5次
-    print("外部第",i,"次迴圈,內部執行",i,"次迴圈： ",end="")
-    for j in range(1,i+1): #內部迴圈
-        print("#", end="")
-    print()  # 換行
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\各章範例\ch04\multiple.py
-
-a = int(input("請輸入 a 的值："))
-b = int(input("請輸入 b 的值："))
-maxno = a * b
-for i in range(1, maxno + 1):
-    if(i % a == 0 and i % b == 0):
+while True:
+    inkey = input("按任意鍵再按[ENTER]鍵擲骰子，直接按[ENTER]鍵結束:")
+    if len(inkey) > 0:
+        num = r.randint(1,6)
+        print("你擲的骰子點數為：" + str(num))
+    else:  
+        print("遊戲結束！")
         break
-print("%d 和 %d 的最小公倍數=%d"  % (a, b, i))  
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\各章範例\ch04\ninenine.py
+#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\各章範例\ch07\replace.py
 
-for i in range(1,10):
-    for j in range(1,10):
-        product = i * j
-        print("%d*%d=%2d   " % (i, j, product), end="")
-    print()
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\各章範例\ch04\numshow.py
-
-n = int(input("請輸入正整數："))
-for i in range(1, n+1):
-    print(i,end=" ")
+date1 = "2017-8-23"
+date1 = "西元 " + date1
+date1 = date1.replace("-", " 年 ", 1)
+date1 = date1.replace("-", " 月 ", 1)
+date1 += " 日"
+print(date1)
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\各章範例\ch04\numtotal.py
+
+import time as t
+
+time1 = t.localtime()
+show = "今天是今年的第 " + str(time1.tm_yday) + " 天，屬於"
+if time1.tm_yday < 184 : show += "上半年。"
+else :  show += "下半年。"
+print(show)
+
+print("------------------------------------------------------------")  # 60個
+
+#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\延伸練習\ch07\pcounter_cl.py
+
+import time as t
+
+timestart = t.perf_counter() ()
+for i in range (0,1000):
+    for j in range (0,1000):
+        n = float(i) * float(j)
+timeend = t.perf_counter() ()
+print("執行一百萬次浮點數運算的時間：" + str(timeend-timestart) + " 秒")
+
+print("------------------------------------------------------------")  # 60個
+
+#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\延伸練習\ch07\randint_cl.py
+
+import random as r
 
 sum = 0
-n = int(input("請輸入正整數："))
-for i in range(1, n+1):
-    sum += i
-print("1 到 %d 的整數和為 %d" % (n, sum))
+print("你三次擲骰子的點數為", end=" ")
+for i in range(0,3):
+     num = r.randint(1,6)
+     sum += num
+     print(str(num), end=" ")
+print("，總點數為：" + str(sum))     
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\各章範例\ch04\range.py
+#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\延伸練習\ch07\replace_cl.py
 
-list1=range(10)
-list2=range(1,10)
-list3=range(1,10,2)
-list4=range(10,1,-2)
-print(list(list1))  # [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-print(list(list2))  # [1, 2, 3, 4, 5, 6, 7, 8, 9]
-print(list(list3))  # [1, 3, 5, 7, 9]
-print(list(list4))  # [10, 8, 6, 4, 2]
+time1 = "10:23:41"
+time1 = time1.replace(":", " 點 ", 1)
+time1 = time1.replace(":", " 分 ", 1)
+time1 += " 秒"
+print(time1)
 
-print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\各章範例\ch04\while.py
+#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\各章範例\ch07\sample.py
 
-total = i = 1
-n = int(input("請輸入正整數 n 的值："))
-while(i<=n):
-    total *= i  
-    i+=1      
-print("%d!=%d" % (n, total))
+import random as r
 
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\各章範例\ch05\append1.py
-
-scores = []
-total = inscore = 0
-while(inscore != -1):
-    inscore = int(input("請輸入學生的成績："))
-    if (inscore!=-1):  # 將成績加入 scores 串列中
-        scores.append(inscore)
-print("共有 %d 位學生" % (len(scores)))
-for score in scores:  # 將成績累加
-    total += score
-average = total / (len(scores))  #求平均值
-print("本班總成績：%d 分，平均成績：%5.2f 分" % (total, average))
+list1 = r.sample(range(1,50), 7)
+special = list1.pop()
+list1.sort()
+print("本期大樂透中獎號碼為：", end="")
+for i in range(0,6):
+    if i == 5:    print(str(list1[i]))
+    else:    print(str(list1[i]), end=", ")
+print("本期大樂透特別號為：" + str(special))
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\各章範例\ch05\list1.py
+#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\綜合演練\ch07\ch07_ex3.py
 
-scores = [85, 79, 93]
-print("國文成績：%d 分" % scores[0])
-print("數學成績：%d 分" % scores[1])
-print("英文成績：%d 分" % scores[2])
+import time as t
 
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\各章範例\ch05\list2.py
-
-items = [12, "Apple", True]
-for item in items:
-    print(item)
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\各章範例\ch05\list3.py
-
-subjects=["國文","數學","英文"]
-scores = [85, 79, 93]
-for i in range(len(scores)): # 即 for i in range(3):
-    print("%s成績：%d 分" % (subjects[i],scores[i]))
+time1 = t.localtime()
+show = "現在時刻："
+if time1.tm_hour < 12: 
+    show += "上午 "
+    hour = time1.tm_hour
+else:
+    show += "下午 "
+    hour = time1.tm_hour - 12
+show += str(hour) + " 點 " + str(time1.tm_min) + " 分 "
+show += str(time1.tm_sec) + " 秒"
+print(show)
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\各章範例\ch05\remove1.py
+
+
+sys.exit()
+
 
 fruits = ["香蕉","蘋果","橘子","鳳梨","西瓜"]
 while True:
@@ -288,7 +223,7 @@ print("成績由大到小排序：",scores2)
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\各章範例\ch05\test.py
+#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\各章範例\ch05\tespy
 
 list1 = [1,2,3,4,5,6]
 del list1[1]
@@ -296,7 +231,7 @@ print(list1) #[1,3,4,5,6]
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\各章範例\ch06\dictget.py
+#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\各章範例\ch06\dictgepy
 
 dict1 = {"A":"內向穩重", "B":"外向樂觀", "O":"堅強自信", "AB":"聰明自然"}
 name = input("輸入要查詢的血型:")
@@ -342,17 +277,6 @@ print("------------------------------------------------------------")  # 60個
 
 #檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\各章範例\ch07\clock.py
 
-import time as t
-
-timestart = t.clock()
-for i in range (0,1000):
-    for j in range (0,1000):
-        n = i * j
-timeend = t.clock()
-print("執行一百萬次整數運算的時間：" + str(timeend-timestart) + " 秒")
-
-print("------------------------------------------------------------")  # 60個
-
 #檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\各章範例\ch07\ctof.py
 
 def ctof(c):  #攝氏轉華氏
@@ -374,7 +298,7 @@ print("蘋果剩餘 " + str(ret[1]) + " 個")
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\各章範例\ch07\just.py
+#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\各章範例\ch07\juspy
 
 listname = ["林大明", "陳阿中", "張小英"]
 listchinese = [100, 74, 82]
@@ -387,74 +311,6 @@ for i in range(0,3):
 print("------------------------------------------------------------")  # 60個
 
 #檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\各章範例\ch07\localtime.py
-
-import time as t
-
-week = ["一", "二", "三", "四", "五", "六", "日"]
-dst = ["無日光節約時間", "有日光節約時間"]
-time1 = t.localtime()
-show = "現在時刻：中華民國 " + str(int(time1.tm_year)-1911) +" 年 "
-show += str(time1.tm_mon) + " 月 " + str(time1.tm_mday) + " 日 "
-show += str(time1.tm_hour) + " 點 " + str(time1.tm_min) + " 分 "
-show += str(time1.tm_sec) + " 秒 星期" + week[time1.tm_wday] + "\n"
-show += "今天是今年的第 " + str(time1.tm_yday) + " 天，此地" + dst[time1.tm_isdst]
-print(show)
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\各章範例\ch07\pcounter.py
-
-import time as t
-
-timestart = t.perf_counter() 
-for i in range (0,1000):
-    for j in range (0,1000):
-        n = i * j
-timeend = t.perf_counter() 
-print("執行一百萬次整數運算的時間：" + str(timeend-timestart) + " 秒")
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\各章範例\ch07\randint.py
-
-import random as r
-
-while True:
-    inkey = input("按任意鍵再按[ENTER]鍵擲骰子，直接按[ENTER]鍵結束:")
-    if len(inkey) > 0:
-        num = r.randint(1,6)
-        print("你擲的骰子點數為：" + str(num))
-    else:  
-        print("遊戲結束！")
-        break
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\各章範例\ch07\replace.py
-
-date1 = "2017-8-23"
-date1 = "西元 " + date1
-date1 = date1.replace("-", " 年 ", 1)
-date1 = date1.replace("-", " 月 ", 1)
-date1 += " 日"
-print(date1)
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\各章範例\ch07\sample.py
-
-import random as r
-
-list1 = r.sample(range(1,50), 7)
-special = list1.pop()
-list1.sort()
-print("本期大樂透中獎號碼為：", end="")
-for i in range(0,6):
-    if i == 5:    print(str(list1[i]))
-    else:    print(str(list1[i]), end=", ")
-print("本期大樂透特別號為：" + str(special))
-
-print("------------------------------------------------------------")  # 60個
 
 #檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\各章範例\ch07\sorted.py
 
@@ -706,214 +562,6 @@ f.close()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\各章範例\ch09\osmkdir.py
-
-import os
-dir = "myDir"
-if not os.path.exists(dir):
-    os.mkdir(dir)
-else:
-    print(dir + "已經建立!")
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\各章範例\ch09\osremove.py
-
-import os
-file = "myFile.txt"
-if os.path.exists(file):
-    os.remove(file)
-else:
-    print(file + "檔案未建立!")
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\各章範例\ch09\osrmdir.py
-
-import os
-dir = "myDir"
-if os.path.exists(dir):
-    os.rmdir(dir)
-else:
-    print(dir + "目錄未建立!")
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\各章範例\ch09\try1.py
-
-try:
-    print(n)
-except:
-    print("變數 n 不存在!")  
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\各章範例\ch09\try2.py
-
-try:
-    print(n)
-except:
-    print("變數 n 不存在!")
-else:
-    print("變數 n 存在!")    
-finally:
-    print("一定會執行的程式區塊")    
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\各章範例\ch09\tryadd.py
-
-try:
-    a=int(input("請輸入第一個整數："))
-    b=int(input("請輸入第二個整數："))
-    r = a + b
-    print("r=",r)
-except:
-    print("發生輸入非數值的錯誤!") 
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\各章範例\ch09\trymod.py
-
-try:
-    a=int(input("請輸入第一個整數："))
-    b=int(input("請輸入第二個整數："))
-    r = a % b
-    print("r=",r)
-except ValueError:
-    print("發生輸入非數值的錯誤!")   
-except Exception as e:
-    print("發生",e,"的錯誤，包括分母為 0 的錯誤!")
-finally:
-    print("一定會執行的程式區塊")    
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\延伸練習\ch02\arith_cl.py
-
-width = float(input("請輸入長方形的長度："))
-height = float(input("請輸入長方形的寬度："))
-area = width * height
-print("長方形的面積為：" + str(area))
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\延伸練習\ch02\complex_cl.py
-
-money = 50000
-cell = int(input("請輸入手機金額："))
-money -= cell
-print("剩餘款為：" + str(money))
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\延伸練習\ch02\format_cl.py
-
-print("年度  所得稅  營業稅  證交稅")
-print("%4s %6.2f  %6.2f  %6.2f" % ("2017", 98.34, 90.2, 104.79))
-print("%4s %6.2f  %6.2f  %6.2f" % ("2016", 83, 110.5, 82.45))
-print("%4s %6.2f  %6.2f  %6.2f" % ("2015", 98, 79.32, 102))
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\延伸練習\ch02\input_cl.py
-
-salary = int(input("請輸入薪資金額: "))
-prize = int(input("請輸入工作獎金: "))
-extra = int(input("請輸入加班費: "))
-total = salary + prize + extra
-print("本月實領金額為：" + str(total))
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\延伸練習\ch03\maxnum.py
-
-a = int(input("請輸入 a 的值："))
-b = int(input("請輸入 b 的值："))
-c = int(input("請輸入 c 的值："))
-if(a > b):
-    if(a > c):
-        print("最大值為",a)  
-    else:
-        print("最大值為",c) 
-else:
-    if(b > c):
-        print("最大值為",b)  
-    else:
-        print("最大值為",c) 
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\延伸練習\ch03\movie.py
-
-age = int(input("請輸入年齡："))
-if(age<6):
-    print("可看普遍級!")
-elif(age<12):
-    print("可看普遍級及保護級!")
-elif(age<18):
-    print("可看限制級以外的所有影片!")
-else:
-    print("您已成年，可看各級影片!")
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\延伸練習\ch03\score.py
-
-score = input("請輸入成績：")
-if(int(score)>=60):
-    print("讚，成績及格!")
-else:
-    print("成績不及格，加油喔!")
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\延伸練習\ch04\even.py
-
-i = 2
-n = int(input("請輸入正整數 n 的值："))
-while(i<=n):     
-    print(i,end=" ")
-    i+=2 
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\延伸練習\ch04\floor.py
-
-n = int(input("請輸入大樓的樓層數："))
-print("本大樓具有的樓層為：")
-if(n > 3):
-    n += 1
-for i in range(1, n+1):
-    if(i==4):
-        continue
-    print(i, end=" ")
-print()
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\延伸練習\ch04\odd.py
-
-n = int(input("請輸入正整數："))
-for i in range(1, n+1,2):
-    print(i,end=" ")
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\延伸練習\ch04\triangle_cl.py
-
-n = int(input("請輸入正整數："))
-for i in range(1,n+1):
-    for j in range(1,i+1):
-        print(j, end="")
-    print()
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\延伸練習\ch05\append1_cl.py
-
 moneys = []
 total = money = 0
 for i in range(1,8):
@@ -925,35 +573,6 @@ for money in moneys:  # 將存款累加
 print("存款總額：%d 元" % (total))
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\延伸練習\ch05\list1_cl.py
-
-names=["林小虎","王中森","邵木淼"]
-print(names[-1])
-print(names[-2])
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\延伸練習\ch05\list2_cl.py
-
-names=["林小虎","王中森","邵木淼"]
-i=1
-for item in names:
-    print("編號：%d  姓名：%s" %(i,item))
-    i+=1
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\延伸練習\ch05\list3_cl.py
-
-names=["林小虎","王中森","邵木淼"]
-n=len(names)
-for i in range(n-1,-1,-1): # 即 for i in range(2,-1,-1):
-    print(names[i])
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\延伸練習\ch05\remove1_cl.py
 
 colors = ["紅","橙","黃","綠","藍"]
 while True:
@@ -1030,17 +649,6 @@ print("------------------------------------------------------------")  # 60個
 
 #檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\延伸練習\ch07\clock_cl.py
 
-import time as t
-
-timestart = t.clock()
-for i in range (0,1000):
-    for j in range (0,1000):
-        n = float(i) * float(j)
-timeend = t.clock()
-print("執行一百萬次浮點數運算的時間：" + str(timeend-timestart) + " 秒")
-
-print("------------------------------------------------------------")  # 60個
-
 #檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\延伸練習\ch07\divmod_cl.py
 
 ret = divmod(10000, 350)
@@ -1073,68 +681,6 @@ for i in range(0,3):
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\延伸練習\ch07\kgtolb.py
-
-def kgtolb(kg): 
-    lb = kg * 2.2
-    return lb
-
-inputc = float(input("請輸入體重公斤數："))
-print("你的體重為：%5.1f 磅" % kgtolb(inputc))
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\延伸練習\ch07\localtime_cl.py
-
-import time as t
-
-time1 = t.localtime()
-show = "今天是今年的第 " + str(time1.tm_yday) + " 天，屬於"
-if time1.tm_yday < 184 : show += "上半年。"
-else :  show += "下半年。"
-print(show)
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\延伸練習\ch07\pcounter_cl.py
-
-import time as t
-
-timestart = t.perf_counter() ()
-for i in range (0,1000):
-    for j in range (0,1000):
-        n = float(i) * float(j)
-timeend = t.perf_counter() ()
-print("執行一百萬次浮點數運算的時間：" + str(timeend-timestart) + " 秒")
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\延伸練習\ch07\randint_cl.py
-
-import random as r
-
-sum = 0
-print("你三次擲骰子的點數為", end=" ")
-for i in range(0,3):
-     num = r.randint(1,6)
-     sum += num
-     print(str(num), end=" ")
-print("，總點數為：" + str(sum))     
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\延伸練習\ch07\replace_cl.py
-
-time1 = "10:23:41"
-time1 = time1.replace(":", " 點 ", 1)
-time1 = time1.replace(":", " 分 ", 1)
-time1 += " 秒"
-print(time1)
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\延伸練習\ch07\sample_cl.py
-
 import random as r
 
 list1 = r.sample(range(0,10), 4)
@@ -1145,8 +691,6 @@ for i in range(0,4):
     else:    print(str(list1[i]), end=", ")
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\延伸練習\ch07\sorted_cl.py
 
 innum = 0
 list1 = []
@@ -1384,53 +928,6 @@ else:
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\綜合演練\ch03\ch03_ex5.py
-
-year = int(input("請輸入一個西元年："))
-if year % 100 == 0:
-    if year % 400 == 0:
-        print("西元 {} 年是閏年".format(year))
-    else:
-        print("西元 {} 年不是閏年".format(year))
-else:
-    if year % 4 == 0:
-        print("西元 {} 年是閏年".format(year))
-    else:
-        print("西元 {} 年不是閏年".format(year))
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\綜合演練\ch04\ch04_01.py
-
-sum=0
-for i in range(1,100,2):
-    sum+=i 
-print("1+3+5+...+99=",sum)
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\綜合演練\ch04\ch04_02.py
-
-for i in range(2,10):
-    for j in range(2,10):
-        product = i * j
-        print("%d*%d=%2d   " % (i, j, product), end="")
-    print()
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\綜合演練\ch04\ch04_03.py
-
-n = int(input("請輸入正整數："))
-for i in range(1,n+1):
-    for j in range(i,n+1):
-        print("*", end="")
-    print()
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\綜合演練\ch04\ch04_04.py
-
 sum=0
 for i in range(0,101):
     if (i%3==0 or i%7==0):
@@ -1598,32 +1095,6 @@ print("平均為：%6.2f" % (sum(list1)/4))
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\綜合演練\ch07\ch07_ex2.py
-
-def fttocm(ft): 
-    cm = ft * 0.3048 * 100
-    return cm
-
-inputc = float(input("請輸入身高 (呎) ："))
-print("你的身高為：%5.1f 公分" % fttocm(inputc))
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\綜合演練\ch07\ch07_ex3.py
-
-import time as t
-
-time1 = t.localtime()
-show = "現在時刻："
-if time1.tm_hour < 12: 
-    show += "上午 "
-    hour = time1.tm_hour
-else:
-    show += "下午 "
-    hour = time1.tm_hour - 12
-show += str(hour) + " 點 " + str(time1.tm_min) + " 分 "
-show += str(time1.tm_sec) + " 秒"
-print(show)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1772,38 +1243,6 @@ while True:
 print(word)       # 顯示輸入文字
 fout.write(word)  # 寫入檔案
 fout.close()
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\綜合演練\ch09\ch09_ex4.py
-
-try:
-    n=int(input("請輸入正整數 n："))
-    for i in range(1,n+1):
-        print(i,end=" ")
-except:
-    print("發生輸入非數值的錯誤!") 
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\綜合演練\ch09\ch09_ex5.py
-
-try:
-    n=int(input("請輸入正整數 n："))
-    for i in range(1,n+1):
-        print(i,end=" ")
-except Exception as e:
-    print("發生錯誤的原因：" , e)     
-    
-''' 修正的程式
-try:
-    n=float(input("請輸入正數 n："))
-    n=int(n)
-    for i in range(1,n+1):
-        print(i,end=" ")
-except Exception as e:
-    print("發生錯誤的原因：" , e) 
-'''
 
 print("------------------------------------------------------------")  # 60個
 

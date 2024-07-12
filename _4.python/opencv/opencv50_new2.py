@@ -24,7 +24,6 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
-'''
 print("共用函數------------------------------------------------------------")  # 60個
 
 from scipy import signal
@@ -119,6 +118,7 @@ def adjust(i, c, b):
 
 # 定義調整亮度函式
 def brightness_fn(val):
+    print('取得 亮度 :', val)
     global image, contrast, brightness
     brightness = val - 100
     adjust(image, contrast, brightness)
@@ -126,15 +126,17 @@ def brightness_fn(val):
 
 # 定義調整對比度函式
 def contrast_fn(val):
+    print('取得 對比度 :', val)
     global image, contrast, brightness
     contrast = val - 100
     adjust(image, contrast, brightness)
 
-
-cv2.createTrackbar("brightness", "ImageProcessing", 0, 200, brightness_fn)  # 加入亮度調整滑桿
+# 加入亮度調整滑桿 0 ~ 200, 預設 100
+cv2.createTrackbar("brightness", "ImageProcessing", 0, 200, brightness_fn)
 cv2.setTrackbarPos("brightness", "ImageProcessing", 100)
 
-cv2.createTrackbar("contrast", "ImageProcessing", 0, 200, contrast_fn)  # 加入對比度調整滑桿
+# 加入對比度調整滑桿 0 ~ 200, 預設 100
+cv2.createTrackbar("contrast", "ImageProcessing", 0, 200, contrast_fn)
 cv2.setTrackbarPos("contrast", "ImageProcessing", 100)
 
 cv2.waitKey(0)
@@ -3122,7 +3124,7 @@ cv2.waitKey(0)
 cv2.destroyAllWindows()
 """
 print("------------------------------------------------------------")  # 60個
-'''
+
 print("幾何形狀的檢測和擬合 convexHull")
 
 # 黑色畫板 400 x 400
@@ -4156,6 +4158,7 @@ def nothing(*arg):
 
 cv2.createTrackbar("l", "l and s", l, MAX_VALUE, nothing)
 cv2.createTrackbar("s", "l and s", s, MAX_VALUE, nothing)
+
 # 調整飽和度和亮度後的效果
 lsImg = np.zeros(image.shape, np.float32)
 # 調整飽和度和亮度

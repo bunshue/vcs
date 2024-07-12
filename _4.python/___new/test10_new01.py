@@ -25,7 +25,7 @@ import math
 import random
 import requests
 import numpy as np
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 def printlocal():
@@ -122,16 +122,6 @@ input_string = input_string.strip()
 print("有strip <<<" + input_string + ">>>")
 
 print("------------------------------------------------------------")  # 60個
-
-a = "Why not to learn "
-b = "Python?"
-
-print(len(a))
-print(a[2])
-print(a[4:7])
-print(a.replace("learn", "teach"))
-print(a.split(" "))
-print(a + b)
 
 string = "測試字串是不是有被包含"
 ss = "要"
@@ -1422,19 +1412,6 @@ print("是否皆為小寫字元", phrase.islower())
 
 print("------------------------------------------------------------")  # 60個
 
-s = "我畢業於宜蘭高中."
-print(s)
-s1 = s.replace("宜蘭高中", "高雄中學")
-print(s1)
-
-print("------------------------------------------------------------")  # 60個
-
-str1 = "happy \nclever \nwisdom"
-print(str1.split())  # 以空格與換行符號(\n)來分割
-print(str1.split(" ", 2))
-
-print("------------------------------------------------------------")  # 60個
-
 wd = "Alex is optimistic and clever."
 print("字串:", wd)
 print("Alex為開頭的字串嗎", wd.startswith("Alex"))
@@ -2501,11 +2478,6 @@ print(str1.split(" ", 2))
 
 print("------------------------------------------------------------")  # 60個
 
-print("字串replace")
-s = "My favorite sport is baseball."
-print(s)
-s1 = s.replace("baseball", "basketball")
-print(s1)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -3532,12 +3504,6 @@ msg = """
 """
 
 print(f"<鳳>出現的次數 : {msg.count('鳳')}")
-
-msg = msg.replace("Linda", "Lxx")
-print(f"新的msg內容 : {msg}")
-
-print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -4599,15 +4565,6 @@ connect = "\\"  # 路徑分隔字元
 print(connect.join(path))
 connect = "*"  # 普通字元
 print(connect.join(path))
-
-print("------------------------------------------------------------")  # 60個
-
-msg = """CIA Mark told CIA Linda that the secret USB had given to CIA Peter"""
-print(f"字串開頭是CIA : {msg.startswith('CIA')}")
-print(f"字串結尾是CIA : {msg.endswith('CIA')}")
-print(f"CIA出現的次數 : {msg.count('CIA')}")
-msg = msg.replace("Linda", "Lxx")
-print(f"新的msg內容 : {msg}")
 
 print("------------------------------------------------------------")  # 60個
 
@@ -6164,25 +6121,6 @@ assert len(ITEMS) == 9
 assert len(PLACES) == 9
 # First letters must be unique:
 assert len(PLACE_FIRST_LETTERS.keys()) == len(PLACES)
-
-print("------------------------------------------------------------")  # 60個
-
-text = "王之渙涼州詞黃河遠上白雲間，一片孤城萬仞山。羌笛何須怨楊柳？春風不度玉門關。"
-word1 = "春風"
-word2 = "白雲"
-
-count1 = text.count(word1)
-print(word1, ":", count1, "個")
-
-count2 = text.count(word2)
-print(word2, ":", count2, "個")
-
-print(text)
-
-print("將", word1, "改成", word2)
-text = text.replace(word1, word2)
-
-print(text)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -8698,10 +8636,6 @@ print("轉成swapcase")
 cc = str2.swapcase()
 print(cc)
 
-print("replace")
-cc = str3.replace("is", "was")
-print(cc)
-
 print("------------------------------------------------------------")  # 60個
 
 text = "This is a book."
@@ -8978,25 +8912,6 @@ del d["pig"]  # 使用Key刪除項目
 print(d.get("pig", "N/A"))  # "pig"不存在: 顯示 "N/A"
 
 print("------------------------------------------------------------")  # 60個
-
-
-
-
-animals = "鼠牛虎兔龍蛇馬羊猴雞狗豬"
-for animal in animals:
-    print(animal, end=" ")
-print()
-
-print("------------------------------------------------------------")  # 60個
-
-animals = "鼠牛虎兔龍蛇馬羊猴雞狗豬"
-print(animals[0])
-print(animals[1])
-print(animals[-1])
-print(animals[-2])
-
-print("------------------------------------------------------------")  # 60個
-
 
 # 字串函數
 animals = "Hello World!"
@@ -9297,20 +9212,6 @@ print(a)
 
 a = (i for i in range(10))
 print(a)
-
-print("------------------------------------------------------------")  # 60個
-
-portfolio = [
-    {'name': 'IBM', 'shares': 100, 'price': 91.1},
-    {'name': 'AAPL', 'shares': 50, 'price': 543.22},
-    {'name': 'FB', 'shares': 200, 'price': 21.09},
-    {'name': 'HPQ', 'shares': 35, 'price': 31.75},
-    {'name': 'YHOO', 'shares': 45, 'price': 16.35},
-    {'name': 'ACME', 'shares': 75, 'price': 115.65}
-]
-print(type(portfolio))
-print(portfolio)
-print()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -9903,49 +9804,6 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("作業完成")
-print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-
-
-print("------------------------------------------------------------")  # 60個
 print("os sys 搬出")
 print("------------------------------------------------------------")  # 60個
 
@@ -9981,16 +9839,8 @@ for income, rate in TAX_RATE.items():
 
 print('------------------------------------------------------------')	#60個
 
-print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-
-
-
 
 print("------------------------------------------------------------")  # 60個
 print("ddf 搬出")
@@ -10188,403 +10038,8 @@ print("------------------------------------------------------------")  # 60個
 print("python 語法 搬出")
 print("------------------------------------------------------------")  # 60個
 
-'''
-
-
-
-
-
-
-
-"""
-std_data = dict()
-with open(filename, encoding='utf-8') as fp:
-    alldata = fp.readlines()
-    for item in alldata:
-        no, name = item.rstrip('\n').split(',')
-        std_data[no] = name
-print(std_data)
-"""
 
 print("------------------------------------------------------------")  # 60個
-
-"""
-def modifySong(songStr):            # 將歌曲的標點符號用空字元取代       
-    for ch in songStr:
-        if ch in ".,?":
-            songStr = songStr.replace(ch,'')
-    return songStr                  # 傳回取代結果
-
-def wordCount(songCount):
-    global mydict
-    songList = songCount.split()    # 將歌曲字串轉成串列
-    mydict = {wd:songList.count(wd) for wd in set(songList)}
-
-filename = "AreYouSleeping.txt"
-with open(filename) as file_Obj:          # 開啟歌曲檔案
-    data = file_Obj.read()          # 讀取歌曲檔案
-
-mydict = {}                         # 空字典未來儲存單字計數結果
-song = modifySong(data.lower())
-
-wordCount(song)                     # 執行歌曲單字計數
-
-dictList = sorted(mydict.items(), key=lambda item:item[1], reverse=True)
-for key, val in dictList:
-    print(key,':',val)
-"""
-
-print("------------------------------------------------------------")  # 60個
-
-
-fobj1 = open("tmp_out24w.txt", mode="w")  # 取代先前資料
-print("Testing mode=w, using utf-8 format", file=fobj1)
-fobj1.close()
-fobj2 = open("tmp_out24a.txt", mode="a")  # 附加資料後面
-print("測試 mode=a 參數, 預設 ANSI 編碼", file=fobj2)
-fobj2.close()
-
-print("------------------------------------------------------------")  # 60個
-
-fobj1 = open("tmp_out25w.txt", mode="w", encoding="utf-8")
-print("Testing mode=w, using utf-8 format", file=fobj1)
-fobj1.close()
-fobj2 = open("tmp_out25a.txt", mode="a", encoding="cp950")
-print("測試 mode=a 參數, 預設 ANSI 編碼", file=fobj2)
-fobj2.close()
-
-print("------------------------------------------------------------")  # 60個
-
-
-def compareString(string):
-    #檢查是否是搜尋的字串
-    if string == searchStr:
-        return True
-    else:
-        return False
-
-def parseString(string):
-    global num
-    # notFoundSignal = True     # 註記沒有找到電話號碼為True
-    for i in range(len(data)):  # 用迴圈逐步抽取字串長度做測試
-        msg = data[i:i+len(string)]
-        if compareString(msg):
-            num += 1
-
-#filename = 'C:/_git/vcs/_4.python/_data/射鵰英雄傳.big5.txt'
-filename = 'C:/_git/vcs/_4.python/_data/python_word_count1.txt'
-#filename = 'data/ex16_2.txt'
-with open(filename) as file_obj:      # 讀取ex21_2.txt
-    data = file_obj.read()
-    #print(data)
-
-searchStr = "包含"
-num = 0
-parseString(searchStr)
-print("所搜尋字串 %s 共出現 %d 次" % (searchStr, num))
-
-print("------------------------------------------------------------")  # 60個
-
-
-def wordsNum(fn):
-    """適用英文文件, 輸入文章的檔案名稱,可以計算此文章的字數"""
-    try:
-        with open(fn) as file_Obj:  # 用預設"r"傳回檔案
-            data = file_Obj.read()  # 讀取檔案到變數data
-    except Exception:
-        print(f"Exception找不到 {fn} 檔案")
-    else:
-        wordList = data.split()  # 將文章轉成串列
-        print(f"{fn} 文章的字數是 {len(wordList)}")  # 文章字數
-
-
-files = ["data1.txt", "data2.txt", "data3.txt"]  # 檔案串列
-for file in files:
-    wordsNum(file)
-
-print("------------------------------------------------------------")  # 60個
-
-
-try:
-    # 嘗試打開一個不存在的檔案
-    with open("non_existent_file.txt", "r") as f:
-        data = f.read()
-except FileNotFoundError:
-    # 如果文件不存在, 捕獲異常
-    print("The file was not found")
-except IOError:
-    # 處理 I/O 錯誤, 例如:讀取錯誤
-    print("An I/O error occurred")
-
-print("------------------------------------------------------------")  # 60個
-
-
-fn = "data15_4.txt"  # 設定欲開啟的檔案
-try:
-    with open(fn) as file_Obj:  # 預設mode=r開啟檔案
-        data = file_Obj.read()  # 讀取檔案到變數data
-except FileNotFoundError:
-    print(f"找不到 {fn} 檔案")
-else:
-    print(data)  # 輸出變數data
-
-
-print("------------------------------------------------------------")  # 60個
-
-fn = "data15_5.txt"  # 設定欲開啟的檔案
-try:
-    with open(fn) as file_Obj:  # 用預設mode=r開啟檔案
-        data = file_Obj.read()  # 讀取檔案到變數data
-except FileNotFoundError:
-    print("找不到 %s 檔案" % fn)
-else:
-    print(data)  # 輸出變數data
-
-print("------------------------------------------------------------")  # 60個
-
-fn = "data15_6.txt"  # 設定欲開啟的檔案
-try:
-    with open(fn) as file_Obj:  # 用預設mode=r開啟檔案
-        data = file_Obj.read()  # 讀取檔案到變數data
-except FileNotFoundError:
-    print(f"找不到 {fn} 檔案")
-else:
-    wordList = data.split()  # 將文章轉成串列
-    print(f"{fn} 文章的字數是 {len(wordList)}")  # 列印文章字數
-
-print("------------------------------------------------------------")  # 60個
-
-
-def wordsNum(fn):
-    """適用英文文件, 輸入文章的檔案名稱,可以計算此文章的字數"""
-    try:
-        with open(fn) as file_Obj:  # 用預設mode=r開啟檔案
-            data = file_Obj.read()  # 讀取檔案到變數data
-    except FileNotFoundError:
-        print(f"找不到 {fn} 檔案")
-    else:
-        wordList = data.split()  # 將文章轉成串列
-        print(f"{fn} 文章的字數是 {len(wordList)}")  # 文章字數
-
-
-file = "data15_6.txt"  # 設定欲開啟的檔案
-wordsNum(file)
-
-print("------------------------------------------------------------")  # 60個
-
-
-def wordsNum(fn):
-    """適用英文文件, 輸入文章的檔案名稱,可以計算此文章的字數"""
-    try:
-        with open(fn) as file_Obj:  # 用預設mode=r開啟檔案
-            data = file_Obj.read()  # 讀取檔案到變數data
-    except FileNotFoundError:
-        print(f"找不到 {fn} 檔案")
-    else:
-        wordList = data.split()  # 將文章轉成串列
-        print(f"{fn} 文章的字數是 {len(wordList)}")  # 文章字數
-
-
-files = ["data1.txt", "data2.txt", "data3.txt"]  # 檔案串列
-for file in files:
-    wordsNum(file)
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-def wordsNum(filename):
-    """適用英文文件, 輸入文章的檔案名稱,可以計算此文章的字數"""
-    try:
-        with open(filename) as file_Obj:  # 用預設"r"傳回檔案物件file_Obj
-            data = file_Obj.read()  # 讀取檔案到變數data
-    except FileNotFoundError:
-        print("找不到 %s 檔案" % filename)
-    else:
-        wordList = data.split()  # 將文章轉成串列
-        print(filename, " 文章的字數是 ", len(wordList))  # 列印文章字數
-
-
-"""
-files = []
-for i in range(5):
-    filename = input("請輸入檔案名稱 : ")
-    files.append(filename)
-    
-for file in files:
-    wordsNum(file)
-"""
-
-print("------------------------------------------------------------")  # 60個
-
-
-def wordsNum(filename):
-    """適用英文文件, 輸入文章的檔案名稱,可以計算此文章的字數"""
-    try:
-        with open(filename) as file_Obj:  # 用預設"r"傳回檔案物件file_Obj
-            data = file_Obj.read()  # 讀取檔案到變數data
-    except FileNotFoundError:
-        print("找不到 %s 檔案" % filename)
-    else:
-        wordList = data.split()  # 將文章轉成串列
-        print(filename, " 文章的字數是 ", len(wordList))  # 列印文章字數
-        return len(wordList)
-
-
-def lenWord(filename):
-    """檢查檔案長度必須是10到35個字元"""
-    wdlen = wordsNum(filename)  # 檔案長度
-    if wdlen < 10:  # 檔案長度不足
-        raise Exception("檔案長度不足")
-    if wdlen > 35:  # 檔案長度太長
-        raise Exception("檔案長度太長")
-    print("檔案長度正確")
-
-
-for file in (
-    "data/d1.txt",
-    "data/d2.txt",
-    "data/d3.txt",
-    "data/d4.txt",
-    "data/d5.txt",
-):  # 測試系列檔案
-    try:
-        lenWord(file)
-    except Exception as err:
-        print("檔案長度檢查異常發生: ", str(err))
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-print("計算字數")
-
-
-def count_words(filename):
-    """Count the approximate number of words in a file."""
-    try:
-        with open(filename, encoding="utf-8") as f:
-            contents = f.read()
-    except FileNotFoundError:
-        pass
-    else:
-        words = contents.split()
-        num_words = len(words)
-        print(f"The file {filename} has about {num_words} words.")
-
-
-filename1 = "C:/_git/vcs/_1.data/______test_files1/__RW/_txt/english_book/alice.txt"
-filename2 = (
-    "C:/_git/vcs/_1.data/______test_files1/__RW/_txt/english_book/siddhartha.txt"
-)
-filename3 = "C:/_git/vcs/_1.data/______test_files1/__RW/_txt/english_book/moby_dick.txt"
-filename4 = (
-    "C:/_git/vcs/_1.data/______test_files1/__RW/_txt/english_book/little_women.txt"
-)
-
-filenames = [filename1, filename2, filename3, filename4]
-
-filename = "C:/_git/vcs/_1.data/______test_files1/poetry2.txt"
-
-for filename in filenames:
-    count_words(filename)
-
-print("------------------------------------------------------------")  # 60個
-
-print("統計一個檔案的字數")
-
-filename = "C:/_git/vcs/_1.data/______test_files1/__RW/_txt/english_book/alice.txt"
-
-try:
-    with open(filename, encoding="utf-8") as f:
-        contents = f.read()
-except FileNotFoundError:
-    print(f"Sorry, the file {filename} does not exist.")
-else:
-    # Count the approximate number of words in the file.
-    words = contents.split()
-    num_words = len(words)
-    print(f"The file {filename} has about {num_words} words.")
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-print("字串的處理")
-
-# 北美獨立宣言
-text = (
-    "Resolved: That these United Colonies are, and of right ought to be, "
-    + "free and independent States, that they are absolved from all allegiance "
-    + "to the British Crown, and that all political connection between them and "
-    + "the State of Great Britain is, and ought to be, totally dissolved."
-)
-
-print(text)
-
-print("依以下符號split字串")
-
-seplist = [":", ",", "."]
-for i in range(len(seplist) - 1):
-    text = text.replace(seplist[i], seplist[-1])
-
-slist = text.split(seplist[-1])
-print(slist)
-
-with open("tmp_resolution.txt", "wt") as outf:
-    for s in slist:
-        outf.write("-------------------------\n")
-        outf.write(s.strip() + "\n")
-
-print("------------------------------------------------------------")  # 60個
-
-
-# 九九乘法表就應該是2..9 而不是 1..9
-set99 = set()
-outf = open("tmp_99.txt", "wt")
-for i in range(2, 9 + 1):
-    for j in range(1, 9 + 1):
-        prod = i * j
-        # 判斷乘積數字是否出現過
-        if prod not in set99:
-            outf.write(str(prod) + " ")
-            # 沒出現過，加入set99
-            set99.add(prod)
-    outf.write("\n")
-outf.close()
-
-print("------------------------------------------------------------")  # 60個
-
-
-file_a = open("tmp_book.txt", "a")
-file_a.write("Python程式設計")
-file_a.writelines(["\n資料結構與演算法", "\n網路行銷與電子商務"])
-file_a.close()
-
-file_r = open("tmp_book.txt", "r")
-print("讀取檔案(read)：", file_r.read())
-file_r.seek(0)
-print("讀取檔案(readline)：", file_r.readline())
-file_r.seek(0)
-print("讀取檔案(readlines)：", file_r.readlines())
-file_r.close()
-
-print('------------------------------------------------------------')	#60個
-
-file = open("tmp_RelatedFunctions.bin", "w+")
-file.write("HIHI!!! I like Program, Do you like this?")
-
-file.flush()
-
-print("寫入之後的游標位置：", file.tell())
-
-file.seek(8, 0)
-file.truncate(22)
-
-print(file.read())
-
-print('------------------------------------------------------------')	#60個
 
 
 
@@ -10646,34 +10101,922 @@ print("------------------------------------------------------------")  # 60個
 
 
 
-"""
-f=open('data/file_u8.txt','r',encoding='UTF-8-sig')
-str=f.readlines()
-print(str)
-f.close()
+print("------------------------------------------------------------")  # 60個
 
-f=open('data/file_u8.txt','r',encoding='UTF-8-sig')
-str1=f.read(7)
-print(str1)
-f.close()
+print("字串replace")
+s = """紅豆生南國，春來發幾枝。"""
+print(s)
+s1 = s.replace("南國", "桃園")
+print(s1)
 
 print("------------------------------------------------------------")  # 60個
 
-#讀出前7拜
-f=open('file.txt','r')
-str1=f.read(7)
-print(str1)
-f.close()
+str1 = "happy \nclever \nwisdom"
+print(str1.split())  # 以空格與換行符號(\n)來分割
+print(str1.split(" ", 2))
+
+print("------------------------------------------------------------")  # 60個
+
+msg = """CIA Mark told CIA Linda that the secret USB had given to CIA Peter"""
+print(f"字串開頭是CIA : {msg.startswith('CIA')}")
+print(f"字串結尾是CIA : {msg.endswith('CIA')}")
+print(f"CIA出現的次數 : {msg.count('CIA')}")
+
+print("------------------------------------------------------------")  # 60個
+
+text = "王之渙涼州詞黃河遠上白雲間，一片孤城萬仞山。羌笛何須怨楊柳？春風不度玉門關。"
+word1 = "春風"
+word2 = "白雲"
+
+count1 = text.count(word1)
+print(word1, ":", count1, "個")
+
+count2 = text.count(word2)
+print(word2, ":", count2, "個")
+
+print(text)
+
+print("將", word1, "改成", word2)
+text = text.replace(word1, word2)
+
+print(text)
+
+print("------------------------------------------------------------")  # 60個
+
+#各種建立資料的寫法
+print("range")
+
+N1 = 3
+N2 = 9
+STEP = 2
+
+a = range(N1)
+print(a)
+for _ in a:
+    print(_, end=" ")
+print()
+
+a = range(N1, N2)
+print(a)
+for _ in a:
+    print(_, end=" ")
+print()
+
+a = range(N1, N2, STEP)
+print(a)
+for _ in a:
+    print(_, end=" ")
+print()
+
+"""
+    range(101)可以產生一個0到100的整數序列。
+    range(1, 100)可以產生一個1到99的整數序列。
+    range(1, 100, 2)可以產生一個1到99的奇數序列，其中的2是步長，即數值序列的增量。
+"""
 
 
-# Filename: ex08_14.py
-while True:
-    try:
-        x = int(input("請輸入一個數字: "))
-        break
-    except ValueError:
-        print("抱歉!!您所輸入並非是有效的數字，請再輸入一次...")
+print("使用np.linspace, 和range一樣")
+
+a = np.arange(N1)
+print(a)
+for _ in a:
+    print(_, end=" ")
+print()
+
+a = np.arange(N1, N2)
+print(a)
+for _ in a:
+    print(_, end=" ")
+print()
+
+a = np.arange(N1, N2, STEP)
+print(a)
+for _ in a:
+    print(_, end=" ")
+print()
+
+
+# 二維
+
+W = 640
+H = 480
+w = 160
+h = 160
+
+for y in range(0, H, h):
+    for x in range(0, W, w):
+        print(x, y, end="    ")
+print()
+
+print("------------------------------------------------------------")  # 60個
+
+print("使用np.linspace")
+
+N1 = 3
+N2 = 9
+N = 2
+
+x = np.linspace(N1, N2, N)  # 從N1到N2, 分成N個, 包含頭尾
+print(x)
+
+x = np.linspace(N1, N2)  # 若沒有給定N值, 則分成 50 個, 包含頭尾
+print(x)
+
+# np.linspace 若只給a b 則代表分成50點
+x = np.linspace(0, 2 * np.pi)
+print(x.shape)
+
+
+import numpy as np
+
+# 含頭尾共N個元素的陣列
+N = 11
+x = np.linspace(0, 10, 11)  # 建立含11個元素的陣列
+
+print("包含頭尾之linespace :", x)
+
+
+print("------------------------------------------------------------")  # 60個
+
+n = list(range(100))
+r = list(range(25))
+n = list(range(10)) * 10
+
+print("------------------------------------------------------------")  # 60個
+
+for _ in range(10):
+    a = random.randint(3, 8)  # 唯一包含頭尾
+    print(a)
+
+print("------------------------------------------------------------")  # 60個
+
+W = 5
+H = 5
+nextCells = {}  # 字典
+for x in range(H):
+    for y in range(W):
+        if random.randint(0, 1) == 0:
+            nextCells[(x, y)] = "Y"
+        else:
+            nextCells[(x, y)] = "N"
+print(type(nextCells))
+print(nextCells)
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("20位 靠右對齊")
+
+string = "abcdefg"
+print(string.rjust(20))
+
+number = 1234567
+print(repr(int(number)).rjust(20))
+
+print("4位 不對齊")
+for _ in range(20):
+    a = random.randint(0, 200)
+    print(repr(int(a)), end=" ")
+print()
+
+print("4位 靠左對齊")
+for _ in range(20):
+    a = random.randint(0, 200)
+    print(repr(int(a)).ljust(4), end="")
+print()
+
+print("------------------------------------------------------------")  # 60個
+
+year = 2023
+month = 3
+day = 11
+total = 123
+print(f"{year}年{month}月{day}日是{year}年的第{total}天")
+
+print("------------------------------------------------------------")  # 60個
+
+import os
+
+#用預設程式開啟檔案
+#os.system('cccc.mp3')
+
+#用預設程式wav檔案
+#os.startfile('harumi99.wav')
+
+#用系統預設程式開啟檔案
+#os.system('cv03.png')
+
+print("------------------------------------------------------------")  # 60個
+
+import random
+import time
+
+N = 10
+lst = list(range(N))
+print(lst)
+random.shuffle(lst)
+print(lst)
+
+lst.sort()
+print(lst)
+
+print("------------------------------------------------------------")  # 60個
+
+import random
+
+animals1 = ['鼠', '牛', '虎']
+animals2 = ['兔', '龍', '蛇']
+animals3 = ['馬', '羊', '猴']
+animals4 = ['雞', '狗', '豬']
+
+print('本次選出人員')
+print(random.choice(animals1) + " " + random.choice(animals2) + " " + random.choice(animals3) + " "+ random.choice(animals4))
+
+print("------------------------------------------------------------")  # 60個
+
+import random
+
+passlen = 3
+s = "ABCDEFG"
+p =  "".join(random.sample(s,passlen ))
+print (p)
+
+print("------------------------------------------------------------")  # 60個
+
+number = 1234.5678
+print("Number :", format(number, ".2f"))
+
+print("------------------------------------------------------------")  # 60個
+
+"""
+import sys, time
+
+PAUSE = 0.02
+
+print('無限迴圈進行中..... 按 Ctrl+C離開 ')
+
+try:
+    while True:
+        print("A", end = " ")
+        time.sleep(PAUSE)  # Pause for PAUSE number of seconds.
+
+    print('XXXXXXXXXXXXXXXXXXXXXXXXXX')
+   
+except KeyboardInterrupt:
+    print('你按了 Ctrl+C 離開')
+    sys.exit()  # When Ctrl-C is pressed, end the program.
 """
 
 print("------------------------------------------------------------")  # 60個
+"""
+import time
+for i in range(5, 0, -1):
+    print("\r", "倒计时{}秒！".format(i), end="", flush=True)
+    time.sleep(1)
+"""
+
+print("------------------------------------------------------------")  # 60個
+"""
+print('目前的全螢幕截圖')
+
+from PIL import ImageGrab
+
+image = ImageGrab.grab()
+filename = 'Image_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.jpg'
+image.save(filename)
+
+image = ImageGrab.grab().convert('L')  
+data = image.load()
+print(type(data))
+#print(data.size)
+if data[260, 300] > 150:
+    #isCollision_day(data)
+    print("aaaaaaa")
+else:
+    #isCollision_night(data)
+    print("bbbbbbb")
+"""
+print("------------------------------------------------------------")  # 60個
+
+
+import datetime
+now = datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S")
+print("現在時間 :", now)
+
+print("------------------------------------------------------------")  # 60個
+
+#字串轉數值,10進位整數
+print(int('13',10))
+#字串轉數值,2進位整數
+print(int('1001',2))
+#字串轉數值,浮點數
+print(float('3.14'))
+
+#ord()是將字元轉成ASCII碼
+#chr()是將ASCII碼轉成字元
+#ord()和chr()互為反函數
+print(chr(ord('A')))
+print(ord(chr(65)))
+
+
+#i的初始值為A字元的ASCII碼(65)，終止值小於Z字元的ASCII碼(90)+1，遞增值為1
+for i in range(ord("A"),ord("Z")+1,1):
+    print(chr(i), end = '')
+  
+#bin()回傳參數的二進位值
+##輸出結果數字前面0b代表二進位(binary)
+print(bin(10))
+#oct()回傳參數的八進位值
+##輸出結果數字前面0o代表八進位(octal)
+print(oct(10))
+#hex()回傳參數的十六進位值
+##輸出結果數字前面0x代表十六進位(hexdecimal)
+print(hex(10))
+
+
+##預設是取到整數位，根據小數第一位(如果是5要看個位數，奇進偶捨)判別
+print("==Test2==")
+print(round(3.5))
+print(round(3.6))
+print(round(4.5))
+print(round(4.6))
+##指定取到小數第一位，根據小數第二位(如果是5要看小數第一位，奇進偶捨)判別
+print("==Test3==")
+print(round(1.35,1))
+print(round(1.36,1))
+print(round(1.45,1))
+print(round(1.46,1))
+
+
+
+#ord()回傳參數字元對應的的編碼位置
+print("==Test1==")
+print(ord("H"))
+print(ord("你"))
+print(ord("好"))
+#chr()回傳參數編碼位置對應的字元
+print("==Test2==")
+print(chr(72))
+print(chr(20320))
+print(chr(22909))
+##輸出'A'之後的10個英文字母
+print("==Test3==")
+for i in range(65,75):
+    print(chr(i),end='')
+print()
+##輸出'你'之後的10個中文字
+for i in range(20320,20330):
+    print(chr(i),end='')
+print()
+#str()回傳參數為字串
+print("==Test4==")
+print(str(123)+"456")
+#ascii()回傳參數的字串表達形式
+##如果字串含有非ASCII字元，所有非ASCII字元會以Unicode跳脫字元的方式呈現
+print(ascii("Ab123"))
+print(ascii("hello你好".encode('utf-8')))
+
+
+print('字串的對齊 justify')
+
+print("01234567890123456789")
+print("==Test1==")
+string1=str(153)
+print(string1)
+#center()指定寬度置中對齊
+print(string1.center(20))
+#ljust()指定寬度靠左對齊
+print(string1.ljust(20))
+#rjust()指定寬度靠右對齊
+print(string1.rjust(20))
+print("==Test2==")
+#center()指定寬度置中對齊，指定補齊填補字元
+print(string1.center(20,"-"))
+#ljust()指定寬度靠左對齊，指定補齊填補字元
+print(string1.ljust(20,"-"))
+#rjust()指定寬度靠右對齊，指定補齊填補字元
+print(string1.rjust(20,"-"))
+print("==Test3==")
+#zfill()指定寬度靠右對齊，以'0'補齊
+print(string1.zfill(20))
+
+print("------------------------------------------------------------")  # 60個
+
+import math
+help(math.sqrt)
+help(math.pow)
+
+print('help 的用法')
+import random
+print(dir(random))
+help(random.randint)
+help(random.choice)
+
+print("------------------------------------------------------------")  # 60個
+
+#chap6-02a
+import pandas as pd
+#建立一個pandas dataframe
+df = pd.DataFrame({
+   "姓名": ["約翰", "瑪莉", "麥可", "大衛"],
+   "年齡": [16, 17, 16, 18],
+   "性別": ["男", "女", "男", "男"],
+  })
+print("==Test1==")
+print(df)
+#取出dataframe其中一欄就是series
+print(df['姓名'])
+print(df['年齡'])
+print("==Test2==")
+#自行建立一個pandas series
+score = pd.Series([78, 67, 90, 81], name="成績")
+print(score)
+#將series加入dataframe導致增加一欄(column)
+print("==Test3==")
+df['成績'] = score
+print(df)
+
+
+
+#chap6-02b
+from pandas import DataFrame as pdDF
+from pandas import Series as pdSer
+#建立一個pandas dataframe
+df = pdDF({
+   "姓名": ["約翰", "瑪莉", "麥可", "大衛"],
+   "年齡": [16, 17, 16, 18],
+   "性別": ["男", "女", "男", "男"],
+  })
+print("==Test1==")
+print(df)
+#取出dataframe其中一欄就是series
+print(df['姓名'])
+print(df['年齡'])
+print("==Test2==")
+#自行建立一個pandas series
+score = pdSer([78, 67, 90, 81], name="成績")
+print(score)
+#將series加入dataframe導致增加一欄(column)
+print("==Test3==")
+df['成績'] = score
+print(df)
+
+
+
+#chap6-02c
+import pandas as pd
+#建立一個pandas dataframe
+df = pd.DataFrame({
+   "姓名": ["約翰", "瑪莉", "麥可", "大衛"],
+   "年齡": [16, 17, 16, 18],
+   "性別": ["男", "女", "男", "男"],
+  })
+print("==Test1==")
+print(df)
+print(df.shape)
+#列出所有欄索引標籤(欄位名稱)
+for col in range(df.shape[1]):
+  print(df.columns.values[col],' ',end='')
+print()
+print("==Test2==")
+#列出各列的列索引標籤、表格內容
+for row in range(df.shape[0]):
+  print(df.index.values[row],' ',end='')
+  for col in range(df.shape[1]):
+    print(df.iloc[row][col],' ',end='')
+  print()
+print("==Test3==")
+#比較loc(彈性較大)和iloc顯示表格內容
+#loc使用行索引標籤(column index label)和列索引標籤(row index label)
+print(df.loc[1]["姓名"])
+#iloc使用行索引(column index)和列索引(row index)
+print(df.iloc[1][0])
+
+
+
+
+
+#chap6-02d
+import pandas as pd
+#建立一個pandas dataframe
+df = pd.DataFrame({
+   "姓名": ["約翰", "瑪莉", "麥可", "大衛"],
+   "年齡": [16, 17, 16, 18],
+   "性別": ["男", "女", "男", "男"],
+  })
+print("==Test1==")
+#將dataframe轉成清單list
+alldata=df.to_dict('split')
+#會有3個list構成: columns, index, data
+print(alldata)
+print(alldata["columns"])  
+print(alldata["index"])
+print(alldata["data"])  
+print("==Test2==")
+#列出所有欄索引標籤(欄位名稱)
+for col in range(len(alldata["columns"])):
+  print(alldata["columns"][col],' ',end='')
+print()
+print("==Test3==")
+#列出各列的列索引標籤、欄位內容
+for row in range(len(alldata["index"])):
+  print(alldata["index"][row],' ',end='')
+  for col in range(len(alldata["columns"])):
+    print(alldata["data"][row][col],' ',end='')
+  print()
+  
+  
+
+#chap6-02e
+from pandas import DataFrame as pdDF
+#建立一個pandas dataframe
+df = pdDF({
+   "姓名": ["約翰", "瑪莉", "麥可", "大衛"],
+   "年齡": [16, 17, 16, 18],
+   "性別": ["男", "女", "男", "男"],
+   "成績": [78, 67, 90, 81]
+  })
+print(df)
+#指定顯示dataframe中是數值型態的欄位的最大max()或最小min()數據
+print("最小年齡:", df['年齡'].min())
+print("最高分:", df['成績'].max())
+#describe()可以顯示dataframe中是數值型態的欄位的統計資料
+df.describe()
+
+
+#chap6-02f
+from pandas import DataFrame as pdDF
+#建立一個pandas dataframe
+df = pdDF({
+   "姓名": ["約翰", "瑪莉", "麥可", "大衛"],
+   "年齡": [16, 17, 16, 18],
+   "性別": ["男", "女", "男", "男"],
+   "成績": [78, 67, 90, 81]
+  })
+print(df)
+newrow={"姓名":"珍妮","年齡":17,"性別":"女","成績":87}
+df=df.append(newrow, ignore_index = True)
+print(df)
+
+
+
+#chap6-02g
+from pandas import DataFrame as pdDF
+#建立一個pandas dataframe
+df = pdDF({
+   "姓名": ["約翰", "瑪莉", "麥可", "大衛"],
+   "年齡": [16, 17, 16, 18],
+   "性別": ["男", "女", "男", "男"],
+   "成績": [78, 67, 90, 81]
+  })
+print("==Test1==")
+print(df)
+#刪除指定的欄
+df.drop(['年齡'],inplace=True,axis=1)
+print(df)
+#刪除指定的列
+indexNames=df[df['成績']<80].index
+df.drop(indexNames,inplace=True)
+print(df.shape)
+print("==Test2==")
+#列出所有欄索引(欄位名稱)
+for col in range(df.shape[1]):
+  print(df.columns.values[col],' ',end='')
+print()
+print("==Test3==")
+#使用iloc列出各列的列索引、欄位內容
+for row in range(df.shape[0]):
+  print(df.index.values[row],' ',end='')
+  for col in range(df.shape[1]):
+    print(df.iloc[row][col],' ',end='')
+  print()
+print("==Test4==")
+#列出所有欄索引(欄位名稱)
+for col in range(df.shape[1]):
+  print(df.columns.values[col],' ',end='')
+print()
+print("==Test5==")
+#使用loc列出各列的列索引、欄位內容
+for row in range(df.shape[0]):
+  print(df.index.values[row],' ',end='')
+  for col in range(df.shape[1]):
+    print(df.loc[df.index.values[row]][df.columns.values[col]],' ',end='')
+  print()  
+  
+  
+#chap6-02h
+import pandas as pd
+#建立一個pandas dataframe
+df = pd.DataFrame({
+   "姓名": ["約翰", "瑪莉", "麥可", "大衛"],
+   "年齡": [16, 17, 16, 18],
+   "性別": ["男", "女", "男", "男"],
+   "成績": [78, 67, 90, 81]
+  })
+print("==Test1==")
+print(df)
+print("==Test2==")
+#建立樞紐分析表
+#aggfunc: mean是求平均, sum是求總和
+table=pd.pivot_table(data=df,index=['性別'],columns=['年齡'],values=['成績'],aggfunc={'成績':'mean'})
+print(table)
+#查看欄索引標籤
+#發現是元組tuple型態
+print(table.columns.values)
+#查看列索引標籤
+print(table.index.values)
+print("==Test3==")
+#建立樞紐分析表
+#aggfunc: mean是求平均, sum是求總和
+table=pd.pivot_table(data=df,index=['性別'],values=['成績'],aggfunc={'成績':'sum'})
+print(table)
+#查看欄索引標籤
+print(table.columns.values)
+#查看列索引標籤
+print(table.index.values)
+
+print("------------------------------------------------------------")  # 60個
+
+import requests
+from bs4 import BeautifulSoup
+
+url ='http://jigsaw.w3.org/HTTP/connection.html'
+response = requests.get(url)
+#指定html.parser作為解析器
+soup = BeautifulSoup(response.text, 'html.parser') 
+#把排版後的html印出來，因為未排版前有很多網頁語法缺乏換行符號，不易閱讀
+#必須借助於Beautiful Shop套件
+print(soup.prettify()) 
+#find_all()回傳的格式是串列list
+#而且contens的內容也是串列list
+a_tags = soup.find_all('title')
+for a_tag in a_tags:
+  for b in a_tag.contents:
+    print(str(b).strip())
+a_tags = soup.find_all('h1')
+for a_tag in a_tags:
+  cc=""
+  for b in a_tag.contents:        
+    b=str(b).replace('<i>','').replace('</i>','').replace('\n','').replace('\r','')
+    cc=cc+b
+  print(cc.strip())
+
+print("------------------------------------------------------------")  # 60個
+
+student_all = [15463, 22825, 14757, 21441]
+student_university = [9093, 12010, 13090, 18176]
+student_graduate = [6370, 10815, 1667, 3265]
+labels = ["中興大學", "成功大學", "東海大學", "逢甲大學"]
+
+print(student_all)
+
+for i in range(4):
+  print(student_university[i] + student_graduate[i])
+
+print("------------------------------------------------------------")  # 60個
+
+#chap5-06a
+import sys
+#查看搜尋模組套件的路徑優先順序
+for path in sys.path:
+  print(path)
+
+print("------------------------------------------------------------")  # 60個
+
+#chap5-06b
+file1=open("handgame.py","w", encoding = 'UTF-8') #打開檔案，建立handgame.py
+file1.write("import random\n") 
+file1.write("handgesture=['剪刀','石頭','布']\n") 
+file1.write("def hand():\n") 
+file1.write("\treturn random.choice(handgesture)") 
+file1.close() #關閉檔案
+#建立games資料夾
+#!mkdir games 
+file1=open("games/dice.py","w", encoding = 'UTF-8') #打開檔案，建立games/dice.py
+file1.write("from random import choice\n") 
+file1.write("def dice():\n") 
+file1.write("\treturn choice(range(1,7))") 
+file1.close() #關閉檔案
+file1=open("games/hand.py","w", encoding = 'UTF-8') #打開檔案，建立games/hand.py
+file1.write("from random import choice\n") 
+file1.write("handgesture=['剪刀','石頭','布']\n") 
+file1.write("def hand():\n") 
+file1.write("\treturn choice(handgesture)") 
+file1.close() #關閉檔案
+file1=open("games/poker.py","w", encoding = 'UTF-8') #打開檔案，建立games/poker.py
+file1.write("from random import choice\n") 
+file1.write("pokerkind=['♠','♥','♦','♣']\n")
+file1.write("pokerpoint=['A','2','3','4','5','6','7','8','9','10','J','Q','K']\n")
+file1.write("def poker():\n") 
+file1.write("\treturn choice(pokerkind)+choice(pokerpoint)") 
+file1.close() #關閉檔案
+file1=open("games/coin.py","w", encoding = 'UTF-8') #打開檔案，建立games/coin.py
+file1.write("from random import choice\n") 
+file1.write("coinkind=['正面','反面']\n")
+file1.write("def coin():\n") 
+file1.write("\treturn choice(coinkind)") 
+file1.close() #關閉檔案
+file1=open("handgames.py","w", encoding = 'UTF-8') #打開檔案，建立handgames.py
+file1.write("import handgame as hg\n") 
+file1.write("def handgame():\n") 
+file1.write("\tcomputer=hg.hand()\n") 
+file1.write("\thgs=''\n") 
+file1.write("\tfor i in range(0,len(hg.handgesture)):\n") 
+file1.write("\t\thgs=hgs+str(i)+hg.handgesture[i]\n") 
+file1.write("\tyourchoice=int(input('請輸入你的選擇'+hgs+': '))\n") 
+file1.write("\tyou=hg.handgesture[yourchoice]\n") 
+file1.write("\tprint('You:',you,'Computer:',computer)\n") 
+file1.write("\tif (computer=='剪刀' and you=='布') or (computer=='布' and you=='石頭') or (computer=='石頭' and you=='剪刀'): \n") 
+file1.write("\t\tprint('電腦獲勝')\n") 
+file1.write("\telif computer==you:\n") 
+file1.write("\t\tprint('平手')\n") 
+file1.write("\telse:\n") 
+file1.write("\t\tprint('你獲勝')\n") 
+file1.write("if __name__=='__main__':\n") 
+file1.write("\tfor i in range(3):\n") 
+file1.write("\t\thandgame()\n") 
+file1.write("else:\n") 
+file1.write("\tprint('被import使用中')") 
+file1.close() #關閉檔案
+
+print("------------------------------------------------------------")  # 60個
+
+import subprocess
+import os
+from os import path
+import re
+
+"""
+for folder, subfolders, filenames in os.walk("."):
+    for filename in filenames:
+        fullpath = path.join(folder, filename)
+        if fullpath.lower().endswith(".ipynb"):
+            print(fullpath)
+            #subprocess.call(["ipython", "trust", fullpath, "--profile", "scipybook2"])
+"""
+print("------------------------------------------------------------")  # 60個
+
+#from IPython.nbformat import read
+
+links = []
+for folder, _, filenames in os.walk("."):
+    for filename in filenames:
+        if re.match(r"\w+-[0-9a-zA-Z]\d\d-.+?\.ipynb$", filename):
+            fullpath = path.join(folder, filename)
+            print(fullpath)
+            """
+            book = read(fullpath, 4)
+            for cell in book.cells:
+                if cell.cell_type == "markdown" and cell.source.startswith("#"):
+                    title = cell.source.strip("# ")
+                    name = path.splitext(filename)[0]
+                    folder = path.basename(folder)
+                    link = u"[{title} - {name}]({folder}/{name}.ipynb)".format(
+                        title=title, name=name, folder=folder)
+                    links.append(link)
+                    break
+            """
+
+from IPython.display import display_markdown, Markdown
+display_markdown(Markdown(u"\n\n".join(links)))
+
+
+from fractions import Fraction
+
+print(Fraction(3, 4) ** 4 / 3)
+
+
+import os
+
+print("HOME環境變數:", os.environ["HOME"])
+
+
+
+import os
+from os import path
+import json
+
+kernel_folder = "tttttttt"
+
+python3_path = "C:\\WinPython-64bit-3.4.3.3\\scripts\\python.bat"
+
+if not path.exists(kernel_folder):
+    os.mkdir(kernel_folder)
+    
+kernel_fn = path.join(kernel_folder, "kernel.json")
+
+kernel_settings = {
+ "argv": [python3_path, 
+          "-m", "IPython.kernel", "-f", "{connection_file}"],
+ "display_name": "Python3-64bit",
+ "language": "python"
+}
+
+with open(kernel_fn, "w") as f:
+    json.dump(kernel_settings, f, indent=4)
+
+print("------------------------------------------------------------")  # 60個
+
+import numpy as np
+n = 100000
+cc = np.sum(4.0 / np.r_[1:n:4, -3:-n:-4])
+print(cc)
+
+print("------------------------------------------------------------")  # 60個
+
+print('積分')
+from sympy import symbols, integrate, sqrt
+x = symbols("x")
+cc = integrate(sqrt(1-x**2), (x, -1, 1)) * 2
+print(cc)
+
+print("------------------------------------------------------------")  # 60個
+
+
+"""
+from google.colab import drive
+drive.mount('/content/drive', force_remount=True)
+
+!mkdir -p /drive
+#umount /drive
+!mount --bind /content/drive/My\ Drive /drive
+!mkdir -p /drive/ngrok-ssh
+!mkdir -p ~/.ssh
+
+----
+
+!mkdir -p /drive/ngrok-ssh
+%cd /drive/ngrok-ssh
+!wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip -O ngrok-stable-linux-amd64.zip
+!unzip -u ngrok-stable-linux-amd64.zip
+!cp /drive/ngrok-ssh/ngrok /ngrok
+!chmod +x /ngrok
+"""
+print("------------------------------------------------------------")  # 60個
+
+print('網址編碼解碼')
+
+from urllib.request import quote, unquote
+
+print('網址編碼 utf-8')
+
+url = "https://www.baidu.com/s?wd=中国"
+
+# utf8编码，指定安全字符
+ret1 = quote(url, safe=";/?:@&=+$,", encoding="utf-8")
+print(ret1)
+
+print('網址編碼 gbk')
+# https://www.baidu.com/s?wd=%E4%B8%AD%E5%9B%BD
+ret2 = quote(url, encoding="gbk")
+print(ret2)
+# https%3A//www.baidu.com/s%3Fwd%3D%D6%D0%B9%FA
+
+print('網址解碼 utf-8')
+url = "https://www.baidu.com/s?wd=%E4%B8%AD%E5%9B%BD"
+ret3 = unquote(url, encoding='utf-8')
+print(ret3)
+# https://www.baidu.com/s?wd=中国
+
+print('網址編碼 預設')
+cc = quote('中文測試')
+#'%E4%B8%AD%E6%96%87%E6%B8%AC%E8%A9%A6'
+print(cc)
+
+print('網址編碼 utf-8')
+cc = quote(u'中文測試'.encode('utf-8'))
+#'%E4%B8%AD%E6%96%87%E6%B8%AC%E8%A9%A6'
+print(cc)
+
+print('網址編碼 big5')
+cc = quote(u'中文測試'.encode('big5'))
+#'%E4%B8%AD%E6%96%87%E6%B8%AC%E8%A9%A6'
+print(cc)
+
+print('網址編碼 gbk')
+cc = quote(u'中文測試'.encode('gbk'))
+#'%E4%B8%AD%E6%96%87%E6%B8%AC%E8%A9%A6'
+print(cc)
+
+print('網址解碼 utf-8')
+url = "https://upload.wikimedia.org/wikipedia/commons/8/8b/%E8%A5%BF%E8%9E%BA%E5%A4%A7%E6%A9%8B_%28cropped%29.jpg"
+ret3 = unquote(url, encoding='utf-8')
+print(ret3)
+# https://www.baidu.com/s?wd=中国
+
+print('網址再解碼 utf-8')
+url = "https://upload.wikimedia.org/wikipedia/commons/8/8b/西螺大橋_(cropped).jpg"
+ret3 = unquote(url, encoding='utf-8')
+print(ret3)
+# https://www.baidu.com/s?wd=中国
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
 

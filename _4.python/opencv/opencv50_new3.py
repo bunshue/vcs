@@ -184,18 +184,13 @@ def callback_trackbar_test(_value):
 
 callback_trackbar_test(initial_value)  # 做一次
 
-# cv2.createTrackbar('滑桿名稱', '視窗名稱', min, max, fn)
-# min 最小值 ( 最小為 0，不可為負值 )
-# max 最大值
-# fn 滑桿數值改變時要執行的函式
 cv2.createTrackbar(
     "value", "TrackbarTest", MIN_VALUE, MAX_VALUE, callback_trackbar_test
 )  # callback function
-cv2.setTrackbarPos("value", "TrackbarTest", initial_value)
+cv2.setTrackbarPos("value", "TrackbarTest", initial_value)  # 預設
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()
-
 
 #-------------------------------------
 
@@ -208,7 +203,7 @@ def get_trackbar_value(val):
     print(val, end = " ")
 
 cv2.createTrackbar('Trackbar', 'opencv', 0, 255, get_trackbar_value)
-cv2.setTrackbarPos('Trackbar', 'opencv', 50)#預設值
+cv2.setTrackbarPos('Trackbar', 'opencv', 50)  # 預設
 
 keycode = cv2.waitKey(0)
 cv2.destroyAllWindows()

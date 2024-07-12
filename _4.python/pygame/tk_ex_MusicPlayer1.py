@@ -3,8 +3,9 @@ Python 聲音處理 pygame
 
 mp3 播放器
 
-用pygame播放mp3檔案
-用pygame播放wav檔案
+用 pygame 播放 mp3 檔案
+用 pygame 播放 wav 檔案
+用 pygame 播放 midi 檔案
 
 """
 
@@ -28,8 +29,9 @@ flag_new_mp3_file = False
 mp3_foldernames = []
 mp3_filenames = []
 mp3_play_index = 0
+volume_setup = 100
 total_mp3_files = 0
-current_playing_mp3_filename = ""#現正播放檔案
+current_playing_mp3_filename = ""  # 現正播放檔案
 
 STATUS_STOP = 0
 STATUS_PLAY = 1
@@ -99,7 +101,7 @@ def playNewmp3b(song):
     pygame.mixer.music.load(current_playing_mp3_filename)
     pygame.mixer.music.play() # 無參數, 單次播放
     mp3_index.set(str(mp3_play_index+1)+"/"+str(total_mp3_files))
-    main_message1.set("{}".format(current_playing_mp3_filename))
+    main_message1.set("{}".format(os.path.basename(current_playing_mp3_filename)))
 
 
 def stopmp3():  # 停止播放
@@ -109,12 +111,15 @@ def stopmp3():  # 停止播放
 def exitmp3():  # 結束
     global mp3_play_index
     global mp3_foldernames
+    global volume_setup
 
     filename = "tk_ex_MusicPlayer1.txt"
     print("檔名 :", filename)
     
     with open(filename, "w", encoding="utf-8") as f:
         f.write(str(mp3_play_index))
+        f.write("\n")
+        f.write(str(volume_setup))
         f.write("\n")
 
         for _ in mp3_foldernames:
@@ -159,7 +164,7 @@ def button00Click():
         if current_playing_mp3_filename != file.name:
             flag_new_mp3_file = True
             current_playing_mp3_filename = file.name
-            message = "檔案 : " + current_playing_mp3_filename
+            message = "檔案 : " + os.path.basename(current_playing_mp3_filename)
             print(message)
             text1.insert("end", message)
             main_message1.set(message)
@@ -170,7 +175,7 @@ def button00Click():
 def button01Click():
     #print("你按了 播放")
     playmp3()
-    main_message1.set("{}".format(current_playing_mp3_filename))
+    main_message1.set("{}".format(os.path.basename(current_playing_mp3_filename)))
     global flag_play_status
     flag_play_status = STATUS_PLAY
     show_play_status()
@@ -218,7 +223,7 @@ def button12Click():
     current_playing_mp3_filename = mp3_filenames[mp3_play_index]
     playNewmp3b(current_playing_mp3_filename)
     mp3_index.set(str(mp3_play_index+1)+"/"+str(total_mp3_files))
-    main_message1.set("{}".format(current_playing_mp3_filename))
+    main_message1.set("{}".format(os.path.basename(current_playing_mp3_filename)))
 
 
 def button13Click():
@@ -230,7 +235,7 @@ def button13Click():
     current_playing_mp3_filename = mp3_filenames[mp3_play_index]
     playNewmp3b(current_playing_mp3_filename)
     mp3_index.set(str(mp3_play_index+1)+"/"+str(total_mp3_files))
-    main_message1.set("{}".format(current_playing_mp3_filename))
+    main_message1.set("{}".format(os.path.basename(current_playing_mp3_filename)))
     
 
 def button14Click():
@@ -377,12 +382,18 @@ w = 12
 h = 3
 
 def setVolume(val):
-    volume = float(scale1.get())
+    global volume_setup
+    volume = int(scale1.get())
     pygame.mixer.music.set_volume(volume / 100)
+    volume_setup = volume
 
-scale1 = tk.Scale(window, from_=100, to=0, command=setVolume, length=200)
+scale1 = tk.Scale(window, from_=100, to=0, length=200, command=setVolume)
 scale1.place(x=x_st-70 + dx * 0, y=y_st + dy * 0+30)
 scale1.set(100)
+
+scale2 = tk.Scale(window, orient=tk.HORIZONTAL, from_=0, to=100, length=700, command="")
+scale2.place(x=x_st + dx * 0, y=y_st + dy * 2 + 55)
+scale2.set(100)
 
 button00_text = tk.StringVar()
 button00 = tk.Button(
@@ -468,6 +479,7 @@ def get_mp3_filenames():
     global total_mp3_files
     global mp3_play_index
     global mp3_foldernames
+    global volume_setup
     """
     mp3_foldername = "D:/vcs/astro/_DATA2/_mp3/japanese/昭和の歌--演歌系列1/"
     mp3_filenames = glob.glob(mp3_foldername + "*.mp3")
@@ -489,6 +501,10 @@ def get_mp3_filenames():
             if cnt == 0:
                 mp3_play_index = int(line.strip())
                 print('取得 mp3_play_index =', mp3_play_index)
+            elif cnt == 1:
+                volume_setup = int(line.strip())
+                scale1.set(volume_setup)
+                print('取得 音量 =', volume_setup)
             else:
                 if os.path.isdir(line.strip()):
                     mp3_foldernames.append(line.strip())
@@ -511,11 +527,11 @@ mp3_play_index = 0
 get_mp3_filenames()
 #print(mp3_filenames)
 
-current_playing_mp3_filename = mp3_filenames[mp3_play_index]#現正播放檔案
+current_playing_mp3_filename = mp3_filenames[mp3_play_index]  # 現正播放檔案
 
 mp3_index.set(str(mp3_play_index+1)+"/"+str(total_mp3_files))
 
-main_message1.set(current_playing_mp3_filename)
+main_message1.set("{}".format(os.path.basename(current_playing_mp3_filename)))
 
 pygame.mixer.init()  # 初始化 mixer
 

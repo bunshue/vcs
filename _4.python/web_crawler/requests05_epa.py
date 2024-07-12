@@ -97,10 +97,8 @@ print(url)
 url = 'https://data.epa.gov.tw/api/v2/%s?format=%s&year_month=%s&offset=%s&limit=%s&api_key=%s&filters=%s' % (DataID, format, year_month, offset, limit, api_key, filters3)
 print(url)
 
-"""
 r = requests.get(url)
 print(r.text)
-"""
 
 print('------------------------------------------------------------')	#60個
 

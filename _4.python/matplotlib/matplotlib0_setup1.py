@@ -192,11 +192,7 @@ plt.grid(axis="y")  # 加上y格線
 """
 plt.grid(color="0.8")  # 顯示格線
 
-
 plt.show()
-
-
-print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
@@ -286,10 +282,6 @@ plt.grid(color="r", linestyle=":", linewidth="1", alpha=0.5)  # 畫格點
 
 plt.show()
 
-
-print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
 
 '''
@@ -324,7 +316,6 @@ plt.grid()
 plt.show()
 
 '''
-
 print("------------------------------------------------------------")  # 60個
 
 from math import log2, factorial
@@ -388,7 +379,7 @@ print("------------------------------------------------------------")  # 60個
 
 --- plt.plot 連線樣式 -------------------------------------------------------------
 
-plt.plot(x, y, color='r', marker='o', linestyle='--')
+plt.plot(x, y, color='r', linestyle='--')
 plt.plot(x, y, color='red', lw='2.0', ls='--', label='label')
 
 plt.plot(x, y, 'go-')
@@ -432,12 +423,6 @@ plt.plot(x, y, '-.')                      # 虛線點樣式
 plt.plot(seq,d1,'-x',seq, d2,'-o',seq,d3,'-^',seq,d4,'-s')   
 plt.plot(seq,d1,'g-',seq, d2,'r:',seq,d3,'y--',seq,d4,'k-.')   
 
-plt.plot(x, y, '-', marker='x')
-plt.plot(x, y, '-', marker='o')
-plt.plot(x, y, '-', marker='^')
-plt.plot(x, y, '-', marker='s') 
-
-
 #plt.plot(seq,data1,'g--',seq,data2,'r-.',seq,data3,'y:',seq,data4,'k.')   
 #plt.plot(seq,data1,'-*',seq,data2,'-o',seq,data3,'-^',seq,data4,'-s')   
 #plt.plot(seq, Benz, '-*', seq, BMW, '-o', seq, Lexus, '-^')   
@@ -451,10 +436,6 @@ plt.plot(seq, Lexus, '-^', label='Lexus')
 plt.plot(x, y, 'go-')
 plt.plot(1,0,'bo')                  # 輸出藍點
 
-
-
-
-plt.plot(x, y, marker='o')
 
 marker 可以設的參數
 marker 	marker 的風格
@@ -488,24 +469,12 @@ markerfacecoloralt (mfcalt) 	marker 替換色
 markersize (ms) 	marker 大小
 markevery 	隔多少畫一個 marker
 
+plt.plot(x, y, c='#6b8fb4', lw=5, mfc='#fffa7c', mec="#084c61", mew=3, ms=20)
 
-plt.plot(x, y, c='#6b8fb4', lw=5, marker='o', mfc='#fffa7c', mec="#084c61", mew=3, ms=20)
-
-
-plt.plot(x, y, lw=3, marker='o', ms=10)
-
-我們現在隔 10 個畫一個 marker 試試。
-plt.plot(x, y, lw=3, marker='o', ms=10, markevery=10)
-
-
-
-
+plt.plot(x, y, lw=3, ms=10)
 
 plt.plot(x, y, lw=3, label='$\sin$')
 plt.plot(x, np.cos(x), lw=3, label='$\cos$')
-
-
-# plt.plot()參數
 
 plt.plot(year, city1, 'r-.s', lw=2, ms=10, label="台北")
 plt.plot(year, city2, 'g--*', lw=2, ms=10, label="台中")
@@ -525,6 +494,36 @@ city2 = [160,50,120,140,110]
 plt.plot(year, city2, 'g--*', lw=2, ms=10, label="高雄")
 
 --- plt.savefig 存圖命令 -------------------------------------------------------------
+
+savefig 必須寫在 show()之前
+
+#存圖
+#image.save("xxxx.jpg")
+#image.save("xxxx.png")
+
+#img1.save("tmp_blue.jpg")
+#print(img1.shape)
+
+#img2.save("tmp_alpha.png")
+#print(img2.shape)
+
+
+# 保存圖片（與網頁顯示無關）
+plt.savefig("導出圖表.jpg", dpi=300)
+
+plt.savefig('tmp_pic.jpg')
+
+#存圖
+#fig2.savefig('./picture.png')
+
+
+欲刪除圖表四周的空白, 加 bbox_inches='tight'
+plt.savefig('myBayes.png', bbox_inches='tight')
+
+filename = "astro" + str(img)
+fig.savefig(filename, bbox_inches='tight')
+
+plt.savefig('out1_14.jpg', bbox_inches='tight')
 
 plt.savefig('filename.png', format='png', dpi=200)
 plt.savefig(fname = 'filename.png', format = "png")
@@ -797,10 +796,6 @@ plt.title('Sin and Cos function',fontdict=font1)
 plt.xlabel('x-value',fontdict=font2)
 plt.ylabel('y-value',fontdict=font2)
 
-plt.show()
-
-
-
 plt.title(r'$H_{2}O$')
 plt.title(r'$\pi r^{2}$')
 plt.title(r'$\binom{7}{9}$',fontsize=20)
@@ -852,14 +847,23 @@ plt.plot(seq, Benz, '-*', seq, BMW, '-o', seq, Lexus, '-^')
 plt.plot(x, y, label="$sin(x)$", color='red', lw=2)
 plt.plot(x, z, label="$cos(x^2)$", color='b')
 
-plt.plot(x, y, c='#6b8fb4', lw=5, marker='o', mfc='#fffa7c', mec="#084c61", mew=3, ms=20)
+plt.plot(x, y, c='#6b8fb4', lw=5, mfc='#fffa7c', mec="#084c61", mew=3, ms=20)
 
 plt.plot(x, np.sin(x), c = '#7fb069', lw = 3)
 plt.scatter(x, np.random.randn(100), c = '#daa73e', s = 50, alpha = 0.5)
 plt.bar(range(10), np.random.randint(1, 30, 10), fc = '#e55934')
 
-plt.plot(x, y, marker='o')
-plt.plot(x, y, c='#6b8fb4', lw=5, marker='o', mfc='#fffa7c', mec="#084c61", mew=3, ms=20)
+plt.plot(x, y, c='#6b8fb4', lw=5, mfc='#fffa7c', mec="#084c61", mew=3, ms=20)
+
+我們現在隔 10 個畫一個 marker 試試。
+plt.plot(x, y, lw=3, marker='o', ms=10, markevery=10)
+
+plt.plot(x, y, '-', marker='x')
+plt.plot(x, y, '-', marker='o')
+plt.plot(x, y, '-', marker='^')
+plt.plot(x, y, '-', marker='s') 
+
+
 
 
 """

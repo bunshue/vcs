@@ -1,4 +1,4 @@
-'''
+"""
 AQI綜合指標（Air Quality Index 空氣品質指標）
 
 空氣品質指標值(AQI)
@@ -11,10 +11,13 @@ AQI綜合指標（Air Quality Index 空氣品質指標）
 
 空氣品質指標(AQI)(歷史資料)
 資料集代碼 	AQX_P_488
-'''
+"""
 
 import os
 import pandas as pd
+
+
+print('------------------------------------------------------------')	#60個
 
 def get_epa_key():
     filename = 'C:/_git/vcs/_1.data/______test_files1/_key/epa_key.txt'

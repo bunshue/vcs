@@ -117,7 +117,6 @@ label7.pack()
 scale7 = ttk.Scale(window, from_=0, to=100, variable=scale7_value_int)
 scale7.pack()
 
-
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
     fill=tk.X, padx=5, pady=5
 )  # 分隔線
@@ -127,47 +126,56 @@ window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-def setup_bg_color(e):
+def setup_bg_color2(e):
     red = r.get()  # 用get()方法讀取刻度值
     green = g.get()
     blue = b.get()
     color = "#{:02x}{:02x}{:02x}".format(red, green, blue)
-    frame1.config(bg=color)
+    frame3.config(bg=color)
 
 
 window = tk.Tk()
-window.geometry("250x200")
+window.geometry("600x800")
 window.title("調色盤")
 window.title("Scale 測試 更改視窗控件背景顏色")
 
-frame1 = tk.Frame(window, width=100, height=180, relief="raised", borderwidth=3, bg="white")
-frame1.pack(side="left", padx=10)
+# LabelFrame 之 大小, 若小於內附控件大小, 則會撐大
+w = 10
+h = 10
+labelframe1 = tk.LabelFrame(window, text="LabelFrame", padx=w, pady=h)
+# LabelFrame 之 位置, 相較於目前表單位置
+x_st = 0
+y_st = 0
+labelframe1.pack(padx=x_st, pady=y_st)
 
-frame2 = tk.Frame(window, width=200, height=200)
+frame3 = tk.Frame(labelframe1, width=100, height=180, relief="raised", borderwidth=3, bg="white")
+frame3.pack(side="left", padx=10)
+
+frame2 = tk.Frame(labelframe1, width=200, height=200, bg="pink")
 frame2.pack(side="left")
 
 r = tk.IntVar()
-scale_r = tk.Scale(frame2, label="紅：", orient=tk.HORIZONTAL, variable=r, from_=0, to=255, command=setup_bg_color)
+scale_r = tk.Scale(frame2, label="紅：", orient=tk.HORIZONTAL, variable=r, from_=0, to=255, command=setup_bg_color2)
 scale_r.pack()
 
 g = tk.IntVar()
-scale_g = tk.Scale(frame2, label="綠：", orient=tk.HORIZONTAL, variable=g, from_=0, to=255, command=setup_bg_color)
+scale_g = tk.Scale(frame2, label="綠：", orient=tk.HORIZONTAL, variable=g, from_=0, to=255, command=setup_bg_color2)
 scale_g.pack()
 
 b = tk.IntVar()
-scale_b = tk.Scale(frame2, label="藍：", orient=tk.HORIZONTAL, variable=b, from_=0, to=255, command=setup_bg_color)
+scale_b = tk.Scale(frame2, label="藍：", orient=tk.HORIZONTAL, variable=b, from_=0, to=255, command=setup_bg_color2)
 scale_b.pack()
 
-r.set(255)  # 預設值
-g.set(255)# 預設值
-b.set(255)# 預設值
+r.set(0)  # 預設
+g.set(255)  # 預設
+b.set(255)  # 預設
 
-window.mainloop()
-
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
-
-def setup_bg_color(source):
+def setup_bg_color1(source):
     # 更改視窗背景顏色
     red = scale_r.get()  # 讀取red值
     green = scale_g.get()  # 讀取green值
@@ -177,11 +185,6 @@ def setup_bg_color(source):
     #window.config(bg=myColor)  # 設定視窗背景顏色
     frame1.config(bg=myColor)  # 設定視窗背景顏色
     canvas1.config(bg=myColor)  # 設定畫布背景顏色
-
-
-window = tk.Tk()
-window.geometry("600x400")
-window.title("Scale 測試 更改視窗控件背景顏色")
 
 frame1 = tk.Frame(window, width=300, height=100)  # 建立框架
 frame1.pack()  # 自動安置在上方中央
@@ -193,9 +196,9 @@ frame2 = tk.Frame(window, width=300, height=100)  # 建立框架
 #frame2 = tk.Frame(window)  # 建立框架
 frame2.pack()  # 自動安置在上方中央
 
-scale_r = tk.Scale(frame2, label="紅", orient=tk.HORIZONTAL, from_=0, to=255, length=150, command=setup_bg_color)
-scale_g = tk.Scale(frame2, label="綠", orient=tk.HORIZONTAL, from_=0, to=255, length=150, command=setup_bg_color)
-scale_b = tk.Scale(frame2, label="藍", orient=tk.HORIZONTAL, from_=0, to=255, length=150, command=setup_bg_color)
+scale_r = tk.Scale(frame2, label="紅", orient=tk.HORIZONTAL, from_=0, to=255, length=150, command=setup_bg_color1)
+scale_g = tk.Scale(frame2, label="綠", orient=tk.HORIZONTAL, from_=0, to=255, length=150, command=setup_bg_color1)
+scale_b = tk.Scale(frame2, label="藍", orient=tk.HORIZONTAL, from_=0, to=255, length=150, command=setup_bg_color1)
 scale_r.pack()
 scale_g.pack()
 scale_b.pack()
