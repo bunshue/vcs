@@ -7,7 +7,7 @@ import tkinter as tk
 
 print("------------------------------------------------------------")  # 60個
 
-print('使用 Toplevel(頂級窗口) 開啟新視窗')
+print("使用 Toplevel(頂級窗口) 開啟新視窗")
 
 mesg = """
 Toplevel(頂級窗口)組件類似于 Frame 組件，
@@ -17,13 +17,15 @@ Toplevel(頂級窗口)組件類似于 Frame 組件，
 Toplevel 組件通常用在顯示額外的窗口、對話框和其他彈出窗口上。
 """
 
+
 def CreateNewWindow1():  # 建立對話方塊
     tl = tk.Toplevel()
     tl.geometry("300x180")
     tl.title("Toplevel")
-    tk.Label(tl, width = 50, height = 5, bg = 'pink', text="Toplevel(頂級窗口)").pack()
-    tk.Label(tl, width = 50, height = 5, bg = 'lime', text=mesg).pack()
-    
+    tk.Label(tl, width=50, height=5, bg="pink", text="Toplevel(頂級窗口)").pack()
+    tk.Label(tl, width=50, height=5, bg="lime", text=mesg).pack()
+
+
 window = tk.Tk()
 window.geometry("600x400")
 
@@ -34,6 +36,7 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
     fill=tk.X, padx=5, pady=5
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
+
 
 def CreateNewWindow2():  # 建立對話方塊
     tl = tk.Toplevel()  # 建立Toplevel視窗
@@ -49,6 +52,7 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
     fill=tk.X, padx=5, pady=5
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
+
 
 # 開啟新視窗
 class MyDialog:  # 定義交談視窗類別
@@ -68,6 +72,7 @@ class MyDialog:  # 定義交談視窗類別
 
     def get(self):  # 傳回在文字框輸入的內容
         return self.input
+
 
 def CreateNewWindow2():  # Create按鈕的事件處理函數
     d = MyDialog(window)  # 產生交談視窗
@@ -94,6 +99,7 @@ print("------------------------------------------------------------")  # 60個
 window = tk.Tk()
 window.geometry("600x800")
 
+
 def popup():
     popupwindow = tk.Toplevel(window)
     popupwindow.title("新視窗")
@@ -103,6 +109,7 @@ def popup():
     alert.pack()
     button1.pack()
     popupwindow.mainloop()
+
 
 button = tk.Button(window, text="開啟新視窗", command=popup)
 button.pack()
@@ -172,8 +179,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
-

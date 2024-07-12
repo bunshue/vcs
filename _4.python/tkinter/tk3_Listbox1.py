@@ -14,11 +14,13 @@ print("------------------------------------------------------------")  # 60個
 
 listbox1 = tk.Listbox(window, width=30, height=5, selectmode=tk.EXTENDED)  # 拖曳可以選擇多選項
 
-#多選
-listbox1 = tk.Listbox(window, width=30, height=5, selectmode=tk.MULTIPLE)  # 建立可以多選項的listbox
-#單選
+# 多選
+listbox1 = tk.Listbox(
+    window, width=30, height=5, selectmode=tk.MULTIPLE
+)  # 建立可以多選項的listbox
+# 單選
 listbox1 = tk.Listbox(window, width=30, height=5)
-#listbox1 = tk.Listbox(window, width=30, height=5, relief="raised")
+# listbox1 = tk.Listbox(window, width=30, height=5, relief="raised")
 listbox1.pack()
 
 listbox1.insert(tk.END, "鼠")
@@ -29,8 +31,8 @@ listbox1.insert(tk.ACTIVE, "兔", "龍", "蛇")  # 前面補充建立3個項目
 
 listbox1.selection_set(2)  # 預設選擇第2個項目
 listbox1.selection_set(0, 3)  # 預設選擇第0-3索引項目
-#listbox1.delete(1)  # 刪除索引1的項目
-#listbox1.delete(1, 3)  # 刪除索引1-3的項目
+# listbox1.delete(1)  # 刪除索引1的項目
+# listbox1.delete(1, 3)  # 刪除索引1-3的項目
 
 print(listbox1.get(1))  # 列印索引1的項目
 print(listbox1.get(1, 3))  # 列印索引1-3的項目
@@ -84,15 +86,15 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
 print("------------------------------------------------------------")  # 60個
 
 
-
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
     fill=tk.X, padx=5, pady=5
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
+
 def itemsSorted():  # 排序
-    print('Checkbutton選取狀態 :', checkbutton_var.get())
-    
+    print("Checkbutton選取狀態 :", checkbutton_var.get())
+
     if checkbutton_var.get() == True:  # 如果設定
         revBool = True  # 大到小排序是True
     else:
@@ -133,6 +135,7 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
     fill=tk.X, padx=5, pady=5
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
+
 
 def get_listbox_data3(event):  # 列出所選單一項目
     obj = event.widget  # 取得事件的物件
@@ -181,6 +184,7 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
     fill=tk.X, padx=5, pady=5
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
+
 
 def get_listbox_data3(event):  # 列出所選單一項目
     obj = event.widget  # 取得事件的物件
@@ -250,6 +254,7 @@ def dragJob(event):  # 處理拖曳選項
         listbox1.delete(newIndex)  # 刪除新位置的內容
         listbox1.insert(newIndex - 1, x)  # 放回原先新位置的內容
         listbox1.index = newIndex  # 選項的新索引
+
 
 listbox1 = tk.Listbox(window, width=30, height=5)
 listbox1.pack()
@@ -399,12 +404,12 @@ window.geometry("600x400")
 window.title("Listbox + Scrollbar use window")
 
 yscrollbar = tk.Scrollbar(window)  # y軸scrollbar物件
-yscrollbar.pack(side=tk.RIGHT, fill=tk.Y)# 靠右安置與父物件高度相同
+yscrollbar.pack(side=tk.RIGHT, fill=tk.Y)  # 靠右安置與父物件高度相同
 
 # 建立Listbox, yscrollcommand指向yscrollbar.set方法
 listbox1 = tk.Listbox(window, yscrollcommand=yscrollbar.set)
 listbox1.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
-#listbox1.pack(side=tk.LEFT, fill=tk.BOTH)
+# listbox1.pack(side=tk.LEFT, fill=tk.BOTH)
 
 for i in range(50):  # 建立50筆項目
     listbox1.insert(tk.END, "第" + str(i) + "列")
@@ -414,6 +419,3 @@ yscrollbar.config(command=listbox1.yview)
 window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
-
-
-

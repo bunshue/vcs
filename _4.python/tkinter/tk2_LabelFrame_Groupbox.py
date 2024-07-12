@@ -75,6 +75,7 @@ from tkinter import ttk
 labelframe3 = tk.LabelFrame(window, text="使用LabelFrame")  # 創建一個容器，其父容器為window
 labelframe3.pack()
 
+
 # button被點擊之后會被執行
 def clickMe():  # 當acction被點擊時,該函數則生效
     action.configure(
@@ -95,7 +96,9 @@ nameEntered.focus()  # 當程序運行時,光標默認會出現在該文本框�
 
 # 創建一個下拉列表
 number = tk.StringVar()
-numberChosen = ttk.Combobox(labelframe3, width=12, textvariable=number, state="readonly")
+numberChosen = ttk.Combobox(
+    labelframe3, width=12, textvariable=number, state="readonly"
+)
 numberChosen["values"] = (1, 2, 4, 42, 100)  # 設置下拉列表的值
 numberChosen.grid(column=1, row=1)  # 設置其在界面中出現的位置,column代表列,row 代表行
 numberChosen.current(0)  # 設置下拉列表默認顯示的值，0為 numberChosen['values'] 的下標值
@@ -104,7 +107,9 @@ numberChosen.current(0)  # 設置下拉列表默認顯示的值，0為 numberCho
 chVarDis = tk.IntVar()  # 用來獲取復選框是否被勾選，其狀態值為int類型,勾選為1,未勾選為0
 
 # text為該復選框后面顯示的名稱, variable將該復選框的狀態賦值給一個變量，當state='disabled'時，該復選框為灰色，不能點的狀態
-check1 = tk.Checkbutton(labelframe3, text="Disabled", variable=chVarDis, state="disabled")
+check1 = tk.Checkbutton(
+    labelframe3, text="Disabled", variable=chVarDis, state="disabled"
+)
 check1.select()  # 該復選框是否勾選,select為勾選, deselect為不勾選
 check1.grid(
     column=0, row=4, sticky=tk.W
@@ -122,6 +127,7 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
     fill=tk.X, padx=5, pady=5
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
+
 
 def fnRed():
     frame1.config(bg="red")
@@ -193,6 +199,7 @@ window = tk.Tk()
 window.geometry("600x800")
 window.title("LabelFrame 2")
 
+
 def fnCal():
     r = userR.get()
     u = unid.get()
@@ -238,4 +245,4 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-print('OK')
+print("OK")

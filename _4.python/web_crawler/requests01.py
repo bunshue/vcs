@@ -50,7 +50,7 @@ def get_html_data_from_url(url):
     return html_data.text
 
 print('------------------------------------------------------------')	#60個
-'''
+
 print('Response 物件資訊')
 url = "https://www.books.com.tw/web/sys_cebbotm/cebook/1003/?loc=P_0001_2_003"  # 博客來網址
 response = requests.get(url)
@@ -386,10 +386,12 @@ for title in titles:
     print(title['title'])
     print(urllib.parse.urljoin("https://udn.com", title['titleLink']))
 """
+
 print("------------------------------------------------------------")  # 60個
 
 print('無參數讀取 ck101 網頁')
-url = "https://ck101.com/forum-3590-1.html?ref=nav"
+url = "https://ck101.tw/thread-5778209-1-1.html"
+url ='https://www.dcard.tw/f/stock/p/237123381'
 response = requests.get(url)
 print(response)
 print(response.text)
@@ -398,12 +400,31 @@ print("------------------------------------------------------------")  # 60個
 
 print('有參數讀取 ck101 網頁')
 
-url = "https://ck101.com/forum-3590-1.html?ref=nav"
+url = "https://ck101.tw/thread-5778209-1-1.html"
+url ='https://www.dcard.tw/f/stock/p/237123381'
+
 headers = {
     "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36"
 }
 response = requests.get(url, headers=headers)
 print(response)
+print(response.text)
+
+print("------------------------------------------------------------")  # 60個
+
+print('無 cookies 抓網頁')
+
+url = "https://www.ptt.cc/bbs/Gossiping/index.html"
+response = requests.get(url)
+print(response.text)
+
+print("------------------------------------------------------------")  # 60個
+
+print('有 cookies 抓網頁')
+url = "https://www.ptt.cc/bbs/Gossiping/index.html"
+cookies = {"over18": "1"}
+response = requests.get(url, cookies=cookies)
+
 print(response.text)
 
 print("------------------------------------------------------------")  # 60個
@@ -554,18 +575,6 @@ print('漫畫圖片下載完成')
 """
 print("------------------------------------------------------------")  # 60個
 
-print('無 cookies 抓網頁')
-response = requests.get("https://www.ptt.cc/bbs/Gossiping/index.html")
-print(response.text)
-
-print("------------------------------------------------------------")  # 60個
-
-print('有 cookies 抓網頁')
-cookies = {"over18": "1"}
-response = requests.get("https://www.ptt.cc/bbs/Gossiping/index.html", cookies=cookies)
-print(response.text)
-
-print("------------------------------------------------------------")  # 60個
 """
 # 建立 Proxy List
 proxy_ips = [
@@ -2751,7 +2760,6 @@ print("------------------------------------------------------------")  # 60個
 print("openai SP")
 print("------------------------------------------------------------")  # 60個
 
-'''
 print('將網頁上的檔案存成本地檔案 csv / jpg / png')
 
 url = 'https://stats.moe.gov.tw/files/detail/111/111_student.csv'

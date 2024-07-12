@@ -75,15 +75,17 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
-tk_image1 = tk.PhotoImage(file = "image/plus.gif")
-tk_image2 = tk.PhotoImage(file = "image/minus.gif")
-tk_image3 = tk.PhotoImage(file = "image/times.gif")
-tk_image4 = tk.PhotoImage(file = "image/divide.gif")
+tk_image1 = tk.PhotoImage(file="image/plus.gif")
+tk_image2 = tk.PhotoImage(file="image/minus.gif")
+tk_image3 = tk.PhotoImage(file="image/times.gif")
+tk_image4 = tk.PhotoImage(file="image/divide.gif")
 
-tk.Button(frame0, image = tk_image1,command=lambda: print("你按了 +")).grid(row = 1, column = 1, sticky = tk.W)
-tk.Button(frame0, image = tk_image2,command=lambda: print("你按了 -")).grid(row = 1, column = 2)
-tk.Button(frame0, image = tk_image3,command=lambda: print("你按了 *")).grid(row = 1, column = 3)
-tk.Button(frame0, image = tk_image4,command=lambda: print("你按了 /")).grid(row = 1, column = 4)
+tk.Button(frame0, image=tk_image1, command=lambda: print("你按了 +")).grid(
+    row=1, column=1, sticky=tk.W
+)
+tk.Button(frame0, image=tk_image2, command=lambda: print("你按了 -")).grid(row=1, column=2)
+tk.Button(frame0, image=tk_image3, command=lambda: print("你按了 *")).grid(row=1, column=3)
+tk.Button(frame0, image=tk_image4, command=lambda: print("你按了 /")).grid(row=1, column=4)
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
     fill=tk.X, padx=5, pady=5
@@ -262,6 +264,7 @@ import cv2
 
 filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
 
+
 def load_picture_color():
     img = cv2.imread(filename)
     cv2.imshow("show", img)  # 在show視窗顯示img圖像
@@ -272,6 +275,7 @@ def load_picture_gray():
     img = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
     cv2.imshow("show", img)  # 在show視窗顯示img圖像
     cv2.waitKey(0)
+
 
 window = tk.Tk()
 window.title("圖像")

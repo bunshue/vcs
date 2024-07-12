@@ -120,6 +120,8 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 import random
+
+
 class App:
     def __init__(self, master):
         self.master = master
@@ -154,9 +156,7 @@ App(window)
 window.mainloop()
 
 
-
 print("------------------------------------------------------------")  # 60個
-
 
 
 """
@@ -164,8 +164,3 @@ button1.place(rely = 1, relx = 0.8, anchor = 'se')
 button2.place(rely = 1, relx = 1, anchor = 'se')
 button3.place(rely = 1, relx = 0.6, anchor = 'se')
 """
-
-
-
-
-

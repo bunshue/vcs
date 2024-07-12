@@ -142,9 +142,11 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
+
 def combobox_select8():
     print(comboboxVar8.get())
     print(f"{combobox8.current()}:{combobox8.get()}")  # 顯示索引值與內容
+
 
 comboboxVar8 = tk.StringVar()
 comboboxVar8.set("")
@@ -154,7 +156,7 @@ comboboxVar8.set("")
 combobox8 = ttk.Combobox(window, textvariable=comboboxVar8)
 combobox8["value"] = ("鼠", "牛", "虎")
 combobox8.current(0)  # 預設
-#comboboxVar8.set("牛")  # 預設
+# comboboxVar8.set("牛")  # 預設
 combobox8.pack()
 
 label8 = tk.Label(window, textvariable=comboboxVar8)  # 建立標籤，內容為變數
@@ -190,8 +192,6 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
 print("------------------------------------------------------------")  # 60個
 
 
-
-
 window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
@@ -209,5 +209,3 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
-

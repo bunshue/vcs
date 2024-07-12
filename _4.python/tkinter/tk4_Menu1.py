@@ -16,6 +16,7 @@ def status():  # 設定是否顯示狀態列
     else:
         statusLabel.pack_forget()
 
+
 window = tk.Tk()
 window.geometry("400x300")
 
@@ -64,10 +65,12 @@ demoStatus.set(True)
 menu5.add_checkbutton(label="Status", command=status, variable=demoStatus)
 
 help_check_string = tk.StringVar()
-menu5.add_checkbutton(label="check", onvalue="on", offvalue="off", variable=help_check_string)
+menu5.add_checkbutton(
+    label="check", onvalue="on", offvalue="off", variable=help_check_string
+)
 
-#menu5.add_command(label="Status", command=lambda: print("你按了 status"))
-#menu5.add_command(label="Info", command=lambda: print("你按了 Info"))
+# menu5.add_command(label="Status", command=lambda: print("你按了 status"))
+# menu5.add_command(label="Info", command=lambda: print("你按了 Info"))
 menu5.add_command(label="Info", command=lambda: print("你按了", help_check_string.get()))
 
 # 第6排功能選單 多層
@@ -78,7 +81,6 @@ menu6b.add_command(label="再多一層a", command=lambda: print("你按了 再�
 menu6b.add_command(label="再多一層b", command=lambda: print("你按了 再多一層b"))
 menu6b.add_command(label="再多一層c", command=lambda: print("你按了 再多一層c"))
 menu6.add_cascade(label="還有下一層", menu=menu6b)
-
 
 
 """
@@ -116,18 +118,18 @@ print("------------------------------------------------------------")  # 60個
 window = tk.Tk()
 window.geometry("400x300")
 
-l = tk.Label(window, text='', bg='pink', width = 50, height = 10)
+l = tk.Label(window, text="", bg="pink", width=50, height=10)
 l.pack()
 
 menubar = tk.Menu(window)
 filemenu = tk.Menu(menubar, tearoff=0)
-menubar.add_cascade(label='文件', menu=filemenu)
+menubar.add_cascade(label="文件", menu=filemenu)
 
 submenu = tk.Menu(filemenu)
-filemenu.add_cascade(label='導入', menu=submenu, underline=0)
+filemenu.add_cascade(label="導入", menu=submenu, underline=0)
 submenu.add_command(label="子菜單1", command=lambda: print("你按了 子菜單1"))
 
-window.config(menu=menubar) 
+window.config(menu=menubar)
 
 window.mainloop()
 
@@ -224,16 +226,12 @@ window.mainloop()
 print("------------------------------------------------------------")  # 60個
 
 
-
-
-
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
 
 
 """
@@ -264,7 +262,3 @@ menu3.add_command(label="執行程式", command=lambda: print("你按了 執行�
 
 
 """
-
-
-
-

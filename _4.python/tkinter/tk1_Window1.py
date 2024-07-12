@@ -28,24 +28,24 @@ window.mainloop()
 print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
-#window.geometry("600x800")
+# window.geometry("600x800")
 window.wm_title("固定視窗大小")
-window.maxsize(width=666, height=480)# 可拉大之最大大小
-window.minsize(width=666, height=480)# 可拉小之最小大小
+window.maxsize(width=666, height=480)  # 可拉大之最大大小
+window.minsize(width=666, height=480)  # 可拉小之最小大小
 window.resizable(width=False, height=False)
-#window.resizable(True,False)
-#window.resizable(True, False)#可橫向擴展 不可直向擴展
+# window.resizable(True,False)
+# window.resizable(True, False)#可橫向擴展 不可直向擴展
 
 # 設定視窗背景色
-#window.configure(bg = "#7AFEC6")
-window.configure(bg='yellow')#背景色
+# window.configure(bg = "#7AFEC6")
+window.configure(bg="yellow")  # 背景色
 window.config(bg="green")
 
 print("設定視窗背景顏色")
 window["bg"] = "pink"  # 窗口背景色，其他背景色見：blog.csdn.net/chl0000/article/details/7657887
 
-icon_filename = 'C:/_git/vcs/_1.data/______test_files1/_material/ims.ico'
-window.iconbitmap(icon_filename)   # 更改圖示
+icon_filename = "C:/_git/vcs/_1.data/______test_files1/_material/ims.ico"
+window.iconbitmap(icon_filename)  # 更改圖示
 
 window.mainloop()
 
@@ -164,4 +164,3 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-

@@ -593,7 +593,404 @@ print("------------------------------------------------------------")  # 60個
 
 
 
+def printInfo():  # 列印輸入資訊
+    print("Account: %s\nPassword: %s" % (entry1.get(), entry2.get()))
+    print('清除 entry1 entry2 的資料')
+    entry1.delete(0, tk.END)  # 刪除account文字方塊的帳號內容
+    entry2.delete(0, tk.END)  # 刪除pwd文字方塊的密碼內容
+
+print("------------------------------------------------------------")  # 60個
+
+
+window = tk.Tk()
+window.geometry("640x480")
+window.title("ImageTk 26")
+
+label1 = tk.Label(window, text="Account")  # account標籤
+label1.grid(row=1)
+
+label2 = tk.Label(window, text="Password")  # pwd標籤
+label2.grid(row=2)
+
+entry1 = tk.Entry(window)  # 文字方塊account
+entry2 = tk.Entry(window, show="*")  # 文字方塊pwd
+entry1.insert(0, "Kevin")  # 預設Account內容
+entry2.insert(0, "pwd")  # 預設pwd內容
+entry1.grid(row=1, column=1)  # 定位文字方塊account
+entry2.grid(row=2, column=1, pady=10)  # 定位文字方塊pwd
+
+# 建立Login 按鈕
+button1 = tk.Button(window, text="Login", command=printInfo)
+button1.grid(row=3, column=0, sticky=tk.W, pady=5)
+
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+window = tk.Tk()
+window.geometry("640x480")
+window.title("ImageTk 27")
+
+label1 = tk.Label(window, text="Account")  # account標籤
+label1.grid(row=1)
+
+label2 = tk.Label(window, text="Password")  # pwd標籤
+label2.grid(row=2)
+
+entry1 = tk.Entry(window)  # 文字方塊account
+entry2 = tk.Entry(window, show="*")  # 文字方塊pwd
+entry1.insert(1, "Kevin")  # 預設Account內容
+entry2.insert(1, "pwd")  # 預設pwd內容
+entry1.grid(row=1, column=1)  # 定位文字方塊account
+entry2.grid(row=2, column=1, pady=10)  # 定位文字方塊pwd
+
+# 建立Login 按鈕
+button1 = tk.Button(window, text="Login", command=printInfo)
+button1.grid(row=3, column=0, sticky=tk.W, pady=5)
+
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+window = tk.Tk()
+window.geometry("640x480")
+window.title("ImageTk 28")
+
+# 以下是 LabelFrame 標籤框架
+labelframe1 = tk.LabelFrame(window, text="資料驗證")  # 建立標籤框架
+labelframe1.pack(padx=10, pady=5, ipadx=5, ipady=5)  # 包裝與定位標籤框架
+
+label1 = tk.Label(labelframe1, text="Account")  # account標籤
+label1.grid(row=0, column=0)
+
+label2 = tk.Label(labelframe1, text="Password")  # pwd標籤
+label2.grid(row=1, column=0)
+
+entry1 = tk.Entry(labelframe1)  # 文字方塊account
+entry1.grid(row=0, column=1)  # 定位文字方塊account
+entry2 = tk.Entry(labelframe1, show="*")  # 文字方塊pwd
+entry2.grid(row=1, column=1, pady=10)  # 定位文字方塊pwd
+
+# 建立Login 按鈕
+button1 = tk.Button(labelframe1, text="Login", command=printInfo)
+button1.grid(row=2, column=0, sticky=tk.W, pady=5)
+
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+window = tk.Tk()
+window.geometry("600x800")
+window.title("new all 2")
+
+
+# Window下的第二個Frame
+# Add a button, a check button, and a radio button to frame1
+frame2 = tk.Frame(window, bg="pink")  # Create and add a frame to window
+frame2.pack()
+
+label = tk.Label(frame2, text="Enter your name: ")
+name = tk.StringVar()
+entryName = tk.Entry(frame2, textvariable=name)
+btGetName = tk.Button(frame2, text="Get Name", command="")
+label.grid(row=1, column=1)
+entryName.grid(row=1, column=2)
+btGetName.grid(row=1, column=3)
+
+
+window.mainloop()
+
+
 print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+"""
+
+
+
+button1 = tk.Button(window, textvariable = textvar, command = click1)
+label1 = tk.Label(window, fg = "red", textvariable = labeltext)
+frame1 = tk.Frame(window)
+
+text = tk.Text(window)
+
+item1 = tk.Radiobutton(window, text="足球", value="足球", variable=choice, command=choose)
+entryUrl = tk.Entry(window, textvariable=score)
+
+cb = Combobox(window, textvariable=cbVar)
+labelShow = Label(window, textvariable=labelVar)
+slider = tk.Scale(window, from_=0, to=goal)
+canvas = tk.Canvas(window, height=300, width=300, bg=colour)
+
+
+取得entry的資料
+guess = int(guessBox.get())
+
+取得entry的資料
+number = int(entry1.get())  #加了輸入欄位
+
+取得entry的資料
+name = nameEntry.get()
+
+設定entry的資料
+result.delete(0, tk.END)
+result.insert(0, sentence)
+
+取定text的資料
+mesg = text1.get("1.0","end")
+
+
+設定button的text
+    button.config(text="按這裡" + str(count))
+
+
+def click1():
+    textvar.set("我已經被按過了！")
+
+textvar = tk.StringVar()
+button1 = tk.Button(window, textvariable=textvar, command=click1)
+textvar.set("按鈕")
+button1.pack()
+
+
+text.pack(fill=tk.BOTH,expand=True,padx=3,pady=2)
+text.pack(fill=tk.BOTH, expand=True)
+
+
+
+
+
+
+tk之string的用法
+
+radio_var = tk.StringVar()
+
+print(radio_var.get()))
+
+check_var = tk.IntVar(value = 10)
+print(check_var.get()),
+check_var.set(5))
+
+button_string = tk.StringVar(value = 'A button with string var')
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+place 參數
+label.place(relx=0.1, rely=0.1, relheight=0.8)
+label1.place(x=0, y=200, width=601, height=203)
+label2.place(relx=0.1, rely=0.25, relwidth=0.8, relheight=0.8)
+
+
+pack 參數
+label1.pack(anchor=tk.S,side=tk.RIGHT,padx=10,pady=10)
+
+
+
+
+def get_entry1_data():
+    cc = entry1.get()
+    print(cc)
+
+
+entry1_data = tk.StringVar()
+entry1 = tk.Entry(frame2, width=40, textvariable=entry1_data)
+entry1.pack(side=tk.LEFT)
+
+tk.Button(frame2, text="取得entry1資料", command=get_entry1_data).pack()
+
+
+
+def getTextData3():
+    mesg = text3.get("1.0", "end")
+    print("取得Text的資料 :", mesg)
+button1 = tk.Button(window, text="取得Text的資料", command=getTextData3)
+button1.pack()
+
+
+def add_text():
+    text = "測試字串......."
+    # 輸出到界面
+    text4.delete(1.0, tk.END)
+    text4.insert(1.0, text)
+
+button3 = tk.Button(window, text="蓋過字串", command=add_text)
+button3.pack()
+
+
+
+
+
+
+
+button1.pack(padx=5, pady=5) #預設button大小
+#button1.pack(padx=5, pady=5, fill="x") # button大小 填滿 x 軸
+
+
+
+sticky 之解釋
+curRad.pack(column=col, row=5, sticky=tk.W)  # 參數sticky對應的值參考復選框的解釋
+
+
+print('寫讀 Entry 上的資料')
+
+# Label / Entry / Text / 
+# 一個按鈕 設定一個變數給控件 並把這個控件的變數讀出來
+
+
+ 
+
+
+
+
+
+
+
+tk.StringVar() 字串，
+tk.IntVar() 整數，預設值為 0
+tk.DoubleVar() 浮點數，預設值為 0.0
+tk.Boolean()  # 布林值變數，True是1， False是0 fail
+
+
+
+menu1.add_command(label="離開", command=window.destroy)
+menu1.add_command(label="結束", command=window.quit)
+buttonQuit = tk.Button(window, text="結束", command=window.destroy)
+
+buttonQuit.grid(row=1, column=3, padx=5, pady=5, sticky=tk.W)
+
+
+
+
+# 使用place + anchor
+button1 = tk.Button(window, text="按鈕 視窗正中央", width=20)
+button1.place(relx=0.5, rely=0.5, anchor="center")
+button2 = tk.Button(window, text="按鈕 視窗左上", width=20)
+button2.place(relx=0.1, rely=0.1, anchor="nw")
+button3 = tk.Button(window, text="按鈕 視窗左下", width=20)
+button3.place(relx=0.1, rely=0.8, anchor="w")  # ???
+
+
+# 使用side
+"""
+pack()#沒寫, 中間靠上 視窗最上邊
+pack(side="left")#視窗最左邊
+pack(side="right")#視窗最右邊
+pack(side="bottom")#視窗最下邊
+"""
+
+
+
+pack 參數
+
+lb1.pack(side=tk.LEFT,padx=5,pady=10)
+lb2.pack(anchor=tk.N,side=tk.LEFT,padx=5,pady=10)
+button1.pack(side=tk.LEFT,padx=10,pady=5)
+cb.pack(side=tk.LEFT)
+
+
+print("------------------------------------------------------------")  # 60個
+
+Exit = tk.Button(window, text='Exit', fg='Black', bg='Blue', command=exit)
+
+
+
+
+
+
+boolean
+var = tk.BooleanVar()
+cb = tk.Checkbutton(window,text="大到小排序",variable=var)
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("tk的font")
+print("------------------------------------------------------------")  # 60個
+
+import tkinter.font as tkfont
+default_font = tkfont.nametofont('TkDefaultFont')
+default_font.configure(size=15)
+
+用法 加 font = default_font
+radbut = tk.Radiobutton(window, text=item, variable=area, value=value, command=radbut_click, font=default_font)
+lab_result = tk.Label(window, font=default_font, fg='black')
+lab_result = tk.Label(window, font=default_font, fg='black', width=18)
+
+combox = ttk.Combobox(window, value=AREA_OPTIONS, textvariable=area, font=default_font)
+
+
+ft1 =('新細明體', 14)
+ft2 = ('標楷體', 18)
+chk1 = tk.Checkbutton(window, text = item1, font = ft1, variable = var1, onvalue = item1, offvalue = '')
+chk2 = tk.Checkbutton(window, text = item2, font = ft1, variable = var2, onvalue = item2, offvalue = '')
+chk3 = tk.Checkbutton(window, text = item3, font = ft1, variable = var3, onvalue = item3, offvalue = '')
+
+
+ft1 =('新細明體', 14)
+ft2 = ('標楷體', 18)
+
+entry = tk.Entry(window, bg="#ffff00", font = "新細明體 16 bold" ,borderwidth = 3)
+
+
+# menu button
+menu_button = ttk.Menubutton(window, text = 'Menu Button')
+menu_button.pack()
+
+button_sub_menu = tk.Menu(menu_button, tearoff = False)
+button_sub_menu.add_command(label = 'entry 1', command = lambda: print('test 1'))
+button_sub_menu.add_checkbutton(label = 'check 1')
+# menu_button.configure(menu = button_sub_menu)
+menu_button['menu']= button_sub_menu
+
+print("------------------------------------------------------------")  # 60個
+
+tk.Label(text = '測試測試測試').pack(anchor=tk.W)
+ 
+tk
+
+# pack
+# label1.pack(side = 'left', expand = True, fill = 'y')
+# label2.pack(side = 'left', expand = True, fill = 'both')
+
+# label1.grid(row = 0, column = 1, sticky = 'nsew')
+# label2.grid(row = 1, column = 1, columnspan = 2, sticky = 'nsew')
+
+
+
+# grid 設定
+# window.columnconfigure(0, weight = 1)
+# window.columnconfigure(1, weight = 1)
+# window.columnconfigure(2, weight = 2)
+# window.rowconfigure(0, weight = 1)
+# window.rowconfigure(1, weight = 1)
+
+
+
+
+
+
+"""
+
+

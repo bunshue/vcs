@@ -13,13 +13,17 @@ window = tk.Tk()
 window.geometry("600x800")
 window.title("Radiobutton 1")
 
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
 print("------------------------------------------------------------")  # 60個
+
 
 def do_select_string9():
     label_selection_string9.config(text="你選擇了 :" + var_string9.get())
 
-#一個一個建立Radiobutton
+
+# 一個一個建立Radiobutton
 
 var_string9 = tk.StringVar()
 var_string9.set("")  # 預設
@@ -27,46 +31,66 @@ var_string9.set("")  # 預設
 label_selection_string9 = tk.Label(window, bg="lightyellow", width=20, text="未選擇")
 label_selection_string9.pack()
 
-rb0 = tk.Radiobutton(window, text="AAA", variable=var_string9, value="A", command=do_select_string9)
+rb0 = tk.Radiobutton(
+    window, text="AAA", variable=var_string9, value="A", command=do_select_string9
+)
 rb0.pack()
-rb1 = tk.Radiobutton(window, text="BBB", variable=var_string9, value="B", command=do_select_string9)
+rb1 = tk.Radiobutton(
+    window, text="BBB", variable=var_string9, value="B", command=do_select_string9
+)
 rb1.pack()
-rb2 = tk.Radiobutton(window, text="CCC", variable=var_string9, value="C", command=do_select_string9)
+rb2 = tk.Radiobutton(
+    window, text="CCC", variable=var_string9, value="C", command=do_select_string9
+)
 rb2.pack()
 
 rb2.select()  # 預設
 
 do_select_string9()
 
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-print('------------------------------------------------------------')	#60個
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
+print("------------------------------------------------------------")  # 60個
+
 
 def do_select_int1():
-        value = var_int1.get()
-        ##print(items1i[value])
-        print('你選擇了 :' + items1i[value])
+    value = var_int1.get()
+    ##print(items1i[value])
+    print("你選擇了 :" + items1i[value])
 
-items1i = {0:'AAA',1:'BBB',2:'CCC'}
+
+items1i = {0: "AAA", 1: "BBB", 2: "CCC"}
 
 var_int1 = tk.IntVar()
 var_int1.set(2)  # 預設
 
-tk.Radiobutton(window, text = items1i[0], variable = var_int1, value = 0, command=do_select_int1).pack()
-tk.Radiobutton(window, text = items1i[1], variable = var_int1, value = 1, command=do_select_int1).pack()
-tk.Radiobutton(window, text = items1i[2], variable = var_int1, value = 2, command=do_select_int1).pack()
+tk.Radiobutton(
+    window, text=items1i[0], variable=var_int1, value=0, command=do_select_int1
+).pack()
+tk.Radiobutton(
+    window, text=items1i[1], variable=var_int1, value=1, command=do_select_int1
+).pack()
+tk.Radiobutton(
+    window, text=items1i[2], variable=var_int1, value=2, command=do_select_int1
+).pack()
 
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
 
-#用字典串列元組 一次建立一組Radiobutton
+# 用字典串列元組 一次建立一組Radiobutton
+
 
 def do_select_int3():
     selected_item = var_int3.get()
     label_selection_int3.config(text=items3i[selected_item][0])
-    print('你選擇了 :', var_int3.get())
+    print("你選擇了 :", var_int3.get())
 
-items3i=(('AAA',0),('BBB',1),('CCC',2))
+
+items3i = (("AAA", 0), ("BBB", 1), ("CCC", 2))
 print(type(items3i))
 
 label_selection_int3 = tk.Label(window, bg="lightyellow", width=20, text="未選擇")
@@ -76,84 +100,104 @@ var_int3 = tk.IntVar()
 var_int3.set(2)  # 預設
 
 for item, value in items3i:
-    rb = tk.Radiobutton(window, text=item, variable=var_int3, value=value, command=do_select_int3)
+    rb = tk.Radiobutton(
+        window, text=item, variable=var_int3, value=value, command=do_select_int3
+    )
     rb.pack()
 
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
 
 def do_select_string1():
-        print('你選擇了 :', var_string1.get())
+    print("你選擇了 :", var_string1.get())
 
-items1s = [('AAA', 0),
-          ('BBB', 1),
-          ('CCC', 2)]
 
-var_string1 = tk.StringVar()                                       # 設定以字串表示選單編號
-var_string1.set('2')  # 預設
+items1s = [("AAA", 0), ("BBB", 1), ("CCC", 2)]
 
-#用字典串列元組 一次建立一組Radiobutton
+var_string1 = tk.StringVar()  # 設定以字串表示選單編號
+var_string1.set("2")  # 預設
+
+# 用字典串列元組 一次建立一組Radiobutton
 for selection, num in items1s:
-    rb = ttk.Radiobutton(window, text=selection, variable=var_string1, value=num, command=do_select_string1)
+    rb = ttk.Radiobutton(
+        window,
+        text=selection,
+        variable=var_string1,
+        value=num,
+        command=do_select_string1,
+    )
     rb.pack()
 
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
 rb1 = ttk.Radiobutton(
-	window,
-	text = 'AAA',
-	value = 1,
-	variable = 'this is a lion-mouse',
-	command = lambda: print('你選擇了 : AAA'))
+    window,
+    text="AAA",
+    value=1,
+    variable="this is a lion-mouse",
+    command=lambda: print("你選擇了 : AAA"),
+)
 rb1.pack()
 
-rb2 = ttk.Radiobutton(window, text = 'BBB', value = 1, variable = 'aaaaaa')
+rb2 = ttk.Radiobutton(window, text="BBB", value=1, variable="aaaaaa")
 rb2.pack()
 
+
 def do_select_string2():
-        print('你選擇了 : CCC/DDD')
+    print("你選擇了 : CCC/DDD")
+
 
 var_string2 = tk.StringVar()
 
 # widgets
 rb3 = ttk.Radiobutton(
-	window, 
-	text = 'CCC', 
-	value = 'C', 
-	command = do_select_string2, 
-	variable = var_string2)
+    window, text="CCC", value="C", command=do_select_string2, variable=var_string2
+)
 rb3.pack()
 
 rb4 = ttk.Radiobutton(
-	window, 
-	text = 'DDD', 
-	value = 'D', 
-	command = do_select_string2, 
-	variable = var_string2)
+    window, text="DDD", value="D", command=do_select_string2, variable=var_string2
+)
 rb4.pack()
 
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
+
 def do_select_string3():
-        print("你選擇了 :" + var_string3.get())
+    print("你選擇了 :" + var_string3.get())
+
 
 var_string3 = tk.StringVar()
 
-rb0 = tk.Radiobutton(window, text="AAA", value="aaa", variable=var_string3, command=do_select_string3)
+rb0 = tk.Radiobutton(
+    window, text="AAA", value="aaa", variable=var_string3, command=do_select_string3
+)
 rb0.pack()
-rb1 = tk.Radiobutton(window, text="BBB", value="bbb", variable=var_string3, command=do_select_string3)
+rb1 = tk.Radiobutton(
+    window, text="BBB", value="bbb", variable=var_string3, command=do_select_string3
+)
 rb1.pack()
-rb2 = tk.Radiobutton(window, text="CCC", value="ccc", variable=var_string3, command=do_select_string3)
+rb2 = tk.Radiobutton(
+    window, text="CCC", value="ccc", variable=var_string3, command=do_select_string3
+)
 rb2.pack()
 
 rb2.select()  # 預設
 
 do_select_string3()
 
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
 items5s = [
@@ -169,7 +213,9 @@ for text, mode in items5s:
     rb = tk.Radiobutton(window, text=text, variable=var_string5, value=mode)
     rb.pack()
 
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
 window.mainloop()
@@ -180,128 +226,154 @@ window = tk.Tk()
 window.geometry("600x800")
 window.title("Radiobutton 2")
 
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
+
 def do_select_int4():
-    print('你選擇了 :', var_int4.get())
+    print("你選擇了 :", var_int4.get())
 
 
-items4i = [('AAA', 0), ('BBB', 1), ('CCC', 2)]
+items4i = [("AAA", 0), ("BBB", 1), ("CCC", 2)]
 
 var_int4 = tk.IntVar()
 var_int4.set(2)  # 預設
 
 for item, val in items4i:
-    tk.Radiobutton(window, text = item, value = val,
-        variable = var_int4, padx = 20,
-        command = do_select_int4).pack()
+    tk.Radiobutton(
+        window, text=item, value=val, variable=var_int4, padx=20, command=do_select_int4
+    ).pack()
 
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
-def do_select_int5():
-    print('你選擇了 :', var_int5.get())
 
-items5i = [('AAA', 0), ('BBB', 1),('CCC', 2)]
+def do_select_int5():
+    print("你選擇了 :", var_int5.get())
+
+
+items5i = [("AAA", 0), ("BBB", 1), ("CCC", 2)]
 
 var_int5 = tk.IntVar()
 var_int5.set(2)  # 預設
 
 for item, val in items5i:
-    tk.Radiobutton(window, text = item, value = val,
-        variable = var_int5, padx = 20,
-        command = do_select_int5).pack()
+    tk.Radiobutton(
+        window, text=item, value=val, variable=var_int5, padx=20, command=do_select_int5
+    ).pack()
 
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
 print("------------------------------------------------------------")  # 60個
+
 
 def do_select_int6():
     print(items6[var_int6.get()])
 
-items6 = {0:"AAA", 1:"BBB", 2:"CCC"}
+
+items6 = {0: "AAA", 1: "BBB", 2: "CCC"}
 
 var_int6 = tk.IntVar()
 var_int6.set(2)  # 預設
 
-#用字典串列元組 一次建立一組Radiobutton
+# 用字典串列元組 一次建立一組Radiobutton
 for val, city in items6.items():
-    tk.Radiobutton(window,
-                text=city,
-                variable=var_int6,value=val,
-                command=do_select_int6).pack()
-    
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+    tk.Radiobutton(
+        window, text=city, variable=var_int6, value=val, command=do_select_int6
+    ).pack()
+
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
-def do_select_int7():
-    print(items7i[var_int7.get()])            # 列出所選城市
 
-items7i = {0:"AAA",1:"BBB",2:"CCC"}
+def do_select_int7():
+    print(items7i[var_int7.get()])  # 列出所選城市
+
+
+items7i = {0: "AAA", 1: "BBB", 2: "CCC"}
 
 var_int7 = tk.IntVar()
 var_int7.set(2)  # 預設
 
-#用字典串列元組 一次建立一組Radiobutton
+# 用字典串列元組 一次建立一組Radiobutton
 for val, city in items7i.items():
-    tk.Radiobutton(window,
-                text=city,
-                indicatoron = 0,        # 用盒子取代選項紐
-                width=30,
-                variable=var_int7,value=val,
-                command=do_select_int7).pack()
+    tk.Radiobutton(
+        window,
+        text=city,
+        indicatoron=0,  # 用盒子取代選項紐
+        width=30,
+        variable=var_int7,
+        value=val,
+        command=do_select_int7,
+    ).pack()
 
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
+
 def do_select_int8():
-    print('你選擇了 :', var_int8.get())
+    print("你選擇了 :", var_int8.get())
 
 
-items8i = [('AAA', 0), ('BBB', 1), ('CCC', 2)]
+items8i = [("AAA", 0), ("BBB", 1), ("CCC", 2)]
 
 var_int8 = tk.IntVar()
 var_int8.set(2)  # 預設
 
 for item, val in items8i:
-    tk.Radiobutton(window, text = item, value = val,
-        variable = var_int8, padx = 20,
-        command = do_select_int8).pack()
+    tk.Radiobutton(
+        window, text=item, value=val, variable=var_int8, padx=20, command=do_select_int8
+    ).pack()
 
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
-def do_select_int9():
-    print('你選擇了 :', var_int9.get())
 
-items9i = [('AAA', 0), ('BBB', 1), ('CCC', 2)]
+def do_select_int9():
+    print("你選擇了 :", var_int9.get())
+
+
+items9i = [("AAA", 0), ("BBB", 1), ("CCC", 2)]
 
 var_int9 = tk.IntVar()
 var_int9.set(2)  # 預設
 
 for item, val in items9i:
-    tk.Radiobutton(window, text = item, value = val,
-        variable = var_int9, padx = 20,
-        command = do_select_int9).pack()
+    tk.Radiobutton(
+        window, text=item, value=val, variable=var_int9, padx=20, command=do_select_int9
+    ).pack()
 
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
 
 def do_select_inta():
-    print(itemsa[var_inta.get()])            # 列出所選城市
+    print(itemsa[var_inta.get()])  # 列出所選城市
 
-itemsa = {0:"AAA",1:"BBB",2:"CCC"}
+
+itemsa = {0: "AAA", 1: "BBB", 2: "CCC"}
 
 var_inta = tk.IntVar()
 var_inta.set(2)  # 預設
 
-#用字典串列元組 一次建立一組Radiobutton
+# 用字典串列元組 一次建立一組Radiobutton
 for val, city in itemsa.items():
-    tk.Radiobutton(window,
-                text=city,
-                variable=var_inta,value=val,
-                command=do_select_inta).pack()
+    tk.Radiobutton(
+        window, text=city, variable=var_inta, value=val, command=do_select_inta
+    ).pack()
 
 """
 # 用盒子取代選項紐
@@ -322,6 +394,7 @@ print("------------------------------------------------------------")  # 60個
 
 def do_select_intd():
     print("你選擇了 :", var_intd.get())
+
 
 itemsdi = [("AAA", 1), ("BBB", 2), ("CCC", 3)]
 
@@ -363,23 +436,38 @@ label_selection_string7 = tk.Label(window, text="這是預設,尚未選擇", bg=
 label_selection_string7.pack()
 
 rb1 = tk.Radiobutton(
-    window, image=tk_image1, variable=var_string7, value="星星", command=do_select_string7  # 星星選項鈕
+    window,
+    image=tk_image1,
+    variable=var_string7,
+    value="星星",
+    command=do_select_string7,  # 星星選項鈕
 )
 rb1.pack()
 
 rb2 = tk.Radiobutton(
-    window, image=tk_image2, variable=var_string7, value="月亮", command=do_select_string7  # 月亮選項鈕
+    window,
+    image=tk_image2,
+    variable=var_string7,
+    value="月亮",
+    command=do_select_string7,  # 月亮選項鈕
 )
 rb2.pack()
 
 rb3 = tk.Radiobutton(
-    window, image=tk_image3, variable=var_string7, value="太陽", command=do_select_string7  # 太陽選項鈕
+    window,
+    image=tk_image3,
+    variable=var_string7,
+    value="太陽",
+    command=do_select_string7,  # 太陽選項鈕
 )
 rb3.pack()
 
 
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-print('------------------------------------------------------------')	#60個
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
+print("------------------------------------------------------------")  # 60個
+
 
 def do_select_string8():
     label_selection_string8.config(text="你選的是" + var_string8.get())
@@ -461,14 +549,16 @@ tk.Button(window,text="進一步了解", command=do_select_intc).pack()
 window.mainloop()
 """
 
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-print('------------------------------------------------------------')	#60個
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
+print("------------------------------------------------------------")  # 60個
 
 
-
-
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-print('------------------------------------------------------------')	#60個
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
+print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
@@ -486,7 +576,6 @@ window.mainloop()
 sys.exit()
 
 
-
 """
 
 # 預設音樂是1
@@ -499,15 +588,14 @@ sys.exit()
 """
 
 
-
-
 def do_select_string4():
-    print('你選擇了 : ' + var_string4.get())
+    print("你選擇了 : " + var_string4.get())
+
 
 frame1 = tk.Frame(window)  # mp3 歌曲容器
 frame1.pack()
 
-source_dir = 'C:/_git/vcs/_1.data/______test_files1/_mp3/'
+source_dir = "C:/_git/vcs/_1.data/______test_files1/_mp3/"
 
 mp3files = glob.glob(source_dir + "*.mp3")
 
@@ -516,16 +604,168 @@ index = 0
 
 var_string4 = tk.StringVar()
 
-#用字典串列元組 一次建立一組Radiobutton
+# 用字典串列元組 一次建立一組Radiobutton
 for mp3 in mp3files:
-    rb = tk.Radiobutton(frame1, text = mp3, variable = var_string4, value = mp3, command = do_select_string4)
-    if(index == 0):  #選取第1個選項按鈕
+    rb = tk.Radiobutton(
+        frame1, text=mp3, variable=var_string4, value=mp3, command=do_select_string4
+    )
+    if index == 0:  # 選取第1個選項按鈕
         rb.select()  # 預設
         playsong = preplaysong = mp3
-    rb.grid(row = index, column = 0, sticky = 'w')
+    rb.grid(row=index, column=0, sticky="w")
     index += 1
 
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
+
+print("------------------------------------------------------------")  # 60個
+
+from PIL import ImageTk, Image
+
+
+def printSelection():
+    label.config(text="你選的是" + var.get())
+
+
+filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
+
+
+window = tk.Tk()
+window.geometry("600x800")
+window.title("Radiobutton 4")
+
+# 檔案 => ImageTk影像
+tk_image1 = ImageTk.PhotoImage(file="__new/star.gif")
+tk_image2 = ImageTk.PhotoImage(file="__new/moon.gif")
+tk_image3 = ImageTk.PhotoImage(file="__new/sun.gif")
+
+var = tk.StringVar()  # 選項紐綁定的變數
+var.set("星星")  # 預設選項是男生
+
+label = tk.Label(window, text="這是預設,尚未選擇", bg="lightyellow", width=30)
+label.pack()
+
+rbStar = tk.Radiobutton(
+    window, image=tk_image1, variable=var, value="星星", command=printSelection  # 星星選項鈕
+)
+rbStar.pack()
+
+rbMoon = tk.Radiobutton(
+    window, image=tk_image2, variable=var, value="月亮", command=printSelection  # 月亮選項鈕
+)
+rbMoon.pack()
+
+rbSun = tk.Radiobutton(
+    window, image=tk_image3, variable=var, value="太陽", command=printSelection  # 太陽選項鈕
+)
+rbSun.pack()
+
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+
+def printSelection():
+    label.config(text="你選的是" + var.get())
+
+
+filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
+
+window = tk.Tk()
+window.geometry("600x800")
+window.title("Radiobutton 5")
+
+
+# 檔案 => ImageTk影像
+tk_image1 = ImageTk.PhotoImage(file="__new/star.gif")
+tk_image2 = ImageTk.PhotoImage(file="__new/moon.gif")
+tk_image3 = ImageTk.PhotoImage(file="__new/sun.gif")
+
+var = tk.StringVar()  # 選項紐綁定的變數
+var.set("星星")  # 預設選項是男生
+
+label = tk.Label(window, text="這是預設,尚未選擇", bg="lightyellow", width=30)
+label.pack()
+
+rbStar = tk.Radiobutton(
+    window,
+    image=tk_image1,  # 星星選項鈕
+    text="星星",
+    compound=tk.RIGHT,
+    variable=var,
+    value="星星",
+    command=printSelection,
+)
+rbStar.pack()
+
+rbMoon = tk.Radiobutton(
+    window,
+    image=tk_image2,  # 月亮選項鈕
+    text="月亮",
+    compound=tk.RIGHT,
+    variable=var,
+    value="月亮",
+    command=printSelection,
+)
+rbMoon.pack()
+
+rbSun = tk.Radiobutton(
+    window,
+    image=tk_image3,  # 太陽選項鈕
+    text="太陽",
+    compound=tk.RIGHT,
+    variable=var,
+    value="太陽",
+    command=printSelection,
+)
+rbSun.pack()
+
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+
+def choose():
+    print("你點選了 :", choice.get())
+
+
+def add_radiobutton_controls():
+    global choice
+    frame1 = tk.Frame(window)
+    frame1.pack()
+
+    list_data = ["aaa", "bbb", "ccc", "ddd", "eee"]
+
+    index = 0
+    choice = tk.StringVar()
+    for line in list_data:
+        prbutton = tk.Radiobutton(
+            frame1, text=line, variable=choice, value=line, command=choose
+        )
+        if index == 0:
+            prbutton.select()
+        prbutton.grid(row=index, column=0, sticky="w")
+        index += 1
+
+
+import tkinter as tk
+import glob
+
+window = tk.Tk()
+window.geometry("640x480")
+window.title("")
+
+frame0 = tk.Frame(window)
+frame0.pack()
+
+button7 = tk.Button(frame0, text="讀取檔案", width=8, command=add_radiobutton_controls)
+button7.grid(row=1, column=0, padx=5, pady=5)
+
+window.mainloop()
+
+
+print("------------------------------------------------------------")  # 60個
 

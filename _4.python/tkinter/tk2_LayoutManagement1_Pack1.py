@@ -258,7 +258,7 @@ tk.Button(fm1, text="第三個").pack(side=tk.TOP, fill=tk.X, expand=tk.YES)
 # 創建第二個容器
 fm2 = tk.Frame(window)
 # 該容器放在左邊排列，就會挨著fm1
-#fm2.pack(side=tk.LEFT, padx=10, expand=tk.YES)
+# fm2.pack(side=tk.LEFT, padx=10, expand=tk.YES)
 fm2.pack(side=tk.LEFT, padx=10, fill=tk.BOTH, expand=tk.YES)
 # 向fm2中添加3個按鈕
 # 設置按鈕從右邊開始排列
@@ -475,8 +475,6 @@ label3.pack(fill=tk.BOTH)  # 預設從上開始配置控件fill=tk.BOTH
 
 
 """
-
-
 
 
 window = tk.Tk()

@@ -61,7 +61,7 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
-print('凸起的Label')
+print("凸起的Label")
 tk.Label(window, text="凸起的Label, 歡迎來到美國", relief="raised").pack()
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
@@ -195,10 +195,13 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
-label = tk.Label(window,text="歡迎來到美國",
-              bg="lightyellow",     # 標籤背景是淺黃色
-              width=15,             # 標籤寬度是15
-              font="Helvetica 16 bold italic")
+label = tk.Label(
+    window,
+    text="歡迎來到美國",
+    bg="lightyellow",  # 標籤背景是淺黃色
+    width=15,  # 標籤寬度是15
+    font="Helvetica 16 bold italic",
+)
 label.pack()
 
 
@@ -710,4 +713,3 @@ print("------------------------------------------------------------")  # 60個
 
 
 """
-

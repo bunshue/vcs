@@ -25,7 +25,7 @@ def set_numbers():
 def get_numbers1():
     for i in range(ROW1):
         for j in range(COLUMN1):
-            print(cells1[i][j].get(), end = " ")
+            print(cells1[i][j].get(), end=" ")
         print()
 
 
@@ -71,7 +71,7 @@ print("用 Entry 和 grid 做 表格 2")
 def get_numbers3():
     """
     # Get the numbers from the entries
-    values = [[print(x.get()) 
+    values = [[print(x.get())
                for x in cells2[i]] for i in range(9)]
 
     print('ok')
@@ -80,35 +80,36 @@ def get_numbers3():
         for j in range(COLUMN2):
             cc = cells2[i][j].get()
             if cc == "":
-                print('X', end = " ")
+                print("X", end=" ")
             else:
-                print(cc, end = " ")
+                print(cc, end=" ")
         print()
+
 
 ROW2 = 8
 COLUMN2 = 12
-        
-frame = tk.Frame(window, bg = 'pink')
+
+frame = tk.Frame(window, bg="pink")
 
 frame.pack()
 
-cells2 = [] # A list of variables tied to entries
+cells2 = []  # A list of variables tied to entries
 for i in range(ROW2):
     cells2.append([])
     for j in range(COLUMN2):
         cells2[i].append(tk.StringVar())
-        
-for i in range(ROW2):
-    for j in range(COLUMN2):
-        tk.Entry(frame, width = 2, justify = tk.RIGHT,
-            textvariable = cells2[i][j]).grid(
-                row = i, column = j)
-        
-tk.Button(window, text = "取得數字",  command = get_numbers3).pack()
 
 for i in range(ROW2):
     for j in range(COLUMN2):
-        cells2[i][j].set('1')
+        tk.Entry(frame, width=2, justify=tk.RIGHT, textvariable=cells2[i][j]).grid(
+            row=i, column=j
+        )
+
+tk.Button(window, text="取得數字", command=get_numbers3).pack()
+
+for i in range(ROW2):
+    for j in range(COLUMN2):
+        cells2[i][j].set("1")
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
     fill=tk.X, padx=5, pady=5
@@ -144,11 +145,12 @@ print("------------------------------------------------------------")  # 60個
 
 
 def get_data():
-    print('取得資料(變數) :', pdir.get())
-    print('取得資料(控件) :', entry1.get())
-    
+    print("取得資料(變數) :", pdir.get())
+    print("取得資料(控件) :", entry1.get())
+
+
 pdir = tk.StringVar()
-pdir.set('C:/_git/vcs/_1.data/______test_files1/_mp3/')
+pdir.set("C:/_git/vcs/_1.data/______test_files1/_mp3/")
 
 entry1 = tk.Entry(window, textvariable=pdir, width=50)
 entry1.pack()
@@ -160,7 +162,7 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
     fill=tk.X, padx=5, pady=5
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
-        
+
 window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
@@ -170,7 +172,6 @@ print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
-
 
 
 """ 新進

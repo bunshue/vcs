@@ -14,8 +14,10 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
+
 def get_spinbox_data():
-    print('你選擇了 :', spinbox3a.get())
+    print("你選擇了 :", spinbox3a.get())
+
 
 spinbox3a = tk.Spinbox(window, values=["AAA", "BBB", "CCC", "DDD"], width=10)
 spinbox3a.pack()
@@ -30,12 +32,15 @@ print("------------------------------------------------------------")  # 60個
 
 
 def show_spinbox_selection():
-    print("你選擇了 :", spinbox1.get()) #取得選取資料
-    cc = spinbox1.get() #取得選取資料
+    print("你選擇了 :", spinbox1.get())  # 取得選取資料
+    cc = spinbox1.get()  # 取得選取資料
     label1.config(text=cc)
 
+
 tk.Label(window, text="tk之spinbox").pack()
-spinbox1 = tk.Spinbox(window, from_=10, to=30, increment=2, command=show_spinbox_selection)
+spinbox1 = tk.Spinbox(
+    window, from_=10, to=30, increment=2, command=show_spinbox_selection
+)
 spinbox1.pack()
 
 label1 = tk.Label(window, fg="red")
@@ -96,14 +101,10 @@ print("------------------------------------------------------------")  # 60個
 
 exercise_letters = ("AAA", "BBB", "CCC", "DDD")
 exercise_string = tk.StringVar(value=exercise_letters[0])
-spinbox8 = ttk.Spinbox(
-    window, textvariable=exercise_string, values=exercise_letters
-)
+spinbox8 = ttk.Spinbox(window, textvariable=exercise_string, values=exercise_letters)
 spinbox8.pack()
 
-spinbox8.bind(
-    "<<Decrement>>", lambda event: print("b你選擇了 :", exercise_string.get())
-)
+spinbox8.bind("<<Decrement>>", lambda event: print("b你選擇了 :", exercise_string.get()))
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
     fill=tk.X, padx=5, pady=5
@@ -172,6 +173,7 @@ def fnAns():
     buttonTest.config(state="normal")
     buttonAns.config(state="disable")
 
+
 print("加減法測驗")
 
 frmTest = tk.Frame(window, relief="raised", borderwidth=2)
@@ -211,6 +213,7 @@ print("------------------------------------------------------------")  # 60個
 def press():
     print(sb2.get())
 
+
 window = tk.Tk()
 window.title("Spinbox測試")
 
@@ -247,6 +250,3 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
-
-

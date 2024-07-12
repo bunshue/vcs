@@ -558,8 +558,8 @@ button.pack()
 """
 
 
-
 print("------------------------------------------------------------")  # 60個
+
 
 def selAll():  # 選取全部字串
     entry.select_range(0, tk.END)
@@ -658,7 +658,6 @@ b = tk.Button(window, text="hit me", width=15, height=2, command=hit_me)
 b.pack()
 
 
-
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
     fill=tk.X, padx=5, pady=5
 )  # 分隔線
@@ -752,4 +751,3 @@ entry1.pack()
 
 
 """
-

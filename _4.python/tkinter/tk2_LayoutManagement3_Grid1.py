@@ -246,15 +246,33 @@ window = tk.Tk()
 window.geometry("600x800")
 window.title("Grid 測試 8 Label")
 
-lab1 = tk.Label(window, text="Label位置00", bg="lightyellow", width=25)  # 標籤背景是淺黃色  # 標籤寬度是15
-lab2 = tk.Label(window, text="Label位置01", bg="lightgreen", width=25)  # 標籤背景是淺綠色  # 標籤寬度是15
-lab3 = tk.Label(window, text="Label位置02", bg="lightblue", width=25)  # 標籤背景是淺綠色  # 標籤寬度是15
-lab4 = tk.Label(window, text="Label位置10", bg="lightgreen", width=25)  # 標籤背景是淺黃色  # 標籤寬度是15
-lab5 = tk.Label(window, text="Label位置11", bg="lightblue", width=25)  # 標籤背景是淺綠色  # 標籤寬度是15
-lab6 = tk.Label(window, text="Label位置12", bg="lightyellow", width=25)  # 標籤背景是淺綠色  # 標籤寬度是15
-lab7 = tk.Label(window, text="Label位置20", bg="lightblue", width=25)  # 標籤背景是淺黃色  # 標籤寬度是15
-lab8 = tk.Label(window, text="Label位置21", bg="lightyellow", width=25)  # 標籤背景是淺綠色  # 標籤寬度是15
-lab9 = tk.Label(window, text="Label位置22", bg="lightgreen", width=25)  # 標籤背景是淺綠色  # 標籤寬度是15
+lab1 = tk.Label(
+    window, text="Label位置00", bg="lightyellow", width=25
+)  # 標籤背景是淺黃色  # 標籤寬度是15
+lab2 = tk.Label(
+    window, text="Label位置01", bg="lightgreen", width=25
+)  # 標籤背景是淺綠色  # 標籤寬度是15
+lab3 = tk.Label(
+    window, text="Label位置02", bg="lightblue", width=25
+)  # 標籤背景是淺綠色  # 標籤寬度是15
+lab4 = tk.Label(
+    window, text="Label位置10", bg="lightgreen", width=25
+)  # 標籤背景是淺黃色  # 標籤寬度是15
+lab5 = tk.Label(
+    window, text="Label位置11", bg="lightblue", width=25
+)  # 標籤背景是淺綠色  # 標籤寬度是15
+lab6 = tk.Label(
+    window, text="Label位置12", bg="lightyellow", width=25
+)  # 標籤背景是淺綠色  # 標籤寬度是15
+lab7 = tk.Label(
+    window, text="Label位置20", bg="lightblue", width=25
+)  # 標籤背景是淺黃色  # 標籤寬度是15
+lab8 = tk.Label(
+    window, text="Label位置21", bg="lightyellow", width=25
+)  # 標籤背景是淺綠色  # 標籤寬度是15
+lab9 = tk.Label(
+    window, text="Label位置22", bg="lightgreen", width=25
+)  # 標籤背景是淺綠色  # 標籤寬度是15
 
 lab1.grid(row=0, column=0)  # 格狀包裝
 lab2.grid(row=0, column=1)  # 格狀包裝
@@ -749,7 +767,7 @@ window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-#設定列欄權重
+# 設定列欄權重
 
 window = tk.Tk()
 window.geometry("600x800")
@@ -785,7 +803,9 @@ label2 = tk.Label(window, text="Label 2", bg="lightblue")
 label2.grid(row=0, column=1, padx=5, pady=5)
 
 label3 = tk.Label(window, bg="yellow")
-label3.grid(row=1, column=0, columnspan=2, padx=5, pady=5, sticky=tk.N + tk.S + tk.W + tk.E)
+label3.grid(
+    row=1, column=0, columnspan=2, padx=5, pady=5, sticky=tk.N + tk.S + tk.W + tk.E
+)
 
 window.mainloop()
 
@@ -804,7 +824,9 @@ label2 = tk.Label(window, text="Label 2", bg="lightblue")
 label2.grid(row=0, column=1, padx=5, pady=5)
 
 label3 = tk.Label(window, text="Label 3", bg="yellow")
-label3.grid(row=1, column=0, columnspan=2, padx=5, pady=5, sticky=tk.N + tk.S + tk.W + tk.E)
+label3.grid(
+    row=1, column=0, columnspan=2, padx=5, pady=5, sticky=tk.N + tk.S + tk.W + tk.E
+)
 
 window.mainloop()
 
@@ -933,6 +955,7 @@ window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
+
 class Application(tk.Frame):
     def __init__(self, master=None):
         super().__init__(master)  # super()代表的是父類的定義， 而不是父類對象
@@ -1004,4 +1027,3 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
-

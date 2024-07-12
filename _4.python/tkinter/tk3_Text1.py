@@ -146,6 +146,7 @@ window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
+
 def selectedText():  # 列印所選的文字
     try:
         selText = text.get(tk.SEL_FIRST, tk.SEL_LAST)
@@ -170,6 +171,7 @@ text.insert(tk.END, "白髮三千丈，離愁似箇長。")  # 插入文字
 window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
+
 
 def printIndex():  # 列印索引
     print("INSERT : ", text.index(tk.INSERT))
@@ -198,7 +200,7 @@ window.geometry("600x400")
 
 text = tk.Text(window, width=30, height=5)
 text.pack(fill=tk.BOTH, expand=True)
-#text.pack()
+# text.pack()
 
 text.insert(tk.END, "第1行\n")
 text.insert(tk.END, "第2行\n")
@@ -325,6 +327,7 @@ window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
+
 def saveFile():
     textContent = text.get("1.0", tk.END)
     filename = "tmp_write_file.txt"
@@ -332,12 +335,13 @@ def saveFile():
         output.write(textContent)
         window.title(filename)
 
+
 window = tk.Tk()
 window.geometry("600x400")
 
 # 建立Text
 text = tk.Text(window, undo=True)
-#text.pack(fill=tk.BOTH, expand=True)
+# text.pack(fill=tk.BOTH, expand=True)
 text.pack()
 
 text.insert(tk.END, "故人西辭黃鶴樓，\n")
@@ -359,6 +363,7 @@ window.title("Text + print log")
 LOG_LINE_NUM = 0
 LOG_LINE_MAX = 10
 
+
 # 日志動態打印
 def write_log():
     global LOG_LINE_NUM
@@ -371,6 +376,7 @@ def write_log():
     else:
         text4.delete(1.0, 2.0)
         text4.insert(tk.END, logmsg_in)
+
 
 # 日誌框
 text4 = tk.Text(window, width=50, height=LOG_LINE_MAX)
@@ -396,8 +402,8 @@ yscrollbar.pack(side=tk.RIGHT, fill=tk.Y)  # y軸scrollbar包裝顯示# 靠右�
 text1 = tk.Text(window, width=30, height=10, wrap="none", bg="lightyellow")
 text1.pack(fill=tk.BOTH, expand=True)
 
-#text1 = tk.Text(frame1, width=30, height=10, wrap=tk.WORD)
-#text1.pack(side=tk.LEFT, fill=tk.Y)  # 靠左安置與父物件高度相同
+# text1 = tk.Text(frame1, width=30, height=10, wrap=tk.WORD)
+# text1.pack(side=tk.LEFT, fill=tk.Y)  # 靠左安置與父物件高度相同
 
 xscrollbar.config(command=text1.xview)  # x軸scrollbar設定
 yscrollbar.config(command=text1.yview)  # y軸scrollbar設定
@@ -432,8 +438,8 @@ yscrollbar.pack(side=tk.RIGHT, fill=tk.Y)  # y軸scrollbar包裝顯示# 靠右�
 text1 = tk.Text(frame1, width=30, height=10, wrap="none", bg="lightyellow")
 text1.pack(fill=tk.BOTH, expand=True)
 
-#text1 = tk.Text(frame1, width=30, height=10, wrap=tk.WORD)
-#text1.pack(side=tk.LEFT, fill=tk.Y)  # 靠左安置與父物件高度相同
+# text1 = tk.Text(frame1, width=30, height=10, wrap=tk.WORD)
+# text1.pack(side=tk.LEFT, fill=tk.Y)  # 靠左安置與父物件高度相同
 
 xscrollbar.config(command=text1.xview)  # x軸scrollbar設定
 yscrollbar.config(command=text1.yview)  # y軸scrollbar設定
@@ -464,7 +470,6 @@ scrolled_text.pack()
 window.mainloop()
 
 
-
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
@@ -480,5 +485,3 @@ print("------------------------------------------------------------")  # 60個
 text9 = tk.Text(window,	selectbackground = 'red', selectforeground = 'gray')
 text9.pack()
 """
-
-

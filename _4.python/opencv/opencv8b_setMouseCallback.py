@@ -1,6 +1,8 @@
 """
-cv2.setMouseCallback
 
+cv2之工具
+
+cv2.setMouseCallback
 
 
 """
@@ -15,7 +17,6 @@ H = 480
 ESC = 27
 SPACE = 32
 
-"""
 print("------------------------------------------------------------")  # 60個
 print("cv2.setMouseCallback 01")
 
@@ -58,10 +59,11 @@ cv2.setMouseCallback("image", draw_circle1)
 
 while True:
     cv2.imshow("image", image)
-    k = cv2.waitKey(1) & 0xFF # 每 1 毫秒偵測一次鍵盤事件
-    if k == 27:
+    #k = cv2.waitKey(1) & 0xFF # 每 1 毫秒偵測一次鍵盤事件
+    k = cv2.waitKey(1)  # 等待按鍵輸入
+    if k == ESC:
         break
-    if k == ord("s"):
+    elif k == ord("s"):
         keyboard_function()
     elif k == ord("c"):
         image = np.full(shape=(H, W, 1), fill_value=0, dtype=np.uint8)
@@ -97,8 +99,9 @@ def CNN():
 
 while (1):
     cv2.imshow('image', image)
-    k = cv2.waitKey(1) & 0xFF # 每 1 毫秒偵測一次鍵盤事件
-    if k == 27:
+    #k = cv2.waitKey(1) & 0xFF # 每 1 毫秒偵測一次鍵盤事件
+    k = cv2.waitKey(1)  # 等待按鍵輸入
+    if k == ESC:
         break
     elif k == ord('s'):
         CNN()
@@ -133,15 +136,16 @@ cv2.imshow('ImageShow', draw)
 cv2.setMouseCallback('ImageShow', show_xy)
 
 while True:
-    k = cv2.waitKey(1) & 0xFF # 每 1 毫秒偵測一次鍵盤事件
-    if k == 27:
+    #k = cv2.waitKey(1) & 0xFF # 每 1 毫秒偵測一次鍵盤事件
+    k = cv2.waitKey(1)  # 等待按鍵輸入
+    if k == ESC:
         break
-    if k == ord('r'):
+    elif k == ord('r'):
         draw = np.zeros((H, W, 4), dtype='uint8')  # 如果按下 r 就變成原本全黑的畫布
         cv2.imshow('ImageShow', draw)
 
 cv2.destroyAllWindows()
-"""
+
 print("------------------------------------------------------------")  # 60個
 
 print("cv2.setMouseCallback 04 測試所有按鍵")
@@ -204,10 +208,11 @@ cv2.imshow("TestMouseEvent", image)
 cv2.setMouseCallback("TestMouseEvent", OnMouseAction)
 
 while True:
-    k = cv2.waitKey(1) & 0xFF  # 每 1 毫秒偵測一次鍵盤事件
-    if k == 27:
+    #k = cv2.waitKey(1) & 0xFF  # 每 1 毫秒偵測一次鍵盤事件
+    k = cv2.waitKey(1)  # 等待按鍵輸入
+    if k == ESC:
         break
-    if k == ord("r"):
+    elif k == ord("r"):
         print("你按了", k)
 
 cv2.destroyAllWindows()
@@ -374,6 +379,7 @@ cv2.waitKey(0)
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+
 """ TBD
 print("cv2.setMouseCallback 10")
 
@@ -393,8 +399,9 @@ cv2.namedWindow('Demo19.10')
 cv2.setMouseCallback('Demo19.10', draw)
 while(1):
     cv2.imshow('Image', image)
-    k = cv2.waitKey(1) & 0xFF # 每 1 毫秒偵測一次鍵盤事件
-    if k == 27:
+    #k = cv2.waitKey(1) & 0xFF # 每 1 毫秒偵測一次鍵盤事件
+    k = cv2.waitKey(1)  # 等待按鍵輸入
+    if k == ESC:
         break
 
 cv2.destroyAllWindows()
@@ -425,8 +432,9 @@ cv2.setMouseCallback('image', draw)
 cv2.createTrackbar('R', 'image', 0, 1, fill)
 while(1):
     cv2.imshow('Image', image)
-    k = cv2.waitKey(1) & 0xFF # 每 1 毫秒偵測一次鍵盤事件
-    if k == 27:
+    #k = cv2.waitKey(1) & 0xFF # 每 1 毫秒偵測一次鍵盤事件
+    k = cv2.waitKey(1)  # 等待按鍵輸入
+    if k == ESC:
         break
     g = cv2.getTrackbarPos('R', 'image')
     if g == 0:
@@ -466,8 +474,9 @@ cv2.namedWindow('image')
 cv2.setMouseCallback('image',draw_circle2)
 while(1):
     cv2.imshow('image',image)
-    k = cv2.waitKey(1) & 0xFF # 每 1 毫秒偵測一次鍵盤事件
-    if k == 27:
+    #k = cv2.waitKey(1) & 0xFF # 每 1 毫秒偵測一次鍵盤事件
+    k = cv2.waitKey(1)  # 等待按鍵輸入
+    if k == ESC:
         break
     elif k==ord('r'):
         mode=1
@@ -515,13 +524,14 @@ cv2.namedWindow("image")
 cv2.setMouseCallback("image", OnMouseAction)
 while 1:
     cv2.imshow("image", img)
-    k = cv2.waitKey(1)
-    if k == ord("l"):
+    k = cv2.waitKey(1)  # 等待按鍵輸入
+    if k == ESC:
+        break
+    elif k == ord("l"):
         mode = 0
     elif k == ord("t"):
         mode = 1
-    elif k == ord("q"):
-        break
+
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個

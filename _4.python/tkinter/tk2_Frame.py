@@ -247,7 +247,7 @@ window.geometry("600x800")
 window.title("Grid 測試 47")
 window.title("AddressBook, Grid範例")
 
-frame1 = tk.Frame(window, bg = 'pink')
+frame1 = tk.Frame(window, bg="pink")
 frame1.pack()
 tk.Label(frame1, text="Name").grid(row=1, column=1, sticky=tk.W)
 tk.Entry(frame1, width=40).grid(row=1, column=2)
@@ -283,7 +283,3 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
-
-
-

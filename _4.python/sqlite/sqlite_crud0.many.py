@@ -44,26 +44,30 @@ SQLite 的 AUTOINCREMENT 是一個關鍵字，用于表中的字段值自動遞�
 
 """
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 import sqlite3
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 import time
 
-db_filename = 'C:/_git/vcs/_1.data/______test_files2/db_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.sqlite';
+db_filename = (
+    "C:/_git/vcs/_1.data/______test_files2/db_"
+    + time.strftime("%Y%m%d_%H%M%S", time.localtime())
+    + ".sqlite"
+)
 
-#print('建立資料庫連線, 資料庫 : ' + db_filename)
-conn = sqlite3.connect(db_filename) # 建立資料庫連線
-cursor = conn.cursor() # 建立 cursor 物件
+# print('建立資料庫連線, 資料庫 : ' + db_filename)
+conn = sqlite3.connect(db_filename)  # 建立資料庫連線
+cursor = conn.cursor()  # 建立 cursor 物件
 
-print('建立一個資料表')
+print("建立一個資料表")
 
-#CREATE 建立
-#CREATE TABLE table01
-#PRIMARY KEY 主鍵
-#序號 自動遞增 不可重複
+# CREATE 建立
+# CREATE TABLE table01
+# PRIMARY KEY 主鍵
+# 序號 自動遞增 不可重複
 
 sqlstr = """
 CREATE TABLE IF NOT EXISTS table01 (
@@ -76,15 +80,21 @@ CREATE TABLE IF NOT EXISTS table01 (
 """
 
 cursor.execute(sqlstr)
-conn.commit() # 更新
+conn.commit()  # 更新
 
 
-print('新增資料 2 筆 寫法三, 有些欄位可以不寫, 序號自動遞增')
+print("新增資料 2 筆 寫法三, 有些欄位可以不寫, 序號自動遞增")
 
 
-cursor.execute("INSERT INTO table01 (id_num, ename, cname, weight) VALUES (5, 'horse', '馬', 48)")
-cursor.execute("INSERT INTO table01 (id_num, ename, cname, weight) VALUES (1, 'mouse', '鼠', 66)")
-cursor.execute("INSERT INTO table01 (id_num, ename, cname, weight) VALUES (4, 'elephant', '象', 48)")
+cursor.execute(
+    "INSERT INTO table01 (id_num, ename, cname, weight) VALUES (5, 'horse', '馬', 48)"
+)
+cursor.execute(
+    "INSERT INTO table01 (id_num, ename, cname, weight) VALUES (1, 'mouse', '鼠', 66)"
+)
+cursor.execute(
+    "INSERT INTO table01 (id_num, ename, cname, weight) VALUES (4, 'elephant', '象', 48)"
+)
 
 cursor.execute("INSERT INTO table01 (id_num, ename, weight) VALUES (9, 'ox', 48)")
 cursor.execute("INSERT INTO table01 (id_num, ename, weight) VALUES (2, 'sheep', 66)")
@@ -97,20 +107,22 @@ cursor.execute("INSERT INTO table01 (id_num, ename, weight) VALUES (7, 'rabbit',
 cursor.execute("INSERT INTO table01 (id_num, ename, weight) VALUES (6, 'tiger', 240)")
 
 for _ in range(123456):
-    cursor.execute("INSERT INTO table01 (id_num, ename, weight) VALUES (6, 'tiger', 240)")
-    
-conn.commit() # 更新
+    cursor.execute(
+        "INSERT INTO table01 (id_num, ename, weight) VALUES (6, 'tiger', 240)"
+    )
+
+conn.commit()  # 更新
 conn.close()  # 關閉資料庫連線
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-print('用fetchall()讀取 全部資料')
-#print('建立資料庫連線, 資料庫 : ' + db_filename)
-conn = sqlite3.connect(db_filename) # 建立資料庫連線
-cursor = conn.execute('SELECT * FROM table01')      #SELECT * : 取得所有資料
-rows = cursor.fetchall()    #讀取全部資料
+print("用fetchall()讀取 全部資料")
+# print('建立資料庫連線, 資料庫 : ' + db_filename)
+conn = sqlite3.connect(db_filename)  # 建立資料庫連線
+cursor = conn.execute("SELECT * FROM table01")  # SELECT * : 取得所有資料
+rows = cursor.fetchall()  # 讀取全部資料
 length = len(rows)
-print('共有', length, '筆資料')
+print("共有", length, "筆資料")
 
 """
 for i in range(length):
@@ -122,11 +134,9 @@ for i in range(length):
 
 conn.close()  # 關閉資料庫連線
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
-
-print('------------------------------------------------------------')	#60個
-print('作業完成')
-print('------------------------------------------------------------')	#60個
-
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個

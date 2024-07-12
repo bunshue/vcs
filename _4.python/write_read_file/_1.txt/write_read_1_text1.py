@@ -158,7 +158,14 @@ print(cc)
 print("從目前檔案位置讀到檔尾")
 cc = f.read()  # read(無參數), 從目前檔案位置讀到檔尾
 f.close()
-print("檔案內容: ", cc)
+print("檔案內容 :", cc)
+
+print('用read()取得檔案大小')
+filename = "data/abc.txt"
+f = open(filename, "r")
+cc = f.read()#一次讀完全部
+f.close()
+print("檔案大小 :", len(cc), '拜')
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1189,7 +1196,7 @@ print("------------------------------------------------------------")  # 60個
 
 
 def wordsNum(filename):
-    """適用英文文件, 輸入文章的檔案名稱,可以計算此文章的字數"""
+    #適用英文文件, 輸入文章的檔案名稱,可以計算此文章的字數
     try:
         with open(filename) as file_Obj:  # 用預設"r"傳回檔案物件file_Obj
             data = file_Obj.read()  # 讀取檔案到變數data
@@ -1214,7 +1221,7 @@ print("------------------------------------------------------------")  # 60個
 
 
 def wordsNum(filename):
-    """適用英文文件, 輸入文章的檔案名稱,可以計算此文章的字數"""
+    #適用英文文件, 輸入文章的檔案名稱,可以計算此文章的字數
     try:
         with open(filename) as file_Obj:  # 用預設"r"傳回檔案物件file_Obj
             data = file_Obj.read()  # 讀取檔案到變數data
@@ -1301,12 +1308,7 @@ else:
     num_words = len(words)
     print(f"The file {filename} has about {num_words} words.")
 
-
 print("------------------------------------------------------------")  # 60個
-
-
-
-
 
 print("字串的處理")
 
@@ -1383,8 +1385,6 @@ print(file.read())
 
 print('------------------------------------------------------------')	#60個
 
-
-"""
 f=open('data/file_u8.txt','r',encoding='UTF-8-sig')
 str=f.readlines()
 print(str)
@@ -1411,10 +1411,6 @@ while True:
         break
     except ValueError:
         print("抱歉!!您所輸入並非是有效的數字，請再輸入一次...")
-"""
-
-
-"""
 
 print("------------------------------------------------------------")  # 60個
 

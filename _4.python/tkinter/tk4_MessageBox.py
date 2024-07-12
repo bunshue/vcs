@@ -8,13 +8,17 @@ print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
 window.geometry("600x800")
-window.title('messagebox 1')
+window.title("messagebox 1")
 
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
+
 
 def confirm_exit():
-    if tk.messagebox.askyesno("關閉窗口","確認關閉窗口嗎"):
+    if tk.messagebox.askyesno("關閉窗口", "確認關閉窗口嗎"):
         window.destroy()
+
 
 window.protocol("WM_DELETE_WINDOW", confirm_exit)
 
@@ -24,10 +28,9 @@ print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
 window.geometry("600x800")
-window.title('messagebox 2')
+window.title("messagebox 2")
 
-window.withdraw()   # 何意? 不顯示視窗? 相對應於 window.mainloop??
-
+window.withdraw()  # 何意? 不顯示視窗? 相對應於 window.mainloop??
 
 
 print("------------------------------------------------------------")  # 60個
@@ -43,50 +46,54 @@ print("------------------------------------------------------------")  # 60個
 
 flag = True
 
+
 # 修改標簽上的文字
 def change_label_text():
     global flag
     flag = not flag
-    color, msg = ('red', 'Hello, world!')\
-        if flag else ('blue', 'Goodbye, world!')
+    color, msg = ("red", "Hello, world!") if flag else ("blue", "Goodbye, world!")
     label.config(text=msg, fg=color)
+
 
 # 確認退出
 def confirm_to_quit():
-    if tk.messagebox.askokcancel('溫馨提示', '確定要退出嗎?'):
+    if tk.messagebox.askokcancel("溫馨提示", "確定要退出嗎?"):
         window.quit()
+
 
 window = tk.Tk()
 window.geometry("600x800")
-window.title('messagebox 4 小遊戲')
+window.title("messagebox 4 小遊戲")
 
 # 創建標簽對象
-label = tk.Label(window, text='Hello, world!', font='Arial -32', fg='red')
+label = tk.Label(window, text="Hello, world!", font="Arial -32", fg="red")
 label.pack(expand=1)
 # 創建一個裝按鈕的容器
 panel = tk.Frame(window)
 # 創建按鈕對象
-button1 = tk.Button(panel, text='修改', command=change_label_text)
-button1.pack(side='left')
-button2 = tk.Button(panel, text='退出', command=confirm_to_quit)
-button2.pack(side='right')
-panel.pack(side='bottom')
+button1 = tk.Button(panel, text="修改", command=change_label_text)
+button1.pack(side="left")
+button2 = tk.Button(panel, text="退出", command=confirm_to_quit)
+button2.pack(side="right")
+panel.pack(side="bottom")
 
 window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
+
 def fnEnd():
-    res = tk.messagebox.askokcancel('注意','確定要結束程式嗎？')
-    if(res == True):	#若傳回值為 True
-        window.destroy()   #結束程式執行
-        
+    res = tk.messagebox.askokcancel("注意", "確定要結束程式嗎？")
+    if res == True:  # 若傳回值為 True
+        window.destroy()  # 結束程式執行
+
+
 window = tk.Tk()
 window.geometry("600x800")
-window.title('messagebox 1')
+window.title("messagebox 1")
 
-lblTitle=tk.Label(window, text = '按鈕結束程式',font=('標楷體', 16))
-btnEnd=tk.Button(window, text = '結束',pady=5,padx=10,command=fnEnd)
+lblTitle = tk.Label(window, text="按鈕結束程式", font=("標楷體", 16))
+btnEnd = tk.Button(window, text="結束", pady=5, padx=10, command=fnEnd)
 lblTitle.pack(pady=20)
 btnEnd.pack(pady=5)
 
@@ -134,9 +141,3 @@ print("取得 浮點數 結果 : ", ans)
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
-
-
-
-
-
-
