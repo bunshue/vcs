@@ -6,7 +6,7 @@ import sys
 import glob
 import tkinter as tk
 from tkinter import ttk
-
+'''
 print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
@@ -766,6 +766,43 @@ button7.grid(row=1, column=0, padx=5, pady=5)
 
 window.mainloop()
 
+
+print("------------------------------------------------------------")  # 60個
+
+'''
+
+
+window = tk.Tk()
+window.geometry("600x400")
+window.title("new all 7")
+
+# 單選按鈕
+# 定義幾個顏色的全局變量
+colors = ["紅", "綠", "藍"]
+
+
+# 單選按鈕回調函數,就是當單選按鈕被點擊會執行該函數
+def radCall():
+    select_value = radVar.get()
+    print(select_value)
+    if select_value == 0:
+        window.configure(background='red')  # 設置整個界面的背景顏色
+    elif select_value == 1:
+        window.configure(background='green')
+    elif select_value == 2:
+        window.configure(background='blue')
+
+
+radVar = tk.IntVar()  # 通過tk.IntVar(),獲取單選按鈕value參數對應的值
+radVar.set(99)
+for col in range(3):
+    # 當該單選按鈕被點擊時，會觸發參數command對應的函數
+    curRad = tk.Radiobutton(
+        window, text=colors[col], variable=radVar, value=col, command=radCall
+    )
+    curRad.pack()
+
+window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 

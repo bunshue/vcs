@@ -14,6 +14,7 @@ Filename :
 
 """
 
+import sys
 import sqlite3
 
 db_filename = "example.db"
@@ -21,10 +22,6 @@ db_filename = "example.db"
 # print('建立資料庫連線, 資料庫 : ' + db_filename)
 conn = sqlite3.connect(db_filename)  # 建立資料庫連線
 cursor = conn.cursor()  # 建立 cursor 物件
-
-
-import sqlite3
-
 
 # 取得一個資料庫內所有表單的名稱, list格式
 def get_table_names(conn):
@@ -43,22 +40,9 @@ def get_column_names(conn, table_name):
         column_names.append(col[1])
     return column_names
 
-
-''' 綜合版, reserved
-def get_database_info(conn):
-    """Return a list of dicts containing the table name and columns for each table in the database."""
-    table_dicts = []
-    for table_name in get_table_names(conn):
-        columns_names = get_column_names(conn, table_name)
-        table_dicts.append({"table_name": table_name, "column_names": columns_names})
-    print(type(table_dicts))
-    return table_dicts
-'''
-
 db_filename = "ims_sql/db_ims.sqlite"
 # db_filename = 'C:/_git/vcs/_1.data/______test_files1/_db/gasoline.sqlite'
 db_filename = "example.db"
-
 
 print("建立資料庫連線, 資料庫 : " + db_filename)
 conn = sqlite3.connect(db_filename)  # 建立資料庫連線
@@ -68,15 +52,19 @@ print(type(table_names))
 talbe_names_length = len(table_names)
 print("裡面有:", talbe_names_length, " 個表單")
 print("分別是:")
+
+table_dicts = []
 for table_name in table_names:
     print("表單:", table_name, end="\t")
     column_names = get_column_names(conn, table_name)
+    table_dicts.append({"table_name": table_name, "column_names": column_names})
     column_names_length = len(column_names)
     print("裡面有:", column_names_length, " 個欄位", end=" ")
     print("分別是:", end=" ")
     for column_name in column_names:
         print(column_name, end=" ")
     print()
+print(type(table_dicts))
 
 conn.close()  # 關閉資料庫連線
 
@@ -84,6 +72,8 @@ print("程式執行完畢！")
 
 
 print("------------------------------------------------------------")  # 60個
+
+sys.exit()
 
 
 """
@@ -125,12 +115,8 @@ SQLite 的 AUTOINCREMENT 是一個關鍵字，用于表中的字段值自動遞�
 
 """
 
-
 print("------------------------------------------------------------")  # 60個
 print("準備工作")
-
-import sqlite3
-
 
 def show_data_base_contents(db_filename, table_name, length):
     conn = sqlite3.connect(db_filename)  # 建立資料庫連線

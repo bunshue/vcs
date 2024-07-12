@@ -458,16 +458,26 @@ window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-from tkinter import scrolledtext
+from tkinter import scrolledtext  # 導入滾動文本框的模塊
 
 window = tk.Tk()
 window.geometry("600x800")
 window.title("ScrolledText 測試")
 
-scrolled_text = scrolledtext.ScrolledText(window, width=100, height=5)
+# 滾動文本框
+scrolled_text = scrolledtext.ScrolledText(window, width=50, height=5)
+
+# wrap=tk.WORD這個值表示在行的末尾如果有一個單詞跨行，會將該單詞放到下一行顯示
+# scrolled_text = scrolledtext.ScrolledText(window, width=50, height=5, wrap=tk.WORD)
+
 scrolled_text.pack()
 
 window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個

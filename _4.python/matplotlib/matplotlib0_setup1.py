@@ -196,6 +196,42 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
+
+
+d01 = [10 for y in range(1, 9)]  # data1線條之y值
+d02 = [20 for y in range(1, 9)]  # data2線條之y值
+d03 = [30 for y in range(1, 9)]  # data3線條之y值
+d04 = [40 for y in range(1, 9)]  # data4線條之y值
+d05 = [50 for y in range(1, 9)]  # data5線條之y值
+d06 = [60 for y in range(1, 9)]  # data6線條之y值
+d07 = [70 for y in range(1, 9)]  # data7線條之y值
+d08 = [80 for y in range(1, 9)]  # data8線條之y值
+d09 = [90 for y in range(1, 9)]  # data9線條之y值
+d10 = [100 for y in range(1, 9)]  # data10線條之y值
+d11 = [110 for y in range(1, 9)]  # data11線條之y值
+d12 = [120 for y in range(1, 9)]  # data12線條之y值
+
+x = [1, 2, 3, 4, 5, 6, 7, 8]
+plt.plot(x, d01, "-1")
+plt.plot(x, d02, "-2")
+plt.plot(x, d03, "-3")
+plt.plot(x, d04, "-4")
+plt.plot(x, d05, "-s")
+plt.plot(x, d06, "-p")
+plt.plot(x, d07, "-*")
+plt.plot(x, d08, "-+")
+plt.plot(x, d09, "-D")
+plt.plot(x, d10, "-d")
+plt.plot(x, d11, "-H")
+plt.plot(x, d12, "-h")
+plt.title("標記符號")
+
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+
 print("兩Y軸不同刻度, plot + bar")
 
 import matplotlib.gridspec as gridspec
@@ -349,7 +385,7 @@ y16 = y00 + offset * 16
 
 num = 6
 styles = ["r-.", "g-*", "b-o", "y-x", "c-^", "m-+", "k-d"]
-legends = ["对数", "线性", "线性对数", "平方", "立方", "几何级数", "阶乘"]
+legends = ["對數", "線性", "線性對數", "平方", "立方", "幾何級數", "階乘"]
 y_datas = [y00, y01, y02, y03, y04, y05, y06]
 for index, y_data in enumerate(y_datas):
     pyplot.plot(x, y_data, styles[index])
@@ -495,27 +531,18 @@ plt.plot(year, city2, 'g--*', lw=2, ms=10, label="高雄")
 
 --- plt.savefig 存圖命令 -------------------------------------------------------------
 
-savefig 必須寫在 show()之前
+plt.savefig 必須寫在 show()之前
 
-#存圖
-#image.save("xxxx.jpg")
-#image.save("xxxx.png")
+plt.savefig('filename.jpg')
+plt.savefig('filename.bmp')
+plt.savefig('filename.png')
+plt.savefig('filename.svg')
+plt.savefig("filename.jpg", dpi=300)
+plt.savefig('filename.png', format='png', dpi=200)
+plt.savefig(fname = 'filename.png', format = "png")
+plt.savefig('filename.png', format='png', transparent=True, dpi=300, pad_inches = 0)    #指定分辨率
 
-#img1.save("tmp_blue.jpg")
-#print(img1.shape)
-
-#img2.save("tmp_alpha.png")
-#print(img2.shape)
-
-
-# 保存圖片（與網頁顯示無關）
-plt.savefig("導出圖表.jpg", dpi=300)
-
-plt.savefig('tmp_pic.jpg')
-
-#存圖
-#fig2.savefig('./picture.png')
-
+fig.savefig('./picture.png')
 
 欲刪除圖表四周的空白, 加 bbox_inches='tight'
 plt.savefig('myBayes.png', bbox_inches='tight')
@@ -524,16 +551,6 @@ filename = "astro" + str(img)
 fig.savefig(filename, bbox_inches='tight')
 
 plt.savefig('out1_14.jpg', bbox_inches='tight')
-
-plt.savefig('filename.png', format='png', dpi=200)
-plt.savefig(fname = 'filename.png', format = "png")
-plt.savefig('filename.svg')
-plt.savefig('filename.png')
-plt.savefig('filename.bmp')
-plt.savefig('filename.jpg')
-plt.savefig('filename.png', format='png', transparent=True, dpi=300, pad_inches = 0)    #指定分辨率
-plt.savefig('filename.png', dpi = 300)
-
 
 也可以直接寫 不用plt.
 savefig("Weight Growth of RN First Rate Line-of-Battle Ships 1630-1875.svg")
@@ -863,6 +880,9 @@ plt.plot(x, y, '-', marker='o')
 plt.plot(x, y, '-', marker='^')
 plt.plot(x, y, '-', marker='s') 
 
+
+# 指定 寬6.4inches, 高4.8inches, 160dpi
+plt.figure(figsize=(6.4, 4.8), dpi=160)
 
 
 

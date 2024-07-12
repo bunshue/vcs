@@ -76,9 +76,9 @@ cv2.createTrackbar(switch, 'image',0,1,setup_bg_color)
 cv2.setTrackbarPos(switch, "image", 1)
 
 while(1):
- k = cv2.waitKey(1) & 0xFF
- if k == 27:
-  break
+    k = cv2.waitKey(1) & 0xFF
+    if k == ESC:
+        break
 
 cv2.destroyAllWindows()
 
