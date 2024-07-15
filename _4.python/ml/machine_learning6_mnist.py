@@ -90,6 +90,9 @@ print("------------------------------------------------------------")  # 60個
 
 print('------------------------------------------------------------')	#60個
 
+"""
+https://waternotetw.blogspot.com/2018/03/keras-mnist.html
+"""
 
 #匯入Keras及相關模組
 import numpy as np #匯入numpy模組，NumPy是Python語言的擴充程式庫。支援維度陣列與矩陣運算
@@ -105,9 +108,14 @@ from keras.datasets import mnist #匯入Keras的mnist模組
 #(x_train, y_train), (x_test, y_test) = mnist.load_data()
 (x_train_image, y_train_label),(x_test_image, y_test_label) = mnist.load_data()
 
-#查看mnist資料集筆數
+# 查看mnist資料集筆數
+# 60,000筆的train data(訓練資料)與10,000筆的test data(測試資料)
 print('train data=', len(x_train_image))
 print('test data=', len(x_test_image))
+
+
+#每一筆mnist資料皆是由images(數字影像)與labels(數字真實值)所組成，
+#images的部分為單色、28*28像素的影像檔案(圖片)，label則是該張影像檔案的真實數值(解答)
 print('x_train_image :', x_train_image.shape) #x_train_image : (60000, 28, 28)
 print('y_train_label :', y_train_label.shape) #共60000張圖片資料，圖片像素28*28
 
@@ -118,10 +126,14 @@ def plot_image(image): #定義plot_image函數，傳入image作為參數
     plt.imshow(image, cmap='binary') #傳入參數image、28*28像素的圖形，camp="binary"表示以黑白色顯示
     plt.show() #顯示圖片
 
+print('顯示第1筆訓練資料 圖形')
 #呼叫plot_image，顯示mnist.train.images[1]的資料圖片
 plot_image(x_train_image[1])
 
+print('顯示第1筆訓練資料 結果')
 print(y_train_label[1])
+
+print('顯示多筆mnist資料內容')
 
 #匯入matplotlib.pyplot模組內容
 #顯示資料集內容
@@ -138,12 +150,12 @@ def plot_images_labels(images, labels, idx, num = 10): #定義plot_images_labels
         idx += 1 #讀取下一筆
     plt.show() #開始繪圖
 
-#顯示第0到第9訓練資料
+print('顯示第0到第9訓練資料')
 plot_images_labels(x_train_image,
                    y_train_label,
                    idx=0)
 
-#顯示第0到第9筆資料
+print('顯示第0到第9筆資料')
 plot_images_labels(x_test_image,
                    y_test_label,
                    idx=0)
@@ -180,9 +192,6 @@ y_TestOneHot = np_utils.to_categorical(y_test_label)
 #輸出One-hot encoding轉換結果
 print('cccc')
 print(y_TrainOneHot[:5])
-
-
-sys.exit()
 
 print('------------------------------------------------------------')	#60個
 

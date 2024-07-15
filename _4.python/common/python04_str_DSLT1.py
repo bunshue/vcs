@@ -811,6 +811,19 @@ print(animals)
 animals_partial = animals[2:]  # 第二項(含)以後的
 print(animals_partial)
 
+# count() 計算次數
+print("虎 出現的次數 :")
+print(animals.count("虎"))
+
+# index() 搜尋
+print("虎 出現的索引位置 :")
+print(animals.index("虎"))
+
+#print("象 出現的索引位置 :") # 出現錯誤
+#print(animals.index("象"))
+
+sys.exit()
+
 print("------------------------------------------------------------")  # 60個
 
 print("字串 轉 串列")
