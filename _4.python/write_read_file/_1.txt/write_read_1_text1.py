@@ -981,22 +981,22 @@ print(data)
 
 print("------------------------------------------------------------")  # 60個
 
-print("------------------------------------------------------------")  # 60個
+filename = 'data/Romeo&Juliet.txt'
 
-filename = "tmp_write_text07.txt"
-filename = 'myfile.txt'
-f = open(filename, "r")
-outfilename = filename[:-4]+'2.txt'
-f = open(outfilename, 'w')
+outfilename = filename[:-4]+'_cpd.txt'
 
-for line in f:           # 讀進來的line字串是有包含檔案內的換行字元哦！
+f1 = open(filename, "r")
+f2 = open(outfilename, 'w')
+
+for line in f1:           # 讀進來的line字串是有包含檔案內的換行字元哦！
     string1 = line.strip()    # 移除line的多餘空白
     if len(string1)>0:        # 如果移除完還有內容，寫進輸出檔
-        f.write(string1+'\n')
-f.close()
-f.close()
+        f2.write(string1+'\n')
+f1.close()
+f2.close()
 
 
+sys.exit()
 
 
 """
@@ -1024,8 +1024,8 @@ def wordCount(songCount):
     mydict = {wd:songList.count(wd) for wd in set(songList)}
 
 filename = "AreYouSleeping.txt"
-with open(filename) as file_Obj:          # 開啟歌曲檔案
-    data = file_Obj.read()          # 讀取歌曲檔案
+with open(filename) as f:          # 開啟歌曲檔案
+    data = f.read()          # 讀取歌曲檔案
 
 mydict = {}                         # 空字典未來儲存單字計數結果
 song = modifySong(data.lower())
@@ -1076,8 +1076,8 @@ def parseString(string):
 
 #filename = 'C:/_git/vcs/_4.python/_data/射鵰英雄傳.big5.txt'
 filename = 'C:/_git/vcs/_4.python/_data/python_word_count1.txt'
-with open(filename) as file_obj:      # 讀取ex21_2.txt
-    data = file_obj.read()
+with open(filename) as f:      # 讀取ex21_2.txt
+    data = f.read()
     #print(data)
 
 searchStr = "包含"
@@ -1091,8 +1091,8 @@ print("------------------------------------------------------------")  # 60個
 def wordsNum(fn):
     """適用英文文件, 輸入文章的檔案名稱,可以計算此文章的字數"""
     try:
-        with open(fn) as file_Obj:  # 用預設"r"傳回檔案
-            data = file_Obj.read()  # 讀取檔案到變數data
+        with open(fn) as f:  # 用預設"r"傳回檔案
+            data = f.read()  # 讀取檔案到變數data
     except Exception:
         print(f"Exception找不到 {fn} 檔案")
     else:
@@ -1105,7 +1105,6 @@ for file in files:
     wordsNum(file)
 
 print("------------------------------------------------------------")  # 60個
-
 
 try:
     # 嘗試打開一個不存在的檔案
@@ -1120,23 +1119,21 @@ except IOError:
 
 print("------------------------------------------------------------")  # 60個
 
-
 fn = "data15_4.txt"  # 設定欲開啟的檔案
 try:
-    with open(fn) as file_Obj:  # 預設mode=r開啟檔案
-        data = file_Obj.read()  # 讀取檔案到變數data
+    with open(fn) as f:  # 預設mode=r開啟檔案
+        data = f.read()  # 讀取檔案到變數data
 except FileNotFoundError:
     print(f"找不到 {fn} 檔案")
 else:
     print(data)  # 輸出變數data
 
-
 print("------------------------------------------------------------")  # 60個
 
 fn = "data15_5.txt"  # 設定欲開啟的檔案
 try:
-    with open(fn) as file_Obj:  # 用預設mode=r開啟檔案
-        data = file_Obj.read()  # 讀取檔案到變數data
+    with open(fn) as f:  # 用預設mode=r開啟檔案
+        data = f.read()  # 讀取檔案到變數data
 except FileNotFoundError:
     print("找不到 %s 檔案" % fn)
 else:
@@ -1146,8 +1143,8 @@ print("------------------------------------------------------------")  # 60個
 
 fn = "data15_6.txt"  # 設定欲開啟的檔案
 try:
-    with open(fn) as file_Obj:  # 用預設mode=r開啟檔案
-        data = file_Obj.read()  # 讀取檔案到變數data
+    with open(fn) as f:  # 用預設mode=r開啟檔案
+        data = f.read()  # 讀取檔案到變數data
 except FileNotFoundError:
     print(f"找不到 {fn} 檔案")
 else:
@@ -1160,8 +1157,8 @@ print("------------------------------------------------------------")  # 60個
 def wordsNum(fn):
     """適用英文文件, 輸入文章的檔案名稱,可以計算此文章的字數"""
     try:
-        with open(fn) as file_Obj:  # 用預設mode=r開啟檔案
-            data = file_Obj.read()  # 讀取檔案到變數data
+        with open(fn) as f:  # 用預設mode=r開啟檔案
+            data = f.read()  # 讀取檔案到變數data
     except FileNotFoundError:
         print(f"找不到 {fn} 檔案")
     else:
@@ -1178,8 +1175,8 @@ print("------------------------------------------------------------")  # 60個
 def wordsNum(fn):
     """適用英文文件, 輸入文章的檔案名稱,可以計算此文章的字數"""
     try:
-        with open(fn) as file_Obj:  # 用預設mode=r開啟檔案
-            data = file_Obj.read()  # 讀取檔案到變數data
+        with open(fn) as f:  # 用預設mode=r開啟檔案
+            data = f.read()  # 讀取檔案到變數data
     except FileNotFoundError:
         print(f"找不到 {fn} 檔案")
     else:
@@ -1198,8 +1195,8 @@ print("------------------------------------------------------------")  # 60個
 def wordsNum(filename):
     #適用英文文件, 輸入文章的檔案名稱,可以計算此文章的字數
     try:
-        with open(filename) as file_Obj:  # 用預設"r"傳回檔案物件file_Obj
-            data = file_Obj.read()  # 讀取檔案到變數data
+        with open(filename) as f:  # 用預設"r"傳回檔案物件f
+            data = f.read()  # 讀取檔案到變數data
     except FileNotFoundError:
         print("找不到 %s 檔案" % filename)
     else:
@@ -1223,8 +1220,8 @@ print("------------------------------------------------------------")  # 60個
 def wordsNum(filename):
     #適用英文文件, 輸入文章的檔案名稱,可以計算此文章的字數
     try:
-        with open(filename) as file_Obj:  # 用預設"r"傳回檔案物件file_Obj
-            data = file_Obj.read()  # 讀取檔案到變數data
+        with open(filename) as f:  # 用預設"r"傳回檔案物件f
+            data = f.read()  # 讀取檔案到變數data
     except FileNotFoundError:
         print("找不到 %s 檔案" % filename)
     else:
@@ -1257,13 +1254,11 @@ for file in (
 
 print("------------------------------------------------------------")  # 60個
 
-
-
 print("計算字數")
 
 
 def count_words(filename):
-    """Count the approximate number of words in a file."""
+    #Count the approximate number of words in a file.
     try:
         with open(filename, encoding="utf-8") as f:
             contents = f.read()
@@ -1331,60 +1326,63 @@ for i in range(len(seplist) - 1):
 slist = text.split(seplist[-1])
 print(slist)
 
-with open("tmp_resolution.txt", "wt") as outf:
+with open("tmp_resolution.txt", "wt") as f:
     for s in slist:
-        outf.write("-------------------------\n")
-        outf.write(s.strip() + "\n")
+        f.write("-------------------------\n")
+        f.write(s.strip() + "\n")
 
 print("------------------------------------------------------------")  # 60個
 
 
 # 九九乘法表就應該是2..9 而不是 1..9
 set99 = set()
-outf = open("tmp_99.txt", "wt")
+f = open("tmp_99.txt", "wt")
 for i in range(2, 9 + 1):
     for j in range(1, 9 + 1):
         prod = i * j
         # 判斷乘積數字是否出現過
         if prod not in set99:
-            outf.write(str(prod) + " ")
+            f.write(str(prod) + " ")
             # 沒出現過，加入set99
             set99.add(prod)
-    outf.write("\n")
-outf.close()
+    f.write("\n")
+f.close()
 
 print("------------------------------------------------------------")  # 60個
 
+print('使用 append 模式')
+f = open("tmp_book.txt", "a")
+f.write("Python程式設計")
+f.writelines(["\n資料結構與演算法", "\n網路行銷與電子商務"])
+f.close()
 
-file_a = open("tmp_book.txt", "a")
-file_a.write("Python程式設計")
-file_a.writelines(["\n資料結構與演算法", "\n網路行銷與電子商務"])
-file_a.close()
-
-file_r = open("tmp_book.txt", "r")
-print("讀取檔案(read)：", file_r.read())
-file_r.seek(0)
-print("讀取檔案(readline)：", file_r.readline())
-file_r.seek(0)
-print("讀取檔案(readlines)：", file_r.readlines())
-file_r.close()
-
-print('------------------------------------------------------------')	#60個
-
-file = open("tmp_RelatedFunctions.bin", "w+")
-file.write("HIHI!!! I like Program, Do you like this?")
-
-file.flush()
-
-print("寫入之後的游標位置：", file.tell())
-
-file.seek(8, 0)
-file.truncate(22)
-
-print(file.read())
+print('使用 read 模式')
+f = open("tmp_book.txt", "r")
+print("讀取檔案(read)：", f.read())
+f.seek(0)
+print("讀取檔案(readline)：", f.readline())
+f.seek(0)
+print("讀取檔案(readlines)：", f.readlines())
+f.close()
 
 print('------------------------------------------------------------')	#60個
 
+print('使用 write+ 模式')
+f = open("tmp_RelatedFunctions.bin", "w+")
+f.write("HIHI!!! I like Program, Do you like this?")
+
+f.flush()
+
+print("寫入之後的游標位置：", f.tell())
+
+f.seek(8, 0)
+f.truncate(22)
+
+print(f.read())
+
+print('------------------------------------------------------------')	#60個
+
+print('使用 read 模式 UTF-8-sig')
 f=open('data/file_u8.txt','r',encoding='UTF-8-sig')
 str=f.readlines()
 print(str)
@@ -1397,12 +1395,12 @@ f.close()
 
 print("------------------------------------------------------------")  # 60個
 
+print('使用 read 模式')
 #讀出前7拜
 f=open('file.txt','r')
 str1=f.read(7)
 print(str1)
 f.close()
-
 
 # Filename: ex08_14.py
 while True:

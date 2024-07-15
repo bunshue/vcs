@@ -6,7 +6,7 @@ import sys
 import glob
 import tkinter as tk
 from tkinter import ttk
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
@@ -581,10 +581,6 @@ sys.exit()
 # 預設音樂是1
 
 
-
-
-
-
 """
 
 
@@ -766,11 +762,7 @@ button7.grid(row=1, column=0, padx=5, pady=5)
 
 window.mainloop()
 
-
 print("------------------------------------------------------------")  # 60個
-
-'''
-
 
 window = tk.Tk()
 window.geometry("600x400")

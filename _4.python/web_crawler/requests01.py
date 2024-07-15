@@ -1,7 +1,7 @@
 # Python 測試 requests
 
-print('------------------------------------------------------------')	#60個
-print('準備工作')
+print("------------------------------------------------------------")  # 60個
+print("準備工作")
 
 import re
 import os
@@ -15,71 +15,85 @@ import random
 import requests
 from datetime import datetime
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-#無參數
+
+# 無參數
 def get_html_data1(url):
-    print('無參數取得網頁資料: ', url)
+    print("無參數取得網頁資料: ", url)
     resp = requests.get(url)
     # 檢查 HTTP 回應碼是否為 requests.codes.ok(200)
     if resp.status_code != requests.codes.ok:
-        print('讀取網頁資料錯誤, url: ', resp.url)
+        print("讀取網頁資料錯誤, url: ", resp.url)
         return None
     else:
         return resp
 
-#有參數
+
+# 有參數
 def get_html_data2(url, params):
-    print('有參數取得網頁資料: ', url)
-    print('參數: ', params)
-    resp = requests.get(url = url, params = params) #有參數的GET請求
+    print("有參數取得網頁資料: ", url)
+    print("參數: ", params)
+    resp = requests.get(url=url, params=params)  # 有參數的GET請求
     # 檢查 HTTP 回應碼是否為 requests.codes.ok(200)
     if resp.status_code != requests.codes.ok:
-        print('讀取網頁資料錯誤, url: ', resp.url)
+        print("讀取網頁資料錯誤, url: ", resp.url)
         return None
     else:
         return resp
+
 
 def get_html_data_from_url(url):
     html_data = get_html_data1(url)
     if html_data == None:
-        print('無法取得網頁資料')
-        sys.exit(1)	#立刻退出程式
+        print("無法取得網頁資料")
+        sys.exit(1)  # 立刻退出程式
 
-    html_data.encoding = 'UTF-8' # 或是 unicode 也可, 指定編碼方式
+    html_data.encoding = "UTF-8"  # 或是 unicode 也可, 指定編碼方式
     return html_data.text
 
-print('------------------------------------------------------------')	#60個
 
-print('Response 物件資訊')
+print("------------------------------------------------------------")  # 60個
+
+print("Response 物件資訊")
 url = "https://www.books.com.tw/web/sys_cebbotm/cebook/1003/?loc=P_0001_2_003"  # 博客來網址
 response = requests.get(url)
 # 印出<class 'requests.models.Response'>，表示response為Response物件
 print("物件型別：", type(response))
 print("網址：", response.url)
-#print("表頭資訊：", response.headers)
+# print("表頭資訊：", response.headers)
 print("連線狀態：", response.status_code)
 print("網頁編碼模式：", response.encoding)
-#print("網頁程式碼：", response.text)
+# print("網頁程式碼：", response.text)
 
-#檢查狀態碼
+# 檢查狀態碼
 if response.status_code == requests.codes.ok:
     print("取得網頁內容成功")
     print("網頁內容大小 = ", len(response.text))
-    #print(response.text)            # 列印網頁內容
+    # print(response.text)            # 列印網頁內容
 else:
     print("取得網頁內容失敗")
-    print(response.status_code, response.reason) # 若發生錯誤(狀態碼不是 200), 則印出狀態碼及錯誤原因
- 
+    print(response.status_code, response.reason)  # 若發生錯誤(狀態碼不是 200), 則印出狀態碼及錯誤原因
+
+"""
+HTTP狀態碼    response.status_code
+
+200 OK
+400 Bad Request
+401 Unauthorized
+402 Payment Required
+403 Forbidden
+404 Not Found
+"""
 print("------------------------------------------------------------")  # 60個
 
-print('讀取網頁異常處理')
-url = 'http://mcut.edu.tw/file_not_existed' # 不存在的內容
+print("讀取網頁異常處理")
+url = "http://mcut.edu.tw/file_not_existed"  # 不存在的內容
 try:
     response = requests.get(url)
-    response.raise_for_status()             # 異常處理
+    response.raise_for_status()  # 異常處理
     print("下載成功")
-except Exception as err:                    # err是系統內建的錯誤訊息
+except Exception as err:  # err是系統內建的錯誤訊息
     print(f"網頁下載失敗: {err}")
 print("程式繼續執行 ... ")
 
@@ -113,127 +127,132 @@ print("查詢字串:", result.query)
 
 print("------------------------------------------------------------")  # 60個
 
-print('requests 測試 1 無參數 取得網頁資料 只是把網頁抓下來')
+print("requests 測試 1 無參數 取得網頁資料 只是把網頁抓下來")
 
-url = 'https://tw.news.yahoo.com/most-popular/'
-url = 'http://www.itwhy.org'
-url = 'http://www.ehappy.tw/demo.htm'
-url = 'http://tw.yahoo.com'
+url = "https://tw.news.yahoo.com/most-popular/"
+url = "http://www.itwhy.org"
+url = "http://www.ehappy.tw/demo.htm"
+url = "http://tw.yahoo.com"
 
 html_data = get_html_data1(url)
 if html_data:
     print("擷取網頁資料 OK")
-    #print(html_data.text)  #OK many
-    #pprint.pprint(html_data.text)  #OK many
+    # print(html_data.text)  #OK many
+    # pprint.pprint(html_data.text)  #OK many
 else:
-    print('無法取得網頁資料')
+    print("無法取得網頁資料")
 
-print('------------------------------------------------------------')	#60個
-print('requests 測試 2 有參數 取得網頁資料 只是把網頁抓下來')
+print("------------------------------------------------------------")  # 60個
+print("requests 測試 2 有參數 取得網頁資料 只是把網頁抓下來")
 
-print('有參數 取得網頁資料 a')
-url = 'http://dict.baidu.com/s'
-params = {'wd':'python'}
+print("有參數 取得網頁資料 a")
+url = "http://dict.baidu.com/s"
+params = {"wd": "python"}
 
 html_data = get_html_data2(url, params)
 
-print('111', html_data.url)
-print('222', html_data.text) #打印解码后的返回数据
-print('333', html_data)
+print("111", html_data.url)
+print("222", html_data.text)  # 打印解码后的返回数据
+print("333", html_data)
 
 print("------------------------------------------------------------")  # 60個
 
-print('有參數 取得網頁資料 d')
-search_word = '椎名林檎'
-url = 'https://zh.wikipedia.org/w/api.php'
-params = {'format':'xmlfm', 'action':'query', 'prop':'revisions', 'rvprop':'content'}
-params['titles'] = search_word
+print("有參數 取得網頁資料 d")
+search_word = "椎名林檎"
+url = "https://zh.wikipedia.org/w/api.php"
+params = {
+    "format": "xmlfm",
+    "action": "query",
+    "prop": "revisions",
+    "rvprop": "content",
+}
+params["titles"] = search_word
 html_data = get_html_data2(url, params)
-#pprint.pprint(html_data)
-#fo = codecs.open('tmp_wiki搜尋結果2' + search_word + '.html', 'w', 'utf-8') # same
-fo = open('tmp_wiki搜尋結果2'+ search_word + '.html', 'w', encoding = 'utf-8')
+# pprint.pprint(html_data)
+# fo = codecs.open('tmp_wiki搜尋結果2' + search_word + '.html', 'w', 'utf-8') # same
+fo = open("tmp_wiki搜尋結果2" + search_word + ".html", "w", encoding="utf-8")
 fo.write(html_data.text)
 fo.close()
 
-print('------------------------------------------------------------')	#60個
-print('requests 測試 11 對網頁資料處理 尋找單字出現次數')
+print("------------------------------------------------------------")  # 60個
+print("requests 測試 11 對網頁資料處理 尋找單字出現次數")
 
-url = 'https://www.ptt.cc/bbs/hotboards.html'
+url = "https://www.ptt.cc/bbs/hotboards.html"
 html_data_text = get_html_data_from_url(url)
 
-lines = html_data_text.splitlines()   #將網頁資料一行一行地分割成串列
+lines = html_data_text.splitlines()  # 將網頁資料一行一行地分割成串列
 
-n=0
+n = 0
 for line in lines:
     if "音樂" in line:
-        n+=1
+        n += 1
 
 print("找到 {} 次!".format(n))
 
-print('------------------------------------------------------------')	#60個
-print('requests 測試 13 讀取網頁上的csv檔')
+print("------------------------------------------------------------")  # 60個
+print("requests 測試 13 讀取網頁上的csv檔")
 
-print('教育部統計處資料')
-url = 'https://stats.moe.gov.tw/files/detail/111/111_student.csv'
+print("教育部統計處資料")
+url = "https://stats.moe.gov.tw/files/detail/111/111_student.csv"
 html_data_text = get_html_data_from_url(url)
 
-rows = html_data_text.split('\n')
-print('第 0 row')
+rows = html_data_text.split("\n")
+print("第 0 row")
 print(rows[0])
-print('第 1 row')
+print("第 1 row")
 print(rows[1])
 
-print('------------------------------------------------------------')	#60個
-print('requests 測試 14b')
+print("------------------------------------------------------------")  # 60個
+print("requests 測試 14b")
 
-print('教育部統計處資料1')
-url = 'https://stats.moe.gov.tw/files/detail/108/108_student.csv'
+print("教育部統計處資料1")
+url = "https://stats.moe.gov.tw/files/detail/108/108_student.csv"
 
 html_data_text = get_html_data_from_url(url)
-rows = html_data_text.split('\n')
+rows = html_data_text.split("\n")
 data = list()
-columns = rows[0].split(',')
+columns = rows[0].split(",")
 for row in rows[1:]:
     try:
-        row = row.split(',')
+        row = row.split(",")
         item = list()
         for f_index in range(1, 5):
-            item.append(row[f_index].replace('"', ''))
+            item.append(row[f_index].replace('"', ""))
         data.append(item)
     except:
         pass
 
 filename = "tmp_教育部統計處資料1_" + os.path.basename(url)
-with open(filename, "w", encoding='utf-8', newline="") as fp:
+with open(filename, "w", encoding="utf-8", newline="") as fp:
     writer = csv.writer(fp)
     writer.writerow(columns[1:5])
     writer.writerows(data)
-print('存檔檔案 :', filename)
+print("存檔檔案 :", filename)
 
-print('------------------------------------------------------------')	#60個
-print('requests 測試 15')
+print("------------------------------------------------------------")  # 60個
+print("requests 測試 15")
 
-print('教育部統計處資料2')
-url = 'https://stats.moe.gov.tw/files/detail/{0}/{0}_student.csv'
+print("教育部統計處資料2")
+url = "https://stats.moe.gov.tw/files/detail/{0}/{0}_student.csv"
 
 for year in range(107, 109):
     csvdata = requests.get(url.format(year)).text
-    rows = csvdata.split('\n')
+    rows = csvdata.split("\n")
     data = list()
-    columns = rows[0].split(',')
+    columns = rows[0].split(",")
     for row in rows[1:]:
         try:
-            row = row.split(',')
+            row = row.split(",")
             item = list()
             for f_index in range(1, 5):
-                item.append(row[f_index].replace('"', ''))
+                item.append(row[f_index].replace('"', ""))
             data.append(item)
         except:
             pass
 
     filename = "tmp_教育部統計處資料2_" + os.path.basename(url.format(year))
-    print('存檔檔案 :', filename)
-    with open(filename, "w", encoding='utf-8', newline="") as fp:
+    print("存檔檔案 :", filename)
+    with open(filename, "w", encoding="utf-8", newline="") as fp:
         writer = csv.writer(fp)
         writer.writerow(columns[1:5])
         writer.writerows(data)
@@ -241,96 +260,98 @@ for year in range(107, 109):
 
 print("OK")
 
-print('------------------------------------------------------------')	#60個
-print('requests 測試 19 json 測試')
+print("------------------------------------------------------------")  # 60個
+print("requests 測試 19 json 測試")
 
-print('PC Home 電腦售價')
-url = 'https://ecshweb.pchome.com.tw/search/v3.3/all/results?q=mac%20Mini&page=1&sort=sale/dc'
+print("PC Home 電腦售價")
+url = "https://ecshweb.pchome.com.tw/search/v3.3/all/results?q=mac%20Mini&page=1&sort=sale/dc"
 
 html_data_text = get_html_data_from_url(url)
 
-json_data = json.loads(html_data_text)['prods']
+json_data = json.loads(html_data_text)["prods"]
 for product in json_data:
-    if product['price'] > 20000:
-        print("NT$:{}, {}".format(product['price'], product['name']))
+    if product["price"] > 20000:
+        print("NT$:{}, {}".format(product["price"], product["name"]))
 
-print('------------------------------------------------------------')	#60個
-print('requests 測試 20 json 測試')
+print("------------------------------------------------------------")  # 60個
+print("requests 測試 20 json 測試")
 
-url = 'https://ecshweb.pchome.com.tw/search/v3.3/all/results?q=mac%20Mini&page=1&sort=sale/dc'
+url = "https://ecshweb.pchome.com.tw/search/v3.3/all/results?q=mac%20Mini&page=1&sort=sale/dc"
 
 html_data_text = get_html_data_from_url(url)
 
-json_data = json.loads(html_data_text)['prods']
+json_data = json.loads(html_data_text)["prods"]
 message = ""
 for product in json_data:
-    if product['price'] > 20000:
-        message = message + "NT$:{}, {}\n".format(product['price'], product['name'])
-        
+    if product["price"] > 20000:
+        message = message + "NT$:{}, {}\n".format(product["price"], product["name"])
+
 print("Mac Mini價格通知", message)
 
-print('------------------------------------------------------------')	#60個
-print('requests 測試 21 中油油價 json 測試')
+print("------------------------------------------------------------")  # 60個
+print("requests 測試 21 中油油價 json 測試")
 
 url = "https://www.cpc.com.tw/historyprice.aspx?n=2890"
 response = requests.get(url)
 
 m = re.search("var pieSeries = (.*);", response.text)
-jsonstr = m.group(0).strip('var pieSeries = ').strip(";")
+jsonstr = m.group(0).strip("var pieSeries = ").strip(";")
 json_data = json.loads(jsonstr)
-#print(json_data)
+# print(json_data)
 cnt = 1
-for item in reversed(json_data):    #反向排序, 利用 reversed 反轉了排序(原內容由舊到新, 利用這個改為由新到舊)
+for item in reversed(json_data):  # 反向排序, 利用 reversed 反轉了排序(原內容由舊到新, 利用這個改為由新到舊)
     new_line = 0
-    for data in item['data']:
-        if(data['name'] == '超級/高級柴油'):
+    for data in item["data"]:
+        if data["name"] == "超級/高級柴油":
             new_line = 0
             continue
         else:
             new_line = 1
-        print("date:" + item['name'])   #第一層的 name 為日期
-        print(data['name'] + ":" + str(data['y']))  #後面再接一層 array data 其中的 name 為產品名, 而 y 為單價
-    if (new_line == 1):
+        print("date:" + item["name"])  # 第一層的 name 為日期
+        print(
+            data["name"] + ":" + str(data["y"])
+        )  # 後面再接一層 array data 其中的 name 為產品名, 而 y 為單價
+    if new_line == 1:
         print("================")
 
     cnt += 1
     if cnt == 10:
         break
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-print('查詢一個網頁有出現的詞的次數 聯合新聞網之即時新聞 關鍵字')
+print("查詢一個網頁有出現的詞的次數 聯合新聞網之即時新聞 關鍵字")
 
-url = 'https://udn.com/news/breaknews/1/99#breaknews'
+url = "https://udn.com/news/breaknews/1/99#breaknews"
 
 response = requests.get(url)
 html = response.text
 print(response.status_code)
 
-text = '賴'
-print('要查詢的詞 :', text)
-print('出現次數 :', html.count(text))
+text = "賴"
+print("要查詢的詞 :", text)
+print("出現次數 :", html.count(text))
 
-text = '總統'
-print('要查詢的詞 :', text)
-print('出現次數 :', html.count(text))
+text = "總統"
+print("要查詢的詞 :", text)
+print("出現次數 :", html.count(text))
 
-text = '委員'
-print('要查詢的詞 :', text)
-print('出現次數 :', html.count(text))
+text = "委員"
+print("要查詢的詞 :", text)
+print("出現次數 :", html.count(text))
 
-print('------------------------------------------------------------')	#60個
-print('requests 測試 22')
+print("------------------------------------------------------------")  # 60個
+print("requests 測試 22")
 
-print('抓取網頁中的電話號碼 用 re')
+print("抓取網頁中的電話號碼 用 re")
 
-url = 'https://www.taichung.gov.tw/10179/12034/'
+url = "https://www.taichung.gov.tw/10179/12034/"
 
 html = requests.get(url).text
 
-regex04a = r'\(\d{2}\)\d{4}-?\d{4}'
-regex04b = r'\d{2}-\d{4}-?\d{4}'
-regex0800 = r'0800-\d{6}'
+regex04a = r"\(\d{2}\)\d{4}-?\d{4}"
+regex04b = r"\d{2}-\d{4}-?\d{4}"
+regex0800 = r"0800-\d{6}"
 matches = re.findall(regex04a, html)
 matches += re.findall(regex04b, html)
 matches += re.findall(regex0800, html)
@@ -341,28 +362,28 @@ for match in matches:
 print('全部資料')
 print(matches)
 """
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-print('抓取網頁中的e-mail地址 用 re')
+print("抓取網頁中的e-mail地址 用 re")
 
 regex = r"([a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9.]+)"
-url = 'http://csharphelper.com/blog/'
+url = "http://csharphelper.com/blog/"
 
-html = requests.get(url, verify = False).text
-    
+html = requests.get(url, verify=False).text
+
 emails = re.findall(regex, html)
 for email in emails:
     print(email)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-print('抓取網頁內的所有圖片連結')
+print("抓取網頁內的所有圖片連結")
 
-url = 'https://www.bagong.cn/dog/'
+url = "https://www.bagong.cn/dog/"
 
 html = requests.get(url).text
 
-regex = r'https?://.+.jpg'
+regex = r"https?://.+.jpg"
 photos = re.findall(regex, html)
 
 """ many
@@ -374,7 +395,7 @@ print("------------------------------------------------------------")  # 60個
 
 import urllib.parse
 
-print('聯合新聞網之即時新聞 標題 與 連結')
+print("聯合新聞網之即時新聞 標題 與 連結")
 
 url = "https://udn.com/api/more?page=2&id=&channelId=1&cate_id=0&type=breaknews&totalRecNo=6561"
 html = requests.get(url).text
@@ -386,22 +407,32 @@ for title in titles:
     print(title['title'])
     print(urllib.parse.urljoin("https://udn.com", title['titleLink']))
 """
-
 print("------------------------------------------------------------")  # 60個
 
-print('無參數讀取 ck101 網頁')
+print("測試 headers, 無 headers 抓網頁, ck101 網頁")
+
+# 怎麼無headers 也是OK?
 url = "https://ck101.tw/thread-5778209-1-1.html"
-url ='https://www.dcard.tw/f/stock/p/237123381'
+# url ='https://www.dcard.tw/f/stock/p/237123381'
+
 response = requests.get(url)
+
+if response.status_code == 403:
+    print("403 Forbidden")
+
 print(response)
+print(response.status_code)
 print(response.text)
 
+
+sys.exit()
+
 print("------------------------------------------------------------")  # 60個
 
-print('有參數讀取 ck101 網頁')
+print("測試 headers, 有 headers 抓網頁, ck101 網頁")
 
 url = "https://ck101.tw/thread-5778209-1-1.html"
-url ='https://www.dcard.tw/f/stock/p/237123381'
+# url ='https://www.dcard.tw/f/stock/p/237123381'
 
 headers = {
     "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36"
@@ -410,21 +441,27 @@ response = requests.get(url, headers=headers)
 print(response)
 print(response.text)
 
+sys.exit()
+
 print("------------------------------------------------------------")  # 60個
 
-print('無 cookies 抓網頁')
+print("測試 cookies over18, 無 cookies 抓網頁")
 
 url = "https://www.ptt.cc/bbs/Gossiping/index.html"
+url = "https://www.ptt.cc/bbs/Beauty/M.1707360497.A.39D.html"
+
 response = requests.get(url)
 print(response.text)
 
 print("------------------------------------------------------------")  # 60個
 
-print('有 cookies 抓網頁')
+print("測試 cookies over18, 有 cookies 抓網頁")
+
 url = "https://www.ptt.cc/bbs/Gossiping/index.html"
+url = "https://www.ptt.cc/bbs/Beauty/M.1707360497.A.39D.html"
+
 cookies = {"over18": "1"}
 response = requests.get(url, cookies=cookies)
-
 print(response.text)
 
 print("------------------------------------------------------------")  # 60個
@@ -436,85 +473,97 @@ import pandas as pd
 
 csv_file = "https://storage.googleapis.com/learn_pd_like_tidyverse/gapminder.csv"
 gdp = pd.read_csv(csv_file)
-print('------------------------------------------------')
+print("------------------------------------------------")
 print(type(gdp))
-print('------------------------------------------------')
+print("------------------------------------------------")
 print(gdp.head())
-print('------------------------------------------------')
+print("------------------------------------------------")
 
 print("用pd處理網頁上的 excel 檔案")
 # 讀入excel 試算表
 xlsx_file = "https://storage.googleapis.com/learn_pd_like_tidyverse/gapminder.xlsx"
 gapminder = pd.read_excel(xlsx_file)
-print('------------------------------------------------')
+print("------------------------------------------------")
 print(type(gapminder))
-print('------------------------------------------------')
+print("------------------------------------------------")
 print(gapminder.head())
-print('------------------------------------------------')
+print("------------------------------------------------")
 
-print('用list 標註變數名稱從DataFrame選出country 與continent 欄位：')
-print(gapminder[['country', 'continent']])
+print("用list 標註變數名稱從DataFrame選出country 與continent 欄位：")
+print(gapminder[["country", "continent"]])
 
-print('------------------------------------------------')
-print('選一個變數且沒有以list 標註，選出欄位資料，型別為Series')
-country = gapminder['country']
+print("------------------------------------------------")
+print("選一個變數且沒有以list 標註，選出欄位資料，型別為Series")
+country = gapminder["country"]
 print(type(country))
-print('------------------------------------------------')
-print('聚合函數計算sum，計算2007 年全球人口總數：')
-aa = gapminder[gapminder['year'] == 2007][['pop']].sum()
+print("------------------------------------------------")
+print("聚合函數計算sum，計算2007 年全球人口總數：")
+aa = gapminder[gapminder["year"] == 2007][["pop"]].sum()
 print(aa)
-print('------------------------------------------------')
-print('計算2007 年全球的平均壽命、平均財富：')
-bb = gapminder[gapminder['year'] == 2007][['lifeExp', 'gdpPercap']].mean()
+print("------------------------------------------------")
+print("計算2007 年全球的平均壽命、平均財富：")
+bb = gapminder[gapminder["year"] == 2007][["lifeExp", "gdpPercap"]].mean()
 print(bb)
-print('------------------------------------------------')
-print('groupby群組計算2007 年各洲人口總數：')
-cc = gapminder[gapminder['year'] == 2007].groupby(by = 'continent')['pop'].sum()
+print("------------------------------------------------")
+print("groupby群組計算2007 年各洲人口總數：")
+cc = gapminder[gapminder["year"] == 2007].groupby(by="continent")["pop"].sum()
 print(cc)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-print('不支持直接讀取網頁, 要使用偽裝瀏覽器')
+print("測試 headers, 無 headers 抓網頁, 金石堂官網")
+print("不支持直接讀取網頁, 要使用偽裝瀏覽器")
 
-""" fail
-print("金石堂官網")
+url = "https://www.kingstone.com.tw/"
 
-url = 'https://www.kingstone.com.tw/'
-response = requests.get(url)
-response.raise_for_status()
-"""
+try:
+    response = requests.get(url)
+    response.raise_for_status()  # 如果發生錯誤的話, 會丟出 exception
+except Exception as err:  # err是系統內建的錯誤訊息
+    print(f"網頁下載失敗: {err}")
+print("程式繼續執行 ... ")
 
-print('------------------------------')	#30個
+print("------------------------------")  # 30個
 
-print("金石堂官網")
-headers = { 'User-Agent':'Mozilla/5.0 (Windows NT 6.1; WOW64)\
+print("測試 headers, 無 headers 抓網頁, 金石堂官網")
+print("使用偽裝瀏覽器")
+
+headers = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 6.1; WOW64)\
             AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.101\
-            Safari/537.36', }
-url = 'https://www.kingstone.com.tw/'
-response = requests.get(url, headers=headers)
-response.raise_for_status()
+            Safari/537.36",
+}
+url = "https://www.kingstone.com.tw/"
+
+try:
+    response = requests.get(url, headers=headers)
+    response.raise_for_status()  # 如果發生錯誤的話, 會丟出 exception
+except Exception as err:  # err是系統內建的錯誤訊息
+    print(f"網頁下載失敗: {err}")
+print("程式繼續執行 ... ")
+
 print("偽裝瀏覽器擷取網路資料成功")
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-print("天瓏書局")
-url = 'http://www.tenlong.com.tw'                    # 天瓏書局網址
+print("儲存網頁內容, 天瓏書局")
+url = "http://www.tenlong.com.tw"  # 天瓏書局
 
 try:
     response = requests.get(url)
     print("下載成功")
-except Exception as err:                                
+except Exception as err:
     print("網頁下載失敗: %s" % err)
 
 # 儲存網頁內容
-fn = 'tmp_html_text1.html'
-with open(fn, 'wb') as f:                     # 以二進位儲存
-    for diskStorage in response.iter_content(10240): # Response物件處理
-        size = f.write(diskStorage)           # Response物件寫入
-        print(size)                                  # 列出每次寫入大小
+fn = "tmp_html_text1.html"
+with open(fn, "wb") as f:  # 以二進位儲存
+    for diskStorage in response.iter_content(10240):  # Response物件處理
+        size = f.write(diskStorage)  # Response物件寫入
+        print("寫入資料 :", size, "拜")
     print("以 %s 儲存網頁HTML檔案成功" % fn)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 """ many 已把 thread 搬出
 import threading
@@ -532,7 +581,11 @@ def download_xkcd(start_comic, end_comic):
         url = f'{base_url}{comic_number}/info.0.json'   # 建立API URL來獲取漫畫資訊
         try:
             response = requests.get(url)
-            response.raise_for_status()                 # 確保請求成功
+            try:
+                response.raise_for_status()  # 如果發生錯誤的話, 會丟出 exception
+            except Exception as err:                    # err是系統內建的錯誤訊息
+                print(f"網頁下載失敗: {err}")
+            print("程式繼續執行 ... ")
 
             comic_json = response.json()
             comic_url = comic_json['img']               # 從JSON響應中提取圖片 URL
@@ -540,7 +593,11 @@ def download_xkcd(start_comic, end_comic):
 
             # 向圖片 URL 發送請求並下載圖片
             res = requests.get(comic_url)
-            res.raise_for_status()
+            try:
+                res.raise_for_status()  # 如果發生錯誤的話, 會丟出 exception
+            except Exception as err:                    # err是系統內建的錯誤訊息
+                print(f"網頁下載失敗: {err}")
+            print("程式繼續執行 ... ")
 
             # 保存圖片到本地資料夾
             with open(os.path.join('xkcd_comics', os.path.basename(comic_url)), 'wb') as image_file:
@@ -595,15 +652,15 @@ for ip in proxy_ips:
 """
 print("------------------------------------------------------------")  # 60個
 
-print('#台灣水庫即時水情 1')
-#台灣水庫即時水情
+print("#台灣水庫即時水情 1")
+# 台灣水庫即時水情
 response = requests.get("https://water.taiwanstat.com/")  # 使用 get 方法
 print(response.text)  # 讀取並印出 text 屬性
 
 print("------------------------------------------------------------")  # 60個
 
-print('#台灣水庫即時水情 2')
-#台灣水庫即時水情
+print("#台灣水庫即時水情 2")
+# 台灣水庫即時水情
 response = requests.get("https://water.taiwanstat.com/")  # 使用 get 方法
 response.encoding = "utf-8"  # 因為該網頁編碼為 utf-8，加上 .encoding 避免亂碼
 print(response.text)
@@ -614,11 +671,11 @@ url = "https://data.kcg.gov.tw/dataset/6f29f6f4-2549-4473-aa90-bf60d10895dc/reso
 response = requests.get(url)  # 使用 get 方法
 response.encoding = "utf-8"  # 因為該網頁編碼為 utf-8，加上 .encoding 避免亂碼
 print(response.text)
-#print(response.json()) fail
+# print(response.json()) fail
 
 print("------------------------------------------------------------")  # 60個
 
-print('測試一個 echo 函數')
+print("測試一個 echo 函數")
 # 設定參數
 params = {"name": "david", "age": "18"}
 # 加入參數
@@ -766,7 +823,7 @@ print(response.text)
 
 print("------------------------------------------------------------")  # 60個
 
-print('拆解網頁資料')
+print("拆解網頁資料")
 response = requests.get("https://today.line.me/tw/v2/article/oqay0ro")
 # 取得文章的原始碼後，使用 split 字串拆分的方式，拆解出 articleId
 article_id = response.text.split("<script>")[1].split('id:"article:')[1].split(":")[0]
@@ -779,6 +836,7 @@ response = requests.post("http://127.0.0.1:5000/", data=data)  # 發送 POST 請
 print(response.text)
 
 print("------------------------------------------------------------")  # 60個
+
 
 def hello_world(request):
     request_json = request.get_json()
@@ -793,7 +851,9 @@ def hello_world(request):
     else:
         return f"Hello World!"
 
+
 print("------------------------------------------------------------")  # 60個
+
 
 def hello_world(request):
     request_json = request.get_json()
@@ -809,6 +869,7 @@ def hello_world(request):
     }
 
     return ("Hello World!", 200, headers)  # 回傳同意跨域的 header
+
 
 print("------------------------------------------------------------")  # 60個
 
@@ -865,11 +926,14 @@ datestr = "20210201"
 
 # 下載股價
 r = requests.get(
-    'https://www.twse.com.tw/exchangeReport/MI_INDEX?response=csv&date=' + datestr + '&type=ALLBUT0999')
+    "https://www.twse.com.tw/exchangeReport/MI_INDEX?response=csv&date="
+    + datestr
+    + "&type=ALLBUT0999"
+)
 
 print(r.text)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 from io import StringIO
 import pandas as pd
@@ -879,21 +943,23 @@ stock_symbol = "2330"
 
 # 下載股價
 r = requests.get(
-    'https://www.twse.com.tw/exchangeReport/MI_INDEX?response=csv&date=' + datestr + '&type=ALLBUT0999')
+    "https://www.twse.com.tw/exchangeReport/MI_INDEX?response=csv&date="
+    + datestr
+    + "&type=ALLBUT0999"
+)
 
-r_text = r.text.split('\n')
+r_text = r.text.split("\n")
 
-r_text = [i for i in r_text if len(
-    i.split('",')) == 17 and i[0] != '=']
+r_text = [i for i in r_text if len(i.split('",')) == 17 and i[0] != "="]
 
 data = "\n".join(r_text)
 df = pd.read_csv(StringIO(data), header=0)
 
-df = df.drop(columns=['Unnamed: 16'])
+df = df.drop(columns=["Unnamed: 16"])
 filter_df = df[df["證券代號"] == stock_symbol]
 print(filter_df)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 """ no module
 import matplotlib.pyplot as plt
@@ -978,7 +1044,7 @@ ax2.set_xticklabels(day[::5])
 plt.show()
 """
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 """
 import photo_module as m
@@ -1038,11 +1104,14 @@ print("\n下載完畢")
 
 print("------------------------------------------------------------")  # 60個
 
+print("檢查錯誤碼")
+
 try:
     # 嘗試發出網絡請求
     response = requests.get("http://example.com")
+
     # 如果請求返回了錯誤響應, 會引發 HTTPError
-    response.raise_for_status()
+    response.raise_for_status()  # 如果發生錯誤的話, 會丟出 exception
 except requests.exceptions.HTTPError as e:
     # 處理 HTTP 錯誤
     print(f"HTTP Error: {e}")
@@ -1075,7 +1144,7 @@ print("讀取網頁的json資料")
 url = "https://www.oxxostudio.tw/json/pageList.json"
 response = requests.get(url)
 json_data = json.loads(response.text)  # 轉成 json 格式
-#print(json_data)#全部
+# print(json_data)#全部
 print("第0筆")
 print(json_data[0])
 print("第1筆")
@@ -1146,7 +1215,6 @@ print(json_data)
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
 
 
@@ -1155,24 +1223,21 @@ print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
 
+print("------------------------------------------------------------")  # 60個
 
+
+print("字串處理 技巧")
+
+print("教育部統計處資料 很多")
+url = "https://stats.moe.gov.tw/files/detail/{}/{}_student.csv"
+for year in range(106, 110):
+    print(url.format(year, year))
 
 print("------------------------------------------------------------")  # 60個
 
 
-
-print('字串處理 技巧')
-
-print('教育部統計處資料 很多')
-url = 'https://stats.moe.gov.tw/files/detail/{}/{}_student.csv'
-for year in range(106, 110):
-    print(url.format(year, year))
-
-print('------------------------------------------------------------')	#60個
-
-
-print('------------------------------------------------------------')	#60個
-print('requests 測試 16 字串處理 技巧')
+print("------------------------------------------------------------")  # 60個
+print("requests 測試 16 字串處理 技巧")
 
 url = "https://www.nkust.edu.tw/p/403-1000-14-{}.php?Lang=zh-tw"
 
@@ -1192,38 +1257,36 @@ for pg_no, page in enumerate(pages, 1):
     filename = "tmp_page-{}.txt".format(pg_no)
     with open(filename, "wt") as fp:
         fp.write(html)
-    print('存檔檔案 :', filename)
+    print("存檔檔案 :", filename)
     time.sleep(3)
     print("=========================")
 
-print('------------------------------------------------')
+print("------------------------------------------------")
 
 print("webbrowser")
 import webbrowser
-webbrowser.open('http://www.mcut.edu.tw')
+
+webbrowser.open("http://www.mcut.edu.tw")
 
 print("------------------------------------------------------------")  # 60個
 
 print("webbrowser")
-#address = input("請輸入地址 : ")
+# address = input("請輸入地址 : ")
 address = "新竹市東區榮光里中華路二段445號"
-webbrowser.open('http://www.google.com.tw/maps/place/' + address)
+webbrowser.open("http://www.google.com.tw/maps/place/" + address)
 
 
+# re 使用
 
-
-
-#re 使用
-
-#明志科技大學
-url = 'http://www.mcut.edu.tw'
+# 明志科技大學
+url = "http://www.mcut.edu.tw"
 response = requests.get(url)
 if response.status_code == requests.codes.ok:
-    print('欲搜尋的字串')
+    print("欲搜尋的字串")
     pattern = "英文"
 
     # 使用方法1
-    if pattern in response.text:              # 方法1
+    if pattern in response.text:  # 方法1
         print(f"搜尋 {pattern} 成功")
     else:
         print(f"搜尋 {pattern} 失敗")
@@ -1237,14 +1300,10 @@ if response.status_code == requests.codes.ok:
 else:
     print("網頁下載失敗")
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
-
-
-
-
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 """ many
 
@@ -1281,14 +1340,14 @@ print("------------------------------------------------------------")  # 60個
 A Simple Public IP Address API
 https://www.ipify.org/
 """
-print('測試 ipify')
+print("測試 ipify")
 
-#IPv4/IPv6 皆可
+# IPv4/IPv6 皆可
 
 ip = requests.get("https://api64.ipify.org")
-print('My public IP address is: {}'.format(ip.text))
+print("My public IP address is: {}".format(ip.text))
 
-ip = requests.get('https://api64.ipify.org?format=json')
+ip = requests.get("https://api64.ipify.org?format=json")
 print(ip.text)
 
 
@@ -1322,8 +1381,6 @@ headers = {
 response = requests.get(url, headers=headers)
 response.encoding = "utf8"
 print(response.text)
-
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -1713,92 +1770,96 @@ driver.close()
 
 print("------------------------------------------------------------")  # 60個
 
-from selenium import webdriver    # 匯入 selenium 的 webdriver 子套件
+from selenium import webdriver  # 匯入 selenium 的 webdriver 子套件
 
-browser = webdriver.Chrome()   # 建立 Chrome 瀏覽器物件
-browser.get('http://www.flag.com.tw')  # 開啟 Chrome 並連到旗標網站
-time.sleep(5)                       # 暫停 5 秒
-browser.close()                # 關閉網頁(目前分頁)A
+browser = webdriver.Chrome()  # 建立 Chrome 瀏覽器物件
+browser.get("http://www.flag.com.tw")  # 開啟 Chrome 並連到旗標網站
+time.sleep(5)  # 暫停 5 秒
+browser.close()  # 關閉網頁(目前分頁)A
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-from selenium import webdriver # 匯入 selenium 的 webdriver
+from selenium import webdriver  # 匯入 selenium 的 webdriver
 
-browser = webdriver.Chrome()            # 建立 Chrome 瀏覽器物件
-browser.get('http://www.google.com')    # 開啟 Chrome 並連到 Google 網站
-print('標題：' + browser.title)         # 輸出網頁標題
-print('網址：' + browser.current_url)   # 輸出網頁網址
-print('內容：' + browser.page_source[0:50]) # 輸出網頁原始碼的前 50 個字
-print('視窗：', browser.get_window_rect())  # 輸出視窗的位置及寬高
-browser.save_screenshot('d:/scrcap.png')   # 截取網頁畫面
-time.sleep(3) # 暫停 3 秒
-browser.set_window_rect(200, 100, 500, 250)   # 改變視窗位置及大小
+browser = webdriver.Chrome()  # 建立 Chrome 瀏覽器物件
+browser.get("http://www.google.com")  # 開啟 Chrome 並連到 Google 網站
+print("標題：" + browser.title)  # 輸出網頁標題
+print("網址：" + browser.current_url)  # 輸出網頁網址
+print("內容：" + browser.page_source[0:50])  # 輸出網頁原始碼的前 50 個字
+print("視窗：", browser.get_window_rect())  # 輸出視窗的位置及寬高
+browser.save_screenshot("d:/scrcap.png")  # 截取網頁畫面
+time.sleep(3)  # 暫停 3 秒
+browser.set_window_rect(200, 100, 500, 250)  # 改變視窗位置及大小
 time.sleep(3)
-browser.fullscreen_window()     # 將視窗設為全螢幕
+browser.fullscreen_window()  # 將視窗設為全螢幕
 time.sleep(3)
-browser.quit() # 關閉視窗結束驅動
+browser.quit()  # 關閉視窗結束驅動
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-from selenium import webdriver # 匯入 selenium 的 webdriver
+from selenium import webdriver  # 匯入 selenium 的 webdriver
 
-browser = webdriver.Chrome() # 建立 Chrome 瀏覽器物件
-browser.get('http://www.google.com') # 開啟 Chrome 並連到旗標網站
-e1 = browser.find_element_by_tag_name('head')  # 尋找 head 標籤
+browser = webdriver.Chrome()  # 建立 Chrome 瀏覽器物件
+browser.get("http://www.google.com")  # 開啟 Chrome 並連到旗標網站
+e1 = browser.find_element_by_tag_name("head")  # 尋找 head 標籤
 print(e1.tag_name)  # 輸出 head 確認已找到 (tag_name 屬性為標籤名稱, 詳見下表)
-e2 = e1.find_element_by_tag_name('title')  # 在 head 元素中尋找 title 標籤
+e2 = e1.find_element_by_tag_name("title")  # 在 head 元素中尋找 title 標籤
 print(e2.tag_name)  # 輸出 tite 確認已找到
-browser.quit()     # 關閉視窗結束驅動
+browser.quit()  # 關閉視窗結束驅動
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 from selenium import webdriver  # 匯入 selenium 的 webdriver
 
 opt = webdriver.ChromeOptions()  # ←建立選項物件
-opt.add_experimental_option('prefs',  # ←在選項物件中加入「禁止顯示訊息框」的選項
-                            {'profile.default_content_setting_values': {'notifications': 2}})
+opt.add_experimental_option(
+    "prefs",  # ←在選項物件中加入「禁止顯示訊息框」的選項
+    {"profile.default_content_setting_values": {"notifications": 2}},
+)
 browser = webdriver.Chrome(options=opt)  # ←以 options 指名參數來建立瀏覽器物件
 
-browser.get('http://www.facebook.com')  # ←開啟 Chrome 並連到 fb 網站
-browser.find_element_by_id('email').send_keys('您的帳號')  # }
-browser.find_element_by_id('pass').send_keys('您的密碼')  # }輸入帳密並按登入鈕
-browser.find_element_by_name('login').click()  # }
+browser.get("http://www.facebook.com")  # ←開啟 Chrome 並連到 fb 網站
+browser.find_element_by_id("email").send_keys("您的帳號")  # }
+browser.find_element_by_id("pass").send_keys("您的密碼")  # }輸入帳密並按登入鈕
+browser.find_element_by_name("login").click()  # }
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 from selenium import webdriver  # 匯入 selenium 的 webdriver
 
-opt =  webdriver.ChromeOptions()      #建立選項物件
-opt.add_experimental_option('prefs',  #加入「禁止顯示訊息框」的選項
-    {'profile.default_content_setting_values': {'notifications' : 2}})
-browser = webdriver.Chrome(options = opt) #以 options 參數來建立瀏覽器物件
+opt = webdriver.ChromeOptions()  # 建立選項物件
+opt.add_experimental_option(
+    "prefs",  # 加入「禁止顯示訊息框」的選項
+    {"profile.default_content_setting_values": {"notifications": 2}},
+)
+browser = webdriver.Chrome(options=opt)  # 以 options 參數來建立瀏覽器物件
 
-browser.get('http://www.google.com')    #←開啟 Chrome 並連到 Google 網站
-browser.maximize_window()  #←將視窗最大化以避免最右邊的登入鈕沒顯示出來
+browser.get("http://www.google.com")  # ←開啟 Chrome 並連到 Google 網站
+browser.maximize_window()  # ←將視窗最大化以避免最右邊的登入鈕沒顯示出來
 
-browser.find_element_by_id('gb_70').click()   #←按登入鈕
-time.sleep(3)       #←暫停 3 秒等待進入下一頁
-browser.find_element_by_id('identifierId').send_keys('您的帳號') #}←輸入帳號
-browser.find_element_by_id('identifierNext').click()   #←按繼續鈕
-time.sleep(3)       #←暫停 3 秒等待進入下一頁
-browser.find_element_by_name('password').send_keys('您的密碼')  #←輸入帳密
-browser.find_element_by_id('passwordNext').click()   #←按繼續鈕
+browser.find_element_by_id("gb_70").click()  # ←按登入鈕
+time.sleep(3)  # ←暫停 3 秒等待進入下一頁
+browser.find_element_by_id("identifierId").send_keys("您的帳號")  # }←輸入帳號
+browser.find_element_by_id("identifierNext").click()  # ←按繼續鈕
+time.sleep(3)  # ←暫停 3 秒等待進入下一頁
+browser.find_element_by_name("password").send_keys("您的密碼")  # ←輸入帳密
+browser.find_element_by_id("passwordNext").click()  # ←按繼續鈕
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 from selenium import webdriver
 
-driverPath = 'D:\geckodriver\geckodriver.exe'
+driverPath = "D:\geckodriver\geckodriver.exe"
 browser = webdriver.Firefox(executable_path=driverPath)
-url = 'https://www.wikipedia.org/'
-browser.get(url)                    # 網頁下載至瀏覽器
+url = "https://www.wikipedia.org/"
+browser.get(url)  # 網頁下載至瀏覽器
 
-txtBox = browser.find_element_by_id('searchInput')
-txtBox.send_keys('Artificial Intelligence')          # 輸入表單資料
-time.sleep(5)                       # 暫停5秒
-txtBox.submit()                     # 送出表單
+txtBox = browser.find_element_by_id("searchInput")
+txtBox.send_keys("Artificial Intelligence")  # 輸入表單資料
+time.sleep(5)  # 暫停5秒
+txtBox.submit()  # 送出表單
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 from selenium import webdriver
 
@@ -1807,18 +1868,19 @@ from selenium import webdriver
 # https://chromedriver.chromium.org/downloads
 
 driver = webdriver.Chrome(
-    '/Users/oxxo/Documents/oxxo/practice/python/chromedriver')  # 設定 chromedriver 路徑
-driver.get('http://oxxo.studio')  # 前往這個網址
+    "/Users/oxxo/Documents/oxxo/practice/python/chromedriver"
+)  # 設定 chromedriver 路徑
+driver.get("http://oxxo.studio")  # 前往這個網址
 print(driver.title)
 time.sleep(1)
-driver.execute_script(
-    'window.scrollTo(0, document.body.scrollHeight);')  # 捲動到最下方
+driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")  # 捲動到最下方
 time.sleep(1)
 for i in range(1, 7):
     img = driver.find_element_by_xpath(
-        '//*[@id="content-grid"]/ul/li[' + str(i) + ']/a[1]/div/img')
-    response = requests.get(img.get_attribute('src'))
-    with open('demo/test'+str(i)+'.jpg', 'wb') as f:
+        '//*[@id="content-grid"]/ul/li[' + str(i) + "]/a[1]/div/img"
+    )
+    response = requests.get(img.get_attribute("src"))
+    with open("demo/test" + str(i) + ".jpg", "wb") as f:
         f.write(response.content)  # 將response.content二進位內容寫入檔案
 driver.close()
 
@@ -1827,40 +1889,46 @@ print("------------------------------------------------------------")  # 60個
 from selenium import webdriver
 
 options = webdriver.ChromeOptions()
-options.add_argument('headless')  # 不會開啟瀏覽器
+options.add_argument("headless")  # 不會開啟瀏覽器
 
 driver = webdriver.Chrome(
-    '/Users/oxxo/Documents/oxxo/practice/python/chromedriver', chrome_options=options)  # 設定 chromedriver 路徑
-driver.get('https://www.dinbendon.net/do/login')  # 前往這個網址
+    "/Users/oxxo/Documents/oxxo/practice/python/chromedriver", chrome_options=options
+)  # 設定 chromedriver 路徑
+driver.get("https://www.dinbendon.net/do/login")  # 前往這個網址
 
 # 輸入使用者 id
 user = driver.find_element_by_xpath(
-    '//*[@id="signInPanel_signInForm"]/table/tbody/tr[1]/td[2]/input')
-user.send_keys('XXX')
+    '//*[@id="signInPanel_signInForm"]/table/tbody/tr[1]/td[2]/input'
+)
+user.send_keys("XXX")
 
 # 輸入使用者密碼
 pwd = driver.find_element_by_xpath(
-    '//*[@id="signInPanel_signInForm"]/table/tbody/tr[2]/td[2]/input')
-pwd.send_keys('XXX')
+    '//*[@id="signInPanel_signInForm"]/table/tbody/tr[2]/td[2]/input'
+)
+pwd.send_keys("XXX")
 
 # 取得驗證碼訊息
 checkquestion = driver.find_element_by_xpath(
-    '//*[@id="signInPanel_signInForm"]/table/tbody/tr[3]/td[1]')
+    '//*[@id="signInPanel_signInForm"]/table/tbody/tr[3]/td[1]'
+)
 check = driver.find_element_by_xpath(
-    '//*[@id="signInPanel_signInForm"]/table/tbody/tr[3]/td[2]/input')
+    '//*[@id="signInPanel_signInForm"]/table/tbody/tr[3]/td[2]/input'
+)
 
 # 計算驗證碼
 checktext = checkquestion.text
 print(checktext)
-a = int(re.findall(r'\d+',checktext)[0])   # 使用正則表達式提取數字
-b = int(re.findall(r'\d+',checktext)[1])
-result = a+b
+a = int(re.findall(r"\d+", checktext)[0])  # 使用正則表達式提取數字
+b = int(re.findall(r"\d+", checktext)[1])
+result = a + b
 print(result)
 check.send_keys(result)  # 輸入驗證碼
 
 # 點擊按鈕
 btn = driver.find_element_by_xpath(
-    ' //*[@id="signInPanel_signInForm"]/table/tbody/tr[5]/td[2]/input[1]')
+    ' //*[@id="signInPanel_signInForm"]/table/tbody/tr[5]/td[2]/input[1]'
+)
 btn.click()
 
 time.sleep(1)
@@ -1868,11 +1936,12 @@ time.sleep(1)
 # 抓取第一筆便當名稱，加入例外處理
 try:
     menu = driver.find_element_by_xpath(
-        '//*[@id="inProgressBox_inProgressOrders_0"]/td[2]/div[1]/a/span[2]')
+        '//*[@id="inProgressBox_inProgressOrders_0"]/td[2]/div[1]/a/span[2]'
+    )
 
     print(menu.text)
 except:
-    print('找不到便當名稱')
+    print("找不到便當名稱")
 
 driver.close()
 
@@ -1881,40 +1950,42 @@ print("------------------------------------------------------------")  # 60個
 from selenium import webdriver
 
 driver = webdriver.Chrome(
-    '/Users/oxxo/Documents/oxxo/practice/python/chromedriver')  # 設定 chromedriver 路徑
-driver.get('https://www.google.com.tw/imghp?hl=zh-TW&tab=wi&ogbl')  # 前往這個網址
+    "/Users/oxxo/Documents/oxxo/practice/python/chromedriver"
+)  # 設定 chromedriver 路徑
+driver.get("https://www.google.com.tw/imghp?hl=zh-TW&tab=wi&ogbl")  # 前往這個網址
 
-search = driver.find_element_by_xpath(
-    '//*[@id="sbtc"]/div/div[2]/input')
-search.send_keys('林志玲')
+search = driver.find_element_by_xpath('//*[@id="sbtc"]/div/div[2]/input')
+search.send_keys("林志玲")
 
-btn = driver.find_element_by_xpath(
-    '//*[@id="sbtc"]/button')
+btn = driver.find_element_by_xpath('//*[@id="sbtc"]/button')
 btn.click()
 
 for i in range(1, 6):
-
     time.sleep(0.5)
     div = driver.find_element_by_xpath(
-        '/html/body/div[6]/div[3]/div[3]/div[2]/div/div[2]/div[2]/div/div/div/div/div[2]/div[1]/div['+str(i)+']')
+        "/html/body/div[6]/div[3]/div[3]/div[2]/div/div[2]/div[2]/div/div/div/div/div[2]/div[1]/div["
+        + str(i)
+        + "]"
+    )
     div.click()
 
     time.sleep(0.5)
     img = driver.find_element_by_xpath(
-        '//*[@id="irc-ss"]/div['+str(i)+']/div[1]/div[4]/div[1]/a/div/img')
-    src = img.get_attribute('src')
+        '//*[@id="irc-ss"]/div[' + str(i) + "]/div[1]/div[4]/div[1]/a/div/img"
+    )
+    src = img.get_attribute("src")
     print(src)
-    if(str(src) != 'None'):
-      if('.jpg' in src):
-          filename = src.split('/')[-1]
-          response = requests.get(src)
-          with open('demo/'+str(filename), 'wb') as f:
-              f.write(response.content)  # 將response.content二進位內容寫入檔案
-              closeBtn = driver.find_element_by_xpath('//*[@id="irc_ccbc"]')
-              closeBtn.click()
-      else:
-          closeBtn = driver.find_element_by_xpath('//*[@id="irc_ccbc"]')
-          closeBtn.click()
+    if str(src) != "None":
+        if ".jpg" in src:
+            filename = src.split("/")[-1]
+            response = requests.get(src)
+            with open("demo/" + str(filename), "wb") as f:
+                f.write(response.content)  # 將response.content二進位內容寫入檔案
+                closeBtn = driver.find_element_by_xpath('//*[@id="irc_ccbc"]')
+                closeBtn.click()
+        else:
+            closeBtn = driver.find_element_by_xpath('//*[@id="irc_ccbc"]')
+            closeBtn.click()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1922,9 +1993,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("webdriver SP")
 print("------------------------------------------------------------")  # 60個
-
-
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -1958,6 +2026,7 @@ app = Flask(__name__)
 @app.route("/", methods=["POST"])
 def home():
     return "<h1>hello world</h1>"
+
 
 app.run()
 
@@ -2075,9 +2144,6 @@ def home():
 app.run()
 
 
-
-
-
 from flask import Flask, request, render_template
 
 app = Flask(__name__)
@@ -2188,6 +2254,7 @@ app.run()
 
 print("------------------------------------------------------------")  # 60個
 
+
 def webhook(request):
     try:
         req = request.get_json()
@@ -2195,6 +2262,7 @@ def webhook(request):
         return {"fulfillmentText": f"{reText} ( webhook )", "source": "webhookdata"}
     except:
         print(request.args)
+
 
 print("------------------------------------------------------------")  # 60個
 
@@ -2270,6 +2338,7 @@ def webhook(request):
         return dialogflowFn(text)
     except:
         print(request.args)
+
 
 print("------------------------------------------------------------")  # 60個
 
@@ -2428,9 +2497,7 @@ fdb.post_async("/", 123, oxxo_callback)  # ok
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -2614,7 +2681,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
 print("openai ST")
 print("------------------------------------------------------------")  # 60個
@@ -2755,50 +2821,50 @@ while True:
         print(f"ai > {ai_msg}")
 
 
-
 print("------------------------------------------------------------")  # 60個
 print("openai SP")
 print("------------------------------------------------------------")  # 60個
 
-print('將網頁上的檔案存成本地檔案 csv / jpg / png')
+print("將網頁上的檔案存成本地檔案 csv / jpg / png")
 
-url = 'https://stats.moe.gov.tw/files/detail/111/111_student.csv'
-url = "http://i.epochtimes.com/assets/uploads/2015/05/1502192113172483-600x400.jpg"  #貼上src屬性中的路徑
+url = "https://stats.moe.gov.tw/files/detail/111/111_student.csv"
+url = "http://i.epochtimes.com/assets/uploads/2015/05/1502192113172483-600x400.jpg"  # 貼上src屬性中的路徑
 url = "https://zh.wikipedia.org/static/images/icons/wikipedia.png"
 url = "https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Alliance_of_Sahel_States.svg/800px-Alliance_of_Sahel_States.svg.png"
 
-#response = requests.get(url) #使用 GET 對檔案連結發出請求
+# response = requests.get(url) #使用 GET 對檔案連結發出請求
 
 from urllib.request import unquote
-print('網址解碼 utf-8')
-url = unquote(url, encoding='utf-8')
+
+print("網址解碼 utf-8")
+url = unquote(url, encoding="utf-8")
 print(url)
 
-response = requests.get(url) #使用 GET 對檔案連結發出請求
+response = requests.get(url)  # 使用 GET 對檔案連結發出請求
 
 filename = "tmp_" + os.path.basename(url)
 with open(filename, "wb") as f:
     f.write(response.content)  # 將response.content二進位內容寫入檔案
-print('存檔檔案 :', filename)
+print("存檔檔案 :", filename)
 
 print("------------------------------------------------------------")  # 60個
 
-print('擷取網頁圖片, 保存檔名2')
+print("擷取網頁圖片, 保存檔名2")
 
 import base64
 from io import BytesIO
 from PIL import Image
 
-url = 'https://upload.wikimedia.org/wikipedia/commons/3/3d/Uranus2.jpg'
+url = "https://upload.wikimedia.org/wikipedia/commons/3/3d/Uranus2.jpg"
 response = requests.get(url)
 image = Image.open(BytesIO(response.content))
 
-filename="tmp_"+url.split('/')[-1]
-print('圖片檔名:', filename)
+filename = "tmp_" + url.split("/")[-1]
+print("圖片檔名:", filename)
 
 image.save(filename)
-print('存檔檔案 :', filename)
-#print(base64.b64encode(response.content))
+print("存檔檔案 :", filename)
+# print(base64.b64encode(response.content))
 
 print("------------------------------------------------------------")  # 60個
 
@@ -2807,4 +2873,3 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
