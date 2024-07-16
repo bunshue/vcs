@@ -1,6 +1,8 @@
+import numpy as np
 from keras.datasets import mnist
 import matplotlib.pyplot as plt
 from keras.models import load_model
+
 
 def show_images_labels_predictions(images,labels,predictions,start_id,num=10):
     plt.gcf().set_size_inches(12, 14)
@@ -20,10 +22,18 @@ def show_images_labels_predictions(images,labels,predictions,start_id,num=10):
         start_id+=1 
     plt.show()
 
+
 (train_feature, train_label), (test_feature, test_label) = mnist.load_data()
 test_feature_vector = test_feature.reshape(len( test_feature), 784).astype('float32')
 test_feature_normalize = test_feature_vector/255
 model = load_model('Mnist_mlp_model.h5')
 
-prediction=model.predict_classes(test_feature_normalize)  #預測
+#prediction=model.predict_classes(test_feature_normalize)  #預測
+
+#在TensorFlow 2.6版本中删除了这个predict_classes函数。
+# 改用
+predict_x=model.predict(test_feature_normalize)
+classes_x=np.argmax(predict_x,axis=1)
+
 show_images_labels_predictions(test_feature,test_label,prediction,0)
+

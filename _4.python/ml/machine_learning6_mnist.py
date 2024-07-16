@@ -5,13 +5,9 @@ MNIST手寫數字辨識資料集
 由於MNIST的資料大小適中，而且皆為單色影像(黑字白底)，
 十分適合做為初學者第一個建立模型、訓練、與預測的資料集。
 
-
 MNIST資料集是由60,000筆訓練資料、10,000筆測試資料所組成。
 MNIST資料集裡的每一筆資料皆由images(數字的影像)與labels
 (該圖片的真實數字，其實就是答案)所組成。
-
-
-
 """
 
 print("------------------------------------------------------------")  # 60個
@@ -35,12 +31,11 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
-print("一次畫一大堆範例... 久")
+print("畫出 mnist 數據集訓練資料的前256筆... 久")
 
 # MNIST手寫數字辨識資料集
-# MNIST資料集是由60,000筆訓練資料 train data
-# 10,000筆測試資料所組成 test data
-
+# MNIST資料集是由60,000筆 訓練資料 train data
+# 10,000筆 測試資料 test data 所組成
 
 # 1. 讀入 MNSIT 數據集
 from keras.datasets import mnist
@@ -59,23 +54,19 @@ x_test, y_test = mnist["x_test"], mnist["y_test"]
 mnist.close()
 """
 
-#查看mnist資料集筆數
-print('訓練資料 X', len(x_train))
-print('訓練資料 Y', len(y_train))
-print('測試資料 X', len(x_test))
-print('測試資料 Y', len(y_test))
+#查看 mnist資料集 內容
+#訓練資料 : (60000, 28, 28) #共60000張圖片資料，圖片像素28*28
+#測試資料 : (10000, 28, 28) #共10000張圖片資料，圖片像素28*28
 
-print('訓練資料 X 大小', x_train.shape)
-print('訓練資料 Y 大小', y_train.shape)
-print('測試資料 X 大小', x_test.shape)
-print('測試資料 Y 大小', y_test.shape)
+print('訓練資料 X(image)長度 :', len(x_train))
+print('訓練資料 Y(label)長度 :', len(y_train))
+print('測試資料 X(image)長度 :', len(x_test))
+print('測試資料 Y(label)長度 :', len(y_test))
 
-"""
-print('train data=', len(x_train_image))
-print('test data=', len(x_test_image))
-print('x_train_image :', x_train_image.shape) #x_train_image : (60000, 28, 28)
-print('y_train_label :', y_train_label.shape) #共60000張圖片資料，圖片像素28*28
-"""
+print('訓練資料 X(image)大小 :', x_train.shape)
+print('訓練資料 Y(label)大小 :', y_train.shape)
+print('測試資料 X(image)大小 :', x_test.shape)
+print('測試資料 Y(label)大小 :', y_test.shape)
 
 fig = plt.figure(figsize=(8, 8))
 for i in range(256):
@@ -87,12 +78,7 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-
-print('------------------------------------------------------------')	#60個
-
-"""
-https://waternotetw.blogspot.com/2018/03/keras-mnist.html
-"""
+# https://waternotetw.blogspot.com/2018/03/keras-mnist.html
 
 #匯入Keras及相關模組
 import numpy as np #匯入numpy模組，NumPy是Python語言的擴充程式庫。支援維度陣列與矩陣運算
@@ -150,39 +136,34 @@ def plot_images_labels(images, labels, idx, num = 10): #定義plot_images_labels
         idx += 1 #讀取下一筆
     plt.show() #開始繪圖
 
-print('顯示第0到第9訓練資料')
-plot_images_labels(x_train_image,
-                   y_train_label,
-                   idx=0)
+print('顯示 第0到第9筆 訓練資料')
+plot_images_labels(x_train_image, y_train_label, idx=0)
 
-print('顯示第0到第9筆資料')
-plot_images_labels(x_test_image,
-                   y_test_label,
-                   idx=0)
+print('顯示 第0到第9筆 測試資料')
+plot_images_labels(x_test_image, y_test_label, idx=0)
 
 #將image以reshape()轉換
 #先將原本28*28的2維數字影像，以reshape()轉換成1維向量，再以astype()轉換為float，共784個float數字
 x_Train = x_train_image.reshape(60000, 28*28).astype('float32') 
 x_Test = x_test_image.reshape(10000, 28*28).astype('float32')
 
-#查看轉換為1維向量的shape
-print('x_train:', x_Train.shape)
-print('x_train:', x_Test.shape)
+print("將二維 28X28 的影像 轉為 一維 784 資料 reshape")
+print('轉換後的 訓練資料 大小 x_train:', x_Train.shape)
+print('轉換後的 測試資料 大小 x_test:', x_Test.shape)
 
-#查看image第0筆的內容
 #每個數字由0至255組成，代表圖形每一個點的灰階深淺
+print('看第0筆一維影像內容')
 print(x_train_image[0])
 
 #將數字影像image的數值正規化(normalization)
 x_Train_normalization = x_Train / 255
 x_Test_normalization = x_Test / 255
 
-#查看標準化後的image第0筆的內容
-print('aaaa')
+print('看標準化後第0筆一維影像內容')
 print(x_Train_normalization[0])
 
 #查看訓練資料label標籤欄位的前五筆訓練資料
-print('bbbb')
+print('看前5筆 訓練資料')
 print(y_train_label[:5])
 
 #使用np_utils.to_categorical()分別傳入y_train_label與y_test_label的label標籤欄位，執行One-hot encoding轉換
@@ -266,9 +247,7 @@ plt.show()
 
 #神經網路判斷為: 8
 
-sys.exit()
-
-""" 以下這個要做很久
+# 以下這個要做很久
 score = model.evaluate(x_test, y_test)
 
 print('loss:', score[0])
@@ -278,9 +257,6 @@ print('正確率', score[1])
 #loss: 0.01081830496697512
 
 #正確率 0.9308000206947327
-"""
-
-
 
 
 print('------------------------------------------------------------')	#60個
@@ -302,4 +278,5 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
+
 

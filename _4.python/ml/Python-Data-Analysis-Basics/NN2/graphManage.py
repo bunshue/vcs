@@ -1,4 +1,5 @@
 from keras.datasets import mnist
+
 (train_feature, train_label), (test_feature, test_label) = mnist.load_data()
 
 train_feature_vector =train_feature.reshape(len(train_feature), 784).astype('float32')

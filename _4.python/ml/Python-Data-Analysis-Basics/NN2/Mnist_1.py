@@ -26,4 +26,5 @@ model.compile(loss='categorical_crossentropy',
 model.fit(x=train_feature_normalize, y=train_label_onehot,
           validation_split=0.2, epochs=10, batch_size=200,verbose=2)
 scores = model.evaluate(test_feature_normalize, test_label_onehot)  #評估準確率
+
 print('\n準確率=',scores[1])

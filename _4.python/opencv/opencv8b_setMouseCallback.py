@@ -22,15 +22,15 @@ print("cv2.setMouseCallback 01")
 
 print("滑鼠動作 + 鍵盤按鍵s c, 按ESC離開")
 
-#建立底圖影像方法一
+# 建立底圖影像方法一
 image = np.full(shape=(H, W, 1), fill_value=0, dtype=np.uint8)
 
-#建立底圖影像方法二
-#image = np.zeros((H,W,3),np.uint8)
+# 建立底圖影像方法二
+# image = np.zeros((H,W,3),np.uint8)
 
-#建立底圖影像方法三
+# 建立底圖影像方法三
 # np.ones(shape, dtype, order)
-# shape(高，宽，色彩通道数) 
+# shape(高，宽，色彩通道数)
 # dtype 常用的是np.unit8
 # image = np.ones((H, W, 3), np.uint8)
 # image = image * 255 #白色圖像
@@ -39,12 +39,14 @@ cv2.namedWindow("image")
 
 drawing = False
 
+
 def keyboard_function():
     print("你按了鍵盤")
 
+
 def draw_circle1(event, x, y, flags, param):
     global image, drawing
-    if event == cv2.EVENT_LBUTTONDOWN: #  滑鼠左鍵
+    if event == cv2.EVENT_LBUTTONDOWN:  #  滑鼠左鍵
         drawing = True
         cv2.circle(image, (x, y), 2, (255), -1)
     elif event == cv2.EVENT_MOUSEMOVE:  # 滑鼠移動
@@ -59,7 +61,7 @@ cv2.setMouseCallback("image", draw_circle1)
 
 while True:
     cv2.imshow("image", image)
-    #k = cv2.waitKey(1) & 0xFF # 每 1 毫秒偵測一次鍵盤事件
+    # k = cv2.waitKey(1) & 0xFF # 每 1 毫秒偵測一次鍵盤事件
     k = cv2.waitKey(1)  # 等待按鍵輸入
     if k == ESC:
         break
@@ -75,37 +77,41 @@ print("------------------------------------------------------------")  # 60個
 print("cv2.setMouseCallback 02")
 
 image = np.full(shape=(H, W, 1), fill_value=0, dtype=np.uint8)
-cv2.namedWindow('image')
+cv2.namedWindow("image")
 
 
 drawing = False
-def draw_circle3(event,x,y,flags,param):
-    global image,drawing
-    if event == cv2.EVENT_LBUTTONDOWN: #  滑鼠左鍵
+
+
+def draw_circle3(event, x, y, flags, param):
+    global image, drawing
+    if event == cv2.EVENT_LBUTTONDOWN:  #  滑鼠左鍵
         drawing = True
         cv2.circle(image, (x, y), 2, (255), -1)
     elif event == cv2.EVENT_MOUSEMOVE:  # 滑鼠移動
         if drawing == True:
-            cv2.circle(image,(x,y),2,(255),-1)
+            cv2.circle(image, (x, y), 2, (255), -1)
     elif event == cv2.EVENT_LBUTTONUP:  # 左鍵放開
         drawing = False
-        cv2.circle(image,(x,y),2,(255),-1)
+        cv2.circle(image, (x, y), 2, (255), -1)
 
-cv2.setMouseCallback('image', draw_circle3)
+
+cv2.setMouseCallback("image", draw_circle3)
 
 
 def CNN():
     print("CNN")
 
-while (1):
-    cv2.imshow('image', image)
-    #k = cv2.waitKey(1) & 0xFF # 每 1 毫秒偵測一次鍵盤事件
+
+while 1:
+    cv2.imshow("image", image)
+    # k = cv2.waitKey(1) & 0xFF # 每 1 毫秒偵測一次鍵盤事件
     k = cv2.waitKey(1)  # 等待按鍵輸入
     if k == ESC:
         break
-    elif k == ord('s'):
+    elif k == ord("s"):
         CNN()
-    elif k == ord('c'):
+    elif k == ord("c"):
         image = np.full(shape=(H, W, 1), fill_value=0, dtype=np.uint8)
 
 cv2.destroyAllWindows()
@@ -113,36 +119,38 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("cv2.setMouseCallback 03")
 
-dots = []   # 建立空串列記錄座標
-draw = np.zeros((H, W, 4), dtype='uint8')   # 建立 WxH 的 RGBA 黑色畫布
+dots = []  # 建立空串列記錄座標
+draw = np.zeros((H, W, 4), dtype="uint8")  # 建立 WxH 的 RGBA 黑色畫布
 
-def show_xy(event,x,y,flags,param):
-    global dots, draw                     # 定義全域變數
+
+def show_xy(event, x, y, flags, param):
+    global dots, draw  # 定義全域變數
     if flags == 1:
-        if event == cv2.EVENT_LBUTTONDOWN: #  滑鼠左鍵
-            dots.append([x,y])            # 如果拖曳滑鼠剛開始，記錄第一點座標
+        if event == cv2.EVENT_LBUTTONDOWN:  #  滑鼠左鍵
+            dots.append([x, y])  # 如果拖曳滑鼠剛開始，記錄第一點座標
         if event == cv2.EVENT_LBUTTONUP:  # 左鍵放開
-            dots = []                     # 如果放開滑鼠，清空串列內容
+            dots = []  # 如果放開滑鼠，清空串列內容
         if event == cv2.EVENT_MOUSEMOVE or event == cv2.EVENT_LBUTTONUP:  # 滑鼠移動 或 左鍵放開
-            dots.append([x,y])            # 拖曳滑鼠時，不斷記錄座標
-            x1 = dots[len(dots)-2][0]     # 取得倒數第二個點的 x 座標
-            y1 = dots[len(dots)-2][1]     # 取得倒數第二個點的 y 座標
-            x2 = dots[len(dots)-1][0]     # 取得倒數第一個點的 x 座標
-            y2 = dots[len(dots)-1][1]     # 取得倒數第一個點的 y 座標
-            cv2.line(draw,(x1,y1),(x2,y2),(0,0,255,255),2)  # 畫直線
-        cv2.imshow('ImageShow', draw)
+            dots.append([x, y])  # 拖曳滑鼠時，不斷記錄座標
+            x1 = dots[len(dots) - 2][0]  # 取得倒數第二個點的 x 座標
+            y1 = dots[len(dots) - 2][1]  # 取得倒數第二個點的 y 座標
+            x2 = dots[len(dots) - 1][0]  # 取得倒數第一個點的 x 座標
+            y2 = dots[len(dots) - 1][1]  # 取得倒數第一個點的 y 座標
+            cv2.line(draw, (x1, y1), (x2, y2), (0, 0, 255, 255), 2)  # 畫直線
+        cv2.imshow("ImageShow", draw)
 
-cv2.imshow('ImageShow', draw)
-cv2.setMouseCallback('ImageShow', show_xy)
+
+cv2.imshow("ImageShow", draw)
+cv2.setMouseCallback("ImageShow", show_xy)
 
 while True:
-    #k = cv2.waitKey(1) & 0xFF # 每 1 毫秒偵測一次鍵盤事件
+    # k = cv2.waitKey(1) & 0xFF # 每 1 毫秒偵測一次鍵盤事件
     k = cv2.waitKey(1)  # 等待按鍵輸入
     if k == ESC:
         break
-    elif k == ord('r'):
-        draw = np.zeros((H, W, 4), dtype='uint8')  # 如果按下 r 就變成原本全黑的畫布
-        cv2.imshow('ImageShow', draw)
+    elif k == ord("r"):
+        draw = np.zeros((H, W, 4), dtype="uint8")  # 如果按下 r 就變成原本全黑的畫布
+        cv2.imshow("ImageShow", draw)
 
 cv2.destroyAllWindows()
 
@@ -208,7 +216,7 @@ cv2.imshow("TestMouseEvent", image)
 cv2.setMouseCallback("TestMouseEvent", OnMouseAction)
 
 while True:
-    #k = cv2.waitKey(1) & 0xFF  # 每 1 毫秒偵測一次鍵盤事件
+    # k = cv2.waitKey(1) & 0xFF  # 每 1 毫秒偵測一次鍵盤事件
     k = cv2.waitKey(1)  # 等待按鍵輸入
     if k == ESC:
         break

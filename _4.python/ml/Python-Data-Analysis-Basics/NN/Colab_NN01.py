@@ -4,24 +4,29 @@
 
 """
 
+print("------------------------------------------------------------")  # 60個
+
+# 共同
+import os
 import sys
+import math
+import random
 import numpy as np
-import matplotlib.pyplot as plt
 import pandas as pd
+import matplotlib.pyplot as plt
 
-font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
-#設定中文字型及負號正確顯示
-#設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
-#設定負號
-plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
+font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+# 設定中文字型及負號正確顯示
+# 設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
+# 設定負號
+plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+plt.rcParams["font.size"] = 12  # 設定字型大小
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 #tensorflow_version
 
-import numpy as np
-import matplotlib.pyplot as plt
 from tensorflow.keras.datasets import mnist
 
 #(x_train, y_train), (x_test, y_test) = mnist.load_data() 改成以下6行
@@ -95,14 +100,10 @@ plt.imshow(x_test[n].reshape(28,28), cmap='Greys')
 
 #神經網路預測 1
 
-
-
 print('------------------------------------------------------------')	#60個
 
 
-
 print('------------------------------------------------------------')	#60個
-
 
 
 print('------------------------------------------------------------')	#60個

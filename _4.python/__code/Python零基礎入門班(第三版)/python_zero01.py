@@ -1,5 +1,6 @@
 import sys
 
+'''
 print("------------------------------------------------------------")  # 60個
 
 """ fail
@@ -91,9 +92,9 @@ print(time1)
 
 print("------------------------------------------------------------")  # 60個
 
-import random as r
+import random
 
-list1 = r.sample(range(1,50), 7)
+list1 = random.sample(range(1,50), 7)
 special = list1.pop()
 list1.sort()
 print("本期大樂透中獎號碼為：", end="")
@@ -120,19 +121,6 @@ print(show)
 
 print("------------------------------------------------------------")  # 60個
 
-list1=[3,2,1,5] #[3, 2, 1, 5]
-list2=sorted(list1,reverse=True)
-print(list2)    #[5, 3, 2, 1]
-print(list1)    #[3, 2, 1, 5]
-
-print("------------------------------------------------------------")  # 60個
-
-list1 = [1,2,3,4,5,6]
-del list1[1]
-print(list1) #[1,3,4,5,6]       
-
-print("------------------------------------------------------------")  # 60個
-
 dict1 = {"A":"內向穩重", "B":"外向樂觀", "O":"堅強自信", "AB":"聰明自然"}
 name = "O"
 blood = dict1.get(name)
@@ -140,32 +128,6 @@ if blood == None:
     print("沒有「" + name + "」血型！")
 else:  
     print(name + " 血型的個性為：" + str(dict1[name]))
-
-print("------------------------------------------------------------")  # 60個
-
-dict1 = {"林小明":85, "曾山水":93, "鄭美麗":67}
-name = "鄭美麗"
-if name in dict1:  
-    print(name + "的成績為 " + str(dict1[name]))
-else:  
-    score = input("輸入學生分數：")
-    dict1[name] = score
-    print("字典內容：" + str(dict1))
-
-print("------------------------------------------------------------")  # 60個
-
-dict1={"金牌":26, "銀牌":34, "銅牌":30}
-item1 = dict1.items()
-for name, num in item1:
-    print("得到的 %s 數目為 %d 面" % (name, num))
-
-print("------------------------------------------------------------")  # 60個
-
-dict1={"金牌":26, "銀牌":34, "銅牌":30}
-listkey = list(dict1.keys())
-listvalue = list(dict1.values())
-for i in range(len(listkey)):
-    print("得到的 %s 數目為 %d 面" % (listkey[i], listvalue[i]))
 
 print("------------------------------------------------------------")  # 60個
 
@@ -285,9 +247,9 @@ for i in range(0,3):
 
 print("------------------------------------------------------------")  # 60個
 
-import random as r
+import random
 
-list1 = r.sample(range(0,10), 4)
+list1 = random.sample(range(0,10), 4)
 list1.sort()
 print("本期四星彩中獎號碼為：", end="")
 for i in range(0,4):
@@ -314,25 +276,6 @@ for i in range(0,n):
 
 print("排序後：",end=" ")  
 disp_data()  # 顯示排序後串列 
-
-print("------------------------------------------------------------")  # 60個
-
-numbers = [21, 4, 35, 1, 8, 7, 3, 6, 9]
-odd_numbers = []
-for number in numbers:
-    if (number % 2 != 0): #將奇數放入 odd_numbers 串列
-        odd_numbers.append(number)
-print(odd_numbers)
-
-print("------------------------------------------------------------")  # 60個
-
-numbers = [1, 2, 3, 4, 2, 7, 3, 2, 3]
-numbers2 = []
-for number in numbers:
-    n = numbers2.count(number)  #計算出現次數
-    if (n == 0): #將不重複數字放入 numbers2 串列
-        numbers2.append(number)
-print(numbers2)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -368,42 +311,61 @@ print("------------------------------------------------------------")  # 60個
 rate = {'USD':28.02, 'JPY':0.2513, 'CNY':4.24}
 TWD = float("123.456")
 print("台幣{:.2f}元等於美金{:.2f}元, 日幣{:.2f}元, 人民幣{:.2f}元".format(TWD, TWD/rate['USD'], TWD/rate['JPY'], TWD/rate['CNY']))
+'''
+print("------------------------------------------------------------")  # 60個
+
+import random
+print("產生N個 從 MIN 到 MAX 不重複的整數(包含頭尾)")
+N = 7
+MIN = 1
+MAX = 50
+list1 = random.sample(range(MIN, MAX), N)
+print(type(list1))
+print(list1)
+list1 = random.sample(range(MIN, MAX), N)
+print(list1)
+list1 = random.sample(range(MIN, MAX), N)
+print(list1)
+list1 = random.sample(range(MIN, MAX), N)
+print(list1)
+list1 = random.sample(range(MIN, MAX), N)
+print(list1)
 
 print("------------------------------------------------------------")  # 60個
 
-def change(n,coin): # 換硬幣
-    m = n // coin   # 硬幣數
-    return m    
+N = 10
+MIN = 80
+MAX = 100
+scores = random.sample(range(MIN, MAX), N)
+print("原成績：", scores)
 
-money=[50,10,5,1]
-n=int(input("請輸入換幣金額："))
-while (n>0):
-    for i in range(len(money)):
-        coin = money[i]
-        if (n >= coin):
-            m = change(n,coin) # 換硬幣
-            print("{}元 * {}個" .format(coin,m))
-            n= n % coin
+print("人數：%d" % len(scores))
+print("最高分為：%d" % max(scores))
+print("最低分為：%d" % min(scores))
+print("總分為：%d" % sum(scores))
+print("平均為：%6.2f" % (sum(scores)/N))
+
+scores2=sorted(scores,reverse=True) # 由大到小排序
+print("成績由大到小排序：",scores2)
+
+scores2=sorted(scores,reverse=False) # 由小到大排序
+print("成績由小到大排序：",scores2) 
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\綜合演練\ch08\ch08_ex1.py
+N = 10
+MIN = 80
+MAX = 100
+scores = random.sample(range(MIN, MAX), N)
 
 def disp_scores(): # 顯示串列的自訂程序
     for score in scores:
         print(score,end=" ")
     print()
 
-scores = []
-while True:
-    inscore = input("請輸入學生的成績：")
-    if (inscore==""):
-        break
-    # 將成績轉為數值後加入 scores 串列中
-    scores.append(int(inscore))  
-    
 print("排序前：",end=" ")
 disp_scores()   # 顯示排序前串列
+
 n=len(scores)-1 # 串列長度-1
 
 for i in range(0,n): 
@@ -416,208 +378,61 @@ disp_scores() # 顯示排序後串列
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\綜合演練\ch08\ch08_ex2.py
 
-num=[67,12,9,52,91,3]
-datas=[]
-
-for i in range(0,3):     
-    no = int(input("請輸入第 " + str(i+1) + " 個號碼："))
-    # 將號碼轉為數值後加入 datas 串列中
-    datas.append(no)  
-
-n=0
-for i in range(0,3): 
-    for j in range(len(num)):   #逐一比對搜尋 
-        if (num[j]==datas[i]):  #號碼相符 
-            n+=1
-            break               #結束比對
-
-if (n>0):
-    print("恭喜您，中了",n,"個號碼!")
-else:
-    print("可惜，您未中獎！") 
+sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\綜合演練\ch08\ch08_ex3.py
 
+
+print("------------------------------------------------------------")  # 60個
+
+animals = ["鼠","牛","虎","兔","龍"]
+
+print("動物有：", animals)
+
+animal = "豬"
+n = animals.count(animal) 
+if (n>0):  # 串列元素存在
+    p=animals.index(animal)
+    print("%s 在串列中的第 %d 項" %(animal,p+1))
+    animals.remove(animal)
+else:
+    print(animal,"不在串列中!, 加入此動物")
+    animals.append(animal)
+
+print("動物有：", animals)
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+dict1={"金牌":26, "銀牌":34, "銅牌":30}
+listkey = list(dict1.keys())
+listvalue = list(dict1.values())
+for i in range(len(listkey)):
+    print("得到的 %s 數目為 %d 面" % (listkey[i], listvalue[i]))
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
 names=["David","Lily","Chiou","Bear","Shantel","Cynthia"]
+
 n=len(names)-1 # 串列長度-1
 for i in range(0,n): 
     for j in range(0,n-i):         
         if (names[j]>names[j+1]): # 由小到大排序
             names[j],names[j+1]=names[j+1],names[j] # 互換  
-                
-while True:     
-    name = input("請輸入中獎者的名單(Enter結束)：")
-    if (name==""):
-        break    
-
-    IsFound=False
-    min=0
-    max=n    
-    while(min<=max):
-        mid=int((min+max)/2)
-        if (names[mid].upper()==name.upper()):  #姓名相符 
-            IsFound=True
-            break
-        if (names[mid].upper()>name.upper()): #如果中間值大於輸入值 
-           max=mid-1      #使用較小的一半區域繼續比對 
-        else:             #如果中間值不大於輸入值 
-           min=mid+1      #使用較大的一半區域繼續比對 
-           
-    if (IsFound==True):
-        print("恭喜您，",name,"中獎了!")
-    else:
-        print("可惜，",name,"未中獎！")   
-
 print("------------------------------------------------------------")  # 60個
 
 
-
-
-fruits = ["香蕉","蘋果","橘子","鳳梨","西瓜"]
-while True:
-    print("串列元素有：",fruits)
-    fruit = input("請輸入要刪除的水果(Enter 結束)：")
-    if (fruit==""):
-        break
-    n = fruits.count(fruit) 
-    if (n>0):  # 串列元素存在
-        fruits.remove(fruit)
-    else:
-        print(fruit,"不在串列中!")
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\各章範例\ch05\sequential.py
-
-
-
-
-scores = []
-
-scores.append(int(inscore))  
-
-scores2=sorted(scores,reverse=True) # 由大到小排序
-print("成績由大到小排序：",scores2) 
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\各章範例\ch05\tespy
-
-innum = 0
-list1 = []
-while(innum != -1):
-    innum = int(input("請輸入電費 (-1：結束)："))
-    list1.append(innum)
-list1.pop()
-print("共輸入 %d 個數" % len(list1))
-print("最多電費為：%d" % max(list1))
-print("最少電費為：%d" % min(list1))
-print("電費總和為：%d" % sum(list1))
-print("電費由大到小排序為：{}".format(sorted(list1, reverse=True)))
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\各章範例\ch07\startswith.py
-
-
-print("------------------------------------------------------------")  # 60個
 
 print("姓名    成績")
 print("%-4s  %3d" % (name1, score1))
 print("%-4s  %3d" % (name2, score2))
 
-
-colors = ["紅","橙","黃","綠","藍"]
-while True:
-    print("顏色有：",colors)
-    color = input("請輸入要刪除的顏色(Enter 結束)：")
-    if (color==""):
-        break
-    n = colors.count(color) 
-    if (n>0):  # 串列元素存在
-        colors.remove(color)
-    else:
-        print(color,"不在串列中!")
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\延伸練習\ch05\sorted1_cl.py
-
-scores = []
-while True:
-    inscore = input("請輸入學生的成績：")
-    if (inscore==""):
-        break
-    # 將成績轉為數值後加入 scores 串列中
-    scores.append(int(inscore))  
-
-scores2=sorted(scores,reverse=False) # 由小到大排序
-print("成績由小到大排序：",scores2) 
-
-print("------------------------------------------------------------")  # 60個
-
-innum = 0
-list1 = []
-for i in range(0,4):
-    innum = int(input("請輸入第 " + str(i+1) + " 個月的支出金額："))
-    list1.append(innum)
-print("支出最多的金額為：%d" % max(list1))
-print("支出最少的金額為：%d" % min(list1))
-print("支出的總額為：%d" % sum(list1))
-print("支出金額由小到大排序為：{}".format(sorted(list1)))
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\延伸練習\ch08\binary_cl.py
-
-
-fruits = ["香蕉","蘋果","橘子","鳳梨","s"]
-while True:
-    fruit = input("請輸入喜歡的水果(Enter 結束)：")
-    if (fruit==""):
-        break
-    n = fruits.count(fruit) 
-    if (n>0):  # 串列元素存在
-        p=fruits.index(fruit)
-        print("%s 在串列中的第 %d 項" %(fruit,p+1))
-    else:
-        print(fruit,"不在串列中!")
-
-print("------------------------------------------------------------")  # 60個
-
-
-scores = []
-names= []
-for i in range(1,4):
-    name = input("請輸入第 " + str(i) + " 同學的姓名：")
-    inscore = int(input("請輸入第 " + str(i) + " 同學的成績："))
-    # 將姓名、成績加入 names、scores 串列中
-    names.append(name)
-    scores.append(inscore)    
-scores2=sorted(scores,reverse=True) # 由大到小排序 
-# 取得最大數在 scores 串列的索引位置
-n = scores.index(scores2[0])  
-print("姓名： %s    成績： %d" %(names[n],scores[n])) 
-
-
-innum = 0
-list1 = []
-for i in range(0,4):
-    innum = int(input("請輸入第 " + str(i+1) + " 位同學分數："))
-    list1.append(innum)
-print("最高分為：%d" % max(list1))
-print("最低分為：%d" % min(list1))
-print("總分為：%d" % sum(list1))
-print("平均為：%6.2f" % (sum(list1)/4))
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\NNNNNN\Python零基礎入門班(第三版)學習資源\Python零基礎入門班(第三版)\綜合演練\ch07\ch07_ex4.py
 

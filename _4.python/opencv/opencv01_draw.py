@@ -503,8 +503,10 @@ points = list()
 
 N = 10
 for i in range(N):
-    px, py = R * math.cos(math.pi*i*360/N/180), R * math.sin(math.pi*i*360/N/180)
-    points.append((W//2+int(px), H//2+int(py)))
+    px, py = R * math.cos(math.pi * i * 360 / N / 180), R * math.sin(
+        math.pi * i * 360 / N / 180
+    )
+    points.append((W // 2 + int(px), H // 2 + int(py)))
 
 print(points)
 
@@ -514,11 +516,11 @@ for ptx in points:
 print("畫連線")
 
 for i in range(len(points)):
-	for j in range(i + 1, len(points)):
-		corner1 = tuple(points[i])
-		corner2 = tuple(points[j])
-		color = tuple(map(lambda x: int(x), np.random.randint(0, 255, size=3)))
-		cv2.line(image, corner1, corner2, color, 1)
+    for j in range(i + 1, len(points)):
+        corner1 = tuple(points[i])
+        corner2 = tuple(points[j])
+        color = tuple(map(lambda x: int(x), np.random.randint(0, 255, size=3)))
+        cv2.line(image, corner1, corner2, color, 1)
 
 
 cv2.imshow("OpenCV Draw 1", image)

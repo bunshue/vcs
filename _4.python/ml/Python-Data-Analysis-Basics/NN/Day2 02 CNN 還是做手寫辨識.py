@@ -8,30 +8,29 @@ Yann LeCun 被譽為 Deep Learning 的三巨頭之一。
 
 """
 
+print("------------------------------------------------------------")  # 60個
+
+# 共同
+import os
 import sys
+import math
+import random
 import numpy as np
-import matplotlib.pyplot as plt
 import pandas as pd
+import matplotlib.pyplot as plt
 
-font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
-#設定中文字型及負號正確顯示
-#設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
-#設定負號
-plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
-
-print('------------------------------------------------------------')	#60個
-
-
+font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+# 設定中文字型及負號正確顯示
+# 設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
+# 設定負號
+plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print('------------------------------------------------------------')	#60個
 '''
-
-import numpy as np
-import matplotlib.pyplot as plt
-import pandas as pd
-
 from tensorflow.keras.datasets import mnist
+
 #(x_train, y_train), (x_test, y_test) = mnist.load_data() 改成以下6行
 path = 'C:/_git/vcs/_4.python/ml/mnist.npz'
 mnist = np.load(path)  
@@ -151,10 +150,8 @@ print('------------------------------------------------------------')	#60個
 基本上和我們上次一樣, 這次因為 Keras 已偷偷把數據庫存在你的電腦, 所以會快很多!
 """
 
-import numpy as np
-import matplotlib.pyplot as plt
-
 from keras.datasets import mnist
+
 #(x_train, y_train), (x_test, y_test) = mnist.load_data() 改成以下6行
 path = 'C:/_git/vcs/_4.python/ml/mnist.npz'
 mnist = np.load(path)  

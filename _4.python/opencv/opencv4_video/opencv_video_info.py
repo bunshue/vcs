@@ -221,7 +221,7 @@ def get_image_by_pos(video, pos, gray, transpose):
         cv2.transpose(img, img)
     if gray:
         img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-        img = cv2.equalizeHist(img)
+        img = cv2.equalizeHist(img)  # 直方圖均衡化處理, 只能處理灰階圖
 
     return img
 

@@ -400,6 +400,7 @@ def phaseSpectrum(fft2):
     # spectrum = phase/math.pi*180
     return phase
 
+
 # 檔案 => cv2影像
 image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
 
@@ -967,7 +968,6 @@ plt.title('log_F')
 """
 
 print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------------------------------------")  # 60個

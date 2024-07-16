@@ -23,7 +23,7 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 print("------------------------------------------------------------")  # 60個
 
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg"
-'''
+"""
 # == Parameters =======================================================================
 BLUR = 21
 CANNY_THRESH_1 = 10
@@ -890,7 +890,7 @@ plt.show()
 
 cv2.waitKey()
 cv2.destroyAllWindows()
-'''
+"""
 print("------------------------------------------------------------")  # 60個
 
 image = cv2.imread("data/cc.bmp")

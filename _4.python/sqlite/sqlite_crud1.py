@@ -1,82 +1,4 @@
 """
-Filename :
-
-讀出一個完整的資料庫大全
-
-1. 一個資料庫內  多個表單 能找出所有表單
-2. 依序開啟每個表單 讀出所有資料
-
-
-搜尋排序.....
-
-
-
-
-"""
-
-import sys
-import sqlite3
-
-db_filename = "example.db"
-
-# print('建立資料庫連線, 資料庫 : ' + db_filename)
-conn = sqlite3.connect(db_filename)  # 建立資料庫連線
-cursor = conn.cursor()  # 建立 cursor 物件
-
-# 取得一個資料庫內所有表單的名稱, list格式
-def get_table_names(conn):
-    table_names = []
-    tables = conn.execute("SELECT name FROM sqlite_master WHERE type='table';")
-    for table in tables.fetchall():
-        table_names.append(table[0])
-    return table_names
-
-
-# 取得一個表單內所有欄位的名稱, list格式
-def get_column_names(conn, table_name):
-    column_names = []
-    columns = conn.execute(f"PRAGMA table_info('{table_name}');").fetchall()
-    for col in columns:
-        column_names.append(col[1])
-    return column_names
-
-db_filename = "ims_sql/db_ims.sqlite"
-# db_filename = 'C:/_git/vcs/_1.data/______test_files1/_db/gasoline.sqlite'
-db_filename = "example.db"
-
-print("建立資料庫連線, 資料庫 : " + db_filename)
-conn = sqlite3.connect(db_filename)  # 建立資料庫連線
-
-table_names = get_table_names(conn)
-print(type(table_names))
-talbe_names_length = len(table_names)
-print("裡面有:", talbe_names_length, " 個表單")
-print("分別是:")
-
-table_dicts = []
-for table_name in table_names:
-    print("表單:", table_name, end="\t")
-    column_names = get_column_names(conn, table_name)
-    table_dicts.append({"table_name": table_name, "column_names": column_names})
-    column_names_length = len(column_names)
-    print("裡面有:", column_names_length, " 個欄位", end=" ")
-    print("分別是:", end=" ")
-    for column_name in column_names:
-        print(column_name, end=" ")
-    print()
-print(type(table_dicts))
-
-conn.close()  # 關閉資料庫連線
-
-print("程式執行完畢！")
-
-
-print("------------------------------------------------------------")  # 60個
-
-sys.exit()
-
-
-"""
 sqlite基本範例 一個
 
 
@@ -154,7 +76,7 @@ db_filename = (
     + ".sqlite"
 )
 
-# print('建立資料庫連線, 資料庫 : ' + db_filename)
+# print('建立資料庫連線, 資料庫 :' + db_filename)
 conn = sqlite3.connect(db_filename)  # 建立資料庫連線
 cursor = conn.cursor()  # 建立 cursor 物件
 
@@ -247,7 +169,7 @@ conn.close()  # 關閉資料庫連線
 
 # UPDATE 更新
 print("更新資料, 修改2號的資料")
-# print('建立資料庫連線, 資料庫 : ' + db_filename)
+# print('建立資料庫連線, 資料庫 :' + db_filename)
 conn = sqlite3.connect(db_filename)  # 建立資料庫連線
 conn.execute(
     "UPDATE table01 SET ename = '{}'  WHERE id_num = {}".format("goat", 2)
@@ -260,7 +182,7 @@ conn.close()  # 關閉資料庫連線
 
 # DELETE 刪除
 print("刪除資料, 刪除4號的資料")
-# print('建立資料庫連線, 資料庫 : ' + db_filename)
+# print('建立資料庫連線, 資料庫 :' + db_filename)
 conn = sqlite3.connect(db_filename)  # 建立資料庫連線
 conn.execute("DELETE FROM table01 WHERE id_num = {}".format(4))
 conn.commit()  # 更新
@@ -273,11 +195,11 @@ show_data_base_contents_all(db_filename, "table01")
 
 print("------------------------------------------------------------")  # 60個
 print("讀取資料庫資料, 全部2")
-# print('建立資料庫連線, 資料庫 : ' + db_filename)
+# print('建立資料庫連線, 資料庫 :' + db_filename)
 conn = sqlite3.connect(db_filename)  # 建立資料庫連線
 cursor = conn.execute("SELECT * FROM table01")  # SELECT * : 取得所有資料
 rows = cursor.fetchall()  # 讀取全部資料
-print("共有 : " + str(len(rows)) + " 筆資料")
+print("共有 :" + str(len(rows)) + " 筆資料")
 # print('顯示原始資料')
 # print(rows)
 print("逐筆顯示資料")
@@ -288,7 +210,7 @@ conn.close()  # 關閉資料庫連線
 
 print("------------------------------------------------------------")  # 60個
 # SELECT 取得
-# print('建立資料庫連線, 資料庫 : ' + db_filename)
+# print('建立資料庫連線, 資料庫 :' + db_filename)
 conn = sqlite3.connect(db_filename)  # 建立資料庫連線
 print("指明抓一筆資料, 9號")
 number = 9
@@ -314,7 +236,7 @@ print("指明抓名字有bb的資料")
 data = ("%bb%",)  # bb在中間 前後要有%
 cursor = conn.execute("SELECT * FROM table01 WHERE ename LIKE ?", data)  # 條件
 rows = cursor.fetchall()  # 讀取全部資料
-print("共有 : " + str(len(rows)) + " 筆資料")
+print("共有 :" + str(len(rows)) + " 筆資料")
 print("顯示原始資料")
 print(rows)
 
@@ -323,7 +245,7 @@ conn.close()  # 關閉資料庫連線
 
 print("------------------------------------------------------------")  # 60個
 print("尋找資料")
-# print('建立資料庫連線, 資料庫 : ' + db_filename)
+# print('建立資料庫連線, 資料庫 :' + db_filename)
 conn = sqlite3.connect(db_filename)  # 建立資料庫連線
 number = 8
 sqlstr = "SELECT * FROM table01 WHERE id_num = {};".format(number)  # 條件
@@ -343,13 +265,13 @@ else:
 
 print("------------------------------------------------------------")  # 60個
 print("不是用fetchall()讀取 全部資料")
-# print('建立資料庫連線, 資料庫 : ' + db_filename)
+# print('建立資料庫連線, 資料庫 :' + db_filename)
 conn = sqlite3.connect(db_filename)  # 建立資料庫連線
 cursor = conn.execute("SELECT * FROM table01")  # SELECT * : 取得所有資料
 i = 0
 for row in cursor:
     # print(type(rows[i]))
-    print("第" + str(i + 1) + "筆資料 : ", end="")
+    print("第" + str(i + 1) + "筆資料 :", end="")
     # print(rows[i])
     print("{}\t{}\t{}\t{}".format(row[0], row[1], row[2], row[3], row[4]))
     i = i + 1
@@ -357,7 +279,7 @@ conn.close()  # 關閉資料庫連線
 
 print("------------------------------------------------------------")  # 60個
 print("用fetchall()讀取 全部資料")
-# print('建立資料庫連線, 資料庫 : ' + db_filename)
+# print('建立資料庫連線, 資料庫 :' + db_filename)
 conn = sqlite3.connect(db_filename)  # 建立資料庫連線
 cursor = conn.execute("SELECT * FROM table01")  # SELECT * : 取得所有資料
 rows = cursor.fetchall()  # 讀取全部資料
@@ -365,14 +287,14 @@ length = len(rows)
 print("共有", length, "筆資料")
 for i in range(length):
     # print(type(rows[i]))
-    print("第" + str(i + 1) + "筆資料 : ", end="")
+    print("第" + str(i + 1) + "筆資料 :", end="")
     # print(rows[i])
     print("{}\t{}\t{}\t{}".format(rows[i][0], rows[i][1], rows[i][2], rows[i][3]))
 conn.close()  # 關閉資料庫連線
 
 print("------------------------------------------------------------")  # 60個
 print("用fetchall()讀取 全部資料 預設排序(依第1項升冪排序)")
-# print('建立資料庫連線, 資料庫 : ' + db_filename)
+# print('建立資料庫連線, 資料庫 :' + db_filename)
 conn = sqlite3.connect(db_filename)  # 建立資料庫連線
 cursor = conn.execute("SELECT * FROM table01")  # SELECT * : 取得所有資料
 rows = cursor.fetchall()  # 讀取全部資料
@@ -380,7 +302,7 @@ length = len(rows)
 print("共有", length, "筆資料")
 for i in range(length):
     # print(type(rows[i]))
-    print("第" + str(i + 1) + "筆資料 : ", end="")
+    print("第" + str(i + 1) + "筆資料 :", end="")
     # print(rows[i])
     print("{}\t{}\t{}\t{}".format(rows[i][0], rows[i][1], rows[i][2], rows[i][3]))
 conn.close()  # 關閉資料庫連線
@@ -388,7 +310,7 @@ conn.close()  # 關閉資料庫連線
 print("------------------------------------------------------------")  # 60個
 
 print("用fetchall()讀取 全部資料 依 ename 排序, 升冪")
-# print('建立資料庫連線, 資料庫 : ' + db_filename)
+# print('建立資料庫連線, 資料庫 :' + db_filename)
 conn = sqlite3.connect(db_filename)  # 建立資料庫連線
 cursor = conn.execute("SELECT * FROM table01 ORDER BY ename;")  # 由小到大, 升冪
 # cursor = conn.execute('SELECT * FROM table01 ORDER BY ename DESC;') #由小到大 + 反相 = 由大到小, 降冪
@@ -397,14 +319,14 @@ length = len(rows)
 print("共有", length, "筆資料")
 for i in range(length):
     # print(type(rows[i]))
-    print("第" + str(i + 1) + "筆資料 : ", end="")
+    print("第" + str(i + 1) + "筆資料 :", end="")
     # print(rows[i])
     print("{}\t{}\t{}\t{}".format(rows[i][0], rows[i][1], rows[i][2], rows[i][3]))
 conn.close()  # 關閉資料庫連線
 
 print("------------------------------------------------------------")  # 60個
 print("用fetchall()讀取 全部資料 依 weight 排序, 降冪")
-# print('建立資料庫連線, 資料庫 : ' + db_filename)
+# print('建立資料庫連線, 資料庫 :' + db_filename)
 conn = sqlite3.connect(db_filename)  # 建立資料庫連線
 # cursor = conn.execute('SELECT * FROM table01 ORDER BY weight;') #由小到大, 升冪
 cursor = conn.execute(
@@ -415,7 +337,7 @@ length = len(rows)
 print("共有", length, "筆資料")
 for i in range(length):
     # print(type(rows[i]))
-    print("第" + str(i + 1) + "筆資料 : ", end="")
+    print("第" + str(i + 1) + "筆資料 :", end="")
     # print(rows[i])
     print("{}\t{}\t{}\t{}".format(rows[i][0], rows[i][1], rows[i][2], rows[i][3]))
 conn.close()  # 關閉資料庫連線
@@ -423,7 +345,7 @@ conn.close()  # 關閉資料庫連線
 """
 print('------------------------------------------------------------')	#60個
 print('刪除資料庫中的資料表')
-#print('建立資料庫連線, 資料庫 : ' + db_filename)
+#print('建立資料庫連線, 資料庫 :' + db_filename)
 conn = sqlite3.connect(db_filename) # 建立資料庫連線
 cursor = conn.execute('DROP TABLE table01')
 conn.commit() # 更新

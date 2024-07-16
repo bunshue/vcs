@@ -1,4 +1,7 @@
 """
+影像分析工具 - 影像直方圖
+cv2.calcHist()
+cv2.equalizeHist()
 
 用直方圖分析一張圖片的顏色組成
 
@@ -76,7 +79,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 filename = "C:/_git/vcs/_4.python/_data/ims01.bmp"
 filename = "C:/_git/vcs/_4.python/_data/eq1.bmp"  # 560X400
 
@@ -526,6 +529,7 @@ plt.title("均衡化之圖")
 
 plt.show()
 
+'''
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print(
@@ -542,109 +546,35 @@ plt.figure(
     frameon=True,
 )
 
-# 影像分析工具
-# 影像直方圖
-
 print("灰階 image1")
 # 檔案 => cv2影像 => 灰階
 image1 = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
 
 plt.subplot(221)
-plt.hist(image1.ravel(), num_bins, [0, 256], color="r")
+plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
 plt.title("原圖轉灰階")
 
 plt.subplot(222)
-plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
-plt.title("影像直方圖")
+plt.hist(image1.ravel(), num_bins, [0, 256], color="r")  # 拉成一維
+plt.xlim(0 - 10, 256 + 10)  # 設定 x 軸座標範圍
+plt.title("原圖的影像直方圖")
 
 # 直方圖均衡化處理
 
 print("灰階 image1")
 # 檔案 => cv2影像 => 灰階
 image1 = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
-equa = cv2.equalizeHist(image1)  # 直方圖均衡化處理, 只能處理灰階圖
+equ = cv2.equalizeHist(image1)  # 直方圖均衡化處理, 只能處理灰階圖
 
 plt.subplot(223)
-plt.hist(equa.ravel(), num_bins, [0, 256], color="g")
-plt.title("原圖轉灰階")
+plt.imshow(cv2.cvtColor(equ, cv2.COLOR_BGR2RGB))
+plt.title("均衡化之圖")
 
 # 均值化的影像
 # 均衡化後的灰度直方圖分布
 plt.subplot(224)
-plt.imshow(cv2.cvtColor(equa, cv2.COLOR_BGR2RGB))
-plt.title("均衡化後的灰度直方圖分布")
-
-plt.show()
-
-print(
-    "測試 11 equalizeHist------------------------------------------------------------"
-)  # 60個
-
-plt.figure(
-    num="直方圖均衡化處理",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
-
-print("灰階 image1")
-# 檔案 => cv2影像 => 灰階
-image1 = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
-
-equ = cv2.equalizeHist(image1)  # 直方圖均衡化處理, 只能處理灰階圖
-
-# -----------顯示均衡化前後的直方圖---------------
-plt.subplot(221)
-plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
-plt.title("原圖")
-
-plt.subplot(222)
-plt.imshow(cv2.cvtColor(equ, cv2.COLOR_BGR2RGB))
-plt.title("均衡化之圖")
-
-# -----------顯示均衡化前後的直方圖---------------
-
-plt.subplot(223)
-plt.hist(image1.ravel(), num_bins, color="r")  # 拉成一維
-plt.xlim(0 - 10, 256 + 10)  # 設定 x 軸座標範圍
-plt.title("原圖的直方圖")
-
-plt.subplot(224)
-plt.hist(equ.ravel(), num_bins, color="g")  # 拉成一維
-plt.xlim(0 - 10, 256 + 10)  # 設定 x 軸座標範圍
-plt.title("均衡化之圖的直方圖")
-
-plt.show()
-
-print(
-    "測試 12 equalizeHist------------------------------------------------------------"
-)  # 60個
-
-plt.figure(
-    num="直方圖均衡化處理",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
-
-print("灰階 image1")
-# 檔案 => cv2影像 => 灰階
-image1 = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
-
-equ = cv2.equalizeHist(image1)  # 直方圖均衡化處理, 只能處理灰階圖
-
-plt.subplot(121)
-plt.hist(image1.ravel(), num_bins, color="r")  # 拉成一維
-plt.xlim(0 - 10, 256 + 10)  # 設定 x 軸座標範圍
-
-plt.subplot(122)
-plt.hist(equ.ravel(), num_bins, color="g")  # 拉成一維
+plt.title("均衡化後的直方圖分布")
+plt.hist(equ.ravel(), num_bins, [0, 256], color="g")  # 拉成一維
 plt.xlim(0 - 10, 256 + 10)  # 設定 x 軸座標範圍
 
 plt.show()
@@ -776,16 +706,16 @@ plt.title("用plot")
 # 法二: 用 plot 或 bar 顯示 calcHist 的結果
 
 plt.subplot(232)
-plt.plot(np.arange(0, 256), hist.ravel())
+plt.plot(np.arange(0, 256), hist.ravel())# 拉成一維 並畫出
 plt.title("用plot")
 
 plt.subplot(233)
-plt.bar(np.arange(0, 256), hist.ravel())
+plt.bar(np.arange(0, 256), hist.ravel())# 拉成一維 並畫出
 plt.title("用bar")
 
 # 法三: 用plt.hist()畫圖
 plt.subplot(234)
-plt.hist(image1.ravel(), num_bins, [0, 256], color="b")
+plt.hist(image1.ravel(), num_bins, [0, 256], color="b")# 拉成一維
 plt.title("用hist")
 
 """

@@ -1054,7 +1054,7 @@ filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
 # 檔案 => cv2影像
 image1 = cv2.imread(filename)
 
-image2 = cv2.cvtColor(image1, cv2.COLOR_BGR2GRAY)  # 轉成灰階
+image2 = cv2.cvtColor(image1, cv2.COLOR_BGR2GRAY)  # 彩色轉灰階
 
 # image2 = cv2.cvtColor(image1, 6)  # 也可以用數字對照 6 表示轉換成灰階
 # 套用 medianBlur() 中值模糊
@@ -1228,10 +1228,12 @@ print("OpenCV_04")
 
 # 檔案 => cv2影像
 image = cv2.imread(filename)
+
 print("原圖為彩色")
 cv2.imshow("image1", image)
+
 print("彩色轉灰階")
-image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 轉換成灰階影像
+image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 彩色轉灰階
 
 cv2.imshow("image", image)
 cv2.waitKey()
@@ -1413,7 +1415,7 @@ logo_filename = "C:/_git/vcs/_4.python/opencv/data/opencv_logo.png"
 image = cv2.imread(logo_filename, cv2.IMREAD_UNCHANGED)  # 開啟圖片
 
 image = cv2.cvtColor(image, cv2.COLOR_BGR2BGRA)  # 因為是 jpg，要轉換顏色為 BGRA
-gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 新增 gray 變數為轉換成灰階的圖片
+gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 彩色轉灰階
 
 h = image.shape[0]  # 取得圖片高度
 w = image.shape[1]  # 取得圖片寬度
@@ -1439,7 +1441,7 @@ logo_filename = "C:/_git/vcs/_4.python/opencv/data/opencv_logo.png"
 image = cv2.imread(logo_filename, cv2.IMREAD_UNCHANGED)
 
 image = cv2.cvtColor(image, cv2.COLOR_BGR2BGRA)
-gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 彩色轉灰階
 
 h = image.shape[0]
 w = image.shape[1]
@@ -1578,7 +1580,7 @@ image = convex(image, (300, 400, 3), (150, 130, 100))  # 提交參數數值，�
 cv2.imshow("image", image)
 cv2.waitKey()
 cv2.destroyAllWindows()
-'''
+
 print("------------------------------------------------------------")  # 60個
 print("OpenCV_24")
 print("按 ESC 離開")
@@ -2052,20 +2054,25 @@ THRESHOLD = 127
 
 # 檔案 => cv2影像
 image = cv2.imread(filename)
-image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 彩色轉灰階
+
 # 轉換前，都先將圖片轉換成灰階色彩
 ret, output1 = cv2.threshold(
     image_gray, THRESHOLD, 255, cv2.THRESH_BINARY
 )  # 如果大於 THRESHOLD 就等於 255，反之等於 0。
+
 ret, output2 = cv2.threshold(
     image_gray, THRESHOLD, 255, cv2.THRESH_BINARY_INV
 )  # 如果大於 THRESHOLD 就等於 0，反之等於 255。
+
 ret, output3 = cv2.threshold(
     image_gray, THRESHOLD, 255, cv2.THRESH_TRUNC
 )  # 如果大於 THRESHOLD 就等於 THRESHOLD，反之數值不變。
+
 ret, output4 = cv2.threshold(
     image_gray, THRESHOLD, 255, cv2.THRESH_TOZERO
 )  # 如果大於 THRESHOLD 數值不變，反之數值等於 0。
+
 ret, output5 = cv2.threshold(
     image_gray, THRESHOLD, 255, cv2.THRESH_TOZERO_INV
 )  # 如果大於 THRESHOLD 等於 0，反之數值不變。
@@ -2087,7 +2094,9 @@ THRESHOLD = 127
 
 # 檔案 => cv2影像
 image = cv2.imread(filename)
-image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+
+image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 彩色轉灰階
+
 # 轉換前，都先將圖片轉換成灰階色彩
 ret, output1 = cv2.threshold(image_gray, THRESHOLD, 255, cv2.THRESH_BINARY)
 output2 = cv2.adaptiveThreshold(
@@ -5669,16 +5678,14 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-
-print("goodFeaturesToTrack 角點檢測")
+print("cv2.goodFeaturesToTrack 角點偵測")
 
 filename = "C:/_git/vcs/_4.python/_data/opencv05_dilate_erode1.png"
 
 img = cv2.imread(filename)
 img = cv2.resize(img, (0, 0), fx=0.75, fy=0.75)
-gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
+gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # 彩色轉灰階
 
 corners = cv2.goodFeaturesToTrack(gray, 100, 0.01, 10)
 corners = np.int0(corners)
@@ -5695,8 +5702,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-
-# 未知其用途 goodFeaturesToTrack
+print("cv2.goodFeaturesToTrack 角點偵測")
 
 
 def getkpoints(imag, input1):
@@ -5719,26 +5725,27 @@ def getkpoints(imag, input1):
 
 
 def process(image):
-    grey1 = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-    grey = cv2.equalizeHist(grey1)
-    cv2.imshow("frame", grey)
-    keypoints = getkpoints(grey, grey1)
+    gray1 = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 彩色轉灰階
+    gray = cv2.equalizeHist(gray1)  # 直方圖均衡化處理, 只能處理灰階圖
+    #cv2.imshow("frame", gray)
+    keypoints = getkpoints(gray, gray1)
+    #print(keypoints)
     if keypoints is not None and len(keypoints) > 0:
         for x, y in keypoints:
-            cv2.circle(image, (int(int(x) + 200), int(y)), 3, (0, 0, 255))
+            cv2.circle(image, (int(int(x) + 200), int(y)), 10, (0, 255, 255))
     return image
 
 
-video_filename = "C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4"
-# video_filename = 'D:/內視鏡影片/_ims影片2/180824-1025.mp4'
+#video_filename = "C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4"
+video_filename = 'D:/內視鏡影片/_ims影片2/180824-1025.mp4'
 
 cap = cv2.VideoCapture(video_filename)
-# cap = cv2.VideoCapture(0)
+#cap = cv2.VideoCapture(0)
 
 while cap.isOpened():
     ret, frame = cap.read()
     frame = process(frame)
-    # cv2.imshow('frame', frame)
+    cv2.imshow('frame', frame)
     if cv2.waitKey(27) & 0xFF == ord("q"):
         break
 
@@ -5804,72 +5811,58 @@ cv2.imshow('result', result)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
+'''
 print("------------------------------------------------------------")  # 60個
 
-print('OpenCV之控件 Trackbar')
-print('滑桿 ( Trackbar ) 又稱作滑動條、Slider bar，是一種可以用滑鼠調整數值的 UI 介面')
-
-print("測試cv2視窗的Trackbar")
-
-filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
-image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
-#image = cv2.imread(filename)
-
-# 調整對比度後，圖像的效果顯示窗口
-cv2.namedWindow("TrackbarTest", cv2.WND_PROP_AUTOSIZE)
-
-cv2.imshow("TrackbarTest", image)
-
-MAX_VALUE = 80
-MIN_VALUE = 30  # 無效，看起來最小值一定要0
-initial_value = 40
-
-
-def callback_trackbar_test(_value):
-    print(_value, end=" ")
-
-callback_trackbar_test(initial_value)  # 做一次
-
-cv2.createTrackbar(
-    "value", "TrackbarTest", MIN_VALUE, MAX_VALUE, callback_trackbar_test
-)  # callback function
-cv2.setTrackbarPos("value", "TrackbarTest", initial_value)  # 預設
-
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-#-------------------------------------
-
-filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
-
-img = cv2.imread(filename)
-cv2.imshow('opencv', img)
-
-def get_trackbar_value(val):
-    print(val, end = " ")
-
-cv2.createTrackbar('Trackbar', 'opencv', 0, 255, get_trackbar_value)
-cv2.setTrackbarPos('Trackbar', 'opencv', 50)  # 預設
-
-keycode = cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-#boxPoints返回四个点顺序：右下→左下→左上→右上
+# boxPoints返回四个点顺序：右下→左下→左上→右上
 
 import cv2
 import numpy as np
 
 image = cv2.imread("data/cc.bmp")
 
-imagegray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+imagegray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 彩色轉灰階
 
-contours, hierarchy = cv2.findContours(imagegray,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)  
-rect = cv2.minAreaRect(contours[0]) # 得到最小外接矩形的（中心(x,y), (宽,高), 旋转角度）
-print(rect)
-points = cv2.boxPoints(rect) # 获取最小外接矩形的4个顶点坐标
-print(points)  # 
+contours, hierarchy = cv2.findContours(
+    imagegray, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE
+)
+rect = cv2.minAreaRect(contours[0])  # 得到最小外接矩形的（中心(x,y), (宽,高), 旋转角度）
+print(type(rect))
+print('rect', rect)
+print('中心 :', rect[0])
+print('寬高 :', rect[1])
+print('旋轉角度 :', rect[2])
+
+cx = rect[0][0]
+cy = rect[0][1]
+print(cx, cy)
+W = rect[1][0]*2
+H = rect[1][1]*2
+print(W, H)
+
+angle = int(rect[2])  # 順時鐘旋轉角度
+cv2.ellipse(image, (int(cx), int(cy)), (int(W // 2), int(H // 2)), angle, 0, 360, 255, 3)  # 實心
+
+"""
+print("畫橢圓形")
+cx, cy = 220, 320  # 橢心
+AA, BB = 100, 50  # 長軸 短軸
+angle = 0  # 順時鐘旋轉角度
+color = (0, 0, 255)
+line_width = 5  # 線條寬度, 負數代表實心
+
+# 畫橢圓              中心  長軸 短軸 旋轉  開始 結束角度 顏色 線寬
+cv2.ellipse(image, (cx, cy), (AA, BB), angle, 0, 360, color, line_width)  # 空心
+cv2.ellipse(image, (cx, cy), (AA // 2, BB // 2), angle, 0, 360, color, -1)  # 實心
+"""
+
+points = cv2.boxPoints(rect)  # 获取最小外接矩形的4个顶点坐标
+print(points)  #
+
+#把矩形的四個頂點標出來
+for point in points:
+    cv2.circle(image, (int(point[0]), int(point[1])), 10, 255, -1)
+
 points = np.int0(points)
 
 # 畫出來
@@ -5878,7 +5871,7 @@ cv2.drawContours(image, [points], 0, (0, 0, 255), 3)
 cv2.imshow("image", image)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
-  
+
 print("------------------------------------------------------------")  # 60個
 
 image = cv2.imread("data/cc.bmp")
@@ -5886,7 +5879,7 @@ print("顯示原圖")
 
 cv2.imshow("original", image)
 
-gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 彩色轉灰階
 ret, binary = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
 contours, hierarchy = cv2.findContours(binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
 rect = cv2.minAreaRect(contours[0])
@@ -5904,7 +5897,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-rotating_angle = 0#順時針
+rotating_angle = 0  # 順時針
 # 旋轉矩形
 
 W, H = 400, 400
@@ -5932,8 +5925,8 @@ for i in range(4):
         lineType=cv2.LINE_AA,
     )
 
-cv2.circle(image, (100,100), 100, (255, 255, 255), 5)
-#cv2.circle(image, (cx, cy), radius, color, line_width)  # 繪製圓形
+cv2.circle(image, (100, 100), 100, (255, 255, 255), 5)
+# cv2.circle(image, (cx, cy), radius, color, line_width)  # 繪製圓形
 
 cv2.imshow("image", image)
 cv2.waitKey(0)
@@ -5952,8 +5945,6 @@ print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
 
-
-
 # 新進 與 測試
 
 """
@@ -5962,5 +5953,3 @@ print("------------------------------------------------------------")  # 60個
     image = image[:, int((w-h)/2):int((h+(w-h)/2))]   # 將影像變成正方形
 
 """
-
-
