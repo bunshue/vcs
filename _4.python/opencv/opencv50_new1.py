@@ -36,7 +36,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 print('練習組合成一張大圖 picasa效果')
 
 filename1 = "C:/_git/vcs/_4.python/_data/elephant.jpg"
@@ -1595,7 +1595,6 @@ cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
 print("OpenCV_38")
 
 """ barcode
@@ -1688,7 +1687,6 @@ filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bm
 image = cv2.imread(filename)
 
 THRESHOLD = 127
-
 
 #        cv2.threshold(image, 閥值, 最大灰度值, 使用的二值化方法)
 t, rst = cv2.threshold(image, THRESHOLD, 255, cv2.THRESH_BINARY)
@@ -1956,58 +1954,11 @@ def getSobelKernel(winSize):
 
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
-
-# 檔案 => cv2影像
-image = cv2.imread(filename)
-cv2.imshow("ImageProcessing", image)
-
-contrast = 0  # 初始化要調整對比度的數值
-brightness = 0  # 初始化要調整亮度的數值
-cv2.imshow("ImageProcessing", image)
-
-
-# 定義調整亮度對比的函式
-def adjust(i, c, b):
-    output = i * (c / 100 + 1) - c + b  # 轉換公式
-    output = np.clip(output, 0, 255)
-    output = np.uint8(output)
-    cv2.imshow("ImageProcessing", output)
-
-
-# 定義調整亮度函式
-def brightness_fn(val):
-    print('取得 亮度 :', val)
-    global image, contrast, brightness
-    brightness = val - 100
-    adjust(image, contrast, brightness)
-
-
-# 定義調整對比度函式
-def contrast_fn(val):
-    print('取得 對比度 :', val)
-    global image, contrast, brightness
-    contrast = val - 100
-    adjust(image, contrast, brightness)
-
-# 加入亮度調整滑桿 0 ~ 200, 預設 100
-cv2.createTrackbar("brightness", "ImageProcessing", 0, 200, brightness_fn)
-cv2.setTrackbarPos("brightness", "ImageProcessing", 100)
-
-# 加入對比度調整滑桿 0 ~ 200, 預設 100
-cv2.createTrackbar("contrast", "ImageProcessing", 0, 200, contrast_fn)
-cv2.setTrackbarPos("contrast", "ImageProcessing", 100)
-
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
 print("測試 cv2.linearPolar")
 print("空間變換 極座標變換 linearPolar_OpenCV3")
 
 filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
-filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
+#filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
 
 # 檔案 => cv2影像
 src = cv2.imread(filename, cv2.IMREAD_ANYCOLOR)
@@ -2042,58 +1993,6 @@ dst = cv2.logPolar(src, (508, 503), M, cv2.WARP_FILL_OUTLIERS)
 print(src.shape)
 print(dst.shape)
 cv2.imshow("dst", dst)
-
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-print("flip")
-
-# 檔案 => cv2影像
-I = cv2.imread(filename)
-
-O = I.copy()
-
-# 旋轉
-O = cv2.flip(O, 1)
-
-# 顯示原圖和輸出圖像
-cv2.imshow("I", I)
-cv2.imshow("O", O)
-
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-print("對比度增強1")
-
-# 檔案 => cv2影像
-image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
-image = cv2.imread(filename)
-
-MAX_VALUE = 120
-value = 120
-
-# 調整對比度後，圖像的效果顯示窗口
-cv2.namedWindow("contrast", cv2.WND_PROP_AUTOSIZE)
-
-
-# 調整系數，觀察圖像的變化
-def callback_contrast(_value):
-    # 通過線性運算，調整圖像對比度
-    a = float(_value) / 40.0
-    contrastImage = a * image
-    contrastImage[contrastImage > 255] = 255
-    contrastImage = np.round(contrastImage)
-    contrastImage = contrastImage.astype(np.uint8)
-    cv2.imshow("contrast", contrastImage)
-
-
-callback_contrast(value)#套用一次設定值
-
-cv2.createTrackbar("value", "contrast", value, MAX_VALUE, callback_contrast)
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()
@@ -2235,41 +2134,6 @@ plt.ylabel("number of pixels")
 y_maxValue = np.max(histogram)
 plt.axis([0, 255, 0, y_maxValue])
 plt.show()
-
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-print("對比度增強4 gamma")
-
-# 檔案 => cv2影像
-image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
-image = cv2.imread(filename)
-
-MAX_VALUE = 200
-value = 40
-segValue = float(value)
-# 伽馬調整需要先將圖像歸一化
-image_0_1 = image / 255.0
-# 伽馬調整後的圖像顯示窗口
-cv2.namedWindow("gamma_contrast", cv2.WND_PROP_AUTOSIZE)
-
-
-# 調整 gamma 值，觀察圖像的變換
-def callback_contrast(_value):
-    gamma = float(_value) / segValue
-    contrastImage = np.power(image_0_1, gamma)
-    cv2.imshow("gamma_contrast", contrastImage)
-    # 保存伽馬調整的結果
-    contrastImage *= 255
-    contrastImage = np.round(contrastImage)
-    contrastImage = contrastImage.astype(np.uint8)
-
-
-callback_contrast(value)#套用一次設定值
-
-cv2.createTrackbar("value", "gamma_contrast", value, MAX_VALUE, callback_contrast)
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()
@@ -2671,77 +2535,6 @@ cv2.destroyAllWindows()
 """
 print("------------------------------------------------------------")  # 60個
 
-print("圖像平滑 meanBlur")
-
-from scipy import signal
-
-
-# 均值平滑
-def meanBlur(image, H, W, _boundary="fill", _fillvalue=0):
-    # H、W均不為零
-    if H == 0 or W == 0:
-        print("W or H is not zero")
-        return image
-
-    # -------沒有對均值平滑算子進行分離
-    # meanKernel = 1.0/(H*W)*np.ones([H,W],np.float32)
-    # result = signal.convolve2d(image,meanKernel,mode='same',boundary = _boundary,fillvalue=_fillvalue)
-    # -----卷積後進行數據類型轉換,得到均值平滑的結果
-    # result = result.astype(np.uint8)
-    # return result
-
-    # 因為均值算子是可分離的卷積核，根據卷積運算的結合律
-    # 可以先進行水平方向的卷積，
-    # 再進行垂直方向的卷積
-    # 首先水平方向的均值平滑
-    meanKernel_x = 1.0 / W * np.ones([1, W], np.float32)
-    i_conv_mk_x = signal.convolve2d(
-        image, meanKernel_x, mode="same", boundary=_boundary, fillvalue=_fillvalue
-    )
-    # 然後對得到的水平卷積的結果再進行垂直方向的卷積
-    meanKernel_y = 1.0 / H * np.ones([H, 1], np.float32)
-    i_conv_xy = signal.convolve2d(
-        i_conv_mk_x, meanKernel_y, mode="same", boundary=_boundary, fillvalue=_fillvalue
-    )
-    i_conv_xy = np.round(i_conv_xy)
-    # 卷積後的結果進行數據類型轉換，得到均值平滑的結果
-    result = i_conv_xy.astype(np.uint8)
-    return result
-
-
-# 檔案 => cv2影像
-image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
-
-# 均值濾波卷積核的寬高均設為 2*halfWinSize+1
-halfWinSize = 1
-MAX_HALFWINSIZE = 20
-cv2.namedWindow("meanBlur", 1)
-
-
-# 回調函數，均值濾波
-def callback_meanBlur(_halfWinSize):
-    result = meanBlur(
-        image,
-        2 * _halfWinSize + 1,
-        2 * _halfWinSize + 1,
-        _boundary="symm",
-        _fillvalue=0,
-    )
-    cv2.imshow("meanBlur", result)
-
-
-callback_meanBlur(halfWinSize)
-cv2.createTrackbar(
-    "winSize/2", "meanBlur", halfWinSize, MAX_HALFWINSIZE, callback_meanBlur
-)
-
-latexImage = meanBlur(image, 29, 29, "symm")
-
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
 print("圖像平滑 medianBlur")
 
 
@@ -2786,37 +2579,6 @@ cv2.imshow("medianBlurImage",medianBlurImage)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 """
-print("------------------------------------------------------------")  # 60個
-
-print("圖像平滑 salt")
-
-
-# 模擬椒鹽噪聲，number 指添加椒鹽噪聲的數量
-def salt(image, number):
-    # 圖像的寬高
-    rows, cols = image.shape
-    # 加入椒鹽噪聲後的圖像
-    saltImage = np.copy(image)
-    for i in range(number):
-        randR = random.randint(0, rows - 1)
-        randC = random.randint(0, cols - 1)
-        saltImage[randR][randC] = 0
-    return saltImage
-
-
-# 檔案 => cv2影像
-image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
-
-# 顯示原圖
-cv2.imshow("image", image)
-
-# 添加椒鹽噪聲
-saltImage = salt(image, 2000)
-cv2.imshow("saltImage", saltImage)
-
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
 print("------------------------------------------------------------")  # 60個
 
 print("圖像平滑 BFilter")
@@ -3772,151 +3534,6 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-print("閾值分割 bitwise_and")
-
-src1 = np.array([[255, 0, 255]])
-src2 = np.array([[255, 0, 0]])
-# 與運算
-dst_and = cv2.bitwise_and(src1, src2)
-# 或運算
-dst_or = cv2.bitwise_or(src1, src2)
-print("與運算的結果：")
-print(dst_and)
-print("或運算的結果：")
-print(dst_or)
-
-print("------------------------------------------------------------")  # 60個
-
-print("形態學處理 erode")
-
-# 檔案 => cv2影像
-I = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
-
-# 創建結構元
-s = cv2.getStructuringElement(cv2.MORPH_RECT, (5, 5))
-
-# 腐蝕圖像
-r = cv2.erode(I, s)
-
-# 顯示原圖和腐蝕後的結果
-cv2.imshow("I", I)
-cv2.imshow("erode", r)
-
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-print("形態學處理 dilate")
-
-""" fail
-if __name__ =="__main__":
-    #第一步：讀入圖像
-    # 檔案 => cv2影像
-    I = cv2.imread(filename,cv2.IMREAD_GRAYSCALE)
-    #顯示原圖
-    cv2.imshow("I",I)
-    #結構元半徑,迭代次數
-    r,i = 1,1
-    MAX_R,MAX_I = 20,20
-    #顯示膨脹效果的窗口
-    cv2.namedWindow("dilate",1)
-    def nothing(*arg):
-        pass
-    #調節結構元半徑
-    cv2.createTrackbar("r","dilate",r,MAX_R,nothing)
-    #調節迭代次數
-    cv2.createTrackbar("i","dilate",i,MAX_I,nothing)
-    while True:
-        #得到當前的r值
-        r = cv2.getTrackbarPos('r', 'dilate')
-        #得到當前的i值
-        i= cv2.getTrackbarPos('i','dilate')
-        #創建結構元
-        s = cv2.getStructuringElement(cv2.MORPH_GRADIENT,(2*r+1,2*r+1))
-        #膨脹圖像
-        d = cv2.erode(I,s,iterations=i)
-        #顯示膨脹效果
-        cv2.imshow("dilate",d)
-
-        k = cv2.waitKey(1)
-        if k == ESC:
-            break
-    cv2.destroyAllWindows()
-"""
-
-print("------------------------------------------------------------")  # 60個
-
-print("形態學處理 open")
-
-# 第一步：讀入圖像
-# 檔案 => cv2影像
-I = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
-
-# 創建結構元
-s = cv2.getStructuringElement(cv2.MORPH_RECT, (5, 5))
-# 腐蝕圖像
-d = cv2.morphologyEx(I, cv2.MORPH_OPEN, s, iterations=1)
-# 顯示原圖和腐蝕後的結果
-cv2.imshow("I", I)
-cv2.imshow("open", d)
-
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-# fail
-
-print("形態學處理 mor")
-print("按 ESC 離開")
-
-# 第一步：讀入圖像
-# 檔案 => cv2影像
-I = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
-
-# 顯示原圖
-cv2.imshow("I", I)
-
-# 結構元半徑，迭代次數
-r, i = 1, 1
-MAX_R, MAX_I = 20, 20
-
-# 顯示形態學處理的效果的窗口
-cv2.namedWindow("morphology", 1)
-
-
-def nothing(*arg):
-    pass
-
-
-# 調節結構元半徑
-cv2.createTrackbar("r", "morphology", r, MAX_R, nothing)
-
-# 調節迭代次數
-cv2.createTrackbar("i", "morphology", i, MAX_I, nothing)
-
-while True:
-    # 得到當前的r值
-    r = cv2.getTrackbarPos("r", "morphology")
-    # 得到當前的i值
-    i = cv2.getTrackbarPos("i", "morphology")
-    # 創建結構元
-    s = cv2.getStructuringElement(cv2.MORPH_RECT, (2 * r + 1, 2 * r + 1))
-    # 形態學處理
-    d = cv2.morphologyEx(I, cv2.MORPH_GRADIENT, s, iterations=i)
-    # 顯示效果
-    cv2.imshow("morphology", d)
-
-    k = cv2.waitKey(1)
-    if k == ESC:
-        break
-
-
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
 print("邊緣檢測 roberts")
 
 from scipy import signal
@@ -4336,189 +3953,6 @@ cv2.waitKey(0)
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
-
-print("邊緣檢測 scharr")
-
-from scipy import signal
-
-
-def scharr(I, _boundary="symm"):
-    # I 與 scharr_x 的 same 卷積
-    scharr_x = np.array([[3, 0, -3], [10, 0, -10], [3, 0, -3]], np.float32)
-    I_x = signal.convolve2d(I, scharr_x, mode="same", boundary="symm")
-    # I 與 scharr_y 的same 卷積
-    scharr_y = np.array([[3, 10, 3], [0, 0, 0], [-3, -10, -3]], np.float32)
-    I_y = signal.convolve2d(I, scharr_y, mode="same", boundary="symm")
-    return (I_x, I_y)
-
-
-""" fail
-# 檔案 => cv2影像
-image = cv2.imread(filename,cv2.IMREAD_GRAYSCALE)
-
-#求卷積
-i_conv_sch_x = scharr(image,1,0,_boundary='symm')
-i_conv_sch_y = scharr(image,0,1,_boundary='symm')
-#取絕對值,分別得到水平方向和垂直方向的邊緣強度
-abs_i_conv_sch_x = np.abs(i_conv_sch_x)
-abs_i_conv_sch_y = np.abs(i_conv_sch_y)
-#水平方向和垂直方向的邊緣強度的灰度級顯示
-edge_x = abs_i_conv_sch_x.copy()
-edge_y = abs_i_conv_sch_y.copy()
-edge_x[edge_x>255]=255
-edge_y[edge_y>255]=255
-edge_x = edge_x.astype(np.uint8)
-edge_y = edge_y.astype(np.uint8)
-cv2.imshow("edge_x",edge_x)
-cv2.imshow("edge_y",edge_y)
-#根據水平方向和垂直方向的邊緣強度,求最終的邊緣強度
-#有多種方式，這里使用平方根形式
-edge = np.sqrt(np.power(abs_i_conv_sch_x,2)+np.power(abs_i_conv_sch_y,2))
-#最終的邊緣強度的灰度級顯示
-edge[edge>255]=255
-edge = np.round(edge)
-edge = edge.astype(np.uint8)
-cv2.imshow('edge',edge)
-#經過閾值處理的邊緣顯示
-cv2.namedWindow("thresh_edge",1)
-MAX_THRESH = 255
-thresh = 255
-
-#回調函數，閾值處理
-def callback_thresh(_thresh):
-    threshEdge = edge.copy()
-    threshEdge[threshEdge < _thresh] = 0
-    threshEdge[threshEdge >= _thresh] = 255
-    cv2.imshow("thresh_edge",threshEdge)
-
-callback_thresh(thresh)
-cv2.createTrackbar("thresh","thresh_edge",thresh,MAX_THRESH,callback_thresh)
-
-#模擬鉛筆素描
-pencilSketch = edge.copy()
-pencilSketch = 255 - pencilSketch
-pencilSketch[pencilSketch < 100] = 100
-cv2.imshow("pencilSketch",pencilSketch)
-
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-"""
-
-print("------------------------------------------------------------")  # 60個
-
-print("邊緣檢測 Kirsch")
-
-from scipy import signal
-
-"""
-    Krisch邊緣檢測算法:
-    krisch(image,_boundary='fill',_fillvalue=0)
-    其中:邊緣處理的方式_boundary包括：'symm','wrap','fill',
-    且當__boundary='fill'時,填充值默認為零_fillvalue=0
-"""
-
-
-def krisch(image, _boundary="fill", _fillvalue=0):
-    """
-    第一步:8個krisch邊緣卷積算子分別和圖像矩陣進行卷積,然後分別取絕對值得到邊緣強度
-    """
-    # 存儲8個方向的邊緣強度
-    list_edge = []
-    # 圖像矩陣和k1進行卷積,然後取絕對值（即:得到邊緣強度）
-    k1 = np.array([[5, 5, 5], [-3, 0, -3], [-3, -3, -3]])
-    image_k1 = signal.convolve2d(
-        image, k1, mode="same", boundary=_boundary, fillvalue=_fillvalue
-    )
-    list_edge.append(np.abs(image_k1))
-    # 圖像矩陣和k2進行卷積,然後取絕對值（即:得到邊緣強度）
-    k2 = np.array([[-3, -3, -3], [-3, 0, -3], [5, 5, 5]])
-    image_k2 = signal.convolve2d(
-        image, k2, mode="same", boundary=_boundary, fillvalue=_fillvalue
-    )
-    list_edge.append(np.abs(image_k2))
-    # 圖像矩陣和k3進行卷積,然後取絕對值（即:得到邊緣強度）
-    k3 = np.array([[-3, 5, 5], [-3, 0, 5], [-3, -3, -3]])
-    image_k3 = signal.convolve2d(
-        image, k3, mode="same", boundary=_boundary, fillvalue=_fillvalue
-    )
-    list_edge.append(np.abs(image_k3))
-    # 圖像矩陣和k4進行卷積,然後取絕對值（即:得到邊緣強度）
-    k4 = np.array([[-3, -3, -3], [5, 0, -3], [5, 5, -3]])
-    image_k4 = signal.convolve2d(
-        image, k4, mode="same", boundary=_boundary, fillvalue=_fillvalue
-    )
-    list_edge.append(np.abs(image_k4))
-    # 圖像矩陣和k5進行卷積,然後取絕對值（即:得到邊緣強度）
-    k5 = np.array([[-3, -3, 5], [-3, 0, 5], [-3, -3, 5]])
-    image_k5 = signal.convolve2d(
-        image, k5, mode="same", boundary=_boundary, fillvalue=_fillvalue
-    )
-    list_edge.append(np.abs(image_k5))
-    # 圖像矩陣和k6進行卷積,然後取絕對值（即:得到邊緣強度）
-    k6 = np.array([[5, -3, -3], [5, 0, -3], [5, -3, -3]])
-    image_k6 = signal.convolve2d(
-        image, k6, mode="same", boundary=_boundary, fillvalue=_fillvalue
-    )
-    list_edge.append(np.abs(image_k6))
-    # 圖像矩陣和k7進行卷積,然後取絕對值（即:得到邊緣強度）
-    k7 = np.array([[-3, -3, -3], [-3, 0, 5], [-3, 5, 5]])
-    image_k7 = signal.convolve2d(
-        image, k7, mode="same", boundary=_boundary, fillvalue=_fillvalue
-    )
-    list_edge.append(np.abs(image_k7))
-    # 圖像矩陣和k8進行卷積,然後取絕對值（即:得到邊緣強度）
-    k8 = np.array([[5, 5, -3], [5, 0, -3], [-3, -3, -3]])
-    image_k8 = signal.convolve2d(
-        image, k8, mode="same", boundary=_boundary, fillvalue=_fillvalue
-    )
-    list_edge.append(np.abs(image_k8))
-    """
-    第二步：對上述8個方向的邊緣強度,對應位置取最大值，作為圖像最後的邊緣強度
-    """
-    edge = list_edge[0]
-    for i in range(len(list_edge)):
-        edge = edge * (edge >= list_edge[i]) + list_edge[i] * (edge < list_edge[i])
-    return edge
-
-# 檔案 => cv2影像
-image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
-edge = krisch(image, _boundary="symm")
-# 邊緣強度的灰度級顯示
-rows, cols = edge.shape
-for r in range(rows):
-    for c in range(cols):
-        if edge[r][c] > 255:
-            edge[r][c] = 255
-edge = edge.astype(np.uint8)
-cv2.imshow("edge", edge)
-# 經過閾值處理的邊緣顯示
-cv2.namedWindow("thresh_edge", 1)
-MAX_THRESH = 255
-thresh = 255
-
-
-# 回調函數，閾值處理
-def callback_thresh(_thresh):
-    threshEdge = edge.copy()
-    threshEdge[threshEdge < _thresh] = 0
-    threshEdge[threshEdge >= _thresh] = 255
-    cv2.imshow("thresh_edge", threshEdge)
-
-
-callback_thresh(thresh)
-cv2.createTrackbar("thresh", "thresh_edge", thresh, MAX_THRESH, callback_thresh)
-
-# 模擬素描
-pencilSketch = edge.copy()
-pencilSketch = 255 - pencilSketch
-pencilSketch[pencilSketch < 50] = 50
-cv2.imshow("pencilSketch", pencilSketch)
-
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
 print("邊緣檢測 canny")
 
 # sobel邊緣檢測
@@ -4984,114 +4418,6 @@ cv2.destroyAllWindows()
 """
 print("------------------------------------------------------------")  # 60個
 
-print("幾何形狀的檢測和擬合 convexHull")
-
-W, H = 400, 400
-I = np.zeros((H, W, 3), np.uint8)  # 黑色畫板
-
-MIN = 50
-MAX = W - 50
-N = 50  # 隨機生成 N 個坐標點，每一行存儲一個坐標
-# 隨機生成 橫縱坐標均在 MIN 至 MAX 的坐標點
-points = np.random.randint(MIN, MAX, (N, 2), np.int32)
-print(points)
-# 把上述點集處的灰度值設置為 255,單個白色像素點不容易觀察，用一個小圓標注一下
-for i in range(N):
-    cv2.circle(I, (points[i, 0], points[i, 1]), 6, red, -1)
-
-# 求點集 points 的凸包
-convexhull = cv2.convexHull(points, clockwise=False)
-# ----- 打印凸包的信息 ----
-print(type(convexhull))
-print(convexhull.shape)
-
-# 連接凸包的各個點
-k = convexhull.shape[0]
-for i in range(k - 1):
-    cv2.line(
-        I,
-        (convexhull[i, 0, 0], convexhull[i, 0, 1]),
-        (convexhull[i + 1, 0, 0], convexhull[i + 1, 0, 1]),
-        green,
-        2,
-    )
-
-# 首尾相接
-cv2.line(
-    I,
-    (convexhull[k - 1, 0, 0], convexhull[k - 1, 0, 1]),
-    (convexhull[0, 0, 0], convexhull[0, 0, 1]),
-    blue,
-    2,
-)
-
-# 顯示圖片
-cv2.imshow("I", I)
-
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-def draw_points(points, color):
-    N = len(points)
-    print("N =", N)
-    for point in points:
-        cv2.circle(image, (int(point[0]), int(point[1])), 6, color, -1)
-
-def draw_lines(points, color):
-    N = len(points)
-    print("N =", N)
-    # 畫出來, 另法, 用drawContours
-    points = np.int0(points)  # 取整數
-    cv2.drawContours(image, [points], 0, color, 3) #多點頭尾連線
-
-print('包覆三角形 與 包覆矩形')
-print("幾何形狀的檢測和擬合 minEnclosingTriangle")
-print("用一個三角形把所有點包起來")
-
-W, H = 400, 400
-image = np.zeros((H, W, 3), np.uint8)# 黑色畫板
-
-points = np.array([[[1, 1]], [[5, 10]], [[5, 1]], [[1, 10]], [[2, 5]]], np.float32)
-points = np.array ([[1,1],[5,10],[5,1],[1,10],[2,5]] ,np.float32)
-
-points = np.array ([[0,0],[100,0],[0,100]] ,np.float32)
-points = np.array ([[0,0],[100,0],[100,100],[0,100]] ,np.float32)
-
-MIN = 100
-MAX = W - 100
-N = 30  # 隨機生成 N 個坐標點，每一行存儲一個坐標
-# 隨機生成 橫縱坐標均在 MIN 至 MAX 的坐標點
-points = np.random.randint(MIN, MAX, (N, 2), np.int32)
-#print(points)
-draw_points(points, red)
-
-print('包覆三角形')
-# 最小外包直立矩形
-area, triangle = cv2.minEnclosingTriangle(points)
-print('面積 :', area)
-print('包覆所有點的三角形之頂點座標 :', triangle)
-print(type(triangle))
-print(triangle.dtype)
-draw_lines(triangle, green)
-
-print('包覆矩形')
-rectangle = cv2.boundingRect(points)
-print(rectangle)
-x_st = rectangle[0]
-y_st = rectangle[1]
-w = rectangle[2]
-h = rectangle[3]
-x_sp, y_sp = x_st + w, y_st + h
-cv2.rectangle(image, (x_st, y_st), (x_sp, y_sp), blue, 3)
-
-cv2.imshow("image", image)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
 print("幾何形狀的檢測和擬合 HTLine")
 
 from mpl_toolkits.mplot3d import Axes3D
@@ -5234,96 +4560,6 @@ cv2.imshow("I",I)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 """
-print("------------------------------------------------------------")  # 60個
-
-print("幾何形狀的檢測和擬合 arcLength")
-
-def draw_points(points, color):
-    N = len(points)
-    print("N =", N)
-    for point in points:
-        cv2.circle(image, (int(point[0]), int(point[1])), 6, color, -1)
-
-
-W, H = 400, 400
-image = np.zeros((H, W, 3), np.uint8)# 黑色畫板
-
-# 點集
-# points = np.array([[0,0],[100,0],[0,100]] ,np.float32)
-points = np.array([[0,0],[100,0],[100,100],[0,100]] ,np.float32)
-print(points.shape)
-
-draw_points(points, red)
-
-# 計算點集的所圍區域的周長
-length1 = cv2.arcLength(points, False)  # 首尾不相連
-length2 = cv2.arcLength(points, True)  # 首尾相連
-
-# 計算點集所圍區域的面積
-area = cv2.contourArea(points)
-
-# 打印周長和面積
-print('首尾不相連 線長 :', length1)
-print('首尾相連 線長 :', length2)
-print('面積 :', area)
-
-cv2.imshow("image", image)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-print("幾何形狀的檢測和擬合 convexityDefects")
-
-W, H = 400, 400
-image = np.zeros((H, W, 3), np.uint8)# 黑色畫板
-
-# 輪廓
-contour = np.array(
-    [[20, 20], [50, 70], [20, 120], [120, 120], [100, 70], [120, 20]], np.int32
-)
-
-draw_points(contour, red)
-
-# 輪廓的凸包
-hull = cv2.convexHull(contour, returnPoints=False)
-defects = cv2.convexityDefects(contour, hull)
-
-# 打印凸包
-print(hull)
-
-# 打印凸包的缺陷
-print(defects)
-
-cv2.imshow("image", image)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-print("幾何形狀的檢測和擬合 pointPolygonTest")
-
-W, H = 400, 400
-image = np.zeros((H, W, 3), np.uint8)# 黑色畫板
-
-# 點集
-contour = np.array([[0, 0], [50, 30], [100, 100], [100, 0]], np.float32)
-
-draw_points(contour, red)
-
-# 判斷三個點和點集構成的輪廓的關系
-dist1 = cv2.pointPolygonTest(contour, (80, 40), False)
-dist2 = cv2.pointPolygonTest(contour, (50, 0), False)
-dist3 = cv2.pointPolygonTest(contour, (40, 80), False)
-# 打印結果
-print(dist1)
-print(dist2)
-print(dist3)
-
-cv2.imshow("image", image)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
 print("------------------------------------------------------------")  # 60個
 
 print("幾何形狀的檢測和擬合 contours")
@@ -5495,64 +4731,6 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-# HLS.py
-
-filename = "C:/_git/vcs/_4.python/opencv/data/rgb512.bmp"
-
-# 檔案 => cv2影像
-image = cv2.imread(filename, cv2.IMREAD_COLOR)
-
-# 顯示原圖
-cv2.imshow("image", image)
-# 圖像歸一化，且轉換為浮點型
-fImg = image.astype(np.float32)
-fImg = fImg / 255.0
-# 顏色空間轉換
-hlsImg = cv2.cvtColor(fImg, cv2.COLOR_BGR2HLS)
-l = 100
-s = 100
-MAX_VALUE = 100
-cv2.namedWindow("l and s", cv2.WINDOW_AUTOSIZE)
-
-
-def nothing(*arg):
-    pass
-
-
-cv2.createTrackbar("l", "l and s", l, MAX_VALUE, nothing)
-cv2.createTrackbar("s", "l and s", s, MAX_VALUE, nothing)
-
-# 調整飽和度和亮度後的效果
-lsImg = np.zeros(image.shape, np.float32)
-# 調整飽和度和亮度
-
-while True:
-    # 復制
-    hlsCopy = np.copy(hlsImg)
-    # 得到 l 和 s 的值
-    l = cv2.getTrackbarPos("l", "l and s")
-    s = cv2.getTrackbarPos("s", "l and s")
-    # 調整亮度和飽和度（線性變換）
-    hlsCopy[:, :, 1] = (1.0 + l / float(MAX_VALUE)) * hlsCopy[:, :, 1]
-    hlsCopy[:, :, 1][hlsCopy[:, :, 1] > 1] = 1
-    hlsCopy[:, :, 2] = (1.0 + s / float(MAX_VALUE)) * hlsCopy[:, :, 2]
-    hlsCopy[:, :, 2][hlsCopy[:, :, 2] > 1] = 1
-    # HLS2BGR
-    lsImg = cv2.cvtColor(hlsCopy, cv2.COLOR_HLS2BGR)
-    # 顯示調整後的效果
-    cv2.imshow("l and s", lsImg)
-    # 保存結果
-    lsImg = lsImg * 255
-    lsImg = lsImg.astype(np.uint8)
-
-    k = cv2.waitKey(1)
-    if k == ESC:
-        break
-
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
 img = cv2.resize(cv2.imread("images/soccer_practice.jpg", 0), (0, 0), fx=0.8, fy=0.8)
 template = cv2.resize(cv2.imread("images/shoe.PNG", 0), (0, 0), fx=0.8, fy=0.8)
 print(img.shape)
@@ -5611,155 +4789,438 @@ print("------------------------------------------------------------")  # 60個
 
 
 
+# HSL即色相、飽和度、亮度（英語：Hue, Saturation, Lightness）
 
-
-
-
-print("OpenCV_34")
-
-filename = "C:/_git/vcs/_4.python/opencv/data/QR1.png"
+filename = "C:/_git/vcs/_4.python/opencv/data/rgb512.bmp"
 
 # 檔案 => cv2影像
-image = cv2.imread(filename)  # 開啟圖片
+image = cv2.imread(filename, cv2.IMREAD_COLOR)
 
-qrcode = cv2.QRCodeDetector()  # 建立 QRCode 偵測器
-data, bbox, rectified = qrcode.detectAndDecode(image)  # 偵測圖片中的 QRCode
-# 如果 bbox 是 None 表示圖片中沒有 QRCode
-if bbox is not None:
-    print(data)  # QRCode 的內容
-    print(bbox)  # QRCode 的邊界
-    print(rectified)  # 換成垂直 90 度的陣列
-
+# 顯示原圖
 cv2.imshow("image", image)
-cv2.waitKey()
+
+# 圖像歸一化，且轉換為浮點型
+fImg = image.astype(np.float32)
+fImg = fImg / 255.0
+
+# 顏色空間轉換
+hlsImg = cv2.cvtColor(fImg, cv2.COLOR_BGR2HLS)
+lightness = 100
+saturation = 100
+MAX_VALUE = 100
+
+cv2.namedWindow("RGB_HLS", cv2.WINDOW_AUTOSIZE)
+
+
+def nothing(*arg):
+    pass
+
+
+cv2.createTrackbar("Lightness", "RGB_HLS", lightness, MAX_VALUE, nothing)
+cv2.createTrackbar("Saturation", "RGB_HLS", saturation, MAX_VALUE, nothing)
+
+# 調整飽和度和亮度後的效果
+lsImg = np.zeros(image.shape, np.float32)
+
+# 調整飽和度和亮度
+while True:
+    hlsCopy = np.copy(hlsImg)#複製原始影像
+    # 得到 亮度 和 飽和度 的值
+    lightness = cv2.getTrackbarPos("Lightness", "RGB_HLS")
+    saturation = cv2.getTrackbarPos("Saturation", "RGB_HLS")
+
+    # 調整亮度和飽和度（線性變換）
+    hlsCopy[:, :, 1] = (1.0 + lightness / float(MAX_VALUE)) * hlsCopy[:, :, 1]
+    hlsCopy[:, :, 1][hlsCopy[:, :, 1] > 1] = 1
+    hlsCopy[:, :, 2] = (1.0 + saturation / float(MAX_VALUE)) * hlsCopy[:, :, 2]
+    hlsCopy[:, :, 2][hlsCopy[:, :, 2] > 1] = 1
+
+    # HLS2BGR
+    lsImg = cv2.cvtColor(hlsCopy, cv2.COLOR_HLS2BGR)
+
+    # 顯示調整後的效果
+    cv2.imshow("RGB_HLS", lsImg)
+
+    # 保存結果
+    lsImg = lsImg * 255
+    lsImg = lsImg.astype(np.uint8)
+
+    k = cv2.waitKey(1)
+    if k == ESC:
+        break
+
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
-print("OpenCV_35")
 
-filename = "C:/_git/vcs/_4.python/opencv/data/QR1.png"
+filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
+
+# 檔案 => cv2影像
+image = cv2.imread(filename)
+cv2.imshow("ImageProcessing", image)
+
+contrast = 0  # 初始化要調整對比度的數值
+brightness = 0  # 初始化要調整亮度的數值
+cv2.imshow("ImageProcessing", image)
+
+
+# 定義調整亮度對比的函式
+def adjust(i, c, b):
+    output = i * (c / 100 + 1) - c + b  # 轉換公式
+    output = np.clip(output, 0, 255)
+    output = np.uint8(output)
+    cv2.imshow("ImageProcessing", output)
+
+
+# 定義調整亮度函式
+def brightness_fn(val):
+    #print('取得 亮度 :', val)
+    global image, contrast, brightness
+    brightness = val - 100
+    adjust(image, contrast, brightness)
+
+
+# 定義調整對比度函式
+def contrast_fn(val):
+    #print('取得 對比度 :', val)
+    global image, contrast, brightness
+    contrast = val - 100
+    adjust(image, contrast, brightness)
+
+# 加入亮度調整滑桿 0 ~ 200, 預設 100
+cv2.createTrackbar("brightness", "ImageProcessing", 0, 200, brightness_fn)
+cv2.setTrackbarPos("brightness", "ImageProcessing", 100)
+
+# 加入對比度調整滑桿 0 ~ 200, 預設 100
+cv2.createTrackbar("contrast", "ImageProcessing", 0, 200, contrast_fn)
+cv2.setTrackbarPos("contrast", "ImageProcessing", 100)
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+print("對比度增強1")
 
 # 檔案 => cv2影像
 image = cv2.imread(filename)
 
-qrcode = cv2.QRCodeDetector()
-data, bbox, rectified = qrcode.detectAndDecode(image)
+MAX_VALUE = 120
+value = 120
+
+# 調整對比度後，圖像的效果顯示窗口
+cv2.namedWindow("contrast", cv2.WND_PROP_AUTOSIZE)
 
 
-# 取得座標的函式
-def boxSize(arr):
-    global data
-    box_roll = np.rollaxis(arr, 1, 0)  # 轉置矩陣，把 x 放在同一欄，y 放在同一欄
-    xmax = int(np.amax(box_roll[0]))  # 取出 x 最大值
-    xmin = int(np.amin(box_roll[0]))  # 取出 x 最小值
-    ymax = int(np.amax(box_roll[1]))  # 取出 y 最大值
-    ymin = int(np.amin(box_roll[1]))  # 取出 y 最小值
-    return (xmin, ymin, xmax, ymax)
+# 調整系數，觀察圖像的變化
+def callback_contrast(_value):
+    # 通過線性運算，調整圖像對比度
+    a = float(_value) / 40.0
+    contrastImage = a * image
+    contrastImage[contrastImage > 255] = 255
+    contrastImage = np.round(contrastImage)
+    contrastImage = contrastImage.astype(np.uint8)
+    cv2.imshow("contrast", contrastImage)
 
 
-# 如果 bbox 是 None 表示圖片中沒有 QRCode
-if bbox is not None:
-    print(data)
-    print(bbox)
-    print(rectified)
-    box = boxSize(bbox[0])
-    cv2.rectangle(image, (box[0], box[1]), (box[2], box[3]), red, 5)  # 畫矩形
+callback_contrast(value)  # 套用一次設定值
 
-cv2.imshow("image", image)
-cv2.waitKey()
+cv2.createTrackbar("value", "contrast", value, MAX_VALUE, callback_contrast)
+
+cv2.waitKey(0)
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
-print("OpenCV_36")
 
-from PIL import ImageFont, ImageDraw, Image  # 載入 PIL ( 為了放中文字 )
-
-filename = "C:/_git/vcs/_4.python/opencv/data/QR1.png"
+print("對比度增強4 gamma")
 
 # 檔案 => cv2影像
+image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
 image = cv2.imread(filename)
 
-qrcode = cv2.QRCodeDetector()
-data, bbox, rectified = qrcode.detectAndDecode(image)
+MAX_VALUE = 200
+value = 40
+segValue = float(value)
+# 伽馬調整需要先將圖像歸一化
+image_0_1 = image / 255.0
+# 伽馬調整後的圖像顯示窗口
+cv2.namedWindow("gamma_contrast", cv2.WND_PROP_AUTOSIZE)
 
 
-# 建立放入文字的函式
-def putText(x, y, text, color=(0, 0, 0)):
-    global image
-    # font_filename = 'NotoSansTC-Regular.otf'      # 字體 ( 從 Google Font 下載 )
-    font = ImageFont.truetype(font_filename, 20)  # 設定字型與大小
-    imagePil = Image.fromarray(image)  # 將 image 轉換成 PIL 圖片物件
-    draw = ImageDraw.Draw(imagePil)  # 建立繪圖物件
-    draw.text((x, y), text, fill=color, font=font)  # 寫入文字
-    image = np.array(imagePil)  # 轉換回 np array
+# 調整 gamma 值，觀察圖像的變換
+def callback_contrast(_value):
+    gamma = float(_value) / segValue
+    contrastImage = np.power(image_0_1, gamma)
+    cv2.imshow("gamma_contrast", contrastImage)
+    # 保存伽馬調整的結果
+    contrastImage *= 255
+    contrastImage = np.round(contrastImage)
+    contrastImage = contrastImage.astype(np.uint8)
 
 
-def boxSize(arr):
-    global data
-    box_roll = np.rollaxis(arr, 1, 0)
-    xmax = int(np.amax(box_roll[0]))
-    xmin = int(np.amin(box_roll[0]))
-    ymax = int(np.amax(box_roll[1]))
-    ymin = int(np.amin(box_roll[1]))
-    return (xmin, ymin, xmax, ymax)
+callback_contrast(value)#套用一次設定值
 
+cv2.createTrackbar("value", "gamma_contrast", value, MAX_VALUE, callback_contrast)
 
-if bbox is not None:
-    print(data)
-    print(bbox)
-    print(rectified)
-    box = boxSize(bbox[0])
-    cv2.rectangle(image, (box[0], box[1]), (box[2], box[3]), red, 5)
-
-cv2.imshow("image", image)
-cv2.waitKey()
+cv2.waitKey(0)
 cv2.destroyAllWindows()
-
-
-
 
 print("------------------------------------------------------------")  # 60個
-print("OpenCV_37")
 
-""" many-qr-code
-from PIL import ImageFont, ImageDraw, Image
+
+print("圖像平滑 meanBlur")
+
+from scipy import signal
+
+
+# 均值平滑
+def meanBlur(image, H, W, _boundary="fill", _fillvalue=0):
+    # H、W均不為零
+    if H == 0 or W == 0:
+        print("W or H is not zero")
+        return image
+
+    # -------沒有對均值平滑算子進行分離
+    # meanKernel = 1.0/(H*W)*np.ones([H,W],np.float32)
+    # result = signal.convolve2d(image,meanKernel,mode='same',boundary = _boundary,fillvalue=_fillvalue)
+    # -----卷積後進行數據類型轉換,得到均值平滑的結果
+    # result = result.astype(np.uint8)
+    # return result
+
+    # 因為均值算子是可分離的卷積核，根據卷積運算的結合律
+    # 可以先進行水平方向的卷積，
+    # 再進行垂直方向的卷積
+    # 首先水平方向的均值平滑
+    meanKernel_x = 1.0 / W * np.ones([1, W], np.float32)
+    i_conv_mk_x = signal.convolve2d(
+        image, meanKernel_x, mode="same", boundary=_boundary, fillvalue=_fillvalue
+    )
+    # 然後對得到的水平卷積的結果再進行垂直方向的卷積
+    meanKernel_y = 1.0 / H * np.ones([H, 1], np.float32)
+    i_conv_xy = signal.convolve2d(
+        i_conv_mk_x, meanKernel_y, mode="same", boundary=_boundary, fillvalue=_fillvalue
+    )
+    i_conv_xy = np.round(i_conv_xy)
+    # 卷積後的結果進行數據類型轉換，得到均值平滑的結果
+    result = i_conv_xy.astype(np.uint8)
+    return result
+
 
 # 檔案 => cv2影像
-image = cv2.imread("many-qrcode.jpg")
+image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
 
-def putText(x,y,text,color=(0,0,0)):
-    global image
-    #font_filename = 'NotoSansTC-Regular.otf'
-    font = ImageFont.truetype(font_filename, 20)
-    imagePil = Image.fromarray(image)
-    draw = ImageDraw.Draw(imagePil)
-    draw.text((x, y), text, fill=color, font=font)
-    image = np.array(imagePil)
+# 均值濾波卷積核的寬高均設為 2*halfWinSize+1
+halfWinSize = 1
+MAX_HALFWINSIZE = 20
+cv2.namedWindow("meanBlur", 1)
 
-def boxSize(arr):
-    global data
-    box_roll = np.rollaxis(arr,1,0)
-    xmax = int(np.amax(box_roll[0]))
-    xmin = int(np.amin(box_roll[0]))
-    ymax = int(np.amax(box_roll[1]))
-    ymin = int(np.amin(box_roll[1]))
-    return (xmin,ymin,xmax,ymax)
 
-qrcode = cv2.QRCodeDetector()
-ok, data, bbox, rectified = qrcode.detectAndDecodeMulti(image)   # 改用 detectAndDecodeMulti
-# 如果有偵測到
-if ok:
-    # 使用 for 迴圈取出每個 QRCode 的資訊
-    for i in range(len(data)):
-        print(data[i])
-        print(bbox[i])
-        text = data[i]          # QRCode 內容
-        box = boxSize(bbox[i])  # QRCode 左上與右下座標
-        cv2.rectangle(image,(box[0],box[1]),(box[2],box[3]),(0,0,255),5)  # 標記外框
-        putText(box[0],box[3],text)   # 寫出文字
+# 回調函數，均值濾波
+def callback_meanBlur(_halfWinSize):
+    result = meanBlur(
+        image,
+        2 * _halfWinSize + 1,
+        2 * _halfWinSize + 1,
+        _boundary="symm",
+        _fillvalue=0,
+    )
+    cv2.imshow("meanBlur", result)
 
-cv2.imshow('image', image)
-cv2.waitKey()
+
+callback_meanBlur(halfWinSize)
+cv2.createTrackbar(
+    "winSize/2", "meanBlur", halfWinSize, MAX_HALFWINSIZE, callback_meanBlur
+)
+
+latexImage = meanBlur(image, 29, 29, "symm")
+
+cv2.waitKey(0)
 cv2.destroyAllWindows()
+'''
+print("------------------------------------------------------------")  # 60個
+
+print("邊緣檢測 scharr")
+
+from scipy import signal
+
+
+def scharr(I, _boundary="symm"):
+    # I 與 scharr_x 的 same 卷積
+    scharr_x = np.array([[3, 0, -3], [10, 0, -10], [3, 0, -3]], np.float32)
+    I_x = signal.convolve2d(I, scharr_x, mode="same", boundary="symm")
+    # I 與 scharr_y 的same 卷積
+    scharr_y = np.array([[3, 10, 3], [0, 0, 0], [-3, -10, -3]], np.float32)
+    I_y = signal.convolve2d(I, scharr_y, mode="same", boundary="symm")
+    return (I_x, I_y)
+
+
+filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
+# 檔案 => cv2影像
+image = cv2.imread(filename,cv2.IMREAD_GRAYSCALE)
+
+#求卷積
+#i_conv_sch_x = scharr(image,1,0,_boundary='symm') 改掉
+#i_conv_sch_y = scharr(image,0,1,_boundary='symm') 改掉
+i_conv_sch_x, i_conv_sch_y=scharr(image)
+
+#取絕對值,分別得到水平方向和垂直方向的邊緣強度
+abs_i_conv_sch_x = np.abs(i_conv_sch_x)
+abs_i_conv_sch_y = np.abs(i_conv_sch_y)
+
+#水平方向和垂直方向的邊緣強度的灰度級顯示
+edge_x = abs_i_conv_sch_x.copy()
+edge_y = abs_i_conv_sch_y.copy()
+edge_x[edge_x>255]=255
+edge_y[edge_y>255]=255
+edge_x = edge_x.astype(np.uint8)
+edge_y = edge_y.astype(np.uint8)
+cv2.imshow("edge_x",edge_x)
+cv2.imshow("edge_y",edge_y)
+
+#根據水平方向和垂直方向的邊緣強度,求最終的邊緣強度
+#有多種方式，這里使用平方根形式
+edge = np.sqrt(np.power(abs_i_conv_sch_x,2)+np.power(abs_i_conv_sch_y,2))
+#最終的邊緣強度的灰度級顯示
+edge[edge>255]=255
+edge = np.round(edge)
+edge = edge.astype(np.uint8)
+cv2.imshow('edge',edge)
+#經過閾值處理的邊緣顯示
+cv2.namedWindow("thresh_edge",1)
+MAX_THRESH = 255
+thresh = 255
+
+#回調函數，閾值處理
+def callback_thresh(_thresh):
+    threshEdge = edge.copy()
+    threshEdge[threshEdge < _thresh] = 0
+    threshEdge[threshEdge >= _thresh] = 255
+    cv2.imshow("thresh_edge",threshEdge)
+
+callback_thresh(thresh)
+cv2.createTrackbar("thresh","thresh_edge",thresh,MAX_THRESH,callback_thresh)
+
+#模擬鉛筆素描
+pencilSketch = edge.copy()
+pencilSketch = 255 - pencilSketch
+pencilSketch[pencilSketch < 100] = 100
+cv2.imshow("pencilSketch",pencilSketch)
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+
+sys.exit()
+
+print("------------------------------------------------------------")  # 60個
+
+print("邊緣檢測 Kirsch")
+
 """
+Krisch邊緣檢測算法:
+krisch(image,_boundary='fill',_fillvalue=0)
+其中:邊緣處理的方式_boundary包括：'symm','wrap','fill',
+且當__boundary='fill'時,填充值默認為零_fillvalue=0
+"""
+
+filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
+
+from scipy import signal
+
+def krisch(image, _boundary="fill", _fillvalue=0):
+    #第一步:8個krisch邊緣卷積算子分別和圖像矩陣進行卷積,然後分別取絕對值得到邊緣強度
+    # 存儲8個方向的邊緣強度
+    list_edge = []
+    # 圖像矩陣和k1進行卷積,然後取絕對值（即:得到邊緣強度）
+    k1 = np.array([[5, 5, 5], [-3, 0, -3], [-3, -3, -3]])
+    image_k1 = signal.convolve2d(
+        image, k1, mode="same", boundary=_boundary, fillvalue=_fillvalue
+    )
+    list_edge.append(np.abs(image_k1))
+    # 圖像矩陣和k2進行卷積,然後取絕對值（即:得到邊緣強度）
+    k2 = np.array([[-3, -3, -3], [-3, 0, -3], [5, 5, 5]])
+    image_k2 = signal.convolve2d(
+        image, k2, mode="same", boundary=_boundary, fillvalue=_fillvalue
+    )
+    list_edge.append(np.abs(image_k2))
+    # 圖像矩陣和k3進行卷積,然後取絕對值（即:得到邊緣強度）
+    k3 = np.array([[-3, 5, 5], [-3, 0, 5], [-3, -3, -3]])
+    image_k3 = signal.convolve2d(
+        image, k3, mode="same", boundary=_boundary, fillvalue=_fillvalue
+    )
+    list_edge.append(np.abs(image_k3))
+    # 圖像矩陣和k4進行卷積,然後取絕對值（即:得到邊緣強度）
+    k4 = np.array([[-3, -3, -3], [5, 0, -3], [5, 5, -3]])
+    image_k4 = signal.convolve2d(
+        image, k4, mode="same", boundary=_boundary, fillvalue=_fillvalue
+    )
+    list_edge.append(np.abs(image_k4))
+    # 圖像矩陣和k5進行卷積,然後取絕對值（即:得到邊緣強度）
+    k5 = np.array([[-3, -3, 5], [-3, 0, 5], [-3, -3, 5]])
+    image_k5 = signal.convolve2d(
+        image, k5, mode="same", boundary=_boundary, fillvalue=_fillvalue
+    )
+    list_edge.append(np.abs(image_k5))
+    # 圖像矩陣和k6進行卷積,然後取絕對值（即:得到邊緣強度）
+    k6 = np.array([[5, -3, -3], [5, 0, -3], [5, -3, -3]])
+    image_k6 = signal.convolve2d(
+        image, k6, mode="same", boundary=_boundary, fillvalue=_fillvalue
+    )
+    list_edge.append(np.abs(image_k6))
+    # 圖像矩陣和k7進行卷積,然後取絕對值（即:得到邊緣強度）
+    k7 = np.array([[-3, -3, -3], [-3, 0, 5], [-3, 5, 5]])
+    image_k7 = signal.convolve2d(
+        image, k7, mode="same", boundary=_boundary, fillvalue=_fillvalue
+    )
+    list_edge.append(np.abs(image_k7))
+    # 圖像矩陣和k8進行卷積,然後取絕對值（即:得到邊緣強度）
+    k8 = np.array([[5, 5, -3], [5, 0, -3], [-3, -3, -3]])
+    image_k8 = signal.convolve2d(
+        image, k8, mode="same", boundary=_boundary, fillvalue=_fillvalue
+    )
+    list_edge.append(np.abs(image_k8))
+    #第二步：對上述8個方向的邊緣強度,對應位置取最大值，作為圖像最後的邊緣強度
+    edge = list_edge[0]
+    for i in range(len(list_edge)):
+        edge = edge * (edge >= list_edge[i]) + list_edge[i] * (edge < list_edge[i])
+    return edge
+
+# 檔案 => cv2影像
+image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
+edge = krisch(image, _boundary="symm")
+# 邊緣強度的灰度級顯示
+rows, cols = edge.shape
+for r in range(rows):
+    for c in range(cols):
+        if edge[r][c] > 255:
+            edge[r][c] = 255
+edge = edge.astype(np.uint8)
+cv2.imshow("edge", edge)
+# 經過閾值處理的邊緣顯示
+cv2.namedWindow("thresh_edge", 1)
+MAX_THRESH = 255
+thresh = 255
+
+
+# 回調函數，閾值處理
+def callback_thresh(_thresh):
+    threshEdge = edge.copy()
+    threshEdge[threshEdge < _thresh] = 0
+    threshEdge[threshEdge >= _thresh] = 255
+    cv2.imshow("thresh_edge", threshEdge)
+
+
+callback_thresh(thresh)
+cv2.createTrackbar("thresh", "thresh_edge", thresh, MAX_THRESH, callback_thresh)
+
+# 模擬素描
+pencilSketch = edge.copy()
+pencilSketch = 255 - pencilSketch
+pencilSketch[pencilSketch < 50] = 50
+cv2.imshow("pencilSketch", pencilSketch)
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
 

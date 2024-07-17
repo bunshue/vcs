@@ -309,6 +309,13 @@ def button22Click():
 
 def button23Click():
     print('你按了button23 測試3')
+    print('快進 10 秒')
+    """
+    current_pos = pygame.mixer.music.get_pos()
+    #print('目前播放位置 :', )
+    current_pos += 100
+    pygame.mixer.music.set_pos(current_pos)
+    """
 
 def button24Click():
     print('你按了button24 測試4')

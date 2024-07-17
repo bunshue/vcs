@@ -5,6 +5,7 @@ cv2之各種影像處理功能
 
 
 """
+
 import sys
 import cv2
 import numpy as np
@@ -207,8 +208,216 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
+print("閾值分割 bitwise_and")
+
+src1 = np.array([[255, 0, 255]])
+src2 = np.array([[255, 0, 0]])
+# 與運算
+dst_and = cv2.bitwise_and(src1, src2)
+# 或運算
+dst_or = cv2.bitwise_or(src1, src2)
+print("與運算的結果：")
+print(dst_and)
+print("或運算的結果：")
+print(dst_or)
+
+print("------------------------------------------------------------")  # 60個
+
+print("幾何形狀的檢測和擬合 convexHull")
+
+W, H = 400, 400
+I = np.zeros((H, W, 3), np.uint8)  # 黑色畫板
+
+MIN = 50
+MAX = W - 50
+N = 50  # 隨機生成 N 個坐標點，每一行存儲一個坐標
+# 隨機生成 橫縱坐標均在 MIN 至 MAX 的坐標點
+points = np.random.randint(MIN, MAX, (N, 2), np.int32)
+print(points)
+# 把上述點集處的灰度值設置為 255,單個白色像素點不容易觀察，用一個小圓標注一下
+for i in range(N):
+    cv2.circle(I, (points[i, 0], points[i, 1]), 6, red, -1)
+
+# 求點集 points 的凸包
+convexhull = cv2.convexHull(points, clockwise=False)
+# ----- 打印凸包的信息 ----
+print(type(convexhull))
+print(convexhull.shape)
+
+# 連接凸包的各個點
+k = convexhull.shape[0]
+for i in range(k - 1):
+    cv2.line(
+        I,
+        (convexhull[i, 0, 0], convexhull[i, 0, 1]),
+        (convexhull[i + 1, 0, 0], convexhull[i + 1, 0, 1]),
+        green,
+        2,
+    )
+
+# 首尾相接
+cv2.line(
+    I,
+    (convexhull[k - 1, 0, 0], convexhull[k - 1, 0, 1]),
+    (convexhull[0, 0, 0], convexhull[0, 0, 1]),
+    blue,
+    2,
+)
+
+# 顯示圖片
+cv2.imshow("I", I)
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+def draw_points(points, color):
+    N = len(points)
+    print("N =", N)
+    for point in points:
+        cv2.circle(image, (int(point[0]), int(point[1])), 6, color, -1)
+
+def draw_lines(points, color):
+    N = len(points)
+    print("N =", N)
+    # 畫出來, 另法, 用drawContours
+    points = np.int0(points)  # 取整數
+    cv2.drawContours(image, [points], 0, color, 3) #多點頭尾連線
+
+print('包覆三角形 與 包覆矩形')
+print("幾何形狀的檢測和擬合 minEnclosingTriangle")
+print("用一個三角形把所有點包起來")
+
+W, H = 400, 400
+image = np.zeros((H, W, 3), np.uint8)# 黑色畫板
+
+points = np.array([[[1, 1]], [[5, 10]], [[5, 1]], [[1, 10]], [[2, 5]]], np.float32)
+points = np.array ([[1,1],[5,10],[5,1],[1,10],[2,5]] ,np.float32)
+
+points = np.array ([[0,0],[100,0],[0,100]] ,np.float32)
+points = np.array ([[0,0],[100,0],[100,100],[0,100]] ,np.float32)
+
+MIN = 100
+MAX = W - 100
+N = 30  # 隨機生成 N 個坐標點，每一行存儲一個坐標
+# 隨機生成 橫縱坐標均在 MIN 至 MAX 的坐標點
+points = np.random.randint(MIN, MAX, (N, 2), np.int32)
+#print(points)
+draw_points(points, red)
+
+print('包覆三角形')
+# 最小外包直立矩形
+area, triangle = cv2.minEnclosingTriangle(points)
+print('面積 :', area)
+print('包覆所有點的三角形之頂點座標 :', triangle)
+print(type(triangle))
+print(triangle.dtype)
+draw_lines(triangle, green)
+
+print('包覆矩形')
+rectangle = cv2.boundingRect(points)
+print(rectangle)
+x_st = rectangle[0]
+y_st = rectangle[1]
+w = rectangle[2]
+h = rectangle[3]
+x_sp, y_sp = x_st + w, y_st + h
+cv2.rectangle(image, (x_st, y_st), (x_sp, y_sp), blue, 3)
+
+cv2.imshow("image", image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+print("幾何形狀的檢測和擬合 arcLength")
+
+def draw_points(points, color):
+    N = len(points)
+    print("N =", N)
+    for point in points:
+        cv2.circle(image, (int(point[0]), int(point[1])), 6, color, -1)
 
 
+W, H = 400, 400
+image = np.zeros((H, W, 3), np.uint8)# 黑色畫板
+
+# 點集
+# points = np.array([[0,0],[100,0],[0,100]] ,np.float32)
+points = np.array([[0,0],[100,0],[100,100],[0,100]] ,np.float32)
+print(points.shape)
+
+draw_points(points, red)
+
+# 計算點集的所圍區域的周長
+length1 = cv2.arcLength(points, False)  # 首尾不相連
+length2 = cv2.arcLength(points, True)  # 首尾相連
+
+# 計算點集所圍區域的面積
+area = cv2.contourArea(points)
+
+# 打印周長和面積
+print('首尾不相連 線長 :', length1)
+print('首尾相連 線長 :', length2)
+print('面積 :', area)
+
+cv2.imshow("image", image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+print("幾何形狀的檢測和擬合 convexityDefects")
+
+W, H = 400, 400
+image = np.zeros((H, W, 3), np.uint8)# 黑色畫板
+
+# 輪廓
+contour = np.array(
+    [[20, 20], [50, 70], [20, 120], [120, 120], [100, 70], [120, 20]], np.int32
+)
+
+draw_points(contour, red)
+
+# 輪廓的凸包
+hull = cv2.convexHull(contour, returnPoints=False)
+defects = cv2.convexityDefects(contour, hull)
+
+# 打印凸包
+print(hull)
+
+# 打印凸包的缺陷
+print(defects)
+
+cv2.imshow("image", image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+print("幾何形狀的檢測和擬合 pointPolygonTest")
+
+W, H = 400, 400
+image = np.zeros((H, W, 3), np.uint8)# 黑色畫板
+
+# 點集
+contour = np.array([[0, 0], [50, 30], [100, 100], [100, 0]], np.float32)
+
+draw_points(contour, red)
+
+# 判斷三個點和點集構成的輪廓的關系
+dist1 = cv2.pointPolygonTest(contour, (80, 40), False)
+dist2 = cv2.pointPolygonTest(contour, (50, 0), False)
+dist3 = cv2.pointPolygonTest(contour, (40, 80), False)
+# 打印結果
+print(dist1)
+print(dist2)
+print(dist3)
+
+cv2.imshow("image", image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 

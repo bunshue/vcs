@@ -478,6 +478,39 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
+
+print("圖像平滑 salt")
+
+
+# 模擬椒鹽噪聲，number 指添加椒鹽噪聲的數量
+def salt(image, number):
+    # 圖像的寬高
+    rows, cols = image.shape
+    # 加入椒鹽噪聲後的圖像
+    saltImage = np.copy(image)
+    for i in range(number):
+        randR = random.randint(0, rows - 1)
+        randC = random.randint(0, cols - 1)
+        saltImage[randR][randC] = 0
+    return saltImage
+
+filename = "C:/_git/vcs/_4.python/_data/tiger.jpg"
+
+# 檔案 => cv2影像
+image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
+
+# 顯示原圖
+cv2.imshow("image", image)
+
+# 添加椒鹽噪聲
+saltImage = salt(image, 2000)
+cv2.imshow("saltImage", saltImage)
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
 filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
 
 # 檔案 => cv2影像

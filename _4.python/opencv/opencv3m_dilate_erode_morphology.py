@@ -11,17 +11,19 @@ dilate 擴大 膨脹
 erode 侵蝕
 morphology 形態學 構詞學
 
-
-
 """
-
-
 import cv2
 
+print("------------------------------------------------------------")  # 60個
+
+# 共同
+import os
 import sys
-import matplotlib.pyplot as plt
-import numpy as np
 import math
+import random
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
 
 font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
@@ -29,9 +31,11 @@ font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
 # 設定負號
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
+'''
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/kernel.bmp"
 o = cv2.imread(filename, cv2.IMREAD_UNCHANGED)
 
@@ -781,13 +785,145 @@ cv2.imshow("image3", img)  # 膨脹後的影像
 
 cv2.waitKey()
 cv2.destroyAllWindows()
+'''
+print("------------------------------------------------------------")  # 60個
 
+filename = "C:/_git/vcs/_4.python/_data/opencv05_dilate_erode1.png"
+
+print("形態學處理 erode")
+
+# 檔案 => cv2影像
+I = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
+
+# 創建結構元
+s = cv2.getStructuringElement(cv2.MORPH_RECT, (5, 5))
+
+# 腐蝕圖像
+r = cv2.erode(I, s)
+
+# 顯示原圖和腐蝕後的結果
+cv2.imshow("I", I)
+cv2.imshow("erode", r)
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+print("形態學處理 dilate")
+
+""" fail
+if __name__ =="__main__":
+    #第一步：讀入圖像
+    # 檔案 => cv2影像
+    I = cv2.imread(filename,cv2.IMREAD_GRAYSCALE)
+    #顯示原圖
+    cv2.imshow("I",I)
+    #結構元半徑,迭代次數
+    r,i = 1,1
+    MAX_R,MAX_I = 20,20
+    #顯示膨脹效果的窗口
+    cv2.namedWindow("dilate",1)
+    def nothing(*arg):
+        pass
+    #調節結構元半徑
+    cv2.createTrackbar("r","dilate",r,MAX_R,nothing)
+    #調節迭代次數
+    cv2.createTrackbar("i","dilate",i,MAX_I,nothing)
+    while True:
+        #得到當前的r值
+        r = cv2.getTrackbarPos('r', 'dilate')
+        #得到當前的i值
+        i= cv2.getTrackbarPos('i','dilate')
+        #創建結構元
+        s = cv2.getStructuringElement(cv2.MORPH_GRADIENT,(2*r+1,2*r+1))
+        #膨脹圖像
+        d = cv2.erode(I,s,iterations=i)
+        #顯示膨脹效果
+        cv2.imshow("dilate",d)
+
+        k = cv2.waitKey(1)
+        if k == ESC:
+            break
+    cv2.destroyAllWindows()
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+print("形態學處理 open")
+
+# 第一步：讀入圖像
+# 檔案 => cv2影像
+I = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
+
+# 創建結構元
+s = cv2.getStructuringElement(cv2.MORPH_RECT, (5, 5))
+# 腐蝕圖像
+d = cv2.morphologyEx(I, cv2.MORPH_OPEN, s, iterations=1)
+# 顯示原圖和腐蝕後的結果
+cv2.imshow("I", I)
+cv2.imshow("open", d)
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+# fail
+
+print("形態學處理 mor")
+print("按 ESC 離開")
+
+# 第一步：讀入圖像
+# 檔案 => cv2影像
+I = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
+
+# 顯示原圖
+cv2.imshow("I", I)
+
+# 結構元半徑，迭代次數
+r, i = 1, 1
+MAX_R, MAX_I = 20, 20
+
+# 顯示形態學處理的效果的窗口
+cv2.namedWindow("morphology", 1)
+
+
+def nothing(*arg):
+    pass
+
+
+# 調節結構元半徑
+cv2.createTrackbar("r", "morphology", r, MAX_R, nothing)
+
+# 調節迭代次數
+cv2.createTrackbar("i", "morphology", i, MAX_I, nothing)
+
+while True:
+    # 得到當前的r值
+    r = cv2.getTrackbarPos("r", "morphology")
+    # 得到當前的i值
+    i = cv2.getTrackbarPos("i", "morphology")
+    # 創建結構元
+    s = cv2.getStructuringElement(cv2.MORPH_RECT, (2 * r + 1, 2 * r + 1))
+    # 形態學處理
+    d = cv2.morphologyEx(I, cv2.MORPH_GRADIENT, s, iterations=i)
+    # 顯示效果
+    cv2.imshow("morphology", d)
+
+    k = cv2.waitKey(1)
+    if k == ESC:
+        break
+
+
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
