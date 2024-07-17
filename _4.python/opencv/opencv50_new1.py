@@ -9,6 +9,11 @@ import cv2
 ESC = 27
 SPACE = 32
 
+red = (0, 0, 255)
+green = (0, 255, 0)
+blue = (255, 0, 0)
+white = (255, 255, 255)
+
 filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
 
 print("------------------------------------------------------------")  # 60個
@@ -31,7 +36,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 print('練習組合成一張大圖 picasa效果')
 
 filename1 = "C:/_git/vcs/_4.python/_data/elephant.jpg"
@@ -532,7 +537,7 @@ def saltpepper(image, n):
     return image
 
 
-# 上面就是椒盐噪声函数，下面是使用方法，大家可以愉快的玩耍了
+# 上面就是椒鹽噪聲函數，下面是使用方法，大家可以愉快的玩耍了
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
 
 # 檔案 => cv2影像
@@ -1012,98 +1017,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-def salt_pepper_noise(image, fraction, salt_vs_pepper):
-    img = np.copy(image)
-    size = img.size
-    num_salt = np.ceil(fraction * size * salt_vs_pepper).astype("int")
-    num_pepper = np.ceil(fraction * size * (1 - salt_vs_pepper)).astype("int")
-    row, column = img.shape
-
-    # 隨機的座標點
-    x = np.random.randint(0, column - 1, num_pepper)
-    y = np.random.randint(0, row - 1, num_pepper)
-    img[y, x] = 0  # 撒上胡椒
-
-    # 隨機的座標點
-    x = np.random.randint(0, column - 1, num_salt)
-    y = np.random.randint(0, row - 1, num_salt)
-    img[y, x] = 255  # 撒上鹽
-    return img
-
-
-fraction = 0.1  # 雜訊佔圖的比例
-salt_vs_pepper = 0.5  # 鹽與胡椒的比例
-
-filename = "C:/_git/vcs/_4.python/_data/tiger.jpg"
-
-# 檔案 => cv2影像
-image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
-noisy = salt_pepper_noise(image, fraction, salt_vs_pepper)
-
-plt.imshow(cv2.cvtColor(noisy, cv2.COLOR_BGR2RGB))
-plt.title("胡椒(黑)鹽(白)效果")
-
-plt.show()
-
-# 黑點就好比胡椒，白點就像是鹽，這種加上雜訊的方式，就稱為椒鹽雜訊（Salt & Pepper Noise）
-
-print("------------------------------------------------------------")  # 60個
-
-filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
-
-# 檔案 => cv2影像
-image1 = cv2.imread(filename)
-
-image2 = cv2.cvtColor(image1, cv2.COLOR_BGR2GRAY)  # 彩色轉灰階
-
-# image2 = cv2.cvtColor(image1, 6)  # 也可以用數字對照 6 表示轉換成灰階
-# 套用 medianBlur() 中值模糊
-image3 = cv2.medianBlur(image2, 7)  # 模糊化，去除雜訊 7, 25 彩色黑白皆可
-image4 = cv2.Canny(image3, 36, 36)  # 偵測邊緣
-
-# 套用自適應二值化黑白影像
-image5 = cv2.adaptiveThreshold(
-    image3, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 2
-)
-
-plt.figure(
-    num="相加",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
-
-plt.subplot(231)
-plt.title("原圖")
-plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
-
-plt.subplot(232)
-plt.title("轉成灰階")
-plt.imshow(cv2.cvtColor(image2, cv2.COLOR_BGR2RGB))
-
-plt.subplot(233)
-plt.title("模糊化，去除雜訊")
-plt.imshow(cv2.cvtColor(image3, cv2.COLOR_BGR2RGB))
-
-plt.subplot(234)
-plt.title("偵測邊緣")
-plt.imshow(cv2.cvtColor(image4, cv2.COLOR_BGR2RGB))
-
-plt.subplot(235)
-plt.title("自適應二值化黑白影像")
-plt.imshow(cv2.cvtColor(image5, cv2.COLOR_BGR2RGB))
-
-plt.subplot(236)
-plt.title("")
-
-plt.tight_layout()  # 緊密排列，並填滿原圖大小
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
 print("Y對稱一張圖片")
 
 filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
@@ -1512,7 +1425,7 @@ def floodFill(
 
 h, w = image.shape[:2]  # 取得原始影像的長寬
 mask = np.zeros((h + 2, w + 2, 1), np.uint8)  # 製作 mask，長寬都要加上 2
-output = floodFill(image, mask, (100, 10), (0, 0, 255), (100, 100, 60), (100, 100, 100))
+output = floodFill(image, mask, (100, 10), red, (100, 100, 60), (100, 100, 100))
 
 cv2.imshow("image", output)
 cv2.waitKey()
@@ -1547,7 +1460,7 @@ mask = 255 - mask  # 變成全白遮罩
 mask[0:100, 0:200] = 0  # 將左上角長方形變成黑色
 
 # 只處理mask區域
-output = floodFill(image, mask, (100, 10), (0, 0, 255), (100, 100, 60), (200, 200, 200))
+output = floodFill(image, mask, (100, 10), red, (100, 100, 60), (200, 200, 200))
 
 cv2.imshow("image", output)
 cv2.waitKey()
@@ -1682,151 +1595,6 @@ cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
-print("OpenCV_34")
-
-filename = "C:/_git/vcs/_4.python/opencv/data/QR1.png"
-
-# 檔案 => cv2影像
-image = cv2.imread(filename)  # 開啟圖片
-
-qrcode = cv2.QRCodeDetector()  # 建立 QRCode 偵測器
-data, bbox, rectified = qrcode.detectAndDecode(image)  # 偵測圖片中的 QRCode
-# 如果 bbox 是 None 表示圖片中沒有 QRCode
-if bbox is not None:
-    print(data)  # QRCode 的內容
-    print(bbox)  # QRCode 的邊界
-    print(rectified)  # 換成垂直 90 度的陣列
-
-cv2.imshow("image", image)
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-print("OpenCV_35")
-
-filename = "C:/_git/vcs/_4.python/opencv/data/QR1.png"
-
-# 檔案 => cv2影像
-image = cv2.imread(filename)
-
-qrcode = cv2.QRCodeDetector()
-data, bbox, rectified = qrcode.detectAndDecode(image)
-
-
-# 取得座標的函式
-def boxSize(arr):
-    global data
-    box_roll = np.rollaxis(arr, 1, 0)  # 轉置矩陣，把 x 放在同一欄，y 放在同一欄
-    xmax = int(np.amax(box_roll[0]))  # 取出 x 最大值
-    xmin = int(np.amin(box_roll[0]))  # 取出 x 最小值
-    ymax = int(np.amax(box_roll[1]))  # 取出 y 最大值
-    ymin = int(np.amin(box_roll[1]))  # 取出 y 最小值
-    return (xmin, ymin, xmax, ymax)
-
-
-# 如果 bbox 是 None 表示圖片中沒有 QRCode
-if bbox is not None:
-    print(data)
-    print(bbox)
-    print(rectified)
-    box = boxSize(bbox[0])
-    cv2.rectangle(image, (box[0], box[1]), (box[2], box[3]), (0, 0, 255), 5)  # 畫矩形
-
-cv2.imshow("image", image)
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-print("OpenCV_36")
-
-from PIL import ImageFont, ImageDraw, Image  # 載入 PIL ( 為了放中文字 )
-
-filename = "C:/_git/vcs/_4.python/opencv/data/QR1.png"
-
-# 檔案 => cv2影像
-image = cv2.imread(filename)
-
-qrcode = cv2.QRCodeDetector()
-data, bbox, rectified = qrcode.detectAndDecode(image)
-
-
-# 建立放入文字的函式
-def putText(x, y, text, color=(0, 0, 0)):
-    global image
-    # font_filename = 'NotoSansTC-Regular.otf'      # 字體 ( 從 Google Font 下載 )
-    font = ImageFont.truetype(font_filename, 20)  # 設定字型與大小
-    imagePil = Image.fromarray(image)  # 將 image 轉換成 PIL 圖片物件
-    draw = ImageDraw.Draw(imagePil)  # 建立繪圖物件
-    draw.text((x, y), text, fill=color, font=font)  # 寫入文字
-    image = np.array(imagePil)  # 轉換回 np array
-
-
-def boxSize(arr):
-    global data
-    box_roll = np.rollaxis(arr, 1, 0)
-    xmax = int(np.amax(box_roll[0]))
-    xmin = int(np.amin(box_roll[0]))
-    ymax = int(np.amax(box_roll[1]))
-    ymin = int(np.amin(box_roll[1]))
-    return (xmin, ymin, xmax, ymax)
-
-
-if bbox is not None:
-    print(data)
-    print(bbox)
-    print(rectified)
-    box = boxSize(bbox[0])
-    cv2.rectangle(image, (box[0], box[1]), (box[2], box[3]), (0, 0, 255), 5)
-
-cv2.imshow("image", image)
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-print("OpenCV_37")
-
-""" many-qr-code
-from PIL import ImageFont, ImageDraw, Image
-
-# 檔案 => cv2影像
-image = cv2.imread("many-qrcode.jpg")
-
-def putText(x,y,text,color=(0,0,0)):
-    global image
-    #font_filename = 'NotoSansTC-Regular.otf'
-    font = ImageFont.truetype(font_filename, 20)
-    imagePil = Image.fromarray(image)
-    draw = ImageDraw.Draw(imagePil)
-    draw.text((x, y), text, fill=color, font=font)
-    image = np.array(imagePil)
-
-def boxSize(arr):
-    global data
-    box_roll = np.rollaxis(arr,1,0)
-    xmax = int(np.amax(box_roll[0]))
-    xmin = int(np.amin(box_roll[0]))
-    ymax = int(np.amax(box_roll[1]))
-    ymin = int(np.amin(box_roll[1]))
-    return (xmin,ymin,xmax,ymax)
-
-qrcode = cv2.QRCodeDetector()
-ok, data, bbox, rectified = qrcode.detectAndDecodeMulti(image)   # 改用 detectAndDecodeMulti
-# 如果有偵測到
-if ok:
-    # 使用 for 迴圈取出每個 QRCode 的資訊
-    for i in range(len(data)):
-        print(data[i])
-        print(bbox[i])
-        text = data[i]          # QRCode 內容
-        box = boxSize(bbox[i])  # QRCode 左上與右下座標
-        cv2.rectangle(image,(box[0],box[1]),(box[2],box[3]),(0,0,255),5)  # 標記外框
-        putText(box[0],box[3],text)   # 寫出文字
-
-cv2.imshow('image', image)
-cv2.waitKey()
-cv2.destroyAllWindows()
-"""
-
 print("------------------------------------------------------------")  # 60個
 print("OpenCV_38")
 
@@ -4144,6 +3912,7 @@ while True:
     if k == ESC:
         break
 
+
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -4754,7 +4523,6 @@ print("邊緣檢測 canny")
 
 # sobel邊緣檢測
 
-
 # 邊緣檢測
 # 非極大值抑制
 def non_maximum_suppression_default(dx, dy):
@@ -5218,20 +4986,25 @@ print("------------------------------------------------------------")  # 60個
 
 print("幾何形狀的檢測和擬合 convexHull")
 
-# 黑色畫板 400 x 400
-s = 400
-I = np.zeros((s, s), np.uint8)
-# 隨機生成 橫縱坐標均在 100 至 300 的坐標點
-n = 80  # 隨機生成 n 個坐標點，每一行存儲一個坐標
-points = np.random.randint(100, 300, (n, 2), np.int32)
+W, H = 400, 400
+I = np.zeros((H, W, 3), np.uint8)  # 黑色畫板
+
+MIN = 50
+MAX = W - 50
+N = 50  # 隨機生成 N 個坐標點，每一行存儲一個坐標
+# 隨機生成 橫縱坐標均在 MIN 至 MAX 的坐標點
+points = np.random.randint(MIN, MAX, (N, 2), np.int32)
+print(points)
 # 把上述點集處的灰度值設置為 255,單個白色像素點不容易觀察，用一個小圓標注一下
-for i in range(n):
-    cv2.circle(I, (points[i, 0], points[i, 1]), 2, 255, 2)
+for i in range(N):
+    cv2.circle(I, (points[i, 0], points[i, 1]), 6, red, -1)
+
 # 求點集 points 的凸包
 convexhull = cv2.convexHull(points, clockwise=False)
 # ----- 打印凸包的信息 ----
 print(type(convexhull))
 print(convexhull.shape)
+
 # 連接凸包的各個點
 k = convexhull.shape[0]
 for i in range(k - 1):
@@ -5239,17 +5012,19 @@ for i in range(k - 1):
         I,
         (convexhull[i, 0, 0], convexhull[i, 0, 1]),
         (convexhull[i + 1, 0, 0], convexhull[i + 1, 0, 1]),
-        255,
+        green,
         2,
     )
+
 # 首尾相接
 cv2.line(
     I,
     (convexhull[k - 1, 0, 0], convexhull[k - 1, 0, 1]),
     (convexhull[0, 0, 0], convexhull[0, 0, 1]),
-    255,
+    blue,
     2,
 )
+
 # 顯示圖片
 cv2.imshow("I", I)
 
@@ -5258,19 +5033,62 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
+def draw_points(points, color):
+    N = len(points)
+    print("N =", N)
+    for point in points:
+        cv2.circle(image, (int(point[0]), int(point[1])), 6, color, -1)
+
+def draw_lines(points, color):
+    N = len(points)
+    print("N =", N)
+    # 畫出來, 另法, 用drawContours
+    points = np.int0(points)  # 取整數
+    cv2.drawContours(image, [points], 0, color, 3) #多點頭尾連線
+
+print('包覆三角形 與 包覆矩形')
 print("幾何形狀的檢測和擬合 minEnclosingTriangle")
+print("用一個三角形把所有點包起來")
+
+W, H = 400, 400
+image = np.zeros((H, W, 3), np.uint8)# 黑色畫板
 
 points = np.array([[[1, 1]], [[5, 10]], [[5, 1]], [[1, 10]], [[2, 5]]], np.float32)
-# points = np.array ([[1,1],[5,10],[5,1],[1,10],[2,5]] ,np.float32)
+points = np.array ([[1,1],[5,10],[5,1],[1,10],[2,5]] ,np.float32)
+
+points = np.array ([[0,0],[100,0],[0,100]] ,np.float32)
+points = np.array ([[0,0],[100,0],[100,100],[0,100]] ,np.float32)
+
+MIN = 100
+MAX = W - 100
+N = 30  # 隨機生成 N 個坐標點，每一行存儲一個坐標
+# 隨機生成 橫縱坐標均在 MIN 至 MAX 的坐標點
+points = np.random.randint(MIN, MAX, (N, 2), np.int32)
+#print(points)
+draw_points(points, red)
+
+print('包覆三角形')
 # 最小外包直立矩形
 area, triangle = cv2.minEnclosingTriangle(points)
-# cv2.boundingRect(points)
-# 打印面積
-print(area)
-# 打印三角形的三個頂點
-print(triangle)
-# print(type(triangle))
-# print(triangle.dtype)
+print('面積 :', area)
+print('包覆所有點的三角形之頂點座標 :', triangle)
+print(type(triangle))
+print(triangle.dtype)
+draw_lines(triangle, green)
+
+print('包覆矩形')
+rectangle = cv2.boundingRect(points)
+print(rectangle)
+x_st = rectangle[0]
+y_st = rectangle[1]
+w = rectangle[2]
+h = rectangle[3]
+x_sp, y_sp = x_st + w, y_st + h
+cv2.rectangle(image, (x_st, y_st), (x_sp, y_sp), blue, 3)
+
+cv2.imshow("image", image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -5312,7 +5130,6 @@ def HTLine(image, stepTheta=1, stepRho=1):
     return accumulator, accuDict
 
 
-"""
 if __name__ == "__main__":
     #輸入圖像
     # 檔案 => cv2影像
@@ -5326,7 +5143,7 @@ if __name__ == "__main__":
     #計數器的二維直方圖方式顯示
     rows,cols = accumulator.shape
     fig = plt.figure()
-    ax = fig.gca(projection='3d')
+    ax = fig.add_subplot(111, projection='3d')
     X,Y = np.mgrid[0:rows:1, 0:cols:1]
     surf = ax.plot_wireframe(X,Y,accumulator,cstride=1, rstride=1,color='gray')
     ax.set_xlabel(u"$\\rho$")
@@ -5352,12 +5169,15 @@ if __name__ == "__main__":
 
     cv2.waitKey(0)
     cv2.destroyAllWindows()
-"""
+
 
 print("------------------------------------------------------------")  # 60個
 
 print("幾何形狀的檢測和擬合 HTCircle")
-""" 跑不完
+""" 跑不完cv2.imshow("image", image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
 #標準霍夫圓檢測
 def HTCircle (I,minR,maxR,voteThresh = 100):
     #寬、高
@@ -5373,7 +5193,10 @@ def HTCircle (I,minR,maxR,voteThresh = 100):
     #投票計數
     for y in range(H):
         for x  in range(W):
-            if(I[y][x] == 255):#只對邊緣點做霍夫變換
+           cv2.imshow("image", image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+ if(I[y][x] == 255):#只對邊緣點做霍夫變換
                 for k in range(r_num):# r 變化的步長為 1 
                     for theta in np.linspace(0,360,360):
                         #計算對應的 a 和 b
@@ -5415,17 +5238,91 @@ print("------------------------------------------------------------")  # 60個
 
 print("幾何形狀的檢測和擬合 arcLength")
 
+def draw_points(points, color):
+    N = len(points)
+    print("N =", N)
+    for point in points:
+        cv2.circle(image, (int(point[0]), int(point[1])), 6, color, -1)
+
+
+W, H = 400, 400
+image = np.zeros((H, W, 3), np.uint8)# 黑色畫板
+
 # 點集
-points = np.array([[[0, 0]], [[50, 30]], [[100, 0]], [[100, 100]]], np.float32)
+# points = np.array([[0,0],[100,0],[0,100]] ,np.float32)
+points = np.array([[0,0],[100,0],[100,100],[0,100]] ,np.float32)
 print(points.shape)
-# points = np.array ([[0,0],[50,30],[100,0],[100,100]] ,np.float32)
+
+draw_points(points, red)
+
 # 計算點集的所圍區域的周長
 length1 = cv2.arcLength(points, False)  # 首尾不相連
 length2 = cv2.arcLength(points, True)  # 首尾相連
+
 # 計算點集所圍區域的面積
 area = cv2.contourArea(points)
+
 # 打印周長和面積
-print(length1, length2, area)
+print('首尾不相連 線長 :', length1)
+print('首尾相連 線長 :', length2)
+print('面積 :', area)
+
+cv2.imshow("image", image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+print("幾何形狀的檢測和擬合 convexityDefects")
+
+W, H = 400, 400
+image = np.zeros((H, W, 3), np.uint8)# 黑色畫板
+
+# 輪廓
+contour = np.array(
+    [[20, 20], [50, 70], [20, 120], [120, 120], [100, 70], [120, 20]], np.int32
+)
+
+draw_points(contour, red)
+
+# 輪廓的凸包
+hull = cv2.convexHull(contour, returnPoints=False)
+defects = cv2.convexityDefects(contour, hull)
+
+# 打印凸包
+print(hull)
+
+# 打印凸包的缺陷
+print(defects)
+
+cv2.imshow("image", image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+print("幾何形狀的檢測和擬合 pointPolygonTest")
+
+W, H = 400, 400
+image = np.zeros((H, W, 3), np.uint8)# 黑色畫板
+
+# 點集
+contour = np.array([[0, 0], [50, 30], [100, 100], [100, 0]], np.float32)
+
+draw_points(contour, red)
+
+# 判斷三個點和點集構成的輪廓的關系
+dist1 = cv2.pointPolygonTest(contour, (80, 40), False)
+dist2 = cv2.pointPolygonTest(contour, (50, 0), False)
+dist3 = cv2.pointPolygonTest(contour, (40, 80), False)
+# 打印結果
+print(dist1)
+print(dist2)
+print(dist3)
+
+cv2.imshow("image", image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -5434,6 +5331,7 @@ print("幾何形狀的檢測和擬合 contours")
 # 輸入圖像
 # 檔案 => cv2影像
 image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
+print(image.shape)
 
 # 邊緣檢測或閾值分割的二值化
 binaryImg = cv2.Canny(image, 50, 200)
@@ -5443,18 +5341,24 @@ contours, h = cv2.findContours(binaryImg, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
 
 # 打印 contoures 的類型
 print(type(contours))
+
 # contours 是列表類型，打印每一元素的類型
 print(type(contours[0]))
+
 # 打印輪廓（點集）個數
 print(len(contours))
+
 # 對這些點集，求每一個點集最小
 # 最小外包凸包
 contoursImg = np.zeros(image.shape, np.uint8)
-cv2.drawContours(contoursImg, contours, 7, 255, 3)
+cv2.drawContours(contoursImg, contours, 7, 255, 3)#多點頭尾連線
+
 circle = cv2.minEnclosingCircle(contours[7])
 cv2.circle(contoursImg, (int(circle[0][0]), int(circle[0][1])), int(circle[1]), 255, 2)
+
 convexhull = cv2.convexHull(contours[7])
-cv2.drawContours(contoursImg, contours, 7, 255, 3)
+cv2.drawContours(contoursImg, contours, 7, 255, 3)#多點頭尾連線
+
 for i in range(len(contours)):
     # ----- 最小外包圓 -------
     circle = cv2.minEnclosingCircle(contours[i])
@@ -5476,23 +5380,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-print("幾何形狀的檢測和擬合 convexityDefects")
-
-# 輪廓
-contour = np.array(
-    [[20, 20], [50, 70], [20, 120], [120, 120], [100, 70], [120, 20]], np.int32
-)
-# 輪廓的凸包
-hull = cv2.convexHull(contour, returnPoints=False)
-defects = cv2.convexityDefects(contour, hull)
-# 打印凸包
-print(hull)
-# 打印凸包的缺陷
-print(defects)
-
-print("------------------------------------------------------------")  # 60個
-
-print("幾何形狀的檢測和擬合 drawContours")
+print("幾何形狀的檢測和擬合")
 
 # 檔案 => cv2影像
 image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
@@ -5511,7 +5399,7 @@ for i in range(n):
     temp = np.zeros(binaryImg.shape, np.uint8)
     contoursImg.append(temp)
     # 在第 i 個黑色畫布上，畫第 i 個輪廓
-    cv2.drawContours(contoursImg[i], contours, i, 255, 2)
+    cv2.drawContours(contoursImg[i], contours, i, 255, 2)#多點頭尾連線
     cv2.imshow("contour-" + str(i), contoursImg[i])
 
 cv2.waitKey(0)
@@ -5550,7 +5438,7 @@ n =  len(hc[1])
 contoursImg = np.zeros(image.shape,np.uint8)
 for i in range(n):
     #畫出輪廓
-    cv2.drawContours(contoursImg,contours,i,255,2)
+    cv2.drawContours(contoursImg,contours,i,255,2)#多點頭尾連線
     #畫出輪廓的最小外包圓
     circle = cv2.minEnclosingCircle(contours[i])
     cv2.circle(image,(int(circle[0][0]),int(circle[0][1])),int(circle[1]),0,5)
@@ -5572,19 +5460,6 @@ cv2.imshow("dst",image)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 """
-print("------------------------------------------------------------")  # 60個
-
-print("幾何形狀的檢測和擬合 pointPolygonTest")
-
-# 點集
-contour = np.array([[0, 0], [50, 30], [100, 100], [100, 0]], np.float32)
-# 判斷三個點和點集構成的輪廓的關系
-dist1 = cv2.pointPolygonTest(contour, (80, 40), False)
-dist2 = cv2.pointPolygonTest(contour, (50, 0), False)
-dist3 = cv2.pointPolygonTest(contour, (40, 80), False)
-# 打印結果
-print(dist1, dist2, dist3)
-
 print("------------------------------------------------------------")  # 60個
 
 print("將一彩圖做RGB分離")
@@ -5678,83 +5553,6 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-print("cv2.goodFeaturesToTrack 角點偵測")
-
-filename = "C:/_git/vcs/_4.python/_data/opencv05_dilate_erode1.png"
-
-img = cv2.imread(filename)
-img = cv2.resize(img, (0, 0), fx=0.75, fy=0.75)
-
-gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # 彩色轉灰階
-
-corners = cv2.goodFeaturesToTrack(gray, 100, 0.01, 10)
-corners = np.int0(corners)
-
-print(len(corners))
-
-for corner in corners:
-    x, y = corner.ravel()
-    cv2.circle(img, (x, y), 10, (0, 0, 255), -1)
-
-cv2.imshow("Frame", img)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-print("cv2.goodFeaturesToTrack 角點偵測")
-
-
-def getkpoints(imag, input1):
-    mask1 = np.zeros_like(input1)
-    x = 0
-    y = 0
-    w1, h1 = input1.shape
-    input1 = input1[0:w1, 200:h1]
-    try:
-        w, h = imag.shape
-    except:
-        return None
-    mask1[y : y + h, x : x + w] = 255  # 整张图片像素
-    keypoints = []
-    kp = cv2.goodFeaturesToTrack(input1, 200, 0.04, 7)
-    if kp is not None and len(kp) > 0:
-        for x, y in np.float32(kp).reshape(-1, 2):
-            keypoints.append((x, y))
-    return keypoints
-
-
-def process(image):
-    gray1 = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 彩色轉灰階
-    gray = cv2.equalizeHist(gray1)  # 直方圖均衡化處理, 只能處理灰階圖
-    #cv2.imshow("frame", gray)
-    keypoints = getkpoints(gray, gray1)
-    #print(keypoints)
-    if keypoints is not None and len(keypoints) > 0:
-        for x, y in keypoints:
-            cv2.circle(image, (int(int(x) + 200), int(y)), 10, (0, 255, 255))
-    return image
-
-
-#video_filename = "C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4"
-video_filename = 'D:/內視鏡影片/_ims影片2/180824-1025.mp4'
-
-cap = cv2.VideoCapture(video_filename)
-#cap = cv2.VideoCapture(0)
-
-while cap.isOpened():
-    ret, frame = cap.read()
-    frame = process(frame)
-    cv2.imshow('frame', frame)
-    if cv2.waitKey(27) & 0xFF == ord("q"):
-        break
-
-cap.release()
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
 img = cv2.resize(cv2.imread("images/soccer_practice.jpg", 0), (0, 0), fx=0.8, fy=0.8)
 template = cv2.resize(cv2.imread("images/shoe.PNG", 0), (0, 0), fx=0.8, fy=0.8)
 print(img.shape)
@@ -5789,152 +5587,6 @@ for method in methods:
 
 print("------------------------------------------------------------")  # 60個
 
-print("製作毛玻璃效果")
-
-filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
-
-import numpy as np
-
-img = cv2.imread(filename)
-result = img.copy()
-H, W = result.shape[:2]
-print(H, W)
-
-for y in range(H-5):
-    for x in range(W-5):
-        random_num = np.random.randint(0, 5)
-        result[y, x] = img[y+random_num, x+random_num]
-
-cv2.imshow('src', img)
-cv2.imshow('result', result)
-
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-'''
-print("------------------------------------------------------------")  # 60個
-
-# boxPoints返回四个点顺序：右下→左下→左上→右上
-
-import cv2
-import numpy as np
-
-image = cv2.imread("data/cc.bmp")
-
-imagegray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 彩色轉灰階
-
-contours, hierarchy = cv2.findContours(
-    imagegray, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE
-)
-rect = cv2.minAreaRect(contours[0])  # 得到最小外接矩形的（中心(x,y), (宽,高), 旋转角度）
-print(type(rect))
-print('rect', rect)
-print('中心 :', rect[0])
-print('寬高 :', rect[1])
-print('旋轉角度 :', rect[2])
-
-cx = rect[0][0]
-cy = rect[0][1]
-print(cx, cy)
-W = rect[1][0]*2
-H = rect[1][1]*2
-print(W, H)
-
-angle = int(rect[2])  # 順時鐘旋轉角度
-cv2.ellipse(image, (int(cx), int(cy)), (int(W // 2), int(H // 2)), angle, 0, 360, 255, 3)  # 實心
-
-"""
-print("畫橢圓形")
-cx, cy = 220, 320  # 橢心
-AA, BB = 100, 50  # 長軸 短軸
-angle = 0  # 順時鐘旋轉角度
-color = (0, 0, 255)
-line_width = 5  # 線條寬度, 負數代表實心
-
-# 畫橢圓              中心  長軸 短軸 旋轉  開始 結束角度 顏色 線寬
-cv2.ellipse(image, (cx, cy), (AA, BB), angle, 0, 360, color, line_width)  # 空心
-cv2.ellipse(image, (cx, cy), (AA // 2, BB // 2), angle, 0, 360, color, -1)  # 實心
-"""
-
-points = cv2.boxPoints(rect)  # 获取最小外接矩形的4个顶点坐标
-print(points)  #
-
-#把矩形的四個頂點標出來
-for point in points:
-    cv2.circle(image, (int(point[0]), int(point[1])), 10, 255, -1)
-
-points = np.int0(points)
-
-# 畫出來
-cv2.drawContours(image, [points], 0, (0, 0, 255), 3)
-
-cv2.imshow("image", image)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-image = cv2.imread("data/cc.bmp")
-print("顯示原圖")
-
-cv2.imshow("original", image)
-
-gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 彩色轉灰階
-ret, binary = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
-contours, hierarchy = cv2.findContours(binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
-rect = cv2.minAreaRect(contours[0])
-print("返回值rect:\n", rect)
-points = cv2.boxPoints(rect)
-print("\n轉換后的points：\n", points)
-points = np.int0(points)  # 取整
-
-# 畫出來
-cv2.drawContours(image, [points], 0, (0, 0, 255), 3)
-
-cv2.imshow("result", image)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-rotating_angle = 0  # 順時針
-# 旋轉矩形
-
-W, H = 400, 400
-cx, cy = 200, 200
-points = cv2.boxPoints(((cx, cy), (350, 100), rotating_angle))
-# 四個頂點
-print(points.dtype)  # 打印數據類型
-print(points)  # 打印四個頂點
-
-# 根據四個頂點在黑色畫板上畫出該矩形
-image = np.zeros((H, W), np.uint8)
-
-for i in range(4):
-    # 相鄰的點
-    p1 = points[i, :]
-    j = (i + 1) % 4
-    p2 = points[j, :]
-    # 畫出直線
-    cv2.line(
-        image,
-        (int(p1[0]), int(p1[1])),
-        (int(p2[0]), int(p2[1])),
-        (255, 255, 255),
-        5,
-        lineType=cv2.LINE_AA,
-    )
-
-cv2.circle(image, (100, 100), 100, (255, 255, 255), 5)
-# cv2.circle(image, (cx, cy), radius, color, line_width)  # 繪製圓形
-
-cv2.imshow("image", image)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-
-print("------------------------------------------------------------")  # 60個
-
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
@@ -5953,3 +5605,161 @@ print("------------------------------------------------------------")  # 60個
     image = image[:, int((w-h)/2):int((h+(w-h)/2))]   # 將影像變成正方形
 
 """
+
+
+
+
+
+
+
+
+
+
+print("OpenCV_34")
+
+filename = "C:/_git/vcs/_4.python/opencv/data/QR1.png"
+
+# 檔案 => cv2影像
+image = cv2.imread(filename)  # 開啟圖片
+
+qrcode = cv2.QRCodeDetector()  # 建立 QRCode 偵測器
+data, bbox, rectified = qrcode.detectAndDecode(image)  # 偵測圖片中的 QRCode
+# 如果 bbox 是 None 表示圖片中沒有 QRCode
+if bbox is not None:
+    print(data)  # QRCode 的內容
+    print(bbox)  # QRCode 的邊界
+    print(rectified)  # 換成垂直 90 度的陣列
+
+cv2.imshow("image", image)
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+print("OpenCV_35")
+
+filename = "C:/_git/vcs/_4.python/opencv/data/QR1.png"
+
+# 檔案 => cv2影像
+image = cv2.imread(filename)
+
+qrcode = cv2.QRCodeDetector()
+data, bbox, rectified = qrcode.detectAndDecode(image)
+
+
+# 取得座標的函式
+def boxSize(arr):
+    global data
+    box_roll = np.rollaxis(arr, 1, 0)  # 轉置矩陣，把 x 放在同一欄，y 放在同一欄
+    xmax = int(np.amax(box_roll[0]))  # 取出 x 最大值
+    xmin = int(np.amin(box_roll[0]))  # 取出 x 最小值
+    ymax = int(np.amax(box_roll[1]))  # 取出 y 最大值
+    ymin = int(np.amin(box_roll[1]))  # 取出 y 最小值
+    return (xmin, ymin, xmax, ymax)
+
+
+# 如果 bbox 是 None 表示圖片中沒有 QRCode
+if bbox is not None:
+    print(data)
+    print(bbox)
+    print(rectified)
+    box = boxSize(bbox[0])
+    cv2.rectangle(image, (box[0], box[1]), (box[2], box[3]), red, 5)  # 畫矩形
+
+cv2.imshow("image", image)
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+print("OpenCV_36")
+
+from PIL import ImageFont, ImageDraw, Image  # 載入 PIL ( 為了放中文字 )
+
+filename = "C:/_git/vcs/_4.python/opencv/data/QR1.png"
+
+# 檔案 => cv2影像
+image = cv2.imread(filename)
+
+qrcode = cv2.QRCodeDetector()
+data, bbox, rectified = qrcode.detectAndDecode(image)
+
+
+# 建立放入文字的函式
+def putText(x, y, text, color=(0, 0, 0)):
+    global image
+    # font_filename = 'NotoSansTC-Regular.otf'      # 字體 ( 從 Google Font 下載 )
+    font = ImageFont.truetype(font_filename, 20)  # 設定字型與大小
+    imagePil = Image.fromarray(image)  # 將 image 轉換成 PIL 圖片物件
+    draw = ImageDraw.Draw(imagePil)  # 建立繪圖物件
+    draw.text((x, y), text, fill=color, font=font)  # 寫入文字
+    image = np.array(imagePil)  # 轉換回 np array
+
+
+def boxSize(arr):
+    global data
+    box_roll = np.rollaxis(arr, 1, 0)
+    xmax = int(np.amax(box_roll[0]))
+    xmin = int(np.amin(box_roll[0]))
+    ymax = int(np.amax(box_roll[1]))
+    ymin = int(np.amin(box_roll[1]))
+    return (xmin, ymin, xmax, ymax)
+
+
+if bbox is not None:
+    print(data)
+    print(bbox)
+    print(rectified)
+    box = boxSize(bbox[0])
+    cv2.rectangle(image, (box[0], box[1]), (box[2], box[3]), red, 5)
+
+cv2.imshow("image", image)
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("OpenCV_37")
+
+""" many-qr-code
+from PIL import ImageFont, ImageDraw, Image
+
+# 檔案 => cv2影像
+image = cv2.imread("many-qrcode.jpg")
+
+def putText(x,y,text,color=(0,0,0)):
+    global image
+    #font_filename = 'NotoSansTC-Regular.otf'
+    font = ImageFont.truetype(font_filename, 20)
+    imagePil = Image.fromarray(image)
+    draw = ImageDraw.Draw(imagePil)
+    draw.text((x, y), text, fill=color, font=font)
+    image = np.array(imagePil)
+
+def boxSize(arr):
+    global data
+    box_roll = np.rollaxis(arr,1,0)
+    xmax = int(np.amax(box_roll[0]))
+    xmin = int(np.amin(box_roll[0]))
+    ymax = int(np.amax(box_roll[1]))
+    ymin = int(np.amin(box_roll[1]))
+    return (xmin,ymin,xmax,ymax)
+
+qrcode = cv2.QRCodeDetector()
+ok, data, bbox, rectified = qrcode.detectAndDecodeMulti(image)   # 改用 detectAndDecodeMulti
+# 如果有偵測到
+if ok:
+    # 使用 for 迴圈取出每個 QRCode 的資訊
+    for i in range(len(data)):
+        print(data[i])
+        print(bbox[i])
+        text = data[i]          # QRCode 內容
+        box = boxSize(bbox[i])  # QRCode 左上與右下座標
+        cv2.rectangle(image,(box[0],box[1]),(box[2],box[3]),(0,0,255),5)  # 標記外框
+        putText(box[0],box[3],text)   # 寫出文字
+
+cv2.imshow('image', image)
+cv2.waitKey()
+cv2.destroyAllWindows()
+"""
+

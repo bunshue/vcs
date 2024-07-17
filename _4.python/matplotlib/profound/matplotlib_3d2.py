@@ -73,8 +73,6 @@ ax.set_title("XXXXXXX1")
 ax = fig.add_subplot(232, projection="3d")  # 第二張圖
 
 # 三維球
-# ax = fig.gca(projection = '3d') old
-# ax = fig.add_axes(Axes3D(fig))
 
 # ax.set_aspect("equal")
 
@@ -107,8 +105,6 @@ ax = fig.add_subplot(233, projection="3d")  # 第三張圖
 
 # 3D quiver  3維向量
 
-# ax = fig.gca(projection = '3d') old
-# ax = fig.add_axes(Axes3D(fig))
 # ax.set_aspect("equal")
 
 v1 = np.array([2, 0, 0])
@@ -143,9 +139,6 @@ ax = fig.add_subplot(234, projection="3d")  # 第四張圖
 
 # 正交曲線座標系統
 # 球座標當中的三個曲面交出三條曲線，這三個曲線形成了廣義的正交曲線座標系統(generalized orthonormal curved coordinates)
-
-# ax = fig.gca(projection = '3d') old
-# ax = fig.add_axes(Axes3D(fig))
 
 # ax.set_aspect("equal")
 
@@ -215,9 +208,6 @@ ax = fig.add_subplot(235, projection="3d")  # 第五張圖
 
 # 三維等位面與法線
 
-# ax = fig.gca(projection = '3d') old
-# ax = fig.add_axes(Axes3D(fig))
-
 x = np.linspace(2.0, 5.0, 10)
 y = np.linspace(2.0, 5.0, 10)
 X, Y = np.meshgrid(x, y)
@@ -273,7 +263,6 @@ ax.contourf(X, Y, Z, zdir="z", offset=-2, cmap=plt.get_cmap("rainbow"))
 
 # fig = plt.figure()
 
-# ax = Axes3D(fig)
 # X, Y value
 X = np.arange(-4, 4, 0.25)
 Y = np.arange(-4, 4, 0.25)
@@ -316,10 +305,7 @@ x = np.random.randn(100)
 y = np.random.randn(100)
 z = np.random.randn(100)
 
-# ax = fig.gca(projection = '3d') old
-# ax = fig.add_axes(Axes3D(fig))
 ax.scatter(x, y, z, c="r")
-
 
 ax.set_title("XXXXXXX1")
 
@@ -398,11 +384,9 @@ y = np.linspace(0, 5, 10)
 X, Y = np.meshgrid(x, y)
 
 Z = 2 * X + Y
-# ax = fig.gca(projection = '3d') old
-# ax = fig.add_axes(Axes3D(fig))
+
 ax.scatter(X, Y, Z + 0.7 * np.random.randn(10, 10))
 ax.plot_surface(X, Y, Z, alpha=0.3)
-
 
 # XXXXXXX6
 ax = fig.add_subplot(236, projection="3d")  # 第六張圖
@@ -417,8 +401,6 @@ ax.set_title("繪製 3D 散佈圖 – scatter3D()")
 
 
 plt.show()
-
-sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 

@@ -1,4 +1,3 @@
-
 """
 
 
@@ -10,25 +9,6 @@ import time
 import random
 import numpy as np
 import pandas as pd
-
-print("------------------------------------------------------------")  # 60個
-
-print('------------------------------------------------------------')	#60個
-
-"""
-
-
-"""
-
-import os
-import sys
-import time
-import random
-import numpy as np
-import pandas as pd
-
-print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -757,13 +737,11 @@ print(Motorcycles.counts)
 del h
 print(Motorcycles.counts)
 
-'''
 print("------------------------------------------------------------")  # 60個
 
 #chap9-01b
 import requests
 import json
-import pandas as pd
 
 url = 'https://od.cdc.gov.tw/eic/Day_Confirmation_Age_County_Gender_19CoV.json'
 res = requests.get(url, verify = False)
@@ -814,22 +792,6 @@ df.head(3)
 
 print("------------------------------------------------------------")  # 60個
 
-
-"""
-
-
-"""
-
-import os
-import sys
-import time
-import random
-import numpy as np
-import pandas as pd
-
-print("------------------------------------------------------------")  # 60個
-'''
-
 import requests
 
 url ='https://www.dcard.tw/f/stock/p/237123381'
@@ -866,20 +828,18 @@ data=data.replace("</I>","")
 data=data.strip()
 print("<網頁的H1的資料(去掉<I>)> :", data)
 
-
 datapos1=response.text.find("<CODE>")
 datapos2=response.text.find("</CODE>")
 data=response.text[datapos1+7:datapos2]
 data=data.strip()
 print("網頁的<CODE> :", data)
 
-
-
 print("------------------------------------------------------------")  # 60個
 
 print('chap7-02b')
 import requests
 from bs4 import BeautifulSoup
+
 url ='https://www.dcard.tw/f/stock/p/237123381'
 response = requests.get(url)
 #指定html.parser作為解析器
@@ -893,8 +853,8 @@ print("------------------------------------------------------------")  # 60個
 print('chap7-02c')
 import requests
 from bs4 import BeautifulSoup
-url = 'https://www.dcard.tw/f/stock/p/237123381'
 
+url = 'https://www.dcard.tw/f/stock/p/237123381'
 
 headers = {
     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
@@ -924,6 +884,7 @@ print('chap7-02d')
 
 import requests
 from bs4 import BeautifulSoup
+
 url = 'https://www.dcard.tw/f/stock/p/237123381'
 res = requests.get(url)
 #指定html.parser作為解析器
@@ -949,6 +910,7 @@ print('chap7-02e')
 
 import requests
 from bs4 import BeautifulSoup
+
 url = 'https://www.dcard.tw/f/stock/p/237123381'
 res = requests.get(url)
 #指定html.parser作為解析器
@@ -1004,7 +966,7 @@ print('chap7-02f')
 
 import requests
 import json
-import pandas as pd
+
 postid = '237123381'
 url = 'https://www.dcard.tw/service/api/v2/posts/'+postid
 res = requests.get(url)
@@ -1025,7 +987,7 @@ print('chap7-02g')
 
 import requests
 import json
-import pandas as pd
+
 postid = '237123381'
 url = 'https://www.dcard.tw/service/api/v2/posts/'+postid
 res = requests.get(url)
@@ -1047,8 +1009,8 @@ print('chap7-02h')
 
 import requests
 import json
-import pandas as pd
 from datetime import datetime
+
 postid = '237123381'
 url = 'https://www.dcard.tw/service/api/v2/posts/'+postid
 res = requests.get(url)
@@ -1096,8 +1058,8 @@ print('chap7-02i')
 
 import requests
 import json
-import pandas as pd
 from datetime import datetime
+
 postid = '237123381'
 url = 'https://www.dcard.tw/service/api/v2/posts/'+postid
 res = requests.get(url)
@@ -1151,7 +1113,6 @@ print((df.keys()))
 df.info()
 #也可以直接看前幾列
 df.head(3)
-'''
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1159,9 +1120,8 @@ print('chap7-02j')
 
 import requests
 import csv
-import pandas as pd
-#如果要將csv擋下載後讀取要 import io
 #from io import StringIO
+
 county="屏東縣"
 url = 'https://data.epa.gov.tw/api/v1/aqx_p_432?limit=1000&api_key=keykeykey&sort=ImportDate%20desc&format=csv'
 #方法1:下載檔案後儲存，再開啟檔案讀出
@@ -1196,30 +1156,9 @@ for i in range(len(df)):
 
 print("------------------------------------------------------------")  # 60個
 
-
-
-print("------------------------------------------------------------")  # 60個
-
-"""
-
-
-"""
-
-import os
-import sys
-import time
-import random
-import numpy as np
-import pandas as pd
-
-print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-'''
 #chap9-01b
 import requests
 import json
-import pandas as pd
 
 url = 'https://od.cdc.gov.tw/eic/Day_Confirmation_Age_County_Gender_19CoV.json'
 res = requests.get(url)
@@ -1267,9 +1206,8 @@ print("------------------------------------------------------------")  # 60個
 #chap9-01c
 import requests
 import csv
-import pandas as pd
-#如果要將csv擋下載後讀取要 import io
 #from io import StringIO
+
 url = 'https://od.cdc.gov.tw/eic/covid19/covid19_tw_stats.csv'
 #方法1:下載檔案後儲存，再開啟檔案讀出
 #res = requests.get(url)
@@ -1285,15 +1223,12 @@ print(df)
 totaldeath=df.loc[0,'死亡']
 print("累積死亡人數",totaldeath)
 
-'''
 print("------------------------------------------------------------")  # 60個
 
 #chap9-01d
 import requests
 import json
 import csv
-import pandas as pd
-import os
 from docx import Document
 
 url = 'https://od.cdc.gov.tw/eic/Day_Confirmation_Age_County_Gender_19CoV.json'
@@ -1383,30 +1318,11 @@ my_doc.save(fname)
 
 累積死亡人數 846
 """
-
+'''
 print("------------------------------------------------------------")  # 60個
 
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
+import matplotlib
+print(matplotlib.__version__)
 
 
 

@@ -188,7 +188,7 @@ print('------------------------------------------------------------')	#60個
 
 # 建立 3D 圖形
 fig = plt.figure()
-ax = fig.gca(projection='3d')
+ax = fig.add_subplot(111, projection='3d')
 
 # 產生 3D 座標資料
 z1 = np.random.randn(50)
@@ -214,7 +214,7 @@ from mpl_toolkits.mplot3d import axes3d
 
 fig = plt.figure(
     num="3D繪圖 集合 1",
-    figsize=(14, 14),
+    figsize=(8, 8),
     dpi=100,
     facecolor="whitesmoke",
     edgecolor="r",
@@ -325,14 +325,11 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-# fail
-
 # 三維散點圖
-from mpl_toolkits.mplot3d import Axes3D
 
 data = np.random.rand(50, 3) # 生成三維數據，每維50個
 fig = plt.figure()
-ax = Axes3D(fig)
+ax = fig.add_subplot(111, projection='3d')
 ax.scatter(data[:, 0], data[:, 1], data[:, 2])
 ax.set_zlabel('Z')
 ax.set_ylabel('Y')
@@ -341,13 +338,11 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#fail
 # 三維柱圖
 
-from mpl_toolkits.mplot3d import Axes3D
-
 fig = plt.figure()
-ax = Axes3D(fig)
+ax = fig.add_subplot(111, projection='3d')
+
 _x = np.arange(4)
 _y = np.arange(5)
 _xx, _yy = np.meshgrid(_x, _y) # 生成網格點座標矩陣
@@ -362,15 +357,13 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#fail
-
 # 三維曲面圖和等高線圖
 
 from matplotlib import cm
-from mpl_toolkits.mplot3d import Axes3D
 
 fig = plt.figure()
-ax = Axes3D(fig)
+ax = fig.add_subplot(111, projection='3d')
+
 X = np.arange(-5, 5, 0.25)
 Y = np.arange(-5, 5, 0.25)
 X, Y = np.meshgrid(X, Y)
@@ -381,12 +374,10 @@ ax.contourf(X,Y,Z,zdir='z',offset=-2) # 把等高線向z軸投射
 ax.set_zlim(-2,2) # 設置z軸範圍
 fig.colorbar(surf, shrink=0.5, aspect=5)
 plt.show()
-
 '''
 print("------------------------------------------------------------")  # 60個
 
 fig = plt.figure()
-# ax = fig.gca(projection='3d') old
 ax = plt.axes(projection="3d")
 
 # Plot a sin curve using the x and y axes.

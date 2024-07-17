@@ -5,7 +5,8 @@ cv2.line()
 cv2.circle()
 cv2.rectangle()
 cv2.ellipse()
-cv2.polylines
+cv2.polylines()
+cv2.drawContours() #多點頭尾連線
 
 cv2.putText()
 
@@ -526,3 +527,33 @@ for i in range(len(points)):
 cv2.imshow("OpenCV Draw 1", image)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+print("drawContours")
+
+W, H = 400, 400
+image = np.zeros((H, W, 3), np.uint8)# 黑色畫板
+
+MIN = 100
+MAX = W - 100
+N = 4  # 隨機生成 N 個坐標點，每一行存儲一個坐標
+# 隨機生成 橫縱坐標均在 MIN 至 MAX 的坐標點
+points = np.random.randint(MIN, MAX, (N, 2), np.int32)
+#print(points)
+
+#points = np.int0(points)  # 取整數
+cv2.drawContours(image, [points], 0, (0, 0, 255), 3)
+
+cv2.imshow("image", image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+

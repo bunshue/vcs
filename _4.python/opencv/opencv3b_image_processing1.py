@@ -416,9 +416,120 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
+print("製作毛玻璃效果")
+
+filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
+
+import numpy as np
+
+img = cv2.imread(filename)
+result = img.copy()
+H, W = result.shape[:2]
+print(H, W)
+
+for y in range(H-5):
+    for x in range(W-5):
+        random_num = np.random.randint(0, 5)
+        result[y, x] = img[y+random_num, x+random_num]
+
+cv2.imshow('src', img)
+cv2.imshow('result', result)
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
 
 print("------------------------------------------------------------")  # 60個
 
+def salt_pepper_noise(image, fraction, salt_vs_pepper):
+    img = np.copy(image)
+    size = img.size
+    num_salt = np.ceil(fraction * size * salt_vs_pepper).astype("int")
+    num_pepper = np.ceil(fraction * size * (1 - salt_vs_pepper)).astype("int")
+    row, column = img.shape
+
+    # 隨機的座標點
+    x = np.random.randint(0, column - 1, num_pepper)
+    y = np.random.randint(0, row - 1, num_pepper)
+    img[y, x] = 0  # 撒上胡椒
+
+    # 隨機的座標點
+    x = np.random.randint(0, column - 1, num_salt)
+    y = np.random.randint(0, row - 1, num_salt)
+    img[y, x] = 255  # 撒上鹽
+    return img
+
+
+fraction = 0.1  # 雜訊佔圖的比例
+salt_vs_pepper = 0.5  # 鹽與胡椒的比例
+
+filename = "C:/_git/vcs/_4.python/_data/tiger.jpg"
+
+# 檔案 => cv2影像
+image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
+noisy = salt_pepper_noise(image, fraction, salt_vs_pepper)
+
+plt.imshow(cv2.cvtColor(noisy, cv2.COLOR_BGR2RGB))
+plt.title("胡椒(黑)鹽(白)效果")
+
+plt.show()
+
+# 黑點就好比胡椒，白點就像是鹽，這種加上雜訊的方式，就稱為椒鹽雜訊（Salt & Pepper Noise）
+
+print("------------------------------------------------------------")  # 60個
+
+filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
+
+# 檔案 => cv2影像
+image1 = cv2.imread(filename)
+
+image2 = cv2.cvtColor(image1, cv2.COLOR_BGR2GRAY)  # 彩色轉灰階
+
+# image2 = cv2.cvtColor(image1, 6)  # 也可以用數字對照 6 表示轉換成灰階
+# 套用 medianBlur() 中值模糊
+image3 = cv2.medianBlur(image2, 7)  # 模糊化，去除雜訊 7, 25 彩色黑白皆可
+image4 = cv2.Canny(image3, 36, 36)  # 偵測邊緣
+
+# 套用自適應二值化黑白影像
+image5 = cv2.adaptiveThreshold(
+    image3, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 2
+)
+
+plt.figure(
+    num="相加",
+    figsize=(12, 8),
+    dpi=100,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
+
+plt.subplot(231)
+plt.title("原圖")
+plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
+
+plt.subplot(232)
+plt.title("轉成灰階")
+plt.imshow(cv2.cvtColor(image2, cv2.COLOR_BGR2RGB))
+
+plt.subplot(233)
+plt.title("模糊化，去除雜訊")
+plt.imshow(cv2.cvtColor(image3, cv2.COLOR_BGR2RGB))
+
+plt.subplot(234)
+plt.title("偵測邊緣")
+plt.imshow(cv2.cvtColor(image4, cv2.COLOR_BGR2RGB))
+
+plt.subplot(235)
+plt.title("自適應二值化黑白影像")
+plt.imshow(cv2.cvtColor(image5, cv2.COLOR_BGR2RGB))
+
+plt.subplot(236)
+plt.title("")
+
+plt.tight_layout()  # 緊密排列，並填滿原圖大小
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 

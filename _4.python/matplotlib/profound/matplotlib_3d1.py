@@ -135,9 +135,6 @@ ax.set_title("XXXXXXX5")
 # XXXXXXX6
 ax = fig.add_subplot(236, projection="3d")  # 第六張圖
 
-# ax = fig.gca(projection='3d') old
-# ax = fig.add_axes(Axes3D(fig))
-
 x = np.arange(-10, 11, 1)  # -10 .... 10
 y = np.arange(-10, 11, 1)  # -10 .... 10
 X, Y = np.meshgrid(x, y)
@@ -151,7 +148,6 @@ fig.colorbar(surf, shrink=0.5, aspect=5)
 
 
 plt.show()
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -184,8 +180,6 @@ X, Y = np.meshgrid(x, y)
 
 Z = np.sin(np.sqrt(X**2 + Y**2))
 
-# ax = fig.gca(projection='3d') old
-# ax = fig.add_axes(Axes3D(fig))
 ax.plot_surface(X, Y, Z)
 
 ax.set_title("曲面 surface")
@@ -293,24 +287,18 @@ x = np.cos(θ)
 y = np.sin(θ)
 z = θ / (5 * π)
 
-# ax = fig.gca(projection='3d') old
-# ax = fig.add_axes(Axes3D(fig))
 plt.plot(x, y, z)
 ax.set_title("3D 畫圖")
 
-
 ax = fig.add_subplot(234, projection="3d")  # 第四張圖
-
 
 ax.set_title("XXXXXXX2")
 
 # 等高線
 ax = fig.add_subplot(235, projection="3d")  # 第五張圖
 
-
 # 柱狀圖
 ax = fig.add_subplot(236, projection="3d")  # 第六張圖
-
 
 plt.show()
 
