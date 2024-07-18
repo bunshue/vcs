@@ -35,52 +35,156 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
-'''
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/kernel.bmp"
-o = cv2.imread(filename, cv2.IMREAD_UNCHANGED)
+def draw_line(image):
+    H = image.shape[0]
+    W = image.shape[1]
+    #print(image.shape, H // 100, W // 100)
+    for i in range(H // 100 + 1):
+        cv2.line(image, (0, 100 * i), (W, 100 * i), (0, 0, 100), 2)  # 畫線 水平線 R
+
+    for i in range(W // 100 + 1):
+        cv2.line(
+            image, (100 * i, 0), (100 * i, H), (0, 100, 0), 2, lineType=cv2.LINE_AA
+        )  # 畫線 垂直線 G
+
+print("------------------------------------------------------------")  # 60個
 
 print("dilate 擴大 膨脹 效果")
+
+filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/kernel.bmp"
+filename = "C:/_git/vcs/_4.python/opencv/data/dilate_erode1.png"
+
+image = cv2.imread(filename, cv2.IMREAD_UNCHANGED)
+
+print('定義矩形結構元素 kernel')
 kernel1 = cv2.getStructuringElement(cv2.MORPH_RECT, (59, 59))
 kernel2 = cv2.getStructuringElement(cv2.MORPH_CROSS, (59, 59))
 kernel3 = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (59, 59))
-dst1 = cv2.dilate(o, kernel1)
-dst2 = cv2.dilate(o, kernel2)
-dst3 = cv2.dilate(o, kernel3)
+#print("kernel1 =\n", kernel1)
+#print("kernel2 =\n", kernel2)
+#print("kernel3 =\n", kernel3)
+image_dilate1 = cv2.dilate(image, kernel1)
+image_dilate2 = cv2.dilate(image, kernel2)
+image_dilate3 = cv2.dilate(image, kernel3)
 
 plt.figure("", figsize=(16, 12))
 plt.subplot(221)
 plt.title("原圖")
-plt.imshow(cv2.cvtColor(o, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 
 plt.subplot(222)
-plt.title("dilate 擴大 膨脹 效果")
-plt.imshow(cv2.cvtColor(dst1, cv2.COLOR_BGR2RGB))
+plt.title("dilate 白色膨脹 方 MORPH_RECT")
+plt.imshow(cv2.cvtColor(image_dilate1, cv2.COLOR_BGR2RGB))
 
 plt.subplot(223)
-plt.title("dilate 擴大 膨脹 效果")
-plt.imshow(cv2.cvtColor(dst2, cv2.COLOR_BGR2RGB))
+plt.title("dilate 白色膨脹 叉 MORPH_CROSS")
+plt.imshow(cv2.cvtColor(image_dilate2, cv2.COLOR_BGR2RGB))
 
 plt.subplot(224)
-plt.title("dilate 擴大 膨脹 效果")
-plt.imshow(cv2.cvtColor(dst3, cv2.COLOR_BGR2RGB))
+plt.title("dilate 白色膨脹 橢 MORPH_ELLIPSE")
+plt.imshow(cv2.cvtColor(image_dilate3, cv2.COLOR_BGR2RGB))
 
+plt.suptitle("白色區域擴大、膨脹了")
 plt.tight_layout()
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
+print("dilate 擴大 膨脹 效果")
+
+filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/dilation.bmp"
+filename = "C:/_git/vcs/_4.python/opencv/data/dilate_erode1.png"
+
+image = cv2.imread(filename, cv2.IMREAD_UNCHANGED)
+
+print('定義矩形結構元素 kernel')
+kernel1 = np.ones((20, 20), np.uint8)
+kernel2 = np.ones((40, 40), np.uint8)
+kernel3 = np.ones((10, 10), np.uint8)
+image_dilate1 = cv2.dilate(image, kernel1)
+image_dilate2 = cv2.dilate(image, kernel2)
+image_dilate3 = cv2.dilate(image, kernel3, iterations=9)
+draw_line(image_dilate1)
+draw_line(image_dilate2)
+draw_line(image_dilate3)
+
+plt.figure("", figsize=(16, 12))
+
+plt.subplot(221)
+plt.title("原圖")
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+
+plt.subplot(222)
+plt.title("dilate 擴大 膨脹 效果 1")
+plt.imshow(cv2.cvtColor(image_dilate1, cv2.COLOR_BGR2RGB))
+
+plt.subplot(223)
+plt.title("dilate 擴大 膨脹 效果 2")
+plt.imshow(cv2.cvtColor(image_dilate2, cv2.COLOR_BGR2RGB))
+
+plt.subplot(224)
+plt.title("dilate 擴大 膨脹 效果 3 加 iterations")
+plt.imshow(cv2.cvtColor(image_dilate3, cv2.COLOR_BGR2RGB))
+
+plt.suptitle("白色區域擴大、膨脹了")
+plt.tight_layout()
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/erode.bmp"
+filename = "C:/_git/vcs/_4.python/opencv/data/dilate_erode1.png"
+
+image = cv2.imread(filename, cv2.IMREAD_UNCHANGED)
+
+plt.figure("erode 侵蝕 效果", figsize=(16, 12))
+
+plt.subplot(221)
+plt.title("原圖")
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+
+print("erode 侵蝕 效果 1")
+kernel1 = np.ones((25, 25), np.uint8)
+image_erosion1 = cv2.erode(image, kernel1)
+
+plt.subplot(222)
+plt.title("erode 侵蝕 效果 1")
+draw_line(image_erosion1)
+plt.imshow(cv2.cvtColor(image_erosion1, cv2.COLOR_BGR2RGB))
+
+print("erode 侵蝕 效果 2")
+kernel2 = np.ones((25, 25), np.uint8)
+image_erosion2 = cv2.erode(image, kernel2)
+
+plt.subplot(223)
+plt.title("erode 侵蝕 效果 2")
+draw_line(image_erosion2)
+plt.imshow(cv2.cvtColor(image_erosion2, cv2.COLOR_BGR2RGB))
+
+print("erode 侵蝕 效果 3 加 iterations")
+kernel3 = np.ones((9, 9), np.uint8)
+image_erosion3 = cv2.erode(image, kernel3, iterations=5)
+
+plt.subplot(224)
+plt.title("erode 侵蝕 效果 3")
+draw_line(image_erosion3)
+plt.imshow(cv2.cvtColor(image_erosion3, cv2.COLOR_BGR2RGB))
+
+plt.suptitle("白色區域被侵蝕、縮小了")
+plt.tight_layout()
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
 
 print("morphology 形態學")
 
-original_img0 = cv2.imread("data/lena.png")
+#original_img = cv2.imread("data/lena.png")
 original_img = cv2.imread("data/lena.png", 0)
 
 kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (3, 3))  # 定義矩形結構元素
 TOPHAT_img = cv2.morphologyEx(original_img, cv2.MORPH_TOPHAT, kernel)  # 頂帽運算
 BLACKHAT_img = cv2.morphologyEx(original_img, cv2.MORPH_BLACKHAT, kernel)  # 黒帽運算
 
-# 顯示圖像
-cv2.imshow("original_img0", original_img0)
 cv2.imshow("original_img", original_img)
 cv2.imshow("TOPHAT_img", TOPHAT_img)
 cv2.imshow("BLACKHAT_img", BLACKHAT_img)
@@ -143,7 +247,6 @@ cv2.imshow("result", result)
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -211,53 +314,9 @@ for j in range(result.size):
 
 cv2.imshow("original_image", original_image)
 cv2.imshow("Result", image)
+
 cv2.waitKey(0)
 cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/dilation.bmp"
-filename = "C:/_git/vcs/_4.python/_data/opencv05_dilate_erode1.png"
-
-image1 = cv2.imread(filename, cv2.IMREAD_UNCHANGED)
-image2 = cv2.imread(filename, cv2.IMREAD_UNCHANGED)
-image3 = cv2.imread(filename, cv2.IMREAD_UNCHANGED)
-image4 = cv2.imread(filename, cv2.IMREAD_UNCHANGED)
-
-plt.figure("", figsize=(16, 12))
-
-print("dilate 擴大 膨脹 效果")
-
-plt.subplot(221)
-plt.title("原圖")
-draw_line(image1)
-plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
-
-plt.subplot(222)
-plt.title("dilate 擴大 膨脹 效果 1")
-kernel = np.ones((20, 20), np.uint8)
-dilation = cv2.dilate(image2, kernel)
-draw_line(dilation)
-plt.imshow(cv2.cvtColor(dilation, cv2.COLOR_BGR2RGB))
-
-plt.subplot(223)
-plt.title("dilate 擴大 膨脹 效果 2")
-kernel = np.ones((40, 40), np.uint8)
-dilation = cv2.dilate(image3, kernel)
-draw_line(dilation)
-plt.imshow(cv2.cvtColor(dilation, cv2.COLOR_BGR2RGB))
-
-plt.subplot(224)
-plt.title("dilate 擴大 膨脹 效果 3 加 iterations")
-kernel = np.ones((10, 10), np.uint8)
-dilation = cv2.dilate(image4, kernel, iterations=9)
-draw_line(dilation)
-plt.imshow(cv2.cvtColor(dilation, cv2.COLOR_BGR2RGB))
-
-plt.suptitle("白色區域擴大、膨脹")
-plt.tight_layout()
-plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -404,7 +463,6 @@ plt.imshow(img)
 plt.tight_layout()
 plt.show()
 
-
 print("------------------------------------------------------------")  # 60個
 
 o = cv2.imread("images/rice.png", cv2.IMREAD_UNCHANGED)
@@ -424,64 +482,6 @@ plt.imshow(b)
 
 plt.tight_layout()
 plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-
-def draw_line(img):
-    for i in range(8):
-        cv2.line(img, (0, 100 * i), (700, 100 * i), (0, 0, 255), 2)  # 水平線
-        cv2.line(img, (100 * i, 0), (100 * i, 700), (0, 0, 255), 2)  # 垂直線
-
-
-print("------------------------------------------------------------")  # 60個
-
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/erode.bmp"
-filename = "C:/_git/vcs/_4.python/_data/opencv05_dilate_erode1.png"
-
-image1 = cv2.imread(filename, cv2.IMREAD_UNCHANGED)
-image2 = cv2.imread(filename, cv2.IMREAD_UNCHANGED)
-image3 = cv2.imread(filename, cv2.IMREAD_UNCHANGED)
-image4 = cv2.imread(filename, cv2.IMREAD_UNCHANGED)
-
-plt.figure("erode 侵蝕 效果", figsize=(16, 12))
-
-plt.subplot(221)
-plt.title("原圖")
-draw_line(image1)
-plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
-
-print("erode 侵蝕 效果 1")
-kernel = np.ones((25, 25), np.uint8)
-erosion = cv2.erode(image2, kernel)
-
-plt.subplot(222)
-plt.title("erode 侵蝕 效果 1")
-draw_line(erosion)
-plt.imshow(cv2.cvtColor(erosion, cv2.COLOR_BGR2RGB))
-
-print("erode 侵蝕 效果 2")
-kernel = np.ones((25, 25), np.uint8)
-erosion = cv2.erode(image3, kernel)
-
-plt.subplot(223)
-plt.title("erode 侵蝕 效果 2")
-draw_line(erosion)
-plt.imshow(cv2.cvtColor(erosion, cv2.COLOR_BGR2RGB))
-
-print("erode 侵蝕 效果 3 加 iterations")
-kernel = np.ones((9, 9), np.uint8)
-erosion = cv2.erode(image4, kernel, iterations=5)
-
-plt.subplot(224)
-plt.title("erode 侵蝕 效果 3")
-draw_line(erosion)
-plt.imshow(cv2.cvtColor(erosion, cv2.COLOR_BGR2RGB))
-
-plt.suptitle("白色區域被侵蝕、縮小了")
-plt.tight_layout()
-plt.show()
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -638,17 +638,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-kernel1 = cv2.getStructuringElement(cv2.MORPH_RECT, (5, 5))
-kernel2 = cv2.getStructuringElement(cv2.MORPH_CROSS, (5, 5))
-kernel3 = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (5, 5))
-print("kernel1 =\n", kernel1)
-print("kernel2 =\n", kernel2)
-print("kernel3 =\n", kernel3)
-
-
-print("------------------------------------------------------------")  # 60個
-
-
 print("defogging")
 
 
@@ -785,10 +774,10 @@ cv2.imshow("image3", img)  # 膨脹後的影像
 
 cv2.waitKey()
 cv2.destroyAllWindows()
-'''
+
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_4.python/_data/opencv05_dilate_erode1.png"
+filename = "C:/_git/vcs/_4.python/opencv/data/dilate_erode1.png"
 
 print("形態學處理 erode")
 
@@ -858,8 +847,10 @@ I = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
 
 # 創建結構元
 s = cv2.getStructuringElement(cv2.MORPH_RECT, (5, 5))
+
 # 腐蝕圖像
 d = cv2.morphologyEx(I, cv2.MORPH_OPEN, s, iterations=1)
+
 # 顯示原圖和腐蝕後的結果
 cv2.imshow("I", I)
 cv2.imshow("open", d)
@@ -904,10 +895,13 @@ while True:
     r = cv2.getTrackbarPos("r", "morphology")
     # 得到當前的i值
     i = cv2.getTrackbarPos("i", "morphology")
+    
     # 創建結構元
     s = cv2.getStructuringElement(cv2.MORPH_RECT, (2 * r + 1, 2 * r + 1))
+    
     # 形態學處理
     d = cv2.morphologyEx(I, cv2.MORPH_GRADIENT, s, iterations=i)
+    
     # 顯示效果
     cv2.imshow("morphology", d)
 

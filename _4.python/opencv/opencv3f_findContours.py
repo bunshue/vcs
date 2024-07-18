@@ -64,8 +64,8 @@ print("------------------------------------------------------------")  # 60個
 # coin.jpg用圖片先處理方法一
 filename = "images/coin.jpg"
 
-# opencv05_dilate_erode1.png用圖片先處理方法二
-# filename = 'C:/_git/vcs/_4.python/_data/opencv05_dilate_erode1.png'
+# dilate_erode1.png用圖片先處理方法二
+# filename = "C:/_git/vcs/_4.python/opencv/data/dilate_erode1.png"
 
 # 讀圖片的方法一
 cap = cv2.VideoCapture(filename)  # 用VideoCapture讀取本機圖片

@@ -26,7 +26,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("cv2.goodFeaturesToTrack 角點偵測")
 
-filename = "C:/_git/vcs/_4.python/_data/opencv05_dilate_erode1.png"
+filename = "C:/_git/vcs/_4.python/opencv/data/dilate_erode1.png"
 
 img = cv2.imread(filename)
 img = cv2.resize(img, (0, 0), fx=0.75, fy=0.75)

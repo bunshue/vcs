@@ -277,8 +277,8 @@ for font in fonts:
 
 cv2.imshow("OpenCV Draw 2", image)
 cv2.waitKey(0)
-cv2.destroyAllWindows()  # 銷毀建立的物件
-
+cv2.destroyAllWindows()
+'''
 print("------------------------------------------------------------")  # 60個
 
 print("建立畫布(黑色)")
@@ -289,7 +289,6 @@ image = np.zeros((H, W, 3), dtype=np.uint8)
 image[:] = (200, 200, 200)  # 將所有點著色
 
 print("畫標示頁箋")
-
 
 # 用 putText 繪製物件偵測的標籤
 def drawBoundingBox(image, bboxs):
@@ -327,7 +326,6 @@ def draw_line(image):
         )  # 畫線 垂直線 G
 
 
-"""
 bboxs = []
 box = {}
 box['label'] = 'object 1'
@@ -344,11 +342,11 @@ draw_line(image)
 
 cv2.imshow('OpenCV Draw 3', image)
 cv2.waitKey(0)
-cv2.destroyAllWindows() #銷毀建立的物件
-"""
+cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
+sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -492,7 +490,6 @@ cv2.waitKey(0)
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
-'''
 
 print("建立畫布(黑色)")
 W, H = 600, 600

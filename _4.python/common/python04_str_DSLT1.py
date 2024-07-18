@@ -822,8 +822,6 @@ print(animals.index("虎"))
 #print("象 出現的索引位置 :") # 出現錯誤
 #print(animals.index("象"))
 
-sys.exit()
-
 print("------------------------------------------------------------")  # 60個
 
 print("字串 轉 串列")
@@ -1339,6 +1337,9 @@ animals = {
     "狗": 12,
     "豬": 42,
 }
+
+for key, value in animals.items():
+    print("key :", key, "\tvalue :", value)
 
 animals1 = {key: value for key, value in animals.items() if value > 30}
 print("大於30公斤的動物 :", animals1)
