@@ -1,15 +1,14 @@
 """
+
+3D plot 集合 1
+
 參考 使用Matplotlib绘制3D图形
 https://paul.pub/matplotlib-3d-plotting/
 
 參考 Python 使用 Matplotlib 繪製 3D 資料圖形教學與範例
 https://officeguide.cc/python-matplotlib-three-dimensional-plotting-tutorial-examples/
 
-
-
 """
-
-# 3D plot 集合 1
 
 print("------------------------------------------------------------")  # 60個
 
@@ -40,7 +39,6 @@ from matplotlib.cm import viridis as colormap
 
 print("------------------------------------------------------------")  # 60個
 
-#          編號                          圖像大小[英吋]     解析度    背景色                      邊框顏色                      邊框有無
 fig = plt.figure(
     num="3D繪圖 集合 1",
     figsize=(12, 8),
@@ -51,17 +49,10 @@ fig = plt.figure(
     frameon=True,
 )
 
-# 設定中文字型及負號正確顯示
-# 設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
-# 設定負號
-plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+print("------------------------------------------------------------")  # 60個
 
-
-# 3D surface plot
 ax = fig.add_subplot(231, projection="3d")  # 第一張圖
 
-# 111
 x = np.arange(-5, 5, 0.1)
 y = np.arange(-5, 5, 0.1)
 X, Y = np.meshgrid(x, y)
@@ -71,7 +62,8 @@ surf = ax.plot_wireframe(X, Y, Z)
 ax.set_title("線框圖111")
 
 
-# 曲面圖
+print("------------------------------------------------------------")  # 60個
+
 ax = fig.add_subplot(232, projection="3d")  # 第二張圖
 
 # 444
@@ -87,8 +79,8 @@ ax.set_xlabel("X")
 ax.set_ylabel("Y")
 ax.set_title("曲面圖")
 
+print("------------------------------------------------------------")  # 60個
 
-# XXXXXXX3
 ax = fig.add_subplot(233, projection="3d")  # 第三張圖
 
 # 333
@@ -103,8 +95,8 @@ ax.set_xlabel("X")
 ax.set_ylabel("Y")
 ax.set_title("等高線333")
 
+print("------------------------------------------------------------")  # 60個
 
-# XXXXXXX4
 ax = fig.add_subplot(234, projection="3d")  # 第四張圖
 
 X = np.arange(-5, 5, 0.1)
@@ -117,8 +109,8 @@ Z = np.add(np.power(X, 2), np.power(Y, 2))  # Z = X^2 + Y^2
 # Z = np.sin(R)
 surf = ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap=cm.coolwarm)
 
+print("------------------------------------------------------------")  # 60個
 
-# XXXXXXX5
 ax = fig.add_subplot(235, projection="3d")  # 第五張圖
 
 
@@ -132,7 +124,8 @@ surf = ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap=cm.coolwarm)
 
 ax.set_title("XXXXXXX5")
 
-# XXXXXXX6
+print("------------------------------------------------------------")  # 60個
+
 ax = fig.add_subplot(236, projection="3d")  # 第六張圖
 
 x = np.arange(-10, 11, 1)  # -10 .... 10
@@ -151,8 +144,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-
-#          編號                          圖像大小             解析度    背景色                      邊框顏色                      邊框有無
 fig = plt.figure(
     num="3D繪圖 集合 2",
     figsize=(12, 8),
@@ -163,17 +154,9 @@ fig = plt.figure(
     frameon=True,
 )
 
-# 設定中文字型及負號正確顯示
-# 設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
-# 設定負號
-plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+print("------------------------------------------------------------")  # 60個
 
-# XXXXXXX1
 ax = fig.add_subplot(231, projection="3d")  # 第一張圖
-
-
-# 曲面 contour
 
 x = y = np.linspace(-3, 3, 300)
 X, Y = np.meshgrid(x, y)
@@ -184,21 +167,24 @@ ax.plot_surface(X, Y, Z)
 
 ax.set_title("曲面 surface")
 
-# XXXXXXX2
+print("------------------------------------------------------------")  # 60個
+
 ax = fig.add_subplot(232, projection="3d")  # 第二張圖
 
 # 曲面 contour
 plt.contour(X, Y, Z)
 ax.set_title("曲面 contour")
 
-# XXXXXXX3
+print("------------------------------------------------------------")  # 60個
+
 ax = fig.add_subplot(233, projection="3d")  # 第三張圖
 
 # 曲面 contourf
 plt.contourf(X, Y, Z)
 ax.set_title("曲面 contourf")
 
-# XXXXXXX4
+print("------------------------------------------------------------")  # 60個
+
 ax = fig.add_subplot(234, projection="3d")  # 第四張圖
 
 t = np.linspace(-2 * np.pi, 2 * np.pi)
@@ -209,8 +195,8 @@ plt.tight_layout()
 
 ax.set_title("XXXXXXX4")
 
+print("------------------------------------------------------------")  # 60個
 
-# XXXXXXX5
 ax = fig.add_subplot(235, projection="3d")  # 第五張圖
 
 # 繪製曲面 – plot_surface()
@@ -222,7 +208,8 @@ ax.plot_surface(x, y, z)
 
 ax.set_title("繪製曲面")
 
-# XXXXXXX6
+print("------------------------------------------------------------")  # 60個
+
 ax = fig.add_subplot(236, projection="3d")  # 第六張圖
 
 # 給曲面套上顏色
@@ -235,10 +222,8 @@ ax.set_title("給曲面套上顏色")
 
 plt.show()
 
-
 print("------------------------------------------------------------")  # 60個
 
-#          編號                          圖像大小[英吋]     解析度    背景色                      邊框顏色                      邊框有無
 fig = plt.figure(
     num="3D繪圖 集合 3",
     figsize=(12, 8),
@@ -249,13 +234,8 @@ fig = plt.figure(
     frameon=True,
 )
 
-# 設定中文字型及負號正確顯示
-# 設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
-# 設定負號
-plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+print("------------------------------------------------------------")  # 60個
 
-# 線形圖
 ax = fig.add_subplot(231, projection="3d")  # 第一張圖
 x = np.linspace(-10, 10, 1000)
 y = np.linspace(-10, 10, 1000)
@@ -264,6 +244,7 @@ z = np.add(x, y)
 ax.plot(x, y, z)
 ax.set_title("線形圖")
 
+print("------------------------------------------------------------")  # 60個
 
 ax = fig.add_subplot(232, projection="3d")  # 第二張圖
 
@@ -276,9 +257,9 @@ ax.plot(x, y, z, color="r")
 ax.plot(p / 3.0, p / 3.0, p / 3.0, color="b")
 # plt.savefig("matplot-3D-1.png")
 
+print("------------------------------------------------------------")  # 60個
 
 ax = fig.add_subplot(233, projection="3d")  # 第三張圖
-
 
 π = np.pi
 θ = np.linspace(-5 * π, 5 * π, 200)
@@ -290,21 +271,25 @@ z = θ / (5 * π)
 plt.plot(x, y, z)
 ax.set_title("3D 畫圖")
 
+print("------------------------------------------------------------")  # 60個
+
 ax = fig.add_subplot(234, projection="3d")  # 第四張圖
 
 ax.set_title("XXXXXXX2")
 
-# 等高線
+print("------------------------------------------------------------")  # 60個
+
 ax = fig.add_subplot(235, projection="3d")  # 第五張圖
 
-# 柱狀圖
+
+print("------------------------------------------------------------")  # 60個
+
 ax = fig.add_subplot(236, projection="3d")  # 第六張圖
 
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#          編號                          圖像大小[英吋]     解析度    背景色                      邊框顏色                      邊框有無
 fig = plt.figure(
     num="3D繪圖 集合 4",
     figsize=(12, 8),
@@ -315,14 +300,8 @@ fig = plt.figure(
     frameon=True,
 )
 
-# 設定中文字型及負號正確顯示
-# 設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
-# 設定負號
-plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+print("------------------------------------------------------------")  # 60個
 
-
-# 多邊形
 ax = fig.add_subplot(231, projection="3d")  # 第一張圖
 
 np.random.seed(59)
@@ -347,9 +326,9 @@ ax.set_zlabel("Precipitation")
 ax.set_zlim3d(0, 300)
 ax.set_title("多邊形")
 
+print("------------------------------------------------------------")  # 60個
 
 ax = fig.add_subplot(232, projection="3d")  # 第二張圖
-
 
 np.random.seed(59)
 month = np.arange(1, 12)
@@ -387,8 +366,9 @@ ax.set_yticks(np.arange(2016, 2020))
 ax.set_zlabel("Precipitation")
 ax.set_title("柱狀圖")
 
-ax = fig.add_subplot(233, projection="3d")  # 第三張圖
+print("------------------------------------------------------------")  # 60個
 
+ax = fig.add_subplot(233, projection="3d")  # 第三張圖
 
 # 線框圖
 step = 0.04
@@ -409,6 +389,8 @@ ax.set_ylabel(r"$\phi_\mathrm{im}$")
 ax.set_zlabel(r"$V(\phi)$")
 ax.set_title("3D surface plot")
 
+print("------------------------------------------------------------")  # 60個
+
 ax = fig.add_subplot(234, projection="3d")  # 第四張圖
 
 # Wireframe 圖形
@@ -422,8 +404,8 @@ ax.plot_wireframe(X, Y, Z, rstride=10, cstride=10)
 
 ax.set_title("Wireframe 圖形")
 
-# 3D 曲面
-# 這是繪製 3D 曲面的範例。
+print("------------------------------------------------------------")  # 60個
+
 ax = fig.add_subplot(235, projection="3d")  # 第五張圖
 
 # 產生測試資料
@@ -434,8 +416,8 @@ ax.plot_surface(X, Y, Z, cmap="seismic")
 
 ax.set_title("3D 曲面")
 
+print("------------------------------------------------------------")  # 60個
 
-# 3D 向量場
 # 這是繪製 3D 向量場（vector field）的範例。
 ax = fig.add_subplot(236, projection="3d")  # 第六張圖
 

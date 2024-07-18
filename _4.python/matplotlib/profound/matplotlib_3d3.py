@@ -1,4 +1,7 @@
-# 3D plot 集合 3
+"""
+3D plot 集合 3
+
+"""
 
 print("------------------------------------------------------------")  # 60個
 
@@ -20,10 +23,318 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-'''
-fig = plt.figure()
 
-ax = fig.add_subplot(111, projection = '3d')
+from mpl_toolkits.mplot3d import axes3d
+
+print("------------------------------------------------------------")  # 60個
+
+fig = plt.figure(
+    num="3D繪圖 集合 1",
+    figsize=(12, 8),
+    dpi=100,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
+
+ax = fig.add_subplot(231, projection='3d')
+
+X, Y, Z = axes3d.get_test_data(0.05)  # 取得測試資料
+
+cset = ax.contour(X, Y, Z, 16, extend3d=True)
+ax.set_title('contour')
+
+ax.clabel(cset, fontsize=9, inline=1)
+
+print("------------------------------------------------------------")  # 60個
+
+ax = fig.add_subplot(232, projection='3d')
+
+X, Y, Z = axes3d.get_test_data(0.05)  # 取得測試資料
+
+ax.plot_surface(X, Y, Z, cmap="bwr")
+ax.set_title('plot_surface 3D曲線表面')
+
+print("------------------------------------------------------------")  # 60個
+
+def f(x, y):                                # 曲面函數
+    return (np.power(x,2) + np.power(y, 2))
+
+ax = fig.add_subplot(233, projection='3d')
+
+X = np.arange(-3, 3, 0.1)                   # 曲面 X 區間
+Y = np.arange(-3, 3, 0.1)                   # 曲面 Y 區間
+X, Y = np.meshgrid(X, Y)                    # 建立取樣數據
+
+ax.plot_surface(X, Y, f(X,Y), cmap='hsv')
+ax.set_title('plot_surface 3D曲線表面')
+
+print("------------------------------------------------------------")  # 60個
+
+def f(x, y):                                # 曲面函數
+    r = np.sqrt(np.power(x,2) + np.power(y, 2))
+    return (np.sin(r))
+
+                 
+ax = fig.add_subplot(234, projection='3d')
+
+X = np.arange(-3, 3, 0.1)                   # 曲面 X 區間
+Y = np.arange(-3, 3, 0.1)                   # 曲面 Y 區間
+X, Y = np.meshgrid(X, Y)                    # 建立取樣數據
+
+ax.plot_surface(X, Y, f(X,Y), cmap='hsv')
+ax.set_title('plot_surface 3D曲線表面')
+
+print("------------------------------------------------------------")  # 60個
+
+def f(x, y):                                # 曲面函數
+    return np.sin(np.sqrt(x ** 2 + y ** 2))
+
+ax = fig.add_subplot(235, projection='3d')
+
+X = np.arange(-3, 3, 0.1)                   # 曲面 X 區間
+Y = np.arange(-3, 3, 0.1)                   # 曲面 Y 區間
+X, Y = np.meshgrid(X, Y)                    # 建立取樣數據
+
+ax.plot_surface(X, Y, f(X,Y), cmap='seismic')
+ax.set_title('plot_surface 3D曲線表面')
+
+print("------------------------------------------------------------")  # 60個
+
+def f(x, y):                                # 曲面函數
+    return (4 - x**2 - y**2)
+
+                 
+ax = fig.add_subplot(236, projection='3d')
+
+X = np.arange(-3, 3, 0.1)                   # 曲面 X 區間
+Y = np.arange(-3, 3, 0.1)                   # 曲面 Y 區間
+X, Y = np.meshgrid(X, Y)                    # 建立取樣數據
+
+ax.plot_surface(X, Y, f(X,Y), cmap='seismic')
+ax.set_title('plot_surface 3D曲線表面')
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+fig = plt.figure(
+    num="3D繪圖 集合 2",
+    figsize=(12, 8),
+    dpi=100,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
+
+ax = fig.add_subplot(231, projection='3d')
+
+X, Y, Z = axes3d.get_test_data(0.05)  # 取得測試資料
+
+ax.plot_wireframe(X, Y, Z, color='g')
+ax.set_title('plot_wireframe 3D線框圖')
+
+print("------------------------------------------------------------")  # 60個
+
+ax = fig.add_subplot(232, projection='3d')
+
+X, Y, Z = axes3d.get_test_data(0.05)  # 取得測試資料
+
+ax.plot_wireframe(X, Y, Z, cstride=5, rstride=5, color='g')
+ax.set_title('plot_wireframe 3D線框圖')
+
+print("------------------------------------------------------------")  # 60個
+
+def f(x, y):
+    return np.sin(np.sqrt(x ** 2 + y ** 2))
+
+ax = fig.add_subplot(233, projection='3d')
+# 定義資料資料
+x = np.linspace(0, 5, 20)
+y = np.linspace(0, 5, 20)  
+X, Y = np.meshgrid(x, y)
+Z = f(X, Y)
+
+ax.plot_wireframe(X, Y, Z, color = 'm')
+ax.set_title('plot_wireframe 3D線框圖')
+
+print("------------------------------------------------------------")  # 60個
+
+ax = fig.add_subplot(234, projection='3d')
+
+X, Y, Z = axes3d.get_test_data(0.05)  # 取得測試資料
+
+ax.contour(X, Y, Z, cmap='jet')
+ax.set_title('contour')
+
+print("------------------------------------------------------------")  # 60個
+
+ax = fig.add_subplot(235, projection='3d')
+
+X, Y, Z = axes3d.get_test_data(0.05)  # 取得測試資料
+
+ax.contour3D(X, Y, Z, cmap='jet')
+ax.set_title('contour3D')
+
+print("------------------------------------------------------------")  # 60個
+
+ax = fig.add_subplot(236, projection='3d')
+
+X, Y, Z = axes3d.get_test_data(0.05)  # 取得測試資料
+
+ax.contourf(X, Y, Z, cmap='jet')
+ax.set_title('contourf')
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+fig = plt.figure(
+    num="3D繪圖 集合 3",
+    figsize=(12, 8),
+    dpi=100,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
+
+ax = fig.add_subplot(231, projection='3d')
+
+X, Y, Z = axes3d.get_test_data(0.05)  # 取得測試資料
+
+ax.contourf3D(X, Y, Z, cmap='jet')
+ax.set_title('contourf3D')
+
+print("------------------------------------------------------------")  # 60個
+
+ax = fig.add_subplot(232, projection='3d')
+
+X, Y, Z = axes3d.get_test_data(0.05)  # 取得測試資料
+
+ax.plot_wireframe(X, Y, Z, rstride=5, cstride=5, alpha=0.3)
+ax.set_title('plot_wireframe 3D線框圖')
+
+# 測試數據投影到 X, Y, Z 平面, 同時設定偏移將數據投影到牆面
+cset = ax.contourf(X, Y, Z, zdir='z', offset=-100, cmap='jet')
+cset = ax.contourf(X, Y, Z, zdir='x', offset=-40, cmap='jet')
+cset = ax.contourf(X, Y, Z, zdir='y', offset=40, cmap='jet')
+# 建立顯示區間和設定座標軸名稱
+ax.set_xlim(-40, 40)
+ax.set_ylim(-40, 40)
+ax.set_zlim(-100, 100)
+
+ax.set_title('contourf')
+
+ax.set_title('plot_wireframe 3D線框圖 + contourf')
+
+print("------------------------------------------------------------")  # 60個
+
+ax = fig.add_subplot(233, projection='3d')
+
+# 建立數據
+N = 50
+x = np.linspace(-5, 5, N)
+y = np.linspace(-5, 5, N)
+X, Y = np.meshgrid(x, y)
+c = np.random.rand(N, N)
+Z = 10 * np.exp(-(0.5*X**2+0.5*Y**2))
+
+ax.plot_wireframe(X,Y,Z,rstride=5,cstride=5,color='g')
+ax.set_title('plot_wireframe 3D線框圖')
+
+# 數據投影到 X, Y, Z 平面, 同時設定偏移將數據投影到牆面
+cset = ax.contourf(X,Y,Z,zdir='z',offset=-10,cmap='cool')
+cset = ax.contourf(X,Y,Z,zdir='x',offset=-10,cmap='cool')
+cset = ax.contourf(X,Y,Z,zdir='y',offset=10,cmap='cool')
+# 建立顯示區間和設定座標軸名稱
+ax.set_xlim(-10, 10)
+ax.set_ylim(-10, 10)
+ax.set_zlim(-10, 10)
+
+ax.set_title('contourf')
+
+ax.set_title('plot_wireframe 3D線框圖 + contourf')
+
+print("------------------------------------------------------------")  # 60個
+
+def f(x, y):                                # 曲面函數
+    return np.sin(np.sqrt(x ** 2 + y ** 2))
+
+ax = fig.add_subplot(234, projection='3d')
+
+X = np.arange(-3, 3, 0.1)                   # 曲面 X 區間
+Y = np.arange(-3, 3, 0.1)                   # 曲面 Y 區間
+X, Y = np.meshgrid(X, Y)                    # 建立取樣數據
+
+ax.plot_surface(X, Y, f(X,Y), cmap='seismic')
+ax.set_title('plot_surface 3D曲線表面')
+
+ax.view_init(60,45)                         # 設定 3D 視角
+
+print("------------------------------------------------------------")  # 60個
+
+ax = fig.add_subplot(235, projection='3d')
+
+# 建立網格空間
+x, y, z = np.meshgrid(np.arange(-0.8, 1, 0.2),
+                      np.arange(-0.8, 1, 0.2),
+                      np.arange(-0.8, 1, 0.8))
+# 建立箭頭方向
+u = np.sin(np.pi * x) * np.cos(np.pi * y) * np.cos(np.pi * z)
+v = -np.cos(np.pi * x) * np.sin(np.pi * y) * np.cos(np.pi * z)
+w = (np.sqrt(2.0 / 3.0) * np.cos(np.pi * x) * np.cos(np.pi * y) *
+     np.sin(np.pi * z))
+
+ax.quiver(x, y, z, u, v, w,length=0.1,normalize=True,color='r')
+ax.set_title('quiver')
+
+print("------------------------------------------------------------")  # 60個
+
+ax = fig.add_subplot(236, projection='3d')
+
+# 建立 x, y, z
+_x = np.linspace(0, 10, 10)
+_y = np.linspace(1, 10, 3)
+_xx, _yy = np.meshgrid(_x, _y)
+_zz = np.exp(-_xx * (1. / _yy))
+x = _xx.flatten()
+y = _yy.flatten()
+z = np.zeros(_zz.size)
+# 建立 dx, dy, dz, 也就是定義長條
+dx = .25 * np.ones(_zz.size)
+dy = .25 * np.ones(_zz.size)
+dz = _zz.flatten()
+# 定義顏色
+color = ["yellow","aqua","lightgreen"]
+color_list = []
+for i in range(len(_y)):
+    c = color[i]
+    color_list.append([c] * len(_x))
+colors = np.asarray(color_list)
+barcolors = colors.ravel()
+
+# 建立 3D 長條圖
+ax.bar3d(x, y, z, dx, dy, dz, color=barcolors, alpha=0.5)
+ax.set_title('bar3d')
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+fig = plt.figure(
+    num="3D繪圖 集合 4",
+    figsize=(12, 8),
+    dpi=100,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
+
+ax = fig.add_subplot(231, projection='3d')
 
 R = 5
 x = np.arange(-R, R + 1, 0.5)
@@ -48,9 +359,9 @@ ax.set_zlabel('z')
 ax.set_title('線框圖 plot_wireframe + scatter')
 #plt.title('線框圖 plot_wireframe + scatter')  same
 
-plt.show()
-
 print('------------------------------------------------------------')	#60個
+
+ax = fig.add_subplot(232, projection='3d')
 
 start = 0
 end = np.pi * 20   
@@ -60,7 +371,6 @@ x = np.arange(start, end, step)
 y = np.sin(x)
 z = np.cos(x) 
 
-ax = plt.axes(projection = '3d')
 ax.plot(x, y, z)
 
 ax.set_xlabel('x')
@@ -68,16 +378,14 @@ ax.set_ylabel('y')
 ax.set_zlabel('z')
 plt.title('3D Plot')
 
-plt.show()
-
 print('------------------------------------------------------------')	#60個
+
+ax = fig.add_subplot(233, projection='3d')
 
 #3D曲面
 
 #建立一個figure
-fig = plt.figure()
 #创建3D轴对象
-ax = fig.add_subplot(111, projection = '3d')
 
 X = np.arange(-2, 2, 0.1)
 Y = np.arange(-2, 2, 0.1)
@@ -93,9 +401,9 @@ def f(x,y):
 #修改曲面顏色, 使用cmap属性可指定曲面颜色
 ax.plot_surface(X, Y, f(X, Y), rstride = 1, cstride = 1, cmap = plt.cm.hot)
 
-plt.show()
-
 print('------------------------------------------------------------')	#60個
+
+ax = fig.add_subplot(234, projection='3d')
 
 #3D散点图的绘制使用scatter() 函数来绘制出散点
 
@@ -109,8 +417,6 @@ xs3 = np.random.randint(10, 30, 100)
 ys3 = np.random.randint(40, 50, 100)
 zs3 = np.random.randint(40, 50, 100)
 
-fig = plt.figure()
-ax = fig.add_subplot(111, projection = '3d')
 ax.scatter(xs, ys, zs)
 ax.scatter(xs2, ys2, zs2, c = 'r', marker = '^')
 ax.scatter(xs3, ys3, zs3, c = 'g', marker = '*')
@@ -118,9 +424,9 @@ ax.set_xlabel('X label')
 ax.set_ylabel('Y label')
 ax.set_zlabel('Z label')
 
-plt.show()
-
 print('------------------------------------------------------------')	#60個
+
+ax = fig.add_subplot(235, projection='3d')
 
 from matplotlib import cm
 
@@ -137,8 +443,6 @@ y = np.arange(-width, width, step)
 X, Y = np.meshgrid(x, y) 
 Z = f(X, Y)
 
-ax = plt.axes(projection = '3d')
-
 #ax.plot_surface(X, Y, Z)   不分層著色
 ax.plot_surface(X, Y, Z, cmap = cm.coolwarm)    #分層著色
 #ax.plot_wireframe(X, Y, Z)  #畫線框圖
@@ -149,9 +453,9 @@ ax.set_zlabel('z')
 ax.set_box_aspect((1, 1, 0.5))  #調整各軸顯示比例
 plt.title('3D Plot Surface')
 
-plt.show()
-
 print('------------------------------------------------------------')	#60個
+
+ax = fig.add_subplot(236, projection='3d')
 
 """
 3D表面（彩色地图）
@@ -162,7 +466,7 @@ print('------------------------------------------------------------')	#60個
 from matplotlib import cm
 from matplotlib.ticker import LinearLocator
 
-fig, ax = plt.subplots(subplot_kw = {"projection" : "3d"})
+#fig, ax = plt.subplots(subplot_kw = {"projection" : "3d"})
 
 # Make data.
 X = np.arange(-5, 5, 0.25)
@@ -186,9 +490,17 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-# 建立 3D 圖形
-fig = plt.figure()
-ax = fig.add_subplot(111, projection='3d')
+fig = plt.figure(
+    num="3D繪圖 集合 5",
+    figsize=(12, 8),
+    dpi=100,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
+
+ax = fig.add_subplot(231, projection='3d')
 
 # 產生 3D 座標資料
 z1 = np.random.randn(50)
@@ -204,25 +516,13 @@ ax.scatter(x2, y2, z2, c=z2, cmap='Blues', marker='o', label='My Points 2')
 
 ax.legend()
 
-plt.show()
-
 print('------------------------------------------------------------')	#60個
 
 # 線框圖
 
 from mpl_toolkits.mplot3d import axes3d
 
-fig = plt.figure(
-    num="3D繪圖 集合 1",
-    figsize=(8, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
-# fig = plt.figure()
-ax = fig.add_subplot(111, projection="3d")
+ax = fig.add_subplot(232, projection='3d')
 
 # 生成一系列的測試數據
 N = 0.05
@@ -254,9 +554,9 @@ ax.set_xlabel("x")
 ax.set_ylabel("y")
 ax.set_zlabel("z")
 
-plt.show()
-
 print("------------------------------------------------------------")  # 60個
+
+ax = fig.add_subplot(233, projection='3d')
 
 from math import floor
 from matplotlib import cm
@@ -313,7 +613,6 @@ y = np.arange(width)
 X, Y = np.meshgrid(x, y)
 Z = perlin2(x / 25, y / 25)
 
-ax = plt.axes(projection="3d")
 ax.plot_surface(X, Y, Z, cmap=cm.gist_earth)  # 用地形高度顏色來著色
 ax.set_xlabel("x")
 ax.set_ylabel("y")
@@ -321,27 +620,24 @@ ax.set_zlabel("z")
 ax.set_box_aspect((1, 1, 25 / width))
 plt.title("Perlin noise")
 
-plt.show()
-
 print("------------------------------------------------------------")  # 60個
+
+ax = fig.add_subplot(234, projection='3d')
 
 # 三維散點圖
 
 data = np.random.rand(50, 3) # 生成三維數據，每維50個
-fig = plt.figure()
-ax = fig.add_subplot(111, projection='3d')
+
 ax.scatter(data[:, 0], data[:, 1], data[:, 2])
 ax.set_zlabel('Z')
 ax.set_ylabel('Y')
 ax.set_xlabel('X')
-plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
 # 三維柱圖
 
-fig = plt.figure()
-ax = fig.add_subplot(111, projection='3d')
+ax = fig.add_subplot(235, projection='3d')
 
 _x = np.arange(4)
 _y = np.arange(5)
@@ -353,16 +649,14 @@ bottom = np.zeros_like(top) # 與top數組形狀一樣，內容全部爲0
 width = depth = 1
 
 ax.bar3d(x, y, bottom, width, depth, top, shade=True)
-plt.show()
 
 print("------------------------------------------------------------")  # 60個
+
+ax = fig.add_subplot(236, projection='3d')
 
 # 三維曲面圖和等高線圖
 
 from matplotlib import cm
-
-fig = plt.figure()
-ax = fig.add_subplot(111, projection='3d')
 
 X = np.arange(-5, 5, 0.25)
 Y = np.arange(-5, 5, 0.25)
@@ -373,8 +667,9 @@ surf = ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap=cm.coolwarm)
 ax.contourf(X,Y,Z,zdir='z',offset=-2) # 把等高線向z軸投射
 ax.set_zlim(-2,2) # 設置z軸範圍
 fig.colorbar(surf, shrink=0.5, aspect=5)
+
 plt.show()
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 fig = plt.figure()
@@ -416,12 +711,18 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 
 
+print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個
 
+
+print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
+
+

@@ -5,12 +5,7 @@ from tkinter import ttk
 
 from PIL import ImageTk, Image
 
-print("------------------------------------------------------------")  # 60個
-
-
-
-
-
+'''
 print("------------------------------------------------------------")  # 60個
 
 import tkinter as tk
@@ -305,12 +300,55 @@ class PackManagerDemoWithSide:
 
 
 PackManagerDemoWithSide()  # Create GUI
-
+'''
 print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
 
+window = tk.Tk()
+window.geometry("800x600")
+window.title("這是主視窗")
+
+frame1 = tk.Frame(window)
+frame1.pack()
+
+#Entry 之 Text 之 對齊
+tk.Entry(frame1, width=5, justify=tk.RIGHT).pack(side=tk.LEFT)
+tk.Entry(frame1, width=5, justify=tk.RIGHT).pack(side=tk.LEFT)
+tk.Entry(frame1, width=5, justify=tk.RIGHT).pack(side=tk.LEFT)
+
+
+print("Toolbox 測試")
+tk.Button(window, text="OK").pack(side=tk.LEFT)
+tk.Button(window, text="Cancel").pack(side=tk.LEFT)
+tk.Label(window, text="Enter your name:").pack(side=tk.LEFT)
+tk.Entry(window, text="Type Name").pack(side=tk.LEFT)
+tk.Checkbutton(window, text="Bold").pack(side=tk.LEFT)
+tk.Checkbutton(window, text="Italic").pack(side=tk.LEFT)
+tk.Radiobutton(window, text="Red").pack(side=tk.LEFT)
+tk.Radiobutton(window, text="Yellow").pack(side=tk.LEFT)
+
+
+
+
+
+
+
+window.mainloop()
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
 
 
 
@@ -319,5 +357,6 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+
 
 

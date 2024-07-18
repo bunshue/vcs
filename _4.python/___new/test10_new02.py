@@ -1328,8 +1328,150 @@ print(matplotlib.__version__)
 
 print("------------------------------------------------------------")  # 60個
 
+try:
+    # 嘗試打開一個不存在的檔案
+    with open("non_existent_file.txt", "r") as f:
+        data = f.read()  # read(無參數), 從目前檔案位置讀到檔尾
+except FileNotFoundError:
+    # 如果文件不存在, 捕獲異常
+    print("The file was not found")
+except IOError:
+    # 處理 I/O 錯誤, 例如:讀取錯誤
+    print("An I/O error occurred")
 
 print("------------------------------------------------------------")  # 60個
+
+filename = "data15_4.txt"
+try:
+    with open(filename) as f:  # 預設mode=r開啟檔案
+        data = f.read()  # read(無參數), 從目前檔案位置讀到檔尾
+except FileNotFoundError:
+    print(f"找不到 {filename} 檔案")
+else:
+    print(data)  # 輸出變數data
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+set99 = set()
+for i in range(2, 9 + 1):
+    set99.add(i)
+
+print(type(set99))
+print(set99)
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+import os
+pName = 'C:/pcYah'
+if os.path.isdir(pName):           # 檢查資料夾路徑是否存在
+    print('%s 資料夾路徑存在' %pName)
+else:
+    print('%s 資料夾路徑不存在' %pName)
+     
+fName = 'C:/Windows/win.ini'
+if os.path.isfile(fName):         # 檢查檔案路徑是否存在
+    print('%s 檔案路徑存在' %fName)
+else:
+    print('%s 檔案路徑不存在' %fName)
+
+"""
+
+isdir  isfile
+
+if os.path.exists(pName):        # 檢查資料夾路徑是否存在
+if os.path.exists(fName):        # 檢查檔案路徑是否存在
+
+
+"""
+
+
+
+#try-catch-finally
+n1 = 8
+n2 = 0
+try:
+    d = n1/n2
+    print('%d / %d = %d' %(n1, n2, d))
+except Exception as e:
+    print('錯誤類型 :', end =' ')
+    print(e)
+finally:
+    print('執行 finally: 敘述\n')
+
+
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+lst = [0 for x in range(4)]
+try:
+    lst[3] = 33
+    print('lst[3] =', lst[3])
+    lst[8] = 88
+    print('lst[8] =', lst[8])
+except ZeroDivisionError: 
+    print('錯誤類型 : 除數為零')
+except IndexError: 
+    print('錯誤類型 : 串列註標超出範圍')
+except MemoryErroe: 
+    print('錯誤類型 : 超出記憶體空間')  
+except Exception as e:
+    print('錯誤類型 :', e) 
+
+import os
+fName = 'score.txt'
+if os.path.isfile(fName):
+    f = open(fName, 'r')
+    print('讀1行')
+    str1 = f.readline()
+    print(str1)
+    print('讀4行')
+    str2 = f.readline(4)
+    print(str2)
+    print('剩下的讀完')
+    print(f.read())
+    f.close()
+else:
+    print(None)
+
+
+print("------------------------------------------------------------")  # 60個
+
+# ord(x) 可以將參數x所代表的Unicode字元，轉換為對應編碼數字
+A = ord('A')
+B = ord('B')
+C = ord('C')
+
+print(A)
+print(B)
+print(C)
+
+# chr(x) 可以將參數x轉換為所代表的Unicode字元
+AA = chr(A)
+BB = chr(B)
+CC = chr(C)
+
+print(AA)
+print(BB)
+print(CC)
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")

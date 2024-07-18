@@ -706,16 +706,16 @@ plt.title("用plot")
 # 法二: 用 plot 或 bar 顯示 calcHist 的結果
 
 plt.subplot(232)
-plt.plot(np.arange(0, 256), hist.ravel())# 拉成一維 並畫出
+plt.plot(np.arange(0, 256), hist.ravel())  # 拉成一維 並畫出
 plt.title("用plot")
 
 plt.subplot(233)
-plt.bar(np.arange(0, 256), hist.ravel())# 拉成一維 並畫出
+plt.bar(np.arange(0, 256), hist.ravel())  # 拉成一維 並畫出
 plt.title("用bar")
 
 # 法三: 用plt.hist()畫圖
 plt.subplot(234)
-plt.hist(image1.ravel(), num_bins, [0, 256], color="b")# 拉成一維
+plt.hist(image1.ravel(), num_bins, [0, 256], color="b")  # 拉成一維
 plt.title("用hist")
 
 """

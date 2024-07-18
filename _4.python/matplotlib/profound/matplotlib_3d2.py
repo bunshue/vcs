@@ -1,10 +1,7 @@
 """
-
-
+# 3D plot 集合 2
 
 """
-
-# 3D plot 集合 2
 
 print("------------------------------------------------------------")  # 60個
 
@@ -32,7 +29,6 @@ from mpl_toolkits.mplot3d import Axes3D
 
 print("------------------------------------------------------------")  # 60個
 
-#          編號                          圖像大小             解析度    背景色                      邊框顏色                      邊框有無
 fig = plt.figure(
     num="3D繪圖 集合 1",
     figsize=(12, 8),
@@ -43,16 +39,9 @@ fig = plt.figure(
     frameon=True,
 )
 
-# 設定中文字型及負號正確顯示
-# 設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
-# 設定負號
-plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
-
 ax = fig.add_subplot(231, projection="3d")  # 第一張圖
 
 # 繪製 3D 長條圖
-# plt.rcParams['font.size'] = 16
 # fig = plt.figure(figsize=(12, 8))
 
 xpos = np.arange(10)
@@ -69,6 +58,8 @@ ax.set_title("繪製 3D 長條圖")
 
 
 ax.set_title("XXXXXXX1")
+
+print("------------------------------------------------------------")  # 60個
 
 ax = fig.add_subplot(232, projection="3d")  # 第二張圖
 
@@ -100,6 +91,8 @@ ax.set_zlabel("z", fontsize=15)
 # plt.savefig('3D-sphere.png')
 
 ax.set_title("三維球")
+
+print("------------------------------------------------------------")  # 60個
 
 ax = fig.add_subplot(233, projection="3d")  # 第三張圖
 
@@ -134,6 +127,7 @@ ax.quiver(0, 0, 0, v123[0], v123[1], v123[2], color="r", arrow_length_ratio=0.1)
 
 ax.set_title("#3D quiver  3維向量")
 
+print("------------------------------------------------------------")  # 60個
 
 ax = fig.add_subplot(234, projection="3d")  # 第四張圖
 
@@ -203,6 +197,7 @@ ax.set_zlabel("z", fontsize=15)
 
 ax.set_title("正交曲線座標系統")
 
+print("------------------------------------------------------------")  # 60個
 
 ax = fig.add_subplot(235, projection="3d")  # 第五張圖
 
@@ -232,7 +227,8 @@ ax.set_zlabel("z", fontsize=15)
 
 ax.set_title("三維等位面與法線")
 
-# XXXXXXX6
+print("------------------------------------------------------------")  # 60個
+
 ax = fig.add_subplot(236, projection="3d")  # 第六張圖
 
 # 1. 首先在進行 3D Plot 時除了導入 matplotlib ，還要額外添加一個模塊，即 Axes 3D 3D 坐標軸顯示：
@@ -281,7 +277,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#          編號                          圖像大小             解析度    背景色                      邊框顏色                      邊框有無
 fig = plt.figure(
     num="3D繪圖 集合 2 散點圖",
     figsize=(12, 8),
@@ -292,13 +287,6 @@ fig = plt.figure(
     frameon=True,
 )
 
-# 設定中文字型及負號正確顯示
-# 設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
-# 設定負號
-plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
-
-# XXXXXXX1
 ax = fig.add_subplot(231, projection="3d")  # 第一張圖
 
 x = np.random.randn(100)
@@ -309,7 +297,8 @@ ax.scatter(x, y, z, c="r")
 
 ax.set_title("XXXXXXX1")
 
-# XXXXXXX2
+print("------------------------------------------------------------")  # 60個
+
 ax = fig.add_subplot(232, projection="3d")  # 第二張圖
 
 count = 100
@@ -328,10 +317,10 @@ ax.set_title("散點圖")
 
 ax.set_title("XXXXXXX2")
 
-# XXXXXXX3
+print("------------------------------------------------------------")  # 60個
+
 ax = fig.add_subplot(233, projection="3d")  # 第三張圖
 
-# 3D 座標點
 # 在三維空間中繪製座標點是最常用到的基本功能。
 
 # 產生 3D 座標資料
@@ -350,10 +339,10 @@ ax.legend()  # 顯示圖例
 
 ax.set_title("3D 座標點")
 
-# XXXXXXX4
+print("------------------------------------------------------------")  # 60個
+
 ax = fig.add_subplot(234, projection="3d")  # 第四張圖
 
-# 3D 曲線
 # 這是將 3D 的曲線與座標點畫在同一張圖的範例。
 
 # 產生 3D 座標資料
@@ -373,10 +362,10 @@ ax.scatter(x2, y2, z, c=z, cmap="jet", label="My Points")
 
 ax.legend()  # 顯示圖例
 
-ax.set_title("3D 曲線")
+ax.set_title("plot 3D 曲線")
 
+print("------------------------------------------------------------")  # 60個
 
-# XXXXXXX5
 ax = fig.add_subplot(235, projection="3d")  # 第五張圖
 
 x = np.linspace(0, 5, 10)
@@ -388,11 +377,10 @@ Z = 2 * X + Y
 ax.scatter(X, Y, Z + 0.7 * np.random.randn(10, 10))
 ax.plot_surface(X, Y, Z, alpha=0.3)
 
-# XXXXXXX6
+print("------------------------------------------------------------")  # 60個
+
 ax = fig.add_subplot(236, projection="3d")  # 第六張圖
 
-# 繪製 3D 散佈圖 – scatter3D()
-plt.rcParams["font.size"] = 16
 x = np.random.randn(1000)
 y = np.random.randn(1000)
 z = np.random.randn(1000)
@@ -404,7 +392,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#          編號                          圖像大小             解析度    背景色                      邊框顏色                      邊框有無
 fig = plt.figure(
     num="3D繪圖 集合 3",
     figsize=(12, 8),
@@ -414,12 +401,6 @@ fig = plt.figure(
     linewidth=1,
     frameon=True,
 )
-
-# 設定中文字型及負號正確顯示
-# 設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
-# 設定負號
-plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 
 # XXXXXXX1
 ax = fig.add_subplot(231, projection="3d")  # 第一張圖
@@ -462,7 +443,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#          編號                          圖像大小             解析度    背景色                      邊框顏色                      邊框有無
 fig = plt.figure(
     num="3D繪圖 集合 4",
     figsize=(12, 8),
@@ -472,12 +452,6 @@ fig = plt.figure(
     linewidth=1,
     frameon=True,
 )
-
-# 設定中文字型及負號正確顯示
-# 設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
-# 設定負號
-plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 
 # XXXXXXX1
 ax = fig.add_subplot(231, projection="3d")  # 第一張圖

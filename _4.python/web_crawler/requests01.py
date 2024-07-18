@@ -16,8 +16,7 @@ import requests
 from datetime import datetime
 
 print("------------------------------------------------------------")  # 60個
-
-
+'''
 # 無參數
 def get_html_data1(url):
     print("無參數取得網頁資料: ", url)
@@ -104,9 +103,9 @@ print("------------------------------------------------------------")  # 60個
 import urllib.request
 
 # 設定欲請求的網址
-addr = "http://www.grandtech.info/"
+url = "http://www.grandtech.info/"
 # 以with/as敘述來取得網址，離開之後也能釋放資源
-with urllib.request.urlopen(addr) as response:
+with urllib.request.urlopen(url) as response:
     print("網頁網址", response.geturl())
     print("伺服器狀態碼", response.getcode())
     print("網頁表頭", response.getheaders())
@@ -117,9 +116,9 @@ print("------------------------------------------------------------")  # 60個
 
 from urllib.parse import urlparse
 
-addr = "https://www.zct.com.tw/hot_sale.php?act=goods&hash=5717321f978f1"
+url = "https://www.zct.com.tw/hot_sale.php?act=goods&hash=5717321f978f1"
 
-result = urlparse(addr)
+result = urlparse(url)
 print("回傳的 ParseResult 物件:")
 print(result)
 print("通訊協定:" + result.scheme)
@@ -413,9 +412,9 @@ print("------------------------------------------------------------")  # 60個
 
 print("各國GDP資料 用pd處理網頁上的csv檔案")
 
-# 讀入csv 文字檔
 import pandas as pd
 
+# 讀入csv 文字檔
 csv_file = "https://storage.googleapis.com/learn_pd_like_tidyverse/gapminder.csv"
 gdp = pd.read_csv(csv_file)
 print("------------------------------------------------")
@@ -425,6 +424,7 @@ print(gdp.head())
 print("------------------------------------------------")
 
 print("用pd處理網頁上的 excel 檔案")
+
 # 讀入excel 試算表
 xlsx_file = "https://storage.googleapis.com/learn_pd_like_tidyverse/gapminder.xlsx"
 gapminder = pd.read_excel(xlsx_file)
@@ -497,7 +497,7 @@ def download_xkcd(start_comic, end_comic):
                 print(f"網頁下載失敗: {err}")
             print("程式繼續執行 ... ")
 
-            comic_json = response.json()
+            comic_json = response.json()  # response轉成json格式
             comic_url = comic_json['img']               # 從JSON響應中提取圖片 URL
             print(f'\n圖片下載中 : {comic_url}...')
 
@@ -553,8 +553,8 @@ proxy_ips = [
 # 依序執行 get 方法
 for ip in proxy_ips:
     try:
-        result = requests.get(
-            "https://www.google.com", proxies={"http": "ip", "https": ip}
+        url = "https://www.google.com"
+        result = requests.get(url, proxies={"http": "ip", "https": ip}
         )
         print(result.text)
     except:
@@ -562,37 +562,12 @@ for ip in proxy_ips:
 """
 print("------------------------------------------------------------")  # 60個
 
-print("#台灣水庫即時水情 1")
-# 台灣水庫即時水情
-response = requests.get("https://water.taiwanstat.com/")  # 使用 get 方法
-print(response.text)  # 讀取並印出 text 屬性
-
-print("------------------------------------------------------------")  # 60個
-
-print("#台灣水庫即時水情 2")
-# 台灣水庫即時水情
-response = requests.get("https://water.taiwanstat.com/")  # 使用 get 方法
-response.encoding = "utf-8"  # 因為該網頁編碼為 utf-8，加上 .encoding 避免亂碼
-print(response.text)
-
-print("------------------------------------------------------------")  # 60個
-
-url = "https://data.kcg.gov.tw/dataset/6f29f6f4-2549-4473-aa90-bf60d10895dc/resource/30dfc2cf-17b5-4a40-8bb7-c511ea166bd3/download/lightrailtraffic.json"
-response = requests.get(url)  # 使用 get 方法
-response.encoding = "utf-8"  # 因為該網頁編碼為 utf-8，加上 .encoding 避免亂碼
-print(response.text)
-# print(response.json()) fail
-
-print("------------------------------------------------------------")  # 60個
-
 print("測試一個 echo 函數")
 # 設定參數
 params = {"name": "david", "age": "18"}
 # 加入參數
-response = requests.get(
-    "https://script.google.com/macros/s/AKfycbw5PnzwybI_VoZaHz65TpA5DYuLkxIF-HUGjJ6jRTOje0E6bVo/exec",
-    params=params,
-)
+url = "https://script.google.com/macros/s/AKfycbw5PnzwybI_VoZaHz65TpA5DYuLkxIF-HUGjJ6jRTOje0E6bVo/exec"
+response = requests.get(url,params=params,)
 print(response.text)
 
 print("------------------------------------------------------------")  # 60個
@@ -600,9 +575,9 @@ print("------------------------------------------------------------")  # 60個
 """ 改了
 # 2022/12 時氣象局有修改了 API 內容，將部份大小寫混合全改成小寫，因此程式碼也跟著修正
 url = "https://data.epa.gov.tw/api/v2/aqx_p_432?api_key=e8dd42e6-9b8b-43f8-991e-b3dee723a52d&limit=1000&sort=ImportDate%20desc&format=JSON"
-data = requests.get(url)  # 使用 get 方法透過空氣品質指標 API 取得內容
-data_json = data.json()  # 將取得的檔案轉換為 JSON 格式
-for i in data_json["records"]:  # 依序取出 records 內容的每個項目
+response = requests.get(url)  # 使用 get 方法透過空氣品質指標 API 取得內容
+response_json = response.json()  # response轉成json格式
+for i in response_json["records"]:  # 依序取出 records 內容的每個項目
     print(i["county"] + " " + i["sitename"], end="，")  # 印出城市與地點名稱
     print("AQI:" + i["aqi"], end="，")  # 印出 AQI 數值
     print("空氣品質" + i["status"])  # 印出空氣品質狀態
@@ -613,10 +588,10 @@ csvfile = open("tmp_csv-aqi.csv", "w")  # 建立空白並可寫入的 CSV 檔案
 csv_write = csv.writer(csvfile)  # 設定 csv_write 為寫入
 
 url = "https://data.epa.gov.tw/api/v2/aqx_p_432?api_key=e8dd42e6-9b8b-43f8-991e-b3dee723a52d&limit=1000&sort=ImportDate%20desc&format=JSON"
-data = requests.get(url)
-data_json = data.json()
+response = requests.get(url)
+response_json = response.json()  # response轉成json格式
 output = [["county", "sitename", "aqi", "空氣品質"]]  # 設定 output 變數為二維串列，第一筆資料為開頭
-for i in data_json["records"]:
+for i in response_json["records"]:
     # 依序將取得的資料加入 output 中
     output.append([i["county"], i["sitename"], i["aqi"], i["status"]])
 print(output)
@@ -625,18 +600,18 @@ csv_write.writerows(output)  # 多行寫入 CSV
 print("------------------------------------------------------------")  # 60個
 
 url = "一般天氣預報 - 今明 36 小時天氣預報 JSON 連結"
-data = requests.get(url)  # 取得 JSON 檔案的內容為文字
-data_json = data.json()  # 轉換成 JSON 格式
-location = data_json["cwbopendata"]["dataset"]["location"]  # 取出 location 的內容
+response = requests.get(url)  # 取得 JSON 檔案的內容為文字
+response_json = response.json()  # response轉成json格式
+location = response_json["cwbopendata"]["dataset"]["location"]  # 取出 location 的內容
 for i in location:
     print(f"{i}")
 
 print("------------------------------------------------------------")  # 60個
 
 url = "一般天氣預報 - 今明 36 小時天氣預報 JSON 連結"
-data = requests.get(url)  # 取得 JSON 檔案的內容為文字
-data_json = data.json()  # 轉換成 JSON 格式
-location = data_json["cwbopendata"]["dataset"]["location"]
+response = requests.get(url)  # 取得 JSON 檔案的內容為文字
+response_json = response.json()  # response轉成json格式
+location = response_json["cwbopendata"]["dataset"]["location"]
 for i in location:
     city = i["locationName"]  # 縣市名稱
     wx8 = i["weatherElement"][0]["time"][0]["parameter"]["parameterName"]  # 天氣現象
@@ -649,9 +624,9 @@ for i in location:
 print("------------------------------------------------------------")  # 60個
 
 url = "你的氣象觀測資料 JSON 網址"
-data = requests.get(url)
-data_json = data.json()
-location = data_json["cwbopendata"]["location"]
+response = requests.get(url)
+response_json = response.json()  # response轉成json格式
+location = response_json["cwbopendata"]["location"]
 for i in location:
     name = i["locationName"]  # 測站地點
     city = i["parameter"][0]["parameterValue"]  # 城市
@@ -661,9 +636,9 @@ for i in location:
 print("------------------------------------------------------------")  # 60個
 
 url = "你的氣象觀測資料 JSON 網址"
-data = requests.get(url)
-data_json = data.json()
-location = data_json["cwbopendata"]["location"]
+response = requests.get(url)
+response_json = response.json()  # response轉成json格式
+location = response_json["cwbopendata"]["location"]
 for i in location:
     name = i["locationName"]  # 測站地點
     city = i["parameter"][0]["parameterValue"]  # 城市
@@ -679,9 +654,9 @@ for i in location:
 print("------------------------------------------------------------")  # 60個
 
 url = "你的氣象觀測資料 JSON 網址"
-data = requests.get(url)
-data_json = data.json()
-location = data_json["cwbopendata"]["location"]
+response = requests.get(url)
+response_json = response.json()  # response轉成json格式
+location = response_json["cwbopendata"]["location"]
 weather = {}  # 新增一個 weather 字典
 for i in location:
     name = i["locationName"]
@@ -713,9 +688,9 @@ print(f"{a}{b}，{weather[a][b]}。")  # 顯示結果
 print("------------------------------------------------------------")  # 60個
 
 url = "https://rate.bot.com.tw/xrt/flcsv/0/day"  # 牌告匯率 CSV 網址
-rate = requests.get(url)  # 爬取網址內容
-rate.encoding = "utf-8"  # 調整回應訊息編碼為 utf-8，避免編碼不同造成亂碼
-rt = rate.text  # 以文字模式讀取內容
+response = requests.get(url)  # 爬取網址內容
+response.encoding = "utf-8"  # 調整回應訊息編碼為 utf-8，避免編碼不同造成亂碼
+rt = response.text  # 以文字模式讀取內容
 rts = rt.split("\n")  # 使用「換行」將內容拆分成串列
 for i in rts:  # 讀取串列的每個項目
     try:  # 使用 try 避開最後一行的空白行
@@ -726,23 +701,9 @@ for i in rts:  # 讀取串列的每個項目
 
 print("------------------------------------------------------------")  # 60個
 
-url = "https://invoice.etax.nat.gov.tw/index.html"
-response = requests.get(url)  # 取得網頁內容
-response.encoding = "utf-8"  # 因為該網頁編碼為 utf-8，加上 .encoding 避免亂碼
-print(response.text)
-
-print("------------------------------------------------------------")  # 60個
-
-print("拆解網頁資料")
-response = requests.get("https://today.line.me/tw/v2/article/oqay0ro")
-# 取得文章的原始碼後，使用 split 字串拆分的方式，拆解出 articleId
-article_id = response.text.split("<script>")[1].split('id:"article:')[1].split(":")[0]
-print(article_id)
-
-print("------------------------------------------------------------")  # 60個
-
 data = {"name": "oxxo", "age": "18"}
-response = requests.post("http://127.0.0.1:5000/", data=data)  # 發送 POST 請求
+url = "http://127.0.0.1:5000/"
+response = requests.post(url, data=data)  # 發送 POST 請求
 print(response.text)
 
 print("------------------------------------------------------------")  # 60個
@@ -752,10 +713,14 @@ url = "你的應用程式網址"
 name = "工作表1"
 row = 2
 response = requests.get(f"{url}?name={name}&row={row}")
+
+print("response轉成json格式")
 print(response.json())
 
 name = "工作表2"
 response = requests.get(f"{url}?name={name}")
+
+print("response轉成json格式")
 print(response.json())
 
 print("------------------------------------------------------------")  # 60個
@@ -805,16 +770,19 @@ url = "https://www.twse.com.tw/exchangeReport/MI_INDEX?response=csv&date=" + dat
 print(url)
 
 # 下載股價
-r = requests.get(url)
-#print(r.text)
-r_text = r.text.split("\n")
+response = requests.get(url)
+#print(response.text)
+
+r_text = response.text.split("\n")
 
 r_text = [i for i in r_text if len(i.split('",')) == 17 and i[0] != "="]
 
 data = "\n".join(r_text)
+
 df = pd.read_csv(StringIO(data), header=0)
 
 df = df.drop(columns=["Unnamed: 16"])
+
 stock_symbol = "2330" #台積電
 filter_df = df[df["證券代號"] == stock_symbol]
 print(filter_df)
@@ -966,9 +934,11 @@ print("------------------------------------------------------------")  # 60個
 
 print("檢查錯誤碼")
 
+url = "http://example.com"
+
 try:
     # 嘗試發出網絡請求
-    response = requests.get("http://example.com")
+    response = requests.get(url)
 
     # 如果請求返回了錯誤響應, 會引發 HTTPError
     response.raise_for_status()  # 如果發生錯誤的話, 會丟出 exception
@@ -1054,47 +1024,20 @@ print("------------------------------------------------------------")  # 60個
 from lxml import html
 
 url = "https://rate.bot.com.tw/xrt?Lang=zh-TW"
-page = requests.get(url)
-tree = html.fromstring(page.text)
+response = requests.get(url)
+tree = html.fromstring(response.text)
 
 print('美金：' + str(tree.xpath('//html/body/div[1]/main/div[3]/table/tbody/tr[1]/td[3]/text()')[0]))
 print('日圓：' + str(tree.xpath('//html/body/div[1]/main/div[3]/table/tbody/tr[8]/td[3]/text()')[0]))
 """
 
 print("------------------------------------------------------------")  # 60個
-
-from lxml import html
-
-# https://mis.twse.com.tw/stock/fibest.jsp?stock=0050
-url = "https://mis.twse.com.tw/stock/api/getStockInfo.jsp?ex_ch=tse_0050.tw"
-response = requests.get(url)
-json_data = json.loads(response.text)
-
-print(json_data)
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("作業完成")
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
 print("字串處理 技巧")
 
 print("教育部統計處資料 很多")
 url = "https://stats.moe.gov.tw/files/detail/{}/{}_student.csv"
 for year in range(106, 110):
     print(url.format(year, year))
-
-print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------------------------------------")  # 60個
 print("requests 測試 16 字串處理 技巧")
@@ -1126,15 +1069,18 @@ print("------------------------------------------------")
 print("webbrowser")
 import webbrowser
 
-webbrowser.open("http://www.mcut.edu.tw")
+url = "http://www.mcut.edu.tw"
+webbrowser.open(url)
 
 print("------------------------------------------------------------")  # 60個
 
 print("webbrowser")
 # address = input("請輸入地址 : ")
 address = "新竹市東區榮光里中華路二段445號"
-webbrowser.open("http://www.google.com.tw/maps/place/" + address)
 
+url = "http://www.google.com.tw/maps/place/" + address
+
+webbrowser.open(url)
 
 # re 使用
 
@@ -1161,20 +1107,6 @@ else:
     print("網頁下載失敗")
 
 print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-""" many
-
-print('------------------------------------------------------------')	#60個
-
-import pprint
-
-r = requests.get('http://tw.yahoo.com')
-pprint.pprint(r.text)
-"""
-
 
 """
 import socket
@@ -1204,12 +1136,13 @@ print("測試 ipify")
 
 # IPv4/IPv6 皆可
 
-ip = requests.get("https://api64.ipify.org")
-print("My public IP address is: {}".format(ip.text))
+url = "https://api64.ipify.org"
+response = requests.get(url)
+print("My public IP address is: {}".format(response.text))
 
-ip = requests.get("https://api64.ipify.org?format=json")
-print(ip.text)
-
+url = "https://api64.ipify.org?format=json"
+response = requests.get(url)
+print(response.text)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1303,7 +1236,8 @@ print("------------------------------------------------------------")  # 60個
 from selenium import webdriver
 
 driver = webdriver.Chrome("./chromedriver")  # 指向 chromedriver 的位置
-driver.get("https://www.google.com")  # 打開瀏覽器，開啟網頁
+url = "https://www.google.com"
+driver.get(url)  # 打開瀏覽器，開啟網頁
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1312,7 +1246,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select  # 使用 Select 對應下拉選單
 
 driver = webdriver.Chrome("./chromedriver")
-driver.get("https://example.oxxostudio.tw/python/selenium/demo.html")  # 開啟範例網址
+url = "https://example.oxxostudio.tw/python/selenium/demo.html"
+driver.get(url)  # 開啟範例網址
 a = driver.find_element(By.ID, "a")  # 取得 id 為 a 的網頁元素 ( 按鈕 A )
 b = driver.find_element(By.CLASS_NAME, "btn")  # 取得 class 為 btn 的網頁元素 ( 按鈕 B )
 c = driver.find_element(By.CSS_SELECTOR, ".test")  # 取得 class 為 test 的網頁元素 ( 按鈕 C )
@@ -1351,7 +1286,8 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 
 driver = webdriver.Chrome("./chromedriver")
-driver.get("https://example.oxxostudio.tw/python/selenium/demo.html")
+url = "https://example.oxxostudio.tw/python/selenium/demo.html"
+driver.get(url)
 a = driver.find_element(By.ID, "a")
 add = driver.find_element(By.ID, "add")
 a.click()  # 點擊按鈕 A，出現 a 文字
@@ -1371,7 +1307,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
 
 driver = webdriver.Chrome("./chromedriver")
-driver.get("https://example.oxxostudio.tw/python/selenium/demo.html")
+url = "https://example.oxxostudio.tw/python/selenium/demo.html"
+driver.get(url)
 a = driver.find_element(By.ID, "a")
 add = driver.find_element(By.ID, "add")
 actions = ActionChains(driver)  # 使用 ActionChains 的方式
@@ -1387,7 +1324,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
 
 driver = webdriver.Chrome("./chromedriver")
-driver.get("https://example.oxxostudio.tw/python/selenium/demo.html")
+url = "https://example.oxxostudio.tw/python/selenium/demo.html"
+driver.get(url)
 a = driver.find_element(By.ID, "a")
 show = driver.find_element(By.ID, "show")
 actions = ActionChains(driver)
@@ -1404,7 +1342,8 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 
 driver = webdriver.Chrome("./chromedriver")
-driver.get("https://example.oxxostudio.tw/python/selenium/demo.html")
+url = "https://example.oxxostudio.tw/python/selenium/demo.html"
+driver.get(url)
 body = driver.find_element(By.TAG_NAME, "body")
 a = driver.find_element(By.ID, "a")
 b = driver.find_element(By.CLASS_NAME, "btn")
@@ -1428,9 +1367,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.alert import Alert
 
 driver = webdriver.Chrome("./chromedriver")
-driver.get(
-    "https://www.selenium.dev/selenium/docs/api/py/webdriver_remote/selenium.webdriver.remote.webelement.html"
-)
+url = "https://www.selenium.dev/selenium/docs/api/py/webdriver_remote/selenium.webdriver.remote.webelement.html"
+driver.get(url)
 
 time.sleep(1)
 driver.execute_script("window.scrollTo(0, 500)")  # 捲動到 500px 位置
@@ -1472,7 +1410,8 @@ driver.execute_cdp_cmd(
 
 print("------------------------------------------------------------")  # 60個
 
-driver.get("https://twitter.com")
+url = "https://twitter.com"
+driver.get(url)
 time.sleep(2)
 driver.execute_script(f"window.scrollTo(0, 200)")  # 自動往下捲動 200px
 login = driver.find_element(By.CSS_SELECTOR, 'a[href="/login"]')  # 取得登入按鈕
@@ -1563,7 +1502,8 @@ driver.execute_cdp_cmd(
     },
 )
 
-driver.get("https://twitter.com")
+url = "https://twitter.com"
+driver.get(url)
 time.sleep(2)
 driver.execute_script(f"window.scrollTo(0, 200)")
 login = driver.find_element(By.CSS_SELECTOR, 'a[href="/login"]')
@@ -1628,7 +1568,8 @@ print("------------------------------------------------------------")  # 60個
 from selenium import webdriver  # 匯入 selenium 的 webdriver 子套件
 
 browser = webdriver.Chrome()  # 建立 Chrome 瀏覽器物件
-browser.get("http://www.flag.com.tw")  # 開啟 Chrome 並連到旗標網站
+url = "http://www.flag.com.tw"
+browser.get(url)  # 開啟 Chrome 並連到旗標網站
 time.sleep(5)  # 暫停 5 秒
 browser.close()  # 關閉網頁(目前分頁)A
 
@@ -1637,7 +1578,8 @@ print("------------------------------------------------------------")  # 60個
 from selenium import webdriver  # 匯入 selenium 的 webdriver
 
 browser = webdriver.Chrome()  # 建立 Chrome 瀏覽器物件
-browser.get("http://www.google.com")  # 開啟 Chrome 並連到 Google 網站
+url = "http://www.google.com"
+browser.get(url)  # 開啟 Chrome 並連到 Google 網站
 print("標題：" + browser.title)  # 輸出網頁標題
 print("網址：" + browser.current_url)  # 輸出網頁網址
 print("內容：" + browser.page_source[0:50])  # 輸出網頁原始碼的前 50 個字
@@ -1655,7 +1597,8 @@ print("------------------------------------------------------------")  # 60個
 from selenium import webdriver  # 匯入 selenium 的 webdriver
 
 browser = webdriver.Chrome()  # 建立 Chrome 瀏覽器物件
-browser.get("http://www.google.com")  # 開啟 Chrome 並連到旗標網站
+url = "http://www.google.com"
+browser.get(url)  # 開啟 Chrome 並連到旗標網站
 e1 = browser.find_element_by_tag_name("head")  # 尋找 head 標籤
 print(e1.tag_name)  # 輸出 head 確認已找到 (tag_name 屬性為標籤名稱, 詳見下表)
 e2 = e1.find_element_by_tag_name("title")  # 在 head 元素中尋找 title 標籤
@@ -1672,8 +1615,8 @@ opt.add_experimental_option(
     {"profile.default_content_setting_values": {"notifications": 2}},
 )
 browser = webdriver.Chrome(options=opt)  # ←以 options 指名參數來建立瀏覽器物件
-
-browser.get("http://www.facebook.com")  # ←開啟 Chrome 並連到 fb 網站
+url = "http://www.facebook.com"
+browser.get(url)  # ←開啟 Chrome 並連到 fb 網站
 browser.find_element_by_id("email").send_keys("您的帳號")  # }
 browser.find_element_by_id("pass").send_keys("您的密碼")  # }輸入帳密並按登入鈕
 browser.find_element_by_name("login").click()  # }
@@ -1689,7 +1632,8 @@ opt.add_experimental_option(
 )
 browser = webdriver.Chrome(options=opt)  # 以 options 參數來建立瀏覽器物件
 
-browser.get("http://www.google.com")  # ←開啟 Chrome 並連到 Google 網站
+url = "http://www.google.com"
+browser.get(url)  # ←開啟 Chrome 並連到 Google 網站
 browser.maximize_window()  # ←將視窗最大化以避免最右邊的登入鈕沒顯示出來
 
 browser.find_element_by_id("gb_70").click()  # ←按登入鈕
@@ -1725,7 +1669,9 @@ from selenium import webdriver
 driver = webdriver.Chrome(
     "/Users/oxxo/Documents/oxxo/practice/python/chromedriver"
 )  # 設定 chromedriver 路徑
-driver.get("http://oxxo.studio")  # 前往這個網址
+
+url = "http://oxxo.studio"
+driver.get(url)  # 前往這個網址
 print(driver.title)
 time.sleep(1)
 driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")  # 捲動到最下方
@@ -1749,7 +1695,9 @@ options.add_argument("headless")  # 不會開啟瀏覽器
 driver = webdriver.Chrome(
     "/Users/oxxo/Documents/oxxo/practice/python/chromedriver", chrome_options=options
 )  # 設定 chromedriver 路徑
-driver.get("https://www.dinbendon.net/do/login")  # 前往這個網址
+
+url = "https://www.dinbendon.net/do/login"
+driver.get(url)  # 前往這個網址
 
 # 輸入使用者 id
 user = driver.find_element_by_xpath(
@@ -1807,7 +1755,9 @@ from selenium import webdriver
 driver = webdriver.Chrome(
     "/Users/oxxo/Documents/oxxo/practice/python/chromedriver"
 )  # 設定 chromedriver 路徑
-driver.get("https://www.google.com.tw/imghp?hl=zh-TW&tab=wi&ogbl")  # 前往這個網址
+
+url = "https://www.google.com.tw/imghp?hl=zh-TW&tab=wi&ogbl"
+driver.get(url)  # 前往這個網址
 
 search = driver.find_element_by_xpath('//*[@id="sbtc"]/div/div[2]/input')
 search.send_keys("林志玲")
@@ -1887,7 +1837,8 @@ app.run()
 
 print("------------------------------------------------------------")  # 60個
 
-response = requests.post("http://127.0.0.1:5000/")  # 使用 post 方法
+url = "http://127.0.0.1:5000/"
+response = requests.post(url)  # 使用 post 方法
 print(response.text)  # 讀取並印出 text 屬性
 
 print("------------------------------------------------------------")  # 60個
@@ -2366,44 +2317,51 @@ print("------------------------------------------------------------")  # 60個
 
 from pytube import YouTube
 
-yt = YouTube("https://www.youtube.com/watch?v=R93ce4FZGbc")  # baby shark 的音樂
-print(yt.title)  # 影片標題
-print(yt.length)  # 影片長度 ( 秒 )
-print(yt.author)  # 影片作者
-print(yt.channel_url)  # 影片作者頻道網址
-print(yt.thumbnail_url)  # 影片縮圖網址
-print(yt.views)  # 影片觀看數
+url = "https://www.youtube.com/watch?v=R93ce4FZGbc"  # baby shark 的音樂
+yt = YouTube(url)
+
+print('影片標題 :', yt.title)
+print('影片長度 :', yt.length, '秒')
+print('影片作者 :', yt.author)
+print('影片作者頻道網址 :', yt.channel_url)
+print('影片縮圖網址 :', yt.thumbnail_url)
+print('影片觀看數 :', yt.views)
+print('取得所有語系 :', yt.captions)
 
 print("------------------------------------------------------------")  # 60個
-
+"""
 from pytube import YouTube
 
-yt = YouTube("https://www.youtube.com/watch?v=R93ce4FZGbc")
-print("download...")
+url = "https://www.youtube.com/watch?v=R93ce4FZGbc"
+yt = YouTube(url)
+print("download...1")
 yt.streams.filter().get_highest_resolution().download(filename="baby_shart.mp4")
 # 下載最高畫質影片，如果沒有設定 filename，則以原本影片的 title 作為檔名
 print("ok!")
 
-
 print("------------------------------------------------------------")  # 60個
 
 from pytube import YouTube
 
-yt = YouTube("https://www.youtube.com/watch?v=R93ce4FZGbc")
-print("download...")
+url = "https://www.youtube.com/watch?v=R93ce4FZGbc"
+yt = YouTube(url)
+print("download...2")
 yt.streams.filter().get_by_resolution("360p").download(filename="oxxostudio_360p.mp4")
 # 下載 480p 的影片畫質
 print("ok!")
-
+"""
 print("------------------------------------------------------------")  # 60個
 
+"""
 from pytube import YouTube
 
-yt = YouTube("https://www.youtube.com/watch?v=R93ce4FZGbc")
+url = "https://www.youtube.com/watch?v=R93ce4FZGbc"
+yt = YouTube(url)
 print(yt.streams.all())
-
+"""
 print("------------------------------------------------------------")  # 60個
 
+""" fail
 from pytube import YouTube
 
 
@@ -2413,33 +2371,34 @@ def onProgress(stream, chunk, remains):
     print(f"下載中… {percent:05.2f}", end="\r")  # 顯示進度，\r 表示不換行，在同一行更新
 
 
-print("download...")
-yt = YouTube(
-    "https://www.youtube.com/watch?v=R93ce4FZGbc", on_progress_callback=onProgress
-)
+print("download...3")
+url = "https://www.youtube.com/watch?v=R93ce4FZGbc"
+yt = YouTube(url, on_progress_callback=onProgress)
 yt.streams.filter().get_highest_resolution().download(filename="oxxostudio.mp4")
 # on_progress_callback 參數等於 onProgress 函式
 print()
 print("ok!")
-
+"""
 print("------------------------------------------------------------")  # 60個
 
+""" fail
 from pytube import YouTube
 
-yt = YouTube("https://www.youtube.com/watch?v=R93ce4FZGbc")
-print("download...")
+url = "https://www.youtube.com/watch?v=R93ce4FZGbc"
+yt = YouTube(url)
+print("download...4")
 yt.streams.filter().get_audio_only().download(filename="oxxostudio.mp3")
 # 儲存為 mp3
 print("ok!")
-
-
+"""
 print("------------------------------------------------------------")  # 60個
 
 from pytube import YouTube
 from bs4 import BeautifulSoup
 
-yt = YouTube("https://www.youtube.com/watch?v=R93ce4FZGbc")
-print(yt.captions)  # 取得所有語系
+url = "https://www.youtube.com/watch?v=R93ce4FZGbc"
+yt = YouTube(url)
+print('取得所有語系 :', yt.captions)
 caption = yt.captions.get_by_language_code("en")  # 取得英文語系
 xml = caption.xml_captions  # 將語系轉換成 xml
 # print(xml)
@@ -2487,40 +2446,37 @@ def xml2srt(text):
 
 
 # print(xml2srt(xml))
-with open("oxxostudio.srt", "w") as f1:
+with open("tmp_oxxostudio.srt", "w") as f1:
     f1.write(xml2srt(xml))  # 儲存為 srt
 
-print("ok!")
+print("下載字幕 ok!")
 
 print("------------------------------------------------------------")  # 60個
 
-from pytube import Playlist
+from pytube import Playlist, YouTube
 
-playlist = Playlist(
-    "https://www.youtube.com/watch?v=mOPRaLPh-YU&list=PL9ACDjBMkp9wViVmgpYweGkNqh62pHspF"
-)
-# 讀取影片清單
-print(playlist.video_urls)  # 印出清單結果
+url = "https://www.youtube.com/watch?v=mOPRaLPh-YU&list=PL9ACDjBMkp9wViVmgpYweGkNqh62pHspF"
+
+playlist = Playlist(url)  # 讀取影片清單
+
+#print(playlist.video_urls)  # 印出清單結果
+for _ in playlist.video_urls:
+    print(_)
+
 """
 ['https://www.youtube.com/watch?v=mOPRaLPh-YU',
  'https://www.youtube.com/watch?v=wARhTJH1fJI',
  'https://www.youtube.com/watch?v=WLjePGUCRqc']
 """
 
-
-print("------------------------------------------------------------")  # 60個
-
-from pytube import Playlist, YouTube
-
-playlist = Playlist(
-    "https://www.youtube.com/watch?v=mOPRaLPh-YU&list=PL9ACDjBMkp9wViVmgpYweGkNqh62pHspF"
-)
-print("download...")
+""" fail
+print("download...5")
 for i in playlist.video_urls:
     print(i)
     yt = YouTube(i)  # 讀取影片
     yt.streams.filter().get_highest_resolution().download()  # 下載為最高畫質影片
 print("ok!")
+"""
 
 print("------------------------------------------------------------")  # 60個
 
@@ -2825,6 +2781,72 @@ response.encoding = "utf8"
 print(response.text)
 
 
+print('簡易 requests.get(url)')
+
+print("#台灣水庫即時水情")
+url = "https://water.taiwanstat.com/"  # 台灣水庫即時水情
+response = requests.get(url)
+response.encoding = "utf-8"  # 因為該網頁編碼為 utf-8，加上 .encoding 避免亂碼
+print(response.text)  # 讀取並印出 text 屬性
+
+print("------------------------------------------------------------")  # 60個
+
+url = "https://invoice.etax.nat.gov.tw/index.html"
+response = requests.get(url)  # 取得網頁內容
+response.encoding = "utf-8"  # 因為該網頁編碼為 utf-8，加上 .encoding 避免亂碼
+print(response.text)
+'''
+print("------------------------------------------------------------")  # 60個
+
+url = "https://data.kcg.gov.tw/dataset/6f29f6f4-2549-4473-aa90-bf60d10895dc/resource/30dfc2cf-17b5-4a40-8bb7-c511ea166bd3/download/lightrailtraffic.json"
+response = requests.get(url)
+response.encoding = "utf-8"  # 因為該網頁編碼為 utf-8，加上 .encoding 避免亂碼
+
+print("response內的text")
+print(response.text)
+
+print("response轉成json格式")
+print(response.json())
+
+print("------------------------------------------------------------")  # 60個
+
+# https://mis.twse.com.tw/stock/fibest.jsp?stock=0050
+url = "https://mis.twse.com.tw/stock/api/getStockInfo.jsp?ex_ch=tse_0050.tw"
+response = requests.get(url)
+json_data = json.loads(response.text)
+
+print(json_data)
+
+print("------------------------------------------------------------")  # 60個
+
+print("拆解網頁資料")
+url = "https://today.line.me/tw/v2/article/oqay0ro"
+response = requests.get(url)
+
+# 取得文章的原始碼後，使用 split 字串拆分的方式，拆解出 articleId
+article_id = response.text.split("<script>")[1].split('id:"article:')[1].split(":")[0]
+print(article_id)
+
+print("------------------------------------------------------------")  # 60個
+
+""" many
+
+print('------------------------------------------------------------')	#60個
+
+import pprint
+
+url = 'http://tw.yahoo.com'
+response = requests.get(url)
+pprint.pprint(response.text)
+"""
+
+print("------------------------------------------------------------")  # 60個
 
 
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
 

@@ -73,25 +73,25 @@ def getkpoints(imag, input1):
 def process(image):
     gray1 = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 彩色轉灰階
     gray = cv2.equalizeHist(gray1)  # 直方圖均衡化處理, 只能處理灰階圖
-    #cv2.imshow("frame", gray)
+    # cv2.imshow("frame", gray)
     keypoints = getkpoints(gray, gray1)
-    #print(keypoints)
+    # print(keypoints)
     if keypoints is not None and len(keypoints) > 0:
         for x, y in keypoints:
             cv2.circle(image, (int(int(x) + 200), int(y)), 10, (0, 255, 255))
     return image
 
 
-#video_filename = "C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4"
-video_filename = 'D:/內視鏡影片/_ims影片2/180824-1025.mp4'
+# video_filename = "C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4"
+video_filename = "D:/內視鏡影片/_ims影片2/180824-1025.mp4"
 
 cap = cv2.VideoCapture(video_filename)
-#cap = cv2.VideoCapture(0)
+# cap = cv2.VideoCapture(0)
 
 while cap.isOpened():
     ret, frame = cap.read()
     frame = process(frame)
-    cv2.imshow('frame', frame)
+    cv2.imshow("frame", frame)
     k = cv2.waitKey(1)
     if k == ESC:
         break
@@ -101,17 +101,17 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-#boxPoints
+# boxPoints 帶有旋轉的矩形框座標
 
 
 def draw_boxpoints(points):
-    #print(points)  # 打印四個頂點
+    # print(points)  # 打印四個頂點
     for i in range(4):
         # 相鄰的點
         p1 = points[i, :]
         j = (i + 1) % 4
         p2 = points[j, :]
-        #print(i, points[i], points[j])
+        # print(i, points[i], points[j])
 
         # 畫出直線
         cv2.line(
@@ -121,11 +121,12 @@ def draw_boxpoints(points):
             red,
             7,
             lineType=cv2.LINE_AA,
-            )
-        
+        )
+
         # 畫出來, 另法, 用drawContours
         points = np.int0(points)  # 取整數
         cv2.drawContours(image, [points], 0, green, 3)
+
 
 # boxPoints返回四個點順序：右下→左下→左上→右上
 
@@ -138,26 +139,26 @@ contours, hierarchy = cv2.findContours(
 )
 rect = cv2.minAreaRect(contours[0])  # 得到最小外接矩形的（中心(x,y), (寬,高), 旋轉角度）
 print(type(rect))
-print('rect', rect)
-print('中心 :', rect[0])
-print('寬高 :', rect[1])
-print('旋轉角度 :', rect[2])
+print("rect", rect)
+print("中心 :", rect[0])
+print("寬高 :", rect[1])
+print("旋轉角度 :", rect[2])
 
 cx = rect[0][0]
 cy = rect[0][1]
 print(cx, cy)
-W = rect[1][0]*2
-H = rect[1][1]*2
+W = rect[1][0] * 2
+H = rect[1][1] * 2
 print(W, H)
 
 points = cv2.boxPoints(rect)  # 獲取最小外接矩形的4個頂點坐標
 print(points)  #
 
-#把矩形的四個頂點標出來
+# 把矩形的四個頂點標出來
 for point in points:
     cv2.circle(image, (int(point[0]), int(point[1])), 10, 255, -1)
 
-draw_boxpoints(points)# 畫出四個頂點連線
+draw_boxpoints(points)  # 畫出四個頂點連線
 
 cv2.imshow("image", image)
 cv2.waitKey(0)
@@ -178,7 +179,7 @@ print("返回值rect:\n", rect)
 points = cv2.boxPoints(rect)
 print("\n轉換后的points：\n", points)
 
-draw_boxpoints(points)# 畫出四個頂點連線
+draw_boxpoints(points)  # 畫出四個頂點連線
 
 cv2.imshow("result", image)
 cv2.waitKey(0)
@@ -192,15 +193,15 @@ W, H = 400, 400
 image = np.zeros((H, W, 3), np.uint8)
 
 cx, cy = 200, 200
-w, h = W//2 , H//4
+w, h = W // 2, H // 4
 
 rotating_angle = 0  # 順時針   # 旋轉矩形
 points = cv2.boxPoints(((cx, cy), (w, h), rotating_angle))
-draw_boxpoints(points)# 畫出四個頂點連線
+draw_boxpoints(points)  # 畫出四個頂點連線
 
 rotating_angle = 20  # 順時針   # 旋轉矩形
 points = cv2.boxPoints(((cx, cy), (w, h), rotating_angle))
-draw_boxpoints(points)# 畫出四個頂點連線
+draw_boxpoints(points)  # 畫出四個頂點連線
 
 cv2.imshow("image", image)
 cv2.waitKey(0)
@@ -272,50 +273,53 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
+
 def draw_points(points, color):
     N = len(points)
     print("N =", N)
     for point in points:
         cv2.circle(image, (int(point[0]), int(point[1])), 6, color, -1)
 
+
 def draw_lines(points, color):
     N = len(points)
     print("N =", N)
     # 畫出來, 另法, 用drawContours
     points = np.int0(points)  # 取整數
-    cv2.drawContours(image, [points], 0, color, 3) #多點頭尾連線
+    cv2.drawContours(image, [points], 0, color, 3)  # 多點頭尾連線
 
-print('包覆三角形 與 包覆矩形')
+
+print("包覆三角形 與 包覆矩形")
 print("幾何形狀的檢測和擬合 minEnclosingTriangle")
 print("用一個三角形把所有點包起來")
 
 W, H = 400, 400
-image = np.zeros((H, W, 3), np.uint8)# 黑色畫板
+image = np.zeros((H, W, 3), np.uint8)  # 黑色畫板
 
 points = np.array([[[1, 1]], [[5, 10]], [[5, 1]], [[1, 10]], [[2, 5]]], np.float32)
-points = np.array ([[1,1],[5,10],[5,1],[1,10],[2,5]] ,np.float32)
+points = np.array([[1, 1], [5, 10], [5, 1], [1, 10], [2, 5]], np.float32)
 
-points = np.array ([[0,0],[100,0],[0,100]] ,np.float32)
-points = np.array ([[0,0],[100,0],[100,100],[0,100]] ,np.float32)
+points = np.array([[0, 0], [100, 0], [0, 100]], np.float32)
+points = np.array([[0, 0], [100, 0], [100, 100], [0, 100]], np.float32)
 
 MIN = 100
 MAX = W - 100
 N = 30  # 隨機生成 N 個坐標點，每一行存儲一個坐標
 # 隨機生成 橫縱坐標均在 MIN 至 MAX 的坐標點
 points = np.random.randint(MIN, MAX, (N, 2), np.int32)
-#print(points)
+# print(points)
 draw_points(points, red)
 
-print('包覆三角形')
+print("包覆三角形")
 # 最小外包直立矩形
 area, triangle = cv2.minEnclosingTriangle(points)
-print('面積 :', area)
-print('包覆所有點的三角形之頂點座標 :', triangle)
+print("面積 :", area)
+print("包覆所有點的三角形之頂點座標 :", triangle)
 print(type(triangle))
 print(triangle.dtype)
 draw_lines(triangle, green)
 
-print('包覆矩形')
+print("包覆矩形")
 rectangle = cv2.boundingRect(points)
 print(rectangle)
 x_st = rectangle[0]
@@ -333,6 +337,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("幾何形狀的檢測和擬合 arcLength")
 
+
 def draw_points(points, color):
     N = len(points)
     print("N =", N)
@@ -341,11 +346,11 @@ def draw_points(points, color):
 
 
 W, H = 400, 400
-image = np.zeros((H, W, 3), np.uint8)# 黑色畫板
+image = np.zeros((H, W, 3), np.uint8)  # 黑色畫板
 
 # 點集
 # points = np.array([[0,0],[100,0],[0,100]] ,np.float32)
-points = np.array([[0,0],[100,0],[100,100],[0,100]] ,np.float32)
+points = np.array([[0, 0], [100, 0], [100, 100], [0, 100]], np.float32)
 print(points.shape)
 
 draw_points(points, red)
@@ -358,9 +363,9 @@ length2 = cv2.arcLength(points, True)  # 首尾相連
 area = cv2.contourArea(points)
 
 # 打印周長和面積
-print('首尾不相連 線長 :', length1)
-print('首尾相連 線長 :', length2)
-print('面積 :', area)
+print("首尾不相連 線長 :", length1)
+print("首尾相連 線長 :", length2)
+print("面積 :", area)
 
 cv2.imshow("image", image)
 cv2.waitKey(0)
@@ -371,7 +376,7 @@ print("------------------------------------------------------------")  # 60個
 print("幾何形狀的檢測和擬合 convexityDefects")
 
 W, H = 400, 400
-image = np.zeros((H, W, 3), np.uint8)# 黑色畫板
+image = np.zeros((H, W, 3), np.uint8)  # 黑色畫板
 
 # 輪廓
 contour = np.array(
@@ -399,7 +404,7 @@ print("------------------------------------------------------------")  # 60個
 print("幾何形狀的檢測和擬合 pointPolygonTest")
 
 W, H = 400, 400
-image = np.zeros((H, W, 3), np.uint8)# 黑色畫板
+image = np.zeros((H, W, 3), np.uint8)  # 黑色畫板
 
 # 點集
 contour = np.array([[0, 0], [50, 30], [100, 100], [100, 0]], np.float32)
@@ -427,4 +432,3 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
-

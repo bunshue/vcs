@@ -22,7 +22,7 @@ from tkinter.filedialog import askopenfilename
 from tkinter.filedialog import asksaveasfilename
 
 import pygame
-
+'''
 count = 0
 flag_pause_mode = False
 flag_new_mp3_file = False
@@ -309,12 +309,28 @@ def button22Click():
 
 def button23Click():
     print('你按了button23 測試3')
-    print('快進 10 秒')
+
+    #ok
+    #pygame.mixer.music.set_pos(10)#設定播放位置(秒)
+
+    #ok
+    pygame.mixer.music.fadeout(5000)  #再播放指定時間后就淡出并停止播放音樂
+    #單位：毫秒
+    #此函數將阻塞，直到音樂淡出
+
+    #ok
+    playtime = pygame.mixer.music.get_pos()#獲得音樂播放時間(msec), 不是播放位置
+    print('目前播放時間 :', playtime)
+    
+
     """
-    current_pos = pygame.mixer.music.get_pos()
-    #print('目前播放位置 :', )
+    
+    print('快進 10 秒')
+    
     current_pos += 100
-    pygame.mixer.music.set_pos(current_pos)
+    pygame.mixer.music.set_pos(30)
+    current_pos = pygame.mixer.music.get_pos()
+    print('目前播放位置 :', current_pos)
     """
 
 def button24Click():
@@ -604,4 +620,55 @@ with open(filename, "r", encoding="utf-8") as f:
     print(lines)
 
 """
+
+'''
+
+
+
+import pygame,time
+
+pygame.init()
+screen = pygame.display.set_mode((640, 480))
+pygame.display.set_caption("my mp3 player")
+
+filename = "C:/_git/vcs/_1.data/______test_files1/_mp3/02 渡り鳥仁義(1984.07.01-候鳥仁義).mp3"
+
+pygame.mixer.music.load(filename)  #載入音樂
+#音樂可以是ogg、mp3、wav等格式
+#載入的音樂不會全部放到內容中，而是以流的形式播放的，即在播放的時候才會一點點從文件中讀取
+
+pygame.mixer.music.play()  #播放載入的音樂
+#該函數立即返回，音樂播放在后臺進行。play方法還可以使用兩個參數
+#如果音樂已經播放，它就會重新啟動
+#play(loops=0, start=0.0) -> None
+#參數1:控制音樂播放的次數。播放(5)將使音樂播放一次，然后重復5次，總共是6次。如果循環是-1，那么音樂就會無限重復
+#起始位置的參數控制著歌曲開始播放的地方。起始位置取決于音樂演奏的格式。MP3和OGG以時間為單位(以秒為單位)。MOD音樂是模式的序號。如果不能設置起始位置，通過一個startpos將會拋出一個NotImplementedError
+
+
+time.sleep(5)
+
+pygame.mixer.music.load(filename)  #如果一個音樂流已經播放，它就會被停止。這并不是音樂的開始
+pygame.mixer.music.play()  #播放載入的音樂
+
+
+pygame.mixer.music.set_endevent(pygame.KEYDOWN)   #當播放停止時，音樂會發送一個事件
+#參數：事件
+#每次音樂結束時，這個事件都會被排隊，而不僅僅是第一次[只要不在播放狀態，會一直發送]。為了防止事件被排隊，請調用這個方法，沒有參數
+
+b=pygame.mixer.music.get_endevent()   #當播放停止時，獲取set_endevent發送的事件--int
+#pygame.KEYDOWN=2
+#如果沒有endevent，函數將返回pygame.NOEVENT
+
+print('xxxxxxx',b)
+
+while True:
+    event=pygame.event.wait()
+    if event.type == pygame.QUIT:
+        print('aaaaa')
+        exit()
+        print('bbbbb')
+    #print('aaaaaa',event)
+    pygame.display.update()
+
+
 

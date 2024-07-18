@@ -427,19 +427,20 @@ result = img.copy()
 H, W = result.shape[:2]
 print(H, W)
 
-for y in range(H-5):
-    for x in range(W-5):
+for y in range(H - 5):
+    for x in range(W - 5):
         random_num = np.random.randint(0, 5)
-        result[y, x] = img[y+random_num, x+random_num]
+        result[y, x] = img[y + random_num, x + random_num]
 
-cv2.imshow('src', img)
-cv2.imshow('result', result)
+cv2.imshow("src", img)
+cv2.imshow("result", result)
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
 
 print("------------------------------------------------------------")  # 60個
+
 
 def salt_pepper_noise(image, fraction, salt_vs_pepper):
     img = np.copy(image)
@@ -493,6 +494,7 @@ def salt(image, number):
         randC = random.randint(0, cols - 1)
         saltImage[randR][randC] = 0
     return saltImage
+
 
 filename = "C:/_git/vcs/_4.python/_data/tiger.jpg"
 

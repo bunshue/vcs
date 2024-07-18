@@ -5056,55 +5056,57 @@ def scharr(I, _boundary="symm"):
 
 filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
 # 檔案 => cv2影像
-image = cv2.imread(filename,cv2.IMREAD_GRAYSCALE)
+image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
 
-#求卷積
-#i_conv_sch_x = scharr(image,1,0,_boundary='symm') 改掉
-#i_conv_sch_y = scharr(image,0,1,_boundary='symm') 改掉
-i_conv_sch_x, i_conv_sch_y=scharr(image)
+# 求卷積
+# i_conv_sch_x = scharr(image,1,0,_boundary='symm') 改掉
+# i_conv_sch_y = scharr(image,0,1,_boundary='symm') 改掉
+i_conv_sch_x, i_conv_sch_y = scharr(image)
 
-#取絕對值,分別得到水平方向和垂直方向的邊緣強度
+# 取絕對值,分別得到水平方向和垂直方向的邊緣強度
 abs_i_conv_sch_x = np.abs(i_conv_sch_x)
 abs_i_conv_sch_y = np.abs(i_conv_sch_y)
 
-#水平方向和垂直方向的邊緣強度的灰度級顯示
+# 水平方向和垂直方向的邊緣強度的灰度級顯示
 edge_x = abs_i_conv_sch_x.copy()
 edge_y = abs_i_conv_sch_y.copy()
-edge_x[edge_x>255]=255
-edge_y[edge_y>255]=255
+edge_x[edge_x > 255] = 255
+edge_y[edge_y > 255] = 255
 edge_x = edge_x.astype(np.uint8)
 edge_y = edge_y.astype(np.uint8)
-cv2.imshow("edge_x",edge_x)
-cv2.imshow("edge_y",edge_y)
+cv2.imshow("edge_x", edge_x)
+cv2.imshow("edge_y", edge_y)
 
-#根據水平方向和垂直方向的邊緣強度,求最終的邊緣強度
-#有多種方式，這里使用平方根形式
-edge = np.sqrt(np.power(abs_i_conv_sch_x,2)+np.power(abs_i_conv_sch_y,2))
-#最終的邊緣強度的灰度級顯示
-edge[edge>255]=255
+# 根據水平方向和垂直方向的邊緣強度,求最終的邊緣強度
+# 有多種方式，這里使用平方根形式
+edge = np.sqrt(np.power(abs_i_conv_sch_x, 2) + np.power(abs_i_conv_sch_y, 2))
+# 最終的邊緣強度的灰度級顯示
+edge[edge > 255] = 255
 edge = np.round(edge)
 edge = edge.astype(np.uint8)
-cv2.imshow('edge',edge)
-#經過閾值處理的邊緣顯示
-cv2.namedWindow("thresh_edge",1)
+cv2.imshow("edge", edge)
+# 經過閾值處理的邊緣顯示
+cv2.namedWindow("thresh_edge", 1)
 MAX_THRESH = 255
 thresh = 255
 
-#回調函數，閾值處理
+
+# 回調函數，閾值處理
 def callback_thresh(_thresh):
     threshEdge = edge.copy()
     threshEdge[threshEdge < _thresh] = 0
     threshEdge[threshEdge >= _thresh] = 255
-    cv2.imshow("thresh_edge",threshEdge)
+    cv2.imshow("thresh_edge", threshEdge)
+
 
 callback_thresh(thresh)
-cv2.createTrackbar("thresh","thresh_edge",thresh,MAX_THRESH,callback_thresh)
+cv2.createTrackbar("thresh", "thresh_edge", thresh, MAX_THRESH, callback_thresh)
 
-#模擬鉛筆素描
+# 模擬鉛筆素描
 pencilSketch = edge.copy()
 pencilSketch = 255 - pencilSketch
 pencilSketch[pencilSketch < 100] = 100
-cv2.imshow("pencilSketch",pencilSketch)
+cv2.imshow("pencilSketch", pencilSketch)
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()
@@ -5127,8 +5129,9 @@ filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
 
 from scipy import signal
 
+
 def krisch(image, _boundary="fill", _fillvalue=0):
-    #第一步:8個krisch邊緣卷積算子分別和圖像矩陣進行卷積,然後分別取絕對值得到邊緣強度
+    # 第一步:8個krisch邊緣卷積算子分別和圖像矩陣進行卷積,然後分別取絕對值得到邊緣強度
     # 存儲8個方向的邊緣強度
     list_edge = []
     # 圖像矩陣和k1進行卷積,然後取絕對值（即:得到邊緣強度）
@@ -5179,11 +5182,12 @@ def krisch(image, _boundary="fill", _fillvalue=0):
         image, k8, mode="same", boundary=_boundary, fillvalue=_fillvalue
     )
     list_edge.append(np.abs(image_k8))
-    #第二步：對上述8個方向的邊緣強度,對應位置取最大值，作為圖像最後的邊緣強度
+    # 第二步：對上述8個方向的邊緣強度,對應位置取最大值，作為圖像最後的邊緣強度
     edge = list_edge[0]
     for i in range(len(list_edge)):
         edge = edge * (edge >= list_edge[i]) + list_edge[i] * (edge < list_edge[i])
     return edge
+
 
 # 檔案 => cv2影像
 image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
@@ -5223,4 +5227,3 @@ cv2.waitKey(0)
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
-
