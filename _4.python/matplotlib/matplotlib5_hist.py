@@ -54,7 +54,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-#          編號               圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
+
 plt.figure(
     num="hist 集合 1",
     figsize=(12, 8),
@@ -137,9 +137,8 @@ plt.title("np.random.exponential")
 
 plt.show()
 
-
 print("------------------------------------------------------------")  # 60個
-#          編號               圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
+
 plt.figure(
     num="hist 集合 2",
     figsize=(12, 8),
@@ -270,7 +269,7 @@ plt.title("unequal bins")
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
-#          編號               圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
+
 plt.figure(
     num="hist 集合 3",
     figsize=(12, 8),
@@ -671,3 +670,45 @@ cb = plt.colorbar(label='xxxxx')
 plt.show()
 
 """
+
+
+
+"""
+# 測試 北大
+
+"""
+
+plt.figure(
+    num="hist 集合 1",
+    figsize=(12, 8),
+    dpi=100,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
+
+N = 1000
+mu, sigma = 620, 37.4
+x = np.linspace(mu - 200, mu + 200, N)  # 從N1到N2, 分成N個, 包含頭尾
+y = (1 / (sigma * np.sqrt(2 * np.pi))) * np.exp(-((x - mu) ** 2) / (2 * sigma**2))
+plt.plot(x, y, "--", color="g", linewidth=2)
+
+xx = [580, 600, 680, 620]
+
+X = []
+Y = []
+for x in xx:
+    y = (1 / (sigma * np.sqrt(2 * np.pi))) * np.exp(-((x - mu) ** 2) / (2 * sigma**2))
+    X.append(x)
+    Y.append(y)
+
+plt.scatter(X, Y)
+
+plt.scatter(X, Y, s=200, c="r")
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+
