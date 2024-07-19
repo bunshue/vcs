@@ -1590,7 +1590,7 @@ print(news_content)
 print("------------------------------------------------------------")  # 60個
 print("BeautifulSoup 測試 11")
 
-print("抓取網頁 bs分析 1")
+print("抓取網頁 分析 1")
 url = "http://aiworker2000.pixnet.net/blog/post/16062839"
 html = requests.get(url).text
 soup = BeautifulSoup(html, "lxml")
@@ -1599,7 +1599,7 @@ print(dir(soup))
 
 print("------------------------------------------------------------")  # 60個
 
-print("抓取網頁 bs分析 2")
+print("抓取網頁 分析 2")
 url = "http://aiworker2000.pixnet.net/blog/post/16062839"
 html = requests.get(url).text
 soup = BeautifulSoup(html, "lxml")
@@ -1609,7 +1609,7 @@ for image in images:
 
 print("------------------------------------------------------------")  # 60個
 
-print("抓取網頁 bs分析 3")
+print("抓取網頁 分析 3")
 """
 from os.path import basename
 
@@ -1634,7 +1634,7 @@ print("------------------------------------------------------------")  # 60個
 
 """ fail
 
-print('抓取網頁 bs分析 8')
+print('抓取網頁 分析 8')
 
 #教育部全球資訊網-即時新聞
 url = "https://www.edu.tw/News.aspx?n=9E7AC85F1954DDA8&sms=169B8E91BB75571F"
@@ -1650,7 +1650,7 @@ for row in soup.find_all("tr"):
 """
 print("------------------------------------------------------------")  # 60個
 
-print("抓取網頁 bs分析 9")
+print("抓取網頁 分析 9")
 
 # 教育部全球資訊網-即時新聞
 url = "https://www.edu.tw/News.aspx?n=9E7AC85F1954DDA8&sms=169B8E91BB75571F"
@@ -1671,7 +1671,7 @@ print("Done!")
 
 print("------------------------------------------------------------")  # 60個
 
-print("抓取網頁 bs分析 10")
+print("抓取網頁 分析 10")
 
 import dominate
 from dominate.tags import *
@@ -1709,7 +1709,7 @@ print("Done!")
 print('------------------------------------------------------------')	#60個
 
 """
-print("抓取網頁 bs分析 11")
+print("抓取網頁 分析 11")
 url = "https://tw.appledaily.com/new/realtime/"
 html = requests.get(url).text
 soup = BeautifulSoup(html, "lxml")
@@ -1722,7 +1722,7 @@ for item in items:
 
 print("------------------------------------------------------------")  # 60個
 
-print("抓取網頁 bs分析 12")
+print("抓取網頁 分析 12")
 
 url = "https://tw.appledaily.com/new/realtime/"
 html = requests.get(url).text
@@ -1743,7 +1743,7 @@ for item in items:
 print("------------------------------------------------------------")  # 60個
 
 """
-print('抓取網頁 bs分析 13')
+print('抓取網頁 分析 13')
 
 url = "https://www.ptt.cc/bbs/gossiping/index.html"
 
@@ -1825,7 +1825,7 @@ print("BeautifulSoup 測試 14")
 """
 req=requests.get('http://www.powenko.com/wordpress/')
 print(req.text.encode('utf-8'))
-soup=BeautifulSoup(req.text.encode('utf-8'), "html.parser")
+soup = BeautifulSoup(req.text.encode('utf-8'), "html.parser")
 print(soup.title)
 print(soup.title.string)
 print(soup.p)
@@ -1868,7 +1868,7 @@ print("------------------------------------------------------------")  # 60個
 """ NG
 
 req=requests.get("http://www.powenko.com/wordpress")
-soup=BeautifulSoup(req.text.encode('utf-8'), "html.parser")
+soup = BeautifulSoup(req.text.encode('utf-8'), "html.parser")
 largefeaturepowenA2=soup.select('.largefeaturepowenA2')
 largefeature0=largefeaturepowenA2[0]
 for area in largefeature0.select('.area'):	
@@ -2274,11 +2274,11 @@ for i in range(1, N + 1):
     print(htmlname)
     html = urlopen(htmlname)
 
-    # 以BeautifulSoup的"lxml"模式解析網頁，設定為bsObj物件
-    bsObj = BeautifulSoup(html, "lxml")
+    # 以BeautifulSoup的"lxml"模式解析網頁，設定為soup物件
+    soup = BeautifulSoup(html, "lxml")
     count = 0
 
-    for single_tr in bsObj.find("table").find("table").findAll("tr"):  # 抓取網頁資料
+    for single_tr in soup.find("table").find("table").findAll("tr"):  # 抓取網頁資料
         if count == 0:
             cell = single_tr.findAll("th")  # 處理表頭
             F0 = cell[0].contents
@@ -2328,21 +2328,21 @@ Python簡單易學又有趣
 </body>
 </html>
 """
-bs = BeautifulSoup(content, "html.parser")
+soup = BeautifulSoup(content, "html.parser")
 print("網頁標題屬性：")  # 網頁標題屬性
-print(bs.title)  # 網頁標題屬性
+print(soup.title)  # 網頁標題屬性
 print("--------------------------------------------------------")
 print("網頁html語法區塊：")
-print(bs.find("html"))  # <html>標籤
+print(soup.find("html"))  # <html>標籤
 print("--------------------------------------------------------")
 print("網頁表頭範圍：")
-print(bs.find("head"))  # <head>標籤
+print(soup.find("head"))  # <head>標籤
 print("--------------------------------------------------------")
 print("網頁身體範圍：")
-print(bs.find("body"))  # <body>標籤
+print(soup.find("body"))  # <body>標籤
 print("--------------------------------------------------------")
 print("第1個超連結：")
-print(bs.find("a", {"href": "https://www.python.org/"}))
+print(soup.find("a", {"href": "https://www.python.org/"}))
 print("--------------------------------------------------------")
 
 print("------------------------------------------------------------")  # 60個
@@ -2353,9 +2353,9 @@ c=%A8%E4%A5%A6%B9q%A4l&rr=0.84235400%201556957344"
 # 取得網頁原始程式碼
 res = requests.get(addr).text
 # 以html.parser解析程式解析程式碼
-bs = BeautifulSoup(res, "html.parser")
+soup = BeautifulSoup(res, "html.parser")
 # 以<tr>並配合屬性取得表格中每列內容
-rows = bs.find_all("tr", {"height": "30"})
+rows = soup.find_all("tr", {"height": "30"})
 
 # 印出要查詢資料各欄位名稱
 print("代號 名稱  時間  成交  買進   賣出  漲跌   張數   昨收   開盤  最高  最低")
@@ -2389,9 +2389,9 @@ print("------------------------------------------------------------")  # 60個
 # 指定url變數為「Dcard熱門文章」網頁的網址
 url = "https://www.dcard.tw/f"
 response = requests.get(url)
-bs = BeautifulSoup(response.text, "lxml")  # 取得物件
+soup = BeautifulSoup(response.text, "lxml")  # 取得物件
 # 取得所有文章程式碼
-listItems = bs.find_all("article", "sc-1v1d5rx-0 lmtfq")
+listItems = soup.find_all("article", "sc-1v1d5rx-0 lmtfq")
 
 for item in listItems:
     time = item.find_all("span", "sc-6oxm01-2 hiTIMq")[2]  # 發文時間
@@ -2715,34 +2715,34 @@ page = """
 </html>
 """
 
-bs = BeautifulSoup(page, "lxml")
+soup = BeautifulSoup(page, "lxml")
 
-print(bs.title)
-print(bs.a)
+print(soup.title)
+print(soup.a)
 
-print(bs.a.text)
-print(bs.a.get("href"))
-print(bs.a["href"])
+print(soup.a.text)
+print(soup.a.get("href"))
+print(soup.a["href"])
 
-print(bs.find("h4"))
-print(bs.find("h4", {"class": "pk"}))
-print(bs.find("h4").text)
+print(soup.find("h4"))
+print(soup.find("h4", {"class": "pk"}))
+print(soup.find("h4").text)
 
-print(bs.find_all("h4"))
-print(bs.find_all("h4", {"class": "pk"}))
+print(soup.find_all("h4"))
+print(soup.find_all("h4", {"class": "pk"}))
 
-print(bs.find_all(["title", "p"]))
-print(bs.find_all(["title", "p"])[1].text)  # ← 傳回第 1 個 (由 0 算起) 符合標籤中的文字
+print(soup.find_all(["title", "p"]))
+print(soup.find_all(["title", "p"])[1].text)  # ← 傳回第 1 個 (由 0 算起) 符合標籤中的文字
 
-print("h4:", bs.select("h4"))  # ←查詢所有 h4 標籤
-print("#book:", bs.select("#books"))  # ←查詢所有 id 為 'books' 的標籤
-print(".pk:", bs.select(".pk"))  # ←查詢所有 class 為 'pk' 的標籤
-print("h4.bk", bs.select("h4.bk"))  # ←查詢所有 class 為 'bk' 的 h4 標籤
+print("h4:", soup.select("h4"))  # ←查詢所有 h4 標籤
+print("#book:", soup.select("#books"))  # ←查詢所有 id 為 'books' 的標籤
+print(".pk:", soup.select(".pk"))  # ←查詢所有 class 為 'pk' 的標籤
+print("h4.bk", soup.select("h4.bk"))  # ←查詢所有 class 為 'bk' 的 h4 標籤
 
-print(bs.select("#main button .pk"))
+print(soup.select("#main button .pk"))
 
-print(bs.select("#main button .pk")[1].text)
-print(bs.select("#footer a")[0]["href"])
+print(soup.select("#main button .pk")[1].text)
+print(soup.select("#footer a")[0]["href"])
 
 print("------------------------------------------------------------")  # 60個
 
@@ -2885,18 +2885,18 @@ print("------------------------------------------------------------")  # 60個
 # www.books.com.tw
 print("------------------------------------------------------------")  # 60個
 
-
 url = "https://www.books.com.tw/"  # 博客來
 response = requests.get(url)
-bs = BeautifulSoup(response.text, "lxml")  # 傳回bs物件可解析網頁
-print(bs.find("title"))  # 傳回網頁含<title>~</title>
-print(bs.find("title").text)  # 傳回網頁<title>標籤內的資料
-print(bs.find("h1"))  # 傳回第一個符合<h1>資料
+soup = BeautifulSoup(response.text, "lxml")  # 傳回soup物件可解析網頁
+print(soup.find("title"))  # 傳回網頁含<title>~</title>
+print(soup.find("title").text)  # 傳回網頁<title>標籤內的資料
+print(soup.find("h1"))  # 傳回第一個符合<h1>資料
 # 若傳回None表示該網頁沒有<h1>標籤
+
 print("------------------------------------------------------------")  # 60個
 
 """ ok, many
-print('抓取網頁 bs分析 4')
+print('抓取網頁 分析 4')
 #博客來-中文書>暢銷榜
 url = "https://www.books.com.tw/web/sys_saletopb/books/19/?loc=P_0002_020"
 html = requests.get(url).text
@@ -2909,7 +2909,7 @@ for image in images:
 print("------------------------------------------------------------")  # 60個
 
 """ ok, many
-print('抓取網頁 bs分析 5')
+print('抓取網頁 分析 5')
 #博客來-中文書>暢銷榜
 url = "https://www.books.com.tw/web/sys_saletopb/books/19/?loc=P_0002_020"
 html = requests.get(url).text
@@ -2922,7 +2922,7 @@ for link in links:
 print("------------------------------------------------------------")  # 60個
 
 """ ok, many
-print('抓取網頁 bs分析 6')
+print('抓取網頁 分析 6')
 #博客來-中文書>暢銷榜
 url = "https://www.books.com.tw/web/sys_saletopb/books/19/?loc=P_0002_020"
 html = requests.get(url).text
@@ -2934,7 +2934,7 @@ for i, title in enumerate(titles):
 print("------------------------------------------------------------")  # 60個
 
 """ fail in sugar
-print('抓取網頁 bs分析 7 fail')
+print('抓取網頁 分析 7 fail')
 #博客來-中文書>暢銷榜
 url = "https://www.books.com.tw/web/sys_saletopb/books/19/?loc=P_0002_020"
 html = requests.get(url).text
@@ -2954,9 +2954,9 @@ url = "https://www.books.com.tw/web/sys_cebbotm/cebook/1003/?loc=P_0001_2_003"
 
 response = requests.get(url)  # 使用requests的get()方法傳回可擷取網頁資訊response物件
 response.encoding = "utf-8"  # 設定編碼模式避免亂碼
-# 使用BeautifulSoup()函式取得解析網頁的BeautifulSoup物件bs
-bs = BeautifulSoup(response.text, "lxml")
-listAll = bs.find_all("div", class_="item")  # 取得<div class="item">標籤的內容
+# 使用BeautifulSoup()函式取得解析網頁的BeautifulSoup物件soup
+soup = BeautifulSoup(response.text, "lxml")
+listAll = soup.find_all("div", class_="item")  # 取得<div class="item">標籤的內容
 for book in listAll:  # 將資料利用迴圈依序解析
     listClass = book.get("class")  # 傳回目前標籤的類別資訊
     if len(listClass) == 2:  # ['item', 'clearfix']總數為2，即目前有兩個類別
@@ -2971,10 +2971,10 @@ url = "https://www.books.com.tw/web/sys_cebbotm/cebook/1003/?loc=P_0001_2_003"
 
 response = requests.get(url)  # 使用requests的get()方法傳回可擷取網頁資訊response物件
 response.encoding = "utf-8"  # 設定編碼模式避免亂碼
-# 使用BeautifulSoup()函式取得解析網頁的BeautifulSoup物件bs
-bs = BeautifulSoup(response.text, "lxml")
-listName = bs.select("div.item>div.msg>h4>a")  # 根據路徑擷取<a>標籤，並指定給listName串列
-listPrice = bs.select("li.set2")  # 取得套用set2類別的<li>標籤，並指定給listPrice串列
+# 使用BeautifulSoup()函式取得解析網頁的BeautifulSoup物件soup
+soup = BeautifulSoup(response.text, "lxml")
+listName = soup.select("div.item>div.msg>h4>a")  # 根據路徑擷取<a>標籤，並指定給listName串列
+listPrice = soup.select("li.set2")  # 取得套用set2類別的<li>標籤，並指定給listPrice串列
 for i in range(0, len(listName)):  # 使用迴圈逐一印出書名與書價
     print("%s  %s" % (listName[i].text, listPrice[i].text))
 
@@ -2987,12 +2987,12 @@ url = "https://www.books.com.tw/web/sys_cebbotm/cebook/1003/?loc=P_0001_2_003"
 
 # 建立取得網頁資訊的Response物件，物件名稱為response
 response = requests.get(url)
-# 建立解析網頁的BeautifulSoup物件，物件名稱為bs
-bs = BeautifulSoup(response.text, "lxml")
+# 建立解析網頁的BeautifulSoup物件，物件名稱為soup
+soup = BeautifulSoup(response.text, "lxml")
 # 分別取的商品名稱以及價格標籤，並指定給對應串列
-listName = bs.select("div.item>div.msg>h4>a")
-listPress = bs.select("li.info>span>a")
-listPrice = bs.select("li.set2")
+listName = soup.select("div.item>div.msg>h4>a")
+listPress = soup.select("li.info>span>a")
+listPrice = soup.select("li.set2")
 
 print("------------")
 print(len(listName))
@@ -3041,9 +3041,9 @@ url = "https://www.books.com.tw/web/sys_cebbotm/cebook/1003/?loc=P_0001_2_003"
 response = requests.get(url)  # 建立取得網頁資訊的Response物件，物件名稱為response
 response.encoding = "utf-8"  # 設定編碼模式避免亂碼
 
-# 使用BeautifulSoup()函式取得解析網頁的BeautifulSoup物件bs
-bs = BeautifulSoup(response.text, "lxml")
-Img = bs.select("div.item>a>img")  # 擷取有圖片網址的<img>標籤
+# 使用BeautifulSoup()函式取得解析網頁的BeautifulSoup物件soup
+soup = BeautifulSoup(response.text, "lxml")
+Img = soup.select("div.item>a>img")  # 擷取有圖片網址的<img>標籤
 
 print("共找到有圖片網址的連結 :", len(Img), "個")
 
@@ -3081,7 +3081,7 @@ print("------------------------------------------------------------")  # 60個
 url = "http://www.taiwanlottery.com.tw/"
 html = requests.get(url)
 
-soup = BeautifulSoup(html.text, "lxml")  # 建立BeautifulSoup物件
+soup = BeautifulSoup(html.text, "lxml")
 
 dataTag = soup.select(".contents_box02")  # 尋找class是contents_box02
 
@@ -3147,7 +3147,7 @@ print("網頁下載中 ...")
 html.raise_for_status()  # 如果發生錯誤的話, 會丟出 exception
 print("網頁下載完成")
 
-soup = BeautifulSoup(html.text, "lxml")  # 建立BeautifulSoup物件
+soup = BeautifulSoup(html.text, "lxml")
 
 dataTag = soup.select(".contents_box02")  # 尋找class是contents_box02
 print("串列長度", len(dataTag))

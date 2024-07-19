@@ -1,17 +1,26 @@
-import matplotlib.pyplot as plt
+
 from matplotlib.animation import FuncAnimation
+
+print("------------------------------------------------------------")  # 60個
+
+# 共同
+import os
+import sys
+import math
+import random
 import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
 
-font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
-#設定中文字型及負號正確顯示
-#設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
-#設定負號
-plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
+font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+# 設定中文字型及負號正確顯示
+# 設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
+# 設定負號
+plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+plt.rcParams["font.size"] = 12  # 設定字型大小
 
-print('------------------------------------------------------------')	#60個
-
-from matplotlib.animation import FuncAnimation  
+print("------------------------------------------------------------")  # 60個
 
 # 建立最初化的 line 資料 (x, y)  
 def init():  
@@ -41,8 +50,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-from matplotlib.animation import FuncAnimation  
-
 # 建立最初化的 line 資料 (x, y)  
 def init():  
     line.set_data([], [])  
@@ -70,8 +77,6 @@ ani.save('tmp_sin2.gif', writer='pillow')       # 儲存 tmp_sin2.gif 檔案
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
-
-from matplotlib.animation import FuncAnimation
 
 # 建立最初化點的位置 
 def init():
@@ -105,8 +110,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-from matplotlib.animation import FuncAnimation
-
 # 建立最初化點的位置 
 def init():
     dot.set_data(x[0], y[0])        # 更新紅色點的資料
@@ -139,8 +142,6 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-from matplotlib.animation import FuncAnimation
-
 def f(x, y):                                # 左邊曲面函數
     return (4 - x**2 - y**2)
 def animate(i):
@@ -158,13 +159,45 @@ ani = FuncAnimation(fig,func=animate,frames=np.arange(0,360,3),
                     interval=60)
 plt.show()
 
-
-      
+   
 
 print("------------------------------------------------------------")  # 60個
 
+from matplotlib import pyplot as plt
+from matplotlib import animation
+
+fig, ax = plt.subplots()
+
+x = np.arange(0, 2 * np.pi, 0.01)
+(line,) = ax.plot(x, np.sin(x))
 
 
+def animate(i):
+    line.set_ydata(np.sin(x + i / 10.0))  # update the data
+    return (line,)
+
+
+# Init only required for blitting to give a clean slate.
+def init():
+    line.set_ydata(np.sin(x))
+    return (line,)
+
+
+# call the animator.  blit=True means only re-draw the parts that have changed.
+# blit=True dose not work on Mac, set blit=False
+# interval= update frequency
+ani = animation.FuncAnimation(
+    fig=fig, func=animate, frames=100, init_func=init, interval=20, blit=False
+)
+
+# save the animation as an mp4.  This requires ffmpeg or mencoder to be
+# installed.  The extra_args ensure that the x264 codec is used, so that
+# the video can be embedded in html5.  You may need to adjust this for
+# your system: for more information, see
+# http://matplotlib.sourceforge.net/api/animation_api.html
+# anim.save('basic_animation.mp4', fps=30, extra_args=['-vcodec', 'libx264'])
+
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")

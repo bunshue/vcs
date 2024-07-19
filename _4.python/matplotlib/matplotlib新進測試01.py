@@ -128,6 +128,101 @@ plt.legend(loc="best")  # 建立圖例
 # 第四張圖
 plt.subplot(234)
 
+y, x = np.mgrid[-3:3:300j, -6:6:600j]
+z = np.sin(x**2 + 2*y**2 + x*y)
+plt.imshow(z, cmap="Blues", vmin=-2, vmax=2)
+
+#plt.colorbar(shrink=0.92)
+
+plt.xticks(())
+plt.yticks(())
+
+
+# 第五張圖
+plt.subplot(235)
+
+# 畫  (x^2 + y^2 -1)^3 - x^2*y^3 = 0
+#%fig=matplotlib繪制心形隱函數曲線
+x, y = np.mgrid[-2:2:500j, -2:2:500j]
+z = (x**2 + y**2 - 1)**3 - x**2 * y**3
+plt.contourf(x, y, z, levels=[-1, 0], colors=["red"])
+plt.gca().set_aspect("equal");
+
+
+# 第六張圖
+plt.subplot(236)
+
+n = 1024  # data size
+X = np.random.normal(0, 1, n)
+Y = np.random.normal(0, 1, n)
+T = np.arctan2(Y, X)  # for color later on
+
+plt.scatter(X, Y, s=75, c=T, alpha=0.5)
+
+plt.xlim(-1.5, 1.5)
+plt.xticks(())  # ignore xticks
+
+plt.ylim(-1.5, 1.5)
+plt.yticks(())  # ignore yticks
+
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+
+plt.figure(
+    num="新進測試 02",
+    figsize=(12, 8),
+    dpi=100,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
+
+# 第一張圖
+plt.subplot(231)
+
+# image data
+a = np.array(
+    [
+        0.313660827978,
+        0.365348418405,
+        0.423733120134,
+        0.365348418405,
+        0.439599930621,
+        0.525083754405,
+        0.423733120134,
+        0.525083754405,
+        0.651536351379,
+    ]
+).reshape(3, 3)
+
+"""
+for the value of "interpolation", check this:
+http://matplotlib.org/examples/images_contours_and_fields/interpolation_methods.html
+for the value of "origin"= ['upper', 'lower'], check this:
+http://matplotlib.org/examples/pylab_examples/image_origin.html
+"""
+plt.imshow(a, interpolation="nearest", cmap="bone", origin="lower")
+plt.colorbar(shrink=0.92)
+
+plt.xticks(())
+plt.yticks(())
+
+
+# 第二張圖
+plt.subplot(232)
+
+
+# 第三張圖
+plt.subplot(233)
+
+
+# 第四張圖
+plt.subplot(234)
+
 
 # 第五張圖
 plt.subplot(235)
@@ -136,10 +231,11 @@ plt.subplot(235)
 # 第六張圖
 plt.subplot(236)
 
+
 plt.show()
 
-'''
 print("------------------------------------------------------------")  # 60個
+
 
 """
 python用mpl_finance中的candlestick_ohlc畫分時圖
@@ -351,7 +447,7 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 
 # 建立一個新的 figure
-# fig1 = plt.figure()
+# fig1 = plt.figure(figsize=(12, 8))
 
 # 增新一個axes（座標軸），以供繪圖和放置資訊:
 # axs = fig1.add_subplot(1,1,1) # 1x1的座標軸
@@ -764,9 +860,6 @@ xx.spines["bottom"].set_position(("data", 0))
 xx.spines["left"].set_position(("data", 0))
 
 plt.show()
-'''
-print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -841,15 +934,12 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-
-
-print("------------------------------------------------------------")  # 60個
-
 x = np.linspace(-3, 3, 50)
 y1 = 2*x + 1
 y2 = x**2
 
-plt.figure()
+plt.figure(figsize=(12, 8))
+
 plt.plot(x, y2)
 # plot the second curve in this figure with certain parameters
 plt.plot(x, y1, color='red', linewidth=1.0, linestyle='--')
@@ -876,7 +966,8 @@ x = np.linspace(-3, 3, 50)
 y1 = 2*x + 1
 y2 = x**2
 
-plt.figure()
+plt.figure(figsize=(12, 8))
+
 plt.plot(x, y2)
 # plot the second curve in this figure with certain parameters
 plt.plot(x, y1, color='red', linewidth=1.0, linestyle='--')
@@ -919,7 +1010,8 @@ x = np.linspace(-3, 3, 50)
 y1 = 2*x + 1
 y2 = x**2
 
-plt.figure()
+plt.figure(figsize=(12, 8))
+
 # set x limits
 plt.xlim((-1, 2))
 plt.ylim((-2, 3))
@@ -964,6 +1056,7 @@ x = np.linspace(-3, 3, 50)
 y = 2*x + 1
 
 plt.figure(num=1, figsize=(8, 5),)
+
 plt.plot(x, y,)
 
 ax = plt.gca()
@@ -1000,9 +1093,11 @@ print("------------------------------------------------------------")  # 60個
 x = np.linspace(-3, 3, 50)
 y = 0.1*x
 
-plt.figure()
+plt.figure(figsize=(12, 8))
+
 plt.plot(x, y, linewidth=10)
 plt.ylim(-2, 2)
+
 ax = plt.gca()
 ax.spines['right'].set_color('none')
 ax.spines['top'].set_color('none')
@@ -1015,25 +1110,6 @@ ax.spines['left'].set_position(('data', 0))
 for label in ax.get_xticklabels() + ax.get_yticklabels():
     label.set_fontsize(12)
     label.set_bbox(dict(facecolor='white', edgecolor='None', alpha=0.7))
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-# 10 - scatter
-
-n = 1024  # data size
-X = np.random.normal(0, 1, n)
-Y = np.random.normal(0, 1, n)
-T = np.arctan2(Y, X)  # for color later on
-
-plt.scatter(X, Y, s=75, c=T, alpha=0.5)
-
-plt.xlim(-1.5, 1.5)
-plt.xticks(())  # ignore xticks
-
-plt.ylim(-1.5, 1.5)
-plt.yticks(())  # ignore yticks
-
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
@@ -1096,96 +1172,12 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-# 13 - image
-
-# image data
-a = np.array(
-    [
-        0.313660827978,
-        0.365348418405,
-        0.423733120134,
-        0.365348418405,
-        0.439599930621,
-        0.525083754405,
-        0.423733120134,
-        0.525083754405,
-        0.651536351379,
-    ]
-).reshape(3, 3)
-
-"""
-for the value of "interpolation", check this:
-http://matplotlib.org/examples/images_contours_and_fields/interpolation_methods.html
-for the value of "origin"= ['upper', 'lower'], check this:
-http://matplotlib.org/examples/pylab_examples/image_origin.html
-"""
-plt.imshow(a, interpolation="nearest", cmap="bone", origin="lower")
-plt.colorbar(shrink=0.92)
-
-plt.xticks(())
-plt.yticks(())
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-# 14 - 3d
-
-from mpl_toolkits.mplot3d import Axes3D
-
-fig = plt.figure()
-ax = Axes3D(fig)
-# X, Y value
-X = np.arange(-4, 4, 0.25)
-Y = np.arange(-4, 4, 0.25)
-X, Y = np.meshgrid(X, Y)
-R = np.sqrt(X**2 + Y**2)
-# height value
-Z = np.sin(R)
-
-ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap=plt.get_cmap("rainbow"))
-"""
-============= ================================================
-        Argument      Description
-        ============= ================================================
-        *X*, *Y*, *Z* Data values as 2D arrays
-        *rstride*     Array row stride (step size), defaults to 10
-        *cstride*     Array column stride (step size), defaults to 10
-        *color*       Color of the surface patches
-        *cmap*        A colormap for the surface patches.
-        *facecolors*  Face colors for the individual patches
-        *norm*        An instance of Normalize to map values to colors
-        *vmin*        Minimum value to map
-        *vmax*        Maximum value to map
-        *shade*       Whether to shade the facecolors
-        ============= ================================================
-"""
-
-# I think this is different from plt12_contours
-ax.contourf(X, Y, Z, zdir="z", offset=-2, cmap=plt.get_cmap("rainbow"))
-"""
-==========  ================================================
-        Argument    Description
-        ==========  ================================================
-        *X*, *Y*,   Data values as numpy.arrays
-        *Z*
-        *zdir*      The direction to use: x, y or z (default)
-        *offset*    If specified plot a projection of the filled contour
-                    on this position in plane normal to zdir
-        ==========  ================================================
-"""
-
-ax.set_zlim(-2, 2)
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
 # 15 - subplot
 
 # example 1:
 ###############################
-plt.figure(figsize=(6, 4))
+plt.figure(figsize=(12, 8))
+
 # plt.subplot(n_rows, n_cols, plot_num)
 plt.subplot(2, 2, 1)
 plt.plot([0, 1], [0, 1])
@@ -1203,7 +1195,8 @@ plt.tight_layout()
 
 # example 2:
 ###############################
-plt.figure(figsize=(6, 4))
+plt.figure(figsize=(12, 8))
+
 # plt.subplot(n_rows, n_cols, plot_num)
 plt.subplot(2, 1, 1)
 # figure splits into 2 rows, 1 col, plot to the 1st sub-fig
@@ -1233,7 +1226,8 @@ import matplotlib.gridspec as gridspec
 
 # method 1: subplot2grid
 ##########################
-plt.figure()
+plt.figure(figsize=(12, 8))
+
 ax1 = plt.subplot2grid((3, 3), (0, 0), colspan=3)  # stands for axes
 ax1.plot([1, 2], [1, 2])
 ax1.set_title("ax1_title")
@@ -1247,7 +1241,8 @@ ax5 = plt.subplot2grid((3, 3), (2, 1))
 
 # method 2: gridspec
 #########################
-plt.figure()
+plt.figure(figsize=(12, 8))
+
 gs = gridspec.GridSpec(3, 3)
 # use index from 0
 ax6 = plt.subplot(gs[0, :])
@@ -1268,7 +1263,8 @@ print("------------------------------------------------------------")  # 60個
 
 # 17 - plot in plot
 
-fig = plt.figure()
+fig = plt.figure(figsize=(12, 8))
+
 x = [1, 2, 3, 4, 5, 6, 7]
 y = [1, 3, 4, 2, 5, 8, 6]
 
@@ -1319,89 +1315,21 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-# 19 - animation
-
-from matplotlib import pyplot as plt
-from matplotlib import animation
-
-fig, ax = plt.subplots()
-
-x = np.arange(0, 2 * np.pi, 0.01)
-(line,) = ax.plot(x, np.sin(x))
-
-
-def animate(i):
-    line.set_ydata(np.sin(x + i / 10.0))  # update the data
-    return (line,)
-
-
-# Init only required for blitting to give a clean slate.
-def init():
-    line.set_ydata(np.sin(x))
-    return (line,)
-
-
-# call the animator.  blit=True means only re-draw the parts that have changed.
-# blit=True dose not work on Mac, set blit=False
-# interval= update frequency
-ani = animation.FuncAnimation(
-    fig=fig, func=animate, frames=100, init_func=init, interval=20, blit=False
-)
-
-# save the animation as an mp4.  This requires ffmpeg or mencoder to be
-# installed.  The extra_args ensure that the x264 codec is used, so that
-# the video can be embedded in html5.  You may need to adjust this for
-# your system: for more information, see
-# http://matplotlib.sourceforge.net/api/animation_api.html
-# anim.save('basic_animation.mp4', fps=30, extra_args=['-vcodec', 'libx264'])
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-"""
-y, x = np.mgrid[-3:3:300j, -6:6:600j]
-z = np.sin(x**2 + 2*y**2 + x*y)
-plt.imshow(z, cmap="Blues", vmin=-2, vmax=2)
-
-#plt.colorbar(shrink=0.92)
-
-plt.xticks(())
-plt.yticks(())
-
-plt.show()
-"""
-print("------------------------------------------------------------")  # 60個
-
-"""
-# 畫  (x^2 + y^2 -1)^3 - x^2*y^3 = 0
-
-#%fig=matplotlib繪制心形隱函數曲線
-x, y = np.mgrid[-2:2:500j, -2:2:500j]
-z = (x**2 + y**2 - 1)**3 - x**2 * y**3
-plt.contourf(x, y, z, levels=[-1, 0], colors=["red"])
-plt.gca().set_aspect("equal");
-
-plt.show()
-"""
-print("------------------------------------------------------------")  # 60個
-
-# pip install mayavi
+""" 久
 # 繪制心形隱函數曲面
+# pip install mayavi
 
 from mayavi import mlab
 
 x, y, z = np.mgrid[-3:3:100j, -1:1:100j, -3:3:100j]
 f = (x**2 + 9.0/4*y**2 + z**2 - 1)**3 - x**2 * z**3 - 9.0/80 * y**2 * z**3
 contour = mlab.contour3d(x, y, z, f, contours=[0], color=(1, 0, 0))
+"""
 
 print("------------------------------------------------------------")  # 60個
 
 
-
-
 print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------------------------------------")  # 60個

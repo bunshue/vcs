@@ -270,9 +270,9 @@ ax.plot_surface(X, Y, Z, rstride=5, cstride=5, cmap=plt.get_cmap("rainbow"))
 ax.contourf(X, Y, Z, zdir="z", offset=-2, cmap=plt.get_cmap("rainbow"))
 # plt.savefig("mat-3D-mv1.png")
 
-
 ax.set_title("XXXXXXX6")
 
+plt.tight_layout()
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
@@ -387,110 +387,14 @@ z = np.random.randn(1000)
 ax.scatter3D(x, y, z)
 ax.set_title("繪製 3D 散佈圖 – scatter3D()")
 
-
+plt.tight_layout()
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-fig = plt.figure(
-    num="3D繪圖 集合 3",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
-
-# XXXXXXX1
-ax = fig.add_subplot(231, projection="3d")  # 第一張圖
-
-
-ax.set_title("XXXXXXX1")
-
-# XXXXXXX2
-ax = fig.add_subplot(232, projection="3d")  # 第二張圖
-
-
-ax.set_title("XXXXXXX2")
-
-# XXXXXXX3
-ax = fig.add_subplot(233, projection="3d")  # 第三張圖
-
-
-ax.set_title("XXXXXXX3")
-
-# XXXXXXX4
-ax = fig.add_subplot(234, projection="3d")  # 第四張圖
-
-
-ax.set_title("XXXXXXX4")
-
-
-# XXXXXXX5
-ax = fig.add_subplot(235, projection="3d")  # 第五張圖
-
-
-ax.set_title("XXXXXXX5")
-
-# XXXXXXX6
-ax = fig.add_subplot(236, projection="3d")  # 第六張圖
-
-
-ax.set_title("XXXXXXX6")
-
-plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-fig = plt.figure(
-    num="3D繪圖 集合 4",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
-
-# XXXXXXX1
-ax = fig.add_subplot(231, projection="3d")  # 第一張圖
-
-
-ax.set_title("XXXXXXX1")
-
-# XXXXXXX2
-ax = fig.add_subplot(232, projection="3d")  # 第二張圖
-
-
-ax.set_title("XXXXXXX2")
-
-# XXXXXXX3
-ax = fig.add_subplot(233, projection="3d")  # 第三張圖
-
-
-ax.set_title("XXXXXXX3")
-
-# XXXXXXX4
-ax = fig.add_subplot(234, projection="3d")  # 第四張圖
-
-
-ax.set_title("XXXXXXX4")
-
-
-# XXXXXXX5
-ax = fig.add_subplot(235, projection="3d")  # 第五張圖
-
-
-ax.set_title("XXXXXXX5")
-
-# XXXXXXX6
-ax = fig.add_subplot(236, projection="3d")  # 第六張圖
-
-
-ax.set_title("XXXXXXX6")
-
-plt.show()
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")

@@ -29,173 +29,6 @@ from mpl_toolkits.mplot3d import axes3d
 print("------------------------------------------------------------")  # 60個
 
 fig = plt.figure(
-    num="3D繪圖 集合 1",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
-
-ax = fig.add_subplot(231, projection='3d')
-
-X, Y, Z = axes3d.get_test_data(0.05)  # 取得測試資料
-
-cset = ax.contour(X, Y, Z, 16, extend3d=True)
-ax.set_title('contour')
-
-ax.clabel(cset, fontsize=9, inline=1)
-
-print("------------------------------------------------------------")  # 60個
-
-ax = fig.add_subplot(232, projection='3d')
-
-X, Y, Z = axes3d.get_test_data(0.05)  # 取得測試資料
-
-ax.plot_surface(X, Y, Z, cmap="bwr")
-#ax.plot_surface(X, Y, Z, cmap="seismic")
-
-ax.set_title('plot_surface 3D曲線表面')
-
-print("------------------------------------------------------------")  # 60個
-
-def f(x, y):                                # 曲面函數
-    return (np.power(x,2) + np.power(y, 2))
-
-ax = fig.add_subplot(233, projection='3d')
-
-X = np.arange(-3, 3, 0.1)                   # 曲面 X 區間
-Y = np.arange(-3, 3, 0.1)                   # 曲面 Y 區間
-X, Y = np.meshgrid(X, Y)                    # 建立取樣數據
-
-ax.plot_surface(X, Y, f(X,Y), cmap='hsv')
-ax.set_title('plot_surface 3D曲線表面')
-
-print("------------------------------------------------------------")  # 60個
-
-def f(x, y):                                # 曲面函數
-    r = np.sqrt(np.power(x,2) + np.power(y, 2))
-    return (np.sin(r))
-
-                 
-ax = fig.add_subplot(234, projection='3d')
-
-X = np.arange(-3, 3, 0.1)                   # 曲面 X 區間
-Y = np.arange(-3, 3, 0.1)                   # 曲面 Y 區間
-X, Y = np.meshgrid(X, Y)                    # 建立取樣數據
-
-ax.plot_surface(X, Y, f(X,Y), cmap='hsv')
-ax.set_title('plot_surface 3D曲線表面')
-
-print("------------------------------------------------------------")  # 60個
-
-def f(x, y):                                # 曲面函數
-    return np.sin(np.sqrt(x ** 2 + y ** 2))
-
-ax = fig.add_subplot(235, projection='3d')
-
-X = np.arange(-3, 3, 0.1)                   # 曲面 X 區間
-Y = np.arange(-3, 3, 0.1)                   # 曲面 Y 區間
-X, Y = np.meshgrid(X, Y)                    # 建立取樣數據
-
-ax.plot_surface(X, Y, f(X,Y), cmap='seismic')
-ax.set_title('plot_surface 3D曲線表面')
-
-print("------------------------------------------------------------")  # 60個
-
-def f(x, y):                                # 曲面函數
-    return (4 - x**2 - y**2)
-
-                 
-ax = fig.add_subplot(236, projection='3d')
-
-X = np.arange(-3, 3, 0.1)                   # 曲面 X 區間
-Y = np.arange(-3, 3, 0.1)                   # 曲面 Y 區間
-X, Y = np.meshgrid(X, Y)                    # 建立取樣數據
-
-ax.plot_surface(X, Y, f(X,Y), cmap='seismic')
-ax.set_title('plot_surface 3D曲線表面')
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-fig = plt.figure(
-    num="3D繪圖 集合 2",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
-
-ax = fig.add_subplot(231, projection='3d')
-
-X, Y, Z = axes3d.get_test_data(0.05)  # 取得測試資料
-
-ax.plot_wireframe(X, Y, Z, color='g')
-ax.set_title('plot_wireframe 3D線框圖')
-
-print("------------------------------------------------------------")  # 60個
-
-ax = fig.add_subplot(232, projection='3d')
-
-X, Y, Z = axes3d.get_test_data(0.05)  # 取得測試資料
-
-ax.plot_wireframe(X, Y, Z, cstride=5, rstride=5, color='g')
-#ax.plot_wireframe(X, Y, Z, cstride=10, rstride=10)
-
-ax.set_title('plot_wireframe 3D線框圖')
-
-print("------------------------------------------------------------")  # 60個
-
-def f(x, y):
-    return np.sin(np.sqrt(x ** 2 + y ** 2))
-
-ax = fig.add_subplot(233, projection='3d')
-# 定義資料資料
-x = np.linspace(0, 5, 20)
-y = np.linspace(0, 5, 20)  
-X, Y = np.meshgrid(x, y)
-Z = f(X, Y)
-
-ax.plot_wireframe(X, Y, Z, color = 'm')
-ax.set_title('plot_wireframe 3D線框圖')
-
-print("------------------------------------------------------------")  # 60個
-
-ax = fig.add_subplot(234, projection='3d')
-
-X, Y, Z = axes3d.get_test_data(0.05)  # 取得測試資料
-
-ax.contour(X, Y, Z, cmap='jet')
-ax.set_title('contour')
-
-print("------------------------------------------------------------")  # 60個
-
-ax = fig.add_subplot(235, projection='3d')
-
-X, Y, Z = axes3d.get_test_data(0.05)  # 取得測試資料
-
-ax.contour3D(X, Y, Z, cmap='jet')
-ax.set_title('contour3D')
-
-print("------------------------------------------------------------")  # 60個
-
-ax = fig.add_subplot(236, projection='3d')
-
-X, Y, Z = axes3d.get_test_data(0.05)  # 取得測試資料
-
-ax.contourf(X, Y, Z, cmap='jet')
-ax.set_title('contourf')
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-fig = plt.figure(
     num="3D繪圖 集合 3",
     figsize=(12, 8),
     dpi=100,
@@ -207,10 +40,6 @@ fig = plt.figure(
 
 ax = fig.add_subplot(231, projection='3d')
 
-X, Y, Z = axes3d.get_test_data(0.05)  # 取得測試資料
-
-ax.contourf3D(X, Y, Z, cmap='jet')
-ax.set_title('contourf3D')
 
 print("------------------------------------------------------------")  # 60個
 
@@ -264,19 +93,8 @@ ax.set_title('plot_wireframe 3D線框圖 + contourf')
 
 print("------------------------------------------------------------")  # 60個
 
-def f(x, y):                                # 曲面函數
-    return np.sin(np.sqrt(x ** 2 + y ** 2))
-
 ax = fig.add_subplot(234, projection='3d')
 
-X = np.arange(-3, 3, 0.1)                   # 曲面 X 區間
-Y = np.arange(-3, 3, 0.1)                   # 曲面 Y 區間
-X, Y = np.meshgrid(X, Y)                    # 建立取樣數據
-
-ax.plot_surface(X, Y, f(X,Y), cmap='seismic')
-ax.set_title('plot_surface 3D曲線表面')
-
-ax.view_init(60,45)                         # 設定 3D 視角
 
 print("------------------------------------------------------------")  # 60個
 
@@ -324,6 +142,7 @@ barcolors = colors.ravel()
 ax.bar3d(x, y, z, dx, dy, dz, color=barcolors, alpha=0.5)
 ax.set_title('bar3d')
 
+plt.tight_layout()
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
@@ -385,19 +204,20 @@ ax = fig.add_subplot(233, projection='3d')
 #建立一個figure
 #创建3D轴对象
 
-X = np.arange(-2, 2, 0.1)
-Y = np.arange(-2, 2, 0.1)
-#计算3维曲面分格线坐标
-X,Y = np.meshgrid(X, Y)
-
 #用于计算X/Y对应的Z值
 def f(x,y):
     return (1 - y** 5 + x ** 5) * np.exp(-x ** 2 - y ** 2)
 #plot_surface函数可绘制对应的曲面
 
-#ax.plot_surface(X, Y, f(X,Y), rstride = 1, cstride = 1)
+X = np.arange(-2, 2, 0.1)
+Y = np.arange(-2, 2, 0.1)
+#计算3维曲面分格线坐标
+X, Y = np.meshgrid(X, Y)
+Z = f(X, Y)
+
+#ax.plot_surface(X, Y, Z, rstride = 1, cstride = 1)
 #修改曲面顏色, 使用cmap属性可指定曲面颜色
-ax.plot_surface(X, Y, f(X, Y), rstride = 1, cstride = 1, cmap = plt.cm.hot)
+ax.plot_surface(X, Y, Z, rstride = 1, cstride = 1, cmap = plt.cm.hot)
 
 print('------------------------------------------------------------')	#60個
 
@@ -478,6 +298,7 @@ ax.zaxis.set_major_formatter('{x:.02f}')
 
 fig.colorbar(surf, shrink = 0.5, aspect = 5)    #colorbar
 
+plt.tight_layout()
 plt.show()
 
 print('------------------------------------------------------------')	#60個
@@ -650,6 +471,7 @@ ax.contourf(X,Y,Z,zdir='z',offset=-2) # 把等高線向z軸投射
 ax.set_zlim(-2,2) # 設置z軸範圍
 fig.colorbar(surf, shrink=0.5, aspect=5)
 
+plt.tight_layout()
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
@@ -685,6 +507,7 @@ ax.set_zlim(0, 1)
 # on the plane y=0
 ax.view_init(elev=20.0, azim=-35)
 
+plt.tight_layout()
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
@@ -713,3 +536,7 @@ ax.set_zlabel('z')
 ax.set_xlabel("X")
 ax.set_ylabel("Y")
 ax.set_zlabel("Z")
+
+
+
+

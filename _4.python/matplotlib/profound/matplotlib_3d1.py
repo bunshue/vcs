@@ -40,155 +40,6 @@ from matplotlib.cm import viridis as colormap
 print("------------------------------------------------------------")  # 60個
 
 fig = plt.figure(
-    num="3D繪圖 集合 1",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
-
-print("------------------------------------------------------------")  # 60個
-
-# 此 figure 共用資料
-x = np.arange(-5, 5, 0.1)
-y = np.arange(-5, 5, 0.1)
-X, Y = np.meshgrid(x, y)
-Z = np.add(np.power(X, 2), np.power(Y, 2))  # Z = X^2 + Y^2
-
-print("------------------------------------------------------------")  # 60個
-
-ax = fig.add_subplot(231, projection="3d")  # 第一張圖
-
-
-surf = ax.plot_wireframe(X, Y, Z)
-ax.set_title("線框圖")
-
-print("------------------------------------------------------------")  # 60個
-
-ax = fig.add_subplot(232, projection="3d")  # 第二張圖
-
-surf = ax.plot_surface(X, Y, Z, cmap=cm.hsv)
-# surf = ax.plot_surface(X, Y, Z, cmap=cm.gist_rainbow)
-# fig.colorbar(surf, shrink=0.5, aspect=5)
-ax.set_title("曲面圖")
-
-print("------------------------------------------------------------")  # 60個
-
-ax = fig.add_subplot(233, projection="3d")  # 第三張圖
-
-ax.plot_wireframe(X, Y, Z, alpha=0.1)
-ax.contour(X, Y, Z, cmap=cm.Accent, linewidths=2)
-ax.set_title("等高線")
-
-print("------------------------------------------------------------")  # 60個
-
-ax = fig.add_subplot(234, projection="3d")  # 第四張圖
-
-surf = ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap=cm.coolwarm)
-
-print("------------------------------------------------------------")  # 60個
-
-ax = fig.add_subplot(235, projection="3d")  # 第五張圖
-
-surf = ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap=cm.coolwarm)
-
-ax.set_title("plot_surface")
-
-print("------------------------------------------------------------")  # 60個
-
-ax = fig.add_subplot(236, projection="3d")  # 第六張圖
-
-x = np.arange(-10, 11, 1)  # -10 .... 10
-y = np.arange(-10, 11, 1)  # -10 .... 10
-X, Y = np.meshgrid(x, y)
-Z = np.add(np.power(X, 2), np.power(Y, 2))
-
-surf = ax.plot_surface(X, Y, Z, cmap=cm.gist_rainbow)
-fig.colorbar(surf, shrink=0.5, aspect=5)
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-fig = plt.figure(
-    num="3D繪圖 集合 2",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
-
-print("------------------------------------------------------------")  # 60個
-
-ax = fig.add_subplot(231, projection="3d")  # 第一張圖
-
-x = y = np.linspace(-3, 3, 300)
-X, Y = np.meshgrid(x, y)
-
-Z = np.sin(np.sqrt(X**2 + Y**2))
-
-ax.plot_surface(X, Y, Z)
-
-ax.set_title("曲面 surface")
-
-print("------------------------------------------------------------")  # 60個
-
-ax = fig.add_subplot(232, projection="3d")  # 第二張圖
-
-plt.contour(X, Y, Z)
-ax.set_title("曲面 contour")
-
-print("------------------------------------------------------------")  # 60個
-
-ax = fig.add_subplot(233, projection="3d")  # 第三張圖
-
-plt.contourf(X, Y, Z)
-ax.set_title("曲面 contourf")
-
-print("------------------------------------------------------------")  # 60個
-
-ax = fig.add_subplot(234, projection="3d")  # 第四張圖
-
-t = np.linspace(-2 * np.pi, 2 * np.pi)
-x, y = np.meshgrid(t, t)
-z = np.sin(np.sqrt(x**2 + y**2))
-ax.plot_surface(x, y, z)  # 畫出三軸資料所構成的曲面
-plt.tight_layout()
-
-ax.set_title("plot_surface")
-
-print("------------------------------------------------------------")  # 60個
-
-ax = fig.add_subplot(235, projection="3d")  # 第五張圖
-
-t = np.linspace(-5, 5, num=50)
-x, y = np.meshgrid(t, t)
-z = x * y
-
-ax.plot_surface(x, y, z)
-
-ax.set_title("繪製曲面 plot_surface")
-
-print("------------------------------------------------------------")  # 60個
-
-ax = fig.add_subplot(236, projection="3d")  # 第六張圖
-
-t = np.linspace(-5, 5)
-x, y = np.meshgrid(t, t)
-z = x * y
-
-ax.plot_surface(x, y, z, cmap="viridis")
-ax.set_title("給曲面套上顏色")
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-fig = plt.figure(
     num="3D繪圖 集合 3",
     figsize=(12, 8),
     dpi=100,
@@ -201,6 +52,7 @@ fig = plt.figure(
 print("------------------------------------------------------------")  # 60個
 
 ax = fig.add_subplot(231, projection="3d")  # 第一張圖
+
 x = np.linspace(-10, 10, 1000)
 y = np.linspace(-10, 10, 1000)
 z = np.add(x, y)
@@ -249,6 +101,8 @@ print("------------------------------------------------------------")  # 60個
 
 ax = fig.add_subplot(236, projection="3d")  # 第六張圖
 
+
+plt.tight_layout()
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
@@ -383,10 +237,11 @@ ax.quiver(x, y, z, u, v, w, length=0.1, normalize=True)
 
 ax.set_title("3D 向量場")
 
+
+plt.tight_layout()
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")

@@ -1,4 +1,5 @@
 # 等高線圖 Contour Chart 集合
+# 輪廓圖
 
 """
 將資料繪製成等高線圖 ( Contour Chart )
@@ -17,19 +18,26 @@ vmin, vmax 	等高線顏色的最小值與最大值。
 linewidths 	等高線的粗細。
 """
 
-font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 
+print("------------------------------------------------------------")  # 60個
+
+# 共同
+import os
 import sys
-import matplotlib.pyplot as plt
-import numpy as np
 import math
+import random
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
 
+font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
 # 設定中文字型檔
 plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
 # 設定負號
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
-
+plt.rcParams["font.size"] = 12  # 設定字型大小
+'''
 print("------------------------------------------------------------")  # 60個
 """
 #下方的程式碼，執行後會先使用 x 和 y 畫出一個二維的直角座標系統，
@@ -65,6 +73,7 @@ print('數量', ndarray2d.size)
 ndarray2d = np.array(z)
 
 import seaborn as sns #海生, 自動把圖畫得比較好看
+
 sns.heatmap(ndarray2d, cmap = 'Reds')
 #sns.heatmap(ndarray2d, cmap="coolwarm")
 #sns.heatmap(ndarray2d, annot = True)
@@ -236,6 +245,140 @@ plt.contourf(X, Y, Z)
 
 plt.show()
 
+'''
+print("------------------------------------------------------------")  # 60個
+
+x = range(5)
+y = range(5)
+X, Y = np.meshgrid(x, y)
+Z = [[0,0,0,0,0],
+     [0,1,1,1,0],
+     [0,1,2,2,0],
+     [0,1,1,1,0],
+     [0,0,0,0,0]]
+fig = plt.figure(figsize=(10,4.5))
+fig.add_subplot(121)
+plt.contour(X, Y, Z)
+plt.title('使用contour函數',fontsize=16,color='b')
+
+fig.add_subplot(122)
+plt.contourf(X, Y, Z)
+plt.title('使用contourf函數',fontsize=16,color='b')
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+x = range(5)
+y = range(5)
+X, Y = np.meshgrid(x, y)
+Z = [[0,0,0,0,0],
+     [0,1,1,1,0],
+     [0,1,2,2,0],
+     [0,1,1,1,0],
+     [0,0,0,0,0]]
+fig = plt.figure(figsize=(10,4.5))
+fig.add_subplot(121)
+plt.contourf(X, Y, Z, cmap='PuRd')
+plt.title('contourf函數, cmap=PuRd',fontsize=16,color='b')
+
+fig.add_subplot(122)
+plt.contourf(X, Y, Z, cmap='YlOrBr')
+plt.title('contourf函數, cmap=YlOrBr',fontsize=16,color='b')
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+def f(x, y):
+    return np.sin(x)**5 + np.cos(5 + y) * np.cos(x)
+
+x = np.linspace(0, 5, 30)
+y = np.linspace(0, 5, 20)
+X, Y = np.meshgrid(x, y)
+Z = f(X, Y)
+fig = plt.figure(figsize=(10,4.5))
+fig.add_subplot(121)
+plt.contour(X, Y, Z)
+plt.title('contour函數',fontsize=16,color='b')
+
+fig.add_subplot(122)
+plt.contourf(X, Y, Z, cmap='Oranges')
+plt.title('contourf函數, cmap=Oranges',fontsize=16,color='b')
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+def f(x, y):
+    return (x**2)/10 + (y**2)/4
+
+x = np.linspace(-10, 10, 100)
+y = np.linspace(-10, 10, 100)
+X, Y = np.meshgrid(x, y)
+Z = f(X, Y)
+fig = plt.figure(figsize=(10,4.5))
+fig.add_subplot(121)
+plt.contour(X, Y, Z)
+plt.title('contour() 橢圓輪廓平面',fontsize=16,color='b')
+
+fig.add_subplot(122)
+plt.contourf(X, Y, Z, cmap='GnBu')
+plt.title('contourf() 填充橢圓輪廓圓平面',fontsize=16,color='b')
+plt.colorbar()                  # 色彩條
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+def f(x, y):
+    return -(x**2 + y**2)
+
+x = np.linspace(-10, 10, 100)
+y = np.linspace(-10, 10, 100)
+X, Y = np.meshgrid(x, y)
+Z = f(X, Y)
+plt.contourf(X, Y, Z)               # 填充輪廓圖
+plt.colorbar()                      # 色彩條
+oval = plt.contour(X, Y, Z)         # 輪廓圖
+plt.clabel(oval,colors='b')         # 增加高度標記
+plt.title('有高度標記的輪廓圖',fontsize=16,color='b')
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+def f(x, y):
+    return (1.2-x**2+y**5)*np.exp(-x**2-y**2)
+
+x = np.linspace(-2.5, 2.5, 100)
+y = np.linspace(-2.5, 2.5, 100)
+X, Y = np.meshgrid(x, y)
+Z = f(X, Y)
+plt.contourf(X,Y,Z,cmap='Greens')       # 填充輪廓圖
+plt.colorbar()                          # 色彩條
+oval = plt.contour(X,Y,Z,colors='b')    # 輪廓圖
+plt.clabel(oval,colors='b')             # 增加高度標記
+plt.title('指數函數的輪廓圖',fontsize=16,color='b')
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+def f(x, y):
+    return (1.2-x**2+y**5)*np.exp(-x**2-y**2)
+
+x = np.linspace(-2.5, 2.5, 100)
+y = np.linspace(-2.5, 2.5, 100)
+X, Y = np.meshgrid(x, y)
+Z = f(X, Y)
+plt.contourf(X,Y,Z,12,cmap='Greens')        # 填充輪廓圖
+plt.colorbar()                              # 色彩條
+oval = plt.contour(X,Y,Z,12,colors='b')     # 輪廓圖
+plt.clabel(oval,colors='b')                 # 增加高度標記
+plt.title('指數函數的輪廓圖,levels=12',fontsize=16,color='b')
+plt.show()
+    
+
+print("------------------------------------------------------------")  # 60個
+
+
 
 print("------------------------------------------------------------")  # 60個
 
@@ -245,5 +388,3 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個

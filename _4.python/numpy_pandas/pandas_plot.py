@@ -23,7 +23,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 # 使用 NumPy 生成随机数
 random_data = np.random.normal(170, 10, 250)
 
@@ -78,8 +78,39 @@ data1.plot(
 
 plt.show()
 
+'''
 print("------------------------------------------------------------")  # 60個
 
+from io import BytesIO
+from lxml import etree
+import base64
+
+data = pd.DataFrame(
+    {
+        "id": ["1", "2", "3", "4", "5"],  # 構造數據
+        "math": [90, 89, 99, 78, 63],
+        "english": [89, 94, 80, 81, 94],
+    }
+)
+plt.plot(data["math"])  # matplotlib做圖
+plt.plot(data["english"])
+
+# 保存網頁
+buffer = BytesIO()
+plt.savefig(buffer)
+plot_data = buffer.getvalue()
+
+imb = base64.b64encode(plot_data)  # 生成網頁內容
+ims = imb.decode()
+imd = "data:image/png;base64," + ims
+data_im = """<h1>Figure</h1>  """ + """<img src="%s">""" % imd
+data_des = """<h1>Describe</h1>""" + data.describe().T.to_html()
+root = "<title>Dataset</title>"
+root = root + data_des + data_im
+
+html = etree.HTML(root)
+tree = etree.ElementTree(html)
+tree.write("tmp_導出圖表.html")
 
 print("------------------------------------------------------------")  # 60個
 
