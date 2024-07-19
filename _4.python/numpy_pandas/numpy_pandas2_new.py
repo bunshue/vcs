@@ -35,7 +35,6 @@ print(f'b = {b}')
 
 print('------------------------------------------------------------')	#60個
 
-
 print(np.c_[np.array([1, 2, 3]), np.array([4, 5, 6])])
 print(np.c_[np.array([[1, 2, 3]]), 0, 0, np.array([[4, 5, 6]])])
 
@@ -236,11 +235,6 @@ print(a.sum())
 print(a.sum(axis=0))
 print(a.sum(axis=1))
 
-
-print('------------------------------------------------------------')	#60個
-
-
-
 print('------------------------------------------------------------')	#60個
 
 filename = "data/python_ReadWrite_CSV6_score.csv"
@@ -253,12 +247,6 @@ print("數學平均", np.mean(dat["數學"]))
 print("數學中位數", np.median(dat["數學"]))
 
 print("------------------------------------------------------------")  # 60­э
-
-
-
-print("------------------------------------------------------------")  # 60­э
-
-import numpy as np
 
 a = np.array([1, 2, 3])   # Create a rank 1 array
 print(type(a))            # Prints "<type 'numpy.ndarray'>"
@@ -407,9 +395,6 @@ print(x+v)  #輸出[[2 2 4] [5 5 7]]
 
 print('------------------------------------------------------------')	#60個
 
-
-import numpy as np
-
 a = np.array([1, 2, 3])
 b = np.array([4, 5, 6])
 print(a[0], b[1])
@@ -490,9 +475,6 @@ print(y2)
 
 print("------------------------------------------------------------")  # 60個
 
-
-print('------------------------------------------------------------')	#60個
-
 # Make the graphs a bit prettier, and bigger
 plt.style.use('ggplot')
 plt.rcParams['figure.figsize'] = (15, 5)
@@ -540,7 +522,7 @@ pd.set_option('display.max_columns', 60)
 plt.rcParams['figure.figsize'] = (15, 5)
 
 # because of mixed types we specify dtype to prevent any errors
-csv_filename = 'C:/_git/big_files/311-service-requests.csv'
+csv_filename = 'D:/_git/big_files/311-service-requests.csv'
 complaints = pd.read_csv(csv_filename, dtype='unicode')
 
 print(complaints)
@@ -567,7 +549,7 @@ pd.set_option('display.max_columns', 60)
 
 
 # because of mixed types we specify dtype to prevent any errors
-csv_filename = 'C:/_git/big_files/311-service-requests.csv'
+csv_filename = 'D:/_git/big_files/311-service-requests.csv'
 complaints = pd.read_csv(csv_filename, dtype='unicode')
 
 is_noise = complaints['Complaint Type'] == "Noise - Street/Sidewalk"
@@ -647,18 +629,9 @@ weekday_counts = berri_bikes.groupby('weekday').aggregate(sum)
 weekday_counts.index = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
 weekday_counts.plot(kind='bar')
 
-
 plt.show()
 
 print('------------------------------------------------------------')	#60個
-
-
-print('------------------------------------------------------------')	#60個
-
-
-import pandas as pd
-import matplotlib.pyplot as plt
-import numpy as np
 
 plt.style.use('ggplot')
 plt.rcParams['figure.figsize'] = (15, 3)
@@ -752,12 +725,7 @@ print(weather_2012)
 #save to csv file
 weather_2012.to_csv('tmp_weather_2012.csv')
 """
-
 print('------------------------------------------------------------')	#60個
-
-print('------------------------------------------------------------')	#60個
-
-import numpy as np
 
 plt.style.use('ggplot')
 plt.rcParams['figure.figsize'] = (15, 3)
@@ -831,17 +799,6 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-
-
-print('------------------------------------------------------------')	#60個
-
-
-print('------------------------------------------------------------')	#60個
-
-import pandas as pd
-import matplotlib.pyplot as plt
-import numpy as np
-
 # Make the graphs a bit prettier, and bigger
 plt.style.use('ggplot')
 plt.rcParams['figure.figsize'] = (15, 5)
@@ -855,7 +812,7 @@ pd.set_option('display.max_columns', 60)
 print('------------------------------------------------------------')	#60個
 
 #NYC 311 service request dataset
-csv_filename = 'C:/_git/big_files/311-service-requests.csv'
+csv_filename = 'D:/_git/big_files/311-service-requests.csv'
 requests = pd.read_csv(csv_filename, dtype='unicode')
 
 cc = requests['Incident Zip'].unique()
@@ -866,7 +823,7 @@ print('------------------------------------------------------------')	#60個
 #Fixing the nan values and string/float confusion
 
 na_values = ['NO CLUE', 'N/A', '0']
-csv_filename = 'C:/_git/big_files/311-service-requests.csv'
+csv_filename = 'D:/_git/big_files/311-service-requests.csv'
 requests = pd.read_csv(csv_filename, na_values=na_values, dtype={'Incident Zip': str})
 
 cc = requests['Incident Zip'].unique()
@@ -925,7 +882,7 @@ print('------------------------------------------------------------')	#60個
 #Putting it together
 
 na_values = ['NO CLUE', 'N/A', '0']
-csv_filename = 'C:/_git/big_files/311-service-requests.csv'
+csv_filename = 'D:/_git/big_files/311-service-requests.csv'
 requests = pd.read_csv(csv_filename, 
                        na_values=na_values, 
                        dtype={'Incident Zip': str})
@@ -983,14 +940,11 @@ nonlibraries = popcon[~popcon['package-name'].str.contains('lib')]
 cc = nonlibraries.sort_values('ctime', ascending=False)[:10]
 print(cc)
 
-
-
 print('------------------------------------------------------------')	#60個
 print('------------------------------------------------------------')	#60個
 print('------------------------------------------------------------')	#60個
 
 #Reading data from SQL databases
-import pandas as pd
 import sqlite3
 
 con = sqlite3.connect("data/weather_2012.sqlite")
@@ -1038,15 +992,8 @@ con = MySQLdb.connect(host="localhost", db="test")
 #To connect to a PostgreSQL database:
 import psycopg2
 con = psycopg2.connect(host="localhost")
-
 """
-
-
 print('------------------------------------------------------------')	#60個
-print('------------------------------------------------------------')	#60個
-
-
-import numpy as np
 
 a = np.array([[1,2,3],[4,5,6]], int)#指定元素型態的陣列
 a = np.array([[1,2,3],[4,5,6]], dtype = float)#指定元素型態的陣列
@@ -1063,7 +1010,6 @@ print('整個陣列所占用的拜數', a.nbytes)
 print("------------------------------------------------------------")  # 60個
 
 print('陣列的形狀操作 reshape 1')
-import numpy as np
 
 a = np.array([1,2,3,4,5,6])
 print(a)
@@ -1073,7 +1019,6 @@ print(b)
 print("------------------------------------------------------------")  # 60個
 
 print('陣列的形狀操作 reshape 2')
-import numpy as np
 
 a = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9])
 b = a.reshape((3, 3))
@@ -1084,8 +1029,6 @@ print(c)
 print("------------------------------------------------------------")  # 60個
 
 #合併
-import numpy as np
-
 a = np.array([[1,2],[3,4]])
 b = np.array([[5,6],[7,8]])
 c = np.concatenate((a, b), axis=0)
@@ -1096,8 +1039,6 @@ print(d)
 print("------------------------------------------------------------")  # 60個
 
 #擴充或刪除陣列的維度
-import numpy as np
-
 a = np.array([[1,2,3,4,5,6,7,8]])
 b = a.reshape(2, 4)
 print(b.shape)
@@ -1111,9 +1052,6 @@ print(e.shape, f.shape)
 print("------------------------------------------------------------")  # 60個
 
 #取得陣列最大最小值和索引
-
-import numpy as np
-
 a = np.array([[11,22,13,74,35,6,27,18]])
 
 min_value = np.min(a)
@@ -1125,11 +1063,6 @@ max_idx = np.argmax(a)
 print(min_idx, max_idx)
 
 print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-import numpy as np
 
 x1 = np.linspace(-2.0, 2.0, 11) #包含頭尾共21點
 

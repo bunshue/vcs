@@ -54,6 +54,8 @@ ax = fig.add_subplot(232, projection='3d')
 X, Y, Z = axes3d.get_test_data(0.05)  # 取得測試資料
 
 ax.plot_surface(X, Y, Z, cmap="bwr")
+#ax.plot_surface(X, Y, Z, cmap="seismic")
+
 ax.set_title('plot_surface 3D曲線表面')
 
 print("------------------------------------------------------------")  # 60個
@@ -143,6 +145,8 @@ ax = fig.add_subplot(232, projection='3d')
 X, Y, Z = axes3d.get_test_data(0.05)  # 取得測試資料
 
 ax.plot_wireframe(X, Y, Z, cstride=5, rstride=5, color='g')
+#ax.plot_wireframe(X, Y, Z, cstride=10, rstride=10)
+
 ax.set_title('plot_wireframe 3D線框圖')
 
 print("------------------------------------------------------------")  # 60個
@@ -353,9 +357,6 @@ fig.colorbar(surf, shrink = 0.5, aspect = 5)    #colorbar
 #畫散佈圖
 ax.scatter(X, Y, Z, c = 'r')
 
-ax.set_xlabel('x')
-ax.set_ylabel('y')
-ax.set_zlabel('z')
 ax.set_title('線框圖 plot_wireframe + scatter')
 #plt.title('線框圖 plot_wireframe + scatter')  same
 
@@ -373,9 +374,6 @@ z = np.cos(x)
 
 ax.plot(x, y, z)
 
-ax.set_xlabel('x')
-ax.set_ylabel('y')
-ax.set_zlabel('z')
 plt.title('3D Plot')
 
 print('------------------------------------------------------------')	#60個
@@ -420,9 +418,6 @@ zs3 = np.random.randint(40, 50, 100)
 ax.scatter(xs, ys, zs)
 ax.scatter(xs2, ys2, zs2, c = 'r', marker = '^')
 ax.scatter(xs3, ys3, zs3, c = 'g', marker = '*')
-ax.set_xlabel('X label')
-ax.set_ylabel('Y label')
-ax.set_zlabel('Z label')
 
 print('------------------------------------------------------------')	#60個
 
@@ -447,9 +442,6 @@ Z = f(X, Y)
 ax.plot_surface(X, Y, Z, cmap = cm.coolwarm)    #分層著色
 #ax.plot_wireframe(X, Y, Z)  #畫線框圖
 
-ax.set_xlabel('x')
-ax.set_ylabel('y')
-ax.set_zlabel('z')
 ax.set_box_aspect((1, 1, 0.5))  #調整各軸顯示比例
 plt.title('3D Plot Surface')
 
@@ -550,10 +542,6 @@ rcount:行數上限
 ccount:列數上限
 """
 
-ax.set_xlabel("x")
-ax.set_ylabel("y")
-ax.set_zlabel("z")
-
 print("------------------------------------------------------------")  # 60個
 
 ax = fig.add_subplot(233, projection='3d')
@@ -614,9 +602,6 @@ X, Y = np.meshgrid(x, y)
 Z = perlin2(x / 25, y / 25)
 
 ax.plot_surface(X, Y, Z, cmap=cm.gist_earth)  # 用地形高度顏色來著色
-ax.set_xlabel("x")
-ax.set_ylabel("y")
-ax.set_zlabel("z")
 ax.set_box_aspect((1, 1, 25 / width))
 plt.title("Perlin noise")
 
@@ -629,9 +614,6 @@ ax = fig.add_subplot(234, projection='3d')
 data = np.random.rand(50, 3) # 生成三維數據，每維50個
 
 ax.scatter(data[:, 0], data[:, 1], data[:, 2])
-ax.set_zlabel('Z')
-ax.set_ylabel('Y')
-ax.set_xlabel('X')
 
 print("------------------------------------------------------------")  # 60個
 
@@ -698,9 +680,6 @@ ax.legend()
 ax.set_xlim(0, 1)
 ax.set_ylim(0, 1)
 ax.set_zlim(0, 1)
-ax.set_xlabel("X")
-ax.set_ylabel("Y")
-ax.set_zlabel("Z")
 
 # Customize the view angle so it's easier to see that the scatter points lie
 # on the plane y=0
@@ -726,3 +705,11 @@ print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
 
+
+
+ax.set_xlabel('x')
+ax.set_ylabel('y')
+ax.set_zlabel('z')
+ax.set_xlabel("X")
+ax.set_ylabel("Y")
+ax.set_zlabel("Z")

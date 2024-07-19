@@ -533,8 +533,57 @@ plt.subplot(236)
 
 plt.show()
 
+print("------------------------------------------------------------")  # 60個
+
+import matplotlib.image as img
+
+filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
+
+macau = img.imread(filename)     # 讀取原始圖像
+plt.figure()
+
+plt.subplot(221)        # 原始圖像
+plt.axis('off')
+plt.title('原始圖像')
+plt.imshow(macau)
+
+plt.subplot(222)
+r = macau.copy()        # 複製圖像
+r[:,:,[1,2]] = 0        # 保留紅色元素, 設定綠色和藍色元素是 0
+plt.axis('off')
+plt.title('Red元素圖像')
+plt.imshow(r)
+
+plt.subplot(223)
+g = macau.copy()        # 複製圖像
+g[:,:,[0,2]] = 0        # 保留綠色元素, 設定紅色和藍色元素是 0
+plt.axis('off')
+plt.title('Green元素圖像')
+plt.imshow(g)
+
+plt.subplot(224)
+b = macau.copy()        # 複製圖像
+b[:,:,[0,1]] = 0        # 保留藍色元素, 設定紅色和綠色元素是 0
+plt.axis('off')
+plt.title('Blue元素圖像')
+plt.imshow(b)
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
+
+import matplotlib.image as img
+
+macau = img.imread(filename)             # 讀取原始圖像
+plt.figure()
+for i in range(1,5):
+    plt.subplot(2,2,i)
+    x = 1 - 0.2*(i-1)                       # 調整色彩明暗參數
+    plt.axis('off')                         # 關閉顯示軸刻度
+    plt.title(f'x = {x:2.1f}',color='b')    # 藍色浮動值標題    
+    src = macau * x                         # 處理像素值
+    intmacau = src.astype(int)              # 將元素值轉成整數
+    plt.imshow(intmacau)                    # 顯示圖像
+plt.show()
 
 
 print("------------------------------------------------------------")  # 60個

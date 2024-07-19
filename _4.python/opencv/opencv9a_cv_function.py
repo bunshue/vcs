@@ -1,8 +1,5 @@
 """
-
 cv2之各種影像處理功能
-
-
 
 """
 
@@ -28,10 +25,10 @@ print("cv2.goodFeaturesToTrack 角點偵測")
 
 filename = "C:/_git/vcs/_4.python/opencv/data/dilate_erode1.png"
 
-img = cv2.imread(filename)
-img = cv2.resize(img, (0, 0), fx=0.75, fy=0.75)
+image = cv2.imread(filename)
+image = cv2.resize(image, (0, 0), fx=0.75, fy=0.75)
 
-gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # 彩色轉灰階
+gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 彩色轉灰階
 
 corners = cv2.goodFeaturesToTrack(gray, 100, 0.01, 10)
 corners = np.int0(corners)
@@ -40,9 +37,9 @@ print(len(corners))
 
 for corner in corners:
     x, y = corner.ravel()
-    cv2.circle(img, (x, y), 10, (0, 0, 255), -1)
+    cv2.circle(image, (x, y), 10, (0, 0, 255), 2)
 
-cv2.imshow("Frame", img)
+cv2.imshow("Frame", image)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
@@ -81,9 +78,9 @@ def process(image):
             cv2.circle(image, (int(int(x) + 200), int(y)), 10, (0, 255, 255))
     return image
 
-
-# video_filename = "C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4"
-video_filename = "D:/內視鏡影片/_ims影片2/180824-1025.mp4"
+"""
+video_filename = "C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4"
+#video_filename = "D:/內視鏡影片/_ims影片2/180824-1025.mp4"
 
 cap = cv2.VideoCapture(video_filename)
 # cap = cv2.VideoCapture(0)
@@ -98,7 +95,7 @@ while cap.isOpened():
 
 cap.release()
 cv2.destroyAllWindows()
-
+"""
 print("------------------------------------------------------------")  # 60個
 
 # boxPoints 帶有旋轉的矩形框座標
@@ -137,26 +134,28 @@ imagegray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 彩色轉灰階
 contours, hierarchy = cv2.findContours(
     imagegray, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE
 )
+
 rect = cv2.minAreaRect(contours[0])  # 得到最小外接矩形的（中心(x,y), (寬,高), 旋轉角度）
-print(type(rect))
-print("rect", rect)
+
+print("最小外接矩形 :", rect)
 print("中心 :", rect[0])
 print("寬高 :", rect[1])
 print("旋轉角度 :", rect[2])
 
 cx = rect[0][0]
 cy = rect[0][1]
-print(cx, cy)
+
+print("中心 :", cx, cy)
 W = rect[1][0] * 2
 H = rect[1][1] * 2
-print(W, H)
+print("W = ", W, "H = ", H)
 
 points = cv2.boxPoints(rect)  # 獲取最小外接矩形的4個頂點坐標
-print(points)  #
+print("最小外接矩形 :", points)
 
 # 把矩形的四個頂點標出來
 for point in points:
-    cv2.circle(image, (int(point[0]), int(point[1])), 10, 255, -1)
+    cv2.circle(image, (int(point[0]), int(point[1])), 10, 255, 5)
 
 draw_boxpoints(points)  # 畫出四個頂點連線
 
@@ -173,9 +172,11 @@ cv2.imshow("original", image)
 
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 彩色轉灰階
 ret, binary = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
+
 contours, hierarchy = cv2.findContours(binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
 rect = cv2.minAreaRect(contours[0])
 print("返回值rect:\n", rect)
+
 points = cv2.boxPoints(rect)
 print("\n轉換后的points：\n", points)
 

@@ -51,78 +51,50 @@ fig = plt.figure(
 
 print("------------------------------------------------------------")  # 60個
 
-ax = fig.add_subplot(231, projection="3d")  # 第一張圖
-
+# 此 figure 共用資料
 x = np.arange(-5, 5, 0.1)
 y = np.arange(-5, 5, 0.1)
 X, Y = np.meshgrid(x, y)
 Z = np.add(np.power(X, 2), np.power(Y, 2))  # Z = X^2 + Y^2
 
-surf = ax.plot_wireframe(X, Y, Z)
-ax.set_title("線框圖111")
+print("------------------------------------------------------------")  # 60個
 
+ax = fig.add_subplot(231, projection="3d")  # 第一張圖
+
+
+surf = ax.plot_wireframe(X, Y, Z)
+ax.set_title("線框圖")
 
 print("------------------------------------------------------------")  # 60個
 
 ax = fig.add_subplot(232, projection="3d")  # 第二張圖
 
-# 444
-x = np.arange(-5, 5, 0.1)
-y = np.arange(-5, 5, 0.1)
-X, Y = np.meshgrid(x, y)
-Z = np.add(np.power(X, 2), np.power(Y, 2))  # Z = X^2 + Y^2
-
 surf = ax.plot_surface(X, Y, Z, cmap=cm.hsv)
 # surf = ax.plot_surface(X, Y, Z, cmap=cm.gist_rainbow)
 # fig.colorbar(surf, shrink=0.5, aspect=5)
-ax.set_xlabel("X")
-ax.set_ylabel("Y")
 ax.set_title("曲面圖")
 
 print("------------------------------------------------------------")  # 60個
 
 ax = fig.add_subplot(233, projection="3d")  # 第三張圖
 
-# 333
-x = np.arange(-5, 5, 0.1)
-y = np.arange(-5, 5, 0.1)
-X, Y = np.meshgrid(x, y)
-Z = np.add(np.power(X, 2), np.power(Y, 2))  # Z = X^2 + Y^2
-
 ax.plot_wireframe(X, Y, Z, alpha=0.1)
 ax.contour(X, Y, Z, cmap=cm.Accent, linewidths=2)
-ax.set_xlabel("X")
-ax.set_ylabel("Y")
-ax.set_title("等高線333")
+ax.set_title("等高線")
 
 print("------------------------------------------------------------")  # 60個
 
 ax = fig.add_subplot(234, projection="3d")  # 第四張圖
 
-X = np.arange(-5, 5, 0.1)
-Y = np.arange(-5, 5, 0.1)
-X, Y = np.meshgrid(X, Y)
-
-# R = np.sqrt(X**2 + Y**2)
-# R = np.sqrt(X**2 + Y**2)
-Z = np.add(np.power(X, 2), np.power(Y, 2))  # Z = X^2 + Y^2
-# Z = np.sin(R)
 surf = ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap=cm.coolwarm)
 
 print("------------------------------------------------------------")  # 60個
 
 ax = fig.add_subplot(235, projection="3d")  # 第五張圖
 
-
-x = np.arange(-5, 5, 0.1)
-y = np.arange(-5, 5, 0.1)
-X, Y = np.meshgrid(x, y)
-# Z = (1.0 - X)**2 + 100.0 * (Y - X*X)**2
-Z = np.add(np.power(X, 2), np.power(Y, 2))  # Z = X^2 + Y^2
-
 surf = ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap=cm.coolwarm)
 
-ax.set_title("XXXXXXX5")
+ax.set_title("plot_surface")
 
 print("------------------------------------------------------------")  # 60個
 
@@ -131,14 +103,10 @@ ax = fig.add_subplot(236, projection="3d")  # 第六張圖
 x = np.arange(-10, 11, 1)  # -10 .... 10
 y = np.arange(-10, 11, 1)  # -10 .... 10
 X, Y = np.meshgrid(x, y)
-
 Z = np.add(np.power(X, 2), np.power(Y, 2))
+
 surf = ax.plot_surface(X, Y, Z, cmap=cm.gist_rainbow)
 fig.colorbar(surf, shrink=0.5, aspect=5)
-
-
-# ax.set_title('XXXXXXX6')
-
 
 plt.show()
 
@@ -171,7 +139,6 @@ print("------------------------------------------------------------")  # 60個
 
 ax = fig.add_subplot(232, projection="3d")  # 第二張圖
 
-# 曲面 contour
 plt.contour(X, Y, Z)
 ax.set_title("曲面 contour")
 
@@ -179,7 +146,6 @@ print("------------------------------------------------------------")  # 60個
 
 ax = fig.add_subplot(233, projection="3d")  # 第三張圖
 
-# 曲面 contourf
 plt.contourf(X, Y, Z)
 ax.set_title("曲面 contourf")
 
@@ -193,26 +159,24 @@ z = np.sin(np.sqrt(x**2 + y**2))
 ax.plot_surface(x, y, z)  # 畫出三軸資料所構成的曲面
 plt.tight_layout()
 
-ax.set_title("XXXXXXX4")
+ax.set_title("plot_surface")
 
 print("------------------------------------------------------------")  # 60個
 
 ax = fig.add_subplot(235, projection="3d")  # 第五張圖
 
-# 繪製曲面 – plot_surface()
 t = np.linspace(-5, 5, num=50)
 x, y = np.meshgrid(t, t)
 z = x * y
 
 ax.plot_surface(x, y, z)
 
-ax.set_title("繪製曲面")
+ax.set_title("繪製曲面 plot_surface")
 
 print("------------------------------------------------------------")  # 60個
 
 ax = fig.add_subplot(236, projection="3d")  # 第六張圖
 
-# 給曲面套上顏色
 t = np.linspace(-5, 5)
 x, y = np.meshgrid(t, t)
 z = x * y
@@ -275,7 +239,6 @@ print("------------------------------------------------------------")  # 60個
 
 ax = fig.add_subplot(234, projection="3d")  # 第四張圖
 
-ax.set_title("XXXXXXX2")
 
 print("------------------------------------------------------------")  # 60個
 
@@ -393,28 +356,12 @@ print("------------------------------------------------------------")  # 60個
 
 ax = fig.add_subplot(234, projection="3d")  # 第四張圖
 
-# Wireframe 圖形
-# 這是 3D 的 wireframe 網格圖形範例。
-
-# 產生測試資料
-X, Y, Z = axes3d.get_test_data(0.05)
-
-# 繪製 Wireframe 圖形
-ax.plot_wireframe(X, Y, Z, rstride=10, cstride=10)
-
-ax.set_title("Wireframe 圖形")
 
 print("------------------------------------------------------------")  # 60個
 
 ax = fig.add_subplot(235, projection="3d")  # 第五張圖
 
-# 產生測試資料
-X, Y, Z = axes3d.get_test_data(0.05)  # 這一個不知道是什麼函數
 
-# 繪製 3D 曲面圖形
-ax.plot_surface(X, Y, Z, cmap="seismic")
-
-ax.set_title("3D 曲面")
 
 print("------------------------------------------------------------")  # 60個
 
@@ -455,3 +402,24 @@ for angle in np.arange(95, 180, 12):
     plt.savefig(filename)
     print("Save " + filename + " finish")
 """
+
+ax.set_xlabel("X")
+ax.set_ylabel("Y")
+
+ax.set_xlabel("X")
+ax.set_ylabel("Y")
+
+
+X = np.arange(-5, 5, 0.1)
+Y = np.arange(-5, 5, 0.1)
+X, Y = np.meshgrid(X, Y)
+Z = np.add(np.power(X, 2), np.power(Y, 2))  # Z = X^2 + Y^2
+
+# Z = (1.0 - X)**2 + 100.0 * (Y - X*X)**2
+
+
+# R = np.sqrt(X**2 + Y**2)
+# R = np.sqrt(X**2 + Y**2)
+# Z = np.sin(R)
+
+

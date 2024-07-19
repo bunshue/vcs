@@ -33,6 +33,19 @@ while True:
 
     cv2.imshow("WebCam", frame)
 
+    #裁出一塊, 另外顯示之
+    x_st=0
+    y_st=0
+    W = 320
+    H = 240
+    x1 = x_st
+    x2 = x_st + W
+    y1 = y_st
+    y2 = y_st + H
+    #print(x1, x2, y1, y2)
+    frame2 = frame[y1:y2, x1:x2]  # 取出一塊
+    cv2.imshow('WebCam_Cut', frame2)
+
     k = cv2.waitKey(1)
     if k == ESC:
         break
