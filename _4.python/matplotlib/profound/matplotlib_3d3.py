@@ -27,7 +27,7 @@ print("------------------------------------------------------------")  # 60個
 from mpl_toolkits.mplot3d import axes3d
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 fig = plt.figure(
     num="3D繪圖 集合 3",
     figsize=(12, 8),
@@ -144,7 +144,7 @@ ax.set_title('bar3d')
 
 plt.tight_layout()
 plt.show()
-
+'''
 print("------------------------------------------------------------")  # 60個
 
 fig = plt.figure(
@@ -182,18 +182,6 @@ ax.set_title('線框圖 plot_wireframe + scatter')
 print('------------------------------------------------------------')	#60個
 
 ax = fig.add_subplot(232, projection='3d')
-
-start = 0
-end = np.pi * 20   
-step = np.pi / 180
-
-x = np.arange(start, end, step)
-y = np.sin(x)
-z = np.cos(x) 
-
-ax.plot(x, y, z)
-
-plt.title('3D Plot')
 
 print('------------------------------------------------------------')	#60個
 
@@ -300,6 +288,8 @@ fig.colorbar(surf, shrink = 0.5, aspect = 5)    #colorbar
 
 plt.tight_layout()
 plt.show()
+
+sys.exit()
 
 print('------------------------------------------------------------')	#60個
 
@@ -431,22 +421,18 @@ print("------------------------------------------------------------")  # 60個
 ax = fig.add_subplot(234, projection='3d')
 
 # 三維散點圖
-
 data = np.random.rand(50, 3) # 生成三維數據，每維50個
-
 ax.scatter(data[:, 0], data[:, 1], data[:, 2])
 
 print("------------------------------------------------------------")  # 60個
 
-# 三維柱圖
-
 ax = fig.add_subplot(235, projection='3d')
 
+# 三維柱圖
 _x = np.arange(4)
 _y = np.arange(5)
 _xx, _yy = np.meshgrid(_x, _y) # 生成網格點座標矩陣
 x, y = _xx.ravel(), _yy.ravel() # 展開爲一維數組
-
 top = x + y
 bottom = np.zeros_like(top) # 與top數組形狀一樣，內容全部爲0
 width = depth = 1
@@ -476,39 +462,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-fig = plt.figure()
-ax = plt.axes(projection="3d")
-
-# Plot a sin curve using the x and y axes.
-x = np.linspace(0, 1, 100)
-y = np.sin(x * 2 * np.pi) / 2 + 0.5
-ax.plot(x, y, zs=0, zdir="z", label="curve in (x, y)")
-
-# Plot scatterplot data (20 2D points per colour) on the x and z axes.
-colors = ("r", "g", "b", "k")
-
-x = np.random.sample(20 * len(colors))
-y = np.random.sample(20 * len(colors))
-
-c_list = []
-for c in colors:
-    c_list.extend([c] * 20)
-# By using zdir='y', the y value of these points is fixed to the zs value 0
-# and the (x, y) points are plotted on the x and z axes.
-ax.scatter(x, y, zs=0, zdir="y", c=c_list, label="points in (x, z)")
-
-# Make legend, set axes limits and labels
-ax.legend()
-ax.set_xlim(0, 1)
-ax.set_ylim(0, 1)
-ax.set_zlim(0, 1)
-
-# Customize the view angle so it's easier to see that the scatter points lie
-# on the plane y=0
-ax.view_init(elev=20.0, azim=-35)
-
-plt.tight_layout()
-plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -526,17 +479,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
-
-
-
-
-ax.set_xlabel('x')
-ax.set_ylabel('y')
-ax.set_zlabel('z')
-ax.set_xlabel("X")
-ax.set_ylabel("Y")
-ax.set_zlabel("Z")
-
 
 
 

@@ -48,7 +48,7 @@ def draw_line(image):
         )  # 畫線 垂直線 G
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 print("dilate 擴大 膨脹 效果")
 
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/kernel.bmp"
@@ -101,6 +101,9 @@ print('定義矩形結構元素 kernel')
 kernel1 = np.ones((20, 20), np.uint8)
 kernel2 = np.ones((40, 40), np.uint8)
 kernel3 = np.ones((10, 10), np.uint8)
+#print("kernel1 =\n", kernel1)
+#print("kernel2 =\n", kernel2)
+#print("kernel3 =\n", kernel3)
 image_dilate1 = cv2.dilate(image, kernel1)
 image_dilate2 = cv2.dilate(image, kernel2)
 image_dilate3 = cv2.dilate(image, kernel3, iterations=9)
@@ -174,6 +177,85 @@ plt.suptitle("白色區域被侵蝕、縮小了")
 plt.tight_layout()
 plt.show()
 
+'''
+print("------------------------------------------------------------")  # 60個
+
+print("erode-dilate")
+
+filename = "data/flower.png"
+filename = "C:/_git/vcs/_4.python/opencv/data/dilate_erode1.png"
+filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
+#filename = "C:/_git/vcs/_4.python/_data/bear.jpg"
+#filename = "C:/_git/vcs/_4.python/_data/panda.jpg"
+
+
+original_img = cv2.imread(filename)
+
+res = cv2.resize(
+    original_img, None, fx=0.6, fy=0.6, interpolation=cv2.INTER_CUBIC
+)  # 圖形太大了縮小一點
+cv2.imshow("original_img", res)  # 原圖像
+
+B, G, R = cv2.split(res)  # 獲取紅色通道
+
+img = R
+
+cv2.imshow("R_channel_img", img)  # 紅色通道圖
+
+#        cv2.threshold(image, 閥值, 最大灰度值, 使用的二值化方法)
+_, RedThresh = cv2.threshold(img, 160, 255, cv2.THRESH_BINARY)
+cv2.imshow("RedThresh", RedThresh)  # 紅色閾值圖像
+
+# OpenCV定義的結構矩形元素
+kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (3, 3))
+
+eroded  = cv2.erode( RedThresh, kernel)  # 腐蝕圖像
+dilated = cv2.dilate(RedThresh, kernel)  # 膨脹圖像
+
+cv2.imshow("Eroded Image", eroded)  # 顯示腐蝕后的圖像
+cv2.imshow("Dilated Image", dilated)  # 顯示膨脹后的圖像
+
+
+# NumPy定義的結構元素
+NpKernel = np.uint8(np.ones((3, 3)))
+Nperoded = cv2.erode(RedThresh, NpKernel)  # 腐蝕圖像
+
+cv2.imshow("Eroded by NumPy kernel", Nperoded)  # 顯示腐蝕后的圖像
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+sys.exit()
+
+print("------------------------------------------------------------")  # 60個
+
+print("Canny")
+
+image = cv2.imread("data/jianzhu.png", cv2.IMREAD_GRAYSCALE)
+
+kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (3, 3))
+
+dilate_img = cv2.dilate(image, kernel)
+erode_img = cv2.erode(image, kernel)
+
+# 將兩幅圖像相減獲得邊；cv2.absdiff參數：(膨脹后的圖像，腐蝕后的圖像)
+# 上面得到的結果是灰度圖，將其二值化以便觀察結果
+# 反色，對二值圖每個像素取反
+
+absdiff_img = cv2.absdiff(dilate_img, erode_img)
+retval, threshold_img = cv2.threshold(absdiff_img, 40, 255, cv2.THRESH_BINARY)
+result = cv2.bitwise_not(threshold_img)
+
+cv2.imshow("jianzhu", image)
+cv2.imshow("dilate_img", dilate_img)
+cv2.imshow("erode_img", erode_img)
+cv2.imshow("absdiff_img", absdiff_img)
+cv2.imshow("threshold_img", threshold_img)
+cv2.imshow("result", result)
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
 print("------------------------------------------------------------")  # 60個
 
 print("morphology 形態學")
@@ -188,62 +270,6 @@ BLACKHAT_img = cv2.morphologyEx(original_img, cv2.MORPH_BLACKHAT, kernel)  # 黒
 cv2.imshow("original_img", original_img)
 cv2.imshow("TOPHAT_img", TOPHAT_img)
 cv2.imshow("BLACKHAT_img", BLACKHAT_img)
-
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-print("erode-dilate")
-
-original_img = cv2.imread("data/flower.png")
-res = cv2.resize(
-    original_img, None, fx=0.6, fy=0.6, interpolation=cv2.INTER_CUBIC
-)  # 圖形太大了縮小一點
-B, G, R = cv2.split(res)  # 獲取紅色通道
-img = R
-_, RedThresh = cv2.threshold(img, 160, 255, cv2.THRESH_BINARY)
-# OpenCV定義的結構矩形元素
-kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (3, 3))
-eroded = cv2.erode(RedThresh, kernel)  # 腐蝕圖像
-dilated = cv2.dilate(RedThresh, kernel)  # 膨脹圖像
-
-cv2.imshow("original_img", res)  # 原圖像
-cv2.imshow("R_channel_img", img)  # 紅色通道圖
-cv2.imshow("RedThresh", RedThresh)  # 紅色閾值圖像
-cv2.imshow("Eroded Image", eroded)  # 顯示腐蝕后的圖像
-cv2.imshow("Dilated Image", dilated)  # 顯示膨脹后的圖像
-
-# NumPy定義的結構元素
-NpKernel = np.uint8(np.ones((3, 3)))
-Nperoded = cv2.erode(RedThresh, NpKernel)  # 腐蝕圖像
-
-cv2.imshow("Eroded by NumPy kernel", Nperoded)  # 顯示腐蝕后的圖像
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-print("Canny")
-
-image = cv2.imread("data/jianzhu.png", cv2.IMREAD_GRAYSCALE)
-kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (3, 3))
-dilate_img = cv2.dilate(image, kernel)
-erode_img = cv2.erode(image, kernel)
-
-# 將兩幅圖像相減獲得邊；cv2.absdiff參數：(膨脹后的圖像，腐蝕后的圖像)
-# 上面得到的結果是灰度圖，將其二值化以便觀察結果
-# 反色，對二值圖每個像素取反
-
-absdiff_img = cv2.absdiff(dilate_img, erode_img)
-retval, threshold_img = cv2.threshold(absdiff_img, 40, 255, cv2.THRESH_BINARY)
-result = cv2.bitwise_not(threshold_img)
-cv2.imshow("jianzhu", image)
-cv2.imshow("dilate_img", dilate_img)
-cv2.imshow("erode_img", erode_img)
-cv2.imshow("absdiff_img", absdiff_img)
-cv2.imshow("threshold_img", threshold_img)
-cv2.imshow("result", result)
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()

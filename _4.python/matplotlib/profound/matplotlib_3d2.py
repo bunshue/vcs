@@ -74,12 +74,6 @@ y = np.sin(u) * np.sin(v)
 z = np.cos(v)
 ax.plot_wireframe(x, y, z, color="r")
 
-# draw a point
-xs = np.array([0, 0, 0, 1])
-ys = np.array([0, 0, 1, 1])
-zs = np.array([0, 1, 1, 1])
-ax.scatter(xs, ys, zs, color="y", s=100)
-
 # draw a vector
 ax.quiver(0, 0, 1, 1, 1, 0, color="k")
 ax.quiver(0, 0, 0, 1, 1, 1, color="b", arrow_length_ratio=0.1)
@@ -90,7 +84,7 @@ ax.set_zlabel("z", fontsize=15)
 
 # plt.savefig('3D-sphere.png')
 
-ax.set_title("三維球")
+ax.set_title("三維球aaa")
 
 print("------------------------------------------------------------")  # 60個
 
@@ -161,31 +155,6 @@ y = r * np.sin(t) * np.sin(f)
 z = r * np.cos(t)
 ax.plot_surface(x, y, z, alpha=0.5, color="b")
 
-# intersection curves
-t = np.pi / 4.0
-f = np.pi / 4.0
-r = np.linspace(0, 1.2, 40)
-x = r * np.sin(t) * np.cos(f)
-y = r * np.sin(t) * np.sin(f)
-z = r * np.cos(t)
-ax.plot(x, y, z, color="k", lw=4)
-
-r = 1.0
-t = np.pi / 4.0
-f = np.linspace(0, 2.0 * np.pi, 40)
-x = r * np.sin(t) * np.cos(f)
-y = r * np.sin(t) * np.sin(f)
-z = r * np.cos(t)
-ax.plot(x, y, z, color="k", lw=4)
-
-r = 1.0
-f = np.pi / 4.0
-t = np.linspace(0, np.pi / 2, 40)
-x = r * np.sin(t) * np.cos(f)
-y = r * np.sin(t) * np.sin(f)
-z = r * np.cos(t)
-ax.plot(x, y, z, color="k", lw=4)
-
 ax.set_title(
     r"3 surfaces $r=1, \theta=\pi/4, \phi=\pi/4$" " meet in 3 curves", fontsize=15
 )
@@ -225,7 +194,7 @@ ax.set_ylabel("y", fontsize=15)
 ax.set_zlabel("z", fontsize=15)
 # ax.legend()
 
-ax.set_title("三維等位面與法線")
+ax.set_title("三維等位面與法線dddd")
 
 print("------------------------------------------------------------")  # 60個
 
@@ -271,121 +240,6 @@ ax.contourf(X, Y, Z, zdir="z", offset=-2, cmap=plt.get_cmap("rainbow"))
 # plt.savefig("mat-3D-mv1.png")
 
 ax.set_title("XXXXXXX6")
-
-plt.tight_layout()
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-fig = plt.figure(
-    num="3D繪圖 集合 2 散點圖",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
-
-ax = fig.add_subplot(231, projection="3d")  # 第一張圖
-
-x = np.random.randn(100)
-y = np.random.randn(100)
-z = np.random.randn(100)
-
-ax.scatter(x, y, z, c="r")
-
-ax.set_title("XXXXXXX1")
-
-print("------------------------------------------------------------")  # 60個
-
-ax = fig.add_subplot(232, projection="3d")  # 第二張圖
-
-count = 100
-range = 100
-
-xs = np.random.rand(count) * range
-ys = np.random.rand(count) * range
-zs = np.random.rand(count) * range
-
-ax.scatter(xs, ys, zs, s=zs, c=zs)
-
-ax.set_xlabel("X Label")
-ax.set_ylabel("Y Label")
-ax.set_zlabel("Z Label")
-ax.set_title("散點圖")
-
-ax.set_title("XXXXXXX2")
-
-print("------------------------------------------------------------")  # 60個
-
-ax = fig.add_subplot(233, projection="3d")  # 第三張圖
-
-# 在三維空間中繪製座標點是最常用到的基本功能。
-
-# 產生 3D 座標資料
-z1 = np.random.randn(50)
-x1 = np.random.randn(50)
-y1 = np.random.randn(50)
-z2 = np.random.randn(50)
-x2 = np.random.randn(50)
-y2 = np.random.randn(50)
-
-# 繪製 3D 座標點
-ax.scatter(x1, y1, z1, c=z1, cmap="Reds", marker="^", label="My Points 1")
-ax.scatter(x2, y2, z2, c=z2, cmap="Blues", marker="o", label="My Points 2")
-
-ax.legend()  # 顯示圖例
-
-ax.set_title("3D 座標點")
-
-print("------------------------------------------------------------")  # 60個
-
-ax = fig.add_subplot(234, projection="3d")  # 第四張圖
-
-# 這是將 3D 的曲線與座標點畫在同一張圖的範例。
-
-# 產生 3D 座標資料
-z = np.linspace(0, 15, 100)
-x = np.sin(z)
-y = np.cos(z)
-
-# 繪製 3D 曲線
-ax.plot(x, y, z, color="gray", label="My Curve")
-
-# 產生 3D 座標資料
-x2 = np.sin(z) + 0.1 * np.random.randn(100)
-y2 = np.cos(z) + 0.1 * np.random.randn(100)
-
-# 繪製 3D 座標點
-ax.scatter(x2, y2, z, c=z, cmap="jet", label="My Points")
-
-ax.legend()  # 顯示圖例
-
-ax.set_title("plot 3D 曲線")
-
-print("------------------------------------------------------------")  # 60個
-
-ax = fig.add_subplot(235, projection="3d")  # 第五張圖
-
-x = np.linspace(0, 5, 10)
-y = np.linspace(0, 5, 10)
-X, Y = np.meshgrid(x, y)
-
-Z = 2 * X + Y
-
-ax.scatter(X, Y, Z + 0.7 * np.random.randn(10, 10))
-ax.plot_surface(X, Y, Z, alpha=0.3)
-
-print("------------------------------------------------------------")  # 60個
-
-ax = fig.add_subplot(236, projection="3d")  # 第六張圖
-
-x = np.random.randn(1000)
-y = np.random.randn(1000)
-z = np.random.randn(1000)
-ax.scatter3D(x, y, z)
-ax.set_title("繪製 3D 散佈圖 – scatter3D()")
 
 plt.tight_layout()
 plt.show()

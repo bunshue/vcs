@@ -92,25 +92,34 @@ print("------------------------------------------------------------")  # 60個
 """
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-
+THRESHOLD = 127
+print('二值化範例, 只能處理灰階圖')
+print("二值化圖, 閥值 = " + str(THRESHOLD) + ", 小於變全黑, 大於變全白")
 
 filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
 
-img = cv2.imread(filename)
-cv2.imshow("opencv", img)
+# 檔案 => cv2影像
+image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
+cv2.imshow("opencv", image)
 
 
 def get_trackbar_value(val):
     print(val, end=" ")
-
+    #        cv2.threshold(image, 閥值, 最大灰度值, 使用的二值化方法)
+    t, rst = cv2.threshold(image, val, 255, cv2.THRESH_BINARY)
+    # t, rst = cv2.threshold(image, val, 255, cv2.THRESH_BINARY_INV)
+    # t, rst = cv2.threshold(image, val, 255, cv2.THRESH_TRUNC)
+    # t, rst = cv2.threshold(image, val, 255, cv2.THRESH_TOZERO_INV)
+    # t, rst = cv2.threshold(image, val, 255, cv2.THRESH_TOZERO)
+    cv2.imshow("opencv", rst)
+   
 
 cv2.createTrackbar("Trackbar", "opencv", 0, 255, get_trackbar_value)
-cv2.setTrackbarPos("Trackbar", "opencv", 50)  # 預設
+cv2.setTrackbarPos("Trackbar", "opencv", THRESHOLD)  # 預設
 
 keycode = cv2.waitKey(0)
 cv2.destroyAllWindows()
+
 
 print("------------------------------------------------------------")  # 60個
 

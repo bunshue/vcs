@@ -403,16 +403,6 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 
 img = cv2.imread(filename)
-output1 = cv2.blur(img, (5, 5))  # 指定區域單位為 (5, 5)
-output2 = cv2.blur(img, (25, 25))  # 指定區域單位為 (25, 25)
-cv2.imshow("image1", output1)
-cv2.imshow("image2", output2)
-cv2.waitKey(0)  # 按下任意鍵停止
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-img = cv2.imread(filename)
 output1 = cv2.GaussianBlur(img, (5, 5), 0)  # 指定區域單位為 (5, 5)
 output2 = cv2.GaussianBlur(img, (25, 25), 0)  # 指定區域單位為 (25, 25)
 cv2.imshow("image1", output1)

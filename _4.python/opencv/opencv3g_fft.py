@@ -38,7 +38,7 @@ f = np.fft.fft2(img)
 fshift = np.fft.fftshift(f)
 magnitude_spectrum = 20 * np.log(np.abs(fshift))
 
-plt.figure('傅立葉', figsize = (16, 12))
+plt.figure('傅立葉', figsize = (12, 8))
 plt.subplot(121)
 plt.title('原圖')
 plt.imshow(img, cmap = 'gray')
@@ -59,12 +59,15 @@ img = cv2.imread("images/boat.bmp", 0)
 f = np.fft.fft2(img)
 fshift = np.fft.fftshift(f)
 ishift = np.fft.ifftshift(fshift)
+
 iimg = np.fft.ifft2(ishift)
 # print(iimg)
+
 iimg = np.abs(iimg)
 # print(iimg)
 
-plt.figure("逆傅立葉", figsize=(16, 12))
+plt.figure("逆傅立葉", figsize=(12, 6))
+
 plt.subplot(121)
 plt.imshow(img, cmap="gray")
 plt.title("original")
@@ -84,15 +87,18 @@ filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bm
 img = cv2.imread(filename, 0)
 
 f = np.fft.fft2(img)
+
 fshift = np.fft.fftshift(f)
 rows, cols = img.shape
 crow, ccol = int(rows / 2), int(cols / 2)
 fshift[crow - 30 : crow + 30, ccol - 30 : ccol + 30] = 0
 ishift = np.fft.ifftshift(fshift)
+
 iimg = np.fft.ifft2(ishift)
 iimg = np.abs(iimg)
 
-plt.figure("高通濾波", figsize=(16, 12))
+plt.figure("高通濾波", figsize=(12, 6))
+
 plt.subplot(121)
 plt.imshow(img, cmap="gray")
 plt.title("original")
@@ -115,7 +121,8 @@ dft = cv2.dft(np.float32(img), flags=cv2.DFT_COMPLEX_OUTPUT)
 dftShift = np.fft.fftshift(dft)
 result = 20 * np.log(cv2.magnitude(dftShift[:, :, 0], dftShift[:, :, 1]))
 
-plt.figure("傅立葉變換", figsize=(16, 12))
+plt.figure("傅立葉變換", figsize=(12, 6))
+
 plt.subplot(121)
 plt.imshow(img, cmap="gray")
 plt.title("original")
@@ -142,7 +149,8 @@ ishift = np.fft.ifftshift(dftShift)
 iImg = cv2.idft(ishift)
 iImg = cv2.magnitude(iImg[:, :, 0], iImg[:, :, 1])
 
-plt.figure("逆傅立葉變換", figsize=(16, 12))
+plt.figure("逆傅立葉變換", figsize=(12, 6))
+
 plt.subplot(121)
 plt.imshow(img, cmap="gray")
 plt.title("original")
@@ -173,7 +181,8 @@ ishift = np.fft.ifftshift(fShift)
 iImg = cv2.idft(ishift)
 iImg = cv2.magnitude(iImg[:, :, 0], iImg[:, :, 1])
 
-plt.figure("低通濾波", figsize=(16, 12))
+plt.figure("低通濾波", figsize=(12, 6))
+
 plt.subplot(121)
 plt.imshow(img, cmap="gray")
 plt.title("original")
@@ -196,16 +205,7 @@ dft = cv2.dft(np.float32(image), flags=cv2.DFT_COMPLEX_OUTPUT)
 dft_shift = np.fft.fftshift(dft)
 magnitude_spectrum = 20 * np.log(cv2.magnitude(dft_shift[:, :, 0], dft_shift[:, :, 1]))
 
-# 繪製結果
-fig = plt.figure(
-    num="magnitude_spectrum",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
+plt.figure("magnitude_spectrum", figsize=(12, 6))
 
 plt.subplot(121), plt.imshow(image, cmap="gray")
 plt.title("原始圖像")

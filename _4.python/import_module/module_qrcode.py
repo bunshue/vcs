@@ -363,12 +363,12 @@ window.mainloop()
 '''
 print("------------------------------------------------------------")  # 60個
 
-#使用中文沒有很順利
+# 使用中文沒有很順利
 
 import pyqrcode
 import tkinter as tk
 
-code = pyqrcode.create('白日依山盡白日依山盡')
+code = pyqrcode.create("白日依山盡白日依山盡")
 code_xbm = code.xbm(scale=5)
 
 window = tk.Tk()

@@ -1676,46 +1676,10 @@ while True:
     cv2.imshow("ImageShow", show)
 
 cv2.destroyAllWindows()
-
+'''
 print("------------------------------------------------------------")  # 60個
 
-print("二值化")
-
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
-
-# 檔案 => cv2影像
-image = cv2.imread(filename)
-
-THRESHOLD = 127
-
-#        cv2.threshold(image, 閥值, 最大灰度值, 使用的二值化方法)
-t, rst = cv2.threshold(image, THRESHOLD, 255, cv2.THRESH_BINARY)
-# t, rst = cv2.threshold(image, THRESHOLD, 255, cv2.THRESH_BINARY_INV)
-# t, rst = cv2.threshold(image, THRESHOLD, 255, cv2.THRESH_TRUNC)
-# t, rst = cv2.threshold(image, THRESHOLD, 255, cv2.THRESH_TOZERO_INV)
-# t, rst = cv2.threshold(image, THRESHOLD, 255, cv2.THRESH_TOZERO)
-
-plt.figure(
-    num="new29 二值化",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
-
-plt.subplot(121)
-plt.title("原圖")
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-
-plt.subplot(122)
-plt.title("二值化圖, 閥值 = " + str(THRESHOLD) + ", 小於變全黑, 大於變全白")
-plt.imshow(cv2.cvtColor(rst, cv2.COLOR_BGR2RGB))
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
+print('三種二值化方法')
 
 THRESHOLD = 127
 
@@ -1724,10 +1688,13 @@ filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/computer.jpg
 # 檔案 => cv2影像
 image = cv2.imread(filename, 0)
 
+#        cv2.threshold(image, 閥值, 最大灰度值, 使用的二值化方法)
 t1, thd = cv2.threshold(image, THRESHOLD, 255, cv2.THRESH_BINARY)
+
 athdMEAN = cv2.adaptiveThreshold(
     image, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 3, 5
 )
+
 athdGAUS = cv2.adaptiveThreshold(
     image, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 3, 5
 )
@@ -1769,6 +1736,7 @@ filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/tiffany.bmp"
 # 檔案 => cv2影像
 image = cv2.imread(filename, 0)
 
+#        cv2.threshold(image, 閥值, 最大灰度值, 使用的二值化方法)
 t1, thd = cv2.threshold(image, THRESHOLD, 255, cv2.THRESH_BINARY)
 t2, otsu = cv2.threshold(image, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
 
@@ -1806,6 +1774,7 @@ filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
 # 檔案 => cv2影像
 image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
 
+#        cv2.threshold(image, 閥值, 最大灰度值, 使用的二值化方法)
 thr, image_binary = cv2.threshold(image, THRESHOLD, 255, cv2.THRESH_TOZERO)
 print(thr)
 
@@ -1823,6 +1792,7 @@ image = cv2.imread(filename)
 image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 彩色轉灰階
 
 # 轉換前，都先將圖片轉換成灰階色彩
+#        cv2.threshold(image, 閥值, 最大灰度值, 使用的二值化方法)
 ret, output1 = cv2.threshold(
     image_gray, THRESHOLD, 255, cv2.THRESH_BINARY
 )  # 如果大於 THRESHOLD 就等於 255，反之等於 0。
@@ -5036,7 +5006,7 @@ latexImage = meanBlur(image, 29, 29, "symm")
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 print("邊緣檢測 scharr")

@@ -40,74 +40,6 @@ from matplotlib.cm import viridis as colormap
 print("------------------------------------------------------------")  # 60個
 
 fig = plt.figure(
-    num="3D繪圖 集合 3",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
-
-print("------------------------------------------------------------")  # 60個
-
-ax = fig.add_subplot(231, projection="3d")  # 第一張圖
-
-x = np.linspace(-10, 10, 1000)
-y = np.linspace(-10, 10, 1000)
-z = np.add(x, y)
-
-ax.plot(x, y, z)
-ax.set_title("線形圖")
-
-print("------------------------------------------------------------")  # 60個
-
-ax = fig.add_subplot(232, projection="3d")  # 第二張圖
-
-# 圓環與直線
-p = np.mgrid[0 : 2.0 * np.pi : 20j]
-x = 3.0 * np.cos(p) * np.sin(np.pi / 6.0)
-y = 3.0 * np.sin(p) * np.sin(np.pi / 6.0)
-z = 3.0 * np.cos(np.pi / 6.0)
-ax.plot(x, y, z, color="r")
-ax.plot(p / 3.0, p / 3.0, p / 3.0, color="b")
-# plt.savefig("matplot-3D-1.png")
-
-print("------------------------------------------------------------")  # 60個
-
-ax = fig.add_subplot(233, projection="3d")  # 第三張圖
-
-π = np.pi
-θ = np.linspace(-5 * π, 5 * π, 200)
-
-x = np.cos(θ)
-y = np.sin(θ)
-z = θ / (5 * π)
-
-plt.plot(x, y, z)
-ax.set_title("3D 畫圖")
-
-print("------------------------------------------------------------")  # 60個
-
-ax = fig.add_subplot(234, projection="3d")  # 第四張圖
-
-
-print("------------------------------------------------------------")  # 60個
-
-ax = fig.add_subplot(235, projection="3d")  # 第五張圖
-
-
-print("------------------------------------------------------------")  # 60個
-
-ax = fig.add_subplot(236, projection="3d")  # 第六張圖
-
-
-plt.tight_layout()
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-fig = plt.figure(
     num="3D繪圖 集合 4",
     figsize=(12, 8),
     dpi=100,
@@ -187,41 +119,7 @@ print("------------------------------------------------------------")  # 60個
 
 ax = fig.add_subplot(233, projection="3d")  # 第三張圖
 
-# 線框圖
-step = 0.04
-maxval = 1.0
-
-# Create supporting points in polar coordinates
-r = np.linspace(0, 1.2, 50)
-p = np.linspace(0, 2 * np.pi, 50)
-R, P = np.meshgrid(r, p)
-# Transform them to cartesian system
-X, Y = R * np.cos(P), R * np.sin(P)
-
-Z = (R**2 - 1) ** 2
-ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap=colormap)
-ax.set_zlim3d(0, 1)
-ax.set_xlabel(r"$\phi_\mathrm{real}$")
-ax.set_ylabel(r"$\phi_\mathrm{im}$")
-ax.set_zlabel(r"$V(\phi)$")
-ax.set_title("3D surface plot")
-
-print("------------------------------------------------------------")  # 60個
-
-ax = fig.add_subplot(234, projection="3d")  # 第四張圖
-
-
-print("------------------------------------------------------------")  # 60個
-
-ax = fig.add_subplot(235, projection="3d")  # 第五張圖
-
-
-
-print("------------------------------------------------------------")  # 60個
-
 # 這是繪製 3D 向量場（vector field）的範例。
-ax = fig.add_subplot(236, projection="3d")  # 第六張圖
-
 # 產生格點資料
 x, y, z = np.meshgrid(
     np.arange(-0.8, 1, 0.2), np.arange(-0.8, 1, 0.2), np.arange(-0.8, 1, 0.8)
@@ -236,6 +134,23 @@ w = np.sqrt(2.0 / 3.0) * np.cos(np.pi * x) * np.cos(np.pi * y) * np.sin(np.pi * 
 ax.quiver(x, y, z, u, v, w, length=0.1, normalize=True)
 
 ax.set_title("3D 向量場")
+
+
+print("------------------------------------------------------------")  # 60個
+
+ax = fig.add_subplot(234, projection="3d")  # 第四張圖
+
+
+print("------------------------------------------------------------")  # 60個
+
+ax = fig.add_subplot(235, projection="3d")  # 第五張圖
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+ax = fig.add_subplot(236, projection="3d")  # 第六張圖
+
 
 
 plt.tight_layout()

@@ -1257,6 +1257,7 @@ print(txt)
 
 print("------------------------------------------------------------")  # 60個
 
+
 def searchStr(pattern, msg):
     txt = re.search(pattern, msg)
     if txt == None:  # 搜尋失敗
@@ -1279,6 +1280,7 @@ searchStr(pattern, msg5)
 
 print("------------------------------------------------------------")  # 60個
 
+
 def searchStr(pattern, msg):
     txt = re.search(pattern, msg)
     if txt == None:  # 搜尋失敗
@@ -1292,6 +1294,7 @@ pattern = "(son){3,5}"
 searchStr(pattern, msg)
 
 print("------------------------------------------------------------")  # 60個
+
 
 def searchStr(pattern, msg):
     txt = re.search(pattern, msg)
@@ -1365,6 +1368,7 @@ txt = re.findall(pattern, msg)  # 傳回搜尋結果
 print(txt)
 
 print("------------------------------------------------------------")  # 60個
+
 
 def taiwanPhoneNum(string):
     """檢查是否有含手機聯絡資訊的台灣手機號碼格式"""
@@ -1643,6 +1647,7 @@ for mail in eMail:
 
 print("------------------------------------------------------------")  # 60個
 
+
 # 定義一個函數用於重命名檔案串列
 def rename_files(files):
     # 定義正則表達式模式匹配檔案名的一部分
@@ -1691,6 +1696,7 @@ is_valid, formatted = validate_and_format_credit_card(card_number)
 print(is_valid, formatted)  # 輸出結果應該為True和格式化後的卡號
 
 print("------------------------------------------------------------")  # 60個
+
 
 def clean_text(text):
     # 刪除不可列印字元和特殊符號, 只保留字母、數字和空格
@@ -1779,28 +1785,27 @@ print(f"區域號碼是: {areaNum}")  # 顯示區域號碼
 print(f"電話號碼是: {localNum}")  # 顯示電話號碼
 
 
-
 print("------------------------------------------------------------")  # 60個
 
 foldername = "data"
 files = os.listdir(foldername)
 txtList = []
 # 測試1
-pattern = '(.*).txt'
+pattern = "(.*).txt"
 print("列印*.txt")
 for filename in files:
-    #print(filename)
-    fnresult = re.search(pattern,filename)      # 傳回搜尋結果
+    # print(filename)
+    fnresult = re.search(pattern, filename)  # 傳回搜尋結果
     if fnresult != None:
         txtList.append(filename)
 print(txtList)
 
-pyList = []  
+pyList = []
 # 測試2
 print("列印ch14_10.py - ch14_19.py")
-pattern = '(ch14_1(\d).py)'
+pattern = "(ch14_1(\d).py)"
 for filename in files:
-    fnresult = re.search(pattern,filename)      # 傳回搜尋結果
+    fnresult = re.search(pattern, filename)  # 傳回搜尋結果
     if fnresult != None:
         pyList.append(filename)
 print(pyList)
@@ -1882,40 +1887,33 @@ print(text)
 
 print("------------------------------------------------------------")  # 60個
 
-print(re.match (r'pyt', 'python')) # pyt 由開頭即符合, 因此成功
-print(re.match (r'yth', 'python')) # yth 與開頭不符合, 因此失敗
-print(re.search(r'yth', 'python')) # seach( ) 不限開頭, 因此成功
+print(re.match(r"pyt", "python"))  # pyt 由開頭即符合, 因此成功
+print(re.match(r"yth", "python"))  # yth 與開頭不符合, 因此失敗
+print(re.search(r"yth", "python"))  # seach( ) 不限開頭, 因此成功
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-m = re.search(r'p[a-z]+e', 'apples')
-print(m)   # 輸出 <_sre.SRE_Match object; span=(1, 5), match='pple'>
-print(m.group())    # 輸出 pple
-print(m.start())    # 輸出 1
-print(m.end())    # 輸出 5 注意！pple 的位置是 1~4
-print(m.span())    # 輸出 (1, 5)
+m = re.search(r"p[a-z]+e", "apples")
+print(m)  # 輸出 <_sre.SRE_Match object; span=(1, 5), match='pple'>
+print(m.group())  # 輸出 pple
+print(m.start())  # 輸出 1
+print(m.end())  # 輸出 5 注意！pple 的位置是 1~4
+print(m.span())  # 輸出 (1, 5)
 
 
 print("------------------------------------------------------------")  # 60個
 
 
+print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -1926,4 +1924,3 @@ print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
-

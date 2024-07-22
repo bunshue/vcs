@@ -1,16 +1,22 @@
 """
-cv2.blur
 
+cv2.blur
 
 
 """
 
 import cv2
 
+print("------------------------------------------------------------")  # 60個
+
+# 共同
+import os
 import sys
-import matplotlib.pyplot as plt
-import numpy as np
 import math
+import random
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
 
 font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
@@ -18,9 +24,9 @@ font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
 # 設定負號
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-
 
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_noise.png"
 image = cv2.imread(filename)
@@ -65,6 +71,17 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
+filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_noise.png"
+
+img = cv2.imread(filename)
+output1 = cv2.blur(img, (5, 5))  # 指定區域單位為 (5, 5)
+output2 = cv2.blur(img, (25, 25))  # 指定區域單位為 (25, 25)
+
+cv2.imshow("image1", output1)
+cv2.imshow("image2", output2)
+
+cv2.waitKey(0)  # 按下任意鍵停止
+cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 

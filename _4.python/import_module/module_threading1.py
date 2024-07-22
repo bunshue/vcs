@@ -18,30 +18,33 @@ print("------------------------------------------------------------")  # 60個
 
 def t1():
     for i in range(10):
-        print('A', end = '')
+        print("A", end="")
         time.sleep(random.random())
-    print(' t1 結束')
+    print(" t1 結束")
+
 
 def t2():
     for i in range(10):
-        print('B', end = '')
+        print("B", end="")
         time.sleep(random.random())
-    print(' t2 結束')
+    print(" t2 結束")
+
 
 def t3(count, mark):
     for i in range(count):
-        print(mark, end = '')
+        print(mark, end="")
         time.sleep(random.random())
-    print(' t3 結束')
+    print(" t3 結束")
 
-threading.Thread(target = t1).start()
-threading.Thread(target = t2).start()
 
-print('主執行緒結束')
+threading.Thread(target=t1).start()
+threading.Thread(target=t2).start()
 
-tt1 = threading.Thread(target = t1)
-tt2 = threading.Thread(target = t2)
-tt3 = threading.Thread(target = t3, kwargs={'count' : 20, 'mark' : 'X'})
+print("主執行緒結束")
+
+tt1 = threading.Thread(target=t1)
+tt2 = threading.Thread(target=t2)
+tt3 = threading.Thread(target=t3, kwargs={"count": 20, "mark": "X"})
 
 tt1.start()
 tt2.start()
@@ -51,7 +54,7 @@ tt1.join()
 tt2.join()
 tt3.join()
 
-print('主執行緒結束')
+print("主執行緒結束")
 
 
 print("------------------------------------------------------------")  # 60個
@@ -75,6 +78,7 @@ thread2 = threading.Thread(target=display, args=("執行緒", 2))
 thread2.start()
 
 print("------------------------------------------------------------")  # 60個
+
 
 def aa():
     i = 0
@@ -111,6 +115,7 @@ A: 5
 """
 
 print("------------------------------------------------------------")  # 60個
+
 
 def aa():
     i = 0
@@ -166,8 +171,6 @@ C: 500
 
 
 print("------------------------------------------------------------")  # 60個
-
-
 
 
 def aa():
@@ -228,6 +231,7 @@ B: 100
 
 
 print("------------------------------------------------------------")  # 60個
+
 
 def aa():
     lock.acquire()  # 鎖定
@@ -358,12 +362,13 @@ b.start()
 
 print("------------------------------------------------------------")  # 60個
 
-from threading import Thread
+LENGTH = 10
+
 
 # 模擬兔子賽跑的狀況
 def rabbitRun():
     progress = 0
-    while progress < 30:
+    while progress < LENGTH:
         progress += 1
         print("兔子跑了", progress, "公尺")
         time.sleep(1)
@@ -375,28 +380,28 @@ def rabbitRun():
 # 模擬烏龜賽跑的狀況
 def turtleRun():
     progress = 0
-    while progress < 30:
+    while progress < LENGTH:
         progress += 0.5
         print("烏龜跑了", progress, "公尺")
         time.sleep(1)
     print("烏龜到達終點！")
 
 
-thr1 = Thread(target=rabbitRun)
-thr2 = Thread(target=turtleRun)
-# 龜兔賽跑開始！
+thr1 = threading.Thread(target=rabbitRun)
+thr2 = threading.Thread(target=turtleRun)
+
+print("龜兔賽跑開始！, 總長度 :", LENGTH, "公尺")
 thr1.start()
 thr2.start()
 
 print("------------------------------------------------------------")  # 60個
 
-from threading import Thread
 
-class RaceHorse(Thread):
+class RaceHorse(threading.Thread):
     # 建構式
     def __init__(self, name, stepSizeMin, stepSizeMax, stepFreq):
         # 一定要注意要先執行Thread.__init()__!!
-        Thread.__init__(self)
+        threading.Thread.__init__(self)
         self._name = name
         self._stepSizeMin = stepSizeMin
         self._stepSizeMax = stepSizeMax
@@ -409,7 +414,7 @@ class RaceHorse(Thread):
         # 每次間隔時間，是步伐頻率的倒數
         intv = 1.0 / self._stepFreq
         progress = 0
-        while progress < 100:
+        while progress < 20:
             # 用隨機數控制步伐的變異區間，縮放到實際步伐大小
             progress += self._stepSizeMin + random.random() * stepVar
             print(self._name, "跑了", progress, "公尺")
@@ -417,9 +422,9 @@ class RaceHorse(Thread):
         print(self._name, "到達終點！")
 
 
-horse1 = RaceHorse("席爾巴斯雷利", 0.7, 0.75, 3)
-horse2 = RaceHorse("波爾薩利諾", 0.6, 0.65, 3.5)
-horse3 = RaceHorse("波雅漢考克", 0.8, 0.85, 2.8)
+horse1 = RaceHorse("劉備", 0.7, 0.75, 3)
+horse2 = RaceHorse("關公", 0.6, 0.65, 3.5)
+horse3 = RaceHorse("張飛", 0.8, 0.85, 2.8)
 
 horse1.start()
 horse2.start()
@@ -427,14 +432,16 @@ horse3.start()
 
 print("------------------------------------------------------------")  # 60個
 
-from threading import Thread
+# from threading import Thread
 import math
 
-# 模擬網路爬蟲執行的狀況
+print("模擬網路爬蟲執行的狀況")
+
+
 def run(name, minDelay, maxDelay):
     intv = maxDelay - minDelay
     delays = []
-    for i in range(100):
+    for i in range(10):
         delay = minDelay + random.random() * intv
         delays.append(delay)
         # 計算平均值！
@@ -447,8 +454,9 @@ def run(name, minDelay, maxDelay):
     print("done!")
 
 
-thr1 = Thread(target=run, args=("1號", 3.2, 5.5))
-thr2 = Thread(target=run, args=("2號", 4.7, 6.2))
+thr1 = threading.Thread(target=run, args=("1號", 3.2, 5.5))
+thr2 = threading.Thread(target=run, args=("2號", 4.7, 6.2))
+
 # 執行延遲觀察開始！
 thr1.start()
 thr2.start()
@@ -503,6 +511,7 @@ def loop_b():
 # 跑多線程
 thread1 = threading.Thread(target=loop_a)
 thread1.start()
+
 thread2 = threading.Thread(target=loop_b)
 thread2.start()
 
@@ -549,8 +558,6 @@ for t in threads:
     t.join()
 
 print("主程式結束")
-
-sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -660,6 +667,7 @@ print("程式階段2")
 
 print("------------------------------------------------------------")  # 60個
 
+
 def wakeUp(name, blessingWord):
     print("threadObj執行緒開始")
     time.sleep(10)  # threadObj執行緒休息10秒
@@ -674,6 +682,7 @@ time.sleep(1)  # 主執行緒休息1秒
 print("程式階段2")
 
 print("------------------------------------------------------------")  # 60個
+
 
 def worker():
     print(threading.current_thread().name, "Starting")
@@ -717,7 +726,9 @@ w2.start()
 
 print("------------------------------------------------------------")  # 60個
 
-print('啟動 thread 無參數')
+print("啟動 thread 無參數")
+
+
 def run():
     print("啟動了！")
     for i in range(100):
@@ -732,7 +743,9 @@ thr2.start()
 
 print("------------------------------------------------------------")  # 60個
 
-print('啟動 thread 有參數')
+print("啟動 thread 有參數")
+
+
 def run(which):
     print(which, "啟動了！")
     for i in range(100):
@@ -746,6 +759,7 @@ thr1.start()
 thr2.start()
 
 print("------------------------------------------------------------")  # 60個
+
 
 def childThread(name):
     for i in range(7):
@@ -826,6 +840,7 @@ print("All threads stop")
 
 print("------------------------------------------------------------")  # 60個
 
+
 class BankAccount:
     def __init__(self, deposit):
         self.balance = deposit
@@ -855,7 +870,7 @@ class BankAccount:
         time.sleep(rnd)
 
 
-from threading import Thread
+# from threading import Thread
 
 
 class Withdrawer(Thread):
@@ -942,7 +957,8 @@ p3.start()
 
 print("------------------------------------------------------------")  # 60個
 
-from threading import Thread
+# from threading import Thread
+
 
 # 消費者thread
 def threadConsumer(cond):
@@ -991,8 +1007,8 @@ def delay():
 commonResource = 0
 condition = threading.Condition()
 
-thr1 = Thread(target=threadConsumer, args=(condition,))
-thr2 = Thread(target=threadProducer, args=(condition,))
+thr1 = threading.Thread(target=threadConsumer, args=(condition,))
+thr2 = threading.Thread(target=threadProducer, args=(condition,))
 
 print("Thread1 consumer start")
 thr1.start()
@@ -1006,7 +1022,8 @@ print("All threads stop")
 
 print("------------------------------------------------------------")  # 60個
 
-from threading import Thread
+# from threading import Thread
+
 
 class Rabbit(Thread):
     def __init__(self, name):
@@ -1084,8 +1101,8 @@ executor.shutdown()
 
 print("------------------------------------------------------------")  # 60個
 
-class MyThreadTest(threading.Thread):
 
+class MyThreadTest(threading.Thread):
     def __init__(self, count=100):
         threading.Thread.__init__(self)
         self.my_count = 200
@@ -1094,60 +1111,63 @@ class MyThreadTest(threading.Thread):
 
     def run(self):
         while self.flag_signal:
-            print('r', end = " ")
-           
+            print("r", end=" ")
+
     def stop_my_thread(self):
         self.flag_signal = False
         print("flag_signal = False")
+
 
 count = 123
 t1 = MyThreadTest(count)
 t1.start()
 
 import datetime
+
 now = datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S")
 print("現在時間 :", now)
 record_time_st = time.time()
 
 for _ in range(10):
-    print(_, end = " ")
+    print(_, end=" ")
     time.sleep(1)
-    
+
 t1.stop_my_thread()
 
 now = datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S")
 print("現在時間 :", now)
 
 record_time_elapsed = time.time() - record_time_st
-print('作業時間 :', format(record_time_elapsed, ".2f"), '秒')
+print("作業時間 :", format(record_time_elapsed, ".2f"), "秒")
 
 print("------------------------------------------------------------")  # 60個
 
 
 # 定義下載漫畫的函數
 def do_my_thread(idx, cnt):
-    #print(text, cnt)
-    #print(cnt)
+    # print(text, cnt)
+    # print(cnt)
     time.sleep(0.8)
-    print(idx, end = "")
+    print(idx, end="")
+
 
 # 建立並啟動多個執行緒
-thread_count = 10                                       # 執行緒的數量
+thread_count = 10  # 執行緒的數量
 
 # 建立執行緒並將它們添加到執行緒串列表
 threads = []
 for i in range(10):
-    #print('建立 thread :', i)
+    # print('建立 thread :', i)
     cnt = random.randint(5, 10)
     thread = threading.Thread(target=do_my_thread, args=(i, cnt))
     threads.append(thread)
-    thread.start()                                      # 啟動執行緒
+    thread.start()  # 啟動執行緒
 
 # 等待所有執行緒完成
 for thread in threads:
     thread.join()
 
-print('\n完成')
+print("\n完成")
 
 print("------------------------------------------------------------")  # 60個
 

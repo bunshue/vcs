@@ -150,6 +150,7 @@ def calculate_file_hash(clear_filename):
 
     return sha256_value.hexdigest()
 
+
 clear_filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 calculated_filehash = calculate_file_hash(clear_filename)
 print("SHA256")
@@ -203,8 +204,10 @@ for filename in filenames:
 
 print("------------------------------------------------------------")  # 60個
 
+
 def md5sum(t):
     return hashlib.md5(t).hexdigest()
+
 
 print("------------------------------------------------------------")  # 60個
 
@@ -326,6 +329,7 @@ print("------------------------------------------------------------")  # 60個
 
 BUFSUZE = 8096
 
+
 def calculate_md5sum(*files):
     sts = 0
     if len(files) == 1 and not isinstance(files[0], str):
@@ -335,12 +339,14 @@ def calculate_md5sum(*files):
             sts = printsum(f) or sts
     return sts
 
+
 def printsum(clear_filename):
     # 以二進位方式讀取檔案
-    fp = open(clear_filename, 'rb')
+    fp = open(clear_filename, "rb")
     sts = printsumfp(fp, clear_filename)
     fp.close()
     return sts
+
 
 def printsumfp(fp, clear_filename):
     md5_value = hashlib.md5()
@@ -353,21 +359,22 @@ def printsumfp(fp, clear_filename):
         md5_value.update(data)
     return md5_value.hexdigest()
 
-#clear_filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+
+# clear_filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 clear_filename = "Python-3.7.17.tar.xz"
-#clear_filename = "\\192.168.1.231\RD_Soft\_主機程式\542-0002\BOOT.bin"
+# clear_filename = "\\192.168.1.231\RD_Soft\_主機程式\542-0002\BOOT.bin"
 
-print('計算一個檔案的 MD5 值 1')
-print('檔案 :', clear_filename)
+print("計算一個檔案的 MD5 值 1")
+print("檔案 :", clear_filename)
 cc = calculate_md5sum(clear_filename)
-print('結果 :', cc)
+print("結果 :", cc)
 
-print('----------')
-print('dd94cab4541b57b88cf3dab32d6336e3')
+print("----------")
+print("dd94cab4541b57b88cf3dab32d6336e3")
 
 print("------------------------------------------------------------")  # 60個
 
-print('計算一個檔案的 MD5 值 2')
+print("計算一個檔案的 MD5 值 2")
 
 clear_filename = "C:/_git/vcs/_1.data/______test_files1/calculate_hash.txt"
 clear_filename = "Python-3.7.17.tar.xz"
@@ -385,7 +392,7 @@ print(md5_value)
 
 print("------------------------------------------------------------")  # 60個
 
-print('計算一個檔案的 MD5 值 3')
+print("計算一個檔案的 MD5 值 3")
 
 clear_filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 clear_filename = "Python-3.7.17.tar.xz"
@@ -397,7 +404,7 @@ print(md5_value)
 
 print("------------------------------------------------------------")  # 60個
 
-print('計算一個檔案的 MD5 值 4')
+print("計算一個檔案的 MD5 值 4")
 
 md5_value = hashlib.md5()  # 建立 md5_value 物件
 clear_filename = "C:/_git/vcs/_1.data/______test_files1/calculate_hash.txt"
