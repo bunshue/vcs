@@ -1,14 +1,18 @@
-'''
+"""
 CH02網路爬蟲資料收集
 
 !pip install scraparazzie
 
 
-'''
+"""
+
+import sys
 
 print('------------------------------------------------------------')	#60個
 
 '''
+
+print('爬取 google news')
 from scraparazzie import scraparazzie
 
 client = scraparazzie.NewsClient(language='chinese traditional', location='Taiwan', topic='Business', max_results=8)
@@ -36,6 +40,7 @@ print(client.get_config())
 print('------------------------------------------------------------')	#60個
 
 print('Newspaper3k：擷取全世界新聞')
+
 # !pip install newspaper3k
 
 import newspaper
@@ -71,9 +76,11 @@ article = Article(url)
 article.download()
 print(fulltext(article.html))
 
-
+'''
 print('------------------------------------------------------------')	#60個
 
+"""
+# fail
 print('technews_tw：擷取台灣科技新聞')
 
 # !pip install technews-tw
@@ -81,6 +88,7 @@ print('technews_tw：擷取台灣科技新聞')
 from technews import TechNews
 
 news = TechNews("business").get_today_news()
+
 # news = TechNews("orange").get_today_news()
 # news = TechNews("ithome").get_today_news()
 # news = TechNews("inside").get_today_news()
@@ -104,11 +112,7 @@ for key in content:
   if 'ago' in mononews['date']: mononews['date'] = date1
   print('發布日期：', mononews['date'])
   print('========================================================================')
-
-
-'''
-
-
+"""
 
 print('------------------------------------------------------------')	#60個
 
@@ -135,19 +139,16 @@ BEGIN_DATE = datetime.date(2020, 10, 1)
 END_DATE = datetime.date(2020, 10, 2)
 QUERY_FORMAT = QueryFormat.DAY
 CONVERT2NUM = True
+
+""" #fail
 collect_weather_tw(STATION_CSV, OUTPUT_PATH, BEGIN_DATE, END_DATE, QUERY_FORMAT, CONVERT2NUM)
 
-
-''' fail??
 import pandas as pd
 df = pd.read_csv('result5.csv')
-df
-'''
-
+print(df)
       
 
-print('------------------------------------------------------------')	#60個
-
+"""
 
 
 print('------------------------------------------------------------')	#60個

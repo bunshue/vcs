@@ -6,22 +6,21 @@ https://paul.pub/matplotlib-3d-plotting/
 參考 Python 使用 Matplotlib 繪製 3D 資料圖形教學與範例
 https://officeguide.cc/python-matplotlib-three-dimensional-plotting-tutorial-examples/
 
-"""
+3D plot 集合 1 大整理
 
+1. plot_wireframe
+2. plot_surface
 
-"""
-3D plot 集合 4
-
-共用資料 大整理用
-
-plot_wireframe
-plot_surface
-scatter
+3. contour
 contour
 contour3D
 contourf
 contourf3D
 
+3. scatter
+
+
+ax.plot
 
 """
 
@@ -54,24 +53,14 @@ from matplotlib.cm import viridis as colormap
 
 print("------------------------------------------------------------")  # 60個
 
-fig = plt.figure(
-    num="3D繪圖 集合 1 wireframe(2) + surface(3)",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
-
-print("------------------------------------------------------------")  # 60個
-
 # 此 figure 共用資料
 
 # 1. Z = X^2 + Y^2
 x = np.arange(-5, 5, 0.1)
 y = np.arange(-5, 5, 0.1)
 X, Y = np.meshgrid(x, y)
+
+# np.add 兩個一維陣列組成一個二維陣列
 Z = np.add(np.power(X, 2), np.power(Y, 2))  # Z = X^2 + Y^2
 
 # 2. Z = sin(sqrt(X^2 + Y^2))
@@ -93,6 +82,18 @@ Z = X * Y
 
 print("------------------------------------------------------------")  # 60個
 
+fig = plt.figure(
+    num="3D繪圖 集合 1 wireframe",
+    figsize=(12, 8),
+    dpi=100,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
+
+print("------------------------------------------------------------")  # 60個
+
 ax = fig.add_subplot(231, projection="3d")  # 第一張圖
 
 ax.plot_wireframe(X, Y, Z)
@@ -101,7 +102,6 @@ ax.plot_wireframe(X, Y, Z)
 #ax.plot_wireframe(X, Y, Z, cstride=10, rstride=10)
 
 ax.set_title('plot_wireframe 3D線框圖')
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -112,6 +112,50 @@ ax.contour(X, Y, Z, cmap=cm.Accent, linewidths=2)
 
 #ax.set_title("等高線")
 ax.set_title('plot_wireframe 3D線框圖 + 等高線')
+
+print("------------------------------------------------------------")  # 60個
+
+ax = fig.add_subplot(233, projection="3d")  # 第三張圖
+
+
+print("------------------------------------------------------------")  # 60個
+
+ax = fig.add_subplot(234, projection="3d")  # 第四張圖
+
+
+print("------------------------------------------------------------")  # 60個
+
+ax = fig.add_subplot(235, projection="3d")  # 第五張圖
+
+print("------------------------------------------------------------")  # 60個
+
+ax = fig.add_subplot(236, projection="3d")  # 第六張圖
+
+
+plt.tight_layout()
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+fig = plt.figure(
+    num="3D繪圖 集合 2 surface",
+    figsize=(12, 8),
+    dpi=100,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
+
+print("------------------------------------------------------------")  # 60個
+
+ax = fig.add_subplot(231, projection="3d")  # 第一張圖
+
+
+print("------------------------------------------------------------")  # 60個
+
+ax = fig.add_subplot(232, projection="3d")  # 第二張圖
+
 
 print("------------------------------------------------------------")  # 60個
 
@@ -168,10 +212,13 @@ ax.set_title('plot_surface 3D曲線表面')
 plt.tight_layout()
 plt.show()
 
+
+
+
 print("------------------------------------------------------------")  # 60個
 
 fig = plt.figure(
-    num="3D繪圖 集合 2 contour(4)",
+    num="3D繪圖 集合 2 contour",
     figsize=(12, 8),
     dpi=100,
     facecolor="whitesmoke",
@@ -285,8 +332,10 @@ print("------------------------------------------------------------")  # 60個
 
 ax = fig.add_subplot(231, projection="3d")  # 第一張圖
 
-x = np.linspace(-10, 10, 1000)
-y = np.linspace(-10, 10, 1000)
+x = np.linspace(-10, 10, 100)
+y = np.linspace(-10, 10, 100)
+
+# np.add 兩個一維陣列組成一個二維陣列
 z = np.add(x, y)
 
 ax.plot(x, y, z)
@@ -301,9 +350,9 @@ p = np.mgrid[0 : 2.0 * np.pi : 20j]
 x = 3.0 * np.cos(p) * np.sin(np.pi / 6.0)
 y = 3.0 * np.sin(p) * np.sin(np.pi / 6.0)
 z = 3.0 * np.cos(np.pi / 6.0)
+
 ax.plot(x, y, z, color="r")
-ax.plot(p / 3.0, p / 3.0, p / 3.0, color="b")
-# plt.savefig("matplot-3D-1.png")
+ax.plot(p / 3.0, p / 3.0, p / 3.0, color="g")
 
 print("------------------------------------------------------------")  # 60個
 
@@ -323,37 +372,66 @@ print("------------------------------------------------------------")  # 60個
 
 ax = fig.add_subplot(234, projection="3d")  # 第四張圖
 
-# 線框圖
-step = 0.04
-maxval = 1.0
+start = 0
+end = np.pi * 20   
+step = np.pi / 180
 
-# Create supporting points in polar coordinates
-r = np.linspace(0, 1.2, 50)
-p = np.linspace(0, 2 * np.pi, 50)
-R, P = np.meshgrid(r, p)
-# Transform them to cartesian system
-X, Y = R * np.cos(P), R * np.sin(P)
+x = np.arange(start, end, step)
+y = np.sin(x)
+z = np.cos(x) 
 
-Z = (R**2 - 1) ** 2
-ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap=colormap)
-ax.set_zlim3d(0, 1)
+ax.plot(x, y, z)
 
-ax.set_title("3D surface plot")
-
-
+plt.title('3D Plot')
 
 print("------------------------------------------------------------")  # 60個
 
 ax = fig.add_subplot(235, projection="3d")  # 第五張圖
 
+# Plot a sin curve using the x and y axes.
+x = np.linspace(0, 1, 100)
+y = np.sin(x * 2 * np.pi) / 2 + 0.5
+ax.plot(x, y, zs=0, zdir="z", label="curve in (x, y)")
 
 print("------------------------------------------------------------")  # 60個
 
 ax = fig.add_subplot(236, projection="3d")  # 第六張圖
 
+x = np.arange(0, 20, 0.1)
+y = np.sin(x)
+z = np.cos(x)
+
+ax.plot(x, y, z, color='m', lw=3)
 
 plt.tight_layout()
 plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+fig = plt.figure()
+ax = fig.add_subplot(projection='3d')
+
+z = np.linspace(0, 1, 300)
+x = z * np.sin(30*z)
+y = z * np.cos(30*z)
+
+ax.plot(x, y, z)
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+fig = plt.figure()
+ax = fig.add_subplot(projection='3d')
+
+z = np.linspace(0, 1, 300)
+x = z * np.sin(30*z)
+y = z * np.cos(30*z)
+
+ax.plot3D(x, y, z)
+
+plt.show()
+
 
 print("------------------------------------------------------------")  # 60個
 
@@ -706,12 +784,9 @@ c = np.random.rand(N, N)
 sc = ax.scatter(X, Y, Z, c=c, marker='o', cmap='hsv')
 fig.colorbar(sc)
 
-
-
 print("------------------------------------------------------------")  # 60個
 
 ax = fig.add_subplot(232, projection='3d')
-
 
 N = 50
 x = np.linspace(-5, 5, N)
@@ -724,7 +799,6 @@ c = np.random.rand(N, N)
 sc = ax.scatter(X, Y, Z, c=c, marker='o', cmap='hsv')
 
 fig.colorbar(sc)
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -741,7 +815,6 @@ c = np.random.rand(N, N)
 sc = ax.scatter(X, Y, Z, c=c, marker='o', cmap='hsv')
 
 fig.colorbar(sc)
-
 
 print("------------------------------------------------------------")  # 60個
                  
@@ -771,62 +844,7 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-
-fig = plt.figure(
-    num="3D繪圖 集合 3",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
-
-print("------------------------------------------------------------")  # 60個
-
-ax = fig.add_subplot(231, projection='3d')
-
-# Plot a sin curve using the x and y axes.
-x = np.linspace(0, 1, 100)
-y = np.sin(x * 2 * np.pi) / 2 + 0.5
-ax.plot(x, y, zs=0, zdir="z", label="curve in (x, y)")
-
-
-print("------------------------------------------------------------")  # 60個
-
-ax = fig.add_subplot(232, projection='3d')
-
-start = 0
-end = np.pi * 20   
-step = np.pi / 180
-
-x = np.arange(start, end, step)
-y = np.sin(x)
-z = np.cos(x) 
-
-ax.plot(x, y, z)
-
-plt.title('3D Plot')
-
-
-print("------------------------------------------------------------")  # 60個
-
-ax = fig.add_subplot(233, projection='3d')
-
-
-print("------------------------------------------------------------")  # 60個
-                 
-ax = fig.add_subplot(234, projection='3d')
-
-print("------------------------------------------------------------")  # 60個
-
-ax = fig.add_subplot(235, projection='3d')
-
-
-print("------------------------------------------------------------")  # 60個
-
-ax = fig.add_subplot(236, projection='3d')
-
+"""
 # intersection curves
 t = np.pi / 4.0
 f = np.pi / 4.0
@@ -851,120 +869,15 @@ x = r * np.sin(t) * np.cos(f)
 y = r * np.sin(t) * np.sin(f)
 z = r * np.cos(t)
 ax.plot(x, y, z, color="k", lw=4)
-
-
-
-plt.tight_layout()
-plt.show()
-
-
-
+"""
 
 print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
 
-fig = plt.figure()
-ax = fig.add_subplot(projection='3d')
-
-z = np.linspace(0, 1, 300)
-x = z * np.sin(30*z)
-y = z * np.cos(30*z)
-
-ax.plot(x, y, z)
-
-plt.show()
 
 print("------------------------------------------------------------")  # 60個
-
-fig = plt.figure()
-ax = fig.add_subplot(projection='3d')
-
-z = np.linspace(0, 1, 300)
-x = z * np.sin(30*z)
-y = z * np.cos(30*z)
-
-ax.plot3D(x, y, z)
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-fig = plt.figure()
-ax = fig.add_subplot(projection='3d')
-
-x = np.arange(0, 20, 0.1)
-y = np.sin(x)
-z = np.cos(x)
-
-ax.plot(x, y, z, color='m', lw=3)
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-
-
-ax.view_init(60,45)                         # 設定 3D 視角
-
-
-ax.set_xlabel('x')
-ax.set_ylabel('y')
-ax.set_zlabel('z')
-ax.set_xlabel("X")
-ax.set_ylabel("Y")
-ax.set_zlabel("Z")
-
-
-
-ax.set_xlabel("X Label")
-ax.set_ylabel("Y Label")
-ax.set_zlabel("Z Label")
-
-ax.set_xlabel(r"$\phi_\mathrm{real}$")
-ax.set_ylabel(r"$\phi_\mathrm{im}$")
-ax.set_zlabel(r"$V(\phi)$")
-
-
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
-
-ax.set_xlabel('x',fontsize=14,color='b')
-ax.set_ylabel('y',fontsize=14,color='b')
-ax.set_zlabel('z',fontsize=14,color='b')
-
-ax.set_xlabel('X',color='b')
-ax.set_ylabel('Y',color='b')
-
-ax.set_title('3D圖表',fontsize=16,color='b')
-
-print("------------------------------------------------------------")  # 60個
-
-fig = plt.figure()
-ax = plt.axes(projection="3d")
-
-# 3D plot
-
-plt.tight_layout()
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-fig = plt.figure()
-ax = fig.add_subplot(projection='3d')
-
-# 3D plot
-
-plt.show()
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -1092,6 +1005,70 @@ print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
+fig = plt.figure()
+ax = plt.axes(projection="3d")
+
+# 3D plot
+
+plt.tight_layout()
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+fig = plt.figure()
+ax = fig.add_subplot(projection='3d')
+
+# 3D plot
+
+plt.show()
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+ax.view_init(60,45)                         # 設定 3D 視角
+
+
+ax.set_xlabel('x')
+ax.set_ylabel('y')
+ax.set_zlabel('z')
+ax.set_xlabel("X")
+ax.set_ylabel("Y")
+ax.set_zlabel("Z")
+
+
+
+ax.set_xlabel("X Label")
+ax.set_ylabel("Y Label")
+ax.set_zlabel("Z Label")
+
+ax.set_xlabel(r"$\phi_\mathrm{real}$")
+ax.set_ylabel(r"$\phi_\mathrm{im}$")
+ax.set_zlabel(r"$V(\phi)$")
+
+
+plt.rcParams["font.family"] = ["Microsoft JhengHei"]
+
+ax.set_xlabel('x',fontsize=14,color='b')
+ax.set_ylabel('y',fontsize=14,color='b')
+ax.set_zlabel('z',fontsize=14,color='b')
+
+ax.set_xlabel('X',color='b')
+ax.set_ylabel('Y',color='b')
+
+ax.set_title('3D圖表',fontsize=16,color='b')
+
+
+
+
 
 """
 #製作動圖
@@ -1113,6 +1090,8 @@ ax.set_ylabel("Y")
 X = np.arange(-5, 5, 0.1)
 Y = np.arange(-5, 5, 0.1)
 X, Y = np.meshgrid(X, Y)
+
+# np.add 兩個一維陣列組成一個二維陣列
 Z = np.add(np.power(X, 2), np.power(Y, 2))  # Z = X^2 + Y^2
 
 # Z = (1.0 - X)**2 + 100.0 * (Y - X*X)**2
@@ -1121,5 +1100,34 @@ Z = np.add(np.power(X, 2), np.power(Y, 2))  # Z = X^2 + Y^2
 # R = np.sqrt(X**2 + Y**2)
 # R = np.sqrt(X**2 + Y**2)
 # Z = np.sin(R)
+
+
+
+# plt.savefig("matplot-3D-1.png")
+
+
+
+
+
+
+# 線框圖
+step = 0.04
+maxval = 1.0
+
+# Create supporting points in polar coordinates
+r = np.linspace(0, 1.2, 50)
+p = np.linspace(0, 2 * np.pi, 50)
+R, P = np.meshgrid(r, p)
+# Transform them to cartesian system
+X, Y = R * np.cos(P), R * np.sin(P)
+
+Z = (R**2 - 1) ** 2
+ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap=colormap)
+ax.set_zlim3d(0, 1)
+
+ax.set_title("3D surface plot")
+
+print("------------------------------------------------------------")  # 60個
+
 
 
