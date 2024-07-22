@@ -11,7 +11,6 @@ import tkinter as tk
 from tkinter import ttk
 
 print("------------------------------------------------------------")  # 60個
-'''
 
 def run_digital_clock(label1):                     # 數字變數內容的更動
     def counting():                         # 更動數字方法
@@ -132,27 +131,33 @@ window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-
+def stop_running():
+    global running
+    running = False
 def displayFan(startingAngle):
     canvas.delete("fan")    
-    canvas.create_arc(xWidth / 2 - r, yHeight / 2 - r, xWidth / 2 + r, yHeight / 2 + r,
+    canvas.create_arc(W / 2 - r, H / 2 - r, W / 2 + r, H / 2 + r,
             start = startAngle + 0, extent = 60, fill = "green", tags = "fan")        
-    canvas.create_arc(xWidth / 2 - r, yHeight / 2 - r, xWidth / 2 + r, yHeight / 2 + r,
+    canvas.create_arc(W / 2 - r, H / 2 - r, W / 2 + r, H / 2 + r,
             start = startAngle + 120, extent = 60, fill = "green", tags = "fan")        
-    canvas.create_arc(xWidth / 2 - r, yHeight / 2 - r, xWidth / 2 + r, yHeight / 2 + r,
+    canvas.create_arc(W / 2 - r, H / 2 - r, W / 2 + r, H / 2 + r,
             start = startAngle + 240, extent = 60, fill = "green", tags = "fan")        
 
-xWidth = 300
-yHeight = 300
+W = 300
+H = 300
 r = 120
 
 window = tk.Tk() 
         
-canvas = tk.Canvas(window,width=xWidth, height=yHeight)
+canvas = tk.Canvas(window,width=W, height=H)
 canvas.pack()
 
+tk.Button(window, text="Stop", command=stop_running).pack()
+
+running = True
+
 startAngle = 0
-while True:
+while running == True:
     startAngle += 5
     displayFan(startAngle)
     canvas.after(50) 
@@ -182,16 +187,16 @@ def running():
         raceResult.set("")
         canvas.delete('all')
         canvas.create_text(10,50,text="1")
-        id1 = canvas.create_oval(20,50,70,100,fill='yellow')
+        item1 = canvas.create_oval(20,50,70,100,fill='yellow')
         canvas.create_text(10,150,text="2")
-        id2 = canvas.create_oval(20,150,70,200,fill='aqua')
+        item2 = canvas.create_oval(20,150,70,200,fill='aqua')
         return
     canvas.delete('all')
     canvas.create_text(10,50,text="1")
-    id1 = canvas.create_oval(20,50,70,100,fill='yellow')
+    item1 = canvas.create_oval(20,50,70,100,fill='yellow')
     canvas.create_text(10,150,text="2")
-    id2 = canvas.create_oval(20,150,70,200,fill='aqua')
-    id1Loc, id2Loc = 0, 0
+    item2 = canvas.create_oval(20,150,70,200,fill='aqua')
+    item1Loc, item2Loc = 0, 0
     for x in range(0, 100):
         if ball.get() == '1':
             weight = 40
@@ -203,14 +208,14 @@ def running():
             raceResult.set("輸入錯誤!")
             return
         if random.randint(1,100) > weight:
-            canvas.move(id2, 5, 0)  # id2 x軸移動5像素, y軸移動0像素
-            id2Loc += 1
+            canvas.move(item2, 5, 0)  # item2 x軸移動5像素, y軸移動0像素
+            item2Loc += 1
         else:
-            canvas.move(id1, 5, 0)  # id1 x軸移動5像素, y軸移動0像素
-            id1Loc += 1
+            canvas.move(item1, 5, 0)  # item1 x軸移動5像素, y軸移動0像素
+            item1Loc += 1
         window.update()                 # 強制tkinter重繪
         canvas.after(50)
-    if id1Loc > id2Loc:
+    if item1Loc > item2Loc:
         Flag = True
     else:
         Flag = False
@@ -233,12 +238,15 @@ frame.pack(padx=5, pady=5)
 tk.Label(frame, text="那一個球獲勝 : ").pack(side=tk.LEFT)
 ball = tk.StringVar()
 ball.set("1or2")
+
 entry = tk.Entry(frame, textvariable=ball).pack(side=tk.LEFT,padx=3)
+
 startBtn = tk.StringVar()
 startBtn.set("開始")
-tk.Button(frame, textvariable=startBtn,command=running).pack(side=tk.LEFT)
-raceResult = tk.StringVar()
 
+tk.Button(frame, textvariable=startBtn,command=running).pack(side=tk.LEFT)
+
+raceResult = tk.StringVar()
 tk.Label(frame,width=16,textvariable=raceResult).pack(side=tk.LEFT,padx=3)
 
 window.mainloop() 
@@ -250,16 +258,16 @@ window = tk.Tk()
 canvas= tk.Canvas(window, width=500, height=300)
 canvas.pack()
 
-#id1 = canvas.create_oval(10,50,60,100,fill='yellow', outline='lightgray')
-id1 = canvas.create_oval(10,50,60,100,fill='yellow')
-id2 = canvas.create_oval(10,150,60,200,fill='aqua')
+#item1 = canvas.create_oval(10,50,60,100,fill='yellow', outline='lightgray')
+item1 = canvas.create_oval(10,50,60,100,fill='yellow')
+item2 = canvas.create_oval(10,150,60,200,fill='aqua')
 
-#ballPos = canvas.coords(id1)
+#ballPos = canvas.coords(item1)
 #print(ballPos)
 
 for x in range(0, 80):
-    canvas.move(id1, 5, 1)      # id1 x軸移動5像素, y軸移動1像素
-    canvas.move(id2, 5, 1)      # id2 x軸移動5像素, y軸移動1像素
+    canvas.move(item1, 5, 1)      # item1 x軸移動5像素, y軸移動1像素
+    canvas.move(item2, 5, 1)      # item2 x軸移動5像素, y軸移動1像素
     window.update()                 # 強制tkinter重繪
     time.sleep(0.05) # 等同於 canvas.after(50)
    
@@ -271,15 +279,19 @@ window = tk.Tk()
 
 canvas= tk.Canvas(window, width=500, height=250)
 canvas.pack()
-id1 = canvas.create_oval(10,50,60,100,fill='yellow')
-id2 = canvas.create_oval(10,150,60,200,fill='aqua')
+
+item1 = canvas.create_oval(10,50,60,100,fill='yellow')
+item2 = canvas.create_oval(10,150,60,200,fill='aqua')
+
 for x in range(0, 100):
     if random.randint(1,100) > 70:
-        canvas.move(id2, 5, 0)  # id2 x軸移動5像素, y軸移動0像素
+        canvas.move(item2, 5, 0)  # item2 x軸移動5像素, y軸移動0像素
     else:
-        canvas.move(id1, 5, 0)  # id1 x軸移動5像素, y軸移動0像素    
+        canvas.move(item1, 5, 0)  # item1 x軸移動5像素, y軸移動0像素    
     window.update()                 # 強制tkinter重繪
     time.sleep(0.05)
+
+print('完成')
 
 window.mainloop()
 
@@ -500,10 +512,10 @@ def animate(): # Move the message
             redisplayBall(ball)
     
 def redisplayBall(ball):
-    if ball.x > width or ball.x < 0:
+    if ball.x > W or ball.x < 0:
         ball.dx = -ball.dx
             
-    if ball.y > height or ball.y < 0:
+    if ball.y > H or ball.y < 0:
         ball.dy = -ball.dy
     
     ball.x += ball.dx
@@ -516,9 +528,9 @@ ballList = [] # Create a list for balls
 window = tk.Tk()
 window.title("Bouncing Ball 9")
 
-width = 350 # Width of the canvas
-height = 150 # Width of the canvas
-canvas = tk.Canvas(window, bg = "white", width = width, height = height)
+W = 350 # Width of the canvas
+H = 150 # Width of the canvas
+canvas = tk.Canvas(window, bg = "white", width = W, height = H)
 canvas.pack()
 
 frame = tk.Frame(window)
@@ -532,6 +544,7 @@ animate()
 
 window.mainloop()
 
+sys.exit()
 print("------------------------------------------------------------")  # 60個
 
 
@@ -543,7 +556,7 @@ def getColor():
 # 定義Ball類別
 class Ball:
     def __init__(self):
-        self.x = width / 2              # 發球的x軸座標 
+        self.x = W / 2              # 發球的x軸座標 
         self.y = 0                      # 發球的y軸座標 
         self.dx = 3                     # 每次移動x距離
         self.dy = 3                     # 每次移動y距離
@@ -575,9 +588,9 @@ def animate():                          # 球體移動
             redisplayBall(ball)
     
 def redisplayBall(ball):                # 重新顯示球
-    if ball.x > width or ball.x < 0:
+    if ball.x > W or ball.x < 0:
         ball.dx = -ball.dx            
-    if ball.y > height or ball.y < 0:
+    if ball.y > H or ball.y < 0:
         ball.dy = -ball.dy   
     ball.x += ball.dx
     ball.y += ball.dy
@@ -588,8 +601,8 @@ def redisplayBall(ball):                # 重新顯示球
 window = tk.Tk()
 
 ballList = []                           # 建立球的串列
-width, height = 400, 260
-canvas = tk.Canvas(window, width=width, height=height)
+W, H = 400, 260
+canvas = tk.Canvas(window, width=W, height=H)
 canvas.pack()
         
 frame = tk.Frame(window)                       # 建立下方功能紐
@@ -611,16 +624,16 @@ ballRunning = False
 animate()
         
 window.mainloop()
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 print("文字移動")
 
 window = tk.Tk()
 
-xWidth = 300
-yHeight = 100
-canvas = tk.Canvas(window, bg="white", width=xWidth, height=yHeight)
+W = 300
+H = 100
+canvas = tk.Canvas(window, bg="white", width=W, height=H)
 canvas.pack()
 
 x = 0  # Starting x position
@@ -632,7 +645,7 @@ while True:
     canvas.move("text", dx, 0)  # 移動dx, dy
     canvas.after(100)  # 100 msec
     canvas.update()
-    if x < xWidth:
+    if x < W:
         x += dx
     else:
         x = 0

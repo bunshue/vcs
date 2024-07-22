@@ -1676,7 +1676,7 @@ while True:
     cv2.imshow("ImageShow", show)
 
 cv2.destroyAllWindows()
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 print('三種二值化方法')
@@ -4387,7 +4387,7 @@ cv2.waitKey(0)
 cv2.destroyAllWindows()
 """
 print("------------------------------------------------------------")  # 60個
-
+'''
 print("幾何形狀的檢測和擬合 HTLine")
 
 from mpl_toolkits.mplot3d import Axes3D
@@ -4466,6 +4466,8 @@ if __name__ == "__main__":
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 
+
+sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 

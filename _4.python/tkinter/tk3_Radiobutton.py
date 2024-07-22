@@ -20,10 +20,9 @@ print("------------------------------------------------------------")  # 60個
 
 
 def do_select_string9():
-    label_selection_string9.config(text="你選擇了 :" + var_string9.get())
+    label_selection_string9.config(text="s9你選擇了 :" + var_string9.get())
 
-
-# 一個一個建立Radiobutton
+tk.Label(window, text = "一個一個建立Radiobutton").pack()
 
 var_string9 = tk.StringVar()
 var_string9.set("")  # 預設
@@ -57,7 +56,7 @@ print("------------------------------------------------------------")  # 60個
 def do_select_int1():
     value = var_int1.get()
     ##print(items1i[value])
-    print("你選擇了 :" + items1i[value])
+    print("i1你選擇了 :" + items1i[value])
 
 
 items1i = {0: "AAA", 1: "BBB", 2: "CCC"}
@@ -80,15 +79,12 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
-
-# 用字典串列元組 一次建立一組Radiobutton
-
-
 def do_select_int3():
     selected_item = var_int3.get()
     label_selection_int3.config(text=items3i[selected_item][0])
-    print("你選擇了 :", var_int3.get())
+    print("i3你選擇了 :", var_int3.get())
 
+tk.Label(window, text = "用字典串列元組 一次建立一組Radiobutton").pack()
 
 items3i = (("AAA", 0), ("BBB", 1), ("CCC", 2))
 print(type(items3i))
@@ -112,15 +108,15 @@ print("------------------------------------------------------------")  # 60個
 
 
 def do_select_string1():
-    print("你選擇了 :", var_string1.get())
+    print("s1你選擇了 :", var_string1.get())
 
+tk.Label(window, text = "用字典串列元組 一次建立一組Radiobutton").pack()
 
 items1s = [("AAA", 0), ("BBB", 1), ("CCC", 2)]
 
 var_string1 = tk.StringVar()  # 設定以字串表示選單編號
 var_string1.set("2")  # 預設
 
-# 用字典串列元組 一次建立一組Radiobutton
 for selection, num in items1s:
     rb = ttk.Radiobutton(
         window,
@@ -141,7 +137,7 @@ rb1 = ttk.Radiobutton(
     text="AAA",
     value=1,
     variable="this is a lion-mouse",
-    command=lambda: print("你選擇了 : AAA"),
+    command=lambda: print("??你選擇了 : AAA"),
 )
 rb1.pack()
 
@@ -150,12 +146,11 @@ rb2.pack()
 
 
 def do_select_string2():
-    print("你選擇了 : CCC/DDD")
+    print("s2你選擇了 : CCC/DDD")
 
 
 var_string2 = tk.StringVar()
 
-# widgets
 rb3 = ttk.Radiobutton(
     window, text="CCC", value="C", command=do_select_string2, variable=var_string2
 )
@@ -173,7 +168,7 @@ print("------------------------------------------------------------")  # 60個
 
 
 def do_select_string3():
-    print("你選擇了 :" + var_string3.get())
+    print("s3你選擇了 :" + var_string3.get())
 
 
 var_string3 = tk.StringVar()
@@ -233,7 +228,7 @@ print("------------------------------------------------------------")  # 60個
 
 
 def do_select_int4():
-    print("你選擇了 :", var_int4.get())
+    print("i4你選擇了 :", var_int4.get())
 
 
 items4i = [("AAA", 0), ("BBB", 1), ("CCC", 2)]
@@ -253,7 +248,7 @@ print("------------------------------------------------------------")  # 60個
 
 
 def do_select_int5():
-    print("你選擇了 :", var_int5.get())
+    print("i5你選擇了 :", var_int5.get())
 
 
 items5i = [("AAA", 0), ("BBB", 1), ("CCC", 2)]
@@ -276,12 +271,13 @@ def do_select_int6():
     print(items6[var_int6.get()])
 
 
+tk.Label(window, text = "用字典串列元組 一次建立一組Radiobutton").pack()
+
 items6 = {0: "AAA", 1: "BBB", 2: "CCC"}
 
 var_int6 = tk.IntVar()
 var_int6.set(2)  # 預設
 
-# 用字典串列元組 一次建立一組Radiobutton
 for val, city in items6.items():
     tk.Radiobutton(
         window, text=city, variable=var_int6, value=val, command=do_select_int6
@@ -297,12 +293,13 @@ def do_select_int7():
     print(items7i[var_int7.get()])  # 列出所選城市
 
 
+tk.Label(window, text = "用字典串列元組 一次建立一組Radiobutton").pack()
+
 items7i = {0: "AAA", 1: "BBB", 2: "CCC"}
 
 var_int7 = tk.IntVar()
 var_int7.set(2)  # 預設
 
-# 用字典串列元組 一次建立一組Radiobutton
 for val, city in items7i.items():
     tk.Radiobutton(
         window,
@@ -321,7 +318,7 @@ print("------------------------------------------------------------")  # 60個
 
 
 def do_select_int8():
-    print("你選擇了 :", var_int8.get())
+    print("i8你選擇了 :", var_int8.get())
 
 
 items8i = [("AAA", 0), ("BBB", 1), ("CCC", 2)]
@@ -341,7 +338,7 @@ print("------------------------------------------------------------")  # 60個
 
 
 def do_select_int9():
-    print("你選擇了 :", var_int9.get())
+    print("i9你選擇了 :", var_int9.get())
 
 
 items9i = [("AAA", 0), ("BBB", 1), ("CCC", 2)]
@@ -364,12 +361,13 @@ def do_select_inta():
     print(itemsa[var_inta.get()])  # 列出所選城市
 
 
+tk.Label(window, text = "用字典串列元組 一次建立一組Radiobutton").pack()
+
 itemsa = {0: "AAA", 1: "BBB", 2: "CCC"}
 
 var_inta = tk.IntVar()
 var_inta.set(2)  # 預設
 
-# 用字典串列元組 一次建立一組Radiobutton
 for val, city in itemsa.items():
     tk.Radiobutton(
         window, text=city, variable=var_inta, value=val, command=do_select_inta
@@ -393,7 +391,7 @@ print("------------------------------------------------------------")  # 60個
 
 
 def do_select_intd():
-    print("你選擇了 :", var_intd.get())
+    print("id你選擇了 :", var_intd.get())
 
 
 itemsdi = [("AAA", 1), ("BBB", 2), ("CCC", 3)]
@@ -585,7 +583,7 @@ sys.exit()
 
 
 def do_select_string4():
-    print("你選擇了 : " + var_string4.get())
+    print("s4你選擇了 : " + var_string4.get())
 
 
 frame1 = tk.Frame(window)  # mp3 歌曲容器

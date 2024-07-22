@@ -41,7 +41,18 @@ def searchdic(search_word):
     soup = BeautifulSoup(html_data.text, "html.parser")
     # soup = BeautifulSoup(html_data.text, 'html5lib')   #也可
     # soup = BeautifulSoup(html_data.text, 'lxml')   # 指定 lxml 作為解析器
-    # print(soup.prettify()) # 把排版後的 html 印出來
+    print(soup.prettify()) # 把排版後的 html 印出來
+
+
+    sorry_word = soup.find_all("div", class_="w-100p fz-16 va-mid ta-c")
+    for sw in sorry_word:
+        #print(type(sorry_word))
+        #print(len(sorry_word))
+        for di in sw:
+            #print(di.text)
+            #result += di.text.replace("\n", "") + "\n"
+            if "很抱歉" in di.text:
+                return None
 
     """
     # 一些屬性或方法, BeautifulSoup的用法
@@ -169,9 +180,16 @@ print('------------------------------')
 while True:
     print()
     search_word = input("請輸入查詢單字 : ")
+    if search_word == "":
+        continue
+    if search_word == "q":
+        break
+    
     result = searchdic(search_word)
-    print(result)
-
+    if result == None:
+        print('找不到 :', search_word)
+    else:
+        print(result)
 
 print("------------------------------------------------------------")  # 60個
 
