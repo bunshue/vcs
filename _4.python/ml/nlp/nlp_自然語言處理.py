@@ -39,7 +39,7 @@ for source, output in converted:
 
 print('------------------------------------------------------------')	#60個
 
-"""
+""" 下載 pywordseg 要很久 失敗
 print('pywordseg：繁體中文斷詞')
 # pip install pywordseg
 

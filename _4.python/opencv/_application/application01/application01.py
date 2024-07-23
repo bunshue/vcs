@@ -25,7 +25,7 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 # 設定負號
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
-
+'''
 print("------------------------------------------------------------")  # 60個
 
 """
@@ -117,7 +117,7 @@ engine = load_engine('tmp_ehappy.p')
 testimage = 'catch.jpg'
 names, boxes = engine.make_prediction(testimage)
 print(names, boxes)
-
+'''
 print("------------------------------------------------------------")  # 60個
 
 print('fer：偵測臉部表情')
@@ -133,19 +133,26 @@ emotion = detector.detect_emotions(img)
 print(emotion)
 
 img = cv2.imread(filename)
-detector = FER()
+detector = FER()#使用OpenCV之Haar方法偵測人臉
 
+print('圖片 :', filename)
 try:
     emotion, score = detector.top_emotion(img)
     print(emotion, score)
 except:
     print('未偵測到人臉！')
 
+plt.imshow(img)
+plt.show()
+
+print("------------------------------")  # 30個
+
 #happy
 filename = 'C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Elon_Musk03.jpg'
 img = cv2.imread(filename)
-detector = FER(mtcnn=True)
+detector = FER(mtcnn=True)#使用MTCNN神經網路偵測人臉
 
+print('圖片 :', filename)
 try:
     emotion, score = detector.top_emotion(img)
     print(emotion, score)

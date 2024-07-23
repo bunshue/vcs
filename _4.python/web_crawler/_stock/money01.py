@@ -52,7 +52,7 @@ if real['success']:
 else:
     print('錯誤：' + real['rtmessage'])
 
-
+print('------------------------------------------------------------')	#60個
 
 import requests
 
@@ -129,11 +129,9 @@ while True:
     for i in range(300):  #每5分鐘讀一次
         time.sleep(1)
 
-
 print('------------------------------------------------------------')	#60個
 
 print('TWCB：中央銀行資料庫')
-
 
 import TWCB
 
@@ -158,13 +156,8 @@ if not os.path.isdir('twcb'):
 for key in test_data.keys():
     data = pd.read_json(test_data[key])
     data.to_csv('twcb/' + key + '.csv')
-    
-
-
 
 print('------------------------------------------------------------')	#60個
-
-
 
 print("查詢台銀牌告匯率")
 

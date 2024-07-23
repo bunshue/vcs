@@ -21,10 +21,9 @@ for i in format_list:
         audio_codec="aac",
     )
 
-print("ok")
+print("ok 01")
 
 print("------------------------------------------------------------")  # 60個
-
 
 from moviepy.editor import *
 
@@ -42,21 +41,18 @@ for n in range(3):
             audio_codec="aac",
         )
 
-print("ok")
-
+print("ok 02")
 
 print("------------------------------------------------------------")  # 60個
-
 
 from pydub import AudioSegment  # 載入 pydub 的 AudioSegment 模組
 
 video = AudioSegment.from_file(video_filename)  # 讀取 mp4 檔案
 output.export("tmp_video.mp3")  # 講讀取的聲音輸出為 mp3
-print("ok")
 
+print("ok 03")
 
 print("------------------------------------------------------------")  # 60個
-
 
 from pydub import AudioSegment
 
@@ -64,22 +60,19 @@ video = AudioSegment.from_file(video_filename)
 output = video[2000:10000]  # 剪輯聲音
 output = output[:] + 10  # 放大聲音
 output.export("tmp_output.mp3")
-print("ok")
-
+print("ok 04")
 
 print("------------------------------------------------------------")  # 60個
-
 
 from moviepy.editor import *
 
 video = VideoFileClip(video_filename)  # 讀取影片
 audio = video.audio  # 取出聲音
 audio.write_audiofile("tmp_song.mp3")  # 輸出聲音為 mp3
-print("ok")
 
+print("ok 05")
 
 print("------------------------------------------------------------")  # 60個
-
 
 from moviepy.editor import *
 
@@ -95,11 +88,9 @@ output.write_videofile(
     audio_codec="aac",
 )
 # 注意要設定相關參數，不然轉出來的影片會沒有聲音
-print("ok")
-
+print("ok 06")
 
 print("------------------------------------------------------------")  # 60個
-
 
 from moviepy.editor import *
 
@@ -113,11 +104,9 @@ output.write_videofile(
     audio_codec="aac",
 )
 # 輸出影片，注意後方需要加上參數，不然會沒有聲音
-print("ok")
-
+print("ok 07")
 
 print("------------------------------------------------------------")  # 60個
-
 
 from moviepy.editor import *
 
@@ -132,10 +121,9 @@ output.write_videofile(
     codec="libx264",
     audio_codec="aac",
 )
-print("ok")
+print("ok 08")
 
 print("------------------------------------------------------------")  # 60個
-
 
 from moviepy.editor import *
 
@@ -152,11 +140,9 @@ output.write_videofile(
     codec="libx264",
     audio_codec="aac",
 )
-print("ok")
-
+print("ok 09")
 
 print("------------------------------------------------------------")  # 60個
-
 
 from moviepy.editor import *
 
@@ -172,11 +158,10 @@ output.write_videofile(
     codec="libx264",
     audio_codec="aac",
 )
-print("ok")
 
+print("ok 10")
 
 print("------------------------------------------------------------")  # 60個
-
 
 from moviepy.editor import *
 
@@ -197,11 +182,10 @@ output.write_videofile(
     audio_codec="aac",
 )
 # 輸出影片，注意後方需要加上參數，不然會沒有聲音
-print("ok")
 
+print("ok 11")
 
 print("------------------------------------------------------------")  # 60個
-
 
 from moviepy.editor import *
 
@@ -216,11 +200,9 @@ output.write_videofile(
     audio_codec="aac",
 )
 # 輸出影片，注意後方需要加上參數，不然會沒有聲音
-print("ok")
-
+print("ok 12")
 
 print("------------------------------------------------------------")  # 60個
-
 
 from moviepy.editor import *
 from moviepy.video.fx.all import *
@@ -237,11 +219,9 @@ output.write_videofile(
     codec="libx264",
     audio_codec="aac",
 )
-print("ok")
-
+print("ok 13")
 
 print("------------------------------------------------------------")  # 60個
-
 
 from moviepy.editor import *
 
@@ -260,8 +240,7 @@ output.write_videofile(
     codec="libx264",
     audio_codec="aac",
 )
-print("ok")
-
+print("ok 14")
 
 print("------------------------------------------------------------")  # 60個
 
@@ -277,8 +256,7 @@ output.write_videofile(
     codec="libx264",
     audio_codec="aac",
 )
-print("ok")
-
+print("ok 15")
 
 print("------------------------------------------------------------")  # 60個
 
@@ -294,11 +272,9 @@ output.write_videofile(
     codec="libx264",
     audio_codec="aac",
 )
-print("ok")
-
+print("ok 16")
 
 print("------------------------------------------------------------")  # 60個
-
 
 from moviepy.editor import *
 from moviepy.video.fx.all import *
@@ -318,11 +294,9 @@ output_1.write_videofile(
     codec="libx264",
     audio_codec="aac",
 )
-print("ok")
-
+print("ok 17")
 
 print("------------------------------------------------------------")  # 60個
-
 
 from moviepy.editor import *
 
@@ -336,11 +310,9 @@ output.write_videofile(
     codec="libx264",
     audio_codec="aac",
 )
-print("ok")
-
+print("ok 18")
 
 print("------------------------------------------------------------")  # 60個
-
 
 from moviepy.editor import *
 from moviepy.video.fx.all import *
@@ -357,6 +329,7 @@ output_x.write_videofile(
     codec="libx264",
     audio_codec="aac",
 )
+
 output_y.write_videofile(
     "output_y.mp4",
     fps=30,
@@ -366,11 +339,9 @@ output_y.write_videofile(
     audio_codec="aac",
 )
 
-print("ok")
-
+print("ok 19")
 
 print("------------------------------------------------------------")  # 60個
-
 
 from moviepy.editor import *
 from moviepy.video.fx.all import *
@@ -387,6 +358,7 @@ output_1.write_videofile(
     codec="libx264",
     audio_codec="aac",
 )
+
 output_2.write_videofile(
     "output_2.mp4",
     temp_audiofile="temp-audio.m4a",
@@ -394,6 +366,7 @@ output_2.write_videofile(
     codec="libx264",
     audio_codec="aac",
 )
+
 output_3.write_videofile(
     "output_3.mp4",
     temp_audiofile="temp-audio.m4a",
@@ -402,11 +375,9 @@ output_3.write_videofile(
     audio_codec="aac",
 )
 
-print("ok")
-
+print("ok 20")
 
 print("------------------------------------------------------------")  # 60個
-
 
 from moviepy.editor import *
 from moviepy.video.fx.all import *
@@ -430,11 +401,9 @@ output_2.write_videofile(
     audio_codec="aac",
 )
 
-print("ok")
-
+print("ok 21")
 
 print("------------------------------------------------------------")  # 60個
-
 
 from moviepy.editor import *
 from moviepy.video.fx.all import *
@@ -452,6 +421,7 @@ output_1.write_videofile(
     codec="libx264",
     audio_codec="aac",
 )
+
 output_2.write_videofile(
     "output_2.mp4",
     temp_audiofile="temp-audio.m4a",
@@ -459,6 +429,7 @@ output_2.write_videofile(
     codec="libx264",
     audio_codec="aac",
 )
+
 output_3.write_videofile(
     "output_3.mp4",
     temp_audiofile="temp-audio.m4a",
@@ -466,6 +437,7 @@ output_3.write_videofile(
     codec="libx264",
     audio_codec="aac",
 )
+
 output_4.write_videofile(
     "output_4.mp4",
     temp_audiofile="temp-audio.m4a",
@@ -474,11 +446,9 @@ output_4.write_videofile(
     audio_codec="aac",
 )
 
-print("ok")
-
+print("ok 22")
 
 print("------------------------------------------------------------")  # 60個
-
 
 from moviepy.editor import *
 from moviepy.video.fx.all import *
@@ -496,6 +466,7 @@ output_1.write_videofile(
     codec="libx264",
     audio_codec="aac",
 )
+
 output_2.write_videofile(
     "output_2.mp4",
     temp_audiofile="temp-audio.m4a",
@@ -503,6 +474,7 @@ output_2.write_videofile(
     codec="libx264",
     audio_codec="aac",
 )
+
 output_3.write_videofile(
     "output_3.mp4",
     temp_audiofile="temp-audio.m4a",
@@ -510,6 +482,7 @@ output_3.write_videofile(
     codec="libx264",
     audio_codec="aac",
 )
+
 output_4.write_videofile(
     "output_4.mp4",
     temp_audiofile="temp-audio.m4a",
@@ -518,11 +491,9 @@ output_4.write_videofile(
     audio_codec="aac",
 )
 
-print("ok")
-
+print("ok 23")
 
 print("------------------------------------------------------------")  # 60個
-
 
 from moviepy.editor import *
 
@@ -530,11 +501,10 @@ video = VideoFileClip(video_filename)  # 讀取影片
 output = video.resize((360, 180))  # 壓縮影片
 output = output.subclip(13, 15)  # 取出 13～15 秒的片段
 output.write_gif("tmp_output.gif")  # 將這個片段轉換成 gif
-print("ok")
 
+print("ok 24")
 
 print("------------------------------------------------------------")  # 60個
-
 
 from moviepy.editor import *
 
@@ -545,11 +515,10 @@ output.write_gif("tmp_output_fps24.gif", fps=24)  # 256 色一秒 24 格
 output.write_gif("tmp_output_fps8.gif", fps=8)  # 256 色一秒 8 格
 output.write_gif("tmp_output_fps8_c2.gif", fps=8, colors=2)  # 2 色一秒 8 格
 output.write_gif("tmp_output_fps8_c16.gif", fps=8, colors=16)  # 16 色一秒 8 格
-print("ok")
 
+print("ok 25")
 
 print("------------------------------------------------------------")  # 60個
-
 
 from moviepy.editor import *
 from PIL import Image, ImageFont, ImageDraw
@@ -557,6 +526,7 @@ from PIL import Image, ImageFont, ImageDraw
 img = Image.new("RGBA", (360, 180))
 font = ImageFont.truetype("NotoSansTC-Regular.otf", 40)
 draw = ImageDraw.Draw(img)
+
 draw.text(
     (10, 120),
     "OXXO.STUDIO",
@@ -565,6 +535,7 @@ draw.text(
     stroke_width=2,
     stroke_fill="red",
 )
+
 draw.text(
     xy=(50, 0),
     text="大家好\n哈哈",
@@ -589,11 +560,9 @@ output.write_videofile(
     audio_codec="aac",
 )
 
-print("ok")
-
+print("ok 26")
 
 print("------------------------------------------------------------")  # 60個
-
 
 from moviepy.editor import *
 from PIL import Image, ImageFont, ImageDraw
@@ -644,8 +613,8 @@ for i in range(len(video_list)):
 
 output = concatenate_videoclips(output_list)  # 合併所有影片片段
 output.write_gif("tmp_output.gif", fps=6, colors=32)  # 轉換成 gif 動畫
-print("ok")
 
+print("ok 27")
 
 print("------------------------------------------------------------")  # 60個
 
@@ -698,9 +667,7 @@ for i in range(len(srt_list)):
 print(sec_list)
 print(text_list)
 
-
 print("------------------------------------------------------------")  # 60個
-
 
 from moviepy.editor import *
 from PIL import Image, ImageFont, ImageDraw
@@ -799,11 +766,9 @@ output.write_videofile(
     codec="libx264",
     audio_codec="aac",
 )
-print("ok")
-
+print("ok 28")
 
 print("------------------------------------------------------------")  # 60個
-
 
 from moviepy.editor import *
 
@@ -811,11 +776,10 @@ video = VideoFileClip(video_filename)
 frame = video.save_frame("tmp_frame1.jpg", t=22)
 frame = video.save_frame("tmp_frame2.jpg", t=22.1)
 frame = video.save_frame("tmp_frame3.jpg", t=22.2)
-print("ok")
 
+print("ok 29")
 
 print("------------------------------------------------------------")  # 60個
-
 
 from moviepy.editor import *
 
@@ -828,11 +792,10 @@ img_clip.write_videofile(
     codec="libx264",
     audio_codec="aac",
 )
-print("ok")
 
+print("ok 30")
 
 print("------------------------------------------------------------")  # 60個
-
 
 from moviepy.editor import *
 
@@ -854,10 +817,10 @@ output.write_videofile(
     codec="libx264",
     audio_codec="aac",
 )
-print("ok")
+
+print("ok 31")
 
 print("------------------------------------------------------------")  # 60個
-
 
 from moviepy.editor import *
 
@@ -869,8 +832,7 @@ video.write_videofile(
     codec="libx264",
     audio_codec="aac",
 )
-print("ok")
-
+print("ok 32")
 
 print("------------------------------------------------------------")  # 60個
 
