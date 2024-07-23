@@ -1,4 +1,4 @@
-# bar 集合
+# bar 集合 長條圖與橫條圖
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1097,3 +1097,230 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+
+courses = ['C++','Java','Python','C#','PHP']
+students = [45, 52, 66, 32, 39]
+plt.bar(courses,students)
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+courses = ['C++','Java','Python','C#','PHP']
+students = [45, 52, 66, 32, 39]
+plt.bar(courses,students,align='edge',color='g')
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+courses = ['C++','Java','Python','C#','PHP']
+students = [45, 52, 66, 32, 39]
+plt.bar(courses,students,width=1.0,color='m')
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+
+def dice_generator(num, sides):
+    ''' 處理隨機數 '''
+    for i in range(num):              
+        ranNum = np.random.randint(1, sides+1)    # 產生 1-6 隨機數
+        dice.append(ranNum)
+def dice_count(sides):
+    '''計算1-6個出現次數'''
+    for i in range(1, sides+1):
+        frequency = dice.count(i)           # 計算i出現在dice串列的次數
+        times.append(frequency)          
+num = 600                                   # 擲骰子次數
+sides = 6                                   # 骰子有幾面
+dice = []                                   # 建立擲骰子的串列
+times = []                                  # 儲存每一面骰子出現次數串列
+dice_generator(num, sides)                  # 產生擲骰子的串列
+dice_count(sides)                           # 將骰子串列轉成次數串列                          
+x = np.arange(6)                            # 長條圖x軸座標
+width = 0.35                                # 長條圖寬度
+plt.bar(x,times,width,color='orange',hatch='o')  # 繪製長條圖
+plt.ylabel('出現次數',color='b')
+plt.title('測試 600次 ',fontsize=16,color='b')
+plt.xticks(x, ('1', '2', '3', '4', '5', '6'), color='b')
+plt.yticks(np.arange(0, 150, 15), color='b')
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+Benz = [3367, 4120, 5539]                   # Benz線條
+BMW = [4000, 3590, 4423]                    # BMW線條
+Lexus = [5200, 4930, 5350]                  # Lexus線條
+
+X = np.arange(len(Benz))
+labels = ["2023年","2024年","2025年"]       # 年度刻度標籤
+fig = plt.figure()
+ax = fig.add_axes([0.15,0.15,0.7,0.7])
+barW = 0.25                                 # 長條圖寬度
+
+plt.bar(X+0.00,Benz,color='r',width=barW,label='Benz')
+plt.bar(X+barW,BMW,color='g',width=barW,label='BMW')
+plt.bar(X+barW*2,Lexus,color='b',width=barW,label='Lexus')
+
+plt.title("銷售報表", fontsize=24, color='b')
+plt.xlabel("年度", fontsize=14, color='b')
+plt.ylabel("數量", fontsize=14, color='b')
+plt.legend()                                 # 繪製圖例
+plt.xticks(X+barW, labels)                   # 加註年度標籤
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+Benz = [3367, 4120, 5539]                   # Benz線條
+BMW = [4000, 3590, 4423]                    # BMW線條
+Lexus = [5200, 4930, 5350]                  # Lexus線條
+
+X = np.arange(len(Benz))
+labels = ["2023年","2024年","2025年"]       # 年度刻度標籤
+fig = plt.figure()
+ax = fig.add_axes([0.15,0.15,0.7,0.7])
+barW = 0.22                                 # 長條圖寬度
+
+plt.bar(X+0.0,Benz,color='r',width=barW,label='Benz')
+plt.bar(X+0.25,BMW,color='g',width=barW,label='BMW')
+plt.bar(X+0.5,Lexus,color='b',width=barW,label='Lexus')
+
+plt.title("銷售報表", fontsize=24, color='b')
+plt.xlabel("年度", fontsize=14, color='b')
+plt.ylabel("數量", fontsize=14, color='b')
+plt.legend()                                # 繪製圖例
+plt.xticks(X+barW, labels)                  # 加註年度標籤
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+Benz = [3367, 4120, 5539]                       # Benz線條
+BMW = [4000, 3590, 4423]                        # BMW線條
+Lexus = [5200, 4930, 5350]                      # Lexus線條
+year = ["2023年","2024年","2025年"]             # 年度  
+
+barW = 0.35                                     # 長條圖寬度
+plt.bar(year,Benz,color="green",width=barW,label="Benz")
+plt.bar(year,BMW,color="yellow",width=barW,
+        bottom=np.array(Benz),label="BMW")
+plt.bar(year,Lexus,color="red",width=barW,
+        bottom=np.array(Benz)+np.array(BMW),label="Lexus")
+plt.title("銷售報表", fontsize=24, color='b')
+plt.xlabel("年度", fontsize=14, color='b')
+plt.ylabel("數量", fontsize=14, color='b')
+plt.legend()
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+colors = ['grey','grey','red','grey','grey']
+courses = ['C++','Java','Python','C#','PHP']
+students = [45, 52, 66, 32, 39]
+plt.bar(courses,students,color=colors)
+plt.title("修課報表", fontsize=24, color='b')
+plt.xlabel("課程名稱", fontsize=14, color='b')
+plt.ylabel("修課人數", fontsize=14, color='b')
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+fig = plt.figure()
+ax = fig.add_axes([0.15,0.15,0.7,0.7])
+colors = ['b','g','r','y','c']
+courses = ['C++','Java','Python','C#','PHP']
+students = [45, 52, 66, 32, 39]
+plt.barh(courses,students,color=colors)
+
+plt.title("修課報表", fontsize=24, color='b')
+plt.xlabel("修課人數", fontsize=12, color='b')
+plt.ylabel("課程名稱", fontsize=12, color='b')
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+Benz = [3367, 4120, 5539]                   # Benz線條
+BMW = [4000, 3590, 4423]                    # BMW線條
+Lexus = [5200, 4930, 5350]                  # Lexus線條
+
+X = np.arange(len(Benz))
+labels = ["2023年","2024年","2025年"]       # 年度刻度標籤
+fig = plt.figure()
+ax = fig.add_axes([0.15,0.15,0.7,0.7])
+barH = 0.25                                 # 橫條圖高度
+plt.barh(X+0.00,Benz,color='r',height=barH,label='Benz')
+plt.barh(X+barH,BMW,color='g',height=barH,label='BMW')
+plt.barh(X+barH*2,Lexus,color='b',height=barH,label='Lexus')
+plt.title("銷售報表", fontsize=24, color='b')
+plt.xlabel("數量", fontsize=14, color='b')
+plt.ylabel("年度", fontsize=14, color='b')
+plt.legend()                                 # 繪製圖例
+plt.yticks(X+barH, labels)                   # 加註年度標籤
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+Benz = [3367, 4120, 5539]                   # Benz線條
+BMW = [4000, 3590, 4423]                    # BMW線條
+Lexus = [5200, 4930, 5350]                  # Lexus線條
+year = ["2023年","2024年","2025年"]         # 年度  
+
+barH = 0.35                                 # 橫條圖高度
+plt.barh(year,Benz,color="green",height=barH,label="Benz")
+plt.barh(year,BMW,color="yellow",height=barH,
+        left=np.array(Benz),label="BMW")
+plt.barh(year,Lexus,color="red",height=barH,
+        left=np.array(Benz)+np.array(BMW),label="Lexus")
+plt.title("銷售報表", fontsize=24, color='b')
+plt.xlabel("數量", fontsize=12, color='b')
+plt.ylabel("年度", fontsize=12, color='b')
+plt.legend()
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+revenue = [300, 320, 400, 350]
+cost = [250, 280, 310, 290]
+quarter = ['Q1','Q2','Q3','Q4']
+
+barH = 0.5
+plt.barh(quarter,revenue,color='g',height=barH,label='收入')
+plt.barh(quarter,-np.array(cost),color='m',height=barH,label='支出')
+plt.title("公司收支表", fontsize=24, color='b')
+plt.xlabel("收入與支出", fontsize=14, color='b')
+plt.ylabel("季度", fontsize=14, color='b')
+plt.legend()
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+N = 20                                      # 長條個數
+theta = np.linspace(0.0, 2 * np.pi, N)      # 角度個數  
+radius = 10 * np.random.rand(N)             # 半徑個數
+width = np.pi / 4 * np.random.rand(N)       # 寬度個數
+colors = plt.cm.hsv(radius / 10)            # 色彩個數
+ax = plt.subplot(projection='polar')        # 建立子圖
+# 繪製極座標長條圖
+ax.bar(theta,radius,width,bottom=0.0,alpha=0.8,color=colors)
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+plt.rcParams["font.family"] = ["Microsoft JhengHei"]

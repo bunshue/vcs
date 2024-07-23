@@ -176,7 +176,32 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
+tk.Label(window, text = "tk開啟cv").pack()
+
+import cv2
+
+filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
+
+def load_picture_color():
+    img = cv2.imread(filename)
+    cv2.imshow("show", img)  # 在show視窗顯示img圖像
+    cv2.waitKey(0)
+
+
+def load_picture_gray():
+    img = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
+    cv2.imshow("show", img)  # 在show視窗顯示img圖像
+    cv2.waitKey(0)
+
+
+button1 = tk.Button(window, text="原圖載入", command=load_picture_color)
+button1.pack(padx=5, pady=5)
+
+button2 = tk.Button(window, text="灰階載入", command=load_picture_gray)
+button2.pack(padx=5, pady=5)
+
 window.mainloop()
+cv2.destroyAllWindows()  # 關閉所有視窗
 
 print("------------------------------------------------------------")  # 60個
 
@@ -196,6 +221,8 @@ def click_picture_button():
 
 from PIL import ImageTk, Image
 
+tk.Label(window, text = "圖片做成的按鈕").pack()
+
 filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 
 img = ImageTk.PhotoImage(Image.open(filename))
@@ -206,6 +233,8 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
     fill=tk.X, padx=5, pady=5
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
+
+tk.Label(window, text = "按鈕屬性 : normal / active / disabled").pack()
 
 print("Button state...")
 
@@ -259,38 +288,6 @@ print("------------------------------------------------------------")  # 60個
 window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
-
-import cv2
-
-filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
-
-
-def load_picture_color():
-    img = cv2.imread(filename)
-    cv2.imshow("show", img)  # 在show視窗顯示img圖像
-    cv2.waitKey(0)
-
-
-def load_picture_gray():
-    img = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
-    cv2.imshow("show", img)  # 在show視窗顯示img圖像
-    cv2.waitKey(0)
-
-
-window = tk.Tk()
-window.title("圖像")
-window.geometry("400x200")
-
-button1 = tk.Button(window, text="原圖載入", command=load_picture_color)
-
-button1.pack(padx=5, pady=5)
-
-button2 = tk.Button(window, text="灰階載入", command=load_picture_gray)
-button2.pack(padx=5, pady=5)
-
-window.mainloop()
-
-cv2.destroyAllWindows()  # 關閉所有視窗
 
 
 print("------------------------------------------------------------")  # 60個

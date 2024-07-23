@@ -12,6 +12,20 @@ from tkinter import ttk
 
 print("------------------------------------------------------------")  # 60個
 
+running = True
+
+def stop_running_and_exit():
+    global running
+    running = False
+    #window.destroy()
+
+def stop_running_and_exit2():
+    global running
+    running = False
+
+print('------------------------------------------------------------')	#60個
+
+'''
 def run_digital_clock(label1):                     # 數字變數內容的更動
     def counting():                         # 更動數字方法
         now = datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S")
@@ -49,7 +63,6 @@ window.mainloop()
 
 print('------------------------------------------------------------')	#60個
 
-from tkinter.ttk import *
  
 def load():                         # 啟動Prograssbar
     pb["value"] = 0                 # Prograssbar初始值
@@ -131,9 +144,7 @@ window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-def stop_running():
-    global running
-    running = False
+
 def displayFan(startingAngle):
     canvas.delete("fan")    
     canvas.create_arc(W / 2 - r, H / 2 - r, W / 2 + r, H / 2 + r,
@@ -147,12 +158,11 @@ W = 300
 H = 300
 r = 120
 
-window = tk.Tk() 
-        
+window = tk.Tk()
+window.protocol("WM_DELETE_WINDOW", stop_running_and_exit)  # 更改協定綁定
+
 canvas = tk.Canvas(window,width=W, height=H)
 canvas.pack()
-
-tk.Button(window, text="Stop", command=stop_running).pack()
 
 running = True
 
@@ -180,8 +190,11 @@ def display():
             raceResult.set("恭喜你贏了, Ball 2勝利")
     startBtn.set("重置")
 
-def running():
+def start_running():
     global Flag
+    global running
+    running = True
+
     if startBtn.get() == "重置":
         startBtn.set("開始")
         raceResult.set("")
@@ -191,13 +204,16 @@ def running():
         canvas.create_text(10,150,text="2")
         item2 = canvas.create_oval(20,150,70,200,fill='aqua')
         return
+
     canvas.delete('all')
     canvas.create_text(10,50,text="1")
     item1 = canvas.create_oval(20,50,70,100,fill='yellow')
     canvas.create_text(10,150,text="2")
     item2 = canvas.create_oval(20,150,70,200,fill='aqua')
     item1Loc, item2Loc = 0, 0
-    for x in range(0, 100):
+    for x in range(0, 100):# 最多100次
+        if running == False:
+            break
         if ball.get() == '1':
             weight = 40
             raceResult.set("")
@@ -222,6 +238,8 @@ def running():
     display()
 
 window = tk.Tk()
+window.protocol("WM_DELETE_WINDOW", stop_running_and_exit)  # 更改協定綁定
+
 canvas= tk.Canvas(window, width=500, height=250)
 canvas.pack()
 canvas.create_text(10,50,text="1")
@@ -230,6 +248,7 @@ canvas.create_text(10,150,text="2")
 canvas.create_oval(20,150,70,200,fill='aqua')
 
 Flag = True                         # 判斷那一球勝利
+running = True
 
 frame = tk.Frame(window)                   # 建立框架
 frame.pack(padx=5, pady=5)
@@ -244,7 +263,7 @@ entry = tk.Entry(frame, textvariable=ball).pack(side=tk.LEFT,padx=3)
 startBtn = tk.StringVar()
 startBtn.set("開始")
 
-tk.Button(frame, textvariable=startBtn,command=running).pack(side=tk.LEFT)
+tk.Button(frame, textvariable=startBtn,command=start_running).pack(side=tk.LEFT)
 
 raceResult = tk.StringVar()
 tk.Label(frame,width=16,textvariable=raceResult).pack(side=tk.LEFT,padx=3)
@@ -254,6 +273,7 @@ window.mainloop()
 print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
+window.protocol("WM_DELETE_WINDOW", stop_running_and_exit)  # 更改協定綁定
 
 canvas= tk.Canvas(window, width=500, height=300)
 canvas.pack()
@@ -265,7 +285,11 @@ item2 = canvas.create_oval(10,150,60,200,fill='aqua')
 #ballPos = canvas.coords(item1)
 #print(ballPos)
 
-for x in range(0, 80):
+running = True
+
+for x in range(0, 80):# 最多80次
+    if running == False:
+        break
     canvas.move(item1, 5, 1)      # item1 x軸移動5像素, y軸移動1像素
     canvas.move(item2, 5, 1)      # item2 x軸移動5像素, y軸移動1像素
     window.update()                 # 強制tkinter重繪
@@ -276,6 +300,7 @@ window.mainloop()
 print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
+window.protocol("WM_DELETE_WINDOW", stop_running_and_exit)  # 更改協定綁定
 
 canvas= tk.Canvas(window, width=500, height=250)
 canvas.pack()
@@ -283,7 +308,11 @@ canvas.pack()
 item1 = canvas.create_oval(10,50,60,100,fill='yellow')
 item2 = canvas.create_oval(10,150,60,200,fill='aqua')
 
-for x in range(0, 100):
+running = True
+
+for x in range(0, 100):# 最多100次
+    if running == False:
+        break
     if random.randint(1,100) > 70:
         canvas.move(item2, 5, 0)  # item2 x軸移動5像素, y軸移動0像素
     else:
@@ -298,11 +327,11 @@ window.mainloop()
 print("------------------------------------------------------------")  # 60個
 
 """
-使用tkinter创建GUI
-- 在窗口上制作动画
+使用tkinter創建GUI
+- 在窗口上制作動畫
 """
 
-# 播放动画效果的函数
+# 播放動畫效果的函數
 def play_animation():
     canvas.move(oval, 2, 2)
     canvas.update()
@@ -314,7 +343,7 @@ y = 20
 
 window = tk.Tk()
 window.geometry("600x800")
-window.title('动画效果')
+window.title('動畫效果')
 window.resizable(False, False)
 #fail window.wm_attributes('-topmost', 1)
 
@@ -327,14 +356,15 @@ play_animation()
 
 window.mainloop()
 
-# 请思考如何让小球碰到屏幕的边界就弹回
-# 请思考如何用面向对象的编程思想对上面的代码进行封装
+# 請思考如何讓小球碰到屏幕的邊界就彈回
+# 請思考如何用面向對象的編程思想對上面的代碼進行封裝
 
 print("------------------------------------------------------------")  # 60個
 
 import math
 
 window = tk.Tk()
+window.protocol("WM_DELETE_WINDOW", stop_running_and_exit)  # 更改協定綁定
 window.geometry("600x800")
 title = "移動測試"
 window.title(title)
@@ -364,7 +394,9 @@ msg.set('')
 label1 = tk.Label(window, textvariable = msg, fg = 'red', font=("新細明體", 20))
 label1.pack() 
 
-while True:
+running = True
+    
+while running == True:
     #移動法
     canvas.move('moving1', dx, 0) #移動那個被畫上去的移動物件
     canvas.after(sleepTime) #Sleep 一段時間(msec)
@@ -379,6 +411,9 @@ while True:
         canvas.delete('moving1') #刪除所有移動物件
         #畫 移動物件
         canvas.create_oval(x1 - radius, y1 - radius, x1 + radius, y1 + radius, fill = 'red', tags = 'moving1')
+
+    if running == False:
+        break
 
     #重畫法
     canvas.delete('moving2') #刪除所有移動物件
@@ -630,6 +665,7 @@ print("------------------------------------------------------------")  # 60個
 print("文字移動")
 
 window = tk.Tk()
+window.protocol("WM_DELETE_WINDOW", stop_running_and_exit)  # 更改協定綁定
 
 W = 300
 H = 100
@@ -640,8 +676,10 @@ x = 0  # Starting x position
 yMsg = 45
 canvas.create_text(x, yMsg, text="Welcome to the US", tags="text")
 
+running = True
+
 dx = 3
-while True:
+while running == True:
     canvas.move("text", dx, 0)  # 移動dx, dy
     canvas.after(100)  # 100 msec
     canvas.update()
@@ -654,17 +692,15 @@ while True:
 
 window.mainloop()
 
+'''
 print("------------------------------------------------------------")  # 60個
-
-from tkinter import *  # Import tkinter
-from random import randint
 
 
 # Return a random color string in the form #RRGGBB
 def getRandomColor():
     color = "#"
     for j in range(6):
-        color += toHexChar(randint(0, 15))  # Add a random digit
+        color += toHexChar(random.randint(0, 15))  # Add a random digit
     return color
 
 
@@ -691,24 +727,24 @@ class BounceBalls:
     def __init__(self):
         self.ballList = []  # Create a list for balls
 
-        window = Tk()
+        window = tk.Tk()
         window.title("Bouncing Balls")
 
         self.width = 350  # Width of the self.canvas
         self.height = 150  # Width of the self.canvas
-        self.canvas = Canvas(window, bg="white", width=self.width, height=self.height)
+        self.canvas = tk.Canvas(window, bg="white", width=self.width, height=self.height)
         self.canvas.pack()
 
-        frame = Frame(window)
+        frame = tk.Frame(window)
         frame.pack()
-        btStop = Button(frame, text="Stop", command=self.stop)
-        btStop.pack(side=LEFT)
-        btResume = Button(frame, text="Resume", command=self.resume)
-        btResume.pack(side=LEFT)
-        btAdd = Button(frame, text="+", command=self.add)
-        btAdd.pack(side=LEFT)
-        btRemove = Button(frame, text="-", command=self.remove)
-        btRemove.pack(side=LEFT)
+        btStop = tk.Button(frame, text="Stop", command=self.stop)
+        btStop.pack(side=tk.LEFT)
+        btResume = tk.Button(frame, text="Resume", command=self.resume)
+        btResume.pack(side=tk.LEFT)
+        btAdd = tk.Button(frame, text="+", command=self.add)
+        btAdd.pack(side=tk.LEFT)
+        btRemove = tk.Button(frame, text="-", command=self.remove)
+        btRemove.pack(side=tk.LEFT)
 
         self.sleepTime = 100  # Set a sleep time
         self.isStopped = False
@@ -830,32 +866,6 @@ print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
 
-# bind
 
 print("------------------------------------------------------------")  # 60個
 
-
-def ballMove(event):
-    if event.keysym == "Left":  # 左移
-        canvas.move(1, -5, 0)
-    if event.keysym == "Right":  # 右移
-        canvas.move(1, 5, 0)
-    if event.keysym == "Up":  # 上移
-        canvas.move(1, 0, -5)
-    if event.keysym == "Down":  # 下移
-        canvas.move(1, 0, 5)
-
-
-print("用上下左右鍵控制紅球移動")
-
-window = tk.Tk()
-
-canvas = tk.Canvas(window, width=500, height=300)
-canvas.pack()
-canvas.create_oval(225, 125, 275, 175, fill="red")
-canvas.bind_all("<KeyPress-Left>", ballMove)
-canvas.bind_all("<KeyPress-Right>", ballMove)
-canvas.bind_all("<KeyPress-Up>", ballMove)
-canvas.bind_all("<KeyPress-Down>", ballMove)
-
-window.mainloop()

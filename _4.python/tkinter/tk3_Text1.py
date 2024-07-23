@@ -1,6 +1,6 @@
 """
 
-Text 放入多行輸入框
+Text 多行輸入框
 
 
 """
@@ -11,33 +11,11 @@ import tkinter as tk
 
 print("------------------------------------------------------------")  # 60個
 
-count = 0
-mmm = "abcd"
-
-
-def set_data():
-    """
-    print('set_data')
-    #回傳結果
-    mesg = text1.get("1.0", "end")
-    mesg= mesg + mmm
-    print(mesg)
-    text1.insert ('end', mesg)
-    """
-    global count
-    count = count + 1
-    message = "  次數" + str(count)
-    text1.insert("end", message)
-
-
-def clear():
-    text1.delete(1.0, "end")
-    # 執行 clear 函式時，清空內容
-
-
 window = tk.Tk()
 window.geometry("600x800")
 window.title("Text 1")
+
+tk.Label(window, text = "不可改動之Text").pack()
 
 text3 = tk.Text(window, width=30, height=4)
 text3.pack()
@@ -60,62 +38,91 @@ text7.pack()
 
 poem_text = "玉階生白露，夜久侵羅襪。\n卻下水晶簾，玲瓏望秋月。"
 text7.insert(tk.END, poem_text)
-
-text7.insert(tk.END, "望廬山瀑布\n李白\n")
-poem_text = """日照香爐生紫煙，
-遙看瀑布挂前川。
-飛流直下三千尺，
-疑是銀河落九天。"""
-text7.insert(tk.END, poem_text)
+text7.insert(tk.END, "\n望廬山瀑布\n李白\n")
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
     fill=tk.X, padx=5, pady=5
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
-text8 = tk.Text(window, width=30, height=4)
-text8.pack()
+LOG_LINE_NUM = 0
+LOG_LINE_MAX = 5
 
-text8.insert(tk.INSERT, "功蓋三分國\n")
-text8.insert(tk.CURRENT, "名成八陣圖\n")
-text8.insert(tk.CURRENT, "江流石不轉\n")
-text8.insert(tk.END, "遺恨失吞吳")
+count = 0
+mmm = "abcd"
 
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
-    fill=tk.X, padx=5, pady=5
-)  # 分隔線
-print("------------------------------------------------------------")  # 60個
-
-text1 = tk.Text(window, width=80, height=4)  # 放入多行輸入框
+text1 = tk.Text(window, width=80, height=LOG_LINE_MAX)  # 放入多行輸入框
 text1.pack()
+text1.insert(tk.INSERT, "故人西辭黃鶴樓，")
+text1.insert(tk.CURRENT, "煙花三月下揚州。")
+text1.insert(tk.CURRENT, "孤帆遠影碧空盡，")
+text1.insert(tk.END, "唯見長江天際流。")
+
+
+def set_data():
+    """
+    print('set_data')
+    #回傳結果
+    mesg = text1.get("1.0", "end")
+    mesg= mesg + mmm
+    print(mesg)
+    text1.insert ('end', mesg)
+    """
+    global count
+    count = count + 1
+    message = "次數" + str(count) + " "
+    text1.insert("end", message)
+
+
+def clear():
+    text1.delete(1.0, "end")
+    # 執行 clear 函式時，清空內容
+
+
+# 日志動態打印
+def write_log():
+    global LOG_LINE_NUM
+    # 獲取當前時間
+    current_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(time.time()))
+    logmsg_in = str(current_time) + " " + "要記錄的訊息" + "\n"  # 換行
+    if LOG_LINE_NUM < LOG_LINE_MAX:
+        text1.insert(tk.END, logmsg_in)
+        LOG_LINE_NUM = LOG_LINE_NUM + 1
+    else:
+        text1.delete(1.0, 2.0)
+        text1.insert(tk.END, logmsg_in)
+
+
+def saveFile():
+    textContent = text1.get("1.0", tk.END)
+    filename = "tmp_write_file.txt"
+    with open(filename, "w") as output:
+        output.write(textContent)
+        print('儲存完成, 檔案 :', filename)
 
 bt_set_data = tk.Button(window, text="set data", command=set_data)  # 放入清空按鈕
 bt_set_data.pack()
 bt_clear = tk.Button(window, text="clear", command=clear)  # 放入清空按鈕
 bt_clear.pack()
+bt_log_data = tk.Button(window, text="寫日誌", command=write_log)
+bt_log_data.pack()
+bt_save_file = tk.Button(window, text="存檔", command=saveFile)
+bt_save_file.pack()
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
     fill=tk.X, padx=5, pady=5
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
+
+tk.Label(window, text = "文字對齊方式").pack()
 
 text5 = tk.Text(window, width=50, height=4, padx=15, pady=15)
 text5.pack()
 
-text5.insert(1.0, "要加到Text內的文字")
+text5.insert(1.0, "故人西辭黃鶴樓")
 text5.tag_configure("center", justify="center")
 text5.tag_add("center", 1.0, "end")
 
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
-    fill=tk.X, padx=5, pady=5
-)  # 分隔線
-print("------------------------------------------------------------")  # 60個
-
-text6 = tk.Text(window, width=30, height=4)
-text6.pack()
-
-text6.insert(tk.END, "白髮三千丈，離愁似箇長。\n")  # 插入文字
-text6.insert(1.14, "不知明鏡裏，何處得秋霜。")  # 插入文字
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
     fill=tk.X, padx=5, pady=5
@@ -167,7 +174,8 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
-print('設定書籤')
+tk.Label(window, text = "設定書籤在第5、第8行").pack()
+
 text_b = tk.Text(window, width=30, height=6)
 #text_b.pack(fill=tk.BOTH, expand=True)
 text_b.pack()
@@ -183,7 +191,6 @@ text_b.insert(tk.END, "第8行\n")
 text_b.insert(tk.END, "第9行\n")
 text_b.insert(tk.END, "第10行\n")
 
-print("設定書籤在第5、第8行")
 text_b.mark_set("mark1", "5.0")
 text_b.mark_set("mark2", "8.0")
 
@@ -297,71 +304,11 @@ window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-
-def saveFile():
-    textContent = text_e.get("1.0", tk.END)
-    filename = "tmp_write_file.txt"
-    with open(filename, "w") as output:
-        output.write(textContent)
-        window.title(filename)
-
-
-window = tk.Tk()
-window.geometry("600x400")
-
-# 建立Text
-text_e = tk.Text(window, undo=True)
-# text_e.pack(fill=tk.BOTH, expand=True)
-text_e.pack()
-
-text_e.insert(tk.END, "故人西辭黃鶴樓，\n")
-text_e.insert(tk.END, "煙花三月下揚州。\n")
-text_e.insert(tk.END, "孤帆遠影碧空盡，\n")
-text_e.insert(tk.END, "唯見長江天際流。\n")
-
-button1 = tk.Button(window, text="存檔", command=saveFile)
-button1.pack(pady=3)
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-window.geometry("600x400")
-window.title("Text + print log")
-
-LOG_LINE_NUM = 0
-LOG_LINE_MAX = 10
-
-
-# 日志動態打印
-def write_log():
-    global LOG_LINE_NUM
-    # 獲取當前時間
-    current_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(time.time()))
-    logmsg_in = str(current_time) + " " + "要記錄的訊息" + "\n"  # 換行
-    if LOG_LINE_NUM < LOG_LINE_MAX:
-        text4.insert(tk.END, logmsg_in)
-        LOG_LINE_NUM = LOG_LINE_NUM + 1
-    else:
-        text4.delete(1.0, 2.0)
-        text4.insert(tk.END, logmsg_in)
-
-
-# 日誌框
-text4 = tk.Text(window, width=50, height=LOG_LINE_MAX)
-text4.pack()
-
-button2 = tk.Button(window, text="寫日誌", command=write_log)
-button2.pack()
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
 window = tk.Tk()
 window.geometry("600x400")
 window.title("Text + Scrollbar use window")
+
+tk.Label(window, text = "有水平/垂直捲軸之Text window").pack()
 
 xscrollbar = tk.Scrollbar(window, orient=tk.HORIZONTAL)  # x軸scrollbar物件
 yscrollbar = tk.Scrollbar(window, orient=tk.VERTICAL)  # y軸scrollbar物件
@@ -389,7 +336,7 @@ text = """故人西辭黃鶴樓，
 text1.insert(tk.END, text)
 
 window.mainloop()
-
+        
 print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
@@ -398,6 +345,8 @@ window.title("Text + Scrollbar use frame")
 
 frame1 = tk.Frame(window)
 frame1.pack()
+
+tk.Label(frame1, text = "有水平/垂直捲軸之Text frame").pack()
 
 xscrollbar = tk.Scrollbar(frame1, orient=tk.HORIZONTAL)  # x軸scrollbar物件
 yscrollbar = tk.Scrollbar(frame1, orient=tk.VERTICAL)  # y軸scrollbar物件
@@ -434,6 +383,8 @@ window = tk.Tk()
 window.geometry("600x800")
 window.title("ScrolledText 測試")
 
+tk.Label(window, text = "有水平/垂直捲軸之Text ScrolledText").pack()
+
 # 滾動文本框
 scrolled_text = scrolledtext.ScrolledText(window, width=50, height=4)
 
@@ -464,4 +415,12 @@ print("------------------------------------------------------------")  # 60個
 # 產生多行文字框元件
 text_f = tk.Text(window,	selectbackground = 'red', selectforeground = 'gray')
 text_f.pack()
+
+text6.insert(tk.END, "白髮三千丈，離愁似箇長。\n")  # 插入文字
+text6.insert(1.14, "不知明鏡裏，何處得秋霜。")  # 插入文字
+
+text1 = tk.Text(window, undo=True)
+# text1.pack(fill=tk.BOTH, expand=True)
+text1.pack()
+
 """

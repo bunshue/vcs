@@ -132,34 +132,14 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
-rb1 = ttk.Radiobutton(
-    window,
-    text="AAA",
-    value=1,
-    variable="this is a lion-mouse",
-    command=lambda: print("??你選擇了 : AAA"),
-)
+tk.Label(window, text = "使用 lambda").pack()
+
+rb1 = ttk.Radiobutton(window,text="AAA",command=lambda: print("lambda 你選擇了 : AAA"))
 rb1.pack()
-
-rb2 = ttk.Radiobutton(window, text="BBB", value=1, variable="aaaaaa")
+rb2 = ttk.Radiobutton(window,text="BBB",command=lambda: print("lambda 你選擇了 : BBB"))
 rb2.pack()
-
-
-def do_select_string2():
-    print("s2你選擇了 : CCC/DDD")
-
-
-var_string2 = tk.StringVar()
-
-rb3 = ttk.Radiobutton(
-    window, text="CCC", value="C", command=do_select_string2, variable=var_string2
-)
+rb3 = ttk.Radiobutton(window,text="CCC",command=lambda: print("lambda 你選擇了 : CCC"))
 rb3.pack()
-
-rb4 = ttk.Radiobutton(
-    window, text="DDD", value="D", command=do_select_string2, variable=var_string2
-)
-rb4.pack()
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
     fill=tk.X, padx=5, pady=5

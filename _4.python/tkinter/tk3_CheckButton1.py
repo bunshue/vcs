@@ -7,7 +7,7 @@ import tkinter.messagebox
 print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
-window.geometry("600x800")
+window.geometry("600x900")
 window.title("Checkbutton 1")
 
 print("------------------------------------------------------------")  # 60個
@@ -164,58 +164,6 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-window.geometry("600x800")
-window.title("Checkbutton 2")
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
-    fill=tk.X, padx=5, pady=5
-)  # 分隔線
-print("------------------------------------------------------------")  # 60個
-
-
-def fnOk():
-    labelframe1 = tk.LabelFrame(window, text="勾選動物(可複選)：")
-    labelframe1.pack(pady=10)
-    for i in range(3):
-        check[i] = tk.BooleanVar()  # 設check[]元素值為布林值物件
-        tk.Checkbutton(labelframe1, text=animals[i], variable=check[i]).pack(anchor="w")
-
-
-def fnMsg():
-    if var_boolean6.get() == True:
-        msg = "勾選的動物為："
-        for i in range(3):
-            if check[i].get() == True:  # 若check[i]元素值為True
-                msg += animals[i] + "、"  # 將animals[i]元素值加入msg字串
-        print("訊息 :", msg[: len(msg) - 1])
-    else:
-        print("訊息 : 期盼下次你能參加")
-    window.destroy()
-
-
-print("動物問卷")
-
-var_boolean6 = tk.BooleanVar()
-checkbutton6 = tk.Checkbutton(
-    window, text="參加選擇", variable=var_boolean6, command=fnOk
-).pack()
-
-animals = ["鼠", "牛", "虎"]
-check = {}
-
-buttonSend = tk.Button(window, text="選擇6", command=fnMsg).pack(pady=5)
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
-    fill=tk.X, padx=5, pady=5
-)  # 分隔線
-print("------------------------------------------------------------")  # 60個
-
 frame1 = tk.Frame(width=150, height=80, relief=tk.RAISED, borderwidth=5)  # 建立框架
 
 tk.Label(frame1, text="Checkbutton測試", fg="blue", bg="yellow", width=30).pack()
@@ -269,6 +217,58 @@ checkbutton2 = tk.Checkbutton(
     command=do_cb_selectb,
 )
 checkbutton2.pack()
+
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
+print("------------------------------------------------------------")  # 60個
+
+
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+window = tk.Tk()
+window.geometry("600x800")
+window.title("Checkbutton 2")
+
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
+print("------------------------------------------------------------")  # 60個
+
+
+def fnOk():
+    labelframe1 = tk.LabelFrame(window, text="勾選動物(可複選)：")
+    labelframe1.pack(pady=10)
+    for i in range(3):
+        check[i] = tk.BooleanVar()  # 設check[]元素值為布林值物件
+        tk.Checkbutton(labelframe1, text=animals[i], variable=check[i]).pack(anchor="w")
+
+
+def fnMsg():
+    if var_boolean6.get() == True:
+        msg = "勾選的動物為："
+        for i in range(3):
+            if check[i].get() == True:  # 若check[i]元素值為True
+                msg += animals[i] + "、"  # 將animals[i]元素值加入msg字串
+        print("訊息 :", msg[: len(msg) - 1])
+    else:
+        print("訊息 : 期盼下次你能參加")
+    window.destroy()
+
+
+print("動物問卷")
+
+var_boolean6 = tk.BooleanVar()
+checkbutton6 = tk.Checkbutton(
+    window, text="參加選擇", variable=var_boolean6, command=fnOk
+).pack()
+
+animals = ["鼠", "牛", "虎"]
+check = {}
+
+buttonSend = tk.Button(window, text="選擇6", command=fnMsg).pack(pady=5)
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
     fill=tk.X, padx=5, pady=5
@@ -372,26 +372,6 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
-
-window.mainloop()
-
-
-print("------------------------------------------------------------")  # 60個
-sys.exit()
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("作業完成")
-print("------------------------------------------------------------")  # 60個
-
-items = ("鼠", "牛", "虎")
-
-print("------------------------------------------------------------")  # 60個
-
-
 def do_cb_select7():  # 回應核取方塊變數狀態
     print("目前選取的動物 :", var1.get(), var2.get(), var3.get())
 
@@ -414,6 +394,9 @@ chk3.pack()
 buttonShow = tk.Button(window, text="選擇7", command=do_cb_select7)
 buttonShow.pack()
 
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
 label_mesg = tk.Label(window, bg="yellow", width=20, text="empty")
@@ -443,9 +426,31 @@ c2 = tk.Checkbutton(
 )
 c2.pack()
 
+
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
+print("------------------------------------------------------------")  # 60個
+
+
+
+window.mainloop()
+
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
+
+
 print("------------------------------------------------------------")  # 60個
 
 
 """
+
 請問迴圈裡面 check_value [i] = tk.BooleanVar() 這一行，能否舉個例子，假設第 0 個按鈕被勾選，check_value 長怎樣；假設第 0、1 個按鈕被勾選，check_value 長怎樣 ... 依此類推
+
 """

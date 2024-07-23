@@ -25,7 +25,7 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 print("------------------------------------------------------------")  # 60個
 
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch23\ch23_1.py
+# 檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch23\ch23_1.py
 
 # ch23_1.py
 import matplotlib.pyplot as plt
@@ -38,11 +38,9 @@ plt.errorbar(x, y, yerr=dy)
 plt.show()
 
 
-      
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch23\ch23_2.py
+# 檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch23\ch23_2.py
 
 # ch23_2.py
 import matplotlib.pyplot as plt
@@ -51,15 +49,13 @@ import numpy as np
 x = np.linspace(0, 10, 20)
 y = np.sin(x) * 2
 dy = 0.5
-plt.errorbar(x,y,yerr=dy,ecolor='r',capsize=3)
+plt.errorbar(x, y, yerr=dy, ecolor="r", capsize=3)
 plt.show()
 
 
-      
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch23\ch23_3.py
+# 檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch23\ch23_3.py
 
 # ch23_3.py
 import matplotlib.pyplot as plt
@@ -69,15 +65,13 @@ x = np.linspace(0, 10, 20)
 y = np.sin(x) * 2
 dy = 0.5
 dx = 0.2
-plt.errorbar(x,y,xerr=dx,yerr=dy,ecolor='r',capsize=3)
+plt.errorbar(x, y, xerr=dx, yerr=dy, ecolor="r", capsize=3)
 plt.show()
 
 
-      
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch23\ch23_4.py
+# 檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch23\ch23_4.py
 
 # ch23_4.py
 import matplotlib.pyplot as plt
@@ -86,15 +80,13 @@ import numpy as np
 x = np.linspace(0, 10, 20)
 y = np.sin(x) * 2
 dy = 0.5
-plt.errorbar(x,y,fmt='o',yerr=dy,ecolor='r',color='b',capsize=3)
+plt.errorbar(x, y, fmt="o", yerr=dy, ecolor="r", color="b", capsize=3)
 plt.show()
 
 
-      
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch23\ch23_5.py
+# 檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch23\ch23_5.py
 
 # ch23_5.py
 import matplotlib.pyplot as plt
@@ -103,15 +95,13 @@ import numpy as np
 x = np.linspace(0, 10, 20)
 y = np.sin(x) * 2
 dy = 0.5
-plt.errorbar(x,y,fmt='o-',yerr=dy,ecolor='r',color='b',capsize=3)
+plt.errorbar(x, y, fmt="o-", yerr=dy, ecolor="r", color="b", capsize=3)
 plt.show()
 
 
-      
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch23\ch23_6.py
+# 檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch23\ch23_6.py
 
 # ch23_6.py
 import matplotlib.pyplot as plt
@@ -120,17 +110,14 @@ import numpy as np
 x = np.linspace(0, 10, 20)
 y = np.sin(x) * 2
 dy = 0.5
-plt.errorbar(x,y,fmt='o-',yerr=dy,ecolor='r',color='b',
-             uplims=True,capsize=3)
-plt.title('uplims = True',color='b')
+plt.errorbar(x, y, fmt="o-", yerr=dy, ecolor="r", color="b", uplims=True, capsize=3)
+plt.title("uplims = True", color="b")
 plt.show()
 
 
-      
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch23\ch23_7.py
+# 檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch23\ch23_7.py
 
 # ch23_7.py
 import matplotlib.pyplot as plt
@@ -139,16 +126,14 @@ import numpy as np
 x = np.linspace(0, 10, 20)
 y = np.sin(x) * 2
 dy = 0.5
-plt.errorbar(x,y,yerr=dy,ecolor='r',uplims=True,lolims=True)
-plt.title('uplims, lolims = True',color='b')
+plt.errorbar(x, y, yerr=dy, ecolor="r", uplims=True, lolims=True)
+plt.title("uplims, lolims = True", color="b")
 plt.show()
 
 
-      
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch23\ch23_8.py
+# 檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch23\ch23_8.py
 
 # ch23_8.py
 import matplotlib.pyplot as plt
@@ -157,17 +142,15 @@ import numpy as np
 x = np.linspace(0, 10, 20)
 y = np.sin(x) * 2
 dy = 0.5
-up = [True,False] * 10      # 上限串列
-lo = [False,True] * 10      # 下限串列
-plt.errorbar(x,y,yerr=dy,uplims=up,lolims=lo,ecolor='r')
+up = [True, False] * 10  # 上限串列
+lo = [False, True] * 10  # 下限串列
+plt.errorbar(x, y, yerr=dy, uplims=up, lolims=lo, ecolor="r")
 plt.show()
 
 
-      
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch23\ch23_9.py
+# 檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch23\ch23_9.py
 
 # ch23_9.py
 import matplotlib.pyplot as plt
@@ -176,16 +159,14 @@ import numpy as np
 x = np.linspace(0, 10, 20)
 y = np.sin(x) * 2
 dy = 0.2 + 0.01 * x
-dy_range = [dy*0.5,dy]      # (下方誤差, 上方誤差)
-plt.errorbar(x,y,fmt='o-',yerr=dy_range,ecolor='r',color='b',capsize=3)
+dy_range = [dy * 0.5, dy]  # (下方誤差, 上方誤差)
+plt.errorbar(x, y, fmt="o-", yerr=dy_range, ecolor="r", color="b", capsize=3)
 plt.show()
 
 
-      
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch23\ch23_10.py
+# 檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch23\ch23_10.py
 
 # ch23_10.py
 import matplotlib.pyplot as plt
@@ -198,38 +179,37 @@ x = np.arange(10)
 y = 3 * np.cos(x / 20 * np.pi)
 yerr = np.linspace(0.05, 0.2, 10)
 
-plt.errorbar(x,y + 3,yerr=yerr,label='誤差條使用預設')
-plt.errorbar(x,y + 2,yerr=yerr,uplims=True,label='uplims=True')
-plt.errorbar(x,y + 1,yerr=yerr,uplims=True,lolims=True,
-             label='uplims, lolims = True')
+plt.errorbar(x, y + 3, yerr=yerr, label="誤差條使用預設")
+plt.errorbar(x, y + 2, yerr=yerr, uplims=True, label="uplims=True")
+plt.errorbar(
+    x, y + 1, yerr=yerr, uplims=True, lolims=True, label="uplims, lolims = True"
+)
 upperlimits = [True, False] * 5
 lowerlimits = [False, True] * 5
-plt.errorbar(x,y,yerr=yerr,uplims=upperlimits,lolims=lowerlimits,
-             label='同時有uplims和lolims = True')
-plt.legend(loc='lower left')
-plt.xticks(np.arange(0,10))
-plt.title('誤差條的綜和應用',fontsize=16,color='b')
+plt.errorbar(
+    x,
+    y,
+    yerr=yerr,
+    uplims=upperlimits,
+    lolims=lowerlimits,
+    label="同時有uplims和lolims = True",
+)
+plt.legend(loc="lower left")
+plt.xticks(np.arange(0, 10))
+plt.title("誤差條的綜和應用", fontsize=16, color="b")
 plt.show()
 
 
-      
-
-print("------------------------------------------------------------")  # 60個
-
-
-
 print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
 
 
+print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
-
-

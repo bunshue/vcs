@@ -25,7 +25,7 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 print("------------------------------------------------------------")  # 60個
 
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch25\ch25_1.py
+# 檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch25\ch25_1.py
 
 # ch25_1.py
 import matplotlib.pyplot as plt
@@ -35,17 +35,15 @@ plt.rcParams["axes.unicode_minus"] = False
 x_pos = 0
 y_pos = 0
 x_direct = 1
-y_direct = 1 
+y_direct = 1
 plt.quiver(x_pos, y_pos, x_direct, y_direct)
-plt.title('Quiver()函數繪製單一箭頭')
+plt.title("Quiver()函數繪製單一箭頭")
 plt.show()
 
 
-      
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch25\ch25_2.py
+# 檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch25\ch25_2.py
 
 # ch25_2.py
 import matplotlib.pyplot as plt
@@ -56,61 +54,63 @@ x_pos = 0
 y_pos = 0
 x_direct = 1
 y_direct = 1
-plt.quiver(x_pos,y_pos,x_direct,y_direct,color='b')
-plt.title('Quiver()函數繪製單一藍色箭頭')
-plt.xlim([-1,10])
-plt.ylim([-1,10])
+plt.quiver(x_pos, y_pos, x_direct, y_direct, color="b")
+plt.title("Quiver()函數繪製單一藍色箭頭")
+plt.xlim([-1, 10])
+plt.ylim([-1, 10])
 plt.show()
 
 
-      
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch25\ch25_3.py
+# 檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch25\ch25_3.py
 
 # ch25_3.py
 import matplotlib.pyplot as plt
 
 plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 plt.rcParams["axes.unicode_minus"] = False
-x_pos = [0,0]
-y_pos = [0,0]
-x_direct = [1,1]
-y_direct = [1,-1]
-plt.quiver(x_pos,y_pos,x_direct,y_direct,color=['b','g'])
-plt.title('Quiver()函數繪製藍色和綠色箭頭')
-plt.axis([-2,2,-2,2])
+x_pos = [0, 0]
+y_pos = [0, 0]
+x_direct = [1, 1]
+y_direct = [1, -1]
+plt.quiver(x_pos, y_pos, x_direct, y_direct, color=["b", "g"])
+plt.title("Quiver()函數繪製藍色和綠色箭頭")
+plt.axis([-2, 2, -2, 2])
 plt.show()
 
 
-      
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch25\ch25_4.py
+# 檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch25\ch25_4.py
 
 # ch25_4.py
 import matplotlib.pyplot as plt
 
 plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 plt.rcParams["axes.unicode_minus"] = False
-x_pos = [0,0]
-y_pos = [0,0]
-x_direct = [1,1]
-y_direct = [1,-1]
-plt.quiver(x_pos,y_pos,x_direct,y_direct,color=['b','g'],
-           angles='xy',scale_units='xy', scale=1)
-plt.title('繪製藍色和綠色箭頭,箭頭長度單位與座標軸相同')
-plt.axis([-2,2,-2,2])
+x_pos = [0, 0]
+y_pos = [0, 0]
+x_direct = [1, 1]
+y_direct = [1, -1]
+plt.quiver(
+    x_pos,
+    y_pos,
+    x_direct,
+    y_direct,
+    color=["b", "g"],
+    angles="xy",
+    scale_units="xy",
+    scale=1,
+)
+plt.title("繪製藍色和綠色箭頭,箭頭長度單位與座標軸相同")
+plt.axis([-2, 2, -2, 2])
 plt.show()
 
 
-      
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch25\ch25_5.py
+# 檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch25\ch25_5.py
 
 # ch25_5.py
 import matplotlib.pyplot as plt
@@ -118,19 +118,18 @@ import numpy as np
 
 plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 plt.rcParams["axes.unicode_minus"] = False
-x = np.arange(-10, 11) 
-y = np.arange(-10, 11) 
+x = np.arange(-10, 11)
+y = np.arange(-10, 11)
 X, Y = np.meshgrid(x, y)
 U, V = X, Y
-plt.quiver(X, Y, U, V) 
-plt.title('箭袋 Quiver',fontsize=14,color='b')
+plt.quiver(X, Y, U, V)
+plt.title("箭袋 Quiver", fontsize=14, color="b")
 plt.show()
 
-      
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch25\ch25_6.py
+# 檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch25\ch25_6.py
 
 # ch25_6.py
 import matplotlib.pyplot as plt
@@ -138,22 +137,21 @@ import numpy as np
 
 plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 plt.rcParams["axes.unicode_minus"] = False
-x = np.arange(-10, 11) 
-y = np.arange(-10, 11) 
+x = np.arange(-10, 11)
+y = np.arange(-10, 11)
 X, Y = np.meshgrid(x, y)
-U, V = X, Y 
-plt.quiver(X, Y, U, V) 
-plt.title('箭袋 Quiver',fontsize=14,color='b')
-plt.axis('equal')
+U, V = X, Y
+plt.quiver(X, Y, U, V)
+plt.title("箭袋 Quiver", fontsize=14, color="b")
+plt.axis("equal")
 plt.xticks([])
 plt.yticks([])
 plt.show()
 
-      
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch25\ch25_7.py
+# 檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch25\ch25_7.py
 
 # ch25_7.py
 import matplotlib.pyplot as plt
@@ -161,23 +159,22 @@ import numpy as np
 
 plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 plt.rcParams["axes.unicode_minus"] = False
-x = np.arange(-10, 11) 
-y = np.arange(-10, 11) 
+x = np.arange(-10, 11)
+y = np.arange(-10, 11)
 X, Y = np.meshgrid(x, y)
 U, V = X, Y
 fig, ax = plt.subplots()
-ax.quiver(X, Y, U, V) 
-ax.set_title('箭袋 Quiver',fontsize=14,color='b')
-ax.set_aspect('equal')
+ax.quiver(X, Y, U, V)
+ax.set_title("箭袋 Quiver", fontsize=14, color="b")
+ax.set_aspect("equal")
 ax.xaxis.set_ticks([])
 ax.yaxis.set_ticks([])
 plt.show()
 
-      
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch25\ch25_8.py
+# 檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch25\ch25_8.py
 
 # ch25_8.py
 import matplotlib.pyplot as plt
@@ -185,22 +182,21 @@ import numpy as np
 
 plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 plt.rcParams["axes.unicode_minus"] = False
-x = np.arange(-3, 3.5, 0.5) 
-y = np.arange(-3, 3.5, 0.5) 
+x = np.arange(-3, 3.5, 0.5)
+y = np.arange(-3, 3.5, 0.5)
 X, Y = np.meshgrid(x, y)
 U = np.sin(X) * Y
 V = np.cos(X) * X
 fig, ax = plt.subplots()
-ax.quiver(X, Y, U, V) 
-ax.set_title('箭袋 Quiver',fontsize=14,color='b')
-ax.set_aspect('equal')
+ax.quiver(X, Y, U, V)
+ax.set_title("箭袋 Quiver", fontsize=14, color="b")
+ax.set_aspect("equal")
 plt.show()
 
-      
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch25\ch25_9.py
+# 檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch25\ch25_9.py
 
 # ch25_9.py
 import matplotlib.pyplot as plt
@@ -208,22 +204,21 @@ import numpy as np
 
 plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 plt.rcParams["axes.unicode_minus"] = False
-x = np.arange(-2, 2.2, 0.2) 
-y = np.arange(-2, 2.2, 0.2) 
+x = np.arange(-2, 2.2, 0.2)
+y = np.arange(-2, 2.2, 0.2)
 X, Y = np.meshgrid(x, y)
 Z = X**2 + Y**2
 U, V = np.gradient(Z)
 fig, ax = plt.subplots()
-ax.quiver(X, Y, U, V) 
-ax.set_title('箭袋 Quiver',fontsize=14,color='b')
-ax.set_aspect('equal')
+ax.quiver(X, Y, U, V)
+ax.set_title("箭袋 Quiver", fontsize=14, color="b")
+ax.set_aspect("equal")
 plt.show()
 
-      
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch25\ch25_10.py
+# 檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch25\ch25_10.py
 
 # ch25_10.py
 import matplotlib.pyplot as plt
@@ -231,22 +226,22 @@ import numpy as np
 
 plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 plt.rcParams["axes.unicode_minus"] = False
-x = np.arange(-2, 2.2, 0.2) 
-y = np.arange(-2, 2.2, 0.2) 
-X, Y = np.meshgrid(x, y)                    # 建立 X, Y
+x = np.arange(-2, 2.2, 0.2)
+y = np.arange(-2, 2.2, 0.2)
+X, Y = np.meshgrid(x, y)  # 建立 X, Y
 Z = X**2 + Y**2
-U, V = np.gradient(Z)                       # 建立 U, V
-C = U + V                                   # 定義箭頭顏色的數據
+U, V = np.gradient(Z)  # 建立 U, V
+C = U + V  # 定義箭頭顏色的數據
 fig, ax = plt.subplots()
-ax.quiver(X, Y, U, V, C)                    # 繪製預設的彩色箭袋
-ax.set_title('箭袋 Quiver',fontsize=14,color='b')
-ax.set_aspect('equal')
+ax.quiver(X, Y, U, V, C)  # 繪製預設的彩色箭袋
+ax.set_title("箭袋 Quiver", fontsize=14, color="b")
+ax.set_aspect("equal")
 plt.show()
 
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch25\ch25_11.py
+# 檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch25\ch25_11.py
 
 # ch25_11.py
 import matplotlib.pyplot as plt
@@ -254,35 +249,29 @@ import numpy as np
 
 plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 plt.rcParams["axes.unicode_minus"] = False
-x = np.arange(-2, 2.2, 0.2) 
-y = np.arange(-2, 2.2, 0.2) 
-X, Y = np.meshgrid(x, y)                    # 建立 X, Y
+x = np.arange(-2, 2.2, 0.2)
+y = np.arange(-2, 2.2, 0.2)
+X, Y = np.meshgrid(x, y)  # 建立 X, Y
 Z = X**2 + Y**2
-U, V = np.gradient(Z)                       # 建立 U, V
-C = U + V                                   # 定義箭頭顏色的數據
+U, V = np.gradient(Z)  # 建立 U, V
+C = U + V  # 定義箭頭顏色的數據
 fig, ax = plt.subplots()
-ax.quiver(X, Y, U, V, C, cmap='hsv')        # 繪製預設的彩色箭袋
-ax.set_title("箭袋 Quiver, cmap='hsv'",fontsize=14,color='b')
-ax.set_aspect('equal')
+ax.quiver(X, Y, U, V, C, cmap="hsv")  # 繪製預設的彩色箭袋
+ax.set_title("箭袋 Quiver, cmap='hsv'", fontsize=14, color="b")
+ax.set_aspect("equal")
 plt.show()
 
 
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
 
 
-
-
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
-
-
