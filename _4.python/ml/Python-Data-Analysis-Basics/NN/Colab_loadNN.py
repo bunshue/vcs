@@ -4,6 +4,8 @@ TBD
 
 """
 
+mnist_npz_filename = "C:/_git/vcs/_big_files/mnist.npz"
+
 print("------------------------------------------------------------")  # 60個
 
 # 共同
@@ -34,11 +36,10 @@ from tensorflow.keras.datasets import mnist
 (x_train, y_train), (x_test, y_test) = mnist.load_data()
 
 """
-path = 'C:/_git/vcs/_4.python/ml/mnist.npz'
-mnist = np.load(path)  
-x_train, y_train = mnist['x_train'], mnist['y_train']  
-x_test, y_test = mnist['x_test'], mnist['y_test']  
-mnist.close()  
+mnist = np.load(mnist_npz_filename)
+x_train, y_train = mnist['x_train'], mnist['y_train']
+x_test, y_test = mnist['x_test'], mnist['y_test']
+mnist.close()
 """
 
 x_test = x_test.reshape(10000, 784)/255

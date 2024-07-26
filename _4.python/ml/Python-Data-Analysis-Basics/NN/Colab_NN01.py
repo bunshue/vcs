@@ -4,6 +4,8 @@
 
 """
 
+mnist_npz_filename = "C:/_git/vcs/_big_files/mnist.npz"
+
 print("------------------------------------------------------------")  # 60個
 
 # 共同
@@ -29,12 +31,11 @@ print("------------------------------------------------------------")  # 60個
 
 from tensorflow.keras.datasets import mnist
 
-#(x_train, y_train), (x_test, y_test) = mnist.load_data() 改成以下6行
-path = 'C:/_git/vcs/_4.python/ml/mnist.npz'
-mnist = np.load(path)  
+#(x_train, y_train), (x_test, y_test) = mnist.load_data() 改成以下4行
+mnist = np.load(mnist_npz_filename)
 x_train, y_train = mnist['x_train'], mnist['y_train']  
 x_test, y_test = mnist['x_test'], mnist['y_test']  
-mnist.close()  
+mnist.close()
 
 print(len(x_train))
 

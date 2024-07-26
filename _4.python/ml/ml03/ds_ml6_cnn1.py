@@ -2,20 +2,35 @@
 
 必學！Python 資料科學‧機器學習最強套件 CNN 1
 
+
 """
 
+import time
+
+mnist_npz_filename = "C:/_git/vcs/_big_files/mnist.npz"
+
+print("------------------------------------------------------------")  # 60個
+
+# 共同
 import os
 import sys
-import time
+import math
 import random
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+# 設定中文字型及負號正確顯示
+# 設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
+# 設定負號
+plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print('------------------------------------------------------------')	#60個
 
 #Final 卷積層的實作
-
-import numpy as np
-
-import matplotlib.pyplot as plt
 
 import urllib.request
 
@@ -87,8 +102,6 @@ plt.show()
 
 #Final 池化層的實作
 
-import numpy as np
-import matplotlib.pyplot as plt
 import urllib.request
 
 # 定義卷積層運算的類別
@@ -242,18 +255,14 @@ from tensorflow.keras.layers import Conv2D, MaxPooling2D
 from tensorflow.keras.models import Sequential, load_model
 from tensorflow.keras.utils import to_categorical
 from tensorflow.keras.utils import plot_model
-import numpy as np
-import matplotlib.pyplot as plt
 
 # 下載數據
 
-#(X_train, y_train), (X_test, y_test) = mnist.load_data() 改成以下5行
-#path = 'C:/_git/vcs/_4.python/ml/mnist.npz'
-path = 'mnist.npz'
-mnist = np.load(path)  
-X_train, y_train = mnist['x_train'], mnist['y_train']  
-X_test, y_test = mnist['x_test'], mnist['y_test']  
-mnist.close()  
+#(X_train, y_train), (X_test, y_test) = mnist.load_data() 改成以下4行
+mnist = np.load(mnist_npz_filename)
+X_train, y_train = mnist['x_train'], mnist['y_train']
+X_test, y_test = mnist['x_test'], mnist['y_test']
+mnist.close()
 
 # 訓練數據300張, 測試數據100張
 
@@ -335,8 +344,6 @@ from tensorflow.keras.layers import Conv2D, MaxPooling2D
 from tensorflow.keras.models import Sequential, load_model
 from tensorflow.keras.utils import to_categorical
 from tensorflow.keras.utils import plot_model
-import numpy as np
-import matplotlib.pyplot as plt
 
 # 下載數據
 (X_train, y_train), (X_test, y_test) = cifar10.load_data()

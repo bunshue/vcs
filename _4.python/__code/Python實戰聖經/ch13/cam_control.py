@@ -1,3 +1,4 @@
+import sys
 import numpy as np
 import cv2
 from time import sleep
@@ -6,7 +7,11 @@ import tensorflow.keras
 labels = ['normal','left','right']
 current_x = 300
 move = 10
+
+# Fail 在此
 model = tensorflow.keras.models.load_model('left_right.h5')
+
+sys.exit()
 
 cap = cv2.VideoCapture(0)
 width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))

@@ -1,17 +1,13 @@
+"""
+pip install gradio==3.1.0
+
+"""
+
 import sys
 
 print('------------------------------------------------------------')	#60個
 
-
-'''
-pip install gradio==3.1.0
-
-'''
-print('------------------------------------------------------------')	#60個
-
-
-
-'''
+"""
 import gradio as gr
 
 def replace1(text):
@@ -20,19 +16,21 @@ def replace1(text):
 grobj = gr.Interface(fn=replace1, inputs=gr.inputs.Textbox(), outputs=gr.outputs.Textbox())
 grobj.launch()
 
-'''
 print('------------------------------------------------------------')	#60個
 
-
-'''
+"""
 
 #手寫數字
 import tensorflow as tf
 from urllib.request import urlretrieve
 import gradio as gr
 
-urlretrieve("https://gr-models.s3-us-west-2.amazonaws.com/mnist-model.h5", "mnist-model.h5")
-model = tf.keras.models.load_model("mnist-model.h5")
+# Loading the MNIST model and data
+# 可下載最新之 .h5 檔案
+# urlretrieve("https://gr-models.s3-us-west-2.amazonaws.com/mnist-model.h5", "mnist-model.h5")
+# mnist-model.h5 路徑不能含中文
+mnist_model_filename = "C:/_git/vcs/_big_files/mnist-model.h5"
+model = tf.keras.models.load_model(mnist_model_filename)
 
 def mnist(image):
     image = image.reshape(1, -1)  #(28,28)轉為(1,784)
@@ -43,12 +41,14 @@ out = gr.outputs.Label(num_top_classes=3, label='預測結果')
 grobj = gr.Interface(fn=mnist, inputs="sketchpad", outputs=out, title="手寫數字")
 #grobj = gr.Interface(fn=mnist, inputs="sketchpad", outputs=out, title="手寫數字", live=True)
 grobj.launch()
-'''
+
+print('aaaa')
+
+sys.exit()
+
 
 print('------------------------------------------------------------')	#60個
 
-
-'''
 # Inception圖片物件偵測
 
 import tensorflow as tf
@@ -73,7 +73,7 @@ label = gr.outputs.Label(num_top_classes=3, label='預測結果')
 grobj = gr.Interface(fn=classify, inputs=image, outputs=label, title='Inception物件偵測')
 #grobj = gr.Interface(fn=classify, inputs=image, outputs=label, title='Inception物件偵測', examples=[['lion1.jpg'], ['tiger1.jpg']])
 grobj.launch()
-'''
+
 
 print('------------------------------------------------------------')	#60個
 
@@ -101,14 +101,12 @@ grobj.launch()
 
 print('------------------------------------------------------------')	#60個
 
-'''
 #自動歌詞產生器
 
 import gradio as gr
 
 grobj = gr.Interface.load("huggingface/uer/gpt2-chinese-lyric", inputs="text", outputs="text")
 grobj.launch()
-'''
 
 
 #pip install opencc
@@ -198,7 +196,6 @@ out = gr.outputs.Label(label='預測結果')
 grobj = gr.Interface(fn=predict_survival, inputs=[sex, age, fare], outputs=out, title='鐵達尼號生存預測', live=True)
 grobj.launch()
 
-
 print('------------------------------------------------------------')	#60個
 
 #使用自行訓練的模型
@@ -207,7 +204,9 @@ import tensorflow.keras
 import numpy as np
 import gradio as gr
 
-model = tensorflow.keras.models.load_model('left_right.h5')
+# left_right.h5 路徑不能含中文
+mnist_model_filename = "C:/_git/vcs/_big_files/left_right.h5"
+model = tensorflow.keras.models.load_model(mnist_model_filename)
 labels = ['normal','left','right']
 
 def classify(img):
@@ -220,8 +219,6 @@ image = gr.inputs.Image(shape=(224, 224), label='輸入圖片')
 label = gr.outputs.Label(num_top_classes=3, label='預測結果')
 grobj = gr.Interface(fn=classify, inputs=image, outputs=label, examples=[['left1.jpg'], ['right1.jpg'], ['normal1.jpg']], title='使用自行訓練的模型')
 grobj.launch()
-
-
 
 
 print('------------------------------------------------------------')	#60個

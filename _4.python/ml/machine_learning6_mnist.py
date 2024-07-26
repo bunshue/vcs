@@ -10,6 +10,8 @@ MNIST資料集裡的每一筆資料皆由images(數字的影像)與labels
 (該圖片的真實數字，其實就是答案)所組成。
 """
 
+mnist_npz_filename = "C:/_git/vcs/_big_files/mnist.npz"
+
 print("------------------------------------------------------------")  # 60個
 
 # 共同
@@ -47,8 +49,7 @@ from keras.datasets import mnist
 
 """
 #方法二 將minst資料集放在 特定 位置
-path = "C:/_git/vcs/_4.python/ml/mnist.npz"
-mnist = np.load(path)
+mnist = np.load(mnist_npz_filename)
 x_train, y_train = mnist["x_train"], mnist["y_train"]
 x_test, y_test = mnist["x_test"], mnist["y_test"]
 mnist.close()
@@ -179,12 +180,10 @@ print('------------------------------------------------------------')	#60個
 # 1. 讀入 MNSIT 數據集
 from keras.datasets import mnist
 
-#(x_train, y_train), (x_test, y_test) = mnist.load_data() 改成以下5行
-
-path = "C:/_git/vcs/_4.python/ml/mnist.npz"
-mnist = np.load(path)  
-x_train, y_train = mnist['x_train'], mnist['y_train']  
-x_test, y_test = mnist['x_test'], mnist['y_test']  
+#(x_train, y_train), (x_test, y_test) = mnist.load_data() 改成以下4行
+mnist = np.load(mnist_npz_filename)
+x_train, y_train = mnist['x_train'], mnist['y_train']
+x_test, y_test = mnist['x_test'], mnist['y_test']
 mnist.close()
 
 x_train = x_train / 255

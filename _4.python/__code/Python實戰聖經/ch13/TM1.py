@@ -1,3 +1,4 @@
+import sys
 import tensorflow.keras
 from PIL import Image, ImageOps
 import numpy as np
@@ -6,7 +7,10 @@ import numpy as np
 np.set_printoptions(suppress=True)
 
 # Load the model
+# Fail 在此
 model = tensorflow.keras.models.load_model('left_right.h5')
+
+sys.exit()
 
 # Create the array of the right shape to feed into the keras model
 # The 'length' or number of images you can put into the array is
