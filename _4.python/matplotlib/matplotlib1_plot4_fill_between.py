@@ -196,6 +196,21 @@ plt.ylabel(r"溫度 $C^{o}$", fontsize=12)
 # 第六張圖
 plt.subplot(236)
 
+n = 256
+X = np.linspace(-np.pi, np.pi, n, endpoint=True)
+Y = np.sin(2 * X)
+
+plt.plot(X, Y + 1, color="blue", alpha=1.00)
+plt.fill_between(X, 1, Y + 1, color="blue", alpha=0.25)
+
+plt.plot(X, Y - 1, color="blue", alpha=1.00)
+plt.fill_between(X, -1, Y - 1, (Y - 1) > -1, color="blue", alpha=0.25)
+plt.fill_between(X, -1, Y - 1, (Y - 1) < -1, color="red", alpha=0.25)
+
+plt.xlim(-np.pi, np.pi)
+plt.xticks(())
+plt.ylim(-2.5, 2.5)
+plt.yticks(())
 
 plt.show()
 
@@ -203,10 +218,10 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-
 print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
+
+

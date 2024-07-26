@@ -17,7 +17,7 @@ running = True
 def stop_running_and_exit():
     global running
     running = False
-    #window.destroy()
+    window.destroy()
 
 def stop_running_and_exit2():
     global running
@@ -25,7 +25,7 @@ def stop_running_and_exit2():
 
 print('------------------------------------------------------------')	#60個
 
-'''
+
 def run_digital_clock(label1):                     # 數字變數內容的更動
     def counting():                         # 更動數字方法
         now = datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S")
@@ -36,7 +36,7 @@ def run_digital_clock(label1):                     # 數字變數內容的更動
 window = tk.Tk()
 label1=tk.Label(window,bg="yellow",fg="blue",     # 黃底藍字
             height=3,width=18,              # 寬10高3
-            font="Helvetic 20 bold")        # 字型設定
+            font="Helvetica 20 bold")        # 字型設定
 label1.pack()
 run_digital_clock(label1)                          # 呼叫數字更動方法
 
@@ -44,12 +44,14 @@ window.mainloop()
 
 print('------------------------------------------------------------')	#60個
 
+#同上 但多了 按鈕
+
 def run_digital_clock(label1):                     # 數字變數內容的更動
     def counting():                         # 更動數字方法
         now = datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S")
         label1.config(text=str(now))     # 列出標籤數字內容
         label1.after(1000,counting)          # 隔一秒後呼叫counting
-    counting()                              # 持續呼叫
+    counting()                              # 啟動呼叫
 
 window = tk.Tk()
 label1=tk.Label(window,bg="yellow",fg="blue",     # 黃底藍字
@@ -63,62 +65,31 @@ window.mainloop()
 
 print('------------------------------------------------------------')	#60個
 
- 
-def load():                         # 啟動Prograssbar
-    pb["value"] = 0                 # Prograssbar初始值
-    pb["maximum"] = maxbytes        # Prograddbar最大值
-    loading()
-def loading():                      # 模擬下載資料
-    global bytes
-    bytes += 500                    # 模擬每次下在500bytes
-    pb["value"] = bytes             # 設定指針
-    if bytes < maxbytes:
-        pb.after(50,loading)        # 經過0.05秒繼續執行loading
- 
-window = tk.Tk()
-
-bytes = 0                           # 設定初值
-maxbytes = 10000                    # 假設下載檔案大小    
-
-pb = ttk.Progressbar(window,length=200,mode="determinate",orient=tk.HORIZONTAL)
-pb.pack(padx=10,pady=10)
-pb["value"] = 0                     # Prograssbar初始值
- 
-btn = tk.Button(window,text="Load",command=load)
-btn.pack(pady=10)
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
 window = tk.Tk()
 window.title('秒數計算中...')
-window.geometry('100x100+150+150')
+window.geometry("300x150")
 
 counter = 0 #儲存數值
 
-# 自訂函式一：顯示標籤(Label)元件
-def display(label):
+# 顯示訊息於label上
+def display():
    counter = 0
    
    # 自訂函式二
    def count():
       global counter #全域變數
       counter += 1
-      label.config(text = str(counter),
+      lb_mesg1.config(text = str(counter),
          bg = 'pink', width = 20, height = 2)
-      label.after(1000, count)
+      lb_mesg1.after(1000, count)
    count()
    
-#設定標籤並把它放入主視窗
-show = tk.Label(window, fg = 'gray')
-show.pack()
-display(show)
+lb_mesg1 = tk.Label(window, fg = 'gray')
+lb_mesg1.pack()
+display()
 
-# 設定按鈕
-btnStop = tk.Button(window, text = 'Stop',
-    width = 20, command = window.destroy)
-btnStop.pack()
+# 設定離開按鈕
+tk.Button(window, text = '結束', width = 20, command = window.destroy).pack()
 
 window.mainloop()
 
@@ -128,7 +99,7 @@ number = 1
 def update_data():
     global number
     # 更新標籤顯示
-    label_data.config(text=str(number))
+    lb_mesg2.config(text=str(number))
     # 每200毫秒後再次調用update_data函數更新數據
     window.after(200, update_data)
     number += 17
@@ -136,9 +107,45 @@ def update_data():
 window = tk.Tk()
 
 # 建立一個標籤用於顯示數據, 初始值為0, 字體設置為Helvetica, 大小為48
-label_data = tk.Label(window, text="0", font=("Helvetica", 48))
-label_data.pack()                           # 將標籤添加到視窗中
+lb_mesg2 = tk.Label(window, text="0",
+                    bg="yellow",fg="blue",     # 黃底藍字
+                    width=6,height=3,              # 寬6高3
+                    #font=("Helvetica", 48))
+                    font="Helvetica 48 bold")
+lb_mesg2.pack()                           # 將標籤添加到視窗中
 update_data()           # 呼叫update_data( )函數以開始數據更新過程
+
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+
+def load():                         # 啟動Prograssbar
+    global download_bytes
+    download_bytes = 0
+    progressbar1["value"] = 0                 # Prograssbar初始值
+    progressbar1["maximum"] = maxbytes        # Prograddbar最大值
+    loading()
+
+
+def loading():                      # 模擬下載資料
+    global download_bytes
+    download_bytes += 500                    # 模擬每次下在500bytes
+    progressbar1["value"] = download_bytes             # 設定指針
+    if download_bytes < maxbytes:
+        progressbar1.after(50,loading)        # 經過0.05秒繼續執行loading
+ 
+window = tk.Tk()
+
+download_bytes = 0                           # 設定初值
+maxbytes = 10000                    # 假設下載檔案大小    
+
+progressbar1 = ttk.Progressbar(window,length=200,mode="determinate",orient=tk.HORIZONTAL)
+progressbar1.pack(padx=10,pady=10)
+progressbar1["value"] = 0                     # Prograssbar初始值
+ 
+btn = tk.Button(window,text="Load",command=load)
+btn.pack(pady=10)
 
 window.mainloop()
 
@@ -170,107 +177,14 @@ startAngle = 0
 while running == True:
     startAngle += 5
     displayFan(startAngle)
-    canvas.after(50) 
+    canvas.after(20) 
     canvas.update()
             
 window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-def display():
-    if Flag:       
-        if ball.get() == "1":
-            raceResult.set("恭喜你贏了, Ball 1勝利")
-        else:
-            raceResult.set("抱歉你輸了, Ball 1勝利")
-    else:
-        if ball.get() == "1":
-            raceResult.set("抱歉你輸了, Ball 2勝利")
-        else:
-            raceResult.set("恭喜你贏了, Ball 2勝利")
-    startBtn.set("重置")
-
-def start_running():
-    global Flag
-    global running
-    running = True
-
-    if startBtn.get() == "重置":
-        startBtn.set("開始")
-        raceResult.set("")
-        canvas.delete('all')
-        canvas.create_text(10,50,text="1")
-        item1 = canvas.create_oval(20,50,70,100,fill='yellow')
-        canvas.create_text(10,150,text="2")
-        item2 = canvas.create_oval(20,150,70,200,fill='aqua')
-        return
-
-    canvas.delete('all')
-    canvas.create_text(10,50,text="1")
-    item1 = canvas.create_oval(20,50,70,100,fill='yellow')
-    canvas.create_text(10,150,text="2")
-    item2 = canvas.create_oval(20,150,70,200,fill='aqua')
-    item1Loc, item2Loc = 0, 0
-    for x in range(0, 100):# 最多100次
-        if running == False:
-            break
-        if ball.get() == '1':
-            weight = 40
-            raceResult.set("")
-        elif ball.get() == '2':
-            weight = 60
-            raceResult.set("")
-        else:
-            raceResult.set("輸入錯誤!")
-            return
-        if random.randint(1,100) > weight:
-            canvas.move(item2, 5, 0)  # item2 x軸移動5像素, y軸移動0像素
-            item2Loc += 1
-        else:
-            canvas.move(item1, 5, 0)  # item1 x軸移動5像素, y軸移動0像素
-            item1Loc += 1
-        window.update()                 # 強制tkinter重繪
-        canvas.after(50)
-    if item1Loc > item2Loc:
-        Flag = True
-    else:
-        Flag = False
-    display()
-
-window = tk.Tk()
-window.protocol("WM_DELETE_WINDOW", stop_running_and_exit)  # 更改協定綁定
-
-canvas= tk.Canvas(window, width=500, height=250)
-canvas.pack()
-canvas.create_text(10,50,text="1")
-canvas.create_oval(20,50,70,100,fill='yellow')
-canvas.create_text(10,150,text="2")
-canvas.create_oval(20,150,70,200,fill='aqua')
-
-Flag = True                         # 判斷那一球勝利
-running = True
-
-frame = tk.Frame(window)                   # 建立框架
-frame.pack(padx=5, pady=5)
-
-# 在框架Frame內建立標籤Label, 輸入獲勝的球, 按鈕Button
-tk.Label(frame, text="那一個球獲勝 : ").pack(side=tk.LEFT)
-ball = tk.StringVar()
-ball.set("1or2")
-
-entry = tk.Entry(frame, textvariable=ball).pack(side=tk.LEFT,padx=3)
-
-startBtn = tk.StringVar()
-startBtn.set("開始")
-
-tk.Button(frame, textvariable=startBtn,command=start_running).pack(side=tk.LEFT)
-
-raceResult = tk.StringVar()
-tk.Label(frame,width=16,textvariable=raceResult).pack(side=tk.LEFT,padx=3)
-
-window.mainloop() 
-
-print("------------------------------------------------------------")  # 60個
+print('移動一個球範例')
 
 window = tk.Tk()
 window.protocol("WM_DELETE_WINDOW", stop_running_and_exit)  # 更改協定綁定
@@ -278,49 +192,55 @@ window.protocol("WM_DELETE_WINDOW", stop_running_and_exit)  # 更改協定綁定
 canvas= tk.Canvas(window, width=500, height=300)
 canvas.pack()
 
-#item1 = canvas.create_oval(10,50,60,100,fill='yellow', outline='lightgray')
-item1 = canvas.create_oval(10,50,60,100,fill='yellow')
-item2 = canvas.create_oval(10,150,60,200,fill='aqua')
-
-#ballPos = canvas.coords(item1)
-#print(ballPos)
+item1 = canvas.create_oval(20,50,70,100,fill='yellow')
 
 running = True
 
-for x in range(0, 80):# 最多80次
-    if running == False:
-        break
-    canvas.move(item1, 5, 1)      # item1 x軸移動5像素, y軸移動1像素
-    canvas.move(item2, 5, 1)      # item2 x軸移動5像素, y軸移動1像素
-    window.update()                 # 強制tkinter重繪
-    time.sleep(0.05) # 等同於 canvas.after(50)
-   
+while running == True:
+    canvas.delete('all') #重來, 刪除全部畫件
+    item1 = canvas.create_oval(20,50,70,100,fill='yellow')
+    for x in range(0, 50):# 最多 N 次
+        if running == False:
+            break
+        canvas.move(item1, 5, 1)      # item1 x軸移動5像素, y軸移動1像素
+        window.update()                 # 強制tkinter重繪
+        canvas.after(50)
+        #time.sleep(0.05) # 等同於 canvas.after(50)
+        
 window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
+print('移動一個球範例')
+
 window = tk.Tk()
 window.protocol("WM_DELETE_WINDOW", stop_running_and_exit)  # 更改協定綁定
 
-canvas= tk.Canvas(window, width=500, height=250)
+canvas= tk.Canvas(window, width=500, height=300)
 canvas.pack()
 
-item1 = canvas.create_oval(10,50,60,100,fill='yellow')
-item2 = canvas.create_oval(10,150,60,200,fill='aqua')
+item1 = canvas.create_oval(10,50,60,100,fill='yellow', outline='lightgray', tags = 'running_ball')
+
+""" 物件資訊
+ballPos = canvas.coords(item1)
+print(ballPos)
+"""
 
 running = True
-
-for x in range(0, 100):# 最多100次
+while running == True:
     if running == False:
+        print('break')
         break
-    if random.randint(1,100) > 70:
-        canvas.move(item2, 5, 0)  # item2 x軸移動5像素, y軸移動0像素
-    else:
-        canvas.move(item1, 5, 0)  # item1 x軸移動5像素, y軸移動0像素    
+   
+    canvas.move(item1, 5, 1)      # item1 x軸移動5像素, y軸移動1像素
+    ballPos = canvas.coords(item1)
+    #print(ballPos)
+    if ballPos[0] > 300:
+        canvas.delete('running_ball') #刪除所有移動物件
+        item1 = canvas.create_oval(10,50,60,100,fill='yellow', outline='lightgray', tags = 'running_ball')
     window.update()                 # 強制tkinter重繪
-    time.sleep(0.05)
-
-print('完成')
+    time.sleep(0.1) # 等同於 canvas.after(100)
+        
 
 window.mainloop()
 
@@ -331,43 +251,42 @@ print("------------------------------------------------------------")  # 60個
 - 在窗口上制作動畫
 """
 
-# 播放動畫效果的函數
+count = 0
+# 播放動畫效果的函數, 每隔 0.1 秒呼叫自己一次
 def play_animation():
-    canvas.move(oval, 2, 2)
-    canvas.update()
-    window.after(30, play_animation)
-
+    global count
+    if count < 50:
+        canvas.move(item1, 5, 1)      # item1 x軸移動5像素, y軸移動1像素
+        canvas.update()
+        window.after(100, play_animation)
+    count += 1
 
 x = 20
 y = 20
 
 window = tk.Tk()
-window.geometry("600x800")
+window.geometry("600x400")
 window.title('動畫效果')
 window.resizable(False, False)
 #fail window.wm_attributes('-topmost', 1)
 
 canvas = tk.Canvas(window, width=600, height=600, bd=0, highlightthickness=0)
-canvas.create_rectangle(0, 0, 600, 600, fill='gray')
-oval = canvas.create_oval(10, 10, 60, 60, fill='red')
 canvas.pack()
+
+canvas.create_rectangle(0, 0, 600, 400, fill='gray')
+item1 = canvas.create_oval(10, 10, 60, 60, fill='red')
+
 window.update()
 play_animation()
 
 window.mainloop()
 
-# 請思考如何讓小球碰到屏幕的邊界就彈回
-# 請思考如何用面向對象的編程思想對上面的代碼進行封裝
-
 print("------------------------------------------------------------")  # 60個
-
-import math
 
 window = tk.Tk()
 window.protocol("WM_DELETE_WINDOW", stop_running_and_exit)  # 更改協定綁定
-window.geometry("600x800")
-title = "移動測試"
-window.title(title)
+window.geometry("600x400")
+window.title("移動測試")
 
 #公用變數
 width = 300
@@ -387,13 +306,6 @@ canvas.create_oval(x2 - radius, y2 - radius, x2 + radius, y2 + radius, fill = 'r
 
 dx = 10
 
-count = 0
-msg = tk.StringVar()
-msg.set('')
-
-label1 = tk.Label(window, textvariable = msg, fg = 'red', font=("新細明體", 20))
-label1.pack() 
-
 running = True
     
 while running == True:
@@ -401,8 +313,6 @@ while running == True:
     canvas.move('moving1', dx, 0) #移動那個被畫上去的移動物件
     canvas.after(sleepTime) #Sleep 一段時間(msec)
     canvas.update() # Update canvas
-    count = count + 1
-    msg.set(count)
     
     if x1 < width:
         x1 += dx  # Set new position 
@@ -417,9 +327,11 @@ while running == True:
 
     #重畫法
     canvas.delete('moving2') #刪除所有移動物件
-    y2 = 200 + 50 * math.sin(count / 5)
-    x2 = x1
-    canvas.create_oval(x2 - radius, y2 - radius, x2 + radius, y2 + radius, fill = 'red', tags = 'moving2')
+    if x2 < width:
+        x2 += dx  # Set new position 
+    else:
+        x2 = 0
+    canvas.create_oval(x2 - radius, y2 - radius, x2 + radius, y2 + radius, fill = 'green', tags = 'moving2')
 
 window.mainloop()
 
@@ -510,6 +422,19 @@ window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
+
+
+
+
+
+
+
+
+
+print('bouncing ball ST')
+
+
+
 # Return a random color string in the form #RRGGBB
 def getRandomColor():
     color = "#"
@@ -579,7 +504,7 @@ animate()
 
 window.mainloop()
 
-sys.exit()
+
 print("------------------------------------------------------------")  # 60個
 
 
@@ -672,27 +597,27 @@ H = 100
 canvas = tk.Canvas(window, bg="white", width=W, height=H)
 canvas.pack()
 
-x = 0  # Starting x position
-yMsg = 45
-canvas.create_text(x, yMsg, text="Welcome to the US", tags="text")
+x_st = 0
+y_st = 45
+canvas.create_text(x_st, y_st, text="Welcome to the US", tags="text")
 
 running = True
 
 dx = 3
+dy = 0
 while running == True:
-    canvas.move("text", dx, 0)  # 移動dx, dy
+    canvas.move("text", dx, dy)  # 移動dx, dy
     canvas.after(100)  # 100 msec
     canvas.update()
-    if x < W:
-        x += dx
-    else:
-        x = 0
+    if x_st < W:
+        x_st += dx
+    else:#若超過, 砍掉重畫
+        x_st = 0
         canvas.delete("text")
-        canvas.create_text(x, yMsg, text="Welcome to the US", tags="text")
+        canvas.create_text(x_st, y_st, text="Welcome to the US", tags="text")
 
 window.mainloop()
 
-'''
 print("------------------------------------------------------------")  # 60個
 
 
@@ -792,9 +717,10 @@ class BounceBalls:
             tags="ball",
         )
 
-
+"""
+print('目前無法移動中關閉視窗')
 BounceBalls()  # Create GUI
-
+"""
 print("------------------------------------------------------------")  # 60個
 
 
@@ -855,9 +781,10 @@ class ControlAnimation:
                 # Redraw text at the beginning
                 self.canvas.create_text(self.x, 30, text="Message moving?", tags="text")
 
-
+"""
+print('目前無法移動中關閉視窗')
 ControlAnimation()  # Create GUI
-
+"""
 print("------------------------------------------------------------")  # 60個
 
 
@@ -868,4 +795,5 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+
 

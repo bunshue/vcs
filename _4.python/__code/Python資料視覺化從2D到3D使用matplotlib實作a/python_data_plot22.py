@@ -32,7 +32,6 @@ print("------------------------------------------------------------")  # 60個
 # ch22_1.py
 import matplotlib.pyplot as plt
 
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 x = [9, 12, 30, 31, 31, 32, 33, 33, 35, 35, 38, 38, 41, 42, 43, 46, 46, 48, 52, 70]
 fig, ax = plt.subplots(nrows=1, ncols=2)
 ax[0].set_title("小提琴圖")
@@ -49,7 +48,6 @@ print("------------------------------------------------------------")  # 60個
 # ch22_2.py
 import matplotlib.pyplot as plt
 
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 x = [9, 12, 30, 31, 31, 32, 33, 33, 35, 35, 38, 38, 41, 42, 43, 46, 46, 48, 52, 70]
 fig, ax = plt.subplots(nrows=1, ncols=2, sharey=True)
 ax[0].set_title("小提琴圖")
@@ -67,8 +65,6 @@ print("------------------------------------------------------------")  # 60個
 import matplotlib.pyplot as plt
 import numpy as np
 
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
-plt.rcParams["axes.unicode_minus"] = False
 np.random.seed(10)
 # 建立 200 個均勻分佈的隨機數
 uniform = np.arange(-100, 100)
@@ -92,7 +88,6 @@ print("------------------------------------------------------------")  # 60個
 import matplotlib.pyplot as plt
 import numpy as np
 
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 np.random.seed(10)
 # 建立 3 組隨機數
 data1 = np.random.randint(1, 100, size=100)
@@ -119,8 +114,6 @@ print("------------------------------------------------------------")  # 60個
 import matplotlib.pyplot as plt
 import numpy as np
 
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
-plt.rcParams["axes.unicode_minus"] = False
 np.random.seed(10)
 # 建立 1 組隨機數
 data = np.random.normal(size=1000)
@@ -155,8 +148,6 @@ print("------------------------------------------------------------")  # 60個
 import matplotlib.pyplot as plt
 import numpy as np
 
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
-plt.rcParams["axes.unicode_minus"] = False
 # 建立測試資料
 np.random.seed(10)
 data = [sorted(np.random.normal(0, std, 100)) for std in range(1, 5)]

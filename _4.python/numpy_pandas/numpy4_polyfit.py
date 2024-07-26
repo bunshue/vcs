@@ -371,7 +371,6 @@ print('------------------------------------------------------------')	#60個
 x = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,19,21,22,23,24]
 y = [100,88,75,60,50,55,55,56,58,58,61,63,68,71,71,75,76,88,93,97,97,100]
 
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]    # 微軟正黑體
 plt.scatter(x,y)
 plt.title('網路購物調查')
 plt.xlabel("點鐘", fontsize=14)
@@ -391,7 +390,6 @@ coef = np.polyfit(x, y, 3)                              # 迴歸直線係數
 model = np.poly1d(coef)                                 # 線性迴歸方程式
 reg = np.linspace(1,24,100)
 
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]    # 微軟正黑體
 plt.scatter(x,y)
 plt.title('網路購物調查')
 plt.xlabel("點鐘", fontsize=14)
@@ -437,7 +435,6 @@ coef = np.polyfit(x, y, 3)                              # 迴歸直線係數
 model = np.poly1d(coef)                                 # 線性迴歸方程式
 reg = np.linspace(1,24,100)
 
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]    # 微軟正黑體
 plt.scatter(x,y)
 plt.title('網路購物調查')
 plt.xlabel("點鐘", fontsize=14)
@@ -465,7 +462,6 @@ rev = [900,1200,950,600,720,1000,1020,1500,1420,1100]   # 營業額
 
 print(f"相關係數 = {np.corrcoef(temperature,rev).round(2)}")
 
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]    # 微軟正黑體
 plt.scatter(temperature, rev)
 plt.title('天氣溫度與冰品銷售')
 plt.xlabel("溫度", fontsize=14)
@@ -503,7 +499,6 @@ rev = [900,1200,950,600,720,1000,1020,1500,1420,1100]   # 營業額
 coef = np.polyfit(temperature, rev, 1)                  # 迴歸直線係數
 reg = np.poly1d(coef)                                   # 線性迴歸方程式
      
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]    # 微軟正黑體
 plt.scatter(temperature, rev)
 plt.plot(temperature,reg(temperature),color='red')
 plt.title('天氣溫度與冰品銷售')
@@ -520,7 +515,6 @@ rev = [10,18,19]                                        # 增加業績
 coef = np.polyfit(times, rev, 2)                        # 二次函數係數
 reg = np.poly1d(coef)                                   # 二次函數迴歸方程式
 print(reg)    
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]    # 微軟正黑體
 plt.scatter(times, rev)
 plt.plot(times,reg(times),color='red')
 plt.title('臉書行銷與業績增加金額')
@@ -537,7 +531,6 @@ rev = [600,900,1100,720,950,1020,1000,1200,1420,1500]   # 營業額
 coef = np.polyfit(temperature, rev, 2)                  # 迴歸直線係數
 reg = np.poly1d(coef)                                   # 線性迴歸方程式
 print(reg)     
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]    # 微軟正黑體
 plt.scatter(temperature, rev)
 plt.plot(temperature,reg(temperature),color='red')
 plt.title('天氣溫度與冰品銷售')

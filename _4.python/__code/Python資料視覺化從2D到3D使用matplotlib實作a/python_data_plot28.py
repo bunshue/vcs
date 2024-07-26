@@ -32,7 +32,6 @@ print("------------------------------------------------------------")  # 60個
 # ch28_1.py
 import matplotlib.pyplot as plt
 
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 fig, ax = plt.subplots()
 data = [[100, 300], [400, 600], [500, 700]]  # 定義儲存格資料
 column_labels = ["2023年", "2024年"]  # 定義欄位標題
@@ -60,7 +59,6 @@ print("------------------------------------------------------------")  # 60個
 import matplotlib.pyplot as plt
 import numpy as np
 
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 data = [
     [100, 105, 110, 115],
     [58, 61, 66, 72],
@@ -109,7 +107,6 @@ print("------------------------------------------------------------")  # 60個
 import numpy as np
 import matplotlib.pyplot as plt
 
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 data = [
     [100, 105, 110, 115],
     [58, 61, 66, 72],

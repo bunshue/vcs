@@ -19,9 +19,9 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 # 設定負號
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
-'''
-print("------------------------------------------------------------")  # 60個
 
+print("------------------------------------------------------------")  # 60個
+'''
 
 def loc(index):
     # 處理座標的移動
@@ -89,57 +89,29 @@ cbar = fig.colorbar(sc)
 cbar.set_label("Z軸", loc="center")
 
 plt.show()
-
+'''
 print("------------------------------------------------------------")  # 60個
 
 from matplotlib import pyplot as plt
 
 
-def plt_scatter():
-    n = 1024
-    X = np.random.normal(0, 1, n)
-    Y = np.random.normal(0, 1, n)
-    T = np.arctan2(Y, X)
+n = 1024
+X = np.random.normal(0, 1, n)
+Y = np.random.normal(0, 1, n)
+T = np.arctan2(Y, X)
 
-    plt.subplot(1, 2, 1)
-    plt.scatter(X, Y, s=75, c=T, alpha=0.5)
+plt.scatter(X, Y, s=75, c=T, alpha=0.5)
 
-    plt.xlim(-1.5, 1.5)
-    plt.xticks(())
-    plt.ylim(-1.5, 1.5)
-    plt.yticks(())
+plt.xlim(-1.5, 1.5)
+plt.xticks(())
+plt.ylim(-1.5, 1.5)
+plt.yticks(())
 
-
-def plt_fill_between():
-    n = 256
-    X = np.linspace(-np.pi, np.pi, n, endpoint=True)
-    Y = np.sin(2 * X)
-
-    plt.subplot(1, 2, 2)
-
-    plt.plot(X, Y + 1, color="blue", alpha=1.00)
-    plt.fill_between(X, 1, Y + 1, color="blue", alpha=0.25)
-
-    plt.plot(X, Y - 1, color="blue", alpha=1.00)
-    plt.fill_between(X, -1, Y - 1, (Y - 1) > -1, color="blue", alpha=0.25)
-    plt.fill_between(X, -1, Y - 1, (Y - 1) < -1, color="red", alpha=0.25)
-
-    plt.xlim(-np.pi, np.pi)
-    plt.xticks(())
-    plt.ylim(-2.5, 2.5)
-    plt.yticks(())
-
-
-plt.figure(figsize=(12, 8))
-plt_scatter()
-plt_fill_between()
 plt.tight_layout()
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
-np.random.seed(5)  # 固定隨機數
 x = np.random.rand(10)
 y = np.random.rand(10)
 colors = np.array(["b", "c", "g", "k", "m", "r", "y", "pink", "purple", "orange"])
@@ -162,8 +134,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
-np.random.seed(20)  # 固定隨機數
 x = np.random.rand(10)
 y = np.random.rand(10)
 colors = np.array(["b", "c", "g", "k", "m", "r", "y", "pink", "purple", "orange"])
@@ -289,7 +259,7 @@ print(Z)
 plt.scatter(X, Y, s = 50, c = Z)
 plt.show()
 """
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 degrees = [x * 15 for x in range(0, 25)]
@@ -328,3 +298,5 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
+
+

@@ -30,20 +30,44 @@ from mpl_toolkits.mplot3d import axes3d
 
 print("------------------------------------------------------------")  # 60個
 
-x = np.array([1,2,3,4,5])
-y = np.array([6,7,8])
+x = np.array([1, 2, 3, 4, 5])
+y = np.array([6, 7, 8])
 
-#x軸1~5, y軸6~8, 編織出來15個點 xx, yy
-xx, yy = np.meshgrid(x,y)
+#x軸1~5, y軸6~8, 編織出來15個點 X, Y
+X, Y = np.meshgrid(x, y)
 
-print('xx = \n', xx)
-print('yy = \n', yy)
+print('X = \n', X)
+print()
+print('Y = \n', Y)
 
-plt.scatter(xx,yy,marker='o',c='m')
-
+plt.scatter(X, Y, marker='o',c='m')
 plt.title("畫出 meshgrid")
-
 plt.show()
+
+
+#數字拉平
+XR = X.ravel()
+YR = Y.ravel()
+print(XR)
+print()
+print(YR)
+
+x = np.array([1, 2, 3, 4])
+y = np.array([5, 6, 7, 8])
+z = np.c_[x.ravel(), y.ravel()]
+print(z.shape)
+print(z)
+
+print()
+
+x = np.arange(1, 5, 1)#1 2 3 4
+y = np.arange(5, 9, 1)#5 6 7 8
+X, Y = np.meshgrid(x, y)
+Z = np.c_[X.ravel(), Y.ravel()]
+
+print(X)
+print(Y)
+print(Z)
 
 print("------------------------------------------------------------")  # 60個
 

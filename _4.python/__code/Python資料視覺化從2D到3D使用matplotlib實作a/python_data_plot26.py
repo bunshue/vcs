@@ -32,7 +32,6 @@ print("------------------------------------------------------------")  # 60個
 import matplotlib.pyplot as plt
 import numpy as np
 
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 x = np.arange(0, 5)
 y = np.arange(0, 5)
 X, Y = np.meshgrid(x, y)  # 建立 X, Y
@@ -51,8 +50,6 @@ print("------------------------------------------------------------")  # 60個
 import matplotlib.pyplot as plt
 import numpy as np
 
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
-plt.rcParams["axes.unicode_minus"] = False
 x = np.arange(-3, 3)
 y = np.arange(-3, 3)
 X, Y = np.meshgrid(x, y)  # 建立 X, Y
@@ -72,8 +69,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
-plt.rcParams["axes.unicode_minus"] = False
 x = np.arange(-3, 3)
 y = np.arange(-3, 3)
 X, Y = np.meshgrid(x, y)  # 建立 X, Y

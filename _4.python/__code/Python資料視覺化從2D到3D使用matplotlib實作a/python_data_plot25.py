@@ -30,8 +30,6 @@ print("------------------------------------------------------------")  # 60個
 # ch25_1.py
 import matplotlib.pyplot as plt
 
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
-plt.rcParams["axes.unicode_minus"] = False
 x_pos = 0
 y_pos = 0
 x_direct = 1
@@ -48,8 +46,6 @@ print("------------------------------------------------------------")  # 60個
 # ch25_2.py
 import matplotlib.pyplot as plt
 
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
-plt.rcParams["axes.unicode_minus"] = False
 x_pos = 0
 y_pos = 0
 x_direct = 1
@@ -68,8 +64,6 @@ print("------------------------------------------------------------")  # 60個
 # ch25_3.py
 import matplotlib.pyplot as plt
 
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
-plt.rcParams["axes.unicode_minus"] = False
 x_pos = [0, 0]
 y_pos = [0, 0]
 x_direct = [1, 1]
@@ -87,8 +81,6 @@ print("------------------------------------------------------------")  # 60個
 # ch25_4.py
 import matplotlib.pyplot as plt
 
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
-plt.rcParams["axes.unicode_minus"] = False
 x_pos = [0, 0]
 y_pos = [0, 0]
 x_direct = [1, 1]
@@ -116,8 +108,6 @@ print("------------------------------------------------------------")  # 60個
 import matplotlib.pyplot as plt
 import numpy as np
 
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
-plt.rcParams["axes.unicode_minus"] = False
 x = np.arange(-10, 11)
 y = np.arange(-10, 11)
 X, Y = np.meshgrid(x, y)
@@ -135,8 +125,6 @@ print("------------------------------------------------------------")  # 60個
 import matplotlib.pyplot as plt
 import numpy as np
 
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
-plt.rcParams["axes.unicode_minus"] = False
 x = np.arange(-10, 11)
 y = np.arange(-10, 11)
 X, Y = np.meshgrid(x, y)
@@ -157,8 +145,6 @@ print("------------------------------------------------------------")  # 60個
 import matplotlib.pyplot as plt
 import numpy as np
 
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
-plt.rcParams["axes.unicode_minus"] = False
 x = np.arange(-10, 11)
 y = np.arange(-10, 11)
 X, Y = np.meshgrid(x, y)
@@ -180,8 +166,6 @@ print("------------------------------------------------------------")  # 60個
 import matplotlib.pyplot as plt
 import numpy as np
 
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
-plt.rcParams["axes.unicode_minus"] = False
 x = np.arange(-3, 3.5, 0.5)
 y = np.arange(-3, 3.5, 0.5)
 X, Y = np.meshgrid(x, y)
@@ -202,8 +186,6 @@ print("------------------------------------------------------------")  # 60個
 import matplotlib.pyplot as plt
 import numpy as np
 
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
-plt.rcParams["axes.unicode_minus"] = False
 x = np.arange(-2, 2.2, 0.2)
 y = np.arange(-2, 2.2, 0.2)
 X, Y = np.meshgrid(x, y)
@@ -224,8 +206,6 @@ print("------------------------------------------------------------")  # 60個
 import matplotlib.pyplot as plt
 import numpy as np
 
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
-plt.rcParams["axes.unicode_minus"] = False
 x = np.arange(-2, 2.2, 0.2)
 y = np.arange(-2, 2.2, 0.2)
 X, Y = np.meshgrid(x, y)  # 建立 X, Y
@@ -247,8 +227,6 @@ print("------------------------------------------------------------")  # 60個
 import matplotlib.pyplot as plt
 import numpy as np
 
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
-plt.rcParams["axes.unicode_minus"] = False
 x = np.arange(-2, 2.2, 0.2)
 y = np.arange(-2, 2.2, 0.2)
 X, Y = np.meshgrid(x, y)  # 建立 X, Y

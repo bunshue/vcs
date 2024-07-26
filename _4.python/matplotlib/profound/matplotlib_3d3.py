@@ -243,8 +243,3 @@ ax1.set_xlabel('X',color='b')
 ax1.set_ylabel('Y',color='b')
 ax1.set_zlabel('Z',color='b')
 
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
-
-
-
-

@@ -34,7 +34,6 @@ def convert_tw_date_to_ad(tw_date):
     return f"{year}-{month:02d}-{day:02d}"
 
 
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 filename = "data/ST43_3479_202310.csv"
 
 with open(filename) as csvfile:  # 開啟csv檔案

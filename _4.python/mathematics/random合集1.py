@@ -438,7 +438,6 @@ def dice_count(sides):
         frequencies.append(frequency)
 
 
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 times = 1000  # 擲骰子次數
 sides = 6  # 骰子有幾面
 dice = []  # 建立擲骰子的串列

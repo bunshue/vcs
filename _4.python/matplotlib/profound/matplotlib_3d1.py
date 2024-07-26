@@ -1496,8 +1496,6 @@ ax.set_ylabel(r"$\phi_\mathrm{im}$")
 ax.set_zlabel(r"$V(\phi)$")
 
 
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
-
 ax.set_xlabel('x',fontsize=14,color='b')
 ax.set_ylabel('y',fontsize=14,color='b')
 ax.set_zlabel('z',fontsize=14,color='b')

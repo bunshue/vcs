@@ -50,9 +50,6 @@ import matplotlib.pyplot as plt
 def f(t):
     return np.exp(-t) * np.sin(2*np.pi*t)
 
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
-plt.rcParams["axes.unicode_minus"] = False
-
 x = np.linspace(0.0, np.pi, 100)
 
 plt.subplot(2,2,1)          # 子圖 1
@@ -78,8 +75,6 @@ print("------------------------------------------------------------")  # 60個
 # ch6_11.py
 import matplotlib.pyplot as plt
 
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
-plt.rcParams["axes.unicode_minus"] = False
 plt.figure()    # 地理投影圖表 Aitoff
 plt.subplot(projection="aitoff")
 plt.title("地理投影 = Aitoff",c='b')
@@ -278,8 +273,6 @@ print("------------------------------------------------------------")  # 60個
 import matplotlib.pyplot as plt
 import numpy as np
 
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
-plt.rcParams["axes.unicode_minus"] = False
 # 建立子圖 1
 x = np.linspace(0, 2*np.pi, 300)
 ax1 = plt.subplot(121)          
@@ -302,8 +295,6 @@ print("------------------------------------------------------------")  # 60個
 import matplotlib.pyplot as plt
 import numpy as np
 
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
-plt.rcParams["axes.unicode_minus"] = False
 # 建立子圖 1
 x1 = np.linspace(0, 2*np.pi, 300)
 ax1 = plt.subplot(221)              
@@ -333,8 +324,6 @@ print("------------------------------------------------------------")  # 60個
 import matplotlib.pyplot as plt
 import numpy as np
 
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
-plt.rcParams["axes.unicode_minus"] = False
 # 建立子圖 1
 x1 = np.linspace(0, 2*np.pi, 300)
 ax1 = plt.subplot(221)              
@@ -364,13 +353,9 @@ print("------------------------------------------------------------")  # 60個
 
 #檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch06\ch6_22.py
 
-# ch6_22.py
 import numpy as np
 import matplotlib.pyplot as plt
 
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
-plt.rcParams["axes.unicode_minus"] = False
-plt.rcParams["figure.facecolor"] = "lightyellow"
 fsize = 24                  # 字型大小                           
 ax = plt.subplot()          # 建立圖表
 ax.plot([1, 3])             # 繪製圖表
@@ -389,9 +374,6 @@ print("------------------------------------------------------------")  # 60個
 import numpy as np
 import matplotlib.pyplot as plt
 
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
-plt.rcParams["axes.unicode_minus"] = False
-plt.rcParams["figure.facecolor"] = "lightyellow"
 fsize = 24                  # 字型大小                           
 ax = plt.subplot()          # 建立圖表
 ax.plot([1, 3])             # 繪製圖表
@@ -400,7 +382,6 @@ ax.set_ylabel('y 座標', fontsize=fsize)
 ax.set_title('資料布局', fontsize=fsize)
 plt.tight_layout()          # 緊湊佈局
 plt.show()
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -417,9 +398,6 @@ def my_plot(ax, size):
     ax.set_ylabel('y 座標', fontsize=size)
     ax.set_title('資料布局', fontsize=size)    
 
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
-plt.rcParams["axes.unicode_minus"] = False
-plt.rcParams["figure.facecolor"] = "lightyellow"
 fsize = 24                  # 字型大小                           
 ax1 = plt.subplot(2,2,1)    # 建立圖表
 my_plot(ax1,fsize)
@@ -447,9 +425,6 @@ def my_plot(ax, size):
     ax.set_ylabel('y 座標', fontsize=size)
     ax.set_title('資料布局', fontsize=size)    
 
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
-plt.rcParams["axes.unicode_minus"] = False
-plt.rcParams["figure.facecolor"] = "lightyellow"
 fsize = 24                  # 字型大小                           
 ax1 = plt.subplot(2,2,1)    # 建立圖表
 my_plot(ax1,fsize)
@@ -478,9 +453,6 @@ def my_plot(ax, size):
     ax.set_ylabel('y 座標', fontsize=size)
     ax.set_title('資料布局', fontsize=size)    
 
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
-plt.rcParams["axes.unicode_minus"] = False
-plt.rcParams["figure.facecolor"] = "lightyellow"
 fsize = 24                  # 字型大小                           
 ax1 = plt.subplot(2,2,1)    # 建立圖表
 my_plot(ax1,fsize)
@@ -507,10 +479,6 @@ def my_plot(ax, size):
     ax.set_ylabel('y 座標', fontsize=size)
     ax.set_title('資料布局', fontsize=size)    
 
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
-plt.rcParams["axes.unicode_minus"] = False
-plt.rcParams["figure.facecolor"] = "lightyellow"
-plt.rcParams["figure.autolayout"] = True
 fsize = 24                  # 字型大小                           
 ax1 = plt.subplot(2,2,1)    # 建立圖表
 my_plot(ax1,fsize)
@@ -519,8 +487,6 @@ my_plot(ax2,fsize)
 ax3 = plt.subplot(1,2,2)    # 建立圖表
 my_plot(ax3,fsize)
 plt.show()
-
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -587,8 +553,6 @@ print("------------------------------------------------------------")  # 60個
 import matplotlib.pyplot as plt
 import numpy as np
 
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
-plt.rcParams["axes.unicode_minus"] = False
 fig, ax = plt.subplots(2, 2)            # 建立4個子圖
 x = np.linspace(0, 2*np.pi, 300)
 y = np.sin(x**2)
@@ -614,8 +578,6 @@ print("------------------------------------------------------------")  # 60個
 import matplotlib.pyplot as plt
 import numpy as np
 
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
-plt.rcParams["axes.unicode_minus"] = False
 fig, ax = plt.subplots(2, 2)            # 建立4個子圖
 x = np.linspace(0, 2*np.pi, 300)
 y = np.sin(x**2)
@@ -643,8 +605,6 @@ print("------------------------------------------------------------")  # 60個
 import matplotlib.pyplot as plt
 import numpy as np
 
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
-plt.rcParams["axes.unicode_minus"] = False
 fig, ax = plt.subplots(2, 2)            # 建立4個子圖
 x = np.linspace(0, 2*np.pi, 300)
 y = np.sin(x**2)
@@ -675,8 +635,6 @@ print("------------------------------------------------------------")  # 60個
 import matplotlib.pyplot as plt
 import numpy as np
 
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
-plt.rcParams["axes.unicode_minus"] = False
 x = np.linspace(0, 2*np.pi, 300)
 y = np.sin(x**2)
 fig, ax = plt.subplots(3, sharex=True, sharey=True)
@@ -697,8 +655,6 @@ print("------------------------------------------------------------")  # 60個
 import matplotlib.pyplot as plt
 import numpy as np
 
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
-plt.rcParams["axes.unicode_minus"] = False
 ax = plt.subplot(projection='polar')
 r = np.arange(0, 1, 0.001)
 theta = 2 * 2*np.pi * r
@@ -718,8 +674,6 @@ print("------------------------------------------------------------")  # 60個
 import matplotlib.pyplot as plt
 import numpy as np
 
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
-plt.rcParams["axes.unicode_minus"] = False
 x = np.linspace(0, 2*np.pi, 300)
 y = np.sin(x)
 fig, (ax1,ax2) = plt.subplots(1,2,subplot_kw=dict(projection='polar'))
@@ -741,9 +695,6 @@ print("------------------------------------------------------------")  # 60個
 import numpy as np
 import matplotlib.pyplot as plt
 
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
-plt.rcParams["axes.unicode_minus"] = False
-plt.rcParams["figure.facecolor"] = "lightyellow"
 fig = plt.figure()
 x = np.arange(1,11)                         
 ax1 = fig.add_subplot(2,2,1)        # 建立子圖表 1
@@ -828,8 +779,6 @@ print("------------------------------------------------------------")  # 60個
 import matplotlib.pyplot as plt
 import numpy as np
 
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
-plt.rcParams["axes.unicode_minus"] = False
 x = np.linspace(0, 2*np.pi, 300)
 y = np.sin(x**2)
 fig = plt.figure()
@@ -855,8 +804,6 @@ print("------------------------------------------------------------")  # 60個
 import matplotlib.pyplot as plt
 import numpy as np
 
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
-plt.rcParams["axes.unicode_minus"] = False
 x = np.linspace(0, 2*np.pi, 300)
 y = np.sin(x**2)
 fig = plt.figure()
@@ -923,8 +870,7 @@ print("------------------------------------------------------------")  # 60個
 import matplotlib.pyplot as plt
 import numpy as np
 
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
-plt.rcParams["axes.unicode_minus"] = False
+
 fig = plt.figure()
 gs = fig.add_gridspec(2,2)          # 建立 2 x 2 網格
 
@@ -1066,10 +1012,6 @@ print("------------------------------------------------------------")  # 60個
 
 import numpy as np
 import matplotlib.pyplot as plt
-
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
-plt.rcParams["axes.unicode_minus"] = False
-plt.rcParams["figure.facecolor"] = "lightyellow"
 
 fig = plt.figure()
 

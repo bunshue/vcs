@@ -172,8 +172,6 @@ print("------------------------------------------------------------")  # 60個
 import matplotlib.pyplot as plt
 import numpy as np
 
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
-plt.rcParams["axes.unicode_minus"] = False
 fig = plt.figure()
 x = np.arange(10)
 y = 3 * np.cos(x / 20 * np.pi)

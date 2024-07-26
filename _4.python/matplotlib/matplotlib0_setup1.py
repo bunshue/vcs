@@ -323,13 +323,11 @@ print("------------------------------------------------------------")  # 60個
 '''
 from matplotlib.ticker import MultipleLocator, FuncFormatter
 
+
 def piformat(x, pos):
     """刻度間距是 1/2 Pi"""
     return r"$\frac{%d\pi}{%d}$" % (int(np.round(x / (np.pi / 2))), 2)
 
-
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
-plt.rcParams["axes.unicode_minus"] = False
 
 x = np.linspace(0, 2 * np.pi, 100)
 y = np.sin(x)

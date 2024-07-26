@@ -48,8 +48,6 @@ print(
     "matplotlib 02 ------------------------------------------------------------"
 )  # 60個
 
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
-plt.rcParams["axes.unicode_minus"] = False
 x = np.linspace(0.0, np.pi, 500)
 y = np.cos(2 * np.pi * x)
 plt.plot(x, y, "m", lw=2)
@@ -67,8 +65,6 @@ print(
     "matplotlib 03 ------------------------------------------------------------"
 )  # 60個
 
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
-plt.rcParams["axes.unicode_minus"] = False
 x = np.linspace(0.0, np.pi, 500)
 y = np.cos(2 * np.pi * x)
 plt.plot(x, y, "m", lw=2)
@@ -83,8 +79,6 @@ print(
     "matplotlib 04 ------------------------------------------------------------"
 )  # 60個
 
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
-plt.rcParams["axes.unicode_minus"] = False
 x = np.linspace(0.0, np.pi, 500)
 y = np.cos(2 * np.pi * x)
 plt.plot(x, y, "m", lw=2)
@@ -97,8 +91,6 @@ print(
     "matplotlib 05 ------------------------------------------------------------"
 )  # 60個
 
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
-plt.rcParams["axes.unicode_minus"] = False
 x = np.linspace(0.0, np.pi, 500)
 y = np.cos(2 * np.pi * x)
 plt.plot(x, y, "m", lw=2)
@@ -259,7 +251,6 @@ print(
     "matplotlib 12 ------------------------------------------------------------"
 )  # 60個
 
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 fig = plt.figure()
 ax = fig.add_subplot(projection="polar")
 r = np.linspace(0, 1, 1000)

@@ -78,7 +78,6 @@ import matplotlib.pyplot as plt
 from matplotlib.patches import Circle
 import numpy as np
 
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 fig, ax = plt.subplots(2, 2)
 # 建立 ax[0,0] 內容
 circle = Circle((2.5, 2.5), radius=2, facecolor="w", edgecolor="r")

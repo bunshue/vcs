@@ -15,8 +15,6 @@ print('------------------------------------------------------------')	#60個
 def animate(i):
     label.set_text(string[:i + 1])      # 顯示字串
 
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
-
 # 建立動畫需要的 Figure 物件和軸物件
 fig, ax = plt.subplots()
 # 建立軸物件與設定大小

@@ -24,8 +24,6 @@ np.random.seed(3)                                       # 設計隨機數種子
 x, y = datasets.make_regression(n_features = 1, noise = 20)
 x_train, x_test, y_train, y_test = train_test_split(x, y, test_size = 0.2)
 
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]    # 微軟正黑體
-plt.rcParams["axes.unicode_minus"] = False              # 可以顯示負號
 plt.xlim(-3, 3)
 plt.ylim(-150, 150)
 plt.scatter(x_train, y_train, label = "訓練數據")
@@ -67,8 +65,6 @@ print(f'斜率  = {regression.coef_[0].round(2)}')
 print(f'截距  = {regression.intercept_.round(2)}')
 
 y_pred = regression.predict(x_test)
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]    # 微軟正黑體
-plt.rcParams["axes.unicode_minus"] = False              # 可以顯示負號
 plt.xlim(-3, 3)
 plt.ylim(-150, 150)
 plt.scatter(x_train,y_train,label = "訓練數據")
@@ -95,8 +91,6 @@ np.random.seed(3)                                       # 設定隨機數種子�
 # 建立 300 個點, n_features = 2
 data, label = datasets.make_blobs(n_samples = 300, n_features = 2)                                
 
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]    # 微軟正黑體
-plt.rcParams["axes.unicode_minus"] = False              # 可以顯示負號
 # 繪圓點, 圓點用黑色外框 
 plt.scatter(data[:, 0], data[:, 1], marker = "o", edgecolor = "black")
 
@@ -132,8 +126,6 @@ e.fit(data)                             # 將數據帶入物件, 做群集分析
 print(e.labels_)                        # 列印群集類別標籤
 print(e.cluster_centers_)               # 列印群集中心
 
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]    # 微軟正黑體
-plt.rcParams["axes.unicode_minus"] = False              # 可以顯示負號
 # 繪圓點, 圓點用黑色外框, 使用標籤 labels_ 區別顏色, 
 plt.scatter(data[:, 0], data[:, 1], marker = "o", c = e.labels_)
 # 用紅色標記群集中心

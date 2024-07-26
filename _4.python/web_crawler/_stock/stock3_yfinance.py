@@ -200,7 +200,6 @@ print("------------------------------------------------------------")  # 60個
 import yfinance as yf
 import matplotlib.pyplot as plt
 
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 # 下載蘋果公司最近三個月的股價數據
 apple = yf.Ticker("AAPL")
 data = apple.history(period="3mo")
@@ -230,7 +229,6 @@ import yfinance as yf
 import matplotlib.pyplot as plt
 import numpy as np
 
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 # 下載台積電最近三個月的股價數據
 tsmc = yf.Ticker("2330.TW")                 
 data = tsmc.history(period='1y')
@@ -271,7 +269,6 @@ print("------------------------------------------------------------")  # 60個
 import yfinance as yf
 import matplotlib.pyplot as plt
 
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 # 下載蘋果公司最近 6 個月的股價數據
 tsm = yf.Ticker("TSM")
 data = tsm.history(period="6mo")

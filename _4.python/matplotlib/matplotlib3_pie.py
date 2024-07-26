@@ -238,8 +238,6 @@ plt.subplot(234)
 
 from pylab import mpl
 
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
-
 sizes = [25, 30, 15, 10]
 labels = ["北部", "西部", "南部", "東部"]
 explode = (0, 0, 0.2, 0)

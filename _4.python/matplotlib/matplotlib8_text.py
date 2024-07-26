@@ -74,7 +74,6 @@ plt.text(-1, 1, s, c="y", ha="left", rotation=-15, wrap=True)
 # 第三張圖
 plt.subplot(233)
 
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 plt.axis([0, 10, 0, 10])
 s1 = "歡迎來到美國"
 plt.text(5, 8, s1, ha="center", fontsize=16, va="top", wrap=True)
@@ -89,7 +88,6 @@ plt.text(-1, 1, s2, c="y", ha="left", rotation=-15, wrap=True)
 # 第四張圖
 plt.subplot(234)
 
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 s1 = "歡迎來到美國"
 plt.text(
     0.7,
@@ -120,12 +118,9 @@ plt.text(
     ),
 )
 
-
 # 第五張圖
 plt.subplot(235)
 
-
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 s = "歡迎來到美國"
 s1 = "Welcome to the United States"
 plt.text(
@@ -223,7 +218,6 @@ plt.text(
 # 第六張圖
 plt.subplot(236)
 
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 my_kwargs = dict(ha="center", va="center", fontsize=50, c="b")
 plt.text(0.5, 0.5, "歡迎來到美國", **my_kwargs)
 
@@ -255,16 +249,13 @@ plt.text(0.4, 0.1, "sin(x)", fontsize=20)  # 輸出公式
 # 第二張圖
 plt.subplot(232)
 
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 my_kwargs = dict(ha="center", va="center", fontsize=50, c="b")
 plt.text(0.5, 0.5, "歡迎來到美國", **my_kwargs)
-
 
 # 第三張圖
 plt.subplot(233)
 
 filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
-
 
 import matplotlib.pyplot as plt
 import matplotlib.image as img
