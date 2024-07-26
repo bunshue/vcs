@@ -9,7 +9,7 @@ W = 200
 H = 200
 w = 12
 h = 2
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
@@ -21,12 +21,12 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
-
+tk.Label(window, text = "標準版顯示訊息").pack()
 label5 = tk.Label(
     window,
     anchor=tk.E,  # 設定文字的位置
-    bg="blue",  # 設定標簽背景色
-    fg="red",  # 設定標簽前景色
+    bg="lightgreen",
+    fg="red",
     text="Python",  # 設定標簽中的文字
     width=30,  # 設定標簽的寬度為30
     height=3,
@@ -36,6 +36,7 @@ label5.pack()
 label2 = tk.Label(
     window,
     text="Python GUI\nTkinter",  # 設定標簽中的文字，在字串中使用換行符
+    bg="pink",
     justify=tk.LEFT,  # 設定多行文字為齊左
     width=30,
     height=3,
@@ -45,6 +46,7 @@ label2.pack()
 label3 = tk.Label(
     window,
     text="Python GUI\nTkinter",
+    bg="lightyellow",
     justify=tk.RIGHT,  # 設定多行文字為齊右
     width=30,
     height=3,
@@ -54,6 +56,7 @@ label3.pack()
 label4 = tk.Label(
     window,
     text="Python GUI\nTkinter",
+    bg="lightblue",
     justify=tk.CENTER,  # 設定多行文字為劇中對齊
     width=30,
     height=3,
@@ -74,7 +77,7 @@ label = tk.Label(
     fg="red",
     bg="gray",
     width=15,
-    height=4,
+    height=3,
     font=("Helvetica", 8, "bold"),
 )
 label.pack()
@@ -86,7 +89,7 @@ label = tk.Label(
     fg="blue",
     bg="lime",
     width=15,
-    height=4,
+    height=3,
     anchor="nw",
 )
 label.pack()
@@ -98,14 +101,19 @@ label = tk.Label(
     fg="blue",
     bg="yellow",
     width=15,
-    height=4,
+    height=3,
     anchor="nw",
     wraplength=80,
     justify="left",
 )  # left / center / right
 label.pack()
 
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
+print("------------------------------------------------------------")  # 60個
 
+tk.Label(window, text = "在視窗的右下方顯示兩個Label").pack()
 print("在視窗的右下方顯示兩個Label")
 oklabel = tk.Label(
     window,
@@ -130,6 +138,35 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
+tk.Label(window, text="on the window").pack()
+
+frm = tk.Frame(window)
+frm.pack()
+
+frm_l = tk.Frame(
+    frm,
+)
+
+frm_r = tk.Frame(frm)
+frm_l.pack(side="left")
+frm_r.pack(side="right")
+
+tk.Label(frm_l, text="on the frm_l1").pack()
+tk.Label(frm_l, text="on the frm_l2").pack()
+tk.Label(frm_r, text="on the frm_r1").pack()
+
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+
+
+
+
 window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
@@ -149,28 +186,6 @@ entry8.insert("2", "BBBB")
 entry8.insert("end", "CCCC")
 entry8.delete(0, 2)  # 刪除前面兩個字元
 entry8.pack()
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
-    fill=tk.X, padx=5, pady=5
-)  # 分隔線
-print("------------------------------------------------------------")  # 60個
-
-tk.Label(window, text="on the window").pack()
-
-frm = tk.Frame(window)
-frm.pack()
-
-frm_l = tk.Frame(
-    frm,
-)
-
-frm_r = tk.Frame(frm)
-frm_l.pack(side="left")
-frm_r.pack(side="right")
-
-tk.Label(frm_l, text="on the frm_l1").pack()
-tk.Label(frm_l, text="on the frm_l2").pack()
-tk.Label(frm_r, text="on the frm_r1").pack()
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
     fill=tk.X, padx=5, pady=5
@@ -264,7 +279,7 @@ label1.pack()
 window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 
 """
 

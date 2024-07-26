@@ -10,10 +10,16 @@ cv2.bitwise_not(a)
 
 import cv2
 
+print("------------------------------------------------------------")  # 60個
+
+# 共同
+import os
 import sys
-import matplotlib.pyplot as plt
-import numpy as np
 import math
+import random
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
 
 font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
@@ -21,11 +27,13 @@ font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
 # 設定負號
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+plt.rcParams["font.size"] = 12  # 設定字型大小
 
-print("------------------------------------------------------------")  # 60個
+print('------------------------------------------------------------')	#60個
 
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
 a = cv2.imread(filename, 0)  # 通道不同
+print(a.shape)
 
 b = np.zeros(a.shape, dtype=np.uint8)  # 與a一樣大的黑圖
 b[100:400, 200:400] = 255  # 某塊做mask
@@ -49,7 +57,6 @@ plt.title("顯示原圖與mask作用後的圖")
 plt.imshow(cv2.cvtColor(c, cv2.COLOR_BGR2RGB))
 
 plt.show()
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -621,6 +628,23 @@ plt.title("抓出綠色的部分")
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
+
+
+print("閾值分割 bitwise_and")
+
+src1 = np.array([[255, 0, 255]])
+src2 = np.array([[255, 0, 0]])
+# 與運算
+dst_and = cv2.bitwise_and(src1, src2)
+# 或運算
+dst_or = cv2.bitwise_or(src1, src2)
+print("與運算的結果：")
+print(dst_and)
+print("或運算的結果：")
+print(dst_or)
+
+print("------------------------------------------------------------")  # 60個
+
 
 
 print("------------------------------------------------------------")  # 60個

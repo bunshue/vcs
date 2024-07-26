@@ -25,16 +25,16 @@ def DealWithVar(s):
 		''',re.X | re.U)	# 設定編譯選項，忽略模式中的注解
 	vars.extend(r.findall(s))
 	return vars
-# 判斷指令行是否有輸入，沒有則要求輸入要處理的檔案
-if len(sys.argv) == 1:
-	sour = input('請輸入要處理的檔案路徑')
-else:
-	sour = sys.argv[1]
-file = open(sour,encoding="utf-8")		# 開啟檔案
+
+print('分析一個python檔案的內容')
+
+python_filename = "GetFunction.py"
+
+file = open(python_filename,encoding="utf-8")		# 開啟檔案
 s = file.readlines()		# 將檔案內容以行讀入的s中
 file.close()			# 關閉檔案
 print('********************************')
-print(sour,'中的函數有：')
+print(python_filename,'中的函數有：')
 print('********************************')
 i = 0				# i為函數所在的行號
 # 循環處理每一行，比對其中的函數並輸出函數所在的行號，以及函數的原型
@@ -44,7 +44,7 @@ for line in s:
 	if len(function) == 1:
 		print('Line: ',i,'\t',function[0])
 print('********************************')
-print(sour,'中的變數有：')
+print(python_filename,'中的變數有：')
 print('********************************')
 i = 0				# 此處i為變數所在的行號
 # 循環處理每一行，比對其中的變數，輸出變數所在的行號，以及變數名

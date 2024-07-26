@@ -87,7 +87,6 @@ poem_text = """黃河遠上白雲間\n
 春風不度玉門關\n
 """
 
-'''
 print("------------------------------------------------------------")  # 60個
 print("1. write() 一次寫入一個字串")
 print("------------------------------------------------------------")  # 60個
@@ -265,7 +264,8 @@ filename = "data/王之渙_涼州詞.big5.txt"
 f = open(filename)
 
 lines = f.readlines()
-print(lines)
+for line in lines:
+    print(line)
 
 f.close()
 
@@ -284,6 +284,7 @@ f = open(filename, "r")
 # 通过for-in循环逐行读取
 for line in f:  # 逐行讀取檔案到變數line
     print(line)
+    #print(line.strip())
 f.close()
 
 print("------------------------------------------------------------")  # 60個
@@ -398,7 +399,7 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("7. 應用範例")
 print("------------------------------------------------------------")  # 60個
-'''
+
 
 # 統計檔案的字元數、字數與行數
 
@@ -938,62 +939,6 @@ print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
 
-#以下不能單獨執行
-
-# 讀出來的資料再處理
-poem_text = poem_text.encode("utf-8")  # 轉成 bytes
-with open(filename, "wb") as f:
-    f.write(poem_text)
-
-
-text = open(filename).read().strip()
-print(text)
-
-
-# print(string.decode("utf-8")) # 這是什麼？
-# print(string.decode("utf-8").encode("utf-8")) # 這是什麼？
-
-
-stops = f.read().split("\n")
-print(stops)
-
-
-print(repr(data))
-print(data)
-print(data.split())
-data = data.split()
-for d in data:
-    d.strip()
-print(data)
-
-print("------------------------------------------------------------")  # 60個
-
-filename = 'data/Romeo&Juliet.txt'
-
-outfilename = filename[:-4]+'_cpd.txt'
-
-f1 = open(filename, "r")
-f2 = open(outfilename, 'w')
-
-for line in f1:           # 讀進來的line字串是有包含檔案內的換行字元哦！
-    string1 = line.strip()    # 移除line的多餘空白
-    if len(string1)>0:        # 如果移除完還有內容，寫進輸出檔
-        f2.write(string1+'\n')
-f1.close()
-f2.close()
-
-
-"""
-std_data = dict()
-with open(filename, encoding='utf-8') as f:
-    alldata = f.readlines()
-    for item in alldata:
-        no, name = item.rstrip('\n').split(',')
-        std_data[no] = name
-print(std_data)
-"""
-
-
 print("------------------------------------------------------------")  # 60個
 
 
@@ -1026,7 +971,7 @@ print("所搜尋字串 %s 共出現 %d 次" % (searchStr, num))
 
 print("------------------------------------------------------------")  # 60個
 
-filename = "data/王之渙_涼州詞.big5.txt"
+filename = "file_not_found.txt"
 
 try:
     with open(filename) as f:  # 用預設mode=r開啟檔案
@@ -1047,7 +992,11 @@ except FileNotFoundError:
     print(f"找不到 {filename} 檔案")
 else:
     wordList = data.split()  # 將文章轉成串列
-    print(f"{filename} 文章的字數是 {len(wordList)}")  # 列印文章字數
+    print('檔案 :', filename)
+    print('字數 :', len(wordList))
+    for _ in wordList:
+        continue
+        print(_)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1063,7 +1012,8 @@ except FileNotFoundError:
 else:
     words = contents.split()
     num_words = len(words)
-    print(f"The file {filename} has about {num_words} words.")
+    print('檔案 :', filename)
+    print('字數 :', num_words)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1079,7 +1029,8 @@ except FileNotFoundError:
 else:
     words = contents.split()
     num_words = len(words)
-    print(f"The file {filename} has about {num_words} words.")
+    print('檔案 :', filename)
+    print('字數 :', num_words)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1110,6 +1061,37 @@ with open("tmp_resolution.txt", "wt") as f:
         f.write(s.strip() + "\n")
 
 print("------------------------------------------------------------")  # 60個
+
+#以下不能單獨執行
+sys.exit()
+
+
+# 讀出來的資料再處理
+poem_text = poem_text.encode("utf-8")  # 轉成 bytes
+with open(filename, "wb") as f:
+    f.write(poem_text)
+
+text = open(filename).read().strip()
+print(text)
+
+
+# print(string.decode("utf-8")) # 這是什麼？
+# print(string.decode("utf-8").encode("utf-8")) # 這是什麼？
+
+
+stops = f.read().split("\n")
+print(stops)
+
+
+print(repr(data))
+print(data)
+print(data.split())
+data = data.split()
+for d in data:
+    d.strip()
+print(data)
+
 print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
+
+
 

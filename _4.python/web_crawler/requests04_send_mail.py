@@ -1,8 +1,10 @@
 # 發送e-mail
 
+print("------------------------------------------------------------")  # 60個
+
 import requests
 
-
+'''
 def get_mailgun_key():
     filename = "C:/_git/vcs/_1.data/______test_files1/_key/mailgun_key.txt"
 
@@ -67,7 +69,7 @@ else:
     print('寄信失敗')
 """
 
-
+'''
 print("------------------------------------------------------------")  # 60個
 print("smtplib ST")
 print("------------------------------------------------------------")  # 60個
@@ -195,6 +197,56 @@ if status == {}:  # 檢查是否發信成功
     print("發送郵件成功!")
 mySMTP.quit()  # 結束連線
 
+print("------------------------------------------------------------")  # 60個
+
+import smtplib
+
+
+def send_gmail(gmail_addr, gmail_pwd, to_addrs, msg):
+    smtp_gmail = smtplib.SMTP('smtp.gmail.com', 587)  # 建立 SMTP 物件
+    print(smtp_gmail.ehlo())	    # Say Hello
+    print(smtp_gmail.starttls())	 # 啟動 TLS 加密模式
+    print(smtp_gmail.login(gmail_addr, gmail_pwd))  # 登入
+    status = smtp_gmail.sendmail(gmail_addr, to_addrs, msg)	  # 寄出
+    if not status:
+        print('寄信成功')
+    else:
+        print('寄信失敗', status)
+    smtp_gmail.quit()  # 結束與郵件伺服器的連線
+
+
+gmail_addr = '您的Gmail郵件地址'
+gmail_pwd = '您的Gmail密碼'
+to_addrs = ['第一個收件者的郵件網路', '第二個收件者的郵件網路']
+send_gmail(gmail_addr, gmail_pwd, to_addrs, 'Subject:Hello\nTesting')
+# ↑主旨   ↑內容
+
+print("------------------------------------------------------------")  # 60個
+
+try:  # 例外處理
+    host = "hostname"  # 取得伺服器位址
+    port = 25  # 取得通訊埠
+    user = "david"  # 取得使用者名稱
+    pw = "123456"  # 取得密碼
+    fromaddr = "david@gmail.com"  # 取得發件人
+    toaddr = "you@lion.mouse"  # 取得收件人
+    subject = "Hello gmail"  # 取得主旨
+    text = "aaaaaaaaa"
+    msg = "From: %s\nTo: %s\nSubject: %s\n\n" % (  # 產生信件頭
+        fromaddr,
+        toaddr,
+        subject,
+    )
+    msg = msg + text
+    smtp = smtplib.SMTP(host, port)  # 連線伺服器
+    smtp.set_debuglevel(1)  # 設定除錯等級
+    smtp.login(user, pw)  # 登入伺服器
+    smtp.sendmail(fromaddr, toaddr, msg)  # 傳送信件
+    smtp.quit()  # 中斷伺服器
+except Exception as e:
+    print("傳送錯誤\n")
+
+print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 print("smtplib SP")

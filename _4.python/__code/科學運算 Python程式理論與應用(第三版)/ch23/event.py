@@ -2,6 +2,7 @@
 # file: event.py
 #
 import threading			# 匯入threading模組
+
 class mythread(threading.Thread):
 	def __init__(self,threadname):
 		threading.Thread.__init__(self,name = threadname)

@@ -39,7 +39,7 @@ import random
 import pathlib
 import numpy as np
 import pandas as pd
-'''
+
 print("------------------------------------------------------------")  # 60個
 print("1. csv_writer = csv.writer() + writerow() + writerows()")
 print("------------------------------------------------------------")  # 60個
@@ -172,7 +172,6 @@ with open(filename, "w", newline="", encoding="utf-8") as csvfile:  # 開啟csv�
 print("------------------------------------------------------------")  # 60個
 
 # 寫 暫存
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -489,7 +488,7 @@ with open(filename_r, 'r') as csvfile:  # 開啟csv檔案
         print(','.join(line))
         print(line[2])
 """
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 filename = "data/新竹縣日出日落2024.csv" #格式是 UTF-16LE BOM
