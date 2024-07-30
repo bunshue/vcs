@@ -15,7 +15,6 @@ random.shuffle
 random.其他
 
 """
-
 print("------------------------------------------------------------")  # 60個
 
 # 共同
@@ -47,20 +46,20 @@ random.seed 隨機數的「種子」，數值一樣則產生的隨機數相同�
 若不設定則使用系統提供隨機源，這樣做出來的random資料並不是真正的隨機數
 如果 seed 相同則結果相同
 """
-'''
-# 不固定亂數種子
+
+print("不固定亂數種子")
 for _ in range(10):
     print(random.random(), end=", ")
 print()
 
-# 固定亂數種子
+print("固定亂數種子")
 random.seed(5)
 
 for _ in range(10):
     print(random.random(), end=", ")
 print()
 
-# 打亂亂數種子
+print("打亂亂數種子")
 randseed = int(time.time())
 random.seed(randseed)
 for _ in range(10):
@@ -80,20 +79,12 @@ print(
     "---- random.random() ST --------------------------------------------------------"
 )  # 60個
 
-# random.random() 	隨機產生一個介於0與1之間小數
-
-print("random.random(), 隨機分布, 產生 0.00 ~ 1.00 之間的一個浮點數")
+print("random.random(), 隨機產生 0.00 ~ 1.00 之間的一個浮點數")
 
 print(random.random())  # 產生隨機浮點數n,0 <= n < 1.0
 
-for i in range(5):
+for _ in range(10):
     print(random.random())
-
-a = random.random()
-b = random.random()
-c = random.random()  # 重複 print 出來的結果是相同的
-d = random.random()
-print(f"{a}\n{b}\n{c}\n{d}")
 
 print("------------------------------------------------------------")  # 60個
 
@@ -114,69 +105,48 @@ print(
     "---- random.random() SP --------------------------------------------------------"
 )  # 60個
 
-'''
 print(
     "---- random.randint(num1, num2) ST --------------------------------------------------------"
 )  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-print('隨機整數 1 ~ 10, 包含頭尾')
+print("random.randint(M, N), 產生隨機整數, 包含頭尾")
+
+print('產生隨機整數 1 ~ 10, 包含頭尾')
 for i in range(20):
-    a = random.randint(1, 10) # 隨機取得整數
-    print(a, end=" ")
+    cc = random.randint(1, 10) # 隨機取得整數
+    print(cc, end=" ")
 print()
 
 print("------------------------------------------------------------")  # 60個
 
-a = set()  # 建立空集合
-while len(a) < 6:  # 使用 while 迴圈，直到集合的長度等於 6 就停止
-    b = random.randint(1, 49)  # 取出 1～49 得隨機整數
-    a.add(b)  # 將隨機數加入集合
-print(a)  # {34, 41, 48, 49, 19, 30}
-
-print("------------------------------------------------------------")  # 60個
-
-lst = [random.randint(1, 100) for i in range(100)]
-print(lst)
-print("Average of the list is", sum(lst) / float(len(lst)))
-
-print("------------------------------------------------------------")  # 60個
-
 num1, num2 = 0, 255
-R = random.randint(num1, num2)  # 產生 num1 ~ num2 之間的亂數整數 包含邊界
-G = random.randint(num1, num2)  # 產生 num1 ~ num2 之間的亂數整數 包含邊界
-B = random.randint(num1, num2)  # 產生 num1 ~ num2 之間的亂數整數 包含邊界
-print("取得亂數: ", R, G, B)
-print("取得亂數1: {} 亂數2: {} 亂數3: {}".format(R, G, B))
-print("取得亂數: (%d, %d, %d)" % (R, G, B))
+R = random.randint(num1, num2)  # 產生 num1 ~ num2 之間的亂數整數 含邊界
+G = random.randint(num1, num2)  # 產生 num1 ~ num2 之間的亂數整數 含邊界
+B = random.randint(num1, num2)  # 產生 num1 ~ num2 之間的亂數整數 含邊界
+print("取得亂數 :", R, G, B)
 
-print("取出 1 ~ 6 之間的整數")
-
-num = random.randint(1, 6)
-print("你擲的骰子點數為：" + str(num))
+num = random.randint(1, 6)# 產生1~6之間的整數亂數 含頭尾
+print("你擲的骰子點數為 :" + str(num))
 
 print("------------------------------------------------------------")  # 60個
 
-for j in range(6):  # 以迴圈執行6次
-    print(random.randint(1, 42), end=" ")  # 產生1-42的整數亂數
-print()  # 換行1
+print('1~49號 取 6 個 為一集合')
+my_set = set()  # 建立空集合
+while len(my_set) < 6:  # 使用 while 迴圈，直到集合的長度等於 6 就停止
+    num = random.randint(1, 49)  # 取出 1～49 得隨機整數
+    #print('本次取得 :', num)
+    my_set.add(num)  # 將隨機數加入集合
+print(my_set)
 
 print("------------------------------------------------------------")  # 60個
 
-random.randint(1, 10)  # 產生1~10之間的整數亂數 包含頭尾
-random.randint(0, 10)  # random之randint含尾, 只有這個特別不一樣
-
-val = 0
-data = [0] * 80
-for i in range(80):
-    data[i] = random.randint(1, 150)
-
-print("資料內容：")
-for i in range(10):
-    for j in range(8):
-        print("%2d[%3d]  " % (i * 8 + j + 1, data[i * 8 + j]), end="")
-    print("")
+print('0~100間取N個整數 取平均')
+N = 1000
+my_list = [random.randint(0, 100) for i in range(N)]
+#print("平均 :", my_list)
+print("平均 :", sum(my_list) / float(len(my_list)))
 
 print("------------------------------------------------------------")  # 60個
 
@@ -344,48 +314,6 @@ print(generate_code(10))
 
 print("------------------------------------------------------------")  # 60個
 
-
-"""
-for _ in range(10):
-    aa = random.randint(1,10)
-    print(aa)
-
-val=0
-data=[0]*80
-for i in range(80):
-    data[i]=random.randint(1,150)
-while val!=-1:
-    find=0
-    val=int(input('請輸入搜尋鍵值(1-150)，輸入-1離開：'))
-    for i in range(80):
-        if data[i]==val:
-            print('在第 %3d個位置找到鍵值 [%3d]' %(i+1,data[i]))
-            find+=1
-    if find==0 and val !=-1 :
-        print('######沒有找到 [%3d]######' %val)
-print('資料內容：')
-for i in range(10):
-    for j in range(8):
-        print('%2d[%3d]  ' %(i*8+j+1,data[i*8+j]),end='')
-    print('')
-
-"""
-print("------------------------------------------------------------")  # 60個
-
-
-"""
-a = random.randint(1, 99)  # 產生 1～99 的隨機整數
-b = int(input("輸入 1～99 的數字："))  # 讓使用者輸入數字，使用 int 轉換成數字
-while a != b:  # 使用 while 迴圈，如果 a 不等於 b，就不斷繼續
-    if b < a:
-        b = int(input("數字太小囉！再試一次吧："))  # 如果 b<a，提示數字太小
-    elif b > a:
-        b = int(input("數字太大囉！再試一次吧："))  # 如果 b>a，提示數字太大
-print("答對囉！")  # 如果 b=a 會停止 while 迴圈，顯示正確答案
-"""
-
-print("------------------------------------------------------------")  # 60個
-
 dices = []
 for loop in range(1, 4):
     for i in range(3):
@@ -396,68 +324,6 @@ for loop in range(1, 4):
         dices.pop()
 
 print("------------------------------------------------------------")  # 60個
-
-min = 1
-max = 6  # 骰子有幾面
-times = 10000  # 擲骰子次數
-
-dice = [0] * 7  # 建立擲骰子的串列
-for i in range(times):
-    data = random.randint(min, max)
-    dice[data] += 1
-print(dice)
-del dice[0]  # 刪除索引0資料
-
-for i, c in enumerate(dice, 1):
-    print("{} = {} 次".format(i, c))
-print(dice)
-x = [i for i in range(1, max + 1)]  # 長條圖x軸座標
-width = 0.35  # 長條圖寬度
-plt.bar(x, dice, width, color="g")  # 繪製長條圖
-plt.ylabel("Frequency")
-plt.title("Test 10000 times")
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-#random.randint() 使用
-
-def dice_generator(times, sides):
-    """處理隨機數"""
-    for i in range(times):
-        ranNum1 = random.randint(1, sides)  # 產生1-6隨機數
-        ranNum2 = random.randint(1, sides)  # 產生1-6隨機數
-        dice.append(ranNum1 + ranNum2)
-
-
-def dice_count(sides):
-    """計算2-11個出現次數"""
-    for i in range(2, 13):
-        frequency = dice.count(i)  # 計算i出現在dice串列的次數
-        frequencies.append(frequency)
-
-
-times = 1000  # 擲骰子次數
-sides = 6  # 骰子有幾面
-dice = []  # 建立擲骰子的串列
-frequencies = []  # 儲存每一面骰子出現次數串列
-dice_generator(times, sides)  # 產生擲骰子的串列
-dice_count(sides)  # 將骰子串列轉成次數串列
-N = len(frequencies)
-x = np.arange(N)  # 長條圖x軸座標
-width = 0.35  # 長條圖寬度
-plt.bar(x, frequencies, width, color="g")  # 繪製長條圖
-plt.ylabel("出現次數")
-plt.title("測試 1000 次", fontsize=16)
-plt.xticks(x, ("2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"))
-plt.yticks(np.arange(0, 150, 15))
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-
 
 print(
     "---- random.randint(num1, num2) SP --------------------------------------------------------"
@@ -664,7 +530,7 @@ for _ in range(N):
 
 print("------------------------------------------------------------")  # 60個
 
-# random.randrange 和 random.randint 都可產生隨機整數
+# random.randrange 可產生隨機整數
 
 a = random.randrange(2, 500, 2)  # randrange 可指定隨機數階層，一定偶數
 print(a)
@@ -762,6 +628,10 @@ for i in range(0,3):
 
 print("------------------------------------------------------------")  # 60個
 
+for _ in range(5):
+    print(random.uniform(0.2, 0.9))
+
+print("------------------------------------------------------------")  # 60個
 
 print(
     "---- random.uniform(num1, num2) SP --------------------------------------------------------"
@@ -1202,9 +1072,13 @@ print(dir(random))
 
 print("------------------------------------------------------------")  # 60個
 
-# triangular 返回兩個值中間的隨機浮點數
+print("triangular 返回兩個值中間的隨機浮點數")
 c = random.triangular(3, 8)
 print(c)
+
+for _ in range(5):
+    print(random.triangular(1, 5))
+print()
 
 # beta 分佈，兩個值需都大於 0，返回 0~1 之間隨機浮點數
 d = random.betavariate(3, 8)
@@ -1226,11 +1100,6 @@ print(e)
 # 參考：https://docs.python.org/zh-cn/3/library/random.html#random.random
 
 print("------------------------------------------------------------")  # 60個
-
-
-
-
-
 
 # 假設一家公司想要測試兩種不同的廣告設計, 以看哪一種效果更好
 ad_designs = ["Design A", "Design B"]
@@ -1257,8 +1126,6 @@ while len(recipients["Design A"]) != 500:
 # 輸出每種設計的接收者數量，確保它們是平均分配的
 print(f"A 廣告接收者數量 : {len(recipients['Design A'])}")
 print(f"B 廣告接收者數量 : {len(recipients['Design B'])}")
-
-print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1291,7 +1158,7 @@ local_table = {
     "Z": 33,
 }
 
-for j in range(20):  # 使用 20 次的 for 迴圈
+for j in range(5):  # 使用 20 次的 for 迴圈
     local = random.choice(list(local_table.keys()))
 
     check_arr = list(str(local_table[local]))
@@ -1397,23 +1264,4 @@ for i in range(numberOfDice, (numberOfDice * 6) + 1):
     percentage = round(results[i] / 10000, 1)
     print("  {} - {} rolls - {}%".format(i, roll, percentage))
 """
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-print('test random.triangular')
-
-for _ in range(10):
-    print(random.triangular(1, 5))
-
-print('test random.uniform')
-for _ in range(10):
-    print(random.uniform(0.2, 0.9))
-
-print("------------------------------------------------------------")  # 60個
-
-
 

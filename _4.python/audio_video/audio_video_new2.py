@@ -2,7 +2,7 @@ import os
 import sys
 import time
 import random
-
+'''
 print("------------------------------------------------------------")  # 60個
 
 """
@@ -483,7 +483,7 @@ clip1_resize.write_videofile('tmp_clip1_resize.mp4')
 """
 print("------------------------------------------------------------")  # 60個
 
-
+'''
 """
 圖片內容偵測
 
@@ -499,9 +499,9 @@ print("------------------------------------------------------------")  # 60個
 !wget -O resnet50_imagenet_tf.2.0.h5 https://github.com/OlafenwaMoses/ImageAI/releases/download/1.0/resnet50_imagenet_tf.2.0.h5
 
 """
-
-""" fail in sugar
+#from keras.layers import ELU, PReLU, LeakyReLU
 from imageai.Detection import ObjectDetection
+
 detector = ObjectDetection()
 detector.setModelTypeAsYOLOv3()
 detector.setModelPath("yolo.h5")
@@ -514,7 +514,6 @@ detections = detector.detectObjectsFromImage(
 
 for eachObject in detections:
     print("{} ： {} ： {}".format(eachObject["name"], eachObject["percentage_probability"], eachObject["box_points"]))
-"""
 
 print("------------------------------------------------------------")  # 60個
 

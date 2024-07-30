@@ -20,7 +20,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 plt.figure(
     num="bar 集合 1",
     figsize=(12, 8),
@@ -63,8 +63,8 @@ y = [3, 48, 33, 8, 38]
 
 print("垂直長條圖")
 # 繪製出垂直 Bar，這邊使用的是 bar 函數，設定的是 width 寬度
-plt.bar(x, y, width=0.5, color="red")  # 直向bar圖
-# plt.bar(x, y, fc = '#e55934', ec = 'none')      #直向bar圖
+plt.bar(x, y, width=0.5, color="red")
+# plt.bar(x, y, fc = '#e55934', ec = 'none')
 # plt.xticks(x, y)       #設定x軸刻度為文字
 
 print("水平長條圖")
@@ -93,21 +93,46 @@ plt.xticks(range(len(animals.values())), animals.keys())
 # 第四張圖
 plt.subplot(234)
 
-weights = [3, 48, 33, 8, 38]
-plt.bar(range(1, 6), weights)
+def addlabels1(x, y):
+    for i in range(len(x)):
+        plt.text(i, y[i], y[i])
+
+students = ["約翰", "瑪莉", "麥可", "大衛"]
+math_scores = [78, 67, 90, 81]
+
+plt.ylim(0, 100)
+plt.bar(students, math_scores, color=["red", "green", "blue", "yellow"])
+addlabels1(students, math_scores)
+plt.xlabel("學生")
+plt.ylabel("數學成績")
+plt.title("期末考")
 
 # 第五張圖
 plt.subplot(235)
 
-plt.bar(np.arange(0.6, 5), weights)
+def addlabels2(x, y):
+    for i in range(len(x)):
+        plt.text(y[i], i, y[i])
+
+
+students = ["約翰", "瑪莉", "麥可", "大衛"]
+math_scores = [78, 67, 90, 81]
+
+plt.xlim(0, 100)
+plt.barh(students, math_scores, color=["red", "green", "blue", "yellow"])
+addlabels2(students, math_scores)
+plt.ylabel("學生")
+plt.xlabel("數學成績")
+plt.title("期末考")
+
 
 # 第六張圖
 plt.subplot(236)
 
-listx1 = [1, 5, 7, 9, 13, 15]
-listy1 = [15, 50, 80, 40, 70, 50]
-plt.bar(listx1, listy1, label="男性")
+print("將字典直接輸出給bar圖")
 
+data = {"apples": 10, "oranges": 15, "lemons": 5, "limes": 20}
+plt.bar(list(data.keys()), list(data.values()))
 
 plt.show()
 
@@ -201,10 +226,14 @@ plt.grid(True)  # 顯示格線
 # 第四張圖
 plt.subplot(234)
 
-print("將字典直接輸出給bar圖")
+x = ["AAA", "BBB", "CCC", "DDD"]
+s = [540, 2800, 1864, 1285]
 
-data = {"apples": 10, "oranges": 15, "lemons": 5, "limes": 20}
-plt.bar(list(data.keys()), list(data.values()))
+"""
+plt.bar(x, s)
+plt.bar(x, s, width=0.8, align="edge", color="r", ec="y", lw=2)
+"""
+plt.bar(x, s, width=0.8, align="edge", color="r", ec="y", lw=2)
 
 # 第五張圖
 plt.subplot(235)
@@ -289,18 +318,6 @@ plt.figure(
 # 第一張圖
 plt.subplot(231)
 
-x = ["AAA", "BBB", "CCC", "DDD"]
-s = [540, 2800, 1864, 1285]
-
-"""
-plt.bar(x, s)
-plt.bar(x, s, width=0.8, align="edge", color="r", ec="y", lw=2)
-"""
-plt.bar(x, s, width=0.8, align="edge", color="r", ec="y", lw=2)
-
-# 第二張圖
-plt.subplot(232)
-
 x = ["上學期", "下學期"]
 s1, s2, s3, s4 = [96.2, 87.1], [88.9, 95.2], [85.1, 91.5], [95.2, 96.7]
 
@@ -317,6 +334,18 @@ plt.legend(["2017年", "2018年", "2019年", "2020年"])
 plt.ylabel("平均分數,取到小數點第一位")
 plt.title("大學四年各學期平均成績比較表")
 
+# 第二張圖
+plt.subplot(232)
+
+votes = [135, 412, 397]  # 得票數
+N = len(votes)  # 計算長度
+x = np.arange(N)  # 長條圖x軸座標
+width = 0.35  # 長條圖寬度
+
+plt.bar(x, votes, width)  # 繪製長條圖
+plt.xticks(x, ("James", "Peter", "Norton"))  # x 軸刻度
+plt.yticks(np.arange(0, 450, 30))  # y 軸刻度
+plt.title("x用名稱 y設定範圍刻距")
 
 # 第三張圖
 plt.subplot(233)
@@ -479,19 +508,6 @@ plt.title("動物體重 使用中文")
 # 第四張圖
 plt.subplot(234)
 
-votes = [135, 412, 397]  # 得票數
-N = len(votes)  # 計算長度
-x = np.arange(N)  # 長條圖x軸座標
-width = 0.35  # 長條圖寬度
-
-plt.bar(x, votes, width)  # 繪製長條圖
-plt.xticks(x, ("James", "Peter", "Norton"))  # x 軸刻度
-plt.yticks(np.arange(0, 450, 30))  # y 軸刻度
-plt.title("x用名稱 y設定範圍刻距")
-
-# 第五張圖
-plt.subplot(235)
-
 x = ["第一季", "第二季", "第三季", "第四季"]
 s = [20000, 15000, 17000, -8000]
 plt.barh(x, s, color="red")
@@ -499,13 +515,19 @@ plt.ylabel("季別")
 plt.xlabel("損益金額")
 plt.title("今年度營業獲利的概況")
 
+
+# 第五張圖
+plt.subplot(235)
+
+
 # 第六張圖
 plt.subplot(236)
 
 
 
 plt.show()
-'''
+
+
 print("------------------------------------------------------------")  # 60個
 
 plt.figure(
@@ -560,15 +582,6 @@ plt.subplot(233)
 # 第四張圖
 plt.subplot(234)
 
-
-# 第五張圖
-plt.subplot(235)
-
-
-# 第六張圖
-plt.subplot(236)
-
-
 N = 5
 menMeans = (20, 35, 30, 35, 27)
 womenMeans = (25, 32, 34, 20, 25)
@@ -583,6 +596,42 @@ plt.title("Scores by group and gender")
 plt.xticks(ind, ("G1", "G2", "G3", "G4", "G5"))
 plt.yticks(np.arange(0, 81, 10))
 plt.legend(labels=["Men", "Women"])
+
+
+# 第五張圖
+plt.subplot(235)
+
+
+# from basic_units import cm, inch
+
+cm = 1
+inch = cm * 0.039
+
+N = 5
+ind = np.arange(N)  # the x locations for the groups
+width = 0.35  # the width of the bars
+men_means = [150 * cm, 160 * cm, 146 * cm, 172 * cm, 155 * cm]
+men_std = [20 * cm, 30 * cm, 32 * cm, 10 * cm, 20 * cm]
+plt.bar(x=ind, height=men_means, width=width, bottom=0 * cm, yerr=men_std, label="Men")
+women_means = (145 * cm, 149 * cm, 172 * cm, 165 * cm, 200 * cm)
+women_std = (30 * cm, 25 * cm, 20 * cm, 31 * cm, 22 * cm)
+plt.bar(
+    x=ind + width,
+    height=women_means,
+    width=width,
+    bottom=0 * cm,
+    yerr=women_std,
+    label="Women",
+)
+plt.title("Scores by group and gender")
+plt.xticks(ind, ("G1", "G2", "G3", "G4", "G5"))
+plt.legend()
+
+
+# 第六張圖
+plt.subplot(236)
+
+
 
 
 plt.show()
@@ -718,81 +767,6 @@ ax.set_title("Bar chart")
 ax.set_xlabel("Name")
 ax.set_ylabel("Money")
 ax.legend(loc=2)
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-# from basic_units import cm, inch
-
-cm = 1
-inch = cm * 0.039
-
-fig, ax = plt.subplots()
-N = 5
-ind = np.arange(N)  # the x locations for the groups
-width = 0.35  # the width of the bars
-men_means = [150 * cm, 160 * cm, 146 * cm, 172 * cm, 155 * cm]
-men_std = [20 * cm, 30 * cm, 32 * cm, 10 * cm, 20 * cm]
-ax.bar(x=ind, height=men_means, width=width, bottom=0 * cm, yerr=men_std, label="Men")
-women_means = (145 * cm, 149 * cm, 172 * cm, 165 * cm, 200 * cm)
-women_std = (30 * cm, 25 * cm, 20 * cm, 31 * cm, 22 * cm)
-ax.bar(
-    x=ind + width,
-    height=women_means,
-    width=width,
-    bottom=0 * cm,
-    yerr=women_std,
-    label="Women",
-)
-ax.set_title("Scores by group and gender")
-ax.set_xticks(ind + width / 2)
-ax.set_xticklabels(("G1", "G2", "G3", "G4", "G5"))
-ax.legend()
-ax.yaxis.set_units(inch)
-ax.autoscale_view()
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-def addlabels1(x, y):
-    for i in range(len(x)):
-        plt.text(i, y[i], y[i])
-
-students = ["約翰", "瑪莉", "麥可", "大衛"]
-math_scores = [78, 67, 90, 81]
-
-# 預設大小為6.4inches*4.8inches, 80dpi
-# 指定 寬6.4inches, 高4.8inches, 160dpi
-fig, ax = plt.subplots(figsize=(6.4, 4.8), dpi=160)
-
-ax.set_ylim(0, 100)
-ax.bar(students, math_scores, color=["red", "green", "blue", "yellow"])
-addlabels1(students, math_scores)
-ax.set(xlabel="學生", ylabel="數學成績")
-ax.set_title("期末考")
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-
-def addlabels2(x, y):
-    for i in range(len(x)):
-        plt.text(y[i], i, y[i])
-
-
-students = ["約翰", "瑪莉", "麥可", "大衛"]
-math_scores = [78, 67, 90, 81]
-# 預設大小為6.4inches*4.8inches, 80dpi
-# 指定 寬6.4inches, 高4.8inches, 160dpi
-fig, ax = plt.subplots(figsize=(6.4, 4.8), dpi=160)
-ax.set_xlim(0, 100)
-ax.barh(students, math_scores, color=["red", "green", "blue", "yellow"])
-addlabels2(students, math_scores)
-ax.set(ylabel="學生", xlabel="數學成績")
-ax.set_title("期末考")
 
 plt.show()
 
@@ -1156,3 +1130,17 @@ plt.ylim(0, 100)
 
 #num="bar 集合 1",
 
+
+
+cc = np.arange(0.6, 5)
+print(cc)
+
+
+# 預設大小為6.4inches*4.8inches, 80dpi
+# 指定 寬6.4inches, 高4.8inches, 160dpi
+#fig, ax = plt.subplots(figsize=(6.4, 4.8), dpi=160)
+
+
+# 預設大小為6.4inches*4.8inches, 80dpi
+# 指定 寬6.4inches, 高4.8inches, 160dpi
+#fig, ax = plt.subplots(figsize=(6.4, 4.8), dpi=160)

@@ -1,7 +1,5 @@
 # plot 集合
 
-import matplotlib
-
 print("------------------------------------------------------------")  # 60個
 
 # 共同
@@ -29,7 +27,6 @@ right = 2 * np.pi
 x = np.linspace(left, right, 100)
 y = np.sin(x)
 
-#          編號                          圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
 plt.figure(
     num="plot 集合 fill_between 1",
     figsize=(12, 8),
@@ -40,7 +37,7 @@ plt.figure(
     frameon=True,
 )
 
-# 第一張圖
+print("------------------------------------------------------------")  # 60個
 plt.subplot(231)
 
 # 使用fill
@@ -48,7 +45,7 @@ plt.plot(x, y)
 plt.fill(x, y, color="y", alpha=0.3)  # 黃色填充
 plt.title("使用fill")
 
-# 第二張圖
+print("------------------------------------------------------------")  # 60個
 plt.subplot(232)
 
 # 使用fill_between
@@ -56,47 +53,47 @@ plt.plot(x, y)
 plt.fill_between(x, 0, y, color="y", alpha=0.3)
 plt.title("與x軸之間填充")
 
-# 第三張圖
+print("------------------------------------------------------------")  # 60個
 plt.subplot(233)
 
 plt.plot(x, y)
 plt.fill_between(x, -1, y, color="y", alpha=0.3)
 plt.title("x之下填充到底")
 
-# 第四張圖 和 第五張圖 比較
+print("------------------------------------------------------------")  # 60個
 plt.subplot(234)
 
 plt.plot(x, y)
 plt.fill_between(x, 1, y, color="y", alpha=0.3)
 plt.title("x之上填充到頂")
 
-# 第五張圖
+print("------------------------------------------------------------")  # 60個
 plt.subplot(235)
 
-t = np.linspace(-np.pi * 1.5, np.pi * 1.5, 100)
-c = np.sinc(t)
 
-plt.plot(t, c)
-plt.fill(t, c)
-
-# 第六張圖
+print("------------------------------------------------------------")  # 60個
 plt.subplot(236)
 
-x = [0, 4, 6, 4, 0]
-y = [0, 0, 2, 4, 4]
-plt.fill(x, y, "r")
+n = 256
+X = np.linspace(-np.pi, np.pi, n, endpoint=True)
+Y = np.sin(2 * X)
 
-x = [0, 1, 3, 2]
-y = [2, 5, 6, 0]
-x2 = [7, 8, 9]
-y2 = [0, 3, 0]
-plt.fill(x, y, "g", x2, y2, "b")
+plt.plot(X, Y + 1, color="blue", alpha=1.00)
+plt.fill_between(X, 1, Y + 1, color="blue", alpha=0.25)
+
+plt.plot(X, Y - 1, color="blue", alpha=1.00)
+plt.fill_between(X, -1, Y - 1, (Y - 1) > -1, color="blue", alpha=0.25)
+plt.fill_between(X, -1, Y - 1, (Y - 1) < -1, color="red", alpha=0.25)
+
+plt.xlim(-np.pi, np.pi)
+plt.xticks(())
+plt.ylim(-2.5, 2.5)
+plt.yticks(())
 
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#          編號                          圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
 plt.figure(
     num="plot 集合 fill_between 2",
     figsize=(12, 8),
@@ -107,7 +104,7 @@ plt.figure(
     frameon=True,
 )
 
-# 第一張圖
+print("------------------------------------------------------------")  # 60個
 plt.subplot(231)
 
 # 函數f(x)的係數
@@ -130,8 +127,7 @@ plt.fill_between(x, y1=y1, y2=y2, where=(x >= -1) & (x <= 2), facecolor="yellow"
 
 plt.grid()
 
-
-# 第二張圖
+print("------------------------------------------------------------")  # 60個
 plt.subplot(232)
 
 x = np.arange(0, 13.3, 0.01)
@@ -146,8 +142,7 @@ plt.ylim(0, 10)
 plt.fill_between(x, 0, y3, color="yellow")
 plt.legend()
 
-
-# 第三張圖
+print("------------------------------------------------------------")  # 60個
 plt.subplot(233)
 
 x = np.arange(0, 13.3, 0.01)
@@ -163,8 +158,7 @@ plt.ylim(0, 10)
 plt.fill_between(x, y, y3, color="yellow")
 plt.legend()
 
-
-# 第四張圖
+print("------------------------------------------------------------")  # 60個
 plt.subplot(234)
 
 # 函數的係數
@@ -176,8 +170,7 @@ y = a * x**2 + b * x
 plt.plot(x, y, color="b")
 plt.fill_between(x, y1=y, y2=0, where=(x >= -2) & (x <= 5), facecolor="lightgreen")
 
-
-# 第五張圖
+print("------------------------------------------------------------")  # 60個
 plt.subplot(235)
 
 import datetime
@@ -193,28 +186,67 @@ plt.fill_between(dates, highTemps, lowTemps, color="pink", alpha=0.2)  # 填滿
 plt.title("2025年1月臺北天氣報告", fontsize=12)
 plt.ylabel(r"溫度 $C^{o}$", fontsize=12)
 
-# 第六張圖
+print("------------------------------------------------------------")  # 60個
 plt.subplot(236)
 
-n = 256
-X = np.linspace(-np.pi, np.pi, n, endpoint=True)
-Y = np.sin(2 * X)
-
-plt.plot(X, Y + 1, color="blue", alpha=1.00)
-plt.fill_between(X, 1, Y + 1, color="blue", alpha=0.25)
-
-plt.plot(X, Y - 1, color="blue", alpha=1.00)
-plt.fill_between(X, -1, Y - 1, (Y - 1) > -1, color="blue", alpha=0.25)
-plt.fill_between(X, -1, Y - 1, (Y - 1) < -1, color="red", alpha=0.25)
-
-plt.xlim(-np.pi, np.pi)
-plt.xticks(())
-plt.ylim(-2.5, 2.5)
-plt.yticks(())
 
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
+
+plt.figure(
+    num="plot 集合 fill_between 3",
+    figsize=(12, 8),
+    dpi=100,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
+
+print("------------------------------------------------------------")  # 60個
+plt.subplot(231)
+
+t = np.linspace(-np.pi * 1.5, np.pi * 1.5, 100)
+c = np.sinc(t)
+
+plt.plot(t, c)
+plt.fill(t, c)
+
+print("------------------------------------------------------------")  # 60個
+plt.subplot(232)
+
+x = [0, 4, 6, 4, 0]
+y = [0, 0, 2, 4, 4]
+plt.fill(x, y, "r")
+
+x = [0, 1, 3, 2]
+y = [2, 5, 6, 0]
+x2 = [7, 8, 9]
+y2 = [0, 3, 0]
+plt.fill(x, y, "g", x2, y2, "b")
+
+
+print("------------------------------------------------------------")  # 60個
+plt.subplot(233)
+
+
+print("------------------------------------------------------------")  # 60個
+plt.subplot(234)
+
+print("------------------------------------------------------------")  # 60個
+plt.subplot(235)
+
+
+print("------------------------------------------------------------")  # 60個
+plt.subplot(236)
+
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+
 
 print("------------------------------------------------------------")  # 60個
 
