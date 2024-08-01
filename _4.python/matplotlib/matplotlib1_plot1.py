@@ -23,7 +23,6 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
-#          編號                          圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
 plt.figure(
     num="plot 集合 1",
     figsize=(12, 8),
@@ -105,7 +104,7 @@ th = np.arange(0, 360)
 x = np.cos(np.radians(th))
 y = np.sin(np.radians(th))
 
-plt.plot(x, y, "steelblue")
+plt.plot(x, y, "red")
 plt.axis("equal")  # 軸比例
 
 # 第五張圖
@@ -124,28 +123,12 @@ plt.axis("equal")  # 軸比例
 # 第六張圖
 plt.subplot(236)
 
-# 畫個函數, 標出正的部份!
-# 把這個函數大於 0 的地方標示出來。
-
-N = 30 + 1
-x = np.linspace(-5, 5, N)  # 含頭尾 分成N個
-y = np.sinc(x)
-
-# print(x)
-# print(y)
-
-plt.plot(x, y, "black")
-plt.plot(x[y > 0], y[y > 0], "ro")
-# plt.scatter(x[y>0], y[y>0], c='r')
-# print(plt.axis())
-plt.title("只標出正的部分")
 
 plt.show()
 
 
 print("------------------------------------------------------------")  # 60個
 
-#          編號               圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
 plt.figure(
     num="plot 集合 2",
     figsize=(12, 8),
@@ -235,7 +218,7 @@ plt.subplot(236)
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
-#          編號               圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
+
 plt.figure(
     num="plot 集合 3",
     figsize=(12, 8),
@@ -330,15 +313,36 @@ plt.title("1986 - 2015 (Boy:Girl)")
 # 第五張圖
 plt.subplot(235)
 
+x = np.linspace(-2 * np.pi, 2 * np.pi, 100)
+y = np.sinc(x)
+plt.plot(x, y)
+plt.margins(0.2, 0.2)
+plt.title("有 margins設定 ")
+
 
 # 第六張圖
 plt.subplot(236)
 
+# 畫個函數, 標出正的部份!
+# 把這個函數大於 0 的地方標示出來。
+
+N = 30 + 1
+x = np.linspace(-5, 5, N)  # 含頭尾 分成N個
+y = np.sinc(x)
+
+# print(x)
+# print(y)
+
+plt.plot(x, y, "black")
+plt.plot(x[y > 0], y[y > 0], "ro")
+# plt.scatter(x[y>0], y[y>0], c='r')
+# print(plt.axis())
+plt.title("只標出正的部分")
 
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
-#          編號                          圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
+
 plt.figure(
     num="plot 集合 4",
     figsize=(12, 8),
@@ -352,64 +356,17 @@ plt.figure(
 # 第一張圖
 plt.subplot(231)
 
-print("描繪切線")
-
-# x的值
-x = np.arange(-1, 1, 0.1)
-
-# 原來的函數
-y = 2 * x * x + 3
-
-# 切線
-a = 4 * 0.25  # 導函數 f'(x)= 4x（斜率）
-b = 3.125 - a * 0.25  # 截距 b = y - ax
-y2 = a * x + b  # 切線的式子
-
-# 繪圖
-plt.plot(x, y)  # 原來的函數
-plt.plot(x, y2)  # 切線
-
 
 # 第二張圖
 plt.subplot(232)
-
-# 資料
-x = [1, 2, 3, 4, 5, 6, 7]
-y = [64.3, 63.8, 63.6, 64.0, 63.5, 63.2, 63.1]
-
-# y = 3 * x - 24
-y = []
-for x in range(1, 11):
-    y.append(3 * x - 24)
-print(type(y))
-print(y)
-
-# 資料
-x = np.arange(-1.0, 1.01, 0.01)
-y = x**2
-
-# 繪圖
-plt.plot(x, y)  # 描繪折線
 
 
 # 第三張圖
 plt.subplot(233)
 
-print("畫出函數與導函數的圖")
-
-# x的值
-x = np.arange(-10, 10, 0.1)
-
-# 原來的函數 f(x) = x**3 + 3x**2 + 3x + 1
-y = x**3 + 3 * x**2 + 3 * x + 1
-plt.plot(x, y)
-
 # 第四張圖
 plt.subplot(234)
 
-# 導函數 f'(x) = 3x**2 + 6x + 3
-y2 = 3 * x**2 + 6 * x + 3
-plt.plot(x, y2)
 
 # 第五張圖
 plt.subplot(235)
@@ -430,7 +387,6 @@ plt.plot(x, y)
 # 第六張圖
 plt.subplot(236)
 
-
 print("描繪差額圖")
 # 資料筆數
 cnt = len(dat)
@@ -442,56 +398,6 @@ for i in range(0, cnt - 1):
 
 # 繪圖
 plt.plot(x[1:], diff_y)
-
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-#          編號                          圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
-plt.figure(
-    num="plot 集合 5",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
-
-
-# 第一張圖
-plt.subplot(231)
-
-x = np.linspace(-2 * np.pi, 2 * np.pi, 100)
-y = np.sinc(x)
-plt.plot(x, y)
-# plt.margins(0.2, 0.2)
-plt.title("無 margins設定 ")
-
-# 第二張圖
-plt.subplot(232)
-
-x = np.linspace(-2 * np.pi, 2 * np.pi, 100)
-y = np.sinc(x)
-plt.plot(x, y)
-plt.margins(0.2, 0.2)
-plt.title("有 margins設定 ")
-
-# 第三張圖
-plt.subplot(233)
-
-
-# 第四張圖
-plt.subplot(234)
-
-
-# 第五張圖
-plt.subplot(235)
-
-
-# 第六張圖
-plt.subplot(236)
 
 
 plt.show()

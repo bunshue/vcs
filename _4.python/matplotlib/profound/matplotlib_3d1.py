@@ -96,7 +96,7 @@ y = np.linspace(-10, 10, 100)
 z = np.add(x, y)
 
 ax.plot(x, y, z, color="r")
-ax.plot(x, y, z, color='m', lw=3)
+#ax.plot(x, y, z, color='m', lw=3)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -126,22 +126,26 @@ print("------------------------------------------------------------")  # 60個
 ax = fig.add_subplot(234, projection="3d")  # 第四張圖
 
 z = np.linspace(0, 1, 300)
-x = z * np.sin(30*z)
-y = z * np.cos(30*z)
+t = np.linspace(0, 1, 300)
+x = z * np.sin(30*t)  # x 軸值
+y = z * np.cos(30*t)  # y 軸值
+z = t  # z 軸值
 
 ax.plot(x, y, z)
-ax.set_title("plot")
+#ax.plot3D(x, y, z) #plot3D看起來和plot一樣
+
+"""
+colors = x + y  # 色彩是沿 x + y 累增
+ax[0].scatter(x, y, z, c=colors)  # 繪製左子圖
+ax[1].scatter(x, y, z, c=colors, cmap="hsv")  # 繪製右子圖
+"""
 
 print("------------------------------------------------------------")  # 60個
 
 ax = fig.add_subplot(235, projection="3d")  # 第五張圖
 
-z = np.linspace(0, 1, 300)
-x = z * np.sin(30*z)
-y = z * np.cos(30*z)
 
-ax.plot3D(x, y, z)
-ax.set_title("plot3D")
+
 
 print("------------------------------------------------------------")  # 60個
 
@@ -670,17 +674,8 @@ Z = f(X, Y)
 
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
 fig = plt.figure(
-    num="3D繪圖 集合 4 new",
+    num="3D繪圖 集合 6 new",
     figsize=(12, 8),
     dpi=100,
     facecolor="whitesmoke",
@@ -688,6 +683,16 @@ fig = plt.figure(
     linewidth=1,
     frameon=True,
 )
+
+print("------------------------------------------------------------")  # 60個
+
+def f1(x, y):  # 左邊曲面函數
+    return np.exp(-(0.5 * X**2 + 0.5 * Y**2))
+
+
+def f2(x, y):  # 右邊曲面函數
+    return np.exp(-(0.1 * X**2 + 0.1 * Y**2))
+
 
 print("------------------------------------------------------------")  # 60個
 
@@ -778,29 +783,37 @@ print("------------------------------------------------------------")  # 60個
 
 ax = fig.add_subplot(234, projection="3d")  # 第四張圖
 
+N = 50
+x = np.linspace(-5, 5, N)
+y = np.linspace(-5, 5, N)
+X, Y = np.meshgrid(x, y)  # 建立 X 和 Y 資料
+np.random.seed(10)
+c = np.random.rand(N, N)  # 取隨機色彩值
+
+sc = ax.scatter(X, Y, f1(X, Y), c=c, marker="o", cmap="hsv")
 
 print("------------------------------------------------------------")  # 60個
 
 ax = fig.add_subplot(235, projection="3d")  # 第五張圖
 
-
+sc = ax.scatter(X, Y, f2(X, Y), c=c, marker="o", cmap="hsv")
 
 print("------------------------------------------------------------")  # 60個
 
 ax = fig.add_subplot(236, projection="3d")  # 第六張圖
 
-
+sc = ax.scatter(X, Y, f2(X, Y), c=c, marker="o", cmap="hsv")
+ax.set_axis_off()
+ax.view_init(60, -30)
+ax.set_title(f"仰角={ax.elev},方位角={ax.azim}", color="b")
 
 plt.tight_layout()
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-
 fig = plt.figure(
-    num="3D繪圖 集合 1",
+    num="3D繪圖 集合 7 new",
     figsize=(12, 8),
     dpi=100,
     facecolor="whitesmoke",
@@ -999,14 +1012,12 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-print("------------------------------------------------------------")  # 60個
-
 from mpl_toolkits.mplot3d import axes3d
 
 print("------------------------------------------------------------")  # 60個
 
 fig = plt.figure(
-    num="3D繪圖 集合 3",
+    num="3D繪圖 集合 8",
     figsize=(12, 8),
     dpi=100,
     facecolor="whitesmoke",
@@ -1015,7 +1026,9 @@ fig = plt.figure(
     frameon=True,
 )
 
+print("------------------------------------------------------------")  # 60個
 ax = fig.add_subplot(231, projection='3d')
+
 
 
 print("------------------------------------------------------------")  # 60個
@@ -1072,10 +1085,23 @@ print("------------------------------------------------------------")  # 60個
 
 ax = fig.add_subplot(234, projection='3d')
 
+X, Y, Z = axes3d.get_test_data(0.05)  # 取得測試資料
+
+ax.plot_surface(X, Y, Z, cmap="bwr")
+ax.set_title("繪製曲線表面圖")
 
 print("------------------------------------------------------------")  # 60個
 
 ax = fig.add_subplot(235, projection='3d')
+
+X, Y, Z = axes3d.get_test_data(0.05)  # 取得測試資料
+
+ax.plot_wireframe(X, Y, Z, color="g")
+ax.set_title("繪製曲線框線圖")
+
+print("------------------------------------------------------------")  # 60個
+
+ax = fig.add_subplot(236, projection='3d')
 
 # 建立網格空間
 x, y, z = np.meshgrid(np.arange(-0.8, 1, 0.2),
@@ -1090,10 +1116,6 @@ w = (np.sqrt(2.0 / 3.0) * np.cos(np.pi * x) * np.cos(np.pi * y) *
 ax.quiver(x, y, z, u, v, w,length=0.1,normalize=True,color='r')
 ax.set_title('quiver')
 
-print("------------------------------------------------------------")  # 60個
-
-ax = fig.add_subplot(236, projection='3d')
-
 
 plt.tight_layout()
 plt.show()
@@ -1101,7 +1123,7 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 
 fig = plt.figure(
-    num="3D繪圖 集合 4",
+    num="3D繪圖 集合 9",
     figsize=(12, 8),
     dpi=100,
     facecolor="whitesmoke",
@@ -1245,7 +1267,7 @@ plt.show()
 print('------------------------------------------------------------')	#60個
 
 fig = plt.figure(
-    num="3D繪圖 集合 5",
+    num="3D繪圖 集合 10",
     figsize=(12, 8),
     dpi=100,
     facecolor="whitesmoke",
@@ -1276,9 +1298,9 @@ print('------------------------------------------------------------')	#60個
 
 ax = fig.add_subplot(232, projection='3d')
 
-# 生成一系列的測試數據
 N = 0.05
-X, Y, Z = axes3d.get_test_data(N)  # (1/N*6) X (1/N*6)
+X, Y, Z = axes3d.get_test_data(N)  # (1/N*6) X (1/N*6)  # 取得測試資料
+
 print(1 / N * 6)
 print(X.shape)
 print(Y.shape)
@@ -1399,75 +1421,8 @@ fig.colorbar(surf, shrink=0.5, aspect=5)
 plt.tight_layout()
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
-
-from mpl_toolkits.mplot3d import axes3d
-
-# 取得測試資料
-X, Y, Z = axes3d.get_test_data(0.05)
-# 建立 2 個子圖
-fig, ax = plt.subplots(1, 2, figsize=(8, 4), subplot_kw={"projection": "3d"})
-# 繪製曲線表面圖
-ax[0].plot_surface(X, Y, Z, cmap="bwr")
-ax[0].set_title("繪製曲線表面圖", fontsize=16, color="b")
-
-# 繪製曲線框面圖
-# ax = fig.add_subplot(111, projection='3d')
-ax[1].plot_wireframe(X, Y, Z, color="g")
-ax[1].set_title("繪製曲線框線圖", fontsize=16, color="b")
-
-plt.show()
 
 print("------------------------------------------------------------")  # 60個
-
-z = np.linspace(0, 1, 300)  # z 軸值
-x = z * np.sin(30 * z)  # x 軸值
-y = z * np.cos(30 * z)  # y 軸值
-colors = x + y  # 色彩是沿 x + y 累增
-
-# 建立 2 個子圖
-fig, ax = plt.subplots(1, 2, figsize=(8, 4), subplot_kw={"projection": "3d"})
-ax[0].scatter(x, y, z, c=colors)  # 繪製左子圖
-ax[1].scatter(x, y, z, c=colors, cmap="hsv")  # 繪製右子圖
-ax[1].set_axis_off()  # 關閉軸
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-
-def f1(x, y):  # 左邊曲面函數
-    return np.exp(-(0.5 * X**2 + 0.5 * Y**2))
-
-
-def f2(x, y):  # 右邊曲面函數
-    return np.exp(-(0.1 * X**2 + 0.1 * Y**2))
-
-
-N = 50
-x = np.linspace(-5, 5, N)
-y = np.linspace(-5, 5, N)
-X, Y = np.meshgrid(x, y)  # 建立 X 和 Y 資料
-np.random.seed(10)
-c = np.random.rand(N, N)  # 取隨機色彩值
-# 建立子圖
-fig, ax = plt.subplots(1, 3, figsize=(8, 4), subplot_kw={"projection": "3d"})
-# 左邊子圖乎叫 f1
-sc = ax[0].scatter(X, Y, f1(X, Y), c=c, marker="o", cmap="hsv")
-# 中間子圖乎叫 f2
-sc = ax[1].scatter(X, Y, f2(X, Y), c=c, marker="o", cmap="hsv")
-ax[1].set_axis_off()
-# 右邊子圖乎叫 f2, 但是用不同的仰角和方位角
-sc = ax[2].scatter(X, Y, f2(X, Y), c=c, marker="o", cmap="hsv")
-ax[2].set_axis_off()
-ax[2].view_init(60, -30)
-ax[2].set_title(f"仰角={ax[2].elev},方位角={ax[2].azim}", color="b")
-
-plt.show()
-
-
-print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -1484,6 +1439,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
+sys.exit()
 
 ax.view_init(60,45)                         # 設定 3D 視角
 
@@ -1495,13 +1451,11 @@ ax.set_xlabel(r"$\phi_\mathrm{real}$")
 ax.set_ylabel(r"$\phi_\mathrm{im}$")
 ax.set_zlabel(r"$V(\phi)$")
 
-
 ax.set_xlabel('x',fontsize=14,color='b')
 ax.set_ylabel('y',fontsize=14,color='b')
 ax.set_zlabel('z',fontsize=14,color='b')
 
 ax.set_title('3D圖表',fontsize=16,color='b')
-
 
 """
 #製作動圖
@@ -1575,3 +1529,4 @@ y = np.random.random(150)*15            # 建立150個0 - 15的隨機數
 z = np.random.random(150)*20            # 建立150個0 - 20的隨機數
 
 ax.legend()  # 顯示圖例
+

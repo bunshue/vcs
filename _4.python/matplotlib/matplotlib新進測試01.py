@@ -1,5 +1,7 @@
 # 新進測試01
 
+# 先做成 2X3 子圖, 以利搬出
+
 print("------------------------------------------------------------")  # 60個
 
 # 共同
@@ -95,8 +97,9 @@ plt.plot(x, y3, color="#FF0000", linestyle="-.", linewidth=3)
 # 設定散佈圖點的形狀:.,ov^<>1234sp*hH+xDd|_
 # 設定散佈圖點的大小
 plt.scatter(x, y4, color="black", marker="x", s=10)
-# 加上格線
-plt.grid()
+
+plt.grid()  # 加上格線
+
 # 加上註解
 # xy箭頭座標,xytext文字座標, shrink
 plt.annotate(
@@ -106,9 +109,9 @@ plt.annotate(
     arrowprops=dict(color="cyan", shrink=0.01),
     color="cyan",
 )
+
 # 加上圖例說明
 plt.legend(["a=2", "a=2.5", "a=3", "a=3.5"], fontsize=20)
-
 
 # 第三張圖
 plt.subplot(233)
@@ -165,11 +168,10 @@ plt.xticks(())  # ignore xticks
 plt.ylim(-1.5, 1.5)
 plt.yticks(())  # ignore yticks
 
-
+plt.tight_layout()
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
-
 
 plt.figure(
     num="新進測試 02",
@@ -216,6 +218,7 @@ plt.yticks(())
 plt.subplot(232)
 
 
+
 # 第三張圖
 plt.subplot(233)
 
@@ -223,6 +226,29 @@ plt.subplot(233)
 # 第四張圖
 plt.subplot(234)
 
+# 時序圖
+import matplotlib.dates as mdates
+
+#     2017/0808/2100    2017/0808/2101    2017/0808/2102    2017/0808/2103
+x = [
+    "20170808210000",
+    "20170808210100",
+    "20170808210200",
+    "20170808210300",
+    "20170808210400",
+    "20170808210500",
+    "20170808210600",
+    "20170808210700",
+    "20170808210800",
+    "20170808210900",
+]
+
+x = pd.to_datetime(x)
+y = [3900.0, 3903.0, 3891.0, 3888.0, 3893.0, 3899.0, 3906.0, 3914.0, 3911.0, 3912.0]
+
+plt.plot(x, y)
+plt.gca().xaxis.set_major_formatter(mdates.DateFormatter("%m-%d %H:%M"))  # 設置時間顯示格式
+plt.gcf().autofmt_xdate()  # 自動旋轉角度，以避免重疊
 
 # 第五張圖
 plt.subplot(235)
@@ -232,6 +258,7 @@ plt.subplot(235)
 plt.subplot(236)
 
 
+plt.tight_layout()
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
@@ -418,175 +445,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-# 時序圖
-import matplotlib.dates as mdates
-
-#     2017/0808/2100    2017/0808/2101    2017/0808/2102    2017/0808/2103
-x = [
-    "20170808210000",
-    "20170808210100",
-    "20170808210200",
-    "20170808210300",
-    "20170808210400",
-    "20170808210500",
-    "20170808210600",
-    "20170808210700",
-    "20170808210800",
-    "20170808210900",
-]
-
-x = pd.to_datetime(x)
-y = [3900.0, 3903.0, 3891.0, 3888.0, 3893.0, 3899.0, 3906.0, 3914.0, 3911.0, 3912.0]
-
-plt.plot(x, y)
-plt.gca().xaxis.set_major_formatter(mdates.DateFormatter("%m-%d %H:%M"))  # 設置時間顯示格式
-plt.gcf().autofmt_xdate()  # 自動旋轉角度，以避免重疊
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-# 建立一個新的 figure
-# fig1 = plt.figure(figsize=(12, 8))
-
-# 增新一個axes（座標軸），以供繪圖和放置資訊:
-# axs = fig1.add_subplot(1,1,1) # 1x1的座標軸
-
-# 增新很多個axes，以供繪圖和放置資訊:
-# fig1.delaxes( fig1.gca() ) # 順便示範，把剛剛1x1的座標軸刪掉
-
-fig2 = plt.figure(
-    num="matplotlib 05",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
-
-# 一般的情況下，axes是"hold on"的, 也就是資料不會被覆蓋掉。
-# hold on: 好處是一次要輸出一堆函數，可以把圖疊加上去。
-# hold off: 可以更新圖的內容，可是全部的資訊會被洗掉（title, legend等）
-# 如果要保留這些資訊，可以單獨抓出圖的內容，直接修改：
-x = np.linspace(0, 6.28, 100)
-y = np.sin(x)
-
-axes = fig2.add_subplot(1, 3, 1)
-axes.set_title("y = sin(x)")
-(line,) = axes.plot(x, y)  # 這裡回傳的line就是畫在圖上的資料
-# 當發現畫錯想修改，可以對line修改：
-line.set_ydata(np.cos(x))
-
-axes = fig2.add_subplot(1, 3, 2)
-axes.set_title("y = sin(x)")
-(line,) = axes.plot(x, y)  # 這裡回傳的line就是畫在圖上的資料
-# 當發現畫錯想修改，可以對line修改：
-line.set_ydata(np.cos(x))
-
-axes = fig2.add_subplot(1, 3, 3)
-axes.set_title("y = sin(x)")
-(line,) = axes.plot(x, y)  # 這裡回傳的line就是畫在圖上的資料
-# 當發現畫錯想修改，可以對line修改：
-line.set_ydata(np.cos(x))
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-from matplotlib import pyplot as plt
-
-x = np.linspace(-np.pi, np.pi, 200, endpoint=True)
-s, c = np.sin(x), np.cos(x)
-
-# 移動坐標軸邊線
-# 坐標軸總共有四個連線，我們通過設置透明色隱藏上方和右方的邊線
-# 通過 set_position() 移動左側和下側的邊線
-# 通過 set_ticks_position() 設置坐標軸的刻度線的顯示位置
-ax = plt.gca()  # gca 代表當前坐標軸，即 'get current axis'
-ax.spines["right"].set_color("none")
-ax.spines["top"].set_color("none")
-ax.xaxis.set_ticks_position("bottom")
-ax.spines["bottom"].set_position(("data", 0))
-ax.yaxis.set_ticks_position("left")
-ax.spines["left"].set_position(("data", 0))
-# 設置坐標刻度的字體大小，增加半透明背景
-for label in ax.get_xticklabels() + ax.get_yticklabels():
-    label.set_fontsize(16)
-    label.set_bbox(dict(facecolor="white", edgecolor="None", alpha=0.65))
-
-# 設置坐標軸的長度
-plt.xlim(x.min() * 1.1, x.max() * 1.1)
-plt.ylim(c.min() * 1.1, c.max() * 1.1)
-
-# 設置坐標軸的刻度和標簽
-plt.xticks(
-    (-np.pi, -np.pi / 2, np.pi / 2, np.pi),
-    label=(r"$-\pi$", r"$-\pi/2$", r"$+\pi/2$", r"$+\pi$"),
-)
-plt.yticks([-1, -0.5, 0, 0.5, 1])
-
-# 畫出正弦曲線，并設置線條顏色，寬度，樣式
-plt.plot(x, s, color="red", linewidth=2.0, linestyle="-")
-# 畫出余弦曲線，并設置線條顏色，寬度，樣式
-plt.plot(x, c, color="blue", linewidth=2.0, linestyle="-")
-
-# 在左上角添加銘牌
-# plt.legend(loc='upper left')
-
-# 在坐標軸上標示相應的點
-t = 2 * np.pi / 3
-# 畫出 cos(t) 所在的點在 X 軸上的位置，即畫出 (t, 0) -> (t, cos(t)) 線段，使用虛線
-plt.plot([t, t], [0, np.cos(t)], color="blue", linewidth=1.5, linestyle="--")
-# 畫出標示的坐標點，即在 (t, cos(t)) 處畫一個大小為 50 的藍色點
-plt.scatter(
-    [
-        t,
-    ],
-    [
-        np.cos(t),
-    ],
-    50,
-    color="blue",
-)
-# 畫出標示點的值，即 cos(t) 的值
-plt.annotate(
-    r"$cos(\frac{2\pi}{3})=-\frac{1}{2}$",
-    xy=(t, np.cos(t)),
-    xycoords="data",
-    xytext=(-90, -50),
-    textcoords="offset points",
-    fontsize=16,
-    arrowprops=dict(arrowstyle="->", connectionstyle="arc3,rad=.2"),
-)
-# 畫出 sin(t) 所在的點在 X 軸上的位置，即畫出 (t, 0) -> (t, sin(t)) 線段，使用虛線
-plt.plot([t, t], [0, np.sin(t)], color="red", linewidth=1.5, linestyle="--")
-# 畫出標示的坐標點，即在 (t, sin(t)) 處畫一個大小為 50 的紅色點
-plt.scatter(
-    [
-        t,
-    ],
-    [
-        np.sin(t),
-    ],
-    50,
-    color="red",
-)
-# 畫出標示點的值，即 sin(t) 的值
-plt.annotate(
-    r"$sin(\frac{2\pi}{3})=\frac{\sqrt{3}}{2}$",
-    xy=(t, np.sin(t)),
-    xycoords="data",
-    xytext=(+10, +30),
-    textcoords="offset points",
-    fontsize=16,
-    arrowprops=dict(arrowstyle="->", connectionstyle="arc3,rad=.2"),
-)
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
 
 def tickline():
     plt.xlim(0, 10), plt.ylim(-1, 1), plt.yticks([])
@@ -646,220 +504,43 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
+ax = plt.subplot(1, 1, 1)
 
-def plt_bar():
-    n = 12
-    X = np.arange(n)
-    Y1 = (1 - X / float(n)) * np.random.uniform(0.5, 1.0, n)
-    Y2 = (1 - X / float(n)) * np.random.uniform(0.5, 1.0, n)
-
-    plt.subplot(1, 2, 1)
-    plt.bar(X, +Y1, facecolor="#9999ff", edgecolor="white")
-    plt.bar(X, -Y2, facecolor="#ff9999", edgecolor="white")
-
-    for x, y in zip(X, Y1):
-        plt.text(x + 0.4, y + 0.05, "%.2f" % y, ha="center", va="bottom")
-
-    for x, y in zip(X, Y2):
-        plt.text(x + 0.4, -y - 0.05, "%.2f" % y, ha="center", va="top")
-
-    plt.xlim(-0.5, n)
-    plt.xticks(())
-    plt.ylim(-1.25, 1.25)
-    plt.yticks(())
-
-
-def plt_contour():
-    def f(x, y):
-        return (1 - x / 2 + x**5 + y**3) * np.exp(-(x**2) - y**2)
-
-    n = 256
-    x = np.linspace(-3, 3, n)
-    y = np.linspace(-3, 3, n)
-    X, Y = np.meshgrid(x, y)
-
-    plt.subplot(1, 2, 2)
-
-    plt.contourf(X, Y, f(X, Y), 8, alpha=0.75, cmap=plt.cm.hot)
-    C = plt.contour(X, Y, f(X, Y), 8, colors="black")
-    plt.clabel(C, inline=1, fontsize=10)
-
-    plt.xticks(())
-    plt.yticks(())
-
-
-plt.figure(
-    num="matplotlib 08",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
-
-plt_bar()
-plt_contour()
+ax.set_xlim(0, 4)
+ax.set_ylim(0, 3)
+ax.xaxis.set_major_locator(plt.MultipleLocator(1.0))
+ax.xaxis.set_minor_locator(plt.MultipleLocator(0.1))
+ax.yaxis.set_major_locator(plt.MultipleLocator(1.0))
+ax.yaxis.set_minor_locator(plt.MultipleLocator(0.1))
+ax.grid(which="major", axis="x", linewidth=0.75, linestyle="-", color="0.75")
+ax.grid(which="minor", axis="x", linewidth=0.25, linestyle="-", color="0.75")
+ax.grid(which="major", axis="y", linewidth=0.75, linestyle="-", color="0.75")
+ax.grid(which="minor", axis="y", linewidth=0.25, linestyle="-", color="0.75")
+ax.set_xticklabels([])
+ax.set_yticklabels([])
 
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
+ax = plt.subplot(1, 1, 1, polar=True)
 
-def plt_grid():
-    ax = plt.subplot(1, 2, 1)
+N = 20
+theta = np.arange(0.0, 2 * np.pi, 2 * np.pi / N)
+radii = 10 * np.random.rand(N)
+width = np.pi / 4 * np.random.rand(N)
+bars = plt.bar(theta, radii, width=width, bottom=0.0)
 
-    ax.set_xlim(0, 4)
-    ax.set_ylim(0, 3)
-    ax.xaxis.set_major_locator(plt.MultipleLocator(1.0))
-    ax.xaxis.set_minor_locator(plt.MultipleLocator(0.1))
-    ax.yaxis.set_major_locator(plt.MultipleLocator(1.0))
-    ax.yaxis.set_minor_locator(plt.MultipleLocator(0.1))
-    ax.grid(which="major", axis="x", linewidth=0.75, linestyle="-", color="0.75")
-    ax.grid(which="minor", axis="x", linewidth=0.25, linestyle="-", color="0.75")
-    ax.grid(which="major", axis="y", linewidth=0.75, linestyle="-", color="0.75")
-    ax.grid(which="minor", axis="y", linewidth=0.25, linestyle="-", color="0.75")
-    ax.set_xticklabels([])
-    ax.set_yticklabels([])
+for r, bar in zip(radii, bars):
+    bar.set_facecolor(plt.cm.jet(r / 10.0))
+    bar.set_alpha(0.5)
 
-
-def plt_polar():
-    ax = plt.subplot(1, 2, 2, polar=True)
-
-    N = 20
-    theta = np.arange(0.0, 2 * np.pi, 2 * np.pi / N)
-    radii = 10 * np.random.rand(N)
-    width = np.pi / 4 * np.random.rand(N)
-    bars = plt.bar(theta, radii, width=width, bottom=0.0)
-
-    for r, bar in zip(radii, bars):
-        bar.set_facecolor(plt.cm.jet(r / 10.0))
-        bar.set_alpha(0.5)
-
-    ax.set_xticklabels([])
-    ax.set_yticklabels([])
-
-
-plt.figure(
-    num="matplotlib 09",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
-
-plt_grid()
-plt_polar()
+ax.set_xticklabels([])
+ax.set_yticklabels([])
 
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
-
-x = np.linspace(0, 2 * np.pi, 300)
-y = np.sin(x)
-
-fig = plt.figure(
-    num="matplotlib 10",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
-
-ax1 = fig.add_subplot(121, projection="polar")
-ax1.plot(x, y)
-ax1.set_title("極座標 Sin 圖", fontsize=12)
-
-ax2 = fig.add_subplot(122)
-ax2.plot(x, y)
-ax2.set_title("一般座標 Sin 圖", fontsize=12)
-ax2.set_aspect(2)
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-from matplotlib import pyplot as plt
-
-ax = np.linspace(0, 20, 100)
-ay = ax * 0.15
-by = np.sin(ax)
-
-# 產生子圖表，第一個數值為縱軸要有幾張圖，第二個數值為橫軸，第三個數值為排在哪裡
-# label 可以設定圖例標籤
-#  '-', '--', '-.', ':', 'None', ' ', '', 'solid', 'dashed', 'dashdot', 'dotted'
-plt.plot(ax, ay, color="red", linewidth=8.0, linestyle="dotted", label="x0.5")
-plt.plot(ax, by, color="blue", linewidth=2.0, linestyle="-", label="sin")
-plt.ylim((-3, 3))  # y 軸上下最大和最小區間
-plt.xlim((0, 20))  # y 軸上下最大和最小區間
-plt.yticks([-3, 0, 3], ["min(-3)", "0", "max(3)"])  # 可以設置座標軸上特定文字
-
-xx = plt.gca()
-xx.spines["right"].set_color("none")  # 設置邊框樣式
-xx.spines["top"].set_color("none")
-xx.spines["bottom"].set_position(("data", 0))  # 設置邊框位置
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-from matplotlib import pyplot as plt
-
-ax = np.linspace(-20, 20, 100)
-ay = ax * 0.5
-by = np.sin(ax)
-cx = 10
-cy = cx * 0.5
-
-plt.plot(ax, ay, color="red", linewidth=3.0, linestyle="dashed", label="x0.5", zorder=2)
-plt.plot(ax, by, color="blue", linewidth=2.0, linestyle="solid", label="sin", zorder=2)
-# 繪製垂直虛線
-plt.plot(
-    [
-        cx,
-        cx,
-    ],
-    [
-        cy,
-        0,
-    ],
-    color="black",
-    linewidth=1.0,
-    linestyle="dashed",
-    zorder=1,
-    alpha=0.5,
-)
-
-# 加上單一圓點
-# https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.pyplot.scatter.html
-plt.scatter(cx, cy, s=100, color="red", zorder=2)
-
-# 繪製 annotate
-# https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.pyplot.annotate.html
-plt.annotate(
-    "test",
-    xy=(cx + 0.5, cy - 0.2),
-    xycoords="data",
-    xytext=(+36, -36),
-    textcoords="offset points",
-    fontsize=12,
-    arrowprops=dict(arrowstyle="->", connectionstyle="arc3,rad=.2"),
-)
-
-plt.ylim((-10, 10))  # 設定 x 和 y 的邊界值
-plt.xlim((-20, 20))
-
-xx = plt.gca()  # 設定座標軸位置
-xx.spines["right"].set_color("none")
-xx.spines["top"].set_color("none")
-xx.spines["bottom"].set_position(("data", 0))
-xx.spines["left"].set_position(("data", 0))
-
-plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -872,9 +553,9 @@ from matplotlib.font_manager import fontManager
 # fontManager.addfont('/usr/local/lib/python3.7/dist-packages/matplotlib/mpl-data/fonts/ttf/taipei_sans_tc_beta.ttf')
 # 將 font-family 設為 Taipei Sans TC Beta
 # 設定完後，之後的圖表都可以顯示中文了
-SMALL_SIZE = 10
-MEDIUM_SIZE = 18
-BIGGER_SIZE = 25
+SMALL_SIZE = 8
+MEDIUM_SIZE = 14
+BIGGER_SIZE = 18
 # 設定字型
 # matplotlib.rc('font', family='Taipei Sans TC Beta')
 # matplotlib.rc('font', size=SMALL_SIZE)
@@ -919,202 +600,24 @@ ax.set_xlabel("X軸", horizontalalignment="right", verticalalignment="top", x=1.
 # 加上Y軸標題(靠上對齊y=1.0為Y軸最上)
 ax.set_ylabel("Y軸", horizontalalignment="right", verticalalignment="bottom", y=1.0)
 # ax.set(xlabel='X軸', ylabel='Y軸')
-# 加上格線
-ax.grid()
+
+ax.grid()  # 加上格線
+
 # 子圖標題
 ax.set_title("子圖標題", loc="right")
+
 # figure標題
 fig.suptitle("y=x**3&y=x**2")
+
 # 儲存檔案名為test.png
 # fig.savefig("tmp_test.png")
+
 # 圖例說明
 ax.legend(["y=x**3", "y=x**2"])
 
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
-
-x = np.linspace(-3, 3, 50)
-y1 = 2*x + 1
-y2 = x**2
-
-plt.figure(figsize=(12, 8))
-
-plt.plot(x, y2)
-# plot the second curve in this figure with certain parameters
-plt.plot(x, y1, color='red', linewidth=1.0, linestyle='--')
-# set x limits
-plt.xlim((-1, 2))
-plt.ylim((-2, 3))
-plt.xlabel('I am x')
-plt.ylabel('I am y')
-
-# set new sticks
-new_ticks = np.linspace(-1, 2, 5)
-print(new_ticks)
-plt.xticks(new_ticks)
-# set tick labels
-plt.yticks([-2, -1.8, -1, 1.22, 3],
-           [r'$really\ bad$', r'$bad$', r'$normal$', r'$good$', r'$really\ good$'])
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-# 6 - axis setting
-
-x = np.linspace(-3, 3, 50)
-y1 = 2*x + 1
-y2 = x**2
-
-plt.figure(figsize=(12, 8))
-
-plt.plot(x, y2)
-# plot the second curve in this figure with certain parameters
-plt.plot(x, y1, color='red', linewidth=1.0, linestyle='--')
-# set x limits
-plt.xlim((-1, 2))
-plt.ylim((-2, 3))
-
-# set new ticks
-new_ticks = np.linspace(-1, 2, 5)
-plt.xticks(new_ticks)
-# set tick labels
-plt.yticks([-2, -1.8, -1, 1.22, 3],
-           ['$really\ bad$', '$bad$', '$normal$', '$good$', '$really\ good$'])
-# to use '$ $' for math text and nice looking, e.g. '$\pi$'
-
-# gca = 'get current axis'
-ax = plt.gca()
-ax.spines['right'].set_color('none')
-ax.spines['top'].set_color('none')
-
-ax.xaxis.set_ticks_position('bottom')
-# ACCEPTS: [ 'top' | 'bottom' | 'both' | 'default' | 'none' ]
-
-ax.spines['bottom'].set_position(('data', 0))
-# the 1st is in 'outward' | 'axes' | 'data'
-# axes: percentage of y axis
-# data: depend on y data
-
-ax.yaxis.set_ticks_position('left')
-# ACCEPTS: [ 'left' | 'right' | 'both' | 'default' | 'none' ]
-
-ax.spines['left'].set_position(('data',0))
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-# 7 - legend
-
-x = np.linspace(-3, 3, 50)
-y1 = 2*x + 1
-y2 = x**2
-
-plt.figure(figsize=(12, 8))
-
-# set x limits
-plt.xlim((-1, 2))
-plt.ylim((-2, 3))
-
-# set new sticks
-new_sticks = np.linspace(-1, 2, 5)
-plt.xticks(new_sticks)
-# set tick labels
-plt.yticks([-2, -1.8, -1, 1.22, 3],
-           [r'$really\ bad$', r'$bad$', r'$normal$', r'$good$', r'$really\ good$'])
-
-l1, = plt.plot(x, y2, label='linear line')
-l2, = plt.plot(x, y1, color='red', linewidth=1.0, linestyle='--', label='square line')
-
-# plt.legend(loc='upper right')
-plt.legend(handles=[l1, l2], labels=['up', 'down'],  loc='best')
-# the "," is very important in here l1, = plt... and l2, = plt... for this step
-"""legend( handles=(line1, line2, line3),
-           labels=('label1', 'label2', 'label3'),
-           'upper right')
-    The *loc* location codes are::
-
-          'best' : 0,          (currently not supported for figure legends)
-          'upper right'  : 1,
-          'upper left'   : 2,
-          'lower left'   : 3,
-          'lower right'  : 4,
-          'right'        : 5,
-          'center left'  : 6,
-          'center right' : 7,
-          'lower center' : 8,
-          'upper center' : 9,
-          'center'       : 10,"""
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-#8_annotation.py
-
-x = np.linspace(-3, 3, 50)
-y = 2*x + 1
-
-plt.figure(num=1, figsize=(8, 5),)
-
-plt.plot(x, y,)
-
-ax = plt.gca()
-ax.spines['right'].set_color('none')
-ax.spines['top'].set_color('none')
-ax.spines['top'].set_color('none')
-ax.xaxis.set_ticks_position('bottom')
-ax.spines['bottom'].set_position(('data', 0))
-ax.yaxis.set_ticks_position('left')
-ax.spines['left'].set_position(('data', 0))
-
-x0 = 1
-y0 = 2*x0 + 1
-plt.plot([x0, x0,], [0, y0,], 'k--', linewidth=2.5)
-plt.scatter([x0, ], [y0, ], s=50, color='b')
-
-# method 1:
-#####################
-plt.annotate(r'$2x+1=%s$' % y0, xy=(x0, y0), xycoords='data', xytext=(+30, -30),
-             textcoords='offset points', fontsize=16,
-             arrowprops=dict(arrowstyle='->', connectionstyle="arc3,rad=.2"))
-
-# method 2:
-########################
-plt.text(-3.7, 3, r'$This\ is\ the\ some\ text. \mu\ \sigma_i\ \alpha_t$',
-         fontdict={'size': 16, 'color': 'r'})
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-#9_tick_visibility.py
-
-x = np.linspace(-3, 3, 50)
-y = 0.1*x
-
-plt.figure(figsize=(12, 8))
-
-plt.plot(x, y, linewidth=10)
-plt.ylim(-2, 2)
-
-ax = plt.gca()
-ax.spines['right'].set_color('none')
-ax.spines['top'].set_color('none')
-ax.spines['top'].set_color('none')
-ax.xaxis.set_ticks_position('bottom')
-ax.spines['bottom'].set_position(('data', 0))
-ax.yaxis.set_ticks_position('left')
-ax.spines['left'].set_position(('data', 0))
-
-for label in ax.get_xticklabels() + ax.get_yticklabels():
-    label.set_fontsize(12)
-    label.set_bbox(dict(facecolor='white', edgecolor='None', alpha=0.7))
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-# 11 - bar
 
 n = 12
 X = np.arange(n)
@@ -1143,8 +646,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-# 12_contours.py
-
 
 def f(x, y):
     # the height function
@@ -1172,148 +673,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-# 15 - subplot
-
-# example 1:
-###############################
-plt.figure(figsize=(12, 8))
-
-# plt.subplot(n_rows, n_cols, plot_num)
-plt.subplot(2, 2, 1)
-plt.plot([0, 1], [0, 1])
-
-plt.subplot(222)
-plt.plot([0, 1], [0, 2])
-
-plt.subplot(223)
-plt.plot([0, 1], [0, 3])
-
-plt.subplot(224)
-plt.plot([0, 1], [0, 4])
-
-plt.tight_layout()
-
-# example 2:
-###############################
-plt.figure(figsize=(12, 8))
-
-# plt.subplot(n_rows, n_cols, plot_num)
-plt.subplot(2, 1, 1)
-# figure splits into 2 rows, 1 col, plot to the 1st sub-fig
-plt.plot([0, 1], [0, 1])
-
-plt.subplot(234)
-# figure splits into 2 rows, 3 col, plot to the 4th sub-fig
-plt.plot([0, 1], [0, 2])
-
-plt.subplot(235)
-# figure splits into 2 rows, 3 col, plot to the 5th sub-fig
-plt.plot([0, 1], [0, 3])
-
-plt.subplot(236)
-# figure splits into 2 rows, 3 col, plot to the 6th sub-fig
-plt.plot([0, 1], [0, 4])
-
-
-plt.tight_layout()
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-# 16 - grid subplot
-
-import matplotlib.gridspec as gridspec
-
-# method 1: subplot2grid
-##########################
-plt.figure(figsize=(12, 8))
-
-ax1 = plt.subplot2grid((3, 3), (0, 0), colspan=3)  # stands for axes
-ax1.plot([1, 2], [1, 2])
-ax1.set_title("ax1_title")
-ax2 = plt.subplot2grid((3, 3), (1, 0), colspan=2)
-ax3 = plt.subplot2grid((3, 3), (1, 2), rowspan=2)
-ax4 = plt.subplot2grid((3, 3), (2, 0))
-ax4.scatter([1, 2], [2, 2])
-ax4.set_xlabel("ax4_x")
-ax4.set_ylabel("ax4_y")
-ax5 = plt.subplot2grid((3, 3), (2, 1))
-
-# method 2: gridspec
-#########################
-plt.figure(figsize=(12, 8))
-
-gs = gridspec.GridSpec(3, 3)
-# use index from 0
-ax6 = plt.subplot(gs[0, :])
-ax7 = plt.subplot(gs[1, :2])
-ax8 = plt.subplot(gs[1:, 2])
-ax9 = plt.subplot(gs[-1, 0])
-ax10 = plt.subplot(gs[-1, -2])
-
-# method 3: easy to define structure
-####################################
-f, ((ax11, ax12), (ax13, ax14)) = plt.subplots(2, 2, sharex=True, sharey=True)
-ax11.scatter([1, 2], [1, 2])
-
-plt.tight_layout()
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-# 17 - plot in plot
-
-fig = plt.figure(figsize=(12, 8))
-
-x = [1, 2, 3, 4, 5, 6, 7]
-y = [1, 3, 4, 2, 5, 8, 6]
-
-# below are all percentage
-left, bottom, width, height = 0.1, 0.1, 0.8, 0.8
-ax1 = fig.add_axes([left, bottom, width, height])  # main axes
-ax1.plot(x, y, "r")
-ax1.set_xlabel("x")
-ax1.set_ylabel("y")
-ax1.set_title("title")
-
-ax2 = fig.add_axes([0.2, 0.6, 0.25, 0.25])  # inside axes
-ax2.plot(y, x, "b")
-ax2.set_xlabel("x")
-ax2.set_ylabel("y")
-ax2.set_title("title inside 1")
-
-
-# different method to add axes
-####################################
-plt.axes([0.6, 0.2, 0.25, 0.25])
-plt.plot(y[::-1], x, "g")
-plt.xlabel("x")
-plt.ylabel("y")
-plt.title("title inside 2")
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-# 18 - secondary y axis
-
-x = np.arange(0, 10, 0.1)
-y1 = 0.05 * x**2
-y2 = -1 * y1
-
-fig, ax1 = plt.subplots()
-
-ax2 = ax1.twinx()  # mirror the ax1
-ax1.plot(x, y1, "g-")
-ax2.plot(x, y2, "b-")
-
-ax1.set_xlabel("X data")
-ax1.set_ylabel("Y1 data", color="g")
-ax2.set_ylabel("Y2 data", color="b")
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
 
 """ 久
 # 繪制心形隱函數曲面
@@ -1328,6 +687,8 @@ contour = mlab.contour3d(x, y, z, f, contours=[0], color=(1, 0, 0))
 
 print("------------------------------------------------------------")  # 60個
 
+
+print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 

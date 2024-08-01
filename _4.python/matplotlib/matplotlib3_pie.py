@@ -1,5 +1,22 @@
-# 派圖 集合
+"""
 
+派圖 集合
+
+圓餅圖是使用 pie 函數繪製出來的，語法為：
+
+plt.pie(串列資料, [其餘參數值])
+
+其餘參數介紹：
+pie參數 	說明
+color 	指定圓餅圖的顏色 ('blue', 'red', 'green', 'yellow', 色碼('#CC00CC')),預設為藍色 blue
+label 	項目標題，需搭配 legend 函式才有效果
+explode 	設定分隔的區塊位置
+autopct 	項目百分比格式，語法為「%格式%%」，Example:autopct = "%2.2f%%"(表示整數2位數及小數點2位數)
+pctdistance 	數值文字與圓心距離
+shadow 	圓餅圖陰影開啟/關閉，True 有陰影，False 沒有陰影
+startangle 	繪製起始角度，繪製會以逆時鐘旋轉計算角度
+radius 	圓餅圖的半徑，預設是1
+"""
 print("------------------------------------------------------------")  # 60個
 
 # 共同
@@ -34,24 +51,6 @@ plt.figure(
 # 第一張圖
 plt.subplot(231)
 
-
-"""
-圓餅圖是使用 pie 函數繪製出來的，語法為：
-
-plt.pie(串列資料, [其餘參數值])
-
-其餘參數介紹：
-pie參數 	說明
-color 	指定圓餅圖的顏色 ('blue', 'red', 'green', 'yellow', 色碼('#CC00CC')),預設為藍色 blue
-label 	項目標題，需搭配 legend 函式才有效果
-explode 	設定分隔的區塊位置
-autopct 	項目百分比格式，語法為「%格式%%」，Example:autopct = "%2.2f%%"(表示整數2位數及小數點2位數)
-pctdistance 	數值文字與圓心距離
-shadow 	圓餅圖陰影開啟/關閉，True 有陰影，False 沒有陰影
-startangle 	繪製起始角度，繪製會以逆時鐘旋轉計算角度
-radius 	圓餅圖的半徑，預設是1
-"""
-
 # 設定將使用的數值，將要有項目標題、數值串列、圓餅圖顏色、分隔的區塊位置
 values = [3, 48, 33, 8, 38]
 labels = ["鼠", "牛", "虎", "兔", "龍"]
@@ -74,10 +73,6 @@ plt.pie(
     radius=0.9,  # 圓餅圖的半徑，預設是1
 )
 
-# 設定 legnd 的位置，將圖表顯示出來，並顯示圖例名稱
-plt.legend(loc="right")  # 設定 legend 的位置
-plt.title("指定顏色 使用圖例")
-
 # 第二張圖
 plt.subplot(232)
 
@@ -99,7 +94,6 @@ plt.pie(
     shadow=True,
     startangle=90,
 )
-plt.title("指定顏色")
 
 # 第三張圖
 plt.subplot(233)
@@ -191,7 +185,6 @@ people = [10000, 12600, 9600, 7500, 5100, 4800]
 exp = [0.0, 0.0, 0.1, 0.0, 0.0, 0.1]
 colors = ["aqua", "g", "pink", "yellow", "m", "salmon"]
 plt.pie(people, labels=area, explode=exp, autopct="%1.2f%%", colors=colors)
-plt.title("五月份國外旅遊調查表", fontsize=16, color="b")
 
 
 # 第二張圖
@@ -236,18 +229,6 @@ plt.axis("equal")
 # 第四張圖
 plt.subplot(234)
 
-from pylab import mpl
-
-sizes = [25, 30, 15, 10]
-labels = ["北部", "西部", "南部", "東部"]
-explode = (0, 0, 0.2, 0)
-
-plt.pie(sizes, labels=sizes, explode=explode, autopct="%1.2f%%")
-
-
-# 第五張圖
-plt.subplot(235)
-
 # pie指定顏色
 
 sizes = [25, 30, 15, 10]
@@ -255,6 +236,8 @@ labels = ["北部", "西部", "南部", "東部"]
 colors = ["red", "green", "blue", "yellow"]
 explode = (0, 0, 0.2, 0)
 
+#plt.pie(sizes, labels=sizes, explode=explode, autopct="%1.2f%%")
+"""
 plt.pie(
     sizes,
     explode=explode,
@@ -266,18 +249,8 @@ plt.pie(
     shadow=True,
     startangle=90,
 )
-
-
-# 第六張圖
-plt.subplot(236)
-
+"""
 # pie指定顏色
-
-sizes = [25, 30, 15, 10]
-labels = ["北部", "西部", "南部", "東部"]
-colors = ["red", "green", "blue", "yellow"]
-explode = (0, 0, 0.2, 0)
-
 plt.pie(
     sizes,
     labels=labels,
@@ -288,10 +261,8 @@ plt.pie(
     shadow=True,
 )
 
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
+# 第五張圖
+plt.subplot(235)
 
 dices = ["1點", "2點", "3點", "4點", "5點", "6點"]
 data = []
@@ -309,20 +280,12 @@ plt.pie(
     explode=[0.1, 0.1, 0.1, 0.1, 0.1, 0.1],
     shadow=True,
 )
-plt.title("擲骰子機率圖", fontsize=18)
+plt.title("擲骰子機率圖")
 
-plt.show()
 
-print("------------------------------------------------------------")  # 60個
+# 第六張圖
+plt.subplot(236)
 
-# 預設字體大小
-plt.rc("font", size=20)
-# 軸標題字體大小
-plt.rc("axes", titlesize=30)
-# X軸刻度字體大小
-plt.rc("xtick", labelsize=20)
-# 圖例字體大小
-plt.rc("legend", fontsize=10)
 # 薪水分配 六三一分配法
 # 圓餅圖
 salarypay = ["生活費", "儲蓄", "娛樂/緊急預備金"]
@@ -332,8 +295,7 @@ ratios = [60, 30, 10]
 explode = [0, 0, 0.1]
 # 顏色
 color = [(1.0, 0, 0), (0, 1.0, 0), (0, 1.0, 1.0)]
-fig, ax = plt.subplots(figsize=(10, 10), dpi=80)
-ax.pie(
+plt.pie(
     ratios,
     explode=explode,
     labels=salarypay,
@@ -343,13 +305,13 @@ ax.pie(
     startangle=40,
 )
 # 設定Y/X軸長度比例
-ax.set_aspect(0.7)
-ax.set_title("薪水分配 六三一分配法")
-ax.legend()
+#plt.set_aspect(0.7)
+plt.title("薪水分配 六三一分配法")
+plt.legend()
+
 
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
@@ -365,6 +327,8 @@ print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
 
+sys.exit()
+
 """
 
 edu = [0.2515,0.3724,0.3336,0.0368,0.0057]
@@ -377,3 +341,19 @@ autopct = '%.1f%%' # 設置百分比的格式，這里保留一位小數
 plt.axes(aspect = 'equal')
 
 """
+
+# 設定 legnd 的位置，將圖表顯示出來，並顯示圖例名稱
+plt.legend(loc="right")  # 設定 legend 的位置
+plt.title("指定顏色 使用圖例")
+
+
+
+# 預設字體大小
+plt.rc("font", size=20)
+# 軸標題字體大小
+plt.rc("axes", titlesize=30)
+# X軸刻度字體大小
+plt.rc("xtick", labelsize=20)
+# 圖例字體大小
+plt.rc("legend", fontsize=10)
+

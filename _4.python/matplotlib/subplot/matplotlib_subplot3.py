@@ -168,6 +168,89 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
+plt.figure(figsize=(18, 4))
+plt.subplot(2, 2, 1)
+plt.xticks(())
+plt.yticks(())
+plt.text(0.5, 0.5, "subplot(2,2,1)", ha="center", va="center", size=20, alpha=0.5)
+
+plt.subplot(2, 2, 2)
+plt.xticks(())
+plt.yticks(())
+plt.text(0.5, 0.5, "subplot(2,2,2)", ha="center", va="center", size=20, alpha=0.5)
+
+plt.subplot(2, 2, 3)
+plt.xticks(())
+plt.yticks(())
+
+plt.text(0.5, 0.5, "subplot(2,2,3)", ha="center", va="center", size=20, alpha=0.5)
+
+plt.subplot(2, 2, 4)
+plt.xticks(())
+plt.yticks(())
+plt.text(0.5, 0.5, "subplot(2,2,4)", ha="center", va="center", size=20, alpha=0.5)
+
+plt.tight_layout()
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+import matplotlib.gridspec as gridspec
+
+plt.figure(figsize=(18, 4))
+G = gridspec.GridSpec(3, 3)
+
+axes_1 = plt.subplot(G[0, :])
+plt.xticks(())
+plt.yticks(())
+plt.text(0.5, 0.5, "Axes 1", ha="center", va="center", size=24, alpha=0.5)
+
+axes_2 = plt.subplot(G[1:, 0])
+plt.xticks(())
+plt.yticks(())
+plt.text(0.5, 0.5, "Axes 2", ha="center", va="center", size=24, alpha=0.5)
+
+axes_3 = plt.subplot(G[1:, -1])
+plt.xticks(())
+plt.yticks(())
+plt.text(0.5, 0.5, "Axes 3", ha="center", va="center", size=24, alpha=0.5)
+
+axes_4 = plt.subplot(G[1, -2])
+plt.xticks(())
+plt.yticks(())
+plt.text(0.5, 0.5, "Axes 4", ha="center", va="center", size=24, alpha=0.5)
+
+axes_5 = plt.subplot(G[-1, -2])
+plt.xticks(())
+plt.yticks(())
+plt.text(0.5, 0.5, "Axes 5", ha="center", va="center", size=24, alpha=0.5)
+
+plt.tight_layout()
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+plt.figure(figsize=(18, 4))
+
+plt.axes([0.1, 0.1, 0.8, 0.8])
+plt.xticks(())
+plt.yticks(())
+plt.text(
+    0.2, 0.5, "axes([0.1, 0.1, .8, .8])", ha="center", va="center", size=20, alpha=0.5
+)
+
+plt.axes([0.5, 0.5, 0.3, 0.3])
+plt.xticks(())
+plt.yticks(())
+plt.text(
+    0.5, 0.5, "axes([.5, .5, .3, .3])", ha="center", va="center", size=16, alpha=0.5
+)
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+
 
 print("------------------------------------------------------------")  # 60個
 

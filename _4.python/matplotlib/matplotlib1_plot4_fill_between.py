@@ -21,12 +21,6 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
-left = -2 * np.pi
-right = 2 * np.pi
-
-x = np.linspace(left, right, 100)
-y = np.sin(x)
-
 plt.figure(
     num="plot 集合 fill_between 1",
     figsize=(12, 8),
@@ -38,38 +32,47 @@ plt.figure(
 )
 
 print("------------------------------------------------------------")  # 60個
+
+x = np.linspace(-2 * np.pi, 2 * np.pi, 100)
+y = np.sin(x)
+
+print("------------------------------------------------------------")  # 60個
+
 plt.subplot(231)
 
-# 使用fill
 plt.plot(x, y)
 plt.fill(x, y, color="y", alpha=0.3)  # 黃色填充
-plt.title("使用fill")
+plt.title("使用fill (預設)")
 
 print("------------------------------------------------------------")  # 60個
 plt.subplot(232)
 
-# 使用fill_between
 plt.plot(x, y)
 plt.fill_between(x, 0, y, color="y", alpha=0.3)
-plt.title("與x軸之間填充")
+plt.title("使用fill_between 0\n與x軸之間填充 (預設)")
 
 print("------------------------------------------------------------")  # 60個
 plt.subplot(233)
 
 plt.plot(x, y)
 plt.fill_between(x, -1, y, color="y", alpha=0.3)
-plt.title("x之下填充到底")
+plt.title("使用fill_between -1\nx之下填充到底")
 
 print("------------------------------------------------------------")  # 60個
 plt.subplot(234)
 
 plt.plot(x, y)
 plt.fill_between(x, 1, y, color="y", alpha=0.3)
-plt.title("x之上填充到頂")
+plt.title("使用fill_between 1\nx之上填充到頂")
 
 print("------------------------------------------------------------")  # 60個
 plt.subplot(235)
 
+t = np.linspace(-np.pi * 1.5, np.pi * 1.5, 100)
+c = np.sinc(t)
+
+plt.plot(t, c)
+plt.fill(t, c)
 
 print("------------------------------------------------------------")  # 60個
 plt.subplot(236)
@@ -173,6 +176,19 @@ plt.fill_between(x, y1=y, y2=0, where=(x >= -2) & (x <= 5), facecolor="lightgree
 print("------------------------------------------------------------")  # 60個
 plt.subplot(235)
 
+x = [0, 4, 6, 4, 0]
+y = [0, 0, 2, 4, 4]
+plt.fill(x, y, "r")
+
+x = [0, 1, 3, 2]
+y = [2, 5, 6, 0]
+x2 = [7, 8, 9]
+y2 = [0, 3, 0]
+plt.fill(x, y, "g", x2, y2, "b")
+
+print("------------------------------------------------------------")  # 60個
+plt.subplot(236)
+
 import datetime
 
 dates=[datetime.datetime(2025, 1, 1, 0, 0), datetime.datetime(2025, 1, 2, 0, 0), datetime.datetime(2025, 1, 3, 0, 0), datetime.datetime(2025, 1, 4, 0, 0), datetime.datetime(2025, 1, 5, 0, 0), datetime.datetime(2025, 1, 6, 0, 0), datetime.datetime(2025, 1, 7, 0, 0), datetime.datetime(2025, 1, 8, 0, 0), datetime.datetime(2025, 1, 9, 0, 0), datetime.datetime(2025, 1, 10, 0, 0), datetime.datetime(2025, 1, 11, 0, 0), datetime.datetime(2025, 1, 12, 0, 0), datetime.datetime(2025, 1, 13, 0, 0), datetime.datetime(2025, 1, 14, 0, 0), datetime.datetime(2025, 1, 15, 0, 0), datetime.datetime(2025, 1, 16, 0, 0), datetime.datetime(2025, 1, 17, 0, 0), datetime.datetime(2025, 1, 18, 0, 0), datetime.datetime(2025, 1, 19, 0, 0), datetime.datetime(2025, 1, 20, 0, 0), datetime.datetime(2025, 1, 21, 0, 0), datetime.datetime(2025, 1, 22, 0, 0), datetime.datetime(2025, 1, 23, 0, 0), datetime.datetime(2025, 1, 24, 0, 0), datetime.datetime(2025, 1, 25, 0, 0), datetime.datetime(2025, 1, 26, 0, 0), datetime.datetime(2025, 1, 27, 0, 0), datetime.datetime(2025, 1, 28, 0, 0), datetime.datetime(2025, 1, 29, 0, 0), datetime.datetime(2025, 1, 30, 0, 0), datetime.datetime(2025, 1, 31, 0, 0)]
@@ -186,67 +202,11 @@ plt.fill_between(dates, highTemps, lowTemps, color="pink", alpha=0.2)  # 填滿
 plt.title("2025年1月臺北天氣報告", fontsize=12)
 plt.ylabel(r"溫度 $C^{o}$", fontsize=12)
 
-print("------------------------------------------------------------")  # 60個
-plt.subplot(236)
-
-
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-plt.figure(
-    num="plot 集合 fill_between 3",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
-
 print("------------------------------------------------------------")  # 60個
-plt.subplot(231)
-
-t = np.linspace(-np.pi * 1.5, np.pi * 1.5, 100)
-c = np.sinc(t)
-
-plt.plot(t, c)
-plt.fill(t, c)
-
-print("------------------------------------------------------------")  # 60個
-plt.subplot(232)
-
-x = [0, 4, 6, 4, 0]
-y = [0, 0, 2, 4, 4]
-plt.fill(x, y, "r")
-
-x = [0, 1, 3, 2]
-y = [2, 5, 6, 0]
-x2 = [7, 8, 9]
-y2 = [0, 3, 0]
-plt.fill(x, y, "g", x2, y2, "b")
-
-
-print("------------------------------------------------------------")  # 60個
-plt.subplot(233)
-
-
-print("------------------------------------------------------------")  # 60個
-plt.subplot(234)
-
-print("------------------------------------------------------------")  # 60個
-plt.subplot(235)
-
-
-print("------------------------------------------------------------")  # 60個
-plt.subplot(236)
-
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-
 
 print("------------------------------------------------------------")  # 60個
 

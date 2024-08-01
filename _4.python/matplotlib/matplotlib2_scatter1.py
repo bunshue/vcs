@@ -126,29 +126,20 @@ correlation[0, 1]  # 顯示在畫面
 # 第五張圖
 plt.subplot(235)
 
-x = np.arange(0.0, 20.0, 1.0)  # 生成一個0到20的序列
-y = x**1.3 # y = x ^ 1.3
-yn = x**1.3 + np.random.rand(*x.shape) * 10.0  # y = x ^ 1.3 + 隨機值 * 10
+N = 20
+x = np.random.randint(1, 11, N)  # 建立 x
+y = np.random.randint(1, 11, N)  # 建立 y
+colors = np.random.rand(N)  # 色彩數列
+size = (30 * np.random.rand(N)) ** 2  # 散點大小數列
 
-plt.plot(x, y, 'r')
-plt.scatter(x, y)
-plt.scatter(x, yn, alpha=0.9, label="rand")
+plt.scatter(x, y, s=size, c=colors)
+plt.xticks(np.arange(0, 12, step=1.0))
+plt.yticks(np.arange(0, 12, step=1.0))
+
 
 # 第六張圖
 plt.subplot(236)
 
-X = np.random.rand(6)
-Y = np.random.rand(6)
-
-
-def myplot(n=1):
-    plt.scatter(X, Y, c="r", s=100)
-    x = np.linspace(0, 1, 1000)
-    y = 0.5 * np.sin(n * x) + 0.5
-    plt.plot(x, y)
-
-
-myplot(10)
 
 plt.show()
 
@@ -224,26 +215,6 @@ plt.scatter(x, y, s=2, c=t, cmap="brg")
 
 # 第四張圖
 plt.subplot(234)
-
-N = 200
-# 曲線資料加入雜訊 y = sin(x)
-x = np.linspace(0, 10, N)
-
-y1 = np.sin(x)
-y1n = y1 + 0.3 * np.random.randn(N)  # 加上noise
-plt.scatter(x, y1n, c="red")
-
-y2 = np.sin(x)
-y2n = y1 + np.random.rand(1, len(y2)) * 1.5
-plt.scatter(x, y2n, c="blue", marker=".")
-
-plt.plot(x, y1, "lime")
-plt.plot(x, y2 + 0.75, "green")
-plt.title("曲線資料加入雜訊")
-
-
-# 第五張圖
-plt.subplot(235)
 
 from pylab import *
 
@@ -365,18 +336,13 @@ ylabel("Tonnage (BOM)")
 grid(True, ls="-", c="#a0a0a0")
 
 
+# 第五張圖
+plt.subplot(235)
+
+
 # 第六張圖
 plt.subplot(236)
 
-N = 20
-x = np.random.randint(1, 11, N)  # 建立 x
-y = np.random.randint(1, 11, N)  # 建立 y
-colors = np.random.rand(N)  # 色彩數列
-size = (30 * np.random.rand(N)) ** 2  # 散點大小數列
-
-plt.scatter(x, y, s=size, c=colors)
-plt.xticks(np.arange(0, 12, step=1.0))
-plt.yticks(np.arange(0, 12, step=1.0))
 
 
 plt.show()
@@ -431,12 +397,6 @@ plt.colorbar()
 # 第三張圖
 plt.subplot(233)
 
-listx = [31, 15, 20, 25, 12, 18, 45, 21, 33, 5, 18, 22, 37, 42, 10]
-listy = [68, 20, 61, 32, 45, 56, 10, 18, 70, 64, 43, 66, 19, 77, 21]
-
-scale = [x**3 for x in [5, 4, 2, 6, 7, 1, 8, 9, 2, 3, 2, 4, 5, 7, 2]]
-
-plt.scatter(listx, listy, c="r", s=scale, marker="o", alpha=0.5)
 
 # 第四張圖
 plt.subplot(234)
@@ -458,7 +418,6 @@ colors = np.random.rand(20)
 size = (50 * np.random.rand(20)) ** 2
 
 plt.scatter(x, y, s=size, c=colors, alpha=0.5)
-
 
 # 第六張圖
 plt.subplot(236)
@@ -524,7 +483,8 @@ y = np.random.rand(20)
 colors = np.random.rand(20)
 size = (50 * np.random.rand(20)) ** 2
 
-plt.scatter(x, y, s=size, c=colors, alpha=0.5, marker="x")
+#plt.scatter(x, y, s=size, c=colors, alpha=0.5, marker="x")
+plt.scatter(x, y, s=size, c=colors, alpha=0.5)
 
 
 # 第二張圖
@@ -539,7 +499,8 @@ size = (50 * np.random.rand(20)) ** 2
 
 lines = np.zeros(220) + 5
 
-plt.scatter(x, y, s=size, c=colors, alpha=0.5, marker="x", linewidths=lines)
+#plt.scatter(x, y, s=size, c=colors, alpha=0.5, marker="x", linewidths=lines)
+plt.scatter(x, y, s=size, c=colors, alpha=0.5, linewidths=lines)
 
 
 # 第三張圖
@@ -744,18 +705,6 @@ plt.figure(
 # 第一張圖
 plt.subplot(231)
 
-N = 10
-colors = np.array(["b", "c", "g", "k", "m", "r", "y", "pink", "purple", "orange"])
-x = np.random.randint(1, 11, N)  # 建立 x
-y1 = np.random.randint(1, 11, N)  # 建立 y1
-y2 = np.random.randint(1, 11, N)  # 建立 y2
-
-plt.scatter(x, y1, c=colors, label="Circle")
-plt.scatter(x, y2, c=colors, marker="*", label="Star")
-plt.xticks(np.arange(0, 11, step=1.0))
-plt.yticks(np.arange(0, 11, step=1.0))
-plt.legend()
-
 
 # 第二張圖
 plt.subplot(232)
@@ -816,38 +765,13 @@ plt.yticks(np.arange(0, 1.1, step=0.1))
 # 第四張圖
 plt.subplot(234)
 
-N = 50  # 色彩數列的點數
-colorused = ["b", "c", "g", "k", "m", "r", "y"]  # 定義顏色
-colors = []  # 建立色彩數列
-for i in range(N):  # 隨機設定顏色
-    colors.append(np.random.choice(colorused))
-x = np.linspace(0.0, 2 * np.pi, N)  # 建立 50 個點
-y1 = np.sin(x)
-plt.scatter(x, y1, c=colors, marker="*")  # 繪製 sine
-y2 = np.cos(x)
-plt.scatter(x, y2, c=colors, marker="s")  # 繪製 cos
 
 # 第五張圖
 plt.subplot(235)
 
-x = np.linspace(0.0, 2 * np.pi, 50)  # 建立 35 個點
-y1 = np.sin(x)
-plt.scatter(x, y1, c="b", marker="x")  # 繪製 sine wave
-y2 = np.cos(x)
-plt.scatter(x, y2, c="g", marker="X")  # 繪製 cos wave
 
 # 第六張圖
 plt.subplot(236)
-
-colorused = ["b", "c", "g", "k", "m", "r", "y"]  # 定義顏色
-x = np.linspace(0.0, 2 * np.pi, 50)  # 建立 50 個點
-y1 = np.sin(x)
-colors = []
-for i in range(50):  # 隨機設定顏色
-    colors.append(np.random.choice(colorused))
-plt.scatter(x, y1, c=colors, marker="*")  # 繪製 sine
-y2 = np.cos(x)
-plt.scatter(x, y2, c=colors, marker="s")  # 繪製 cos
 
 
 
@@ -1300,3 +1224,48 @@ plt.colorbar()  # 色彩條
 print("------------------------------------------------------------")  # 60個
 
 plt.scatter(x, y, s=N, c=x, cmap="brg")  # 繪製散點圖
+
+
+
+
+colors = np.array(["b", "c", "g", "k", "m", "r", "y", "pink", "purple", "orange"])
+plt.scatter(x, y1, c=colors, label="圓形標記")
+plt.scatter(x, y2, c=colors, marker="*", label="星形標記")
+plt.xticks(np.arange(0, 11, step=1.0))
+plt.yticks(np.arange(0, 11, step=1.0))
+
+
+
+N = 50  # 色彩數列的點數
+
+colorused = ["b", "c", "g", "k", "m", "r", "y"]  # 定義顏色
+
+colors = []  # 建立色彩數列
+for i in range(N):  # 隨機設定顏色
+    colors.append(np.random.choice(colorused))
+
+plt.scatter(x, y1, c=colors, marker="*")  # 繪製 sine
+plt.scatter(x, y2, c=colors, marker="s")  # 繪製 cos
+
+
+plt.scatter(x, y1, c="b", marker="x")  # 繪製 sine wave
+plt.scatter(x, y2, c="g", marker="X")  # 繪製 cos wave
+
+plt.scatter(x, y1, c=colors, marker="*")  # 繪製 sine
+plt.scatter(x, y2, c=colors, marker="s")  # 繪製 cos
+
+colorused = ["b", "c", "g", "k", "m", "r", "y"]  # 定義顏色
+x = np.linspace(0.0, 2 * np.pi, 50)  # 建立 50 個點
+
+
+colors = []
+for i in range(50):  # 隨機設定顏色
+    colors.append(np.random.choice(colorused))
+
+
+x = np.linspace(0, 1, 1000)
+y = 0.5 * np.sin(n * x) + 0.5
+
+
+plt.scatter(listx, listy, c="r", s=scale, marker="o", alpha=0.5)
+

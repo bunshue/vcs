@@ -236,7 +236,8 @@ import statsmodels.api as sm # 示例使用了statsmodels庫中的自帶的數�
 import matplotlib as mpl
 
 sns.set(style='darkgrid',color_codes=True) # 帶灰色網格的背景風格
-tips=sns.load_dataset('tips')  # 示例中的基本數據
+
+tips = sns.load_dataset('tips')  # 示例中的基本數據
 
 # 4.2.2 連續變量相關圖
 # Relplot關係類型圖表
@@ -246,7 +247,7 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-
+tips=sns.load_dataset('tips')  # 示例中的基本數據
 
 # 點圖
 sns.scatterplot(x="total_bill", y="tip", hue="size", size="size", data=tips)
@@ -255,12 +256,16 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
+tips=sns.load_dataset('tips')  # 示例中的基本數據
+
 # 線圖
 sns.lineplot(x="tip", y="total_bill", hue="sex", style="sex", data=tips)
 
 plt.show()
 
 print('------------------------------------------------------------')	#60個
+
+tips=sns.load_dataset('tips')  # 示例中的基本數據
 
 # 4.2.3 分類變量圖
 # stripplot散點圖
@@ -270,6 +275,8 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
+tips=sns.load_dataset('tips')  # 示例中的基本數據
+
 # swarmplot散點圖
 sns.swarmplot(x='day',y='total_bill',data=tips)
 
@@ -277,12 +284,7 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-# violinplot小提琴圖
-sns.violinplot(x="day", y="total_bill", hue="sex", split=True, data=tips)
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
+tips=sns.load_dataset('tips')  # 示例中的基本數據
 
 # boxplot箱式圖
 sns.boxplot(x="day", y="total_bill", hue="sex", data=tips);
@@ -291,12 +293,16 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
+tips=sns.load_dataset('tips')  # 示例中的基本數據
+
 # boxenplot變種箱式圖
 sns.boxenplot(x="day", y="total_bill", hue="sex", data=tips)
 
 plt.show()
 
 print('------------------------------------------------------------')	#60個
+
+tips=sns.load_dataset('tips')  # 示例中的基本數據
 
 # pointplot分類統計圖
 sns.pointplot(x="sex", y="total_bill", hue="smoker", data=tips,
@@ -307,6 +313,8 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
+tips=sns.load_dataset('tips')  # 示例中的基本數據
+
 # barplot柱對比圖
 sns.barplot(x='smoker',y='total_bill',hue='sex',data=tips)
 
@@ -314,6 +322,7 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
+tips=sns.load_dataset('tips')  # 示例中的基本數據
 
 # 4.2.4 迴歸圖
 # 連續變量回歸圖
@@ -323,6 +332,7 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
+tips=sns.load_dataset('tips')  # 示例中的基本數據
 
 # 分類變量回歸圖
 sns.lmplot(x="size", y="total_bill", data=tips, x_estimator=np.mean)
@@ -369,6 +379,9 @@ plt.show()
 print('------------------------------------------------------------')	#60個
 
 """ fail
+
+tips=sns.load_dataset('tips')  # 示例中的基本數據
+
 # FacetGrid結構化繪圖網格
 g = sns.FacetGrid(tips, col = 'time', row = 'smoker') # 按行和列的分類做N個圖
 g.map(plt.hist, 'total_bill', bins = 10) # 指定做圖方式
@@ -393,6 +406,8 @@ print('------------------------------------------------------------')	#60個
 # 印刷品作圖
 
 sns.set_style("whitegrid")
+
+tips=sns.load_dataset('tips')  # 示例中的基本數據
 
 with sns.cubehelix_palette(start=2.7, rot=0, dark=.5, light=.8, 
           reverse=True, n_colors=5):
@@ -425,7 +440,6 @@ bar
 """
 
 print('------------------------------------------------------------')	#60個
-'''
 
 import logging
 
@@ -1762,8 +1776,6 @@ for i, count in enumerate(countlist):
     for word, score in scores.items():
         print(word, round(score, 2))
 
-'''
-
 print('------------------------------------------------------------')	#60個
 
 print('切分數據集與交叉驗證')
@@ -1929,7 +1941,6 @@ draw_curve(params, train_score, test_score)
 
 print('------------------------------------------------------------')	#60個
 
-'''
 # 數據集和數據處理
 
 from pandas import Series,DataFrame
@@ -2007,7 +2018,6 @@ logreg.fit(X_train, Y_train) # 訓練模型
 print(logreg.score(X_train, Y_train)) # 模型評分
 Y_pred = logreg.predict(X_test) # 預測
 
-'''
 print('------------------------------------------------------------')	#60個
 
 """

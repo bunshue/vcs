@@ -293,6 +293,80 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
+# 建立一個新的 figure
+# fig1 = plt.figure(figsize=(12, 8))
+
+# 增新一個axes（座標軸），以供繪圖和放置資訊:
+# axs = fig1.add_subplot(1,1,1) # 1x1的座標軸
+
+# 增新很多個axes，以供繪圖和放置資訊:
+# fig1.delaxes( fig1.gca() ) # 順便示範，把剛剛1x1的座標軸刪掉
+
+fig2 = plt.figure(
+    num="matplotlib 05",
+    figsize=(12, 8),
+    dpi=100,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
+
+# 一般的情況下，axes是"hold on"的, 也就是資料不會被覆蓋掉。
+# hold on: 好處是一次要輸出一堆函數，可以把圖疊加上去。
+# hold off: 可以更新圖的內容，可是全部的資訊會被洗掉（title, legend等）
+# 如果要保留這些資訊，可以單獨抓出圖的內容，直接修改：
+x = np.linspace(0, 6.28, 100)
+y = np.sin(x)
+
+axes = fig2.add_subplot(1, 3, 1)
+axes.set_title("y = sin(x)")
+(line,) = axes.plot(x, y)  # 這裡回傳的line就是畫在圖上的資料
+# 當發現畫錯想修改，可以對line修改：
+line.set_ydata(np.cos(x))
+
+axes = fig2.add_subplot(1, 3, 2)
+axes.set_title("y = sin(x)")
+(line,) = axes.plot(x, y)  # 這裡回傳的line就是畫在圖上的資料
+# 當發現畫錯想修改，可以對line修改：
+line.set_ydata(np.cos(x))
+
+axes = fig2.add_subplot(1, 3, 3)
+axes.set_title("y = sin(x)")
+(line,) = axes.plot(x, y)  # 這裡回傳的line就是畫在圖上的資料
+# 當發現畫錯想修改，可以對line修改：
+line.set_ydata(np.cos(x))
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+x = np.linspace(0, 2 * np.pi, 300)
+y = np.sin(x)
+
+fig = plt.figure(
+    num="matplotlib 10",
+    figsize=(12, 8),
+    dpi=100,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
+
+ax1 = fig.add_subplot(121, projection="polar")
+ax1.plot(x, y)
+ax1.set_title("極座標 Sin 圖", fontsize=12)
+
+ax2 = fig.add_subplot(122)
+ax2.plot(x, y)
+ax2.set_title("一般座標 Sin 圖", fontsize=12)
+ax2.set_aspect(2)
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個
 

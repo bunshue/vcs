@@ -1,6 +1,6 @@
-# matplotlib_新進測試14_其他
+"""
 
-import time
+"""
 
 print("------------------------------------------------------------")  # 60個
 
@@ -23,10 +23,6 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
-print(
-    "matplotlib 01 ------------------------------------------------------------"
-)  # 60個
-
 x = np.linspace(0.0, np.pi, 500)
 y = np.cos(2 * np.pi * x)
 plt.plot(x, y, "m", lw=2)
@@ -44,9 +40,7 @@ plt.ylim(-1.5, 1.5)
 
 plt.show()
 
-print(
-    "matplotlib 02 ------------------------------------------------------------"
-)  # 60個
+print("------------------------------------------------------------")  # 60個
 
 x = np.linspace(0.0, np.pi, 500)
 y = np.cos(2 * np.pi * x)
@@ -61,9 +55,7 @@ plt.ylim(-1.5, 1.5)
 
 plt.show()
 
-print(
-    "matplotlib 03 ------------------------------------------------------------"
-)  # 60個
+print("------------------------------------------------------------")  # 60個
 
 x = np.linspace(0.0, np.pi, 500)
 y = np.cos(2 * np.pi * x)
@@ -75,9 +67,7 @@ plt.ylim(-1.5, 1.5)
 
 plt.show()
 
-print(
-    "matplotlib 04 ------------------------------------------------------------"
-)  # 60個
+print("------------------------------------------------------------")  # 60個
 
 x = np.linspace(0.0, np.pi, 500)
 y = np.cos(2 * np.pi * x)
@@ -87,9 +77,7 @@ plt.ylim(-1.5, 1.5)
 
 plt.show()
 
-print(
-    "matplotlib 05 ------------------------------------------------------------"
-)  # 60個
+print("------------------------------------------------------------")  # 60個
 
 x = np.linspace(0.0, np.pi, 500)
 y = np.cos(2 * np.pi * x)
@@ -101,9 +89,7 @@ plt.annotate(
 plt.ylim(-1.5, 1.5)
 plt.show()
 
-print(
-    "matplotlib 06 ------------------------------------------------------------"
-)  # 60個
+print("------------------------------------------------------------")  # 60個
 
 fig, ax = plt.subplots(figsize=(4, 4))
 ax.annotate(
@@ -114,9 +100,7 @@ ax.annotate(
 )
 plt.show()
 
-print(
-    "matplotlib 07 ------------------------------------------------------------"
-)  # 60個
+print("------------------------------------------------------------")  # 60個
 
 fig, ax = plt.subplots(figsize=(4, 4))
 ax.annotate(
@@ -127,10 +111,7 @@ ax.annotate(
 )
 plt.show()
 
-print(
-    "matplotlib 08 ------------------------------------------------------------"
-)  # 60個
-
+print("------------------------------------------------------------")  # 60個
 
 def demo(ax, connectionstyle):
     # 繪製子圖與箭頭樣式說明
@@ -183,9 +164,7 @@ plt.tight_layout()  # 緊縮佈局
 
 plt.show()
 
-print(
-    "matplotlib 09 ------------------------------------------------------------"
-)  # 60個
+print("------------------------------------------------------------")  # 60個
 
 plt.subplots(figsize=(4, 4))
 plt.annotate(
@@ -200,9 +179,7 @@ plt.annotate(
 )
 plt.show()
 
-print(
-    "matplotlib 10 ------------------------------------------------------------"
-)  # 60個
+print("------------------------------------------------------------")  # 60個
 
 plt.subplots(figsize=(4, 4))
 plt.annotate(
@@ -218,9 +195,7 @@ plt.annotate(
 )
 plt.show()
 
-print(
-    "matplotlib 11 ------------------------------------------------------------"
-)  # 60個
+print("------------------------------------------------------------")  # 60個
 
 plt.subplots(figsize=(4, 4))
 plt.annotate(
@@ -247,9 +222,7 @@ plt.annotate(
 )
 plt.show()
 
-print(
-    "matplotlib 12 ------------------------------------------------------------"
-)  # 60個
+print("------------------------------------------------------------")  # 60個
 
 fig = plt.figure()
 ax = fig.add_subplot(projection="polar")
@@ -272,118 +245,7 @@ ax.annotate(
 )
 plt.show()
 
-print(
-    "matplotlib 13 ------------------------------------------------------------"
-)  # 60個
-
-plt.figure(figsize=(18, 4))
-plt.subplot(2, 2, 1)
-plt.xticks(())
-plt.yticks(())
-plt.text(0.5, 0.5, "subplot(2,2,1)", ha="center", va="center", size=20, alpha=0.5)
-
-plt.subplot(2, 2, 2)
-plt.xticks(())
-plt.yticks(())
-plt.text(0.5, 0.5, "subplot(2,2,2)", ha="center", va="center", size=20, alpha=0.5)
-
-plt.subplot(2, 2, 3)
-plt.xticks(())
-plt.yticks(())
-
-plt.text(0.5, 0.5, "subplot(2,2,3)", ha="center", va="center", size=20, alpha=0.5)
-
-plt.subplot(2, 2, 4)
-plt.xticks(())
-plt.yticks(())
-plt.text(0.5, 0.5, "subplot(2,2,4)", ha="center", va="center", size=20, alpha=0.5)
-
-plt.tight_layout()
-plt.show()
-
-print(
-    "matplotlib 14 ------------------------------------------------------------"
-)  # 60個
-
-import matplotlib.gridspec as gridspec
-
-plt.figure(figsize=(18, 4))
-G = gridspec.GridSpec(3, 3)
-
-axes_1 = plt.subplot(G[0, :])
-plt.xticks(())
-plt.yticks(())
-plt.text(0.5, 0.5, "Axes 1", ha="center", va="center", size=24, alpha=0.5)
-
-axes_2 = plt.subplot(G[1:, 0])
-plt.xticks(())
-plt.yticks(())
-plt.text(0.5, 0.5, "Axes 2", ha="center", va="center", size=24, alpha=0.5)
-
-axes_3 = plt.subplot(G[1:, -1])
-plt.xticks(())
-plt.yticks(())
-plt.text(0.5, 0.5, "Axes 3", ha="center", va="center", size=24, alpha=0.5)
-
-axes_4 = plt.subplot(G[1, -2])
-plt.xticks(())
-plt.yticks(())
-plt.text(0.5, 0.5, "Axes 4", ha="center", va="center", size=24, alpha=0.5)
-
-axes_5 = plt.subplot(G[-1, -2])
-plt.xticks(())
-plt.yticks(())
-plt.text(0.5, 0.5, "Axes 5", ha="center", va="center", size=24, alpha=0.5)
-
-plt.tight_layout()
-plt.show()
-
-print(
-    "matplotlib 15 ------------------------------------------------------------"
-)  # 60個
-
-plt.figure(figsize=(18, 4))
-
-plt.axes([0.1, 0.1, 0.8, 0.8])
-plt.xticks(())
-plt.yticks(())
-plt.text(
-    0.2, 0.5, "axes([0.1, 0.1, .8, .8])", ha="center", va="center", size=20, alpha=0.5
-)
-
-plt.axes([0.5, 0.5, 0.3, 0.3])
-plt.xticks(())
-plt.yticks(())
-plt.text(
-    0.5, 0.5, "axes([.5, .5, .3, .3])", ha="center", va="center", size=16, alpha=0.5
-)
-
-plt.show()
-
-print(
-    "matplotlib 16 ------------------------------------------------------------"
-)  # 60個
-
-# 箱線圖
-
-data = np.random.rand(20, 5)  # 生成5個維度數據，每組20個
-plt.boxplot(data)
-
-plt.show()
-
-print(
-    "matplotlib 17 ------------------------------------------------------------"
-)  # 60個
-
-# 小提琴圖
-data = np.random.rand(20, 5)
-plt.violinplot(data, showmeans=False, showmedians=True)
-
-plt.show()
-
-print(
-    "matplotlib 18 ------------------------------------------------------------"
-)  # 60個
+print("------------------------------------------------------------")  # 60個
 
 import matplotlib
 
@@ -417,64 +279,13 @@ plt.show()
 # 顯示繪製對象的各個屬性值
 # print(matplotlib.artist.getp(fig.patch))
 
-print(
-    "matplotlib 19 箱圖------------------------------------------------------------"
-)  # 60個
+print("------------------------------------------------------------")  # 60個
 
-# Creating dataset
-np.random.seed(10)
-data_1 = np.random.normal(100, 10, 200)
-data_2 = np.random.normal(90, 20, 200)
-data_3 = np.random.normal(80, 30, 200)
-data_4 = np.random.normal(70, 40, 200)
-data = [data_1, data_2, data_3, data_4]
+print("------------------------------------------------------------")  # 60個
 
-fig = plt.figure(figsize=(10, 7))
-
-# 圖加軸
-ax = fig.add_axes([0, 0, 1, 1])
-
-bp = ax.boxplot(data, labels=["mu = 100", "mu = 90", "mu = 80", "mu = 70"])
-ax.set_title("Box plot")
-
-plt.show()
-
-print(
-    "matplotlib 20 ------------------------------------------------------------"
-)  # 60個
-
-
-print(
-    "matplotlib 21 ------------------------------------------------------------"
-)  # 60個
-
-
-print(
-    "matplotlib 22 ------------------------------------------------------------"
-)  # 60個
-
-
+print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
-
-'''
-
-#文字顯示問題
-
-from os import path
-from matplotlib.font_manager import fontManager
-
-"""
-print('顯示所有字型')
-for i in fontManager.ttflist:
-    print(i.fname, i.name)
-"""
-
-print("matplotlib 14 ------------------------------------------------------------")  # 60個
-
-
-
-'''

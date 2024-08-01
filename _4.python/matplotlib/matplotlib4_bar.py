@@ -20,7 +20,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 plt.figure(
     num="bar 集合 1",
     figsize=(12, 8),
@@ -97,15 +97,13 @@ def addlabels1(x, y):
     for i in range(len(x)):
         plt.text(i, y[i], y[i])
 
-students = ["約翰", "瑪莉", "麥可", "大衛"]
-math_scores = [78, 67, 90, 81]
+animals = ["鼠", "牛", "虎", "兔"]
+weights2 = [3, 48, 33, 8]
 
-plt.ylim(0, 100)
-plt.bar(students, math_scores, color=["red", "green", "blue", "yellow"])
-addlabels1(students, math_scores)
-plt.xlabel("學生")
-plt.ylabel("數學成績")
-plt.title("期末考")
+plt.ylim(0, 50)
+plt.bar(animals, weights2, color=["red", "green", "blue", "yellow"])
+addlabels1(animals, weights2)
+plt.title("體重")
 
 # 第五張圖
 plt.subplot(235)
@@ -115,23 +113,20 @@ def addlabels2(x, y):
         plt.text(y[i], i, y[i])
 
 
-students = ["約翰", "瑪莉", "麥可", "大衛"]
-math_scores = [78, 67, 90, 81]
+animals = ["鼠", "牛", "虎", "兔"]
+weights2 = [3, 48, 33, 8]
 
-plt.xlim(0, 100)
-plt.barh(students, math_scores, color=["red", "green", "blue", "yellow"])
-addlabels2(students, math_scores)
-plt.ylabel("學生")
-plt.xlabel("數學成績")
-plt.title("期末考")
-
+plt.xlim(0, 50)
+plt.barh(animals, weights2, color=["red", "green", "blue", "yellow"])
+addlabels2(animals, weights2)
+plt.title("體重")
 
 # 第六張圖
 plt.subplot(236)
 
 print("將字典直接輸出給bar圖")
 
-data = {"apples": 10, "oranges": 15, "lemons": 5, "limes": 20}
+data = {"鼠": 3, "牛": 48, "虎": 33, "兔": 8}
 plt.bar(list(data.keys()), list(data.values()))
 
 plt.show()
@@ -226,8 +221,8 @@ plt.grid(True)  # 顯示格線
 # 第四張圖
 plt.subplot(234)
 
-x = ["AAA", "BBB", "CCC", "DDD"]
-s = [540, 2800, 1864, 1285]
+x = ["鼠", "牛", "虎", "兔"]
+s = [3, 48, 33, 8]
 
 """
 plt.bar(x, s)
@@ -240,8 +235,8 @@ plt.subplot(235)
 
 print("將字典直接輸出給barh圖, 加error")
 
-data = {"apples": 10, "oranges": 15, "lemons": 5, "limes": 20}
-error = [3, 4, 2, 7]
+data = {"鼠": 3, "牛": 48, "虎": 33, "兔": 8}
+error = [3, 10, 5, 8]
 plt.barh(
     list(data.keys()),
     list(data.values()),
@@ -357,36 +352,33 @@ plt.subplot(233)
 plt.subplot(234)
 
 colors = ['b','g','r','y','c']
-courses = ['C++','Java','Python','C#','PHP']
-students = [45, 52, 66, 32, 39]
 
-plt.barh(courses,students,color=colors)
+animals = ["鼠", "牛", "虎", "兔", "龍"]
 
-plt.title("修課報表", fontsize=12, color='b')
-plt.xlabel("修課人數", fontsize=8, color='b')
-plt.ylabel("課程名稱", fontsize=8, color='b')
+weights = [3, 48, 33, 8, 38]
+
+plt.barh(animals,weights,color=colors)
 
 # 第五張圖
 plt.subplot(235)
 
-courses = ['C++','Java','Python','C#','PHP']
-students = [45, 52, 66, 32, 39]
-#plt.bar(courses,students)
-#plt.bar(courses,students,align='edge',color='g')
-plt.bar(courses,students,width=0.5,color='m')
+animals = ["鼠", "牛", "虎", "兔", "龍"]
+
+weights = [3, 48, 33, 8, 38]
+#plt.bar(animals,weights)
+#plt.bar(animals,weights,align='edge',color='g')
+plt.bar(animals,weights,width=0.5,color='m')
 
 # 第六張圖
 plt.subplot(236)
 
 colors = ['grey','grey','red','grey','grey']
-courses = ['C++','Java','Python','C#','PHP']
-students = [45, 52, 66, 32, 39]
+animals = ["鼠", "牛", "虎", "兔", "龍"]
 
-plt.bar(courses,students,color=colors)
+weights = [3, 48, 33, 8, 38]
 
-plt.title("修課報表", fontsize=12, color='b')
-plt.xlabel("課程名稱", fontsize=8, color='b')
-plt.ylabel("修課人數", fontsize=8, color='b')
+plt.bar(animals,weights,color=colors)
+
 
 plt.show()
 
@@ -475,45 +467,24 @@ plt.subplot(231)
 
 name = ["鼠", "牛", "虎", "兔", "龍"]
 weight = [3, 48, 33, 8, 38]
-plt.bar(name, weight)
-
-plt.ylabel("體重(單位:公斤)")
-plt.title("動物體重 使用中文")
+#plt.bar(name, weight)
+plt.bar(name, weight, width=0.8, align="edge", color="r", ec="y", lw=2)
 
 
 # 第二張圖
 plt.subplot(232)
 
-name = ["鼠", "牛", "虎", "兔", "龍"]
-weight = [3, 48, 33, 8, 38]
-
-plt.bar(name, weight, width=0.8, align="edge", color="r", ec="y", lw=2)
-
-plt.ylabel("體重(單位:公斤)")
-plt.title("動物體重 使用中文")
+x = ["鼠", "牛", "虎", "兔", "龍"]
+s = [3, 48, 33, 8, -38]
+plt.barh(x, s, color="red")
 
 
 # 第三張圖
 plt.subplot(233)
 
-name = ["鼠", "牛", "虎", "兔", "龍"]
-weight = [3, 48, 33, 8, 38]
-
-plt.bar(name, weight, width=0.8, align="edge", color="r", ec="y", lw=2)
-
-plt.ylabel("體重(單位:公斤)")
-plt.title("動物體重 使用中文")
-
 
 # 第四張圖
 plt.subplot(234)
-
-x = ["第一季", "第二季", "第三季", "第四季"]
-s = [20000, 15000, 17000, -8000]
-plt.barh(x, s, color="red")
-plt.ylabel("季別")
-plt.xlabel("損益金額")
-plt.title("今年度營業獲利的概況")
 
 
 # 第五張圖
@@ -742,103 +713,82 @@ plt.bar(areas, data1, label="上半年")
 plt.bar(areas, data2, label="下半年", bottom=data1)
 plt.legend()
 
-
 plt.show()
-
-
+'''
 print("------------------------------------------------------------")  # 60個
 
+plt.figure(
+    num="bar 集合 8 new 1",
+    figsize=(12, 8),
+    dpi=100,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
 
-print("Bar圖")
-
-money = [1.5e5, 2.5e6, 5.5e6, 2.0e7]
-
-
-def millions(x, pos):
-    #The two args are the value and tick position.
-    return "${:1.1f}M".format(x * 1e-6)
-
-
-fig, ax = plt.subplots()
-# Use automatic FuncFormatter creation
-ax.yaxis.set_major_formatter(millions)
-ax.bar(["Bill", "Fred", "Mary", "Sue"], money, label="data1", align="edge")
-ax.set_title("Bar chart")
-ax.set_xlabel("Name")
-ax.set_ylabel("Money")
-ax.legend(loc=2)
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
+# 第一張圖
+plt.subplot(231)
 
 def addlabels3(x, y):
     for i in range(len(x)):
         plt.text(i, y[i], y[i])
 
 
-students = ["約翰", "瑪莉", "麥可", "大衛"]
-chin_scores = [78, 67, 90, 81]
-math_scores = [85, 72, 94, 70]
+animals = ["鼠", "牛", "虎", "兔"]
+weights1 = [3, 48, 33, 8]
+weights2 = [3, 48, 33, 8]
+
 # 產生總分list，總分相加
-all_scores = list(np.array(chin_scores) + np.array(math_scores))
-# 柱寬度
-width = 0.35
-# 預設大小為6.4inches*4.8inches, 80dpi
-# 指定 寬6.4inches, 高4.8inches, 160dpi
-fig, ax = plt.subplots(figsize=(6.4, 4.8), dpi=160)
-ax.set_ylim(0, 200)
+weights_sum = list(np.array(weights1) + np.array(weights2))
+
+width = 0.35  # 柱寬度
+
+plt.ylim(0, 100)
 # 柱狀圖下層
-ax.bar(students, chin_scores, width, label="國文")
+plt.bar(animals, weights1, width, label="體重1")
 # 柱狀圖上層
-ax.bar(students, math_scores, width, bottom=chin_scores, label="數學")
-addlabels3(students, chin_scores)
-addlabels3(students, all_scores)
-ax.set_xlabel("學生")
-ax.set_ylabel("總分")
-ax.set_title("分數統計圖(累計)")
-ax.legend()
+plt.bar(animals, weights2, width, bottom=weights1, label="體重2")
+addlabels3(animals, weights1)
+addlabels3(animals, weights_sum)
+plt.ylabel("體重")
+plt.title("體重統計圖(累計)")
+plt.legend()
 
-plt.show()
 
-print("------------------------------------------------------------")  # 60個
 
+# 第二張圖
+plt.subplot(232)
 
 def addlabels4(x, y):
     for i in range(len(x)):
         plt.text(i, y[i], y[i])
 
 
-students = ["約翰", "瑪莉", "麥可", "大衛"]
-chin_scores = [78, 67, 90, 81]
-math_scores = [85, 72, 94, 70]
+animals = ["鼠", "牛", "虎", "兔"]
+weights1 = [3, 48, 33, 8]
+weights2 = [3, 48, 33, 8]
 # 產生總分list，總分相加
-all_scores = list(np.array(chin_scores) + np.array(math_scores))
-# 柱寬度
-width = 0.35
-# 預設大小為6.4inches*4.8inches, 80dpi
-# 指定 寬6.4inches, 高4.8inches, 160dpi
-fig, ax = plt.subplots(figsize=(6.4, 4.8), dpi=160)
-ax.set_ylim(0, 200)
+weights_sum = list(np.array(weights1) + np.array(weights2))
+
+width = 0.35  # 柱寬度
+
+plt.ylim(0, 100)
 # 柱狀圖下層
-ax.bar(students, chin_scores, width, label="國文")
+plt.bar(animals, weights1, width, label="體重1")
 # 柱狀圖上層
-ax.bar(students, math_scores, width, bottom=chin_scores, label="數學")
-addlabels4(students, chin_scores)
-addlabels4(students, all_scores)
-# 縮小次圖比例為原來的80%
-box = ax.get_position()
-ax.set_position([box.x0, box.y0, box.width * 0.8, box.height])
+plt.bar(animals, weights2, width, bottom=weights1, label="體重2")
+addlabels4(animals, weights1)
+addlabels4(animals, weights_sum)
 
 # 將圖例說明對齊右邊中間
-ax.legend(loc="center left", bbox_to_anchor=(1, 0.5))
+plt.legend(loc="center left", bbox_to_anchor=(1, 0.5))
 
-ax.set_title("分數累計圖")
+plt.title("體重累計圖")
 
-plt.show()
 
-print("------------------------------------------------------------")  # 60個
+# 第三張圖
+plt.subplot(233)
 
 AAA = [3367, 4120, 5539]                   # AAA線條
 BBB = [4000, 3590, 4423]                    # BBB線條
@@ -846,8 +796,8 @@ CCC = [5200, 4930, 5350]                  # CCC線條
 
 X = np.arange(len(AAA))
 labels = ["2023年","2024年","2025年"]       # 年度刻度標籤
-fig = plt.figure()
-ax = fig.add_axes([0.15,0.15,0.7,0.7])
+#fig = plt.figure()
+#ax = fig.add_axes([0.15,0.15,0.7,0.7])
 barW = 0.22                                 # 長條圖寬度
 
 """
@@ -865,9 +815,9 @@ plt.ylabel("數量", fontsize=10, color='b')
 plt.legend()                                # 繪製圖例
 plt.xticks(X+barW, labels)                  # 加註年度標籤
 
-plt.show()
 
-print("------------------------------------------------------------")  # 60個
+# 第四張圖
+plt.subplot(234)
 
 AAA = [3367, 4120, 5539]                       # AAA線條
 BBB = [4000, 3590, 4423]                        # BBB線條
@@ -885,9 +835,9 @@ plt.xlabel("年度", fontsize=10, color='b')
 plt.ylabel("數量", fontsize=10, color='b')
 plt.legend()
 
-plt.show()
 
-print("------------------------------------------------------------")  # 60個
+# 第五張圖
+plt.subplot(235)
 
 AAA = [3367, 4120, 5539]                   # AAA線條
 BBB = [4000, 3590, 4423]                    # BBB線條
@@ -895,8 +845,8 @@ CCC = [5200, 4930, 5350]                  # CCC線條
 
 X = np.arange(len(AAA))
 labels = ["2023年","2024年","2025年"]       # 年度刻度標籤
-fig = plt.figure()
-ax = fig.add_axes([0.15,0.15,0.7,0.7])
+#fig = plt.figure()
+#ax = fig.add_axes([0.15,0.15,0.7,0.7])
 barH = 0.25                                 # 橫條圖高度
 
 plt.barh(X+0.00,AAA,color='r',height=barH,label='AAA')
@@ -910,9 +860,9 @@ plt.legend()                                 # 繪製圖例
 
 plt.yticks(X+barH, labels)                   # 加註年度標籤
 
-plt.show()
 
-print("------------------------------------------------------------")  # 60個
+# 第六張圖
+plt.subplot(236)
 
 AAA = [3367, 4120, 5539]                   # AAA線條
 BBB = [4000, 3590, 4423]                    # BBB線條
@@ -935,6 +885,20 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
+
+plt.figure(
+    num="bar 集合 8 new 2",
+    figsize=(12, 8),
+    dpi=100,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
+
+# 第一張圖
+plt.subplot(231)
+
 revenue = [300, 320, 400, 350]
 cost = [250, 280, 310, 290]
 quarter = ['Q1','Q2','Q3','Q4']
@@ -948,6 +912,34 @@ plt.xlabel("收入與支出", fontsize=10, color='b')
 plt.ylabel("季度", fontsize=10, color='b')
 
 plt.legend()
+
+
+# 第二張圖
+plt.subplot(232)
+
+
+
+# 第三張圖
+plt.subplot(233)
+
+
+# 第四張圖
+plt.subplot(234)
+
+
+# 第五張圖
+plt.subplot(235)
+
+
+
+# 第六張圖
+plt.subplot(236)
+
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
 
 plt.show()
 
@@ -1015,9 +1007,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-
-
-
 n = 10
 x = [i for i in range(0, n + 1)]  # 長條圖x軸座標
 y = x
@@ -1031,7 +1020,6 @@ x = np.arange(1, 6)
 plt.bar(x - 0.4, [3, 10, 8, 12, 6], width=0.4, ec="none", fc="#e63946")
 plt.bar(x, [6, 3, 12, 5, 8], width=0.4, ec="none", fc="#7fb069")
 
-
 #-----------------
 
 
@@ -1039,7 +1027,6 @@ plt.bar(x, [6, 3, 12, 5, 8], width=0.4, ec="none", fc="#7fb069")
 
 
 #-----------------
-
 
 
 # 雙向的長條圖
@@ -1058,24 +1045,17 @@ y = [12, 41, 32, 36, 21]
 labels = ["鼠", "牛", "虎", "兔", "龍"]
 plt.bar(x, y, tick_label=labels)
 
-
 #-----------------
 
 
 #-----------------
-
-
-
-
-
-
 
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
-
+sys.exit()
 
 
 
@@ -1127,20 +1107,29 @@ plt.ylim(0, 100)
 
 
 
-
-#num="bar 集合 1",
-
-
-
 cc = np.arange(0.6, 5)
 print(cc)
 
-
 # 預設大小為6.4inches*4.8inches, 80dpi
 # 指定 寬6.4inches, 高4.8inches, 160dpi
 #fig, ax = plt.subplots(figsize=(6.4, 4.8), dpi=160)
 
 
-# 預設大小為6.4inches*4.8inches, 80dpi
-# 指定 寬6.4inches, 高4.8inches, 160dpi
-#fig, ax = plt.subplots(figsize=(6.4, 4.8), dpi=160)
+money = [1.5e6, 2.5e6, 5.5e6, 7.0e6]
+
+
+def millions(x, pos):
+    #The two args are the value and tick position.
+    return "${:1.1f}M".format(x * 1e-6)
+
+
+fig, ax = plt.subplots()
+# Use automatic FuncFormatter creation
+ax.yaxis.set_major_formatter(millions)
+ax.bar(["Bill", "Fred", "Mary", "Sue"], money, label="data1", align="edge")
+ax.set_title("Bar chart")
+ax.set_xlabel("Name")
+ax.set_ylabel("Money")
+ax.legend(loc=2)
+
+plt.show()

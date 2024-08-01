@@ -49,6 +49,97 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 
 
+# plotyy
+
+#新竹市平均高溫 °C
+temperature_high = [
+19.1,
+19.4,
+21.6,
+25.6,
+28.9,
+31.5,
+33.2,
+32.8,
+31.2,
+28,
+25.1,
+21.1,
+26.5]
+
+#新竹市日均氣溫 °C
+temperature_average = [
+15.7,
+16,
+18,
+21.9,
+25.2,
+27.9,
+29.3,
+28.9,
+27.3,
+24.4,
+21.5,
+17.7,
+22.8]
+
+#新竹市平均低溫 °C
+temperature_low = [
+13.1,
+13.4,
+15.2,
+18.9,
+22.2,
+24.9,
+26,
+25.8,
+24.4,
+21.8,
+18.8,
+15.1,
+20]
+
+#新竹市平均降雨量 mm
+rainfall_average = [
+75.7,
+123,
+159.8,
+161.9,
+249,
+252,
+120.2,
+197.1,
+174.5,
+53.6,
+51.1,
+57.7,
+1675.6]
+
+print(len(temperature_high))
+print(len(temperature_average))
+print(len(temperature_low))
+print(len(rainfall_average))
+
+x = np.arange(0, 12, 1)
+print(len(x))
+print(x)
+
+fig, ax1 = plt.subplots()
+
+ax2 = ax1.twinx()  # mirror the ax1
+ax1.plot(x, temperature_high[:12], "r-")
+ax1.plot(x, temperature_average[:12], "g-")
+ax1.plot(x, temperature_low[:12], "b-")
+
+ax2.plot(x, rainfall_average[:12], "yellow")
+
+ax1.set_xlabel("月份")
+ax1.set_ylabel("氣溫")
+ax2.set_ylabel("雨量")
+
+plt.show()
+
+
 print("------------------------------------------------------------")  # 60個
 
 
