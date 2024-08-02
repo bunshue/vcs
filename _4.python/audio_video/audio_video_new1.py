@@ -13,8 +13,8 @@ from pydub import AudioSegment
 
 print('使用 ffmpeg.exe 將 .wav 轉成 .mp3')
 
-wav_filename = 'test_wave.wav'
-mp3_filename = 'test_wave.mp3'
+wav_filename = '老北京.wav'
+mp3_filename = '老北京.mp3'
 
 # 讀取.wav文件
 wav_audio = AudioSegment.from_wav(wav_filename)
@@ -74,11 +74,13 @@ with sr.Microphone() as source:
 
 """
 print("------------------------------------------------------------")  # 60個
+
+
 """
 #很多mp3不能播放
 
 # fail
-#filename = "C:/_git/vcs/_1.data/______test_files1/_mp3/02 渡り鳥仁義(1984.07.01-候鳥仁義).mp3"
+filename = "C:/_git/vcs/_1.data/______test_files1/_mp3/02 渡り鳥仁義(1984.07.01-候鳥仁義).mp3"
 
 # ok
 filename = "C:/_git/vcs/_1.data/______test_files1/_mp3/aaaa.mp3"
@@ -86,20 +88,10 @@ filename = "C:/_git/vcs/_1.data/______test_files1/_mp3/aaaa.mp3"
 import playsound
 playsound.playsound(filename, block=True)
 """
-print("------------------------------------------------------------")  # 60個
-
-from mutagen.mp3 import MP3
-import datetime
-
-filename = "C:/_git/vcs/_1.data/______test_files1/_mp3/02 渡り鳥仁義(1984.07.01-候鳥仁義).mp3"
-
-audio = MP3(filename)             #載入檔案
-sec = audio.info.length         #播放時間（秒）
-timestr = str(datetime.timedelta(seconds=sec))  #轉換成時分秒格式
-print("播放時間=",timestr)
 
 print("------------------------------------------------------------")  # 60個
 
+print('使用 cv2 取得一個avi檔的播放時間')
 import cv2
 import datetime
 
@@ -190,7 +182,7 @@ def findfiles(infolder):
 #【執行】
 msg = findfiles(infolder)
 print(msg)
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 """ fail
@@ -423,12 +415,12 @@ print("------------------------------------------------------------")  # 60個
 聲音轉字幕
 
 """
-
+'''
 import sys
 
 print("------------------------------------------------------------")  # 60個
 
-"""
+
 #影片轉wav, 但是要跑很久
 
 video_filename = 'C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4'
@@ -439,7 +431,8 @@ audio1.write_audiofile('老北京22222.wav')
 
 print('ok')
 
-"""
+sys.exit()
+
 print("------------------------------------------------------------")  # 60個
 
 

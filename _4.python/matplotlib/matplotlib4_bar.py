@@ -20,7 +20,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 plt.figure(
     num="bar 集合 1",
     figsize=(12, 8),
@@ -482,6 +482,21 @@ plt.barh(x, s, color="red")
 # 第三張圖
 plt.subplot(233)
 
+revenue = [300, 320, 400, 350]
+cost = [250, 280, 310, 290]
+quarter = ['Q1','Q2','Q3','Q4']
+
+barH = 0.5
+plt.barh(quarter,revenue,color='g',height=barH,label='收入')
+plt.barh(quarter,-np.array(cost),color='m',height=barH,label='支出')
+
+plt.title("公司收支表", fontsize=16, color='b')
+plt.xlabel("收入與支出", fontsize=10, color='b')
+plt.ylabel("季度", fontsize=10, color='b')
+
+plt.legend()
+
+
 
 # 第四張圖
 plt.subplot(234)
@@ -607,10 +622,9 @@ plt.subplot(236)
 
 plt.show()
 
-
 print("------------------------------------------------------------")  # 60個
 plt.figure(
-    num="bar 集合 7 累計",
+    num="bar 集合 7 堆疊圖 疊加長條圖",
     figsize=(12, 8),
     dpi=100,
     facecolor="whitesmoke",
@@ -630,43 +644,44 @@ plt.subplot(231)
 
 x = ["鼠", "牛", "虎", "兔", "龍"]
 y1 = [3, 48, 33, 8, 38]
-y2 = [10, 32, 25, 15, 30]
+y2 = [3, 48, 33, 8, 38]
 
 # 將兩條長條圖繪製出來，其中第二條 y2 的 y 軸基底座標是建立在 y1 上
 
 plt.bar(x, y1, width=0.5, label="第一群")
 plt.bar(x, y2, width=0.5, bottom=y1, label="第二群")
-
 plt.legend()
+
 
 # 第二張圖
 plt.subplot(232)
 
 # 繪製堆疊長條圖
-x = [1, 2, 3, 4, 5, 6]
-y1 = [12, 41, 32, 36, 21, 17]
-y2 = [43, 1, 6, 17, 17, 9]
+x = [1, 2, 3, 4, 5]
+y1 = [3, 48, 33, 8, 38]
+y2 = [3, 48, 33, 8, 38]
 
-labels = ["Apple", "Orange", "Banana", "Pineapple", "Kiwifruit", "Strawberry"]
+labels = ["鼠", "牛", "虎", "兔", "龍"]
 plt.bar(x, y1, tick_label=labels)  # 繪製 y1 長條圖
 plt.bar(x, y2, tick_label=labels, bottom=y1)  # 繪製 y2 長條圖
 
-plt.legend(("y1", "y2"))  # 顯示圖例來識別 y1 與 y2
+plt.legend(("第一群", "第二群"))  # 顯示圖例來識別 y1 與 y2
 
 
 # 第三張圖
 plt.subplot(233)
 
 x = [1, 2, 3, 4, 5]
+
 # 疊加型的資料
-A = np.random.randint(2, 15, 5)
-B = np.random.randint(2, 15, 5)
-C = np.random.randint(2, 15, 5)
+y1 = [3, 48, 33, 8, 38]
+y2 = [3, 48, 33, 8, 38]
+y3 = [3, 48, 33, 8, 38]
 
-plt.bar(x, A, fc="#e63946", ec="none")
-plt.bar(x, B, fc="#7fb069", ec="none", bottom=A)
-plt.bar(x, C, fc="#e55934", ec="none", bottom=A + B)
-
+plt.bar(x, y1, fc="#e63946", ec="none")
+plt.bar(x, y2, fc="#7fb069", ec="none", bottom=y1)
+plt.bar(x, y3, fc="#e55934", ec="none", bottom=np.add(y1, y2))
+plt.legend(("第一群", "第二群", "第三群"))  # 顯示圖例來識別 y1 y2 y3
 
 # 第四張圖
 plt.subplot(234)
@@ -691,44 +706,6 @@ for x, y in zip(range(len(student_all)), student_all.values()):
 
 # 第五張圖
 plt.subplot(235)
-
-# 堆疊圖
-y1 = (20, 35, 30, 35, 27)
-y2 = (25, 32, 34, 20, 25)
-x = np.arange(len(y1))
-width = 0.35
-p1 = plt.bar(x, y1, width)
-p2 = plt.bar(x, y2, width, bottom=y1)  # 堆疊圖
-
-
-# 第六張圖
-plt.subplot(236)
-
-# bar累計
-
-areas = ["北部", "中部", "南部", "東部"]
-data1 = [800000, 580000, 640000, 420000]
-data2 = [750000, 460000, 680000, 340000]
-plt.bar(areas, data1, label="上半年")
-plt.bar(areas, data2, label="下半年", bottom=data1)
-plt.legend()
-
-plt.show()
-'''
-print("------------------------------------------------------------")  # 60個
-
-plt.figure(
-    num="bar 集合 8 new 1",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
-
-# 第一張圖
-plt.subplot(231)
 
 def addlabels3(x, y):
     for i in range(len(x)):
@@ -755,10 +732,8 @@ plt.ylabel("體重")
 plt.title("體重統計圖(累計)")
 plt.legend()
 
-
-
-# 第二張圖
-plt.subplot(232)
+# 第六張圖
+plt.subplot(236)
 
 def addlabels4(x, y):
     for i in range(len(x)):
@@ -786,9 +761,22 @@ plt.legend(loc="center left", bbox_to_anchor=(1, 0.5))
 
 plt.title("體重累計圖")
 
+plt.show()
 
-# 第三張圖
-plt.subplot(233)
+print("------------------------------------------------------------")  # 60個
+
+plt.figure(
+    num="bar 集合 8 new 1",
+    figsize=(12, 8),
+    dpi=100,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
+
+# 第一張圖
+plt.subplot(231)
 
 AAA = [3367, 4120, 5539]                   # AAA線條
 BBB = [4000, 3590, 4423]                    # BBB線條
@@ -816,8 +804,9 @@ plt.legend()                                # 繪製圖例
 plt.xticks(X+barW, labels)                  # 加註年度標籤
 
 
-# 第四張圖
-plt.subplot(234)
+
+# 第二張圖
+plt.subplot(232)
 
 AAA = [3367, 4120, 5539]                       # AAA線條
 BBB = [4000, 3590, 4423]                        # BBB線條
@@ -836,8 +825,8 @@ plt.ylabel("數量", fontsize=10, color='b')
 plt.legend()
 
 
-# 第五張圖
-plt.subplot(235)
+# 第三張圖
+plt.subplot(233)
 
 AAA = [3367, 4120, 5539]                   # AAA線條
 BBB = [4000, 3590, 4423]                    # BBB線條
@@ -861,8 +850,8 @@ plt.legend()                                 # 繪製圖例
 plt.yticks(X+barH, labels)                   # 加註年度標籤
 
 
-# 第六張圖
-plt.subplot(236)
+# 第四張圖
+plt.subplot(234)
 
 AAA = [3367, 4120, 5539]                   # AAA線條
 BBB = [4000, 3590, 4423]                    # BBB線條
@@ -881,6 +870,16 @@ plt.xlabel("數量", fontsize=12, color='b')
 plt.ylabel("年度", fontsize=12, color='b')
 plt.legend()
 
+
+# 第五張圖
+plt.subplot(235)
+
+
+
+# 第六張圖
+plt.subplot(236)
+
+
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
@@ -898,20 +897,6 @@ plt.figure(
 
 # 第一張圖
 plt.subplot(231)
-
-revenue = [300, 320, 400, 350]
-cost = [250, 280, 310, 290]
-quarter = ['Q1','Q2','Q3','Q4']
-
-barH = 0.5
-plt.barh(quarter,revenue,color='g',height=barH,label='收入')
-plt.barh(quarter,-np.array(cost),color='m',height=barH,label='支出')
-
-plt.title("公司收支表", fontsize=16, color='b')
-plt.xlabel("收入與支出", fontsize=10, color='b')
-plt.ylabel("季度", fontsize=10, color='b')
-
-plt.legend()
 
 
 # 第二張圖
