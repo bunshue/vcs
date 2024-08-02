@@ -687,6 +687,68 @@ contour = mlab.contour3d(x, y, z, f, contours=[0], color=(1, 0, 0))
 
 print("------------------------------------------------------------")  # 60個
 
+# 新增圖表 並 設定屬性
+plt.figure(
+    figsize=[12, 8],
+    dpi=100,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
+plt.plot([1, 2, 3])
+
+plt.axis("off")  # 隱藏坐標軸
+_ = plt.title("image file", size="x-large", y=-0.1)  # 顯示圖片描述
+
+plt.axis("off")
+plt.title("Picture Title", size=30, x=0.0, y=0.0)
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+# 散點圖
+
+N = 150
+# 產生 150 個 0~2 之間的隨機半徑
+r = 2 * np.random.rand(N)
+# 產生 150 個 0~2pi 之間的隨機弧度
+theta = 2 * np.pi * np.random.rand(N)
+# 區域大小與半徑成正比
+area = 50 * r**2
+# 顏色由弧度決定
+colors = theta
+
+ax = plt.subplot(211)
+c = ax.scatter(theta, r, c=colors, s=area, cmap="hsv", alpha=0.75)
+
+# 畫出極座標圖，此時的 x 為弧度，y 為半徑
+ax = plt.subplot(212, projection="polar")
+c = ax.scatter(theta, r, c=colors, s=area, cmap="hsv", alpha=0.75)
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+N = 50  # 色彩數列的點數
+colorused = ["b", "c", "g", "k", "m", "r", "y"]  # 定義顏色
+colors = []  # 建立色彩數列
+for i in range(N):  # 隨機設定顏色
+    colors.append(np.random.choice(colorused))
+x = np.linspace(0.0, 2 * np.pi, N)  # 建立 50 個點
+y = np.sin(x)
+fig = plt.figure()  # 建立畫布物件
+ax = fig.add_subplot()  # 建立子圖(或稱軸物件)ax
+ax.scatter(x, y, c=colors, marker="*")  # 繪製 sin
+ax.set_title("建立畫布與軸物件,使用OO API繪圖", fontsize=16)
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 

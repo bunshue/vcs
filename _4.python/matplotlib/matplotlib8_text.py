@@ -1,6 +1,6 @@
 # text 集合
 
-import matplotlib
+#import matplotlib
 
 print("------------------------------------------------------------")  # 60個
 
@@ -23,7 +23,6 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
-#          編號                          圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
 plt.figure(
     num="text 集合 1",
     figsize=(12, 8),
@@ -34,8 +33,7 @@ plt.figure(
     frameon=True,
 )
 
-
-# 第一張圖
+print("------------------------------------------------------------")  # 60個
 plt.subplot(231)
 
 squares = [0, 1, 4, 9, 16, 25, 36, 49, 64]
@@ -47,8 +45,7 @@ plt.plot(x, y, "bo")  # 輸出位智繪製藍色的點
 plt.text(x, y, "把字寫在這裡")  # 輸出字串
 plt.grid()
 
-
-# 第二張圖
+print("------------------------------------------------------------")  # 60個
 plt.subplot(232)
 
 plt.axis([0, 10, 0, 10])
@@ -70,8 +67,8 @@ plt.text(6, 4, s, c="g", ha="left", rotation=15, wrap=True)
 plt.text(5, 4, s, c="m", ha="right", rotation=-15, wrap=True)
 plt.text(-1, 1, s, c="y", ha="left", rotation=-15, wrap=True)
 
+print("------------------------------------------------------------")  # 60個
 
-# 第三張圖
 plt.subplot(233)
 
 plt.axis([0, 10, 0, 10])
@@ -84,8 +81,8 @@ plt.text(6, 4, s2, c="g", ha="left", rotation=15, wrap=True)
 plt.text(5, 4, s2, c="m", ha="right", rotation=-15, wrap=True)
 plt.text(-1, 1, s2, c="y", ha="left", rotation=-15, wrap=True)
 
+print("------------------------------------------------------------")  # 60個
 
-# 第四張圖
 plt.subplot(234)
 
 s1 = "歡迎來到美國"
@@ -118,7 +115,8 @@ plt.text(
     ),
 )
 
-# 第五張圖
+print("------------------------------------------------------------")  # 60個
+
 plt.subplot(235)
 
 s = "歡迎來到美國"
@@ -215,7 +213,8 @@ plt.text(
     ),
 )
 
-# 第六張圖
+print("------------------------------------------------------------")  # 60個
+
 plt.subplot(236)
 
 my_kwargs = dict(ha="center", va="center", fontsize=50, c="b")
@@ -225,7 +224,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#          編號                          圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
 plt.figure(
     num="text 集合 2",
     figsize=(12, 8),
@@ -236,8 +234,7 @@ plt.figure(
     frameon=True,
 )
 
-
-# 第一張圖
+print("------------------------------------------------------------")  # 60個
 plt.subplot(231)
 
 # 放置文字
@@ -246,13 +243,15 @@ plt.text(0.4, 0.6, r"$\int_0^5 f(x)\mathrm{d}x$", fontsize=20, color="blue")
 plt.text(0.4, 0.3, r"$\sum_{n=1}^\infty\frac{-e^{2\pi}}{3^n}!$", fontsize=20)
 plt.text(0.4, 0.1, "sin(x)", fontsize=20)  # 輸出公式
 
-# 第二張圖
+print("------------------------------------------------------------")  # 60個
+
 plt.subplot(232)
 
 my_kwargs = dict(ha="center", va="center", fontsize=50, c="b")
 plt.text(0.5, 0.5, "歡迎來到美國", **my_kwargs)
 
-# 第三張圖
+print("------------------------------------------------------------")  # 60個
+
 plt.subplot(233)
 
 filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
@@ -272,8 +271,8 @@ imgplot = plt.imshow(image)
 plt.plot(t, t, "r--")
 plt.text(70, 10, "牡丹亭")
 
+print("------------------------------------------------------------")  # 60個
 
-# 第四張圖
 plt.subplot(234)
 
 print("寫字")
@@ -286,7 +285,8 @@ text = "歡迎來到美國"
 plt.text(x_st, y_st, text, **my_kwargs)
 plt.plot(x_st, y_st, "r-o")  # 畫基準點
 
-# 第五張圖
+print("------------------------------------------------------------")  # 60個
+
 plt.subplot(235)
 
 print("從windows字型中找出可以顯示的中文字型")
@@ -300,7 +300,8 @@ plt.rcParams["axes.unicode_minus"] = False
 
 plt.text(0.5, 0.5, "測試一下")
 
-# 第六張圖
+print("------------------------------------------------------------")  # 60個
+
 plt.subplot(236)
 
 
@@ -326,6 +327,28 @@ plt.ylim(-1.5, 1.5)
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
+
+plt.figure(
+    num="text 集合 1",
+    figsize=(12, 8),
+    dpi=100,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
+
+plt.text(0.1, 0.2, "正常顯示中文字", fontsize=20, color="b")
+
+plt.text(0.1, 0.6, "半透明中文字", alpha=0.3, size=25, ha="center", va="center")
+
+plt.show()
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")

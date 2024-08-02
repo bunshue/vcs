@@ -51,13 +51,13 @@ print(f"圖檔高度   = {h}")
 print(f"圖檔寬度   = {w}")
 print(f"圖檔通道數 = {c}")
 
-# 第一張圖
+print("------------------------------------------------------------")  # 60個
 plt.subplot(231)
 
 plt.imshow(image)
 plt.title("顯示圖片")
 
-# 第二張圖
+print("------------------------------------------------------------")  # 60個
 plt.subplot(232)
 
 # 裁剪圖片 plt
@@ -68,7 +68,7 @@ cut_img = image[y_u:y_d, x_l:x_r]
 plt.imshow(cut_img)
 plt.title("顯示裁剪圖片")
 
-# 第三張圖
+print("------------------------------------------------------------")  # 60個
 plt.subplot(233)
 
 filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
@@ -82,14 +82,14 @@ plt.contour(image, origin="image")
 plt.axis("equal")
 plt.title("圖像輪廓圖")
 
-# 第四張圖
+print("------------------------------------------------------------")  # 60個
 plt.subplot(234)
 
 
-# 第五張圖
+print("------------------------------------------------------------")  # 60個
 plt.subplot(235)
 
-# 第六張圖
+print("------------------------------------------------------------")  # 60個
 plt.subplot(236)
 
 
@@ -114,27 +114,27 @@ plt.figure(
 image = np.asarray(Image.open(filename))
 # print(repr(image))
 
-# 第一張圖
+print("------------------------------------------------------------")  # 60個
 plt.subplot(231)
 
 # 原圖(灰階)
 imgplot = plt.imshow(image)
 
-# 第二張圖
+print("------------------------------------------------------------")  # 60個
 plt.subplot(232)
 
 # 1 偽色彩
 lum_img = image[:, :, 0]
 plt.imshow(lum_img)
 
-# 第三張圖
+print("------------------------------------------------------------")  # 60個
 plt.subplot(233)
 
 # 2 偽色彩
 plt.imshow(lum_img, cmap="hot")
 
 
-# 第四張圖
+print("------------------------------------------------------------")  # 60個
 plt.subplot(234)
 
 
@@ -143,7 +143,7 @@ imgplot = plt.imshow(lum_img)
 imgplot.set_cmap("nipy_spectral")
 
 
-# 第五張圖
+print("------------------------------------------------------------")  # 60個
 plt.subplot(235)
 
 # 4 Color scale reference
@@ -151,7 +151,7 @@ imgplot = plt.imshow(lum_img)
 plt.colorbar()
 
 
-# 第六張圖
+print("------------------------------------------------------------")  # 60個
 plt.subplot(236)
 
 
@@ -242,7 +242,7 @@ plt.figure(
     frameon=True,
 )
 
-# 第一張圖
+print("------------------------------------------------------------")  # 60個
 plt.subplot(231)
 
 print("二維 sinc 函數")
@@ -264,29 +264,25 @@ sinc2d = np.outer(np.sin(x1), np.sin(x2)) / np.outer(x1, x2)
 plt.imshow(sinc2d)
 plt.title("二維 sinc 函數")
 
-# 第二~三張圖
+
+print("------------------------------------------------------------")  # 60個
+plt.subplot(232)
 
 x = np.linspace(-2 * np.pi, 2 * np.pi, 100)
 X, Y = np.meshgrid(x, x)
 zz = np.sinc(np.sqrt((X - 1) ** 2 + (Y - 1) ** 2))
 
-# 第二張圖
-plt.subplot(232)
-
 plt.imshow(zz)
 plt.title("default margins")
 
-
-# 第三張圖
-plt.subplot(233)
-
+"""
 plt.imshow(zz)
 plt.margins(0.2)
 plt.title("margins(0.2)")
+"""
 
-
-# 第四張圖
-plt.subplot(234)
+print("------------------------------------------------------------")  # 60個
+plt.subplot(233)
 
 delta = 0.025
 x = y = np.arange(-3.0, 3.0, delta)
@@ -305,17 +301,41 @@ fig.savefig(filename)
 print('已存圖' + filename)
 """
 
-# 第五張圖
-plt.subplot(235)
+
+
+print("------------------------------------------------------------")  # 60個
+plt.subplot(234)
 
 image = np.array([[0, 1, 2, 3], [4, 5, 6, 7], [8, 9, 10, 11], [12, 13, 14, 15]])
 
 plt.imshow(image, cmap="Blues")
 plt.colorbar()
 
-# 第六張圖
+
+print("------------------------------------------------------------")  # 60個
+plt.subplot(235)
+
+img = np.array([[0, 1, 2, 3, 4, 5],
+                [6, 7, 8, 9, 10, 11],
+                [12, 13, 14, 15, 16, 18],
+                [18, 19, 20, 21, 22, 23],
+                [24, 25, 26, 27, 28, 29],
+                [30, 31, 32, 33, 34, 35]])               
+plt.imshow(img, cmap='Blues')
+plt.colorbar()
+
+
+print("------------------------------------------------------------")  # 60個
 plt.subplot(236)
 
+img = np.array([[0, 1, 2, 3, 4, 5],
+                [6, 7, 8, 9, 10, 11],
+                [12, 13, 14, 15, 16, 18],
+                [18, 19, 20, 21, 22, 23],
+                [24, 25, 26, 27, 28, 29],
+                [30, 31, 32, 33, 34, 35]])               
+plt.imshow(img, cmap='Blues', origin='lower')
+plt.colorbar()
 
 plt.tight_layout()
 plt.show()
@@ -332,7 +352,7 @@ plt.figure(
     frameon=True,
 )
 
-# 第一張圖
+print("------------------------------------------------------------")  # 60個
 plt.subplot(231)
 
 xmin, xmax, ymin, ymax = -2, 0.8, -1.5, 1.5
@@ -371,7 +391,7 @@ plt.imshow(
 plt.xlabel("Re(c)")
 plt.ylabel("Im(c)")
 
-# 第二張圖
+print("------------------------------------------------------------")  # 60個
 plt.subplot(232)
 
 xmin, xmax, ymin, ymax = -2, 0.8, -1.5, 1.5
@@ -407,11 +427,11 @@ plt.imshow(
 plt.xlabel("Re(c)")
 plt.ylabel("Im(c)")
 
-# 第三張圖
+print("------------------------------------------------------------")  # 60個
 plt.subplot(233)
 
 
-# 第四張圖
+print("------------------------------------------------------------")  # 60個
 plt.subplot(234)
 
 print("imshow 顯示 numpy 資料")
@@ -422,7 +442,7 @@ im = plt.imshow(arr, interpolation="none")
 
 plt.colorbar(im)
 
-# 第五張圖
+print("------------------------------------------------------------")  # 60個
 plt.subplot(235)
 
 from mpl_toolkits.axes_grid1 import make_axes_locatable
@@ -434,7 +454,7 @@ divider = make_axes_locatable(plt.gca())
 cax = divider.append_axes("right", "5%", pad="3%")
 plt.colorbar(im, cax=cax)
 
-# 第六張圖
+print("------------------------------------------------------------")  # 60個
 plt.subplot(236)
 
 """ outer 用法
@@ -458,7 +478,7 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 
 plt.figure(
-    num="imshow 集合 7 random 影像",
+    num="imshow 集合 7 random 影像 1",
     figsize=(12, 8),
     dpi=100,
     facecolor="whitesmoke",
@@ -469,7 +489,7 @@ plt.figure(
 
 plt.gray()  # 不使用顏色信息, 將圖像以灰階方式顯示
 
-# 第一張圖
+print("------------------------------------------------------------")  # 60個
 plt.subplot(231)
 
 print("建立一個random圖像 0 50 100 ... 255")
@@ -485,7 +505,7 @@ image = (
 plt.imshow(image)
 print(image)
 
-# 第二張圖
+print("------------------------------------------------------------")  # 60個
 plt.subplot(232)
 
 print("畫出 常態分布 二維 N X N")
@@ -494,7 +514,7 @@ image = np.random.randn(N, N)
 plt.imshow(image)
 print(image)
 
-# 第三張圖
+print("------------------------------------------------------------")  # 60個
 plt.subplot(233)
 
 image = np.random.random((100, 100))
@@ -505,7 +525,7 @@ plt.subplots_adjust(bottom=0.1, right=0.8, top=0.9)
 cax = plt.axes([0.85, 0.1, 0.075, 0.8])  # 設定位置
 plt.colorbar(cax=cax)
 
-# 第四張圖
+print("------------------------------------------------------------")  # 60個
 plt.subplot(234)
 
 x = np.linspace(start=-10, stop=10, num=101)
@@ -516,7 +536,7 @@ xx = x + 1j * x[:, np.newaxis]
 
 plt.imshow(np.abs(xx), extent=[-10, 10, -10, 10], cmap="gray")
 
-# 第五張圖
+print("------------------------------------------------------------")  # 60個
 plt.subplot(235)
 
 # Layer Images
@@ -550,12 +570,7 @@ im2 = plt.imshow(
     Z2, cmap=plt.cm.viridis, alpha=0.9, interpolation="bilinear", extent=extent
 )
 
-
-
-
-
-
-# 第六張圖
+print("------------------------------------------------------------")  # 60個
 plt.subplot(236)
 
 def func2(x, y):
@@ -581,6 +596,85 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 
 plt.figure(
+    num="imshow 集合 7 random 影像 2",
+    figsize=(12, 8),
+    dpi=100,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
+
+print("------------------------------------------------------------")  # 60個
+plt.subplot(231)
+
+data = np.random.random((10, 10))
+plt.imshow(data)
+plt.colorbar()
+
+
+print("------------------------------------------------------------")  # 60個
+plt.subplot(232)
+
+data = np.random.random((80, 80))
+plt.imshow(data, cmap='cool')
+#plt.imshow(data, cmap="hsv")
+plt.colorbar()
+
+
+print("------------------------------------------------------------")  # 60個
+plt.subplot(233)
+
+#四圖
+N = 4
+src = np.random.random((N,N,3))     # 隨機產生影像圖陣列資料
+
+print(src)
+print(src[:,:,0])
+print(src[:,:,1])
+print(src[:,:,2])
+
+plt.xticks(range(N))    # 繪製 x 軸刻度
+plt.yticks(range(N))    # 繪製 y 軸刻度
+plt.title('RGB色彩')
+plt.imshow(src)
+
+print("------------------------------------------------------------")  # 60個
+plt.subplot(234)
+
+r = src.copy()          # 複製影像色彩陣列
+r[:,:,[1,2]] = 0        # 保留紅色元素, 設定綠色和藍色元素是 0
+plt.xticks(range(N))    # 繪製 x 軸刻度
+plt.yticks([])          # 隱藏繪製 y 軸刻度
+plt.title('Red元素')
+plt.imshow(r)
+
+print("------------------------------------------------------------")  # 60個
+plt.subplot(235)
+
+g = src.copy()          # 複製影像色彩陣列
+g[:,:,[0,2]] = 0        # 保留綠色元素, 設定紅色和藍色元素是 0
+plt.xticks(range(N))    # 繪製 x 軸刻度
+plt.yticks([])          # 隱藏繪製 y 軸刻度
+plt.title('Green元素')
+plt.imshow(g)
+
+print("------------------------------------------------------------")  # 60個
+plt.subplot(236)
+
+b = src.copy()          # 複製影像色彩陣列
+b[:,:,[0,1]] = 0        # 保留藍色元素, 設定紅色和綠色元素是 0
+plt.xticks(range(N))    # 繪製 x 軸刻度
+plt.yticks([])          # 隱藏繪製 y 軸刻度
+plt.title('Blue元素')
+plt.imshow(b)
+
+plt.tight_layout()
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+plt.figure(
     num="imshow 集合 8 顯示圖片 簡單圖片處理",
     figsize=(12, 8),
     dpi=100,
@@ -591,48 +685,8 @@ plt.figure(
 )
 
 
-# 第一張圖
+print("------------------------------------------------------------")  # 60個
 plt.subplot(231)
-
-img = np.array([[0, 1, 2, 3, 4, 5],
-                [6, 7, 8, 9, 10, 11],
-                [12, 13, 14, 15, 16, 18],
-                [18, 19, 20, 21, 22, 23],
-                [24, 25, 26, 27, 28, 29],
-                [30, 31, 32, 33, 34, 35]])               
-plt.imshow(img, cmap='Blues')
-plt.colorbar()
-
-# 第二張圖
-plt.subplot(232)
-
-img = np.array([[0, 1, 2, 3, 4, 5],
-                [6, 7, 8, 9, 10, 11],
-                [12, 13, 14, 15, 16, 18],
-                [18, 19, 20, 21, 22, 23],
-                [24, 25, 26, 27, 28, 29],
-                [30, 31, 32, 33, 34, 35]])               
-plt.imshow(img, cmap='Blues', origin='lower')
-plt.colorbar()
-
-
-# 第三張圖
-plt.subplot(233)
-
-data = np.random.random((10, 10))
-plt.imshow(data)
-plt.colorbar()
-
-# 第四張圖
-plt.subplot(234)
-
-data = np.random.random((80, 80))
-plt.imshow(data, cmap='cool')
-#plt.imshow(data, cmap="hsv")
-plt.colorbar()
-
-# 第五張圖
-plt.subplot(235)
 
 x = np.linspace(0, 2 * np.pi, 100)
 y = np.linspace(0, 2 * np.pi, 100)
@@ -644,8 +698,9 @@ z = np.sin(X) + np.sin(Y)   # 建立影像
 plt.imshow(z)
 #plt.imshow(z,cmap='hsv')
 
-# 第六張圖
-plt.subplot(236)
+
+print("------------------------------------------------------------")  # 60個
+plt.subplot(232)
 
 N = 100
 x = np.linspace(-3.0, 3.0, N)
@@ -662,23 +717,13 @@ z2 = np.sin(X) + np.cos(Y)                        # 影像 2 公式
 plt.imshow(z2, cmap='jet', alpha=0.8,
            interpolation='bilinear',extent=extent)  # 影像 2
 
-plt.tight_layout()
-plt.show()
 
 print("------------------------------------------------------------")  # 60個
-
-plt.figure(
-    num="imshow 集合 1 顯示圖片 簡單圖片處理",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
+plt.subplot(233)
 
 
-plt.subplot(241)
+print("------------------------------------------------------------")  # 60個
+plt.subplot(234)
 
 N = 5
 data = np.reshape(np.linspace(0,1,N**2), (N,N)) # 建立 N x N 陣列
@@ -689,7 +734,8 @@ plt.xticks(range(N))                            # 繪製 x 軸刻度
 plt.yticks(range(N))                            # 繪製 y 軸刻度
 plt.title('使用預設插值',fontsize=12,color='b')
 
-plt.subplot(242)
+print("------------------------------------------------------------")  # 60個
+plt.subplot(235)
 
 # 相同陣列使用不同的插值法
 plt.imshow(data,interpolation='bicubic')
@@ -697,50 +743,14 @@ plt.xticks(range(N))                            # 繪製 x 軸刻度
 plt.yticks([])                                  # 隱藏繪製 y 軸刻度
 plt.title('使用 bicubic 插值',fontsize=12,color='b')
 
-plt.subplot(243)
+print("------------------------------------------------------------")  # 60個
+plt.subplot(236)
 
 plt.imshow(data,interpolation='hamming')
 plt.xticks(range(N))                            # 繪製 x 軸刻度
 plt.yticks([])                                  # 隱藏繪製 y 軸刻度
 plt.title('使用 hamming 插值',fontsize=12,color='b')
 
-N = 4
-src = np.random.random((N,N,3))     # 隨機產生影像圖陣列資料
-
-print(src)
-print(src[:,:,0])
-print(src[:,:,1])
-print(src[:,:,2])
-
-plt.subplot(245)
-plt.xticks(range(N))    # 繪製 x 軸刻度
-plt.yticks(range(N))    # 繪製 y 軸刻度
-plt.title('RGB色彩')
-plt.imshow(src)
-
-plt.subplot(246)
-r = src.copy()          # 複製影像色彩陣列
-r[:,:,[1,2]] = 0        # 保留紅色元素, 設定綠色和藍色元素是 0
-plt.xticks(range(N))    # 繪製 x 軸刻度
-plt.yticks([])          # 隱藏繪製 y 軸刻度
-plt.title('Red元素')
-plt.imshow(r)
-
-plt.subplot(247)
-g = src.copy()          # 複製影像色彩陣列
-g[:,:,[0,2]] = 0        # 保留綠色元素, 設定紅色和藍色元素是 0
-plt.xticks(range(N))    # 繪製 x 軸刻度
-plt.yticks([])          # 隱藏繪製 y 軸刻度
-plt.title('Green元素')
-plt.imshow(g)
-
-plt.subplot(248)
-b = src.copy()          # 複製影像色彩陣列
-b[:,:,[0,1]] = 0        # 保留藍色元素, 設定紅色和綠色元素是 0
-plt.xticks(range(N))    # 繪製 x 軸刻度
-plt.yticks([])          # 隱藏繪製 y 軸刻度
-plt.title('Blue元素')
-plt.imshow(b)
 
 plt.tight_layout()
 plt.show()
