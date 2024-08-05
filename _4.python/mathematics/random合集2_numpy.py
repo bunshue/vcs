@@ -693,6 +693,136 @@ print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
+cc = np.random.random(size = (3, 4))
+print(cc)
+
+cc = np.random.randint(10, size = (4, 3))  # 數值0~9, size : 4X3
+print('shape :', cc.shape)
+print(cc)
+
+"""
+print('round 將浮點值四舍五入到指定數目的小數點。')
+#np.round(a, decimals = 0, out = None)
+#decimals:要保留的小數點的個數。
+
+cc = np.round(a,decimals = 0)
+print(cc)
+
+cc = np.round(a,decimals = 1)
+print(cc)
+"""
+
+print('------------------------------------------------------------')	#60個
+
+"""
+np.gradient(f) 計算數組f中元素的梯度，當f為多維時，返回每個維度梯度
+梯度：連續值之間的變化率，即斜率
+XY坐標軸連續三個X坐標對應的Y軸值：a, b, c，其中，b的梯度是： (c‐a)/2
+"""
+na = np.random.randint(0, 50, (11))
+print(na)
+print(np.gradient(na))
+
+print('------------------------------------------------------------')	#60個
+
+#建立陣列
+
+cc = np.array([1, 2, 3])
+print(cc)
+
+print('不固定亂數種子')
+X = np.random.randn(5)
+Y = np.random.randn(5)
+
+print('X:', X)
+print('Y:', Y)
+
+print('固定亂數種子')
+np.random.seed(0)
+X = np.random.randn(5)
+
+np.random.seed(0)
+Y = np.random.randn(5)
+
+print('X (seed=0):', X)
+print('Y (seed=0):', Y)
+
+#X: [-0.89002049  0.30911242 -0.69646098 -0.68680865  0.54940027]
+#Y: [-0.11053683  0.81934032 -1.48607749 -1.10757407  0.24476998]
+
+#X (seed=0): [1.76405235 0.40015721 0.97873798 2.2408932  1.86755799]
+#Y (seed=0): [1.76405235 0.40015721 0.97873798 2.2408932  1.86755799]
+
+print('------------------------------------------------------------')	#60個
+
+# arr1
+arr1 = np.random.randint(0, 11, (5, 2))
+print('arr1:')
+print(arr1)
+
+# arr2
+arr2 = np.random.rand(3)
+print('arr2:')
+print(arr2)
+
+print('------------------------------------------------------------')	#60個
+
+np.random.seed(0)
+x = ['蘋果', '橘子', '香蕉', '鳳梨', '奇異果', '草莓']
+print(np.random.choice(x, 5))
+
+#['奇異果' '草莓' '蘋果' '鳳梨' '鳳梨']
+
+print('------------------------------------------------------------')	#60個
+
+"""
+x1 = np.random.normal(mu, sigma, size=N*10)  # 隨機數
+
+# list 移除資料的寫法
+x2 = x1[x1 <= 100.0]
+x2 = x2[x2 >= 0]
+"""
+
+#過濾資料
+
+"""
+scores1 = np.random.normal(mu, sigma, size=N)  # 隨機數
+print("資料個數1 :", len(scores1))
+print("最高分 :", max(scores1))
+print("最低分 :", min(scores1))
+
+scores2 = scores1[scores1 <= 100.0]
+scores3 = scores2[scores2 >= 0.0]
+"""
+
+print('------------------------------------------------------------')	#60個
+
+#np.random.rand(M, N)  # random values in a given shape
+
+count = 10
+range = 10
+
+xs = np.random.rand(count) * range
+print(xs)
+#ys = np.random.rand(count) * range
+#zs = np.random.rand(count) * range
+
+
+N = 100
+range = 100
+
+xs = np.random.rand(N) * range
+ys = np.random.rand(N) * range
+zs = np.random.rand(N) * range
+
+
+print('------------------------------------------------------------')	#60個
+
+N = 10
+x = np.random.randn(N)
+y = np.random.randn(N)
+z = np.random.randn(N)
+
 
 
 """ 新進

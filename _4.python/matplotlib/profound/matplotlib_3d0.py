@@ -33,19 +33,19 @@ print("------------------------------------------------------------")  # 60個
 x = np.array([1, 2, 3, 4, 5])
 y = np.array([6, 7, 8])
 
-#x軸1~5, y軸6~8, 編織出來15個點 X, Y
+# x軸1~5, y軸6~8, 編織出來15個點 X, Y
 X, Y = np.meshgrid(x, y)
 
-print('X = \n', X)
+print("X = \n", X)
 print()
-print('Y = \n', Y)
+print("Y = \n", Y)
 
-plt.scatter(X, Y, marker='o',c='m')
+plt.scatter(X, Y, marker="o", c="m")
 plt.title("畫出 meshgrid")
 plt.show()
 
 
-#數字拉平
+# 數字拉平
 XR = X.ravel()
 YR = Y.ravel()
 print(XR)
@@ -60,8 +60,8 @@ print(z)
 
 print()
 
-x = np.arange(1, 5, 1)#1 2 3 4
-y = np.arange(5, 9, 1)#5 6 7 8
+x = np.arange(1, 5, 1)  # 1 2 3 4
+y = np.arange(5, 9, 1)  # 5 6 7 8
 X, Y = np.meshgrid(x, y)
 Z = np.c_[X.ravel(), Y.ravel()]
 
@@ -100,7 +100,6 @@ ax.set_title('wireframe( )函數的實例',fontsize=16,color='b');
 """
 
 
-
 print("------------------------------------------------------------")  # 60個
 
 import cv2
@@ -110,16 +109,16 @@ from mpl_toolkits import mplot3d
 
 """
 
-filename = 'mola_1024x512_200mp.jpg'
-filename = 'C:/_git/vcs/_1.data/______test_files1/_material/ims3.bmp'
+filename = "mola_1024x512_200mp.jpg"
+filename = "C:/_git/vcs/_1.data/______test_files1/_material/ims3.bmp"
 
 IMG_GRAY = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
 
-plt.title('使用 matplotlib 顯示圖片, 需先BGR轉RGB')
+plt.title("使用 matplotlib 顯示圖片, 需先BGR轉RGB")
 plt.imshow(cv2.cvtColor(IMG_GRAY, cv2.COLOR_BGR2RGB))
 plt.show()
 
-print('image.shape內容 :', IMG_GRAY.shape)
+print("image.shape內容 :", IMG_GRAY.shape)
 
 H, W = IMG_GRAY.shape
 
@@ -127,17 +126,15 @@ x = np.linspace(W - 1, 0, W)
 y = np.linspace(0, H - 1, H)
 
 X, Y = np.meshgrid(x, y)
-Z = IMG_GRAY[0 : H, 0 : W]
+Z = IMG_GRAY[0:H, 0:W]
 
 fig = plt.figure()
-ax = plt.axes(projection='3d')
-ax.contour3D(X, Y, Z, 50, cmap='gist_earth')  # 150為剖面採樣數
+ax = plt.axes(projection="3d")
+ax.contour3D(X, Y, Z, 50, cmap="gist_earth")  # 150為剖面採樣數
 ax.auto_scale_xyz([W - 1, 0], [0, H - 1], [0, 300])
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
-
-
 
 
 from mpl_toolkits.mplot3d import Axes3D
@@ -193,28 +190,31 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
 
 
 import matplotlib.pyplot as plt
 import numpy as np
 
-def f1(x, y):                                # 左邊曲面函數
-    return (np.power(x,2) + np.power(y, 2))
-def f2(x, y):                                # 右邊曲面函數
-    r = np.sqrt(np.power(x,2) + np.power(y, 2))
-    return (np.sin(r))
 
-X = np.arange(-3, 3, 0.1)                   # 曲面 X 區間
-Y = np.arange(-3, 3, 0.1)                   # 曲面 Y 區間
-X, Y = np.meshgrid(X, Y)                    # 建立 XY 座標
+def f1(x, y):  # 左邊曲面函數
+    return np.power(x, 2) + np.power(y, 2)
+
+
+def f2(x, y):  # 右邊曲面函數
+    r = np.sqrt(np.power(x, 2) + np.power(y, 2))
+    return np.sin(r)
+
+
+X = np.arange(-3, 3, 0.1)  # 曲面 X 區間
+Y = np.arange(-3, 3, 0.1)  # 曲面 Y 區間
+X, Y = np.meshgrid(X, Y)  # 建立 XY 座標
 # 建立子圖
-fig,ax = plt.subplots(1,2,figsize=(8,4),subplot_kw={'projection':'3d'})
+fig, ax = plt.subplots(1, 2, figsize=(8, 4), subplot_kw={"projection": "3d"})
 # 左邊子圖乎叫 f1
-ax[0].plot_surface(X, Y, f1(X,Y), cmap='hsv')   # 繪製 3D 圖
+ax[0].plot_surface(X, Y, f1(X, Y), cmap="hsv")  # 繪製 3D 圖
 # 左邊子圖乎叫 f2
-ax[1].plot_surface(X, Y, f2(X,Y), cmap='hsv')   # 繪製 3D 圖
+ax[1].plot_surface(X, Y, f2(X, Y), cmap="hsv")  # 繪製 3D 圖
 plt.show()
 
 
@@ -224,14 +224,11 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-
-
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -247,13 +244,10 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 
 fig = plt.figure()
-ax = fig.add_subplot(projection='3d')
+ax = fig.add_subplot(projection="3d")
 
 # 3D plot
 
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
-
-
-

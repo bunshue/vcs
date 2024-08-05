@@ -18,6 +18,7 @@ print("------------------------------------------------------------")  # 60個
 import os
 import sys
 import math
+import time
 import random
 import numpy as np
 import pandas as pd
@@ -256,6 +257,29 @@ print('正確率', score[1])
 #loss: 0.01081830496697512
 
 #正確率 0.9308000206947327
+
+
+print('------------------------------------------------------------')	#60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+import tensorflow as tf
+from urllib.request import urlretrieve
+import numpy as np
+import gradio as gr
+from PIL import Image
+
+# Loading the MNIST model and data
+# 可下載最新之 .h5 檔案
+# urlretrieve("https://gr-models.s3-us-west-2.amazonaws.com/mnist-model.h5", "mnist-model.h5")
+# mnist-model.h5 路徑不能含中文
+mnist_model_filename = "C:/_git/vcs/_big_files/mnist-model.h5"
+model = tf.keras.models.load_model(mnist_model_filename)
+
+(x_train, y_train), (x_test, y_test) = tf.keras.datasets.mnist.load_data(
+    path='mnist.npz'
+)
 
 
 print('------------------------------------------------------------')	#60個

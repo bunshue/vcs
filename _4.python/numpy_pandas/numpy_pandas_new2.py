@@ -1,1113 +1,1012 @@
 """
-numpy pandas 新進
+
+pandas
+
 
 """
 
+print('------------------------------------------------------------')	#60個
+
+#建立 Series 物件
+
+index = ['鼠', '牛', '虎', '兔', '龍']
+data = [1, 4, 5, 6, 3]
+series = pd.Series(data, index = index)
+
+print(series)
+print(series.shape)
+
+data = [1, 4, 5, 6, 3]
+series = pd.Series(data)
+
+print(series)
+
+fruits = {"orange": 2, "banana": 3}
+print(pd.Series(fruits))
+
+print('------------------------------------------------------------')	#60個
+
+#取出 Series 當中的元素
+
+fruits = {"banana": 3, "orange": 4, "grape": 1, "peach": 5}
+
+series = pd.Series(fruits)
+
+print(series[0:2])
+
+print(series[["orange", "peach"]])
+
+print('------------------------------------------------------------')	#60個
+
+#單取出「索引值」或者「內容值」-.index、.values
+
+index = ['鼠', '牛', '虎', '兔', '龍']
+
+data = [10, 5, 8, 12, 3]
+
+series = pd.Series(data, index = index)
+
+print(series)
+
+series_index = series.index
+
+series_values = series.values
+
+print(series_index)
+
+print(series_values)
+
+print('------------------------------------------------------------')	#60個
+
+#新增 Series 物件的元素 – append()
+
+index = ['鼠', '牛', '虎', '兔', '龍']
+
+data = [10, 5, 8, 12, 3]
+
+series = pd.Series(data, index = index)
+
+print(series)
+
+pineapple = pd.Series([12], index = ["pineapple"])
+
+# pineapple = pd.Series( {"pineapple":12})
+
+series = series.append(pineapple)
+
+print(series)
+
+print('------------------------------------------------------------')	#60個
+
+#刪除 Series 物件的元素 – drop()
+
+index = ['鼠', '牛', '虎', '兔', '龍']
+
+data = [10, 5, 8, 12, 3]
+
+series = pd.Series(data, index = index)
+
+print(series)
+
+series = series.drop('兔')
+
+print(series)
+
+print('------------------------------------------------------------')	#60個
+
+#從 Series 物件篩選出想要的元素
+
+index = ['鼠', '牛', '虎', '兔', '龍']
+
+data = [10, 5, 8, 12, 3]
+
+series = pd.Series(data, index = index)
+
+print(series)
+
+conditions = [True, True, False, False, False]
+
+print(series[conditions])
+
+index = ['鼠', '牛', '虎', '兔', '龍']
+
+data = [10, 5, 8, 12, 3]
+
+series = pd.Series(data, index = index)
+
+print(series[series >= 5])
+
+series = series[series >= 5][series < 10]
+
+print(series)
+
+print('------------------------------------------------------------')	#60個
+
+#將 Series 的元素排序 – sort_index()、sort_values()
+
+index = ['鼠', '牛', '虎', '兔', '龍']
+
+data = [10, 5, 8, 12, 3]
+
+series = pd.Series(data, index = index)
+
+print(series)
+
+items1 = series.sort_index()
+
+items2 = series.sort_values()
+
+print(items1)
+
+print()
+
+print(items2)
+
+print('------------------------------------------------------------')	#60個
+
+#建立 DataFrame 物件 – pd.DataFrame()
+
+index = ['鼠', '牛', '虎', '兔', '龍']
+
+data1 = [10, 5, 8, 12, 3]
+
+data2 = [30, 25, 12, 10, 8]
+
+series1 = pd.Series(data1, index = index)
+
+series2 = pd.Series(data2, index = index)
+
+df = pd.DataFrame([series1, series2])
+
+print(df)
+
+data = {"fruits": ["apple", "orange", "banana", "strawberry","kiwifruit"],
+        "time": [1, 4, 5, 6, 3],
+        "year": [2001, 2002, 2001, 2008, 2006]}
+
+df = pd.DataFrame(data)
+
+print(df)
+
+order_df = pd.DataFrame( [[1000, 2546, 103],
+                          [1001, 4352, 101],
+                          [1002, 342, 101]],
+                         columns = ["id", "item_id", "customer_id"])
+print(order_df)
+
+print('------------------------------------------------------------')	#60個
+
+#修改 index 和 column 的名稱 –.index、.column
+
+index = ['鼠', '牛', '虎', '兔', '龍']
+data1 = [10, 5, 8, 12, 3]
+data2 = [30, 25, 12, 10, 8]
+series1 = pd.Series(data1, index = index)
+series2 = pd.Series(data2, index = index)
+df = pd.DataFrame([series1, series2])
+df.index = [1, 2]
+print(df)
+
+print('------------------------------------------------------------')	#60個
+
+#加入新的資料列 – append()
+
+data = {"fruits": ["apple", "orange", "banana", "strawberry", "kiwifruit"],
+        "year": [2001, 2002, 2001, 2008, 2006],
+        "time": [1, 4, 5, 6, 3]}
+
+df = pd.DataFrame(data)
+
+series = pd.Series(["mango", 2008, 7], index = ["fruits", "year", "time"])
+
+df = df.append(series, ignore_index = True)
+
+print(df)
+
+index = ['鼠', '牛', '虎', '兔', '龍']
+data1 = [10, 5, 8, 12, 3]
+data2 = [30, 25, 12, 10, 8]
+data3 = [30, 12, 10, 8, 25, 3]
+
+series1 = pd.Series(data1, index = index)
+series2 = pd.Series(data2, index = index)
+
+df = pd.DataFrame([series1, series2])
+
+index.append("pineapple")
+
+series3 = pd.Series(data3, index = index)
+
+df = df.append(series3, ignore_index = True)
+
+print(df)
+
+print('------------------------------------------------------------')	#60個
+
+#加入新的欄位
+
+data = {"fruits": ["apple", "orange", "banana", "strawberry", "kiwifruit"],
+        "year": [2001, 2002, 2001, 2008, 2006],
+        "time": [1, 4, 5, 6, 3]}
+df = pd.DataFrame(data)
+df["price"] = [150, 120, 100, 300, 150]
+print(df)
+
+index = ['鼠', '牛', '虎', '兔', '龍']
+data1 = [10, 5, 8, 12, 3]
+data2 = [30, 25, 12, 10, 8]
+series1 = pd.Series(data1, index = index)
+series2 = pd.Series(data2, index = index)
+df = pd.DataFrame([series1, series2])
+new_column = pd.Series([15, 7], index = [0, 1])
+df["mango"] = new_column
+print(df)
+
+print('------------------------------------------------------------')	#60個
+
+#取出 DataFrame 當中的元素 –df.loc[]、df.iloc[]
+
+data = {"fruits": ["apple", "orange", "banana", "strawberry", "kiwifruit"],
+        "year": [2001, 2002, 2001, 2008, 2006],
+        "time": [1, 4, 5, 6, 3]}
+df = pd.DataFrame(data)
+print(df)
+
+df = df.loc[[1,2],["time","year"]]
+print(df)
+
+np.random.seed(0)
+df = pd.DataFrame()
+columns = ["apple", "orange", "banana", "strawberry", "kiwifruit"]
+
+for column in columns:
+  df[column] = np.random.choice(range(1, 11), 10)
+print(df)
+
+df = df.loc[range(2,6),["banana","kiwifruit"]]
+print(df)
+
+data = {"fruits": ["apple", "orange", "banana", "strawberry",
+                   "kiwifruit"],
+        "time": [1, 4, 5, 6, 3],
+        "year": [2001, 2002, 2001, 2008, 2006] }
+df = pd.DataFrame(data)
+print(df)
+
+df = df.iloc[[1, 3], [0, 2]]
+print(df)
+
+print('------------------------------------------------------------')	#60個
+
+#刪除 df 物件的列或行 – drop()
+
+data = {"fruits": ["apple", "orange", "banana", "strawberry",
+                   "kiwifruit"],
+        "time": [1, 4, 5, 6, 3] ,
+        "year": [2001, 2002, 2001, 2008, 2006]}
+
+df = pd.DataFrame(data)
+print(df)
+
+df_1 = df.drop([0,1])
+print(df_1)
+
+df_2 = df.drop("year", axis = 1)
+print(df_2)
+
+np.random.seed(0)
+df = pd.DataFrame()
+columns = ["apple", "orange", "banana", "strawberry", "kiwifruit"]
+for column in columns:
+  df[column] = np.random.choice(range(1, 11), 10)
+print(df)
+
+df = df.drop(np.arange(0, 9, 2))
+df = df.drop("strawberry", axis = 1)
+print(df)
+
+print('------------------------------------------------------------')	#60個
+
+#將欄位值依大小排序 – sort_values()
+
+data = {"fruits": ["apple", "orange", "banana", "strawberry",
+                   "kiwifruit"],
+        "time": [1, 4, 3, 6, 3],
+        "year": [2001, 2002, 2001, 2008, 2006]}
+df = pd.DataFrame(data)
+print(df)
+
+df = df.sort_values(by = "year", ascending = True)
+print(df)
+
+df = df.sort_values(by = ["time", "year"] , ascending = True)
+print(df)
+
+print('------------------------------------------------------------')	#60個
+
+#從 df 物件篩選出想要的資料
+
+data = {"fruits": ["apple", "orange", "banana", "strawberry",
+                   "kiwifruit"],
+        "time": [1, 4, 5, 6, 3] ,
+        "year": [2001, 2002, 2001, 2008, 2006] }
+df = pd.DataFrame(data)
+print(df)
+print(df.index % 2 == 0)
+print(df[df.index % 2 == 0])
+
+np.random.seed(0)
+df = pd.DataFrame()
+columns = ["apple", "orange", "banana", "strawberry", "kiwifruit"]
+for column in columns:
+  df[column] = np.random.choice(range(1, 11), 10)
+print(df)
+
+df = df[df["apple"] >= 5]
+df = df[df["kiwifruit"] >= 5]
+# df = df.loc[df["apple"] >= 5][df["kiwifruit"] >= 5]
+print(df)
+
+print('------------------------------------------------------------')	#60個
+
+#索引、欄位內容「一致」時的串接做法
+
+def make_random_df(index, columns, seed):
+  np.random.seed(seed)
+  df = pd.DataFrame()
+  for column in columns:
+    df[column] = np.random.choice(range(1, 101), len(index))
+  df.index = index
+  return df
+
+columns = ["apple", "orange", "banana"]
+df_data1 = make_random_df(range(1, 5), columns, 0)
+df_data2 = make_random_df(range(1, 5), columns, 1)
+
+print(df_data1)
+print(df_data2)
+
+df1 = pd.concat( [df_data1, df_data2], axis = 0)
+print(df1)
+
+df2 = pd.concat([df_data1, df_data2], axis = 1)
+print(df2)
+
+print('------------------------------------------------------------')	#60個
+
+#索引、欄位內容「不一致」時的串接做法
+
+def make_random_df(index, columns, seed):
+  np.random.seed(seed)
+  df = pd.DataFrame()
+  for column in columns:
+    df[column] = np.random.choice(range(1, 101), len(index))
+  df.index = index
+  return df
+
+columns1 = ["apple", "orange", "banana"]
+columns2 = ["orange", "kiwifruit", "banana"]
+
+df_data1 = make_random_df(range(1, 5), columns1, 0)
+df_data2 = make_random_df(np.arange(1, 8, 2), columns2, 1)
+
+print(df_data1)
+print(df_data2)
+
+df1 = pd.concat([df_data1, df_data2], axis = 0)
+print(df1)
+
+df2 = pd.concat([df_data1, df_data2], axis = 1)
+print(df2)
+
+print('------------------------------------------------------------')	#60個
+
+#於橫向串接時增列上一層的欄位
+
+def make_random_df(index, columns, seed):
+  np.random.seed(seed)
+  df = pd.DataFrame()
+  for column in columns:
+    df[column] = np.random.choice(range(1, 101), len(index))
+  df.index = index
+  return df
+
+columns = ["apple", "orange", "banana"]
+df_data1 = make_random_df(range(1, 5), columns, 0)
+df_data2 = make_random_df(range(1, 5), columns, 1)
+print(df_data1)
+print(df_data2)
+
+df = pd.concat([df_data1, df_data2], axis = 1, keys = ["X", "Y"])
+print(df)
+
+Y_banana = df["Y", "banana"]
+print(Y_banana)
+
+print('------------------------------------------------------------')	#60個
+
+#用 merge() 做 DataFrame 的交集合併
+
+data1 = {"fruits": ["apple", "orange", "banana", "strawberry", "kiwifruit"],
+         "year": [2001, 2002, 2001, 2008, 2006],
+         "amount": [1, 4, 5, 6, 3]}
+df1 = pd.DataFrame(data1)
+print('df1 :\n', df1)
+
+data2 = {"fruits": ["apple", "orange", "banana", "strawberry", "mango"],
+         "year": [2001, 2002, 2001, 2008, 2007],
+         "price": [150, 120, 100, 250, 3000]}
+df2 = pd.DataFrame(data2)
+print('df2 :\n', df2)
+
+df3 = pd.merge(df1, df2, on = "fruits", how = "inner")
+print('df3 :\n', df3)
+
+#用 merge() 做 DataFrame 的聯集合併
+df3 = pd.merge(df1, df2, on = "fruits", how = "outer")
+print('df3 :\n', df3)
+
+#透過「具關聯性的欄位」合併多個 DataFrame(一)
+
+order_df = pd.DataFrame([[1000, 2546, 103],
+                         [1001, 4352, 101],
+                         [1002, 342, 101]],
+                        columns = ["id", "item_id", "customer_id"])
+print('order_df :\n', order_df)
+
+customer_df = pd.DataFrame([[101, "Tanaka"],
+                            [102, "Suzuki"],
+                            [103, "Kato"]],
+                           columns = ["id", "name"])
+print('customer_df :\n', customer_df)
+
+order_df = pd.merge(order_df, customer_df, left_on = "customer_id", right_on = "id", how = "inner")
+print('-----交集合併-----')
+print('order_df :\n', order_df)
+
+print('------------------------------------------------------------')	#60個
+
+#透過「具關聯性的欄位」合併多個DataFrame (二)
+
+order_df = pd.DataFrame([[1000, 2546, 103],
+                         [1001, 4352, 101],
+                         [1002, 342, 101]],
+                        columns = ["id", "item_id", "customer_id"])
+
+print('----訂貨紀錄----\n', order_df)
+
+customer_df = pd.DataFrame([["Tanaka"],
+                            ["Suzuki"],
+                            ["Kato"]],
+                           columns = ["name"])
+
+customer_df.index = [101, 102, 103]
+
+print('----客戶資訊----\n', customer_df)
+
+order_df = pd.merge(order_df, customer_df, left_on = "customer_id", right_index = True, how = "inner")
+
+print('----order_df----\n', order_df)
+
+print('------------------------------------------------------------')	#60個
+
+
+
+
+print('------------------------------------------------------------')	#60個
+
+from numpy import nan
+
+print('------------------------------------------------------------')	#60個
+
+#載入外部檔案並做資料整理
+#使用 Pandas 讀取 CSV 檔
+
+url = 'https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data'
+url = 'iris.data'
+df = pd.read_csv(url, header = None)
+df.columns = ['sepal length', 'sepal width', 'petal length', 'petal width', 'class']
+print(df)
+
+print('------------------------------------------------------------')	#60個
+
+#將 DataFrame 的內容寫入到 CSV 檔
+
+data = {'city': ['Nagano', 'Sydney', 'Salt Lake City', 'Athens',
+                 'Torino', 'Beijing', 'Vancouver', 'London',
+                 'Sochi', 'Rio de Janeiro'],
+        'year': [1998, 2000, 2002, 2004, 2006,
+                 2008, 2010, 2012, 2014, 2016],
+        'season': ['winter', 'summer', 'winter', 'summer', 'winter',
+                   'summer', 'winter', 'summer', 'winter', 'summer']}
+df = pd.DataFrame(data)
+
+print('df存成csv檔')
+df.to_csv('olympics.csv')
+
+print('------------------------------------------------------------')	#60個
+
+#處理 DataFrame 中的缺漏值
+#用 dropna() 刪除含有 NaN ( 缺漏值 ) 的列
+
+#   借用 NumPy 的 nan 來設定 NaN 值
+np.random.seed(0)       
+
+sample_df = pd.DataFrame(np.random.rand(8, 4))      
+
+#   設定亂數種子為 0
+
+#   用 NumPy 隨機產生 8x4 的亂數資料並轉成 DataFrame
+
+sample_df.iloc[1, 0] = nan      
+
+sample_df.iloc[2, 2] = nan
+
+sample_df.iloc[6, 1] = nan
+
+sample_df.iloc[5:, 3] = nan
+
+#   將部分值改成 NaN
+
+print(sample_df)        
+
+#   檢視 DataFrame
+
+sample_df_dropped = sample_df.dropna()
+
+print(sample_df_dropped)
+
+sample_df_dropped_2 = sample_df[[0, 1, 2]].dropna()
+
+print(sample_df_dropped_2)
+
+print('------------------------------------------------------------')	#60個
+
+#用 fllna() 填補 NaN 值
+
+np.random.seed(0)
+
+sample_df = pd.DataFrame(np.random.rand(8, 4))
+
+sample_df.iloc[1, 0] = nan
+
+sample_df.iloc[2, 2] = nan
+
+sample_df.iloc[6, 1] = nan
+
+sample_df.iloc[5:, 3] = nan
+
+sample_df_fill = sample_df.fillna(0)        # 在 NaN 之處填入 0
+
+print(sample_df_fill)
+
+sample_df_fill_2 = sample_df.fillna(method='ffill') 
+
+print(sample_df_fill_2)
+
+print(sample_df)
+
+sample_df_fill_3 = sample_df.fillna(sample_df.mean())
+
+print(sample_df_fill_3) 
+
+print('------------------------------------------------------------')	#60個
+
+#duplicated()、drop_duplicated() - 尋找或刪除 DataFrame 內重複的資料
+
+dupli_df = pd.DataFrame({'col1':[1, 1, 2, 3, 4, 4, 5, 5],
+                         'col2':['a', 'b', 'b', 'b', 'c', 'c', 'b', 'b']})
+print(dupli_df)
+print(dupli_df.duplicated())
+
+print('------------------------------------------------------------')	#60個
+
+#map() - 利用 DataFrame 的既有欄位生成新的欄位
+
+people_data = {'ID': ['100', '101', '102', '103', '104',
+                      '106', '108', '110', '111', '113'],
+               'birth_year': [1990, 1989, 1992, 1997, 1982,
+                              1991, 1988, 1990, 1995, 1981],
+               'name': ['Hiroshi', 'Akiko', 'Yuki', 'Satoru', 'Steeve', 'Mituru', 'Aoi', 'Tarou', 'Suguru', 'Mitsuo'],
+               'city': ['東京', '大阪', '京都', '札幌', '東京', '東京', '大阪', '京都', '札幌', '東京']}
+
+people_df = pd.DataFrame(people_data)
+print(people_df)
+
+city_map = {'東京': '關東',
+            '札幌': '北海道',
+            '大阪': '關西',
+            '京都': '關西'}
+
+print(people_df['city'].map(city_map))
+
+people_df['region'] = people_df['city'].map(city_map)
+
+print(people_df)
+
+print('------------------------------------------------------------')	#60個
+
+#用 cut() 劃分、篩選資料
+
+people_data = {'ID': ['100', '101', '102', '103', '104',
+                      '106', '108', '110', '111', '113'],
+               'name': ['Hiroshi', 'Akiko', 'Yuki', 'Satoru',
+                        'Steeve', 'Mituru', 'Aoi', 'Tarou',
+                        'Suguru', 'Mitsuo'],
+               'birth_year': [1990, 1989, 1992, 1997, 1982,
+                              1991, 1988, 1990, 1995, 1981]}
+
+people_df = pd.DataFrame(people_data)
+print(people_df)
+
+birth_year_cut = pd.cut(people_df['birth_year'], 4)
+
+print(birth_year_cut)
+
+print(pd.value_counts(birth_year_cut))
+
+birth_year_bins = [1980, 1985, 1990, 1995, 2000]
+
+birth_year_bins_labels = ['Born in 81~85', 'Born in 86~90', 'Born in 91~95', 'Born in 96~2000']
+
+birth_year_cut = pd.cut(people_df['birth_year'], birth_year_bins, labels=birth_year_bins_labels)
+
+print(pd.value_counts(birth_year_cut))
+print(birth_year_cut)
+
+people_df['birth_year_bin'] = birth_year_cut
+
+print(people_df)
+
+print('------------------------------------------------------------')	#60個
+
+#取頭尾列 - head()、tail()
+
+np.random.seed(0)
+
+columns = ["apple", "orange", "banana", "strawberry", "kiwifruit"]
+
+df = pd.DataFrame()
+
+for column in columns:
+
+  df[column] = np.random.choice(range(1, 11), 10)
+
+df.index = [i for i in range(1,11)]
+
+print(df)
+
+df_head = df.head(3)
+
+df_tail = df.tail()
+
+print('----前 3 列----\n', df_head)
+
+print('----倒數 5 列----\n', df_tail)
+
+print('------------------------------------------------------------')	#60個
+
+#對 DataFrame 的值做運算
+
+np.random.seed(0)
+
+columns = ["apple", "orange", "banana", "strawberry",
+
+"kiwifruit"]
+
+df = pd.DataFrame()
+
+for column in columns:
+     df[column] = np.random.choice(range(1, 11), 10)
+
+df.index = [i for i in range(1,11)]
+
+print(df)
+
+double_df = df * 2
+
+square_df = df * df
+
+sqrt_df = np.sqrt(df)
+
+print('----double_df----\n', double_df)
+
+print('----square_df----\n', square_df)
+
+print('----sqrt_df----\n', sqrt_df)
+
+print('------------------------------------------------------------')	#60個
+
+#快速取得 DataFrame 各種統計數據
+
+np.random.seed(0)
+
+columns = ["apple", "orange", "banana", "strawberry",
+
+"kiwifruit"]
+
+df = pd.DataFrame()
+
+for column in columns:
+
+  df[column] = np.random.choice(range(1, 11), 10)
+
+df.index = [i for i in range(1,11)]
+
+print(df)
+
+print(df.describe())
+
+print('------------------------------------------------------------')	#60個
+
+#計算行(列)之間的差 (diff)
+
+np.random.seed(0)
+
+columns = ["apple", "orange", "banana", "strawberry",
+
+"kiwifruit"]
+
+df = pd.DataFrame()
+
+for column in columns:
+     df[column] = np.random.choice(range(1, 11), 10)
+
+df.index = [i for i in range(1,11)]
+
+print(df)
+
+df_diff = df.diff(-2, axis=0)
+
+print(df_diff)
+
+print('------------------------------------------------------------')	#60個
+
+#用 groupy() 做分組統計
+
+prefecture_df = pd.DataFrame([["Tokyo", 2190, 13636, "Kanto"],
+                              ["Kanagawa", 2415, 9145, "Kanto"],
+                              ["Osaka", 1904, 8837, "Kinki"],
+                              ["Kyoto", 4610, 2605, "Kinki"],
+                              ["Aichi", 5172, 7505, "Chubu"]],
+                             columns=["Prefecture", "Area", "Population", "Region"])
+print(prefecture_df)
+
+grouped_region = prefecture_df.groupby("Region")
+
+mean_df = grouped_region.mean()
+print(mean_df)
+
+print('------------------------------------------------------------')	#60個
+
+
+
+
+
+
+
+from __future__ import print_function
+import pandas as pd
+import numpy as np
+
+s = pd.Series([1,3,6,np.nan,4,1]) # similar with 1D numpy
+print(s)
+dates = pd.date_range('20160101', periods=6)
+df = pd.DataFrame(np.random.randn(6,4), index=dates, columns=['A','B','C','D'])
+print(df['B'])
+df2 = pd.DataFrame({'A' : 1.,
+                       'B' : pd.Timestamp('20130102'),
+                        'C' : pd.Series(1,index=list(range(4)),dtype='float32'),
+                        'D' : np.array([3] * 4,dtype='int32'),
+                        'E' : pd.Categorical(["test","train","test","train"]),
+                        'F' : 'foo'})
+print(df2)
+print(df2.dtypes)
+
+print(df.index)
+print(df.columns)
+print(df.values)
+print(df.describe())
+print(df.T)
+print(df.sort_index(axis=1, ascending=False))
+print(df.sort_values(by='B'))
+
 print("------------------------------------------------------------")  # 60個
 
-# 共同
-import os
-import sys
-import math
-import random
-import numpy as np
+from __future__ import print_function
 import pandas as pd
+import numpy as np
+
+dates = pd.date_range('20130101', periods=6)
+df = pd.DataFrame(np.random.randn(6,4), index=dates, columns=['A', 'B', 'C', 'D'])
+
+print(df['A'], df.A)
+print(df[0:3], df['20130102':'20130104'])
+
+# select by label: loc
+print(df.loc['20130102'])
+print(df.loc[:,['A','B']])
+print(df.loc['20130102', ['A','B']])
+
+# select by position: iloc
+print(df.iloc[3])
+print(df.iloc[3, 1])
+print(df.iloc[3:5,0:2])
+print(df.iloc[[1,2,4],[0,2]])
+
+# mixed selection: ix
+print(df.ix[:3, ['A', 'C']])
+# Boolean indexing
+print(df[df.A > 0])
+
+print("------------------------------------------------------------")  # 60個
+
+from __future__ import print_function
+import pandas as pd
+import numpy as np
+
+dates = pd.date_range('20130101', periods=6)
+df = pd.DataFrame(np.random.randn(6,4), index=dates, columns=['A', 'B', 'C', 'D'])
+
+df.iloc[2,2] = 1111
+df.loc['2013-01-03', 'D'] = 2222
+df.A[df.A>0] = 0
+df['F'] = np.nan
+df['G']  = pd.Series([1,2,3,4,5,6], index=pd.date_range('20130101', periods=6))
+print(df)
+
+print("------------------------------------------------------------")  # 60個
+
+from __future__ import print_function
+import pandas as pd
+import numpy as np
+
+dates = pd.date_range('20130101', periods=6)
+df = pd.DataFrame(np.arange(24).reshape((6,4)), index=dates, columns=['A', 'B', 'C', 'D'])
+
+df.iloc[0,1] = np.nan
+df.iloc[1,2] = np.nan
+print(df.dropna(axis=0, how='any'))   # how={'any', 'all'}
+print(df.fillna(value=0))
+print(pd.isnull(df))
+
+print("------------------------------------------------------------")  # 60個
+
+from __future__ import print_function
+import pandas as pd
+
+# read from
+data = pd.read_csv('data/student.csv')
+print(data)
+
+# save to
+data.to_pickle('tmp_student.pickle')
+
+print("------------------------------------------------------------")  # 60個
+
+from __future__ import print_function
+import pandas as pd
+import numpy as np
+
+# concatenating
+# ignore index
+df1 = pd.DataFrame(np.ones((3,4))*0, columns=['a','b','c','d'])
+df2 = pd.DataFrame(np.ones((3,4))*1, columns=['a','b','c','d'])
+df3 = pd.DataFrame(np.ones((3,4))*2, columns=['a','b','c','d'])
+res = pd.concat([df1, df2, df3], axis=0, ignore_index=True)
+
+# join, ('inner', 'outer')
+df1 = pd.DataFrame(np.ones((3,4))*0, columns=['a','b','c','d'], index=[1,2,3])
+df2 = pd.DataFrame(np.ones((3,4))*1, columns=['b','c','d', 'e'], index=[2,3,4])
+res = pd.concat([df1, df2], axis=1, join='outer')
+res = pd.concat([df1, df2], axis=1, join='inner')
+
+# join_axes
+res = pd.concat([df1, df2], axis=1, join_axes=[df1.index])
+
+# append
+df1 = pd.DataFrame(np.ones((3,4))*0, columns=['a','b','c','d'])
+df2 = pd.DataFrame(np.ones((3,4))*1, columns=['a','b','c','d'])
+df2 = pd.DataFrame(np.ones((3,4))*1, columns=['b','c','d', 'e'], index=[2,3,4])
+res = df1.append(df2, ignore_index=True)
+res = df1.append([df2, df3])
+
+s1 = pd.Series([1,2,3,4], index=['a','b','c','d'])
+res = df1.append(s1, ignore_index=True)
+
+print(res)
+
+print("------------------------------------------------------------")  # 60個
+
+from __future__ import print_function
+import pandas as pd
+
+# merging two df by key/keys. (may be used in database)
+# simple example
+left = pd.DataFrame({'key': ['K0', 'K1', 'K2', 'K3'],
+                                  'A': ['A0', 'A1', 'A2', 'A3'],
+                                  'B': ['B0', 'B1', 'B2', 'B3']})
+right = pd.DataFrame({'key': ['K0', 'K1', 'K2', 'K3'],
+                                    'C': ['C0', 'C1', 'C2', 'C3'],
+                                    'D': ['D0', 'D1', 'D2', 'D3']})
+print(left)
+print(right)
+res = pd.merge(left, right, on='key')
+print(res)
+
+# consider two keys
+left = pd.DataFrame({'key1': ['K0', 'K0', 'K1', 'K2'],
+                             'key2': ['K0', 'K1', 'K0', 'K1'],
+                             'A': ['A0', 'A1', 'A2', 'A3'],
+                             'B': ['B0', 'B1', 'B2', 'B3']})
+right = pd.DataFrame({'key1': ['K0', 'K1', 'K1', 'K2'],
+                              'key2': ['K0', 'K0', 'K0', 'K0'],
+                              'C': ['C0', 'C1', 'C2', 'C3'],
+                              'D': ['D0', 'D1', 'D2', 'D3']})
+print(left)
+print(right)
+res = pd.merge(left, right, on=['key1', 'key2'], how='inner')  # default for how='inner'
+# how = ['left', 'right', 'outer', 'inner']
+res = pd.merge(left, right, on=['key1', 'key2'], how='left')
+print(res)
+
+# indicator
+df1 = pd.DataFrame({'col1':[0,1], 'col_left':['a','b']})
+df2 = pd.DataFrame({'col1':[1,2,2],'col_right':[2,2,2]})
+print(df1)
+print(df2)
+res = pd.merge(df1, df2, on='col1', how='outer', indicator=True)
+# give the indicator a custom name
+res = pd.merge(df1, df2, on='col1', how='outer', indicator='indicator_column')
+
+
+# merged by index
+left = pd.DataFrame({'A': ['A0', 'A1', 'A2'],
+                                  'B': ['B0', 'B1', 'B2']},
+                                  index=['K0', 'K1', 'K2'])
+right = pd.DataFrame({'C': ['C0', 'C2', 'C3'],
+                                     'D': ['D0', 'D2', 'D3']},
+                                      index=['K0', 'K2', 'K3'])
+print(left)
+print(right)
+# left_index and right_index
+res = pd.merge(left, right, left_index=True, right_index=True, how='outer')
+res = pd.merge(left, right, left_index=True, right_index=True, how='inner')
+
+# handle overlapping
+boys = pd.DataFrame({'k': ['K0', 'K1', 'K2'], 'age': [1, 2, 3]})
+girls = pd.DataFrame({'k': ['K0', 'K0', 'K3'], 'age': [4, 5, 6]})
+res = pd.merge(boys, girls, on='k', suffixes=['_boy', '_girl'], how='inner')
+print(res)
+
+# join function in pandas is similar with merge. If know merge, you will understand join
+
+print("------------------------------------------------------------")  # 60個
+
+from __future__ import print_function
+import pandas as pd
+import numpy as np
 import matplotlib.pyplot as plt
 
-font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
-# 設定中文字型及負號正確顯示
-# 設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
-# 設定負號
-plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
-plt.rcParams["font.size"] = 12  # 設定字型大小
-
-print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-print("numpy")
-print("------------------------------------------------------------")  # 60個
-
-a = np.array([2,3,4,5,6])
-print(f'a = {a}')
-b = np.ma.masked_where(a > 3, a)
-print(f'b = {b}')
-
-print('------------------------------------------------------------')	#60個
-
-print(np.c_[np.array([1, 2, 3]), np.array([4, 5, 6])])
-print(np.c_[np.array([[1, 2, 3]]), 0, 0, np.array([[4, 5, 6]])])
-
-"""
-array([[1, 4],
-       [2, 5],
-       [3, 6]])
-"""
-
-#array([[1, 2, 3, ..., 4, 5, 6]])
-
-print('------------------------------------------------------------')	#60個
-
-#numpy.c_() and numpy.r_()的用法
-
-
-#####np.c_是按行连接两个矩阵，就是把两矩阵左右相加，要求行数相等，类似于pandas中的merge()。
-#####np.r_是按列连接两个矩阵，就是把两矩阵上下相加，要求列数相等，类似于pandas中的concat()。
-
-#np.c_是按行连接两个矩阵，就是把两矩阵左右相加，要求行数相等。
-#np.r_是按列连接两个矩阵，就是把两矩阵上下相加，要求列数相等。
-
-
-#1.numpy.c_:
-
-x = np.arange(12).reshape(3,4)
-print('x:',x, x.shape)
-
-y = np.arange(10,22).reshape(3,4)
-print('y:',y, y.shape)
-
-z = np.c_[x,y]
-print('z:',z, z.shape)
-
-#2.numpy.r_用法:
-
-x = np.arange(12).reshape(3,4)
-print('x:',x, x.shape)
-
-y = np.arange(10,22).reshape(3,4)
-print('y:',y, y.shape)
-
-z = np.r_[x,y]
-print('z:',z, z.shape)
-
-print("------------------------------------------------------------")  # 60個
-
-x = np.array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
-print(type(x))
-
-print("------------------------------------------------------------")  # 60個
-
-print("二維陣列 6 X 4")
-a = np.array(
-    [[0, 0, 0, 1], [1, 1, 1, 2], [2, 2, 2, 3], [3, 3, 3, 4], [4, 4, 4, 5], [5, 5, 5, 6]]
-)
-print(a)
-print(a.shape)
-print(a.dtype)
-print(a.ndim)
-print(a.size)
-print(a.nbytes)
-
-print("第3列 之 第1~4項(不含尾)")
-print(a[3, 1:4])
-
-print("前2列 之 第2欄之後")
-print(a[:2, 2:])
-
-print("第2列 之 全部")
-print(a[2, :])
-
-print("全部列 之 第3欄, 轉成row")
-print(a[:, 3])
-
-print("全部列 之 偶數欄")
-print(a[:, ::2])
-
-print("偶數列 之 036欄")
-print(a[::2, ::3])
-
-# axis = 0 : 第0維 直行
-# axis = 1 : 第1維 橫列
-print("全部和:", a.sum())
-print("直行加:", a.sum(axis=0))
-print("橫列加:", a.sum(axis=1))
-
-# np.argmin()求最小值對應的索引
-# np.argmax()求最大值對應的索引
-
-print("每個直行的最小值:", a.min(axis=0))
-print("每個直行的最小值對應的索引:", a.argmin(axis=0))
-print("每個直行的標準差:", a.std(axis=0))
-
-print("全部平均:", a.mean())
-print("直行平均:", a.mean(axis=0))
-print("橫列平均:", a.mean(axis=1))
-
-print("------------------------------------------------------------")  # 60個
-
-print("一維陣列 10個元素")
-a = np.arange(10)
-print(a)
-
-print("前4項")
-print(a[:4])
-
-print("第3項 至 第7項(不含尾)")
-print(a[3:7])
-
-print("第5項 至 最後")
-print(a[5:])
-
-print("第3至第9項 跳一個")
-print(a[3:9:2])
-
-print("第2項開始至最後, 跳一個")
-print(a[2::2])
-
-print("從頭至最後, 跳二個")
-print(a[::3])
-
-print("------------------------------------------------------------")  # 60個
-
-print("使用 numpy函數 對 list做處理")
-
-x = [-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 0, 0]
-
-print(np.max(x))
-print(np.mean(x))
-print(np.min(x))
-
-print("------------------------------------------------------------")  # 60個
-
-print("用numpy建立資料")
-a = np.arange(5)
-print(a)
-a = np.arange(2,5,1)
-print(a)
-a = np.linspace(2,5,4)
-print(a)
-a = np.logspace(0,2,5)
-print(a)
-
-a = np.empty(5) # 生成5個元素，值爲隨機數的數組（速度快）
-print(a)
-a = np.zeros(5) # 生成5個值全爲0的數組
-print(a)
-a = np.ones(5) # 生成5個值全爲1的數組
-print(a)
-a = np.full(5, 6) # 生成5個值全爲6的數組
-print(a)
-
-print("------------------------------------------------------------")  # 60個
-
-a = np.array([1,2,3,4,5,6], dtype=np.int64)
-print(a.dtype) 
-a = a.astype(np.float32)
-print(a.dtype) 
-print(a.dtype.type)
-
-print("------------------------------------------------------------")  # 60個
-
-print("分段函數")
-
-x=np.arange(10)
-print(x)
-
-print(np.where(x<5, x, 9-x))
-
-
-a=np.arange(10)
-print(np.select([x<3,x>6], [-1,1], 0))
-
-
-a=np.arange(10)
-print(np.piecewise(x, [x<3,x>6], [lambda x: x * 2, lambda x: x * 3]))
-
-print("------------------------------------------------------------")  # 60個
-
-print("矩陣與二維數組")
-a = np.mat(np.mat([[1,2,3],[4,5,6]]))
-print(type(a))
-
-print(np.eye(2))
-print(np.diag([2,3]))
-
-a = np.mat([[1.,2.],[3.,4.]])
-print(np.dot(a,a))    # 矩陣乘積
-print(np.multiply(a,a))    # 矩陣點乘
-print(a.T)   # 矩陣轉置
-print(a.I)   # 矩陣求逆
-print(np.trace(a))    # 求矩陣的跡
-print(np.linalg.eig(a))   # 特徵分解
-
-a = np.mat(np.mat([[1,2,3],[4,5,6]]))
-print(a.sum())
-print(a.sum(axis=0))
-print(a.sum(axis=1))
-
-print('------------------------------------------------------------')	#60個
-
-filename = "data/python_ReadWrite_CSV6_score.csv"
-
-dat = pd.read_csv(filename, encoding="UTF-8")
-
-print(dat.head())
-
-print("數學平均", np.mean(dat["數學"]))
-print("數學中位數", np.median(dat["數學"]))
-
-print("------------------------------------------------------------")  # 60­э
-
-a = np.array([1, 2, 3])   # Create a rank 1 array
-print(type(a))            # Prints "<type 'numpy.ndarray'>"
-print(a.shape)            # Prints "(3,)"
-print(a[0], a[1], a[2])   # Prints "1 2 3"
-a[0] = 5                  # Change an element of the array
-print(a)                  # Prints "[5, 2, 3]"
-b = np.array([[1,2,3],[4,5,6]])   # Create a rank 2 array
-print(b.shape)                     # Prints "(2, 3)"
-print(b[0, 0], b[0, 1], b[1, 0])   # Prints "1 2 4"
-
-print('------------------------------------------------------------')	#60個
-
-a = np.zeros((2,2))
-print(a) # Prints "[[ 0. 0.]
-# [0. 0.]]"
-
-b = np.ones((1,2)) # Create an array of all ones
-print(b) # Prints "[[ 1. 1.]]"
-
-c = np.full((2,2), 7) # Create a constant array
-print(c)
-
-d = np.eye(3)
-print(d)
-
-print('------------------------------------------------------------')	#60個
-
-a = np.array([[1,2,3,4], [5,6,7,8], [9,10,11,12]])
-b= a[0:2,1:3]         # 定義b為a 的部分資料
-#b= a[0:2,1:3].copy() # 複製b為a 的部分資料
-print(b)              #輸出[[2 3], [6 7]]
-b[0, 0] = 99          # 修改b的局部資料
-print(b)              #輸出[[99  3], [ 6  7]]
-print(a)              # 輸出[[ 1 99  3  4],[ 5  6  7  8],[ 9 10 11 12]]
-
-print('------------------------------------------------------------')	#60個
-
-a = np.array([[1,2,3,4], [5,6,7,8], [9,10,11,12]])
-row_r1 = a[1, :]
-row_r2 = a[1:2, :]
-print(row_r1, row_r1.shape)
-print(row_r2, row_r2.shape)
-col_r1 = a[:, 1]
-col_r2 = a[:, 1:2]
-print(col_r1, col_r1.shape)
-print(col_r2, col_r2.shape)
-
-print('------------------------------------------------------------')	#60個
-
-a = np.array([[1,2], [3, 4], [5, 6]])
-print(a[0, 0])
-print(a[1, 1])
-b=[a[0, 0], a[1, 1]];
-print(b)
-b=a[[0, 0], [1, 1]];
-print(b)
-print(b[1])
-print(a[[0,1,2], [0,1,0]])
-
-print('------------------------------------------------------------')	#60個
-
-x = np.array([1, 2])  #numpy自動設定
-print(x.dtype)         # 輸出 "int64"
-x = np.array([1.0, 2.0])  #numpy自動設定
-print(x.dtype)             # 輸出 "float64"
-x = np.array([1, 2], dtype=np.int64)  #設定為int64
-print(x.dtype)                         # 輸出 "int64"
-
-print('------------------------------------------------------------')	#60個
-
-x = np.array([[1,2],[3,4]], dtype=np.float64)
-y = np.array([[5,6],[7,8]], dtype=np.float64)
-v = np.array([9, 10], dtype=np.float64)
-
-# 加法
-print(x + y)        # 輸出 [[ 6.0  8.0] [10.0 12.0]]
-print(np.add(x, y)) # 輸出 [[ 6.0  8.0] [10.0 12.0]]
-print(x + 10)       # 輸出 [[11. 12.] [13. 14.]]
-# 減法
-print(x - y)        # 輸出 [[-4.0 -4.0] [-4.0 -4.0]]
-print(np.subtract(x, y)) # 輸出 [[-4.0 -4.0] [-4.0 -4.0]]
-print(x -[1,2])     # 輸出 [[0. 0.]  [2. 2.]]
-# 乘法
-print(x * y)
-print(np.multiply(x, y)) # 輸出  [[ 5.0 12.0][21.0 32.0]]
-# 除法
-print(x / y)
-print(np.divide(x, y))# 輸出 [[ 0.2  0.33333333] [ 0.42857143  0.5]]
-# 平方
-print(x **2)
-print(np.sqrt(x))# 輸出[[ 1. 1.41421356] [ 1.73205081  2.]]
-
-#矩陣乘法，兩個數組的點積 Dot product
-print(x.dot(y))# 輸出         [[19. 22.] [43. 50.]]
-print(np.dot(x, y))   # [[5+14 , 6+16] []]
-
-print('------------------------------------------------------------')	#60個
-
-x = np.array([[-1,2,3],[13,14,15]])
-print(x)
-print(np.sum(x))       # 輸出46   全部累加
-print(np.sum(x, axis=0))  # 輸出"[12 16 18]" =(-1+13),(2+14),(3+15)
-print(np.sum(x, axis=1))  # 輸出"[ 4 42]" =(-1+2+3),(13+14+15)
-print(np.max(x))       #最大值 輸出15
-print(np.min(x))       #最小值 輸出-1
-print(np.cumsum(x))    # 累加[-1  1  4 17 31 46]
-# 加權平均值
-print(np.average(x))   # 輸出7.666
-# 平均 mean=sum(x)/len(x)
-print(np.mean(x))      # 輸出7.666
-# 中間值
-print(np.median(x))   # 輸出8.0
-# 標準偏差 std = sqrt(mean(abs(x - x.mean())**2))
-print(np.std(x))       # 輸出 6.472
-# 方差 var = mean(abs(x - x.mean())**2)
-print(np.var(x))       # 輸出 41.888
-print(x.T)       # 輸出 [[-1 13] [ 2 14] [ 3 15]]
-
-print('------------------------------------------------------------')	#60個
-
-a = np.array([[1,2,3,4], [5,6,7,8], [9,10,11,12]])
-bool_idx =  ((a % 2)==0)
-print(bool_idx)
-print(a[bool_idx])
-print(a[a > 10])
-print(a[a%2==1]*10)
-
-print('------------------------------------------------------------')	#60個
-
-#方法1
-x = np.array([[1,2,3], [4,5,6]])
-v = np.array([1, 0, 1])
-y = np.empty_like(x)
-for i in range(2):
-    y[i, :] = x[i, :] + v
-print(y)    #輸出[[2 2 4][5 5 7]]
-
-#方法2
-v2 = np.tile(v, (2, 1))
-print(v2)   #輸出[[1 0 1][1 0 1]]
-print(x+v2) #輸出[[2 2 4] [5 5 7]]
-
-#方法3
-print(x+v)  #輸出[[2 2 4] [5 5 7]]
-
-print('------------------------------------------------------------')	#60個
-
-a = np.array([1, 2, 3])
-b = np.array([4, 5, 6])
-print(a[0], b[1])
-
-a = np.append(a, b)
-print(a)
-
-d = a[1]
-print(d)
-
-a2 = np.delete(a, 1)
-print(a2)
-a3 = np.insert(a, 1, d)
-print(a3)
-
-print("------------------------------------------------------------")  # 60個
-
-# 一維
-a = np.array([1, 2, 3])
-print(a)
-
-# 二維
-b = np.array([[1, 2, 3], [5, 6, 7]])
-print(b)
-
-# 二維，使用 dtype 定義數據類型
-bb = np.array([[1, 2, 3], [5, 6, 7]], dtype=float)
-print(bb)
-
-# 最小維度
-c = np.array([1, 2, 3], ndmin=3)
-print(c)
-
-
-print("------------------------------------------------------------")  # 60個
-
-a = np.array([[[1, 2, 3], [5, 6, 7]]])
-
-# 取得陣列維度的深度
-print(np.ndim(a))
-
-# 依序取得每個維度的數量
-print(np.shape(a))
-
-# 修改維度 1,2,3 -> 1,3,2
-a.shape = (1, 3, 2)
-print(a)
-
-# 也可以使用 reshape，不過不知道為什麼用了之後執行沒問題，但編輯器會報錯
-# b = a.reshape(1,2,3)
-# print(b)
-
-print("------------------------------------------------------------")  # 60個
-
-# 複製數據
-a = [1, 2, 3]
-b = np.asarray(a)
-c = a
-a = [4, 5, 6]
-d = np.asarray(a, dtype=float)
-print(a)  # [4, 5, 6]
-print(b)  # [1 2 3]
-print(c)  # [1, 2, 3]
-print(d)  # [4. 5. 6.]
-
-# 產生數據
-x = np.arange(5, dtype=float)
-print(x)  # [0. 1. 2. 3. 4.]
-x2 = np.arange(0, 10, 2)
-print(x2)  # [0 2 4 6 8]
-
-# 使用 linspace 產生數據
-y = np.linspace(1, 10, 10, dtype=int)
-print(y)  # [ 1  2  3  4  5  6  7  8  9 10]
-y2 = np.linspace(1, 2, 10)
-print(y2)
-# [1. 1.11111111 1.22222222 1.33333333 1.44444444 1.55555556 1.66666667 1.77777778 1.88888889 2.]
-
-print("------------------------------------------------------------")  # 60個
-
-# Make the graphs a bit prettier, and bigger
-plt.style.use('ggplot')
-plt.rcParams['figure.figsize'] = (15, 5)
-
-print('------------------------------------------------------------')	#60個
-
-broken_df = pd.read_csv('data/bikes.csv', encoding = "ISO-8859-1")
-
-# Look at the first 3 rows
-print(broken_df[:3])
-
-print('------------------------------------------------------------')	#60個
-
-fixed_df = pd.read_csv('data/bikes.csv', sep = ';', encoding = 'latin1', parse_dates = ['Date'], dayfirst=True, index_col='Date')
-print(fixed_df[:3])
-
-print(fixed_df['Berri 1'])
-
-fixed_df['Berri 1'].plot()
+# plot data
+
+# Series
+data = pd.Series(np.random.randn(1000), index=np.arange(1000))
+data = data.cumsum()
+##data.plot()
+
+# DataFrame
+data = pd.DataFrame(np.random.randn(1000, 4), index=np.arange(1000), columns=list("ABCD"))
+data = data.cumsum()
+# plot methods:
+# 'bar', 'hist', 'box', 'kde', 'area', scatter', hexbin', 'pie'
+ax = data.plot.scatter(x='A', y='B', color='DarkBlue', label="Class 1")
+data.plot.scatter(x='A', y='C', color='LightGreen', label='Class 2', ax=ax)
 
 plt.show()
 
-
-fixed_df.plot(figsize=(15, 10))
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-df = pd.read_csv('data/bikes.csv', sep=';', encoding='latin1', parse_dates=['Date'], dayfirst=True, index_col='Date')
-df['Berri 1'].plot()
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-# Make the graphs a bit prettier, and bigger
-plt.style.use('ggplot')
-
-# This is necessary to show lots of columns in pandas 0.12. 
-# Not necessary in pandas 0.13.
-pd.set_option('display.width', 5000) 
-pd.set_option('display.max_columns', 60)
-
-plt.rcParams['figure.figsize'] = (15, 5)
-
-# because of mixed types we specify dtype to prevent any errors
-csv_filename = 'D:/_git/big_files/311-service-requests.csv'
-complaints = pd.read_csv(csv_filename, dtype='unicode')
-
-print(complaints)
-complaints['Complaint Type']
-
-complaints['Complaint Type'].value_counts()
-
-complaint_counts = complaints['Complaint Type'].value_counts()
-complaint_counts[:10]
-
-complaint_counts[:10].plot(kind='bar')
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-# Make the graphs a bit prettier, and bigger
-plt.style.use('ggplot')
-plt.rcParams['figure.figsize'] = (15, 5)
-
-# This is necessary to show lots of columns in pandas 0.12. 
-# Not necessary in pandas 0.13.
-pd.set_option('display.width', 5000) 
-pd.set_option('display.max_columns', 60)
-
-
-# because of mixed types we specify dtype to prevent any errors
-csv_filename = 'D:/_git/big_files/311-service-requests.csv'
-complaints = pd.read_csv(csv_filename, dtype='unicode')
-
-is_noise = complaints['Complaint Type'] == "Noise - Street/Sidewalk"
-noise_complaints = complaints[is_noise]
-noise_complaints['Borough'].value_counts()
-
-noise_complaint_counts = noise_complaints['Borough'].value_counts()
-complaint_counts = complaints['Borough'].value_counts()
-
-noise_complaint_counts / complaint_counts
-
-noise_complaint_counts / complaint_counts.astype(float)
-
-(noise_complaint_counts / complaint_counts.astype(float)).plot(kind='bar')
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-# Make the graphs a bit prettier, and bigger
-plt.style.use('ggplot')
-plt.rcParams['figure.figsize'] = (15, 5)
-plt.rcParams['font.family'] = 'sans-serif'
-
-# This is necessary to show lots of columns in pandas 0.12. 
-# Not necessary in pandas 0.13.
-pd.set_option('display.width', 5000) 
-pd.set_option('display.max_columns', 60)
-
-
-bikes = pd.read_csv('data/bikes.csv', sep=';', encoding='latin1', parse_dates=['Date'], dayfirst=True, index_col='Date')
-bikes['Berri 1'].plot()
-plt.show()
-
-
-berri_bikes = bikes[['Berri 1']].copy()
-
-
-berri_bikes[:5]
-
-
-
-berri_bikes.index
-
-
-berri_bikes.index.day
-
-berri_bikes.index.weekday
-
-berri_bikes.loc[:,'weekday'] = berri_bikes.index.weekday
-berri_bikes[:5]
-
-
-weekday_counts = berri_bikes.groupby('weekday').aggregate(sum)
-weekday_counts
-
-weekday_counts.index = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
-weekday_counts
-
-
-weekday_counts.plot(kind='bar')
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-bikes = pd.read_csv('data/bikes.csv', 
-                    sep=';', encoding='latin1', 
-                    parse_dates=['Date'], dayfirst=True, 
-                    index_col='Date')
-# Add the weekday column
-berri_bikes = bikes[['Berri 1']].copy()
-berri_bikes.loc[:,'weekday'] = berri_bikes.index.weekday
-
-# Add up the number of cyclists by weekday, and plot!
-weekday_counts = berri_bikes.groupby('weekday').aggregate(sum)
-weekday_counts.index = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
-weekday_counts.plot(kind='bar')
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-plt.style.use('ggplot')
-plt.rcParams['figure.figsize'] = (15, 3)
-plt.rcParams['font.family'] = 'sans-serif'
-
-#Canada's weather data for 2012, and saved it to a CSV.
-#Here's the temperature every hour for 2012!
-
-weather_2012_final = pd.read_csv('data/weather_2012.csv', index_col='Date/Time')
-weather_2012_final['Temp (C)'].plot(figsize=(15, 6))
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-#Here's an URL template you can use to get data in Montreal.
-url_template = "http://climate.weather.gc.ca/climateData/bulkdata_e.html?format=csv&stationID=5415&Year={year}&Month={month}&timeframe=1&submit=Download+Data"
-
-#To get the data for March 2013, we need to format it with month=3, year=2012.
-#url = url_template.format(month=3, year=2012)
-#weather_mar2012 = pd.read_csv(url, skiprows=15, index_col='Date/Time', parse_dates=True, encoding='latin1', header=True)
-
-# because the url is broken, we use our saved dataframe for now
-weather_mar2012 = pd.read_csv('data/weather_2012.csv')
-
-print(weather_mar2012)
-
-
-weather_mar2012[u"Temp (C)"].plot(figsize=(15, 5))
-plt.show()
-
-
-# '\xb0' for that degree character °
-""" fail
-weather_mar2012.columns = [
-    u'Year', u'Month', u'Day', u'Time', u'Data Quality', u'Temp (C)', 
-    u'Temp Flag', u'Dew Point Temp (C)', u'Dew Point Temp Flag', 
-    u'Rel Hum (%)', u'Rel Hum Flag', u'Wind Dir (10s deg)', u'Wind Dir Flag', 
-    u'Wind Spd (km/h)', u'Wind Spd Flag', u'Visibility (km)', u'Visibility Flag',
-    u'Stn Press (kPa)', u'Stn Press Flag', u'Hmdx', u'Hmdx Flag', u'Wind Chill', 
-    u'Wind Chill Flag', u'Weather']
-"""
-
-weather_mar2012 = weather_mar2012.dropna(axis=1, how='any')
-print(weather_mar2012[:5])
-
-print('------------------------------------------------------------')	#60個
-
-#fail
-#weather_mar2012 = weather_mar2012.drop(['Year', 'Month', 'Day', 'Time', 'Data Quality'], axis=1)
-#print(weather_mar2012[:5])
-
-print('------------------------------------------------------------')	#60個
-
-
-#Plotting the temperature by hour of day
-
-"""fail
-temperatures = weather_mar2012[[u'Temp (C)']].copy()
-print(temperatures.head)
-temperatures.loc[:,'Hour'] = weather_mar2012.index.hour
-temperatures.groupby('Hour').aggregate(np.median).plot()
-
-plt.show()
-"""
-
-print('------------------------------------------------------------')	#60個
-
-""" fail in reading csv data
-#5.3 Getting the whole year of data
-
-def download_weather_month(year, month):
-    if month == 1:
-        year += 1
-    url = 'weather_2012.csv'
-    weather_data = pd.read_csv(url, skiprows=15, index_col='Date/Time', parse_dates=True, header=True)
-    weather_data = weather_data.dropna(axis=1)
-    weather_data.columns = [col.replace('\xb0', '') for col in weather_data.columns]
-    weather_data = weather_data.drop(['Year', 'Day', 'Month', 'Time', 'Data Quality'], axis=1)
-    return weather_data
-
-
-cc = download_weather_month(2012, 1)[:5]
-print(cc)
-
-data_by_month = [download_weather_month(2012, i) for i in range(1, 13)]
-
-weather_2012 = pd.concat(data_by_month)
-print(weather_2012)
-
-#save to csv file
-weather_2012.to_csv('tmp_weather_2012.csv')
-"""
-print('------------------------------------------------------------')	#60個
-
-plt.style.use('ggplot')
-plt.rcParams['figure.figsize'] = (15, 3)
-plt.rcParams['font.family'] = 'sans-serif'
-
-weather_2012 = pd.read_csv('data/weather_2012.csv', parse_dates=True, index_col='Date/Time')
-print(weather_2012[:5])
-
-weather_description = weather_2012['Weather']
-is_snowing = weather_description.str.contains('Snow')
-
-# Not super useful
-print(is_snowing[:5])
-
-# More useful!
-is_snowing=is_snowing.astype(float)
-is_snowing.plot()
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-#Use resampling to find the snowiest month
-
-#If we wanted the median temperature each month, we could use the resample() method like this:
-
-weather_2012['Temp (C)'].resample('M').apply(np.median).plot(kind='bar')
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-
-print(is_snowing.astype(float)[:10])
-
-
-
-
-
-print('------------------------------------------------------------')	#60個
-
-print(is_snowing.astype(float).resample('M').apply(np.mean))
-
-is_snowing.astype(float).resample('M').apply(np.mean).plot(kind='bar')
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-#Plotting temperature and snowiness stats together
-
-temperature = weather_2012['Temp (C)'].resample('M').apply(np.median)
-is_snowing = weather_2012['Weather'].str.contains('Snow')
-snowiness = is_snowing.astype(float).resample('M').apply(np.mean)
-
-# Name the columns
-temperature.name = "Temperature"
-snowiness.name = "Snowiness"
-
-#We'll use concat again to combine the two statistics into a single dataframe.
-stats = pd.concat([temperature, snowiness], axis=1)
-print(stats)
-
-stats.plot(kind='bar')
-plt.show()
-
-#Uh, that didn't work so well because the scale was wrong. We can do better by plotting them on two separate graphs:
-
-stats.plot(kind='bar', subplots=True, figsize=(15, 10))
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-# Make the graphs a bit prettier, and bigger
-plt.style.use('ggplot')
-plt.rcParams['figure.figsize'] = (15, 5)
-plt.rcParams['font.family'] = 'sans-serif'
-
-# This is necessary to show lots of columns in pandas 0.12. 
-# Not necessary in pandas 0.13.
-pd.set_option('display.width', 5000) 
-pd.set_option('display.max_columns', 60)
-
-print('------------------------------------------------------------')	#60個
-
-#NYC 311 service request dataset
-csv_filename = 'D:/_git/big_files/311-service-requests.csv'
-requests = pd.read_csv(csv_filename, dtype='unicode')
-
-cc = requests['Incident Zip'].unique()
-print(cc)
-
-print('------------------------------------------------------------')	#60個
-
-#Fixing the nan values and string/float confusion
-
-na_values = ['NO CLUE', 'N/A', '0']
-csv_filename = 'D:/_git/big_files/311-service-requests.csv'
-requests = pd.read_csv(csv_filename, na_values=na_values, dtype={'Incident Zip': str})
-
-cc = requests['Incident Zip'].unique()
-print(cc)
-
-
-#What's up with the dashes?
-
-rows_with_dashes = requests['Incident Zip'].str.contains('-').fillna(False)
-cc = len(requests[rows_with_dashes])
-print(cc)
-
-print(requests[rows_with_dashes])
-
-#But then my friend Dave pointed out that 9-digit zip codes are normal.
-#Let's look at all the zip codes with more than 5 digits, make sure they're okay, and then truncate them.
-long_zip_codes = requests['Incident Zip'].str.len() > 5
-cc = requests['Incident Zip'][long_zip_codes].unique()
-print(cc)
-
-
-requests['Incident Zip'] = requests['Incident Zip'].str.slice(0, 5)
-
-#Earlier I thought 00083 was a broken zip code, but turns out Central Park's zip code 00083!
-#Shows what I know. I'm still concerned about the 00000 zip codes, though: let's look at that.
-cc = requests[requests['Incident Zip'] == '00000']
-print(cc)
-
-
-zero_zips = requests['Incident Zip'] == '00000'
-requests.loc[zero_zips, 'Incident Zip'] = np.nan
-
-""" fail
-unique_zips = requests['Incident Zip'].unique()
-unique_zips.sort()
-cc = unique_zips
-print(cc)
-"""
-zips = requests['Incident Zip']
-# Let's say the zips starting with '0' and '1' are okay, for now. (this isn't actually true -- 13221 is in Syracuse, and why?)
-is_close = zips.str.startswith('0') | zips.str.startswith('1')
-# There are a bunch of NaNs, but we're not interested in them right now, so we'll say they're False
-is_far = ~(is_close) & zips.notnull()
-
-cc = zips[is_far]
-print(cc)
-
-cc = requests[is_far][['Incident Zip', 'Descriptor', 'City']].sort_values('Incident Zip')
-print(cc)
-
-cc = requests['City'].str.upper().value_counts()
-print(cc)
-
-print('------------------------------------------------------------')	#60個
-
-#Putting it together
-
-na_values = ['NO CLUE', 'N/A', '0']
-csv_filename = 'D:/_git/big_files/311-service-requests.csv'
-requests = pd.read_csv(csv_filename, 
-                       na_values=na_values, 
-                       dtype={'Incident Zip': str})
-
-def fix_zip_codes(zips):
-    # Truncate everything to length 5 
-    zips = zips.str.slice(0, 5)
-    
-    # Set 00000 zip codes to nan
-    zero_zips = zips == '00000'
-    zips[zero_zips] = np.nan
-    
-    return zips
-
-requests['Incident Zip'] = fix_zip_codes(requests['Incident Zip'])
-
-cc = requests['Incident Zip'].unique()
-print(cc)
-
-
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-print('------------------------------------------------------------')	#60個
-
-#Parsing Unix timestamps
-
-# Read it, and remove the last row
-popcon = pd.read_csv('data/popularity-contest', sep=' ', )[:-1]
-popcon.columns = ['atime', 'ctime', 'package-name', 'mru-program', 'tag']
-
-print(popcon[:5])
-
-popcon['atime'] = popcon['atime'].astype(int)
-popcon['ctime'] = popcon['ctime'].astype(int)
-
-popcon['atime'] = pd.to_datetime(popcon['atime'], unit='s')
-popcon['ctime'] = pd.to_datetime(popcon['ctime'], unit='s')
-
-print(popcon['atime'].dtype)
-
-
-print(popcon[:5])
-
-print('------------------------------------------------------------')	#60個
-
-popcon = popcon[popcon['atime'] > '1970-01-01']
-
-#不包含lib的
-nonlibraries = popcon[~popcon['package-name'].str.contains('lib')]
-
-cc = nonlibraries.sort_values('ctime', ascending=False)[:10]
-print(cc)
-
-print('------------------------------------------------------------')	#60個
-print('------------------------------------------------------------')	#60個
-print('------------------------------------------------------------')	#60個
-
-#Reading data from SQL databases
-import sqlite3
-
-con = sqlite3.connect("data/weather_2012.sqlite")
-df = pd.read_sql("SELECT * from weather_2012 LIMIT 3", con)
-print(df)
-
-print('------------------------------------------------------------')	#60個
-
-df = pd.read_sql("SELECT * from weather_2012 LIMIT 3", con, index_col='id')
-print(df)
-
-print('------------------------------------------------------------')	#60個
-
-df = pd.read_sql("SELECT * from weather_2012 LIMIT 3", con, 
-                 index_col=['id', 'date_time'])
-print(df)
-
-print('--------ddd----------------------------------------------------')	#60個
-
-#Writing to a SQLite database
-
-weather_df = pd.read_csv('data/weather_2012.csv')
-con = sqlite3.connect("tmp_test_db.sqlite")
-con.execute("DROP TABLE IF EXISTS weather_2012")
-weather_df.to_sql("weather_2012", con)
-
-
-con = sqlite3.connect("tmp_test_db.sqlite")
-df = pd.read_sql("SELECT * from weather_2012 LIMIT 3", con)
-print(df)
-
-con = sqlite3.connect("tmp_test_db.sqlite")
-df = pd.read_sql("SELECT * from weather_2012 ORDER BY Weather LIMIT 3", con)
-print(df)
-
-print('------------------------------------------------------------')	#60個
-
-"""
-#Connecting to other kinds of database
-
-#MySQL / PostgreSQL
-import MySQLdb
-con = MySQLdb.connect(host="localhost", db="test")
-
-#To connect to a PostgreSQL database:
-import psycopg2
-con = psycopg2.connect(host="localhost")
-"""
-print('------------------------------------------------------------')	#60個
-
-a = np.array([[1,2,3],[4,5,6]], int)#指定元素型態的陣列
-a = np.array([[1,2,3],[4,5,6]], dtype = float)#指定元素型態的陣列
-print(a[0, 0], a[0, 1], a[0, 2])
-print(a[1, 0], a[1, 1], a[1, 2])
-
-print('陣列元素的資料型態 :', a.dtype)
-print('陣列的元素總數', a.size)
-print('陣列的形狀', a.shape)
-print('陣列元素所占用的拜數', a.itemsize)
-print('幾維陣列', a.ndim)
-print('整個陣列所占用的拜數', a.nbytes)
-
 print("------------------------------------------------------------")  # 60個
 
-print('陣列的形狀操作 reshape 1')
-
-a = np.array([1,2,3,4,5,6])
-print(a)
-b = a.reshape((3, 2))
-print(b)
-
-print("------------------------------------------------------------")  # 60個
-
-print('陣列的形狀操作 reshape 2')
-
-a = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9])
-b = a.reshape((3, 3))
-print(b)
-c = b.flatten()
-print(c)
-
-print("------------------------------------------------------------")  # 60個
-
-#合併
-a = np.array([[1,2],[3,4]])
-b = np.array([[5,6],[7,8]])
-c = np.concatenate((a, b), axis=0)
-print(c)
-d = np.concatenate((a, b), axis=1)
-print(d)
-
-print("------------------------------------------------------------")  # 60個
-
-#擴充或刪除陣列的維度
-a = np.array([[1,2,3,4,5,6,7,8]])
-b = a.reshape(2, 4)
-print(b.shape)
-c = np.expand_dims(b, axis=0)
-d = np.expand_dims(b, axis=1)
-print(c.shape, d.shape)
-e = np.squeeze(c)
-f = np.squeeze(d)
-print(e.shape, f.shape)
-
-print("------------------------------------------------------------")  # 60個
-
-#取得陣列最大最小值和索引
-a = np.array([[11,22,13,74,35,6,27,18]])
-
-min_value = np.min(a)
-max_value = np.max(a)
-print(min_value, max_value)
-
-min_idx = np.argmin(a)
-max_idx = np.argmax(a)
-print(min_idx, max_idx)
-
-print("------------------------------------------------------------")  # 60個
-
-x1 = np.linspace(-2.0, 2.0, 11) #包含頭尾共21點
-
-# 移除 x1 > 0.55 的點, 就是保存 x1 <=0.6的點
-x2 = x1[x1 <= 0.55]
-
-# 遮罩 x1 > 0.7 的點, 會多了點線標記
-x3 = np.ma.masked_where(x1 > 0.7, x1)
-
-print(x1)
-print(x2)
-print(x3)
-
-
-"""
-x1 = np.random.normal(mu, sigma, size=N*10)  # 隨機數
-
-# list 移除資料的寫法
-x2 = x1[x1 <= 100.0]
-x2 = x2[x2 >= 0]
-
-"""
-
-#過濾資料
-
-"""
-scores1 = np.random.normal(mu, sigma, size=N)  # 隨機數
-print("資料個數1 :", len(scores1))
-print("最高分 :", max(scores1))
-print("最低分 :", min(scores1))
-
-scores2 = scores1[scores1 <= 100.0]
-scores3 = scores2[scores2 >= 0.0]
-"""
-
-
-
-
-print('------------------------------------------------------------')	#60個
-
-print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-print("作業完成")
-print("------------------------------------------------------------")  # 60個
 
 
 

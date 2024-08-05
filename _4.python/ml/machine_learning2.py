@@ -10,6 +10,7 @@ print("------------------------------------------------------------")  # 60個
 import os
 import sys
 import math
+import time
 import random
 import numpy as np
 import pandas as pd
@@ -25,7 +26,6 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
-import time
 import matplotlib
 import seaborn as sns
 import matplotlib as mpl
@@ -916,7 +916,6 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
-import time
 import matplotlib
 import seaborn as sns
 

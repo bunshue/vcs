@@ -8,6 +8,7 @@ print("------------------------------------------------------------")  # 60個
 import os
 import sys
 import math
+import time
 import random
 import numpy as np
 import pandas as pd

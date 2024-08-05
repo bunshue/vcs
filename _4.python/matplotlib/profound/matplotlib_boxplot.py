@@ -28,15 +28,15 @@ np.random.seed(10)
 N = 100
 y = np.random.randn(N)
 
-#plt.boxplot(y) # 無參數 最基本的箱形圖 直式
-#plt.show()
+# plt.boxplot(y) # 無參數 最基本的箱形圖 直式
+# plt.show()
 
-#print("全部\n",y) #  many
-print("最大: ",y.max())
-print("最小: ",y.min())
-print("平均: ",y.mean())
-#print("中位數: ",y.median())
-print("標準差: ",y.std())
+# print("全部\n",y) #  many
+print("最大: ", y.max())
+print("最小: ", y.min())
+print("平均: ", y.mean())
+# print("中位數: ",y.median())
+print("標準差: ", y.std())
 
 print("求 四分位數")
 lower_q = np.quantile(y, 0.25, method="lower")  # 下四分位數
@@ -52,38 +52,36 @@ print("四分位距 :", int_r)
 # 盒鬚圖（Box plot）
 
 # plt.boxplot(y) # 無參數
-labels = ['常態分佈亂數產生']
-#plt.boxplot(y, labels = labels)
+labels = ["常態分佈亂數產生"]
+# plt.boxplot(y, labels = labels)
 
-#plt.boxplot(y, whis = 1.8) # ???
+# plt.boxplot(y, whis = 1.8) # ???
 
-median_line = dict(linestyle='--',
-                   linewidth=2.5,
-                   color='g')
+median_line = dict(linestyle="--", linewidth=2.5, color="g")
 
-#vert=True 垂直箱圖, vert=False 水平箱圖
+# vert=True 垂直箱圖, vert=False 水平箱圖
 
-#在箱圖上 多畫 中位數線
-#plt.boxplot(y,labels=labels,vert=True,medianprops=median_line)
+# 在箱圖上 多畫 中位數線
+# plt.boxplot(y,labels=labels,vert=True,medianprops=median_line)
 
-#多標記平均數線
-#plt.boxplot(y,labels=labels,vert=True,showmeans=True)
+# 多標記平均數線
+# plt.boxplot(y,labels=labels,vert=True,showmeans=True)
 
 # 設計箱線圖的晶鬚線
-whisker_line = dict(linestyle='--',linewidth=2.5,color='m')
-#plt.boxplot(y,labels=labels,vert=True,whiskerprops=whisker_line)
+whisker_line = dict(linestyle="--", linewidth=2.5, color="m")
+# plt.boxplot(y,labels=labels,vert=True,whiskerprops=whisker_line)
 
 # 隱藏箱線圖的異常值
 # plt.boxplot(y,labels=labels,showfliers=False)
 
 
 # 設計箱線圖的caps
-caps_line = dict(linestyle='--',linewidth=2.5,color='r')
-#plt.boxplot(y,labels=labels,vert=True,capprops=caps_line)
+caps_line = dict(linestyle="--", linewidth=2.5, color="r")
+# plt.boxplot(y,labels=labels,vert=True,capprops=caps_line)
 
 # 隨機數據的箱線圖
-mean_mark = dict(markerfacecolor='b', markeredgecolor='b', marker='D')
-plt.boxplot(y,labels=labels,vert=True, showmeans=True,meanprops=mean_mark)
+mean_mark = dict(markerfacecolor="b", markeredgecolor="b", marker="D")
+plt.boxplot(y, labels=labels, vert=True, showmeans=True, meanprops=mean_mark)
 
 
 plt.grid(True)
@@ -145,10 +143,9 @@ print("------------------------------------------------------------")  # 60個
 
 import matplotlib.pyplot as plt
 
-x = [9, 12, 30, 31, 31, 32, 33, 33, 35, 35,
-     38, 38, 41, 42, 43, 46, 46, 48, 52, 70]
+x = [9, 12, 30, 31, 31, 32, 33, 33, 35, 35, 38, 38, 41, 42, 43, 46, 46, 48, 52, 70]
 
-bp = plt.boxplot(x,showmeans=True)
+bp = plt.boxplot(x, showmeans=True)
 outliers = [y.get_ydata() for y in bp["fliers"]]
 boxes = [y.get_ydata() for y in bp["boxes"]]
 medians = [y.get_ydata() for y in bp["medians"]]
@@ -164,18 +161,14 @@ print(f"帽  子caps     : {caps}")
 plt.show()
 
 
-      
-
-
 print("------------------------------------------------------------")  # 60個
 
 
 import matplotlib.pyplot as plt
 
-x = [9, 12, 30, 31, 31, 32, 33, 33, 35, 35,
-     38, 38, 41, 42, 43, 46, 46, 48, 52, 70]
+x = [9, 12, 30, 31, 31, 32, 33, 33, 35, 35, 38, 38, 41, 42, 43, 46, 46, 48, 52, 70]
 
-bp = plt.boxplot(x,showmeans=True)
+bp = plt.boxplot(x, showmeans=True)
 outliers = [y.get_ydata() for y in bp["fliers"]]
 Q1 = [min(y.get_ydata()) for y in bp["boxes"]]
 Q3 = [max(y.get_ydata()) for y in bp["boxes"]]
@@ -193,8 +186,6 @@ print(f"晶  鬚Whiskers : {whiskers}")
 print(f"極小值mimimums : {minimum[0]}")
 print(f"極大值maximums : {maximum[0]}")
 plt.show()
-
-     
 
 
 print("------------------------------------------------------------")  # 60個
@@ -382,5 +373,3 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
-
-
