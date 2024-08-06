@@ -14,6 +14,7 @@ print("------------------------------------------------------------")  # 60個
 import os
 import sys
 import math
+import time
 import random
 import numpy as np
 import pandas as pd
@@ -28,7 +29,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 print('---- 1111 csv --------------------------------------------------------')	#60個
 
 print('pandas DataFrame資料輸出到csv檔')
@@ -604,20 +605,159 @@ print("標準差:", np.std(dat["太郎"]))
 
 print('------------------------------------------------------------')	#60個
 
+'''
+print("------------------------------------------------------------")  # 60個
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
 
-print('------------------------------------------------------------')	#60個
-print('作業完成')
-print('------------------------------------------------------------')	#60個
+filename = "data/python_ReadWrite_CSV6_score.csv"
+
+dat = pd.read_csv(filename, encoding="UTF-8")
+
+print(dat.head())
+
+print("數學平均", np.mean(dat["數學"]))
+print("數學中位數", np.median(dat["數學"]))
+
+print("------------------------------------------------------------")  # 60個
 
 
+print("------------------------------------------------------------")  # 60個
 
 
+# NYC 311 service request dataset
+csv_filename = "C:/_git/vcs/_big_files/311-service-requests.csv"
+requests = pd.read_csv(csv_filename, dtype="unicode")
+
+cc = requests["Incident Zip"].unique()
+print(cc)
+
+print("------------------------------------------------------------")  # 60個
+
+# Fixing the nan values and string/float confusion
+
+na_values = ["NO CLUE", "N/A", "0"]
+csv_filename = "C:/_git/vcs/_big_files/311-service-requests.csv"
+requests = pd.read_csv(csv_filename, na_values=na_values, dtype={"Incident Zip": str})
+
+cc = requests["Incident Zip"].unique()
+print(cc)
 
 
+# What's up with the dashes?
 
-print('------------------------------------------------------------')	#60個
+rows_with_dashes = requests["Incident Zip"].str.contains("-").fillna(False)
+cc = len(requests[rows_with_dashes])
+print(cc)
+
+print(requests[rows_with_dashes])
+
+# But then my friend Dave pointed out that 9-digit zip codes are normal.
+# Let's look at all the zip codes with more than 5 digits, make sure they're okay, and then truncate them.
+long_zip_codes = requests["Incident Zip"].str.len() > 5
+cc = requests["Incident Zip"][long_zip_codes].unique()
+print(cc)
 
 
+requests["Incident Zip"] = requests["Incident Zip"].str.slice(0, 5)
 
+# Earlier I thought 00083 was a broken zip code, but turns out Central Park's zip code 00083!
+# Shows what I know. I'm still concerned about the 00000 zip codes, though: let's look at that.
+cc = requests[requests["Incident Zip"] == "00000"]
+print(cc)
+
+
+zero_zips = requests["Incident Zip"] == "00000"
+requests.loc[zero_zips, "Incident Zip"] = np.nan
+
+""" fail
+unique_zips = requests['Incident Zip'].unique()
+unique_zips.sort()
+cc = unique_zips
+print(cc)
+"""
+zips = requests["Incident Zip"]
+# Let's say the zips starting with '0' and '1' are okay, for now. (this isn't actually true -- 13221 is in Syracuse, and why?)
+is_close = zips.str.startswith("0") | zips.str.startswith("1")
+# There are a bunch of NaNs, but we're not interested in them right now, so we'll say they're False
+is_far = ~(is_close) & zips.notnull()
+
+cc = zips[is_far]
+print(cc)
+
+cc = requests[is_far][["Incident Zip", "Descriptor", "City"]].sort_values(
+    "Incident Zip"
+)
+print(cc)
+
+cc = requests["City"].str.upper().value_counts()
+print(cc)
+
+print("------------------------------------------------------------")  # 60個
+
+# Putting it together
+
+na_values = ["NO CLUE", "N/A", "0"]
+csv_filename = "C:/_git/vcs/_big_files/311-service-requests.csv"
+requests = pd.read_csv(csv_filename, na_values=na_values, dtype={"Incident Zip": str})
+
+
+def fix_zip_codes(zips):
+    # Truncate everything to length 5
+    zips = zips.str.slice(0, 5)
+
+    # Set 00000 zip codes to nan
+    zero_zips = zips == "00000"
+    zips[zero_zips] = np.nan
+
+    return zips
+
+
+requests["Incident Zip"] = fix_zip_codes(requests["Incident Zip"])
+
+cc = requests["Incident Zip"].unique()
+print(cc)
+
+print("------------------------------------------------------------")  # 60個
+
+# Parsing Unix timestamps
+
+# Read it, and remove the last row
+popcon = pd.read_csv(
+    "data/popularity-contest",
+    sep=" ",
+)[:-1]
+popcon.columns = ["atime", "ctime", "package-name", "mru-program", "tag"]
+
+print(popcon[:5])
+
+popcon["atime"] = popcon["atime"].astype(int)
+popcon["ctime"] = popcon["ctime"].astype(int)
+
+popcon["atime"] = pd.to_datetime(popcon["atime"], unit="s")
+popcon["ctime"] = pd.to_datetime(popcon["ctime"], unit="s")
+
+print(popcon["atime"].dtype)
+
+print(popcon[:5])
+
+print("------------------------------------------------------------")  # 60個
+
+popcon = popcon[popcon["atime"] > "1970-01-01"]
+
+# 不包含lib的
+nonlibraries = popcon[~popcon["package-name"].str.contains("lib")]
+
+cc = nonlibraries.sort_values("ctime", ascending=False)[:10]
+print(cc)
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個

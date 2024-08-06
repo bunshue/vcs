@@ -2,6 +2,14 @@
 numpy的使用
 
 numpy: 數值計算的標準套件
+
+1. 基本建立 np.array
+   1.1 自填陣列, 串列轉np陣列
+   1.2 自動產生陣列
+
+arr1 = np.array([1, 2, 3, 4, 5])
+
+
 """
 
 print("------------------------------------------------------------")  # 60個
@@ -24,186 +32,119 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-print('numpy之基本函數')
+print("建立numpy陣列, 串列 轉 numpy陣列")
+print("一維")
+cc = np.array([1, 2, 3, 4])
+print(cc)
+print(cc.shape)
 
-print('建立數據 np.arange()')
-print('建立 numpy陣列, 使用 np.arange()')
-
-print('創建數組 Arange')
-#在給定的間隔內返回具有一定步長的整數。
-#np.arange(start, stop, step, dtype = None)
-#step:數值步長。
-
-cc = np.arange(5, 10, 2)
+print("串列 轉 numpy陣列 int")
+cc = np.array([1, 2, 3, 4], dtype=int)
 print(cc)
 
+print("串列 轉 numpy陣列 float")
+cc = np.array([1, 2, 3, 4], dtype=float)
+print(cc)
 
-cc = np.arange(10)  # 類似 Python 的 range, 但是回傳 array
+print("元組 轉 numpy陣列")
+cc = np.array((1, 2, 3, 4))
+print(cc)
+
+print("------------------------------------------------------------")  # 60個
+
+print("二維串列 轉 numpy陣列")
+
+print("二維陣列 2 X 4")
+cc = np.array([[1, 2, 3, 4], [5, 6, 7, 8]])
+print(cc)
+print(cc.shape)
+
+listdata = [[1, 2, 3, 4], [5, 6, 7, 8]]
+cc = np.array(listdata)
+print(cc)
+print("維度 :", cc.ndim)
+print("形狀 :", cc.shape)
+print("數量 :", cc.size)
+
+print("------------------------------------------------------------")  # 60個
+
+# 自動產生陣列
+
+# 1. np.arange
+
+
+# 2. np.linspace
+
+
+# 3. 其他
+
+print("numpy之基本函數")
+
+print("建立數據 np.arange()")
+print("建立 numpy陣列, 使用 np.arange()")
+
+print("創建數組 Arange")
+# 在給定的間隔內返回具有一定步長的整數。
+# np.arange(start, stop, step, dtype = None)
+# step:數值步長。
+
+cc = np.arange(10)
 print(cc)
 
 cc = np.arange(0, 6)
 print(cc)
 
+cc = np.arange(1, 10)
+print(cc)
+
 cc = np.arange(0, 11, 2)
 print(cc)
 
-cc = np.arange(1, 10)
-print(cc)
-cc = cc.reshape(3, 3)
-print(cc)
+cc = np.arange(5, dtype=float)
+print(cc)  # [0. 1. 2. 3. 4.]
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-
-print('------------------------------------------------------------')	#60個
-
-
-list2d = np.arange(18).reshape(3,6)
+list2d = np.arange(18).reshape(3, 6)
 print(list2d)
-h, w = list2d.shape[::]
-print(h, w)
-w, h = list2d.shape[::-1]
-print(w, h)
-
-print('------------------------------------------------------------')	#60個
-
-list2d = np.arange(18).reshape(3,6)
 print(list2d)
 print(list2d[::-1])
 
-print('------------------------------------------------------------')	#60個
+h, w = list2d.shape[::]
+print(h, w)
 
-a = np.arange(1, 10).reshape(3, 3)
-b = np.arange(10, 19).reshape(3, 3)
-print('a 陣列內容：\n', a)
-print('b 陣列內容：\n', b)
-print('a 陣列元素都加值：\n', a + 1)
-print('a 陣列元素都平方：\n', a ** 2)
-print('a 陣列元素加判斷：\n', a < 5)
-print('a 陣列取出第一個row都加1：\n', a[0,:] + 1)
-print('a 陣列取出第一個col都加1：\n', a[:,0] + 1)
-print('a b 陣列對應元素相加：\n', a + b)
-print('a b 陣列對應元素相乘：\n', a * b)
-print('a b 陣列點積計算：\n', np.dot(a, b))
+w, h = list2d.shape[::-1]
+print(w, h)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
-print(np.arange(5))
-print(np.arange(1, 5))
-print(np.arange(0, 10, 2))
+print("------------------------------------------------------------")  # 60個
 
-print("一維陣列 10個元素")
-a = np.arange(10)
-print(a)
+cc = np.linspace(2, 5, 4)
+print(cc)
 
-print("前4項")
-print(a[:4])
+print("創建數組 np.linspace()")
 
-print("第3項 至 第7項(不含尾)")
-print(a[3:7])
+# 創建一個具有指定間隔的浮點數的數組。
+# np.linspace(start, stop, num=50, endpoint = True, retstep = False, dtype = None, axis = 0)
+# start:起始數字
+# end:結束
+# Num:要生成的樣本數，默認為50。
 
-print("第5項 至 最後")
-print(a[5:])
-
-print("第3至第9項 跳一個")
-print(a[3:9:2])
-
-print("第2項開始至最後, 跳一個")
-print(a[2::2])
-
-print("從頭至最後, 跳二個")
-print(a[::3])
-
-print('------------------------------------------------------------')	#60個
-
-print("用numpy建立資料")
-a = np.arange(5)
-print(a)
-a = np.arange(2,5,1)
-print(a)
-
-print('------------------------------------------------------------')	#60個
-
-
-# 產生數據
-x = np.arange(5, dtype=float)
-print(x)  # [0. 1. 2. 3. 4.]
-x2 = np.arange(0, 10, 2)
-print(x2)  # [0 2 4 6 8]
-
-print('------------------------------------------------------------')	#60個
-
-#使用布林陣列篩選值
-
-arr = np.arange(10)
-
-new_arr = arr < 5
-
-print(arr)
-
-print(new_arr)
-
-print(arr[new_arr])
-
-print('------------------------------------------------------------')	#60個
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-#陣列轉置 (transpose)
-
-arr = np.arange(10).reshape(2, 5)
-print(arr.T)
-
-# print(arr.transpose(1,0))
-
-print('------------------------------------------------------------')	#60個
-
-
-
-#陣列的切片操作
-arr = np.arange(10)
-print(arr)
-
-arr[0:3] = 1
-print(arr)
-
-print('------------------------------------------------------------')	#60個
-
-
-
-my_array = np.arange(101)   # 0 1 2 ... 100
-
-sum_my_array = sum(my_array)
-print('和')
-print(sum_my_array)
-
-print('------------------------------------------------------------')	#60個
-
-print('創建數組 np.linspace()')
-
-#創建一個具有指定間隔的浮點數的數組。
-#np.linspace(start, stop, num=50, endpoint = True, retstep = False, dtype = None, axis = 0)
-#start:起始數字
-#end:結束
-#Num:要生成的樣本數，默認為50。
-
-cc = np.linspace(0, 1, 5) #0~1共分5個, 包含頭尾
+cc = np.linspace(0, 1, 5)  # 0~1共分5個, 包含頭尾
 print(cc)
 
 cc = np.linspace(1, 15, 3)
 print(cc)
 
 
-cc = np.linspace(10, 100, 10) 
+cc = np.linspace(10, 100, 10)
 print(cc)
 
-x1 = np.linspace(-2.0, 2.0, 11) #包含頭尾共21點
+x1 = np.linspace(-2.0, 2.0, 11)  # 包含頭尾共21點
 
 # 移除 x1 > 0.55 的點, 就是保存 x1 <=0.6的點
 x2 = x1[x1 <= 0.55]
@@ -215,7 +156,7 @@ print(x1)
 print(x2)
 print(x3)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 # 使用 linspace 產生數據
 y = np.linspace(1, 10, 10, dtype=int)
@@ -226,37 +167,8 @@ print(y2)
 
 print("------------------------------------------------------------")  # 60個
 
-cc = np.linspace(2,5,4)
-print(cc)
 
-
-
-
-cc = np.logspace(0,2,5)
-print(cc)
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-print("分段函數")
-
-x=np.arange(10)
-print(x)
-
-print(np.where(x<5, x, 9-x))
-
-
-a=np.arange(10)
-print(np.select([x<3,x>6], [-1,1], 0))
-
-
-a=np.arange(10)
-print(np.piecewise(x, [x<3,x>6], [lambda x: x * 2, lambda x: x * 3]))
-
-print('------------------------------------------------------------')	#60個
-
-print('建立 numpy陣列, 使用 np.linspace()')
+print("建立 numpy陣列, 使用 np.linspace()")
 
 x = np.linspace(0, 3, 4)  # 建立一個array, 在0與3的範圍之間讓4個點等分
 print(x)
@@ -264,115 +176,43 @@ print(x)
 ST = 0
 SP = 5
 N = 11
-xx = np.linspace(ST, SP, N, dtype = float)  # 建立一個array, 在 ST 與 SP 的範圍之間讓 N 個點等分
+xx = np.linspace(ST, SP, N, dtype=float)  # 建立一個array, 在 ST 與 SP 的範圍之間讓 N 個點等分
 print(xx)
 
-print('aaaaa')
+print("aaaaa")
 x = np.linspace(-np.pi, np.pi, 5)
 y1 = np.sin(x)
 y2 = np.cos(x)
 y3 = np.tan(x)
 y4 = np.sinc(x)
-print('x', x)
-print('sin(x) =', y1)
-print('cos(x) =', y2)
-print('tan(x) =', y3)
-print('sinc(x) =', y4)
+print("x", x)
+print("sin(x) =", y1)
+print("cos(x) =", y2)
+print("tan(x) =", y3)
+print("sinc(x) =", y4)
 
-x1 = np.linspace(0, 10, num = 11)     # 使用linspace()產生陣列
+x1 = np.linspace(0, 10, num=11)  # 使用linspace()產生陣列
 print(type(x1), x1)
 
 
+print("創建數組 Logspace")
 
-print('------------------------------------------------------------')	#60個
+# 在對數尺度上生成間隔均勻的數字。
+# np.logspace(start, stop, num = 50, endpoint = True, base = 10.0, dtype = None, axis = 0)
+# Start:序列的起始值。
+# End:序列的最后一個值。
+# endpoint:如果為True，最后一個樣本將包含在序列中。
+# base:底數。默認是10。
 
+cc = np.logspace(0, 10, 5, base=2)
+print(cc)
 
-print('創建數組 Logspace')
-
-#在對數尺度上生成間隔均勻的數字。
-#np.logspace(start, stop, num = 50, endpoint = True, base = 10.0, dtype = None, axis = 0)
-#Start:序列的起始值。
-#End:序列的最后一個值。
-#endpoint:如果為True，最后一個樣本將包含在序列中。
-#base:底數。默認是10。
-
-cc = np.logspace(0, 10, 5,base = 2)
+cc = np.logspace(0, 2, 5)
 print(cc)
 
 
+print("------------------------------------------------------------")  # 60個
 
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-print('numpy 統計函數')
-
-#串列
-data = [
-    37, 24, 6, 51, 83, 28, 51, 58, 82, 95,
-    83, 6, 42, 53, 98, 6, 90, 4, 59, 87,
-    28, 17, 28, 46, 40, 53, 70, 49, 55, 41,
-    74, 57, 31, 55, 5, 65, 44, 98, 36, 4
-    ]
-
-print('串列 轉 numpy陣列')
-print('串列長度 :', len(data))
-
-cc = np.array(data)
-
-print('資料型態：%s' % type(cc))
-print('平均值：%.2f' % np.mean(cc))
-print('中位數：%.2f' % np.median(cc))
-print('標準差：%.2f' % np.std(cc))
-print('變異數：%.2f' % np.var(cc))
-print('極差值：%.2f' % np.ptp(cc))
-
-"""
-sum(a, axis = None)	根據給定軸axis計算陣列a相關元素之和, axis整數或元組
-mean(a, axis = None)	根據給定軸axis計算陣列a相關元素之期值, axis整數或元組
-average(a, axis = None, weight = None)	根據給定軸axis計算陣列a相關元素之加權平均值
-std(a, axis = None)	根據給定軸axis計算陣列a相關元素之標準差
-var(a, axis = None)	根據給定軸axis計算陣列a相關元素之方差
-
-min(a) max(a)		計算陣列a中元素的 最小值 最大值
-argmin(a) argmax(a)	計算陣列a中元素的 最小值 最大值 的降一維後下標
-unravel_index(index, shape)	根據shape將一維下標index轉換成多維下標
-ptp(a)	計算陣列a中元素最大值與最小值的差
-median(a)計算陣列a中元素的中位數(中值)
-"""
-
-print('numpy 統計函數')
-cc = np.arange(15).reshape(3, 5)
-print(cc)
-print(np.sum)
-print(np.sum(cc))
-print(np.mean(cc))
-print(np.mean(cc, axis = 0))
-print(np.mean(cc, axis = 1))
-print(np.average(cc, axis = 0, weights = [11, 6, 2]))
-print(np.std(cc))
-print(np.var(cc))
-print(np.std(cc, axis = 1))
-print(np.std(cc, axis = 0))
-print(np.std(cc, axis = 1))
-print(np.std(cc, axis = 0))
-print(np.argmax(cc))
-print(np.unravel_index(np.argmax(cc), cc.shape))
-print(cc)
-print(np.ptp(cc))
-
-a = np.arange(1, 10).reshape(3, 3)
-print('陣列的內容：\n', a)
-print('1.最小值與最大值：\n', np.min(a), np.max(a))
-print('2.每一直行最小值與最大值：\n', np.min(a, axis = 0), np.max(a, axis = 0))
-print('3.每一橫列最小值與最大值：\n', np.min(a, axis = 1), np.max(a, axis = 1))
-print('4.加總、乘積及平均值：\n', np.sum(a), np.prod(a), np.mean(a))
-print('5.每一直行加總、乘積與平均值：\n', np.sum(a, axis = 0), np.prod(a, axis = 0), np.mean(a, axis = 0))
-print('6.每一橫列加總、乘積與平均值：\n', np.sum(a, axis = 1), np.prod(a, axis = 1), np.mean(a, axis = 1))
-
-print('------------------------------------------------------------')	#60個
 
 cc = np.array(range(10))
 cc = cc.reshape(5, 2)
@@ -383,779 +223,6 @@ print(cc.itemsize)
 print(cc.ndim)
 print(cc.nbytes)
 
-print('------------------------------------------------------------')	#60個
-
-"""
-50個常用的Numpy函數解釋，參數和使用示例
-Numpy是python中最有用的工具之一。
-它可以有效地處理大容量數據。使用NumPy的最大原因之一是它有很多處理數組的函數。
-在本文中，將介紹NumPy在數據科學中最重要和最有用的一些函數。
-"""
-
-# np.array()用於創建一維或多維數組
-# array(object, dtype = None, *, copy = True, order = 'K', subok = False, ndmin = 0)
-# dtype:生成數組所需的數據類型。
-# ndim:指定生成數組的最小維度數。
-
-print('創建數組 Array')
-
-print('創建數組 full')
-#創建一個單獨值的n維數組。
-#np.full(shape, fill_value, dtype = None)
-#fill_value:填充值。
-
-cc = np.full((2, 4), fill_value = 2)
-print(cc)
-
-print('創建數組 Identity')
-#創建具有指定維度的單位矩陣。
-#np.identity(n, dtype = None)
-
-cc = np.identity(4) 
-print(cc)
-
-print('unique 返回一個所有唯一元素排序的數組。')
-#np.unique(ar, return_index = Fasle, return_inverse = Fasle, return_counts = Fasle, axis = None)
-#return_index:如果為True，返回數組的索引。
-#return_inverse:如果為True，返回唯一數組的下標。
-#return_counts:如果為True，返回數組中每個唯一元素出現的次數。
-#axis:要操作的軸。默認情況下，數組被認為是扁平的。
-
-arr = np.array([1, 1, 2, 3, 3, 4, 5, 6, 6, 2])
-cc = np.unique(arr, return_counts = True)
-print(cc)
-
-print('mean 返回數組的平均數')
-#np.mean(a, axis = None, dtype = None, out = None)
-cc = np.mean(arr, dtype = 'int')
-print(cc)
-
-print('medain 返回數組的中位數。')
-#np.median(a, axis = None, out = None)
-print('二維串列 轉 numpy陣列')
-arr = np.array([[1, 2, 3], [5, 8, 4]]) 
-cc = np.median(arr) 
-print(cc)
-
-print('digitize 返回輸入數組中每個值所屬的容器的索引。')
-#np.digitize(x, bins, right = False)
-#bin：容器的數組。
-#right:表示該間隔是否包括右邊或左邊的bin。
-
-print('串列 轉 numpy陣列')
-a = np.array([-0.9, 0.5, 0.9, 1, 1.2, 1.4, 3.6, 4.7, 5.3]) 
-bins = np.array([0, 1, 2, 3]) 
-cc = np.digitize(a,bins) 
-print(cc)
-
-"""
-Exp        Value 
-x < 0     :   0 
-0 <= x <1 :   1 
-1 <= x <2 :   2 
-2 <= x <3 :   3 
-3 <=x     :   4 
-Compares -0.9 to 0, here x < 0 so Put 0 in resulting array. 
-Compares  0.5 to 0, here 0 <= x <1 so Put 1. 
-Compares 5.4 to 4, here 3<=x so Put 4
-"""
-
-print('reshape 它是NumPy中最常用的函數之一。它返回一個數組，其中包含具有新形狀的相同數據。')
-#np.reshape(shape)
-
-cc = np.arange(1, 13).reshape(4, 3) # 一維的 1~9 1X9 改成 二維的 4 X 3
-
-print('shape :', cc.shape)
-print(cc)
-
-cc = cc.reshape(3, 4)
-print(cc)
-
-cc = cc.reshape(-1)
-print(cc)
-
-"""
-#cc = np.arange(0, 16) same
-cc = np.arange(16)   # 一維的 1~16 1X16 改成 二維的 4 X 4
-print(cc)
-cc = cc.reshape(4, 4)
-print(cc)
-
-cc = np.arange(1, 10).reshape(3, 3) # 一維的 1~10 1X9 改成 二維的 3 X 3
-print(cc)
-"""
-print('expand_dims 它用於擴展數組的維度。')
-#np.expand_dims(a, axis)
-print('串列 轉 numpy陣列')
-arr = np.array([8, 14, 1, 8, 11, 4, 9, 4, 1, 13, 13, 11])
-cc = np.expand_dims(cc, axis = 0)
-print(cc)
-
-cc = np.expand_dims(cc, axis = 1)
-print(cc)
-
-print('squeeze 通過移除一個單一維度來降低數組的維度。')
-#np.squeeze(a, axis = None)
-
-print('串列 轉 numpy陣列')
-arr = np.array([[8], [14], [1], [8], [11], [4], [9], [4], [1], [13], [13], [11]]) 
-cc = np.squeeze(arr)
-print(cc)
-
-print('count_nonzero 計算所有非零元素并返回它們的計數。')
-#np.count_nonzero(a, axis = None, ...)
-
-print('串列 轉 numpy陣列')
-a = np.array([0, 0, 1, 1, 1, 0]) 
-cc = np.count_nonzero(a)
-print(cc)
-
-print('argwhere 查找并返回非零元素的所有下標。')
-#np.argwhere(a)
-
-print('串列 轉 numpy陣列')
-a = np.array([0, 0, 1, 1, 1, 0]) 
-cc = np.argwhere(a)
-print(cc)
-
-print('argmax & argmin argmax返回數組中Max元素的索引。它可以用於多類圖像分類問題中獲得高概率預測標簽的指標。')
-#np.argmax(a, axis = None, out = None)
-print('串列 轉 numpy陣列')
-arr = np.array([[0.12, 0.64, 0.19, 0.05]]) 
-cc = np.argmax(arr) 
-print(cc)
-
-print('argmin將返回數組中min元素的索引。')
-#np.argmin(a, axis = None, out = None)
-cc = np.argmin(min) 
-print(cc)
-
-print('sort 對數組排序。')
-#np.sort(a, axis = -1, kind = None, order = None)
-#kind:要使用的排序算法。{‘quicksort’, ‘mergesort’, ‘heapsort’, ‘stable’}
-
-print('clip 它可以將數組的裁剪值保持在一個范圍內。')
-
-print('串列 轉 numpy陣列')
-arr = np.array([0, 1, -3, -4, 5, 6, 7, 2, 3]) 
-cc = arr.clip(0, 5)
-print(cc)
-
-cc = arr.clip(0, 3)
-print(cc)
-
-cc = arr.clip(3, 5)
-print(cc)
-
-print('替換數組中的值 where put copyto')
-
-print('where 返回滿足條件的數組元素。')
-#np.where(condition, [x, y])
-#condition:匹配的條件。如果true則返回x，否則y。
-
-cc = np.arange(12).reshape(4, 3)
-print(cc)
-
-print('大於5的')
-cc = np.where(a > 5)      ## Get The Index
-print(cc)
-
-print('大於5的') 
-cc = a[np.where(a > 5)]  ## Get Values
-print(cc)
-
-sys.exit()
-
-
-#它還可以用來替換pandas df中的元素。
-
-#cc = np.where(data[feature].isnull(), 1, 0)
-#print(cc)
-
-print('put 用給定的值替換數組中指定的元素。')
-#np.put(a, ind, v)
-#a:數組
-#Ind:需要替換的索引。
-#V:替換值。
-
-print('串列 轉 numpy陣列')
-cc = np.array([1, 2, 3, 4, 5, 6]) 
-print(cc)
- 
-cc = np.put(arr, [1, 2], [6, 7]) 
-print(cc)
-
-print('copyto 將一個數組的內容復制到另一個數組中。')
-#np.copyto(dst, src, casting = 'same_kind', where = True)
-#dst：目標
-#src：來源
-
-print('串列 轉 numpy陣列')
-arr1 = np.array([1, 2, 3])
-print('串列 轉 numpy陣列')
-arr2 = np.array([4, 5, 6])
-
-print("Before arr1", arr1)
-print("Before arr2", arr1)
-np.copyto(arr1, arr2)
-print("After arr1", arr1)
-print("After arr2", arr2)
-
-#集合操作
-
-print('查找公共元素 intersect1d函數以排序的方式返回兩個數組中所有唯一的值。')
-#np.intersect1d(arg1, arg2, assume_unique = False, return_indices = False)
-#Assume_unique:如果為真值，則假設輸入數組都是唯一的。
-#Return_indices:如果為真，則返回公共元素的索引。
-
-print('串列 轉 numpy陣列')
-ar1 = np.array([1, 2, 3, 4, 5, 6]) 
-ar2 = np.array([3, 4, 5, 8, 9, 1]) 
-np.intersect1d(ar1, ar2) 
- 
-np.intersect1d(ar1, ar2, return_indices = True) 
-
-print('查找不同元素 np.setdiff1d函數返回arr1中在arr2中不存在的所有唯一元素。')
-print('串列 轉 numpy陣列')
-a = np.array([1, 7, 3, 2, 4, 1]) 
-b = np.array([9, 2, 5, 6, 7, 8]) 
-np.setdiff1d(a, b) 
-
-print('從兩個數組中提取唯一元素 Setxor1d 將按順序返回兩個數組中所有唯一的值。')
-print('串列 轉 numpy陣列')
-a = np.array([1, 2, 3, 4, 6]) 
-b = np.array([1, 4, 9, 4, 36]) 
-np.setxor1d(a,b) 
-
-print('合并 Union1d函數將兩個數組合并為一個。')
-print('串列 轉 numpy陣列')
-a = np.array([1, 2, 3, 4, 5]) 
-b = np.array([1, 3, 5, 4, 36]) 
-np.union1d(a,b) 
-
-#數組分割
-
-print('水平分割 Hsplit函數將數據水平分割為n個相等的部分。')
-print('二維串列 轉 numpy陣列')
-A = np.array([[3, 4, 5, 2], [6, 7, 2, 6]]) 
-np.hsplit(A, 2)    ## splits the data into two equal parts 
- 
-np.hsplit(A, 4)    ## splits the data into four equal parts 
-
-print('垂直分割 Vsplit將數據垂直分割為n個相等的部分。')
-print('二維串列 轉 numpy陣列')
-A = np.array([[3, 4, 5, 2], [6, 7, 2, 6]]) 
-np.vsplit(A, 2) 
-
-#數組疊加
-
-print('水平疊加 hstack 將在另一個數組的末尾追加一個數組。')
-print('串列 轉 numpy陣列')
-a = np.array([1, 2, 3, 4, 5]) 
-b = np.array([1, 4, 9, 16, 25]) 
- 
-cc = np.hstack((a, b))
-print(cc)
-      
-print('垂直疊加 vstack將一個數組堆疊在另一個數組上。')
-
-cc = np.vstack((a, b))
-print(cc)
-      
-#數組比較
-
-print('allclose 如果兩個數組的形狀相同，則Allclose函數根據公差值查找兩個數組是否相等或近似相等。')
-
-print('串列 轉 numpy陣列')
-a = np.array([0.25, 0.4, 0.6, 0.32]) 
-b = np.array([0.26, 0.3, 0.7, 0.32]) 
- 
-tolerance = 0.1           ## Total Difference  
-np.allclose(a, b, tolerance) 
- 
-tolerance = 0.5 
-np.allclose(a, b, tolerance) 
-
-print('equal 它比較兩個數組的每個元素，如果元素匹配就返回True。')
-
-np.equal(arr1, arr2) 
-
-#重復的數組元素
-
-print('repeat 它用於重復數組中的元素n次。')
-#np.repeat(a, repeats, axis = None)
-
-#A:重復的元素
-
-#Repeats:重復的次數。
-
-cc = np.repeat('2017', 3)
-print(cc)
-
-
-#讓我們來看一個更實際的示例，我們有一個包含按年數量銷售的數據集。
-
-fruits = pd.DataFrame([
-    ['Mango', 40],
-    ['Apple', 90],
-    ['Banana', 130]
-    ],columns=['Product','ContainerSales'])
-print(fruits)
-
-#在數據集中，缺少年份列。我們嘗試使用numpy添加它。
-
-fruits['year'] = np.repeat(2020, fruits.shape[0])
-print(fruits)
-
-print('tile 通過重復A，rep次來構造一個數組。')
-#np.tile(A, reps)
-
-na = np.tile("Ram", 5)
-print(na)
- 
-na = np.tile(3, (2, 3))
-print(na)
-
-#愛因斯坦求和
-
-print('einsum 此函數用於計算數組上的多維和線性代數運算。')
-
-a = np.arange(1, 10).reshape(3, 3)
-b = np.arange(21, 30).reshape(3, 3)
- 
-na = np.einsum('ii->i', a)
-print(na)
-
-na = np.einsum('ji', a)
-print(na)
-
-na = np.einsum('ij,jk', a, b)
-print(na)
-
-na = np.einsum('ii', a)
-print(na)
-
-#統計分析
-
-print('直方圖 這是Numpy的重要統計分析函數，可計算一組數據的直方圖值。')
-
-print('二維串列 轉 numpy陣列')
-A = np.array([[3, 4, 5, 2],
-              [6, 7, 2, 6]])
-na = np.histogram(A) 
-print(na)
-
-print('百分位數 沿指定軸計算數據的Q-T-T百分位數。')
-
-#a:輸入。
-#q:要計算的百分位。
-#overwrite_input:如果為true，則允許輸入數組修改中間計算以節省內存。
-print('二維串列 轉 numpy陣列')
-a = np.array([[2, 4, 6], [4, 8, 12]])
-na = np.percentile(a, 50)
-print(na)
-na = np.percentile(a, 10)
-print(na)
-arr = np.array([2, 3, 4, 1, 6, 7])
-na = np.percentile(a, 5)
-print(na)
-
-print('標準偏差和方差 std和var是NumPy的兩個函數，用於計算沿軸的標準偏差和方差。')
-
-print('二維串列 轉 numpy陣列')
-a = np.array([[2, 4, 6], [4, 8, 12]]) 
- 
-na = np.std(a,axis = 1) 
-print(na) 
-na = np.std(a,axis = 0)    ## Column Wise 
-print(na)
-na = np.var(a,axis = 1) 
-print(na) 
-na = np.var(a,axis = 0) 
-print(na)
-
-#數組打印
-
-print('顯示帶有兩個十進制值的浮點數')
-
-np.set_printoptions(precision = 2)
-
-print('串列 轉 numpy陣列')
-na = np.array([12.23456, 32.34535]) 
-print(na) 
-
-print('設置打印數組最大值')
-
-na = np.set_printoptions(threshold = np.inf)
-print(na)
-
-print('增加一行中元素的數量')
-
-na = np.set_printoptions(linewidth = 100) ## 默認是 75
-print(na)
-
-#保存和加載數據
-
-print('保存')
-
-#savetxt用於在文本文件中保存數組的內容。
-
-arr = np.linspace(10, 100, 500).reshape(25, 20)
-np.savetxt('array.txt', arr)
-
-print('加載')
-
-#用於從文本文件加載數組，它以文件名作為參數。
-
-np.loadtxt('array.txt') 
-
-print('------------------------------------------------------------')	#60個
-
-sys.exit()
-
-
-x1 = [7, 2, 11, 9, 20]
-print(f'中位數 = {np.median(x1)}')
-
-x1 = [30, 7, 2, 11, 9, 20]
-print(f'中位數 = {np.median(x1)}')
-
-print('------------------------------------------------------------')	#60個
-
-print('串列 轉 numpy陣列')
-x1 = np.array([0, 1, 1, 3, 2, 1])
-# 因為 x1 元素最大值是 3, 所以 bin 是 4
-print(f'np.bincount = {np.bincount(x1)}')       
-
-print('串列 轉 numpy陣列')
-x2 = np.array([0, 1, 1, 7, 2, 1])
-# 因為 x2 元素最大值是 7, 所以 bin 是 8
-print(f'np.bincount = {np.bincount(x2)}') 
-
-print('------------------------------------------------------------')	#60個
-
-print('串列 轉 numpy陣列')
-x1 = np.array([0, 1, 1, 3, 2, 1])
-# 因為 x1 元素最大值是 3, 所以 bin 是 4
-print(f'np.bincount = {np.bincount(x1)}')
-print(f'mode        = {np.argmax(np.bincount(x1))}')
-
-print('串列 轉 numpy陣列')
-x2 = np.array([0, 1, 1, 7, 2, 1])
-# 因為 x2 元素最大值是 7, 所以 bin 是 8
-print(f'np.bincount = {np.bincount(x2)}') 
-print(f'mode        = {np.argmax(np.bincount(x1))}')
-
-print('------------------------------------------------------------')	#60個
-
-print('串列 轉 numpy陣列')
-a = np.array([1, 1])
-b = np.array([5, 5])
-c = np.array([1, 5])
-d = np.array([5, 1])
-
-ab = b - a                              # 向量ab
-cd = d - c                              # 向量bc
-
-norm_a = np.linalg.norm(ab)             # 計算向量大小
-norm_b = np.linalg.norm(cd)             # 計算向量大小
-                    
-dot_ab = np.dot(ab, cd)                 # 計算向量內積
-
-cos_angle = dot_ab / (norm_a * norm_b)  # 計算cos值
-rad = math.acos(cos_angle)              # acos轉成弧度
-deg = math.degrees(rad)                 # 轉成角度
-print('角度是 = {}'.format(deg))
-
-print('------------------------------------------------------------')	#60個
-
-def cosine_similarity(va, vb):
-    norm_a = np.linalg.norm(va)                 # 計算向量大小
-    norm_b = np.linalg.norm(vb)                 # 計算向量大小
-    dot_ab = np.dot(va, vb)                     # 計算向量內積
-    return (dot_ab / (norm_a * norm_b))         # 回傳相似度
-
-print('串列 轉 numpy陣列')
-a = np.array([2, 1, 1, 1, 0, 0, 0, 0])
-b = np.array([1, 1, 0, 0, 1, 1, 1, 0])
-c = np.array([1, 1, 0, 0, 1, 1, 0, 1])
-print('a 和 b 相似度 = {0:5.3f}'.format(cosine_similarity(a, b)))
-print('a 和 c 相似度 = {0:5.3f}'.format(cosine_similarity(a, c)))
-print('b 和 c 相似度 = {0:5.3f}'.format(cosine_similarity(b, c)))
-
-print('------------------------------------------------------------')	#60個
-
-print('兩陣列的相關係數')
-print('串列 轉 numpy陣列')
-x = np.array([8, 9, 10, 7, 8, 9, 5, 7, 9, 8])
-y = np.array([12, 15, 16, 18, 6, 11, 3, 12, 11, 16])
-print('x陣列長度 :', len(x))
-print('y陣列長度 :', len(y))
-x_mean = np.mean(x)
-y_mean = np.mean(y)
-
-xi_x = [v - x_mean  for v in x]
-yi_y = [v - y_mean  for v in y]
-
-data1 = [0] * 10
-data2 = [0] * 10
-data3 = [0] * 10
-for i in range(len(x)):
-    data1[i] = xi_x[i] * yi_y[i]
-    data2[i] = xi_x[i] ** 2
-    data3[i] = yi_y[i] ** 2
-
-v1 = np.sum(data1)
-v2 = np.sum(data2)
-v3 = np.sum(data3)
-r = v1 / ((v2 ** 0.5) * (v3 ** 0.5))
-print('相關係數 : {}'.format(r))
-
-print('------------------------------------------------------------')	#60個
-
-print('串列 轉 numpy陣列')
-x = np.array([8, 9, 10, 7, 8, 9, 5, 7, 9, 8])
-y = np.array([12, 15, 16, 18, 6, 11, 3, 12, 11, 16])             
-x_mean = np.mean(x)
-y_mean = np.mean(y)
-xpt1 = np.linspace(0, 12, 12)      
-ypt1 = [y_mean for xp in xpt1]          # 平均購買次數
-ypt2 = np.linspace(0, 20, 20)
-xpt2 = [x_mean for yp in ypt2]          # 平均滿意度
-
-plt.scatter(x, y)                       # 滿意度 vs 購買次數
-plt.plot(xpt1, ypt1, 'ro-')               # 平均購買次數
-plt.plot(xpt2, ypt2, 'go-')               # 平均滿意度
-plt.grid()
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-print('串列 轉 numpy陣列')
-a = np.array([4, 2])
-b = np.array([1, 3])
-
-norm_a = np.linalg.norm(a)              # 計算向量大小
-norm_b = np.linalg.norm(b)              # 計算向量大小
-                    
-dot_ab = np.dot(a, b)                   # 計算向量內積
-
-cos_angle = dot_ab / (norm_a * norm_b)  # 計算cos值
-rad = math.acos(cos_angle)              # acos轉成弧度
-
-area = norm_a * norm_b * math.sin(rad) / 2
-print('area = {0:5.2f}'.format(area))
-
-print('------------------------------------------------------------')	#60個
-
-print('串列 轉 numpy陣列')
-a = np.array([4, 2])
-b = np.array([1, 3])
-
-ab_cross = np.cross(a, b)               # 計算向量外積
-area = np.linalg.norm(ab_cross) / 2     # 向量長度除以2
-                    
-print('area = {0:5.2f}'.format(area))
-
-print('------------------------------------------------------------')	#60個
-
-print('串列 轉 numpy陣列')
-x = np.array([1, 2, 3])         # 1 x 3 陣列 x
-y = np.array([2, 3, 4])         # 1 x 3 陣列 y
-print(f'x = {x}')
-print(f'y = {y}')
-
-print()
-
-y = y.reshape(-1, 1)            # y 改為 3 x 1 陣列 
-print(f'新的 y = \n{y}')
-
-print()
-
-print(f'x + y = \n{x+y}')
-
-print('------------------------------------------------------------')	#60個
-
-print('numpy 之 array 之 形狀轉換')
-
-animal_list = [
-    [1, '鼠', 'mouse', 3],
-    [2, '牛', 'ox', 48],
-    [3, '虎', 'tiger', 33],
-    [4, '兔', 'rabbit', 8],
-    [5, '龍', 'dragon', 38],
-    [6, "蛇", "snake", 16],
-    ]
-
-na_animal1 = np.array(animal_list)
-#print(na_animal1)
-print('維度 :', na_animal1.ndim)
-print('形狀 :', na_animal1.shape)
-print('數量 :', na_animal1.size)
-
-print('numpy 之 array 之 reshape 用法, 轉成 3 X 8')
-na_animal2 = na_animal1.reshape(3, 8) #ravel()方法將數組維度拉成一維數組
-print(na_animal2)
-print('維度 :', na_animal2.ndim)
-print('形狀 :', na_animal2.shape)
-print('數量 :', na_animal2.size)
-
-print('numpy 之 array 之 ravel 用法, 轉成 一維陣列')
-na_animal3 = na_animal1.ravel() #ravel()方法將數組維度拉成一維數組
-#print(na_animal3)
-print('維度 :', na_animal3.ndim)
-print('形狀 :', na_animal3.shape)
-print('數量 :', na_animal3.size)
-
-print('------------------------------------------------------------')	#60個
-
-print('numpy 之 mgrid()方法生成等差數列')
-
-print('一維等差數列')
-a = np.mgrid[0:5:1] #用mgrid()方法生成等差數列a
-print(a)
-
-print('二維等差數列')
-a, b = np.mgrid[0:5:1, 0:5:1] #用mgrid()方法生成等差數列a,b
-print(a)
-print(b)
-
-print('------------------------------------------------------------')	#60個
-
-a = np.array([3, 6, 8, 1, 2, 88])
-b = np.where(a > 5)
-print(a)
-print(b)
-
-print('------------------------------------------------------------')	#60個
-
-a = np.array([[3, 6, 8, 77, 66],
-              [1, 2, 88, 3, 98],
-              [11, 2, 67, 5, 2]])
-b = np.where(a > 5)
-print(a)
-print(b)
-
-print('------------------------------------------------------------')	#60個
-
-
-num = 3.2
-print("數值{0:2.1f} 取log10 {1:4.3f}".format(num, np.log10(num)))
-
-print("------------------------------------------------------------")  # 60­э
-
-
-print("------------------------------------------------------------")  # 60個
-print("numpy")
-print("------------------------------------------------------------")  # 60個
-
-a = np.array([2,3,4,5,6])
-print(f'a = {a}')
-b = np.ma.masked_where(a > 3, a)
-print(f'b = {b}')
-
-print('------------------------------------------------------------')	#60個
-
-print(np.c_[np.array([1, 2, 3]), np.array([4, 5, 6])])
-print(np.c_[np.array([[1, 2, 3]]), 0, 0, np.array([[4, 5, 6]])])
-
-"""
-array([[1, 4],
-       [2, 5],
-       [3, 6]])
-"""
-
-#array([[1, 2, 3, ..., 4, 5, 6]])
-
-print('------------------------------------------------------------')	#60個
-
-#numpy.c_() and numpy.r_()的用法
-
-
-#####np.c_是按行连接两个矩阵，就是把两矩阵左右相加，要求行数相等，类似於pandas中的merge()。
-#####np.r_是按列连接两个矩阵，就是把两矩阵上下相加，要求列数相等，类似於pandas中的concat()。
-
-#np.c_是按行连接两个矩阵，就是把两矩阵左右相加，要求行数相等。
-#np.r_是按列连接两个矩阵，就是把两矩阵上下相加，要求列数相等。
-
-
-#1.numpy.c_:
-
-x = np.arange(12).reshape(3,4)
-print('x:',x, x.shape)
-
-y = np.arange(10,22).reshape(3,4)
-print('y:',y, y.shape)
-
-z = np.c_[x,y]
-print('z:',z, z.shape)
-
-#2.numpy.r_用法:
-
-x = np.arange(12).reshape(3,4)
-print('x:',x, x.shape)
-
-y = np.arange(10,22).reshape(3,4)
-print('y:',y, y.shape)
-
-z = np.r_[x,y]
-print('z:',z, z.shape)
-
-print("------------------------------------------------------------")  # 60個
-
-x = np.array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
-print(type(x))
-
-print("------------------------------------------------------------")  # 60個
-
-print("二維陣列 6 X 4")
-a = np.array(
-    [[0, 0, 0, 1], [1, 1, 1, 2], [2, 2, 2, 3], [3, 3, 3, 4], [4, 4, 4, 5], [5, 5, 5, 6]]
-)
-print(a)
-print(a.shape)
-print(a.dtype)
-print(a.ndim)
-print(a.size)
-print(a.nbytes)
-
-print("第3列 之 第1~4項(不含尾)")
-print(a[3, 1:4])
-
-print("前2列 之 第2欄之後")
-print(a[:2, 2:])
-
-print("第2列 之 全部")
-print(a[2, :])
-
-print("全部列 之 第3欄, 轉成row")
-print(a[:, 3])
-
-print("全部列 之 偶數欄")
-print(a[:, ::2])
-
-print("偶數列 之 036欄")
-print(a[::2, ::3])
-
-# axis = 0 : 第0維 直行
-# axis = 1 : 第1維 橫列
-print("全部和:", a.sum())
-print("直行加:", a.sum(axis=0))
-print("橫列加:", a.sum(axis=1))
-
-# np.argmin()求最小值對應的索引
-# np.argmax()求最大值對應的索引
-
-print("每個直行的最小值:", a.min(axis=0))
-print("每個直行的最小值對應的索引:", a.argmin(axis=0))
-print("每個直行的標準差:", a.std(axis=0))
-
-print("全部平均:", a.mean())
-print("直行平均:", a.mean(axis=0))
-print("橫列平均:", a.mean(axis=1))
-
-print("------------------------------------------------------------")  # 60個
 
 print("使用 numpy函數 對 list做處理")
 
@@ -1167,193 +234,32 @@ print(np.min(x))
 
 print("------------------------------------------------------------")  # 60個
 
-a = np.array([1,2,3,4,5,6], dtype=np.int64)
-print(a.dtype) 
+a = np.array([1, 2, 3, 4, 5, 6], dtype=np.int64)
+print(a.dtype)
 a = a.astype(np.float32)
-print(a.dtype) 
+print(a.dtype)
 print(a.dtype.type)
 
 print("------------------------------------------------------------")  # 60個
 
-print("矩陣與二維數組")
-a = np.mat(np.mat([[1,2,3],[4,5,6]]))
-print(type(a))
-
-print(np.eye(2))
-print(np.diag([2,3]))
-
-a = np.mat([[1.,2.],[3.,4.]])
-print(np.dot(a,a))    # 矩陣乘積
-print(np.multiply(a,a))    # 矩陣點乘
-print(a.T)   # 矩陣轉置
-print(a.I)   # 矩陣求逆
-print(np.trace(a))    # 求矩陣的跡
-print(np.linalg.eig(a))   # 特徵分解
-
-a = np.mat(np.mat([[1,2,3],[4,5,6]]))
-print(a.sum())
-print(a.sum(axis=0))
-print(a.sum(axis=1))
-
-print('------------------------------------------------------------')	#60個
-
-filename = "data/python_ReadWrite_CSV6_score.csv"
-
-dat = pd.read_csv(filename, encoding="UTF-8")
-
-print(dat.head())
-
-print("數學平均", np.mean(dat["數學"]))
-print("數學中位數", np.median(dat["數學"]))
-
-print("------------------------------------------------------------")  # 60­э
-
-a = np.array([1, 2, 3])   # Create a rank 1 array
-print(type(a))            # Prints "<type 'numpy.ndarray'>"
-print(a.shape)            # Prints "(3,)"
-print(a[0], a[1], a[2])   # Prints "1 2 3"
-a[0] = 5                  # Change an element of the array
-print(a)                  # Prints "[5, 2, 3]"
-b = np.array([[1,2,3],[4,5,6]])   # Create a rank 2 array
-print(b.shape)                     # Prints "(2, 3)"
-print(b[0, 0], b[0, 1], b[1, 0])   # Prints "1 2 4"
-
-print('------------------------------------------------------------')	#60個
-
-a = np.array([[1,2,3,4], [5,6,7,8], [9,10,11,12]])
-b= a[0:2,1:3]         # 定義b為a 的部分資料
-#b= a[0:2,1:3].copy() # 複製b為a 的部分資料
-print(b)              #輸出[[2 3], [6 7]]
-b[0, 0] = 99          # 修改b的局部資料
-print(b)              #輸出[[99  3], [ 6  7]]
-print(a)              # 輸出[[ 1 99  3  4],[ 5  6  7  8],[ 9 10 11 12]]
-
-print('------------------------------------------------------------')	#60個
-
-a = np.array([[1,2,3,4], [5,6,7,8], [9,10,11,12]])
-row_r1 = a[1, :]
-row_r2 = a[1:2, :]
-print(row_r1, row_r1.shape)
-print(row_r2, row_r2.shape)
-col_r1 = a[:, 1]
-col_r2 = a[:, 1:2]
-print(col_r1, col_r1.shape)
-print(col_r2, col_r2.shape)
-
-print('------------------------------------------------------------')	#60個
-
-a = np.array([[1,2], [3, 4], [5, 6]])
+a = np.array([[1, 2], [3, 4], [5, 6]])
 print(a[0, 0])
 print(a[1, 1])
-b=[a[0, 0], a[1, 1]];
+b = [a[0, 0], a[1, 1]]
 print(b)
-b=a[[0, 0], [1, 1]];
+b = a[[0, 0], [1, 1]]
 print(b)
 print(b[1])
-print(a[[0,1,2], [0,1,0]])
+print(a[[0, 1, 2], [0, 1, 0]])
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-x = np.array([1, 2])  #numpy自動設定
-print(x.dtype)         # 輸出 "int64"
-x = np.array([1.0, 2.0])  #numpy自動設定
-print(x.dtype)             # 輸出 "float64"
-x = np.array([1, 2], dtype=np.int64)  #設定為int64
-print(x.dtype)                         # 輸出 "int64"
-
-print('------------------------------------------------------------')	#60個
-
-x = np.array([[1,2],[3,4]], dtype=np.float64)
-y = np.array([[5,6],[7,8]], dtype=np.float64)
-v = np.array([9, 10], dtype=np.float64)
-
-# 加法
-print(x + y)        # 輸出 [[ 6.0  8.0] [10.0 12.0]]
-print(np.add(x, y)) # 輸出 [[ 6.0  8.0] [10.0 12.0]]
-print(x + 10)       # 輸出 [[11. 12.] [13. 14.]]
-# 減法
-print(x - y)        # 輸出 [[-4.0 -4.0] [-4.0 -4.0]]
-print(np.subtract(x, y)) # 輸出 [[-4.0 -4.0] [-4.0 -4.0]]
-print(x -[1,2])     # 輸出 [[0. 0.]  [2. 2.]]
-# 乘法
-print(x * y)
-print(np.multiply(x, y)) # 輸出  [[ 5.0 12.0][21.0 32.0]]
-# 除法
-print(x / y)
-print(np.divide(x, y))# 輸出 [[ 0.2  0.33333333] [ 0.42857143  0.5]]
-# 平方
-print(x **2)
-print(np.sqrt(x))# 輸出[[ 1. 1.41421356] [ 1.73205081  2.]]
-
-#矩陣乘法，兩個數組的點積 Dot product
-print(x.dot(y))# 輸出         [[19. 22.] [43. 50.]]
-print(np.dot(x, y))   # [[5+14 , 6+16] []]
-
-print('------------------------------------------------------------')	#60個
-
-x = np.array([[-1,2,3],[13,14,15]])
-print(x)
-print(np.sum(x))       # 輸出46   全部累加
-print(np.sum(x, axis=0))  # 輸出"[12 16 18]" =(-1+13),(2+14),(3+15)
-print(np.sum(x, axis=1))  # 輸出"[ 4 42]" =(-1+2+3),(13+14+15)
-print(np.max(x))       #最大值 輸出15
-print(np.min(x))       #最小值 輸出-1
-print(np.cumsum(x))    # 累加[-1  1  4 17 31 46]
-# 加權平均值
-print(np.average(x))   # 輸出7.666
-# 平均 mean=sum(x)/len(x)
-print(np.mean(x))      # 輸出7.666
-# 中間值
-print(np.median(x))   # 輸出8.0
-# 標準偏差 std = sqrt(mean(abs(x - x.mean())**2))
-print(np.std(x))       # 輸出 6.472
-# 方差 var = mean(abs(x - x.mean())**2)
-print(np.var(x))       # 輸出 41.888
-print(x.T)       # 輸出 [[-1 13] [ 2 14] [ 3 15]]
-
-print('------------------------------------------------------------')	#60個
-
-a = np.array([[1,2,3,4], [5,6,7,8], [9,10,11,12]])
-bool_idx =  ((a % 2)==0)
-print(bool_idx)
-print(a[bool_idx])
-print(a[a > 10])
-print(a[a%2==1]*10)
-
-print('------------------------------------------------------------')	#60個
-
-#方法1
-x = np.array([[1,2,3], [4,5,6]])
-v = np.array([1, 0, 1])
-y = np.empty_like(x)
-for i in range(2):
-    y[i, :] = x[i, :] + v
-print(y)    #輸出[[2 2 4][5 5 7]]
-
-#方法2
-v2 = np.tile(v, (2, 1))
-print(v2)   #輸出[[1 0 1][1 0 1]]
-print(x+v2) #輸出[[2 2 4] [5 5 7]]
-
-#方法3
-print(x+v)  #輸出[[2 2 4] [5 5 7]]
-
-print('------------------------------------------------------------')	#60個
-
-a = np.array([1, 2, 3])
-b = np.array([4, 5, 6])
-print(a[0], b[1])
-
-a = np.append(a, b)
-print(a)
-
-d = a[1]
-print(d)
-
-a2 = np.delete(a, 1)
-print(a2)
-a3 = np.insert(a, 1, d)
-print(a3)
+x = np.array([1, 2])  # numpy自動設定
+print(x.dtype)  # 輸出 "int64"
+x = np.array([1.0, 2.0])  # numpy自動設定
+print(x.dtype)  # 輸出 "float64"
+x = np.array([1, 2], dtype=np.int64)  # 設定為int64
+print(x.dtype)  # 輸出 "int64"
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1394,6 +300,1143 @@ print(a)
 
 print("------------------------------------------------------------")  # 60個
 
+a = np.array([[1, 2, 3], [4, 5, 6]], int)  # 指定元素型態的陣列
+a = np.array([[1, 2, 3], [4, 5, 6]], dtype=float)  # 指定元素型態的陣列
+print(a[0, 0], a[0, 1], a[0, 2])
+print(a[1, 0], a[1, 1], a[1, 2])
+
+print("陣列元素的資料型態 :", a.dtype)
+print("陣列的元素總數", a.size)
+print("陣列的形狀", a.shape)
+print("陣列元素所占用的拜數", a.itemsize)
+print("幾維陣列", a.ndim)
+print("整個陣列所占用的拜數", a.nbytes)
+
+print("------------------------------------------------------------")  # 60個
+
+print("陣列的形狀操作 reshape 1")
+
+a = np.array([1, 2, 3, 4, 5, 6])
+print(a)
+b = a.reshape((3, 2))
+print(b)
+
+print("------------------------------------------------------------")  # 60個
+
+print("reshape 它是NumPy中最常用的函數之一。它返回一個數組，其中包含具有新形狀的相同數據。")
+# np.reshape(shape)
+
+cc = np.arange(1, 13).reshape(4, 3)  # 一維的 1~9 1X9 改成 二維的 4 X 3
+print("shape :", cc.shape)
+print(cc)
+
+cc = cc.reshape(3, 4)
+print(cc)
+
+"""
+#cc = np.arange(0, 16) same
+cc = np.arange(16)   # 一維的 1~16 1X16 改成 二維的 4 X 4
+print(cc)
+cc = cc.reshape(4, 4)
+print(cc)
+
+cc = np.arange(1, 10).reshape(3, 3) # 一維的 1~10 1X9 改成 二維的 3 X 3
+print(cc)
+"""
+print("------------------------------------------------------------")  # 60個
+
+
+print("串列 轉 numpy陣列")
+x = np.array([1, 2, 3])
+print(x)
+print("每個元素的平方")
+print(x**2)
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+# np 之基本運算
+
+
+a = np.arange(1, 10).reshape(3, 3)
+b = np.arange(10, 19).reshape(3, 3)
+print("a 陣列內容：\n", a)
+print("b 陣列內容：\n", b)
+print("a 陣列元素都加值：\n", a + 1)
+print("a 陣列元素都平方：\n", a**2)
+print("a 陣列元素加判斷：\n", a < 5)
+print("a 陣列取出第一個row都加1：\n", a[0, :] + 1)
+print("a 陣列取出第一個col都加1：\n", a[:, 0] + 1)
+print("a b 陣列對應元素相加：\n", a + b)
+print("a b 陣列對應元素相乘：\n", a * b)
+print("a b 陣列點積計算：\n", np.dot(a, b))
+
+print("------------------------------------------------------------")  # 60個
+
+
+print(np.arange(5))
+print(np.arange(1, 5))
+print(np.arange(0, 10, 2))
+
+print("一維陣列 10個元素")
+a = np.arange(10)
+print(a)
+
+print("前4項")
+print(a[:4])
+
+print("第3項 至 第7項(不含尾)")
+print(a[3:7])
+
+print("第5項 至 最後")
+print(a[5:])
+
+print("第3至第9項 跳一個")
+print(a[3:9:2])
+
+print("第2項開始至最後, 跳一個")
+print(a[2::2])
+
+print("從頭至最後, 跳二個")
+print(a[::3])
+
+print("------------------------------------------------------------")  # 60個
+
+# 使用布林陣列篩選值
+
+arr = np.arange(10)
+
+new_arr = arr < 5
+
+print(arr)
+
+print(new_arr)
+
+print(arr[new_arr])
+
+print("------------------------------------------------------------")  # 60個
+
+
+# 陣列轉置 (transpose)
+
+arr = np.arange(10).reshape(2, 5)
+print(arr.T)
+
+# print(arr.transpose(1,0))
+
+print("------------------------------------------------------------")  # 60個
+
+
+# 陣列的切片操作
+arr = np.arange(10)
+print(arr)
+
+arr[0:3] = 1
+print(arr)
+
+print("------------------------------------------------------------")  # 60個
+
+my_array = np.arange(101)  # 0 1 2 ... 100
+
+sum_my_array = sum(my_array)
+print("和")
+print(sum_my_array)
+
+print("------------------------------------------------------------")  # 60個
+
+print("分段函數")
+
+x = np.arange(10)
+print(x)
+
+print(np.where(x < 5, x, 9 - x))
+
+a = np.arange(10)
+print(np.select([x < 3, x > 6], [-1, 1], 0))
+
+a = np.arange(10)
+print(np.piecewise(x, [x < 3, x > 6], [lambda x: x * 2, lambda x: x * 3]))
+
+print("------------------------------------------------------------")  # 60個
+
+print("numpy 統計函數")
+
+# 串列
+data = [
+    37,
+    24,
+    6,
+    51,
+    83,
+    28,
+    51,
+    58,
+    82,
+    95,
+    83,
+    6,
+    42,
+    53,
+    98,
+    6,
+    90,
+    4,
+    59,
+    87,
+    28,
+    17,
+    28,
+    46,
+    40,
+    53,
+    70,
+    49,
+    55,
+    41,
+    74,
+    57,
+    31,
+    55,
+    5,
+    65,
+    44,
+    98,
+    36,
+    4,
+]
+
+print("串列長度 :", len(data))
+
+print("串列 轉 numpy陣列")
+cc = np.array(data)  # 串列 轉 numpy陣列
+
+print("資料型態：%s" % type(cc))
+print("平均值：%.2f" % np.mean(cc))
+print("中位數：%.2f" % np.median(cc))
+print("標準差：%.2f" % np.std(cc))
+print("變異數：%.2f" % np.var(cc))
+print("極差值：%.2f" % np.ptp(cc))
+
+"""
+sum(a, axis = None)	根據給定軸axis計算陣列a相關元素之和, axis整數或元組
+mean(a, axis = None)	根據給定軸axis計算陣列a相關元素之期值, axis整數或元組
+average(a, axis = None, weight = None)	根據給定軸axis計算陣列a相關元素之加權平均值
+std(a, axis = None)	根據給定軸axis計算陣列a相關元素之標準差
+var(a, axis = None)	根據給定軸axis計算陣列a相關元素之方差
+
+min(a) max(a)		計算陣列a中元素的 最小值 最大值
+argmin(a) argmax(a)	計算陣列a中元素的 最小值 最大值 的降一維後下標
+unravel_index(index, shape)	根據shape將一維下標index轉換成多維下標
+ptp(a)	計算陣列a中元素最大值與最小值的差
+median(a)計算陣列a中元素的中位數(中值)
+"""
+
+print("numpy 統計函數")
+cc = np.arange(15).reshape(3, 5)
+print(cc)
+print(np.sum)
+print(np.sum(cc))
+print(np.mean(cc))
+print(np.mean(cc, axis=0))
+print(np.mean(cc, axis=1))
+print(np.average(cc, axis=0, weights=[11, 6, 2]))
+print(np.std(cc))
+print(np.var(cc))
+print(np.std(cc, axis=1))
+print(np.std(cc, axis=0))
+print(np.std(cc, axis=1))
+print(np.std(cc, axis=0))
+print(np.argmax(cc))
+print(np.unravel_index(np.argmax(cc), cc.shape))
+print(cc)
+print(np.ptp(cc))
+
+a = np.arange(1, 10).reshape(3, 3)
+print("陣列的內容：\n", a)
+print("1.最小值與最大值：\n", np.min(a), np.max(a))
+print("2.每一直行最小值與最大值：\n", np.min(a, axis=0), np.max(a, axis=0))
+print("3.每一橫列最小值與最大值：\n", np.min(a, axis=1), np.max(a, axis=1))
+print("4.加總、乘積及平均值：\n", np.sum(a), np.prod(a), np.mean(a))
+print("5.每一直行加總、乘積與平均值：\n", np.sum(a, axis=0), np.prod(a, axis=0), np.mean(a, axis=0))
+print("6.每一橫列加總、乘積與平均值：\n", np.sum(a, axis=1), np.prod(a, axis=1), np.mean(a, axis=1))
+
+print("------------------------------------------------------------")  # 60個
+
+"""
+50個常用的Numpy函數解釋，參數和使用示例
+Numpy是python中最有用的工具之一。
+它可以有效地處理大容量數據。使用NumPy的最大原因之一是它有很多處理數組的函數。
+在本文中，將介紹NumPy在數據科學中最重要和最有用的一些函數。
+"""
+
+# np.array()用於創建一維或多維數組
+# array(object, dtype = None, *, copy = True, order = 'K', subok = False, ndmin = 0)
+# dtype:生成數組所需的數據類型。
+# ndim:指定生成數組的最小維度數。
+
+print("創建數組 Array")
+
+print("創建數組 full")
+# 創建一個單獨值的n維數組。
+# np.full(shape, fill_value, dtype = None)
+# fill_value:填充值。
+
+cc = np.full((2, 4), fill_value=2)
+print(cc)
+
+print("創建數組 Identity")
+# 創建具有指定維度的單位矩陣。
+# np.identity(n, dtype = None)
+
+cc = np.identity(4)
+print(cc)
+
+print("unique 返回一個所有唯一元素排序的數組。")
+# np.unique(ar, return_index = Fasle, return_inverse = Fasle, return_counts = Fasle, axis = None)
+# return_index:如果為True，返回數組的索引。
+# return_inverse:如果為True，返回唯一數組的下標。
+# return_counts:如果為True，返回數組中每個唯一元素出現的次數。
+# axis:要操作的軸。默認情況下，數組被認為是扁平的。
+
+arr = np.array([1, 1, 2, 3, 3, 4, 5, 6, 6, 2])
+cc = np.unique(arr, return_counts=True)
+print(cc)
+
+print("mean 返回數組的平均數")
+# np.mean(a, axis = None, dtype = None, out = None)
+cc = np.mean(arr, dtype="int")
+print(cc)
+
+print("medain 返回數組的中位數。")
+# np.median(a, axis = None, out = None)
+print("二維串列 轉 numpy陣列")
+arr = np.array([[1, 2, 3, 4], [5, 6, 7, 8]])
+cc = np.median(arr)
+print(cc)
+
+print("digitize 返回輸入數組中每個值所屬的容器的索引。")
+# np.digitize(x, bins, right = False)
+# bin：容器的數組。
+# right:表示該間隔是否包括右邊或左邊的bin。
+
+print("串列 轉 numpy陣列")
+a = np.array([-0.9, 0.5, 0.9, 1, 1.2, 1.4, 3.6, 4.7, 5.3])
+bins = np.array([0, 1, 2, 3])
+cc = np.digitize(a, bins)
+print(cc)
+
+"""
+Exp        Value 
+x < 0     :   0 
+0 <= x <1 :   1 
+1 <= x <2 :   2 
+2 <= x <3 :   3 
+3 <=x     :   4 
+Compares -0.9 to 0, here x < 0 so Put 0 in resulting array. 
+Compares  0.5 to 0, here 0 <= x <1 so Put 1. 
+Compares 5.4 to 4, here 3<=x so Put 4
+"""
+
+print("expand_dims 它用於擴展數組的維度。")
+# np.expand_dims(a, axis)
+print("串列 轉 numpy陣列")
+arr = np.array([8, 14, 1, 8, 11, 4, 9, 4, 1, 13, 13, 11])
+cc = np.expand_dims(cc, axis=0)
+print(cc)
+
+cc = np.expand_dims(cc, axis=1)
+print(cc)
+
+print("squeeze 通過移除一個單一維度來降低數組的維度。")
+# np.squeeze(a, axis = None)
+
+print("串列 轉 numpy陣列")
+arr = np.array([[8], [14], [1], [8], [11], [4], [9], [4], [1], [13], [13], [11]])
+cc = np.squeeze(arr)
+print(cc)
+
+print("count_nonzero 計算所有非零元素并返回它們的計數。")
+# np.count_nonzero(a, axis = None, ...)
+
+print("串列 轉 numpy陣列")
+a = np.array([0, 0, 1, 1, 1, 0])
+cc = np.count_nonzero(a)
+print(cc)
+
+print("argwhere 查找并返回非零元素的所有下標。")
+# np.argwhere(a)
+
+print("串列 轉 numpy陣列")
+a = np.array([0, 0, 1, 1, 1, 0])
+cc = np.argwhere(a)
+print(cc)
+
+print("argmax & argmin argmax返回數組中Max元素的索引。它可以用於多類圖像分類問題中獲得高概率預測標簽的指標。")
+# np.argmax(a, axis = None, out = None)
+print("串列 轉 numpy陣列")
+arr = np.array([[0.12, 0.64, 0.19, 0.05]])
+cc = np.argmax(arr)
+print(cc)
+
+print("argmin將返回數組中min元素的索引。")
+# np.argmin(a, axis = None, out = None)
+cc = np.argmin(min)
+print(cc)
+
+print("sort 對數組排序。")
+# np.sort(a, axis = -1, kind = None, order = None)
+# kind:要使用的排序算法。{‘quicksort’, ‘mergesort’, ‘heapsort’, ‘stable’}
+
+print("clip 它可以將數組的裁剪值保持在一個范圍內。")
+
+print("串列 轉 numpy陣列")
+arr = np.array([0, 1, -3, -4, 5, 6, 7, 2, 3])
+cc = arr.clip(0, 5)
+print(cc)
+
+cc = arr.clip(0, 3)
+print(cc)
+
+cc = arr.clip(3, 5)
+print(cc)
+
+print("替換數組中的值 where put copyto")
+
+print("where 返回滿足條件的數組元素。")
+# np.where(condition, [x, y])
+# condition:匹配的條件。如果true則返回x，否則y。
+
+cc = np.arange(12).reshape(4, 3)
+print(cc)
+
+print("大於5的")
+cc = np.where(a > 5)  ## Get The Index
+print(cc)
+
+print("大於5的")
+cc = a[np.where(a > 5)]  ## Get Values
+print(cc)
+
+# 它還可以用來替換pandas df中的元素。
+
+# cc = np.where(data[feature].isnull(), 1, 0)
+# print(cc)
+
+print("put 用給定的值替換數組中指定的元素。")
+# np.put(a, ind, v)
+# a:數組
+# Ind:需要替換的索引。
+# V:替換值。
+
+cc = np.put(arr, [1, 2], [6, 7])
+print(cc)
+
+print("copyto 將一個數組的內容復制到另一個數組中。")
+# np.copyto(dst, src, casting = 'same_kind', where = True)
+# dst：目標
+# src：來源
+
+print("串列 轉 numpy陣列")
+arr1 = np.array([1, 2, 3, 4])
+print("串列 轉 numpy陣列")
+arr2 = np.array([5, 6, 7, 8])
+
+print("Before arr1", arr1)
+print("Before arr2", arr1)
+np.copyto(arr1, arr2)
+print("After arr1", arr1)
+print("After arr2", arr2)
+
+# 集合操作
+
+print("查找公共元素 intersect1d函數以排序的方式返回兩個數組中所有唯一的值。")
+# np.intersect1d(arg1, arg2, assume_unique = False, return_indices = False)
+# Assume_unique:如果為真值，則假設輸入數組都是唯一的。
+# Return_indices:如果為真，則返回公共元素的索引。
+
+print("串列 轉 numpy陣列")
+ar1 = np.array([1, 2, 3, 4, 5, 6])
+ar2 = np.array([3, 4, 5, 8, 9, 1])
+np.intersect1d(ar1, ar2)
+
+np.intersect1d(ar1, ar2, return_indices=True)
+
+print("查找不同元素 np.setdiff1d函數返回arr1中在arr2中不存在的所有唯一元素。")
+print("串列 轉 numpy陣列")
+a = np.array([1, 7, 3, 2, 4, 1])
+b = np.array([9, 2, 5, 6, 7, 8])
+np.setdiff1d(a, b)
+
+print("從兩個數組中提取唯一元素 Setxor1d 將按順序返回兩個數組中所有唯一的值。")
+print("串列 轉 numpy陣列")
+a = np.array([1, 2, 3, 4, 6])
+b = np.array([1, 4, 9, 4, 36])
+np.setxor1d(a, b)
+
+print("合并 Union1d函數將兩個數組合并為一個。")
+print("串列 轉 numpy陣列")
+a = np.array([1, 2, 3, 4, 5])
+b = np.array([1, 3, 5, 4, 36])
+np.union1d(a, b)
+
+# 數組分割
+
+print("水平分割 Hsplit函數將數據水平分割為n個相等的部分。")
+print("二維串列 轉 numpy陣列")
+A = np.array([[3, 4, 5, 2], [6, 7, 2, 6]])
+np.hsplit(A, 2)  ## splits the data into two equal parts
+
+np.hsplit(A, 4)  ## splits the data into four equal parts
+
+print("垂直分割 Vsplit將數據垂直分割為n個相等的部分。")
+print("二維串列 轉 numpy陣列")
+A = np.array([[3, 4, 5, 2], [6, 7, 2, 6]])
+np.vsplit(A, 2)
+
+# 數組疊加
+
+print("水平疊加 hstack 將在另一個數組的末尾追加一個數組。")
+print("串列 轉 numpy陣列")
+a = np.array([1, 2, 3, 4, 5])
+b = np.array([1, 4, 9, 16, 25])
+
+cc = np.hstack((a, b))
+print(cc)
+
+print("垂直疊加 vstack將一個數組堆疊在另一個數組上。")
+
+cc = np.vstack((a, b))
+print(cc)
+
+# 數組比較
+
+print("allclose 如果兩個數組的形狀相同，則Allclose函數根據公差值查找兩個數組是否相等或近似相等。")
+
+print("串列 轉 numpy陣列")
+a = np.array([0.25, 0.4, 0.6, 0.32])
+b = np.array([0.26, 0.3, 0.7, 0.32])
+
+tolerance = 0.1  ## Total Difference
+np.allclose(a, b, tolerance)
+
+tolerance = 0.5
+np.allclose(a, b, tolerance)
+
+print("equal 它比較兩個數組的每個元素，如果元素匹配就返回True。")
+
+np.equal(arr1, arr2)
+
+# 重復的數組元素
+
+print("repeat 它用於重復數組中的元素n次。")
+# np.repeat(a, repeats, axis = None)
+
+# A:重復的元素
+
+# Repeats:重復的次數。
+
+cc = np.repeat("2017", 3)
+print(cc)
+
+
+# 讓我們來看一個更實際的示例，我們有一個包含按年數量銷售的數據集。
+
+fruits = pd.DataFrame(
+    [["Mango", 40], ["Apple", 90], ["Banana", 130]],
+    columns=["Product", "ContainerSales"],
+)
+print(fruits)
+
+# 在數據集中，缺少年份列。我們嘗試使用numpy添加它。
+
+fruits["year"] = np.repeat(2020, fruits.shape[0])
+print(fruits)
+
+print("tile 通過重復A，rep次來構造一個數組。")
+# np.tile(A, reps)
+
+na = np.tile("Ram", 5)
+print(na)
+
+na = np.tile(3, (2, 3))
+print(na)
+
+# 愛因斯坦求和
+
+print("einsum 此函數用於計算數組上的多維和線性代數運算。")
+
+a = np.arange(1, 10).reshape(3, 3)
+b = np.arange(21, 30).reshape(3, 3)
+
+na = np.einsum("ii->i", a)
+print(na)
+
+na = np.einsum("ji", a)
+print(na)
+
+na = np.einsum("ij,jk", a, b)
+print(na)
+
+na = np.einsum("ii", a)
+print(na)
+
+# 統計分析
+
+print("直方圖 這是Numpy的重要統計分析函數，可計算一組數據的直方圖值。")
+
+print("二維串列 轉 numpy陣列")
+A = np.array([[3, 4, 5, 2], [6, 7, 2, 6]])
+na = np.histogram(A)
+print(na)
+
+print("百分位數 沿指定軸計算數據的Q-T-T百分位數。")
+
+# a:輸入。
+# q:要計算的百分位。
+# overwrite_input:如果為true，則允許輸入數組修改中間計算以節省內存。
+print("二維串列 轉 numpy陣列")
+a = np.array([[2, 4, 6], [4, 8, 12]])
+na = np.percentile(a, 50)
+print(na)
+na = np.percentile(a, 10)
+print(na)
+arr = np.array([2, 3, 4, 1, 6, 7])
+na = np.percentile(a, 5)
+print(na)
+
+print("標準偏差和方差 std和var是NumPy的兩個函數，用於計算沿軸的標準偏差和方差。")
+
+print("二維串列 轉 numpy陣列")
+a = np.array([[2, 4, 6], [4, 8, 12]])
+
+na = np.std(a, axis=1)
+print(na)
+na = np.std(a, axis=0)  ## Column Wise
+print(na)
+na = np.var(a, axis=1)
+print(na)
+na = np.var(a, axis=0)
+print(na)
+
+# 數組打印
+
+print("顯示帶有兩個十進制值的浮點數")
+
+np.set_printoptions(precision=2)
+
+print("串列 轉 numpy陣列")
+na = np.array([12.23456, 32.34535])
+print(na)
+
+print("設置打印數組最大值")
+
+na = np.set_printoptions(threshold=np.inf)
+print(na)
+
+print("增加一行中元素的數量")
+
+na = np.set_printoptions(linewidth=100)  ## 默認是 75
+print(na)
+
+# 保存和加載數據
+
+print("保存")
+
+# savetxt用於在文本文件中保存數組的內容。
+
+arr = np.linspace(10, 100, 500).reshape(25, 20)
+np.savetxt("array.txt", arr)
+
+print("加載")
+
+# 用於從文本文件加載數組，它以文件名作為參數。
+
+np.loadtxt("array.txt")
+
+print("------------------------------------------------------------")  # 60個
+
+cc = [1, 2, 3, 4]
+print("中位數 : ", np.median(cc))
+
+cc = [1, 2, 3, 4, 5]
+print("中位數 : ", np.median(cc))
+
+print("------------------------------------------------------------")  # 60個
+
+print("串列 轉 numpy陣列")
+x1 = np.array([0, 1, 1, 3, 2, 1])
+# 因為 x1 元素最大值是 3, 所以 bin 是 4
+print("np.bincount :", np.bincount(x1))
+
+print("串列 轉 numpy陣列")
+x2 = np.array([0, 1, 1, 7, 2, 1])
+# 因為 x2 元素最大值是 7, 所以 bin 是 8
+print("np.bincount :", np.bincount(x2))
+
+print("------------------------------------------------------------")  # 60個
+
+print("串列 轉 numpy陣列")
+x1 = np.array([0, 1, 1, 3, 2, 1])
+# 因為 x1 元素最大值是 3, 所以 bin 是 4
+print("np.bincount :", np.bincount(x1))
+print("mode :", np.argmax(np.bincount(x1)))
+
+print("串列 轉 numpy陣列")
+x2 = np.array([0, 1, 1, 7, 2, 1])
+# 因為 x2 元素最大值是 7, 所以 bin 是 8
+print("np.bincount :", np.bincount(x2))
+print("mode :", np.argmax(np.bincount(x1)))
+
+print("------------------------------------------------------------")  # 60個
+
+print("串列 轉 numpy陣列")
+a = np.array([1, 1])
+b = np.array([5, 5])
+c = np.array([1, 5])
+d = np.array([5, 1])
+
+ab = b - a  # 向量ab
+cd = d - c  # 向量bc
+
+norm_a = np.linalg.norm(ab)  # 計算向量大小
+norm_b = np.linalg.norm(cd)  # 計算向量大小
+
+dot_ab = np.dot(ab, cd)  # 計算向量內積
+
+cos_angle = dot_ab / (norm_a * norm_b)  # 計算cos值
+rad = math.acos(cos_angle)  # acos轉成弧度
+deg = math.degrees(rad)  # 轉成角度
+print("角度是 = {}".format(deg))
+
+print("------------------------------------------------------------")  # 60個
+
+
+def cosine_similarity(va, vb):
+    norm_a = np.linalg.norm(va)  # 計算向量大小
+    norm_b = np.linalg.norm(vb)  # 計算向量大小
+    dot_ab = np.dot(va, vb)  # 計算向量內積
+    return dot_ab / (norm_a * norm_b)  # 回傳相似度
+
+
+print("串列 轉 numpy陣列")
+a = np.array([2, 1, 1, 1, 0, 0, 0, 0])
+b = np.array([1, 1, 0, 0, 1, 1, 1, 0])
+c = np.array([1, 1, 0, 0, 1, 1, 0, 1])
+print("a 和 b 相似度 = {0:5.3f}".format(cosine_similarity(a, b)))
+print("a 和 c 相似度 = {0:5.3f}".format(cosine_similarity(a, c)))
+print("b 和 c 相似度 = {0:5.3f}".format(cosine_similarity(b, c)))
+
+print("------------------------------------------------------------")  # 60個
+
+print("兩陣列的相關係數")
+print("串列 轉 numpy陣列")
+x = np.array([8, 9, 10, 7, 8, 9, 5, 7, 9, 8])
+y = np.array([12, 15, 16, 18, 6, 11, 3, 12, 11, 16])
+print("x陣列長度 :", len(x))
+print("y陣列長度 :", len(y))
+x_mean = np.mean(x)
+y_mean = np.mean(y)
+
+xi_x = [v - x_mean for v in x]
+yi_y = [v - y_mean for v in y]
+
+data1 = [0] * 10
+data2 = [0] * 10
+data3 = [0] * 10
+for i in range(len(x)):
+    data1[i] = xi_x[i] * yi_y[i]
+    data2[i] = xi_x[i] ** 2
+    data3[i] = yi_y[i] ** 2
+
+v1 = np.sum(data1)
+v2 = np.sum(data2)
+v3 = np.sum(data3)
+r = v1 / ((v2**0.5) * (v3**0.5))
+print("相關係數 : {}".format(r))
+
+print("------------------------------------------------------------")  # 60個
+
+print("串列 轉 numpy陣列")
+x = np.array([8, 9, 10, 7, 8, 9, 5, 7, 9, 8])
+y = np.array([12, 15, 16, 18, 6, 11, 3, 12, 11, 16])
+
+x_mean = np.mean(x)
+y_mean = np.mean(y)
+
+xpt1 = np.linspace(0, 12, 12)
+ypt1 = [y_mean for xp in xpt1]  # 平均購買次數
+
+ypt2 = np.linspace(0, 20, 20)
+xpt2 = [x_mean for yp in ypt2]  # 平均滿意度
+
+plt.scatter(x, y)  # 滿意度 vs 購買次數
+plt.plot(xpt1, ypt1, "ro-")  # 平均購買次數
+plt.plot(xpt2, ypt2, "go-")  # 平均滿意度
+plt.grid()
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+print("串列 轉 numpy陣列")
+a = np.array([4, 2])
+b = np.array([1, 3])
+
+norm_a = np.linalg.norm(a)  # 計算向量大小
+norm_b = np.linalg.norm(b)  # 計算向量大小
+
+dot_ab = np.dot(a, b)  # 計算向量內積
+
+cos_angle = dot_ab / (norm_a * norm_b)  # 計算cos值
+rad = math.acos(cos_angle)  # acos轉成弧度
+
+area = norm_a * norm_b * math.sin(rad) / 2
+print("area = {0:5.2f}".format(area))
+
+print("------------------------------------------------------------")  # 60個
+
+print("串列 轉 numpy陣列")
+a = np.array([4, 2])
+b = np.array([1, 3])
+
+ab_cross = np.cross(a, b)  # 計算向量外積
+area = np.linalg.norm(ab_cross) / 2  # 向量長度除以2
+
+print("area = {0:5.2f}".format(area))
+
+print("------------------------------------------------------------")  # 60個
+
+print("串列 轉 numpy陣列")
+x = np.array([1, 2, 3])  # 1 x 3 陣列 x
+y = np.array([2, 3, 4])  # 1 x 3 陣列 y
+print("x :", x)
+print("y :", y)
+
+print()
+
+y = y.reshape(-1, 1)  # y 改為 3 x 1 陣列
+print("新 y :", y)
+
+print()
+
+print("x + y :", x + y)
+
+print("------------------------------------------------------------")  # 60個
+
+print("numpy 之 array 之 形狀轉換")
+
+animal_list = [
+    [1, "鼠", "mouse", 3],
+    [2, "牛", "ox", 48],
+    [3, "虎", "tiger", 33],
+    [4, "兔", "rabbit", 8],
+    [5, "龍", "dragon", 38],
+    [6, "蛇", "snake", 16],
+]
+
+na_animal1 = np.array(animal_list)
+# print(na_animal1)
+print("維度 :", na_animal1.ndim)
+print("形狀 :", na_animal1.shape)
+print("數量 :", na_animal1.size)
+
+print("numpy 之 array 之 reshape 用法, 轉成 3 X 8")
+na_animal2 = na_animal1.reshape(3, 8)  # ravel()方法將數組維度拉成一維數組
+print(na_animal2)
+print("維度 :", na_animal2.ndim)
+print("形狀 :", na_animal2.shape)
+print("數量 :", na_animal2.size)
+
+print("numpy 之 array 之 ravel 用法, 轉成 一維陣列")
+na_animal3 = na_animal1.ravel()  # ravel()方法將數組維度拉成一維數組
+# print(na_animal3)
+print("維度 :", na_animal3.ndim)
+print("形狀 :", na_animal3.shape)
+print("數量 :", na_animal3.size)
+
+print("------------------------------------------------------------")  # 60個
+
+print("numpy 之 mgrid()方法生成等差數列")
+
+print("一維等差數列")
+a = np.mgrid[0:5:1]  # 用mgrid()方法生成等差數列a
+print(a)
+
+print("二維等差數列")
+a, b = np.mgrid[0:5:1, 0:5:1]  # 用mgrid()方法生成等差數列a,b
+print(a)
+print(b)
+
+print("------------------------------------------------------------")  # 60個
+
+a = np.array([3, 6, 8, 1, 2, 88])
+b = np.where(a > 5)
+print(a)
+print(b)
+
+print("------------------------------------------------------------")  # 60個
+
+a = np.array([[3, 6, 8, 77, 66], [1, 2, 88, 3, 98], [11, 2, 67, 5, 2]])
+b = np.where(a > 5)
+print(a)
+print(b)
+
+print("------------------------------------------------------------")  # 60個
+
+
+num = 3.2
+print("數值{0:2.1f} 取log10 {1:4.3f}".format(num, np.log10(num)))
+
+print("------------------------------------------------------------")  # 60­э
+
+
+print("------------------------------------------------------------")  # 60個
+print("numpy")
+print("------------------------------------------------------------")  # 60個
+
+a = np.array([2, 3, 4, 5, 6])
+print(f"a = {a}")
+b = np.ma.masked_where(a > 3, a)
+print(f"b = {b}")
+
+print("------------------------------------------------------------")  # 60個
+
+print(np.c_[np.array([1, 2, 3]), np.array([4, 5, 6])])
+print(np.c_[np.array([[1, 2, 3]]), 0, 0, np.array([[4, 5, 6]])])
+
+"""
+array([[1, 4],
+       [2, 5],
+       [3, 6]])
+"""
+
+# array([[1, 2, 3, ..., 4, 5, 6]])
+
+print("------------------------------------------------------------")  # 60個
+
+# numpy.c_() and numpy.r_()的用法
+
+
+#####np.c_是按行连接两个矩阵，就是把两矩阵左右相加，要求行数相等，类似於pandas中的merge()。
+#####np.r_是按列连接两个矩阵，就是把两矩阵上下相加，要求列数相等，类似於pandas中的concat()。
+
+# np.c_是按行连接两个矩阵，就是把两矩阵左右相加，要求行数相等。
+# np.r_是按列连接两个矩阵，就是把两矩阵上下相加，要求列数相等。
+
+
+# 1.numpy.c_:
+
+x = np.arange(12).reshape(3, 4)
+print("x:", x, x.shape)
+
+y = np.arange(10, 22).reshape(3, 4)
+print("y:", y, y.shape)
+
+z = np.c_[x, y]
+print("z:", z, z.shape)
+
+# 2.numpy.r_用法:
+
+x = np.arange(12).reshape(3, 4)
+print("x:", x, x.shape)
+
+y = np.arange(10, 22).reshape(3, 4)
+print("y:", y, y.shape)
+
+z = np.r_[x, y]
+print("z:", z, z.shape)
+
+print("------------------------------------------------------------")  # 60個
+
+print("二維陣列 6 X 4")
+a = np.array(
+    [[0, 0, 0, 1], [1, 1, 1, 2], [2, 2, 2, 3], [3, 3, 3, 4], [4, 4, 4, 5], [5, 5, 5, 6]]
+)
+print(a)
+print(a.shape)
+print(a.dtype)
+print(a.ndim)
+print(a.size)
+print(a.nbytes)
+
+print("第3列 之 第1~4項(不含尾)")
+print(a[3, 1:4])
+
+print("前2列 之 第2欄之後")
+print(a[:2, 2:])
+
+print("第2列 之 全部")
+print(a[2, :])
+
+print("全部列 之 第3欄, 轉成row")
+print(a[:, 3])
+
+print("全部列 之 偶數欄")
+print(a[:, ::2])
+
+print("偶數列 之 036欄")
+print(a[::2, ::3])
+
+# np.argmin()求最小值對應的索引
+# np.argmax()求最大值對應的索引
+
+print("每個直行的最小值:", a.min(axis=0))
+print("每個直行的最小值對應的索引:", a.argmin(axis=0))
+print("每個直行的標準差:", a.std(axis=0))
+
+print("全部平均:", a.mean())
+print("直行平均:", a.mean(axis=0))
+print("橫列平均:", a.mean(axis=1))
+
+print("------------------------------------------------------------")  # 60個
+
+print("矩陣與二維數組")
+a = np.mat(np.mat([[1, 2, 3], [4, 5, 6]]))
+print(type(a))
+
+print(np.eye(2))
+print(np.diag([2, 3]))
+
+a = np.mat([[1.0, 2.0], [3.0, 4.0]])
+print(np.dot(a, a))  # 矩陣乘積
+print(np.multiply(a, a))  # 矩陣點乘
+print(a.T)  # 矩陣轉置
+print(a.I)  # 矩陣求逆
+print(np.trace(a))  # 求矩陣的跡
+print(np.linalg.eig(a))  # 特徵分解
+
+print("------------------------------------------------------------")  # 60個
+
+a = np.array([1, 2, 3])  # Create a rank 1 array
+print(type(a))  # Prints "<type 'numpy.ndarray'>"
+print(a.shape)  # Prints "(3,)"
+print(a[0], a[1], a[2])  # Prints "1 2 3"
+a[0] = 5  # Change an element of the array
+print(a)  # Prints "[5, 2, 3]"
+b = np.array([[1, 2, 3], [4, 5, 6]])  # Create a rank 2 array
+print(b.shape)  # Prints "(2, 3)"
+print(b[0, 0], b[0, 1], b[1, 0])  # Prints "1 2 4"
+
+print("------------------------------------------------------------")  # 60個
+
+a = np.array([[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]])
+b = a[0:2, 1:3]  # 定義b為a 的部分資料
+# b= a[0:2,1:3].copy() # 複製b為a 的部分資料
+print(b)  # 輸出[[2 3], [6 7]]
+b[0, 0] = 99  # 修改b的局部資料
+print(b)  # 輸出[[99  3], [ 6  7]]
+print(a)  # 輸出[[ 1 99  3  4],[ 5  6  7  8],[ 9 10 11 12]]
+
+print("------------------------------------------------------------")  # 60個
+
+a = np.array([[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]])
+row_r1 = a[1, :]
+row_r2 = a[1:2, :]
+print(row_r1, row_r1.shape)
+print(row_r2, row_r2.shape)
+col_r1 = a[:, 1]
+col_r2 = a[:, 1:2]
+print(col_r1, col_r1.shape)
+print(col_r2, col_r2.shape)
+
+print("------------------------------------------------------------")  # 60個
+
+x = np.array([[1, 2], [3, 4]], dtype=np.float64)
+y = np.array([[5, 6], [7, 8]], dtype=np.float64)
+v = np.array([9, 10], dtype=np.float64)
+
+# 加法
+print(x + y)  # 輸出 [[ 6.0  8.0] [10.0 12.0]]
+print(np.add(x, y))  # 輸出 [[ 6.0  8.0] [10.0 12.0]]
+print(x + 10)  # 輸出 [[11. 12.] [13. 14.]]
+# 減法
+print(x - y)  # 輸出 [[-4.0 -4.0] [-4.0 -4.0]]
+print(np.subtract(x, y))  # 輸出 [[-4.0 -4.0] [-4.0 -4.0]]
+print(x - [1, 2])  # 輸出 [[0. 0.]  [2. 2.]]
+# 乘法
+print(x * y)
+print(np.multiply(x, y))  # 輸出  [[ 5.0 12.0][21.0 32.0]]
+# 除法
+print(x / y)
+print(np.divide(x, y))  # 輸出 [[ 0.2  0.33333333] [ 0.42857143  0.5]]
+# 平方
+print(x**2)
+print(np.sqrt(x))  # 輸出[[ 1. 1.41421356] [ 1.73205081  2.]]
+
+# 矩陣乘法，兩個數組的點積 Dot product
+print(x.dot(y))  # 輸出         [[19. 22.] [43. 50.]]
+print(np.dot(x, y))  # [[5+14 , 6+16] []]
+
+print("------------------------------------------------------------")  # 60個
+
+x = np.array([[-1, 2, 3], [13, 14, 15]])
+print(x)
+print(np.sum(x))  # 輸出46   全部累加
+print(np.sum(x, axis=0))  # 輸出"[12 16 18]" =(-1+13),(2+14),(3+15)
+print(np.sum(x, axis=1))  # 輸出"[ 4 42]" =(-1+2+3),(13+14+15)
+print(np.max(x))  # 最大值 輸出15
+print(np.min(x))  # 最小值 輸出-1
+print(np.cumsum(x))  # 累加[-1  1  4 17 31 46]
+# 加權平均值
+print(np.average(x))  # 輸出7.666
+# 平均 mean=sum(x)/len(x)
+print(np.mean(x))  # 輸出7.666
+# 中間值
+print(np.median(x))  # 輸出8.0
+# 標準偏差 std = sqrt(mean(abs(x - x.mean())**2))
+print(np.std(x))  # 輸出 6.472
+# 方差 var = mean(abs(x - x.mean())**2)
+print(np.var(x))  # 輸出 41.888
+print(x.T)  # 輸出 [[-1 13] [ 2 14] [ 3 15]]
+
+print("------------------------------------------------------------")  # 60個
+
+a = np.array([[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]])
+bool_idx = (a % 2) == 0
+print(bool_idx)
+print(a[bool_idx])
+print(a[a > 10])
+print(a[a % 2 == 1] * 10)
+
+print("------------------------------------------------------------")  # 60個
+
+# 方法1
+x = np.array([[1, 2, 3], [4, 5, 6]])
+v = np.array([1, 0, 1])
+y = np.empty_like(x)
+for i in range(2):
+    y[i, :] = x[i, :] + v
+print(y)  # 輸出[[2 2 4][5 5 7]]
+
+# 方法2
+v2 = np.tile(v, (2, 1))
+print(v2)  # 輸出[[1 0 1][1 0 1]]
+print(x + v2)  # 輸出[[2 2 4] [5 5 7]]
+
+# 方法3
+print(x + v)  # 輸出[[2 2 4] [5 5 7]]
+
+print("------------------------------------------------------------")  # 60個
+
+a = np.array([1, 2, 3])
+b = np.array([4, 5, 6])
+print(a[0], b[1])
+
+a = np.append(a, b)
+print(a)
+
+d = a[1]
+print(d)
+
+a2 = np.delete(a, 1)
+print(a2)
+a3 = np.insert(a, 1, d)
+print(a3)
+
+print("------------------------------------------------------------")  # 60個
+
 # 複製數據
 a = [1, 2, 3]
 b = np.asarray(a)
@@ -1405,494 +1448,9 @@ print(b)  # [1 2 3]
 print(c)  # [1, 2, 3]
 print(d)  # [4. 5. 6.]
 
-# Make the graphs a bit prettier, and bigger
-plt.style.use('ggplot')
-plt.rcParams['figure.figsize'] = (15, 5)
-
-print('------------------------------------------------------------')	#60個
-
-broken_df = pd.read_csv('data/bikes.csv', encoding = "ISO-8859-1")
-
-# Look at the first 3 rows
-print(broken_df[:3])
-
-print('------------------------------------------------------------')	#60個
-
-fixed_df = pd.read_csv('data/bikes.csv', sep = ';', encoding = 'latin1', parse_dates = ['Date'], dayfirst=True, index_col='Date')
-print(fixed_df[:3])
-
-print(fixed_df['Berri 1'])
-
-fixed_df['Berri 1'].plot()
-
-plt.show()
-
-
-fixed_df.plot(figsize=(15, 10))
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-df = pd.read_csv('data/bikes.csv', sep=';', encoding='latin1', parse_dates=['Date'], dayfirst=True, index_col='Date')
-df['Berri 1'].plot()
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-"""
-# Make the graphs a bit prettier, and bigger
-plt.style.use('ggplot')
-
-# This is necessary to show lots of columns in pandas 0.12. 
-# Not necessary in pandas 0.13.
-pd.set_option('display.width', 5000) 
-pd.set_option('display.max_columns', 60)
-
-plt.rcParams['figure.figsize'] = (15, 5)
-
-# because of mixed types we specify dtype to prevent any errors
-csv_filename = 'C:/_git/vcs/_big_files/311-service-requests.csv'
-complaints = pd.read_csv(csv_filename, dtype='unicode')
-
-print(complaints)
-complaints['Complaint Type']
-
-complaints['Complaint Type'].value_counts()
-
-complaint_counts = complaints['Complaint Type'].value_counts()
-complaint_counts[:10]
-
-complaint_counts[:10].plot(kind='bar')
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-# Make the graphs a bit prettier, and bigger
-plt.style.use('ggplot')
-plt.rcParams['figure.figsize'] = (15, 5)
-
-# This is necessary to show lots of columns in pandas 0.12. 
-# Not necessary in pandas 0.13.
-pd.set_option('display.width', 5000) 
-pd.set_option('display.max_columns', 60)
-
-
-# because of mixed types we specify dtype to prevent any errors
-csv_filename = 'C:/_git/vcs/_big_files/311-service-requests.csv'
-complaints = pd.read_csv(csv_filename, dtype='unicode')
-
-is_noise = complaints['Complaint Type'] == "Noise - Street/Sidewalk"
-noise_complaints = complaints[is_noise]
-noise_complaints['Borough'].value_counts()
-
-noise_complaint_counts = noise_complaints['Borough'].value_counts()
-complaint_counts = complaints['Borough'].value_counts()
-
-noise_complaint_counts / complaint_counts
-
-noise_complaint_counts / complaint_counts.astype(float)
-
-(noise_complaint_counts / complaint_counts.astype(float)).plot(kind='bar')
-
-plt.show()
-"""
-print('------------------------------------------------------------')	#60個
-
-# Make the graphs a bit prettier, and bigger
-plt.style.use('ggplot')
-plt.rcParams['figure.figsize'] = (15, 5)
-plt.rcParams['font.family'] = 'sans-serif'
-
-# This is necessary to show lots of columns in pandas 0.12. 
-# Not necessary in pandas 0.13.
-pd.set_option('display.width', 5000) 
-pd.set_option('display.max_columns', 60)
-
-
-bikes = pd.read_csv('data/bikes.csv', sep=';', encoding='latin1', parse_dates=['Date'], dayfirst=True, index_col='Date')
-bikes['Berri 1'].plot()
-plt.show()
-
-
-berri_bikes = bikes[['Berri 1']].copy()
-
-
-berri_bikes[:5]
-
-
-
-berri_bikes.index
-
-
-berri_bikes.index.day
-
-berri_bikes.index.weekday
-
-berri_bikes.loc[:,'weekday'] = berri_bikes.index.weekday
-berri_bikes[:5]
-
-
-weekday_counts = berri_bikes.groupby('weekday').aggregate(sum)
-weekday_counts
-
-weekday_counts.index = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
-weekday_counts
-
-
-weekday_counts.plot(kind='bar')
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-bikes = pd.read_csv('data/bikes.csv', 
-                    sep=';', encoding='latin1', 
-                    parse_dates=['Date'], dayfirst=True, 
-                    index_col='Date')
-# Add the weekday column
-berri_bikes = bikes[['Berri 1']].copy()
-berri_bikes.loc[:,'weekday'] = berri_bikes.index.weekday
-
-# Add up the number of cyclists by weekday, and plot!
-weekday_counts = berri_bikes.groupby('weekday').aggregate(sum)
-weekday_counts.index = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
-weekday_counts.plot(kind='bar')
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-plt.style.use('ggplot')
-plt.rcParams['figure.figsize'] = (15, 3)
-plt.rcParams['font.family'] = 'sans-serif'
-
-#Canada's weather data for 2012, and saved it to a CSV.
-#Here's the temperature every hour for 2012!
-
-weather_2012_final = pd.read_csv('data/weather_2012.csv', index_col='Date/Time')
-weather_2012_final['Temp (C)'].plot(figsize=(15, 6))
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-#Here's an URL template you can use to get data in Montreal.
-url_template = "http://climate.weather.gc.ca/climateData/bulkdata_e.html?format=csv&stationID=5415&Year={year}&Month={month}&timeframe=1&submit=Download+Data"
-
-#To get the data for March 2013, we need to format it with month=3, year=2012.
-#url = url_template.format(month=3, year=2012)
-#weather_mar2012 = pd.read_csv(url, skiprows=15, index_col='Date/Time', parse_dates=True, encoding='latin1', header=True)
-
-# because the url is broken, we use our saved dataframe for now
-weather_mar2012 = pd.read_csv('data/weather_2012.csv')
-
-print(weather_mar2012)
-
-weather_mar2012[u"Temp (C)"].plot(figsize=(15, 5))
-plt.show()
-
-# '\xb0' for that degree character °
-""" fail
-weather_mar2012.columns = [
-    u'Year', u'Month', u'Day', u'Time', u'Data Quality', u'Temp (C)', 
-    u'Temp Flag', u'Dew Point Temp (C)', u'Dew Point Temp Flag', 
-    u'Rel Hum (%)', u'Rel Hum Flag', u'Wind Dir (10s deg)', u'Wind Dir Flag', 
-    u'Wind Spd (km/h)', u'Wind Spd Flag', u'Visibility (km)', u'Visibility Flag',
-    u'Stn Press (kPa)', u'Stn Press Flag', u'Hmdx', u'Hmdx Flag', u'Wind Chill', 
-    u'Wind Chill Flag', u'Weather']
-"""
-
-weather_mar2012 = weather_mar2012.dropna(axis=1, how='any')
-print(weather_mar2012[:5])
-
-print('------------------------------------------------------------')	#60個
-
-#fail
-#weather_mar2012 = weather_mar2012.drop(['Year', 'Month', 'Day', 'Time', 'Data Quality'], axis=1)
-#print(weather_mar2012[:5])
-
-print('------------------------------------------------------------')	#60個
-
-
-#Plotting the temperature by hour of day
-
-"""fail
-temperatures = weather_mar2012[[u'Temp (C)']].copy()
-print(temperatures.head)
-temperatures.loc[:,'Hour'] = weather_mar2012.index.hour
-temperatures.groupby('Hour').aggregate(np.median).plot()
-
-plt.show()
-"""
-
-print('------------------------------------------------------------')	#60個
-
-""" fail in reading csv data
-#5.3 Getting the whole year of data
-
-def download_weather_month(year, month):
-    if month == 1:
-        year += 1
-    url = 'weather_2012.csv'
-    weather_data = pd.read_csv(url, skiprows=15, index_col='Date/Time', parse_dates=True, header=True)
-    weather_data = weather_data.dropna(axis=1)
-    weather_data.columns = [col.replace('\xb0', '') for col in weather_data.columns]
-    weather_data = weather_data.drop(['Year', 'Day', 'Month', 'Time', 'Data Quality'], axis=1)
-    return weather_data
-
-
-cc = download_weather_month(2012, 1)[:5]
-print(cc)
-
-data_by_month = [download_weather_month(2012, i) for i in range(1, 13)]
-
-weather_2012 = pd.concat(data_by_month)
-print(weather_2012)
-
-#save to csv file
-weather_2012.to_csv('tmp_weather_2012.csv')
-"""
-print('------------------------------------------------------------')	#60個
-
-plt.style.use('ggplot')
-plt.rcParams['figure.figsize'] = (15, 3)
-plt.rcParams['font.family'] = 'sans-serif'
-
-weather_2012 = pd.read_csv('data/weather_2012.csv', parse_dates=True, index_col='Date/Time')
-print(weather_2012[:5])
-
-weather_description = weather_2012['Weather']
-is_snowing = weather_description.str.contains('Snow')
-
-# Not super useful
-print(is_snowing[:5])
-
-# More useful!
-is_snowing=is_snowing.astype(float)
-is_snowing.plot()
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-#Use resampling to find the snowiest month
-
-#If we wanted the median temperature each month, we could use the resample() method like this:
-
-weather_2012['Temp (C)'].resample('M').apply(np.median).plot(kind='bar')
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-
-print(is_snowing.astype(float)[:10])
-
-
-
-
-
-print('------------------------------------------------------------')	#60個
-
-print(is_snowing.astype(float).resample('M').apply(np.mean))
-
-is_snowing.astype(float).resample('M').apply(np.mean).plot(kind='bar')
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-#Plotting temperature and snowiness stats together
-
-temperature = weather_2012['Temp (C)'].resample('M').apply(np.median)
-is_snowing = weather_2012['Weather'].str.contains('Snow')
-snowiness = is_snowing.astype(float).resample('M').apply(np.mean)
-
-# Name the columns
-temperature.name = "Temperature"
-snowiness.name = "Snowiness"
-
-#We'll use concat again to combine the two statistics into a single dataframe.
-stats = pd.concat([temperature, snowiness], axis=1)
-print(stats)
-
-stats.plot(kind='bar')
-plt.show()
-
-#Uh, that didn't work so well because the scale was wrong. We can do better by plotting them on two separate graphs:
-
-stats.plot(kind='bar', subplots=True, figsize=(15, 10))
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-# Make the graphs a bit prettier, and bigger
-plt.style.use('ggplot')
-plt.rcParams['figure.figsize'] = (15, 5)
-plt.rcParams['font.family'] = 'sans-serif'
-
-# This is necessary to show lots of columns in pandas 0.12. 
-# Not necessary in pandas 0.13.
-pd.set_option('display.width', 5000) 
-pd.set_option('display.max_columns', 60)
-
-print('------------------------------------------------------------')	#60個
-
-#NYC 311 service request dataset
-csv_filename = 'C:/_git/vcs/_big_files/311-service-requests.csv'
-requests = pd.read_csv(csv_filename, dtype='unicode')
-
-cc = requests['Incident Zip'].unique()
-print(cc)
-
-print('------------------------------------------------------------')	#60個
-
-#Fixing the nan values and string/float confusion
-
-na_values = ['NO CLUE', 'N/A', '0']
-csv_filename = 'C:/_git/vcs/_big_files/311-service-requests.csv'
-requests = pd.read_csv(csv_filename, na_values=na_values, dtype={'Incident Zip': str})
-
-cc = requests['Incident Zip'].unique()
-print(cc)
-
-
-#What's up with the dashes?
-
-rows_with_dashes = requests['Incident Zip'].str.contains('-').fillna(False)
-cc = len(requests[rows_with_dashes])
-print(cc)
-
-print(requests[rows_with_dashes])
-
-#But then my friend Dave pointed out that 9-digit zip codes are normal.
-#Let's look at all the zip codes with more than 5 digits, make sure they're okay, and then truncate them.
-long_zip_codes = requests['Incident Zip'].str.len() > 5
-cc = requests['Incident Zip'][long_zip_codes].unique()
-print(cc)
-
-
-requests['Incident Zip'] = requests['Incident Zip'].str.slice(0, 5)
-
-#Earlier I thought 00083 was a broken zip code, but turns out Central Park's zip code 00083!
-#Shows what I know. I'm still concerned about the 00000 zip codes, though: let's look at that.
-cc = requests[requests['Incident Zip'] == '00000']
-print(cc)
-
-
-zero_zips = requests['Incident Zip'] == '00000'
-requests.loc[zero_zips, 'Incident Zip'] = np.nan
-
-""" fail
-unique_zips = requests['Incident Zip'].unique()
-unique_zips.sort()
-cc = unique_zips
-print(cc)
-"""
-zips = requests['Incident Zip']
-# Let's say the zips starting with '0' and '1' are okay, for now. (this isn't actually true -- 13221 is in Syracuse, and why?)
-is_close = zips.str.startswith('0') | zips.str.startswith('1')
-# There are a bunch of NaNs, but we're not interested in them right now, so we'll say they're False
-is_far = ~(is_close) & zips.notnull()
-
-cc = zips[is_far]
-print(cc)
-
-cc = requests[is_far][['Incident Zip', 'Descriptor', 'City']].sort_values('Incident Zip')
-print(cc)
-
-cc = requests['City'].str.upper().value_counts()
-print(cc)
-
-print('------------------------------------------------------------')	#60個
-
-#Putting it together
-
-na_values = ['NO CLUE', 'N/A', '0']
-csv_filename = 'C:/_git/vcs/_big_files/311-service-requests.csv'
-requests = pd.read_csv(csv_filename, 
-                       na_values=na_values, 
-                       dtype={'Incident Zip': str})
-
-def fix_zip_codes(zips):
-    # Truncate everything to length 5 
-    zips = zips.str.slice(0, 5)
-    
-    # Set 00000 zip codes to nan
-    zero_zips = zips == '00000'
-    zips[zero_zips] = np.nan
-    
-    return zips
-
-requests['Incident Zip'] = fix_zip_codes(requests['Incident Zip'])
-
-cc = requests['Incident Zip'].unique()
-print(cc)
-
-print('------------------------------------------------------------')	#60個
-
-#Parsing Unix timestamps
-
-# Read it, and remove the last row
-popcon = pd.read_csv('data/popularity-contest', sep=' ', )[:-1]
-popcon.columns = ['atime', 'ctime', 'package-name', 'mru-program', 'tag']
-
-print(popcon[:5])
-
-popcon['atime'] = popcon['atime'].astype(int)
-popcon['ctime'] = popcon['ctime'].astype(int)
-
-popcon['atime'] = pd.to_datetime(popcon['atime'], unit='s')
-popcon['ctime'] = pd.to_datetime(popcon['ctime'], unit='s')
-
-print(popcon['atime'].dtype)
-
-
-print(popcon[:5])
-
-print('------------------------------------------------------------')	#60個
-
-popcon = popcon[popcon['atime'] > '1970-01-01']
-
-#不包含lib的
-nonlibraries = popcon[~popcon['package-name'].str.contains('lib')]
-
-cc = nonlibraries.sort_values('ctime', ascending=False)[:10]
-print(cc)
-
-print('------------------------------------------------------------')	#60個
-print('------------------------------------------------------------')	#60個
-
-
-
-
-print('------------------------------------------------------------')	#60個
-
-a = np.array([[1,2,3],[4,5,6]], int)#指定元素型態的陣列
-a = np.array([[1,2,3],[4,5,6]], dtype = float)#指定元素型態的陣列
-print(a[0, 0], a[0, 1], a[0, 2])
-print(a[1, 0], a[1, 1], a[1, 2])
-
-print('陣列元素的資料型態 :', a.dtype)
-print('陣列的元素總數', a.size)
-print('陣列的形狀', a.shape)
-print('陣列元素所占用的拜數', a.itemsize)
-print('幾維陣列', a.ndim)
-print('整個陣列所占用的拜數', a.nbytes)
-
 print("------------------------------------------------------------")  # 60個
 
-print('陣列的形狀操作 reshape 1')
-
-a = np.array([1,2,3,4,5,6])
-print(a)
-b = a.reshape((3, 2))
-print(b)
-
-print("------------------------------------------------------------")  # 60個
-
-print('陣列的形狀操作 reshape 2')
+print("陣列的形狀操作 reshape 2")
 
 a = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9])
 b = a.reshape((3, 3))
@@ -1902,9 +1460,9 @@ print(c)
 
 print("------------------------------------------------------------")  # 60個
 
-#合併
-a = np.array([[1,2],[3,4]])
-b = np.array([[5,6],[7,8]])
+# 合併
+a = np.array([[1, 2], [3, 4]])
+b = np.array([[5, 6], [7, 8]])
 c = np.concatenate((a, b), axis=0)
 print(c)
 d = np.concatenate((a, b), axis=1)
@@ -1912,8 +1470,8 @@ print(d)
 
 print("------------------------------------------------------------")  # 60個
 
-#擴充或刪除陣列的維度
-a = np.array([[1,2,3,4,5,6,7,8]])
+# 擴充或刪除陣列的維度
+a = np.array([[1, 2, 3, 4, 5, 6, 7, 8]])
 b = a.reshape(2, 4)
 print(b.shape)
 c = np.expand_dims(b, axis=0)
@@ -1925,8 +1483,8 @@ print(e.shape, f.shape)
 
 print("------------------------------------------------------------")  # 60個
 
-#取得陣列最大最小值和索引
-a = np.array([[11,22,13,74,35,6,27,18]])
+# 取得陣列最大最小值和索引
+a = np.array([[11, 22, 13, 74, 35, 6, 27, 18]])
 
 min_value = np.min(a)
 max_value = np.max(a)
@@ -1936,29 +1494,29 @@ min_idx = np.argmin(a)
 max_idx = np.argmax(a)
 print(min_idx, max_idx)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-#NumPy 的高速運算
+# NumPy 的高速運算
 
 N = 5
 
-print('建立NXN之隨機矩陣A')
+print("建立NXN之隨機矩陣A")
 matA = np.array(np.random.rand(N, N))
 print(matA.shape)
 print(matA)
 
-print('建立NXN之隨機矩陣B')
+print("建立NXN之隨機矩陣B")
 matB = np.array(np.random.rand(N, N))
 print(matB.shape)
 print(matB)
 
-print('建立NXN之矩陣C 元素全為3')
+print("建立NXN之矩陣C 元素全為3")
 matC = np.array([[3] * N for _ in range(N)])
 print(matC.shape)
 print(matC)
 
-print('使用 Python 計算')
-start = time.time() 
+print("使用 Python 計算")
+start = time.time()
 
 for i in range(N):
     for j in range(N):
@@ -1969,7 +1527,7 @@ time1 = time.time() - start
 print("Python 的計算結果：%f[sec]" % float(time1))
 
 
-print('使用 NumPy 計算')
+print("使用 NumPy 計算")
 start = time.time()
 
 matC = np.dot(matA, matB)
@@ -1979,26 +1537,26 @@ print("NumPy 的計算結果：%f[sec]" % float(time2))
 
 if time2 < 0.000001:
     time2 = 0.000001
-print('使用numpy快了 ', time1/time2, ' 倍')
+print("使用numpy快了 ", time1 / time2, " 倍")
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
-print('---------------↓不使用 copy()↓---------------')
+print("---------------↓不使用 copy()↓---------------")
 
 arr1 = np.array([1, 2, 3, 4, 5])
 
-print('arr1:'+str(arr1))
+print("arr1:" + str(arr1))
 
 arr2 = arr1
 
 arr2[0] = 100
 
-print('arr2:'+str(arr1))
+print("arr2:" + str(arr1))
 
-print('arr1:'+str(arr2))
+print("arr1:" + str(arr2))
 
-print('---------------↓使用 copy()↓-----------------')
+print("---------------↓使用 copy()↓-----------------")
 
 arr1 = np.array([1, 2, 3, 4, 5])
 
@@ -2008,91 +1566,53 @@ arr2 = arr1.copy()
 
 arr2[0] = 100
 
-print('arr1:'+str(arr1))
+print("arr1:" + str(arr1))
 
-print('arr2:'+str(arr2))
+print("arr2:" + str(arr2))
 
-print('arr1:'+str(arr1))
+print("arr1:" + str(arr1))
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-#陣列的四則計算
-
-# 使用 Python 的 list
-
-storages = [1, 2, 3, 4]
-
-new_storages = []
-
-for n in storages:
-    n += n
-    new_storages.append(n)
-
-print(new_storages)
-
-#[2, 4, 6, 8]
-
-print('------------------------------------------------------------')	#60個
 
 # 使用 NumPy 陣列
-
 storages = np.array([1, 2, 3, 4])
 
-storages += storages
-
-print(storages)
-
-#[2 4 6 8]
 
 arr_1 = np.array([2, 4, 6, 8, 10])
-
 arr_2 = np.array([1, 3, 5, 7, 9])
 
 # arr + arr (相加)
-
-print('arr_1 + arr_2:')
-
+print("arr_1 + arr_2:")
 print(arr_1 + arr_2)
 
-print('--------------------------')
-
 # arr - arr (相減)
-
-print('arr_1 - arr_2:')
-
+print("arr_1 - arr_2:")
 print(arr_1 - arr_2)
 
-print('--------------------------')
-
 # arr ** 3 (三次方)
-
-print('arr_1 ** 3:')
-
-print(arr_1 ** 3)
-
-print('--------------------------')
+print("arr_1 ** 3:")
+print(arr_1**3)
 
 # arr_1 / arr_2(相除)
-
-print('arr_1 / arr_2:')
-
+print("arr_1 / arr_2:")
 print(arr_1 / arr_2)
 
 print()
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-#體驗好用的 NumPy 函式
+# 體驗好用的 NumPy 函式
 
 arr = np.array([4, -9, 16, -4, 20])
 print(arr)
 
 arr_abs = np.abs(arr)
-print('絕對值:',arr_abs)
+print("絕對值:", arr_abs)
 
-print('e為底數:',np.exp(arr_abs))
+print("e為底數:", np.exp(arr_abs))
 
-print('平方根:',np.sqrt(arr_abs))
+print("平方根:", np.sqrt(arr_abs))
 
 arr1 = np.array([2, 5, 7, 9, 5, 2])
 
@@ -2100,124 +1620,145 @@ arr2 = np.array([2, 5, 8, 3, 1])
 
 new_arr1 = np.unique(arr1)
 
-print('剔除arr1重複元素:',new_arr1)
+print("剔除arr1重複元素:", new_arr1)
 
-print('聯集:',np.union1d(new_arr1, arr2))
+print("聯集:", np.union1d(new_arr1, arr2))
 
-print('交集:',np.intersect1d(new_arr1, arr2))
+print("交集:", np.intersect1d(new_arr1, arr2))
 
-print('差集:',np.setdiff1d(new_arr1, arr2))
+print("差集:", np.setdiff1d(new_arr1, arr2))
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-#陣列的軸 (axis)
+# 陣列的軸 (axis)
 
-arr = np.array([ [1, 2 ,3],
-                 [4, 5, 6]])
+arr = np.array([[1, 2, 3, 4], [5, 6, 7, 8]])
 
+print("shape")
+print(arr.shape)
+print("sum()")
 print(arr.sum())
-
+print("sum(axis=0) 第0軸和")
 print(arr.sum(axis=0))
-
+print("sum(axis=1) 第1軸和")
 print(arr.sum(axis=1))
 
-arr = np.array([[[0, 1, 2],
-                 [3, 4, 5]],
-                [[6, 7, 8],
-                 [9, 10, 11]]])
+arr = np.array([[[0, 1, 2], [3, 4, 5]], [[6, 7, 8], [9, 10, 11]]])
+print("shape")
+print(arr.shape)
+print("sum()")
 print(arr.sum())
+print("sum(axis=0) 第0軸和")
 print(arr.sum(axis=0))
+print("sum(axis=1) 第1軸和")
 print(arr.sum(axis=1))
+print("sum(axis=2) 第2軸和")
 print(arr.sum(axis=2))
 
-print('------------------------------------------------------------')	#60個
+a = np.mat(np.mat([[1, 2, 3], [4, 5, 6]]))
+print(a.sum())
+print(a.sum(axis=0))
+print(a.sum(axis=1))
 
-#陣列的 shape 與 reshape
+# axis = 0 : 第0維 直行
+# axis = 1 : 第1維 橫列
+print("全部和:", a.sum())
+print("直行加:", a.sum(axis=0))
+print("橫列加:", a.sum(axis=1))
 
-arr = np.array([[1, 2, 3, 4],
-                [5, 6, 7, 8]])
+print("------------------------------------------------------------")  # 60個
 
-print('原 shape 為:',arr.shape)
+# 陣列的 shape 與 reshape
 
-print(arr.reshape(4, 2))
+cc = np.array([[1, 2, 3, 4], [5, 6, 7, 8]])
 
-print('------------------------------------------------------------')	#60個
+print("原 shape  :", cc.shape)
+print("內容 :", cc)
 
-#多軸陣列的切片做法
+cc = cc.reshape(4, 2)
 
-arr = np.array([[1, 2 ,3],
-                [4, 5, 6]])
+print("新 shape  :", cc.shape)
+print("內容 :", cc)
+
+cc = cc.reshape(-1)
+print(cc)
+
+print("新 shape  :", cc.shape)
+print("內容 :", cc)
+
+print("------------------------------------------------------------")  # 60個
+
+# 多軸陣列的切片做法
+
+arr = np.array([[1, 2, 3], [4, 5, 6]])
 print(arr[1])
 
-arr = np.array([[1, 2 ,3],
-                [4, 5, 6]])
+arr = np.array([[1, 2, 3], [4, 5, 6]])
 print(arr[1][2])
 
-arr = np.array([[1, 2 ,3],
-                [4, 5, 6]])
-print(arr[1,1:])
+arr = np.array([[1, 2, 3], [4, 5, 6]])
+print(arr[1, 1:])
 
 arr = np.array([[1, 2], [3, 4], [5, 6], [7, 8]])
 print(arr[[3, 2, 0]])
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-#陣列排序
+# 陣列排序
 
-arr = np.array([[8, 4, 2],
-                [3, 5, 1]])
+arr = np.array([[8, 4, 2], [3, 5, 1]])
 
-print('---------------原陣列----------------')
+print("---------------原陣列----------------")
 
 print(arr)
 
-print('----------對 arr 以軸 1 方向排序---------')
+print("----------對 arr 以軸 1 方向排序---------")
 
 print(np.sort(arr))
 
-print('----------對 arr 以軸 0 方向排序---------')
+print("----------對 arr 以軸 0 方向排序---------")
 
-arr.sort(axis = 0)
+arr.sort(axis=0)
 
 print(arr)
 
-print('-------------argsort排序-------------')
+print("-------------argsort排序-------------")
 
 print(arr.argsort())
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-#陣列擴張 (Broadcasting)
+# 陣列擴張 (Broadcasting)
 
 x = np.arange(15).reshape(3, 5)
 y = np.array([np.arange(5)])
 z = x - y
 print(z)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-#用 NumPy 函式計算矩陣乘積
+# 用 NumPy 函式計算矩陣乘積
 
 arr = np.arange(9).reshape(3, 3)
 
 print(np.dot(arr, arr))
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-print('創建數組 ones')
-#np.ones函數創建一個全部為1的數組。
-#np.ones(shape, dtype = None, order = 'C')
+print("創建數組 ones")
+# np.ones函數創建一個全部為1的數組。
+# np.ones(shape, dtype = None, order = 'C')
 
 cc = np.ones((3, 4))
 print(cc)
 
-b = np.ones((1,2)) # Create an array of all ones
-print(b) # Prints "[[ 1. 1.]]"
+b = np.ones((1, 2))  # Create an array of all ones
+print(b)  # Prints "[[ 1. 1.]]"
 
 
-print(np.ones(5))#壹陣列
+print(np.ones(5))  # 壹陣列
 
-a = np.ones(5) # 生成5個值全爲1的數組
+a = np.ones(5)  # 生成5個值全爲1的數組
 print(a)
 
 b = np.ones((5,))
@@ -2227,129 +1768,111 @@ print(b)
 print("------------------------------------------------------------")  # 60個
 
 
-print('創建數組 zeros')
+print("創建數組 zeros")
 
-#np.zeros會創建一個全部為0的數組。
-#np.zeros(shape, dtype = float, order = 'C')
-#shape:陣列的形狀。
-#Dtype:生成數組所需的數據類型。' int '或默認' float '
+# np.zeros會創建一個全部為0的數組。
+# np.zeros(shape, dtype = float, order = 'C')
+# shape:陣列的形狀。
+# Dtype:生成數組所需的數據類型。' int '或默認' float '
 
-na = np.zeros((2, 3), dtype = 'int') 
+na = np.zeros((2, 3), dtype="int")
 print(na)
 
-a = np.zeros((2,2))
-print(a) # Prints "[[ 0. 0.]
+a = np.zeros((2, 2))
+print(a)  # Prints "[[ 0. 0.]
 # [0. 0.]]"
 
-na = np.zeros(5) 
+na = np.zeros(5)
 print(na)
 
-a = np.zeros(5) # 生成5個值全爲0的數組
+a = np.zeros(5)  # 生成5個值全爲0的數組
 print(a)
 
 a = np.zeros((5,))
 print(a)
 
-print(np.zeros(5))#零陣列
+print(np.zeros(5))  # 零陣列
 
 print("------------------------------------------------------------")  # 60個
 
-a = np.empty(5) # 生成5個元素，值爲隨機數的數組（速度快）
+a = np.empty(5)  # 生成5個元素，值爲隨機數的數組（速度快）
 print(a)
 
 c = np.empty((5,))
 print(c)
 
-a = np.full(5, 6) # 生成5個值全爲6的數組
+a = np.full(5, 6)  # 生成5個值全爲6的數組
 print(a)
 
-c = np.full((2,2), 7) # Create a constant array
+c = np.full((2, 2), 7)  # Create a constant array
 print(c)
 
 d = np.eye(3)
 print(d)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
+# save  txt
 
-
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-# save  txt 
-
-print('建立np陣列')
+print("建立np陣列")
 a = np.arange(15).reshape(3, 5)
 print(a)
 
-print('np陣列存檔成np之文字格式')
-np.savetxt('np_asc.txt' , a)
+print("np陣列存檔成np之文字格式")
+np.savetxt("np_asc.txt", a)
 
-print('讀取np之文字格式檔案成np陣列')
-b = np.loadtxt('np_asc.txt')
+print("讀取np之文字格式檔案成np陣列")
+b = np.loadtxt("np_asc.txt")
 print(b)
 
-print('np陣列存檔成np之binary格式')
-np.save('np_bin.npy' , a)
+print("np陣列存檔成np之binary格式")
+np.save("np_bin.npy", a)
 
-print('讀取np之binary格式檔案成np陣列')
-c = np.load('np_bin.npy')
+print("讀取np之binary格式檔案成np陣列")
+c = np.load("np_bin.npy")
 print(c)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-#Python numpy 寫入 csv 
-#將 numpy array 用 savetxt 寫入 csv
+# Python numpy 寫入 csv
+# 將 numpy array 用 savetxt 寫入 csv
 
-arr = np.asarray([
-  [1,2,3],
-  [4,5,6],
-  [7,8,9]
-  ])
+arr = np.asarray([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
 
-print(type(arr)) # <class 'numpy.ndarray'>
-np.savetxt('output_data1.csv', arr, delimiter = ',')
-np.savetxt('output_data2.csv', arr, delimiter = ',', fmt = '%d')
-np.savetxt('output_data3.csv', arr, delimiter = ',', fmt = '%.2f')
+print(type(arr))  # <class 'numpy.ndarray'>
+np.savetxt("output_data1.csv", arr, delimiter=",")
+np.savetxt("output_data2.csv", arr, delimiter=",", fmt="%d")
+np.savetxt("output_data3.csv", arr, delimiter=",", fmt="%.2f")
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
+print("------------------------------------------------------------")  # 60個
 
-
-
-
-
-
-
-print('------------------------------------------------------------')	#60個
-
-#Reading data from SQL databases
+# Reading data from SQL databases
 import sqlite3
 
 con = sqlite3.connect("data/weather_2012.sqlite")
 df = pd.read_sql("SELECT * from weather_2012 LIMIT 3", con)
 print(df)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-df = pd.read_sql("SELECT * from weather_2012 LIMIT 3", con, index_col='id')
+df = pd.read_sql("SELECT * from weather_2012 LIMIT 3", con, index_col="id")
 print(df)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-df = pd.read_sql("SELECT * from weather_2012 LIMIT 3", con, 
-                 index_col=['id', 'date_time'])
+df = pd.read_sql(
+    "SELECT * from weather_2012 LIMIT 3", con, index_col=["id", "date_time"]
+)
 print(df)
 
-print('--------ddd----------------------------------------------------')	#60個
+print("--------ddd----------------------------------------------------")  # 60個
 
-#Writing to a SQLite database
+# Writing to a SQLite database
 
-weather_df = pd.read_csv('data/weather_2012.csv')
+weather_df = pd.read_csv("data/weather_2012.csv")
 con = sqlite3.connect("tmp_test_db.sqlite")
 con.execute("DROP TABLE IF EXISTS weather_2012")
 weather_df.to_sql("weather_2012", con)
@@ -2363,7 +1886,7 @@ con = sqlite3.connect("tmp_test_db.sqlite")
 df = pd.read_sql("SELECT * from weather_2012 ORDER BY Weather LIMIT 3", con)
 print(df)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 """
 #Connecting to other kinds of database
@@ -2377,17 +1900,9 @@ import psycopg2
 con = psycopg2.connect(host="localhost")
 """
 
+print("------------------------------------------------------------")  # 60個
 
-
-
-
-print('串列 轉 numpy陣列')
-a = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9])
-print(a)
-
-print('------------------------------------------------------------')	#60個
-
-print('二維串列 轉 numpy陣列')
+print("二維串列 轉 numpy陣列")
 b = np.array([[1, 2], [3, 4], [5, 6]])
 print(b)
 
@@ -2397,112 +1912,36 @@ print(c)
 c = b.transpose()
 print(c)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
+# 數組操作
+print("min 返回數組中的最小值。")
+# np.min(a, axis = None, out = None, ...)
+# axis:用於操作的軸。
+# out:用於存儲輸出的數組。
 
-print('串列 轉 numpy陣列')
-x = np.array([1, 2, 3])
-print(x)
-print('每個元素的平方')
-print(x ** 2)
-
-print('串列 轉 numpy陣列')
-np1 = np.array([1, 2, 3, 4])
-print(type(np1))
-print(np1)
-
-print('元組 轉 numpy陣列')
-np2 = np.array((5, 6, 7, 8))
-print(type(np2))
-print(np2)
-
-print('------------------------------------------------------------')	#60個
-
-print('串列 轉 numpy陣列')
-cc = np.array([1, 2, 3, 4, 5]) 
+print("串列 轉 numpy陣列")
+arr = np.array([1, 1, 2, 3, 3, 4, 5, 6, 6, 2])
+cc = np.min(arr)
 print(cc)
 
-print('------------------------------------------------------------')	#60個
-
-print('串列 轉 numpy陣列')
-np1 = np.array([1, 2, 3, 4])
-print(type(np1))
-print(np1)
-
-print('元組 轉 numpy陣列')
-np2 = np.array((5, 6, 7, 8))
-print(type(np2))
-print(np2)
-
-print('串列 轉 numpy陣列 int')
-cc = np.array([1, 2, 3, 4], dtype = int)
-print(cc)
-
-print('串列 轉 numpy陣列 float')
-cc = np.array([1, 2, 3, 4], dtype = float)
-print(cc)
-
-print('------------------------------------------------------------')	#60個
-
-print('二維串列 轉 numpy陣列')
-
-listdata = [[1, 2, 3, 4, 5],
-            [6, 7, 8, 9, 10],
-            [11, 12, 13, 14, 15]]
-cc = np.array(listdata)
-print(cc)
-print('維度 :', cc.ndim)
-print('形狀 :', cc.shape)
-print('數量 :', cc.size)
-
-print('------------------------------------------------------------')	#60個
-
-#數組操作
-print('min 返回數組中的最小值。')
-#np.min(a, axis = None, out = None, ...)
-#axis:用於操作的軸。
-#out:用於存儲輸出的數組。
-
-print('串列 轉 numpy陣列')
-arr = np.array([1, 1, 2, 3, 3, 4, 5, 6, 6, 2]) 
-cc = np.min(arr) 
-print(cc)
-
-print('max 返回數組中的最大值。')
-#np.max(a, axis = None, out = None, ...)
-cc = np.max(arr) 
+print("max 返回數組中的最大值。")
+# np.max(a, axis = None, out = None, ...)
+cc = np.max(arr)
 print(cc)
 
 
-
-print('串列 轉 numpy陣列')
-arr = np.array([2, 3, 1, 7, 4, 5]) 
+print("串列 轉 numpy陣列")
+arr = np.array([2, 3, 1, 7, 4, 5])
 cc = np.sort(arr)
 print(cc)
 
 
-
-
-
-#----
-
-#還可以使用此函數將pandas的df和series轉為NumPy數組。
-sex = pd.Series(['Male','Male','Female']) 
-cc = np.array(sex) 
-print(cc)
-
-
-
-
-
-
-
-
-
-print('abs 返回數組中元素的絕對值。當數組中包含負數時，它很有用。')
-print('串列 轉 numpy陣列')
+print("abs 返回數組中元素的絕對值。當數組中包含負數時，它很有用。")
+print("串列 轉 numpy陣列")
 cc = np.array([[1, -3, 4], [-2, -4, 3]])
 cc = np.abs(cc)
 print(cc)
 
 
+print("------------------------------------------------------------")  # 60­э

@@ -75,7 +75,7 @@ Z = X * Y
 """
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 fig = plt.figure(
     num="3D繪圖 集合 1.plot",
     figsize=(12, 8),
@@ -102,45 +102,43 @@ ax.plot(x, y, z, color='m', lw=2)
 #投影在xy平面 
 ax.plot(x, y, zs=0, zdir="z")
 
+plt.title('3D折線圖')
+
 print("------------------------------------------------------------")  # 60個
 
 ax = fig.add_subplot(232, projection="3d")
 
+# 畫點 (1,1,1)-(2,2,2)-(3,3,3)-(4,4,4)
+xs = np.array([1, 2, 3, 4])
+ys = np.array([1, 2, 3, 4])
+zs = np.array([1, 2, 3, 4])
 
+ax.plot(xs, ys, zs, color='m', lw=2)
+ax.scatter(xs, ys, zs, color="y", s=100)
 
 print("------------------------------------------------------------")  # 60個
 
 ax = fig.add_subplot(233, projection="3d")
 
+N = 150
+# 建立折線用的 3D 座標資料
+z = np.linspace(0, 20, N)
+x1 = np.cos(z)
+y1 = np.sin(z)
+
+# 繪製 3D 折線
+ax.plot(x1, y1, z, color='m', label='plot')
+
+# 建立散點用的 3D 座標資料, z 則沿用
+x2 = np.cos(z) + np.random.randn(N) * 0.1
+y2 = np.sin(z) + np.random.randn(N) * 0.1
+# 繪製 3D 散點
+ax.scatter(x2,y2,z,c=z,cmap='hsv',label='scatter')
+ax.legend()
+
 print("------------------------------------------------------------")  # 60個
 
 ax = fig.add_subplot(234, projection="3d")
-
-print("------------------------------------------------------------")  # 60個
-
-ax = fig.add_subplot(235, projection="3d")
-
-print("------------------------------------------------------------")  # 60個
-
-ax = fig.add_subplot(236, projection="3d")
-
-
-plt.tight_layout()
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-fig = plt.figure(
-    num="3D繪圖 集合 2.scatter 散點圖1",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
-
-ax = fig.add_subplot(231, projection="3d")
 
 ax.scatter(X, Y, Z, c="r")
 #ax.scatter(X, Y, Z, c=Z, cmap="Reds", marker="^", label="My Points 1")
@@ -159,17 +157,7 @@ ax.scatter(X, Y, Z, c=c, cmap='hsv')
 
 print("------------------------------------------------------------")  # 60個
 
-ax = fig.add_subplot(232, projection="3d")
-
-# 畫點 (1,1,1)-(2,2,2)-(3,3,3)-(4,4,4)
-xs = np.array([1, 2, 3, 4])
-ys = np.array([1, 2, 3, 4])
-zs = np.array([1, 2, 3, 4])
-ax.scatter(xs, ys, zs, color="y", s=100)
-
-print("------------------------------------------------------------")  # 60個
-
-ax = fig.add_subplot(233, projection="3d")
+ax = fig.add_subplot(235, projection="3d")
 
 # Plot scatterplot data (20 2D points per colour) on the x and z axes.
 colors = ("r", "g", "b", "k")
@@ -196,48 +184,14 @@ ax.view_init(elev=20.0, azim=-35)
 
 print("------------------------------------------------------------")  # 60個
 
-ax = fig.add_subplot(234, projection="3d")
-
-x_heights = np.random.randint(120,190,50)
-y_weights = np.random.randint(30,100,50)
-z_ages = np.random.randint(low=10,high=35,size=50)
-
-# 性別標籤 1 是男生, 0 是女生
-gender = np.random.choice([0, 1],50)   
-
-# 繪製散點圖
-ax.scatter(x_heights,y_weights,z_ages,c=gender)
-
-ax.set_xlabel('身高 (單位 : 公分)',color='m')
-ax.set_ylabel('體重 (單位 : 公斤)',color='m')
-ax.set_zlabel('年齡 (單位 : 歲',color='m')
-
-ax.set_title('不同年齡體重與身高分佈圖',fontsize=16,color='b')
-
-print("------------------------------------------------------------")  # 60個
-
-ax = fig.add_subplot(235, projection="3d")
-
-# 三維散點圖
-data = np.random.rand(50, 3) # 生成三維數據，每維50個
-ax.scatter(data[:, 0], data[:, 1], data[:, 2])
-
-print("------------------------------------------------------------")  # 60個
-
 ax = fig.add_subplot(236, projection="3d")
 
-# 產生 3D 座標資料
-z1 = np.random.randn(50)
-x1 = np.random.randn(50)
-y1 = np.random.randn(50)
-z2 = np.random.randn(50)
-x2 = np.random.randn(50)
-y2 = np.random.randn(50)
-
-# 繪製 3D 座標點
-ax.scatter(x1, y1, z1, c=z1, cmap='Reds', marker='^', label='My Points 1')
-ax.scatter(x2, y2, z2, c=z2, cmap='Blues', marker='o', label='My Points 2')
-ax.legend()
+#畫三維球
+u, v = np.mgrid[0 : 2 * np.pi : 20j, 0 : np.pi : 10j]
+x = np.cos(u) * np.sin(v)
+y = np.sin(u) * np.sin(v)
+z = np.cos(v)
+ax.plot_wireframe(x, y, z, color="r")
 
 plt.tight_layout()
 plt.show()
@@ -270,30 +224,15 @@ print("------------------------------------------------------------")  # 60個
 
 ax = fig.add_subplot(232, projection='3d')
 
-N = 150
-# 建立折線用的 3D 座標資料
-z = np.linspace(0, 20, N)
-x1 = np.cos(z)
-y1 = np.sin(z)
-
-# 繪製 3D 折線
-ax.plot(x1, y1, z, color='m', label='plot')
-
-# 建立散點用的 3D 座標資料, z 則沿用
-x2 = np.cos(z) + np.random.randn(N) * 0.1
-y2 = np.sin(z) + np.random.randn(N) * 0.1
-# 繪製 3D 散點
-ax.scatter(x2,y2,z,c=z,cmap='hsv',label='scatter')
-ax.legend()
 
 print("------------------------------------------------------------")  # 60個
 
 ax = fig.add_subplot(233, projection='3d')
 
 #3D散點圖的繪制使用scatter() 函數來繪制出散點
-xs = np.random.randint(30, 40, 100)
-ys = np.random.randint(20, 30, 100)
-zs = np.random.randint(10, 20, 100)
+xs1 = np.random.randint(30, 40, 100)
+ys1 = np.random.randint(20, 30, 100)
+zs1 = np.random.randint(10, 20, 100)
 xs2 = np.random.randint(50, 60, 100)
 ys2 = np.random.randint(30, 40, 100)
 zs2 = np.random.randint(50, 70, 100)
@@ -301,9 +240,9 @@ xs3 = np.random.randint(10, 30, 100)
 ys3 = np.random.randint(40, 50, 100)
 zs3 = np.random.randint(40, 50, 100)
 
-ax.scatter(xs, ys, zs)
-ax.scatter(xs2, ys2, zs2, c = 'r', marker = '^')
-ax.scatter(xs3, ys3, zs3, c = 'g', marker = '*')
+ax.scatter(xs1, ys1, zs1, c = 'r')
+ax.scatter(xs2, ys2, zs2, c = 'g', marker = '^')
+ax.scatter(xs3, ys3, zs3, c = 'b', marker = '*')
 
 print("------------------------------------------------------------")  # 60個
 
@@ -694,8 +633,6 @@ ax = fig.add_subplot(233, projection='3d')
 # 正交曲線座標系統
 # 球座標當中的三個曲面交出三條曲線，這三個曲線形成了廣義的正交曲線座標系統(generalized orthonormal curved coordinates)
 
-# ax.set_aspect("equal")
-
 # draw 3 surfaces
 r = 1.0  # r=constant
 f, t = np.mgrid[0 : 2 * np.pi : 40j, 0 : np.pi / 2 : 40j]
@@ -925,7 +862,7 @@ ax.set_title('plot_wireframe 3D線框圖 + contourf')
 plt.tight_layout()
 plt.show()
 
-
+'''
 print("------------------------------------------------------------")  # 60個
 
 # 此 figure 共用資料
@@ -968,43 +905,34 @@ fig = plt.figure(
     frameon=True,
 )
 
-ax = fig.add_subplot(231, projection="3d")
-
-
 print("------------------------------------------------------------")  # 60個
 
-ax = fig.add_subplot(232, projection="3d")
+ax = fig.add_subplot(231, projection="3d")
 
-# 三維球
+# 從(x, y, z)指向(dx,dy,dz)
+x, y, z = 0, 0, -1
+dx, dy, dz = 0, 0, 1
+ax.quiver(x, y, z, dx, dy, dz, color="r", arrow_length_ratio=0.1)
 
-# ax.set_aspect("equal")
+x, y, z = 0, 0, 0
+dx, dy, dz = 1, 1, 1
+ax.quiver(x, y, z, dx, dy, dz, color="g")
 
-# draw sphere
-u, v = np.mgrid[0 : 2 * np.pi : 20j, 0 : np.pi : 10j]
-x = np.cos(u) * np.sin(v)
-y = np.sin(u) * np.sin(v)
-z = np.cos(v)
-ax.plot_wireframe(x, y, z, color="r")
+x, y, z = 1, 1, 1
+dx, dy, dz = 0, -2, -2
+ax.quiver(x, y, z, dx, dy, dz, color="b")
 
-# draw a vector
-ax.quiver(0, 0, 1, 1, 1, 0, color="k")
-ax.quiver(0, 0, 0, 1, 1, 1, color="b", arrow_length_ratio=0.1)
+ax.set_xlim3d(-1, 1)
+ax.set_ylim3d(-1, 1)
+ax.set_zlim3d(-1, 1)
 
 ax.set_xlabel("x", fontsize=15)
 ax.set_ylabel("y", fontsize=15)
 ax.set_zlabel("z", fontsize=15)
 
-# plt.savefig('3D-sphere.png')
-
-ax.set_title("三維球aaa")
-
 print("------------------------------------------------------------")  # 60個
 
-ax = fig.add_subplot(233, projection="3d")
-
-# 3D quiver  3維向量
-
-# ax.set_aspect("equal")
+ax = fig.add_subplot(232, projection="3d")
 
 v1 = np.array([2, 0, 0])
 v2 = np.array([0, 4, 0])
@@ -1029,64 +957,12 @@ ax.quiver(v1[0], v1[1], v1[2], v2[0], v2[1], v2[2], color="b")
 ax.quiver(v12[0], v12[1], v12[2], v3[0], v3[1], v3[2], color="b")
 ax.quiver(0, 0, 0, v12[0], v12[1], v12[2], color="r", arrow_length_ratio=0.1)
 ax.quiver(0, 0, 0, v123[0], v123[1], v123[2], color="r", arrow_length_ratio=0.1)
-# plt.savefig("3-vectors.png")
-
-ax.set_title("#3D quiver  3維向量")
 
 print("------------------------------------------------------------")  # 60個
 
-ax = fig.add_subplot(234, projection="3d")
+ax = fig.add_subplot(233, projection="3d")
 
-# 三維等位面與法線
-
-x = np.linspace(2.0, 5.0, 10)
-y = np.linspace(2.0, 5.0, 10)
-X, Y = np.meshgrid(x, y)
-Z = np.sqrt(X**2 + Y**2)
-Z2 = np.sqrt(X**2 + Y**2 - 2.0)
-Z3 = np.sqrt(X**2 + Y**2 - 3.0)
-ax.scatter([3], [4], [5], color="k", s=40)
-
-# ax.set_aspect("equal")
-
-ax.plot_surface(X, Y, Z, label="C=0")
-ax.plot_surface(X, Y, Z2, label="C=6")
-ax.plot_surface(X, Y, Z3, label="C=12")
-
-ax.quiver(3.0, 4.0, 5.0, 6.0 / 5.0, 8.0 / 5.0, -10.0 / 5.0, color="b")
-
-ax.set_title("$f(x,y,z)=x^2+y^2-z=C$", fontsize=15)
-# ax.plot_surface(X, Y, Z)
-
-ax.set_xlabel("x", fontsize=15)
-ax.set_ylabel("y", fontsize=15)
-ax.set_zlabel("z", fontsize=15)
-# ax.legend()
-
-ax.set_title("三維等位面與法線dddd")
-
-print("------------------------------------------------------------")  # 60個
-
-ax = fig.add_subplot(235, projection="3d")
-
-# 建立網格空間
-x, y, z = np.meshgrid(
-    np.arange(-0.8, 1, 0.2), np.arange(-0.8, 1, 0.2), np.arange(-0.8, 1, 0.8)
-)
-# 建立箭頭方向
-u = np.sin(np.pi * x) * np.cos(np.pi * y) * np.cos(np.pi * z)
-v = -np.cos(np.pi * x) * np.sin(np.pi * y) * np.cos(np.pi * z)
-w = np.sqrt(2.0 / 3.0) * np.cos(np.pi * x) * np.cos(np.pi * y) * np.sin(np.pi * z)
-
-ax.quiver(x, y, z, u, v, w, length=0.1, normalize=True, color="r")
-ax.set_title("quiver 3D 向量場")
-
-print("------------------------------------------------------------")  # 60個
-
-ax = fig.add_subplot(236, projection="3d")
-
-# 這是繪製 3D 向量場（vector field）的範例。
-# 產生格點資料
+# 建立網格空間, 產生格點資料
 x, y, z = np.meshgrid(
     np.arange(-0.8, 1, 0.2), np.arange(-0.8, 1, 0.2), np.arange(-0.8, 1, 0.8)
 )
@@ -1097,98 +973,39 @@ v = -np.cos(np.pi * x) * np.sin(np.pi * y) * np.cos(np.pi * z)
 w = np.sqrt(2.0 / 3.0) * np.cos(np.pi * x) * np.cos(np.pi * y) * np.sin(np.pi * z)
 
 # 繪製向量場
-ax.quiver(x, y, z, u, v, w, length=0.1, normalize=True)
-
+#ax.quiver(x, y, z, u, v, w, length=0.1, normalize=True)
+ax.quiver(x, y, z, u, v, w, length=0.1, normalize=True, color="r")
 ax.set_title("quiver 3D 向量場")
-
-
-plt.tight_layout()
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-fig = plt.figure(
-    num="3D繪圖 集合 7 new",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
-
-print("------------------------------------------------------------")  # 60個
-
-ax = fig.add_subplot(231, projection="3d")
-
-month = np.arange(0, 13)
-years = [2016, 2017, 2018, 2019]
-
-precipitation = []
-for year in years:
-    value = np.random.rand(len(month)) * 300
-    value[0], value[-1] = 0, 0
-    precipitation.append(list(zip(month, value)))
-
-poly = PolyCollection(precipitation, facecolors=["b", "c", "r", "m"])
-poly.set_alpha(0.7)
-
-ax.add_collection3d(poly, zs=years, zdir="y")
-ax.set_xlabel("Month")
-ax.set_xlim3d(0, 12)
-ax.set_ylabel("Year")
-ax.set_ylim3d(2015, 2020)
-ax.set_zlabel("Precipitation")
-ax.set_zlim3d(0, 300)
-ax.set_title("多邊形")
-
-print("------------------------------------------------------------")  # 60個
-
-ax = fig.add_subplot(232, projection="3d")
-
-month = np.arange(1, 12)
-years = [2016, 2017, 2018, 2019]
-
-
-def get_color(value_array):
-    color = []
-    for v in value_array:
-        if v < 50:
-            color.append("y")
-        elif v < 100:
-            color.append("g")
-        elif v < 150:
-            color.append("b")
-        elif v < 200:
-            color.append("c")
-        elif v < 250:
-            color.append("m")
-        else:
-            color.append("r")
-    return color
-
-
-for year, c in zip(years, ["b", "c", "r", "m"]):
-    value = np.random.rand(len(month)) * 300
-    ax.bar(month, value, year, zdir="y", color=get_color(value), alpha=0.7)
-    for i in np.arange(0, 12):
-        ax.bar
-
-ax.set_xlabel("Month")
-ax.set_xticks(np.arange(1, 13))
-ax.set_ylabel("Year")
-ax.set_yticks(np.arange(2016, 2020))
-ax.set_zlabel("Precipitation")
-ax.set_title("柱狀圖")
-
-print("------------------------------------------------------------")  # 60個
-
-ax = fig.add_subplot(233, projection="3d")
-
 
 print("------------------------------------------------------------")  # 60個
 
 ax = fig.add_subplot(234, projection="3d")
+
+# 三維等位面與法線
+
+x = np.linspace(2.0, 5.0, 10)
+y = np.linspace(2.0, 5.0, 10)
+X, Y = np.meshgrid(x, y)
+Z1 = np.sqrt(X**2 + Y**2)
+Z2 = np.sqrt(X**2 + Y**2 - 2.0)
+Z3 = np.sqrt(X**2 + Y**2 - 3.0)
+ax.scatter([3], [4], [5], color="k", s=40)
+
+ax.plot_surface(X, Y, Z1, label="C=0")
+ax.plot_surface(X, Y, Z2, label="C=6")
+ax.plot_surface(X, Y, Z3, label="C=12")
+
+ax.quiver(3.0, 4.0, 5.0, 6.0 / 5.0, 8.0 / 5.0, -10.0 / 5.0, color="r")
+
+ax.set_title("$f(x,y,z)=x^2+y^2-z=C$", fontsize=15)
+# ax.plot_surface(X, Y, Z)
+
+ax.set_xlabel("x", fontsize=15)
+ax.set_ylabel("y", fontsize=15)
+ax.set_zlabel("z", fontsize=15)
+# ax.legend()
+
+#ax.set_title("三維等位面與法線dddd")
 
 
 print("------------------------------------------------------------")  # 60個
@@ -1425,9 +1242,68 @@ print("------------------------------------------------------------")  # 60個
 
 ax = fig.add_subplot(235, projection="3d")
 
+month = np.arange(0, 13)
+years = [2016, 2017, 2018, 2019]
+
+precipitation = []
+for year in years:
+    value = np.random.rand(len(month)) * 300
+    value[0], value[-1] = 0, 0
+    precipitation.append(list(zip(month, value)))
+
+poly = PolyCollection(precipitation, facecolors=["b", "c", "r", "m"])
+poly.set_alpha(0.7)
+
+ax.add_collection3d(poly, zs=years, zdir="y")
+ax.set_xlabel("Month")
+ax.set_xlim3d(0, 12)
+ax.set_ylabel("Year")
+ax.set_ylim3d(2015, 2020)
+ax.set_zlabel("Precipitation")
+ax.set_zlim3d(0, 300)
+ax.set_title("多邊形")
+
+
+
+
 print("------------------------------------------------------------")  # 60個
 
 ax = fig.add_subplot(236, projection="3d")
+
+month = np.arange(1, 12)
+years = [2016, 2017, 2018, 2019]
+
+
+def get_color(value_array):
+    color = []
+    for v in value_array:
+        if v < 50:
+            color.append("y")
+        elif v < 100:
+            color.append("g")
+        elif v < 150:
+            color.append("b")
+        elif v < 200:
+            color.append("c")
+        elif v < 250:
+            color.append("m")
+        else:
+            color.append("r")
+    return color
+
+
+for year, c in zip(years, ["b", "c", "r", "m"]):
+    value = np.random.rand(len(month)) * 300
+    ax.bar(month, value, year, zdir="y", color=get_color(value), alpha=0.7)
+    for i in np.arange(0, 12):
+        ax.bar
+
+ax.set_xlabel("Month")
+ax.set_xticks(np.arange(1, 13))
+ax.set_ylabel("Year")
+ax.set_yticks(np.arange(2016, 2020))
+ax.set_zlabel("Precipitation")
+ax.set_title("柱狀圖")
 
 
 plt.tight_layout()
@@ -1562,3 +1438,39 @@ ax.plot(x, y, z, color="gray")
 
 # 繪製 3D 座標點
 ax.scatter(x2, y2, z, c=z, cmap="jet")
+
+ax.set_xlabel('身高 (單位 : 公分)',color='m')
+ax.set_ylabel('體重 (單位 : 公斤)',color='m')
+ax.set_zlabel('年齡 (單位 : 歲',color='m')
+
+ax.set_title('不同年齡體重與身高分佈圖',fontsize=16,color='b')
+
+
+
+x_heights = np.random.randint(120,190,50)
+y_weights = np.random.randint(30,100,50)
+z_ages = np.random.randint(low=10,high=35,size=50)
+
+# 性別標籤 1 是男生, 0 是女生
+gender = np.random.choice([0, 1],50)   
+
+data = np.random.rand(50, 3) # 生成三維數據，每維50個
+
+# 產生 3D 座標資料
+x1 = np.random.randn(50)
+y1 = np.random.randn(50)
+z1 = np.random.randn(50)
+
+x2 = np.random.randn(50)
+y2 = np.random.randn(50)
+z2 = np.random.randn(50)
+
+# 繪製 3D 座標點
+ax.scatter(x1, y1, z1, c=z1, cmap='Reds', marker='^', label='My Points 1')
+ax.scatter(x2, y2, z2, c=z2, cmap='Blues', marker='o', label='My Points 2')
+
+
+# plt.savefig("3-vectors.png")
+
+# ax.set_aspect("equal")
+
