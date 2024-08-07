@@ -24,7 +24,7 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
-print('使用wavfile模組')
+print("使用wavfile模組")
 from scipy.io import wavfile
 
 wave_filename = "_data/notify1.wav"
@@ -40,7 +40,7 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-print('使用wave模組')
+print("使用wave模組")
 import wave
 
 wave_filename = "C:/_git/vcs/_1.data/______test_files1/_wav/hello.wav"

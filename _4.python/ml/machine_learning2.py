@@ -1,6 +1,6 @@
 """
 
-機器學習從數學開始(第二版)
+
 
 """
 
@@ -23,8 +23,29 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 # 設定負號
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
-
+'''
 print("------------------------------------------------------------")  # 60個
+
+""" 還沒好
+#通過euclidean_distances計算向量之間的距離
+
+#sklearn sklearn向量距離計算
+
+#本文介紹如何利用Python的scikit-learn庫中的euclidean_distances函數，高效地計算多個向量間的歐氏距離。
+#在scikit-learn包中，有一個euclidean_distances方法，可以用來計算向量之間的距離。
+
+from sklearn.metrics.pairwise import euclidean_distances
+from sklearn.feature_extraction.text import CountVectorizer
+ 
+corpus = ['UNC played Duke in basketball','Duke lost the basketball game','I ate a sandwich']# 文集
+vectorizer =CountVectorizer()#
+counts = vectorizer.fit_transform(corpus).todense() #得到文集corpus的特征向量，并將其轉為密集矩陣
+print(counts)
+for x,y in [[0,1],[0,2],[1,2]]:
+    dist = euclidean_distances(counts[x],counts[y])
+    print('文檔{}與文檔{}的距離{}'.format(x,y,dist))
+
+"""
 
 import matplotlib
 import seaborn as sns
@@ -43,6 +64,8 @@ rating_matrix = np.array(
      [0, 0, 2, 4, 0, 5]
      ]
 )
+
+print('歐幾里得距離 (Euclidean distance)')
 
 dist = euclidean_distances(rating_matrix)
 print(dist)
@@ -162,7 +185,7 @@ def linear_regression(data, power, models_to_plot):
     
     return ret
 
-plt.rcParams['figure.figsize'] = 18, 9
+plt.rcParams['figure.figsize'] = 12, 8
 
 #Initialize a dataframe to store the results:
 col = ['rss','intercept'] + ['coef_x_%d' % i for i in range(1, 16)]
@@ -310,6 +333,7 @@ coef_matrix_lasso.apply(lambda x: sum(x.values==0),axis=1)
 """
 
 print('------------------------------------------------------------')	#60個
+'''
 
 from numpy.random import RandomState
 import matplotlib.image as mpimg
@@ -323,15 +347,31 @@ rng = RandomState(0)
 
 print('------------------------------------------------------------')	#60個
 
-faces = fetch_olivetti_faces(data_home='data\\',shuffle=True, random_state=rng)
-print(faces.data.shape)
+#讀取數據集
+#指定下載位置
+olivetti_faces = fetch_olivetti_faces(data_home='data\\',shuffle=True, random_state=rng)
+
+#未指定下載位置, 下載至 C:/Users/070601/scikit_learn_data/olivetti_py3.pkz
+olivetti_faces = fetch_olivetti_faces()
+
+print("olivetti_faces 資料型態")
+print(olivetti_faces.data.shape)
+#(400, 4096)
+
+#標籤 olivetti_faces.target
+print(olivetti_faces.target.shape)
+#(400,)
+
+#圖像 olivetti_faces.images
+print(olivetti_faces.images.shape)
+#(400, 64, 64)
 
 print('------------------------------------------------------------')	#60個
 
-fig = plt.figure(figsize=(10, 10))
-for i in range(10):
-    ax = plt.subplot2grid((1, 10), (0, i))    
-    ax.imshow(faces.data[i * 10].reshape(64, 64), cmap=plt.cm.gray)
+fig = plt.figure(figsize=(12, 8))
+for i in range(15):
+    ax = plt.subplot2grid((3, 5), (i//5, i%5))    
+    ax.imshow(olivetti_faces.data[i * 10].reshape(64, 64), cmap=plt.cm.gray)
     ax.axis('off')
 
 plt.show()
@@ -339,15 +379,15 @@ plt.show()
 print('------------------------------------------------------------')	#60個
 
 pca = decomposition.PCA()
-pca.fit(faces.data)
+pca.fit(olivetti_faces.data)
 
 print(pca.components_.shape)
 
 print('------------------------------------------------------------')	#60個
 
-fig = plt.figure(figsize=(10, 10))
-for i in range(10):
-    ax = plt.subplot2grid((1, 10), (0, i))
+fig = plt.figure(figsize=(12, 8))
+for i in range(15):
+    ax = plt.subplot2grid((3, 5), (i//5, i%5))
     
     ax.imshow(pca.components_[i].reshape(64, 64), cmap=plt.cm.gray)
     ax.axis('off')
@@ -359,17 +399,20 @@ print('------------------------------------------------------------')	#60個
 # pip install scikit-image
 from skimage.io import imsave
 
-face = faces.data[0]
+face = olivetti_faces.data[0]
 
 trans = pca.transform(face.reshape(1, -1))
 print(trans.shape)
 for k in range(400):
     rank_k_approx = trans[:, :k].dot(pca.components_[:k]) + pca.mean_
     if k % 10 == 0:
-        print('{:>03}'.format(str(k)) + '.jpg')
+        print('{:>03}'.format(str(k)) + '.jpg', end = "\t")
         #存圖fail
         #imsave('{:>03}'.format(str(k)) + '.jpg', rank_k_approx.reshape(64, 64))
         #imsave('cccc.jpg', rank_k_approx.reshape(64, 64))
+
+print()
+sys.exit()
 
 print('------------------------------------------------------------')	#60個
 
@@ -522,6 +565,8 @@ plt.show()
 print(pd.DataFrame(model.components_,index=['component_1','component_2'],columns=vectorizer.get_feature_names_out()).T)
 
 
+# 至此 OK
+
 print('------------------------------------------------------------')	#60個
 
 #from __future__ import print_function
@@ -644,8 +689,6 @@ plt.hist(data)
 
 plt.show()
 
-sys.exit()
-
 print('------------------------------------------------------------')	#60個
 
 mus = [1.4,1.5,1.6,1.7,1.8,1.9,2.0]
@@ -724,9 +767,6 @@ example_counts = cv.transform(examples)
 predictions = classifier.predict(example_counts)
 
 print(predictions)
-
-
-sys.exit()
 
 print('------------------------------------------------------------')	#60個
 

@@ -20,6 +20,7 @@ print("------------------------------------------------------------")  # 60個
 import os
 import sys
 import math
+import time
 import random
 import numpy as np
 import pandas as pd
@@ -34,7 +35,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 print(
     "---- 用 numpy 做的 random --------------------------------------------------------"
 )  # 60個
@@ -680,7 +681,7 @@ count, bins, ignored = plt.hist(s, 15, density=True)
 plt.plot(bins, np.ones_like(bins), linewidth=2, color='r')
 
 plt.show()
-
+'''
 print('------------------------------------------------------------')	#60個
 
 
@@ -823,6 +824,16 @@ x = np.random.randn(N)
 y = np.random.randn(N)
 z = np.random.randn(N)
 
+A = np.random.randint(2, 15, 5)
+B = np.random.randint(2, 15, 5)
+C = np.random.randint(2, 15, 5)
+
+#--------------
+
+z = np.linspace(0, 15, 100)
+x = np.sin(z)
+y = np.cos(z)
+x2 = np.sin(z) + 0.1 * np.random.randn(100)
 
 
 """ 新進
@@ -831,3 +842,41 @@ z = np.random.randn(N)
 
 
 """
+
+x1 = np.random.normal(0, 1, 1024)
+y1 = np.random.normal(0, 1, 1024)
+
+n = 300
+ax = np.random.normal(0, 1, n)
+ay = np.random.normal(0, 1, n)
+
+bx = np.random.normal(0, 1, n)
+by = np.random.normal(0, 1, n)
+
+
+
+# 使用 NumPy 隨機數的「常態分佈」產生 N 個數據點，再透過 matplotlib 畫出散布圖。
+N = 500
+x = np.random.normal(5, 50, N)
+y = np.random.normal(5, 50, N)
+
+
+
+print("以直方圖顯示常態分佈")
+# 生成 N 組標準常態分配（平均值為 0，標準差為 1 的常態分配）隨機變數
+x = np.random.randn(N)  # 常態分佈數字
+plt.hist(x, bins=num_bins, color="r", alpha=0.3)
+
+plt.title("np.random.randn")
+
+print('------------------------------------------------------------')	#60個
+
+x = np.random.randn(N, 3)
+colors = ["red", "green", "blue"]
+plt.hist(x, num_bins, density=True, histtype="bar", color=colors, label=colors)
+plt.legend(prop={"size": 10})
+plt.title("一次顯示三組數據", fontweight="bold")
+
+
+print('------------------------------------------------------------')	#60個
+

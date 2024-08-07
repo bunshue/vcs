@@ -60,8 +60,8 @@ labels = ["鼠", "牛", "虎", "兔", "龍"]  # list格式
 labels = "鼠", "牛", "虎", "兔", "龍"  # tuple格式
 
 colors = ["r", "g", "b", "c", "m"]
-#colors = ["#9999ff", "#ff9999", "#7777aa", "#2442aa", "#dd5555"]  # 自定義顏色
-#colors = [(1.0, 0, 0), (0, 1.0, 0), (0, 1.0, 1.0)]  # 自定義顏色
+# colors = ["#9999ff", "#ff9999", "#7777aa", "#2442aa", "#dd5555"]  # 自定義顏色
+# colors = [(1.0, 0, 0), (0, 1.0, 0), (0, 1.0, 1.0)]  # 自定義顏色
 
 # 分離係數，所以只有 '虎' 會分離
 explode = (0, 0, 0.15, 0, 0)  # 設定分隔的區塊位置
@@ -75,9 +75,9 @@ plt.pie(
     explode=explode,  # 設定分隔的區塊位置
     labeldistance=1.1,  # 設置標簽與圓心的距離
     autopct="%2.1f%%",  # 項目百分比的格式, 顯示數字
-    #autopct="%.1f%%",  # 設置百分比的格式，這里保留一位小數
-    #autopct="%1.2f%%",
-    #autopct="%1.1f%%",
+    # autopct="%.1f%%",  # 設置百分比的格式，這里保留一位小數
+    # autopct="%1.2f%%",
+    # autopct="%1.1f%%",
     pctdistance=0.5,  # 數值文字與圓心距離, 設置百分比標簽與圓心的距離
     shadow=True,  # 派圖陰影開啟/關閉
     startangle=90,  # 設置派圖的起始角度
@@ -86,9 +86,9 @@ plt.pie(
     wedgeprops={"linewidth": 1.5, "edgecolor": "green"},  # 設置餅圖內外邊界的屬性值
     textprops={"fontsize": 10, "color": "black"},  # 設置文本標簽的屬性值
 )
-    
+
 # 設定Y/X軸長度比例 fail
-#plt.set_aspect(0.7)
+# plt.set_aspect(0.7)
 
 
 print("------------------------------------------------------------")  # 60個
@@ -224,7 +224,6 @@ plt.legend(loc="right")  # 設定 legend 的位置
 plt.title("指定顏色 使用圖例")
 
 
-
 # 預設字體大小
 plt.rc("font", size=20)
 # 軸標題字體大小
@@ -233,4 +232,3 @@ plt.rc("axes", titlesize=30)
 plt.rc("xtick", labelsize=20)
 # 圖例字體大小
 plt.rc("legend", fontsize=10)
-

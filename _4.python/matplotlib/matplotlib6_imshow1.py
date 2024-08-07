@@ -17,6 +17,7 @@ print("------------------------------------------------------------")  # 60個
 import os
 import sys
 import math
+import time
 import random
 import numpy as np
 import pandas as pd
@@ -31,7 +32,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 plt.figure(
     num="imshow 集合 1 顯示圖片 簡單圖片處理",
     figsize=(12, 8),
@@ -229,7 +230,7 @@ for i in range(1,5):
 
 plt.tight_layout()
 plt.show()
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 plt.figure(
@@ -294,14 +295,13 @@ Z = (Z1 - Z2) * 2
 im = plt.imshow(
     Z, interpolation="bilinear", cmap=cm.gray, origin="lower", extent=[-3, 3, -3, 3]
 )
+
 """
 im.set_url('https://www.google.com/')
 filename = 'C:/_git/vcs/_1.data/______test_files2/image.svg'
 fig.savefig(filename)
 print('已存圖' + filename)
 """
-
-
 
 print("------------------------------------------------------------")  # 60個
 plt.subplot(234)
@@ -315,26 +315,34 @@ plt.colorbar()
 print("------------------------------------------------------------")  # 60個
 plt.subplot(235)
 
-img = np.array([[0, 1, 2, 3, 4, 5],
-                [6, 7, 8, 9, 10, 11],
-                [12, 13, 14, 15, 16, 18],
-                [18, 19, 20, 21, 22, 23],
-                [24, 25, 26, 27, 28, 29],
-                [30, 31, 32, 33, 34, 35]])               
-plt.imshow(img, cmap='Blues')
+img = np.array(
+    [
+        [0, 1, 2, 3, 4, 5],
+        [6, 7, 8, 9, 10, 11],
+        [12, 13, 14, 15, 16, 18],
+        [18, 19, 20, 21, 22, 23],
+        [24, 25, 26, 27, 28, 29],
+        [30, 31, 32, 33, 34, 35],
+    ]
+)
+plt.imshow(img, cmap="Blues")
 plt.colorbar()
 
 
 print("------------------------------------------------------------")  # 60個
 plt.subplot(236)
 
-img = np.array([[0, 1, 2, 3, 4, 5],
-                [6, 7, 8, 9, 10, 11],
-                [12, 13, 14, 15, 16, 18],
-                [18, 19, 20, 21, 22, 23],
-                [24, 25, 26, 27, 28, 29],
-                [30, 31, 32, 33, 34, 35]])               
-plt.imshow(img, cmap='Blues', origin='lower')
+img = np.array(
+    [
+        [0, 1, 2, 3, 4, 5],
+        [6, 7, 8, 9, 10, 11],
+        [12, 13, 14, 15, 16, 18],
+        [18, 19, 20, 21, 22, 23],
+        [24, 25, 26, 27, 28, 29],
+        [30, 31, 32, 33, 34, 35],
+    ]
+)
+plt.imshow(img, cmap="Blues", origin="lower")
 plt.colorbar()
 
 plt.tight_layout()
@@ -470,7 +478,7 @@ print(f"z2 = \n{z2}")
 """
 
 z = np.add.outer(range(8), range(8)) % 2
-im1 = plt.imshow(z, cmap='gray')
+im1 = plt.imshow(z, cmap="gray")
 
 plt.tight_layout()
 plt.show()
@@ -541,6 +549,7 @@ plt.subplot(235)
 
 # Layer Images
 
+
 def func3(x, y):
     return (1 - x / 2 + x**5 + y**3) * np.exp(-(x**2 + y**2))
 
@@ -572,6 +581,7 @@ im2 = plt.imshow(
 
 print("------------------------------------------------------------")  # 60個
 plt.subplot(236)
+
 
 def func2(x, y):
     return (1 - x / 2 + x**5 + y**3) * np.exp(-(x**2) - y**2)
@@ -617,56 +627,56 @@ print("------------------------------------------------------------")  # 60個
 plt.subplot(232)
 
 data = np.random.random((80, 80))
-plt.imshow(data, cmap='cool')
-#plt.imshow(data, cmap="hsv")
+plt.imshow(data, cmap="cool")
+# plt.imshow(data, cmap="hsv")
 plt.colorbar()
 
 
 print("------------------------------------------------------------")  # 60個
 plt.subplot(233)
 
-#四圖
+# 四圖
 N = 4
-src = np.random.random((N,N,3))     # 隨機產生影像圖陣列資料
+src = np.random.random((N, N, 3))  # 隨機產生影像圖陣列資料
 
 print(src)
-print(src[:,:,0])
-print(src[:,:,1])
-print(src[:,:,2])
+print(src[:, :, 0])
+print(src[:, :, 1])
+print(src[:, :, 2])
 
-plt.xticks(range(N))    # 繪製 x 軸刻度
-plt.yticks(range(N))    # 繪製 y 軸刻度
-plt.title('RGB色彩')
+plt.xticks(range(N))  # 繪製 x 軸刻度
+plt.yticks(range(N))  # 繪製 y 軸刻度
+plt.title("RGB色彩")
 plt.imshow(src)
 
 print("------------------------------------------------------------")  # 60個
 plt.subplot(234)
 
-r = src.copy()          # 複製影像色彩陣列
-r[:,:,[1,2]] = 0        # 保留紅色元素, 設定綠色和藍色元素是 0
-plt.xticks(range(N))    # 繪製 x 軸刻度
-plt.yticks([])          # 隱藏繪製 y 軸刻度
-plt.title('Red元素')
+r = src.copy()  # 複製影像色彩陣列
+r[:, :, [1, 2]] = 0  # 保留紅色元素, 設定綠色和藍色元素是 0
+plt.xticks(range(N))  # 繪製 x 軸刻度
+plt.yticks([])  # 隱藏繪製 y 軸刻度
+plt.title("Red元素")
 plt.imshow(r)
 
 print("------------------------------------------------------------")  # 60個
 plt.subplot(235)
 
-g = src.copy()          # 複製影像色彩陣列
-g[:,:,[0,2]] = 0        # 保留綠色元素, 設定紅色和藍色元素是 0
-plt.xticks(range(N))    # 繪製 x 軸刻度
-plt.yticks([])          # 隱藏繪製 y 軸刻度
-plt.title('Green元素')
+g = src.copy()  # 複製影像色彩陣列
+g[:, :, [0, 2]] = 0  # 保留綠色元素, 設定紅色和藍色元素是 0
+plt.xticks(range(N))  # 繪製 x 軸刻度
+plt.yticks([])  # 隱藏繪製 y 軸刻度
+plt.title("Green元素")
 plt.imshow(g)
 
 print("------------------------------------------------------------")  # 60個
 plt.subplot(236)
 
-b = src.copy()          # 複製影像色彩陣列
-b[:,:,[0,1]] = 0        # 保留藍色元素, 設定紅色和綠色元素是 0
-plt.xticks(range(N))    # 繪製 x 軸刻度
-plt.yticks([])          # 隱藏繪製 y 軸刻度
-plt.title('Blue元素')
+b = src.copy()  # 複製影像色彩陣列
+b[:, :, [0, 1]] = 0  # 保留藍色元素, 設定紅色和綠色元素是 0
+plt.xticks(range(N))  # 繪製 x 軸刻度
+plt.yticks([])  # 隱藏繪製 y 軸刻度
+plt.title("Blue元素")
 plt.imshow(b)
 
 plt.tight_layout()
@@ -692,11 +702,11 @@ x = np.linspace(0, 2 * np.pi, 100)
 y = np.linspace(0, 2 * np.pi, 100)
 X, Y = np.meshgrid(x, y)
 
-#z = np.sin(X) + np.cos(Y)   # 建立影像
-z = np.sin(X) + np.sin(Y)   # 建立影像
+# z = np.sin(X) + np.cos(Y)   # 建立影像
+z = np.sin(X) + np.sin(Y)  # 建立影像
 
 plt.imshow(z)
-#plt.imshow(z,cmap='hsv')
+# plt.imshow(z,cmap='hsv')
 
 
 print("------------------------------------------------------------")  # 60個
@@ -710,12 +720,11 @@ X, Y = np.meshgrid(x, y)
 # 當建立重疊影像時, 需要有相同的 extent
 extent = np.min(x), np.max(x), np.min(y), np.max(y)
 
-z1 = np.add.outer(range(8), range(8)) % 2           # 棋盤
-plt.imshow(z1, cmap='gray',extent=extent)           # 影像 1
+z1 = np.add.outer(range(8), range(8)) % 2  # 棋盤
+plt.imshow(z1, cmap="gray", extent=extent)  # 影像 1
 
-z2 = np.sin(X) + np.cos(Y)                        # 影像 2 公式
-plt.imshow(z2, cmap='jet', alpha=0.8,
-           interpolation='bilinear',extent=extent)  # 影像 2
+z2 = np.sin(X) + np.cos(Y)  # 影像 2 公式
+plt.imshow(z2, cmap="jet", alpha=0.8, interpolation="bilinear", extent=extent)  # 影像 2
 
 
 print("------------------------------------------------------------")  # 60個
@@ -726,30 +735,30 @@ print("------------------------------------------------------------")  # 60個
 plt.subplot(234)
 
 N = 5
-data = np.reshape(np.linspace(0,1,N**2), (N,N)) # 建立 N x N 陣列
+data = np.reshape(np.linspace(0, 1, N**2), (N, N))  # 建立 N x N 陣列
 
 # 使用預設顏色繪製
 plt.imshow(data)
-plt.xticks(range(N))                            # 繪製 x 軸刻度
-plt.yticks(range(N))                            # 繪製 y 軸刻度
-plt.title('使用預設插值',fontsize=12,color='b')
+plt.xticks(range(N))  # 繪製 x 軸刻度
+plt.yticks(range(N))  # 繪製 y 軸刻度
+plt.title("使用預設插值", fontsize=12, color="b")
 
 print("------------------------------------------------------------")  # 60個
 plt.subplot(235)
 
 # 相同陣列使用不同的插值法
-plt.imshow(data,interpolation='bicubic')
-plt.xticks(range(N))                            # 繪製 x 軸刻度
-plt.yticks([])                                  # 隱藏繪製 y 軸刻度
-plt.title('使用 bicubic 插值',fontsize=12,color='b')
+plt.imshow(data, interpolation="bicubic")
+plt.xticks(range(N))  # 繪製 x 軸刻度
+plt.yticks([])  # 隱藏繪製 y 軸刻度
+plt.title("使用 bicubic 插值", fontsize=12, color="b")
 
 print("------------------------------------------------------------")  # 60個
 plt.subplot(236)
 
-plt.imshow(data,interpolation='hamming')
-plt.xticks(range(N))                            # 繪製 x 軸刻度
-plt.yticks([])                                  # 隱藏繪製 y 軸刻度
-plt.title('使用 hamming 插值',fontsize=12,color='b')
+plt.imshow(data, interpolation="hamming")
+plt.xticks(range(N))  # 繪製 x 軸刻度
+plt.yticks([])  # 隱藏繪製 y 軸刻度
+plt.title("使用 hamming 插值", fontsize=12, color="b")
 
 
 plt.tight_layout()
@@ -757,18 +766,22 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-farmers = ["張三","李四","大成","陳王", "李曉.","林邊"]
-fruits = ["釋迦","番茄","鳳梨","蓮霧","香蕉","芭樂"]
+farmers = ["張三", "李四", "大成", "陳王", "李曉.", "林邊"]
+fruits = ["釋迦", "番茄", "鳳梨", "蓮霧", "香蕉", "芭樂"]
 # 建立收成表
-harvest = np.array([[0.3, 2.1, 1.8, 3.5, 0.0, 2.0],
-                    [2.1, 0.0, 3.0, 1.0, 2.3, 0.0],
-                    [1.2, 2.6, 1.8, 4.1, 0.5, 3.6],
-                    [0.5, 0.2, 0.7, 0.0, 2.3, 0.0],
-                    [0.6, 1.5, 0.0, 2.1, 2.0, 4.2],
-                    [0.3, 2.2, 0.0, 1.3, 0.0, 1.5]])
+harvest = np.array(
+    [
+        [0.3, 2.1, 1.8, 3.5, 0.0, 2.0],
+        [2.1, 0.0, 3.0, 1.0, 2.3, 0.0],
+        [1.2, 2.6, 1.8, 4.1, 0.5, 3.6],
+        [0.5, 0.2, 0.7, 0.0, 2.3, 0.0],
+        [0.6, 1.5, 0.0, 2.1, 2.0, 4.2],
+        [0.3, 2.2, 0.0, 1.3, 0.0, 1.5],
+    ]
+)
 
 fig, ax = plt.subplots()
-im = ax.imshow(harvest,cmap='YlGn')
+im = ax.imshow(harvest, cmap="YlGn")
 ax.figure.colorbar(im, ax=ax)
 # 依據農夫姓名建立 x 軸刻度標記和刻度標籤
 ax.set_xticks(np.arange(len(farmers)))
@@ -781,9 +794,8 @@ plt.setp(ax.get_xticklabels(), rotation=45)
 # 使用雙層迴圈註記收成數量
 for i in range(len(fruits)):
     for j in range(len(farmers)):
-        text = ax.text(j, i, harvest[i,j],
-                        ha="center", va="center", color="b")
-ax.set_title("農夫收成(噸 / 年)",fontsize=18)
+        text = ax.text(j, i, harvest[i, j], ha="center", va="center", color="b")
+ax.set_title("農夫收成(噸 / 年)", fontsize=18)
 ax.set_xlabel("姓名")
 ax.set_ylabel("水果")
 
@@ -792,18 +804,22 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-farmers = ["張三","李四","大成","陳王", "李曉.","林邊"]
-fruits = ["釋迦","番茄","鳳梨","蓮霧","香蕉","芭樂"]
+farmers = ["張三", "李四", "大成", "陳王", "李曉.", "林邊"]
+fruits = ["釋迦", "番茄", "鳳梨", "蓮霧", "香蕉", "芭樂"]
 # 建立收成表
-harvest = np.array([[0.3, 2.1, 1.8, 3.5, 0.0, 2.0],
-                    [2.1, 0.0, 3.0, 1.0, 2.3, 0.0],
-                    [1.2, 2.6, 1.8, 4.1, 0.5, 3.6],
-                    [0.5, 0.2, 0.7, 0.0, 2.3, 0.0],
-                    [0.6, 1.5, 0.0, 2.1, 2.0, 4.2],
-                    [0.3, 2.2, 0.0, 1.3, 0.0, 1.5]])
+harvest = np.array(
+    [
+        [0.3, 2.1, 1.8, 3.5, 0.0, 2.0],
+        [2.1, 0.0, 3.0, 1.0, 2.3, 0.0],
+        [1.2, 2.6, 1.8, 4.1, 0.5, 3.6],
+        [0.5, 0.2, 0.7, 0.0, 2.3, 0.0],
+        [0.6, 1.5, 0.0, 2.1, 2.0, 4.2],
+        [0.3, 2.2, 0.0, 1.3, 0.0, 1.5],
+    ]
+)
 
 fig, ax = plt.subplots()
-im = ax.imshow(harvest,cmap='YlGn')
+im = ax.imshow(harvest, cmap="YlGn")
 ax.figure.colorbar(im, ax=ax)
 # 依據農夫姓名建立 x 軸刻度標記和刻度標籤
 ax.set_xticks(np.arange(len(farmers)))
@@ -816,13 +832,11 @@ plt.setp(ax.get_xticklabels(), rotation=45)
 # 使用雙層迴圈註記收成數量
 for i in range(len(fruits)):
     for j in range(len(farmers)):
-        if harvest[i,j] < 3.0:
-            text = ax.text(j, i, harvest[i,j],
-                           ha="center", va="center", color="b")
+        if harvest[i, j] < 3.0:
+            text = ax.text(j, i, harvest[i, j], ha="center", va="center", color="b")
         else:
-            text = ax.text(j, i, harvest[i,j],
-                           ha="center", va="center", color="w")
-ax.set_title("農夫收成(噸 / 年)",fontsize=18)
+            text = ax.text(j, i, harvest[i, j], ha="center", va="center", color="w")
+ax.set_title("農夫收成(噸 / 年)", fontsize=18)
 ax.set_xlabel("姓名")
 ax.set_ylabel("水果")
 
@@ -832,7 +846,6 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
 
 
@@ -842,27 +855,20 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
-
+sys.exit()
 
 plt.rcParams["savefig.facecolor"] = "0.8"
 plt.tight_layout()
-
-
-
-
-
 
 
 """
@@ -895,4 +901,3 @@ imgplot = plt.imshow(image, interpolation="bicubic")
 """
 
 print("------------------------------------------------------------")  # 60個
-

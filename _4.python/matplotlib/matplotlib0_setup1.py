@@ -197,7 +197,6 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 
 
-
 d01 = [10 for y in range(1, 9)]  # data1線條之y值
 d02 = [20 for y in range(1, 9)]  # data2線條之y值
 d03 = [30 for y in range(1, 9)]  # data3線條之y值

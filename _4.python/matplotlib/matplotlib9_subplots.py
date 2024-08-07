@@ -31,8 +31,8 @@ y = np.sin(x)
 print("------------------------------------------------------------")  # 60個
 
 print("用plt畫圖")
-plt.plot(x, np.sin(x), "r-o", label = "sin")
-plt.plot(x, np.cos(x), "g-o", label = "cos")
+plt.plot(x, np.sin(x), "r-o", label="sin")
+plt.plot(x, np.cos(x), "g-o", label="cos")
 plt.title("用plt畫圖, 一張子圖")
 plt.legend()
 
@@ -42,8 +42,8 @@ print("fig, ax = plt.subplots() 一張子圖, 可以直接換回 plt.plot()")
 
 print("用fig ax畫圖, 一張子圖")
 fig, ax = plt.subplots()  # 一張子圖
-ax.plot(x, np.sin(x), "r-o", label = "sin")
-ax.plot(x, np.cos(x), "g-o", label = "cos")
+ax.plot(x, np.sin(x), "r-o", label="sin")
+ax.plot(x, np.cos(x), "g-o", label="cos")
 ax.set_title("用fig ax畫圖, 一張子圖")
 handles, labels = ax.get_legend_handles_labels()
 ax.legend(handles, labels)
@@ -111,8 +111,8 @@ ax[1, 0].set(xlim=(-5, 5), ylim=(-5, 5))
 ax[1, 0].set_title("設定寬和高相同區間")
 
 ax[1, 1].plot(5 * np.cos(angle), 5 * np.sin(angle))
-#ax[1, 1].set_aspect(2)
-#ax[1, 1].set_title("設定寬高比是2")
+# ax[1, 1].set_aspect(2)
+# ax[1, 1].set_title("設定寬高比是2")
 ax[1, 1].set_aspect("equal", "box")
 ax[1, 1].set_title("設定寬高比相同")
 
@@ -170,54 +170,54 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#建立字典data
-data = {'蘋果': 10, '橘子': 15, '檸檬': 5, '萊姆': 20}
-#取出keys為串列list
+# 建立字典data
+data = {"蘋果": 10, "橘子": 15, "檸檬": 5, "萊姆": 20}
+# 取出keys為串列list
 names = list(data.keys())
-#取出values為串列list
+# 取出values為串列list
 values = list(data.values())
-#預設字體大小
-plt.rc('font', size=6)
-#軸標題字體大小
-plt.rc('axes', titlesize=8)
-#軸標籤字體大小
-plt.rc('axes', labelsize=6)
-#X軸刻度字體大小
-plt.rc('xtick', labelsize=6)
-#Y軸刻度字體大小
-plt.rc('ytick', labelsize=6)
+# 預設字體大小
+plt.rc("font", size=6)
+# 軸標題字體大小
+plt.rc("axes", titlesize=8)
+# 軸標籤字體大小
+plt.rc("axes", labelsize=6)
+# X軸刻度字體大小
+plt.rc("xtick", labelsize=6)
+# Y軸刻度字體大小
+plt.rc("ytick", labelsize=6)
 
-#sharex, sharey 共用X軸, Y軸 刻度
-#預設大小為6.4inches*4.8inches, 80dpi
-#指定 寬6.4inches, 高4.8inches, 160dpi
-#將圖分成2列3欄共6個子圖
+# sharex, sharey 共用X軸, Y軸 刻度
+# 預設大小為6.4inches*4.8inches, 80dpi
+# 指定 寬6.4inches, 高4.8inches, 160dpi
+# 將圖分成2列3欄共6個子圖
 fig, axs = plt.subplots(2, 3, figsize=(6.4, 4.8), dpi=160, sharex=True, sharey=True)
 
-axs[0][0].bar(names, values, color='red')
-axs[0][1].scatter(names, values, color='green')
-axs[0][2].plot(names, values, color='cyan')
-axs[1][0].bar(names, values, color='magenta')
-axs[1][1].scatter(names, values, color='yellow')
-axs[1][2].plot(names, values, color='blue')
-axs[0][0].set(xlabel='水果', ylabel='數量')
-axs[0][1].set(xlabel='水果', ylabel='數量')
-axs[0][2].set(xlabel='水果', ylabel='數量')
-axs[1][0].set(xlabel='水果', ylabel='數量')
-axs[1][1].set(xlabel='水果', ylabel='數量')
-axs[1][2].set(xlabel='水果', ylabel='數量')
-axs[0][0].set_title('圖1')
-axs[0][1].set_title('圖2')
-axs[0][2].set_title('圖3')
-axs[1][0].set_title('圖4')
-axs[1][1].set_title('圖5')
-axs[1][2].set_title('圖6')
+axs[0][0].bar(names, values, color="red")
+axs[0][1].scatter(names, values, color="green")
+axs[0][2].plot(names, values, color="cyan")
+axs[1][0].bar(names, values, color="magenta")
+axs[1][1].scatter(names, values, color="yellow")
+axs[1][2].plot(names, values, color="blue")
+axs[0][0].set(xlabel="水果", ylabel="數量")
+axs[0][1].set(xlabel="水果", ylabel="數量")
+axs[0][2].set(xlabel="水果", ylabel="數量")
+axs[1][0].set(xlabel="水果", ylabel="數量")
+axs[1][1].set(xlabel="水果", ylabel="數量")
+axs[1][2].set(xlabel="水果", ylabel="數量")
+axs[0][0].set_title("圖1")
+axs[0][1].set_title("圖2")
+axs[0][2].set_title("圖3")
+axs[1][0].set_title("圖4")
+axs[1][1].set_title("圖5")
+axs[1][2].set_title("圖6")
 axs[0][0].grid(True)
 axs[0][1].grid(True)
 axs[0][2].grid(True)
 axs[1][0].grid(True)
 axs[1][1].grid(True)
 axs[1][2].grid(True)
-fig.suptitle('分類繪圖', fontsize=20)
+fig.suptitle("分類繪圖", fontsize=20)
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
@@ -228,4 +228,3 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
-

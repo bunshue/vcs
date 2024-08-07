@@ -173,6 +173,7 @@ plt.colorbar()
 # 第二張圖
 plt.subplot(232)
 
+
 def loc(index):
     # 處理座標的移動
     x_mov = random.choice([-3, 3])  # 隨機x軸移動值
@@ -196,6 +197,7 @@ plt.axis("off")  # 隱藏座標
 
 # 第三張圖
 plt.subplot(233)
+
 
 def loc(index):
     # 處理座標的移動
@@ -348,7 +350,6 @@ plt.subplot(235)
 plt.subplot(236)
 
 
-
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
@@ -487,7 +488,7 @@ y = np.random.rand(20)
 colors = np.random.rand(20)
 size = (50 * np.random.rand(20)) ** 2
 
-#plt.scatter(x, y, s=size, c=colors, alpha=0.5, marker="x")
+# plt.scatter(x, y, s=size, c=colors, alpha=0.5, marker="x")
 plt.scatter(x, y, s=size, c=colors, alpha=0.5)
 
 
@@ -503,7 +504,7 @@ size = (50 * np.random.rand(20)) ** 2
 
 lines = np.zeros(220) + 5
 
-#plt.scatter(x, y, s=size, c=colors, alpha=0.5, marker="x", linewidths=lines)
+# plt.scatter(x, y, s=size, c=colors, alpha=0.5, marker="x", linewidths=lines)
 plt.scatter(x, y, s=size, c=colors, alpha=0.5, linewidths=lines)
 
 
@@ -776,7 +777,6 @@ plt.subplot(235)
 
 # 第六張圖
 plt.subplot(236)
-
 
 
 plt.show()
@@ -1161,8 +1161,6 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 
 
-
-
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
@@ -1230,14 +1228,11 @@ print("------------------------------------------------------------")  # 60個
 plt.scatter(x, y, s=N, c=x, cmap="brg")  # 繪製散點圖
 
 
-
-
 colors = np.array(["b", "c", "g", "k", "m", "r", "y", "pink", "purple", "orange"])
 plt.scatter(x, y1, c=colors, label="圓形標記")
 plt.scatter(x, y2, c=colors, marker="*", label="星形標記")
 plt.xticks(np.arange(0, 11, step=1.0))
 plt.yticks(np.arange(0, 11, step=1.0))
-
 
 
 N = 50  # 色彩數列的點數
@@ -1272,4 +1267,3 @@ y = 0.5 * np.sin(n * x) + 0.5
 
 
 plt.scatter(listx, listy, c="r", s=scale, marker="o", alpha=0.5)
-

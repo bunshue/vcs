@@ -132,10 +132,10 @@ plt.legend(loc="best")  # 建立圖例
 plt.subplot(234)
 
 y, x = np.mgrid[-3:3:300j, -6:6:600j]
-z = np.sin(x**2 + 2*y**2 + x*y)
+z = np.sin(x**2 + 2 * y**2 + x * y)
 plt.imshow(z, cmap="Blues", vmin=-2, vmax=2)
 
-#plt.colorbar(shrink=0.92)
+# plt.colorbar(shrink=0.92)
 
 plt.xticks(())
 plt.yticks(())
@@ -145,11 +145,11 @@ plt.yticks(())
 plt.subplot(235)
 
 # 畫  (x^2 + y^2 -1)^3 - x^2*y^3 = 0
-#%fig=matplotlib繪制心形隱函數曲線
+# %fig=matplotlib繪制心形隱函數曲線
 x, y = np.mgrid[-2:2:500j, -2:2:500j]
-z = (x**2 + y**2 - 1)**3 - x**2 * y**3
+z = (x**2 + y**2 - 1) ** 3 - x**2 * y**3
 plt.contourf(x, y, z, levels=[-1, 0], colors=["red"])
-plt.gca().set_aspect("equal");
+plt.gca().set_aspect("equal")
 
 
 # 第六張圖
@@ -216,7 +216,6 @@ plt.yticks(())
 
 # 第二張圖
 plt.subplot(232)
-
 
 
 # 第三張圖

@@ -93,9 +93,11 @@ plt.xticks(range(len(animals.values())), animals.keys())
 # 第四張圖
 plt.subplot(234)
 
+
 def addlabels1(x, y):
     for i in range(len(x)):
         plt.text(i, y[i], y[i])
+
 
 animals = ["鼠", "牛", "虎", "兔"]
 weights2 = [3, 48, 33, 8]
@@ -107,6 +109,7 @@ plt.title("體重")
 
 # 第五張圖
 plt.subplot(235)
+
 
 def addlabels2(x, y):
     for i in range(len(x)):
@@ -346,18 +349,16 @@ plt.title("x用名稱 y設定範圍刻距")
 plt.subplot(233)
 
 
-
-
 # 第四張圖
 plt.subplot(234)
 
-colors = ['b','g','r','y','c']
+colors = ["b", "g", "r", "y", "c"]
 
 animals = ["鼠", "牛", "虎", "兔", "龍"]
 
 weights = [3, 48, 33, 8, 38]
 
-plt.barh(animals,weights,color=colors)
+plt.barh(animals, weights, color=colors)
 
 # 第五張圖
 plt.subplot(235)
@@ -365,19 +366,19 @@ plt.subplot(235)
 animals = ["鼠", "牛", "虎", "兔", "龍"]
 
 weights = [3, 48, 33, 8, 38]
-#plt.bar(animals,weights)
-#plt.bar(animals,weights,align='edge',color='g')
-plt.bar(animals,weights,width=0.5,color='m')
+# plt.bar(animals,weights)
+# plt.bar(animals,weights,align='edge',color='g')
+plt.bar(animals, weights, width=0.5, color="m")
 
 # 第六張圖
 plt.subplot(236)
 
-colors = ['grey','grey','red','grey','grey']
+colors = ["grey", "grey", "red", "grey", "grey"]
 animals = ["鼠", "牛", "虎", "兔", "龍"]
 
 weights = [3, 48, 33, 8, 38]
 
-plt.bar(animals,weights,color=colors)
+plt.bar(animals, weights, color=colors)
 
 
 plt.show()
@@ -447,7 +448,6 @@ plt.title("大學四年各學期的平均分數")
 plt.subplot(236)
 
 
-
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
@@ -467,7 +467,7 @@ plt.subplot(231)
 
 name = ["鼠", "牛", "虎", "兔", "龍"]
 weight = [3, 48, 33, 8, 38]
-#plt.bar(name, weight)
+# plt.bar(name, weight)
 plt.bar(name, weight, width=0.8, align="edge", color="r", ec="y", lw=2)
 
 
@@ -484,18 +484,17 @@ plt.subplot(233)
 
 revenue = [300, 320, 400, 350]
 cost = [250, 280, 310, 290]
-quarter = ['Q1','Q2','Q3','Q4']
+quarter = ["Q1", "Q2", "Q3", "Q4"]
 
 barH = 0.5
-plt.barh(quarter,revenue,color='g',height=barH,label='收入')
-plt.barh(quarter,-np.array(cost),color='m',height=barH,label='支出')
+plt.barh(quarter, revenue, color="g", height=barH, label="收入")
+plt.barh(quarter, -np.array(cost), color="m", height=barH, label="支出")
 
-plt.title("公司收支表", fontsize=16, color='b')
-plt.xlabel("收入與支出", fontsize=10, color='b')
-plt.ylabel("季度", fontsize=10, color='b')
+plt.title("公司收支表", fontsize=16, color="b")
+plt.xlabel("收入與支出", fontsize=10, color="b")
+plt.ylabel("季度", fontsize=10, color="b")
 
 plt.legend()
-
 
 
 # 第四張圖
@@ -508,7 +507,6 @@ plt.subplot(235)
 
 # 第六張圖
 plt.subplot(236)
-
 
 
 plt.show()
@@ -573,8 +571,8 @@ menMeans = (20, 35, 30, 35, 27)
 womenMeans = (25, 32, 34, 20, 25)
 ind = np.arange(N)  # the x locations for the groups
 width = 0.35
-#fig = plt.figure()
-#ax = fig.add_axes([0, 0, 1, 1])
+# fig = plt.figure()
+# ax = fig.add_axes([0, 0, 1, 1])
 plt.bar(ind, menMeans, width, color="r")
 plt.bar(ind, womenMeans, width, bottom=menMeans, color="b")
 plt.ylabel("Scores")
@@ -616,8 +614,6 @@ plt.legend()
 
 # 第六張圖
 plt.subplot(236)
-
-
 
 
 plt.show()
@@ -707,6 +703,7 @@ for x, y in zip(range(len(student_all)), student_all.values()):
 # 第五張圖
 plt.subplot(235)
 
+
 def addlabels3(x, y):
     for i in range(len(x)):
         plt.text(i, y[i], y[i])
@@ -734,6 +731,7 @@ plt.legend()
 
 # 第六張圖
 plt.subplot(236)
+
 
 def addlabels4(x, y):
     for i in range(len(x)):
@@ -778,102 +776,105 @@ plt.figure(
 # 第一張圖
 plt.subplot(231)
 
-AAA = [3367, 4120, 5539]                   # AAA線條
-BBB = [4000, 3590, 4423]                    # BBB線條
-CCC = [5200, 4930, 5350]                  # CCC線條
+AAA = [3367, 4120, 5539]  # AAA線條
+BBB = [4000, 3590, 4423]  # BBB線條
+CCC = [5200, 4930, 5350]  # CCC線條
 
 X = np.arange(len(AAA))
-labels = ["2023年","2024年","2025年"]       # 年度刻度標籤
-#fig = plt.figure()
-#ax = fig.add_axes([0.15,0.15,0.7,0.7])
-barW = 0.22                                 # 長條圖寬度
+labels = ["2023年", "2024年", "2025年"]  # 年度刻度標籤
+# fig = plt.figure()
+# ax = fig.add_axes([0.15,0.15,0.7,0.7])
+barW = 0.22  # 長條圖寬度
 
 """
 plt.bar(X+0.00,AAA,color='r',width=barW,label='AAA')
 plt.bar(X+barW,BBB,color='g',width=barW,label='BBB')
 plt.bar(X+barW*2,CCC,color='b',width=barW,label='CCC')
 """
-plt.bar(X+0.0,AAA,color='r',width=barW,label='AAA')
-plt.bar(X+0.25,BBB,color='g',width=barW,label='BBB')
-plt.bar(X+0.5,CCC,color='b',width=barW,label='CCC')
+plt.bar(X + 0.0, AAA, color="r", width=barW, label="AAA")
+plt.bar(X + 0.25, BBB, color="g", width=barW, label="BBB")
+plt.bar(X + 0.5, CCC, color="b", width=barW, label="CCC")
 
-plt.title("銷售報表(並列)", fontsize=16, color='b')
-plt.xlabel("年度", fontsize=10, color='b')
-plt.ylabel("數量", fontsize=10, color='b')
-plt.legend()                                # 繪製圖例
-plt.xticks(X+barW, labels)                  # 加註年度標籤
-
+plt.title("銷售報表(並列)", fontsize=16, color="b")
+plt.xlabel("年度", fontsize=10, color="b")
+plt.ylabel("數量", fontsize=10, color="b")
+plt.legend()  # 繪製圖例
+plt.xticks(X + barW, labels)  # 加註年度標籤
 
 
 # 第二張圖
 plt.subplot(232)
 
-AAA = [3367, 4120, 5539]                       # AAA線條
-BBB = [4000, 3590, 4423]                        # BBB線條
-CCC = [5200, 4930, 5350]                      # CCC線條
-year = ["2023年","2024年","2025年"]             # 年度  
+AAA = [3367, 4120, 5539]  # AAA線條
+BBB = [4000, 3590, 4423]  # BBB線條
+CCC = [5200, 4930, 5350]  # CCC線條
+year = ["2023年", "2024年", "2025年"]  # 年度
 
-barW = 0.35                                     # 長條圖寬度
-plt.bar(year,AAA,color="green",width=barW,label="AAA")
-plt.bar(year,BBB,color="yellow",width=barW,
-        bottom=np.array(AAA),label="BBB")
-plt.bar(year,CCC,color="red",width=barW,
-        bottom=np.array(AAA)+np.array(BBB),label="CCC")
-plt.title("銷售報表(累計)", fontsize=16, color='b')
-plt.xlabel("年度", fontsize=10, color='b')
-plt.ylabel("數量", fontsize=10, color='b')
+barW = 0.35  # 長條圖寬度
+plt.bar(year, AAA, color="green", width=barW, label="AAA")
+plt.bar(year, BBB, color="yellow", width=barW, bottom=np.array(AAA), label="BBB")
+plt.bar(
+    year,
+    CCC,
+    color="red",
+    width=barW,
+    bottom=np.array(AAA) + np.array(BBB),
+    label="CCC",
+)
+plt.title("銷售報表(累計)", fontsize=16, color="b")
+plt.xlabel("年度", fontsize=10, color="b")
+plt.ylabel("數量", fontsize=10, color="b")
 plt.legend()
 
 
 # 第三張圖
 plt.subplot(233)
 
-AAA = [3367, 4120, 5539]                   # AAA線條
-BBB = [4000, 3590, 4423]                    # BBB線條
-CCC = [5200, 4930, 5350]                  # CCC線條
+AAA = [3367, 4120, 5539]  # AAA線條
+BBB = [4000, 3590, 4423]  # BBB線條
+CCC = [5200, 4930, 5350]  # CCC線條
 
 X = np.arange(len(AAA))
-labels = ["2023年","2024年","2025年"]       # 年度刻度標籤
-#fig = plt.figure()
-#ax = fig.add_axes([0.15,0.15,0.7,0.7])
-barH = 0.25                                 # 橫條圖高度
+labels = ["2023年", "2024年", "2025年"]  # 年度刻度標籤
+# fig = plt.figure()
+# ax = fig.add_axes([0.15,0.15,0.7,0.7])
+barH = 0.25  # 橫條圖高度
 
-plt.barh(X+0.00,AAA,color='r',height=barH,label='AAA')
-plt.barh(X+barH,BBB,color='g',height=barH,label='BBB')
-plt.barh(X+barH*2,CCC,color='b',height=barH,label='CCC')
+plt.barh(X + 0.00, AAA, color="r", height=barH, label="AAA")
+plt.barh(X + barH, BBB, color="g", height=barH, label="BBB")
+plt.barh(X + barH * 2, CCC, color="b", height=barH, label="CCC")
 
-plt.title("銷售報表", fontsize=16, color='b')
-plt.xlabel("數量", fontsize=10, color='b')
-plt.ylabel("年度", fontsize=10, color='b')
-plt.legend()                                 # 繪製圖例
+plt.title("銷售報表", fontsize=16, color="b")
+plt.xlabel("數量", fontsize=10, color="b")
+plt.ylabel("年度", fontsize=10, color="b")
+plt.legend()  # 繪製圖例
 
-plt.yticks(X+barH, labels)                   # 加註年度標籤
+plt.yticks(X + barH, labels)  # 加註年度標籤
 
 
 # 第四張圖
 plt.subplot(234)
 
-AAA = [3367, 4120, 5539]                   # AAA線條
-BBB = [4000, 3590, 4423]                    # BBB線條
-CCC = [5200, 4930, 5350]                  # CCC線條
-year = ["2023年","2024年","2025年"]         # 年度  
+AAA = [3367, 4120, 5539]  # AAA線條
+BBB = [4000, 3590, 4423]  # BBB線條
+CCC = [5200, 4930, 5350]  # CCC線條
+year = ["2023年", "2024年", "2025年"]  # 年度
 
-barH = 0.35                                 # 橫條圖高度
-plt.barh(year,AAA,color="green",height=barH,label="AAA")
-plt.barh(year,BBB,color="yellow",height=barH,
-        left=np.array(AAA),label="BBB")
-plt.barh(year,CCC,color="red",height=barH,
-        left=np.array(AAA)+np.array(BBB),label="CCC")
+barH = 0.35  # 橫條圖高度
+plt.barh(year, AAA, color="green", height=barH, label="AAA")
+plt.barh(year, BBB, color="yellow", height=barH, left=np.array(AAA), label="BBB")
+plt.barh(
+    year, CCC, color="red", height=barH, left=np.array(AAA) + np.array(BBB), label="CCC"
+)
 
-plt.title("銷售報表", fontsize=16, color='b')
-plt.xlabel("數量", fontsize=12, color='b')
-plt.ylabel("年度", fontsize=12, color='b')
+plt.title("銷售報表", fontsize=16, color="b")
+plt.xlabel("數量", fontsize=12, color="b")
+plt.ylabel("年度", fontsize=12, color="b")
 plt.legend()
 
 
 # 第五張圖
 plt.subplot(235)
-
 
 
 # 第六張圖
@@ -903,7 +904,6 @@ plt.subplot(231)
 plt.subplot(232)
 
 
-
 # 第三張圖
 plt.subplot(233)
 
@@ -914,7 +914,6 @@ plt.subplot(234)
 
 # 第五張圖
 plt.subplot(235)
-
 
 
 # 第六張圖
@@ -930,20 +929,20 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-N = 20                                      # 長條個數
-theta = np.linspace(0.0, 2 * np.pi, N)      # 角度個數
-radius = 10 * np.random.rand(N)             # 半徑個數
-width = np.pi / 4 * np.random.rand(N)       # 寬度個數
-colors = plt.cm.hsv(radius / 10)            # 色彩個數
+N = 20  # 長條個數
+theta = np.linspace(0.0, 2 * np.pi, N)  # 角度個數
+radius = 10 * np.random.rand(N)  # 半徑個數
+width = np.pi / 4 * np.random.rand(N)  # 寬度個數
+colors = plt.cm.hsv(radius / 10)  # 色彩個數
 
-ax = plt.subplot(projection='polar')        # 建立子圖
+ax = plt.subplot(projection="polar")  # 建立子圖
 
 print(theta)
 print(radius)
 print(width)
 
 # 繪製極座標長條圖
-ax.bar(theta,radius,width,bottom=0.0,alpha=0.8,color=colors)
+ax.bar(theta, radius, width, bottom=0.0, alpha=0.8, color=colors)
 
 plt.show()
 
@@ -973,11 +972,11 @@ dice_count(sides)  # 將骰子串列轉成次數串列
 x = np.arange(6)  # 長條圖x軸座標
 width = 0.35  # 長條圖寬度
 
-#狀況一
+# 狀況一
 plt.bar(x, frequencies, width, color="g")  # 繪製長條圖
 plt.xlabel("骰子點數")
-plt.ylabel('出現次數',color='b')
-plt.title('測試 600次 ',fontsize=16,color='b')
+plt.ylabel("出現次數", color="b")
+plt.title("測試 600次 ", fontsize=16, color="b")
 plt.xticks(x, ("1", "2", "3", "4", "5", "6"))
 plt.yticks(np.arange(0, 150, 15))
 """
@@ -999,19 +998,19 @@ width = 0.35  # 長條圖寬度
 plt.xticks(x)
 plt.bar(x, y, width, color="g")  # 繪製長條圖
 
-#-----------------
+# -----------------
 # 雙色的長條圖
 x = np.arange(1, 6)
 plt.bar(x - 0.4, [3, 10, 8, 12, 6], width=0.4, ec="none", fc="#e63946")
 plt.bar(x, [6, 3, 12, 5, 8], width=0.4, ec="none", fc="#7fb069")
 
-#-----------------
+# -----------------
 
 
-#-----------------
+# -----------------
 
 
-#-----------------
+# -----------------
 
 
 # 雙向的長條圖
@@ -1022,7 +1021,7 @@ plt.barh(x, A, fc="#e63946", ec="none")
 plt.barh(x, -B, fc="#7fb069", ec="none")
 
 
-#-----------------
+# -----------------
 
 # 設定長條圖橫軸標籤
 x = [1, 2, 3, 4, 5]
@@ -1030,10 +1029,10 @@ y = [12, 41, 32, 36, 21]
 labels = ["鼠", "牛", "虎", "兔", "龍"]
 plt.bar(x, y, tick_label=labels)
 
-#-----------------
+# -----------------
 
 
-#-----------------
+# -----------------
 
 
 print("------------------------------------------------------------")  # 60個
@@ -1041,10 +1040,6 @@ print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
 sys.exit()
-
-
-
-
 
 
 print("新進")
@@ -1091,20 +1086,19 @@ plt.ylim(0, 100)
 """
 
 
-
 cc = np.arange(0.6, 5)
 print(cc)
 
 # 預設大小為6.4inches*4.8inches, 80dpi
 # 指定 寬6.4inches, 高4.8inches, 160dpi
-#fig, ax = plt.subplots(figsize=(6.4, 4.8), dpi=160)
+# fig, ax = plt.subplots(figsize=(6.4, 4.8), dpi=160)
 
 
 money = [1.5e6, 2.5e6, 5.5e6, 7.0e6]
 
 
 def millions(x, pos):
-    #The two args are the value and tick position.
+    # The two args are the value and tick position.
     return "${:1.1f}M".format(x * 1e-6)
 
 
