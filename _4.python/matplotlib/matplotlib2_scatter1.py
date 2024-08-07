@@ -1,6 +1,9 @@
-# scatter 集合
-# 散布圖 Scatter Chart
-# 散點圖
+"""
+scatter 集合
+散布圖 Scatter Chart
+散點圖
+
+"""
 
 N = 500
 
@@ -10,6 +13,7 @@ print("------------------------------------------------------------")  # 60個
 import os
 import sys
 import math
+import time
 import random
 import numpy as np
 import pandas as pd

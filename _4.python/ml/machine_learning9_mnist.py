@@ -34,6 +34,25 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
+import tensorflow as tf
+from urllib.request import urlretrieve
+import numpy as np
+import gradio as gr
+from PIL import Image
+
+# Loading the MNIST model and data
+# 可下載最新之 .h5 檔案
+# urlretrieve("https://gr-models.s3-us-west-2.amazonaws.com/mnist-model.h5", "mnist-model.h5")
+# mnist-model.h5 路徑不能含中文
+mnist_model_filename = "C:/_git/vcs/_big_files/mnist-model.h5"
+model = tf.keras.models.load_model(mnist_model_filename)
+
+(x_train, y_train), (x_test, y_test) = tf.keras.datasets.mnist.load_data(
+    path='mnist.npz'
+)
+
+print("------------------------------------------------------------")  # 60個
+
 print("畫出 mnist 數據集訓練資料的前256筆... 久")
 
 # MNIST手寫數字辨識資料集

@@ -114,33 +114,6 @@ for i in range(len(dist)):
 
 print('------------------------------------------------------------')	#60個
 
-df = pd.read_csv('iris.csv')
-
-print(df.shape)
-
-print(df.head(5))
-
-print(df.describe())
-
-target_mapping = {"setosa": 0,
-          "versicolor": 1,
-          "virginica": 2}
-Y = df["target"].map(target_mapping)
-colmap = np.array(["r", "g", "y"])
-plt.figure(figsize=(10,5))
-
-plt.subplot(1, 2, 1)
-plt.subplots_adjust(hspace = .5)
-plt.scatter(df["sepal_length"], df["sepal_width"], color=colmap[Y])
-plt.xlabel("Sepal Length")
-plt.ylabel("Sepal Width")
-
-plt.subplot(1, 2, 2)
-plt.scatter(df["petal_length"], df["petal_width"], color=colmap[Y])
-plt.xlabel("Petal Length")
-plt.ylabel("Petal Width")
-
-plt.show()
 
 print('------------------------------------------------------------')	#60個
 
@@ -148,9 +121,14 @@ print('------------------------------------------------------------')	#60個
 print('------------------------------------------------------------')	#60個
 
 
+print("------------------------------------------------------------")  # 60個
 
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
+
 
 
 
