@@ -1,5 +1,6 @@
 """
 
+kilo 不可安裝 pip install sklearn
 
 
 """
