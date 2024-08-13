@@ -20,6 +20,7 @@ print("------------------------------------------------------------")  # 60個
 import os
 import sys
 import math
+import time
 import random
 import numpy as np
 import pandas as pd
@@ -34,7 +35,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 #          編號                                     圖像大小[英吋]      解析度    背景色                      邊框顏色                      邊框有無
 plt.figure(
     num="不使用subplot畫多圖",
@@ -418,7 +419,6 @@ ax5 = plt.subplot2grid((3, 3), (2, 1))
 
 plt.show()
 
-'''
 print("------------------------------------------------------------")  # 60個
 
 import matplotlib.gridspec as gridspec
@@ -1063,6 +1063,26 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
+x = np.linspace(0, 2 * np.pi, num=100, endpoint=True)
+y = np.sin(x)
+
+# 建立 3 x 3 的子圖
+fig, axs = plt.subplots(figsize=(12, 8),nrows=3, ncols=3, sharex=True, sharey=True)
+
+axs[0, 0].plot(x,y)
+axs[0, 1].plot(x,y)
+axs[0, 2].plot(x,y)
+axs[1, 0].plot(x,y)
+axs[1, 1].plot(x,y)
+axs[1, 2].plot(x,y)
+axs[2, 0].plot(x,y)
+axs[2, 1].plot(x,y)
+axs[2, 2].plot(x,y)
+
+plt.tight_layout()
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 

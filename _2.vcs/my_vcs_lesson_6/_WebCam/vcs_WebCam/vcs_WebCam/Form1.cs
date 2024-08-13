@@ -13,10 +13,11 @@ using System.Diagnostics;       //for Process
 using System.Runtime.InteropServices;   //for dll
 
 using AForge.Video;             //需要添加這兩個.dll, 參考/加入參考/瀏覽此二檔
-using AForge.Video.DirectShow;
+using AForge.Video.DirectShow;  // Video Recording
 //using AForge.Video.FFMPEG;      //for VideoFileWriter
 
 using AForge.Vision.Motion;     // Motion detection
+
 /*
 移動偵測 需要 參考/加入參考/選取以下3個dll
 AForge.dll
@@ -55,8 +56,8 @@ namespace vcs_WebCam
         private const int S_FALSE = 1;     //system return FALSE
         private const int BORDER = 10;
 
-        private const int W_groupBox1 = 640 * 2 + BORDER;
-        private const int H_groupBox1 = 220;
+        private const int W_groupBox_webcam = 640 * 2 + BORDER;
+        private const int H_groupBox_webcam = 220;
         private const int W_pictureBox1 = 640;
         private const int H_pictureBox1 = 480;
         private const int W_richTextBox1 = 640;
@@ -74,8 +75,6 @@ namespace vcs_WebCam
         int webcam_w = 0;
         int webcam_h = 0;
         int webcam_fps = 0;
-
-        bool debug_mode = true;
 
         bool flag_motion_detection = false;
         MotionDetector motion_detector;
@@ -185,6 +184,38 @@ namespace vcs_WebCam
             pictureBox1.Image = vcs_WebCam.Properties.Resources.chicken;
         }
 
+        //窗口關閉事件
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            try
+            {
+                if (Cam != null)
+                {
+                    //關閉WebCam
+                    if (Cam.IsRunning)  // When Form1 closes itself, WebCam must stop, too.
+                    {
+                        Cam.Stop();   // WebCam stops capturing images.
+                        Cam.SignalToStop();
+                        Cam.WaitForStop();
+                        while (Cam.IsRunning)
+                        {
+                        }
+                        Cam = null;
+                    }
+                }
+                //System.Environment.Exit(0);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+            //C# 強制關閉 Process
+            Process.GetCurrentProcess().Kill();
+
+            Application.Exit();
+        }
+
         void show_item_location()
         {
             int x_st;
@@ -192,17 +223,17 @@ namespace vcs_WebCam
             int dx;
             int dy;
 
-            groupBox1.Size = new Size(W_groupBox1, H_groupBox1);
-            groupBox1.Location = new Point(BORDER, BORDER);
+            groupBox_webcam.Size = new Size(W_groupBox_webcam, H_groupBox_webcam);
+            groupBox_webcam.Location = new Point(BORDER, BORDER);
 
             pictureBox1.Size = new Size(W_pictureBox1, H_pictureBox1);
-            pictureBox1.Location = new Point(BORDER, BORDER + H_groupBox1 + BORDER);
+            pictureBox1.Location = new Point(BORDER, BORDER + H_groupBox_webcam + BORDER);
 
             richTextBox1.Size = new Size(W_richTextBox1, H_richTextBox1);
-            richTextBox1.Location = new Point(BORDER + W_pictureBox1 + BORDER, BORDER + H_groupBox1 + BORDER);
+            richTextBox1.Location = new Point(BORDER + W_pictureBox1 + BORDER, BORDER + H_groupBox_webcam + BORDER);
 
-            int w = BORDER + W_groupBox1 + BORDER;
-            int h = BORDER + H_groupBox1 + BORDER + H_pictureBox1 + BORDER;
+            int w = BORDER + W_groupBox_webcam + BORDER;
+            int h = BORDER + H_groupBox_webcam + BORDER + H_pictureBox1 + BORDER;
             this.ClientSize = new Size(w, h);
 
             int W = Screen.PrimaryScreen.WorkingArea.Width;
@@ -210,12 +241,11 @@ namespace vcs_WebCam
 
             this.Location = new Point((W - w) / 2, (H - h) / 2);    //置中顯示
 
-            w = (W_groupBox1 - BORDER * 5 - 100) / 4;
+            w = (W_groupBox_webcam - BORDER * 5 - 100) / 4;
             h = 190;
-            groupBox2.Size = new Size(w, h);
-            groupBox3.Size = new Size(w, h);
-            groupBox4.Size = new Size(w + 100, h);
-            groupBox5.Size = new Size(w, h);
+            groupBox1.Size = new Size(w, h);
+            groupBox2.Size = new Size(w + 100, h);
+            groupBox3.Size = new Size(w + 100, h);
 
             //button
             x_st = BORDER;
@@ -225,47 +255,11 @@ namespace vcs_WebCam
             dy = 42;
             y_st = BORDER * 2;
 
-            if (debug_mode == true)
-            {
-                groupBox2.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-                groupBox3.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-                groupBox4.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-                groupBox5.Location = new Point(x_st + dx * 3 + 100, y_st + dy * 0);
-            }
-            else
-            {
-                groupBox2.Visible = false;
-                groupBox3.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-                groupBox4.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-                groupBox5.Location = new Point(x_st + dx * 2 + 100, y_st + dy * 0);
-                groupBox5.Size = new Size(w + 250, h);
-                richTextBox1.Visible = false;
-                bt_record.Visible = false;
-                bt_clear.Visible = false;
-                cb_image_processing.Visible = false;
-                cb_auto_save.Visible = false;
-                cb_show_grid.Visible = false;
-                rb1.Visible = false;
-                rb2.Visible = false;
-                rb3.Visible = false;
-            }
+            groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            groupBox2.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            groupBox3.Location = new Point(x_st + dx * 2 + 100, y_st + dy * 0);
 
-            //groupBox2
-            x_st = BORDER;
-            y_st = BORDER * 2;
-            dx = 80;
-            dy = 30;
-            checkBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            checkBox2.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            checkBox3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
-            radioButton1.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            radioButton2.Location = new Point(x_st + dx * 1, y_st + dy * 2);
-            checkBox1.Enabled = false;
-            checkBox2.Enabled = false;
-            radioButton1.Enabled = false;
-            radioButton2.Enabled = false;
-
-            //groupBox3
+            //groupBox1
             x_st = BORDER;
             y_st = BORDER * 2;
             dx = 210;
@@ -281,7 +275,7 @@ namespace vcs_WebCam
             comboBox2.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             comboBox3.Location = new Point(x_st + dx * 0, y_st + dy * 5);
 
-            //groupBox4
+            //groupBox2
             x_st = BORDER;
             y_st = BORDER * 2;
             dx = 80;
@@ -320,7 +314,7 @@ namespace vcs_WebCam
             rb_4X4.Visible = false;
             rb_5X5.Visible = false;
 
-            //groupBox5
+            //groupBox3
             x_st = BORDER;
             y_st = BORDER * 2;
             dx = 80;
@@ -357,38 +351,6 @@ namespace vcs_WebCam
         private void bt_clear_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
-        }
-
-        //窗口關閉事件
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            try
-            {
-                if (Cam != null)
-                {
-                    //關閉WebCam
-                    if (Cam.IsRunning)  // When Form1 closes itself, WebCam must stop, too.
-                    {
-                        Cam.Stop();   // WebCam stops capturing images.
-                        Cam.SignalToStop();
-                        Cam.WaitForStop();
-                        while (Cam.IsRunning)
-                        {
-                        }
-                        Cam = null;
-                    }
-                }
-                //System.Environment.Exit(0);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-
-            //C# 強制關閉 Process
-            Process.GetCurrentProcess().Kill();
-
-            Application.Exit();
         }
 
         void Init_WebcamSetup()         //讀出目前相機資訊 存在各list, comboBox1~3和richTextBox1裏
@@ -1166,7 +1128,7 @@ namespace vcs_WebCam
             {
                 flag_fullscreen = true;
                 show_main_message("全螢幕", S_OK, 20);
-                groupBox1.Visible = false;
+                groupBox_webcam.Visible = false;
                 richTextBox1.Visible = false;
                 bt_clear.Visible = false;
 
@@ -1184,12 +1146,9 @@ namespace vcs_WebCam
             {
                 flag_fullscreen = false;
                 show_main_message("復原", S_OK, 20);
-                groupBox1.Visible = true;
-                if (debug_mode == true)
-                {
-                    richTextBox1.Visible = true;
-                    bt_clear.Visible = true;
-                }
+                groupBox_webcam.Visible = true;
+                richTextBox1.Visible = true;
+                bt_clear.Visible = true;
 
                 this.BackColor = System.Drawing.SystemColors.ControlLight;
                 //最大化螢幕
@@ -1198,7 +1157,7 @@ namespace vcs_WebCam
                 //this.StartPosition = FormStartPosition.CenterScreen; //居中顯示
 
                 pictureBox1.Size = new Size(W_pictureBox1, H_pictureBox1);
-                pictureBox1.Location = new Point(BORDER, BORDER + H_groupBox1 + BORDER);
+                pictureBox1.Location = new Point(BORDER, BORDER + H_groupBox_webcam + BORDER);
                 pictureBox1.Focus();
             }
         }
@@ -1240,20 +1199,6 @@ namespace vcs_WebCam
         private void timer_auto_save_Tick(object sender, EventArgs e)
         {
             save_image_to_drive();
-        }
-
-        private void checkBox3_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox3.Checked == true)
-            {
-                richTextBox1.Visible = true;
-                bt_clear.Visible = true;
-            }
-            else
-            {
-                richTextBox1.Visible = false;
-                bt_clear.Visible = false;
-            }
         }
 
         private void cb_auto_save_CheckedChanged(object sender, EventArgs e)
@@ -1432,7 +1377,7 @@ namespace vcs_WebCam
                     {
                         flag_fullscreen = false;
                         show_main_message("復原", S_OK, 20);
-                        groupBox1.Visible = true;
+                        groupBox_webcam.Visible = true;
                         richTextBox1.Visible = true;
                         bt_clear.Visible = true;
 
@@ -1443,7 +1388,7 @@ namespace vcs_WebCam
                         //this.StartPosition = FormStartPosition.CenterScreen; //居中顯示
 
                         pictureBox1.Size = new Size(W_pictureBox1, H_pictureBox1);
-                        pictureBox1.Location = new Point(BORDER, BORDER + H_groupBox1 + BORDER);
+                        pictureBox1.Location = new Point(BORDER, BORDER + H_groupBox_webcam + BORDER);
                         pictureBox1.Focus();
                     }
                     break;
@@ -1497,7 +1442,7 @@ namespace vcs_WebCam
             {
                 flag_fullscreen = true;
                 show_main_message("全螢幕", S_OK, 20);
-                groupBox1.Visible = false;
+                groupBox_webcam.Visible = false;
                 richTextBox1.Visible = false;
                 bt_clear.Visible = false;
 
@@ -1515,12 +1460,9 @@ namespace vcs_WebCam
             {
                 flag_fullscreen = false;
                 show_main_message("復原", S_OK, 20);
-                groupBox1.Visible = true;
-                if (debug_mode == true)
-                {
-                    richTextBox1.Visible = true;
-                    bt_clear.Visible = true;
-                }
+                groupBox_webcam.Visible = true;
+                richTextBox1.Visible = true;
+                bt_clear.Visible = true;
 
                 this.BackColor = System.Drawing.SystemColors.ControlLight;
                 //最大化螢幕
@@ -1529,7 +1471,7 @@ namespace vcs_WebCam
                 //this.StartPosition = FormStartPosition.CenterScreen; //居中顯示
 
                 pictureBox1.Size = new Size(W_pictureBox1, H_pictureBox1);
-                pictureBox1.Location = new Point(BORDER, BORDER + H_groupBox1 + BORDER);
+                pictureBox1.Location = new Point(BORDER, BORDER + H_groupBox_webcam + BORDER);
                 pictureBox1.Focus();
             }
         }

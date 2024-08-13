@@ -42,11 +42,11 @@ plt.figure(
 # 第一張圖
 plt.subplot(231)
 
-radius = 10
+R = 10
 degrees = [x * 15 for x in range(0, 25)]
 print(degrees)
-x = [radius * math.cos(math.radians(d)) for d in degrees]
-y = [radius * math.sin(math.radians(d)) for d in degrees]
+x = [R * math.cos(math.radians(d)) for d in degrees]
+y = [R * math.sin(math.radians(d)) for d in degrees]
 plt.scatter(x, y)
 
 
@@ -59,17 +59,17 @@ for i in range(1000):
     x = random.randint(0, 10) + random.random()
     y = random.randint(0, 10) + random.random()
     if ((x - 5) ** 2 + (y - 5) ** 2) > 25:
-        # print('Reject ({0}, {1})'.format(x, y))
         continue
     else:
         X.append(x)
         Y.append(y)
-print(len(X))
+#print(len(X))
 
 plt.scatter(X, Y)
-print(len(X))
+
 plt.axis([0, 10, 0, 10])
-plt.axis("equal")  # 軸比例
+plt.axis("equal")
+plt.title('蒙地卡羅模擬')
 
 # 第三張圖
 plt.subplot(233)
@@ -112,20 +112,15 @@ plt.title("三群數據")
 # 第四張圖
 plt.subplot(234)
 
-print("繪製散布圖")
+N = 30
+degrees = np.arange(0, 360, N)
+x = np.cos(np.radians(degrees))
+y = np.sin(np.radians(degrees))
 
-filename = "_data/python_ReadWrite_CSV6_score.csv"
+#plt.plot(x, y)
+plt.scatter(x, y)
 
-# 讀入資料
-dat = pd.read_csv(filename, encoding="UTF-8")
 
-# 散布圖
-plt.scatter(dat["數學"], dat["理科"])
-plt.axis("equal")
-
-# 共變異數與相關係數
-correlation = np.corrcoef(dat["數學"], dat["理科"])  # 計算相關係數
-correlation[0, 1]  # 顯示在畫面
 
 # 第五張圖
 plt.subplot(235)
@@ -143,6 +138,20 @@ plt.yticks(np.arange(0, 12, step=1.0))
 
 # 第六張圖
 plt.subplot(236)
+
+N = 30
+colorused = ["b", "c", "g", "k", "m", "r", "y"]  # 定義顏色
+colors = []  # 建立色彩數列
+for i in range(N):  # 隨機設定顏色
+    colors.append(np.random.choice(colorused))
+
+x = np.random.randint(1, 11, N)  # 建立 x
+y = np.random.randint(1, 11, N)  # 建立 y
+size = (N * np.random.rand(N)) ** 2  # 散點大小數列
+plt.scatter(x, y, s=size, c=colors)  # 繪製散點
+
+plt.xticks(np.arange(0, 12, step=1.0))  # x 軸刻度
+plt.yticks(np.arange(0, 12, step=1.0))  # y 軸刻度
 
 
 plt.show()
@@ -163,12 +172,10 @@ plt.figure(
 plt.subplot(231)
 
 # 使用隨機陣列產生圖像
-# 一般random
 x = np.random.rand(10000)  # N個0~1之間的亂數
 y = np.random.rand(10000)
 plt.scatter(x, y, c=y, cmap="hsv")  # 色彩依 y 軸值變化
-plt.colorbar()
-
+#plt.colorbar()
 
 # 第二張圖
 plt.subplot(232)
@@ -192,8 +199,6 @@ for i in range(1, num):  # 建立點的座標
     loc(i)
 t = x  # 色彩隨x軸變化
 plt.scatter(x, y, s=2, c=t, cmap="brg")
-plt.axis("off")  # 隱藏座標
-
 
 # 第三張圖
 plt.subplot(233)
@@ -345,10 +350,37 @@ grid(True, ls="-", c="#a0a0a0")
 # 第五張圖
 plt.subplot(235)
 
+"""
+額外設定 s、c 和 cmap，就能根據資料點的數據，對應出指定的顏色，
+假設資料的範圍是 0～100，顏色地圖是紅橙黃綠藍，
+則 0～20 對應紅色，21～40 對應橙色，
+41～60 對應黃色，61～80 對應綠色，81～100 對應藍色。
+"""
+
+x = range(1, 11)  # 1 2 3 ... 10
+y = range(1, 11)  # 1 2 3 ... 10
+X, Y = np.meshgrid(x, y)
+
+size = [i * 80 for i in Y]  # 放大資料點數據 N 倍，比較容易觀察尺寸
+
+plt.scatter(X, Y, s=size, c=size, cmap="Set1")  # 使用 Set1 的 colormap
+#plt.colorbar()
+
 
 # 第六張圖
 plt.subplot(236)
 
+# 加上 vmin 和 vmax 的設定，能設定顏色的最大值與最小值
+# 當數值小於 vmin 時，只會顯示紅色，當數值大於 vmax 時，只會顯示灰色。
+
+x = range(1, 11)  # 1 2 3 ... 10
+y = range(1, 11)  # 1 2 3 ... 10
+X, Y = np.meshgrid(x, y)
+
+size = [i * 80 for i in Y]  # 放大資料點數據 N 倍，比較容易觀察尺寸
+
+plt.scatter(X, Y, s=size, c=size, cmap="Set1", vmin=200, vmax=650)
+#plt.colorbar()
 
 plt.show()
 
@@ -367,37 +399,56 @@ plt.figure(
 # 第一張圖
 plt.subplot(231)
 
-"""
-額外設定 s、c 和 cmap，就能根據資料點的數據，對應出指定的顏色，
-假設資料的範圍是 0～100，顏色地圖是紅橙黃綠藍，
-則 0～20 對應紅色，21～40 對應橙色，
-41～60 對應黃色，61～80 對應綠色，81～100 對應藍色。
-"""
+N = 50  # 散點的數量
+r = 0.5  # 邊界線boundary半徑
+x = np.random.rand(N)  # 隨機的 x 座標點
+y = np.random.rand(N)  # 隨機的 y 座標點
+size = []
+for i in range(N):  # 建立散點區域陣列
+    size.append(30)
+colorused = ["b", "c", "g", "k", "m", "r", "y"]  # 定義顏色
+colors = []
+for i in range(N):  # 隨機設定 N 個顏色
+    colors.append(np.random.choice(colorused))
 
-x = range(1, 11)  # 1 2 3 ... 10
-y = range(1, 11)  # 1 2 3 ... 10
-X, Y = np.meshgrid(x, y)
+size1 = np.ma.masked_where(x < r, size)  # 邊界線 0.5 內區域遮罩
+size2 = np.ma.masked_where(x >= r, size)  # 邊界線 0.5 (含)外區域遮罩
 
-size = [i * 80 for i in Y]  # 放大資料點數據 N 倍，比較容易觀察尺寸
+# 大於或等於 0.5 繪製星形, 小於 0.5 繪製圓形
+plt.scatter(x, y, s=size1, marker="*", c=colors)
+plt.scatter(x, y, s=size2, marker="o", c=colors)
 
-plt.scatter(X, Y, s=size, c=size, cmap="Set1")  # 使用 Set1 的 colormap
-plt.colorbar()
+# 繪製邊界線
+plt.plot((0.5, 0.5), (0, 1.0))  # 繪製邊界線
+plt.xticks(np.arange(0, 1.1, step=0.1))
+plt.yticks(np.arange(0, 1.1, step=0.1))
 
 # 第二張圖
 plt.subplot(232)
 
-# 加上 vmin 和 vmax 的設定，能設定顏色的最大值與最小值
-# 當數值小於 vmin 時，只會顯示紅色，當數值大於 vmax 時，只會顯示灰色。
+N = 50  # 散點的數量
+r = 0.5  # 邊界線boundary半徑
+x = np.random.rand(N)  # 隨機的 x 座標點
+y = np.random.rand(N)  # 隨機的 y 座標點
+size = np.random.randint(20, 100, N)  # 散點大小
+colorused = ["b", "c", "g", "k", "m", "r", "y"]  # 定義顏色
+colors = []
+for i in range(N):  # 隨機設定 N 個顏色
+    colors.append(np.random.choice(colorused))
 
-x = range(1, 11)  # 1 2 3 ... 10
-y = range(1, 11)  # 1 2 3 ... 10
-X, Y = np.meshgrid(x, y)
+r1 = np.sqrt(x**2 + y**2)  # 計算距離
+size1 = np.ma.masked_where(r1 < r, size)  # 邊界線 0.5 內區域遮罩
+size2 = np.ma.masked_where(r1 >= r, size)  # 邊界線 0.5 (含)外區域遮罩
 
-size = [i * 80 for i in Y]  # 放大資料點數據 N 倍，比較容易觀察尺寸
+# 大於或等於 0.5 繪製星形, 小於 0.5 繪製圓形
+plt.scatter(x, y, s=size1, marker="*", c=colors)
+plt.scatter(x, y, s=size2, marker="o", c=colors)
 
-plt.scatter(X, Y, s=size, c=size, cmap="Set1", vmin=200, vmax=650)
-plt.colorbar()
-
+# 計算 0.5Pi 之弧度, 依據弧度產生的座標點繪製邊界線
+radian = np.arange(0, np.pi / 2, 0.01)
+plt.plot(r * np.cos(radian), r * np.sin(radian))  # 繪製邊界線
+plt.xticks(np.arange(0, 1.1, step=0.1))
+plt.yticks(np.arange(0, 1.1, step=0.1))
 
 # 第三張圖
 plt.subplot(233)
@@ -629,8 +680,7 @@ colors = rng.rand(50)  # 隨機產生50個用于顏色映射的數值
 sizes = 700 * rng.rand(50)  # 隨機產生50個用于改變散點面積的數值
 
 plt.scatter(x, y, c=colors, s=sizes, alpha=0.3, cmap="viridis")
-plt.colorbar()  # 顯示顏色條
-
+#plt.colorbar()
 
 # 第三張圖
 plt.subplot(233)
@@ -646,8 +696,7 @@ sizes = 700 * rng.rand(50)
 changecolor = colors.Normalize(vmin=0.4, vmax=0.8)
 
 plt.scatter(x, y, c=color, s=sizes, alpha=0.3, cmap="viridis", norm=changecolor)
-plt.colorbar()
-
+#plt.colorbar()
 
 # 第四張圖
 plt.subplot(234)
@@ -697,87 +746,126 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-plt.figure(
-    num="scatter 集合 6",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
+print("------------------------------------------------------------")  # 60個
 
-# 第一張圖
-plt.subplot(231)
+print("scatter參數大合集")
 
+plt.figure(figsize=(12, 8))
 
-# 第二張圖
-plt.subplot(232)
+x = np.random.randn(N)
+y = np.random.randn(N)
 
-N = 50  # 散點的數量
-r = 0.5  # 邊界線boundary半徑
-x = np.random.rand(N)  # 隨機的 x 座標點
-y = np.random.rand(N)  # 隨機的 y 座標點
-size = []
-for i in range(N):  # 建立散點區域陣列
-    size.append(30)
-colorused = ["b", "c", "g", "k", "m", "r", "y"]  # 定義顏色
-colors = []
-for i in range(N):  # 隨機設定 N 個顏色
-    colors.append(np.random.choice(colorused))
+plt.scatter(x, y)
+# plt.scatter(x, y, marker="^", color="red") # 指名marker和顏色
+# plt.scatter(x, y, s=30)# 設定資料點的大小
+plt.scatter(x, y, c="r", s=100)  # 指定顏色與大小
 
-size1 = np.ma.masked_where(x < r, size)  # 邊界線 0.5 內區域遮罩
-size2 = np.ma.masked_where(x >= r, size)  # 邊界線 0.5 (含)外區域遮罩
+# 給散佈圖的點套上不同深淺顏色
+# c = np.random.choice(np.arange(100), 100)
+# plt.scatter(x, y, s=c, c=c, cmap="viridis")
 
-# 大於或等於 0.5 繪製星形, 小於 0.5 繪製圓形
-plt.scatter(x, y, s=size1, marker="*", c=colors)
-plt.scatter(x, y, s=size2, marker="o", c=colors)
+""" 各種scatter的語法
+plt.scatter(x, y, alpha=0.3)
+plt.scatter(x, y, alpha=0.5, s=100)
 
-# 繪製邊界線
-plt.plot((0.5, 0.5), (0, 1.0))  # 繪製邊界線
-plt.xticks(np.arange(0, 1.1, step=0.1))
-plt.yticks(np.arange(0, 1.1, step=0.1))
+plt.scatter(x, y, alpha=0.5, s=100, color="red")
+plt.scatter(x, y, alpha=0.5, s=100, color="blue")
 
+print("color：顏色串列， color=['r','g','b','c','m'], 若有多組數據 依序顯示顏色")
+print("alpha : 透明度")
 
-# 第三張圖
-plt.subplot(233)
+"""
 
-N = 50  # 散點的數量
-r = 0.5  # 邊界線boundary半徑
-x = np.random.rand(N)  # 隨機的 x 座標點
-y = np.random.rand(N)  # 隨機的 y 座標點
-size = np.random.randint(20, 100, N)  # 散點大小
-colorused = ["b", "c", "g", "k", "m", "r", "y"]  # 定義顏色
-colors = []
-for i in range(N):  # 隨機設定 N 個顏色
-    colors.append(np.random.choice(colorused))
+plt.title("scatter參數大合集")
+plt.xlabel("")
+plt.ylabel("")
 
-r1 = np.sqrt(x**2 + y**2)  # 計算距離
-size1 = np.ma.masked_where(r1 < r, size)  # 邊界線 0.5 內區域遮罩
-size2 = np.ma.masked_where(r1 >= r, size)  # 邊界線 0.5 (含)外區域遮罩
+plt.show()
 
-# 大於或等於 0.5 繪製星形, 小於 0.5 繪製圓形
-plt.scatter(x, y, s=size1, marker="*", c=colors)
-plt.scatter(x, y, s=size2, marker="o", c=colors)
+print("------------------------------------------------------------")  # 60個
 
-# 計算 0.5Pi 之弧度, 依據弧度產生的座標點繪製邊界線
-radian = np.arange(0, np.pi / 2, 0.01)
-plt.plot(r * np.cos(radian), r * np.sin(radian))  # 繪製邊界線
-plt.xticks(np.arange(0, 1.1, step=0.1))
-plt.yticks(np.arange(0, 1.1, step=0.1))
+""" TBD
+def loc(index):
+    # 處理座標的移動
+    x_mov = random.choice([-3, 3])  # 隨機x軸移動值
+    xloc = x[index - 1] + x_mov  # 計算x軸新位置
+    y_mov = random.choice([-5, -1, 1, 5])  # 隨機y軸移動值
+    yloc = y[index - 1] + y_mov  # 計算y軸新位置
+    x.append(xloc)  # x軸新位置加入串列
+    y.append(yloc)  # y軸新位置加入串列
 
 
-# 第四張圖
-plt.subplot(234)
+num = 10000  # 設定隨機點的數量
+x = [0]  # 設定第一次執行x座標
+y = [0]  # 設定第一次執行y座標
+
+for i in range(1, num):  # 建立點的座標
+    loc(i)
+
+t = x  # 色彩隨x軸變化
+plt.scatter(x, y, s=2, c=t, cmap="brg")
+plt.show()
+"""
+print("------------------------------------------------------------")  # 60個
 
 
-# 第五張圖
-plt.subplot(235)
+""" TBD
+def loc(index):
+    # 處理座標的移動
+    x_mov = random.choice([-3, 3])  # 隨機x軸移動值
+    xloc = x[index - 1] + x_mov  # 計算x軸新位置
+    y_mov = random.choice([-5, -1, 1, 5])  # 隨機y軸移動值
+    yloc = y[index - 1] + y_mov  # 計算y軸新位置
+    x.append(xloc)  # x軸新位置加入串列
+    y.append(yloc)  # y軸新位置加入串列
 
 
-# 第六張圖
-plt.subplot(236)
+num = 10000  # 設定隨機點的數量
+x = [0]  # 設定第一次執行x座標
+y = [0]  # 設定第一次執行y座標
 
+for i in range(1, num):  # 建立點的座標
+    loc(i)
+t = x  # 色彩隨x軸變化
+plt.scatter(x, y, s=2, c=t, cmap="brg")
+# plt.axes().get_xaxis().set_visible(False)   # 隱藏x軸座標
+# plt.axes().get_yaxis().set_visible(False)   # 隱藏y軸座標
+
+plt.show()
+"""
+print("------------------------------------------------------------")  # 60個
+
+print("散佈圖")
+
+fig, ax = plt.subplots()
+
+N = 50
+x = np.random.randint(30, size=N)
+y = np.random.randint(30, size=N)
+c = np.random.randint(30, size=N)
+size = np.random.randint(10, size=N) * 400
+
+sc = ax.scatter(x=x, y=y, c=c, s=c, alpha=0.5, label="scatter plot")
+
+ax.set_xlabel("X軸", loc="left")
+ax.set_ylabel("Y軸", loc="top")
+ax.legend(loc=1)
+cbar = fig.colorbar(sc)
+cbar.set_label("Z軸", loc="center")
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+n = 1024
+X = np.random.normal(0, 1, n)
+Y = np.random.normal(0, 1, n)
+T = np.arctan2(Y, X)
+
+plt.scatter(X, Y, s=75, c=T, alpha=0.5)
+
+plt.xlim(-3.5, 3.5)
+plt.ylim(-3.5, 3.5)
 
 plt.show()
 
@@ -786,7 +874,43 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
+""" TBD
+def loc(index):
+    # 處理座標的移動
+    x_mov = random.choice([-3, 3])  # 隨機x軸移動值
+    xloc = x[index - 1] + x_mov  # 計算x軸新位置
+    y_mov = random.choice([-5, -1, 1, 5])  # 隨機y軸移動值
+    yloc = y[index - 1] + y_mov  # 計算y軸新位置
+    x.append(xloc)  # x軸新位置加入串列
+    y.append(yloc)  # y軸新位置加入串列
+
+
+num = 10000  # 設定隨機點的數量
+x = [0]  # 設定第一次執行x座標
+y = [0]  # 設定第一次執行y座標
+
+for i in range(1, num):  # 建立點的座標
+    loc(i)
+t = x  # 色彩隨x軸變化
+plt.scatter(x, y, s=2, c=t, cmap="brg")
+plt.show()
+"""
 print("------------------------------------------------------------")  # 60個
+
+
+""" fail
+#zip 高級組合法
+
+xx = [1, 2, 3, 4]
+yy = [5, 6, 7, 8]
+list(zip(xx, yy))
+
+Z = list(zip(X, Y))
+print(Z)
+
+plt.scatter(X, Y, s = 50, c = Z)
+plt.show()
+"""
 
 print("------------------------------------------------------------")  # 60個
 
@@ -796,6 +920,13 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
+print("------------------------------------------------------------")  # 60個
+sys.exit()
+print("------------------------------------------------------------")  # 60個
+
+
+
+
 print("------------------------------------------------------------")  # 60個
 
 
@@ -871,302 +1002,6 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-print("------------------------------------------------------------")  # 60個
-
-print("scatter參數大合集")
-
-plt.figure(figsize=(12, 8))
-
-x = np.random.randn(N)
-y = np.random.randn(N)
-
-plt.scatter(x, y)
-# plt.scatter(x, y, marker="^", color="red") # 指名marker和顏色
-# plt.scatter(x, y, s=30)# 設定資料點的大小
-plt.scatter(x, y, c="r", s=100)  # 指定顏色與大小
-
-# 給散佈圖的點套上不同深淺顏色
-# c = np.random.choice(np.arange(100), 100)
-# plt.scatter(x, y, s=c, c=c, cmap="viridis")
-
-""" 各種scatter的語法
-plt.scatter(x, y, alpha=0.3)
-plt.scatter(x, y, alpha=0.5, s=100)
-
-plt.scatter(x, y, alpha=0.5, s=100, color="red")
-plt.scatter(x, y, alpha=0.5, s=100, color="blue")
-
-print("color：顏色串列， color=['r','g','b','c','m'], 若有多組數據 依序顯示顏色")
-print("alpha : 透明度")
-
-"""
-
-plt.title("scatter參數大合集")
-plt.xlabel("")
-plt.ylabel("")
-
-plt.show()
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-def loc(index):
-    # 處理座標的移動
-    x_mov = random.choice([-3, 3])  # 隨機x軸移動值
-    xloc = x[index - 1] + x_mov  # 計算x軸新位置
-    y_mov = random.choice([-5, -1, 1, 5])  # 隨機y軸移動值
-    yloc = y[index - 1] + y_mov  # 計算y軸新位置
-    x.append(xloc)  # x軸新位置加入串列
-    y.append(yloc)  # y軸新位置加入串列
-
-
-num = 10000  # 設定隨機點的數量
-x = [0]  # 設定第一次執行x座標
-y = [0]  # 設定第一次執行y座標
-
-for i in range(1, num):  # 建立點的座標
-    loc(i)
-t = x  # 色彩隨x軸變化
-plt.scatter(x, y, s=2, c=t, cmap="brg")
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-
-def loc(index):
-    # 處理座標的移動
-    x_mov = random.choice([-3, 3])  # 隨機x軸移動值
-    xloc = x[index - 1] + x_mov  # 計算x軸新位置
-    y_mov = random.choice([-5, -1, 1, 5])  # 隨機y軸移動值
-    yloc = y[index - 1] + y_mov  # 計算y軸新位置
-    x.append(xloc)  # x軸新位置加入串列
-    y.append(yloc)  # y軸新位置加入串列
-
-
-num = 10000  # 設定隨機點的數量
-x = [0]  # 設定第一次執行x座標
-y = [0]  # 設定第一次執行y座標
-
-for i in range(1, num):  # 建立點的座標
-    loc(i)
-t = x  # 色彩隨x軸變化
-plt.scatter(x, y, s=2, c=t, cmap="brg")
-# plt.axes().get_xaxis().set_visible(False)   # 隱藏x軸座標
-# plt.axes().get_yaxis().set_visible(False)   # 隱藏y軸座標
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-print("散佈圖")
-
-fig, ax = plt.subplots()
-
-N = 50
-x = np.random.randint(30, size=N)
-y = np.random.randint(30, size=N)
-c = np.random.randint(30, size=N)
-size = np.exp(np.random.randint(10, size=N) * 200)
-sc = ax.scatter(x=x, y=y, c=c, s=c, alpha=0.5, label="scatter plot")
-
-ax.set_xlabel("X軸", loc="left")
-ax.set_ylabel("Y軸", loc="top")
-ax.legend(loc=1)
-cbar = fig.colorbar(sc)
-cbar.set_label("Z軸", loc="center")
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-n = 1024
-X = np.random.normal(0, 1, n)
-Y = np.random.normal(0, 1, n)
-T = np.arctan2(Y, X)
-
-plt.scatter(X, Y, s=75, c=T, alpha=0.5)
-
-plt.xlim(-1.5, 1.5)
-plt.xticks(())
-plt.ylim(-1.5, 1.5)
-plt.yticks(())
-
-plt.tight_layout()
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-x = np.random.rand(10)
-y = np.random.rand(10)
-colors = np.array(["b", "c", "g", "k", "m", "r", "y", "pink", "purple", "orange"])
-
-# 建立 1 x 3 的子圖
-fig, axs = plt.subplots(nrows=1, ncols=3, sharex=True, sharey=True)
-
-# 建立多邊形標記
-axs[0].scatter(x, y, s=75, c=colors, marker=(5, 0))
-axs[0].set_title("多邊形marker=(5, 0)")
-axs[0].axis("square")  # 建立矩形子圖
-
-# 建立星形標記
-axs[1].scatter(x, y, s=75, c=colors, marker=(5, 1))
-axs[1].set_title("星狀形marker=(5, 1)")
-axs[1].axis("square")  # 建立矩形子圖
-
-# 建立鑽石標記
-axs[2].scatter(x, y, s=75, c=colors, marker=(5, 2))
-axs[2].set_title("鑽石形marker=(5, 2)")
-axs[2].axis("square")  # 建立矩形子圖
-
-plt.tight_layout()
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-x = np.random.rand(10)
-y = np.random.rand(10)
-colors = np.array(["b", "c", "g", "k", "m", "r", "y", "pink", "purple", "orange"])
-# 建立 2 x 3 的子圖
-fig, axs = plt.subplots(nrows=2, ncols=3, sharex=True, sharey=True)
-
-# 建立 aplha 標記
-axs[0, 0].scatter(x, y, s=100, c=colors, marker=r"$\alpha$")
-axs[0, 0].set_title(r"${alpha=}\alpha$" + "標記", c="b")
-axs[0, 0].axis("square")  # 建立矩形子圖
-
-# 建立 beta 標記
-axs[0, 1].scatter(x, y, s=100, c=colors, marker=r"$\beta$")
-axs[0, 1].set_title(r"${beta=}\beta$" + "標記", c="b")
-axs[0, 1].axis("square")  # 建立矩形子圖
-
-# 建立 gamma 標記
-axs[0, 2].scatter(x, y, s=100, c=colors, marker=r"$\gamma$")
-axs[0, 2].set_title(r"${gamma=}\gamma$" + "標記", c="b")
-axs[0, 2].axis("square")  # 建立矩形子圖
-
-# 建立 clubsuit 標記
-axs[1, 0].scatter(x, y, s=100, c=colors, marker=r"$\clubsuit$")
-axs[1, 0].set_title(r"${clubsuit=}\clubsuit$" + "標記", c="b")
-axs[1, 0].axis("square")  # 建立矩形子圖
-
-# 建立 spadesuit 標記
-axs[1, 1].scatter(x, y, s=100, c=colors, marker=r"$\spadesuit$")
-axs[1, 1].set_title(r"${spadesuit=}\spadesuit$" + "標記", c="b")
-axs[1, 1].axis("square")  # 建立矩形子圖
-
-# 建立 heartsuit 標記
-axs[1, 2].scatter(x, y, s=100, c=colors, marker=r"$\heartsuit$")
-axs[1, 2].set_title(r"${heartsuit=}\heartsuit$" + "標記", c="b")
-axs[1, 2].axis("square")  # 建立矩形子圖
-
-plt.tight_layout()
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-N = 50  # 色彩數列的點數
-colorused = ["b", "c", "g", "k", "m", "r", "y"]  # 定義顏色
-colors = []  # 建立色彩數列
-for i in range(N):  # 隨機設定顏色
-    colors.append(np.random.choice(colorused))
-
-x = np.linspace(0.0, 2 * np.pi, N)  # 建立 50 個點
-y1 = np.sin(x)
-plt.scatter(x, y1, c=colors, marker="*")  # 繪製 sine
-y2 = np.cos(x)
-plt.scatter(x, y2, c=colors, marker="s")  # 繪製 cos
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-points = 30
-colorused = ["b", "c", "g", "k", "m", "r", "y"]  # 定義顏色
-colors = []  # 建立色彩數列
-for i in range(points):  # 隨機設定顏色
-    colors.append(np.random.choice(colorused))
-
-x = np.random.randint(1, 11, points)  # 建立 x
-y = np.random.randint(1, 11, points)  # 建立 y
-size = (points * np.random.rand(points)) ** 2  # 散點大小數列
-plt.scatter(x, y, s=size, c=colors)  # 繪製散點
-
-plt.xticks(np.arange(0, 12, step=1.0))  # x 軸刻度
-plt.yticks(np.arange(0, 12, step=1.0))  # y 軸刻度
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-
-x = np.linspace(0, 5, 500)  # 含500個元素的陣列
-y = 1 - 0.5 * np.abs(x - 2)  # y陣列的變化
-
-plt.scatter(x, y, s=50, c=x, cmap="rainbow")  # 色彩隨 x 軸值變化
-plt.scatter(x, y, s=50, c=y, cmap="rainbow")  # 色彩隨 y 軸值變化
-
-plt.colorbar()  # 色彩條
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-
-def loc(index):
-    # 處理座標的移動
-    x_mov = random.choice([-3, 3])  # 隨機x軸移動值
-    xloc = x[index - 1] + x_mov  # 計算x軸新位置
-    y_mov = random.choice([-5, -1, 1, 5])  # 隨機y軸移動值
-    yloc = y[index - 1] + y_mov  # 計算y軸新位置
-    x.append(xloc)  # x軸新位置加入串列
-    y.append(yloc)  # y軸新位置加入串列
-
-
-num = 10000  # 設定隨機點的數量
-x = [0]  # 設定第一次執行x座標
-y = [0]  # 設定第一次執行y座標
-
-for i in range(1, num):  # 建立點的座標
-    loc(i)
-t = x  # 色彩隨x軸變化
-plt.scatter(x, y, s=2, c=t, cmap="brg")
-plt.axis("off")  # 隱藏座標
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-
-""" fail
-#zip 高級組合法
-
-xx = [1, 2, 3, 4]
-yy = [5, 6, 7, 8]
-list(zip(xx, yy))
-
-Z = list(zip(X, Y))
-print(Z)
-
-plt.scatter(X, Y, s = 50, c = Z)
-plt.show()
-"""
-
-print("------------------------------------------------------------")  # 60個
-
-degrees = np.arange(0, 360)
-x = np.cos(np.radians(degrees))
-y = np.sin(np.radians(degrees))
-
-plt.plot(x, y)
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("作業完成")
-print("------------------------------------------------------------")  # 60個
-sys.exit()
-print("------------------------------------------------------------")  # 60個
-
 
 # x，y，大小，顏色
 plt.scatter([1, 2, 3, 4], [2, 4, 6, 8], [10, 20, 30, 400], ["r", "b", "y", "k"])
@@ -1179,8 +1014,7 @@ plt.scatter(x, y, color="lightgreen", edgecolor="b", s=60)
 
 plt.scatter(x, y, c=y, cmap="rainbow")
 plt.scatter(x, y, s=50, c=y, cmap="hsv")  # 色彩隨y軸值變化
-plt.colorbar()  # 色彩條
-
+#plt.colorbar()
 
 # 由平均 0, 標準差 1 的分布中取 20 個數
 # np.random.randn(20)
@@ -1221,7 +1055,7 @@ plt.legend(loc="best")  # 添加圖例
 x = np.linspace(0, 5, 50)  # 含50個元素的陣列
 
 plt.scatter(x, y, s=50, c=y, cmap="rainbow")  # 色彩隨 y 軸值變化
-plt.colorbar()  # 色彩條
+#plt.colorbar()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1265,5 +1099,97 @@ for i in range(50):  # 隨機設定顏色
 x = np.linspace(0, 1, 1000)
 y = 0.5 * np.sin(n * x) + 0.5
 
-
 plt.scatter(listx, listy, c="r", s=scale, marker="o", alpha=0.5)
+
+plt.axis("off")  # 隱藏座標
+plt.axis("off")  # 隱藏座標
+
+
+N = 50  # 色彩數列的點數
+colorused = ["b", "c", "g", "k", "m", "r", "y"]  # 定義顏色
+colors = []  # 建立色彩數列
+for i in range(N):  # 隨機設定顏色
+    colors.append(np.random.choice(colorused))
+
+x = np.linspace(0.0, 2 * np.pi, N)  # 建立 50 個點
+
+#方塊
+plt.scatter(x, y1, c=colors, marker="*")  # 繪製 sine
+#星形
+plt.scatter(x, y2, c=colors, marker="s")  # 繪製 cos
+
+
+x = np.linspace(0, 5, 500)  # 含500個元素的陣列
+y = np.linspace(0, 5, 500)  # 含500個元素的陣列
+
+plt.scatter(x, y, s=50, c=x, cmap="rainbow")  # 色彩隨 x 軸值變化
+plt.scatter(x, y, s=50, c=y, cmap="rainbow")  # 色彩隨 y 軸值變化
+
+#plt.colorbar()
+plt.show()
+
+
+x = np.random.rand(10)
+y = np.random.rand(10)
+colors = np.array(["b", "c", "g", "k", "m", "r", "y", "pink", "purple", "orange"])
+
+# 建立多邊形標記
+axs[0, 0].scatter(x, y, s=75, c=colors, marker=(5, 0))
+axs[0, 0].set_title("多邊形marker=(5, 0)")
+
+# 建立星形標記
+axs[0, 1].scatter(x, y, s=75, c=colors, marker=(5, 1))
+axs[0, 1].set_title("星狀形marker=(5, 1)")
+
+# 建立鑽石標記
+axs[0, 2].scatter(x, y, s=75, c=colors, marker=(5, 2))
+axs[0, 2].set_title("鑽石形marker=(5, 2)")
+
+# 建立 aplha 標記
+axs[1, 0].scatter(x, y, s=100, c=colors, marker=r"$\alpha$")
+axs[1, 0].set_title(r"${alpha=}\alpha$" + "標記", c="b")
+
+# 建立 beta 標記
+axs[1, 1].scatter(x, y, s=100, c=colors, marker=r"$\beta$")
+axs[1, 1].set_title(r"${beta=}\beta$" + "標記", c="b")
+
+# 建立 gamma 標記
+axs[1, 2].scatter(x, y, s=100, c=colors, marker=r"$\gamma$")
+axs[1, 2].set_title(r"${gamma=}\gamma$" + "標記", c="b")
+
+# 建立 clubsuit 標記
+axs[2, 0].scatter(x, y, s=100, c=colors, marker=r"$\clubsuit$")
+axs[2, 0].set_title(r"${clubsuit=}\clubsuit$" + "標記", c="b")
+
+# 建立 spadesuit 標記
+axs[2, 1].scatter(x, y, s=100, c=colors, marker=r"$\spadesuit$")
+axs[2, 1].set_title(r"${spadesuit=}\spadesuit$" + "標記", c="b")
+
+# 建立 heartsuit 標記
+axs[2, 2].scatter(x, y, s=100, c=colors, marker=r"$\heartsuit$")
+axs[2, 2].set_title(r"${heartsuit=}\heartsuit$" + "標記", c="b")
+
+
+
+
+
+""" 搬到pd plot
+
+filename = "_data/python_ReadWrite_CSV6_score.csv"
+
+# 讀入資料
+dat = pd.read_csv(filename, encoding="UTF-8")
+
+# 散布圖
+plt.scatter(dat["數學"], dat["理科"])
+plt.axis([0, 100, 0, 100])
+plt.axis("equal")
+plt.xlabel("數學")
+plt.ylabel("理科")
+
+# 共變異數與相關係數
+correlation = np.corrcoef(dat["數學"], dat["理科"])  # 計算相關係數
+correlation[0, 1]  # 顯示在畫面
+
+"""
+

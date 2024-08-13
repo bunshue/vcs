@@ -30,8 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.groupBox_webcam = new System.Windows.Forms.GroupBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lb_rgb_r = new System.Windows.Forms.Label();
             this.lb_rgb_g = new System.Windows.Forms.Label();
@@ -41,7 +41,8 @@
             this.lb_yuv_v = new System.Windows.Forms.Label();
             this.lb_fps = new System.Windows.Forms.Label();
             this.lb_main_mesg = new System.Windows.Forms.Label();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.bt_flip = new System.Windows.Forms.Button();
             this.cb_corner = new System.Windows.Forms.CheckBox();
             this.cb_rgb = new System.Windows.Forms.CheckBox();
             this.bt_open_folder = new System.Windows.Forms.Button();
@@ -66,19 +67,13 @@
             this.bt_exit = new System.Windows.Forms.Button();
             this.bt_refresh = new System.Windows.Forms.Button();
             this.bt_snapshot = new System.Windows.Forms.Button();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label3 = new System.Windows.Forms.Label();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.bt_clear = new System.Windows.Forms.Button();
@@ -87,44 +82,41 @@
             this.timer_auto_save = new System.Windows.Forms.Timer(this.components);
             this.timer_qr_code = new System.Windows.Forms.Timer(this.components);
             this.timer_rgb = new System.Windows.Forms.Timer(this.components);
-            this.bt_flip = new System.Windows.Forms.Button();
-            this.groupBox1.SuspendLayout();
-            this.groupBox5.SuspendLayout();
-            this.groupBox4.SuspendLayout();
+            this.groupBox_webcam.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
-            // groupBox1
+            // groupBox_webcam
             // 
-            this.groupBox1.Controls.Add(this.groupBox5);
-            this.groupBox1.Controls.Add(this.groupBox4);
-            this.groupBox1.Controls.Add(this.groupBox3);
-            this.groupBox1.Controls.Add(this.groupBox2);
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1270, 272);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
+            this.groupBox_webcam.Controls.Add(this.groupBox3);
+            this.groupBox_webcam.Controls.Add(this.groupBox2);
+            this.groupBox_webcam.Controls.Add(this.groupBox1);
+            this.groupBox_webcam.Location = new System.Drawing.Point(12, 12);
+            this.groupBox_webcam.Name = "groupBox_webcam";
+            this.groupBox_webcam.Size = new System.Drawing.Size(962, 272);
+            this.groupBox_webcam.TabIndex = 0;
+            this.groupBox_webcam.TabStop = false;
             // 
-            // groupBox5
+            // groupBox3
             // 
-            this.groupBox5.Controls.Add(this.panel1);
-            this.groupBox5.Controls.Add(this.lb_rgb_r);
-            this.groupBox5.Controls.Add(this.lb_rgb_g);
-            this.groupBox5.Controls.Add(this.lb_rgb_b);
-            this.groupBox5.Controls.Add(this.lb_yuv_y);
-            this.groupBox5.Controls.Add(this.lb_yuv_u);
-            this.groupBox5.Controls.Add(this.lb_yuv_v);
-            this.groupBox5.Controls.Add(this.lb_fps);
-            this.groupBox5.Controls.Add(this.lb_main_mesg);
-            this.groupBox5.Location = new System.Drawing.Point(958, 37);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(254, 212);
-            this.groupBox5.TabIndex = 17;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Message";
+            this.groupBox3.Controls.Add(this.panel1);
+            this.groupBox3.Controls.Add(this.lb_rgb_r);
+            this.groupBox3.Controls.Add(this.lb_rgb_g);
+            this.groupBox3.Controls.Add(this.lb_rgb_b);
+            this.groupBox3.Controls.Add(this.lb_yuv_y);
+            this.groupBox3.Controls.Add(this.lb_yuv_u);
+            this.groupBox3.Controls.Add(this.lb_yuv_v);
+            this.groupBox3.Controls.Add(this.lb_fps);
+            this.groupBox3.Controls.Add(this.lb_main_mesg);
+            this.groupBox3.Location = new System.Drawing.Point(682, 28);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(254, 212);
+            this.groupBox3.TabIndex = 17;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Message";
             // 
             // panel1
             // 
@@ -220,39 +212,50 @@
             this.lb_main_mesg.TabIndex = 16;
             this.lb_main_mesg.Text = "lb_main_mesg";
             // 
-            // groupBox4
+            // groupBox2
             // 
-            this.groupBox4.Controls.Add(this.bt_flip);
-            this.groupBox4.Controls.Add(this.cb_corner);
-            this.groupBox4.Controls.Add(this.cb_rgb);
-            this.groupBox4.Controls.Add(this.bt_open_folder);
-            this.groupBox4.Controls.Add(this.bt_motion_detection);
-            this.groupBox4.Controls.Add(this.bt_record);
-            this.groupBox4.Controls.Add(this.rb_5X5);
-            this.groupBox4.Controls.Add(this.rb_4X4);
-            this.groupBox4.Controls.Add(this.rb_3X3);
-            this.groupBox4.Controls.Add(this.cb_show_grid);
-            this.groupBox4.Controls.Add(this.rb3);
-            this.groupBox4.Controls.Add(this.rb2);
-            this.groupBox4.Controls.Add(this.rb1);
-            this.groupBox4.Controls.Add(this.bt_help);
-            this.groupBox4.Controls.Add(this.cb_image_processing);
-            this.groupBox4.Controls.Add(this.cb_auto_save);
-            this.groupBox4.Controls.Add(this.bt_fullscreen);
-            this.groupBox4.Controls.Add(this.cb_show_time);
-            this.groupBox4.Controls.Add(this.bt_start);
-            this.groupBox4.Controls.Add(this.bt_info);
-            this.groupBox4.Controls.Add(this.bt_pause);
-            this.groupBox4.Controls.Add(this.bt_stop);
-            this.groupBox4.Controls.Add(this.bt_exit);
-            this.groupBox4.Controls.Add(this.bt_refresh);
-            this.groupBox4.Controls.Add(this.bt_snapshot);
-            this.groupBox4.Location = new System.Drawing.Point(496, 30);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(384, 215);
-            this.groupBox4.TabIndex = 1;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Operation";
+            this.groupBox2.Controls.Add(this.bt_flip);
+            this.groupBox2.Controls.Add(this.cb_corner);
+            this.groupBox2.Controls.Add(this.cb_rgb);
+            this.groupBox2.Controls.Add(this.bt_open_folder);
+            this.groupBox2.Controls.Add(this.bt_motion_detection);
+            this.groupBox2.Controls.Add(this.bt_record);
+            this.groupBox2.Controls.Add(this.rb_5X5);
+            this.groupBox2.Controls.Add(this.rb_4X4);
+            this.groupBox2.Controls.Add(this.rb_3X3);
+            this.groupBox2.Controls.Add(this.cb_show_grid);
+            this.groupBox2.Controls.Add(this.rb3);
+            this.groupBox2.Controls.Add(this.rb2);
+            this.groupBox2.Controls.Add(this.rb1);
+            this.groupBox2.Controls.Add(this.bt_help);
+            this.groupBox2.Controls.Add(this.cb_image_processing);
+            this.groupBox2.Controls.Add(this.cb_auto_save);
+            this.groupBox2.Controls.Add(this.bt_fullscreen);
+            this.groupBox2.Controls.Add(this.cb_show_time);
+            this.groupBox2.Controls.Add(this.bt_start);
+            this.groupBox2.Controls.Add(this.bt_info);
+            this.groupBox2.Controls.Add(this.bt_pause);
+            this.groupBox2.Controls.Add(this.bt_stop);
+            this.groupBox2.Controls.Add(this.bt_exit);
+            this.groupBox2.Controls.Add(this.bt_refresh);
+            this.groupBox2.Controls.Add(this.bt_snapshot);
+            this.groupBox2.Location = new System.Drawing.Point(278, 25);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(384, 215);
+            this.groupBox2.TabIndex = 1;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Operation";
+            // 
+            // bt_flip
+            // 
+            this.bt_flip.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_flip.Location = new System.Drawing.Point(18, 116);
+            this.bt_flip.Name = "bt_flip";
+            this.bt_flip.Size = new System.Drawing.Size(75, 30);
+            this.bt_flip.TabIndex = 62;
+            this.bt_flip.Text = "上下左右";
+            this.bt_flip.UseVisualStyleBackColor = true;
+            this.bt_flip.Click += new System.EventHandler(this.bt_flip_Click);
             // 
             // cb_corner
             // 
@@ -521,20 +524,20 @@
             this.bt_snapshot.UseVisualStyleBackColor = true;
             this.bt_snapshot.Click += new System.EventHandler(this.bt_snapshot_Click);
             // 
-            // groupBox3
+            // groupBox1
             // 
-            this.groupBox3.Controls.Add(this.label3);
-            this.groupBox3.Controls.Add(this.comboBox3);
-            this.groupBox3.Controls.Add(this.label2);
-            this.groupBox3.Controls.Add(this.comboBox1);
-            this.groupBox3.Controls.Add(this.comboBox2);
-            this.groupBox3.Controls.Add(this.label1);
-            this.groupBox3.Location = new System.Drawing.Point(233, 30);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(257, 219);
-            this.groupBox3.TabIndex = 1;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "WebCam";
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.comboBox3);
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.comboBox1);
+            this.groupBox1.Controls.Add(this.comboBox2);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Location = new System.Drawing.Point(15, 21);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(257, 219);
+            this.groupBox1.TabIndex = 1;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "WebCam";
             // 
             // label3
             // 
@@ -609,82 +612,11 @@
             this.label1.TabIndex = 4;
             this.label1.Text = "相機";
             // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.checkBox3);
-            this.groupBox2.Controls.Add(this.checkBox2);
-            this.groupBox2.Controls.Add(this.checkBox1);
-            this.groupBox2.Controls.Add(this.radioButton2);
-            this.groupBox2.Controls.Add(this.radioButton1);
-            this.groupBox2.Location = new System.Drawing.Point(17, 30);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(157, 215);
-            this.groupBox2.TabIndex = 0;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Method";
-            // 
-            // checkBox3
-            // 
-            this.checkBox3.AutoSize = true;
-            this.checkBox3.Checked = true;
-            this.checkBox3.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox3.Location = new System.Drawing.Point(18, 183);
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(55, 16);
-            this.checkBox3.TabIndex = 4;
-            this.checkBox3.Text = "Debug";
-            this.checkBox3.UseVisualStyleBackColor = true;
-            this.checkBox3.CheckedChanged += new System.EventHandler(this.checkBox3_CheckedChanged);
-            // 
-            // checkBox2
-            // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(18, 72);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(57, 16);
-            this.checkBox2.TabIndex = 3;
-            this.checkBox2.Text = "EMGU";
-            this.checkBox2.UseVisualStyleBackColor = true;
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Checked = true;
-            this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox1.Location = new System.Drawing.Point(18, 32);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(59, 16);
-            this.checkBox1.TabIndex = 2;
-            this.checkBox1.Text = "AForge";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            // 
-            // radioButton2
-            // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(80, 143);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(41, 16);
-            this.radioButton2.TabIndex = 1;
-            this.radioButton2.Text = "x64";
-            this.radioButton2.UseVisualStyleBackColor = true;
-            // 
-            // radioButton1
-            // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Checked = true;
-            this.radioButton1.Location = new System.Drawing.Point(80, 105);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(41, 16);
-            this.radioButton1.TabIndex = 0;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "x86";
-            this.radioButton1.UseVisualStyleBackColor = true;
-            // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(570, 301);
+            this.richTextBox1.Location = new System.Drawing.Point(118, 301);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(421, 273);
+            this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
             // 
@@ -694,7 +626,7 @@
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox1.Location = new System.Drawing.Point(12, 301);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(464, 248);
+            this.pictureBox1.Size = new System.Drawing.Size(100, 100);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
@@ -703,7 +635,7 @@
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(916, 538);
+            this.bt_clear.Location = new System.Drawing.Point(143, 365);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(75, 36);
             this.bt_clear.TabIndex = 15;
@@ -736,40 +668,27 @@
             this.timer_rgb.Enabled = true;
             this.timer_rgb.Tick += new System.EventHandler(this.timer_rgb_Tick);
             // 
-            // bt_flip
-            // 
-            this.bt_flip.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_flip.Location = new System.Drawing.Point(18, 116);
-            this.bt_flip.Name = "bt_flip";
-            this.bt_flip.Size = new System.Drawing.Size(75, 30);
-            this.bt_flip.TabIndex = 62;
-            this.bt_flip.Text = "上下左右";
-            this.bt_flip.UseVisualStyleBackColor = true;
-            this.bt_flip.Click += new System.EventHandler(this.bt_flip_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1244, 761);
+            this.ClientSize = new System.Drawing.Size(992, 429);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.richTextBox1);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.groupBox_webcam);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "WebCam";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox5.ResumeLayout(false);
-            this.groupBox5.PerformLayout();
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
+            this.groupBox_webcam.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
@@ -777,7 +696,7 @@
 
         #endregion
 
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBox_webcam;
         private System.Windows.Forms.Button bt_exit;
         private System.Windows.Forms.Button bt_snapshot;
         private System.Windows.Forms.Button bt_refresh;
@@ -788,16 +707,10 @@
         private System.Windows.Forms.ComboBox comboBox3;
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.CheckBox checkBox3;
-        private System.Windows.Forms.CheckBox checkBox2;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.Label lb_fps;
         private System.Windows.Forms.Button bt_info;
-        private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.RichTextBox richTextBox1;
@@ -808,7 +721,7 @@
         private System.Windows.Forms.Button bt_clear;
         private System.Windows.Forms.Timer timer_display;
         private System.Windows.Forms.Label lb_main_mesg;
-        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.CheckBox cb_image_processing;
         private System.Windows.Forms.Timer timer_clock;
         private System.Windows.Forms.Timer timer_auto_save;

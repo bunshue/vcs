@@ -8,11 +8,12 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.IO;
-using System.Threading;
 
 using AForge.Video;
 using AForge.Video.DirectShow;  // Video Recording
 using AForge.Video.FFMPEG;      //for VideoFileWriter
+
+//不使用Thread 錄影
 
 namespace vcs_WebCam_AForge2_Record3
 {
@@ -20,12 +21,14 @@ namespace vcs_WebCam_AForge2_Record3
     {
         private FilterInfoCollection USBWebcams = null;
         CameraMonitor CamMonitor;
-        private bool flag_recording2 = false;    //判斷是否啟動錄影的旗標, for 錄影2, 不使用Thread
+        private bool flag_recording = false;    //判斷是否啟動錄影的旗標
+
+
         private string recording_filename = string.Empty;
         DateTime recording_time_st = DateTime.Now;
-        
+
         int webcam_count = 0;
-        private const int BORDER = 30;
+        private const int BORDER = 10;
 
         public Form1()
         {
@@ -81,6 +84,7 @@ namespace vcs_WebCam_AForge2_Record3
             }
             catch (Exception ex)
             {
+                richTextBox1.Text += "xxx錯誤訊息e01 : " + ex.Message + "\n";
             }
         }
 
@@ -96,19 +100,52 @@ namespace vcs_WebCam_AForge2_Record3
             pictureBox1.Size = new Size(W, H);
             pictureBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
 
-            richTextBox1.Size = new Size(300, 600);
-            richTextBox1.Location = new Point(x_st + dx * 4 + 70, y_st + dy * 0);
-
+            richTextBox1.Size = new Size(300, 690);
+            richTextBox1.Location = new Point(x_st + dx * 3 + 90, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            lb_fps.Text = "";
-            lb_fps.Location = new Point(680, 10);
+            groupBox1.Size = new Size(250, 200);
+            groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0 + H + BORDER);
+            groupBox2.Size = new Size(380, 200);
+            groupBox2.Location = new Point(x_st + dx * 0 + 250 + BORDER, y_st + dy * 0 + H + BORDER);
 
-            button4.Enabled = false;
+            lb_fps.Text = "";
+
+            bt_record_stop.Enabled = false;
+            this.Size = new Size(1000, 750);
+            x_st = 10;
+            y_st = 20;
+            dx = 90;
+            dy = 28;
+            comboBox1.Size = new Size(220, 40);
+            comboBox2.Size = new Size(220, 40);
+            comboBox3.Size = new Size(220, 40);
+            label1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            comboBox1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            label2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            comboBox2.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            label3.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            comboBox3.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            dy = 40;
+
+            bt_start.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            bt_stop.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            bt_refresh.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            bt_exit.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+
+            bt_snapshot.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            bt_record_start.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            bt_record_stop.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            lb_fps.Location = new Point(x_st + dx * 0, y_st + dy * 2);
         }
 
-        //錄影 ST, 不使用thread
-        private void button3_Click(object sender, EventArgs e)
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        //錄影 ST
+        private void bt_record_start_Click(object sender, EventArgs e)
         {
             /*
             if (flag_webcam_ok == false)    //如果webcam沒啟動
@@ -118,10 +155,10 @@ namespace vcs_WebCam_AForge2_Record3
             }
             */
 
-            if (flag_recording2 == false)
+            if (flag_recording == false)
             {
                 //開啟錄影模式
-                flag_recording2 = true;
+                flag_recording = true;
 
                 recording_filename = Application.StartupPath + "\\avi_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".avi";
 
@@ -135,8 +172,8 @@ namespace vcs_WebCam_AForge2_Record3
                 richTextBox1.Text += "檔案 :\t\t" + this.CamMonitor.RecordingFilename + "\n\n";
                 richTextBox1.Text += "錄影開始\t時間 : " + DateTime.Now.ToString() + "\n";
                 recording_time_st = DateTime.Now;
-                button3.Enabled = false;
-                button4.Enabled = true;
+                bt_record_start.Enabled = false;
+                bt_record_stop.Enabled = true;
             }
             else
             {
@@ -144,13 +181,13 @@ namespace vcs_WebCam_AForge2_Record3
             }
         }
 
-        //錄影 SP, 不使用Thread
-        private void button4_Click(object sender, EventArgs e)
+        //錄影 SP
+        private void bt_record_stop_Click(object sender, EventArgs e)
         {
-            if (flag_recording2 == true)
+            if (flag_recording == true)
             {
                 //錄影完需將影像停止不然會出錯
-                flag_recording2 = false;
+                flag_recording = false;
 
                 this.CamMonitor.StopRecording2();
 
@@ -158,8 +195,8 @@ namespace vcs_WebCam_AForge2_Record3
                 richTextBox1.Text += "錄影時間 :\t" + (DateTime.Now - recording_time_st).TotalSeconds.ToString("0.00") + " 秒\n";
                 //richTextBox1.Text += "錄影時間 : " + (DateTime.Now - recording_time_st).ToString() + "\n\n";
                 richTextBox1.Text += "檔案 :\t\t" + this.CamMonitor.RecordingFilename + "\n\n";
-                button3.Enabled = true;
-                button4.Enabled = false;
+                bt_record_start.Enabled = true;
+                bt_record_stop.Enabled = false;
             }
             else
             {
@@ -235,7 +272,7 @@ namespace vcs_WebCam_AForge2_Record3
 
                 e.Graphics.DrawString(str, f, sb, new Point(10, 10));
 
-                if (flag_recording2 == true)
+                if (flag_recording == true)
                 {
                     if (DateTime.Now.Millisecond < 500)
                     {
@@ -279,7 +316,7 @@ namespace vcs_WebCam_AForge2_Record3
                 Graphics g = Graphics.FromImage(bitmap1);
                 g.DrawString(str, f, sb, new Point(10, 10));
 
-                if (flag_recording2 == true)
+                if (flag_recording == true)
                 {
                     try
                     {
@@ -287,12 +324,14 @@ namespace vcs_WebCam_AForge2_Record3
                     }
                     catch (Exception ex)
                     {
+                        //richTextBox1.Text += "xxx錯誤訊息e02 : " + ex.Message + "\n";
                     }
                 }
                 GC.Collect();       //回收資源
             }
             catch (InvalidOperationException ex)
             {
+                //richTextBox1.Text += "xxx錯誤訊息e03 : " + ex.Message + "\n";
             }
         }
 
@@ -301,11 +340,9 @@ namespace vcs_WebCam_AForge2_Record3
         int Width = 0;
         int Height = 0;
 
-        private bool flag_recording2 = false;    //判斷是否啟動錄影的旗標, for 錄影2, 不使用Thread
+        private bool flag_recording = false;    //判斷是否啟動錄影的旗標, for 錄影
 
         public string RecordingFilename = "aaaaa.avi";
-
-        Queue<Bitmap> frames = new Queue<Bitmap>(); // Queue that stores frames to be written by the recorder thread
 
         private void DoRecord()
         {
@@ -319,16 +356,16 @@ namespace vcs_WebCam_AForge2_Record3
 
         public void StartRecording2()
         {
-            if (flag_recording2 == false)
+            if (flag_recording == false)
             {
-                flag_recording2 = true;
+                flag_recording = true;
                 writer2.Open(RecordingFilename, this.Width, this.Height, 30);
             }
         }
 
         public void StopRecording2()
         {
-            flag_recording2 = false;
+            flag_recording = false;
             writer2.Close();
         }
     }

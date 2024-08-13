@@ -34,6 +34,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>ims.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="AForge.Video">
       <HintPath>dll\AForge.Video.dll</HintPath>
@@ -105,6 +108,9 @@
     <Content Include="avutil-50.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="img\folder_open.png" />
+    <None Include="img\ims-logo-720x480.bmp" />
+    <Content Include="ims.ico" />
     <Content Include="swscale-0.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
