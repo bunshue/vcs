@@ -26,12 +26,14 @@ namespace vcs_BarcodeScanner
 
         void show_item_location()
         {
+            /*
             int W = 640;
             int H = 480;
             int x_st = BORDER;
             int y_st = BORDER;
             int dx = 140 + 50;
             int dy = 50 + 15;
+            */
 
             //pictureBox1.Size = new Size(W, H);
             //pictureBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
@@ -53,21 +55,21 @@ namespace vcs_BarcodeScanner
         {
             ccc++;
             if ((ccc % 4) == 0)
-                lb_main_mesg1.Text = "等待輸入第 1 筆資料 \\";
+                lb_main_mesg1.Text = "等待 \\";
             else if ((ccc % 4) == 1)
-                lb_main_mesg1.Text = "等待輸入第 1 筆資料 |";
+                lb_main_mesg1.Text = "等待 |";
             else if ((ccc % 4) == 2)
-                lb_main_mesg1.Text = "等待輸入第 1 筆資料 /";
+                lb_main_mesg1.Text = "等待 /";
             else
-                lb_main_mesg1.Text = "等待輸入第 1 筆資料 -";
+                lb_main_mesg1.Text = "等待 -";
 
             if ((timer_cnt++ % 10) == 0)
             {
-                richTextBox1.Text += "八";
+                //richTextBox1.Text += "八";
                 if (this.tb_wait_barcode_data.Focused == false)
                 {
                     this.tb_wait_barcode_data.Focus();
-                    richTextBox1.Text += "F8";
+                    //richTextBox1.Text += "F8";
                 }
             }
 
@@ -111,6 +113,11 @@ namespace vcs_BarcodeScanner
         {
             //網頁連線
 
+        }
+
+        private void button02_Click(object sender, EventArgs e)
+        {
+            tb_barcode_data.Clear();
         }
 
 

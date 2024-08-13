@@ -48,6 +48,14 @@ namespace vcs_WebCam_AForge2_Record1
         private string recording_filename = "XXXXXXX.avi";
         VideoFileWriter writer = new VideoFileWriter();
         DateTime recording_time_st = DateTime.Now;
+        private string ims_camera_name_short1 = "USB Camera";
+        private string ims_camera_name_short2 = "InsightEyes";
+        private string ims_camera_name_long1 = "xxxx3";
+        private string ims_camera_name_long2 = "xxxx4";
+        private string ims_camera_name_short = "xxxx5";
+        private string ims_camera_name_long = "xxxx6";
+        private bool flag_ims_camera_exists1 = false;
+        private bool flag_ims_camera_exists2 = false;
 
         int webcam_w = 0;
         int webcam_h = 0;
@@ -104,8 +112,10 @@ namespace vcs_WebCam_AForge2_Record1
 
             groupBox1.Size = new Size(250, 200);
             groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0 + H + BORDER);
+            groupBox1.Visible = false;
             groupBox2.Size = new Size(380, 200);
-            groupBox2.Location = new Point(x_st + dx * 0 + 250 + BORDER, y_st + dy * 0 + H + BORDER);
+            //groupBox2.Location = new Point(x_st + dx * 0 + 250 + BORDER, y_st + dy * 0 + H + BORDER);
+            groupBox2.Location = new Point(x_st + dx * 0, y_st + dy * 0 + H + BORDER);
 
             bt_record_stop.Enabled = false;
             this.Size = new Size(1000, 750);
@@ -148,6 +158,9 @@ namespace vcs_WebCam_AForge2_Record1
 
         void Init_WebcamSetup()         //讀出目前相機資訊 存在各list, comboBox1~3和richTextBox1裏
         {
+            flag_ims_camera_exists1 = false;
+            flag_ims_camera_exists2 = false;
+
             camera_short_name.Clear();
             camera_full_name.Clear();
             camera_capability.Clear();
@@ -160,7 +173,6 @@ namespace vcs_WebCam_AForge2_Record1
                 USBWebcams = new FilterInfoCollection(FilterCategory.VideoInputDevice); //實例化對象
                 webcam_count = USBWebcams.Count;
                 richTextBox1.Text += "找到 " + webcam_count.ToString() + " 台WebCam\n";
-
                 richTextBox1.Text += "USBWebcams.Capacity : " + USBWebcams.Capacity.ToString() + "\n";
                 richTextBox1.Text += "USBWebcams.Count : " + USBWebcams.Count.ToString() + "\n";
 
@@ -170,6 +182,18 @@ namespace vcs_WebCam_AForge2_Record1
                     richTextBox1.Text += "第 " + (i + 1).ToString() + " 台WebCam:\n";
                     richTextBox1.Text += "短名 : " + vidDevice.Name + "\n";
                     richTextBox1.Text += "長名 : " + vidDevice.MonikerString + "\n";
+                    if (vidDevice.Name == ims_camera_name_short1)
+                    {
+                        richTextBox1.Text += "取得 ims 相機1(顯微鏡)\n";
+                        flag_ims_camera_exists1 = true;
+                        ims_camera_name_long1 = vidDevice.MonikerString;
+                    }
+                    else if (vidDevice.Name == ims_camera_name_short2)
+                    {
+                        richTextBox1.Text += "取得 ims 相機(內視鏡)\n";
+                        flag_ims_camera_exists2 = true;
+                        ims_camera_name_long2 = vidDevice.MonikerString;
+                    }
                     richTextBox1.Text += "\n";
                     i++;
                 }
@@ -344,17 +368,46 @@ namespace vcs_WebCam_AForge2_Record1
             richTextBox1.Text += "選擇能力 : " + comboBox2.SelectedIndex.ToString() + "\n";
             richTextBox1.Text += "選擇方向 : " + comboBox3.SelectedIndex.ToString() + "\t" + comboBox3.Text + "\n";
 
+            if (flag_ims_camera_exists1 == true)
+            {
+                richTextBox1.Text += "短名 : " + ims_camera_name_short1 + "\n";
+                richTextBox1.Text += "長名 : " + ims_camera_name_long1 + "\n";
+            }
+            if (flag_ims_camera_exists2 == true)
+            {
+                richTextBox1.Text += "短名 : " + ims_camera_name_short2 + "\n";
+                richTextBox1.Text += "長名 : " + ims_camera_name_long2 + "\n";
+            }
+
+            if ((flag_ims_camera_exists1 == false) && (flag_ims_camera_exists2 == false))
+            {
+                richTextBox1.Text += "無 ims 相機, 離開\n";
+                show_main_message("僅支持 ims 裝置", S_OK, 50);
+                return;
+            }
+
+            if (flag_ims_camera_exists1 == true)
+            {
+                ims_camera_name_short = ims_camera_name_short1;
+                ims_camera_name_long = ims_camera_name_long1;
+            }
+            else
+            {
+                ims_camera_name_short = ims_camera_name_short2;
+                ims_camera_name_long = ims_camera_name_long2;
+            }
+
+            richTextBox1.Text += "使用短名 : " + ims_camera_name_short + "\n";
+            richTextBox1.Text += "使用長名 : " + ims_camera_name_long + "\n";
+
             USBWebcams = new FilterInfoCollection(FilterCategory.VideoInputDevice);
             if (USBWebcams.Count > 0)  // The quantity of WebCam must be more than 0.
             {
-                Cam = new VideoCaptureDevice(USBWebcams[comboBox1.SelectedIndex].MonikerString);  //實例化對象
+                Cam = new VideoCaptureDevice(ims_camera_name_long);  //實例化對象
+                //richTextBox1.Text += "MonikerString : " + USBWebcams[comboBox1.SelectedIndex].MonikerString + "\n";
 
                 //真正設定顯示能力的地方
                 //Cam.VideoResolution = Cam.VideoCapabilities[comboBox2.SelectedIndex];   //若有多個capabilities 可以更換
-
-                richTextBox1.Text += Cam.VideoCapabilities[comboBox2.SelectedIndex] + "\n";
-                richTextBox1.Text += Cam.VideoCapabilities[comboBox2.SelectedIndex] + "\n";
-                richTextBox1.Text += Cam.VideoCapabilities[comboBox2.SelectedIndex] + "\n";
 
                 Cam.NewFrame += new NewFrameEventHandler(Cam_NewFrame);
                 Cam.Start();   // WebCam starts capturing images.
@@ -362,10 +415,16 @@ namespace vcs_WebCam_AForge2_Record1
                 //以下為WebCam訊息與調整視窗大小
                 //Cam.VideoResolution = Cam.VideoCapabilities[comboBox1.SelectedIndex];
                 string webcam_name = string.Empty;
-                int ww = Cam.VideoCapabilities[comboBox1.SelectedIndex].FrameSize.Width;
-                int hh = Cam.VideoCapabilities[comboBox1.SelectedIndex].FrameSize.Height;
+                //int ww = Cam.VideoCapabilities[comboBox1.SelectedIndex].FrameSize.Width;
+                int ww = 640;
+                //int hh = Cam.VideoCapabilities[comboBox1.SelectedIndex].FrameSize.Height;
+                int hh = 480;
                 //webcam_name = USBWebcams[comboBox1.SelectedIndex].Name + " " + ww.ToString() + " X " + hh.ToString() + " @ " + Cam.VideoCapabilities[comboBox1.SelectedIndex].AverageFrameRate.ToString() + " Hz";
-                webcam_name = USBWebcams[comboBox1.SelectedIndex].Name + " " + ww.ToString() + " X " + hh.ToString();
+                //webcam_name = USBWebcams[comboBox1.SelectedIndex].Name + " " + ww.ToString() + " X " + hh.ToString();
+                webcam_name = "ims_camera";
+                //richTextBox1.Text += "webcam_name = " + webcam_name + "\n";
+                //richTextBox1.Text += "webcam_name = " + webcam_name + "\n";
+                //richTextBox1.Text += "webcam_name = " + webcam_name + "\n";
                 this.Text = webcam_name;
 
                 //有抓到WebCam, 重新設定pictureBox和vsp的大小和位置
@@ -543,6 +602,12 @@ namespace vcs_WebCam_AForge2_Record1
         //錄影 ST
         private void bt_record_start_Click(object sender, EventArgs e)
         {
+            if (flag_webcam_ok == false)    //如果webcam沒啟動
+            {
+                show_main_message("相機未啟動, 無錄影", S_OK, 20);
+                return;
+            }
+
             if (flag_recording == false)
             {
                 flag_limit_recording_time = false;
@@ -560,6 +625,12 @@ namespace vcs_WebCam_AForge2_Record1
         //錄影 ST, 有限時
         private void bt_record_start2_Click(object sender, EventArgs e)
         {
+            if (flag_webcam_ok == false)    //如果webcam沒啟動
+            {
+                show_main_message("相機未啟動, 無錄影", S_OK, 20);
+                return;
+            }
+
             if (flag_limit_recording_time == false)
             {
                 flag_limit_recording_time = true;
@@ -619,7 +690,7 @@ namespace vcs_WebCam_AForge2_Record1
 
                     if (flag_limit_recording_time == true)
                     {
-                        if ((DateTime.Now - recording_time_st).TotalSeconds > 180)
+                        if ((DateTime.Now - recording_time_st).TotalSeconds > 60)
                         {
                             flag_limit_recording_time = false;
                             bt_record_stop_Click(sender, e);
@@ -725,6 +796,12 @@ namespace vcs_WebCam_AForge2_Record1
         {
             camera_start = true;
             Start_Webcam();
+
+            if (flag_webcam_ok == false)    //如果webcam沒啟動
+            {
+                show_main_message("相機啟動失敗", S_OK, 20);
+                return;
+            }
             bt_start.Enabled = false;
             bt_stop.Enabled = true;
             //bt_record.Enabled = true;
@@ -764,6 +841,11 @@ namespace vcs_WebCam_AForge2_Record1
 
         private void bt_snapshot_Click(object sender, EventArgs e)
         {
+            if (flag_webcam_ok == false)    //如果webcam沒啟動
+            {
+                show_main_message("相機未啟動, 無存圖", S_OK, 20);
+                return;
+            }
             save_image_to_drive();
         }
 

@@ -38,6 +38,7 @@
             this.button01 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.bt_clear = new System.Windows.Forms.Button();
+            this.button02 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // tb_wait_barcode_data
@@ -84,7 +85,7 @@
             // 
             this.richTextBox1.Location = new System.Drawing.Point(16, 156);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(736, 154);
+            this.richTextBox1.Size = new System.Drawing.Size(736, 174);
             this.richTextBox1.TabIndex = 136;
             this.richTextBox1.Text = "";
             // 
@@ -96,7 +97,7 @@
             // 
             // button01
             // 
-            this.button01.Location = new System.Drawing.Point(672, 54);
+            this.button01.Location = new System.Drawing.Point(672, 33);
             this.button01.Name = "button01";
             this.button01.Size = new System.Drawing.Size(80, 40);
             this.button01.TabIndex = 137;
@@ -124,11 +125,22 @@
             this.bt_clear.UseVisualStyleBackColor = true;
             this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
             // 
+            // button02
+            // 
+            this.button02.Location = new System.Drawing.Point(672, 79);
+            this.button02.Name = "button02";
+            this.button02.Size = new System.Drawing.Size(80, 40);
+            this.button02.TabIndex = 140;
+            this.button02.Text = "清除";
+            this.button02.UseVisualStyleBackColor = true;
+            this.button02.Click += new System.EventHandler(this.button02_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(768, 342);
+            this.Controls.Add(this.button02);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button01);
@@ -138,7 +150,7 @@
             this.Controls.Add(this.tb_wait_barcode_data);
             this.Controls.Add(this.tb_barcode_data);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Barcode Scanner";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -156,6 +168,7 @@
         private System.Windows.Forms.Button button01;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button bt_clear;
+        private System.Windows.Forms.Button button02;
     }
 }
 
