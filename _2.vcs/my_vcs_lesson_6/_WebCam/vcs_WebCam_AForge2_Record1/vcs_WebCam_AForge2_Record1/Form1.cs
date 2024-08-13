@@ -1,4 +1,5 @@
 ﻿using System;
+
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -34,17 +35,23 @@ namespace vcs_WebCam_AForge2_Record1
 
         int webcam_count = 0;
 
+        private const int S_OK = 0;     //system return OK
+        private const int S_FALSE = 1;     //system return FALSE
+        private const int BORDER = 10;
+
+        int timer_display_show_main_mesg_count = 0;
+        int timer_display_show_main_mesg_count_target = 0;
+
         private bool flag_webcam_ok = false;    //判斷是否啟動webcam的旗標
         private bool flag_recording = false;    //判斷是否啟動錄影的旗標, for 錄影1
         private bool flag_limit_recording_time = false;
-        private string recording_filename = string.Empty;
+        private string recording_filename = "XXXXXXX.avi";
         VideoFileWriter writer = new VideoFileWriter();
         DateTime recording_time_st = DateTime.Now;
 
         int webcam_w = 0;
         int webcam_h = 0;
         //int webcam_fps = 0;
-        private const int BORDER = 10;
 
         public Form1()
         {
@@ -53,43 +60,11 @@ namespace vcs_WebCam_AForge2_Record1
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            //C# 跨 Thread 存取 UI
+            Form1.CheckForIllegalCrossThreadCalls = false;  //解決跨執行緒控制無效
+
             show_item_location();
             Init_WebcamSetup();
-
-            recording_filename = Application.StartupPath + "\\avi_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".avi";
-
-            USBWebcams = new FilterInfoCollection(FilterCategory.VideoInputDevice);
-            if (USBWebcams.Count > 0)  // The quantity of WebCam must be more than 0.
-            {
-                Cam = new VideoCaptureDevice(USBWebcams[0].MonikerString);  //實例化對象
-
-                Cam.NewFrame += new NewFrameEventHandler(Cam_NewFrame);
-                Cam.Start();   // WebCam starts capturing images.
-
-                //以下為WebCam訊息與調整視窗大小
-                //Cam.VideoResolution = Cam.VideoCapabilities[0];
-                string webcam_name = string.Empty;
-                int ww = Cam.VideoCapabilities[0].FrameSize.Width;
-                int hh = Cam.VideoCapabilities[0].FrameSize.Height;
-                //webcam_name = USBWebcams[0].Name + " " + ww.ToString() + " X " + hh.ToString() + " @ " + Cam.VideoCapabilities[0].AverageFrameRate.ToString() + " Hz";
-                webcam_name = USBWebcams[0].Name + " " + ww.ToString() + " X " + hh.ToString();
-                this.Text = webcam_name;
-
-                //有抓到WebCam, 重新設定pictureBox和vsp的大小和位置
-                pictureBox1.Size = new Size(ww, hh);
-                //pictureBox1.Location = new Point(BORDER, BORDER);
-
-                flag_webcam_ok = true;
-
-                webcam_w = ww;
-                webcam_h = hh;
-                //webcam_fps = fps;
-            }
-            else
-            {
-                this.Text = "無影像裝置";
-                flag_webcam_ok = false;
-            }
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -121,6 +96,7 @@ namespace vcs_WebCam_AForge2_Record1
 
             pictureBox1.Size = new Size(W, H);
             pictureBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            pictureBox1.Image = vcs_WebCam_AForge2_Record1.Properties.Resources.ims_logo_720x480;
 
             richTextBox1.Size = new Size(300, 690);
             richTextBox1.Location = new Point(x_st + dx * 3 + 90, y_st + dy * 0);
@@ -130,8 +106,6 @@ namespace vcs_WebCam_AForge2_Record1
             groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0 + H + BORDER);
             groupBox2.Size = new Size(380, 200);
             groupBox2.Location = new Point(x_st + dx * 0 + 250 + BORDER, y_st + dy * 0 + H + BORDER);
-
-            lb_fps.Text = "";
 
             bt_record_stop.Enabled = false;
             this.Size = new Size(1000, 750);
@@ -160,8 +134,11 @@ namespace vcs_WebCam_AForge2_Record1
             bt_record_stop.Location = new Point(x_st + dx * 2, y_st + dy * 1);
             bt_record_start2.Location = new Point(x_st + dx * 3, y_st + dy * 1);
             lb_fps.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-
-
+            lb_fps.Text = "";
+            lb_main_mesg.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            lb_main_mesg.Text = "";
+            richTextBox1.BringToFront();
+            bt_clear.BringToFront();
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -358,6 +335,114 @@ namespace vcs_WebCam_AForge2_Record1
             //bt_record.Enabled = false;
 
             return;
+        }
+
+        void Start_Webcam()
+        {
+            richTextBox1.Text += "選擇相機 : " + camera_short_name[comboBox1.SelectedIndex] + "\n";
+            richTextBox1.Text += "選擇相機 index : " + comboBox1.SelectedIndex.ToString() + "\n";
+            richTextBox1.Text += "選擇能力 : " + comboBox2.SelectedIndex.ToString() + "\n";
+            richTextBox1.Text += "選擇方向 : " + comboBox3.SelectedIndex.ToString() + "\t" + comboBox3.Text + "\n";
+
+            USBWebcams = new FilterInfoCollection(FilterCategory.VideoInputDevice);
+            if (USBWebcams.Count > 0)  // The quantity of WebCam must be more than 0.
+            {
+                Cam = new VideoCaptureDevice(USBWebcams[comboBox1.SelectedIndex].MonikerString);  //實例化對象
+
+                //真正設定顯示能力的地方
+                //Cam.VideoResolution = Cam.VideoCapabilities[comboBox2.SelectedIndex];   //若有多個capabilities 可以更換
+
+                richTextBox1.Text += Cam.VideoCapabilities[comboBox2.SelectedIndex] + "\n";
+                richTextBox1.Text += Cam.VideoCapabilities[comboBox2.SelectedIndex] + "\n";
+                richTextBox1.Text += Cam.VideoCapabilities[comboBox2.SelectedIndex] + "\n";
+
+                Cam.NewFrame += new NewFrameEventHandler(Cam_NewFrame);
+                Cam.Start();   // WebCam starts capturing images.
+
+                //以下為WebCam訊息與調整視窗大小
+                //Cam.VideoResolution = Cam.VideoCapabilities[comboBox1.SelectedIndex];
+                string webcam_name = string.Empty;
+                int ww = Cam.VideoCapabilities[comboBox1.SelectedIndex].FrameSize.Width;
+                int hh = Cam.VideoCapabilities[comboBox1.SelectedIndex].FrameSize.Height;
+                //webcam_name = USBWebcams[comboBox1.SelectedIndex].Name + " " + ww.ToString() + " X " + hh.ToString() + " @ " + Cam.VideoCapabilities[comboBox1.SelectedIndex].AverageFrameRate.ToString() + " Hz";
+                webcam_name = USBWebcams[comboBox1.SelectedIndex].Name + " " + ww.ToString() + " X " + hh.ToString();
+                this.Text = webcam_name;
+
+                //有抓到WebCam, 重新設定pictureBox和vsp的大小和位置
+                pictureBox1.Size = new Size(ww, hh);
+                //pictureBox1.Location = new Point(BORDER, BORDER);
+
+                flag_webcam_ok = true;
+
+                webcam_w = ww;
+                webcam_h = hh;
+                //webcam_fps = fps;
+            }
+            else
+            {
+                this.Text = "無影像裝置";
+                flag_webcam_ok = false;
+            }
+
+            /*
+            Cam = new VideoCaptureDevice(camera_full_name[comboBox1.SelectedIndex]);    //實例化對象
+
+            //真正設定顯示能力的地方
+            Cam.VideoResolution = Cam.VideoCapabilities[comboBox2.SelectedIndex];   //若有多個capabilities 可以更換
+
+            Cam.NewFrame += new NewFrameEventHandler(Cam_NewFrame);                 //綁定事件
+            */
+            /* 以下為WebCam訊息
+            richTextBox1.Text += "Cam.Source = " + Cam.Source + "\n";   //就是camera fullname
+            richTextBox1.Text += "Cam.Source.Length " + Cam.Source.Length.ToString() + "\n";
+            richTextBox1.Text += "VideoCapabilities.Length " + Cam.VideoCapabilities.Length.ToString() + "\n";
+            var videoCapabilities = Cam.VideoCapabilities;
+            foreach (var video in videoCapabilities)
+            {
+                richTextBox1.Text += "預覽分辨率 : " + video.FrameSize.Width.ToString() + " X " + video.FrameSize.Height.ToString() + "\n";
+                richTextBox1.Text += "AverageFrameRate : " + video.AverageFrameRate.ToString() + "\n";
+                richTextBox1.Text += "BitCount : " + video.BitCount.ToString() + "\n";
+                richTextBox1.Text += "MaximumFrameRate : " + video.MaximumFrameRate.ToString() + "\n";
+                string video_capability = video.FrameSize.Width.ToString() + " X " + video.FrameSize.Height.ToString() + " @ " + video.AverageFrameRate.ToString() + " Hz";
+                richTextBox1.Text += video_capability + "\n";
+            }
+            */
+            /*
+            //以下為WebCam訊息
+            string webcam_name = string.Empty;
+            int ww = Cam.VideoCapabilities[comboBox2.SelectedIndex].FrameSize.Width;
+            int hh = Cam.VideoCapabilities[comboBox2.SelectedIndex].FrameSize.Height;
+            //int fps = Cam.VideoCapabilities[comboBox2.SelectedIndex].AverageFrameRate;
+
+            webcam_name = camera_short_name[comboBox1.SelectedIndex] + " "
+                + ww.ToString() + " X "
+                + hh.ToString();
+            //+" @ " + fps.ToString() + " Hz";
+            this.Text = webcam_name;
+            show_main_message(webcam_name, S_OK, 20);
+
+            webcam_w = ww;
+            webcam_h = hh;
+            //webcam_fps = fps;
+
+            Cam.Start();   // WebCam starts capturing images.
+            */
+        }
+
+        void Stop_Webcam()
+        {
+            if (Cam != null)
+            {
+                show_main_message("停止", S_OK, 20);
+                Cam.Stop();  // WebCam stops capturing images.
+                Cam.SignalToStop();
+                Cam.WaitForStop();
+                while (Cam.IsRunning)
+                {
+                }
+                Cam = null;
+            }
+            pictureBox1.Image = vcs_WebCam_AForge2_Record1.Properties.Resources.ims_logo_720x480;
         }
 
         public Bitmap bm = null;
@@ -634,5 +719,111 @@ namespace vcs_WebCam_AForge2_Record1
             }
             richTextBox1.Text += "選了" + rotate_flip_type.ToString() + "\n";
         }
+
+        bool camera_start = false;
+        private void bt_start_Click(object sender, EventArgs e)
+        {
+            camera_start = true;
+            Start_Webcam();
+            bt_start.Enabled = false;
+            bt_stop.Enabled = true;
+            //bt_record.Enabled = true;
+        }
+
+        private void bt_stop_Click(object sender, EventArgs e)
+        {
+            camera_start = false;
+            Stop_Webcam();
+            bt_start.Enabled = true;
+            bt_stop.Enabled = false;
+            //bt_record.Enabled = false;
+        }
+
+        //重抓WebCam, 只有關了再開
+        private void bt_refresh_Click(object sender, EventArgs e)
+        {
+            show_main_message("重抓", S_OK, 20);
+
+            camera_start = false;
+
+            Stop_Webcam();
+
+            System.Threading.Thread.Sleep(100);
+
+            camera_start = true;
+            bt_start.Text = "停止";
+
+            Start_Webcam();
+        }
+
+        private void bt_exit_Click(object sender, EventArgs e)
+        {
+            show_main_message("離開", S_OK, 20);
+            Application.Exit();
+        }
+
+        private void bt_snapshot_Click(object sender, EventArgs e)
+        {
+            save_image_to_drive();
+        }
+
+        void save_image_to_drive()
+        {
+            show_main_message("截圖", S_OK, 20);
+
+            Bitmap bitmap1 = (Bitmap)pictureBox1.Image;
+
+            if (bitmap1 != null)
+            {
+                String filename = string.Empty;
+                filename = Application.StartupPath + "\\ims_image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
+
+                //String file1 = file + ".jpg";
+                String filename2 = filename + ".bmp";
+                //String file3 = file + ".png";
+                try
+                {
+                    //bitmap1.Save(@file1, ImageFormat.Jpeg);
+                    bitmap1.Save(filename2, ImageFormat.Bmp);
+                    //bitmap1.Save(@file3, ImageFormat.Png);
+
+                    richTextBox1.Text += "存檔成功\n";
+                    //richTextBox1.Text += "已存檔 : " + file1 + "\n";
+                    richTextBox1.Text += "已存檔 : " + filename2 + "\n";
+                    //richTextBox1.Text += "已存檔 : " + file3 + "\n";
+                    show_main_message("已存檔", S_OK, 10);
+                }
+                catch (Exception ex)
+                {
+                    richTextBox1.Text += "xxx錯誤訊息b : " + ex.Message + "\n";
+                    show_main_message("存檔失敗", S_OK, 30);
+                }
+            }
+            else
+            {
+                richTextBox1.Text += "無圖可存\n";
+                show_main_message("無圖可存", S_OK, 20);
+            }
+        }
+
+        void show_main_message(string mesg, int number, int timeout)
+        {
+            lb_main_mesg.Text = mesg;
+
+            timer_display_show_main_mesg_count = 0;
+            timer_display_show_main_mesg_count_target = timeout;   //timeout in 0.1 sec
+            timer_display.Enabled = true;
+        }
+
+        private void timer_display_Tick(object sender, EventArgs e)
+        {
+            if (timer_display_show_main_mesg_count < timer_display_show_main_mesg_count_target)      //display main message timeout
+            {
+                timer_display_show_main_mesg_count++;
+                if (timer_display_show_main_mesg_count >= timer_display_show_main_mesg_count_target)
+                    lb_main_mesg.Text = "";
+            }
+        }
+
     }
 }

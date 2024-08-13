@@ -35,6 +35,7 @@
             this.bt_record_start = new System.Windows.Forms.Button();
             this.bt_record_stop = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.lb_main_mesg = new System.Windows.Forms.Label();
             this.bt_refresh = new System.Windows.Forms.Button();
             this.bt_exit = new System.Windows.Forms.Button();
             this.bt_stop = new System.Windows.Forms.Button();
@@ -50,6 +51,7 @@
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.timer_display = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -60,6 +62,7 @@
             this.pictureBox1.Location = new System.Drawing.Point(12, 27);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 9;
             this.pictureBox1.TabStop = false;
             // 
@@ -95,6 +98,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.lb_main_mesg);
             this.groupBox2.Controls.Add(this.bt_refresh);
             this.groupBox2.Controls.Add(this.bt_exit);
             this.groupBox2.Controls.Add(this.bt_stop);
@@ -110,6 +114,17 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Operation";
             // 
+            // lb_main_mesg
+            // 
+            this.lb_main_mesg.AutoSize = true;
+            this.lb_main_mesg.Font = new System.Drawing.Font("標楷體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_main_mesg.ForeColor = System.Drawing.Color.Red;
+            this.lb_main_mesg.Location = new System.Drawing.Point(102, 110);
+            this.lb_main_mesg.Name = "lb_main_mesg";
+            this.lb_main_mesg.Size = new System.Drawing.Size(154, 24);
+            this.lb_main_mesg.TabIndex = 37;
+            this.lb_main_mesg.Text = "lb_main_mesg";
+            // 
             // bt_refresh
             // 
             this.bt_refresh.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
@@ -119,6 +134,7 @@
             this.bt_refresh.TabIndex = 36;
             this.bt_refresh.Text = "重抓";
             this.bt_refresh.UseVisualStyleBackColor = true;
+            this.bt_refresh.Click += new System.EventHandler(this.bt_refresh_Click);
             // 
             // bt_exit
             // 
@@ -129,6 +145,7 @@
             this.bt_exit.TabIndex = 35;
             this.bt_exit.Text = "離開";
             this.bt_exit.UseVisualStyleBackColor = true;
+            this.bt_exit.Click += new System.EventHandler(this.bt_exit_Click);
             // 
             // bt_stop
             // 
@@ -139,6 +156,7 @@
             this.bt_stop.TabIndex = 33;
             this.bt_stop.Text = "停止";
             this.bt_stop.UseVisualStyleBackColor = true;
+            this.bt_stop.Click += new System.EventHandler(this.bt_stop_Click);
             // 
             // bt_snapshot
             // 
@@ -149,6 +167,7 @@
             this.bt_snapshot.TabIndex = 34;
             this.bt_snapshot.Text = "截圖";
             this.bt_snapshot.UseVisualStyleBackColor = true;
+            this.bt_snapshot.Click += new System.EventHandler(this.bt_snapshot_Click);
             // 
             // bt_start
             // 
@@ -159,6 +178,7 @@
             this.bt_start.TabIndex = 32;
             this.bt_start.Text = "啟動";
             this.bt_start.UseVisualStyleBackColor = true;
+            this.bt_start.Click += new System.EventHandler(this.bt_start_Click);
             // 
             // lb_fps
             // 
@@ -272,6 +292,10 @@
             this.label1.TabIndex = 4;
             this.label1.Text = "相機";
             // 
+            // timer_display
+            // 
+            this.timer_display.Tick += new System.EventHandler(this.timer_display_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -318,6 +342,8 @@
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Timer timer_display;
+        private System.Windows.Forms.Label lb_main_mesg;
     }
 }
 

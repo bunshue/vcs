@@ -1078,6 +1078,8 @@ axs[1, 2].plot(x,y)
 axs[2, 0].plot(x,y)
 axs[2, 1].plot(x,y)
 axs[2, 2].plot(x,y)
+axs[2, 2].set_title("subplots", c="b")
+axs[2, 2].axis("square")  # 建立矩形子圖
 
 plt.tight_layout()
 plt.show()

@@ -8,6 +8,10 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.IO;
+using System.Drawing.Imaging;   //for ImageFormat
+using System.Diagnostics;       //for Process
+using System.Runtime.InteropServices;   //for dll
+
 using System.Threading;
 
 using AForge.Video;
@@ -27,7 +31,13 @@ namespace vcs_WebCam_AForge2_Record2
         DateTime recording_time_st = DateTime.Now;
 
         int webcam_count = 0;
+
+        private const int S_OK = 0;     //system return OK
+        private const int S_FALSE = 1;     //system return FALSE
         private const int BORDER = 10;
+
+        int timer_display_show_main_mesg_count = 0;
+        int timer_display_show_main_mesg_count_target = 0;
 
         public Form1()
         {
@@ -36,6 +46,9 @@ namespace vcs_WebCam_AForge2_Record2
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            //C# 跨 Thread 存取 UI
+            Form1.CheckForIllegalCrossThreadCalls = false;  //解決跨執行緒控制無效
+
             show_item_location();
 
             USBWebcams = new FilterInfoCollection(FilterCategory.VideoInputDevice); //實例化對象
@@ -98,6 +111,7 @@ namespace vcs_WebCam_AForge2_Record2
 
             pictureBox1.Size = new Size(W, H);
             pictureBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            pictureBox1.Image = vcs_WebCam_AForge2_Record2.Properties.Resources.ims_logo_720x480;
 
             richTextBox1.Size = new Size(300, 690);
             richTextBox1.Location = new Point(x_st + dx * 3 + 90, y_st + dy * 0);
@@ -107,8 +121,6 @@ namespace vcs_WebCam_AForge2_Record2
             groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0 + H + BORDER);
             groupBox2.Size = new Size(380, 200);
             groupBox2.Location = new Point(x_st + dx * 0 + 250 + BORDER, y_st + dy * 0 + H + BORDER);
-
-            lb_fps.Text = "";
 
             bt_record_stop.Enabled = false;
             this.Size = new Size(1000, 750);
@@ -136,6 +148,9 @@ namespace vcs_WebCam_AForge2_Record2
             bt_record_start.Location = new Point(x_st + dx * 1, y_st + dy * 1);
             bt_record_stop.Location = new Point(x_st + dx * 2, y_st + dy * 1);
             lb_fps.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            lb_fps.Text = "";
+            lb_main_mesg.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            lb_main_mesg.Text = "";
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -228,6 +243,95 @@ namespace vcs_WebCam_AForge2_Record2
                 lb_fps.Text = "";
             }
             */
+        }
+
+        bool camera_start = false;
+        private void bt_start_Click(object sender, EventArgs e)
+        {
+            camera_start = true;
+            //Start_Webcam();
+            bt_start.Enabled = false;
+            bt_stop.Enabled = true;
+            //bt_record.Enabled = true;
+        }
+
+        private void bt_stop_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_refresh_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_exit_Click(object sender, EventArgs e)
+        {
+            show_main_message("離開", S_OK, 20);
+            Application.Exit();
+        }
+
+        private void bt_snapshot_Click(object sender, EventArgs e)
+        {
+            save_image_to_drive();
+        }
+
+        void save_image_to_drive()
+        {
+            show_main_message("截圖", S_OK, 20);
+
+            Bitmap bitmap1 = (Bitmap)pictureBox1.Image;
+
+            if (bitmap1 != null)
+            {
+                String filename = string.Empty;
+                filename = Application.StartupPath + "\\ims_image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
+
+                //String file1 = file + ".jpg";
+                String filename2 = filename + ".bmp";
+                //String file3 = file + ".png";
+                try
+                {
+                    //bitmap1.Save(@file1, ImageFormat.Jpeg);
+                    bitmap1.Save(filename2, ImageFormat.Bmp);
+                    //bitmap1.Save(@file3, ImageFormat.Png);
+
+                    richTextBox1.Text += "存檔成功\n";
+                    //richTextBox1.Text += "已存檔 : " + file1 + "\n";
+                    richTextBox1.Text += "已存檔 : " + filename2 + "\n";
+                    //richTextBox1.Text += "已存檔 : " + file3 + "\n";
+                    show_main_message("已存檔", S_OK, 10);
+                }
+                catch (Exception ex)
+                {
+                    richTextBox1.Text += "xxx錯誤訊息b : " + ex.Message + "\n";
+                    show_main_message("存檔失敗", S_OK, 30);
+                }
+            }
+            else
+            {
+                richTextBox1.Text += "無圖可存\n";
+                show_main_message("無圖可存", S_OK, 20);
+            }
+        }
+
+        void show_main_message(string mesg, int number, int timeout)
+        {
+            lb_main_mesg.Text = mesg;
+
+            timer_display_show_main_mesg_count = 0;
+            timer_display_show_main_mesg_count_target = timeout;   //timeout in 0.1 sec
+            timer_display.Enabled = true;
+        }
+
+        private void timer_display_Tick(object sender, EventArgs e)
+        {
+            if (timer_display_show_main_mesg_count < timer_display_show_main_mesg_count_target)      //display main message timeout
+            {
+                timer_display_show_main_mesg_count++;
+                if (timer_display_show_main_mesg_count >= timer_display_show_main_mesg_count_target)
+                    lb_main_mesg.Text = "";
+            }
         }
     }
 

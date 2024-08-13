@@ -180,8 +180,6 @@ namespace vcs_WebCam
 
             //初始化motion detector
             motion_detector = new MotionDetector(new TwoFramesDifferenceDetector(), new MotionAreaHighlighting());
-
-            pictureBox1.Image = vcs_WebCam.Properties.Resources.chicken;
         }
 
         //窗口關閉事件
@@ -228,6 +226,7 @@ namespace vcs_WebCam
 
             pictureBox1.Size = new Size(W_pictureBox1, H_pictureBox1);
             pictureBox1.Location = new Point(BORDER, BORDER + H_groupBox_webcam + BORDER);
+            pictureBox1.Image = vcs_WebCam.Properties.Resources.chicken;
 
             richTextBox1.Size = new Size(W_richTextBox1, H_richTextBox1);
             richTextBox1.Location = new Point(BORDER + W_pictureBox1 + BORDER, BORDER + H_groupBox_webcam + BORDER);
