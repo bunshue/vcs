@@ -59,7 +59,7 @@ namespace vcs_WebCam_AForge2_Record1
 
         int webcam_w = 0;
         int webcam_h = 0;
-        //int webcam_fps = 0;
+        int webcam_fps = 0;
 
         public Form1()
         {
@@ -72,7 +72,7 @@ namespace vcs_WebCam_AForge2_Record1
             Form1.CheckForIllegalCrossThreadCalls = false;  //解決跨執行緒控制無效
 
             show_item_location();
-            Init_WebcamSetup();
+            //Init_WebcamSetup();
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -218,7 +218,7 @@ namespace vcs_WebCam_AForge2_Record1
 
                         richTextBox1.Text += "第 " + (i + 1).ToString() + " 台WebCam:\n";
                         richTextBox1.Text += "短名 : " + USBWebcams[i].Name + "\n";
-                        richTextBox1.Text += "ProvideSnapshots = " + Cam.ProvideSnapshots.ToString() + "\n";
+                        //richTextBox1.Text += "ProvideSnapshots = " + Cam.ProvideSnapshots.ToString() + "\n";
                         if (Cam.ProvideSnapshots == true)
                         {
                             richTextBox1.Text += "Snapshot len = " + Cam.SnapshotCapabilities.Length.ToString() + "\n";
@@ -226,7 +226,7 @@ namespace vcs_WebCam_AForge2_Record1
                             //richTextBox1.Text += "Snapshot H = " + Cam.SnapshotResolution.FrameSize.Height.ToString() + "\n";
                             //richTextBox1.Text += "Snapshot FR = " + Cam.SnapshotResolution.MaximumFrameRate.ToString() + "\n";
                         }
-                        richTextBox1.Text += "顯示能力 VideoCapabilities.Length " + Cam.VideoCapabilities.Length.ToString() + "\n";
+                        //richTextBox1.Text += "顯示能力 VideoCapabilities.Length " + Cam.VideoCapabilities.Length.ToString() + "\n";
                         var videoCapabilities = Cam.VideoCapabilities;
                         foreach (var video in videoCapabilities)
                         {
@@ -250,7 +250,6 @@ namespace vcs_WebCam_AForge2_Record1
                         {
                             camera_short_name.Add(USBWebcams[i].Name);
                             camera_full_name.Add(USBWebcams[i].MonikerString);
-
                             comboBox1.Items.Add(USBWebcams[i].Name);
 
                             int j;
@@ -291,12 +290,12 @@ namespace vcs_WebCam_AForge2_Record1
                                 webcam_name = (i + 1).ToString() + ". " + USBWebcams[i].Name + " "
     + Cam.VideoCapabilities[j].FrameSize.Width.ToString() + " X " + Cam.VideoCapabilities[j].FrameSize.Height.ToString();
 
-                                richTextBox1.Text += webcam_name + "\n";
+                                //richTextBox1.Text += webcam_name + "\n";
 
                                 camera_capability.Add(new int[] { i, j });
                             }
                         }
-                        richTextBox1.Text += "\n\n";
+                        richTextBox1.Text += "\n";
                     }
                     if (comboBox1.Items.Count > 0)
                         comboBox1.SelectedIndex = 0;
@@ -355,29 +354,29 @@ namespace vcs_WebCam_AForge2_Record1
                 bt_snapshot.Enabled = false;
                 //bt_fullscreen.Enabled = false;
             }
+            bt_start.Enabled = true;
             bt_stop.Enabled = false;
-            //bt_record.Enabled = false;
-
+            bt_snapshot.Enabled = false;
+            bt_record_start.Enabled = false;
+            bt_record_stop.Enabled = false;
+            bt_record_start2.Enabled = false;
             return;
         }
 
         void Start_Webcam()
         {
-            richTextBox1.Text += "選擇相機 : " + camera_short_name[comboBox1.SelectedIndex] + "\n";
-            richTextBox1.Text += "選擇相機 index : " + comboBox1.SelectedIndex.ToString() + "\n";
-            richTextBox1.Text += "選擇能力 : " + comboBox2.SelectedIndex.ToString() + "\n";
-            richTextBox1.Text += "選擇方向 : " + comboBox3.SelectedIndex.ToString() + "\t" + comboBox3.Text + "\n";
-
-            if (flag_ims_camera_exists1 == true)
+            /*
+            if (flag_ims_camera_exists1 == true) // ims 顯微鏡
             {
                 richTextBox1.Text += "短名 : " + ims_camera_name_short1 + "\n";
                 richTextBox1.Text += "長名 : " + ims_camera_name_long1 + "\n";
             }
-            if (flag_ims_camera_exists2 == true)
+            if (flag_ims_camera_exists2 == true) // ims 內視鏡
             {
                 richTextBox1.Text += "短名 : " + ims_camera_name_short2 + "\n";
                 richTextBox1.Text += "長名 : " + ims_camera_name_long2 + "\n";
             }
+            */
 
             if ((flag_ims_camera_exists1 == false) && (flag_ims_camera_exists2 == false))
             {
@@ -406,8 +405,40 @@ namespace vcs_WebCam_AForge2_Record1
                 Cam = new VideoCaptureDevice(ims_camera_name_long);  //實例化對象
                 //richTextBox1.Text += "MonikerString : " + USBWebcams[comboBox1.SelectedIndex].MonikerString + "\n";
 
-                //真正設定顯示能力的地方
+                //真正設定顯示能力的地方  Fail
                 //Cam.VideoResolution = Cam.VideoCapabilities[comboBox2.SelectedIndex];   //若有多個capabilities 可以更換
+
+                richTextBox1.Text += "目前因為AF版本問題, 只能使用預設顯示能力\n";
+
+                /*
+                richTextBox1.Text += "DesiredFrameRate : " + Cam.DesiredFrameRate + "\n";
+                richTextBox1.Text += "DesiredFrameSize : " + Cam.DesiredFrameSize + "\n";
+                richTextBox1.Text += "VideoCapabilities : " + Cam.VideoCapabilities + "\n";
+                richTextBox1.Text += "顯示能力 VideoCapabilities.Length " + Cam.VideoCapabilities.Length.ToString() + "\n";
+                */
+
+                webcam_w = Cam.VideoCapabilities[0].FrameSize.Width;
+                webcam_h = Cam.VideoCapabilities[0].FrameSize.Height;
+                webcam_fps = Cam.VideoCapabilities[0].FrameRate;
+
+                richTextBox1.Text += "格式 : " + webcam_w.ToString() + " X " + webcam_h.ToString() + " @ " + webcam_fps.ToString() + " Hz\n";
+
+                var videoCapabilities = Cam.VideoCapabilities;
+                foreach (var video in videoCapabilities)
+                {
+                    /*
+                    richTextBox1.Text += "fps : " + video.FrameRate.ToString() + "\n";
+                    richTextBox1.Text += "預覽分辨率 : " + video.FrameSize.Width.ToString() + " X " + video.FrameSize.Height.ToString() + "\n";
+                    //richTextBox1.Text += "AverageFrameRate : " + video.AverageFrameRate.ToString() + "\n";
+                    //richTextBox1.Text += "BitCount : " + video.BitCount.ToString() + "\n";
+                    //richTextBox1.Text += "MaximumFrameRate : " + video.MaximumFrameRate.ToString() + "\n";
+                    //string video_capability = video.FrameSize.Width.ToString() + " X " + video.FrameSize.Height.ToString() + " @ " + video.AverageFrameRate.ToString() + " Hz";
+                    string video_capability = video.FrameSize.Width.ToString() + " X " + video.FrameSize.Height.ToString();
+                    richTextBox1.Text += "video_capability : " + video_capability + "\n";
+                    //comboBox2.Items.Add(video_capability);
+                    */
+                }
+
 
                 Cam.NewFrame += new NewFrameEventHandler(Cam_NewFrame);
                 Cam.Start();   // WebCam starts capturing images.
@@ -416,9 +447,9 @@ namespace vcs_WebCam_AForge2_Record1
                 //Cam.VideoResolution = Cam.VideoCapabilities[comboBox1.SelectedIndex];
                 string webcam_name = string.Empty;
                 //int ww = Cam.VideoCapabilities[comboBox1.SelectedIndex].FrameSize.Width;
-                int ww = 640;
+                int ww = webcam_w;
                 //int hh = Cam.VideoCapabilities[comboBox1.SelectedIndex].FrameSize.Height;
-                int hh = 480;
+                int hh = webcam_h;
                 //webcam_name = USBWebcams[comboBox1.SelectedIndex].Name + " " + ww.ToString() + " X " + hh.ToString() + " @ " + Cam.VideoCapabilities[comboBox1.SelectedIndex].AverageFrameRate.ToString() + " Hz";
                 //webcam_name = USBWebcams[comboBox1.SelectedIndex].Name + " " + ww.ToString() + " X " + hh.ToString();
                 webcam_name = "ims_camera";
@@ -436,6 +467,13 @@ namespace vcs_WebCam_AForge2_Record1
                 webcam_w = ww;
                 webcam_h = hh;
                 //webcam_fps = fps;
+
+                bt_start.Enabled = false;
+                bt_stop.Enabled = true;
+                bt_snapshot.Enabled = true;
+                bt_record_start.Enabled = true;
+                bt_record_stop.Enabled = true;
+                bt_record_start2.Enabled = true;
             }
             else
             {
@@ -518,8 +556,26 @@ namespace vcs_WebCam_AForge2_Record1
         void Cam_NewFrame(object sender, NewFrameEventArgs eventArgs)
         {
             frame_count++;
-            //pictureBox1.Image = (Bitmap)eventArgs.Frame.Clone();
-            bm = (Bitmap)eventArgs.Frame.Clone();
+
+            try
+            {
+                //bm.RotateFlip(RotateFlipType.RotateNoneFlipY);    //反轉
+                //pictureBox1.Image = (Bitmap)eventArgs.Frame.Clone();
+                pictureBox1.Image = (Bitmap)eventArgs.Frame.Clone();
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "xxx錯誤訊息e05 : " + ex.Message + "\n";
+            }
+
+            try
+            {
+                bm = (Bitmap)eventArgs.Frame.Clone();
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "xxx錯誤訊息e04 : " + ex.Message + "\n";
+            }
 
             g = Graphics.FromImage(bm);
 
@@ -561,10 +617,9 @@ namespace vcs_WebCam_AForge2_Record1
                 }
             }
 
-            //bm.RotateFlip(RotateFlipType.RotateNoneFlipY);    //反轉
-            pictureBox1.Image = bm;
-
             GC.Collect();       //回收資源
+
+            return;
         }
 
         void do_record()
@@ -579,19 +634,32 @@ namespace vcs_WebCam_AForge2_Record1
             {
                 //開啟錄影模式
                 flag_recording = true;
+                recording_time_st = DateTime.Now;
+                //int fps = webcam_fps;
+                int fps = 17;   //16.79
 
                 recording_filename = Application.StartupPath + "\\avi_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".avi";
 
-                richTextBox1.Text += "filename : " + recording_filename + "\n";
-                richTextBox1.Text += "Width : " + webcam_w.ToString() + "\n";
-                richTextBox1.Text += "Height : " + webcam_h.ToString() + "\n";
+                richTextBox1.Text += "\n開始錄影, 檔案 : " + recording_filename + "\n";
+                richTextBox1.Text += "格式 : " + webcam_w.ToString() + " X " + webcam_h.ToString() + " @ " + fps.ToString() + " Hz\n";
+                richTextBox1.Text += "時間 : " + recording_time_st.ToString() + "\n";
 
-                int fps = 30;
                 //writer.Open(recording_filename, webcam_w, webcam_h, fps, VideoCodec.MPEG4);
-                writer.Open(recording_filename, webcam_w, webcam_h, fps, VideoCodec.WMV2);
-
-                richTextBox1.Text += "錄影開始\t時間 : " + DateTime.Now.ToString() + "\n";
-                recording_time_st = DateTime.Now;
+                //writer.Open(recording_filename, webcam_w, webcam_h, fps, VideoCodec.WMV2); //容量較大
+                writer.Open(recording_filename, webcam_w, webcam_h, fps, (VideoCodec)0);
+                /*
+                Default = -1,
+                MPEG4 = 0,
+                WMV1 = 1,
+                WMV2 = 2,
+                MSMPEG4v2 = 3,
+                MSMPEG4v3 = 4,
+                H263P = 5,
+                FLV1 = 6,
+                MPEG2 = 7,
+                Raw = 8,
+                //(VideoCodec)3;
+                */
             }
             else
             {
@@ -655,13 +723,14 @@ namespace vcs_WebCam_AForge2_Record1
 
                 writer.Close();
 
-                richTextBox1.Text += "錄影結束\t時間 : " + DateTime.Now.ToString() + "\n";
-                richTextBox1.Text += "錄影時間 :\t" + (DateTime.Now - recording_time_st).TotalSeconds.ToString("0.00") + " 秒\n";
-                //richTextBox1.Text += "錄影時間 : " + (DateTime.Now - recording_time_st).ToString() + "\n\n";
-                richTextBox1.Text += "檔案 :\t\t" + recording_filename + "\n\n";
+                richTextBox1.Text += "\n停止錄影, 檔案 : " + recording_filename + "\n";
+                richTextBox1.Text += "時間 : " + DateTime.Now.ToString() + "\n";
+                richTextBox1.Text += "錄影長度 :\t" + (DateTime.Now - recording_time_st).TotalSeconds.ToString("0.00") + " 秒\n";
+
                 flag_limit_recording_time = false;
                 bt_record_start.Enabled = true;
                 bt_record_stop.Enabled = false;
+                bt_record_start2.Enabled = true;
             }
             else
             {
@@ -709,7 +778,7 @@ namespace vcs_WebCam_AForge2_Record1
             comboBox3.SelectedIndex = 0;
             comboBox2.Items.Clear();
             int i = comboBox1.SelectedIndex;
-            richTextBox1.Text += "你選了 : " + i.ToString() + "  相機\n";
+            //richTextBox1.Text += "你選了 : " + i.ToString() + "  相機\n";
             VideoCaptureDevice Cam_tmp = null;
             Cam_tmp = new VideoCaptureDevice(USBWebcams[i].MonikerString);  //實例化對象
 
@@ -758,7 +827,7 @@ namespace vcs_WebCam_AForge2_Record1
 
                     comboBox2.Items.Add(webcam_name);
 
-                    richTextBox1.Text += webcam_name + "\n";
+                    //richTextBox1.Text += webcam_name + "\n";
                 }
             }
             if (comboBox2.Items.Count > 0)
@@ -767,7 +836,7 @@ namespace vcs_WebCam_AForge2_Record1
 
         private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
         {
-            richTextBox1.Text += "選了" + comboBox3.SelectedIndex.ToString() + "\n";
+            //richTextBox1.Text += "選了" + comboBox3.SelectedIndex.ToString() + "\n";
             switch (comboBox3.SelectedIndex)
             {
                 case 0: rotate_flip_type = RotateFlipType.RotateNoneFlipNone; break;
@@ -788,12 +857,14 @@ namespace vcs_WebCam_AForge2_Record1
                 case 15: rotate_flip_type = RotateFlipType.Rotate270FlipXY; break;
                 default: rotate_flip_type = RotateFlipType.RotateNoneFlipNone; break;
             }
-            richTextBox1.Text += "選了" + rotate_flip_type.ToString() + "\n";
+            //richTextBox1.Text += "選了" + rotate_flip_type.ToString() + "\n";
         }
 
         bool camera_start = false;
         private void bt_start_Click(object sender, EventArgs e)
         {
+            Init_WebcamSetup();
+
             camera_start = true;
             Start_Webcam();
 
@@ -811,9 +882,13 @@ namespace vcs_WebCam_AForge2_Record1
         {
             camera_start = false;
             Stop_Webcam();
+
             bt_start.Enabled = true;
             bt_stop.Enabled = false;
-            //bt_record.Enabled = false;
+            bt_snapshot.Enabled = false;
+            bt_record_start.Enabled = false;
+            bt_record_stop.Enabled = false;
+            bt_record_start2.Enabled = false;
         }
 
         //重抓WebCam, 只有關了再開
@@ -827,9 +902,9 @@ namespace vcs_WebCam_AForge2_Record1
 
             System.Threading.Thread.Sleep(100);
 
-            camera_start = true;
-            bt_start.Text = "停止";
+            Init_WebcamSetup();
 
+            camera_start = true;
             Start_Webcam();
         }
 
@@ -837,6 +912,10 @@ namespace vcs_WebCam_AForge2_Record1
         {
             show_main_message("離開", S_OK, 20);
             Application.Exit();
+
+            show_main_message("測試自動錄影", S_OK, 20);
+
+            test_auto_record();
         }
 
         private void bt_snapshot_Click(object sender, EventArgs e)
@@ -907,5 +986,75 @@ namespace vcs_WebCam_AForge2_Record1
             }
         }
 
+        //delay 10000 約 10秒
+        //C# 不lag的延遲時間
+        private void delay(int delay_milliseconds)
+        {
+            delay_milliseconds *= 2;
+            DateTime time_before = DateTime.Now;
+            while (((TimeSpan)(DateTime.Now - time_before)).TotalMilliseconds < delay_milliseconds)
+            {
+                Application.DoEvents();
+            }
+        }
+
+        void test_auto_record()
+        {
+            if (flag_webcam_ok == false)    //如果webcam沒啟動
+            {
+                show_main_message("相機未啟動, 無錄影", S_OK, 20);
+                return;
+            }
+
+            for (int codec = 0; codec <= 8; codec++)
+            {
+                flag_limit_recording_time = true;
+                //開啟錄影模式
+                flag_recording = true;
+                recording_time_st = DateTime.Now;
+                int fps = webcam_fps;
+
+                //recording_filename = Application.StartupPath + "\\avi_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".avi";
+                recording_filename = Application.StartupPath + "\\avi_test_mode_" + codec.ToString() + ".avi";
+
+                richTextBox1.Text += "\n開始錄影, 檔案 : " + recording_filename + "\n";
+                richTextBox1.Text += "格式 : " + webcam_w.ToString() + " X " + webcam_h.ToString() + " @ " + fps.ToString() + " Hz\n";
+                richTextBox1.Text += "時間 : " + recording_time_st.ToString() + "\n";
+
+                //writer.Open(recording_filename, webcam_w, webcam_h, fps, VideoCodec.MPEG4);
+                //writer.Open(recording_filename, webcam_w, webcam_h, fps, VideoCodec.WMV2); //容量較大
+                writer.Open(recording_filename, webcam_w, webcam_h, fps, (VideoCodec)codec);
+                /*
+                Default = -1,
+                MPEG4 = 0,
+                WMV1 = 1,
+                WMV2 = 2,
+                MSMPEG4v2 = 3,
+                MSMPEG4v3 = 4,
+                H263P = 5,
+                FLV1 = 6,
+                MPEG2 = 7,
+                Raw = 8,
+
+                //(VideoCodec)3;
+                */
+
+                while (true)
+                {
+                    if (flag_limit_recording_time == false)
+                    {
+                        richTextBox1.Text += "XXXX";
+                        break;
+                    }
+                    delay(100);
+                }
+
+            }
+
+
+
+        }
     }
 }
+
+
