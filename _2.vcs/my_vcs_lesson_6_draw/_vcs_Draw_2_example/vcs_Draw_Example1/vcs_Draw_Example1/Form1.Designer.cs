@@ -291,7 +291,6 @@
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(135, 45);
             this.button0.TabIndex = 30;
-            this.button0.Text = "製作數字球";
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 

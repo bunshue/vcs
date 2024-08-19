@@ -10,6 +10,8 @@ using System.Windows.Forms;
 using System.IO;                //for File
 using System.Diagnostics;       //for Process
 using System.Drawing.Imaging;   //for ImageFormat
+using System.Drawing.Drawing2D; //for CompositingQuality, SmoothingMode //提供畫高級二維，矢量圖形功能
+using System.Drawing.Text;      //for TextRenderingHint //提供畫GDI+圖形的高級功能
 
 namespace _vcs_MakePicture
 {
@@ -2065,8 +2067,6 @@ namespace _vcs_MakePicture
             //逐點製作圖檔
             int width;
             int height;
-            int xx;
-            int yy;
 
             width = 500;
             height = 200;
@@ -2107,10 +2107,7 @@ namespace _vcs_MakePicture
             g = Graphics.FromImage(bitmap1);
             g.Clear(Color.White);
 
-            int x_st = 100;
-            int y_st = 100;
             int dx = 50;
-            int dy = 50;
 
             int i;
             for (i = 0; i <= width; i += dx)
@@ -2133,9 +2130,6 @@ namespace _vcs_MakePicture
             //1080p的桌面 Windows是顯示 1920 X 1040  下面的40點是工作列
             //用ACDSee設置桌面 要選 Titled
 
-            int width;
-            int height;
-
             int W = 1920;
             int H = 1040;
 
@@ -2144,8 +2138,6 @@ namespace _vcs_MakePicture
             g = Graphics.FromImage(bitmap1);
             g.Clear(Color.Black);
 
-            int x_st = 0;
-            int y_st = 0;
             int dx = 100;
             int dy = 100;
 
@@ -2368,7 +2360,7 @@ namespace _vcs_MakePicture
 
             string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.bmp";
             Bitmap bitmap2 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
-            g.DrawImage(bitmap2, 20+100, (H - 400) / 2, bitmap2.Width, bitmap2.Height);
+            g.DrawImage(bitmap2, 20 + 100, (H - 400) / 2, bitmap2.Width, bitmap2.Height);
             //              貼上的位置      貼上的大小 放大縮小用
 
             Font f;
@@ -2403,13 +2395,13 @@ namespace _vcs_MakePicture
             string filename = @"C:\_git\vcs\_1.data\______test_files1\picture2.jpg";
             Bitmap bitmap2 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
             richTextBox1.Text += "W = " + bitmap2.Width.ToString() + ", H = " + bitmap2.Height.ToString() + "\n";
-            g.DrawImage(bitmap2, W-20-bitmap2.Width-100, (H - 400) / 2, bitmap2.Width, bitmap2.Height);
+            g.DrawImage(bitmap2, W - 20 - bitmap2.Width - 100, (H - 400) / 2, bitmap2.Width, bitmap2.Height);
             //              貼上的位置      貼上的大小 放大縮小用
 
             Font f;
             f = new Font("標楷體", 80);
             sb = new SolidBrush(Color.FromArgb(255, 0, 255, 0));
-            g.DrawString("右", f, sb, new PointF(80+320, 350));
+            g.DrawString("右", f, sb, new PointF(80 + 320, 350));
 
             filename = Application.StartupPath + "\\IMG_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
             bitmap1.Save(@filename, ImageFormat.Bmp);
@@ -2452,7 +2444,7 @@ namespace _vcs_MakePicture
             //Cyan 0 255 255
             sb = new SolidBrush(Color.FromArgb(255, 0x00, 0xff, 0xff));
             g.FillRectangle(sb, new Rectangle(x_st + dx * 0, y_st + dy * 2, w, h));
-            
+
             //Magenta 255 0 255
             sb = new SolidBrush(Color.FromArgb(255, 0xff, 0x0, 0xff));
             g.FillRectangle(sb, new Rectangle(x_st + dx * 1, y_st + dy * 2, w, h));
@@ -2516,7 +2508,7 @@ namespace _vcs_MakePicture
 
             sb = new SolidBrush(Color.Blue);
 
-            g.FillEllipse(sb, 100+70, 50+120, 200, 200);
+            g.FillEllipse(sb, 100 + 70, 50 + 120, 200, 200);
 
             pictureBox1.Image = bitmap1;
 
@@ -2571,7 +2563,7 @@ namespace _vcs_MakePicture
             Font f;
             f = new Font("標楷體", 300);
             sb = new SolidBrush(Color.Red);
-            g.DrawString("群", f, sb, new PointF(-65,-10));
+            g.DrawString("群", f, sb, new PointF(-65, -10));
 
             pictureBox1.Image = bitmap1;
 
@@ -2677,9 +2669,122 @@ namespace _vcs_MakePicture
 
         }
 
+        //製作標示球 ST
         private void button68_Click(object sender, EventArgs e)
         {
+            //製作標示球
 
+            string word = "通";
+
+            Color color_background = Color.Lime;
+            Color color_foreground = Color.Magenta;
+            Font f = new Font("Times New Roman", 200F);//字型與大小
+            f = new Font("標楷體", 50F); //字型與大小
+            int width = 100;    //圖片大小
+            int boder_size = 20; //邊框大小, 寫0為無邊框
+
+            richTextBox1.Text += "背景色\t" + color_background + "\n";
+            richTextBox1.Text += "前景色\t" + color_foreground + "\n";
+            richTextBox1.Text += "字型\t" + f.Name + ", " + f.Size.ToString() + "\n";
+            richTextBox1.Text += "大小\t" + width + "\n";
+            richTextBox1.Text += "框線大小\t" + boder_size.ToString() + "\n";
+
+            Bitmap bitmap1 = MakeNumberBitmap(width, color_background, color_foreground, boder_size, f, word);
+            //顯示出來
+            pictureBox1.Image = bitmap1;
+
+            //存圖
+
+            //用PNG可以避免黑邊框
+            string filename = Application.StartupPath + "\\" + word + ".png";
+            try
+            {
+                //bitmap1.Save(filename, ImageFormat.Jpeg);
+                //bitmap1.Save(filename, ImageFormat.Bmp);
+                bitmap1.Save(filename, ImageFormat.Png);
+
+                //richTextBox1.Text += "已存檔 : " + file1 + "\n";
+                richTextBox1.Text += "已存檔 : " + filename + "\n";
+                //richTextBox1.Text += "已存檔 : " + file3 + "\n";
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
+            }
+            richTextBox1.Text += "完成\n";
+        }
+
+        // Make a bitmap containing the indicated text.
+        private Bitmap MakeNumberBitmap(int width, Color bg_color, Color fg_color, int border_size, Font fg_font, string txt)
+        {
+            // Size the bitmap.
+            Bitmap bm = new Bitmap(width, width);
+            using (Graphics g = Graphics.FromImage(bm))
+            {
+                g.SmoothingMode = SmoothingMode.AntiAlias;
+                g.TextRenderingHint = TextRenderingHint.AntiAlias;
+
+                // Make the background transparent.
+                g.Clear(Color.Transparent);
+
+                // Fill the background.
+                Rectangle rect;
+                const int margin = 2;
+                int rect_width;
+
+
+                if (border_size == 0)
+                {
+                    rect = new Rectangle(2, 2, width - 4, width - 4);
+                }
+                else
+                {
+                    rect_width = width - 2 * margin;
+                    if (rect_width < 1) rect_width = 1;
+                    rect = new Rectangle(margin, margin, rect_width, rect_width);
+                }
+                using (LinearGradientBrush bg_brush = new LinearGradientBrush(rect, Color.White, bg_color, LinearGradientMode.BackwardDiagonal))
+                {
+                    g.FillEllipse(bg_brush, rect);
+                }
+
+                if (border_size == 0)
+                {
+                    // Outline the background.
+                    if (border_size > 0)
+                    {
+                        using (Pen bg_pen = new Pen(bg_color))
+                        {
+                            g.DrawEllipse(bg_pen, rect);
+                        }
+                    }
+                }
+                else
+                {
+                    rect_width = width - 2 * (margin + border_size);
+                    if (rect_width < 1) rect_width = 1;
+                    Rectangle inner_rect = new Rectangle(margin + border_size, margin + border_size, rect_width, rect_width);
+                    using (LinearGradientBrush bg_brush = new LinearGradientBrush(inner_rect, bg_color, Color.White, LinearGradientMode.BackwardDiagonal))
+                    {
+                        g.FillEllipse(bg_brush, inner_rect);
+                    }
+                }
+
+                // Draw the sample text.
+                using (StringFormat string_format = new StringFormat())
+                {
+                    string_format.Alignment = StringAlignment.Center;
+                    string_format.LineAlignment = StringAlignment.Center;
+                    using (Brush fg_brush = new SolidBrush(fg_color))
+                    {
+                        rect_width = width - 2 * margin;
+                        rect = new Rectangle(margin, margin + 10, rect_width, rect_width);
+
+                        g.DrawString(txt, fg_font, fg_brush, rect, string_format);
+                    }
+                }
+            }
+            return bm;
         }
 
         private void button69_Click(object sender, EventArgs e)

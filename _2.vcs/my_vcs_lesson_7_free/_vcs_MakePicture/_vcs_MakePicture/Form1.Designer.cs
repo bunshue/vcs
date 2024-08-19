@@ -1003,6 +1003,7 @@
             this.button68.Name = "button68";
             this.button68.Size = new System.Drawing.Size(60, 60);
             this.button68.TabIndex = 72;
+            this.button68.Text = "製作  標示球";
             this.button68.UseVisualStyleBackColor = true;
             this.button68.Click += new System.EventHandler(this.button68_Click);
             // 

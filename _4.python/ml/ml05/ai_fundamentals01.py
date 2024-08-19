@@ -1,3 +1,9 @@
+"""
+
+
+
+"""
+
 print("------------------------------------------------------------")  # 60個
 
 # 共同
@@ -20,6 +26,26 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
+#numpy cumsum()函数简介
+#函数作用：求数组的所有元素的累计和，可通过参数axis指定求某个轴向的统计值。
+
+a = np.array([[0, 1, 2, 3], [4, 5, 6, 7], [8, 9, 10, 11]])
+
+print(a)
+
+print('累計和')
+cc = a.cumsum()
+print(cc)
+#array([ 1,  3,  6, 10, 15, 21], dtype=int32)
+
+print('累計和, axis=0')
+cc = np.cumsum(a, axis=0)
+print(cc)
+
+print('累計和, axis=1')
+cc = np.cumsum(a, axis=1)
+print(cc)
+
 #隨機漫步算法
 
 n_person = 2000
@@ -33,10 +59,13 @@ sd_amount = amount ** 2
 mean_sd_amount = sd_amount.mean(axis=0)
 
 plt.figure(figsize=(8, 6))
+
 plt.xlabel(r"$t$", fontsize=16)
-plt.tick_params(labelsize=12)
 plt.ylabel(r"$\sqrt{\langle (\delta x)^2 \rangle}$", fontsize=24)
-plt.plot(t, np.sqrt(mean_sd_amount), 'g.', t, np.sqrt(t), 'r-');
+
+plt.plot(t, np.sqrt(mean_sd_amount), 'g.');
+plt.plot(t, np.sqrt(t), 'r-');
+
 plt.title('隨機漫步算法')
 
 plt.show()
@@ -45,18 +74,22 @@ print("------------------------------------------------------------")  # 60個
 
 #多項式擬合
 
-n_dots = 20
-n_order = 3
+N = 10
+n_order = 3 # 3階
 
-x = np.linspace(0, 1, n_dots)
-y = np.sqrt(x) + 0.2*np.random.rand(n_dots)
+x = np.linspace(0, 1, N)
+y = x + 0.4*(np.random.rand(N)-0.5)
 p = np.poly1d(np.polyfit(x, y, n_order))
 print(p.coeffs)
 
-t = np.linspace(0, 1, 200)
-#plt.figure(figsize=(16, 12), dpi=200)
-plt.plot(x, y, 'ro', t, p(t), '-');
-plt.title('多項式擬合')
+t = np.linspace(0, 1, 100)
+
+plt.plot(x, x, 'r-', label='理論');
+plt.plot(x, y, 'go', label='實驗');
+plt.plot(t, p(t), 'b-', label='擬合');
+plt.legend()
+
+plt.title('多項式擬合, ' + str(n_order) + " 階")
 
 plt.show()
 
@@ -152,6 +185,8 @@ df = pd.read_csv('data.csv', index_col=0)
 print(df.shape)
 print(df.head(5))
 
+sys.exit()
+
 print("------------------------------------------------------------")  # 60個
 
 from sklearn import datasets
@@ -225,10 +260,10 @@ print(clf.score(Xtest, Ytest))
 
 print("------------------------------------------------------------")  # 60個
 
-n_dots = 20
+N = 20
 
-x = np.linspace(0, 1, n_dots)                   # [0, 1] 之间创建 20 个点
-y = np.sqrt(x) + 0.2*np.random.rand(n_dots) - 0.1;
+x = np.linspace(0, 1, N)                   # [0, 1] 之间创建 20 个点
+y = np.sqrt(x) + 0.2*np.random.rand(N) - 0.1;
 
 def plot_polynomial_fit(x, y, order):
     p = np.poly1d(np.polyfit(x, y, order))
@@ -274,10 +309,10 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-n_dots = 200
+N = 200
 
-X = np.linspace(0, 1, n_dots)                   
-y = np.sqrt(X) + 0.2*np.random.rand(n_dots) - 0.1;
+X = np.linspace(0, 1, N)                   
+y = np.sqrt(X) + 0.2*np.random.rand(N) - 0.1;
 
 X = X.reshape(-1, 1)
 y = y.reshape(-1, 1)
@@ -430,12 +465,12 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 
 # 生成训练样本
-n_dots = 40
-X = 5 * np.random.rand(n_dots, 1)
+N = 40
+X = 5 * np.random.rand(N, 1)
 y = np.cos(X).ravel()
 
 # 添加一些噪声
-y += 0.2 * np.random.rand(n_dots) - 0.1
+y += 0.2 * np.random.rand(N) - 0.1
 
 # 训练模型
 from sklearn.neighbors import KNeighborsRegressor
@@ -555,10 +590,10 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-n_dots = 200
+N = 200
 
-X = np.linspace(-2 * np.pi, 2 * np.pi, n_dots)
-Y = np.sin(X) + 0.2 * np.random.rand(n_dots) - 0.1
+X = np.linspace(-2 * np.pi, 2 * np.pi, N)
+Y = np.sin(X) + 0.2 * np.random.rand(N) - 0.1
 X = X.reshape(-1, 1)
 Y = Y.reshape(-1, 1);
 
