@@ -351,6 +351,7 @@ print('------------------------------------------------------------')	#60個
 #讀取數據集
 #指定下載位置
 olivetti_faces = fetch_olivetti_faces(data_home='data\\',shuffle=True, random_state=rng)
+#olivetti_faces = fetch_olivetti_faces(data_home=data_home)
 
 #未指定下載位置, 下載至 C:/Users/070601/scikit_learn_data/olivetti_py3.pkz
 olivetti_faces = fetch_olivetti_faces()
@@ -376,6 +377,8 @@ for i in range(15):
     ax.axis('off')
 
 plt.show()
+
+sys.exit()
 
 print('------------------------------------------------------------')	#60個
 

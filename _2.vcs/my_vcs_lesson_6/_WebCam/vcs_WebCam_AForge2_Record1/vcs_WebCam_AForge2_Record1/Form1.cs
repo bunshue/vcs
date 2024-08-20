@@ -110,9 +110,6 @@ namespace vcs_WebCam_AForge2_Record1
             richTextBox1.Location = new Point(x_st + dx * 3 + 90, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            groupBox1.Size = new Size(250, 200);
-            groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0 + H + BORDER);
-            groupBox1.Visible = false;
             groupBox2.Size = new Size(380, 200);
             //groupBox2.Location = new Point(x_st + dx * 0 + 250 + BORDER, y_st + dy * 0 + H + BORDER);
             groupBox2.Location = new Point(x_st + dx * 0, y_st + dy * 0 + H + BORDER);
@@ -123,15 +120,6 @@ namespace vcs_WebCam_AForge2_Record1
             y_st = 20;
             dx = 90;
             dy = 28;
-            comboBox1.Size = new Size(220, 40);
-            comboBox2.Size = new Size(220, 40);
-            comboBox3.Size = new Size(220, 40);
-            label1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            comboBox1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            label2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            comboBox2.Location = new Point(x_st + dx * 0, y_st + dy * 3);
-            label3.Location = new Point(x_st + dx * 0, y_st + dy * 4);
-            comboBox3.Location = new Point(x_st + dx * 0, y_st + dy * 5);
             dy = 40;
 
             bt_start.Location = new Point(x_st + dx * 0, y_st + dy * 0);
@@ -156,7 +144,7 @@ namespace vcs_WebCam_AForge2_Record1
             richTextBox1.Clear();
         }
 
-        void Init_WebcamSetup()         //讀出目前相機資訊 存在各list, comboBox1~3和richTextBox1裏
+        void Init_WebcamSetup()         //讀出目前相機資訊 存在各list和richTextBox1裏
         {
             flag_ims_camera_exists1 = false;
             flag_ims_camera_exists2 = false;
@@ -164,9 +152,6 @@ namespace vcs_WebCam_AForge2_Record1
             camera_short_name.Clear();
             camera_full_name.Clear();
             camera_capability.Clear();
-            comboBox1.Items.Clear();
-            comboBox2.Items.Clear();
-            comboBox3.SelectedIndex = 0;
 
             try
             {
@@ -179,9 +164,11 @@ namespace vcs_WebCam_AForge2_Record1
                 int i = 0;
                 foreach (FilterInfo vidDevice in USBWebcams)
                 {
+                    /*
                     richTextBox1.Text += "第 " + (i + 1).ToString() + " 台WebCam:\n";
                     richTextBox1.Text += "短名 : " + vidDevice.Name + "\n";
                     richTextBox1.Text += "長名 : " + vidDevice.MonikerString + "\n";
+                    */
                     if (vidDevice.Name == ims_camera_name_short1)
                     {
                         richTextBox1.Text += "取得 ims 相機1(顯微鏡)\n";
@@ -236,7 +223,6 @@ namespace vcs_WebCam_AForge2_Record1
                             richTextBox1.Text += "BitCount : " + video.BitCount.ToString() + "\n";
                             richTextBox1.Text += "MaximumFrameRate : " + video.MaximumFrameRate.ToString() + "\n";
                             string video_capability = video.FrameSize.Width.ToString() + " X " + video.FrameSize.Height.ToString() + " @ " + video.AverageFrameRate.ToString() + " Hz";
-                            //comboBox2.Items.Add(video_capability);
                             */
                         }
 
@@ -250,7 +236,6 @@ namespace vcs_WebCam_AForge2_Record1
                         {
                             camera_short_name.Add(USBWebcams[i].Name);
                             camera_full_name.Add(USBWebcams[i].MonikerString);
-                            comboBox1.Items.Add(USBWebcams[i].Name);
 
                             int j;
 
@@ -297,11 +282,6 @@ namespace vcs_WebCam_AForge2_Record1
                         }
                         richTextBox1.Text += "\n";
                     }
-                    if (comboBox1.Items.Count > 0)
-                        comboBox1.SelectedIndex = 0;
-
-                    if (comboBox2.Items.Count > 0)
-                        comboBox2.SelectedIndex = 0;
                 }
 
                 /*  reserved
@@ -396,17 +376,16 @@ namespace vcs_WebCam_AForge2_Record1
                 ims_camera_name_long = ims_camera_name_long2;
             }
 
-            richTextBox1.Text += "使用短名 : " + ims_camera_name_short + "\n";
-            richTextBox1.Text += "使用長名 : " + ims_camera_name_long + "\n";
+            //richTextBox1.Text += "使用短名 : " + ims_camera_name_short + "\n";
+            //richTextBox1.Text += "使用長名 : " + ims_camera_name_long + "\n";
 
             USBWebcams = new FilterInfoCollection(FilterCategory.VideoInputDevice);
             if (USBWebcams.Count > 0)  // The quantity of WebCam must be more than 0.
             {
                 Cam = new VideoCaptureDevice(ims_camera_name_long);  //實例化對象
-                //richTextBox1.Text += "MonikerString : " + USBWebcams[comboBox1.SelectedIndex].MonikerString + "\n";
 
                 //真正設定顯示能力的地方  Fail
-                //Cam.VideoResolution = Cam.VideoCapabilities[comboBox2.SelectedIndex];   //若有多個capabilities 可以更換
+                //Cam.VideoResolution = Cam.VideoCapabilities[0];   //若有多個capabilities 可以更換
 
                 richTextBox1.Text += "目前因為AF版本問題, 只能使用預設顯示能力\n";
 
@@ -435,7 +414,6 @@ namespace vcs_WebCam_AForge2_Record1
                     //string video_capability = video.FrameSize.Width.ToString() + " X " + video.FrameSize.Height.ToString() + " @ " + video.AverageFrameRate.ToString() + " Hz";
                     string video_capability = video.FrameSize.Width.ToString() + " X " + video.FrameSize.Height.ToString();
                     richTextBox1.Text += "video_capability : " + video_capability + "\n";
-                    //comboBox2.Items.Add(video_capability);
                     */
                 }
 
@@ -444,14 +422,14 @@ namespace vcs_WebCam_AForge2_Record1
                 Cam.Start();   // WebCam starts capturing images.
 
                 //以下為WebCam訊息與調整視窗大小
-                //Cam.VideoResolution = Cam.VideoCapabilities[comboBox1.SelectedIndex];
+                //Cam.VideoResolution = Cam.VideoCapabilities[0];
                 string webcam_name = string.Empty;
-                //int ww = Cam.VideoCapabilities[comboBox1.SelectedIndex].FrameSize.Width;
+                //int ww = Cam.VideoCapabilities[0].FrameSize.Width;
                 int ww = webcam_w;
-                //int hh = Cam.VideoCapabilities[comboBox1.SelectedIndex].FrameSize.Height;
+                //int hh = Cam.VideoCapabilities[0].FrameSize.Height;
                 int hh = webcam_h;
-                //webcam_name = USBWebcams[comboBox1.SelectedIndex].Name + " " + ww.ToString() + " X " + hh.ToString() + " @ " + Cam.VideoCapabilities[comboBox1.SelectedIndex].AverageFrameRate.ToString() + " Hz";
-                //webcam_name = USBWebcams[comboBox1.SelectedIndex].Name + " " + ww.ToString() + " X " + hh.ToString();
+                //webcam_name = USBWebcams[0].Name + " " + ww.ToString() + " X " + hh.ToString() + " @ " + Cam.VideoCapabilities[0].AverageFrameRate.ToString() + " Hz";
+                //webcam_name = USBWebcams[0].Name + " " + ww.ToString() + " X " + hh.ToString();
                 webcam_name = "ims_camera";
                 //richTextBox1.Text += "webcam_name = " + webcam_name + "\n";
                 //richTextBox1.Text += "webcam_name = " + webcam_name + "\n";
@@ -482,10 +460,10 @@ namespace vcs_WebCam_AForge2_Record1
             }
 
             /*
-            Cam = new VideoCaptureDevice(camera_full_name[comboBox1.SelectedIndex]);    //實例化對象
+            Cam = new VideoCaptureDevice(camera_full_name[0]);    //實例化對象
 
             //真正設定顯示能力的地方
-            Cam.VideoResolution = Cam.VideoCapabilities[comboBox2.SelectedIndex];   //若有多個capabilities 可以更換
+            Cam.VideoResolution = Cam.VideoCapabilities[0];   //若有多個capabilities 可以更換
 
             Cam.NewFrame += new NewFrameEventHandler(Cam_NewFrame);                 //綁定事件
             */
@@ -507,11 +485,11 @@ namespace vcs_WebCam_AForge2_Record1
             /*
             //以下為WebCam訊息
             string webcam_name = string.Empty;
-            int ww = Cam.VideoCapabilities[comboBox2.SelectedIndex].FrameSize.Width;
-            int hh = Cam.VideoCapabilities[comboBox2.SelectedIndex].FrameSize.Height;
-            //int fps = Cam.VideoCapabilities[comboBox2.SelectedIndex].AverageFrameRate;
+            int ww = Cam.VideoCapabilities[0].FrameSize.Width;
+            int hh = Cam.VideoCapabilities[0].FrameSize.Height;
+            //int fps = Cam.VideoCapabilities[0].AverageFrameRate;
 
-            webcam_name = camera_short_name[comboBox1.SelectedIndex] + " "
+            webcam_name = camera_short_name[0] + " "
                 + ww.ToString() + " X "
                 + hh.ToString();
             //+" @ " + fps.ToString() + " Hz";
@@ -559,17 +537,6 @@ namespace vcs_WebCam_AForge2_Record1
 
             try
             {
-                //bm.RotateFlip(RotateFlipType.RotateNoneFlipY);    //反轉
-                //pictureBox1.Image = (Bitmap)eventArgs.Frame.Clone();
-                pictureBox1.Image = (Bitmap)eventArgs.Frame.Clone();
-            }
-            catch (Exception ex)
-            {
-                richTextBox1.Text += "xxx錯誤訊息e05 : " + ex.Message + "\n";
-            }
-
-            try
-            {
                 bm = (Bitmap)eventArgs.Frame.Clone();
             }
             catch (Exception ex)
@@ -588,25 +555,13 @@ namespace vcs_WebCam_AForge2_Record1
 
             drawDate = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
             drawBrush = new SolidBrush(Color.Yellow);
-            drawFont = new Font("Arial", 6, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
+            drawFont = new Font("Arial", 8, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
 
             //在畫面的上方顯示時間
             g.DrawString(drawDate, drawFont, drawBrush, BORDER * 3, BORDER);
 
             if (flag_recording == true)
             {
-
-                TimeSpan diff = DateTime.Now - recording_time_st;
-                int hh = diff.Hours;
-                int mm = diff.Minutes;
-                int ss = diff.Seconds;
-                int ms = diff.Milliseconds;
-                if (ms < 500)
-                {
-                    g.FillEllipse(Brushes.Red, 5, BORDER, 22, 22);
-                }
-                g.DrawString("(" + hh.ToString("D2") + ":" + mm.ToString("D2") + ":" + ss.ToString("D2") + ")", drawFont, Brushes.Red, BORDER * 26, BORDER);
-
                 try
                 {
                     writer.WriteVideoFrame(bm);
@@ -615,6 +570,31 @@ namespace vcs_WebCam_AForge2_Record1
                 {
                     Console.WriteLine("xxx錯誤訊息e01 : " + ex.Message);
                 }
+            }
+
+            if (flag_recording == true)
+            {
+                TimeSpan diff = DateTime.Now - recording_time_st;
+                int hh = diff.Hours;
+                int mm = diff.Minutes;
+                int ss = diff.Seconds;
+                int ms = diff.Milliseconds;
+                if (ms < 500)
+                {
+                    g.FillEllipse(Brushes.Red, 8, BORDER+4, 22, 22);
+                }
+                //g.DrawString("(" + hh.ToString("D2") + ":" + mm.ToString("D2") + ":" + ss.ToString("D2") + ")", drawFont, Brushes.Red, BORDER * 32, BORDER);
+            }
+
+            try
+            {
+                //bm.RotateFlip(RotateFlipType.RotateNoneFlipY);    //反轉
+                //pictureBox1.Image = (Bitmap)eventArgs.Frame.Clone();
+                pictureBox1.Image = bm;
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "xxx錯誤訊息e05 : " + ex.Message + "\n";
             }
 
             GC.Collect();       //回收資源
@@ -771,93 +751,6 @@ namespace vcs_WebCam_AForge2_Record1
             {
                 lb_fps.Text = "";
             }
-        }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            comboBox3.SelectedIndex = 0;
-            comboBox2.Items.Clear();
-            int i = comboBox1.SelectedIndex;
-            //richTextBox1.Text += "你選了 : " + i.ToString() + "  相機\n";
-            VideoCaptureDevice Cam_tmp = null;
-            Cam_tmp = new VideoCaptureDevice(USBWebcams[i].MonikerString);  //實例化對象
-
-            string webcam_name;
-            if (USBWebcams[i].Name.Contains("Virtual"))
-            {
-                richTextBox1.Text += "跳過 Virtual\n";
-                webcam_name = (i + 1).ToString() + ". " + USBWebcams[i].Name;
-            }
-            else
-            {
-                int j;
-
-                for (j = 0; j < Cam_tmp.VideoCapabilities.Length; j++)
-                {
-                    /*
-                    richTextBox1.Text += "FR1 = " + Cam_tmp.VideoCapabilities[j].AverageFrameRate.ToString() + "\n";
-                    //richTextBox1.Text += "FR1 = " + Cam_tmp.VideoCapabilities[j].FrameRate.ToString();
-                    richTextBox1.Text += "W = " + Cam_tmp.VideoCapabilities[j].FrameSize.Width.ToString() + "\n";
-                    richTextBox1.Text += "H = " + Cam_tmp.VideoCapabilities[j].FrameSize.Height.ToString() + "\n";
-                    */
-                    /*
-                    richTextBox1.Text += "BitCount = " + Cam_tmp.VideoCapabilities[j].BitCount.ToString() + "\n";
-                    richTextBox1.Text += "FR_max = " + Cam_tmp.VideoCapabilities[j].MaximumFrameRate.ToString() + "\n";
-                    richTextBox1.Text += "ProvideSnapshots = " + Cam_tmp.ProvideSnapshots.ToString() + "\n";
-                    if (Cam_tmp.ProvideSnapshots == true)
-                    {
-                    richTextBox1.Text += "Snapshot len = " + Cam_tmp.SnapshotCapabilities.Length.ToString() + "\n";
-                    richTextBox1.Text += "Snapshot W = " + Cam_tmp.SnapshotResolution.FrameSize.Width.ToString() + "\n";
-                    richTextBox1.Text += "Snapshot H = " + Cam_tmp.SnapshotResolution.FrameSize.Height.ToString() + "\n";
-                    richTextBox1.Text += "Snapshot FR = " + Cam_tmp.SnapshotResolution.MaximumFrameRate.ToString() + "\n";
-                    }
-                    richTextBox1.Text += "Cam_tmp.Source = " + Cam_tmp.Source.ToString() + "\n";
-                    richTextBox1.Text += "Cam_tmp.Source.Length = " + Cam_tmp.Source.Length.ToString() + "\n";
-                    richTextBox1.Text += "FrameRate = " + Cam_tmp.VideoResolution.FrameRate.ToString() + "\n";    //old
-                    richTextBox1.Text += "FrameSize.W = " + Cam_tmp.VideoResolution.FrameSize.Width.ToString() + "\n";
-                    richTextBox1.Text += "FrameSize.H = " + Cam_tmp.VideoResolution.FrameSize.Height.ToString() + "\n";
-                    */
-
-                    /*
-                    webcam_name = Cam_tmp.VideoCapabilities[j].FrameSize.Width.ToString() + " X " + Cam_tmp.VideoCapabilities[j].FrameSize.Height.ToString()
-                    + " @ " + Cam_tmp.VideoCapabilities[j].AverageFrameRate.ToString() + " Hz";
-                    */
-
-                    webcam_name = Cam_tmp.VideoCapabilities[j].FrameSize.Width.ToString() + " X " + Cam_tmp.VideoCapabilities[j].FrameSize.Height.ToString();
-
-                    comboBox2.Items.Add(webcam_name);
-
-                    //richTextBox1.Text += webcam_name + "\n";
-                }
-            }
-            if (comboBox2.Items.Count > 0)
-                comboBox2.SelectedIndex = 0;
-        }
-
-        private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            //richTextBox1.Text += "選了" + comboBox3.SelectedIndex.ToString() + "\n";
-            switch (comboBox3.SelectedIndex)
-            {
-                case 0: rotate_flip_type = RotateFlipType.RotateNoneFlipNone; break;
-                case 1: rotate_flip_type = RotateFlipType.RotateNoneFlipX; break;
-                case 2: rotate_flip_type = RotateFlipType.RotateNoneFlipY; break;
-                case 3: rotate_flip_type = RotateFlipType.RotateNoneFlipXY; break;
-                case 4: rotate_flip_type = RotateFlipType.Rotate90FlipNone; break;
-                case 5: rotate_flip_type = RotateFlipType.Rotate90FlipX; break;
-                case 6: rotate_flip_type = RotateFlipType.Rotate90FlipY; break;
-                case 7: rotate_flip_type = RotateFlipType.Rotate90FlipXY; break;
-                case 8: rotate_flip_type = RotateFlipType.Rotate180FlipNone; break;
-                case 9: rotate_flip_type = RotateFlipType.Rotate180FlipX; break;
-                case 10: rotate_flip_type = RotateFlipType.Rotate180FlipY; break;
-                case 11: rotate_flip_type = RotateFlipType.Rotate180FlipXY; break;
-                case 12: rotate_flip_type = RotateFlipType.Rotate270FlipNone; break;
-                case 13: rotate_flip_type = RotateFlipType.Rotate270FlipX; break;
-                case 14: rotate_flip_type = RotateFlipType.Rotate270FlipY; break;
-                case 15: rotate_flip_type = RotateFlipType.Rotate270FlipXY; break;
-                default: rotate_flip_type = RotateFlipType.RotateNoneFlipNone; break;
-            }
-            //richTextBox1.Text += "選了" + rotate_flip_type.ToString() + "\n";
         }
 
         bool camera_start = false;

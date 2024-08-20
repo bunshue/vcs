@@ -880,3 +880,24 @@ plt.title("一次顯示三組數據", fontweight="bold")
 
 print('------------------------------------------------------------')	#60個
 
+# numpy.random.RandomState的用法
+rng = np.random.RandomState(0)
+
+N = 6
+rng = np.random.RandomState(0)#偽隨機數產生器, 類似random.seed, 但語法不一樣
+cc = rng.randn(N)
+print(cc)
+
+cc = np.random.randn(N)
+print(cc)
+
+
+rng = np.random.RandomState(42)  # 固定random seed
+# print(rng)
+
+generator = np.random.RandomState(1)  #隨機數種子
+
+
+# numpy random generator
+numpy_rng = numpy.random.RandomState(123)
+

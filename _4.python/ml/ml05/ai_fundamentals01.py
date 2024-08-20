@@ -1414,17 +1414,17 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s %(message)s')
 data_home='datasets/'
 
 logging.info('Start to load dataset')
-faces = fetch_olivetti_faces(data_home=data_home)
+olivetti_faces = fetch_olivetti_faces(data_home=data_home)
 logging.info('Done with load dataset')
 
 print("------------------------------")  # 30個
 
-X = faces.data
-y = faces.target
-targets = np.unique(faces.target)
+X = olivetti_faces.data
+y = olivetti_faces.target
+targets = np.unique(olivetti_faces.target)
 target_names = np.array(["c%d" % t for t in targets])
 n_targets = target_names.shape[0]
-n_samples, h, w = faces.images.shape
+n_samples, h, w = olivetti_faces.images.shape
 print('Sample count: {}\nTarget count: {}'.format(n_samples, n_targets))
 print('Image size: {}x{}\nDataset shape: {}\n'.format(w, h, X.shape))
 

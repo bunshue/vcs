@@ -1,4 +1,8 @@
-#!/usr/bin/env python
+"""
+pip install PySimpleGUIWeb
+
+"""
+
 import inspect
 
 import PySimpleGUIWeb as sg

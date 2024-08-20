@@ -7,8 +7,7 @@ t1 = time.time()
 vlen = 10 * 30 * 768  # 10 x #cores x # threads per core
 iters = 1000
 
-rng = numpy.random.RandomState(22)
-x = shared(numpy.asarray(rng.rand(vlen), config.floatX))
+x = shared(numpy.asarray(np.random.rand(vlen), config.floatX))
 f = function([], T.exp(x))
 print(f.maker.fgraph.toposort())
 t0 = time.time()

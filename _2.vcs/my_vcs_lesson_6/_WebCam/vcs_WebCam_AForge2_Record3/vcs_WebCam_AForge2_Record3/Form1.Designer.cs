@@ -33,6 +33,7 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.lb_main_mesg = new System.Windows.Forms.Label();
             this.bt_refresh = new System.Windows.Forms.Button();
             this.bt_exit = new System.Windows.Forms.Button();
             this.bt_stop = new System.Windows.Forms.Button();
@@ -43,18 +44,9 @@
             this.bt_record_stop = new System.Windows.Forms.Button();
             this.bt_clear = new System.Windows.Forms.Button();
             this.timer_fps = new System.Windows.Forms.Timer(this.components);
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.lb_main_mesg = new System.Windows.Forms.Label();
             this.timer_display = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox2.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -90,6 +82,17 @@
             this.groupBox2.TabIndex = 12;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Operation";
+            // 
+            // lb_main_mesg
+            // 
+            this.lb_main_mesg.AutoSize = true;
+            this.lb_main_mesg.Font = new System.Drawing.Font("標楷體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_main_mesg.ForeColor = System.Drawing.Color.Red;
+            this.lb_main_mesg.Location = new System.Drawing.Point(92, 99);
+            this.lb_main_mesg.Name = "lb_main_mesg";
+            this.lb_main_mesg.Size = new System.Drawing.Size(154, 24);
+            this.lb_main_mesg.TabIndex = 37;
+            this.lb_main_mesg.Text = "lb_main_mesg";
             // 
             // bt_refresh
             // 
@@ -194,103 +197,6 @@
             this.timer_fps.Interval = 1000;
             this.timer_fps.Tick += new System.EventHandler(this.timer_fps_Tick);
             // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.comboBox3);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.comboBox1);
-            this.groupBox1.Controls.Add(this.comboBox2);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(386, 12);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(250, 200);
-            this.groupBox1.TabIndex = 27;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "WebCam";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label3.Location = new System.Drawing.Point(26, 147);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(47, 19);
-            this.label3.TabIndex = 14;
-            this.label3.Text = "方向";
-            // 
-            // comboBox3
-            // 
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Items.AddRange(new object[] {
-            "不鏡射也不旋轉",
-            "水平鏡射",
-            "垂直鏡射",
-            "水平 & 垂直鏡射",
-            "90°旋轉",
-            "90°旋轉 + 水平鏡射",
-            "90°旋轉 + 垂直鏡射",
-            "90°旋轉 + 水平 & 垂直鏡射",
-            "180°旋轉",
-            "180°旋轉 + 水平鏡射",
-            "180°旋轉 + 垂直鏡射",
-            "180°旋轉 + 水平 & 垂直鏡射",
-            "270°旋轉",
-            "270°旋轉 + 水平鏡射",
-            "270°旋轉 + 垂直鏡射",
-            "270°旋轉 + 水平 & 垂直鏡射"});
-            this.comboBox3.Location = new System.Drawing.Point(29, 173);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(192, 20);
-            this.comboBox3.TabIndex = 3;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label2.Location = new System.Drawing.Point(26, 81);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(66, 19);
-            this.label2.TabIndex = 13;
-            this.label2.Text = "解析度";
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(29, 57);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(192, 20);
-            this.comboBox1.TabIndex = 1;
-            // 
-            // comboBox2
-            // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(29, 114);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(192, 20);
-            this.comboBox2.TabIndex = 2;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label1.Location = new System.Drawing.Point(25, 20);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(47, 19);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "相機";
-            // 
-            // lb_main_mesg
-            // 
-            this.lb_main_mesg.AutoSize = true;
-            this.lb_main_mesg.Font = new System.Drawing.Font("標楷體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_main_mesg.ForeColor = System.Drawing.Color.Red;
-            this.lb_main_mesg.Location = new System.Drawing.Point(92, 99);
-            this.lb_main_mesg.Name = "lb_main_mesg";
-            this.lb_main_mesg.Size = new System.Drawing.Size(154, 24);
-            this.lb_main_mesg.TabIndex = 37;
-            this.lb_main_mesg.Text = "lb_main_mesg";
-            // 
             // timer_display
             // 
             this.timer_display.Tick += new System.EventHandler(this.timer_display_Tick);
@@ -300,7 +206,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(653, 339);
-            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.pictureBox1);
@@ -313,8 +218,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -334,13 +237,6 @@
         private System.Windows.Forms.Button bt_stop;
         private System.Windows.Forms.Button bt_snapshot;
         private System.Windows.Forms.Button bt_start;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox comboBox3;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lb_main_mesg;
         private System.Windows.Forms.Timer timer_display;
     }

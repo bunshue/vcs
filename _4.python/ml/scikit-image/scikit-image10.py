@@ -117,8 +117,7 @@ def microstructure(l=256):
     n = 5
     x, y = np.ogrid[0:l, 0:l]  #生成網絡
     mask = np.zeros((l, l))
-    generator = np.random.RandomState(1)  #隨機數種子
-    points = l * generator.rand(2, n**2)
+    points = l * np.random.rand(2, n**2)
     mask[(points[0]).astype(np.int), (points[1]).astype(np.int)] = 1
     mask = ndi.gaussian_filter(mask, sigma=l/(4.*n)) #高斯濾波
     return mask > mask.mean()
@@ -192,8 +191,7 @@ def microstructure(l=256):
     n = 5
     x, y = np.ogrid[0:l, 0:l]  #生成網絡
     mask = np.zeros((l, l))
-    generator = np.random.RandomState(1)  #隨機數種子
-    points = l * generator.rand(2, n**2)
+    points = l * np.random.rand(2, n**2)
     mask[(points[0]).astype(np.int), (points[1]).astype(np.int)] = 1
     mask = ndi.gaussian_filter(mask, sigma=l/(4.*n)) #高斯濾波
     return mask > mask.mean()
@@ -369,8 +367,7 @@ def microstructure(l=256):
     n = 5
     x, y = np.ogrid[0:l, 0:l]
     mask = np.zeros((l, l))
-    generator = np.random.RandomState(1)
-    points = l * generator.rand(2, n**2)
+    points = l * np.random.rand(2, n**2)
     mask[(points[0]).astype(np.int), (points[1]).astype(np.int)] = 1
     mask = ndi.gaussian_filter(mask, sigma=l/(4.*n))
     return mask > mask.mean()

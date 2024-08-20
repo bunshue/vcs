@@ -17,8 +17,8 @@ print("------------------------------------------------------------")  # 60個
 # 共同
 import os
 import sys
-import time
 import math
+import time
 import random
 import numpy as np
 import pandas as pd
@@ -755,6 +755,8 @@ print("equal 它比較兩個數組的每個元素，如果元素匹配就返回T
 
 np.equal(arr1, arr2)
 
+print("------------------------------------------------------------")  # 60個
+
 # 重復的數組元素
 
 print("repeat 它用於重復數組中的元素n次。")
@@ -763,9 +765,15 @@ print("repeat 它用於重復數組中的元素n次。")
 # A:重復的元素
 
 # Repeats:重復的次數。
-
-cc = np.repeat("2017", 3)
+N = 10
+cc = np.repeat("ABCD", N)
 print(cc)
+
+N = 10
+cc = np.repeat([0, 1, 2], N)
+print(cc)
+
+print("------------------------------------------------------------")  # 60個
 
 # 讓我們來看一個更實際的示例，我們有一個包含按年數量銷售的數據集。
 

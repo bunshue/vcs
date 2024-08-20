@@ -36,15 +36,12 @@ plt.figure(
 # 第一張圖
 plt.subplot(231)
 
-prng = np.random.RandomState(123)
-
 x = np.linspace(0, 10, 101)
-
 
 def random_walk(xy0=(0.0, 0.0), nsteps=100, std=1.0):
     xy = np.zeros((nsteps + 1, 2))
     xy[0, :] = xy0
-    deltas = prng.normal(loc=0.0, scale=std, size=(nsteps, 2))
+    deltas = np.random.normal(loc=0.0, scale=std, size=(nsteps, 2))
     xy[1:, :] = xy[0, :] + np.cumsum(deltas, axis=0)
     return xy
 
@@ -126,6 +123,7 @@ plt.subplot(236)
 
 plt.show()
 
+sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 

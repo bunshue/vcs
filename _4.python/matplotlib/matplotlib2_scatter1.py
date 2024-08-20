@@ -12,8 +12,8 @@ print("------------------------------------------------------------")  # 60個
 # 共同
 import os
 import sys
-import math
 import time
+import math
 import random
 import numpy as np
 import pandas as pd
@@ -42,16 +42,48 @@ plt.figure(
 # 第一張圖
 plt.subplot(231)
 
+N = 30
+degrees = np.arange(0, 360, N)
+x = np.cos(np.radians(degrees))
+y = np.sin(np.radians(degrees))
+
+size = 300
+plt.scatter(x, y, s=size)
+plt.plot(x, y, 'r')
+
+
+
+# 第二張圖
+plt.subplot(232)
+
 R = 10
 degrees = [x * 15 for x in range(0, 25)]
 print(degrees)
 x = [R * math.cos(math.radians(d)) for d in degrees]
 y = [R * math.sin(math.radians(d)) for d in degrees]
-plt.scatter(x, y)
+size = 300
+plt.scatter(x, y, s=size)
 
 
-# 第二張圖
-plt.subplot(232)
+# 第三張圖
+plt.subplot(233)
+
+A = 10  # 震幅
+N = 10  # 總點數
+x = A * np.random.rand(N)  # 0~A取N個數出來
+print(type(x))
+y = A * np.random.rand(N)  # 0~A取N個數出來
+
+print(x)
+print(y)
+plt.scatter(x, y)  # 畫出每個x-y對應點
+
+# 第四張圖
+plt.subplot(234)
+
+
+# 第五張圖
+plt.subplot(235)
 
 X = []
 Y = []
@@ -71,8 +103,10 @@ plt.axis([0, 10, 0, 10])
 plt.axis("equal")
 plt.title('蒙地卡羅模擬')
 
-# 第三張圖
-plt.subplot(233)
+
+# 第六張圖
+plt.subplot(236)
+
 
 # 試著做三群的數據。
 N = 500  # 每一群都是 N 個點
@@ -109,50 +143,6 @@ plt.scatter([cx0, cx1, cx2], [cy0, cy1, cy2], [200, 200, 200], ["r", "g", "b"])
 
 plt.title("三群數據")
 
-# 第四張圖
-plt.subplot(234)
-
-N = 30
-degrees = np.arange(0, 360, N)
-x = np.cos(np.radians(degrees))
-y = np.sin(np.radians(degrees))
-
-#plt.plot(x, y)
-plt.scatter(x, y)
-
-
-
-# 第五張圖
-plt.subplot(235)
-
-N = 20
-x = np.random.randint(1, 11, N)  # 建立 x
-y = np.random.randint(1, 11, N)  # 建立 y
-colors = np.random.rand(N)  # 色彩數列
-size = (30 * np.random.rand(N)) ** 2  # 散點大小數列
-
-plt.scatter(x, y, s=size, c=colors)
-plt.xticks(np.arange(0, 12, step=1.0))
-plt.yticks(np.arange(0, 12, step=1.0))
-
-
-# 第六張圖
-plt.subplot(236)
-
-N = 30
-colorused = ["b", "c", "g", "k", "m", "r", "y"]  # 定義顏色
-colors = []  # 建立色彩數列
-for i in range(N):  # 隨機設定顏色
-    colors.append(np.random.choice(colorused))
-
-x = np.random.randint(1, 11, N)  # 建立 x
-y = np.random.randint(1, 11, N)  # 建立 y
-size = (N * np.random.rand(N)) ** 2  # 散點大小數列
-plt.scatter(x, y, s=size, c=colors)  # 繪製散點
-
-plt.xticks(np.arange(0, 12, step=1.0))  # x 軸刻度
-plt.yticks(np.arange(0, 12, step=1.0))  # y 軸刻度
-
 
 plt.show()
 
@@ -171,9 +161,10 @@ plt.figure(
 # 第一張圖
 plt.subplot(231)
 
+N = 1000
 # 使用隨機陣列產生圖像
-x = np.random.rand(10000)  # N個0~1之間的亂數
-y = np.random.rand(10000)
+x = np.random.rand(N)  # N個0~1之間的亂數
+y = np.random.rand(N)
 plt.scatter(x, y, c=y, cmap="hsv")  # 色彩依 y 軸值變化
 #plt.colorbar()
 
@@ -191,11 +182,11 @@ def loc(index):
     y.append(yloc)  # y軸新位置加入串列
 
 
-num = 10000  # 設定隨機點的數量
+N = 10000  # 設定隨機點的數量
 x = [0]  # 設定第一次執行x座標
 y = [0]  # 設定第一次執行y座標
 
-for i in range(1, num):  # 建立點的座標
+for i in range(1, N):  # 建立點的座標
     loc(i)
 t = x  # 色彩隨x軸變化
 plt.scatter(x, y, s=2, c=t, cmap="brg")
@@ -214,11 +205,11 @@ def loc(index):
     y.append(yloc)  # y軸新位置加入串列
 
 
-num = 10000  # 設定隨機點的數量
+N = 10000  # 設定隨機點的數量
 x = [0]  # 設定第一次執行x座標
 y = [0]  # 設定第一次執行y座標
 
-for i in range(1, num):  # 建立點的座標
+for i in range(1, N):  # 建立點的座標
     loc(i)
 t = x  # 色彩隨x軸變化
 plt.scatter(x, y, s=2, c=t, cmap="brg")
@@ -226,125 +217,6 @@ plt.scatter(x, y, s=2, c=t, cmap="brg")
 
 # 第四張圖
 plt.subplot(234)
-
-from pylab import *
-
-rc("xtick.major", pad=8)
-
-data = """
-   Sovereign of the Seas   90     1637   1,522                                             2,500             Sail Three-Decker                  Lavery        
-   Naseby                  80     1655   1,258                                             2,100             Sail Three-Decker                  Lavery        
-   Prince                 100     1670   1,403                                             2,300             Sail Three-Decker                  Lavery        
-   Royal James            100     1671   1,416                                             2,300             Sail Three-Decker                  Lavery        
-   Royal Charles          100     1673   1,443                                             2,400             Sail Three-Decker                  Lavery        
-   Royal James            100     1675   1,422                                             2,400             Sail Three-Decker                  Lavery        
-   Royal Prince            92     1663   1,432                                             2,400             Sail Three-Decker                  Lavery        
-   Britannia              100     1682   1,739                                             2,900             Sail Three-Decker                  Lavery        
-   Royal Sovereign        100     1701   1,883                                             3,100             Sail Three-Decker                  Lavery        
-   Royal Anne             100     1703   1,722                                             2,900             Sail Three-Decker                  Lavery        
-   London                 100     1706   1,685                                             2,800             Sail Three-Decker                  Lavery        
-   Royal George           100     1715   1,801                                             3,000             Sail Three-Decker                  Lavery        
-   Britannia              100     1719   1,895                                             3,100             Sail Three-Decker                  Lavery        
-   Royal William          100     1719   1,918                                             3,200             Sail Three-Decker                  Lavery        
-   Royal Sovereign        100     1728   1,883                                             3,100             Sail Three-Decker                  Lavery        
-   Victory                100     1737   1,921                                             3,200             Sail Three-Decker                  Lavery        
-   Royal George           100     1756   2,047                                             3,400             Sail Three-Decker                  Lavery        
-   Britannia              100     1762   2,116                                             3,500             Sail Three-Decker                  Lavery        
-   Victory                100     1765   2,142                                             3,600             Sail Three-Decker                  Lavery        
-   Royal Sovereign        100     1786   2,175                                             3,600             Sail Three-Decker                  Lavery        
-   Royal George           100     1788   2,286                                             3,800             Sail Three-Decker                  Lavery        
-   Caledonia              120     1808   2,616                                             4,300             Sail Three-Decker                  Lavery        
-   Ville de Paris         110     1795   2,351                                             3,900             Sail Three-Decker                  Lavery        
-   Hibernia               110     1804   2,530                                             4,200             Sail Three-Decker                  Lavery        
-   Queen Charlotte        100     1790   2,286                                             3,800             Sail Three-Decker                  Lavery        
-   Nelson                 120     1814   2,617                                             4,300             Sail Three-Decker                  Lavery        
-   St Vincent             120     1815   2,601                                             4,300             Sail Three-Decker                  Lavery        
-   Howe                   120     1815   2,619                                             4,300             Sail Three-Decker                  Lavery        
-   Britannia              120     1820   2,616                                             4,300             Sail Three-Decker                  Lavery        
-   Prince Regent          120     1823   2,613                                             4,300             Sail Three-Decker                  Lavery        
-   Queen Charlotte        104     1810   2,289                                             3,800             Sail Three-Decker                  Lavery        
-   Princess Charlotte     104     1825   2,443                                             4,100             Sail Three-Decker                  Lavery        
-   Royal Adelaide         104     1828   2,446                                             4,100             Sail Three-Decker                  Lavery        
-   Royal George           120     1827   2,616                                             4,300             Sail Three-Decker                  Lavery        
-   Neptune                120     1832   2,694                                             4,500             Sail Three-Decker                  Lavery        
-   Royal William          120     1833   2,694                                             4,500             Sail Three-Decker                  Lavery        
-   Waterloo               120     1833   2,694                                             4,500             Sail Three-Decker                  Lavery        
-   St George              120     1840   2,694                                             4,500             Sail Three-Decker                  Lavery        
-   Trafalgar              120     1841   2,694                                             4,500             Sail Three-Decker                  Lavery        
-   Queen                  110     1839   3,104                                             5,100             Sail Three-Decker                  Lavery        
-   Duke of Wellington     131     1852   3,759                                5,829        5,829 Steam Three-Decker (conversion from sail)      Lambert       
-   Marlborough            131     1855   3,853                                6,065        6,065 Steam Three-Decker (conversion from sail)      Lambert       
-   Royal Sovereign        131     1857   3,853                                6,065        6,065 Steam Three-Decker (conversion from sail)      Lambert       
-   Prince of Wales        131     1860   3,853                                6,065        6,065 Steam Three-Decker (conversion from sail)      Lambert       
-   Royal Albert           121     1854   3,726                                5,572        5,572 Steam Three-Decker (conversion from sail)      Lambert       
-   Windsor Castle         102     1858   3,099                                             5,100 Steam Three-Decker (conversion from sail)      Lambert       
-   Victoria               121     1859   4,116                                6,959        6,959             Steam Three-Decker                 Lambert       
-   Howe                   121     1860   4,236                                             7,000             Steam Three-Decker                 Lambert       
-   Saint Jean d'Acre      101     1853   3,200                                5,499        5,499              Steam Two-Decker                  Lambert       
-   Conqueror              101     1855   3,224                                5,720        5,720              Steam Two-Decker                  Lambert       
-   Donegal                101     1858   3,224                                5,720        5,720              Steam Two-Decker                  Lambert       
-   Duncan                 101     1859   3,715                                5,950        5,950              Steam Two-Decker                  Lambert       
-   Gibraltar              101     1860   3,715                                5,950        5,950              Steam Two-Decker                  Lambert       
-   Warrior                 40     1860   6,039                                9,180        9,180             Iron-Clad Frigate              Lyon & Winfield   
-   Black Prince            40     1861   6,039                                9,180        9,180             Iron-Clad Frigate              Lyon & Winfield   
-   Achilles                26     1863   6,121                                9,820        9,820             Iron-Clad Frigate              Lyon & Winfield   
-   Minotaur                36     1863   6,643                               10,690       10,690             Iron-Clad Frigate              Lyon & Winfield   
-   Agincourt               36     1865   6,638                               10,600       10,600             Iron-Clad Frigate              Lyon & Winfield   
-   Northumberland          36     1866   6,631                               10,784       10,784             Iron-Clad Frigate              Lyon & Winfield   
-   Lord Clyde              24     1864   4,067                                7,750        7,750    Centre-Battery Iron-Clad Frigate       Lyon & Winfield   
-   Lord Warden             16     1865   4,080                                7,842        7,842    Centre-Battery Iron-Clad Frigate       Lyon & Winfield   
-   Bellerophon             15     1865   4,720                                7,551        7,551          Centre-Battery Iron-Clad          Lyon & Winfield   
-   Hercules                14     1868   5,234                                8,830        8,830          Centre-Battery Iron-Clad          Lyon & Winfield   
-   Monarch                  7     1868   5,102                                8,322        8,322             Masted Turret Ship             Lyon & Winfield   
-   Captain                  6     1869   4,272                                7,767        7,767             Masted Turret Ship             Lyon & Winfield   
-   Sultan                  12     1870   5,234                                9,540        9,540          Centre-Battery Iron-Clad          Lyon & Winfield   
-   Devastation              4     1871   4,407                                9,390        9,390            Mastless Turret Ship            Lyon & Winfield   
-   Thunderer                4     1872                                        9,390        9,390            Mastless Turret Ship            Lyon & Winfield   
-   Alexandra               12     1875                                        9,490        9,490          Centre-Battery Iron-Clad          Lyon & Winfield   
-   Dreadnought              4     1875                                       10,820       10,820            Mastless Turret Ship            Lyon & Winfield   
-   Temeraire                8     1876                                        8,571        8,571          Centre-Battery Iron-Clad          Lyon & Winfield   
-   Inflexible               4     1876                                       11,880       11,880        Central Citadel Turret Ship         Lyon & Winfield   
-"""
-
-s2x, s2y, s3x, s3y, t3x, t3y, ix, iy, lx, ly = [], [], [], [], [], [], [], [], [], []
-
-for l in data.splitlines():
-    if len(l) < 5:
-        continue
-    n = l[:26].strip()
-    y = int(l[33:39])
-    try:
-        t = int(l[39:47].replace(",", ""))
-    except:
-        continue
-    if "Steam Two-Decker" in l:
-        s2x.append(y)
-        s2y.append(t)
-    elif "Steam Three-Decker" in l:
-        s3x.append(y)
-        s3y.append(t)
-    elif "Sail Three-Decker" in l:
-        t3x.append(y)
-        t3y.append(t)
-    elif "igate" in l:
-        ix.append(y)
-        iy.append(t)
-    else:
-        lx.append(y)
-        ly.append(t)
-
-ll = 0.7
-scatter(t3x, t3y, c="b", marker="o", lw=ll, label="Sail 3-Deckers")
-scatter(s3x, s3y, c="orange", marker="o", lw=ll, label="Steam 3-Deckers")
-scatter(s2x, s2y, c="r", marker="o", lw=ll, label="Steam 2-Deckers")
-scatter(ix, iy, c="g", marker="o", lw=ll, label="Iron-clad Frigates")
-scatter(lx, ly, c="cyan", marker="o", lw=ll, label="Later Iron-clads")
-
-legend(loc="upper left")
-xticks(range(1630, 1930, 50))
-xlabel("Year launched")
-ylabel("Tonnage (BOM)")
-grid(True, ls="-", c="#a0a0a0")
 
 
 # 第五張圖
@@ -420,8 +292,6 @@ plt.scatter(x, y, s=size2, marker="o", c=colors)
 
 # 繪製邊界線
 plt.plot((0.5, 0.5), (0, 1.0))  # 繪製邊界線
-plt.xticks(np.arange(0, 1.1, step=0.1))
-plt.yticks(np.arange(0, 1.1, step=0.1))
 
 # 第二張圖
 plt.subplot(232)
@@ -447,8 +317,6 @@ plt.scatter(x, y, s=size2, marker="o", c=colors)
 # 計算 0.5Pi 之弧度, 依據弧度產生的座標點繪製邊界線
 radian = np.arange(0, np.pi / 2, 0.01)
 plt.plot(r * np.cos(radian), r * np.sin(radian))  # 繪製邊界線
-plt.xticks(np.arange(0, 1.1, step=0.1))
-plt.yticks(np.arange(0, 1.1, step=0.1))
 
 # 第三張圖
 plt.subplot(233)
@@ -457,36 +325,30 @@ plt.subplot(233)
 # 第四張圖
 plt.subplot(234)
 
-x = np.random.rand(20)
-y = np.random.rand(20)
-size = (50 * np.random.rand(20)) ** 2
-plt.scatter(x, y, s=size, alpha=0.5)
+N = 20
+x = np.random.rand(N)
+y = np.random.rand(N)
 
+colors = np.random.rand(N)  # 色彩數列
+size = 300
+plt.scatter(x, y, s=size, c=colors, alpha=0.5)
 
 # 第五張圖
 plt.subplot(235)
 
-# 把c參數改成隨機數組。
-x = np.random.rand(20)
-y = np.random.rand(20)
-
-colors = np.random.rand(20)
-size = (50 * np.random.rand(20)) ** 2
-
+N = 20
+x = np.random.randint(1, 11, N)
+y = np.random.randint(1, 11, N)
+colors = np.random.rand(N)  # 色彩數列
+size = 300
 plt.scatter(x, y, s=size, c=colors, alpha=0.5)
 
 # 第六張圖
 plt.subplot(236)
 
-# 把s參數改成200。
-x = np.random.rand(20)
-y = np.random.rand(20)
-
-colors = np.random.rand(20)
-plt.scatter(x, y, s=200, c=colors, alpha=0.5)
-
 
 plt.show()
+
 
 print("------------------------------------------------------------")  # 60個
 
@@ -532,26 +394,34 @@ matplotlib.pyplot.scatter(x,
 # 第一張圖
 plt.subplot(231)
 
-# 把maker參數改成x的樣本。
-x = np.random.rand(20)
-y = np.random.rand(20)
+N = 20
+x = np.random.rand(N)
+y = np.random.rand(N)
 
-colors = np.random.rand(20)
-size = (50 * np.random.rand(20)) ** 2
+colors = np.random.rand(N)  # 色彩數列
+size = 300
 
-# plt.scatter(x, y, s=size, c=colors, alpha=0.5, marker="x")
 plt.scatter(x, y, s=size, c=colors, alpha=0.5)
+plt.scatter(x, y, s=size, c=colors, alpha=0.5, marker="x")#使用marker
 
+"""
+#方塊
+plt.scatter(x, y, c=colors, marker="*")  # 繪製 sine
+#星形
+plt.scatter(x, y, c=colors, marker="s")  # 繪製 cos
+"""
 
 # 第二張圖
 plt.subplot(232)
 
 # 修改其中的linewidth參數的大小，但是沒什么不同，**注意：**只有marker為封閉的圖案的時候，這個參數才有效。
-x = np.random.rand(20)
-y = np.random.rand(20)
 
-colors = np.random.rand(20)
-size = (50 * np.random.rand(20)) ** 2
+N = 20
+x = np.random.rand(N)
+y = np.random.rand(N)
+
+colors = np.random.rand(N)  # 色彩數列
+size = 300
 
 lines = np.zeros(220) + 5
 
@@ -562,14 +432,14 @@ plt.scatter(x, y, s=size, c=colors, alpha=0.5, linewidths=lines)
 # 第三張圖
 plt.subplot(233)
 
+N = 20
 # 把linewidths參數改成數組。
-x = np.random.rand(20)
-y = np.random.rand(20)
+x = np.random.rand(N)
+y = np.random.rand(N)
 
 lines = np.zeros(220) + 5
-plt.scatter(x, y, s=200, c="b", alpha=0.5, linewidths=lines)
-# 再把alpha改成1
-
+size = 300
+plt.scatter(x, y, s=size, c="b", alpha=0.5, linewidths=lines)
 
 # 第四張圖
 plt.subplot(234)
@@ -586,28 +456,13 @@ plt.scatter(
     cmap="Paired",
 )
 
-
 # 第五張圖
 plt.subplot(235)
 
-N = 50
-x = np.random.rand(N)
-y = np.random.rand(N)
-colors = np.random.rand(N)  # 點的顏色
-size = (30 * np.random.rand(N)) ** 2  # 點的半徑
-plt.scatter(x, y, s=size, c=colors, alpha=0.5)  # 由於點可能疊加，設置透明度爲0.5
 
 # 第六張圖
 plt.subplot(236)
 
-N = 30
-x = np.random.randint(1, 11, N)  # 建立 x
-y = np.random.randint(1, 11, N)  # 建立 y
-colors = np.random.rand(N)  # 色彩數列
-
-plt.scatter(x, y, c=colors)
-plt.xticks(np.arange(0, 11, step=1.0))
-plt.yticks(np.arange(0, 11, step=1.0))
 
 plt.show()
 
@@ -648,15 +503,13 @@ norm、vmin、vmax → 散點顏色亮度設置
 # 第一張圖
 plt.subplot(231)
 
-# numpy.random.RandomState的用法
+N = 20
 
-rng = np.random.RandomState(0)
+x = np.random.randn(N)  # 隨機產生N個X軸坐標
+y = np.random.randn(N)  # 隨機產生N個Y軸坐標
 
-x = rng.randn(50)  # 隨機產生50個X軸坐標
-y = rng.randn(50)  # 隨機產生50個Y軸坐標
-
-colors = rng.rand(50)  # 隨機產生50個用于顏色映射的數值
-sizes = 700 * rng.rand(50)  # 隨機產生50個用于改變散點面積的數值
+colors = np.random.rand(N)  # 隨機產生N個用于顏色映射的數值
+sizes = 700 * np.random.rand(N)  # 隨機產生N個用于改變散點面積的數值
 
 plt.scatter(x, y, c=colors, s=sizes, alpha=0.3, cmap="viridis")
 
@@ -671,13 +524,12 @@ plt.scatter(x, y, c=colors, s=sizes, alpha=0.3, cmap="viridis")
 # 第二張圖
 plt.subplot(232)
 
-rng = np.random.RandomState(0)
+N = 20
+x = np.random.randn(N)  # 隨機產生N個X軸坐標
+y = np.random.randn(N)  # 隨機產生N個Y軸坐標
 
-x = rng.randn(50)  # 隨機產生50個X軸坐標
-y = rng.randn(50)  # 隨機產生50個Y軸坐標
-
-colors = rng.rand(50)  # 隨機產生50個用于顏色映射的數值
-sizes = 700 * rng.rand(50)  # 隨機產生50個用于改變散點面積的數值
+colors = np.random.rand(N)  # 隨機產生N個用于顏色映射的數值
+sizes = 700 * np.random.rand(N)  # 隨機產生N個用于改變散點面積的數值
 
 plt.scatter(x, y, c=colors, s=sizes, alpha=0.3, cmap="viridis")
 #plt.colorbar()
@@ -687,11 +539,11 @@ plt.subplot(233)
 
 from matplotlib import colors  # 為了調整“色盤”，需要導入colors
 
-rng = np.random.RandomState(0)
-x = rng.randn(50)
-y = rng.randn(50)
-color = rng.rand(50)
-sizes = 700 * rng.rand(50)
+N = 20
+x = np.random.randn(N)
+y = np.random.randn(N)
+color = np.random.rand(N)
+sizes = 700 * np.random.rand(N)
 
 changecolor = colors.Normalize(vmin=0.4, vmax=0.8)
 
@@ -701,17 +553,16 @@ plt.scatter(x, y, c=color, s=sizes, alpha=0.3, cmap="viridis", norm=changecolor)
 # 第四張圖
 plt.subplot(234)
 
-N = 50  # 色彩數列的點數
+N = 20
 colorused = ["b", "c", "g", "k", "m", "r", "y"]  # 定義顏色
 colors = []  # 建立色彩數列
 for i in range(N):  # 隨機設定顏色
     colors.append(np.random.choice(colorused))
-x = np.random.randint(1, 11, N)  # 建立 x
-y = np.random.randint(1, 11, N)  # 建立 y
-size = (30 * np.random.rand(N)) ** 2  # 散點大小數列
+
+x = np.random.randint(1, 11, N)
+y = np.random.randint(1, 11, N)
+size = 300
 plt.scatter(x, y, s=size, c=colors)  # 繪製散點
-plt.xticks(np.arange(0, 12, step=1.0))  # x 軸刻度
-plt.yticks(np.arange(0, 12, step=1.0))  # y 軸刻度
 
 # 第五張圖
 plt.subplot(235)
@@ -735,10 +586,10 @@ for i in range(0, 3):
 # 第六張圖
 plt.subplot(236)
 
-N = 50
+N = 20
 x = np.random.rand(N)
 y = np.random.rand(N)
-colors = np.random.rand(N)
+colors = np.random.rand(N)  # 色彩數列
 plt.scatter(x, y, s=300, c=colors, alpha=0.5)
 
 
@@ -839,7 +690,7 @@ print("散佈圖")
 
 fig, ax = plt.subplots()
 
-N = 50
+N = 20
 x = np.random.randint(30, size=N)
 y = np.random.randint(30, size=N)
 c = np.random.randint(30, size=N)
@@ -908,7 +759,7 @@ list(zip(xx, yy))
 Z = list(zip(X, Y))
 print(Z)
 
-plt.scatter(X, Y, s = 50, c = Z)
+plt.scatter(X, Y, s = 300, c = Z)
 plt.show()
 """
 
@@ -998,7 +849,9 @@ edgecolors：設置散點邊界線的顏色
 
 print("------------------------------------------------------------")  # 60個
 
+
 print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1013,7 +866,7 @@ plt.scatter(x, g, c="blue", marker=".")
 plt.scatter(x, y, color="lightgreen", edgecolor="b", s=60)
 
 plt.scatter(x, y, c=y, cmap="rainbow")
-plt.scatter(x, y, s=50, c=y, cmap="hsv")  # 色彩隨y軸值變化
+plt.scatter(x, y, s=300, c=y, cmap="hsv")  # 色彩隨y軸值變化
 #plt.colorbar()
 
 # 由平均 0, 標準差 1 的分布中取 20 個數
@@ -1051,10 +904,10 @@ y = math.sin(theta) * r + 5
 
 plt.legend(loc="best")  # 添加圖例
 
+N = 20
+x = np.linspace(0, 5, N)  # 含N個元素的陣列
 
-x = np.linspace(0, 5, 50)  # 含50個元素的陣列
-
-plt.scatter(x, y, s=50, c=y, cmap="rainbow")  # 色彩隨 y 軸值變化
+plt.scatter(x, y, s=300, c=y, cmap="rainbow")  # 色彩隨 y 軸值變化
 #plt.colorbar()
 
 print("------------------------------------------------------------")  # 60個
@@ -1065,17 +918,6 @@ plt.scatter(x, y, s=N, c=x, cmap="brg")  # 繪製散點圖
 colors = np.array(["b", "c", "g", "k", "m", "r", "y", "pink", "purple", "orange"])
 plt.scatter(x, y1, c=colors, label="圓形標記")
 plt.scatter(x, y2, c=colors, marker="*", label="星形標記")
-plt.xticks(np.arange(0, 11, step=1.0))
-plt.yticks(np.arange(0, 11, step=1.0))
-
-
-N = 50  # 色彩數列的點數
-
-colorused = ["b", "c", "g", "k", "m", "r", "y"]  # 定義顏色
-
-colors = []  # 建立色彩數列
-for i in range(N):  # 隨機設定顏色
-    colors.append(np.random.choice(colorused))
 
 plt.scatter(x, y1, c=colors, marker="*")  # 繪製 sine
 plt.scatter(x, y2, c=colors, marker="s")  # 繪製 cos
@@ -1087,15 +929,6 @@ plt.scatter(x, y2, c="g", marker="X")  # 繪製 cos wave
 plt.scatter(x, y1, c=colors, marker="*")  # 繪製 sine
 plt.scatter(x, y2, c=colors, marker="s")  # 繪製 cos
 
-colorused = ["b", "c", "g", "k", "m", "r", "y"]  # 定義顏色
-x = np.linspace(0.0, 2 * np.pi, 50)  # 建立 50 個點
-
-
-colors = []
-for i in range(50):  # 隨機設定顏色
-    colors.append(np.random.choice(colorused))
-
-
 x = np.linspace(0, 1, 1000)
 y = 0.5 * np.sin(n * x) + 0.5
 
@@ -1104,26 +937,12 @@ plt.scatter(listx, listy, c="r", s=scale, marker="o", alpha=0.5)
 plt.axis("off")  # 隱藏座標
 plt.axis("off")  # 隱藏座標
 
+N = 20
+x = np.linspace(0, 5, N)  # 含N個元素的陣列
+y = np.linspace(0, 5, N)  # 含N個元素的陣列
 
-N = 50  # 色彩數列的點數
-colorused = ["b", "c", "g", "k", "m", "r", "y"]  # 定義顏色
-colors = []  # 建立色彩數列
-for i in range(N):  # 隨機設定顏色
-    colors.append(np.random.choice(colorused))
-
-x = np.linspace(0.0, 2 * np.pi, N)  # 建立 50 個點
-
-#方塊
-plt.scatter(x, y1, c=colors, marker="*")  # 繪製 sine
-#星形
-plt.scatter(x, y2, c=colors, marker="s")  # 繪製 cos
-
-
-x = np.linspace(0, 5, 500)  # 含500個元素的陣列
-y = np.linspace(0, 5, 500)  # 含500個元素的陣列
-
-plt.scatter(x, y, s=50, c=x, cmap="rainbow")  # 色彩隨 x 軸值變化
-plt.scatter(x, y, s=50, c=y, cmap="rainbow")  # 色彩隨 y 軸值變化
+plt.scatter(x, y, s=300, c=x, cmap="rainbow")  # 色彩隨 x 軸值變化
+plt.scatter(x, y, s=300, c=y, cmap="rainbow")  # 色彩隨 y 軸值變化
 
 #plt.colorbar()
 plt.show()
@@ -1170,9 +989,6 @@ axs[2, 2].scatter(x, y, s=100, c=colors, marker=r"$\heartsuit$")
 axs[2, 2].set_title(r"${heartsuit=}\heartsuit$" + "標記", c="b")
 
 
-
-
-
 """ 搬到pd plot
 
 filename = "_data/python_ReadWrite_CSV6_score.csv"
@@ -1192,4 +1008,14 @@ correlation = np.corrcoef(dat["數學"], dat["理科"])  # 計算相關係數
 correlation[0, 1]  # 顯示在畫面
 
 """
+
+print('建立任意大小陣列')
+size = (30 * np.random.rand(N)) ** 2  # 散點大小數列
+
+plt.xticks(np.arange(0, 12, step=1.0))  # x 軸刻度
+plt.yticks(np.arange(0, 12, step=1.0))  # y 軸刻度
+plt.xticks(np.arange(0, 11, step=1.0))
+plt.yticks(np.arange(0, 11, step=1.0))
+
+# 由於點可能疊加，設置透明度爲0.5
 

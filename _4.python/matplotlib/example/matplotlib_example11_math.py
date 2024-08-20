@@ -106,17 +106,7 @@ print("圓周率 = ", pi)
 # 第三張圖
 plt.subplot(233)
 
-A = 10  # 震幅
-N = 10  # 總點數
-rng = np.random.RandomState(42)  # 固定random seed
-# print(rng)
-x = A * rng.rand(N)  # 0~A取N個數出來
-print(type(x))
-y = A * rng.rand(N)  # 0~A取N個數出來
 
-print(x)
-print(y)
-plt.scatter(x, y)  # 畫出每個x-y對應點
 
 # 第四張圖
 plt.subplot(234)
