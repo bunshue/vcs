@@ -110,9 +110,8 @@ namespace vcs_WebCam_AForge2_Record1
             richTextBox1.Location = new Point(x_st + dx * 3 + 90, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            groupBox2.Size = new Size(380, 200);
-            //groupBox2.Location = new Point(x_st + dx * 0 + 250 + BORDER, y_st + dy * 0 + H + BORDER);
-            groupBox2.Location = new Point(x_st + dx * 0, y_st + dy * 0 + H + BORDER);
+            groupBox1.Size = new Size(380, 200);
+            groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0 + H + BORDER);
 
             bt_record_stop.Enabled = false;
             this.Size = new Size(1000, 750);
@@ -581,7 +580,8 @@ namespace vcs_WebCam_AForge2_Record1
                 int ms = diff.Milliseconds;
                 if (ms < 500)
                 {
-                    g.FillEllipse(Brushes.Red, 8, BORDER+4, 22, 22);
+                    int ww = 22;
+                    g.FillEllipse(Brushes.Red, 640 - BORDER - ww, BORDER + 4, ww, ww);
                 }
                 //g.DrawString("(" + hh.ToString("D2") + ":" + mm.ToString("D2") + ":" + ss.ToString("D2") + ")", drawFont, Brushes.Red, BORDER * 32, BORDER);
             }
@@ -941,13 +941,7 @@ namespace vcs_WebCam_AForge2_Record1
                     }
                     delay(100);
                 }
-
             }
-
-
-
         }
     }
 }
-
-

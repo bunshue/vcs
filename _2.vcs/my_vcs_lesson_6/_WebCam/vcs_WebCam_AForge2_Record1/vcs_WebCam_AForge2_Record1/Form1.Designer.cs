@@ -38,7 +38,7 @@
             this.bt_record_stop = new System.Windows.Forms.Button();
             this.bt_record_start2 = new System.Windows.Forms.Button();
             this.bt_clear = new System.Windows.Forms.Button();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lb_main_mesg = new System.Windows.Forms.Label();
             this.bt_refresh = new System.Windows.Forms.Button();
             this.bt_exit = new System.Windows.Forms.Button();
@@ -47,7 +47,7 @@
             this.bt_start = new System.Windows.Forms.Button();
             this.timer_display = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.groupBox2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -125,24 +125,24 @@
             this.bt_clear.UseVisualStyleBackColor = true;
             this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
             // 
-            // groupBox2
+            // groupBox1
             // 
-            this.groupBox2.Controls.Add(this.lb_main_mesg);
-            this.groupBox2.Controls.Add(this.bt_refresh);
-            this.groupBox2.Controls.Add(this.bt_exit);
-            this.groupBox2.Controls.Add(this.bt_stop);
-            this.groupBox2.Controls.Add(this.lb_fps);
-            this.groupBox2.Controls.Add(this.bt_snapshot);
-            this.groupBox2.Controls.Add(this.bt_start);
-            this.groupBox2.Controls.Add(this.bt_record_stop);
-            this.groupBox2.Controls.Add(this.bt_record_start);
-            this.groupBox2.Controls.Add(this.bt_record_start2);
-            this.groupBox2.Location = new System.Drawing.Point(12, 128);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(375, 141);
-            this.groupBox2.TabIndex = 25;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Operation";
+            this.groupBox1.Controls.Add(this.lb_main_mesg);
+            this.groupBox1.Controls.Add(this.bt_refresh);
+            this.groupBox1.Controls.Add(this.bt_exit);
+            this.groupBox1.Controls.Add(this.bt_stop);
+            this.groupBox1.Controls.Add(this.lb_fps);
+            this.groupBox1.Controls.Add(this.bt_snapshot);
+            this.groupBox1.Controls.Add(this.bt_start);
+            this.groupBox1.Controls.Add(this.bt_record_stop);
+            this.groupBox1.Controls.Add(this.bt_record_start);
+            this.groupBox1.Controls.Add(this.bt_record_start2);
+            this.groupBox1.Location = new System.Drawing.Point(12, 128);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(375, 141);
+            this.groupBox1.TabIndex = 25;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Operation";
             // 
             // lb_main_mesg
             // 
@@ -218,8 +218,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(663, 317);
-            this.Controls.Add(this.groupBox2);
+            this.ClientSize = new System.Drawing.Size(450, 305);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.richTextBox1);
@@ -229,8 +229,8 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -245,7 +245,7 @@
         private System.Windows.Forms.Button bt_record_stop;
         private System.Windows.Forms.Button bt_record_start2;
         private System.Windows.Forms.Button bt_clear;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button bt_refresh;
         private System.Windows.Forms.Button bt_exit;
         private System.Windows.Forms.Button bt_stop;
