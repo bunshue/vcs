@@ -36,7 +36,6 @@ print("------------------------------------------------------------")  # 60個
 
 import tensorflow as tf
 from urllib.request import urlretrieve
-import numpy as np
 import gradio as gr
 from PIL import Image
 
@@ -102,9 +101,8 @@ print("------------------------------------------------------------")  # 60個
 # https://waternotetw.blogspot.com/2018/03/keras-mnist.html
 
 #匯入Keras及相關模組
-import numpy as np #匯入numpy模組，NumPy是Python語言的擴充程式庫。支援維度陣列與矩陣運算
-import pandas as pd 
 from keras.utils import np_utils #匯入keras.utils因為後續要將label標籤轉換為One-hotencoding
+
 np.random.seed(10) #設定seed可以讓每次需要隨機產生的資料，都有相同的輸出
 
 from keras.datasets import mnist #匯入Keras的mnist模組
@@ -277,15 +275,10 @@ print('正確率', score[1])
 
 #正確率 0.9308000206947327
 
-
 print('------------------------------------------------------------')	#60個
-
-
-print("------------------------------------------------------------")  # 60個
 
 import tensorflow as tf
 from urllib.request import urlretrieve
-import numpy as np
 import gradio as gr
 from PIL import Image
 
