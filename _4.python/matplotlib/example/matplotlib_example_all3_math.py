@@ -10,8 +10,8 @@ print("------------------------------------------------------------")  # 60個
 # 共同
 import os
 import sys
-import math
 import time
+import math
 import random
 import numpy as np
 import pandas as pd
@@ -26,8 +26,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-
-#          編號                          圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
+'''
 plt.figure(
     num="math 集合 1",
     figsize=(12, 8),
@@ -108,9 +107,39 @@ plt.subplot(233)
 
 
 
+def dice_generator(times, sides):
+    # 處理隨機數
+    for i in range(times):
+        ranNum1 = random.randint(1, sides)  # 產生1-6隨機數
+        ranNum2 = random.randint(1, sides)  # 產生1-6隨機數
+        dice.append(ranNum1 + ranNum2)
+
+
+def dice_count(sides):
+    # 計算2-11個出現次數
+    for i in range(2, 13):
+        frequency = dice.count(i)  # 計算i出現在dice串列的次數
+        frequencies.append(frequency)
+
+
+times = 1000  # 擲骰子次數
+sides = 6  # 骰子有幾面
+dice = []  # 建立擲骰子的串列
+frequencies = []  # 儲存每一面骰子出現次數串列
+dice_generator(times, sides)  # 產生擲骰子的串列
+dice_count(sides)  # 將骰子串列轉成次數串列
+N = len(frequencies)
+x = np.arange(N)  # 長條圖x軸座標
+width = 0.35  # 長條圖寬度
+plt.bar(x, frequencies, width, color="g")  # 繪製長條圖
+plt.ylabel("出現次數")
+plt.title("測試 1000 次", fontsize=16)
+plt.xticks(x, ("2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"))
+plt.yticks(np.arange(0, 150, 15))
+
+
 # 第四張圖
 plt.subplot(234)
-
 
 N = 500
 
@@ -174,7 +203,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#          編號                          圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
 plt.figure(
     num="math 集合 2",
     figsize=(12, 8),
@@ -300,52 +328,114 @@ plt.xlabel("Research")
 plt.ylabel("UI")
 plt.grid()  # 加格線
 
-
 plt.show()
-
 
 print("------------------------------------------------------------")  # 60個
 
-import random
+plt.figure(
+    num="math 集合 3",
+    figsize=(12, 8),
+    dpi=100,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
+
+# 第一張圖
+plt.subplot(231)
+
+x = np.linspace(-3, 3, 50)
+y1 = 2*x + 1
+y2 = x**2
 
 
-def dice_generator(times, sides):
-    # 處理隨機數
-    for i in range(times):
-        ranNum1 = random.randint(1, sides)  # 產生1-6隨機數
-        ranNum2 = random.randint(1, sides)  # 產生1-6隨機數
-        dice.append(ranNum1 + ranNum2)
+plt.plot(x, y2)
+# plot the second curve in this figure with certain parameters
+plt.plot(x, y1, color='red', linewidth=1.0, linestyle='--')
+# set x limits
+plt.xlim((-1, 2))
+plt.ylim((-2, 3))
+plt.xlabel('I am x')
+plt.ylabel('I am y')
+
+# set new sticks
+new_ticks = np.linspace(-1, 2, 5)
+print(new_ticks)
+plt.xticks(new_ticks)
+# set tick labels
+plt.yticks([-2, -1.8, -1, 1.22, 3],
+           [r'$really\ bad$', r'$bad$', r'$normal$', r'$good$', r'$really\ good$'])
 
 
-def dice_count(sides):
-    # 計算2-11個出現次數
-    for i in range(2, 13):
-        frequency = dice.count(i)  # 計算i出現在dice串列的次數
-        frequencies.append(frequency)
+# 第二張圖
+plt.subplot(232)
+
+# legend
+
+x = np.linspace(-3, 3, 50)
+y1 = 2*x + 1
+y2 = x**2
+
+# set x limits
+plt.xlim((-1, 2))
+plt.ylim((-2, 3))
+
+# set new sticks
+new_sticks = np.linspace(-1, 2, 5)
+plt.xticks(new_sticks)
+# set tick labels
+plt.yticks([-2, -1.8, -1, 1.22, 3],
+           [r'$really\ bad$', r'$bad$', r'$normal$', r'$good$', r'$really\ good$'])
+
+l1, = plt.plot(x, y2, label='linear line')
+l2, = plt.plot(x, y1, color='red', linewidth=1.0, linestyle='--', label='square line')
+
+# plt.legend(loc='upper right')
+plt.legend(handles=[l1, l2], labels=['up', 'down'],  loc='best')
+# the "," is very important in here l1, = plt... and l2, = plt... for this step
+"""legend( handles=(line1, line2, line3),
+           labels=('label1', 'label2', 'label3'),
+           'upper right')
+    The *loc* location codes are::
+
+          'best' : 0,          (currently not supported for figure legends)
+          'upper right'  : 1,
+          'upper left'   : 2,
+          'lower left'   : 3,
+          'lower right'  : 4,
+          'right'        : 5,
+          'center left'  : 6,
+          'center right' : 7,
+          'lower center' : 8,
+          'upper center' : 9,
+          'center'       : 10,"""
 
 
-times = 1000  # 擲骰子次數
-sides = 6  # 骰子有幾面
-dice = []  # 建立擲骰子的串列
-frequencies = []  # 儲存每一面骰子出現次數串列
-dice_generator(times, sides)  # 產生擲骰子的串列
-dice_count(sides)  # 將骰子串列轉成次數串列
-N = len(frequencies)
-x = np.arange(N)  # 長條圖x軸座標
-width = 0.35  # 長條圖寬度
-plt.bar(x, frequencies, width, color="g")  # 繪製長條圖
-plt.ylabel("出現次數")
-plt.title("測試 1000 次", fontsize=16)
-plt.xticks(x, ("2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"))
-plt.yticks(np.arange(0, 150, 15))
+# 第三張圖
+plt.subplot(233)
+
+
+# 第四張圖
+plt.subplot(234)
+
+
+# 第五張圖
+plt.subplot(235)
+
+
+# 第六張圖
+plt.subplot(236)
+
+
 
 plt.show()
 
-
 print("------------------------------------------------------------")  # 60個
-
 
 print("數學畫圖")
+
+plt.figure(figsize=(12, 8))
 x = np.linspace(0, 10, 50)
 plt.subplot(231)
 plt.plot(x, np.sin(x))
@@ -443,40 +533,14 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
+plt.figure(figsize=(12, 8))
+
+# axis setting
 
 x = np.linspace(-3, 3, 50)
 y1 = 2*x + 1
 y2 = x**2
 
-plt.figure(figsize=(12, 8))
-
-plt.plot(x, y2)
-# plot the second curve in this figure with certain parameters
-plt.plot(x, y1, color='red', linewidth=1.0, linestyle='--')
-# set x limits
-plt.xlim((-1, 2))
-plt.ylim((-2, 3))
-plt.xlabel('I am x')
-plt.ylabel('I am y')
-
-# set new sticks
-new_ticks = np.linspace(-1, 2, 5)
-print(new_ticks)
-plt.xticks(new_ticks)
-# set tick labels
-plt.yticks([-2, -1.8, -1, 1.22, 3],
-           [r'$really\ bad$', r'$bad$', r'$normal$', r'$good$', r'$really\ good$'])
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-# 6 - axis setting
-
-x = np.linspace(-3, 3, 50)
-y1 = 2*x + 1
-y2 = x**2
-
-plt.figure(figsize=(12, 8))
 
 plt.plot(x, y2)
 # plot the second curve in this figure with certain parameters
@@ -510,51 +574,6 @@ ax.yaxis.set_ticks_position('left')
 # ACCEPTS: [ 'left' | 'right' | 'both' | 'default' | 'none' ]
 
 ax.spines['left'].set_position(('data',0))
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-# 7 - legend
-
-x = np.linspace(-3, 3, 50)
-y1 = 2*x + 1
-y2 = x**2
-
-plt.figure(figsize=(12, 8))
-
-# set x limits
-plt.xlim((-1, 2))
-plt.ylim((-2, 3))
-
-# set new sticks
-new_sticks = np.linspace(-1, 2, 5)
-plt.xticks(new_sticks)
-# set tick labels
-plt.yticks([-2, -1.8, -1, 1.22, 3],
-           [r'$really\ bad$', r'$bad$', r'$normal$', r'$good$', r'$really\ good$'])
-
-l1, = plt.plot(x, y2, label='linear line')
-l2, = plt.plot(x, y1, color='red', linewidth=1.0, linestyle='--', label='square line')
-
-# plt.legend(loc='upper right')
-plt.legend(handles=[l1, l2], labels=['up', 'down'],  loc='best')
-# the "," is very important in here l1, = plt... and l2, = plt... for this step
-"""legend( handles=(line1, line2, line3),
-           labels=('label1', 'label2', 'label3'),
-           'upper right')
-    The *loc* location codes are::
-
-          'best' : 0,          (currently not supported for figure legends)
-          'upper right'  : 1,
-          'upper left'   : 2,
-          'lower left'   : 3,
-          'lower right'  : 4,
-          'right'        : 5,
-          'center left'  : 6,
-          'center right' : 7,
-          'lower center' : 8,
-          'upper center' : 9,
-          'center'       : 10,"""
 
 plt.show()
 
@@ -633,6 +652,7 @@ s, c = np.sin(x), np.cos(x)
 # 坐標軸總共有四個連線，我們通過設置透明色隱藏上方和右方的邊線
 # 通過 set_position() 移動左側和下側的邊線
 # 通過 set_ticks_position() 設置坐標軸的刻度線的顯示位置
+
 ax = plt.gca()  # gca 代表當前坐標軸，即 'get current axis'
 ax.spines["right"].set_color("none")
 ax.spines["top"].set_color("none")
@@ -792,17 +812,16 @@ myfont = fm.FontProperties(fname=font_filename)
 plt.title("使用自定義的中文字型", fontproperties=myfont, size=24)
 
 plt.show()
-
-
+'''
 print("------------------------------------------------------------")  # 60個
 
 π = np.pi
 
 θ = np.linspace(0, 2 * π, 500)
 
-r = 3
-x = r * np.cos(θ)
-y = r * np.sin(θ)
+R = 10
+x = R * np.cos(θ)
+y = R * np.sin(θ)
 
 # gca 的意思是 "Get Current Axes"。
 ax = plt.gca()

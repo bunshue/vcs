@@ -83,46 +83,6 @@ namespace vcs_Thread_Example
             this.label3.Text = s.ToString();
         }
 
-        //螢幕畫素讀取 ST
-
-        Random r = new Random(Guid.NewGuid().GetHashCode());
-        private int _R = 0, _G = 0, _B = 0;
-        private Thread my_thread;
-
-        private void run_my_threaed()
-        {
-            while (true)
-            {
-                _R = r.Next(256);
-                _G = r.Next(256);
-                _B = r.Next(256);
-                Thread.Sleep(100);
-            }
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            my_thread = new Thread(run_my_threaed);
-
-            if (my_thread.IsAlive == false)
-            {
-                my_thread.Start();
-            }
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            my_thread.Abort();
-        }
-
-        private void timer_rgb_Tick(object sender, EventArgs e)
-        {
-            lb_R.Text = _R.ToString();
-            lb_G.Text = _G.ToString();
-            lb_B.Text = _B.ToString();
-        }
-        //螢幕畫素讀取 SP
-
         // 色塊 ST
         private void button4_Click(object sender, EventArgs e)
         {
@@ -285,29 +245,6 @@ namespace vcs_Thread_Example
                 th.Abort();
 
             }
-        }
-
-        private void bt_thread_example_Click(object sender, EventArgs e)
-        {
-            Thread t = new Thread(new ParameterizedThreadStart(delegate(object obj)
-            {
-                while (true)
-                {
-                    Thread.Sleep(400);
-                    if (bt_thread_example.BackColor == Color.Green)
-                    {
-                        bt_thread_example.BackColor = Color.Pink;
-                    }
-                    else
-                    {
-                        bt_thread_example.BackColor = Color.Green;
-                    }
-                }
-            }));
-            t.Name = " --start tray thread";
-            t.IsBackground = true;
-            t.Priority = ThreadPriority.Lowest;
-            t.Start(null);
         }
     }
 }

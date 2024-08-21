@@ -27,7 +27,6 @@ namespace vcs_WebCam_AForge2_Record1
     {
         public FilterInfoCollection USBWebcams = null;
         public VideoCaptureDevice Cam = null;
-        RotateFlipType rotate_flip_type = RotateFlipType.RotateNoneFlipNone;
 
         List<string> camera_short_name = new List<string>();      //一維List for string
         List<string> camera_full_name = new List<string>();      //一維List for string
@@ -549,8 +548,6 @@ namespace vcs_WebCam_AForge2_Record1
             SolidBrush drawBrush;
             Font drawFont;
             string drawDate;
-            //int x_st = 0;
-            //int y_st = 0;
 
             drawDate = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
             drawBrush = new SolidBrush(Color.Yellow);
@@ -574,31 +571,24 @@ namespace vcs_WebCam_AForge2_Record1
             if (flag_recording == true)
             {
                 TimeSpan diff = DateTime.Now - recording_time_st;
-                int hh = diff.Hours;
-                int mm = diff.Minutes;
-                int ss = diff.Seconds;
                 int ms = diff.Milliseconds;
                 if (ms < 500)
                 {
                     int ww = 22;
                     g.FillEllipse(Brushes.Red, 640 - BORDER - ww, BORDER + 4, ww, ww);
                 }
-                //g.DrawString("(" + hh.ToString("D2") + ":" + mm.ToString("D2") + ":" + ss.ToString("D2") + ")", drawFont, Brushes.Red, BORDER * 32, BORDER);
             }
 
             try
             {
                 //bm.RotateFlip(RotateFlipType.RotateNoneFlipY);    //反轉
-                //pictureBox1.Image = (Bitmap)eventArgs.Frame.Clone();
                 pictureBox1.Image = bm;
             }
             catch (Exception ex)
             {
                 richTextBox1.Text += "xxx錯誤訊息e05 : " + ex.Message + "\n";
             }
-
             GC.Collect();       //回收資源
-
             return;
         }
 

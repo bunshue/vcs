@@ -77,15 +77,10 @@ import xlrd
 
 book = xlrd.open_workbook('data/election_2018.xls')
 sheet = book.sheet_by_index(0)
+
 for row in range(10):
     print(sheet.row_values(row))
 
-print('------------------------------------------------------------')	#60個
-
-import xlrd
-
-book = xlrd.open_workbook('data/election_2018.xls')
-sheet = book.sheet_by_index(0)
 rows = sheet.nrows
 table = list()
 for row in range(rows):
@@ -174,15 +169,14 @@ target = target[['地區','姓名','推薦政黨','得票數']].groupby(by = '�
 target.plot.pie(y='推薦政黨')
 target
 
+plt.show()
+
 import seaborn as sns
 
 #如果明明有的字型, matplotlib 說找不到的話, 有可能需要讓 matplotlib 清掉原本的 cache。
 #matplotlib.font_manager._rebuild()
 #from matplotlib.font_manager import _rebuild
 #_rebuild()
-
-#plt.rcParams['font.sans-serif'] = [u'SimHei']
-sns.set_style("darkgrid",{"font.sans-serif":[u'SimHei', 'Arial']})
 
 #pd.read_excel kilo可用  sugar不可用, sugar降版成 pandas 1.3.5 可用
 
@@ -196,6 +190,8 @@ tainan = target.loc['臺南市'][['姓名','得票數']]
 tainan = tainan.set_index(['姓名'])
 tainan.plot.pie(y='得票數')
 tainan.plot.bar()
+
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 

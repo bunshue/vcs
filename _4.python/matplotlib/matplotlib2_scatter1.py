@@ -3,6 +3,72 @@ scatter 集合
 散布圖 Scatter Chart
 散點圖
 
+matplotlib.pyplot.scatter(x, 
+    y, 
+    s=20, 
+    c='b', 
+    marker='o', 
+    cmap=None, 
+    norm=None, 
+    vmin=None, 
+    vmax=None, 
+    alpha=None, 
+    linewidths=None, 
+    verts=None, 
+    hold=None, 
+    **kwargs)
+
+參數：
+    x，y：表示的是shape大小為(n,)的數組，也就是我們即將繪制散點圖的數據點，輸入數據。
+    s：表示的是大小，是一個標量或者是一個shape大小為(n,)的數組，可選，默認20。
+    c：表示的是色彩或顏色序列，可選，默認藍色’b’。但是c不應該是一個單一的RGB數字，也不應該是一個RGBA的序列，因為不便區分。c可以是一個RGB或RGBA二維行數組。
+     
+    marker：MarkerStyle，表示的是標記的樣式，可選，默認’o’。
+    cmap：Colormap，標量或者是一個colormap的名字，cmap僅僅當c是一個浮點數數組的時候才使用。如果沒有申明就是image.cmap，可選，默認None。
+    norm：Normalize，數據亮度在0-1之間，也是只有c是一個浮點數的數組的時候才使用。如果沒有申明，就是默認None。
+    vmin，vmax：標量，當norm存在的時候忽略。用來進行亮度數據的歸一化，可選，默認None。
+    alpha：標量，0-1之間，可選，默認None。
+    linewidths：也就是標記點的長度，默認None。
+
+matplotlib.pyplot.scatter(x, y, s=None, c=None, marker=None, cmap=None, norm=None, vmin=None, 
+vmax=None, alpha=None, linewidths=None, verts=None, edgecolors=None, hold=None, data=None, **kwargs)
+
+基本參數講解
+
+x, y → 散點的坐標
+s → 散點的面積
+c → 散點的顏色（默認值為藍色，'b'，其余顏色同plt.plot( )）
+marker → 散點樣式（默認值為實心圓，'o'，其余樣式同plt.plot( )）
+alpha → 散點透明度（[0, 1]之間的數，0表示完全透明，1則表示完全不透明）
+linewidths →散點的邊緣線寬
+edgecolors → 散點的邊緣顏色
+
+高級參數講解
+
+cmap → 指的是matplotlib.colors.Colormap，相當于多個調色盤的合集
+norm、vmin、vmax → 散點顏色亮度設置
+
+
+matplotlib.pyplot.scatter(x, y, s=None, 
+                            c=None, marker=None, 
+                            cmap=None, norm=None, 
+                            vmin=None, vmax=None, 
+                            alpha=None, linewidths=None, 
+                            verts=None, edgecolors=None, 
+                            **kwargs)
+
+x，y：輸入數據的x，y軸
+s：標量或數組，可選參數，散點圖點的大小
+c：顏色或顏色序列，可選參數，默認為藍色
+marker：散點圖中點的形狀，默認為圓點
+cmap：色圖，僅在c是浮點數組的情況下使用
+norm：設置數據亮度，用于將亮度數據縮放到0~1之間。僅當c是浮點數組的情況下使用
+vmin，vmax：亮度設置，與norm類似，只是設置縮放的范圍，當使用了norm參數，則該參數無效
+alpha：透明度設置，0（透明）~1（不透明）之間
+linewidths：設置散點邊界線的寬度
+verts：如果marker參數為空，則用（x，y）序列來構造marker，中心的點被置為（0，0），其他點被s重新縮放
+edgecolors：設置散點邊界線的顏色
+
 """
 
 N = 500
@@ -42,6 +108,10 @@ plt.figure(
 # 第一張圖
 plt.subplot(231)
 
+
+# 第二張圖
+plt.subplot(232)
+
 N = 30
 degrees = np.arange(0, 360, N)
 x = np.cos(np.radians(degrees))
@@ -52,9 +122,8 @@ plt.scatter(x, y, s=size)
 plt.plot(x, y, 'r')
 
 
-
-# 第二張圖
-plt.subplot(232)
+# 第三張圖
+plt.subplot(233)
 
 R = 10
 degrees = [x * 15 for x in range(0, 25)]
@@ -65,22 +134,18 @@ size = 300
 plt.scatter(x, y, s=size)
 
 
-# 第三張圖
-plt.subplot(233)
-
-A = 10  # 震幅
-N = 10  # 總點數
-x = A * np.random.rand(N)  # 0~A取N個數出來
-print(type(x))
-y = A * np.random.rand(N)  # 0~A取N個數出來
-
-print(x)
-print(y)
-plt.scatter(x, y)  # 畫出每個x-y對應點
-
 # 第四張圖
 plt.subplot(234)
 
+N = 1024
+X = np.random.normal(0, 1, N)
+Y = np.random.normal(0, 1, N)
+T = np.arctan2(Y, X)
+
+plt.scatter(X, Y, s=75, c=T, alpha=0.5)
+
+plt.xlim(-3.5, 3.5)
+plt.ylim(-3.5, 3.5)
 
 # 第五張圖
 plt.subplot(235)
@@ -131,10 +196,8 @@ y2 = np.random.randn(N) + cy2
 x = np.concatenate((x0, x1, x2))
 y = np.concatenate((y0, y1, y2))
 
-"""
-現在第一群的點是第 0 類, 第二群是第 1 類, 第三群是第 2 類，所以我們要做個像這樣
-[0, 0, ..., 0, 1, 1, ..., 1, 2, 2, ..., 2] 的標記。
-"""
+# 現在第一群的點是第 0 類, 第二群是第 1 類, 第三群是第 2 類，所以我們要做個像這樣
+# [0, 0, ..., 0, 1, 1, ..., 1, 2, 2, ..., 2] 的標記。
 
 c = np.repeat([0, 1, 2], N)
 
@@ -161,17 +224,6 @@ plt.figure(
 # 第一張圖
 plt.subplot(231)
 
-N = 1000
-# 使用隨機陣列產生圖像
-x = np.random.rand(N)  # N個0~1之間的亂數
-y = np.random.rand(N)
-plt.scatter(x, y, c=y, cmap="hsv")  # 色彩依 y 軸值變化
-#plt.colorbar()
-
-# 第二張圖
-plt.subplot(232)
-
-
 def loc(index):
     # 處理座標的移動
     x_mov = random.choice([-3, 3])  # 隨機x軸移動值
@@ -191,9 +243,8 @@ for i in range(1, N):  # 建立點的座標
 t = x  # 色彩隨x軸變化
 plt.scatter(x, y, s=2, c=t, cmap="brg")
 
-# 第三張圖
-plt.subplot(233)
-
+# 第二張圖
+plt.subplot(232)
 
 def loc(index):
     # 處理座標的移動
@@ -214,20 +265,68 @@ for i in range(1, N):  # 建立點的座標
 t = x  # 色彩隨x軸變化
 plt.scatter(x, y, s=2, c=t, cmap="brg")
 
+# 第三張圖
+plt.subplot(233)
+
+N = 50  # 散點的數量
+r = 0.5  # 邊界線boundary半徑
+x = np.random.rand(N)  # 隨機的 x 座標點
+y = np.random.rand(N)  # 隨機的 y 座標點
+size = []
+for i in range(N):  # 建立散點區域陣列
+    size.append(30)
+colorused = ["b", "c", "g", "k", "m", "r", "y"]  # 定義顏色
+colors = []
+for i in range(N):  # 隨機設定 N 個顏色
+    colors.append(np.random.choice(colorused))
+
+size1 = np.ma.masked_where(x < r, size)  # 邊界線 0.5 內區域遮罩
+size2 = np.ma.masked_where(x >= r, size)  # 邊界線 0.5 (含)外區域遮罩
+
+# 大於或等於 0.5 繪製星形, 小於 0.5 繪製圓形
+plt.scatter(x, y, s=size1, marker="*", c=colors)
+plt.scatter(x, y, s=size2, marker="o", c=colors)
+
+# 繪製邊界線
+plt.plot((0.5, 0.5), (0, 1.0))  # 繪製邊界線
+
+
 
 # 第四張圖
 plt.subplot(234)
+
+N = 50  # 散點的數量
+r = 0.5  # 邊界線boundary半徑
+x = np.random.rand(N)  # 隨機的 x 座標點
+y = np.random.rand(N)  # 隨機的 y 座標點
+size = np.random.randint(20, 100, N)  # 散點大小
+colorused = ["b", "c", "g", "k", "m", "r", "y"]  # 定義顏色
+colors = []
+for i in range(N):  # 隨機設定 N 個顏色
+    colors.append(np.random.choice(colorused))
+
+r1 = np.sqrt(x**2 + y**2)  # 計算距離
+size1 = np.ma.masked_where(r1 < r, size)  # 邊界線 0.5 內區域遮罩
+size2 = np.ma.masked_where(r1 >= r, size)  # 邊界線 0.5 (含)外區域遮罩
+
+# 大於或等於 0.5 繪製星形, 小於 0.5 繪製圓形
+plt.scatter(x, y, s=size1, marker="*", c=colors)
+plt.scatter(x, y, s=size2, marker="o", c=colors)
+
+# 計算 0.5Pi 之弧度, 依據弧度產生的座標點繪製邊界線
+radian = np.arange(0, np.pi / 2, 0.01)
+plt.plot(r * np.cos(radian), r * np.sin(radian))  # 繪製邊界線
 
 
 # 第五張圖
 plt.subplot(235)
 
-"""
-額外設定 s、c 和 cmap，就能根據資料點的數據，對應出指定的顏色，
-假設資料的範圍是 0～100，顏色地圖是紅橙黃綠藍，
-則 0～20 對應紅色，21～40 對應橙色，
-41～60 對應黃色，61～80 對應綠色，81～100 對應藍色。
-"""
+
+# 額外設定 s、c 和 cmap，就能根據資料點的數據，對應出指定的顏色，
+# 假設資料的範圍是 0～100，顏色地圖是紅橙黃綠藍，
+# 則 0～20 對應紅色，21～40 對應橙色，
+# 41～60 對應黃色，61～80 對應綠色，81～100 對應藍色。
+
 
 x = range(1, 11)  # 1 2 3 ... 10
 y = range(1, 11)  # 1 2 3 ... 10
@@ -271,287 +370,79 @@ plt.figure(
 # 第一張圖
 plt.subplot(231)
 
-N = 50  # 散點的數量
-r = 0.5  # 邊界線boundary半徑
-x = np.random.rand(N)  # 隨機的 x 座標點
-y = np.random.rand(N)  # 隨機的 y 座標點
-size = []
-for i in range(N):  # 建立散點區域陣列
-    size.append(30)
-colorused = ["b", "c", "g", "k", "m", "r", "y"]  # 定義顏色
-colors = []
-for i in range(N):  # 隨機設定 N 個顏色
-    colors.append(np.random.choice(colorused))
 
-size1 = np.ma.masked_where(x < r, size)  # 邊界線 0.5 內區域遮罩
-size2 = np.ma.masked_where(x >= r, size)  # 邊界線 0.5 (含)外區域遮罩
-
-# 大於或等於 0.5 繪製星形, 小於 0.5 繪製圓形
-plt.scatter(x, y, s=size1, marker="*", c=colors)
-plt.scatter(x, y, s=size2, marker="o", c=colors)
-
-# 繪製邊界線
-plt.plot((0.5, 0.5), (0, 1.0))  # 繪製邊界線
-
-# 第二張圖
-plt.subplot(232)
-
-N = 50  # 散點的數量
-r = 0.5  # 邊界線boundary半徑
-x = np.random.rand(N)  # 隨機的 x 座標點
-y = np.random.rand(N)  # 隨機的 y 座標點
-size = np.random.randint(20, 100, N)  # 散點大小
-colorused = ["b", "c", "g", "k", "m", "r", "y"]  # 定義顏色
-colors = []
-for i in range(N):  # 隨機設定 N 個顏色
-    colors.append(np.random.choice(colorused))
-
-r1 = np.sqrt(x**2 + y**2)  # 計算距離
-size1 = np.ma.masked_where(r1 < r, size)  # 邊界線 0.5 內區域遮罩
-size2 = np.ma.masked_where(r1 >= r, size)  # 邊界線 0.5 (含)外區域遮罩
-
-# 大於或等於 0.5 繪製星形, 小於 0.5 繪製圓形
-plt.scatter(x, y, s=size1, marker="*", c=colors)
-plt.scatter(x, y, s=size2, marker="o", c=colors)
-
-# 計算 0.5Pi 之弧度, 依據弧度產生的座標點繪製邊界線
-radian = np.arange(0, np.pi / 2, 0.01)
-plt.plot(r * np.cos(radian), r * np.sin(radian))  # 繪製邊界線
-
-# 第三張圖
-plt.subplot(233)
-
-
-# 第四張圖
-plt.subplot(234)
-
-N = 20
-x = np.random.rand(N)
-y = np.random.rand(N)
-
-colors = np.random.rand(N)  # 色彩數列
-size = 300
-plt.scatter(x, y, s=size, c=colors, alpha=0.5)
-
-# 第五張圖
-plt.subplot(235)
-
-N = 20
-x = np.random.randint(1, 11, N)
-y = np.random.randint(1, 11, N)
-colors = np.random.rand(N)  # 色彩數列
-size = 300
-plt.scatter(x, y, s=size, c=colors, alpha=0.5)
-
-# 第六張圖
-plt.subplot(236)
-
-
-plt.show()
-
-
-print("------------------------------------------------------------")  # 60個
-
-plt.figure(
-    num="scatter 集合 4",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
-
-"""
-matplotlib.pyplot.scatter(x, 
-    y, 
-    s=20, 
-    c='b', 
-    marker='o', 
-    cmap=None, 
-    norm=None, 
-    vmin=None, 
-    vmax=None, 
-    alpha=None, 
-    linewidths=None, 
-    verts=None, 
-    hold=None, 
-    **kwargs)
-
-參數：
-    x，y：表示的是shape大小為(n,)的數組，也就是我們即將繪制散點圖的數據點，輸入數據。
-    s：表示的是大小，是一個標量或者是一個shape大小為(n,)的數組，可選，默認20。
-    c：表示的是色彩或顏色序列，可選，默認藍色’b’。但是c不應該是一個單一的RGB數字，也不應該是一個RGBA的序列，因為不便區分。c可以是一個RGB或RGBA二維行數組。
-     
-    marker：MarkerStyle，表示的是標記的樣式，可選，默認’o’。
-    cmap：Colormap，標量或者是一個colormap的名字，cmap僅僅當c是一個浮點數數組的時候才使用。如果沒有申明就是image.cmap，可選，默認None。
-    norm：Normalize，數據亮度在0-1之間，也是只有c是一個浮點數的數組的時候才使用。如果沒有申明，就是默認None。
-    vmin，vmax：標量，當norm存在的時候忽略。用來進行亮度數據的歸一化，可選，默認None。
-    alpha：標量，0-1之間，可選，默認None。
-    linewidths：也就是標記點的長度，默認None。
-"""
-
-# 第一張圖
-plt.subplot(231)
-
-N = 20
+N = 10
 x = np.random.rand(N)
 y = np.random.rand(N)
 
 colors = np.random.rand(N)  # 色彩數列
 size = 300
 
-plt.scatter(x, y, s=size, c=colors, alpha=0.5)
-plt.scatter(x, y, s=size, c=colors, alpha=0.5, marker="x")#使用marker
-
-"""
-#方塊
-plt.scatter(x, y, c=colors, marker="*")  # 繪製 sine
-#星形
-plt.scatter(x, y, c=colors, marker="s")  # 繪製 cos
-"""
-
-# 第二張圖
-plt.subplot(232)
+# 把linewidths參數改成數組。
+lines = np.zeros(N) + 5
+print(lines)
 
 # 修改其中的linewidth參數的大小，但是沒什么不同，**注意：**只有marker為封閉的圖案的時候，這個參數才有效。
-
-N = 20
-x = np.random.rand(N)
-y = np.random.rand(N)
-
-colors = np.random.rand(N)  # 色彩數列
-size = 300
-
-lines = np.zeros(220) + 5
-
-# plt.scatter(x, y, s=size, c=colors, alpha=0.5, marker="x", linewidths=lines)
+#plt.scatter(x, y, s=size, c=colors, alpha=0.5, marker="x", linewidths=lines) # NG
 plt.scatter(x, y, s=size, c=colors, alpha=0.5, linewidths=lines)
 
 
+
+# 第二張圖
+plt.subplot(232)
+
+"""
+搭配 NumPy 繪製散布圖
+由於 matplotlib 能完美的和 NumPy 整合，
+所以能透過 NumPy 強大的處理或產生數據能力，快速產生許多繪圖用的數據，
+下方的例子，使用 NumPy 產生每組 10 個共三組 100～2000 隨機數字 y 和 size，
+使用 matplotlib 繪製出散布圖 ( 如果不指定顏色，每組數據會自動套用不同的顏色 )。
+"""
+
+x = range(0, 10)
+y = np.random.randint(100, 2000, size=(3, 10))  # 產生 3x10 陣列，內容為 100～2000 隨機數字
+size = 300
+for i in range(0, 3):
+    plt.scatter(x, y[i], s=size, alpha=0.5)
+
+
 # 第三張圖
 plt.subplot(233)
-
-N = 20
-# 把linewidths參數改成數組。
-x = np.random.rand(N)
-y = np.random.rand(N)
-
-lines = np.zeros(220) + 5
-size = 300
-plt.scatter(x, y, s=size, c="b", alpha=0.5, linewidths=lines)
-
-# 第四張圖
-plt.subplot(234)
 
 # np.random.randint(0, 3, 10)
 x = np.array([1, 2, 3, 4])
 y = np.array([5, 6, 7, 8])
 X, Y = np.meshgrid(x, y)
+size = 300
 
 plt.scatter(
     X.ravel(),
     Y.ravel(),
+    s=size,
     c=[0, 1, 2, 1, 1, 2, 1, 1, 0, 1, 1, 0, 0, 0, 2, 1],
     cmap="Paired",
 )
 
-# 第五張圖
-plt.subplot(235)
-
-
-# 第六張圖
-plt.subplot(236)
-
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-plt.figure(
-    num="scatter 集合 5",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
-
-"""
-matplotlib.pyplot.scatter(x, y, s=None, c=None, marker=None, cmap=None, norm=None, vmin=None, 
-vmax=None, alpha=None, linewidths=None, verts=None, edgecolors=None, hold=None, data=None, **kwargs)
-
-基本參數講解
-
-x, y → 散點的坐標
-s → 散點的面積
-c → 散點的顏色（默認值為藍色，'b'，其余顏色同plt.plot( )）
-marker → 散點樣式（默認值為實心圓，'o'，其余樣式同plt.plot( )）
-alpha → 散點透明度（[0, 1]之間的數，0表示完全透明，1則表示完全不透明）
-linewidths →散點的邊緣線寬
-edgecolors → 散點的邊緣顏色
-
-
-高級參數講解
-
-cmap → 指的是matplotlib.colors.Colormap，相當于多個調色盤的合集
-norm、vmin、vmax → 散點顏色亮度設置
-
-"""
-
-# 第一張圖
-plt.subplot(231)
-
-N = 20
-
-x = np.random.randn(N)  # 隨機產生N個X軸坐標
-y = np.random.randn(N)  # 隨機產生N個Y軸坐標
-
-colors = np.random.rand(N)  # 隨機產生N個用于顏色映射的數值
-sizes = 700 * np.random.rand(N)  # 隨機產生N個用于改變散點面積的數值
-
-plt.scatter(x, y, c=colors, s=sizes, alpha=0.3, cmap="viridis")
-
-
-# 這里從cmap中選取了一個叫做'viridis'的調色盤，
-# 其作用是，將參數c中獲取到的數值，映射到“色盤”中已經對應好的顏色上
-
-# 并且上圖中從“色盤”viridis中獲取到的顏色，
-# 可以通過plt.colorbar( )顯示為顏色條（與熱力圖同理）。
-
-
-# 第二張圖
-plt.subplot(232)
-
-N = 20
-x = np.random.randn(N)  # 隨機產生N個X軸坐標
-y = np.random.randn(N)  # 隨機產生N個Y軸坐標
-
-colors = np.random.rand(N)  # 隨機產生N個用于顏色映射的數值
-sizes = 700 * np.random.rand(N)  # 隨機產生N個用于改變散點面積的數值
-
-plt.scatter(x, y, c=colors, s=sizes, alpha=0.3, cmap="viridis")
-#plt.colorbar()
-
-# 第三張圖
-plt.subplot(233)
-
-from matplotlib import colors  # 為了調整“色盤”，需要導入colors
-
-N = 20
-x = np.random.randn(N)
-y = np.random.randn(N)
-color = np.random.rand(N)
-sizes = 700 * np.random.rand(N)
-
-changecolor = colors.Normalize(vmin=0.4, vmax=0.8)
-
-plt.scatter(x, y, c=color, s=sizes, alpha=0.3, cmap="viridis", norm=changecolor)
-#plt.colorbar()
 
 # 第四張圖
 plt.subplot(234)
+
+N = 20
+x = np.random.randn(N)  # 隨機產生N個X軸坐標
+y = np.random.randn(N)  # 隨機產生N個Y軸坐標
+
+colors = np.random.rand(N)  # 隨機產生N個用于顏色映射的數值
+size = 300
+
+plt.scatter(x, y, c=colors, s=size, alpha=0.3, cmap="viridis")
+
+# 這里從cmap中選取了一個叫做'viridis'的調色盤，
+# 其作用是，將參數c中獲取到的數值，映射到“色盤”中已經對應好的顏色上
+# 并且上圖中從“色盤”viridis中獲取到的顏色，
+# 可以通過plt.colorbar( )顯示為顏色條（與熱力圖同理）。
+
+# 第五張圖
+plt.subplot(235)
 
 N = 20
 colorused = ["b", "c", "g", "k", "m", "r", "y"]  # 定義顏色
@@ -564,59 +455,61 @@ y = np.random.randint(1, 11, N)
 size = 300
 plt.scatter(x, y, s=size, c=colors)  # 繪製散點
 
-# 第五張圖
-plt.subplot(235)
-
-"""
-搭配 NumPy 繪製散布圖
-
-由於 matplotlib 能完美的和 NumPy 整合，
-所以能透過 NumPy 強大的處理或產生數據能力，快速產生許多繪圖用的數據，
-下方的例子，使用 NumPy 產生每組 10 個共三組 100～2000 隨機數字 y 和 size，
-使用 matplotlib 繪製出散布圖 ( 如果不指定顏色，每組數據會自動套用不同的顏色 )。
-"""
-
-x = range(0, 10)
-y = np.random.randint(100, 2000, size=(3, 10))  # 產生 3x10 陣列，內容為 100～2000 隨機數字
-size = np.random.randint(100, 2000, size=(3, 10))  # 產生 3x10 陣列，內容為 100～2000 隨機數字
-for i in range(0, 3):
-    plt.scatter(x, y[i], s=size[i], alpha=0.5)
-
-
 # 第六張圖
 plt.subplot(236)
 
-N = 20
-x = np.random.rand(N)
-y = np.random.rand(N)
-colors = np.random.rand(N)  # 色彩數列
-plt.scatter(x, y, s=300, c=colors, alpha=0.5)
+from matplotlib import colors  # 為了調整“色盤”，需要導入colors
 
+N = 20
+x = np.random.randn(N)
+y = np.random.randn(N)
+color = np.random.rand(N)
+size = 300
+
+changecolor = colors.Normalize(vmin=0.4, vmax=0.8)
+
+plt.scatter(x, y, c=color, s=size, alpha=0.3, cmap="viridis", norm=changecolor)
+#plt.colorbar()
 
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 print("scatter參數大合集")
 
 plt.figure(figsize=(12, 8))
 
-x = np.random.randn(N)
-y = np.random.randn(N)
+N = 1000
+A = 10  # 震幅
+# 使用隨機陣列產生圖像
+x = A * np.random.rand(N)  # 0~A取N個數出來
+y = A * np.random.rand(N)  # 0~A取N個數出來
 
-plt.scatter(x, y)
-# plt.scatter(x, y, marker="^", color="red") # 指名marker和顏色
-# plt.scatter(x, y, s=30)# 設定資料點的大小
-plt.scatter(x, y, c="r", s=100)  # 指定顏色與大小
+colors = np.random.rand(N)  # 色彩數列
+size = 300
 
+#plt.scatter(x, y)
+
+#plt.scatter(x, y, s=size, c=colors, alpha=0.5)
+plt.scatter(x, y, c=y, cmap="hsv")  # 色彩依 y 軸值變化
+#plt.scatter(x, y, s=size, c=colors, alpha=0.5, marker="x")#使用marker
+#plt.scatter(x, y, s=size, c=colors, marker="*")#使用marker 方塊
+#plt.scatter(x, y, s=size, c=colors, marker="s")#使用marker 星形
+#plt.scatter(x, y, color="red", marker="^") # 指名marker和顏色
+#plt.scatter(x, y, s=size, c="r")  # 指定顏色與大小
+
+#plt.colorbar()
+
+""" 各種scatter的語法
 # 給散佈圖的點套上不同深淺顏色
 # c = np.random.choice(np.arange(100), 100)
 # plt.scatter(x, y, s=c, c=c, cmap="viridis")
 
-""" 各種scatter的語法
-plt.scatter(x, y, alpha=0.3)
+plt.scatter(x, y, alpha=0.5)
 plt.scatter(x, y, alpha=0.5, s=100)
 
 plt.scatter(x, y, alpha=0.5, s=100, color="red")
@@ -635,55 +528,17 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-""" TBD
-def loc(index):
-    # 處理座標的移動
-    x_mov = random.choice([-3, 3])  # 隨機x軸移動值
-    xloc = x[index - 1] + x_mov  # 計算x軸新位置
-    y_mov = random.choice([-5, -1, 1, 5])  # 隨機y軸移動值
-    yloc = y[index - 1] + y_mov  # 計算y軸新位置
-    x.append(xloc)  # x軸新位置加入串列
-    y.append(yloc)  # y軸新位置加入串列
+N = 20
+x = np.random.randn(N)  # 隨機產生N個X軸坐標
+y = np.random.randn(N)  # 隨機產生N個Y軸坐標
+colors = np.random.rand(N)  # 隨機產生N個用于顏色映射的數值
+size = 300
 
-
-num = 10000  # 設定隨機點的數量
-x = [0]  # 設定第一次執行x座標
-y = [0]  # 設定第一次執行y座標
-
-for i in range(1, num):  # 建立點的座標
-    loc(i)
-
-t = x  # 色彩隨x軸變化
-plt.scatter(x, y, s=2, c=t, cmap="brg")
-plt.show()
-"""
-print("------------------------------------------------------------")  # 60個
-
-
-""" TBD
-def loc(index):
-    # 處理座標的移動
-    x_mov = random.choice([-3, 3])  # 隨機x軸移動值
-    xloc = x[index - 1] + x_mov  # 計算x軸新位置
-    y_mov = random.choice([-5, -1, 1, 5])  # 隨機y軸移動值
-    yloc = y[index - 1] + y_mov  # 計算y軸新位置
-    x.append(xloc)  # x軸新位置加入串列
-    y.append(yloc)  # y軸新位置加入串列
-
-
-num = 10000  # 設定隨機點的數量
-x = [0]  # 設定第一次執行x座標
-y = [0]  # 設定第一次執行y座標
-
-for i in range(1, num):  # 建立點的座標
-    loc(i)
-t = x  # 色彩隨x軸變化
-plt.scatter(x, y, s=2, c=t, cmap="brg")
-# plt.axes().get_xaxis().set_visible(False)   # 隱藏x軸座標
-# plt.axes().get_yaxis().set_visible(False)   # 隱藏y軸座標
+plt.scatter(x, y, c=colors, s=size, alpha=0.3, cmap="viridis")
+#plt.colorbar()
 
 plt.show()
-"""
+
 print("------------------------------------------------------------")  # 60個
 
 print("散佈圖")
@@ -708,46 +563,7 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-n = 1024
-X = np.random.normal(0, 1, n)
-Y = np.random.normal(0, 1, n)
-T = np.arctan2(Y, X)
-
-plt.scatter(X, Y, s=75, c=T, alpha=0.5)
-
-plt.xlim(-3.5, 3.5)
-plt.ylim(-3.5, 3.5)
-
-plt.show()
-
 print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-""" TBD
-def loc(index):
-    # 處理座標的移動
-    x_mov = random.choice([-3, 3])  # 隨機x軸移動值
-    xloc = x[index - 1] + x_mov  # 計算x軸新位置
-    y_mov = random.choice([-5, -1, 1, 5])  # 隨機y軸移動值
-    yloc = y[index - 1] + y_mov  # 計算y軸新位置
-    x.append(xloc)  # x軸新位置加入串列
-    y.append(yloc)  # y軸新位置加入串列
-
-
-num = 10000  # 設定隨機點的數量
-x = [0]  # 設定第一次執行x座標
-y = [0]  # 設定第一次執行y座標
-
-for i in range(1, num):  # 建立點的座標
-    loc(i)
-t = x  # 色彩隨x軸變化
-plt.scatter(x, y, s=2, c=t, cmap="brg")
-plt.show()
-"""
-print("------------------------------------------------------------")  # 60個
-
 
 """ fail
 #zip 高級組合法
@@ -774,7 +590,6 @@ print("作業完成")
 print("------------------------------------------------------------")  # 60個
 sys.exit()
 print("------------------------------------------------------------")  # 60個
-
 
 
 
@@ -825,27 +640,6 @@ np.random.seed(10)  # 固定隨機數
 """
 
 
-"""
-matplotlib.pyplot.scatter(x, y, s=None, 
-                            c=None, marker=None, 
-                            cmap=None, norm=None, 
-                            vmin=None, vmax=None, 
-                            alpha=None, linewidths=None, 
-                            verts=None, edgecolors=None, 
-                            **kwargs)
-
-x，y：輸入數據的x，y軸
-s：標量或數組，可選參數，散點圖點的大小
-c：顏色或顏色序列，可選參數，默認為藍色
-marker：散點圖中點的形狀，默認為圓點
-cmap：色圖，僅在c是浮點數組的情況下使用
-norm：設置數據亮度，用于將亮度數據縮放到0~1之間。僅當c是浮點數組的情況下使用
-vmin，vmax：亮度設置，與norm類似，只是設置縮放的范圍，當使用了norm參數，則該參數無效
-alpha：透明度設置，0（透明）~1（不透明）之間
-linewidths：設置散點邊界線的寬度
-verts：如果marker參數為空，則用（x，y）序列來構造marker，中心的點被置為（0，0），其他點被s重新縮放
-edgecolors：設置散點邊界線的顏色
-"""
 
 print("------------------------------------------------------------")  # 60個
 
@@ -947,9 +741,6 @@ plt.scatter(x, y, s=300, c=y, cmap="rainbow")  # 色彩隨 y 軸值變化
 #plt.colorbar()
 plt.show()
 
-
-x = np.random.rand(10)
-y = np.random.rand(10)
 colors = np.array(["b", "c", "g", "k", "m", "r", "y", "pink", "purple", "orange"])
 
 # 建立多邊形標記
@@ -1011,6 +802,8 @@ correlation[0, 1]  # 顯示在畫面
 
 print('建立任意大小陣列')
 size = (30 * np.random.rand(N)) ** 2  # 散點大小數列
+size = 700 * np.random.rand(N)  # 隨機產生N個用于改變散點面積的數值
+size = np.random.randint(100, 2000, size=(3, 10))  # 產生 3x10 陣列，內容為 100～2000 隨機數字
 
 plt.xticks(np.arange(0, 12, step=1.0))  # x 軸刻度
 plt.yticks(np.arange(0, 12, step=1.0))  # y 軸刻度
@@ -1018,4 +811,13 @@ plt.xticks(np.arange(0, 11, step=1.0))
 plt.yticks(np.arange(0, 11, step=1.0))
 
 # 由於點可能疊加，設置透明度爲0.5
+
+N = 20
+x = np.random.randint(1, 11, N)
+y = np.random.randint(1, 11, N)
+
+
+
+x = np.random.randn(N)
+y = np.random.randn(N)
 

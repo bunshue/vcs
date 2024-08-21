@@ -65,6 +65,7 @@ namespace vcs_Queue
                 }
                 catch (Exception ex)
                 {
+                    Console.WriteLine("xxx錯誤訊息e03 : " + ex.Message);
                 }
             }
             else
@@ -108,7 +109,7 @@ namespace vcs_Queue
                     e.Graphics.DrawRectangle(Pens.DarkRed, x_st + width * i, y_st, width, h);
                 }
 
-                
+
 
             }
         }
@@ -258,9 +259,43 @@ namespace vcs_Queue
                 object o = objs[i];
                 Console.Write("<4> " + o + "\n");
             }
-            
+
 
         }
 
+        Queue<string> string_queue = new Queue<string>(); // Queue that stores frames to be written by the recorder thread
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            //Queue訊息
+            int len = string_queue.Count;
+            richTextBox1.Text += "目前Queue內共有 : " + len.ToString() + " 筆資料\n";
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            //Queue加入
+            richTextBox1.Text += "加入Queue";
+            string str = "加入Queue";
+            string_queue.Enqueue(str);
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            //Queue取出
+            if (string_queue.Count > 0)
+            {
+                try
+                {
+                    string str = string_queue.Dequeue();
+                    richTextBox1.Text += "取得 : " + str + "\n";
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("xxx錯誤訊息e03 : " + ex.Message);
+                }
+            }
+        }
     }
 }
+
