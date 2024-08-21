@@ -79,39 +79,6 @@ namespace vcs_Queue
         {
             label1.Text = "目前Queue中的張數 : " + frames.Count.ToString();
             //richTextBox1.Text += "目前Queue中的張數 : " + frames.Count.ToString() + "\n";
-            pictureBox_count.Invalidate();
-        }
-
-        private void pictureBox_count_Paint(object sender, PaintEventArgs e)
-        {
-            int border = 10;    //10 percent
-            int W = pictureBox_count.ClientSize.Width;
-            int H = pictureBox_count.ClientSize.Height;
-            int x_st = W * border / 100;
-            int y_st = H * border / 100;
-            int w = W * (100 - border * 2) / 100;
-            int h = H * (100 - border * 2) / 100;
-
-            int cnt = frames.Count;
-            int i = 0;
-            int width = 0;
-
-            e.Graphics.Clear(Color.Pink);
-            if (cnt == 0)
-            {
-            }
-            else if (cnt <= 10)
-            {
-                width = w / 10;
-                for (i = 0; i < cnt; i++)
-                {
-                    e.Graphics.FillRectangle(Brushes.Red, x_st + width * i, y_st, width, h);
-                    e.Graphics.DrawRectangle(Pens.DarkRed, x_st + width * i, y_st, width, h);
-                }
-
-
-
-            }
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -119,7 +86,6 @@ namespace vcs_Queue
             frames.Clear();
             richTextBox1.Text += "清除Queue\n";
             update_queue_count();
-
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -259,8 +225,6 @@ namespace vcs_Queue
                 object o = objs[i];
                 Console.Write("<4> " + o + "\n");
             }
-
-
         }
 
         Queue<string> string_queue = new Queue<string>(); // Queue that stores frames to be written by the recorder thread

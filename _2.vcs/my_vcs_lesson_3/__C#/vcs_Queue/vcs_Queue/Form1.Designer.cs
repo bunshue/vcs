@@ -35,7 +35,6 @@
             this.pictureBox_show = new System.Windows.Forms.PictureBox();
             this.button4 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.pictureBox_count = new System.Windows.Forms.PictureBox();
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
@@ -47,7 +46,6 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_show)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_count)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -55,7 +53,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(14, 31);
+            this.button1.Location = new System.Drawing.Point(14, 64);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(120, 60);
             this.button1.TabIndex = 0;
@@ -65,7 +63,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(14, 109);
+            this.button2.Location = new System.Drawing.Point(14, 142);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(120, 60);
             this.button2.TabIndex = 1;
@@ -75,7 +73,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(14, 187);
+            this.button3.Location = new System.Drawing.Point(14, 220);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(120, 60);
             this.button3.TabIndex = 2;
@@ -85,9 +83,9 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(700, 12);
+            this.richTextBox1.Location = new System.Drawing.Point(637, 12);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(408, 646);
+            this.richTextBox1.Size = new System.Drawing.Size(471, 646);
             this.richTextBox1.TabIndex = 3;
             this.richTextBox1.Text = "";
             // 
@@ -95,16 +93,16 @@
             // 
             this.pictureBox_show.BackColor = System.Drawing.Color.Pink;
             this.pictureBox_show.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox_show.Location = new System.Drawing.Point(342, 305);
+            this.pictureBox_show.Location = new System.Drawing.Point(302, 21);
             this.pictureBox_show.Name = "pictureBox_show";
-            this.pictureBox_show.Size = new System.Drawing.Size(333, 353);
+            this.pictureBox_show.Size = new System.Drawing.Size(288, 259);
             this.pictureBox_show.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox_show.TabIndex = 4;
             this.pictureBox_show.TabStop = false;
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(405, 36);
+            this.button4.Location = new System.Drawing.Point(167, 142);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(120, 60);
             this.button4.TabIndex = 5;
@@ -116,28 +114,17 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label1.Location = new System.Drawing.Point(147, 31);
+            this.label1.Location = new System.Drawing.Point(14, 29);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(53, 19);
             this.label1.TabIndex = 6;
             this.label1.Text = "label1";
             // 
-            // pictureBox_count
-            // 
-            this.pictureBox_count.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox_count.Location = new System.Drawing.Point(151, 124);
-            this.pictureBox_count.Name = "pictureBox_count";
-            this.pictureBox_count.Size = new System.Drawing.Size(485, 123);
-            this.pictureBox_count.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox_count.TabIndex = 7;
-            this.pictureBox_count.TabStop = false;
-            this.pictureBox_count.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_count_Paint);
-            // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(544, 42);
+            this.button5.Location = new System.Drawing.Point(167, 220);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(92, 49);
+            this.button5.Size = new System.Drawing.Size(120, 60);
             this.button5.TabIndex = 8;
             this.button5.Text = "clear";
             this.button5.UseVisualStyleBackColor = true;
@@ -178,7 +165,7 @@
             this.groupBox1.Controls.Add(this.button11);
             this.groupBox1.Controls.Add(this.button10);
             this.groupBox1.Controls.Add(this.button9);
-            this.groupBox1.Location = new System.Drawing.Point(179, 305);
+            this.groupBox1.Location = new System.Drawing.Point(179, 333);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(150, 220);
             this.groupBox1.TabIndex = 12;
@@ -221,12 +208,12 @@
             this.groupBox2.Controls.Add(this.button2);
             this.groupBox2.Controls.Add(this.button3);
             this.groupBox2.Controls.Add(this.button4);
+            this.groupBox2.Controls.Add(this.pictureBox_show);
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Controls.Add(this.button5);
-            this.groupBox2.Controls.Add(this.pictureBox_count);
             this.groupBox2.Location = new System.Drawing.Point(12, 12);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(663, 275);
+            this.groupBox2.Size = new System.Drawing.Size(606, 302);
             this.groupBox2.TabIndex = 13;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Queue 測試";
@@ -236,7 +223,7 @@
             this.groupBox3.Controls.Add(this.button6);
             this.groupBox3.Controls.Add(this.button7);
             this.groupBox3.Controls.Add(this.button8);
-            this.groupBox3.Location = new System.Drawing.Point(12, 305);
+            this.groupBox3.Location = new System.Drawing.Point(12, 333);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(150, 220);
             this.groupBox3.TabIndex = 14;
@@ -252,12 +239,10 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.richTextBox1);
-            this.Controls.Add(this.pictureBox_show);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_show)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_count)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
@@ -275,7 +260,6 @@
         private System.Windows.Forms.PictureBox pictureBox_show;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.PictureBox pictureBox_count;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button7;

@@ -74,6 +74,7 @@ namespace vcs_Draw1
             dy = 50;
 
             pictureBox_uac.Location = new Point(x_st + dx * 0 - 100, y_st + dy * 0);
+            pictureBox_count.Location = new Point(x_st + dx * 0 - 280, y_st + dy * 4);
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             button2.Location = new Point(x_st + dx * 2, y_st + dy * 0);
@@ -2943,6 +2944,7 @@ namespace vcs_Draw1
 
         private void button52_Click(object sender, EventArgs e)
         {
+            pictureBox_count.Invalidate();
         }
 
         private void button53_Click(object sender, EventArgs e)
@@ -3099,6 +3101,40 @@ namespace vcs_Draw1
 
         private void button59_Click(object sender, EventArgs e)
         {
+        }
+
+        int count = 0;
+        private void pictureBox_count_Paint(object sender, PaintEventArgs e)
+        {
+            int border = 10;    //10 percent
+            int W = pictureBox_count.ClientSize.Width;
+            int H = pictureBox_count.ClientSize.Height;
+            int x_st = W * border / 100;
+            int y_st = H * border / 100;
+            int w = W * (100 - border * 2) / 100;
+            int h = H * (100 - border * 2) / 100;
+
+            int i = 0;
+            int width = 0;
+
+            e.Graphics.Clear(Color.Pink);
+            if (count == 0)
+            {
+            }
+            else if (count <= 10)
+            {
+                width = w / 10;
+                for (i = 0; i < count; i++)
+                {
+                    e.Graphics.FillRectangle(Brushes.Red, x_st + width * i, y_st, width, h);
+                    e.Graphics.DrawRectangle(Pens.DarkRed, x_st + width * i, y_st, width, h);
+                }
+            }
+            else
+            {
+                count = 0;
+            }
+            count++;
         }
     }
 }

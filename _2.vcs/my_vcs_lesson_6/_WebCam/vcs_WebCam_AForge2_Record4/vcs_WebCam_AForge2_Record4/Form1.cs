@@ -46,21 +46,16 @@ namespace vcs_WebCam_AForge2_Record4
 
         public void StopCapture()
         {
-            if (this.Cam.IsRunning == true)
+            if (Cam.IsRunning == true)
             {
                 // we must stop the VideoCaptureDevice when done to free it so it can be used by other applications
-                this.Cam.Stop();
+                Cam.Stop();  // WebCam stops capturing images.
             }
         }
 
         public void StartRecording()
         {
-            if (flag_recording == false)
-            {
-                flag_recording = true;
-
-                writer.Open(RecordingFilename, this.Width, this.Height, 30);
-            }
+            writer.Open(RecordingFilename, Width, Height, 30);
         }
 
         public void StopRecording()
@@ -94,15 +89,15 @@ namespace vcs_WebCam_AForge2_Record4
             try
             {
                 bitmap1 = (Bitmap)eventArgs.Frame.Clone(); // get a copy of the BitMap from the VideoCaptureDevice
-                if (this.isResolutionSet == false)
+                if (isResolutionSet == false)
                 {
                     // this is run once to set the resolution for the VideoRecorder
-                    this.Width = bitmap1.Width;
-                    this.Height = bitmap1.Height;
-                    this.isResolutionSet = true;
+                    Width = bitmap1.Width;
+                    Height = bitmap1.Height;
+                    isResolutionSet = true;
                 }
 
-                this.pictureBox1.Image = (Bitmap)bitmap1.Clone(); // displays the current frame on the main form
+                pictureBox1.Image = (Bitmap)bitmap1.Clone(); // displays the current frame on the main form
 
                 if (flag_recording == true)
                 {
@@ -147,7 +142,7 @@ namespace vcs_WebCam_AForge2_Record4
             {
                 string camera_name = USBWebcams[0].MonikerString;   //長名
 
-                this.pictureBox1.Paint += new PaintEventHandler(DrawMessage);
+                pictureBox1.Paint += new PaintEventHandler(DrawMessage);
 
                 Cam = new VideoCaptureDevice(camera_name);
                 Cam.NewFrame += new NewFrameEventHandler(Cam_NewFrame); // defines which method to call when a new frame arrives

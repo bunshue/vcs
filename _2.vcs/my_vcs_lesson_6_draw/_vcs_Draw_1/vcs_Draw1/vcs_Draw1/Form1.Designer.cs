@@ -99,9 +99,11 @@
             this.button58 = new System.Windows.Forms.Button();
             this.button59 = new System.Windows.Forms.Button();
             this.bt_reset = new System.Windows.Forms.Button();
+            this.pictureBox_count = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_uac)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_text)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_count)).BeginInit();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -789,6 +791,7 @@
             this.button52.Name = "button52";
             this.button52.Size = new System.Drawing.Size(120, 42);
             this.button52.TabIndex = 81;
+            this.button52.Text = "畫進度表";
             this.button52.UseVisualStyleBackColor = true;
             this.button52.Click += new System.EventHandler(this.button52_Click);
             // 
@@ -874,11 +877,24 @@
             this.bt_reset.UseVisualStyleBackColor = true;
             this.bt_reset.Click += new System.EventHandler(this.bt_reset_Click);
             // 
+            // pictureBox_count
+            // 
+            this.pictureBox_count.BackColor = System.Drawing.Color.LightPink;
+            this.pictureBox_count.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox_count.Location = new System.Drawing.Point(478, 262);
+            this.pictureBox_count.Name = "pictureBox_count";
+            this.pictureBox_count.Size = new System.Drawing.Size(271, 86);
+            this.pictureBox_count.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox_count.TabIndex = 89;
+            this.pictureBox_count.TabStop = false;
+            this.pictureBox_count.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_count_Paint);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1443, 917);
+            this.Controls.Add(this.pictureBox_count);
             this.Controls.Add(this.bt_reset);
             this.Controls.Add(this.button59);
             this.Controls.Add(this.button58);
@@ -960,6 +976,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_uac)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_text)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_count)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1038,6 +1055,7 @@
         private System.Windows.Forms.Button button58;
         private System.Windows.Forms.Button button59;
         private System.Windows.Forms.Button bt_reset;
+        private System.Windows.Forms.PictureBox pictureBox_count;
     }
 }
 
