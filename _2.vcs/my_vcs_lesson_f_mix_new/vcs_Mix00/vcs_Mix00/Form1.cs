@@ -177,15 +177,9 @@ namespace vcs_Mix00
                 richTextBox1.Text += "處理序啟動的時間 :\t" + curProcess.StartTime.ToString() + "\n";   //取得處理序的主視窗標題
                 richTextBox1.Text += "這個處理序的總處理器時間 :\t" + curProcess.TotalProcessorTime.ToString() + "\n";   //取得處理序的主視窗標題
 
-
-
                 //程序的退出
                 //Process.GetCurrentProcess().Kill();
-
-
-
             }
-
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -327,9 +321,75 @@ namespace vcs_Mix00
             }
         }
 
+        static float Gamma(float x)
+        {
+            return (float)(x > 0.04045f ? Math.Pow((x + 0.055f) / 1.055f, 2.4f) : x / 12.92f);
+        }
+
+        public static float[] rgb2lab(float var_R, float var_G, float var_B)
+        {
+
+            float[] arr = new float[3];
+            float B = Gamma(var_B);
+            float G = Gamma(var_G);
+            float R = Gamma(var_R);
+            float X = 0.412453f * R + 0.357580f * G + 0.180423f * B;
+            float Y = 0.212671f * R + 0.715160f * G + 0.072169f * B;
+            float Z = 0.019334f * R + 0.119193f * G + 0.950227f * B;
+
+            X /= 0.95047f;
+            Y /= 1.0f;
+            Z /= 1.08883f;
+
+            float FX = (float)(X > 0.008856f ? Math.Pow(X, 1.0f / 3.0f) : (7.787f * X + 0.137931f));
+            float FY = (float)(Y > 0.008856f ? Math.Pow(Y, 1.0f / 3.0f) : (7.787f * Y + 0.137931f));
+            float FZ = (float)(Z > 0.008856f ? Math.Pow(Z, 1.0f / 3.0f) : (7.787f * Z + 0.137931f));
+            arr[0] = Y > 0.008856f ? (116.0f * FY - 16.0f) : (903.3f * Y);
+            arr[1] = 500f * (FX - FY);
+            arr[2] = 200f * (FY - FZ);
+            return arr;
+
+        }
+
         private void button4_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            //RGB 轉 LAB
+
+            float var_R = 255;
+            float var_G = 0;
+            float var_B = 0;
+
+            float[] cc = rgb2lab(var_R, var_G, var_B);
+
+            richTextBox1.Text += cc + "\n";
+            richTextBox1.Text += cc[0] + "\n";
+            richTextBox1.Text += cc[1] + "\n";
+            richTextBox1.Text += cc[2] + "\n";
+
+
+            var_R = 0;
+            var_G = 255;
+            var_B = 0;
+
+            cc = rgb2lab(var_R, var_G, var_B);
+
+            richTextBox1.Text += cc + "\n";
+            richTextBox1.Text += cc[0] + "\n";
+            richTextBox1.Text += cc[1] + "\n";
+            richTextBox1.Text += cc[2] + "\n";
+
+
+            var_R = 0;
+            var_G = 0;
+            var_B = 255;
+
+            cc = rgb2lab(var_R, var_G, var_B);
+
+            richTextBox1.Text += cc + "\n";
+            richTextBox1.Text += cc[0] + "\n";
+            richTextBox1.Text += cc[1] + "\n";
+            richTextBox1.Text += cc[2] + "\n";
         }
 
         private void button5_Click(object sender, EventArgs e)
