@@ -5,6 +5,7 @@ print("------------------------------------------------------------")  # 60個
 # 共同
 import os
 import sys
+import time
 import math
 import random
 import numpy as np
@@ -267,7 +268,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-
 N = 1000  # 數據數量
 np.random.seed(10)  # 設定隨機數種子值
 x = np.random.normal(0, 1, N)  # 均值是 0, 標準差是 1
@@ -283,20 +283,6 @@ plt.yticks(())  # 不顯示 y 刻度
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
-
-fig = plt.figure()
-np.random.seed(10)  # 設定種子值
-N = 100
-r = 2 * np.random.rand(N)
-theta = 2 * np.pi * np.random.rand(N)
-area = 150 * r**2
-colors = theta
-plt.subplot(projection="polar")
-plt.scatter(theta, r, c=colors, s=area, cmap="rainbow", alpha=0.8)
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
 
 fig, axs = plt.subplots(nrows=2, ncols=2)
 x = np.linspace(0, 2 * np.pi, 200)

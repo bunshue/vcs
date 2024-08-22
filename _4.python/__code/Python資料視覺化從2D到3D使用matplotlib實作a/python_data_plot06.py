@@ -8,6 +8,7 @@ print("------------------------------------------------------------")  # 60個
 # 共同
 import os
 import sys
+import time
 import math
 import random
 import numpy as np
@@ -24,9 +25,6 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
-# ch6_9.py
-import matplotlib.pyplot as plt
-
 plt.subplot(1,2,1)      # 建立子圖表 1,2,1
 plt.text(0.15,0.5,'subplot(1,2,1)',fontsize='16',c='b')
 
@@ -39,13 +37,6 @@ plt.text(0.15,0.5,'subplot(2,2,4)',fontsize='16',c='m')
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
-
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch06\ch6_10.py
-
-# ch6_10.py
-import numpy as np
-import matplotlib.pyplot as plt
 
 def f(t):
     return np.exp(-t) * np.sin(2*np.pi*t)
@@ -70,11 +61,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch06\ch6_11.py
-
-# ch6_11.py
-import matplotlib.pyplot as plt
-
 plt.figure()    # 地理投影圖表 Aitoff
 plt.subplot(projection="aitoff")
 plt.title("地理投影 = Aitoff",c='b')
@@ -94,35 +80,19 @@ plt.figure()    # 地理投影圖表 Mollweide
 plt.subplot(projection="mollweide")
 plt.title("地理投影 = Mollweide",c='b')
 plt.grid(True)
+
 plt.show()
 
-
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch06\ch6_12.py
-
-# ch6_12.py
-import matplotlib.pyplot as plt
-import numpy as np
 
 x = np.linspace(0, 2*np.pi, 500)
 y = np.sin(x**2)
 ax = plt.subplot()      # 回傳子圖物件
 ax.plot(x, y)           # 使用子圖物件調用plot()函數
+
 plt.show()
 
-
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch06\ch6_12_1.py
-
-# ch6_12_1.py
-import matplotlib.pyplot as plt
-import numpy as np
 
 x = np.linspace(0, 2*np.pi, 500)    # 建立含500個元素的陣列
 y1 = np.sin(x)                      # sin函數
@@ -130,16 +100,10 @@ y2 = np.cos(x)                      # cos函數
 ax = plt.subplot()
 ax.plot(x, y1, lw = 2)              # 線條寬度是 2
 ax.plot(x, y2, linewidth = 5)       # 線條寬度是 5                
+
 plt.show()
 
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch06\ch6_13.py
-
-# ch6_13.py
-import matplotlib.pyplot as plt
-import numpy as np
 
 x = np.linspace(0, 2*np.pi, 500)
 y = np.sin(x**2)
@@ -153,10 +117,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch06\ch6_13_1.py
-
-import matplotlib.pyplot as plt
-
 x = [x for x in range(9)]
 squares = [y * y for y in range(9)]
 ax = plt.subplot()
@@ -165,15 +125,7 @@ ax.set_aspect('equal')
 
 plt.show()
 
-
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch06\ch6_14.py
-
-import matplotlib.pyplot as plt
-import numpy as np
 
 # 建立子圖 1
 x1 = np.linspace(0, 2*np.pi, 300)
@@ -189,11 +141,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch06\ch6_15.py
-
-import matplotlib.pyplot as plt
-import numpy as np
-
 # 建立子圖 1
 x1 = np.linspace(0, 2*np.pi, 300)
 ax1 = plt.subplot(211)              
@@ -207,11 +154,6 @@ ax2.plot(x2, np.sin(4*np.pi*x2))
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch06\ch6_16.py
-
-import matplotlib.pyplot as plt
-import numpy as np
 
 # 建立子圖 1
 x1 = np.linspace(0, 2*np.pi, 300)
@@ -227,12 +169,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch06\ch6_17.py
-
-# ch6_17.py
-import matplotlib.pyplot as plt
-import numpy as np
-
 # 建立子圖 1
 x = np.linspace(0, 2*np.pi, 300)
 ax1 = plt.subplot(121)          
@@ -240,18 +176,10 @@ ax1.plot(x, np.sin(x**2),'b')
 # 建立子圖 2
 ax2 = plt.subplot(122)      
 ax2.plot(x, 1+np.sin(x**2),'g--')
+
 plt.show()
 
-
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch06\ch6_18.py
-
-# ch6_18.py
-import matplotlib.pyplot as plt
-import numpy as np
 
 # 建立子圖 1
 x = np.linspace(0, 2*np.pi, 300)
@@ -260,18 +188,10 @@ ax1.plot(x, np.sin(x**2),'b')
 # 建立子圖 2
 ax2 = plt.subplot(122,sharey=ax1)   # 共享 y 軸    
 ax2.plot(x, 1+np.sin(x**2),'g--')
+
 plt.show()
 
-
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch06\ch6_19.py
-
-# ch6_19.py
-import matplotlib.pyplot as plt
-import numpy as np
 
 # 建立子圖 1
 x = np.linspace(0, 2*np.pi, 300)
@@ -282,18 +202,10 @@ ax2 = plt.subplot(122,sharey=ax1)       # 共享 y 軸
 ax2.plot(x, 1+np.sin(x**2),'g--')
 ax2.tick_params('y',labelleft=False)    # 取消顯示刻度標籤
 plt.suptitle("共享 y 軸")
+
 plt.show()
 
-
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch06\ch6_20.py
-
-# ch6_20.py
-import matplotlib.pyplot as plt
-import numpy as np
 
 # 建立子圖 1
 x1 = np.linspace(0, 2*np.pi, 300)
@@ -311,18 +223,10 @@ ax3.plot(x3, np.sin(x3**2),'b')
 ax4 = plt.subplot(224, sharex=ax1, sharey=ax1)  # 共享x和y軸    
 ax4.plot(x3, 1+np.sin(x3**2),'g--')
 plt.suptitle("共享 x 和 y 軸")
+
 plt.show()
 
-
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch06\ch6_21.py
-
-# ch6_21.py
-import matplotlib.pyplot as plt
-import numpy as np
 
 # 建立子圖 1
 x1 = np.linspace(0, 2*np.pi, 300)
@@ -344,17 +248,10 @@ ax4 = plt.subplot(224, sharex=ax1, sharey=ax1)  # 共享x和y軸
 ax4.plot(x3, 1+np.sin(x3**2),'g--')
 ax4.tick_params('y',labelleft=False)            # 取消顯示y軸刻度標籤
 plt.suptitle("共享 x 和 y 軸")
+
 plt.show()
 
-
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch06\ch6_22.py
-
-import numpy as np
-import matplotlib.pyplot as plt
 
 fsize = 24                  # 字型大小                           
 ax = plt.subplot()          # 建立圖表
@@ -362,17 +259,10 @@ ax.plot([1, 3])             # 繪製圖表
 ax.set_xlabel('x 座標', fontsize=fsize)
 ax.set_ylabel('y 座標', fontsize=fsize)
 ax.set_title('資料布局', fontsize=fsize)
+
 plt.show()
 
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch06\ch6_23.py
-
-# ch6_23.py
-import numpy as np
-import matplotlib.pyplot as plt
 
 fsize = 24                  # 字型大小                           
 ax = plt.subplot()          # 建立圖表
@@ -380,17 +270,11 @@ ax.plot([1, 3])             # 繪製圖表
 ax.set_xlabel('x 座標', fontsize=fsize)
 ax.set_ylabel('y 座標', fontsize=fsize)
 ax.set_title('資料布局', fontsize=fsize)
-plt.tight_layout()          # 緊湊佈局
-plt.show()
 
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch06\ch6_24.py
-
-# ch6_24.py
-import numpy as np
-import matplotlib.pyplot as plt
 
 def my_plot(ax, size):
     ax.plot([1, 3])             # 繪製圖表
@@ -407,17 +291,11 @@ ax3 = plt.subplot(2,2,3)    # 建立圖表
 my_plot(ax3,fsize)
 ax4 = plt.subplot(2,2,4)    # 建立圖表
 my_plot(ax4,fsize)
+
 plt.show()
-
-
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch06\ch6_25.py
-
-# ch6_25.py
-import numpy as np
-import matplotlib.pyplot as plt
 
 def my_plot(ax, size):
     ax.plot([1, 3])             # 繪製圖表
@@ -434,18 +312,11 @@ ax3 = plt.subplot(2,2,3)    # 建立圖表
 my_plot(ax3,fsize)
 ax4 = plt.subplot(2,2,4)    # 建立圖表
 my_plot(ax4,fsize)
-plt.tight_layout()          # 緊湊佈局
+
 plt.show()
-
-
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch06\ch6_26.py
-
-# ch6_26.py
-import numpy as np
-import matplotlib.pyplot as plt
 
 def my_plot(ax, size):
     ax.plot([1, 3])             # 繪製圖表
@@ -460,18 +331,11 @@ ax2 = plt.subplot(2,2,3)    # 建立圖表
 my_plot(ax2,fsize)
 ax3 = plt.subplot(1,2,2)    # 建立圖表
 my_plot(ax3,fsize)
-plt.tight_layout()          # 緊湊佈局
+
 plt.show()
-
-
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch06\ch6_26_1.py
-
-# ch6_26_1.py
-import numpy as np
-import matplotlib.pyplot as plt
 
 def my_plot(ax, size):
     ax.plot([1, 3])             # 繪製圖表
@@ -486,72 +350,41 @@ ax2 = plt.subplot(2,2,3)    # 建立圖表
 my_plot(ax2,fsize)
 ax3 = plt.subplot(1,2,2)    # 建立圖表
 my_plot(ax3,fsize)
+
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch06\ch6_27.py
-
-# ch6_27.py
-import matplotlib.pyplot as plt
-import numpy as np
 
 fig, ax = plt.subplots(nrows=1,ncols=2) # 建立2個子圖
 x = np.linspace(0, 2*np.pi, 300)
 y = np.sin(x**2)
 ax[0].plot(x, y,'b')                    # 子圖索引 0 
 ax[1].plot(x, y,'g')                    # 子圖索引 1
-plt.tight_layout()                      # 緊縮佈局
+
 plt.show()
 
-
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch06\ch6_27_1.py
-
-# ch6_27_1.py
-import matplotlib.pyplot as plt
-import numpy as np
 
 fig, ax = plt.subplots(1, 2)            # 建立2個子圖
 x = np.linspace(0, 2*np.pi, 300)
 y = np.sin(x**2)
 ax[0].plot(x, y,'b')                    # 子圖索引 0 
 ax[1].plot(x, y,'g')                    # 子圖索引 1
-plt.tight_layout()                      # 緊縮佈局
+
 plt.show()
 
-
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch06\ch6_28.py
-
-# ch6_28.py
-import matplotlib.pyplot as plt
-import numpy as np
 
 fig, ax = plt.subplots(2)               # 建立2個子圖
 x = np.linspace(0, 2*np.pi, 300)
 y = np.sin(x**2)
 ax[0].plot(x, y,'b')                    # 子圖索引 0 
 ax[1].plot(x, y,'g')                    # 子圖索引 1
-plt.tight_layout()                      # 緊縮佈局
+
 plt.show()
 
-
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch06\ch6_29.py
-
-# ch6_29.py
-import matplotlib.pyplot as plt
-import numpy as np
 
 fig, ax = plt.subplots(2, 2)            # 建立4個子圖
 x = np.linspace(0, 2*np.pi, 300)
@@ -564,19 +397,10 @@ ax[1, 0].plot(x, y,'m')                 # 子圖索引 1,0
 ax[1, 0].set_title('子圖[1, 0]')
 ax[1, 1].plot(x, y,'r')                 # 子圖索引 1,1
 ax[1, 1].set_title('子圖[1, 1]')
-plt.tight_layout()                      # 緊縮佈局
+
 plt.show()
 
-
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch06\ch6_30.py
-
-# ch6_30.py
-import matplotlib.pyplot as plt
-import numpy as np
 
 fig, ax = plt.subplots(2, 2)            # 建立4個子圖
 x = np.linspace(0, 2*np.pi, 300)
@@ -591,19 +415,10 @@ ax[1, 1].plot(x, y,'r')                 # 子圖索引 1,1
 ax[1, 1].set_title('子圖[1, 1]')
 for a in ax.flat:
     a.set(xlabel='x 軸資料', ylabel='y 軸資料')
-plt.tight_layout()                      # 緊縮佈局
+
 plt.show()
 
-
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch06\ch6_31.py
-
-# ch6_31.py
-import matplotlib.pyplot as plt
-import numpy as np
 
 fig, ax = plt.subplots(2, 2)            # 建立4個子圖
 x = np.linspace(0, 2*np.pi, 300)
@@ -621,19 +436,10 @@ for a in ax.flat:
 # 隱藏內側的刻度標記與標籤
 for a in ax.flat:
     a.label_outer()
-plt.tight_layout()                      # 緊縮佈局
+
 plt.show()
 
-
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch06\ch6_32.py
-
-# ch6_32.py
-import matplotlib.pyplot as plt
-import numpy as np
 
 x = np.linspace(0, 2*np.pi, 300)
 y = np.sin(x**2)
@@ -642,58 +448,10 @@ fig.suptitle('共享 x 和 y 軸', fontsize=18)
 ax[0].plot(x, y ** 2, 'b--')
 ax[1].plot(x, 0.5 * y, 'go')
 ax[2].plot(x, y, 'm+')
+
 plt.show()
 
-
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch06\ch6_33.py
-
-# ch6_33.py
-import matplotlib.pyplot as plt
-import numpy as np
-
-ax = plt.subplot(projection='polar')
-r = np.arange(0, 1, 0.001)
-theta = 2 * 2*np.pi * r
-ax.plot(theta, r, 'm', lw=3)
-plt.title("極座標圖表",fontsize=16)
-plt.tight_layout()      # 圖表標題可以緊縮佈局
-plt.show()
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch06\ch6_34.py
-
-# ch6_34.py
-import matplotlib.pyplot as plt
-import numpy as np
-
-x = np.linspace(0, 2*np.pi, 300)
-y = np.sin(x)
-fig, (ax1,ax2) = plt.subplots(1,2,subplot_kw=dict(projection='polar'))
-ax1.plot(x, y)
-ax1.set_title("極座標 Sin 圖",fontsize=12)
-ax2.plot(x, y ** 2)
-ax2.set_title('極座標 Sin 平方圖',fontsize=12)
-plt.tight_layout()                      # 緊縮佈局
-plt.show()
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch06\ch6_35.py
-
-# ch6_35.py
-import numpy as np
-import matplotlib.pyplot as plt
 
 fig = plt.figure()
 x = np.arange(1,11)                         
@@ -706,17 +464,10 @@ ax1.set_title("子圖 223")
 ax1 = fig.add_subplot(1,2,2)        # 建立子圖表 2
 ax1.plot(x, x, 'm')
 ax1.set_title("子圖 122")
-plt.tight_layout()                  # 緊湊佈局
+
 plt.show()
 
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch06\ch6_36.py
-
-# ch6_36.py
-import matplotlib.pyplot as plt
 
 fig = plt.figure()
 gs = fig.add_gridspec(2)
@@ -724,15 +475,7 @@ ax1 = fig.add_subplot(gs[0,0])
 ax2 = fig.add_subplot(gs[1,0])
 plt.show()
 
-
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch06\ch6_37.py
-
-# ch6_37.py
-import matplotlib.pyplot as plt
 
 fig = plt.figure()
 gs = fig.add_gridspec(2, 2)
@@ -744,18 +487,10 @@ ax3 = fig.add_subplot(gs[1,0])
 ax3.set_title('gs[1,0]')
 ax4 = fig.add_subplot(gs[1,1])
 ax4.set_title('gs[1,1]')
-plt.tight_layout()
+
 plt.show()
 
-
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch06\ch6_38.py
-
-# ch6_38.py
-import matplotlib.pyplot as plt
 
 fig = plt.figure()
 gs = fig.add_gridspec(2, 2)
@@ -765,19 +500,10 @@ ax2 = fig.add_subplot(gs[0,1])
 ax2.set_title('gs[0,1]')
 ax3 = fig.add_subplot(gs[1,:])
 ax3.set_title('gs[1,:]')
-plt.tight_layout()
+
 plt.show()
 
-
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch06\ch6_39.py
-
-# ch6_39.py
-import matplotlib.pyplot as plt
-import numpy as np
 
 x = np.linspace(0, 2*np.pi, 300)
 y = np.sin(x**2)
@@ -793,16 +519,7 @@ for a in ax.flat:
     a.label_outer()
 plt.show()
 
-
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch06\ch6_40.py
-
-# ch6_40.py
-import matplotlib.pyplot as plt
-import numpy as np
 
 x = np.linspace(0, 2*np.pi, 300)
 y = np.sin(x**2)
@@ -814,18 +531,10 @@ ax1.plot(x, y, 'b')
 ax2.plot(x, y ** 2, 'g')
 ax3.plot(x+1, y, 'm')
 ax4.plot(x+2, y ** 2, 'r')
+
 plt.show()
 
-
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch06\ch6_41.py
-
-# ch6_41.py
-import matplotlib.pyplot as plt
-import numpy as np
 
 fig, ax = plt.subplots(1, 1)
 x = np.linspace(0, 2*np.pi, 300)
@@ -834,18 +543,10 @@ y2 = np.cos(x)
 # 繪圖
 ax.plot(x, y1)
 ax.plot(x, y2, 'g', lw='3')
+
 plt.show()
 
-
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch06\ch6_42.py
-
-# ch6_42.py
-import matplotlib.pyplot as plt
-import numpy as np
 
 fig, ax1 = plt.subplots(1, 1)
 ax2 = ax1.twinx()               # 使用相同的 x 軸
@@ -857,19 +558,10 @@ y2 = np.cos(x)
 # 繪圖
 ax1.plot(x, y1)
 ax2.plot(x, y2, 'g', lw='3')
+
 plt.show()
 
-
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch06\ch6_43.py
-
-# ch6_43.py
-import matplotlib.pyplot as plt
-import numpy as np
-
 
 fig = plt.figure()
 gs = fig.add_gridspec(2,2)          # 建立 2 x 2 網格
@@ -889,19 +581,9 @@ gs_ax4 = fig.add_subplot(gs[1,1])   # 用網格物件索引1,1指定子圖
 gs_ax4.plot(x, y,'r')               
 gs_ax4.set_title('子圖[1, 1]')
 
-plt.tight_layout()                  # 緊縮佈局
 plt.show()
 
-
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch06\ch6_44.py
-
-# ch6_44.py
-import numpy as np
-import matplotlib.pyplot as plt
 
 plt.rcParams["figure.facecolor"] = "lightyellow"
 
@@ -924,18 +606,9 @@ gs_ax5 = fig.add_subplot(gs[-1,-2]) # 使用切片觀念
 gs_ax5.plot(x, x)
 gs_ax5.set_title('gs[-1,-2]')
 
-plt.tight_layout()                  # 緊湊佈局
 plt.show()
 
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch06\ch6_45.py
-
-# ch6_45.py
-import numpy as np
-import matplotlib.pyplot as plt
 
 plt.rcParams["figure.facecolor"] = "lightyellow"
 
@@ -959,59 +632,31 @@ ax1.set_ylabel("y")
 ax3.set_xlabel("x")
 ax3.set_ylabel("y")
 
-plt.tight_layout()                  # 緊湊佈局
 plt.show()
 
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch06\ch6_46.py
-
-# ch6_46.py
-import matplotlib.pyplot as plt
 
 fig = plt.figure()
 ax = plt.axes([0.1,0.1,0.8,0.8])
+
 plt.show()
 
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch06\ch6_47.py
-
-# ch6_47.py
-import matplotlib.pyplot as plt
 
 fig = plt.figure()
 ax = plt.axes([0.1,0.1,0.5,0.8])
 plt.show()
 
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch06\ch6_48.py
-
-# ch6_48.py
-import matplotlib.pyplot as plt
-import numpy as np
 
 fig = plt.figure()
 ax = plt.axes([0.1,0.1,0.8,0.8])
 x = np.linspace(0, 2*np.pi, 500)
 ax.plot(x, np.sin(x)**2,'g')
+
 plt.show()
 
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch06\ch6_49.py
-
-import numpy as np
-import matplotlib.pyplot as plt
 
 fig = plt.figure()
 
@@ -1027,16 +672,7 @@ ax2.set_title('內圖表')
 
 plt.show() 
 
-
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch06\ch6_50.py
-
-# ch6_50.py
-import matplotlib.pyplot as plt
-import numpy as np
 
 x = np.linspace(0, 2*np.pi, 500)
 y = np.sin(2 * np.pi * x) + 1
@@ -1047,16 +683,7 @@ ax = plt.axes()
 plt.plot(x, y)
 plt.show()
 
-
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch06\ch6_51.py
-
-# ch6_51.py
-import matplotlib.pyplot as plt
-import numpy as np
 
 x = np.linspace(0, 2*np.pi, 500)
 y = np.sin(2 * np.pi * x) + 1
@@ -1065,10 +692,8 @@ ax = plt.axes()
 ax.set_xlim([1, 5])
 ax.set_ylim([-0.5, 2.5])
 plt.plot(x, y)
+
 plt.show()
-
-
-
 
 print("------------------------------------------------------------")  # 60個
 

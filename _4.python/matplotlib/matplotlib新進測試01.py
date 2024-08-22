@@ -7,6 +7,7 @@ print("------------------------------------------------------------")  # 60個
 # 共同
 import os
 import sys
+import time
 import math
 import random
 import numpy as np
@@ -22,7 +23,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 plt.figure(
     num="新進測試 01",
     figsize=(12, 8),
@@ -522,27 +523,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-ax = plt.subplot(1, 1, 1, polar=True)
-
-N = 20
-theta = np.arange(0.0, 2 * np.pi, 2 * np.pi / N)
-radii = 10 * np.random.rand(N)
-width = np.pi / 4 * np.random.rand(N)
-bars = plt.bar(theta, radii, width=width, bottom=0.0)
-
-for r, bar in zip(radii, bars):
-    bar.set_facecolor(plt.cm.jet(r / 10.0))
-    bar.set_alpha(0.5)
-
-ax.set_xticklabels([])
-ax.set_yticklabels([])
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-
 #!wget -O taipei_sans_tc_beta.ttf https://drive.google.com/uc?id=1eGAsTN1HBpJAkeVM57_C7ccp7hbgSz3_&export=download
 #!mv taipei_sans_tc_beta.ttf /usr/local/lib/python3.7/dist-packages/matplotlib/mpl-data/fonts/ttf
 import matplotlib
@@ -707,29 +687,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-# 散點圖
-
-N = 150
-# 產生 150 個 0~2 之間的隨機半徑
-r = 2 * np.random.rand(N)
-# 產生 150 個 0~2pi 之間的隨機弧度
-theta = 2 * np.pi * np.random.rand(N)
-# 區域大小與半徑成正比
-area = 50 * r**2
-# 顏色由弧度決定
-colors = theta
-
-ax = plt.subplot(211)
-c = ax.scatter(theta, r, c=colors, s=area, cmap="hsv", alpha=0.75)
-
-# 畫出極座標圖，此時的 x 為弧度，y 為半徑
-ax = plt.subplot(212, projection="polar")
-c = ax.scatter(theta, r, c=colors, s=area, cmap="hsv", alpha=0.75)
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
 N = 50  # 色彩數列的點數
 colorused = ["b", "c", "g", "k", "m", "r", "y"]  # 定義顏色
 colors = []  # 建立色彩數列
@@ -743,7 +700,7 @@ ax.scatter(x, y, c=colors, marker="*")  # 繪製 sin
 ax.set_title("建立畫布與軸物件,使用OO API繪圖", fontsize=16)
 
 plt.show()
-
+'''
 print("------------------------------------------------------------")  # 60個
 
 

@@ -1,14 +1,15 @@
 """
+Matplotlib 多圖顯示(subplot()/subplot2grid()/subplots())
 
-使用 fig, ax = plt.subplots()
+plt.subplots()
 
 """
-
 print("------------------------------------------------------------")  # 60個
 
 # 共同
 import os
 import sys
+import time
 import math
 import random
 import numpy as np
@@ -24,7 +25,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 x = np.linspace(0, 2 * np.pi, 30)
 y = np.sin(x)
 
@@ -122,10 +123,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-
-
 # 2D random walk
 # fig2, ax2 = plt.subplots(num="Figure_2")
 # ax2.legend(loc='best')
@@ -135,7 +132,6 @@ plt.xlabel('弧度')
 
 ax.set_xlabel('弧度')
 """
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -219,8 +215,193 @@ axs[1][1].grid(True)
 axs[1][2].grid(True)
 fig.suptitle("分類繪圖", fontsize=20)
 plt.show()
+'''
+print("------------------------------------------------------------")  # 60個
+
+"""
+    使用plt.subplot2s()做圖
+    (2,2): 表示把窗口分成2行2列
+    ax1, ax2 代表第一行由左至右的兩個位置(座標(1,1), (1,2))
+    ax3, ax4 代表第二行由左至右的兩個位置(座標(2,1), (2,2))
+    sharex: 是否共享座標軸X (使用相同座標軸)
+    sharey: 是否共享座標軸 (使用相同座標軸)
+"""
+f, ((ax1, ax2), (ax3, ax4)) = plt.subplots(
+    2, 2, sharex=False, sharey=False, figsize=(12, 8)
+)
+data = np.arange(1, 10, 0.5)
+
+df1 = pd.DataFrame(data)
+df2 = pd.DataFrame(data**2)
+df3 = pd.DataFrame(data**3)
+df4 = pd.DataFrame(data**4)
+
+ax1.plot(df1)
+ax2.plot(df2)
+ax3.plot(df3)
+ax4.plot(df4)
+
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
+
+print("3圖比較")
+
+x = np.linspace(-2 * np.pi, 2 * np.pi, 51)
+y0 = np.sin(x)
+y1 = np.cos(x)
+y2 = np.tan(x)
+
+fig, ax = plt.subplots(1, 3, figsize=(12, 8))
+
+ax[0].plot(x,y0, label="sin")
+ax[1].plot(x,y1, label="cos")
+ax[2].plot(x,y2, label="tan")
+ax[0].legend()
+ax[1].legend()
+ax[2].legend()
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+f, ((ax11, ax12), (ax13, ax14)) = plt.subplots(2, 2, sharex=True, sharey=True)
+ax11.scatter([1, 2], [1, 2])
+
+plt.tight_layout()
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+"""
+Matplotlib 繪圖
+    Matplotlib有很多種畫法，不同指令也可以達到相同效果 但較好也較全面的姿勢應該是先釐清fig,ax的關係
+    step1:設定好fig,ax和subplots數目及figsize
+    step2:個別指定每個ax的畫圖種類，例如line plot, bar chart or hist chart…
+    step3:個別指定每個ax的屬性，例如label, xlabel, ylabel,xlim,ylim, legend, xticklabels等等
+"""
+
+x = np.linspace(0, 6.28, 50)
+y1 = np.sin(x)
+y2 = np.cos(x)
+
+fig, axs = plt.subplots(2, 2, figsize=(12, 8), sharex=True, sharey=True)
+
+axs[0][0].plot(x, y1, label="Sin(x)")
+axs[0][1].plot(x, y1, label="Sin(x)", linewidth=4, color="black")
+axs[1][0].plot(x, y1, label="Sin(x)")
+axs[1][1].plot(x, y1, label="Sin(x)")
+axs[0][0].set_title("(0, 0)")
+axs[0][1].set_title("(0, 1)")
+axs[1][0].set_title("(1, 0)")
+axs[1][1].set_title("(1, 1)")
+axs[0][0].set_xlabel("x_label0")
+axs[0][1].set_xlabel("x_label1")
+axs[1][0].set_xlabel("x_label2")
+axs[1][1].set_xlabel("x_label3")
+axs[0][0].set_ylabel("y_label0")
+axs[0][1].set_ylabel("y_label1")
+axs[1][0].set_ylabel("y_label2")
+axs[1][1].set_ylabel("y_label3")
+# axs[1][0].set_xticklabels(labels = x, rotation = 45)
+# axs[1][1].set_xticklabels(labels = x, rotation = 45)
+axs[0][0].grid(True)
+# axs[0][0].legend(['legend'], loc = 2)
+axs[0][0].plot(x, y2, label="Cos(x)", marker="x", markersize=5, color="r")
+axs[0][0].legend(loc=3)
+axs[0][0].set_ylim(-1.2, 1.2)
+
+fig.suptitle("Suptitle")
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+fig, ax = plt.subplots(2, 2)  # 建立4個子圖
+x = np.linspace(0, 2 * np.pi, 300)
+y = np.sin(x**2)
+ax[0, 0].plot(x, y, "b")  # 子圖索引 0,0
+ax[0, 0].set_title("子圖[0, 0]")
+ax[0, 1].plot(x, y, "g")  # 子圖索引 0,1
+ax[0, 1].set_title("子圖[0, 1]")
+ax[1, 0].plot(x, y, "m")  # 子圖索引 1,0
+ax[1, 0].set_title("子圖[1, 0]")
+ax[1, 1].plot(x, y, "r")  # 子圖索引 1,1
+ax[1, 1].set_title("子圖[1, 1]")
+fig.suptitle("4個子圖的實作", fontsize=16)  # 圖表主標題
+
+plt.tight_layout()  # 緊縮佈局
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+# 繪製半徑 5 的圓
+angle = np.linspace(0, 2 * np.pi, 100)
+fig, ax = plt.subplots(2, 2)  # 建立 2 x 2 子圖
+
+ax[0, 0].plot(5 * np.cos(angle), 5 * np.sin(angle))
+ax[0, 0].set_title("繪圓形, 看起來像橢圓")
+ax[0, 1].plot(5 * np.cos(angle), 5 * np.sin(angle))
+ax[0, 1].axis("equal")
+ax[0, 1].set_title("寬高比相同, 是圓形")
+ax[1, 0].plot(5 * np.cos(angle), 5 * np.sin(angle))
+ax[1, 0].axis("equal")
+ax[1, 0].set(xlim=(-5, 5), ylim=(-5, 5))
+ax[1, 0].set_title("設定寬和高相同區間")
+ax[1, 1].plot(5 * np.cos(angle), 5 * np.sin(angle))
+ax[1, 1].set_aspect("equal", "box")
+ax[1, 1].set_title("設定寬高比相同")
+
+fig.tight_layout()
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+# 繪製半徑 5 的圓
+angle = np.linspace(0, 2 * np.pi, 100)
+fig, ax = plt.subplots(2, 2)  # 建立 2 x 2 子圖
+
+ax[0, 0].plot(5 * np.cos(angle), 5 * np.sin(angle))
+ax[0, 0].set_title("繪圓形, 看起來像橢圓")
+ax[0, 1].plot(5 * np.cos(angle), 5 * np.sin(angle))
+ax[0, 1].axis("equal")
+ax[0, 1].set_title("寬高比相同, 是圓形")
+ax[1, 0].plot(5 * np.cos(angle), 5 * np.sin(angle))
+ax[1, 0].axis("equal")
+ax[1, 0].set(xlim=(-5, 5), ylim=(-5, 5))
+ax[1, 0].set_title("設定寬和高相同區間")
+ax[1, 1].plot(5 * np.cos(angle), 5 * np.sin(angle))
+ax[1, 1].set_aspect(2)
+ax[1, 1].set_title("設定寬高比是2")
+
+fig.tight_layout()
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+x = np.linspace(0, 2 * np.pi, num=100, endpoint=True)
+y = np.sin(x)
+
+# 建立 3 x 3 的子圖
+fig, axs = plt.subplots(figsize=(12, 8),nrows=3, ncols=3, sharex=True, sharey=True)
+
+axs[0, 0].plot(x,y)
+axs[0, 1].plot(x,y)
+axs[0, 2].plot(x,y)
+axs[1, 0].plot(x,y)
+axs[1, 1].plot(x,y)
+axs[1, 2].plot(x,y)
+axs[2, 0].plot(x,y)
+axs[2, 1].plot(x,y)
+axs[2, 2].plot(x,y)
+axs[2, 2].set_title("subplots", c="b")
+axs[2, 2].axis("square")  # 建立矩形子圖
+
+plt.tight_layout()
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
 
 
 print("------------------------------------------------------------")  # 60個

@@ -5,6 +5,7 @@ print("------------------------------------------------------------")  # 60個
 # 共同
 import os
 import sys
+import time
 import math
 import random
 import numpy as np
@@ -20,7 +21,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 plt.figure(
     num="bar 集合 1",
     figsize=(12, 8),
@@ -923,32 +924,7 @@ plt.subplot(236)
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
-
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-N = 20  # 長條個數
-theta = np.linspace(0.0, 2 * np.pi, N)  # 角度個數
-radius = 10 * np.random.rand(N)  # 半徑個數
-width = np.pi / 4 * np.random.rand(N)  # 寬度個數
-colors = plt.cm.hsv(radius / 10)  # 色彩個數
-
-ax = plt.subplot(projection="polar")  # 建立子圖
-
-print(theta)
-print(radius)
-print(width)
-
-# 繪製極座標長條圖
-ax.bar(theta, radius, width, bottom=0.0, alpha=0.8, color=colors)
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-
+'''
 def dice_generator(num, sides):
     # 處理隨機數
     for i in range(num):

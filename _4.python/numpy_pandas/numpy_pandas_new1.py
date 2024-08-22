@@ -17,8 +17,8 @@ print("------------------------------------------------------------")  # 60個
 # 共同
 import os
 import sys
-import math
 import time
+import math
 import random
 import numpy as np
 import pandas as pd
@@ -1889,7 +1889,14 @@ print(f"b = {b}")
 
 print("------------------------------------------------------------")  # 60個
 
-
+"""
+np.gradient(f) 計算數組f中元素的梯度，當f為多維時，返回每個維度梯度
+梯度：連續值之間的變化率，即斜率
+XY坐標軸連續三個X坐標對應的Y軸值：a, b, c，其中，b的梯度是： (c‐a)/2
+"""
+na = np.random.randint(0, 50, (11))
+print(na)
+print(np.gradient(na))
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1942,12 +1949,25 @@ df4.index = range(7)
 df_grades = pd.DataFrame(np.random.randint(6,16,(100,5)), 
                       columns=["國文", "英文", "數學", 
                                "社會", "自然"])
-                             
                                
 print("------------------------------------------------------------")  # 60個
 
+print('常態分布 二維 轉 df')
+df3 = pd.DataFrame(np.random.randn(3,3), columns=list("ABC"))
 
-
-
+print("------------------------------------------------------------")  # 60個
 
 """
+
+#建立陣列
+
+cc = np.array([1, 2, 3])
+print(cc)
+
+
+
+z = np.linspace(0, 15, 100)
+x = np.sin(z)
+y = np.cos(z)
+x2 = np.sin(z)
+
