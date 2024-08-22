@@ -9,8 +9,8 @@ print("------------------------------------------------------------")  # 60個
 # 共同
 import os
 import sys
-import math
 import time
+import math
 import random
 import numpy as np
 import pandas as pd
@@ -117,3 +117,76 @@ print(df.shape)
 print(df.head(5))
 
 print("------------------------------------------------------------")  # 60個
+
+
+import sqlite3
+
+con = sqlite3.connect("data/weather_2012.sqlite")
+df = pd.read_sql("SELECT * from weather_2012 LIMIT 3", con)
+print(df)
+
+print("------------------------------")  # 30個
+
+df = pd.read_sql("SELECT * from weather_2012 LIMIT 3", con, index_col="id")
+print(df)
+
+print("------------------------------")  # 30個
+
+df = pd.read_sql(
+    "SELECT * from weather_2012 LIMIT 3", con, index_col=["id", "date_time"]
+)
+print(df)
+
+print("------------------------------")  # 30個
+
+# Writing to a SQLite database
+
+weather_df = pd.read_csv("data/weather_2012.csv")
+con = sqlite3.connect("tmp_test_db.sqlite")
+con.execute("DROP TABLE IF EXISTS weather_2012")
+weather_df.to_sql("weather_2012", con)
+
+
+con = sqlite3.connect("tmp_test_db.sqlite")
+df = pd.read_sql("SELECT * from weather_2012 LIMIT 3", con)
+print(df)
+
+con = sqlite3.connect("tmp_test_db.sqlite")
+df = pd.read_sql("SELECT * from weather_2012 ORDER BY Weather LIMIT 3", con)
+print(df)
+
+print("------------------------------------------------------------")  # 60個
+
+mydata = np.random.randn(4,3)
+
+df2 = pd.DataFrame(mydata, columns=list("ABC"))
+
+df3 = pd.DataFrame(np.random.randn(3,3), columns=list("ABC"))
+
+df4 = pd.concat([df2, df3], axis=0)
+
+df4.index = range(7)
+
+df_grades = pd.DataFrame(np.random.randint(6,16,(100,5)), 
+                      columns=["國文", "英文", "數學", 
+                               "社會", "自然"])
+                               
+print("------------------------------------------------------------")  # 60個
+
+print('常態分布 二維 轉 df')
+df3 = pd.DataFrame(np.random.randn(3,3), columns=list("ABC"))
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+

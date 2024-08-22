@@ -1633,59 +1633,6 @@ print(d)
 
 print("------------------------------------------------------------")  # 60個
 
-# Reading data from SQL databases
-import sqlite3
-
-con = sqlite3.connect("data/weather_2012.sqlite")
-df = pd.read_sql("SELECT * from weather_2012 LIMIT 3", con)
-print(df)
-
-print("------------------------------------------------------------")  # 60個
-
-df = pd.read_sql("SELECT * from weather_2012 LIMIT 3", con, index_col="id")
-print(df)
-
-print("------------------------------------------------------------")  # 60個
-
-df = pd.read_sql(
-    "SELECT * from weather_2012 LIMIT 3", con, index_col=["id", "date_time"]
-)
-print(df)
-
-print("--------ddd----------------------------------------------------")  # 60個
-
-# Writing to a SQLite database
-
-weather_df = pd.read_csv("data/weather_2012.csv")
-con = sqlite3.connect("tmp_test_db.sqlite")
-con.execute("DROP TABLE IF EXISTS weather_2012")
-weather_df.to_sql("weather_2012", con)
-
-
-con = sqlite3.connect("tmp_test_db.sqlite")
-df = pd.read_sql("SELECT * from weather_2012 LIMIT 3", con)
-print(df)
-
-con = sqlite3.connect("tmp_test_db.sqlite")
-df = pd.read_sql("SELECT * from weather_2012 ORDER BY Weather LIMIT 3", con)
-print(df)
-
-print("------------------------------------------------------------")  # 60個
-
-"""
-#Connecting to other kinds of database
-
-#MySQL / PostgreSQL
-import MySQLdb
-con = MySQLdb.connect(host="localhost", db="test")
-
-#To connect to a PostgreSQL database:
-import psycopg2
-con = psycopg2.connect(host="localhost")
-"""
-
-print("------------------------------------------------------------")  # 60個
-
 print("二維串列 轉 numpy陣列")
 b = np.array([[1, 2], [3, 4], [5, 6]])
 print(b)
@@ -1850,8 +1797,6 @@ print("大於5的")
 cc = a[np.where(a > 5)]  ## Get Values
 print(cc)
 
-# 它還可以用來替換pandas df中的元素。
-
 # cc = np.where(data[feature].isnull(), 1, 0)
 # print(cc)
 
@@ -1934,27 +1879,6 @@ A.sum(axis=1)
 【提示】當然也有可能全部算	全部總和
 A.sum()
   
-print("------------------------------------------------------------")  # 60個
-
-mydata = np.random.randn(4,3)
-
-df2 = pd.DataFrame(mydata, columns=list("ABC"))
-
-df3 = pd.DataFrame(np.random.randn(3,3), columns=list("ABC"))
-
-df4 = pd.concat([df2, df3], axis=0)
-
-df4.index = range(7)
-
-df_grades = pd.DataFrame(np.random.randint(6,16,(100,5)), 
-                      columns=["國文", "英文", "數學", 
-                               "社會", "自然"])
-                               
-print("------------------------------------------------------------")  # 60個
-
-print('常態分布 二維 轉 df')
-df3 = pd.DataFrame(np.random.randn(3,3), columns=list("ABC"))
-
 print("------------------------------------------------------------")  # 60個
 
 """

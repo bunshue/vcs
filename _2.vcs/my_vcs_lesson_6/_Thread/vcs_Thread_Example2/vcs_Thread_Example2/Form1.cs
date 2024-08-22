@@ -447,6 +447,21 @@ namespace vcs_Thread_Example2
         {
 
         }
+
+        private void button23_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button22_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button21_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 
     // This class's Run method displays a count in the Output window.
