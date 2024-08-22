@@ -68,6 +68,10 @@
             this.button21 = new System.Windows.Forms.Button();
             this.button22 = new System.Windows.Forms.Button();
             this.button23 = new System.Windows.Forms.Button();
+            this.groupBox11 = new System.Windows.Forms.GroupBox();
+            this.button24 = new System.Windows.Forms.Button();
+            this.button25 = new System.Windows.Forms.Button();
+            this.button26 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -78,6 +82,7 @@
             this.groupBox8.SuspendLayout();
             this.groupBox9.SuspendLayout();
             this.groupBox10.SuspendLayout();
+            this.groupBox11.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -102,7 +107,7 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(505, 12);
+            this.richTextBox1.Location = new System.Drawing.Point(686, 12);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(328, 555);
             this.richTextBox1.TabIndex = 2;
@@ -145,12 +150,12 @@
             this.groupBox3.Controls.Add(this.button3);
             this.groupBox3.Controls.Add(this.lb_R);
             this.groupBox3.Controls.Add(this.button4);
-            this.groupBox3.Location = new System.Drawing.Point(324, 12);
+            this.groupBox3.Location = new System.Drawing.Point(330, 327);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(150, 150);
             this.groupBox3.TabIndex = 7;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "RGB亂數";
+            this.groupBox3.Text = "Thread使用範例8_RGB亂數";
             // 
             // lb_B
             // 
@@ -217,12 +222,12 @@
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.button5);
-            this.groupBox4.Location = new System.Drawing.Point(12, 172);
+            this.groupBox4.Location = new System.Drawing.Point(493, 327);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(150, 150);
             this.groupBox4.TabIndex = 2;
             this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Thread使用範例";
+            this.groupBox4.Text = "Thread使用範例9";
             // 
             // button5
             // 
@@ -239,7 +244,7 @@
             this.groupBox5.Controls.Add(this.button8);
             this.groupBox5.Controls.Add(this.button7);
             this.groupBox5.Controls.Add(this.button6);
-            this.groupBox5.Location = new System.Drawing.Point(168, 172);
+            this.groupBox5.Location = new System.Drawing.Point(12, 168);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(150, 150);
             this.groupBox5.TabIndex = 3;
@@ -281,7 +286,7 @@
             this.groupBox6.Controls.Add(this.button9);
             this.groupBox6.Controls.Add(this.button10);
             this.groupBox6.Controls.Add(this.button11);
-            this.groupBox6.Location = new System.Drawing.Point(324, 172);
+            this.groupBox6.Location = new System.Drawing.Point(168, 168);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Size = new System.Drawing.Size(150, 150);
             this.groupBox6.TabIndex = 4;
@@ -323,7 +328,7 @@
             this.groupBox7.Controls.Add(this.button12);
             this.groupBox7.Controls.Add(this.button13);
             this.groupBox7.Controls.Add(this.button14);
-            this.groupBox7.Location = new System.Drawing.Point(12, 327);
+            this.groupBox7.Location = new System.Drawing.Point(330, 171);
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.Size = new System.Drawing.Size(150, 150);
             this.groupBox7.TabIndex = 5;
@@ -365,7 +370,7 @@
             this.groupBox8.Controls.Add(this.button15);
             this.groupBox8.Controls.Add(this.button16);
             this.groupBox8.Controls.Add(this.button17);
-            this.groupBox8.Location = new System.Drawing.Point(168, 327);
+            this.groupBox8.Location = new System.Drawing.Point(493, 171);
             this.groupBox8.Name = "groupBox8";
             this.groupBox8.Size = new System.Drawing.Size(150, 150);
             this.groupBox8.TabIndex = 6;
@@ -407,7 +412,7 @@
             this.groupBox9.Controls.Add(this.button18);
             this.groupBox9.Controls.Add(this.button19);
             this.groupBox9.Controls.Add(this.button20);
-            this.groupBox9.Location = new System.Drawing.Point(324, 327);
+            this.groupBox9.Location = new System.Drawing.Point(12, 327);
             this.groupBox9.Name = "groupBox9";
             this.groupBox9.Size = new System.Drawing.Size(150, 150);
             this.groupBox9.TabIndex = 7;
@@ -449,7 +454,7 @@
             this.groupBox10.Controls.Add(this.button21);
             this.groupBox10.Controls.Add(this.button22);
             this.groupBox10.Controls.Add(this.button23);
-            this.groupBox10.Location = new System.Drawing.Point(12, 483);
+            this.groupBox10.Location = new System.Drawing.Point(168, 327);
             this.groupBox10.Name = "groupBox10";
             this.groupBox10.Size = new System.Drawing.Size(150, 150);
             this.groupBox10.TabIndex = 8;
@@ -486,11 +491,54 @@
             this.button23.UseVisualStyleBackColor = true;
             this.button23.Click += new System.EventHandler(this.button23_Click);
             // 
+            // groupBox11
+            // 
+            this.groupBox11.Controls.Add(this.button24);
+            this.groupBox11.Controls.Add(this.button25);
+            this.groupBox11.Controls.Add(this.button26);
+            this.groupBox11.Location = new System.Drawing.Point(12, 493);
+            this.groupBox11.Name = "groupBox11";
+            this.groupBox11.Size = new System.Drawing.Size(150, 150);
+            this.groupBox11.TabIndex = 8;
+            this.groupBox11.TabStop = false;
+            this.groupBox11.Text = "Thread使用範例6";
+            // 
+            // button24
+            // 
+            this.button24.Location = new System.Drawing.Point(23, 104);
+            this.button24.Name = "button24";
+            this.button24.Size = new System.Drawing.Size(90, 30);
+            this.button24.TabIndex = 2;
+            this.button24.Text = "狀態";
+            this.button24.UseVisualStyleBackColor = true;
+            this.button24.Click += new System.EventHandler(this.button24_Click);
+            // 
+            // button25
+            // 
+            this.button25.Location = new System.Drawing.Point(23, 59);
+            this.button25.Name = "button25";
+            this.button25.Size = new System.Drawing.Size(90, 30);
+            this.button25.TabIndex = 1;
+            this.button25.Text = "停止";
+            this.button25.UseVisualStyleBackColor = true;
+            this.button25.Click += new System.EventHandler(this.button25_Click);
+            // 
+            // button26
+            // 
+            this.button26.Location = new System.Drawing.Point(23, 21);
+            this.button26.Name = "button26";
+            this.button26.Size = new System.Drawing.Size(90, 30);
+            this.button26.TabIndex = 0;
+            this.button26.Text = "啟動";
+            this.button26.UseVisualStyleBackColor = true;
+            this.button26.Click += new System.EventHandler(this.button26_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(946, 642);
+            this.ClientSize = new System.Drawing.Size(1037, 680);
+            this.Controls.Add(this.groupBox11);
             this.Controls.Add(this.groupBox10);
             this.Controls.Add(this.groupBox9);
             this.Controls.Add(this.groupBox8);
@@ -518,6 +566,7 @@
             this.groupBox8.ResumeLayout(false);
             this.groupBox9.ResumeLayout(false);
             this.groupBox10.ResumeLayout(false);
+            this.groupBox11.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -563,6 +612,10 @@
         private System.Windows.Forms.Button button21;
         private System.Windows.Forms.Button button22;
         private System.Windows.Forms.Button button23;
+        private System.Windows.Forms.GroupBox groupBox11;
+        private System.Windows.Forms.Button button24;
+        private System.Windows.Forms.Button button25;
+        private System.Windows.Forms.Button button26;
     }
 }
 

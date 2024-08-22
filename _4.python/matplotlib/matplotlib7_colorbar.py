@@ -1,4 +1,9 @@
-# plot 集合
+"""
+plot 集合
+
+colorbar
+
+"""
 
 print("------------------------------------------------------------")  # 60個
 
@@ -214,7 +219,7 @@ print("------------------------------------------------------------")  # 60個
 import matplotlib as mpl
 
 colName = ['sepal_len','sepal_wd','petal_len','petal_wd','species']
-iris = pd.read_csv('iris.csv', names = colName)
+iris = pd.read_csv('_data/iris.csv', names = colName)
 x = iris['petal_len'].values        # 花瓣長度
 y = iris['sepal_len'].values        # 花萼長度
 

@@ -31,7 +31,7 @@ namespace vcs_Thread3
             Thread.CurrentThread.Name = "MainThread";
         }
 
-        
+
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             /*
@@ -128,39 +128,6 @@ namespace vcs_Thread3
 
             // Start the thread.
             thread.Start();
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            Thread t1 = new Thread(new ThreadStart(thread_1));
-            t1.IsBackground = true;
-            t1.Start();
-
-            Thread t2 = new Thread(new ThreadStart(thread_2));
-            t2.IsBackground = true;
-            t2.Start();
-        }
-
-        private void thread_1()
-        {
-            while (true)
-            {
-                Console.Write("A");
-                richTextBox1.Text += "A";
-
-                Thread.Sleep(300);
-            }
-        }
-
-        private void thread_2()
-        {
-            while (true)
-            {
-                Console.Write("B");
-                richTextBox1.Text += "B";
-
-                Thread.Sleep(1000);
-            }
         }
     }
 
