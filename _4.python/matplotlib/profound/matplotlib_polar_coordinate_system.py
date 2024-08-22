@@ -1,4 +1,8 @@
-# plot 集合, 極坐標系 做圖
+"""
+極座標系 繪圖
+
+
+"""
 
 import matplotlib
 
@@ -252,6 +256,78 @@ ax1.set_title("極座標 Sin 圖",fontsize=12)
 ax2.plot(x, y ** 2)
 ax2.set_title('極座標 Sin 平方圖',fontsize=12)
 plt.tight_layout()                      # 緊縮佈局
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+pts = 12
+theta = np.linspace(0, 2 * np.pi, pts, endpoint=False)
+r = 50 * np.random.rand(pts)
+"""
+plt.polar(theta,r)
+plt.polar(theta,r,'-',marker='*',color='g')
+plt.polar(theta,r,'--',marker='D',color='m')
+"""
+plt.polar(theta, r, "*", color="b", markersize=10)
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+a = 6  # 主軸半徑
+b = 3  # 次軸半徑
+
+radian = np.arange(0, (2 * np.pi), 0.01)
+for rad in radian:
+    r = (a * b) / np.sqrt((a * np.sin(rad)) ** 2 + (b * np.cos(rad)) ** 2)
+    plt.polar(rad, r, "b.")
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+radian = np.arange(0, (2 * np.pi), 0.01)
+for r in range(1, 3):
+    for rad in radian:
+        plt.polar(rad, r, "b.")
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+radian = np.arange(0, (6 * np.pi), 0.01)
+for rad in radian:
+    r = rad
+    plt.polar(rad, r, "b.")
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+a = 1
+radian = np.arange(0, (6 * np.pi), 0.01)
+for rad in radian:
+    r = a + (a * np.cos(rad))
+    # r =  a - (a*np.sin(rad))
+    plt.polar(rad, r, "r.")
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+print("螺旋圖")
+
+plt.figure(figsize=(6, 6))  # 圖像大小[英吋]
+
+ax = plt.axes([0.1, 0.1, 0.8, 0.8], polar=True)
+
+t = np.arange(-4 * np.pi, 4 * np.pi, 0.1)
+plt.polar(t, 1.19**t, linewidth=2)
+
+xt, yt = plt.xticks()[0], plt.yticks()[0]
+
+plt.xticks(xt, ["" for q in range(len(xt))])
+plt.yticks(yt, ["" for q in range(len(yt))])
+
 plt.show()
 
 print("------------------------------------------------------------")  # 60個

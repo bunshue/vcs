@@ -17,8 +17,6 @@ namespace vcs_Thread3
 
     public partial class Form1 : Form
     {
-        Thread main_thread;                                  //宣告監聽用執行續
-
         public Form1()
         {
             InitializeComponent();
@@ -33,19 +31,9 @@ namespace vcs_Thread3
             Thread.CurrentThread.Name = "MainThread";
         }
 
-        //關閉監聽執行續(如果有的話)
+        
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            try
-            {
-                main_thread.Abort(); //關閉監聽執行續
-                //U.Close();  //關閉監聽器
-            }
-            catch
-            {
-                //忽略錯誤，程式繼續執行
-            }
-
             /*
             richTextBox1.Text += "關閉程式\n";
             //Application.Exit();
@@ -142,67 +130,6 @@ namespace vcs_Thread3
             thread.Start();
         }
 
-        //監聽副程式
-        int i;
-        private void Listen()
-        {
-            while (true)
-            {
-                i++;
-                this.Text = i.ToString();
-                richTextBox1.Text += "m";
-
-                //一秒執行一次
-                Thread.Sleep(1000); //停一秒
-            }
-        }
-
-        int cnt = 0;
-        private void bt_th1_Click(object sender, EventArgs e)
-        {
-            main_thread = new Thread(Listen); //建立監聽網路訊息的新執行緒
-            //Th.IsBackground = true;  //設定為背景執行緒
-            main_thread.Name = "my_thread" + cnt.ToString();
-            cnt++;
-            richTextBox1.Text += "啟動 Main Thread, 名稱 : " + main_thread.Name + "\n";
-
-            main_thread.Start();             //啟動監聽執行緒
-        }
-
-        private void bt_th2_Click(object sender, EventArgs e)
-        {
-            if (main_thread != null)
-            {
-                richTextBox1.Text += "關閉 Main Thread\n";
-                main_thread.Abort();
-            }
-            else
-            {
-                richTextBox1.Text += "無Thread\n";
-            }
-        }
-
-        private void bt_th3_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "Info\n";
-            if (main_thread == null)
-            {
-                richTextBox1.Text += "Main Thread 尚未啟動\n";
-            }
-            else
-            {
-                richTextBox1.Text += "Main Thread\t" + main_thread.ToString() + "\n";
-                richTextBox1.Text += "ThreadState\t" + main_thread.ThreadState.ToString() + "\n";
-                richTextBox1.Text += "Name\t" + main_thread.Name + "\n";
-                richTextBox1.Text += "IsAlive\t" + main_thread.IsAlive.ToString() + "\n";
-
-                if (main_thread.IsAlive == true)
-                {
-                    richTextBox1.Text += "IsBackground\t" + main_thread.IsBackground.ToString() + "\n";
-                }
-            }
-        }
-
         private void button4_Click(object sender, EventArgs e)
         {
             Thread t1 = new Thread(new ThreadStart(thread_1));
@@ -236,7 +163,6 @@ namespace vcs_Thread3
             }
         }
     }
-    
 
     //建一個類，模擬實際使用情況
     public class NEWThreadClass
@@ -312,4 +238,3 @@ namespace vcs_Thread3
         }
     }
 }
-

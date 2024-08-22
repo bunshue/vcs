@@ -5,6 +5,7 @@ print("------------------------------------------------------------")  # 60個
 # 共同
 import os
 import sys
+import time
 import math
 import random
 import numpy as np
@@ -20,7 +21,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 N = 1000                        # 數據數量
 np.random.seed(10)              # 設定隨機數種子值
 x = np.random.normal(0, 1, N)   # 均值是 0, 標準差是 1
@@ -207,7 +208,7 @@ fig.colorbar(mpl.cm.ScalarMappable(norm=mynorm, cmap=cmap),
              cax=ax, orientation='horizontal',
              label='使用extend=max')
 plt.show()
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 import matplotlib as mpl

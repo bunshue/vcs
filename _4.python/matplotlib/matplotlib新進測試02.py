@@ -1,3 +1,10 @@
+"""
+新進測試
+
+"""
+
+print("------------------------------------------------------------")  # 60個
+
 # 共同
 import os
 import sys
@@ -31,8 +38,119 @@ plt.plot(x, y1)
 plt.plot(x, y2)
 plt.plot(x, y3)
 
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+x = np.linspace(0, 2*np.pi, 500)
+y = np.sin(x**2)
+ax = plt.subplot()      # 回傳子圖物件
+ax.plot(x, y)           # 使用子圖物件調用plot()函數
 
 plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+x = np.linspace(0, 2*np.pi, 500)    # 建立含500個元素的陣列
+y1 = np.sin(x)                      # sin函數
+y2 = np.cos(x)                      # cos函數
+ax = plt.subplot()
+ax.plot(x, y1, lw = 2)              # 線條寬度是 2
+ax.plot(x, y2, linewidth = 5)       # 線條寬度是 5                
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+x = np.linspace(0, 2*np.pi, 500)
+y = np.sin(x**2)
+ax = plt.subplot()      # 回傳子圖物件
+ax.plot(x, y)           # 使用子圖物件調用plot()函數
+ax.set_title("Sin function")
+ax.set_xlabel("x")
+ax.set_ylabel("y")
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+x = [x for x in range(9)]
+squares = [y * y for y in range(9)]
+ax = plt.subplot()
+ax.plot(squares)
+ax.set_aspect('equal')
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+ax = plt.subplot()          # 建立圖表
+ax.plot([1, 3])             # 繪製圖表
+ax.set_xlabel('x 座標')
+ax.set_ylabel('y 座標')
+ax.set_title('資料布局')
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+ax = plt.subplot()          # 建立圖表
+ax.plot([1, 3])             # 繪製圖表
+ax.set_xlabel('x 座標')
+ax.set_ylabel('y 座標')
+ax.set_title('資料布局')
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+fig = plt.figure()
+ax = plt.axes([0.1,0.1,0.8,0.8])
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+fig = plt.figure()
+ax = plt.axes([0.1,0.1,0.5,0.8])
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+fig = plt.figure()
+ax = plt.axes([0.1,0.1,0.8,0.8])
+x = np.linspace(0, 2*np.pi, 500)
+ax.plot(x, np.sin(x)**2,'g')
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+x = np.linspace(0, 2*np.pi, 500)
+y = np.sin(2 * np.pi * x) + 1
+fig = plt.figure()
+ax = plt.axes()
+#ax.set_xlim([1, 5])
+#ax.set_ylim([-0.5, 2.5])
+plt.plot(x, y)
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+x = np.linspace(0, 2*np.pi, 500)
+y = np.sin(2 * np.pi * x) + 1
+fig = plt.figure()
+ax = plt.axes()
+ax.set_xlim([1, 5])
+ax.set_ylim([-0.5, 2.5])
+plt.plot(x, y)
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+
+
 
 print("------------------------------------------------------------")  # 60個
 

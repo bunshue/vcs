@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_Thread5
+namespace vcs_Picture2Video
 {
     static class Program
     {

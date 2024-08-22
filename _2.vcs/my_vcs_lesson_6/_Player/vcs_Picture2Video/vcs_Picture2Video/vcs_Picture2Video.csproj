@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{15DB99EF-6FED-4AAC-BF77-DD76A20215FB}</ProjectGuid>
+    <ProjectGuid>{ED35518B-59C0-4413-B6B5-EECF83E8F0A5}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>vcs_Thread5</RootNamespace>
-    <AssemblyName>vcs_Thread5</AssemblyName>
+    <RootNamespace>vcs_Picture2Video</RootNamespace>
+    <AssemblyName>vcs_Picture2Video</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

@@ -581,8 +581,125 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
+x = np.arange(6)
+y = x
+t = x  # 色彩隨 y 軸值變化
+plt.scatter(x, y, c=t, cmap="rainbow")
+plt.scatter(x, y, c=x, cmap="rainbow", marker="*")  # 繪製 sin
+plt.scatter(x, y, c=x, cmap="rainbow", marker="s")  # 繪製 cos
+plt.scatter(x, y, c=y, cmap="rainbow", marker="*")  # 繪製 sin
+plt.scatter(x, y, c=y, cmap="rainbow", marker="s")  # 繪製 cos
+
+xpt = np.linspace(0, 5, 500)  # 建立含500個元素的陣列
+ypt = 1 - 0.5 * np.abs(xpt - 2)  # y陣列的變化
+lwidths = (1 + xpt) ** 2  # 寬度陣列
+plt.scatter(xpt, ypt, s=lwidths, c=xpt, cmap="hsv")  # hsv色彩映射圖
+
+xpt = np.linspace(0, 5, 500)  # 建立含500個元素的陣列
+ypt = 1 - 0.5 * np.abs(xpt - 2)  # y陣列的變化
+lwidths = (1 + xpt) ** 2  # 寬度陣列
+plt.scatter(xpt, ypt, s=lwidths, c=ypt, cmap="hsv")  # hsv色彩映射圖
+
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
+
+
+def loc(index):
+    """處理座標的移動"""
+    x_mov = np.random.choice([-3, 3])  # 隨機x軸移動值
+    xloc = x[index - 1] + x_mov  # 計算x軸新位置
+    y_mov = np.random.choice([-5, -1, 1, 5])  # 隨機y軸移動值
+    yloc = y[index - 1] + y_mov  # 計算y軸新位置
+    x.append(xloc)  # x軸新位置加入串列
+    y.append(yloc)  # y軸新位置加入串列
+
+
+num = 10000  # 設定隨機點的數量
+x = [0]  # 設定第一次執行x座標
+y = [0]  # 設定第一次執行y座標
+while True:
+    for i in range(1, num):  # 建立點的座標
+        loc(i)
+    t = x  # 色彩隨x軸變化
+    plt.scatter(x, y, s=2, c=t, cmap="brg")
+    plt.axis("off")  # 隱藏座標
+    plt.show()
+    yORn = input("是否繼續 ?(y/n) ")  # 詢問是否繼續
+    if yORn == "n" or yORn == "N":  # 輸入n或N則程式結束
+        break
+    else:
+        x[0] = x[num - 1]  # 上次結束x座標成新的起點x座標
+        y[0] = y[num - 1]  # 上次結束y座標成新的起點y座標
+        del x[1:]  # 刪除舊串列x座標元素
+        del y[1:]  # 刪除舊串列y座標元素
+
+print("------------------------------------------------------------")  # 60個
+
+
+num = 100
+
+x = np.random.random(100)  # 可以產生num個0.0至1.0之間的數字
+y = np.random.random(100)
+t = x  # 色彩隨x軸變化
+plt.scatter(x, y, s=100, c=t, cmap="brg")
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+N = 1000  # 數據數量
+x = np.random.normal(0, 1, N)  # 均值是 0, 標準差是 1
+y = np.random.normal(0, 1, N)  # 均值是 0, 標準差是 1
+color = x + y  # 設定顏色串列是 x + y 數列結果
+norm = plt.Normalize(vmin=-3, vmax=3)
+plt.scatter(x, y, s=60, c=color, cmap="Greens", norm=norm)
+plt.xlim(-3, 3)
+plt.xticks(())  # 不顯示 x 刻度
+plt.ylim(-3, 3)
+plt.yticks(())  # 不顯示 y 刻度
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+N = 1000  # 數據數量
+x = np.random.normal(0, 1, N)  # 均值是 0, 標準差是 1
+y = np.random.normal(0, 1, N)  # 均值是 0, 標準差是 1
+color = x + y  # 設定顏色串列是 x + y 數列結果
+norm = plt.Normalize(vmin=-3, vmax=3)
+plt.scatter(x, y, s=60, alpha=0.5, c=color, cmap="Greens", norm=norm)
+plt.xlim(-3, 3)
+plt.xticks(())  # 不顯示 x 刻度
+plt.ylim(-3, 3)
+plt.yticks(())  # 不顯示 y 刻度
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+N = 1000  # 數據數量
+x = np.random.normal(0, 1, N)  # 均值是 0, 標準差是 1
+y = np.random.normal(0, 1, N)  # 均值是 0, 標準差是 1
+color = x + y  # 設定顏色串列是 x + y 數列結果
+norm = plt.Normalize(vmin=-3, vmax=3)
+plt.scatter(x, y, s=60, alpha=0.5, c=color, cmap="jet", norm=norm)
+plt.xlim(-3, 3)
+plt.xticks(())  # 不顯示 x 刻度
+plt.ylim(-3, 3)
+plt.yticks(())  # 不顯示 y 刻度
+
+plt.show()
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
 
 
 print("------------------------------------------------------------")  # 60個
@@ -590,6 +707,7 @@ print("作業完成")
 print("------------------------------------------------------------")  # 60個
 sys.exit()
 print("------------------------------------------------------------")  # 60個
+
 
 
 
@@ -634,7 +752,6 @@ plt.scatter(x, y, s=100, c=cl, alpha=0.6, cmap="Paired")
 
 ----
 
-np.random.seed(10)  # 固定隨機數
 
 
 """

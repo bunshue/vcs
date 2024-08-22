@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace vcs_Thread5.Properties
+namespace vcs_Picture2Video.Properties
 {
 
 

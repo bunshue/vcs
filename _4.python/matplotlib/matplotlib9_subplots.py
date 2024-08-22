@@ -215,7 +215,7 @@ axs[1][1].grid(True)
 axs[1][2].grid(True)
 fig.suptitle("分類繪圖", fontsize=20)
 plt.show()
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 """
@@ -399,9 +399,137 @@ axs[2, 2].axis("square")  # 建立矩形子圖
 
 plt.tight_layout()
 plt.show()
+'''
+print("------------------------------------------------------------")  # 60個
+
+
+
+fig, ax = plt.subplots(nrows=1,ncols=2) # 建立2個子圖
+x = np.linspace(0, 2*np.pi, 300)
+y = np.sin(x**2)
+ax[0].plot(x, y,'b')                    # 子圖索引 0 
+ax[1].plot(x, y,'g')                    # 子圖索引 1
+
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
+fig, ax = plt.subplots(1, 2)            # 建立2個子圖
+x = np.linspace(0, 2*np.pi, 300)
+y = np.sin(x**2)
+ax[0].plot(x, y,'b')                    # 子圖索引 0 
+ax[1].plot(x, y,'g')                    # 子圖索引 1
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+fig, ax = plt.subplots(2)               # 建立2個子圖
+x = np.linspace(0, 2*np.pi, 300)
+y = np.sin(x**2)
+ax[0].plot(x, y,'b')                    # 子圖索引 0 
+ax[1].plot(x, y,'g')                    # 子圖索引 1
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+fig, ax = plt.subplots(2, 2)            # 建立4個子圖
+x = np.linspace(0, 2*np.pi, 300)
+y = np.sin(x**2)
+ax[0, 0].plot(x, y,'b')                 # 子圖索引 0,0
+ax[0, 0].set_title('子圖[0, 0]')
+ax[0, 1].plot(x, y,'g')                 # 子圖索引 0,1
+ax[0, 1].set_title('子圖[0, 1]')
+ax[1, 0].plot(x, y,'m')                 # 子圖索引 1,0
+ax[1, 0].set_title('子圖[1, 0]')
+ax[1, 1].plot(x, y,'r')                 # 子圖索引 1,1
+ax[1, 1].set_title('子圖[1, 1]')
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+fig, ax = plt.subplots(2, 2)            # 建立4個子圖
+x = np.linspace(0, 2*np.pi, 300)
+y = np.sin(x**2)
+ax[0, 0].plot(x, y,'b')                 # 子圖索引 0,0
+ax[0, 0].set_title('子圖[0, 0]')
+ax[0, 1].plot(x, y,'g')                 # 子圖索引 0,1
+ax[0, 1].set_title('子圖[0, 1]')
+ax[1, 0].plot(x, y,'m')                 # 子圖索引 1,0
+ax[1, 0].set_title('子圖[1, 0]')
+ax[1, 1].plot(x, y,'r')                 # 子圖索引 1,1
+ax[1, 1].set_title('子圖[1, 1]')
+for a in ax.flat:
+    a.set(xlabel='x 軸資料', ylabel='y 軸資料')
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+fig, ax = plt.subplots(2, 2)            # 建立4個子圖
+x = np.linspace(0, 2*np.pi, 300)
+y = np.sin(x**2)
+ax[0, 0].plot(x, y,'b')                 # 子圖索引 0,0
+ax[0, 0].set_title('子圖[0, 0]')
+ax[0, 1].plot(x, y,'g')                 # 子圖索引 0,1
+ax[0, 1].set_title('子圖[0, 1]')
+ax[1, 0].plot(x, y,'m')                 # 子圖索引 1,0
+ax[1, 0].set_title('子圖[1, 0]')
+ax[1, 1].plot(x, y,'r')                 # 子圖索引 1,1
+ax[1, 1].set_title('子圖[1, 1]')
+for a in ax.flat:
+    a.set(xlabel='x 軸資料', ylabel='y 軸資料')
+# 隱藏內側的刻度標記與標籤
+for a in ax.flat:
+    a.label_outer()
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+x = np.linspace(0, 2*np.pi, 300)
+y = np.sin(x**2)
+fig, ax = plt.subplots(3, sharex=True, sharey=True)
+fig.suptitle('共享 x 和 y 軸', fontsize=18)
+ax[0].plot(x, y ** 2, 'b--')
+ax[1].plot(x, 0.5 * y, 'go')
+ax[2].plot(x, y, 'm+')
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+fig, ax = plt.subplots(1, 1)
+x = np.linspace(0, 2*np.pi, 300)
+y1 = np.sin(x)
+y2 = np.cos(x)
+# 繪圖
+ax.plot(x, y1)
+ax.plot(x, y2, 'g', lw='3')
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+fig, ax1 = plt.subplots(1, 1)
+ax2 = ax1.twinx()               # 使用相同的 x 軸
+# y1 = sin(x)
+x = np.linspace(0, 2*np.pi, 300)
+y1 = np.sin(x)
+# y2 = cos(x)
+y2 = np.cos(x)
+# 繪圖
+ax1.plot(x, y1)
+ax2.plot(x, y2, 'g', lw='3')
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個

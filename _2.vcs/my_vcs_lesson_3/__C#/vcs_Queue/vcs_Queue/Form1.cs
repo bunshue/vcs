@@ -17,7 +17,12 @@ namespace vcs_Queue
         string filename2 = @"C:\_git\vcs\_1.data\______test_files1\bear.jpg";
         string filename3 = @"C:\_git\vcs\_1.data\______test_files1\elephant.jpg";
 
-        Queue<Bitmap> frames = new Queue<Bitmap>(); // Queue that stores frames to be written by the recorder thread
+        Queue<Bitmap> frames = new Queue<Bitmap>();
+        Queue<string> string_queue = new Queue<string>();
+
+        Bitmap bitmap1 = null;
+        Bitmap bitmap2 = null;
+        Bitmap bitmap3 = null;
 
         public Form1()
         {
@@ -26,30 +31,40 @@ namespace vcs_Queue
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            bitmap1 = (Bitmap)Bitmap.FromFile(filename1);	//Bitmap.FromFile出來的是Image格式
+            bitmap2 = (Bitmap)Bitmap.FromFile(filename2);	//Bitmap.FromFile出來的是Image格式
+            bitmap3 = (Bitmap)Bitmap.FromFile(filename3);	//Bitmap.FromFile出來的是Image格式
+
             update_queue_count();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename1);	//Bitmap.FromFile出來的是Image格式
-            frames.Enqueue((Bitmap)bitmap1.Clone());
-            richTextBox1.Text += "將第1張圖放入Queue, 從尾加\n";
+            frames.Enqueue(bitmap1);
+
+            string now = DateTime.Now.ToString();
+            string_queue.Enqueue(now);
+
             update_queue_count();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename2);	//Bitmap.FromFile出來的是Image格式
-            frames.Enqueue((Bitmap)bitmap1.Clone());
-            richTextBox1.Text += "將第2張圖放入Queue, 從尾加\n";
+            frames.Enqueue(bitmap2);
+
+            string now = DateTime.Now.ToString();
+            string_queue.Enqueue(now);
+
             update_queue_count();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename3);	//Bitmap.FromFile出來的是Image格式
-            frames.Enqueue((Bitmap)bitmap1.Clone());
-            richTextBox1.Text += "將第3張圖放入Queue, 從尾加\n";
+            frames.Enqueue(bitmap3);
+
+            string now = DateTime.Now.ToString();
+            string_queue.Enqueue(now);
+
             update_queue_count();
         }
 
@@ -72,6 +87,21 @@ namespace vcs_Queue
             {
                 richTextBox1.Text += "無圖可讀\n";
             }
+
+            //Queue取出
+            if (string_queue.Count > 0)
+            {
+                try
+                {
+                    string str = string_queue.Dequeue();
+                    richTextBox1.Text += "取得 : " + str + "\n";
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("xxx錯誤訊息e03 : " + ex.Message);
+                }
+            }
+
             update_queue_count();
         }
 
@@ -160,13 +190,14 @@ namespace vcs_Queue
             // 打印队列中的所有值
             Console.Write("Queue values:");
             PrintValues(myQ);
-
         }
 
         public static void PrintValues(IEnumerable myCollection)
         {
             foreach (Object obj in myCollection)
+            {
                 Console.Write("    {0}", obj);
+            }
             Console.WriteLine();
         }
 
@@ -227,39 +258,11 @@ namespace vcs_Queue
             }
         }
 
-        Queue<string> string_queue = new Queue<string>(); // Queue that stores frames to be written by the recorder thread
-
-        private void button9_Click(object sender, EventArgs e)
+        private void button12_Click(object sender, EventArgs e)
         {
             //Queue訊息
             int len = string_queue.Count;
             richTextBox1.Text += "目前Queue內共有 : " + len.ToString() + " 筆資料\n";
         }
-
-        private void button10_Click(object sender, EventArgs e)
-        {
-            //Queue加入
-            richTextBox1.Text += "加入Queue";
-            string str = "加入Queue";
-            string_queue.Enqueue(str);
-        }
-
-        private void button11_Click(object sender, EventArgs e)
-        {
-            //Queue取出
-            if (string_queue.Count > 0)
-            {
-                try
-                {
-                    string str = string_queue.Dequeue();
-                    richTextBox1.Text += "取得 : " + str + "\n";
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("xxx錯誤訊息e03 : " + ex.Message);
-                }
-            }
-        }
     }
 }
-

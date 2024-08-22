@@ -9,6 +9,7 @@ using System.Windows.Forms;
 
 using System.Threading;
 using System.Diagnostics;
+using System.Timers;    //for ElapsedEventHandler
 
 namespace vcs_Thread_Example2
 {
@@ -24,6 +25,8 @@ namespace vcs_Thread_Example2
 
         static Thread thread_ex2a;
         static Thread thread_ex2b;
+        static Thread thread_ex3 = null;
+        Thread thread_ex4;                                  //宣告監聽用執行續
 
         public Form1()
         {
@@ -44,6 +47,17 @@ namespace vcs_Thread_Example2
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
+            //關閉監聽執行續(如果有的話)
+            try
+            {
+                thread_ex4.Abort(); //關閉監聽執行續
+                //U.Close();  //關閉監聽器
+            }
+            catch
+            {
+                //忽略錯誤，程式繼續執行
+            }
+
             //C# 強制關閉 Process
             Process.GetCurrentProcess().Kill();
 
@@ -263,6 +277,175 @@ namespace vcs_Thread_Example2
             //狀態
             richTextBox1.Text += "Thread_ex1 狀態 : " + thread_ex2a.ThreadState + "\n";
             richTextBox1.Text += "Thread_ex2 狀態 : " + thread_ex2b.ThreadState + "\n";
+        }
+
+        public void SayHello()
+        {
+            while (true)
+            {
+                Console.WriteLine("Hello from a single thread.");
+                Thread.Sleep(1000);
+            }
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            //啟動一個Thread
+            thread_ex3 = new Thread(new ThreadStart(SayHello));
+            thread_ex3.Name = "SayHelloThread";
+            thread_ex3.Start();
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            //停止一個Thread
+            if (thread_ex3 != null)
+            {
+                thread_ex3.Abort();
+            }
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
+        //監聽副程式
+        int i;
+        private void Listen()
+        {
+            while (true)
+            {
+                i++;
+                this.Text = i.ToString();
+                richTextBox1.Text += "m";
+
+                //一秒執行一次
+                Thread.Sleep(1000); //停一秒
+            }
+        }
+        int cnt = 0;
+        private void button14_Click(object sender, EventArgs e)
+        {
+            thread_ex4 = new Thread(Listen); //建立監聽網路訊息的新執行緒
+            //Th.IsBackground = true;  //設定為背景執行緒
+            thread_ex4.Name = "my_thread" + cnt.ToString();
+            cnt++;
+            richTextBox1.Text += "啟動 Main Thread, 名稱 : " + thread_ex4.Name + "\n";
+
+            thread_ex4.Start();             //啟動監聽執行緒
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+            if (thread_ex4 != null)
+            {
+                richTextBox1.Text += "關閉 Main Thread\n";
+                thread_ex4.Abort();
+            }
+            else
+            {
+                richTextBox1.Text += "無Thread\n";
+            }
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "Info\n";
+            if (thread_ex4 == null)
+            {
+                richTextBox1.Text += "Main Thread 尚未啟動\n";
+            }
+            else
+            {
+                richTextBox1.Text += "Main Thread\t" + thread_ex4.ToString() + "\n";
+                richTextBox1.Text += "ThreadState\t" + thread_ex4.ThreadState.ToString() + "\n";
+                richTextBox1.Text += "Name\t" + thread_ex4.Name + "\n";
+                richTextBox1.Text += "IsAlive\t" + thread_ex4.IsAlive.ToString() + "\n";
+
+                if (thread_ex4.IsAlive == true)
+                {
+                    richTextBox1.Text += "IsBackground\t" + thread_ex4.IsBackground.ToString() + "\n";
+                }
+            }
+        }
+
+        thread1 obj;
+        Thread thread_ex5;
+
+        class thread1
+        {
+            private String title;
+            public thread1(String title)
+            {
+                this.title = title;
+            }
+            int aa = 0;
+            public void runMe()
+            {
+                while (true)
+                {
+                    aa++;
+                    System.Diagnostics.Debug.Print("即時運算視窗輸出除錯訊息 測試訊息！！！Form1！！！ title = " + title + "  " + aa.ToString());
+                    Console.Write(title + "\r\n");
+                    System.Threading.Thread.Sleep(1000);
+                }
+            }
+        }
+
+        int a = 0;
+        //建立一個Thread 到 偵錯/視窗/即時運算 看結果
+        private void button17_Click(object sender, EventArgs e)
+        {
+            a++;
+            string thread_name = "Thread測試_" + a.ToString();
+            richTextBox1.Text += "開啟thread, 名稱 : " + thread_name + "\n";
+            obj = new thread1(thread_name);
+            thread_ex5 = new Thread(obj.runMe);
+            thread_ex5.Start();
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+            thread_ex5.Abort();
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //開啟關閉thread    ST
+        System.Timers.Timer tt = new System.Timers.Timer(1234);
+        int number = 0;
+
+        public void run(object source, System.Timers.ElapsedEventArgs e)
+        {
+            number++;
+            System.Diagnostics.Debug.Print("即時運算視窗輸出除錯訊息 測試訊息！！！Form1！！！ " + number.ToString());
+            Console.Write(number.ToString() + "\r\n");
+
+            //MessageBox.Show("number = " + number);
+        }
+
+        private void button20_Click(object sender, EventArgs e)
+        {
+            //thread_ex6
+            tt.Elapsed += new ElapsedEventHandler(run);
+            tt.Enabled = true;
+        }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+            tt.Enabled = false;
+            number = 0;
+
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+
         }
     }
 

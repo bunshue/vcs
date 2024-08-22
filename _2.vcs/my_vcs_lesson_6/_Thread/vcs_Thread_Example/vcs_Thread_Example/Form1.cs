@@ -216,35 +216,5 @@ namespace vcs_Thread_Example
             if (timechange != null)
                 timechange.stop();
         }
-
-
-        Thread th = null;
-        private void button12_Click(object sender, EventArgs e)
-        {
-            //啟動一個Thread
-            th = new Thread(new ThreadStart(SayHello));
-            th.Name = "SayHelloThread";
-            th.Start();
-
-        }
-
-        public void SayHello()
-        {
-            while (true)
-            {
-                Console.WriteLine("Hello from a single thread.");
-                Thread.Sleep(1000);
-            }
-        }
-
-        private void button13_Click(object sender, EventArgs e)
-        {
-            //停止一個Thread
-            if (th != null)
-            {
-                th.Abort();
-
-            }
-        }
     }
 }
