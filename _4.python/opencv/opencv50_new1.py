@@ -21,6 +21,7 @@ print("------------------------------------------------------------")  # 60個
 # 共同
 import os
 import sys
+import time
 import math
 import random
 import numpy as np
@@ -36,7 +37,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 print('練習組合成一張大圖 picasa效果')
 
 filename1 = "C:/_git/vcs/_4.python/_data/elephant.jpg"
@@ -137,7 +138,7 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray2.bmp"
+filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
 
 # 檔案 => cv2影像
 lena = cv2.imread(filename, cv2.IMREAD_UNCHANGED)
@@ -703,11 +704,22 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
+print("對比度增強 CLAHE")
 print("createCLAHE_image 生成自適應均衡化圖像")
+
+# 自適應直方圖均衡化（Adaptive Histogram Equalization, AHE）
+# 限制對比度 自適應直方圖均衡化(Contrast Limited Adaptive Histogram Equalization, CLAHE)
 
 # 檔案 => cv2影像
 image = cv2.imread("data/building.png", 0)
+#image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
+
+# 創建 CLAHE  對象
 clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8, 8))
+# 創建 CLAHE  對象
+# clahe = cv2.createCLAHE(clipLimit=1.0, tileGridSize=(28, 28))
+
+# 限制對比度的自適應閾值均衡化
 cl1 = clahe.apply(image)
 
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
@@ -715,6 +727,10 @@ plt.show()
 
 plt.imshow(cv2.cvtColor(cl1, cv2.COLOR_BGR2RGB))
 plt.show()
+
+#存圖以比較之
+#cv2.imwrite('building.png', image)
+#cv2.imwrite('building_clahe.png', cl1)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -2183,27 +2199,6 @@ plt.ylabel("number of pixels")
 y_maxValue = np.max(histogram)
 plt.axis([0, 255, 0, y_maxValue])
 plt.show()
-
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-print("對比度增強6 CLAHE")
-
-# 第一步：讀入圖像
-# 檔案 => cv2影像
-src = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
-
-# 創建 CLAHE  對象
-clahe = cv2.createCLAHE(clipLimit=1.0, tileGridSize=(28, 28))
-
-# 限制對比度的自適應閾值均衡化
-dst = clahe.apply(src)
-
-# 顯示
-cv2.imshow("src", src)
-cv2.imshow("clahe", dst)
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()
@@ -4387,7 +4382,7 @@ cv2.waitKey(0)
 cv2.destroyAllWindows()
 """
 print("------------------------------------------------------------")  # 60個
-'''
+
 print("幾何形狀的檢測和擬合 HTLine")
 
 from mpl_toolkits.mplot3d import Axes3D

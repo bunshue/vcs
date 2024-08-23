@@ -677,7 +677,7 @@ plt.imshow(cv2.cvtColor(a, cv2.COLOR_BGR2RGB))
 print("------------------------------------------------------------")  # 60個
 
 # A圖
-filename1 = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray2.bmp"
+filename1 = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
 # 檔案 => cv2影像
 lena = cv2.imread(filename1, cv2.IMREAD_UNCHANGED)
 

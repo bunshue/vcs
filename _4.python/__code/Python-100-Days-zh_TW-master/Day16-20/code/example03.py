@@ -1,36 +1,6 @@
 import sys
-print("------------------------------------------------------------")  # 60個
-
-from contextlib import contextmanager
-from time import perf_counter
-
-import time
-
-def do_something():
-    time.sleep(1.2345)
-
-@contextmanager
-def timer():
-    try:
-        start = perf_counter()
-        yield
-    finally:
-        end = perf_counter()
-        print(f'{end - start}秒')
-
-for _ in range(10):
-    with timer():
-        print('執行工作')
-        do_something()
-
 
 print("------------------------------------------------------------")  # 60個
-
-
-
-
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python-100-Days-zh_TW-master\Day16-20\code\example09.py
 
 from functools import wraps
 from random import randint
@@ -81,21 +51,14 @@ def random_delay(min, max):
     sleep(randint(min, max))
 
 
-def main():
-    for _ in range(3):
-        # print(random_delay.__name__)
-        random_delay(3, 5)
-    # for _ in range(3):
-    #     # 取消掉装饰器
-    #     random_delay.__wrapped__(3, 5)
-
-
-if __name__ == '__main__':
-    main()
+for _ in range(3):
+    # print(random_delay.__name__)
+    random_delay(3, 5)
+# for _ in range(3):
+#     # 取消掉装饰器
+#     random_delay.__wrapped__(3, 5)
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python-100-Days-zh_TW-master\Day16-20\code\example12.py
 
 """
 面向对象的三大支柱：封装、继承、多态
@@ -165,8 +128,6 @@ class EmployeeFactory():
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python-100-Days-zh_TW-master\Day16-20\code\example19.py
-
 import glob
 import os
 import time
@@ -187,62 +148,23 @@ def gen_thumbnail(infile):
         image.thumbnail((size, size))
         image.save(outfile, format='PNG')
 
-def main():
-    pool = ThreadPoolExecutor(max_workers=30)
-    futures = []
-    start = time.time()
-    print('aaaa')
-    for infile in glob.glob('images/*'):
-        print(infile)
-        # submit方法是非阻塞式的方法 
-        # 即便工作线程数已经用完，submit方法也会接受提交的任务 
-        future = pool.submit(gen_thumbnail, infile)
-        futures.append(future)
-    for future in futures:
-        # result方法是一个阻塞式的方法 如果线程还没有结束
-        # 暂时取不到线程的执行结果 代码就会在此处阻塞
-        future.result()
-    end = time.time()
-    print(f'耗时: {end - start}秒')
-    # shutdown也是非阻塞式的方法 但是如果已经提交的任务还没有执行完
-    # 线程池是不会停止工作的 shutdown之后再提交任务就不会执行而且会产生异常
-    pool.shutdown()
-
-if __name__ == '__main__':
-    main()
-
+pool = ThreadPoolExecutor(max_workers=30)
+futures = []
+for infile in glob.glob('images/*'):
+    print(infile)
+    # submit方法是非阻塞式的方法 
+    # 即便工作线程数已经用完，submit方法也会接受提交的任务 
+    future = pool.submit(gen_thumbnail, infile)
+    futures.append(future)
+for future in futures:
+    # result方法是一个阻塞式的方法 如果线程还没有结束
+    # 暂时取不到线程的执行结果 代码就会在此处阻塞
+    future.result()
+# shutdown也是非阻塞式的方法 但是如果已经提交的任务还没有执行完
+# 线程池是不会停止工作的 shutdown之后再提交任务就不会执行而且会产生异常
+pool.shutdown()
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python-100-Days-zh_TW-master\Day16-20\code\example20.py
-
-"""
-线程间通信（共享数据）非常简单因为可以共享同一个进程的内存
-进程间通信（共享数据）比较麻烦因为操作系统会保护分配给进程的内存
-要实现多进程间的通信通常可以用系统管道、套接字、三方服务来实现
-multiprocessing.Queue
-守护线程 - daemon thread
-守护进程 - firewalld / httpd / mysqld
-在系统停机的时候不保留的进程 - 不会因为进程还没有执行结束而阻碍系统停止
-"""
-from threading import Thread
-import time
-
-def do_something(content):
-    while True:
-        print(content, end='')
-        time.sleep(0.1)
-
-
-Thread(target=do_something, args=('O', ), daemon=True).start()
-Thread(target=do_something, args=('X', ), daemon=True).start()
-time.sleep(5)
-print('bye!')
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python-100-Days-zh_TW-master\Day16-20\code\example21.py
 
 from concurrent.futures import ThreadPoolExecutor
 from random import randint
@@ -294,20 +216,13 @@ def sub_money(account):
         sleep(1)
 
 
-def main():
-    account = Account()
-    with ThreadPoolExecutor(max_workers=10) as pool:
-        for _ in range(5):
-            pool.submit(add_money, account)
-            pool.submit(sub_money, account)
-
-
-if __name__ == '__main__':
-    main()
+account = Account()
+with ThreadPoolExecutor(max_workers=10) as pool:
+    for _ in range(5):
+        pool.submit(add_money, account)
+        pool.submit(sub_money, account)
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python-100-Days-zh_TW-master\Day16-20\code\example24.py
 
 """
 aiohttp - 异步HTTP网络访问
@@ -320,7 +235,6 @@ Celery - 将要执行的耗时间的任务异步化处理
 """
 import asyncio
 import re
-
 import aiohttp
 
 
@@ -346,8 +260,6 @@ print('異步訪問')
 loop = asyncio.get_event_loop()
 loop.run_until_complete(main_task())
 loop.close()
-
-
 
 print("------------------------------------------------------------")  # 60個
 

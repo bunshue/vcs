@@ -17,8 +17,9 @@ namespace vcs_Queue
         string filename2 = @"C:\_git\vcs\_1.data\______test_files1\bear.jpg";
         string filename3 = @"C:\_git\vcs\_1.data\______test_files1\elephant.jpg";
 
-        Queue<Bitmap> frames = new Queue<Bitmap>();
+        Queue<Bitmap> bitmap_queue = new Queue<Bitmap>();
         Queue<string> string_queue = new Queue<string>();
+        Queue<char> char_queue = new Queue<char>();
 
         Bitmap bitmap1 = null;
         Bitmap bitmap2 = null;
@@ -35,48 +36,64 @@ namespace vcs_Queue
             bitmap2 = (Bitmap)Bitmap.FromFile(filename2);	//Bitmap.FromFile出來的是Image格式
             bitmap3 = (Bitmap)Bitmap.FromFile(filename3);	//Bitmap.FromFile出來的是Image格式
 
-            update_queue_count();
+            update_queue_count();//更新佇列狀態
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            frames.Enqueue(bitmap1);
+            richTextBox1.Text += "從佇列尾加圖片1\n";
+            bitmap_queue.Enqueue(bitmap1);
 
+            //richTextBox1.Text += "從佇列尾加時間訊息\n";
             string now = DateTime.Now.ToString();
             string_queue.Enqueue(now);
 
-            update_queue_count();
+            //richTextBox1.Text += "從佇列尾加字元\n";
+            char_queue.Enqueue('A');
+
+            update_queue_count();//更新佇列狀態
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            frames.Enqueue(bitmap2);
+            richTextBox1.Text += "從佇列尾加圖片2\n";
+            bitmap_queue.Enqueue(bitmap2);
 
+            //richTextBox1.Text += "從佇列尾加時間訊息\n";
             string now = DateTime.Now.ToString();
             string_queue.Enqueue(now);
 
-            update_queue_count();
+            //richTextBox1.Text += "從佇列尾加字元\n";
+            char_queue.Enqueue('B');
+
+            update_queue_count();//更新佇列狀態
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            frames.Enqueue(bitmap3);
+            richTextBox1.Text += "從佇列尾加圖片2\n";
+            bitmap_queue.Enqueue(bitmap3);
 
+            //richTextBox1.Text += "從佇列尾加時間訊息\n";
             string now = DateTime.Now.ToString();
             string_queue.Enqueue(now);
 
-            update_queue_count();
+            //richTextBox1.Text += "從佇列尾加字元\n";
+            char_queue.Enqueue('C');
+
+            update_queue_count();//更新佇列狀態
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            if (frames.Count > 0)
+            //bitmap queue取出
+            if (bitmap_queue.Count > 0)
             {
                 try
                 {
-                    Bitmap bitmap1 = frames.Dequeue();
+                    Bitmap bitmap1 = bitmap_queue.Dequeue();
                     pictureBox_show.Image = bitmap1;
-                    richTextBox1.Text += "從Queue中讀出第1張圖, 從頭取\n";
+                    richTextBox1.Text += "從佇列頭取出1張圖\n";
                 }
                 catch (Exception ex)
                 {
@@ -88,13 +105,13 @@ namespace vcs_Queue
                 richTextBox1.Text += "無圖可讀\n";
             }
 
-            //Queue取出
+            //string queue取出
             if (string_queue.Count > 0)
             {
                 try
                 {
                     string str = string_queue.Dequeue();
-                    richTextBox1.Text += "取得 : " + str + "\n";
+                    richTextBox1.Text += "從佇列頭取出訊息 : " + str + "\n";
                 }
                 catch (Exception ex)
                 {
@@ -102,52 +119,50 @@ namespace vcs_Queue
                 }
             }
 
-            update_queue_count();
+            //char queue取出
+            if (char_queue.Count > 0)
+            {
+                try
+                {
+                    char ch = (char)char_queue.Dequeue();
+                    richTextBox1.Text += "從佇列頭取出字元 : " + ch + "\n";
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("xxx錯誤訊息e03 : " + ex.Message);
+                }
+            }
+
+
+            update_queue_count();//更新佇列狀態
         }
 
         void update_queue_count()
         {
-            label1.Text = "目前Queue中的張數 : " + frames.Count.ToString();
-            //richTextBox1.Text += "目前Queue中的張數 : " + frames.Count.ToString() + "\n";
+            label1.Text = "目前Queue中的張數 : " + bitmap_queue.Count.ToString();
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            frames.Clear();
             richTextBox1.Text += "清除Queue\n";
-            update_queue_count();
+            bitmap_queue.Clear();
+            string_queue.Clear();
+            char_queue.Clear();
+            update_queue_count();//更新佇列狀態
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            Queue<char> q = new Queue<char>();
-
-            q.Enqueue('A');
-            q.Enqueue('B');
-            q.Enqueue('C');
-            q.Enqueue('D');
+            //Queue訊息
+            int len = string_queue.Count;
+            richTextBox1.Text += "目前Queue內共有 : " + len.ToString() + " 筆資料\n";
 
             richTextBox1.Text += "Current queue: " + "\n";
-            foreach (char c in q)
+            foreach (char c in char_queue)
             {
                 richTextBox1.Text += c + " ";
             }
             richTextBox1.Text += "\n";
-
-            q.Enqueue('E');
-            q.Enqueue('F');
-            richTextBox1.Text += "Current queue: " + "\n";
-            foreach (char c in q)
-            {
-                richTextBox1.Text += c + " ";
-            }
-            richTextBox1.Text += "\n";
-
-            richTextBox1.Text += "Removing some values " + "\n";
-            char ch = (char)q.Dequeue();
-            richTextBox1.Text += "The removed value: " + ch + "\n";
-            ch = (char)q.Dequeue();
-            richTextBox1.Text += "The removed value: " + ch + "\n";
 
         }
 
@@ -256,13 +271,6 @@ namespace vcs_Queue
                 object o = objs[i];
                 Console.Write("<4> " + o + "\n");
             }
-        }
-
-        private void button12_Click(object sender, EventArgs e)
-        {
-            //Queue訊息
-            int len = string_queue.Count;
-            richTextBox1.Text += "目前Queue內共有 : " + len.ToString() + " 筆資料\n";
         }
     }
 }

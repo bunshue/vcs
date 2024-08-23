@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.Threading;
-
+using System.Diagnostics;   //for Process
 namespace vcs_Thread_Example1
 {
     public partial class Form1 : Form
@@ -28,6 +28,27 @@ namespace vcs_Thread_Example1
 
             show_item_location();
         }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            //關閉監聽執行續(如果有的話)
+            try
+            {
+                thread_ex1.Abort(); //關閉監聽執行續
+                //U.Close();  //關閉監聽器
+            }
+            catch
+            {
+                //忽略錯誤，程式繼續執行
+            }
+
+            //C# 強制關閉 Process
+            Process.GetCurrentProcess().Kill();
+
+            Application.Exit();
+
+        }
+
 
         void show_item_location()
         {
@@ -141,50 +162,203 @@ namespace vcs_Thread_Example1
 
 
         //Thread使用範例1 ST
+
+        Thread thread_ex1;                                  //宣告監聽用執行續
+
+        //監聽副程式
+        int i;
+        private void ThreadProc_ex1()
+        {
+            while (true)
+            {
+                i++;
+                this.Text = i.ToString();
+                richTextBox1.Text += "m";
+
+                //一秒執行一次
+                Thread.Sleep(1000); //停一秒
+            }
+        }
+        int cnt = 0;
+
         private void button10_Click(object sender, EventArgs e)
         {
-
+            thread_ex1 = new Thread(ThreadProc_ex1); //建立監聽網路訊息的新執行緒
+            thread_ex1.Name = "Thread_ex1_" + cnt.ToString();
+            //thread_ex1.IsBackground = true;  //設定為背景執行緒
+            thread_ex1.Start();             //啟動監聽執行緒
+            richTextBox1.Text += "啟動 thread 4, 名稱 : " + thread_ex1.Name + "\n";
+            cnt++;
         }
 
         private void button11_Click(object sender, EventArgs e)
         {
-
+            if (thread_ex1 != null)
+            {
+                richTextBox1.Text += "關閉 Main Thread\n";
+                thread_ex1.Abort();
+            }
+            else
+            {
+                richTextBox1.Text += "無Thread\n";
+            }
         }
 
         private void button12_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "Info\n";
+            if (thread_ex1 == null)
+            {
+                richTextBox1.Text += "Main Thread 尚未啟動\n";
+            }
+            else
+            {
+                richTextBox1.Text += "Main Thread\t" + thread_ex1.ToString() + "\n";
+                richTextBox1.Text += "ThreadState\t" + thread_ex1.ThreadState.ToString() + "\n";
+                richTextBox1.Text += "Name\t" + thread_ex1.Name + "\n";
+                richTextBox1.Text += "IsAlive\t" + thread_ex1.IsAlive.ToString() + "\n";
+
+                if (thread_ex1.IsAlive == true)
+                {
+                    richTextBox1.Text += "IsBackground\t" + thread_ex1.IsBackground.ToString() + "\n";
+                }
+            }
 
         }
         //Thread使用範例1 SP
 
 
         //Thread使用範例2 ST
+
+        static Thread thread_ex2a;
+        static Thread thread_ex2b;
+
+        private void ThreadProc_ex2()
+        {
+            while (true)
+            {
+                if (Thread.CurrentThread.Name == "Thread_ex1")
+                {
+                    //richTextBox1.Text += "AA ";
+                    Console.Write("AA ");
+                }
+                else if (Thread.CurrentThread.Name == "Thread_ex2")
+                {
+                    //richTextBox1.Text += "BB ";
+                    Console.Write("BB ");
+                }
+                else
+                {
+                    //richTextBox1.Text += "XX ";
+                    Console.Write("XX ");
+                }
+
+
+                richTextBox1.Text += Thread.CurrentThread.Name + "  ";
+                Thread.Sleep(1000);
+            }
+            /*
+            richTextBox1.Text += "建立 thread : " + Thread.CurrentThread.Name + "\n";
+
+            if (Thread.CurrentThread.Name == "Thread_ex1" && Thread_ex2.ThreadState != ThreadState.Unstarted)
+            {
+                if (thread_ex2b.Join(2000))
+                {
+                    richTextBox1.Text += "Thread_ex2 has termminated.\n";
+                }
+                else
+                {
+                    richTextBox1.Text += "The timeout has elapsed and Thread_ex1 will resume.\n";
+                }
+            }
+
+            //Thread.Sleep(4000);
+            richTextBox1.Text += "\nCurrent thread : " + Thread.CurrentThread.Name + "\n";
+            richTextBox1.Text += "Thread_ex1 狀態 : " + thread_ex2a.ThreadState + "\n";
+            richTextBox1.Text += "Thread_ex2 狀態 : " + thread_ex2b.ThreadState + "\n";
+            */
+        }
+
         private void button20_Click(object sender, EventArgs e)
         {
+            thread_ex2a = new Thread(ThreadProc_ex2);
+            thread_ex2a.Name = "Thread_ex1";
 
+            thread_ex2b = new Thread(ThreadProc_ex2);
+            thread_ex2b.Name = "Thread_ex2";
+
+            richTextBox1.Text += "啟動 thread 2\n";
+            //啟動
+            if (thread_ex2a.ThreadState == System.Threading.ThreadState.Unstarted)
+            {
+                thread_ex2a.Start();
+            }
+
+            if (thread_ex2b.ThreadState == System.Threading.ThreadState.Unstarted)
+            {
+                thread_ex2b.Start();
+            }
+
+            if (thread_ex2a.ThreadState == System.Threading.ThreadState.Aborted)
+            {
+                thread_ex2a = new Thread(ThreadProc_ex2);
+                thread_ex2a.Name = "Thread_ex1";
+                thread_ex2a.Start();
+                richTextBox1.Text += "啟動 thread 2a, 名稱 : " + thread_ex2a.Name + "\n";
+            }
+            if (thread_ex2b.ThreadState == System.Threading.ThreadState.Aborted)
+            {
+                thread_ex2b = new Thread(ThreadProc_ex2);
+                thread_ex2b.Name = "Thread_ex2";
+                thread_ex2b.Start();
+                richTextBox1.Text += "啟動 thread 2b, 名稱 : " + thread_ex2b.Name + "\n";
+            }
         }
 
         private void button21_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "停止 thread 2a\n";
+            thread_ex2a.Abort();
 
+            richTextBox1.Text += "停止 thread 2b\n";
+            thread_ex2b.Abort();
         }
 
         private void button22_Click(object sender, EventArgs e)
         {
-
+            //狀態
+            richTextBox1.Text += "Thread_ex1 狀態 : " + thread_ex2a.ThreadState + "\n";
+            richTextBox1.Text += "Thread_ex2 狀態 : " + thread_ex2b.ThreadState + "\n";
         }
         //Thread使用範例2 SP
 
 
         //Thread使用範例3 ST
+        static Thread thread_ex3 = null;
+        public void ThreadProc_ex3()
+        {
+            while (true)
+            {
+                Console.WriteLine("Hello from a single thread.");
+                Thread.Sleep(1000);
+            }
+        }
+
         private void button30_Click(object sender, EventArgs e)
         {
-
+            thread_ex3 = new Thread(new ThreadStart(ThreadProc_ex3));
+            thread_ex3.Name = "Thread_ex3";
+            thread_ex3.Start();
+            richTextBox1.Text += "啟動 thread 3, 名稱 : " + thread_ex3.Name + "\n";
         }
 
         private void button31_Click(object sender, EventArgs e)
         {
-
+            //停止一個Thread
+            if (thread_ex3 != null)
+            {
+                thread_ex3.Abort();
+            }
         }
 
         private void button32_Click(object sender, EventArgs e)
@@ -261,6 +435,7 @@ namespace vcs_Thread_Example1
         {
 
         }
+
         //Thread使用範例7 SP
 
     }
