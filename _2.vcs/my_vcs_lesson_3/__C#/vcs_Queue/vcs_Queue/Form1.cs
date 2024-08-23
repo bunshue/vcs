@@ -20,6 +20,7 @@ namespace vcs_Queue
         Queue<Bitmap> bitmap_queue = new Queue<Bitmap>();
         Queue<string> string_queue = new Queue<string>();
         Queue<char> char_queue = new Queue<char>();
+        Queue any_queue = new Queue();
 
         Bitmap bitmap1 = null;
         Bitmap bitmap2 = null;
@@ -51,6 +52,9 @@ namespace vcs_Queue
             //richTextBox1.Text += "從佇列尾加字元\n";
             char_queue.Enqueue('A');
 
+            //richTextBox1.Text += "從佇列尾加any\n";
+            any_queue.Enqueue("aaa");
+
             update_queue_count();//更新佇列狀態
         }
 
@@ -66,6 +70,9 @@ namespace vcs_Queue
             //richTextBox1.Text += "從佇列尾加字元\n";
             char_queue.Enqueue('B');
 
+            //richTextBox1.Text += "從佇列尾加any\n";
+            any_queue.Enqueue("bbb");
+
             update_queue_count();//更新佇列狀態
         }
 
@@ -80,6 +87,9 @@ namespace vcs_Queue
 
             //richTextBox1.Text += "從佇列尾加字元\n";
             char_queue.Enqueue('C');
+
+            //richTextBox1.Text += "從佇列尾加any\n";
+            any_queue.Enqueue("ccc");
 
             update_queue_count();//更新佇列狀態
         }
@@ -133,7 +143,19 @@ namespace vcs_Queue
                 }
             }
 
-
+            //any queue取出
+            if (any_queue.Count > 0)
+            {
+                try
+                {
+                    object any = any_queue.Dequeue();
+                    richTextBox1.Text += "從佇列頭取出any : " + any + "\n";
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("xxx錯誤訊息e03 : " + ex.Message);
+                }
+            }
             update_queue_count();//更新佇列狀態
         }
 
@@ -157,54 +179,43 @@ namespace vcs_Queue
             int len = string_queue.Count;
             richTextBox1.Text += "目前Queue內共有 : " + len.ToString() + " 筆資料\n";
 
-            richTextBox1.Text += "Current queue: " + "\n";
+            richTextBox1.Text += "char_queue\n";
             foreach (char c in char_queue)
             {
                 richTextBox1.Text += c + " ";
             }
             richTextBox1.Text += "\n";
 
-        }
+            richTextBox1.Text += "any_queue\n";
+            PrintValues(any_queue);
 
-        private void button7_Click(object sender, EventArgs e)
-        {
-            //创建一个队列
-            Queue myQ = new Queue();
-            myQ.Enqueue("The");//入队
-            myQ.Enqueue("quick");
-            myQ.Enqueue("brown");
-            myQ.Enqueue("fox");
-            myQ.Enqueue(null);//添加null
-            myQ.Enqueue("fox");//添加重复的元素
+            richTextBox1.Text += "any_queue 之 第1個元素\n";
+            Console.WriteLine("(Peek)   \t{0}", any_queue.Peek());
 
-            // 打印队列的数量和值
-            Console.WriteLine("myQ");
-            Console.WriteLine("\tCount:    {0}", myQ.Count);
+            object one = any_queue.Peek();
+            Console.WriteLine("我是第一個元素：{0}", one);
 
-            // 打印队列中的所有值
-            Console.Write("Queue values:");
-            PrintValues(myQ);
+            // 遍歷隊列的所有內容 方法一
+            foreach (Object item in any_queue)
+            {
+                Console.WriteLine("<1> {0}", item);
+            }
 
-            // 打印队列中的第一个元素，并移除
-            Console.WriteLine("(Dequeue)\t{0}", myQ.Dequeue());
+            // 遍歷隊列的所有內容 方法二
+            IEnumerator enumer = any_queue.GetEnumerator();
+            while (enumer.MoveNext())
+            {
+                object o = enumer.Current;
+                Console.WriteLine("<3> " + o);
+            }
 
-            // 打印队列中的所有值
-            Console.Write("Queue values:");
-            PrintValues(myQ);
-
-            // 打印队列中的第一个元素，并移除
-            Console.WriteLine("(Dequeue)\t{0}", myQ.Dequeue());
-
-            // 打印队列中的所有值
-            Console.Write("Queue values:");
-            PrintValues(myQ);
-
-            // 打印队列中的第一个元素
-            Console.WriteLine("(Peek)   \t{0}", myQ.Peek());
-
-            // 打印队列中的所有值
-            Console.Write("Queue values:");
-            PrintValues(myQ);
+            // 將Queue轉換為數組
+            object[] objs = any_queue.ToArray();
+            for (int i = 0; i < objs.Length; i++)
+            {
+                object o = objs[i];
+                Console.Write("<4> " + o + "\n");
+            }
         }
 
         public static void PrintValues(IEnumerable myCollection)
@@ -215,62 +226,6 @@ namespace vcs_Queue
             }
             Console.WriteLine();
         }
-
-        private void button8_Click(object sender, EventArgs e)
-        {
-            //创建一个队列对象Queue
-            Queue queue = new Queue();
-
-            // 队列的插入操作 入队 
-            queue.Enqueue("what21");
-            // 队列中添加数值
-            queue.Enqueue(21);
-            // 队列中添加null 
-            queue.Enqueue(null);
-            // 队列中
-            queue.Enqueue(new object());
-            // 队列中重复插入
-            queue.Enqueue("what21");
-            // 标识一下最好一个
-            queue.Enqueue("我是最后一个了");
-
-            // 遍历队列的所有内容
-            foreach (Object item in queue)
-            {
-                Console.WriteLine("<1> {0}", item);
-            }
-
-            // 队列的数量
-            Console.WriteLine("这个队列的数量为：{0}", queue.Count);
-            // 取列中的第一个元素
-            object one = queue.Peek();
-            Console.WriteLine("我是第一个元素：{0}", one);
-            // 取列中的第一个元素，并移除 
-            object rone = queue.Dequeue();
-            Console.WriteLine("我是第一个元素：{0}", rone);
-
-
-            // 遍历队列的所有内容
-            foreach (Object item in queue)
-            {
-                Console.WriteLine("<2> {0}", item);
-            }
-
-            //  遍历方法二
-            IEnumerator enumer = queue.GetEnumerator();
-            while (enumer.MoveNext())
-            {
-                object o = enumer.Current;
-                Console.WriteLine("<3> " + o);
-            }
-
-            // 将Queue转换为数组
-            object[] objs = queue.ToArray();
-            for (int i = 0; i < objs.Length; i++)
-            {
-                object o = objs[i];
-                Console.Write("<4> " + o + "\n");
-            }
-        }
     }
 }
+

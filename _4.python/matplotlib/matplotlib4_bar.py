@@ -21,7 +21,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 plt.figure(
     num="bar 集合 1",
     figsize=(12, 8),
@@ -491,19 +491,31 @@ barH = 0.5
 plt.barh(quarter, revenue, color="g", height=barH, label="收入")
 plt.barh(quarter, -np.array(cost), color="m", height=barH, label="支出")
 
-plt.title("公司收支表", fontsize=16, color="b")
-plt.xlabel("收入與支出", fontsize=10, color="b")
-plt.ylabel("季度", fontsize=10, color="b")
-
+plt.title("公司收支表")
+plt.xlabel("收入與支出")
+plt.ylabel("季度")
 plt.legend()
-
 
 # 第四張圖
 plt.subplot(234)
 
+x = np.arange(1, 6)
+plt.bar(x - 0.4, [3, 10, 8, 12, 6], width=0.4, ec="none", fc="#e63946")
+plt.bar(x, [6, 3, 12, 5, 8], width=0.4, ec="none", fc="#7fb069")
+
+plt.title("雙色的長條圖")
+
 
 # 第五張圖
 plt.subplot(235)
+
+x = np.arange(0.6, 6)
+A = np.random.randint(1, 15, 6)
+B = np.random.randint(1, 15, 6)
+plt.barh(x, A, fc="#e63946", ec="none")
+plt.barh(x, -B, fc="#7fb069", ec="none")
+
+plt.title("雙向的長條圖")
 
 
 # 第六張圖
@@ -511,7 +523,6 @@ plt.subplot(236)
 
 
 plt.show()
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -658,7 +669,7 @@ x = [1, 2, 3, 4, 5]
 y1 = [3, 48, 33, 8, 38]
 y2 = [3, 48, 33, 8, 38]
 
-labels = ["鼠", "牛", "虎", "兔", "龍"]
+labels = ["鼠", "牛", "虎", "兔", "龍"] # x軸的刻度標籤
 plt.bar(x, y1, tick_label=labels)  # 繪製 y1 長條圖
 plt.bar(x, y2, tick_label=labels, bottom=y1)  # 繪製 y2 長條圖
 
@@ -796,9 +807,9 @@ plt.bar(X + 0.0, AAA, color="r", width=barW, label="AAA")
 plt.bar(X + 0.25, BBB, color="g", width=barW, label="BBB")
 plt.bar(X + 0.5, CCC, color="b", width=barW, label="CCC")
 
-plt.title("銷售報表(並列)", fontsize=16, color="b")
-plt.xlabel("年度", fontsize=10, color="b")
-plt.ylabel("數量", fontsize=10, color="b")
+plt.title("銷售報表(並列)")
+plt.xlabel("年度")
+plt.ylabel("數量")
 plt.legend()  # 繪製圖例
 plt.xticks(X + barW, labels)  # 加註年度標籤
 
@@ -822,9 +833,9 @@ plt.bar(
     bottom=np.array(AAA) + np.array(BBB),
     label="CCC",
 )
-plt.title("銷售報表(累計)", fontsize=16, color="b")
-plt.xlabel("年度", fontsize=10, color="b")
-plt.ylabel("數量", fontsize=10, color="b")
+plt.title("銷售報表(累計)")
+plt.xlabel("年度")
+plt.ylabel("數量")
 plt.legend()
 
 
@@ -845,9 +856,9 @@ plt.barh(X + 0.00, AAA, color="r", height=barH, label="AAA")
 plt.barh(X + barH, BBB, color="g", height=barH, label="BBB")
 plt.barh(X + barH * 2, CCC, color="b", height=barH, label="CCC")
 
-plt.title("銷售報表", fontsize=16, color="b")
-plt.xlabel("數量", fontsize=10, color="b")
-plt.ylabel("年度", fontsize=10, color="b")
+plt.title("銷售報表")
+plt.xlabel("數量")
+plt.ylabel("年度")
 plt.legend()  # 繪製圖例
 
 plt.yticks(X + barH, labels)  # 加註年度標籤
@@ -868,12 +879,11 @@ plt.barh(
     year, CCC, color="red", height=barH, left=np.array(AAA) + np.array(BBB), label="CCC"
 )
 
-plt.title("銷售報表", fontsize=16, color="b")
-plt.xlabel("數量", fontsize=12, color="b")
-plt.ylabel("年度", fontsize=12, color="b")
+plt.title("銷售報表")
+plt.xlabel("數量")
+plt.ylabel("年度")
 plt.legend()
 
-
 # 第五張圖
 plt.subplot(235)
 
@@ -886,152 +896,19 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-
-plt.figure(
-    num="bar 集合 8 new 2",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
-
-# 第一張圖
-plt.subplot(231)
-
-
-# 第二張圖
-plt.subplot(232)
-
-
-# 第三張圖
-plt.subplot(233)
-
-
-# 第四張圖
-plt.subplot(234)
-
-
-# 第五張圖
-plt.subplot(235)
-
-
-# 第六張圖
-plt.subplot(236)
-
-
-plt.show()
-
 print("------------------------------------------------------------")  # 60個
-'''
-def dice_generator(num, sides):
-    # 處理隨機數
-    for i in range(num):
-        ranNum = random.randint(1, sides)  # 產生1-6隨機數
-        dice.append(ranNum)
-
-
-def dice_count(sides):
-    # 計算1-6個出現次數
-    for i in range(1, sides + 1):
-        frequency = dice.count(i)  # 計算i出現在dice串列的次數
-        frequencies.append(frequency)
-
-
-num = 600  # 擲骰子次數
-sides = 6  # 骰子有幾面
-dice = []  # 建立擲骰子的串列
-frequencies = []  # 儲存每一面骰子出現次數串列
-dice_generator(num, sides)  # 產生擲骰子的串列
-dice_count(sides)  # 將骰子串列轉成次數串列
-x = np.arange(6)  # 長條圖x軸座標
-width = 0.35  # 長條圖寬度
-
-# 狀況一
-plt.bar(x, frequencies, width, color="g")  # 繪製長條圖
-plt.xlabel("骰子點數")
-plt.ylabel("出現次數", color="b")
-plt.title("測試 600次 ", fontsize=16, color="b")
-plt.xticks(x, ("1", "2", "3", "4", "5", "6"))
-plt.yticks(np.arange(0, 150, 15))
-"""
-#狀況二
-plt.bar(x,frequencies,width,color='orange',hatch='o')  # 繪製長條圖
-plt.xticks(x, ('1', '2', '3', '4', '5', '6'), color='b')
-plt.ylabel('出現次數',color='b')
-plt.title('測試 600次 ',fontsize=16,color='b')
-plt.yticks(np.arange(0, 150, 15), color='b')
-"""
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-n = 10
-x = [i for i in range(0, n + 1)]  # 長條圖x軸座標
-y = x
-width = 0.35  # 長條圖寬度
-plt.xticks(x)
-plt.bar(x, y, width, color="g")  # 繪製長條圖
-
-# -----------------
-# 雙色的長條圖
-x = np.arange(1, 6)
-plt.bar(x - 0.4, [3, 10, 8, 12, 6], width=0.4, ec="none", fc="#e63946")
-plt.bar(x, [6, 3, 12, 5, 8], width=0.4, ec="none", fc="#7fb069")
-
-# -----------------
-
-
-# -----------------
-
-
-# -----------------
-
-
-# 雙向的長條圖
-x = np.arange(0.6, 6)
-A = np.random.randint(1, 15, 6)
-B = np.random.randint(1, 15, 6)
-plt.barh(x, A, fc="#e63946", ec="none")
-plt.barh(x, -B, fc="#7fb069", ec="none")
-
-
-# -----------------
-
-# 設定長條圖橫軸標籤
-x = [1, 2, 3, 4, 5]
-y = [12, 41, 32, 36, 21]
-labels = ["鼠", "牛", "虎", "兔", "龍"]
-plt.bar(x, y, tick_label=labels)
-
-# -----------------
-
-
-# -----------------
 
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
-
 sys.exit()
 
 
 print("新進")
 
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 """
-plt.xlabel('程式課程', fontsize="10") # 設定 x 軸標題內容及大小
-plt.ylabel('選修人數', fontsize="10") # 設定 y 軸標題標題內容及大小
-
-plt.xlabel('程式課程', fontsize="10") # 設定 x 軸標題內容及大小
-plt.ylabel('選修人數', fontsize="10") # 設定 y 軸標題標題內容及大小
-plt.title('資訊程式課程選修人數', fontsize="18") # 設定圖表標題內容及大小
 -----
 from collections import Counter
 
@@ -1088,3 +965,5 @@ ax.set_ylabel("Money")
 ax.legend(loc=2)
 
 plt.show()
+
+

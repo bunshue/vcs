@@ -38,7 +38,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 plt.figure(
     num="派圖 集合 1",
     figsize=(12, 8),
@@ -190,7 +190,7 @@ plt.pie(
 )
 
 plt.show()
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 plt.figure(
@@ -223,28 +223,6 @@ people = [350, 200, 250, 150, 270]  # 人數
 labelgender = ["男生", "女生"]  # 性別標籤
 gender = [720, 500]  # 性別人數
 colors = ["lightyellow", "lightgreen"]  # 自定性別色彩
-# 建立外層程式語言圓餅圖
-plt.pie(people, pctdistance=0.8, labels=lang, autopct="%1.2f%%")
-# 建立內層性別標籤
-plt.pie(
-    gender,
-    radius=0.6,
-    labels=labelgender,
-    colors=colors,
-    autopct="%1.2f%%",
-    labeldistance=0.2,
-)
-plt.title("程式語言調查表", fontsize=16, color="b")
-
-print("------------------------------------------------------------")  # 60個
-
-plt.subplot(233)
-
-lang = ["Python", "C", "Java", "C++", "PHP"]  # 程式語言標籤
-people = [350, 200, 250, 150, 270]  # 人數
-labelgender = ["男生", "女生"]  # 性別標籤
-gender = [720, 500]  # 性別人數
-colors = ["lightyellow", "lightgreen"]  # 自定性別色彩
 data_no = [1, 0, 0, 0]
 # 建立外層程式語言圓餅圖
 plt.pie(people, pctdistance=0.8, labels=lang, autopct="%1.2f%%")
@@ -257,31 +235,37 @@ plt.pie(
     autopct="%1.2f%%",
     labeldistance=0.45,
 )
-plt.pie(data_no, radius=0.2, colors="w")  # 建立最內層空的圓餅
+# 建立最內層空的圓餅
+plt.pie(data_no, radius=0.2, colors="w")
 plt.title("程式語言調查表", fontsize=16, color="b")
 
+print("------------------------------------------------------------")  # 60個
+
+plt.subplot(233)
+
+product = ["家電", "生活用品", "圖書", "保健", "彩妝"]  # 產品標籤
+revenue = [23000, 18000, 12000, 15000, 16000]  # 業績
+#plt.pie(revenue, labels=product, autopct="%1.2f%%")
+
+patches = plt.pie(revenue, labels=product, autopct="%1.2f%%")
+
+#plt.legend()
+plt.legend(
+    patches[0], product, loc="center left", title="產品類別", bbox_to_anchor=(1, 0, 0.5, 1)
+)
+plt.title("銷售品項分析", fontsize=16, color="b")
 
 print("------------------------------------------------------------")  # 60個
 
 plt.subplot(234)
 
-product = ["家電", "生活用品", "圖書", "保健", "彩妝"]  # 產品標籤
-revenue = [23000, 18000, 12000, 15000, 16000]  # 業績
-plt.pie(revenue, labels=product, autopct="%1.2f%%")
-plt.legend()
-plt.title("銷售品項分析", fontsize=16, color="b")
+
+
 
 print("------------------------------------------------------------")  # 60個
 
 plt.subplot(235)
 
-product = ["家電", "生活用品", "圖書", "保健", "彩妝"]  # 產品標籤
-revenue = [23000, 18000, 12000, 15000, 16000]  # 業績
-patches = plt.pie(revenue, labels=product, autopct="%1.2f%%")
-plt.legend(
-    patches[0], product, loc="center left", title="產品類別", bbox_to_anchor=(1, 0, 0.5, 1)
-)
-plt.title("銷售品項分析", fontsize=16, color="b")
 
 print("------------------------------------------------------------")  # 60個
 
@@ -290,131 +274,6 @@ plt.subplot(236)
 
 print("------------------------------------------------------------")  # 60個
 
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("作業完成")
-print("------------------------------------------------------------")  # 60個
-
-
-print('新進派圖')
-
-
-area = ["大陸", "東南亞", "東北亞", "美國", "歐洲", "澳紐"]
-people = [10000, 12600, 9600, 7500, 5100, 4800]
-"""
-plt.pie(people, labels=area)
-plt.pie(people, labels=area, autopct="%d%%")
-plt.pie(people, labels=area, autopct="%1.2f%%")
-exp = [0.0, 0.0, 0.0, 0.0, 0.0, 0.1]
-plt.pie(people, labels=area, explode=exp, autopct="%1.2f%%")
-
-exp = [0.0, 0.0, 0.1, 0.0, 0.0, 0.1]
-plt.pie(people, labels=area, explode=exp, autopct="%1.2f%%")
-
-exp = [0.0, 0.0, 0.0, 0.0, 0.0, 0.1]
-plt.pie(people, labels=area, explode=exp, autopct="%1.2f%%", startangle=90)
-
-exp = [0.0, 0.0, 0.0, 0.0, 0.0, 0.1]
-plt.pie(people, labels=area, explode=exp, autopct="%1.2f%%", startangle=90, shadow=True)
-
-exp = [0.0, 0.0, 0.1, 0.0, 0.0, 0.1]
-colors = ["#ff9999", "#66b4ff", "#99ff88", "#ffcc99", "#00ffff", "#ff00ff"]
-plt.pie(people, labels=area, explode=exp, autopct="%1.2f%%", colors=colors)
-
-exp = [0.0, 0.0, 0.1, 0.0, 0.0, 0.1]
-piecolors = ["aqua", "g", "pink", "yellow", "m", "salmon"]
-patches, texts, autotexts = plt.pie(
-    people, labels=area, explode=exp, autopct="%1.2f%%", colors=piecolors
-)
-for txt in texts:  # 設定標籤顏色
-    txt.set_color("m")
-
-exp = [0.0, 0.0, 0.1, 0.0, 0.0, 0.1]
-patches, texts, autotexts = plt.pie(people, labels=area, explode=exp, autopct="%1.2f%%")
-for txt in texts:  # 設定標籤顏色
-    txt.set_color("m")
-for txt in autotexts:  # 設定百分比顏色
-    txt.set_color("w")
-
-exp = [0.0, 0.0, 0.1, 0.0, 0.0, 0.1]
-patches, texts, autotexts = plt.pie(people, labels=area, explode=exp, autopct="%1.2f%%")
-for txt in texts:  # 設定標籤
-    txt.set_color("m")  # 色彩設定
-    txt.set_size(14)  # 字型大小
-for txt in autotexts:  # 設定百分比
-    txt.set_color("w")  # 色彩設定
-    txt.set_size(12)  # 字型大小
-"""
-
-"""
-patches = plt.pie(people, labels=area, autopct="%1.2f%%")
-for edgecolor in patches[0]:
-    edgecolor.set_edgecolor("w")  # 設定圓餅邊界線是白色
-plt.title("使用 set_edgecolor() 函數", fontsize=16, color="b")
-"""
-"""
-plt.pie(people, labels=area, autopct="%1.2f%%", wedgeprops={"edgecolor": "w"})
-plt.title("使用 wedgeprops 字典", fontsize=16, color="b")
-"""
-
-"""
-plt.pie(people, labels=area, autopct="%1.2f%%", wedgeprops={"ec": "w", "lw": 5})
-plt.title("使用 wedgeprops ec 和 lw", fontsize=16, color="b")
-"""
-
-#plt.title("五月份國外旅遊調查表", fontsize=16, color="b")
-
-"""
-fig, axs = plt.subplots(nrows=2, ncols=2)  # 建立 2 x 2 子圖
-# 建立 [0,0]子圖
-axs[0, 0].pie(
-    people, labels=area, autopct="%1.2f%%", wedgeprops={"ec": "w", "hatch": "-"}
-)
-axs[0, 0].set_title("hatch = '-'", color="m")
-# 建立 [0,1]子圖
-axs[0, 1].pie(
-    people, labels=area, autopct="%1.2f%%", wedgeprops={"ec": "w", "hatch": "+"}
-)
-axs[0, 1].set_title("hatch = '+'", color="m")
-# 建立 [1,0]子圖
-axs[1, 0].pie(
-    people, labels=area, autopct="%1.2f%%", wedgeprops={"ec": "w", "hatch": "o"}
-)
-axs[1, 0].set_title("hatch = 'o'", color="m")
-# 建立 [1,1]子圖
-axs[1, 1].pie(
-    people, labels=area, autopct="%1.2f%%", wedgeprops={"ec": "w", "hatch": "*"}
-)
-axs[1, 1].set_title("hatch = '*'", color="m")
-plt.suptitle("使用 wedgeprops 字典的 hatch 參數", fontsize=16, color="b")
-
-fig.tight_layout()
-
-"""
-
-"""
-plt.pie(people, labels=area, autopct="%1.2f%%")
-plt.title("使用 plt.axis() 函數", fontsize=16, color="b")
-plt.axis("equal")  # 圓餅圖保持圓形
-"""
-
-"""
-fig, ax = plt.subplots()
-ax.pie(people, labels=area, autopct="%1.2f%%")
-ax.set_title("使用 ax.set() 函數", fontsize=16, color="b")
-ax.set(aspect="equal")  # 圓餅圖保持圓形
-"""
 
 plt.show()
 
@@ -529,10 +388,128 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
+print("------------------------------------------------------------")  # 60個
 
 
+print("------------------------------------------------------------")  # 60個
 
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
 sys.exit()
+
+
+area = ["大陸", "東南亞", "東北亞", "美國", "歐洲", "澳紐"]
+people = [10000, 12600, 9600, 7500, 5100, 4800]
+"""
+plt.pie(people, labels=area)
+plt.pie(people, labels=area, autopct="%d%%")
+plt.pie(people, labels=area, autopct="%1.2f%%")
+exp = [0.0, 0.0, 0.0, 0.0, 0.0, 0.1]
+plt.pie(people, labels=area, explode=exp, autopct="%1.2f%%")
+
+exp = [0.0, 0.0, 0.1, 0.0, 0.0, 0.1]
+plt.pie(people, labels=area, explode=exp, autopct="%1.2f%%")
+
+exp = [0.0, 0.0, 0.0, 0.0, 0.0, 0.1]
+plt.pie(people, labels=area, explode=exp, autopct="%1.2f%%", startangle=90)
+
+exp = [0.0, 0.0, 0.0, 0.0, 0.0, 0.1]
+plt.pie(people, labels=area, explode=exp, autopct="%1.2f%%", startangle=90, shadow=True)
+
+exp = [0.0, 0.0, 0.1, 0.0, 0.0, 0.1]
+colors = ["#ff9999", "#66b4ff", "#99ff88", "#ffcc99", "#00ffff", "#ff00ff"]
+plt.pie(people, labels=area, explode=exp, autopct="%1.2f%%", colors=colors)
+
+exp = [0.0, 0.0, 0.1, 0.0, 0.0, 0.1]
+piecolors = ["aqua", "g", "pink", "yellow", "m", "salmon"]
+patches, texts, autotexts = plt.pie(
+    people, labels=area, explode=exp, autopct="%1.2f%%", colors=piecolors
+)
+for txt in texts:  # 設定標籤顏色
+    txt.set_color("m")
+
+exp = [0.0, 0.0, 0.1, 0.0, 0.0, 0.1]
+patches, texts, autotexts = plt.pie(people, labels=area, explode=exp, autopct="%1.2f%%")
+for txt in texts:  # 設定標籤顏色
+    txt.set_color("m")
+for txt in autotexts:  # 設定百分比顏色
+    txt.set_color("w")
+
+exp = [0.0, 0.0, 0.1, 0.0, 0.0, 0.1]
+patches, texts, autotexts = plt.pie(people, labels=area, explode=exp, autopct="%1.2f%%")
+for txt in texts:  # 設定標籤
+    txt.set_color("m")  # 色彩設定
+    txt.set_size(14)  # 字型大小
+for txt in autotexts:  # 設定百分比
+    txt.set_color("w")  # 色彩設定
+    txt.set_size(12)  # 字型大小
+"""
+
+"""
+patches = plt.pie(people, labels=area, autopct="%1.2f%%")
+for edgecolor in patches[0]:
+    edgecolor.set_edgecolor("w")  # 設定圓餅邊界線是白色
+plt.title("使用 set_edgecolor() 函數", fontsize=16, color="b")
+"""
+"""
+plt.pie(people, labels=area, autopct="%1.2f%%", wedgeprops={"edgecolor": "w"})
+plt.title("使用 wedgeprops 字典", fontsize=16, color="b")
+"""
+
+"""
+plt.pie(people, labels=area, autopct="%1.2f%%", wedgeprops={"ec": "w", "lw": 5})
+plt.title("使用 wedgeprops ec 和 lw", fontsize=16, color="b")
+"""
+
+#plt.title("五月份國外旅遊調查表", fontsize=16, color="b")
+
+"""
+fig, axs = plt.subplots(nrows=2, ncols=2)  # 建立 2 x 2 子圖
+# 建立 [0,0]子圖
+axs[0, 0].pie(
+    people, labels=area, autopct="%1.2f%%", wedgeprops={"ec": "w", "hatch": "-"}
+)
+axs[0, 0].set_title("hatch = '-'", color="m")
+# 建立 [0,1]子圖
+axs[0, 1].pie(
+    people, labels=area, autopct="%1.2f%%", wedgeprops={"ec": "w", "hatch": "+"}
+)
+axs[0, 1].set_title("hatch = '+'", color="m")
+# 建立 [1,0]子圖
+axs[1, 0].pie(
+    people, labels=area, autopct="%1.2f%%", wedgeprops={"ec": "w", "hatch": "o"}
+)
+axs[1, 0].set_title("hatch = 'o'", color="m")
+# 建立 [1,1]子圖
+axs[1, 1].pie(
+    people, labels=area, autopct="%1.2f%%", wedgeprops={"ec": "w", "hatch": "*"}
+)
+axs[1, 1].set_title("hatch = '*'", color="m")
+plt.suptitle("使用 wedgeprops 字典的 hatch 參數", fontsize=16, color="b")
+
+fig.tight_layout()
+
+"""
+
+"""
+plt.pie(people, labels=area, autopct="%1.2f%%")
+plt.title("使用 plt.axis() 函數", fontsize=16, color="b")
+plt.axis("equal")  # 圓餅圖保持圓形
+"""
+
+"""
+fig, ax = plt.subplots()
+ax.pie(people, labels=area, autopct="%1.2f%%")
+ax.set_title("使用 ax.set() 函數", fontsize=16, color="b")
+ax.set(aspect="equal")  # 圓餅圖保持圓形
+"""
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
 
 """
 

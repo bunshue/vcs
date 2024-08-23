@@ -13,8 +13,6 @@
         /// <param name="disposing">如果應該處置 Managed 資源則為 true，否則為 false。</param>
         protected override void Dispose(bool disposing)
         {
-            //把thread停掉
-            //timechange.stop();
             if (disposing && (components != null))
             {
                 components.Dispose();
@@ -30,14 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.button11 = new System.Windows.Forms.Button();
@@ -51,103 +41,16 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
-            this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("新細明體", 16F);
-            this.label1.Location = new System.Drawing.Point(37, 39);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(32, 22);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "時";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("新細明體", 16F);
-            this.label2.Location = new System.Drawing.Point(87, 39);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(32, 22);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "分";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("新細明體", 16F);
-            this.label3.Location = new System.Drawing.Point(141, 39);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(32, 22);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "秒";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(115, 46);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(20, 12);
-            this.label4.TabIndex = 3;
-            this.label4.Text = " ：";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(66, 46);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(20, 12);
-            this.label5.TabIndex = 4;
-            this.label5.Text = " ：";
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.button6);
-            this.groupBox1.Controls.Add(this.button5);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Location = new System.Drawing.Point(12, 23);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(374, 88);
-            this.groupBox1.TabIndex = 5;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "時鐘";
-            // 
-            // button6
-            // 
-            this.button6.Font = new System.Drawing.Font("新細明體", 14F);
-            this.button6.Location = new System.Drawing.Point(281, 22);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(70, 56);
-            this.button6.TabIndex = 9;
-            this.button6.Text = "關閉時鐘";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
-            // 
-            // button5
-            // 
-            this.button5.Font = new System.Drawing.Font("新細明體", 14F);
-            this.button5.Location = new System.Drawing.Point(197, 21);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(70, 56);
-            this.button5.TabIndex = 8;
-            this.button5.Text = "啟動時鐘";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
-            // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(12, 509);
+            this.richTextBox1.Location = new System.Drawing.Point(639, 12);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(802, 164);
+            this.richTextBox1.Size = new System.Drawing.Size(422, 581);
             this.richTextBox1.TabIndex = 7;
             this.richTextBox1.Text = "";
             // 
@@ -164,7 +67,7 @@
             this.groupBox3.Controls.Add(this.pictureBox1);
             this.groupBox3.Controls.Add(this.button1);
             this.groupBox3.Controls.Add(this.button4);
-            this.groupBox3.Location = new System.Drawing.Point(12, 128);
+            this.groupBox3.Location = new System.Drawing.Point(12, 12);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(611, 360);
             this.groupBox3.TabIndex = 8;
@@ -292,18 +195,15 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1073, 685);
+            this.ClientSize = new System.Drawing.Size(1073, 608);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.richTextBox1);
-            this.Controls.Add(this.groupBox1);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Form1";
             this.Text = "時鐘";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
@@ -314,20 +214,12 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button5;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button7;

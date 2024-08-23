@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace vcs_Thread_Example
+namespace vcs_Thread_Example2
 {
     class ChangeTime
     {

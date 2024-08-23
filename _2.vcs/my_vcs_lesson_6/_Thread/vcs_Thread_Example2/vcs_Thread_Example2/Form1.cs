@@ -15,15 +15,11 @@ namespace vcs_Thread_Example2
 {
     public partial class Form1 : Form
     {
-        private Thread thread_ex1;
-        private bool flag_thread_running = false;
 
         // This value is incremented by the thread.
         public int Value = 0;
         // Make and start a new counter object.
         private int thread_num = 0;
-
-        static Thread thread_ex3 = null;
 
         public Form1()
         {
@@ -39,40 +35,18 @@ namespace vcs_Thread_Example2
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if (timechange != null)
+            {
+                //把thread停掉
+                timechange.stop();
+            }
+
+
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            if (flag_thread_running == false)
-            {
-                flag_thread_running = true;
-                button1.Text = "停止";
-                thread_ex1 = new Thread(new ThreadStart(this.ThreadProc_ex1));
-                thread_ex1.Start();
-            }
-            else
-            {
-                button1.Text = "啟動";
-                flag_thread_running = false;
-                richTextBox1.Text += "\n";
-            }
-        }
-
-        private void ThreadProc_ex1()
-        {
-            richTextBox1.Text += "啟動一個thread ";
-            while (flag_thread_running)
-            {
-                //無限迴圈
-                richTextBox1.Text += "A";
-
-                Thread.Sleep(500);
-            }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -171,55 +145,6 @@ namespace vcs_Thread_Example2
             richTextBox1.ScrollToCaret();       //RichTextBox顯示訊息自動捲動，顯示最後一行
         }
 
-
-
-
-        thread1 obj;
-        Thread thread_ex5;
-
-        class thread1
-        {
-            private String title;
-            public thread1(String title)
-            {
-                this.title = title;
-            }
-            int aa = 0;
-            public void runMe()
-            {
-                while (true)
-                {
-                    aa++;
-                    System.Diagnostics.Debug.Print("即時運算視窗輸出除錯訊息 測試訊息！！！Form1！！！ title = " + title + "  " + aa.ToString());
-                    Console.Write(title + "\r\n");
-                    System.Threading.Thread.Sleep(1000);
-                }
-            }
-        }
-
-        int a = 0;
-        //建立一個Thread 到 偵錯/視窗/即時運算 看結果
-        private void button17_Click(object sender, EventArgs e)
-        {
-            a++;
-            string thread_name = "Thread測試_" + a.ToString();
-            richTextBox1.Text += "開啟thread, 名稱 : " + thread_name + "\n";
-            richTextBox1.Text += "啟動 thread 5\n";
-            obj = new thread1(thread_name);
-            thread_ex5 = new Thread(obj.runMe);
-            thread_ex5.Start();
-        }
-
-        private void button16_Click(object sender, EventArgs e)
-        {
-            thread_ex5.Abort();
-        }
-
-        private void button15_Click(object sender, EventArgs e)
-        {
-
-        }
-
         //開啟關閉thread    ST
         System.Timers.Timer tt = new System.Timers.Timer(1234);
         int number = 0;
@@ -253,46 +178,76 @@ namespace vcs_Thread_Example2
 
         }
 
-        private void ThreadProc_ex6a()
+        //委派function
+        public delegate void InvokeFunction(int h, int m, int s);
+        //設定時間
+        public void setTime(int h, int m, int s)
         {
-            while (true)
-            {
-                Console.Write("A");
-                richTextBox1.Text += "A";
-
-                Thread.Sleep(300);
-            }
+            setHH(h);
+            setMM(m);
+            setSS(s);
         }
 
-        private void ThreadProc_ex6b()
+        public void setHH(int h)
         {
-            while (true)
-            {
-                Console.Write("B");
-                richTextBox1.Text += "B";
-
-                Thread.Sleep(1000);
-            }
+            this.label1.Text = h.ToString();
+        }
+        public void setMM(int m)
+        {
+            this.label2.Text = m.ToString();
+        }
+        public void setSS(int s)
+        {
+            this.label3.Text = s.ToString();
         }
 
-        private void button26_Click(object sender, EventArgs e)
+        private ChangeTime timechange;
+        private void button1_Click(object sender, EventArgs e)
         {
-            Thread thread_ex6a = new Thread(new ThreadStart(ThreadProc_ex6a));
-            thread_ex6a.IsBackground = true;
-            thread_ex6a.Start();
+            //啟動時鐘
+            //產生一個類別，專門來管理時間運作
+            timechange = new ChangeTime(this);
+            //timechange.change();
 
-            Thread thread_ex6b = new Thread(new ThreadStart(ThreadProc_ex6b));
-            thread_ex6b.IsBackground = true;
-            thread_ex6b.Start();
+            //使用一個thread來增加時間的秒數
+            System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(timechange.run));
+            thread.Start();
 
         }
 
-        private void button25_Click(object sender, EventArgs e)
+        private void button6_Click(object sender, EventArgs e)
+        {
+            //關閉時鐘
+            if (timechange != null)
+                timechange.stop();
+        }
+
+        private void button9_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void button24_Click(object sender, EventArgs e)
+        private void button8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button10_Click(object sender, EventArgs e)
         {
 
         }

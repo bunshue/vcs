@@ -103,7 +103,6 @@ plt.ylabel("機率")
 # plt.title(r"$\mu=100,\ \sigma=15$, 加 理想曲線", fontweight="bold")
 plt.title(
     r"$f(x)=\frac{1}{\sigma\sqrt{2\pi}}e^{\frac{-1}{2}(\frac{x-\mu}{\sigma})^{2}}    $",
-    fontsize=20,
 )
 
 # 第三張圖
@@ -414,20 +413,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("作業完成")
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
 print("hist參數大合集")
 
 plt.figure(figsize=(12, 8))
@@ -503,7 +488,7 @@ n, bins, patches = plt.hist(
 print("標示高度")
 for i in range(len(n)):
     print("x = ", bins[i] + 10, ", y = ", n[i], ", text =", int(n[i]))
-    plt.text(bins[i] + 10, n[i], int(n[i]), ha="center", va="bottom", fontsize=12)
+    plt.text(bins[i] + 10, n[i], int(n[i]), ha="center", va="bottom")
 
 print("返回值")
 print("每一柱的高度(y軸) : ", n)
@@ -612,89 +597,46 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
+sys.exit()
+
+
 
 print('新進')
-
 
 print("------------------------------------------------------------")  # 60個
 
 x = [4, 3, 3, 2, 5, 4, 5, 6, 9, 4, 5, 5, 3, 0, 1, 7, 8, 7, 5, 6, 4]
-"""
+
 plt.hist(x)
-plt.hist(x, color="g")
-h = plt.hist(x, color="g")
+plt.hist(x, color="r")
+
+num_bins = 5  # 直方圖顯示時的束數
+
+h = plt.hist(x, bins=num_bins, color="g")
 print(f"bins的 y 軸 = {h[0]}")
 print(f"bins的 x 軸 = {h[1]}")
-"""
-plt.hist(x, color="g", rwidth=0.8)  # 寬度設定 80%
-#plt.hist(x, bins=5, color="g", cumulative=True, rwidth=0.8) # 累計
-plt.xlabel("值")
+
+#plt.hist(x, color="g", rwidth=0.8)  # 寬度設定 80%
+#plt.hist(x, bins=num_bins, color="g", cumulative=True, rwidth=0.8) # 累計
 plt.ylabel("頻率")
 
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-sides = 6
-# 建立 10000 個 1-6(含) 的整數隨機數
-dice = np.random.randint(1, sides + 1, size=10000)  # 建立隨機數
-# 設定 bins = sides = 6
-h = plt.hist(dice, sides)  # 繪製hist圖
-
-print("骰子出現次數 : ", h[0])
-
-plt.ylabel("次數")
-plt.xlabel("骰子點數")
-plt.title("測試 10000 次")
-
-plt.show()
-'''
-
-print("------------------------------------------------------------")  # 60個
-
 N = 10000 # 樣本數
-s = np.random.randn(N)  # 隨機數, 預設 平均值 = 0.0, 標準差 = 1
+x = np.random.randn(N)  # 隨機數, 預設 平均值 = 0.0, 標準差 = 1
 
 mu = 100  # 均值
 sigma = 15  # 標準差
-s = np.random.normal(mu, sigma, N)  # 隨機數
+x = np.random.normal(mu, sigma, N)  # 隨機數
 bins = 50 # 束
-plt.hist(s, bins, density=True)  # 直方圖
+plt.hist(x, bins, density=True)  # 直方圖
 
-plt.xlabel("智商指數", color="b")
-plt.ylabel("機率", color="b")
-plt.title("智商IQ指標直方圖", color="m")
-plt.text(120, 0.02, r"$\mu=100,\ \sigma=15$", color="b")
+plt.ylabel("機率")
+plt.title("mu=100, sigma=15之常態分佈")
+plt.text(120, 0.02, r"$\mu=100,\ \sigma=15$")
 #plt.grid(True)
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-x1 = np.random.normal(50, 5, 10000)
-x2 = np.random.normal(60, 5, 50000)
-plt.hist(x1, range=(30, 80), bins=20, color="g", alpha=0.8)
-plt.hist(x2, range=(30, 80), bins=20, color="m", alpha=0.8)
-"""
-#用density
-plt.hist(x1, range=(30, 80), bins=20, color="g", alpha=0.8, density=True)
-plt.hist(x2, range=(30, 80), bins=20, color="m", alpha=0.8, density=True)
-"""
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-N = 10000 # 樣本數
-left = -2
-peak = 8  # mode尖峰值
-right = 10
-bins = 50 # 束
-s = np.random.triangular(left, peak, right, N)
-plt.hist(s, bins, density=False)
-plt.title("np.random.triangular")
-"""
-#用density
-plt.hist(s, bins, density=True)
-"""
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
@@ -702,9 +644,9 @@ print("------------------------------------------------------------")  # 60個
 N = 10000 # 樣本數
 mu = 0  # 平均值
 sigma = 1  # 標準差
-s = np.random.randn(N)  # 隨機數
+x = np.random.randn(N)  # 隨機數
 bins = 50 # 束
-count, bins, ignored = plt.hist(s, bins, density=True)  # 直方圖
+count, bins, ignored = plt.hist(x, bins, density=True)  # 直方圖
 # 繪製折線圖
 plt.plot(
     bins,
@@ -712,7 +654,21 @@ plt.plot(
     linewidth=2,
     color="r",
 )
-plt.title("常態分布 " + r"$\mu=0, \sigma=1$", fontsize=16)
+plt.title("常態分布 " + r"$\mu=0, \sigma=1$")
+
+plt.show()
+
+'''
+print("------------------------------------------------------------")  # 60個
+
+import seaborn as sns
+
+N = 10000 # 樣本數
+x = np.random.uniform(size=N)  # 隨機數
+bins = 50 # 束
+plt.hist(x, bins, density=True)  # 直方圖
+
+sns.kdeplot(x)  # 核密度估計圖, 多了外圍那圈
 
 plt.show()
 
@@ -723,25 +679,71 @@ import seaborn as sns
 N = 10000 # 樣本數
 mu = 0  # 平均值
 sigma = 1  # 標準差
-s = np.random.randn(N)  # 隨機數
+
+x = np.random.randn(N)  # 隨機數
 bins = 50 # 束
-count, bins, ignored = plt.hist(s, bins, density=True)  # 直方圖
-sns.kdeplot(s)  # 核密度估計圖
-plt.title("使用kdeplot()函數繪製常態分布 " + r"$\mu=0, \sigma=1$", fontsize=16)
+count, bins, ignored = plt.hist(x, bins, density=True)  # 直方圖
+
+sns.kdeplot(x)  # 核密度估計圖, 多了外圍那圈
+
+plt.title("使用kdeplot()函數繪製常態分布 " + r"$\mu=0, \sigma=1$")
 
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-import seaborn as sns
+N = 10000 # 樣本數
+x = np.random.randn(N, 3)
+colors = ["red", "green", "blue"]
+bins = 50 # 束
+plt.hist(x, bins, density=True, color=colors, label=colors)
+plt.legend()
+plt.title("3 組數據的常態分佈隨機數")
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+N1 = 10000 # 樣本數
+mu1 = 50  # 均值
+sigma1 = 5  # 標準差
+
+N2 = 10000 # 樣本數
+mu2 = 60  # 均值
+sigma2 = 5  # 標準差
+
+x1 = np.random.normal(mu1, sigma1, N1)
+x2 = np.random.normal(mu2, sigma2, N2)
+
+plt.hist(x1, range=(30, 80), bins=20, color="r", alpha=0.8)
+plt.hist(x2, range=(30, 80), bins=20, color="g", alpha=0.8)
+
+"""
+#用density
+plt.hist(x1, range=(30, 80), bins=20, color="r", alpha=0.8, density=True)
+plt.hist(x2, range=(30, 80), bins=20, color="g", alpha=0.8, density=True)
+"""
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
 
 N = 10000 # 樣本數
-s = np.random.uniform(size=N)  # 隨機數
+
+left = -2
+peak = 8  # mode尖峰值
+right = 10
+
 bins = 50 # 束
-plt.hist(s, bins, density=True)  # 直方圖
-sns.kdeplot(s)  # 核密度估計圖
+x = np.random.triangular(left, peak, right, N)
+plt.hist(x, bins, density=False)
+plt.title("np.random.triangular")
+
+#用density
+#plt.hist(x, bins, density=True)
 
 plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個
 
@@ -836,21 +838,11 @@ labels = ["數學", "化學"]
 plt.hist([math, chem], bins, label=labels)
 plt.ylabel("學生人數")
 plt.xlabel("分數")
-plt.title("成績表", fontsize=16)
+plt.title("成績表")
 plt.legend()
 
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
-
-N = 10000 # 樣本數
-x = np.random.randn(N, 3)
-colors = ["red", "green", "blue"]
-bins = 50 # 束
-plt.hist(x, bins, density=True, color=colors, label=colors)
-plt.legend()
-plt.title("3 組數據的常態分佈隨機數", fontsize=16)
-plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -918,8 +910,6 @@ sys.exit()
 
 
 import matplotlib
-
-np.random.seed(10)
 
 # 產生常態分佈的數據:平均數0, 標準差1, 1000個資料
 x = np.random.normal(0, 1, 1000)
@@ -1013,3 +1003,4 @@ plt.scatter(X, Y, s=200, c="r")
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
+
