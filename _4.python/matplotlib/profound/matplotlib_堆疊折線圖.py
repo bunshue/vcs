@@ -1,10 +1,15 @@
-# plot 集合
+"""
+matplotlib_堆疊折線圖
+
+
+"""
 
 print("------------------------------------------------------------")  # 60個
 
 # 共同
 import os
 import sys
+import time
 import math
 import random
 import numpy as np
@@ -26,11 +31,12 @@ working = [5, 4, 6, 5, 8, 4, 3]  # 設定每天工作時間
 playing = [2, 5, 3, 4, 5, 8, 6]  # 設定每天玩手機的時間
 labels = ["工作", "玩手機"]
 xlabels = ["星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"]
+
 # 繪製堆疊折線圖
 plt.stackplot(days, working, playing, labels=labels)
-plt.xlabel("日期", fontsize=12, color="b")
-plt.ylabel("時數", fontsize=12, color="b")
-plt.title("繪製一週工作和玩手機的時間", fontsize=16, color="b")
+plt.xlabel("日期")
+plt.ylabel("時數")
+plt.title("繪製一週工作和玩手機的時間")
 plt.xticks(days, xlabels)
 plt.legend(loc="upper left")
 
@@ -46,11 +52,12 @@ sleeping = [10, 9, 9, 6, 7, 6, 8]  # 設定每天睡眠時間
 labels = ["工作", "玩手機", "吃飯", "睡眠"]
 xlabels = ["星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"]
 colors = ["orange", "lightgreen", "yellow", "lightblue"]
+
 # 繪製堆疊折線圖
 plt.stackplot(days, working, playing, eating, sleeping, labels=labels, colors=colors)
-plt.xlabel("日期", fontsize=12, color="b")
-plt.ylabel("時數", fontsize=12, color="b")
-plt.title("繪製一週時間分配圖", fontsize=16, color="b")
+plt.xlabel("日期")
+plt.ylabel("時數")
+plt.title("繪製一週時間分配圖")
 plt.xticks(days, xlabels)
 plt.legend()
 
@@ -65,7 +72,7 @@ y3 = 2.0 * x + 2
 plt.stackplot(x, y1, y2, y3)
 plt.xlim((0, 10))
 plt.ylim((0, 60))
-plt.title("基礎數學公式的堆疊", fontsize=16, color="b")
+plt.title("基礎數學公式的堆疊")
 
 plt.show()
 
@@ -79,11 +86,12 @@ population = {
     "大洋洲": [88, 95, 110, 130, 150],
 }
 year = ["1980", "1990", "2000", "2010", "2020"]
+
 plt.stackplot(year, population.values(), labels=population.keys())
 plt.legend(loc="upper left")
-plt.xlabel("年度", color="b")
-plt.ylabel("百萬人", color="b")
-plt.title("世界人口統計", fontsize=16, color="b")
+plt.xlabel("年度")
+plt.ylabel("百萬人")
+plt.title("世界人口統計")
 
 plt.show()
 
@@ -96,14 +104,15 @@ deaths = [2, 2, 6, 7, 10, 12, 13]  # 往生人數
 colors = ["orange", "green", "red"]
 labels = ["疑似病例", "康原病例", "往生人數"]
 xlabels = ["星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"]
+
 # 建立堆疊折線圖
 plt.stackplot(
     days, suspected, cured, deaths, colors=colors, labels=labels, baseline="zero"
 )
 plt.legend(loc="upper left")
-plt.title("病例數據統計資料", fontsize=16, color="b")
-plt.xlabel("一週時間", fontsize=12, color="b")
-plt.ylabel("全部病例數", fontsize=12, color="b")
+plt.title("病例數據統計資料")
+plt.xlabel("一週時間")
+plt.ylabel("全部病例數")
 plt.xticks(days, xlabels)
 
 plt.show()
@@ -117,14 +126,15 @@ deaths = [2, 2, 6, 7, 10, 12, 13]  # 往生人數
 colors = ["orange", "green", "red"]
 labels = ["疑似病例", "康原病例", "往生人數"]
 xlabels = ["星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"]
+
 # 建立堆疊折線圖
 plt.stackplot(
     days, suspected, cured, deaths, colors=colors, labels=labels, baseline="sym"
 )
 plt.legend(loc="upper left")
-plt.title("病例數據統計資料", fontsize=16, color="b")
-plt.xlabel("一週時間", fontsize=12, color="b")
-plt.ylabel("全部病例數", fontsize=12, color="b")
+plt.title("病例數據統計資料")
+plt.xlabel("一週時間")
+plt.ylabel("全部病例數")
 plt.xticks(days, xlabels)
 
 plt.show()
@@ -138,14 +148,15 @@ deaths = [2, 2, 6, 7, 10, 12, 13]  # 往生人數
 colors = ["orange", "green", "red"]
 labels = ["疑似病例", "康原病例", "往生人數"]
 xlabels = ["星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"]
+
 # 建立堆疊折線圖
 plt.stackplot(
     days, suspected, cured, deaths, colors=colors, labels=labels, baseline="wiggle"
 )
 plt.legend(loc="upper left")
-plt.title("病例數據統計資料", fontsize=16, color="b")
-plt.xlabel("一週時間", fontsize=12, color="b")
-plt.ylabel("全部病例數", fontsize=12, color="b")
+plt.title("病例數據統計資料")
+plt.xlabel("一週時間")
+plt.ylabel("全部病例數")
 plt.xticks(days, xlabels)
 
 plt.show()
@@ -159,6 +170,7 @@ deaths = [2, 2, 6, 7, 10, 12, 13]  # 往生人數
 colors = ["orange", "green", "red"]
 labels = ["疑似病例", "康原病例", "往生人數"]
 xlabels = ["星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"]
+
 # 建立堆疊折線圖
 plt.stackplot(
     days,
@@ -170,9 +182,9 @@ plt.stackplot(
     baseline="weighted_wiggle",
 )
 plt.legend(loc="lower left")
-plt.title("病例數據統計資料", fontsize=16, color="b")
-plt.xlabel("一週時間", fontsize=12, color="b")
-plt.ylabel("全部病例數", fontsize=12, color="b")
+plt.title("病例數據統計資料")
+plt.xlabel("一週時間")
+plt.ylabel("全部病例數")
 plt.xticks(days, xlabels)
 
 plt.show()
@@ -227,16 +239,16 @@ cost = {
     "保險支出": [6000, 6200, 5500, 5800, 5900, 6100, 4800, 5200, 6100, 5900, 4800, 7000],
 }
 fig, ax = plt.subplots()
-ax.set_title("家庭開銷統計", fontsize=16, color="b")
-ax.set_xlabel("月份", fontsize=14, color="b")
-ax.set_ylabel("費用", fontsize=14, color="b")
+ax.set_title("家庭開銷統計")
+ax.set_xlabel("月份")
+ax.set_ylabel("費用")
 # 繪製家庭開銷堆疊折線圖
 ax.stackplot(months, cost.values(), labels=cost.keys())
 ax.legend()
+
 plt.tight_layout()
 plt.show()
 
-
 print("------------------------------------------------------------")  # 60個
 
 
@@ -255,3 +267,8 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
+
+
+plt.xlabel("日期", fontsize=12, color="b")
+plt.ylabel("時數", fontsize=12, color="b")
+plt.title("繪製一週工作和玩手機的時間", fontsize=16, color="b")

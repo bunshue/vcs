@@ -6,6 +6,7 @@ print("------------------------------------------------------------")  # 60個
 # 共同
 import os
 import sys
+import time
 import math
 import random
 import numpy as np
@@ -21,9 +22,6 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-
-print("固定亂數種子")
-np.random.seed(10)
 
 N = 100
 y = np.random.randn(N)
@@ -83,14 +81,12 @@ caps_line = dict(linestyle="--", linewidth=2.5, color="r")
 mean_mark = dict(markerfacecolor="b", markeredgecolor="b", marker="D")
 plt.boxplot(y, labels=labels, vert=True, showmeans=True, meanprops=mean_mark)
 
-
 plt.grid(True)
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
 """ 計算分位數
-import math
 
 def percentile(N, percent, key=lambda x: x):
     N = sorted(N)
@@ -114,13 +110,10 @@ print(percentile([1, 2, 3, 4, 5], 0.9))
 
 print("numpy 计算分位数")
 
-import numpy as np
-
 nums = [1, 2, 3, 4, 5]
 print(np.percentile(nums, [10, 50, 90]))
 
 print("pandas 计算分位数")
-import pandas as pd
 
 data = pd.DataFrame({"col": [1, 2, 3, 4, 5]})
 print(data.head())
@@ -138,11 +131,6 @@ print(np.percentile(data["col"], [10, 50, 90]))
 
 print("------------------------------------------------------------")  # 60個
 
-print("------------------------------------------------------------")  # 60個
-
-
-import matplotlib.pyplot as plt
-
 x = [9, 12, 30, 31, 31, 32, 33, 33, 35, 35, 38, 38, 41, 42, 43, 46, 46, 48, 52, 70]
 
 bp = plt.boxplot(x, showmeans=True)
@@ -158,13 +146,10 @@ print(f"中位數Medians  : {medians}")
 print(f"均  值Means    : {means}")
 print(f"晶  鬚Whiskers : {whiskers}")
 print(f"帽  子caps     : {caps}")
+
 plt.show()
 
-
 print("------------------------------------------------------------")  # 60個
-
-
-import matplotlib.pyplot as plt
 
 x = [9, 12, 30, 31, 31, 32, 33, 33, 35, 35, 38, 38, 41, 42, 43, 46, 46, 48, 52, 70]
 
@@ -185,11 +170,10 @@ print(f"均  值Means    : {means[0]}")
 print(f"晶  鬚Whiskers : {whiskers}")
 print(f"極小值mimimums : {minimum[0]}")
 print(f"極大值maximums : {maximum[0]}")
+
 plt.show()
 
-
 print("------------------------------------------------------------")  # 60個
-
 
 x = [9, 12, 30, 31, 31, 32, 33, 33, 35, 35, 38, 38, 41, 42, 43, 46, 46, 48, 52, 70]
 rtn = np.percentile(x, np.arange(0, 100, 25))
@@ -213,59 +197,30 @@ data4 = np.random.normal(75, 40, 250)
 data5 = np.random.normal(60, 35, 250)
 data = [data1, data2, data3, data4, data5]
 labels = ["data1", "data2", "data3", "data4", "data5"]
-plt.boxplot(data, labels=labels)
-plt.title("5 組數據的箱線圖", fontsize=16, color="b")
 
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-data1 = np.random.normal(80, 30, 250)
-data2 = np.random.normal(90, 50, 250)
-data3 = np.random.normal(100, 20, 250)
-data4 = np.random.normal(75, 40, 250)
-data5 = np.random.normal(60, 35, 250)
-data = [data1, data2, data3, data4, data5]
-labels = ["data1", "data2", "data3", "data4", "data5"]
+#plt.boxplot(data, labels=labels)
 plt.boxplot(data, labels=labels, sym="b", patch_artist=True)
-plt.title("5 組數據的箱線圖", fontsize=16, color="b")
-plt.show()
 
-print("------------------------------------------------------------")  # 60個
-
-data1 = np.random.normal(80, 30, 250)
-data2 = np.random.normal(90, 50, 250)
-data3 = np.random.normal(100, 20, 250)
-data4 = np.random.normal(75, 40, 250)
-data5 = np.random.normal(60, 35, 250)
-data = [data1, data2, data3, data4, data5]
-labels = ["data1", "data2", "data3", "data4", "data5"]
+"""
 my_mark = dict(markerfacecolor="r", marker="o")
 plt.boxplot(data, labels=labels, flierprops=my_mark)
-plt.title("5 組數據的箱線圖", fontsize=16, color="b")
+"""
 
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-data1 = np.random.normal(80, 30, 250)
-data2 = np.random.normal(90, 50, 250)
-data3 = np.random.normal(100, 20, 250)
-data4 = np.random.normal(75, 40, 250)
-data5 = np.random.normal(60, 35, 250)
-data = [data1, data2, data3, data4, data5]
-labels = ["data1", "data2", "data3", "data4", "data5"]
+"""
 my_mark = dict(markeredgecolor="g", markerfacecolor="g", marker="*")
 plt.boxplot(data, labels=labels, flierprops=my_mark)
+"""
+
 plt.title("5 組數據的箱線圖", fontsize=16, color="b")
 
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-data1 = np.random.randn(1000)
-data2 = np.random.randn(1000)
-data3 = np.random.randn(1000)
+N = 1000 # 樣本數
+data1 = np.random.randn(N)
+data2 = np.random.randn(N)
+data3 = np.random.randn(N)
 data = [data1, data2, data3]
 labels = ["data1", "data2", "data3"]
 plt.boxplot(data, labels=labels, notch=True)
@@ -275,8 +230,9 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
+N = 1000 # 樣本數
 # 建立 3 組數據
-data = [np.random.randn(1000) for x in range(1, 4)]
+data = [np.random.randn(N) for x in range(1, 4)]
 labels = ["x1", "x2", "x3"]
 # 建立子圖
 fig, ax = plt.subplots(nrows=1, ncols=2, figsize=(9, 5))
@@ -303,10 +259,11 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-x1 = np.random.randn(1000)
-x2 = np.random.randn(1000)
-x3 = np.random.randn(1000)
-x4 = np.random.randn(1000)
+N = 1000 # 樣本數
+x1 = np.random.randn(N)
+x2 = np.random.randn(N)
+x3 = np.random.randn(N)
+x4 = np.random.randn(N)
 x = [x1, x2, x3, x4]
 
 # 建立箱線圖
@@ -328,11 +285,10 @@ for median in bp["medians"]:
 for flier in bp["fliers"]:
     flier.set(marker="D", markerfacecolor="g", markeredgecolor="g")
 plt.title("使用回傳物件更新樣式")
+
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
-
-# 箱線圖
 
 data = np.random.rand(20, 5)  # 生成5個維度數據，每組20個
 plt.boxplot(data)
@@ -341,8 +297,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-# Creating dataset
-np.random.seed(10)
 data_1 = np.random.normal(100, 10, 200)
 data_2 = np.random.normal(90, 20, 200)
 data_3 = np.random.normal(80, 30, 200)

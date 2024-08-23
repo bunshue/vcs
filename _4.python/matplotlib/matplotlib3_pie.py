@@ -38,7 +38,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 plt.figure(
     num="派圖 集合 1",
     figsize=(12, 8),
@@ -190,8 +190,111 @@ plt.pie(
 )
 
 plt.show()
+'''
+print("------------------------------------------------------------")  # 60個
+
+plt.figure(
+    num="派圖 集合 2",
+    figsize=(12, 8),
+    dpi=100,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
 
 print("------------------------------------------------------------")  # 60個
+
+plt.subplot(231)
+
+sorts = ["交通", "娛樂", "教育", "交通", "餐費"]
+fee = [8000, 2000, 3000, 5000, 6000]
+fee_no = [1, 0, 0, 0]
+plt.pie(fee, pctdistance=0.8, labels=sorts, autopct="%1.2f%%")
+plt.pie(fee_no, radius=0.6, colors="w")
+plt.title("統計個人花費的環圈圖設計", fontsize=16, color="b")
+
+print("------------------------------------------------------------")  # 60個
+
+plt.subplot(232)
+
+lang = ["Python", "C", "Java", "C++", "PHP"]  # 程式語言標籤
+people = [350, 200, 250, 150, 270]  # 人數
+labelgender = ["男生", "女生"]  # 性別標籤
+gender = [720, 500]  # 性別人數
+colors = ["lightyellow", "lightgreen"]  # 自定性別色彩
+# 建立外層程式語言圓餅圖
+plt.pie(people, pctdistance=0.8, labels=lang, autopct="%1.2f%%")
+# 建立內層性別標籤
+plt.pie(
+    gender,
+    radius=0.6,
+    labels=labelgender,
+    colors=colors,
+    autopct="%1.2f%%",
+    labeldistance=0.2,
+)
+plt.title("程式語言調查表", fontsize=16, color="b")
+
+print("------------------------------------------------------------")  # 60個
+
+plt.subplot(233)
+
+lang = ["Python", "C", "Java", "C++", "PHP"]  # 程式語言標籤
+people = [350, 200, 250, 150, 270]  # 人數
+labelgender = ["男生", "女生"]  # 性別標籤
+gender = [720, 500]  # 性別人數
+colors = ["lightyellow", "lightgreen"]  # 自定性別色彩
+data_no = [1, 0, 0, 0]
+# 建立外層程式語言圓餅圖
+plt.pie(people, pctdistance=0.8, labels=lang, autopct="%1.2f%%")
+# 建立內層性別標籤
+plt.pie(
+    gender,
+    radius=0.6,
+    labels=labelgender,
+    colors=colors,
+    autopct="%1.2f%%",
+    labeldistance=0.45,
+)
+plt.pie(data_no, radius=0.2, colors="w")  # 建立最內層空的圓餅
+plt.title("程式語言調查表", fontsize=16, color="b")
+
+
+print("------------------------------------------------------------")  # 60個
+
+plt.subplot(234)
+
+product = ["家電", "生活用品", "圖書", "保健", "彩妝"]  # 產品標籤
+revenue = [23000, 18000, 12000, 15000, 16000]  # 業績
+plt.pie(revenue, labels=product, autopct="%1.2f%%")
+plt.legend()
+plt.title("銷售品項分析", fontsize=16, color="b")
+
+print("------------------------------------------------------------")  # 60個
+
+plt.subplot(235)
+
+product = ["家電", "生活用品", "圖書", "保健", "彩妝"]  # 產品標籤
+revenue = [23000, 18000, 12000, 15000, 16000]  # 業績
+patches = plt.pie(revenue, labels=product, autopct="%1.2f%%")
+plt.legend(
+    patches[0], product, loc="center left", title="產品類別", bbox_to_anchor=(1, 0, 0.5, 1)
+)
+plt.title("銷售品項分析", fontsize=16, color="b")
+
+print("------------------------------------------------------------")  # 60個
+
+plt.subplot(236)
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個
 
@@ -312,83 +415,6 @@ ax.pie(people, labels=area, autopct="%1.2f%%")
 ax.set_title("使用 ax.set() 函數", fontsize=16, color="b")
 ax.set(aspect="equal")  # 圓餅圖保持圓形
 """
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-sorts = ["交通", "娛樂", "教育", "交通", "餐費"]
-fee = [8000, 2000, 3000, 5000, 6000]
-fee_no = [1, 0, 0, 0]
-plt.pie(fee, pctdistance=0.8, labels=sorts, autopct="%1.2f%%")
-plt.pie(fee_no, radius=0.6, colors="w")
-plt.title("統計個人花費的環圈圖設計", fontsize=16, color="b")
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-lang = ["Python", "C", "Java", "C++", "PHP"]  # 程式語言標籤
-people = [350, 200, 250, 150, 270]  # 人數
-labelgender = ["男生", "女生"]  # 性別標籤
-gender = [720, 500]  # 性別人數
-colors = ["lightyellow", "lightgreen"]  # 自定性別色彩
-# 建立外層程式語言圓餅圖
-plt.pie(people, pctdistance=0.8, labels=lang, autopct="%1.2f%%")
-# 建立內層性別標籤
-plt.pie(
-    gender,
-    radius=0.6,
-    labels=labelgender,
-    colors=colors,
-    autopct="%1.2f%%",
-    labeldistance=0.2,
-)
-plt.title("程式語言調查表", fontsize=16, color="b")
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-lang = ["Python", "C", "Java", "C++", "PHP"]  # 程式語言標籤
-people = [350, 200, 250, 150, 270]  # 人數
-labelgender = ["男生", "女生"]  # 性別標籤
-gender = [720, 500]  # 性別人數
-colors = ["lightyellow", "lightgreen"]  # 自定性別色彩
-data_no = [1, 0, 0, 0]
-# 建立外層程式語言圓餅圖
-plt.pie(people, pctdistance=0.8, labels=lang, autopct="%1.2f%%")
-# 建立內層性別標籤
-plt.pie(
-    gender,
-    radius=0.6,
-    labels=labelgender,
-    colors=colors,
-    autopct="%1.2f%%",
-    labeldistance=0.45,
-)
-plt.pie(data_no, radius=0.2, colors="w")  # 建立最內層空的圓餅
-plt.title("程式語言調查表", fontsize=16, color="b")
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-product = ["家電", "生活用品", "圖書", "保健", "彩妝"]  # 產品標籤
-revenue = [23000, 18000, 12000, 15000, 16000]  # 業績
-plt.pie(revenue, labels=product, autopct="%1.2f%%")
-plt.legend()
-plt.title("銷售品項分析", fontsize=16, color="b")
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-product = ["家電", "生活用品", "圖書", "保健", "彩妝"]  # 產品標籤
-revenue = [23000, 18000, 12000, 15000, 16000]  # 業績
-patches = plt.pie(revenue, labels=product, autopct="%1.2f%%")
-plt.legend(
-    patches[0], product, loc="center left", title="產品類別", bbox_to_anchor=(1, 0, 0.5, 1)
-)
-plt.title("銷售品項分析", fontsize=16, color="b")
 
 plt.show()
 

@@ -457,40 +457,6 @@ namespace vcs_Thread_Example2
 
         }
 
-        private bool flag_ThreadProc_ex7 = false;
-
-        private void ThreadProc_ex7()
-        {
-            while (flag_ThreadProc_ex7 == true)
-            {
-                Console.WriteLine("無限迴圈");
-                richTextBox1.Text += "無限迴圈 ";
-
-                Thread.Sleep(1000);
-            }
-            Console.WriteLine("結束 ThreadProc_ex7");
-            richTextBox1.Text += "\n結束 ThreadProc_ex7\n";
-        }
-
-        private void button23_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "啟動 thread 7\n";
-
-            flag_ThreadProc_ex7 = true;
-            Thread thread_ex7 = new Thread(ThreadProc_ex7);
-            thread_ex7.Start();
-        }
-
-        private void button22_Click(object sender, EventArgs e)
-        {
-            flag_ThreadProc_ex7 = false;
-        }
-
-        private void button21_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void ThreadProc_ex6a()
         {
             while (true)

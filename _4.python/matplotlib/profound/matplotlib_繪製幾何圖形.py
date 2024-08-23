@@ -1,6 +1,5 @@
 """
-
-第27章：繪製幾何圖形
+matplotlib_繪製幾何圖形
 
 """
 
@@ -26,58 +25,34 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-
-
-# 檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch27\ch27_1.py
-
-# ch27_1.py
-import matplotlib.pyplot as plt
-
 figure, axes = plt.subplots()  # 建立子圖物件
 circle = plt.Circle((0.5, 0.5), 0.4)  # 繪製圓
 axes.set_aspect("equal")  # 設定座標單位長度相同
 axes.add_artist(circle)  # 將物件加入圖表物件
+
 plt.show()
 
-
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch27\ch27_2.py
-
-# ch27_2.py
-import matplotlib.pyplot as plt
 
 figure, axes = plt.subplots()  # 建立子圖物件
 circle = plt.Circle((0.5, 0.5), 0.4, fill=False, linewidth=3, edgecolor="m")  # 繪製圓
 axes.set_aspect("equal")  # 設定座標單位長度相同
 plt.gcf().gca().add_artist(circle)  # 將物件加入圖表物件
+
 plt.show()
 
-
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch27\ch27_3.py
-
-# ch27_3.py
-import matplotlib.pyplot as plt
 
 figure, axes = plt.subplots()  # 建立子圖物件
 circle = plt.Circle((0.5, 0.5), 0.4, fill=False, linewidth=3, edgecolor="m")  # 繪製圓
 axes.set_aspect("equal")  # 設定座標單位長度相同
 plt.gca().add_artist(circle)  # 將物件加入圖表物件
-plt.show()
 
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch27\ch27_4.py
-
-# ch27_4.py
-import matplotlib.pyplot as plt
 from matplotlib.patches import Circle
-import numpy as np
 
 fig, ax = plt.subplots(2, 2)
 # 建立 ax[0,0] 內容
@@ -110,15 +85,11 @@ ax[1, 1].add_patch(circle)  # 將circle物件加入ax[0,1]軸物件
 ax[1, 1].axis("equal")
 ax[1, 1].set_title("繪製圓 + 矩形框, 軸長度單位相同\n矩形框內部是藍色")
 plt.tight_layout()
-plt.show()
 
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch27\ch27_5.py
-
-# ch27_5.py
-import matplotlib.pyplot as plt
 from matplotlib.patches import Circle
 import matplotlib.image as img
 
@@ -129,15 +100,11 @@ im = ax.imshow(jk)  # 顯示 jk 影像物件
 patch = Circle((160, 160), radius=150, transform=ax.transData)
 im.set_clip_path(patch)  # 建立剪輯結果
 ax.axis("off")  # 關閉軸標記與刻度
-plt.show()
 
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch27\ch27_6.py
-
-# ch27_6.py
-import matplotlib.pyplot as plt
 from matplotlib.patches import Ellipse
 
 # 建立軸單位長度相同的 axes 軸物件
@@ -149,17 +116,12 @@ ellip = Ellipse(xy=center, width=width, height=height)  # 繪製橢圓
 axes.add_artist(ellip)  # 將物件加入軸物件
 axes.set_xlim(-3, 3)
 axes.set_ylim(-2, 2)
-plt.show()
 
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch27\ch27_7.py
-
-# ch27_7.py
-import matplotlib.pyplot as plt
 from matplotlib.patches import Ellipse
-import numpy as np
 
 angle = 30  # 炫轉角度
 angles = np.arange(0, 180, angle)  # 建立角度陣列
@@ -173,17 +135,12 @@ for angle in angles:  # 繪製系列橢圓
     axes.add_artist(ellip)  # 加入ellip物件
 axes.set_xlim(-2.2, 2.2)
 axes.set_ylim(-2.2, 2.2)
-plt.show()
 
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch27\ch27_8.py
-
-# ch27_8.py
-import matplotlib.pyplot as plt
 from matplotlib.patches import Ellipse
-import numpy as np
 
 np.random.seed(10)  # 隨機數種子
 num = 100  # 建立 100 個橢圓
@@ -207,15 +164,11 @@ for e in ells:
 # 設定顯示空間
 axes.set_xlim(0, 10)
 axes.set_ylim(0, 10)
-plt.show()
 
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch27\ch27_9.py
-
-# ch27_9.py
-import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
 
 # 建立軸單位長度相同的 ax 軸物件
@@ -229,18 +182,12 @@ rect = Rectangle(
 ax.add_artist(rect)  # 將物件加入軸物件
 ax.set_xlim(0, 6)
 ax.set_ylim(0, 4)
-plt.show()
 
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-
-# 檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch27\ch27_10.py
-
-# ch27_10.py
-import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
-import numpy as np
 
 fig = plt.figure()
 ax = fig.add_subplot(111)
@@ -257,15 +204,11 @@ ax.add_patch(
         lw=8,
     )
 )  # 矩形線寬
-plt.show()
 
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch27\ch27_11.py
-
-# ch27_11.py
-import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
 import matplotlib.image as img
 
@@ -278,15 +221,11 @@ ax.add_patch(
     )
 )  # 矩形線寬
 ax.axis("off")  # 關閉軸標記與刻度
-plt.show()
 
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch27\ch27_12.py
-
-# ch27_12.py
-import matplotlib.pyplot as plt
 import matplotlib.patches as patch
 
 fig = plt.figure()
@@ -306,15 +245,11 @@ ax.add_patch(rect2)  # 將 rect2 加入軸物件
 ax.add_patch(rect3)  # 將 rect3 加入軸物件
 plt.xlim([-400, 400])
 plt.ylim([-300, 300])
-plt.show()
 
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch27\ch27_13.py
-
-# ch27_13.py
-import matplotlib.pyplot as plt
 import matplotlib.patches as patch
 
 fig = plt.figure()
@@ -365,15 +300,11 @@ for arc in (arc0, arc1, arc2, arc3, arc4):
     ax.add_patch(arc)
 ax.axis([0, 4, 0, 3])
 ax.set_aspect(1)  # 1與'equal'效果相同
-plt.show()
 
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch27\ch27_14.py
-
-# ch27_14.py
-import matplotlib.pyplot as plt
 import matplotlib.patches as patch
 
 fig = plt.figure()
@@ -405,15 +336,11 @@ ax.add_patch(wedge3)
 ax.add_patch(wedge4)
 ax.axis([0, 4, 0, 4])
 ax.set_aspect("equal")  #
-plt.show()
 
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch27\ch27_15.py
-
-# ch27_15.py
-import matplotlib.pyplot as plt
 import matplotlib.patches as patch
 
 fig = plt.figure()
@@ -471,17 +398,12 @@ ax.set_xlim(0, 6)
 ax.set_ylim(0, 6)
 ax.set_aspect("equal")
 ax.grid(True)
-plt.show()
 
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch27\ch27_17.py
-
-# ch27_17.py
-import matplotlib.pyplot as plt
 import matplotlib.patches as patch
-import numpy as np
 
 ax = plt.subplot()
 xy = np.array([[5, 5], [8, 3], [8, 1], [2, 1], [2, 3]])
@@ -490,16 +412,11 @@ ax.add_patch(poly)
 ax.set_xlim(0, 10)
 ax.set_ylim(0, 6)
 ax.set_aspect("equal")
-plt.show()
 
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch27\ch27_18.py
-
-# ch27_18.py
-import numpy as np
-import matplotlib.pyplot as plt
 import matplotlib.patches as patch
 
 circle = patch.Circle((2, 8), 1.5, fc="r")
@@ -515,8 +432,8 @@ for shape in (square, circle, triangle, diamond):
 ax.xaxis.set_visible(False)
 ax.yaxis.set_visible(False)
 ax.set(xlim=(0, 10), ylim=(0, 10))  # 設定顯示區間
-plt.show()
 
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 

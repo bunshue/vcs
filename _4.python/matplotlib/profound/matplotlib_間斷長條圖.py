@@ -1,7 +1,5 @@
 """
-# plot 集合
-
-第21章：間斷長條圖
+matplotlib_間斷長條圖
 
 """
 print("------------------------------------------------------------")  # 60個
@@ -9,6 +7,7 @@ print("------------------------------------------------------------")  # 60個
 # 共同
 import os
 import sys
+import time
 import math
 import random
 import numpy as np

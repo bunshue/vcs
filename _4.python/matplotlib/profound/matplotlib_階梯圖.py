@@ -1,5 +1,5 @@
 """
-# plot 集合
+matplotlib_階梯圖
 step
 
 """
@@ -9,6 +9,7 @@ print("------------------------------------------------------------")  # 60個
 # 共同
 import os
 import sys
+import time
 import time
 import math
 import random

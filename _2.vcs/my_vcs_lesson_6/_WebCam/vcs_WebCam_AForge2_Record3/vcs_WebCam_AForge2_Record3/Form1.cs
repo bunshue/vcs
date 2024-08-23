@@ -16,8 +16,6 @@ using AForge.Video;
 using AForge.Video.DirectShow;  // Video Recording
 using AForge.Video.FFMPEG;      //for VideoFileWriter
 
-//不使用Thread 錄影
-
 namespace vcs_WebCam_AForge2_Record3
 {
     public partial class Form1 : Form

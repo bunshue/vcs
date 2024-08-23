@@ -1,5 +1,5 @@
 """
-第28章：表格製作
+matplotlib_表格製作
 
 """
 
@@ -8,6 +8,7 @@ print("------------------------------------------------------------")  # 60個
 # 共同
 import os
 import sys
+import time
 import math
 import random
 import numpy as np
@@ -23,14 +24,6 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-
-
-# 檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch28\ch28_1.py
-
-# ch28_1.py
-import matplotlib.pyplot as plt
 
 fig, ax = plt.subplots()
 data = [[100, 300], [400, 600], [500, 700]]  # 定義儲存格資料
@@ -48,16 +41,10 @@ ax.table(
 )  # 從左邊上方放置表格
 ax.axis("off")
 ax.set_title("深智軟件銷售表", fontsize=16, color="b")
+
 plt.show()
 
-
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch28\ch28_2.py
-
-# ch28_2.py
-import matplotlib.pyplot as plt
-import numpy as np
 
 data = [
     [100, 105, 110, 115],
@@ -95,17 +82,11 @@ plt.ylabel("各通路業績表")
 plt.yticks(np.arange(0, 500, step=100))
 plt.xticks([])  # 隱藏顯示 x 軸刻度
 plt.title("深智業績表", fontsize=16, color="b")
+
 plt.tight_layout()
 plt.show()
 
-
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch28\ch28_3.py
-
-# ch28_3.py
-import numpy as np
-import matplotlib.pyplot as plt
 
 data = [
     [100, 105, 110, 115],
@@ -132,15 +113,9 @@ plt.ylabel("各通路業績表")
 plt.yticks(np.arange(0, 130, step=10))
 plt.xticks([])
 plt.title("深智業績表", fontsize=16, color="b")
+
 plt.tight_layout()
 plt.show()
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------------------------------------")  # 60個
 
