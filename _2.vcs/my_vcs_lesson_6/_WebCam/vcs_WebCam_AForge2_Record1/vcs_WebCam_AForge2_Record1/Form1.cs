@@ -599,7 +599,7 @@ namespace vcs_WebCam_AForge2_Record1
                 flag_recording = true;
                 recording_time_st = DateTime.Now;
                 //int fps = webcam_fps;
-                int fps = 17;   //16.79
+                int fps = 30;   //16.79
 
                 recording_filename = Application.StartupPath + "\\avi_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".avi";
 

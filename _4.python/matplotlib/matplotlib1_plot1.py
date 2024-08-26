@@ -7,6 +7,7 @@ print("------------------------------------------------------------")  # 60個
 # 共同
 import os
 import sys
+import time
 import math
 import random
 import numpy as np
@@ -427,3 +428,21 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
+
+
+#把字典畫出來
+animals = {
+    "鼠": 3,
+    "牛": 48,
+    "虎": 33,
+    "兔": 8,
+    "龍": 38,
+}
+
+plt.plot(range(len(animals.values())), animals.values())
+plt.xticks(range(len(animals.values())), animals.keys(), rotation=45)
+
+plt.show()
+
+sys.exit()
+

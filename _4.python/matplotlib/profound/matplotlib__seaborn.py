@@ -1,125 +1,84 @@
 """
 海生, 自動把圖畫得比較好看
 
+
+sns.set() 繪圖風格設置
+
 """
+
+import sys
+import numpy as np
+import matplotlib.pyplot as plt
+
+
+
+# 要平均值 μ, 標準差 σ 的時候呢?
+
+μ = 87
+
+σ = 2.5
+
+eggs = np.random.randn(100) * σ + μ
+
+# 我們來檢查這樣生出的平均值、標準差是不是我們想的那樣。
+
+print("平均值 :", eggs.mean())
+
+# 87.3032349761459
+
+print("標準差 :", eggs.std())
+
+# 2.411544933383249
+
+import seaborn as sns
+
+sns.distplot(eggs)
+plt.show()
+
+
+
+'''
+print('最簡單的海生, 只要多一行海生設定即可')
 
 import seaborn as sns  # 海生, 自動把圖畫得比較好看
 
-print("------------------------------------------------------------")  # 60個
-
-# 共同
-import os
-import sys
-import time
-import math
-import random
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-
-font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
-# 設定中文字型及負號正確顯示
-# 設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
-# 設定負號
-plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
-plt.rcParams["font.size"] = 12  # 設定字型大小
-
-print("------------------------------------------------------------")  # 60個
-'''
-font_filename = (
-    "C:/_git/vcs/_1.data/______test_files1/_font/TaipeiSansTCBeta-Regular.ttf"
-)
-
-import matplotlib as mpl
-import matplotlib.font_manager as fm
-
-fm.fontManager.addfont(font_filename)
-mpl.rc("font", family="Taipei Sans TC Beta")
-
-x = np.linspace(-5, 5, 200)
-y = np.sinc(x)
-
-plt.plot(x, y)
-plt.title("原圖, 無海生")
-plt.show()
-
-# 把預設狀態存起來
-saved_state = mpl.rcParams.copy()
-
-# plt.xkcd()  #加此行變成搞笑風格
-
-# 多此三行 變成海生風格
-import seaborn as sns
-
-sns.set()
-plt.rcParams[
-    "font.sans-serif"
-] = "Microsoft JhengHei"  # 海生設定中文字型 將字體換成 Microsoft JhengHei
-
-plt.plot(x, y)
-plt.title("使用海生")
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-plt.plot(x, y)
-plt.title("再畫一新圖, 還是海生風格")
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-mpl.rcParams.update(saved_state)
-
-plt.plot(x, y)
-plt.title("恢復成原風格, 無海生")
-plt.show()
-'''
-print("------------------------------------------------------------")  # 60個
-
-plt.xlabel("銷售張數")
-plt.ylabel("成功次數")
-sns.histplot(np.random.binomial(n=5, p=0.75, size=1000), kde=False)
-#sns.histplot(np.random.binomial(n=10, p=0.35, size=1000), kde=False)
-
-plt.title("二項式分布 Binomial")
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
 sns.set(color_codes=True)
 
-x = np.linspace(-10, 10, 200)
-y = np.sinc(x)
-plt.plot(x, y)
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
 N = 200
-data = np.random.randn(N)
-print(np.mean(data))
+x = np.random.randn(N)
+print(np.mean(x))
 
 ax = plt.subplot()
-sns.histplot(data, kde=False, ax=ax)
+sns.histplot(x, kde=False, ax=ax)
 _ = ax.set(title="Histogram", xlabel="x", ylabel="y")
 
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-sns.get_dataset_names()
+print('取得 sns 資料集')
+cc = sns.get_dataset_names()
+print(cc)
 
-tips = sns.load_dataset("tips")
-print(tips.shape)
-print(tips.head())
+
+titanic = sns.load_dataset("titanic")
+print(titanic.head())
+
+sns.countplot(x="class", hue="survived", data=titanic)
+plt.show()
+
+sns.countplot(x="sex", hue="survived", data=titanic)
+plt.show()
+
+sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 
 sns.set()
 tips = sns.load_dataset("tips")
+print(tips.shape)
+print(tips.head())
+
 plt.scatter(tips.total_bill, tips.tip)
 plt.xlabel("Total Bill")
 plt.ylabel("Tip")
@@ -129,11 +88,14 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 
 sns.set(style="whitegrid")
+
 tips = sns.load_dataset("tips")
 male_tips = tips[tips.sex == "Male"]
 female_tips = tips[tips.sex == "Female"]
+
 plt.scatter(male_tips.total_bill, male_tips.tip, label="Male tips")
 plt.scatter(female_tips.total_bill, female_tips.tip, label="Female tips")
+
 plt.xlabel("Total Bill")
 plt.ylabel("Tip")
 plt.legend()
@@ -147,39 +109,10 @@ sns.catplot(x="day", y="tip", data=tips)
 
 print("------------------------------------------------------------")  # 60個
 
-titanic = sns.load_dataset("titanic")
-print(titanic.head())
 
 print("------------------------------------------------------------")  # 60個
 
-titanic = sns.load_dataset("titanic")
-sns.countplot(x="class", hue="survived", data=titanic)
 
-print("------------------------------------------------------------")  # 60個
-
-titanic = sns.load_dataset("titanic")
-sns.countplot(x="sex", hue="survived", data=titanic)
-
-print("------------------------------------------------------------")  # 60個
-
-sns.set()
-ranking = {
-    "Toyota RAV4": 2958,
-    "CMC Veryca": 1312,
-    "Nissan Kicks": 1267,
-    "Honda CRV": 1209,
-    "Toyota Sienta": 1163,
-    "Toyota Yaris": 936,
-    "Toyota": 911,
-    "Ford Focus": 873,
-    "M-Benz C-Class": 749,
-    "Honda HR-V": 704,
-}
-
-plt.bar(range(len(ranking.values())), ranking.values(), width=0.8)
-plt.xticks(range(len(ranking.values())), ranking.keys(), rotation=45)
-
-plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -461,7 +394,7 @@ g = sns.catplot(x="day", y="total_bill", kind="violin", data=tips)
 sns.swarmplot(x="day", y="total_bill", color="k", size=3, data=tips, ax=g.ax)
 plt.show()
 
-# 分類統計估計圖#barplot
+# 分類統計估計圖 #barplot
 titanic = sns.load_dataset("titanic")
 g1 = sns.catplot(x="sex", y="survived", hue="class", kind="bar", data=titanic, ci=None)
 plt.show()
@@ -586,11 +519,6 @@ print("------------------------------------------------------------")  # 60個
 N = 500  # 資料個數
 num_bins = 50  # 直方圖顯示時的束數
 
-
-print("另外用海生畫出來")
-
-import seaborn as sns  # 海生, 自動把圖畫得比較好看
-
 mu, sigma = 100, 15  # 平均值, 標準差
 x = np.random.normal(mu, sigma, N)  # 隨機數
 
@@ -606,8 +534,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-import seaborn as sns  # 海生, 自動把圖畫得比較好看
-
 x = np.random.uniform(size=N)  # 隨機數
 
 n, bins, patches = plt.hist(
@@ -621,6 +547,135 @@ plt.title("用海生畫均勻分佈")
 
 plt.show()
 
+print("------------------------------------------------------------")  # 60個
+
+N = 10000 # 樣本數
+mu = 0  # 平均值
+sigma = 1  # 標準差
+
+x1 = np.random.randn(N)  # 隨機數
+x2 = np.random.uniform(size=N)  # 隨機數
+
+left = -2
+peak = 8  # mode尖峰值
+right = 10
+x3 = np.random.triangular(left, peak, right, N)
+
+bins = 50 # 束
+
+plt.figure(figsize=(12, 6))
+
+plt.subplot(131)
+
+count, bins, ignored = plt.hist(x1, bins, density=True)  # 直方圖
+sns.kdeplot(x1)  # 核密度估計圖, 多了外圍那圈
+plt.title("常態分布 + kdeplot")
+
+plt.subplot(132)
+
+plt.hist(x2, bins, density=True)  # 直方圖
+sns.kdeplot(x2)  # 核密度估計圖, 多了外圍那圈
+plt.title("均勻分布 + kdeplot")
+
+plt.subplot(133)
+
+plt.hist(x3, bins, density=True)
+#sns.kdeplot(x3)  # 核密度估計圖, 多了外圍那圈
+plt.title("np.random.triangular")
+
+#用density
+#plt.hist(x3, bins, density=True)
+
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+
+import seaborn as sns  # 海生, 自動把圖畫得比較好看
+
+print("------------------------------------------------------------")  # 60個
+
+# 共同
+import os
+import sys
+import time
+import math
+import random
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+# 設定中文字型及負號正確顯示
+# 設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
+# 設定負號
+plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+plt.rcParams["font.size"] = 12  # 設定字型大小
+
+print("------------------------------------------------------------")  # 60個
+
+font_filename = (
+    "C:/_git/vcs/_1.data/______test_files1/_font/TaipeiSansTCBeta-Regular.ttf"
+)
+
+import matplotlib as mpl
+import matplotlib.font_manager as fm
+
+fm.fontManager.addfont(font_filename)
+mpl.rc("font", family="Taipei Sans TC Beta")
+
+x = np.linspace(-5, 5, 200)
+y = np.sinc(x)
+
+plt.plot(x, y)
+plt.title("原圖, 無海生")
+plt.show()
+
+# 把預設狀態存起來
+saved_state = mpl.rcParams.copy()
+
+# plt.xkcd()  #加此行變成搞笑風格
+
+# 多此三行 變成海生風格
+import seaborn as sns
+
+sns.set()
+plt.rcParams[
+    "font.sans-serif"
+] = "Microsoft JhengHei"  # 海生設定中文字型 將字體換成 Microsoft JhengHei
+
+plt.plot(x, y)
+plt.title("使用海生")
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+plt.plot(x, y)
+plt.title("再畫一新圖, 還是海生風格")
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+mpl.rcParams.update(saved_state)
+
+plt.plot(x, y)
+plt.title("恢復成原風格, 無海生")
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+plt.xlabel("銷售張數")
+plt.ylabel("成功次數")
+sns.histplot(np.random.binomial(n=5, p=0.75, size=1000), kde=False)
+#sns.histplot(np.random.binomial(n=10, p=0.35, size=1000), kde=False)
+
+plt.title("二項式分布 Binomial")
+
+plt.show()
+'''
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個

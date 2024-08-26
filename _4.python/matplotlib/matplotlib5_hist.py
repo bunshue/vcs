@@ -669,50 +669,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-import seaborn as sns
-
-N = 10000 # 樣本數
-mu = 0  # 平均值
-sigma = 1  # 標準差
-
-x1 = np.random.randn(N)  # 隨機數
-x2 = np.random.uniform(size=N)  # 隨機數
-
-left = -2
-peak = 8  # mode尖峰值
-right = 10
-x3 = np.random.triangular(left, peak, right, N)
-
-bins = 50 # 束
-
-plt.figure(figsize=(12, 6))
-
-plt.subplot(131)
-
-count, bins, ignored = plt.hist(x1, bins, density=True)  # 直方圖
-sns.kdeplot(x1)  # 核密度估計圖, 多了外圍那圈
-plt.title("常態分布 + kdeplot")
-
-plt.subplot(132)
-
-plt.hist(x2, bins, density=True)  # 直方圖
-sns.kdeplot(x2)  # 核密度估計圖, 多了外圍那圈
-plt.title("均勻分布 + kdeplot")
-
-plt.subplot(133)
-
-plt.hist(x3, bins, density=True)
-#sns.kdeplot(x3)  # 核密度估計圖, 多了外圍那圈
-plt.title("np.random.triangular")
-
-#用density
-#plt.hist(x3, bins, density=True)
-
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
 N1 = 10000 # 樣本數
 mu1 = 50  # 均值
 sigma1 = 5  # 標準差
@@ -1132,4 +1088,21 @@ print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
+
+
+
+
+
+x3 = np.random.randn(N, 3)
+colors = ["red", "green", "blue"]
+bins = 50  # 直方圖顯示時的束數
+
+plt.hist(x3, bins, density=True, color=colors, label=colors)
+plt.legend()
+plt.title("3 組數據的常態分佈隨機數")
+
+plt.show()
+
+sys.exit()
+
 
