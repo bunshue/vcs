@@ -1,5 +1,4 @@
 ﻿using System;
-
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -17,16 +16,15 @@ using AForge.Video;             //需要添加這兩個.dll, 參考/加入參考
 using AForge.Video.DirectShow;  // Video Recording
 using AForge.Video.FFMPEG;      //for VideoFileWriter
 
-//using AForge.Vision.Motion;     // Motion detection
-
-//不使用Thread 錄影
-
 namespace vcs_WebCam_AForge2_Record1
 {
     public partial class Form1 : Form
     {
         public FilterInfoCollection USBWebcams = null;
         public VideoCaptureDevice Cam = null;
+
+        private bool flag_webcam_ok = false;    //判斷是否啟動webcam的旗標
+        private bool flag_recording = false;    //判斷是否啟動錄影的旗標, for 錄影1
 
         List<string> camera_short_name = new List<string>();      //一維List for string
         List<string> camera_full_name = new List<string>();      //一維List for string
@@ -41,8 +39,6 @@ namespace vcs_WebCam_AForge2_Record1
         int timer_display_show_main_mesg_count = 0;
         int timer_display_show_main_mesg_count_target = 0;
 
-        private bool flag_webcam_ok = false;    //判斷是否啟動webcam的旗標
-        private bool flag_recording = false;    //判斷是否啟動錄影的旗標, for 錄影1
         private bool flag_limit_recording_time = false;
         private string recording_filename = "XXXXXXX.avi";
         VideoFileWriter writer = new VideoFileWriter();
@@ -67,9 +63,6 @@ namespace vcs_WebCam_AForge2_Record1
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //C# 跨 Thread 存取 UI
-            Form1.CheckForIllegalCrossThreadCalls = false;  //解決跨執行緒控制無效
-
             show_item_location();
             //Init_WebcamSetup();
         }
@@ -651,6 +644,8 @@ namespace vcs_WebCam_AForge2_Record1
                 flag_limit_recording_time = false;
                 do_record();
 
+                richTextBox1.Text += "錄影開始, 時間 : " + DateTime.Now.ToString() + "\n";
+                recording_time_st = DateTime.Now;
                 bt_record_start.Enabled = false;
                 bt_record_stop.Enabled = true;
             }
@@ -693,9 +688,10 @@ namespace vcs_WebCam_AForge2_Record1
 
                 writer.Close();
 
-                richTextBox1.Text += "\n停止錄影, 檔案 : " + recording_filename + "\n";
-                richTextBox1.Text += "時間 : " + DateTime.Now.ToString() + "\n";
-                richTextBox1.Text += "錄影長度 :\t" + (DateTime.Now - recording_time_st).TotalSeconds.ToString("0.00") + " 秒\n";
+                richTextBox1.Text += "錄影結束, 時間 : " + DateTime.Now.ToString() + "\n";
+                richTextBox1.Text += "錄影時間 : " + (DateTime.Now - recording_time_st).TotalSeconds.ToString("0.00") + " 秒\n";
+                richTextBox1.Text += "錄影時間 : " + (DateTime.Now - recording_time_st).ToString() + "\n";
+                richTextBox1.Text += "檔案 : " + recording_filename + "\n\n";
 
                 flag_limit_recording_time = false;
                 bt_record_start.Enabled = true;

@@ -27,6 +27,7 @@ _4.python/sqlite/ims_sql/*.sqlite
 _4.python/import_module/pyinstaller/ims_qc_database/QC/QC_data/*
 _4.python/import_module/Python-3.7.17.tar.xz
 _big_files/*
+_vcs_new_test1/*
 
 # C 相關產出之檔案
 *.so

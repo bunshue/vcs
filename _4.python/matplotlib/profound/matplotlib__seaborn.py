@@ -10,6 +10,7 @@ print("------------------------------------------------------------")  # 60個
 # 共同
 import os
 import sys
+import time
 import math
 import random
 import numpy as np
@@ -25,7 +26,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 font_filename = (
     "C:/_git/vcs/_1.data/______test_files1/_font/TaipeiSansTCBeta-Regular.ttf"
 )
@@ -73,31 +74,24 @@ mpl.rcParams.update(saved_state)
 plt.plot(x, y)
 plt.title("恢復成原風格, 無海生")
 plt.show()
-
+'''
 print("------------------------------------------------------------")  # 60個
 
-plt.title("二項式分布 Binomial")
-plt.xlabel("銷售張數", fontsize=14)
-plt.ylabel("成功次數", fontsize=14)
+plt.xlabel("銷售張數")
+plt.ylabel("成功次數")
 sns.histplot(np.random.binomial(n=5, p=0.75, size=1000), kde=False)
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
+#sns.histplot(np.random.binomial(n=10, p=0.35, size=1000), kde=False)
 
 plt.title("二項式分布 Binomial")
-plt.xlabel("銷售張數", fontsize=14)
-plt.ylabel("成功次數", fontsize=14)
-sns.histplot(np.random.binomial(n=10, p=0.35, size=1000), kde=False)
 
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
 sns.set(color_codes=True)
+
 x = np.linspace(-10, 10, 200)
 y = np.sinc(x)
-
 plt.plot(x, y)
 
 plt.show()
@@ -186,10 +180,6 @@ plt.bar(range(len(ranking.values())), ranking.values(), width=0.8)
 plt.xticks(range(len(ranking.values())), ranking.keys(), rotation=45)
 
 plt.show()
-
-
-print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -626,6 +616,7 @@ n, bins, patches = plt.hist(
 
 # 繪製曲線圖
 sns.kdeplot(x)
+
 plt.title("用海生畫均勻分佈")
 
 plt.show()

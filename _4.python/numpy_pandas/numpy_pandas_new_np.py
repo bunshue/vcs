@@ -33,7 +33,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 print("建立numpy陣列, 串列 轉 numpy陣列")
 print("一維")
 cc = np.array([1, 2, 3, 4])
@@ -1894,4 +1894,49 @@ z = np.linspace(0, 15, 100)
 x = np.sin(z)
 y = np.cos(z)
 x2 = np.sin(z)
+'''
 
+#numpy統計
+
+"""
+1. 隨機變數
+np.random.randn(size)：由一個平均為0，變異數為1的高斯分布中隨機取點，並以list儲存。
+np.random.randint(low, high, size, dtype='l')：由low到high中產生一個size大小的list。 dtype，一般來說我們不會動到
+
+除此之外，其實可以import random
+random.random()：在0 <= output < 1之間產生一個浮點數
+random.uniform(low,hight)：在low<= output <=hight之間產生一個浮點數
+random.randint(low,hight)：在low<= output <=hight之間產生一個整數
+"""
+
+print(np.random.randn(6))
+#output:[ 1.3265288  -0.15050998 -0.59429709  0.6356734  -0.89041176  0.2790698]
+
+
+
+print(np.random.randn(2,3))
+#output:[[-0.51469048 -0.82356942  0.80310762]
+#        [ 0.21914897 -0.04437828 -0.41106366]]
+
+print(np.random.randint(1,10,6))
+#output: [[4 6 7],[4 2 9]]
+
+"""
+2. 統計平均
+numpy.sum(a, axis=None, dtype=None, out=None, keepdims=False)：
+numpy.mean(a, axis=None, dtype=None, out=None, keepdims=False)：
+numpy.std(a, axis=None, dtype=None, out=None, keepdims=False)：
+在array A，取其總和(sum)、平均(mean)或標準差(std)，
+而當axis=0是針對列(row)進行各列之間的統計；axis=1是針對行(column)進行各列之間的統計，
+dtype可以限制其輸出型態，常見有np.float32,np.unit8，
+這就請大家多加嘗試看自己希望型態長怎麼樣囉
+"""
+
+A=[[1,2,3,4,5,6],[7,8,9,10,11,12],[13,14,15,16,17,18]]
+print(np.sum(A)) #output: 171
+print(np.mean(A,axis=0))
+# 如果先將A的型態透過np.array(A)進行變成numpy的一個物件的話，下面的操作也是可以接受的
+A=np.array(A)
+print(A.sum(axis=0)) #output: [21 24 27 30 33 36]
+print(A.mean(axis=1))#output:[ 3.5  9.5 15.5]
+print(A.std(axis=1))#output:[1.70782513, 1.70782513, 1.70782513]

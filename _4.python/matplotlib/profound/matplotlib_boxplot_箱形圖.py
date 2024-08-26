@@ -1,5 +1,8 @@
-# boxplot 集合 箱線圖
+"""
+boxplot_箱形圖
 
+
+"""
 
 print("------------------------------------------------------------")  # 60個
 
@@ -22,7 +25,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 N = 100
 y = np.random.randn(N)
 
@@ -140,6 +143,7 @@ medians = [y.get_ydata() for y in bp["medians"]]
 means = [y.get_ydata() for y in bp["means"]]
 whiskers = [y.get_ydata() for y in bp["whiskers"]]
 caps = [y.get_ydata() for y in bp["caps"]]
+
 print(f"異常值Outliers : {outliers}")
 print(f"盒  子Boxes    : {boxes}")
 print(f"中位數Medians  : {medians}")
@@ -162,6 +166,7 @@ means = [y.get_ydata()[0] for y in bp["means"]]
 whiskers = [y.get_ydata() for y in bp["whiskers"]]
 minimum = [y.get_ydata()[0] for y in bp["caps"][::2]]
 maximum = [y.get_ydata()[0] for y in bp["caps"][1::2]]
+
 print(f"異常值Outliers : {outliers}")
 print(f"     Q1        : {Q1[0]}")
 print(f"     Q3        : {Q3[0]}")
@@ -181,6 +186,7 @@ Q1 = rtn[1]
 mean = rtn[2]
 Q3 = rtn[3]
 IQR = Q3 - Q1
+
 print(f"回傳值 = {rtn}")
 print(f"最小值 = {Q1-1.5*IQR}")
 print(f"  Q1   = {Q1}")
@@ -211,7 +217,22 @@ my_mark = dict(markeredgecolor="g", markerfacecolor="g", marker="*")
 plt.boxplot(data, labels=labels, flierprops=my_mark)
 """
 
-plt.title("5 組數據的箱線圖", fontsize=16, color="b")
+plt.title("5 組數據的箱線圖")
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+N = 1000 # 樣本數
+x = np.random.randn(N)
+
+plt.subplot(121)
+plt.boxplot(x, notch=False)
+plt.title("notch=False 的箱線圖")
+
+plt.subplot(122)
+plt.boxplot(x, notch=True)
+plt.title("notch=True 的箱線圖")
 
 plt.show()
 
@@ -224,31 +245,36 @@ data3 = np.random.randn(N)
 data = [data1, data2, data3]
 labels = ["data1", "data2", "data3"]
 plt.boxplot(data, labels=labels, notch=True)
-plt.title("notch=True 的箱線圖", fontsize=16, color="b")
+plt.title("notch=True 的箱線圖")
 
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
 N = 1000 # 樣本數
+
 # 建立 3 組數據
 data = [np.random.randn(N) for x in range(1, 4)]
 labels = ["x1", "x2", "x3"]
+
 # 建立子圖
 fig, ax = plt.subplots(nrows=1, ncols=2, figsize=(9, 5))
 # 建立正常的箱形圖盒子
 box1 = ax[0].boxplot(data, patch_artist=True, labels=labels)  # 含顏色  # x 軸標記
 ax[0].set_title("預設箱線圖盒子")
+
 # 建立缺口箱線圖盒子
 box2 = ax[1].boxplot(
     data, notch=True, patch_artist=True, labels=labels  # 缺口  # 含顏色
 )  # x 軸標記
 ax[1].set_title("缺口箱線圖盒子")
+
 # 箱線盒填上顏色
 colors = ["lightgreen", "yellow", "aqua"]
 for box in (box1, box2):
     for patch, color in zip(box["boxes"], colors):
         patch.set_facecolor(color)
+
 # 建立水平軸線
 for ax in [ax[0], ax[1]]:
     ax.yaxis.grid(True)
@@ -294,13 +320,31 @@ data = np.random.rand(20, 5)  # 生成5個維度數據，每組20個
 plt.boxplot(data)
 
 plt.show()
-
+'''
 print("------------------------------------------------------------")  # 60個
 
-data_1 = np.random.normal(100, 10, 200)
-data_2 = np.random.normal(90, 20, 200)
-data_3 = np.random.normal(80, 30, 200)
-data_4 = np.random.normal(70, 40, 200)
+#mu, sigma = 0, 0.1 # mean and standard deviation
+#s = np.random.normal(mu, sigma, 1000)
+
+N = 200
+mu, sigma = 100, 10
+data_1 = np.random.normal(mu, sigma, 200)
+mu, sigma = 90, 20
+data_2 = np.random.normal(mu, sigma, 200)
+mu, sigma = 80, 30
+data_3 = np.random.normal(mu, sigma, 200)
+mu, sigma = 70, 40
+data_4 = np.random.normal(mu, sigma, 200)
+
+"""
+bins = 50 # 束
+plt.hist(data_1, range=(30, 150), bins=bins, color="r", alpha=0.5)
+plt.hist(data_2, range=(30, 150), bins=bins, color="g", alpha=0.5)
+plt.hist(data_3, range=(30, 150), bins=bins, color="b", alpha=0.5)
+plt.hist(data_4, range=(30, 150), bins=bins, color="m", alpha=0.5)
+plt.show()
+"""
+
 data = [data_1, data_2, data_3, data_4]
 
 fig = plt.figure(figsize=(10, 7))
@@ -327,3 +371,4 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
+

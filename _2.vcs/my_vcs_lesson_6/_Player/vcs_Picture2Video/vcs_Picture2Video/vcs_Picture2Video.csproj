@@ -110,6 +110,7 @@
     </Content>
     <None Include="img\folder_open.png" />
     <None Include="img\ims-logo-720x480.bmp" />
+    <None Include="img\logo.png" />
     <Content Include="ims.ico" />
     <Content Include="swscale-0.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

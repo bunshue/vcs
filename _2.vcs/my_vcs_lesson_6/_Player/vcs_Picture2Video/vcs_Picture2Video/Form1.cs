@@ -37,13 +37,14 @@ namespace vcs_Picture2Video
         {
             int x_st = BORDER;
             int y_st = BORDER;
-            int dx = 120;
-            int dy = 50 + 15;
+            int dx = 100 + BORDER;
+            int dy = 50 + BORDER;
 
+            button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             richTextBox1.Size = new Size(400, 560);
             richTextBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
-
             this.Size = new Size(560, 620);
         }
 
@@ -52,7 +53,23 @@ namespace vcs_Picture2Video
             richTextBox1.Clear();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        void drawMessage(Bitmap bitmap1)
+        {
+            int W = bitmap1.Width;
+            int H = bitmap1.Height;
+            Bitmap bmp = vcs_Picture2Video.Properties.Resources.logo;
+            Graphics g;
+            g = Graphics.FromImage(bitmap1);
+            g.DrawRectangle(new Pen(Color.Red, 10), 50, 50, W - 50 * 2, H - 50 * 2);    //draw boundary
+            g.DrawString("台東之旅", new Font("標楷體", 30), new SolidBrush(Color.Navy), new PointF(W - 50 - 240, H - 50 - 50));
+            g.DrawImage(bmp, W - 50 - 70, H - 50 - 50 - 30, bmp.Width / 4, bmp.Height / 4);
+
+            //原圖貼上
+            //               貼上位置x      貼上位置y      貼上大小W            貼上大小H
+            //g.DrawImage(bmp, x_st + dx * 0, y_st + dy * 0, bmp.Width * 12 / 10, bmp.Height * 12 / 10);
+        }
+
+        private void button0_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "圖片轉影片\n";
             Application.DoEvents();
@@ -62,7 +79,20 @@ namespace vcs_Picture2Video
             int W = 1600;
             int H = 760;
             int fps = 1;
-            Bitmap bitmap1;
+
+            string filename1 = @"C:\_git\vcs\_1.data\______test_files1\__pic\_scenery/taitung1.jpg";
+            string filename2 = @"C:\_git\vcs\_1.data\______test_files1\__pic\_scenery/taitung2.jpg";
+            string filename3 = @"C:\_git\vcs\_1.data\______test_files1\__pic\_scenery/taitung3.jpg";
+            string filename4 = @"C:\_git\vcs\_1.data\______test_files1\__pic\_scenery/taitung4.jpg";
+            Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename1);	//Bitmap.FromFile出來的是Image格式
+            Bitmap bitmap2 = (Bitmap)Bitmap.FromFile(filename2);	//Bitmap.FromFile出來的是Image格式
+            Bitmap bitmap3 = (Bitmap)Bitmap.FromFile(filename3);	//Bitmap.FromFile出來的是Image格式
+            Bitmap bitmap4 = (Bitmap)Bitmap.FromFile(filename4);	//Bitmap.FromFile出來的是Image格式
+
+            drawMessage(bitmap1);
+            drawMessage(bitmap2);
+            drawMessage(bitmap3);
+            drawMessage(bitmap4);
 
             //公用變數
             VideoFileWriter writer = new VideoFileWriter();
@@ -72,27 +102,22 @@ namespace vcs_Picture2Video
 
             for (int i = 0; i < 10; i++)
             {
-                filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\_scenery/taitung1.jpg";
-                bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
                 writer.WriteVideoFrame(bitmap1);//寫入影格
-
-                filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\_scenery/taitung2.jpg";
-                bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
-                writer.WriteVideoFrame(bitmap1);//寫入影格
-
-                filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\_scenery/taitung3.jpg";
-                bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
-                writer.WriteVideoFrame(bitmap1);//寫入影格
-
-                filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\_scenery/taitung4.jpg";
-                bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
-                writer.WriteVideoFrame(bitmap1);//寫入影格
+                writer.WriteVideoFrame(bitmap2);//寫入影格
+                writer.WriteVideoFrame(bitmap3);//寫入影格
+                writer.WriteVideoFrame(bitmap4);//寫入影格
             }
 
             //關閉檔案
             writer.Close();
 
             richTextBox1.Text += "圖片轉影片 OK\n";
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //製作繪圖影片
         }
     }
 }

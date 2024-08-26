@@ -12,7 +12,7 @@ using System.Drawing.Imaging;   //for ImageFormat
 using System.Diagnostics;       //for Process
 using System.Runtime.InteropServices;   //for dll
 
-using AForge.Video;
+using AForge.Video;             //需要添加這兩個.dll, 參考/加入參考/瀏覽此二檔
 using AForge.Video.DirectShow;  // Video Recording
 using AForge.Video.FFMPEG;      //for VideoFileWriter
 
@@ -40,14 +40,7 @@ namespace vcs_WebCam_AForge2_Record3
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
-
-            USBWebcams = new FilterInfoCollection(FilterCategory.VideoInputDevice); //實例化對象
-            if (USBWebcams.Count > 0)
-            {
-                string camera_name = USBWebcams[0].MonikerString;   //長名
-                this.CamMonitor = new CameraMonitor(pictureBox1, camera_name, "第 1 台攝影機");
-                flag_webcam_ok = true;
-            }
+            Init_WebcamSetup();
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -103,6 +96,17 @@ namespace vcs_WebCam_AForge2_Record3
         private void bt_clear_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
+        }
+
+        void Init_WebcamSetup()
+        {
+            USBWebcams = new FilterInfoCollection(FilterCategory.VideoInputDevice); //實例化對象
+            if (USBWebcams.Count > 0)
+            {
+                string camera_name = USBWebcams[0].MonikerString;   //長名
+                this.CamMonitor = new CameraMonitor(pictureBox1, camera_name, "第 1 台攝影機");
+                flag_webcam_ok = true;
+            }
         }
 
         //錄影 ST
