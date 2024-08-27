@@ -9,6 +9,7 @@ using System.Windows.Forms;
 
 using System.Threading;
 using System.Diagnostics;   //for Process
+
 namespace vcs_Thread_Example1
 {
     public partial class Form1 : Form
@@ -42,13 +43,31 @@ namespace vcs_Thread_Example1
                 //忽略錯誤，程式繼續執行
             }
 
+            //殺死一個線程
+            if (thread_ex8a != null)
+            {
+                if (thread_ex8a.IsAlive)//線程類的 Abort() 方法可以永久的殺死一個線程。在殺死一個線程起前應該判斷線程是否在生存期間。
+                {
+                    thread_ex8a.Abort();
+                }
+                thread_ex8a = null;
+            }
+
+            //殺死一個線程
+            if (thread_ex8b != null)
+            {
+                if (thread_ex8b.IsAlive)//線程類的 Abort() 方法可以永久的殺死一個線程。在殺死一個線程起前應該判斷線程是否在生存期間。
+                {
+                    thread_ex8b.Abort();
+                }
+                thread_ex8b = null;
+            }
+
             //C# 強制關閉 Process
             Process.GetCurrentProcess().Kill();
 
             Application.Exit();
-
         }
-
 
         void show_item_location()
         {
@@ -123,8 +142,10 @@ namespace vcs_Thread_Example1
             button70.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button71.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button72.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            button80.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            button81.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button80a.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button81a.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button80b.Location = new Point(x_st + dx * 0 + 50 + 10, y_st + dy * 0);
+            button81b.Location = new Point(x_st + dx * 0 + 50 + 10, y_st + dy * 1);
             button82.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             button90.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button91.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -243,7 +264,6 @@ namespace vcs_Thread_Example1
                     richTextBox1.Text += "IsBackground\t" + thread_ex1.IsBackground.ToString() + "\n";
                 }
             }
-
         }
         //Thread使用範例1 SP
 
@@ -419,7 +439,6 @@ namespace vcs_Thread_Example1
                 flag_thread_running = false;
                 richTextBox1.Text += "\n";
             }
-
         }
 
         private void button41_Click(object sender, EventArgs e)
@@ -569,8 +588,6 @@ namespace vcs_Thread_Example1
             {
                 MakeThread("高_" + i.ToString(), ThreadPriority.AboveNormal);
             }
-
-
         }
 
         private void button71_Click(object sender, EventArgs e)
@@ -585,15 +602,86 @@ namespace vcs_Thread_Example1
         //Thread使用範例7 SP
 
         //Thread使用範例8 ST
+        private Thread thread_ex8a;
+        private Thread thread_ex8b;
+        int cnt8a = 0;
+        int cnt8b = 0;
 
-        private void button80_Click(object sender, EventArgs e)
+        private void ThreadProc_ex8a()
         {
-
+            while (true)
+            {
+                richTextBox1.Text += "8a " + (cnt8a++).ToString() + " ";
+                Thread.Sleep(500);
+            }
         }
 
-        private void button81_Click(object sender, EventArgs e)
+        private void ThreadProc_ex8b()
         {
+            if (thread_ex8a != null)
+            {
+                //等待執行
+                thread_ex8a.Join();//thread_ex8b 要先讓線程 thread_ex8a 執行完，然後線程 thread_ex8b 再繼續執行
+            }
 
+            while (true)
+            {
+                richTextBox1.Text += "8b " + (cnt8b++).ToString() + " ";
+                Thread.Sleep(500);
+            }
+        }
+
+        private void button80a_Click(object sender, EventArgs e)
+        {
+            if (thread_ex8a == null)
+            {
+                // The thread isn't running. Start it.
+                cnt8a = 0;
+                thread_ex8a = new Thread(ThreadProc_ex8a);
+                thread_ex8a.Priority = ThreadPriority.BelowNormal;
+                thread_ex8a.IsBackground = true;
+                thread_ex8a.Start();
+            }
+        }
+
+        private void button81a_Click(object sender, EventArgs e)
+        {
+            //殺死一個線程
+            if (thread_ex8a != null)
+            {
+                if (thread_ex8a.IsAlive)//線程類的 Abort() 方法可以永久的殺死一個線程。在殺死一個線程起前應該判斷線程是否在生存期間。
+                {
+                    thread_ex8a.Abort();
+                }
+                thread_ex8a = null;
+            }
+        }
+
+        private void button80b_Click(object sender, EventArgs e)
+        {
+            if (thread_ex8b == null)
+            {
+                richTextBox1.Text += "等thread_ex8a 執行完，thread_ex8b 再繼續執行\n";
+                // The thread isn't running. Start it.
+                cnt8b = 0;
+                thread_ex8b = new Thread(ThreadProc_ex8b);
+                thread_ex8b.Priority = ThreadPriority.BelowNormal;
+                thread_ex8b.IsBackground = true;
+                thread_ex8b.Start();
+            }
+        }
+
+        private void button81b_Click(object sender, EventArgs e)
+        {
+            //殺死一個線程
+            if (thread_ex8b != null)
+            {
+                if (thread_ex8b.IsAlive)//線程類的 Abort() 方法可以永久的殺死一個線程。在殺死一個線程起前應該判斷線程是否在生存期間。
+                {
+                    thread_ex8b.Abort();
+                }
+                thread_ex8b = null;
+            }
         }
 
         private void button82_Click(object sender, EventArgs e)
@@ -602,9 +690,40 @@ namespace vcs_Thread_Example1
         }
         //Thread使用範例8 SP
 
+        //Thread使用範例9 ST
+
+        // This value is incremented by the thread.
+        public int Value = 0;
+        // Make and start a new counter object.
+        private int thread_num = 0;
+
+        // Add the text to the results.
+        // The form provides this service because the
+        // thread cannot access the form's controls directly.
+        public void DisplayValue(string txt)
+        {
+            richTextBox1.AppendText(txt + "\n");
+            richTextBox1.ScrollToCaret();       //RichTextBox顯示訊息自動捲動，顯示最後一行
+        }
+
         private void button90_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "啟動 thread 9\n";
 
+            // Make a new counter object.
+            Counter new_counter = new Counter(this, thread_num);
+            richTextBox1.Text += "開啟thread, 編號 " + thread_num.ToString() + "\n";
+            thread_num++;
+
+            // Make a thread to run the object's Run method.
+            Thread thread_ex9 = new Thread(new_counter.Run);
+
+            // Make this a background thread so it automatically
+            // aborts when the main program stops.
+            thread_ex9.IsBackground = true;
+
+            // Start the thread.
+            thread_ex9.Start();
         }
 
         private void button91_Click(object sender, EventArgs e)
@@ -621,20 +740,49 @@ namespace vcs_Thread_Example1
 
         //Thread使用範例10 ST
 
+        Random r = new Random(Guid.NewGuid().GetHashCode());
+        private int _R = 0, _G = 0, _B = 0;
+        private Thread thread_ex10;
+
+        private void ThreadProc_ex10()
+        {
+            while (true)
+            {
+                _R = r.Next(256);
+                _G = r.Next(256);
+                _B = r.Next(256);
+                Thread.Sleep(100);
+            }
+        }
+
         private void button100_Click(object sender, EventArgs e)
         {
+            thread_ex10 = new Thread(ThreadProc_ex10);
 
+            if (thread_ex10.IsAlive == false)
+            {
+                thread_ex10.Start();
+            }
         }
 
         private void button101_Click(object sender, EventArgs e)
         {
-
+            richTextBox1.Text += "停止 thread thread_ex10\n";
+            thread_ex10.Abort();
         }
 
         private void button102_Click(object sender, EventArgs e)
         {
 
         }
+
+        private void timer_rgb_Tick(object sender, EventArgs e)
+        {
+            lb_R.Text = _R.ToString();
+            lb_G.Text = _G.ToString();
+            lb_B.Text = _B.ToString();
+        }
+
         //Thread使用範例10 SP
 
 
@@ -654,14 +802,81 @@ namespace vcs_Thread_Example1
         {
 
         }
+
         //Thread使用範例11 SP
-
-
-
-
-
-
     }
+
+    // This class's Run method displays a count in the Output window.
+    class Counter
+    {
+        // The form that owns the Value variable.
+        private Form1 MyForm;
+
+        // This counter's number.
+        private int Number;
+
+        // Define a delegate type for the form's DisplayValue method.
+        private delegate void DisplayValueDelegateType(string txt);
+
+        // Declare a delegate variable to point to the form's DisplayValue method.
+        private DisplayValueDelegateType DisplayValueDelegate;
+
+        public Counter(Form1 form1, int number)
+        {
+            MyForm = form1;
+            Number = number;
+
+            // Initialize the delegate variable to point
+            // to the form's DisplayValue method.
+            DisplayValueDelegate = MyForm.DisplayValue;
+        }
+
+        // Count off seconds in the Output window.
+        public void Run()
+        {
+            try
+            {
+                while (true)
+                {
+                    // Wait 1 second.
+                    Thread.Sleep(1000);
+
+                    // Lock the form object. This doesn't do anything
+                    // to the form, it just means no other thread can
+                    // lock the form object until we release the lock.
+                    // That means a thread can update MyForm.Value
+                    // and then display its value without interference.
+                    lock (MyForm)
+                    {
+                        // Increment the form's Value.
+                        MyForm.Value++;
+
+                        // Display the value on the form.
+                        // The call to InvokeRequired returns true
+                        // if this code is not running on the same
+                        // thread as the object MyForm. In this
+                        // example, we know that is true so the call
+                        // isn't necessary, but in other cases it
+                        // might not be so clear.
+                        if (MyForm.InvokeRequired)
+                        {
+                            // Make an array containing the parameters
+                            // to pass to the method.
+                            string[] args = new string[] { "Thread : " + Number + ", 數字 : " + MyForm.Value };
+
+                            // Invoke the delegate.
+                            MyForm.Invoke(DisplayValueDelegate, args);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Unexpected error in thread " + Number + "\r\n" + ex.Message);
+            }
+        }
+    }
+
     class Counter2
     {
         // This counter's number.
@@ -693,5 +908,4 @@ namespace vcs_Thread_Example1
             }
         }
     }
-
 }

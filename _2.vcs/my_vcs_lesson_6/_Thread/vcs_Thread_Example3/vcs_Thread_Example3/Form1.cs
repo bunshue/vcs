@@ -7,20 +7,18 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Threading;
-using System.Diagnostics;
+using System.Diagnostics;   //for Process
+using System.Threading;   //匯入多執行緒功能函數
+
 using System.Timers;    //for ElapsedEventHandler
 
 namespace vcs_Thread_Example3
 {
+    //創建SetValue的委托
+    public delegate void SetValueDel(string str, object obj);
+
     public partial class Form1 : Form
     {
-
-        // This value is incremented by the thread.
-        public int Value = 0;
-        // Make and start a new counter object.
-        private int thread_num = 0;
-
         public Form1()
         {
             InitializeComponent();
@@ -31,6 +29,8 @@ namespace vcs_Thread_Example3
             //C# 跨 Thread 存取 UI
             //Form1.CheckForIllegalCrossThreadCalls = false;  //解決跨執行緒控制無效	same
             Control.CheckForIllegalCrossThreadCalls = false;//忽略跨執行緒錯誤
+
+            Thread.CurrentThread.Name = "MainThread";
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -41,7 +41,23 @@ namespace vcs_Thread_Example3
                 timechange.stop();
             }
 
+            /*
+            richTextBox1.Text += "關閉程式\n";
+            //Application.Exit();
+            try
+            {
+                System.Environment.Exit(0);
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "xxx錯誤訊息e41 : " + ex.Message + "\n";
+            }
+            */
 
+            //C# 強制關閉 Process
+            Process.GetCurrentProcess().Kill();
+
+            Application.Exit();
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -71,78 +87,6 @@ namespace vcs_Thread_Example3
             t.Priority = ThreadPriority.Lowest;
             t.Start(null);
 
-        }
-
-        //螢幕畫素讀取 ST
-
-        Random r = new Random(Guid.NewGuid().GetHashCode());
-        private int _R = 0, _G = 0, _B = 0;
-        private Thread thread_ex8;
-
-        private void ThreadProc_ex8()
-        {
-            while (true)
-            {
-                _R = r.Next(256);
-                _G = r.Next(256);
-                _B = r.Next(256);
-                Thread.Sleep(100);
-            }
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            thread_ex8 = new Thread(ThreadProc_ex8);
-
-            if (thread_ex8.IsAlive == false)
-            {
-                thread_ex8.Start();
-            }
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "停止 thread thread_ex8\n";
-            thread_ex8.Abort();
-        }
-
-        private void timer_rgb_Tick(object sender, EventArgs e)
-        {
-            lb_R.Text = _R.ToString();
-            lb_G.Text = _G.ToString();
-            lb_B.Text = _B.ToString();
-        }
-        //螢幕畫素讀取 SP
-
-        //第1種Thread使用
-        private void button5_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "啟動 thread 9\n";
-
-            richTextBox1.Text += "第1種Thread使用\n";
-            // Make a new counter object.
-            Counter new_counter = new Counter(this, thread_num);
-            richTextBox1.Text += "開啟thread, 編號 " + thread_num.ToString() + "\n";
-            thread_num++;
-
-            // Make a thread to run the object's Run method.
-            Thread thread_ex9 = new Thread(new_counter.Run);
-
-            // Make this a background thread so it automatically
-            // aborts when the main program stops.
-            thread_ex9.IsBackground = true;
-
-            // Start the thread.
-            thread_ex9.Start();
-
-        }
-        // Add the text to the results.
-        // The form provides this service because the
-        // thread cannot access the form's controls directly.
-        public void DisplayValue(string txt)
-        {
-            richTextBox1.AppendText(txt + "\n");
-            richTextBox1.ScrollToCaret();       //RichTextBox顯示訊息自動捲動，顯示最後一行
         }
 
         //開啟關閉thread    ST
@@ -222,104 +166,80 @@ namespace vcs_Thread_Example3
                 timechange.stop();
         }
 
-        private void button9_Click(object sender, EventArgs e)
-        {
 
+        //開啟一個線程
+        int aaaa = 0;
+
+        //給文本框賦值
+        private void SetValue(string str, object obj)
+        {
+            //lock裡面的代碼同一個時刻，只能被一個線程使用。其它的後面排隊。這樣防止數據混亂。
+            lock (obj)
+            {
+                richTextBox1.Text += "Thread名稱 : " + str + " 做事 " + DateTime.Now.ToString() + "\n";
+            }
         }
 
-        private void button8_Click(object sender, EventArgs e)
+        private void button3_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "第2種Thread使用\n";
+            //將委托的方法和主窗體傳過去
+            NEWThreadClass threadOneClass = new NEWThreadClass(SetValue, this);
 
-        }
+            aaaa++;
+            string thread_name = "Thread測試_" + aaaa.ToString();
 
-        private void button7_Click(object sender, EventArgs e)
-        {
+            Thread TheThreadOne = new Thread(threadOneClass.threadOne);//不需要ThreadStart()也可以
+            TheThreadOne.Name = thread_name;
 
-        }
+            richTextBox1.Text += "開啟thread, 名稱 : " + TheThreadOne.Name + "\n";
 
-        private void button12_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button11_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button10_Click(object sender, EventArgs e)
-        {
+            //讓線程變為後台線程（默認是前台的），這樣主線程結束了，這個線程也會結束。要不然，任何前台線程在運行都會保持程序存活。
+            TheThreadOne.IsBackground = true;
+            TheThreadOne.Start();
 
         }
     }
 
-    // This class's Run method displays a count in the Output window.
-    class Counter
+
+    //建一個類，模擬實際使用情況
+    public class NEWThreadClass
     {
-        // The form that owns the Value variable.
-        private Form1 MyForm;
+        //接收主窗體傳過來的委托方法。
+        public SetValueDel setValueDel;
 
-        // This counter's number.
-        private int Number;
+        //接收主窗體
+        public Form form;
 
-        // Define a delegate type for the form's DisplayValue method.
-        private delegate void DisplayValueDelegateType(string txt);
+        //用於告訴主線程中鎖，是哪一個線程調用的。
+        static object locker = new object();
 
-        // Declare a delegate variable to point to the form's DisplayValue method.
-        private DisplayValueDelegateType DisplayValueDelegate;
-
-        public Counter(Form1 form1, int number)
+        public NEWThreadClass(SetValueDel del, Form fom)
         {
-            MyForm = form1;
-            Number = number;
-
-            // Initialize the delegate variable to point
-            // to the form's DisplayValue method.
-            DisplayValueDelegate = MyForm.DisplayValue;
+            this.setValueDel = del;
+            this.form = fom;
         }
-
-        // Count off seconds in the Output window.
-        public void Run()
+        //第一個線程,給主線程創建的控件傳值。
+        public void threadOne()
         {
+            //這裡獲取線程的名字
+            string threadName = Thread.CurrentThread.Name;
             try
             {
                 while (true)
                 {
-                    // Wait 1 second.
-                    Thread.Sleep(1000);
-
-                    // Lock the form object. This doesn't do anything
-                    // to the form, it just means no other thread can
-                    // lock the form object until we release the lock.
-                    // That means a thread can update MyForm.Value
-                    // and then display its value without interference.
-                    lock (MyForm)
+                    //告訴主線程，我要更改你的控件了。
+                    this.form.Invoke((EventHandler)(delegate
                     {
-                        // Increment the form's Value.
-                        MyForm.Value++;
-
-                        // Display the value on the form.
-                        // The call to InvokeRequired returns true
-                        // if this code is not running on the same
-                        // thread as the object MyForm. In this
-                        // example, we know that is true so the call
-                        // isn't necessary, but in other cases it
-                        // might not be so clear.
-                        if (MyForm.InvokeRequired)
-                        {
-                            // Make an array containing the parameters
-                            // to pass to the method.
-                            string[] args = new string[] { "Thread : " + Number + ", 數字 : " + MyForm.Value };
-
-                            // Invoke the delegate.
-                            MyForm.Invoke(DisplayValueDelegate, args);
-                        }
-                    }
+                        //如果在這裡使用Thread.CurrentThread.Name 獲取到的是主線程的名字。
+                        setValueDel(threadName + " :Hello!", locker);//給文本框傳值，“自己的名字：Hello!”。
+                    }));
+                    Thread.Sleep(3 * 1000);//太累了 ，休息三秒。。。。
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Unexpected error in thread " + Number + "\r\n" + ex.Message);
+                Console.WriteLine("Unexpected error in thread : " + ex.Message);
             }
         }
     }

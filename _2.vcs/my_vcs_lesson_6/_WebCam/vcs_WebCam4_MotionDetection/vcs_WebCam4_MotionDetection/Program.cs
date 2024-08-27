@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_Thread_Example
+namespace vcs_WebCam4_MotionDetection
 {
     static class Program
     {

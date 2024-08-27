@@ -1238,7 +1238,7 @@ namespace vcs_Mix00
 
         private void button23_Click(object sender, EventArgs e)
         {
-            string str = "10/3";
+            string str = "(123+456)*789/123";
             float result = Calculator.dealWith(str);
             richTextBox1.Text += str + " = " + result.ToString() + "\n";
         }
@@ -2212,7 +2212,6 @@ namespace vcs_Mix00
             //循環字符串中的所有字符並賦值給numberQueue隊列 
             foreach (char c in number)
             {
-
                 numberQueue.Enqueue(c);
             }
 

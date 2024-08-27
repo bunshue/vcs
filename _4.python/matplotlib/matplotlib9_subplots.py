@@ -103,6 +103,22 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
+fig, axs = plt.subplots(nrows=2, ncols=2)
+
+axs[0, 0].plot(x, y)
+axs[0, 1].plot(x, y)
+axs[1, 0].plot(x, y)
+axs[1, 1].plot(x, y)
+
+axs[0, 0].set_title("A")
+axs[0, 1].set_title("B")
+axs[1, 0].set_title("C")
+axs[1, 1].set_title("D")
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
 print("用fig ax畫圖, 四張子圖")
 
 #fig, ax = plt.subplots(2, 2)  # 建立4個子圖 #same

@@ -23,7 +23,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 plt.figure(
     num="plot 集合 1",
     figsize=(12, 8),
@@ -51,7 +51,7 @@ def random_walk(xy0=(0.0, 0.0), nsteps=100, std=1.0):
 
 for cnt in range(3):
     traj = random_walk()
-    plt.plot(traj[:, 0], traj[:, 1], label="Traj. {c}".format(c=cnt))
+    plt.plot(traj[:, 0], traj[:, 1], label="軌跡 : {c}".format(c=cnt))
 
 plt.legend()
 plt.title("Random Walk")
@@ -286,9 +286,7 @@ for i in range(0, cnt - 1):
 # 繪圖
 plt.plot(x[1:], diff_y)
 
-
 plt.show()
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -332,6 +330,18 @@ plt.gcf().autofmt_xdate()  # 自動旋轉角度，以避免重疊
 print("------------------------------------------------------------")  # 60個
 plt.subplot(232)
 
+# 把字典畫出來
+animals = {
+    "鼠": 3,
+    "牛": 48,
+    "虎": 33,
+    "兔": 8,
+    "龍": 38,
+}
+
+plt.plot(range(len(animals.values())), animals.values())
+plt.xticks(range(len(animals.values())), animals.keys(), rotation=30)
+
 print("------------------------------------------------------------")  # 60個
 plt.subplot(233)
 
@@ -347,26 +357,32 @@ plt.subplot(236)
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
-
-fig, axs = plt.subplots(nrows=2, ncols=2)
+'''
 x = np.linspace(0, 2 * np.pi, 200)
 N = 20
+
+plt.figure(figsize=(12, 8))
+
 for i in range(N):
-    axs[0, 0].plot(x, i * np.sin(x), color=plt.cm.hsv(i / N))
-    axs[0, 1].plot(x, i * np.sin(x), color=plt.cm.rainbow(i / N))
-    axs[1, 0].plot(x, i * np.sin(x), color=plt.cm.cool(i / N))
-    axs[1, 1].plot(x, i * np.sin(x), color=plt.cm.hot(i / N))
+    plt.subplot(221)
+    plt.plot(x, i * np.sin(x), color=plt.cm.hsv(i / N))
+    plt.subplot(222)
+    plt.plot(x, i * np.sin(x), color=plt.cm.rainbow(i / N))
+    plt.subplot(223)
+    plt.plot(x, i * np.sin(x), color=plt.cm.cool(i / N))
+    plt.subplot(224)
+    plt.plot(x, i * np.sin(x), color=plt.cm.hot(i / N))
 
-axs[0, 0].set_title("hsv")
-axs[0, 1].set_title("rainbow")
-axs[1, 0].set_title("cool")
-axs[1, 1].set_title("hot")
+plt.subplot(221)
+plt.title("hsv")
+plt.subplot(222)
+plt.title("rainbow")
+plt.subplot(223)
+plt.title("cool")
+plt.subplot(224)
+plt.title("hot")
 
-plt.tight_layout()
 plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -376,18 +392,9 @@ print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
 
-# 把字典畫出來
-animals = {
-    "鼠": 3,
-    "牛": 48,
-    "虎": 33,
-    "兔": 8,
-    "龍": 38,
-}
+print("------------------------------------------------------------")  # 60個
 
-plt.plot(range(len(animals.values())), animals.values())
-plt.xticks(range(len(animals.values())), animals.keys(), rotation=45)
 
-plt.show()
+print("------------------------------------------------------------")  # 60個
 
-sys.exit()
+
