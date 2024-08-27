@@ -11,7 +11,7 @@ using System.Threading;
 using System.Diagnostics;
 using System.Timers;    //for ElapsedEventHandler
 
-namespace vcs_Thread_Example2
+namespace vcs_Thread_Example3
 {
     public partial class Form1 : Form
     {

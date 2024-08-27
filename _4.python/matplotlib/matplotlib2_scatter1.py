@@ -119,7 +119,7 @@ y = np.sin(np.radians(degrees))
 
 size = 300
 plt.scatter(x, y, s=size)
-plt.plot(x, y, 'r')
+plt.plot(x, y, "r")
 
 
 # 第三張圖
@@ -160,13 +160,13 @@ for i in range(1000):
     else:
         X.append(x)
         Y.append(y)
-#print(len(X))
+# print(len(X))
 
 plt.scatter(X, Y)
 
 plt.axis([0, 10, 0, 10])
 plt.axis("equal")
-plt.title('蒙地卡羅模擬')
+plt.title("蒙地卡羅模擬")
 
 
 # 第六張圖
@@ -224,6 +224,7 @@ plt.figure(
 # 第一張圖
 plt.subplot(231)
 
+
 def loc(index):
     # 處理座標的移動
     x_mov = random.choice([-3, 3])  # 隨機x軸移動值
@@ -245,6 +246,7 @@ plt.scatter(x, y, s=2, c=t, cmap="brg")
 
 # 第二張圖
 plt.subplot(232)
+
 
 def loc(index):
     # 處理座標的移動
@@ -291,7 +293,6 @@ plt.scatter(x, y, s=size2, marker="o", c=colors)
 plt.plot((0.5, 0.5), (0, 1.0))  # 繪製邊界線
 
 
-
 # 第四張圖
 plt.subplot(234)
 
@@ -335,7 +336,7 @@ X, Y = np.meshgrid(x, y)
 size = [i * 80 for i in Y]  # 放大資料點數據 N 倍，比較容易觀察尺寸
 
 plt.scatter(X, Y, s=size, c=size, cmap="Set1")  # 使用 Set1 的 colormap
-#plt.colorbar()
+# plt.colorbar()
 
 
 # 第六張圖
@@ -351,7 +352,7 @@ X, Y = np.meshgrid(x, y)
 size = [i * 80 for i in Y]  # 放大資料點數據 N 倍，比較容易觀察尺寸
 
 plt.scatter(X, Y, s=size, c=size, cmap="Set1", vmin=200, vmax=650)
-#plt.colorbar()
+# plt.colorbar()
 
 plt.show()
 
@@ -383,9 +384,8 @@ lines = np.zeros(N) + 5
 print(lines)
 
 # 修改其中的linewidth參數的大小，但是沒什么不同，**注意：**只有marker為封閉的圖案的時候，這個參數才有效。
-#plt.scatter(x, y, s=size, c=colors, alpha=0.5, marker="x", linewidths=lines) # NG
+# plt.scatter(x, y, s=size, c=colors, alpha=0.5, marker="x", linewidths=lines) # NG
 plt.scatter(x, y, s=size, c=colors, alpha=0.5, linewidths=lines)
-
 
 
 # 第二張圖
@@ -469,7 +469,7 @@ size = 300
 changecolor = colors.Normalize(vmin=0.4, vmax=0.8)
 
 plt.scatter(x, y, c=color, s=size, alpha=0.3, cmap="viridis", norm=changecolor)
-#plt.colorbar()
+# plt.colorbar()
 
 plt.show()
 
@@ -492,17 +492,17 @@ y = A * np.random.rand(N)  # 0~A取N個數出來
 colors = np.random.rand(N)  # 色彩數列
 size = 300
 
-#plt.scatter(x, y)
+# plt.scatter(x, y)
 
-#plt.scatter(x, y, s=size, c=colors, alpha=0.5)
+# plt.scatter(x, y, s=size, c=colors, alpha=0.5)
 plt.scatter(x, y, c=y, cmap="hsv")  # 色彩依 y 軸值變化
-#plt.scatter(x, y, s=size, c=colors, alpha=0.5, marker="x")#使用marker
-#plt.scatter(x, y, s=size, c=colors, marker="*")#使用marker 方塊
-#plt.scatter(x, y, s=size, c=colors, marker="s")#使用marker 星形
-#plt.scatter(x, y, color="red", marker="^") # 指名marker和顏色
-#plt.scatter(x, y, s=size, c="r")  # 指定顏色與大小
+# plt.scatter(x, y, s=size, c=colors, alpha=0.5, marker="x")#使用marker
+# plt.scatter(x, y, s=size, c=colors, marker="*")#使用marker 方塊
+# plt.scatter(x, y, s=size, c=colors, marker="s")#使用marker 星形
+# plt.scatter(x, y, color="red", marker="^") # 指名marker和顏色
+# plt.scatter(x, y, s=size, c="r")  # 指定顏色與大小
 
-#plt.colorbar()
+# plt.colorbar()
 
 """ 各種scatter的語法
 # 給散佈圖的點套上不同深淺顏色
@@ -535,7 +535,7 @@ colors = np.random.rand(N)  # 隨機產生N個用于顏色映射的數值
 size = 300
 
 plt.scatter(x, y, c=colors, s=size, alpha=0.3, cmap="viridis")
-#plt.colorbar()
+# plt.colorbar()
 
 plt.show()
 
@@ -662,7 +662,6 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
 
 
@@ -671,8 +670,6 @@ print("作業完成")
 print("------------------------------------------------------------")  # 60個
 sys.exit()
 print("------------------------------------------------------------")  # 60個
-
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -721,7 +718,6 @@ plt.scatter(x, y, s=100, c=cl, alpha=0.6, cmap="Paired")
 """
 
 
-
 print("------------------------------------------------------------")  # 60個
 
 
@@ -742,7 +738,7 @@ plt.scatter(x, y, color="lightgreen", edgecolor="b", s=60)
 
 plt.scatter(x, y, c=y, cmap="rainbow")
 plt.scatter(x, y, s=300, c=y, cmap="hsv")  # 色彩隨y軸值變化
-#plt.colorbar()
+# plt.colorbar()
 
 # 由平均 0, 標準差 1 的分布中取 20 個數
 # np.random.randn(20)
@@ -783,7 +779,7 @@ N = 20
 x = np.linspace(0, 5, N)  # 含N個元素的陣列
 
 plt.scatter(x, y, s=300, c=y, cmap="rainbow")  # 色彩隨 y 軸值變化
-#plt.colorbar()
+# plt.colorbar()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -819,7 +815,7 @@ y = np.linspace(0, 5, N)  # 含N個元素的陣列
 plt.scatter(x, y, s=300, c=x, cmap="rainbow")  # 色彩隨 x 軸值變化
 plt.scatter(x, y, s=300, c=y, cmap="rainbow")  # 色彩隨 y 軸值變化
 
-#plt.colorbar()
+# plt.colorbar()
 plt.show()
 
 colors = np.array(["b", "c", "g", "k", "m", "r", "y", "pink", "purple", "orange"])
@@ -881,7 +877,7 @@ correlation[0, 1]  # 顯示在畫面
 
 """
 
-print('建立任意大小陣列')
+print("建立任意大小陣列")
 size = (30 * np.random.rand(N)) ** 2  # 散點大小數列
 size = 700 * np.random.rand(N)  # 隨機產生N個用于改變散點面積的數值
 size = np.random.randint(100, 2000, size=(3, 10))  # 產生 3x10 陣列，內容為 100～2000 隨機數字
@@ -898,7 +894,5 @@ x = np.random.randint(1, 11, N)
 y = np.random.randint(1, 11, N)
 
 
-
 x = np.random.randn(N)
 y = np.random.randn(N)
-

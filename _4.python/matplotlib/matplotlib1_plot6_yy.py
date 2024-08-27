@@ -11,6 +11,7 @@ print("------------------------------------------------------------")  # 60個
 # 共同
 import os
 import sys
+import time
 import math
 import random
 import numpy as np
@@ -145,6 +146,22 @@ ax2.set_ylabel("雨量")
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
+
+# 共同參數
+x = np.linspace(0, 2 * np.pi, 30)
+y = np.sin(x)
+y0 = np.sin(x)
+y1 = np.cos(x)
+y2 = np.tan(x)
+
+fig, ax1 = plt.subplots(1, 1)
+
+ax2 = ax1.twinx()  # 使用相同的 x 軸
+
+ax1.plot(x, y0)
+ax2.plot(x, y1, "g", lw="3")
+
+plt.show()
 
 
 print("------------------------------------------------------------")  # 60個

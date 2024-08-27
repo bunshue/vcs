@@ -14,6 +14,7 @@ print("------------------------------------------------------------")  # 60個
 # 共同
 import os
 import sys
+import time
 import math
 import time
 import random
@@ -238,11 +239,6 @@ print('------------------------------------------------------------')	#60個
 #Python繪圖的方法-使用 pandas
 #pandas 繪圖
 
-import numpy as np
-import matplotlib.pyplot as plt
-import pandas as pd
-import seaborn as sns
-
 data=np.random.randn(1000,4)
 
 df=pd.DataFrame(data=data,index=np.arange(1000),columns=['a','b','c','d'])
@@ -363,6 +359,7 @@ print('------------------------------------------------------------')	#60個
 
 
 from matplotlib import style
+
 style.use("fivethirtyeight")
 
 dictionary1 = {"順序": [1, 2, 3, 4],
@@ -501,9 +498,6 @@ tree.write("tmp_導出圖表.html")
 
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-
 # 定義資料 
 sales_dep = pd.DataFrame({
     "label": ["第1業務部", "第2業務部", "第3業務部",
@@ -532,7 +526,8 @@ print('只變更要強調的扇形的顏色')
 # 要強調的扇形的標籤 
 point_label = "第3業務部" 
 # 重點色 
-point_color = "#CC0000" 
+point_color = "#CC0000"
+
 # 調整特定標籤的顏色
 palette = sns.color_palette("binary", len(sales_dep)) 
 for i in sales_dep[sales_dep.label == point_label].index.values:
@@ -543,76 +538,55 @@ plt.pie(sales_dep["value"], labels=sales_dep["label"],
         colors=palette)
 
 plt.show()
-
+'''
 print('------------------------------------------------------------')	#60個
 
-# 折線圖
-# 日本各都市平均氣溫全年資料
+print("日本各都市平均氣溫全年資料")
 
 filename = 'data/weather_sample.csv'
 weather = pd.read_csv(filename, header=0, parse_dates=["年月"])
+#print(weather)
 
-#折線圖的繪製範例
-#sns.set(style="whitegrid", font="meiryo")
-
-# 由於座標軸的最小值不能為0，所以指定y軸的值
-plt.ylim([0, 30])
-
-sns.lineplot(data=weather, x="年月", y="東京-平均氣溫(℃)")
-
-
-#sns.set(style="whitegrid", font="meiryo")
-plt.ylim([0, 30])
-sns.lineplot(data=weather, x="年月", y="東京-平均氣溫(℃)")
-
-# 讓年月轉成90度的直書格式，才更方便閱讀
-plt.xticks(rotation=90)
+weather.plot(kind = 'line', x="年月", y="東京-平均氣溫(℃)", title = '東京', figsize = [10, 5])
+weather.plot(kind = 'line', x="年月", y="大阪-平均氣溫(℃)", title = '大阪', figsize = [10, 5])
 
 plt.show()
 
-print('------------------------------------------------------------')	#60個
+print('------------------------------')	#30個
 
 filename = 'data/weather_sample.csv'
-weather_index = pd.read_csv(filename, header=0,
-                             parse_dates=["年月"], index_col=0) 
+weather_index = pd.read_csv(filename, header=0, parse_dates=["年月"], index_col=0) 
 tmp_ave = weather_index[["東京-平均氣溫(℃)", "大阪-平均氣溫(℃)",
                          "那霸-平均氣溫(℃)", "函館-平均氣溫(℃)"]] 
 print(tmp_ave)
 
 # 在單一圖表繪製多張折線圖的範例
 
-# 繪製折線圖
-#sns.set(style="white", font="meiryo")
-ax = sns.lineplot(data=tmp_ave)
+tmp_ave.plot(kind = 'line')
 
 # 適度調整標籤與圖例
-plt.xticks(rotation=90)
-ax.legend(loc="lower left", bbox_to_anchor=(1, 0))
+plt.xticks(rotation=30)
+plt.legend()
 
-print('ddd')
 plt.show()
 
-print('------------------------------------------------------------')	#60個
+print('------------------------------')	#30個
 
 #將多張折線圖的折線設定為同一種類的範例
 
-# 調整資料的格式
-#sns.set(style="white", font="meiryo") 
 tmp_stack = tmp_ave.stack().rename_axis(["年月", "category"]).reset_index().rename(columns={0: "value"}) 
 print(tmp_stack)
 
 # 繪製折線圖
-#sns.set(style="white", font="meiryo") 
-ax = sns.lineplot(data=tmp_stack, x="年月", y="value", hue="category",
-                  palette="pastel") 
-# 適度調整標籤與圖例 
-plt.xticks(rotation=90) 
-ax.legend(loc="lower left", bbox_to_anchor=(1, 0))
+ax = sns.lineplot(data=tmp_stack, x="年月", y="value", hue="category", palette="pastel")
 
-print('eee')
+# 適度調整標籤與圖例 
+plt.xticks(rotation=30)
+plt.legend()
+
 plt.show()
 
-print('------------------------------------------------------------')	#60個
+print('------------------------------')	#30個
 
 #強調特定折線圖的範例
 #sns.set(style="white", font="meiryo") 
@@ -636,15 +610,14 @@ palette[point_number] = point_color
 # 繪製折線圖
 ax = sns.lineplot(data=tmp_stack, x="年月", y="value", hue="category",
                   palette=palette) 
+
 # 適度調整標籤與圖例 
-plt.xticks(rotation=90) 
+plt.xticks(rotation=30)
 ax.legend(loc="lower left", bbox_to_anchor=(1, 0))
 
-print('fff')
 plt.show()
-'''
-print("------------------------------------------------------------")  # 60個
 
+print("------------------------------------------------------------")  # 60個
 
 broken_df = pd.read_csv("data/bikes.csv", encoding="ISO-8859-1")
 
@@ -1029,3 +1002,4 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
+

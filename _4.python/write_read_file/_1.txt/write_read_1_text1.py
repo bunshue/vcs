@@ -1093,5 +1093,45 @@ print(data)
 
 print("------------------------------------------------------------")  # 60個
 
+print('讀txt的第1欄資料出來')
+
+filename = "data/school.txt"
+with open(filename, "r") as fp:
+    schools = fp.readlines()
+
+school = list()
+for s in schools:
+    school.append(int(s.split()[1]))
+
+print(school)
+
+print('讀txt的資料進字典')
+
+filename = "data/yrborn.txt"
+with open(filename, "r") as fp:
+    populations = fp.readlines()
+
+yrborn = dict()
+
+for p in populations:
+    yr, tl, boy, girl = p.split()
+    yrborn[yr] = {"boy": int(boy), "girl": int(girl)}
+
+print(yrborn)
+print(yrborn.keys())
+
+
+yrlist = sorted(list(yrborn.keys()))
+bp = list()
+bp_b = list()
+bp_g = list()
+for yr in yrlist:
+    boys = yrborn[yr]["boy"]
+    girls = yrborn[yr]["girl"]
+    bp.append(boys + girls)
+    bp_b.append(boys)
+    bp_g.append(girls)
+
+print(yrlist)
 
 

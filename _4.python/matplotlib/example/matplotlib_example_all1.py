@@ -155,8 +155,6 @@ print("國民黨：\t{:>10,d}票".format(target.loc['中國國民黨']['得票�
 print("民進黨：\t{:>10,d}票".format(target.loc['民主進步黨']['得票數'].sum()))
 print("其它：\t{:>10,d}票".format(target.loc['無黨籍及未經政黨推薦']['得票數'].sum()))
 
-import seaborn as sns
-
 #如果明明有的字型, matplotlib 說找不到的話, 有可能需要讓 matplotlib 清掉原本的 cache。
 #matplotlib.font_manager._rebuild()
 #from matplotlib.font_manager import _rebuild
@@ -170,8 +168,6 @@ target.plot.pie(y='推薦政黨')
 target
 
 plt.show()
-
-import seaborn as sns
 
 #如果明明有的字型, matplotlib 說找不到的話, 有可能需要讓 matplotlib 清掉原本的 cache。
 #matplotlib.font_manager._rebuild()

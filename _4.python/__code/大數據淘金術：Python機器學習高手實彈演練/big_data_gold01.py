@@ -1,9 +1,16 @@
+"""
+pandas一大堆
+
+
+
+"""
 
 print("------------------------------------------------------------")  # 60個
 
 # 共同
 import os
 import sys
+import time
 import math
 import random
 import numpy as np
@@ -17,6 +24,10 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 # 設定負號
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
+
+print("------------------------------------------------------------")  # 60個
+
+import seaborn as sns
 
 print("------------------------------------------------------------")  # 60個
 
@@ -228,119 +239,7 @@ df = pd.DataFrame({"時間":['期中','期末','期中','期末'],
 df1 = df.pivot(index='時間', columns='學科', values='分數')
 print(df, df1)
 
-
 print("------------------------------------------------------------")  # 60個
-
-import seaborn as sns
-import statsmodels.api as sm # 示例使用了statsmodels庫中的自帶的數據
-import matplotlib as mpl
-
-sns.set(style='darkgrid',color_codes=True) # 帶灰色網格的背景風格
-
-tips = sns.load_dataset('tips')  # 示例中的基本數據
-
-# 4.2.2 連續變量相關圖
-# Relplot關係類型圖表
-sns.relplot(x="total_bill", y="tip", hue="day",col="time", row="sex", data=tips)
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-tips=sns.load_dataset('tips')  # 示例中的基本數據
-
-# 點圖
-sns.scatterplot(x="total_bill", y="tip", hue="size", size="size", data=tips)
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-tips=sns.load_dataset('tips')  # 示例中的基本數據
-
-# 線圖
-sns.lineplot(x="tip", y="total_bill", hue="sex", style="sex", data=tips)
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-tips=sns.load_dataset('tips')  # 示例中的基本數據
-
-# 4.2.3 分類變量圖
-# stripplot散點圖
-sns.stripplot(x='day', y='total_bill', data=tips, jitter=True)
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-tips=sns.load_dataset('tips')  # 示例中的基本數據
-
-# swarmplot散點圖
-sns.swarmplot(x='day',y='total_bill',data=tips)
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-tips=sns.load_dataset('tips')  # 示例中的基本數據
-
-# boxplot箱式圖
-sns.boxplot(x="day", y="total_bill", hue="sex", data=tips);
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-tips=sns.load_dataset('tips')  # 示例中的基本數據
-
-# boxenplot變種箱式圖
-sns.boxenplot(x="day", y="total_bill", hue="sex", data=tips)
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-tips=sns.load_dataset('tips')  # 示例中的基本數據
-
-# pointplot分類統計圖
-sns.pointplot(x="sex", y="total_bill", hue="smoker", data=tips,
-palette={"Yes": "g", "No": "m"},
-markers=["^", "o"], linestyles=["-", "--"]);
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-tips=sns.load_dataset('tips')  # 示例中的基本數據
-
-# barplot柱對比圖
-sns.barplot(x='smoker',y='total_bill',hue='sex',data=tips)
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-tips=sns.load_dataset('tips')  # 示例中的基本數據
-
-# 4.2.4 迴歸圖
-# 連續變量回歸圖
-sns.lmplot(x="total_bill", y="tip", data=tips)
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-tips=sns.load_dataset('tips')  # 示例中的基本數據
-
-# 分類變量回歸圖
-sns.lmplot(x="size", y="total_bill", data=tips, x_estimator=np.mean)
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
 
 """ fail
 # 4.2.5 多圖組合
@@ -372,47 +271,6 @@ print('------------------------------------------------------------')	#60個
 # factorplot兩變量關係圖
 data = sm.datasets.fair.load_pandas().data
 sns.factorplot(x='occupation', y='affairs', hue='religious', data=data)
-
-plt.show()
-"""
-
-print('------------------------------------------------------------')	#60個
-
-""" fail
-
-tips=sns.load_dataset('tips')  # 示例中的基本數據
-
-# FacetGrid結構化繪圖網格
-g = sns.FacetGrid(tips, col = 'time', row = 'smoker') # 按行和列的分類做N個圖
-g.map(plt.hist, 'total_bill', bins = 10) # 指定做圖方式
-
-plt.show()
-"""
-
-print('------------------------------------------------------------')	#60個
-
-
-# 4.2.6 熱力圖
-data = sns.load_dataset('planets')
-corr=data[['number','orbital_period','mass','distance']].corr(method='pearson')
-sns.heatmap(corr, cmap="YlGnBu") 
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-
-""" fail
-# 印刷品作圖
-
-sns.set_style("whitegrid")
-
-tips=sns.load_dataset('tips')  # 示例中的基本數據
-
-with sns.cubehelix_palette(start=2.7, rot=0, dark=.5, light=.8, 
-          reverse=True, n_colors=5):
-    # 此處放置具體繪圖函數
-    sns.stripplot(x='day', y='total_bill', data=tips, jitter=True)
 
 plt.show()
 """
@@ -468,7 +326,6 @@ logger.addHandler(console)
 logger.info("show info")
 logger.debug("show debug")
 logger.warning("show warning")
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -619,7 +476,6 @@ print('------------------------------------------------------------')	#60個
 
 print('讀寫Excel文件')
 
-
 print('df轉excel')
 df = pd.DataFrame({'Name': ['Smith', 'Lucy'], 'Age': ['25', '20'], 'Sex': ['男','女']})
 df.to_excel("tmp.xlsx")
@@ -751,9 +607,6 @@ clf = tree.DecisionTreeClassifier()
 clf = clf.fit(iris.data, iris.target)
 print(clf.feature_importances_)
 
-
-
-
 print('------------------------------------------------------------')	#60個
 
 print('數學方法降維')
@@ -781,9 +634,7 @@ print(pca.explained_variance_ratio_,
 plt.scatter(data1[:,0], data1[:,1], c = np.array(iris.target), 
             cmap=plt.cm.copper)
 
-
 plt.show()
-
 
 print('------------------------------------------------------------')	#60個
 

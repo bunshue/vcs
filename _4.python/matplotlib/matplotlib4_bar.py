@@ -669,7 +669,7 @@ x = [1, 2, 3, 4, 5]
 y1 = [3, 48, 33, 8, 38]
 y2 = [3, 48, 33, 8, 38]
 
-labels = ["鼠", "牛", "虎", "兔", "龍"] # x軸的刻度標籤
+labels = ["鼠", "牛", "虎", "兔", "龍"]  # x軸的刻度標籤
 plt.bar(x, y1, tick_label=labels)  # 繪製 y1 長條圖
 plt.bar(x, y2, tick_label=labels, bottom=y1)  # 繪製 y2 長條圖
 
@@ -965,5 +965,3 @@ ax.set_ylabel("Money")
 ax.legend(loc=2)
 
 plt.show()
-
-

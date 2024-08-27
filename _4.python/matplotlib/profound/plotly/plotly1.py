@@ -5,6 +5,7 @@ print("------------------------------------------------------------")  # 60個
 # 共同
 import os
 import sys
+import time
 import math
 import random
 import numpy as np
@@ -18,10 +19,6 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 # 設定負號
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
-
-print('------------------------------------------------------------')	#60個
-
-import seaborn as sns #海生, 自動把圖畫得比較好看
 
 print('------------------------------------------------------------')	#60個
 
@@ -119,6 +116,8 @@ fig.update_layout(title="我的帳戶餘額增減趨勢",
 fig.show()  # 繪製圖表
 
 print('------------------------------------------------------------')	#60個
+
+import seaborn as sns #海生, 自動把圖畫得比較好看
 
 #矩形樹狀圖
 # 調整大小

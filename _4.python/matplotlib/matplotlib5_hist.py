@@ -66,23 +66,24 @@ plt.figure(
     frameon=True,
 )
 
-plt.suptitle("皆為 np.random.normal\t" + r"$\mu = 200, \sigma=25$")
+plt.suptitle("皆為 np.random.normal\t" + r"$\mu = 100, \sigma=15$")
 
 mu, sigma = 100, 15  # 平均值, 標準差
 x = np.random.normal(mu, sigma, size=N * 10)  # 隨機數
 print("平均數:", np.mean(x))
 print("標準差:", np.std(x))
 
-# 第一張圖
+print("------------------------------------------------------------")  # 60個
 plt.subplot(231)
 
 mu, sigma = 100, 15
 x = np.linspace(mu - 50, mu + 50, 3000)  # 從N1到N2, 分成N個, 包含頭尾
 y = (1 / (sigma * np.sqrt(2 * np.pi))) * np.exp(-((x - mu) ** 2) / (2 * sigma**2))
+
 plt.plot(x, y, "--", color="r", linewidth=2)
+plt.title("使用plot")
 
-
-# 第二張圖
+print("------------------------------------------------------------")  # 60個
 plt.subplot(232)
 
 N = 10000  # 資料個數
@@ -100,42 +101,66 @@ x = bins
 y = (1 / (sigma * np.sqrt(2 * np.pi))) * np.exp(-((bins - mu) ** 2) / (2 * sigma**2))
 plt.plot(x, y, "--", color="r", linewidth=2)
 
+plt.title("使用plot + hist")
 plt.ylabel("機率")
 
-# plt.title(r"$\mu=100,\ \sigma=15$, 加 理想曲線", fontweight="bold")
-plt.title(
-    r"$f(x)=\frac{1}{\sigma\sqrt{2\pi}}e^{\frac{-1}{2}(\frac{x-\mu}{\sigma})^{2}}    $",
-)
-
-# 第三張圖
+print("------------------------------------------------------------")  # 60個
 plt.subplot(233)
 
+N = 10000  # 樣本數
+x = np.random.randn(N)  # 隨機數, 預設 平均值 = 0.0, 標準差 = 1
 
-# 第四張圖
+mu = 100  # 均值
+sigma = 15  # 標準差
+x = np.random.normal(mu, sigma, N)  # 隨機數
+print("平均數:", np.mean(x))
+print("標準差:", np.std(x))
+
+bins = 50  # 束
+plt.hist(x, bins, density=True)  # 直方圖
+
+plt.ylabel("機率")
+plt.title("mu=100, sigma=15之常態分佈")
+plt.text(120, 0.02, r"$\mu=100,\ \sigma=15$")
+# plt.grid(True)
+
+print("------------------------------------------------------------")  # 60個
 plt.subplot(234)
 
-x = np.random.rand(N, 3)  # 產生共3組，每組 N 個隨機數
+N1 = 10000  # 樣本數
+mu1 = 50  # 均值
+sigma1 = 5  # 標準差
 
-plt.hist(x, bins=num_bins // 10)
-plt.title("產生共3組，每組 10000 個隨機數")
+N2 = 10000  # 樣本數
+mu2 = 60  # 均值
+sigma2 = 5  # 標準差
 
+x1 = np.random.normal(mu1, sigma1, N1)
+x2 = np.random.normal(mu2, sigma2, N2)
 
-# 第五張圖
+plt.hist(x1, range=(30, 80), bins=20, color="r", alpha=0.8)
+plt.hist(x2, range=(30, 80), bins=20, color="g", alpha=0.8)
+
+"""
+#用density
+plt.hist(x1, range=(30, 80), bins=20, color="r", alpha=0.8, density=True)
+plt.hist(x2, range=(30, 80), bins=20, color="g", alpha=0.8, density=True)
+"""
+
+print("------------------------------------------------------------")  # 60個
 plt.subplot(235)
 
-# 生成 N 組介於 0 與 1 之間均勻分配隨機變數
-x = np.random.uniform(size=N)
-# x = np.random.uniform(0.0, 5.0, size=N)     # 隨機數 #另外範圍
+# 產生常態分佈的數據:平均數0, 標準差1, 1000個資料
+x = np.random.normal(0, 1, N)
+print("平均數:", np.mean(x))
+print("標準差:", np.std(x))
 
-plt.hist(x, bins=num_bins, rwidth=0.8)
-plt.title("np.random.uniform")
+bins = 50  # 束
+plt.hist(x, bins=bins)
 
-# 第六張圖
+print("------------------------------------------------------------")  # 60個
 plt.subplot(236)
 
-x = np.random.exponential(scale=2, size=N)
-plt.hist(x, bins=num_bins, label="Exponential distribution")
-plt.title("np.random.exponential")
 
 plt.show()
 
@@ -151,14 +176,14 @@ plt.figure(
     frameon=True,
 )
 
-plt.suptitle("皆為 np.random.normal\t" + r"$\mu = 200, \sigma=25$")
+plt.suptitle("皆為 np.random.normal\t" + r"$\mu = 100, \sigma=15$")
 
 mu, sigma = 100, 15  # 平均值, 標準差
 x = np.random.normal(mu, sigma, size=N * 10)  # 隨機數
 print("平均數:", np.mean(x))
 print("標準差:", np.std(x))
 
-# 第一張圖
+print("------------------------------------------------------------")  # 60個
 plt.subplot(231)
 
 plt.hist(
@@ -174,7 +199,7 @@ plt.hist(
 plt.title("histtype 1 : bar")
 plt.text(50, 250, r"$\mu=100,\ \sigma=15$")
 
-# 第二張圖
+print("------------------------------------------------------------")  # 60個
 plt.subplot(232)
 
 plt.hist(
@@ -189,7 +214,7 @@ plt.hist(
 )
 plt.title("histtype 2 : barstacked")
 
-# 第三張圖
+print("------------------------------------------------------------")  # 60個
 plt.subplot(233)
 
 plt.hist(
@@ -234,9 +259,9 @@ plt.hist(
 # 合寫, 但效果不對
 # plt.hist([x2, x3], bins=num_bins, histtype="step", facecolor="y", edgecolor="b", alpha=0.75, rwidth=0.8, label="Normal distribution")
 
-
-# 第四張圖
+print("------------------------------------------------------------")  # 60個
 plt.subplot(234)
+
 # 縱軸不做正規化處理為數量，直條的間距填滿
 plt.hist(
     x,
@@ -250,15 +275,14 @@ plt.hist(
 )
 plt.title("histtype 4 : stepfilled")
 
-# 第五張圖
+print("------------------------------------------------------------")  # 60個
 plt.subplot(235)
 
 kwargs = dict(histtype="stepfilled", alpha=0.3, bins=num_bins // 2, rwidth=0.8)
 plt.hist(x, **kwargs)
 plt.title("以字典傳送參數")
 
-
-# 第六張圖
+print("------------------------------------------------------------")  # 60個
 plt.subplot(236)
 
 # 縱軸執行正規化處理表示為機率
@@ -284,10 +308,83 @@ plt.figure(
     frameon=True,
 )
 
+print("------------------------------------------------------------")  # 60個
+plt.subplot(231)
+
+x = np.random.rand(N, 3)  # 產生共3組，每組 N 個隨機數
+
+plt.hist(x, bins=num_bins // 10)
+plt.title("產生共3組，每組 10000 個隨機數")
+
+print("------------------------------------------------------------")  # 60個
+plt.subplot(232)
+
+# 生成 N 組介於 0 與 1 之間均勻分配隨機變數
+x = np.random.uniform(size=N)
+# x = np.random.uniform(0.0, 5.0, size=N)     # 隨機數 #另外範圍
+
+plt.hist(x, bins=num_bins, rwidth=0.8)
+plt.title("np.random.uniform")
+
+print("------------------------------------------------------------")  # 60個
+plt.subplot(233)
+
+x = np.random.exponential(scale=2, size=N)
+plt.hist(x, bins=num_bins, label="Exponential distribution")
+plt.title("np.random.exponential")
+
+print("------------------------------------------------------------")  # 60個
+plt.subplot(234)
+
+x3 = np.random.randn(N, 3)
+colors = ["red", "green", "blue"]
+bins = 50  # 直方圖顯示時的束數
+
+plt.hist(x3, bins, density=True, color=colors, label=colors)
+
+plt.legend()
+plt.title("3 組數據的常態分佈隨機數")
+
+print("------------------------------------------------------------")  # 60個
+plt.subplot(235)
+
+N = 10000  # 樣本數
+mu = 0  # 平均值
+sigma = 1  # 標準差
+x = np.random.randn(N)  # 隨機數
+bins = 50  # 束
+count, bins, ignored = plt.hist(x, bins, density=True)  # 直方圖
+# 繪製折線圖
+plt.plot(
+    bins,
+    1 / (sigma * np.sqrt(2 * np.pi)) * np.exp(-((bins - mu) ** 2) / (2 * sigma**2)),
+    linewidth=2,
+    color="r",
+)
+plt.title("常態分布 " + r"$\mu=0, \sigma=1$")
+
+print("------------------------------------------------------------")  # 60個
+plt.subplot(236)
+
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+plt.figure(
+    num="hist 集合 4",
+    figsize=(12, 8),
+    dpi=100,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
+
 # 資料個數
 N = 10000
 
-# 第一張圖
+print("------------------------------------------------------------")  # 60個
 plt.subplot(231)
 
 sides = 6  # 骰子有幾面
@@ -305,7 +402,7 @@ plt.hist(dice, bins=6, rwidth=0.5, cumulative=False, alpha=0.3)  # 繪製hist圖
 plt.ylabel("次數")
 plt.title("測試 10000 次 不累積統計")
 
-# 第二張圖
+print("------------------------------------------------------------")  # 60個
 plt.subplot(232)
 
 print("資料同上, 改了 累積統計")
@@ -316,7 +413,7 @@ plt.hist(dice, bins=6, rwidth=0.5, cumulative=True, alpha=0.3)  # 繪製hist圖
 plt.ylabel("次數")
 plt.title("測試 10000 次, 累積統計")
 
-# 第三張圖
+print("------------------------------------------------------------")  # 60個
 plt.subplot(233)
 
 d1 = np.random.randint(1, 6 + 1, N)  # 不含尾
@@ -330,7 +427,7 @@ plt.xlabel("兩個骰子和")
 plt.ylabel("次數")
 plt.title("擲兩個骰子 10000 次 看其分布")
 
-# 第四張圖
+print("------------------------------------------------------------")  # 60個
 plt.subplot(234)
 
 sc1 = [
@@ -404,12 +501,25 @@ plt.ylabel("學生人數")
 plt.xlabel("分數")
 plt.title("成績表")
 
+"""
+N = 100
+math = np.random.randint(10, 100, N)  # 不含尾
+chem = np.random.randint(10, 100, N)  # 不含尾
 
-# 第五張圖
+bins = 9
+labels = ["數學", "化學"]
+plt.hist([math, chem], bins, label=labels)
+plt.ylabel("學生人數")
+plt.xlabel("分數")
+plt.title("成績表")
+plt.legend()
+"""
+
+print("------------------------------------------------------------")  # 60個
 plt.subplot(235)
 
 
-# 第六張圖
+print("------------------------------------------------------------")  # 60個
 plt.subplot(236)
 
 
@@ -447,7 +557,6 @@ print("align : 此參數是可選參數，它控制如何繪制直方圖。 {‘
 print("align : left 柱子的中心位於bins的左邊緣")
 print("align : mid 柱子位於bins左右邊緣之間")
 print("align : right 柱子的中心位於bins的右邊緣")
-
 
 """
 
@@ -601,205 +710,18 @@ plt.title("建立N筆成績資料 常態分佈")
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
-print("作業完成")
-print("------------------------------------------------------------")  # 60個
-sys.exit()
-
-
-
-print('新進')
-
-print("------------------------------------------------------------")  # 60個
-
-x = [4, 3, 3, 2, 5, 4, 5, 6, 9, 4, 5, 5, 3, 0, 1, 7, 8, 7, 5, 6, 4]
-
-plt.hist(x)
-plt.hist(x, color="r")
-
-num_bins = 5  # 直方圖顯示時的束數
-
-h = plt.hist(x, bins=num_bins, color="g")
-print(f"bins的 y 軸 = {h[0]}")
-print(f"bins的 x 軸 = {h[1]}")
-
-#plt.hist(x, color="g", rwidth=0.8)  # 寬度設定 80%
-#plt.hist(x, bins=num_bins, color="g", cumulative=True, rwidth=0.8) # 累計
-plt.ylabel("頻率")
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-N = 10000 # 樣本數
-x = np.random.randn(N)  # 隨機數, 預設 平均值 = 0.0, 標準差 = 1
-
-mu = 100  # 均值
-sigma = 15  # 標準差
-x = np.random.normal(mu, sigma, N)  # 隨機數
-print("平均數:", np.mean(x))
-print("標準差:", np.std(x))
-
-bins = 50 # 束
-plt.hist(x, bins, density=True)  # 直方圖
-
-plt.ylabel("機率")
-plt.title("mu=100, sigma=15之常態分佈")
-plt.text(120, 0.02, r"$\mu=100,\ \sigma=15$")
-#plt.grid(True)
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-N = 10000 # 樣本數
-mu = 0  # 平均值
-sigma = 1  # 標準差
-x = np.random.randn(N)  # 隨機數
-bins = 50 # 束
-count, bins, ignored = plt.hist(x, bins, density=True)  # 直方圖
-# 繪製折線圖
-plt.plot(
-    bins,
-    1 / (sigma * np.sqrt(2 * np.pi)) * np.exp(-((bins - mu) ** 2) / (2 * sigma**2)),
-    linewidth=2,
-    color="r",
-)
-plt.title("常態分布 " + r"$\mu=0, \sigma=1$")
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-N1 = 10000 # 樣本數
-mu1 = 50  # 均值
-sigma1 = 5  # 標準差
-
-N2 = 10000 # 樣本數
-mu2 = 60  # 均值
-sigma2 = 5  # 標準差
-
-x1 = np.random.normal(mu1, sigma1, N1)
-x2 = np.random.normal(mu2, sigma2, N2)
-
-plt.hist(x1, range=(30, 80), bins=20, color="r", alpha=0.8)
-plt.hist(x2, range=(30, 80), bins=20, color="g", alpha=0.8)
-
-"""
-#用density
-plt.hist(x1, range=(30, 80), bins=20, color="r", alpha=0.8, density=True)
-plt.hist(x2, range=(30, 80), bins=20, color="g", alpha=0.8, density=True)
-"""
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-math = [
-    60,
-    10,
-    40,
-    80,
-    80,
-    30,
-    80,
-    60,
-    70,
-    90,
-    50,
-    50,
-    50,
-    70,
-    60,
-    80,
-    80,
-    50,
-    60,
-    70,
-    70,
-    40,
-    30,
-    70,
-    60,
-    80,
-    20,
-    80,
-    70,
-    50,
-    90,
-    80,
-    40,
-    40,
-    70,
-    60,
-    80,
-    30,
-    20,
-    70,
-]
-chem = [
-    50,
-    10,
-    60,
-    80,
-    70,
-    30,
-    80,
-    60,
-    30,
-    90,
-    50,
-    50,
-    90,
-    70,
-    60,
-    50,
-    80,
-    50,
-    60,
-    70,
-    60,
-    50,
-    30,
-    70,
-    70,
-    80,
-    10,
-    80,
-    70,
-    50,
-    90,
-    80,
-    40,
-    50,
-    70,
-    60,
-    80,
-    40,
-    20,
-    70,
-]
-
-bins = 9
-labels = ["數學", "化學"]
-plt.hist([math, chem], bins, label=labels)
-plt.ylabel("學生人數")
-plt.xlabel("分數")
-plt.title("成績表")
-plt.legend()
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
 
 import cv2
 
-filename = 'C:/_git/vcs/_4.python/_data/elephant.jpg'
+filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
 src = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
 
-plt.figure(figsize=(12, 8))
+plt.figure(figsize=(12, 6))
 
-plt.subplot(121)  # 建立子圖 1
+plt.subplot(121)
 plt.imshow(src, "gray")  # 灰階顯示第1張圖
 
-plt.subplot(122)  # 建立子圖 2
+plt.subplot(122)
 plt.hist(src.ravel(), 256)  # 降維再繪製直方圖
 
 plt.tight_layout()
@@ -807,80 +729,43 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
+N = 500
 mu = 0  # 平均值
 sigma1 = 25  # x1 資料標準差
-x1 = np.random.normal(mu, sigma1, size=100)  # 建立 x1 資料
+x1 = np.random.normal(mu, sigma1, size=N)  # 建立 x1 資料
 print("平均數:", np.mean(x1))
 print("標準差:", np.std(x1))
 
 sigma2 = 10  # x2 資料標準差
-x2 = np.random.normal(mu, sigma2, size=100)  # 建立 x1 資料
+x2 = np.random.normal(mu, sigma2, size=N)  # 建立 x1 資料
 print("平均數:", np.mean(x2))
 print("標準差:", np.std(x2))
 
-fig, axs = plt.subplots(nrows=2, ncols=2)  # 建立 2 x 2 子圖
-# 建立 [0,0]子圖
-axs[0, 0].hist(x1, 15, density=True, histtype="step")
-axs[0, 0].set_title("histtype = 'step'")
-# 建立 [0,1]子圖
-axs[0, 1].hist(x1, 15, density=True, histtype="stepfilled", color="m", alpha=0.8)
-axs[0, 1].set_title("histtype = 'stepfilled'")
-# 建立 [1,0]子圖
-axs[1, 0].hist(x1, density=True, histtype="barstacked", rwidth=0.8)
-axs[1, 0].hist(x2, density=True, histtype="barstacked", rwidth=0.8)
-axs[1, 0].set_title("histtype = 'barstacked'")
-# 建立 [1,1]子圖, 寬度不相等
+plt.figure(figsize=(12, 8))
+
+plt.subplot(221)
+plt.hist(x1, 15, density=True, histtype="step")
+plt.title("histtype = 'step'")
+
+plt.subplot(222)
+plt.hist(x1, 15, density=True, histtype="stepfilled", color="m", alpha=0.8)
+plt.title("histtype = 'stepfilled'")
+
+plt.subplot(223)
+plt.hist(x1, density=True, histtype="barstacked", rwidth=0.8)
+plt.hist(x2, density=True, histtype="barstacked", rwidth=0.8)
+plt.title("histtype = 'barstacked'")
+
+plt.subplot(224)
+# 寬度不相等
 bins = [-60, -50, -20, -10, 30, 50]
-axs[1, 1].hist(x1, bins, density=True, histtype="bar", rwidth=0.8, color="g")
-axs[1, 1].set_title("histtype = 'bar' 不相等寬度的 bins")
-fig.tight_layout()
+plt.hist(x1, bins, density=True, histtype="bar", rwidth=0.8, color="g")
+plt.title("histtype = 'bar' 不相等寬度的 bins")
 
+plt.tight_layout()
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
-
-# 產生常態分佈的數據:平均數0, 標準差1, 1000個資料
-x = np.random.normal(0, 1, 1000)
-print("平均數:", np.mean(x))
-print("標準差:", np.std(x))
-
-bins = 50 # 束
-plt.hist(x, bins=bins)
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-"""
-二維頻次直方圖
-
-就像將一維數組分為區間創建一維頻次直方圖一樣，我們也可以將二維數組按照二維區 間進行切分，來創建二維頻次直方圖。
-
-1.plt.hist2d:二維頻次直方圖
-繪製二維頻次直方圖最簡單的方法，就是使用Matplotlib的plt.hist2d函數。
-
-# NG
-plt.hist2d(x, y, bins=30, cmap='Blues')
-cb = plt.colorbar()
-cb.set_label('counts in bin')
-
-plt.show()
-
-2.plt.hexbin:六邊形區間劃分
-
-二維頻次直方圖是由與坐標軸正交的方塊分割而成的，
-還有一種常用的方式是用正六邊形分割。
-Matplotlib 提供了 plt.hexbin 滿足此類需求，將二維數據集分割成蜂窩狀。
-
-# NG
-plt.hexbin(x, y, gridsize=30, cmap='Blues')
-cb = plt.colorbar(label='xxxxx')
-plt.show()
-
-"""
-
-print("------------------------------------------------------------")  # 60個
-
 
 """
 # 測試 北大
@@ -912,60 +797,24 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-
-"""
-常態分佈
-
-normal distribution / Gaussian distribution
-
-
-"""
-
-
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
-# 共同
-import os
-import sys
-import time
-import math
-import random
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-
-font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
-# 設定中文字型及負號正確顯示
-# 設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
-# 設定負號
-plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
-plt.rcParams["font.size"] = 12  # 設定字型大小
+print("新進")
 
 print("------------------------------------------------------------")  # 60個
-
-"""
-#Standard Normal Distribution
 
 mu = 0
-sd = 1
+sigma = 1
+variance = np.square(sigma)
 
-x = np.linspace(-2.0, 2.0, 50)
-#y = np.exp((x-mu)**2/(2*sd)**2) / np.sqrt(2*np.pi*(sd**2))
+x = np.arange(-5, 5, 0.01)
+y = np.exp(-np.square(x - mu) / 2 * variance) / (np.sqrt(2 * np.pi * variance))
 
-y = np.exp((-x)**2) / np.sqrt(2*np.pi)
+plt.plot(x, y)
 
-
-plt.plot(x,y)
 plt.show()
-"""
-
-"""
-x = np.linspace(-2 * np.pi, 2 * np.pi, 100) #共100個點
-x = np.linspace(-2 * np.pi, 2 * np.pi)   #預設為50個點
-r = np.sqrt(np.power(x,2) + np.power(y, 2))
-return (1 - x / 2 + x**5 + y**3) * np.exp(-x**2 -y**2)
-"""
 
 print("------------------------------------------------------------")  # 60個
 
@@ -981,7 +830,6 @@ sd = statistics.stdev(x_axis)
 
 plt.plot(x_axis, norm.pdf(x_axis, mean, sd))
 plt.show()
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1002,19 +850,6 @@ from scipy.stats import norm
 x_axis = np.arange(-10, 10, 0.001)
 # Mean = 0, SD = 2.
 plt.plot(x_axis, norm.pdf(x_axis, 0, 2))
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-mean = 0
-std = 1
-variance = np.square(std)
-
-x = np.arange(-5, 5, 0.01)
-f = np.exp(-np.square(x - mean) / 2 * variance) / (np.sqrt(2 * np.pi * variance))
-
-plt.plot(x, f)
-plt.ylabel("gaussian distribution")
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
@@ -1052,14 +887,15 @@ print("最小 : ", min(x))
 print("平均 : ", x.mean())
 print("標準差 : ", x.std())
 
-print('使用 numpy 模組計算統計資料')
+print("使用 numpy 模組計算統計資料")
 print(f"Numpy模組 母體變異數  : {np.var(x):6.2f}")
 print(f"Numpy模組 樣本變異數  : {np.var(x,ddof=1):6.2f}")
 print(f"Numpy模組 母體標準差  : {np.std(x):6.2f}")
 print(f"Numpy模組 樣本標準差  : {np.std(x,ddof=1):6.2f}")
 
 import statistics
-print('使用 statistics 模組計算統計資料')
+
+print("使用 statistics 模組計算統計資料")
 print(f"Statistics 母體變異數 : {statistics.pvariance(x):6.2f}")
 print(f"Statistics 樣本變異數 : {statistics.variance(x):6.2f}")
 print(f"Statistics 母體標準差 : {statistics.pstdev(x):6.2f}")
@@ -1073,36 +909,29 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("作業完成")
-print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-
-
-x3 = np.random.randn(N, 3)
-colors = ["red", "green", "blue"]
-bins = 50  # 直方圖顯示時的束數
-
-plt.hist(x3, bins, density=True, color=colors, label=colors)
-plt.legend()
-plt.title("3 組數據的常態分佈隨機數")
-
-plt.show()
-
 sys.exit()
 
 
+# ------------------------------------------------------------------------------------
+
+# 共同抽出
+
+# plt.title(r"$\mu=100,\ \sigma=15$, 加 理想曲線", fontweight="bold")
+plt.title(
+    r"$f(x)=\frac{1}{\sigma\sqrt{2\pi}}e^{\frac{-1}{2}(\frac{x-\mu}{\sigma})^{2}}    $",
+)
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+h = plt.hist(x, bins=num_bins, color="g")
+print(f"bins的 y 軸 = {h[0]}")
+print(f"bins的 x 軸 = {h[1]}")
+
+# plt.hist(x, color="g", rwidth=0.8)  # 寬度設定 80%
+# plt.hist(x, bins=num_bins, color="g", cumulative=True, rwidth=0.8) # 累計
+
+
+x = np.linspace(-2 * np.pi, 2 * np.pi, 100)  # 共100個點
+x = np.linspace(-2 * np.pi, 2 * np.pi)  # 預設為50個點

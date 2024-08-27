@@ -34,10 +34,12 @@ plt.figure(
     frameon=True,
 )
 
-# 第一張圖
+print("------------------------------------------------------------")  # 60個
+
 plt.subplot(231)
 
 x = np.linspace(0, 10, 101)
+
 
 def random_walk(xy0=(0.0, 0.0), nsteps=100, std=1.0):
     xy = np.zeros((nsteps + 1, 2))
@@ -51,13 +53,14 @@ for cnt in range(3):
     traj = random_walk()
     plt.plot(traj[:, 0], traj[:, 1], label="Traj. {c}".format(c=cnt))
 
+plt.legend()
 plt.title("Random Walk")
 
-# 第二張圖
+print("------------------------------------------------------------")  # 60個
 plt.subplot(232)
 
 N = 20
-x = np.linspace(0, 6.4, N)  # x是numpy.ndarray格式
+x = np.linspace(0, 6.4, N)
 
 A = 0.8  # 雜訊的振幅
 y = np.sin(x) + np.random.rand(1, len(x)) * A - A / 2  # 加入雜訊的點集    # y是numpy.ndarray格式
@@ -68,9 +71,9 @@ plt.plot(x, np.sin(x), "black")  # 無雜訊
 plt.plot(x, y, "r")  # 有雜訊
 plt.grid()
 
-plt.title("畫雜訊範例 " + str(N) + "點")
+plt.title("畫雜訊範例 " + str(N) + " 點")
 
-# 第三張圖
+print("------------------------------------------------------------")  # 60個
 plt.subplot(233)
 
 filename = "_data/python_ReadWrite_CSV6_temperature.csv"
@@ -91,7 +94,7 @@ y2 = np.convolve(y, v, mode="same")  # 計算移動平均
 plt.plot(x[4 : n - 4], y2[4 : n - 4])  # 繪圖
 plt.title("繪製移動平均圖")
 
-# 第四張圖
+print("------------------------------------------------------------")  # 60個
 plt.subplot(234)
 
 # 描點畫圓
@@ -105,7 +108,7 @@ y = np.sin(np.radians(th))
 plt.plot(x, y, "red")
 plt.axis("equal")  # 軸比例
 
-# 第五張圖
+print("------------------------------------------------------------")  # 60個
 plt.subplot(235)
 
 # 繪製半徑300的圓（y >= 0）
@@ -118,9 +121,23 @@ y = np.sqrt(r**2 - x**2)  # y
 plt.plot(x, y)
 plt.axis("equal")  # 軸比例
 
-# 第六張圖
+print("------------------------------------------------------------")  # 60個
 plt.subplot(236)
 
+print("畫點")
+plt.plot(0, 0, "-o")  # 在 (0, 1) 上 畫一點
+plt.plot(1.5, 1.5, "r-o")
+plt.plot(2, -2, "g-o")
+plt.plot(-2, -2, "b-o")
+
+radius = 5
+degrees = np.arange(0, 360)
+x = radius * np.cos(np.radians(degrees))
+y = radius * np.sin(np.radians(degrees))
+
+plt.plot(x, y)
+plt.axis("equal")
+plt.title("畫點 畫圓")
 
 plt.show()
 
@@ -136,179 +153,8 @@ plt.figure(
     frameon=True,
 )
 
-
-def f1(x):
-    return int(float(bp[x]) / float(school[x]))
-
-
-def f2(x):
-    return float(float(school[x]) / float(bp[x]))
-
-
-filename = "_data/school.txt"
-with open(filename, "r") as fp:
-    schools = fp.readlines()
-
-school = list()
-for s in schools:
-    school.append(int(s.split()[1]))
-
-# 共取得??筆資料 list的用法
-
-filename = "_data/yrborn.txt"
-with open(filename, "r") as fp:
-    populations = fp.readlines()
-
-yrborn = dict()
-
-for p in populations:
-    yr, tl, boy, girl = p.split()
-    yrborn[yr] = {"boy": int(boy), "girl": int(girl)}
-
-# 共取得??筆資料 dict的用法
-
-yrlist = sorted(list(yrborn.keys()))
-bp = list()
-for yr in yrlist:
-    boys = yrborn[yr]["boy"]
-    girls = yrborn[yr]["girl"]
-    bp.append(boys + girls)
-yr = range(1986, 2016)
-ind = np.arange(len(bp))
-
-# 第一張圖
-plt.subplot(231)
-
-plt.plot(yr, bp, lw=2)
-plt.xlim(1986, 2015)
-plt.title("1986 - 2015 (Total)")
-
-# 第二張圖
-plt.subplot(232)
-
-plt.plot(yr, school, lw=2)
-plt.xlim(1986, 2015)
-plt.title("1986 - 2015 School Numbers")
-
-# 第三張圖
-plt.subplot(233)
-
-plt.plot(yr, list(map(f1, ind)), lw=2)
-plt.xlim(1986, 2015)
-plt.title("Person/School")
-
-# 第四張圖
-plt.subplot(234)
-
-plt.plot(yr, list(map(f2, ind)), lw=2, color="r")
-plt.xlim(1986, 2015)
-plt.title("School/Person")
-
-# 第五張圖
-plt.subplot(235)
-
-
-# 第六張圖
-plt.subplot(236)
-
-
-plt.show()
-
 print("------------------------------------------------------------")  # 60個
-
-plt.figure(
-    num="plot 集合 3",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
-
-# 第1~2張圖
-filename = "_data/yrborn.txt"
-
-with open(filename, "r") as fp:
-    populations = fp.readlines()
-
-yrborn = dict()
-
-for p in populations:
-    yr, tl, boy, girl = p.split()
-    yrborn[yr] = {"boy": int(boy), "girl": int(girl)}
-
-ind = np.arange(len(yrborn))
-yrlist = sorted(list(yrborn.keys()))
-bp = list()
-bp_b = list()
-bp_g = list()
-for yr in yrlist:
-    boys = yrborn[yr]["boy"]
-    girls = yrborn[yr]["girl"]
-    bp.append(boys + girls)
-    bp_b.append(boys)
-    bp_g.append(girls)
-
-# 第一張圖
 plt.subplot(231)
-
-plt.plot(bp)
-plt.xlim(0, len(bp) - 1)
-plt.title("1986 - 2015 (Total)")
-
-# 第二張圖
-plt.subplot(232)
-
-plt.plot(bp_b)
-plt.plot(bp_g)
-plt.xlim(0, len(bp_b) - 1)
-plt.title("1986 - 2015 (Boy:Girl)")
-
-
-# 第3~4張圖
-
-filename = "_data/yrborn.txt"
-
-with open(filename, "r") as fp:
-    populations = fp.readlines()
-
-yrborn = dict()
-
-for p in populations:
-    yr, tl, boy, girl = p.split()
-    yrborn[yr] = {"boy": int(boy), "girl": int(girl)}
-
-ind = np.arange(1986, 2016)
-yrlist = sorted(list(yrborn.keys()))
-bp = list()
-bp_b = list()
-bp_g = list()
-for yr in yrlist:
-    boys = yrborn[yr]["boy"]
-    girls = yrborn[yr]["girl"]
-    bp.append(boys + girls)
-    bp_b.append(boys)
-    bp_g.append(girls)
-
-width = 0.35
-
-# 第三張圖
-plt.subplot(233)
-
-plt.plot(ind, bp)
-plt.xlim(1986, 2015)
-plt.title("1986 - 2015 (Total)")
-
-# 第四張圖
-plt.subplot(234)
-plt.bar(ind, bp_b, width, color="b")
-plt.bar(ind + 0.35, bp_g, width, color="r")
-plt.xlim(1986, 2015)
-plt.title("1986 - 2015 (Boy:Girl)")
-
-# 第五張圖
-plt.subplot(235)
 
 x = np.linspace(-2 * np.pi, 2 * np.pi, 100)
 y = np.sinc(x)
@@ -316,9 +162,8 @@ plt.plot(x, y)
 plt.margins(0.2, 0.2)
 plt.title("有 margins設定 ")
 
-
-# 第六張圖
-plt.subplot(236)
+print("------------------------------------------------------------")  # 60個
+plt.subplot(232)
 
 # 畫個函數, 標出正的部份!
 # 把這個函數大於 0 的地方標示出來。
@@ -336,36 +181,82 @@ plt.plot(x[y > 0], y[y > 0], "ro")
 # print(plt.axis())
 plt.title("只標出正的部分")
 
-plt.show()
-
 print("------------------------------------------------------------")  # 60個
-
-plt.figure(
-    num="plot 集合 4",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
-
-# 第一張圖
-plt.subplot(231)
-
-
-# 第二張圖
-plt.subplot(232)
-
-
-# 第三張圖
 plt.subplot(233)
 
-# 第四張圖
+# 畫出y=a^x的函數圖形 0<=x<=10
+x = np.linspace(0, 10, 50)
+y1 = 2**x
+y2 = 2.5**x
+y3 = 3**x
+y4 = 3.5**x
+
+# 加上圖表標題, 字體大小12, 靠右對齊
+plt.title("y=a^x", fontsize=12, loc="right")
+# 加上X軸標題(靠右對齊x=1.0為X軸最右)
+# horizontalalignment,verticalalignment只是調整與x=1.0之相對位置)
+plt.xlabel(
+    "x", fontsize=20, horizontalalignment="right", verticalalignment="top", x=1.0
+)
+# 加上X軸刻度範圍0~10(如果大小顛倒，圖形會左右鏡射)
+plt.xlim(0, 10)
+# 加上X軸刻度標示 0,1,...,10(只有整數),字體大小16
+plt.xticks(list(range(0, 11, 1)), fontsize=16)
+# 加上Y軸標題(靠上對齊y=1.0為Y軸最上)
+# horizontalalignment,verticalalignment只是調整與y=1.0之相對位置)
+plt.ylabel(
+    "y", fontsize=20, horizontalalignment="right", verticalalignment="bottom", y=1.0
+)
+# 加上Y軸刻度範圍0~1200(如果大小顛倒，圖形會上下鏡射)
+plt.ylim(0, 1200)
+# 加上Y軸刻度標示 0,100,200,...,1200(只有100的倍數),字體大小16
+plt.yticks(list(range(0, 1201, 100)), fontsize=16)
+# 設定曲線顏色、線條類型、寬度
+# 設定顏色1:blue、green、red、cyan、magenta、yellow、black、white
+# 設定顏色2:(R, G, B), 0<=R,G,B<=1
+# 設定顏色3:#000000~#FFFFFF, RGB各二個十六進位 00~FF
+# 設定線條型態:-、--、-.、:
+# 設定線條寬度:1~20
+# 設定點的形狀:.,ov^<>1234sp*hH+xDd|_
+# 設定點的形狀:1~10
+plt.plot(x, y1, color="cyan", marker="2", markersize=10)
+plt.plot(x, y2, color=(0, 0, 1), linestyle=":", linewidth=2, marker="x", markersize=10)
+plt.plot(x, y3, color="#FF0000", linestyle="-.", linewidth=3)
+# 設定散佈圖顏色、形狀、大小
+# 設定散佈圖點的形狀:.,ov^<>1234sp*hH+xDd|_
+# 設定散佈圖點的大小
+plt.scatter(x, y4, color="black", marker="x", s=10)
+
+plt.grid()  # 加上格線
+
+# 加上註解
+# xy箭頭座標,xytext文字座標, shrink
+plt.annotate(
+    "y=2^x",
+    xy=(9.5, 800),
+    xytext=(8, 1100),
+    arrowprops=dict(color="cyan", shrink=0.01),
+    color="cyan",
+)
+
+# 加上圖例說明
+plt.legend(["a=2", "a=2.5", "a=3", "a=3.5"], fontsize=20)
+
+print("------------------------------------------------------------")  # 60個
 plt.subplot(234)
 
+x1 = np.linspace(0.1, 10, 99)  # 建立含30個元素的陣列
+x2 = np.linspace(0.1, 10, 99)  # 建立含30個元素的陣列
+y1 = [math.log2(x) for x in x1]
+y2 = [math.log(x, 0.5) for x in x2]
 
-# 第五張圖
+plt.plot(x1, y1, label="基底 = 2")
+plt.plot(x2, y2, label="基底 = 0.5")
+
+plt.axis([0, 10, -5, 5])
+plt.legend(loc="best")  # 建立圖例
+
+print("------------------------------------------------------------")  # 60個
 plt.subplot(235)
 
 print("畫出年收入圖")
@@ -378,10 +269,9 @@ dat = pd.read_csv(filename, encoding="UTF-8")
 x = dat["年齡"]
 y = dat["年收入"]
 
-# 繪圖
 plt.plot(x, y)
 
-# 第六張圖
+print("------------------------------------------------------------")  # 60個
 plt.subplot(236)
 
 print("描繪差額圖")
@@ -396,6 +286,63 @@ for i in range(0, cnt - 1):
 # 繪圖
 plt.plot(x[1:], diff_y)
 
+
+plt.show()
+
+
+print("------------------------------------------------------------")  # 60個
+
+plt.figure(
+    num="plot 集合 3",
+    figsize=(12, 8),
+    dpi=100,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
+
+print("------------------------------------------------------------")  # 60個
+plt.subplot(231)
+
+# 時序圖
+import matplotlib.dates as mdates
+
+#     2017/0808/2100    2017/0808/2101    2017/0808/2102    2017/0808/2103
+x = [
+    "20170808210000",
+    "20170808210100",
+    "20170808210200",
+    "20170808210300",
+    "20170808210400",
+    "20170808210500",
+    "20170808210600",
+    "20170808210700",
+    "20170808210800",
+    "20170808210900",
+]
+
+x = pd.to_datetime(x)
+y = [3900.0, 3903.0, 3891.0, 3888.0, 3893.0, 3899.0, 3906.0, 3914.0, 3911.0, 3912.0]
+
+plt.plot(x, y)
+plt.gca().xaxis.set_major_formatter(mdates.DateFormatter("%m-%d %H:%M"))  # 設置時間顯示格式
+plt.gcf().autofmt_xdate()  # 自動旋轉角度，以避免重疊
+
+print("------------------------------------------------------------")  # 60個
+plt.subplot(232)
+
+print("------------------------------------------------------------")  # 60個
+plt.subplot(233)
+
+print("------------------------------------------------------------")  # 60個
+plt.subplot(234)
+
+print("------------------------------------------------------------")  # 60個
+plt.subplot(235)
+
+print("------------------------------------------------------------")  # 60個
+plt.subplot(236)
 
 plt.show()
 
@@ -416,7 +363,6 @@ axs[1, 0].set_title("cool")
 axs[1, 1].set_title("hot")
 
 plt.tight_layout()
-
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
@@ -430,7 +376,7 @@ print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
 
-#把字典畫出來
+# 把字典畫出來
 animals = {
     "鼠": 3,
     "牛": 48,
@@ -445,4 +391,3 @@ plt.xticks(range(len(animals.values())), animals.keys(), rotation=45)
 plt.show()
 
 sys.exit()
-

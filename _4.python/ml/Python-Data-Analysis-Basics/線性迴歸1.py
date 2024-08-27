@@ -248,12 +248,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-# 改變畫風
-
-import seaborn as sns
-
-sns.set()
-
 plt.plot(x, Y_lin, "r", label="標準線性學習機")
 plt.plot(x, Y_poly, "g", label="6 次多項式")
 plt.plot(x, Y_rbf, "b", label="RBF")

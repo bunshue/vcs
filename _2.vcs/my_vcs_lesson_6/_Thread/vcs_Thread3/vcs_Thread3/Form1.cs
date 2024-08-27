@@ -85,50 +85,6 @@ namespace vcs_Thread3
                 richTextBox1.Text += "Thread名稱 : " + str + " 做事 " + DateTime.Now.ToString() + "\n";
             }
         }
-
-
-        //第3種Thread使用
-
-        // Start threads with different priorities.
-        private void button3_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "第3種Thread使用\n";
-            int i;
-            int num_low = 4;
-            for (i = 0; i < num_low; i++)
-            {
-                MakeThread("低_" + i.ToString(), ThreadPriority.BelowNormal);
-            }
-
-            int num_normal = 4;
-            for (i = 0; i < num_normal; i++)
-            {
-                MakeThread("中_" + i.ToString(), ThreadPriority.Normal);
-            }
-
-            int num_high = 4;
-            for (i = 0; i < num_high; i++)
-            {
-                MakeThread("高_" + i.ToString(), ThreadPriority.AboveNormal);
-            }
-        }
-
-        // Make a thread with the indicated priority.
-        private void MakeThread(string thread_name, ThreadPriority thread_priority)
-        {
-            richTextBox1.Text += "開啟thread, 名稱 : " + thread_name + ", 優先序 : " + thread_priority.ToString() + "\n";
-            Application.DoEvents();
-
-            // Initialize the thread.
-            Counter2 new_counter = new Counter2(thread_name);
-            Thread thread = new Thread(new_counter.Run);
-            thread.Priority = thread_priority;
-            thread.IsBackground = true;
-            thread.Name = thread_name;
-
-            // Start the thread.
-            thread.Start();
-        }
     }
 
     //建一個類，模擬實際使用情況
@@ -169,38 +125,6 @@ namespace vcs_Thread3
             catch (Exception ex)
             {
                 Console.WriteLine("Unexpected error in thread : " + ex.Message);
-            }
-        }
-    }
-
-    class Counter2
-    {
-        // This counter's number.
-        public string Name;
-
-        // Initializing constructor.
-        public Counter2(string name)
-        {
-            Name = name;
-        }
-
-        // Count off 10 half second intervals in the Output window.
-        public void Run()
-        {
-            for (int i = 1; i <= 10; i++)
-            {
-                // Display the next message.
-                Console.WriteLine(Name + " " + i);
-
-                // See when we should display the next message.
-                DateTime next_time = DateTime.Now.AddSeconds(0.5);
-
-                // Waste half a second. We don't sleep or call
-                // DoEvents so we don't give up control of the CPU.
-                while (DateTime.Now < next_time)
-                {
-                    // Wait a bit.
-                }
             }
         }
     }

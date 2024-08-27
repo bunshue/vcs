@@ -175,29 +175,29 @@ plt.figure(
 
 filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
 
-image = img.imread(filename)     # 讀取原始圖像
+image = img.imread(filename)  # 讀取原始圖像
 
 plt.subplot(221)
 plt.imshow(image)
-plt.title('原始圖像')
+plt.title("原始圖像")
 
 plt.subplot(222)
-r = image.copy()        # 複製圖像
-r[:,:,[1,2]] = 0        # 保留紅色元素, 設定綠色和藍色元素是 0
+r = image.copy()  # 複製圖像
+r[:, :, [1, 2]] = 0  # 保留紅色元素, 設定綠色和藍色元素是 0
 plt.imshow(r)
-plt.title('Red元素圖像')
+plt.title("Red元素圖像")
 
 plt.subplot(223)
-g = image.copy()        # 複製圖像
-g[:,:,[0,2]] = 0        # 保留綠色元素, 設定紅色和藍色元素是 0
+g = image.copy()  # 複製圖像
+g[:, :, [0, 2]] = 0  # 保留綠色元素, 設定紅色和藍色元素是 0
 plt.imshow(g)
-plt.title('Green元素圖像')
+plt.title("Green元素圖像")
 
 plt.subplot(224)
-b = image.copy()        # 複製圖像
-b[:,:,[0,1]] = 0        # 保留藍色元素, 設定紅色和綠色元素是 0
+b = image.copy()  # 複製圖像
+b[:, :, [0, 1]] = 0  # 保留藍色元素, 設定紅色和綠色元素是 0
 plt.imshow(b)
-plt.title('Blue元素圖像')
+plt.title("Blue元素圖像")
 
 plt.tight_layout()
 plt.show()
@@ -216,17 +216,17 @@ plt.figure(
     frameon=True,
 )
 
-image = img.imread(filename)             # 讀取原始圖像
+image = img.imread(filename)  # 讀取原始圖像
 
-for i in range(1,5):
-    plt.subplot(2,2,i)
-    x = 1 - 0.2*(i-1)                       # 調整色彩明暗參數
-    print(f'i = {i}  x = {x:2.1f}')
-    plt.axis('off')                         # 關閉顯示軸刻度
-    plt.title(f'x = {x:2.1f}',color='b')    # 藍色浮動值標題
-    src = image * x                         # 處理像素值
-    int_image = src.astype(int)              # 將元素值轉成整數
-    plt.imshow(int_image)                    # 顯示圖像
+for i in range(1, 5):
+    plt.subplot(2, 2, i)
+    x = 1 - 0.2 * (i - 1)  # 調整色彩明暗參數
+    print(f"i = {i}  x = {x:2.1f}")
+    plt.axis("off")  # 關閉顯示軸刻度
+    plt.title(f"x = {x:2.1f}", color="b")  # 藍色浮動值標題
+    src = image * x  # 處理像素值
+    int_image = src.astype(int)  # 將元素值轉成整數
+    plt.imshow(int_image)  # 顯示圖像
 
 plt.tight_layout()
 plt.show()

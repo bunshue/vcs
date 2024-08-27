@@ -14,12 +14,11 @@ namespace vcs_Thread_Example
     public partial class Form1 : Form
     {
         //色塊 ST
-        private Thread ThreadA;
-        private Thread ThreadB;
+        private Thread thread_ex8a;
+        private Thread thread_ex8b;
         int cnt1 = 0;
         int cnt2 = 0;
         //色塊 SP
-
 
         public Form1()
         {
@@ -35,23 +34,23 @@ namespace vcs_Thread_Example
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             //殺死一個線程
-            if (ThreadA != null)
+            if (thread_ex8a != null)
             {
-                if (ThreadA.IsAlive)//線程類的 Abort() 方法可以永久的殺死一個線程。在殺死一個線程起前應該判斷線程是否在生存期間。
+                if (thread_ex8a.IsAlive)//線程類的 Abort() 方法可以永久的殺死一個線程。在殺死一個線程起前應該判斷線程是否在生存期間。
                 {
-                    ThreadA.Abort();
+                    thread_ex8a.Abort();
                 }
-                ThreadA = null;
+                thread_ex8a = null;
             }
 
             //殺死一個線程
-            if (ThreadB != null)
+            if (thread_ex8b != null)
             {
-                if (ThreadB.IsAlive)//線程類的 Abort() 方法可以永久的殺死一個線程。在殺死一個線程起前應該判斷線程是否在生存期間。
+                if (thread_ex8b.IsAlive)//線程類的 Abort() 方法可以永久的殺死一個線程。在殺死一個線程起前應該判斷線程是否在生存期間。
                 {
-                    ThreadB.Abort();
+                    thread_ex8b.Abort();
                 }
-                ThreadB = null;
+                thread_ex8b = null;
             }
         }
 
@@ -59,27 +58,27 @@ namespace vcs_Thread_Example
         // 色塊 ST
         private void button4_Click(object sender, EventArgs e)
         {
-            if (ThreadA == null)
+            if (thread_ex8a == null)
             {
                 // The thread isn't running. Start it.
                 cnt1 = 0;
-                ThreadA = new Thread(DoThreadA);
-                ThreadA.Priority = ThreadPriority.BelowNormal;
-                ThreadA.IsBackground = true;
-                ThreadA.Start();
+                thread_ex8a = new Thread(ThreadProc_ex8a);
+                thread_ex8a.Priority = ThreadPriority.BelowNormal;
+                thread_ex8a.IsBackground = true;
+                thread_ex8a.Start();
             }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             //殺死一個線程
-            if (ThreadA != null)
+            if (thread_ex8a != null)
             {
-                if (ThreadA.IsAlive)//線程類的 Abort() 方法可以永久的殺死一個線程。在殺死一個線程起前應該判斷線程是否在生存期間。
+                if (thread_ex8a.IsAlive)//線程類的 Abort() 方法可以永久的殺死一個線程。在殺死一個線程起前應該判斷線程是否在生存期間。
                 {
-                    ThreadA.Abort();
+                    thread_ex8a.Abort();
                 }
-                ThreadA = null;
+                thread_ex8a = null;
             }
         }
 
@@ -103,7 +102,7 @@ namespace vcs_Thread_Example
         }
 
 
-        private void DoThreadA()
+        private void ThreadProc_ex8a()
         {
             while (true)
             {
@@ -121,15 +120,15 @@ namespace vcs_Thread_Example
 
         private void button7_Click(object sender, EventArgs e)
         {
-            if (ThreadB == null)
+            if (thread_ex8b == null)
             {
-                richTextBox1.Text += "等ThreadA 執行完，ThreadB 再繼續執行\n";
+                richTextBox1.Text += "等thread_ex8a 執行完，thread_ex8b 再繼續執行\n";
                 // The thread isn't running. Start it.
                 cnt2 = 0;
-                ThreadB = new Thread(DoThreadB);
-                ThreadB.Priority = ThreadPriority.BelowNormal;
-                ThreadB.IsBackground = true;
-                ThreadB.Start();
+                thread_ex8b = new Thread(ThreadProc_ex8b);
+                thread_ex8b.Priority = ThreadPriority.BelowNormal;
+                thread_ex8b.IsBackground = true;
+                thread_ex8b.Start();
             }
 
         }
@@ -137,22 +136,22 @@ namespace vcs_Thread_Example
         private void button8_Click(object sender, EventArgs e)
         {
             //殺死一個線程
-            if (ThreadB != null)
+            if (thread_ex8b != null)
             {
-                if (ThreadB.IsAlive)//線程類的 Abort() 方法可以永久的殺死一個線程。在殺死一個線程起前應該判斷線程是否在生存期間。
+                if (thread_ex8b.IsAlive)//線程類的 Abort() 方法可以永久的殺死一個線程。在殺死一個線程起前應該判斷線程是否在生存期間。
                 {
-                    ThreadB.Abort();
+                    thread_ex8b.Abort();
                 }
-                ThreadB = null;
+                thread_ex8b = null;
             }
         }
 
-        private void DoThreadB()
+        private void ThreadProc_ex8b()
         {
-            if (ThreadA != null)
+            if (thread_ex8a != null)
             {
                 //等待執行
-                ThreadA.Join();//ThreadB 要先讓線程 ThreadA 執行完，然後線程 ThreadB 再繼續執行
+                thread_ex8a.Join();//thread_ex8b 要先讓線程 thread_ex8a 執行完，然後線程 thread_ex8b 再繼續執行
             }
 
             while (true)
@@ -170,7 +169,5 @@ namespace vcs_Thread_Example
         }
 
         // 色塊 SP
-
     }
 }
-

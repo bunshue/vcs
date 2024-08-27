@@ -23,7 +23,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 plt.figure(
     num="新進測試 01",
     figsize=(12, 8),
@@ -34,157 +34,7 @@ plt.figure(
     frameon=True,
 )
 
-# 第一張圖
-plt.subplot(231)
-
-print("畫點")
-plt.plot(0, 0, "-o")  # 在 (0, 1) 上 畫一點
-plt.plot(1.5, 1.5, "r-o")
-plt.plot(2, -2, "g-o")
-plt.plot(-2, -2, "b-o")
-
-radius = 5
-degrees = np.arange(0, 360)
-x = radius * np.cos(np.radians(degrees))
-y = radius * np.sin(np.radians(degrees))
-
-plt.plot(x, y)
-plt.axis("equal")
-plt.title("畫點 畫圓")
-
-
-# 第二張圖
-plt.subplot(232)
-
-# 畫出y=a^x的函數圖形 0<=x<=10
-x = np.linspace(0, 10, 50)
-y1 = 2**x
-y2 = 2.5**x
-y3 = 3**x
-y4 = 3.5**x
-
-# 加上圖表標題, 字體大小12, 靠右對齊
-plt.title("y=a^x", fontsize=12, loc="right")
-# 加上X軸標題(靠右對齊x=1.0為X軸最右)
-# horizontalalignment,verticalalignment只是調整與x=1.0之相對位置)
-plt.xlabel(
-    "x", fontsize=20, horizontalalignment="right", verticalalignment="top", x=1.0
-)
-# 加上X軸刻度範圍0~10(如果大小顛倒，圖形會左右鏡射)
-plt.xlim(0, 10)
-# 加上X軸刻度標示 0,1,...,10(只有整數),字體大小16
-plt.xticks(list(range(0, 11, 1)), fontsize=16)
-# 加上Y軸標題(靠上對齊y=1.0為Y軸最上)
-# horizontalalignment,verticalalignment只是調整與y=1.0之相對位置)
-plt.ylabel(
-    "y", fontsize=20, horizontalalignment="right", verticalalignment="bottom", y=1.0
-)
-# 加上Y軸刻度範圍0~1200(如果大小顛倒，圖形會上下鏡射)
-plt.ylim(0, 1200)
-# 加上Y軸刻度標示 0,100,200,...,1200(只有100的倍數),字體大小16
-plt.yticks(list(range(0, 1201, 100)), fontsize=16)
-# 設定曲線顏色、線條類型、寬度
-# 設定顏色1:blue、green、red、cyan、magenta、yellow、black、white
-# 設定顏色2:(R, G, B), 0<=R,G,B<=1
-# 設定顏色3:#000000~#FFFFFF, RGB各二個十六進位 00~FF
-# 設定線條型態:-、--、-.、:
-# 設定線條寬度:1~20
-# 設定點的形狀:.,ov^<>1234sp*hH+xDd|_
-# 設定點的形狀:1~10
-plt.plot(x, y1, color="cyan", marker="2", markersize=10)
-plt.plot(x, y2, color=(0, 0, 1), linestyle=":", linewidth=2, marker="x", markersize=10)
-plt.plot(x, y3, color="#FF0000", linestyle="-.", linewidth=3)
-# 設定散佈圖顏色、形狀、大小
-# 設定散佈圖點的形狀:.,ov^<>1234sp*hH+xDd|_
-# 設定散佈圖點的大小
-plt.scatter(x, y4, color="black", marker="x", s=10)
-
-plt.grid()  # 加上格線
-
-# 加上註解
-# xy箭頭座標,xytext文字座標, shrink
-plt.annotate(
-    "y=2^x",
-    xy=(9.5, 800),
-    xytext=(8, 1100),
-    arrowprops=dict(color="cyan", shrink=0.01),
-    color="cyan",
-)
-
-# 加上圖例說明
-plt.legend(["a=2", "a=2.5", "a=3", "a=3.5"], fontsize=20)
-
-# 第三張圖
-plt.subplot(233)
-
-x1 = np.linspace(0.1, 10, 99)  # 建立含30個元素的陣列
-x2 = np.linspace(0.1, 10, 99)  # 建立含30個元素的陣列
-y1 = [math.log2(x) for x in x1]
-y2 = [math.log(x, 0.5) for x in x2]
-
-plt.plot(x1, y1, label="基底 = 2")
-plt.plot(x2, y2, label="基底 = 0.5")
-
-plt.axis([0, 10, -5, 5])
-plt.legend(loc="best")  # 建立圖例
-
-
-# 第四張圖
-plt.subplot(234)
-
-y, x = np.mgrid[-3:3:300j, -6:6:600j]
-z = np.sin(x**2 + 2 * y**2 + x * y)
-plt.imshow(z, cmap="Blues", vmin=-2, vmax=2)
-
-# plt.colorbar(shrink=0.92)
-
-plt.xticks(())
-plt.yticks(())
-
-
-# 第五張圖
-plt.subplot(235)
-
-# 畫  (x^2 + y^2 -1)^3 - x^2*y^3 = 0
-# %fig=matplotlib繪制心形隱函數曲線
-x, y = np.mgrid[-2:2:500j, -2:2:500j]
-z = (x**2 + y**2 - 1) ** 3 - x**2 * y**3
-plt.contourf(x, y, z, levels=[-1, 0], colors=["red"])
-plt.gca().set_aspect("equal")
-
-
-# 第六張圖
-plt.subplot(236)
-
-n = 1024  # data size
-X = np.random.normal(0, 1, n)
-Y = np.random.normal(0, 1, n)
-T = np.arctan2(Y, X)  # for color later on
-
-plt.scatter(X, Y, s=75, c=T, alpha=0.5)
-
-plt.xlim(-1.5, 1.5)
-plt.xticks(())  # ignore xticks
-
-plt.ylim(-1.5, 1.5)
-plt.yticks(())  # ignore yticks
-
-plt.tight_layout()
-plt.show()
-
 print("------------------------------------------------------------")  # 60個
-
-plt.figure(
-    num="新進測試 02",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
-
-# 第一張圖
 plt.subplot(231)
 
 # image data
@@ -215,46 +65,90 @@ plt.xticks(())
 plt.yticks(())
 
 
-# 第二張圖
+print("------------------------------------------------------------")  # 60個
 plt.subplot(232)
 
 
-# 第三張圖
+print("------------------------------------------------------------")  # 60個
 plt.subplot(233)
 
 
-# 第四張圖
+print("------------------------------------------------------------")  # 60個
 plt.subplot(234)
 
-# 時序圖
-import matplotlib.dates as mdates
+y, x = np.mgrid[-3:3:300j, -6:6:600j]
+z = np.sin(x**2 + 2 * y**2 + x * y)
+plt.imshow(z, cmap="Blues", vmin=-2, vmax=2)
 
-#     2017/0808/2100    2017/0808/2101    2017/0808/2102    2017/0808/2103
-x = [
-    "20170808210000",
-    "20170808210100",
-    "20170808210200",
-    "20170808210300",
-    "20170808210400",
-    "20170808210500",
-    "20170808210600",
-    "20170808210700",
-    "20170808210800",
-    "20170808210900",
-]
+# plt.colorbar(shrink=0.92)
 
-x = pd.to_datetime(x)
-y = [3900.0, 3903.0, 3891.0, 3888.0, 3893.0, 3899.0, 3906.0, 3914.0, 3911.0, 3912.0]
+plt.xticks(())
+plt.yticks(())
 
-plt.plot(x, y)
-plt.gca().xaxis.set_major_formatter(mdates.DateFormatter("%m-%d %H:%M"))  # 設置時間顯示格式
-plt.gcf().autofmt_xdate()  # 自動旋轉角度，以避免重疊
 
-# 第五張圖
+print("------------------------------------------------------------")  # 60個
+plt.subplot(235)
+
+# 畫  (x^2 + y^2 -1)^3 - x^2*y^3 = 0
+# %fig=matplotlib繪制心形隱函數曲線
+x, y = np.mgrid[-2:2:500j, -2:2:500j]
+z = (x**2 + y**2 - 1) ** 3 - x**2 * y**3
+plt.contourf(x, y, z, levels=[-1, 0], colors=["red"])
+plt.gca().set_aspect("equal")
+
+
+print("------------------------------------------------------------")  # 60個
+plt.subplot(236)
+
+n = 1024  # data size
+X = np.random.normal(0, 1, n)
+Y = np.random.normal(0, 1, n)
+T = np.arctan2(Y, X)  # for color later on
+
+plt.scatter(X, Y, s=75, c=T, alpha=0.5)
+
+plt.xlim(-1.5, 1.5)
+plt.xticks(())  # ignore xticks
+
+plt.ylim(-1.5, 1.5)
+plt.yticks(())  # ignore yticks
+
+plt.tight_layout()
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+plt.figure(
+    num="新進測試 02",
+    figsize=(12, 8),
+    dpi=100,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
+
+print("------------------------------------------------------------")  # 60個
+plt.subplot(231)
+
+
+print("------------------------------------------------------------")  # 60個
+plt.subplot(232)
+
+
+print("------------------------------------------------------------")  # 60個
+plt.subplot(233)
+
+
+print("------------------------------------------------------------")  # 60個
+plt.subplot(234)
+
+
+print("------------------------------------------------------------")  # 60個
 plt.subplot(235)
 
 
-# 第六張圖
+print("------------------------------------------------------------")  # 60個
 plt.subplot(236)
 
 
@@ -700,7 +594,7 @@ ax.scatter(x, y, c=colors, marker="*")  # 繪製 sin
 ax.set_title("建立畫布與軸物件,使用OO API繪圖", fontsize=16)
 
 plt.show()
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 
@@ -714,28 +608,3 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
-
-
-"""
-
-plt.rcParams['font.sans-serif']='DFKai-SB'  # 中文OK
-
-plt.rcParams['font.sans-serif']='mingliu'	#指定為明體字
-plt.rcParams['font.sans-serif']='mingliu'  # 中文OK
-
-
-
-#預設大小為6.4inches*4.8inches, 80dpi
-
-#預設大小為6.4inches*4.8inches, 80dpi
-#指定 寬10inches, 高8inches, 160dpi
-plt.figure(figsize=(10, 8),dpi=160)
-
-#指定 寬10inches, 高8inches 
-matplotlib.pyplot.figure(figsize=(10, 8))
-
-#指定 寬10inches, 高8inches, 160dpi
-plt.figure(figsize=(10, 8),dpi=160)
-
-
-"""

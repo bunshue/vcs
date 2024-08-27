@@ -5,6 +5,7 @@ print("------------------------------------------------------------")  # 60個
 # 共同
 import os
 import sys
+import time
 import math
 import random
 import numpy as np
@@ -21,10 +22,6 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print('------------------------------------------------------------')	#60個
 
-import seaborn as sns #海生, 自動把圖畫得比較好看
-
-print('------------------------------------------------------------')	#60個
-
 """
 import plotly.offline
 import plotly.express as px
@@ -32,7 +29,6 @@ import plotly.graph_objects as go
 import plotly.subplots
 
 """
-
 print('------------------------------------------------------------')	#60個
 
 import plotly

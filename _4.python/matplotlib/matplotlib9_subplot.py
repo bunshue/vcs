@@ -25,6 +25,16 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
+
+# 共同參數
+x = np.linspace(0, 2 * np.pi, 30)
+y = np.sin(x)
+y0 = np.sin(x)
+y1 = np.cos(x)
+y2 = np.tan(x)
+
+print("------------------------------------------------------------")  # 60個
+
 '''
 plt.figure(
     num="不使用subplot畫多圖",
@@ -643,37 +653,39 @@ plt.show()
 '''
 print("------------------------------------------------------------")  # 60個
 
-plt.subplot(1,2,1)      # 建立子圖表 1,2,1
-plt.text(0.15,0.5,'subplot(1,2,1)',fontsize='16',c='b')
+plt.subplot(1, 2, 1)  # 建立子圖表 1,2,1
+plt.text(0.15, 0.5, "subplot(1,2,1)", fontsize="16", c="b")
 
-plt.subplot(2,2,2)      # 建立子圖表 2,2,2
-plt.text(0.15,0.5,'subplot(2,2,2)',fontsize='16',c='m')
+plt.subplot(2, 2, 2)  # 建立子圖表 2,2,2
+plt.text(0.15, 0.5, "subplot(2,2,2)", fontsize="16", c="m")
 
-plt.subplot(2,2,4)      # 建立子圖表 2,2,4
-plt.text(0.15,0.5,'subplot(2,2,4)',fontsize='16',c='m')
+plt.subplot(2, 2, 4)  # 建立子圖表 2,2,4
+plt.text(0.15, 0.5, "subplot(2,2,4)", fontsize="16", c="m")
 
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
+
 def f(t):
-    return np.exp(-t) * np.sin(2*np.pi*t)
+    return np.exp(-t) * np.sin(2 * np.pi * t)
+
 
 x = np.linspace(0.0, np.pi, 100)
 
-plt.subplot(2,2,1)          # 子圖 1
+plt.subplot(2, 2, 1)  # 子圖 1
 plt.plot(x, f(x))
-plt.title('子圖 1')
+plt.title("子圖 1")
 
-plt.subplot(2,2,2)          # 子圖 2
+plt.subplot(2, 2, 2)  # 子圖 2
 plt.plot(x, f(x))
-plt.title('子圖 2')
+plt.title("子圖 2")
 
-plt.subplot(2,1,2)          # 子圖 3
+plt.subplot(2, 1, 2)  # 子圖 3
 plt.plot(x, f(x))
-plt.title('子圖 3')
+plt.title("子圖 3")
 
-plt.suptitle('主標題 : 衰減函數',fontsize=16,c='b')
+plt.suptitle("主標題 : 衰減函數", fontsize=16, c="b")
 
 plt.show()
 
@@ -681,79 +693,79 @@ print("------------------------------------------------------------")  # 60個
 
 
 # 建立子圖 1
-x1 = np.linspace(0, 2*np.pi, 300)
-ax1 = plt.subplot(211)              
-ax1.plot(x1, np.sin(2*np.pi*x1))
+x1 = np.linspace(0, 2 * np.pi, 300)
+ax1 = plt.subplot(211)
+ax1.plot(x1, np.sin(2 * np.pi * x1))
 
 # 建立子圖 2
-x2 = np.linspace(0, 3*np.pi, 300)
-ax2 = plt.subplot(212)  
-ax2.plot(x2, np.sin(4*np.pi*x2))
+x2 = np.linspace(0, 3 * np.pi, 300)
+ax2 = plt.subplot(212)
+ax2.plot(x2, np.sin(4 * np.pi * x2))
 
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
 # 建立子圖 1
-x1 = np.linspace(0, 2*np.pi, 300)
-ax1 = plt.subplot(211)              
-ax1.plot(x1, np.sin(2*np.pi*x1))
+x1 = np.linspace(0, 2 * np.pi, 300)
+ax1 = plt.subplot(211)
+ax1.plot(x1, np.sin(2 * np.pi * x1))
 
 # 建立子圖 2
-x2 = np.linspace(0, 3*np.pi, 300)
+x2 = np.linspace(0, 3 * np.pi, 300)
 ax2 = plt.subplot(212, sharex=ax1)  # 共享 x 軸
-ax2.plot(x2, np.sin(4*np.pi*x2))
+ax2.plot(x2, np.sin(4 * np.pi * x2))
 
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
 # 建立子圖 1
-x1 = np.linspace(0, 2*np.pi, 300)
-ax1 = plt.subplot(211)              
-ax1.plot(x1, np.sin(2*np.pi*x1))
-ax1.tick_params('x',labelbottom=False)  # 取消顯示刻度標籤
+x1 = np.linspace(0, 2 * np.pi, 300)
+ax1 = plt.subplot(211)
+ax1.plot(x1, np.sin(2 * np.pi * x1))
+ax1.tick_params("x", labelbottom=False)  # 取消顯示刻度標籤
 
 # 建立子圖 2
-x2 = np.linspace(0, 3*np.pi, 300)
-ax2 = plt.subplot(212, sharex=ax1)      # 共享 x 軸
-ax2.plot(x2, np.sin(4*np.pi*x2))
+x2 = np.linspace(0, 3 * np.pi, 300)
+ax2 = plt.subplot(212, sharex=ax1)  # 共享 x 軸
+ax2.plot(x2, np.sin(4 * np.pi * x2))
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
 # 建立子圖 1
-x = np.linspace(0, 2*np.pi, 300)
-ax1 = plt.subplot(121)          
-ax1.plot(x, np.sin(x**2),'b')
+x = np.linspace(0, 2 * np.pi, 300)
+ax1 = plt.subplot(121)
+ax1.plot(x, np.sin(x**2), "b")
 # 建立子圖 2
-ax2 = plt.subplot(122)      
-ax2.plot(x, 1+np.sin(x**2),'g--')
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-# 建立子圖 1
-x = np.linspace(0, 2*np.pi, 300)
-ax1 = plt.subplot(121)          
-ax1.plot(x, np.sin(x**2),'b')
-# 建立子圖 2
-ax2 = plt.subplot(122,sharey=ax1)   # 共享 y 軸    
-ax2.plot(x, 1+np.sin(x**2),'g--')
+ax2 = plt.subplot(122)
+ax2.plot(x, 1 + np.sin(x**2), "g--")
 
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
 # 建立子圖 1
-x = np.linspace(0, 2*np.pi, 300)
-ax1 = plt.subplot(121)          
-ax1.plot(x, np.sin(x**2),'b')
+x = np.linspace(0, 2 * np.pi, 300)
+ax1 = plt.subplot(121)
+ax1.plot(x, np.sin(x**2), "b")
 # 建立子圖 2
-ax2 = plt.subplot(122,sharey=ax1)       # 共享 y 軸    
-ax2.plot(x, 1+np.sin(x**2),'g--')
-ax2.tick_params('y',labelleft=False)    # 取消顯示刻度標籤
+ax2 = plt.subplot(122, sharey=ax1)  # 共享 y 軸
+ax2.plot(x, 1 + np.sin(x**2), "g--")
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+# 建立子圖 1
+x = np.linspace(0, 2 * np.pi, 300)
+ax1 = plt.subplot(121)
+ax1.plot(x, np.sin(x**2), "b")
+# 建立子圖 2
+ax2 = plt.subplot(122, sharey=ax1)  # 共享 y 軸
+ax2.plot(x, 1 + np.sin(x**2), "g--")
+ax2.tick_params("y", labelleft=False)  # 取消顯示刻度標籤
 plt.suptitle("共享 y 軸")
 
 plt.show()
@@ -761,23 +773,23 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 
 # 建立子圖 1
-x1 = np.linspace(0, 2*np.pi, 300)
-ax1 = plt.subplot(221)              
-ax1.plot(x1, np.sin(2*np.pi*x1))
+x1 = np.linspace(0, 2 * np.pi, 300)
+ax1 = plt.subplot(221)
+ax1.plot(x1, np.sin(2 * np.pi * x1))
 
 # 建立子圖 2
-x2 = np.linspace(0, 3*np.pi, 300)
+x2 = np.linspace(0, 3 * np.pi, 300)
 ax2 = plt.subplot(222, sharex=ax1, sharey=ax1)  # 共享x和y軸
-ax2.plot(x2, np.sin(4*np.pi*x2))
+ax2.plot(x2, np.sin(4 * np.pi * x2))
 
 # 建立子圖 3
-x3 = np.linspace(0, 2*np.pi, 300)
-ax3 = plt.subplot(223, sharex=ax1, sharey=ax1)  # 共享x和y軸        
-ax3.plot(x3, np.sin(x3**2),'b')
+x3 = np.linspace(0, 2 * np.pi, 300)
+ax3 = plt.subplot(223, sharex=ax1, sharey=ax1)  # 共享x和y軸
+ax3.plot(x3, np.sin(x3**2), "b")
 
 # 建立子圖 4
-ax4 = plt.subplot(224, sharex=ax1, sharey=ax1)  # 共享x和y軸    
-ax4.plot(x3, 1+np.sin(x3**2),'g--')
+ax4 = plt.subplot(224, sharex=ax1, sharey=ax1)  # 共享x和y軸
+ax4.plot(x3, 1 + np.sin(x3**2), "g--")
 plt.suptitle("共享 x 和 y 軸")
 
 plt.show()
@@ -785,27 +797,27 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 
 # 建立子圖 1
-x1 = np.linspace(0, 2*np.pi, 300)
-ax1 = plt.subplot(221)              
-ax1.plot(x1, np.sin(2*np.pi*x1))
-ax1.tick_params('x',labelbottom=False)          # 取消顯示x軸刻度標籤
+x1 = np.linspace(0, 2 * np.pi, 300)
+ax1 = plt.subplot(221)
+ax1.plot(x1, np.sin(2 * np.pi * x1))
+ax1.tick_params("x", labelbottom=False)  # 取消顯示x軸刻度標籤
 
 # 建立子圖 2
-x2 = np.linspace(0, 3*np.pi, 300)
+x2 = np.linspace(0, 3 * np.pi, 300)
 ax2 = plt.subplot(222, sharex=ax1, sharey=ax1)  # 共享x和y軸
-ax2.plot(x2, np.sin(4*np.pi*x2))
-ax2.tick_params('x', labelbottom=False)         # 取消顯示x軸刻度標籤
-ax2.tick_params('y', labelleft=False)           # 取消顯示y軸刻度標籤
+ax2.plot(x2, np.sin(4 * np.pi * x2))
+ax2.tick_params("x", labelbottom=False)  # 取消顯示x軸刻度標籤
+ax2.tick_params("y", labelleft=False)  # 取消顯示y軸刻度標籤
 
 # 建立子圖 3
-x3 = np.linspace(0, 2*np.pi, 300)
-ax3 = plt.subplot(223, sharex=ax1, sharey=ax1)  # 共享x和y軸        
-ax3.plot(x3, np.sin(x3**2),'b')
+x3 = np.linspace(0, 2 * np.pi, 300)
+ax3 = plt.subplot(223, sharex=ax1, sharey=ax1)  # 共享x和y軸
+ax3.plot(x3, np.sin(x3**2), "b")
 
 # 建立子圖 4
-ax4 = plt.subplot(224, sharex=ax1, sharey=ax1)  # 共享x和y軸    
-ax4.plot(x3, 1+np.sin(x3**2),'g--')
-ax4.tick_params('y',labelleft=False)            # 取消顯示y軸刻度標籤
+ax4 = plt.subplot(224, sharex=ax1, sharey=ax1)  # 共享x和y軸
+ax4.plot(x3, 1 + np.sin(x3**2), "g--")
+ax4.tick_params("y", labelleft=False)  # 取消顯示y軸刻度標籤
 
 plt.suptitle("共享 x 和 y 軸")
 
@@ -815,18 +827,19 @@ print("------------------------------------------------------------")  # 60個
 
 
 def my_plot(ax):
-    ax.plot([1, 3])             # 繪製圖表
-    ax.set_xlabel('x 座標')
-    ax.set_ylabel('y 座標')
-    ax.set_title('資料布局')    
+    ax.plot([1, 3])  # 繪製圖表
+    ax.set_xlabel("x 座標")
+    ax.set_ylabel("y 座標")
+    ax.set_title("資料布局")
 
-ax1 = plt.subplot(2,2,1)    # 建立圖表
+
+ax1 = plt.subplot(2, 2, 1)  # 建立圖表
 my_plot(ax1)
-ax2 = plt.subplot(2,2,2)    # 建立圖表
+ax2 = plt.subplot(2, 2, 2)  # 建立圖表
 my_plot(ax2)
-ax3 = plt.subplot(2,2,3)    # 建立圖表
+ax3 = plt.subplot(2, 2, 3)  # 建立圖表
 my_plot(ax3)
-ax4 = plt.subplot(2,2,4)    # 建立圖表
+ax4 = plt.subplot(2, 2, 4)  # 建立圖表
 my_plot(ax4)
 
 plt.show()
@@ -835,18 +848,19 @@ print("------------------------------------------------------------")  # 60個
 
 
 def my_plot(ax):
-    ax.plot([1, 3])             # 繪製圖表
-    ax.set_xlabel('x 座標')
-    ax.set_ylabel('y 座標')
-    ax.set_title('資料布局')    
+    ax.plot([1, 3])  # 繪製圖表
+    ax.set_xlabel("x 座標")
+    ax.set_ylabel("y 座標")
+    ax.set_title("資料布局")
 
-ax1 = plt.subplot(2,2,1)    # 建立圖表
+
+ax1 = plt.subplot(2, 2, 1)  # 建立圖表
 my_plot(ax1)
-ax2 = plt.subplot(2,2,2)    # 建立圖表
+ax2 = plt.subplot(2, 2, 2)  # 建立圖表
 my_plot(ax2)
-ax3 = plt.subplot(2,2,3)    # 建立圖表
+ax3 = plt.subplot(2, 2, 3)  # 建立圖表
 my_plot(ax3)
-ax4 = plt.subplot(2,2,4)    # 建立圖表
+ax4 = plt.subplot(2, 2, 4)  # 建立圖表
 my_plot(ax4)
 
 plt.show()
@@ -855,16 +869,17 @@ print("------------------------------------------------------------")  # 60個
 
 
 def my_plot(ax):
-    ax.plot([1, 3])             # 繪製圖表
-    ax.set_xlabel('x 座標')
-    ax.set_ylabel('y 座標')
-    ax.set_title('資料布局')    
+    ax.plot([1, 3])  # 繪製圖表
+    ax.set_xlabel("x 座標")
+    ax.set_ylabel("y 座標")
+    ax.set_title("資料布局")
 
-ax1 = plt.subplot(2,2,1)    # 建立圖表
+
+ax1 = plt.subplot(2, 2, 1)  # 建立圖表
 my_plot(ax1)
-ax2 = plt.subplot(2,2,3)    # 建立圖表
+ax2 = plt.subplot(2, 2, 3)  # 建立圖表
 my_plot(ax2)
-ax3 = plt.subplot(1,2,2)    # 建立圖表
+ax3 = plt.subplot(1, 2, 2)  # 建立圖表
 my_plot(ax3)
 
 plt.show()
@@ -873,22 +888,22 @@ print("------------------------------------------------------------")  # 60個
 
 
 def my_plot(ax):
-    ax.plot([1, 3])             # 繪製圖表
-    ax.set_xlabel('x 座標')
-    ax.set_ylabel('y 座標')
-    ax.set_title('資料布局')    
+    ax.plot([1, 3])  # 繪製圖表
+    ax.set_xlabel("x 座標")
+    ax.set_ylabel("y 座標")
+    ax.set_title("資料布局")
 
-ax1 = plt.subplot(2,2,1)    # 建立圖表
+
+ax1 = plt.subplot(2, 2, 1)  # 建立圖表
 my_plot(ax1)
-ax2 = plt.subplot(2,2,3)    # 建立圖表
+ax2 = plt.subplot(2, 2, 3)  # 建立圖表
 my_plot(ax2)
-ax3 = plt.subplot(1,2,2)    # 建立圖表
+ax3 = plt.subplot(1, 2, 2)  # 建立圖表
 my_plot(ax3)
 
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------------------------------------")  # 60個

@@ -1,7 +1,8 @@
-# 等高線圖 Contour Chart 集合
-# 輪廓圖
-
 """
+等高線圖 Contour Chart 集合
+輪廓圖
+
+
 將資料繪製成等高線圖 ( Contour Chart )
 並進一步介紹 contour() 的相關用法
 以及使用 contourf() 將等高線圖變成等高線面積圖。
@@ -18,12 +19,12 @@ vmin, vmax 	等高線顏色的最小值與最大值。
 linewidths 	等高線的粗細。
 """
 
-
 print("------------------------------------------------------------")  # 60個
 
 # 共同
 import os
 import sys
+import time
 import math
 import random
 import numpy as np
@@ -37,9 +38,54 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 # 設定負號
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
-'''
+
 print("------------------------------------------------------------")  # 60個
-"""
+
+plt.figure(
+    num="Contour 集合 1",
+    figsize=(12, 8),
+    dpi=100,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
+
+print("------------------------------------------------------------")  # 60個
+plt.subplot(231)
+
+
+
+print("------------------------------------------------------------")  # 60個
+plt.subplot(232)
+
+
+
+print("------------------------------------------------------------")  # 60個
+plt.subplot(233)
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+plt.subplot(234)
+
+
+print("------------------------------------------------------------")  # 60個
+plt.subplot(235)
+
+
+
+print("------------------------------------------------------------")  # 60個
+plt.subplot(236)
+
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+
+
 #下方的程式碼，執行後會先使用 x 和 y 畫出一個二維的直角座標系統，
 #接著 z 使用二維陣列，標記每個位置的高度，最後就會根據數據資料畫出等高線圖。
 
@@ -60,6 +106,8 @@ print(y.shape)
 plt.contour(x, y, z, levels = 10)   #10階
 #plt.contour(x, y, z)    #預設維6階
 plt.show()
+
+print("------------------------------")  # 30個
 
 print('畫熱圖')
 ndarray2d = np.array(z)
@@ -180,17 +228,14 @@ plt.contourf(xx, yy, zz, alpha = 0.3)
 
 plt.title('函數 z = x^2 + y^2')
 plt.grid()
-plt.show()
-"""
-print("------------------------------------------------------------")  # 60個
 
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
 x = np.array([1, 2, 3, 4])
 y = np.array([5, 6, 7, 8])
 X, Y = np.meshgrid(x, y)
-
 
 Z = np.random.randint(0, 3, (4, 4))
 plt.contour(X, Y, Z)
@@ -245,7 +290,6 @@ plt.contourf(X, Y, Z)
 
 plt.show()
 
-'''
 print("------------------------------------------------------------")  # 60個
 
 x = range(5)

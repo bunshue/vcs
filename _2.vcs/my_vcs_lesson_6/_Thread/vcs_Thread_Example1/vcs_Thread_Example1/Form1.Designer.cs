@@ -62,6 +62,22 @@
             this.button42 = new System.Windows.Forms.Button();
             this.button41 = new System.Windows.Forms.Button();
             this.button40 = new System.Windows.Forms.Button();
+            this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.button82 = new System.Windows.Forms.Button();
+            this.button81 = new System.Windows.Forms.Button();
+            this.button80 = new System.Windows.Forms.Button();
+            this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.button92 = new System.Windows.Forms.Button();
+            this.button91 = new System.Windows.Forms.Button();
+            this.button90 = new System.Windows.Forms.Button();
+            this.groupBox10 = new System.Windows.Forms.GroupBox();
+            this.button102 = new System.Windows.Forms.Button();
+            this.button101 = new System.Windows.Forms.Button();
+            this.button100 = new System.Windows.Forms.Button();
+            this.groupBox11 = new System.Windows.Forms.GroupBox();
+            this.button112 = new System.Windows.Forms.Button();
+            this.button111 = new System.Windows.Forms.Button();
+            this.button110 = new System.Windows.Forms.Button();
             this.groupBox0.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -70,6 +86,10 @@
             this.groupBox6.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            this.groupBox8.SuspendLayout();
+            this.groupBox9.SuspendLayout();
+            this.groupBox10.SuspendLayout();
+            this.groupBox11.SuspendLayout();
             this.SuspendLayout();
             // 
             // bt_clear
@@ -426,11 +446,183 @@
             this.button40.UseVisualStyleBackColor = true;
             this.button40.Click += new System.EventHandler(this.button40_Click);
             // 
+            // groupBox8
+            // 
+            this.groupBox8.Controls.Add(this.button82);
+            this.groupBox8.Controls.Add(this.button81);
+            this.groupBox8.Controls.Add(this.button80);
+            this.groupBox8.Location = new System.Drawing.Point(12, 325);
+            this.groupBox8.Name = "groupBox8";
+            this.groupBox8.Size = new System.Drawing.Size(150, 150);
+            this.groupBox8.TabIndex = 34;
+            this.groupBox8.TabStop = false;
+            this.groupBox8.Text = "Thread使用範例8";
+            // 
+            // button82
+            // 
+            this.button82.Location = new System.Drawing.Point(23, 104);
+            this.button82.Name = "button82";
+            this.button82.Size = new System.Drawing.Size(90, 30);
+            this.button82.TabIndex = 2;
+            this.button82.Text = "狀態";
+            this.button82.UseVisualStyleBackColor = true;
+            this.button82.Click += new System.EventHandler(this.button82_Click);
+            // 
+            // button81
+            // 
+            this.button81.Location = new System.Drawing.Point(23, 59);
+            this.button81.Name = "button81";
+            this.button81.Size = new System.Drawing.Size(90, 30);
+            this.button81.TabIndex = 1;
+            this.button81.Text = "停止";
+            this.button81.UseVisualStyleBackColor = true;
+            this.button81.Click += new System.EventHandler(this.button81_Click);
+            // 
+            // button80
+            // 
+            this.button80.Location = new System.Drawing.Point(23, 21);
+            this.button80.Name = "button80";
+            this.button80.Size = new System.Drawing.Size(90, 30);
+            this.button80.TabIndex = 0;
+            this.button80.Text = "啟動";
+            this.button80.UseVisualStyleBackColor = true;
+            this.button80.Click += new System.EventHandler(this.button80_Click);
+            // 
+            // groupBox9
+            // 
+            this.groupBox9.Controls.Add(this.button92);
+            this.groupBox9.Controls.Add(this.button91);
+            this.groupBox9.Controls.Add(this.button90);
+            this.groupBox9.Location = new System.Drawing.Point(168, 325);
+            this.groupBox9.Name = "groupBox9";
+            this.groupBox9.Size = new System.Drawing.Size(150, 150);
+            this.groupBox9.TabIndex = 35;
+            this.groupBox9.TabStop = false;
+            this.groupBox9.Text = "Thread使用範例9";
+            // 
+            // button92
+            // 
+            this.button92.Location = new System.Drawing.Point(23, 104);
+            this.button92.Name = "button92";
+            this.button92.Size = new System.Drawing.Size(90, 30);
+            this.button92.TabIndex = 2;
+            this.button92.Text = "狀態";
+            this.button92.UseVisualStyleBackColor = true;
+            this.button92.Click += new System.EventHandler(this.button92_Click);
+            // 
+            // button91
+            // 
+            this.button91.Location = new System.Drawing.Point(23, 59);
+            this.button91.Name = "button91";
+            this.button91.Size = new System.Drawing.Size(90, 30);
+            this.button91.TabIndex = 1;
+            this.button91.Text = "停止";
+            this.button91.UseVisualStyleBackColor = true;
+            this.button91.Click += new System.EventHandler(this.button91_Click);
+            // 
+            // button90
+            // 
+            this.button90.Location = new System.Drawing.Point(23, 21);
+            this.button90.Name = "button90";
+            this.button90.Size = new System.Drawing.Size(90, 30);
+            this.button90.TabIndex = 0;
+            this.button90.Text = "啟動";
+            this.button90.UseVisualStyleBackColor = true;
+            this.button90.Click += new System.EventHandler(this.button90_Click);
+            // 
+            // groupBox10
+            // 
+            this.groupBox10.Controls.Add(this.button102);
+            this.groupBox10.Controls.Add(this.button101);
+            this.groupBox10.Controls.Add(this.button100);
+            this.groupBox10.Location = new System.Drawing.Point(324, 325);
+            this.groupBox10.Name = "groupBox10";
+            this.groupBox10.Size = new System.Drawing.Size(150, 150);
+            this.groupBox10.TabIndex = 35;
+            this.groupBox10.TabStop = false;
+            this.groupBox10.Text = "Thread使用範例10";
+            // 
+            // button102
+            // 
+            this.button102.Location = new System.Drawing.Point(23, 104);
+            this.button102.Name = "button102";
+            this.button102.Size = new System.Drawing.Size(90, 30);
+            this.button102.TabIndex = 2;
+            this.button102.Text = "狀態";
+            this.button102.UseVisualStyleBackColor = true;
+            this.button102.Click += new System.EventHandler(this.button102_Click);
+            // 
+            // button101
+            // 
+            this.button101.Location = new System.Drawing.Point(23, 59);
+            this.button101.Name = "button101";
+            this.button101.Size = new System.Drawing.Size(90, 30);
+            this.button101.TabIndex = 1;
+            this.button101.Text = "停止";
+            this.button101.UseVisualStyleBackColor = true;
+            this.button101.Click += new System.EventHandler(this.button101_Click);
+            // 
+            // button100
+            // 
+            this.button100.Location = new System.Drawing.Point(23, 21);
+            this.button100.Name = "button100";
+            this.button100.Size = new System.Drawing.Size(90, 30);
+            this.button100.TabIndex = 0;
+            this.button100.Text = "啟動";
+            this.button100.UseVisualStyleBackColor = true;
+            this.button100.Click += new System.EventHandler(this.button100_Click);
+            // 
+            // groupBox11
+            // 
+            this.groupBox11.Controls.Add(this.button112);
+            this.groupBox11.Controls.Add(this.button111);
+            this.groupBox11.Controls.Add(this.button110);
+            this.groupBox11.Location = new System.Drawing.Point(480, 325);
+            this.groupBox11.Name = "groupBox11";
+            this.groupBox11.Size = new System.Drawing.Size(150, 150);
+            this.groupBox11.TabIndex = 35;
+            this.groupBox11.TabStop = false;
+            this.groupBox11.Text = "Thread使用範例11";
+            // 
+            // button112
+            // 
+            this.button112.Location = new System.Drawing.Point(23, 104);
+            this.button112.Name = "button112";
+            this.button112.Size = new System.Drawing.Size(90, 30);
+            this.button112.TabIndex = 2;
+            this.button112.Text = "狀態";
+            this.button112.UseVisualStyleBackColor = true;
+            this.button112.Click += new System.EventHandler(this.button112_Click);
+            // 
+            // button111
+            // 
+            this.button111.Location = new System.Drawing.Point(23, 59);
+            this.button111.Name = "button111";
+            this.button111.Size = new System.Drawing.Size(90, 30);
+            this.button111.TabIndex = 1;
+            this.button111.Text = "停止";
+            this.button111.UseVisualStyleBackColor = true;
+            this.button111.Click += new System.EventHandler(this.button111_Click);
+            // 
+            // button110
+            // 
+            this.button110.Location = new System.Drawing.Point(23, 21);
+            this.button110.Name = "button110";
+            this.button110.Size = new System.Drawing.Size(90, 30);
+            this.button110.TabIndex = 0;
+            this.button110.Text = "啟動";
+            this.button110.UseVisualStyleBackColor = true;
+            this.button110.Click += new System.EventHandler(this.button110_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(752, 334);
+            this.ClientSize = new System.Drawing.Size(781, 568);
+            this.Controls.Add(this.groupBox11);
+            this.Controls.Add(this.groupBox10);
+            this.Controls.Add(this.groupBox9);
+            this.Controls.Add(this.groupBox8);
             this.Controls.Add(this.groupBox7);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox6);
@@ -453,6 +645,10 @@
             this.groupBox6.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
+            this.groupBox8.ResumeLayout(false);
+            this.groupBox9.ResumeLayout(false);
+            this.groupBox10.ResumeLayout(false);
+            this.groupBox11.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -493,6 +689,22 @@
         private System.Windows.Forms.Button button42;
         private System.Windows.Forms.Button button41;
         private System.Windows.Forms.Button button40;
+        private System.Windows.Forms.GroupBox groupBox8;
+        private System.Windows.Forms.Button button82;
+        private System.Windows.Forms.Button button81;
+        private System.Windows.Forms.Button button80;
+        private System.Windows.Forms.GroupBox groupBox9;
+        private System.Windows.Forms.Button button92;
+        private System.Windows.Forms.Button button91;
+        private System.Windows.Forms.Button button90;
+        private System.Windows.Forms.GroupBox groupBox10;
+        private System.Windows.Forms.Button button102;
+        private System.Windows.Forms.Button button101;
+        private System.Windows.Forms.Button button100;
+        private System.Windows.Forms.GroupBox groupBox11;
+        private System.Windows.Forms.Button button112;
+        private System.Windows.Forms.Button button111;
+        private System.Windows.Forms.Button button110;
     }
 }
 

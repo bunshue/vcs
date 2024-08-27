@@ -73,6 +73,10 @@ namespace vcs_Thread_Example1
             groupBox5.Size = new Size(W, H);
             groupBox6.Size = new Size(W, H);
             groupBox7.Size = new Size(W, H);
+            groupBox8.Size = new Size(W, H);
+            groupBox9.Size = new Size(W, H);
+            groupBox10.Size = new Size(W, H);
+            groupBox11.Size = new Size(W, H);
             groupBox0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             groupBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             groupBox2.Location = new Point(x_st + dx * 2, y_st + dy * 0);
@@ -81,6 +85,10 @@ namespace vcs_Thread_Example1
             groupBox5.Location = new Point(x_st + dx * 1, y_st + dy * 1);
             groupBox6.Location = new Point(x_st + dx * 2, y_st + dy * 1);
             groupBox7.Location = new Point(x_st + dx * 3, y_st + dy * 1);
+            groupBox8.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            groupBox9.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            groupBox10.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            groupBox11.Location = new Point(x_st + dx * 3, y_st + dy * 2);
             richTextBox1.Size = new Size(320, 540);
             richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
@@ -115,6 +123,18 @@ namespace vcs_Thread_Example1
             button70.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button71.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button72.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button80.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button81.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button82.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button90.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button91.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button92.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button100.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button101.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button102.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button110.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button111.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button112.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             this.Size = new Size(1000, 600);
         }
 
@@ -510,8 +530,46 @@ namespace vcs_Thread_Example1
         //Thread使用範例6 SP
 
         //Thread使用範例7 ST
+
+        // Make a thread with the indicated priority.
+        private void MakeThread(string thread_name, ThreadPriority thread_priority)
+        {
+            richTextBox1.Text += "開啟thread, 名稱 : " + thread_name + ", 優先序 : " + thread_priority.ToString() + "\n";
+            Application.DoEvents();
+
+            // Initialize the thread.
+            Counter2 new_counter = new Counter2(thread_name);
+            Thread thread = new Thread(new_counter.Run);
+            thread.Priority = thread_priority;
+            thread.IsBackground = true;
+            thread.Name = thread_name;
+
+            // Start the thread.
+            thread.Start();
+        }
+
         private void button70_Click(object sender, EventArgs e)
         {
+            //啟動thread, 不同優先序
+            int i;
+            int num_low = 4;
+            for (i = 0; i < num_low; i++)
+            {
+                MakeThread("低_" + i.ToString(), ThreadPriority.BelowNormal);
+            }
+
+            int num_normal = 4;
+            for (i = 0; i < num_normal; i++)
+            {
+                MakeThread("中_" + i.ToString(), ThreadPriority.Normal);
+            }
+
+            int num_high = 4;
+            for (i = 0; i < num_high; i++)
+            {
+                MakeThread("高_" + i.ToString(), ThreadPriority.AboveNormal);
+            }
+
 
         }
 
@@ -524,8 +582,116 @@ namespace vcs_Thread_Example1
         {
 
         }
-
         //Thread使用範例7 SP
 
+        //Thread使用範例8 ST
+
+        private void button80_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button81_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button82_Click(object sender, EventArgs e)
+        {
+
+        }
+        //Thread使用範例8 SP
+
+        private void button90_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button91_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button92_Click(object sender, EventArgs e)
+        {
+
+        }
+        //Thread使用範例9 SP
+
+
+        //Thread使用範例10 ST
+
+        private void button100_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button101_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button102_Click(object sender, EventArgs e)
+        {
+
+        }
+        //Thread使用範例10 SP
+
+
+        //Thread使用範例11 ST
+
+        private void button110_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button111_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button112_Click(object sender, EventArgs e)
+        {
+
+        }
+        //Thread使用範例11 SP
+
+
+
+
+
+
     }
+    class Counter2
+    {
+        // This counter's number.
+        public string Name;
+
+        // Initializing constructor.
+        public Counter2(string name)
+        {
+            Name = name;
+        }
+
+        // Count off 10 half second intervals in the Output window.
+        public void Run()
+        {
+            for (int i = 1; i <= 10; i++)
+            {
+                // Display the next message.
+                Console.WriteLine(Name + " " + i);
+
+                // See when we should display the next message.
+                DateTime next_time = DateTime.Now.AddSeconds(0.5);
+
+                // Waste half a second. We don't sleep or call
+                // DoEvents so we don't give up control of the CPU.
+                while (DateTime.Now < next_time)
+                {
+                    // Wait a bit.
+                }
+            }
+        }
+    }
+
 }

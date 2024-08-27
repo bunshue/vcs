@@ -245,11 +245,11 @@ plt.subplot(233)
 
 product = ["家電", "生活用品", "圖書", "保健", "彩妝"]  # 產品標籤
 revenue = [23000, 18000, 12000, 15000, 16000]  # 業績
-#plt.pie(revenue, labels=product, autopct="%1.2f%%")
+# plt.pie(revenue, labels=product, autopct="%1.2f%%")
 
 patches = plt.pie(revenue, labels=product, autopct="%1.2f%%")
 
-#plt.legend()
+# plt.legend()
 plt.legend(
     patches[0], product, loc="center left", title="產品類別", bbox_to_anchor=(1, 0, 0.5, 1)
 )
@@ -258,8 +258,6 @@ plt.title("銷售品項分析", fontsize=16, color="b")
 print("------------------------------------------------------------")  # 60個
 
 plt.subplot(234)
-
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -463,7 +461,7 @@ plt.pie(people, labels=area, autopct="%1.2f%%", wedgeprops={"ec": "w", "lw": 5})
 plt.title("使用 wedgeprops ec 和 lw", fontsize=16, color="b")
 """
 
-#plt.title("五月份國外旅遊調查表", fontsize=16, color="b")
+# plt.title("五月份國外旅遊調查表", fontsize=16, color="b")
 
 """
 fig, axs = plt.subplots(nrows=2, ncols=2)  # 建立 2 x 2 子圖

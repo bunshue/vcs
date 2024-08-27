@@ -1,4 +1,4 @@
-﻿namespace vcs_Thread_Example2
+﻿namespace vcs_Thread_Example3
 {
     partial class Form1
     {
