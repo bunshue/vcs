@@ -35,9 +35,8 @@ y2 = np.tan(x)
 
 print("------------------------------------------------------------")  # 60個
 
-'''
 plt.figure(
-    num="不使用subplot畫多圖",
+    num="標準 subplot",
     figsize=(12, 8),
     dpi=100,
     facecolor="whitesmoke",
@@ -46,33 +45,81 @@ plt.figure(
     frameon=True,
 )
 
-plt.suptitle("在圖表的指定地方畫圖, 不用subplot")
+print("------------------------------------------------------------")  # 60個
+plt.subplot(231)
 
-x = np.linspace(0, 2 * np.pi, num=100, endpoint=True)
-y = np.sin(x)
+plt.plot(x, y)
 
-x_st = 0.1
-y_st = 0.1
-w = 0.2
-h = 0.2
-dx = 0.2
-dy = 0.2
+print("------------------------------------------------------------")  # 60個
+plt.subplot(232)
 
-print("第0圖")
-plt.axes([x_st+dx*0, y_st+dy*0, w, h])
-plt.plot(x, y, "r-s")
+plt.plot(x, y)
 
-print("第1圖")
-plt.axes([x_st+dx*1, y_st+dy*1, w, h])
-plt.plot(x, y, "g--o")
+print("------------------------------------------------------------")  # 60個
+plt.subplot(233)
 
-print("第2圖")
-plt.axes([x_st+dx*2, y_st+dy*2, w, h])
-plt.plot(x, y, "b-s")
+plt.plot(x, y)
 
-print("第3圖")
-plt.axes([x_st+dx*3, y_st+dy*3, w, h])
-plt.plot(x, y, "y--o")
+print("------------------------------------------------------------")  # 60個
+plt.subplot(234)
+
+plt.plot(x, y)
+
+print("------------------------------------------------------------")  # 60個
+plt.subplot(235)
+
+plt.plot(x, y)
+
+print("------------------------------------------------------------")  # 60個
+plt.subplot(236)
+
+plt.plot(x, y)
+
+plt.suptitle("標準 subplot")
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+
+plt.figure(figsize=(12, 8))
+
+"""
+plt.subplot(3,5,(1,2)): 表示把窗口分成3行5列， 並指定位置於位置1~2
+plt.subplot(3,5,(3,5)): 表示把窗口分成3行5列， 並指定位置於位置3~5
+
+plt.subplot(3,4,6): 表示把窗口重新分成3行4列， 並指定位置於位置6(會用新的窗口重新計算位置)
+plt.subplot(3,4,(7,8)): 表示把窗口重新分成3行4列， 並指定位置於位置7~8(會用新的窗口重新計算位置)
+"""
+plt.subplot(3, 5, (1, 2))
+plt.subplot(3, 5, (3, 5))
+plt.tight_layout()
+
+plt.subplot(3, 4, 6)
+plt.subplot(3, 4, (7, 8))
+plt.tight_layout()
+
+plt.suptitle("不均勻做圖(大小不同)")
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+plt.figure(figsize=(12, 8))
+
+t1 = [1, 2, 3, 4]
+t2 = [2, 4, 6, 8]
+
+plt.subplot(2, 1, 1, facecolor="y")
+# plt.subplot(211,facecolor='y')
+plt.plot(t1, t2, "ro")
+
+plt.subplot(2, 2, 3, facecolor="k")
+# plt.subplot(223,facecolor='k')
+plt.plot(t2, t2, "g--")
+
+plt.subplot(2, 2, 4)
+# plt.subplot(224)
+plt.plot(t2, t2, "b|")
 
 plt.show()
 
@@ -215,71 +262,6 @@ for file in files:
 
 print(test_label)
 show_images_labels_predictions(test_feature, test_label, 0, len(test_feature))
-
-print("------------------------------------------------------------")  # 60個
-
-plt.figure(figsize=(12, 8))
-
-"""
-plt.subplot(2,2,1): 表示把窗口分成2行2列， 並指定位置於位置1
-plt.subplot(2,2,1): 表示把窗口分成2行2列， 並指定位置於位置2
-"""
-plt.subplot(2, 2, 1)
-plt.plot([0, 1], [0, 2])
-
-plt.subplot(2, 2, 2)
-plt.plot([0, 1], [0, 4])
-
-plt.subplot(2, 2, 3)
-plt.plot([0, 1], [0, 5])
-
-plt.subplot(2, 2, 4)
-plt.plot([0, 1], [0, 6])
-
-plt.suptitle("均勻做圖")
-plt.show()
-
-
-plt.figure(figsize=(12, 8))
-
-"""
-plt.subplot(3,5,(1,2)): 表示把窗口分成3行5列， 並指定位置於位置1~2
-plt.subplot(3,5,(3,5)): 表示把窗口分成3行5列， 並指定位置於位置3~5
-
-plt.subplot(3,4,6): 表示把窗口重新分成3行4列， 並指定位置於位置6(會用新的窗口重新計算位置)
-plt.subplot(3,4,(7,8)): 表示把窗口重新分成3行4列， 並指定位置於位置7~8(會用新的窗口重新計算位置)
-"""
-plt.subplot(3, 5, (1, 2))
-plt.subplot(3, 5, (3, 5))
-plt.tight_layout()
-
-plt.subplot(3, 4, 6)
-plt.subplot(3, 4, (7, 8))
-plt.tight_layout()
-
-plt.suptitle("不均勻做圖(大小不同)")
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-plt.figure(figsize=(12, 8))
-
-t1 = [1, 2, 3, 4]
-t2 = [2, 4, 6, 8]
-
-plt.subplot(2, 1, 1, facecolor="y")
-# plt.subplot(211,facecolor='y')
-plt.plot(t1, t2, "ro")
-
-plt.subplot(2, 2, 3, facecolor="k")
-# plt.subplot(223,facecolor='k')
-plt.plot(t2, t2, "g--")
-
-plt.subplot(2, 2, 4)
-# plt.subplot(224)
-plt.plot(t2, t2, "b|")
-
-plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -650,7 +632,7 @@ axes.set_title("y = sin(x)")
 line.set_ydata(np.cos(x))
 
 plt.show()
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 plt.subplot(1, 2, 1)  # 建立子圖表 1,2,1
@@ -900,6 +882,48 @@ ax2 = plt.subplot(2, 2, 3)  # 建立圖表
 my_plot(ax2)
 ax3 = plt.subplot(1, 2, 2)  # 建立圖表
 my_plot(ax3)
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+plt.figure(
+    num="不使用subplot畫多圖",
+    figsize=(12, 8),
+    dpi=100,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
+
+plt.suptitle("在圖表的指定地方畫圖, 不用subplot")
+
+x = np.linspace(0, 2 * np.pi, num=100, endpoint=True)
+y = np.sin(x)
+
+x_st = 0.1
+y_st = 0.1
+w = 0.2
+h = 0.2
+dx = 0.2
+dy = 0.2
+
+print("第0圖")
+plt.axes([x_st+dx*0, y_st+dy*0, w, h])
+plt.plot(x, y, "r-s")
+
+print("第1圖")
+plt.axes([x_st+dx*1, y_st+dy*1, w, h])
+plt.plot(x, y, "g--o")
+
+print("第2圖")
+plt.axes([x_st+dx*2, y_st+dy*2, w, h])
+plt.plot(x, y, "b-s")
+
+print("第3圖")
+plt.axes([x_st+dx*3, y_st+dy*3, w, h])
+plt.plot(x, y, "y--o")
 
 plt.show()
 

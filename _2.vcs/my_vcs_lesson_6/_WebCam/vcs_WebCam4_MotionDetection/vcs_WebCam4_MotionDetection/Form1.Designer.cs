@@ -74,6 +74,7 @@
             this.bt_motion_detection.TabIndex = 25;
             this.bt_motion_detection.Text = "移動偵測";
             this.bt_motion_detection.UseVisualStyleBackColor = true;
+            this.bt_motion_detection.Click += new System.EventHandler(this.bt_motion_detection_Click);
             // 
             // Form1
             // 
@@ -86,6 +87,7 @@
             this.Controls.Add(this.pictureBox1);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);

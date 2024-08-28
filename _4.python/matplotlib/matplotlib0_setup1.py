@@ -9,6 +9,7 @@ print("------------------------------------------------------------")  # 60個
 # 共同
 import os
 import sys
+import time
 import math
 import random
 import numpy as np
@@ -223,38 +224,8 @@ plt.plot(x, d09, "-D")
 plt.plot(x, d10, "-d")
 plt.plot(x, d11, "-H")
 plt.plot(x, d12, "-h")
+
 plt.title("標記符號")
-
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("兩Y軸不同刻度, plot + bar")
-
-import matplotlib.gridspec as gridspec
-
-x = np.linspace(0, 6.28, 10)
-y = np.sin(x * 2)
-y2 = np.sin(x * 2) * np.sin(x * 2) * 10
-
-fig = plt.figure(figsize=(12, 8))  # 圖像大小[英吋]
-gs = gridspec.GridSpec(4, 1, figure=fig)
-ax = fig.add_subplot()
-
-ax.plot(x, y, marker="", alpha=0.8)
-ax.grid(20)
-
-axx = ax.twinx()
-axx.bar(
-    x,
-    y2,
-    alpha=0.2,
-    label="hold_volume",
-    color="pink",
-)
-ax.set_title("兩Y軸不同刻度 plot + bar", size=20)
 
 plt.show()
 
@@ -780,6 +751,54 @@ plt.xticks(value,x)
 plt.rcParams['xtick.labelsize'] = 34	X軸刻度的文字大小
 plt.rcParams['ytick.labelsize'] = 16	Y軸刻度的文字大小
 
+#用 matplotlib 的參數設定, rcParams, 把字型完完全全用某個中文字型
+
+plt.rcParams['font.sans-serif'] = ['SimHei'] # 選個普通的黑體字
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
+plt.rcParams['axes.unicode_minus']=False # 負號不出問題
+plt.title("使用自定義的中文字型", size=15) # 不用再設字型!
+
+plt.rcParams['font.sans-serif']='DFKai-SB'  # 中文OK
+plt.rcParams['font.sans-serif']='mingliu'	#指定為明體字
+plt.rcParams['font.sans-serif']='mingliu'  # 中文OK
+plt.rcParams["font.family"] = "Microsoft JhengHei"
+
+中文OK 一行就可以
+plt.rcParams["font.family"] = ["Microsoft JhengHei"]    # 微軟正黑體
+
+
+# fix 中文亂碼 
+plt.rcParams['font.sans-serif'] = ['Arial Unicode MS'] #輸入中文
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"
+
+
+plt.rcParams["figure.facecolor"] = "lightyellow"
+plt.rcParams["figure.autolayout"] = True
+
+plt.rcParams["font.size"] = 12
+
+plt.rcParams["savefig.facecolor"] = "0.8"
+
+print("以下是matplotlibrc檔案內容")
+print(plt.rcParamsDefault)
+plt.show()
+
+print("以下是matplotlibrc檔案內容")
+print(plt.rcParams)
+plt.show()
+
+mat_rcParams = plt.rcParams.keys()
+print(type(mat_rcParams))
+print("以下是matplotlib完整的內容")
+print(mat_rcParams)
+plt.show()
+
+
+
+# 設定中文字型
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" #也可設mingliu或DFKai-SB
+
+
 
 print('x軸刻度設定')
 plt.tick_params(axis='x',direction='in',color='b')
@@ -877,9 +896,42 @@ plt.plot(x, y, '-', marker='o')
 plt.plot(x, y, '-', marker='^')
 plt.plot(x, y, '-', marker='s') 
 
+plt.plot(['A','B','C','D'],[76,85,64,92], color='red', ls='--', marker='*', lw=3, ms=20,)
+plt.plot(['A','B','C','D'],[76,85,64,92],'r--*',lw=3,ms=20)#簡寫
+
 
 # 指定 寬6.4inches, 高4.8inches, 160dpi
 plt.figure(figsize=(6.4, 4.8), dpi=160)
+
+
+#預設大小為6.4inches*4.8inches, 80dpi
+
+#預設大小為6.4inches*4.8inches, 80dpi
+#指定 寬10inches, 高8inches, 160dpi
+plt.figure(figsize=(10, 8),dpi=160)
+
+#指定 寬10inches, 高8inches 
+matplotlib.pyplot.figure(figsize=(10, 8))
+
+#指定 寬10inches, 高8inches, 160dpi
+plt.figure(figsize=(10, 8),dpi=160)
+
+
+plt.tick_params(labelsize=12)
+
+
+# Make the graphs a bit prettier, and bigger
+plt.style.use('ggplot')
+plt.rcParams['figure.figsize'] = (15, 5)
+
+# plt.savefig('3D-sphere.png')
+
+
+plt.tight_layout()  # 緊縮佈局
+plt.tight_layout()  # 緊密排列，並填滿原圖大小
+plt.tight_layout()  # 圖表標題可以緊縮佈局
+plt.tight_layout()  # 緊縮佈局
+plt.tight_layout()  # 緊湊佈局
 
 
 

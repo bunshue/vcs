@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.Threading;
+
 using AForge.Video;             //需要添加這兩個.dll, 參考/加入參考/瀏覽此二檔
 using AForge.Video.DirectShow;  // Video Recording
 //using AForge.Video.FFMPEG;      //for VideoFileWriter
@@ -37,13 +39,18 @@ namespace vcs_WebCam4_MotionDetection
 {
     public partial class Form1 : Form
     {
-        private FilterInfoCollection USBWebcams = null;
+        public FilterInfoCollection USBWebcams = null;
+        public VideoCaptureDevice Cam = null;
+
+        MotionDetector md;
 
         private const int BORDER = 10;
         private const int W_pictureBox1 = 640;
         private const int H_pictureBox1 = 480;
         private const int W_richTextBox1 = 300;
         private const int H_richTextBox1 = 480 - 60;
+
+        bool flag_motion_detection = false;
 
         public Form1()
         {
@@ -58,6 +65,19 @@ namespace vcs_WebCam4_MotionDetection
             show_item_location();
 
             Init_WebcamSetup();
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (Cam != null)
+            {
+                if (Cam.IsRunning)  // When Form1 closes itself, WebCam must stop, too.
+                {
+                    Cam.Stop();   // WebCam stops capturing images.
+                    Cam.SignalToStop();
+                    Cam.WaitForStop();
+                }
+            }
         }
 
         void show_item_location()
@@ -95,7 +115,104 @@ namespace vcs_WebCam4_MotionDetection
                 //this.CamMonitor = new CameraMonitor(pictureBox1, camera_name, "第 1 台攝影機");
                 //flag_webcam_ok = true;
             }
+
+            USBWebcams = new FilterInfoCollection(FilterCategory.VideoInputDevice); //實例化對象
+            if (USBWebcams.Count > 0)  // The quantity of WebCam must be more than 0.
+            {
+                Cam = new VideoCaptureDevice(USBWebcams[0].MonikerString);  //實例化對象
+
+                Cam.NewFrame += new NewFrameEventHandler(Cam_NewFrame);
+                Cam.Start();   // WebCam starts capturing images.
+
+                md = new MotionDetector(new TwoFramesDifferenceDetector(), new MotionAreaHighlighting()); // creates the motion detector
+
+                /*
+                //以下為WebCam訊息與調整視窗大小
+                Cam.VideoResolution = Cam.VideoCapabilities[0];
+                string webcam_name = string.Empty;
+                int ww;
+                int hh;
+                ww = Cam.VideoCapabilities[0].FrameSize.Width;
+                hh = Cam.VideoCapabilities[0].FrameSize.Height;
+                webcam_name = USBWebcams[0].Name + " " + Cam.VideoCapabilities[0].FrameSize.Width.ToString() + " X " + Cam.VideoCapabilities[0].FrameSize.Height.ToString() + " @ " + Cam.VideoCapabilities[0].AverageFrameRate.ToString() + " Hz";
+                this.Text = webcam_name;
+                //有抓到WebCam, 重新設定pictureBox的大小和位置
+                pictureBox1.Size = new Size(ww, hh);
+                pictureBox1.Location = new Point(BORDER, BORDER);
+                */
+            }
+            else
+            {
+                this.Text = "無影像裝置";
+            }
         }
+
+        bool motionDetected = false;
+
+        // different option toggles
+        public bool RecordOnMotion = false;
+        public bool BeepOnMotion = false;
+        public bool MotionDetection = false;
+        public bool forceRecord = false;
+
+        private void MotionReaction()
+        {
+            this.motionDetected = true;
+
+            if (this.BeepOnMotion == true)
+            {
+                // beep if BeepOnMotion is toggeled
+                System.Console.Beep(400, 500);
+                System.Console.Beep(800, 500);
+            }
+
+            Thread.Sleep(10000); // the user is notified for 10 seconds
+            calibrateAndResume = 0;
+            this.motionDetected = false;
+            Thread.Sleep(3000);
+        }
+
+        int calibrateAndResume = 0; // counter used delay/skip frames from being processed by the MotionDetector
+
+        public Bitmap bm = null;
+        //自定義函數, 捕獲每一幀圖像並顯示
+        void Cam_NewFrame(object sender, NewFrameEventArgs eventArgs)
+        {
+            //pictureBox1.Image = (Bitmap)eventArgs.Frame.Clone();
+            bm = (Bitmap)eventArgs.Frame.Clone();
+            //bm.RotateFlip(RotateFlipType.RotateNoneFlipY);    //反轉
+            pictureBox1.Image = bm;
+
+            if (flag_motion_detection == true)
+            {
+                // if motion detection is enabled and there werent any previous motion detected
+                Bitmap bitmap2 = (Bitmap)bm.Clone(); // clone the bits from the current frame
+
+                if (md.ProcessFrame(bitmap2) > 0.001) // feed the bits to the MD 
+                {
+                    if (this.calibrateAndResume > 3)
+                    {
+                        // if motion was detected in 3 subsequent frames
+                        Thread th = new Thread(MotionReaction);
+                        th.Start(); // start the motion reaction thread
+                    }
+                    else
+                    {
+                        this.calibrateAndResume++;
+                    }
+                }
+
+            }
+
+            GC.Collect();       //回收資源
+        }
+
+        private void bt_motion_detection_Click(object sender, EventArgs e)
+        {
+            flag_motion_detection = !flag_motion_detection; 
+        }
+
     }
 }
+
 
