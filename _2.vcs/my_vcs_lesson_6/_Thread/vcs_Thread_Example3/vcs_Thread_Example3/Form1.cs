@@ -65,30 +65,6 @@ namespace vcs_Thread_Example3
             richTextBox1.Clear();
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            Thread t = new Thread(new ParameterizedThreadStart(delegate(object obj)
-            {
-                while (true)
-                {
-                    Thread.Sleep(400);
-                    if (this.BackColor == Color.Green)
-                    {
-                        this.BackColor = Color.Pink;
-                    }
-                    else
-                    {
-                        this.BackColor = Color.Green;
-                    }
-                }
-            }));
-            t.Name = " --start tray thread";
-            t.IsBackground = true;
-            t.Priority = ThreadPriority.Lowest;
-            t.Start(null);
-
-        }
-
         //開啟關閉thread    ST
         System.Timers.Timer tt = new System.Timers.Timer(1234);
         int number = 0;
@@ -154,8 +130,8 @@ namespace vcs_Thread_Example3
             //timechange.change();
 
             //使用一個thread來增加時間的秒數
-            System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(timechange.run));
-            thread.Start();
+            Thread thread_clock = new Thread(new ThreadStart(timechange.run));
+            thread_clock.Start();
 
         }
 

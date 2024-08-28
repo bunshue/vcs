@@ -7,11 +7,9 @@ namespace vcs_Thread_Example3
 {
     class ChangeTime
     {
-
         private Form1 form;
 
         private Boolean state = true;
-
 
         private int h;
         private int m;
@@ -65,4 +63,3 @@ namespace vcs_Thread_Example3
         }
     }
 }
-

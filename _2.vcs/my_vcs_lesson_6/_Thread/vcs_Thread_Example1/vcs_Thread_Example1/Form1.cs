@@ -16,6 +16,22 @@ namespace vcs_Thread_Example1
     {
         private const int BORDER = 10;
 
+        private Thread thread_ex0;
+        static Thread thread_ex2a = null;
+        static Thread thread_ex2b = null;
+        private Thread thread_ex8a;
+        private Thread thread_ex8b;
+        private Thread thread_ex10;
+
+        private bool flag_thread_running0 = false;
+        private bool flag_thread_running2a = false;
+        private bool flag_thread_running2b = false;
+        private bool flag_thread_running8a = false;
+        private bool flag_thread_running8b = false;
+        private bool flag_thread_running7 = false;
+        private bool flag_thread_running9 = false;
+        private bool flag_thread_running10 = false;
+
         public Form1()
         {
             InitializeComponent();
@@ -35,7 +51,7 @@ namespace vcs_Thread_Example1
             //關閉監聽執行續(如果有的話)
             try
             {
-                thread_ex1.Abort(); //關閉監聽執行續
+                thread_ex0.Abort(); //關閉監聽執行續
                 //U.Close();  //關閉監聽器
             }
             catch
@@ -158,7 +174,10 @@ namespace vcs_Thread_Example1
             button112.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             this.Size = new Size(1000, 600);
 
+            groupBox1.Enabled = false;
             groupBox4.Enabled = false;
+            groupBox5.Enabled = false;
+            groupBox6.Enabled = false;
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -168,16 +187,13 @@ namespace vcs_Thread_Example1
 
         //Thread使用範例0 ST
 
-        private Thread thread_ex0;
-        private bool flag_thread_running0 = false;
-
         private void ThreadProc_ex0()
         {
-            richTextBox1.Text += "啟動一個thread ";
+            richTextBox1.Text += "啟動一個thread0 ";
             while (flag_thread_running0 == true)
             {
                 //無限迴圈
-                richTextBox1.Text += "0";
+                richTextBox1.Text += "0 ";
                 Thread.Sleep(500);
             }
             richTextBox1.Text += "\n結束 ThreadProc_ex0\n";
@@ -188,8 +204,13 @@ namespace vcs_Thread_Example1
             richTextBox1.Text += "啟動 thread 0\n";
 
             flag_thread_running0 = true;
-            //thread_ex0 = new Thread(new ThreadStart(this.ThreadProc_ex0)); same
+            //thread_ex0 = new Thread(new ThreadStart(ThreadProc_ex0)); same
             thread_ex0 = new Thread(ThreadProc_ex0);
+
+            thread_ex0.Name = "Thread_ex0";
+            //thread_ex0.IsBackground = true;  //設定為背景執行緒
+            richTextBox1.Text += "啟動 thread 0, 名稱 : " + thread_ex0.Name + "\n";
+
             thread_ex0.Start();
         }
 
@@ -207,133 +228,99 @@ namespace vcs_Thread_Example1
 
         private void button02_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "Info\n";
+            if (thread_ex0 == null)
+            {
+                richTextBox1.Text += "Main Thread 尚未啟動\n";
+            }
+            else
+            {
+                richTextBox1.Text += "Main Thread\t" + thread_ex0.ToString() + "\n";
+                richTextBox1.Text += "ThreadState\t" + thread_ex0.ThreadState.ToString() + "\n";
+                richTextBox1.Text += "Name\t" + thread_ex0.Name + "\n";
+                richTextBox1.Text += "IsAlive\t" + thread_ex0.IsAlive.ToString() + "\n";
 
+                if (thread_ex0.IsAlive == true)
+                {
+                    richTextBox1.Text += "IsBackground\t" + thread_ex0.IsBackground.ToString() + "\n";
+                }
+            }
         }
         //Thread使用範例0 SP
 
 
         //Thread使用範例1 ST
 
-        Thread thread_ex1;                                  //宣告監聽用執行續
-        private bool flag_thread_running1 = false;
-
-        private void ThreadProc_ex1()
-        {
-            while (flag_thread_running1 == true)
-            {
-                //無限迴圈
-                richTextBox1.Text += "1";
-                Thread.Sleep(500);
-            }
-            richTextBox1.Text += "\n結束 ThreadProc_ex1\n";
-        }
-
         private void button10_Click(object sender, EventArgs e)
         {
-            flag_thread_running1 = true;
-            thread_ex1 = new Thread(ThreadProc_ex1); //建立監聽網路訊息的新執行緒
-            thread_ex1.Name = "Thread_ex1";
-            //thread_ex1.IsBackground = true;  //設定為背景執行緒
-            thread_ex1.Start();             //啟動監聽執行緒
-            richTextBox1.Text += "啟動 thread 1, 名稱 : " + thread_ex1.Name + "\n";
         }
 
         private void button11_Click(object sender, EventArgs e)
         {
-            if (thread_ex1 != null)
-            {
-                richTextBox1.Text += "停止 thread 1\n";
-                thread_ex1.Abort();
-            }
-            
-            //same
-            flag_thread_running1 = false;
         }
 
         private void button12_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "Info\n";
-            if (thread_ex1 == null)
-            {
-                richTextBox1.Text += "Main Thread 尚未啟動\n";
-            }
-            else
-            {
-                richTextBox1.Text += "Main Thread\t" + thread_ex1.ToString() + "\n";
-                richTextBox1.Text += "ThreadState\t" + thread_ex1.ThreadState.ToString() + "\n";
-                richTextBox1.Text += "Name\t" + thread_ex1.Name + "\n";
-                richTextBox1.Text += "IsAlive\t" + thread_ex1.IsAlive.ToString() + "\n";
 
-                if (thread_ex1.IsAlive == true)
-                {
-                    richTextBox1.Text += "IsBackground\t" + thread_ex1.IsBackground.ToString() + "\n";
-                }
-            }
         }
         //Thread使用範例1 SP
 
 
         //Thread使用範例2 ST
 
-        static Thread thread_ex2a;
-        static Thread thread_ex2b;
-
-        private bool flag_thread_running2a = false;
-        private bool flag_thread_running2b = false;
-
         private void ThreadProc_ex2()
         {
+            richTextBox1.Text += "啟動一個thread2 ";
+
+            //無限迴圈
             while (true)
             {
-                if (Thread.CurrentThread.Name == "Thread_ex1")
+                if (Thread.CurrentThread.Name == "Thread_ex2a")
                 {
-                    //richTextBox1.Text += "AA ";
-                    Console.Write("AA ");
+                    richTextBox1.Text += "2A ";
                 }
-                else if (Thread.CurrentThread.Name == "Thread_ex2")
+                else if (Thread.CurrentThread.Name == "Thread_ex2b")
                 {
-                    //richTextBox1.Text += "BB ";
-                    Console.Write("BB ");
+                    richTextBox1.Text += "2B ";
                 }
                 else
                 {
-                    //richTextBox1.Text += "XX ";
-                    Console.Write("XX ");
+                    richTextBox1.Text += "2X ";
                 }
-
-
-                richTextBox1.Text += Thread.CurrentThread.Name + "  ";
-                Thread.Sleep(1000);
+                //richTextBox1.Text += Thread.CurrentThread.Name + "  ";
+                Thread.Sleep(500);
             }
+
+            richTextBox1.Text += "\n結束 ThreadProc_ex2\n";
             /*
             richTextBox1.Text += "建立 thread : " + Thread.CurrentThread.Name + "\n";
 
-            if (Thread.CurrentThread.Name == "Thread_ex1" && Thread_ex2.ThreadState != ThreadState.Unstarted)
+            if (Thread.CurrentThread.Name == "Thread_ex2a" && Thread_ex2b.ThreadState != ThreadState.Unstarted)
             {
                 if (thread_ex2b.Join(2000))
                 {
-                    richTextBox1.Text += "Thread_ex2 has termminated.\n";
+                    richTextBox1.Text += "Thread_ex2b has termminated.\n";
                 }
                 else
                 {
-                    richTextBox1.Text += "The timeout has elapsed and Thread_ex1 will resume.\n";
+                    richTextBox1.Text += "The timeout has elapsed and Thread_ex2a will resume.\n";
                 }
             }
 
             //Thread.Sleep(4000);
             richTextBox1.Text += "\nCurrent thread : " + Thread.CurrentThread.Name + "\n";
-            richTextBox1.Text += "Thread_ex1 狀態 : " + thread_ex2a.ThreadState + "\n";
-            richTextBox1.Text += "Thread_ex2 狀態 : " + thread_ex2b.ThreadState + "\n";
+            richTextBox1.Text += "Thread_ex2a 狀態 : " + thread_ex2a.ThreadState + "\n";
+            richTextBox1.Text += "Thread_ex2b 狀態 : " + thread_ex2b.ThreadState + "\n";
             */
         }
 
         private void button20_Click(object sender, EventArgs e)
         {
             thread_ex2a = new Thread(ThreadProc_ex2);
-            thread_ex2a.Name = "Thread_ex1";
+            thread_ex2a.Name = "Thread_ex2a";
 
             thread_ex2b = new Thread(ThreadProc_ex2);
-            thread_ex2b.Name = "Thread_ex2";
+            thread_ex2b.Name = "Thread_ex2b";
 
             richTextBox1.Text += "啟動 thread 2\n";
             //啟動
@@ -350,14 +337,14 @@ namespace vcs_Thread_Example1
             if (thread_ex2a.ThreadState == System.Threading.ThreadState.Aborted)
             {
                 thread_ex2a = new Thread(ThreadProc_ex2);
-                thread_ex2a.Name = "Thread_ex1";
+                thread_ex2a.Name = "Thread_ex2a";
                 thread_ex2a.Start();
                 richTextBox1.Text += "啟動 thread 2a, 名稱 : " + thread_ex2a.Name + "\n";
             }
             if (thread_ex2b.ThreadState == System.Threading.ThreadState.Aborted)
             {
                 thread_ex2b = new Thread(ThreadProc_ex2);
-                thread_ex2b.Name = "Thread_ex2";
+                thread_ex2b.Name = "Thread_ex2b";
                 thread_ex2b.Start();
                 richTextBox1.Text += "啟動 thread 2b, 名稱 : " + thread_ex2b.Name + "\n";
             }
@@ -385,46 +372,32 @@ namespace vcs_Thread_Example1
         private void button22_Click(object sender, EventArgs e)
         {
             //狀態
-            richTextBox1.Text += "Thread_ex1 狀態 : " + thread_ex2a.ThreadState + "\n";
-            richTextBox1.Text += "Thread_ex2 狀態 : " + thread_ex2b.ThreadState + "\n";
+            richTextBox1.Text += "Thread_ex2a 狀態 : " + thread_ex2a.ThreadState + "\n";
+            richTextBox1.Text += "Thread_ex2b 狀態 : " + thread_ex2b.ThreadState + "\n";
         }
         //Thread使用範例2 SP
 
 
         //Thread使用範例3 ST
-        static Thread thread_ex3 = null;
-        private bool flag_thread_running3 = false;
-
-        public void ThreadProc_ex3()
-        {
-            while (flag_thread_running3 == true)
-            {
-                //無限迴圈
-                richTextBox1.Text += "3";
-                Thread.Sleep(500);
-            }
-            richTextBox1.Text += "\n結束 ThreadProc_ex3\n";
-        }
 
         private void button30_Click(object sender, EventArgs e)
         {
-            flag_thread_running3 = true;
-            thread_ex3 = new Thread(new ThreadStart(ThreadProc_ex3));
-            thread_ex3.Name = "Thread_ex3";
-            thread_ex3.Start();
-            richTextBox1.Text += "啟動 thread 3, 名稱 : " + thread_ex3.Name + "\n";
+            Thread thread_ex3 = new Thread(new ParameterizedThreadStart(delegate(object obj)
+            {
+                while (true)
+                {
+                    richTextBox1.Text += "3 ";
+                    Thread.Sleep(500);
+                }
+            }));
+            thread_ex3.Name = " --start tray thread";
+            thread_ex3.IsBackground = true;
+            thread_ex3.Priority = ThreadPriority.Lowest;
+            thread_ex3.Start(null);
         }
 
         private void button31_Click(object sender, EventArgs e)
         {
-            if (thread_ex3 != null)
-            {
-                richTextBox1.Text += "停止 thread 3\n";
-                thread_ex3.Abort();
-            }
-
-            //same
-            flag_thread_running3 = false;
         }
 
         private void button32_Click(object sender, EventArgs e)
@@ -451,53 +424,17 @@ namespace vcs_Thread_Example1
 
 
         //Thread使用範例5 ST
-        //建立一個Thread 到 偵錯/視窗/即時運算 看結果
 
-        thread1 obj;
-        Thread thread_ex5;
-        private bool flag_thread_running5 = false;
-
-        class thread1
+        private void ThreadProc_ex5()
         {
-            private String title;
-            public thread1(String title)
-            {
-                this.title = title;
-            }
-            int aa = 0;
-            public void runMe()
-            {
-                while (true)
-                {
-                    aa++;
-                    System.Diagnostics.Debug.Print("即時運算視窗輸出除錯訊息 測試訊息！！！Form1！！！ title = " + title + "  " + aa.ToString());
-                    Console.Write(title + "\r\n");
-                    System.Threading.Thread.Sleep(1000);
-                }
-            }
         }
 
         private void button50_Click(object sender, EventArgs e)
         {
-            flag_thread_running5 = true;
-            string thread_name = "Thread測試_5";
-            richTextBox1.Text += "開啟thread, 名稱 : " + thread_name + "\n";
-            richTextBox1.Text += "啟動 thread 5\n";
-            obj = new thread1(thread_name);
-            thread_ex5 = new Thread(obj.runMe);
-            thread_ex5.Start();
         }
 
         private void button51_Click(object sender, EventArgs e)
         {
-            if (thread_ex5 != null)
-            {
-                richTextBox1.Text += "停止 thread 5\n";
-                thread_ex5.Abort();
-            }
-
-            //same
-            flag_thread_running5 = false;
         }
 
         private void button52_Click(object sender, EventArgs e)
@@ -509,46 +446,16 @@ namespace vcs_Thread_Example1
 
         //Thread使用範例6 ST
 
-        private bool flag_thread_running6a = false;
-        private bool flag_thread_running6b = false;
-
         private void ThreadProc_ex6a()
         {
-            while (flag_thread_running6a == true)
-            {
-                //無限迴圈
-                richTextBox1.Text += "6a";
-                Thread.Sleep(500);
-            }
-        }
-
-        private void ThreadProc_ex6b()
-        {
-            while (flag_thread_running6b == true)
-            {
-                //無限迴圈
-                richTextBox1.Text += "6b";
-                Thread.Sleep(500);
-            }
         }
 
         private void button60_Click(object sender, EventArgs e)
         {
-            flag_thread_running6a = true;
-            Thread thread_ex6a = new Thread(new ThreadStart(ThreadProc_ex6a));
-            thread_ex6a.IsBackground = true;
-            thread_ex6a.Start();
-
-            flag_thread_running6b = true;
-            Thread thread_ex6b = new Thread(new ThreadStart(ThreadProc_ex6b));
-            thread_ex6b.IsBackground = true;
-            thread_ex6b.Start();
         }
 
         private void button61_Click(object sender, EventArgs e)
         {
-            flag_thread_running6a = false;
-            flag_thread_running6b = false;
         }
 
         private void button62_Click(object sender, EventArgs e)
@@ -559,6 +466,18 @@ namespace vcs_Thread_Example1
 
         //Thread使用範例7 ST
 
+        private void ThreadProc_ex7()
+        {
+            richTextBox1.Text += "啟動一個thread7 ";
+            while (flag_thread_running7 == true)
+            {
+                //無限迴圈
+                richTextBox1.Text += "7 ";
+                Thread.Sleep(500);
+            }
+            richTextBox1.Text += "\n結束 ThreadProc_ex7\n";
+        }
+
         // Make a thread with the indicated priority.
         private void MakeThread(string thread_name, ThreadPriority thread_priority)
         {
@@ -567,7 +486,7 @@ namespace vcs_Thread_Example1
 
             // Initialize the thread.
             Counter2 new_counter = new Counter2(thread_name);
-            Thread thread = new Thread(new_counter.Run);
+            Thread thread = new Thread(new_counter.ThreadProc_ex7);
             thread.Priority = thread_priority;
             thread.IsBackground = true;
             thread.Name = thread_name;
@@ -611,22 +530,16 @@ namespace vcs_Thread_Example1
         //Thread使用範例7 SP
 
         //Thread使用範例8 ST
-        private Thread thread_ex8a;
-        private Thread thread_ex8b;
-        int cnt8a = 0;
-        int cnt8b = 0;
-
-        private bool flag_thread_running8a = false;
-        private bool flag_thread_running8b = false;
-
 
         private void ThreadProc_ex8a()
         {
-            while (true)
+            richTextBox1.Text += "啟動一個thread8a ";
+            while (flag_thread_running8a == true)
             {
-                richTextBox1.Text += "8a " + (cnt8a++).ToString() + " ";
+                richTextBox1.Text += "8a ";
                 Thread.Sleep(500);
             }
+            richTextBox1.Text += "\n結束 ThreadProc_ex8a\n";
         }
 
         private void ThreadProc_ex8b()
@@ -637,11 +550,13 @@ namespace vcs_Thread_Example1
                 thread_ex8a.Join();//thread_ex8b 要先讓線程 thread_ex8a 執行完，然後線程 thread_ex8b 再繼續執行
             }
 
-            while (true)
+            richTextBox1.Text += "啟動一個thread8b ";
+            while (flag_thread_running8b==true)
             {
-                richTextBox1.Text += "8b " + (cnt8b++).ToString() + " ";
+                richTextBox1.Text += "8b ";
                 Thread.Sleep(500);
             }
+            richTextBox1.Text += "\n結束 ThreadProc_ex8b\n";
         }
 
         private void button80a_Click(object sender, EventArgs e)
@@ -649,8 +564,6 @@ namespace vcs_Thread_Example1
             if (thread_ex8a == null)
             {
                 flag_thread_running8a = true;
-                // The thread isn't running. Start it.
-                cnt8a = 0;
                 thread_ex8a = new Thread(ThreadProc_ex8a);
                 thread_ex8a.Priority = ThreadPriority.BelowNormal;
                 thread_ex8a.IsBackground = true;
@@ -679,8 +592,6 @@ namespace vcs_Thread_Example1
             if (thread_ex8b == null)
             {
                 richTextBox1.Text += "等thread_ex8a 執行完，thread_ex8b 再繼續執行\n";
-                // The thread isn't running. Start it.
-                cnt8b = 0;
                 thread_ex8b = new Thread(ThreadProc_ex8b);
                 thread_ex8b.Priority = ThreadPriority.BelowNormal;
                 thread_ex8b.IsBackground = true;
@@ -718,7 +629,6 @@ namespace vcs_Thread_Example1
         // Make and start a new counter object.
         private int thread_num = 0;
 
-        private bool flag_thread_running9 = false;
 
         // Add the text to the results.
         // The form provides this service because the
@@ -727,6 +637,18 @@ namespace vcs_Thread_Example1
         {
             richTextBox1.AppendText(txt + "\n");
             richTextBox1.ScrollToCaret();       //RichTextBox顯示訊息自動捲動，顯示最後一行
+        }
+
+        private void ThreadProc_ex9()
+        {
+            richTextBox1.Text += "啟動一個thread9 ";
+            while (flag_thread_running9 == true)
+            {
+                //無限迴圈
+                richTextBox1.Text += "9 ";
+                Thread.Sleep(500);
+            }
+            richTextBox1.Text += "\n結束 ThreadProc_ex9\n";
         }
 
         private void button90_Click(object sender, EventArgs e)
@@ -739,7 +661,7 @@ namespace vcs_Thread_Example1
             thread_num++;
 
             // Make a thread to run the object's Run method.
-            Thread thread_ex9 = new Thread(new_counter.Run);
+            Thread thread_ex9 = new Thread(new_counter.ThreadProc_ex9);
 
             // Make this a background thread so it automatically
             // aborts when the main program stops.
@@ -766,11 +688,10 @@ namespace vcs_Thread_Example1
 
         Random r = new Random(Guid.NewGuid().GetHashCode());
         private int _R = 0, _G = 0, _B = 0;
-        private Thread thread_ex10;
-        private bool flag_thread_running10 = false;
 
         private void ThreadProc_ex10()
         {
+            richTextBox1.Text += "啟動一個thread10 ";
             while (true)
             {
                 _R = r.Next(256);
@@ -778,6 +699,7 @@ namespace vcs_Thread_Example1
                 _B = r.Next(256);
                 Thread.Sleep(100);
             }
+            richTextBox1.Text += "\n結束 ThreadProc_ex10\n";
         }
 
         private void button100_Click(object sender, EventArgs e)
@@ -863,7 +785,7 @@ namespace vcs_Thread_Example1
         }
 
         // Count off seconds in the Output window.
-        public void Run()
+        public void ThreadProc_ex9()
         {
             try
             {
@@ -920,7 +842,7 @@ namespace vcs_Thread_Example1
         }
 
         // Count off 10 half second intervals in the Output window.
-        public void Run()
+        public void ThreadProc_ex7()
         {
             for (int i = 1; i <= 10; i++)
             {
@@ -937,6 +859,7 @@ namespace vcs_Thread_Example1
                     // Wait a bit.
                 }
             }
+            Console.WriteLine(Name + "  done");
         }
     }
 }
@@ -946,6 +869,9 @@ namespace vcs_Thread_Example1
 
                 //一秒執行一次
                 Thread.Sleep(1000); //停一秒
+
+                    //richTextBox1.Text += "XX ";
+                    Console.Write("XX ");
 
  
 */
