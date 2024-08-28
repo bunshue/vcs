@@ -1,5 +1,6 @@
 import tkinter
 import tkinter.filedialog
+
 from win32com.client import Dispatch
 
 class Window:
@@ -48,6 +49,7 @@ class Window:
 		self.wmp.controls.next()						# 下一首
 	def stop(self):
 		self.wmp.controls.stop()						# 停止
+
 window = Window()
 window.MainLoop()
 

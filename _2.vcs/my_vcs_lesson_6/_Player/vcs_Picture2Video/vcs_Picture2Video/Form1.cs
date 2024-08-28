@@ -40,10 +40,13 @@ namespace vcs_Picture2Video
             int dx = 100 + BORDER;
             int dy = 50 + BORDER;
 
+            pictureBox1.Size = new Size(300, 300);
+            pictureBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            richTextBox1.Size = new Size(400, 560);
-            richTextBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            richTextBox1.Size = new Size(400, 560 - 300);
+            richTextBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0 + 300);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
             this.Size = new Size(560, 620);
         }
@@ -112,12 +115,47 @@ namespace vcs_Picture2Video
             writer.Close();
 
             richTextBox1.Text += "圖片轉影片 OK\n";
-
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "製作繪圖影片\n";
+            Application.DoEvents();
+
+            //vcs最小化錄影
+            string filename = "tmp_pic2video.avi";
+            int W = 300;
+            int H = 300;
+            int fps = 1;
+
+            //公用變數
+            VideoFileWriter writer = new VideoFileWriter();
+
+            //開啟檔案
+            writer.Open(filename, W, H, fps);
+
             //製作繪圖影片
+            Bitmap bitmap1 = new Bitmap(300, 300);
+            Graphics g = Graphics.FromImage(bitmap1);
+            int cx = 300 / 2;
+            int cy = 300 / 2;
+            int R = 100;
+            for (R = 0; R < 150; R++)
+            {
+                g.Clear(Color.White);
+                g.DrawEllipse(new Pen(Color.FromArgb(255, 255, 0, 0)), cx - R, cy - R, R * 2, R * 2);
+
+                writer.WriteVideoFrame(bitmap1);//寫入影格
+            }
+
+            //關閉檔案
+            writer.Close();
+
+            richTextBox1.Text += "製作繪圖影片 OK\n";
+
+            pictureBox1.Image = bitmap1;
+
+
         }
     }
 }

@@ -2,14 +2,6 @@ import sys
 
 print("------------------------------------------------------------")  # 60個
 
-'''
-#DisplayUnicode
-import turtle
-
-turtle.write("\u6B22\u8FCE \u03b1 \u03b2 \u03b3")
-
-turtle.done() 
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -51,13 +43,13 @@ print("------------------------------------------------------------")  # 60個
 from random import randint 
 
 # Open file for writing data
-outfile = open("Numbers.txt", "w")
+outfile = open("tmp_Numbers.txt", "w")
 for i in range(10):
     outfile.write(str(randint(0, 9)) + " ")
 outfile.close() # Close the file
 
 # Open file for reading data
-infile = open("Numbers.txt", "r")
+infile = open("tmp_Numbers.txt", "r")
 s = infile.read()
 numbers = [eval(x) for x in s.split()]
 for number in numbers:
@@ -84,7 +76,7 @@ print("degrees(1.57) =", math.degrees(1.57))
 print("radians(90) =", math.radians(90))
 
 print("------------------------------------------------------------")  # 60個
-
+"""
 #data analysis
 
 NUMBER_OF_ELEMENTS = 5 # For simplicity, use 5 instead of 100
@@ -105,7 +97,7 @@ for i in range(NUMBER_OF_ELEMENTS):
 
 print("Average is", average)
 print("Number of elements above the average is", count)
-
+"""
 print("------------------------------------------------------------")  # 60個
 
 filename = 'tmp_Presidents.txt'
@@ -231,9 +223,11 @@ print(totalSeconds)
 
 print("------------------------------------------------------------")  # 60個
 
+""" 久
 import urllib.request
 input = urllib.request.urlopen('http://www.yahoo.com/index.html')
 print(input.read())
+"""
 
 print("------------------------------------------------------------")  # 60個
 
@@ -253,13 +247,14 @@ if match1 != None:
 else:
     print(ssn, " is not a valid SSN")
     
-
 print("------------------------------------------------------------")  # 60個
 
 import re
 
 regex = "\d{3}-\d{2}-\d{4}"
-text = input("Enter a text: ")
+#text = input("Enter a text: ")
+text = "123-45-6789"
+
 match1 = re.search(regex, text)
 
 if match1 != None:
@@ -279,19 +274,6 @@ lst = [eval(x) for x in items] # Convert items to numbers
 
 print(lst)
 
-print("------------------------------------------------------------")  # 60個
-
-from turtle import *
-color('green', 'red')
-begin_fill()
-while True:
-    forward(200)
-    left(170)
-    if abs(pos()) < 1:
-        break
-end_fill()
-done() 
-'''
 print("------------------------------------------------------------")  # 60個
 
 students = [("John", "Smith", 96), ("Susan", "King", 76), 
@@ -421,29 +403,7 @@ print("The closest two points are (" +
     str(points[p1][0]) + ", " + str(points[p1][1]) + ") and (" +
     str(points[p2][0]) + ", " + str(points[p2][1]) + ")")
 
-
-
 print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------------------------------------")  # 60個

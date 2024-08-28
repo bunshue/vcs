@@ -66,8 +66,6 @@ plt.figure(
     frameon=True,
 )
 
-plt.suptitle("皆為 np.random.normal\t" + r"$\mu = 100, \sigma=15$")
-
 mu, sigma = 100, 15  # 平均值, 標準差
 x = np.random.normal(mu, sigma, size=N * 10)  # 隨機數
 print("平均數:", np.mean(x))
@@ -729,44 +727,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-N = 500
-mu = 0  # 平均值
-sigma1 = 25  # x1 資料標準差
-x1 = np.random.normal(mu, sigma1, size=N)  # 建立 x1 資料
-print("平均數:", np.mean(x1))
-print("標準差:", np.std(x1))
-
-sigma2 = 10  # x2 資料標準差
-x2 = np.random.normal(mu, sigma2, size=N)  # 建立 x1 資料
-print("平均數:", np.mean(x2))
-print("標準差:", np.std(x2))
-
-plt.figure(figsize=(12, 8))
-
-plt.subplot(221)
-plt.hist(x1, 15, density=True, histtype="step")
-plt.title("histtype = 'step'")
-
-plt.subplot(222)
-plt.hist(x1, 15, density=True, histtype="stepfilled", color="m", alpha=0.8)
-plt.title("histtype = 'stepfilled'")
-
-plt.subplot(223)
-plt.hist(x1, density=True, histtype="barstacked", rwidth=0.8)
-plt.hist(x2, density=True, histtype="barstacked", rwidth=0.8)
-plt.title("histtype = 'barstacked'")
-
-plt.subplot(224)
-# 寬度不相等
-bins = [-60, -50, -20, -10, 30, 50]
-plt.hist(x1, bins, density=True, histtype="bar", rwidth=0.8, color="g")
-plt.title("histtype = 'bar' 不相等寬度的 bins")
-
-plt.tight_layout()
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
 """
 # 測試 北大
 
@@ -921,9 +881,7 @@ plt.title(
     r"$f(x)=\frac{1}{\sigma\sqrt{2\pi}}e^{\frac{-1}{2}(\frac{x-\mu}{\sigma})^{2}}    $",
 )
 
-
 print("------------------------------------------------------------")  # 60個
-
 
 h = plt.hist(x, bins=num_bins, color="g")
 print(f"bins的 y 軸 = {h[0]}")
@@ -932,6 +890,3 @@ print(f"bins的 x 軸 = {h[1]}")
 # plt.hist(x, color="g", rwidth=0.8)  # 寬度設定 80%
 # plt.hist(x, bins=num_bins, color="g", cumulative=True, rwidth=0.8) # 累計
 
-
-x = np.linspace(-2 * np.pi, 2 * np.pi, 100)  # 共100個點
-x = np.linspace(-2 * np.pi, 2 * np.pi)  # 預設為50個點

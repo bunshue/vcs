@@ -143,9 +143,27 @@ screen.exitonclick()
 
 print("------------------------------------------------------------")  # 60個
 
+#DisplayUnicode
+import turtle
+
+turtle.write("\u6B22\u8FCE \u03b1 \u03b2 \u03b3")
+
+turtle.done() 
+
+
 
 print("------------------------------------------------------------")  # 60個
 
+from turtle import *
+color('green', 'red')
+begin_fill()
+while True:
+    forward(200)
+    left(170)
+    if abs(pos()) < 1:
+        break
+end_fill()
+done() 
    
 
 
