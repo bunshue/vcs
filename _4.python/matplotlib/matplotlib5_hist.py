@@ -159,6 +159,14 @@ plt.hist(x, bins=bins)
 print("------------------------------------------------------------")  # 60個
 plt.subplot(236)
 
+mu = 0
+sigma = 1
+variance = np.square(sigma)
+
+x = np.arange(-5, 5, 0.01)
+y = np.exp(-np.square(x - mu) / 2 * variance) / (np.sqrt(2 * np.pi * variance))
+
+plt.plot(x, y)
 
 plt.show()
 
@@ -166,6 +174,85 @@ print("------------------------------------------------------------")  # 60個
 
 plt.figure(
     num="hist 集合 2",
+    figsize=(12, 8),
+    dpi=100,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
+
+
+print("------------------------------------------------------------")  # 60個
+plt.subplot(231)
+
+
+N = 10000  # 樣本數
+mu = 0  # 平均值
+sigma = 1  # 標準差
+x = np.random.randn(N)  # 隨機數
+bins = 50  # 束
+count, bins, ignored = plt.hist(x, bins, density=True)  # 直方圖
+# 繪製折線圖
+plt.plot(
+    bins,
+    1 / (sigma * np.sqrt(2 * np.pi)) * np.exp(-((bins - mu) ** 2) / (2 * sigma**2)),
+    linewidth=2,
+    color="r",
+)
+plt.title("常態分布 " + r"$\mu=0, \sigma=1$")
+
+
+print("------------------------------------------------------------")  # 60個
+plt.subplot(232)
+
+x3 = np.random.randn(N, 3)
+colors = ["red", "green", "blue"]
+bins = 50  # 直方圖顯示時的束數
+
+plt.hist(x3, bins, density=True, color=colors, label=colors)
+
+plt.legend()
+plt.title("3 組數據的常態分佈隨機數")
+
+
+
+print("------------------------------------------------------------")  # 60個
+plt.subplot(233)
+
+
+print("------------------------------------------------------------")  # 60個
+plt.subplot(234)
+
+
+print("------------------------------------------------------------")  # 60個
+plt.subplot(235)
+
+x = np.random.exponential(scale=2, size=N)
+plt.hist(x, bins=num_bins, label="Exponential distribution")
+plt.title("np.random.exponential")
+
+
+print("------------------------------------------------------------")  # 60個
+plt.subplot(236)
+
+
+
+# 生成 N 組介於 0 與 1 之間均勻分配隨機變數
+x = np.random.uniform(size=N)
+# x = np.random.uniform(0.0, 5.0, size=N)     # 隨機數 #另外範圍
+
+plt.hist(x, bins=num_bins, rwidth=0.8)
+plt.title("np.random.uniform")
+
+
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+plt.figure(
+    num="hist 集合 3",
     figsize=(12, 8),
     dpi=100,
     facecolor="whitesmoke",
@@ -297,80 +384,7 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 
 plt.figure(
-    num="hist 集合 3",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
-
-print("------------------------------------------------------------")  # 60個
-plt.subplot(231)
-
-x = np.random.rand(N, 3)  # 產生共3組，每組 N 個隨機數
-
-plt.hist(x, bins=num_bins // 10)
-plt.title("產生共3組，每組 10000 個隨機數")
-
-print("------------------------------------------------------------")  # 60個
-plt.subplot(232)
-
-# 生成 N 組介於 0 與 1 之間均勻分配隨機變數
-x = np.random.uniform(size=N)
-# x = np.random.uniform(0.0, 5.0, size=N)     # 隨機數 #另外範圍
-
-plt.hist(x, bins=num_bins, rwidth=0.8)
-plt.title("np.random.uniform")
-
-print("------------------------------------------------------------")  # 60個
-plt.subplot(233)
-
-x = np.random.exponential(scale=2, size=N)
-plt.hist(x, bins=num_bins, label="Exponential distribution")
-plt.title("np.random.exponential")
-
-print("------------------------------------------------------------")  # 60個
-plt.subplot(234)
-
-x3 = np.random.randn(N, 3)
-colors = ["red", "green", "blue"]
-bins = 50  # 直方圖顯示時的束數
-
-plt.hist(x3, bins, density=True, color=colors, label=colors)
-
-plt.legend()
-plt.title("3 組數據的常態分佈隨機數")
-
-print("------------------------------------------------------------")  # 60個
-plt.subplot(235)
-
-N = 10000  # 樣本數
-mu = 0  # 平均值
-sigma = 1  # 標準差
-x = np.random.randn(N)  # 隨機數
-bins = 50  # 束
-count, bins, ignored = plt.hist(x, bins, density=True)  # 直方圖
-# 繪製折線圖
-plt.plot(
-    bins,
-    1 / (sigma * np.sqrt(2 * np.pi)) * np.exp(-((bins - mu) ** 2) / (2 * sigma**2)),
-    linewidth=2,
-    color="r",
-)
-plt.title("常態分布 " + r"$\mu=0, \sigma=1$")
-
-print("------------------------------------------------------------")  # 60個
-plt.subplot(236)
-
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-plt.figure(
-    num="hist 集合 4",
+    num="hist 集合 5",
     figsize=(12, 8),
     dpi=100,
     facecolor="whitesmoke",
@@ -515,6 +529,11 @@ plt.legend()
 
 print("------------------------------------------------------------")  # 60個
 plt.subplot(235)
+
+x = np.random.rand(N, 3)  # 產生共3組，每組 N 個隨機數
+
+plt.hist(x, bins=num_bins // 10)
+plt.title("產生共3組，每組 10000 個隨機數")
 
 
 print("------------------------------------------------------------")  # 60個
@@ -765,14 +784,7 @@ print("新進")
 
 print("------------------------------------------------------------")  # 60個
 
-mu = 0
-sigma = 1
-variance = np.square(sigma)
 
-x = np.arange(-5, 5, 0.01)
-y = np.exp(-np.square(x - mu) / 2 * variance) / (np.sqrt(2 * np.pi * variance))
-
-plt.plot(x, y)
 
 plt.show()
 

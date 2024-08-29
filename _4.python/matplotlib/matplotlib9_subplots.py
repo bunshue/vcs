@@ -47,7 +47,9 @@ print("fig, ax = plt.subplots() 一張子圖, 可以直接換回 plt.plot()")
 
 print("用fig ax畫圖, 一張子圖")
 fig, ax = plt.subplots()  # 一張子圖
+
 ax.plot(x, y, label="sin")
+
 ax.set_title("用fig ax畫圖, 一張子圖")
 handles, labels = ax.get_legend_handles_labels()
 ax.legend(handles, labels)
@@ -56,7 +58,8 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-fig, ax = plt.subplots(1, 1)
+print("用fig ax畫圖, 一張子圖")
+fig, ax = plt.subplots(1, 1)  # 一張子圖
 
 ax.plot(x, y)
 

@@ -4,7 +4,7 @@
 
 
 """
-#import matplotlib
+
 
 print("------------------------------------------------------------")  # 60個
 
@@ -27,7 +27,34 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-'''
+
+print("使用 plt.subplots() 做一圖")
+
+x = np.linspace(0, 10, 50)
+y = np.sin(x)
+
+#fig, ax = plt.subplots() same
+fig, ax = plt.subplots(1, 1)
+
+ax.plot(x, y, "r-o", label="Sin(x)")
+ax.set_xlabel("弧度", color="green")
+ax.set_ylabel("Sin(x)", color="red")
+
+ax.set_title("sin(x)", size=20)
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+# 共同參數
+x = np.linspace(0, 2 * np.pi, 30)
+y = np.sin(x)
+y0 = np.sin(x)
+y1 = np.cos(x)
+y2 = np.tan(x)
+
+print("------------------------------------------------------------")  # 60個
+
 print("兩Y軸不同刻度, plot + plot")
 
 x = np.linspace(0, 10, 50)
@@ -35,19 +62,90 @@ sinus = np.sin(x)
 sinhs = np.sinh(x)
 
 fig, ax = plt.subplots()
+ax2 = ax.twinx()  # 使用相同的 x 軸
 
+#第1軸
 ax.plot(x, sinus, "r-o", label="Sin(x)")
 ax.set_xlabel("弧度", color="green")
 ax.set_ylabel("Sin(x)", color="red")
 ax.legend(loc="best")
 
-ax2 = ax.twinx()
-
+#第2軸
 ax2.plot(x, sinhs, "g--", label="Sinh(x)")
 ax2.set_ylabel("Sinh(x)", color="blue")
 ax2.legend(loc="best")
 
 ax.set_title("兩Y軸不同刻度 plot + plot", size=20)
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+x = np.linspace(0, 10, 50)
+sinus = np.sin(x)
+sinhs = np.sinh(x)
+
+fig, ax = plt.subplots()
+ax2 = ax.twinx()  # 使用相同的 x 軸
+
+lns1 = ax.plot(x, sinus, "r-o", label="Sin(x)")
+ax.set_xlabel("x", color="green")
+ax.set_ylabel("Sin(x)", color="red")
+
+lns2 = ax2.plot(x, sinhs, "g--", label="Sinh(x)")
+ax2.set_ylabel("Sinh(x)", color="blue")
+# 自行建立圖例來顯示所有標籤
+lns = lns1 + lns2
+labs = [l.get_label() for l in lns]
+ax.legend(lns, labs, loc="best")
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+x = np.linspace(0, 10, 50)
+sinus = np.sin(x)
+sinhs = np.sinh(x)
+
+fig, ax = plt.subplots()
+ax2 = ax.twinx()  # 使用相同的 x 軸
+
+ax.plot(x, sinus, "r-o")
+ax.set_xlabel("x", color="green")
+ax.set_ylabel("Sin(x)", color="red")
+
+ax2.plot(x, sinhs, "g--")
+ax2.set_ylabel("Sinh(x)", color="blue")
+
+# 指定圖表標題文字
+ax.set_title("Sin和Cos三角函數的波型", fontsize="large")
+
+# 更改刻度的外觀
+for tick in ax.xaxis.get_ticklabels():
+    tick.set_fontsize("large")
+    tick.set_fontname("Times New Roman")
+    tick.set_color("blue")
+    tick.set_weight("bold")   
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+x = np.linspace(0, 10, 50)
+sinus = np.sin(x)
+sinhs = np.sinh(x)
+
+fig, ax = plt.subplots()
+ax2 = ax.twinx()  # 使用相同的 x 軸
+
+ax.plot(x, sinus, "r-o")
+ax.set_xlabel("x", color="green")
+ax.set_ylabel("Sin(x)", color="red")
+
+ax2.plot(x, sinhs, "g--")
+ax2.set_ylabel("Sinh(x)", color="blue")
+
+plt.xticks(range(0, 11))
+ax.set_yticks(np.linspace(-1, 1, 10))
+ax2.set_yticks(np.linspace(0, 12000, 10))
 
 plt.show()
 
@@ -64,12 +162,12 @@ y2 = np.sin(x * 2) * np.sin(x * 2) * 10
 fig = plt.figure(figsize=(12, 8))  # 圖像大小[英吋]
 gs = gridspec.GridSpec(4, 1, figure=fig)
 ax = fig.add_subplot()
+ax2 = ax.twinx()  # 使用相同的 x 軸
 
 ax.plot(x, y, marker="", alpha=0.8)
 ax.grid(20)
 
-axx = ax.twinx()
-axx.bar(
+ax2.bar(
     x,
     y2,
     alpha=0.2,
@@ -160,143 +258,18 @@ print(len(x))
 print(x)
 
 fig, ax1 = plt.subplots()
+ax2 = ax1.twinx()  # 使用相同的 x 軸
 
-ax2 = ax1.twinx()  # mirror the ax1
 ax1.plot(x, temperature_high[:12], "r-")
 ax1.plot(x, temperature_average[:12], "g-")
 ax1.plot(x, temperature_low[:12], "b-")
-
-ax2.plot(x, rainfall_average[:12], "yellow")
-
 ax1.set_xlabel("月份")
 ax1.set_ylabel("氣溫")
+
+ax2.plot(x, rainfall_average[:12], "yellow")
 ax2.set_ylabel("雨量")
 
 plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-# 共同參數
-x = np.linspace(0, 2 * np.pi, 30)
-y = np.sin(x)
-y0 = np.sin(x)
-y1 = np.cos(x)
-y2 = np.tan(x)
-
-fig, ax1 = plt.subplots(1, 1)
-
-ax2 = ax1.twinx()  # 使用相同的 x 軸
-
-ax1.plot(x, y0)
-ax2.plot(x, y1, "g", lw="3")
-
-plt.show()
-'''
-print("------------------------------------------------------------")  # 60個
-
-
-#雙Y軸
-x = np.linspace(0, 10, 50)
-sinus = np.sin(x)
-sinhs = np.sinh(x)
-fig, ax = plt.subplots()
-ax.plot(x, sinus, "r-o")
-ax2 = ax.twinx()
-ax2.plot(x, sinhs, "g--")
-plt.show()
-
-
-print("------------------------------------------------------------")  # 60個
-
-x = np.linspace(0, 10, 50)
-sinus = np.sin(x)
-sinhs = np.sinh(x)
-fig, ax = plt.subplots()
-ax.plot(x, sinus, "r-o")
-ax.set_xlabel("x", color="green")
-ax.set_ylabel("Sin(x)", color="red")
-ax2 = ax.twinx()
-ax2.plot(x, sinhs, "g--")
-ax2.set_ylabel("Sinh(x)", color="blue")
-plt.show()
-
-
-print("------------------------------------------------------------")  # 60個
-
-x = np.linspace(0, 10, 50)
-sinus = np.sin(x)
-sinhs = np.sinh(x)
-fig, ax = plt.subplots()
-ax.plot(x, sinus, "r-o", label="Sin(x)")
-ax.set_xlabel("x", color="green")
-ax.set_ylabel("Sin(x)", color="red")
-ax.legend(loc="best")
-ax2 = ax.twinx()
-ax2.plot(x, sinhs, "g--", label="Sinh(x)")
-ax2.set_ylabel("Sinh(x)", color="blue")
-ax2.legend(loc="best")
-plt.show()
-
-
-print("------------------------------------------------------------")  # 60個
-
-x = np.linspace(0, 10, 50)
-sinus = np.sin(x)
-sinhs = np.sinh(x)
-fig, ax = plt.subplots()
-lns1 = ax.plot(x, sinus, "r-o", label="Sin(x)")
-ax.set_xlabel("x", color="green")
-ax.set_ylabel("Sin(x)", color="red")
-ax2 = ax.twinx()
-lns2 = ax2.plot(x, sinhs, "g--", label="Sinh(x)")
-ax2.set_ylabel("Sinh(x)", color="blue")
-# 自行建立圖例來顯示所有標籤
-lns = lns1 + lns2
-labs = [l.get_label() for l in lns]
-ax.legend(lns, labs, loc="best")
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-x = np.linspace(0, 10, 50)
-sinus = np.sin(x)
-sinhs = np.sinh(x)
-fig, ax = plt.subplots()
-ax.plot(x, sinus, "r-o")
-ax.set_xlabel("x", color="green")
-ax.set_ylabel("Sin(x)", color="red")
-ax2 = ax.twinx()
-ax2.plot(x, sinhs, "g--")
-ax2.set_ylabel("Sinh(x)", color="blue")
-# 指定圖表標題文字
-ax.set_title("Sin和Cos三角函數的波型", fontsize="large")
-# 更改刻度的外觀
-for tick in ax.xaxis.get_ticklabels():
-    tick.set_fontsize("large")
-    tick.set_fontname("Times New Roman")
-    tick.set_color("blue")
-    tick.set_weight("bold")   
-plt.show()
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-x = np.linspace(0, 10, 50)
-sinus = np.sin(x)
-sinhs = np.sinh(x)
-fig, ax = plt.subplots()
-ax.plot(x, sinus, "r-o")
-ax.set_xlabel("x", color="green")
-ax.set_ylabel("Sin(x)", color="red")
-ax2 = ax.twinx()
-ax2.plot(x, sinhs, "g--")
-ax2.set_ylabel("Sinh(x)", color="blue")
-plt.xticks(range(0, 11))
-ax.set_yticks(np.linspace(-1, 1, 10))
-ax2.set_yticks(np.linspace(0, 12000, 10))
-plt.show()
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -321,7 +294,7 @@ fig, ax = plt.subplots()
 fig.suptitle("分區統計")
 ax.set_ylabel("人口")
 ax.set_xlabel("分區")
-ax2 = ax.twinx()
+ax2 = ax.twinx()  # 使用相同的 x 軸
 ax2.set_ylabel("面積")
 df["人口"].plot( ax=ax, 
                  style="b--o",

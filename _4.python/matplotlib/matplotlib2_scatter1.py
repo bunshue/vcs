@@ -105,11 +105,11 @@ plt.figure(
     frameon=True,
 )
 
-# 第一張圖
+print("------------------------------------------------------------")  # 60個
 plt.subplot(231)
 
 
-# 第二張圖
+print("------------------------------------------------------------")  # 60個
 plt.subplot(232)
 
 N = 30
@@ -122,7 +122,7 @@ plt.scatter(x, y, s=size)
 plt.plot(x, y, "r")
 
 
-# 第三張圖
+print("------------------------------------------------------------")  # 60個
 plt.subplot(233)
 
 R = 10
@@ -134,7 +134,7 @@ size = 300
 plt.scatter(x, y, s=size)
 
 
-# 第四張圖
+print("------------------------------------------------------------")  # 60個
 plt.subplot(234)
 
 N = 1024
@@ -147,7 +147,7 @@ plt.scatter(X, Y, s=75, c=T, alpha=0.5)
 plt.xlim(-3.5, 3.5)
 plt.ylim(-3.5, 3.5)
 
-# 第五張圖
+print("------------------------------------------------------------")  # 60個
 plt.subplot(235)
 
 X = []
@@ -169,7 +169,7 @@ plt.axis("equal")
 plt.title("蒙地卡羅模擬")
 
 
-# 第六張圖
+print("------------------------------------------------------------")  # 60個
 plt.subplot(236)
 
 
@@ -221,7 +221,7 @@ plt.figure(
     frameon=True,
 )
 
-# 第一張圖
+print("------------------------------------------------------------")  # 60個
 plt.subplot(231)
 
 
@@ -244,7 +244,7 @@ for i in range(1, N):  # 建立點的座標
 t = x  # 色彩隨x軸變化
 plt.scatter(x, y, s=2, c=t, cmap="brg")
 
-# 第二張圖
+print("------------------------------------------------------------")  # 60個
 plt.subplot(232)
 
 
@@ -267,7 +267,7 @@ for i in range(1, N):  # 建立點的座標
 t = x  # 色彩隨x軸變化
 plt.scatter(x, y, s=2, c=t, cmap="brg")
 
-# 第三張圖
+print("------------------------------------------------------------")  # 60個
 plt.subplot(233)
 
 N = 50  # 散點的數量
@@ -293,7 +293,7 @@ plt.scatter(x, y, s=size2, marker="o", c=colors)
 plt.plot((0.5, 0.5), (0, 1.0))  # 繪製邊界線
 
 
-# 第四張圖
+print("------------------------------------------------------------")  # 60個
 plt.subplot(234)
 
 N = 50  # 散點的數量
@@ -319,7 +319,7 @@ radian = np.arange(0, np.pi / 2, 0.01)
 plt.plot(r * np.cos(radian), r * np.sin(radian))  # 繪製邊界線
 
 
-# 第五張圖
+print("------------------------------------------------------------")  # 60個
 plt.subplot(235)
 
 
@@ -339,7 +339,7 @@ plt.scatter(X, Y, s=size, c=size, cmap="Set1")  # 使用 Set1 的 colormap
 # plt.colorbar()
 
 
-# 第六張圖
+print("------------------------------------------------------------")  # 60個
 plt.subplot(236)
 
 # 加上 vmin 和 vmax 的設定，能設定顏色的最大值與最小值
@@ -368,9 +368,8 @@ plt.figure(
     frameon=True,
 )
 
-# 第一張圖
+print("------------------------------------------------------------")  # 60個
 plt.subplot(231)
-
 
 N = 10
 x = np.random.rand(N)
@@ -387,8 +386,7 @@ print(lines)
 # plt.scatter(x, y, s=size, c=colors, alpha=0.5, marker="x", linewidths=lines) # NG
 plt.scatter(x, y, s=size, c=colors, alpha=0.5, linewidths=lines)
 
-
-# 第二張圖
+print("------------------------------------------------------------")  # 60個
 plt.subplot(232)
 
 """
@@ -405,8 +403,7 @@ size = 300
 for i in range(0, 3):
     plt.scatter(x, y[i], s=size, alpha=0.5)
 
-
-# 第三張圖
+print("------------------------------------------------------------")  # 60個
 plt.subplot(233)
 
 # np.random.randint(0, 3, 10)
@@ -423,25 +420,24 @@ plt.scatter(
     cmap="Paired",
 )
 
-
-# 第四張圖
+print("------------------------------------------------------------")  # 60個
 plt.subplot(234)
 
 N = 20
-x = np.random.randn(N)  # 隨機產生N個X軸坐標
-y = np.random.randn(N)  # 隨機產生N個Y軸坐標
-
-colors = np.random.rand(N)  # 隨機產生N個用于顏色映射的數值
+x = np.random.randn(N)
+y = np.random.randn(N)
+colors = np.random.rand(N)  # 色彩數列
 size = 300
 
 plt.scatter(x, y, c=colors, s=size, alpha=0.3, cmap="viridis")
+# plt.colorbar()
 
 # 這里從cmap中選取了一個叫做'viridis'的調色盤，
 # 其作用是，將參數c中獲取到的數值，映射到“色盤”中已經對應好的顏色上
 # 并且上圖中從“色盤”viridis中獲取到的顏色，
 # 可以通過plt.colorbar( )顯示為顏色條（與熱力圖同理）。
 
-# 第五張圖
+print("------------------------------------------------------------")  # 60個
 plt.subplot(235)
 
 N = 20
@@ -455,7 +451,7 @@ y = np.random.randint(1, 11, N)
 size = 300
 plt.scatter(x, y, s=size, c=colors)  # 繪製散點
 
-# 第六張圖
+print("------------------------------------------------------------")  # 60個
 plt.subplot(236)
 
 from matplotlib import colors  # 為了調整“色盤”，需要導入colors
@@ -463,7 +459,7 @@ from matplotlib import colors  # 為了調整“色盤”，需要導入colors
 N = 20
 x = np.random.randn(N)
 y = np.random.randn(N)
-color = np.random.rand(N)
+color = np.random.rand(N)  # 色彩數列
 size = 300
 
 changecolor = colors.Normalize(vmin=0.4, vmax=0.8)
@@ -528,24 +524,11 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-N = 20
-x = np.random.randn(N)  # 隨機產生N個X軸坐標
-y = np.random.randn(N)  # 隨機產生N個Y軸坐標
-colors = np.random.rand(N)  # 隨機產生N個用于顏色映射的數值
-size = 300
-
-plt.scatter(x, y, c=colors, s=size, alpha=0.3, cmap="viridis")
-# plt.colorbar()
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
 print("散佈圖")
 
 fig, ax = plt.subplots()
 
-N = 20
+N = 100
 x = np.random.randint(30, size=N)
 y = np.random.randint(30, size=N)
 c = np.random.randint(30, size=N)
@@ -556,6 +539,7 @@ sc = ax.scatter(x=x, y=y, c=c, s=c, alpha=0.5, label="scatter plot")
 ax.set_xlabel("X軸", loc="left")
 ax.set_ylabel("Y軸", loc="top")
 ax.legend(loc=1)
+
 cbar = fig.colorbar(sc)
 cbar.set_label("Z軸", loc="center")
 
@@ -563,83 +547,61 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-print("------------------------------------------------------------")  # 60個
-
-""" fail
-#zip 高級組合法
-
-xx = [1, 2, 3, 4]
-yy = [5, 6, 7, 8]
-list(zip(xx, yy))
-
-Z = list(zip(X, Y))
-print(Z)
-
-plt.scatter(X, Y, s = 300, c = Z)
-plt.show()
-"""
-
-print("------------------------------------------------------------")  # 60個
-
 x = np.arange(6)
-y = x
-t = x  # 色彩隨 y 軸值變化
-plt.scatter(x, y, c=t, cmap="rainbow")
-plt.scatter(x, y, c=x, cmap="rainbow", marker="*")  # 繪製 sin
-plt.scatter(x, y, c=x, cmap="rainbow", marker="s")  # 繪製 cos
-plt.scatter(x, y, c=y, cmap="rainbow", marker="*")  # 繪製 sin
-plt.scatter(x, y, c=y, cmap="rainbow", marker="s")  # 繪製 cos
+y = x/3 - 1
+t = x/3  # 色彩隨 x 軸值變化
 
-xpt = np.linspace(0, 5, 500)  # 建立含500個元素的陣列
-ypt = 1 - 0.5 * np.abs(xpt - 2)  # y陣列的變化
-lwidths = (1 + xpt) ** 2  # 寬度陣列
-plt.scatter(xpt, ypt, s=lwidths, c=xpt, cmap="hsv")  # hsv色彩映射圖
+plt.scatter(x, y, c=t, s=500, cmap="rainbow")
+plt.scatter(x, y, c=x, s=500, cmap="rainbow", marker="*")  # 繪製 sin
+plt.scatter(x, y, c=x, s=500, cmap="rainbow", marker="s")  # 繪製 cos
+plt.scatter(x, y, c=y, s=500, cmap="rainbow", marker="*")  # 繪製 sin
+plt.scatter(x, y, c=y, s=500, cmap="rainbow", marker="s")  # 繪製 cos
+plt.scatter(x, y, c=t, s=100, cmap="brg")
+plt.scatter(x, y, c="blue", marker=".")
+plt.scatter(x, y, color="lightgreen", edgecolor="b", s=80)
+plt.scatter(x, y, c=y, cmap="rainbow")
+plt.scatter(x, y, s=300, c=y, cmap="hsv")  # 色彩隨y軸值變化
+plt.scatter(x, y, s = 100, c = 'b', alpha = 0.5)   # 設定透明度為 0.5
+plt.scatter(x, y, s = 100, c = 'r', alpha = 0.5)   # 設定透明度為 0.5
 
-xpt = np.linspace(0, 5, 500)  # 建立含500個元素的陣列
-ypt = 1 - 0.5 * np.abs(xpt - 2)  # y陣列的變化
-lwidths = (1 + xpt) ** 2  # 寬度陣列
-plt.scatter(xpt, ypt, s=lwidths, c=ypt, cmap="hsv")  # hsv色彩映射圖
+N = 50
+x = np.linspace(0, 6.2, N)  # 建立含 N 個元素的陣列
+y = np.sin(x)  # y陣列的變化
+lwidths = (1 + x) ** 2  # 寬度陣列
 
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-num = 100
-
-x = np.random.random(100)  # 可以產生num個0.0至1.0之間的數字
-y = np.random.random(100)
-t = x  # 色彩隨x軸變化
-plt.scatter(x, y, s=100, c=t, cmap="brg")
+plt.scatter(x, y, s=lwidths, c=x, cmap="hsv")  # hsv色彩映射圖
 
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-N = 1000  # 數據數量
+N = 100  # 數據數量
 x = np.random.normal(0, 1, N)  # 均值是 0, 標準差是 1
 y = np.random.normal(0, 1, N)  # 均值是 0, 標準差是 1
+
 color = x + y  # 設定顏色串列是 x + y 數列結果
 norm = plt.Normalize(vmin=-3, vmax=3)
+
 plt.scatter(x, y, s=60, c=color, cmap="Greens", norm=norm)
+
 plt.xlim(-3, 3)
-plt.xticks(())  # 不顯示 x 刻度
 plt.ylim(-3, 3)
-plt.yticks(())  # 不顯示 y 刻度
 
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-N = 1000  # 數據數量
+N = 100  # 數據數量
 x = np.random.normal(0, 1, N)  # 均值是 0, 標準差是 1
 y = np.random.normal(0, 1, N)  # 均值是 0, 標準差是 1
+
 color = x + y  # 設定顏色串列是 x + y 數列結果
 norm = plt.Normalize(vmin=-3, vmax=3)
+
 plt.scatter(x, y, s=60, alpha=0.5, c=color, cmap="Greens", norm=norm)
+
 plt.xlim(-3, 3)
-plt.xticks(())  # 不顯示 x 刻度
 plt.ylim(-3, 3)
-plt.yticks(())  # 不顯示 y 刻度
 
 plt.show()
 
@@ -648,16 +610,16 @@ print("------------------------------------------------------------")  # 60個
 N = 1000  # 數據數量
 x = np.random.normal(0, 1, N)  # 均值是 0, 標準差是 1
 y = np.random.normal(0, 1, N)  # 均值是 0, 標準差是 1
+
 color = x + y  # 設定顏色串列是 x + y 數列結果
 norm = plt.Normalize(vmin=-3, vmax=3)
+
 plt.scatter(x, y, s=60, alpha=0.5, c=color, cmap="jet", norm=norm)
+
 plt.xlim(-3, 3)
-plt.xticks(())  # 不顯示 x 刻度
 plt.ylim(-3, 3)
-plt.yticks(())  # 不顯示 y 刻度
 
 plt.show()
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -687,11 +649,6 @@ s1 = [i*100 for i in y1]            # 將第一組的 Y 軸數據放大 100 倍�
 y2 = [19,29,15,12,21,6,7,8,18,2]    # 第二組的 Y 軸數據
 s2 = [i*100 for i in y2]            # 將第二組的 Y 軸數據放大 100 倍作為園點尺寸
 
-plt.scatter(x, y1, s = s1, c = 'b', alpha = 0.5)   # 設定透明度為 0.5
-plt.scatter(x, y2, s = s2, c = 'r', alpha = 0.5)   # 設定透明度為 0.5
-
-
-
 ----
 #連接2點的直線
 
@@ -703,8 +660,6 @@ y = 1/2*x + (1/2)
 plt.scatter(x, y)
 plt.grid(color='0.8')
 
-
-
 ----
 
 #畫不同顏色的scatter
@@ -712,7 +667,6 @@ cl = np.random.randint(1, 4, 100)
 plt.scatter(x, y, s=100, c=cl, alpha=0.6, cmap="Paired")
 
 ----
-
 
 
 """
@@ -733,11 +687,7 @@ plt.scatter([1, 2, 3, 4], [9, 8, 7, 6], s=10, c="b", marker="v")
 
 s = plt.scatter([1, 2, 3], [4, 5, 6])
 
-plt.scatter(x, g, c="blue", marker=".")
-plt.scatter(x, y, color="lightgreen", edgecolor="b", s=60)
 
-plt.scatter(x, y, c=y, cmap="rainbow")
-plt.scatter(x, y, s=300, c=y, cmap="hsv")  # 色彩隨y軸值變化
 # plt.colorbar()
 
 # 由平均 0, 標準差 1 的分布中取 20 個數
@@ -896,3 +846,25 @@ y = np.random.randint(1, 11, N)
 
 x = np.random.randn(N)
 y = np.random.randn(N)
+
+
+
+""" fail
+#zip 高級組合法
+
+xx = [1, 2, 3, 4]
+yy = [5, 6, 7, 8]
+list(zip(xx, yy))
+
+Z = list(zip(X, Y))
+print(Z)
+
+plt.scatter(X, Y, s = 300, c = Z)
+plt.show()
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+
+plt.xticks(())  # 不顯示 x 刻度
+plt.yticks(())  # 不顯示 y 刻度

@@ -73,8 +73,7 @@ print("------------------------------------------------------------")  # 60個
 plt.subplot(233)
 
 plt.axis([0, 10, 0, 10])
-s1 = "歡迎來到美國"
-plt.text(5, 8, s1, ha="center", fontsize=16, va="top", wrap=True)
+
 s2 = "Welcome to the United States" "God bless you" "Thanks Got It's Friday"
 
 plt.text(5, 1, s2, c="b", ha="left", rotation=15, wrap=True)
@@ -218,8 +217,21 @@ print("------------------------------------------------------------")  # 60個
 
 plt.subplot(236)
 
-my_kwargs = dict(ha="center", va="center", fontsize=50, c="b")
-plt.text(0.5, 0.5, "歡迎來到美國", **my_kwargs)
+my_kwargs = dict(ha="center", va="center", fontsize=20, c="b")
+plt.text(0.5, 0.1, "歡迎來到美國1", **my_kwargs)
+
+plt.text(0.5, 0.3, "歡迎來到美國2", ha="center", fontsize=20, va="top", wrap=True)
+
+print("從windows字型中找出可以顯示的中文字型")
+import matplotlib as mpl
+
+zhfont = mpl.font_manager.FontProperties(fname="C:/Windows/Fonts/mingliu.ttc")
+plt.text(0, 0.4, "歡迎來到美國3", fontsize=20, fontproperties=zhfont)
+
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
+plt.rcParams["axes.unicode_minus"] = False
+
+plt.text(0.5, 0.5, "歡迎來到美國4")
 
 plt.show()
 
@@ -248,8 +260,6 @@ print("------------------------------------------------------------")  # 60個
 
 plt.subplot(232)
 
-my_kwargs = dict(ha="center", va="center", fontsize=50, c="b")
-plt.text(0.5, 0.5, "歡迎來到美國", **my_kwargs)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -290,16 +300,7 @@ print("------------------------------------------------------------")  # 60個
 
 plt.subplot(235)
 
-print("從windows字型中找出可以顯示的中文字型")
-import matplotlib as mpl
 
-zhfont = mpl.font_manager.FontProperties(fname="C:/Windows/Fonts/mingliu.ttc")
-plt.text(0, 0, "測試一下 ", fontsize=20, fontproperties=zhfont)
-
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
-plt.rcParams["axes.unicode_minus"] = False
-
-plt.text(0.5, 0.5, "測試一下")
 
 print("------------------------------------------------------------")  # 60個
 
