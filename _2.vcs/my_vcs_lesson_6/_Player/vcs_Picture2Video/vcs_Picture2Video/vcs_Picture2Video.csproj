@@ -47,6 +47,9 @@
     <Reference Include="AForge.Video.FFMPEG">
       <HintPath>dll\AForge.Video.FFMPEG.dll</HintPath>
     </Reference>
+    <Reference Include="AviFile">
+      <HintPath>dll\AviFile.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />

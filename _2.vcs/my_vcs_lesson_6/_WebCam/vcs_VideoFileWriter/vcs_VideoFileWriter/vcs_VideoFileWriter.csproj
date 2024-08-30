@@ -107,6 +107,7 @@
     <Content Include="avutil-50.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="img\logo.png" />
     <Content Include="swscale-0.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
