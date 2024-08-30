@@ -1894,7 +1894,7 @@ z = np.linspace(0, 15, 100)
 x = np.sin(z)
 y = np.cos(z)
 x2 = np.sin(z)
-'''
+
 
 #numpy統計
 
@@ -1940,3 +1940,286 @@ A=np.array(A)
 print(A.sum(axis=0)) #output: [21 24 27 30 33 36]
 print(A.mean(axis=1))#output:[ 3.5  9.5 15.5]
 print(A.std(axis=1))#output:[1.70782513, 1.70782513, 1.70782513]
+
+'''
+print("------------------------------------------------------------")  # 60個
+
+import numpy as np
+
+# n阶方阵的行列式运算
+A = np.mat([[1,2,4,5,7,],[9,12,11,8,2,],[6,4,3,2,1,],[9,1,3,4,5],[0,2,3,4,1]])
+
+print("det(A):",np.linalg.det(A))  # 方阵的行列式
+
+invA = np.linalg.inv(A) # 矩阵的逆
+print("inv(A):",invA)
+
+AT = A.T   #矩阵的对称
+print(A*AT)
+
+#矩阵的秩
+print(np.linalg.matrix_rank(A))
+
+#可逆矩阵求解
+b = [1,0,1,0,1] 
+S = np.linalg.solve(A,np.transpose(b))
+print(S)
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+base = np.mat([[3,1],[1,3]])
+v1 = np.mat([1,2])
+print(np.linalg.norm(v1))
+print((base[0]*base[1].T)/(np.linalg.norm(base[1])*np.linalg.norm(base[0])))
+v2 = v1*base
+print(v2)
+print(np.linalg.norm(v2))
+
+# 绘图
+fig = plt.figure()
+
+ax = fig.add_subplot(111)
+x0 = np.linspace(0,1,200)
+y0 = 2*x0
+x1 = np.linspace(0,1,200)
+y1 = 3*x1
+x2 = np.linspace(0,3,200)
+y2 = x2/3 
+x3 = np.linspace(0,5,200)
+y3 = 7*x3/5
+ax.plot(x0,y0,"r")
+plt.annotate("(1,2)",xy = (1,2))	
+ax.plot(x1,y1,"b")
+plt.annotate("(1,3)",xy = (1,3))	
+ax.plot(x2,y2,"b")
+plt.annotate("(3,1)",xy = (3,1))	
+ax.plot(x3,y3,"r")
+plt.annotate("(5,7)",xy = (5,7))	
+
+#平行四边形
+x7 = np.linspace(0,1,200)
+y7 = np.linspace(2,2,200)
+ax.plot(x7,y7,"b",linestyle='--')	
+x8 = np.linspace(1,1,200)
+y8 = np.linspace(0,2,200)
+ax.plot(x8,y8,"b",linestyle='--')	
+x4 = np.linspace(1,2,200)
+y4 = 3*x4
+ax.plot(x4,y4,"b",linestyle='--')	
+x5 = np.linspace(2,5,200)
+y5 = 6+x0
+ax.plot(x5,y5,"b",linestyle='--')
+x6 = np.linspace(3,5,200)
+y6 = 1+6*x0
+ax.plot(x6,y6,"b",linestyle='--')
+plt.xlim(0, 8)
+plt.ylim(0, 8)
+plt.grid(True)
+
+plt.show()
+
+
+print("------------------------------------------------------------")  # 60個
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+base = np.mat([[1,3],[3,1]])
+print(base[0]+base[1])
+
+# 绘图
+fig = plt.figure()
+ax = fig.add_subplot(111)
+x1 = np.linspace(0,1,200)
+y1 = 3*x1
+x2 = np.linspace(0,3,200)
+y2 = x2/3 
+x3 = np.linspace(0,4,200)
+y3 = x3
+ax.plot(x1,y1,"b")
+plt.annotate("(1,3)",xy = (1,3))	
+ax.plot(x2,y2,"b")
+plt.annotate("(3,1)",xy = (3,1))	
+ax.plot(x3,y3,"b")
+plt.annotate("(4,4)",xy = (4,4))	
+plt.xlim(0, 4)
+plt.ylim(0, 4)
+plt.grid(True)
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+import numpy as np
+
+eps = 1.0e-6 # 误差量
+
+# 矩阵的特征值和特征向量
+A = np.mat([[8,1,6],[3,5,7],[4,9,2]])
+
+# 手动计算特征值：
+m,n = np.shape(A)
+# Aeig = lambda*I-A = [[lambda-8,-1],[-6;-3,lambda-5,-7],[-4,-9,lambda-2]]
+# (lambda-8)*(lambda-5)*(lambda-2)-190-24*(5-lambda)-3*(2-lambda)-63*(8-lambda)
+equationA = [1,-15,-24,360] #得到系数方程矩阵
+evals = np.roots(equationA) # 计算矩阵方程的根
+print("特征值:" , evals)
+
+evals, evecs = np.linalg.eig(A)
+print("特征值:",evals,"\n特征向量:", evecs)
+
+# 特征值和特征向量,还原原矩阵
+sigma = evals*np.eye(m)
+print(evecs*sigma*np.linalg.inv(evecs))
+
+print("------------------------------------------------------------")  # 60個
+
+import numpy as np
+
+mylist = [1,2,3,4,5]
+a = 10
+mymatrix = np.mat(mylist)
+print(a*mymatrix)
+
+print("------------------------------------------------------------")  # 60個
+
+import numpy as np 
+
+myZero = np.zeros([3,5]) #3*5的全零矩阵 
+print(myZero)
+
+myOnes = np.ones([3,5]) #3*5的全零矩阵 
+print(myOnes)
+
+# 随机矩阵:3行4列的0~1之间的随机数矩阵
+myRand = np.random.rand(3,4)
+print(myRand)
+
+# 单位阵
+myEye = np.eye(3) # 3*3的单位阵
+print(myEye)
+
+
+print("------------------------------------------------------------")  # 60個
+
+import numpy as np
+
+myOnes = np.ones([3,3]) #3*3的全1矩阵 
+myEye = np.eye(3) # 3*3的单位阵
+print(myOnes+myEye)
+print(myOnes-myEye)
+
+mylist = [[1,2,3],[4,5,6],[7,8,9]]
+mymatrix = np.mat(mylist)
+
+a = 10
+print(a*mymatrix)
+
+print(sum(mymatrix))
+
+mymatrix2 = 1.5*np.ones([3,3])
+print(np.multiply(mymatrix,mymatrix2))
+
+print(np.power(mymatrix,2))
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+import numpy as np
+
+mymatrix = np.mat([[1,2,3],[4,5,6],[7,8,9]])
+
+mymatrix2 = np.mat([[1],[2],[3]])
+print(mymatrix*mymatrix2)
+
+# 矩阵的转置
+print(mymatrix.T)
+mymatrix.transpose()
+print(mymatrix)
+
+
+print("------------------------------------------------------------")  # 60個
+
+import numpy as np
+
+mymatrix = np.mat([[1,2,3],[4,5,6],[7,8,9]])
+[m,n]=np.shape(mymatrix) # 矩阵的行列数
+print("矩阵的行数和列数:",m,n)
+
+myscl1 = mymatrix[0] # 按行切片
+print("按行切片:",myscl1)
+
+myscl2 = mymatrix.T[0] # 按列切片
+print("按列切片:",myscl2)
+
+mycpmat = mymatrix.copy() # 矩阵的复制
+print("复制矩阵:\n",mycpmat)
+
+#比较
+print("矩阵元素的比较:\n",mymatrix < mymatrix.T)
+
+# 矩阵的特征值和特征向量
+A = [[8,1,6],[3,5,7],[4,9,2]]
+evals, evecs = np.linalg.eig(A)
+print("特征值:",evals,"\n特征向量:", evecs)
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+import numpy as np
+
+featuremat = np.mat([[88.5,96.8,104.1,111.3,117.7,124.0,130.0,135.4,140.2,145.3,151.9,159.5,165.9,169.8,171.6,172.3,172.7],
+[12.54,14.65,16.64,18.98,21.26,24.06,27.33,30.46,33.74,37.69,42.49,48.08,53.37,57.08,59.35,60.68,61.40]])
+
+# 计算均值
+mv1 = np.mean(featuremat[0]) # 第一列的均值
+mv2 = np.mean(featuremat[1]) # 第二列的均值 
+
+# 计算两列标准差
+dv1 = np.std(featuremat[0])
+dv2 = np.std(featuremat[1])
+
+corref = np.mean(np.multiply(featuremat[0]-mv1,featuremat[1]-mv2))/(dv1*dv2)
+print(corref)
+
+print(np.corrcoef(featuremat))
+
+covinv = np.linalg.inv(np.cov(featuremat))
+print(covinv)
+tp = featuremat.T[0]-featuremat.T[1]
+distma = np.sqrt(np.dot(np.dot(tp,covinv),tp.T))
+print(distma)
+
+print("------------------------------------------------------------")  # 60個
+
+vectormat = np.mat([[1,2,3],[4,5,6]])
+v12 = vectormat[0]-vectormat[1]
+print(np.sqrt(v12*v12.T))
+
+#norm
+varmat = np.std(vectormat.T,axis=0)
+normvmat = (vectormat-np.mean(vectormat))/varmat.T
+
+#norm
+print(normvmat)
+normv12 = normvmat[0]-normvmat[1]
+print(np.sqrt(normv12*normv12.T))
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+

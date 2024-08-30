@@ -149,6 +149,38 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
+import numpy as np
+import matplotlib.pyplot as plt 
+
+# nodelist = ["city1","city2","city3","city4","city5","city6","city7","city8"]
+dist = np.mat([[0.1,0.1],[0.9,0.5],[0.9,0.1],[0.45,0.9],[0.9,0.8],[0.7,0.9],[0.1,0.45],[0.45,0.1]])
+m,n = np.shape(dist)
+
+# 绘图
+fig = plt.figure()
+
+ax = fig.add_subplot(111)
+
+for point in dist.tolist():
+	plt.annotate("("+str(point[0])+", "+str(point[1])+")",xy = (point[0],point[1]))	
+xlist = []
+ylist = []
+for px,py in zip(dist.T.tolist()[0],dist.T.tolist()[1]):
+	xlist.append([px])
+	ylist.append([py])
+
+ax.plot(xlist,ylist,'r') 
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
 
 print("------------------------------------------------------------")  # 60個
 

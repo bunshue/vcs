@@ -41,9 +41,13 @@ rng = RandomState(0)
 print('------------------------------------------------------------')	#60個
 
 #讀取數據集
+
+"""
 #指定下載位置
-olivetti_faces = fetch_olivetti_faces(data_home='data\\',shuffle=True, random_state=rng)
-#olivetti_faces = fetch_olivetti_faces(data_home=data_home)
+data_home='data\\'
+olivetti_faces = fetch_olivetti_faces(data_home=data_home,shuffle=True, random_state=rng)
+olivetti_faces = fetch_olivetti_faces(data_home=data_home)
+"""
 
 #未指定下載位置, 下載至 C:/Users/070601/scikit_learn_data/olivetti_py3.pkz
 olivetti_faces = fetch_olivetti_faces()
@@ -66,9 +70,10 @@ fig = plt.figure(figsize=(12, 8))
 for i in range(15):
     ax = plt.subplot2grid((3, 5), (i//5, i%5))    
     ax.imshow(olivetti_faces.data[i * 10].reshape(64, 64), cmap=plt.cm.gray)
-    ax.set_title('Original')
+    #ax.set_title('Original')
     ax.axis('off')
 
+plt.suptitle('Original')
 plt.show()
 
 print('------------------------------------------------------------')	#60個
@@ -85,11 +90,11 @@ fig = plt.figure(figsize=(12, 8))
 
 for i in range(15):
     ax = plt.subplot2grid((3, 5), (i//5, i%5))
-    
     ax.imshow(pca.components_[i].reshape(64, 64), cmap=plt.cm.gray)
-    ax.set_title('PCA')
+    #ax.set_title('PCA')
     ax.axis('off')
 
+plt.suptitle('PCA')
 plt.show()
 
 print('------------------------------------------------------------')	#60個
@@ -128,21 +133,16 @@ print('------------------------------------------------------------')	#60個
 
 print('Olivetti 資料集 ST')
 
-import logging
 from sklearn.datasets import fetch_olivetti_faces
 
-logging.basicConfig(level=logging.INFO, format='%(asctime)s %(message)s')
-
 data_home='datasets/'
-
-logging.info('Start to load dataset')
 olivetti_faces = fetch_olivetti_faces(data_home=data_home)
-logging.info('Done with load dataset')
 
 print("------------------------------")  # 30個
 
 X = olivetti_faces.data
 y = olivetti_faces.target
+
 targets = np.unique(olivetti_faces.target)
 target_names = np.array(["c%d" % t for t in targets])
 n_targets = target_names.shape[0]
@@ -153,8 +153,7 @@ print('Image size: {}x{}\nDataset shape: {}\n'.format(w, h, X.shape))
 print("------------------------------")  # 30個
 
 def plot_gallery(images, titles, h, w, n_row=2, n_col=5):
-    #显示图片阵列
-    plt.figure(figsize=(2 * n_col, 2.2 * n_row), dpi=144)
+    plt.figure(figsize=(12, 8))
     plt.subplots_adjust(bottom=0, left=.01, right=.99, top=.90, hspace=.01)
     for i in range(n_row * n_col):
         plt.subplot(n_row, n_col, i + 1)
@@ -230,7 +229,7 @@ print('Done in {0:.2f}s'.format(time.time()-start))
 
 print("------------------------------")  # 30個
 
-plt.figure(figsize=(10, 6), dpi=144)
+plt.figure(figsize=(12, 8))
 plt.grid()
 plt.plot(candidate_components, explained_ratios)
 plt.xlabel('Number of PCA Components')

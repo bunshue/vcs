@@ -8,8 +8,8 @@ print("------------------------------------------------------------")  # 60個
 # 共同
 import os
 import sys
-import math
 import time
+import math
 import random
 import numpy as np
 import pandas as pd
@@ -68,7 +68,7 @@ base_map = folium.Map(location = [50, 0], zoom_start = 1.8)
 
 # 新增Choropleth
 folium.Choropleth(
-    geo_data=json.load(open("countries.geo.json","r", encoding ='UTF-8')),
+    geo_data=json.load(open("data/countries.geo.json","r", encoding ='UTF-8')),
     data=gapminder,                        # 使用的資料
     fill_opacity=1,                        # 填色的透明度
     line_color = "black",                  # 邊界顏色
@@ -94,8 +94,8 @@ print('------------------------------------------------------------')	#60個
 # 定義基礎地圖 
 base_map = folium.Map(location=[35.655616, 139.338853], zoom_start=5.0) 
 # 新增Choropleth
-folium.Choropleth(geo_data=json.load(open("japan_map/japan.geojson", "r", encoding ='UTF-8')),
-#folium.Choropleth(geo_data=json.load(open("japan_map/TWN.geo.json", "r", encoding ='UTF-8')),                  
+folium.Choropleth(geo_data=json.load(open("data/japan_map/japan.geojson", "r", encoding ='UTF-8')),
+#folium.Choropleth(geo_data=json.load(open("data/japan_map/TWN.geo.json", "r", encoding ='UTF-8')),                  
                   fill_color="red",   # 填色
                   fill_opacity=0.3,   # 填色的透明度
                   line_color="black", # 邊界線顏色
@@ -108,11 +108,11 @@ base_map
 #根據資料框架的值替日本的都道府縣標色的範例
 
 # 載入資料
-df = pd.read_csv("japan_pop.csv")
+df = pd.read_csv("data/japan_pop.csv")
 # 定義基礎地圖
 base_map = folium.Map(location=[35.655616, 139.338853], zoom_start=5.0) 
 # 新增Choropleth
-folium.Choropleth(geo_data=json.load(open("japan_map/japan.geojson", "r", encoding ='UTF-8')),
+folium.Choropleth(geo_data=json.load(open("data/japan_map/japan.geojson", "r", encoding ='UTF-8')),
                   data=df,                          # 都道府縣的資料
                   columns=["name", "value"],        # 用於填色的Key與欄位名稱
                   key_on="feature.properties.name", # geojson的行政區域的Key
@@ -244,7 +244,7 @@ map
 #指定在地圖顯示的符號種類
 
 # 設定符號的圖片檔
-MARKER_IMG = "original_icon\ATM_icon.png"  
+MARKER_IMG = "data\original_icon\ATM_icon.png"  
 # 符號的透明度
 OPACITY = 1  
 # 定義資料

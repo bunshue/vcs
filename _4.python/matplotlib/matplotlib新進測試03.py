@@ -8,8 +8,8 @@ print("------------------------------------------------------------")  # 60個
 # 共同
 import os
 import sys
-import math
 import time
+import math
 import random
 import numpy as np
 import pandas as pd
@@ -24,24 +24,19 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print('------------------------------------------------------------')	#60個
-'''
-#資訊圖表的視覺化手法
 
+#資訊圖表的視覺化手法
 
 from PIL import Image, ImageOps
 from IPython.display import display
 
-
-im = Image.open("fruit_momo.png")
+im = Image.open("_data2/fruit_momo.png")
 display(im)
-
 
 # resize
 mini_im = im.resize((int(im.size[0] * 0.2), int(im.size[1] * 0.2)))
 display(mini_im)
 print(mini_im.size)
-
-
 
 # 要排列的圖示個數
 num = 10
@@ -50,7 +45,7 @@ num = 10
 margin = 5
 
 # 載入圖片
-im = Image.open("human.png")
+im = Image.open("_data2/human.png")
 im_width, im_height = im.size
 
 # 將圖片入作為畫布使用的Image
@@ -77,7 +72,7 @@ margin_h = 5
 margin_v = 5
 
 # 載入圖片
-im = Image.open("human.png")
+im = Image.open("_data2/human.png")
 im_width, im_height = im.size
 
 # 將圖片入作為畫布使用的Image
@@ -96,7 +91,7 @@ print('------------------------------------------------------------')	#60個
 from PIL import Image, ImageOps
 from IPython.display import display
 
-im = Image.open("original_icon\woman.png")
+im = Image.open("_data2/woman.png")
 display(im)
 
 
@@ -130,7 +125,7 @@ def fill(image, color=(255, 255, 255)):
                 image.putpixel((x, y), color)
                 
 # 載入圖片
-im = Image.open("human.png")
+im = Image.open("_data2/human.png")
 im_width, im_height = im.size
 
 # 將圖片入作為畫布使用的Image
@@ -284,17 +279,17 @@ label_back_color = (130, 230, 180)
 data = [
     {
         "label": "Dolphin",  # 標籤
-        "image": "dolphin.png",  # 用於堆疊的圖片
+        "image": "_data2/dolphin.png",  # 用於堆疊的圖片
         "value": 3  # 堆疊個數
     },
     {
         "label": "Penguin",
-        "image": "penguin.png",
+        "image": "_data2/penguin.png",
         "value": 5
     },
     {
         "label": "Sunfish",
-        "image": "sunfish.png",
+        "image": "_data2/sunfish.png",
         "value": 2
     },
 ]
@@ -302,7 +297,7 @@ data = [
 
 ig = IconGraph(data, icon_size, canvas_size, graph_back_color, label_back_color)
 ig.get_image()
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 

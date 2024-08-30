@@ -23,6 +23,7 @@ print("------------------------------------------------------------")  # 60個
 # 共同
 import os
 import sys
+import time
 import math
 import random
 import numpy as np
@@ -36,7 +37,7 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 # 設定負號
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
-
+'''
 print("------------------------------------------------------------")  # 60個
 
 print(
@@ -476,6 +477,31 @@ def sampler(
 
 tt = sampler(data, samples=5)
 print(tt)
+
+'''
+
+print("------------------------------------------------------------")  # 60個
+
+import numpy as np
+import scipy.spatial.distance as dist
+
+Vector1 = np.array([1,1,0,1,0,1,0,0,1])
+Vector2 = np.array([0,1,1,0,0,0,1,1,1])
+matV = np.mat([Vector1 ,Vector2])
+print(matV)
+print("dist.jaccard:",dist.pdist(matV,'jaccard'))
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
 
 
 print("------------------------------------------------------------")  # 60個
