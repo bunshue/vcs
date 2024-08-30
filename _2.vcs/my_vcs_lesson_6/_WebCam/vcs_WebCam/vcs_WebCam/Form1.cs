@@ -16,8 +16,6 @@ using AForge.Video;             //需要添加這兩個.dll, 參考/加入參考
 using AForge.Video.DirectShow;  // Video Recording
 //using AForge.Video.FFMPEG;      //for VideoFileWriter
 
-using AForge.Vision.Motion;     // Motion detection
-
 /*
 移動偵測 需要 參考/加入參考/選取以下3個dll
 AForge.dll
@@ -75,9 +73,6 @@ namespace vcs_WebCam
         int webcam_w = 0;
         int webcam_h = 0;
         int webcam_fps = 0;
-
-        bool flag_motion_detection = false;
-        MotionDetector motion_detector;
 
         public struct RGB
         {
@@ -177,9 +172,6 @@ namespace vcs_WebCam
 
             show_item_location();
             Init_WebcamSetup();
-
-            //初始化motion detector
-            motion_detector = new MotionDetector(new TwoFramesDifferenceDetector(), new MotionAreaHighlighting());
         }
 
         //窗口關閉事件
@@ -285,7 +277,6 @@ namespace vcs_WebCam
             bt_record.Location = new Point(x_st + dx * 3, y_st + dy * 0);
             bt_refresh.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             bt_snapshot.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            bt_motion_detection.Location = new Point(x_st + dx * 2, y_st + dy * 1);
             bt_exit.Location = new Point(x_st + dx * 3, y_st + dy * 1);
             bt_flip.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             bt_info.Location = new Point(x_st + dx * 1, y_st + dy * 2);
@@ -667,31 +658,7 @@ namespace vcs_WebCam
                     g.FillPolygon(sb, points);
                 }
 
-                if (flag_motion_detection == true)
-                {
-                    //Bitmap bitmap1 = (Bitmap)eventArgs.Frame.Clone(); // get a copy of the BitMap from the VideoCaptureDevice
-                    Bitmap bitmap1 = (Bitmap)bm.Clone(); // get a copy of the BitMap from the VideoCaptureDevice
-                    Bitmap bitmap2 = (Bitmap)bitmap1.Clone(); // clone the bits from the current frame
-
-                    if (motion_detector.ProcessFrame(bitmap2) > 0.001) // feed the bits to the MD
-                    {
-                        this.Text = "移動";
-                        Graphics g = Graphics.FromImage(bitmap1);
-                        g.DrawRectangle(new Pen(Color.Red, 10), 0, 0, bitmap1.Width - 5, bitmap1.Height - 5);
-
-                        pictureBox1.Image = bitmap1;
-                    }
-                    else
-                    {
-                        this.Text = "無移動";
-                        pictureBox1.Image = bm;
-                    }
-                }
-                else
-                {
-                    pictureBox1.Image = bm;
-
-                }
+                pictureBox1.Image = bm;
             }
             else                //處理後再顯示圖片
             {
@@ -1051,21 +1018,6 @@ namespace vcs_WebCam
         {
             save_image_to_drive();
             //save_image_to_drive30();  30張平均
-        }
-
-        private void bt_motion_detection_Click(object sender, EventArgs e)
-        {
-            if (flag_motion_detection == false)
-            {
-                flag_motion_detection = true;
-                bt_motion_detection.Text = "移動偵測";
-
-            }
-            else
-            {
-                flag_motion_detection = false;
-                bt_motion_detection.Text = "停止移動偵測";
-            }
         }
 
         private void bt_exit_Click(object sender, EventArgs e)

@@ -40,7 +40,6 @@
             this.button8 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.lb_fps = new System.Windows.Forms.Label();
             this.bt_clear = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -165,16 +164,6 @@
             this.pictureBox1.TabIndex = 19;
             this.pictureBox1.TabStop = false;
             // 
-            // lb_fps
-            // 
-            this.lb_fps.AutoSize = true;
-            this.lb_fps.Font = new System.Drawing.Font("Courier New", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_fps.Location = new System.Drawing.Point(1063, 12);
-            this.lb_fps.Name = "lb_fps";
-            this.lb_fps.Size = new System.Drawing.Size(43, 21);
-            this.lb_fps.TabIndex = 20;
-            this.lb_fps.Text = "fps";
-            // 
             // bt_clear
             // 
             this.bt_clear.Location = new System.Drawing.Point(977, 442);
@@ -191,7 +180,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1179, 695);
             this.Controls.Add(this.bt_clear);
-            this.Controls.Add(this.lb_fps);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.button9);
             this.Controls.Add(this.button8);
@@ -210,7 +198,6 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -228,7 +215,6 @@
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Label lb_fps;
         private System.Windows.Forms.Button bt_clear;
     }
 }

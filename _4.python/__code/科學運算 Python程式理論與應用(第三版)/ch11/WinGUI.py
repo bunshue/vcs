@@ -1,8 +1,6 @@
-# -*- coding:utf-8 -*-
-# file: WinGUI.py
-#
 import win32gui
 from win32con import *
+
 # 視窗訊息處理函數
 def WndProc(hwnd, msg, wParam, lParam):
 	if msg == WM_PAINT:

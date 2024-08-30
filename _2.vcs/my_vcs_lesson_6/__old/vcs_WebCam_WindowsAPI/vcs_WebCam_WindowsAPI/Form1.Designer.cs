@@ -1,4 +1,4 @@
-﻿namespace vcs_WebCam3
+﻿namespace vcs_WebCam_WindowsAPI
 {
     partial class Form1
     {

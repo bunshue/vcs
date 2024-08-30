@@ -1,9 +1,7 @@
-# -*- coding:utf-8 -*-
-# file: SimpleDialog.py
-#
 import win32ui							# 匯入Win32ui模組
 import win32con							# 匯入win32con模組 
 from pywin.mfc import dialog					# 匯入pywin.mfc中的dialog模組
+
 class MyDialog(dialog.Dialog):					# 透過繼承dialog.Dialog產生交談視窗類別
 	def OnInitDialog(self):					# 多載起始化函數
 		dialog.Dialog.OnInitDialog(self)		# 呼叫父類別的起始化函數

@@ -1,6 +1,3 @@
-# -*- coding:utf-8 -*-
-# file: pypop.py
-#
 import poplib
 import re
 import tkinter

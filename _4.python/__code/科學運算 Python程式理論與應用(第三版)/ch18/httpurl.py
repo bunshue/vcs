@@ -1,6 +1,3 @@
-# -*- coding:utf-8 -*-
-# file: httpurl.py
-#
 import tkinter
 import urllib.request
 

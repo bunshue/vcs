@@ -1,9 +1,7 @@
-#  -*- coding: utf-8 -*-
-#  file: AutoRuns.py
-#
 # 匯入所需要的模組
 from win32api import *
 from win32con import *
+
 # GetValues函數用於獲得某登錄記錄下所有的項值
 def GetValues(fullname):
     # 把完整的項分割成根項和次基碼兩部分

@@ -23,8 +23,6 @@ namespace vcs_VideoFileWriter
 {
     public partial class Form1 : Form
     {
-        Stopwatch stopwatch;
-
         private const int BORDER = 10;
 
         public Form1()
@@ -41,17 +39,12 @@ namespace vcs_VideoFileWriter
         {
         }
 
-        private void bt_clear_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Clear();
-        }
-
         void show_item_location()
         {
             int x_st = BORDER;
             int y_st = BORDER;
             int dx = 140 + 50;
-            int dy = 50 + 15;
+            int dy = 50 + 10;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -64,15 +57,18 @@ namespace vcs_VideoFileWriter
             button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
 
-            pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            pictureBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
 
-            richTextBox1.Size = new Size(300, 670);
-            richTextBox1.Location = new Point(x_st + dx * 4 + 100, y_st + dy * 0);
-
+            richTextBox1.Size = new Size(300, 640);
+            richTextBox1.Location = new Point(x_st + dx * 3 + 90, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            lb_fps.Text = "";
-            lb_fps.Location = new Point(750, 5);
+            this.Size = new Size(1000, 700);
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
         }
 
         private void button0_Click(object sender, EventArgs e)

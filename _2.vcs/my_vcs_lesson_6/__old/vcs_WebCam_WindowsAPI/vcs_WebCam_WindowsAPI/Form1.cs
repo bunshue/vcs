@@ -12,7 +12,7 @@ using System.Runtime.InteropServices;
 //c#攝像頭編程
 //安裝攝像頭後，一般可以找到一個avicap32.dll文件
 
-namespace vcs_WebCam3
+namespace vcs_WebCam_WindowsAPI
 {
     public partial class Form1 : Form
     {

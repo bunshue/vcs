@@ -24,9 +24,9 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 # 設定負號
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
-'''
-print("------------------------------------------------------------")  # 60個
 
+print("------------------------------------------------------------")  # 60個
+'''
 """ 還沒好
 #通過euclidean_distances計算向量之間的距離
 
@@ -334,182 +334,8 @@ coef_matrix_lasso.apply(lambda x: sum(x.values==0),axis=1)
 """
 
 print('------------------------------------------------------------')	#60個
-'''
-
-from numpy.random import RandomState
-import matplotlib.image as mpimg
-from sklearn.datasets import fetch_olivetti_faces
-from sklearn import decomposition
-
-n_row, n_col = 2, 5
-n_components = n_row * n_col
-image_shape = (64, 64)
-rng = RandomState(0)
-
 print('------------------------------------------------------------')	#60個
 
-#讀取數據集
-#指定下載位置
-olivetti_faces = fetch_olivetti_faces(data_home='data\\',shuffle=True, random_state=rng)
-#olivetti_faces = fetch_olivetti_faces(data_home=data_home)
-
-#未指定下載位置, 下載至 C:/Users/070601/scikit_learn_data/olivetti_py3.pkz
-olivetti_faces = fetch_olivetti_faces()
-
-print("olivetti_faces 資料型態")
-print(olivetti_faces.data.shape)
-#(400, 4096)
-
-#標籤 olivetti_faces.target
-print(olivetti_faces.target.shape)
-#(400,)
-
-#圖像 olivetti_faces.images
-print(olivetti_faces.images.shape)
-#(400, 64, 64)
-
-print('------------------------------------------------------------')	#60個
-
-fig = plt.figure(figsize=(12, 8))
-for i in range(15):
-    ax = plt.subplot2grid((3, 5), (i//5, i%5))    
-    ax.imshow(olivetti_faces.data[i * 10].reshape(64, 64), cmap=plt.cm.gray)
-    ax.axis('off')
-
-plt.show()
-
-sys.exit()
-
-print('------------------------------------------------------------')	#60個
-
-pca = decomposition.PCA()
-pca.fit(olivetti_faces.data)
-
-print(pca.components_.shape)
-
-print('------------------------------------------------------------')	#60個
-
-fig = plt.figure(figsize=(12, 8))
-for i in range(15):
-    ax = plt.subplot2grid((3, 5), (i//5, i%5))
-    
-    ax.imshow(pca.components_[i].reshape(64, 64), cmap=plt.cm.gray)
-    ax.axis('off')
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-# pip install scikit-image
-from skimage.io import imsave
-
-face = olivetti_faces.data[0]
-
-trans = pca.transform(face.reshape(1, -1))
-print(trans.shape)
-for k in range(400):
-    rank_k_approx = trans[:, :k].dot(pca.components_[:k]) + pca.mean_
-    if k % 10 == 0:
-        print('{:>03}'.format(str(k)) + '.jpg', end = "\t")
-        #存圖fail
-        #imsave('{:>03}'.format(str(k)) + '.jpg', rank_k_approx.reshape(64, 64))
-        #imsave('cccc.jpg', rank_k_approx.reshape(64, 64))
-
-print()
-sys.exit()
-
-print('------------------------------------------------------------')	#60個
-
-"""
-import matplotlib as mpl
-from IPython.core.pylabtools import figsize
-
-figsize(2 ,4)
-plt.style.use('ggplot')
-colors = ['#348ABD','#A60628','#7A68A6','#467821','#D55E00','#CC79A7','#56B4E9','#009E73','#F0E442','#0072B2']
-plt.cmap = mpl.colors.ListedColormap(colors)
-# plt.rcParams['savefig.dpi'] = 300
-# plt.rcParams['figure.dpi'] = 300
-
-from sklearn import datasets  
-digits = datasets.load_digits(n_class=10)
-X = digits.data
-y = digits.target
-n_samples, n_features = X.shape
-n_neighbors = 30
-
-print(X.shape)
-
-fig = plt.figure()
-for i in range(10):
-    ax = plt.subplot2grid((1, 10), (0, i))
-    ax.imshow(digits.data[i * 100].reshape(8, 8), cmap=plt.cm.gray)
-    ax.axis('off')
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-def plot_embedding(ax , X):
-    x_min, x_max = np.min(X, 0), np.max(X, 0)
-    X = (X - x_min) / (x_max - x_min)
-    for i in range(X.shape[0]):
-        ax.text(X[i, 0], X[i, 1], str(digits.target[i]),
-                color=colors[int(y[i] % 10)],
-                fontdict={ 'size': 12})
-
-def format_plot(ax,x_label,y_label, title):
-    ax.xaxis.set_major_formatter(plt.NullFormatter())
-    ax.yaxis.set_major_formatter(plt.NullFormatter())
-
-    ax.set_title(title)
-    
-
-#PCA降維
-from sklearn import decomposition,manifold
-X_pca = decomposition.TruncatedSVD(n_components=2).fit_transform(X)
-
-fig, ax = plt.subplots()
-plot_embedding(ax,X_pca)
-format_plot(ax,'','', 'PCA')
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-embedder = manifold.SpectralEmbedding(n_components=2, random_state=0,
-                                      eigen_solver="arpack")
-X_se = embedder.fit_transform(X)
-
-tsne = manifold.TSNE(n_components=2, init='pca', random_state=0)
-
-X_tsne = tsne.fit_transform(X)
-
-mds =  manifold.MDS(n_components=2, n_init=1, max_iter=100)
-X_mds = mds.fit_transform(X)
-
-fig, ax = plt.subplots(2, 2)
-figsize(20,16)
-fig.subplots_adjust(left=0.0625, right=0.95, wspace=0.1)
-
-plot_embedding(ax[0,0],X_pca)
-format_plot(ax[0,0],'','', 'PCA') 
-
-plot_embedding(ax[0,1],X_mds)
-format_plot(ax[0,1],'','', 'MDS')
-
-plot_embedding(ax[1,0],X_se)
-format_plot(ax[1,0],'','', 'Spectral')
-
-plot_embedding(ax[1,1],X_tsne)
-format_plot(ax[1,1],'','', 'tSNE')
-
-plt.show()
-
-
-print('------------------------------------------------------------')	#60個
-
-"""
 from sklearn.feature_extraction.text import  CountVectorizer
 from sklearn.preprocessing import Normalizer
 from sklearn.decomposition import TruncatedSVD
@@ -546,9 +372,11 @@ xs = data_n[:,0]
 ys = data_n[:,1]
 
 plt.figure(figsize=(4,4))
+
 ax = plt.gca()
 ax.set_xlim([-1, 2])
 ax.set_ylim([-1, 2])
+
 plt.scatter(xs, ys)
 plt.xlabel('First principal component')
 plt.ylabel('Second principal component')
@@ -562,25 +390,25 @@ similarity = np.asarray(np.asmatrix(data_n) * np.asmatrix(data_n).T)
 tt = pd.DataFrame(similarity, index = corpus, columns = corpus).head(10)
 print(tt)
 
+import seaborn as sns
 sns.heatmap(similarity, cmap = 'Reds')
-plt.show()
 
+plt.show()
 
 print(pd.DataFrame(model.components_,index=['component_1','component_2'],columns=vectorizer.get_feature_names_out()).T)
 
-
-# 至此 OK
-
+print('------------------------------------------------------------')	#60個
 print('------------------------------------------------------------')	#60個
 
+import seaborn as sns
+
+print('房價')
 #from __future__ import print_function
 
-"""
 import scipy.stats as stats
 
 train = pd.read_csv(u'data/houseprice.csv')
 print(train.head(3))
-
 
 import scipy.stats as st
 
@@ -588,7 +416,6 @@ plt.figure()
 sns.distplot(train['SalePrice'])
 
 plt.show()
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -599,8 +426,6 @@ res = st.probplot(train['SalePrice'], plot=plt)
 
 plt.show()
 
-"""
-
 y = train['SalePrice']
 
 plt.figure(1)
@@ -609,7 +434,6 @@ sns.distplot(y,kde=False)
 plt.figure(2)
 plt.title('Johnson SU')
 sns.distplot(y, kde=True, fit=st.johnsonsu)
-
 
 plt.figure(3)
 plt.title('Normal')
@@ -620,7 +444,6 @@ plt.title('Log Normal')
 sns.distplot(y, kde=False, fit=st.lognorm)
 
 plt.show()
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -634,7 +457,6 @@ res = st.probplot(train['SalePrice'], plot=plt)
 
 plt.show()
 
-"""
 print('------------------------------------------------------------')	#60個
 
 #把房價做對數變換后再看
@@ -651,10 +473,12 @@ res = st.probplot(SalePrice_log, plot=plt)
 print(res)
 
 plt.show()
-"""
 
-
+'''
 print('------------------------------------------------------------')	#60個
+print('------------------------------------------------------------')	#60個
+
+#import seaborn as sns
 
 from scipy.stats import norm
 
@@ -752,7 +576,6 @@ corpus_df = pd.concat((neg_df,pos_df))
 
 tt = corpus_df.head(5)
 print(tt)
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -1069,6 +892,7 @@ plt.plot(y, color = 'r')
 plt.plot(y,alpha=0.3,linewidth=5)
 plt.plot(y_predict, color = 'g')
 plt.plot(y_predict,linewidth= 2)
+
 plt.show()
 
 print(model.coef_)
@@ -1087,6 +911,7 @@ X = np.vstack((subset1, subset2))
 y = np.hstack((np.zeros(num_pos), np.ones(num_pos)))
  
 plt.scatter(X[:, 0], X[:, 1], c=y)
+
 plt.show()
 
 print('------------------------------------------------------------')	#60個
@@ -1221,7 +1046,9 @@ print(np.sum(y_pred.reshape(-1,1)==y.reshape(-1,1))*1.0/len(y))
 from sklearn.metrics import confusion_matrix
 print(confusion_matrix(y,y_pred))
 sns.heatmap(confusion_matrix(y,y_pred))
+
 plt.show()
+
 """
 [[495   5]
 

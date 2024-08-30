@@ -45,6 +45,12 @@ namespace vcs_Picture2Video
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+
             richTextBox1.Size = new Size(400, 560 - 300);
             richTextBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0 + 300);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
@@ -78,7 +84,7 @@ namespace vcs_Picture2Video
             Application.DoEvents();
 
             //vcs最小化錄影
-            string filename = "tmp_pic2video.avi";
+            string filename = "tmp_video_writer0.avi";
             int W = 1600;
             int H = 760;
             int fps = 1;
@@ -123,7 +129,7 @@ namespace vcs_Picture2Video
             Application.DoEvents();
 
             //vcs最小化錄影
-            string filename = "tmp_pic2video.avi";
+            string filename = "tmp_video_writer1.avi";
             int W = 300;
             int H = 300;
             int fps = 1;
@@ -154,7 +160,6 @@ namespace vcs_Picture2Video
             richTextBox1.Text += "製作繪圖影片 OK\n";
 
             pictureBox1.Image = bitmap1;
-
 
         }
     }

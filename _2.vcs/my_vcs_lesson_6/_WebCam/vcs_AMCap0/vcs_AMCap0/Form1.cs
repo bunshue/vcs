@@ -140,7 +140,6 @@ namespace vcs_AMCap0
         private void bt_save_picture_Click(object sender, EventArgs e)
         {
             save_image_file();
-
         }
     }
 }

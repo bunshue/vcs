@@ -34,12 +34,17 @@
             this.button1 = new System.Windows.Forms.Button();
             this.button0 = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(127, 12);
+            this.richTextBox1.Location = new System.Drawing.Point(322, 12);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 8;
@@ -47,7 +52,7 @@
             // 
             // bt_clear
             // 
-            this.bt_clear.Location = new System.Drawing.Point(156, 82);
+            this.bt_clear.Location = new System.Drawing.Point(351, 82);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(71, 30);
             this.bt_clear.TabIndex = 25;
@@ -79,17 +84,67 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(12, 128);
+            this.pictureBox1.Location = new System.Drawing.Point(195, 12);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(100, 100);
             this.pictureBox1.TabIndex = 38;
             this.pictureBox1.TabStop = false;
+            // 
+            // button2
+            // 
+            this.button2.ImageIndex = 0;
+            this.button2.Location = new System.Drawing.Point(12, 137);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(100, 50);
+            this.button2.TabIndex = 39;
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // button3
+            // 
+            this.button3.ImageIndex = 0;
+            this.button3.Location = new System.Drawing.Point(12, 193);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(100, 50);
+            this.button3.TabIndex = 40;
+            this.button3.UseVisualStyleBackColor = true;
+            // 
+            // button4
+            // 
+            this.button4.ImageIndex = 0;
+            this.button4.Location = new System.Drawing.Point(12, 258);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(100, 50);
+            this.button4.TabIndex = 41;
+            this.button4.UseVisualStyleBackColor = true;
+            // 
+            // button5
+            // 
+            this.button5.ImageIndex = 0;
+            this.button5.Location = new System.Drawing.Point(12, 314);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(100, 50);
+            this.button5.TabIndex = 42;
+            this.button5.UseVisualStyleBackColor = true;
+            // 
+            // button6
+            // 
+            this.button6.ImageIndex = 0;
+            this.button6.Location = new System.Drawing.Point(12, 370);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(100, 50);
+            this.button6.TabIndex = 43;
+            this.button6.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(576, 450);
+            this.Controls.Add(this.button6);
+            this.Controls.Add(this.button5);
+            this.Controls.Add(this.button4);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.button0);
             this.Controls.Add(this.button1);
@@ -112,6 +167,11 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button0;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button6;
     }
 }
 

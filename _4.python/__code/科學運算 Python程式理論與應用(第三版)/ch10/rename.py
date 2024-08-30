@@ -1,11 +1,10 @@
-# -*- coding:utf-8 -*-
-# file: rename.py
-#
 import os
+
 perfix = 'Python'						# perfix 為更名後的檔案起始字元
 length = 2 							# length 為除去perfix後，檔名要達到的長度
 base = 1								# 檔名的起始數
 format = 'mdb'							# 檔案的副檔名
+
 # 函數PadLeft將檔名補全到指定長度
 # str 為要補全的字元
 # num 為要達到的長度
@@ -16,6 +15,7 @@ def PadLeft(str , num , padstr):
 	if n >=0 :
 		str=padstr * n + str
 	return str
+
 # 為了避免誤動作，這裡先提示使用者
 print('the files in %s will be renamed' % os.getcwd())
 input = input('press y to continue\n')		# 取得使用者輸入

@@ -1,10 +1,8 @@
-# -*- coding:utf-8 -*-
-# file: UseMenu.py
-#
 import win32ui
 import win32api
 from win32con import *
 from pywin.mfc import window
+
 # 定義視窗類別
 class MyWnd(window.Wnd):
 	def __init__ (self):

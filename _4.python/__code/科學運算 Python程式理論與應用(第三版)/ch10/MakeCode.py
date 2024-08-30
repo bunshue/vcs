@@ -1,9 +1,7 @@
-# -*- coding:utf-8 -*-
-# file: MakeCode.py
-# 
 import os
 import sys
 import datetime
+
 # python指令稿範本
 py = '''#-----------------------------------------------------
 # TO:        

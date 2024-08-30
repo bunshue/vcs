@@ -46,7 +46,6 @@
             this.cb_corner = new System.Windows.Forms.CheckBox();
             this.cb_rgb = new System.Windows.Forms.CheckBox();
             this.bt_open_folder = new System.Windows.Forms.Button();
-            this.bt_motion_detection = new System.Windows.Forms.Button();
             this.bt_record = new System.Windows.Forms.Button();
             this.rb_5X5 = new System.Windows.Forms.RadioButton();
             this.rb_4X4 = new System.Windows.Forms.RadioButton();
@@ -218,7 +217,6 @@
             this.groupBox2.Controls.Add(this.cb_corner);
             this.groupBox2.Controls.Add(this.cb_rgb);
             this.groupBox2.Controls.Add(this.bt_open_folder);
-            this.groupBox2.Controls.Add(this.bt_motion_detection);
             this.groupBox2.Controls.Add(this.bt_record);
             this.groupBox2.Controls.Add(this.rb_5X5);
             this.groupBox2.Controls.Add(this.rb_4X4);
@@ -291,17 +289,6 @@
             this.bt_open_folder.TabIndex = 59;
             this.bt_open_folder.UseVisualStyleBackColor = true;
             this.bt_open_folder.Click += new System.EventHandler(this.bt_open_folder_Click);
-            // 
-            // bt_motion_detection
-            // 
-            this.bt_motion_detection.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_motion_detection.Location = new System.Drawing.Point(188, 80);
-            this.bt_motion_detection.Name = "bt_motion_detection";
-            this.bt_motion_detection.Size = new System.Drawing.Size(75, 30);
-            this.bt_motion_detection.TabIndex = 24;
-            this.bt_motion_detection.Text = "移動偵測";
-            this.bt_motion_detection.UseVisualStyleBackColor = true;
-            this.bt_motion_detection.Click += new System.EventHandler(this.bt_motion_detection_Click);
             // 
             // bt_record
             // 
@@ -735,7 +722,6 @@
         private System.Windows.Forms.RadioButton rb_4X4;
         private System.Windows.Forms.RadioButton rb_3X3;
         private System.Windows.Forms.Button bt_record;
-        private System.Windows.Forms.Button bt_motion_detection;
         private System.Windows.Forms.Button bt_open_folder;
         private System.Windows.Forms.CheckBox cb_rgb;
         private System.Windows.Forms.Timer timer_rgb;

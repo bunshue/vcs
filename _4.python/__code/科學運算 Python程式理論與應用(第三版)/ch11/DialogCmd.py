@@ -1,9 +1,7 @@
-# -*- coding:utf-8 -*-
-# file: DialogCmd.py
-#
 import win32ui								# 匯入win32ui模組
 import win32con 							# 匯入win32con模組
 from pywin.mfc import dialog						# 從pywin.mfc匯入dialog
+
 class MyDialog(dialog.Dialog):						# 透過繼承dialog.Dialog產生交談視窗類別
 	def OnInitDialog(self):						# 多載交談視窗起始化方法
 		dialog.Dialog.OnInitDialog(self)			# 呼叫父類別的交談視窗起始化方法

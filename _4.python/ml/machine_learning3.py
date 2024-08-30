@@ -3,8 +3,8 @@ print("------------------------------------------------------------")  # 60個
 # 共同
 import os
 import sys
-import math
 import time
+import math
 import random
 import numpy as np
 import pandas as pd
@@ -19,7 +19,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 #學習分類
 from sklearn.datasets import load_breast_cancer
 data = load_breast_cancer()
@@ -227,22 +227,8 @@ y_pred = model.predict(X_test)
 print(accuracy_score(y_pred, y_test)) # 評価
 
 print('------------------------------------------------------------')	#60個
+'''
 
-from sklearn.datasets import load_digits
-from sklearn.neural_network import MLPClassifier
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score
-
-# データ読み込み
-data = load_digits()
-X = data.images.reshape(len(data.images), -1)
-y = data.target
-
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
-model = model = MLPClassifier(hidden_layer_sizes=(16, )) 
-model.fit(X_train, y_train) # 學習
-y_pred = model.predict(X_test) 
-print(accuracy_score(y_pred, y_test)) # 評価
 
 print('------------------------------------------------------------')	#60個
 

@@ -1,6 +1,3 @@
-# -*- coding:utf-8 -*-
-# file: pyftp.py
-#
 from ftplib import FTP  # 從ftplib模組中匯入FTP
 
 bufsize = 1024  # 設定緩沖區大小

@@ -1,8 +1,6 @@
-#  -*- coding: utf-8 -*-
-#  file: Add2AutoRun.py
-#
 import win32api
 import win32con
+
 # 要加入的項值名稱
 name = 'SetIE'
 # 要加入的Python指令稿的路徑

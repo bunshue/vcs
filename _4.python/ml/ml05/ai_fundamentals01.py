@@ -25,79 +25,6 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-'''
-from sklearn import datasets
-
-digits = datasets.load_digits() # 加载数据
-
-# 把数据所代表的图片显示出来
-images_and_labels = list(zip(digits.images, digits.target))
-plt.figure(figsize=(8, 6))
-for index, (image, label) in enumerate(images_and_labels[:8]):
-    plt.subplot(2, 4, index + 1)
-    plt.axis('off')
-    plt.imshow(image, cmap=plt.cm.gray_r, interpolation='nearest')
-    plt.title('Digit: %i' % label, fontsize=20)
-
-plt.show()
-
-print("------------------------------")  # 30個
-
-print("shape of raw image data: {0}".format(digits.images.shape))
-print("shape of data: {0}".format(digits.data.shape))
-
-# 把数据分成训练数据集和测试数据集
-from sklearn.model_selection import train_test_split
-
-Xtrain, Xtest, Ytrain, Ytest = train_test_split(digits.data, digits.target, test_size=0.20, random_state=2)
-
-# 使用支持向量机来训练模型
-from sklearn import svm
-
-clf = svm.SVC(gamma=0.001, C=100., probability=True)
-clf.fit(Xtrain, Ytrain)
-
-# 评估模型的准确度
-from sklearn.metrics import accuracy_score
-Ypred = clf.predict(Xtest)
-print(accuracy_score(Ytest, Ypred))
-
-print(clf.score(Xtest, Ytest))
-
-# 查看预测的情况
-fig, axes = plt.subplots(4, 4, figsize=(8, 8))
-fig.subplots_adjust(hspace=0.1, wspace=0.1)
-
-for i, ax in enumerate(axes.flat):
-    ax.imshow(Xtest[i].reshape(8, 8), cmap=plt.cm.gray_r, interpolation='nearest')
-    ax.text(0.05, 0.05, str(Ypred[i]), fontsize=32,
-            transform=ax.transAxes,
-            color='green' if Ypred[i] == Ytest[i] else 'red')
-    ax.text(0.8, 0.05, str(Ytest[i]), fontsize=32,
-            transform=ax.transAxes,
-            color='black')
-    ax.set_xticks([])
-    ax.set_yticks([])
-
-plt.show()
-
-print("------------------------------")  # 30個
-
-print('Xtest[4] 的各种可能性')
-print(clf.predict_proba(Xtest[4].reshape(1, -1)))
-
-""" no joblib
-print('保存模型参数')
-from sklearn.externals import joblib
-joblib.dump(clf, 'digits_svm.pkl')
-
-print('导入模型参数，直接进行预测')
-clf = joblib.load('digits_svm.pkl')
-Ypred = clf.predict(Xtest)
-print(clf.score(Xtest, Ytest))
-"""
-
-print("------------------------------------------------------------")  # 60個
 
 N = 200
 
@@ -1203,7 +1130,7 @@ for i in range(len(degrees)):
 print('耗時 : {0:.6f}'.format(time.time()-start))
 
 plt.show()
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 from sklearn.datasets import load_files
@@ -1405,190 +1332,6 @@ plt.annotate(r'projected data',
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
-
-import logging
-from sklearn.datasets import fetch_olivetti_faces
-
-logging.basicConfig(level=logging.INFO, format='%(asctime)s %(message)s')
-
-data_home='datasets/'
-
-logging.info('Start to load dataset')
-olivetti_faces = fetch_olivetti_faces(data_home=data_home)
-logging.info('Done with load dataset')
-
-print("------------------------------")  # 30個
-
-X = olivetti_faces.data
-y = olivetti_faces.target
-targets = np.unique(olivetti_faces.target)
-target_names = np.array(["c%d" % t for t in targets])
-n_targets = target_names.shape[0]
-n_samples, h, w = olivetti_faces.images.shape
-print('Sample count: {}\nTarget count: {}'.format(n_samples, n_targets))
-print('Image size: {}x{}\nDataset shape: {}\n'.format(w, h, X.shape))
-
-print("------------------------------")  # 30個
-
-def plot_gallery(images, titles, h, w, n_row=2, n_col=5):
-    #显示图片阵列
-    plt.figure(figsize=(2 * n_col, 2.2 * n_row), dpi=144)
-    plt.subplots_adjust(bottom=0, left=.01, right=.99, top=.90, hspace=.01)
-    for i in range(n_row * n_col):
-        plt.subplot(n_row, n_col, i + 1)
-        plt.imshow(images[i].reshape((h, w)), cmap=plt.cm.gray)
-        plt.title(titles[i])
-        plt.axis('off')
-
-n_row = 2
-n_col = 6
-
-sample_images = None
-sample_titles = []
-for i in range(n_targets):
-    people_images = X[y==i]
-    people_sample_index = np.random.randint(0, people_images.shape[0], 1)
-    people_sample_image = people_images[people_sample_index, :]
-    if sample_images is not None:
-        sample_images = np.concatenate((sample_images, people_sample_image), axis=0)
-    else:
-        sample_images = people_sample_image
-    sample_titles.append(target_names[i])
-
-plot_gallery(sample_images, sample_titles, h, w, n_row, n_col)
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-from sklearn.model_selection import train_test_split
-
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=4)
-
-
-from sklearn.svm import SVC
-
-start = time.time()
-print('Fitting train datasets ...')
-clf = SVC(class_weight='balanced')
-clf.fit(X_train, y_train)
-print('Done in {0:.2f}s'.format(time.time()-start))
-
-start = time.time()
-print("Predicting test dataset ...")
-y_pred = clf.predict(X_test)
-print('Done in {0:.2f}s'.format(time.time()-start))
-
-from sklearn.metrics import confusion_matrix
-
-cm = confusion_matrix(y_test, y_pred, labels=range(n_targets))
-print("confusion matrix:\n")
-
-np.set_printoptions(threshold=sys.maxsize)
-print(cm)
-
-""" not match
-from sklearn.metrics import classification_report
-
-print(classification_report(y_test, y_pred, target_names=target_names))
-"""
-print("------------------------------------------------------------")  # 60個
-
-from sklearn.decomposition import PCA
-
-print("Exploring explained variance ratio for dataset ...")
-candidate_components = range(10, 300, 30)
-explained_ratios = []
-start = time.time()
-for c in candidate_components:
-    pca = PCA(n_components=c)
-    X_pca = pca.fit_transform(X)
-    explained_ratios.append(np.sum(pca.explained_variance_ratio_))
-print('Done in {0:.2f}s'.format(time.time()-start))
-
-print("------------------------------")  # 30個
-
-plt.figure(figsize=(10, 6), dpi=144)
-plt.grid()
-plt.plot(candidate_components, explained_ratios)
-plt.xlabel('Number of PCA Components')
-plt.ylabel('Explained Variance Ratio')
-plt.title('Explained variance ratio for PCA')
-plt.yticks(np.arange(0.5, 1.05, .05))
-plt.xticks(np.arange(0, 300, 20))
-
-plt.show()
-
-print("------------------------------")  # 30個
-
-def title_prefix(prefix, title):
-    return "{}: {}".format(prefix, title)
-
-n_row = 1
-n_col = 5
-
-sample_images = sample_images[0:5]
-sample_titles = sample_titles[0:5]
-
-plotting_images = sample_images
-plotting_titles = [title_prefix('orig', t) for t in sample_titles]
-candidate_components = [140, 75, 37, 19, 8]
-for c in candidate_components:
-    print("Fitting and projecting on PCA(n_components={}) ...".format(c))
-    start = time.time()
-    pca = PCA(n_components=c)
-    pca.fit(X)
-    X_sample_pca = pca.transform(sample_images)
-    X_sample_inv = pca.inverse_transform(X_sample_pca)
-    plotting_images = np.concatenate((plotting_images, X_sample_inv), axis=0)
-    sample_title_pca = [title_prefix('{}'.format(c), t) for t in sample_titles]
-    plotting_titles = np.concatenate((plotting_titles, sample_title_pca), axis=0)
-    print("Done in {0:.2f}s".format(time.time() - start))
-
-print("Plotting sample image with different number of PCA conpoments ...")
-plot_gallery(plotting_images, plotting_titles, h, w,
-    n_row * (len(candidate_components) + 1), n_col)
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-n_components = 140
-
-print("Fitting PCA by using training data ...")
-start = time.time()
-pca = PCA(n_components=n_components, svd_solver='randomized', whiten=True).fit(X_train)
-print("Done in {0:.2f}s".format(time.time() - start))
-
-print("Projecting input data for PCA ...")
-start = time.time()
-X_train_pca = pca.transform(X_train)
-X_test_pca = pca.transform(X_test)
-print("Done in {0:.2f}s".format(time.time() - start))
-
-
-from sklearn.model_selection import GridSearchCV
-
-print("Searching the best parameters for SVC ...")
-param_grid = {'C': [1, 5, 10, 50, 100],
-              'gamma': [0.0001, 0.0005, 0.001, 0.005, 0.01]}
-clf = GridSearchCV(SVC(kernel='rbf', class_weight='balanced'), param_grid, verbose=2, n_jobs=4)
-clf = clf.fit(X_train_pca, y_train)
-print("Best parameters found by grid search:")
-print(clf.best_params_)
-
-start = time.time()
-print("Predict test dataset ...")
-y_pred = clf.best_estimator_.predict(X_test_pca)
-cm = confusion_matrix(y_test, y_pred, labels=range(n_targets))
-print("Done in {0:.2f}.\n".format(time.time()-start))
-print("confusion matrix:")
-np.set_printoptions(threshold=sys.maxsize)
-print(cm)
-
-from sklearn.metrics import classification_report
-print(classification_report(y_test, y_pred))
-
 print("------------------------------------------------------------")  # 60個
 
 from sklearn.datasets import make_blobs
@@ -1707,7 +1450,7 @@ print("n_samples: %d, n_features: %d" % X.shape)
 print("number of non-zero features in sample [{0}]: {1}".format(
     docs.filenames[0], X[0].getnnz()))
 print("done in {0} seconds".format(time() - t))
-"""
+
 print("------------------------------------------------------------")  # 60個
 
 from sklearn.cluster import KMeans
@@ -1732,7 +1475,7 @@ print(cc)
 cc = docs.filenames[1000:1010]
 print(cc)
 
-print("------------------------------------------------------------")  # 60個
+print('------------------------------')	#30個
 
 #from __future__ import print_function
 
@@ -1754,7 +1497,7 @@ print(cc)
 a = np.array([10, 30, 20, 40])
 cc = a.argsort()[::-1]
 print(cc)
-
+"""
 print("------------------------------------------------------------")  # 60個
 
 from sklearn import metrics
@@ -1822,7 +1565,7 @@ label_true = [1, 1, 2, 2]
 label_pred = [1, 2, 1, 2]
 print("V-measure score for each class assign to two class: %.3f"
       % metrics.v_measure_score(label_true, label_pred))
-
+"""
 from sklearn import metrics
 
 labels = docs.target
@@ -1833,7 +1576,7 @@ print("Adjusted Rand-Index: %.3f"
       % metrics.adjusted_rand_score(labels, kmean.labels_))
 print("Silhouette Coefficient: %0.3f"
       % metrics.silhouette_score(X, kmean.labels_, sample_size=1000))
-
+"""
 print("------------------------------------------------------------")  # 60個
 
 
