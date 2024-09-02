@@ -23,19 +23,16 @@ namespace vcs_WebCam0
 
         //參考/右鍵/加入參考/瀏覽AForge.Video.dll和AForge.Video.DirectShow.dll
 
-
         private FilterInfoCollection USBWebcams = null;
+        public VideoCaptureDevice Cam = null;
 
         private const int BORDER = 10;
-        private const int W = 640;
-        private const int H = 480;
-        private const int W_richTextBox1 = W/2;
-        private const int H_richTextBox1 = H - 50;
-
-        //int webcam_count = 0;
-        
-        //public FilterInfoCollection USBWebcams = null;
-        public VideoCaptureDevice Cam = null;
+        private const int W_pictureBox1 = 640;
+        private const int H_pictureBox1 = 480;
+        private const int W_groupBox1 = W_pictureBox1;
+        private const int H_groupBox1 = 60;
+        private const int W_richTextBox1 = 360;
+        private const int H_richTextBox1 = H_pictureBox1 + H_groupBox1 + BORDER;
 
         public Form1()
         {
@@ -54,20 +51,25 @@ namespace vcs_WebCam0
 
         void show_item_location()
         {
-            pictureBox1.Size = new Size(W, H);
+            pictureBox1.Size = new Size(W_pictureBox1, H_pictureBox1);
             pictureBox1.Location = new Point(BORDER, BORDER);
 
-            richTextBox1.Location = new Point(BORDER+W+BORDER, BORDER + 50);
+            richTextBox1.Location = new Point(BORDER + W_pictureBox1 + BORDER, BORDER);
             richTextBox1.Size = new Size(W_richTextBox1, H_richTextBox1);
 
             int dx = 80;
-            button1.Location = new Point(BORDER + W + BORDER + dx * 0, BORDER);
-            button2.Location = new Point(BORDER + W + BORDER + dx * 1, BORDER);
-            button3.Location = new Point(BORDER + W + BORDER + dx * 2, BORDER);
-            lb_fps.Location = new Point(BORDER + W + BORDER + dx * 3, BORDER+BORDER/2);
+            int offset_y = 3;
+            button0.Location = new Point(BORDER + dx * 0, BORDER + offset_y);
+            button1.Location = new Point(BORDER + dx * 1, BORDER + offset_y);
+            button2.Location = new Point(BORDER + dx * 2, BORDER + offset_y);
+            button3.Location = new Point(BORDER + dx * 3, BORDER + offset_y);
+            lb_fps.Location = new Point(BORDER + dx * 4, BORDER + BORDER);
+
+            groupBox1.Size = new Size(W_groupBox1, H_groupBox1);
+            groupBox1.Location = new Point(BORDER + dx * 0, BORDER + H_pictureBox1 + BORDER);
 
             this.Text = "";
-            this.ClientSize = new Size(BORDER + W + BORDER + W/2 + BORDER, BORDER + H + BORDER);
+            this.ClientSize = new Size(BORDER + W_pictureBox1 + BORDER + W_richTextBox1 + BORDER, BORDER + H_pictureBox1 + BORDER + H_groupBox1 + BORDER);
         }
 
         void Init_WebcamSetup()
@@ -146,7 +148,7 @@ namespace vcs_WebCam0
             }
             catch (Exception ex)
             {
-                //richTextBox1.Text += "xxx錯誤訊息n : " + ex.Message + "\n";
+                richTextBox1.Text += "xxx錯誤訊息n : " + ex.Message + "\n";
             }
 
             Graphics g = Graphics.FromImage(bm);
@@ -160,7 +162,7 @@ namespace vcs_WebCam0
             }
             catch (Exception ex)
             {
-                //richTextBox1.Text += "xxx錯誤訊息m : " + ex.Message + "\n";
+                richTextBox1.Text += "xxx錯誤訊息m : " + ex.Message + "\n";
                 GC.Collect();       //回收資源
                 return;
             }
@@ -179,7 +181,7 @@ namespace vcs_WebCam0
             }
             catch (Exception ex)
             {
-                //richTextBox1.Text += "xxx錯誤訊息a : " + ex.Message + "\n";
+                richTextBox1.Text += "xxx錯誤訊息a : " + ex.Message + "\n";
             }
             GC.Collect();       //回收資源
         }
@@ -202,21 +204,25 @@ namespace vcs_WebCam0
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void button0_Click(object sender, EventArgs e)
         {
             Init_WebcamSetup();
             Start_Webcam();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
             Stop_Webcam();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
 
         }
+
     }
 }
-
