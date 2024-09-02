@@ -30,7 +30,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 # 共同參數
 x = np.linspace(0, 2 * np.pi, 30)
 y = np.sin(x)
@@ -218,8 +218,41 @@ sns.histplot(np.random.binomial(n=5, p=0.75, size=1000), kde=False)
 plt.title("二項式分布 Binomial")
 
 plt.show()
+'''
+print("------------------------------------------------------------")  # 60個
+
+
+data = pd.read_csv("_data/president_heights.csv")
+print(data.head())
+
+height = np.array(data["height(cm)"])
+print(height)
+
+print("Mean of heights =", height.mean())
+print("Standard Deviation of height =", height.std())
+print("Minimum height =", height.min())
+print("Maximum height =", height.max())
+
+print("25th percentile =", np.percentile(height, 25))
+print("Median =", np.median(height))
+print("75th percentile =", np.percentile(height, 75))
+
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+sns.set()
+
+plt.hist(height)
+plt.title("Height Distribution of Presidents of USA")
+plt.xlabel("height(cm)")
+plt.ylabel("Number")
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個
 

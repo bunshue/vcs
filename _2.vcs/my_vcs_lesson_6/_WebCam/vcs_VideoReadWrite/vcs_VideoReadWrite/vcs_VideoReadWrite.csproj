@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{8C968FB9-E813-4734-959A-66E1D1A021AD}</ProjectGuid>
+    <ProjectGuid>{699D842B-DEAE-4DB0-B405-31B9AF494783}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>vcs_VideoFileWriter</RootNamespace>
-    <AssemblyName>vcs_VideoFileWriter</AssemblyName>
+    <RootNamespace>vcs_VideoReadWrite</RootNamespace>
+    <AssemblyName>vcs_VideoReadWrite</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
@@ -36,16 +36,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AForge.Video">
-      <HintPath>dll\AForge.Video.dll</HintPath>
+      <HintPath>dll1\AForge.Video.dll</HintPath>
     </Reference>
     <Reference Include="AForge.Video.DirectShow">
-      <HintPath>dll\AForge.Video.DirectShow.dll</HintPath>
+      <HintPath>dll1\AForge.Video.DirectShow.dll</HintPath>
     </Reference>
     <Reference Include="AForge.Video.FFMPEG">
-      <HintPath>dll\AForge.Video.FFMPEG.dll</HintPath>
-    </Reference>
-    <Reference Include="AviFile">
-      <HintPath>dll\AviFile.dll</HintPath>
+      <HintPath>dll1\AForge.Video.FFMPEG.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

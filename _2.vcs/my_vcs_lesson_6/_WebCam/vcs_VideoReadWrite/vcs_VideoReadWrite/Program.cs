@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_VideoFileWriter
+namespace vcs_VideoReadWrite
 {
     static class Program
     {
