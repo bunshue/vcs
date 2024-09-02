@@ -79,19 +79,19 @@ print('------------------------------------------------------------')	#60個
 
 from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
 
-text = ["小贝来到北京清华大学",
-        "小花来到了网易杭研大厦",
-        "小明硕士毕业于中国科学院",
-        "小明爱北京小明爱北京天安门"
+text = ["小貝來到北京清華大學",
+        "小花來到了網易杭研大廈",
+        "小明碩士畢業于中國科學院",
+        "小明愛北京小明愛北京天安門"
         ]
                
-corpus = ["小贝 来到 北京 清华大学",
-          "小花 来到 了 网易 杭研 大厦",
-          "小明 硕士 毕业 于 中国 科学院",
-          "小明 爱 北京 小明 爱 北京 天安门"
+corpus = ["小貝 來到 北京 清華大學",
+          "小花 來到 了 網易 杭研 大廈",
+          "小明 碩士 畢業 于 中國 科學院",
+          "小明 愛 北京 小明 愛 北京 天安門"
           ]
 
-print('二值化、词频')
+print('二值化、詞頻')
 vectorizer = CountVectorizer(min_df = 1, binary = True) #Transformer
 data = vectorizer.fit_transform(corpus)
 features = vectorizer.get_feature_names_out()
@@ -589,7 +589,7 @@ classifier = MultinomialNB()
 targets = corpus_df['label'].values
 classifier.fit(counts, targets)
 
-examples = [u'这 本 书 真差', u"这个 电影 还 可 以"]
+examples = [u'這 本 書 真差', u"這個 電影 還 可 以"]
 example_counts = cv.transform(examples)
 predictions = classifier.predict(example_counts)
 
@@ -650,7 +650,7 @@ print(p_x_given_y_1('i100','female'))
 print('------------------------------------------------------------')	#60個
 
 
-#计算先验
+#計算先驗
 # Number of i100
 n_i100 = data['Team'][data['Team'] == 'i100'].count()
 
@@ -695,7 +695,7 @@ print(data_variance)
 print('------------------------------------------------------------')	#60個
 
 
-#计算我们需要的均值方差
+#計算我們需要的均值方差
 # Means for i100
 i100_height_mean = data_means['Height'][data_means.index == 'i100'].values[0]
 i100_weight_mean = data_means['Weight'][data_means.index == 'i100'].values[0]
@@ -721,7 +721,7 @@ i500_size_variance = data_variance['Size'][data_variance.index == 'i500'].values
 print('------------------------------------------------------------')	#60個
 
 
-#接下来，我们写个公式来计算高斯分布的概率
+#接下來，我們寫個公式來計算高斯分布的概率
 
 def p_x_given_y_2(x, mean_y, variance_y):
 
@@ -944,7 +944,7 @@ print(confusion_matrix(y,y_pred))
 
 print('------------------------------------------------------------')	#60個
 
-#绘制分类边界
+#繪制分類邊界
 
 def plot_decision_boundary(pred_func, X, y, title):
     # Set min and max values and give it some padding
@@ -1055,7 +1055,7 @@ plt.show()
  [  5 495]]
 """
 
-#绘制分类边界
+#繪制分類邊界
 plt.style.use('bmh')
 def plot_decision_boundary(pred_func, X, y, title):
     # Set min and max values and give it some padding
@@ -1136,21 +1136,21 @@ print(accu)
 print('------------------------------------------------------------')	#60個
 
 """
-探索性数据分析（EDA）
+探索性數據分析（EDA）
 
-EDA指对已有的数据用可视化等手段探索数据的结构和规律的一种数据分析方法，其目的是最大化对数据的直觉，完成这个事情的方法是结合统计学的图形以各种形式展现出来。
+EDA指對已有的數據用可視化等手段探索數據的結構和規律的一種數據分析方法，其目的是最大化對數據的直覺，完成這個事情的方法是結合統計學的圖形以各種形式展現出來。
 
-在深入机器学习或统计建模之前，EDA是一个重要的步骤，这是因为它提供了为现有问题开发适当模型并正确解释其结果所需的来龙去脉。
+在深入機器學習或統計建模之前，EDA是一個重要的步驟，這是因為它提供了為現有問題開發適當模型并正確解釋其結果所需的來龍去脈。
 
-EDA通常涉及以下几种方法的组合：
+EDA通常涉及以下幾種方法的組合：
 
-.原始数据集中每个字段的单变量可视化和汇总统计
+.原始數據集中每個字段的單變量可視化和匯總統計
 
-.数据集中每个变量与感兴趣目标变量之间的关系的双变量可视化和汇总统计
+.數據集中每個變量與感興趣目標變量之間的關系的雙變量可視化和匯總統計
 
-.多元可视化以了解数据中不同字段之间的交互作用
+.多元可視化以了解數據中不同字段之間的交互作用
 
-.降维以了解数据,通过将数据折叠成几个小数据点让观察值聚类成有区别的小组，可以更容易地识别行为模式
+.降維以了解數據,通過將數據折疊成幾個小數據點讓觀察值聚類成有區別的小組，可以更容易地識別行為模式
 
 """
 
@@ -1174,23 +1174,23 @@ print(train.head(3))
 
 print('------------------------------------------------------------')	#60個
 
-print(u'训练数据集基本信息')
+print(u'訓練數據集基本信息')
 
 # print(train.info())
 
 print(train.shape)
 
-#训练数据集基本信息
+#訓練數據集基本信息
 #(1460, 81)
 
-#1.1 首先，区分出数据中的数值型变量和类别型变量
-#数值型变量
+#1.1 首先，區分出數據中的數值型變量和類別型變量
+#數值型變量
 
 quantitative = [f for f in train.columns if train.dtypes[f] != 'object']
 quantitative.remove('SalePrice')
 quantitative.remove('Id')
 
-#类别型变量
+#類別型變量
 
 qualitative = [f for f in train.columns if train.dtypes[f] == 'object']
 
@@ -1201,25 +1201,25 @@ for col in ccs:
     if not col in qualitative:
         qualitative.append(col)
 
-print(u'训练集样本数量：{}'.format(train.shape[0]))
-print(u'数值型变量共有：{}'.format(len(quantitative)))
-print(u'类别型变量共有：{}'.format(len(qualitative)))
+print(u'訓練集樣本數量：{}'.format(train.shape[0]))
+print(u'數值型變量共有：{}'.format(len(quantitative)))
+print(u'類別型變量共有：{}'.format(len(qualitative)))
 
 """
-训练集样本数量：1460
-数值型变量共有：29
-类别型变量共有：50
+訓練集樣本數量：1460
+數值型變量共有：29
+類別型變量共有：50
 """
-#1.2查看缺失值的分布情况
+#1.2查看缺失值的分布情況
 
 missing = train.isnull().sum()/train.shape[0]
 print(missing.head(3))
 
 missing = missing[missing > 0]
-print(u'有缺失值的变量共有：{}'.format(len(missing)))
+print(u'有缺失值的變量共有：{}'.format(len(missing)))
 
 missing.sort_values(inplace=True)
-print(u'缺失率超过50%的有{}个'.format(len(missing[missing>=0.5])))
+print(u'缺失率超過50%的有{}個'.format(len(missing[missing>=0.5])))
 
 print(missing[missing>=0.5])
 
@@ -1231,8 +1231,8 @@ Id            0.0
 MSSubClass    0.0
 MSZoning      0.0
 dtype: float64
-有缺失值的变量共有：19
-缺失率超过50%的有4个
+有缺失值的變量共有：19
+缺失率超過50%的有4個
 Fence          0.807534
 Alley          0.937671
 MiscFeature    0.963014
@@ -1240,7 +1240,7 @@ PoolQC         0.995205
 dtype: float64
 """
 
-#可以直接删除这几个变量
+#可以直接刪除這幾個變量
 
 missing_cols = missing[missing>=0.5].index.tolist()
 
@@ -1250,14 +1250,14 @@ for col in missing_cols :
     if col in qualitative:
         qualitative.remove(col)
 
-print(u'数值型变量共有：{}'.format(len(quantitative)))
-print(u'类别型变量共有：{}'.format(len(qualitative)))        
+print(u'數值型變量共有：{}'.format(len(quantitative)))
+print(u'類別型變量共有：{}'.format(len(qualitative)))        
 
-#数值型变量共有：29
-#类别型变量共有：46
+#數值型變量共有：29
+#類別型變量共有：46
 
-#2 数值型变量
-#2.1 查看目标变量saleprice是否服从正态分布
+#2 數值型變量
+#2.1 查看目標變量saleprice是否服從正態分布
 
 import scipy.stats as st
 
@@ -1282,14 +1282,14 @@ plt.title('Log Normal')
 sns.distplot(y, kde=False, fit=st.lognorm)
 plt.show()
 
-#另一种查看是否服从正态分布的可视化方法
+#另一種查看是否服從正態分布的可視化方法
 sns.distplot(train['SalePrice'], fit=st.norm)
 plt.show()
 
 res = st.probplot(train['SalePrice'], plot=plt)
 plt.show()
 
-#把房价做对数变换后再看
+#把房價做對數變換后再看
 SalePrice_log = np.log(train['SalePrice'])
 #transformed histogram and normal probability plot
 sns.distplot(SalePrice_log, fit=st.norm)
@@ -1309,9 +1309,9 @@ plt.show()
 ,          13.5211395 ,  13.53447303])),
 , (0.39826223081618845, 12.024050901109383, 0.99537614756366088))
 
-显然，房价本身不服从正态分布，是不能直接用来做回归建模的。但是经过对数转换之后，就好了很多。
-对于其它的数值型变量，也同样要做分布的正态性检验.
-检验方法就用：夏皮罗-威尔克(Shapiro-Wilk)法检验数据正态性,即W检验。
+顯然，房價本身不服從正態分布，是不能直接用來做回歸建模的。但是經過對數轉換之后，就好了很多。
+對于其它的數值型變量，也同樣要做分布的正態性檢驗.
+檢驗方法就用：夏皮羅-威爾克(Shapiro-Wilk)法檢驗數據正態性,即W檢驗。
 """
 
 check_normality = lambda x: stats.shapiro(x.fillna(0))[1] < 0.01
@@ -1331,8 +1331,8 @@ LotArea         True
 dtype: bool
 True
 
-可以发现所有的数值型变量都没能通过正态性分布检验，都需要做转换。
-我们可以把所有的数值型变量的分布曲线都画出来，从可视化角度进一步验证这个判断
+可以發現所有的數值型變量都沒能通過正態性分布檢驗，都需要做轉換。
+我們可以把所有的數值型變量的分布曲線都畫出來，從可視化角度進一步驗證這個判斷
 """
 
 f = pd.melt(train, value_vars=quantitative)
@@ -1348,9 +1348,9 @@ print(df)
 pd.melt(df, id_vars=['A'], value_vars=['B', 'C'])
 print(df)
 
-#看起来TotalBsmtSF, KitchenAbvGr, LotFrontage, LotArea这几个变量似乎更适合做些变型，以使其服从正态分布。
-#2.2 异常值分析
-#对saleprice做标准化后再看
+#看起來TotalBsmtSF, KitchenAbvGr, LotFrontage, LotArea這幾個變量似乎更適合做些變型，以使其服從正態分布。
+#2.2 異常值分析
+#對saleprice做標準化后再看
 
 saleprice_scaled = StandardScaler().fit_transform(train['SalePrice'][:,np.newaxis]);
 low_range = saleprice_scaled[saleprice_scaled[:,0].argsort()][:10]
@@ -1414,10 +1414,10 @@ d:\Anaconda2\lib\site-packages\sklearnutils\validation.py:420: DataConversionWar
   warnings.warn(msg, DataConversionWarning)
 """
 
-#低房价并没有太多异常，但是高房价有两个超过了7，虽然不一定是异常值，但是要小心
-#2.3 查看数值型变量和待预测变量之间的相关性
-#常用pearson相关系数，它是用有前提条件，并且是有局限的——判断线性相关，非线性相关它是无能为力的。
-#Spearman相关系数 vs pearson相关系数的优点：对于数据分布没有要求。也叫秩和。
+#低房價并沒有太多異常，但是高房價有兩個超過了7，雖然不一定是異常值，但是要小心
+#2.3 查看數值型變量和待預測變量之間的相關性
+#常用pearson相關系數，它是用有前提條件，并且是有局限的——判斷線性相關，非線性相關它是無能為力的。
+#Spearman相關系數 vs pearson相關系數的優點：對于數據分布沒有要求。也叫秩和。
 
 def spearman(frame, features):
     spr = pd.DataFrame()
@@ -1434,26 +1434,26 @@ spr = spearman(train, features)
 plt.show()
 
 
-#删除相关系数小于0.3的变量
+#刪除相關系數小于0.3的變量
 
-print(u'数值型变量共有：{}'.format(len(quantitative)))
-print(u'类别型变量共有：{}'.format(len(qualitative))) 
+print(u'數值型變量共有：{}'.format(len(quantitative)))
+print(u'類別型變量共有：{}'.format(len(qualitative))) 
 
 for col in spr[abs(spr['spearman'])<0.3].feature:
     if col in quantitative:
         quantitative.remove(col)
 
-print(u'数值型变量共有：{}'.format(len(quantitative)))
-print(u'类别型变量共有：{}'.format(len(qualitative))) 
+print(u'數值型變量共有：{}'.format(len(quantitative)))
+print(u'類別型變量共有：{}'.format(len(qualitative))) 
 
 """
-数值型变量共有：29
-类别型变量共有：46
-数值型变量共有：12
-类别型变量共有：46
+數值型變量共有：29
+類別型變量共有：46
+數值型變量共有：12
+類別型變量共有：46
 """
 
-#2.4 用散点图观察数值型变量之间的关系
+#2.4 用散點圖觀察數值型變量之間的關系
 
 #scatterplot
 
@@ -1489,11 +1489,11 @@ sns.pairplot(train[cols2].fillna(0.), height = 2.5)
 plt.show()
 
 """
-3.类别型变量
+3.類別型變量
 
-对于类别型的变量，要观察目标变量（sale_price）在类别的各个取值上的分布情况；用分组箱线图
+對于類別型的變量，要觀察目標變量（sale_price）在類別的各個取值上的分布情況；用分組箱線圖
 
-对于类别型变量的缺失值，不再用0填充，而是用一个特殊的值'Missing'填充。
+對于類別型變量的缺失值，不再用0填充，而是用一個特殊的值'Missing'填充。
 """
 
 for c in qualitative:
@@ -1514,9 +1514,9 @@ g = g.map(boxplot, "value", "SalePrice")
 plt.show()
 
 """
-看起来像LotConfig、LandSlope这样的变量，对于房价的影响似乎不大。 Neighborhood对房价有影响。 然后每个类别的不同子类之间看起来似乎也有差别。 overallQual的值太多。
+看起來像LotConfig、LandSlope這樣的變量，對于房價的影響似乎不大。 Neighborhood對房價有影響。 然后每個類別的不同子類之間看起來似乎也有差別。 overallQual的值太多。
 
-具体到一个分类指标和数值型变量之间的相关关系，我们可以用方差分析进行检查。
+具體到一個分類指標和數值型變量之間的相關關系，我們可以用方差分析進行檢查。
 3.2 方差分析
 """
 
@@ -1542,16 +1542,16 @@ plt.show()
 
 
 """
-这里我们用了方差分析，来看每一个类别变量和预测变量Sale_price之间是否有相关关系。
+這里我們用了方差分析，來看每一個類別變量和預測變量Sale_price之間是否有相關關系。
 
-因为我们最后得到了个p值，p>0.05说明样本的分组之间没有显著性差异，
+因為我們最后得到了個p值，p>0.05說明樣本的分組之間沒有顯著性差異，
 
-p值越小说明差异越显著。
+p值越小說明差異越顯著。
 
-因为我们想用一个类似于“变异度”的指标——“差异度”，我们希望这个指标越大，说明差异越明显。也就是想要一个同向变化的指标，所以对p值取了个倒数。仅此而已。
-3.3 对于这些分类变量的每个值做正确编码
+因為我們想用一個類似于“變異度”的指標——“差異度”，我們希望這個指標越大，說明差異越明顯。也就是想要一個同向變化的指標，所以對p值取了個倒數。僅此而已。
+3.3 對于這些分類變量的每個值做正確編碼
 
-另一种编码方式是OneHotEncoding或者dummy
+另一種編碼方式是OneHotEncoding或者dummy
 """
 
 def encode(frame, feature):
@@ -1602,9 +1602,9 @@ print(train['GarageQual_E'].value_counts())
 ,1.0       3
 ,Name: GarageQual_E, dtype: int64
 
-3.4.查看衍生变量和房价的Spearman相关性
+3.4.查看衍生變量和房價的Spearman相關性
 
-对于相关性的检测我们使用的是Spearman correlation，这种检验方法的好处是即使是非线性相关也能检测出来。
+對于相關性的檢測我們使用的是Spearman correlation，這種檢驗方法的好處是即使是非線性相關也能檢測出來。
 """
 
 sns.set(font_scale=1.2)
@@ -1621,10 +1621,10 @@ spearman(train, features)
 plt.show()
 
 """
-显然，OverallQual和房价的关系最明显。房子的邻居和位置看起来也是有影响的。
-3.5 观察变量之间的相关性
+顯然，OverallQual和房價的關系最明顯。房子的鄰居和位置看起來也是有影響的。
+3.5 觀察變量之間的相關性
 
-回归模型对于变量共线的容忍度差，所以，我们需要考虑变量之间的相关性。用相关系数矩阵的热力图即可。
+回歸模型對于變量共線的容忍度差，所以，我們需要考慮變量之間的相關性。用相關系數矩陣的熱力圖即可。
 """
 
 sns.set(font_scale=1)
@@ -1657,9 +1657,9 @@ sns.heatmap(corr,cbar=True, annot=True, square=True, fmt='.2f', annot_kws={'size
 plt.show()
 
 """
-3.6 观察所有变量（包括衍生变量）和目标变量之间的关系
+3.6 觀察所有變量（包括衍生變量）和目標變量之間的關系
 
-现在所有类别型变量也做了重新编码，编码成数值型。所有所有的特征都可以看作是数值型的了。于是，我们可以再次全景式观察变量和目标变量之间的关系。
+現在所有類別型變量也做了重新編碼，編碼成數值型。所有所有的特征都可以看作是數值型的了。于是，我們可以再次全景式觀察變量和目標變量之間的關系。
 """
 
 def pairplot(x, y, **kwargs):
@@ -1669,7 +1669,7 @@ def pairplot(x, y, **kwargs):
     ts.plot(ax=ax)
     plt.xticks(rotation=90)
 
-#画散点图
+#畫散點圖
 sns.set(style="ticks", color_codes=True)
 
 f = pd.melt(train, id_vars=['SalePrice'], value_vars=quantitative+qual_encoded)
@@ -1680,16 +1680,16 @@ g = g.map(pairplot, "value", "SalePrice")
 plt.show()
 
 """
-看起来，YearBuild、1stFlrSF, 2ndFlrSF, Neighborhood_E There are lots of nonlinearities this may be the cause why some variables wont be selected by Lasso/Lars. Some factors like YearBuilt, 1stFlrSF, 2ndFlrSF, Neighborhood_E look like they would benefit from adding quadratic term to regression. But on the other hand this will most probably provoke overfit.
+看起來，YearBuild、1stFlrSF, 2ndFlrSF, Neighborhood_E There are lots of nonlinearities this may be the cause why some variables wont be selected by Lasso/Lars. Some factors like YearBuilt, 1stFlrSF, 2ndFlrSF, Neighborhood_E look like they would benefit from adding quadratic term to regression. But on the other hand this will most probably provoke overfit.
 
-观察的结果提示我们，有些变量可以尝试做些变换，比如平方变换。
-4.高级内容
+觀察的結果提示我們，有些變量可以嘗試做些變換，比如平方變換。
+4.高級內容
 
-考虑数据本身是否分群，如果分群，就可以用分段回归。
+考慮數據本身是否分群，如果分群，就可以用分段回歸。
 
-接下来，考虑是否可以分段进行回归。
+接下來，考慮是否可以分段進行回歸。
 
-我们把房价200000作为分界点，之下的作为普通住宅，之上的作为豪宅，然后看看在这样分开后，那些数值型变量的均值有多大差异。
+我們把房價200000作為分界點，之下的作為普通住宅，之上的作為豪宅，然后看看在這樣分開后，那些數值型變量的均值有多大差異。
 """
 
 features = quantitative
@@ -1749,13 +1749,13 @@ plt.show()
 35	YrSold	-0.000021
 ,
 
-我们用tnse方法，把每个高维样本映射到二维平面上的点。
+我們用tnse方法，把每個高維樣本映射到二維平面上的點。
 
-然后我们对样本做标准化处理，处理之后做PCA，提取前30个主成分。也就是把样本的特征降维到30个特征。
+然后我們對樣本做標準化處理，處理之后做PCA，提取前30個主成分。也就是把樣本的特征降維到30個特征。
 
-对这30个特征的样本聚类，聚成5类。
+對這30個特征的樣本聚類，聚成5類。
 
-在把这5类用可视化的方法会出来，看看是否有聚集趋势。
+在把這5類用可視化的方法會出來，看看是否有聚集趨勢。
 """
 
 features = quantitative + qual_encoded
@@ -1781,9 +1781,9 @@ print(np.sum(pca.explained_variance_ratio_))
 """
 0.846903058622
 
-看起来聚集趋势并不明显，所以分段回归的意义似乎不大。
+看起來聚集趨勢并不明顯，所以分段回歸的意義似乎不大。
 
-另外40个主成分能解释84%的方差。
+另外40個主成分能解釋84%的方差。
 """
 
 y = train['SalePrice'].values
@@ -1819,7 +1819,7 @@ def log_transform(feature):
 def quadratic(feature):
     train[feature+'2'] = train[feature]**2
 
-#下面这些特征做log转化    
+#下面這些特征做log轉化    
 log_transform('GrLivArea')
 log_transform('1stFlrSF')
 log_transform('2ndFlrSF')
@@ -1829,7 +1829,7 @@ log_transform('LotFrontage')
 log_transform('KitchenAbvGr')
 log_transform('GarageArea')
 
-#下面这些特征取平方转换
+#下面這些特征取平方轉換
 #quadratic('OverallQual') fail
 quadratic('YearBuilt')
 quadratic('YearRemodAdd')
@@ -1842,7 +1842,7 @@ quadratic('GrLivArea')
 qdr = ['OverallQual2', 'YearBuilt2', 'YearRemodAdd2', 'TotalBsmtSF2',
         '2ndFlrSF2', 'Neighborhood_E2', 'RoofMatl_E2', 'GrLivArea2']
 
-#下面这些特征做二值化
+#下面這些特征做二值化
 train['HasBasement'] = train['TotalBsmtSF'].apply(lambda x: 1 if x > 0 else 0)
 train['HasGarage'] = train['GarageArea'].apply(lambda x: 1 if x > 0 else 0)
 train['Has2ndFloor'] = train['2ndFlrSF'].apply(lambda x: 1 if x > 0 else 0)
@@ -1859,13 +1859,13 @@ features = quantitative + qual_encoded + boolean + qdr
 lasso = linear_model.LassoLarsCV(max_iter=10000)
 
 """ NG
-# sklearn中要求X，y都是矩阵形式，而不是数据框
+# sklearn中要求X，y都是矩陣形式，而不是數據框
 X = train[features].fillna(0.).values
 Y = train['SalePrice'].values
 
 lasso.fit(X, np.log(Y))
 
-#反log1p变换
+#反log1p變換
 Ypred = np.exp(lasso.predict(X))
 print(error(Y, Ypred))
 
@@ -1921,6 +1921,5 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
-
 
 

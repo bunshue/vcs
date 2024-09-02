@@ -29,8 +29,9 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 # 設定負號
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
-'''
+
 print('------------------------------------------------------------')	#60個
+'''
 #                   2015,2016,2017,2018,2019
 df = pd.DataFrame([[250, 320, 300, 312, 280],   #北部
                    [280, 300, 280, 290, 310],   #中部
@@ -71,21 +72,8 @@ df.plot(kind = 'pie', subplots = True, figsize = [14, 6]) # 繪圖 plot
 
 plt.show()
 
-
 print('------------------------------------------------------------')	#60個
 
-
-# 創造一些隨機資料 create some data with random value
-ts = pd.Series(np.random.randn(1000), index = pd.date_range('1/1/2000', periods = 1000))
-ts = ts.cumsum() # 計算累積值 cumulative sum
-df = pd.DataFrame(np.random.randn(1000, 4), index = ts.index, columns = list('ABCD'))
-df = df.cumsum()
-
-df.plot()       # 繪圖 plot
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
 
 #     "國文", "數學", "英文", "自然", "社會"]
 datas = [[65, 92, 78, 83, 70],  #學生A
@@ -140,8 +128,6 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-print('------------------------------------------------------------')	#60個
-
 filename = 'data/hours_used_performance.csv'
 df = pd.read_csv(filename)
 df.plot(kind = "scatter", x = "hours_used", y = "work_performance")
@@ -181,7 +167,6 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-
 #df = pd.DataFrame(np.random.randn(3,3), columns=list("甲乙丙"))
 #print(df)
 
@@ -217,7 +202,6 @@ print('存圖')
 plt.savefig('df_data.png')
 
 plt.show()
-
 
 """
 loc 的用法
@@ -357,7 +341,6 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-
 from matplotlib import style
 
 style.use("fivethirtyeight")
@@ -406,6 +389,15 @@ print('------------------------------------------------------------')	#60個
 
 print('------------------------------------------------------------')	#60個
 
+'''
+print("------------------------------------------------------------")  # 60個
+
+# 常態分佈轉series
+data = pd.Series(np.random.normal(size=100))
+
+data.hist()
+
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -417,49 +409,6 @@ dataframe = pd.DataFrame(random_data)
 
 # 使用 Pandas hist() 方法绘制直方图
 dataframe.hist()
-
-# 设置图表属性
-plt.title("RUNOOB hist() Test")
-plt.xlabel("X-Value")
-plt.ylabel("Y-Value")
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-# 生成随机数据
-data = pd.Series(np.random.normal(size=100))
-
-data.hist()
-
-# 设置图形标题和坐标轴标签
-plt.title("RUNOOB hist() Tes")
-plt.xlabel("X-Values")
-plt.ylabel("Y-Values")
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-# 構建序列
-data1 = pd.Series(
-    {"中專": 0.2515, "大專": 0.3724, "本科": 0.3336, "碩士": 0.0368, "其他": 0.0057}
-)
-print(data1)
-data1.name = ""
-# 控制餅圖為正圓
-plt.axes(aspect="equal")
-# plot方法對序列進行繪圖
-data1.plot(
-    kind="pie",  # 選擇圖形類型
-    autopct="%.1f%%",  # 餅圖中添加數值標簽
-    radius=1,  # 設置餅圖的半徑
-    startangle=180,  # 設置餅圖的初始角度
-    counterclock=False,  # 將餅圖的順序設置為順時針方向
-    title="失信用戶的受教育水平分布",  # 為餅圖添加標題
-    wedgeprops={"linewidth": 1.5, "edgecolor": "green"},  # 設置餅圖內外邊界的屬性值
-    textprops={"fontsize": 10, "color": "black"},  # 設置文本標簽的屬性值
-)
 
 plt.show()
 
@@ -498,15 +447,17 @@ tree.write("tmp_導出圖表.html")
 
 print("------------------------------------------------------------")  # 60個
 
+weight = [3, 48,33,8,38,16,36,29,22,6,12,42]
+animals = ["鼠", "牛", "虎", "兔", "龍", "蛇", "馬", "羊", "猴", "雞", "狗", "豬"]
+
+
 # 定義資料 
 sales_dep = pd.DataFrame({
-    "label": ["第1業務部", "第2業務部", "第3業務部",
-              "網路事業部1", "網路事業部2"],
-    "value": [500, 130, 200, 75, 20]})
+    "label": ["鼠", "牛", "虎", "兔", "龍"],
+    "value": [3, 48, 33, 8, 38]})
 
 print('繪製預設的派圖')
-plt.pie(sales_dep["value"], labels=sales_dep["label"],
-        autopct="%1.1f%%")
+plt.pie(sales_dep["value"], labels=sales_dep["label"], autopct="%1.1f%%")
 
 plt.show()
 
@@ -988,12 +939,6 @@ noise_complaint_counts / complaint_counts.astype(float)
 plt.show()
 """
 print("------------------------------------------------------------")  # 60個
-'''
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
 
 print('顯示')
 n_items = 366
@@ -1011,10 +956,12 @@ print(ts.resample("1m").sum())
 plt.figure(figsize=(10, 6))
 cs = ts.cumsum()
 cs.plot()
+plt.title('aaa')
 plt.show()
 
 plt.figure(figsize=(10, 6))
 ts.resample("1m").sum().plot.bar()
+plt.title('bbb')
 plt.show()
 
 df = pd.DataFrame(np.random.randn(100, 4), columns=list('ABCD'))
@@ -1023,27 +970,6 @@ df.to_csv('tmp_data.csv')
 df = pd.read_csv('tmp_data.csv', index_col=0)
 print(df.shape)
 print(df.head(5))
-
-print("------------------------------------------------------------")  # 60個
-
-
-data = [100, 110, 150, 170, 190, 200, 220]
-x = pd.Series(data)
-x.plot()
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-data = [100, 110, 150, 170, 190, 200, 220]
-weekday = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
-x = pd.Series(data, index=weekday)
-x.plot()
-
-plt.show()
-
-
-#weight = [3, 48,33,8,38,16,36,29,22,6,12,42]
-#animals = ["鼠牛虎兔龍蛇馬羊猴雞狗豬"]
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1066,6 +992,8 @@ df2 = pd.DataFrame(dists,
 print(df2)
 #df2.to_html("ch9-4-2-02.html")  #df轉html
 df2.plot()
+
+plt.title('eee')
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
@@ -1090,6 +1018,7 @@ df.plot(xticks=range(len(df.index)),
         use_index=True,
         rot=90)
 
+plt.title('fff')
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
@@ -1117,13 +1046,7 @@ df.plot(xticks=range(len(df.index)),
         use_index=True,
         rot=45)
 
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-data = [100, 110, 150, 170, 190, 200, 220]
-s = pd.Series(data)
-s.plot(kind="bar", rot=0)
+plt.title('ggg')
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
@@ -1138,29 +1061,7 @@ print(df)
 df.to_html("tmp_ch9-4-4.html")
 df.plot(kind="bar")
 
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-fruits = ["蘋果","梨子","香蕉","橙子"]
-percentage = [30, 10, 40, 20]
-
-s = pd.Series(percentage, index=fruits, name="水果")
-print(s)
-s.plot(kind="pie")
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-fruits = ["蘋果","梨子","香蕉","橙子"]
-percentage = [30, 10, 40, 20]
-
-s = pd.Series(percentage, index=fruits, name="水果")
-print(s)
-explode = [0.1, 0.3, 0.1, 0.3]
-s.plot(kind="pie",
-       figsize=(6, 6),
-       explode=explode)
+plt.title('iii')
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
@@ -1173,6 +1074,7 @@ df = pd.DataFrame({"x":x, "y":y})
 df.plot(kind="scatter", x="x", y="y", 
         title="Sin(x)")
 
+plt.title('lll')
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
@@ -1182,25 +1084,93 @@ iris = pd.read_csv("data/iris.csv")
 iris.boxplot(column="sepal_length",
              by="target",
              figsize=(6,5))
+
+plt.title('mmm')
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
+weight = [3, 48,33,8,38,16,36,29,22,6,12,42]
+animals = ["鼠", "牛", "虎", "兔", "龍", "蛇", "馬", "羊", "猴", "雞", "狗", "豬"]
 
+x = pd.Series(weight)
+
+x.plot(kind="bar", rot=0)
+x.plot()
+
+x = pd.Series(weight, index=animals)
+x.plot()
+
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
+weight = [3, 48,33,8,38,16,36,29,22,6,12,42]
+animals = ["鼠", "牛", "虎", "兔", "龍", "蛇", "馬", "羊", "猴", "雞", "狗", "豬"]
 
+fruits = ["蘋果","梨子","香蕉","橙子"]
+percentage = [30, 10, 40, 20]
+
+
+s = pd.Series(percentage, index=fruits, name="水果")
+print(s)
+
+#s.plot(kind="pie")
+
+explode = [0.1, 0.3, 0.1, 0.3]
+s.plot(kind="pie",
+       figsize=(6, 6),
+       explode=explode)
+
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
+# 構建序列
+data1 = pd.Series(
+    {"鼠": 3, "牛": 48, "虎": 33, "兔": 8, "龍": 38}
+)
+print(data1)
 
+data1.name = ""
 
+# 控制餅圖為正圓
+plt.axes(aspect="equal")
+
+# plot方法對序列進行繪圖
+data1.plot(
+    kind="pie",  # 選擇圖形類型
+    autopct="%.1f%%",  # 餅圖中添加數值標簽
+    radius=1,  # 設置餅圖的半徑
+    startangle=180,  # 設置餅圖的初始角度
+    counterclock=False,  # 將餅圖的順序設置為順時針方向
+    title="分佈",  # 為餅圖添加標題
+    wedgeprops={"linewidth": 1.5, "edgecolor": "green"},  # 設置餅圖內外邊界的屬性值
+    textprops={"fontsize": 10, "color": "black"},  # 設置文本標簽的屬性值
+)
+
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
+# 創造一些隨機資料 create some data with random value
+
+ts = pd.Series(np.random.randn(1000), index = pd.date_range('1/1/2000', periods = 1000))
+ts = ts.cumsum() # 計算累積值 cumulative sum
+
+ts.plot()
+
+plt.show()
 
 
+df = pd.DataFrame(np.random.randn(1000, 4), index = ts.index, columns = list('ABCD'))
+df = df.cumsum()
+
+df.plot()
+
+plt.show()
+
+print('------------------------------------------------------------')	#60個
 
 print("------------------------------------------------------------")  # 60個
 

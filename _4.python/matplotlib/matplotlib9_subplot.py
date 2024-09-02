@@ -25,7 +25,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 # 共同參數
 x = np.linspace(0, 2 * np.pi, 30)
 y = np.sin(x)
@@ -926,8 +926,31 @@ plt.axes([x_st+dx*3, y_st+dy*3, w, h])
 plt.plot(x, y, "y--o")
 
 plt.show()
+'''
+print("------------------------------------------------------------")  # 60個
+
+fig = plt.figure()
+
+ax1 = fig.add_subplot(121)
+ax2 = fig.add_subplot(122)
+fig.subplots_adjust()
+
+x = np.linspace(0, 2 * np.pi, num=100, endpoint=True)
+y = np.sin(x)
+
+ax1.plot(x,y)
+ax1.set_title("左圖", color="b")
+
+ax2.plot(x,y)
+ax2.set_title("右圖", color="b")
+
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
 
 
 print("------------------------------------------------------------")  # 60個

@@ -8,6 +8,7 @@ print("------------------------------------------------------------")  # 60個
 # 共同
 import os
 import sys
+import time
 import math
 import random
 import numpy as np
@@ -32,10 +33,12 @@ sample_rate, data = wavfile.read(wave_filename)  # 讀取.wav文件
 
 # 繪製聲波圖
 plt.figure(figsize=(10, 6))
+
 plt.plot(data)
 plt.title("聲波圖")
 plt.ylabel("Amplitude")
 plt.xlabel("Sample")
+
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
@@ -54,9 +57,11 @@ f_rate = raw.getframerate()  # 取得 framerate
 time = np.linspace(0, len(signal) / f_rate, num=len(signal))  # 根據聲音採樣產生成對應的時間
 
 plt.figure(figsize=(10, 6))
+
 plt.plot(time, signal)  # 畫線，橫軸時間，縱軸陣列值
 plt.title("Sound Wave")  # 圖表標題
 plt.xlabel("Time")  # 橫軸標題
+
 plt.show()
 
 print("------------------------------------------------------------")  # 60個

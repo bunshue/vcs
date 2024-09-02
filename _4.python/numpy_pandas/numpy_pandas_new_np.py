@@ -12,7 +12,7 @@ arr1 = np.array([1, 2, 3, 4, 5])
 
 """
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 # 共同
 import os
@@ -33,7 +33,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 print("建立numpy陣列, 串列 轉 numpy陣列")
 print("一維")
 cc = np.array([1, 2, 3, 4])
@@ -57,24 +57,24 @@ print("------------------------------------------------------------")  # 60個
 print("二維串列 轉 numpy陣列")
 
 print("二維陣列 2 X 4")
-cc = np.array([[1, 2, 3, 4], [5, 6, 7, 8]])
-print(cc)
-print(cc.shape)
+list2d = np.array([[1, 2, 3, 4], [5, 6, 7, 8]])
+print(list2d)
+print(list2d.shape)
 
-listdata = [[1, 2, 3, 4], [5, 6, 7, 8]]
-cc = np.array(listdata)
+list2d = [[1, 2, 3, 4], [5, 6, 7, 8]]
+cc = np.array(list2d)
 print(cc)
 print("維度 :", cc.ndim)
 print("形狀 :", cc.shape)
 print("數量 :", cc.size)
 
 # 二維，使用 dtype 定義數據類型
-cc = np.array([[1, 2, 3], [5, 6, 7]], dtype=float)
-print(cc)
+list2d = np.array([[1, 2, 3], [5, 6, 7]], dtype=float)
+print(list2d)
 
 # 最小維度
-cc = np.array([1, 2, 3], ndmin=3)
-print(cc)
+list1d = np.array([1, 2, 3], ndmin=3)
+print(list1d)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -109,6 +109,9 @@ cc = np.arange(10, dtype=float)
 print(cc)
 
 print("------------------------------------------------------------")  # 60個
+
+sys.exit()
+
 
 print("reshape 它是NumPy中最常用的函數之一。它返回一個數組，其中包含具有新形狀的相同數據。")
 # np.reshape(shape)
@@ -314,21 +317,21 @@ print(x.dtype)  # 輸出 "int64"
 
 print("------------------------------------------------------------")  # 60個
 
-a = np.array([[[1, 2, 3], [5, 6, 7]]])
+A = np.array([[[1, 2, 3], [5, 6, 7]]])
 
 # 取得陣列維度的深度
-print(np.ndim(a))
+print(np.ndim(A))
 
 # 依序取得每個維度的數量
-print(np.shape(a))
+print(np.shape(A))
 
 # 修改維度 1,2,3 -> 1,3,2
-a.shape = (1, 3, 2)
-print(a)
+A.shape = (1, 3, 2)
+print(A)
 
 # 也可以使用 reshape，不過不知道為什麼用了之後執行沒問題，但編輯器會報錯
-# b = a.reshape(1,2,3)
-# print(b)
+# B = A.reshape(1,2,3)
+# print(B)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -585,8 +588,8 @@ print(cc)
 print("medain 返回數組的中位數。")
 # np.median(a, axis = None, out = None)
 print("二維串列 轉 numpy陣列")
-arr = np.array([[1, 2, 3, 4], [5, 6, 7, 8]])
-cc = np.median(arr)
+list2d = np.array([[1, 2, 3, 4], [5, 6, 7, 8]])
+cc = np.median(list2d)
 print(cc)
 
 print("digitize 返回輸入數組中每個值所屬的容器的索引。")
@@ -615,7 +618,7 @@ Compares 5.4 to 4, here 3<=x so Put 4
 print("expand_dims 它用於擴展數組的維度。")
 # np.expand_dims(a, axis)
 print("串列 轉 numpy陣列")
-arr = np.array([8, 14, 1, 8, 11, 4, 9, 4, 1, 13, 13, 11])
+list1d = np.array([8, 14, 1, 8, 11, 4, 9, 4, 1, 13, 13, 11])
 cc = np.expand_dims(cc, axis=0)
 print(cc)
 
@@ -634,16 +637,16 @@ print("count_nonzero 計算所有非零元素并返回它們的計數。")
 # np.count_nonzero(a, axis = None, ...)
 
 print("串列 轉 numpy陣列")
-a = np.array([0, 0, 1, 1, 1, 0])
-cc = np.count_nonzero(a)
+list1d = np.array([0, 0, 1, 1, 1, 0])
+cc = np.count_nonzero(list1d)
 print(cc)
 
 print("argwhere 查找并返回非零元素的所有下標。")
 # np.argwhere(a)
 
 print("串列 轉 numpy陣列")
-a = np.array([0, 0, 1, 1, 1, 0])
-cc = np.argwhere(a)
+list1d = np.array([0, 0, 1, 1, 1, 0])
+cc = np.argwhere(list1d)
 print(cc)
 
 print("argmax & argmin argmax返回數組中Max元素的索引。它可以用於多類圖像分類問題中獲得高概率預測標簽的指標。")
@@ -665,16 +668,15 @@ print("sort 對數組排序。")
 print("clip 它可以將數組的裁剪值保持在一個范圍內。")
 
 print("串列 轉 numpy陣列")
-arr = np.array([0, 1, -3, -4, 5, 6, 7, 2, 3])
-cc = arr.clip(0, 5)
+list1d = np.array([0, 1, -3, -4, 5, 6, 7, 2, 3])
+cc = list1d.clip(0, 5)
 print(cc)
 
-cc = arr.clip(0, 3)
+cc = list1d.clip(0, 3)
 print(cc)
 
-cc = arr.clip(3, 5)
+cc = list1d.clip(3, 5)
 print(cc)
-
 
 # 集合操作
 
@@ -684,11 +686,11 @@ print("查找公共元素 intersect1d函數以排序的方式返回兩個數組�
 # Return_indices:如果為真，則返回公共元素的索引。
 
 print("串列 轉 numpy陣列")
-ar1 = np.array([1, 2, 3, 4, 5, 6])
-ar2 = np.array([3, 4, 5, 8, 9, 1])
-np.intersect1d(ar1, ar2)
+list1d1 = np.array([1, 2, 3, 4, 5, 6])
+list1d2 = np.array([3, 4, 5, 8, 9, 1])
+np.intersect1d(list1d1, list1d2)
 
-np.intersect1d(ar1, ar2, return_indices=True)
+np.intersect1d(list1d1, list1d2, return_indices=True)
 
 print("查找不同元素 np.setdiff1d函數返回arr1中在arr2中不存在的所有唯一元素。")
 print("串列 轉 numpy陣列")
@@ -712,29 +714,29 @@ np.union1d(a, b)
 
 print("水平分割 Hsplit函數將數據水平分割為n個相等的部分。")
 print("二維串列 轉 numpy陣列")
-A = np.array([[3, 4, 5, 2], [6, 7, 2, 6]])
-np.hsplit(A, 2)  ## splits the data into two equal parts
+list2d = np.array([[3, 4, 5, 2], [6, 7, 2, 6]])
+np.hsplit(list2d, 2)  ## splits the data into two equal parts
 
-np.hsplit(A, 4)  ## splits the data into four equal parts
+np.hsplit(list2d, 4)  ## splits the data into four equal parts
 
 print("垂直分割 Vsplit將數據垂直分割為n個相等的部分。")
 print("二維串列 轉 numpy陣列")
-A = np.array([[3, 4, 5, 2], [6, 7, 2, 6]])
-np.vsplit(A, 2)
+list2d = np.array([[3, 4, 5, 2], [6, 7, 2, 6]])
+np.vsplit(list2d, 2)
 
 # 數組疊加
 
 print("水平疊加 hstack 將在另一個數組的末尾追加一個數組。")
 print("串列 轉 numpy陣列")
-a = np.array([1, 2, 3, 4, 5])
-b = np.array([1, 4, 9, 16, 25])
+list1da = np.array([1, 2, 3, 4, 5])
+list1db = np.array([1, 4, 9, 16, 25])
 
-cc = np.hstack((a, b))
+cc = np.hstack((list1da, list1db))
 print(cc)
 
 print("垂直疊加 vstack將一個數組堆疊在另一個數組上。")
 
-cc = np.vstack((a, b))
+cc = np.vstack((list1da, list1db))
 print(cc)
 
 # 數組比較
@@ -742,18 +744,21 @@ print(cc)
 print("allclose 如果兩個數組的形狀相同，則Allclose函數根據公差值查找兩個數組是否相等或近似相等。")
 
 print("串列 轉 numpy陣列")
-a = np.array([0.25, 0.4, 0.6, 0.32])
-b = np.array([0.26, 0.3, 0.7, 0.32])
+list1da = np.array([0.25, 0.4, 0.6, 0.32])
+list1db = np.array([0.26, 0.3, 0.7, 0.32])
 
 tolerance = 0.1  ## Total Difference
-np.allclose(a, b, tolerance)
+np.allclose(list1da, list1db, tolerance)
 
 tolerance = 0.5
-np.allclose(a, b, tolerance)
+np.allclose(list1da, list1db, tolerance)
 
 print("equal 它比較兩個數組的每個元素，如果元素匹配就返回True。")
 
-np.equal(arr1, arr2)
+cc = np.equal(list1da, list1da)
+print('兩陣列相同 :', cc)
+cc = np.equal(list1da, list1db)
+print('兩陣列相同 :', cc)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1086,11 +1091,11 @@ print("------------------------------------------------------------")  # 60個
 # numpy.c_() and numpy.r_()的用法
 
 
-#####np.c_是按行连接两个矩阵，就是把两矩阵左右相加，要求行数相等，类似於pandas中的merge()。
-#####np.r_是按列连接两个矩阵，就是把两矩阵上下相加，要求列数相等，类似於pandas中的concat()。
+#####np.c_是按行连接两个矩陣，就是把两矩陣左右相加，要求行数相等，类似於pandas中的merge()。
+#####np.r_是按列连接两个矩陣，就是把两矩陣上下相加，要求列数相等，类似於pandas中的concat()。
 
-# np.c_是按行连接两个矩阵，就是把两矩阵左右相加，要求行数相等。
-# np.r_是按列连接两个矩阵，就是把两矩阵上下相加，要求列数相等。
+# np.c_是按行连接两个矩陣，就是把两矩陣左右相加，要求行数相等。
+# np.r_是按列连接两个矩陣，就是把两矩陣上下相加，要求列数相等。
 
 
 # 1.numpy.c_:
@@ -1162,19 +1167,196 @@ print("------------------------------------------------------------")  # 60個
 print("矩陣與二維數組")
 cc = np.mat(np.mat([[1, 2, 3], [4, 5, 6]]))
 print(type(cc))
-
-print(np.eye(2))
-print(np.diag([2, 3]))
+print(cc)
 
 cc = np.mat([[1.0, 2.0], [3.0, 4.0]])
-print(np.dot(cc, cc))  # 矩陣乘積
-print(np.multiply(cc, cc))  # 矩陣點乘
-print(cc.T)  # 矩陣轉置
-print(cc.I)  # 矩陣求逆
-print(np.trace(cc))  # 求矩陣的跡
-print(np.linalg.eig(cc))  # 特徵分解
+
+print("矩陣乘積")
+print(np.dot(cc, cc))
+
+print("矩陣點乘")
+print(np.multiply(cc, cc))
+
+print("矩陣轉置")
+print(cc.T)
+
+print("矩陣求逆")
+print(cc.I)
+
+print("求矩陣的跡")
+print(np.trace(cc))
+
+print("特徵分解")
+print(np.linalg.eig(cc))
+
+evals, evecs = np.linalg.eig(cc)
+print("特征值:",evals,"\n特征向量:", evecs)
+
+print("------------------------------")  # 30個
+
+cc = np.mat(np.mat([[1, 2, 3], [4, 5, 6]]))
+
+print(cc.sum())
+print(cc.sum(axis=0))
+print(cc.sum(axis=1))
+
+# axis = 0 : 第0維 直行
+# axis = 1 : 第1維 橫列
+print("全部和:", cc.sum())
+print("直行加:", cc.sum(axis=0))
+print("橫列加:", cc.sum(axis=1))
+
+print("------------------------------")  # 30個
+
+# n阶方阵的行列式运算
+A = np.mat([[1,2,4,5,7,],[9,12,11,8,2,],[6,4,3,2,1,],[9,1,3,4,5],[0,2,3,4,1]])
+
+print("det(A):",np.linalg.det(A))  # 方阵的行列式
+
+invA = np.linalg.inv(A) # 矩陣的逆矩陣
+print("inv(A):",invA)
+
+AT = A.T   #矩陣的对称
+print(A*AT)
+
+#矩陣的秩
+print(np.linalg.matrix_rank(A))
+
+#可逆矩陣求解
+b = [1,0,1,0,1] 
+S = np.linalg.solve(A,np.transpose(b))
+print(S)
+
+print("------------------------------")  # 30個
+
+base = np.mat([[3,1],[1,3]])
+v1 = np.mat([1,2])
+print(np.linalg.norm(v1))
+print((base[0]*base[1].T)/(np.linalg.norm(base[1])*np.linalg.norm(base[0])))
+
+v2 = v1*base
+print(v2)
+print(np.linalg.norm(v2))
+
+print("------------------------------")  # 30個
+
+base = np.mat([[1,3],[3,1]])
+print(base[0]+base[1])
+
+print("------------------------------")  # 30個
+
+# 一維陣列轉矩陣
+list1d = [1,2,3,4,5]
+print(type(list1d))
+
+A = np.mat(list1d)
+
+N = 10
+print(N*A)
+
+print("------------------------------")  # 30個
+
+# 二維陣列轉矩陣
+list2d = [[1,2,3,4],[5,6,7,8],[9,10,11,12]]
+print(type(list2d))
+
+A = np.mat(list2d)
+
+cc = np.shape(A)
+
+print('矩陣')
+print(A)
+print('shape :', cc)
+
+print("------------------------------")  # 30個
+
+list2d = [[1,2,3],[4,5,6],[7,8,9]]
+A = np.mat(list2d)
+
+N = 10
+print(N*A)
+
+print(sum(A))
+
+A2 = 1.5*np.ones([3,3])
+print(np.multiply(A, A2))
+
+print(np.power(A, 2))
+
+print("------------------------------")  # 30個
+
+A1 = np.mat([[1,2,3],[4,5,6],[7,8,9]])
+
+A2 = np.mat([[1],[2],[3]])
+print(A1 * A2)
+
+# 矩陣的转置
+print(A1.T)
+A1.transpose()
+print(A1)
+
+print("------------------------------")  # 30個
+
+list2d = [[1,2,3],[4,5,6],[7,8,9]]
+A = np.mat(list2d)
+
+[m,n]=np.shape(A) # 矩陣的行列数
+print("矩陣的行数和列数:",m,n)
+
+myscl1 = A[0] # 按行切片
+print("按行切片:",myscl1)
+
+myscl2 = A.T[0] # 按列切片
+print("按列切片:",myscl2)
+
+mycpmat = A.copy() # 矩陣的复制
+print("复制矩陣:\n",mycpmat)
+
+#比较
+print("矩陣元素的比较:\n",A < A.T)
+
+print("------------------------------")  # 30個
+
+featuremat = np.mat([[88.5,96.8,104.1,111.3,117.7,124.0,130.0,135.4,140.2,145.3,151.9,159.5,165.9,169.8,171.6,172.3,172.7],
+[12.54,14.65,16.64,18.98,21.26,24.06,27.33,30.46,33.74,37.69,42.49,48.08,53.37,57.08,59.35,60.68,61.40]])
+
+# 计算均值
+mv1 = np.mean(featuremat[0]) # 第一列的均值
+mv2 = np.mean(featuremat[1]) # 第二列的均值 
+
+# 计算两列标准差
+dv1 = np.std(featuremat[0])
+dv2 = np.std(featuremat[1])
+
+corref = np.mean(np.multiply(featuremat[0]-mv1,featuremat[1]-mv2))/(dv1*dv2)
+print(corref)
+
+print(np.corrcoef(featuremat))
+
+covinv = np.linalg.inv(np.cov(featuremat))
+print(covinv)
+tp = featuremat.T[0]-featuremat.T[1]
+distma = np.sqrt(np.dot(np.dot(tp,covinv),tp.T))
+print(distma)
+
+print("------------------------------")  # 30個
+
+vectormat = np.mat([[1,2,3],[4,5,6]])
+v12 = vectormat[0]-vectormat[1]
+print(np.sqrt(v12*v12.T))
+
+#norm
+varmat = np.std(vectormat.T,axis=0)
+normvmat = (vectormat-np.mean(vectormat))/varmat.T
+
+#norm
+print(normvmat)
+normv12 = normvmat[0]-normvmat[1]
+print(np.sqrt(normv12*normv12.T))
 
 print("------------------------------------------------------------")  # 60個
+
+print('一維np陣列')
 
 cc = np.array([1, 2, 3])  # Create a rank 1 array
 print(type(cc))  # Prints "<type 'numpy.ndarray'>"
@@ -1188,6 +1370,8 @@ print(cc[0, 0], cc[0, 1], cc[1, 0])  # Prints "1 2 4"
 
 print("------------------------------------------------------------")  # 60個
 
+print('二維np陣列')
+
 c = np.array([[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]])
 cc = c[0:2, 1:3]  # 取得部分資料
 # cc= c[0:2,1:3].copy() # 複製cc為c的部分資料
@@ -1197,6 +1381,8 @@ print(cc)  # 輸出[[99  3], [ 6  7]]
 print(c)  # 輸出[[ 1 99  3  4],[ 5  6  7  8],[ 9 10 11 12]]
 
 print("------------------------------------------------------------")  # 60個
+
+print('二維np陣列')
 
 cc = np.array([[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]])
 row_r1 = cc[1, :]
@@ -1296,9 +1482,6 @@ print(d)  # [4. 5. 6.]
 
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-
 # 合併
 a = np.array([[1, 2], [3, 4]])
 b = np.array([[5, 6], [7, 8]])
@@ -1321,8 +1504,6 @@ f = np.squeeze(d)
 print(e.shape, f.shape)
 
 print("------------------------------------------------------------")  # 60個
-
-# NumPy 的高速運算
 
 N = 5
 
@@ -1476,17 +1657,6 @@ print(cc.sum(axis=1))
 print("sum(axis=2) 第2軸和")
 print(cc.sum(axis=2))
 
-cc = np.mat(np.mat([[1, 2, 3], [4, 5, 6]]))
-print(cc.sum())
-print(cc.sum(axis=0))
-print(cc.sum(axis=1))
-
-# axis = 0 : 第0維 直行
-# axis = 1 : 第1維 橫列
-print("全部和:", cc.sum())
-print("直行加:", cc.sum(axis=0))
-print("橫列加:", cc.sum(axis=1))
-
 print("------------------------------------------------------------")  # 60個
 
 # 陣列的 shape 與 reshape
@@ -1566,70 +1736,6 @@ print(np.dot(cc, cc))
 
 print("------------------------------------------------------------")  # 60個
 
-print("創建數組 ones")
-# np.ones函數創建一個全部為1的數組。
-# np.ones(shape, dtype = None, order = 'C')
-
-cc = np.ones((3, 4))
-print(cc)
-
-b = np.ones((1, 2))  # Create an array of all ones
-print(b)  # Prints "[[ 1. 1.]]"
-
-
-print(np.ones(5))  # 壹陣列
-
-a = np.ones(5)  # 生成5個值全爲1的數組
-print(a)
-
-b = np.ones((5,))
-print(b)
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("創建數組 zeros")
-
-# np.zeros會創建一個全部為0的數組。
-# np.zeros(shape, dtype = float, order = 'C')
-# shape:陣列的形狀。
-# Dtype:生成數組所需的數據類型。' int '或默認' float '
-
-na = np.zeros((2, 3), dtype="int")
-print(na)
-
-a = np.zeros((2, 2))
-print(a)  # Prints "[[ 0. 0.]
-# [0. 0.]]"
-
-na = np.zeros(5)
-print(na)
-
-a = np.zeros(5)  # 生成5個值全爲0的數組
-print(a)
-
-a = np.zeros((5,))
-print(a)
-
-print(np.zeros(5))  # 零陣列
-
-print("------------------------------------------------------------")  # 60個
-
-a = np.empty(5)  # 生成5個元素，值爲隨機數的數組（速度快）
-print(a)
-
-c = np.empty((5,))
-print(c)
-
-a = np.full(5, 6)  # 生成5個值全爲6的數組
-print(a)
-
-c = np.full((2, 2), 7)  # Create a constant array
-print(c)
-
-d = np.eye(3)
-print(d)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1685,17 +1791,17 @@ a = np.arange(15).reshape(3, 5)
 print(a)
 
 print("np陣列存檔成np之文字格式")
-np.savetxt("np_asc.txt", a)
+np.savetxt("tmp_np_asc.txt", a)
 
 print("讀取np之文字格式檔案成np陣列")
-b = np.loadtxt("np_asc.txt")
+b = np.loadtxt("tmp_np_asc.txt")
 print(b)
 
 print("np陣列存檔成np之binary格式")
-np.save("np_bin.npy", a)
+np.save("tmp_np_bin.npy", a)
 
 print("讀取np之binary格式檔案成np陣列")
-c = np.load("np_bin.npy")
+c = np.load("tmp_np_bin.npy")
 print(c)
 
 print("------------------------------------------------------------")  # 60個
@@ -1704,14 +1810,13 @@ print("------------------------------------------------------------")  # 60個
 # 將 numpy array 用 savetxt 寫入 csv
 
 cc = np.asarray([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
-
 print(type(cc))  # <class 'numpy.ndarray'>
-np.savetxt("output_data1.csv", cc, delimiter=",")
-np.savetxt("output_data2.csv", cc, delimiter=",", fmt="%d")
-np.savetxt("output_data3.csv", cc, delimiter=",", fmt="%.2f")
+
+np.savetxt("tmp_output_data1.csv", cc, delimiter=",")
+np.savetxt("tmp_output_data2.csv", cc, delimiter=",", fmt="%d")
+np.savetxt("tmp_output_data3.csv", cc, delimiter=",", fmt="%.2f")
 
 print("------------------------------------------------------------")  # 60個
-
 
 # 保存和加載數據
 
@@ -1720,63 +1825,11 @@ print("保存")
 # savetxt 在文本文件中保存數組的內容。
 
 arr = np.linspace(10, 100, 500).reshape(25, 20)
-np.savetxt("array.txt", arr)
+np.savetxt("tmp_array.txt", arr)
 
 print("加載") # 從文本文件加載數組，它以文件名作為參數。
 
-np.loadtxt("array.txt")
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-print("過濾資料 where")
-a = np.array([3, 6, 8, 1, 2, 88])
-b = np.where(a > 5)
-print(a)
-print(b)
-
-print("------------------------------------------------------------")  # 60個
-
-a = np.array([[3, 6, 8, 77, 66], [1, 2, 88, 3, 98], [11, 2, 67, 5, 2]])
-b = np.where(a > 5)
-print(a)
-print(b)
-
-print("------------------------------------------------------------")  # 60個
-
-
-x1 = np.linspace(-2.0, 2.0, 11)  # 包含頭尾共21點
-
-# 移除 x1 > 0.55 的點, 就是保存 x1 <=0.6的點
-x2 = x1[x1 <= 0.55]
-
-# 遮罩 x1 > 0.7 的點, 會多了點線標記
-x3 = np.ma.masked_where(x1 > 0.7, x1)
-
-print(x1)
-print(x2)
-print(x3)
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-print("分段函數")
-
-x = np.arange(10)
-print(x)
-
-print(np.where(x < 5, x, 9 - x))
-
-a = np.arange(10)
-print(np.select([x < 3, x > 6], [-1, 1], 0))
-
-a = np.arange(10)
-print(np.piecewise(x, [x < 3, x > 6], [lambda x: x * 2, lambda x: x * 3]))
+np.loadtxt("tmp_array.txt")
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1827,25 +1880,6 @@ print("After arr2", arr2)
 
 print("------------------------------------------------------------")  # 60個
 
-a = np.array([2, 3, 4, 5, 6])
-print(f"a = {a}")
-b = np.ma.masked_where(a > 3, a)
-print(f"b = {b}")
-
-print("------------------------------------------------------------")  # 60個
-
-"""
-np.gradient(f) 計算數組f中元素的梯度，當f為多維時，返回每個維度梯度
-梯度：連續值之間的變化率，即斜率
-XY坐標軸連續三個X坐標對應的Y軸值：a, b, c，其中，b的梯度是： (c‐a)/2
-"""
-na = np.random.randint(0, 50, (11))
-print(na)
-print(np.gradient(na))
-
-print("------------------------------------------------------------")  # 60個
-
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1882,19 +1916,6 @@ A.sum()
 print("------------------------------------------------------------")  # 60個
 
 """
-
-#建立陣列
-
-cc = np.array([1, 2, 3])
-print(cc)
-
-
-
-z = np.linspace(0, 15, 100)
-x = np.sin(z)
-y = np.cos(z)
-x2 = np.sin(z)
-
 
 #numpy統計
 
@@ -1941,277 +1962,187 @@ print(A.sum(axis=0)) #output: [21 24 27 30 33 36]
 print(A.mean(axis=1))#output:[ 3.5  9.5 15.5]
 print(A.std(axis=1))#output:[1.70782513, 1.70782513, 1.70782513]
 
-'''
 print("------------------------------------------------------------")  # 60個
-
-import numpy as np
-
-# n阶方阵的行列式运算
-A = np.mat([[1,2,4,5,7,],[9,12,11,8,2,],[6,4,3,2,1,],[9,1,3,4,5],[0,2,3,4,1]])
-
-print("det(A):",np.linalg.det(A))  # 方阵的行列式
-
-invA = np.linalg.inv(A) # 矩阵的逆
-print("inv(A):",invA)
-
-AT = A.T   #矩阵的对称
-print(A*AT)
-
-#矩阵的秩
-print(np.linalg.matrix_rank(A))
-
-#可逆矩阵求解
-b = [1,0,1,0,1] 
-S = np.linalg.solve(A,np.transpose(b))
-print(S)
 
 
 
 print("------------------------------------------------------------")  # 60個
 
-import numpy as np
-import matplotlib.pyplot as plt
 
-base = np.mat([[3,1],[1,3]])
-v1 = np.mat([1,2])
-print(np.linalg.norm(v1))
-print((base[0]*base[1].T)/(np.linalg.norm(base[1])*np.linalg.norm(base[0])))
-v2 = v1*base
-print(v2)
-print(np.linalg.norm(v2))
 
-# 绘图
-fig = plt.figure()
+print("------------------------------------------------------------")  # 60個
 
-ax = fig.add_subplot(111)
-x0 = np.linspace(0,1,200)
-y0 = 2*x0
-x1 = np.linspace(0,1,200)
-y1 = 3*x1
-x2 = np.linspace(0,3,200)
-y2 = x2/3 
-x3 = np.linspace(0,5,200)
-y3 = 7*x3/5
-ax.plot(x0,y0,"r")
-plt.annotate("(1,2)",xy = (1,2))	
-ax.plot(x1,y1,"b")
+
+
+
+""" 共同抽出
+
 plt.annotate("(1,3)",xy = (1,3))	
-ax.plot(x2,y2,"b")
+
 plt.annotate("(3,1)",xy = (3,1))	
-ax.plot(x3,y3,"r")
-plt.annotate("(5,7)",xy = (5,7))	
 
-#平行四边形
-x7 = np.linspace(0,1,200)
-y7 = np.linspace(2,2,200)
-ax.plot(x7,y7,"b",linestyle='--')	
-x8 = np.linspace(1,1,200)
-y8 = np.linspace(0,2,200)
-ax.plot(x8,y8,"b",linestyle='--')	
-x4 = np.linspace(1,2,200)
-y4 = 3*x4
-ax.plot(x4,y4,"b",linestyle='--')	
-x5 = np.linspace(2,5,200)
-y5 = 6+x0
-ax.plot(x5,y5,"b",linestyle='--')
-x6 = np.linspace(3,5,200)
-y6 = 1+6*x0
-ax.plot(x6,y6,"b",linestyle='--')
-plt.xlim(0, 8)
-plt.ylim(0, 8)
-plt.grid(True)
-
-plt.show()
-
-
-print("------------------------------------------------------------")  # 60個
-
-import numpy as np
-import matplotlib.pyplot as plt
-
-base = np.mat([[1,3],[3,1]])
-print(base[0]+base[1])
-
-# 绘图
-fig = plt.figure()
-ax = fig.add_subplot(111)
-x1 = np.linspace(0,1,200)
-y1 = 3*x1
-x2 = np.linspace(0,3,200)
-y2 = x2/3 
-x3 = np.linspace(0,4,200)
-y3 = x3
-ax.plot(x1,y1,"b")
-plt.annotate("(1,3)",xy = (1,3))	
-ax.plot(x2,y2,"b")
-plt.annotate("(3,1)",xy = (3,1))	
-ax.plot(x3,y3,"b")
 plt.annotate("(4,4)",xy = (4,4))	
-plt.xlim(0, 4)
-plt.ylim(0, 4)
-plt.grid(True)
 
-plt.show()
+
+plt.annotate("向量(1,2)",xy = (1,2))	
+plt.annotate("向量(1,3)",xy = (1,3))	
+ax.plot(x4,y4,"b",linestyle='--')	
+ax.plot(x7,y7,"c",linestyle='--')	
+
+"""
+
+print("------------------------------------------------------------")  # 60個
+print("np陣列")
+print("------------------------------------------------------------")  # 60個
+
+print('全零np陣列 np.zeros()')
+
+# 全零np陣列
+# np.zeros會創建一個全部為0的數組。
+# np.zeros(shape, dtype = float, order = 'C')
+# shape:陣列的形狀。
+# Dtype:生成數組所需的數據類型。' int '或默認' float '
+
+cc = np.zeros(5)  # 生成5個值全爲0的數組
+print(cc)
+
+cc = np.zeros((5,))
+print(cc)
+
+print('全零np陣列 3X5')
+cc = np.zeros([3,5])
+print(cc)
+
+print('全零np陣列 3X5')
+cc = np.zeros((3, 5), dtype="int")
+print(cc)
+
+cc = np.zeros((2, 2))
+print(cc)
+
+
+print('全壹np陣列 np.ones()')
+
+# 全壹np陣列
+# np.ones函數創建一個全部為1的數組。
+# np.ones(shape, dtype = None, order = 'C')
+
+cc = np.ones(5)  # 生成5個值全爲1的數組
+print(cc)
+
+cc = np.ones((5,))
+print(cc)
+
+cc = np.ones((3, 4))
+print(cc)
+
+cc = np.ones((1, 2))
+print(cc)
+
+print('全一np陣列 3X5')
+cc = np.ones([3,5])
+print(cc)
+
+
+print('單位np陣列 np.eye()')
+
+
+print('單位np陣列 3X3')
+cc = np.eye(3)
+print(cc)
+
+
+print('空白np陣列 np.empty()')
+
+a = np.empty(5)  # 生成5個元素，值爲隨機數的數組（速度快）
+print(a)
+
+c = np.empty((5,))
+print(c)
+
+print('full np陣列 np.full()')
+
+
+
+a = np.full(5, 6)  # 生成5個值全爲6的數組
+print(a)
+
+c = np.full((2, 2), 7)  # Create a constant array
+print(c)
+
+
+print('diag np陣列 np.diag()')
+
+cc = np.diag([2, 3])
+print(cc)
+
+
+
+
+cc1 = np.ones([3,3]) #3*3的全1矩陣 
+cc2 = np.eye(3) # 3*3的单位阵
+print(cc1+cc2)
+print(cc1-cc2)
+
+print("------------------------------")  # 30個
 
 print("------------------------------------------------------------")  # 60個
 
-import numpy as np
+print("過濾資料 where")
 
-eps = 1.0e-6 # 误差量
+a = np.array([3, 6, 8, 1, 2, 88])
+b = np.where(a > 5)
+print('原np陣列')
+print(a)
+print('過濾資料 >5 的部分')
+print(b)
 
-# 矩阵的特征值和特征向量
-A = np.mat([[8,1,6],[3,5,7],[4,9,2]])
+print("------------------------------")  # 30個
 
-# 手动计算特征值：
-m,n = np.shape(A)
-# Aeig = lambda*I-A = [[lambda-8,-1],[-6;-3,lambda-5,-7],[-4,-9,lambda-2]]
-# (lambda-8)*(lambda-5)*(lambda-2)-190-24*(5-lambda)-3*(2-lambda)-63*(8-lambda)
-equationA = [1,-15,-24,360] #得到系数方程矩阵
-evals = np.roots(equationA) # 计算矩阵方程的根
-print("特征值:" , evals)
+a = np.array([[3, 6, 8, 77, 66], [1, 2, 88, 3, 98], [11, 2, 67, 5, 2]])
+b = np.where(a > 5)
+print('原np陣列')
+print(a)
+print('過濾資料 >5 的部分')
+print(b)
 
-evals, evecs = np.linalg.eig(A)
-print("特征值:",evals,"\n特征向量:", evecs)
+print("------------------------------")  # 30個
 
-# 特征值和特征向量,还原原矩阵
-sigma = evals*np.eye(m)
-print(evecs*sigma*np.linalg.inv(evecs))
+x1 = np.linspace(-2.0, 2.0, 11)  # 包含頭尾共21點
 
-print("------------------------------------------------------------")  # 60個
+# 移除 x1 > 0.55 的點, 就是保存 x1 <=0.6的點
+x2 = x1[x1 <= 0.55]
 
-import numpy as np
+# 遮罩 x1 > 0.7 的點, 會多了點線標記
+x3 = np.ma.masked_where(x1 > 0.7, x1)
 
-mylist = [1,2,3,4,5]
-a = 10
-mymatrix = np.mat(mylist)
-print(a*mymatrix)
+print('x1 :', x1)
+print('x2 :', x2)
+print('x3 :', x3)
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
-import numpy as np 
+print("分段函數")
 
-myZero = np.zeros([3,5]) #3*5的全零矩阵 
-print(myZero)
+x = np.arange(10)
+print(x)
 
-myOnes = np.ones([3,5]) #3*5的全零矩阵 
-print(myOnes)
+print(np.where(x < 5, x, 9 - x))
 
-# 随机矩阵:3行4列的0~1之间的随机数矩阵
-myRand = np.random.rand(3,4)
-print(myRand)
+a = np.arange(10)
+print(np.select([x < 3, x > 6], [-1, 1], 0))
 
-# 单位阵
-myEye = np.eye(3) # 3*3的单位阵
-print(myEye)
+a = np.arange(10)
+print(np.piecewise(x, [x < 3, x > 6], [lambda x: x * 2, lambda x: x * 3]))
 
+print("------------------------------")  # 30個
 
-print("------------------------------------------------------------")  # 60個
-
-import numpy as np
-
-myOnes = np.ones([3,3]) #3*3的全1矩阵 
-myEye = np.eye(3) # 3*3的单位阵
-print(myOnes+myEye)
-print(myOnes-myEye)
-
-mylist = [[1,2,3],[4,5,6],[7,8,9]]
-mymatrix = np.mat(mylist)
-
-a = 10
-print(a*mymatrix)
-
-print(sum(mymatrix))
-
-mymatrix2 = 1.5*np.ones([3,3])
-print(np.multiply(mymatrix,mymatrix2))
-
-print(np.power(mymatrix,2))
-
+a = np.array([2, 3, 4, 5, 6])
+print(f"a = {a}")
+b = np.ma.masked_where(a > 3, a)
+print(f"b = {b}")
 
 print("------------------------------------------------------------")  # 60個
-
-
-import numpy as np
-
-mymatrix = np.mat([[1,2,3],[4,5,6],[7,8,9]])
-
-mymatrix2 = np.mat([[1],[2],[3]])
-print(mymatrix*mymatrix2)
-
-# 矩阵的转置
-print(mymatrix.T)
-mymatrix.transpose()
-print(mymatrix)
-
-
-print("------------------------------------------------------------")  # 60個
-
-import numpy as np
-
-mymatrix = np.mat([[1,2,3],[4,5,6],[7,8,9]])
-[m,n]=np.shape(mymatrix) # 矩阵的行列数
-print("矩阵的行数和列数:",m,n)
-
-myscl1 = mymatrix[0] # 按行切片
-print("按行切片:",myscl1)
-
-myscl2 = mymatrix.T[0] # 按列切片
-print("按列切片:",myscl2)
-
-mycpmat = mymatrix.copy() # 矩阵的复制
-print("复制矩阵:\n",mycpmat)
-
-#比较
-print("矩阵元素的比较:\n",mymatrix < mymatrix.T)
-
-# 矩阵的特征值和特征向量
-A = [[8,1,6],[3,5,7],[4,9,2]]
-evals, evecs = np.linalg.eig(A)
-print("特征值:",evals,"\n特征向量:", evecs)
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-import numpy as np
-
-featuremat = np.mat([[88.5,96.8,104.1,111.3,117.7,124.0,130.0,135.4,140.2,145.3,151.9,159.5,165.9,169.8,171.6,172.3,172.7],
-[12.54,14.65,16.64,18.98,21.26,24.06,27.33,30.46,33.74,37.69,42.49,48.08,53.37,57.08,59.35,60.68,61.40]])
-
-# 计算均值
-mv1 = np.mean(featuremat[0]) # 第一列的均值
-mv2 = np.mean(featuremat[1]) # 第二列的均值 
-
-# 计算两列标准差
-dv1 = np.std(featuremat[0])
-dv2 = np.std(featuremat[1])
-
-corref = np.mean(np.multiply(featuremat[0]-mv1,featuremat[1]-mv2))/(dv1*dv2)
-print(corref)
-
-print(np.corrcoef(featuremat))
-
-covinv = np.linalg.inv(np.cov(featuremat))
-print(covinv)
-tp = featuremat.T[0]-featuremat.T[1]
-distma = np.sqrt(np.dot(np.dot(tp,covinv),tp.T))
-print(distma)
-
-print("------------------------------------------------------------")  # 60個
-
-vectormat = np.mat([[1,2,3],[4,5,6]])
-v12 = vectormat[0]-vectormat[1]
-print(np.sqrt(v12*v12.T))
-
-#norm
-varmat = np.std(vectormat.T,axis=0)
-normvmat = (vectormat-np.mean(vectormat))/varmat.T
-
-#norm
-print(normvmat)
-normv12 = normvmat[0]-normvmat[1]
-print(np.sqrt(normv12*normv12.T))
 
 
 
@@ -2220,6 +2151,34 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+
+
+"""
+np.gradient(f) 計算數組f中元素的梯度，當f為多維時，返回每個維度梯度
+梯度：連續值之間的變化率，即斜率
+XY坐標軸連續三個X坐標對應的Y軸值：a, b, c，其中，b的梯度是： (c‐a)/2
+"""
+na = np.random.randint(0, 50, (11))
+print(na)
+print(np.gradient(na))
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+
+#建立陣列
+
+cc = np.array([1, 2, 3])
+print(cc)
+
+
+
+z = np.linspace(0, 15, 100)
+x = np.sin(z)
+y = np.cos(z)
+x2 = np.sin(z)
 
 
 

@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.Threading;
+
 using AForge.Video;
 using AForge.Video.DirectShow;
 
@@ -18,34 +20,17 @@ namespace vcs_WebCam2
 
         private FilterInfoCollection USBWebcams = null;
 
-        private const int BORDER = 30;
+        private const int BORDER = 10;
         private const int W = 640;
         private const int H = 480;
-        private const int W_richTextBox1 = W + BORDER + W;
-        private const int H_richTextBox1 = 200;
+        private const int W_richTextBox1 = W / 2;
+        private const int H_richTextBox1 = H - 50;
 
         int webcam_count = 0;
 
         public Form1()
         {
             InitializeComponent();
-        }
-
-        void show_item_location()
-        {
-            pictureBox1.Size = new Size(W, H);
-            pictureBox1.Location = new Point(BORDER, BORDER);
-
-            richTextBox1.Location = new Point(BORDER, BORDER + H + BORDER);
-            richTextBox1.Size = new Size(W_richTextBox1, H_richTextBox1);
-
-            int dx = 100;
-            button1.Location = new Point(BORDER + W + BORDER + dx * 0, BORDER);
-            button2.Location = new Point(BORDER + W + BORDER + dx * 1, BORDER);
-            button3.Location = new Point(BORDER + W + BORDER + dx * 2, BORDER);
-
-            this.Text = "";
-            this.ClientSize = new Size(BORDER + W + BORDER + W + BORDER, BORDER + H + BORDER + 200 + BORDER);
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -63,6 +48,24 @@ namespace vcs_WebCam2
             catch (Exception ex)
             {
             }
+        }
+
+        void show_item_location()
+        {
+            pictureBox1.Size = new Size(W, H);
+            pictureBox1.Location = new Point(BORDER, BORDER);
+
+            richTextBox1.Location = new Point(BORDER + W + BORDER, BORDER + 50);
+            richTextBox1.Size = new Size(W_richTextBox1, H_richTextBox1);
+
+            int dx = 80;
+            button1.Location = new Point(BORDER + W + BORDER + dx * 0, BORDER);
+            button2.Location = new Point(BORDER + W + BORDER + dx * 1, BORDER);
+            button3.Location = new Point(BORDER + W + BORDER + dx * 2, BORDER);
+            lb_fps.Location = new Point(BORDER + W + BORDER + dx * 3, BORDER + BORDER / 2);
+
+            this.Text = "";
+            this.ClientSize = new Size(BORDER + W + BORDER + W / 2 + BORDER, BORDER + H + BORDER);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -133,5 +136,90 @@ namespace vcs_WebCam2
                 richTextBox1.Text += "尚未開啟WebCam\n";
             }
         }
+
+        private void timer_clock_Tick(object sender, EventArgs e)
+        {
+            /*
+            if (Cam != null)
+            {
+                if (Cam.IsRunning == true)
+                {
+                    DateTime dt = DateTime.Now;
+                    lb_fps.Text = (((frame_count - frame_count_old) * 1000) / ((TimeSpan)(dt - dt_old)).TotalMilliseconds).ToString("F2") + " fps";
+                    dt_old = dt;
+                    frame_count_old = frame_count;
+                }
+                else
+                {
+                    lb_fps.Text = "";
+                }
+            }
+            */
+        }
+    }
+
+    class WebCam
+    {
+        PictureBox display;    // a refrence to the PictureBox on the MainForm
+        private VideoCaptureDevice Cam = null; // refrence to the actual VidioCaptureDevice (webcam)
+        public String cameraName; // string for display purposes
+
+        public WebCam(PictureBox display, string monikerString, String cameraName)
+        {
+            this.cameraName = cameraName;
+            this.display = display;
+            this.display.Paint += new PaintEventHandler(DrawMessage);
+
+            Cam = new VideoCaptureDevice(monikerString);
+            Cam.NewFrame += new NewFrameEventHandler(Cam_NewFrame); // defines which method to call when a new frame arrives
+            Cam.Start(); // starts the videoCapture
+        }
+
+        public void StopCapture()
+        {
+            if (this.Cam.IsRunning == true)
+            {
+                // we must stop the VideoCaptureDevice when done to free it so it can be used by other applications
+                this.Cam.Stop();
+            }
+        }
+
+        private void DrawMessage(object sender, PaintEventArgs e)
+        {
+            using (Font f = new Font("Arial", 14, FontStyle.Bold))
+            {
+                string str = DateTime.Now.ToString();
+                SolidBrush sb = new SolidBrush(Color.Green);
+
+                e.Graphics.DrawString(str, f, sb, new Point(10, 10));
+            }
+        }
+
+        //自定義函數, 捕獲每一幀圖像並顯示
+        void Cam_NewFrame(object sender, NewFrameEventArgs eventArgs)
+        {
+            try
+            {
+                Bitmap bitmap1 = (Bitmap)eventArgs.Frame.Clone(); // get a copy of the BitMap from the VideoCaptureDevice
+                if (this.isResolutionSet == false)
+                {
+                    // this is run once to set the resolution for the VideoRecorder
+                    this.Width = bitmap1.Width;
+                    this.Height = bitmap1.Height;
+                    this.isResolutionSet = true;
+                }
+
+                this.display.Image = (Bitmap)bitmap1.Clone(); // displays the current frame on the main form
+
+            }
+            catch (InvalidOperationException ex)
+            {
+            }
+        }
+
+        // output video resolution info
+        bool isResolutionSet = false;
+        int Width = 0;
+        int Height = 0;
     }
 }

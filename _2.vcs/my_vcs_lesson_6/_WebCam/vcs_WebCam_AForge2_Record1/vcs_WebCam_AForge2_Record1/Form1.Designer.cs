@@ -137,12 +137,11 @@
             this.groupBox1.Controls.Add(this.bt_record_stop);
             this.groupBox1.Controls.Add(this.bt_record_start);
             this.groupBox1.Controls.Add(this.bt_record_start2);
-            this.groupBox1.Location = new System.Drawing.Point(12, 128);
+            this.groupBox1.Location = new System.Drawing.Point(4, 116);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(375, 141);
             this.groupBox1.TabIndex = 25;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Operation";
             // 
             // lb_main_mesg
             // 
@@ -218,7 +217,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(450, 305);
+            this.ClientSize = new System.Drawing.Size(384, 261);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.pictureBox1);

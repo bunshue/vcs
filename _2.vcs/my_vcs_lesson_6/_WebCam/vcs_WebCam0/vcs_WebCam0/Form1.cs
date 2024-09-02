@@ -23,7 +23,18 @@ namespace vcs_WebCam0
 
         //參考/右鍵/加入參考/瀏覽AForge.Video.dll和AForge.Video.DirectShow.dll
 
-        public FilterInfoCollection USBWebcams = null;
+
+        private FilterInfoCollection USBWebcams = null;
+
+        private const int BORDER = 10;
+        private const int W = 640;
+        private const int H = 480;
+        private const int W_richTextBox1 = W/2;
+        private const int H_richTextBox1 = H - 50;
+
+        //int webcam_count = 0;
+        
+        //public FilterInfoCollection USBWebcams = null;
         public VideoCaptureDevice Cam = null;
 
         public Form1()
@@ -33,15 +44,33 @@ namespace vcs_WebCam0
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            start_webcam();
+            show_item_location();
         }
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
-            stop_webcam();
+            Stop_Webcam();
         }
 
-        void start_webcam()
+        void show_item_location()
+        {
+            pictureBox1.Size = new Size(W, H);
+            pictureBox1.Location = new Point(BORDER, BORDER);
+
+            richTextBox1.Location = new Point(BORDER+W+BORDER, BORDER + 50);
+            richTextBox1.Size = new Size(W_richTextBox1, H_richTextBox1);
+
+            int dx = 80;
+            button1.Location = new Point(BORDER + W + BORDER + dx * 0, BORDER);
+            button2.Location = new Point(BORDER + W + BORDER + dx * 1, BORDER);
+            button3.Location = new Point(BORDER + W + BORDER + dx * 2, BORDER);
+            lb_fps.Location = new Point(BORDER + W + BORDER + dx * 3, BORDER+BORDER/2);
+
+            this.Text = "";
+            this.ClientSize = new Size(BORDER + W + BORDER + W/2 + BORDER, BORDER + H + BORDER);
+        }
+
+        void Init_WebcamSetup()
         {
             //richTextBox1.Text += "重新抓取USB影像\t";
             USBWebcams = new FilterInfoCollection(FilterCategory.VideoInputDevice);
@@ -50,13 +79,13 @@ namespace vcs_WebCam0
                 //button12.Enabled = false;
                 Cam = new VideoCaptureDevice(USBWebcams[0].MonikerString);  //實例化對象
                 Cam.NewFrame += new NewFrameEventHandler(Cam_NewFrame);
-                Cam.Start();   // WebCam starts capturing images.
                 //richTextBox1.Text += "有影像裝置\n";
 
                 Cam.VideoResolution = Cam.VideoCapabilities[0];
 
                 string webcam_name = string.Empty;
 
+                /*
                 int ww;
                 int hh;
                 ww = Cam.VideoCapabilities[0].FrameSize.Width;
@@ -68,6 +97,7 @@ namespace vcs_WebCam0
                 pictureBox1.Size = new Size(ww, hh);
                 pictureBox1.Location = new Point(50, 50);
                 this.ClientSize = new Size(pictureBox1.Location.X + pictureBox1.Width + 50, pictureBox1.Location.Y + pictureBox1.Height + 50);
+                */
             }
             else
             {
@@ -75,16 +105,27 @@ namespace vcs_WebCam0
             }
         }
 
-        void stop_webcam()
+        void Start_Webcam()
         {
             if (Cam != null)
             {
-                if (Cam.IsRunning == true)  // When Form1 closes itself, WebCam must stop, too.
+                Cam.Start();   // WebCam starts capturing images.
+            }
+        }
+
+        void Stop_Webcam()
+        {
+            if (Cam != null)
+            {
+                //show_main_message("停止", S_OK, 20);
+                Cam.Stop();  // WebCam stops capturing images.
+                Cam.SignalToStop();
+                Cam.WaitForStop();
+                while (Cam.IsRunning)
                 {
-                    Cam.Stop();   // WebCam stops capturing images.
-                    Cam.SignalToStop();
-                    Cam.WaitForStop();
+                    Console.Write("等候相機關閉");
                 }
+                Cam = null;
             }
         }
 
@@ -145,17 +186,36 @@ namespace vcs_WebCam0
 
         private void timer_clock_Tick(object sender, EventArgs e)
         {
-            if (Cam.IsRunning == true)
+            if (Cam != null)
             {
-                DateTime dt = DateTime.Now;
-                lb_fps.Text = (((frame_count - frame_count_old) * 1000) / ((TimeSpan)(dt - dt_old)).TotalMilliseconds).ToString("F2") + " fps";
-                dt_old = dt;
-                frame_count_old = frame_count;
+                if (Cam.IsRunning == true)
+                {
+                    DateTime dt = DateTime.Now;
+                    lb_fps.Text = (((frame_count - frame_count_old) * 1000) / ((TimeSpan)(dt - dt_old)).TotalMilliseconds).ToString("F2") + " fps";
+                    dt_old = dt;
+                    frame_count_old = frame_count;
+                }
+                else
+                {
+                    lb_fps.Text = "";
+                }
             }
-            else
-            {
-                lb_fps.Text = "";
-            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Init_WebcamSetup();
+            Start_Webcam();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Stop_Webcam();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

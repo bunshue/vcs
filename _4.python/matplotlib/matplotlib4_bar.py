@@ -94,36 +94,32 @@ plt.xticks(range(len(animals.values())), animals.keys())
 # 第四張圖
 plt.subplot(234)
 
-
-def addlabels1(x, y):
-    for i in range(len(x)):
-        plt.text(i, y[i], y[i])
-
-
 animals = ["鼠", "牛", "虎", "兔"]
 weights2 = [3, 48, 33, 8]
 
 plt.ylim(0, 50)
 plt.bar(animals, weights2, color=["red", "green", "blue", "yellow"])
-addlabels1(animals, weights2)
-plt.title("體重")
+
+for i in range(len(animals)):
+    plt.text(i, weights2[i], weights2[i])
 
 # 第五張圖
 plt.subplot(235)
-
-
-def addlabels2(x, y):
-    for i in range(len(x)):
-        plt.text(y[i], i, y[i])
-
 
 animals = ["鼠", "牛", "虎", "兔"]
 weights2 = [3, 48, 33, 8]
 
 plt.xlim(0, 50)
-plt.barh(animals, weights2, color=["red", "green", "blue", "yellow"])
-addlabels2(animals, weights2)
-plt.title("體重")
+plt.barh(animals, weights2, color=["red", "green", "blue", "yellow"])  #橫向bar圖
+
+"""
+#顯示數值 1
+for i in range(len(animals)):
+    plt.text(weights2[i], i, weights2[i])
+"""
+#顯示數值 2
+for y, x in enumerate(weights2):
+    plt.text(x, y, "%s" % x, ha="center")
 
 # 第六張圖
 plt.subplot(236)
@@ -149,9 +145,238 @@ plt.figure(
 # 第一張圖
 plt.subplot(231)
 
+x = ["鼠", "牛", "虎", "兔"]
+s = [3, 48, 33, 8]
+
+"""
+plt.bar(x, s)
+plt.bar(x, s, width=0.8, align="edge", color="r", ec="y", lw=2)
+"""
+plt.bar(x, s, width=0.8, align="edge", color="r", ec="y", lw=2)
+
 
 # 第二張圖
 plt.subplot(232)
+
+print("將字典直接輸出給barh圖, 加error")
+
+data = {"鼠": 3, "牛": 48, "虎": 33, "兔": 8}
+error = [3, 10, 5, 8]
+
+#橫向bar圖
+plt.barh(
+    list(data.keys()),
+    list(data.values()),
+    xerr=error,
+    align="center",
+    color="green",
+    ecolor="black",
+)
+
+# 第三張圖
+plt.subplot(233)
+
+
+
+# 第四張圖
+plt.subplot(234)
+
+colors = ["b", "g", "r", "y", "c"]
+animals = ["鼠", "牛", "虎", "兔", "龍"]
+weights = [3, 48, 33, 8, 38]
+
+plt.barh(animals, weights, color=colors)  #橫向bar圖
+
+# 第五張圖
+plt.subplot(235)
+
+animals = ["鼠", "牛", "虎", "兔", "龍"]
+weights = [3, 48, 33, 8, 38]
+
+# plt.bar(animals,weights)
+# plt.bar(animals,weights,align='edge',color='g')
+plt.bar(animals, weights, width=0.5, color="m")
+
+# 第六張圖
+plt.subplot(236)
+
+animals = ["鼠", "牛", "虎", "兔", "龍"]
+weights = [3, 48, 33, 8, 38]
+colors = ["grey", "grey", "red", "grey", "grey"]
+
+plt.bar(animals, weights, color=colors)
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+plt.figure(
+    num="bar 集合 4",
+    figsize=(12, 8),
+    dpi=100,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
+
+# 第一張圖
+plt.subplot(231)
+
+x = ["第1學期", "第2學期", "第3學期", "第4學期", "第5學期", "第6學期", "第7學期", "第8學期"]
+s = [95.3, 94.2, 91.4, 96.2, 92.3, 93.6, 89.4, 91.2]
+plt.bar(x, s)
+plt.ylabel("平均分數")
+plt.title("大學四年各學期的平均分數")
+
+# 第二張圖
+plt.subplot(232)
+
+x = ["第1學期", "第2學期", "第3學期", "第4學期", "第5學期", "第6學期", "第7學期", "第8學期"]
+s = [95.3, 94.2, 91.4, 96.2, 92.3, 93.6, 89.4, 91.2]
+plt.bar(x, s, width=0.5, align="edge", color="r", ec="y", lw=2)
+plt.ylabel("平均分數")
+plt.title("大學四年各學期的平均分數")
+
+
+# 第三張圖
+plt.subplot(233)
+
+x = ["第1學期", "第2學期", "第3學期", "第4學期", "第5學期", "第6學期", "第7學期", "第8學期"]
+s = [95.3, 94.2, 91.4, 96.2, 92.3, 93.6, 89.4, 91.2]
+plt.barh(x, s)  #橫向bar圖
+plt.ylabel("平均分數")
+plt.title("大學四年各學期的平均分數")
+
+
+# 第四張圖
+plt.subplot(234)
+
+x = ["第1學期", "第2學期", "第3學期", "第4學期", "第5學期", "第6學期", "第7學期", "第8學期"]
+s = [95.3, 94.2, 91.4, 96.2, 92.3, 93.6, 89.4, 91.2]
+plt.barh(x, s)  #橫向bar圖
+plt.ylabel("平均分數")
+plt.title("大學四年各學期的平均分數")
+
+
+# 第五張圖
+plt.subplot(235)
+
+x = ["第1學期", "第2學期", "第3學期", "第4學期", "第5學期", "第6學期", "第7學期", "第8學期"]
+s = [95.3, 94.2, 91.4, 96.2, 92.3, 93.6, 89.4, 91.2]
+plt.bar(x, s, width=0.5, align="edge", color="r", ec="y", lw=2)
+plt.ylabel("平均分數")
+plt.title("大學四年各學期的平均分數")
+
+
+# 第六張圖
+plt.subplot(236)
+
+x = ["上學期", "下學期"]
+s1, s2, s3, s4 = [96.2, 87.1], [88.9, 95.2], [85.1, 91.5], [95.2, 96.7]
+
+index = np.arange(len(x))
+width = 0.15
+plt.bar(index - 1.5 * width, s1, width, color="b")
+plt.bar(index - 0.5 * width, s2, width, color="r")
+plt.bar(index + 0.5 * width, s3, width, color="y")
+plt.bar(index + 1.5 * width, s4, width, color="g")
+
+plt.xticks(index, x)
+plt.legend(["2017年", "2018年", "2019年", "2020年"])
+
+plt.ylabel("平均分數,取到小數點第一位")
+plt.title("大學四年各學期平均成績比較表")
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+plt.figure(
+    num="bar 集合 5",
+    figsize=(12, 8),
+    dpi=100,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
+
+# 第一張圖
+plt.subplot(231)
+
+name = ["鼠", "牛", "虎", "兔", "龍"]
+weight = [3, 48, 33, 8, 38]
+# plt.bar(name, weight)
+plt.bar(name, weight, width=0.8, align="edge", color="r", ec="y", lw=2)
+
+
+# 第二張圖
+plt.subplot(232)
+
+x = ["鼠", "牛", "虎", "兔", "龍"]
+s = [3, 48, 33, 8, -38]
+plt.barh(x, s, color="red")  #橫向bar圖
+
+
+# 第三張圖
+plt.subplot(233)
+
+revenue = [300, 320, 400, 350]
+cost = [250, 280, 310, 290]
+quarter = ["Q1", "Q2", "Q3", "Q4"]
+
+barH = 0.5
+plt.barh(quarter, revenue, color="g", height=barH, label="收入")  #橫向bar圖
+plt.barh(quarter, -np.array(cost), color="m", height=barH, label="支出")  #橫向bar圖
+
+plt.title("公司收支表")
+plt.xlabel("收入與支出")
+plt.ylabel("季度")
+plt.legend()
+
+# 第四張圖
+plt.subplot(234)
+
+x = np.arange(1, 6)
+plt.bar(x - 0.4, [3, 10, 8, 12, 6], width=0.4, ec="none", fc="#e63946")
+plt.bar(x, [6, 3, 12, 5, 8], width=0.4, ec="none", fc="#7fb069")
+
+plt.title("雙色的長條圖")
+
+
+# 第五張圖
+plt.subplot(235)
+
+x = np.arange(0.6, 6)
+A = np.random.randint(1, 15, 6)
+B = np.random.randint(1, 15, 6)
+plt.barh(x, A, fc="#e63946", ec="none")  #橫向bar圖
+plt.barh(x, -B, fc="#7fb069", ec="none")  #橫向bar圖
+
+plt.title("雙向的長條圖")
+
+
+# 第六張圖
+plt.subplot(236)
+
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+plt.figure(
+    num="bar 集合 5",
+    figsize=(12, 8),
+    dpi=100,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
+
+# 第一張圖
+plt.subplot(231)
 
 filename = "C:/_git/vcs/_1.data/______test_files1/__RW/_txt/台灣各縣市人口.txt"
 
@@ -174,74 +399,9 @@ print(popu)
 plt.bar(index, popu)
 plt.xticks(index + 0.5, city, rotation=-70)
 
-# 第三張圖
-plt.subplot(233)
+# 第二張圖
+plt.subplot(232)
 
-listCity = [
-    "高雄市",
-    "屏東縣",
-    "臺東縣",
-    "新北市",
-    "臺中市",
-    "臺北市",
-    "臺南市",
-    "新竹縣",
-    "彰化縣",
-    "嘉義縣",
-    "雲林縣",
-    "桃園市",
-    "宜蘭縣",
-    "苗栗縣",
-    "南投縣",
-    "基隆市",
-    "花蓮縣",
-]
-
-listCount = [12, 24, 11, 11, 18, 8, 16, 11, 18, 8, 11, 9, 54, 40, 31, 10, 9]
-
-# 繪製柱狀圖
-
-plt.barh(listCity, listCount, label="農業區")  # 橫向柱狀圖串列數據設定
-plt.title("各縣市農場數量")  # 柱狀圖名稱
-plt.xlim(0, 60)  # X軸範圍0~60
-plt.xlabel("數量")  # X軸名稱
-plt.ylabel("縣市")  # Y軸名稱
-for y, x in enumerate(listCount):  # 使用迴圈讓柱狀末端顯示各縣市農業區總數
-    plt.text(x, y, "%s" % x, ha="center")
-plt.legend()  # 圖例(柱狀圖)說明
-plt.grid(True)  # 顯示格線
-
-
-# 第四張圖
-plt.subplot(234)
-
-x = ["鼠", "牛", "虎", "兔"]
-s = [3, 48, 33, 8]
-
-"""
-plt.bar(x, s)
-plt.bar(x, s, width=0.8, align="edge", color="r", ec="y", lw=2)
-"""
-plt.bar(x, s, width=0.8, align="edge", color="r", ec="y", lw=2)
-
-# 第五張圖
-plt.subplot(235)
-
-print("將字典直接輸出給barh圖, 加error")
-
-data = {"鼠": 3, "牛": 48, "虎": 33, "兔": 8}
-error = [3, 10, 5, 8]
-plt.barh(
-    list(data.keys()),
-    list(data.values()),
-    xerr=error,
-    align="center",
-    color="green",
-    ecolor="black",
-)
-
-# 第六張圖
-plt.subplot(236)
 
 print("畫出頻率分布圖")
 
@@ -290,223 +450,17 @@ labels = [
 ]  # x軸的刻度標籤
 plt.bar(x, hist, tick_label=labels, width=1)  # 描繪長條圖
 
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-plt.figure(
-    num="bar 集合 3",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
-
-# 第一張圖
-plt.subplot(231)
-
-x = ["上學期", "下學期"]
-s1, s2, s3, s4 = [96.2, 87.1], [88.9, 95.2], [85.1, 91.5], [95.2, 96.7]
-
-index = np.arange(len(x))
-width = 0.15
-plt.bar(index - 1.5 * width, s1, width, color="b")
-plt.bar(index - 0.5 * width, s2, width, color="r")
-plt.bar(index + 0.5 * width, s3, width, color="y")
-plt.bar(index + 1.5 * width, s4, width, color="g")
-
-plt.xticks(index, x)
-plt.legend(["2017年", "2018年", "2019年", "2020年"])
-
-plt.ylabel("平均分數,取到小數點第一位")
-plt.title("大學四年各學期平均成績比較表")
-
-# 第二張圖
-plt.subplot(232)
-
-votes = [135, 412, 397]  # 得票數
-N = len(votes)  # 計算長度
-x = np.arange(N)  # 長條圖x軸座標
-width = 0.35  # 長條圖寬度
-
-plt.bar(x, votes, width)  # 繪製長條圖
-plt.xticks(x, ("James", "Peter", "Norton"))  # x 軸刻度
-plt.yticks(np.arange(0, 450, 30))  # y 軸刻度
-plt.title("x用名稱 y設定範圍刻距")
-
 # 第三張圖
 plt.subplot(233)
-
 
 
 # 第四張圖
 plt.subplot(234)
 
-colors = ["b", "g", "r", "y", "c"]
-
-animals = ["鼠", "牛", "虎", "兔", "龍"]
-
-weights = [3, 48, 33, 8, 38]
-
-plt.barh(animals, weights, color=colors)
 
 # 第五張圖
 plt.subplot(235)
 
-animals = ["鼠", "牛", "虎", "兔", "龍"]
-
-weights = [3, 48, 33, 8, 38]
-# plt.bar(animals,weights)
-# plt.bar(animals,weights,align='edge',color='g')
-plt.bar(animals, weights, width=0.5, color="m")
-
-# 第六張圖
-plt.subplot(236)
-
-colors = ["grey", "grey", "red", "grey", "grey"]
-animals = ["鼠", "牛", "虎", "兔", "龍"]
-
-weights = [3, 48, 33, 8, 38]
-
-plt.bar(animals, weights, color=colors)
-
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-plt.figure(
-    num="bar 集合 4",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
-
-# 第一張圖
-plt.subplot(231)
-
-x = ["第1學期", "第2學期", "第3學期", "第4學期", "第5學期", "第6學期", "第7學期", "第8學期"]
-s = [95.3, 94.2, 91.4, 96.2, 92.3, 93.6, 89.4, 91.2]
-plt.bar(x, s)
-plt.ylabel("平均分數")
-plt.title("大學四年各學期的平均分數")
-
-# 第二張圖
-plt.subplot(232)
-
-x = ["第1學期", "第2學期", "第3學期", "第4學期", "第5學期", "第6學期", "第7學期", "第8學期"]
-s = [95.3, 94.2, 91.4, 96.2, 92.3, 93.6, 89.4, 91.2]
-plt.bar(x, s, width=0.5, align="edge", color="r", ec="y", lw=2)
-plt.ylabel("平均分數")
-plt.title("大學四年各學期的平均分數")
-
-
-# 第三張圖
-plt.subplot(233)
-
-x = ["第1學期", "第2學期", "第3學期", "第4學期", "第5學期", "第6學期", "第7學期", "第8學期"]
-s = [95.3, 94.2, 91.4, 96.2, 92.3, 93.6, 89.4, 91.2]
-plt.barh(x, s)
-plt.ylabel("平均分數")
-plt.title("大學四年各學期的平均分數")
-
-
-# 第四張圖
-plt.subplot(234)
-
-x = ["第1學期", "第2學期", "第3學期", "第4學期", "第5學期", "第6學期", "第7學期", "第8學期"]
-s = [95.3, 94.2, 91.4, 96.2, 92.3, 93.6, 89.4, 91.2]
-plt.barh(x, s)
-plt.ylabel("平均分數")
-plt.title("大學四年各學期的平均分數")
-
-
-# 第五張圖
-plt.subplot(235)
-
-x = ["第1學期", "第2學期", "第3學期", "第4學期", "第5學期", "第6學期", "第7學期", "第8學期"]
-s = [95.3, 94.2, 91.4, 96.2, 92.3, 93.6, 89.4, 91.2]
-plt.bar(x, s, width=0.5, align="edge", color="r", ec="y", lw=2)
-plt.ylabel("平均分數")
-plt.title("大學四年各學期的平均分數")
-
-
-# 第六張圖
-plt.subplot(236)
-
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-plt.figure(
-    num="bar 集合 5",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
-
-# 第一張圖
-plt.subplot(231)
-
-name = ["鼠", "牛", "虎", "兔", "龍"]
-weight = [3, 48, 33, 8, 38]
-# plt.bar(name, weight)
-plt.bar(name, weight, width=0.8, align="edge", color="r", ec="y", lw=2)
-
-
-# 第二張圖
-plt.subplot(232)
-
-x = ["鼠", "牛", "虎", "兔", "龍"]
-s = [3, 48, 33, 8, -38]
-plt.barh(x, s, color="red")
-
-
-# 第三張圖
-plt.subplot(233)
-
-revenue = [300, 320, 400, 350]
-cost = [250, 280, 310, 290]
-quarter = ["Q1", "Q2", "Q3", "Q4"]
-
-barH = 0.5
-plt.barh(quarter, revenue, color="g", height=barH, label="收入")
-plt.barh(quarter, -np.array(cost), color="m", height=barH, label="支出")
-
-plt.title("公司收支表")
-plt.xlabel("收入與支出")
-plt.ylabel("季度")
-plt.legend()
-
-# 第四張圖
-plt.subplot(234)
-
-x = np.arange(1, 6)
-plt.bar(x - 0.4, [3, 10, 8, 12, 6], width=0.4, ec="none", fc="#e63946")
-plt.bar(x, [6, 3, 12, 5, 8], width=0.4, ec="none", fc="#7fb069")
-
-plt.title("雙色的長條圖")
-
-
-# 第五張圖
-plt.subplot(235)
-
-x = np.arange(0.6, 6)
-A = np.random.randint(1, 15, 6)
-B = np.random.randint(1, 15, 6)
-plt.barh(x, A, fc="#e63946", ec="none")
-plt.barh(x, -B, fc="#7fb069", ec="none")
-
-plt.title("雙向的長條圖")
 
 
 # 第六張圖
@@ -843,9 +797,9 @@ labels = ["2023年", "2024年", "2025年"]  # 年度刻度標籤
 # ax = fig.add_axes([0.15,0.15,0.7,0.7])
 barH = 0.25  # 橫條圖高度
 
-plt.barh(X + 0.00, AAA, color="r", height=barH, label="AAA")
-plt.barh(X + barH, BBB, color="g", height=barH, label="BBB")
-plt.barh(X + barH * 2, CCC, color="b", height=barH, label="CCC")
+plt.barh(X + 0.00, AAA, color="r", height=barH, label="AAA")  #橫向bar圖
+plt.barh(X + barH, BBB, color="g", height=barH, label="BBB")  #橫向bar圖
+plt.barh(X + barH * 2, CCC, color="b", height=barH, label="CCC")  #橫向bar圖
 
 plt.title("銷售報表")
 plt.xlabel("數量")
@@ -864,11 +818,11 @@ CCC = [5200, 4930, 5350]  # CCC線條
 year = ["2023年", "2024年", "2025年"]  # 年度
 
 barH = 0.35  # 橫條圖高度
-plt.barh(year, AAA, color="green", height=barH, label="AAA")
-plt.barh(year, BBB, color="yellow", height=barH, left=np.array(AAA), label="BBB")
+plt.barh(year, AAA, color="green", height=barH, label="AAA")  #橫向bar圖
+plt.barh(year, BBB, color="yellow", height=barH, left=np.array(AAA), label="BBB")  #橫向bar圖
 plt.barh(
     year, CCC, color="red", height=barH, left=np.array(AAA) + np.array(BBB), label="CCC"
-)
+)  #橫向bar圖
 
 plt.title("銷售報表")
 plt.xlabel("數量")
@@ -977,3 +931,12 @@ ax.set_ylabel("Money")
 ax.legend(loc=2)
 
 plt.show()
+
+
+width = 0.35  # 長條圖寬度
+plt.bar(x, values, width)  # 繪製長條圖
+#x用名稱 
+plt.xticks(x, names)  # x 軸刻度
+#y設定範圍刻距
+plt.yticks(np.arange(0, 50, 5))  # y 軸刻度
+

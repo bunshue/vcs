@@ -224,25 +224,27 @@ plt.figure(
 print("------------------------------------------------------------")  # 60個
 plt.subplot(231)
 
+# 額外設定 s、c 和 cmap，就能根據資料點的數據，對應出指定的顏色，
+# 假設資料的範圍是 0～100，顏色地圖是紅橙黃綠藍，
+# 則 0～20 對應紅色，21～40 對應橙色，
+# 41～60 對應黃色，61～80 對應綠色，81～100 對應藍色。
 
-def loc(index):
-    # 處理座標的移動
-    x_mov = random.choice([-3, 3])  # 隨機x軸移動值
-    xloc = x[index - 1] + x_mov  # 計算x軸新位置
-    y_mov = random.choice([-5, -1, 1, 5])  # 隨機y軸移動值
-    yloc = y[index - 1] + y_mov  # 計算y軸新位置
-    x.append(xloc)  # x軸新位置加入串列
-    y.append(yloc)  # y軸新位置加入串列
+x = range(1, 11)  # 1 2 3 ... 10
+y = range(1, 11)  # 1 2 3 ... 10
+X, Y = np.meshgrid(x, y)
 
+size = [i * 80 for i in Y]  # 放大資料點數據 N 倍，比較容易觀察尺寸
 
-N = 10000  # 設定隨機點的數量
-x = [0]  # 設定第一次執行x座標
-y = [0]  # 設定第一次執行y座標
+plt.scatter(X, Y, s=size, c=size, cmap="Set1")  # 使用 Set1 的 colormap
 
-for i in range(1, N):  # 建立點的座標
-    loc(i)
-t = x  # 色彩隨x軸變化
-plt.scatter(x, y, s=2, c=t, cmap="brg")
+"""
+# 加上 vmin 和 vmax 的設定，能設定顏色的最大值與最小值
+# 當數值小於 vmin 時，只會顯示紅色，當數值大於 vmax 時，只會顯示灰色。
+plt.scatter(X, Y, s=size, c=size, cmap="Set1", vmin=200, vmax=650)
+# plt.colorbar()
+"""
+
+# plt.colorbar()
 
 print("------------------------------------------------------------")  # 60個
 plt.subplot(232)
@@ -274,9 +276,11 @@ N = 50  # 散點的數量
 r = 0.5  # 邊界線boundary半徑
 x = np.random.rand(N)  # 隨機的 x 座標點
 y = np.random.rand(N)  # 隨機的 y 座標點
+
 size = []
 for i in range(N):  # 建立散點區域陣列
     size.append(30)
+
 colorused = ["b", "c", "g", "k", "m", "r", "y"]  # 定義顏色
 colors = []
 for i in range(N):  # 隨機設定 N 個顏色
@@ -292,7 +296,6 @@ plt.scatter(x, y, s=size2, marker="o", c=colors)
 # 繪製邊界線
 plt.plot((0.5, 0.5), (0, 1.0))  # 繪製邊界線
 
-
 print("------------------------------------------------------------")  # 60個
 plt.subplot(234)
 
@@ -300,6 +303,7 @@ N = 50  # 散點的數量
 r = 0.5  # 邊界線boundary半徑
 x = np.random.rand(N)  # 隨機的 x 座標點
 y = np.random.rand(N)  # 隨機的 y 座標點
+
 size = np.random.randint(20, 100, N)  # 散點大小
 colorused = ["b", "c", "g", "k", "m", "r", "y"]  # 定義顏色
 colors = []
@@ -318,41 +322,13 @@ plt.scatter(x, y, s=size2, marker="o", c=colors)
 radian = np.arange(0, np.pi / 2, 0.01)
 plt.plot(r * np.cos(radian), r * np.sin(radian))  # 繪製邊界線
 
-
 print("------------------------------------------------------------")  # 60個
 plt.subplot(235)
-
-
-# 額外設定 s、c 和 cmap，就能根據資料點的數據，對應出指定的顏色，
-# 假設資料的範圍是 0～100，顏色地圖是紅橙黃綠藍，
-# 則 0～20 對應紅色，21～40 對應橙色，
-# 41～60 對應黃色，61～80 對應綠色，81～100 對應藍色。
-
-
-x = range(1, 11)  # 1 2 3 ... 10
-y = range(1, 11)  # 1 2 3 ... 10
-X, Y = np.meshgrid(x, y)
-
-size = [i * 80 for i in Y]  # 放大資料點數據 N 倍，比較容易觀察尺寸
-
-plt.scatter(X, Y, s=size, c=size, cmap="Set1")  # 使用 Set1 的 colormap
-# plt.colorbar()
 
 
 print("------------------------------------------------------------")  # 60個
 plt.subplot(236)
 
-# 加上 vmin 和 vmax 的設定，能設定顏色的最大值與最小值
-# 當數值小於 vmin 時，只會顯示紅色，當數值大於 vmax 時，只會顯示灰色。
-
-x = range(1, 11)  # 1 2 3 ... 10
-y = range(1, 11)  # 1 2 3 ... 10
-X, Y = np.meshgrid(x, y)
-
-size = [i * 80 for i in Y]  # 放大資料點數據 N 倍，比較容易觀察尺寸
-
-plt.scatter(X, Y, s=size, c=size, cmap="Set1", vmin=200, vmax=650)
-# plt.colorbar()
 
 plt.show()
 
@@ -424,10 +400,12 @@ print("------------------------------------------------------------")  # 60個
 plt.subplot(234)
 
 N = 20
+
 x = np.random.randn(N)
 y = np.random.randn(N)
-colors = np.random.rand(N)  # 色彩數列
 size = 300
+
+colors = np.random.rand(N)  # 色彩數列
 
 plt.scatter(x, y, c=colors, s=size, alpha=0.3, cmap="viridis")
 # plt.colorbar()
@@ -441,14 +419,17 @@ print("------------------------------------------------------------")  # 60個
 plt.subplot(235)
 
 N = 20
+
+x = np.random.randint(1, 11, N)
+y = np.random.randint(1, 11, N)
+
+size = 300
+
 colorused = ["b", "c", "g", "k", "m", "r", "y"]  # 定義顏色
 colors = []  # 建立色彩數列
 for i in range(N):  # 隨機設定顏色
     colors.append(np.random.choice(colorused))
 
-x = np.random.randint(1, 11, N)
-y = np.random.randint(1, 11, N)
-size = 300
 plt.scatter(x, y, s=size, c=colors)  # 繪製散點
 
 print("------------------------------------------------------------")  # 60個
@@ -457,10 +438,13 @@ plt.subplot(236)
 from matplotlib import colors  # 為了調整“色盤”，需要導入colors
 
 N = 20
+
 x = np.random.randn(N)
 y = np.random.randn(N)
-color = np.random.rand(N)  # 色彩數列
+
 size = 300
+
+color = np.random.rand(N)  # 色彩數列
 
 changecolor = colors.Normalize(vmin=0.4, vmax=0.8)
 
@@ -481,6 +465,7 @@ plt.figure(figsize=(12, 8))
 
 N = 1000
 A = 10  # 震幅
+
 # 使用隨機陣列產生圖像
 x = A * np.random.rand(N)  # 0~A取N個數出來
 y = A * np.random.rand(N)  # 0~A取N個數出來
@@ -526,27 +511,6 @@ print("------------------------------------------------------------")  # 60個
 
 print("散佈圖")
 
-fig, ax = plt.subplots()
-
-N = 100
-x = np.random.randint(30, size=N)
-y = np.random.randint(30, size=N)
-c = np.random.randint(30, size=N)
-size = np.random.randint(10, size=N) * 400
-
-sc = ax.scatter(x=x, y=y, c=c, s=c, alpha=0.5, label="scatter plot")
-
-ax.set_xlabel("X軸", loc="left")
-ax.set_ylabel("Y軸", loc="top")
-ax.legend(loc=1)
-
-cbar = fig.colorbar(sc)
-cbar.set_label("Z軸", loc="center")
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
 x = np.arange(6)
 y = x/3 - 1
 t = x/3  # 色彩隨 x 軸值變化
@@ -570,54 +534,6 @@ y = np.sin(x)  # y陣列的變化
 lwidths = (1 + x) ** 2  # 寬度陣列
 
 plt.scatter(x, y, s=lwidths, c=x, cmap="hsv")  # hsv色彩映射圖
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-N = 100  # 數據數量
-x = np.random.normal(0, 1, N)  # 均值是 0, 標準差是 1
-y = np.random.normal(0, 1, N)  # 均值是 0, 標準差是 1
-
-color = x + y  # 設定顏色串列是 x + y 數列結果
-norm = plt.Normalize(vmin=-3, vmax=3)
-
-plt.scatter(x, y, s=60, c=color, cmap="Greens", norm=norm)
-
-plt.xlim(-3, 3)
-plt.ylim(-3, 3)
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-N = 100  # 數據數量
-x = np.random.normal(0, 1, N)  # 均值是 0, 標準差是 1
-y = np.random.normal(0, 1, N)  # 均值是 0, 標準差是 1
-
-color = x + y  # 設定顏色串列是 x + y 數列結果
-norm = plt.Normalize(vmin=-3, vmax=3)
-
-plt.scatter(x, y, s=60, alpha=0.5, c=color, cmap="Greens", norm=norm)
-
-plt.xlim(-3, 3)
-plt.ylim(-3, 3)
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-N = 1000  # 數據數量
-x = np.random.normal(0, 1, N)  # 均值是 0, 標準差是 1
-y = np.random.normal(0, 1, N)  # 均值是 0, 標準差是 1
-
-color = x + y  # 設定顏色串列是 x + y 數列結果
-norm = plt.Normalize(vmin=-3, vmax=3)
-
-plt.scatter(x, y, s=60, alpha=0.5, c=color, cmap="jet", norm=norm)
-
-plt.xlim(-3, 3)
-plt.ylim(-3, 3)
 
 plt.show()
 
@@ -739,14 +655,10 @@ plt.scatter(x, y, s=N, c=x, cmap="brg")  # 繪製散點圖
 colors = np.array(["b", "c", "g", "k", "m", "r", "y", "pink", "purple", "orange"])
 plt.scatter(x, y1, c=colors, label="圓形標記")
 plt.scatter(x, y2, c=colors, marker="*", label="星形標記")
-
 plt.scatter(x, y1, c=colors, marker="*")  # 繪製 sine
 plt.scatter(x, y2, c=colors, marker="s")  # 繪製 cos
-
-
 plt.scatter(x, y1, c="b", marker="x")  # 繪製 sine wave
 plt.scatter(x, y2, c="g", marker="X")  # 繪製 cos wave
-
 plt.scatter(x, y1, c=colors, marker="*")  # 繪製 sine
 plt.scatter(x, y2, c=colors, marker="s")  # 繪製 cos
 
@@ -764,9 +676,6 @@ y = np.linspace(0, 5, N)  # 含N個元素的陣列
 
 plt.scatter(x, y, s=300, c=x, cmap="rainbow")  # 色彩隨 x 軸值變化
 plt.scatter(x, y, s=300, c=y, cmap="rainbow")  # 色彩隨 y 軸值變化
-
-# plt.colorbar()
-plt.show()
 
 colors = np.array(["b", "c", "g", "k", "m", "r", "y", "pink", "purple", "orange"])
 
@@ -868,3 +777,12 @@ print("------------------------------------------------------------")  # 60個
 
 plt.xticks(())  # 不顯示 x 刻度
 plt.yticks(())  # 不顯示 y 刻度
+
+N = 100
+x = np.random.randint(30, size=N)
+y = np.random.randint(30, size=N)
+
+plt.scatter(x, y, s=size, c=color, cmap="Greens", norm=norm)
+plt.scatter(x, y, s=size, alpha=0.5, c=color, cmap="Greens", norm=norm)
+plt.scatter(x, y, s=size, alpha=0.5, c=color, cmap="jet", norm=norm)
+

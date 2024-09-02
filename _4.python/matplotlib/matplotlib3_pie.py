@@ -90,7 +90,6 @@ plt.pie(
 # 設定Y/X軸長度比例 fail
 # plt.set_aspect(0.7)
 
-
 print("------------------------------------------------------------")  # 60個
 
 plt.subplot(232)
@@ -130,7 +129,6 @@ plt.subplot(234)
 values = [3, 48, 33, 8, 38]
 labels = ["鼠", "牛", "虎", "兔", "龍"]
 explode = (0, 0, 0.15, 0, 0)  # 設定分隔的區塊位置
-
 
 patches, texts = plt.pie(values, labels=labels, explode=explode)
 plt.legend(patches, labels, loc="best")
@@ -243,17 +241,6 @@ print("------------------------------------------------------------")  # 60個
 
 plt.subplot(233)
 
-product = ["家電", "生活用品", "圖書", "保健", "彩妝"]  # 產品標籤
-revenue = [23000, 18000, 12000, 15000, 16000]  # 業績
-# plt.pie(revenue, labels=product, autopct="%1.2f%%")
-
-patches = plt.pie(revenue, labels=product, autopct="%1.2f%%")
-
-# plt.legend()
-plt.legend(
-    patches[0], product, loc="center left", title="產品類別", bbox_to_anchor=(1, 0, 0.5, 1)
-)
-plt.title("銷售品項分析", fontsize=16, color="b")
 
 print("------------------------------------------------------------")  # 60個
 
@@ -308,86 +295,8 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-fig = plt.figure()
-ax1 = fig.add_subplot(121)
-ax2 = fig.add_subplot(122)
-fig.subplots_adjust()
-# 定義程式語言人數
-lang = ["Python", "C", "Java", "C++", "PHP"]
-people = [350, 200, 250, 150, 270]
-# 定義男女生人數
-labelgender = ["男生", "女生"]
-gender = [720, 500]
-# 繪製程式語言人數圓餅圖
-ax1.pie(people, autopct="%1.1f%%", startangle=20, labels=lang)
-ax1.set_title("程式語言使用調查表", color="b")
-# 繪製男女生圓餅圖
-ax2.pie(
-    gender,
-    autopct="%1.1f%%",
-    startangle=70,
-    labels=labelgender,
-    radius=0.7,
-    colors=["lightgreen", "yellow"],
-)
-ax2.set_title("男女生比例調查表", color="b")
-
-plt.show()
 
 print("------------------------------------------------------------")  # 60個
-
-from matplotlib.patches import ConnectionPatch
-
-fig = plt.figure()
-ax1 = fig.add_subplot(121)
-ax2 = fig.add_subplot(122)
-fig.subplots_adjust()
-# 定義程式語言人數
-lang = ["Python", "C", "Java", "C++", "PHP"]
-people = [350, 200, 250, 150, 270]
-# 定義男女生人數
-labelgender = ["男生", "女生"]
-gender = [720, 500]
-# 繪製程式語言人數圓餅圖
-ax1.pie(people, autopct="%1.1f%%", startangle=20, labels=lang)
-ax1.set_title("程式語言使用調查表", color="b")
-# 繪製男女生圓餅圖
-ax2.pie(
-    gender,
-    autopct="%1.1f%%",
-    startangle=70,
-    labels=labelgender,
-    radius=0.7,
-    colors=["lightgreen", "yellow"],
-)
-ax2.set_title("男女生比例調查表", color="b")
-# 建立上方線條
-con_a = ConnectionPatch(
-    xyA=(0, 1),
-    xyB=(0, 0.7),
-    coordsA=ax1.transData,
-    coordsB=ax2.transData,
-    axesA=ax1,
-    axesB=ax2,
-)
-# 建立下方線條
-con_b = ConnectionPatch(
-    xyA=(0, -1),
-    xyB=(0, -0.7),
-    coordsA=ax1.transData,
-    coordsB=ax2.transData,
-    axesA=ax1,
-    axesB=ax2,
-)
-# 線條連接
-for con in [con_a, con_b]:
-    ax2.add_artist(con)
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -535,3 +444,25 @@ plt.rc("axes", titlesize=30)
 plt.rc("xtick", labelsize=20)
 # 圖例字體大小
 plt.rc("legend", fontsize=10)
+
+# plt.pie(revenue, labels=product, autopct="%1.2f%%")
+plt.pie(revenue, labels=product, autopct="%1.2f%%")
+
+plt.legend(
+    patches[0], product, loc="center left", title="產品類別", bbox_to_anchor=(1, 0, 0.5, 1)
+)
+
+
+plt.pie(people, autopct="%1.1f%%", startangle=20, labels=lang)
+plt.pie(
+    gender,
+    autopct="%1.1f%%",
+    startangle=70,
+    labels=labelgender,
+    radius=0.7,
+    colors=["lightgreen", "yellow"],
+)
+
+
+
+

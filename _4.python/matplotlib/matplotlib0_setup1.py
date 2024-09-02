@@ -175,12 +175,20 @@ plt.xticks(
 """
 # 圖例設定
 # 設定圖例標籤位置 ( best, upper, lower, right,left,center )
+plt.legend()
+plt.legend(loc="best")                      # 建立圖例
 plt.legend(loc=0)
+plt.legend(loc=4)	#  用 `loc` 去設圖例的位置, 依 1, 2, 3, ... 表示。
 plt.legend(loc='upper right')
-plt.legend(loc="upper right")
 plt.legend(loc="lower center")
-plt.legend(loc=6)
-plt.legend(loc='best')
+plt.legend(loc = 'upper left', bbox_to_anchor = (1,1))
+plt.legend(loc = 6, bbox_to_anchor = (1,1))
+plt.legend(loc='center left',shadow=True)
+plt.legend(bbox_to_anchor=(1,1))
+plt.legend(loc='upper right')
+plt.legend(loc='center left')
+plt.legend(loc='center left',frameon=False)
+plt.legend(loc=6,edgecolor='b',facecolor='y')
 """
 plt.legend()
 
@@ -378,9 +386,6 @@ print("------------------------------------------------------------")  # 60個
 
 
 """
-
-
-
 --- plt.plot 連線樣式 -------------------------------------------------------------
 
 plt.plot(x, y, color='r', linestyle='--')
@@ -542,20 +547,12 @@ plt.grid(color='k', ls=':', lw=1, alpha=0.5)
 
 plt.plot(x, y, label = "$sin(x)$", color = 'red', lw = 2)
 plt.plot(x, z, label = "$cos(x^2)$", color = 'b')
-plt.legend()
 
 plt.plot(x, y1, label = "$sin(x)$", color = "red", linewidth = 2)
 plt.plot(x, y2, "b--", label = "$cos(x^2)$")
-plt.legend()
-
-plt.legend(loc = 6)
-plt.legend(loc = 'upper left', bbox_to_anchor = (1,1))
-plt.legend(loc = 6, bbox_to_anchor = (1,1))
 
 plt.tight_layout(pad = 7)
 
-plt.legend()
-plt.legend(loc=4)	#  用 `loc` 去設圖例的位置, 依 1, 2, 3, ... 表示。
 
 plt.legend(bbox_to_anchor=(1,1))
 plt.tight_layout(pad=7)
@@ -563,27 +560,11 @@ plt.tight_layout(pad=7)
 plt.legend(bbox_to_anchor=(1,1),title='圖例說明')
 plt.tight_layout(pad=7)
 
-plt.legend(loc='center left',shadow=True)
-
-#plt.legend(bbox_to_anchor=(1,1))
-
-#plt.legend(loc='upper right')
-
-#plt.legend(loc='center left')
-
-plt.legend(loc='center left',frameon=False)
-
-plt.legend(loc=6,edgecolor='b',facecolor='y')
-
-
 plt.plot(xpt, ypt1, '-o', label="O(1)")                  
 plt.plot(xpt, ypt2, '-o', label="O(logn)")                  
 plt.plot(xpt, ypt3, '-o', label="O(n)")
 plt.plot(xpt, ypt4, '-o', label="O(nlogn)")
 plt.plot(xpt, ypt5, '-o', label="O(n*n)")
-plt.legend(loc="best")                      # 建立圖例
-
-
 
 --- plt.title 標題 -------------------------------------------------------------
 
@@ -700,20 +681,12 @@ print(f"xmax = {xmax}")
 print(f"ymin = {ymin}")
 print(f"ymax = {ymax}")
 
-
-
-
-
-
-
-
 調整x軸刻度 1
 week = [0,1,2,3,4,5,6]
 labels = ['Sunday','Monday','Tuesday','Wednesday',
           'Thursday','Friday','Saturday']
 
 plt.xticks(week,labels,rotation=30) #字體加旋轉
-
 
 調整x軸刻度 2
 year = [2015,2016,2017,2018,2019]
@@ -744,9 +717,6 @@ value = range(len(x))
 plt.xticks(value,x)
 
 調整x軸刻度 7
-
-
-
 
 plt.rcParams['xtick.labelsize'] = 34	X軸刻度的文字大小
 plt.rcParams['ytick.labelsize'] = 16	Y軸刻度的文字大小
@@ -794,11 +764,8 @@ print(mat_rcParams)
 plt.show()
 
 
-
 # 設定中文字型
 plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" #也可設mingliu或DFKai-SB
-
-
 
 print('x軸刻度設定')
 plt.tick_params(axis='x',direction='in',color='b')
