@@ -1,23 +1,36 @@
-'''
+"""
 scikit-image
 
 
-'''
+"""
 
+print("------------------------------------------------------------")  # 60個
+
+# 共同
+import os
 import sys
+import time
+import math
+import random
+import numpy as np
+import pandas as pd
 import matplotlib.pyplot as plt
+
+font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+# 設定中文字型及負號正確顯示
+# 設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
+# 設定負號
+plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+plt.rcParams["font.size"] = 12  # 設定字型大小
+
+print("------------------------------------------------------------")  # 60個
+
 from PIL import Image   # Importing Image class from PIL module
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 
-font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
-#設定中文字型及負號正確顯示
-#設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
-#設定負號
-plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
-
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 import skimage as ski
 print(ski.__version__)
@@ -59,13 +72,7 @@ print('------------------------------------------------------------')	#60個
 
 print('顯示scikit-image所有預設圖片')
 
-import matplotlib.pyplot as plt
-import matplotlib
-import numpy as np
-
 from skimage import data
-
-matplotlib.rcParams['font.size'] = 18
 
 images = ('astronaut',
           'binary_blobs',
@@ -103,10 +110,10 @@ for name in images:
 
 plt.show()
 
-
 print('------------------------------------------------------------')	#60個
 
 fig, axs = plt.subplots(nrows=3, ncols=3)
+
 for ax in axs.flat:
     ax.axis("off")
 axs[0, 0].imshow(data.astronaut())
@@ -124,12 +131,6 @@ axs[2, 2].imshow(further_img, cmap=plt.cm.gray)
 plt.subplots_adjust(wspace=0.1, hspace=0.1)
 
 plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-
-print('------------------------------------------------------------')	#60個
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -160,5 +161,11 @@ print('------------------------------------------------------------')	#60個
 
 
 print('------------------------------------------------------------')	#60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
 
 

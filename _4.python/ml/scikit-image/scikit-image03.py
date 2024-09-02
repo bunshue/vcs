@@ -4,20 +4,27 @@ skimage : scikit-image SciKit (toolkit for SciPy)
 
 """
 
+print("------------------------------------------------------------")  # 60個
+
+# 共同
+import os
 import sys
-import matplotlib.pyplot as plt
-import numpy as np
+import time
 import math
+import random
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
 
-font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
-#設定中文字型及負號正確顯示
-#設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
-#設定負號
-plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
+font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+# 設定中文字型及負號正確顯示
+# 設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
+# 設定負號
+plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+plt.rcParams["font.size"] = 12  # 設定字型大小
 
-print('------------------------------------------------------------')	#60個
-
+print("------------------------------------------------------------")  # 60個
 
 """
 #圖像的繪制
@@ -56,6 +63,7 @@ plt.imshow(img,cmap=plt.cm.jet)
 """
 
 from skimage import io,data
+
 img=data.astronaut()
 dst=io.imshow(img)
 print(type(dst))
@@ -65,13 +73,12 @@ io.show()
 
 import matplotlib.pyplot as plt
 from skimage import io,data
+
 img=data.astronaut()
 plt.imshow(img)
 plt.show()
 
-
 print('------------------------------------------------------------')	#60個
-
  
 """
 matplotlib是一個專業繪圖的庫，相當于matlab中的plot,可以設置多個figure窗口,設置figure的標題，隱藏坐標尺，甚至可以使用subplot在一個figure中顯示多張圖片。一般我們可以這樣導入matplotlib庫：
@@ -87,6 +94,7 @@ import matplotlib.pyplot as plt
 
 from skimage import data
 import matplotlib.pyplot as plt
+
 img=data.astronaut()
 plt.figure(num='astronaut',figsize=(8,8))  #創建一個名為astronaut的窗口,并設置大小 
 
@@ -265,4 +273,10 @@ print('------------------------------------------------------------')	#60個
 
 
 print('------------------------------------------------------------')	#60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
 

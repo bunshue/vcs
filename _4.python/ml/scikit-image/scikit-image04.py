@@ -4,19 +4,27 @@ skimage : scikit-image SciKit (toolkit for SciPy)
 
 """
 
+print("------------------------------------------------------------")  # 60個
+
+# 共同
+import os
 import sys
-import matplotlib.pyplot as plt
-import numpy as np
+import time
 import math
+import random
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
 
-font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
-#設定中文字型及負號正確顯示
-#設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
-#設定負號
-plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
+font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+# 設定中文字型及負號正確顯示
+# 設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
+# 設定負號
+plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+plt.rcParams["font.size"] = 12  # 設定字型大小
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 """
 圖像的批量處理
@@ -33,6 +41,7 @@ skimage.io.ImageCollection(load_pattern,load_func=None)
 '''
 import skimage.io as io
 from skimage import data_dir
+
 string = data_dir + '/*.png'
 string = 'C:/_git/vcs/_1.data/______test_files1/__pic/_angry_bird/*.jpg'
 coll = io.ImageCollection(string)
@@ -52,6 +61,7 @@ io.imshow(coll[10])
 """
 import skimage.io as io
 from skimage import data_dir
+
 #string='d:/pic/*.jpg:d:/pic/*.png'
 string = data_dir + '/*.png'
 string = 'C:/_git/vcs/_1.data/______test_files1/__pic/_angry_bird/*.jpg'
@@ -80,13 +90,9 @@ coll = io.ImageCollection(string,load_func=convert_gray)
 io.imshow(coll[8])
 plt.show()
 
-
-
 print('------------------------------------------------------------')	#60個
 
-
 #這種批量操作對視頻處理是極其有用的，因為視頻就是一系列的圖片組合
-
 
 from skimage import data_dir, io,color
 
@@ -101,9 +107,7 @@ avi_load = AVILoader()
 frames = range(0, 1000, 10) # 0, 10, 20, ...
 ic =io.ImageCollection(frames, load_func=avi_load)
 
-
 print('------------------------------------------------------------')	#60個
-
 
 """
 這段代碼的意思，就是將myvideo.avi這個視頻中每隔10幀的圖片讀取出來，放在圖片集合中。
@@ -224,6 +228,7 @@ scale參數可以是單個float數，表示縮放的倍數，也可以是一個f
 """
 
 from skimage import transform,data
+
 img = data.camera()
 print(img.shape)  #圖片原始大小 
 print(transform.rescale(img, 0.1).shape)  #縮小為原來圖片大小的0.1倍
@@ -246,6 +251,7 @@ resize用于控制在旋轉時，是否改變大小 ，默認為False
 """
 from skimage import transform,data
 import matplotlib.pyplot as plt
+
 img = data.camera()
 print(img.shape)  #圖片原始大小
 img1=transform.rotate(img, 60) #旋轉90度，不改變大小 
@@ -298,3 +304,9 @@ composite_image = np.ones((rows, cols + 256, 3), dtype=np.double)  #生成背景
 除了高斯金字塔外，還有其它的金字塔，如：
 skimage.transform.pyramid_laplacian(image, downscale=2)
 """
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個

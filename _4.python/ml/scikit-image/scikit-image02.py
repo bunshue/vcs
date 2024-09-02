@@ -28,25 +28,32 @@ hubble_deep_field     星空圖片        text	            文字圖片
 clock	              時鐘圖片        immunohistochemistry  結腸圖片
 
 """
+print("------------------------------------------------------------")  # 60個
 
+# 共同
+import os
 import sys
-import matplotlib.pyplot as plt
-import numpy as np
+import time
 import math
+import random
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
 
-font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
-#設定中文字型及負號正確顯示
-#設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
-#設定負號
-plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
+font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+# 設定中文字型及負號正確顯示
+# 設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
+# 設定負號
+plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+plt.rcParams["font.size"] = 12  # 設定字型大小
 
-print('------------------------------------------------------------')	#60個
-
+print("------------------------------------------------------------")  # 60個
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 
 from skimage import io
+
 img=io.imread(filename)
 io.imshow(img)
 
@@ -54,6 +61,7 @@ plt.show()
 
 
 from skimage import io
+
 img=io.imread(filename, True)   #True:轉為灰階
 io.imshow(img)
 plt.show()
@@ -71,6 +79,7 @@ io.imshow(img)
 plt.show()
 
 from skimage import data_dir
+
 print('skimage內建圖片位置 :', data_dir)
 
 '''
@@ -120,7 +129,7 @@ io.imshow(R)
 #對小貓圖片隨機添加椒鹽噪聲
 
 from skimage import io,data
-import numpy as np
+
 img=data.chelsea()
 
 #隨機生成5000個椒鹽
@@ -198,7 +207,6 @@ plt.show()
 
 '''
 
-
 print('------------------------------------------------------------')	#60個
 
 #圖像數據類型及顏色空間轉換
@@ -218,9 +226,11 @@ print(img.dtype.name)
 #rgb轉灰度圖
 
 from skimage import io,data,color
+
 img=data.chelsea()
 gray=color.rgb2gray(img)
 io.imshow(gray)
+
 plt.show()
 
 """
@@ -252,7 +262,7 @@ print('------------------------------------------------------------')	#60個
 #例：將astronaut圖片分成三類，然后用默認顏色對三類進行著色
 
 from skimage import io,data,color
-import numpy as np
+
 img=data.astronaut()
 gray=color.rgb2gray(img)
 rows,cols=gray.shape
@@ -270,3 +280,9 @@ io.imshow(dst)
 plt.show()
 
 print('------------------------------------------------------------')	#60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
