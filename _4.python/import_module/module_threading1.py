@@ -15,6 +15,65 @@ print("多執行緒")
 
 print("------------------------------------------------------------")  # 60個
 
+print("啟動 thread 無參數")
+
+
+def run():
+    print("啟動了！")
+    for i in range(100):
+        print(i, end=" ")
+    print("完成了！")
+
+
+thr1 = threading.Thread(target=run)
+thr2 = threading.Thread(target=run)
+
+thr1.start()
+thr2.start()
+
+print("------------------------------------------------------------")  # 60個
+
+print("啟動 thread 有參數")
+
+
+def run(which):
+    print(which, "啟動了！")
+    for i in range(100):
+        print(which, i)
+    print(which, "完成了！")
+
+
+thr1 = threading.Thread(target=run, args=("1"))
+thr2 = threading.Thread(target=run, args=("2"))
+thr1.start()
+thr2.start()
+
+print("------------------------------------------------------------")  # 60個
+'''
+def thread_ex0(name, num):
+    print("啟動 thread :", name + str(num))
+    i = 1
+    while True:
+        time.sleep(random.randint(1, 3))
+        # time.sleep(1)
+        print(name + str(num), " = ", i)
+        i += 1
+        if i > 10:
+            break
+    print(name + str(num), "已完成")
+
+print('開兩個 thread, 分別進行')
+
+# 建立新的執行緒
+thread_ex0a = threading.Thread(target=thread_ex0, args=("執行緒", 1))
+thread_ex0a.start()
+
+# 建立新的執行緒
+thread_ex0b = threading.Thread(target=thread_ex0, args=("執行緒", 2))
+thread_ex0b.start()
+
+print("------------------------------------------------------------")  # 60個
+
 
 def t1():
     for i in range(10):
@@ -36,332 +95,55 @@ def t3(count, mark):
         time.sleep(random.random())
     print(" t3 結束")
 
-
-threading.Thread(target=t1).start()
-threading.Thread(target=t2).start()
-
-print("主執行緒結束")
+print('開三個 thread, 分別進行')
 
 tt1 = threading.Thread(target=t1)
 tt2 = threading.Thread(target=t2)
-tt3 = threading.Thread(target=t3, kwargs={"count": 20, "mark": "X"})
+tt3 = threading.Thread(target=t3, kwargs={"count": 20, "mark": "C"})
 
 tt1.start()
 tt2.start()
 tt3.start()
 
+print('等待這三個 thread 分別做完工作')
+
 tt1.join()
 tt2.join()
 tt3.join()
 
-print("主執行緒結束")
-
+print("\n全部完成工作")
 
 print("------------------------------------------------------------")  # 60個
 
 
-def display(name, num):
-    i = 1
-    while True:
-        time.sleep(random.randint(1, 3))
-        # time.sleep(1)
+def thread_ex5(name, num):
+    print("啟動 thread :", name + str(num))
+    i = 0
+    while i < num:
+        i = i + 1
+        time.sleep(1.5)
         print(name + str(num), " = ", i)
-        i += 1
 
 
-print("多執行緒")
+thread_ex5a = threading.Thread(target=thread_ex5, args=("執行緒", 5))
+thread_ex5b = threading.Thread(target=thread_ex5, args=("執行緒", 50))
+thread_ex5c = threading.Thread(target=thread_ex5, args=("執行緒", 500))
 
-thread1 = threading.Thread(target=display, args=("執行緒", 1))
-thread1.start()
-# time.sleep(0.3)
-thread2 = threading.Thread(target=display, args=("執行緒", 2))
-thread2.start()
-
-print("------------------------------------------------------------")  # 60個
-
-
-def aa():
-    i = 0
-    while i < 5:
-        i = i + 1
-        time.sleep(0.5)
-        print("A:", i)
-
-
-def bb():
-    i = 0
-    while i < 50:
-        i = i + 10
-        time.sleep(0.5)
-        print("B:", i)
-
-
-a = threading.Thread(target=aa)  # 建立新的執行緒
-b = threading.Thread(target=bb)  # 建立新的執行緒
-
-a.start()  # 啟用執行緒
-b.start()  # 啟用執行緒
-
-"""
-A: 1
-B: 10
-A: 2
-B: 20
-A: 3
-B: 30
-A: 4
-B: 40
-A: 5
-"""
+thread_ex5a.start()
+thread_ex5b.start()
+thread_ex5a.join()  # 加入等待 aa() 完成的方法
+thread_ex5b.join()  # 加入等待 bb() 完成的方法
+thread_ex5c.start()  # 當 aa() 與 bb() 都完成後，才會開始執行 cc()
 
 print("------------------------------------------------------------")  # 60個
 
-
-def aa():
-    i = 0
-    while i < 5:
-        i = i + 1
-        time.sleep(0.5)
-        print("A:", i)
-
-
-def bb():
-    i = 0
-    while i < 50:
-        i = i + 10
-        time.sleep(0.5)
-        print("B:", i)
-
-
-def cc():
-    i = 0
-    while i < 500:
-        i = i + 100
-        time.sleep(0.5)
-        print("C:", i)
-
-
-a = threading.Thread(target=aa)
-b = threading.Thread(target=bb)
-c = threading.Thread(target=cc)
-
-a.start()
-b.start()
-a.join()  # 加入等待 aa() 完成的方法
-b.join()  # 加入等待 bb() 完成的方法
-c.start()  # 當 aa() 與 bb() 都完成後，才會開始執行 cc()
-
-"""
-A: 1
-B: 10
-A: 2
-B: 20
-A: 3
-B: 30
-A: 4
-B: 40
-A: 5
-B: 50
-C: 100 <--- A B 都結束後才開始
-C: 200
-C: 300
-C: 400
-C: 500
-"""
-
+thread_ex5a.start()
+thread_ex5b.start()
+thread_ex5a.join()  # 加入等待 aa() 完成的方法
+thread_ex5c.start()  # 當 aa() 完成後，就會開始執行 cc()
 
 print("------------------------------------------------------------")  # 60個
-
-
-def aa():
-    i = 0
-    while i < 5:
-        i = i + 1
-        time.sleep(0.5)
-        print("A:", i)
-
-
-def bb():
-    i = 0
-    while i < 100:
-        i = i + 10
-        time.sleep(0.5)
-        print("B:", i)
-
-
-def cc():
-    i = 0
-    while i < 500:
-        i = i + 100
-        time.sleep(0.5)
-        print("C:", i)
-
-
-a = threading.Thread(target=aa)
-b = threading.Thread(target=bb)
-c = threading.Thread(target=cc)
-
-a.start()
-b.start()
-a.join()  # 加入等待 aa() 完成的方法
-c.start()  # 當 aa() 完成後，就會開始執行 cc()
-
-"""
-A: 1
-B: 10
-A: 2
-B: 20
-A: 3
-B: 30
-A: 4
-B: 40
-A: 5
-B: 50
-C: 100 <--- A 結束就開始
-B: 60
-C: 200
-B: 70
-C: 300
-B: 80
-C: 400
-B: 90
-C: 500
-B: 100
-"""
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-def aa():
-    lock.acquire()  # 鎖定
-    i = 0
-    while i < 5:
-        i = i + 1
-        time.sleep(0.5)
-        print("A:", i)
-        if i == 2:
-            lock.release()  # i 等於 2 時解除鎖定
-
-
-def bb():
-    lock.acquire()  # 鎖定
-    i = 0
-    while i < 50:
-        i = i + 10
-        time.sleep(0.5)
-        print("B:", i)
-    lock.release()
-
-
-lock = threading.Lock()  # 建立 Lock
-a = threading.Thread(target=aa)
-b = threading.Thread(target=bb)
-
-a.start()
-b.start()
-
-"""
-A: 1
-A: 2
-B: 10
-A: 3
-B: 20
-A: 4
-B: 30
-A: 5
-B: 40
-B: 50
-"""
-
-print("------------------------------------------------------------")  # 60個
-
-
-def aa():
-    event.wait()  # 等待事件被觸發
-    event.clear()  # 觸發後將事件回歸原本狀態
-    for i in range(1, 6):
-        print("A:", i)
-        time.sleep(0.5)
-
-
-def bb():
-    for i in range(10, 60, 10):
-        if i == 30:
-            event.set()  # 觸發事件
-        print("B:", i)
-        time.sleep(0.5)
-
-
-event = threading.Event()  # 註冊事件
-a = threading.Thread(target=aa)
-b = threading.Thread(target=bb)
-
-a.start()
-b.start()
-
-"""
-B: 10
-B: 20
-B: 30
-A: 1
-B: 40
-A: 2
-B: 50
-A: 3
-A: 4
-A: 5
-"""
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-def aa():
-    i = 0
-    while True:
-        event_a.wait()  # 等待 event_a 被觸發
-        event_a.clear()  # 還原 event_a 狀態
-        for i in range(1, 6):
-            print(i)
-            time.sleep(0.5)
-        event_b.set()  # 觸發 event_b
-
-
-def bb():
-    while True:
-        input("輸入任意內容")
-        event_a.set()  # 觸發 event_a
-        event_b.wait()  # 等待 event_b 被觸發
-        event_b.clear()  # 還原 event_b 狀態
-
-
-event_a = threading.Event()  # 註冊 event_a
-event_b = threading.Event()  # 註冊 event_b
-a = threading.Thread(target=aa)
-b = threading.Thread(target=bb)
-
-a.start()
-b.start()
-
-"""
-輸入任意內容a
-1
-2
-3
-4
-5
-輸入任意內容b
-1
-2
-3
-4
-5
-輸入任意內容
-"""
-
-print("------------------------------------------------------------")  # 60個
-
+'''
 LENGTH = 10
 
 
@@ -696,11 +478,11 @@ def manager():
     print(threading.current_thread().name, "Exiting")
 
 
-m = threading.Thread(target=manager)
-w = threading.Thread(target=worker)
+thread_ex6_manager = threading.Thread(target=manager)
+thread_ex6_worker = threading.Thread(target=worker)
 
-m.start()
-w.start()
+thread_ex6_manager.start()
+thread_ex6_worker.start()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -717,46 +499,13 @@ def manager():
     print(threading.current_thread().name, "Exiting")
 
 
-m = threading.Thread(target=manager)
-w = threading.Thread(target=worker)
-w2 = threading.Thread(name="Manager", target=worker)
-m.start()
-w.start()
-w2.start()
+thread_ex7_manager = threading.Thread(target=manager)
+thread_ex7_worker = threading.Thread(target=worker)
+thread_ex7_worker2 = threading.Thread(name="Manager", target=worker)
 
-print("------------------------------------------------------------")  # 60個
-
-print("啟動 thread 無參數")
-
-
-def run():
-    print("啟動了！")
-    for i in range(100):
-        print(i, end=" ")
-    print("完成了！")
-
-
-thr1 = threading.Thread(target=run)
-thr2 = threading.Thread(target=run)
-thr1.start()
-thr2.start()
-
-print("------------------------------------------------------------")  # 60個
-
-print("啟動 thread 有參數")
-
-
-def run(which):
-    print(which, "啟動了！")
-    for i in range(100):
-        print(which, i)
-    print(which, "完成了！")
-
-
-thr1 = threading.Thread(target=run, args=("1"))
-thr2 = threading.Thread(target=run, args=("2"))
-thr1.start()
-thr2.start()
+thread_ex7_manager.start()
+thread_ex7_worker.start()
+thread_ex7_worker2.start()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -954,11 +703,7 @@ p1.start()
 p2.start()
 p3.start()
 
-
 print("------------------------------------------------------------")  # 60個
-
-# from threading import Thread
-
 
 # 消費者thread
 def threadConsumer(cond):
@@ -1022,8 +767,6 @@ print("All threads stop")
 
 print("------------------------------------------------------------")  # 60個
 
-# from threading import Thread
-
 
 class Rabbit(Thread):
     def __init__(self, name):
@@ -1051,7 +794,6 @@ rabbit1 = Rabbit("Bunny")
 turtle1 = Turtle("Ted")
 rabbit1.start()
 turtle1.start()
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1097,7 +839,6 @@ executor = ThreadPoolExecutor()
 e1 = executor.submit(run)
 e2 = executor.submit(keyin)
 executor.shutdown()
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1172,6 +913,33 @@ print("\n完成")
 print("------------------------------------------------------------")  # 60個
 
 
+
+"""
+线程间通信（共享数据）非常简单因为可以共享同一个进程的内存
+进程间通信（共享数据）比较麻烦因为操作系统会保护分配给进程的内存
+要实现多进程间的通信通常可以用系统管道、套接字、三方服务来实现
+multiprocessing.Queue
+守护线程 - daemon thread
+守护进程 - firewalld / httpd / mysqld
+在系统停机的时候不保留的进程 - 不会因为进程还没有执行结束而阻碍系统停止
+"""
+from threading import Thread
+import time
+
+def do_something(content):
+    while True:
+        print(content, end='')
+        time.sleep(0.1)
+
+
+Thread(target=do_something, args=('O', ), daemon=True).start()
+Thread(target=do_something, args=('X', ), daemon=True).start()
+time.sleep(5)
+print('bye!')
+
+print("------------------------------------------------------------")  # 60個
+
+
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
@@ -1190,3 +958,19 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+
+"""
+
+lock = threading.Lock()  # 建立 Lock
+
+    #lock.acquire()  # 鎖定
+            lock.acquire()  # 鎖定
+            lock.release()  # 解除鎖定
+    #lock.acquire()  # 鎖定
+    #lock.release()
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+"""

@@ -23,7 +23,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 plt.figure(
     num="plot 集合 1",
     figsize=(12, 8),
@@ -357,7 +357,7 @@ plt.subplot(236)
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 x = np.linspace(0, 2 * np.pi, 200)
 N = 20
 

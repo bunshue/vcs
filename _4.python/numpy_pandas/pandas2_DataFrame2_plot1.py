@@ -190,7 +190,6 @@ print(df.corr())
 print('data_frame 存檔')
 df.to_csv("df_data.csv")
 
-
 print('data_frame 畫點圖')
 
 x = df.A.values
@@ -384,12 +383,6 @@ df3.plot()
 
 plt.show()
 
-print('------------------------------------------------------------')	#60個
-
-
-print('------------------------------------------------------------')	#60個
-
-'''
 print("------------------------------------------------------------")  # 60個
 
 # 常態分佈轉series
@@ -1172,12 +1165,255 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
+"""
+Pandas繪圖筆記
+有以下類型的圖
+
+折線圖df.plot()
+柱狀圖df.plot(kind='bar')
+橫向柱狀圖df.plot(kind='barh')
+直方圖df.plot(kind='hist')
+KDE圖df.plot(kind='kde')
+面積圖df.plot(kind='area')
+圓餅圖df.plot(kind='pie')
+散佈圖df.plot(kind='scatter')
+六角形箱體圖df.plot(kind='hexbin')
+箱形圖df.plot(kind='box')
+"""
+print("------------------------------------------------------------")  # 60個
+
+#1.初始化
+
+import pandas as pd #引入Pandas模組 as pd
+
+pd.set_option("display.max_rows", 1000)    #設定最大能顯示1000rows
+pd.set_option("display.max_columns", 1000) #設定最大能顯示1000columns
+
+#2.解決plot不能顯示中文問題
+
+from pylab import mpl
+mpl.rcParams['font.sans-serif'] = ['Microsoft YaHei']  
+mpl.rcParams['axes.unicode_minus'] = False
+
+#3.讀取檔案
+
+df=pd.read_excel('data/2017_PM25.xlsx')
+
+#4.資料操作
+#4.1NaN與重複值處理
+
+df=df.dropna()
+df=df.drop_duplicates() 
+
+cc = df.head(30)
+print(cc)
+
+#4.2檢視資料類型(有無非數值類型存在)
+
+cc = df.dtypes
+print(cc)
+
+#如果屬性是Object，如何改成數值屬性
+#df["屬於Object的欄位"] = pd.to_numeric(df.屬於Object的欄位, errors='coerce')
+
+#4.3相關係數
+
+cc = df.corr()
+print(cc)
+
+print("折線圖")
+
+df.plot(x='監測月份', y='PM25',title='監測月份與PM2.5的關係')
+plt.show()
+
+df.plot(x='監測月份', y='PM10',title='監測月份與PM10的關係')
+plt.show()
+
+print("柱狀圖")
+
+df.plot(kind='bar',x='監測月份', y='PM25',title='監測月份與PM2.5的關係')
+plt.show()
+
+plt.show()
+
+print("橫向柱狀圖")
+
+df.plot(kind='barh',x='監測月份', y='PM25',title='監測月份與PM2.5的關係')
+
+plt.show()
+
+print("直方圖")
+
+df.plot(kind='hist',x='監測月份', y='PM25',title='監測月份與PM2.5的關係')
+
+plt.show()
+
+print("核密度(KDE)圖")
+
+df.plot(kind='kde',x='監測月份', y='PM25',title='監測月份與PM2.5的關係')
+
+plt.show()
+
+print("面積圖")
+
+df.plot(kind='area',x='監測月份', y='PM25',title='監測月份與PM2.5的關係')
+
+plt.show()
+
+print("圓餅圖")
+
+df.plot(kind='pie',x='監測月份', y='PM25',title='監測月份與PM2.5的關係',autopct = '%1.2f%%')
+
+plt.show()
+
+print("散佈圖")
+
+df.plot(kind='scatter',x='PM25', y='PM10',title='PM2.5與PM10的關係') #X,Y需為數值
+
+plt.show()
+
+print("六角形箱體圖")
+
+df.plot(kind='hexbin',x='PM25', y='PM10',title='PM2.5與PM10的關係') #X,Y需為數值
+
+plt.show()
+
+print("箱形圖")
+
+df.plot(kind='box',x='PM25', y='PM10',title='監測月份與PM2.5的關係') #X,Y需為數值
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+'''
+import seaborn as sns  # 海生, 自動把圖畫得比較好看
+
+tips=sns.load_dataset('tips')
+cc = tips.head()
+print(cc)
+
+
+sns.distplot(tips['total_bill']) 
+plt.show()
+
+sns.distplot(tips['total_bill'],kde=False,bins=30)
+plt.show()
+
+sns.jointplot(x='total_bill',y='tip',data=tips,kind='scatter')
+
+sns.jointplot(x='total_bill',y='tip',data=tips,kind='hex')
+sns.jointplot(x='total_bill',y='tip',data=tips,kind='reg')
+
+sns.pairplot(tips)
+
+sns.pairplot(tips,hue='sex',palette='coolwarm')
+
+sns.kdeplot(tips['total_bill'])
+sns.rugplot(tips['tip'])
+
+plt.show()
+
+import numpy as np
+sns.barplot(x='sex',y='total_bill',data=tips,estimator=np.std)
+
+plt.show()
+
+sns.countplot(x='sex',data=tips)
+
+plt.show()
+
+sns.boxplot(x='day',y='total_bill',data=tips,hue='smoker')
+
+plt.show()
+
+sns.violinplot(x='day',y='total_bill',data=tips,hue='sex',split=True)
+
+plt.show()
+
+sns.stripplot(x='day',y='total_bill',data=tips,jitter=True,hue='sex',dodge=True)
+
+plt.show()
+
+sns.violinplot(x='day',y='total_bill',data=tips)
+sns.swarmplot(x='day',y='total_bill',data=tips,color='black')
+
+plt.show()
+""" NG
+sns.factorplot(x='day',y='total_bill',data=tips,kind='bar')
+
+tc = tips.corr()
+
+sns.heatmap(tc,annot=True,cmap='coolwarm')
+
+plt.show()
+"""
+
+""" NG
+fp=flights.pivot_table(index='month',columns='year',values='passengers')
+
+sns.heatmap(fp,cmap='magma',linecolor='white',linewidths=1)
+
+plt.show()
+
+sns.clustermap(fp,cmap='coolwarm',standard_scale=1)
+
+sns.lmplot(x='total_bill',y='tip',data=tips,hue='sex',markers=['o','v'],scatter_kws={'s':100})
+
+
+sns.lmplot(x='total_bill',y='tip',data=tips,col='sex',row='time',aspect=1,size=4)
+"""
+iris=sns.load_dataset('iris')
+cc = iris.head()
+print(cc)
+
+cc = iris['species'].unique()
+print(cc)
+
+#array(['setosa', 'versicolor', 'virginica'], dtype=object)
+
+g = sns.PairGrid(iris)
+g.map_diag(sns.distplot)
+g.map_upper(plt.scatter)
+g.map_lower(sns.kdeplot)
+
+g = sns.FacetGrid(data=tips,col='time',row='smoker')
+
+g.map(plt.scatter,'total_bill','tip')
+
+sns.set_style('ticks')
+sns.countplot(x='sex',data=tips)
+
+plt.show()
+
+sns.despine(left=True,bottom=True)
+
+
+sns.countplot(x='sex',data=tips)
+
+plt.show()
+
+sns.set_context('paper')
+sns.countplot(x='sex',data=tips)
+
+plt.show()
+
+
+
+
 print("------------------------------------------------------------")  # 60個
 
 
 
+print("------------------------------------------------------------")  # 60個
+
+
 
 print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
 
 
 
