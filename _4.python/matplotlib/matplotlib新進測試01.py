@@ -23,7 +23,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 plt.figure(
     num="新進測試 01",
     figsize=(12, 8),
@@ -61,10 +61,6 @@ http://matplotlib.org/examples/pylab_examples/image_origin.html
 plt.imshow(a, interpolation="nearest", cmap="bone", origin="lower")
 plt.colorbar(shrink=0.92)
 
-plt.xticks(())
-plt.yticks(())
-
-
 print("------------------------------------------------------------")  # 60個
 plt.subplot(232)
 
@@ -81,10 +77,6 @@ z = np.sin(x**2 + 2 * y**2 + x * y)
 plt.imshow(z, cmap="Blues", vmin=-2, vmax=2)
 
 # plt.colorbar(shrink=0.92)
-
-plt.xticks(())
-plt.yticks(())
-
 
 print("------------------------------------------------------------")  # 60個
 plt.subplot(235)
@@ -108,12 +100,10 @@ T = np.arctan2(Y, X)  # for color later on
 plt.scatter(X, Y, s=75, c=T, alpha=0.5)
 
 plt.xlim(-1.5, 1.5)
-plt.xticks(())  # ignore xticks
-
 plt.ylim(-1.5, 1.5)
-plt.yticks(())  # ignore yticks
 
 plt.tight_layout()
+
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
@@ -153,6 +143,7 @@ plt.subplot(236)
 
 
 plt.tight_layout()
+
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
@@ -332,8 +323,8 @@ for i in range(num):
     title = 'label = ' + str(i)
     ax.set_title(title,fontsize=12)  # X,Y軸不顯示刻度
     ax.set_xticks([]);ax.set_yticks([])        
-plt.show()
 
+plt.show()
 
 """
 
@@ -394,10 +385,12 @@ for i, locator in enumerate(locators):
     plt.text(5, 0.3, locator[3:], ha="center", size=16)
 
 plt.subplots_adjust(bottom=0.01, top=0.99, left=0.01, right=0.99)
+
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
+print('畫格線')
 ax = plt.subplot(1, 1, 1)
 
 ax.set_xlim(0, 4)
@@ -419,7 +412,8 @@ print("------------------------------------------------------------")  # 60個
 
 #!wget -O taipei_sans_tc_beta.ttf https://drive.google.com/uc?id=1eGAsTN1HBpJAkeVM57_C7ccp7hbgSz3_&export=download
 #!mv taipei_sans_tc_beta.ttf /usr/local/lib/python3.7/dist-packages/matplotlib/mpl-data/fonts/ttf
-import matplotlib
+
+#import matplotlib
 from matplotlib.font_manager import fontManager
 
 # 新增字體
@@ -446,56 +440,20 @@ plt.rc("ytick", labelsize=SMALL_SIZE)
 plt.rc("legend", fontsize=SMALL_SIZE)
 # 圖形標題字體大小
 plt.rc("figure", titlesize=BIGGER_SIZE)
-
+'''
 print("------------------------------------------------------------")  # 60個
 
-# 準備描點x,y資料
-x = np.arange(-10, 10, 0.1)
-y1 = x**3
-y2 = x**2
-# 指定 寬6.4inches, 高4.8inches, 160dpi
-# 將圖分成一個子圖
-fig, ax = plt.subplots(figsize=(6.4, 4.8), dpi=160)
-# 畫出y=x**3曲線
-ax.plot(x, y1)
-# 畫出y=x**2曲線
-ax.plot(x, y2)
-# 加上X軸刻度範圍-10~10(如果大小顛倒，圖形會左右鏡射)
-ax.set_xlim(-10, 10)
-# 加上Y軸刻度範圍-1000~1000(如果大小顛倒，圖形會左右鏡射)
-ax.set_ylim(-1000, 1000)
-# 加上X軸刻度標示 -10,-9,-8,...,10(只有整數),字體大小為預設
-ax.set_xticks(np.arange(-10, 11, 1))
-# 加上Y軸刻度標示 -1000,-900,...,1000(只有100的倍數),字體大小為預設
-ax.set_yticks(np.arange(-1000, 1000, 100))
-# 加上X軸標題(靠右對齊x=1.0為X軸最右)
-ax.set_xlabel("X軸", horizontalalignment="right", verticalalignment="top", x=1.0)
-# 加上Y軸標題(靠上對齊y=1.0為Y軸最上)
-ax.set_ylabel("Y軸", horizontalalignment="right", verticalalignment="bottom", y=1.0)
-# ax.set(xlabel='X軸', ylabel='Y軸')
+N = 12
+X = np.arange(N)
 
-ax.grid()  # 加上格線
+# 生成 N 組介於 0 與 1 之間均勻分配隨機變數
+Y1 = np.random.uniform(size=N)
+Y2 = np.random.uniform(size=N)
 
-# 子圖標題
-ax.set_title("子圖標題", loc="right")
-
-# figure標題
-fig.suptitle("y=x**3&y=x**2")
-
-# 儲存檔案名為test.png
-# fig.savefig("tmp_test.png")
-
-# 圖例說明
-ax.legend(["y=x**3", "y=x**2"])
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-n = 12
-X = np.arange(n)
-Y1 = (1 - X / float(n)) * np.random.uniform(0.5, 1.0, n)
-Y2 = (1 - X / float(n)) * np.random.uniform(0.5, 1.0, n)
+# 生成 N 組介於 ST 與 SP 之間均勻分配隨機變數
+ST, SP = 0.5, 1.0
+Y1 = np.random.uniform(ST, SP, size=N)
+Y2 = np.random.uniform(ST, SP, size=N)
 
 plt.bar(X, +Y1, facecolor="#9999ff", edgecolor="white")
 plt.bar(X, -Y2, facecolor="#ff9999", edgecolor="white")
@@ -510,42 +468,12 @@ for x, y in zip(X, Y2):
     # va: vertical alignment
     plt.text(x + 0.4, -y - 0.05, "%.2f" % y, ha="center", va="top")
 
-plt.xlim(-0.5, n)
-plt.xticks(())
+plt.xlim(-0.5, N)
 plt.ylim(-1.25, 1.25)
-plt.yticks(())
 
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
-
-
-def f(x, y):
-    # the height function
-    return (1 - x / 2 + x**5 + y**3) * np.exp(-(x**2) - y**2)
-
-
-n = 256
-x = np.linspace(-3, 3, n)
-y = np.linspace(-3, 3, n)
-X, Y = np.meshgrid(x, y)
-
-# use plt.contourf to filling contours
-# X, Y and value for (X,Y) point
-plt.contourf(X, Y, f(X, Y), 8, alpha=0.75, cmap=plt.cm.hot)
-
-# use plt.contour to add contour lines
-C = plt.contour(X, Y, f(X, Y), 8, colors="black", linewidth=0.5)
-# adding label
-plt.clabel(C, inline=True, fontsize=10)
-
-plt.xticks(())
-plt.yticks(())
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
 
 """ 久
 # 繪制心形隱函數曲面
@@ -557,46 +485,450 @@ x, y, z = np.mgrid[-3:3:100j, -1:1:100j, -3:3:100j]
 f = (x**2 + 9.0/4*y**2 + z**2 - 1)**3 - x**2 * z**3 - 9.0/80 * y**2 * z**3
 contour = mlab.contour3d(x, y, z, f, contours=[0], color=(1, 0, 0))
 """
-
 print("------------------------------------------------------------")  # 60個
 
-# 新增圖表 並 設定屬性
-plt.figure(
-    figsize=[12, 8],
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
-plt.plot([1, 2, 3])
+x = np.linspace(0, 2 * np.pi, 500)  # 建立含500個元素的陣列
+y1 = np.sin(x)
+y2 = np.cos(x)
 
-plt.axis("off")  # 隱藏坐標軸
-_ = plt.title("image file", size="x-large", y=-0.1)  # 顯示圖片描述
+ax = plt.subplot()  # 回傳子圖物件
 
-plt.axis("off")
-plt.title("Picture Title", size=30, x=0.0, y=0.0)
+ax.plot(x, y1, lw=2)  # 線條寬度是 2, # 使用子圖物件調用plot()函數
+ax.plot(x, y2, linewidth=5)  # 線條寬度是 5
 
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-N = 50  # 色彩數列的點數
-colorused = ["b", "c", "g", "k", "m", "r", "y"]  # 定義顏色
-colors = []  # 建立色彩數列
-for i in range(N):  # 隨機設定顏色
-    colors.append(np.random.choice(colorused))
-x = np.linspace(0.0, 2 * np.pi, N)  # 建立 50 個點
-y = np.sin(x)
-fig = plt.figure()  # 建立畫布物件
-ax = fig.add_subplot()  # 建立子圖(或稱軸物件)ax
-ax.scatter(x, y, c=colors, marker="*")  # 繪製 sin
-ax.set_title("建立畫布與軸物件,使用OO API繪圖", fontsize=16)
+x = [x for x in range(9)]
+squares = [y * y for y in range(9)]
+ax = plt.subplot()
+ax.plot(squares)
+
+#ax.set_aspect("equal")
 
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
+ax = plt.subplot()  # 建立圖表
+
+ax.plot([1, 3])  # 繪製圖表
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+fig = plt.figure()
+
+ax = plt.axes([0.1, 0.1, 0.8, 0.8])
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+fig = plt.figure()
+
+ax = plt.axes([0.1, 0.1, 0.5, 0.8])
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+fig = plt.figure()
+
+ax = plt.axes([0.1, 0.1, 0.8, 0.8])
+x = np.linspace(0, 2 * np.pi, 500)
+ax.plot(x, np.sin(x) ** 2, "g")
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+x = np.linspace(0, 2 * np.pi, 500)
+y = np.sin(2 * np.pi * x) + 1
+
+fig = plt.figure()
+ax = plt.axes()
+# ax.set_xlim([1, 5])
+# ax.set_ylim([-0.5, 2.5])
+plt.plot(x, y)
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+x = np.linspace(0, 2 * np.pi, 500)
+y = np.sin(2 * np.pi * x) + 1
+
+fig = plt.figure()
+
+ax = plt.axes()
+ax.set_xlim([1, 5])
+ax.set_ylim([-0.5, 2.5])
+plt.plot(x, y)
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+# nodelist = ["city1","city2","city3","city4","city5","city6","city7","city8"]
+dist = np.mat([[0.1,0.1],[0.9,0.5],[0.9,0.1],[0.45,0.9],[0.9,0.8],[0.7,0.9],[0.1,0.45],[0.45,0.1]])
+m,n = np.shape(dist)
+
+# 绘图
+fig = plt.figure()
+
+ax = fig.add_subplot(111)
+
+for point in dist.tolist():
+	plt.annotate("("+str(point[0])+", "+str(point[1])+")",xy = (point[0],point[1]))	
+xlist = []
+ylist = []
+for px,py in zip(dist.T.tolist()[0],dist.T.tolist()[1]):
+	xlist.append([px])
+	ylist.append([py])
+
+ax.plot(xlist,ylist,'r') 
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+#資訊圖表的視覺化手法
+
+from PIL import Image, ImageOps
+
+image = Image.open("_data2/fruit_momo.png")
+
+plt.imshow(image)
+
+plt.show()
+
+# resize
+mini_image = image.resize((int(image.size[0] * 0.2), int(image.size[1] * 0.2)))
+
+plt.imshow(mini_image)
+
+plt.show()
+
+print(mini_image.size)
+
+# 要排列的圖示個數
+num = 10
+
+# 圖片之間的邊界
+margin = 5
+
+# 載入圖片
+image = Image.open("_data2/human.png")
+image_width, image_height = image.size
+
+# 將圖片入作為畫布使用的Image
+canvas = Image.new("RGBA", ((image_width + margin) * num, image_height))
+for i in range(num):
+    canvas.paste(image, ((image_width + margin) * i, 0))
+
+plt.imshow(canvas)
+
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+# 圖片並列個數
+num = 15
+
+# 換行位置
+wrap_num = 10
+
+# 圖片之間的邊界
+margin_h = 5
+margin_v = 5
+
+# 載入圖片
+image = Image.open("_data2/human.png")
+image_width, image_height = image.size
+
+# 將圖片入作為畫布使用的Image
+canvas = Image.new("RGBA", ((image_width + margin_h) * wrap_num, 
+                            (image_height + margin_v) * math.ceil(num / wrap_num)))
+for i in range(num):
+    x = (image_width + margin_h) * (i % wrap_num)
+    y = (image_height + margin_v) * (i // wrap_num)
+    canvas.paste(image, (x, y))
+
+plt.imshow(canvas)
+
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+from PIL import Image, ImageOps
+
+image = Image.open("_data2/woman.png")
+
+plt.imshow(image)
+
+plt.show()
+
+print('------------------------------')	#30個
+
+
+def fill(image, percentage=100):
+    start = int(image.size[1] / 100 * percentage)
+    for y in range(image.size[1] - start, image.size[1]):
+        for x in range(image.size[0]):
+            if image.getpixel((x, y))[3] != 0:
+                image.putpixel((x, y), (255, 200, 200))
+                
+fill(image, 90)
+
+plt.imshow(image)
+
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+# 圖片並列個數
+num = 10
+
+# 圖片之間的邊界
+margin = 5
+
+# 以指定的顏色替圖片填色的函數
+def fill(image, color=(255, 255, 255)):
+    for y in range(image.size[1]):
+        for x in range(image.size[0]):
+            if image.getpixel((x, y))[3] != 0:
+                image.putpixel((x, y), color)
+                
+# 載入圖片
+image = Image.open("_data2/human.png")
+image_width, image_height = image.size
+
+# 將圖片入作為畫布使用的Image
+canvas = Image.new("RGBA", ((image_width + margin) * num, image_height))
+for i in range(num):
+    if i < 7:
+        # 到第7張圖片之前的圖片都是藍色
+        color = (0, 0, 255)
+    else:
+        # 第7張圖片之後的圖片都是紅色
+        color = (255, 0, 0)
+        
+ # 以指定的顏色替圖片填色
+    color_image = image.copy()
+    fill(color_image, color)
+    
+    # 貼入圖片
+    canvas.paste(color_image, ((image_width + margin) * i, 0))
+    
+plt.imshow(canvas)
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+from PIL import Image, ImageDraw, ImageFont
+
+class IconGraph:
+    # 初始化的內容
+    def __init__(self, data, icon_size=(128, 128), size=(800, 800),
+                 back_color=(255, 255, 255), 
+                 label_back_color=(255, 255, 255),
+                 font="C:\Windows\Fonts\msjh.ttc", 
+                 font_size=24, font_color=(0, 0, 0)):
+        
+        self.canvas_size = [size[0], size[1]]  # 圖表的整體大小
+        self.label_field_height = 100  # 繪製標籤區塊的高度
+        # 繪製圖表的範圍大小
+        self.graph_size = [self.canvas_size[0], 
+                           self.canvas_size[1] - self.label_field_height]
+        self.icon_size = icon_size  # 圖示的大小
+        self.back_color = back_color # 圖表區塊的背景色
+        self.label_back_color = label_back_color  # 標籤區塊的背景色
+            
+        # 設定標籤資訊
+        self.labels = []
+        for d in data:
+            self.labels.append(d["label"])
+              
+        # 取得value的最大值
+        value_max = data[0]["value"]
+        for d in data:
+            if value_max < d["value"]:
+                value_max = d["value"]
+        
+        # 儲存格的個數
+        self.grid_y = value_max  # 儲存格的個數（垂直）
+        self.grid_x = len(data)  # 儲存格的個數（水平）
+        
+        # 儲存格的大小
+        # 單一儲存格可使用的高度
+        self.grid_height = self.icon_size[1]  
+        # 單一儲存格可使用的寬度
+        self.grid_width = self.graph_size[0] // self.grid_x
+        
+        # 距離儲存格中心點的位移量
+        self.grid_med_offset = (self.grid_width // 2, self.grid_height // 2)  
+        
+        # 假設圖表區塊的高度不夠就自動擴張
+        if self.graph_size[1] < self.grid_height * self.grid_y:
+            self.graph_size[1] = self.grid_height * self.grid_y
+            self.canvas_size[1] = self.grid_height * self.grid_y \
+                                  + self.label_field_height
+        
+        # 建立格點
+        self.grid = [[None for i in range(self.grid_y)] \
+                     for j in range(self.grid_x)]
+        
+        # 於格點新增圖片
+        for x in range(len(data)):
+            target = data[x]
+            icon = Image.open(target["image"])
+            for j in range(target["value"]):
+                self.grid[x][j] = icon
+        
+        # 設定標籤的字型
+        self.font = ImageFont.truetype(font, font_size)
+        self.font_color = font_color
+        
+        # 繪製圖表
+        self._draw()
+
+        
+    # 繪製圖表
+    def _draw(self):
+        # 建立繪製畫布與圖表的區塊
+        self.canvas = Image.new("RGBA", self.canvas_size, self.label_back_color)
+        self.graph_field = Image.new("RGBA", self.graph_size, self.back_color)
+        
+        # 在圖表區塊繪製圖示
+        for x in range(len(self.grid)):
+            # 計算繪製位置
+            x_offset = x * self.grid_width  # 儲存格左端的座標
+            
+            # 繪製標籤
+            imd = ImageDraw.Draw(self.canvas)
+            # 計算標籤的大小
+            label_size = imd.textsize(self.labels[x], self.font)  
+            # 標籤左端的座標
+            label_x = x_offset + self.grid_med_offset[0] - label_size[0] // 2  
+            
+            imd.text((label_x, self.graph_size[1]), self.labels[x], 
+                     font=self.font, fill=self.font_color)
+            
+            # 繪製圖示
+            for y in range(len(self.grid[x])):
+                if self.grid[x][y] is None:
+                    continue
+                c_x = x_offset + self.grid_med_offset[0] \
+                      - self.icon_size[0] // 2  # 圖示左端的座標
+                c_y = self.graph_size[1] - (y * self.grid_height) \
+                      - self.grid_height  # 圖示上緣的座標
+                self.graph_field.paste(self.grid[x][y],
+                                       (c_x, c_y), 
+                                       self.grid[x][y])
+        
+        # 將圖表區塊貼入畫布
+        self.canvas.paste(self.graph_field)
+
+    
+    # 傳回圖表的圖片
+    def get_image(self):
+        return self.canvas
+
+print("------------------------------------------------------------")  # 60個
+
+#繪製以圖片代替長條的長條圖
+
+# 預設圖示的大小一致
+# 圖示的大小
+icon_size = (128, 128)
+
+# 整張圖表的大小（圖表的高度會自動擴張）
+canvas_size = (800, 800)
+
+# 圖表區塊的背景色
+graph_back_color = (248, 255, 248)
+
+# 標籤區塊的背景色
+label_back_color = (130, 230, 180)
+
+# 定義資料
+data = [
+    {
+        "label": "Dolphin",  # 標籤
+        "image": "_data2/dolphin.png",  # 用於堆疊的圖片
+        "value": 3  # 堆疊個數
+    },
+    {
+        "label": "Penguin",
+        "image": "_data2/penguin.png",
+        "value": 5
+    },
+    {
+        "label": "Sunfish",
+        "image": "_data2/sunfish.png",
+        "value": 2
+    },
+]
+
+""" NG
+ig = IconGraph(data, icon_size, canvas_size, graph_back_color, label_back_color)
+ig.get_image()
+"""
+print("------------------------------------------------------------")  # 60個
+
+#資料視覺化的調色盤
+
+import seaborn as sns
+
+sns.set()
+current_palette = sns.color_palette()
+sns.palplot(current_palette)
+
+#02 seaborn的調色盤
+
+#適用於質化變數視覺化手法的調色盤
+
+sns.palplot(sns.color_palette("husl", 8))
+
+sns.palplot(sns.color_palette("Set1", 8))
+
+sns.palplot(sns.color_palette("Set2", 8))
+
+sns.palplot(sns.color_palette("Paired", 8))
+
+#適用於質化變數視覺化手法的調色盤
+
+sns.palplot(sns.color_palette("Blues"))
+
+sns.palplot(sns.color_palette("BuGn_r"))
+
+sns.palplot(sns.color_palette("GnBu_d"))
+
+sns.palplot(sns.color_palette("Reds"))
+
+sns.palplot(sns.color_palette("Reds_r"))
+
+sns.palplot(sns.color_palette("Reds_d"))
+
+#無彩色的調色盤
+
+sns.palplot(sns.color_palette("binary"))
+
+sns.palplot(sns.color_palette("gray"))
+
+sns.palplot(sns.color_palette("gist_gray_r"))
+
+#適用於數值在基準值前後分佈的調色盤
+
+sns.palplot(sns.color_palette("RdBu", 7))
+
+sns.palplot(sns.color_palette("coolwarm", 7))
+
+print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
@@ -608,3 +940,18 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
+sys.exit()
+
+plt.xticks(())  # ignore xticks
+plt.yticks(())  # ignore yticks
+
+#plt.axis("off")
+#plt.axis("off")  # 隱藏坐標軸
+
+#plt.title("標題在特定位置", size="x-large", y=-0.1)  # 顯示圖片描述
+
+plt.title("標題在特定位置", size=30, x=0.0, y=0.0)
+
+
+#清除
+#from IPython.display import display

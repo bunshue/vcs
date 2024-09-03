@@ -202,7 +202,6 @@ plt.plot(
 )
 plt.title("常態分布 " + r"$\mu=0, \sigma=1$")
 
-
 print("------------------------------------------------------------")  # 60個
 plt.subplot(232)
 
@@ -215,15 +214,12 @@ plt.hist(x3, bins, density=True, color=colors, label=colors)
 plt.legend()
 plt.title("3 組數據的常態分佈隨機數")
 
-
-
 print("------------------------------------------------------------")  # 60個
 plt.subplot(233)
 
 
 print("------------------------------------------------------------")  # 60個
 plt.subplot(234)
-
 
 print("------------------------------------------------------------")  # 60個
 plt.subplot(235)
@@ -232,11 +228,8 @@ x = np.random.exponential(scale=2, size=N)
 plt.hist(x, bins=num_bins, label="Exponential distribution")
 plt.title("np.random.exponential")
 
-
 print("------------------------------------------------------------")  # 60個
 plt.subplot(236)
-
-
 
 # 生成 N 組介於 0 與 1 之間均勻分配隨機變數
 x = np.random.uniform(size=N)
@@ -244,8 +237,6 @@ x = np.random.uniform(size=N)
 
 plt.hist(x, bins=num_bins, rwidth=0.8)
 plt.title("np.random.uniform")
-
-
 
 plt.show()
 

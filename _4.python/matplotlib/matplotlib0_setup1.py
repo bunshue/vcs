@@ -901,5 +901,34 @@ plt.tight_layout()  # 緊縮佈局
 plt.tight_layout()  # 緊湊佈局
 
 
+plt.tick_params(axis='both', labelsize = 12, color='red')
+plt.tick_params(axis='both', labelsize=12, color='red')
+plt.tick_params(axis='both', labelsize=12, color='red')
+plt.tick_params(axis='both', labelsize=12, color='red')
+
+
+plt.tick_params(axis='both', labelsize=12, color='red')
+
+
+#plt.style.use("seaborn-white")
+
+# plt.axis('equal')       #軸比例
+# xmin, xmax, ymin, ymax = 0.5, 6.5, 15, 32.5
+# plt.axis([xmin, xmax, ymin, ymax])  #設定各軸顯示範圍
+# plt.axis([0.5, 6.5, 15, 35])
+# plt.axes([0.2, 0.2, 0.4, 0.4]) #設定各軸顯示範圍
+
+# 設定 x, y 軸座標範圍
+# plt.xlim(0, 30) # 設定 x 軸座標範圍
+# plt.ylim(0, 50) # 設定 y 軸座標範圍
+
+# plt.axis("equal")  # 調整比例，確認顯示為圓形
+# plt.axis('equal') # 設置餅圖爲正圓形
+
+
+plt.xticks(())
+plt.yticks(())
+
+
 
 """

@@ -10,6 +10,7 @@ print("------------------------------------------------------------")  # 60個
 import os
 import sys
 import math
+import time
 import random
 import numpy as np
 import pandas as pd
@@ -22,10 +23,8 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 # 設定負號
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
-
-print("------------------------------------------------------------")  # 60個
-
 '''
+print("------------------------------------------------------------")  # 60個
 
 """
 高級形態學處理
@@ -44,7 +43,6 @@ skimage.morphology.convex_hull_image(image)
 
 """
 """ pic NG
-import matplotlib.pyplot as plt
 from skimage import data,color,morphology
 
 #生成二值測試圖像
@@ -75,7 +73,6 @@ convex_hull_image()是將圖片中的所有目標看作一個整體，因此計�
 """
 
 """ NG
-import matplotlib.pyplot as plt
 from skimage import data,color,morphology,feature
 
 #生成二值測試圖像
@@ -114,10 +111,8 @@ skimage.measure.label（image,connectivity=None)
 
 """
 
-import numpy as np
 import scipy.ndimage as ndi
 from skimage import measure,color
-import matplotlib.pyplot as plt
 
 #編寫一個函數來生成原始二值圖像
 def microstructure(l=256):
@@ -188,10 +183,8 @@ in_place: bool型值，如果為True,表示直接在輸入圖像中刪除小塊�
 返回刪除了小塊區域的二值圖像。
 """
 
-import numpy as np
 import scipy.ndimage as ndi
 from skimage import morphology
-import matplotlib.pyplot as plt
 
 #編寫一個函數來生成原始二值圖像
 def microstructure(l=256):
@@ -220,8 +213,6 @@ plt.show()
  4、綜合示例：閾值分割+閉運算+連通區域標記+刪除小區塊+分色顯示
 """
 
-import numpy as np
-import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 from skimage import data,filters,segmentation,measure,morphology,color
 
@@ -257,11 +248,9 @@ for region in measure.regionprops(label_image): #循環得到每一個連通區�
 fig.tight_layout()
 plt.show()
 
-'''
-
 print('------------------------------------------------------------')	#60個
 
-
+'''
 print('------------------------------------------------------------')	#60個
 
 """
@@ -281,8 +270,6 @@ morphology子模塊提供了兩個函數用于骨架提取，分別是Skeletoniz
 """
 
 from skimage import morphology,draw
-import numpy as np
-import matplotlib.pyplot as plt
 
 #創建一個二值圖像用于測試
 image = np.zeros((400, 400))
@@ -315,11 +302,11 @@ fig, (ax1, ax2) = plt.subplots(nrows=1, ncols=2, figsize=(8, 4))
 
 ax1.imshow(image, cmap=plt.cm.gray)
 ax1.axis('off')
-ax1.set_title('original', fontsize=20)
+ax1.set_title('原圖')
 
 ax2.imshow(skeleton, cmap=plt.cm.gray)
 ax2.axis('off')
-ax2.set_title('skeleton', fontsize=20)
+ax2.set_title('骨架skeleton')
 
 fig.tight_layout()
 plt.show()
@@ -332,7 +319,6 @@ plt.show()
 
 """ pic NG
 from skimage import morphology,data,color
-import matplotlib.pyplot as plt
 
 image=color.rgb2gray(data.horse())
 image=1-image #反相
@@ -344,11 +330,11 @@ fig, (ax1, ax2) = plt.subplots(nrows=1, ncols=2, figsize=(8, 4))
 
 ax1.imshow(image, cmap=plt.cm.gray)
 ax1.axis('off')
-ax1.set_title('original', fontsize=20)
+ax1.set_title('原圖')
 
 ax2.imshow(skeleton, cmap=plt.cm.gray)
 ax2.axis('off')
-ax2.set_title('skeleton', fontsize=20)
+ax2.set_title('骨架skeleton')
 
 fig.tight_layout()
 plt.show()
@@ -364,10 +350,8 @@ mask: 掩模。默認為None, 如果給定一個掩模，則在掩模內的像�
 return_distance: bool型值，默認為False. 如果為True, 則除了返回骨架，還將距離變換值也同時返回。這里的距離指的是中軸線上的所有點與背景點的距離。
 """
 
-import numpy as np
 import scipy.ndimage as ndi
 from skimage import morphology
-import matplotlib.pyplot as plt
 
 #編寫一個函數，生成測試圖像
 def microstructure(l=256):
@@ -409,8 +393,6 @@ plt.show()
 例1：基于距離變換的分山嶺圖像分割
 """
 
-import numpy as np
-import matplotlib.pyplot as plt
 from scipy import ndimage as ndi
 from skimage import morphology,feature
 
@@ -461,7 +443,6 @@ plt.show()
 """
 
 """ pic NG
-import matplotlib.pyplot as plt
 from scipy import ndimage as ndi
 from skimage import morphology,color,data,filters
 

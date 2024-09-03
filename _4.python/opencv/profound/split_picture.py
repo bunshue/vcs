@@ -26,5 +26,5 @@ def split_picture(filename):
             cv2.imwrite('tmp_char%s.jpg'%flag, thresh1[y:y+h, x:x+w])
             flag += 1
 
-filename = '8a.jpg'
+filename = 'data/captcha.jpg'
 split_picture(filename)

@@ -1,9 +1,36 @@
-import cv2
+"""
+
+"""
+print("------------------------------------------------------------")  # 60個
+
+# 共同
+import os
+import sys
+import time
+import math
+import random
 import numpy as np
+import pandas as pd
 import matplotlib.pyplot as plt
 
+font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+# 設定中文字型及負號正確顯示
+# 設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
+# 設定負號
+plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+plt.rcParams["font.size"] = 12  # 設定字型大小
+
+print("------------------------------------------------------------")  # 60個
+
+import cv2
+
+filename = 'C:/_git/vcs/_4.python/_data/lena_color.png'
+
+print("------------------------------------------------------------")  # 60個
+
 #读取原始图像
-img = cv2.imread('flow.jpg') 
+img = cv2.imread(filename)
 print(img.shape)
 
 #图像二维像素转换为一维
@@ -60,14 +87,6 @@ dst4 = cv2.cvtColor(dst4, cv2.COLOR_BGR2RGB)
 dst8 = cv2.cvtColor(dst8, cv2.COLOR_BGR2RGB)
 dst16 = cv2.cvtColor(dst16, cv2.COLOR_BGR2RGB)
 dst64 = cv2.cvtColor(dst64, cv2.COLOR_BGR2RGB)
-
-#用来正常显示中文标签
-#plt.rcParams['font.sans-serif']=['SimHei']
-#設定中文字型及負號正確顯示
-#設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
-#設定負號
-plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 #显示图像
 titles = [u'原始图像', u'聚类图像 K=2', u'聚类图像 K=4',

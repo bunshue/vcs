@@ -1,3 +1,9 @@
+"""
+watershed 分水嶺
+
+
+"""
+
 import cv2 as cv
 import numpy as np
 from matplotlib import pyplot as plt
@@ -39,6 +45,7 @@ def watershed_demo(img):
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/ims01.24.bmp'
 filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_egd/pic04a.jpg'
+
 img = cv.imread(filename)
 cv.namedWindow('img',cv.WINDOW_AUTOSIZE)
 cv.imshow('Original',img)

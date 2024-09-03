@@ -13,6 +13,7 @@ print("------------------------------------------------------------")  # 60個
 # 共同
 import os
 import sys
+import time
 import math
 import time
 import random
@@ -29,7 +30,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 print('---- 1111 csv --------------------------------------------------------')	#60個
 
 print('pandas DataFrame資料輸出到csv檔')
@@ -109,24 +110,18 @@ print(df.head())
 
 print(df["國文"])
 
-
 print(df.國文)
-
 
 cg = df.國文.values
 
-
 print(cg)
-
 
 print(cg.mean())
 
 print(cg.std())
 
-
 df.國文.plot()
 plt.show()
-
 
 df.國文.hist(bins = 15)
 plt.show()
@@ -204,16 +199,13 @@ df = pd.read_csv("http://bit.ly/uforeports")
 
 print(df.head())
 
-
 df_state = df.groupby("State").count()
 
 print(df_state)
 
 df_state.sort_values(by = "Time", ascending = False)
 
-
 print(df_state)
-
 
 df_state.sort_values(by = "Time", ascending = False, inplace = True)
 
@@ -250,8 +242,6 @@ print('------------------------------------------------------------')	#60個
 
 print('---- 3333 excel --------------------------------------------------------')	#60個
 
-
-
 filename = 'C:/_git/vcs/_1.data/______test_files2/score555.xlsx'
 
 datas = [[65,92,78,83,70], [90,72,76,93,56], [81,85,91,89,77], [79,53,47,94,80]]
@@ -262,13 +252,11 @@ print(df)
 
 df.to_excel(filename, encoding="utf-8-sig")
 
-
 print('------------------------------------------------------------')	#60個
 
 data = pd.read_excel(filename, encoding="utf-8-sig",index_col=0)
 
 print(data)
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -287,7 +275,6 @@ filename = 'C:/_git/vcs/_1.data/______test_files2/district.csv'
 
 print('寫出到csv檔')
 df3.to_csv(filename, encoding = 'big5', index = False)
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -605,12 +592,14 @@ print("標準差:", np.std(dat["太郎"]))
 
 print('------------------------------------------------------------')	#60個
 
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
+
+# 新進
 
 filename = "data/python_ReadWrite_CSV6_score.csv"
 
@@ -622,11 +611,7 @@ print("數學平均", np.mean(dat["數學"]))
 print("數學中位數", np.median(dat["數學"]))
 
 print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
+'''
 # NYC 311 service request dataset
 csv_filename = "C:/_git/vcs/_big_files/311-service-requests.csv"
 requests = pd.read_csv(csv_filename, dtype="unicode")
@@ -644,7 +629,6 @@ requests = pd.read_csv(csv_filename, na_values=na_values, dtype={"Incident Zip":
 
 cc = requests["Incident Zip"].unique()
 print(cc)
-
 
 # What's up with the dashes?
 
@@ -719,7 +703,7 @@ requests["Incident Zip"] = fix_zip_codes(requests["Incident Zip"])
 
 cc = requests["Incident Zip"].unique()
 print(cc)
-
+'''
 print("------------------------------------------------------------")  # 60個
 
 # Parsing Unix timestamps
@@ -753,6 +737,34 @@ nonlibraries = popcon[~popcon["package-name"].str.contains("lib")]
 cc = nonlibraries.sort_values("ctime", ascending=False)[:10]
 print(cc)
 
+print("------------------------------------------------------------")  # 60個
+
+# use_pivot_sum
+
+df = pd.read_csv("data\ordersList.csv", encoding="utf-8", header=0)
+
+print(
+    df.pivot_table(
+        index="品名",
+        columns="客戶名稱",
+        values="金額",
+        fill_value=0,
+        margins=True,
+        aggfunc="sum",
+    )
+)
+
+print(
+    df.pivot_table(index="品名", columns="客戶名稱", values="金額", fill_value=0, margins=True)
+)
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 

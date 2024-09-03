@@ -464,6 +464,26 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
+def f(x, y):
+    return np.sqrt(x**2 + y**2)
+
+
+N = 256
+x = np.linspace(-3, 3, N)
+y = np.linspace(-3, 3, N)
+X, Y = np.meshgrid(x, y)
+
+# X, Y and value for (X,Y) point
+plt.contourf(X, Y, f(X, Y), 8, alpha=0.75, cmap=plt.cm.hot)
+
+# use plt.contour to add contour lines
+C = plt.contour(X, Y, f(X, Y), 8, colors="black", linewidth=0.5)
+
+# adding label
+plt.clabel(C, inline=True, fontsize=10)
+
+plt.show()
+
 
 print("------------------------------------------------------------")  # 60個
 

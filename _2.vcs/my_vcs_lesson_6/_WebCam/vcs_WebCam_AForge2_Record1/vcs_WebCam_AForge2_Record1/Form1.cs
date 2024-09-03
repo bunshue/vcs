@@ -135,6 +135,18 @@ namespace vcs_WebCam_AForge2_Record1
             richTextBox1.Clear();
         }
 
+        //delay 10000 約 10秒
+        //C# 不lag的延遲時間
+        private void delay(int delay_milliseconds)
+        {
+            delay_milliseconds *= 2;
+            DateTime time_before = DateTime.Now;
+            while (((TimeSpan)(DateTime.Now - time_before)).TotalMilliseconds < delay_milliseconds)
+            {
+                Application.DoEvents();
+            }
+        }
+
         void Init_WebcamSetup()         //讀出目前相機資訊 存在各list和richTextBox1裏
         {
             flag_ims_camera_exists1 = false;
@@ -557,7 +569,7 @@ namespace vcs_WebCam_AForge2_Record1
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("xxx錯誤訊息e01 : " + ex.Message);
+                    Console.WriteLine("xxx錯誤訊息e01a : " + ex.Message);
                 }
             }
 
@@ -568,7 +580,14 @@ namespace vcs_WebCam_AForge2_Record1
                 if (ms < 500)
                 {
                     int ww = 22;
-                    g.FillEllipse(Brushes.Red, 640 - BORDER - ww, BORDER + 4, ww, ww);
+                    try
+                    {
+                        g.FillEllipse(Brushes.Red, 640 - BORDER - ww, BORDER + 4, ww, ww);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("xxx錯誤訊息e01b : " + ex.Message);
+                    }
                 }
             }
 
@@ -683,8 +702,13 @@ namespace vcs_WebCam_AForge2_Record1
         {
             if (flag_recording == true)
             {
+                bt_record_stop.Text = "停止錄影中";
+                bt_record_stop.BackColor = Color.Red;
+
                 //錄影完需將影像停止不然會出錯
                 flag_recording = false;
+
+                delay(500);//1秒
 
                 writer.Close();
 
@@ -697,6 +721,9 @@ namespace vcs_WebCam_AForge2_Record1
                 bt_record_start.Enabled = true;
                 bt_record_stop.Enabled = false;
                 bt_record_start2.Enabled = true;
+
+                bt_record_stop.Text = "錄影 SP";
+                bt_record_stop.BackColor = SystemColors.ControlLight;
             }
             else
             {
@@ -862,18 +889,6 @@ namespace vcs_WebCam_AForge2_Record1
                 timer_display_show_main_mesg_count++;
                 if (timer_display_show_main_mesg_count >= timer_display_show_main_mesg_count_target)
                     lb_main_mesg.Text = "";
-            }
-        }
-
-        //delay 10000 約 10秒
-        //C# 不lag的延遲時間
-        private void delay(int delay_milliseconds)
-        {
-            delay_milliseconds *= 2;
-            DateTime time_before = DateTime.Now;
-            while (((TimeSpan)(DateTime.Now - time_before)).TotalMilliseconds < delay_milliseconds)
-            {
-                Application.DoEvents();
             }
         }
 

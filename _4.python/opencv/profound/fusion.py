@@ -3,9 +3,10 @@
 import cv2
 import numpy as np 
  
-imgA = cv2.imread("a.tif") #载入图片A
-imgB = cv2.imread("b.tif") #载入图片B
+imgA = cv2.imread("data/a.tif") #载入图片A
+imgB = cv2.imread("data/b.tif") #载入图片B
 heigh, wide, channel = imgA.shape #获取图像的高、宽、通道数
+
 """临时变量、存储哈尔小波处理后的数据"""
 tempA1 = []                   
 tempA2 = []                   

@@ -28,6 +28,14 @@ namespace vcs_AMCap0
         public FilterInfoCollection USBWebcams = null;
         public VideoCaptureDevice Cam = null;
 
+        private const int BORDER = 10;
+        private const int W_pictureBox1 = 640;
+        private const int H_pictureBox1 = 480;
+        private const int W_groupBox1 = W_pictureBox1;
+        private const int H_groupBox1 = 60;
+        private const int W_richTextBox1 = 360;
+        private const int H_richTextBox1 = H_pictureBox1 + H_groupBox1 + BORDER;
+
         public Form1()
         {
             InitializeComponent();
@@ -35,6 +43,8 @@ namespace vcs_AMCap0
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            show_item_location();
+
             //richTextBox1.Text += "重新抓取USB影像\t";
             USBWebcams = new FilterInfoCollection(FilterCategory.VideoInputDevice);
             if (USBWebcams.Count > 0)  // The quantity of WebCam must be more than 0.
@@ -55,15 +65,36 @@ namespace vcs_AMCap0
 
                 webcam_name = USBWebcams[0].Name + " " + Cam.VideoCapabilities[0].FrameSize.Width.ToString() + " X " + Cam.VideoCapabilities[0].FrameSize.Height.ToString() + " @ " + Cam.VideoCapabilities[0].AverageFrameRate.ToString() + " Hz";
                 this.Text = webcam_name;
-
-                pictureBox1.Size = new Size(ww, hh);
-                this.ClientSize = new Size(pictureBox1.Location.X + pictureBox1.Width + 50, pictureBox1.Location.Y + pictureBox1.Height + 50);
             }
             else
             {
                 this.Text = "無影像裝置\n";
             }
         }
+
+        void show_item_location()
+        {
+            pictureBox1.Size = new Size(W_pictureBox1, H_pictureBox1);
+            pictureBox1.Location = new Point(BORDER, BORDER);
+
+            richTextBox1.Location = new Point(BORDER + W_pictureBox1 + BORDER, BORDER);
+            richTextBox1.Size = new Size(W_richTextBox1, H_richTextBox1);
+
+            int dx = 80;
+            int offset_y = 3;
+            button0.Location = new Point(BORDER + dx * 0, BORDER + offset_y);
+            button1.Location = new Point(BORDER + dx * 1, BORDER + offset_y);
+            button2.Location = new Point(BORDER + dx * 2, BORDER + offset_y);
+            button3.Location = new Point(BORDER + dx * 3, BORDER + offset_y);
+            lb_fps.Location = new Point(BORDER + dx * 4, BORDER + BORDER);
+
+            groupBox1.Size = new Size(W_groupBox1, H_groupBox1);
+            groupBox1.Location = new Point(BORDER + dx * 0, BORDER + H_pictureBox1 + BORDER);
+
+            this.Text = "";
+            this.ClientSize = new Size(BORDER + W_pictureBox1 + BORDER + W_richTextBox1 + BORDER, BORDER + H_pictureBox1 + BORDER + H_groupBox1 + BORDER);
+        }
+
 
         public Bitmap bm = null;
         //自定義函數, 捕獲每一幀圖像並顯示
@@ -137,7 +168,22 @@ namespace vcs_AMCap0
             return;
         }
 
-        private void bt_save_picture_Click(object sender, EventArgs e)
+        private void button0_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
         {
             save_image_file();
         }

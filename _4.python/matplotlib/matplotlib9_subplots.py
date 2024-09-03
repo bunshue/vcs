@@ -344,6 +344,59 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
+# 準備描點x,y資料
+x = np.arange(-10, 10, 0.1)
+y1 = x**3
+y2 = x**2
+
+# 指定 寬6.4inches, 高4.8inches, 160dpi
+# 將圖分成一個子圖
+fig, ax = plt.subplots(figsize=(6.4, 4.8), dpi=160)
+
+# 畫出y=x**3曲線
+ax.plot(x, y1)
+
+# 畫出y=x**2曲線
+ax.plot(x, y2)
+
+# 加上X軸刻度範圍-10~10(如果大小顛倒，圖形會左右鏡射)
+ax.set_xlim(-10, 10)
+
+# 加上Y軸刻度範圍-1000~1000(如果大小顛倒，圖形會左右鏡射)
+ax.set_ylim(-1000, 1000)
+
+# 加上X軸刻度標示 -10,-9,-8,...,10(只有整數),字體大小為預設
+ax.set_xticks(np.arange(-10, 11, 1))
+
+# 加上Y軸刻度標示 -1000,-900,...,1000(只有100的倍數),字體大小為預設
+ax.set_yticks(np.arange(-1000, 1000, 100))
+
+# 加上X軸標題(靠右對齊x=1.0為X軸最右)
+ax.set_xlabel("X軸", horizontalalignment="right", verticalalignment="top", x=1.0)
+
+# 加上Y軸標題(靠上對齊y=1.0為Y軸最上)
+ax.set_ylabel("Y軸", horizontalalignment="right", verticalalignment="bottom", y=1.0)
+# ax.set(xlabel='X軸', ylabel='Y軸')
+
+ax.grid()  # 加上格線
+
+# 子圖標題
+ax.set_title("子圖標題", loc="right")
+
+# figure標題
+fig.suptitle("y=x**3&y=x**2")
+
+# 儲存檔案名為test.png
+# fig.savefig("tmp_test.png")
+
+# 圖例說明
+ax.legend(["y=x**3", "y=x**2"])
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+
 
 print("------------------------------------------------------------")  # 60個
 

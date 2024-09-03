@@ -119,6 +119,7 @@ plt.subplot(235)
 
 s = "歡迎來到美國"
 s1 = "Welcome to the United States"
+
 plt.text(
     0.1,
     0.2,
@@ -132,6 +133,7 @@ plt.text(
         fc="lightgreen",
     ),
 )
+
 plt.text(
     0.1,
     0.4,
@@ -145,6 +147,7 @@ plt.text(
         fc="lightgreen",
     ),
 )
+
 plt.text(
     0.1,
     0.6,
@@ -158,6 +161,7 @@ plt.text(
         fc="lightgreen",
     ),
 )
+
 plt.text(
     0.6,
     0.2,
@@ -171,6 +175,7 @@ plt.text(
         fc="lightgreen",
     ),
 )
+
 plt.text(
     0.6,
     0.4,
@@ -184,6 +189,7 @@ plt.text(
         fc="lightgreen",
     ),
 )
+
 plt.text(
     0.6,
     0.6,
@@ -197,6 +203,7 @@ plt.text(
         fc="lightgreen",
     ),
 )
+
 plt.text(
     0.1,
     0.8,
@@ -348,4 +355,7 @@ print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
+
+#寫字
+plt.text(1,0,'sin(x)',fontsize=20)
 

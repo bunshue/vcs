@@ -1,5 +1,6 @@
 """
 
+
 """
 
 print("------------------------------------------------------------")  # 60個
@@ -7,6 +8,7 @@ print("------------------------------------------------------------")  # 60個
 # 共同
 import os
 import sys
+import time
 import math
 import random
 import numpy as np
@@ -87,6 +89,7 @@ plt.annotate(
 )
 # arrowprops = dict(color = 'g', shrink = 0.05))
 plt.ylim(-1.5, 1.5)
+
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
@@ -98,6 +101,7 @@ ax.annotate(
     xytext=(0.7, 0.8),
     arrowprops=dict(arrowstyle="->", connectionstyle="arc"),
 )
+
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
@@ -109,6 +113,7 @@ ax.annotate(
     xytext=(0.7, 0.8),
     arrowprops=dict(arrowstyle="->", connectionstyle="angle"),
 )
+
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
@@ -178,6 +183,7 @@ plt.annotate(
     color="b",
     arrowprops=dict(arrowstyle="simple", color="g", connectionstyle="arc3,rad=-0.3"),
 )
+
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
@@ -194,6 +200,7 @@ plt.annotate(
     bbox=dict(boxstyle="round4", fc="lightyellow"),
     arrowprops=dict(arrowstyle="fancy", color="g", connectionstyle="arc3,rad=-0.3"),
 )
+
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
@@ -221,11 +228,10 @@ plt.annotate(
     bbox=dict(boxstyle="round4", fc="lightyellow"),
     arrowprops=dict(arrowstyle="wedge", color="m", connectionstyle="arc3,rad=0.3"),
 )
+
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
-
-import matplotlib
 
 fig = plt.figure(figsize=(6, 4), dpi=100)  # 設置繪製對象大小
 plt.style.use("ggplot")  # 設置顯示風格
@@ -251,10 +257,11 @@ plt.xlabel("x value")  # 設置x軸上的標籤
 plt.ylabel("y value")  # 設置y軸上的標籤
 plt.xlim(-0.5, 7)  # 設置x軸範圍
 plt.ylim(-5, 50)  # 設置y軸範圍
+
 plt.show()
 
-# many
-# 顯示繪製對象的各個屬性值
+# 顯示繪製對象的各個屬性值, many
+# import matplotlib
 # print(matplotlib.artist.getp(fig.patch))
 
 print("------------------------------------------------------------")  # 60個
