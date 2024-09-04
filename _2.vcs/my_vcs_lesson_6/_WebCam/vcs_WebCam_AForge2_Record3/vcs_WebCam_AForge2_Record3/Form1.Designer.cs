@@ -36,6 +36,8 @@
             this.bt_record_start = new System.Windows.Forms.Button();
             this.bt_record_stop = new System.Windows.Forms.Button();
             this.bt_clear = new System.Windows.Forms.Button();
+            this.bt_stop = new System.Windows.Forms.Button();
+            this.bt_start = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -58,8 +60,10 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.bt_stop);
             this.groupBox1.Controls.Add(this.bt_exit);
             this.groupBox1.Controls.Add(this.bt_record_start);
+            this.groupBox1.Controls.Add(this.bt_start);
             this.groupBox1.Controls.Add(this.bt_record_stop);
             this.groupBox1.Location = new System.Drawing.Point(12, 140);
             this.groupBox1.Name = "groupBox1";
@@ -70,7 +74,7 @@
             // bt_exit
             // 
             this.bt_exit.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_exit.Location = new System.Drawing.Point(192, 21);
+            this.bt_exit.Location = new System.Drawing.Point(177, 32);
             this.bt_exit.Name = "bt_exit";
             this.bt_exit.Size = new System.Drawing.Size(75, 30);
             this.bt_exit.TabIndex = 35;
@@ -81,7 +85,7 @@
             // bt_record_start
             // 
             this.bt_record_start.ImageIndex = 0;
-            this.bt_record_start.Location = new System.Drawing.Point(6, 21);
+            this.bt_record_start.Location = new System.Drawing.Point(6, 47);
             this.bt_record_start.Name = "bt_record_start";
             this.bt_record_start.Size = new System.Drawing.Size(75, 30);
             this.bt_record_start.TabIndex = 7;
@@ -92,7 +96,7 @@
             // bt_record_stop
             // 
             this.bt_record_stop.ImageIndex = 0;
-            this.bt_record_stop.Location = new System.Drawing.Point(96, 22);
+            this.bt_record_stop.Location = new System.Drawing.Point(96, 48);
             this.bt_record_stop.Name = "bt_record_stop";
             this.bt_record_stop.Size = new System.Drawing.Size(75, 30);
             this.bt_record_stop.TabIndex = 10;
@@ -109,6 +113,28 @@
             this.bt_clear.Text = "Clear";
             this.bt_clear.UseVisualStyleBackColor = true;
             this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
+            // 
+            // bt_stop
+            // 
+            this.bt_stop.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_stop.Location = new System.Drawing.Point(96, 12);
+            this.bt_stop.Name = "bt_stop";
+            this.bt_stop.Size = new System.Drawing.Size(75, 30);
+            this.bt_stop.TabIndex = 37;
+            this.bt_stop.Text = "停止";
+            this.bt_stop.UseVisualStyleBackColor = true;
+            this.bt_stop.Click += new System.EventHandler(this.bt_stop_Click);
+            // 
+            // bt_start
+            // 
+            this.bt_start.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_start.Location = new System.Drawing.Point(6, 11);
+            this.bt_start.Name = "bt_start";
+            this.bt_start.Size = new System.Drawing.Size(75, 30);
+            this.bt_start.TabIndex = 36;
+            this.bt_start.Text = "啟動";
+            this.bt_start.UseVisualStyleBackColor = true;
+            this.bt_start.Click += new System.EventHandler(this.bt_start_Click);
             // 
             // Form1
             // 
@@ -139,6 +165,8 @@
         private System.Windows.Forms.Button bt_record_stop;
         private System.Windows.Forms.Button bt_clear;
         private System.Windows.Forms.Button bt_exit;
+        private System.Windows.Forms.Button bt_stop;
+        private System.Windows.Forms.Button bt_start;
     }
 }
 

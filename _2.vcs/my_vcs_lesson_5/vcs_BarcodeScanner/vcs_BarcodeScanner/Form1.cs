@@ -21,7 +21,6 @@ namespace vcs_BarcodeScanner
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
-
         }
 
         void show_item_location()
@@ -112,15 +111,13 @@ namespace vcs_BarcodeScanner
         private void button01_Click(object sender, EventArgs e)
         {
             //網頁連線
-
+            System.Diagnostics.Process.Start("https://www.google.com.tw/");
         }
 
         private void button02_Click(object sender, EventArgs e)
         {
             tb_barcode_data.Clear();
         }
-
-
     }
 }
 

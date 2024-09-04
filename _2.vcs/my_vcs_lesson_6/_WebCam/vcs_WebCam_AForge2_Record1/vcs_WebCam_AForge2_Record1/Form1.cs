@@ -20,15 +20,11 @@ namespace vcs_WebCam_AForge2_Record1
 {
     public partial class Form1 : Form
     {
-        public FilterInfoCollection USBWebcams = null;
-        public VideoCaptureDevice Cam = null;
+        private FilterInfoCollection USBWebcams = null;
+        private VideoCaptureDevice Cam = null;
 
-        private bool flag_webcam_ok = false;    //判斷是否啟動webcam的旗標
-        private bool flag_recording = false;    //判斷是否啟動錄影的旗標, for 錄影1
-
-        List<string> camera_short_name = new List<string>();      //一維List for string
-        List<string> camera_full_name = new List<string>();      //一維List for string
-        List<int[]> camera_capability = new List<int[]>();  //二維List for int
+        private bool flag_webcam_start = false;    //判斷是否啟動webcam的旗標
+        private bool flag_recording = false;    //判斷是否啟動錄影的旗標
 
         int webcam_count = 0;
 
@@ -36,13 +32,17 @@ namespace vcs_WebCam_AForge2_Record1
         private const int S_FALSE = 1;     //system return FALSE
         private const int BORDER = 10;
 
+        private string recording_filename = "XXXXXXX.avi";
+        VideoFileWriter writer = new VideoFileWriter();
+        DateTime recording_time_st = DateTime.Now;
+        private const int LIMIT_RECORD_TIME_SEC = 15;   //單次錄影時間(秒)
+        int limit_record_time_sec = LIMIT_RECORD_TIME_SEC;
+
         int timer_display_show_main_mesg_count = 0;
         int timer_display_show_main_mesg_count_target = 0;
 
         private bool flag_limit_recording_time = false;
-        private string recording_filename = "XXXXXXX.avi";
-        VideoFileWriter writer = new VideoFileWriter();
-        DateTime recording_time_st = DateTime.Now;
+        private bool flag_limit_recording_time_ims = false;
         private string ims_camera_name_short1 = "USB Camera";
         private string ims_camera_name_short2 = "InsightEyes";
         private string ims_camera_name_long1 = "xxxx3";
@@ -63,15 +63,31 @@ namespace vcs_WebCam_AForge2_Record1
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            int time = Properties.Settings.Default.limit_record_time_sec;
+            if ((time >= 5) && (time <= 50))
+                limit_record_time_sec = time;
+            numericUpDown_limit_record_time.Value = limit_record_time_sec;
+
             show_item_location();
-            //Init_WebcamSetup();
+            bt_start_Click(sender, e);
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
+
+            //離開程式前, 關閉相機(錄影與播放)
+            ///先關閉錄影  再關閉播放
+
             if (flag_recording == true)
             {
-                bt_record_stop_Click(sender, e);
+                try
+                {
+                    bt_record_stop_Click(sender, e);
+                }
+                catch (Exception ex)
+                {
+                    richTextBox1.Text += "xxx錯誤訊息e01 : " + ex.Message + "\n";
+                }
             }
 
             if (Cam != null)
@@ -102,30 +118,40 @@ namespace vcs_WebCam_AForge2_Record1
             richTextBox1.Location = new Point(x_st + dx * 3 + 90, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            groupBox1.Size = new Size(380, 200);
+            groupBox1.Size = new Size(640, 200);
             groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0 + H + BORDER);
 
             bt_record_stop.Enabled = false;
             this.Size = new Size(1000, 750);
             x_st = 10;
             y_st = 20;
-            dx = 90;
+            dx = 70 + 8;
             dy = 28;
-            dy = 40;
+            dy = 40 + 6;
 
             bt_start.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             bt_stop.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             bt_refresh.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             bt_exit.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            bt_snapshot.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+            bt_record_start.Location = new Point(x_st + dx * 5, y_st + dy * 0);
+            bt_record_stop.Location = new Point(x_st + dx * 6, y_st + dy * 0);
+            bt_record_limit_time.Location = new Point(x_st + dx * 7, y_st + dy * 0);
+            bt_clear2.Location = new Point(x_st + dx * 7, y_st + dy * 2);
+            numericUpDown_limit_record_time.Location = new Point(x_st + dx * 7, y_st + dy * 1);
 
-            bt_snapshot.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            bt_record_start.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            bt_record_stop.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-            bt_record_start2.Location = new Point(x_st + dx * 3, y_st + dy * 1);
-            lb_fps.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+
+            lb_fps.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             lb_fps.Text = "";
-            lb_main_mesg.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            lb_main_mesg.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             lb_main_mesg.Text = "";
+
+            tb_barcode_data.Size = new Size(226, 50);
+            tb_wait_barcode_data.Size = new Size(226, 30);
+            tb_barcode_data.Location = new Point(x_st + dx * 4, y_st + dy * 2);
+            tb_wait_barcode_data.Location = new Point(x_st + dx * 4, y_st + dy * 3);
+            lb_main_mesg1.Location = new Point(x_st + dx * 3, y_st + dy * 3);
+
             richTextBox1.BringToFront();
             bt_clear.BringToFront();
         }
@@ -147,14 +173,10 @@ namespace vcs_WebCam_AForge2_Record1
             }
         }
 
-        void Init_WebcamSetup()         //讀出目前相機資訊 存在各list和richTextBox1裏
+        void Init_WebcamSetup()
         {
             flag_ims_camera_exists1 = false;
             flag_ims_camera_exists2 = false;
-
-            camera_short_name.Clear();
-            camera_full_name.Clear();
-            camera_capability.Clear();
 
             try
             {
@@ -188,17 +210,6 @@ namespace vcs_WebCam_AForge2_Record1
                     i++;
                 }
 
-                /* same
-                for (i = 0; i < webcam_count; i++)
-                {
-                    richTextBox1.Text += "第 " + (i + 1).ToString() + " 台WebCam:\n";
-                    richTextBox1.Text += "短名 : " + USBWebcams[i].Name + "\n";
-                    richTextBox1.Text += "長名 : " + USBWebcams[i].MonikerString + "\n";
-                    richTextBox1.Text += "\n";
-                }
-                richTextBox1.Text += "\n";
-                */
-
                 //抓出並顯示所有顯示能力
                 if (webcam_count > 0)  // The quantity of WebCam must be more than 0.
                 {
@@ -220,13 +231,6 @@ namespace vcs_WebCam_AForge2_Record1
                         var videoCapabilities = Cam.VideoCapabilities;
                         foreach (var video in videoCapabilities)
                         {
-                            /*
-                            richTextBox1.Text += "預覽分辨率 : " + video.FrameSize.Width.ToString() + " X " + video.FrameSize.Height.ToString() + "\n";
-                            richTextBox1.Text += "AverageFrameRate : " + video.AverageFrameRate.ToString() + "\n";
-                            richTextBox1.Text += "BitCount : " + video.BitCount.ToString() + "\n";
-                            richTextBox1.Text += "MaximumFrameRate : " + video.MaximumFrameRate.ToString() + "\n";
-                            string video_capability = video.FrameSize.Width.ToString() + " X " + video.FrameSize.Height.ToString() + " @ " + video.AverageFrameRate.ToString() + " Hz";
-                            */
                         }
 
                         string webcam_name;
@@ -237,84 +241,17 @@ namespace vcs_WebCam_AForge2_Record1
                         }
                         else
                         {
-                            camera_short_name.Add(USBWebcams[i].Name);
-                            camera_full_name.Add(USBWebcams[i].MonikerString);
-
                             int j;
 
                             for (j = 0; j < Cam.VideoCapabilities.Length; j++)
                             {
-                                /*
-                                richTextBox1.Text += "FR1 = " + Cam.VideoCapabilities[j].AverageFrameRate.ToString() + "\n";
-                                //richTextBox1.Text += "FR1 = " + Cam.VideoCapabilities[j].FrameRate.ToString();
-                                richTextBox1.Text += "W = " + Cam.VideoCapabilities[j].FrameSize.Width.ToString() + "\n";
-                                richTextBox1.Text += "H = " + Cam.VideoCapabilities[j].FrameSize.Height.ToString() + "\n";
-                                */
-                                /*
-                                richTextBox1.Text += "BitCount = " + Cam.VideoCapabilities[j].BitCount.ToString() + "\n";
-                                richTextBox1.Text += "FR_max = " + Cam.VideoCapabilities[j].MaximumFrameRate.ToString() + "\n";
-                                richTextBox1.Text += "ProvideSnapshots = " + Cam.ProvideSnapshots.ToString() + "\n";
-                                if (Cam.ProvideSnapshots == true)
-                                {
-                                    richTextBox1.Text += "Snapshot len = " + Cam.SnapshotCapabilities.Length.ToString() + "\n";
-                                    richTextBox1.Text += "Snapshot W = " + Cam.SnapshotResolution.FrameSize.Width.ToString() + "\n";
-                                    richTextBox1.Text += "Snapshot H = " + Cam.SnapshotResolution.FrameSize.Height.ToString() + "\n";
-                                    richTextBox1.Text += "Snapshot FR = " + Cam.SnapshotResolution.MaximumFrameRate.ToString() + "\n";
-                                }
-                                richTextBox1.Text += "Cam.Source = " + Cam.Source.ToString() + "\n";
-                                richTextBox1.Text += "Cam.Source.Length = " + Cam.Source.Length.ToString() + "\n";
-                                richTextBox1.Text += "FrameRate = " + Cam.VideoResolution.FrameRate.ToString() + "\n";    //old
-                                richTextBox1.Text += "FrameSize.W = " + Cam.VideoResolution.FrameSize.Width.ToString() + "\n";
-                                richTextBox1.Text += "FrameSize.H = " + Cam.VideoResolution.FrameSize.Height.ToString() + "\n";
-                                */
-
-                                /*
-
-                                webcam_name = (i + 1).ToString() + ". " + USBWebcams[i].Name + " "
-                                    + Cam.VideoCapabilities[j].FrameSize.Width.ToString() + " X " + Cam.VideoCapabilities[j].FrameSize.Height.ToString()
-                                    + " @ " + Cam.VideoCapabilities[j].AverageFrameRate.ToString() + " Hz";
-                                */
-
                                 webcam_name = (i + 1).ToString() + ". " + USBWebcams[i].Name + " "
     + Cam.VideoCapabilities[j].FrameSize.Width.ToString() + " X " + Cam.VideoCapabilities[j].FrameSize.Height.ToString();
-
-                                //richTextBox1.Text += webcam_name + "\n";
-
-                                camera_capability.Add(new int[] { i, j });
                             }
                         }
                         richTextBox1.Text += "\n";
                     }
                 }
-
-                /*  reserved
-                 * 
-                    richTextBox1.Text += "aaaa SnapshotCapabilities.Length " + Cam.SnapshotCapabilities.Length.ToString() + "\n";
-                    var snapVabalities = Cam.SnapshotCapabilities;
-                    foreach (var snap in snapVabalities)
-                    {
-                        richTextBox1.Text += "Snapshot分辨率->" + snap.FrameSize.Width.ToString() + "*" + snap.FrameSize.Height.ToString() + "\n";
-                        richTextBox1.Text += "Snapshot AverageFrameRate : " + snap.AverageFrameRate.ToString() + "\n";
-                        richTextBox1.Text += "Snapshot BitCount : " + snap.BitCount.ToString() + "\n";
-                        richTextBox1.Text += "Snapshot MaximumFrameRate : " + snap.MaximumFrameRate.ToString() + "\n";
-                    }
-                    //選擇Snapshot分辨率
-                    if (snapVabalities.Count() > 0)
-                    {
-                        Cam.SnapshotResolution = Cam.SnapshotCapabilities.Last();
-                    }
-
-                    int len;
-                    len = Cam.VideoCapabilities.Length;
-                    for (i = 0; i < len; i++)
-                    {
-                        richTextBox1.Text += "BitCount = " + Cam.VideoCapabilities[i].BitCount.ToString() + "\t";
-                        richTextBox1.Text += "MaximumFrameRate = " + Cam.VideoCapabilities[i].MaximumFrameRate.ToString() + "\t";
-                        richTextBox1.Text += "fps = " + Cam.VideoCapabilities[i].AverageFrameRate.ToString() + "\t";
-                        richTextBox1.Text += "W = " + Cam.VideoCapabilities[i].FrameSize.Width.ToString() + "\t";
-                        richTextBox1.Text += "H = " + Cam.VideoCapabilities[i].FrameSize.Height.ToString() + "\n";
-                    }
-                */
             }
             catch (Exception ex)
             {
@@ -342,7 +279,6 @@ namespace vcs_WebCam_AForge2_Record1
             bt_snapshot.Enabled = false;
             bt_record_start.Enabled = false;
             bt_record_stop.Enabled = false;
-            bt_record_start2.Enabled = false;
             return;
         }
 
@@ -423,6 +359,7 @@ namespace vcs_WebCam_AForge2_Record1
 
                 Cam.NewFrame += new NewFrameEventHandler(Cam_NewFrame);
                 Cam.Start();   // WebCam starts capturing images.
+                flag_webcam_start = true;
 
                 //以下為WebCam訊息與調整視窗大小
                 //Cam.VideoResolution = Cam.VideoCapabilities[0];
@@ -443,8 +380,6 @@ namespace vcs_WebCam_AForge2_Record1
                 pictureBox1.Size = new Size(ww, hh);
                 //pictureBox1.Location = new Point(BORDER, BORDER);
 
-                flag_webcam_ok = true;
-
                 webcam_w = ww;
                 webcam_h = hh;
                 //webcam_fps = fps;
@@ -454,12 +389,11 @@ namespace vcs_WebCam_AForge2_Record1
                 bt_snapshot.Enabled = true;
                 bt_record_start.Enabled = true;
                 bt_record_stop.Enabled = true;
-                bt_record_start2.Enabled = true;
             }
             else
             {
                 this.Text = "無影像裝置";
-                flag_webcam_ok = false;
+                flag_webcam_start = false;
             }
 
             /*
@@ -606,21 +540,28 @@ namespace vcs_WebCam_AForge2_Record1
 
         void do_record()
         {
-            if (flag_webcam_ok == false)    //如果webcam沒啟動
+            if (flag_webcam_start == false)    //如果webcam沒啟動
             {
-                richTextBox1.Text += "無相機\n";
+                richTextBox1.Text += "無相機 / 相機未啟動\n";
                 return;
             }
 
             if (flag_recording == false)
             {
                 //開啟錄影模式
-                flag_recording = true;
                 recording_time_st = DateTime.Now;
                 //int fps = webcam_fps;
                 int fps = 30;   //16.79
 
-                recording_filename = Application.StartupPath + "\\avi_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".avi";
+                if (flag_limit_recording_time_ims == true)
+                {
+                    string camera_id = tb_barcode_data.Text;
+                    recording_filename = Application.StartupPath + "\\ims_" + camera_id + "_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".avi";
+                }
+                else
+                {
+                    recording_filename = Application.StartupPath + "\\avi_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".avi";
+                }
 
                 richTextBox1.Text += "\n開始錄影, 檔案 : " + recording_filename + "\n";
                 richTextBox1.Text += "格式 : " + webcam_w.ToString() + " X " + webcam_h.ToString() + " @ " + fps.ToString() + " Hz\n";
@@ -652,16 +593,24 @@ namespace vcs_WebCam_AForge2_Record1
         //錄影 ST
         private void bt_record_start_Click(object sender, EventArgs e)
         {
-            if (flag_webcam_ok == false)    //如果webcam沒啟動
+            if (flag_webcam_start == false)    //如果webcam沒啟動
             {
-                show_main_message("相機未啟動, 無錄影", S_OK, 20);
+                show_main_message("無相機 / 相機未啟動, 無錄影", S_OK, 20);
+                return;
+            }
+
+            if (flag_limit_recording_time == true)
+            {
+                richTextBox1.Text += "已在限時錄影\n";
                 return;
             }
 
             if (flag_recording == false)
             {
-                flag_limit_recording_time = false;
+                //開啟錄影模式
                 do_record();
+                flag_recording = true;
+                flag_limit_recording_time = false;
 
                 richTextBox1.Text += "錄影開始, 時間 : " + DateTime.Now.ToString() + "\n";
                 recording_time_st = DateTime.Now;
@@ -674,20 +623,30 @@ namespace vcs_WebCam_AForge2_Record1
             }
         }
 
-        //錄影 ST, 有限時
-        private void bt_record_start2_Click(object sender, EventArgs e)
+        //限時錄影 ST
+        private void do_limit_time_record()
         {
-            if (flag_webcam_ok == false)    //如果webcam沒啟動
+            if (flag_webcam_start == false)    //如果webcam沒啟動
             {
-                show_main_message("相機未啟動, 無錄影", S_OK, 20);
+                show_main_message("無相機 / 相機未啟動, 無錄影", S_OK, 20);
+                return;
+            }
+
+            if (flag_recording == true)
+            {
+                richTextBox1.Text += "已在錄影\n";
                 return;
             }
 
             if (flag_limit_recording_time == false)
             {
-                flag_limit_recording_time = true;
+                //開啟錄影模式
                 do_record();
+                flag_recording = true;
+                flag_limit_recording_time = true;
 
+                richTextBox1.Text += "錄影開始, 時間 : " + DateTime.Now.ToString() + "\n";
+                recording_time_st = DateTime.Now;
                 bt_record_start.Enabled = false;
                 bt_record_stop.Enabled = true;
             }
@@ -702,13 +661,13 @@ namespace vcs_WebCam_AForge2_Record1
         {
             if (flag_recording == true)
             {
-                bt_record_stop.Text = "停止錄影中";
+                bt_record_stop.Text = "停止錄影";
                 bt_record_stop.BackColor = Color.Red;
 
                 //錄影完需將影像停止不然會出錯
                 flag_recording = false;
 
-                delay(500);//1秒
+                delay(250);//0.5秒
 
                 writer.Close();
 
@@ -718,9 +677,9 @@ namespace vcs_WebCam_AForge2_Record1
                 richTextBox1.Text += "檔案 : " + recording_filename + "\n\n";
 
                 flag_limit_recording_time = false;
+                flag_limit_recording_time_ims = false;
                 bt_record_start.Enabled = true;
                 bt_record_stop.Enabled = false;
-                bt_record_start2.Enabled = true;
 
                 bt_record_stop.Text = "錄影 SP";
                 bt_record_stop.BackColor = SystemColors.ControlLight;
@@ -731,50 +690,73 @@ namespace vcs_WebCam_AForge2_Record1
             }
         }
 
+        private void bt_record_limit_time_Click(object sender, EventArgs e)
+        {
+            //限時錄影
+            limit_record_time_sec = (int)numericUpDown_limit_record_time.Value;
+            richTextBox1.Text += "限時錄影 " + limit_record_time_sec.ToString() + " 秒\n";
+            Properties.Settings.Default.limit_record_time_sec = limit_record_time_sec;
+            Properties.Settings.Default.Save();
+            do_limit_time_record();
+        }
+
+        private void bt_clear2_Click(object sender, EventArgs e)
+        {
+            tb_barcode_data.Clear();
+        }
+
         int min_old = 0;
         private void timer_fps_Tick(object sender, EventArgs e)
         {
-            if (flag_webcam_ok == true)
+            //一般播放顯示fps
+            if (flag_webcam_start == true)
             {
                 DateTime dt = DateTime.Now;
                 lb_fps.Text = (((frame_count - frame_count_old) * 1000) / ((TimeSpan)(dt - dt_old)).TotalMilliseconds).ToString("F2") + " fps";
                 dt_old = dt;
                 frame_count_old = frame_count;
-
-                if (flag_recording == true)
-                {
-                    int min = (int)((DateTime.Now - recording_time_st).TotalMinutes);
-                    if ((min > 0) && (min != min_old))
-                    {
-                        richTextBox1.Text += "已錄影 " + min.ToString() + " 分\n";
-                        min_old = min;
-                    }
-
-                    if (flag_limit_recording_time == true)
-                    {
-                        if ((DateTime.Now - recording_time_st).TotalSeconds > 60)
-                        {
-                            flag_limit_recording_time = false;
-                            bt_record_stop_Click(sender, e);
-                        }
-                    }
-                }
             }
             else
             {
                 lb_fps.Text = "";
             }
+
+            //錄影
+            if (flag_recording == true)
+            {
+                int min = (int)((DateTime.Now - recording_time_st).TotalMinutes);
+                if ((min > 0) && (min != min_old))
+                {
+                    richTextBox1.Text += "已錄影 " + min.ToString() + " 分\n";
+                    min_old = min;
+                }
+            }
+
+            //限時錄影
+            if (flag_limit_recording_time == true)
+            {
+                if ((DateTime.Now - recording_time_st).TotalSeconds >= limit_record_time_sec)
+                {
+                    flag_limit_recording_time = false;
+                    flag_limit_recording_time_ims = false;
+                    bt_record_stop_Click(sender, e);
+                }
+
+                int remaining_sec = limit_record_time_sec - (int)((DateTime.Now - recording_time_st).TotalSeconds);
+                if (remaining_sec > 0)
+                    show_main_message(remaining_sec.ToString(), S_OK, 20);
+                else
+                    show_main_message("錄影完成", S_OK, 20);
+            }
         }
 
-        bool camera_start = false;
         private void bt_start_Click(object sender, EventArgs e)
         {
             Init_WebcamSetup();
 
-            camera_start = true;
             Start_Webcam();
 
-            if (flag_webcam_ok == false)    //如果webcam沒啟動
+            if (flag_webcam_start == false)    //如果webcam沒啟動
             {
                 show_main_message("相機啟動失敗", S_OK, 20);
                 return;
@@ -786,7 +768,7 @@ namespace vcs_WebCam_AForge2_Record1
 
         private void bt_stop_Click(object sender, EventArgs e)
         {
-            camera_start = false;
+            flag_webcam_start = false;
             Stop_Webcam();
 
             bt_start.Enabled = true;
@@ -794,7 +776,6 @@ namespace vcs_WebCam_AForge2_Record1
             bt_snapshot.Enabled = false;
             bt_record_start.Enabled = false;
             bt_record_stop.Enabled = false;
-            bt_record_start2.Enabled = false;
         }
 
         //重抓WebCam, 只有關了再開
@@ -802,31 +783,30 @@ namespace vcs_WebCam_AForge2_Record1
         {
             show_main_message("重抓", S_OK, 20);
 
-            camera_start = false;
-
             Stop_Webcam();
 
             System.Threading.Thread.Sleep(100);
 
             Init_WebcamSetup();
 
-            camera_start = true;
             Start_Webcam();
         }
 
         private void bt_exit_Click(object sender, EventArgs e)
         {
             show_main_message("離開", S_OK, 20);
+            bt_record_stop_Click(sender, e);
             Application.Exit();
 
+            /*
             show_main_message("測試自動錄影", S_OK, 20);
-
             test_auto_record();
+            */
         }
 
         private void bt_snapshot_Click(object sender, EventArgs e)
         {
-            if (flag_webcam_ok == false)    //如果webcam沒啟動
+            if (flag_webcam_start == false)    //如果webcam沒啟動
             {
                 show_main_message("相機未啟動, 無存圖", S_OK, 20);
                 return;
@@ -843,7 +823,16 @@ namespace vcs_WebCam_AForge2_Record1
             if (bitmap1 != null)
             {
                 String filename = string.Empty;
-                filename = Application.StartupPath + "\\ims_image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
+
+                string camera_id = tb_barcode_data.Text;
+                if (camera_id.Length > 0)
+                {
+                    filename = Application.StartupPath + "\\ims_" + camera_id + "_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
+                }
+                else
+                {
+                    filename = Application.StartupPath + "\\ims_image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
+                }
 
                 //String file1 = file + ".jpg";
                 String filename2 = filename + ".bmp";
@@ -894,7 +883,7 @@ namespace vcs_WebCam_AForge2_Record1
 
         void test_auto_record()
         {
-            if (flag_webcam_ok == false)    //如果webcam沒啟動
+            if (flag_webcam_start == false)    //如果webcam沒啟動
             {
                 show_main_message("相機未啟動, 無錄影", S_OK, 20);
                 return;
@@ -942,6 +931,75 @@ namespace vcs_WebCam_AForge2_Record1
                     }
                     delay(100);
                 }
+            }
+        }
+
+        int ccc = 0;
+        int timer_cnt = 0;
+        private void timer_barcode_Tick(object sender, EventArgs e)
+        {
+            ccc++;
+            if ((ccc % 4) == 0)
+                lb_main_mesg1.Text = "等待 \\";
+            else if ((ccc % 4) == 1)
+                lb_main_mesg1.Text = "等待 |";
+            else if ((ccc % 4) == 2)
+                lb_main_mesg1.Text = "等待 /";
+            else
+                lb_main_mesg1.Text = "等待 -";
+
+            if ((timer_cnt++ % 10) == 0)
+            {
+                //richTextBox1.Text += "八";
+                if (this.tb_wait_barcode_data.Focused == false)
+                {
+                    this.tb_wait_barcode_data.Focus();
+                    //richTextBox1.Text += "F8";
+                }
+            }
+
+            int len;
+            len = tb_wait_barcode_data.Text.Length;
+
+            if (len > 2000)   //太長, 直接放棄
+            {
+                tb_wait_barcode_data.Clear();
+                //richTextBox1.Text += "X1";
+                return;
+            }
+            else if (len > 3)    //檢查是否換行
+            {
+                if ((tb_wait_barcode_data.Text[len - 2] == 0x0D) || (tb_wait_barcode_data.Text[len - 1] == 0x0A))
+                {
+                    tb_wait_barcode_data.Text = tb_wait_barcode_data.Text.Trim();
+                    richTextBox1.Text += "OK";
+                }
+                else
+                {
+                    richTextBox1.Text += "X2";
+                    return;
+                }
+            }
+            else    //太短  留著累計
+            {
+                //richTextBox1.Text += "X3";
+                return;
+            }
+
+            if (tb_wait_barcode_data.Text.Length > 0)
+            {
+                richTextBox1.Text += "取得資料1 : " + tb_wait_barcode_data.Text + "\n";
+                tb_barcode_data.Text = tb_wait_barcode_data.Text;
+                tb_wait_barcode_data.Text = "";
+
+                flag_limit_recording_time_ims = true;
+
+                //限時錄影
+                limit_record_time_sec = (int)numericUpDown_limit_record_time.Value;
+                richTextBox1.Text += "限時錄影 " + limit_record_time_sec.ToString() + " 秒\n";
+                Properties.Settings.Default.limit_record_time_sec = limit_record_time_sec;
+                Properties.Settings.Default.Save();
+                do_limit_time_record();
             }
         }
     }

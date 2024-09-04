@@ -21,16 +21,23 @@ namespace vcs_WebCam_AForge2_Record3
     public partial class Form1 : Form
     {
         private FilterInfoCollection USBWebcams = null;
-        CameraMonitor CamMonitor;
+        private VideoCaptureDevice Cam = null;
 
-        private bool flag_webcam_ok = false; //判斷是否啟動攝影機的旗標
-        private bool flag_recording = false; //判斷是否啟動錄影的旗標
+        private bool flag_webcam_start = false;    //判斷是否啟動webcam的旗標
+        private bool flag_recording = false;    //判斷是否啟動錄影的旗標
 
-        DateTime recording_time_st = DateTime.Now;
+        int webcam_count = 0;
 
         private const int S_OK = 0;     //system return OK
         private const int S_FALSE = 1;     //system return FALSE
         private const int BORDER = 10;
+
+        private string recording_filename = "XXXXXXX.avi";
+        VideoFileWriter writer = new VideoFileWriter();
+        DateTime recording_time_st = DateTime.Now;
+        int webcam_w = 640;
+        int webcam_h = 480;
+        int webcam_fps = 30;
 
         public Form1()
         {
@@ -40,21 +47,34 @@ namespace vcs_WebCam_AForge2_Record3
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
-            Init_WebcamSetup();
+            bt_start_Click(sender, e);
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             //離開程式前, 關閉相機(錄影與播放)
-            try
+            ///先關閉錄影  再關閉播放
+
+            if (flag_recording == true)
             {
-                bt_record_stop_Click(sender, e);
-                this.CamMonitor.StopRecording();
-                this.CamMonitor.StopCapture();
+                try
+                {
+                    bt_record_stop_Click(sender, e);
+                }
+                catch (Exception ex)
+                {
+                    richTextBox1.Text += "xxx錯誤訊息e01 : " + ex.Message + "\n";
+                }
             }
-            catch (Exception ex)
+
+            if (Cam != null)
             {
-                richTextBox1.Text += "xxx錯誤訊息e01 : " + ex.Message + "\n";
+                if (Cam.IsRunning)  // When Form1 closes itself, WebCam must stop, too.
+                {
+                    Cam.Stop();   // WebCam stops capturing images.
+                    Cam.SignalToStop();
+                    Cam.WaitForStop();
+                }
             }
         }
 
@@ -75,7 +95,7 @@ namespace vcs_WebCam_AForge2_Record3
             richTextBox1.Location = new Point(x_st + dx * 3 + 90, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            groupBox1.Size = new Size(380, 70);
+            groupBox1.Size = new Size(450, 70);
             groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0 + H + BORDER);
 
             bt_record_stop.Enabled = false;
@@ -86,9 +106,12 @@ namespace vcs_WebCam_AForge2_Record3
             dy = 28;
             dy = 40;
 
-            bt_record_start.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            bt_record_stop.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            bt_exit.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            bt_start.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            bt_stop.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            bt_record_start.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            bt_record_stop.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            bt_exit.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+
             richTextBox1.BringToFront();
             bt_clear.BringToFront();
         }
@@ -98,34 +121,166 @@ namespace vcs_WebCam_AForge2_Record3
             richTextBox1.Clear();
         }
 
-        void Init_WebcamSetup()
+        //delay 10000 約 10秒
+        //C# 不lag的延遲時間
+        private void delay(int delay_milliseconds)
         {
-            USBWebcams = new FilterInfoCollection(FilterCategory.VideoInputDevice); //實例化對象
-            if (USBWebcams.Count > 0)
+            delay_milliseconds *= 2;
+            DateTime time_before = DateTime.Now;
+            while (((TimeSpan)(DateTime.Now - time_before)).TotalMilliseconds < delay_milliseconds)
             {
-                string camera_name = USBWebcams[0].MonikerString;   //長名
-                this.CamMonitor = new CameraMonitor(pictureBox1, camera_name, "第 1 台攝影機");
-                flag_webcam_ok = true;
+                Application.DoEvents();
             }
         }
 
-        //錄影 ST
-        private void bt_record_start_Click(object sender, EventArgs e)
+        void Init_WebcamSetup()
         {
-            if (flag_webcam_ok == false)    //如果webcam沒啟動
+            USBWebcams = new FilterInfoCollection(FilterCategory.VideoInputDevice); //實例化對象
+            webcam_count = USBWebcams.Count;
+            richTextBox1.Text += "找到 " + webcam_count.ToString() + " 台WebCam\n";
+            richTextBox1.Text += "USBWebcams.Capacity : " + USBWebcams.Capacity.ToString() + "\n";
+            richTextBox1.Text += "USBWebcams.Count : " + USBWebcams.Count.ToString() + "\n";
+
+            if (webcam_count > 0)
             {
-                richTextBox1.Text += "無相機\n";
+                Cam = new VideoCaptureDevice(USBWebcams[0].MonikerString);  //實例化對象
+                Cam.NewFrame += new NewFrameEventHandler(Cam_NewFrame);
+            }
+            //pictureBox1.Paint += new PaintEventHandler(DrawMessage);
+        }
+
+        void Start_Webcam()
+        {
+            Cam.Start();   // WebCam starts capturing images.
+            flag_webcam_start = true;
+        }
+
+        void Stop_Webcam()
+        {
+            if (Cam != null)
+            {
+                //show_main_message("停止", S_OK, 20);
+                Cam.Stop();  // WebCam stops capturing images.
+                Cam.SignalToStop();
+                Cam.WaitForStop();
+                while (Cam.IsRunning)
+                {
+                }
+                Cam = null;
+            }
+            pictureBox1.Image = null;
+        }
+
+        public Bitmap bm = null;
+
+        //自定義函數, 捕獲每一幀圖像並顯示
+        void Cam_NewFrame(object sender, NewFrameEventArgs eventArgs)
+        {
+            try
+            {
+                bm = (Bitmap)eventArgs.Frame.Clone();
+
+                pictureBox1.Image = (Bitmap)bm.Clone(); // displays the current frame on the main form
+
+                if (flag_recording == true)
+                {
+                    try
+                    {
+                        //給錄影用的畫字
+                        string now = DateTime.Now.ToString();
+                        SolidBrush sb = new SolidBrush(Color.Green);
+                        Font f = new Font("Arial", 14, FontStyle.Bold);
+                        Graphics g = Graphics.FromImage(bm);
+                        g.DrawString(now, f, sb, new Point(BORDER, BORDER));
+
+                        writer.WriteVideoFrame(bm);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("xxx錯誤訊息e01a : " + ex.Message);
+                    }
+                }
+                GC.Collect();       //回收資源
+            }
+            catch (InvalidOperationException ex)
+            {
+                Console.WriteLine("xxx錯誤訊息e02 : " + ex.Message);
+            }
+        }
+
+        void do_record()
+        {
+            if (flag_webcam_start == false)    //如果webcam沒啟動
+            {
+                richTextBox1.Text += "無相機 / 相機未啟動\n";
                 return;
             }
 
             if (flag_recording == false)
             {
                 //開啟錄影模式
-                flag_recording = true;
+                recording_time_st = DateTime.Now;
+                //int fps = webcam_fps;
+                int fps = 30;   //16.79
 
-                string recording_filename = Application.StartupPath + "\\avi_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".avi";
-                this.CamMonitor.RecordingFilename = recording_filename;
-                this.CamMonitor.StartRecording();
+                recording_filename = Application.StartupPath + "\\avi_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".avi";
+
+                richTextBox1.Text += "\n開始錄影, 檔案 : " + recording_filename + "\n";
+                richTextBox1.Text += "格式 : " + webcam_w.ToString() + " X " + webcam_h.ToString() + " @ " + fps.ToString() + " Hz\n";
+                richTextBox1.Text += "時間 : " + recording_time_st.ToString() + "\n";
+
+                //writer.Open(recording_filename, webcam_w, webcam_h, fps, VideoCodec.MPEG4);
+                //writer.Open(recording_filename, webcam_w, webcam_h, fps, VideoCodec.WMV2); //容量較大
+                writer.Open(recording_filename, webcam_w, webcam_h, fps, (VideoCodec)0);
+                /*
+                Default = -1,
+                MPEG4 = 0,
+                WMV1 = 1,
+                WMV2 = 2,
+                MSMPEG4v2 = 3,
+                MSMPEG4v3 = 4,
+                H263P = 5,
+                FLV1 = 6,
+                MPEG2 = 7,
+                Raw = 8,
+                //(VideoCodec)3;
+                */
+            }
+            else
+            {
+                richTextBox1.Text += "已在錄影\n";
+            }
+        }
+
+        private void bt_start_Click(object sender, EventArgs e)
+        {
+            Init_WebcamSetup();
+
+            Cam.Start(); // 啟動攝影機
+            flag_webcam_start = true;
+
+            
+        }
+
+        private void bt_stop_Click(object sender, EventArgs e)
+        {
+            Stop_Webcam();
+        }
+
+        //錄影 ST
+        private void bt_record_start_Click(object sender, EventArgs e)
+        {
+            if (flag_webcam_start == false)    //如果webcam沒啟動
+            {
+                richTextBox1.Text += "無相機 / 相機未啟動, 無錄影\n";
+                return;
+            }
+
+            if (flag_recording == false)
+            {
+                //開啟錄影模式
+                do_record();
+                flag_recording = true;
 
                 richTextBox1.Text += "錄影開始, 時間 : " + DateTime.Now.ToString() + "\n";
                 recording_time_st = DateTime.Now;
@@ -143,17 +298,25 @@ namespace vcs_WebCam_AForge2_Record3
         {
             if (flag_recording == true)
             {
+                bt_record_stop.Text = "停止錄影中";
+                bt_record_stop.BackColor = Color.Red;
+
                 //錄影完需將影像停止不然會出錯
                 flag_recording = false;
 
-                this.CamMonitor.StopRecording();
+                delay(250);//0.5秒
+
+                writer.Close();
 
                 richTextBox1.Text += "錄影結束, 時間 : " + DateTime.Now.ToString() + "\n";
                 richTextBox1.Text += "錄影時間 : " + (DateTime.Now - recording_time_st).TotalSeconds.ToString("0.00") + " 秒\n";
                 richTextBox1.Text += "錄影時間 : " + (DateTime.Now - recording_time_st).ToString() + "\n";
-                richTextBox1.Text += "檔案 : " + this.CamMonitor.RecordingFilename + "\n\n";
+                richTextBox1.Text += "檔案 : " + recording_filename + "\n\n";
                 bt_record_start.Enabled = true;
                 bt_record_stop.Enabled = false;
+
+                bt_record_stop.Text = "錄影 SP";
+                bt_record_stop.BackColor = SystemColors.ControlLight;
             }
             else
             {
@@ -166,28 +329,13 @@ namespace vcs_WebCam_AForge2_Record3
             bt_record_stop_Click(sender, e);
             Application.Exit();
         }
-    }
 
+    }
+}
+
+    /*
     class CameraMonitor
     {
-        PictureBox display;    // 連接到主表單的pictureBox
-        private VideoCaptureDevice Cam = null; // 真實的影像裝置
-        public String cameraName; // 攝影機名稱(沒用到)
-        VideoFileWriter writer = new VideoFileWriter();
-        public Bitmap bitmap1 = null;
-        private const int BORDER = 10;
-
-        public CameraMonitor(PictureBox display, string monikerString, String cameraName)
-        {
-            this.cameraName = cameraName;
-            this.display = display;
-            this.display.Paint += new PaintEventHandler(DrawMessage);
-
-            Cam = new VideoCaptureDevice(monikerString);
-            Cam.NewFrame += new NewFrameEventHandler(Cam_NewFrame); // defines which method to call when a new frame arrives
-            Cam.Start(); // 啟動攝影機
-        }
-
         public void StopCapture()
         {
             if (this.Cam.IsRunning == true)
@@ -215,72 +363,5 @@ namespace vcs_WebCam_AForge2_Record3
                 }
             }
         }
-
-        //自定義函數, 捕獲每一幀圖像並顯示
-        void Cam_NewFrame(object sender, NewFrameEventArgs eventArgs)
-        {
-            try
-            {
-                bitmap1 = (Bitmap)eventArgs.Frame.Clone(); // get a copy of the BitMap from the VideoCaptureDevice
-                if (this.isResolutionSet == false)
-                {
-                    // this is run once to set the resolution for the VideoRecorder
-                    this.Width = bitmap1.Width;
-                    this.Height = bitmap1.Height;
-                    this.isResolutionSet = true;
-                }
-
-                this.display.Image = (Bitmap)bitmap1.Clone(); // displays the current frame on the main form
-
-                if (flag_recording == true)
-                {
-                    try
-                    {
-                        //給錄影用的畫字
-                        string now = DateTime.Now.ToString();
-                        SolidBrush sb = new SolidBrush(Color.Green);
-                        Font f = new Font("Arial", 14, FontStyle.Bold);
-                        Graphics g = Graphics.FromImage(bitmap1);
-                        g.DrawString(now, f, sb, new Point(BORDER, BORDER));
-
-                        writer.WriteVideoFrame(bitmap1);
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine("xxx錯誤訊息e02 : " + ex.Message);
-                    }
-                }
-                GC.Collect();       //回收資源
-            }
-            catch (InvalidOperationException ex)
-            {
-                Console.WriteLine("xxx錯誤訊息e02 : " + ex.Message);
-            }
-        }
-
-        // output video resolution info
-        bool isResolutionSet = false;
-        int Width = 0;
-        int Height = 0;
-
-        private bool flag_recording = false;    //判斷是否啟動錄影的旗標
-
-        public string RecordingFilename = "RecordingFilename.avi";
-
-        public void StartRecording()
-        {
-            if (flag_recording == false)
-            {
-                flag_recording = true;
-
-                writer.Open(RecordingFilename, this.Width, this.Height, 30);
-            }
-        }
-
-        public void StopRecording()
-        {
-            flag_recording = false;
-            writer.Close();
-        }
     }
-}
+     */
