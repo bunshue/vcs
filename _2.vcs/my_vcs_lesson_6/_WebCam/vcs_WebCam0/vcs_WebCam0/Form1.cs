@@ -129,6 +129,7 @@ namespace vcs_WebCam0
                 }
                 Cam = null;
             }
+            pictureBox1.Image = null;
         }
 
         int frame_count = 0;        //計算fps用

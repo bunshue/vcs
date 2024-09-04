@@ -21,10 +21,12 @@ namespace vcs_WebCam2
         private FilterInfoCollection USBWebcams = null;
 
         private const int BORDER = 10;
-        private const int W = 640;
-        private const int H = 480;
-        private const int W_richTextBox1 = W / 2;
-        private const int H_richTextBox1 = H - 50;
+        private const int W_pictureBox1 = 640;
+        private const int H_pictureBox1 = 480;
+        private const int W_groupBox1 = W_pictureBox1;
+        private const int H_groupBox1 = 60;
+        private const int W_richTextBox1 = 360;
+        private const int H_richTextBox1 = H_pictureBox1 + H_groupBox1 + BORDER;
 
         int webcam_count = 0;
 
@@ -52,23 +54,28 @@ namespace vcs_WebCam2
 
         void show_item_location()
         {
-            pictureBox1.Size = new Size(W, H);
+            pictureBox1.Size = new Size(W_pictureBox1, H_pictureBox1);
             pictureBox1.Location = new Point(BORDER, BORDER);
 
-            richTextBox1.Location = new Point(BORDER + W + BORDER, BORDER + 50);
+            richTextBox1.Location = new Point(BORDER + W_pictureBox1 + BORDER, BORDER);
             richTextBox1.Size = new Size(W_richTextBox1, H_richTextBox1);
 
             int dx = 80;
-            button1.Location = new Point(BORDER + W + BORDER + dx * 0, BORDER);
-            button2.Location = new Point(BORDER + W + BORDER + dx * 1, BORDER);
-            button3.Location = new Point(BORDER + W + BORDER + dx * 2, BORDER);
-            lb_fps.Location = new Point(BORDER + W + BORDER + dx * 3, BORDER + BORDER / 2);
+            int offset_y = 3;
+            button0.Location = new Point(BORDER + dx * 0, BORDER + offset_y);
+            button1.Location = new Point(BORDER + dx * 1, BORDER + offset_y);
+            button2.Location = new Point(BORDER + dx * 2, BORDER + offset_y);
+            button3.Location = new Point(BORDER + dx * 3, BORDER + offset_y);
+            lb_fps.Location = new Point(BORDER + dx * 4, BORDER + BORDER);
+
+            groupBox1.Size = new Size(W_groupBox1, H_groupBox1);
+            groupBox1.Location = new Point(BORDER + dx * 0, BORDER + H_pictureBox1 + BORDER);
 
             this.Text = "";
-            this.ClientSize = new Size(BORDER + W + BORDER + W / 2 + BORDER, BORDER + H + BORDER);
+            this.ClientSize = new Size(BORDER + W_pictureBox1 + BORDER + W_richTextBox1 + BORDER, BORDER + H_pictureBox1 + BORDER + H_groupBox1 + BORDER);
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void button0_Click(object sender, EventArgs e)
         {
             //ST
 
@@ -108,7 +115,7 @@ namespace vcs_WebCam2
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
             //SP
             try
@@ -119,9 +126,10 @@ namespace vcs_WebCam2
             catch (Exception ex)
             {
             }
+            pictureBox1.Image = null;
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)
         {
             if (this.webcam != null)
             {
@@ -135,6 +143,10 @@ namespace vcs_WebCam2
             {
                 richTextBox1.Text += "尚未開啟WebCam\n";
             }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
         }
 
         private void timer_clock_Tick(object sender, EventArgs e)
@@ -156,6 +168,7 @@ namespace vcs_WebCam2
             }
             */
         }
+
     }
 
     class WebCam

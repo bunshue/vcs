@@ -3,7 +3,7 @@ Iris 的
 
 """
 
-#import keras
+# import keras
 
 print("------------------------------------------------------------")  # 60個
 
@@ -25,8 +25,8 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
-print('------------------------------------------------------------')	#60個
-'''
+print("------------------------------------------------------------")  # 60個
+"""
 df = pd.read_csv('data/iris.csv')
 
 print(df.shape)
@@ -54,62 +54,62 @@ plt.xlabel("Petal Length")
 plt.ylabel("Petal Width")
 
 plt.show()
-'''
-print('------------------------------------------------------------')	#60個
+"""
+print("------------------------------------------------------------")  # 60個
 
 from sklearn.datasets import load_iris
 
 data = load_iris()
-X = pd.DataFrame(data.data, columns = data.feature_names)
-y = pd.DataFrame(data.target, columns = ["Species"])
-df = pd.concat([X, y], axis = 1)
+X = pd.DataFrame(data.data, columns=data.feature_names)
+y = pd.DataFrame(data.target, columns=["Species"])
+df = pd.concat([X, y], axis=1)
 
 print(df.head())
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 from sklearn.decomposition import PCA
 from sklearn.datasets import load_iris
 
 data = load_iris()
-n_components = 2 # 削減後の次元を2に設定
+n_components = 2  # 削減後の次元を2に設定
 model = PCA(n_components=n_components)
 model = model.fit(data.data)
-print(model.transform(data.data)) # 変換したデータ
+print(model.transform(data.data))  # 変換したデータ
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 from sklearn.cluster import KMeans
 from sklearn.datasets import load_iris
 
 data = load_iris()
-n_clusters = 3 # クラスタ数を3に設定
+n_clusters = 3  # クラスタ数を3に設定
 model = KMeans(n_clusters=n_clusters)
 model.fit(data.data)
-print(model.labels_) # 各データ点が所属するクラスタ 
-print(model.cluster_centers_) # fit()によって計算された重心
+print(model.labels_)  # 各データ点が所属するクラスタ
+print(model.cluster_centers_)  # fit()によって計算された重心
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 from sklearn.datasets import load_iris
 from sklearn.mixture import GaussianMixture
 
 data = load_iris()
-n_components = 3 # ガウス分布の数
+n_components = 3  # ガウス分布の数
 model = GaussianMixture(n_components=n_components)
-model.fit(data.data) 
-print(model.predict(data.data)) # クラスを予測 
-print(model.means_) # 各ガウス分布の平均 
-print(model.covariances_) # 各ガウス分布の分散
+model.fit(data.data)
+print(model.predict(data.data))  # クラスを予測
+print(model.means_)  # 各ガウス分布の平均
+print(model.covariances_)  # 各ガウス分布の分散
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
-#決策樹 (decision tree)
+# 決策樹 (decision tree)
 
 from sklearn.datasets import load_iris
 
-dx, dy = load_iris(return_X_y = True)
+dx, dy = load_iris(return_X_y=True)
 
 print(dx[0])
 print(dy[0])
@@ -120,9 +120,11 @@ from sklearn.model_selection import train_test_split
 
 from sklearn.tree import DecisionTreeClassifier
 
-dx, dy = load_iris(return_X_y = True)
+dx, dy = load_iris(return_X_y=True)
 
-dx_train, dx_test, dy_train, dy_test = train_test_split(dx, dy, test_size = 0.2, random_state = 0)
+dx_train, dx_test, dy_train, dy_test = train_test_split(
+    dx, dy, test_size=0.2, random_state=0
+)
 
 tree = DecisionTreeClassifier()
 
@@ -134,17 +136,19 @@ print(tree.score(dx_train, dy_train))
 
 print(tree.score(dx_test, dy_test))
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-#隨機森林 (random forest)
+# 隨機森林 (random forest)
 
 from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 
-dx, dy = load_iris(return_X_y = True)
+dx, dy = load_iris(return_X_y=True)
 
-dx_train, dx_test, dy_train, dy_test = train_test_split(dx, dy, test_size = 0.2, random_state = 0)
+dx_train, dx_test, dy_train, dy_test = train_test_split(
+    dx, dy, test_size=0.2, random_state=0
+)
 
 forest = RandomForestClassifier()
 
@@ -156,7 +160,7 @@ print(forest.score(dx_train, dy_train))
 
 print(forest.score(dx_test, dy_test))
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
@@ -166,7 +170,3 @@ print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
-
-
-
-

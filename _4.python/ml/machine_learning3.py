@@ -19,7 +19,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-'''
+"""
 #學習分類
 from sklearn.datasets import load_breast_cancer
 data = load_breast_cancer()
@@ -227,10 +227,10 @@ y_pred = model.predict(X_test)
 print(accuracy_score(y_pred, y_test)) # 評価
 
 print('------------------------------------------------------------')	#60個
-'''
+"""
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.datasets import make_moons
@@ -241,67 +241,69 @@ from sklearn.metrics import accuracy_score
 X, y = make_moons(noise=0.3)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
 model = KNeighborsClassifier()
-model.fit(X_train, y_train) # 學習
+model.fit(X_train, y_train)  # 學習
 y_pred = model.predict(X_test)
-print(accuracy_score(y_pred, y_test)) # 評価
+print(accuracy_score(y_pred, y_test))  # 評価
 
 print("------------------------------------------------------------")  # 60個
 
 from sklearn.decomposition import TruncatedSVD
 
-data = [[1, 0, 0, 0],
-[1, 0, 0, 0],
-[1, 1, 0, 0],
-[0, 1, 0, 0],
-[0, 0, 1, 1],
-[0, 0, 1, 0],
-[0, 0, 1, 1],
-[0, 0, 0, 1]]
-n_components = 2 # 潜在変数の数
+data = [
+    [1, 0, 0, 0],
+    [1, 0, 0, 0],
+    [1, 1, 0, 0],
+    [0, 1, 0, 0],
+    [0, 0, 1, 1],
+    [0, 0, 1, 0],
+    [0, 0, 1, 1],
+    [0, 0, 0, 1],
+]
+n_components = 2  # 潜在変数の数
 model = TruncatedSVD(n_components=n_components)
 model.fit(data)
-print(model.transform(data)) # 変換したデータ 
-print(model.explained_variance_ratio_) # 寄与率 
-print(sum(model.explained_variance_ratio_)) # 累積寄与率
+print(model.transform(data))  # 変換したデータ
+print(model.explained_variance_ratio_)  # 寄与率
+print(sum(model.explained_variance_ratio_))  # 累積寄与率
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 from sklearn.decomposition import NMF
-#from sklearn.datasets.samples_generator import make_blobs old
+
+# from sklearn.datasets.samples_generator import make_blobs old
 from sklearn.datasets import make_blobs
 
 centers = [[5, 10, 5], [10, 4, 10], [6, 8, 8]]
-X, _ = make_blobs(centers=centers) # centersを中心としたデータを生成
-n_components = 2 # 潜在変数の数
+X, _ = make_blobs(centers=centers)  # centersを中心としたデータを生成
+n_components = 2  # 潜在変数の数
 model = NMF(n_components=n_components)
 model.fit(X)
-W = model.transform(X) # 分解後の行列
+W = model.transform(X)  # 分解後の行列
 H = model.components_
 print(W)
 print(H)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 from sklearn.datasets import fetch_20newsgroups
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.decomposition import LatentDirichletAllocation
 
 # removeで本文以外の情報を取り除く
-data = fetch_20newsgroups(remove=('headers', 'footers', 'quotes'))
+data = fetch_20newsgroups(remove=("headers", "footers", "quotes"))
 max_features = 1000
 # 文書 データをベクトルに変換
-tf_vectorizer = CountVectorizer(max_features=max_features,
-stop_words='english')
+tf_vectorizer = CountVectorizer(max_features=max_features, stop_words="english")
 tf = tf_vectorizer.fit_transform(data.data)
 n_topics = 20
 model = LatentDirichletAllocation(n_components=n_topics)
 model.fit(tf)
-print(model.components_) # 各トピックが持つ単語分布 
-print(model.transform(tf)) # トピックで表現された文書
+print(model.components_)  # 各トピックが持つ単語分布
+print(model.transform(tf))  # トピックで表現された文書
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-''' import fail
+""" import fail
 from sklearn.datasets import samples_generator
 from sklearn.manifold import LocallyLinearEmbedding
 
@@ -312,22 +314,23 @@ model = LocallyLinearEmbedding(n_neighbors=n_neighbors,
 n_components=n_components)
 model.fit(data)
 print(model.transform(data)) # 変換したデータ
-'''
+"""
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 from sklearn.manifold import TSNE
 from sklearn.datasets import load_digits
 
 data = load_digits()
-n_components = 2 # 削減後の次元を2に設定
+n_components = 2  # 削減後の次元を2に設定
 model = TSNE(n_components=n_components)
 print(model.fit_transform(data.data))
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-#分類問題における評価方法
+# 分類問題における評価方法
 from sklearn.datasets import load_breast_cancer
+
 data = load_breast_cancer()
 X = data.data
 y = 1 - data.target
@@ -335,100 +338,111 @@ y = 1 - data.target
 
 X = X[:, :10]
 from sklearn.linear_model import LogisticRegression
+
 model_lor = LogisticRegression()
 model_lor.fit(X, y)
 y_pred = model_lor.predict(X)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-print('混同行列')
+print("混同行列")
 
 from sklearn.metrics import confusion_matrix
+
 cm = confusion_matrix(y, y_pred)
 print(cm)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-print('正解率')
+print("正解率")
 from sklearn.metrics import accuracy_score
+
 accuracy_score(y, y_pred)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-print('適合率')
+print("適合率")
 from sklearn.metrics import precision_score
+
 precision_score(y, y_pred)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-print('再現率')
+print("再現率")
 from sklearn.metrics import recall_score
+
 recall_score(y, y_pred)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-print('F値')
+print("F値")
 from sklearn.metrics import f1_score
+
 f1_score(y, y_pred)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-print('予測確率')
+print("予測確率")
 model_lor.predict_proba(X)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-y_pred2 = (model_lor.predict_proba(X)[:, 1]>0.1).astype(np.int)
+y_pred2 = (model_lor.predict_proba(X)[:, 1] > 0.1).astype(np.int)
 print(confusion_matrix(y, y_pred2))
 
 print(accuracy_score(y, y_pred2))
 print(recall_score(y, y_pred2))
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-print('ROC曲線・AUC')
+print("ROC曲線・AUC")
 from sklearn.metrics import roc_curve
+
 probas = model_lor.predict_proba(X)
 fpr, tpr, thresholds = roc_curve(y, probas[:, 1])
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-plt.style.use('fivethirtyeight')
+plt.style.use("fivethirtyeight")
 
 fig, ax = plt.subplots()
 fig.set_size_inches(4.8, 5)
 
-ax.step(fpr, tpr, 'gray')
-ax.fill_between(fpr, tpr, 0, color='skyblue', alpha=0.8)
-ax.set_xlabel('False Positive Rate')
-ax.set_ylabel('True Positive Rate')
-ax.set_facecolor('xkcd:white')
+ax.step(fpr, tpr, "gray")
+ax.fill_between(fpr, tpr, 0, color="skyblue", alpha=0.8)
+ax.set_xlabel("False Positive Rate")
+ax.set_ylabel("True Positive Rate")
+ax.set_facecolor("xkcd:white")
 plt.show()
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 from sklearn.metrics import roc_auc_score
+
 roc_auc_score(y, probas[:, 1])
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-print('平均二乗誤差')
+print("平均二乗誤差")
 
 from sklearn.metrics import mean_squared_error
+
 mean_squared_error(y, y_pred)
 
-print('------------------------------------------------------------')	#60個
-print('決定係数')
+print("------------------------------------------------------------")  # 60個
+print("決定係数")
 
 from sklearn.metrics import r2_score
+
 print(r2_score(y, y_pred))
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-print('異なるアルゴリズムを利用した場合との比較')
+print("異なるアルゴリズムを利用した場合との比較")
 
 from sklearn.svm import SVR
-model_svr_linear = SVR(C=0.01, kernel='linear')
+
+model_svr_linear = SVR(C=0.01, kernel="linear")
 model_svr_linear.fit(X, y)
 y_svr_pred = model_svr_linear.predict(X)
 print(y_svr_pred)
@@ -442,116 +456,125 @@ ax.legend()
 plt.show()
 """
 
-print(mean_squared_error(y, y_svr_pred)) # 平均二乗誤差 
-print(r2_score(y, y_svr_pred)) # 決定係数 
-print(model_svr_linear.coef_) # 傾き 
-print(model_svr_linear.intercept_) # 切片
+print(mean_squared_error(y, y_svr_pred))  # 平均二乗誤差
+print(r2_score(y, y_svr_pred))  # 決定係数
+print(model_svr_linear.coef_)  # 傾き
+print(model_svr_linear.intercept_)  # 切片
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-print('ハイパーパラメータの設定')
+print("ハイパーパラメータの設定")
 
-model_svr_rbf = SVR(C=1.0, kernel='rbf')
+model_svr_rbf = SVR(C=1.0, kernel="rbf")
 model_svr_rbf.fit(X, y)
-y_svr_pred = model_svr_rbf.predict(X) 
-print(mean_squared_error(y, y_svr_pred)) # 平均二乗誤差 
-print(r2_score(y, y_svr_pred)) # 決定係数
+y_svr_pred = model_svr_rbf.predict(X)
+print(mean_squared_error(y, y_svr_pred))  # 平均二乗誤差
+print(r2_score(y, y_svr_pred))  # 決定係数
 
 train_X, test_X = X[:400], X[400:]
 train_y, test_y = y[:400], y[400:]
-model_svr_rbf_1 = SVR(C=1.0, kernel='rbf')
+model_svr_rbf_1 = SVR(C=1.0, kernel="rbf")
 model_svr_rbf_1.fit(train_X, train_y)
-test_y_pred = model_svr_rbf_1.predict(test_X) 
-print(mean_squared_error(test_y, test_y_pred)) # 平均二乗誤差 
-print(r2_score(test_y, test_y_pred)) # 決定係数
+test_y_pred = model_svr_rbf_1.predict(test_X)
+print(mean_squared_error(test_y, test_y_pred))  # 平均二乗誤差
+print(r2_score(test_y, test_y_pred))  # 決定係数
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-print('学習データと検証データに分割')
+print("学習データと検証データに分割")
 
 from sklearn.datasets import load_breast_cancer
+
 data = load_breast_cancer()
 X = data.data
 y = data.target
 from sklearn.model_selection import train_test_split
+
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
 
 from sklearn.svm import SVC
+
 model_svc = SVC()
 model_svc.fit(X_train, y_train)
 y_train_pred = model_svc.predict(X_train)
 y_test_pred = model_svc.predict(X_test)
 from sklearn.metrics import accuracy_score
+
 print(accuracy_score(y_train, y_train_pred))
 print(accuracy_score(y_test, y_test_pred))
 
 from sklearn.ensemble import RandomForestClassifier
+
 model_rfc = RandomForestClassifier()
 model_rfc.fit(X_train, y_train)
 y_train_pred = model_rfc.predict(X_train)
 y_test_pred = model_rfc.predict(X_test)
 from sklearn.metrics import accuracy_score
+
 print(accuracy_score(y_train, y_train_pred))
 print(accuracy_score(y_test, y_test_pred))
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-print('交差検証（クロスバリデーション）')
+print("交差検証（クロスバリデーション）")
 
 from sklearn.model_selection import cross_val_score
 from sklearn.model_selection import KFold
+
 cv = KFold(5, shuffle=True)
 model_rfc_1 = RandomForestClassifier()
-cross_val_score(model_rfc_1, X, y, cv=cv, scoring='accuracy')
+cross_val_score(model_rfc_1, X, y, cv=cv, scoring="accuracy")
 
 cross_val_score(model_rfc_1, X, y, cv=cv, scoring="f1")
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-print('ハイパーパラメータの探索')
+print("ハイパーパラメータの探索")
 
 from sklearn.datasets import load_breast_cancer
+
 data = load_breast_cancer()
 X = data.data
-y = 1 - data.target # ラベルの0と1を反転
+y = 1 - data.target  # ラベルの0と1を反転
 X = X[:, :10]
 
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import GridSearchCV
 from sklearn.model_selection import KFold
+
 cv = KFold(5, shuffle=True)
-param_grid = {'max_depth': [5, 10, 15], 'n_estimators': [10, 20, 30]}
+param_grid = {"max_depth": [5, 10, 15], "n_estimators": [10, 20, 30]}
 model_rfc_2 = RandomForestClassifier()
-grid_search = GridSearchCV(model_rfc_2, param_grid, cv=cv, scoring='accuracy')
+grid_search = GridSearchCV(model_rfc_2, param_grid, cv=cv, scoring="accuracy")
 grid_search.fit(X, y)
 
 print(grid_search.best_score_)
 print(grid_search.best_params_)
 
-grid_search = GridSearchCV(model_rfc_2, param_grid, cv=cv, scoring='f1')
+grid_search = GridSearchCV(model_rfc_2, param_grid, cv=cv, scoring="f1")
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-print('機械学習モデルへの適用')
+print("機械学習モデルへの適用")
 
 from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 from sklearn.svm import LinearSVC
 from sklearn.datasets import fetch_20newsgroups
 
-categories = ['alt.atheism', 'soc.religion.christian', 'comp.graphics', 'sci.med']
-remove = ('headers', 'footers', 'quotes')
-twenty_train = fetch_20newsgroups(subset='train', 
-                                  remove=remove, 
-                                  categories=categories) # 学習データ
-twenty_test = fetch_20newsgroups(subset='test',
-                                 remove=remove, 
-                                 categories=categories) # 検証データ
+categories = ["alt.atheism", "soc.religion.christian", "comp.graphics", "sci.med"]
+remove = ("headers", "footers", "quotes")
+twenty_train = fetch_20newsgroups(
+    subset="train", remove=remove, categories=categories
+)  # 学習データ
+twenty_test = fetch_20newsgroups(
+    subset="test", remove=remove, categories=categories
+)  # 検証データ
 
-count_vect = CountVectorizer() # 単語カウント
+count_vect = CountVectorizer()  # 単語カウント
 X_train_counts = count_vect.fit_transform(twenty_train.data)
 X_test_count = count_vect.transform(twenty_test.data)
 
-model = LinearSVC() 
+model = LinearSVC()
 model.fit(X_train_counts, twenty_train.target)
 predicted = model.predict(X_test_count)
 np.mean(predicted == twenty_test.target)
@@ -565,9 +588,9 @@ model.fit(X_train_tfidf, twenty_train.target)
 predicted = model.predict(X_test_tfidf)
 np.mean(predicted == twenty_test.target)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-#変換後のベクトルデータを入力として機械学習モデルを適用する
+# 変換後のベクトルデータを入力として機械学習モデルを適用する
 
 from sklearn import datasets
 from sklearn import metrics
@@ -580,61 +603,63 @@ data = digits.images.reshape((n_samples, -1))
 
 model = RandomForestClassifier(n_estimators=10)
 
-model.fit(data[:n_samples // 2], digits.target[:n_samples // 2])
+model.fit(data[: n_samples // 2], digits.target[: n_samples // 2])
 
-expected = digits.target[n_samples // 2:]
-predicted = model.predict(data[n_samples // 2:])
+expected = digits.target[n_samples // 2 :]
+predicted = model.predict(data[n_samples // 2 :])
 
 print(metrics.classification_report(expected, predicted))
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-print('產生測試資料 並畫出')
+print("產生測試資料 並畫出")
 
 from sklearn.datasets import make_blobs
 
 N = 500
-print('產生', N, '筆資料 2維 2群')
-dx, dy = make_blobs(n_samples = N, n_features = 2, centers = 2, random_state = 0)
+print("產生", N, "筆資料 2維 2群")
+dx, dy = make_blobs(n_samples=N, n_features=2, centers=2, random_state=0)
 
 print(dx.shape)
 print(dy.shape)
-#print(dx)
-#print(dy)
+# print(dx)
+# print(dy)
 
-plt.scatter(dx.T[0], dx.T[1], c = dy, cmap = 'Dark2')
-plt.title('dx的分佈狀況, dy是用顏色表示')
+plt.scatter(dx.T[0], dx.T[1], c=dy, cmap="Dark2")
+plt.title("dx的分佈狀況, dy是用顏色表示")
 plt.grid(True)
 
 plt.show()
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-#StandardScaler
-#將資料常態分布化，平均值會變為0, 標準差變為1，使離群值影響降低
-#MinMaxScaler與StandardScaler類似
+# StandardScaler
+# 將資料常態分布化，平均值會變為0, 標準差變為1，使離群值影響降低
+# MinMaxScaler與StandardScaler類似
 
 from sklearn.datasets import make_blobs
 from sklearn.preprocessing import StandardScaler
 
 N = 500
-print('產生', N, '筆資料 2維 2群')
-dx, dy = make_blobs(n_samples = N, n_features = 2, centers = 2, random_state = 0)
+print("產生", N, "筆資料 2維 2群")
+dx, dy = make_blobs(n_samples=N, n_features=2, centers=2, random_state=0)
 
 dx_std = StandardScaler().fit_transform(dx)
 
-plt.scatter(dx_std.T[0], dx_std.T[1], c = dy, cmap = 'Dark2')
+plt.scatter(dx_std.T[0], dx_std.T[1], c=dy, cmap="Dark2")
 plt.grid(True)
 
 plt.show()
 
-#分割訓練資料集和測試資料集
+# 分割訓練資料集和測試資料集
 from sklearn.model_selection import train_test_split
 
-dx_train, dx_test, dy_train, dy_test = train_test_split(dx_std, dy, test_size = 0.2, random_state = 0)
+dx_train, dx_test, dy_train, dy_test = train_test_split(
+    dx_std, dy, test_size=0.2, random_state=0
+)
 
 print(dx.shape)
 print(dx_train.shape)
@@ -644,10 +669,10 @@ print(dy.shape)
 print(dy_train.shape)
 print(dy_test.shape)
 
-#k 最近鄰演算法 (KNN)
+# k 最近鄰演算法 (KNN)
 from sklearn.neighbors import KNeighborsClassifier
 
-knn = KNeighborsClassifier(n_neighbors = 5)
+knn = KNeighborsClassifier(n_neighbors=5)
 knn.fit(dx_train, dy_train)
 predictions = knn.predict(dx_test)
 
@@ -658,21 +683,23 @@ print(knn.score(dx_test, dy_test))
 
 sys.exit()
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-#邏輯斯迴歸 (logistic regression)
+# 邏輯斯迴歸 (logistic regression)
 
 from sklearn.datasets import make_blobs
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 
-print('產生500筆資料 2維 2群')
-dx, dy = make_blobs(n_samples = 500, n_features = 2, centers = 2, random_state = 0)
+print("產生500筆資料 2維 2群")
+dx, dy = make_blobs(n_samples=500, n_features=2, centers=2, random_state=0)
 
 dx_std = StandardScaler().fit_transform(dx)
 
-dx_train, dx_test, dy_train, dy_test = train_test_split(dx_std, dy, test_size = 0.2, random_state = 0)
+dx_train, dx_test, dy_train, dy_test = train_test_split(
+    dx_std, dy, test_size=0.2, random_state=0
+)
 
 log_reg = LogisticRegression()
 log_reg.fit(dx_train, dy_train)
@@ -681,19 +708,21 @@ predictions = log_reg.predict(dx_test)
 print(log_reg.score(dx_train, dy_train))
 print(log_reg.score(dx_test, dy_test))
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-#線性支援向量機 (Linear SVM)
+# 線性支援向量機 (Linear SVM)
 
 from sklearn.datasets import make_blobs
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 from sklearn.svm import LinearSVC
 
-print('產生500筆資料 2維 2群')
-dx, dy = make_blobs(n_samples = 500, n_features = 2, centers = 2, random_state = 0)
+print("產生500筆資料 2維 2群")
+dx, dy = make_blobs(n_samples=500, n_features=2, centers=2, random_state=0)
 dx_std = StandardScaler().fit_transform(dx)
-dx_train, dx_test, dy_train, dy_test = train_test_split(dx_std, dy, test_size = 0.2, random_state = 0)
+dx_train, dx_test, dy_train, dy_test = train_test_split(
+    dx_std, dy, test_size=0.2, random_state=0
+)
 
 linear_svm = LinearSVC()
 linear_svm.fit(dx_train, dy_train)
@@ -702,18 +731,20 @@ predictions = linear_svm.predict(dx_test)
 print(linear_svm.score(dx_train, dy_train))
 print(linear_svm.score(dx_test, dy_test))
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-#非線性 SVM
+# 非線性 SVM
 
 from sklearn.datasets import make_moons
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 from sklearn.svm import LinearSVC, SVC
 
-dx, dy = make_moons(n_samples = 500, noise = 0.15, random_state = 0)
+dx, dy = make_moons(n_samples=500, noise=0.15, random_state=0)
 
-dx_train, dx_test, dy_train, dy_test = train_test_split(StandardScaler().fit_transform(dx), dy, test_size = 0.2, random_state = 0)
+dx_train, dx_test, dy_train, dy_test = train_test_split(
+    StandardScaler().fit_transform(dx), dy, test_size=0.2, random_state=0
+)
 
 linear_svm = LinearSVC()
 
@@ -735,24 +766,26 @@ print(svm.score(dx_train, dy_train))
 
 print(svm.score(dx_test, dy_test))
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-#k-fold 交叉驗證法
+# k-fold 交叉驗證法
 
 from sklearn.datasets import load_wine
-from sklearn.model_selection import train_test_split,cross_val_score
+from sklearn.model_selection import train_test_split, cross_val_score
 from sklearn.preprocessing import StandardScaler
 from sklearn.ensemble import RandomForestClassifier
 
-dx, dy = load_wine(return_X_y = True)
+dx, dy = load_wine(return_X_y=True)
 dx_std = StandardScaler().fit_transform(dx)
-dx_train, dx_test, dy_train, dy_test = train_test_split(dx_std, dy, test_size = 0.2, random_state = 0)
+dx_train, dx_test, dy_train, dy_test = train_test_split(
+    dx_std, dy, test_size=0.2, random_state=0
+)
 
 forest = RandomForestClassifier()
 
 forest.fit(dx_train, dy_train)
 
-val_score = cross_val_score(forest, dx_train, dy_train, cv = 5)
+val_score = cross_val_score(forest, dx_train, dy_train, cv=5)
 
 predictions = forest.predict(dx_test)
 
@@ -760,11 +793,11 @@ print(forest.score(dx_train, dy_train).round(3))
 
 print(val_score.mean().round(3))
 
-print(forest.score(dx_test, dy_test) .round(3))
+print(forest.score(dx_test, dy_test).round(3))
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-#產生預測結果報告
+# 產生預測結果報告
 
 from sklearn.datasets import load_wine
 from sklearn.model_selection import train_test_split
@@ -772,11 +805,13 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import classification_report
 
-dx, dy = load_wine(return_X_y = True)
+dx, dy = load_wine(return_X_y=True)
 
 dx_std = StandardScaler().fit_transform(dx)
 
-dx_train, dx_test, dy_train, dy_test = train_test_split(dx_std, dy, test_size = 0.2, random_state = 0)
+dx_train, dx_test, dy_train, dy_test = train_test_split(
+    dx_std, dy, test_size=0.2, random_state=0
+)
 
 forest = RandomForestClassifier()
 
@@ -790,50 +825,52 @@ print(forest.score(dx_test, dy_test).round(3))
 
 print(classification_report(dy_test, predictions))
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-#13-1-1 最近 k 鄰數量：n_neighbors
+# 13-1-1 最近 k 鄰數量：n_neighbors
 
-from sklearn.datasets import load_breast_cancer #匯入資料集
+from sklearn.datasets import load_breast_cancer  # 匯入資料集
 from sklearn.model_selection import train_test_split, cross_val_score
 from sklearn.neighbors import KNeighborsClassifier
 import numpy as np
-import matplotlib.pyplot as plt #匯入 matplotlib
+import matplotlib.pyplot as plt  # 匯入 matplotlib
 
-#取得特徵與標籤資料
+# 取得特徵與標籤資料
 
-dx, dy = load_breast_cancer(return_X_y = True) 
+dx, dy = load_breast_cancer(return_X_y=True)
 
-dx_train, dx_test, dy_train, dy_test = train_test_split(dx, dy, test_size = 0.2, random_state = 0)
+dx_train, dx_test, dy_train, dy_test = train_test_split(
+    dx, dy, test_size=0.2, random_state=0
+)
 
-cv_scores = [] #用來收集交叉驗證準確率的 list
+cv_scores = []  # 用來收集交叉驗證準確率的 list
 
-test_scores = [] #用來收集測試集準確率的 list
+test_scores = []  # 用來收集測試集準確率的 list
 
-x = np.arange(10) + 1 #圖表 X 軸 (KNN 模型的 k 值)
+x = np.arange(10) + 1  # 圖表 X 軸 (KNN 模型的 k 值)
 
 for k in x:
-    knn = KNeighborsClassifier(n_neighbors = k).fit(dx_train, dy_train)
-    cv_scores.append(cross_val_score(knn, dx_train, dy_train, cv = 5).mean())
+    knn = KNeighborsClassifier(n_neighbors=k).fit(dx_train, dy_train)
+    cv_scores.append(cross_val_score(knn, dx_train, dy_train, cv=5).mean())
     test_scores.append(knn.score(dx_test, dy_test))
 
-plt.title('KNN hyperparameter')
-plt.plot(x, cv_scores, label = 'CV score') #繪製交叉驗證折線圖
-plt.plot(x, test_scores, label = 'Test score') #繪製測試集預測折線圖
-plt.xlabel('k neighbors')
-plt.ylabel('accuracy (%)')
+plt.title("KNN hyperparameter")
+plt.plot(x, cv_scores, label="CV score")  # 繪製交叉驗證折線圖
+plt.plot(x, test_scores, label="Test score")  # 繪製測試集預測折線圖
+plt.xlabel("k neighbors")
+plt.ylabel("accuracy (%)")
 plt.legend()
 plt.grid(True)
 plt.show()
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-#13-1-2 用 GridSearchCV 自動搜尋最佳 k 值
+# 13-1-2 用 GridSearchCV 自動搜尋最佳 k 值
 
 from sklearn.datasets import load_breast_cancer
 from sklearn.model_selection import train_test_split
@@ -841,20 +878,22 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.model_selection import GridSearchCV
 import matplotlib.pyplot as plt
 
-dx, dy = load_breast_cancer(return_X_y = True)
-dx_train, dx_test, dy_train, dy_test = train_test_split(dx, dy, test_size = 0.2, random_state = 0)
+dx, dy = load_breast_cancer(return_X_y=True)
+dx_train, dx_test, dy_train, dy_test = train_test_split(
+    dx, dy, test_size=0.2, random_state=0
+)
 
-param_grid = {'n_neighbors': np.arange(10) + 1} #要網格搜尋的參數
+param_grid = {"n_neighbors": np.arange(10) + 1}  # 要網格搜尋的參數
 model = GridSearchCV(KNeighborsClassifier(), param_grid)
-model.fit(dx_train, dy_train) #用最佳模型來做訓練
+model.fit(dx_train, dy_train)  # 用最佳模型來做訓練
 
-print('Best params:', model.best_params_) #傳回最佳參數
-print('CV score:', model.best_score_.round(3))
-print('Test score:', model.score(dx_test, dy_test).round(3))
+print("Best params:", model.best_params_)  # 傳回最佳參數
+print("CV score:", model.best_score_.round(3))
+print("Test score:", model.score(dx_test, dy_test).round(3))
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-#13-2-1 邏輯斯迴歸的 C：常規化強度
+# 13-2-1 邏輯斯迴歸的 C：常規化強度
 
 from sklearn.datasets import load_breast_cancer
 from sklearn.preprocessing import StandardScaler
@@ -862,35 +901,37 @@ from sklearn.model_selection import train_test_split, cross_val_score
 from sklearn.linear_model import LogisticRegression
 import matplotlib.pyplot as plt
 
-dx, dy = load_breast_cancer(return_X_y = True)
-dx_std = StandardScaler().fit_transform(dx) #資料標準化
-dx_train, dx_test, dy_train, dy_test = train_test_split(dx_std, dy, test_size = 0.2, random_state = 0)
+dx, dy = load_breast_cancer(return_X_y=True)
+dx_std = StandardScaler().fit_transform(dx)  # 資料標準化
+dx_train, dx_test, dy_train, dy_test = train_test_split(
+    dx_std, dy, test_size=0.2, random_state=0
+)
 
 cv_scores = []
 test_scores = []
 
-x = [10 ** n for n in range(-4, 5)]
+x = [10**n for n in range(-4, 5)]
 
-x_str = [str(n) for n in x] #X 軸各數值『名稱』
+x_str = [str(n) for n in x]  # X 軸各數值『名稱』
 
 for c in x:
-    log_reg = LogisticRegression(C = c, max_iter = 1000).fit(dx_train, dy_train)
-    cv_scores.append(cross_val_score(log_reg, dx_train, dy_train,cv = 5).mean())
+    log_reg = LogisticRegression(C=c, max_iter=1000).fit(dx_train, dy_train)
+    cv_scores.append(cross_val_score(log_reg, dx_train, dy_train, cv=5).mean())
     test_scores.append(log_reg.score(dx_test, dy_test))
 
-plt.title('Logistic Regression hyperparameter')
-plt.plot(x_str, cv_scores, label = 'CV score')
-plt.plot(x_str, test_scores, label = 'Test score')
-plt.xlabel('C')
-plt.ylabel('accuracy (%)')
+plt.title("Logistic Regression hyperparameter")
+plt.plot(x_str, cv_scores, label="CV score")
+plt.plot(x_str, test_scores, label="Test score")
+plt.xlabel("C")
+plt.ylabel("accuracy (%)")
 plt.legend()
 plt.grid(True)
 
 plt.show()
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-#13-2-2 線性 SVC 的 C：常規化強度
+# 13-2-2 線性 SVC 的 C：常規化強度
 
 from sklearn.datasets import load_breast_cancer
 from sklearn.preprocessing import StandardScaler
@@ -899,33 +940,35 @@ from sklearn.svm import LinearSVC
 import numpy as np
 import matplotlib.pyplot as plt
 
-dx, dy = load_breast_cancer(return_X_y = True)
+dx, dy = load_breast_cancer(return_X_y=True)
 dx_std = StandardScaler().fit_transform(dx)
-dx_train, dx_test, dy_train, dy_test = train_test_split(dx_std, dy, test_size = 0.2, random_state = 0)
+dx_train, dx_test, dy_train, dy_test = train_test_split(
+    dx_std, dy, test_size=0.2, random_state=0
+)
 
 cv_scores = []
 test_scores = []
 
-x = [10 ** n for n in range(-4, 5)]
+x = [10**n for n in range(-4, 5)]
 x_str = [str(n) for n in x]
 
 for c in x:
-    linear_svc = LinearSVC(C = c, max_iter = 10000).fit(dx_train, dy_train)
-    cv_scores.append(cross_val_score(linear_svc, dx_train, dy_train, cv = 5).mean())
+    linear_svc = LinearSVC(C=c, max_iter=10000).fit(dx_train, dy_train)
+    cv_scores.append(cross_val_score(linear_svc, dx_train, dy_train, cv=5).mean())
     test_scores.append(linear_svc.score(dx_test, dy_test))
 
-plt.title('Linear SVM hyperparameter')
-plt.plot(x_str, cv_scores, label = 'CV score')
-plt.plot(x_str, test_scores, label = 'Test score')
-plt.xlabel('C')
-plt.ylabel('accuracy (%)')
+plt.title("Linear SVM hyperparameter")
+plt.plot(x_str, cv_scores, label="CV score")
+plt.plot(x_str, test_scores, label="Test score")
+plt.xlabel("C")
+plt.ylabel("accuracy (%)")
 plt.legend()
 plt.grid(True)
 plt.show()
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-#13-3-1 C, gamma 與 kernel 參數
+# 13-3-1 C, gamma 與 kernel 參數
 
 from sklearn.datasets import load_breast_cancer
 from sklearn.preprocessing import StandardScaler
@@ -934,26 +977,26 @@ from sklearn.svm import SVC
 from sklearn.model_selection import GridSearchCV, RandomizedSearchCV
 import matplotlib.pyplot as plt
 
-dx, dy = load_breast_cancer(return_X_y = True)
+dx, dy = load_breast_cancer(return_X_y=True)
 dx_std = StandardScaler().fit_transform(dx)
-dx_train, dx_test, dy_train, dy_test = train_test_split(dx_std, dy, test_size = 0.2, random_state = 0)
+dx_train, dx_test, dy_train, dy_test = train_test_split(
+    dx_std, dy, test_size=0.2, random_state=0
+)
 
-x = [10 ** n for n in range(-2, 3)]
+x = [10**n for n in range(-2, 3)]
 
-param_grid = {'C': x,
-              'gamma': x,
-              'kernel': ['linear', 'rbf', 'poly', 'sigmoid']}
+param_grid = {"C": x, "gamma": x, "kernel": ["linear", "rbf", "poly", "sigmoid"]}
 
 model = GridSearchCV(SVC(), param_grid)
 model.fit(dx_train, dy_train)
 
-print('Best params: ', model.best_params_)
-print('CV score:', model.best_score_.round(3))
-print('Test score:', model.score(dx_test, dy_test).round(3))
+print("Best params: ", model.best_params_)
+print("CV score:", model.best_score_.round(3))
+print("Test score:", model.score(dx_test, dy_test).round(3))
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-#13-3-2 使用 RandomizedSearchCV 更快速尋找較適當的參數
+# 13-3-2 使用 RandomizedSearchCV 更快速尋找較適當的參數
 
 from sklearn.datasets import load_breast_cancer
 from sklearn.preprocessing import StandardScaler
@@ -963,26 +1006,30 @@ from sklearn.model_selection import RandomizedSearchCV
 import numpy as np
 import matplotlib.pyplot as plt
 
-dx, dy = load_breast_cancer(return_X_y = True)
+dx, dy = load_breast_cancer(return_X_y=True)
 
 dx_std = StandardScaler().fit_transform(dx)
 
-dx_train, dx_test, dy_train, dy_test = train_test_split(dx_std, dy, test_size = 0.2, random_state = 0)
+dx_train, dx_test, dy_train, dy_test = train_test_split(
+    dx_std, dy, test_size=0.2, random_state=0
+)
 
-param_grid = {'C': np.linspace(1, 100, 100),
-              'gamma': np.linspace(0.01, 1, 100),
-              'kernel': ['linear', 'rbf', 'poly', 'sigmoid']}
+param_grid = {
+    "C": np.linspace(1, 100, 100),
+    "gamma": np.linspace(0.01, 1, 100),
+    "kernel": ["linear", "rbf", "poly", "sigmoid"],
+}
 
-model = RandomizedSearchCV(SVC(), param_grid, n_iter = 100)
+model = RandomizedSearchCV(SVC(), param_grid, n_iter=100)
 model.fit(dx_train, dy_train)
 
-print('Best params:', model.best_params_)
-print('CV score:', model.best_score_.round(3))
-print('Test score:', model.score(dx_test, dy_test).round(3))
+print("Best params:", model.best_params_)
+print("CV score:", model.best_score_.round(3))
+print("Test score:", model.score(dx_test, dy_test).round(3))
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-#13-4-1 決策樹的最大深度：max_depth
+# 13-4-1 決策樹的最大深度：max_depth
 
 from sklearn.datasets import load_breast_cancer
 from sklearn.preprocessing import StandardScaler
@@ -991,11 +1038,13 @@ from sklearn.tree import DecisionTreeClassifier
 import numpy as np
 import matplotlib.pyplot as plt
 
-dx, dy = load_breast_cancer(return_X_y = True)
+dx, dy = load_breast_cancer(return_X_y=True)
 
 dx_std = StandardScaler().fit_transform(dx)
 
-dx_train, dx_test, dy_train, dy_test = train_test_split(dx_std, dy, test_size = 0.2, random_state = 0)
+dx_train, dx_test, dy_train, dy_test = train_test_split(
+    dx_std, dy, test_size=0.2, random_state=0
+)
 
 cv_scores = []
 
@@ -1006,39 +1055,41 @@ x = np.arange(12) + 1
 x_str = [str(n) for n in x]
 
 for d in x:
-    tree = DecisionTreeClassifier(max_depth = d).fit(dx_train, dy_train)
-    cv_scores.append(cross_val_score(tree, dx_train, dy_train, cv = 5).mean())
+    tree = DecisionTreeClassifier(max_depth=d).fit(dx_train, dy_train)
+    cv_scores.append(cross_val_score(tree, dx_train, dy_train, cv=5).mean())
     test_scores.append(tree.score(dx_test, dy_test))
 
-plt.title('Decision Tree hyperparameter')
-plt.plot(x_str, cv_scores, label = 'CV score')
-plt.plot(x_str, test_scores, label = 'Test score')
-plt.xlabel('Max depth')
-plt.ylabel('accuracy (%)')
+plt.title("Decision Tree hyperparameter")
+plt.plot(x_str, cv_scores, label="CV score")
+plt.plot(x_str, test_scores, label="Test score")
+plt.xlabel("Max depth")
+plt.ylabel("accuracy (%)")
 plt.legend()
 plt.grid(True)
 plt.show()
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 from sklearn.datasets import load_breast_cancer
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier, export_text
 
-dx, dy = load_breast_cancer(return_X_y = True)
+dx, dy = load_breast_cancer(return_X_y=True)
 feature_names = list(load_breast_cancer().feature_names)
 
 dx_std = StandardScaler().fit_transform(dx)
-dx_train, dx_test, dy_train, dy_test = train_test_split(dx_std, dy, test_size = 0.2, random_state = 0)
+dx_train, dx_test, dy_train, dy_test = train_test_split(
+    dx_std, dy, test_size=0.2, random_state=0
+)
 
-model = DecisionTreeClassifier(max_depth = 3).fit(dx_train, dy_train)
+model = DecisionTreeClassifier(max_depth=3).fit(dx_train, dy_train)
 
-print(export_text(model, feature_names = feature_names))
+print(export_text(model, feature_names=feature_names))
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-#13-4-2 隨機森林的規模 n_estimators 與亂數種子 random_state
+# 13-4-2 隨機森林的規模 n_estimators 與亂數種子 random_state
 
 from sklearn.datasets import load_breast_cancer
 from sklearn.preprocessing import StandardScaler
@@ -1047,11 +1098,13 @@ from sklearn.ensemble import RandomForestClassifier
 import numpy as np
 import matplotlib.pyplot as plt
 
-dx, dy = load_breast_cancer(return_X_y = True)
+dx, dy = load_breast_cancer(return_X_y=True)
 
 dx_std = StandardScaler().fit_transform(dx)
 
-dx_train, dx_test, dy_train, dy_test = train_test_split(dx_std, dy, test_size = 0.2, random_state = 0)
+dx_train, dx_test, dy_train, dy_test = train_test_split(
+    dx_std, dy, test_size=0.2, random_state=0
+)
 
 cv_scores = []
 test_scores = []
@@ -1060,45 +1113,36 @@ x = (np.arange(10) + 1) * 50
 x_str = [str(n) for n in x]
 
 for t in x:
-  tree = RandomForestClassifier(n_estimators = t, max_depth = 3,random_state = 0)
-  tree.fit(dx_train, dy_train)
-  cv_scores.append(cross_val_score(tree, dx_train, dy_train,cv = 5).mean())
-  test_scores.append(tree.score(dx_test, dy_test))
+    tree = RandomForestClassifier(n_estimators=t, max_depth=3, random_state=0)
+    tree.fit(dx_train, dy_train)
+    cv_scores.append(cross_val_score(tree, dx_train, dy_train, cv=5).mean())
+    test_scores.append(tree.score(dx_test, dy_test))
 
-plt.title('Random Forest hyperparameter')
-plt.plot(x_str, cv_scores, label = 'CV score')
-plt.plot(x_str, test_scores, label = 'Test score')
-plt.xlabel('Number of trees')
-plt.ylabel('accuracy (%)')
+plt.title("Random Forest hyperparameter")
+plt.plot(x_str, cv_scores, label="CV score")
+plt.plot(x_str, test_scores, label="Test score")
+plt.xlabel("Number of trees")
+plt.ylabel("accuracy (%)")
 plt.legend()
 plt.grid(True)
 plt.show()
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-print('------------------------------------------------------------')	#60個
-
-
+print("------------------------------------------------------------")  # 60個
 
 
+print("------------------------------------------------------------")  # 60個
 
-print('------------------------------------------------------------')	#60個
-
-print('------------------------------------------------------------')	#60個
-
+print("------------------------------------------------------------")  # 60個
 
 
-
-print('------------------------------------------------------------')	#60個
-
-
-print('------------------------------------------------------------')	#60個
-print('作業完成')
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
 
 
-
-
+print("------------------------------------------------------------")  # 60個

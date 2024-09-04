@@ -44,32 +44,6 @@ namespace vcs_AMCap0
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
-
-            //richTextBox1.Text += "重新抓取USB影像\t";
-            USBWebcams = new FilterInfoCollection(FilterCategory.VideoInputDevice);
-            if (USBWebcams.Count > 0)  // The quantity of WebCam must be more than 0.
-            {
-                Cam = new VideoCaptureDevice(USBWebcams[0].MonikerString);  //實例化對象
-                Cam.NewFrame += new NewFrameEventHandler(Cam_NewFrame);
-                Cam.Start();   // WebCam starts capturing images.
-                //richTextBox1.Text += "有影像裝置\n";
-
-                Cam.VideoResolution = Cam.VideoCapabilities[0];
-
-                string webcam_name = string.Empty;
-
-                int ww;
-                int hh;
-                ww = Cam.VideoCapabilities[0].FrameSize.Width;
-                hh = Cam.VideoCapabilities[0].FrameSize.Height;
-
-                webcam_name = USBWebcams[0].Name + " " + Cam.VideoCapabilities[0].FrameSize.Width.ToString() + " X " + Cam.VideoCapabilities[0].FrameSize.Height.ToString() + " @ " + Cam.VideoCapabilities[0].AverageFrameRate.ToString() + " Hz";
-                this.Text = webcam_name;
-            }
-            else
-            {
-                this.Text = "無影像裝置\n";
-            }
         }
 
         void show_item_location()
@@ -95,6 +69,58 @@ namespace vcs_AMCap0
             this.ClientSize = new Size(BORDER + W_pictureBox1 + BORDER + W_richTextBox1 + BORDER, BORDER + H_pictureBox1 + BORDER + H_groupBox1 + BORDER);
         }
 
+        void Init_WebcamSetup()
+        {
+            //richTextBox1.Text += "重新抓取USB影像\t";
+            USBWebcams = new FilterInfoCollection(FilterCategory.VideoInputDevice);
+            if (USBWebcams.Count > 0)  // The quantity of WebCam must be more than 0.
+            {
+                Cam = new VideoCaptureDevice(USBWebcams[0].MonikerString);  //實例化對象
+                Cam.NewFrame += new NewFrameEventHandler(Cam_NewFrame);
+                //richTextBox1.Text += "有影像裝置\n";
+
+                Cam.VideoResolution = Cam.VideoCapabilities[0];
+
+                string webcam_name = string.Empty;
+
+                int ww;
+                int hh;
+                ww = Cam.VideoCapabilities[0].FrameSize.Width;
+                hh = Cam.VideoCapabilities[0].FrameSize.Height;
+
+                webcam_name = USBWebcams[0].Name + " " + Cam.VideoCapabilities[0].FrameSize.Width.ToString() + " X " + Cam.VideoCapabilities[0].FrameSize.Height.ToString() + " @ " + Cam.VideoCapabilities[0].AverageFrameRate.ToString() + " Hz";
+                this.Text = webcam_name;
+            }
+            else
+            {
+                this.Text = "無影像裝置\n";
+            }
+        }
+
+        void Start_Webcam()
+        {
+            if (Cam != null)
+            {
+                Cam.Start();   // WebCam starts capturing images.
+            }
+        }
+
+        void Stop_Webcam()
+        {
+            if (Cam != null)
+            {
+                //show_main_message("停止", S_OK, 20);
+                Cam.Stop();  // WebCam stops capturing images.
+                Cam.SignalToStop();
+                Cam.WaitForStop();
+                while (Cam.IsRunning)
+                {
+                    Console.Write("等候相機關閉");
+                }
+                Cam = null;
+            }
+            pictureBox1.Image = null;
+        }
 
         public Bitmap bm = null;
         //自定義函數, 捕獲每一幀圖像並顯示
@@ -170,12 +196,13 @@ namespace vcs_AMCap0
 
         private void button0_Click(object sender, EventArgs e)
         {
-
+            Init_WebcamSetup();
+            Start_Webcam();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            Stop_Webcam();
         }
 
         private void button2_Click(object sender, EventArgs e)

@@ -29,9 +29,9 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-#Final 建構神經網路模型
+# Final 建構神經網路模型
 
 from tensorflow.keras.datasets import mnist
 from tensorflow.keras.models import Sequential
@@ -39,10 +39,10 @@ from tensorflow.keras.layers import Dense
 from tensorflow.keras.utils import plot_model
 from tensorflow.keras.utils import to_categorical
 
-#(X_train, y_train), (X_test, y_test) = mnist.load_data() 改成以下4行
+# (X_train, y_train), (X_test, y_test) = mnist.load_data() 改成以下4行
 mnist = np.load(mnist_npz_filename)
-X_train, y_train = mnist['x_train'], mnist['y_train']
-X_test, y_test = mnist['x_test'], mnist['y_test']
+X_train, y_train = mnist["x_train"], mnist["y_train"]
+X_test, y_test = mnist["x_test"], mnist["y_test"]
 mnist.close()
 
 X_train = X_train.reshape(X_train.shape[0], 784)
@@ -55,20 +55,20 @@ y_test = to_categorical(y_test)
 
 model = Sequential()
 
-model.add(Dense(256, activation='sigmoid', input_dim=784))
+model.add(Dense(256, activation="sigmoid", input_dim=784))
 
-model.add(Dense(128, activation='relu'))
+model.add(Dense(128, activation="relu"))
 
-model.add(Dense(10, activation='softmax'))
+model.add(Dense(10, activation="softmax"))
 
-model.compile(optimizer='rmsprop',loss='binary_crossentropy',metrics=['accuracy'])
+model.compile(optimizer="rmsprop", loss="binary_crossentropy", metrics=["accuracy"])
 
-#plot_model(model, show_shapes=True, show_layer_names=False)
-#目前plot_model不能用
+# plot_model(model, show_shapes=True, show_layer_names=False)
+# 目前plot_model不能用
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-#Final 訓練模型
+# Final 訓練模型
 
 from tensorflow.keras.datasets import mnist
 from tensorflow.keras.models import Sequential
@@ -76,10 +76,10 @@ from tensorflow.keras.layers import Dense
 from tensorflow.keras.utils import plot_model
 from tensorflow.keras.utils import to_categorical
 
-#(X_train, y_train), (X_test, y_test) = mnist.load_data() 改成以下4行
+# (X_train, y_train), (X_test, y_test) = mnist.load_data() 改成以下4行
 mnist = np.load(mnist_npz_filename)
-X_train, y_train = mnist['x_train'], mnist['y_train']
-X_test, y_test = mnist['x_test'], mnist['y_test']
+X_train, y_train = mnist["x_train"], mnist["y_train"]
+X_test, y_test = mnist["x_test"], mnist["y_test"]
 mnist.close()
 
 X_train = X_train.reshape(X_train.shape[0], 784)
@@ -90,12 +90,12 @@ y_test = to_categorical(y_test)
 
 model = Sequential()
 
-model.add(Dense(256, activation='sigmoid', input_dim=784))
-model.add(Dense(128, activation='relu'))
-model.add(Dense(10, activation='softmax'))
-model.compile(optimizer='rmsprop',loss='binary_crossentropy',metrics=['accuracy'])
+model.add(Dense(256, activation="sigmoid", input_dim=784))
+model.add(Dense(128, activation="relu"))
+model.add(Dense(10, activation="softmax"))
+model.compile(optimizer="rmsprop", loss="binary_crossentropy", metrics=["accuracy"])
 
-#跑很久
+# 跑很久
 """
 #history = model.fit(X_train, y_train, verbose=1, batch_size=32,epochs=3)
 history = model.fit(X_train, y_train, verbose=1, batch_size=960,epochs=1)
@@ -110,9 +110,9 @@ plt.legend(loc="best")
 
 plt.show()
 """
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-#Final 評估模型成效
+# Final 評估模型成效
 
 from tensorflow.keras.datasets import mnist
 from tensorflow.keras.models import Sequential
@@ -120,10 +120,10 @@ from tensorflow.keras.layers import Dense
 from tensorflow.keras.utils import plot_model
 from tensorflow.keras.utils import to_categorical
 
-#(X_train, y_train), (X_test, y_test) = mnist.load_data() 改成以下4行
+# (X_train, y_train), (X_test, y_test) = mnist.load_data() 改成以下4行
 mnist = np.load(mnist_npz_filename)
-X_train, y_train = mnist['x_train'], mnist['y_train']
-X_test, y_test = mnist['x_test'], mnist['y_test']
+X_train, y_train = mnist["x_train"], mnist["y_train"]
+X_test, y_test = mnist["x_test"], mnist["y_test"]
 mnist.close()
 
 X_train = X_train.reshape(X_train.shape[0], 784)
@@ -136,26 +136,26 @@ y_test = to_categorical(y_test)
 
 model = Sequential()
 
-model.add(Dense(256, activation='sigmoid', input_dim=784))
+model.add(Dense(256, activation="sigmoid", input_dim=784))
 
-model.add(Dense(128, activation='relu'))
+model.add(Dense(128, activation="relu"))
 
-model.add(Dense(10, activation='softmax'))
+model.add(Dense(10, activation="softmax"))
 
-model.compile(optimizer='rmsprop',loss='binary_crossentropy',metrics=['accuracy'])
+model.compile(optimizer="rmsprop", loss="binary_crossentropy", metrics=["accuracy"])
 
 model.fit(X_train, y_train, verbose=0)
 
-score = model.evaluate(X_test, y_test,verbose=0)
+score = model.evaluate(X_test, y_test, verbose=0)
 
 print("evaluate loss: {0[0]}\nevaluate acc: {0[1]}".format(score))
 
-#evaluate loss: 0.0431341715157032
-#evaluate acc: 0.9291999936103821
+# evaluate loss: 0.0431341715157032
+# evaluate acc: 0.9291999936103821
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-#Final 用模型預測答案
+# Final 用模型預測答案
 
 from tensorflow.keras.datasets import mnist
 from tensorflow.keras.models import Sequential
@@ -163,10 +163,10 @@ from tensorflow.keras.layers import Dense
 from tensorflow.keras.utils import plot_model
 from tensorflow.keras.utils import to_categorical
 
-#(X_train, y_train), (X_test, y_test) = mnist.load_data() 改成以下4行
+# (X_train, y_train), (X_test, y_test) = mnist.load_data() 改成以下4行
 mnist = np.load(mnist_npz_filename)
-X_train, y_train = mnist['x_train'], mnist['y_train']
-X_test, y_test = mnist['x_test'], mnist['y_test']
+X_train, y_train = mnist["x_train"], mnist["y_train"]
+X_test, y_test = mnist["x_test"], mnist["y_test"]
 mnist.close()
 
 X_train = X_train.reshape(X_train.shape[0], 784)
@@ -179,19 +179,19 @@ y_test = to_categorical(y_test)
 
 model = Sequential()
 
-model.add(Dense(256, activation='sigmoid', input_dim=784))
+model.add(Dense(256, activation="sigmoid", input_dim=784))
 
-model.add(Dense(128, activation='relu'))
+model.add(Dense(128, activation="relu"))
 
-model.add(Dense(10, activation='softmax'))
+model.add(Dense(10, activation="softmax"))
 
-model.compile(optimizer='rmsprop',loss='binary_crossentropy',metrics=['accuracy'])
+model.compile(optimizer="rmsprop", loss="binary_crossentropy", metrics=["accuracy"])
 
 model.fit(X_train, y_train, verbose=0)
 
 for i in range(10):
-    plt.subplot(1, 10, i+1)
-    plt.imshow(X_test[i].reshape((28,28)), "gray")
+    plt.subplot(1, 10, i + 1)
+    plt.imshow(X_test[i].reshape((28, 28)), "gray")
 
 plt.show()
 
@@ -199,8 +199,8 @@ pred = np.argmax(model.predict(X_test[0:10]), axis=1)
 
 print(pred)
 
-print('------------------------------------------------------------')	#60個
-'''
+print("------------------------------------------------------------")  # 60個
+"""
 #建構神經網路模型
 
 from tensorflow.keras.datasets import mnist
@@ -429,19 +429,19 @@ print("evaluate loss: {0[0]}\nevaluate acc: {0[1]}".format(score))
 #evaluate acc: 0.9229000210762024
 
 print('------------------------------------------------------------')	#60個
-'''
-#超參數設定(四)：batch_size
+"""
+# 超參數設定(四)：batch_size
 
 from tensorflow.keras.datasets import mnist
 from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense,Dropout
+from tensorflow.keras.layers import Dense, Dropout
 from tensorflow.keras import optimizers
 from tensorflow.keras.utils import to_categorical
 
-#(X_train, y_train), (X_test, y_test) = mnist.load_data() 改成以下4行
+# (X_train, y_train), (X_test, y_test) = mnist.load_data() 改成以下4行
 mnist = np.load(mnist_npz_filename)
-X_train, y_train = mnist['x_train'], mnist['y_train']
-X_test, y_test = mnist['x_test'], mnist['y_test']
+X_train, y_train = mnist["x_train"], mnist["y_train"]
+X_test, y_test = mnist["x_test"], mnist["y_test"]
 mnist.close()
 
 X_train = X_train.reshape(X_train.shape[0], 784)
@@ -454,63 +454,67 @@ y_test = to_categorical(y_test)
 
 model = Sequential()
 
-model.add(Dense(256, activation='sigmoid', input_dim=784))
-model.add(Dense(128, activation='relu'))
+model.add(Dense(256, activation="sigmoid", input_dim=784))
+model.add(Dense(128, activation="relu"))
 model.add(Dropout(rate=0.5))
-model.add(Dense(10, activation='softmax'))
+model.add(Dense(10, activation="softmax"))
 
 sgd = optimizers.SGD(learning_rate=0.01)
 
-model.compile(optimizer=sgd,loss='categorical_crossentropy',metrics=['accuracy'])
+model.compile(optimizer=sgd, loss="categorical_crossentropy", metrics=["accuracy"])
 
-#超參數設定(四)：batch_size
+# 超參數設定(四)：batch_size
+
 
 def funcA():
     global batch_size
     batch_size = 16
 
+
 def funcB():
     global batch_size
     batch_size = 32
 
+
 def funcC():
     global batch_size
     batch_size = 64
+
 
 # 選用模型A時就將B和C這兩行註解掉
 # ---------------------------
 
 funcA()
 
-#funcB()
+# funcB()
 
-#funcC()
+# funcC()
 
 # ---------------------------
 
-model.fit(X_train, y_train, verbose=0, batch_size=batch_size,epochs=3)
+model.fit(X_train, y_train, verbose=0, batch_size=batch_size, epochs=3)
 
 score = model.evaluate(X_test, y_test, verbose=0)
 
 print("evaluate loss: {0[0]}\nevaluate acc: {0[1]}".format(score))
 
-#evaluate loss: 0.2627638280391693
-#evaluate acc: 0.92330002784729
+# evaluate loss: 0.2627638280391693
+# evaluate acc: 0.92330002784729
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-#超參數設定(五)：epochs
+# 超參數設定(五)：epochs
 
 from tensorflow.keras.datasets import mnist
 from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense,Dropout
+from tensorflow.keras.layers import Dense, Dropout
 from tensorflow.keras import optimizers
 from tensorflow.keras.utils import to_categorical
 
-#(X_train, y_train), (X_test, y_test) = mnist.load_data() 改成以下4行
+# (X_train, y_train), (X_test, y_test) = mnist.load_data() 改成以下4行
 mnist = np.load(mnist_npz_filename)
-X_train, y_train = mnist['x_train'], mnist['y_train']
-X_test, y_test = mnist['x_test'], mnist['y_test']
+X_train, y_train = mnist["x_train"], mnist["y_train"]
+X_test, y_test = mnist["x_test"], mnist["y_test"]
 mnist.close()
 
 X_train = X_train.reshape(X_train.shape[0], 784)
@@ -523,31 +527,35 @@ y_test = to_categorical(y_test)
 
 model = Sequential()
 
-model.add(Dense(256, activation='sigmoid', input_dim=784))
+model.add(Dense(256, activation="sigmoid", input_dim=784))
 
-model.add(Dense(128, activation='relu'))
+model.add(Dense(128, activation="relu"))
 
 model.add(Dropout(rate=0.5))
 
-model.add(Dense(10, activation='softmax'))
+model.add(Dense(10, activation="softmax"))
 
 sgd = optimizers.SGD(learning_rate=0.01)
 
-model.compile(optimizer=sgd,loss='categorical_crossentropy',metrics=['accuracy'])
+model.compile(optimizer=sgd, loss="categorical_crossentropy", metrics=["accuracy"])
 
-#超參數設定(五)：epochs
+# 超參數設定(五)：epochs
+
 
 def funcA():
     global epochs
     epochs = 5
 
+
 def funcB():
     global epochs
     epochs = 10
 
+
 def funcC():
     global epochs
     epochs = 60
+
 
 # ---------------------------
 # epochs: 5
@@ -557,11 +565,11 @@ funcA()
 
 # epochs: 10
 
-#funcB()
+# funcB()
 
 # epochs: 60
 
-#funcC()
+# funcC()
 
 # ---------------------------
 
@@ -576,14 +584,11 @@ print("evaluate loss: {0[0]}\nevaluate acc: {0[1]}".format(score))
 
 #evaluate acc: 0.9323999881744385
 """
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-print('------------------------------------------------------------')	#60個
-
-
-
-print('------------------------------------------------------------')	#60個
-
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個

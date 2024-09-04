@@ -475,96 +475,98 @@ print(res)
 plt.show()
 
 '''
-print('------------------------------------------------------------')	#60個
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-#import seaborn as sns
+# import seaborn as sns
 
 from scipy.stats import norm
 
-def norm_prob(x,mu,sigma):
-    p = norm(mu,sigma).cdf(x+0.0001) - norm(mu,sigma).cdf(x-0.0001)
+
+def norm_prob(x, mu, sigma):
+    p = norm(mu, sigma).cdf(x + 0.0001) - norm(mu, sigma).cdf(x - 0.0001)
     return p
 
-def loglikelihood(data,mu,sigma):
+
+def loglikelihood(data, mu, sigma):
     l = 0.0
     for x in data:
-        l -= np.log(norm_prob(x,mu,sigma))
+        l -= np.log(norm_prob(x, mu, sigma))
     return l
 
 
-N=1000
+N = 1000
 mu, sigma = 1.6, 0.2
 
-h=1.8
+h = 1.8
 
-data = norm.rvs(loc=mu, scale=sigma,size = N)
+data = norm.rvs(loc=mu, scale=sigma, size=N)
 
 print(data)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-tt = norm.pdf(x=1.8,loc=1.6,scale=0.2)
+tt = norm.pdf(x=1.8, loc=1.6, scale=0.2)
 print(tt)
 
-tt = norm_prob(h,mu,sigma)
+tt = norm_prob(h, mu, sigma)
 print(tt)
 
-tt = loglikelihood(data,mu,sigma)
+tt = loglikelihood(data, mu, sigma)
 print(tt)
 
 plt.hist(data)
 
 plt.show()
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-mus = [1.4,1.5,1.6,1.7,1.8,1.9,2.0]
-sigma =0.1
+mus = [1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2.0]
+sigma = 0.1
 print(mus)
 
-l = [loglikelihood(data,mu2,sigma) for mu2 in mus]
+l = [loglikelihood(data, mu2, sigma) for mu2 in mus]
 print(l)
 
 df = pd.DataFrame()
-df['mu'] = mus
-df['-logl'] =l
+df["mu"] = mus
+df["-logl"] = l
 print(df)
 
-plt.figure(figsize=(6,4))
+plt.figure(figsize=(6, 4))
 
-#sns.pointplot(df['mu'],df['-logl'], alpha=0.8) fail
-#sns.pointplot(df['mu'],df['-logl']) fail
+# sns.pointplot(df['mu'],df['-logl'], alpha=0.8) fail
+# sns.pointplot(df['mu'],df['-logl']) fail
 
 plt.show()
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-neg_data = u'data/neg.csv'
-pos_data = u'data/pos.csv'
+neg_data = "data/neg.csv"
+pos_data = "data/pos.csv"
 
 import codecs
 import jieba
 
 corpus = []
-with codecs.open(neg_data,encoding='utf-8') as f:
+with codecs.open(neg_data, encoding="utf-8") as f:
     for line in f:
-        words = list(jieba.cut(line.replace('|','')))
-        corpus.append(' '.join(words))
+        words = list(jieba.cut(line.replace("|", "")))
+        corpus.append(" ".join(words))
 
 neg_df = pd.DataFrame()
-neg_df['content'] = corpus
-neg_df['label'] = 0
+neg_df["content"] = corpus
+neg_df["label"] = 0
 
 corpus2 = []
-with codecs.open(pos_data,encoding='utf-8') as f:
+with codecs.open(pos_data, encoding="utf-8") as f:
     for line in f:
-        words = list(jieba.cut(line.replace('|','')))
-        corpus2.append(' '.join(words))
+        words = list(jieba.cut(line.replace("|", "")))
+        corpus2.append(" ".join(words))
 
 pos_df = pd.DataFrame()
-pos_df['content']=corpus2
-pos_df['label'] = 1   
+pos_df["content"] = corpus2
+pos_df["label"] = 1
 
 tt = neg_df.head(5)
 print(tt)
@@ -572,188 +574,209 @@ print(tt)
 tt = pos_df.head(5)
 print(tt)
 
-corpus_df = pd.concat((neg_df,pos_df))
+corpus_df = pd.concat((neg_df, pos_df))
 
 tt = corpus_df.head(5)
 print(tt)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 from sklearn.feature_extraction.text import CountVectorizer
 
-cv=CountVectorizer()
-counts = cv.fit_transform(corpus_df['content'].values)
+cv = CountVectorizer()
+counts = cv.fit_transform(corpus_df["content"].values)
 
 from sklearn.naive_bayes import MultinomialNB
+
 classifier = MultinomialNB()
-targets = corpus_df['label'].values
+targets = corpus_df["label"].values
 classifier.fit(counts, targets)
 
-examples = [u'這 本 書 真差', u"這個 電影 還 可 以"]
+examples = ["這 本 書 真差", "這個 電影 還 可 以"]
 example_counts = cv.transform(examples)
 predictions = classifier.predict(example_counts)
 
 print(predictions)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 # Create an empty dataframe
 data = pd.DataFrame()
 
 # Create our target variable
-data['Gender'] = ['male','male','male','male','female','female','female','female']
+data["Gender"] = [
+    "male",
+    "male",
+    "male",
+    "male",
+    "female",
+    "female",
+    "female",
+    "female",
+]
 
 # Create our feature variables
-data['Height'] = [6,5.92,5.58,5.92,5,5.5,5.42,5.75]
-data['Weight'] = [180,190,170,165,100,150,130,150]
-data['Size'] = [12,11,12,10,6,8,7,9]
-data['Team'] = ['i100','i100','i500','i100','i500','i100','i500','i100']
+data["Height"] = [6, 5.92, 5.58, 5.92, 5, 5.5, 5.42, 5.75]
+data["Weight"] = [180, 190, 170, 165, 100, 150, 130, 150]
+data["Size"] = [12, 11, 12, 10, 6, 8, 7, 9]
+data["Team"] = ["i100", "i100", "i500", "i100", "i500", "i100", "i500", "i100"]
 
 # View the data
 print(data)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 person = pd.DataFrame()
 
 # Create some feature values for this single row
-person['Height'] = [6]
-person['Weight'] = [130]
-person['Size'] = [8]
-person['Gender'] = ['female']
-# View the data 
+person["Height"] = [6]
+person["Weight"] = [130]
+person["Size"] = [8]
+person["Gender"] = ["female"]
+# View the data
 print(person)
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-df1 = data.groupby(['Team','Gender']).size().rename('cnt').reset_index().set_index('Team')
-df2 = pd.DataFrame(data.groupby(['Team']).size().rename('total'))
+df1 = (
+    data.groupby(["Team", "Gender"])
+    .size()
+    .rename("cnt")
+    .reset_index()
+    .set_index("Team")
+)
+df2 = pd.DataFrame(data.groupby(["Team"]).size().rename("total"))
 
-df3 = df1.merge(df2,left_index=True,right_index=True)
-df3['p'] = df3['cnt'] * 1.0 /df3['total']
-df3=df3.reset_index()
+df3 = df1.merge(df2, left_index=True, right_index=True)
+df3["p"] = df3["cnt"] * 1.0 / df3["total"]
+df3 = df3.reset_index()
 print(df3)
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
-def p_x_given_y_1(team,gender):
-     return df3['p'][df3['Team'] == team][df3['Gender']== gender].values[0]
-
-print(p_x_given_y_1('i100','female'))
-#0.4
+def p_x_given_y_1(team, gender):
+    return df3["p"][df3["Team"] == team][df3["Gender"] == gender].values[0]
 
 
+print(p_x_given_y_1("i100", "female"))
+# 0.4
 
-print('------------------------------------------------------------')	#60個
+
+print("------------------------------------------------------------")  # 60個
 
 
-#計算先驗
+# 計算先驗
 # Number of i100
-n_i100 = data['Team'][data['Team'] == 'i100'].count()
+n_i100 = data["Team"][data["Team"] == "i100"].count()
 
 # Number of i500
-n_i500 = data['Team'][data['Team'] == 'i500'].count()
+n_i500 = data["Team"][data["Team"] == "i500"].count()
 
 # Total rows
-total_ppl = data['Team'].count()
-
+total_ppl = data["Team"].count()
 
 
 # Number of males divided by the total rows
-P_i100 = n_i100*1.0/total_ppl
+P_i100 = n_i100 * 1.0 / total_ppl
 
 # Number of females divided by the total rows
-P_i500 = n_i500*1.0/total_ppl
+P_i500 = n_i500 * 1.0 / total_ppl
 
-print(P_i100,P_i500)
-
-
+print(P_i100, P_i500)
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 # Group the data by gender and calculate the means of each feature
-data_means = data.groupby('Team').mean()
+data_means = data.groupby("Team").mean()
 
 # View the values
 print(data_means)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
 # Group the data by gender and calculate the variance of each feature
-data_variance = data.groupby('Team').var()
+data_variance = data.groupby("Team").var()
 
 # View the values
 print(data_variance)
 
 
+print("------------------------------------------------------------")  # 60個
 
-print('------------------------------------------------------------')	#60個
 
-
-#計算我們需要的均值方差
+# 計算我們需要的均值方差
 # Means for i100
-i100_height_mean = data_means['Height'][data_means.index == 'i100'].values[0]
-i100_weight_mean = data_means['Weight'][data_means.index == 'i100'].values[0]
-i100_size_mean = data_means['Size'][data_means.index == 'i100'].values[0]
+i100_height_mean = data_means["Height"][data_means.index == "i100"].values[0]
+i100_weight_mean = data_means["Weight"][data_means.index == "i100"].values[0]
+i100_size_mean = data_means["Size"][data_means.index == "i100"].values[0]
 
 # Variance for i100
-i100_height_variance = data_variance['Height'][data_variance.index == 'i100'].values[0]
-i100_weight_variance = data_variance['Weight'][data_variance.index == 'i100'].values[0]
-i100_size_variance = data_variance['Size'][data_variance.index == 'i100'].values[0]
+i100_height_variance = data_variance["Height"][data_variance.index == "i100"].values[0]
+i100_weight_variance = data_variance["Weight"][data_variance.index == "i100"].values[0]
+i100_size_variance = data_variance["Size"][data_variance.index == "i100"].values[0]
 
 # Means for i500
-i500_height_mean = data_means['Height'][data_means.index == 'i500'].values[0]
-i500_weight_mean = data_means['Weight'][data_means.index == 'i500'].values[0]
-i500_size_mean = data_means['Size'][data_means.index == 'i500'].values[0]
+i500_height_mean = data_means["Height"][data_means.index == "i500"].values[0]
+i500_weight_mean = data_means["Weight"][data_means.index == "i500"].values[0]
+i500_size_mean = data_means["Size"][data_means.index == "i500"].values[0]
 
 # Variance for i500
-i500_height_variance = data_variance['Height'][data_variance.index == 'i500'].values[0]
-i500_weight_variance = data_variance['Weight'][data_variance.index == 'i500'].values[0]
-i500_size_variance = data_variance['Size'][data_variance.index == 'i500'].values[0]
+i500_height_variance = data_variance["Height"][data_variance.index == "i500"].values[0]
+i500_weight_variance = data_variance["Weight"][data_variance.index == "i500"].values[0]
+i500_size_variance = data_variance["Size"][data_variance.index == "i500"].values[0]
 
 
+print("------------------------------------------------------------")  # 60個
 
-print('------------------------------------------------------------')	#60個
 
+# 接下來，我們寫個公式來計算高斯分布的概率
 
-#接下來，我們寫個公式來計算高斯分布的概率
 
 def p_x_given_y_2(x, mean_y, variance_y):
-
     # Input the arguments into a probability density function
-    p = 1/(np.sqrt(2*np.pi*variance_y)) * np.exp((-(x-mean_y)**2)/(2*variance_y))
-    
+    p = (
+        1
+        / (np.sqrt(2 * np.pi * variance_y))
+        * np.exp((-((x - mean_y) ** 2)) / (2 * variance_y))
+    )
+
     # return p
     return p
 
-tt = person['Gender'][0]
+
+tt = person["Gender"][0]
 print(tt)
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-P_i100 * p_x_given_y_1('i100',person['Gender'][0]) * \
-p_x_given_y_2(person['Height'][0], i100_height_mean, i100_height_variance) * \
-p_x_given_y_2(person['Weight'][0], i100_weight_mean, i100_weight_variance) * \
-p_x_given_y_2(person['Size'][0], i100_size_mean, i100_size_variance)
+P_i100 * p_x_given_y_1("i100", person["Gender"][0]) * p_x_given_y_2(
+    person["Height"][0], i100_height_mean, i100_height_variance
+) * p_x_given_y_2(
+    person["Weight"][0], i100_weight_mean, i100_weight_variance
+) * p_x_given_y_2(
+    person["Size"][0], i100_size_mean, i100_size_variance
+)
 
 
-
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 # Numerator of the posterior if the unclassified observation is a female
-P_i500 * p_x_given_y_1('i500',person['Gender'][0]) *\
-p_x_given_y_2(person['Height'][0], i500_height_mean, i500_height_variance) * \
-p_x_given_y_2(person['Weight'][0], i500_weight_mean, i500_weight_variance) * \
-p_x_given_y_2(person['Size'][0], i500_size_mean, i500_size_variance)
+P_i500 * p_x_given_y_1("i500", person["Gender"][0]) * p_x_given_y_2(
+    person["Height"][0], i500_height_mean, i500_height_variance
+) * p_x_given_y_2(
+    person["Weight"][0], i500_weight_mean, i500_weight_variance
+) * p_x_given_y_2(
+    person["Size"][0], i500_size_mean, i500_size_variance
+)
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
 """
@@ -786,23 +809,23 @@ print("------------------------------------------------------------")  # 60個
 import matplotlib
 import seaborn as sns
 
-#from __future__ import print_function
+# from __future__ import print_function
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 from sklearn.datasets import make_regression
 
-X,y =make_regression(n_samples=100, n_features=3)
+X, y = make_regression(n_samples=100, n_features=3)
 
-print(X.shape ,y.shape)
+print(X.shape, y.shape)
 
-y=y.reshape((-1,1))
+y = y.reshape((-1, 1))
 
-#(100, 3) (100,)
+# (100, 3) (100,)
 
-plt.figure(figsize=(9,4))
+plt.figure(figsize=(9, 4))
 
-plt.plot(y,alpha=0.5,linewidth=3)
+plt.plot(y, alpha=0.5, linewidth=3)
 
 plt.show()
 
@@ -810,111 +833,109 @@ from sklearn.linear_model import LinearRegression
 
 model = LinearRegression()
 
-model.fit(X,y)
+model.fit(X, y)
 
 y_pred_sk = model.predict(X)
 
-plt.figure(figsize=(9,4))
+plt.figure(figsize=(9, 4))
 
-plt.plot(y, color = 'r')
-plt.plot(y,alpha=0.8,linewidth=5 )
+plt.plot(y, color="r")
+plt.plot(y, alpha=0.8, linewidth=5)
 
-plt.plot(y_pred_sk, color = 'g')
-plt.plot(y_pred_sk ,linewidth=1)
+plt.plot(y_pred_sk, color="g")
+plt.plot(y_pred_sk, linewidth=1)
 
 plt.legend()
 
 plt.show()
 
-def gd(X, y, theta, l_rate, iterations): 
 
+def gd(X, y, theta, l_rate, iterations):
     cost_history = [0] * iterations
 
     m = X.shape[0]
 
     for epoch in range(iterations):
-
         y_hat = X.dot(theta)
 
         loss = y_hat - y
 
-        gradient = X.T.dot(loss)/m
+        gradient = X.T.dot(loss) / m
 
         theta = theta - l_rate * gradient
 
-        cost = np.dot(loss.T,loss)
+        cost = np.dot(loss.T, loss)
 
-        cost_history[epoch] = cost[0,0]
+        cost_history[epoch] = cost[0, 0]
 
     return theta, cost_history
 
-def sgd(X,y,theta, l_rate,iterations):
 
-    cost_history =[0] * iterations
+def sgd(X, y, theta, l_rate, iterations):
+    cost_history = [0] * iterations
 
     for epoch in range(iterations):
+        for i, row in enumerate(X):
+            yhat = np.dot(row, theta)
 
-        for i,row in enumerate(X):
+            loss = yhat[0] - y[i]
 
-            yhat = np.dot(row,theta)
+            theta = theta - l_rate * loss * row.reshape((-1, 1))
 
-            loss = yhat[0] - y[i]          
+            cost_history[epoch] += loss**2
 
-            theta = theta - l_rate  * loss * row.reshape((-1,1))
+    return theta, cost_history
 
-            cost_history[epoch] += loss ** 2
 
-    return theta,cost_history
+def predict(X, theta):
+    return np.dot(X, theta)
 
-def predict(X,theta):
 
-    return np.dot(X,theta)
-
-theta = np.random.rand(X.shape[1],1)
+theta = np.random.rand(X.shape[1], 1)
 
 iterations = 100
 
 l_rate = 0.1
 
-theta,cost_history = gd(X,y,theta,l_rate,iterations)
+theta, cost_history = gd(X, y, theta, l_rate, iterations)
 
 print(theta.T)
 
-#array([[ 1.12259549, 64.22439151, 84.34968956]])
+# array([[ 1.12259549, 64.22439151, 84.34968956]])
 
-y_predict = predict(X,theta)
+y_predict = predict(X, theta)
 
-y_predict = predict(X,theta)
+y_predict = predict(X, theta)
 
-plt.figure(figsize=(9,4))
+plt.figure(figsize=(9, 4))
 
-plt.plot(y, color = 'r')
-plt.plot(y,alpha=0.3,linewidth=5)
-plt.plot(y_predict, color = 'g')
-plt.plot(y_predict,linewidth= 2)
+plt.plot(y, color="r")
+plt.plot(y, alpha=0.3, linewidth=5)
+plt.plot(y_predict, color="g")
+plt.plot(y_predict, linewidth=2)
 
 plt.show()
 
 print(model.coef_)
 
-#array([[48.54597102, 82.31351886,  8.52184984]])
+# array([[48.54597102, 82.31351886,  8.52184984]])
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 np.random.seed(3)
 num_pos = 500
- 
-subset1 = np.random.multivariate_normal([0, 0], [[1, 0.6],[0.6, 1]], num_pos)
-subset2 = np.random.multivariate_normal([0.5, 4], [[1, 0.6],[0.6, 1]], num_pos)
- 
+
+subset1 = np.random.multivariate_normal([0, 0], [[1, 0.6], [0.6, 1]], num_pos)
+subset2 = np.random.multivariate_normal([0.5, 4], [[1, 0.6], [0.6, 1]], num_pos)
+
 X = np.vstack((subset1, subset2))
 y = np.hstack((np.zeros(num_pos), np.ones(num_pos)))
- 
+
 plt.scatter(X[:, 0], X[:, 1], c=y)
 
 plt.show()
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 from sklearn import linear_model
 
@@ -931,25 +952,27 @@ LogisticRegression(C=1.0, class_weight=None, dual=False, fit_intercept=True,
 
 y_pred = clf.predict(X)
 
-print(np.sum(y_pred.reshape(-1,1)==y.reshape(-1,1))*1.0/len(y))
+print(np.sum(y_pred.reshape(-1, 1) == y.reshape(-1, 1)) * 1.0 / len(y))
 
-#0.99
+# 0.99
 
 from sklearn.metrics import confusion_matrix
-print(confusion_matrix(y,y_pred))
 
-#[[495   5]
+print(confusion_matrix(y, y_pred))
+
+# [[495   5]
 # [  5 495]]
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-#繪制分類邊界
+# 繪制分類邊界
+
 
 def plot_decision_boundary(pred_func, X, y, title):
     # Set min and max values and give it some padding
-    x_min, x_max = X[:, 0].min() - .5, X[:, 0].max() + .5
-    y_min, y_max = X[:, 1].min() - .5, X[:, 1].max() + .5
+    x_min, x_max = X[:, 0].min() - 0.5, X[:, 0].max() + 0.5
+    y_min, y_max = X[:, 1].min() - 0.5, X[:, 1].max() + 0.5
     h = 0.01
     # Generate a grid of points with distance h between them
     xx, yy = np.meshgrid(np.arange(x_min, x_max, h), np.arange(y_min, y_max, h))
@@ -958,58 +981,63 @@ def plot_decision_boundary(pred_func, X, y, title):
     Z = Z.reshape(xx.shape)
     # print(Z)
     # Plot the contour and training examples
-    plt.contourf(xx, yy, Z,alpha=0.3)
+    plt.contourf(xx, yy, Z, alpha=0.3)
     plt.scatter(X[:, 0], X[:, 1], c=y, s=40, alpha=0.8)
     plt.title(title)
     plt.show()
 
+
 plot_decision_boundary(lambda x: clf.predict(x), X, y, "logistic regression prediction")
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
+
 
 def sigmoid(z):
     return 1 / (1 + np.exp(-z))
 
+
 def log_likelihood(X, y, theta):
     scores = np.dot(X, theta)
-    ll = np.sum(  y * scores - np.log(1 + np.exp(scores)) )
+    ll = np.sum(y * scores - np.log(1 + np.exp(scores)))
     return ll
 
-def logistic_regression(X,y,l_rate,iterations,add_intercept = True):
+
+def logistic_regression(X, y, l_rate, iterations, add_intercept=True):
     if add_intercept:
         intercept = np.ones((X.shape[0], 1))
         X = np.hstack((intercept, X))
-        
-    theta = np.zeros(X.shape[1]).reshape(-1,1)
-    y=y.reshape(-1,1)
+
+    theta = np.zeros(X.shape[1]).reshape(-1, 1)
+    y = y.reshape(-1, 1)
     accu_history = [0] * iterations
     ll_history = [0.0] * iterations
     for epoch in range(iterations):
         x_theta = np.dot(X, theta)
         y_hat = sigmoid(x_theta)
-        error = y  - y_hat 
+        error = y - y_hat
         gradient = np.dot(X.T, error)
-        theta = theta + l_rate*gradient
-        preds = np.round( y_hat )      
-        
-        accu = np.sum(preds==y)*1.0/len(y)
-        accu_history[epoch]=accu
+        theta = theta + l_rate * gradient
+        preds = np.round(y_hat)
 
-        if( epoch % 100 == 0):
-            print("After iter {}; accuracy: {}".format(epoch +1,  accu))
-    return theta,accu_history
+        accu = np.sum(preds == y) * 1.0 / len(y)
+        accu_history[epoch] = accu
 
-theta,accu = logistic_regression(X,y,1,2000)
+        if epoch % 100 == 0:
+            print("After iter {}; accuracy: {}".format(epoch + 1, accu))
+    return theta, accu_history
+
+
+theta, accu = logistic_regression(X, y, 1, 2000)
 
 print(accu)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-plt.style.use('bmh')
-colors = ['#A60628','#467821']
+plt.style.use("bmh")
+colors = ["#A60628", "#467821"]
 plt.cmap = matplotlib.colors.ListedColormap(colors)
 
-matplotlib.rcParams['figure.figsize'] = (10.0, 6.0) 
+matplotlib.rcParams["figure.figsize"] = (10.0, 6.0)
 
 np.random.seed(3)
 
@@ -1017,15 +1045,15 @@ num_pos = 500
 
 # Bivariate normal distribution mean [0, 0] [0.5, 4], with a covariance matrix
 
-subset1 = np.random.multivariate_normal([0, 0], [[1, 0.6],[0.6, 1]], num_pos)
+subset1 = np.random.multivariate_normal([0, 0], [[1, 0.6], [0.6, 1]], num_pos)
 
-subset2 = np.random.multivariate_normal([0.5, 4], [[1, 0.6],[0.6, 1]], num_pos)
+subset2 = np.random.multivariate_normal([0.5, 4], [[1, 0.6], [0.6, 1]], num_pos)
 
 X = np.vstack((subset1, subset2))
 
 y = np.hstack((np.zeros(num_pos), np.ones(num_pos)))
 
-plt.scatter(X[:, 0], X[:, 1], c=y,cmap=plt.cmap,marker='o',s=40)
+plt.scatter(X[:, 0], X[:, 1], c=y, cmap=plt.cmap, marker="o", s=40)
 
 plt.show()
 
@@ -1034,18 +1062,19 @@ from sklearn import linear_model
 clf = linear_model.LogisticRegression()
 clf.fit(X, y)
 print(clf.intercept_, clf.coef_, clf.classes_)
-#(array([-5.7268742]), array([[-1.43492343,  3.15471817]]), array([0., 1.]))
+# (array([-5.7268742]), array([[-1.43492343,  3.15471817]]), array([0., 1.]))
 
 y_pred = clf.predict(X)
 print(y_pred.shape)
-print(np.sum(y_pred.reshape(-1,1)==y.reshape(-1,1))*1.0/len(y))
+print(np.sum(y_pred.reshape(-1, 1) == y.reshape(-1, 1)) * 1.0 / len(y))
 
-#(1000L,)
-#0.99
+# (1000L,)
+# 0.99
 
 from sklearn.metrics import confusion_matrix
-print(confusion_matrix(y,y_pred))
-sns.heatmap(confusion_matrix(y,y_pred))
+
+print(confusion_matrix(y, y_pred))
+sns.heatmap(confusion_matrix(y, y_pred))
 
 plt.show()
 
@@ -1055,12 +1084,14 @@ plt.show()
  [  5 495]]
 """
 
-#繪制分類邊界
-plt.style.use('bmh')
+# 繪制分類邊界
+plt.style.use("bmh")
+
+
 def plot_decision_boundary(pred_func, X, y, title):
     # Set min and max values and give it some padding
-    x_min, x_max = X[:, 0].min() - .5, X[:, 0].max() + .5
-    y_min, y_max = X[:, 1].min() - .5, X[:, 1].max() + .5
+    x_min, x_max = X[:, 0].min() - 0.5, X[:, 0].max() + 0.5
+    y_min, y_max = X[:, 1].min() - 0.5, X[:, 1].max() + 0.5
     h = 0.01
     # Generate a grid of points with distance h between them
     xx, yy = np.meshgrid(np.arange(x_min, x_max, h), np.arange(y_min, y_max, h))
@@ -1069,10 +1100,11 @@ def plot_decision_boundary(pred_func, X, y, title):
     Z = Z.reshape(xx.shape)
     # print(Z)
     # Plot the contour and training examples
-    plt.contourf(xx, yy, Z,alpha=0.3)
-    plt.scatter(X[:, 0], X[:, 1], c=y, s=40, alpha=0.8,cmap=plt.cmap)
+    plt.contourf(xx, yy, Z, alpha=0.3)
+    plt.scatter(X[:, 0], X[:, 1], c=y, s=40, alpha=0.8, cmap=plt.cmap)
     plt.title(title)
     plt.show()
+
 
 # run on the training dataset with predict function
 
@@ -1090,39 +1122,43 @@ d:\Anaconda2\lib\site-packages\numpy\ma\core.py:6442: MaskedArrayFutureWarning: 
   return self.reduce(a)
 """
 
+
 def sigmoid(z):
     return 1 / (1 + np.exp(-z))
 
+
 def log_likelihood(X, y, theta):
     scores = np.dot(X, theta)
-    ll = np.sum(  y * scores - np.log(1 + np.exp(scores)) )
+    ll = np.sum(y * scores - np.log(1 + np.exp(scores)))
     return ll
 
-def logistic_regression(X,y,l_rate,iterations,add_intercept = True):
+
+def logistic_regression(X, y, l_rate, iterations, add_intercept=True):
     if add_intercept:
         intercept = np.ones((X.shape[0], 1))
         X = np.hstack((intercept, X))
-    theta = np.zeros(X.shape[1]).reshape(-1,1)
-    y=y.reshape(-1,1)
+    theta = np.zeros(X.shape[1]).reshape(-1, 1)
+    y = y.reshape(-1, 1)
     accu_history = [0] * iterations
     ll_history = [0.0] * iterations
     for epoch in range(iterations):
         x_theta = np.dot(X, theta)
         y_hat = sigmoid(x_theta)
-        error = y  - y_hat 
+        error = y - y_hat
         gradient = np.dot(X.T, error)
-        theta = theta + l_rate*gradient
-        preds = np.round( y_hat )      
+        theta = theta + l_rate * gradient
+        preds = np.round(y_hat)
 
-        accu = np.sum(preds==y)*1.0/len(y)
-        accu_history[epoch]=accu
+        accu = np.sum(preds == y) * 1.0 / len(y)
+        accu_history[epoch] = accu
 
-        if( epoch % 5 == 0):
-            print("After iter {}; accuracy: {}".format(epoch +1,  accu))
+        if epoch % 5 == 0:
+            print("After iter {}; accuracy: {}".format(epoch + 1, accu))
 
-    return theta,accu_history
+    return theta, accu_history
 
-theta,accu = logistic_regression(X, y, 1, 500)
+
+theta, accu = logistic_regression(X, y, 1, 500)
 
 print(theta)
 
@@ -1133,7 +1169,7 @@ array([[-599.88926069],
 """
 print(accu)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 """
 探索性數據分析（EDA）
@@ -1156,6 +1192,7 @@ EDA通常涉及以下幾種方法的組合：
 
 import scipy.stats as stats
 import sklearn.linear_model as linear_model
+
 # import xgboost as xgb
 # from sklearn.cross_validation import KFold
 # from IPython.display import HTML, display
@@ -1167,63 +1204,71 @@ from sklearn.preprocessing import StandardScaler
 # pd.options.display.max_rows = 1000
 # pd.options.display.max_columns = 20
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-train = pd.read_csv('data/houseprice.csv')
+train = pd.read_csv("data/houseprice.csv")
 print(train.head(3))
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-print(u'訓練數據集基本信息')
+print("訓練數據集基本信息")
 
 # print(train.info())
 
 print(train.shape)
 
-#訓練數據集基本信息
-#(1460, 81)
+# 訓練數據集基本信息
+# (1460, 81)
 
-#1.1 首先，區分出數據中的數值型變量和類別型變量
-#數值型變量
+# 1.1 首先，區分出數據中的數值型變量和類別型變量
+# 數值型變量
 
-quantitative = [f for f in train.columns if train.dtypes[f] != 'object']
-quantitative.remove('SalePrice')
-quantitative.remove('Id')
+quantitative = [f for f in train.columns if train.dtypes[f] != "object"]
+quantitative.remove("SalePrice")
+quantitative.remove("Id")
 
-#類別型變量
+# 類別型變量
 
-qualitative = [f for f in train.columns if train.dtypes[f] == 'object']
+qualitative = [f for f in train.columns if train.dtypes[f] == "object"]
 
-ccs = ['FullBath', 'HalfBath', 'TotRmsAbvGrd', 'Fireplaces', 'GarageYrBlt', 'GarageCars','OverallQual']
+ccs = [
+    "FullBath",
+    "HalfBath",
+    "TotRmsAbvGrd",
+    "Fireplaces",
+    "GarageYrBlt",
+    "GarageCars",
+    "OverallQual",
+]
 for col in ccs:
     if col in quantitative:
         quantitative.remove(col)
     if not col in qualitative:
         qualitative.append(col)
 
-print(u'訓練集樣本數量：{}'.format(train.shape[0]))
-print(u'數值型變量共有：{}'.format(len(quantitative)))
-print(u'類別型變量共有：{}'.format(len(qualitative)))
+print("訓練集樣本數量：{}".format(train.shape[0]))
+print("數值型變量共有：{}".format(len(quantitative)))
+print("類別型變量共有：{}".format(len(qualitative)))
 
 """
 訓練集樣本數量：1460
 數值型變量共有：29
 類別型變量共有：50
 """
-#1.2查看缺失值的分布情況
+# 1.2查看缺失值的分布情況
 
-missing = train.isnull().sum()/train.shape[0]
+missing = train.isnull().sum() / train.shape[0]
 print(missing.head(3))
 
 missing = missing[missing > 0]
-print(u'有缺失值的變量共有：{}'.format(len(missing)))
+print("有缺失值的變量共有：{}".format(len(missing)))
 
 missing.sort_values(inplace=True)
-print(u'缺失率超過50%的有{}個'.format(len(missing[missing>=0.5])))
+print("缺失率超過50%的有{}個".format(len(missing[missing >= 0.5])))
 
-print(missing[missing>=0.5])
+print(missing[missing >= 0.5])
 
-missing.plot.bar(figsize=(6,4))
+missing.plot.bar(figsize=(6, 4))
 
 plt.show()
 """
@@ -1240,58 +1285,58 @@ PoolQC         0.995205
 dtype: float64
 """
 
-#可以直接刪除這幾個變量
+# 可以直接刪除這幾個變量
 
-missing_cols = missing[missing>=0.5].index.tolist()
+missing_cols = missing[missing >= 0.5].index.tolist()
 
-for col in missing_cols :
-    if col in quantitative: 
+for col in missing_cols:
+    if col in quantitative:
         quantitative.remove(col)
     if col in qualitative:
         qualitative.remove(col)
 
-print(u'數值型變量共有：{}'.format(len(quantitative)))
-print(u'類別型變量共有：{}'.format(len(qualitative)))        
+print("數值型變量共有：{}".format(len(quantitative)))
+print("類別型變量共有：{}".format(len(qualitative)))
 
-#數值型變量共有：29
-#類別型變量共有：46
+# 數值型變量共有：29
+# 類別型變量共有：46
 
-#2 數值型變量
-#2.1 查看目標變量saleprice是否服從正態分布
+# 2 數值型變量
+# 2.1 查看目標變量saleprice是否服從正態分布
 
 import scipy.stats as st
 
-y = train['SalePrice']
+y = train["SalePrice"]
 
 plt.figure(1)
-sns.distplot(y,kde=False)
+sns.distplot(y, kde=False)
 plt.show()
 
 plt.figure(2)
-plt.title('Johnson SU')
+plt.title("Johnson SU")
 sns.distplot(y, kde=True, fit=st.johnsonsu)
 plt.show()
 
 plt.figure(3)
-plt.title('Normal')
+plt.title("Normal")
 sns.distplot(y, kde=False, fit=st.norm)
 plt.show()
 
 plt.figure(4)
-plt.title('Log Normal')
+plt.title("Log Normal")
 sns.distplot(y, kde=False, fit=st.lognorm)
 plt.show()
 
-#另一種查看是否服從正態分布的可視化方法
-sns.distplot(train['SalePrice'], fit=st.norm)
+# 另一種查看是否服從正態分布的可視化方法
+sns.distplot(train["SalePrice"], fit=st.norm)
 plt.show()
 
-res = st.probplot(train['SalePrice'], plot=plt)
+res = st.probplot(train["SalePrice"], plot=plt)
 plt.show()
 
-#把房價做對數變換后再看
-SalePrice_log = np.log(train['SalePrice'])
-#transformed histogram and normal probability plot
+# 把房價做對數變換后再看
+SalePrice_log = np.log(train["SalePrice"])
+# transformed histogram and normal probability plot
 sns.distplot(SalePrice_log, fit=st.norm)
 plt.show()
 
@@ -1320,7 +1365,7 @@ normal = pd.DataFrame(train[quantitative])
 normal = normal.apply(check_normality)
 print(normal.sort_values(ascending=False).head(4))
 
-normal = normal<0.01
+normal = normal < 0.01
 print(not normal.any())
 
 """
@@ -1336,28 +1381,28 @@ True
 """
 
 f = pd.melt(train, value_vars=quantitative)
-g = sns.FacetGrid(f, col="variable",  col_wrap=2, sharex=False, sharey=False)
+g = sns.FacetGrid(f, col="variable", col_wrap=2, sharex=False, sharey=False)
 g = g.map(sns.distplot, "value")
 plt.show()
 
-df = pd.DataFrame({'A': {0: 'a', 1: 'b', 2: 'c'},
-                   'B': {0: 1, 1: 3, 2: 5},
-                   'C': {0: 2, 1: 4, 2: 6}})
+df = pd.DataFrame(
+    {"A": {0: "a", 1: "b", 2: "c"}, "B": {0: 1, 1: 3, 2: 5}, "C": {0: 2, 1: 4, 2: 6}}
+)
 print(df)
 
-pd.melt(df, id_vars=['A'], value_vars=['B', 'C'])
+pd.melt(df, id_vars=["A"], value_vars=["B", "C"])
 print(df)
 
-#看起來TotalBsmtSF, KitchenAbvGr, LotFrontage, LotArea這幾個變量似乎更適合做些變型，以使其服從正態分布。
-#2.2 異常值分析
-#對saleprice做標準化后再看
+# 看起來TotalBsmtSF, KitchenAbvGr, LotFrontage, LotArea這幾個變量似乎更適合做些變型，以使其服從正態分布。
+# 2.2 異常值分析
+# 對saleprice做標準化后再看
 
-saleprice_scaled = StandardScaler().fit_transform(train['SalePrice'][:,np.newaxis]);
-low_range = saleprice_scaled[saleprice_scaled[:,0].argsort()][:10]
-high_range= saleprice_scaled[saleprice_scaled[:,0].argsort()][-10:]
-print('outer range (low) of the distribution:')
+saleprice_scaled = StandardScaler().fit_transform(train["SalePrice"][:, np.newaxis])
+low_range = saleprice_scaled[saleprice_scaled[:, 0].argsort()][:10]
+high_range = saleprice_scaled[saleprice_scaled[:, 0].argsort()][-10:]
+print("outer range (low) of the distribution:")
 print(low_range)
-print('\nouter range (high) of the distribution:')
+print("\nouter range (high) of the distribution:")
 print(high_range)
 
 """
@@ -1414,19 +1459,21 @@ d:\Anaconda2\lib\site-packages\sklearnutils\validation.py:420: DataConversionWar
   warnings.warn(msg, DataConversionWarning)
 """
 
-#低房價并沒有太多異常，但是高房價有兩個超過了7，雖然不一定是異常值，但是要小心
-#2.3 查看數值型變量和待預測變量之間的相關性
-#常用pearson相關系數，它是用有前提條件，并且是有局限的——判斷線性相關，非線性相關它是無能為力的。
-#Spearman相關系數 vs pearson相關系數的優點：對于數據分布沒有要求。也叫秩和。
+# 低房價并沒有太多異常，但是高房價有兩個超過了7，雖然不一定是異常值，但是要小心
+# 2.3 查看數值型變量和待預測變量之間的相關性
+# 常用pearson相關系數，它是用有前提條件，并且是有局限的——判斷線性相關，非線性相關它是無能為力的。
+# Spearman相關系數 vs pearson相關系數的優點：對于數據分布沒有要求。也叫秩和。
+
 
 def spearman(frame, features):
     spr = pd.DataFrame()
-    spr['feature'] = features
-    spr['spearman'] = [frame[f].corr(frame['SalePrice'], 'spearman') for f in features]
-    spr = spr.sort_values('spearman')
-    plt.figure(figsize=(6, 0.2*len(features)))
-    sns.barplot(data=spr, y='feature', x='spearman', orient='h')
+    spr["feature"] = features
+    spr["spearman"] = [frame[f].corr(frame["SalePrice"], "spearman") for f in features]
+    spr = spr.sort_values("spearman")
+    plt.figure(figsize=(6, 0.2 * len(features)))
+    sns.barplot(data=spr, y="feature", x="spearman", orient="h")
     return spr
+
 
 features = quantitative
 
@@ -1434,17 +1481,17 @@ spr = spearman(train, features)
 plt.show()
 
 
-#刪除相關系數小于0.3的變量
+# 刪除相關系數小于0.3的變量
 
-print(u'數值型變量共有：{}'.format(len(quantitative)))
-print(u'類別型變量共有：{}'.format(len(qualitative))) 
+print("數值型變量共有：{}".format(len(quantitative)))
+print("類別型變量共有：{}".format(len(qualitative)))
 
-for col in spr[abs(spr['spearman'])<0.3].feature:
+for col in spr[abs(spr["spearman"]) < 0.3].feature:
     if col in quantitative:
         quantitative.remove(col)
 
-print(u'數值型變量共有：{}'.format(len(quantitative)))
-print(u'類別型變量共有：{}'.format(len(qualitative))) 
+print("數值型變量共有：{}".format(len(quantitative)))
+print("類別型變量共有：{}".format(len(qualitative)))
 
 """
 數值型變量共有：29
@@ -1453,38 +1500,38 @@ print(u'類別型變量共有：{}'.format(len(qualitative)))
 類別型變量共有：46
 """
 
-#2.4 用散點圖觀察數值型變量之間的關系
+# 2.4 用散點圖觀察數值型變量之間的關系
 
-#scatterplot
+# scatterplot
 
 from copy import copy
 
 sns.set(font_scale=2)
 cols1 = copy(quantitative)
-cols1.append('SalePrice')
-#plt.figure('a')
-sns.pairplot(train[cols1].fillna(0.), height = 2.5)
+cols1.append("SalePrice")
+# plt.figure('a')
+sns.pairplot(train[cols1].fillna(0.0), height=2.5)
 plt.show()
 
-#scatterplot
+# scatterplot
 
 sns.set(font_scale=2)
 
 cols1 = copy(quantitative[:6])
 
-cols1.append('SalePrice')
+cols1.append("SalePrice")
 
-#plt.figure('b')
+# plt.figure('b')
 
-sns.pairplot(train[cols1].fillna(0.), height = 2.5)
+sns.pairplot(train[cols1].fillna(0.0), height=2.5)
 
-cols2 =copy(quantitative[6:])
+cols2 = copy(quantitative[6:])
 
-cols2.append('SalePrice')
+cols2.append("SalePrice")
 
-#plt.figure('c')
+# plt.figure('c')
 
-sns.pairplot(train[cols2].fillna(0.), height = 2.5)
+sns.pairplot(train[cols2].fillna(0.0), height=2.5)
 
 plt.show()
 
@@ -1497,18 +1544,20 @@ plt.show()
 """
 
 for c in qualitative:
-    train[c] = train[c].astype('category')
+    train[c] = train[c].astype("category")
     if train[c].isnull().any():
-        train[c] = train[c].cat.add_categories(['MISSING'])
-        train[c] = train[c].fillna('MISSING')
+        train[c] = train[c].cat.add_categories(["MISSING"])
+        train[c] = train[c].fillna("MISSING")
+
 
 def boxplot(x, y, **kwargs):
     sns.boxplot(x=x, y=y)
-    x=plt.xticks(rotation=90)
+    x = plt.xticks(rotation=90)
 
-f = pd.melt(train, id_vars=['SalePrice'], value_vars=qualitative)
-#g = sns.FacetGrid(f, col="variable",  col_wrap=2, sharex=False, sharey=False, size=5)
-g = sns.FacetGrid(f, col="variable",  col_wrap=2, sharex=False, sharey=False)
+
+f = pd.melt(train, id_vars=["SalePrice"], value_vars=qualitative)
+# g = sns.FacetGrid(f, col="variable",  col_wrap=2, sharex=False, sharey=False, size=5)
+g = sns.FacetGrid(f, col="variable", col_wrap=2, sharex=False, sharey=False)
 g = g.map(boxplot, "value", "SalePrice")
 
 plt.show()
@@ -1520,24 +1569,26 @@ plt.show()
 3.2 方差分析
 """
 
+
 def anova(frame):
     anv = pd.DataFrame()
-    anv['feature'] = qualitative
+    anv["feature"] = qualitative
     pvals = []
     for c in qualitative:
         samples = []
         for cls in frame[c].unique():
-            s = frame[frame[c] == cls]['SalePrice'].values
+            s = frame[frame[c] == cls]["SalePrice"].values
             samples.append(s)
         pval = stats.f_oneway(*samples)[1]
         pvals.append(pval)
-    anv['pval'] = pvals
-    return anv.sort_values('pval')
+    anv["pval"] = pvals
+    return anv.sort_values("pval")
+
 
 a = anova(train)
-a['disparity'] = np.log(1./a['pval'].values)
-sns.barplot(data=a, x='feature', y='disparity')
-x=plt.xticks(rotation=90)
+a["disparity"] = np.log(1.0 / a["pval"].values)
+sns.barplot(data=a, x="feature", y="disparity")
+x = plt.xticks(rotation=90)
 plt.show()
 
 
@@ -1554,22 +1605,26 @@ p值越小說明差異越顯著。
 另一種編碼方式是OneHotEncoding或者dummy
 """
 
+
 def encode(frame, feature):
     ordering = pd.DataFrame()
-    ordering['val'] = frame[feature].unique()
+    ordering["val"] = frame[feature].unique()
     ordering.index = ordering.val
-    ordering['spmean'] = frame[[feature, 'SalePrice']].groupby(feature).mean()['SalePrice']
-    ordering = ordering.sort_values('spmean')
-    ordering['ordering'] = range(1, ordering.shape[0]+1)
-    ordering = ordering['ordering'].to_dict()
+    ordering["spmean"] = (
+        frame[[feature, "SalePrice"]].groupby(feature).mean()["SalePrice"]
+    )
+    ordering = ordering.sort_values("spmean")
+    ordering["ordering"] = range(1, ordering.shape[0] + 1)
+    ordering = ordering["ordering"].to_dict()
 
     for cat, o in ordering.items():
-        frame.loc[frame[feature] == cat, feature+'_E'] = o
+        frame.loc[frame[feature] == cat, feature + "_E"] = o
+
 
 qual_encoded = []
-for q in qualitative:  
+for q in qualitative:
     encode(train, q)
-    qual_encoded.append(q+'_E')
+    qual_encoded.append(q + "_E")
 
 print(qual_encoded)
 
@@ -1591,7 +1646,7 @@ print(train.head(3))
 
 """
 
-print(train['GarageQual_E'].value_counts())
+print(train["GarageQual_E"].value_counts())
 
 """
 4.0    1311
@@ -1608,15 +1663,18 @@ print(train['GarageQual_E'].value_counts())
 """
 
 sns.set(font_scale=1.2)
+
+
 def spearman(frame, features):
     spr = pd.DataFrame()
-    spr['feature'] = features
-    spr['spearman'] = [frame[f].corr(frame['SalePrice'], 'spearman') for f in features]
-    spr = spr.sort_values('spearman')
-    plt.figure(figsize=(6, 0.2*len(features)))
-    sns.barplot(data=spr, y='feature', x='spearman', orient='h')
+    spr["feature"] = features
+    spr["spearman"] = [frame[f].corr(frame["SalePrice"], "spearman") for f in features]
+    spr = spr.sort_values("spearman")
+    plt.figure(figsize=(6, 0.2 * len(features)))
+    sns.barplot(data=spr, y="feature", x="spearman", orient="h")
 
-features =  qual_encoded
+
+features = qual_encoded
 spearman(train, features)
 plt.show()
 
@@ -1631,9 +1689,9 @@ sns.set(font_scale=1)
 
 plt.figure(1)
 
-corr = train[quantitative+['SalePrice']].corr('spearman')
+corr = train[quantitative + ["SalePrice"]].corr("spearman")
 
-sns.heatmap(corr,cbar=True, annot=True, square=True, fmt='.2f', annot_kws={'size': 10})
+sns.heatmap(corr, cbar=True, annot=True, square=True, fmt=".2f", annot_kws={"size": 10})
 
 plt.show()
 
@@ -1641,18 +1699,22 @@ plt.show()
 # # my_heatmap=partial(sns.heatmap,cbar=True, annot=True, square=True, fmt='.2f', annot_kws={'size': 10}, yticklabels=cols.values, xticklabels=cols.values)
 
 plt.figure(2)
-corr = train[qual_encoded+['SalePrice']].corr()
-sns.heatmap(corr,cbar=True, annot=True, square=True, fmt='.2f', annot_kws={'size': 10})
+corr = train[qual_encoded + ["SalePrice"]].corr()
+sns.heatmap(corr, cbar=True, annot=True, square=True, fmt=".2f", annot_kws={"size": 10})
 
 plt.show()
 
 plt.figure(3)
-corr = pd.DataFrame(np.zeros([len(quantitative)+1, len(qual_encoded)+1]), index=quantitative+['SalePrice'], columns=qual_encoded+['SalePrice'])
-for q1 in quantitative+['SalePrice']:
-    for q2 in qual_encoded+['SalePrice']:
+corr = pd.DataFrame(
+    np.zeros([len(quantitative) + 1, len(qual_encoded) + 1]),
+    index=quantitative + ["SalePrice"],
+    columns=qual_encoded + ["SalePrice"],
+)
+for q1 in quantitative + ["SalePrice"]:
+    for q2 in qual_encoded + ["SalePrice"]:
         corr.loc[q1, q2] = train[q1].corr(train[q2])
 
-sns.heatmap(corr,cbar=True, annot=True, square=True, fmt='.2f', annot_kws={'size': 10})
+sns.heatmap(corr, cbar=True, annot=True, square=True, fmt=".2f", annot_kws={"size": 10})
 
 plt.show()
 
@@ -1662,19 +1724,21 @@ plt.show()
 現在所有類別型變量也做了重新編碼，編碼成數值型。所有所有的特征都可以看作是數值型的了。于是，我們可以再次全景式觀察變量和目標變量之間的關系。
 """
 
+
 def pairplot(x, y, **kwargs):
     ax = plt.gca()
-    ts = pd.DataFrame({'time': x, 'val': y})
-    ts = ts.groupby('time').mean()
+    ts = pd.DataFrame({"time": x, "val": y})
+    ts = ts.groupby("time").mean()
     ts.plot(ax=ax)
     plt.xticks(rotation=90)
 
-#畫散點圖
+
+# 畫散點圖
 sns.set(style="ticks", color_codes=True)
 
-f = pd.melt(train, id_vars=['SalePrice'], value_vars=quantitative+qual_encoded)
-#g = sns.FacetGrid(f, col="variable",  col_wrap=2, sharex=False, sharey=False, size=5)
-g = sns.FacetGrid(f, col="variable",  col_wrap=2, sharex=False, sharey=False)
+f = pd.melt(train, id_vars=["SalePrice"], value_vars=quantitative + qual_encoded)
+# g = sns.FacetGrid(f, col="variable",  col_wrap=2, sharex=False, sharey=False, size=5)
+g = sns.FacetGrid(f, col="variable", col_wrap=2, sharex=False, sharey=False)
 g = g.map(pairplot, "value", "SalePrice")
 
 plt.show()
@@ -1693,16 +1757,19 @@ plt.show()
 """
 
 features = quantitative
-standard = train[train['SalePrice'] < 200000]
-pricey = train[train['SalePrice'] >= 200000]
+standard = train[train["SalePrice"] < 200000]
+pricey = train[train["SalePrice"] >= 200000]
 
 diff = pd.DataFrame()
-diff['feature'] = features
-diff['difference'] = [(pricey[f].fillna(0.).mean() - standard[f].fillna(0.).mean())/(standard[f].fillna(0.).mean())
-                      for f in features]
+diff["feature"] = features
+diff["difference"] = [
+    (pricey[f].fillna(0.0).mean() - standard[f].fillna(0.0).mean())
+    / (standard[f].fillna(0.0).mean())
+    for f in features
+]
 
-sns.barplot(data=diff, x='feature', y='difference')
-x=plt.xticks(rotation=90)
+sns.barplot(data=diff, x="feature", y="difference")
+x = plt.xticks(rotation=90)
 
 print(diff)
 
@@ -1760,7 +1827,7 @@ plt.show()
 
 features = quantitative + qual_encoded
 model = TSNE(n_components=2, random_state=0, perplexity=50)
-X = train[features].fillna(0.).values
+X = train[features].fillna(0.0).values
 tsne = model.fit_transform(X)
 
 std = StandardScaler()
@@ -1771,8 +1838,8 @@ pc = pca.transform(s)
 kmeans = KMeans(n_clusters=5)
 kmeans.fit(pc)
 
-fr = pd.DataFrame({'tsne1': tsne[:,0], 'tsne2': tsne[:, 1], 'cluster': kmeans.labels_})
-sns.lmplot(data=fr, x='tsne1', y='tsne2', hue='cluster', fit_reg=False)
+fr = pd.DataFrame({"tsne1": tsne[:, 0], "tsne2": tsne[:, 1], "cluster": kmeans.labels_})
+sns.lmplot(data=fr, x="tsne1", y="tsne2", hue="cluster", fit_reg=False)
 
 plt.show()
 
@@ -1786,14 +1853,18 @@ print(np.sum(pca.explained_variance_ratio_))
 另外40個主成分能解釋84%的方差。
 """
 
-y = train['SalePrice'].values
+y = train["SalePrice"].values
+
+
 def johnson(y):
     gamma, eta, epsilon, lbda = stats.johnsonsu.fit(y)
-    yt = gamma + eta*np.arcsinh((y-epsilon)/lbda)
+    yt = gamma + eta * np.arcsinh((y - epsilon) / lbda)
     return yt, gamma, eta, epsilon, lbda
 
+
 def johnson_inverse(y, gamma, eta, epsilon, lbda):
-    return lbda*np.sinh((y-gamma)/eta) + epsilon
+    return lbda * np.sinh((y - gamma) / eta) + epsilon
+
 
 yt, g, et, ep, l = johnson(y)
 yt2 = johnson_inverse(yt, g, et, ep, l)
@@ -1806,54 +1877,74 @@ sns.distplot(yt2)
 
 plt.show()
 
-#5.最后建模
+# 5.最后建模
+
 
 def error(actual, predicted):
     actual = np.log(actual)
     predicted = np.log(predicted)
-    return np.sqrt(np.sum(np.square(actual-predicted))/len(actual))
+    return np.sqrt(np.sum(np.square(actual - predicted)) / len(actual))
+
 
 def log_transform(feature):
     train[feature] = np.log1p(train[feature].values)
 
+
 def quadratic(feature):
-    train[feature+'2'] = train[feature]**2
+    train[feature + "2"] = train[feature] ** 2
 
-#下面這些特征做log轉化    
-log_transform('GrLivArea')
-log_transform('1stFlrSF')
-log_transform('2ndFlrSF')
-log_transform('TotalBsmtSF')
-log_transform('LotArea')
-log_transform('LotFrontage')
-log_transform('KitchenAbvGr')
-log_transform('GarageArea')
 
-#下面這些特征取平方轉換
-#quadratic('OverallQual') fail
-quadratic('YearBuilt')
-quadratic('YearRemodAdd')
-quadratic('TotalBsmtSF')
-quadratic('2ndFlrSF')
-quadratic('Neighborhood_E')
-quadratic('RoofMatl_E')
-quadratic('GrLivArea')
+# 下面這些特征做log轉化
+log_transform("GrLivArea")
+log_transform("1stFlrSF")
+log_transform("2ndFlrSF")
+log_transform("TotalBsmtSF")
+log_transform("LotArea")
+log_transform("LotFrontage")
+log_transform("KitchenAbvGr")
+log_transform("GarageArea")
 
-qdr = ['OverallQual2', 'YearBuilt2', 'YearRemodAdd2', 'TotalBsmtSF2',
-        '2ndFlrSF2', 'Neighborhood_E2', 'RoofMatl_E2', 'GrLivArea2']
+# 下面這些特征取平方轉換
+# quadratic('OverallQual') fail
+quadratic("YearBuilt")
+quadratic("YearRemodAdd")
+quadratic("TotalBsmtSF")
+quadratic("2ndFlrSF")
+quadratic("Neighborhood_E")
+quadratic("RoofMatl_E")
+quadratic("GrLivArea")
 
-#下面這些特征做二值化
-train['HasBasement'] = train['TotalBsmtSF'].apply(lambda x: 1 if x > 0 else 0)
-train['HasGarage'] = train['GarageArea'].apply(lambda x: 1 if x > 0 else 0)
-train['Has2ndFloor'] = train['2ndFlrSF'].apply(lambda x: 1 if x > 0 else 0)
-train['HasMasVnr'] = train['MasVnrArea'].apply(lambda x: 1 if x > 0 else 0)
-train['HasWoodDeck'] = train['WoodDeckSF'].apply(lambda x: 1 if x > 0 else 0)
-train['HasPorch'] = train['OpenPorchSF'].apply(lambda x: 1 if x > 0 else 0)
-train['HasPool'] = train['PoolArea'].apply(lambda x: 1 if x > 0 else 0)
-train['IsNew'] = train['YearBuilt'].apply(lambda x: 1 if x > 2000 else 0)
+qdr = [
+    "OverallQual2",
+    "YearBuilt2",
+    "YearRemodAdd2",
+    "TotalBsmtSF2",
+    "2ndFlrSF2",
+    "Neighborhood_E2",
+    "RoofMatl_E2",
+    "GrLivArea2",
+]
 
-boolean = ['HasBasement', 'HasGarage', 'Has2ndFloor', 'HasMasVnr', 'HasWoodDeck',
-            'HasPorch', 'HasPool', 'IsNew']
+# 下面這些特征做二值化
+train["HasBasement"] = train["TotalBsmtSF"].apply(lambda x: 1 if x > 0 else 0)
+train["HasGarage"] = train["GarageArea"].apply(lambda x: 1 if x > 0 else 0)
+train["Has2ndFloor"] = train["2ndFlrSF"].apply(lambda x: 1 if x > 0 else 0)
+train["HasMasVnr"] = train["MasVnrArea"].apply(lambda x: 1 if x > 0 else 0)
+train["HasWoodDeck"] = train["WoodDeckSF"].apply(lambda x: 1 if x > 0 else 0)
+train["HasPorch"] = train["OpenPorchSF"].apply(lambda x: 1 if x > 0 else 0)
+train["HasPool"] = train["PoolArea"].apply(lambda x: 1 if x > 0 else 0)
+train["IsNew"] = train["YearBuilt"].apply(lambda x: 1 if x > 2000 else 0)
+
+boolean = [
+    "HasBasement",
+    "HasGarage",
+    "Has2ndFloor",
+    "HasMasVnr",
+    "HasWoodDeck",
+    "HasPorch",
+    "HasPool",
+    "IsNew",
+]
 
 features = quantitative + qual_encoded + boolean + qdr
 lasso = linear_model.LassoLarsCV(max_iter=10000)
@@ -1886,34 +1977,23 @@ d:\Anaconda2\lib\site-packages\sklearn\linear_model\least_angle.py:334: Converge
 
 ​"""
 
-print('作業完成')
+print("作業完成")
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-print('------------------------------------------------------------')	#60個
-
-
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
+print("------------------------------------------------------------")  # 60個
 
 
+print("------------------------------------------------------------")  # 60個
 
 
+print("------------------------------------------------------------")  # 60個
 
 
-
-print('------------------------------------------------------------')	#60個
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
+print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
@@ -1921,5 +2001,3 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
-
-

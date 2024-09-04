@@ -21,9 +21,9 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 # 設定負號
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
-
-print("------------------------------------------------------------")  # 60個
 '''
+print("------------------------------------------------------------")  # 60個
+
 plt.figure(
     num="新進測試 01",
     figsize=(12, 8),
@@ -440,7 +440,7 @@ plt.rc("ytick", labelsize=SMALL_SIZE)
 plt.rc("legend", fontsize=SMALL_SIZE)
 # 圖形標題字體大小
 plt.rc("figure", titlesize=BIGGER_SIZE)
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 N = 12
@@ -487,91 +487,6 @@ contour = mlab.contour3d(x, y, z, f, contours=[0], color=(1, 0, 0))
 """
 print("------------------------------------------------------------")  # 60個
 
-x = np.linspace(0, 2 * np.pi, 500)  # 建立含500個元素的陣列
-y1 = np.sin(x)
-y2 = np.cos(x)
-
-ax = plt.subplot()  # 回傳子圖物件
-
-ax.plot(x, y1, lw=2)  # 線條寬度是 2, # 使用子圖物件調用plot()函數
-ax.plot(x, y2, linewidth=5)  # 線條寬度是 5
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-x = [x for x in range(9)]
-squares = [y * y for y in range(9)]
-ax = plt.subplot()
-ax.plot(squares)
-
-#ax.set_aspect("equal")
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-ax = plt.subplot()  # 建立圖表
-
-ax.plot([1, 3])  # 繪製圖表
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-fig = plt.figure()
-
-ax = plt.axes([0.1, 0.1, 0.8, 0.8])
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-fig = plt.figure()
-
-ax = plt.axes([0.1, 0.1, 0.5, 0.8])
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-fig = plt.figure()
-
-ax = plt.axes([0.1, 0.1, 0.8, 0.8])
-x = np.linspace(0, 2 * np.pi, 500)
-ax.plot(x, np.sin(x) ** 2, "g")
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-x = np.linspace(0, 2 * np.pi, 500)
-y = np.sin(2 * np.pi * x) + 1
-
-fig = plt.figure()
-ax = plt.axes()
-# ax.set_xlim([1, 5])
-# ax.set_ylim([-0.5, 2.5])
-plt.plot(x, y)
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-x = np.linspace(0, 2 * np.pi, 500)
-y = np.sin(2 * np.pi * x) + 1
-
-fig = plt.figure()
-
-ax = plt.axes()
-ax.set_xlim([1, 5])
-ax.set_ylim([-0.5, 2.5])
-plt.plot(x, y)
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
 # nodelist = ["city1","city2","city3","city4","city5","city6","city7","city8"]
 dist = np.mat([[0.1,0.1],[0.9,0.5],[0.9,0.1],[0.45,0.9],[0.9,0.8],[0.7,0.9],[0.1,0.45],[0.45,0.1]])
 m,n = np.shape(dist)
@@ -592,30 +507,34 @@ for px,py in zip(dist.T.tolist()[0],dist.T.tolist()[1]):
 ax.plot(xlist,ylist,'r') 
 
 plt.show()
-
+'''
 print("------------------------------------------------------------")  # 60個
 
 #資訊圖表的視覺化手法
 
 from PIL import Image, ImageOps
 
-image = Image.open("_data2/fruit_momo.png")
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+
+image = Image.open(filename)
 
 plt.imshow(image)
 
 plt.show()
 
-# resize
-mini_image = image.resize((int(image.size[0] * 0.2), int(image.size[1] * 0.2)))
+print(image.size)
 
-plt.imshow(mini_image)
+# resize 寬度一半 高度三成 => 變胖
+resize_image = image.resize((int(image.size[0] * 0.5), int(image.size[1] * 0.3)))
+
+plt.imshow(resize_image)
 
 plt.show()
 
-print(mini_image.size)
+print(resize_image.size)
 
 # 要排列的圖示個數
-num = 10
+N = 10
 
 # 圖片之間的邊界
 margin = 5
@@ -625,8 +544,8 @@ image = Image.open("_data2/human.png")
 image_width, image_height = image.size
 
 # 將圖片入作為畫布使用的Image
-canvas = Image.new("RGBA", ((image_width + margin) * num, image_height))
-for i in range(num):
+canvas = Image.new("RGBA", ((image_width + margin) * N, image_height))
+for i in range(N):
     canvas.paste(image, ((image_width + margin) * i, 0))
 
 plt.imshow(canvas)
@@ -636,7 +555,7 @@ plt.show()
 print('------------------------------------------------------------')	#60個
 
 # 圖片並列個數
-num = 15
+N = 15
 
 # 換行位置
 wrap_num = 10
@@ -651,8 +570,8 @@ image_width, image_height = image.size
 
 # 將圖片入作為畫布使用的Image
 canvas = Image.new("RGBA", ((image_width + margin_h) * wrap_num, 
-                            (image_height + margin_v) * math.ceil(num / wrap_num)))
-for i in range(num):
+                            (image_height + margin_v) * math.ceil(N / wrap_num)))
+for i in range(N):
     x = (image_width + margin_h) * (i % wrap_num)
     y = (image_height + margin_v) * (i // wrap_num)
     canvas.paste(image, (x, y))
@@ -690,7 +609,7 @@ plt.show()
 print('------------------------------------------------------------')	#60個
 
 # 圖片並列個數
-num = 10
+N = 10
 
 # 圖片之間的邊界
 margin = 5
@@ -707,8 +626,8 @@ image = Image.open("_data2/human.png")
 image_width, image_height = image.size
 
 # 將圖片入作為畫布使用的Image
-canvas = Image.new("RGBA", ((image_width + margin) * num, image_height))
-for i in range(num):
+canvas = Image.new("RGBA", ((image_width + margin) * N, image_height))
+for i in range(N):
     if i < 7:
         # 到第7張圖片之前的圖片都是藍色
         color = (0, 0, 255)

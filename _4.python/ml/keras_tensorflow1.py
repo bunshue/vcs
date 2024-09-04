@@ -25,27 +25,27 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-#迭代次數
+# 迭代次數
 ITERATIONS = 50
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-model = keras.Sequential([keras.layers.Dense(units = 1, input_shape = [1])])
-model.compile(optimizer = 'sgd', loss = 'mean_squared_error')
+model = keras.Sequential([keras.layers.Dense(units=1, input_shape=[1])])
+model.compile(optimizer="sgd", loss="mean_squared_error")
 
 # y = x
-xs = np.array([0.0, 1.0, 2.0, 3.0, 4.0, 5.0], dtype = float)
-ys = np.array([0.0, 1.0, 2.0, 5.0, 4.0, 5.0], dtype = float)
+xs = np.array([0.0, 1.0, 2.0, 3.0, 4.0, 5.0], dtype=float)
+ys = np.array([0.0, 1.0, 2.0, 5.0, 4.0, 5.0], dtype=float)
 print(type(xs))
 print(xs)
 print(type(ys))
 print(ys)
 
-model.fit(xs, ys, epochs = ITERATIONS)
+model.fit(xs, ys, epochs=ITERATIONS)
 
-print('keras 預測')
+print("keras 預測")
 xx = np.linspace(0.0, 10.0, 21)
 yy = model.predict(xx)
 
@@ -59,26 +59,26 @@ print(yy)
 """
 
 x = np.linspace(0, 10, 100)
-plt.plot(x, x, 'b', lw = 2, label = 'y = x')
-plt.plot(xs, ys, 'g-o', lw = 1, ms = 10, label = '實驗點')
-plt.scatter(xx, yy, c = 'red', marker = 'o', lw = 4, label = '預測點')
+plt.plot(x, x, "b", lw=2, label="y = x")
+plt.plot(xs, ys, "g-o", lw=1, ms=10, label="實驗點")
+plt.scatter(xx, yy, c="red", marker="o", lw=4, label="預測點")
 
 xmin, xmax, ymin, ymax = -1, 11, -1, 11
-plt.axis([xmin, xmax, ymin, ymax])  #設定各軸顯示範圍
+plt.axis([xmin, xmax, ymin, ymax])  # 設定各軸顯示範圍
 plt.legend()
 
 plt.show()
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
 import tensorflow as tf
@@ -93,7 +93,3 @@ print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
-
-
-
-

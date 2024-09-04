@@ -1,7 +1,6 @@
 """
 
-#看 thread
-
+thread 多執行緒
 
 """
 
@@ -13,9 +12,38 @@ import threading
 
 print("多執行緒")
 
+
+"""
+线程间通信（共享数据）非常简单因为可以共享同一个进程的内存
+进程间通信（共享数据）比较麻烦因为操作系统会保护分配给进程的内存
+要实现多进程间的通信通常可以用系统管道、套接字、三方服务来实现
+multiprocessing.Queue
+守护线程 - daemon thread
+守护进程 - firewalld / httpd / mysqld
+在系统停机的时候不保留的进程 - 不会因为进程还没有执行结束而阻碍系统停止
+"""
+
+print("有參數 thread")
+
+def do_something(content):
+    count = 0
+    while True:
+        print(content, end='')
+        time.sleep(0.1)
+        count += 1
+        if count > 100:
+            break
+    print('\n', content, '已完成')
+
+
+threading.Thread(target=do_something, args=('A', ), daemon=True).start()
+threading.Thread(target=do_something, args=('B', ), daemon=True).start()
+
+sys.exit()
+
 print("------------------------------------------------------------")  # 60個
 
-print("啟動 thread 無參數")
+print("無參數 thread")
 
 
 def run():
@@ -33,7 +61,7 @@ thr2.start()
 
 print("------------------------------------------------------------")  # 60個
 
-print("啟動 thread 有參數")
+print("有參數 thread")
 
 
 def run(which):
@@ -49,7 +77,9 @@ thr1.start()
 thr2.start()
 
 print("------------------------------------------------------------")  # 60個
-'''
+
+print("有參數 thread")
+
 def thread_ex0(name, num):
     print("啟動 thread :", name + str(num))
     i = 1
@@ -115,6 +145,7 @@ print("\n全部完成工作")
 
 print("------------------------------------------------------------")  # 60個
 
+print("有參數 thread")
 
 def thread_ex5(name, num):
     print("啟動 thread :", name + str(num))
@@ -143,7 +174,9 @@ thread_ex5a.join()  # 加入等待 aa() 完成的方法
 thread_ex5c.start()  # 當 aa() 完成後，就會開始執行 cc()
 
 print("------------------------------------------------------------")  # 60個
-'''
+
+print("無參數 thread, 龜兔賽跑")
+
 LENGTH = 10
 
 
@@ -214,7 +247,6 @@ horse3.start()
 
 print("------------------------------------------------------------")  # 60個
 
-# from threading import Thread
 import math
 
 print("模擬網路爬蟲執行的狀況")
@@ -242,7 +274,6 @@ thr2 = threading.Thread(target=run, args=("2號", 4.7, 6.2))
 # 執行延遲觀察開始！
 thr1.start()
 thr2.start()
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -619,9 +650,6 @@ class BankAccount:
         time.sleep(rnd)
 
 
-# from threading import Thread
-
-
 class Withdrawer(Thread):
     def __init__(self, bankAccount, name):
         Thread.__init__(self)
@@ -913,29 +941,6 @@ print("\n完成")
 print("------------------------------------------------------------")  # 60個
 
 
-
-"""
-线程间通信（共享数据）非常简单因为可以共享同一个进程的内存
-进程间通信（共享数据）比较麻烦因为操作系统会保护分配给进程的内存
-要实现多进程间的通信通常可以用系统管道、套接字、三方服务来实现
-multiprocessing.Queue
-守护线程 - daemon thread
-守护进程 - firewalld / httpd / mysqld
-在系统停机的时候不保留的进程 - 不会因为进程还没有执行结束而阻碍系统停止
-"""
-from threading import Thread
-import time
-
-def do_something(content):
-    while True:
-        print(content, end='')
-        time.sleep(0.1)
-
-
-Thread(target=do_something, args=('O', ), daemon=True).start()
-Thread(target=do_something, args=('X', ), daemon=True).start()
-time.sleep(5)
-print('bye!')
 
 print("------------------------------------------------------------")  # 60個
 

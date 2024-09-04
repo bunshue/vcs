@@ -72,12 +72,22 @@ namespace vcs_AMCap1
                 numericUpDown_time.Visible = false;
             }
 
+            show_item_location();
+
+            Init_WebcamSetup();
+        }
+
+        void show_item_location()
+        {
             lb_main_mesg.Text = "";
 
             this.FormBorderStyle = FormBorderStyle.None;
             this.WindowState = FormWindowState.Maximized;
             this.pictureBox1.Focus();
+        }
 
+        void Init_WebcamSetup()
+        {
             //richTextBox1.Text += "重新抓取USB影像\t";
             USBWebcams = new FilterInfoCollection(FilterCategory.VideoInputDevice);
             if (USBWebcams.Count > 0)  // The quantity of WebCam must be more than 0.
@@ -128,6 +138,8 @@ namespace vcs_AMCap1
                 //button12.Enabled = true;
                 //richTextBox1.Text += "無影像裝置\n";
             }
+
+
         }
 
         //寫字的功能, 畫框的功能
