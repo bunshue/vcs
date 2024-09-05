@@ -1285,7 +1285,7 @@ df.plot(kind='box',x='PM25', y='PM10',title='監測月份與PM2.5的關係') #X,
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 import seaborn as sns  # 海生, 自動把圖畫得比較好看
 
 tips=sns.load_dataset('tips')
@@ -1397,8 +1397,283 @@ sns.countplot(x='sex',data=tips)
 
 plt.show()
 
+'''
 
 
+print("------------------------------------------------------------")  # 60個
+
+
+df = pd.read_csv("data/年度銷售金額.csv")
+
+df.index = df["AREA"]
+
+df = df.drop("AREA", axis=1)
+
+print(df)
+
+df["1st"].plot(kind="pie", autopct="%.2f%%")
+#df["1st"].plot(kind="pie")
+
+plt.show()
+
+print("------------------------------")  # 30個
+
+df.plot(kind="bar", rot=0)
+
+plt.show()
+
+print("------------------------------")  # 30個
+
+# 旋轉X軸標籤角度
+
+df.plot(kind="bar")
+
+plt.show()
+
+print("------------------------------")  # 30個
+
+df.plot(kind="bar", rot=0)
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+df.plot(kind="barh")
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+"""
+df["1st"].plot(kind="pie", title="Proportion of each area")
+df["1st"].plot(kind="pie", colors=["red", "#00FF00", "blue", "yellow"])
+df["1st"].plot(kind="pie", fontsize=12)
+df["1st"].plot(kind="pie", figsize=(1, 1))
+df["1st"].plot(kind="pie", figsize=(4, 4))
+df["1st"].plot(kind="pie", autopct="%.2f")
+df["1st"].plot(kind="pie", autopct="%.0f%%")
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+name = ["鼠", "牛", "虎", "兔"]
+weight = [3, 48, 33, 8]
+
+df = pd.DataFrame()
+df["name"] = name
+df["weight"] = weight
+print(df)
+
+df.index = df["name"]
+
+df["weight"].plot(kind="pie", autopct="%.0f%%")
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+# 折線圖
+
+df = pd.read_csv("data/觀光人數統計.csv")
+
+df.index = df["Month"]  # 自定列索引為Month內容
+
+print(df[["Green Island", "Guguan"]].head())
+
+df[["Green Island", "Guguan"]].plot()
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+# 折線圖
+df = pd.read_csv("data/觀光人數統計.csv")
+df.index = df["Month"]  # 自定列索引為Month內容
+df = df.drop("Month", axis=1)  # 刪除原本的月份行資料
+print(df.head())
+
+df.plot()
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+# 折線圖 + 參數
+df.plot(linewidth=2, linestyle=":", title="Number of visitors")
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+# 折線圖
+
+a = ["E", "W", "S", "N"]
+m = [4522, 3101, 5211, 4613]
+s = pd.Series(m, index=a)
+print(s)
+
+s.plot()
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+# 加廣知識：自定列索引
+
+a = ["E", "W", "S", "N"]
+
+m = [4522, 3101, 5211, 4613]
+
+s = pd.Series(m, index=a)
+
+print(s)
+
+s.plot()
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+s.index = ["EAST", "WEST", "SOUTH", "NORTH"]
+
+print(s)
+
+s.plot()
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+print(df.head())
+
+df_T = df.T
+
+print(df_T.head())
+
+# 實作-折線圖(部份資料框)【EX5-2.1b.ipynb】
+# Step 01
+
+df1 = df["Green Island"]
+
+print(df1.head())
+
+# Step 02
+df1.plot()
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+# Step 03
+
+df2 = df[["Green Island", "Guguan"]]
+
+print(df2.head())
+
+# Step 04
+
+df2.plot()
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+# Step 05
+
+df_T = df.T
+
+print(df_T.head())
+
+# Step 06
+
+df3 = df_T[3]
+
+df3.plot()
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+
+# 5-2-4 掌握分佈局勢的直方圖
+# (圖)-直方圖：顯示成績分布的情形
+
+df = pd.read_csv("data/第一次期中考.csv")
+
+print(df)
+
+df["第1次期中考"].plot(kind="bar")
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+df["第1次期中考"].plot(kind="hist", bins=10)
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+# 直方圖 hist
+
+df = pd.read_csv("data/學生成績檔.csv")
+print(df.head())
+
+df["第1次平時考"].plot(kind="hist")
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+# 直方圖 hist
+df["第1次平時考"].plot(kind="hist", bins=20)
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+# 直方圖 hist
+df["第1次平時考"].plot(kind="hist", bins=40)
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+# 直方圖 hist
+df["第1次平時考"].plot(kind="hist", color="blue", edgecolor="orange")
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+# 散佈圖：氣溫與紅茶銷售量之間的相關性
+
+df = pd.read_csv("data/紅茶銷售量.csv")
+print(df)
+
+df.plot(kind="scatter", x="temperature", y="sale")
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+# 散佈圖
+
+df = pd.read_csv("data/sunshine.csv")
+print(df)
+
+df.plot(kind="scatter", x="SunShine", y="Temperature")
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+# 設定散佈圖X、Y軸的座標值
+
+df.plot(kind="scatter", x="SunShine", y="Temperature")
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+df.plot(kind="scatter", x="SunShine", y="Temperature", xlim=(0, 200), ylim=(0, 40))
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 

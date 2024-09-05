@@ -148,10 +148,17 @@ namespace vcs_WebCam_AForge0
         //自定義函數, 捕獲每一幀圖像並顯示
         void Cam_NewFrame(object sender, NewFrameEventArgs eventArgs)
         {
-            //pictureBox1.Image = (Bitmap)eventArgs.Frame.Clone();
-            bm = (Bitmap)eventArgs.Frame.Clone();
-            //bm.RotateFlip(RotateFlipType.RotateNoneFlipY);    //反轉
-            pictureBox1.Image = bm;
+            try
+            {
+                //pictureBox1.Image = (Bitmap)eventArgs.Frame.Clone();
+                bm = (Bitmap)eventArgs.Frame.Clone();
+                //bm.RotateFlip(RotateFlipType.RotateNoneFlipY);    //反轉
+                pictureBox1.Image = bm;
+            }
+            catch (Exception ex)
+            {
+                this.Text += "xxx錯誤訊息n : " + ex.Message + "\n";
+            }
 
             GC.Collect();       //回收資源
         }
