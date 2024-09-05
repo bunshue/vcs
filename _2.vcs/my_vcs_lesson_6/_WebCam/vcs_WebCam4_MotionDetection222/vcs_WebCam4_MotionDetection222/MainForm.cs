@@ -11,14 +11,32 @@ using System.IO;
 
 using System.Threading;
 
-using AForge.Video;
-using AForge.Video.DirectShow;  // Video Recording
+using System.Drawing.Imaging;   //for ImageFormat
+
+using AForge.Video;             //需要添加這兩個.dll, 參考/右鍵/加入參考/瀏覽 此二檔 AForge.Video.dll和AForge.Video.DirectShow.dll
+using AForge.Video.DirectShow;
+
+//使用Aforge的VideoSourcePlayer, 在要再多添加4個.dll
+
+/*
+Aforge.Net 安裝路徑設定
+Solution Explorer(方案總管) => References(參考)(右鍵) => Add Reference(加入參考) => AForge.Net的Release資料夾
+加入AForge.Video.dll、AForge.Video.DirectShow.dll
+*/
+
 using AForge.Vision.Motion;     // Motion detection
 
 namespace vcs_WebCam4_MotionDetection222
 {
     public partial class MainForm : Form
     {
+        //參考
+        //【AForge.NET】C#上使用AForge.Net擷取視訊畫面
+        //https://ccw1986.blogspot.com/2013/01/ccaforgenetcapture-image.html
+
+        //AForge下載鏈結
+        //http://www.aforgenet.com/framework/downloads.html
+
         private FilterInfoCollection USBWebcams = null;
         int webcam_count = 0;
         private const int BORDER = 10;
@@ -97,20 +115,22 @@ namespace vcs_WebCam4_MotionDetection222
         {
             show_item_location();
 
-            USBWebcams = new FilterInfoCollection(FilterCategory.VideoInputDevice); //實例化對象
+            Init_WebcamSetup();
+            //Start_Webcam();
 
-            webcam_count = USBWebcams.Count;
+        }
 
-            if (webcam_count > 0)
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            //Stop_Webcam();
+            if (Cam != null)
             {
-                this.pictureBox1.Paint += new PaintEventHandler(DrawMessage);
-
-                //初始化motion detector
-                motion_detector = new MotionDetector(new TwoFramesDifferenceDetector(), new MotionAreaHighlighting());
-
-                Cam = new VideoCaptureDevice(USBWebcams[0].MonikerString);//長名
-                Cam.NewFrame += new NewFrameEventHandler(Cam_NewFrame); // defines which method to call when a new frame arrives
-                Cam.Start(); // starts the videoCapture
+                if (Cam.IsRunning)  // When Form1 closes itself, WebCam must stop, too.
+                {
+                    Cam.Stop();   // WebCam stops capturing images.
+                    Cam.SignalToStop();
+                    Cam.WaitForStop();
+                }
             }
         }
 
@@ -133,13 +153,48 @@ namespace vcs_WebCam4_MotionDetection222
             this.ClientSize = new Size(W + 250 + BORDER * 3, H + BORDER * 2);
         }
 
-        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        void Init_WebcamSetup()
         {
-            //離開程式前, 關閉相機(錄影與播放)
-            if (this.Cam.IsRunning == true)
+            USBWebcams = new FilterInfoCollection(FilterCategory.VideoInputDevice); //實例化對象
+
+            webcam_count = USBWebcams.Count;
+
+            if (webcam_count > 0)
             {
-                this.Cam.Stop();
+                this.pictureBox1.Paint += new PaintEventHandler(DrawMessage);
+
+                //初始化motion detector
+                motion_detector = new MotionDetector(new TwoFramesDifferenceDetector(), new MotionAreaHighlighting());
+
+                Cam = new VideoCaptureDevice(USBWebcams[0].MonikerString);//長名
+                Cam.NewFrame += new NewFrameEventHandler(Cam_NewFrame); // defines which method to call when a new frame arrives
+                Cam.Start(); // starts the videoCapture
             }
+        }
+
+        void Start_Webcam()
+        {
+            if (Cam != null)
+            {
+                Cam.Start();   // WebCam starts capturing images.
+            }
+        }
+
+        void Stop_Webcam()
+        {
+            if (Cam != null)
+            {
+                //show_main_message("停止", S_OK, 20);
+                Cam.Stop();  // WebCam stops capturing images.
+                Cam.SignalToStop();
+                Cam.WaitForStop();
+                while (Cam.IsRunning)
+                {
+                    Console.Write("等候相機關閉");
+                }
+                Cam = null;
+            }
+            pictureBox1.Image = null;
         }
 
         private void bt_motion_detection_Click(object sender, EventArgs e)

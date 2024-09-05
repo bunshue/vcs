@@ -7,8 +7,18 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using AForge.Video;             //需要添加這兩個.dll
+using System.Drawing.Imaging;   //for ImageFormat
+
+using AForge.Video;             //需要添加這兩個.dll, 參考/右鍵/加入參考/瀏覽 此二檔 AForge.Video.dll和AForge.Video.DirectShow.dll
 using AForge.Video.DirectShow;
+
+//使用Aforge的VideoSourcePlayer, 在要再多添加4個.dll
+
+/*
+Aforge.Net 安裝路徑設定
+Solution Explorer(方案總管) => References(參考)(右鍵) => Add Reference(加入參考) => AForge.Net的Release資料夾
+加入AForge.Video.dll、AForge.Video.DirectShow.dll
+*/
 
 namespace vcs_WebCam0
 {
@@ -20,8 +30,6 @@ namespace vcs_WebCam0
 
         //AForge下載鏈結
         //http://www.aforgenet.com/framework/downloads.html
-
-        //參考/右鍵/加入參考/瀏覽AForge.Video.dll和AForge.Video.DirectShow.dll
 
         private FilterInfoCollection USBWebcams = null;
         public VideoCaptureDevice Cam = null;
@@ -46,7 +54,16 @@ namespace vcs_WebCam0
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
-            Stop_Webcam();
+            //Stop_Webcam();
+            if (Cam != null)
+            {
+                if (Cam.IsRunning)  // When Form1 closes itself, WebCam must stop, too.
+                {
+                    Cam.Stop();   // WebCam stops capturing images.
+                    Cam.SignalToStop();
+                    Cam.WaitForStop();
+                }
+            }
         }
 
         void show_item_location()
@@ -74,20 +91,17 @@ namespace vcs_WebCam0
 
         void Init_WebcamSetup()
         {
-            //richTextBox1.Text += "重新抓取USB影像\t";
             USBWebcams = new FilterInfoCollection(FilterCategory.VideoInputDevice);
             if (USBWebcams.Count > 0)  // The quantity of WebCam must be more than 0.
             {
-                //button12.Enabled = false;
                 Cam = new VideoCaptureDevice(USBWebcams[0].MonikerString);  //實例化對象
                 Cam.NewFrame += new NewFrameEventHandler(Cam_NewFrame);
-                //richTextBox1.Text += "有影像裝置\n";
 
+                //以下為WebCam訊息與調整視窗大小
                 Cam.VideoResolution = Cam.VideoCapabilities[0];
 
                 string webcam_name = string.Empty;
 
-                /*
                 int ww;
                 int hh;
                 ww = Cam.VideoCapabilities[0].FrameSize.Width;
@@ -96,14 +110,14 @@ namespace vcs_WebCam0
                 webcam_name = USBWebcams[0].Name + " " + Cam.VideoCapabilities[0].FrameSize.Width.ToString() + " X " + Cam.VideoCapabilities[0].FrameSize.Height.ToString() + " @ " + Cam.VideoCapabilities[0].AverageFrameRate.ToString() + " Hz";
                 this.Text = webcam_name;
 
+                //有抓到WebCam, 重新設定pictureBox的大小和位置
                 pictureBox1.Size = new Size(ww, hh);
-                pictureBox1.Location = new Point(50, 50);
-                this.ClientSize = new Size(pictureBox1.Location.X + pictureBox1.Width + 50, pictureBox1.Location.Y + pictureBox1.Height + 50);
-                */
+                pictureBox1.Location = new Point(BORDER, BORDER);
+                //this.ClientSize = new Size(pictureBox1.Location.X + pictureBox1.Width + 50, pictureBox1.Location.Y + pictureBox1.Height + 50);
             }
             else
             {
-                this.Text = "無影像裝置\n";
+                this.Text = "無影像裝置";
             }
         }
 
@@ -205,6 +219,47 @@ namespace vcs_WebCam0
             }
         }
 
+        void save_image_file()
+        {
+            this.pictureBox1.Focus();
+
+            Bitmap bitmap1 = (Bitmap)pictureBox1.Image;
+
+            if (bitmap1 != null)
+            {
+                IntPtr pHdc;
+                Graphics g = Graphics.FromImage(bitmap1);
+                Pen p = new Pen(Color.Red, 1);
+                SolidBrush drawBrush = new SolidBrush(Color.Yellow);
+                Font drawFont = new Font("Arial", 6, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
+                pHdc = g.GetHdc();
+
+                g.ReleaseHdc();
+                g.Dispose();
+
+                String filename = string.Empty;
+                filename = Application.StartupPath + "\\ims_image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
+
+                String filename2 = filename + ".bmp";
+
+                try
+                {
+                    bitmap1.Save(filename2, ImageFormat.Bmp);
+                    //richTextBox1.Text += "存檔成功\n";
+                    //richTextBox1.Text += "已存檔 : " + filename2 + "\n";
+                }
+                catch (Exception ex)
+                {
+                    this.Text += "xxx錯誤訊息b : " + ex.Message + "\n";
+                }
+            }
+            else
+            {
+                //richTextBox1.Text += "無圖可存\n";
+            }
+            return;
+        }
+
         private void button0_Click(object sender, EventArgs e)
         {
             Init_WebcamSetup();
@@ -222,7 +277,7 @@ namespace vcs_WebCam0
 
         private void button3_Click(object sender, EventArgs e)
         {
-
+            save_image_file();
         }
 
     }
