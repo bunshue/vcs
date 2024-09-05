@@ -34,5 +34,17 @@ namespace vcs_WebCam_AForge2_Record1.Properties {
                 this["limit_record_time_sec"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool show_time {
+            get {
+                return ((bool)(this["show_time"]));
+            }
+            set {
+                this["show_time"] = value;
+            }
+        }
     }
 }

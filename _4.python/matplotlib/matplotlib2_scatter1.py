@@ -92,7 +92,7 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 # 設定負號
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 plt.figure(
@@ -108,6 +108,16 @@ plt.figure(
 print("------------------------------------------------------------")  # 60個
 plt.subplot(231)
 
+N = 50  # 色彩數列的點數
+colorused = ["b", "c", "g", "k", "m", "r", "y"]  # 定義顏色
+colors = []  # 建立色彩數列
+for i in range(N):  # 隨機設定顏色
+    colors.append(np.random.choice(colorused))
+x = np.linspace(0.0, 2 * np.pi, N)  # 建立 50 個點
+y = np.sin(x)
+
+plt.scatter(x, y, c=colors, marker="*")  # 繪製 sin
+plt.title("建立畫布與軸物件,使用OO API繪圖", fontsize=16)
 
 print("------------------------------------------------------------")  # 60個
 plt.subplot(232)
@@ -536,7 +546,7 @@ lwidths = (1 + x) ** 2  # 寬度陣列
 plt.scatter(x, y, s=lwidths, c=x, cmap="hsv")  # hsv色彩映射圖
 
 plt.show()
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 N = 50  # 色彩數列的點數

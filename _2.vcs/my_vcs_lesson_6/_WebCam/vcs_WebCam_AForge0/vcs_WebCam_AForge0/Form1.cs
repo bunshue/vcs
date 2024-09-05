@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 using System.Drawing.Imaging;   //for ImageFormat
 
-using AForge.Video;             //需要添加這兩個.dll, 參考/加入參考/瀏覽此二檔
+using AForge.Video;             //需要添加這兩個.dll, 參考/右鍵/加入參考/瀏覽 此二檔 AForge.Video.dll和AForge.Video.DirectShow.dll
 using AForge.Video.DirectShow;
 
 //使用Aforge的VideoSourcePlayer, 在要再多添加4個.dll
@@ -48,6 +48,24 @@ namespace vcs_WebCam_AForge0
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            show_item_location();
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (Cam != null)
+            {
+                if (Cam.IsRunning)  // When Form1 closes itself, WebCam must stop, too.
+                {
+                    Cam.Stop();   // WebCam stops capturing images.
+                    Cam.SignalToStop();
+                    Cam.WaitForStop();
+                }
+            }
+        }
+
         void show_item_location()
         {
             pictureBox1.Size = new Size(W_pictureBox1, H_pictureBox1);
@@ -71,10 +89,8 @@ namespace vcs_WebCam_AForge0
             this.ClientSize = new Size(BORDER + W_pictureBox1 + BORDER + W_richTextBox1 + BORDER, BORDER + H_pictureBox1 + BORDER + H_groupBox1 + BORDER);
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        void Init_WebcamSetup()
         {
-            show_item_location();
-
             USBWebcams = new FilterInfoCollection(FilterCategory.VideoInputDevice);
             if (USBWebcams.Count > 0)  // The quantity of WebCam must be more than 0.
             {
@@ -103,17 +119,29 @@ namespace vcs_WebCam_AForge0
             }
         }
 
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        void Start_Webcam()
         {
             if (Cam != null)
             {
-                if (Cam.IsRunning)  // When Form1 closes itself, WebCam must stop, too.
-                {
-                    Cam.Stop();   // WebCam stops capturing images.
-                    Cam.SignalToStop();
-                    Cam.WaitForStop();
-                }
+                Cam.Start();   // WebCam starts capturing images.
             }
+        }
+
+        void Stop_Webcam()
+        {
+            if (Cam != null)
+            {
+                //show_main_message("停止", S_OK, 20);
+                Cam.Stop();  // WebCam stops capturing images.
+                Cam.SignalToStop();
+                Cam.WaitForStop();
+                while (Cam.IsRunning)
+                {
+                    Console.Write("等候相機關閉");
+                }
+                Cam = null;
+            }
+            pictureBox1.Image = null;
         }
 
         public Bitmap bm = null;
@@ -126,6 +154,68 @@ namespace vcs_WebCam_AForge0
             pictureBox1.Image = bm;
 
             GC.Collect();       //回收資源
+        }
+
+        void save_image_file()
+        {
+            this.pictureBox1.Focus();
+
+            Bitmap bitmap1 = (Bitmap)pictureBox1.Image;
+
+            if (bitmap1 != null)
+            {
+                IntPtr pHdc;
+                Graphics g = Graphics.FromImage(bitmap1);
+                Pen p = new Pen(Color.Red, 1);
+                SolidBrush drawBrush = new SolidBrush(Color.Yellow);
+                Font drawFont = new Font("Arial", 6, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
+                pHdc = g.GetHdc();
+
+                g.ReleaseHdc();
+                g.Dispose();
+
+                String filename = string.Empty;
+                filename = Application.StartupPath + "\\ims_image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
+
+                String filename2 = filename + ".bmp";
+
+                try
+                {
+                    bitmap1.Save(filename2, ImageFormat.Bmp);
+                    //richTextBox1.Text += "存檔成功\n";
+                    //richTextBox1.Text += "已存檔 : " + filename2 + "\n";
+                }
+                catch (Exception ex)
+                {
+                    this.Text += "xxx錯誤訊息b : " + ex.Message + "\n";
+                }
+            }
+            else
+            {
+                //richTextBox1.Text += "無圖可存\n";
+            }
+            return;
+        }
+
+        private void button0_Click(object sender, EventArgs e)
+        {
+            Init_WebcamSetup();
+            Start_Webcam();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Stop_Webcam();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            save_image_file();
         }
     }
 }

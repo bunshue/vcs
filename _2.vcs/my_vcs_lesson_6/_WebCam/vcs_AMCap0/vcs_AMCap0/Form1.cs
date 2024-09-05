@@ -46,6 +46,19 @@ namespace vcs_AMCap0
             show_item_location();
         }
 
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (Cam != null)
+            {
+                if (Cam.IsRunning)  // When Form1 closes itself, WebCam must stop, too.
+                {
+                    Cam.Stop();   // WebCam stops capturing images.
+                    Cam.SignalToStop();
+                    Cam.WaitForStop();
+                }
+            }
+        }
+
         void show_item_location()
         {
             pictureBox1.Size = new Size(W_pictureBox1, H_pictureBox1);
@@ -60,7 +73,6 @@ namespace vcs_AMCap0
             button1.Location = new Point(BORDER + dx * 1, BORDER + offset_y);
             button2.Location = new Point(BORDER + dx * 2, BORDER + offset_y);
             button3.Location = new Point(BORDER + dx * 3, BORDER + offset_y);
-            lb_fps.Location = new Point(BORDER + dx * 4, BORDER + BORDER);
 
             groupBox1.Size = new Size(W_groupBox1, H_groupBox1);
             groupBox1.Location = new Point(BORDER + dx * 0, BORDER + H_pictureBox1 + BORDER);
@@ -138,19 +150,6 @@ namespace vcs_AMCap0
                 this.Text += "xxx錯誤訊息n : " + ex.Message + "\n";
             }
             GC.Collect();       //回收資源
-        }
-
-        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            if (Cam != null)
-            {
-                if (Cam.IsRunning)  // When Form1 closes itself, WebCam must stop, too.
-                {
-                    Cam.Stop();   // WebCam stops capturing images.
-                    Cam.SignalToStop();
-                    Cam.WaitForStop();
-                }
-            }
         }
 
         void save_image_file()

@@ -32,7 +32,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 plt.figure(
     num="imshow 集合 1 顯示圖片 簡單圖片處理",
     figsize=(12, 8),
@@ -110,6 +110,8 @@ b[:, :, [0, 1]] = 0  # 保留藍色元素, 設定紅色和綠色元素是 0
 plt.imshow(b)
 plt.title("Blue元素圖像")
 
+print("------------------------------------------------------------")  # 60個
+plt.suptitle("")
 plt.tight_layout()
 plt.show()
 
@@ -167,6 +169,8 @@ print("------------------------------------------------------------")  # 60個
 plt.subplot(236)
 
 
+print("------------------------------------------------------------")  # 60個
+plt.suptitle("")
 plt.tight_layout()
 plt.show()
 
@@ -196,6 +200,8 @@ for i in range(1, 5):
     int_image = src.astype(int)  # 將元素值轉成整數
     plt.imshow(int_image)  # 顯示圖像
 
+print("------------------------------------------------------------")  # 60個
+plt.suptitle("")
 plt.tight_layout()
 plt.show()
 
@@ -214,31 +220,31 @@ plt.figure(
 print("------------------------------------------------------------")  # 60個
 plt.subplot(231)
 
-print("二維 sinc 函數")
-
 N = 100
-
 sinc2d = np.zeros((N, N))
-for x, x1 in enumerate(np.linspace(-10, 10, N)):
-    for y, x2 in enumerate(np.linspace(-10, 10, N)):
-        sinc2d[x, y] = np.sin(x1) * np.sin(x2) / (x1 * x2)
+for x, x1 in enumerate(np.linspace(-2 * np.pi, 2 * np.pi, N)):
+    for y, x2 in enumerate(np.linspace(-2 * np.pi, 2 * np.pi, N)):
+        #sinc2d[x, y] = np.sin(x1) * np.sin(x2) / (x1 * x2)  # 二維 sinc 函數
+        sinc2d[x, y] = np.sqrt(x1 ** 2 + x2 ** 2)
 # print(sinc2d)
 
-# same
+""" same
 x1 = np.linspace(-10, 10, N)
 x2 = np.linspace(-10, 10, N)
-sinc2d = np.outer(np.sin(x1), np.sin(x2)) / np.outer(x1, x2)
+sinc2d = np.outer(np.sin(x1), np.sin(x2)) / np.outer(x1, x2)  # 二維 sinc 函數
 # print(sinc2d)
-
+"""
 plt.imshow(sinc2d)
-plt.title("二維 sinc 函數")
 
 print("------------------------------------------------------------")  # 60個
 plt.subplot(232)
 
-x = np.linspace(-2 * np.pi, 2 * np.pi, 100)
-X, Y = np.meshgrid(x, x)
-zz = np.sinc(np.sqrt((X - 1) ** 2 + (Y - 1) ** 2))
+N = 100
+x = np.linspace(-2 * np.pi, 2 * np.pi, N)
+y = np.linspace(-2 * np.pi, 2 * np.pi, N)
+X, Y = np.meshgrid(x, y)
+zz = np.sinc(np.sqrt(X ** 2 + Y ** 2))
+zz = np.sqrt(X ** 2 + Y ** 2)
 
 plt.imshow(zz)
 plt.title("default margins")
@@ -252,10 +258,12 @@ plt.title("margins(0.2)")
 print("------------------------------------------------------------")  # 60個
 plt.subplot(233)
 
-delta = 0.1
-x = y = np.arange(-3.0, 3.0, delta)
+x = np.arange(-2 * np.pi, 2 * np.pi, 0.1)
+y = np.arange(-2 * np.pi, 2 * np.pi, 0.1)
 X, Y = np.meshgrid(x, y)
-Z = np.exp(-(X**2) - Y**2)
+
+#Z = np.exp(-(X**2) - Y**2)
+Z = np.sqrt((X**2) + Y**2)
 
 im = plt.imshow(
     Z, interpolation="bilinear", cmap=cm.gray, origin="lower", extent=[-3, 3, -3, 3]
@@ -271,7 +279,7 @@ print('已存圖' + filename)
 print("------------------------------------------------------------")  # 60個
 plt.subplot(234)
 
-image = np.array(
+np_array_2d = np.array(
     [
         [0, 1, 2, 3, 4, 5],
         [6, 7, 8, 9, 10, 11],
@@ -281,38 +289,43 @@ image = np.array(
         [30, 31, 32, 33, 34, 35],
     ]
 )
-plt.imshow(image, cmap="Blues")
-plt.imshow(image, cmap="Blues", origin="lower")
+
+#same
+np_array_2d = np.arange(36).reshape((6, 6))
+
+plt.imshow(np_array_2d, cmap="Blues")
+plt.imshow(np_array_2d, cmap="Blues", origin="lower")
 
 print("------------------------------------------------------------")  # 60個
 plt.subplot(235)
 
 print("imshow 顯示 numpy 資料")
 
-arr = np.arange(256).reshape((16, 16))
+np_array_2d = np.arange(256).reshape((16, 16))
 
-im = plt.imshow(arr, interpolation="none")
+im = plt.imshow(np_array_2d, interpolation="none")
 
 plt.colorbar(im)
-
 
 print("------------------------------------------------------------")  # 60個
 plt.subplot(236)
 
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 
-arr = np.arange(256).reshape((16, 16))
-im = plt.imshow(arr, interpolation="none")
+np_array_2d = np.arange(256).reshape((16, 16))
+im = plt.imshow(np_array_2d, interpolation="none")
 
 divider = make_axes_locatable(plt.gca())
 cax = divider.append_axes("right", "5%", pad="3%")
 plt.colorbar(im, cax=cax)
 
+print("------------------------------------------------------------")  # 60個
+plt.suptitle("")
 plt.tight_layout()
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 plt.figure(
     num="imshow 集合 5",
     figsize=(12, 8),
@@ -326,6 +339,14 @@ plt.figure(
 print("------------------------------------------------------------")  # 60個
 plt.subplot(231)
 
+N = 100
+x = np.linspace(-5, 5, N)
+y = np.linspace(-5, 5, N)
+X, Y = np.meshgrid(x, y)
+Z = np.sin(X) + np.sin(Y)  # 建立影像
+
+plt.imshow(Z, cmap="hot")
+
 print("------------------------------------------------------------")  # 60個
 plt.subplot(232)
 
@@ -333,6 +354,13 @@ plt.subplot(232)
 print("------------------------------------------------------------")  # 60個
 plt.subplot(233)
 
+import cv2
+filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg"
+image = cv2.imread(filename)  # 讀取本機圖片
+image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 灰階
+_, image = cv2.threshold(image, 120, 255, cv2.THRESH_BINARY_INV)  # 轉為反相黑白
+
+plt.imshow(image, cmap="binary")  # 顯示黑白圖片
 
 print("------------------------------------------------------------")  # 60個
 plt.subplot(234)
@@ -343,52 +371,19 @@ print("------------------------------------------------------------")  # 60個
 plt.subplot(235)
 
 
-# make these smaller to increase the resolution
-dx, dy = 0.05, 0.05
-
-x = np.arange(-3.0, 3.0, dx)
-y = np.arange(-3.0, 3.0, dy)
-X, Y = np.meshgrid(x, y)
-
-# when layering multiple images, the images need to have the same
-# extent.  This does not mean they need to have the same shape, but
-# they both need to render to the same coordinate system determined by
-# xmin, xmax, ymin, ymax.  Note if you use different interpolations
-# for the images their apparent extent could be different due to
-# interpolation edge effects
-
-extent = np.min(x), np.max(x), np.min(y), np.max(y)
-
-Z = np.add.outer(range(8), range(8)) % 2  # chessboard
-im1 = plt.imshow(Z, cmap=plt.cm.gray, interpolation="nearest", extent=extent)
-#im1 = plt.imshow(Z, cmap=plt.cm.viridis, alpha=0.9, interpolation="bilinear", extent=extent)
-
-
 print("------------------------------------------------------------")  # 60個
 plt.subplot(236)
 
-""" outer 用法
-x1 = [1,2,3]
-y1 = [4,5,6,7,8]
-z1 = np.add.outer(x1, y1)
-print(f"z1 = \n{z1}")
 
-x2 = range(8)
-y2 = range(8)
-z2 = np.add.outer(x2, y2)
-print(f"z2 = \n{z2}")
-"""
-
-z = np.add.outer(range(8), range(8)) % 2
-im1 = plt.imshow(z, cmap="gray")
-
+print("------------------------------------------------------------")  # 60個
+plt.suptitle("")
 plt.tight_layout()
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
 plt.figure(
-    num="imshow 集合 6 random 影像 1",
+    num="imshow 集合 6 random 影像",
     figsize=(12, 8),
     dpi=100,
     facecolor="whitesmoke",
@@ -402,85 +397,37 @@ plt.gray()  # 不使用顏色信息, 將圖像以灰階方式顯示
 print("------------------------------------------------------------")  # 60個
 plt.subplot(231)
 
-print("建立一個random圖像 0 50 100 ... 255")
+print("6數任選 MXN random圖像")
 
-W, H = 10, 10
+W, H = 8, 8
 
 image = (
     np.random.choice([0, 50, 100, 150, 200, 255], size=W * H)
     .reshape(H, W)
     .astype(np.uint8)
 )
+print(str(W)+ 'X'+str(H)+ ' 6數任選')
+
+N = 10
+image = np.random.randn(N, N)
+print("常態分布 二維 N X N")
 
 plt.imshow(image)
+
 print(image)
 
 print("------------------------------------------------------------")  # 60個
 plt.subplot(232)
 
-print("畫出 常態分布 二維 N X N")
-N = 10
-image = np.random.randn(N, N)
-plt.imshow(image)
-print(image)
-
-print("------------------------------------------------------------")  # 60個
-plt.subplot(233)
-
 image = np.random.random((10, 10))
 plt.imshow(image)
-print(image)
+# plt.imshow(image, cmap="cool")
+# plt.imshow(image, cmap="hsv")
+# print(image)
 
 plt.subplots_adjust(bottom=0.1, right=0.8, top=0.9)
 cax = plt.axes([0.85, 0.1, 0.075, 0.8])  # 設定位置
 plt.colorbar(cax=cax)
-
-print("------------------------------------------------------------")  # 60個
-plt.subplot(234)
-
-data = np.random.random((10, 10))
-plt.imshow(data)
-
-
-print("------------------------------------------------------------")  # 60個
-plt.subplot(235)
-
-data = np.random.random((10, 10))
-plt.imshow(data, cmap="cool")
-# plt.imshow(data, cmap="hsv")
-
-print("------------------------------------------------------------")  # 60個
-plt.subplot(236)
-
-N = 100
-x = np.linspace(-5, 5, N)
-y = np.linspace(-5, 5, N)
-X, Y = np.meshgrid(x, y)
-Z = np.sin(X) + np.sin(Y)  # 建立影像
-
-plt.imshow(Z, cmap="hot")
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-plt.figure(
-    num="imshow 集合 7 random 影像 2",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
-
-print("------------------------------------------------------------")  # 60個
-plt.subplot(231)
-
-
-print("------------------------------------------------------------")  # 60個
-plt.subplot(232)
-
 
 print("------------------------------------------------------------")  # 60個
 plt.subplot(233)
@@ -526,6 +473,72 @@ plt.xticks(range(N))  # 繪製 x 軸刻度
 plt.title("Blue元素")
 plt.imshow(b)
 
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+plt.figure(
+    num="imshow 集合 7",
+    figsize=(12, 8),
+    dpi=100,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
+
+print("------------------------------------------------------------")  # 60個
+plt.subplot(231)
+
+x = np.arange(-3.0, 3.0, 0.05)
+y = np.arange(-3.0, 3.0, 0.05)
+X, Y = np.meshgrid(x, y)
+
+extent = np.min(x), np.max(x), np.min(y), np.max(y)
+
+Z = np.add.outer(range(8), range(8)) % 2  # chessboard
+im1 = plt.imshow(Z, cmap=plt.cm.gray, interpolation="nearest", extent=extent)
+#im1 = plt.imshow(Z, cmap=plt.cm.viridis, alpha=0.9, interpolation="bilinear", extent=extent)
+
+print("------------------------------------------------------------")  # 60個
+plt.subplot(232)
+
+""" outer 用法
+x1 = [1,2,3]
+y1 = [4,5,6,7,8]
+z1 = np.add.outer(x1, y1)
+print(f"z1 = \n{z1}")
+
+x2 = range(8)
+y2 = range(8)
+z2 = np.add.outer(x2, y2)
+print(f"z2 = \n{z2}")
+"""
+
+z = np.add.outer(range(8), range(8)) % 2
+im1 = plt.imshow(z, cmap="gray")
+
+
+print("------------------------------------------------------------")  # 60個
+plt.subplot(233)
+
+
+print("------------------------------------------------------------")  # 60個
+plt.subplot(234)
+
+
+
+print("------------------------------------------------------------")  # 60個
+plt.subplot(235)
+
+
+
+print("------------------------------------------------------------")  # 60個
+plt.subplot(236)
+
+
+print("------------------------------------------------------------")  # 60個
+plt.suptitle("")
 plt.tight_layout()
 plt.show()
 
@@ -580,7 +593,8 @@ X, Y = np.meshgrid(x, y)
 # 當建立重疊影像時, 需要有相同的 extent
 extent = np.min(x), np.max(x), np.min(y), np.max(y)
 
-Z = np.sin(X) + np.cos(Y)
+#Z = np.sin(X) + np.cos(Y)
+Z = np.sqrt(X**2+Y**2)
 plt.imshow(Z, cmap="jet", alpha=0.8, interpolation="bilinear", extent=extent)
 
 print("------------------------------------------------------------")  # 60個
@@ -611,6 +625,8 @@ plt.imshow(data, interpolation="hamming")
 plt.xticks(range(N))  # 繪製 x 軸刻度
 plt.title("使用 hamming 插值")
 
+print("------------------------------------------------------------")  # 60個
+plt.suptitle("")
 plt.tight_layout()
 plt.show()
 
@@ -657,6 +673,8 @@ ax.set_title("農夫收成(噸 / 年)", fontsize=18)
 ax.set_xlabel("姓名")
 ax.set_ylabel("水果")
 
+print("------------------------------------------------------------")  # 60個
+plt.suptitle("")
 fig.tight_layout()
 plt.show()
 
@@ -685,8 +703,6 @@ print("------------------------------------------------------------")  # 60個
 sys.exit()
 
 plt.rcParams["savefig.facecolor"] = "0.8"
-plt.tight_layout()
-
 
 """
 

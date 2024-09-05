@@ -38,6 +38,8 @@
             this.bt_record_stop = new System.Windows.Forms.Button();
             this.bt_clear = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.bt_clear2 = new System.Windows.Forms.Button();
+            this.numericUpDown_limit_record_time = new System.Windows.Forms.NumericUpDown();
             this.bt_record_limit_time = new System.Windows.Forms.Button();
             this.tb_wait_barcode_data = new System.Windows.Forms.TextBox();
             this.lb_main_mesg1 = new System.Windows.Forms.Label();
@@ -50,8 +52,7 @@
             this.bt_start = new System.Windows.Forms.Button();
             this.timer_display = new System.Windows.Forms.Timer(this.components);
             this.timer_barcode = new System.Windows.Forms.Timer(this.components);
-            this.numericUpDown_limit_record_time = new System.Windows.Forms.NumericUpDown();
-            this.bt_clear2 = new System.Windows.Forms.Button();
+            this.cb_show_time = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_limit_record_time)).BeginInit();
@@ -94,21 +95,21 @@
             // 
             // bt_record_start
             // 
-            this.bt_record_start.Location = new System.Drawing.Point(96, 63);
+            this.bt_record_start.Location = new System.Drawing.Point(82, 63);
             this.bt_record_start.Name = "bt_record_start";
             this.bt_record_start.Size = new System.Drawing.Size(70, 30);
             this.bt_record_start.TabIndex = 21;
-            this.bt_record_start.Text = "錄影 ST";
+            this.bt_record_start.Text = "錄影 開始";
             this.bt_record_start.UseVisualStyleBackColor = true;
             this.bt_record_start.Click += new System.EventHandler(this.bt_record_start_Click);
             // 
             // bt_record_stop
             // 
-            this.bt_record_stop.Location = new System.Drawing.Point(186, 63);
+            this.bt_record_stop.Location = new System.Drawing.Point(153, 64);
             this.bt_record_stop.Name = "bt_record_stop";
             this.bt_record_stop.Size = new System.Drawing.Size(70, 30);
             this.bt_record_stop.TabIndex = 22;
-            this.bt_record_stop.Text = "錄影 SP";
+            this.bt_record_stop.Text = "錄影 停止";
             this.bt_record_stop.UseVisualStyleBackColor = true;
             this.bt_record_stop.Click += new System.EventHandler(this.bt_record_stop_Click);
             // 
@@ -124,6 +125,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.cb_show_time);
             this.groupBox1.Controls.Add(this.bt_clear2);
             this.groupBox1.Controls.Add(this.numericUpDown_limit_record_time);
             this.groupBox1.Controls.Add(this.bt_record_limit_time);
@@ -145,9 +147,43 @@
             this.groupBox1.TabIndex = 25;
             this.groupBox1.TabStop = false;
             // 
+            // bt_clear2
+            // 
+            this.bt_clear2.Location = new System.Drawing.Point(305, 23);
+            this.bt_clear2.Name = "bt_clear2";
+            this.bt_clear2.Size = new System.Drawing.Size(70, 30);
+            this.bt_clear2.TabIndex = 137;
+            this.bt_clear2.Text = "Clear";
+            this.bt_clear2.UseVisualStyleBackColor = true;
+            this.bt_clear2.Click += new System.EventHandler(this.bt_clear2_Click);
+            // 
+            // numericUpDown_limit_record_time
+            // 
+            this.numericUpDown_limit_record_time.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.numericUpDown_limit_record_time.Location = new System.Drawing.Point(305, 59);
+            this.numericUpDown_limit_record_time.Maximum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.numericUpDown_limit_record_time.Minimum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.numericUpDown_limit_record_time.Name = "numericUpDown_limit_record_time";
+            this.numericUpDown_limit_record_time.Size = new System.Drawing.Size(70, 33);
+            this.numericUpDown_limit_record_time.TabIndex = 26;
+            this.numericUpDown_limit_record_time.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numericUpDown_limit_record_time.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            // 
             // bt_record_limit_time
             // 
-            this.bt_record_limit_time.Location = new System.Drawing.Point(285, 63);
+            this.bt_record_limit_time.Location = new System.Drawing.Point(229, 64);
             this.bt_record_limit_time.Name = "bt_record_limit_time";
             this.bt_record_limit_time.Size = new System.Drawing.Size(70, 30);
             this.bt_record_limit_time.TabIndex = 136;
@@ -158,10 +194,10 @@
             // tb_wait_barcode_data
             // 
             this.tb_wait_barcode_data.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_wait_barcode_data.Location = new System.Drawing.Point(377, 71);
+            this.tb_wait_barcode_data.Location = new System.Drawing.Point(421, 23);
             this.tb_wait_barcode_data.Multiline = true;
             this.tb_wait_barcode_data.Name = "tb_wait_barcode_data";
-            this.tb_wait_barcode_data.Size = new System.Drawing.Size(113, 22);
+            this.tb_wait_barcode_data.Size = new System.Drawing.Size(34, 22);
             this.tb_wait_barcode_data.TabIndex = 107;
             this.tb_wait_barcode_data.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -170,7 +206,7 @@
             this.lb_main_mesg1.AutoSize = true;
             this.lb_main_mesg1.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_main_mesg1.ForeColor = System.Drawing.Color.Red;
-            this.lb_main_mesg1.Location = new System.Drawing.Point(235, 112);
+            this.lb_main_mesg1.Location = new System.Drawing.Point(221, 101);
             this.lb_main_mesg1.Name = "lb_main_mesg1";
             this.lb_main_mesg1.Size = new System.Drawing.Size(78, 24);
             this.lb_main_mesg1.TabIndex = 135;
@@ -179,9 +215,9 @@
             // tb_barcode_data
             // 
             this.tb_barcode_data.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_barcode_data.Location = new System.Drawing.Point(377, 21);
+            this.tb_barcode_data.Location = new System.Drawing.Point(381, 23);
             this.tb_barcode_data.Name = "tb_barcode_data";
-            this.tb_barcode_data.Size = new System.Drawing.Size(104, 32);
+            this.tb_barcode_data.Size = new System.Drawing.Size(34, 32);
             this.tb_barcode_data.TabIndex = 106;
             this.tb_barcode_data.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -190,7 +226,7 @@
             this.lb_main_mesg.AutoSize = true;
             this.lb_main_mesg.Font = new System.Drawing.Font("標楷體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.lb_main_mesg.ForeColor = System.Drawing.Color.Red;
-            this.lb_main_mesg.Location = new System.Drawing.Point(75, 101);
+            this.lb_main_mesg.Location = new System.Drawing.Point(55, 101);
             this.lb_main_mesg.Name = "lb_main_mesg";
             this.lb_main_mesg.Size = new System.Drawing.Size(154, 24);
             this.lb_main_mesg.TabIndex = 27;
@@ -199,7 +235,7 @@
             // bt_refresh
             // 
             this.bt_refresh.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_refresh.Location = new System.Drawing.Point(192, 20);
+            this.bt_refresh.Location = new System.Drawing.Point(153, 21);
             this.bt_refresh.Name = "bt_refresh";
             this.bt_refresh.Size = new System.Drawing.Size(70, 30);
             this.bt_refresh.TabIndex = 31;
@@ -210,7 +246,7 @@
             // bt_exit
             // 
             this.bt_exit.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_exit.Location = new System.Drawing.Point(285, 21);
+            this.bt_exit.Location = new System.Drawing.Point(229, 22);
             this.bt_exit.Name = "bt_exit";
             this.bt_exit.Size = new System.Drawing.Size(70, 30);
             this.bt_exit.TabIndex = 30;
@@ -221,7 +257,7 @@
             // bt_stop
             // 
             this.bt_stop.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_stop.Location = new System.Drawing.Point(96, 21);
+            this.bt_stop.Location = new System.Drawing.Point(82, 21);
             this.bt_stop.Name = "bt_stop";
             this.bt_stop.Size = new System.Drawing.Size(70, 30);
             this.bt_stop.TabIndex = 28;
@@ -261,39 +297,17 @@
             this.timer_barcode.Interval = 300;
             this.timer_barcode.Tick += new System.EventHandler(this.timer_barcode_Tick);
             // 
-            // numericUpDown_limit_record_time
+            // cb_show_time
             // 
-            this.numericUpDown_limit_record_time.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.numericUpDown_limit_record_time.Location = new System.Drawing.Point(377, 102);
-            this.numericUpDown_limit_record_time.Maximum = new decimal(new int[] {
-            50,
-            0,
-            0,
-            0});
-            this.numericUpDown_limit_record_time.Minimum = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            this.numericUpDown_limit_record_time.Name = "numericUpDown_limit_record_time";
-            this.numericUpDown_limit_record_time.Size = new System.Drawing.Size(70, 33);
-            this.numericUpDown_limit_record_time.TabIndex = 26;
-            this.numericUpDown_limit_record_time.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.numericUpDown_limit_record_time.Value = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            // 
-            // bt_clear2
-            // 
-            this.bt_clear2.Location = new System.Drawing.Point(239, 41);
-            this.bt_clear2.Name = "bt_clear2";
-            this.bt_clear2.Size = new System.Drawing.Size(70, 30);
-            this.bt_clear2.TabIndex = 137;
-            this.bt_clear2.Text = "Clear";
-            this.bt_clear2.UseVisualStyleBackColor = true;
-            this.bt_clear2.Click += new System.EventHandler(this.bt_clear2_Click);
+            this.cb_show_time.AutoSize = true;
+            this.cb_show_time.Checked = true;
+            this.cb_show_time.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cb_show_time.Location = new System.Drawing.Point(305, 106);
+            this.cb_show_time.Name = "cb_show_time";
+            this.cb_show_time.Size = new System.Drawing.Size(72, 16);
+            this.cb_show_time.TabIndex = 138;
+            this.cb_show_time.Text = "顯示時間";
+            this.cb_show_time.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -341,6 +355,7 @@
         private System.Windows.Forms.Button bt_record_limit_time;
         private System.Windows.Forms.NumericUpDown numericUpDown_limit_record_time;
         private System.Windows.Forms.Button bt_clear2;
+        private System.Windows.Forms.CheckBox cb_show_time;
     }
 }
 

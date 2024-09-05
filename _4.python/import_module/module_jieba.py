@@ -1,10 +1,14 @@
-import sys
-import os
+"""
 
+jieba：最常用中文分詞工具
+
+
+"""
+
+import os
+import sys
 import jieba
 import operator
-
-print("jieba：最常用中文分詞工具")
 
 print("------------------------------------------------------------")  # 60個
 
@@ -31,6 +35,50 @@ print(" | ".join(cut_text))  # 全切分 全切分, 搜尋引擎模式
 
 print("------------------------------------------------------------")  # 60個
 
+cut_text = jieba.cut("小明终于在1995年从北京清华大学毕业了。")
+print(" | ".join(cut_text))
+
+cut_text = jieba.cut("小明1995年毕业于北京清华大学", cut_all=False)
+print("默認模式")
+print(" | ".join(cut_text))
+
+cut_text = jieba.cut("小明1995年毕业于北京清华大学")
+print(" | ".join(cut_text))
+
+cut_text = jieba.cut("小明1995年毕业于北京清华大学", cut_all=True)
+print("全模式")
+print(" | ".join(cut_text))
+
+cut_text = jieba.cut_for_search("小明硕士毕业于中国科学院计算所，后在日本京都大学深造")  # 搜索引擎模式
+print("搜索引擎模式")
+print(" | ".join(cut_text))
+
+print("------------------------------------------------------------")  # 60個
+
+original_text = "我今天要到台北松山機場出差！"
+cut_text = jieba.cut(original_text, cut_all=False)
+print("精確模式")
+print(" | ".join(cut_text))
+
+cut_text = jieba.cut(original_text, cut_all=True)
+print("全文模式")
+print(" | ".join(cut_text))
+
+cut_text = jieba.cut_for_search(original_text)
+print("搜索引擎模式")
+print(" | ".join(cut_text))
+
+print("------------------------------------------------------------")  # 60個
+
+cut_text = jieba.cut("来到北京清华大学", cut_all=False)
+print("默認模式")
+print(" | ".join(cut_text))
+
+cut_text = jieba.cut("他来到网易杭研大厦")
+print(" | ".join(cut_text))
+
+print("------------------------------------------------------------")  # 60個
+
 # 默認使用精確模式(一般直接使用精確模式即可)
 
 original_text = "名偵探柯南是根據日本漫畫家青山剛昌著名原作推理漫畫名偵探柯南改編的動畫作品。"
@@ -38,6 +86,22 @@ original_text = "名偵探柯南是根據日本漫畫家青山剛昌著名原作
 print("預設:", " | ".join(jieba.cut(original_text, cut_all=False, HMM=True)))
 print("全關閉:", " | ".join(jieba.cut(original_text, cut_all=False, HMM=False)))
 print("全關閉:", " | ".join(jieba.cut(original_text, cut_all=True, HMM=True)))
+
+print("------------------------------------------------------------")  # 60個
+
+#!wget -O dict.txt.big.txt https://raw.githubusercontent.com/fxsjy/jieba/master/extra_dict/dict.txt.big
+
+jieba.set_dictionary("data/dict.txt.big.txt")
+original_text = "我今天要到台北松山機場出差！"
+cut_text = jieba.cut(original_text, cut_all=False)
+print("|".join(cut_text))
+
+print("------------------------------------------------------------")  # 60個
+
+jieba.set_dictionary("data/dict.txt.big.txt")
+original_text = "這部電影很好看，是我的朋友陳國文主演的。"
+cut_text = jieba.cut(original_text, cut_all=False)
+print("|".join(cut_text))
 
 print("------------------------------------------------------------")  # 60個
 
@@ -127,32 +191,6 @@ for w, c in Counter(words).most_common():
 
 print("------------------------------------------------------------")  # 60個
 
-original_text = "我今天要到台北松山機場出差！"
-cut_text = jieba.cut(original_text, cut_all=False)
-print("精確模式：" + "|".join(cut_text))
-
-cut_text = jieba.cut(original_text, cut_all=True)
-print("全文模式：" + "|".join(cut_text))
-
-cut_text = jieba.cut_for_search(original_text)
-print("搜索引擎模式：" + "|".join(cut_text))
-
-#!wget -O dict.txt.big.txt https://raw.githubusercontent.com/fxsjy/jieba/master/extra_dict/dict.txt.big
-
-jieba.set_dictionary("data/dict.txt.big.txt")
-original_text = "我今天要到台北松山機場出差！"
-cut_text = jieba.cut(original_text, cut_all=False)
-print("|".join(cut_text))
-
-print("------------------------------------------------------------")  # 60個
-
-jieba.set_dictionary("data/dict.txt.big.txt")
-original_text = "這部電影很好看，是我的朋友陳國文主演的。"
-cut_text = jieba.cut(original_text, cut_all=False)
-print("|".join(cut_text))
-
-print("------------------------------------------------------------")  # 60個
-
 """ fail
 jieba.set_dictionary('data/dict.txt.big.txt')
 jieba.load_userdict('data/user_dict_test.txt')
@@ -218,33 +256,6 @@ print(cv.get_feature_names_out())
 """
 
 print("------------------------------------------------------------")  # 60個
-
-import jieba
-
-seg_list = jieba.cut("来到北京清华大学", cut_all=False)
-print("Default Mode:", "/ ".join(seg_list))  # 默认模式
-
-seg_list = jieba.cut("他来到网易杭研大厦")
-print(" ".join(seg_list))
-
-print("------------------------------------------------------------")  # 60個
-
-import jieba
-
-seg_list = jieba.cut("小明终于在1995年从北京清华大学毕业了。")
-print("  ".join(seg_list))
-
-seg_list = jieba.cut("小明1995年毕业于北京清华大学", cut_all=False)
-print("Default Mode:", " ".join(seg_list))  # 默认模式
-
-seg_list = jieba.cut("小明1995年毕业于北京清华大学")
-print("  ".join(seg_list))
-
-seg_list = jieba.cut("小明1995年毕业于北京清华大学", cut_all=True)
-print("Full Mode:", "/ ".join(seg_list))  # 全模式
-
-seg_list = jieba.cut_for_search("小明硕士毕业于中国科学院计算所，后在日本京都大学深造")  # 搜索引擎模式
-print("/  ".join(seg_list))
 
 
 print("------------------------------------------------------------")  # 60個
