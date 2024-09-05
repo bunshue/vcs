@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_Thread_Example1
+namespace vcs_Thread
 {
     static class Program
     {

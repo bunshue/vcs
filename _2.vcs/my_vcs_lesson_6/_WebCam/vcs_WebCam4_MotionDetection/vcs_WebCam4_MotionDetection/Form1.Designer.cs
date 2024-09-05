@@ -68,11 +68,11 @@
             // bt_motion_detection
             // 
             this.bt_motion_detection.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_motion_detection.Location = new System.Drawing.Point(614, 12);
+            this.bt_motion_detection.Location = new System.Drawing.Point(12, 129);
             this.bt_motion_detection.Name = "bt_motion_detection";
-            this.bt_motion_detection.Size = new System.Drawing.Size(75, 30);
+            this.bt_motion_detection.Size = new System.Drawing.Size(120, 30);
             this.bt_motion_detection.TabIndex = 25;
-            this.bt_motion_detection.Text = "移動偵測";
+            this.bt_motion_detection.Text = "啟動 移動偵測";
             this.bt_motion_detection.UseVisualStyleBackColor = true;
             this.bt_motion_detection.Click += new System.EventHandler(this.bt_motion_detection_Click);
             // 
@@ -80,7 +80,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(703, 339);
+            this.ClientSize = new System.Drawing.Size(284, 261);
             this.Controls.Add(this.bt_motion_detection);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.richTextBox1);

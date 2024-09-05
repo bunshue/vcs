@@ -46,7 +46,6 @@
             this.cb_corner = new System.Windows.Forms.CheckBox();
             this.cb_rgb = new System.Windows.Forms.CheckBox();
             this.bt_open_folder = new System.Windows.Forms.Button();
-            this.bt_record = new System.Windows.Forms.Button();
             this.rb_5X5 = new System.Windows.Forms.RadioButton();
             this.rb_4X4 = new System.Windows.Forms.RadioButton();
             this.rb_3X3 = new System.Windows.Forms.RadioButton();
@@ -217,7 +216,6 @@
             this.groupBox2.Controls.Add(this.cb_corner);
             this.groupBox2.Controls.Add(this.cb_rgb);
             this.groupBox2.Controls.Add(this.bt_open_folder);
-            this.groupBox2.Controls.Add(this.bt_record);
             this.groupBox2.Controls.Add(this.rb_5X5);
             this.groupBox2.Controls.Add(this.rb_4X4);
             this.groupBox2.Controls.Add(this.rb_3X3);
@@ -289,17 +287,6 @@
             this.bt_open_folder.TabIndex = 59;
             this.bt_open_folder.UseVisualStyleBackColor = true;
             this.bt_open_folder.Click += new System.EventHandler(this.bt_open_folder_Click);
-            // 
-            // bt_record
-            // 
-            this.bt_record.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_record.Location = new System.Drawing.Point(269, 38);
-            this.bt_record.Name = "bt_record";
-            this.bt_record.Size = new System.Drawing.Size(75, 30);
-            this.bt_record.TabIndex = 23;
-            this.bt_record.Text = "錄影";
-            this.bt_record.UseVisualStyleBackColor = true;
-            this.bt_record.Click += new System.EventHandler(this.bt_record_Click);
             // 
             // rb_5X5
             // 
@@ -481,7 +468,7 @@
             // bt_exit
             // 
             this.bt_exit.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_exit.Location = new System.Drawing.Point(269, 70);
+            this.bt_exit.Location = new System.Drawing.Point(269, 36);
             this.bt_exit.Name = "bt_exit";
             this.bt_exit.Size = new System.Drawing.Size(75, 30);
             this.bt_exit.TabIndex = 10;
@@ -721,7 +708,6 @@
         private System.Windows.Forms.RadioButton rb_5X5;
         private System.Windows.Forms.RadioButton rb_4X4;
         private System.Windows.Forms.RadioButton rb_3X3;
-        private System.Windows.Forms.Button bt_record;
         private System.Windows.Forms.Button bt_open_folder;
         private System.Windows.Forms.CheckBox cb_rgb;
         private System.Windows.Forms.Timer timer_rgb;

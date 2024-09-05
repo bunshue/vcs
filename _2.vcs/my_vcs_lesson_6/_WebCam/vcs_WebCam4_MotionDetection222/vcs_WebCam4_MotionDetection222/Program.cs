@@ -15,7 +15,7 @@ namespace vcs_WebCam4_MotionDetection222
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
+            Application.Run(new Form1());
         }
     }
 }

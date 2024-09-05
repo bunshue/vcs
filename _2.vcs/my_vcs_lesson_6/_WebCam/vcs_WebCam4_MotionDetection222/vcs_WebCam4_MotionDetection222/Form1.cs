@@ -28,7 +28,7 @@ using AForge.Vision.Motion;     // Motion detection
 
 namespace vcs_WebCam4_MotionDetection222
 {
-    public partial class MainForm : Form
+    public partial class Form1 : Form
     {
         //參考
         //【AForge.NET】C#上使用AForge.Net擷取視訊畫面
@@ -106,7 +106,7 @@ namespace vcs_WebCam4_MotionDetection222
             Thread.Sleep(3000);
         }
 
-        public MainForm()
+        public Form1()
         {
             InitializeComponent();
         }
@@ -116,11 +116,10 @@ namespace vcs_WebCam4_MotionDetection222
             show_item_location();
 
             Init_WebcamSetup();
-            //Start_Webcam();
-
+            Start_Webcam();
         }
 
-        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             //Stop_Webcam();
             if (Cam != null)
@@ -168,7 +167,6 @@ namespace vcs_WebCam4_MotionDetection222
 
                 Cam = new VideoCaptureDevice(USBWebcams[0].MonikerString);//長名
                 Cam.NewFrame += new NewFrameEventHandler(Cam_NewFrame); // defines which method to call when a new frame arrives
-                Cam.Start(); // starts the videoCapture
             }
         }
 
@@ -201,13 +199,15 @@ namespace vcs_WebCam4_MotionDetection222
         {
             if (flag_motion_detection == false)
             {
-                richTextBox1.Text += "啟動移動偵測\n";
                 flag_motion_detection = true;
+                richTextBox1.Text += "啟動 移動偵測\n";
+                bt_motion_detection.Text = "停止 移動偵測";
             }
             else
             {
-                richTextBox1.Text += "停止移動偵測\n";
                 flag_motion_detection = false;
+                richTextBox1.Text += "停止 移動偵測\n";
+                bt_motion_detection.Text = "啟動 移動偵測";
             }
         }
     }

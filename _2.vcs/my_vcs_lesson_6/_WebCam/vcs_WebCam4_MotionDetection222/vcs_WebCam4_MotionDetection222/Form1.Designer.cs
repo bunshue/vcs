@@ -1,6 +1,6 @@
 ﻿namespace vcs_WebCam4_MotionDetection222
 {
-    partial class MainForm
+    partial class Form1
     {
         /// <summary>
         /// Required designer variable.
@@ -55,25 +55,25 @@
             // bt_motion_detection
             // 
             this.bt_motion_detection.ImageIndex = 0;
-            this.bt_motion_detection.Location = new System.Drawing.Point(230, 10);
+            this.bt_motion_detection.Location = new System.Drawing.Point(10, 125);
             this.bt_motion_detection.Name = "bt_motion_detection";
-            this.bt_motion_detection.Size = new System.Drawing.Size(94, 26);
+            this.bt_motion_detection.Size = new System.Drawing.Size(100, 30);
             this.bt_motion_detection.TabIndex = 7;
-            this.bt_motion_detection.Text = "移動偵測";
+            this.bt_motion_detection.Text = "啟動 移動偵測";
             this.bt_motion_detection.UseVisualStyleBackColor = true;
             this.bt_motion_detection.Click += new System.EventHandler(this.bt_motion_detection_Click);
             // 
-            // MainForm
+            // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(384, 361);
+            this.ClientSize = new System.Drawing.Size(284, 261);
             this.Controls.Add(this.bt_motion_detection);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.pictureBox1);
-            this.Name = "MainForm";
+            this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);

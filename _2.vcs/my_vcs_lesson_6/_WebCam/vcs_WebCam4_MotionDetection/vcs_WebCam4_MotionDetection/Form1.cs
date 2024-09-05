@@ -209,10 +209,19 @@ namespace vcs_WebCam4_MotionDetection
 
         private void bt_motion_detection_Click(object sender, EventArgs e)
         {
-            flag_motion_detection = !flag_motion_detection; 
+            if (flag_motion_detection == false)
+            {
+                flag_motion_detection = true;
+                richTextBox1.Text += "啟動 移動偵測\n";
+                bt_motion_detection.Text = "停止 移動偵測";
+            }
+            else
+            {
+                flag_motion_detection = false;
+                richTextBox1.Text += "停止 移動偵測\n";
+                bt_motion_detection.Text = "啟動 移動偵測";
+            }
         }
-
     }
 }
-
 

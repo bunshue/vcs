@@ -398,3 +398,13 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
+plt.plot(seq, data1, "-*")
+plt.plot(seq, data2, "m-o")
+plt.plot(seq, data2, "-o")
+plt.plot(seq, data3, "-^")
+plt.plot(seq, data4, "-s")
+plt.plot(x1, y1, "go-")
+plt.plot(x2, y2, "m.-")
+
+
+

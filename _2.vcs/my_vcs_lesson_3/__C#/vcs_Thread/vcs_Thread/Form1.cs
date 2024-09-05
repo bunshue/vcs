@@ -12,7 +12,7 @@ using System.Diagnostics;   //for Process
 
 using System.Timers;    //for ElapsedEventHandler
 
-namespace vcs_Thread_Example1
+namespace vcs_Thread
 {
     //創建SetValue的委托
     public delegate void SetValueDel(string str, object obj);

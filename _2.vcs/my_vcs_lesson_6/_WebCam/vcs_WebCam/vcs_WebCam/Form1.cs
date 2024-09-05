@@ -14,7 +14,6 @@ using System.Runtime.InteropServices;   //for dll
 
 using AForge.Video;             //需要添加這兩個.dll, 參考/加入參考/瀏覽此二檔
 using AForge.Video.DirectShow;  // Video Recording
-//using AForge.Video.FFMPEG;      //for VideoFileWriter
 
 /*
 移動偵測 需要 參考/加入參考/選取以下3個dll
@@ -274,10 +273,9 @@ namespace vcs_WebCam
             bt_start.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             bt_pause.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             bt_stop.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            bt_record.Location = new Point(x_st + dx * 3, y_st + dy * 0);
             bt_refresh.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             bt_snapshot.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            bt_exit.Location = new Point(x_st + dx * 3, y_st + dy * 1);
+            bt_exit.Location = new Point(x_st + dx * 3, y_st + dy * 0);
             bt_flip.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             bt_info.Location = new Point(x_st + dx * 1, y_st + dy * 2);
             bt_fullscreen.Location = new Point(x_st + dx * 2, y_st + dy * 2);
@@ -335,7 +333,6 @@ namespace vcs_WebCam
 
             bt_start.Enabled = true;
             bt_stop.Enabled = false;
-            bt_record.Enabled = false;
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -523,7 +520,6 @@ namespace vcs_WebCam
                 bt_fullscreen.Enabled = false;
             }
             bt_stop.Enabled = false;
-            bt_record.Enabled = false;
 
             return;
         }
@@ -980,7 +976,6 @@ namespace vcs_WebCam
             Start_Webcam();
             bt_start.Enabled = false;
             bt_stop.Enabled = true;
-            bt_record.Enabled = true;
         }
 
         private void bt_pause_Click(object sender, EventArgs e)
@@ -994,7 +989,6 @@ namespace vcs_WebCam
             Stop_Webcam();
             bt_start.Enabled = true;
             bt_stop.Enabled = false;
-            bt_record.Enabled = false;
         }
 
         //重抓WebCam, 只有關了再開
@@ -1513,30 +1507,6 @@ namespace vcs_WebCam
                 rb_5X5.Visible = false;
             }
         }
-
-        private void bt_record_Click(object sender, EventArgs e)
-        {
-            string filename = "test0.avi";
-            int W = 640;
-            int H = 480;
-            //int frameRate = 25;
-            if (File.Exists(filename) == true)
-            {
-                File.Delete(filename);
-            }
-
-            richTextBox1.Text += "W = " + webcam_w.ToString() + "\n";
-            richTextBox1.Text += "H = " + webcam_h.ToString() + "\n";
-            richTextBox1.Text += "F = " + webcam_fps.ToString() + "\n";
-
-            richTextBox1.Text += "目前 AForge.Video.FFMPEG.dll 在 Sugar 上還不能用\n";
-            //VideoFileWriter writer = new VideoFileWriter();
-
-            //writer.Open(filename, webcam_w, webcam_h, webcam_fps, VideoCodec.MPEG4);
-        }
-
-
-
 
         [DllImport("gdi32.dll")]
         static public extern uint GetPixel(IntPtr hDC, int XPos, int YPos);
