@@ -4,7 +4,7 @@ import time
 print("------------------------------------------------------------")  # 60個
 
 print("寫入一些日誌")
-
+'''
 import logging
 
 logging.basicConfig(
@@ -388,5 +388,66 @@ f = open("tmp_my_logfile2.txt", "w")
 f.write("# BUILD INFO\n")
 f.write("# Date: %s\n" % time.ctime())
 f.close()
+'''
+print("------------------------------------------------------------")  # 60個
+
+import logging
+
+# 獲取logger對象,取名mylog
+logger = logging.getLogger("mylog")
+# 輸出DEBUG及以上級別的信息，針對所有輸出的第一層過濾
+logger.setLevel(level=logging.DEBUG)
+
+# 獲取文件日誌句柄並設置日誌級別，第二層過濾
+handler = logging.FileHandler("tmp_log.txt")
+handler.setLevel(logging.INFO)	
+
+# 生成並設置文件日誌格式，其中name爲上面設置的mylog
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+handler.setFormatter(formatter)
+
+# 獲取流句柄並設置日誌級別，第二層過濾
+console = logging.StreamHandler()
+console.setLevel(logging.WARNING)
+
+# 爲logger對象添加句柄
+logger.addHandler(handler)
+logger.addHandler(console)
+
+# 記錄日誌
+logger.info("show info")
+logger.debug("show debug")
+logger.warning("show warning")
+
+print('------------------------------------------------------------')	#60個
+
+
+
 
 print("------------------------------------------------------------")  # 60個
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+

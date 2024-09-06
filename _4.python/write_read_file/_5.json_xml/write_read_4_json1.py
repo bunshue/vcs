@@ -37,7 +37,7 @@ import json
 import datetime
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 print('字典 轉 json')
 data = {
    "name": "Joe Chen", 
@@ -836,13 +836,13 @@ print("單價：%d"%(dictMeal["單價"]))
 
 print("------------------------------------------------------------")  # 60個
 
-jsonStr='''
+jsonStr="""
     [    
         {"編號": "A","品名": "雙人分享餐","單價": 120},
         {"編號": "B","品名": "歡樂全家餐","單價": 399},
         {"編號": "C","品名": "情人精緻餐","單價": 540}
     ]
-'''
+"""
 
 listMeal=json.loads(jsonStr)
 
@@ -851,12 +851,12 @@ for meal in listMeal:
     print("品名：%s"%(meal["品名"]))
     print("單價：%d"%(meal["單價"]))
     print("="*20) 
-'''
+"""
 for meal in listMeal:
     for key in meal:
         print("%s：%s" %(key, meal[key]))
     print("="*20)
-'''
+"""
 
 print("------------------------------------------------------------")  # 60個
 
@@ -931,12 +931,42 @@ plt.savefig('tmp_event.png', dpi=300) 	# 將圓餅圖出成圖片，檔名為eve
 plt.show()                 	        # 顯示圓餅圖
 os.system('event.png')  	        # 開啟圓餅圖event.png圖片
 print("圖表建置成成功")
+'''
+print("------------------------------------------------------------")  # 60個
+
+data = [{"group":0,"param":["one","two","three"]},
+        {"group":1,"param":["1","2","3"]}] 
+
+jsonstr = json.dumps(data)
+print(jsonstr)
+jsonstr = json.dumps(data, sort_keys=True, 
+                 indent=4, separators=(',', ': '))
+print(jsonstr)
+data1 = json.loads(jsonstr)
+print(data1, type(data1))
+
+with open('tmp_json.txt','w') as json_file:
+    json.dump(data, json_file)
+    json_file.close()
+
+with open('tmp_json.txt','r') as json_file:
+    data = json.load(json_file)
+    json_file.close()
+print(data1, type(data1))
 
 print("------------------------------------------------------------")  # 60個
 
+
 print("------------------------------------------------------------")  # 60個
 
 
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")

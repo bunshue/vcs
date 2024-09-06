@@ -37,7 +37,7 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 # 設定負號
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 print(
@@ -329,7 +329,7 @@ plt.xlabel("time in sec)")
 
 #plt.show()
 
-img = np.load("scipy_data/digit8.npy")
+img = np.load("data/digit8.npy")
 
 plt.figure()
 plt.imshow(img, cmap="gray")
@@ -371,7 +371,7 @@ plt.title("sharpen image")
 
 print("------------------------------------------------------------")  # 60個
 
-img = np.load("scipy_data/digit3.npy")
+img = np.load("data/digit3.npy")
 filters = [
     [[-1, -1, -1], [1, 1, 1], [0, 0, 0]],
     [[-1, 1, 0], [-1, 1, 0], [-1, 1, 0]],
@@ -478,8 +478,6 @@ def sampler(
 tt = sampler(data, samples=5)
 print(tt)
 
-'''
-
 print("------------------------------------------------------------")  # 60個
 
 import numpy as np
@@ -493,8 +491,309 @@ print("dist.jaccard:",dist.pdist(matV,'jaccard'))
 
 print("------------------------------------------------------------")  # 60個
 
+print('關鍵字特徵')
+
+from scipy import stats
+import jieba
+import re
+
+def do_split(test_text):
+    pattern = r',|\.|/|;|\'|`|\[|\]|<|>|\?|:|"|\{|\}|\~|!|？|@|#|\$|%|\^|&|\(|\)|-|=|\_|\+|，|。|、|；|‘|’|【|】03   |·|！| |…|（|）' 
+    return re.split(pattern, test_text) 
 
 
+
+def get_keywords(data, feat):
+    ret = []
+    data[feat] = data[feat].apply(lambda x: x.strip())
+    for i in data[feat].unique():
+        # 將短句作爲關鍵字
+        if len(i) <= 50 and i not in ret:
+            ret.append(i)
+        # 將子句作爲關鍵字
+        for sentence in do_split(i):
+            if len(sentence) <= 50 and sentence not in ret:
+                ret.append(sentence)
+        # 將詞作爲關鍵字
+        for word in jieba.cut(i, cut_all=True):
+            if len(word) > 1 and word not in ret:
+                ret.append(word)
+    return ret
+
+def check_freq(data, feat, keywords, limit):
+    ret = []
+    for key in keywords:
+        try:
+            if len(data[data[feat].str.contains(key)]) > limit:
+                ret.append(key)
+        except:
+            pass
+    return ret
+
+def do_test(data, feat, key, y, debug=False):
+    arr1 = data[data[feat].str.contains(key) == True][y]
+    arr2 = data[data[feat].str.contains(key) == False][y]
+    ret1 = stats.ttest_ind(arr1, arr2, equal_var = False)
+    ret2 = stats.levene(arr1, arr2)
+    if ret1.pvalue < 0.05 or ret2.pvalue < 0.05:
+        return True    
+    return False
+
+def check(data, feat, y):
+    ret = []
+    keywords = get_keywords(data, feat)
+    arr = check_freq(data, feat, keywords, 5)
+    for word in arr:
+        if do_test(data, feat, word, y):
+            ret.append(word)
+    return ret
+
+# 讀取數據文件的前500條數據，其中第6個字段是微博內容，第5個字段爲點贊次數。
+data = pd.read_csv('data/weibo_train_data.txt', sep='\t', 
+                   header=None, nrows=500)
+print(check(data, 6, 5))
+
+print('------------------------------------------------------------')	#60個
+
+from scipy import stats
+
+arr1 = [96,95,95,95,95,95,95,95,95,95,95,95,95,95,95,
+        95,95,95,95,95,95,95,95,95,95,95,95,95,95,95]
+arr2 = [90,91,92,93,94,90,91,92,93,94,90,91,92,93,94,
+        90,91,92,93,94,90,91,92,93,94,90,91,92,93,94]
+print(stats.ttest_1samp(arr1, 92))
+print(stats.ttest_1samp(arr2, 92))
+print((np.mean(arr1)-92)/(np.std(arr1)/np.sqrt(len(arr1)-1)))
+print((np.mean(arr2)-92)/(np.std(arr2)/np.sqrt(len(arr2)-1)))
+
+print('------------------------------------------------------------')	#60個
+
+from scipy import stats
+
+
+print('正態性檢驗')
+
+# 檢驗樣本是否服從某一分佈
+np.random.seed(12345678)
+x = stats.norm.rvs(loc=0, scale=1, size=300) # loc爲均值，scale爲方差
+print(stats.kstest(x,'norm'))
+
+# 數據的正態性檢驗
+np.random.seed(12345678)
+x = stats.norm.rvs(loc=10, scale=2, size=70) 
+print(stats.shapiro(x))
+
+# 作圖法檢驗正態分佈
+np.random.seed(12345678)
+x = stats.norm.rvs(loc=10, scale=2, size=300) 
+plt.hist(x)
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+print('方差齊性檢驗')
+np.random.seed(12345678)
+rvs1 = stats.norm.rvs(loc=5,scale=10,size=500)  
+rvs2 = stats.norm.rvs(loc=25,scale=9,size=500)
+print(stats.levene(rvs1, rvs2))
+
+
+print('------------------------------------------------------------')	#60個
+
+from scipy import stats
+
+print('兩獨立樣本T檢驗')
+np.random.seed(12345678)
+rvs1 = stats.norm.rvs(loc=5,scale=10,size=500)  
+rvs2 = stats.norm.rvs(loc=6,scale=10,size=500)
+print(stats.ttest_ind(rvs1,rvs2))
+
+
+print('配對樣本T檢驗')
+np.random.seed(12345678)
+rvs1 = stats.norm.rvs(loc=5,scale=10,size=500) 
+rvs2 = (stats.norm.rvs(loc=5,scale=10,size=500) + stats.norm.rvs(scale=0.2,size=500)) 
+print(stats.ttest_rel(rvs1,rvs2))
+
+print('------------------------------------------------------------')	#60個
+
+from scipy import stats
+
+a = [47,56,46,56,48,48,57,56,45,57]  # 分組1
+b = [87,85,99,85,79,81,82,78,85,91]  # 分組2
+c = [29,31,36,27,29,30,29,36,36,33]  # 分組3
+print(stats.f_oneway(a,b,c))
+
+
+print('------------------------------------------------------------')	#60個
+
+from scipy import stats
+
+A = [6, 15, 22, 36, 40, 48, 53]
+B = [3, 4, 5, 12, 17, 18, 21]
+print(stats.ranksums(A, B))
+
+C = [1, 2, 3, 4, 5, 6, 7]
+print(stats.kruskal(A, B, C))
+
+
+print('------------------------------------------------------------')	#60個
+
+import statsmodels.api as sm 
+import scipy.stats as stats
+
+data = sm.datasets.anes96.load_pandas().data
+contingency = pd.crosstab(data['vote'], [data['educ']])
+print(stats.chi2_contingency(contingency)) # 卡方檢驗
+
+print('------------------------------------------------------------')	#60個
+
+from scipy import stats
+
+print('圖形描述相關性')
+import statsmodels.api as sm
+data = sm.datasets.ccard.load_pandas().data
+plt.scatter(data['INCOMESQ'], data['INCOME'])
+
+plt.show()
+
+print('正態資料的相關分析')
+np.random.seed(12345678)
+a = np.random.normal(0,1,100)
+b = np.random.normal(2,2,100)
+print(stats.pearsonr(a, b))
+
+
+print('非正態資料的相關分析')
+print(stats.spearmanr([1,2,3,4,5], [1,6,7,8,20]))
+
+
+print('------------------------------------------------------------')	#60個
+
+print('多元線性迴歸')
+import statsmodels.api as sm 
+
+data = sm.datasets.ccard.load_pandas().data
+model = sm.OLS(endog = data['AVGEXP'],
+     exog = data[['AGE','INCOME','INCOMESQ','OWNRENT']]).fit()
+
+print('多元線性迴歸 總結')
+print(model.summary())
+
+print('------------------------------------------------------------')	#60個
+
+# 邏輯迴歸
+
+import statsmodels.api as sm
+
+data = sm.datasets.ccard.load_pandas().data
+data['OWNRENT'] = data['OWNRENT'].astype(int)
+model = sm.Logit(endog = data['OWNRENT'], 
+     exog = data[['AVGEXP','AGE','INCOME','INCOMESQ']]).fit()
+
+print('邏輯迴歸 總結')
+print(model.summary())
+
+print('------------------------------------------------------------')	#60個
+
+import statsmodels as sm
+import tableone 
+
+data = sm.datasets.anes96.load_pandas().data
+categorical = ['TVnews', 'selfLR', 'ClinLR', 'educ', 'income'] 
+groupby = 'vote'
+mytable = tableone.TableOne(data, categorical=categorical, 
+                            groupby=groupby, pval=True)
+print()
+print()
+print()
+print()
+print()
+print(mytable)
+mytable.to_excel("tmp_b.xlsx")
+
+print('------------------------------------------------------------')	#60個
+
+print('方差、協方差、協方差矩陣')
+
+# 數據準備
+df = pd.DataFrame({'身高':[1.7, 1.8, 1.65, 1.75, 1.8], 
+                   '體重':[140, 170, 135,  150,  200]})
+print(df)
+
+print('均值')
+print(df['身高'].mean())
+
+print('方差')
+print(df['身高'].var())
+print((sum((df['身高']-df['身高'].mean())**2))/(len(df)-1))
+
+print('標準差')
+print(df['身高'].std())
+
+print('協方差')
+print((sum((df['體重']-df['體重'].mean())*(df['身高']-df['身高'].mean()))/(len(df)-1)))
+
+print('協方差矩陣')
+print(df.cov())
+
+print('相關係數和相關係數矩陣')
+print(df.corr())
+
+print('------------------------------------------------------------')	#60個
+
+print('距離與範數')
+
+from scipy.spatial.distance import pdist  # 導入科學計算庫中的距離計算工具
+
+df = pd.DataFrame({'身高':[1.7, 1.8, 1.65, 1.75, 1.8], 
+                   '體重':[140, 170, 135,  150,  200]})
+x = df.loc[0,:]  # 取第一條實例x
+print(x)
+y = df.loc[1,:]  # 取第二條實例y
+print(y)
+
+print('歐氏距離')
+d1 = np.sqrt(np.sum(np.square(x-y))) # 公式計算
+d2 = pdist([x,y])  # 調用距離函數
+print(d1, d2)
+
+print('曼哈頓距離')
+d1 = np.sum(np.abs(x-y))
+d2 = pdist([x,y],'cityblock')
+print(d1, d2)
+
+print('海明距離')
+d1 = pdist([x,y], 'hamming') 
+d2 = pdist([[0,0,0,1],[0,0,0,8]], 'hamming') # 對比兩數組的海明距離
+print(d1, d2)
+
+print('閔氏距離')
+d1=np.sqrt(np.sum(np.square(x-y)))
+d2=pdist([x,y],'minkowski',p=2) # 求取p=2時的閔氏距離
+print(d1, d2)
+
+print('切比雪夫距離')
+d1 = np.max(np.abs(x-y))
+d2 = pdist([x,y],'chebyshev')
+print(d1, d2)
+
+print('馬氏距離')
+delta = x-y
+S=df.cov()   #協方差矩陣
+SI = np.linalg.inv(S) #協方差矩陣的逆矩陣
+d1=np.sqrt(np.dot(np.dot(delta,SI),delta.T))
+d2=pdist([x,y], 'mahalanobis', VI=SI)
+print(d1, d2)
+
+print('------------------------------------------------------------')	#60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個

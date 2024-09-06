@@ -199,6 +199,83 @@ print(cv.get_feature_names_out())
 print("------------------------------------------------------------")  # 60個
 
 
+
+print('分詞工具')
+
+import jieba
+print(' '.join(jieba.cut('今天我去參觀展覽館', cut_all=True))) # 全模式
+print(' '.join(jieba.cut('今天我去參觀展覽館', cut_all=False))) # 精確模式
+
+jieba.load_userdict('data/_jieba/a.txt')
+print(jieba.cut('今天我去參觀展覽館'))
+
+import jieba.posseg as pseg
+words = pseg.cut("今天我去參觀展覽館")
+for w in words:
+    print("%s %s" %(w.word, w.flag))
+
+print('------------------------------------------------------------')	#60個
+
+import numpy as np
+import pandas as pd
+
+print('TF-IDF逆文本頻率指數')
+
+import jieba
+from sklearn.feature_extraction.text import CountVectorizer 
+from sklearn.feature_extraction.text import TfidfTransformer  
+
+arr = ['第一天我參觀了美術館',
+       '第二天我參觀了博物館',
+       '第三天我參觀了動物園',]
+
+arr = [' '.join(jieba.cut(i)) for i in arr] # 分詞
+print(arr)
+
+vectorizer = CountVectorizer() 
+X = vectorizer.fit_transform(arr) 
+word = vectorizer.get_feature_names_out() 
+df = pd.DataFrame(X.toarray(), columns=word)
+print(df)
+
+transformer = TfidfTransformer()
+tfidf = transformer.fit_transform(X)
+weight = tfidf.toarray()
+for i in range(len(weight)): # 訪問每一句
+    print("第{}句：".format(i))
+    for j in range(len(word)):  # 訪問每個詞
+        if weight[i][j] > 0.05:  # 只顯示重要關鍵字
+            print(word[j],round(weight[i][j],2))  # 保留兩位小數
+
+print('------------------------------')	#30個
+
+# 寫程序實現TF-IDF方法
+
+from collections import Counter
+
+countlist = []
+for i in range(len(arr)):
+    count = Counter(arr[i].split(' ')) # 用空格將字串切分成字符串列表，統計每個詞出現次數
+    countlist.append(count)
+print(countlist)
+
+def tf(word, count): 
+    return count[word] / sum(count.values())
+def contain(word, count_list): # 統計包含關鍵詞word的句子數量
+    return sum(1 for count in count_list if word in count)
+def idf(word, count_list):
+    return np.log(len(count_list) / (contain(word, count_list)) + 1)  #爲避免分母爲0，分母加1
+def tfidf(word, count, count_list):
+    return tf(word, count) * idf(word, count_list)
+for i, count in enumerate(countlist):
+    print("第{}句：".format(i))
+    scores = {word: tfidf(word, count, countlist) for word in count}
+    for word, score in scores.items():
+        print(word, round(score, 2))
+
+print('------------------------------------------------------------')	#60個
+
+
 print("------------------------------------------------------------")  # 60個
 
 

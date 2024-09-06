@@ -31,7 +31,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print('------------------------------------------------------------')	#60個
-'''
+
 name = ["鼠", "牛", "虎", "兔"]
 weight = [3, 48, 33, 8]
 
@@ -531,10 +531,10 @@ plt.xticks(rotation=30)
 ax.legend(loc="lower left", bbox_to_anchor=(1, 0))
 
 plt.show()
-'''
+
 print("------------------------------------------------------------")  # 60個
 
-'''
+
 print("bikes ST")
 
 broken_df = pd.read_csv("data/bikes.csv", encoding="ISO-8859-1")
@@ -664,7 +664,7 @@ weekday_counts.plot(kind="bar")
 plt.show()
 
 print("bikes SP")
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 plt.style.use("ggplot")
@@ -1628,3 +1628,41 @@ df.to_html("tmp_ch9-4-4.html")
 print("------------------------------------------------------------")  # 60個
 
 
+
+
+
+"""
+
+#準備做 pandas 多圖 TBD
+
+name = ["鼠", "牛", "虎", "兔"]
+weight = [3, 48, 33, 8]
+
+print('建立 DataFrame')
+df = pd.DataFrame()
+df["name"] = name
+df["weight"] = weight
+print(df)
+
+df["weight"].plot(kind = 'line', title = '線圖', fontsize = 12)
+
+plt.show()
+
+
+df = pd.DataFrame(np.random.randint(1, 7, 6000),columns = ['one'])
+df['two'] = df['one'] + np.random.randint(1, 7, 6000)
+
+fig,ax1=plt.subplots(2,1,figsize=(10,8))
+df.plot.hist(bins=12, alpha=0.5,ax=ax1)
+ax1.set_title('Hist. plot')
+ax1.set_xlabel('Xlabel')
+
+
+fig,ax2=plt.subplots(1,2,figsize=(10,8))
+df.plot.hist(bins=12, alpha=0.5,ax=ax2)
+ax2.set_title('Hist. plot')
+ax2.set_xlabel('Xlabel')
+
+
+plt.show()
+"""

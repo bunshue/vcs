@@ -1,6 +1,7 @@
 import sys
 import sqlite3
 
+'''
 print("------------------------------------------------------------")  # 60個
 print("讀取資料庫的所有資料")
 
@@ -502,5 +503,33 @@ elif field == "3":
 conn.execute(sql)  # 執行SQL指令
 conn.commit()  # 更新資料庫
 conn.close()  # 關閉資料庫
+'''
+print("------------------------------------------------------------")  # 60個
+
+print('Python存取Sqlite數據庫')
+
+import sqlite3
+
+conn = sqlite3.connect('tmp_test.db')
+c = conn.cursor()
+c.execute("""CREATE TABLE IF NOT EXISTS TIPS 
+       (NAME           TEXT    NOT NULL,
+       ADDRESS        CHAR(50),
+       BILL         REAL);""") # 創建數據表
+c.execute("INSERT INTO TIPS (NAME,ADDRESS,BILL) \
+      VALUES ('Zhang', 'Beijing', 1004.00 )"); # 向表中輸入數據
+cursor = c.execute("SELECT * from TIPS")
+for row in cursor:
+    print(row)
+conn.commit()
+conn.close()
 
 print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+

@@ -12,37 +12,33 @@ using System.Threading;
 using AForge.Video;             //需要添加這兩個.dll, 參考/加入參考/瀏覽此二檔
 using AForge.Video.DirectShow;  // Video Recording
 //using AForge.Video.FFMPEG;      //for VideoFileWriter
-
 using AForge.Vision.Motion;     // Motion detection
 
 /*
+參考
+【AForge.NET】C#上使用AForge.Net擷取視訊畫面
+https://ccw1986.blogspot.com/2013/01/ccaforgenetcapture-image.html
+
+AForge下載鏈結
+http://www.aforgenet.com/framework/downloads.html
+
+Aforge.Net 安裝路徑設定
+Solution Explorer(方案總管) => References(參考)(右鍵) => Add Reference(加入參考) => AForge.Net的Release資料夾
+加入AForge.Video.dll、AForge.Video.DirectShow.dll
+
 移動偵測 需要 參考/加入參考/選取以下3個dll
 AForge.dll
 AForge.Imaging.dll
 AForge.Vision.dll
-*/
-
-//參考
-//【AForge.NET】C#上使用AForge.Net擷取視訊畫面
-//https://ccw1986.blogspot.com/2013/01/ccaforgenetcapture-image.html
-
-//AForge下載鏈結
-//http://www.aforgenet.com/framework/downloads.html
-
-/*
-Aforge.Net 安裝路徑設定
-Solution Explorer(方案總管) => References(參考)(右鍵) => Add Reference(加入參考) => AForge.Net的Release資料夾
-加入AForge.Video.dll、AForge.Video.DirectShow.dll
-*/
+ */
 
 namespace vcs_WebCam4_MotionDetection
 {
     public partial class Form1 : Form
     {
-        public FilterInfoCollection USBWebcams = null;
-        public VideoCaptureDevice Cam = null;
-
-        MotionDetector md;
+        private FilterInfoCollection USBWebcams = null;
+        private VideoCaptureDevice Cam = null;
+        MotionDetector motion_detector;
 
         private const int BORDER = 10;
         private const int W_pictureBox1 = 640;
@@ -59,16 +55,15 @@ namespace vcs_WebCam4_MotionDetection
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //C# 跨 Thread 存取 UI
-            Form1.CheckForIllegalCrossThreadCalls = false;  //解決跨執行緒控制無效
-
             show_item_location();
 
             Init_WebcamSetup();
+            Start_Webcam();
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
+            //Stop_Webcam();
             if (Cam != null)
             {
                 if (Cam.IsRunning)  // When Form1 closes itself, WebCam must stop, too.
@@ -124,7 +119,7 @@ namespace vcs_WebCam4_MotionDetection
                 Cam.NewFrame += new NewFrameEventHandler(Cam_NewFrame);
                 Cam.Start();   // WebCam starts capturing images.
 
-                md = new MotionDetector(new TwoFramesDifferenceDetector(), new MotionAreaHighlighting()); // creates the motion detector
+                motion_detector = new MotionDetector(new TwoFramesDifferenceDetector(), new MotionAreaHighlighting()); // creates the motion detector
 
                 /*
                 //以下為WebCam訊息與調整視窗大小
@@ -188,7 +183,7 @@ namespace vcs_WebCam4_MotionDetection
                 // if motion detection is enabled and there werent any previous motion detected
                 Bitmap bitmap2 = (Bitmap)bm.Clone(); // clone the bits from the current frame
 
-                if (md.ProcessFrame(bitmap2) > 0.001) // feed the bits to the MD 
+                if (motion_detector.ProcessFrame(bitmap2) > 0.001) // feed the bits to the MD 
                 {
                     if (this.calibrateAndResume > 3)
                     {

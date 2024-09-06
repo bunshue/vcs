@@ -7,44 +7,43 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.IO;
-
 using System.Threading;
-
 using System.Drawing.Imaging;   //for ImageFormat
 
 using AForge.Video;             //需要添加這兩個.dll, 參考/右鍵/加入參考/瀏覽 此二檔 AForge.Video.dll和AForge.Video.DirectShow.dll
 using AForge.Video.DirectShow;
-
-//使用Aforge的VideoSourcePlayer, 在要再多添加4個.dll
+using AForge.Vision.Motion;     // Motion detection
 
 /*
+參考
+【AForge.NET】C#上使用AForge.Net擷取視訊畫面
+https://ccw1986.blogspot.com/2013/01/ccaforgenetcapture-image.html
+
+AForge下載鏈結
+http://www.aforgenet.com/framework/downloads.html
+
 Aforge.Net 安裝路徑設定
 Solution Explorer(方案總管) => References(參考)(右鍵) => Add Reference(加入參考) => AForge.Net的Release資料夾
 加入AForge.Video.dll、AForge.Video.DirectShow.dll
+
+移動偵測 需要 參考/加入參考/選取以下3個dll
+AForge.dll
+AForge.Imaging.dll
+AForge.Vision.dll
 */
 
-using AForge.Vision.Motion;     // Motion detection
-
-namespace vcs_WebCam_AForge3_MotionDetection
+namespace vcs_WebCam_AForge3_MotionDetection  // 標準 移動偵測
 {
     public partial class Form1 : Form
     {
-        //參考
-        //【AForge.NET】C#上使用AForge.Net擷取視訊畫面
-        //https://ccw1986.blogspot.com/2013/01/ccaforgenetcapture-image.html
-
-        //AForge下載鏈結
-        //http://www.aforgenet.com/framework/downloads.html
-
         private FilterInfoCollection USBWebcams = null;
-        int webcam_count = 0;
+        private VideoCaptureDevice Cam = null; // refrence to the actual VidioCaptureDevice (webcam)
+        MotionDetector motion_detector;
+
         private const int BORDER = 10;
 
         bool flag_motion_detection = false;
-        MotionDetector motion_detector;
 
-        private VideoCaptureDevice Cam = null; // refrence to the actual VidioCaptureDevice (webcam)
         bool motionDetected = false; // was there any motion detected previously
         int calibrateAndResume = 0; // counter used delay/skip frames from being processed by the MotionDetector
 
@@ -156,9 +155,7 @@ namespace vcs_WebCam_AForge3_MotionDetection
         {
             USBWebcams = new FilterInfoCollection(FilterCategory.VideoInputDevice); //實例化對象
 
-            webcam_count = USBWebcams.Count;
-
-            if (webcam_count > 0)
+            if (USBWebcams.Count > 0)
             {
                 this.pictureBox1.Paint += new PaintEventHandler(DrawMessage);
 

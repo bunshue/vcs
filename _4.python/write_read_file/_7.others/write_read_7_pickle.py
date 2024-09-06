@@ -4,7 +4,7 @@ import pickle
 print('使用 pickle 模組 寫讀二進位檔案')
 
 print('------------------------------------------------------------')	#60個
-
+'''
 filename = 'tmp_pickle1.dat'
 
 print('寫入二進位檔案 :', filename)
@@ -234,6 +234,34 @@ else:
 
     f.close()
     print(addressList)
+'''
+
+print("------------------------------------------------------------")  # 60個
+
+
+import pickle
+data1 = {'a': [1, 2.0, 4+6j],
+         'b': ('string1', u'Unicode string'),
+         'c': None}
+output = open('tmp2.pkl', 'wb')
+pickle.dump(data1, output)
+output.close()
+
+pkl_file = open('tmp2.pkl', 'rb')
+data2 = pickle.load(pkl_file)
+print(data2)
+pkl_file.close()
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
 
 
 print("------------------------------------------------------------")  # 60個

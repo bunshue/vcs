@@ -44,7 +44,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 print('---- 1111 csv --------------------------------------------------------')	#60個
 
 print('pandas DataFrame資料輸出到csv檔')
@@ -661,7 +661,7 @@ print("數學平均", np.mean(dat["數學"]))
 print("數學中位數", np.median(dat["數學"]))
 
 print("------------------------------------------------------------")  # 60個
-''' no file
+
 # NYC 311 service request dataset
 csv_filename = "C:/_git/vcs/_big_files/311-service-requests.csv"
 print("pd讀取csv檔案 :", csv_filename)
@@ -756,7 +756,7 @@ requests["Incident Zip"] = fix_zip_codes(requests["Incident Zip"])
 
 cc = requests["Incident Zip"].unique()
 print(cc)
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 # Parsing Unix timestamps
@@ -815,12 +815,56 @@ print(
 
 print("------------------------------------------------------------")  # 60個
 
+print('df 轉 pickle')
+
+df = pd.DataFrame({'Name': ['Smith', 'Lucy'], 'Age': ['25', '20'], 'Sex': ['男','女']})
+print(df.info())
+df.to_pickle("tmp.pkl")
+
+df1 = pd.read_pickle("tmp.pkl")
+print(df1.info())
+'''
+
+print("------------------------------------------------------------")  # 60個
+
+# df轉csv
+print('讀寫CSV文件')
+
+df = pd.DataFrame({'Name': ['Smith', 'Lucy'], 'Age': ['25', '20'], 'Sex': ['男','女']})
+print(df.info()) # 顯示dataframe相關信息
+df.to_csv("tmp.csv", index=False, header=True, columns=['Name','Sex','Age'])
+
+df1 = pd.read_csv("tmp.csv")
+print(df1.info())
+print(df1)
+
+print('------------------------------------------------------------')	#60個
+
+print('讀寫Excel文件')
+
+print('df轉excel')
+df = pd.DataFrame({'Name': ['Smith', 'Lucy'], 'Age': ['25', '20'], 'Sex': ['男','女']})
+df.to_excel("tmp_a.xlsx")
+
+print('pd讀取excel')
+df1 = pd.read_excel("tmp_a.xlsx")
+print(df1)
+
+print('------------------------------------------------------------')	#60個
+
+
 
 print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
 
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
 print("------------------------------------------------------------")  # 60個
 
 
@@ -828,3 +872,7 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
