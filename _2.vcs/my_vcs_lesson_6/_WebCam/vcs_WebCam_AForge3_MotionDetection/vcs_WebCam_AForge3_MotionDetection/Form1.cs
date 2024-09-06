@@ -26,7 +26,7 @@ Solution Explorer(方案總管) => References(參考)(右鍵) => Add Reference(�
 
 using AForge.Vision.Motion;     // Motion detection
 
-namespace vcs_WebCam4_MotionDetection222
+namespace vcs_WebCam_AForge3_MotionDetection
 {
     public partial class Form1 : Form
     {

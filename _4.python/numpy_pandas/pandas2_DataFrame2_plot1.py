@@ -32,23 +32,52 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print('------------------------------------------------------------')	#60個
 '''
-#                   2015,2016,2017,2018,2019
+name = ["鼠", "牛", "虎", "兔"]
+weight = [3, 48, 33, 8]
+
+print('建立 DataFrame')
+df = pd.DataFrame()
+df["name"] = name
+df["weight"] = weight
+print(df)
+
+"""
+df.index = df["name"]
+df["weight"].plot(kind="pie", autopct="%.0f%%", title = '派圖', fontsize = 12)
+"""
+
+"""
+df["weight"].plot(kind = 'line', title = '線圖', fontsize = 12)
+"""
+
+df["weight"].plot(kind = 'bar', title = '長條圖', fontsize = 12)
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+#                  2015,2016,2017,2018,2019
 df = pd.DataFrame([[250, 320, 300, 312, 280],   #北部
                    [280, 300, 280, 290, 310],   #中部
                    [220, 280, 250, 305, 250]],  #南部
                    index = ['北部', '中部', '南部'],
                    columns = [2015, 2016, 2017, 2018, 2019])
 
-g0 = df.plot(kind = 'line', title = '線圖', figsize = [10, 5])
-g1 = df.plot(kind = 'bar', title = '長條圖', figsize = [10, 5])
-g2 = df.plot(kind = 'barh', title = '橫條圖', figsize = [10, 5])
-g3 = df.plot(kind = 'bar', stacked = True, title = '堆疊圖', figsize = [10, 5])
+df.plot(kind = 'line', title = '線圖', figsize = [10, 5])
+plt.show()
 
+df.plot(kind = 'bar', title = '長條圖', figsize = [10, 5])
+plt.show()
+
+df.plot(kind = 'barh', title = '橫條圖', figsize = [10, 5])
+plt.show()
+
+df.plot(kind = 'bar', stacked = True, title = '堆疊圖', figsize = [10, 5])
 plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-#                   2015,2016,2017,2018,2019
+#                  2015,2016,2017,2018,2019
 df = pd.DataFrame([[250, 320, 300, 312, 280],   #北部
                    [280, 300, 280, 290, 310],   #中部
                    [220, 280, 250, 305, 250]],  #南部
@@ -62,7 +91,7 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-#                   2015,2016,2017,2018,2019
+#                  2015,2016,2017,2018,2019
 df = pd.DataFrame([[250, 320, 300, 312, 280],   #北部
                    [280, 300, 280, 290, 310],   #中部
                    [220, 280, 250, 305, 250]],  #南部
@@ -75,56 +104,65 @@ plt.show()
 print('------------------------------------------------------------')	#60個
 
 
-#     "國文", "數學", "英文", "自然", "社會"]
+#     "國文", "數學", "英文", "自然", "社會"
 datas = [[65, 92, 78, 83, 70],  #學生A
          [90, 72, 76, 93, 56],  #學生B
          [81, 85, 91, 89, 77],  #學生C
          [79, 53, 47, 94, 80]]  #學生D
 indexs = ["林大明", "陳聰明", "黃美麗", "熊小娟"]
 columns = ["國文", "數學", "英文", "自然", "社會"]
+
 df = pd.DataFrame(datas, columns = columns,  index = indexs)
 df.plot(kind = 'bar', title = '一年甲班成績單', fontsize = 12)
 
 plt.show()
 
 print('------------------------------------------------------------')	#60個
-#      "國文","數學","英文","自然","社會"
-datas = [[65,92,78,83,70],  #學生A
-         [90,72,76,93,56],  #學生B
-         [81,85,91,89,77],  #學生C
-         [79,53,47,94,80]]  #學生D
 
+#      "國文","數學","英文","自然","社會"
+datas = [[65, 92, 78, 83, 70],  #學生A
+         [90, 72, 76, 93, 56],  #學生B
+         [81, 85, 91, 89, 77],  #學生C
+         [79, 53, 47, 94, 80]]  #學生D
 columns = ["國文", "數學", "英文", "自然", "社會"]
+
 df = pd.DataFrame(datas, index=list(range(1,5)), columns=columns)
-df.plot(xticks=range(1,5))
+df.plot(xticks=range(1,5), title = '一年甲班成績單', fontsize = 12)
 
 plt.show()
 
 print('------------------------------------------------------------')	#60個
 
+""" no file
 filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_csv/python_ReadWrite_CSV5_Kobe_stats.csv'
+
 df = pd.read_csv(filename)
+
 data = pd.DataFrame()
 data["Season"] = pd.to_datetime(df["Season"])
 data["PTS"] = df["PTS"]
 data["AST"] = df["AST"]
 data["REB"] = df["TRB"]
+
 data = data.set_index("Season")
 data.plot(kind = 'line')
 
 plt.show()
-
+"""
 print('------------------------------------------------------------')	#60個
 
+""" no file
 filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_csv/python_ReadWrite_CSV5_HOU_players_stats.csv'
 df = pd.read_csv(filename)
 df_grouped = df.groupby("Pos")
 points = df_grouped["PTS/G"].mean()
+
 data = pd.DataFrame()
 data["Points"] = points
 points.plot(kind = 'bar')
 
 plt.show()
+"""
 
 print('------------------------------------------------------------')	#60個
 
@@ -135,6 +173,7 @@ print('係數矩陣 :', df.corr())
 
 print('------------------------------------------------------------')	#60個
 
+""" no sklearn
 filename = 'data/fb_tracking_happiness.csv'
 df = pd.read_csv(filename)
 print(df.head())
@@ -164,7 +203,7 @@ print(df_minmax.head())
 df_minmax.plot(kind = "scatter", x = "fb_tracking_m", y = "happiness_m")
 
 plt.show()
-
+"""
 print('------------------------------------------------------------')	#60個
 
 #df = pd.DataFrame(np.random.randn(3,3), columns=list("甲乙丙"))
@@ -173,10 +212,10 @@ print('------------------------------------------------------------')	#60個
 #df = pd.DataFrame(np.random.randn(5, 3), index=list(range(1,6)), columns=list("ABC"))
 
 #                    A  B  C  D  E
-df = pd.DataFrame([[65,92,78,83,70],
-                   [90,72,76,93,56],
-                   [81,85,91,89,77],
-                   [79,53,47,94,80]],
+df = pd.DataFrame([[65, 92, 78, 83, 70],
+                   [90, 72, 76, 93, 56],
+                   [81, 85, 91, 89, 77],
+                   [79, 53, 47, 94, 80]],
                   index=list(range(1,5)), columns=list("ABCDE"))
 
 print('原資料 :\n', df)
@@ -187,8 +226,8 @@ print(df.describe())
 print('相關係數')
 print(df.corr())
 
-print('data_frame 存檔')
-df.to_csv("df_data.csv")
+print('df轉csv')
+df.to_csv("tmp_df_data1.csv")
 
 print('data_frame 畫點圖')
 
@@ -198,7 +237,7 @@ y = df.B.values
 plt.scatter(x,y)
 
 print('存圖')
-plt.savefig('df_data.png')
+plt.savefig('tmp_df_data.png')
 
 plt.show()
 
@@ -241,13 +280,16 @@ plt.show()
 fig, axs = plt.subplots(1, 2,sharey=True)
 df.plot(y=['a'],kind='line',ax=axs[0],legend=False)
 df.plot(y=['b','c','d'],kind='line',ax=axs[1],figsize=(20,5))
+
 #設定title
 axs[0].set_title('ax1')
 axs[1].set_title('ax2')
+
 #設定label
 axs[0].set_xlabel('xlabel')
 axs[1].set_xlabel('xlabel')
 axs[0].set_xlabel('ylabel')
+
 #調整各個圖的間距
 plt.subplots_adjust(hspace=0.5,  wspace=0.1)
 
@@ -315,7 +357,6 @@ print('------------------------------------------------------------')	#60個
 
 #box plot
 
-np.random.seed(1234)
 df = pd.DataFrame(np.random.randn(10,4),columns=['Col1', 'Col2', 'Col3', 'Col4'])
 df.boxplot(column=['Col1', 'Col2', 'Col3'])
 
@@ -329,7 +370,7 @@ speed = [0.1, 17.5, 40, 48, 52, 69, 88]
 lifespan = [2, 8, 70, 1.5, 25, 12, 28]
 index = ['snail', 'pig', 'elephant','rabbit', 'giraffe', 'coyote', 'horse']
 df = pd.DataFrame({'speed': speed,'lifespan': lifespan}, index=index)
-ax = df.plot.hist(y='lifespan',rot=45)#rot表示xstick旋轉的角度
+ax = df.plot.hist(y='lifespan',rot=45)  # rot表示xstick旋轉的角度
 
 plt.show()
 
@@ -386,104 +427,34 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 
 # 常態分佈轉series
-data = pd.Series(np.random.normal(size=100))
+N = 1000  # 樣本數
+s = pd.Series(np.random.normal(size=N))
 
-data.hist()
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-# 使用 NumPy 生成随机数
-random_data = np.random.normal(170, 10, 250)
-
-# 将数据转换为 Pandas DataFrame
-dataframe = pd.DataFrame(random_data)
-
-# 使用 Pandas hist() 方法绘制直方图
-dataframe.hist()
+#s.hist() #無參數
+#s.hist(bins=50, alpha=0.5)# same
+#s.plot.hist(bins=50, alpha=0.5)
+#s.plot(kind='hist', title='常態分佈轉series 直方圖的使用')
+s.plot(kind="hist", bins=50)
+#s.plot(kind="hist") # 未指定束數, 預設10束
 
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-from io import BytesIO
-from lxml import etree
-import base64
+mu = 170
+sigma = 10
+N = 500
+random_data = np.random.normal(mu, sigma, N)
 
-data = pd.DataFrame(
-    {
-        "id": ["1", "2", "3", "4", "5"],  # 構造數據
-        "math": [90, 89, 99, 78, 63],
-        "english": [89, 94, 80, 81, 94],
-    }
-)
-plt.plot(data["math"])  # matplotlib做圖
-plt.plot(data["english"])
+# np陣列轉df
+df = pd.DataFrame(random_data)
 
-# 保存網頁
-buffer = BytesIO()
-plt.savefig(buffer)
-plot_data = buffer.getvalue()
-
-imb = base64.b64encode(plot_data)  # 生成網頁內容
-ims = imb.decode()
-imd = "data:image/png;base64," + ims
-data_im = """<h1>Figure</h1>  """ + """<img src="%s">""" % imd
-data_des = """<h1>Describe</h1>""" + data.describe().T.to_html()
-root = "<title>Dataset</title>"
-root = root + data_des + data_im
-
-html = etree.HTML(root)
-tree = etree.ElementTree(html)
-tree.write("tmp_導出圖表.html")
-
-print("------------------------------------------------------------")  # 60個
-
-weight = [3, 48,33,8,38,16,36,29,22,6,12,42]
-animals = ["鼠", "牛", "虎", "兔", "龍", "蛇", "馬", "羊", "猴", "雞", "狗", "豬"]
-
-
-# 定義資料 
-sales_dep = pd.DataFrame({
-    "label": ["鼠", "牛", "虎", "兔", "龍"],
-    "value": [3, 48, 33, 8, 38]})
-
-print('繪製預設的派圖')
-plt.pie(sales_dep["value"], labels=sales_dep["label"], autopct="%1.1f%%")
-
-plt.show()
-
-print('從12點鐘方向開始繪製的派圖')
-
-# 排序（這次一開始就先排序資料） 
-sales_dep = sales_dep.sort_values("value", ascending=False) 
-plt.pie(sales_dep["value"], labels=sales_dep["label"],
-        autopct="%1.1f%%", startangle=90, counterclock=False) 
+#df.hist()
+df.plot(kind="hist", bins=50)
 
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
-
-print('只變更要強調的扇形的顏色')
-
-# 要強調的扇形的標籤 
-point_label = "第3業務部" 
-# 重點色 
-point_color = "#CC0000"
-
-# 調整特定標籤的顏色
-palette = sns.color_palette("binary", len(sales_dep)) 
-for i in sales_dep[sales_dep.label == point_label].index.values:
-    palette[i] = point_color 
-
-plt.pie(sales_dep["value"], labels=sales_dep["label"],
-        autopct="%1.1f%%", startangle=90, counterclock=False,
-        colors=palette)
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
 
 print("日本各都市平均氣溫全年資料")
 
@@ -560,8 +531,11 @@ plt.xticks(rotation=30)
 ax.legend(loc="lower left", bbox_to_anchor=(1, 0))
 
 plt.show()
-
+'''
 print("------------------------------------------------------------")  # 60個
+
+'''
+print("bikes ST")
 
 broken_df = pd.read_csv("data/bikes.csv", encoding="ISO-8859-1")
 
@@ -629,15 +603,11 @@ bikes = pd.read_csv(
 bikes["Berri 1"].plot()
 plt.show()
 
-
 berri_bikes = bikes[["Berri 1"]].copy()
-
 
 berri_bikes[:5]
 
-
 berri_bikes.index
-
 
 berri_bikes.index.day
 
@@ -645,7 +615,6 @@ berri_bikes.index.weekday
 
 berri_bikes.loc[:, "weekday"] = berri_bikes.index.weekday
 berri_bikes[:5]
-
 
 weekday_counts = berri_bikes.groupby("weekday").aggregate(sum)
 weekday_counts
@@ -660,7 +629,6 @@ weekday_counts.index = [
     "Sunday",
 ]
 weekday_counts
-
 
 weekday_counts.plot(kind="bar")
 
@@ -695,6 +663,8 @@ weekday_counts.plot(kind="bar")
 
 plt.show()
 
+print("bikes SP")
+'''
 print("------------------------------------------------------------")  # 60個
 
 plt.style.use("ggplot")
@@ -822,9 +792,7 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-
 print(is_snowing.astype(float)[:10])
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -870,9 +838,7 @@ plt.rcParams["font.family"] = "sans-serif"
 pd.set_option("display.width", 5000)
 pd.set_option("display.max_columns", 60)
 
-
 print("------------------------------------------------------------")  # 60個
-
 
 """
 # Make the graphs a bit prettier, and bigger
@@ -935,32 +901,33 @@ print("------------------------------------------------------------")  # 60個
 
 print('顯示')
 n_items = 366
-ts = pd.Series(np.random.randn(n_items), index=pd.date_range('20000101', periods=n_items))
+s = pd.Series(np.random.randn(n_items), index=pd.date_range('20000101', periods=n_items))
 
-print('顯示ts大小')
-print(ts.shape)
+print('顯示s大小')
+print(s.shape)
 
-print('顯示ts頭5項')
-print(ts.head(5))
+print('顯示s頭5項')
+print(s.head(5))
 
 print('顯示')
-print(ts.resample("1m").sum())
+print(s.resample("1m").sum())
 
 plt.figure(figsize=(10, 6))
-cs = ts.cumsum()
+cs = s.cumsum()
 cs.plot()
 plt.title('aaa')
 plt.show()
 
 plt.figure(figsize=(10, 6))
-ts.resample("1m").sum().plot.bar()
+s.resample("1m").sum().plot.bar()
 plt.title('bbb')
 plt.show()
 
 df = pd.DataFrame(np.random.randn(100, 4), columns=list('ABCD'))
-df.to_csv('tmp_data.csv')
+print("df轉csv")
+df.to_csv('tmp_df_data2.csv')
 
-df = pd.read_csv('tmp_data.csv', index_col=0)
+df = pd.read_csv('tmp_df_data2.csv', index_col=0)
 print(df.shape)
 print(df.head(5))
 
@@ -974,8 +941,10 @@ dists = {"name": ["Zhongzheng", "Banqiao", "Taoyuan", "Beitun",
                         192327, 343203, 309835, 222531,
                         198473, 189623, 359125, 
                         225561, 302070]}
+print(type(df))
 df = pd.DataFrame(dists)
-print(df) 
+print(df)
+
 #df.to_html("ch9-4-2-01.html")  #df轉html
 df.plot()
 
@@ -1040,21 +1009,6 @@ df.plot(xticks=range(len(df.index)),
         rot=45)
 
 plt.title('ggg')
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-usage = {"os": ["Windows","Mac OS","Linux","Chrome OS","BSD"],
-         "percentage": [88.78, 8.21, 2.32, 0.34, 0.02]}
-
-df = pd.DataFrame(usage, 
-                  columns=["percentage"],
-                  index=usage["os"])
-print(df)
-df.to_html("tmp_ch9-4-4.html")
-df.plot(kind="bar")
-
-plt.title('iii')
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
@@ -1148,15 +1102,15 @@ print("------------------------------------------------------------")  # 60個
 
 # 創造一些隨機資料 create some data with random value
 
-ts = pd.Series(np.random.randn(1000), index = pd.date_range('1/1/2000', periods = 1000))
-ts = ts.cumsum() # 計算累積值 cumulative sum
+s = pd.Series(np.random.randn(1000), index = pd.date_range('1/1/2000', periods = 1000))
+s = s.cumsum() # 計算累積值 cumulative sum
 
-ts.plot()
+s.plot()
 
 plt.show()
 
 
-df = pd.DataFrame(np.random.randn(1000, 4), index = ts.index, columns = list('ABCD'))
+df = pd.DataFrame(np.random.randn(1000, 4), index = s.index, columns = list('ABCD'))
 df = df.cumsum()
 
 df.plot()
@@ -1184,13 +1138,10 @@ print("------------------------------------------------------------")  # 60個
 
 #1.初始化
 
-import pandas as pd #引入Pandas模組 as pd
-
 pd.set_option("display.max_rows", 1000)    #設定最大能顯示1000rows
 pd.set_option("display.max_columns", 1000) #設定最大能顯示1000columns
 
 #2.解決plot不能顯示中文問題
-
 from pylab import mpl
 mpl.rcParams['font.sans-serif'] = ['Microsoft YaHei']  
 mpl.rcParams['axes.unicode_minus'] = False
@@ -1216,11 +1167,11 @@ print(cc)
 #如果屬性是Object，如何改成數值屬性
 #df["屬於Object的欄位"] = pd.to_numeric(df.屬於Object的欄位, errors='coerce')
 
-#4.3相關係數
-
+"""
+#相關係數
 cc = df.corr()
 print(cc)
-
+"""
 print("折線圖")
 
 df.plot(x='監測月份', y='PM25',title='監測月份與PM2.5的關係')
@@ -1230,58 +1181,41 @@ df.plot(x='監測月份', y='PM10',title='監測月份與PM10的關係')
 plt.show()
 
 print("柱狀圖")
-
 df.plot(kind='bar',x='監測月份', y='PM25',title='監測月份與PM2.5的關係')
 plt.show()
 
-plt.show()
-
 print("橫向柱狀圖")
-
 df.plot(kind='barh',x='監測月份', y='PM25',title='監測月份與PM2.5的關係')
-
 plt.show()
 
 print("直方圖")
-
 df.plot(kind='hist',x='監測月份', y='PM25',title='監測月份與PM2.5的關係')
-
 plt.show()
 
+"""
 print("核密度(KDE)圖")
-
 df.plot(kind='kde',x='監測月份', y='PM25',title='監測月份與PM2.5的關係')
-
 plt.show()
+"""
 
 print("面積圖")
-
 df.plot(kind='area',x='監測月份', y='PM25',title='監測月份與PM2.5的關係')
-
 plt.show()
 
 print("圓餅圖")
-
 df.plot(kind='pie',x='監測月份', y='PM25',title='監測月份與PM2.5的關係',autopct = '%1.2f%%')
-
 plt.show()
 
 print("散佈圖")
-
 df.plot(kind='scatter',x='PM25', y='PM10',title='PM2.5與PM10的關係') #X,Y需為數值
-
 plt.show()
 
 print("六角形箱體圖")
-
 df.plot(kind='hexbin',x='PM25', y='PM10',title='PM2.5與PM10的關係') #X,Y需為數值
-
 plt.show()
 
 print("箱形圖")
-
 df.plot(kind='box',x='PM25', y='PM10',title='監測月份與PM2.5的關係') #X,Y需為數值
-
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
@@ -1313,25 +1247,20 @@ sns.rugplot(tips['tip'])
 
 plt.show()
 
-import numpy as np
-sns.barplot(x='sex',y='total_bill',data=tips,estimator=np.std)
 
+sns.barplot(x='sex',y='total_bill',data=tips,estimator=np.std)
 plt.show()
 
 sns.countplot(x='sex',data=tips)
-
 plt.show()
 
 sns.boxplot(x='day',y='total_bill',data=tips,hue='smoker')
-
 plt.show()
 
 sns.violinplot(x='day',y='total_bill',data=tips,hue='sex',split=True)
-
 plt.show()
 
 sns.stripplot(x='day',y='total_bill',data=tips,jitter=True,hue='sex',dodge=True)
-
 plt.show()
 
 sns.violinplot(x='day',y='total_bill',data=tips)
@@ -1397,11 +1326,7 @@ sns.countplot(x='sex',data=tips)
 
 plt.show()
 
-'''
-
-
 print("------------------------------------------------------------")  # 60個
-
 
 df = pd.read_csv("data/年度銷售金額.csv")
 
@@ -1413,33 +1338,27 @@ print(df)
 
 df["1st"].plot(kind="pie", autopct="%.2f%%")
 #df["1st"].plot(kind="pie")
-
 plt.show()
 
 print("------------------------------")  # 30個
 
 df.plot(kind="bar", rot=0)
-
 plt.show()
 
 print("------------------------------")  # 30個
 
 # 旋轉X軸標籤角度
-
 df.plot(kind="bar")
-
 plt.show()
 
 print("------------------------------")  # 30個
 
 df.plot(kind="bar", rot=0)
-
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
 df.plot(kind="barh")
-
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
@@ -1453,22 +1372,6 @@ df["1st"].plot(kind="pie", figsize=(4, 4))
 df["1st"].plot(kind="pie", autopct="%.2f")
 df["1st"].plot(kind="pie", autopct="%.0f%%")
 """
-
-print("------------------------------------------------------------")  # 60個
-
-name = ["鼠", "牛", "虎", "兔"]
-weight = [3, 48, 33, 8]
-
-df = pd.DataFrame()
-df["name"] = name
-df["weight"] = weight
-print(df)
-
-df.index = df["name"]
-
-df["weight"].plot(kind="pie", autopct="%.0f%%")
-
-plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1706,4 +1609,22 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
+
+
+#如果是pandas資料 用 plt畫圖的 要改成pandas資料之使用
+
+
+#df 轉  html
+
+usage = {"os": ["Windows","Mac OS","Linux","Chrome OS","BSD"],
+         "percentage": [88.78, 8.21, 2.32, 0.34, 0.02]}
+
+df = pd.DataFrame(usage, 
+                  columns=["percentage"],
+                  index=usage["os"])
+print(df)
+df.to_html("tmp_ch9-4-4.html")
+
+print("------------------------------------------------------------")  # 60個
+
 

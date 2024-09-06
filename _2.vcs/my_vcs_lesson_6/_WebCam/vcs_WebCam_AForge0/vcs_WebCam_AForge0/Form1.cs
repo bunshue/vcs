@@ -20,7 +20,7 @@ Solution Explorer(方案總管) => References(參考)(右鍵) => Add Reference(�
 加入AForge.Video.dll、AForge.Video.DirectShow.dll
 */
 
-namespace vcs_WebCam_AForge0
+namespace vcs_WebCam_AForge0  //以此為準
 {
     public partial class Form1 : Form
     {
@@ -31,7 +31,7 @@ namespace vcs_WebCam_AForge0
         //AForge下載鏈結
         //http://www.aforgenet.com/framework/downloads.html
 
-        public FilterInfoCollection USBWebcams = null;
+        private FilterInfoCollection USBWebcams = null;
         public VideoCaptureDevice Cam = null;
 
         private const int BORDER = 10;
@@ -55,6 +55,7 @@ namespace vcs_WebCam_AForge0
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
+            //Stop_Webcam();
             if (Cam != null)
             {
                 if (Cam.IsRunning)  // When Form1 closes itself, WebCam must stop, too.
@@ -97,7 +98,6 @@ namespace vcs_WebCam_AForge0
                 Cam = new VideoCaptureDevice(USBWebcams[0].MonikerString);  //實例化對象
 
                 Cam.NewFrame += new NewFrameEventHandler(Cam_NewFrame);
-                Cam.Start();   // WebCam starts capturing images.
 
                 //以下為WebCam訊息與調整視窗大小
                 Cam.VideoResolution = Cam.VideoCapabilities[0];
@@ -112,6 +112,7 @@ namespace vcs_WebCam_AForge0
                 //有抓到WebCam, 重新設定pictureBox的大小和位置
                 pictureBox1.Size = new Size(ww, hh);
                 pictureBox1.Location = new Point(BORDER, BORDER);
+                //this.ClientSize = new Size(pictureBox1.Location.X + pictureBox1.Width + 50, pictureBox1.Location.Y + pictureBox1.Height + 50);
             }
             else
             {
@@ -144,23 +145,79 @@ namespace vcs_WebCam_AForge0
             pictureBox1.Image = null;
         }
 
+        int frame_count = 0;        //計算fps用
+        int frame_count_old = 0;    //計算fps用
+        DateTime dt_old = DateTime.Now;
+
         public Bitmap bm = null;
         //自定義函數, 捕獲每一幀圖像並顯示
         void Cam_NewFrame(object sender, NewFrameEventArgs eventArgs)
         {
+            frame_count++;
             try
             {
                 //pictureBox1.Image = (Bitmap)eventArgs.Frame.Clone();
                 bm = (Bitmap)eventArgs.Frame.Clone();
                 //bm.RotateFlip(RotateFlipType.RotateNoneFlipY);    //反轉
+                //pictureBox1.Image = bm;
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "xxx錯誤訊息n : " + ex.Message + "\n";
+            }
+
+            Graphics g = Graphics.FromImage(bm);
+
+            int w;
+            int h;
+            try
+            {
+                w = bm.Width;
+                h = bm.Height;
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "xxx錯誤訊息m : " + ex.Message + "\n";
+                GC.Collect();       //回收資源
+                return;
+            }
+
+            //顯示時間
+            string drawDate = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+            SolidBrush sb = new SolidBrush(Color.Yellow);
+            Font f = new Font("Arial", 6, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
+            int x_st = 10;
+            int y_st = 10;
+            g.DrawString(drawDate, f, sb, x_st, y_st);
+
+            try
+            {
                 pictureBox1.Image = bm;
             }
             catch (Exception ex)
             {
-                this.Text += "xxx錯誤訊息n : " + ex.Message + "\n";
+                richTextBox1.Text += "xxx錯誤訊息a : " + ex.Message + "\n";
+            }
+            GC.Collect();       //回收資源
+        }
+
+        private void timer_clock_Tick(object sender, EventArgs e)
+        {
+            if (Cam != null)
+            {
+                if (Cam.IsRunning == true)
+                {
+                    DateTime dt = DateTime.Now;
+                    lb_fps.Text = (((frame_count - frame_count_old) * 1000) / ((TimeSpan)(dt - dt_old)).TotalMilliseconds).ToString("F2") + " fps";
+                    dt_old = dt;
+                    frame_count_old = frame_count;
+                }
+                else
+                {
+                    lb_fps.Text = "";
+                }
             }
 
-            GC.Collect();       //回收資源
         }
 
         void save_image_file()
@@ -190,7 +247,7 @@ namespace vcs_WebCam_AForge0
                 {
                     bitmap1.Save(filename2, ImageFormat.Bmp);
                     //richTextBox1.Text += "存檔成功\n";
-                    //richTextBox1.Text += "已存檔 : " + filename2 + "\n";
+                    richTextBox1.Text += "已存檔 : " + filename2 + "\n";
                 }
                 catch (Exception ex)
                 {

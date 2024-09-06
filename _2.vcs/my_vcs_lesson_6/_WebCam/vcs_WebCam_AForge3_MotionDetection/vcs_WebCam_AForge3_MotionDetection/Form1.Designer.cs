@@ -1,4 +1,4 @@
-﻿namespace vcs_WebCam4_MotionDetection222
+﻿namespace vcs_WebCam_AForge3_MotionDetection
 {
     partial class Form1
     {

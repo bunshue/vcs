@@ -1,5 +1,5 @@
 import sys
-
+'''
 print("------------------------------------------------------------")  # 60個
 
 """ fail
@@ -1016,8 +1016,50 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s %(message)s')
 logging.info('Start to load dataset')
 
 logging.info('Done with load dataset')
-
+'''
 print("------------------------------------------------------------")  # 60個
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+from io import BytesIO
+from lxml import etree
+import base64
+
+
+df = pd.DataFrame(
+    {
+        "id": ["1", "2", "3", "4", "5"],  # 構造數據
+        "math": [90, 89, 99, 78, 63],
+        "english": [89, 94, 80, 81, 94],
+    }
+)
+
+
+x = np.linspace(0,8, 100)
+y = np.sin(x)
+plt.plot(x, y)
+
+# df資料存成html
+buffer = BytesIO()
+plt.savefig(buffer)
+plot_data = buffer.getvalue()
+
+imb = base64.b64encode(plot_data)  # 生成網頁內容
+ims = imb.decode()
+imd = "data:image/png;base64," + ims
+data_im = """<h1>Figure</h1>  """ + """<img src="%s">""" % imd
+data_des = """<h1>Describe</h1>""" + df.describe().T.to_html()
+root = "<title>Dataset</title>"
+root = root + data_des + data_im
+
+html = etree.HTML(root)
+tree = etree.ElementTree(html)
+tree.write("tmp_導出圖表.html")
+
+
+plt.show()
 
 
 print("------------------------------------------------------------")  # 60個

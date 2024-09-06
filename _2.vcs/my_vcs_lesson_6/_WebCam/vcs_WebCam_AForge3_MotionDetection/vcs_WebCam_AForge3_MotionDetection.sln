@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_WebCam4_MotionDetection222", "vcs_WebCam4_MotionDetection222\vcs_WebCam4_MotionDetection222.csproj", "{46A3FD9C-57CA-4371-8655-4EDA1B465111}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_WebCam_AForge3_MotionDetection", "vcs_WebCam_AForge3_MotionDetection\vcs_WebCam_AForge3_MotionDetection.csproj", "{46A3FD9C-57CA-4371-8655-4EDA1B465111}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

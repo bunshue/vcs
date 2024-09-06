@@ -18,8 +18,6 @@ namespace vcs_AMCap1
     {
         bool flag_show_time = true;     //顯示時間
         bool flag_show_grid = true;     //顯示格線
-        bool flag_invert = false;        //反相, SC700需要反相
-        bool flag_auto_save = false;    //自動存檔
         bool flag_fullscreen = false;
 
         //參考
@@ -47,30 +45,10 @@ namespace vcs_AMCap1
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            if (flag_show_time == true)
-                checkBox1.Checked = true;
-            else
-                checkBox1.Checked = false;
             if (flag_show_grid == true)
                 checkBox2.Checked = true;
             else
                 checkBox2.Checked = false;
-            if (flag_invert == true)
-                checkBox3.Checked = true;
-            else
-                checkBox3.Checked = false;
-            if (flag_auto_save == true)
-            {
-                checkBox4.Checked = true;
-                timer_auto_save.Enabled = true;
-                numericUpDown_time.Visible = true;
-            }
-            else
-            {
-                checkBox4.Checked = false;
-                timer_auto_save.Enabled = false;
-                numericUpDown_time.Visible = false;
-            }
 
             show_item_location();
 
@@ -164,9 +142,6 @@ namespace vcs_AMCap1
             {
                 //richTextBox1.Text += "xxx錯誤訊息n : " + ex.Message + "\n";
             }
-
-            if (flag_invert == true)
-                bm.RotateFlip(RotateFlipType.RotateNoneFlipY);
 
             gg = Graphics.FromImage(bm);
 
@@ -286,14 +261,6 @@ namespace vcs_AMCap1
 
         }
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox1.Checked == true)
-                flag_show_time = true;
-            else
-                flag_show_time = false;
-        }
-
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBox2.Checked == true)
@@ -310,35 +277,6 @@ namespace vcs_AMCap1
                 rb_4X4.Visible = false;
                 rb_5X5.Visible = false;
             }
-        }
-
-        private void checkBox3_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox3.Checked == true)
-                flag_invert = true;
-            else
-                flag_invert = false;
-        }
-
-        private void checkBox4_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox4.Checked == true)
-            {
-                flag_auto_save = true;
-                timer_auto_save.Enabled = true;
-                numericUpDown_time.Visible = true;
-            }
-            else
-            {
-                flag_auto_save = false;
-                timer_auto_save.Enabled = false;
-                numericUpDown_time.Visible = false;
-            }
-        }
-
-        private void timer_auto_save_Tick(object sender, EventArgs e)
-        {
-            save_image_file();
         }
 
         private void timer_focus_Tick(object sender, EventArgs e)
@@ -411,11 +349,6 @@ namespace vcs_AMCap1
                 //show_main_message("無圖可存", S_FALSE, 30);
             }
             return;
-        }
-
-        private void numericUpDown_time_ValueChanged(object sender, EventArgs e)
-        {
-            timer_auto_save.Interval = (int)numericUpDown_time.Value * 1000;
         }
 
         private void pictureBox1_MouseDoubleClick(object sender, MouseEventArgs e)

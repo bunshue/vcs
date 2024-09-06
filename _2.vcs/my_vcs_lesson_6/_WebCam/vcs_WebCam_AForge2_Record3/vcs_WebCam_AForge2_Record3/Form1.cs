@@ -47,7 +47,7 @@ namespace vcs_WebCam_AForge2_Record3
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
-            bt_start_Click(sender, e);
+            //bt_start_Click(sender, e);
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -168,14 +168,24 @@ namespace vcs_WebCam_AForge2_Record3
                 }
                 Cam = null;
             }
-            pictureBox1.Image = null;
+            //pictureBox1.Image = vcs_WebCam_AForge2_Record2.Properties.Resources.ims_logo_720x480;
         }
 
         public Bitmap bm = null;
+        //int frame_cnt = 0;          //每多少張做一個計算
+        int frame_count = 0;        //計算fps用
+        int frame_count_old = 0;    //計算fps用
+        DateTime dt_old = DateTime.Now;
+
+        Graphics g;
+        //SolidBrush drawBrush;
+        //Font drawFont1;
 
         //自定義函數, 捕獲每一幀圖像並顯示
         void Cam_NewFrame(object sender, NewFrameEventArgs eventArgs)
         {
+            frame_count++;
+
             try
             {
                 bm = (Bitmap)eventArgs.Frame.Clone();
@@ -272,7 +282,7 @@ namespace vcs_WebCam_AForge2_Record3
         {
             if (flag_webcam_start == false)    //如果webcam沒啟動
             {
-                richTextBox1.Text += "無相機 / 相機未啟動, 無錄影\n";
+                //show_main_message("無相機 / 相機未啟動, 無錄影", S_OK, 20);
                 return;
             }
 
@@ -286,6 +296,7 @@ namespace vcs_WebCam_AForge2_Record3
                 recording_time_st = DateTime.Now;
                 bt_record_start.Enabled = false;
                 bt_record_stop.Enabled = true;
+                bt_stop.Enabled = false;
             }
             else
             {
@@ -298,7 +309,7 @@ namespace vcs_WebCam_AForge2_Record3
         {
             if (flag_recording == true)
             {
-                bt_record_stop.Text = "停止錄影中";
+                bt_record_stop.Text = "停止錄影";
                 bt_record_stop.BackColor = Color.Red;
 
                 //錄影完需將影像停止不然會出錯
@@ -314,6 +325,7 @@ namespace vcs_WebCam_AForge2_Record3
                 richTextBox1.Text += "檔案 : " + recording_filename + "\n\n";
                 bt_record_start.Enabled = true;
                 bt_record_stop.Enabled = false;
+                bt_stop.Enabled = true;
 
                 bt_record_stop.Text = "錄影 SP";
                 bt_record_stop.BackColor = SystemColors.ControlLight;
@@ -326,8 +338,14 @@ namespace vcs_WebCam_AForge2_Record3
 
         private void bt_exit_Click(object sender, EventArgs e)
         {
+            //show_main_message("離開", S_OK, 20);
             bt_record_stop_Click(sender, e);
             Application.Exit();
+
+            /*
+            show_main_message("測試自動錄影", S_OK, 20);
+            test_auto_record();
+            */
         }
 
     }

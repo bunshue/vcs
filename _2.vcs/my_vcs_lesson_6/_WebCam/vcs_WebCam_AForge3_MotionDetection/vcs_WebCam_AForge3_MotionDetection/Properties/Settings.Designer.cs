@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace vcs_WebCam4_MotionDetection222.Properties {
+namespace vcs_WebCam_AForge3_MotionDetection.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

@@ -8,8 +8,8 @@
     <ProjectGuid>{46A3FD9C-57CA-4371-8655-4EDA1B465111}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>vcs_WebCam4_MotionDetection222</RootNamespace>
-    <AssemblyName>vcs_WebCam4_MotionDetection222</AssemblyName>
+    <RootNamespace>vcs_WebCam_AForge3_MotionDetection</RootNamespace>
+    <AssemblyName>vcs_WebCam_AForge3_MotionDetection</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>

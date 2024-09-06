@@ -32,18 +32,12 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lb_main_mesg = new System.Windows.Forms.Label();
             this.timer_display = new System.Windows.Forms.Timer(this.components);
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
-            this.checkBox4 = new System.Windows.Forms.CheckBox();
-            this.timer_auto_save = new System.Windows.Forms.Timer(this.components);
             this.timer_focus = new System.Windows.Forms.Timer(this.components);
-            this.numericUpDown_time = new System.Windows.Forms.NumericUpDown();
             this.rb_3X3 = new System.Windows.Forms.RadioButton();
             this.rb_4X4 = new System.Windows.Forms.RadioButton();
             this.rb_5X5 = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_time)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -72,18 +66,6 @@
             // 
             this.timer_display.Tick += new System.EventHandler(this.timer_display_Tick);
             // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Font = new System.Drawing.Font("標楷體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.checkBox1.Location = new System.Drawing.Point(12, 62);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(117, 25);
-            this.checkBox1.TabIndex = 3;
-            this.checkBox1.Text = "顯示時間";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
-            // 
             // checkBox2
             // 
             this.checkBox2.AutoSize = true;
@@ -96,60 +78,11 @@
             this.checkBox2.UseVisualStyleBackColor = true;
             this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
             // 
-            // checkBox3
-            // 
-            this.checkBox3.AutoSize = true;
-            this.checkBox3.Font = new System.Drawing.Font("標楷體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.checkBox3.Location = new System.Drawing.Point(12, 204);
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(73, 25);
-            this.checkBox3.TabIndex = 5;
-            this.checkBox3.Text = "反相";
-            this.checkBox3.UseVisualStyleBackColor = true;
-            this.checkBox3.CheckedChanged += new System.EventHandler(this.checkBox3_CheckedChanged);
-            // 
-            // checkBox4
-            // 
-            this.checkBox4.AutoSize = true;
-            this.checkBox4.Font = new System.Drawing.Font("標楷體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.checkBox4.Location = new System.Drawing.Point(12, 240);
-            this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(117, 25);
-            this.checkBox4.TabIndex = 6;
-            this.checkBox4.Text = "自動存檔";
-            this.checkBox4.UseVisualStyleBackColor = true;
-            this.checkBox4.CheckedChanged += new System.EventHandler(this.checkBox4_CheckedChanged);
-            // 
-            // timer_auto_save
-            // 
-            this.timer_auto_save.Interval = 3000;
-            this.timer_auto_save.Tick += new System.EventHandler(this.timer_auto_save_Tick);
-            // 
             // timer_focus
             // 
             this.timer_focus.Enabled = true;
             this.timer_focus.Interval = 3000;
             this.timer_focus.Tick += new System.EventHandler(this.timer_focus_Tick);
-            // 
-            // numericUpDown_time
-            // 
-            this.numericUpDown_time.Font = new System.Drawing.Font("標楷體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.numericUpDown_time.Location = new System.Drawing.Point(64, 269);
-            this.numericUpDown_time.Maximum = new decimal(new int[] {
-            300,
-            0,
-            0,
-            0});
-            this.numericUpDown_time.Name = "numericUpDown_time";
-            this.numericUpDown_time.Size = new System.Drawing.Size(56, 30);
-            this.numericUpDown_time.TabIndex = 12;
-            this.numericUpDown_time.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.numericUpDown_time.Value = new decimal(new int[] {
-            3,
-            0,
-            0,
-            0});
-            this.numericUpDown_time.ValueChanged += new System.EventHandler(this.numericUpDown_time_ValueChanged);
             // 
             // rb_3X3
             // 
@@ -191,11 +124,7 @@
             this.Controls.Add(this.rb_5X5);
             this.Controls.Add(this.rb_4X4);
             this.Controls.Add(this.rb_3X3);
-            this.Controls.Add(this.numericUpDown_time);
-            this.Controls.Add(this.checkBox4);
-            this.Controls.Add(this.checkBox3);
             this.Controls.Add(this.checkBox2);
-            this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.lb_main_mesg);
             this.Controls.Add(this.pictureBox1);
             this.Name = "Form1";
@@ -203,7 +132,6 @@
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_time)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -214,13 +142,8 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label lb_main_mesg;
         private System.Windows.Forms.Timer timer_display;
-        private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.CheckBox checkBox2;
-        private System.Windows.Forms.CheckBox checkBox3;
-        private System.Windows.Forms.CheckBox checkBox4;
-        private System.Windows.Forms.Timer timer_auto_save;
         private System.Windows.Forms.Timer timer_focus;
-        private System.Windows.Forms.NumericUpDown numericUpDown_time;
         private System.Windows.Forms.RadioButton rb_3X3;
         private System.Windows.Forms.RadioButton rb_4X4;
         private System.Windows.Forms.RadioButton rb_5X5;
