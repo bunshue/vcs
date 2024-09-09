@@ -15,7 +15,7 @@ print("------------------------------------------------------------")  # 60個
 original_text = "名偵探柯南是根據日本漫畫家青山剛昌著名原作推理漫畫名偵探柯南改編的動畫作品。"
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 print("原字串")
 print(original_text)
 
@@ -75,7 +75,7 @@ jieba.load_userdict(dict_filename)
 print("預設切分, cut_all=False")
 cut_text = jieba.cut(original_text, cut_all=False)
 print(" | ".join(cut_text))
-'''
+
 print("------------------------------")  # 30個
 
 print('分詞工具')
@@ -153,39 +153,46 @@ print("------------------------------------------------------------")  # 60個
 
 filename = "data/_jieba/cna_news.txt"
 with open(filename, "r", encoding="utf-8") as f:
-    data = f.read()
-# print(data, "\n")
+    original_text = f.read()
 
-data = data.translate({ord(c): None for c in list("(),.“”（）「」，。、：；！|\n/ ")})
-words = jieba.cut(data)
+print('清理資料, 清除 標點符號 換行 空白')
+original_text = original_text.translate({ord(c): None for c in list("(),.“”（）「」，。、：；！|\n/ ")})
+print(original_text)
 
-""" ok, many
+print("斷句, 預設切分, cut_all不寫")
+cut_text = jieba.cut(original_text)
+
 print('打印結果')
-for word in words:
-    print(word, "/ ", end="")
+for word in cut_text:
+    print(word, " | ", end="")
+
+""" same
+print(" | ".join(cut_text))
 """
 
 print("------------------------------------------------------------")  # 60個
 
 filename = "data/_jieba/cna_news.txt"
 with open(filename, "r", encoding="utf-8") as f:
-    data = f.read()
+    original_text = f.read()
 
-data = data.translate({ord(c): None for c in list("(),.“”（）「」，。、：；！|\n/ ")})
-words = jieba.cut(data)
+print('清理資料, 清除 標點符號 換行 空白')
+original_text = original_text.translate({ord(c): None for c in list("(),.“”（）「」，。、：；！|\n/ ")})
+
+print("斷句, 預設切分, cut_all不寫")
+cut_text = jieba.cut(original_text)
 
 word_freq = dict()
-for word in words:
+for word in cut_text:
     if word not in word_freq:
         word_freq[word] = 1
     else:
         word_freq[word] += 1
 ordered_freq = sorted(word_freq.items(), key=operator.itemgetter(1), reverse=True)
 
-""" many
+print('打印結果')
 for w, c in ordered_freq:
     print(w, c)
-"""
 
 print("------------------------------------------------------------")  # 60個
 
@@ -194,15 +201,18 @@ from collections import Counter
 filename = "data/_jieba/cna_news.txt"
 
 with open(filename, "r", encoding="utf-8") as f:
-    data = f.read()
-data = data.translate({ord(c): None for c in list("(),.“”（）「」，。、：；！|\n/ ")})
-words = jieba.cut(data)
+    original_text = f.read()
 
-""" many
-for w, c in Counter(words).most_common():
+print('清理資料, 清除 標點符號 換行 空白')
+original_text = original_text.translate({ord(c): None for c in list("(),.“”（）「」，。、：；！|\n/ ")})
+
+print("斷句, 預設切分, cut_all不寫")
+cut_text = jieba.cut(original_text)
+
+print('打印結果 most_common')
+for w, c in Counter(cut_text).most_common():
     if c > 1:
         print(w, c)
-"""
 
 print("------------------------------------------------------------")  # 60個
 

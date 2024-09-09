@@ -5,10 +5,9 @@ import time
 """
 記錄等級:
 
+level=logging.WARNING
 
-level=logging.WARNING)
-
-    level=logging.CRITICAL,
+level=logging.CRITICAL
 
 
 """

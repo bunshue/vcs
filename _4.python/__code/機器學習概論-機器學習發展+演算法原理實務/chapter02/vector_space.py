@@ -1,7 +1,9 @@
 import sys  
 import os 
+
 #引入Bunch类
 from sklearn.datasets.base import Bunch
+
 #引入持久化类
 import cPickle as pickle
 from sklearn import feature_extraction  
@@ -52,3 +54,4 @@ space_path = "train_word_bag/tfdifspace.dat"        # 词向量空间保存路�
 writebunchobj(space_path,tfidfspace)
 
 print("if-idf词向量空间创建成功！！！")
+

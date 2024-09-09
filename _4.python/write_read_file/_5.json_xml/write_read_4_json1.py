@@ -957,6 +957,47 @@ print(data1, type(data1))
 print("------------------------------------------------------------")  # 60個
 
 
+SAVED_DATA = "tmp_json_data.json"
+
+def save_data(filepath, data):
+    with open(filepath, "w") as f:
+        json.dump(data, f)
+
+
+def load_data(filepath):
+    try:
+        with open(filepath, "r") as f:
+            data = json.load(f)
+            return data
+    except:
+        return {}
+
+data = load_data(SAVED_DATA)
+print(data)
+
+#save
+key = "aaa"
+data[key] = "AAAA"
+save_data(SAVED_DATA, data)
+
+key = "bbb"
+data[key] = "BBBB"
+save_data(SAVED_DATA, data)
+
+key = "ccc"
+data[key] = "CCCC"
+save_data(SAVED_DATA, data)
+
+print('存了3筆資料')
+
+print('讀取資料')
+
+data = load_data(SAVED_DATA)
+print(data)
+
+key = 'bbb'
+print(data[key])
+
 print("------------------------------------------------------------")  # 60個
 
 

@@ -1,5 +1,6 @@
 import sys
 
+import numpy as np
 import pandas as pd
 
 print('------------------------------------------------------------')	#60個
@@ -17,7 +18,6 @@ C:/Users/070601/.keras/models/
 之下
 """
 
-'''
 #from keras.applications.resnet50 import ResNet50
 from tensorflow.keras.applications.resnet50 import ResNet50
 #from keras.preprocessing import image
@@ -25,7 +25,6 @@ from keras.utils import image_utils
 
 #from keras.applications.resnet50 import preprocess_input, decode_predictions
 from tensorflow.keras.applications.resnet50 import preprocess_input, decode_predictions
-import numpy as np
 
 model = ResNet50(weights='imagenet') 
 print(model.summary()) # 顯示模型基本信息
@@ -95,7 +94,6 @@ print('------------------------------------------------------------')	#60個
 # 訓練模型並預測，此處使用了深度學習模型，也可以換成機器學習模型
 
 import h5py
-import numpy as np
 from sklearn.utils import shuffle
 from keras.models import *
 from keras.layers import *
@@ -154,11 +152,8 @@ def plot_training(history):
 plot_training(history)
 """
 
-'''
-
 print('------------------------------------------------------------')	#60個
 
-'''
 # should be the same
 print('提取特徵')
 
@@ -204,7 +199,6 @@ print('------------------------------------------------------------')	#60個
 #訓練模型和預測
 
 import h5py
-import numpy as np
 from sklearn.utils import shuffle
 from keras.models import *
 from keras.layers import *
@@ -261,7 +255,7 @@ plt.title('Training and validation loss')
 plt.show()
 
 plot_training(history)
-'''
+
 
 print('------------------------------------------------------------')	#60個
 

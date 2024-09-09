@@ -158,63 +158,9 @@ namespace vcs_WebCam3_Record2
             {
                 USBWebcams = new FilterInfoCollection(FilterCategory.VideoInputDevice); //實例化對象
                 webcam_count = USBWebcams.Count;
-                richTextBox1.Text += "找到 " + webcam_count.ToString() + " 台WebCam\n";
-                richTextBox1.Text += "USBWebcams.Capacity : " + USBWebcams.Capacity.ToString() + "\n";
-                richTextBox1.Text += "USBWebcams.Count : " + USBWebcams.Count.ToString() + "\n";
-
-                int i = 0;
-                foreach (FilterInfo vidDevice in USBWebcams)
-                {
-                    /*
-                    richTextBox1.Text += "第 " + (i + 1).ToString() + " 台WebCam:\n";
-                    richTextBox1.Text += "短名 : " + vidDevice.Name + "\n";
-                    richTextBox1.Text += "長名 : " + vidDevice.MonikerString + "\n";
-                    */
-                    richTextBox1.Text += "\n";
-                    i++;
-                }
-
-                //抓出並顯示所有顯示能力
                 if (webcam_count > 0)  // The quantity of WebCam must be more than 0.
                 {
-                    for (i = 0; i < webcam_count; i++)
-                    {
-                        Cam = new VideoCaptureDevice(USBWebcams[i].MonikerString);  //實例化對象
-
-                        richTextBox1.Text += "第 " + (i + 1).ToString() + " 台WebCam:\n";
-                        richTextBox1.Text += "短名 : " + USBWebcams[i].Name + "\n";
-                        //richTextBox1.Text += "ProvideSnapshots = " + Cam.ProvideSnapshots.ToString() + "\n";
-                        if (Cam.ProvideSnapshots == true)
-                        {
-                            richTextBox1.Text += "Snapshot len = " + Cam.SnapshotCapabilities.Length.ToString() + "\n";
-                            //richTextBox1.Text += "Snapshot W = " + Cam.SnapshotResolution.FrameSize.Width.ToString() + "\n";
-                            //richTextBox1.Text += "Snapshot H = " + Cam.SnapshotResolution.FrameSize.Height.ToString() + "\n";
-                            //richTextBox1.Text += "Snapshot FR = " + Cam.SnapshotResolution.MaximumFrameRate.ToString() + "\n";
-                        }
-                        //richTextBox1.Text += "顯示能力 VideoCapabilities.Length " + Cam.VideoCapabilities.Length.ToString() + "\n";
-                        var videoCapabilities = Cam.VideoCapabilities;
-                        foreach (var video in videoCapabilities)
-                        {
-                        }
-
-                        string webcam_name;
-                        if (USBWebcams[i].Name.Contains("Virtual"))
-                        {
-                            richTextBox1.Text += "跳過 Virtual\n";
-                            webcam_name = (i + 1).ToString() + ". " + USBWebcams[i].Name;
-                        }
-                        else
-                        {
-                            int j;
-
-                            for (j = 0; j < Cam.VideoCapabilities.Length; j++)
-                            {
-                                webcam_name = (i + 1).ToString() + ". " + USBWebcams[i].Name + " "
-    + Cam.VideoCapabilities[j].FrameSize.Width.ToString() + " X " + Cam.VideoCapabilities[j].FrameSize.Height.ToString();
-                            }
-                        }
-                        richTextBox1.Text += "\n";
-                    }
+                    Cam = new VideoCaptureDevice(USBWebcams[0].MonikerString);  //實例化對象
                 }
             }
             catch (Exception ex)
@@ -265,23 +211,6 @@ namespace vcs_WebCam3_Record2
                 webcam_h = Cam.VideoCapabilities[0].FrameSize.Height;
                 webcam_fps = Cam.VideoCapabilities[0].FrameRate;
 
-                richTextBox1.Text += "格式 : " + webcam_w.ToString() + " X " + webcam_h.ToString() + " @ " + webcam_fps.ToString() + " Hz\n";
-
-                var videoCapabilities = Cam.VideoCapabilities;
-                foreach (var video in videoCapabilities)
-                {
-                    /*
-                    richTextBox1.Text += "fps : " + video.FrameRate.ToString() + "\n";
-                    richTextBox1.Text += "預覽分辨率 : " + video.FrameSize.Width.ToString() + " X " + video.FrameSize.Height.ToString() + "\n";
-                    //richTextBox1.Text += "AverageFrameRate : " + video.AverageFrameRate.ToString() + "\n";
-                    //richTextBox1.Text += "BitCount : " + video.BitCount.ToString() + "\n";
-                    //richTextBox1.Text += "MaximumFrameRate : " + video.MaximumFrameRate.ToString() + "\n";
-                    //string video_capability = video.FrameSize.Width.ToString() + " X " + video.FrameSize.Height.ToString() + " @ " + video.AverageFrameRate.ToString() + " Hz";
-                    string video_capability = video.FrameSize.Width.ToString() + " X " + video.FrameSize.Height.ToString();
-                    richTextBox1.Text += "video_capability : " + video_capability + "\n";
-                    */
-                }
-
                 Cam.NewFrame += new NewFrameEventHandler(Cam_NewFrame);
                 Cam.Start();   // WebCam starts capturing images.
                 flag_webcam_start = true;
@@ -320,50 +249,6 @@ namespace vcs_WebCam3_Record2
                 this.Text = "無影像裝置";
                 flag_webcam_start = false;
             }
-
-            /*
-            Cam = new VideoCaptureDevice(camera_full_name[0]);    //實例化對象
-
-            //真正設定顯示能力的地方
-            Cam.VideoResolution = Cam.VideoCapabilities[0];   //若有多個capabilities 可以更換
-
-            Cam.NewFrame += new NewFrameEventHandler(Cam_NewFrame);                 //綁定事件
-            */
-            /* 以下為WebCam訊息
-            richTextBox1.Text += "Cam.Source = " + Cam.Source + "\n";   //就是camera fullname
-            richTextBox1.Text += "Cam.Source.Length " + Cam.Source.Length.ToString() + "\n";
-            richTextBox1.Text += "VideoCapabilities.Length " + Cam.VideoCapabilities.Length.ToString() + "\n";
-            var videoCapabilities = Cam.VideoCapabilities;
-            foreach (var video in videoCapabilities)
-            {
-                richTextBox1.Text += "預覽分辨率 : " + video.FrameSize.Width.ToString() + " X " + video.FrameSize.Height.ToString() + "\n";
-                richTextBox1.Text += "AverageFrameRate : " + video.AverageFrameRate.ToString() + "\n";
-                richTextBox1.Text += "BitCount : " + video.BitCount.ToString() + "\n";
-                richTextBox1.Text += "MaximumFrameRate : " + video.MaximumFrameRate.ToString() + "\n";
-                string video_capability = video.FrameSize.Width.ToString() + " X " + video.FrameSize.Height.ToString() + " @ " + video.AverageFrameRate.ToString() + " Hz";
-                richTextBox1.Text += video_capability + "\n";
-            }
-            */
-            /*
-            //以下為WebCam訊息
-            string webcam_name = string.Empty;
-            int ww = Cam.VideoCapabilities[0].FrameSize.Width;
-            int hh = Cam.VideoCapabilities[0].FrameSize.Height;
-            //int fps = Cam.VideoCapabilities[0].AverageFrameRate;
-
-            webcam_name = camera_short_name[0] + " "
-                + ww.ToString() + " X "
-                + hh.ToString();
-            //+" @ " + fps.ToString() + " Hz";
-            this.Text = webcam_name;
-            show_main_message(webcam_name, S_OK, 20);
-
-            webcam_w = ww;
-            webcam_h = hh;
-            //webcam_fps = fps;
-
-            Cam.Start();   // WebCam starts capturing images.
-            */
         }
 
         void Stop_Webcam()
