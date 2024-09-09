@@ -1,0 +1,34 @@
+使用Emgu.CV x86可用_修改方法
+
+取得 4個Emgu.XX.dll 與 2個opencv.XX.dll
+需把路徑指到C:\Emgu\emgucv-windows-x86 2.3.0.1416\bin
+或者到此路徑把檔案拷貝出來
+
+1. 做一個專案
+2. (x64才要做的動作)
+3. 開啟專案，參考/加入參考 到C:\Emgu\emgucv-windows-x86 2.3.0.1416\bin 選4個Emgu.XX.dll
+4. 專案/加入/現有項目 到C:\Emgu\emgucv-windows-x86 2.3.0.1416\bin 選2個opencv.XX.dll
+   點選這2個dll的屬性，將此dll的屬性 之 "複製到輸出目錄" 改成 "有更新時才複製"
+5. 編輯Form1.cs
+
+4個Emgu.XX.dll
+
+Emgu.CV.dll
+Emgu.CV.ML.dll (不用也可以)
+Emgu.CV.UI.dll
+Emgu.Util.dll
+
+2個opencv.XX.dll
+opencv_core231.dll
+opencv_highgui231.dll
+
+----------------------------------------------------------------------------------
+若是已有x64的專案，要在x86上運行，
+要改：
+1. 把*.csproj
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x64</PlatformTarget>
+改
+    <PlatformTarget>x86</PlatformTarget>
+
+2. 改 4個Emgu.XX.dll 與 2個opencv.XX.dll 的路徑

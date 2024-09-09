@@ -15,7 +15,7 @@ print("------------------------------------------------------------")  # 60個
 original_text = "名偵探柯南是根據日本漫畫家青山剛昌著名原作推理漫畫名偵探柯南改編的動畫作品。"
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 print("原字串")
 print(original_text)
 
@@ -65,19 +65,57 @@ print(" | ".join(cut_text))
 print("------------------------------")  # 30個
 
 print('設定jieba分詞字典')
-jieba.set_dictionary('data/_jieba/dict.txt.big.txt')
-jieba.load_userdict('data/_jieba/user_dict_test.txt')
+dict_filename = 'data/_jieba/dict.txt.big.txt'
+jieba.set_dictionary(dict_filename)
+
+print("使用自訂詞庫")
+dict_filename = 'data/_jieba/user_dict_test.txt'
+jieba.load_userdict(dict_filename)
 
 print("預設切分, cut_all=False")
 cut_text = jieba.cut(original_text, cut_all=False)
-print('|'.join(cut_text))
+print(" | ".join(cut_text))
+'''
+print("------------------------------")  # 30個
+
+print('分詞工具')
+
+original_text = "名偵探柯南是根據日本漫畫家青山剛昌著名原作推理漫畫名偵探柯南改編的動畫作品。"
+original_text = "今天我去參觀展覽館"
+
+print("全切分, cut_all=True")
+cut_text = jieba.cut(original_text, cut_all=True) # 全模式
+print(" | ".join(cut_text))
+
+print("預設切分, cut_all=False")
+cut_text = jieba.cut(original_text, cut_all=False) # 精確模式
+print(" | ".join(cut_text))
+
+print("使用自訂詞庫")
+dict_filename = 'data/_jieba/a.txt'
+jieba.load_userdict(dict_filename)
+
+print("預設切分, cut_all不寫")
+cut_text = jieba.cut(original_text)
+print(" | ".join(cut_text))
+
+import jieba.posseg as pseg
+words = pseg.cut(original_text)
+for w in words:
+    print("%s %s" %(w.word, w.flag))
 
 print("------------------------------")  # 30個
 
 stopWord_filename = 'data/_jieba/stopWord_test.txt'  #設定自訂詞庫
+
 print('設定jieba分詞字典')
-jieba.set_dictionary('data/_jieba/dict.txt.big.txt')
-jieba.load_userdict('data/_jieba/user_dict_test.txt')
+dict_filename = 'data/_jieba/dict.txt.big.txt'
+jieba.set_dictionary(dict_filename)
+
+print("使用自訂詞庫")
+dict_filename = 'data/_jieba/user_dict_test.txt'
+jieba.load_userdict(dict_filename)
+
 with open('data/_jieba/stopWord_test.txt', 'r', encoding='utf-8-sig') as f:
     stops = f.read().split('\n')   
 
@@ -91,10 +129,11 @@ print('|'.join(words))
 
 print("------------------------------")  # 30個
 
-print("使用自訂詞庫 + 停用詞")
+print("使用自訂詞庫")
 dict_filename = "data/_jieba/user_dict_test.txt"
 jieba.load_userdict(dict_filename)
 
+print("使用停用詞")
 stopWord_filename = "data/_jieba/stopWord_test.txt"  # 設定自訂詞庫
 
 with open(stopWord_filename, "r", encoding="utf-8-sig") as f:  # 設定停用詞
@@ -116,6 +155,7 @@ filename = "data/_jieba/cna_news.txt"
 with open(filename, "r", encoding="utf-8") as f:
     data = f.read()
 # print(data, "\n")
+
 data = data.translate({ord(c): None for c in list("(),.“”（）「」，。、：；！|\n/ ")})
 words = jieba.cut(data)
 
@@ -130,6 +170,7 @@ print("------------------------------------------------------------")  # 60個
 filename = "data/_jieba/cna_news.txt"
 with open(filename, "r", encoding="utf-8") as f:
     data = f.read()
+
 data = data.translate({ord(c): None for c in list("(),.“”（）「」，。、：；！|\n/ ")})
 words = jieba.cut(data)
 
@@ -151,6 +192,7 @@ print("------------------------------------------------------------")  # 60個
 from collections import Counter
 
 filename = "data/_jieba/cna_news.txt"
+
 with open(filename, "r", encoding="utf-8") as f:
     data = f.read()
 data = data.translate({ord(c): None for c in list("(),.“”（）「」，。、：；！|\n/ ")})
@@ -164,6 +206,7 @@ for w, c in Counter(words).most_common():
 
 print("------------------------------------------------------------")  # 60個
 
+""" no module in kilo
 from sklearn.feature_extraction.text import TfidfVectorizer
 
 t1 = list(jieba.cut('今天台北天氣晴朗，風景區擠滿了人潮。'))
@@ -196,24 +239,6 @@ print(data.toarray())
 print('特徵名稱：')
 print(cv.get_feature_names_out())
 
-print("------------------------------------------------------------")  # 60個
-
-
-
-print('分詞工具')
-
-import jieba
-print(' '.join(jieba.cut('今天我去參觀展覽館', cut_all=True))) # 全模式
-print(' '.join(jieba.cut('今天我去參觀展覽館', cut_all=False))) # 精確模式
-
-jieba.load_userdict('data/_jieba/a.txt')
-print(jieba.cut('今天我去參觀展覽館'))
-
-import jieba.posseg as pseg
-words = pseg.cut("今天我去參觀展覽館")
-for w in words:
-    print("%s %s" %(w.word, w.flag))
-
 print('------------------------------------------------------------')	#60個
 
 import numpy as np
@@ -221,7 +246,6 @@ import pandas as pd
 
 print('TF-IDF逆文本頻率指數')
 
-import jieba
 from sklearn.feature_extraction.text import CountVectorizer 
 from sklearn.feature_extraction.text import TfidfTransformer  
 
@@ -272,7 +296,7 @@ for i, count in enumerate(countlist):
     scores = {word: tfidf(word, count, countlist) for word in count}
     for word, score in scores.items():
         print(word, round(score, 2))
-
+"""
 print('------------------------------------------------------------')	#60個
 
 
@@ -294,3 +318,9 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+

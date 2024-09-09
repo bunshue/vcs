@@ -1,6 +1,0 @@
-從x64轉到x86的方法
-
-1. 開啟.csproj，把PlatformTarget之x64改成x86
-
-2. 宜除EMGU.XX(3個)、opencv_xxxx(3個)，新增x86的檔案
-

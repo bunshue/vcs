@@ -1,0 +1,27 @@
+使用Emgu.CV, kilo可用_修改方法
+
+一、未取得 4個Emgu.XX.dll
+
+1. 做一個專案, 先存檔
+2. 把 zxing.dll 放在/dll裡
+3. 開啟專案, 參考/加入參考 到C:\Emgu\emgucv-windows-x86 2.3.0.1416\bin 選4個Emgu.XX.dll
+4. 參考/加入參考 選/dll裡的zxing.dll
+5. 編輯Form1.cs
+
+二、已取得 4個Emgu.XX.dll
+
+1. 做一個專案, 先存檔
+2. 把 4個Emgu.XX.dll、zxing.dll 放在/dll裡
+3. 開啟專案, 參考/加入參考 選/dll裡的前5個dll
+4. 專案/加入/現有項目/加入全部5個dll, 並將此dll的屬性 之 複製到輸出目錄 改為 有更新時才複製
+5. 編輯Form1.cs
+
+
+4個Emgu.XX.dll
+
+Emgu.CV.dll
+Emgu.CV.ML.dll
+Emgu.CV.UI.dll
+Emgu.Util.dll
+
+

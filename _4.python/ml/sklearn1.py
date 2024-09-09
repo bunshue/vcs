@@ -887,161 +887,167 @@ print("------------------------------------------------------------")  # 60個
 
 '''
 
-print('迴歸效果評估')
+print("迴歸效果評估")
 
 
-print('MSE均方誤差')
+print("MSE均方誤差")
 
 from sklearn.metrics import mean_squared_error
+
 y_true = [1, 1.25, 2.37]
 y_pred = [1, 1, 2]
 print(mean_squared_error(y_true, y_pred))
 
-print('MAE平均絕對誤差')
+print("MAE平均絕對誤差")
 from sklearn.metrics import mean_absolute_error
+
 y_true = [1, 1.25, 2.37]
 y_pred = [1, 1, 2]
 print(mean_absolute_error(y_true, y_pred))
 
-print('R-Squared擬合度')
+print("R-Squared擬合度")
 from sklearn.metrics import r2_score
+
 y_true = [1, 1.25, 2.37]
 y_pred = [1, 1, 2]
-print(r2_score(y_true,y_pred))
+print(r2_score(y_true, y_pred))
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-print('分類效果評估')
-print('FP/FN/TP/TN')
+print("分類效果評估")
+print("FP/FN/TP/TN")
 
 y_pred = [0, 0, 0, 1, 1, 1, 0, 1, 0, 0]  # 預測值
 y_real = [0, 1, 1, 1, 1, 1, 0, 0, 0, 0]  # 實際值
 
 from sklearn.metrics import confusion_matrix
+
 cm = confusion_matrix(y_real, y_pred)
 tn, fp, fn, tp = cm.ravel()
 print("tn", tn, "fp", fp, "fn", fn, "tp", tp)
 
-print('準確率')
+print("準確率")
 from sklearn.metrics import accuracy_score
+
 print(accuracy_score(y_real, y_pred))
 
-print('召回率')
+print("召回率")
 from sklearn.metrics import recall_score
+
 print(recall_score(y_real, y_pred))
 
-print('精度')
+print("精度")
 from sklearn.metrics import precision_score
+
 print(precision_score(y_real, y_pred))
 
-print('F值')
+print("F值")
 
 from sklearn.metrics import f1_score
 from sklearn.metrics import fbeta_score
 
 print(f1_score(y_real, y_pred))  # 計算f1
-print(fbeta_score(y_real, y_pred, beta=2)) # 計算fn
+print(fbeta_score(y_real, y_pred, beta=2))  # 計算fn
 
-print('Logloss')
+print("Logloss")
 from sklearn.metrics import log_loss
-y_real = [0, 1, 1, 1, 1, 1, 0, 0, 0, 0]
-y_score=[0.9, 0.75, 0.86, 0.47, 0.55, 0.56, 0.74, 0.22, 0.5, 0.26]
-print(log_loss(y_real,y_score))
 
-print('ROC曲線和AUC')
+y_real = [0, 1, 1, 1, 1, 1, 0, 0, 0, 0]
+y_score = [0.9, 0.75, 0.86, 0.47, 0.55, 0.56, 0.74, 0.22, 0.5, 0.26]
+print(log_loss(y_real, y_score))
+
+print("ROC曲線和AUC")
 from sklearn.metrics import roc_auc_score, roc_curve
 
-print(roc_auc_score(y_real, y_score)) # AUC值
+print(roc_auc_score(y_real, y_score))  # AUC值
 
-fpr, tpr, thresholds = roc_curve(y_real, y_score) 
-plt.plot(fpr, tpr) # 繪圖
+fpr, tpr, thresholds = roc_curve(y_real, y_score)
+plt.plot(fpr, tpr)  # 繪圖
 plt.show()
 
 # P-R曲線
 from sklearn.metrics import precision_recall_curve
+
 precision, recall, _ = precision_recall_curve(y_real, y_score)
-plt.plot(recall,precision)
+plt.plot(recall, precision)
 
 plt.show()
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-print('多指標評分')
+print("多指標評分")
 
 from sklearn.metrics import classification_report
 
 y_real = [0, 1, 1, 1, 1, 1, 0, 0, 0, 0]
-y_score=[0.9, 0.75, 0.86, 0.47, 0.55, 0.56, 0.74, 0.22, 0.5, 0.26]
+y_score = [0.9, 0.75, 0.86, 0.47, 0.55, 0.56, 0.74, 0.22, 0.5, 0.26]
 y_pred = [round(i) for i in y_score]
 print(classification_report(y_real, y_pred))
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-print('K近鄰算法')
+print("K近鄰算法")
 
 from sklearn import neighbors, datasets
 from sklearn.model_selection import train_test_split
 
 data = datasets.load_breast_cancer()
-X = data.data # 自變量
-y = data.target # 因變量
-x_train,x_test,y_train,y_test = train_test_split(X,y,test_size=0.1,random_state=0)
-clf = neighbors.KNeighborsClassifier(5) # 設鄰居數爲5個
-clf.fit(x_train, y_train) # 訓練模型
-print(clf.score(x_test, y_test)) # 給模型打分
+X = data.data  # 自變量
+y = data.target  # 因變量
+x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.1, random_state=0)
+clf = neighbors.KNeighborsClassifier(5)  # 設鄰居數爲5個
+clf.fit(x_train, y_train)  # 訓練模型
+print(clf.score(x_test, y_test))  # 給模型打分
 print(clf.predict([x_test[0]]), y_test[0], clf.predict_proba([x_test[0]]))
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 from sklearn.metrics import accuracy_score
 from scipy.spatial import distance
 import operator
 
+
 def classify(inX, dataSet, labels, k):
-    #S=np.cov(dataSet.T)   #協方差矩陣，爲計算馬氏距離
-    #SI = np.linalg.inv(S)  #協方差矩陣的逆矩陣
-    #distances = np.array(distance.cdist(dataSet, [inX], 'mahalanobis', VI=SI)).reshape(-1)
-    distances = np.array(distance.cdist(dataSet, [inX], 'euclidean').reshape(-1))
-    sortedDistIndicies = distances.argsort() # 取排序的索引，用於label排序
-    classCount={}
-    for i in range(k): # 訪問距離最近的五個實例
+    # S=np.cov(dataSet.T)   #協方差矩陣，爲計算馬氏距離
+    # SI = np.linalg.inv(S)  #協方差矩陣的逆矩陣
+    # distances = np.array(distance.cdist(dataSet, [inX], 'mahalanobis', VI=SI)).reshape(-1)
+    distances = np.array(distance.cdist(dataSet, [inX], "euclidean").reshape(-1))
+    sortedDistIndicies = distances.argsort()  # 取排序的索引，用於label排序
+    classCount = {}
+    for i in range(k):  # 訪問距離最近的五個實例
         voteILabel = labels[sortedDistIndicies[i]]
-        classCount[voteILabel]=classCount.get(voteILabel,0)+1
-    sortedClassCount = sorted(classCount.items(), 
-             key=operator.itemgetter(1), reverse=True)
-    return sortedClassCount[0][0] # 取最多的分類
+        classCount[voteILabel] = classCount.get(voteILabel, 0) + 1
+    sortedClassCount = sorted(
+        classCount.items(), key=operator.itemgetter(1), reverse=True
+    )
+    return sortedClassCount[0][0]  # 取最多的分類
+
 
 ret = [classify(x_test[i], x_train, y_train, 5) for i in range(len(x_test))]
 print(accuracy_score(y_test, ret))
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-print('聚類算法')
+print("聚類算法")
 
 from sklearn.datasets import make_blobs  # 數據支持
 from sklearn.cluster import KMeans  # 聚類方法
 
-X,y = make_blobs(n_samples=100, random_state=150) 
+X, y = make_blobs(n_samples=100, random_state=150)
 y_pred = KMeans(n_clusters=3, random_state=5).fit_predict(X)  # 訓練
-plt.scatter(X[:,0],X[:,1],c=y_pred)
+plt.scatter(X[:, 0], X[:, 1], c=y_pred)
 plt.show()
 
-print('------------------------------------------------------------')	#60個
-
+print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
 
 
+print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
-
-
-
-print("------------------------------------------------------------")  # 60個
-

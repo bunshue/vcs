@@ -1,14 +1,26 @@
+import os
 import sys
 import time
+
+"""
+記錄等級:
+
+
+level=logging.WARNING)
+
+    level=logging.CRITICAL,
+
+
+"""
 
 print("------------------------------------------------------------")  # 60個
 
 print("寫入一些日誌")
-'''
+
 import logging
 
 logging.basicConfig(
-    filename="log_filename.txt",
+    filename="tmp_log_filename01.txt",
     level=logging.DEBUG,
     format="%(asctime)s - %(levelname)s - %(message)s",
 )
@@ -31,8 +43,10 @@ print("------------------------------------------------------------")  # 60個
 
 import logging
 
-# 不知道這樣是把log寫到哪?
-logging.basicConfig(level=logging.DEBUG)  # 等級是DEBUG
+logging.basicConfig(
+    filename="tmp_log_filename02.txt",
+    level=logging.DEBUG)
+
 logging.debug("logging message, DEBUG")
 logging.info("logging message, INFO")
 logging.warning("logging message, WARNING")
@@ -41,21 +55,34 @@ logging.critical("logging message, CRITICAL")
 
 print("------------------------------------------------------------")  # 60個
 
-sys.exit()
+import logging
 
+logging.basicConfig(
+    filename="tmp_log_filename06.txt",
+    level=logging.DEBUG,
+    format="%(asctime)s")
+
+
+print("------------------------------------------------------------")  # 60個
+
+import logging
+
+logging.basicConfig(
+    filename="tmp_log_filename07.txt",
+    level=logging.DEBUG,
+    format="%(asctime)s : %(message)s")
+
+print("------------------------------------------------------------")  # 60個
 
 logger = logging.getLogger("untar")
 
 logger.info("finished reading")
 logger.debug("Unzipping...")
-
 logging.debug("Untar complete!")
 logging.info("Interrupt detected, quiting")
 logging.warning("Unknown Error, exiting")
 
-
 print("------------------------------------------------------------")  # 60個
-
 
 """
 logger = logging.getLogger("untar")
@@ -78,10 +105,12 @@ logging.debug("Unzip complete!")
 print("------------------------------------------------------------")  # 60個
 
 import logging
-import os
 
 print("start here")
-logging.basicConfig(level=logging.INFO, format="*** %(levelname)s %(message)s")
+logging.basicConfig(
+    filename="tmp_log_filename08.txt",
+    level=logging.INFO,
+    format="*** %(levelname)s %(message)s")
 
 log = logging.getLogger("multissl")
 
@@ -108,7 +137,10 @@ mesg1 = "aaaa"
 mesg2 = "bbbb"
 function_name = "cccc"
 number = 1234
-logging.basicConfig(level=logging.INFO)
+
+logging.basicConfig(
+    filename="tmp_log_filename09.txt",
+    level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 logger.info("Sending %r to %r, function : %s", mesg1, mesg2, function_name)
@@ -118,128 +150,49 @@ logger.warning("retrying %s due to %s", function_name, "kkkk")
 
 logger.exception("Error in %s", function_name)
 
-logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
+logging.basicConfig(
+    filename="tmp_log_filename10.txt",
+    level=logging.INFO,
+    format="%(levelname)s: %(message)s")
+
 logger = logging.getLogger(__name__)
 
-logging.basicConfig(level=logging.INFO, format="%(message)s")
+logging.basicConfig(
+    filename="tmp_log_filename11.txt",
+    level=logging.INFO,
+    format="%(message)s")
+
 logger = logging.getLogger(__name__)
 
-
 print("------------------------------------------------------------")  # 60個
 
-import logging
-
-logging.basicConfig(level=logging.DEBUG)  # 等級是DEBUG
-logging.debug("logging message, DEBUG")
-logging.info("logging message, INFO")
-logging.warning("logging message, WARNING")
-logging.error("logging message, ERROR")
-logging.critical("logging message, CRITICAL")
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch15\ch15_23.py
-
-# ch15_23.py
-import logging
-
-logging.basicConfig(level=logging.WARNING)  # 等級是WARNING
-logging.debug("logging message, DEBUG")
-logging.info("logging message, INFO")
-logging.warning("logging message, WARNING")
-logging.error("logging message, ERROR")
-logging.critical("logging message, CRITICAL")
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch15\ch15_24.py
-
-# ch15_24.py
-import logging
-
-logging.basicConfig(level=logging.DEBUG, format="")
-logging.debug("logging message, DEBUG")
-logging.info("logging message, INFO")
-logging.warning("logging message, WARNING")
-logging.error("logging message, ERROR")
-logging.critical("logging message, CRITICAL")
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch15\ch15_25.py
-
-# ch15_25.py
-import logging
-
-logging.basicConfig(level=logging.DEBUG, format="%(asctime)s")
-logging.debug("logging message, DEBUG")
-logging.info("logging message, INFO")
-logging.warning("logging message, WARNING")
-logging.error("logging message, ERROR")
-logging.critical("logging message, CRITICAL")
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch15\ch15_26.py
-
-# ch15_26.py
-import logging
-
-logging.basicConfig(level=logging.DEBUG, format="%(asctime)s : %(message)s")
-logging.debug("logging message, DEBUG")
-logging.info("logging message, INFO")
-logging.warning("logging message, WARNING")
-logging.error("logging message, ERROR")
-logging.critical("logging message, CRITICAL")
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch15\ch15_27.py
-
-# ch15_27.py
 import logging
 
 logging.basicConfig(
-    level=logging.DEBUG, format="%(asctime)s - %(levelname)s : %(message)s"
+    filename="tmp_log_filename12.txt",
+    level=logging.DEBUG,
+    format="%(asctime)s - %(levelname)s : %(message)s"
 )
+
 logging.debug("logging message.")
 logging.info("logging message.")
 logging.warning("logging message")
 logging.error("logging message")
 logging.critical("logging message")
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch15\ch15_28.py
-
-# ch15_28.py
 import logging
 
-logging.basicConfig(
-    level=logging.DEBUG, format="%(asctime)s - %(levelname)s : %(message)s"
-)
 logging.debug("程式開始")
 for i in range(5):
     logging.debug(f"目前索引 {i}")
 logging.debug("程式結束")
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch15\ch15_29.py
-
-# ch15_29.py
 import logging
 
-logging.basicConfig(
-    level=logging.DEBUG, format="%(asctime)s - %(levelname)s : %(message)s"
-)
 logging.debug("程式開始")
 
 
@@ -260,9 +213,6 @@ logging.debug("程式結束")
 
 import logging
 
-logging.basicConfig(
-    level=logging.DEBUG, format="%(asctime)s - %(levelname)s : %(message)s"
-)
 logging.debug("程式開始")
 
 
@@ -280,19 +230,10 @@ num = 5
 print(f"factorial({num}) = {factorial(num)}")
 logging.debug("程式結束")
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch15\ch15_31.py
-
-# ch15_31.py
 import logging
 
-logging.basicConfig(
-    filename="out15_31.txt",
-    level=logging.DEBUG,
-    format="%(asctime)s - %(levelname)s : %(message)s",
-)
 logging.debug("程式開始")
 
 
@@ -310,17 +251,11 @@ num = 5
 print(f"factorial({num}) = {factorial(num)}")
 logging.debug("程式結束")
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch15\ch15_32.py
-
-# ch15_32.py
 import logging
 
-logging.basicConfig(
-    level=logging.CRITICAL, format="%(asctime)s - %(levelname)s : %(message)s"
-)
+
 logging.debug("程式開始")
 
 
@@ -338,18 +273,12 @@ num = 5
 print(f"factorial({num}) = {factorial(num)}")
 logging.debug("程式結束")
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch15\ch15_33.py
-
-# ch15_33.py
 import logging
 
 logging.disable(logging.CRITICAL)  # 停用所有logging
-logging.basicConfig(
-    level=logging.DEBUG, format="%(asctime)s - %(levelname)s : %(message)s"
-)
+
 logging.debug("程式開始")
 
 
@@ -369,28 +298,7 @@ logging.debug("程式結束")
 
 
 print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("不使用 logging 的 logging")
-
-# 製作 log 檔 每執行一次, 存一筆資料在log檔, 附加模式
-
-with open("tmp_my_logfile1.log", "a") as f:
-    f.write(f'{time.strftime("%Y-%m-%d %H:%M:%S")} - 寫了一筆工作紀錄\n')
-
-print("------------------------------------------------------------")  # 60個
-
-# 製作log檔的範例
-print("存檔紀念")
-
-f = open("tmp_my_logfile2.txt", "w")
-f.write("# BUILD INFO\n")
-f.write("# Date: %s\n" % time.ctime())
-f.close()
 '''
-print("------------------------------------------------------------")  # 60個
-
 import logging
 
 # 獲取logger對象,取名mylog
@@ -399,7 +307,7 @@ logger = logging.getLogger("mylog")
 logger.setLevel(level=logging.DEBUG)
 
 # 獲取文件日誌句柄並設置日誌級別，第二層過濾
-handler = logging.FileHandler("tmp_log.txt")
+handler = logging.FileHandler("tmp_log_filename20.txt")
 handler.setLevel(logging.INFO)	
 
 # 生成並設置文件日誌格式，其中name爲上面設置的mylog
@@ -419,7 +327,25 @@ logger.info("show info")
 logger.debug("show debug")
 logger.warning("show warning")
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
+print("不使用 logging 的 logging")
+
+# 製作 log 檔 每執行一次, 存一筆資料在log檔, 附加模式
+
+with open("tmp_log_filename31.log", "a") as f:
+    f.write(f'{time.strftime("%Y-%m-%d %H:%M:%S")} - 寫了一筆工作紀錄\n')
+
+print("------------------------------------------------------------")  # 60個
+
+# 製作log檔的範例
+print("存檔紀念")
+
+f = open("tmp_log_filename32.txt", "w")
+f.write("# BUILD INFO\n")
+f.write("# Date: %s\n" % time.ctime())
+f.close()
+'''
+print("------------------------------------------------------------")  # 60個
 
 
 

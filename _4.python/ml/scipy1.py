@@ -46,16 +46,20 @@ print(
 
 
 print("積分")
+
+
 def my_funciton1(x):
-    #return math.sin(x)
-    #return (1 - x**2) ** 0.5    #上半圓
-    return x**2 + 2 * x + 5 # f(x) = x**2 + 2x + 5
+    # return math.sin(x)
+    # return (1 - x**2) ** 0.5    #上半圓
+    return x**2 + 2 * x + 5  # f(x) = x**2 + 2x + 5
+
 
 area, err = scipy.integrate.quad(my_funciton1, -3, 3)
 print("積分結果 :", area)
 print("誤差 :", err)
 
 print("------------------------------------------------------------")  # 60個
+
 
 # 計算半徑為r的圓的圓周
 def calc_area(r):
@@ -135,13 +139,15 @@ print(
     "---- scipy.optimize --------------------------------------------------------"
 )  # 60個
 
+
 def f(x):
     return x**2 + 15 * np.sin(x)
+
 
 x = np.arange(-10, 10, 0.1)
 plt.plot(x, f(x))
 
-#plt.show()
+# plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -151,9 +157,10 @@ print(result.x)
 plt.plot(x, f(x))
 plt.plot(result.x, f(result.x), "o")
 
-#plt.show()
+# plt.show()
 
 print("------------------------------------------------------------")  # 60個
+
 
 def fmax(x):
     """計算最大值"""
@@ -195,7 +202,7 @@ y = -3 * x**2 + 12 * x - 9
 plt.plot(x, y, color="b")
 plt.grid()
 
-#plt.show()
+# plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -234,7 +241,7 @@ x = np.linspace(0, 4, 50)
 y = 3 * x**2 - 12 * x + 10
 plt.plot(x, y, color="b")
 
-#plt.show()
+# plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -279,6 +286,7 @@ print(
     "---- scipy.stats --------------------------------------------------------"
 )  # 60個
 
+
 def normal_pdf(x, mu, sigma):
     pi = 3.1415926
     e = 2.718281
@@ -292,7 +300,7 @@ ax = np.linspace(-5, 5, 100)
 ay = [normal_pdf(x, 0, 1) for x in ax]
 plt.plot(ax, ay)
 
-#plt.show()
+# plt.show()
 
 x = [x / 10.0 for x in range(-50, 60)]
 plt.plot(x, scipy.stats.norm.pdf(x, 0, 1), "r-", lw=1, alpha=0.6, label="mu=0,sigma=1")
@@ -301,7 +309,7 @@ plt.plot(x, scipy.stats.norm.pdf(x, 2, 1), "g-.", lw=1, alpha=0.6, label="mu=2,s
 plt.legend()
 plt.title("Various Normal PDF")
 
-#plt.show()
+# plt.show()
 
 samples = [9, 3, 27]
 
@@ -327,7 +335,7 @@ plt.plot(t, w)
 plt.title("Linear Chirp")
 plt.xlabel("time in sec)")
 
-#plt.show()
+# plt.show()
 
 img = np.load("data/digit8.npy")
 
@@ -335,7 +343,7 @@ plt.figure()
 plt.imshow(img, cmap="gray")
 plt.axis("off")
 
-#plt.show()
+# plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -351,7 +359,7 @@ plt.imshow(c_digit, cmap="gray")
 plt.axis("off")
 plt.title("edge-detection image")
 
-#plt.show()
+# plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -367,7 +375,7 @@ plt.imshow(c_digit, cmap="gray")
 plt.axis("off")
 plt.title("sharpen image")
 
-#plt.show()
+# plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -392,7 +400,7 @@ for i in range(2, 6):
     plt.axis("off")
     plt.title("filter" + str(i - 1))
 
-#plt.show()
+# plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -483,24 +491,24 @@ print("------------------------------------------------------------")  # 60個
 import numpy as np
 import scipy.spatial.distance as dist
 
-Vector1 = np.array([1,1,0,1,0,1,0,0,1])
-Vector2 = np.array([0,1,1,0,0,0,1,1,1])
-matV = np.mat([Vector1 ,Vector2])
+Vector1 = np.array([1, 1, 0, 1, 0, 1, 0, 0, 1])
+Vector2 = np.array([0, 1, 1, 0, 0, 0, 1, 1, 1])
+matV = np.mat([Vector1, Vector2])
 print(matV)
-print("dist.jaccard:",dist.pdist(matV,'jaccard'))
+print("dist.jaccard:", dist.pdist(matV, "jaccard"))
 
 print("------------------------------------------------------------")  # 60個
 
-print('關鍵字特徵')
+print("關鍵字特徵")
 
 from scipy import stats
 import jieba
 import re
 
-def do_split(test_text):
-    pattern = r',|\.|/|;|\'|`|\[|\]|<|>|\?|:|"|\{|\}|\~|!|？|@|#|\$|%|\^|&|\(|\)|-|=|\_|\+|，|。|、|；|‘|’|【|】03   |·|！| |…|（|）' 
-    return re.split(pattern, test_text) 
 
+def do_split(test_text):
+    pattern = r',|\.|/|;|\'|`|\[|\]|<|>|\?|:|"|\{|\}|\~|!|？|@|#|\$|%|\^|&|\(|\)|-|=|\_|\+|，|。|、|；|‘|’|【|】03   |·|！| |…|（|）'
+    return re.split(pattern, test_text)
 
 
 def get_keywords(data, feat):
@@ -520,6 +528,7 @@ def get_keywords(data, feat):
                 ret.append(word)
     return ret
 
+
 def check_freq(data, feat, keywords, limit):
     ret = []
     for key in keywords:
@@ -530,14 +539,16 @@ def check_freq(data, feat, keywords, limit):
             pass
     return ret
 
+
 def do_test(data, feat, key, y, debug=False):
     arr1 = data[data[feat].str.contains(key) == True][y]
     arr2 = data[data[feat].str.contains(key) == False][y]
-    ret1 = stats.ttest_ind(arr1, arr2, equal_var = False)
+    ret1 = stats.ttest_ind(arr1, arr2, equal_var=False)
     ret2 = stats.levene(arr1, arr2)
     if ret1.pvalue < 0.05 or ret2.pvalue < 0.05:
-        return True    
+        return True
     return False
+
 
 def check(data, feat, y):
     ret = []
@@ -548,84 +559,144 @@ def check(data, feat, y):
             ret.append(word)
     return ret
 
+
 # 讀取數據文件的前500條數據，其中第6個字段是微博內容，第5個字段爲點贊次數。
-data = pd.read_csv('data/weibo_train_data.txt', sep='\t', 
-                   header=None, nrows=500)
+data = pd.read_csv("data/weibo_train_data.txt", sep="\t", header=None, nrows=500)
 print(check(data, 6, 5))
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 from scipy import stats
 
-arr1 = [96,95,95,95,95,95,95,95,95,95,95,95,95,95,95,
-        95,95,95,95,95,95,95,95,95,95,95,95,95,95,95]
-arr2 = [90,91,92,93,94,90,91,92,93,94,90,91,92,93,94,
-        90,91,92,93,94,90,91,92,93,94,90,91,92,93,94]
+arr1 = [
+    96,
+    95,
+    95,
+    95,
+    95,
+    95,
+    95,
+    95,
+    95,
+    95,
+    95,
+    95,
+    95,
+    95,
+    95,
+    95,
+    95,
+    95,
+    95,
+    95,
+    95,
+    95,
+    95,
+    95,
+    95,
+    95,
+    95,
+    95,
+    95,
+    95,
+]
+arr2 = [
+    90,
+    91,
+    92,
+    93,
+    94,
+    90,
+    91,
+    92,
+    93,
+    94,
+    90,
+    91,
+    92,
+    93,
+    94,
+    90,
+    91,
+    92,
+    93,
+    94,
+    90,
+    91,
+    92,
+    93,
+    94,
+    90,
+    91,
+    92,
+    93,
+    94,
+]
 print(stats.ttest_1samp(arr1, 92))
 print(stats.ttest_1samp(arr2, 92))
-print((np.mean(arr1)-92)/(np.std(arr1)/np.sqrt(len(arr1)-1)))
-print((np.mean(arr2)-92)/(np.std(arr2)/np.sqrt(len(arr2)-1)))
+print((np.mean(arr1) - 92) / (np.std(arr1) / np.sqrt(len(arr1) - 1)))
+print((np.mean(arr2) - 92) / (np.std(arr2) / np.sqrt(len(arr2) - 1)))
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 from scipy import stats
 
 
-print('正態性檢驗')
+print("正態性檢驗")
 
 # 檢驗樣本是否服從某一分佈
 np.random.seed(12345678)
-x = stats.norm.rvs(loc=0, scale=1, size=300) # loc爲均值，scale爲方差
-print(stats.kstest(x,'norm'))
+x = stats.norm.rvs(loc=0, scale=1, size=300)  # loc爲均值，scale爲方差
+print(stats.kstest(x, "norm"))
 
 # 數據的正態性檢驗
 np.random.seed(12345678)
-x = stats.norm.rvs(loc=10, scale=2, size=70) 
+x = stats.norm.rvs(loc=10, scale=2, size=70)
 print(stats.shapiro(x))
 
 # 作圖法檢驗正態分佈
 np.random.seed(12345678)
-x = stats.norm.rvs(loc=10, scale=2, size=300) 
+x = stats.norm.rvs(loc=10, scale=2, size=300)
 plt.hist(x)
 plt.show()
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-print('方差齊性檢驗')
+print("方差齊性檢驗")
 np.random.seed(12345678)
-rvs1 = stats.norm.rvs(loc=5,scale=10,size=500)  
-rvs2 = stats.norm.rvs(loc=25,scale=9,size=500)
+rvs1 = stats.norm.rvs(loc=5, scale=10, size=500)
+rvs2 = stats.norm.rvs(loc=25, scale=9, size=500)
 print(stats.levene(rvs1, rvs2))
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 from scipy import stats
 
-print('兩獨立樣本T檢驗')
+print("兩獨立樣本T檢驗")
 np.random.seed(12345678)
-rvs1 = stats.norm.rvs(loc=5,scale=10,size=500)  
-rvs2 = stats.norm.rvs(loc=6,scale=10,size=500)
-print(stats.ttest_ind(rvs1,rvs2))
+rvs1 = stats.norm.rvs(loc=5, scale=10, size=500)
+rvs2 = stats.norm.rvs(loc=6, scale=10, size=500)
+print(stats.ttest_ind(rvs1, rvs2))
 
 
-print('配對樣本T檢驗')
+print("配對樣本T檢驗")
 np.random.seed(12345678)
-rvs1 = stats.norm.rvs(loc=5,scale=10,size=500) 
-rvs2 = (stats.norm.rvs(loc=5,scale=10,size=500) + stats.norm.rvs(scale=0.2,size=500)) 
-print(stats.ttest_rel(rvs1,rvs2))
+rvs1 = stats.norm.rvs(loc=5, scale=10, size=500)
+rvs2 = stats.norm.rvs(loc=5, scale=10, size=500) + stats.norm.rvs(scale=0.2, size=500)
+print(stats.ttest_rel(rvs1, rvs2))
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 from scipy import stats
 
-a = [47,56,46,56,48,48,57,56,45,57]  # 分組1
-b = [87,85,99,85,79,81,82,78,85,91]  # 分組2
-c = [29,31,36,27,29,30,29,36,36,33]  # 分組3
-print(stats.f_oneway(a,b,c))
+a = [47, 56, 46, 56, 48, 48, 57, 56, 45, 57]  # 分組1
+b = [87, 85, 99, 85, 79, 81, 82, 78, 85, 91]  # 分組2
+c = [29, 31, 36, 27, 29, 30, 29, 36, 36, 33]  # 分組3
+print(stats.f_oneway(a, b, c))
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 from scipy import stats
 
@@ -637,73 +708,75 @@ C = [1, 2, 3, 4, 5, 6, 7]
 print(stats.kruskal(A, B, C))
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-import statsmodels.api as sm 
+import statsmodels.api as sm
 import scipy.stats as stats
 
 data = sm.datasets.anes96.load_pandas().data
-contingency = pd.crosstab(data['vote'], [data['educ']])
-print(stats.chi2_contingency(contingency)) # 卡方檢驗
+contingency = pd.crosstab(data["vote"], [data["educ"]])
+print(stats.chi2_contingency(contingency))  # 卡方檢驗
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 from scipy import stats
 
-print('圖形描述相關性')
+print("圖形描述相關性")
 import statsmodels.api as sm
+
 data = sm.datasets.ccard.load_pandas().data
-plt.scatter(data['INCOMESQ'], data['INCOME'])
+plt.scatter(data["INCOMESQ"], data["INCOME"])
 
 plt.show()
 
-print('正態資料的相關分析')
+print("正態資料的相關分析")
 np.random.seed(12345678)
-a = np.random.normal(0,1,100)
-b = np.random.normal(2,2,100)
+a = np.random.normal(0, 1, 100)
+b = np.random.normal(2, 2, 100)
 print(stats.pearsonr(a, b))
 
 
-print('非正態資料的相關分析')
-print(stats.spearmanr([1,2,3,4,5], [1,6,7,8,20]))
+print("非正態資料的相關分析")
+print(stats.spearmanr([1, 2, 3, 4, 5], [1, 6, 7, 8, 20]))
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-print('多元線性迴歸')
-import statsmodels.api as sm 
+print("多元線性迴歸")
+import statsmodels.api as sm
 
 data = sm.datasets.ccard.load_pandas().data
-model = sm.OLS(endog = data['AVGEXP'],
-     exog = data[['AGE','INCOME','INCOMESQ','OWNRENT']]).fit()
+model = sm.OLS(
+    endog=data["AVGEXP"], exog=data[["AGE", "INCOME", "INCOMESQ", "OWNRENT"]]
+).fit()
 
-print('多元線性迴歸 總結')
+print("多元線性迴歸 總結")
 print(model.summary())
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 # 邏輯迴歸
 
 import statsmodels.api as sm
 
 data = sm.datasets.ccard.load_pandas().data
-data['OWNRENT'] = data['OWNRENT'].astype(int)
-model = sm.Logit(endog = data['OWNRENT'], 
-     exog = data[['AVGEXP','AGE','INCOME','INCOMESQ']]).fit()
+data["OWNRENT"] = data["OWNRENT"].astype(int)
+model = sm.Logit(
+    endog=data["OWNRENT"], exog=data[["AVGEXP", "AGE", "INCOME", "INCOMESQ"]]
+).fit()
 
-print('邏輯迴歸 總結')
+print("邏輯迴歸 總結")
 print(model.summary())
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 import statsmodels as sm
-import tableone 
+import tableone
 
 data = sm.datasets.anes96.load_pandas().data
-categorical = ['TVnews', 'selfLR', 'ClinLR', 'educ', 'income'] 
-groupby = 'vote'
-mytable = tableone.TableOne(data, categorical=categorical, 
-                            groupby=groupby, pval=True)
+categorical = ["TVnews", "selfLR", "ClinLR", "educ", "income"]
+groupby = "vote"
+mytable = tableone.TableOne(data, categorical=categorical, groupby=groupby, pval=True)
 print()
 print()
 print()
@@ -712,83 +785,79 @@ print()
 print(mytable)
 mytable.to_excel("tmp_b.xlsx")
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-print('方差、協方差、協方差矩陣')
+print("方差、協方差、協方差矩陣")
 
 # 數據準備
-df = pd.DataFrame({'身高':[1.7, 1.8, 1.65, 1.75, 1.8], 
-                   '體重':[140, 170, 135,  150,  200]})
+df = pd.DataFrame({"身高": [1.7, 1.8, 1.65, 1.75, 1.8], "體重": [140, 170, 135, 150, 200]})
 print(df)
 
-print('均值')
-print(df['身高'].mean())
+print("均值")
+print(df["身高"].mean())
 
-print('方差')
-print(df['身高'].var())
-print((sum((df['身高']-df['身高'].mean())**2))/(len(df)-1))
+print("方差")
+print(df["身高"].var())
+print((sum((df["身高"] - df["身高"].mean()) ** 2)) / (len(df) - 1))
 
-print('標準差')
-print(df['身高'].std())
+print("標準差")
+print(df["身高"].std())
 
-print('協方差')
-print((sum((df['體重']-df['體重'].mean())*(df['身高']-df['身高'].mean()))/(len(df)-1)))
+print("協方差")
+print(
+    (sum((df["體重"] - df["體重"].mean()) * (df["身高"] - df["身高"].mean())) / (len(df) - 1))
+)
 
-print('協方差矩陣')
+print("協方差矩陣")
 print(df.cov())
 
-print('相關係數和相關係數矩陣')
+print("相關係數和相關係數矩陣")
 print(df.corr())
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-print('距離與範數')
+print("距離與範數")
 
 from scipy.spatial.distance import pdist  # 導入科學計算庫中的距離計算工具
 
-df = pd.DataFrame({'身高':[1.7, 1.8, 1.65, 1.75, 1.8], 
-                   '體重':[140, 170, 135,  150,  200]})
-x = df.loc[0,:]  # 取第一條實例x
+df = pd.DataFrame({"身高": [1.7, 1.8, 1.65, 1.75, 1.8], "體重": [140, 170, 135, 150, 200]})
+x = df.loc[0, :]  # 取第一條實例x
 print(x)
-y = df.loc[1,:]  # 取第二條實例y
+y = df.loc[1, :]  # 取第二條實例y
 print(y)
 
-print('歐氏距離')
-d1 = np.sqrt(np.sum(np.square(x-y))) # 公式計算
-d2 = pdist([x,y])  # 調用距離函數
+print("歐氏距離")
+d1 = np.sqrt(np.sum(np.square(x - y)))  # 公式計算
+d2 = pdist([x, y])  # 調用距離函數
 print(d1, d2)
 
-print('曼哈頓距離')
-d1 = np.sum(np.abs(x-y))
-d2 = pdist([x,y],'cityblock')
+print("曼哈頓距離")
+d1 = np.sum(np.abs(x - y))
+d2 = pdist([x, y], "cityblock")
 print(d1, d2)
 
-print('海明距離')
-d1 = pdist([x,y], 'hamming') 
-d2 = pdist([[0,0,0,1],[0,0,0,8]], 'hamming') # 對比兩數組的海明距離
+print("海明距離")
+d1 = pdist([x, y], "hamming")
+d2 = pdist([[0, 0, 0, 1], [0, 0, 0, 8]], "hamming")  # 對比兩數組的海明距離
 print(d1, d2)
 
-print('閔氏距離')
-d1=np.sqrt(np.sum(np.square(x-y)))
-d2=pdist([x,y],'minkowski',p=2) # 求取p=2時的閔氏距離
+print("閔氏距離")
+d1 = np.sqrt(np.sum(np.square(x - y)))
+d2 = pdist([x, y], "minkowski", p=2)  # 求取p=2時的閔氏距離
 print(d1, d2)
 
-print('切比雪夫距離')
-d1 = np.max(np.abs(x-y))
-d2 = pdist([x,y],'chebyshev')
+print("切比雪夫距離")
+d1 = np.max(np.abs(x - y))
+d2 = pdist([x, y], "chebyshev")
 print(d1, d2)
 
-print('馬氏距離')
-delta = x-y
-S=df.cov()   #協方差矩陣
-SI = np.linalg.inv(S) #協方差矩陣的逆矩陣
-d1=np.sqrt(np.dot(np.dot(delta,SI),delta.T))
-d2=pdist([x,y], 'mahalanobis', VI=SI)
+print("馬氏距離")
+delta = x - y
+S = df.cov()  # 協方差矩陣
+SI = np.linalg.inv(S)  # 協方差矩陣的逆矩陣
+d1 = np.sqrt(np.dot(np.dot(delta, SI), delta.T))
+d2 = pdist([x, y], "mahalanobis", VI=SI)
 print(d1, d2)
-
-print('------------------------------------------------------------')	#60個
-
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -801,6 +870,8 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
+
+print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
@@ -814,4 +885,3 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-

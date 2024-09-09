@@ -281,5 +281,61 @@ namespace vcs_WebCam_AForge0  //以此為準
         {
             save_image_file();
         }
+
+        bool flag_fullscreen = false;
+        private void pictureBox1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (flag_fullscreen == false)
+            {
+                flag_fullscreen = true;
+                //show_main_message("全螢幕", S_OK, 20);
+                //groupBox1.Visible = false;
+                //richTextBox1.Visible = false;
+                //bt_clear.Visible = false;
+
+                this.BackColor = Color.Black;
+                //最大化螢幕
+                this.FormBorderStyle = FormBorderStyle.None;
+                this.WindowState = FormWindowState.Maximized;
+                //this.StartPosition = FormStartPosition.CenterScreen; //居中顯示
+
+                pictureBox1.Size = new Size(1920, 1080);
+                pictureBox1.Location = new Point(0, 0);
+                pictureBox1.Focus();
+            }
+            else
+            {
+                flag_fullscreen = false;
+                //show_main_message("復原", S_OK, 20);
+                /*
+                groupBox1.Visible = true;
+                if (debug_mode == true)
+                {
+                    richTextBox1.Visible = true;
+                    bt_clear.Visible = true;
+                }
+                */
+                this.BackColor = System.Drawing.SystemColors.ControlLight;
+                //最大化螢幕
+                this.FormBorderStyle = FormBorderStyle.Sizable;
+                this.WindowState = FormWindowState.Normal;
+
+                int ww;
+                int hh;
+                ww = Cam.VideoCapabilities[0].FrameSize.Width;
+                hh = Cam.VideoCapabilities[0].FrameSize.Height;
+                pictureBox1.Size = new Size(ww, hh);
+                pictureBox1.Location = new Point(140, 60);
+                this.FormBorderStyle = FormBorderStyle.FixedSingle;
+                this.WindowState = FormWindowState.Normal;
+                this.ClientSize = new Size(pictureBox1.Location.X + pictureBox1.Width + 50, pictureBox1.Location.Y + pictureBox1.Height + 50);
+
+                //this.StartPosition = FormStartPosition.CenterScreen; //居中顯示
+
+                //pictureBox1.Size = new Size(W_pictureBox1, H_pictureBox1);
+                //pictureBox1.Location = new Point(BORDER, BORDER + H_groupBox1 + BORDER);
+                pictureBox1.Focus();
+            }
+        }
     }
 }

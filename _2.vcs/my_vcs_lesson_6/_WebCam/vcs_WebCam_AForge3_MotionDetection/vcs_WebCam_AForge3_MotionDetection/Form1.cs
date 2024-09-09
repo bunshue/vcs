@@ -47,64 +47,6 @@ namespace vcs_WebCam_AForge3_MotionDetection  // 標準 移動偵測
         bool motionDetected = false; // was there any motion detected previously
         int calibrateAndResume = 0; // counter used delay/skip frames from being processed by the MotionDetector
 
-        private void DrawMessage(object sender, PaintEventArgs e)
-        {
-            using (Font f = new Font("Arial", 14, FontStyle.Bold))
-            {
-                string str = string.Empty;
-                SolidBrush sb;
-                if (this.motionDetected == true)
-                {
-                    str = DateTime.Now.ToString() + " 移動偵測";
-                    sb = new SolidBrush(Color.Red);
-                    e.Graphics.DrawRectangle(new Pen(Color.Red, 10), 5, 5, 640 - 10, 480 - 10);
-                }
-                else
-                {
-                    str = DateTime.Now.ToString();
-                    sb = new SolidBrush(Color.Green);
-                }
-                e.Graphics.DrawString(str, f, sb, new Point(10, 10));
-            }
-        }
-
-        //自定義函數, 捕獲每一幀圖像並顯示
-        void Cam_NewFrame(object sender, NewFrameEventArgs eventArgs)
-        {
-            Bitmap bitmap1 = (Bitmap)eventArgs.Frame.Clone(); // get a copy of the BitMap from the VideoCaptureDevice
-            pictureBox1.Image = (Bitmap)bitmap1.Clone(); // displays the current frame on the main form
-
-            if ((this.flag_motion_detection == true) && (this.motionDetected == false))
-            {
-                // if motion detection is enabled and there werent any previous motion detected
-                Bitmap bitmap2 = (Bitmap)bitmap1.Clone(); // clone the bits from the current frame
-
-                if (motion_detector.ProcessFrame(bitmap2) > 0.001) // feed the bits to the MD 
-                {
-                    if (this.calibrateAndResume > 3)
-                    {
-                        // if motion was detected in 3 subsequent frames
-                        Thread th = new Thread(MotionReaction);
-                        th.Start(); // start the motion reaction thread
-                    }
-                    else
-                    {
-                        this.calibrateAndResume++;
-                    }
-                }
-            }
-        }
-
-        private void MotionReaction()
-        {
-            this.motionDetected = true;
-
-            Thread.Sleep(10000); // the user is notified for 10 seconds
-            calibrateAndResume = 0;
-            this.motionDetected = false;
-            Thread.Sleep(3000);
-        }
-
         public Form1()
         {
             InitializeComponent();
@@ -165,6 +107,64 @@ namespace vcs_WebCam_AForge3_MotionDetection  // 標準 移動偵測
                 Cam = new VideoCaptureDevice(USBWebcams[0].MonikerString);//長名
                 Cam.NewFrame += new NewFrameEventHandler(Cam_NewFrame); // defines which method to call when a new frame arrives
             }
+        }
+
+        private void DrawMessage(object sender, PaintEventArgs e)
+        {
+            using (Font f = new Font("Arial", 14, FontStyle.Bold))
+            {
+                string str = string.Empty;
+                SolidBrush sb;
+                if (this.motionDetected == true)
+                {
+                    str = DateTime.Now.ToString() + " 移動偵測";
+                    sb = new SolidBrush(Color.Red);
+                    e.Graphics.DrawRectangle(new Pen(Color.Red, 10), 5, 5, 640 - 10, 480 - 10);
+                }
+                else
+                {
+                    str = DateTime.Now.ToString();
+                    sb = new SolidBrush(Color.Green);
+                }
+                e.Graphics.DrawString(str, f, sb, new Point(10, 10));
+            }
+        }
+
+        //自定義函數, 捕獲每一幀圖像並顯示
+        void Cam_NewFrame(object sender, NewFrameEventArgs eventArgs)
+        {
+            Bitmap bitmap1 = (Bitmap)eventArgs.Frame.Clone(); // get a copy of the BitMap from the VideoCaptureDevice
+            pictureBox1.Image = (Bitmap)bitmap1.Clone(); // displays the current frame on the main form
+
+            if ((this.flag_motion_detection == true) && (this.motionDetected == false))
+            {
+                // if motion detection is enabled and there werent any previous motion detected
+                Bitmap bitmap2 = (Bitmap)bitmap1.Clone(); // clone the bits from the current frame
+
+                if (motion_detector.ProcessFrame(bitmap2) > 0.001) // feed the bits to the MD 
+                {
+                    if (this.calibrateAndResume > 3)
+                    {
+                        // if motion was detected in 3 subsequent frames
+                        Thread th = new Thread(MotionReaction);
+                        th.Start(); // start the motion reaction thread
+                    }
+                    else
+                    {
+                        this.calibrateAndResume++;
+                    }
+                }
+            }
+        }
+
+        private void MotionReaction()
+        {
+            this.motionDetected = true;
+
+            Thread.Sleep(10000); // the user is notified for 10 seconds
+            calibrateAndResume = 0;
+            this.motionDetected = false;
+            Thread.Sleep(3000);
         }
 
         void Start_Webcam()
