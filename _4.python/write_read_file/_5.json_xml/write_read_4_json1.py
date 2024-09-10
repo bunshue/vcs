@@ -37,7 +37,36 @@ import json
 import datetime
 
 print("------------------------------------------------------------")  # 60個
-'''
+
+print('串列 轉 json')
+
+numbers = [2, 3, 5, 7, 11, 13]
+
+filename = 'tmp_numbers.json'
+with open(filename, 'w') as f:
+    json.dump(numbers, f)
+
+print('------------------------------')	#30個
+
+filename = 'tmp_numbers.json'
+with open(filename) as f:
+    numbers = json.load(f)
+    
+print(numbers)
+
+print("------------------------------------------------------------")  # 60個
+
+data = [
+    {'姓名':'王小明', '身高':174, '體重':56},
+    {'姓名':'林小華', '身高':185, '體重':80},
+    {'姓名':'陳小強', '身高':168, '體重':60} ]
+
+with open('tmp_person_data.json', 'w', encoding='utf-8') as fp:
+    json.dump(data, fp)
+print("done")
+
+print("------------------------------------------------------------")  # 60個
+
 print('字典 轉 json')
 data = {
    "name": "Joe Chen", 
@@ -51,13 +80,9 @@ print(json_str)
 data2 = json.loads(json_str)
 print(data2)
 
-sys.exit()
-
-
-jsonfile = "Student2.json"
+jsonfile = "tmp_Student2.json"
 with open(jsonfile, 'w') as fp:
     json.dump(data, fp)
-
 
 animals = {
     "鼠": 3,
@@ -68,13 +93,11 @@ animals = {
     "蛇": 16,
 }
 
-"""
-jsonfile = "animal.json"
+jsonfile = "tmp_animal.json"
 with open(jsonfile, 'w') as fp:
     json.dump(animals, fp)
-"""
 
-jsonfile = "animal.json"
+jsonfile = "tmp_animal.json"
 with open(jsonfile, 'r') as fp:
     data = json.load(fp)
 print(data)
@@ -83,9 +106,11 @@ print(json_str)
 
 print("------------------------------------------------------------")  # 60個
 
-jsonfile = "Student.json"
+jsonfile = "data/Student.json"
 with open(jsonfile, 'r') as fp:
     data = json.load(fp)
+print(data)
+
 json_str = json.dumps(data)
 print(json_str)  
 
@@ -96,7 +121,7 @@ with open(filename) as fnObj:
     getDatas = json.load(fnObj)                     # 讀json檔案
 
 i = 0
-filename = "_tmp_population.json"
+filename = "tmp_population.json"
 tmpdict = {}
 with open(filename, 'w') as fnObj:
     for getData in getDatas:
@@ -346,22 +371,6 @@ print(lats[:5])
 
 print('------------------------------------------------------------')	#60個
 
-numbers = [2, 3, 5, 7, 11, 13]
-
-filename = 'numbers.json'
-with open(filename, 'w') as f:
-    json.dump(numbers, f)
-
-print('------------------------------------------------------------')	#60個
-
-filename = 'numbers.json'
-with open(filename) as f:
-    numbers = json.load(f)
-    
-print(numbers)
-
-print("------------------------------------------------------------")  # 60個
-
 filename = 'C:/_git/vcs/_1.data/______test_files1/_json/data_earthquake.json'
 fp = open(filename, 'r')
 earthquakes = json.load(fp)
@@ -420,13 +429,13 @@ html = requests.get(url)
 sig = hashlib.md5(html.text.encode('utf-8')).hexdigest()
 old_sig=''
 
-if os.path.exists('eq_sig.txt'):
-    with open('eq_sig.txt', 'r') as fp:
+if os.path.exists('tmp_eq_sig.txt'):
+    with open('tmp_eq_sig.txt', 'r') as fp:
         old_sig = fp.read()
-    with open('eq_sig.txt', 'w') as fp:
+    with open('tmp_eq_sig.txt', 'w') as fp:
         fp.write(sig)
 else:
-    with open('eq_sig.txt', 'w') as fp:
+    with open('tmp_eq_sig.txt', 'w') as fp:
         fp.write(sig)
 
 if sig == old_sig:
@@ -465,17 +474,6 @@ pp.pprint(data)
 print(data)
 
 print('------------------------------------------------------------')	#60個
-
-data = [
-    {'姓名':'王小明', '身高':174, '體重':56},
-    {'姓名':'林小華', '身高':185, '體重':80},
-    {'姓名':'陳小強', '身高':168, '體重':60} ]
-
-with open('p-data.json', 'w', encoding='utf-8') as fp:
-    json.dump(data, fp)
-print("done")
-
-print("------------------------------------------------------------")  # 60個
 
 #讀取 JSON 檔
 
@@ -927,11 +925,9 @@ for c in listCount:
 font={"family":"DFKai-SB"}
 plt.rc("font", **font)
 plt.pie(listPercent, labels=listEvent, autopct="%3.1f%%")
-plt.savefig('tmp_event.png', dpi=300) 	# 將圓餅圖出成圖片，檔名為event.png 
 plt.show()                 	        # 顯示圓餅圖
-os.system('event.png')  	        # 開啟圓餅圖event.png圖片
 print("圖表建置成成功")
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 data = [{"group":0,"param":["one","two","three"]},

@@ -90,29 +90,21 @@ namespace vcs_WebCam1  //以此為準
             this.ClientSize = new Size(BORDER + W_pictureBox1 + BORDER + W_richTextBox1 + BORDER, BORDER + H_pictureBox1 + BORDER + H_groupBox1 + BORDER);
         }
 
-        void Init_WebcamSetup()
+        void Init_WebcamSetup() //最小化WebCam設定
         {
             USBWebcams = new FilterInfoCollection(FilterCategory.VideoInputDevice);
-            if (USBWebcams.Count > 0)  // The quantity of WebCam must be more than 0.
+            if (USBWebcams.Count > 0)
             {
                 Cam = new VideoCaptureDevice(USBWebcams[0].MonikerString);  //實例化對象
-
                 Cam.NewFrame += new NewFrameEventHandler(Cam_NewFrame);
 
+                //新版AForge才支持以下功能
                 //以下為WebCam訊息與調整視窗大小
                 Cam.VideoResolution = Cam.VideoCapabilities[0];
-                string webcam_name = string.Empty;
-                int ww;
-                int hh;
-                ww = Cam.VideoCapabilities[0].FrameSize.Width;
-                hh = Cam.VideoCapabilities[0].FrameSize.Height;
-                webcam_name = USBWebcams[0].Name + " " + Cam.VideoCapabilities[0].FrameSize.Width.ToString() + " X " + Cam.VideoCapabilities[0].FrameSize.Height.ToString() + " @ " + Cam.VideoCapabilities[0].AverageFrameRate.ToString() + " Hz";
+                int ww = Cam.VideoCapabilities[0].FrameSize.Width;
+                int hh = Cam.VideoCapabilities[0].FrameSize.Height;
+                string webcam_name = USBWebcams[0].Name + " " + Cam.VideoCapabilities[0].FrameSize.Width.ToString() + " X " + Cam.VideoCapabilities[0].FrameSize.Height.ToString() + " @ " + Cam.VideoCapabilities[0].AverageFrameRate.ToString() + " Hz";
                 this.Text = webcam_name;
-
-                //有抓到WebCam, 重新設定pictureBox的大小和位置
-                pictureBox1.Size = new Size(ww, hh);
-                pictureBox1.Location = new Point(BORDER, BORDER);
-                //this.ClientSize = new Size(pictureBox1.Location.X + pictureBox1.Width + 50, pictureBox1.Location.Y + pictureBox1.Height + 50);
             }
             else
             {

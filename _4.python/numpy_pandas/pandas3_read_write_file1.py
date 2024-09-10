@@ -44,7 +44,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 print('pandas 讀取 csv檔')
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_csv/scores2.csv'
@@ -847,7 +847,85 @@ df1 = pd.read_csv("tmp.csv")
 print(df1.info())
 print(df1)
 
-print('------------------------------------------------------------')	#60個
+'''
+print("------------------------------------------------------------")  # 60個
+
+filename = "data/animals_big5.csv"
+
+pd.options.mode.chained_assignment = None  # 取消顯示pandas資料重設警告
+
+df = pd.read_csv(filename, encoding="big5")  # 以pandas讀取檔案
+print(df)
+
+fullname = pd.DataFrame(df["全名"])
+print(fullname)
+
+print("------------------------------------------------------------")  # 60個
+
+print("df 轉 檔案")
+
+data = {
+    "中文名": ["鼠", "牛", "虎", "兔"],
+    "英文名": ["mouse", "ox", "tiger", "rabbit"],
+    "體重": [3, 48, 33, 8],
+    "全名": ["米老鼠", "班尼牛", "跳跳虎", "彼得兔"],
+}
+df = pd.DataFrame(data, index=["1", "2", "3", "4"])
+
+df.to_csv("tmp_write_read_csv06.csv", index=False, encoding="big5")
+df.to_json("tmp_write_read_csv06a.json")
+df.to_json("tmp_write_read_csv06b.json", force_ascii=False)
+
+print("檔案 轉 df")
+
+df = pd.read_csv("tmp_write_read_csv06.csv", encoding="big5")
+print(df)
+df = pd.read_json("tmp_write_read_csv06a.json")
+print(df)
+df = pd.read_json("tmp_write_read_csv06b.json")
+print(df)
+
+print("------------------------------------------------------------")  # 60個
+
+print("csv檔案 轉 df")
+filename = "data/animals.csv"
+
+df = pd.read_csv(filename)
+print(df.head(5))
+
+print("df 轉 csv檔案")
+filename = "tmp_write_read_csv07.csv"
+
+df.to_csv(filename)
+
+print("------------------------------------------------------------")  # 60個
+
+filename = "data/animals.csv"
+DataFrame = pd.read_csv(filename)
+print(DataFrame["中文名"])
+print()
+print(DataFrame[["中文名", "英文名"]])
+print()
+print(DataFrame[["中文名", "英文名", "體重"]])
+print()
+
+DataFrame["中英文"] = DataFrame["中文名"] + DataFrame["英文名"]
+print(DataFrame[["中文名", "英文名", "體重", "中英文"]])
+
+print("------------------------------------------------------------")  # 60個
+
+df = pd.DataFrame(
+    {"中文名": ["鼠", "牛", "虎", "兔"], "英文名": ["mouse", "ox", "tiger", "rabbit"]}
+)
+print(df[["中文名", "英文名"]])
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
@@ -859,21 +937,11 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-
-
 print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
 
 
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-df = pd.DataFrame({'Math': [90, 91,92, 93, 94],'English': np.arange(80,85,1) })
-print(df[["Math","English"]])
-
-
+df = pd.DataFrame({"Math": [90, 91, 92, 93, 94], "English": np.arange(80, 85, 1)})
+print(df[["Math", "English"]])

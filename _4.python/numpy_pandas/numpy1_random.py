@@ -36,7 +36,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-'''
+"""
 print(
     "---- 用 numpy 做的 random --------------------------------------------------------"
 )  # 60個
@@ -79,7 +79,7 @@ print('平均值 : ', np.mean(y))
 print('中間值 : ', np.median(y))
 
 print('------------------------------------------------------------')	#60個
-'''
+"""
 print("------------------------------------------------------------")  # 60個
 
 # 產生一個多維陣列 0 ~ 1 的隨機數 ( 不包含 1 )
@@ -99,10 +99,10 @@ print(cc)
 cc = np.random.rand(3)
 print(cc)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
-#np.random.rand(M, N)  # random values in a given shape
+# np.random.rand(M, N)  # random values in a given shape
 
 N = 10
 A = 10
@@ -115,18 +115,17 @@ A = 100
 cc = np.random.rand(N) * A
 print(cc)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
+print(
+    "---- np.random.rand() SP --------------------------------------------------------"
+)  # 60個
 
 
-
-
-
-print('---- np.random.rand() SP --------------------------------------------------------')	#60個
-
-
-print('---- np.random.randn() ST --------------------------------------------------------')	#60個
+print(
+    "---- np.random.randn() ST --------------------------------------------------------"
+)  # 60個
 
 # 如果只是想返回一個隨機數，可使用 randn()
 # randn 的用法和 rand 類似，也可從標準正態分佈中產生多維陣列隨機數
@@ -134,30 +133,30 @@ print('---- np.random.randn() ST -----------------------------------------------
 cc = np.random.randn()
 print(cc)
 
-print('2.產生2x3常態分佈的隨機浮點數\n', np.random.randn(2,3))
+print("2.產生2x3常態分佈的隨機浮點數\n", np.random.randn(2, 3))
 
-print('常態分布 一維 N = 6')
+print("常態分布 一維 N = 6")
 
-#由一個平均為0，變異數為1的高斯分布中隨機取點，並以list儲存。
+# 由一個平均為0，變異數為1的高斯分布中隨機取點，並以list儲存。
 
 N = 6
 cc = np.random.randn(N)
 print(cc)
 
-print('常態分布 二維 5 X 3')
+print("常態分布 二維 5 X 3")
 M, N = 5, 3
 cc = np.random.randn(M, N)
 print(cc)
 
-#numpy.random.randn
-#sigma * np.random.randn(...) + mu
+# numpy.random.randn
+# sigma * np.random.randn(...) + mu
 
 s = 3 + 2.5 * np.random.randn(2, 4)
 print(s)
 
 print("------------------------------")  # 30個
 
-print('常態分布 一維 N = 1000 統計資料')
+print("常態分布 一維 N = 1000 統計資料")
 
 N = 1000
 cc = np.random.randn(N)
@@ -171,7 +170,7 @@ print("最小 : ", min(cc))
 print("平均 : ", cc.mean())
 print("標準差 : ", cc.std())
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 """
 x = np.random.randn(N, 3)
@@ -189,9 +188,13 @@ plt.hist(x, bins=num_bins, color="r", alpha=0.3)
 plt.title("np.random.randn")
 """
 
-print('---- np.random.randn() SP --------------------------------------------------------')	#60個
+print(
+    "---- np.random.randn() SP --------------------------------------------------------"
+)  # 60個
 
-print('---- np.random.randint() ST --------------------------------------------------------')	#60個
+print(
+    "---- np.random.randint() ST --------------------------------------------------------"
+)  # 60個
 
 print("建立 ST ~ SP 間的隨機整數(不含尾)")
 
@@ -203,8 +206,8 @@ print(cc)
 cc = np.random.randint(ST, SP)
 print(cc)
 
-print('建立 3 個 0-9(含) 的整數隨機數')
-cc = np.random.randint(10,size=3)
+print("建立 3 個 0-9(含) 的整數隨機數")
+cc = np.random.randint(10, size=3)
 print(cc)
 
 print("一維陣列 N 個, ST ~ SP 間的隨機整數(不含尾)")
@@ -212,52 +215,52 @@ N = 10
 cc = np.random.randint(ST, SP, N)
 print(cc)
 
-print('建立 3x2 個0-9(含) 的整數隨機數')
-cc = np.random.randint(0, 10, size=(3,2))
+print("建立 3x2 個0-9(含) 的整數隨機數")
+cc = np.random.randint(0, 10, size=(3, 2))
 print(cc)
 
 print("回傳單3*5陣列, 值是0(含)至10(不含)的隨機數")
 print("二維鎮列 MXN 個, 0 ~ SP 間的隨機整數(不含尾)")
-cc = np.random.randint(SP, size=(3, 5))     
+cc = np.random.randint(SP, size=(3, 5))
 print(cc)
 
 print("np亂數建立二維陣列 1 ~ 7(不含尾), 6X4")
 cc = np.random.randint(ST, SP, (6, 4))
 print(cc)
 
-cc = np.random.randint(10, size = (4, 3))  # 數值0~9, size : 4X3
-print('shape :', cc.shape)
+cc = np.random.randint(10, size=(4, 3))  # 數值0~9, size : 4X3
+print("shape :", cc.shape)
 print(cc)
 
-cc = np.random.randint(ST, SP, size = 5)
+cc = np.random.randint(ST, SP, size=5)
 print(cc)
 
-cc = np.random.randint(ST, SP, size = (2, 3))
+cc = np.random.randint(ST, SP, size=(2, 3))
 print(cc)
 
 cc = np.random.randint(SP, size=10)
 print(cc)
 
-print('統計資料')
+print("統計資料")
 cc = np.random.randint(100, size=50)
-print('陣列的內容：', cc)
-print('1.標準差：', np.std(cc))
-print('2.變異數：', np.var(cc))
-print('3.中位數：', np.median(cc))
-print('4.百分比值：', np.percentile(cc, 80))
-print('5.最大最小差值：', np.ptp(cc))
+print("陣列的內容：", cc)
+print("1.標準差：", np.std(cc))
+print("2.變異數：", np.var(cc))
+print("3.中位數：", np.median(cc))
+print("4.百分比值：", np.percentile(cc, 80))
+print("5.最大最小差值：", np.ptp(cc))
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 cc = np.random.randint(ST, SP, (3, 5))
-print('原陣列內容：')
+print("原陣列內容：")
 print(cc)
-print('將每一直行進行排序：')
-print(np.sort(cc, axis = 0))
-print('將每一橫列進行排序：')
-print(np.sort(cc, axis = 1))
+print("將每一直行進行排序：")
+print(np.sort(cc, axis=0))
+print("將每一橫列進行排序：")
+print(np.sort(cc, axis=1))
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 N = 10
 cc = np.random.randint(ST, SP, N)
@@ -265,7 +268,7 @@ print(cc)
 print(np.unique(cc))  # unique統計陣列中所有不同的值
 print(np.bincount(cc))  # bincount統計整數陣列中每個元素出現的次數
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 """
 #由low到high中產生一個size大小的list。 dtype，一般來說我們不會動到
@@ -283,19 +286,19 @@ k = np.random.randint(1,101)
 
 """
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-print('創建數組 Random.randint')
-#在一个范围内生成n个随机整数样本。
-#np.random.randint(low, high = None, size = None, dtype = int)
+print("創建數組 Random.randint")
+# 在一个范围内生成n个随机整数样本。
+# np.random.randint(low, high = None, size = None, dtype = int)
 na = np.random.randint(5, 10, 10)
 print(na)
 
-a=np.random.randint(0,5,10)
-print(a) 
-print(np.unique(a)) 
-print(np.bincount(a)) 
-print(np.histogram(a,bins=5))
+a = np.random.randint(0, 5, 10)
+print(a)
+print(np.unique(a))
+print(np.bincount(a))
+print(np.histogram(a, bins=5))
 
 # 產生隨機整數，也可用 size 產生多維陣列隨機數
 d = np.random.randint(1, 100, 10)
@@ -303,50 +306,54 @@ print(d)
 e = np.random.randint(1, 100, size=(2, 2, 3))
 print(e)
 
-print('---- np.random.randint() SP --------------------------------------------------------')	#60個
+print(
+    "---- np.random.randint() SP --------------------------------------------------------"
+)  # 60個
 
 
-print('---- np.random.choice() ST --------------------------------------------------------')	#60個
+print(
+    "---- np.random.choice() ST --------------------------------------------------------"
+)  # 60個
 
-print('在名詞字串中隨機選取一個字串')
-#animals = list("鼠牛虎兔龍蛇")
-animals = ['鼠', '牛', '虎', '兔', '龍', '蛇']
+print("在名詞字串中隨機選取一個字串")
+# animals = list("鼠牛虎兔龍蛇")
+animals = ["鼠", "牛", "虎", "兔", "龍", "蛇"]
 for _ in range(10):
     animal = np.random.choice(animals)
     print(animal)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-animals = ['鼠', '牛', '虎', '兔', '龍', '蛇']
-animals1 = np.random.choice(animals,3)
+animals = ["鼠", "牛", "虎", "兔", "龍", "蛇"]
+animals1 = np.random.choice(animals, 3)
 print("隨機挑選 3 種動物")
 print(animals1)
 
-animals2 = np.random.choice(animals,5)
+animals2 = np.random.choice(animals, 5)
 print("隨機挑選 5 種動物 -- 可以重複")
 print(animals2)
-    
-animals3 = np.random.choice(animals,5,replace=False)
+
+animals3 = np.random.choice(animals, 5, replace=False)
 print("隨機挑選 5 種動物 -- 不可以重複")
 print(animals3)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-animals = ['鼠', '牛', '虎', '兔', '龍', '蛇']
-animals1 = np.random.choice(animals,5,p=[0.2,0.6,0.05,0.05,0.05,0.05])
+animals = ["鼠", "牛", "虎", "兔", "龍", "蛇"]
+animals1 = np.random.choice(animals, 5, p=[0.2, 0.6, 0.05, 0.05, 0.05, 0.05])
 print("依權重挑選 5 種動物")
 print(animals1)
 
-animals2 = np.random.choice(animals,5,p=[0.05,0.05,0.05,0.05,0.3,0.5])
+animals2 = np.random.choice(animals, 5, p=[0.05, 0.05, 0.05, 0.05, 0.3, 0.5])
 print("依權重挑選 5 種動物")
 print(animals2)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-print('6.產生0~4(不含5)2x3的隨機整數\n', np.random.choice(5,[2,3]))
-print('7.產生0~42(不含43)6個不重複的隨機整數\n', np.random.choice(43,6,replace=False))
+print("6.產生0~4(不含5)2x3的隨機整數\n", np.random.choice(5, [2, 3]))
+print("7.產生0~42(不含43)6個不重複的隨機整數\n", np.random.choice(43, 6, replace=False))
 
-animals = ['鼠', '牛', '虎', '兔', '龍', '蛇']
+animals = ["鼠", "牛", "虎", "兔", "龍", "蛇"]
 cc = np.random.choice(animals, 5)
 print(cc)
 
@@ -354,15 +361,15 @@ print(cc)
 #size = np.random.choice(np.arange(100), 100)
 """
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 a = np.random.choice(50, size=10, replace=False)
-print('排序前的陣列：', a)
-print('排序後的陣列：', np.sort(a))
-print('排序後的索引：', np.argsort(a))
-#用索引到陣列取值
+print("排序前的陣列：", a)
+print("排序後的陣列：", np.sort(a))
+print("排序後的索引：", np.argsort(a))
+# 用索引到陣列取值
 for i in np.argsort(a):
-    print(a[i], end=',')
+    print(a[i], end=",")
 
 print("------------------------------------------------------------")  # 60個
 
@@ -401,18 +408,27 @@ def poem():
         sentence = np.random.choice(words, m, replace=False)
         print(" ".join(sentence))
 
+
 poem()
 
 print("------------------------------------------------------------")  # 60個
 
-print('---- np.random.choice() SP --------------------------------------------------------')	#60個
+print(
+    "---- np.random.choice() SP --------------------------------------------------------"
+)  # 60個
 
-print('---- np.random.randrange() ST --------------------------------------------------------')	#60個
+print(
+    "---- np.random.randrange() ST --------------------------------------------------------"
+)  # 60個
 
 
-print('---- np.random.randrange() SP --------------------------------------------------------')	#60個
+print(
+    "---- np.random.randrange() SP --------------------------------------------------------"
+)  # 60個
 
-print('---- np.random.normal() ST --------------------------------------------------------')	#60個
+print(
+    "---- np.random.normal() ST --------------------------------------------------------"
+)  # 60個
 
 N = 10
 cc = np.random.normal(0, 1, N)
@@ -427,14 +443,14 @@ cc = np.random.normal(3, 2.5, size=(2, 4))
 print(cc)
 
 
-x = np.random.normal(1,4,(3,5))
-y = np.argmax(x,axis=1)
+x = np.random.normal(1, 4, (3, 5))
+y = np.argmax(x, axis=1)
 print(x)
 print(x.shape)
 print(y)
 print(y.shape)
-                                                                                                                  
-print('查詢函數用法')
+
+print("查詢函數用法")
 help(np.max)
 
 print("------------------------------------------------------------")  # 60個
@@ -447,7 +463,7 @@ x2 = x1[x1 <= 100.0]
 x2 = x2[x2 >= 0]
 """
 
-#過濾資料
+# 過濾資料
 
 """
 scores1 = np.random.normal(mu, sigma, size=N)  # 隨機數
@@ -459,57 +475,66 @@ scores2 = scores1[scores1 <= 100.0]
 scores3 = scores2[scores2 >= 0.0]
 """
 
-print('---- np.random.normal() SP --------------------------------------------------------')	#60個
+print(
+    "---- np.random.normal() SP --------------------------------------------------------"
+)  # 60個
 
-print('---- np.random.uniform() ST --------------------------------------------------------')	#60個
+print(
+    "---- np.random.uniform() ST --------------------------------------------------------"
+)  # 60個
 
 for _ in range(50):
     cc = np.random.uniform()
     print(cc)
 
-print('創建數組 Uniform')
-#np.uniform(low = 0.0, high = 1.0, size = None)
-#在上下限之间的均匀分布中生成随机样本。
+print("創建數組 Uniform")
+# np.uniform(low = 0.0, high = 1.0, size = None)
+# 在上下限之间的均匀分布中生成随机样本。
 
-na = np.random.uniform(5, 10, size = 4)
+na = np.random.uniform(5, 10, size=4)
 print(na)
- 
-na = np.random.uniform(size = 5)
+
+na = np.random.uniform(size=5)
 print(na)
- 
-na = np.random.uniform(size = (2, 3))
+
+na = np.random.uniform(size=(2, 3))
 print(na)
 
 print("------------------------------------------------------------")  # 60個
 
 
+print(
+    "---- np.random.uniform() SP --------------------------------------------------------"
+)  # 60個
+
+print(
+    "---- np.random.sample() ST --------------------------------------------------------"
+)  # 60個
 
 
-
-print('---- np.random.uniform() SP --------------------------------------------------------')	#60個
-
-print('---- np.random.sample() ST --------------------------------------------------------')	#60個
-
-
-print('---- np.random.sample() SP --------------------------------------------------------')	#60個
+print(
+    "---- np.random.sample() SP --------------------------------------------------------"
+)  # 60個
 
 
-print('---- np.random.shuffle() ST --------------------------------------------------------')	#60個
+print(
+    "---- np.random.shuffle() ST --------------------------------------------------------"
+)  # 60個
 
-animals = ['鼠', '牛', '虎', '兔', '龍', '蛇']
+animals = ["鼠", "牛", "虎", "兔", "龍", "蛇"]
 
-print('原list')
+print("原list")
 print(animals)
 
-print('shuffle list')
+print("shuffle list")
 np.random.shuffle(animals)
 print(animals)
 
-print('再 shuffle list')
+print("再 shuffle list")
 np.random.shuffle(animals)
 print(animals)
 
-print('再 shuffle list')
+print("再 shuffle list")
 np.random.shuffle(animals)
 print(animals)
 
@@ -521,56 +546,63 @@ for i in ran:
 index.sort()
 """
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 print("一維陣列之shuffle")
-cc = np.arange(20)    # 0 1 2 ... 20
-print('初')
+cc = np.arange(20)  # 0 1 2 ... 20
+print("初")
 print(cc)
-np.random.shuffle(cc)         # 重新排列
+np.random.shuffle(cc)  # 重新排列
 print("末")
 print(cc)
 
 print("二維陣列之shuffle")
-cc = np.arange(25).reshape((5,5))
-print('初')
+cc = np.arange(25).reshape((5, 5))
+print("初")
 print(cc)
-np.random.shuffle(cc)         # 重新排列
+np.random.shuffle(cc)  # 重新排列
 print("末")
 print(cc)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
+print(
+    "---- np.random.shuffle() SP --------------------------------------------------------"
+)  # 60個
 
-print('---- np.random.shuffle() SP --------------------------------------------------------')	#60個
 
+print(
+    "---- np.random.其他 ST--------------------------------------------------------"
+)  # 60個
 
-print('---- np.random.其他 ST--------------------------------------------------------')	#60個
+print("綜合比較")  # 60個
 
-print('綜合比較')	#60個
+print("1.產生2x3 0~1之間的隨機浮點數\n", np.random.rand(2, 3))
+print("3.產生0~4(不含5)隨機整數\n", np.random.randint(5))
+print("4.產生2~4(不含5)5個隨機整數\n", np.random.randint(2, 5, [5]))
+print(
+    "5.產生3個 0~1之間的隨機浮點數\n",
+    np.random.random(3),
+    "\n",
+    np.random.random_sample(3),
+    "\n",
+    np.random.sample(3),
+)
 
-print('1.產生2x3 0~1之間的隨機浮點數\n', np.random.rand(2,3))
-print('3.產生0~4(不含5)隨機整數\n', np.random.randint(5))
-print('4.產生2~4(不含5)5個隨機整數\n', np.random.randint(2,5,[5]))
-print('5.產生3個 0~1之間的隨機浮點數\n',
-      np.random.random(3),'\n',
-      np.random.random_sample(3),'\n',
-      np.random.sample(3))
+print("------------------------------------------------------------")  # 60個
 
-print('------------------------------------------------------------')	#60個
-
-print('------------------------------------------------------------')	#60個
-print('作業完成')
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
 
 print("統計函數")
-a=np.arange(10,0,-1)
+a = np.arange(10, 0, -1)
 print(a)
 print(a.mean())
 print(a.var())
 print(a.std())
-print(np.average(a, weights=np.arange(0,10,1)))
+print(np.average(a, weights=np.arange(0, 10, 1)))
 print(np.median(a))
 print(np.percentile(a, 75))
 print(a.min())
@@ -582,10 +614,10 @@ print(a.argsort())
 a.sort()
 print(a)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-#mu + sigma * np.random.standard_normal(size=...)
-#np.random.normal(mu, sigma, size=...)
+# mu + sigma * np.random.standard_normal(size=...)
+# np.random.normal(mu, sigma, size=...)
 
 for _ in range(10):
     cc = np.random.standard_normal()
@@ -600,7 +632,7 @@ print(s)
 print(s.shape)
 
 
-#mean 3 and standard deviation 2.5:
+# mean 3 and standard deviation 2.5:
 mu = 3
 sigma = 2.5
 
@@ -608,7 +640,7 @@ s = mu + sigma * np.random.standard_normal(size=(2, 4))
 print(s)
 print(s.shape)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 """
 print('round 將浮點值四舍五入到指定數目的小數點。')
@@ -622,10 +654,10 @@ cc = np.round(a,decimals = 1)
 print(cc)
 """
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 # numpy.random.RandomState的用法
-rng = np.random.RandomState(0)#偽隨機數產生器, 類似random.seed, 但語法不一樣
+rng = np.random.RandomState(0)  # 偽隨機數產生器, 類似random.seed, 但語法不一樣
 
 N = 6
 cc = rng.randn(N)
@@ -634,14 +666,14 @@ print(cc)
 rng = np.random.RandomState(42)  # 固定random seed
 # print(rng)
 
-generator = np.random.RandomState(1)  #隨機數種子
+generator = np.random.RandomState(1)  # 隨機數種子
 
 # numpy random generator
 numpy_rng = np.random.RandomState(123)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-#np.random.random_sample ST
+# np.random.random_sample ST
 
 # 產生一個 0~1 的隨機數
 r1 = np.random.random_sample()
@@ -649,65 +681,64 @@ print(r1)
 r2 = np.random.random_sample((2, 2))
 print(r2)
 
-#np.random.random_sample SP
+# np.random.random_sample SP
 
 
-#np.random.random ST
+# np.random.random ST
 
 N = 6
 cc = np.random.random(N)
 print(cc)
 
-cc = np.random.random(size = (3, 4))
+cc = np.random.random(size=(3, 4))
 print(cc)
 
-cc = np.mat(np.random.random((2,2)))
+cc = np.mat(np.random.random((2, 2)))
 print(cc)
 
-cc = np.random.random((2,2))
+cc = np.random.random((2, 2))
 print(cc)
 
-#np.random.random SP
+# np.random.random SP
 
 print("------------------------------------------------------------")  # 60個
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
 MIN = 1
 MAX = 6
 for _ in range(10):
-    print(random.randint(MIN, MAX), end = ' ')
+    print(random.randint(MIN, MAX), end=" ")
 print()
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
+print("------------------------------------------------------------")  # 60個
 
-print('------------------------------------------------------------')	#60個
-
-print('畫圖類')
+print("畫圖類")
 
 sys.exit()
 
 
 N = 30
 plt.plot(np.random.randn(N))
-#plt.plot(range(N), np.random.randn(N))  #same
+# plt.plot(range(N), np.random.randn(N))  #same
 plt.scatter(range(N), np.random.randn(N))
 
 plt.show()
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
 N = 50
 A = 100
-spread = np.random.rand(N) * A #放大 A 倍 原本0~1 後來 0~1*A
-#print(spread)
+spread = np.random.rand(N) * A  # 放大 A 倍 原本0~1 後來 0~1*A
+# print(spread)
 
 center = np.ones(25) * 50
-#print(center)
+# print(center)
 
 flier_high = np.random.rand(10) * 100 + 100
 flier_low = np.random.rand(10) * -100
@@ -718,24 +749,23 @@ plt.boxplot(data)
 plt.show()
 
 
+print("------------------------------------------------------------")  # 60個
 
-print('------------------------------------------------------------')	#60個
+# numpy.random.uniform
+# random.uniform(low=0.0, high=1.0, size=None)
 
-#numpy.random.uniform
-#random.uniform(low=0.0, high=1.0, size=None)
-
-s = np.random.uniform(-1,0,10)
+s = np.random.uniform(-1, 0, 10)
 print(s)
 count, bins, ignored = plt.hist(s, 15, density=True)
-plt.plot(bins, np.ones_like(bins), linewidth=2, color='r')
+plt.plot(bins, np.ones_like(bins), linewidth=2, color="r")
 plt.show()
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-#np.random.normal
+# np.random.normal
 
-mu, sigma = 0, 0.1 # mean and standard deviation
+mu, sigma = 0, 0.1  # mean and standard deviation
 s = np.random.normal(mu, sigma, 1000)
 
 """
@@ -748,14 +778,16 @@ abs(sigma - np.std(s, ddof=1))
 """
 count, bins, ignored = plt.hist(s, 30, density=True)
 
-plt.plot(bins, 1/(sigma * np.sqrt(2 * np.pi)) *
-               np.exp( - (bins - mu)**2 / (2 * sigma**2) ),
-         linewidth=2, color='r')
+plt.plot(
+    bins,
+    1 / (sigma * np.sqrt(2 * np.pi)) * np.exp(-((bins - mu) ** 2) / (2 * sigma**2)),
+    linewidth=2,
+    color="r",
+)
 
 plt.show()
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
-
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個

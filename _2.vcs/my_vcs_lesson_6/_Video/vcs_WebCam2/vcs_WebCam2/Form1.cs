@@ -234,8 +234,8 @@ namespace vcs_WebCam2
             w = (W_groupBox_webcam - BORDER * 5 - 100) / 4;
             h = 190;
             groupBox1.Size = new Size(w, h);
-            groupBox2.Size = new Size(w + 100, h);
-            groupBox3.Size = new Size(w + 100, h);
+            groupBox2.Size = new Size(w + 120, h);
+            groupBox3.Size = new Size(w + 120, h);
 
             //button
             x_st = BORDER;
@@ -247,7 +247,7 @@ namespace vcs_WebCam2
 
             groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             groupBox2.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            groupBox3.Location = new Point(x_st + dx * 2 + 100, y_st + dy * 0);
+            groupBox3.Location = new Point(x_st + dx * 2 + 120, y_st + dy * 0);
 
             //groupBox1
             x_st = BORDER;
@@ -280,13 +280,13 @@ namespace vcs_WebCam2
             bt_info.Location = new Point(x_st + dx * 1, y_st + dy * 2);
             bt_fullscreen.Location = new Point(x_st + dx * 2, y_st + dy * 2);
             bt_help.Location = new Point(x_st + dx * 3, y_st + dy * 2);
-            bt_open_folder.Location = new Point(x_st + dx * 4 - 5 - 1, y_st + dy * 2 + 29 - 1);
+            bt_open_folder.Location = new Point(x_st + dx * 4 + 5, y_st + dy * 0);
             bt_open_folder.BackgroundImage = Properties.Resources.folder_open;
 
             cb_show_time.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             cb_image_processing.Location = new Point(x_st + dx * 1, y_st + dy * 3);
             cb_auto_save.Location = new Point(x_st + dx * 2, y_st + dy * 3);
-            cb_show_grid.Location = new Point(x_st + dx * 3, y_st + dy * 3);
+            cb_show_grid.Location = new Point(x_st + dx * 3 + 50, y_st + dy * 3);
             cb_rgb.Location = new Point(x_st + dx * 0, y_st + dy * 3 + 25);
             cb_corner.Location = new Point(x_st + dx * 1, y_st + dy * 3 + 25);
 
@@ -294,9 +294,9 @@ namespace vcs_WebCam2
             rb2.Location = new Point(x_st + dx * 2 + 30, y_st + dy * 3 + 25);
             rb3.Location = new Point(x_st + dx * 2 + 60, y_st + dy * 3 + 25);
 
-            rb_3X3.Location = new Point(x_st + dx * 3 + 45, y_st + dy * 3 - 20);
-            rb_4X4.Location = new Point(x_st + dx * 3 + 45, y_st + dy * 3);
-            rb_5X5.Location = new Point(x_st + dx * 3 + 45, y_st + dy * 3 + 20);
+            rb_3X3.Location = new Point(x_st + dx * 3 + 100, y_st + dy * 3 - 20);
+            rb_4X4.Location = new Point(x_st + dx * 3 + 100, y_st + dy * 3);
+            rb_5X5.Location = new Point(x_st + dx * 3 + 100, y_st + dy * 3 + 20);
 
             rb_3X3.Visible = false;
             rb_4X4.Visible = false;

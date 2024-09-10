@@ -17,7 +17,7 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 # 設定負號
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
-
+'''
 print("------------------------------------------------------------")  # 60個
 """
 #學習分類
@@ -315,13 +315,17 @@ n_components=n_components)
 model.fit(data)
 print(model.transform(data)) # 変換したデータ
 """
-
+'''
 print("------------------------------------------------------------")  # 60個
 
 from sklearn.manifold import TSNE
 from sklearn.datasets import load_digits
 
 data = load_digits()
+print(type(data))
+print(len(data))
+
+print('TSNE')
 n_components = 2  # 削減後の次元を2に設定
 model = TSNE(n_components=n_components)
 print(model.fit_transform(data.data))
@@ -343,7 +347,7 @@ model_lor = LogisticRegression()
 model_lor.fit(X, y)
 y_pred = model_lor.predict(X)
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 print("混同行列")
 
@@ -352,40 +356,40 @@ from sklearn.metrics import confusion_matrix
 cm = confusion_matrix(y, y_pred)
 print(cm)
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 print("正解率")
 from sklearn.metrics import accuracy_score
 
 accuracy_score(y, y_pred)
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 print("適合率")
 from sklearn.metrics import precision_score
 
 precision_score(y, y_pred)
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 print("再現率")
 from sklearn.metrics import recall_score
 
 recall_score(y, y_pred)
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 print("F値")
 from sklearn.metrics import f1_score
 
 f1_score(y, y_pred)
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 print("予測確率")
 model_lor.predict_proba(X)
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 y_pred2 = (model_lor.predict_proba(X)[:, 1] > 0.1).astype(np.int)
 print(confusion_matrix(y, y_pred2))
@@ -393,7 +397,7 @@ print(confusion_matrix(y, y_pred2))
 print(accuracy_score(y, y_pred2))
 print(recall_score(y, y_pred2))
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 print("ROC曲線・AUC")
 from sklearn.metrics import roc_curve
@@ -401,7 +405,7 @@ from sklearn.metrics import roc_curve
 probas = model_lor.predict_proba(X)
 fpr, tpr, thresholds = roc_curve(y, probas[:, 1])
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 plt.style.use("fivethirtyeight")
 
@@ -415,13 +419,13 @@ ax.set_ylabel("True Positive Rate")
 ax.set_facecolor("xkcd:white")
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 from sklearn.metrics import roc_auc_score
 
 roc_auc_score(y, probas[:, 1])
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 print("平均二乗誤差")
 
@@ -429,7 +433,8 @@ from sklearn.metrics import mean_squared_error
 
 mean_squared_error(y, y_pred)
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
+
 print("決定係数")
 
 from sklearn.metrics import r2_score

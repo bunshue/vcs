@@ -93,19 +93,22 @@ namespace vcs_WebCam4_MotionDetection  // 標準 移動偵測
             this.ClientSize = new Size(W + 250 + BORDER * 3, H + BORDER * 2);
         }
 
-        void Init_WebcamSetup()
+        void Init_WebcamSetup() //最小化WebCam設定
         {
             USBWebcams = new FilterInfoCollection(FilterCategory.VideoInputDevice); //實例化對象
-
             if (USBWebcams.Count > 0)
             {
+                Cam = new VideoCaptureDevice(USBWebcams[0].MonikerString);//長名
+                Cam.NewFrame += new NewFrameEventHandler(Cam_NewFrame); // defines which method to call when a new frame arrives
+
                 this.pictureBox1.Paint += new PaintEventHandler(DrawMessage);
 
                 //初始化motion detector
                 motion_detector = new MotionDetector(new TwoFramesDifferenceDetector(), new MotionAreaHighlighting());
-
-                Cam = new VideoCaptureDevice(USBWebcams[0].MonikerString);//長名
-                Cam.NewFrame += new NewFrameEventHandler(Cam_NewFrame); // defines which method to call when a new frame arrives
+            }
+            else
+            {
+                this.Text = "無影像裝置";
             }
         }
 

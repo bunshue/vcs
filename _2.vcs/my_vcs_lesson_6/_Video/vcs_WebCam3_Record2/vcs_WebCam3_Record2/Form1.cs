@@ -152,15 +152,56 @@ namespace vcs_WebCam3_Record2
             }
         }
 
-        void Init_WebcamSetup()
+        void Init_WebcamSetup() //最小化WebCam設定
         {
             try
             {
                 USBWebcams = new FilterInfoCollection(FilterCategory.VideoInputDevice); //實例化對象
                 webcam_count = USBWebcams.Count;
-                if (webcam_count > 0)  // The quantity of WebCam must be more than 0.
+                if (webcam_count > 0)
                 {
                     Cam = new VideoCaptureDevice(USBWebcams[0].MonikerString);  //實例化對象
+                    Cam.NewFrame += new NewFrameEventHandler(Cam_NewFrame);
+
+                    //真正設定顯示能力的地方  Fail
+                    //Cam.VideoResolution = Cam.VideoCapabilities[0];   //若有多個capabilities 可以更換
+
+                    //richTextBox1.Text += "目前因為AF版本問題, 只能使用預設顯示能力\n";
+
+                    /*
+                    richTextBox1.Text += "DesiredFrameRate : " + Cam.DesiredFrameRate + "\n";
+                    richTextBox1.Text += "DesiredFrameSize : " + Cam.DesiredFrameSize + "\n";
+                    richTextBox1.Text += "VideoCapabilities : " + Cam.VideoCapabilities + "\n";
+                    richTextBox1.Text += "顯示能力 VideoCapabilities.Length " + Cam.VideoCapabilities.Length.ToString() + "\n";
+                    */
+
+                    webcam_w = Cam.VideoCapabilities[0].FrameSize.Width;
+                    webcam_h = Cam.VideoCapabilities[0].FrameSize.Height;
+                    webcam_fps = Cam.VideoCapabilities[0].FrameRate;
+
+                    //以下為WebCam訊息與調整視窗大小
+                    //Cam.VideoResolution = Cam.VideoCapabilities[0];
+                    string webcam_name = string.Empty;
+                    //int ww = Cam.VideoCapabilities[0].FrameSize.Width;
+                    int ww = webcam_w;
+                    //int hh = Cam.VideoCapabilities[0].FrameSize.Height;
+                    int hh = webcam_h;
+                    //webcam_name = USBWebcams[0].Name + " " + ww.ToString() + " X " + hh.ToString() + " @ " + Cam.VideoCapabilities[0].AverageFrameRate.ToString() + " Hz";
+                    //webcam_name = USBWebcams[0].Name + " " + ww.ToString() + " X " + hh.ToString();
+                    webcam_name = "camera";
+                    //richTextBox1.Text += "webcam_name = " + webcam_name + "\n";
+                    //richTextBox1.Text += "webcam_name = " + webcam_name + "\n";
+                    //richTextBox1.Text += "webcam_name = " + webcam_name + "\n";
+                    this.Text = webcam_name;
+
+                    //有抓到WebCam, 重新設定pictureBox和vsp的大小和位置
+                    pictureBox1.Size = new Size(ww, hh);
+                    //pictureBox1.Location = new Point(BORDER, BORDER);
+
+                    webcam_w = ww;
+                    webcam_h = hh;
+                    //webcam_fps = fps;
+
                 }
             }
             catch (Exception ex)
@@ -180,9 +221,7 @@ namespace vcs_WebCam3_Record2
                 bt_refresh.Enabled = false;
                 bt_snapshot.Enabled = false;
             }
-            bt_start.Enabled = true;
             bt_stop.Enabled = false;
-            bt_snapshot.Enabled = false;
             bt_record_start.Enabled = false;
             bt_record_stop.Enabled = false;
             return;
@@ -190,59 +229,17 @@ namespace vcs_WebCam3_Record2
 
         void Start_Webcam()
         {
-            USBWebcams = new FilterInfoCollection(FilterCategory.VideoInputDevice);
-            if (USBWebcams.Count > 0)  // The quantity of WebCam must be more than 0.
+            if (Cam != null)
             {
-                Cam = new VideoCaptureDevice(USBWebcams[0].MonikerString);  //實例化對象
-
-                //真正設定顯示能力的地方  Fail
-                //Cam.VideoResolution = Cam.VideoCapabilities[0];   //若有多個capabilities 可以更換
-
-                //richTextBox1.Text += "目前因為AF版本問題, 只能使用預設顯示能力\n";
-
-                /*
-                richTextBox1.Text += "DesiredFrameRate : " + Cam.DesiredFrameRate + "\n";
-                richTextBox1.Text += "DesiredFrameSize : " + Cam.DesiredFrameSize + "\n";
-                richTextBox1.Text += "VideoCapabilities : " + Cam.VideoCapabilities + "\n";
-                richTextBox1.Text += "顯示能力 VideoCapabilities.Length " + Cam.VideoCapabilities.Length.ToString() + "\n";
-                */
-
-                webcam_w = Cam.VideoCapabilities[0].FrameSize.Width;
-                webcam_h = Cam.VideoCapabilities[0].FrameSize.Height;
-                webcam_fps = Cam.VideoCapabilities[0].FrameRate;
-
-                Cam.NewFrame += new NewFrameEventHandler(Cam_NewFrame);
                 Cam.Start();   // WebCam starts capturing images.
                 flag_webcam_start = true;
-
-                //以下為WebCam訊息與調整視窗大小
-                //Cam.VideoResolution = Cam.VideoCapabilities[0];
-                string webcam_name = string.Empty;
-                //int ww = Cam.VideoCapabilities[0].FrameSize.Width;
-                int ww = webcam_w;
-                //int hh = Cam.VideoCapabilities[0].FrameSize.Height;
-                int hh = webcam_h;
-                //webcam_name = USBWebcams[0].Name + " " + ww.ToString() + " X " + hh.ToString() + " @ " + Cam.VideoCapabilities[0].AverageFrameRate.ToString() + " Hz";
-                //webcam_name = USBWebcams[0].Name + " " + ww.ToString() + " X " + hh.ToString();
-                webcam_name = "camera";
-                //richTextBox1.Text += "webcam_name = " + webcam_name + "\n";
-                //richTextBox1.Text += "webcam_name = " + webcam_name + "\n";
-                //richTextBox1.Text += "webcam_name = " + webcam_name + "\n";
-                this.Text = webcam_name;
-
-                //有抓到WebCam, 重新設定pictureBox和vsp的大小和位置
-                pictureBox1.Size = new Size(ww, hh);
-                //pictureBox1.Location = new Point(BORDER, BORDER);
-
-                webcam_w = ww;
-                webcam_h = hh;
-                //webcam_fps = fps;
 
                 bt_start.Enabled = false;
                 bt_stop.Enabled = true;
                 bt_snapshot.Enabled = true;
                 bt_record_start.Enabled = true;
                 bt_record_stop.Enabled = false;
+
             }
             else
             {
@@ -485,7 +482,6 @@ namespace vcs_WebCam3_Record2
             show_main_message("啟動", S_OK, 20);
 
             Init_WebcamSetup();
-
             Start_Webcam();
 
             if (flag_webcam_start == false)    //如果webcam沒啟動
