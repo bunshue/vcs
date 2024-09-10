@@ -38,7 +38,6 @@ import csv
 import random
 import pathlib
 import numpy as np
-import pandas as pd
 
 print("------------------------------------------------------------")  # 60個
 print("1. csv_writer = csv.writer() + writerow() + writerows()")

@@ -17,10 +17,8 @@ namespace vcs_WebCam5
     public partial class MainForm : Form
     {
         CameraMonitor[] CamMonitor = new CameraMonitor[4];  //物件陣列
-
         private FilterInfoCollection USBWebcams = null;
         int webcam_count = 0;
-        private const int BORDER = 30;
 
         public MainForm()
         {
@@ -30,18 +28,6 @@ namespace vcs_WebCam5
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
-
-            //檢查錄影存檔的資料夾
-            string Path = @"C:\dddddddddd";
-            if (Directory.Exists(Path) == false)     //確認資料夾是否存在
-            {
-                Directory.CreateDirectory(Path);
-                richTextBox1.Text += "已建立一個新資料夾: " + Path + "\n";
-            }
-            else
-            {
-                //richTextBox1.Text += "資料夾: " + Path + " 已存在，不用再建立\n";
-            }
 
             USBWebcams = new FilterInfoCollection(FilterCategory.VideoInputDevice); //實例化對象
 
@@ -80,6 +66,7 @@ namespace vcs_WebCam5
 
         void show_item_location()
         {
+            int BORDER = 20;
             int W = 640;
             int H = 480;
             int x_st = BORDER;
@@ -88,20 +75,12 @@ namespace vcs_WebCam5
             int dy = H + 50;
 
             pictureBox1.Size = new Size(W, H);
-
             pictureBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-
-            W = 120;
-            H = 30;
-            button1.Size = new Size(W, H);
-
-            //W = 640;
-            H = 480;
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 0 + H + BORDER);
-            button2.Location = new Point(1000, BORDER);
-
-            richTextBox1.Size = new Size(200, 600);
-            richTextBox1.Location = new Point(1000, 70);
+            button2.Location = new Point(x_st + dx * 0 + 150, y_st + dy * 0 + H + BORDER);
+            richTextBox1.Size = new Size(200, H);
+            richTextBox1.Location = new Point(W + 50, BORDER);
+            this.ClientSize = new Size(W + 300, H + 100);
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -137,58 +116,6 @@ namespace vcs_WebCam5
             }
         }
 
-        private void toggleOption(int camIndex, int optionIndex, bool value)
-        {
-            switch (optionIndex)
-            {
-                case 0:
-                    this.CamMonitor[camIndex].MotionDetection = value;
-                    break;
-                case 1:
-                    this.CamMonitor[camIndex].RecordOnMotion = value;
-                    break;
-                case 2:
-                    this.CamMonitor[camIndex].BeepOnMotion = value;
-                    break;
-            }
-        }
-
-        private void MotionDetection1_CheckedChanged(object sender, EventArgs e)
-        {
-            if (((CheckBox)sender).Checked)
-            {
-                this.toggleOption(0, 0, true);
-            }
-            else
-            {
-                this.toggleOption(0, 0, false);
-            }
-        }
-
-        private void AutoRecord1_CheckedChanged(object sender, EventArgs e)
-        {
-            if (((CheckBox)sender).Checked)
-            {
-                this.toggleOption(0, 1, true);
-            }
-            else
-            {
-                this.toggleOption(0, 1, false);
-            }
-        }
-
-        private void BeepOnMotionCheck1_CheckedChanged(object sender, EventArgs e)
-        {
-            if (((CheckBox)sender).Checked)
-            {
-                this.toggleOption(0, 2, true);
-            }
-            else
-            {
-                this.toggleOption(0, 2, false);
-            }
-        }
-
         private void button2_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "找到 " + webcam_count.ToString() + " 台WebCam\n";
@@ -203,4 +130,3 @@ namespace vcs_WebCam5
         }
     }
 }
-

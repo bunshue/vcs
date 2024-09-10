@@ -144,7 +144,10 @@ namespace vcs_WebCam3_Record1
             cb_show_time.Location = new Point(x_st + dx * 7, y_st + dy * 3 + 5);
             numericUpDown_limit_record_time.Location = new Point(x_st + dx * 7, y_st + dy * 1);
 
-            lb_fps.Location = new Point(x_st + dx * 5+40, y_st + dy * 1);
+            bt_open_folder.Location = new Point(x_st + dx * 6, y_st + dy * 1 - 10);
+            bt_open_folder.BackgroundImage = Properties.Resources.folder_open;
+
+            lb_fps.Location = new Point(x_st + dx * 4 + 40, y_st + dy * 1);
             lb_fps.Text = "";
             lb_main_mesg.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             lb_main_mesg.Text = "";
@@ -171,6 +174,12 @@ namespace vcs_WebCam3_Record1
         private void bt_clear_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
+        }
+
+        private void bt_open_folder_Click(object sender, EventArgs e)
+        {
+            //開啟檔案總管
+            Process.Start(Application.StartupPath);
         }
 
         //delay 10000 約 10秒

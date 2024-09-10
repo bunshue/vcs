@@ -5,23 +5,22 @@
 
 """
 
+import cv2
 import os
 import sys
 import time
 import math
 import random
+import numpy as np
+import pandas as pd
 
 print("------------------------------------------------------------")  # 60個
 
 ESC = 27
 SPACE = 32
 
-import cv2
-import numpy as np
-import pandas as pd
-
 print("------------------------------------------------------------")  # 60個
-
+'''
 print("OpenCV VideoCapture 04 兩個camera")
 print("按 ESC 離開")
 
@@ -1201,8 +1200,38 @@ while True:
 # 釋放所有資源
 cap.release()  # 釋放攝影機
 cv2.destroyAllWindows()  # 關閉所有 OpenCV 視窗
-
+'''
 print("------------------------------------------------------------")  # 60個
+
+print("按 ESC 離開")
+
+cap = cv2.VideoCapture(0)
+
+logo_filename = "C:/_git/vcs/_4.python/_data/panda.jpg"
+logo = cv2.imread(logo_filename)
+logo = cv2.resize(logo, (640, 480))  # 改變影像尺寸，符合疊加的圖片
+
+if not cap.isOpened():
+    print("Cannot open camera")
+    exit()
+while True:
+    ret, img = cap.read()  # 讀取影片的每一幀
+    if not ret:
+        print("Cannot receive frame")  # 如果讀取錯誤，印出訊息
+        break
+    #cv2.imshow("OpenCV 10", img) 原圖顯示
+
+    #addWeighted
+    output = cv2.addWeighted(img, 0.6, logo, 0.4, 50)  # 疊加圖片
+    cv2.imshow('image', output)
+
+
+    k = cv2.waitKey(1)
+    if k == ESC:  # ESC
+        break
+
+cap.release()
+cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 

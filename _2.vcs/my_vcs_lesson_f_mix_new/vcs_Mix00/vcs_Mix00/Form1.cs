@@ -456,6 +456,10 @@ namespace vcs_Mix00
         private void button6_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
+            System.Console.Beep(400, 500);
+            System.Console.Beep(800, 500);
+
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -463,14 +467,8 @@ namespace vcs_Mix00
             show_button_text(sender);
 
 
-            double lat = 24.7793839095484;
-            double lon = 121.01557231432;
-            //double lat = 10;
-            //double lon = 10;
-            double lat_new = -lat;
-            double lon_new = -(180 - lon);
-            richTextBox1.Text += lat.ToString() + ", " + lon.ToString() + "\n";
-            richTextBox1.Text += lat_new.ToString() + ", " + lon_new.ToString() + "\n";
+            ((Button)sender).Text = "改 Button Text 為 AAAA";
+
 
         }
 

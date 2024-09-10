@@ -40,22 +40,38 @@ print("------------------------------------------------------------")  # 60個
 
 print('串列 轉 json')
 
-numbers = [2, 3, 5, 7, 11, 13]
+# 串列
+animals = ["鼠", "牛", "虎", "兔", "龍"]  # 串列
 
-filename = 'tmp_numbers.json'
+filename = 'tmp_animals.json'
 with open(filename, 'w') as f:
-    json.dump(numbers, f)
+    json.dump(animals, f)
 
 print('------------------------------')	#30個
 
-filename = 'tmp_numbers.json'
+filename = 'tmp_animals.json'
 with open(filename) as f:
-    numbers = json.load(f)
+    animals = json.load(f)
     
-print(numbers)
+print(animals)
 
 print("------------------------------------------------------------")  # 60個
 
+# 串列
+listAnimals = ["鼠", "牛", "虎", "兔", "龍"]
+
+# 元組
+tupleAnimals = ("鼠", "牛", "虎", "兔", "龍")
+
+jsonData1 = json.dumps(listAnimals)     # 串列 轉 json
+jsonData2 = json.dumps(tupleAnimals)    # 元組 轉 json
+print("串列轉換成json的陣列", jsonData1)
+print("元組轉換成json的陣列", jsonData2)
+print("json陣列在Python的資料類型 ", type(jsonData1))
+
+print("------------------------------------------------------------")  # 60個
+
+# 串列, 元素是字典
 data = [
     {'姓名':'王小明', '身高':174, '體重':56},
     {'姓名':'林小華', '身高':185, '體重':80},
@@ -134,6 +150,19 @@ with open(filename, 'w') as fnObj:
 
 print("------------------------------------------------------------")  # 60個
 
+filename = 'data/populations.json'
+with open(filename) as fnObj:
+    getDatas = json.load(fnObj)                     # 讀json檔案
+
+for getData in getDatas:
+    if getData['Year'] == '2000':                   # 篩選2000年的數據
+        countryName = getData['Country Name']       # 國家名稱
+        countryCode = getData['Country Code']       # 國家代碼
+        population = int(float(getData['Numbers'])) # 人口數據
+        #print('國家代碼 =', countryCode,'國家名稱 =', countryName,'人口數 =', population)
+
+print("------------------------------------------------------------")  # 60個
+
 filename = 'data/aqi.json'
 
 with open(filename) as fnObj:
@@ -151,16 +180,20 @@ for getData in getDatas:
 
 print("------------------------------------------------------------")  # 60個
 
-listNumbers = [5, 10, 20, 1]            # 串列資料
-tupleNumbers = (1, 5, 10, 9)            # 元組資料
-jsonData1 = json.dumps(listNumbers)     # 將串列資料轉成json資料
-jsonData2 = json.dumps(tupleNumbers)    # 將串列資料轉成json資料
-print("串列轉換成json的陣列", jsonData1)
-print("元組轉換成json的陣列", jsonData2)
-print("json陣列在Python的資料類型 ", type(jsonData1))
+filename = 'data/aqi.json'
+with open(filename) as fnObj:
+    getDatas = json.load(fnObj)                     # 讀json檔案
+
+for getData in getDatas:
+    county = getData['County']                      # 城市名稱
+    sitename = getData['SiteName']                  # 站台名稱
+    siteid = getData['SiteId']                      # 站台ID
+    pm25 = getData['PM2.5']                         # PM2.5值    
+    #print('城市名稱 =%4s  站台ID =%3s  PM2.5值 =%3s  站台名稱 = %s ' % (county, siteid, pm25, sitename))
 
 print("------------------------------------------------------------")  # 60個
 
+#串列, 元素是字典
 listObj = [{'Name':'Peter', 'Age':25, 'Gender':'M'}]    # 串列元素是字典
 jsonData = json.dumps(listObj)                          # 串列轉成json
 print("串列轉換成json的陣列", jsonData)
@@ -236,6 +269,7 @@ with open(filename, 'w') as fnObj:
 
 print("------------------------------------------------------------")  # 60個
 
+# 串列, 元素是字典
 objlist = [{"日本":"Japan", "首都":"Tykyo"},
            {"美州":"USA", "首都":"Washington"}]
 
@@ -245,6 +279,7 @@ with open(filename, 'w') as fnObj:
 
 print("------------------------------------------------------------")  # 60個
 
+# 串列, 元素是字典
 objlist = [{"日本":"Japan", "首都":"Tykyo"},
            {"美州":"USA", "首都":"Washington"}]
 
@@ -254,6 +289,7 @@ with open(filename, 'w') as fnObj:
 
 print("------------------------------------------------------------")  # 60個
 
+# 串列, 元素是字典
 objlist = [{"日本":"Japan", "首都":"Tykyo"},
            {"美州":"USA", "首都":"Washington"}]
 
@@ -272,33 +308,8 @@ print(type(data))
 
 print("------------------------------------------------------------")  # 60個
 
-filename = 'data/populations.json'
-with open(filename) as fnObj:
-    getDatas = json.load(fnObj)                     # 讀json檔案
-
-for getData in getDatas:
-    if getData['Year'] == '2000':                   # 篩選2000年的數據
-        countryName = getData['Country Name']       # 國家名稱
-        countryCode = getData['Country Code']       # 國家代碼
-        population = int(float(getData['Numbers'])) # 人口數據
-        #print('國家代碼 =', countryCode,'國家名稱 =', countryName,'人口數 =', population)
-
-print("------------------------------------------------------------")  # 60個
-
-filename = 'data/aqi.json'
-with open(filename) as fnObj:
-    getDatas = json.load(fnObj)                     # 讀json檔案
-
-for getData in getDatas:
-    county = getData['County']                      # 城市名稱
-    sitename = getData['SiteName']                  # 站台名稱
-    siteid = getData['SiteId']                      # 站台ID
-    pm25 = getData['PM2.5']                         # PM2.5值    
-    #print('城市名稱 =%4s  站台ID =%3s  PM2.5值 =%3s  站台名稱 = %s ' % (county, siteid, pm25, sitename))
-
-print("------------------------------------------------------------")  # 60個
-
 # 客戶數據管理
+# 串列, 元素是字典
 customer_data = [
     {"id":1, "name":"Tom", "email":"tom@example.com", "purchases":3},
     {"id":2, "name":"Bob", "email":"bob@example.com", "purchases":5}
@@ -317,6 +328,7 @@ with open('tmp_inventory.json', 'w') as file:
     json.dump(inventory, file)
 
 # 員工記錄
+# 串列, 元素是字典
 employees = [
     {"id":"E01", "name":"John Doe", "position":"Manager"},
     {"id":"E02", "name":"Jane Smith", "position":"Developer"}
@@ -356,6 +368,7 @@ with open(filename) as f:
 
 all_eq_dicts = all_eq_data['features']
 
+# 串列
 mags, lons, lats = [], [], []
 for eq_dict in all_eq_dicts:
     mag = eq_dict['properties']['mag']
@@ -383,7 +396,9 @@ for eq in earthquakes['features']:
     d=datetime.datetime.fromtimestamp(et).strftime('%Y-%m-%d %H:%M:%S')
     print("時間:{}".format(d))
 
+print('------------------------------------------------------------')	#60個
 
+""" many
 filename_json = 'C:/_git/vcs/_1.data/______test_files1/_json/ChinaBoundary_Province_City'
 fp = open(filename_json, 'r', encoding ='UTF-8')
 boundary_data = json.load(fp)
@@ -391,8 +406,7 @@ for b_data in boundary_data['Province']:
     print("ID:{}".format(b_data['ID']))
     print("code:{}".format(b_data['code']))
     print("name:{}".format(b_data['name']))
-
-
+"""
 print('------------------------------------------------------------')	#60個
 
 #抓取地震資料 用json拆解
@@ -622,6 +636,8 @@ teacher_dict = {'name': '白元芳', 'age': 25, 'title': '講師'}
 json_str = json.dumps(teacher_dict)
 print(json_str)
 print(type(json_str))
+
+# 串列
 fruits_list = ['apple', 'orange', 'strawberry', 'banana', 'pitaya']
 json_str = json.dumps(fruits_list)
 print(json_str)
@@ -654,6 +670,7 @@ print("------------------------------------------------------------")  # 60個
 
 print('串列 轉 json')
 
+# 串列, 元素是字典
 listProduct = [
     {"編號": "P01", "品名": "五香豆干", "單價": 89},
     {"編號": "P02", "品名": "龍哥可樂", "單價": 20},
@@ -666,6 +683,7 @@ print("JSON產品資料存檔成功")
 
 print("------------------------------------------------------------")  # 60個
 
+# 串列
 listScore = [89, 100, 23, 78, 89]
 print("listScore串列：", listScore)
 print("listScore型別：", type(listScore))
@@ -780,6 +798,8 @@ def fnSaveJSONFile():
 
 
 jsonfile = "MemberInfo.json"
+
+# 串列
 listMember = []
 listUid = []
 if os.path.exists(jsonfile):
@@ -849,7 +869,7 @@ for meal in listMeal:
     print("品名：%s"%(meal["品名"]))
     print("單價：%d"%(meal["單價"]))
     print("="*20) 
-"""
+""" many
 for meal in listMeal:
     for key in meal:
         print("%s：%s" %(key, meal[key]))
@@ -869,7 +889,7 @@ f.close()
 print("JSON餐點記錄建置完成")
 
 print("------------------------------------------------------------")  # 60個
-
+""" many
 f=open("tmp_meal.json", "r", encoding="utf_8")
 listMeal = json.load(f)
 f.close()
@@ -879,7 +899,7 @@ for meal in listMeal:
         print("%s：%s" %(key, meal[key]))
     print("折扣：%.2f" %(float(meal[key])*0.9))
     print("="*20)
-
+"""
 print("------------------------------------------------------------")  # 60個
 
 import matplotlib.pyplot as plt  	# 引用圖表使用套件
@@ -930,6 +950,7 @@ print("圖表建置成成功")
 
 print("------------------------------------------------------------")  # 60個
 
+# 串列, 元素是字典
 data = [{"group":0,"param":["one","two","three"]},
         {"group":1,"param":["1","2","3"]}] 
 

@@ -100,7 +100,7 @@ print("------------------------------------------------------------")  # 60個
 from sklearn import linear_model
 
 #read data
-dataframe = pd.read_fwf('brain_body.txt')
+dataframe = pd.read_fwf('data/brain_body.txt')
 x_values = dataframe[['Brain']]
 y_values = dataframe[['Body']]
 
@@ -123,7 +123,7 @@ print("------------------------------------------------------------")  # 60個
 from sklearn import linear_model
 
 #read data
-dataframe = pd.read_fwf('brain_body.txt')
+dataframe = pd.read_fwf('data/brain_body.txt')
 x_values = dataframe[['Body']]
 y_values = dataframe[['Brain']]
 
@@ -165,7 +165,6 @@ diabetes_y_test = diabetes.target[-20:]
 # Plot outputs
 plt.scatter(diabetes_X_test, diabetes_y_test,  color='black')
 
-
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
@@ -179,6 +178,7 @@ diabetes = datasets.load_diabetes()
 print("diabetes.data.shape=",diabetes.data.shape)
 print("dir(diabetes)",dir(diabetes))
 print("diabetes.target.shape=",diabetes.target.shape)
+
 try:
   print("diabetes.feature_names=",diabetes.feature_names)
 except:
@@ -195,12 +195,11 @@ df['target'] = diabetes.target
 
 
 print(df.head())
-df.to_csv("diabetes.csv", sep='\t')
-writer = pd.ExcelWriter('diabetes.xlsx', engine='xlsxwriter')
+df.to_csv("tmp_diabetes.csv", sep='\t')
+
+writer = pd.ExcelWriter('tmp_diabetes.xlsx', engine='xlsxwriter')
 df.to_excel(writer, sheet_name='Sheet1')
 writer.save()
-               
-
 
 
 # Use only one feature
@@ -216,7 +215,6 @@ diabetes_y_test = diabetes.target[-20:]
 
 # Plot outputs
 plt.scatter(diabetes_X_test, diabetes_y_test,  color='black')
-
 
 plt.show()
 

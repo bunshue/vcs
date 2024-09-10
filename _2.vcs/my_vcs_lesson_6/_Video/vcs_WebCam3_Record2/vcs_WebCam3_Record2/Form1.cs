@@ -117,6 +117,8 @@ namespace vcs_WebCam3_Record2
             bt_snapshot.Location = new Point(x_st + dx * 4, y_st + dy * 0);
             bt_record_start.Location = new Point(x_st + dx * 5, y_st + dy * 0);
             bt_record_stop.Location = new Point(x_st + dx * 6, y_st + dy * 0);
+            bt_open_folder.Location = new Point(x_st + dx * 7+10, y_st + dy * 0);
+            bt_open_folder.BackgroundImage = Properties.Resources.folder_open;
 
             lb_fps.Location = new Point(x_st + dx * 5 + 40, y_st + dy * 1);
             lb_fps.Text = "";
@@ -138,6 +140,12 @@ namespace vcs_WebCam3_Record2
         private void bt_clear_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
+        }
+
+        private void bt_open_folder_Click(object sender, EventArgs e)
+        {
+            //開啟檔案總管
+            Process.Start(Application.StartupPath);
         }
 
         //delay 10000 約 10秒
@@ -316,6 +324,8 @@ namespace vcs_WebCam3_Record2
 
             if (flag_recording == true)
             {
+                g.DrawRectangle(new Pen(Color.Red, 4), 2, 2, 640 - 4, 480 - 4);
+
                 TimeSpan diff = DateTime.Now - recording_time_st;
                 int ms = diff.Milliseconds;
                 if (ms < 500)
@@ -323,7 +333,7 @@ namespace vcs_WebCam3_Record2
                     int ww = 22;
                     try
                     {
-                        g.FillEllipse(Brushes.Red, 640 - BORDER - ww, BORDER + 4, ww, ww);
+                        g.FillEllipse(Brushes.Red, 640 - BORDER - ww, BORDER, ww, ww);
                     }
                     catch (Exception ex)
                     {
@@ -652,5 +662,6 @@ namespace vcs_WebCam3_Record2
                 }
             }
         }
+
     }
 }

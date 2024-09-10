@@ -5,21 +5,29 @@ Python資料科學實戰教本
 
 """
 
+print("------------------------------------------------------------")  # 60個
 
+# 共同
 import os
 import sys
 import time
+import math
 import random
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+# 設定中文字型及負號正確顯示
+# 設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
+# 設定負號
+plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
-
-
-import numpy as np
 from scipy.stats import norm
-from matplotlib import pyplot as plt
-plt.rcParams['font.sans-serif'] = ['Microsoft JhengHei'] 
-plt.rcParams['axes.unicode_minus'] = False
 
 sigma = 1
 mu = 0
@@ -35,12 +43,7 @@ plt.title("標準常態分配(Standard Normal Distribution)")
 plt.legend()
 plt.show()
 
-
-
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch12\ch12-2-2.py
-
-import pandas as pd
+print("------------------------------------------------------------")  # 60個
 
 friends = [110, 1017, 1127, 417, 624, 957, 89, 
            951, 947, 797, 981, 125, 455, 731, 
@@ -51,10 +54,6 @@ s_friends = pd.Series(friends)
 print(s_friends.describe())
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch12\ch12-2-2a.py
-
-import pandas as pd
 
 friends = [110, 1017, 1127, 417, 624, 957, 89, 
            951, 947, 797, 981, 125, 455, 731, 
@@ -75,12 +74,6 @@ print(z_scores)
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch12\ch12-2-2b.py
-
-import pandas as pd
-import matplotlib.pyplot as plt
-import numpy as np
-
 friends = [110, 1017, 1127, 417, 624, 957, 89, 
            951, 947, 797, 981, 125, 455, 731, 
            1641, 486, 1307, 472, 1131, 1771, 905,
@@ -99,12 +92,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch12\ch12-3.py
-
-import pandas as pd
-import matplotlib.pyplot as plt
-import numpy as np
-
 dice = [1, 2, 3, 4, 5, 6]
 sample_means = []
 for x in range(100):
@@ -116,12 +103,6 @@ df.plot(kind="density")
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch12\ch12-3a.py
-
-import pandas as pd
-import matplotlib.pyplot as plt
-import numpy as np
 
 dice = [1, 2, 3, 4, 5, 6]
 sample_means = []
@@ -135,12 +116,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch12\ch12-3b.py
-
-import pandas as pd
-import matplotlib.pyplot as plt
-import numpy as np
-
 dice = [1, 2, 3, 4, 5, 6]
 sample_means = []
 for x in range(100):
@@ -152,10 +127,6 @@ df.plot(kind="density")
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch12\ch12-4-2.py
-
-import numpy as np
 
 dice = [1, 2, 3, 4, 5, 6]
 population = []
@@ -170,12 +141,7 @@ for sample_size in size_range:
     sample_mean = sample.mean()
     print(sample_size, "樣本平均數:", sample_mean)
 
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch12\ch12-4-2a.py
-
-import random
 
 population = (["臺灣閩南語"]*7330) + (["臺灣客家語"]*1200) + \
              (["其他漢語方言"]*1300) + (["原住民語"]*170) 
@@ -184,14 +150,9 @@ sample = random.sample(population, sample_size)
 for lang in set(sample):
     print(lang+"比例估計:", sample.count(lang)/sample_size)
     
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch12\ch12-4-4.py
-
-import numpy as np
 from scipy import stats
-import math
 
 dice = [1, 2, 3, 4, 5, 6]
 population = []
@@ -222,12 +183,7 @@ print(conf_int[0], conf_int[1])
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch12\ch12-4-4a.py
-
-import numpy as np
 from scipy import stats
-import matplotlib.pyplot as plt
-import math
 
 dice = [1, 2, 3, 4, 5, 6]
 population = []
@@ -263,11 +219,7 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch12\ch12-4-5.py
-
-import numpy as np
 from scipy import stats
-import math
 
 dice = [1, 2, 3, 4, 5, 6]
 population = []
@@ -299,11 +251,7 @@ print(conf_int[0], conf_int[1])
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch12\ch12-5-2.py
-
-import numpy as np
 from scipy import stats
-import math
 
 population_mean = 70
 sample_size = 100
@@ -319,11 +267,7 @@ print("Z分數:", z_critical)
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch12\ch12-5-3.py
-
-import numpy as np
 from scipy import stats
-import math
 
 population_mean = 500
 sample = np.array([502.2, 501.6, 499.8, 502.8,
@@ -343,12 +287,8 @@ print(stats.ttest_1samp(a=sample, popmean=population_mean))
 t_critical = stats.t.ppf(q=0.975, df=sample_size-1)
 print("t分數:", t_critical)
  
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch12\ch12-6-1.py
-
-import numpy as np
 from scipy import stats
 
 observed = np.array([20, 16, 34, 40, 38, 32])
@@ -367,11 +307,6 @@ print("臨界區: ", crit)
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch12\ch12-6-2.py
-
-import numpy as np
-import pandas as pd
-
 voter_gender = np.array((["男"]*352)+(["男"]*315)+ \
                         (["女"]*217)+(["女"]*331))
 voter_favorite = np.array((["喜歡"]*352)+(["不喜歡"]*315)+ \
@@ -385,11 +320,6 @@ observed = voter_tab.iloc[0:3, 0:3]
 print(observed)
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch12\ch12-6-2a.py
-
-import numpy as np
-import pandas as pd
 
 voter_gender = np.array((["男"]*352)+(["男"]*315)+ \
                         (["女"]*217)+(["女"]*331))
@@ -409,14 +339,9 @@ expected = pd.DataFrame(expected)
 expected.columns = ["喜歡", "不喜歡"]
 expected.index = ["男", "女"]                   
 print(expected)
- 
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch12\ch12-6-2b.py
-
-import numpy as np
-import pandas as pd
 from scipy import stats
 
 voter_gender = np.array((["男"]*352)+(["男"]*315)+ \
@@ -453,8 +378,6 @@ crit = stats.chi2.ppf(q = 0.95, df=df)
 print("臨界區: ", crit)
 
 print("------------------------------------------------------------")  # 60個
-
-
 
 
 print("------------------------------------------------------------")  # 60個

@@ -123,6 +123,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="img\ims-logo-720x480.bmp" />
+    <Content Include="img\folder_open.png" />
     <Content Include="swscale-0.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

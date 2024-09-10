@@ -6,16 +6,25 @@ Python資料科學實戰教本
 """
 
 
+print("------------------------------------------------------------")  # 60個
+
+# 共同
 import os
 import sys
 import time
+import math
 import random
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
 
-print("------------------------------------------------------------")  # 60個
-
-
-
-import numpy as np 
+font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+# 設定中文字型及負號正確顯示
+# 設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
+# 設定負號
+plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
@@ -33,8 +42,6 @@ print(b)
 
 print("------------------------------------------------------------")  # 60個
 
-import numpy as np 
-
 a = np.array([[1,2,3],[4,5,6]])
 print(a[0, 0], a[0, 1], a[0, 2])
 print(a[1, 0], a[1, 1], a[1, 2])
@@ -45,10 +52,6 @@ print(a)
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch07\ch7-2-2b.py
-
-import numpy as np 
-
 a = np.array([1, 2, 3, 4, 5], int) 
 b = np.array((1, 2, 3, 4, 5), dtype=float) 
 print(a)
@@ -56,10 +59,6 @@ print("---------------------------")
 print(b)    
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch07\ch7-2-2c.py
-
-import numpy as np 
 
 a = np.arange(5)
 print(a)
@@ -85,13 +84,7 @@ print("---------------------------")
 h = np.full((2,2), 7)
 print(h)  
 
- 
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch07\ch7-2-2d.py
-
-import numpy as np 
 
 a = np.array([[1,2,3],[4,5,6]])
 b = np.zeros_like(a)
@@ -112,12 +105,7 @@ print("---------------------------")
 g = np.random.rand(3,3)
 print(g)   
 
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch07\ch7-2-2e.py
-
-import numpy as np 
 
 a = np.arange(16)
 print(a)
@@ -131,13 +119,7 @@ print("---------------------------")
 d = c.reshape((5, 2))
 print(d)
 
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch07\ch7-2-3.py
-
-import numpy as np 
 
 a = np.array([[11, 12, 13, 14, 15],
               [16, 17, 18, 19, 20],
@@ -155,31 +137,16 @@ print(a.nbytes)
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch07\ch7-2-4.py
-
-import numpy as np 
-
-a = np.array([1, 2, 3, 4, 5])
-for ele in a:
-    print(ele)
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch07\ch7-2-4a.py
-
-import numpy as np 
-
 a = np.array([[1, 2], [3, 4], [5, 6]])
 for ele in a:
     print(ele)
+
 print("---------------------------")
 for ele in a:
     for item in ele:
         print(str(item) + " ", end="")
 
 print("------------------------------------------------------------")  # 60個
-
-import numpy as np 
 
 a = np.arange(10)
 outputfile = "Example.npy"
@@ -188,15 +155,11 @@ with open(outputfile, 'wb') as fp:
 
 print("------------------------------------------------------------")  # 60個
 
-import numpy as np 
-
 a = np.array([[1,2,3],[4,5,6]])
 outputfile = "Example.out"
 np.savetxt(outputfile, a, delimiter=',')
 
 print("------------------------------------------------------------")  # 60個
-
-import numpy as np 
 
 outputfile = "Example.npy"
 with open(outputfile, 'rb') as fp:
@@ -205,19 +168,11 @@ print(a)
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch07\ch7-2-5c.py
-
-import numpy as np 
-
 outputfile = "Example.out"
 a = np.loadtxt(outputfile, delimiter=',')
 print(a)
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch07\ch7-3-1.py
-
-import numpy as np 
 
 a = np.array([1, 2, 3]) 
 print("a=" + str(a))
@@ -233,10 +188,6 @@ b = a / s
 print("a/s=" + str(b))  
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch07\ch7-3-1a.py
-
-import numpy as np 
 
 a = np.array([1, 2, 3]) 
 print("a=" + str(a))
@@ -253,10 +204,6 @@ print("np.divide(a,s)=" + str(b))
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch07\ch7-3-1b.py
-
-import numpy as np 
-
 a = np.array([1, 2, 3]) 
 print("a=" + str(a))
 s = np.array([4, 5, 6])  
@@ -271,10 +218,6 @@ b = a / s
 print("a/s=" + str(b))  
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch07\ch7-3-1c.py
-
-import numpy as np 
 
 a = np.array([1, 2, 3]) 
 print("c=" + str(a))
@@ -291,10 +234,6 @@ print("np.divide(a,s)=" + str(b))
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch07\ch7-3-1d.py
-
-import numpy as np 
-
 a = np.array([1, 2, 3]) 
 print("a=" + str(a))
 s = np.array([4, 5, 6])  
@@ -303,10 +242,6 @@ b = a.dot(s)
 print("a.dot(s)=" + str(b))    
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch07\ch7-3-2.py
-
-import numpy as np 
 
 a = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9])
 print("a=" + str(a))
@@ -328,10 +263,6 @@ print("a[2:-2]=" + str(b))
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch07\ch7-3-3.py
-
-import numpy as np 
-
 a = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9])
 print("a=" + str(a))
 
@@ -345,10 +276,6 @@ print("a[[2,6]]=10->" + str(a))
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch07\ch7-3-3a.py
-
-import numpy as np 
-
 a = np.array([14,8,10,11,6,3,18,13,12,9])
 print("a=" + str(a))
 mask = (a % 3 == 0)        # 建立布林值陣列
@@ -360,12 +287,6 @@ print("a[a%3==0]=-1->" + str(a))
 
 print("------------------------------------------------------------")  # 60個
 
-
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch07\ch7-4-1.py
-
-import numpy as np 
-
 a = np.array([[1,2,3],[4,5,6]])
 print("a=")
 print(a)
@@ -386,10 +307,6 @@ print(b)
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch07\ch7-4-1a.py
-
-import numpy as np 
-
 a = np.array([[1,2,3],[4,5,6]])
 print("a=")
 print(a)
@@ -409,10 +326,6 @@ print("np.divide(a,s)=")
 print(b)  
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch07\ch7-4-1b.py
-
-import numpy as np 
 
 a = np.array([[1,2],[3,4]])
 print("a=")
@@ -435,10 +348,6 @@ print(b)
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch07\ch7-4-1c.py
-
-import numpy as np 
-
 a = np.array([[1,2],[3,4]])
 print("a=")
 print(a)
@@ -459,10 +368,6 @@ print("np.divide(a,s)=")
 print(b)  
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch07\ch7-4-1d.py
-
-import numpy as np 
 
 a = np.array([[1,2],[3,4]])
 print("a=")
@@ -475,10 +380,6 @@ print("a.dot(s)=")
 print(b)    
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch07\ch7-4-2.py
-
-import numpy as np 
 
 a = np.arange(11,36)
 a = a.reshape(5,5)
@@ -503,10 +404,6 @@ print(b)
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch07\ch7-4-3.py
-
-import numpy as np 
-
 a = np.array([[1,2,3],[4,5,6],[7,8,9],[10,11,12]])
 print("a=")
 print(a)
@@ -529,10 +426,6 @@ print(a)
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch07\ch7-4-3a.py
-
-import numpy as np 
-
 a = np.array([[1,2],[3,4],[5,6]])
 print("a=")
 print(a)
@@ -546,12 +439,7 @@ a[a > 2] = -1         # 同時更改多個True索引
 print("a[a>2]=-1->")
 print(a)
 
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch07\ch7-5.py
-
-import numpy as np 
 
 a = np.array([[1,2,3],[4,5,6],[7,8,9],[10,11,12]])
 print("a=")
@@ -566,10 +454,6 @@ print(c)
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch07\ch7-6-1.py
-
-import numpy as np
-
 a = np.array([[1,2,3],[4,5,6]])
 print("a=")
 print(a)
@@ -581,12 +465,7 @@ print("a.flatten()=" + str(c))
 d = np.ravel(a)
 print("np.ravel(a)=" + str(d))
 
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch07\ch7-6-1a.py
-
-import numpy as np 
 
 a = np.array([1,2,3,4,5,6])
 print("a=" + str(a))
@@ -606,10 +485,6 @@ print(c)
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch07\ch7-6-1b.py
-
-import numpy as np 
-
 a = np.array([1,2,3])
 print("a=" + str(a))
 
@@ -624,10 +499,6 @@ print(b.shape)
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch07\ch7-6-1c.py
-
-import numpy as np 
-
 a = np.array([1,2,3])
 print("a=" + str(a))
 
@@ -639,10 +510,6 @@ c = np.concatenate((a,b))
 print("c=np.concatenate((a,b))->" + str(c))
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch07\ch7-6-1d.py
-
-import numpy as np 
 
 a = np.array([[1,2],[3,4]])
 b = np.array([[5,6],[7,8]])
@@ -659,10 +526,6 @@ print(c)
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch07\ch7-6-1e.py
-
-import numpy as np
-
 a = np.array([[1,2,3,4,5,6,7,8]])
 b = a.reshape(2, 4)
 print(b.shape)
@@ -676,10 +539,6 @@ f = np.squeeze(d)
 print(e.shape, f.shape)
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch07\ch7-6-1f.py
-
-import numpy as np
 
 a = np.array([[11,22,13,74,35,6,27,18]])
 
@@ -695,12 +554,6 @@ print("最大值索引: " + str(max_idx))
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch07\ch7-6-2.py
-
-import numpy as np 
-
-np.random.seed(293423)
-
 v1 = np.random.random()
 v2 = np.random.random()
 print(v1, v2)
@@ -709,10 +562,6 @@ v4 = np.random.randint(1, 101)
 print(v3, v4)
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch07\ch7-6-2a.py
-
-import numpy as np 
 
 a = np.random.rand(5)
 print("np.random.rand(5)=")
@@ -729,10 +578,6 @@ print(d)
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch07\ch7-6-3.py
-
-import numpy as np 
-
 a = np.array([30,45,60]) 
 
 print(np.sin(a*np.pi/180)) 
@@ -740,10 +585,6 @@ print(np.cos(a*np.pi/180))
 print(np.tan(a*np.pi/180)) 
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch07\ch7-6-3a.py
-
-import numpy as np 
 
 a = np.array([1.0,5.55, 123, 0.567, 25.532]) 
 print("a=" + str(a))
@@ -769,7 +610,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
-
 
 
 

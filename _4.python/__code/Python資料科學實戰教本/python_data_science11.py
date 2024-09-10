@@ -1,25 +1,29 @@
 """
 Python資料科學實戰教本
 
-
-
 """
-
-
-import os
-import sys
-import time
-import random
 
 print("------------------------------------------------------------")  # 60個
 
-
-
+# 共同
+import os
+import sys
+import time
+import math
+import random
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-plt.rcParams['font.sans-serif'] = ['Microsoft JhengHei'] 
-plt.rcParams['axes.unicode_minus'] = False
+
+font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+# 設定中文字型及負號正確顯示
+# 設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
+# 設定負號
+plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+plt.rcParams["font.size"] = 12  # 設定字型大小
+
+print("------------------------------------------------------------")  # 60個
 
 results = []
 for num_throws in range(1, 10001):
@@ -35,16 +39,7 @@ plt.xlabel("投擲次數")
 plt.ylabel("平均機率")
 plt.show()
 
-
-
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch11\ch11-1-3a.py
-
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-plt.rcParams['font.sans-serif'] = ['Microsoft JhengHei'] 
-plt.rcParams['axes.unicode_minus'] = False
+print("------------------------------------------------------------")  # 60個
 
 results = []
 for num_throws in range(1, 10001):
@@ -63,10 +58,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch11\ch11-5-1.py
-
-import pandas as pd
-
 df = pd.read_csv("data/titanic.csv")
 s =  pd.Series([30,1,5,10,30,50,30,15,40,45,30])
 
@@ -75,10 +66,6 @@ print(s.mode())
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch11\ch11-5-1a.py
-
-import pandas as pd
-
 df = pd.read_csv("data/titanic.csv")
 s =  pd.Series([30,1,5,10,30,50,30,15,40,45,30])
 
@@ -86,10 +73,6 @@ print(df["Age"].median())
 print(s.median())
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch11\ch11-5-1b.py
-
-import pandas as pd
 
 df = pd.read_csv("data/titanic.csv")
 s =  pd.Series([30,1,5,10,30,50,30,15,40,45,30])
@@ -103,10 +86,6 @@ print(s.quantile(q=0.75))
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch11\ch11-5-1c.py
-
-import pandas as pd
-
 df = pd.read_csv("data/titanic.csv")
 s =  pd.Series([30,1,5,10,30,50,30,15,40,45,30])
 
@@ -114,10 +93,6 @@ print(df["Age"].mean())
 print(s.mean())
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch11\ch11-5-2.py
-
-import pandas as pd
 
 df = pd.read_csv("data/titanic.csv")
 s =  pd.Series([30,1,5,10,30,50,30,15,40,45,30])
@@ -127,10 +102,6 @@ print(s.max() - s.min())
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch11\ch11-5-2a.py
-
-import pandas as pd
-
 df = pd.read_csv("data/titanic.csv")
 s =  pd.Series([30,1,5,10,30,50,30,15,40,45,30])
 
@@ -138,10 +109,6 @@ print(df["Age"].quantile(0.75) - df["Age"].quantile(0.25))
 print(s.quantile(0.75) - s.quantile(0.25))
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch11\ch11-5-2b.py
-
-import pandas as pd
 
 df = pd.read_csv("data/titanic.csv")
 s =  pd.Series([30,1,5,10,30,50,30,15,40,45,30])
@@ -151,10 +118,6 @@ print(s.var())
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch11\ch11-5-2c.py
-
-import pandas as pd
-
 df = pd.read_csv("data/titanic.csv")
 s =  pd.Series([30,1,5,10,30,50,30,15,40,45,30])
 
@@ -162,10 +125,6 @@ print(df["Age"].std())
 print(s.std())
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch11\ch11-5-2d.py
-
-import pandas as pd
 
 df = pd.read_csv("data/titanic.csv")
 s =  pd.Series([30,1,5,10,30,50,30,15,40,45,30])
@@ -175,10 +134,6 @@ print("---------------------------")
 print(s.describe())
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch11\ch11-6-2.py
-
-import random
 
 def dice_roll():
     v = random.randint(1, 6)
@@ -191,13 +146,6 @@ for trial in range(num_of_trials):
 print(sum(trials)/float(num_of_trials))
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch11\ch11-6-2a.py
-
-import random
-import matplotlib.pyplot as plt
-plt.rcParams['font.sans-serif'] = ['Microsoft JhengHei'] 
-plt.rcParams['axes.unicode_minus'] = False
 
 def dice_roll():
     v = random.randint(1, 6)
@@ -218,8 +166,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch11\ch11-6-5.py
-
 from scipy import stats
 
 n = 5
@@ -230,10 +176,6 @@ for k in range(n+1):
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch11\ch11-6-5a.py
-
-import pandas as pd
-import matplotlib.pyplot as plt
 from scipy import stats
 
 fair_dice_rolls = stats.binom.rvs(n=5, 
@@ -246,10 +188,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch11\ch11-6-5b.py
-
-import pandas as pd
-import matplotlib.pyplot as plt
 from scipy import stats
 
 fair_dice_rolls = stats.binom.rvs(n=10, 
@@ -262,8 +200,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch11\ch11-6-5c.py
-
 from scipy import stats
 
 n = 10
@@ -275,8 +211,6 @@ for k in range(n+1):
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch11\ch11-6-5d.py
-
 from scipy import stats
 
 n = 14
@@ -284,14 +218,9 @@ p = 0.2
 k = 3
 v = stats.binom.pmf(k, n, p)
 print(k, v)
- 
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch11\ch11-6-6.py
-
-import numpy as np
-import matplotlib.pyplot as plt
 
 def normal_pdf(x, mu, sigma):
     pi = 3.1415926
@@ -306,13 +235,7 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch11\ch11-6-6a.py
-
 from scipy import stats
-import matplotlib.pyplot as plt
-import numpy as np
-plt.rcParams['font.sans-serif'] = ['Microsoft JhengHei'] 
-plt.rcParams['axes.unicode_minus'] = False
 
 x = [x/10.0 for x in range(-50, 60)]
 plt.plot(x, stats.norm.pdf(x, 0, 1),

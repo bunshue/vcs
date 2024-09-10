@@ -2,16 +2,14 @@
 Python資料科學實戰教本
 
 
-
 """
-import time
-import seaborn as sns
 
 print("------------------------------------------------------------")  # 60個
 
 # 共同
 import os
 import sys
+import time
 import math
 import random
 import numpy as np
@@ -25,6 +23,10 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 # 設定負號
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
+
+print("------------------------------------------------------------")  # 60個
+
+import seaborn as sns
 
 print("------------------------------------------------------------")  # 60個
 

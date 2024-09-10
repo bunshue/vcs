@@ -152,13 +152,6 @@ namespace vcs_WebCam5
                 this.StartRecording(); // record if Autorecord is toggled
             }
 
-            if (this.BeepOnMotion == true)
-            {
-                // beep if BeepOnMotion is toggeled
-                System.Console.Beep(400, 500);
-                System.Console.Beep(800, 500);
-            }
-
             Thread.Sleep(10000); // the user is notified for 10 seconds
             calibrateAndResume = 0;
             this.motionDetected = false;

@@ -164,10 +164,9 @@ namespace vcs_WebCam4_MotionDetection  // 標準 移動偵測
         {
             this.motionDetected = true;
 
-            Thread.Sleep(10000); // the user is notified for 10 seconds
+            Thread.Sleep(50000); // 警示 5 秒
             calibrateAndResume = 0;
             this.motionDetected = false;
-            Thread.Sleep(3000);
         }
 
         void Start_Webcam()

@@ -37,7 +37,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 print('練習組合成一張大圖 picasa效果')
 
 filename1 = "C:/_git/vcs/_4.python/_data/elephant.jpg"
@@ -134,7 +134,6 @@ plt.imshow(cv2.cvtColor(result3, cv2.COLOR_BGR2RGB))
 
 plt.tight_layout()  # 緊密排列，並填滿原圖大小
 plt.show()
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -5192,5 +5191,59 @@ cv2.imshow("pencilSketch", pencilSketch)
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
+
+temp = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
+print(temp.shape)
+
+tempHt, tempWd = temp.shape
+print(tempHt, tempWd)
+
+height, width = temp.shape[:2]
+
+array = temp.reshape(1,-1)
+
+print(array.shape)
+
+EM_sum = np.double(np.sum(array[0]))
+print(EM_sum)
+
+square_arr = np.square(array[0])
+EM2_sum = np.double(np.sum(square_arr))
+print(EM2_sum)
+
+
+product_array = temp.reshape(1, -1)
+_sum = np.double(np.sum(product_array[0]))
+
+print("------------------------------------------------------------")  # 60個
+
+
+"""
+#例外的寫法
+img = cv2.imread('digits.png',0)
+if img is None:
+    raise Exception("we need the digits.png image from samples/data here !")
+
+"""
+'''
+print("------------------------------------------------------------")  # 60個
+
+filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
+
+image = cv2.imread(filename)
+image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  #灰階
+_, image = cv2.threshold(image, 120, 255, cv2.THRESH_BINARY_INV) #轉為反相黑白
+
+cv2.imshow('image',image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+
 
 print("------------------------------------------------------------")  # 60個

@@ -2,13 +2,27 @@
 Python資料科學實戰教本
 
 
-
 """
 
+print("------------------------------------------------------------")  # 60個
+
+# 共同
 import os
 import sys
 import time
+import math
 import random
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+# 設定中文字型及負號正確顯示
+# 設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
+# 設定負號
+plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
@@ -20,59 +34,6 @@ print('  python '.strip())  # 刪除空白字元: 顯示 "python"
 
 print("------------------------------------------------------------")  # 60個
 
-# 擁有1個參數的range()函數
-for i in range(5):
-    print("range(5)的值 = " + str(i))
-for i in range(10):
-    print("range(10)的值 = " + str(i))
-for i in range(11):
-    print("range(11)的值 = " + str(i))
-# 擁有2個參數的range()函數
-for i in range(1, 5):
-    print("range(1,5)的值 = " + str(i))
-for i in range(1, 10):
-    print("range(1,10)的值 = " + str(i))
-for i in range(1, 11):
-    print("range(1,11)的值 = " + str(i))
-# 擁有3個參數的range()函數
-for i in range(1, 11, 2):
-    print("range(1,11,2)的值 = " + str(i))
-for i in range(1, 11, 3):
-    print("range(1,11,3)的值 = " + str(i))
-for i in range(1, 11, 4):
-    print("range(1,11,4)的值 = " + str(i))
-for i in range(0, -10, -1):
-    print("range(0,-10,-1)的值 = " + str(i))
-for i in range(0, -10, -2):
-    print("range(0,-10,-2)的值 = " + str(i))
-    
-print("------------------------------------------------------------")  # 60個
-
-# 定義函數
-def print_msg():
-    print("歡迎學習Python程式設計!")
-
-def is_valid_num(no):
-    if no >= 0 and no <= 200.0:
-        return True
-    else:
-        return False
-
-def convert_to_f(c):
-    f = (9.0 * c) / 5.0 + 32.0
-    return f
-# 函數呼叫
-print_msg()
-c = 100
-f = convert_to_f(c)
-print("華氏: " + str(f))
-if is_valid_num(c):
-    print("合法!")
-else:
-    print("不合法")
-
-print("------------------------------------------------------------")  # 60個
-
 from bs4 import BeautifulSoup
 
 html_str = "<p>Hello World!</p>"
@@ -80,50 +41,6 @@ soup = BeautifulSoup(html_str, "lxml")
 print(soup)
 
 print("------------------------------------------------------------")  # 60個
-
-try: 
-    fp = open("myfile.txt", "r")
-    print(fp.read())
-    fp.close()
-except FileNotFoundError:
-    print("錯誤: myfile.txt檔案不存在!")
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch02\ch2-5-1.py
-
-ls = [6, 4, 5]    # 建立清單
-print(ls, ls[2])  # 顯示 "[6, 4, 5] 5"
-print(ls[-1])     # 負索引從最後開始: 顯示 "5"
-ls[2] = "py"      # 指定字串型態的項目
-print(ls)         # 顯示 "[6, 4, 'py']"
-ls.append("bar")  # 新增項目
-print(ls)         # 顯示 "[6, 4, 'py', 'bar']"
-ele = ls.pop()    # 取出最後項目
-print(ele, ls)    # 顯示 "bar [6, 4, 'py']"
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch02\ch2-5-1a.py
-
-nums = list(range(5))  # 建立一序列的整數清單
-print(nums)            # 顯示 "[0, 1, 2, 3, 4]"
-print(nums[2:4])       # 切割索引2~4(不含4): 顯示 "[2, 3]"
-print(nums[2:])        # 切割索引從2至最後: 顯示 "[2, 3, 4]"
-print(nums[:2])        # 切割從開始至索引2(不含2): 顯示 "[0, 1]"
-print(nums[:])         # 切割整個清單: 顯示 "[0, 1, 2, 3, 4]"
-print(nums[:-1])       # 使用負索引切割: 顯示 "[0, 1, 2, 3]"
-nums[2:4] = [7, 8]     # 使用切割來指定子清單
-print(nums)            # 顯示 "[0, 1, 8, 9, 4]"
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch02\ch2-5-1b.py
 
 print("走訪顯示串列的每一個項目...")
 animals = ['cat', 'dog', 'bat']
@@ -138,7 +55,7 @@ for index, animal in enumerate(animals):
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch02\ch2-5-1c.py
+print('建立資料的方法')
 
 list1 = [x for x in range(10)]
 print("[x for x in range(10)]")
@@ -146,6 +63,8 @@ print(str(list1))
 list2 = [x+1 for x in range(10)]
 print("[x+1 for x in range(10)]")
 print(str(list2))
+
+print('range 加條件')
 list3 = [x for x in range(10) if x % 2 == 0]
 print("[x for x in range(10) if x%2==0]")
 print(str(list3))
@@ -157,8 +76,7 @@ print(str(list4))
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch02\ch2-5-2.py
-
+print('字典')
 d = {"cat": "white", "dog": "black"}  # 建立字典
 print(d["cat"])       # 使用Key取得項目: 顯示 "white"
 print("cat" in d)     # 是否有Key: 顯示 "True"
@@ -169,10 +87,7 @@ print(d.get("pig", "N/A"))     # 取出項目+預設值: 顯示 "pink"
 del d["pig"]          # 使用Key刪除項目
 print(d.get("pig", "N/A"))     # "pig"不存在: 顯示 "N/A"
 
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch02\ch2-5-2a.py
 
 print("以鍵來走訪字典...")
 d = {"chicken": 2, "dog": 4, "cat": 4, "spider": 8}
@@ -186,8 +101,6 @@ for animal, legs in d.items():
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch02\ch2-5-2b.py
-
 d1 = {x:x*x for x in range(10)}
 print("{x:x*x for x in range(10)}")
 print(str(d1))
@@ -195,11 +108,7 @@ d2 = {x:x*x for x in range(10) if x % 2 == 1}
 print("{x:x*x for x in range(11) if x%2==1}")
 print(str(d2))
 
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch02\ch2-5-3.py
 
 animals = {"cat", "dog", "pig"} # 建立集合
 print("cat" in animals)   # 檢查是否有此元素: 顯示 "True"
@@ -212,23 +121,16 @@ print(len(animals))       # 顯示 "4"
 animals.remove('cat')     # 刪除集合元素
 print(len(animals))       # 顯示 "3"
 
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch02\ch2-5-3a.py
-
+#集合
 animals = {"cat", "dog", "pig", "fish"} # 建立集合
 for index, animal in enumerate(animals):
     print('#%d: %s' % (index + 1, animal))
 
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch02\ch2-5-3b.py
-
+#集合
 A = {1, 2, 3, 4, 5}
 B = {4, 5, 6, 7, 8}
 print("A = " + str(A))
@@ -256,8 +158,6 @@ print("A.symmetric_difference(B) = " + str(C))
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch02\ch2-5-4.py
-
 t = (5, 6, 7, 8)  # 建立元組
 print(type(t))    # 顯示 "<class 'tuple'>"
 print(t)          # 顯示 "(5, 6, 7, 8)"
@@ -268,11 +168,7 @@ print(t[-2])      # 顯示 "7"
 for ele in t:     # 走訪項目
     print(ele, end=" ")  # 顯示 "5, 6, 7, 8"
 
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch02\ch2-6-1.py
 
 # 定義Student類別
 class Student:
@@ -297,8 +193,6 @@ print("s1.name = " + s1.name)
 print("s1.grade = " + str(s1.grade))
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch02\ch2-6-2.py
 
 # 定義Student類別
 class Student:
@@ -392,6 +286,7 @@ print(r.status_code)
 print(r.status_code == requests.codes.all_good)
 
 print("------------------------------------------------------------")  # 60個
+
 """ request fail
 import requests
 
@@ -453,7 +348,6 @@ try:
     print(r.text)
 except requests.exceptions.Timeout as ex:
     print("錯誤: HTTP請求已經超過時間...\n" + str(ex))
-    
 
 print("------------------------------------------------------------")  # 60個
 
@@ -821,24 +715,6 @@ def urlencode(query, doseq=False, safe='', encoding=None, errors=None):
 
 print("------------------------------------------------------------")  # 60個
 
-
-
-
-"""
-Python資料科學實戰教本
-
-
-
-"""
-
-
-import os
-import sys
-import time
-import random
-
-print("------------------------------------------------------------")  # 60個
-
 from bs4 import BeautifulSoup 
 
 html_str = "<p>Hello World!</p>"
@@ -856,12 +732,7 @@ r.encoding = "utf8"
 soup = BeautifulSoup(r.text, "lxml")
 print(soup)
 
-
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch04\ch4-2-1b.py
 
 from bs4 import BeautifulSoup
 
@@ -885,12 +756,7 @@ print("標籤內容: ", tag.b.string)
 print("URL網址: ", tag.get("href", None))
 print("target屬性: ", tag["target"])
 
-
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch04\ch4-2-2a.py
 
 from bs4 import BeautifulSoup
 
@@ -903,11 +769,7 @@ print("圖片網址: ", tag.get("src", None))
 print("alt屬性: ", tag["alt"])
 print("屬性: ", tag.attrs)
 
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch04\ch4-2-3.py
 
 from bs4 import BeautifulSoup
 
@@ -953,11 +815,7 @@ tag_a = tag_p.find(name="a")
 print(tag_p.a.text)
 print(tag_a.text)
 
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch04\ch4-3-1a.py
 
 from bs4 import BeautifulSoup
 
@@ -973,11 +831,7 @@ tag_div = soup.find(id="q2")
 tag_a = tag_div.find("a") 
 print(tag_a.text)
 
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch04\ch4-3-1b.py
 
 from bs4 import BeautifulSoup
 
@@ -996,10 +850,7 @@ tag_div = soup.find(id="q2")
 tag_span = tag_div.find(class_="score")
 print(tag_span.text)
 
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch04\ch4-3-1c.py
 
 from bs4 import BeautifulSoup
 
@@ -1014,11 +865,7 @@ with open("data/Surveys.html", "r", encoding="utf8") as fp:
 tag_div = soup.find(attrs={"data-custom": "important"})
 print(tag_div.text)
 
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch04\ch4-3-1d.py
 
 from bs4 import BeautifulSoup
 
@@ -1041,8 +888,6 @@ print(tag_str)
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch04\ch4-3-1e.py
-
 from bs4 import BeautifulSoup
 
 with open("data/Surveys.html", "r", encoding="utf8") as fp:
@@ -1060,10 +905,7 @@ print(tag_li.text)
 print(tag_li.string)
 print(tag_li.span.string)
 
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch04\ch4-3-1f.py
 
 from bs4 import BeautifulSoup
 
@@ -1080,10 +922,7 @@ print(tag_div.prettify())
 tag_p = soup.find("p", class_="question")
 print(tag_p.prettify())
 
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch04\ch4-3-1g.py
 
 from bs4 import BeautifulSoup
 
@@ -1102,11 +941,7 @@ def is_secondary_question(tag):
 tag_a = soup.find(is_secondary_question)
 print(tag_a.prettify())
 
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch04\ch4-3-2.py
 
 from bs4 import BeautifulSoup
 
@@ -1126,8 +961,6 @@ for question in tag_list:
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch04\ch4-3-2a.py
-
 from bs4 import BeautifulSoup
 
 with open("data/Surveys.html", "r", encoding="utf8") as fp:
@@ -1146,8 +979,6 @@ for question in tag_list:
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch04\ch4-3-2b.py
-
 from bs4 import BeautifulSoup
 
 with open("data/Surveys.html", "r", encoding="utf8") as fp:
@@ -1163,10 +994,7 @@ tag_all = tag_div.find_all(True)
 for tag in tag_all:
     print(tag.name)
 
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch04\ch4-3-2c.py
 
 from bs4 import BeautifulSoup
 
@@ -1185,10 +1013,7 @@ print(tag_str_list)
 tag_str_list = tag_div.find_all(text=["20", "40"])
 print(tag_str_list)
 
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch04\ch4-3-2d.py
 
 from bs4 import BeautifulSoup
 
@@ -1210,10 +1035,7 @@ tag_list = tag_div.find_all(class_=["question", "selected"])
 for tag in tag_list:
     print(tag.name, tag.text.replace("\n", ""))
 
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch04\ch4-3-2e.py
 
 from bs4 import BeautifulSoup
 
@@ -1233,10 +1055,7 @@ for tag in tag_list:
 tag_list = tag_div.find_all("li", recursive=False)
 print(tag_list)
 
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch04\ch4-4-2.py
 
 from bs4 import BeautifulSoup
 
@@ -1254,14 +1073,7 @@ tag_first_div = soup.find("div")
 tag_div = tag_first_div.select("div:nth-of-type(3)")
 print(tag_div[0].prettify())
 
-
-
 print("------------------------------------------------------------")  # 60個
-
-
-
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch04\ch4-4-2a.py
 
 from bs4 import BeautifulSoup
 
@@ -1291,8 +1103,6 @@ for item in tag_span:
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch04\ch4-4-2b.py
-
 from bs4 import BeautifulSoup
 
 with open("data/Surveys.html", "r", encoding="utf8") as fp:
@@ -1320,8 +1130,6 @@ print_a(tag_a)
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch04\ch4-4-2c.py
-
 from bs4 import BeautifulSoup
 
 with open("data/Surveys.html", "r", encoding="utf8") as fp:
@@ -1338,12 +1146,7 @@ tag_a = soup.select("body div a")
 for tag in tag_a:
     print(tag["href"])
 
-
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch04\ch4-4-2d.py
 
 from bs4 import BeautifulSoup
 
@@ -1365,11 +1168,7 @@ tag_span = soup.select("div > #email")
 for tag in tag_span:
     print(tag.prettify())  
 
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch04\ch4-4-2e.py
 
 from bs4 import BeautifulSoup
 
@@ -1392,11 +1191,7 @@ tag_div = soup.select("#q1 + .survey")
 for item in tag_div:            
     print(item.p.a.text)   
 
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch04\ch4-4-3.py
 
 from bs4 import BeautifulSoup
 
@@ -1412,8 +1207,6 @@ tag_a = soup.select_one("a[href]")
 print(tag_a.prettify())
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch04\ch4-5-2.py
 
 import re
 from bs4 import BeautifulSoup
@@ -1438,8 +1231,6 @@ print(tag_list)
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch04\ch4-5-2a.py
-
 import re
 from bs4 import BeautifulSoup
 
@@ -1459,8 +1250,6 @@ tag_list = soup.find_all(text=email_regexp)
 print(tag_list)
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch04\ch4-5-2b.py
 
 import re
 from bs4 import BeautifulSoup
@@ -1484,7 +1273,6 @@ for tag in tag_list:
 print("------------------------------------------------------------")  # 60個
 
 """webdriver skip
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch04\ch4-6-1.py
 
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
@@ -1502,10 +1290,7 @@ for tag in tags_li:
     print(tag.text)
 driver.quit()
 
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch04\ch4-6-1_edge.py
 
 from selenium import webdriver
 from selenium.webdriver.edge.service import Service
@@ -1523,10 +1308,7 @@ for tag in tags_li:
     print(tag.text)
 driver.quit()
 
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch04\ch4-6-2.py
 
 from selenium import webdriver
 
@@ -1542,8 +1324,6 @@ driver.quit()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch04\ch4-6-2_edge.py
-
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.edge.service import Service
@@ -1561,13 +1341,10 @@ driver.quit()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch04\ch4-6-2a.py
-
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
-
 
 driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
 driver.implicitly_wait(10)
@@ -1580,8 +1357,6 @@ for tag in tags_li:
 driver.quit()
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch04\ch4-6-2a_edge.py
 
 from selenium import webdriver
 
@@ -1596,8 +1371,6 @@ for tag in tags_li:
 driver.quit()
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch04\ch4-6-2b.py
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -1618,8 +1391,6 @@ for tag in tags_li:
 driver.quit()
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch04\ch4-6-2b_edge.py
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By

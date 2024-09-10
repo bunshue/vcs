@@ -38,6 +38,7 @@
             this.bt_record_stop = new System.Windows.Forms.Button();
             this.bt_clear = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cb_show_time = new System.Windows.Forms.CheckBox();
             this.bt_clear2 = new System.Windows.Forms.Button();
             this.numericUpDown_limit_record_time = new System.Windows.Forms.NumericUpDown();
             this.bt_record_limit_time = new System.Windows.Forms.Button();
@@ -52,7 +53,7 @@
             this.bt_start = new System.Windows.Forms.Button();
             this.timer_display = new System.Windows.Forms.Timer(this.components);
             this.timer_barcode = new System.Windows.Forms.Timer(this.components);
-            this.cb_show_time = new System.Windows.Forms.CheckBox();
+            this.bt_open_folder = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_limit_record_time)).BeginInit();
@@ -125,6 +126,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.bt_open_folder);
             this.groupBox1.Controls.Add(this.cb_show_time);
             this.groupBox1.Controls.Add(this.bt_clear2);
             this.groupBox1.Controls.Add(this.numericUpDown_limit_record_time);
@@ -146,6 +148,18 @@
             this.groupBox1.Size = new System.Drawing.Size(512, 141);
             this.groupBox1.TabIndex = 25;
             this.groupBox1.TabStop = false;
+            // 
+            // cb_show_time
+            // 
+            this.cb_show_time.AutoSize = true;
+            this.cb_show_time.Checked = true;
+            this.cb_show_time.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cb_show_time.Location = new System.Drawing.Point(305, 106);
+            this.cb_show_time.Name = "cb_show_time";
+            this.cb_show_time.Size = new System.Drawing.Size(72, 16);
+            this.cb_show_time.TabIndex = 138;
+            this.cb_show_time.Text = "顯示時間";
+            this.cb_show_time.UseVisualStyleBackColor = true;
             // 
             // bt_clear2
             // 
@@ -297,17 +311,15 @@
             this.timer_barcode.Interval = 300;
             this.timer_barcode.Tick += new System.EventHandler(this.timer_barcode_Tick);
             // 
-            // cb_show_time
+            // bt_open_folder
             // 
-            this.cb_show_time.AutoSize = true;
-            this.cb_show_time.Checked = true;
-            this.cb_show_time.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cb_show_time.Location = new System.Drawing.Point(305, 106);
-            this.cb_show_time.Name = "cb_show_time";
-            this.cb_show_time.Size = new System.Drawing.Size(72, 16);
-            this.cb_show_time.TabIndex = 138;
-            this.cb_show_time.Text = "顯示時間";
-            this.cb_show_time.UseVisualStyleBackColor = true;
+            this.bt_open_folder.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bt_open_folder.Location = new System.Drawing.Point(437, 65);
+            this.bt_open_folder.Name = "bt_open_folder";
+            this.bt_open_folder.Size = new System.Drawing.Size(70, 50);
+            this.bt_open_folder.TabIndex = 139;
+            this.bt_open_folder.UseVisualStyleBackColor = true;
+            this.bt_open_folder.Click += new System.EventHandler(this.bt_open_folder_Click);
             // 
             // Form1
             // 
@@ -356,6 +368,7 @@
         private System.Windows.Forms.NumericUpDown numericUpDown_limit_record_time;
         private System.Windows.Forms.Button bt_clear2;
         private System.Windows.Forms.CheckBox cb_show_time;
+        private System.Windows.Forms.Button bt_open_folder;
     }
 }
 
