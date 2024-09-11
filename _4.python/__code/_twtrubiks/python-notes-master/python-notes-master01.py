@@ -21,7 +21,7 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 # 設定負號
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
-
+'''
 print("------------------------------------------------------------")  # 60個
 
 # ref. https://docs.python.org/3/library/dataclasses.html
@@ -2849,9 +2849,6 @@ if __name__ == "__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\reduce_use_for_loop_tutorial_1.py
-
-
 def number_add(num):
     return num + 1
 
@@ -2885,8 +2882,6 @@ if __name__ == "__main__":
     print("result tuple", result)
 
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\reduce_use_for_loop_tutorial_2.py
 
 
 def process_item(item_new):
@@ -3135,12 +3130,6 @@ if __name__ == "__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\str_find_tutorial.py
-
-# ref. https://docs.python.org/3/library/stdtypes.html#str.find
-
-# str.find(sub[, start[, end]])
-
 if __name__ == "__main__":
     data = "hello 123 456 789"
     target = "456"
@@ -3233,332 +3222,11 @@ if __name__ == "__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\translate_tutorial.py
-
-# ref. https://docs.python.org/3/library/stdtypes.html
-
-if __name__ == "__main__":
-    """
-    str.translate(table[, deletechars]);
-    """
-    # tutorial_1
-    intab_1 = "abc"
-    outtab_1 = "def"
-    # make translation table
-    trantab_1 = str.maketrans(intab_1, outtab_1)
-    value_1 = "aabbcc"
-    print("tutorial_1:", value_1.translate(trantab_1))
-
-    # tutorial_2
-    intab_2 = "abc"
-    outtab_2 = "def"
-    # make translation table and remove "2" this character
-    trantab_2 = str.maketrans(intab_2, outtab_2, "2")
-    value_2 = "2aabb123cc2"
-    print("tutorial_2:", value_2.translate(trantab_2))
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\try_finally_tutorial.py
-
-
-def base_example_1():
-    try:
-        print("run_1")
-    except Exception:
-        print("Exception")
-    finally:
-        print("other code")
-
-
-def example_1():
-    try:
-        print("run_1")
-    except Exception:
-        print("Exception")
-        return "re Exception"
-    finally:
-        print("other code")
-
-
-def example_1_except():
-    try:
-        1 / 0
-    except Exception:
-        print("Exception")
-        return "re Exception"
-    finally:
-        print("other code")
-
-
-def example_2_diff():
-    try:
-        print("run_1")
-    except Exception:
-        print("Exception")
-        return "re Exception"
-
-    print("other code")
-
-
-def example_2_diff_except():
-    try:
-        1 / 0
-    except Exception:
-        print("Exception")
-        return "re Exception"
-
-    print("other code")
-
-
-def example_file():
-    # better with as statement
-    myfile = open("test.txt", "w")
-
-    try:
-        # 1/0
-        myfile.write("data")  # raises Exception
-    except Exception:
-        print("Exception")
-    finally:
-        print("close file")
-        myfile.close()  # has run
-
-
-if __name__ == "__main__":
-    print(base_example_1())
-
-    # print(example_1())
-    # print(example_1_except()) # -> has print("other code") ## important
-
-    # print(example_2_diff())
-    # print(example_2_diff_except()) # -> no print("other code")
-
-    # example_file()
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\unicodedata_tutorial.py
-
-# ref. https://docs.python.org/3.6/library/unicodedata.html
-import unicodedata
-
-
-def remove_control_characters(s):
-    return "".join(ch for ch in s if unicodedata.category(ch)[0] != "C")
-
-
-if __name__ == "__main__":
-    a = unicodedata.category("A")  # 'L'etter, 'u'ppercase
-    print("a:", a)
-    b = unicodedata.category("\r")  # carriage return Cc : control character
-    print("b:", b)
-    c = unicodedata.category("\t")  # tab  Cc : control character
-    print("c:", c)
-    d = unicodedata.category("\v")  # vertical tabulation.  Cc : control character
-    print("d:", d)
-    demo = "\tA\rB\v"
-    print("demo:", demo)
-    print("remove_control:", remove_control_characters(demo))
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\user_defined_exceptions_tutorial.py
-
-# ref. https://docs.python.org/3/tutorial/errors.html
-
-# a common practice is to create a base class for exceptions defined by that module,
-# and subclass that to create specific exception classes for different error conditions
-
-
-class Error(Exception):
-    """Base class for exceptions in this module."""
-
-    pass
-
-
-class InputError(Error):
-    """Exception raised for errors in the input.
-
-    Attributes:
-        expression -- input expression in which the error occurred
-        message -- explanation of the error
-    """
-
-    def __init__(self, expression, message):
-        self.expression = expression
-        self.message = message
-
-
-if __name__ == "__main__":
-    try:
-        raise InputError(expression="expression", message="This is InputError")
-    except InputError as e:
-        print("e.expression:", e.expression)
-        print("e.message:", e.message)
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\using_a_mutable_default_value_as_an_argument.py
-
-# Passing mutable lists or dictionaries as default arguments to a function can have unforeseen consequences.
-# Usually when a programmer uses a list or dictionary as the default argument to a function,
-# the programmer wants the program to create a new list or dictionary every time that the function is called.
-# However, this is not what Python does. The first time that the function is called,
-# Python creates a persistent object for the list or dictionary. Every subsequent time the function is called,
-# Python uses that same persistent object that was created from the first call to the function.
-
-
-# ref.
-# https://docs.quantifiedcode.com/python-anti-patterns/correctness/mutable_default_value_as_argument.html
-
-
-# error Anti-pattern
-# Be careful with mutable default arguments
-def append_anti_pattern(number, number_list=[]):  # if use pycharm , will warn you
-    number_list.append(number)
-    print(number_list)
-    return number_list
-
-
-def append(number, number_list=None):
-    if not number_list:
-        number_list = []
-    number_list.append(number)
-    print(number_list)
-    return number_list
-
-
-if __name__ == "__main__":
-    print("error Anti-pattern:")
-    append_anti_pattern(5)  # expecting: [5], actual: [5]
-    append_anti_pattern(7)  # expecting: [7], actual: [5, 7]
-    append_anti_pattern(2)  # expecting: [2], actual: [5, 7, 2]
-    print("right:")
-    append(5)  # expecting: [5]
-    append(7)  # expecting: [7]
-    append(2)  # expecting: [2]
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\weakref_tutorial.py
-
-# ref.
-# https://docs.python.org/3/library/weakref.html#finalizer-objects
-# https://docs.python.org/3/library/weakref.html#module-weakref
-
-# A primary use for weak references is to implement caches or mappings holding large objects,
-# where it’s desired that a large object not be kept alive solely
-# because it appears in a cache or mapping.
-
-# for garbage collector(GC)
-
-import weakref
-
-
-class Object:
-    pass
-
-
-def example_1():
-    twtrubiks = Object()
-    weakref.finalize(twtrubiks, print, "You killed twtrubiks!")
-    del twtrubiks
-
-
-def callback(x, y, z):
-    print("hello")
-    return x + y + z
-
-
-def example_2():
-    obj = Object()
-    f = weakref.finalize(obj, callback, 1, 2, 3)
-    print("f()", f())
-
-
-def example_3():
-    # With WeakValueDictionary garbage collection can reclaim the object
-    # when there are no other references to it.
-
-    class Foo(object):
-        pass
-
-    A = Foo()
-    B = weakref.ref(A)
-    # B = A
-    # <weakref at 0x108b43958; to 'Foo' at 0x108b2f468>
-    del A
-    print(B)
-    # <weakref at 0x108b43958; dead>
-
-
-if __name__ == "__main__":
-    example_1()
-    # example_2()
-    # example_3()
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\with_as_tutorial.py
-
-
-class Demo_1:
-    def __enter__(self):
-        print("__enter__")
-        return "hello enter"
-
-    def __exit__(self, exc_type, exc_value, traceback):
-        print("__exit__")
-        if exc_type is ZeroDivisionError:
-            print("Please DO NOT divide by zero!")
-            return None
-
-
-class Demo_2:
-    def __enter__(self):
-        print("__enter__")
-        return "hello enter"
-
-    def __exit__(self, exc_type, exc_value, traceback):
-        print("__exit__")
-        if exc_type is ZeroDivisionError:
-            print("Please DO NOT divide by zero!")
-            return True
-
-
-def example_1():
-    with Demo_1() as data:
-        print("data:", data)
-        1 / 0
-        print("example_1")
-
-
-def example_better():
-    with Demo_2() as data:
-        print("data:", data)
-        1 / 0
-        print("example_1")
-
-
-if __name__ == "__main__":
-    # example_1()
-    example_better()
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\yield_from_tutorial.py
-
-# Using yield from allows us to avoid having to deal with unexpected exceptions,
-# let us focus on the implementation of business code.
-
-
 def demo(n):
     i = 0
     while i < n:
         yield i
         i += 1
-
 
 def test_yield_from(n):
     print("test_yield_from start")
@@ -3724,14 +3392,13 @@ if __name__ == "__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\zipfile_tutorial.py
 
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
+'''
 
 import pickle
 
@@ -3886,7 +3553,7 @@ def ex4():
     logger = logging.getLogger("my_app")
     logger.setLevel(logging.DEBUG)
 
-    log_file = "my_test_logger.log"
+    log_file = "tmp_my_test_logger.log"
     f_log = logging.FileHandler(log_file, mode="w")
     f_log.setLevel(logging.ERROR)
 
@@ -3928,11 +3595,11 @@ if __name__ == "__main__":
         "c": {None, True, False},
     }
 
-    with open("data.pickle", "wb") as f:
+    with open("tmp_data.pickle", "wb") as f:
         # Pickle the 'data' dictionary using the highest protocol available.
         pickle.dump(data, f, pickle.HIGHEST_PROTOCOL)
 
-    with open("data.pickle", "rb") as f:
+    with open("tmp_data.pickle", "rb") as f:
         # The protocol version used is detected automatically, so we do not
         # have to specify it.
         data_new = pickle.load(f)
@@ -3957,3 +3624,94 @@ if __name__ == "__main__":
     print(sample(num_seqs, 5))
 
 print("------------------------------------------------------------")  # 60個
+
+vowels = ['c', 'a', 'd', 'e', 'b']
+
+vowels.sort()
+# vowels.sort(reverse=True)
+
+print('Sorted list: {}'.format(vowels))
+print('Sorted list: {}'.format(vowels.sort()))
+
+random = [('b', 2), ('d', 4), ('a', 1), ('c', 3)]
+random_lambda = [('b', 2), ('d', 4), ('a', 1), ('c', 3)]
+
+"""
+# sort list with key
+random.sort(key=random[1])
+random_lambda.sort(key=lambda x: x[1], reverse=True)
+print('Sorted list use def: {}'.format(random))
+print('Sorted list use lambda: {}'.format(random_lambda))
+"""
+
+
+
+
+
+pyList = ['c', 'a', 'd', 'e', 'b']
+print('sorted(pyList): {}'.format(sorted(pyList)))
+print('pyList: {}'.format(pyList))
+
+# string
+int_string = '51423'
+print('int_string: {}'.format(sorted(int_string)))
+
+# int + string sequences (mixed bag)
+int_string_seqs = [1, '299', 3, '10', 7]
+
+# print(sorted(int_string_seqs))
+# Traceback (most recent call last):
+# File "<stdin>", line 1, in <module>
+# TypeError: '<' not supported between instances of 'str' and 'int'
+
+print(sorted(int_string_seqs, key=int))
+print(sorted(int_string_seqs, key=str))
+
+# vowels tuple
+pyTuple = ('c', 'a', 'd', 'e', 'b')
+print('sorted(pyTuple): {}'.format(sorted(pyTuple)))
+
+pySet = {'c', 'a', 'd', 'e', 'b'}
+print('sorted(pySet, reverse=True): {}'.format(sorted(pySet, reverse=True)))
+
+# random list
+random = [('b', 2), ('d', 4), ('a', 1), ('c', 3)]
+
+"""
+# sort list with key
+sortedList = sorted(random, key=random[1])
+sortedList_random = sorted(random, key=lambda x: x[1])
+# euqal
+# from operator import itemgetter
+# sortedList_random = sorted(random, key=itemgetter(1))
+
+print('sortedList: {}'.format(sortedList))
+print('sortedList_random: {}'.format(sortedList_random))
+"""
+
+
+
+
+print('本檔案 :', __file__)
+dirn = os.path.dirname(__file__)
+print('本檔案所在位置 :', dirn)
+
+print(sys.version_info)
+if (sys.version_info > (3, 0)):
+    print('aaaa')
+else:
+    print('bbbb')
+
+cc = os.path.join(dirn, 'test.txt')
+print(cc)
+
+text = "abcdefg"
+
+# 字符串前面加u表示使用unicode编码
+if (sys.version_info > (3, 0)):
+    content = text
+else:
+    content = text.decode('utf_8')  # 使用unicode編碼 
+
+
+

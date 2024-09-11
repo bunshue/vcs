@@ -9,5 +9,4 @@ def job(n):
 
 
 if __name__ == '__main__':
-    print(job([1,2,3]))
-    # print(job(1.0))
+    print(job(1.0))

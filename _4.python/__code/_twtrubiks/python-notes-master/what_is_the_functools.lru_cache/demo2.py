@@ -9,4 +9,4 @@ def fib(n):
 
 
 if __name__ == '__main__':
-    print([fib(n) for n in range(16)])
+    print([fib(n) for n in range(5)])

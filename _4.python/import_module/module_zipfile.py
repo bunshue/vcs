@@ -17,7 +17,7 @@ import zipfile
 zip_filename = "C:/_git/vcs/_1.data/______test_files1/_exe/ffmpeg.zip"
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 print("判斷是否為一個壓縮檔")
 
 zip_filename = "C:/_git/vcs/_1.data/______test_files1/__RW/_zip/PIL.zip"
@@ -366,7 +366,7 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-'''
+"""
 
 tmptmp
 
@@ -378,7 +378,7 @@ tmptmp
             with open('test10_new09.py', "rb") as f:
                 print(zipfp.read('test10_new09.py'), f.read())
 
-'''
+"""
 
 
 print("------------------------------------------------------------")  # 60個
@@ -399,6 +399,19 @@ files.extractall()
 
 files.close()
 """
+
+'''
+print("------------------------------------------------------------")  # 60個
+
+import zipfile
+with zipfile.ZipFile('data/kagglecatsanddogs_3367a.zip', 'r') as zip:
+    for i in zip.namelist():
+        #print(i)
+        if i.startswith('kagglecatsanddogs_3367a/PetImages'):
+            print(i)
+            zip.extract(i)
+
+print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
