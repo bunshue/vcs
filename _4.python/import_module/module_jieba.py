@@ -43,6 +43,13 @@ print("預設:", " | ".join(jieba.cut(original_text, cut_all=False, HMM=True)))
 print("全關閉:", " | ".join(jieba.cut(original_text, cut_all=False, HMM=False)))
 print("全關閉:", " | ".join(jieba.cut(original_text, cut_all=True, HMM=True)))
 
+cut_text = jieba.cut(original_text, cut_all=True, HMM=False)
+cut_text = jieba.cut(original_text, cut_all=False, HMM=True)
+
+print("預設:", " | ".join(jieba.cut(original_text, HMM=True)))
+print("全關閉:", " | ".join(jieba.cut(original_text, HMM=False)))
+print("全關閉:", " | ".join(jieba.cut(original_text)))
+
 print("------------------------------------------------------------")  # 60個
 
 # 不一定要設定詞庫，內建的效果也不錯
@@ -307,10 +314,202 @@ for i, count in enumerate(countlist):
     for word, score in scores.items():
         print(word, round(score, 2))
 """
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
+#03-jieba-userdict-loadfile.py
+
+import sys
+import jieba
+import jieba.analyse
+
+#original_text = "名偵探柯南是根據日本漫畫家青山剛昌著名原作推理漫畫名偵探柯南改編的動畫作品。"
+
+text = "名偵探柯南是根據日本漫畫家青山剛昌著名原作推理漫畫名偵探柯南改編的動畫作品。"
+
+text = text.replace(" ", "")
+text = text.replace("「", "")
+text = text.replace("」", "")
+text = text.replace("，", "")
+text = text.replace("。", "")
+print('/'.join(jieba.cut(text)))
+print("1 ====================")
+
+jieba.load_userdict('data/_jieba/userdict.txt')
+print('/'.join(jieba.cut(text)))
+print("2 ====================")
+words = jieba.posseg.cut(text)
+
+print(words)
+
+"""
+for word, flag in words:
+    print('%s, %s' % (word, flag))
+print("3 ====================")
+
+content = text
+
+keywords = jieba.analyse.extract_tags(content, topK = 20, withWeight = True, allowPOS = ())
+for item in keywords:
+        print(" %s =  %f "  %  (item[0], item[1]))
+print("4 ====================")
+keywords = jieba.analyse.textrank(content, topK = 20, withWeight = True, allowPOS = ('ns', 'n', 'vn', 'v'))
+for item in keywords:
+    print(" %s =  %f " % (item[0].encode('utf_8'), item[1])) 
+"""
+print("------------------------------------------------------------")  # 60個
+
+#04-jieba-suggest_freq.py
+
+import jieba
+import jieba.analyse
+
+text = "名偵探柯南是根據日本漫畫家青山剛昌著名原作推理漫畫名偵探柯南改編的動畫作品。"
+
+text=text.replace("，", "")
+print('/'.join(jieba.cut(text)))
+
+""" NG
+jieba.suggest_freq('台中', True)
+print('/'.join(jieba.cut(text)))
+
+jieba.suggest_freq(('名產'), True)
+print('/'.join(jieba.cut(text)))
+
+jieba.suggest_freq(('部落格'), True)
+print('/'.join(jieba.cut(text)))
+
+jieba.suggest_freq(('太陽餅'), True)
+print('/'.join(jieba.cut(text)))
+
+jieba.suggest_freq(('中', '將'), True)
+print('/'.join(jieba.cut(text)))
+"""
 
 print("------------------------------------------------------------")  # 60個
+
+#05-jieba-analyse.py
+
+import jieba
+import jieba.analyse
+
+text = "名偵探柯南是根據日本漫畫家青山剛昌著名原作推理漫畫名偵探柯南改編的動畫作品。"
+
+jieba.load_userdict('data/_jieba/userdict.txt')
+
+content = text
+
+print(' default'+'-'*40)
+
+result = jieba.tokenize(content)
+for tk in result:
+    print("word %s\t\t start: %d \t\t end:%d" % (tk[0],tk[1],tk[2]))
+
+print(' tokenize search'+'-'*40)
+
+result = jieba.tokenize(content, mode='search')
+for tk in result:
+    print("word %s\t\t start: %d \t\t end:%d" % (tk[0],tk[1],tk[2]))    
+
+print("------------------------------------------------------------")  # 60個
+
+#06-jieba-stopwords.py
+
+import jieba
+import jieba.analyse
+
+text = "名偵探柯南是根據日本漫畫家青山剛昌著名原作推理漫畫名偵探柯南改編的動畫作品。"
+
+jieba.load_userdict('data/_jieba/userdict.txt')
+
+content = text
+
+print(",".join(jieba.analyse.extract_tags(text, topK=10)))
+jieba.analyse.set_stop_words("data/_jieba/stop_words.txt")
+print(",".join(jieba.analyse.extract_tags(text, topK=10)))
+
+""" allowPOS NG
+print(' default idf'+'-'*40)
+keywords = jieba.analyse.extract_tags(text, topK=10, withWeight=True, allowPOS=()) #topK=TF/IDF 
+print(" topK=TF/IDF , TF=%d" % len(keywords))
+for item in keywords:
+        print(" %s =  %f "  %  (item[0], item[1]))      # 分別為關鍵詞和相應的權重
+
+
+print('set_idf_path'+'-'*40)
+jieba.analyse.set_idf_path("data/_jieba/idf.txt")
+keywords = jieba.analyse.extract_tags(text, topK=10, withWeight=True, allowPOS=())
+for item in keywords:
+        print("  %s   TF=%f , IDF=%f  topK=%f" % (item[0], item[1], len(keywords)*item[1], item[1]*len(keywords)*item[1]))      # 分別為關鍵詞和相應的權重
+"""
+print("------------------------------------------------------------")  # 60個
+
+#07-jieba-sort.py
+
+import jieba
+import jieba.analyse
+
+text = "名偵探柯南是根據日本漫畫家青山剛昌著名原作推理漫畫名偵探柯南改編的動畫作品。"
+
+text=text.replace('\n', '')
+jieba.analyse.set_stop_words("data/_jieba/stop_words.txt")
+print('/'.join(jieba.cut(text)))
+print("====================")
+jieba.load_userdict('data/_jieba/userdict.txt')
+
+dic={}
+for ele in jieba.cut(text):
+    if ele not in dic:
+        dic[ele]=1
+    else:
+        dic[ele]=dic[ele]+1
+
+for w in sorted(dic, key=dic.get, reverse=True):
+    print("%s  %i " % (w, dic[w]))
+
+print("------------------------------------------------------------")  # 60個
+
+#08-jieba-http.py
+
+import jieba
+import jieba.analyse
+import urllib.request as httplib
+
+print('等待久')
+
+try:
+    url="http://www.powenko.com/wordpress/"
+    req=httplib.Request(url)
+    reponse = httplib.urlopen(req)
+    if reponse.code==200:
+        contents=reponse.read().decode(reponse.headers.get_content_charset())
+        #print(contents)
+
+        #print(",".join(jieba.analyse.extract_tags(contents, topK=1000)))
+        jieba.analyse.set_stop_words("data/_jieba/stop_words.txt")
+        #print(",".join(jieba.analyse.extract_tags(contents, topK=1000)))
+
+        dic = {}
+        #keywords = jieba.analyse.extract_tags(contents, topK=40, withWeight=True, allowPOS=())
+        keywords = jieba.analyse.extract_tags(contents, topK=100, withWeight=True, allowPOS=('ns', 'n', 'vn', 'v'))
+        for item in keywords:
+                print(" %s =  %f  %s "  %  (item[0], item[1],flag))
+        print("="*40)
+        words =jieba.posseg.cut(contents)
+        for word, flag in words:
+            if flag=="ns" or flag=="n" or flag=='vn' or flag=='n':
+                if word not in dic:
+                    dic[word] = 1
+                else:
+                    dic[word] = dic[word] + 1
+        for w in sorted(dic, key=dic.get, reverse=True):
+            if dic[w]>1:
+               print("%s  %i " % (w, dic[w]))
+
+except:
+    print("error")
+
+print("------------------------------------------------------------")  # 60個
+
 
 
 print("------------------------------------------------------------")  # 60個

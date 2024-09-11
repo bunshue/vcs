@@ -37,7 +37,7 @@ import json
 import datetime
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 print('串列 轉 json')
 
 # 串列
@@ -1014,9 +1014,28 @@ print(data)
 
 key = 'bbb'
 print(data[key])
-
+'''
 print("------------------------------------------------------------")  # 60個
 
+data = {
+    'ename' : 'Mickey',
+    'weight' : 3,
+    'cname' : "米老鼠"
+}
+
+json_str = json.dumps(data)
+print(json_str)
+data = json.loads(json_str)
+print(data)
+print(data['ename'])
+
+#寫json資料
+with open('tmp_data.json', 'w') as f:
+    json.dump(data, f)
+
+#讀json資料
+with open('tmp_data.json', 'r') as f:
+    data = json.load(f)
 
 print("------------------------------------------------------------")  # 60個
 

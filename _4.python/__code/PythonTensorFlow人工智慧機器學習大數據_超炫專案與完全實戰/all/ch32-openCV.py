@@ -4,12 +4,12 @@ import tensorflow as tf
 from tensorflow.keras.models import model_from_json
 
 # 讀取模型架構
-json_file = open('model.json', 'r')
+json_file = open('data/model.json', 'r')
 loaded_model_json = json_file.read()
 json_file.close()
 model = model_from_json(loaded_model_json)
 # 讀取模型權重
-model.load_weights("model.h5")
+model.load_weights("data/model.h5")
 # 設定模型的 Loss 函數、Optimizer 以及用來判斷模型好壞的依據（metrics）
 model.compile(loss=tf.keras.losses.categorical_crossentropy,
             optimizer=tf.keras.optimizers.Adadelta(),
@@ -52,7 +52,7 @@ while (1):
     cv2.imshow('image', img)
     k = cv2.waitKey(1) & 0xFF
     if k == ord('s'):
-        cv2.imwrite("1.jpg",img)
+        cv2.imwrite("tmp_1.jpg",img)
         CNN()
     elif k == ord('c'):
         img = np.full(shape=(28, 28, 1), fill_value=0, dtype=np.uint8)
@@ -60,3 +60,7 @@ while (1):
         break
 
 cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+
