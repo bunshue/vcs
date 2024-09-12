@@ -2,7 +2,7 @@ import sys
 import random
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 import linecache
 
 filename = "C:/_git/vcs/_1.data/______test_files1/__RW/_txt/涼州詞.txt"
@@ -123,9 +123,7 @@ text = "Welcome to the United States and have a nice day."
 msg = "cccccc"
 notification.notify(title=text, message=msg)
 
-
 print("------------------------------------------------------------")  # 60個
-
 
 print("列出所有python關鍵字")
 import keyword
@@ -135,7 +133,6 @@ print(keyword.kwlist)
 keywordLists = ["as", "while", "break", "sse", "Python"]
 for x in keywordLists:
     print(f"{x:>8s} {keyword.iskeyword(x)}")
-
 
 """ 檢測按鍵
 import keyboard
@@ -265,36 +262,6 @@ print("P123456789 城市：{}".format(city))
 
 print("------------------------------------------------------------")  # 60個
 
-print("cnlunardate：農曆日期")
-
-# pip install cnlunardate
-from cnlunardate import cnlunardate
-from datetime import date
-
-year = 2023  # @param {type:'slider', min:1950, max:2020}
-month = 2  # @param {type:'slider', min:1, max:12}
-try:
-    cnlunardate(year, month, 1, True)
-    print("農曆 {} 年 {} 月「是」閏月。".format(year, month))
-except:
-    print("農曆 {} 年 {} 月「不是」閏月。".format(year, month))
-
-print(cnlunardate.fromsolardate(date(1974, 9, 24)))
-print(cnlunardate.fromsolardate(date(2006, 3, 11)))
-print(cnlunardate.fromsolardate(date(2023, 9, 20)))
-
-print(cnlunardate(2017, 9, 1).tosolardate())
-print(cnlunardate(2017, 6, 10, True).tosolardate())
-print(cnlunardate(2017, 6, 10, False).tosolardate())
-
-print(cnlunardate(2017, 6, 1, False).toordinal())
-
-n1 = cnlunardate(2017, 6, 1, False).toordinal()
-n2 = cnlunardate(2015, 10, 12, False).toordinal()
-print(n1 - n2)
-
-print("------------------------------------------------------------")  # 60個
-
 print("chardet：檔案編碼格式")
 
 import chardet
@@ -312,7 +279,7 @@ for f in files:
     text = open(f, "rb").read()
     codetype = chardet.detect(text)
     print("{} 編碼格式：{}".format(f, codetype))
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 print("查找wikipedia上的資料...")
@@ -338,26 +305,6 @@ import send2trash
 
 filename = "picture1cccc.jpg"
 send2trash.send2trash(filename)
-
-print("------------------------------------------------------------")  # 60個
-
-from deep_translator import GoogleTranslator
-
-# 要翻譯的文本
-text = "早安"
-
-# 翻譯成英文
-translator = GoogleTranslator(source="auto", target="en")
-translation_en = translator.translate(text)
-print("英文:", translation_en)
-
-# 翻譯成日文, 另一種寫法
-translation_ja = GoogleTranslator(source="auto", target="ja").translate(text)
-print("日文:", translation_ja)
-
-# 翻譯成韓文
-translation_ko = GoogleTranslator(source="auto", target="ko").translate(text)
-print("韓文:", translation_ko)
 
 print("------------------------------------------------------------")  # 60個
 

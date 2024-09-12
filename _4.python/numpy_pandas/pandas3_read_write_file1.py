@@ -847,7 +847,6 @@ df1 = pd.read_csv("tmp.csv")
 print(df1.info())
 print(df1)
 
-'''
 print("------------------------------------------------------------")  # 60個
 
 filename = "data/animals_big5.csv"
@@ -918,6 +917,36 @@ df = pd.DataFrame(
     {"中文名": ["鼠", "牛", "虎", "兔"], "英文名": ["mouse", "ox", "tiger", "rabbit"]}
 )
 print(df[["中文名", "英文名"]])
+'''
+print("------------------------------------------------------------")  # 60個
+
+import pandas as pd
+cities = pd.read_csv("data/california_cities.csv")
+
+print(cities.head())
+
+# extracting the data we ar interested in
+latitude, longitude = cities["latd"], cities["longd"]
+population, area = cities["population_total"], cities["area_total_km2"]
+
+# to scatter the points, using size and color but without label
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn
+seaborn.set()
+plt.scatter(longitude, latitude, label=None, c=np.log10(population),
+            cmap='viridis', s=area, linewidth=0, alpha=0.5)
+#plt.axis(aspect='equal') NG
+plt.xlabel('Longitude')
+plt.ylabel('Longitude')
+plt.colorbar(label='log$_{10}$(population)')
+plt.clim(3, 7)
+# now we will craete a legend, we will plot empty lists with the desired size and label
+for area in [100, 300, 500]:
+    plt.scatter([], [], c='k', alpha=0.3, s=area, label=str(area) + 'km$^2$')
+plt.legend(scatterpoints=1, frameon=False, labelspacing=1, title='City Areas')
+plt.title("Area and Population of California Cities")
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -939,9 +968,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-
+sys.exit()
 
 df = pd.DataFrame({"Math": [90, 91, 92, 93, 94], "English": np.arange(80, 85, 1)})
 print(df[["Math", "English"]])

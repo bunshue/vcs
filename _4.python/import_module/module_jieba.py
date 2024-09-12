@@ -39,16 +39,13 @@ print("------------------------------------------------------------")  # 60個
 
 # 默認使用精確模式(一般直接使用精確模式即可)
 # 多了 HMM 參數
-print("預設:", " | ".join(jieba.cut(original_text, cut_all=False, HMM=True)))
+print("  xxxx:", " | ".join(jieba.cut(original_text)))
+print("  預設:", " | ".join(jieba.cut(original_text, HMM=True)))
+print("全關閉:", " | ".join(jieba.cut(original_text, HMM=False)))
+print("  預設:", " | ".join(jieba.cut(original_text, cut_all=False, HMM=True)))
 print("全關閉:", " | ".join(jieba.cut(original_text, cut_all=False, HMM=False)))
 print("全關閉:", " | ".join(jieba.cut(original_text, cut_all=True, HMM=True)))
-
-cut_text = jieba.cut(original_text, cut_all=True, HMM=False)
-cut_text = jieba.cut(original_text, cut_all=False, HMM=True)
-
-print("預設:", " | ".join(jieba.cut(original_text, HMM=True)))
-print("全關閉:", " | ".join(jieba.cut(original_text, HMM=False)))
-print("全關閉:", " | ".join(jieba.cut(original_text)))
+print("   xxx:", " | ".join(jieba.cut(original_text, cut_all=True, HMM=False)))
 
 print("------------------------------------------------------------")  # 60個
 
@@ -318,27 +315,22 @@ print("------------------------------------------------------------")  # 60個
 
 #03-jieba-userdict-loadfile.py
 
-import sys
-import jieba
 import jieba.analyse
 
 #original_text = "名偵探柯南是根據日本漫畫家青山剛昌著名原作推理漫畫名偵探柯南改編的動畫作品。"
 
-text = "名偵探柯南是根據日本漫畫家青山剛昌著名原作推理漫畫名偵探柯南改編的動畫作品。"
+original_text = "名偵探柯南是根據日本漫畫家青山剛昌著名原作推理漫畫名偵探柯南改編的動畫作品。"
+print("預設切分, cut_all不寫")
+print(" | ".join(jieba.cut(original_text)))
 
-text = text.replace(" ", "")
-text = text.replace("「", "")
-text = text.replace("」", "")
-text = text.replace("，", "")
-text = text.replace("。", "")
-print('/'.join(jieba.cut(text)))
 print("1 ====================")
-
+print('使用 load_userdict')
 jieba.load_userdict('data/_jieba/userdict.txt')
-print('/'.join(jieba.cut(text)))
-print("2 ====================")
-words = jieba.posseg.cut(text)
+print("預設切分, cut_all不寫")
+print(" | ".join(jieba.cut(original_text)))
 
+print("2 ====================")
+words = jieba.posseg.cut(original_text)
 print(words)
 
 """
@@ -346,13 +338,11 @@ for word, flag in words:
     print('%s, %s' % (word, flag))
 print("3 ====================")
 
-content = text
-
-keywords = jieba.analyse.extract_tags(content, topK = 20, withWeight = True, allowPOS = ())
+keywords = jieba.analyse.extract_tags(original_text, topK = 20, withWeight = True, allowPOS = ())
 for item in keywords:
         print(" %s =  %f "  %  (item[0], item[1]))
 print("4 ====================")
-keywords = jieba.analyse.textrank(content, topK = 20, withWeight = True, allowPOS = ('ns', 'n', 'vn', 'v'))
+keywords = jieba.analyse.textrank(original_text, topK = 20, withWeight = True, allowPOS = ('ns', 'n', 'vn', 'v'))
 for item in keywords:
     print(" %s =  %f " % (item[0].encode('utf_8'), item[1])) 
 """
@@ -360,53 +350,53 @@ print("------------------------------------------------------------")  # 60個
 
 #04-jieba-suggest_freq.py
 
-import jieba
 import jieba.analyse
 
-text = "名偵探柯南是根據日本漫畫家青山剛昌著名原作推理漫畫名偵探柯南改編的動畫作品。"
+original_text = "名偵探柯南是根據日本漫畫家青山剛昌著名原作推理漫畫名偵探柯南改編的動畫作品。"
 
-text=text.replace("，", "")
-print('/'.join(jieba.cut(text)))
+print("預設切分, cut_all不寫")
+print(" | ".join(jieba.cut(original_text)))
 
 """ NG
 jieba.suggest_freq('台中', True)
-print('/'.join(jieba.cut(text)))
+print("預設切分, cut_all不寫")
+print(" | ".join(jieba.cut(original_text)))
 
 jieba.suggest_freq(('名產'), True)
-print('/'.join(jieba.cut(text)))
+print("預設切分, cut_all不寫")
+print(" | ".join(jieba.cut(original_text)))
 
 jieba.suggest_freq(('部落格'), True)
-print('/'.join(jieba.cut(text)))
+print("預設切分, cut_all不寫")
+print(" | ".join(jieba.cut(original_text)))
 
 jieba.suggest_freq(('太陽餅'), True)
-print('/'.join(jieba.cut(text)))
+print("預設切分, cut_all不寫")
+print(" | ".join(jieba.cut(original_text)))
 
 jieba.suggest_freq(('中', '將'), True)
-print('/'.join(jieba.cut(text)))
+print("預設切分, cut_all不寫")
+print(" | ".join(jieba.cut(original_text)))
 """
 
 print("------------------------------------------------------------")  # 60個
 
 #05-jieba-analyse.py
-
-import jieba
 import jieba.analyse
 
-text = "名偵探柯南是根據日本漫畫家青山剛昌著名原作推理漫畫名偵探柯南改編的動畫作品。"
+original_text = "名偵探柯南是根據日本漫畫家青山剛昌著名原作推理漫畫名偵探柯南改編的動畫作品。"
 
 jieba.load_userdict('data/_jieba/userdict.txt')
 
-content = text
+print('default')
 
-print(' default'+'-'*40)
-
-result = jieba.tokenize(content)
+result = jieba.tokenize(original_text)
 for tk in result:
     print("word %s\t\t start: %d \t\t end:%d" % (tk[0],tk[1],tk[2]))
 
-print(' tokenize search'+'-'*40)
+print('tokenize search')
 
-result = jieba.tokenize(content, mode='search')
+result = jieba.tokenize(original_text, mode='search')
 for tk in result:
     print("word %s\t\t start: %d \t\t end:%d" % (tk[0],tk[1],tk[2]))    
 
@@ -414,30 +404,27 @@ print("------------------------------------------------------------")  # 60個
 
 #06-jieba-stopwords.py
 
-import jieba
 import jieba.analyse
 
-text = "名偵探柯南是根據日本漫畫家青山剛昌著名原作推理漫畫名偵探柯南改編的動畫作品。"
+original_text = "名偵探柯南是根據日本漫畫家青山剛昌著名原作推理漫畫名偵探柯南改編的動畫作品。"
 
 jieba.load_userdict('data/_jieba/userdict.txt')
 
-content = text
-
-print(",".join(jieba.analyse.extract_tags(text, topK=10)))
+print(",".join(jieba.analyse.extract_tags(original_text, topK=10)))
 jieba.analyse.set_stop_words("data/_jieba/stop_words.txt")
-print(",".join(jieba.analyse.extract_tags(text, topK=10)))
+print(",".join(jieba.analyse.extract_tags(original_text, topK=10)))
 
 """ allowPOS NG
-print(' default idf'+'-'*40)
-keywords = jieba.analyse.extract_tags(text, topK=10, withWeight=True, allowPOS=()) #topK=TF/IDF 
+print('default idf')
+keywords = jieba.analyse.extract_tags(original_text, topK=10, withWeight=True, allowPOS=()) #topK=TF/IDF 
 print(" topK=TF/IDF , TF=%d" % len(keywords))
 for item in keywords:
         print(" %s =  %f "  %  (item[0], item[1]))      # 分別為關鍵詞和相應的權重
 
 
-print('set_idf_path'+'-'*40)
+print('set_idf_path')
 jieba.analyse.set_idf_path("data/_jieba/idf.txt")
-keywords = jieba.analyse.extract_tags(text, topK=10, withWeight=True, allowPOS=())
+keywords = jieba.analyse.extract_tags(original_text, topK=10, withWeight=True, allowPOS=())
 for item in keywords:
         print("  %s   TF=%f , IDF=%f  topK=%f" % (item[0], item[1], len(keywords)*item[1], item[1]*len(keywords)*item[1]))      # 分別為關鍵詞和相應的權重
 """
@@ -445,19 +432,20 @@ print("------------------------------------------------------------")  # 60個
 
 #07-jieba-sort.py
 
-import jieba
 import jieba.analyse
 
-text = "名偵探柯南是根據日本漫畫家青山剛昌著名原作推理漫畫名偵探柯南改編的動畫作品。"
+original_text = "名偵探柯南是根據日本漫畫家青山剛昌著名原作推理漫畫名偵探柯南改編的動畫作品。"
 
-text=text.replace('\n', '')
+print('set_stop_words')
 jieba.analyse.set_stop_words("data/_jieba/stop_words.txt")
-print('/'.join(jieba.cut(text)))
+print("預設切分, cut_all不寫")
+print(" | ".join(jieba.cut(original_text)))
+
 print("====================")
 jieba.load_userdict('data/_jieba/userdict.txt')
 
 dic={}
-for ele in jieba.cut(text):
+for ele in jieba.cut(original_text):
     if ele not in dic:
         dic[ele]=1
     else:
@@ -470,11 +458,12 @@ print("------------------------------------------------------------")  # 60個
 
 #08-jieba-http.py
 
-import jieba
 import jieba.analyse
 import urllib.request as httplib
 
 print('等待久')
+
+sys.exit()
 
 try:
     url="http://www.powenko.com/wordpress/"
@@ -532,4 +521,15 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+
+#整理資料用
+
+original_text = original_text.replace(" ", "")
+original_text = original_text.replace("「", "")
+original_text = original_text.replace("」", "")
+original_text = original_text.replace("，", "")
+original_text = original_text.replace("。", "")
+
+original_text=original_text.replace('\n', '')
+original_text=original_text.replace("，", "")
 

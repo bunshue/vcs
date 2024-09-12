@@ -4,7 +4,7 @@ import time
 import datetime
 
 print('------------------------------------------------------------')	#60個
-
+'''
 text = "2012-09-20"
 y = datetime.datetime.strptime(text, "%Y-%m-%d")
 z = datetime.datetime.now()
@@ -929,8 +929,39 @@ for daynumber in range(totaldays):
     if date.weekday() < 6:
         dates.append(date.strftime('%Y%m%d'))
 print(dates)
-
+'''
 print('------------------------------------------------------------')	#60個
+
+print("cnlunardate：農曆日期")
+
+# pip install cnlunardate
+from cnlunardate import cnlunardate
+from datetime import date
+
+year = 2023  # @param {type:'slider', min:1950, max:2020}
+month = 2  # @param {type:'slider', min:1, max:12}
+try:
+    cnlunardate(year, month, 1, True)
+    print("農曆 {} 年 {} 月「是」閏月。".format(year, month))
+except:
+    print("農曆 {} 年 {} 月「不是」閏月。".format(year, month))
+
+print(cnlunardate.fromsolardate(date(1974, 9, 24)))
+print(cnlunardate.fromsolardate(date(2006, 3, 11)))
+print(cnlunardate.fromsolardate(date(2023, 9, 20)))
+
+print(cnlunardate(2017, 9, 1).tosolardate())
+print(cnlunardate(2017, 6, 10, True).tosolardate())
+print(cnlunardate(2017, 6, 10, False).tosolardate())
+
+print(cnlunardate(2017, 6, 1, False).toordinal())
+
+n1 = cnlunardate(2017, 6, 1, False).toordinal()
+n2 = cnlunardate(2015, 10, 12, False).toordinal()
+print(n1 - n2)
+
+print("------------------------------------------------------------")  # 60個
+
 
 
 
