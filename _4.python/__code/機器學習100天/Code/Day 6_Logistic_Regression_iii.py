@@ -11,7 +11,7 @@ dataset = pd.read_csv('../datasets/Social_Network_Ads.csv')
 X = dataset.iloc[:, [2, 3]].values
 Y = dataset.iloc[:,4].values
 
-
+# Splitting the dataset into the Training set and Test set
 #将数据集分成训练集和测试集
 
 from sklearn.model_selection import train_test_split
@@ -19,6 +19,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size = 0.25, rand
 
 #特征缩放
 
+# Feature Scaling
 from sklearn.preprocessing import StandardScaler
 sc = StandardScaler()
 X_train = sc.fit_transform(X_train)
@@ -29,13 +30,13 @@ X_test = sc.transform(X_test)
 #该项工作的库将会是一个线性模型库，之所以被称为线性是因为逻辑回归是一个线性分类器，这意味着我们在二维空间中，我们两类用户（购买和不购买）将被一条直线分割。然后导入逻辑回归类。下一步我们将创建该类的对象，它将作为我们训练集的分类器。
 
 #将逻辑回归应用于训练集
-
+# Fitting Logistic Regression to the Training set
 from sklearn.linear_model import LogisticRegression
 classifier = LogisticRegression()
 classifier.fit(X_train, y_train)
 
 
-
+# Predicting the Test set results
 #第3步：预测
 #预测测试集结果
 
@@ -45,9 +46,13 @@ y_pred = classifier.predict(X_test)
 
 #我们预测了测试集。 现在我们将评估逻辑回归模型是否正确的学习和理解。因此这个混淆矩阵将包含我们模型的正确和错误的预测。
 
+# Making the Confusion Matrix
 #生成混淆矩阵
 from sklearn.metrics import confusion_matrix
+from sklearn.metrics import classification_report
 cm = confusion_matrix(y_test, y_pred)
+print(cm)  # print confusion_matrix
+print(classification_report(y_test, y_pred))   # print classification report
 
 #可视化
 

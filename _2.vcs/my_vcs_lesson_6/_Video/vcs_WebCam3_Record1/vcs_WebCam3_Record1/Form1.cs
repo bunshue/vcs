@@ -477,6 +477,120 @@ namespace vcs_WebCam3_Record1
             pictureBox1.Image = vcs_WebCam3_Record1.Properties.Resources.ims_logo_720x480;
         }
 
+        //錄影 ST
+        void Start_Record()
+        {
+            if (flag_webcam_start == false)    //如果webcam沒啟動
+            {
+                show_main_message("無相機 / 相機未啟動, 無錄影", S_OK, 20);
+                return;
+            }
+
+            if (flag_limit_recording_time == true)
+            {
+                richTextBox1.Text += "已在限時錄影\n";
+                return;
+            }
+
+            if (flag_recording == false)
+            {
+                //開啟錄影模式
+                do_record();
+                flag_recording = true;
+                flag_limit_recording_time = false;
+
+                richTextBox1.Text += "錄影開始, 時間 : " + DateTime.Now.ToString() + "\n";
+                recording_time_st = DateTime.Now;
+                bt_record_start.Enabled = false;
+                bt_record_stop.Enabled = true;
+                bt_stop.Enabled = false;
+                bt_record_limit_time.Enabled = false;
+            }
+            else
+            {
+                richTextBox1.Text += "已在錄影\n";
+            }
+        }
+
+        //限時錄影 ST
+        private void Start_Record_Limit_Time0()
+        {
+            if (flag_webcam_start == false)    //如果webcam沒啟動
+            {
+                show_main_message("無相機 / 相機未啟動, 無錄影", S_OK, 20);
+                return;
+            }
+
+            if (flag_recording == true)
+            {
+                richTextBox1.Text += "已在錄影\n";
+                return;
+            }
+
+            if (flag_limit_recording_time == false)
+            {
+                //開啟錄影模式
+                do_record();
+                flag_recording = true;
+                flag_limit_recording_time = true;
+
+                richTextBox1.Text += "錄影開始, 時間 : " + DateTime.Now.ToString() + "\n";
+                recording_time_st = DateTime.Now;
+                bt_record_start.Enabled = false;
+                bt_record_stop.Enabled = true;
+                bt_stop.Enabled = false;
+            }
+            else
+            {
+                richTextBox1.Text += "已在限時錄影\n";
+            }
+        }
+
+        void Start_Record_Limit_Time()
+        {
+            limit_record_time_sec = (int)numericUpDown_limit_record_time.Value;
+            richTextBox1.Text += "限時錄影 " + limit_record_time_sec.ToString() + " 秒\n";
+            Properties.Settings.Default.limit_record_time_sec = limit_record_time_sec;
+            Properties.Settings.Default.Save();
+            Start_Record_Limit_Time0();
+        }
+
+        //錄影 SP
+        void Stop_Record()
+        {
+            if (flag_recording == true)
+            {
+                bt_record_stop.Text = "停止錄影";
+                bt_record_stop.BackColor = Color.Red;
+
+                //錄影完需將影像停止不然會出錯
+                flag_recording = false;
+
+                delay(250);//0.5秒
+
+                writer.Close();
+
+                richTextBox1.Text += "錄影結束, 時間 : " + DateTime.Now.ToString() + "\n";
+                richTextBox1.Text += "錄影時間 : " + (DateTime.Now - recording_time_st).TotalSeconds.ToString("0.00") + " 秒\n";
+                richTextBox1.Text += "錄影時間 : " + (DateTime.Now - recording_time_st).ToString() + "\n";
+                richTextBox1.Text += "檔案 : " + recording_filename + "\n\n";
+
+                flag_limit_recording_time = false;
+                flag_limit_recording_time_ims = false;
+                bt_record_start.Enabled = true;
+                bt_record_stop.Enabled = false;
+                bt_stop.Enabled = true;
+                bt_record_limit_time.Enabled = true;
+
+                bt_record_stop.Text = "錄影 SP";
+                bt_record_stop.BackColor = SystemColors.ControlLight;
+            }
+            else
+            {
+                richTextBox1.Text += "並沒有在錄影\n";
+            }
+        }
+
         public Bitmap bm = null;
         //int frame_cnt = 0;          //每多少張做一個計算
         int frame_count = 0;        //計算fps用
@@ -532,6 +646,8 @@ namespace vcs_WebCam3_Record1
 
             if (flag_recording == true)
             {
+                g.DrawRectangle(new Pen(Color.Red, 4), 2, 2, 640 - 4, 480 - 4);
+
                 TimeSpan diff = DateTime.Now - recording_time_st;
                 int ms = diff.Milliseconds;
                 if (ms < 500)
@@ -539,7 +655,7 @@ namespace vcs_WebCam3_Record1
                     int ww = 22;
                     try
                     {
-                        g.FillEllipse(Brushes.Red, 640 - BORDER - ww, BORDER + 4, ww, ww);
+                        g.FillEllipse(Brushes.Red, 640 - BORDER - ww, BORDER, ww, ww);
                     }
                     catch (Exception ex)
                     {
@@ -613,119 +729,19 @@ namespace vcs_WebCam3_Record1
             }
         }
 
-        //錄影 ST
         private void bt_record_start_Click(object sender, EventArgs e)
         {
-            if (flag_webcam_start == false)    //如果webcam沒啟動
-            {
-                show_main_message("無相機 / 相機未啟動, 無錄影", S_OK, 20);
-                return;
-            }
-
-            if (flag_limit_recording_time == true)
-            {
-                richTextBox1.Text += "已在限時錄影\n";
-                return;
-            }
-
-            if (flag_recording == false)
-            {
-                //開啟錄影模式
-                do_record();
-                flag_recording = true;
-                flag_limit_recording_time = false;
-
-                richTextBox1.Text += "錄影開始, 時間 : " + DateTime.Now.ToString() + "\n";
-                recording_time_st = DateTime.Now;
-                bt_record_start.Enabled = false;
-                bt_record_stop.Enabled = true;
-                bt_stop.Enabled = false;
-                bt_record_limit_time.Enabled = false;
-            }
-            else
-            {
-                richTextBox1.Text += "已在錄影\n";
-            }
+            Start_Record();
         }
 
-        //限時錄影 ST
-        private void do_limit_time_record()
-        {
-            if (flag_webcam_start == false)    //如果webcam沒啟動
-            {
-                show_main_message("無相機 / 相機未啟動, 無錄影", S_OK, 20);
-                return;
-            }
-
-            if (flag_recording == true)
-            {
-                richTextBox1.Text += "已在錄影\n";
-                return;
-            }
-
-            if (flag_limit_recording_time == false)
-            {
-                //開啟錄影模式
-                do_record();
-                flag_recording = true;
-                flag_limit_recording_time = true;
-
-                richTextBox1.Text += "錄影開始, 時間 : " + DateTime.Now.ToString() + "\n";
-                recording_time_st = DateTime.Now;
-                bt_record_start.Enabled = false;
-                bt_record_stop.Enabled = true;
-                bt_stop.Enabled = false;
-            }
-            else
-            {
-                richTextBox1.Text += "已在限時錄影\n";
-            }
-        }
-
-        //錄影 SP
         private void bt_record_stop_Click(object sender, EventArgs e)
         {
-            if (flag_recording == true)
-            {
-                bt_record_stop.Text = "停止錄影";
-                bt_record_stop.BackColor = Color.Red;
-
-                //錄影完需將影像停止不然會出錯
-                flag_recording = false;
-
-                delay(250);//0.5秒
-
-                writer.Close();
-
-                richTextBox1.Text += "錄影結束, 時間 : " + DateTime.Now.ToString() + "\n";
-                richTextBox1.Text += "錄影時間 : " + (DateTime.Now - recording_time_st).TotalSeconds.ToString("0.00") + " 秒\n";
-                richTextBox1.Text += "錄影時間 : " + (DateTime.Now - recording_time_st).ToString() + "\n";
-                richTextBox1.Text += "檔案 : " + recording_filename + "\n\n";
-
-                flag_limit_recording_time = false;
-                flag_limit_recording_time_ims = false;
-                bt_record_start.Enabled = true;
-                bt_record_stop.Enabled = false;
-                bt_stop.Enabled = true;
-                bt_record_limit_time.Enabled = true;
-
-                bt_record_stop.Text = "錄影 SP";
-                bt_record_stop.BackColor = SystemColors.ControlLight;
-            }
-            else
-            {
-                richTextBox1.Text += "並沒有在錄影\n";
-            }
+            Stop_Record();
         }
 
         private void bt_record_limit_time_Click(object sender, EventArgs e)
         {
-            //限時錄影
-            limit_record_time_sec = (int)numericUpDown_limit_record_time.Value;
-            richTextBox1.Text += "限時錄影 " + limit_record_time_sec.ToString() + " 秒\n";
-            Properties.Settings.Default.limit_record_time_sec = limit_record_time_sec;
-            Properties.Settings.Default.Save();
-            do_limit_time_record();
+            Start_Record_Limit_Time();
         }
 
         private void bt_clear2_Click(object sender, EventArgs e)
@@ -1034,7 +1050,7 @@ namespace vcs_WebCam3_Record1
                 richTextBox1.Text += "限時錄影 " + limit_record_time_sec.ToString() + " 秒\n";
                 Properties.Settings.Default.limit_record_time_sec = limit_record_time_sec;
                 Properties.Settings.Default.Save();
-                do_limit_time_record();
+                Start_Record_Limit_Time0();
             }
         }
     }

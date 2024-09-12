@@ -117,7 +117,7 @@ namespace vcs_WebCam3_Record2
             bt_snapshot.Location = new Point(x_st + dx * 4, y_st + dy * 0);
             bt_record_start.Location = new Point(x_st + dx * 5, y_st + dy * 0);
             bt_record_stop.Location = new Point(x_st + dx * 6, y_st + dy * 0);
-            bt_open_folder.Location = new Point(x_st + dx * 7+10, y_st + dy * 0);
+            bt_open_folder.Location = new Point(x_st + dx * 7 + 10, y_st + dy * 0);
             bt_open_folder.BackgroundImage = Properties.Resources.folder_open;
 
             lb_fps.Location = new Point(x_st + dx * 5 + 40, y_st + dy * 1);
@@ -272,6 +272,66 @@ namespace vcs_WebCam3_Record2
             pictureBox1.Image = vcs_WebCam3_Record2.Properties.Resources.ims_logo_720x480;
         }
 
+        //錄影 ST
+        void Start_Record()
+        {
+            if (flag_webcam_start == false)    //如果webcam沒啟動
+            {
+                show_main_message("無相機 / 相機未啟動, 無錄影", S_OK, 20);
+                return;
+            }
+
+            if (flag_recording == false)
+            {
+                //開啟錄影模式
+                do_record();
+                flag_recording = true;
+
+                richTextBox1.Text += "錄影開始, 時間 : " + DateTime.Now.ToString() + "\n";
+                recording_time_st = DateTime.Now;
+                bt_record_start.Enabled = false;
+                bt_record_stop.Enabled = true;
+                bt_stop.Enabled = false;
+            }
+            else
+            {
+                richTextBox1.Text += "已在錄影\n";
+            }
+        }
+
+        //錄影 SP
+        void Stop_Record()
+        {
+            if (flag_recording == true)
+            {
+                bt_record_stop.Text = "停止錄影";
+                bt_record_stop.BackColor = Color.Red;
+
+                //錄影完需將影像停止不然會出錯
+                flag_recording = false;
+
+                delay(250);//0.5秒
+
+                writer.Close();
+
+                richTextBox1.Text += "錄影結束, 時間 : " + DateTime.Now.ToString() + "\n";
+                richTextBox1.Text += "錄影時間 : " + (DateTime.Now - recording_time_st).TotalSeconds.ToString("0.00") + " 秒\n";
+                richTextBox1.Text += "錄影時間 : " + (DateTime.Now - recording_time_st).ToString() + "\n";
+                richTextBox1.Text += "檔案 : " + recording_filename + "\n\n";
+
+                bt_record_start.Enabled = true;
+                bt_record_stop.Enabled = false;
+                bt_stop.Enabled = true;
+
+                bt_record_stop.Text = "錄影 SP";
+                bt_record_stop.BackColor = SystemColors.ControlLight;
+            }
+            else
+            {
+                richTextBox1.Text += "並沒有在錄影\n";
+            }
+        }
+
         public Bitmap bm = null;
         //int frame_cnt = 0;          //每多少張做一個計算
         int frame_count = 0;        //計算fps用
@@ -399,64 +459,14 @@ namespace vcs_WebCam3_Record2
             }
         }
 
-        //錄影 ST
         private void bt_record_start_Click(object sender, EventArgs e)
         {
-            if (flag_webcam_start == false)    //如果webcam沒啟動
-            {
-                show_main_message("無相機 / 相機未啟動, 無錄影", S_OK, 20);
-                return;
-            }
-
-            if (flag_recording == false)
-            {
-                //開啟錄影模式
-                do_record();
-                flag_recording = true;
-
-                richTextBox1.Text += "錄影開始, 時間 : " + DateTime.Now.ToString() + "\n";
-                recording_time_st = DateTime.Now;
-                bt_record_start.Enabled = false;
-                bt_record_stop.Enabled = true;
-                bt_stop.Enabled = false;
-            }
-            else
-            {
-                richTextBox1.Text += "已在錄影\n";
-            }
+            Start_Record();
         }
 
-        //錄影 SP
         private void bt_record_stop_Click(object sender, EventArgs e)
         {
-            if (flag_recording == true)
-            {
-                bt_record_stop.Text = "停止錄影";
-                bt_record_stop.BackColor = Color.Red;
-
-                //錄影完需將影像停止不然會出錯
-                flag_recording = false;
-
-                delay(250);//0.5秒
-
-                writer.Close();
-
-                richTextBox1.Text += "錄影結束, 時間 : " + DateTime.Now.ToString() + "\n";
-                richTextBox1.Text += "錄影時間 : " + (DateTime.Now - recording_time_st).TotalSeconds.ToString("0.00") + " 秒\n";
-                richTextBox1.Text += "錄影時間 : " + (DateTime.Now - recording_time_st).ToString() + "\n";
-                richTextBox1.Text += "檔案 : " + recording_filename + "\n\n";
-
-                bt_record_start.Enabled = true;
-                bt_record_stop.Enabled = false;
-                bt_stop.Enabled = true;
-
-                bt_record_stop.Text = "錄影 SP";
-                bt_record_stop.BackColor = SystemColors.ControlLight;
-            }
-            else
-            {
-                richTextBox1.Text += "並沒有在錄影\n";
-            }
+            Stop_Record();
         }
 
         int min_old = 0;
@@ -662,6 +672,5 @@ namespace vcs_WebCam3_Record2
                 }
             }
         }
-
     }
 }

@@ -18,6 +18,9 @@ print(dataset.head(30))
 
 #这里我们需要使用pandas的iloc(区分于loc根据index来索引，iloc利用行号来索引)方法来对数据进行处理，第一个参数为行号，:表示全部行，第二个参数 ：1表示截到第1列(也就是取第0列)
 
+#X = dataset.iloc[ : ,   : 1 ].values
+#Y = dataset.iloc[ : , 1 ].values
+
 X = dataset.iloc[ 0: 25,   : 1 ].values
 Y = dataset.iloc[ 0: 25, -1: ].values
 print("X:",X)
@@ -35,7 +38,7 @@ print(Y_train,Y_test)
 
 
 #训练线性回归
-
+# Fitting Simple Linear Regression Model to the training set
 from sklearn.linear_model import LinearRegression
 #使用训练集对模型进行训练
 regressor = LinearRegression()
@@ -52,12 +55,16 @@ print(Y_test)
 plt.scatter(X_train , Y_train, color = 'red')
 #线图
 plt.plot(X_train , regressor.predict(X_train), 'bo-')
+#plt.plot(X_train , regressor.predict(X_train), color ='blue')
+
 plt.show()
 
 #散点图
 plt.scatter(X_test , Y_test, color = 'red')
 #线图
 plt.plot(X_test ,Y_pred, 'bo-')
+#plt.plot(X_test , regressor.predict(X_test), color ='blue')
+
 plt.show()
 
 

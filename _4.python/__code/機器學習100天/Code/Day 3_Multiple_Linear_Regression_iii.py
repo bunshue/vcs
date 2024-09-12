@@ -28,6 +28,7 @@ print(X)
 
 #将类别数据数字化
 
+# Encoding Categorical data
 from sklearn.preprocessing import LabelEncoder, OneHotEncoder
 from sklearn.compose import ColumnTransformer 
 labelencoder = LabelEncoder()
@@ -60,12 +61,14 @@ print(X[:10])
 
 """
 
+# Avoiding Dummy Variable Trap
 X1 = X[: , 1:]
 
 print(X1)
 print(X)
 
 #拆分数据集为训练集和测试集
+# Splitting the dataset into the Training set and Test set
 from sklearn.model_selection import train_test_split
 X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size = 0.2, random_state = 0)
 X1_train, X1_test, Y1_train, Y1_test = train_test_split(X1, Y, test_size = 0.2, random_state = 0)
@@ -76,6 +79,7 @@ print(Y1_test)
 
 
 #第2步：在训练集上训练多元线性回归模型
+# Fitting Multiple Linear Regression to the Training set
 from sklearn.linear_model import LinearRegression
 regressor = LinearRegression()
 regressor.fit(X_train, Y_train)
@@ -87,6 +91,7 @@ LinearRegression()
 
 #第3步：在测试集上预测结果
 
+# Predicting the Test set results
 y_pred = regressor.predict(X_test)
 y1_pred = regressor1.predict(X1_test)
 
@@ -98,3 +103,7 @@ print(y1_pred)
 
 
 
+
+# regression evaluation
+from sklearn.metrics import r2_score
+print(r2_score(Y_test, y_pred))

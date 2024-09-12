@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 
 
 #要先对数据集中的图片进行处理，可能需要进行的任务有图像尺寸统一、颜色处理等
-'''
+
 import os
 import cv2
 from tqdm import tqdm
@@ -194,9 +194,6 @@ model.fit(X, y, batch_size=32, epochs=3, validation_split=0.3)
 
 
 """
-'''
-
-
 
 
 #这是Python，TensorFlow和Keras教程系列的深度学习基础知识的第4部分。

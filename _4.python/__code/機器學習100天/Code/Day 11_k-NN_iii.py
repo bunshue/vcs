@@ -19,18 +19,19 @@ X = dataset.iloc[:, [2, 3]].values
 y = dataset.iloc[:, 4].values
 
 #第三步：将数据划分成训练集和测试集
-
+# Splitting the dataset into the Training set and Test set
 from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.25, random_state = 0)
 
 #第四步：特征缩放
-
+# Feature Scaling
 from sklearn.preprocessing import StandardScaler
 sc = StandardScaler()
 X_train = sc.fit_transform(X_train)
 X_test = sc.transform(X_test)
 
 #第五步：使用K-NN对训练集数据进行训练
+# Fitting K-NN to the Training set
 #从sklearn的neighbors类中导入KNeighborsClassifier学习器
 
 from sklearn.neighbors import KNeighborsClassifier
@@ -45,19 +46,21 @@ KNeighborsClassifier(algorithm='auto', leaf_size=30, metric='minkowski',
            weights='uniform')
 
 #第六步：对测试集进行预测
+# Predicting the Test set results
 
 y_pred = classifier.predict(X_test)
 print(y_pred)
 
 
 #第七步：生成混淆矩阵
-
+# Making the Confusion Matrix
 #混淆矩阵可以对一个分类器性能进行分析，由此可以计算出许多指标，例如：ROC曲线、正确率等
 
 from sklearn.metrics import confusion_matrix
+from sklearn.metrics import classification_report
 cm = confusion_matrix(y_test, y_pred)
 print(cm)
-
+print(classification_report(y_test, y_pred))
 
 """
 

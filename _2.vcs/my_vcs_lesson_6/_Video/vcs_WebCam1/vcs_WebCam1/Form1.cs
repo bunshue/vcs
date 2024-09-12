@@ -69,6 +69,7 @@ namespace vcs_WebCam1  //以此為準
 
         void show_item_location()
         {
+            pictureBox1.Paint += new PaintEventHandler(DrawMessage);
             pictureBox1.Size = new Size(W_pictureBox1, H_pictureBox1);
             pictureBox1.Location = new Point(BORDER, BORDER);
 
@@ -90,7 +91,17 @@ namespace vcs_WebCam1  //以此為準
             this.ClientSize = new Size(BORDER + W_pictureBox1 + BORDER + W_richTextBox1 + BORDER, BORDER + H_pictureBox1 + BORDER + H_groupBox1 + BORDER);
         }
 
-        void Init_WebcamSetup() //最小化WebCam設定
+        private void DrawMessage(object sender, PaintEventArgs e)
+        {
+            //顯示時間
+            string drawDate = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+            SolidBrush sb = new SolidBrush(Color.Green);
+            Font f = new Font("Arial", 6, FontStyle.Bold, GraphicsUnit.Millimeter);
+            e.Graphics.DrawString(drawDate, f, sb, new Point(BORDER, BORDER));
+        }
+
+        //最小化WebCam設定
+        void Init_WebcamSetup()
         {
             USBWebcams = new FilterInfoCollection(FilterCategory.VideoInputDevice);
             if (USBWebcams.Count > 0)
@@ -151,44 +162,11 @@ namespace vcs_WebCam1  //以此為準
                 //pictureBox1.Image = (Bitmap)eventArgs.Frame.Clone();
                 bm = (Bitmap)eventArgs.Frame.Clone();
                 //bm.RotateFlip(RotateFlipType.RotateNoneFlipY);    //反轉
-                //pictureBox1.Image = bm;
-            }
-            catch (Exception ex)
-            {
-                richTextBox1.Text += "xxx錯誤訊息n : " + ex.Message + "\n";
-            }
-
-            Graphics g = Graphics.FromImage(bm);
-
-            int w;
-            int h;
-            try
-            {
-                w = bm.Width;
-                h = bm.Height;
-            }
-            catch (Exception ex)
-            {
-                richTextBox1.Text += "xxx錯誤訊息m : " + ex.Message + "\n";
-                GC.Collect();       //回收資源
-                return;
-            }
-
-            //顯示時間
-            string drawDate = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
-            SolidBrush sb = new SolidBrush(Color.Yellow);
-            Font f = new Font("Arial", 6, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
-            int x_st = 10;
-            int y_st = 10;
-            g.DrawString(drawDate, f, sb, x_st, y_st);
-
-            try
-            {
                 pictureBox1.Image = bm;
             }
             catch (Exception ex)
             {
-                richTextBox1.Text += "xxx錯誤訊息a : " + ex.Message + "\n";
+                richTextBox1.Text += "xxx錯誤訊息n : " + ex.Message + "\n";
             }
             GC.Collect();       //回收資源
         }
@@ -209,7 +187,6 @@ namespace vcs_WebCam1  //以此為準
                     lb_fps.Text = "";
                 }
             }
-
         }
 
         void save_image_file()
@@ -224,7 +201,7 @@ namespace vcs_WebCam1  //以此為準
                 Graphics g = Graphics.FromImage(bitmap1);
                 Pen p = new Pen(Color.Red, 1);
                 SolidBrush drawBrush = new SolidBrush(Color.Yellow);
-                Font drawFont = new Font("Arial", 6, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
+                Font drawFont = new Font("Arial", 6, FontStyle.Bold, GraphicsUnit.Millimeter);
                 pHdc = g.GetHdc();
 
                 g.ReleaseHdc();
@@ -307,7 +284,7 @@ namespace vcs_WebCam1  //以此為準
                     bt_clear.Visible = true;
                 }
                 */
-                this.BackColor = System.Drawing.SystemColors.ControlLight;
+                this.BackColor = SystemColors.ControlLight;
                 //最大化螢幕
                 this.FormBorderStyle = FormBorderStyle.Sizable;
                 this.WindowState = FormWindowState.Normal;

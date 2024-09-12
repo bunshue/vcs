@@ -1,5 +1,3 @@
-#!/usr/bin/python
-
 from kafka import KafkaConsumer;
 
 
@@ -22,3 +20,4 @@ consumer.subscribe("testapplog_plm-prototype");
 
 for msg in consumer:
     print(msg.value)
+

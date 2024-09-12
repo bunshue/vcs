@@ -25,9 +25,9 @@ _4.python/import_module/pyinstaller/ims_qc_database/T 060201 01 環境溫濕度�
 _4.python/import_module/pyinstaller/ims_qc_database/ims_qc_database.spec
 _4.python/sqlite/ims_sql/*.sqlite
 _4.python/import_module/pyinstaller/ims_qc_database/QC/QC_data/*
-_4.python/import_module/Python-3.7.17.tar.xz
 _big_files/*
 _vcs_new_test1/*
+_整理資料/*
 
 # C 相關產出之檔案
 *.so
