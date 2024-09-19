@@ -8,8 +8,11 @@ import webbrowser
 import pandas as pd
 import holoviews as hv
 from holoviews import opts
+
 hv.extension('bokeh')
-from bokeh.sampledata.us_counties import data as counties
+
+# import fail
+#from bokeh.sampledata.us_counties import data as counties
 
 df = pd.read_csv('census_data_popl_2010.csv', encoding="utf-8")
 
@@ -57,6 +60,7 @@ popl_dens_dict = dict(zip(tuple_list, den))
 
 EXCLUDED = ('ak', 'hi', 'pr', 'gu', 'vi', 'mp', 'as')
 
+# fail here
 counties = [dict(county, Density=popl_dens_dict[cid])
             for cid, county in counties.items()
             if county["state"] not in EXCLUDED]
@@ -78,6 +82,6 @@ choropleth.opts(opts.Polygons(logz=True,
                )
 
 # 儲存區域密度圖，並另開新分頁顯示
-hv.save(choropleth, 'choropleth.html', backend='bokeh')
-url = abspath('choropleth.html')
+hv.save(choropleth, 'tmp_choropleth.html', backend='bokeh')
+url = abspath('tmp_choropleth.html')
 webbrowser.open(url)

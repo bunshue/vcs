@@ -1,18 +1,7 @@
 import os
-import pyttsx3
 import cv2 as cv
-from playsound import playsound
 
 xml_filename = r'C:\_git\vcs\_4.python\_data\haarcascade_frontalface_default.xml'
-
-# 設定音訊
-engine = pyttsx3.init()
-engine.setProperty('rate', 145) # 設定語速
-engine.setProperty('volume', 1.0) # 設定音量 (1.0 為最大值)
-
-# 設定音訊檔案路徑
-root_dir = os.path.abspath('.')
-tone_path = os.path.join(root_dir, 'tone.wav')
 
 # 設定 Haar 分類器檔案路徑
 face_detector = cv.CascadeClassifier(xml_filename)
@@ -25,11 +14,11 @@ cap.set(3, 640)  # 畫面寬度
 cap.set(4, 480)  # 畫面高度
 
 # 向使用者解釋程序
-engine.say("當螢幕提示時，請輸入你的訊息。\
-           然後取下眼鏡，直視攝影鏡頭。\
-           請做出多種不同的表情，包括正常的、快樂的、悲傷的、疲倦的，\
-           直到聽到提示喊停為止。")
-engine.runAndWait()
+print("""當螢幕提示時，請輸入你的訊息。\n
+      然後取下眼鏡，直視攝影鏡頭。\n
+      請做出多種不同的表情，包括正常的、快樂的、悲傷的、疲倦的，\n
+      直到聽到提示喊停為止。""")
+
 name = input("\nEnter last name: ")
 user_id = input("Enter assigned ID Number: ")
 print("\nCapturing face. Look at the camera now!")
@@ -58,6 +47,6 @@ while True:
         break
      
 print("\nImage collection complete. Exiting...")
-playsound(tone_path, block=False)
+
 cap.release()
 cv.destroyAllWindows()

@@ -2,18 +2,7 @@ import os
 import time
 from datetime import datetime
 from playsound import playsound
-import pyttsx3
 import cv2 as cv
-
-# 設定語音引擎
-engine = pyttsx3.init()
-engine.setProperty('rate', 145)  # 設定語速
-engine.setProperty('volume', 1.0)  # 設定音量 (1.0 為最大值)
-
-# 設定音訊檔案路徑
-root_dir = os.path.abspath('.')
-gunfire_path = os.path.join(root_dir, 'gunfire.wav')
-tone_path = os.path.join(root_dir, 'tone.wav')
 
 # 設定 Haar 階層式分類器檔案路徑
 path = "C:/Users/Admin/AppData/Local/Programs/Python/Python310/Lib/site-packages/cv2/data/"
@@ -28,10 +17,9 @@ contents = sorted(os.listdir())
 for image in contents:
     print(f"\nMotion detected...{datetime.now()}")
     discharge_weapon = True
-    engine.say("你已經進入射擊區域。\
+    print("你已經進入射擊區域。\
                請停止腳步，立即把頭轉向槍的位置。 \
                當你聽到聲響，你只有 5 秒鐘的時間能通過。")
-    engine.runAndWait()
     time.sleep(3)
     
     img_gray = cv.imread(image, cv.IMREAD_GRAYSCALE)
@@ -62,7 +50,7 @@ for image in contents:
                 break
             
     if discharge_weapon == False:
-        playsound(tone_path, block=False) # 播放音訊檔案
+        playsound("tone.wav", block=False) # 播放音訊檔案
         cv.imshow('Detected Faces', img_gray) # 顯示當前偵測完成之影像
         cv.waitKey(2000) # 視窗停滯 2 秒
         cv.destroyWindow('Detected Faces') # 關閉視窗
@@ -72,10 +60,10 @@ for image in contents:
         print(f"No face in {image}. Discharging weapon!") # 印出開火訊息
         cv.putText(img_gray, 'FIRE!', (int(width / 2) - 20, int(height / 2)),
                    cv.FONT_HERSHEY_PLAIN, 3, 255, 3)
-        playsound(gunfire_path, block=False) # 播放槍聲檔案
+        playsound("gunfire.wav", block=False) # 播放槍聲檔案
         cv.imshow('Mutant', img_gray) # 顯示當前偵測完成之影像
         cv.waitKey(2000) # 視窗停滯 2 秒
         cv.destroyWindow('Mutant') # 關閉視窗
         time.sleep(3)  # 暫停程式 3 秒
 
-engine.stop()  # 停止 pyttsx3 引擎
+

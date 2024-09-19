@@ -86,6 +86,9 @@ fig = px.scatter_geo(gapminder, locations="iso_alpha", color="continent",
                      projection="orthographic")
 fig.show()
 
+
+sys.exit()
+
 print('------------------------------------------------------------')	#60個
 
 #分區標色的日本地圖

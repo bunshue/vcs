@@ -87,6 +87,11 @@ filename = "C:/_git/vcs/_1.data/______test_files1/_mp3/aaaa.mp3"
 
 import playsound
 playsound.playsound(filename, block=True)
+
+filename = "C:/_git/vcs/_1.data/______test_files1/_wav/tone.wav"
+import playsound
+playsound.playsound(filename, block=True)
+
 """
 
 print("------------------------------------------------------------")  # 60個
@@ -415,7 +420,7 @@ print("------------------------------------------------------------")  # 60個
 聲音轉字幕
 
 """
-'''
+
 import sys
 
 print("------------------------------------------------------------")  # 60個
@@ -521,10 +526,29 @@ file.close()
 print('完成')
 print('完成22222')
 
-
+'''
 
 print("------------------------------------------------------------")  # 60個
 
+import pyttsx3
+
+# 設定語音引擎
+engine = pyttsx3.init()
+engine.setProperty('rate', 145)  # 設定語速
+engine.setProperty('volume', 1.0)  # 設定音量 (1.0 為最大值)
+
+# 向使用者解釋程序
+engine.say("當螢幕提示時，請輸入你的訊息。\
+           直到聽到提示喊停為止。")
+engine.runAndWait()
+
+
+engine.stop()  # 停止 pyttsx3 引擎
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
