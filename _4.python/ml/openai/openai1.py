@@ -1,12 +1,14 @@
-
-
-
-
-
-
 """
+因為帳號限制 目前應該是不能用了
+
+只是把程式整理在這裡
+
 #pip install openai
 
+"""
+
+print('------------------------------------------------------------')	#60個
+'''
 import openai
 
 #C:\_git\vcs\_1.data\______test_files1\_key
@@ -26,12 +28,8 @@ response = openai.ChatCompletion.create(
 print('------------------------')
 print(response["choices"][0]["message"]["content"])
 
-"""
-
 print('------------------------------------------------------------')	#60個
 
-
-"""
 import openai
 import os
 
@@ -68,19 +66,14 @@ while True:
     response = chat(prompt)
     print("ChatGPT  : " + response)
     prompt += response + "\n"
-"""
-
-
-"""
 
 print('------------------------------------------------------------')	#60個
 
-
 import os
-import openai  # pip install openai
-
+import openai
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
+openai.api_key = "sk-xxxxxxx"
 
 user_prompt = "cat wearing red cape"
 
@@ -93,9 +86,7 @@ response = openai.Image.create(
 image_url = response['data'][0]['url']
 print(image_url)
 
-
 print('------------------------------------------------------------')	#60個
-
 
 import os
 import openai
@@ -119,7 +110,7 @@ print('------------------------------------------------------------')	#60個
 
 
 import os
-import openai  # pip install openai
+import openai
 import urllib.request
 from datetime import datetime
 
@@ -143,9 +134,8 @@ urllib.request.urlretrieve(image_url, file_name)
 
 print('------------------------------------------------------------')	#60個
 
-
 import os
-import openai # pip install openai
+import openai
 import customtkinter as ctk # pip install customtkinter
 
 def generate():
@@ -230,12 +220,81 @@ result.pack(pady=10, fill="x", padx=100)
 
 root.mainloop()
 
+print('------------------------------------------------------------')	#60個
 
+import customtkinter as ctk # pip install customtkinter
+import tkinter
+import os
+import openai
+from PIL import Image, ImageTk
+import requests, io
+
+def generate():
+    openai.api_key = os.getenv("OPENAI_API_KEY")
+    user_prompt = prompt_entry.get("0.0", tkinter.END)
+    user_prompt += "in style: " + style_dropdown.get()
+
+    response = openai.Image.create(
+        prompt=user_prompt,
+        n=int(number_slider.get()),
+        size="512x512"
+    )
+
+    image_urls = []
+    for i in range(len(response['data'])):
+        image_urls.append(response['data'][i]['url'])
+    print(image_urls)
+
+    images = []
+    for url in image_urls:
+        response = requests.get(url)
+        image = Image.open(io.BytesIO(response.content))
+        photo_image = ImageTk.PhotoImage(image)
+        images.append(photo_image)
+
+    def update_image(index=0):
+        canvas.image = images[index]
+        canvas.create_image(0, 0, anchor="nw", image=images[index])
+        index = (index + 1) % len(images) 
+        canvas.after(3000, update_image, index)
+
+    update_image()
+
+root = ctk.CTk()
+root.title("AI Image Generator")
+
+ctk.set_appearance_mode("dark")
+
+input_frame = ctk.CTkFrame(root)
+input_frame.pack(side="left", expand=True, padx=20, pady=20)
+
+prompt_label = ctk.CTkLabel(input_frame, text="Prompt")
+prompt_label.grid(row=0,column=0, padx=10, pady=10)
+prompt_entry = ctk.CTkTextbox(input_frame, height=10)
+prompt_entry.grid(row=0,column=1, padx=10, pady=10)
+
+style_label = ctk.CTkLabel(input_frame, text="Style")
+style_label.grid(row=1,column=0, padx=10, pady=10)
+style_dropdown = ctk.CTkComboBox(input_frame, values=["Realistic", "Cartoon", "3D Illustration", "Flat Art"])
+style_dropdown.grid(row=1, column=1, padx=10, pady=10)
+
+number_label = ctk.CTkLabel(input_frame, text="# Images")
+number_label.grid(row=2,column=0)
+number_slider = ctk.CTkSlider(input_frame, from_=1, to=10, number_of_steps=9)
+number_slider.grid(row=2,column=1)
+
+generate_button = ctk.CTkButton(input_frame, text="Generate", command=generate)
+generate_button.grid(row=3, column=0, columnspan=2, sticky="news", padx=10, pady=10)
+
+canvas = tkinter.Canvas(root, width=512, height=512)
+canvas.pack(side="left")
+
+root.mainloop()
 
 print('------------------------------------------------------------')	#60個
 
 import os
-import openai # pip install openai
+import openai
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
 response = openai.ChatCompletion.create(
@@ -246,8 +305,6 @@ response = openai.ChatCompletion.create(
 )
 answer = response.choices[0].message.content
 print(answer)
-
-"""
 
 print('------------------------------------------------------------')	#60個
 
@@ -264,8 +321,6 @@ openai.api_key = "你的 OpenAI API 金鑰"
     user: 使用者輸入的東西。
     assistant: ChatGPT 的回應。
 """
-
-"""
 response = openai.ChatCompletion.create(
   model="gpt-3.5-turbo",
   messages=[
@@ -279,9 +334,6 @@ response = openai.ChatCompletion.create(
 #再來就是看我們怎麼讀出 ChatGPT 的回應。
 
 print(response["choices"][0]["message"]["content"])
-
-
-"""
 
 #3. 打造可以一直聊下去的 ChatGPT!
 
@@ -303,10 +355,91 @@ while True:
     print()
     messages.append({"role": "assistant", "content": reply})
 
-
+'''
 
 print('------------------------------------------------------------')	#60個
 
+import openai
+
+# 設定API金鑰
+openai.api_key = 'Your_API_Key'
+
+# 定義對話函數
+def chat(messages):
+    response = openai.ChatCompletion.create(
+        model = "gpt-4",
+        messages = messages,
+        max_tokens = 150            # 限制回應token數
+    )
+    return response.choices[0].message['content']
+
+print("歡迎來到深智 Deepwisdom 客服中心")
+
+# 初始化對話串列
+messages = [{"role": "system", "content": "你是深智公司客服人員"}]
+
+# 執行對話
+while True:
+    user_input = input("    客戶 : ")
+    if user_input.lower() == "bye":
+        print("深智客服 : 感謝您的諮詢，祝您有美好的一天！")
+        break
+    messages.append({"role": "user", "content": user_input})
+    response = chat(messages)
+    print("深智客服 : " + response)
+    messages.append({"role": "assistant", "content": response})
+
+print("------------------------------------------------------------")  # 60個
+
+import openai
+
+# 設定API金鑰 
+openai.api_key = 'Your_API_Key'
+
+# 定義對話函數
+def chat(messages):
+    response = openai.ChatCompletion.create(
+        model = "gpt-4",
+        messages = messages,
+        max_tokens = 150     # 限制回應token數
+    )
+    return response.choices[0].message['content']
+
+print("歡迎使用Emoji Translation工具")
+
+# 初始化對話串列
+messages = [{"role": "system", "content": "你是emoji翻譯專家"}]
+
+# 執行對話
+while True:
+    user_input = input("請輸入要翻譯的文字 : ")
+    if user_input.lower() == "bye":
+        print("Emoji翻譯專家 : 感謝您的使用，再見！👋")
+        break
+    # 將用戶輸入的文字構建為帶有翻譯要求的問句
+    translation_request = f"翻譯下列文字為emojis: '{user_input}'"
+    messages.append({"role": "user", "content": translation_request})
+    response = chat(messages)
+    print("Emoji翻譯專家  : " + response)
+    messages.append({"role": "assistant", "content": response})
+
+print("------------------------------------------------------------")  # 60個
+
+import openai
+
+openai.api_key = 'kkkkkkk'
+
+response = openai.Completion.create(
+    model="gpt-3.5-turbo-instruct",
+    prompt="講個笑話來聽聽",
+    max_tokens=128,
+    temperature=0.5,
+)
+
+completed_text = response["choices"][0]["text"]
+print(completed_text)
+
+print("------------------------------------------------------------")  # 60個
 
 
 print('------------------------------------------------------------')	#60個

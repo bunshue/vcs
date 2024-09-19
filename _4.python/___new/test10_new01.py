@@ -8161,22 +8161,6 @@ print(dir(random))
 
 print("------------------------------------------------------------")  # 60個
 
-import openai
-
-openai.api_key = 'kkkkkkk'
-
-response = openai.Completion.create(
-    model="gpt-3.5-turbo-instruct",
-    prompt="講個笑話來聽聽",
-    max_tokens=128,
-    temperature=0.5,
-)
-
-completed_text = response["choices"][0]["text"]
-print(completed_text)
-
-print("------------------------------------------------------------")  # 60個
-
 import time
 import pyautogui
 
