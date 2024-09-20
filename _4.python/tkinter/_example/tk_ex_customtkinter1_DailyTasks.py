@@ -1,3 +1,10 @@
+"""
+customtkinter(ctk) 範例
+pip install customtkinter
+"""
+
+print("------------------------------------------------------------")  # 60個
+
 import customtkinter as ctk
 
 def add_todo():
@@ -23,3 +30,6 @@ add_button = ctk.CTkButton(root, text="Add", width=500, command=add_todo)
 add_button.pack(pady=20)
 
 root.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+

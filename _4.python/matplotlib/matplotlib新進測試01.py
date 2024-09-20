@@ -21,7 +21,7 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 # 設定負號
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 plt.figure(
@@ -64,10 +64,51 @@ plt.colorbar(shrink=0.92)
 print("------------------------------------------------------------")  # 60個
 plt.subplot(232)
 
+N = 12
+X = np.arange(N)
+
+# 生成 N 組介於 0 與 1 之間均勻分配隨機變數
+Y1 = np.random.uniform(size=N)
+Y2 = np.random.uniform(size=N)
+
+# 生成 N 組介於 ST 與 SP 之間均勻分配隨機變數
+ST, SP = 0.5, 1.0
+Y1 = np.random.uniform(ST, SP, size=N)
+Y2 = np.random.uniform(ST, SP, size=N)
+
+plt.bar(X, +Y1, facecolor="#9999ff", edgecolor="white")
+plt.bar(X, -Y2, facecolor="#ff9999", edgecolor="white")
+
+for x, y in zip(X, Y1):
+    # ha: horizontal alignment
+    # va: vertical alignment
+    plt.text(x + 0.4, y + 0.05, "%.2f" % y, ha="center", va="bottom")
+
+for x, y in zip(X, Y2):
+    # ha: horizontal alignment
+    # va: vertical alignment
+    plt.text(x + 0.4, -y - 0.05, "%.2f" % y, ha="center", va="top")
+
+plt.xlim(-0.5, N)
+plt.ylim(-1.25, 1.25)
+
 
 print("------------------------------------------------------------")  # 60個
 plt.subplot(233)
 
+# nodelist = ["city1","city2","city3","city4","city5","city6","city7","city8"]
+dist = np.mat([[0.1,0.1],[0.9,0.5],[0.9,0.1],[0.45,0.9],[0.9,0.8],[0.7,0.9],[0.1,0.45],[0.45,0.1]])
+m,n = np.shape(dist)
+
+for point in dist.tolist():
+	plt.annotate("("+str(point[0])+", "+str(point[1])+")",xy = (point[0],point[1]))	
+xlist = []
+ylist = []
+for px,py in zip(dist.T.tolist()[0],dist.T.tolist()[1]):
+	xlist.append([px])
+	ylist.append([py])
+
+plt.plot(xlist,ylist,'r') 
 
 print("------------------------------------------------------------")  # 60個
 plt.subplot(234)
@@ -121,10 +162,35 @@ plt.figure(
 print("------------------------------------------------------------")  # 60個
 plt.subplot(231)
 
+x = [x for x in range(0, 11)]                   
+y = [7.5*y - 3.33 for y in x]
+voucher = 25                            # unit = 100
+ans_x = (25 + 3.33) / 7.5
+print('拜訪次數 = {}'.format(int(ans_x*100)))
+plt.axis([0, 4, 0, 30])
+plt.plot(x, y)   
+plt.plot(1, 5, '-x')
+plt.plot(2, 10, '-x')
+plt.plot(3, 20, '-x')
+plt.plot(ans_x, 25, '-o')
+plt.text(ans_x-0.6, 25+0.2, '('+str(int(ans_x*100))+','+str(2500)+')')
+plt.xlabel('Times:unit=100')
+plt.ylabel('Voucher:unit=100')
+plt.grid()                              # 加格線
 
 print("------------------------------------------------------------")  # 60個
 plt.subplot(232)
 
+x = np.linspace(1, 10, 10)                          # 建立 x
+y = np.random.random((7, 10))                       # 建立 y 7 X 10 的隨機陣列
+
+print(y.shape)
+print(y)
+
+for yy in y:    
+    plt.scatter(x, yy, c='r', marker='*')
+
+plt.xticks(np.arange(0,11,step=1.0))
 
 print("------------------------------------------------------------")  # 60個
 plt.subplot(233)
@@ -147,7 +213,6 @@ plt.tight_layout()
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
-
 
 """
 python用mpl_finance中的candlestick_ohlc畫分時圖
@@ -410,71 +475,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#!wget -O taipei_sans_tc_beta.ttf https://drive.google.com/uc?id=1eGAsTN1HBpJAkeVM57_C7ccp7hbgSz3_&export=download
-#!mv taipei_sans_tc_beta.ttf /usr/local/lib/python3.7/dist-packages/matplotlib/mpl-data/fonts/ttf
-
-#import matplotlib
-from matplotlib.font_manager import fontManager
-
-# 新增字體
-# fontManager.addfont('/usr/local/lib/python3.7/dist-packages/matplotlib/mpl-data/fonts/ttf/taipei_sans_tc_beta.ttf')
-# 將 font-family 設為 Taipei Sans TC Beta
-# 設定完後，之後的圖表都可以顯示中文了
-SMALL_SIZE = 8
-MEDIUM_SIZE = 14
-BIGGER_SIZE = 18
-# 設定字型
-# matplotlib.rc('font', family='Taipei Sans TC Beta')
-# matplotlib.rc('font', size=SMALL_SIZE)
-# 預設字體大小
-plt.rc("font", size=SMALL_SIZE)
-# 軸標題字體大小
-plt.rc("axes", titlesize=BIGGER_SIZE)
-# 軸標籤字體大小
-plt.rc("axes", labelsize=MEDIUM_SIZE)
-# X軸刻度字體大小
-plt.rc("xtick", labelsize=SMALL_SIZE)
-# Y軸刻度字體大小
-plt.rc("ytick", labelsize=SMALL_SIZE)
-# 圖例字體大小
-plt.rc("legend", fontsize=SMALL_SIZE)
-# 圖形標題字體大小
-plt.rc("figure", titlesize=BIGGER_SIZE)
-
-print("------------------------------------------------------------")  # 60個
-
-N = 12
-X = np.arange(N)
-
-# 生成 N 組介於 0 與 1 之間均勻分配隨機變數
-Y1 = np.random.uniform(size=N)
-Y2 = np.random.uniform(size=N)
-
-# 生成 N 組介於 ST 與 SP 之間均勻分配隨機變數
-ST, SP = 0.5, 1.0
-Y1 = np.random.uniform(ST, SP, size=N)
-Y2 = np.random.uniform(ST, SP, size=N)
-
-plt.bar(X, +Y1, facecolor="#9999ff", edgecolor="white")
-plt.bar(X, -Y2, facecolor="#ff9999", edgecolor="white")
-
-for x, y in zip(X, Y1):
-    # ha: horizontal alignment
-    # va: vertical alignment
-    plt.text(x + 0.4, y + 0.05, "%.2f" % y, ha="center", va="bottom")
-
-for x, y in zip(X, Y2):
-    # ha: horizontal alignment
-    # va: vertical alignment
-    plt.text(x + 0.4, -y - 0.05, "%.2f" % y, ha="center", va="top")
-
-plt.xlim(-0.5, N)
-plt.ylim(-1.25, 1.25)
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
 """ 久
 # 繪制心形隱函數曲面
 # pip install mayavi
@@ -487,29 +487,6 @@ contour = mlab.contour3d(x, y, z, f, contours=[0], color=(1, 0, 0))
 """
 print("------------------------------------------------------------")  # 60個
 
-# nodelist = ["city1","city2","city3","city4","city5","city6","city7","city8"]
-dist = np.mat([[0.1,0.1],[0.9,0.5],[0.9,0.1],[0.45,0.9],[0.9,0.8],[0.7,0.9],[0.1,0.45],[0.45,0.1]])
-m,n = np.shape(dist)
-
-# 绘图
-fig = plt.figure()
-
-ax = fig.add_subplot(111)
-
-for point in dist.tolist():
-	plt.annotate("("+str(point[0])+", "+str(point[1])+")",xy = (point[0],point[1]))	
-xlist = []
-ylist = []
-for px,py in zip(dist.T.tolist()[0],dist.T.tolist()[1]):
-	xlist.append([px])
-	ylist.append([py])
-
-ax.plot(xlist,ylist,'r') 
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
 #資訊圖表的視覺化手法
 
 from PIL import Image, ImageOps
@@ -517,12 +494,12 @@ from PIL import Image, ImageOps
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 
 image = Image.open(filename)
+print(image.size)
 
 plt.imshow(image)
 
 plt.show()
 
-print(image.size)
 
 # resize 寬度一半 高度三成 => 變胖
 resize_image = image.resize((int(image.size[0] * 0.5), int(image.size[1] * 0.3)))
@@ -797,10 +774,12 @@ data = [
 ig = IconGraph(data, icon_size, canvas_size, graph_back_color, label_back_color)
 ig.get_image()
 """
+
+
 print("------------------------------------------------------------")  # 60個
 
-#資料視覺化的調色盤
-
+print("資料視覺化的調色盤 many")
+"""
 import seaborn as sns
 
 sns.set()
@@ -846,41 +825,12 @@ sns.palplot(sns.color_palette("gist_gray_r"))
 sns.palplot(sns.color_palette("RdBu", 7))
 
 sns.palplot(sns.color_palette("coolwarm", 7))
-'''
-print("------------------------------------------------------------")  # 60個
-
-x = [x for x in range(0, 11)]                   
-y = [7.5*y - 3.33 for y in x]
-voucher = 25                            # unit = 100
-ans_x = (25 + 3.33) / 7.5
-print('拜訪次數 = {}'.format(int(ans_x*100)))
-plt.axis([0, 4, 0, 30])
-plt.plot(x, y)   
-plt.plot(1, 5, '-x')
-plt.plot(2, 10, '-x')
-plt.plot(3, 20, '-x')
-plt.plot(ans_x, 25, '-o')
-plt.text(ans_x-0.6, 25+0.2, '('+str(int(ans_x*100))+','+str(2500)+')')
-plt.xlabel('Times:unit=100')
-plt.ylabel('Voucher:unit=100')
-plt.grid()                              # 加格線
 
 plt.show()
+"""
+
 print("------------------------------------------------------------")  # 60個
 
-x = np.linspace(1, 10, 10)                          # 建立 x
-y = np.random.random((7, 10))                       # 建立 y 7 X 10 的隨機陣列
-
-print(y.shape)
-print(y)
-
-for yy in y:    
-    plt.scatter(x, yy, c='r', marker='*')
-
-plt.xticks(np.arange(0,11,step=1.0))
-
-plt.show()
-print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
@@ -913,3 +863,39 @@ plt.title("標題在特定位置", size=30, x=0.0, y=0.0)
 
 #清除
 #from IPython.display import display
+
+
+
+#!wget -O taipei_sans_tc_beta.ttf https://drive.google.com/uc?id=1eGAsTN1HBpJAkeVM57_C7ccp7hbgSz3_&export=download
+#!mv taipei_sans_tc_beta.ttf /usr/local/lib/python3.7/dist-packages/matplotlib/mpl-data/fonts/ttf
+
+#import matplotlib
+from matplotlib.font_manager import fontManager
+
+# 新增字體
+# fontManager.addfont('/usr/local/lib/python3.7/dist-packages/matplotlib/mpl-data/fonts/ttf/taipei_sans_tc_beta.ttf')
+# 將 font-family 設為 Taipei Sans TC Beta
+# 設定完後，之後的圖表都可以顯示中文了
+SMALL_SIZE = 8
+MEDIUM_SIZE = 14
+BIGGER_SIZE = 18
+# 設定字型
+# matplotlib.rc('font', family='Taipei Sans TC Beta')
+# matplotlib.rc('font', size=SMALL_SIZE)
+# 預設字體大小
+plt.rc("font", size=SMALL_SIZE)
+# 軸標題字體大小
+plt.rc("axes", titlesize=BIGGER_SIZE)
+# 軸標籤字體大小
+plt.rc("axes", labelsize=MEDIUM_SIZE)
+# X軸刻度字體大小
+plt.rc("xtick", labelsize=SMALL_SIZE)
+# Y軸刻度字體大小
+plt.rc("ytick", labelsize=SMALL_SIZE)
+# 圖例字體大小
+plt.rc("legend", fontsize=SMALL_SIZE)
+# 圖形標題字體大小
+plt.rc("figure", titlesize=BIGGER_SIZE)
+
+print("------------------------------------------------------------")  # 60個
+

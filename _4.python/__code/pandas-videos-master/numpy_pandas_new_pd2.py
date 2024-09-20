@@ -31,13 +31,11 @@ cc = pd.__version__
 
 print(cc)
 
-
-'''
 print('pd直接讀取網頁上的資料')
 # read a dataset of Chipotle orders directly from a URL and store the results in a DataFrame
 orders = pd.read_table('http://bit.ly/chiporders')
 
-# examine the first 5 rows
+print('檢視前幾行')
 cc = orders.head()
 print(cc)
 
@@ -45,9 +43,8 @@ print(cc)
 user_cols = ['user_id', 'age', 'gender', 'occupation', 'zip_code']
 users = pd.read_table('http://bit.ly/movieusers', sep='|', header=None, names=user_cols)
 
-# examine the first 5 rows
+print('檢視前幾行')
 cc = users.head()
-
 print(cc)
 
 
@@ -59,7 +56,7 @@ ufo = pd.read_table('http://bit.ly/uforeports', sep=',')
 # read_csv is equivalent to read_table, except it assumes a comma separator
 ufo = pd.read_csv('http://bit.ly/uforeports')
 
-# examine the first 5 rows
+print('檢視前幾行')
 cc = ufo.head()
 print(cc)
 
@@ -108,7 +105,7 @@ print('rename pd 之 df')
 # read a dataset of UFO reports into a DataFrame
 ufo = pd.read_csv('http://bit.ly/uforeports')
 
-# examine the column names
+print('檢查欄名')
 cc = ufo.columns
 print(cc)
 
@@ -416,8 +413,9 @@ drinks = pd.read_csv('http://bit.ly/drinksbycountry')
 drinks.head()
 
 # examine the data type of each Series
-drinks.dtypes
-
+print('檢視資料型態')
+cc = drinks.dtypes
+print(cc)
 
 # change the data type of an existing Series
 drinks['beer_servings'] = drinks.beer_servings.astype(float)
@@ -432,10 +430,8 @@ orders = pd.read_table('http://bit.ly/chiporders')
 orders.head()
 
 # examine the data type of each Series
-orders.dtypes
-
-
-
+cc = orders.dtypes
+print(cc)
 
 # convert a string to a number in order to do math
 orders.item_price.str.replace('$', '').astype(float).mean()
@@ -446,9 +442,6 @@ orders.item_name.str.contains('Chicken').head()
 # convert a boolean Series to an integer (False = 0, True = 1)
 orders.item_name.str.contains('Chicken').astype(int).head()
 
-
-
-
 print("------------------------------------------------------------")  # 60個
 
 #When should I use a "groupby" in pandas? (video)
@@ -458,7 +451,6 @@ drinks = pd.read_csv('http://bit.ly/drinksbycountry')
 drinks.head()
 
 """
-
 # calculate the mean beer servings across the entire dataset
 drinks.beer_servings.mean()
 
@@ -492,9 +484,8 @@ movies = pd.read_csv('http://bit.ly/imdbratings')
 movies.head()
 
 # examine the data type of each Series
-movies.dtypes
-
-
+cc = movies.dtypes
+print(cc)
 
 # count the non-null values, unique values, and frequency of the most common value
 movies.genre.describe()
@@ -572,7 +563,8 @@ ufo.isnull().sum()
 ufo[ufo.City.isnull()].head()
 
 # examine the number of rows and columns
-ufo.shape
+cc = ufo.shape
+print(cc)
 
 # if 'any' values are missing in a row, then drop that row
 ufo.dropna(how='any').shape
@@ -921,15 +913,15 @@ pd.DataFrame({'PassengerId':test.PassengerId, 'Survived':new_pred_class}).head()
 # ensure that PassengerID is the first column by setting it as the index
 pd.DataFrame({'PassengerId':test.PassengerId, 'Survived':new_pred_class}).set_index('PassengerId').head()
 
-
-# write the DataFrame to a CSV file that can be submitted to Kaggle
+print('df轉csv')
 pd.DataFrame({'PassengerId':test.PassengerId, 'Survived':new_pred_class}).set_index('PassengerId').to_csv('tmp_sub.csv')
 
-# save a DataFrame to disk ("pickle it")
+print('df轉pickle')
 train.to_pickle('tmp_train.pkl')
 
-# read a pickled object from disk ("unpickle it")
-pd.read_pickle('tmp_train.pkl').head()
+print('pickle轉df')
+cc = pd.read_pickle('tmp_train.pkl').head()
+print(cc)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -995,7 +987,7 @@ print(cc)
 ufo.Year.value_counts().sort_index().plot()
 
 #plt.show()
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 #How do I create a pandas DataFrame from another object? (video)

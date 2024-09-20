@@ -23,19 +23,7 @@ import shutil
 
 png_path = path.join(default_dest, "fonts/HTML-CSS/TeX/png")
 shutil.rmtree(png_path)
- 
 
-sys.exit()
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-"""
-os.system("cls")  # 在cmd視窗下清除螢幕
-
-
-"""
 print("------------------------------------------------------------")  # 60個
 
 #留下錄影部分 比較之
@@ -308,16 +296,6 @@ Python資料型態
 新進文件要如何整理?
 
 Python字串 不允許變更內容
-
-
-os模組
-os.getcwd()
-os.listdir()
-os.mkdir()	建立目錄
-os.chdir()	切換目錄
-os.rmdir()	刪除目錄
-os.remove()	刪除檔案
-os.rename()	更名目錄/檔案
 
 python_install_faq.txt
 
@@ -3411,7 +3389,7 @@ drive = os.environ['HOMEDRIVE']
 
 
 print("------------------------------------------------------------")  # 60個
-os.getpid()
+
 
 print("------------------------------------------------------------")  # 60個
 
@@ -3489,8 +3467,6 @@ print("------------------------------------------------------------")  # 60個
         finally:
             self.sock.close()
 
-                                user = 'uid %s' % os.getuid()
-
 
     def load_file(self, pathname):
         dir, name = os.path.split(pathname)
@@ -3554,14 +3530,6 @@ def basename(p):
     i = p.rfind(sep) + 1
     return p[i:]
 
-import os
-
-print(os.getpid())
-
-userhome = os.environ['HOME']
-print(userhome)
-userhome = os.fsencode(userhome)
-print(userhome)
 
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 st = os.lstat(filename)
@@ -3673,7 +3641,7 @@ S_ISREG(self.stat().st_mode)
                 for p in self.successor._select_from(path, is_dir, exists, listdir):
                     yield p
 
-        base = '' if path.is_absolute() else os.getcwd()
+        path.is_absolute()
 
 '''
 
