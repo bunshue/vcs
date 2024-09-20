@@ -156,8 +156,8 @@ plt.show()
 # 模型存檔
 import joblib
 
-joblib.dump(clf, 'model.joblib')
-joblib.dump(scaler, 'scaler.joblib');
+joblib.dump(clf, 'tmp_model.joblib')
+joblib.dump(scaler, 'tmp_scaler.joblib');
 
 print("------------------------------------------------------------")  # 60個
 
@@ -167,8 +167,8 @@ import joblib
 #10.模型預測
 
 # 載入模型與標準化轉換模型
-clf = joblib.load('model.joblib')
-scaler = joblib.load('scaler.joblib')
+clf = joblib.load('tmp_model.joblib')
+scaler = joblib.load('tmp_scaler.joblib')
 
 st.title('鳶尾花（Iris）預測')
 sepal_length = st.slider('花萼長度:', min_value=3.0, max_value=8.0, value=5.8)

@@ -1,4 +1,4 @@
-# 机器学习100天——第1天：数据预处理（Data Preprocessing）
+# 機器學習100天——第1天：數據預處理（Data Preprocessing）
 
 #Day 1: Data Prepocessing
 
@@ -56,12 +56,12 @@ print("Y")
 print(Y)
 print(X[ : , 1:3])
 
-#第三步：处理丢失数据
+#第三步：處理丟失數據
 
-#我们得到的数据很少是完整的。
-#数据可能因为各种原因丢失，为了不降低机器学习模型的性能，需要处理数据。
-#我们可以用整列的平均值或中间值替换丢失的数据。
-#我们用sklearn.preprocessing库中的Imputer类完成这项任务。
+#我們得到的數據很少是完整的。
+#數據可能因為各種原因丟失，為了不降低機器學習模型的性能，需要處理數據。
+#我們可以用整列的平均值或中間值替換丟失的數據。
+#我們用sklearn.preprocessing庫中的Imputer類完成這項任務。
 
 #Step 3: Handling the missing data
 # If you use the newest version of sklearn, use the lines of code commented out
@@ -69,7 +69,7 @@ from sklearn.impute import SimpleImputer
 
 imputer = SimpleImputer(missing_values=np.nan, strategy="mean")
 #from sklearn.preprocessing import Imputer
-# axis=0表示按列进行
+# axis=0表示按列進行
 #imputer = Imputer(missing_values = "NaN", strategy = "mean", axis = 0)
 #print(imputer)
 # print(X[ : , 1:3])
@@ -83,7 +83,7 @@ print("X")
 print(X)
 
 """ another
-第3步：处理丢失数据
+第3步：處理丟失數據
 
 from sklearn.preprocessing import Imputer
 imputer = Imputer(missing_values = "NaN", strategy = "mean", axis = 0)
@@ -93,10 +93,10 @@ X[ : , 1:3] = imputer.transform(X[ : , 1:3])
 
 
 #Step 4: Encoding categorical data
-#第四步：解析分类数据
-#分类数据指的是含有标签值而不是数字值的变量。取值范围通常是固定的。
-#例如"Yes"和"No"不能用于模型的数学计算，所以需要解析成数字。
-#为实现这一功能，我们从sklearn.preprocessing库导入LabelEncoder类。
+#第四步：解析分類數據
+#分類數據指的是含有標簽值而不是數字值的變量。取值范圍通常是固定的。
+#例如"Yes"和"No"不能用于模型的數學計算，所以需要解析成數字。
+#為實現這一功能，我們從sklearn.preprocessing庫導入LabelEncoder類。
 
 from sklearn.preprocessing import LabelEncoder, OneHotEncoder
 from sklearn.compose import ColumnTransformer
@@ -125,7 +125,7 @@ print("Y")
 print(Y)
 
 """ another
-创建虚拟变量
+創建虛擬變量
 
 onehotencoder = OneHotEncoder(categorical_features = [0])
 X = onehotencoder.fit_transform(X).toarray()
@@ -134,10 +134,10 @@ Y =  labelencoder_Y.fit_transform(Y)
 """
 
 #Step 5: Splitting the datasets into training sets and Test sets
-#第五步：拆分数据集为测试集合和训练集合
-#把数据集拆分成两个：一个是用来训练模型的训练集合，另一个是用来验证模型的测试集合。
-#两者比例一般是80:20。
-#我们导入sklearn.model_selection库中的train_test_split()方法。
+#第五步：拆分數據集為測試集合和訓練集合
+#把數據集拆分成兩個：一個是用來訓練模型的訓練集合，另一個是用來驗證模型的測試集合。
+#兩者比例一般是80:20。
+#我們導入sklearn.model_selection庫中的train_test_split()方法。
 
 from sklearn.model_selection import train_test_split
 
@@ -160,11 +160,11 @@ print(Y_test)
 #第六步：特征縮放
 #第6步：特征量化
 #Step 6: Feature Scaling
-#大部分模型算法使用两点间的欧氏距离表示，
-#但此特征在幅度、单位和范围姿态问题上变化很大。
-#在距离计算中，高幅度的特征比低幅度特征权重更大。
-#可用特征标准化或Z值归一化解决。
-#导入sklearn.preprocessing库的StandardScalar类。
+#大部分模型算法使用兩點間的歐氏距離表示，
+#但此特征在幅度、單位和范圍姿態問題上變化很大。
+#在距離計算中，高幅度的特征比低幅度特征權重更大。
+#可用特征標準化或Z值歸一化解決。
+#導入sklearn.preprocessing庫的StandardScalar類。
 
 from sklearn.preprocessing import StandardScaler
 
@@ -177,4 +177,3 @@ print("X_train")
 print(X_train)
 print("X_test")
 print(X_test)
-
