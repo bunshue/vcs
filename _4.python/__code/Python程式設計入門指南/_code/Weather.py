@@ -10,6 +10,7 @@ for i in range(NUMBER_OF_DAYS):
         data[i][j].append(0) # Temperature value
         data[i][j].append(0) # Humidity value
 
+print(data)
 print('222')
 
 filename2 = 'weather.txt'
@@ -45,3 +46,5 @@ for i in range(NUMBER_OF_DAYS):
     print("Day" + str(i) + "'s average temperature is " + str(dailyTemperatureTotal / NUMBER_OF_HOURS))
     print("Day " + str(i) + "'s average humidity is " + str(dailyHumidityTotal / NUMBER_OF_HOURS))
 
+
+print(data)

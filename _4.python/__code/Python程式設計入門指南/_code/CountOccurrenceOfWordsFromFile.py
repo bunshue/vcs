@@ -1,6 +1,8 @@
 def main():
+    print('統計一個檔案的字數')
     # Prompt the user to enter a file
-    filename = input("Enter a filename: ").strip()
+    #filename = input("Enter a filename: ").strip()
+    filename = "HuffmanCode.py"
     infile = open(filename, "r") # Open the file
 
     wordCounts = {} # Create an empty dictionary to count words

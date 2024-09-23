@@ -1,7 +1,8 @@
 import urllib.request
 
 def main():
-    url = input("Enter an URL for a file: ").strip()
+    #url = input("Enter an URL for a file: ").strip()
+    url = "https://github.com/bunshue/vcs/blob/master/_4.python/__code/Python-100-Days-zh_TW-master/.gitignore"
     infile = urllib.request.urlopen(url)
     s = infile.read().decode() # Read the content as string 
 

@@ -1,7 +1,12 @@
+"""
+統計一個檔案的英文字母出現次數
+
+"""
+
 def main():
     while True:
         try:
-            filename = input("Enter a filename: ").strip()
+            filename = "GraphView.py"
             infile = open(filename, "r") # Open the file
             break 
         except IOError:

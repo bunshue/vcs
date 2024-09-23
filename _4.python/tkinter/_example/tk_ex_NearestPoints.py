@@ -1,4 +1,6 @@
-from tkinter import * # Import tkinter
+print('找出最相鄰的兩點')
+
+import tkinter as tk
        
 RADIUS = 2 # Radius of the point
 
@@ -28,10 +30,10 @@ def nearestPoints(points):
 class NearestPointsGUI:
     def __init__(self):
         self.points = [] # Store self.points
-        window = Tk() # Create a window
+        window = tk.Tk() # Create a window
         window.title("Find Nearest Points") # Set title
         
-        self.canvas = Canvas(window, width = 400, height = 200)
+        self.canvas = tk.Canvas(window, width = 400, height = 200)
         self.canvas.pack()
         
         self.canvas.bind("<Button-1>", self.addPoint)
