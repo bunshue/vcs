@@ -6,6 +6,10 @@ python / vcs 暫存片段程式
 print('------------------------------------------------------------')	#60個
 
 
+print(dir(random))
+
+
+
 print('------------------------------------------------------------')	#60個
 
 
@@ -1203,84 +1207,6 @@ UNIQUE 唯一
 NOT NULL	不能空白
 
 
-putty 可以 讀出每個相機page的資料  hex 與 char 格式
-
-Potplayer  avi
-13:07:29
-15.8 GB
-16 549 136 KB
-
-10 min 155 MB
-60 min 950 MB
-
-
-ctrl + J 	開啟 / 網路攝影機/其他裝置
-Alt + C		視訊 / 視訊錄製 / 錄製視訊
-
-
-
-
-如何看到結果
-1. 如何看到色調結果?
-    目前只能看到色調後的RB參數，有參數即是有成功做完色調
-
-2. 如何看到燒錄結果?
-或許在程式的某個地方多一個按鈕 可以顯示出色調/燒錄結果
-
-
-
-
-
-1. 色調
-
-無影像色調
-
-序號長度  11 13 15  17 英數大小寫 不管位置
-
-
-
-錯誤碼
-
-
-目前燒錄序號並無定義  
-
-
-
-考慮
-
-影片裁減 分割程式
-
-色調燒錄二合一
-燒錄的工作在色調站完成
-燒錄站一律回復OK
-
-色調燒錄程式+按鍵取得資訊
-1. 連線資訊 主機 相機
-2. 影像資訊
-3. 相機內部資訊
-
-10	相機序號格式錯誤
-自動化產線序號條件 7碼以上、英數大小寫(0~9、A`Z、a~z，符號底線空白不允許)
-
-17	無年月日資料 包含年月日資料缺少或錯誤
-
-
-主機螢幕顯示序號 要能顯示自動化產線之序號 13碼以上
-
-
-看到桌子旁邊因為疫情買的酒精噴霧
-把右鍵掰開一點點，噴了2下，竟然好了，2個禮拜過去也沒發生連點
-
-鼠标双击测试
-https://cps-check.com/cn/double-click-test
-這個網站我數30下，本來會變成36下左右 
-
-
-
-print(dir(random))
-'''
-
-
 print("------------------------------------------------------------")  # 60個
 
 import os
@@ -1291,63 +1217,8 @@ drive.mount('/content/drive', force_remount=True)
 
 os.chdir('/content/drive/MyDrive/Colab Notebooks')  # Colab 換路徑使用
 
-
-
-
-
-
-
-
     elif k == ord('r'):
         draw = np.zeros((h,w,4), dtype='uint8')
-
-
-
-openai  model `text-davinci-003` 已過時
-
-改成
-
-gpt-3.5-turbo-instruct
-
-
-
-
-
-自動化 + 
-
-按鍵加入 顯示相機資料 色調+序號 資料
-
-awb_result = "\"有連接器, 無相機\"";
-awb_result = "有連接器 無相機";
-
-LL)
-            {
-                awb_result = "AWB搜尋失敗 太小";
-            }
-            else if (do_awb_result == REASON_FIND_AWB_AREA_FAIL_TOO_FAR)
-            {
-                awb_result = "AWB搜尋失敗 太遠";
-            }
-            else if (do_awb_result == REASON_MANUALLY_INTERRUPT)
-            
-
-
-iMS_AWB.exe
-
-iMS_WriteData.exe
-
-
-
-            if (flag_enaglb_automation == true)
-            {
-                flag_network_disk_status = true;
-                return S_OK;
-            }
-
-
-
-
-
 
 
 #下載台北思源黑體並命名 taipei_sans_tc_beta.ttf
@@ -1359,10 +1230,6 @@ from matplotlib.font_manager import fontManager
 fontManager.addfont('TaipeiSansTCBeta-Regular.ttf')
 
 plt.rcParams['font.sans-serif'] = ['Taipei Sans TC Beta'] #輸入中文
-
-
-
-
 
 
 Scikit-learn的基本功能主要被分為六大部分：
@@ -1395,20 +1262,6 @@ https://archive.ics.uci.edu/
 
 GET  爬蟲，取得網站的靜態資料
 POST 爬蟲，提出要求向對方索取資料
-
-https://mops.twse.com.tw/mops/web/index
-
-公開資訊觀測站
-https://mops.twse.com.tw/mops/web/index
-
-
-
-大陸華為與賽力斯聯合打造電動車「問界M7」
-
-問界M7價格約人25萬元人民幣（約112.5萬元新台幣）
-
-
-問界汽車（AITO）
 
 
 

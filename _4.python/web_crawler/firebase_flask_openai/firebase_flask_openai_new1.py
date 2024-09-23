@@ -1,6 +1,13 @@
 import sys
 import sqlite3
 
+"""
+openai  model `text-davinci-003` 已過時
+改成
+gpt-3.5-turbo-instruct
+
+"""
+
 
 print('------------------------------------------------------------')	#60個
 

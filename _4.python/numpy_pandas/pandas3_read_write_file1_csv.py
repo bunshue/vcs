@@ -1,5 +1,5 @@
 """
-使用pandas讀取csv檔, 讀成 DataFrame 格式
+使用pandas讀寫csv檔, 讀成 DataFrame 格式
 
 """
 

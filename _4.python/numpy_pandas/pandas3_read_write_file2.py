@@ -338,6 +338,16 @@ print(data)
 
 print('------------------------------------------------------------')	#60個
 
+""" lack file
+# 匯入JSON格式的檔案
+df2 = pd.read_json("tmp_dists.json")
+print(df2)
+df.to_html("tmp8-2-2a-02.html")
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+
 print('---- 3333 excel --------------------------------------------------------')	#60個
 
 print('讀寫Excel文件')
@@ -950,6 +960,333 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
+dists = {
+    "name": [
+        "中正區",
+        "板橋區",
+        "桃園區",
+        "北屯區",
+        "安南區",
+        "三民區",
+        "大安區",
+        "永和區",
+        "八德區",
+        "前鎮區",
+        "鳳山區",
+        "信義區",
+        "新店區",
+    ],
+    "population": [
+        159598,
+        551452,
+        441287,
+        275207,
+        192327,
+        343203,
+        309835,
+        222531,
+        198473,
+        189623,
+        359125,
+        225561,
+        302070,
+    ],
+    "city": [
+        "台北市",
+        "新北市",
+        "桃園市",
+        "台中市",
+        "台南市",
+        "高雄市",
+        "台北市",
+        "新北市",
+        "桃園市",
+        "高雄市",
+        "高雄市",
+        "台北市",
+        "新北市",
+    ],
+}
+df = pd.DataFrame(dists)
+print(df)
+df.to_html("tmp8-2-1.html")
+
+print("------------------------------------------------------------")  # 60個
+
+dists = {
+    "name": [
+        "中正區",
+        "板橋區",
+        "桃園區",
+        "北屯區",
+        "安南區",
+        "三民區",
+        "大安區",
+        "永和區",
+        "八德區",
+        "前鎮區",
+        "鳳山區",
+        "信義區",
+        "新店區",
+    ],
+    "population": [
+        159598,
+        551452,
+        441287,
+        275207,
+        192327,
+        343203,
+        309835,
+        222531,
+        198473,
+        189623,
+        359125,
+        225561,
+        302070,
+    ],
+    "city": [
+        "台北市",
+        "新北市",
+        "桃園市",
+        "台中市",
+        "台南市",
+        "高雄市",
+        "台北市",
+        "新北市",
+        "桃園市",
+        "高雄市",
+        "高雄市",
+        "台北市",
+        "新北市",
+    ],
+}
+
+ordinals = [
+    "first",
+    "second",
+    "third",
+    "fourth",
+    "fifth",
+    "sixth",
+    "seventh",
+    "eigth",
+    "ninth",
+    "tenth",
+    "eleventh",
+    "twelvth",
+    "thirteenth",
+]
+df = pd.DataFrame(dists, index=ordinals)
+print(df)
+df.to_html("tmp8-2-1a.html")
+
+print("------------------------------")  # 30個
+
+df2 = pd.DataFrame(dists)
+df2.index = ordinals
+print(df2)
+
+print("------------------------------------------------------------")  # 60個
+
+dists = {
+    "name": [
+        "中正區",
+        "板橋區",
+        "桃園區",
+        "北屯區",
+        "安南區",
+        "三民區",
+        "大安區",
+        "永和區",
+        "八德區",
+        "前鎮區",
+        "鳳山區",
+        "信義區",
+        "新店區",
+    ],
+    "population": [
+        159598,
+        551452,
+        441287,
+        275207,
+        192327,
+        343203,
+        309835,
+        222531,
+        198473,
+        189623,
+        359125,
+        225561,
+        302070,
+    ],
+    "city": [
+        "台北市",
+        "新北市",
+        "桃園市",
+        "台中市",
+        "台南市",
+        "高雄市",
+        "台北市",
+        "新北市",
+        "桃園市",
+        "高雄市",
+        "高雄市",
+        "台北市",
+        "新北市",
+    ],
+}
+
+ordinals = [
+    "first",
+    "second",
+    "third",
+    "fourth",
+    "fifth",
+    "sixth",
+    "seventh",
+    "eigth",
+    "ninth",
+    "tenth",
+    "eleventh",
+    "twelvth",
+    "thirteenth",
+]
+df = pd.DataFrame(dists, columns=["name", "city", "population"], index=ordinals)
+print(df)
+df.to_html("tmp8-2-1b.html")
+
+print("------------------------------")  # 30個
+
+df2 = pd.DataFrame(dists, index=ordinals)
+df2.columns = ["name", "city", "population"]
+print(df2)
+
+print("------------------------------------------------------------")  # 60個
+
+dists = {
+    "name": [
+        "中正區",
+        "板橋區",
+        "桃園區",
+        "北屯區",
+        "安南區",
+        "三民區",
+        "大安區",
+        "永和區",
+        "八德區",
+        "前鎮區",
+        "鳳山區",
+        "信義區",
+        "新店區",
+    ],
+    "population": [
+        159598,
+        551452,
+        441287,
+        275207,
+        192327,
+        343203,
+        309835,
+        222531,
+        198473,
+        189623,
+        359125,
+        225561,
+        302070,
+    ],
+    "city": [
+        "台北市",
+        "新北市",
+        "桃園市",
+        "台中市",
+        "台南市",
+        "高雄市",
+        "台北市",
+        "新北市",
+        "桃園市",
+        "高雄市",
+        "高雄市",
+        "台北市",
+        "新北市",
+    ],
+}
+
+df = pd.DataFrame(dists, columns=["name", "population"], index=dists["city"])
+print(df)
+df.to_html("tmp8-2-1c.html")
+
+print("------------------------------------------------------------")  # 60個
+
+dists = {
+    "name": [
+        "中正區",
+        "板橋區",
+        "桃園區",
+        "北屯區",
+        "安南區",
+        "三民區",
+        "大安區",
+        "永和區",
+        "八德區",
+        "前鎮區",
+        "鳳山區",
+        "信義區",
+        "新店區",
+    ],
+    "population": [
+        159598,
+        551452,
+        441287,
+        275207,
+        192327,
+        343203,
+        309835,
+        222531,
+        198473,
+        189623,
+        359125,
+        225561,
+        302070,
+    ],
+    "city": [
+        "台北市",
+        "新北市",
+        "桃園市",
+        "台中市",
+        "台南市",
+        "高雄市",
+        "台北市",
+        "新北市",
+        "桃園市",
+        "高雄市",
+        "高雄市",
+        "台北市",
+        "新北市",
+    ],
+}
+
+ordinals = [
+    "first",
+    "second",
+    "third",
+    "fourth",
+    "fifth",
+    "sixth",
+    "seventh",
+    "eigth",
+    "ninth",
+    "tenth",
+    "eleventh",
+    "twelvth",
+    "thirteenth",
+]
+df = pd.DataFrame(dists, columns=["name", "population"], index=dists["city"])
+print(df.T)
+df.T.to_html("tmp8-2-1d.html")
+
+print("------------------------------------------------------------")  # 60個
+
+
 
 print("------------------------------------------------------------")  # 60個
 
@@ -972,3 +1309,47 @@ sys.exit()
 
 df = pd.DataFrame({"Math": [90, 91, 92, 93, 94], "English": np.arange(80, 85, 1)})
 print(df[["Math", "English"]])
+
+
+filename = "tmp_動物資料0.csv"
+df.to_csv(filename)  # 預設為 儲存index行
+
+filename = "tmp_動物資料1.csv"
+df.to_csv(filename, index=False)  # 不儲存index行
+
+filename = "tmp_動物資料2.csv"
+df.to_csv(filename, index=True)  # 儲存index行
+
+"""
+df.to_csv("tmp_datas11.csv",index=False,encoding="utf8")
+df.to_json("tmp_datas11.json")
+
+df2 = pd.read_csv("tmp_datas11.csv", encoding="utf8")
+df2 = pd.read_json("tmp_datas11.json")
+print(df2)
+
+for index, row in df.iterrows() :
+    print(index, row["蘋果"], row["香蕉"],
+          row["橘子"])
+
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+print("df存成csv檔")
+df.to_csv("tmp_olympics.csv")
+
+
+print("csv檔案轉df")
+
+# read from
+data = pd.read_csv("data/student.csv")
+print(data)
+
+# save to
+data.to_pickle("tmp_student.pickle")
+
+
+
+
+

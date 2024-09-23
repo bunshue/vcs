@@ -110,9 +110,6 @@ print(cc)
 
 print("------------------------------------------------------------")  # 60個
 
-sys.exit()
-
-
 print("reshape 它是NumPy中最常用的函數之一。它返回一個數組，其中包含具有新形狀的相同數據。")
 # np.reshape(shape)
 
@@ -782,19 +779,6 @@ cc = np.repeat([0, 1, 2], N)
 print(cc)
 
 print("------------------------------------------------------------")  # 60個
-
-# 讓我們來看一個更實際的示例，我們有一個包含按年數量銷售的數據集。
-
-fruits = pd.DataFrame(
-    [["Mango", 40], ["Apple", 90], ["Banana", 130]],
-    columns=["Product", "ContainerSales"],
-)
-print(fruits)
-
-# 在數據集中，缺少年份列。我們嘗試使用numpy添加它。
-
-fruits["year"] = np.repeat(2020, fruits.shape[0])
-print(fruits)
 
 print("tile 通過重復A，rep次來構造一個數組。")
 # np.tile(A, reps)

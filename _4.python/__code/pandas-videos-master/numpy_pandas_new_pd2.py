@@ -25,10 +25,18 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-'''
+
+#可以使用SSL module把證書驗證改成不需要驗證即可，方法如下:
+import ssl
+ssl._create_default_https_context = ssl._create_unverified_context
+
+print("------------------------------------------------------------")  # 60個
+
 import pandas as pd
 cc = pd.__version__
 print(cc)
+
+print("------------------------------------------------------------")  # 60個
 
 print('pd直接讀取網頁上的資料')
 # read a dataset of Chipotle orders directly from a URL and store the results in a DataFrame
@@ -45,7 +53,6 @@ users = pd.read_table('http://bit.ly/movieusers', sep='|', header=None, names=us
 print('檢視前幾行')
 cc = users.head()
 print(cc)
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -71,13 +78,12 @@ ufo['Location'] = ufo.City + ', ' + ufo.State
 cc = ufo.head()
 print(cc)
 
-
 print("------------------------------------------------------------")  # 60個
 
 # read a dataset of top-rated IMDb movies into a DataFrame
 movies = pd.read_csv('http://bit.ly/imdbratings')
 
-# example method: show the first 5 rows
+print('檢視前幾行')
 cc = movies.head()
 print(cc)
 
@@ -86,6 +92,7 @@ cc = movies.describe() # 方法有()
 print(cc)
 
 # example attribute: number of rows and columns
+print("movies之大小")
 cc = movies.shape # 屬性無()
 print(cc)
 
@@ -125,7 +132,6 @@ ufo.columns = ufo_cols
 
 print(ufo.columns)
 
-
 # replace the column names during the file reading process by using the 'names' parameter
 ufo = pd.read_csv('http://bit.ly/uforeports', header=0, names=ufo_cols)
 cc = ufo.columns
@@ -147,21 +153,25 @@ print("------------------------------------------------------------")  # 60個
 
 # read a dataset of UFO reports into a DataFrame
 ufo = pd.read_csv('http://bit.ly/uforeports')
+print('檢視前幾行')
 cc = ufo.head()
 print(cc)
 
 # remove a single column (axis=1 refers to columns)
 ufo.drop('Colors Reported', axis=1, inplace=True)
+print('檢視前幾行')
 cc = ufo.head()
 print(cc)
 
 # remove multiple columns at once
 ufo.drop(['City', 'State'], axis=1, inplace=True)
+print('檢視前幾行')
 cc = ufo.head()
 print(cc)
 
 # remove multiple rows at once (axis=0 refers to rows)
 ufo.drop([0, 1], axis=0, inplace=True)
+print('檢視前幾行')
 cc = ufo.head()
 print(cc)
 
@@ -171,26 +181,32 @@ print("------------------------------------------------------------")  # 60個
 
 # read a dataset of top-rated IMDb movies into a DataFrame
 movies = pd.read_csv('http://bit.ly/imdbratings')
+print('檢視前幾行')
 cc = movies.head()
 print(cc)
 
 # sort the 'title' Series in ascending order (returns a Series)
+print('檢視前幾行')
 cc = movies.title.sort_values().head()
 print(cc)
 
 # sort in descending order instead
+print('檢視前幾行')
 cc = movies.title.sort_values(ascending=False).head()
 print(cc)
 
 # sort the entire DataFrame by the 'title' Series (returns a DataFrame)
+print('檢視前幾行')
 cc = movies.sort_values('title').head()
 print(cc)
 
 # sort in descending order instead
+print('檢視前幾行')
 cc = movies.sort_values('title', ascending=False).head()
 print(cc)
 
 # sort the DataFrame first by 'content_rating', then by 'duration'
+print('檢視前幾行')
 cc = movies.sort_values(['content_rating', 'duration']).head()
 print(cc)
 
@@ -200,10 +216,12 @@ print("------------------------------------------------------------")  # 60個
 
 # read a dataset of top-rated IMDb movies into a DataFrame
 movies = pd.read_csv('http://bit.ly/imdbratings')
+print('檢視前幾行')
 cc = movies.head()
 print(cc)
 
 # examine the number of rows and columns
+print("movies之大小")
 cc = movies.shape
 print(cc)
 
@@ -225,6 +243,7 @@ print(cc)
 
 # convert the list to a Series
 is_long = pd.Series(booleans)
+print('檢視前幾行')
 cc = is_long.head()
 print(cc)
 
@@ -257,6 +276,7 @@ print("------------------------------------------------------------")  # 60個
 
 # read a dataset of top-rated IMDb movies into a DataFrame
 movies = pd.read_csv('http://bit.ly/imdbratings')
+print('檢視前幾行')
 cc = movies.head()
 print(cc)
 
@@ -264,13 +284,13 @@ print(cc)
 cc = movies[movies.duration >= 200]
 print(cc)
 
-
 # CORRECT: use the '&' operator to specify that both conditions are required
 cc = movies[(movies.duration >=200) & (movies.genre == 'Drama')]
 print(cc)
 
 # 錯誤
 # INCORRECT: using the '|' operator would have shown movies that are either long or dramas (or both)
+print('檢視前幾行')
 cc = movies[(movies.duration >=200) | (movies.genre == 'Drama')].head()
 print(cc)
 
@@ -325,19 +345,21 @@ import numpy as np
 cc = drinks.select_dtypes(include=[np.number]).dtypes
 print(cc)
 
-
 # describe all of the numeric columns
-drinks.describe()
-
+cc = drinks.describe()
+print(cc)
 
 # pass the string 'all' to describe all columns
-drinks.describe(include='all')
+cc = drinks.describe(include='all')
+print(cc)
 
 # pass a list of data types to only describe certain types
-drinks.describe(include=['object', 'float64'])
+cc = drinks.describe(include=['object', 'float64'])
+print(cc)
 
 # pass a list even if you only want to describe a single data type
-drinks.describe(include=['object'])
+cc = drinks.describe(include=['object'])
+print(cc)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -345,14 +367,19 @@ print('使用 axis')
 
 # read a dataset of alcohol consumption into a DataFrame
 drinks = pd.read_csv('http://bit.ly/drinksbycountry')
+print('檢視前幾行')
 cc = drinks.head()
 print(cc)
 
 # drop a column (temporarily)
-drinks.drop('continent', axis=1).head()
+print('檢視前幾行')
+cc = drinks.drop('continent', axis=1).head()
+print(cc)
 
 # drop a row (temporarily)
-drinks.drop(2, axis=0).head()
+print('檢視前幾行')
+cc = drinks.drop(2, axis=0).head()
+print(cc)
 
 """
 # calculate the mean of each numeric column
@@ -363,7 +390,9 @@ drinks.drop(2, axis=0).head()
 drinks.mean(axis=0)
 
 # calculate the mean of each row
-drinks.mean(axis=1).head()
+print('檢視前幾行')
+cc = drinks.mean(axis=1).head()
+print(cc)
 
 
 # 'index' is an alias for axis 0
@@ -371,7 +400,9 @@ drinks.mean(axis='index')
 
 
 # 'columns' is an alias for axis 1
-drinks.mean(axis='columns').head()
+print('檢視前幾行')
+cc = drinks.mean(axis='columns').head()
+print(cc)
 """
 
 print("------------------------------------------------------------")  # 60個
@@ -380,36 +411,42 @@ print("------------------------------------------------------------")  # 60個
 
 # read a dataset of Chipotle orders into a DataFrame
 orders = pd.read_table('http://bit.ly/chiporders')
-orders.head()
+print('檢視前幾行')
+cc = orders.head()
+print(cc)
 
 # string methods for pandas Series are accessed via 'str'
-orders.item_name.str.upper().head()
-
-
-
+print('檢視前幾行')
+cc = orders.item_name.str.upper().head()
+print(cc)
 
 # string method 'contains' checks for a substring and returns a boolean Series
-orders.item_name.str.contains('Chicken').head()
+print('檢視前幾行')
+cc = orders.item_name.str.contains('Chicken').head()
+print(cc)
 
 # use the boolean Series to filter the DataFrame
-orders[orders.item_name.str.contains('Chicken')].head()
+print('檢視前幾行')
+cc = orders[orders.item_name.str.contains('Chicken')].head()
+print(cc)
 
 # string methods can be chained together
-orders.choice_description.str.replace('[', '').str.replace(']', '').head()
-
+print('檢視前幾行')
+cc = orders.choice_description.str.replace('[', '').str.replace(']', '').head()
+print(cc)
 
 # many pandas string methods support regular expressions (regex)
-orders.choice_description.str.replace('[\[\]]', '').head()
-
-
-
-
+print('檢視前幾行')
+cc = orders.choice_description.str.replace('[\[\]]', '').head()
+print(cc)
 
 print("------------------------------------------------------------")  # 60個
 
 # read a dataset of alcohol consumption into a DataFrame
 drinks = pd.read_csv('http://bit.ly/drinksbycountry')
-drinks.head()
+print('檢視前幾行')
+cc = drinks.head()
+print(cc)
 
 # examine the data type of each Series
 print('檢視資料型態')
@@ -426,7 +463,9 @@ drinks.dtypes
 
 # read a dataset of Chipotle orders into a DataFrame
 orders = pd.read_table('http://bit.ly/chiporders')
-orders.head()
+print('檢視前幾行')
+cc = orders.head()
+print(cc)
 
 # examine the data type of each Series
 cc = orders.dtypes
@@ -436,10 +475,14 @@ print(cc)
 orders.item_price.str.replace('$', '').astype(float).mean()
 
 # string method 'contains' checks for a substring and returns a boolean Series
-orders.item_name.str.contains('Chicken').head()
+print('檢視前幾行')
+cc = orders.item_name.str.contains('Chicken').head()
+print(cc)
 
 # convert a boolean Series to an integer (False = 0, True = 1)
-orders.item_name.str.contains('Chicken').astype(int).head()
+print('檢視前幾行')
+cc = orders.item_name.str.contains('Chicken').astype(int).head()
+print(cc)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -447,7 +490,9 @@ print("------------------------------------------------------------")  # 60個
 
 # read a dataset of alcohol consumption into a DataFrame
 drinks = pd.read_csv('http://bit.ly/drinksbycountry')
-drinks.head()
+print('檢視前幾行')
+cc = drinks.head()
+print(cc)
 
 """
 # calculate the mean beer servings across the entire dataset
@@ -480,14 +525,17 @@ print("------------------------------------------------------------")  # 60個
 
 # read a dataset of top-rated IMDb movies into a DataFrame
 movies = pd.read_csv('http://bit.ly/imdbratings')
-movies.head()
+print('檢視前幾行')
+cc = movies.head()
+print(cc)
 
 # examine the data type of each Series
 cc = movies.dtypes
 print(cc)
 
 # count the non-null values, unique values, and frequency of the most common value
-movies.genre.describe()
+cc = movies.genre.describe()
+print(cc)
 
 # count how many times each value in the Series occurs
 movies.genre.value_counts()
@@ -500,7 +548,9 @@ movies.genre.value_counts(normalize=True)
 type(movies.genre.value_counts())
 
 # thus, you can add another Series method on the end
-movies.genre.value_counts().head()
+print('檢視前幾行')
+cc = movies.genre.value_counts().head()
+print(cc)
 
 # display the unique values in the Series
 movies.genre.unique()
@@ -512,18 +562,18 @@ movies.genre.nunique()
 # compute a cross-tabulation of two Series
 pd.crosstab(movies.genre, movies.content_rating)
 
-
-
 # calculate various summary statistics
-movies.duration.describe()
+cc = movies.duration.describe()
+print(cc)
 
 # many statistics are implemented as Series methods
 cc = movies.duration.mean()
 print(cc)
 
 # 'value_counts' is primarily useful for categorical data, not numerical data
-movies.duration.value_counts().head()
-
+print('檢視前幾行')
+cc = movies.duration.value_counts().head()
+print(cc)
 
 # histogram of the 'duration' Series (shows the distribution of a numerical variable)
 movies.duration.plot(kind='hist')
@@ -541,17 +591,19 @@ print("------------------------------------------------------------")  # 60個
 
 # read a dataset of UFO reports into a DataFrame
 ufo = pd.read_csv('http://bit.ly/uforeports')
+print('檢視後幾行')
 cc = ufo.tail()
 print(cc)
 
-
 print('找出缺少資料的項目')
 # 'isnull' returns a DataFrame of booleans (True if missing, False if not missing)
+print('檢視後幾行')
 cc = ufo.isnull().tail()
 print(cc)
 
 print('找出缺少資料的項目')
 # 'nonnull' returns the opposite of 'isnull' (True if not missing, False if missing)
+print('檢視後幾行')
 cc = ufo.notnull().tail()
 print(cc)
 
@@ -559,38 +611,56 @@ print(cc)
 ufo.isnull().sum()
 
 # use the 'isnull' Series method to filter the DataFrame rows
-ufo[ufo.City.isnull()].head()
+print('檢視前幾行')
+cc = ufo[ufo.City.isnull()].head()
+print(cc)
 
 # examine the number of rows and columns
+print("ufo之大小")
 cc = ufo.shape
 print(cc)
 
 # if 'any' values are missing in a row, then drop that row
+print("ufo之大小")
 ufo.dropna(how='any').shape
 
 # 'inplace' parameter for 'dropna' is False by default, thus rows were only dropped temporarily
-ufo.shape
+print("ufo之大小")
+cc = ufo.shape
+print(cc)
 
 # if 'all' values are missing in a row, then drop that row (none are dropped in this case)
-ufo.dropna(how='all').shape
+print("ufo之大小")
+cc = ufo.dropna(how='all').shape
+print(cc)
 
 # if 'any' values are missing in a row (considering only 'City' and 'Shape Reported'), then drop that row
-ufo.dropna(subset=['City', 'Shape Reported'], how='any').shape
+print("ufo之大小")
+cc = ufo.dropna(subset=['City', 'Shape Reported'], how='any').shape
+print(cc)
 
 # if 'all' values are missing in a row (considering only 'City' and 'Shape Reported'), then drop that row
-ufo.dropna(subset=['City', 'Shape Reported'], how='all').shape
+print("ufo之大小")
+cc = ufo.dropna(subset=['City', 'Shape Reported'], how='all').shape
+print(cc)
 
 # 'value_counts' does not include missing values by default
-ufo['Shape Reported'].value_counts().head()
+print('檢視前幾行')
+cc = ufo['Shape Reported'].value_counts().head()
+print(cc)
 
 # explicitly include missing values
-ufo['Shape Reported'].value_counts(dropna=False).head()
+print('檢視前幾行')
+cc = ufo['Shape Reported'].value_counts(dropna=False).head()
+print(cc)
 
 # fill in missing values with a specified value
 ufo['Shape Reported'].fillna(value='VARIOUS', inplace=True)
 
 # confirm that the missing values were filled in
-ufo['Shape Reported'].value_counts().head()
+print('檢視前幾行')
+cc = ufo['Shape Reported'].value_counts().head()
+print(cc)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -598,7 +668,9 @@ print("------------------------------------------------------------")  # 60個
 
 # read a dataset of alcohol consumption into a DataFrame
 drinks = pd.read_csv('http://bit.ly/drinksbycountry')
-drinks.head()
+print('檢視前幾行')
+cc = drinks.head()
+print(cc)
 
 # every DataFrame has an index (sometimes called the "row labels")
 drinks.index
@@ -607,10 +679,14 @@ drinks.index
 drinks.columns
 
 # neither the index nor the columns are included in the shape
-drinks.shape
+print("drinks之大小")
+cc = drinks.shape
+print(cc)
 
 # index and columns both default to integers if you don't define them
-pd.read_table('http://bit.ly/movieusers', header=None, sep='|').head()
+print('檢視前幾行')
+cc = pd.read_table('http://bit.ly/movieusers', header=None, sep='|').head()
+print(cc)
 
 # identification: index remains with each row when filtering the DataFrame
 drinks[drinks.continent=='South America']
@@ -620,7 +696,9 @@ drinks.loc[23, 'beer_servings']
 
 # set an existing column as the index
 drinks.set_index('country', inplace=True)
-drinks.head()
+print('檢視前幾行')
+cc = drinks.head()
+print(cc)
 
 # 'country' is now the index
 drinks.index
@@ -629,22 +707,29 @@ drinks.index
 drinks.columns
 
 # 'country' data is no longer part of the DataFrame contents
-drinks.shape
+print("drinks之大小")
+cc = drinks.shape
+print(cc)
 
 # country name can now be used for selection
 drinks.loc['Brazil', 'beer_servings']
 
 # index name is optional
 drinks.index.name = None
-drinks.head()
+print('檢視前幾行')
+cc = drinks.head()
+print(cc)
 
 # restore the index name, and move the index back to a column
 drinks.index.name = 'country'
 drinks.reset_index(inplace=True)
-drinks.head()
+print('檢視前幾行')
+cc = drinks.head()
+print(cc)
 
 # many DataFrame methods output a DataFrame
-drinks.describe()
+cc = drinks.describe()
+print(cc)
 
 # you can interact with any DataFrame using its index and columns
 cc = drinks.describe().loc['25%', 'beer_servings']
@@ -656,7 +741,9 @@ print("------------------------------------------------------------")  # 60個
 
 # read a dataset of alcohol consumption into a DataFrame
 drinks = pd.read_csv('http://bit.ly/drinksbycountry')
-drinks.head()
+print('檢視前幾行')
+cc = drinks.head()
+print(cc)
 
 # every DataFrame has an index
 cc = drinks.index
@@ -664,13 +751,17 @@ print(cc)
 #RangeIndex(start=0, stop=193, step=1)
 
 # every Series also has an index (which carries over from the DataFrame)
-drinks.continent.head()
+print('檢視前幾行')
+cc = drinks.continent.head()
+print(cc)
 
 # set 'country' as the index
 drinks.set_index('country', inplace=True)
 
 # Series index is on the left, values are on the right
-drinks.continent.head()
+print('檢視前幾行')
+cc = drinks.continent.head()
+print(cc)
 
 # another example of a Series (output from the 'value_counts' method)
 drinks.continent.value_counts()
@@ -691,19 +782,23 @@ drinks.continent.value_counts().sort_values()
 drinks.continent.value_counts().sort_index()
 
 # 'beer_servings' Series contains the average annual beer servings per person
-drinks.beer_servings.head()
-
-
+print('檢視前幾行')
+cc = drinks.beer_servings.head()
+print(cc)
 
 # create a Series containing the population of two countries
 people = pd.Series([3000000, 85000], index=['Albania', 'Andorra'], name='population')
 people
 
 # calculate the total annual beer servings for each country
-(drinks.beer_servings * people).head()
+print('檢視前幾行')
+cc = (drinks.beer_servings * people).head()
+print(cc)
 
 # concatenate the 'drinks' DataFrame with the 'population' Series (aligns by the index)
-pd.concat([drinks, people], axis=1).head()
+print('檢視前幾行')
+cc = pd.concat([drinks, people], axis=1).head()
+print(cc)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -711,7 +806,9 @@ print("------------------------------------------------------------")  # 60個
 
 # read a dataset of UFO reports into a DataFrame
 ufo = pd.read_csv('http://bit.ly/uforeports')
-ufo.head(3)
+print('檢視前3行')
+cc = ufo.head(3)
+print(cc)
 
 # row 0, all columns
 ufo.loc[0, :]
@@ -732,13 +829,17 @@ ufo.loc[0:2, 'City']
 ufo.loc[0:2, ['City', 'State']]
 
 # accomplish the same thing using double brackets - but using 'loc' is preferred since it's more explicit
-ufo[['City', 'State']].head(3)
+print('檢視前3行')
+cc = ufo[['City', 'State']].head(3)
+print(cc)
 
 # rows 0 through 2 (inclusive), columns 'City' through 'State' (inclusive)
 ufo.loc[0:2, 'City':'State']
 
 # accomplish the same thing using 'head' and 'drop'
-ufo.head(3).drop('Time', axis=1)
+print('檢視前3行')
+cc = ufo.head(3).drop('Time', axis=1)
+print(cc)
 
 # rows in which the 'City' is 'Oakland', column 'State'
 ufo.loc[ufo.City=='Oakland', 'State']
@@ -763,8 +864,9 @@ ufo[0:2]
 
 # read a dataset of alcohol consumption into a DataFrame and set 'country' as the index
 drinks = pd.read_csv('http://bit.ly/drinksbycountry', index_col='country')
-drinks.head()
-
+print('檢視前幾行')
+cc = drinks.head()
+print(cc)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -772,45 +874,60 @@ print("------------------------------------------------------------")  # 60個
 
 # read a dataset of UFO reports into a DataFrame
 ufo = pd.read_csv('http://bit.ly/uforeports')
-ufo.head()
+print('檢視前幾行')
+cc = ufo.head()
+print(cc)
 
-
-ufo.shape
-
+print("ufo之大小")
+cc = ufo.shape
+print(cc)
 
 # remove the 'City' column (doesn't affect the DataFrame since inplace=False)
-ufo.drop('City', axis=1).head()
+print('檢視前幾行')
+cc = ufo.drop('City', axis=1).head()
+print(cc)
 
 # confirm that the 'City' column was not actually removed
-ufo.head()
+print('檢視前幾行')
+cc = ufo.head()
+print(cc)
 
 # remove the 'City' column (does affect the DataFrame since inplace=True)
 ufo.drop('City', axis=1, inplace=True)
 
 # confirm that the 'City' column was actually removed
-ufo.head()
+print('檢視前幾行')
+cc = ufo.head()
+print(cc)
 
 
 # drop a row if any value is missing from that row (doesn't affect the DataFrame since inplace=False)
-ufo.dropna(how='any').shape
-
-(2490, 4)
+print("ufo之大小")
+cc = ufo.dropna(how='any').shape
+print(cc)
+#(2490, 4)
 
 # confirm that no rows were actually removed
-ufo.shape
-
-(18241, 4)
+print("ufo之大小")
+cc = ufo.shape
+print(cc)
+#(18241, 4)
 
 # use an assignment statement instead of the 'inplace' parameter
 ufo = ufo.set_index('Time')
-ufo.tail()
+print('檢視後幾行')
+cc = ufo.tail()
+print(cc)
 
 # fill missing values using "backward fill" strategy (doesn't affect the DataFrame since inplace=False)
-ufo.fillna(method='bfill').tail()
+print('檢視後幾行')
+cc = ufo.fillna(method='bfill').tail()
+print(cc)
 
 # compare with "forward fill" strategy (doesn't affect the DataFrame since inplace=False)
-ufo.fillna(method='ffill').tail()
-
+print('檢視後幾行')
+cc = ufo.fillna(method='ffill').tail()
+print(cc)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -818,58 +935,65 @@ print("------------------------------------------------------------")  # 60個
 
 # read a dataset of alcohol consumption into a DataFrame
 drinks = pd.read_csv('http://bit.ly/drinksbycountry')
-drinks.head()
+print('檢視前幾行')
+cc = drinks.head()
+print(cc)
 
 # exact memory usage is unknown because object columns are references elsewhere
-drinks.info()
+cc = drinks.info()
+print(cc)
 
 # force pandas to calculate the true memory usage
-drinks.info(memory_usage='deep')
-
-
+cc = drinks.info(memory_usage='deep')
+print(cc)
 
 # calculate the memory usage for each Series (in bytes)
-drinks.memory_usage(deep=True)
-
+cc = drinks.memory_usage(deep=True)
+print(cc)
 
 # use the 'category' data type (new in pandas 0.15) to store the 'continent' strings as integers
 drinks['continent'] = drinks.continent.astype('category')
-drinks.dtypes
+print(drinks.dtypes)
 
 # 'continent' Series appears to be unchanged
-drinks.continent.head()
-
-
+print('檢視前幾行')
+cc = drinks.continent.head()
+print(cc)
 
 # strings are now encoded (0 means 'Africa', 1 means 'Asia', 2 means 'Europe', etc.)
-drinks.continent.cat.codes.head()
-
+print('檢視前幾行')
+cc = drinks.continent.cat.codes.head()
+print(cc)
 
 # memory usage has been drastically reduced
-drinks.memory_usage(deep=True)
-
+cc = drinks.memory_usage(deep=True)
+print(cc)
 
 # repeat this process for the 'country' Series
 drinks['country'] = drinks.country.astype('category')
-drinks.memory_usage(deep=True)
-
+cc = drinks.memory_usage(deep=True)
+print(cc)
 
 # memory usage increased because we created 193 categories
-drinks.country.cat.categories
+cc = drinks.country.cat.categories
+print(cc)
 
-#字典轉df
+print("建立df, 字典轉df")
 # create a small DataFrame from a dictionary
 df = pd.DataFrame({'ID':[100, 101, 102, 103], 'quality':['good', 'very good', 'good', 'excellent']})
-df
+print(df)
 
 # sort the DataFrame by the 'quality' Series (alphabetical order)
-df.sort_values('quality')
+cc = df.sort_values('quality')
+print(cc)
 
 # sort the DataFrame by the 'quality' Series (logical order)
-df.sort_values('quality')
+cc = df.sort_values('quality')
+print(cc)
 
 # comparison operators work with ordered categories
-df.loc[df.quality > 'good', :]
+cc = df.loc[df.quality > 'good', :]
+print(cc)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -877,17 +1001,27 @@ print("------------------------------------------------------------")  # 60個
 
 # read the training dataset from Kaggle's Titanic competition into a DataFrame
 train = pd.read_csv('http://bit.ly/kaggletrain')
-train.head()
+print('檢視前幾行')
+cc = train.head()
+print(cc)
 
 # create a feature matrix 'X' by selecting two DataFrame columns
 feature_cols = ['Pclass', 'Parch']
 X = train.loc[:, feature_cols]
-X.shape
+print("X之大小")
+cc = X.shape
+print(cc)
 
 # create a response vector 'y' by selecting a Series
 y = train.Survived
-y.shape
+print("y之大小")
+cc = y.shape
+print(cc)
 
+sys.exit()
+
+
+""" skip sklearn for kilo
 
 # fit a classification model to the training data
 from sklearn.linear_model import LogisticRegression
@@ -897,20 +1031,28 @@ logreg.fit(X, y)
 
 # read the testing dataset from Kaggle's Titanic competition into a DataFrame
 test = pd.read_csv('http://bit.ly/kaggletest')
-test.head()
+print('檢視前幾行')
+cc = test.head()
+print(cc)
 
 # create a feature matrix from the testing data that matches the training data
 X_new = test.loc[:, feature_cols]
-X_new.shape
+print("X_new之大小")
+cc = X_new.shape
+print(cc)
 
 # use the fitted model to make predictions for the testing set observations
 new_pred_class = logreg.predict(X_new)
 
 # create a DataFrame of passenger IDs and testing set predictions
-pd.DataFrame({'PassengerId':test.PassengerId, 'Survived':new_pred_class}).head()
+print('檢視前幾行')
+cc = pd.DataFrame({'PassengerId':test.PassengerId, 'Survived':new_pred_class}).head()
+print(cc)
 
 # ensure that PassengerID is the first column by setting it as the index
-pd.DataFrame({'PassengerId':test.PassengerId, 'Survived':new_pred_class}).set_index('PassengerId').head()
+print('檢視前幾行')
+cc = pd.DataFrame({'PassengerId':test.PassengerId, 'Survived':new_pred_class}).set_index('PassengerId').head()
+print(cc)
 
 print('df轉csv')
 pd.DataFrame({'PassengerId':test.PassengerId, 'Survived':new_pred_class}).set_index('PassengerId').to_csv('tmp_sub.csv')
@@ -919,8 +1061,10 @@ print('df轉pickle')
 train.to_pickle('tmp_train.pkl')
 
 print('pickle轉df')
+print('檢視前幾行')
 cc = pd.read_pickle('tmp_train.pkl').head()
 print(cc)
+"""
 
 print("------------------------------------------------------------")  # 60個
 
@@ -928,32 +1072,37 @@ print("------------------------------------------------------------")  # 60個
 
 # read a dataset of UFO reports into a DataFrame
 ufo = pd.read_csv('http://bit.ly/uforeports')
-ufo.head()
+print('檢視前幾行')
+cc = ufo.head()
+print(cc)
 
 # 'Time' is currently stored as a string
-ufo.dtypes
-
+print(ufo.dtypes)
 
 # hour could be accessed using string slicing, but this approach breaks too easily
+print('檢視前幾行')
 cc = ufo.Time.str.slice(-5, -3).astype(int).head()
 print(cc)
 
-
-
 # convert 'Time' to datetime format
 ufo['Time'] = pd.to_datetime(ufo.Time)
-ufo.head()
+print('檢視前幾行')
+cc = ufo.head()
+print(cc)
 
-ufo.dtypes
+print(ufo.dtypes)
 
 # convenient Series attributes are now available
+print('檢視前幾行')
 cc = ufo.Time.dt.hour.head()
 print(cc)
 
 """ NG
+print('檢視前幾行')
 cc = ufo.Time.dt.weekday_name.head()
 print(cc)
 """
+print('檢視前幾行')
 cc = ufo.Time.dt.dayofyear.head()
 print(cc)
 
@@ -963,6 +1112,7 @@ print(ts)
 
 
 # compare a datetime Series with a timestamp
+print('檢視前幾行')
 cc = ufo.loc[ufo.Time >= ts, :].head()
 print(cc)
 
@@ -979,6 +1129,7 @@ print(cc)
 
 # count the number of UFO reports per year
 ufo['Year'] = ufo.Time.dt.year
+print('檢視前幾行')
 cc = ufo.Year.value_counts().sort_index().head()
 print(cc)
 
@@ -992,25 +1143,22 @@ print("------------------------------------------------------------")  # 60個
 #How do I create a pandas DataFrame from another object? (video)
 
 # create a DataFrame from a dictionary (keys become column names, values become data)
+print("建立df, 字典轉df")
 df = pd.DataFrame({'id':[100, 101, 102], 'color':['red', 'blue', 'red']})
 print(df)
 
-
-
 # optionally specify the order of columns and define the index
+print("建立df, 字典轉df")
 df = pd.DataFrame({'id':[100, 101, 102], 'color':['red', 'blue', 'red']}, columns=['id', 'color'], index=['a', 'b', 'c'])
 print(df)
 
 # create a DataFrame from a list of lists (each inner list becomes a row)
 pd.DataFrame([[100, 'red'], [101, 'blue'], [102, 'red']], columns=['id', 'color'])
 
-
 # create a NumPy array (with shape 4 by 2) and fill it with random numbers between 0 and 1
 import numpy as np
 arr = np.random.rand(4, 2)
 print(arr)
-
-
 
 # create a DataFrame from the NumPy array
 pd.DataFrame(arr, columns=['one', 'two'])
@@ -1037,9 +1185,11 @@ print("------------------------------------------------------------")  # 60個
 print('電影資料')
 movie_cols = ['movie_id', 'title']
 movies = pd.read_table('data/u.item', sep='|', header=None, names=movie_cols, usecols=[0, 1])
+print('檢視前幾行')
 cc = movies.head()
 print(cc)
 
+print("movies之大小")
 cc = movies.shape
 print(cc)
 
@@ -1050,15 +1200,18 @@ print(cc)
 
 rating_cols = ['user_id', 'movie_id', 'rating', 'timestamp']
 ratings = pd.read_table('data/u.data', sep='\t', header=None, names=rating_cols)
+print('檢視前幾行')
 cc = ratings.head()
 print(cc)
 
+print("ratings之大小")
 cc = ratings.shape
 print(cc)
 
 cc = ratings.movie_id.nunique()
 print(cc)
 
+print('檢視前幾行')
 cc = ratings.loc[ratings.movie_id == 1, :].head()
 print(cc)
 
@@ -1080,14 +1233,19 @@ print(cc)
 
 #Index(['movie_id', 'title', 'user_id', 'rating', 'timestamp'], dtype='object')
 
+print('檢視前幾行')
 cc = movie_ratings.head()
 print(cc)
 
+print("movie_ratings之大小")
 cc = movie_ratings.shape
 print(cc)
 
+print("movie之大小")
 print(movies.shape)
+print("ratings之大小")
 print(ratings.shape)
+print("movie_ratings之大小")
 print(movie_ratings.shape)
 
 print('3個df都不一樣大')
@@ -1103,17 +1261,18 @@ print(cc)
 
 #Index(['user_id', 'movie_id', 'rating', 'timestamp'], dtype='object')
 
+print('檢視前幾行')
 cc = pd.merge(movies, ratings, left_on='m_id', right_on='movie_id').head()
 print(cc)
-
-
 
 #What if you want to join on one index?
 
 movies = movies.set_index('m_id')
+print('檢視前幾行')
 cc = movies.head()
 print(cc)
 
+print('檢視前幾行')
 cc = pd.merge(movies, ratings, left_index=True, right_on='movie_id').head()
 print(cc)
 
@@ -1121,9 +1280,11 @@ print(cc)
 #What if you want to join on two indexes?
 
 ratings = ratings.set_index('movie_id')
+print('檢視前幾行')
 cc = ratings.head()
 print(cc)
 
+print('檢視前幾行')
 cc = pd.merge(movies, ratings, left_index=True, right_index=True).head()
 print(cc)
 
@@ -1178,9 +1339,9 @@ print("Create a category column during file reading")
 
 # read the drinks dataset into a DataFrame
 drinks = pd.read_csv('http://bit.ly/drinksbycountry')
+print('檢視前幾行')
 cc = drinks.head()
 print(cc)
-
 
 # data types are automatically detected
 cc = drinks.dtypes
@@ -1247,8 +1408,6 @@ print(cc)
 cc = drinks.describe()
 print(cc)
 
-'''
-
 print("------------------------------------------------------------")  # 60個
 
 #Load example datasets
@@ -1268,7 +1427,7 @@ cc = pd.show_versions()
 print(cc)
 
 #2. Create an example DataFrame
-
+print("建立df")
 df = pd.DataFrame({'col one':[100, 200], 'col two':[300, 400]})
 print(df)
 
@@ -1302,22 +1461,25 @@ print(cc)
 cc = df.add_suffix('_Y')
 print(cc)
 
-
 #4. Reverse row order
 
 #the drinks DataFrame:
 
+print('檢視前幾行')
 cc = drinks.head()
 print(cc)
 
+print('檢視前幾行')
 cc = drinks.loc[::-1].head()
 print(cc)
 
+print('檢視前幾行')
 cc = drinks.loc[::-1].reset_index(drop=True).head()
 print(cc)
 
 #5. Reverse column order
 
+print('檢視前幾行')
 cc = drinks.loc[:, ::-1].head()
 print(cc)
 
@@ -1328,20 +1490,24 @@ print(cc)
 cc = drinks.dtypes
 print(cc)
 
+print('檢視前幾行')
 cc = drinks.select_dtypes(include='number').head()
 print(cc)
 
+print('檢視前幾行')
 cc = drinks.select_dtypes(include='object').head()
 print(cc)
 
+print('檢視前幾行')
 cc = drinks.select_dtypes(include=['number', 'object', 'category', 'datetime']).head()
 print(cc)
 
+print('檢視前幾行')
 cc = drinks.select_dtypes(exclude='number').head()
 print(cc)
 
 #7. Convert strings to numbers
-
+print("建立df")
 df = pd.DataFrame({'col_one':['1.1', '2.2', '3.3'],
                    'col_two':['4.4', '5.5', '6.6'],
                    'col_three':['7.7', '8.8', '-']})
@@ -1408,33 +1574,30 @@ print(cc)
 
 #10. Build a DataFrame from multiple files (column-wise)
 
+print('檢視前幾行')
 cc = pd.read_csv('data/drinks1.csv').head()
 print(cc)
 
+print('檢視前幾行')
 cc = pd.read_csv('data/drinks2.csv').head()
 print(cc)
 
 drink_files = sorted(glob('data/drinks*.csv'))
 
+print('檢視前幾行')
 cc = pd.concat((pd.read_csv(file) for file in drink_files), axis='columns').head()
 print(cc)
 
 #11. Create a DataFrame from the clipboard
-
+print("建立df 將剪貼簿的資料轉成df")
 df = pd.read_clipboard()
 print(df)
 
-print(df.dtypes)
-
-df = pd.read_clipboard()
-print(df)
+print("型態:", df.dtypes)
 
 #Amazingly, pandas has even identified the first column as the index:
-
 print(df.index)
-
 #Index(['Alice', 'Bob', 'Charlie'], dtype='object')
-
 
 #12. Split a DataFrame into two random subsets
 
@@ -1468,6 +1631,7 @@ cc = movies_2.index.sort_values()
 
 #the movies DataFrame:
 
+print('檢視前幾行')
 cc = movies.head()
 print(cc)
 
@@ -1475,20 +1639,21 @@ print(cc)
 cc = movies.genre.unique()
 print(cc)
 
+print('檢視前幾行')
 cc = movies[(movies.genre == 'Action') |
        (movies.genre == 'Drama') |
        (movies.genre == 'Western')].head()
-
 print(cc)
 
+print('檢視前幾行')
 cc = movies[movies.genre.isin(['Action', 'Drama', 'Western'])].head()
 print(cc)
 
 #And if you want to reverse this filter, so that you are excluding (rather than including) those three genres, you can put a tilde in front of the condition:
 
+print('檢視前幾行')
 cc = movies[~movies.genre.isin(['Action', 'Drama', 'Western'])].head()
 print(cc)
-
 
 #14. Filter a DataFrame by largest categories
 
@@ -1504,6 +1669,7 @@ print(cc)
 
 #Finally, we can pass the index object to isin(), and it will be treated like a list of genres:
 
+print('檢視前幾行')
 cc = movies[movies.genre.isin(counts.nlargest(3).index)].head()
 print(cc)
 
@@ -1511,6 +1677,7 @@ print(cc)
 
 #Let's look at a dataset of UFO sightings:
 
+print('檢視前幾行')
 cc = ufo.head()
 print(cc)
 
@@ -1520,16 +1687,18 @@ print(cc)
 cc = ufo.isna().mean()
 print(cc)
 
+print('檢視前幾行')
 cc = ufo.dropna(axis='columns').head()
 print(cc)
 
+print('檢視前幾行')
 cc = ufo.dropna(thresh=len(ufo)*0.9, axis='columns').head()
 print(cc)
 
 #len(ufo) returns the total number of rows, and then we multiply that by 0.9 to tell pandas to only keep columns in which at least 90% of the values are not missing.
 
 #16. Split a string into multiple columns
-
+print("建立df")
 df = pd.DataFrame({'name':['John Arthur Doe', 'Jane Ann Smith'],
                    'location':['Los Angeles, CA', 'Washington, DC']})
 print(df)
@@ -1549,7 +1718,7 @@ print(df)
 #17. Expand a Series of lists into a DataFrame
 
 #Let's create another example DataFrame:
-
+print("建立df")
 df = pd.DataFrame({'col_one':['a', 'b', 'c'], 'col_two':[[10, 40], [20, 50], [30, 60]]})
 print(df)
 
@@ -1563,23 +1732,28 @@ print(cc)
 
 #Let's look at a DataFrame of orders from the Chipotle restaurant chain:
 
+print('檢視前10行')
 cc = orders.head(10)
 print(cc)
 
 cc = orders[orders.order_id == 1].item_price.sum()
 print(cc)
 
+print('檢視前幾行')
 cc = orders.groupby('order_id').item_price.sum().head()
 print(cc)
 
+print('檢視前幾行')
 cc = orders.groupby('order_id').item_price.agg(['sum', 'count']).head()
 print(cc)
 
 #19. Combine the output of an aggregation with a DataFrame
 
+print('檢視前10行')
 cc = orders.head(10)
 print(cc)
 
+print('檢視前幾行')
 cc = orders.groupby('order_id').item_price.sum().head()
 print(cc)
 
@@ -1596,10 +1770,12 @@ cc = len(total_price)
 print(cc)
 
 orders['total_price'] = total_price
+print('檢視前10行')
 cc = orders.head(10)
 print(cc)
 
 orders['percent_of_total'] = orders.item_price / orders.total_price
+print('檢視前10行')
 cc = orders.head(10)
 print(cc)
 
@@ -1607,6 +1783,7 @@ print(cc)
 
 #Let's take a look at another dataset:
 
+print('檢視前幾行')
 cc = titanic.head()
 print(cc)
 
@@ -1703,7 +1880,9 @@ This shows the number of records that appear in each combination of categories.
 
 Let's take a look at the Age column from the Titanic dataset:
 
-titanic.Age.head(10)
+print('檢視前10行')
+cc = titanic.Age.head(10)
+print(cc)
 
 0    22.0
 1    38.0
@@ -1721,7 +1900,9 @@ It's currently continuous data, but what if you wanted to convert it into catego
 
 One solution would be to label the age ranges, such as "child", "young adult", and "adult". The best way to do this is by using the cut() function:
 
+print('檢視前10行')
 pd.cut(titanic.Age, bins=[0, 18, 25, 99], labels=['child', 'young adult', 'adult']).head(10)
+print(cc)
 
 0    young adult
 1          adult
@@ -1743,7 +1924,9 @@ Notice that the data type is now "category", and the categories are automaticall
 
 Let's take another look at the Titanic dataset:
 
-titanic.head()
+print('檢視前幾行')
+cc = titanic.head()
+print(cc)
 
 	PassengerId 	Survived 	Pclass 	Name 	Sex 	Age 	SibSp 	Parch 	Ticket 	Fare 	Cabin 	Embarked
 0 	1 	0 	3 	Braund, Mr. Owen Harris 	male 	22.0 	1 	0 	A/5 21171 	7.2500 	NaN 	S
@@ -1760,7 +1943,9 @@ pd.set_option('display.float_format', '{:.2f}'.format)
 
 The first argument is the name of the option, and the second argument is a Python format string.
 
-titanic.head()
+print('檢視前幾行')
+cc = titanic.head()
+print(cc)
 
 	PassengerId 	Survived 	Pclass 	Name 	Sex 	Age 	SibSp 	Parch 	Ticket 	Fare 	Cabin 	Embarked
 0 	1 	0 	3 	Braund, Mr. Owen Harris 	male 	22.00 	1 	0 	A/5 21171 	7.25 	NaN 	S
