@@ -56,7 +56,7 @@ trace = go.Scatter(
     mode = "markers"
 )
 data = [trace]
-plotly.offline.plot(data, filename="ch15-2-2.html")
+plotly.offline.plot(data, filename="tmp_ch15-2-2.html")
 
 print('------------------------------------------------------------')	#60個
 
@@ -90,7 +90,7 @@ trace2 = go.Scatter(
     name = "折線"
 )
 data = [trace0, trace1, trace2]
-plotly.offline.plot(data, filename="ch15-2-2a.html")
+plotly.offline.plot(data, filename="tmp_ch15-2-2a.html")
 
 print('------------------------------------------------------------')	#60個
 
@@ -117,7 +117,7 @@ layout = {"xaxis": {"showgrid":False,"zeroline":False,
           "paper_bgcolor": "rgb(233,233,233)",
           "plot_bgcolor": "rgb(233,233,233)",
           }
-plotly.offline.plot({"data":data,"layout":layout}, filename="ch15-2-2b.html")
+plotly.offline.plot({"data":data,"layout":layout}, filename="tmp_ch15-2-2b.html")
 
 print('------------------------------------------------------------')	#60個
 
@@ -129,7 +129,7 @@ df = pd.read_csv("data/AAPL.csv")
 data = [go.Scatter(
         x=df.Date,
         y=df["Close"])]
-plotly.offline.plot(data, filename="ch15-2-2c.html")
+plotly.offline.plot(data, filename="tmp_ch15-2-2c.html")
 
 print('------------------------------------------------------------')	#60個
 
@@ -144,7 +144,7 @@ trace = go.Ohlc(x=df.Date,
                 low=df["Low"],
                 close=df["Close"])
 data = [trace]
-plotly.offline.plot(data, filename="ch15-2-2d.html")
+plotly.offline.plot(data, filename="tmp_ch15-2-2d.html")
 
 print('------------------------------------------------------------')	#60個
 
@@ -159,7 +159,7 @@ df = pd.DataFrame(stock.fetch_from(2020,1))
 df["date"] = pd.to_datetime(df["date"]) 
 df.set_index("date", inplace=True)
 print(df.head())
-conn = sqlite3.connect(tsmc+".db")
+conn = sqlite3.connect("tmp_"+tsmc+".db")
 df.to_sql(tsmc, conn, if_exists="replace")
 print("已經將股票資料存入SQLite資料庫...")
 
@@ -171,7 +171,7 @@ import plotly.graph_objs as go
 import sqlite3
 
 tsmc = "2330"
-conn = sqlite3.connect(tsmc+".db")
+conn = sqlite3.connect("tmp_"+tsmc+".db")
 df = pd.read_sql("SELECT * FROM '2330'", con=conn)
 trace = go.Ohlc(x=df.date,
                 open= df["open"],
@@ -182,7 +182,7 @@ data = [trace]
 plotly.offline.plot({
     "data": data,
     "layout": go.Layout(title="台積電2020年的OHLC圖")
-}, filename="ch15-4.html")
+}, filename="tmp_ch15-4.html")
 
 print('------------------------------------------------------------')	#60個
 
@@ -193,7 +193,7 @@ import plotly.graph_objs as go
 import sqlite3
 
 tsmc = "2330"
-conn = sqlite3.connect(tsmc+".db")
+conn = sqlite3.connect("tmp_"+tsmc+".db")
 df = pd.read_sql("SELECT * FROM '2330'", con=conn)
 data = [go.Scatter(
         x=df.date,
@@ -201,9 +201,10 @@ data = [go.Scatter(
 plotly.offline.plot({
     "data": data,
     "layout": go.Layout(title="台積電2020年的成交股數的時序圖")
-}, filename="ch15-4a.html")
+}, filename="tmp_ch15-4a.html")
 
 print('------------------------------------------------------------')	#60個
+
 
 
 print("------------------------------------------------------------")  # 60個
