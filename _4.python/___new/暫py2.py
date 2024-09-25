@@ -25,6 +25,18 @@ print('------------------------------------------------------------')	#60個
 
 print('------------------------------------------------------------')	#60個
 
+# post 與 payload的寫法 目前不能用
+import requests
+url = 'http://www.ibon.com.tw/retail_inquiry_ajax.aspx'
+payload = {'strTargetField': 'COUNTY', 'strKeyWords': '南投縣'}
+html = requests.post(url, data=payload)
+html.encoding='utf-8'
+
+url = 'http://www.ibon.com.tw/retail_inquiry.aspx#gsc.tab=0'
+r = requests.get(url)
+r.encoding = 'utf-8'
+html = BeautifulSoup(r.text, 'html.parser')
+
 
 
 
