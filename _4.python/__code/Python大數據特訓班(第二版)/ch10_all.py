@@ -162,3 +162,6 @@ data = [
     Scatter(x=pdstock['日期'], y=pdstock['最高價'], name='最高價')
 ]
 plot({"data": data, "layout": Layout(title='2019年個股統計圖')},auto_open=True)
+
+print("------------------------------------------------------------")  # 60個
+
