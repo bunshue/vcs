@@ -190,7 +190,38 @@ print(s)
 
 print("------------------------------------------------------------")  # 60個
 
+# Series
 
+# se1.py
+se = pd.Series([1,2,3,4])
+print(se)           #顯示Series
+print(se.values)    #顯示值
+print(se.index)     #顯示索引
+
+# se2.py
+dict1 = {'a': 100, 'b': 200, 'c': 300}
+se = pd.Series(dict1)
+print(se)           #顯示Series
+print(se.values)    #顯示值
+print(se.index)     #顯示索引
+
+# se3.py
+se = pd.Series([1,2,3,4,5])
+print(se[2])
+print('-' * 6)
+print(se[2:5])
+
+
+print('------------------------------------------------------------')	#60個
+
+
+lst = ["Bike","Bus","Car","Truck"]
+print(type(lst))
+
+print('List 轉 Series')
+s = pd.Series(lst)
+print(type(s))
+print(s)
 
 print("------------------------------------------------------------")  # 60個
 
