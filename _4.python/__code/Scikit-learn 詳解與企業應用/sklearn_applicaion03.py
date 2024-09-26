@@ -23,40 +23,42 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-'''
+"""
 #Scikit-learn_Toy datasets
-
-from sklearn import datasets
 
 #載入酒類資料集
 
+"""
+
+from sklearn import datasets
+
 ds = datasets.load_wine()
 
-#資料集說明
+print("資料集說明")
 
 print(ds.DESCR)
 
-#資料集的特徵(X)
+print("資料集的特徵(X)")
 
 import pandas as pd
 df = pd.DataFrame(ds.data, columns=ds.feature_names)
 print(df)
 
-#資料集的目標(Y)
+print("資料集的目標(Y)")
 print(ds.target)
 
-# 目標(Y)的名稱，即標註(Label)
+print("目標(Y)的名稱，即標註(Label)")
 print(ds.target_names)
 
-# 觀察資料集彙總資訊
+print("觀察資料集彙總資訊")
 cc = df.info()
 print(cc)
 
-# 描述統計量
+print("描述統計量")
 cc = df.describe()
 print(cc)
 
-#另一種載入資料集的方法
+print("另一種載入資料集的方法")
 
 X, y = datasets.load_wine(return_X_y=True)
 print(X)
@@ -101,9 +103,9 @@ import numpy as np
 cc = np.isnan(X).sum()
 print(cc)
 
-#繪圖
 
-# y 各類別資料筆數統計
+
+print("# y 各類別資料筆數統計")
 import pandas as pd
 
 df_y = pd.DataFrame({'code':y})
@@ -117,7 +119,7 @@ plt.xticks(rotation=30);
 
 plt.show()
 
-# 以Pandas函數統計各類別資料筆數
+print("以Pandas函數統計各類別資料筆數")
 pd.Series(y).value_counts()
 
 #3. 不須進行特徵工程
@@ -149,28 +151,21 @@ clf = LogisticRegression(max_iter=500)
 
 clf.fit(X_train_std, y_train)
 
-"""
-LogisticRegression(max_iter=500)
-
-In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook.
-On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.
-"""
-
 #7. 模型計分
 
 y_pred = clf.predict(X_test_std)
 print(y_pred)
 
-# 計算準確率
+print('計算準確率 測試目標 與 預測目標 接近程度')
 from sklearn.metrics import accuracy_score
 
 print(f'{accuracy_score(y_test, y_pred)*100:.2f}%') 
 
-# 混淆矩陣
+print('混淆矩陣')
 from sklearn.metrics import confusion_matrix
 print(confusion_matrix(y_test, y_pred))
 
-# 混淆矩陣圖
+print('混淆矩陣圖')
 from sklearn.metrics import ConfusionMatrixDisplay
 import matplotlib.pyplot as plt
 
@@ -247,8 +242,6 @@ print(X.shape)
 
 print(centers)
 
-#繪圖
-
 import matplotlib.pyplot as plt
 
 # 樣本點的形狀
@@ -282,8 +275,6 @@ print(X.shape)
 
 print(coef)
 
-#繪圖
-
 plt.scatter(X[:,0], y)
 plt.plot([min(X), max(X)], [min(X)*coef, max(X)*coef], 'r')
 plt.show()
@@ -292,8 +283,6 @@ plt.show()
 
 X, y = make_moons(n_samples=100, noise=0.05)
 print(X.shape)
-
-#繪圖
 
 # 針對類別各畫一個散佈圖
 colors = ['red', 'blue']
@@ -311,8 +300,6 @@ plt.show()
 
 X, y = make_circles(n_samples=100, noise=0.05)
 print(X.shape)
-
-#繪圖
 
 # 針對類別各畫一個散佈圖
 colors = ['red', 'blue']
@@ -692,7 +679,7 @@ print(df2)
 # 存檔
 import joblib
 joblib.dump(encoder, 'tmp_color.joblib')
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 #頻率轉換、合併多個表格

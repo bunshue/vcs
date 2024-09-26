@@ -23,119 +23,74 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-
-""" 不知道在演什麼
-
-#MLflow 測試
-#載入相關套件
-
-from sklearn import datasets
-import os
-import warnings
-import sys
-import pandas as pd
-import numpy as np
-from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
-from sklearn.model_selection import train_test_split
-from sklearn.linear_model import ElasticNet
-import mlflow
-import mlflow.sklearn
-
-#載入資料集
-
-X, y = datasets.load_diabetes(return_X_y=True)
-
-#資料分割
-
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=.2)
-
-#模型訓練與評估
-
-# 定義模型參數
-alpha = 1
-l1_ratio = 1
-
-with mlflow.start_run():
-    # 模型訓練
-    model = ElasticNet(alpha = alpha,
-                       l1_ratio = l1_ratio)
-    model.fit(X_train,y_train)
-    
-    # 模型評估
-    pred = model.predict(X_test)
-    rmse = mean_squared_error(pred, y_test)
-    abs_error = mean_absolute_error(pred, y_test)
-    r2 = r2_score(pred, y_test)
-    
-    # MLflow 記錄
-    mlflow.log_param('alpha', alpha)
-    mlflow.log_param('l1_ratio', l1_ratio)
-    mlflow.log_metric('rmse', rmse)
-    mlflow.log_metric('abs_error', abs_error)
-    mlflow.log_metric('r2', r2)
-    
-    # MLflow 記錄模型
-    mlflow.sklearn.log_model(model, "model")
-
-
-#模型評估
-
-mlflow.sklearn.log_model(model, "model")
 """
-print("------------------------------------------------------------")  # 60個
 
+乳癌診斷預測
 
-print("------------------------------------------------------------")  # 60個
-
-#乳癌診斷預測
+"""
 
 from sklearn import datasets, preprocessing
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 
-#載入資料集
+#1. 載入資料集
 
 ds = datasets.load_breast_cancer()
+"""
+print("資料集說明")
+print(ds.DESCR)
+
+print("資料集欄位")
+print(ds.feature_names)
+
+print("資料集資料")
+print(ds.data)
+
+print("資料集目標名稱")
+print(ds.target_names)
+
+print("資料集目標")
+print(ds.target)
+"""
 
 #2. 資料清理、資料探索與分析
 
-# 資料集說明
-print(ds.DESCR)
-
-import pandas as pd
 df = pd.DataFrame(ds.data, columns=ds.feature_names)
-print(df)
+#print(df)
 
+# 資料集目標
 y = ds.target
-print(y)
+#print(y)
+#資料集目標名稱
+#print(ds.target_names)
 
-print(ds.target_names)
-
-# 觀察資料集彙總資訊
+print("觀察資料集彙總資訊")
 cc = df.info()
-print(df)
+print(cc)
 
-# 描述統計量
-df.describe()
+print("描述統計量")
+cc = df.describe()
+print(cc)
 
 # 箱型圖
 import seaborn as sns
 sns.boxplot(data=df)
+plt.title('xxxxx箱型圖')
 plt.show()
 
 
-# 是否有含遺失值(Missing value)
+print("是否有含遺失值(Missing value)")
 cc = df.isnull().sum()
 print(cc)
 
-print("繪圖")
-
-# y 各類別資料筆數統計
+print("y 各類別資料筆數統計")
+"""
 import seaborn as sns
 sns.countplot(x=y)
+plt.title('y 各類別資料筆數統計')
 plt.show()
-
-# 以Pandas函數統計各類別資料筆數
+"""
+print("以Pandas函數統計各類別資料筆數")
 cc = pd.Series(y).value_counts()
 print(cc)
 
@@ -147,14 +102,20 @@ print(cc)
 X = df.values
 
 # 資料分割
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=.2)
+# 訓練資料, 測試資料, 訓練目標, 測試目標
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)  # 8成訓練 2成測試
 
 # 查看陣列維度
-print(X_train.shape, X_test.shape, y_train.shape, y_test.shape)
+cc = X_train.shape, X_test.shape, y_train.shape, y_test.shape
+print(cc)
 
-print(y_train)
+print("訓練目標")
+#print(y_train)
 
-#特徵縮放
+print("測試目標")
+print(y_test)
+
+print("特徵縮放")
 
 scaler = preprocessing.StandardScaler()
 X_train_std = scaler.fit_transform(X_train)
@@ -169,32 +130,27 @@ clf = LogisticRegression()
 
 clf.fit(X_train_std, y_train)
 
-"""
-LogisticRegression()
-
-In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook.
-On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.
-"""
-
-#7. 模型計分
+#7. 模型評估
 
 y_pred = clf.predict(X_test_std)
+print('預測目標')
 print(y_pred)
 
-print("計算準確率")
+print('計算準確率 測試目標 與 預測目標 接近程度')
 print(f'{accuracy_score(y_test, y_pred)*100:.2f}%') 
 
-# 混淆矩陣
+print('混淆矩陣')
 from sklearn.metrics import confusion_matrix
 print(confusion_matrix(y_test, y_pred))
 
-# 混淆矩陣圖
+print('混淆矩陣圖')
 from sklearn.metrics import ConfusionMatrixDisplay
 import matplotlib.pyplot as plt
 
 disp = ConfusionMatrixDisplay(confusion_matrix=confusion_matrix(y_test, y_pred)
                               , display_labels=ds.target_names)
 disp.plot()
+plt.title('混淆矩陣圖')
 plt.show()
 
 #8. 模型評估，暫不進行
@@ -206,8 +162,6 @@ import joblib
 
 joblib.dump(clf, 'tmp_cancer_model.joblib')
 joblib.dump(scaler, 'tmp_cancer_scaler.joblib');
-
-
 
 print("------------------------------------------------------------")  # 60個
 

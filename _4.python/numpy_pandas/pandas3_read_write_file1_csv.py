@@ -25,34 +25,111 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
+"""
+中文名,英文名,體重,全名
+鼠,mouse,3,米老鼠
+牛,ox,48,班尼牛
+虎,tiger,33,跳跳虎
+兔,rabbit,8,彼得兔
+龍,dragon,38,逗逗龍
+    :
+豬,pig,42,佩佩豬
+"""
+
+# 好像都不是我要的
+
 # 載入資料與定義資料
 filename = "data/animals.csv"
-
+print('讀取csv檔, 無參數')
 df = pd.read_csv(filename)
 print(df)
 print("--------")
+print('讀取csv檔, header=0, index_col=0')
 df = pd.read_csv(filename, header=0, index_col=0)
 print(df)
 print("--------")
+print('讀取csv檔, header=0, index_col=1')
 df = pd.read_csv(filename, header=0, index_col=1)
 print(df)
 print("--------")
+print('讀取csv檔, header=1, index_col=0')
 df = pd.read_csv(filename, header=1, index_col=0)
 print(df)
 print("--------")
+print('讀取csv檔, header=1, index_col=1')
 df = pd.read_csv(filename, header=1, index_col=1)
 print(df)
 print("--------")
 
+print("------------------------------------------------------------")  # 60個
+
+filename = "data/iris_sample.csv"
+
+iris = pd.read_csv(filename)
 """
-print('資料結構訊息', df.info())
-print('資料shape :', df.shape)
-print('資料內容\n', df)
-print('資料head\n', df.head())
-print(type(df))
-print(df)
-print(df.shape)
+共有五個欄位：
+1. 花萼長度(Sepal Length)：計算單位是公分。
+2. 花萼寬度(Sepal Width)：計算單位是公分。
+3. 花瓣長度(Petal Length) ：計算單位是公分。
+4. 花瓣寬度(Petal Width)：計算單位是公分。
+5. 類別(Class)：可分為Setosa，Versicolor和Virginica三個品種。
 """
+
+print("資料")
+print(iris)
+
+print("資料shape")
+print(iris.shape)
+
+print("資料.type")
+print(type(iris))
+
+print("資料.head()")
+print(iris.head())
+
+print("size")
+print(np.unique(iris["花萼長度"].values).size)
+print()
+
+cccc = np.where(iris["類別"] == "versicolor", 1, 0)
+print("抓出versicolor :", cccc)
+print()
+
+color = ["r", "y", "b"]
+species = ["Setosa", "Versicolour", "Virginica"]
+Setosa = []
+Versicolour = []
+Virginica = []
+
+print(type(iris))
+print(len(iris))
+print(iris.shape)
+
+# sepal_length,sepal_width,petal_length,petal_width,species
+print(iris["花萼長度"])
+
+print(len(iris["花萼長度"]))
+
+print(iris["花萼長度"][0])
+
+# 不同种类保存为不同的列表
+for i in range(len(iris)):
+    if iris["類別"][i] == "setosa":
+        Setosa.append(1)
+        Versicolour.append(0)
+        Virginica.append(0)
+    elif iris["類別"][i] == "versicolor":
+        Setosa.append(0)
+        Versicolour.append(1)
+        Virginica.append(0)
+    elif iris["類別"][i] == "virginica":
+        Setosa.append(0)
+        Versicolour.append(0)
+        Virginica.append(1)
+
+print("Setosa :", Setosa)
+print("Versicolour :", Versicolour)
+print("Virginica :", Virginica)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -165,7 +242,7 @@ titanic["SexCode"] = np.where(titanic["Sex"] == "female", 1, 0)
 print(titanic.head())
 print()
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 from sklearn import preprocessing
 
@@ -191,7 +268,7 @@ print(titanic["Sex"].groupby(titanic["Sex"]).size())
 print("2222")
 print(titanic.groupby("Sex")["Age"].mean())
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 # 探索性資料分析
 
@@ -207,7 +284,7 @@ df["Age"].plot(kind="hist", bins=15)
 
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 fig, axes = plt.subplots(nrows=1, ncols=2)
 df = titanic[["Survived", "Died"]].groupby(titanic["Sex"]).sum()
@@ -218,96 +295,26 @@ df.plot(kind="bar", ax=axes[1])
 
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 df = titanic[["Survived", "Died"]].groupby(titanic["PClass"]).sum()
 df.plot(kind="bar")
 
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 df = titanic[["Survived", "Died"]].groupby(titanic["PClass"]).mean()
 df.plot(kind="bar")
 
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 df = titanic.drop("Died", axis=1)
 print("係數矩陣 :", df.corr())
 
 plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-filename = "data/iris_sample.csv"
-
-iris = pd.read_csv(filename)
-"""
-共有五個欄位：
-1. 花萼長度(Sepal Length)：計算單位是公分。
-2. 花萼寬度(Sepal Width)：計算單位是公分。
-3. 花瓣長度(Petal Length) ：計算單位是公分。
-4. 花瓣寬度(Petal Width)：計算單位是公分。
-5. 類別(Class)：可分為Setosa，Versicolor和Virginica三個品種。
-"""
-
-print("資料")
-print(iris)
-
-print("資料shape")
-print(iris.shape)
-
-print("資料.type")
-print(type(iris))
-
-print("資料.head()")
-print(iris.head())
-
-print("size")
-print(np.unique(iris["花萼長度"].values).size)
-print()
-
-cccc = np.where(iris["類別"] == "versicolor", 1, 0)
-print("抓出versicolor :", cccc)
-print()
-
-color = ["r", "y", "b"]
-species = ["Setosa", "Versicolour", "Virginica"]
-Setosa = []
-Versicolour = []
-Virginica = []
-
-print(type(iris))
-print(len(iris))
-print(iris.shape)
-
-# sepal_length,sepal_width,petal_length,petal_width,species
-print(iris["花萼長度"])
-
-print(len(iris["花萼長度"]))
-
-print(iris["花萼長度"][0])
-
-# 不同种类保存为不同的列表
-for i in range(len(iris)):
-    if iris["類別"][i] == "setosa":
-        Setosa.append(1)
-        Versicolour.append(0)
-        Virginica.append(0)
-    elif iris["類別"][i] == "versicolor":
-        Setosa.append(0)
-        Versicolour.append(1)
-        Virginica.append(0)
-    elif iris["類別"][i] == "virginica":
-        Setosa.append(0)
-        Versicolour.append(0)
-        Virginica.append(1)
-
-print("Setosa :", Setosa)
-print("Versicolour :", Versicolour)
-print("Virginica :", Virginica)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1218,3 +1225,17 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+
+# 準備移出
+
+"""
+print('資料結構訊息', df.info())
+print('資料shape :', df.shape)
+print('資料內容\n', df)
+print('資料head\n', df.head())
+print(type(df))
+print(df)
+print(df.shape)
+"""
+
+
