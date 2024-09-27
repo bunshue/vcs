@@ -35,6 +35,7 @@ def download_image(image_url, dest_dir, image_filename):
 
     try:
         print("downloading image %s" % image_url)
+        return
         tmp_file_name, headers = urlretrieve(image_url)
         content_type = headers.get("Content-Type")
 
