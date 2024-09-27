@@ -44,299 +44,39 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-'''
-print('pandas 讀取 csv檔')
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_csv/scores2.csv'
-print("pd讀取csv檔案 :", filename)
-print('跳過標題與索引')
-df = pd.read_csv(filename, header=0, index_col=0)
-print(df)
-
-print("pd讀取csv檔案 :", filename)
-df = pd.read_csv(filename)
-print(df)
-
-print('------------------------------------------------------------')	#60個
-
-filename = "http://bit.ly/gradescsv"
-print("pd讀取http csv檔案 :", filename)
-df = pd.read_csv(filename)
-print(df.head())
-
-print('------------------------------------------------------------')	#60個
-
-filename = 'data/grades.csv'
-print("pd讀取csv檔案 :", filename)
-df = pd.read_csv(filename)
-
-print('df的前5筆資料')
-print(df.head())
-
-print('國文成績')
-print(df["國文"])
-
-print('國文成績')
-print(df.國文)
-
-cg = df.國文.values
-print(type(cg))
-print('cg')
-print(cg)
-
-print('平均值')
-print(cg.mean())
-print('標準差')
-print(cg.std())
-
-print('平均值')
-print(df.國文.mean())
-print('標準差')
-print(df.國文.std())
-print('顯示df統計資料')
-print(df.describe())    #顯示統計資料
-
-#print('係數矩陣 :', df.corr())
-
-#只算兩科間的相關係數當然也可以。
-print(df.國文.corr(df.數學))
-
-df["總級分"] = df[["國文", "英文", "數學", "社會", "自然"]].sum(1)
-print(df.head())
-
-df["主科"] = df.數學*1.5 + df.英文
-
-print(df.head())
-
-print(df.sort_values(by = "總級分", ascending = False).head(20))
-
-print(df.sort_values(by = ["主科", "總級分"], ascending = False).head(20))
-
-print('------------------------------------------------------------')	#60個
-
-filename = 'data/ExpensesRecord.csv'
-print("pd讀取csv檔案 :", filename)
-df = pd.read_csv(filename)
-print(df.head(5) )
-print(df["說明"])
-print(df[["說明","支出金額"]] )
-
-filename = "tmp_ExpensesRecord.csv"
-df.to_csv(filename)
-print("df寫入csv檔案 :", filename)
-
-df["單價"]=df["支出金額"]/df["數量"]
-print(df[["數量","支出金額","單價"]] )
-
-print('------------------------------------------------------------')	#60個
-
-filename = "data/qunar_routes.csv"
-print("pd讀取csv檔案 :", filename)
-df = pd.read_csv(filename)
-print (df.head())
-print (df.info())
-print (df)
-
-print(df.路線信息)
-print()
-
-print(df.路線信息.str.extract('(\d+)天\d+晚'))
-
-df["天數"]=df.路線信息.str.extract('(\d+)天\d+晚')
-print('ttttt2')
-df["酒店評分"]=df.酒店信息.str.extract('(\d\.\d)分')
-print('ttttt3')
-df["酒店等級"]=df.酒店信息.str.extract('\n(.*)')
-print('ttttt4')
-df["價格"]=df.路線信息.str.extract('(\d+)起/人')
-print('ttttt5')
-print (df.head())
-print (df.info())
-
-print('酒店等級 :', df["酒店等級"])
-print('酒店評分 :', df["酒店評分"])
-print('價格 :', df["價格"])
-
-class_map = {"其他":0,"經濟型":1,"舒適型":2,"高檔型":3,"豪華型":4}
-df["酒店等級"]=df["酒店等級"].map(class_map)
-
-print('------------------------------------------------------------')	#60個
-
-filename = "data/python_ReadWrite_CSV7_onigiri.csv"
-print("pd讀取csv檔案 :", filename)
-dat = pd.read_csv(filename, encoding="UTF-8")
-
-print(type(dat))
-print(dat)
-
-bins=range(0, 200, 10)
-for b in bins:
-    print(b)
-
-print("計算平均數、變異數、標準差")
-
-print("店長---------")
-print("平均:", np.mean(dat["店長"]))
-print("變異數:", np.var(dat["店長"]))
-print("標準差:", np.std(dat["店長"]))
-
-print("太郎---------")
-print("平均:", np.mean(dat["太郎"]))
-print("變異數:", np.var(dat["太郎"]))
-print("標準差:", np.std(dat["太郎"]))
-
-print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
 
-
+print("---- 1111 csv --------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-print('---- 1111 csv --------------------------------------------------------')	#60個
+print("---- 2222 json --------------------------------------------------------")  # 60個
 
-print('pandas DataFrame資料輸出到csv檔')
-
-scores = {'國文':{'王小明':65,'李小美':90,'陳大同':81,'林小玉':79},
-          '英文':{'王小明':92,'李小美':72,'陳大同':85,'林小玉':53},
-          '數學':{'王小明':78,'李小美':76,'陳大同':91,'林小玉':47},
-          '自然':{'王小明':83,'李小美':93,'陳大同':89,'林小玉':94},
-          '社會':{'王小明':70,'李小美':56,'陳大同':77,'林小玉':80}}
-df = pd.DataFrame(scores)
-print(df)
-
-filename = 'tmp_score1.csv'
-df.to_csv(filename, encoding = 'utf-8-sig')
-print("df寫入csv檔案 :", filename)
-
-print('------------------------------------------------------------')	#60個
-
-datas = [[65,92,78,83,70], [90,72,76,93,56], [81,85,91,89,77], [79,53,47,94,80]]
-indexs = ["王小明", "李小美", "陳大同", "林小玉"]
-columns = ["國文", "英文", "數學", "自然", "社會"]
-df = pd.DataFrame(datas, columns=columns,  index=indexs)
-print(df)
-
-filename = 'tmp_score2.csv'
-df.to_csv(filename, encoding="utf-8-sig")
-print("df寫入csv檔案 :", filename)
-
-print('------------------------------')	#30個
-
-print("pd讀取csv檔案 :", filename)
-print('跳過索引')
-df = pd.read_csv(filename, encoding="utf-8-sig",index_col=0)
-print(df)
-
-print('------------------------------------------------------------')	#60個
-
-print('pandas 讀取 csv檔')
-
-print("讀取 .csv 檔 1")
-filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_csv/scores.csv'
-na = np.genfromtxt(filename, delimiter = ',', skip_header = 1)
-print("資料寬高")
-print(na.shape)
-
-print('國文最高分數：', na[:,1].max())
-print('英文最低分數：', na[:,2].min())
-print('數學平均分數：', na[:,3].mean())
-total1 = na[:,1] + na[:,2] + na[:,3]
-print(total1)
-print('全班最高總分：',total1.max())
-
-total2 = na[:,1:4].sum(axis=1)
-print(total2)
-print('全班最高總分：',total2.max())
-
-print('------------------------------------------------------------')	#60個
-
-def format_data(df):
-    #用missing填充缺失值，並去除首尾空格
-    for column in df.columns:
-        if df[column].dtype == "object":
-            df[column] = df[column].fillna("missing")
-            df[column]=df[column].apply(lambda x: x.strip())
-
-
-    #清洗數據：將位置只保留省份，面料只保留第一個
-    #df["銷量"]=df["銷量"].apply(lambda x: int(x.replace("人付款","")))
-    df["位置"]=df["位置"].apply(lambda x: x.split(" ")[0])
-    df["面料"]=df["面料"].apply(lambda x: x.split(",")[0])
-    
-    return df
-
-filename = 'data/dress.csv'
-print("pd讀取csv檔案 :", filename)
-df = pd.read_csv(filename)
-# print (df.head())
-
-#刪除缺失值個數>100的列
-for column in df.columns:
-    isnullList=df[column].isnull()
-    nullCnt = (len(isnullList[isnullList==True]))
-    if nullCnt > 100:
-        del df[column]
-#         print ("del column:" + column)
-
-#刪除不重要的特征
-del df["貨號"]
-del df["年份季節"]
-del df["品牌"]
-del df["銷量"]
-
-df = format_data(df)
-
-print('aaaaaaaaaaaaaaaaaaaaaaaaa')
-print(df)
-
-print('------------------------------------------------------------')	#60個
-"""
-print('用 Groupby 看美國哪裡最容易看到 UFO')
-filename = "http://bit.ly/uforeports"
-print("pd讀取http csv檔案 :", filename)
-df = pd.read_csv(filename)
-print(df.head())
-
-df_state = df.groupby("State").count()
-
-print(df_state)
-
-df_state.sort_values(by = "Time", ascending = False)
-
-print(df_state)
-
-df_state.sort_values(by = "Time", ascending = False, inplace = True)
-
-print(df_state.head(10))
-
-df_state[:10].Time.plot(kind = 'bar')
-
-plt.show()
-"""
-print('------------------------------------------------------------')	#60個
-
-print('---- 2222 json --------------------------------------------------------')	#60個
-
-datas = [[65,92,78,83,70], [90,72,76,93,56], [81,85,91,89,77], [79,53,47,94,80]]
+datas = [
+    [65, 92, 78, 83, 70],
+    [90, 72, 76, 93, 56],
+    [81, 85, 91, 89, 77],
+    [79, 53, 47, 94, 80],
+]
 indexs = ["林大明", "陳聰明", "黃美麗", "熊小娟"]
 columns = ["國文", "數學", "英文", "自然", "社會"]
-df = pd.DataFrame(datas, columns=columns,  index=indexs)
+df = pd.DataFrame(datas, columns=columns, index=indexs)
 print(df)
 
-filename = 'tmp_score444.json'
+filename = "tmp_score444.json"
 df.to_json(filename, force_ascii=False)
 print("df寫入json檔案 :", filename)
 
-print('------------------------------')	#30個
+print("------------------------------")  # 30個
 
 print("pd讀取json檔案 :", filename)
-data = pd.read_json(filename, typ='series')
+data = pd.read_json(filename, typ="series")
 
 print(data)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 """ lack file
 # 匯入JSON格式的檔案
@@ -348,61 +88,66 @@ df.to_html("tmp8-2-2a-02.html")
 print("------------------------------------------------------------")  # 60個
 
 
-print('---- 3333 excel --------------------------------------------------------')	#60個
+print("---- 3333 excel --------------------------------------------------------")  # 60個
 
-print('讀寫Excel文件')
+print("讀寫Excel文件")
 
-print('df轉excel')
-df = pd.DataFrame({'Name': ['Smith', 'Lucy'], 'Age': ['25', '20'], 'Sex': ['男','女']})
+print("df轉excel")
+df = pd.DataFrame({"Name": ["Smith", "Lucy"], "Age": ["25", "20"], "Sex": ["男", "女"]})
 df.to_excel("tmp_a.xlsx")
 
-print('pd讀取excel')
+print("pd讀取excel")
 df1 = pd.read_excel("tmp_a.xlsx")
 print(df1)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-datas = [[65,92,78,83,70], [90,72,76,93,56], [81,85,91,89,77], [79,53,47,94,80]]
+datas = [
+    [65, 92, 78, 83, 70],
+    [90, 72, 76, 93, 56],
+    [81, 85, 91, 89, 77],
+    [79, 53, 47, 94, 80],
+]
 indexs = ["林大明", "陳聰明", "黃美麗", "熊小娟"]
 columns = ["國文", "數學", "英文", "自然", "社會"]
-df = pd.DataFrame(datas, columns=columns,  index=indexs)
+df = pd.DataFrame(datas, columns=columns, index=indexs)
 print(df)
 
-filename = 'tmp_score555.xlsx'
-#df.to_excel(filename, encoding="utf-8-sig") fail
+filename = "tmp_score555.xlsx"
+# df.to_excel(filename, encoding="utf-8-sig") fail
 df.to_excel(filename)
 print("df寫入excel檔案 :", filename)
 
-print('------------------------------')	#30個
+print("------------------------------")  # 30個
 
-filename = 'tmp_score555.xlsx'
+filename = "tmp_score555.xlsx"
 print("pd讀取excel檔案 :", filename)
-print('跳過索引')
-#data = pd.read_excel(filename, encoding="utf-8-sig",index_col=0) fail
+print("跳過索引")
+# data = pd.read_excel(filename, encoding="utf-8-sig",index_col=0) fail
 data = pd.read_excel(filename, index_col=0)
 print(data)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-filename = 'C:/_git/vcs/_4.python/write_read_file/_4.office/data/python_ReadWrite_EXCEL4.xlsx'
+filename = (
+    "C:/_git/vcs/_4.python/write_read_file/_4.office/data/python_ReadWrite_EXCEL4.xlsx"
+)
 print("pd讀取excel檔案 :", filename)
 df = pd.read_excel(filename)
-#print(df)
+# print(df)
 
-header = df.iloc[2]  #取得標題
-df1 = df[3:].copy()  #去除前三列
-df1 = df1.rename(columns = header)  #重置標題
-df2 = df1.drop(columns=['縣市代碼', '村里代碼', '村里名稱', '村里代碼'], axis=1)  #去除四行資料
-df3 = df2.drop_duplicates()  #移除重複資料
+header = df.iloc[2]  # 取得標題
+df1 = df[3:].copy()  # 去除前三列
+df1 = df1.rename(columns=header)  # 重置標題
+df2 = df1.drop(columns=["縣市代碼", "村里代碼", "村里名稱", "村里代碼"], axis=1)  # 去除四行資料
+df3 = df2.drop_duplicates()  # 移除重複資料
 
-filename = 'tmp_district.csv'
-df3.to_csv(filename, encoding = 'big5', index = False)
-print("df寫入csv檔案 :", filename)
-
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
-print('---- 4444 html與其他 --------------------------------------------------------')	#60個
+print(
+    "---- 4444 html與其他 --------------------------------------------------------"
+)  # 60個
 
 """ NG
 print("使用pandas讀取網頁表單");
@@ -416,9 +161,9 @@ tables = pd.read_html(url, header=0, keep_default_na=False)
 print("結果");
 print(tables[0])
 """
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-#原物料商品行情
+# 原物料商品行情
 url = "http://www.stockq.org/market/commodity.php"
 print("pd讀取html檔案 :", url)
 tables = pd.read_html(url)
@@ -430,9 +175,9 @@ for table in tables:
     print()
     n += 1
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-#原物料商品行情
+# 原物料商品行情
 url = "http://www.stockq.org/market/commodity.php"
 print("pd讀取html檔案 :", url)
 tables = pd.read_html(url)
@@ -447,7 +192,7 @@ table.index = range(len(table.index))
 
 print(table)
 """
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 """ NG
 #由網址讀取資料檔
@@ -457,15 +202,17 @@ print("pd讀取html檔案 :", url)
 df = pd.read_html(url)
 print(df)
 """
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-data = {'種類': ["Bike","Bus","Car","Truck"],
-        '數量': [3,4,6,2],
-        '輪數': ["2","4","4","6"] } 
-df = pd.DataFrame(data, index=["A","B","C","D"]) 
+data = {
+    "種類": ["Bike", "Bus", "Car", "Truck"],
+    "數量": [3, 4, 6, 2],
+    "輪數": ["2", "4", "4", "6"],
+}
+df = pd.DataFrame(data, index=["A", "B", "C", "D"])
 
 filename = "tmp_vehicles.csv"
-df.to_csv(filename,index=False,encoding="big5")
+df.to_csv(filename, index=False, encoding="big5")
 print("df寫入csv檔案 :", filename)
 
 filename = "tmp_vehicles.csv"
@@ -478,7 +225,7 @@ df.to_json(filename)
 print("df寫入json檔案 :", filename)
 
 filename = "tmp_vehicles2.json"
-df.to_json(filename, force_ascii = False)
+df.to_json(filename, force_ascii=False)
 print("df寫入json檔案 :", filename)
 
 filename = "tmp_vehicles1.json"
@@ -486,7 +233,7 @@ print("pd讀取json檔案 :", filename)
 df2 = pd.read_json(filename)
 print(df2)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 """ fail in kilo
 # pip install xlsxwriter
 
@@ -512,7 +259,7 @@ writer.save()
 
 print("df寫入excel檔案 :", filename)
 """
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 """
 url = 'http://www.fdic.gov/bank/individual/failed/banklist.html'
@@ -526,7 +273,7 @@ url ='http://news.baidu.com/tech'
 #print(df[0].head(5) )
 """
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 """ no file AAPL.xlsx
 filename = 'AAPL.xlsx'
@@ -665,9 +412,9 @@ dfMonthsPivot = dfMonths.pivot_table(values = 'High', columns = 'month', index =
 dfMonthsPivot.plot(kind = 'box',title = 'Months High')
 plt.show()
 """
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
@@ -676,15 +423,6 @@ print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
-
-filename = "data/python_ReadWrite_CSV6_score.csv"
-print("pd讀取csv檔案 :", filename)
-df = pd.read_csv(filename, encoding="UTF-8")
-print(df.head())
-print("數學平均", np.mean(df["數學"]))
-print("數學中位數", np.median(df["數學"]))
-
-print("------------------------------------------------------------")  # 60個
 
 # NYC 311 service request dataset
 csv_filename = "C:/_git/vcs/_big_files/311-service-requests.csv"
@@ -731,10 +469,10 @@ zero_zips = requests["Incident Zip"] == "00000"
 requests.loc[zero_zips, "Incident Zip"] = np.nan
 
 # fail
-#unique_zips = requests['Incident Zip'].unique()
-#unique_zips.sort()
-#cc = unique_zips
-#print(cc)
+# unique_zips = requests['Incident Zip'].unique()
+# unique_zips.sort()
+# cc = unique_zips
+# print(cc)
 zips = requests["Incident Zip"]
 # Let's say the zips starting with '0' and '1' are okay, for now. (this isn't actually true -- 13221 is in Syracuse, and why?)
 is_close = zips.str.startswith("0") | zips.str.startswith("1")
@@ -769,6 +507,7 @@ def fix_zip_codes(zips):
     zero_zips = zips == "00000"
     zips[zero_zips] = np.nan
     return zips
+
 
 requests["Incident Zip"] = fix_zip_codes(requests["Incident Zip"])
 
@@ -814,7 +553,7 @@ print("------------------------------------------------------------")  # 60個
 
 filename = "data\ordersList.csv"
 print("pd讀取csv檔案 :", filename)
-print('跳過標題')
+print("跳過標題")
 df = pd.read_csv(filename, encoding="utf-8", header=0)
 
 print(
@@ -834,40 +573,15 @@ print(
 
 print("------------------------------------------------------------")  # 60個
 
-print('df 轉 pickle')
+print("df 轉 pickle")
 
-df = pd.DataFrame({'Name': ['Smith', 'Lucy'], 'Age': ['25', '20'], 'Sex': ['男','女']})
+df = pd.DataFrame({"Name": ["Smith", "Lucy"], "Age": ["25", "20"], "Sex": ["男", "女"]})
 print(df.info())
 df.to_pickle("tmp.pkl")
 
 df1 = pd.read_pickle("tmp.pkl")
 print(df1.info())
 
-
-print("------------------------------------------------------------")  # 60個
-
-# df轉csv
-print('讀寫CSV文件')
-
-df = pd.DataFrame({'Name': ['Smith', 'Lucy'], 'Age': ['25', '20'], 'Sex': ['男','女']})
-print(df.info()) # 顯示dataframe相關信息
-df.to_csv("tmp.csv", index=False, header=True, columns=['Name','Sex','Age'])
-
-df1 = pd.read_csv("tmp.csv")
-print(df1.info())
-print(df1)
-
-print("------------------------------------------------------------")  # 60個
-
-filename = "data/animals_big5.csv"
-
-pd.options.mode.chained_assignment = None  # 取消顯示pandas資料重設警告
-
-df = pd.read_csv(filename, encoding="big5")  # 以pandas讀取檔案
-print(df)
-
-fullname = pd.DataFrame(df["全名"])
-print(fullname)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -896,41 +610,15 @@ print(df)
 
 print("------------------------------------------------------------")  # 60個
 
-print("csv檔案 轉 df")
-filename = "data/animals.csv"
-
-df = pd.read_csv(filename)
-print(df.head(5))
-
-print("df 轉 csv檔案")
-filename = "tmp_write_read_csv07.csv"
-
-df.to_csv(filename)
-
-print("------------------------------------------------------------")  # 60個
-
-filename = "data/animals.csv"
-DataFrame = pd.read_csv(filename)
-print(DataFrame["中文名"])
-print()
-print(DataFrame[["中文名", "英文名"]])
-print()
-print(DataFrame[["中文名", "英文名", "體重"]])
-print()
-
-DataFrame["中英文"] = DataFrame["中文名"] + DataFrame["英文名"]
-print(DataFrame[["中文名", "英文名", "體重", "中英文"]])
-
-print("------------------------------------------------------------")  # 60個
-
 df = pd.DataFrame(
     {"中文名": ["鼠", "牛", "虎", "兔"], "英文名": ["mouse", "ox", "tiger", "rabbit"]}
 )
 print(df[["中文名", "英文名"]])
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 import pandas as pd
+
 cities = pd.read_csv("data/california_cities.csv")
 
 print(cities.head())
@@ -943,18 +631,27 @@ population, area = cities["population_total"], cities["area_total_km2"]
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn
+
 seaborn.set()
-plt.scatter(longitude, latitude, label=None, c=np.log10(population),
-            cmap='viridis', s=area, linewidth=0, alpha=0.5)
-#plt.axis(aspect='equal') NG
-plt.xlabel('Longitude')
-plt.ylabel('Longitude')
-plt.colorbar(label='log$_{10}$(population)')
+plt.scatter(
+    longitude,
+    latitude,
+    label=None,
+    c=np.log10(population),
+    cmap="viridis",
+    s=area,
+    linewidth=0,
+    alpha=0.5,
+)
+# plt.axis(aspect='equal') NG
+plt.xlabel("Longitude")
+plt.ylabel("Longitude")
+plt.colorbar(label="log$_{10}$(population)")
 plt.clim(3, 7)
 # now we will craete a legend, we will plot empty lists with the desired size and label
 for area in [100, 300, 500]:
-    plt.scatter([], [], c='k', alpha=0.3, s=area, label=str(area) + 'km$^2$')
-plt.legend(scatterpoints=1, frameon=False, labelspacing=1, title='City Areas')
+    plt.scatter([], [], c="k", alpha=0.3, s=area, label=str(area) + "km$^2$")
+plt.legend(scatterpoints=1, frameon=False, labelspacing=1, title="City Areas")
 plt.title("Area and Population of California Cities")
 plt.show()
 
@@ -1286,22 +983,20 @@ df.T.to_html("tmp8-2-1d.html")
 
 print("------------------------------------------------------------")  # 60個
 
-print('pd寫入excel')
+print("pd寫入excel")
 # excel_write.py
 import pandas as pd
 
-writer = pd.ExcelWriter('tmp_test1111.xlsx')
+writer = pd.ExcelWriter("tmp_test1111.xlsx")
 print(type(writer))
 
 # 建立數據一
-df1 = pd.DataFrame({"name":["david","tom","chiou"],
-                    "id":[123,456,789] })
-df1.to_excel(writer,sheet_name='sheet1',index=False)
+df1 = pd.DataFrame({"name": ["david", "tom", "chiou"], "id": [123, 456, 789]})
+df1.to_excel(writer, sheet_name="sheet1", index=False)
 
 # 建立數據二
-df2 = pd.DataFrame({"電話":["0912-112233","0987-556677"],
-                    "地址":["台北市","埔里鎮"] })
-df2.to_excel(writer,sheet_name='工作表二')
+df2 = pd.DataFrame({"電話": ["0912-112233", "0987-556677"], "地址": ["台北市", "埔里鎮"]})
+df2.to_excel(writer, sheet_name="工作表二")
 
 # 儲存至 Excel文件中
 writer._save()
@@ -1372,16 +1067,7 @@ df.to_csv("tmp_olympics.csv")
 
 
 print("csv檔案轉df")
+df = pd.read_csv("data/student.csv")
+print(df)
 
-# read from
-data = pd.read_csv("data/student.csv")
-print(data)
-
-# save to
-data.to_pickle("tmp_student.pickle")
-
-
-
-
-
-
+df.to_pickle("tmp_student.pickle")

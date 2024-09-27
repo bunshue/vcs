@@ -585,7 +585,7 @@ print(f'{accuracy_score(y_test, y_pred)*100:.2f}%')
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-#SelectPercentile 單變數特徵選取(Univariate feature selection)
+# SelectPercentile 單變數特徵選取(Univariate feature selection)
 
 from sklearn import datasets
 from sklearn.preprocessing import StandardScaler
@@ -593,12 +593,12 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 from sklearn.feature_selection import SelectPercentile, chi2
 
-#載入資料集
+# 載入資料集
 
 X, y = datasets.load_digits(return_X_y=True)
 print(X.shape)
 
-#SelectPercentile 特徵選取
+# SelectPercentile 特徵選取
 
 clf = SelectPercentile(chi2, percentile=10)
 X_new = clf.fit_transform(X, y)
@@ -610,32 +610,33 @@ print(clf.scores_)
 # 顯示 p value
 print(clf.pvalues_)
 
-#3. 不須進行特徵工程
+# 3. 不須進行特徵工程
 
-#4. 資料分割
+# 4. 資料分割
 
 # 選擇部份特徵
 X = X_new
 
 # 資料分割
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=.2)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 # 查看陣列維度
 cc = X_train.shape, X_test.shape, y_train.shape, y_test.shape
 print(cc)
 
-#特徵縮放
+# 特徵縮放
 
 scaler = StandardScaler()
 X_train_std = scaler.fit_transform(X_train)
 X_test_std = scaler.transform(X_test)
 
-#5. 選擇演算法
+# 5. 選擇演算法
 
 from sklearn.linear_model import LogisticRegression
+
 clf = LogisticRegression()
 
-#6. 模型訓練
+# 6. 模型訓練
 
 clf.fit(X_train_std, y_train)
 """
@@ -645,18 +646,19 @@ In a Jupyter environment, please rerun this cell to show the HTML representation
 On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.
 """
 
-#7. 模型計分
+# 7. 模型計分
 
 y_pred = clf.predict(X_test_std)
 print(y_pred)
 
 # 計算準確率
-print(f'{accuracy_score(y_test, y_pred)*100:.2f}%') 
+print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
 
-#71.94%
+# 71.94%
 
 # 混淆矩陣
 from sklearn.metrics import confusion_matrix
+
 print(confusion_matrix(y_test, y_pred))
 
 # 混淆矩陣圖
@@ -667,13 +669,13 @@ disp = ConfusionMatrixDisplay(confusion_matrix=confusion_matrix(y_test, y_pred))
 disp.plot()
 plt.show()
 
-#使用全部特徵
+# 使用全部特徵
 
 # 載入資料集
 X, y = datasets.load_digits(return_X_y=True)
 
 # 資料分割
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=.2)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 # 查看陣列維度
 print(X_train.shape, X_test.shape, y_train.shape, y_test.shape)
@@ -685,15 +687,16 @@ X_test_std = scaler.transform(X_test)
 
 # 模型訓練
 from sklearn.linear_model import LogisticRegression
+
 clf = LogisticRegression()
 clf.fit(X_train_std, y_train)
 
 # 模型計分
 y_pred = clf.predict(X_test_std)
-print(f'{accuracy_score(y_test, y_pred)*100:.2f}%') 
+print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
 
-#(1437, 64) (360, 64) (1437,) (360,)
-#98.33%
+# (1437, 64) (360, 64) (1437,) (360,)
+# 98.33%
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -711,10 +714,10 @@ from sklearn.feature_selection import GenericUnivariateSelect, chi2
 X, y = datasets.load_digits(return_X_y=True)
 print(X.shape)
 
-#GenericUnivariateSelect 特徵選取
+# GenericUnivariateSelect 特徵選取
 
 # 使用 SelectKBest, 20 個特徵
-clf = GenericUnivariateSelect(chi2, mode='k_best', param=20)
+clf = GenericUnivariateSelect(chi2, mode="k_best", param=20)
 X_new = clf.fit_transform(X, y)
 print(X_new.shape)
 
@@ -724,32 +727,33 @@ print(clf.scores_)
 # 顯示 p value
 print(clf.pvalues_)
 
-#3. 不須進行特徵工程
+# 3. 不須進行特徵工程
 
-#4. 資料分割
+# 4. 資料分割
 
 # 選擇部份特徵
 X = X_new
 
 # 資料分割
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=.2)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 # 查看陣列維度
 cc = X_train.shape, X_test.shape, y_train.shape, y_test.shape
 print(cc)
-    
-#特徵縮放
+
+# 特徵縮放
 
 scaler = StandardScaler()
 X_train_std = scaler.fit_transform(X_train)
 X_test_std = scaler.transform(X_test)
 
-#5. 選擇演算法
+# 5. 選擇演算法
 
 from sklearn.linear_model import LogisticRegression
+
 clf = LogisticRegression()
 
-#6. 模型訓練
+# 6. 模型訓練
 
 clf.fit(X_train_std, y_train)
 """
@@ -759,18 +763,19 @@ In a Jupyter environment, please rerun this cell to show the HTML representation
 On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.
 """
 
-#7. 模型計分
+# 7. 模型計分
 
 y_pred = clf.predict(X_test_std)
 print(y_pred)
 
 # 計算準確率
-print(f'{accuracy_score(y_test, y_pred)*100:.2f}%') 
+print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
 
-#93.33%
+# 93.33%
 
 # 混淆矩陣
 from sklearn.metrics import confusion_matrix
+
 print(confusion_matrix(y_test, y_pred))
 
 # 混淆矩陣圖
@@ -781,13 +786,13 @@ disp = ConfusionMatrixDisplay(confusion_matrix=confusion_matrix(y_test, y_pred))
 disp.plot()
 plt.show()
 
-#使用全部特徵
+# 使用全部特徵
 
 # 載入資料集
 X, y = datasets.load_digits(return_X_y=True)
 
 # 資料分割
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=.2)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 # 查看陣列維度
 print(X_train.shape, X_test.shape, y_train.shape, y_test.shape)
@@ -799,15 +804,16 @@ X_test_std = scaler.transform(X_test)
 
 # 模型訓練
 from sklearn.linear_model import LogisticRegression
+
 clf = LogisticRegression()
 clf.fit(X_train_std, y_train)
 
 # 模型計分
 y_pred = clf.predict(X_test_std)
-print(f'{accuracy_score(y_test, y_pred)*100:.2f}%') 
+print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
 
-#(1437, 64) (360, 64) (1437,) (360,)
-#97.22%
+# (1437, 64) (360, 64) (1437,) (360,)
+# 97.22%
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -826,7 +832,7 @@ from sklearn.svm import SVC
 X, y = datasets.load_iris(return_X_y=True)
 print(X.shape)
 
-#RFE 特徵選取
+# RFE 特徵選取
 
 svc = SVC(kernel="linear", C=1)
 clf = RFE(estimator=svc, n_features_to_select=2, step=1)
@@ -836,32 +842,33 @@ print(X_new.shape)
 # 特徵重要性排名
 print(clf.ranking_)
 
-#3. 不須進行特徵工程
+# 3. 不須進行特徵工程
 
-#4. 資料分割
+# 4. 資料分割
 
 # 選擇2個特徵
 X = X_new
 
 # 資料分割
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=.2)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 # 查看陣列維度
 cc = X_train.shape, X_test.shape, y_train.shape, y_test.shape
 print(cc)
 
-#特徵縮放
+# 特徵縮放
 
 scaler = StandardScaler()
 X_train_std = scaler.fit_transform(X_train)
 X_test_std = scaler.transform(X_test)
 
-#5. 選擇演算法
+# 5. 選擇演算法
 
 from sklearn.linear_model import LogisticRegression
+
 clf = LogisticRegression()
 
-#6. 模型訓練
+# 6. 模型訓練
 
 clf.fit(X_train_std, y_train)
 """
@@ -871,18 +878,19 @@ In a Jupyter environment, please rerun this cell to show the HTML representation
 On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.
 """
 
-#7. 模型計分
+# 7. 模型計分
 
 y_pred = clf.predict(X_test_std)
 print(y_pred)
 
 # 計算準確率
-print(f'{accuracy_score(y_test, y_pred)*100:.2f}%') 
+print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
 
-#93.33%
+# 93.33%
 
 # 混淆矩陣
 from sklearn.metrics import confusion_matrix
+
 print(confusion_matrix(y_test, y_pred))
 
 # 混淆矩陣圖
@@ -893,13 +901,13 @@ disp = ConfusionMatrixDisplay(confusion_matrix=confusion_matrix(y_test, y_pred))
 disp.plot()
 plt.show()
 
-#使用全部特徵
+# 使用全部特徵
 
 # 載入資料集
 X, y = datasets.load_iris(return_X_y=True)
 
 # 資料分割
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=.2)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 # 查看陣列維度
 print(X_train.shape, X_test.shape, y_train.shape, y_test.shape)
@@ -911,39 +919,31 @@ X_test_std = scaler.transform(X_test)
 
 # 模型訓練
 from sklearn.linear_model import LogisticRegression
+
 clf = LogisticRegression()
 clf.fit(X_train_std, y_train)
 
 # 模型計分
 y_pred = clf.predict(X_test_std)
-print(f'{accuracy_score(y_test, y_pred)*100:.2f}%') 
+print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
 
-#(120, 4) (30, 4) (120,) (30,)
-#96.67%
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
+# (120, 4) (30, 4) (120,) (30,)
+# 96.67%
 
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
 sys.exit()
-
-
-

@@ -32,7 +32,7 @@ from sklearn import datasets, preprocessing
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 
-#1. 載入資料集
+# 1. 載入資料集
 
 ds = datasets.load_iris()
 """
@@ -52,16 +52,16 @@ print("資料集目標")
 print(ds.target)
 """
 
-#2. 資料清理、資料探索與分析
+# 2. 資料清理、資料探索與分析
 
 df = pd.DataFrame(ds.data, columns=ds.feature_names)
-#print(df)
+# print(df)
 
 # 資料集目標
 y = ds.target
-#print(y)
-#資料集目標名稱
-#print(ds.target_names) 
+# print(y)
+# 資料集目標名稱
+# print(ds.target_names)
 
 print("觀察資料集彙總資訊")
 cc = df.info()
@@ -72,51 +72,61 @@ cc = df.describe()
 print(cc)
 
 # 集中
-cc = df['sepal length (cm)'].mean(), df['sepal length (cm)'].median(), df['sepal length (cm)'].mode()
+cc = (
+    df["sepal length (cm)"].mean(),
+    df["sepal length (cm)"].median(),
+    df["sepal length (cm)"].mode(),
+)
 print(cc)
 
 # 計算變異數(variance)、標準差(standard deviation)、IQR
-cc = df['sepal length (cm)'].var(), df['sepal length (cm)'].std(), \
-    df['sepal length (cm)'].quantile(.75) - df['sepal length (cm)'].quantile(.25)
+cc = (
+    df["sepal length (cm)"].var(),
+    df["sepal length (cm)"].std(),
+    df["sepal length (cm)"].quantile(0.75) - df["sepal length (cm)"].quantile(0.25),
+)
 
 print(cc)
 
-#(0.6856935123042505, 0.8280661279778629, 1.3000000000000007)
+# (0.6856935123042505, 0.8280661279778629, 1.3000000000000007)
 
 # 計算偏態(skewness)及峰度(kurtosis)
-cc = df['sepal length (cm)'].skew(), df['sepal length (cm)'].kurt()
+cc = df["sepal length (cm)"].skew(), df["sepal length (cm)"].kurt()
 print(cc)
 
 # 自行計算偏態
-mean1 = df['sepal length (cm)'].mean()
-std1  = df['sepal length (cm)'].std()
-n = len(df['sepal length (cm)'])
-skew1  = (((df['sepal length (cm)'] - mean1)/std1)**3).sum() * n / ((n-1) * (n-2))
+mean1 = df["sepal length (cm)"].mean()
+std1 = df["sepal length (cm)"].std()
+n = len(df["sepal length (cm)"])
+skew1 = (
+    (((df["sepal length (cm)"] - mean1) / std1) ** 3).sum() * n / ((n - 1) * (n - 2))
+)
 print(skew1)
 
-#0.31491095663697277
+# 0.31491095663697277
 
 # 自行計算峰度
-M2  = (((df['sepal length (cm)'] - mean1)/std1)**2).mean()
-M4  = (((df['sepal length (cm)'] - mean1)/std1)**4).mean()
-K = (M4 / (M2 ** 2)) 
-print(K-3)
+M2 = (((df["sepal length (cm)"] - mean1) / std1) ** 2).mean()
+M4 = (((df["sepal length (cm)"] - mean1) / std1) ** 4).mean()
+K = M4 / (M2**2)
+print(K - 3)
 
-#-0.5735679489249756
+# -0.5735679489249756
 
 from scipy.stats import kurtosis
-print(kurtosis(df['sepal length (cm)'], axis=0, bias=True))
 
-#-0.5735679489249765
+print(kurtosis(df["sepal length (cm)"], axis=0, bias=True))
+
+# -0.5735679489249765
 
 # 直方圖
 import seaborn as sns
 
-sns.histplot(x='sepal length (cm)', data=df)
+sns.histplot(x="sepal length (cm)", data=df)
 plt.show()
 
 # 直方圖平滑化
-sns.kdeplot(x='sepal length (cm)', data=df)
+sns.kdeplot(x="sepal length (cm)", data=df)
 plt.show()
 
 # 右偏
@@ -124,7 +134,7 @@ import numpy as np
 
 data1 = np.random.normal(0, 1, 500)
 data2 = np.random.normal(5, 1, 100)
-data = np.concatenate((data1,data2))
+data = np.concatenate((data1, data2))
 sns.kdeplot(data=data)
 pd.DataFrame(data).skew()
 plt.show()
@@ -134,20 +144,20 @@ import numpy as np
 
 data1 = np.random.normal(0, 1, 100)
 data2 = np.random.normal(5, 1, 500)
-data = np.concatenate((data1,data2))
+data = np.concatenate((data1, data2))
 sns.kdeplot(data=data)
 pd.DataFrame(data).skew()
 plt.show()
 
-#關聯度
+# 關聯度
 
-df['y'] = y
+df["y"] = y
 cc = df.corr()
 print(cc)
 
 # 箱型圖
 sns.boxplot(data=df)
-plt.title('鳶尾花資料分布箱型圖')
+plt.title("鳶尾花資料分布箱型圖")
 plt.show()
 
 print("是否有含遺失值(Missing value)")
@@ -156,17 +166,18 @@ print(cc)
 
 print("y 各類別資料筆數統計")
 import seaborn as sns
+
 sns.countplot(x=y)
-plt.title('y 各類別資料筆數統計')
+plt.title("y 各類別資料筆數統計")
 plt.show()
 
 print("以Pandas函數統計各類別資料筆數")
 cc = pd.Series(y).value_counts()
 print(cc)
 
-#3. 不須進行特徵工程
+# 3. 不須進行特徵工程
 
-#4. 資料分割
+# 4. 資料分割
 
 # 指定X，並轉為 Numpy 陣列
 X = df.values
@@ -180,7 +191,7 @@ cc = X_train.shape, X_test.shape, y_train.shape, y_test.shape
 print(cc)
 
 print("訓練目標")
-#print(y_train)
+# print(y_train)
 
 print("測試目標")
 print(y_test)
@@ -191,57 +202,60 @@ scaler = preprocessing.StandardScaler()
 X_train_std = scaler.fit_transform(X_train)
 X_test_std = scaler.transform(X_test)
 
-#5. 選擇演算法
+# 5. 選擇演算法
 
 from sklearn.linear_model import LogisticRegression
+
 clf = LogisticRegression()
 
-#6. 模型訓練
+# 6. 模型訓練
 
 clf.fit(X_train_std, y_train)
 
-#7. 模型評估
+# 7. 模型評估
 
 y_pred = clf.predict(X_test_std)
-print('預測目標')
+print("預測目標")
 print(y_pred)
 
-print('計算準確率 測試目標 與 預測目標 接近程度')
-print(f'{accuracy_score(y_test, y_pred)*100:.2f}%') 
+print("計算準確率 測試目標 與 預測目標 接近程度")
+print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
 
-print('混淆矩陣')
+print("混淆矩陣")
 from sklearn.metrics import confusion_matrix
+
 print(confusion_matrix(y_test, y_pred))
 
-print('混淆矩陣圖')
+print("混淆矩陣圖")
 from sklearn.metrics import ConfusionMatrixDisplay
 import matplotlib.pyplot as plt
 
-disp = ConfusionMatrixDisplay(confusion_matrix=confusion_matrix(y_test, y_pred)
-                              , display_labels=ds.target_names)
+disp = ConfusionMatrixDisplay(
+    confusion_matrix=confusion_matrix(y_test, y_pred), display_labels=ds.target_names
+)
 disp.plot()
-plt.title('混淆矩陣圖')
+plt.title("混淆矩陣圖")
 plt.show()
 
-#8. 模型評估，暫不進行
+# 8. 模型評估，暫不進行
 
-#9. 模型佈署
+# 9. 模型佈署
 
 # 模型存檔
 import joblib
 
-joblib.dump(clf, 'tmp_model.joblib')
-joblib.dump(scaler, 'tmp_scaler.joblib');
+joblib.dump(clf, "tmp_model.joblib")
+joblib.dump(scaler, "tmp_scaler.joblib")
 
 print("------------------------------------------------------------")  # 60個
 
 import joblib
 
-#10.模型預測
+# 10.模型預測
 
 # 載入模型與標準化轉換模型
-clf = joblib.load('tmp_model.joblib')
-scaler = joblib.load('tmp_scaler.joblib')
+clf = joblib.load("tmp_model.joblib")
+scaler = joblib.load("tmp_scaler.joblib")
 
 # 測試資料
 sepal_length, sepal_width, petal_length, petal_width = 5.8, 3.5, 4.4, 1.3
@@ -249,9 +263,9 @@ sepal_length, sepal_width, petal_length, petal_width = 5.8, 3.5, 4.4, 1.3
 X_new = [[sepal_length, sepal_width, petal_length, petal_width]]
 X_new = scaler.transform(X_new)
 
-labels = ['setosa', 'versicolor', 'virginica']
+labels = ["setosa", "versicolor", "virginica"]
 
-print('### 預測品種是：', labels[clf.predict(X_new)[0]])
+print("### 預測品種是：", labels[clf.predict(X_new)[0]])
 
 
 """ 使用 streamlit 與人互動
@@ -282,6 +296,3 @@ print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
 sys.exit()
-
-
-
