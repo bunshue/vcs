@@ -1,18 +1,25 @@
+print("------------------------------------------------------------")  # 60個
 
-"""
-
-
-"""
-
+# 共同
 import os
 import sys
 import time
+import math
 import random
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
+
+font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+# 設定中文字型及負號正確顯示
+# 設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
+# 設定負號
+plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 # 電影打分資料MovieLens中讀入使用者資料
 
 import pandas as pd
@@ -46,12 +53,58 @@ perimeter = cv2.arcLength(contour, True)
 cc = perimeter**2 / (4 * area)
 print(cc)
 
+print("------------------------------------------------------------")  # 60個
+
+#%figonly=使用`ogrid`計算二元函數的曲面
+from mpl_toolkits.mplot3d.axes3d import Axes3D
+import pylab as pl
+
+x, y = np.ogrid[-2:2:20j, -2:2:20j]
+z = x * np.exp( - x**2 - y**2)
+
+fig = pl.figure(figsize=(15, 5))
+ax = fig.add_subplot(1, 2, 1, projection='3d')
+surf = ax.plot_surface(x, y, z, rstride=1, cstride=1, cmap="coolwarm", linewidth=0.2)
+
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
+def normal_pdf(mean, var, x):
+    return 1 / np.sqrt(2 * np.pi * var) * np.exp(-(x - mean) ** 2 / (2 * var))
+
+np.random.seed(42)
+data = np.random.normal(0, 2.0, size=10)
+mean, var = np.mean(data), np.var(data)
+var_range = np.linspace(max(var - 4, 0.1), var + 4, 100)
+
+p = normal_pdf(mean, var_range[:, None], data)
+p = np.product(p, axis=1) 
+
+#%fig=偏樣本方差位於似然估計曲線的最大值處
+import pylab as pl
+pl.plot(var_range, p)
+pl.axvline(var, 0, 1, c="r")
+pl.show()
+'''
 print("------------------------------------------------------------")  # 60個
 
-print("------------------------------------------------------------")  # 60個
+foldername = 'C:/_git/vcs/_1.data/______test_files1/__pic//_scenery'
 
+import glob
+import numpy as np
+from cv2 import imread, imwrite
+
+imgs = []
+for fn in glob.glob(foldername + "/*.jpg"):
+    print(fn)
+    imgs.append(imread(fn, -1))
+
+length = len(imgs)
+print(length)
+"""
+for i in range(length):
+    print(imgs[i].shape)
+"""
 
 
