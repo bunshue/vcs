@@ -39,7 +39,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 print(
     "---- scipy.integrate 積分 --------------------------------------------------------"
 )  # 60個
@@ -488,7 +488,6 @@ print(tt)
 
 print("------------------------------------------------------------")  # 60個
 
-import numpy as np
 import scipy.spatial.distance as dist
 
 Vector1 = np.array([1, 1, 0, 1, 0, 1, 0, 0, 1])
@@ -858,9 +857,49 @@ SI = np.linalg.inv(S)  # 協方差矩陣的逆矩陣
 d1 = np.sqrt(np.dot(np.dot(delta, SI), delta.T))
 d2 = pdist([x, y], "mahalanobis", VI=SI)
 print(d1, d2)
-
+'''
 print("------------------------------------------------------------")  # 60個
 
+from scipy.stats import loguniform
+
+fig, ax = plt.subplots(1, 1)
+
+a, b = 0.01, 1.25
+
+r = loguniform.rvs(a, b, size=1000) # Random variates
+
+ax.hist(r, density=True, bins='auto', histtype='stepfilled', alpha=0.2, label = 'Random variates')
+ax.legend(loc='best', frameon=False)
+
+plt.show()
+
+fig, ax = plt.subplots(1, 1)
+
+ax.hist(np.log10(r))
+
+ax.set_ylabel("Frequency")
+ax.set_xlabel("Value of random variable")
+
+ax.xaxis.set_major_locator(plt.FixedLocator([-2, -1, 0]))
+
+ticks = ["$10^{{ {} }}$".format(i) for i in [-2, -1, 0]]
+ax.set_xticklabels(ticks)  
+
+plt.show()
+
+rvs = loguniform(2**-2, 2**0).rvs(size=1000)
+fig, ax = plt.subplots(1, 1)
+
+ax.hist(np.log2(rvs))
+
+ax.set_ylabel("Frequency")
+ax.set_xlabel("Value of random variable")
+
+ax.xaxis.set_major_locator(plt.FixedLocator([-2, -1, 0]))
+ticks = ["$2^{{ {} }}$".format(i) for i in [-2, -1, 0]]
+ax.set_xticklabels(ticks)  
+
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 

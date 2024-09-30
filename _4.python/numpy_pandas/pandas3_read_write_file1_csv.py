@@ -32,7 +32,7 @@ ssl._create_default_https_context = ssl._create_unverified_context
 
 print("------------------------------------------------------------")  # 60個
 
-
+'''
 print("------------------------------------------------------------")  # 60個
 print("簡易讀取csv檔")
 print("------------------------------------------------------------")  # 60個
@@ -101,13 +101,30 @@ print(df.index)
 
 print("df 之 某欄")
 print(df["數學"])
-
+'''
 print("------------------------------------------------------------")  # 60個
 
 filename = "http://bit.ly/gradescsv"
 print("pd讀取http csv檔案 :", filename)
 df = pd.read_csv(filename)
-print(df)
+print(df.head())
+
+filename = "tmp_grades.csv"
+#df.to_csv(filename)
+#df.to_csv(filename, index=False, header=True, columns=["Name", "Sex", "Age"])
+#df.to_csv(filename, index=False)
+#df.to_csv(filename, index=False, encoding="big5")
+df.to_csv(filename, index=False, encoding="utf8")
+print("df寫入csv檔案 :", filename)
+
+
+print("pd讀取http csv檔案 :", filename)
+df2 = pd.read_csv(filename)
+print(df2.head())
+
+print("比較df是否相同")
+cc = df.equals(df2)
+print(cc)
 
 print("------------------------------------------------------------")  # 60個
 

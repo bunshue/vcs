@@ -78,72 +78,53 @@ print(df)
 
 print("------------------------------------------------------------")  # 60個
 
-df = pd.DataFrame(
-    [
-        [65, 92, 78, 83, 70],
-        [90, 72, 76, 93, 56],
-        [81, 85, 91, 89, 77],
-        [79, 53, 47, 94, 80],
-    ]
-)
+print("建立df, 字典 轉 df")
+
+datas = {
+    "姓名": ["王小明", "李小美", "陳大同", "林小玉"],
+    "國文": [65,90,81,79],
+    "英文": [92,72,85,53],
+    "數學": [78,76,91,47],
+    "自然": [83,93,89,94],
+    "社會": [70,56,94,80],
+    }
+
+df = pd.DataFrame(datas)
 print(df)
 
 print("------------------------------------------------------------")  # 60個
 
-df = pd.DataFrame(
-    [
-        [65, 92, 78, 83, 70],
-        [90, 72, 76, 93, 56],
-        [81, 85, 91, 89, 77],
-        [79, 53, 47, 94, 80],
-    ],
-    index=["王小明", "李小美", "陳大同", "林小玉"],
-    columns=["國文", "英文", "數學", "自然", "社會"],
-)
+print("建立df, 字典 轉 df")
+
+datas = {
+    "國文": {"王小明": 65, "李小美": 90, "陳大同": 81, "林小玉": 79},
+    "英文": {"王小明": 92, "李小美": 72, "陳大同": 85, "林小玉": 53},
+    "數學": {"王小明": 78, "李小美": 76, "陳大同": 91, "林小玉": 47},
+    "自然": {"王小明": 83, "李小美": 93, "陳大同": 89, "林小玉": 94},
+    "社會": {"王小明": 70, "李小美": 56, "陳大同": 94, "林小玉": 80},
+    }
+
+df = pd.DataFrame(datas)
 print(df)
 
 print("------------------------------------------------------------")  # 60個
 
-se1 = pd.Series({"王小明": 65, "李小美": 90, "陳大同": 81, "林小玉": 79})
-se2 = pd.Series({"王小明": 92, "李小美": 72, "陳大同": 85, "林小玉": 53})
-se3 = pd.Series({"王小明": 78, "李小美": 76, "陳大同": 91, "林小玉": 47})
-se4 = pd.Series({"王小明": 83, "李小美": 93, "陳大同": 89, "林小玉": 94})
-se5 = pd.Series({"王小明": 70, "李小美": 56, "陳大同": 94, "林小玉": 80})
-df = pd.DataFrame({"國文": se1, "英文": se2, "數學": se3, "自然": se4, "社會": se5})
+print('建立空的df, 再加入資料至df')
+
+df = pd.DataFrame()
+
+columns = ["國文", "英文", "數學", "自然", "社會"]
+
+for column in columns:
+    df[column] = np.random.choice(range(1, 11), 10)
+
+df.index = [i for i in range(1, 11)]
+
 print(df)
 
 print("------------------------------------------------------------")  # 60個
 
-print("建立df, 使用Series 合併")
-se1 = pd.Series({"王小明": 65, "李小美": 90, "陳大同": 81, "林小玉": 79})
-se2 = pd.Series({"王小明": 92, "李小美": 72, "陳大同": 85, "林小玉": 53})
-se3 = pd.Series({"王小明": 78, "李小美": 76, "陳大同": 91, "林小玉": 47})
-se4 = pd.Series({"王小明": 83, "李小美": 93, "陳大同": 89, "林小玉": 94})
-se5 = pd.Series({"王小明": 70, "李小美": 56, "陳大同": 94, "林小玉": 80})
-df = pd.concat([se1, se2, se3, se4, se5], axis=1)  # axis=0 : 垂直連接, axis=1 : 水平連接
-df.columns = ["國文", "英文", "數學", "自然", "社會"]
-print(df)
-
-
-# read_html.py
-url = "https://www.tiobe.com/tiobe-index/"
-tables = pd.read_html(url, header=0, keep_default_na=False)
-print(tables[0])
-
-# to_csv.py
-scores = {
-    " 國文": {" 王小明": 65, " 李小美": 90, " 陳大同": 81, " 林小玉": 79},
-    " 英文": {" 王小明": 92, " 李小美": 72, " 陳大同": 85, " 林小玉": 53},
-    " 數學": {" 王小明": 78, " 李小美": 76, " 陳大同": 91, " 林小玉": 47},
-    " 自然": {" 王小明": 83, " 李小美": 93, " 陳大同": 89, " 林小玉": 94},
-    " 社會": {" 王小明": 70, " 李小美": 56, " 陳大同": 94, " 林小玉": 80},
-}
-df = pd.DataFrame(scores)
-df.to_csv("tmp_scores3.csv", encoding="utf-8-sig")
-
-
-
-print("建立df, 二維串列4X5 轉 df")
+print("建立df, 二維串列4X5 轉 df, 加上欄名與index")
 
 datas = [
     [65, 92, 78, 83, 70],
@@ -151,8 +132,11 @@ datas = [
     [81, 85, 91, 89, 77],
     [79, 53, 47, 94, 80],
 ]
+
 columns = ["國文", "數學", "英文", "自然", "社會"]
-df = pd.DataFrame(datas, columns=columns)
+index = ["王小明", "李小美", "陳大同", "林小玉"]
+
+df = pd.DataFrame(datas, columns=columns, index=index)
 print(df)
 
 """
@@ -210,29 +194,40 @@ print(df.median())
 print(df.max())
 
 """
+print("李小美的成績(df.values[1])：")
+print(df.values[1])
+print("李小美的英文成績(df.values[1][2])：")
+print(df.values[1][2])
 
 print("------------------------------------------------------------")  # 60個
 
-print("建立df, 二維串列4X5 轉 df, 加上欄名與index")
-
-datas = [
-    [65, 92, 78, 83, 70],
-    [90, 72, 76, 93, 56],
-    [81, 85, 91, 89, 77],
-    [79, 53, 47, 94, 80],
-]
-indexs = ["林大明", "陳聰明", "黃美麗", "熊小娟"]
-columns = ["國文", "數學", "英文", "自然", "社會"]
-
-df = pd.DataFrame(datas, columns=columns, index=indexs)
+se1 = pd.Series({"王小明": 65, "李小美": 90, "陳大同": 81, "林小玉": 79})
+se2 = pd.Series({"王小明": 92, "李小美": 72, "陳大同": 85, "林小玉": 53})
+se3 = pd.Series({"王小明": 78, "李小美": 76, "陳大同": 91, "林小玉": 47})
+se4 = pd.Series({"王小明": 83, "李小美": 93, "陳大同": 89, "林小玉": 94})
+se5 = pd.Series({"王小明": 70, "李小美": 56, "陳大同": 94, "林小玉": 80})
+df = pd.DataFrame({"國文": se1, "英文": se2, "數學": se3, "自然": se4, "社會": se5})
 print(df)
 
-print("陳聰明的成績(df.values[1])：")
-print(df.values[1])
-print("陳聰明的英文成績(df.values[1][2])：")
-print(df.values[1][2])
+print("------------------------------------------------------------")  # 60個
 
-print("------------------------------")  # 30個
+print("建立df, 使用Series 合併")
+se1 = pd.Series({"王小明": 65, "李小美": 90, "陳大同": 81, "林小玉": 79})
+se2 = pd.Series({"王小明": 92, "李小美": 72, "陳大同": 85, "林小玉": 53})
+se3 = pd.Series({"王小明": 78, "李小美": 76, "陳大同": 91, "林小玉": 47})
+se4 = pd.Series({"王小明": 83, "李小美": 93, "陳大同": 89, "林小玉": 94})
+se5 = pd.Series({"王小明": 70, "李小美": 56, "陳大同": 94, "林小玉": 80})
+df = pd.concat([se1, se2, se3, se4, se5], axis=1)  # axis=0 : 垂直連接, axis=1 : 水平連接
+df.columns = ["國文", "英文", "數學", "自然", "社會"]
+print(df)
+
+print("------------------------------------------------------------")  # 60個
+
+url = "https://www.tiobe.com/tiobe-index/"
+tables = pd.read_html(url, header=0, keep_default_na=False)
+print(tables[0])
+
+print("------------------------------------------------------------")  # 60個
 
 print("建立df, 二維串列 轉 df")
 
@@ -276,6 +271,7 @@ print(df)
 print("------------------------------------------------------------")  # 60個
 
 print("二維串列 轉 df")
+
 # 由list組成list
 animals = [
     ["鼠", "mouse", 3, "米老鼠"],
@@ -292,9 +288,10 @@ animals = [
     ["豬", "pig", 42, "佩佩豬"],
 ]
 
-indexs = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+index = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
 columns = ["中文名", "英文名", "體重", "全名"]
-df = pd.DataFrame(animals, columns=columns, index=indexs)
+
+df = pd.DataFrame(animals, columns=columns, index=index)
 print(df)
 
 for i in range(12):
@@ -313,10 +310,18 @@ df1 = df.sort_values("體重")
 print("依體重排序, 檢視前幾行")
 print(df1.head())
 
+print('對df的某欄做運算')
 print("最重 :", df["體重"].max())
 print("最輕 :", df["體重"].min())
 print("總重 :", df["體重"].sum())
 print("平均 :", df["體重"].mean())
+
+#print('因為df有字串(中英文), 不能直接做mean(), 但可做 max() min() sum()')
+
+#print(df.max()) OK
+#print(df.min()) OK
+#print(df.sum()) OK
+#print(df.mean()) NG
 
 print("------------------------------")  # 30個
 
@@ -325,129 +330,18 @@ print(df.iloc[1, :])
 print("df.iloc[1][1] ->")
 print(df.iloc[1][1])
 
-print("------------------------------")  # 30個
-
-print('df.loc["陳聰明"]["數學"] (原始)：' + str(df.loc["陳聰明"]["數學"]))
-df.loc["陳聰明"]["數學"] = 91
-print('df.loc["陳聰明"]["數學"] (修改)：' + str(df.loc["陳聰明"]["數學"]))
-print('df.loc["陳聰明", :] ->')
-df.loc["陳聰明", :] = 80
-print(df.loc["陳聰明", :])
-
-print("------------------------------")  # 30個
-
-print('df["自然"] ->')
-print(df["自然"])
-print('df[["國文", "數學", "自然"] ->')
-print(df[["國文", "數學", "自然"]])
-print("df[df.數學>=80] ->")
-print(df[df.數學 >= 80])
-
-print("------------------------------")  # 30個
-
-print('df.loc["陳聰明", :] ->')
-print(df.loc["陳聰明", :])
-# print(df.loc["陳聰明"])
-print('df.loc["陳聰明"]["數學"] ->')
-print(df.loc["陳聰明"]["數學"])
-print('df.loc[("陳聰明", "熊小娟") ->')
-print(df.loc[("陳聰明", "熊小娟"), :])
-print('df.loc[:, "數學"] ->')
-print(df.loc[:, "數學"])
-print('df.loc[("陳聰明", "熊小娟"), ("數學", "自然")] ->')
-print(df.loc[("陳聰明", "熊小娟"), ("數學", "自然")])
-print('df.loc["陳聰明":"熊小娟", "數學":"社會"] ->')
-print(df.loc["陳聰明":"熊小娟", "數學":"社會"])
-print('df.loc[:黃美麗, "數學":"社會"] ->')
-print(df.loc[:"黃美麗", "數學":"社會"])
-print('df.loc["陳聰明":, "數學":"社會"] ->')
-print(df.loc["陳聰明":, "數學":"社會"])
-
-print("------------------------------")  # 30個
-
-print("修改索引index")
-indexs[0] = "林晶輝"
-df.index = indexs
-
-print("修改欄名columns")
-columns[3] = "理化"
-df.columns = columns
-
-print(df)
-
-print("------------------------------")  # 30個
-
-print("按照數學遞減排序 ->")
-df1 = df.sort_values(by="數學", ascending=False)
-print(df1)
-
-print("按照列標題遞增排序 ->")
-df2 = df.sort_index(axis=0)
-print(df2)
-
-print("------------------------------")  # 30個
-
-"""
-print("移除陳聰明成績 ->")
-df1 = df.drop("陳聰明")
-print(df1)
-print("移除數學科成績 ->")
-df2 = df.drop("數學", axis=1)
-print(df2)
-print("移除數學科及自然科成績 ->")
-df3 = df.drop(["數學", "自然"], axis=1)
-print(df3)
-print("移除陳聰明到熊小娟成績 ->")
-df4 = df.drop(df.index[1:4])
-print(df4)
-print("移除數學科到自然科成績 ->")
-df5 = df.drop(df.columns[1:4], axis=1)
-print(df5)
-"""
-
-print("------------------------------------------------------------")  # 60個
-
-datas = [
-    [65, 92, 78, 83, 70],
-    [90, 72, 76, 93, 56],
-    [81, 85, 91, 89, 77],
-    [79, 53, 47, 94, 80],
-]
-indexs = ["王小明", "李小美", "陳大同", "林小玉"]
-columns = ["國文", "英文", "數學", "自然", "社會"]
-df = pd.DataFrame(datas, columns=columns, index=indexs)
-print(df)
-
 print("------------------------------------------------------------")  # 60個
 
 print("建立df, 字典 轉 df")
 
-scores = {
-    "王小明": {"國文": 65, "英文": 92, "數學": 78, "社會": 83, "自然": 70},
-    "李小美": {"國文": 90, "英文": 72, "數學": 76, "社會": 93, "自然": 56},
-    "陳大同": {"國文": 81, "英文": 85, "數學": 91, "社會": 89, "自然": 77},
-    "林小玉": {"國文": 79, "英文": 53, "數學": 47, "社會": 94, "自然": 80},
-}
-print(type(scores))
-print(scores)
-df = pd.DataFrame(scores)
-print(df)
-
-print("------------------------------------------------------------")  # 60個
-
-print("建立df, 字典 轉 df")
-
-scores = {
+datas = {
     "國文": {"王小明": 65, "李小美": 90, "陳大同": 81, "林小玉": 79},
     "英文": {"王小明": 92, "李小美": 72, "陳大同": 85, "林小玉": 53},
     "數學": {"王小明": 78, "李小美": 76, "陳大同": 91, "林小玉": 47},
     "自然": {"王小明": 83, "李小美": 93, "陳大同": 89, "林小玉": 94},
     "社會": {"王小明": 70, "李小美": 56, "陳大同": 94, "林小玉": 80},
 }
-df = pd.DataFrame(scores)
-print(df)
-print(type(scores))
-print(scores)
+df = pd.DataFrame(datas)
 print(df)
 
 print(df["自然"])
@@ -476,14 +370,14 @@ print("------------------------------------------------------------")  # 60個
 
 print("建立df, 字典 轉 df")
 
-scores = {
+datas = {
     "國文": {"王小明": 65, "李小美": 90, "陳大同": 81, "林小玉": 79},
     "英文": {"王小明": 92, "李小美": 72, "陳大同": 85, "林小玉": 53},
     "數學": {"王小明": 78, "李小美": 76, "陳大同": 91, "林小玉": 47},
     "自然": {"王小明": 83, "李小美": 93, "陳大同": 89, "林小玉": 94},
     "社會": {"王小明": 70, "李小美": 56, "陳大同": 94, "林小玉": 80},
 }
-df = pd.DataFrame(scores)
+df = pd.DataFrame(datas)
 print(df)
 
 # 排序
@@ -510,10 +404,10 @@ print("修改後的資料 :\n", df, "\n")
 print("------------------------------------------------------------")  # 60個
 
 datas = [["mouse", 3], ["ox", 48], ["tiger", 33], ["rabbit", 8]]
-indexs = ["鼠", "牛", "虎", "兔"]
+index = ["鼠", "牛", "虎", "兔"]
 columns = ["英文名", "體重"]
 
-df = pd.DataFrame(datas, columns=columns, index=indexs)
+df = pd.DataFrame(datas, columns=columns, index=index)
 print(df)
 
 print("按照數學遞減排序 ->")
@@ -523,28 +417,6 @@ print(df1)
 print("按照列標題遞增排序 ->")
 df2 = df.sort_index(axis=0)
 print(df2)
-
-print("------------------------------------------------------------")  # 60個
-
-print("建立df, 字典 轉 df")
-
-datas = {
-    "林大明": [65, 92, 78, 83, 70],
-    "陳聰明": [90, 72, 76, 93, 56],
-    "黃美麗": [81, 85, 91, 89, 77],
-    "熊小娟": [79, 53, 47, 94, 80],
-}
-
-df = pd.DataFrame(datas)
-print(df)
-
-print("------------------------------------------------------------")  # 60個
-
-print("建立df, 字典 轉 df")
-
-datas = {"姓名": ["Alice", "Bob", "Charlie"], "分數": [78, 65, 90]}
-df = pd.DataFrame(datas)
-print(df)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -691,11 +563,15 @@ print(df)
 df = df.loc[[1, 2], ["time", "year"]]
 print(df)
 
+print('建立空的df, 再加入資料至df')
+
 df = pd.DataFrame()
-columns = ["AAA", "BBB", "CCC", "DDD", "EEE"]
+
+columns = ["國文", "英文", "數學", "自然", "社會"]
 
 for column in columns:
     df[column] = np.random.choice(range(1, 11), 10)
+
 print(df)
 
 df = df.loc[range(2, 6), ["CCC", "EEE"]]
@@ -732,10 +608,15 @@ print(df_1)
 df_2 = df.drop("year", axis=1)
 print(df_2)
 
+print('建立空的df, 再加入資料至df')
+
 df = pd.DataFrame()
-columns = ["AAA", "BBB", "CCC", "DDD", "EEE"]
+
+columns = ["國文", "英文", "數學", "自然", "社會"]
+
 for column in columns:
     df[column] = np.random.choice(range(1, 11), 10)
+
 print(df)
 
 df = df.drop(np.arange(0, 9, 2))
@@ -774,11 +655,15 @@ print(df)
 print(df.index % 2 == 0)
 print(df[df.index % 2 == 0])
 
+print('建立空的df, 再加入資料至df')
+
 df = pd.DataFrame()
-columns = ["AAA", "BBB", "CCC", "DDD", "EEE"]
+
+columns = ["國文", "英文", "數學", "自然", "社會"]
 
 for column in columns:
     df[column] = np.random.choice(range(1, 11), 10)
+
 print(df)
 
 df = df[df["AAA"] >= 5]
@@ -792,20 +677,17 @@ print("------------------------------------------------------------")  # 60個
 
 print("建立df, 使用Series 合併")
 
-
-def make_random_df(index, columns):
-    df = pd.DataFrame()
-    for column in columns:
-        df[column] = np.random.choice(range(1, 101), len(index))
-    df.index = index
-    return df
-
-
-columns = ["AAA", "BBB", "CCC"]
-df_data1 = make_random_df(range(1, 5), columns)
-df_data2 = make_random_df(range(1, 5), columns)
-
+columns = ["國文", "英文", "數學"]
+df_data1 = pd.DataFrame()
+for column in columns:
+    df_data1[column] = np.random.choice(range(1, 101), 4)
+df_data1.index = range(1, 5)
 print(df_data1)
+
+df_data2 = pd.DataFrame()
+for column in columns:
+    df_data2[column] = np.random.choice(range(1, 101), 4)
+df_data2.index = range(1, 5)
 print(df_data2)
 
 df1 = pd.concat([df_data1, df_data2], axis=0)  # axis=0 : 垂直連接, axis=1 : 水平連接
@@ -820,13 +702,19 @@ print("------------------------------------------------------------")  # 60個
 
 print("建立df, 使用 合併")
 
-columns1 = ["AAA", "BBB", "CCC"]
-columns2 = ["DDD", "EEE", "FFF"]
+columns1 = ["國文", "英文", "數學"]
+columns2 = ["物理", "化學", "生物"]
 
-df_data1 = make_random_df(range(1, 5), columns1)
-df_data2 = make_random_df(np.arange(1, 8, 2), columns2)
-
+df_data1 = pd.DataFrame()
+for column in columns1:
+    df_data1[column] = np.random.choice(range(1, 101), 4)
+df_data1.index = range(1, 5)
 print(df_data1)
+
+df_data2 = pd.DataFrame()
+for column in columns2:
+    df_data2[column] = np.random.choice(range(1, 101), 4)
+df_data2.index = np.arange(1, 8, 2)
 print(df_data2)
 
 df1 = pd.concat([df_data1, df_data2], axis=0)  # axis=0 : 垂直連接, axis=1 : 水平連接
@@ -837,23 +725,44 @@ print(df2)
 
 print("------------------------------------------------------------")  # 60個
 
+def make_random_df():
+    N = 4
+    index = range(1, N + 1)
+    columns = ["國文", "英文", "數學"]
+    df = pd.DataFrame()
+    for column in columns:
+        df[column] = np.random.choice(range(80, 101), N)
+    df.index = index
+    return df
+
+df = make_random_df()
+print(df)
+
+print("------------------------------------------------------------")  # 60個
+
 # 於橫向串接時增列上一層的欄位
 
 print("建立df, 使用 合併")
 
 columns = ["AAA", "BBB", "CCC"]
-df_data1 = make_random_df(range(1, 5), columns)
-df_data2 = make_random_df(range(1, 5), columns)
+
+df_data1 = pd.DataFrame()
+for column in columns:
+    df_data1[column] = np.random.choice(range(1, 101), 4)
+df_data1.index = range(1, 5)
 print(df_data1)
+
+df_data2 = pd.DataFrame()
+for column in columns:
+    df_data2[column] = np.random.choice(range(1, 101), 4)
+df_data2.index = range(1, 5)
 print(df_data2)
 
+# 水平連接
 df = pd.concat(
     [df_data1, df_data2], axis=1, keys=["X", "Y"]
 )  # axis=0 : 垂直連接, axis=1 : 水平連接
 print(df)
-
-Y_CCC = df["Y", "CCC"]
-print(Y_CCC)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1032,108 +941,57 @@ print(dupli_df.duplicated())
 
 print("------------------------------------------------------------")  # 60個
 
-# map() - 利用 DataFrame 的既有欄位生成新的欄位
+# 字典 轉 df
 
-people_data = {
-    "ID": ["100", "101", "102", "103", "104", "106", "108", "110", "111", "113"],
-    "birth_year": [1990, 1989, 1992, 1997, 1982, 1991, 1988, 1990, 1995, 1981],
+datas = {
+    "ID": ["100", "101", "102", "103", "104"],
+    "birth_year": [1990, 1989, 1992, 1997, 1982],
     "name": [
         "Hiroshi",
         "Akiko",
         "Yuki",
         "Satoru",
         "Steeve",
-        "Mituru",
-        "Aoi",
-        "Tarou",
-        "Suguru",
-        "Mitsuo",
     ],
-    "city": ["東京", "大阪", "京都", "札幌", "東京", "東京", "大阪", "京都", "札幌", "東京"],
+    "city": ["東京", "大阪", "京都", "札幌", "東京"],
 }
 
-people_df = pd.DataFrame(people_data)
-print(people_df)
-
-city_map = {"東京": "關東", "札幌": "北海道", "大阪": "關西", "京都": "關西"}
-
-print(people_df["city"].map(city_map))
-
-people_df["region"] = people_df["city"].map(city_map)
-
-print(people_df)
-
-print("------------------------------------------------------------")  # 60個
-
-# 用 cut() 劃分、篩選資料
-
-people_data = {
-    "ID": ["100", "101", "102", "103", "104", "106", "108", "110", "111", "113"],
-    "name": [
-        "Hiroshi",
-        "Akiko",
-        "Yuki",
-        "Satoru",
-        "Steeve",
-        "Mituru",
-        "Aoi",
-        "Tarou",
-        "Suguru",
-        "Mitsuo",
-    ],
-    "birth_year": [1990, 1989, 1992, 1997, 1982, 1991, 1988, 1990, 1995, 1981],
-}
-
-people_df = pd.DataFrame(people_data)
-print(people_df)
-
-birth_year_cut = pd.cut(people_df["birth_year"], 4)
-
-print(birth_year_cut)
-
-print(pd.value_counts(birth_year_cut))
-
-birth_year_bins = [1980, 1985, 1990, 1995, 2000]
-
-birth_year_bins_labels = [
-    "Born in 81~85",
-    "Born in 86~90",
-    "Born in 91~95",
-    "Born in 96~2000",
-]
-
-birth_year_cut = pd.cut(
-    people_df["birth_year"], birth_year_bins, labels=birth_year_bins_labels
-)
-
-print(pd.value_counts(birth_year_cut))
-print(birth_year_cut)
-
-people_df["birth_year_bin"] = birth_year_cut
-
-print(people_df)
-
-print("------------------------------------------------------------")  # 60個
-
-columns = ["AAA", "BBB", "CCC", "DDD", "EEE"]
-
-df = pd.DataFrame()
+df = pd.DataFrame(datas)
 print(df)
 
-for column in columns:
-    df[column] = np.random.choice(range(1, 11), 10)
+#新增欄位 region
+df["region"] = ["AAA", "AAA", "AAA", "AAA", "AAA"]
+print(df["region"])
 
-df.index = [i for i in range(1, 11)]
+print(df)
+
+print("------------------------------------------------------------")  # 60個
+
+# 字典 轉 df
+datas = {
+    "ID": ["100", "101", "102", "103", "104"],
+    "name": [
+        "Hiroshi",
+        "Akiko",
+        "Yuki",
+        "Satoru",
+        "Steeve",
+    ],
+    "birth_year": [1990, 1989, 1992, 1997, 1982],
+}
+
+df = pd.DataFrame(datas)
 print(df)
 
 print("------------------------------------------------------------")  # 60個
 
 # 對 DataFrame 的值做運算
 
-columns = ["AAA", "BBB", "CCC", "DDD", "EEE"]
+print('建立空的df, 再加入資料至df')
 
 df = pd.DataFrame()
-print(df)
+
+columns = ["國文", "英文", "數學", "自然", "社會"]
 
 for column in columns:
     df[column] = np.random.choice(range(1, 11), 10)
@@ -1142,78 +1000,54 @@ df.index = [i for i in range(1, 11)]
 print(df)
 
 double_df = df * 2
-
 square_df = df * df
-
 sqrt_df = np.sqrt(df)
 
 print("----double_df----\n", double_df)
-
 print("----square_df----\n", square_df)
-
 print("----sqrt_df----\n", sqrt_df)
-
-print("------------------------------------------------------------")  # 60個
-
-columns = ["AAA", "BBB", "CCC", "DDD", "EEE"]
-
-df = pd.DataFrame()
-print(df)
-
-for column in columns:
-    df[column] = np.random.choice(range(1, 11), 10)
-
-df.index = [i for i in range(1, 11)]
-print(df)
-
-print("------------------------------------------------------------")  # 60個
 
 # 計算行(列)之間的差 (diff)
 
-columns = ["AAA", "BBB", "CCC", "DDD", "EEE"]
-
-df = pd.DataFrame()
-print(df)
-
-for column in columns:
-    df[column] = np.random.choice(range(1, 11), 10)
-
-df.index = [i for i in range(1, 11)]
-print(df)
-
 df_diff = df.diff(-2, axis=0)
-
 print(df_diff)
 
 print("------------------------------------------------------------")  # 60個
 
-# 用 groupy() 做分組統計
-
-prefecture_df = pd.DataFrame(
-    [
-        ["Tokyo", 2190, 13636, "Kanto"],
-        ["Kanagawa", 2415, 9145, "Kanto"],
-        ["Osaka", 1904, 8837, "Kinki"],
-        ["Kyoto", 4610, 2605, "Kinki"],
-        ["Aichi", 5172, 7505, "Chubu"],
-    ],
-    columns=["Prefecture", "Area", "Population", "Region"],
-)
-print(prefecture_df)
-
-grouped_region = prefecture_df.groupby("Region")
-
-# NG
-# mean_df = grouped_region.mean()
-# print(mean_df)
+dates = pd.date_range("20130101", periods=6)
+print(dates)
 
 print("------------------------------------------------------------")  # 60個
 
-dates = pd.date_range("20160101", periods=6)
+datas = [
+    [1,1,1,1],
+    [2,2,2,2],
+    [3,3,3,3],
+    [4,4,4,4],
+    [5,5,5,5],
+    [6,6,6,6]
+]
 
-df = pd.DataFrame(np.random.randn(6, 4), index=dates, columns=["A", "B", "C", "D"])
-print(df["B"])
+columns = ["AA", "BB", "CC", "DD"]
+dates = list("ABCDEF")
 
+df = pd.DataFrame(datas, index=dates, columns=columns)
+print(df)
+
+print('顯示B欄的資料')
+print(df["BB"])
+print('df反置')
+print(df.T)
+
+print('排序')
+print(df.sort_index(axis=1, ascending=False))
+
+print('排序, 依BB欄')
+print(df.sort_values(by="BB"))
+
+print("------------------------------------------------------------")  # 60個
+
+print('字典轉 df')
 df2 = pd.DataFrame(
     {
         "A": 1.0,
@@ -1227,14 +1061,21 @@ df2 = pd.DataFrame(
 print(df2)
 print(df2.dtypes)
 
-print(df.T)
-print(df.sort_index(axis=1, ascending=False))
-print(df.sort_values(by="B"))
-
 print("------------------------------------------------------------")  # 60個
 
+datas = [
+    [1,1,1,1],
+    [2,2,2,2],
+    [3,3,3,3],
+    [4,4,4,4],
+    [5,5,5,5],
+    [6,6,6,6]
+]
+
+columns = ["A", "B", "C", "D"]
 dates = pd.date_range("20130101", periods=6)
-df = pd.DataFrame(np.random.randn(6, 4), index=dates, columns=["A", "B", "C", "D"])
+
+df = pd.DataFrame(datas, index=dates, columns=columns)
 
 print(df["A"], df.A)
 print(df[0:3], df["20130102":"20130104"])
@@ -1258,7 +1099,15 @@ print(df[df.A > 0])
 """
 print("------------------------------------------------------------")  # 60個
 
-datas = np.random.randn(6, 4)
+datas = [
+    [1,1,1,1],
+    [2,2,2,2],
+    [3,3,3,3],
+    [4,4,4,4],
+    [5,5,5,5],
+    [6,6,6,6]
+]
+
 columns = ["A", "B", "C", "D"]
 dates = pd.date_range("20130101", periods=6)
 
@@ -1289,7 +1138,15 @@ print("------------------------------------------------------------")  # 60個
 
 print("建立df 二維串列 常態分佈二維串列 6X4, 設定欄名")
 
-datas = np.random.randn(6, 4)
+datas = [
+    [1,1,1,1],
+    [2,2,2,2],
+    [3,3,3,3],
+    [4,4,4,4],
+    [5,5,5,5],
+    [6,6,6,6]
+]
+
 columns = list("ABCD")
 df = pd.DataFrame(datas, columns=columns)
 print(df)
@@ -1470,9 +1327,6 @@ data.plot.scatter(x="A", y="C", color="LightGreen", label="Class 2", ax=ax)
 plt.show()
 """
 
-print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 讀取[Chipotle快餐數據]資料集至df
@@ -1808,7 +1662,6 @@ print(ufo)
 for c in ufo.City:
     print(c)
 
-
 # various methods are available to iterate through a DataFrame
 for index, row in ufo.iterrows():
     print(index, row.City, row.State)
@@ -1879,10 +1732,8 @@ print('檢視前幾行')
 cc = drinks.mean(axis=1).head()
 print(cc)
 
-
 # 'index' is an alias for axis 0
 drinks.mean(axis='index')
-
 
 # 'columns' is an alias for axis 1
 print('檢視前幾行')
@@ -2015,7 +1866,6 @@ drinks.groupby('continent').mean()
 
 # side-by-side bar plot of the DataFrame directly above
 drinks.groupby('continent').mean().plot(kind='bar')
-
 """
 print("------------------------------------------------------------")  # 60個
 
@@ -4023,19 +3873,16 @@ df_sample["age"] = df_sample["age"].astype("int32")
 
 # 客戶中男女生的平均年齡
 print(df_sample.groupby("gender")["age"].mean())
-print("-" * 30)
+
+print("------------------------------")  # 30個
 
 # 客戶中住各區的人數
 print(df_sample.groupby("area")["id"].count())
-print("-" * 30)
+
+print("------------------------------")  # 30個
 
 # 客戶中男女生的平均年齡、最年長及最年輕的年齡
 print(df_sample.groupby("gender")["age"].agg(["mean", "max", "min"]))
-
-print("cccccc")
-
-print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -4382,9 +4229,8 @@ print(df)
 
 print("------------------------------------------------------------")  # 60個
 
-data = pd.read_csv("_new/scores2.csv", header=0, index_col=0)
-print(data)
-print(type(data))
+df = pd.read_csv("_new/scores2.csv", header=0, index_col=0)
+print(df)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -4529,4 +4375,87 @@ print(cc)
 
 
 plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 也可設mingliu或DFKai-SB
+
+
+
+print('df.loc["李小美"]["數學"] (原始)：' + str(df.loc["李小美"]["數學"]))
+df.loc["李小美"]["數學"] = 91
+print('df.loc["李小美"]["數學"] (修改)：' + str(df.loc["李小美"]["數學"]))
+print('df.loc["李小美", :] ->')
+df.loc["李小美", :] = 80
+print(df.loc["李小美", :])
+
+print("------------------------------")  # 30個
+
+print('df["自然"] ->')
+print(df["自然"])
+print('df[["國文", "數學", "自然"] ->')
+print(df[["國文", "數學", "自然"]])
+print("df[df.數學>=80] ->")
+print(df[df.數學 >= 80])
+
+print("------------------------------")  # 30個
+
+print('df.loc["李小美", :] ->')
+print(df.loc["李小美", :])
+# print(df.loc["李小美"])
+print('df.loc["李小美"]["數學"] ->')
+print(df.loc["李小美"]["數學"])
+print('df.loc[("李小美", "熊小娟") ->')
+print(df.loc[("李小美", "熊小娟"), :])
+print('df.loc[:, "數學"] ->')
+print(df.loc[:, "數學"])
+print('df.loc[("李小美", "熊小娟"), ("數學", "自然")] ->')
+print(df.loc[("李小美", "熊小娟"), ("數學", "自然")])
+print('df.loc["李小美":"熊小娟", "數學":"社會"] ->')
+print(df.loc["李小美":"熊小娟", "數學":"社會"])
+print('df.loc[:黃美麗, "數學":"社會"] ->')
+print(df.loc[:"黃美麗", "數學":"社會"])
+print('df.loc["李小美":, "數學":"社會"] ->')
+print(df.loc["李小美":, "數學":"社會"])
+
+print("修改索引index")
+index[0] = "林晶輝"
+df.index = index
+
+print("修改欄名columns")
+columns[3] = "理化"
+df.columns = columns
+
+print(df)
+
+print("------------------------------")  # 30個
+
+print("按照數學遞減排序 ->")
+df1 = df.sort_values(by="數學", ascending=False)
+print(df1)
+
+print("按照列標題遞增排序 ->")
+df2 = df.sort_index(axis=0)
+print(df2)
+
+print("------------------------------")  # 30個
+
+"""
+print("移除李小美成績 ->")
+df1 = df.drop("李小美")
+print(df1)
+print("移除數學科成績 ->")
+df2 = df.drop("數學", axis=1)
+print(df2)
+print("移除數學科及自然科成績 ->")
+df3 = df.drop(["數學", "自然"], axis=1)
+print(df3)
+print("移除李小美到熊小娟成績 ->")
+df4 = df.drop(df.index[1:4])
+print(df4)
+print("移除數學科到自然科成績 ->")
+df5 = df.drop(df.columns[1:4], axis=1)
+print(df5)
+"""
+
+
+df.to_csv("tmp_scores3.csv", encoding="utf-8-sig")
+
+
 
