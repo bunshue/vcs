@@ -43,17 +43,19 @@ namespace vcs_Remove_Bin_Obj
             checkBox10.Location = new Point(x_st, y_st + dy * 7);
             button1.Location = new Point(x_st, y_st + dy * 8);
 
-            checkBox5.Location = new Point(x_st, y_st + dy * 11);
-            checkBox6.Location = new Point(x_st, y_st + dy * 12);
-
-            button2.Location = new Point(x_st, y_st + dy * 13);
-            button3.Location = new Point(x_st, y_st + dy * 14 + 30);
-            button4.Location = new Point(x_st + 115, y_st + dy * 13);
-            groupBox_remove.Location = new Point(x_st + 115, y_st + dy * 8);
+            button2.Location = new Point(x_st, y_st + dy * 10);
+            button3.Location = new Point(x_st, y_st + dy * 11 + 30);
+            button4.Location = new Point(x_st + 115, y_st + dy * 10);
+            bt_open_dir2.Location = new Point(x_st + 115 + 50, y_st + dy * 10 - 60);
+            groupBox_remove.Location = new Point(x_st + 170, y_st + dy * 0);
 
             lb_main_mesg.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            richTextBox1.Size = new Size(630, 550);
-            richTextBox1.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+
+            listView1.Size = new Size(580, 550);
+            listView1.Location = new Point(x_st + dx * 1 + 50, y_st + dy * 1);
+
+            richTextBox1.Size = new Size(300, 550);
+            richTextBox1.Location = new Point(x_st + dx * 1 + 630, y_st + dy * 1);
 
             groupBox_replace.Size = new Size(550, 170);
             groupBox_replace.Location = new Point(x_st + dx * 0, y_st + dy * 17 - 10);
@@ -90,7 +92,7 @@ namespace vcs_Remove_Bin_Obj
             lb_path.Text = search_path;
             lb_main_mesg.Text = "";
 
-            this.Size = new Size(900, 820);
+            this.Size = new Size(1200, 820);
 
             tb_string_old.Text = @"C:/_git/vcs/_1.data/______test_files2";
             tb_string_new.Text = @"C:/_git/vcs/_1.data/______test_files1/";
@@ -416,304 +418,18 @@ namespace vcs_Remove_Bin_Obj
                 lb_main_mesg.Text += "\t有錯誤";
         }
 
-        // Process all files in the directory passed in, recurse on any directories 
-        // that are found, and process the files they contain.
-        public void ProcessRenameDirectory(string targetDirectory)
-        {
-            try
-            {
-                // Process the list of files found in the directory.
-                try
-                {
-                    string[] fileEntries = Directory.GetFiles(targetDirectory);
-                    Array.Sort(fileEntries);
-                    foreach (string fileName in fileEntries)
-                    {
-                        if (fileName.EndsWith(" 的副本"))
-                        {
-                            if (checkBox5.Checked == true)
-                                richTextBox1.Text += fileName + "\n";
-                            if (checkBox6.Checked == true)
-                                filename_rename.Add(fileName);
-                        }
-                    }
-
-                    // Recurse into subdirectories of this directory.
-                    string[] subdirectoryEntries = Directory.GetDirectories(targetDirectory);
-                    Array.Sort(subdirectoryEntries);
-                    foreach (string subdirectory in subdirectoryEntries)
-                    {
-                        //richTextBox1.Text += "subdirectory = " + subdirectory + "\n";
-                        DirectoryInfo di = new DirectoryInfo(subdirectory);
-                        ProcessRenameDirectory(subdirectory);
-                    }
-                }
-                catch (UnauthorizedAccessException ex)
-                {
-                    richTextBox1.Text += ex.Message + "\n";
-                }
-            }
-            catch (IOException e)
-            {
-                richTextBox1.Text += "IOException, " + e.GetType().Name + "\n";
-            }
-        }
-
-        public void ProcessRenameBackup(List<string> filename_rename)
-        {
-            bool flag_rename_fail = false;
-            int i;
-            int len;
-            len = filename_rename.Count;
-            richTextBox1.Text += "欲更名個數 : " + len + "\n";
-            for (i = 0; i < len; i++)
-            {
-                richTextBox1.Text += "檔案 : " + filename_rename[i] + "\n";
-
-
-                richTextBox1.Text += "new 檔案 : " + filename_rename[i].Replace(" 的副本", "") + "\n";
-
-                //if (!File.Exists(Path.Combine(dir, f.ToString().Replace("(", "").Replace(")", "")         )))
-
-
-                if (File.Exists(filename_rename[i]))     //確認檔案是否存在
-                {
-
-                    string sourceFileName = filename_rename[i];
-                    string destFileName = filename_rename[i].Replace(" 的副本", "");
-
-                    //移動檔案，從 sourceFileName 移動到 destFileName
-                    if (File.Exists(sourceFileName))        //確認原始檔案是否存在
-                    {
-                        if (!File.Exists(destFileName))     //確認目標檔案是否存在
-                        {
-                            File.Move(sourceFileName, destFileName);
-                            richTextBox1.Text += "已移動檔案: " + sourceFileName + " 到 " + destFileName + "\n";
-                        }
-                        else
-                        {
-                            richTextBox1.Text += "檔案: " + destFileName + " 已存在，無法移動\n";
-                            flag_rename_fail = true;
-                        }
-                    }
-                    else
-                    {
-                        richTextBox1.Text += "檔案: " + sourceFileName + " 不存在，無法移動\n";
-                        flag_rename_fail = true;
-                    }
-
-                }
-                else
-                {
-                    richTextBox1.Text += "資料夾或檔案: " + filename_rename[i] + " 不存在，不能刪除\n";
-                    flag_rename_fail = true;
-                }
-            }
-
-            lb_main_mesg.Text = "更名個數 : " + len + ", 完成";
-            if (flag_rename_fail == true)
-                lb_main_mesg.Text += "\t有錯誤";
-        }
-
         private void button2_Click(object sender, EventArgs e)
         {
-            lb_main_mesg.Text = "開始改名檔案";
-            this.Refresh();         //加上.Refresh()才可以讓人看清楚字的變化
-            /*
-            //取得目前所在路徑
-            string currentPath = Directory.GetCurrentDirectory();
-            richTextBox1.Text += "目前所在路徑: " + currentPath + "\n";
 
-            //確認資料夾是否存在
-            string Path = @"C:/_git/vcs/_1.data/______test_files2/aaaa/bbbb";
-            if (Directory.Exists(Path) == false)    //確認資料夾是否存在
-                richTextBox1.Text += "資料夾: " + Path + " 不存在\n";
-            else
-                richTextBox1.Text += "資料夾: " + Path + " 存在\n";
-            */
-
-            //string path = @"C:\_git\vcs\_2.vcs";
-            string path = search_path;
-
-            filename_rename.Clear();
-
-            richTextBox1.Text += "資料夾: " + path + "\n\n";
-            if (Directory.Exists(path))
-            {
-                // This path is a directory
-                ProcessRenameDirectory(path);
-            }
-            ProcessRenameBackup(filename_rename);
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            //檔名簡中轉正中
-        }
-
-        // Process all files in the directory passed in, recurse on any directories 
-        // that are found, and process the files they contain.
-        public void ProcessRenameDirectory001(string targetDirectory)
-        {
-            try
-            {
-                // Process the list of files found in the directory.
-                try
-                {
-                    string[] fileEntries = Directory.GetFiles(targetDirectory);
-                    Array.Sort(fileEntries);
-                    foreach (string fileName in fileEntries)
-                    {
-                        //richTextBox1.Text += fileName + "\n";
-
-                        //取得檔案名稱
-                        string short_filename =
-                            fileName.Substring(fileName.LastIndexOf("\\") + 1,
-                            fileName.LastIndexOf(".") -
-                            (fileName.LastIndexOf("\\") + 1));
-
-                        //richTextBox1.Text += "檔案名稱:\t" + short_filename + "\n";
-
-                        if (short_filename.Length >= 11)
-                        {
-                            if (short_filename[short_filename.Length - 4] == '-')
-                            {
-                                if ((short_filename[short_filename.Length - 3] == '0') && (short_filename[short_filename.Length - 2] == '0'))
-                                {
-                                    filename_rename.Add(fileName);
-                                }
-                            }
-                        }
-                    }
-
-                    // Recurse into subdirectories of this directory.
-                    string[] subdirectoryEntries = Directory.GetDirectories(targetDirectory);
-                    Array.Sort(subdirectoryEntries);
-                    foreach (string subdirectory in subdirectoryEntries)
-                    {
-                        //richTextBox1.Text += "subdirectory = " + subdirectory + "\n";
-                        DirectoryInfo di = new DirectoryInfo(subdirectory);
-                        ProcessRenameDirectory001(subdirectory);
-                    }
-                }
-                catch (UnauthorizedAccessException ex)
-                {
-                    richTextBox1.Text += ex.Message + "\n";
-                }
-            }
-            catch (IOException e)
-            {
-                richTextBox1.Text += "IOException, " + e.GetType().Name + "\n";
-            }
-        }
-
-        public void ProcessRenameBackup001(List<string> filename_rename)
-        {
-            bool flag_rename_fail = false;
-            int i;
-            int len;
-            len = filename_rename.Count;
-            richTextBox1.Text += "欲更名個數 : " + len + "\n";
-            for (i = 0; i < len; i++)
-            {
-                richTextBox1.Text += "檔案 : " + filename_rename[i] + "\n";
-
-                //取得檔案名稱
-                string short_filename =
-                    filename_rename[i].Substring(filename_rename[i].LastIndexOf("\\") + 1,
-                    filename_rename[i].LastIndexOf(".") -
-                    (filename_rename[i].LastIndexOf("\\") + 1));
-
-                //richTextBox1.Text += "檔案名稱:\t" + short_filename + "\n";
-
-                if (short_filename.Length >= 11)
-                {
-                    if (short_filename[short_filename.Length - 4] == '-')
-                    {
-                        if ((short_filename[short_filename.Length - 3] == '0') && (short_filename[short_filename.Length - 2] == '0'))
-                        {
-                            richTextBox1.Text += "符合條件 改名 : " + filename_rename[i] + "\n";
-
-                            if (File.Exists(filename_rename[i]))     //確認檔案是否存在
-                            {
-                                string sourceFileName = filename_rename[i];
-                                string destFileName = string.Empty;
-
-                                int length = sourceFileName.Length;
-                                destFileName = sourceFileName.Substring(0, length - 8) + sourceFileName.Substring(length - 4, 4);
-
-                                richTextBox1.Text += "new filename : " + destFileName + "\n";
-
-                                //移動檔案，從 sourceFileName 移動到 destFileName
-                                if (File.Exists(sourceFileName))        //確認原始檔案是否存在
-                                {
-                                    if (!File.Exists(destFileName))     //確認目標檔案是否存在
-                                    {
-                                        File.Move(sourceFileName, destFileName);
-                                        richTextBox1.Text += "已移動檔案: " + sourceFileName + " 到 " + destFileName + "\n";
-                                    }
-                                    else
-                                    {
-                                        richTextBox1.Text += "檔案: " + destFileName + " 已存在，無法移動\n";
-                                        flag_rename_fail = true;
-                                    }
-                                }
-                                else
-                                {
-                                    richTextBox1.Text += "檔案: " + sourceFileName + " 不存在，無法移動\n";
-                                    flag_rename_fail = true;
-                                }
-                            }
-                            else
-                            {
-                                richTextBox1.Text += "資料夾或檔案: " + filename_rename[i] + " 不存在，不能刪除\n";
-                                flag_rename_fail = true;
-                            }
-                        }
-                    }
-                }
-            }
-
-            lb_main_mesg.Text = "更名個數 : " + len + ", 完成";
-            if (flag_rename_fail == true)
-            {
-                lb_main_mesg.Text += "\t有錯誤";
-            }
+            richTextBox1.Text += "檔名簡中轉正中\nTBD";
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            //改名 001
-
-            lb_main_mesg.Text = "開始改名檔案";
-            this.Refresh();         //加上.Refresh()才可以讓人看清楚字的變化
-            /*
-            //取得目前所在路徑
-            string currentPath = Directory.GetCurrentDirectory();
-            richTextBox1.Text += "目前所在路徑: " + currentPath + "\n";
-
-            //確認資料夾是否存在
-            string Path = @"C:/_git/vcs/_1.data/______test_files2/aaaa/bbbb";
-            if (Directory.Exists(Path) == false)    //確認資料夾是否存在
-                richTextBox1.Text += "資料夾: " + Path + " 不存在\n";
-            else
-                richTextBox1.Text += "資料夾: " + Path + " 存在\n";
-            */
-
-            //string path = @"C:\_git\vcs\_2.vcs";
-
-            string path = @"C:\_git\vcs\_1.data\______test_files1\rename001";
-            //string path = search_path;
-
-            filename_rename.Clear();
-
-            richTextBox1.Text += "資料夾: " + path + "\n\n";
-            if (Directory.Exists(path))
-            {
-                // This path is a directory
-                ProcessRenameDirectory001(path);
-            }
-            ProcessRenameBackup001(filename_rename);
         }
 
         void RemoveNeedlessFiles()
@@ -1360,6 +1076,19 @@ namespace vcs_Remove_Bin_Obj
             {
                 richTextBox1.Text = "未選取資料夾\n";
                 specified_search_path = String.Empty;
+            }
+        }
+
+        private void bt_open_dir2_Click(object sender, EventArgs e)
+        {
+            int cnt = listView1.SelectedItems.Count;
+            if (cnt > 0)
+            {
+                int selNdx = listView1.SelectedIndices[0];
+            }
+            else
+            {
+                richTextBox1.Text += "尚未選擇\n";
             }
         }
     }

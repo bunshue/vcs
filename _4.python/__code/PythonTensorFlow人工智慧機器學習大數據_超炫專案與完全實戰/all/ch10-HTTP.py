@@ -1,7 +1,7 @@
 import sys
 import urllib.request as httplib
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 '''
 try:
     url="http://www.powenko.com/download_release/get.php?name=powenko"
@@ -115,62 +115,65 @@ print('------------------------------------------------------------')	#60個
 '''
 from xml.etree import ElementTree
 
+
 def print_node(node):
     try:
-       print("node.text:%s" % node.text)
+        print("node.text:%s" % node.text)
     except:
-       print("node.text:null")
+        print("node.text:null")
 
 
 try:
-    url="http://data.taipei/opendata/datalist/datasetMeta/download?id=ece023db-a5f8-4399-97da-f04d7f4009e3&rid=1a2d417e-c121-4a12-835f-97ee6852c4b8"
-    req=httplib.Request(url)
+    url = "http://data.taipei/opendata/datalist/datasetMeta/download?id=ece023db-a5f8-4399-97da-f04d7f4009e3&rid=1a2d417e-c121-4a12-835f-97ee6852c4b8"
+    req = httplib.Request(url)
     reponse = httplib.urlopen(req)
-    if reponse.code==200:
-        if (sys.version_info > (3, 0)):
-            contents=reponse.read().decode(reponse.headers.get_content_charset())
-        else:  
-            contents=reponse.read()
+    if reponse.code == 200:
+        if sys.version_info > (3, 0):
+            contents = reponse.read().decode(reponse.headers.get_content_charset())
+        else:
+            contents = reponse.read()
 
         print(contents)
         print_node(contents)
         root = ElementTree.fromstring(contents)
         lst_node = root.findall("MAP/PERSON_IN_CHARGE")
-        #lst_node = root.findall("MAP/ADDRESS")
-        #lst_node = root.findall("MAP/PHO        #lst_node = root.findall("MAP/ADDRESS")
-        #lst_node = root.findall("MAP/PHONE")NE")
+        # lst_node = root.findall("MAP/ADDRESS")
+        # lst_node = root.findall("MAP/PHO        #lst_node = root.findall("MAP/ADDRESS")
+        # lst_node = root.findall("MAP/PHONE")NE")
         for node in lst_node:
             print_node(node)
 except:
     print("error")
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 from xml.etree import ElementTree
 
+
 def print_node(node):
     try:
-       print("node.text:%s" % node.text)
+        print("node.text:%s" % node.text)
     except:
-       print("node.text:null")
+        print("node.text:null")
+
 
 try:
-    url="http://data.taipei/opendata/datalist/datasetMeta/download?id=ece023db-a5f8-4399-97da-f04d7f4009e3&rid=1a2d417e-c121-4a12-835f-97ee6852c4b8"
-    req=httplib.Request(url)
+    url = "http://data.taipei/opendata/datalist/datasetMeta/download?id=ece023db-a5f8-4399-97da-f04d7f4009e3&rid=1a2d417e-c121-4a12-835f-97ee6852c4b8"
+    req = httplib.Request(url)
     reponse = httplib.urlopen(req)
-    if reponse.code==200:
-        if (sys.version_info > (3, 0)):
-            contents=reponse.read().decode(reponse.headers.get_content_charset())
-        else:  
-            contents=reponse.read()
+    if reponse.code == 200:
+        if sys.version_info > (3, 0):
+            contents = reponse.read().decode(reponse.headers.get_content_charset())
+        else:
+            contents = reponse.read()
 
         print(contents)
         print_node(contents)
         root = ElementTree.fromstring(contents)
-        #lst_node = root.findall("MAP/PERSON_IN_CHARGE")
-        #lst_node = root.findall("MAP/ADDRESS")
-        #lst_node = root.findall("MAP/PHONE")
-        #for node in lst_node:
+        # lst_node = root.findall("MAP/PERSON_IN_CHARGE")
+        # lst_node = root.findall("MAP/ADDRESS")
+        # lst_node = root.findall("MAP/PHONE")
+        # for node in lst_node:
         #    print_node(node)
 
         MAP = root.findall("MAP")
@@ -179,100 +182,115 @@ try:
             ADDRESS = root3.findall("ADDRESS")
             LAT = root3.findall("LAT")
             LON = root3.findall("LON")
-            print("ADDRESS:%s   LAT:%s  LON:%s " % (ADDRESS[0].text, LAT[0].text,LON[0].text))
+            print(
+                "ADDRESS:%s   LAT:%s  LON:%s "
+                % (ADDRESS[0].text, LAT[0].text, LON[0].text)
+            )
 except:
     print("error")
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 from xml.etree import ElementTree
 
+
 def print_node(node):
     try:
-       print("node.text:%s" % node.text)
+        print("node.text:%s" % node.text)
     except:
-       print("node.text:null")
+        print("node.text:null")
+
 
 try:
-    url="http://data.taipei/opendata/datalist/datasetMeta/download?id=ece023db-a5f8-4399-97da-f04d7f4009e3&rid=1a2d417e-c121-4a12-835f-97ee6852c4b8"
+    url = "http://data.taipei/opendata/datalist/datasetMeta/download?id=ece023db-a5f8-4399-97da-f04d7f4009e3&rid=1a2d417e-c121-4a12-835f-97ee6852c4b8"
     url = "http://data.taipei/opendata/datalist/datasetMeta/download?id=5bc82dc7-f2a2-4351-abc8-c09c8a8d7529&rid=1f1aaba5-616a-4a33-867d-878142cac5c4"
-    req=httplib.Request(url)
+    req = httplib.Request(url)
     reponse = httplib.urlopen(req)
-    if reponse.code==200:
-        if (sys.version_info > (3, 0)):
-            contents=reponse.read().decode(reponse.headers.get_content_charset())
+    if reponse.code == 200:
+        if sys.version_info > (3, 0):
+            contents = reponse.read().decode(reponse.headers.get_content_charset())
         else:
-            contents=reponse.read()
+            contents = reponse.read()
 
-        contents = contents.replace('<cwbopendata xmlns="urn:cwb:gov:tw:cwbcommon:0.1">', '<cwbopendata>')
-        #print(contents)
-        #print_node(contents)
+        contents = contents.replace(
+            '<cwbopendata xmlns="urn:cwb:gov:tw:cwbcommon:0.1">', "<cwbopendata>"
+        )
+        # print(contents)
+        # print_node(contents)
         root = ElementTree.fromstring(contents)
-        #lst_node = root.findall("MAP/PERSON_IN_CHARGE")
-        #lst_node = root.findall("MAP/ADDRESS")
+        # lst_node = root.findall("MAP/PERSON_IN_CHARGE")
+        # lst_node = root.findall("MAP/ADDRESS")
 
-        node_find = root.find('sender')
+        node_find = root.find("sender")
         print_node(node_find)
-
 
         lst_node = root.findall("dataset/locations/location/locationName")
         for node in lst_node:
             print_node(node)
 
-        lst_node = root.findall("dataset/locations/location/weatherElement/time/elementValue/value")
+        lst_node = root.findall(
+            "dataset/locations/location/weatherElement/time/elementValue/value"
+        )
         for node in lst_node:
             print_node(node)
 
         root2 = root.findall("dataset/locations/location")
         for root3 in root2:
-            #print_node(node)
+            # print_node(node)
             root3_locationName = root3.findall("locationName")
             root3_dataTime = root3.findall("weatherElement/time/dataTime")
-            root3_value= root3.findall("weatherElement/time/elementValue/value")
-            print("地區:%s   溫度:%s  時間:%s " % (root3_locationName[0].text,root3_value[0].text,root3_dataTime[0].text))
+            root3_value = root3.findall("weatherElement/time/elementValue/value")
+            print(
+                "地區:%s   溫度:%s  時間:%s "
+                % (
+                    root3_locationName[0].text,
+                    root3_value[0].text,
+                    root3_dataTime[0].text,
+                )
+            )
 except:
     print("error")
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 import json
 import ssl
 import urllib.request
 
-url="https://parks.taipei/parks/api/"
+url = "https://parks.taipei/parks/api/"
 
-req=httplib.Request(url)
+req = httplib.Request(url)
 try:
     context = ssl._create_unverified_context()
     reponse = httplib.urlopen(url, context=context)
-    if reponse.code==200:
-        if (sys.version_info > (3, 0)):
-                contents=reponse.read().decode(reponse.headers.get_content_charset())
-                contents=contents.replace("\r\n", "")
-                print(contents)
-        else:  
-                contents=reponse.read()   
+    if reponse.code == 200:
+        if sys.version_info > (3, 0):
+            contents = reponse.read().decode(reponse.headers.get_content_charset())
+            contents = contents.replace("\r\n", "")
+            print(contents)
+        else:
+            contents = reponse.read()
         data = json.loads(contents)
         for data2 in data:
-            print(data2['pm_name'],data2['pm_location'])
-except:                                                                 #  處理網路連線異常
-    print("error")   
+            print(data2["pm_name"], data2["pm_location"])
+except:  #  處理網路連線異常
+    print("error")
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 import json
 import ssl
 
 context = ssl._create_unverified_context()
 
-url="http://data.taipei/opendata/datalist/datasetMeta/download?id=ea732fb5-4bec-4be7-93f2-8ab91e74a6c6&rid=bf073841-c734-49bf-a97f-3757a6013812"
-url="https://data.tycg.gov.tw/opendata/datalist/datasetMeta/download?id=5ca2bfc7-9ace-4719-88ae-4034b9a5a55c&rid=a1b4714b-3b75-4ff8-a8f2-cc377e4eaa0f"
-req=httplib.Request(url)
+url = "http://data.taipei/opendata/datalist/datasetMeta/download?id=ea732fb5-4bec-4be7-93f2-8ab91e74a6c6&rid=bf073841-c734-49bf-a97f-3757a6013812"
+url = "https://data.tycg.gov.tw/opendata/datalist/datasetMeta/download?id=5ca2bfc7-9ace-4719-88ae-4034b9a5a55c&rid=a1b4714b-3b75-4ff8-a8f2-cc377e4eaa0f"
+req = httplib.Request(url)
 try:
     reponse = httplib.urlopen(req, context=context)
-    if reponse.code==200:
-        if (sys.version_info > (3, 0)):
-            contents = reponse.read();
+    if reponse.code == 200:
+        if sys.version_info > (3, 0):
+            contents = reponse.read()
         else:
             contents = reponse.read()
         data = json.loads(contents)
@@ -281,10 +299,7 @@ try:
         for x in range(2001,2100):
             print(data["retVal"][str(x)]["sna"])
         """
-except:                                                                 #  處理網路連線異常
-    print("error")   
+except:  #  處理網路連線異常
+    print("error")
 
-print('------------------------------------------------------------')	#60個
-
-
-
+print("------------------------------------------------------------")  # 60個

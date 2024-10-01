@@ -36,8 +36,6 @@
             this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.checkBox4 = new System.Windows.Forms.CheckBox();
             this.button3 = new System.Windows.Forms.Button();
-            this.checkBox5 = new System.Windows.Forms.CheckBox();
-            this.checkBox6 = new System.Windows.Forms.CheckBox();
             this.lb_main_mesg = new System.Windows.Forms.Label();
             this.bt_clear = new System.Windows.Forms.Button();
             this.checkBox7 = new System.Windows.Forms.CheckBox();
@@ -63,13 +61,15 @@
             this.rb_file_type2 = new System.Windows.Forms.RadioButton();
             this.rb_file_type1 = new System.Windows.Forms.RadioButton();
             this.rb_file_type0 = new System.Windows.Forms.RadioButton();
+            this.listView1 = new System.Windows.Forms.ListView();
+            this.bt_open_dir2 = new System.Windows.Forms.Button();
             this.groupBox_remove.SuspendLayout();
             this.groupBox_replace.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button1.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button1.Location = new System.Drawing.Point(12, 335);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(104, 39);
@@ -91,10 +91,10 @@
             this.checkBox1.AutoSize = true;
             this.checkBox1.Checked = true;
             this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox1.Font = new System.Drawing.Font("新細明體", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.checkBox1.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.checkBox1.Location = new System.Drawing.Point(15, 64);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(165, 31);
+            this.checkBox1.Size = new System.Drawing.Size(145, 28);
             this.checkBox1.TabIndex = 2;
             this.checkBox1.Text = "刪除 bin obj";
             this.checkBox1.UseVisualStyleBackColor = true;
@@ -104,10 +104,10 @@
             this.checkBox2.AutoSize = true;
             this.checkBox2.Checked = true;
             this.checkBox2.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox2.Font = new System.Drawing.Font("新細明體", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.checkBox2.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.checkBox2.Location = new System.Drawing.Point(15, 144);
             this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(189, 31);
+            this.checkBox2.Size = new System.Drawing.Size(170, 28);
             this.checkBox2.TabIndex = 3;
             this.checkBox2.Text = "刪除 .suo .user";
             this.checkBox2.UseVisualStyleBackColor = true;
@@ -117,10 +117,10 @@
             this.checkBox3.AutoSize = true;
             this.checkBox3.Checked = true;
             this.checkBox3.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox3.Font = new System.Drawing.Font("新細明體", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.checkBox3.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.checkBox3.Location = new System.Drawing.Point(15, 24);
             this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(165, 31);
+            this.checkBox3.Size = new System.Drawing.Size(145, 28);
             this.checkBox3.TabIndex = 5;
             this.checkBox3.Text = "顯示 bin obj";
             this.checkBox3.UseVisualStyleBackColor = true;
@@ -130,10 +130,10 @@
             this.checkBox4.AutoSize = true;
             this.checkBox4.Checked = true;
             this.checkBox4.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox4.Font = new System.Drawing.Font("新細明體", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.checkBox4.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.checkBox4.Location = new System.Drawing.Point(15, 104);
             this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(189, 31);
+            this.checkBox4.Size = new System.Drawing.Size(170, 28);
             this.checkBox4.TabIndex = 6;
             this.checkBox4.Text = "顯示 .suo .user";
             this.checkBox4.UseVisualStyleBackColor = true;
@@ -148,30 +148,6 @@
             this.button3.Text = "檔名簡中轉正中";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // checkBox5
-            // 
-            this.checkBox5.AutoSize = true;
-            this.checkBox5.Checked = true;
-            this.checkBox5.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox5.Font = new System.Drawing.Font("新細明體", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.checkBox5.Location = new System.Drawing.Point(12, 437);
-            this.checkBox5.Name = "checkBox5";
-            this.checkBox5.Size = new System.Drawing.Size(180, 31);
-            this.checkBox5.TabIndex = 10;
-            this.checkBox5.Text = "顯示  的副本";
-            this.checkBox5.UseVisualStyleBackColor = true;
-            // 
-            // checkBox6
-            // 
-            this.checkBox6.AutoSize = true;
-            this.checkBox6.Font = new System.Drawing.Font("新細明體", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.checkBox6.Location = new System.Drawing.Point(12, 487);
-            this.checkBox6.Name = "checkBox6";
-            this.checkBox6.Size = new System.Drawing.Size(180, 31);
-            this.checkBox6.TabIndex = 9;
-            this.checkBox6.Text = "改名  的副本";
-            this.checkBox6.UseVisualStyleBackColor = true;
             // 
             // lb_main_mesg
             // 
@@ -200,10 +176,10 @@
             this.checkBox7.AutoSize = true;
             this.checkBox7.Checked = true;
             this.checkBox7.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox7.Font = new System.Drawing.Font("新細明體", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.checkBox7.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.checkBox7.Location = new System.Drawing.Point(15, 184);
             this.checkBox7.Name = "checkBox7";
-            this.checkBox7.Size = new System.Drawing.Size(140, 31);
+            this.checkBox7.Size = new System.Drawing.Size(126, 28);
             this.checkBox7.TabIndex = 136;
             this.checkBox7.Text = "顯示 misc";
             this.checkBox7.UseVisualStyleBackColor = true;
@@ -213,10 +189,10 @@
             this.checkBox8.AutoSize = true;
             this.checkBox8.Checked = true;
             this.checkBox8.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox8.Font = new System.Drawing.Font("新細明體", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.checkBox8.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.checkBox8.Location = new System.Drawing.Point(15, 224);
             this.checkBox8.Name = "checkBox8";
-            this.checkBox8.Size = new System.Drawing.Size(140, 31);
+            this.checkBox8.Size = new System.Drawing.Size(126, 28);
             this.checkBox8.TabIndex = 137;
             this.checkBox8.Text = "刪除 misc";
             this.checkBox8.UseVisualStyleBackColor = true;
@@ -226,10 +202,10 @@
             this.checkBox9.AutoSize = true;
             this.checkBox9.Checked = true;
             this.checkBox9.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox9.Font = new System.Drawing.Font("新細明體", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.checkBox9.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.checkBox9.Location = new System.Drawing.Point(15, 264);
             this.checkBox9.Name = "checkBox9";
-            this.checkBox9.Size = new System.Drawing.Size(193, 31);
+            this.checkBox9.Size = new System.Drawing.Size(173, 28);
             this.checkBox9.TabIndex = 138;
             this.checkBox9.Text = "顯示空資料夾";
             this.checkBox9.UseVisualStyleBackColor = true;
@@ -237,10 +213,10 @@
             // checkBox10
             // 
             this.checkBox10.AutoSize = true;
-            this.checkBox10.Font = new System.Drawing.Font("新細明體", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.checkBox10.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.checkBox10.Location = new System.Drawing.Point(15, 301);
             this.checkBox10.Name = "checkBox10";
-            this.checkBox10.Size = new System.Drawing.Size(193, 31);
+            this.checkBox10.Size = new System.Drawing.Size(173, 28);
             this.checkBox10.TabIndex = 139;
             this.checkBox10.Text = "刪除空資料夾";
             this.checkBox10.UseVisualStyleBackColor = true;
@@ -252,7 +228,6 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(104, 52);
             this.button2.TabIndex = 140;
-            this.button2.Text = "改名\r\n的副本";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -263,7 +238,6 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(104, 52);
             this.button4.TabIndex = 141;
-            this.button4.Text = "改名\r001";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -272,6 +246,7 @@
             this.groupBox_remove.Controls.Add(this.rb_remove_opengl);
             this.groupBox_remove.Controls.Add(this.rb_remove_cuda);
             this.groupBox_remove.Controls.Add(this.rb_remove_vcs);
+            this.groupBox_remove.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.groupBox_remove.Location = new System.Drawing.Point(132, 335);
             this.groupBox_remove.Name = "groupBox_remove";
             this.groupBox_remove.Size = new System.Drawing.Size(104, 97);
@@ -284,7 +259,7 @@
             this.rb_remove_opengl.AutoSize = true;
             this.rb_remove_opengl.Location = new System.Drawing.Point(20, 70);
             this.rb_remove_opengl.Name = "rb_remove_opengl";
-            this.rb_remove_opengl.Size = new System.Drawing.Size(55, 16);
+            this.rb_remove_opengl.Size = new System.Drawing.Size(76, 23);
             this.rb_remove_opengl.TabIndex = 2;
             this.rb_remove_opengl.Text = "opengl";
             this.rb_remove_opengl.UseVisualStyleBackColor = true;
@@ -294,7 +269,7 @@
             this.rb_remove_cuda.AutoSize = true;
             this.rb_remove_cuda.Location = new System.Drawing.Point(20, 45);
             this.rb_remove_cuda.Name = "rb_remove_cuda";
-            this.rb_remove_cuda.Size = new System.Drawing.Size(45, 16);
+            this.rb_remove_cuda.Size = new System.Drawing.Size(61, 23);
             this.rb_remove_cuda.TabIndex = 1;
             this.rb_remove_cuda.Text = "cuda";
             this.rb_remove_cuda.UseVisualStyleBackColor = true;
@@ -305,7 +280,7 @@
             this.rb_remove_vcs.Checked = true;
             this.rb_remove_vcs.Location = new System.Drawing.Point(20, 20);
             this.rb_remove_vcs.Name = "rb_remove_vcs";
-            this.rb_remove_vcs.Size = new System.Drawing.Size(38, 16);
+            this.rb_remove_vcs.Size = new System.Drawing.Size(51, 23);
             this.rb_remove_vcs.TabIndex = 0;
             this.rb_remove_vcs.TabStop = true;
             this.rb_remove_vcs.Text = "vcs";
@@ -458,11 +433,35 @@
             this.rb_file_type0.Text = "*.cs";
             this.rb_file_type0.UseVisualStyleBackColor = true;
             // 
+            // listView1
+            // 
+            this.listView1.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.listView1.Location = new System.Drawing.Point(581, 51);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(221, 217);
+            this.listView1.TabIndex = 146;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.View = System.Windows.Forms.View.Details;
+            // 
+            // bt_open_dir2
+            // 
+            this.bt_open_dir2.BackgroundImage = global::vcs_Remove_Bin_Obj.Properties.Resources.open_folder;
+            this.bt_open_dir2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bt_open_dir2.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_open_dir2.Location = new System.Drawing.Point(179, 472);
+            this.bt_open_dir2.Name = "bt_open_dir2";
+            this.bt_open_dir2.Size = new System.Drawing.Size(50, 50);
+            this.bt_open_dir2.TabIndex = 147;
+            this.bt_open_dir2.UseVisualStyleBackColor = true;
+            this.bt_open_dir2.Click += new System.EventHandler(this.bt_open_dir2_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(588, 678);
+            this.ClientSize = new System.Drawing.Size(955, 678);
+            this.Controls.Add(this.bt_open_dir2);
+            this.Controls.Add(this.listView1);
             this.Controls.Add(this.groupBox_replace);
             this.Controls.Add(this.groupBox_remove);
             this.Controls.Add(this.button4);
@@ -473,8 +472,6 @@
             this.Controls.Add(this.checkBox7);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.lb_main_mesg);
-            this.Controls.Add(this.checkBox5);
-            this.Controls.Add(this.checkBox6);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.checkBox4);
             this.Controls.Add(this.checkBox3);
@@ -504,8 +501,6 @@
         private System.Windows.Forms.CheckBox checkBox3;
         private System.Windows.Forms.CheckBox checkBox4;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.CheckBox checkBox5;
-        private System.Windows.Forms.CheckBox checkBox6;
         private System.Windows.Forms.Label lb_main_mesg;
         private System.Windows.Forms.Button bt_clear;
         private System.Windows.Forms.CheckBox checkBox7;
@@ -531,6 +526,8 @@
         private System.Windows.Forms.RadioButton rb_file_type3;
         private System.Windows.Forms.Button bt_open_dir;
         private System.Windows.Forms.Label lb_path;
+        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.Button bt_open_dir2;
     }
 }
 

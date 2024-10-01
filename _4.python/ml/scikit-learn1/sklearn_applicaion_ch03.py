@@ -170,6 +170,8 @@ joblib.dump(scaler, "tmp_scaler.joblib")
 
 print("------------------------------------------------------------")  # 60個
 
+sys.exit()
+
 import joblib
 
 # 10.模型預測
