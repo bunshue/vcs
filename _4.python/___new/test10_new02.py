@@ -11,7 +11,7 @@ import numpy as np
 import pandas as pd
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 #chap8-01
 #Cars基礎類別
 class Cars():
@@ -2520,11 +2520,31 @@ html = etree.HTML(root)
 tree = etree.ElementTree(html)
 tree.write("tmp_導出圖表.html")
 
-
 plt.show()
-
-
+'''
 print("------------------------------------------------------------")  # 60個
+
+
+root_dir = os.path.abspath('.')
+gunfire_path = os.path.join(root_dir, 'gunfire.wav')
+filename = os.path.join(root_dir, 'tone.wav')
+
+print(filename)
+
+
+import os
+
+"""
+# 新建資料夾用於放置影像
+if not os.path.isdir('trainer'):
+    os.mkdir('trainer')
+os.chdir('trainer')
+"""
+
+root_dir = os.path.abspath('.')
+filename = os.path.join(root_dir, 'tone.wav')
+print(filename)
+
 
 
 print('------------------------------------------------------------')	#60個

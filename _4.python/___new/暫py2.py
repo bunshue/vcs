@@ -3,12 +3,24 @@ python / vcs 暫存片段程式
 
 """
 
+
+
 print('------------------------------------------------------------')	#60個
 
 
+用兩連線分隔主題
+print('------------------------------------------------------------')	#60個
+print('------------------------------------------------------------')	#60個
+
+
+用半連線分隔主題內之分支
+print('------------------------------')	#30個
+
+
+
+print('------------------------------------------------------------')	#60個
+
 print(dir(random))
-
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -51,45 +63,9 @@ print('------------------------------------------------------------')	#60個
 
 
 
-print('------------------------------------------------------------')	#60個
-
-
-
-print('------------------------------------------------------------')	#60個
 
 
 print('------------------------------------------------------------')	#60個
-
-
-print('------------------------------------------------------------')	#60個
-
-
-            string finalString1 = "ABCD0123456789";
-            richTextBox1.Text += "\nPLC製作相機序號：" + finalString1 + "\n";
-
-            richTextBox1.Text += "len = " + finalString1.Length.ToString() + "\n";
-
-            string ccc = string.Empty;
-            try
-            {
-                ccc = finalString1.Substring(0, 14);
-
-            }
-            catch (Exception ex)
-            {
-                richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
-            }
-
-            
-            //content += csv_index2.ToString() + "," + camera_serials[i][0].Substring(0, 14).ToString() + "," + camera_serials[i][1].ToString() + "," + camera_serials[i][2].ToString() + "," +
-
-            richTextBox1.Text += ccc + "\n";
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
 
 
 Kaggle Cats and Dogs Dataset
@@ -98,11 +74,6 @@ https://www.microsoft.com/en-us/download/details.aspx?id=54765
 https://www.microsoft.com/en-us/download/details.aspx?id=54765
 
 
-
-plt.xlabel("X軸", loc="left")
-plt.ylabel("Y軸", loc="top")
-plt.legend(loc=1)
-plt.xlabel("X軸", loc="center")
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -245,47 +216,7 @@ https://mega.nz/file/KQVlRAhR#c7-tWIJ6Kzz7tcTkYHd1kmr8oDAicupkSCO9tO4O470
 
 
 
-import os
-
-
-# 新建資料夾用於放置影像
-if not os.path.isdir('trainer'):
-    os.mkdir('trainer')
-os.chdir('trainer')
-
-root_dir = os.path.abspath('.')
-filename = os.path.join(root_dir, 'tone.wav')
-print(filename)
-
-
-
-root_dir = os.path.abspath('.')
-gunfire_path = os.path.join(root_dir, 'gunfire.wav')
-tone_path = os.path.join(root_dir, 'tone.wav')
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
-
-#第二步：导入数据集
-
-#数据集通常是.csv格式。
-CSV文件以文本形式保存表格数据。
-文件的每一行是一条数据记录。
-我们使用Pandas的read_csv方法读取本地csv文件为一个数据帧。
-然后，从数据帧中制作自变量和因变量的矩阵和向量。
-
-
-import pandas as pd
-
-dataset = pd.read_csv('Data_age_salary.csv');
-cc = dataset.iloc[:1]
-
-print(cc)
-
-
 
 Day 1_Data_Preprocessing python版本适配问题 #109 
  
@@ -466,19 +397,12 @@ bt_stop_Click()
 bt_record_start_Click()
 bt_record_stop_Click()
 
-
-
 #x = np.linspace(-np.pi, np.pi, num=100, endpoint=True)
 #c, s, t = np.cos(x), np.sin(x), np.tan(x)
 
-
-
 print('繪製預設的派圖')
 plt.pie(df["weight"], labels=df["name"], autopct="%1.1f%%")
-
 plt.show()
-
-
 
 print('從12點鐘方向開始繪製的派圖, 設定 startangle, 設定順時針開始')
 plt.pie(df["weight"], labels=df["name"],
@@ -486,77 +410,7 @@ plt.pie(df["weight"], labels=df["name"],
 
 plt.show()
 
-
----
-weight = [3, 48,33,8,38,16,36,29,22,6,12,42]
-name = ["鼠", "牛", "虎", "兔", "龍", "蛇", "馬", "羊", "猴", "雞", "狗", "豬"]
-
-
-# 定義資料 
-df = pd.DataFrame({
-    "name": ["鼠", "牛", "虎", "兔", "龍"],
-    "weight": [3, 48, 33, 8, 38]})
-
-print('name')
-print(df["name"])
-
-print('weight')
-print(df["weight"])
-
-print(df)
-# 排序, 依 weight 排序
-df = df.sort_values("weight", ascending=False)
-print(df)
-
-#cc = df.describe()  # 資料直列
-cc = df.describe().T  # 資料橫列
-print(cc)
-
-
-----------------
-print('用plt畫pd資料')
-
-print('只變更要強調的扇形的顏色')
-
-df = pd.DataFrame({
-    "name": ["鼠", "牛", "虎", "兔", "龍"],
-    "weight": [3, 48, 33, 8, 38]})
-
-# 要強調的扇形的標籤 
-point_label = "虎" 
-# 重點色 
-point_color = "#CC0000"
-
-# 調整特定標籤的顏色
-palette = sns.color_palette("binary", len(df)) 
-for i in df[df.name == point_label].index.values:
-    palette[i] = point_color 
-
-plt.pie(df["weight"], labels=df["name"],
-        autopct="%1.1f%%", startangle=90, counterclock=False,
-        colors=palette)
-
-plt.show()
-
-
-pandas 多圖 無效
-
-fig,ax=plt.subplots(1,1,figsize=(10,8))
-df = pd.DataFrame(np.random.randint(1, 7, 6000),columns = ['one'])
-df['two'] = df['one'] + np.random.randint(1, 7, 6000)
-df.plot.hist(bins=12, alpha=0.5,ax=ax)
-ax.set_title('Hist. plot')
-ax.set_xlabel('Xlabel')
-
-plt.show()
-
-
-
-
 print('------------------------------------------------------------')	#60個
-
-
-
 
             ManagementObjectSearcher searcher = new ManagementObjectSearcher("select * from Win32_Processor");
             foreach (ManagementObject myobject in searcher.Get())
@@ -581,32 +435,6 @@ print('------------------------------------------------------------')	#60個
     print('Execution time: %.3fs' % (end - start))
 
 
-
-print('------------------------------------------------------------')	#60個
-
-
-
-
- import pickle
-
-file_obj = open(root+"/recordmat.dat", "wb")
-pickle.dump(recordmat[0], file_obj)
-file_obj.close()
-
-read_obj = open(root+"/recordmat.dat", "rb")
-readmat = pickle.load(read_obj)
-print(shape(readmat))
-
-
-用兩連線分隔主題
-print('------------------------------------------------------------')	#60個
-print('------------------------------------------------------------')	#60個
-
-
-用半連線分隔主題內之分支
-print('------------------------------')	#30個
-
-
 # 資料
 x = np.arange(-1.0, 1.01, 0.01)
 y = x**2
@@ -620,7 +448,6 @@ x = np.linspace(0, 10, N)
 x = np.arange(0.0, 20.0, 1.0)  # 生成一個0到20的序列
 
 plt.scatter(x, yn, alpha=0.9)
-
 
 暫存文字雲
 
@@ -748,18 +575,7 @@ if (frames.Count > 0)
     }
 }
 
-
-
 print("------------------------------------------------------------")  # 60個
-
-cc = np.arange(6).reshape(2, 3)  # 陣列轉成 2 x 3
-print(cc)
-print(cc.ravel())
-
-print("------------------------------------------------------------")  # 60個
-
-
-
 
 面板上三類 Button LED燈號
 
@@ -918,69 +734,6 @@ TBGBMBKB
 
 
 print("------------------------------------------------------------")  # 60­э
-
-xx = [1,2,3,4,5]
-yy = [6,7,8]
-#x軸1~5, y軸6~8, 編織出來15個點 X, Y
-X, Y = np.meshgrid(xx, yy)
-print('X = \n', X)
-print('Y = \n', Y)
-
-print('------------------------------------------------------------')	#60個
-
-x = np.array([1,2,3,4,5])
-y = np.array([6,7,8])
-#x軸1~5, y軸6~8, 編織出來15個點 X, Y
-X, Y = np.meshgrid(x,y)
-
-print('X = \n', X)
-print('Y = \n', Y)
-
-print('------------------------------------------------------------')	#60個
-
-xx = np.linspace(1, 5, 5)
-yy = np.linspace(6, 8, 3)
-
-#x軸1~5, y軸6~8, 編織出來15個點 X, Y
-X, Y = np.meshgrid(xx, yy)
-nprint('X = \n', X)
-print('Y = \n', Y)
-
-print('------------------------------------------------------------')	#60個
-
-
-
-xx = [1,2,3,4,5]
-yy = [6,7,8]
-#x軸1~5, y軸6~8, 編織出來15個點 X, Y
-X, Y = np.meshgrid(xx, yy)
-print('X = \n', X)
-print('Y = \n', Y)
-
-print('------------------------------------------------------------')	#60個
-
-x = np.array([1,2,3,4,5])
-y = np.array([6,7,8])
-#x軸1~5, y軸6~8, 編織出來15個點 X, Y
-X, Y = np.meshgrid(x,y)
-
-print('X = \n', X)
-print('Y = \n', Y)
-
-print('------------------------------------------------------------')	#60個
-
-xx = np.linspace(1, 5, 5)
-yy = np.linspace(6, 8, 3)
-#x軸1~5, y軸6~8, 編織出來15個點 X, Y
-X, Y = np.meshgrid(xx, yy)
-print('X = \n', X)
-print('Y = \n', Y)
-
-
-
-
-
-
 
 MNIST
 C:\_git\vcs\_4.python\ml\Python-Data-Analysis-Basics\NN
@@ -1143,43 +896,6 @@ python套件分類
 自然語言	NLTK
 
 
-
-list 
-
-串列合併運算子 +
-串列比較運算子 <==>
-in, not in 運算子
-複製串列運算子 =
-
-list常用的函式
-len()
-sum()
-max()
-min()
-list常用的方法
-append(object)
-insert(index, object)
-extend(iterable)
-value=pop()
-value=pop(index)
-remove(value)
-index(value)
-count(value)
-reverse()
-clear()
-
-字典常用的方法
-keys
-values
-items
-setdefault
-pop
-popitem
-update
-clear
-
-
-
 print ('姓名','國文','數學','平均',sep='\t')
 
 print("BMI is", format(bmi, ".2f"))
@@ -1249,15 +965,6 @@ fontManager.addfont('TaipeiSansTCBeta-Regular.ttf')
 plt.rcParams['font.sans-serif'] = ['Taipei Sans TC Beta'] #輸入中文
 
 
-Scikit-learn的基本功能主要被分為六大部分：
-
-1. 分類（Classification），
-2. 回歸（Regression），
-3. 集群(聚類)（Clustering）
-4. 數據降維（Dimensionality reduction）
-5. 模型選擇（Model selection）
-6. 數據前置處理（Preprocessing）。
-
 lost
 1. UCI波士頓的房價資料集 (https://archive.ics.uci.edu/ml/machine-learning-databases/housing/)
 Home - UCI Machine Learning Repository
@@ -1309,10 +1016,6 @@ Y+-+-+-+-+
 
 
 --------------------------
-
-print('結果')
-for k, v in stat.items():
-    print(k, v)
 
 --------------------------
 

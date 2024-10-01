@@ -56,7 +56,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 # 可以使用SSL module把證書驗證改成不需要驗證即可，方法如下:
 import ssl
 
@@ -4147,6 +4147,75 @@ print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
 sys.exit()
+'''
+print("------------------------------------------------------------")  # 60個
+
+
+weight = [3, 48,33,8,38,16,36,29,22,6,12,42]
+name = ["鼠", "牛", "虎", "兔", "龍", "蛇", "馬", "羊", "猴", "雞", "狗", "豬"]
+
+
+# 定義資料 
+df = pd.DataFrame({
+    "name": ["鼠", "牛", "虎", "兔", "龍"],
+    "weight": [3, 48, 33, 8, 38]})
+
+print('name')
+print(df["name"])
+
+print('weight')
+print(df["weight"])
+
+print(df)
+# 排序, 依 weight 排序
+df = df.sort_values("weight", ascending=False)
+print(df)
+
+#cc = df.describe()  # 資料直列
+cc = df.describe().T  # 資料橫列
+print(cc)
+
+
+#----------------
+
+print('用plt畫pd資料')
+
+print('只變更要強調的扇形的顏色')
+
+df = pd.DataFrame({
+    "name": ["鼠", "牛", "虎", "兔", "龍"],
+    "weight": [3, 48, 33, 8, 38]})
+
+# 要強調的扇形的標籤 
+point_label = "虎" 
+# 重點色 
+point_color = "#CC0000"
+
+# 調整特定標籤的顏色
+palette = sns.color_palette("binary", len(df)) 
+for i in df[df.name == point_label].index.values:
+    palette[i] = point_color 
+
+plt.pie(df["weight"], labels=df["name"],
+        autopct="%1.1f%%", startangle=90, counterclock=False,
+        colors=palette)
+
+plt.show()
+
+
+#pandas 多圖 無效
+
+fig,ax=plt.subplots(1,1,figsize=(10,8))
+df = pd.DataFrame(np.random.randint(1, 7, 6000),columns = ['one'])
+df['two'] = df['one'] + np.random.randint(1, 7, 6000)
+df.plot.hist(bins=12, alpha=0.5,ax=ax)
+ax.set_title('Hist. plot')
+ax.set_xlabel('Xlabel')
+
+plt.show()
+
+
+print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 

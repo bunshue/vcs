@@ -1,4 +1,11 @@
 
+
+plt.xlabel("X軸", loc="left")
+plt.ylabel("Y軸", loc="top")
+plt.legend(loc=1)
+plt.xlabel("X軸", loc="center")
+
+
 plt.plot(..., 'yx' )
 plt.plot(..., 'gx' )
 plt.plot(..., 'b--' )

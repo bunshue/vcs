@@ -1,6 +1,44 @@
 """
 使用pandas讀寫csv檔, 讀成 DataFrame 格式
 
+
+
+#匯出DataFrame
+df.to_csv(filename)
+df.to_json(filename)
+df.to_html(filename)
+df.to_excel(filename)
+df.to_sql(table, con = engine)
+
+#匯入DataFrame
+df.read_csv(filename)
+df.read_json(filename)
+df.read_html(filename)
+df.read_excel(filename)
+df.read_sql(query, engine)
+
+
+匯出匯入DataFrame物件(5)
+
+匯出
+df.to_csv(filename)
+df.to_json(filename)
+df.to_html(filename)
+df.to_excel(filename)
+df.to_sql(filename)
+
+匯入
+pd.read_csv(filename)
+pd.read_json(filename)
+pd.read_html(filename)
+pd.read_excel(filename)
+pd.read_sql(filename)
+
+
+
+
+
+
 """
 
 print("------------------------------------------------------------")  # 60個
@@ -1147,3 +1185,19 @@ print("pd讀取csv檔案 :", filename)
 print("跳過索引")
 df = pd.read_csv(filename, encoding="utf-8-sig", index_col=0)
 print(df)
+
+
+import pandas as pd
+
+df = pd.DataFrame({'A': ['foo', 'bar', 'baz'],
+                   'B': [1, 2, 3]})
+
+df.to_excel('檔案路徑.xlsx', index=False)
+
+
+import pandas as pd
+
+df = pd.read_excel('檔案路徑.xlsx')
+
+
+

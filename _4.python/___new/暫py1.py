@@ -369,41 +369,7 @@ image2 = image2.resize((w, h), resample=Image.NEAREST)
 # cv2.WINDOW_AUTOSIZE显示原图片的大小，用户不能调整大小
 
 
-#匯出DataFrame
-df.to_csv(filename)
-df.to_json(filename)
-df.to_html(filename)
-df.to_excel(filename)
-df.to_sql(table, con = engine)
-
-#匯入DataFrame
-df.read_csv(filename)
-df.read_json(filename)
-df.read_html(filename)
-df.read_excel(filename)
-df.read_sql(query, engine)
-
-
-匯出匯入DataFrame物件(5)
-
-匯出
-df.to_csv(filename)
-df.to_json(filename)
-df.to_html(filename)
-df.to_excel(filename)
-df.to_sql(filename)
-
-匯入
-pd.read_csv(filename)
-pd.read_json(filename)
-pd.read_html(filename)
-pd.read_excel(filename)
-pd.read_sql(filename)
-
-
-
 移動檔案指標
-    
 
 seek 要以binary開檔 才會正確
 
@@ -4367,9 +4333,11 @@ Pandas 有兩個基本資料結構:
 一個 DataFrame, 我們有 index (列的名稱), columns (行的名稱)。
 series 大概就是一個 list, 一個 array。其實更精準的說, 其實是一個有 "index" 的 array。
 
-print("------------------------------------------------------------")  # 60個製作 DataFrame
+print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個
+
 print 格式化
 
 name = "炎龍"
@@ -4546,23 +4514,7 @@ print(sorted(tuples_list, key=lambda x: x[1]))
 
 print(sorted(range(-5, 6), key=lambda x: x ** 2))
 
-
 print('------------------------------------------------------------')	#60個
-
-print('------------------------------------------------------------')	#60個
-
-import pandas as pd
-
-df = pd.DataFrame({'A': ['foo', 'bar', 'baz'],
-                   'B': [1, 2, 3]})
-
-df.to_excel('檔案路徑.xlsx', index=False)
-
-
-import pandas as pd
-
-df = pd.read_excel('檔案路徑.xlsx')
-
 
 import zipfile
 
@@ -4864,7 +4816,6 @@ x = np.arange(0, 2 * np.pi, 0.02)
 x = np.linspace(0, 2 * np.pi, num = 100)	#頭, 尾, 點數(含頭尾)
 logspace
 
-
 pandas主要之資料型態:
 1. Series	一維資料結構
 2. DataFrame	二維資料結構
@@ -4892,8 +4843,6 @@ Python 幫幫忙！用程式思維解決現實世界問題
 答案(哪裡找？)：
 
 https://www.flag.com.tw/bk/st/F2387
-
-
 
 
 KNN(K Nearest Neighbor) 最近鄰居法 or K-近鄰算法

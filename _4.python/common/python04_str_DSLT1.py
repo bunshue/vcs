@@ -22,6 +22,40 @@ Python提供四種Collections，分別是Dictionary、Set、List、Tuple，
 Dictionary(字典)
 Dictionary是無序、沒有索引值且沒有重複的成員的容器，Pair的語法是key: value，一個key對應一個value，key不一定要是字串，但必須是唯一的。
 
+串列合併運算子 +
+串列比較運算子 <==>
+in, not in 運算子
+複製串列運算子 =
+
+list常用的函式
+len()
+sum()
+max()
+min()
+list常用的方法
+append(object)
+insert(index, object)
+extend(iterable)
+value=pop()
+value=pop(index)
+remove(value)
+index(value)
+count(value)
+reverse()
+clear()
+
+
+字典常用的方法
+keys
+values
+items
+setdefault
+pop
+popitem
+update
+clear
+
+
 """
 
 print("建立空容器")
@@ -4307,5 +4341,11 @@ print(f"sex = {sex}")
 
 
 print("------------------------------------------------------------")  # 60個
+
+
+
+print('結果')
+for k, v in stat.items():
+    print(k, v)
 
 
