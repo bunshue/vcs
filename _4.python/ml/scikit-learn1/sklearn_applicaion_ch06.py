@@ -24,7 +24,7 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
+
 #06_01_logistic_regression_validation
 
 #證明 Exp(log(x)) = x
@@ -405,9 +405,11 @@ print(result.summary())
 """
 
 """
-8. 模型評估，暫不進行
+8. 模型評估
+
 9. 模型佈署
-10.模型預測，請參見 01_05_iris_prediction.py
+
+10.模型預測
 """
 
 print("------------------------------------------------------------")  # 60個
@@ -575,9 +577,11 @@ disp.plot()
 plt.show()
 
 """
-8. 模型評估，暫不進行
+8. 模型評估
+
 9. 模型佈署
-10.模型預測，請參見 01_05_iris_prediction.py
+
+10.模型預測
 """
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -593,18 +597,19 @@ import matplotlib.pyplot as plt
 #載入資料集
 
 # 書籍資料
-books = pd.read_csv('./data/BX-Books.csv', sep=';', on_bad_lines='skip', 
+books = pd.read_csv('C:/_git/vcs/_big_files/Scikit-learn_data/BX-Books.csv', sep=';', on_bad_lines='skip', 
                     low_memory=False, encoding="latin-1")
 books.columns = ['ISBN', 'bookTitle', 'bookAuthor', 'yearOfPublication', 'publisher', 
                  'imageUrlS', 'imageUrlM', 'imageUrlL']
 
 # 讀者資料
-users = pd.read_csv('./data/BX-Users.csv', sep=';', on_bad_lines='skip', 
+users = pd.read_csv('C:/_git/vcs/_big_files/Scikit-learn_data/BX-Users.csv', sep=';', on_bad_lines='skip', 
                     encoding="latin-1")
 users.columns = ['userID', 'Location', 'Age']
 
+
 # 評價資料
-ratings = pd.read_csv('./data/BX-Book-Ratings.csv', sep=';', on_bad_lines='skip', 
+ratings = pd.read_csv('C:/_git/vcs/_big_files/Scikit-learn_data/BX-Book-Ratings.csv', sep=';', on_bad_lines='skip', 
                       encoding="latin-1")
 ratings.columns = ['userID', 'ISBN', 'bookRating']
 
@@ -1130,7 +1135,6 @@ print(f'{accuracy_score(y_test, y_pred)*100:.2f}%')
 
 #80.00%
 
-'''
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 

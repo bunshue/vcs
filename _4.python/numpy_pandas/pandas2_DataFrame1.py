@@ -68,6 +68,9 @@ print("目前 Pandas 版本 :")
 cc = pd.__version__
 print(cc)
 
+#many
+#pd.show_versions()
+
 print("------------------------------------------------------------")  # 60個
 
 #新竹市氣象資料1992_2020
@@ -94,6 +97,8 @@ print(df)
 
 # 資料運算要做橫向運算
 
+# TBD
+
 print("------------------------------------------------------------")  # 60個
 
 print("建立df, 一維串列 轉 df")
@@ -114,6 +119,7 @@ def make_data_frame():
         [70,56,94,80],#社會
         ]
     columns = ["國文", "英文", "數學", "自然", "社會"]
+    #columns = ["CC", "DD", "AA", "EE", "BB"]
     index = ["王小明", "李小美", "陳大同", "林小玉"]
     df = pd.DataFrame(np.array(datas).T, columns=columns, index=index)
     return df
@@ -122,6 +128,24 @@ df = make_data_frame()
 print(df)
 
 # 對 DataFrame 的值做運算
+
+"""
+# 排序
+print('排序, 依 國文 欄, 預設為上升')
+print(df.sort_values(by="國文"))#預設上升
+#print(df.sort_values(by="國文", ascending=True))#上升
+#print(df.sort_values(by="國文", ascending=False))#下降
+df = df.sort_values(by=["英文", "自然"], ascending=True)
+print(df)
+
+print("排序 axis=1, 依column欄名排序, 橫向, 下降")
+print(df.sort_index(axis=1, ascending=False))
+print(df.sort_index(axis=0))
+
+"""
+
+print('計算每一科的平均, axis=0 0直1橫')
+print(df.mean(axis=0))
 
 print('所有人成績 X 2')
 double_df = df * 2
@@ -255,24 +279,35 @@ print(df.values[1][2])
 
 print("------------------------------------------------------------")  # 60個
 
+print("建立df, 使用Series 合併1")
+
 se1 = pd.Series({"王小明": 65, "李小美": 90, "陳大同": 81, "林小玉": 79})
 se2 = pd.Series({"王小明": 92, "李小美": 72, "陳大同": 85, "林小玉": 53})
 se3 = pd.Series({"王小明": 78, "李小美": 76, "陳大同": 91, "林小玉": 47})
 se4 = pd.Series({"王小明": 83, "李小美": 93, "陳大同": 89, "林小玉": 94})
 se5 = pd.Series({"王小明": 70, "李小美": 56, "陳大同": 94, "林小玉": 80})
+
+# 方法一
+df = pd.concat([se1, se2, se3, se4, se5], axis=0)  # axis=0 : 垂直連接, axis=1 : 水平連接
+df.columns = ["國文", "英文", "數學", "自然", "社會"]
+print(df)
+
+# 方法二
 df = pd.DataFrame({"國文": se1, "英文": se2, "數學": se3, "自然": se4, "社會": se5})
 print(df)
 
 print("------------------------------------------------------------")  # 60個
 
-print("建立df, 使用Series 合併")
-se1 = pd.Series({"王小明": 65, "李小美": 90, "陳大同": 81, "林小玉": 79})
-se2 = pd.Series({"王小明": 92, "李小美": 72, "陳大同": 85, "林小玉": 53})
-se3 = pd.Series({"王小明": 78, "李小美": 76, "陳大同": 91, "林小玉": 47})
-se4 = pd.Series({"王小明": 83, "李小美": 93, "陳大同": 89, "林小玉": 94})
-se5 = pd.Series({"王小明": 70, "李小美": 56, "陳大同": 94, "林小玉": 80})
-df = pd.concat([se1, se2, se3, se4, se5], axis=1)  # axis=0 : 垂直連接, axis=1 : 水平連接
-df.columns = ["國文", "英文", "數學", "自然", "社會"]
+print("建立df, 使用Series 合併2")
+
+s1 = pd.Series(["Bike", "Bus", "Car", "Truck"])
+s2 = pd.Series([3, 4, 6, 2])
+s3 = pd.Series([2, 4, 4, 6])
+data = {"種類": s1, "數量": s2, "輪數": s3}
+
+print("字典 轉 df")
+df = pd.DataFrame(data)
+print(type(df))
 print(df)
 
 print("------------------------------------------------------------")  # 60個
@@ -306,9 +341,19 @@ print("------------------------------------------------------------")  # 60個
 
 print("二維串列 轉 df")
 
-print("建立資料 np陣列 常態分布 二維串列 3X4")
-datas1 = np.random.randn(3, 4)
-datas2 = np.random.randn(3, 4)
+print("建立資料 二維串列 3X4")
+
+datas1 = [
+    [1,1,1,1],
+    [2,2,2,2],
+    [3,3,3,3],
+]
+
+datas2 = [
+    [7,7,7,7],
+    [8,8,8,8],
+    [9,9,9,9],
+]
 
 print("np陣列 轉 df")
 df_a = pd.DataFrame(datas1, columns=list("ABCD"))
@@ -434,9 +479,6 @@ datas = {
 df = pd.DataFrame(datas)
 print(df)
 
-# 排序
-print(df.sort_values(by="數學", ascending=False))
-print(df.sort_index(axis=0))
 # 修改
 df1 = df.loc["王小明"]["數學"] = 90
 
@@ -457,43 +499,7 @@ print("修改後的資料 :\n", df, "\n")
 
 print("------------------------------------------------------------")  # 60個
 
-datas = [["mouse", 3], ["ox", 48], ["tiger", 33], ["rabbit", 8]]
-index = ["鼠", "牛", "虎", "兔"]
-columns = ["英文名", "體重"]
-
-df = pd.DataFrame(datas, columns=columns, index=index)
-print(df)
-
-print("按照數學遞減排序 ->")
-df1 = df.sort_values(by="體重", ascending=False)
-print(df1)
-
-print("按照列標題遞增排序 ->")
-df2 = df.sort_index(axis=0)
-print(df2)
-
-print("------------------------------------------------------------")  # 60個
-
-print("建立df, 使用Series 合併")
-
-se1 = pd.Series({"王小明": 65, "李小美": 90, "陳大同": 81, "林小玉": 79})
-se2 = pd.Series({"王小明": 92, "李小美": 72, "陳大同": 85, "林小玉": 53})
-se3 = pd.Series({"王小明": 78, "李小美": 76, "陳大同": 91, "林小玉": 47})
-se4 = pd.Series({"王小明": 83, "李小美": 93, "陳大同": 89, "林小玉": 94})
-se5 = pd.Series({"王小明": 70, "李小美": 56, "陳大同": 94, "林小玉": 80})
-
-# 方法一
-df = pd.concat([se1, se2, se3, se4, se5], axis=0)  # axis=0 : 垂直連接, axis=1 : 水平連接
-df.columns = ["國文", "英文", "數學", "自然", "社會"]
-print(df)
-
-# 方法二
-df = pd.DataFrame({"國文": se1, "英文": se2, "數學": se3, "自然": se4, "社會": se5})
-print(df)
-
-print("------------------------------------------------------------")  # 60個
-
-print("建立df, 使用Series")
+print("建立df, 使用Series 合併3")
 
 index = ["鼠", "牛", "虎", "兔", "龍"]
 data1 = [10, 5, 8, 12, 3]
@@ -520,7 +526,7 @@ print(order_df)
 
 print("------------------------------------------------------------")  # 60個
 
-print("建立df, 使用Series")
+print("建立df, 使用Series 合併4")
 
 # 修改 index 和 column 的名稱 –.index、.column
 
@@ -539,7 +545,7 @@ print(df)
 
 print("------------------------------------------------------------")  # 60個
 
-print("建立df, 使用Series")
+print("建立df, 使用Series 合併5")
 
 # 加入新的資料列 – append()
 
@@ -578,7 +584,7 @@ series3 = pd.Series(data3, index=index)
 
 print("------------------------------------------------------------")  # 60個
 
-print("建立df, 使用Series")
+print("建立df, 使用Series 合併6")
 
 # 加入新的欄位
 
@@ -689,12 +695,6 @@ data = {
 df = pd.DataFrame(data)
 print(df)
 
-df = df.sort_values(by="year", ascending=True)
-print(df)
-
-df = df.sort_values(by=["time", "year"], ascending=True)
-print(df)
-
 print("------------------------------------------------------------")  # 60個
 
 # 從 df 物件篩選出想要的資料
@@ -729,7 +729,7 @@ print("------------------------------------------------------------")  # 60個
 
 # 索引、欄位內容「一致」時的串接做法
 
-print("建立df, 使用Series 合併")
+print("建立df, 使用Series 合併7")
 
 columns = ["國文", "英文", "數學"]
 df_data1 = pd.DataFrame()
@@ -1049,12 +1049,6 @@ print(df["BB"])
 print('df反置')
 print(df.T)
 
-print('排序')
-print(df.sort_index(axis=1, ascending=False))
-
-print('排序, 依BB欄')
-print(df.sort_values(by="BB"))
-
 print("------------------------------------------------------------")  # 60個
 
 print('字典轉 df')
@@ -1122,6 +1116,7 @@ columns = ["A", "B", "C", "D"]
 dates = pd.date_range("20130101", periods=6)
 
 df = pd.DataFrame(datas, columns=columns, index=dates)
+print(df)
 
 df.iloc[2, 2] = 1111
 df.loc["2013-01-03", "D"] = 2222
@@ -1142,11 +1137,13 @@ df.iloc[0, 1] = np.nan
 df.iloc[1, 2] = np.nan
 print(df.dropna(axis=0, how="any"))  # how={'any', 'all'}
 print(df.fillna(value=0))
+
+print('空資料 :')
 print(pd.isnull(df))
 
 print("------------------------------------------------------------")  # 60個
 
-print("建立df 二維串列 常態分佈二維串列 6X4, 設定欄名")
+print("建立df 二維串列 二維串列 6X4, 設定欄名")
 
 datas = [
     [1,1,1,1],
@@ -1186,12 +1183,6 @@ print(df.iloc[2:5, 0:2])
 
 print("顯示")
 print(df[df.C > 0])
-
-print("排序 axis=1")
-print(df.sort_index(axis=1, ascending=False))
-
-print("依B欄排序")
-print(df.sort_values(by="B"))
 
 print("加入TAG")
 df["TAG"] = ["cat", "dog", "cat", "cat", "cat", "dog"]
@@ -1965,6 +1956,7 @@ print(cc)
 
 print("找出缺少資料的項目")
 # 'isnull' returns a DataFrame of booleans (True if missing, False if not missing)
+
 print("檢視後幾行")
 cc = ufo.isnull().tail()
 print(cc)
@@ -1976,6 +1968,7 @@ cc = ufo.notnull().tail()
 print(cc)
 
 # count the number of missing values in each Series
+print('ufo 之 空資料 的個數')
 cc = ufo.isnull().sum()
 print(cc)
 
@@ -2847,12 +2840,6 @@ titanic = pd.read_csv(filename)
 filename = "data/ufo.csv"
 ufo = pd.read_csv(filename, parse_dates=["Time"])
 
-cc = pd.__version__
-print(cc)
-
-cc = pd.show_versions()
-print(cc)
-
 # 2. Create an example DataFrame
 print("建立df")
 df = pd.DataFrame({"col one": [100, 200], "col two": [300, 400]})
@@ -3438,6 +3425,7 @@ print(cc)
 # 6. Convert one set of values to another
 
 cc = titanic.Sex.head()
+print(cc)
 
 titanic["Sex_num"] = titanic.Sex.map({"male": 0, "female": 1})
 cc = titanic.Sex_num.head()
@@ -3794,8 +3782,10 @@ print("------------------------------------------------------------")  # 60個
 # 讀取資料
 df = pd.read_csv("_new/customer.csv")
 # 空值的處理
-print("各個欄位有空值的狀況:")
+
+print('各欄位有 空資料 的個數 :')
 print(df.isnull().sum())
+
 print("有空值的記錄筆數:", df.isnull().any(axis=1).sum())
 print("有空值的欄位數:", df.isnull().any(axis=0).sum())
 print("age欄有空值的記錄:")
@@ -3896,46 +3886,23 @@ print(df_sample.groupby("gender")["age"].agg(["mean", "max", "min"]))
 
 print("------------------------------------------------------------")  # 60個
 
-s1 = pd.Series(["Bike", "Bus", "Car", "Truck"])
-s2 = pd.Series([3, 4, 6, 2])
-s3 = pd.Series([2, 4, 4, 6])
-data = {"種類": s1, "數量": s2, "輪數": s3}
-print(type(data))
+print("字典 轉 df")
 
-print("字典 轉 DataFrame")
-df = pd.DataFrame(data)
-print(type(df))
-print(df)
+data = {
+    "種類": ["Bike", "Bus", "Car", "Truck"],
+    "數量": [3, 4, 6, 2],
+    "輪數": [2, 4, 4, 6]
+    }
 
-print("------------------------------------------------------------")  # 60個
-
-data = {"種類": ["Bike", "Bus", "Car", "Truck"], "數量": [3, 4, 6, 2], "輪數": [2, 4, 4, 6]}
-print(type(data))
-
-print("字典 轉 DataFrame")
 df = pd.DataFrame(data)
 print(df)
 
-print("------------------------------------------------------------")  # 60個
-
-data = {"種類": ["Bike", "Bus", "Car", "Truck"], "數量": [3, 4, 6, 2], "輪數": [2, 4, 4, 6]}
-print(type(data))
-
-print("字典 轉 DataFrame")
-df = pd.DataFrame(data)
 labels = ["A", "B", "E", "D"]
 df.columns = ["Types", "Count", "Wheels"]
 labels[2] = "C"
 df.index = labels
 print(df)
 
-print("------------------------------------------------------------")  # 60個
-
-data = {"種類": ["Bike", "Bus", "Car", "Truck"], "數量": [3, 4, 6, 2], "輪數": [2, 4, 4, 6]}
-print(type(data))
-
-print("字典 轉 DataFrame")
-df = pd.DataFrame(data)
 df.set_index("種類", inplace=True)
 print(df)
 df.reset_index(inplace=True)
@@ -3943,10 +3910,14 @@ print(df)
 
 print("------------------------------------------------------------")  # 60個
 
-data = {"種類": ["Bike", "Bus", "Car", "Truck"], "數量": [3, 4, 6, 2], "輪數": [2, 4, 4, 6]}
-print(type(data))
+print("字典 轉 df")
 
-print("字典 轉 DataFrame")
+data = {
+    "種類": ["Bike", "Bus", "Car", "Truck"],
+    "數量": [3, 4, 6, 2],
+    "輪數": [2, 4, 4, 6]
+    }
+
 df = pd.DataFrame(data)
 
 s = pd.Series({"種類": "Bicycle", "數量": 5, "輪數": 2})
@@ -3959,9 +3930,14 @@ print(df)
 
 print("------------------------------------------------------------")  # 60個
 
-data = {"種類": ["Bike", "Bus", "Car", "Truck"], "數量": [3, 4, 6, 2], "輪數": [2, 4, 4, 6]}
+print("字典 轉 df")
 
-print("字典 轉 DataFrame")
+data = {
+    "種類": ["Bike", "Bus", "Car", "Truck"],
+    "數量": [3, 4, 6, 2],
+    "輪數": [2, 4, 4, 6]
+    }
+
 df = pd.DataFrame(data)
 df.set_index("種類", inplace=True)
 print(df)
@@ -3974,84 +3950,35 @@ print(df4)
 
 print("------------------------------------------------------------")  # 60個
 
-data = {"種類": ["Bike", "Bus", "Car", "Truck"], "數量": [3, 4, 6, 2], "輪數": [2, 4, 4, 6]}
+print("字典 轉 df")
 
-print("字典 轉 DataFrame")
+data = {
+    "種類": ["Bike", "Bus", "Car", "Truck"],
+    "數量": [3, 4, 6, 2],
+    "輪數": [2, 4, 4, 6]
+    }
+
 df = pd.DataFrame(data)
 print(df.head(2))
 print(df.tail(3))
-
-print("------------------------------------------------------------")  # 60個
-
-data = {"種類": ["Bike", "Bus", "Car", "Truck"], "數量": [3, 4, 6, 2], "輪數": [2, 4, 4, 6]}
-
-print("字典 轉 DataFrame")
-df = pd.DataFrame(data)
 print(df.index)
 print(df.columns)
 print(df.values)
-
 print(df.values[2])
 print(df.values[1][2])
-
-print("------------------------------------------------------------")  # 60個
-
-data = {"種類": ["Bike", "Bus", "Car", "Truck"], "數量": [3, 4, 6, 2], "輪數": [2, 4, 4, 6]}
-
-print("字典 轉 DataFrame")
-df = pd.DataFrame(data)
 print(len(df))
 print(df.shape)
 
-print("------------------------------------------------------------")  # 60個
 
-data = {"種類": ["Bike", "Bus", "Car", "Truck"], "數量": [3, 4, 6, 2], "輪數": [2, 4, 4, 6]}
-print(type(data))
+print("字典 轉 df")
 
-print("字典 轉 DataFrame")
-df = pd.DataFrame(data)
-
-print("------------------------------------------------------------")  # 60個
-
-data = {
-    "種類": ["Bike", "Bus", "Car", "Truck"],
-    "數量": [3, 4, 6, 2],
-    "輪數": ["2", "4", "4", "6"],
-}
-print(type(data))
-
-print("字典 轉 DataFrame")
 df = pd.DataFrame(data, index=["A", "B", "C", "D"])
+
 print(df["種類"])
-
 print(df[["數量", "輪數"]].head(3))
-
-print("------------------------------------------------------------")  # 60個
-
-data = {
-    "種類": ["Bike", "Bus", "Car", "Truck"],
-    "數量": [3, 4, 6, 2],
-    "輪數": ["2", "4", "4", "6"],
-}
-print(type(data))
-
-print("字典 轉 DataFrame")
-df = pd.DataFrame(data, index=["A", "B", "C", "D"])
 print(df[0:2])
-
 print(df["A":"C"])
 
-print("------------------------------------------------------------")  # 60個
-
-data = {
-    "種類": ["Bike", "Bus", "Car", "Truck"],
-    "數量": [3, 4, 6, 2],
-    "輪數": ["2", "4", "4", "6"],
-}
-print(type(data))
-
-print("字典 轉 DataFrame")
-df = pd.DataFrame(data, index=["A", "B", "C", "D"])
 print(df.loc["A", "數量"])
 print(df.loc[["C", "D"], ["數量", "輪數"]])
 
@@ -4063,29 +3990,19 @@ print(df.iloc[2:4, 1:3])
 
 print("------------------------------------------------------------")  # 60個
 
+print("字典 轉 df")
+
 data = {
     "種類": ["Bike", "Bus", "Car", "Truck"],
     "數量": [3, 4, 6, 2],
     "輪數": ["2", "4", "4", "6"],
 }
-print(type(data))
 
-print("字典 轉 DataFrame")
 df = pd.DataFrame(data, index=["A", "B", "C", "D"])
+
 df["輪數"] = df["輪數"].astype("int64")
 print(df[df.輪數 > 3])
 
-print("------------------------------------------------------------")  # 60個
-
-data = {
-    "種類": ["Bike", "Bus", "Car", "Truck"],
-    "數量": [3, 4, 6, 2],
-    "輪數": ["2", "4", "4", "6"],
-}
-print(type(data))
-
-print("字典 轉 DataFrame")
-df = pd.DataFrame(data, index=["A", "B", "C", "D"])
 df2 = df.sort_values("數量", ascending=False)
 print(df2)
 
@@ -4132,27 +4049,54 @@ print(df2)
 
 print("------------------------------------------------------------")  # 60個
 
-df = pd.read_csv("_new/titanic_test.csv")
+df = pd.read_csv("data/titanic20.csv")
+
+print('取出某欄位的資料方法1')
+cc = df["Sex"].head()
+print(cc)
+
+print('取出某欄位的資料方法2, 英文字串可以直接當變數用')
+cc = df.Sex.head()
+print(cc)
+
+print('對 空資料之處理')
+
+df = pd.read_csv("data/titanic20.csv")
+print('檢視前幾行')
 print(df.head())
-
-print("------------------------------------------------------------")  # 60個
-
-df = pd.read_csv("_new/titanic_test.csv")
+print('原df之個數')
+print(len(df))
+print('欄位 Age 為 空資料 之個數')
 print(df["Age"].isnull().sum())
+
+print('將原df之 Age為空資料 之列 刪除, 新建df')
 df2 = df.dropna(subset=["Age"])
+print('新df之個數')
 print(len(df2))
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
-df = pd.read_csv("_new/titanic_test.csv")
-df["Age"] = df["Age"].fillna(value=20)
+df = pd.read_csv("data/titanic20.csv")
+
+print('將原df之 Age為空資料 之列 填入20')
+age = 20
+df["Age"] = df["Age"].fillna(value=age)
+
+print('欄位 Age 為 空資料 之個數')
 print(df["Age"].isnull().sum())
+print(df.head())
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
-df = pd.read_csv("_new/titanic_test.csv")
-df["Age"] = df["Age"].fillna(df["Age"].mean())
+df = pd.read_csv("data/titanic20.csv")
+
+print('將原df之 Age為空資料 之列 填入 Age 之平均')
+age = df["Age"].mean()
+df["Age"] = df["Age"].fillna(value=age)
+
+print('欄位 Age 為 空資料 之個數')
 print(df["Age"].isnull().sum())
+print(df.head())
 
 print("------------------------------------------------------------")  # 60個
 
@@ -4191,8 +4135,6 @@ df.plot(kind="barh")
 
 print("------------------------------------------------------------")  # 60個
 
-df = pd.read_csv("_new/NBA_players_salary_stats_2018.csv")
-df.plot(kind="scatter", x="PTS", y="salary", title="Scatter Plot of NBA Salary and PTS")
 
 
 print("------------------------------------------------------------")  # 60個
@@ -4235,11 +4177,6 @@ print(df)
 
 con = sqlite3.connect("tmp_test_db.sqlite")
 df = pd.read_sql("SELECT * from weather_2012 ORDER BY Weather LIMIT 3", con)
-print(df)
-
-print("------------------------------------------------------------")  # 60個
-
-df = pd.read_csv("_new/scores2.csv", header=0, index_col=0)
 print(df)
 
 print("------------------------------------------------------------")  # 60個
@@ -4436,16 +4373,6 @@ print(df)
 
 print("------------------------------")  # 30個
 
-print("按照數學遞減排序 ->")
-df1 = df.sort_values(by="數學", ascending=False)
-print(df1)
-
-print("按照列標題遞增排序 ->")
-df2 = df.sort_index(axis=0)
-print(df2)
-
-print("------------------------------")  # 30個
-
 """
 print("移除李小美成績 ->")
 df1 = df.drop("李小美")
@@ -4468,4 +4395,15 @@ print(df5)
 df.to_csv("tmp_scores3.csv", encoding="utf-8-sig")
 
 
+
+print("------------------------------")  # 30個
+print("------------------------------")  # 30個
+
+
+
+
+df = pd.read_csv("_new/scores2.csv", header=0, index_col=0)
+print(df)
+
+print("------------------------------------------------------------")  # 60個
 
