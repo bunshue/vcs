@@ -409,10 +409,6 @@ is_contains_chinese()
 
 print("------------------------------------------------------------")  # 60個
 
-
-
-print("------------------------------------------------------------")  # 60個
-
 for y in "12345":
     for x in "JQKA":
         print(x, y, end=" ")
@@ -478,8 +474,6 @@ print("100的16進位 = %x\n100的 8進位 = %o" % (x, x))
 print("------------------------------------------------------------")  # 60個
 
 print(2**32)
-
-print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
@@ -956,6 +950,7 @@ print(arr)
 
 print("------------------------------------------------------------")  # 60個
 
+dslt
 # 最基本簡單的堆疊
 
 s = []
@@ -972,6 +967,7 @@ print(s.pop())
 
 print("------------------------------------------------------------")  # 60個
 
+dslt
 # 麻煩的優先佇列
 
 q = []
@@ -8124,25 +8120,6 @@ print("圓柱的半徑%6.2f長度%6.2f體積為%6.2f"%(pradius,plength,pvolume))
 """
 
 print("------------------------------------------------------------")  # 60個
-import numpy as np
-
-# 數據處理
-# 正常顯示
-x1 = np.linspace(-1.5, 1.5, 31)
-y1 = np.cos(x1) ** 2
-
-# 移除 y1 > 0.6 的點
-x2 = x1[y1 <= 0.6]
-y2 = y1[y1 <= 0.6]
-
-# 遮罩 y1 > 0.7 的點, 遮罩就是不要的
-y3 = np.ma.masked_where(y1 > 0.7, y1)
-
-# 將 y1 > 0.8 的點設為 NaN
-y4 = y1.copy()
-y4[y4 > 0.8] = np.nan
-
-print("------------------------------------------------------------")  # 60個
 
 #去掉警告信息
 import warnings
@@ -9118,7 +9095,6 @@ else:
 """
 print("------------------------------------------------------------")  # 60個
 
-
 import datetime
 now = datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S")
 print("現在時間 :", now)
@@ -9231,229 +9207,6 @@ import random
 print(dir(random))
 help(random.randint)
 help(random.choice)
-
-print("------------------------------------------------------------")  # 60個
-
-#chap6-02a
-import pandas as pd
-#建立一個pandas dataframe
-df = pd.DataFrame({
-   "姓名": ["約翰", "瑪莉", "麥可", "大衛"],
-   "年齡": [16, 17, 16, 18],
-   "性別": ["男", "女", "男", "男"],
-  })
-print("==Test1==")
-print(df)
-#取出dataframe其中一欄就是series
-print(df['姓名'])
-print(df['年齡'])
-print("==Test2==")
-#自行建立一個pandas series
-score = pd.Series([78, 67, 90, 81], name="成績")
-print(score)
-#將series加入dataframe導致增加一欄(column)
-print("==Test3==")
-df['成績'] = score
-print(df)
-
-
-
-#chap6-02b
-from pandas import DataFrame as pdDF
-from pandas import Series as pdSer
-#建立一個pandas dataframe
-df = pdDF({
-   "姓名": ["約翰", "瑪莉", "麥可", "大衛"],
-   "年齡": [16, 17, 16, 18],
-   "性別": ["男", "女", "男", "男"],
-  })
-print("==Test1==")
-print(df)
-#取出dataframe其中一欄就是series
-print(df['姓名'])
-print(df['年齡'])
-print("==Test2==")
-#自行建立一個pandas series
-score = pdSer([78, 67, 90, 81], name="成績")
-print(score)
-#將series加入dataframe導致增加一欄(column)
-print("==Test3==")
-df['成績'] = score
-print(df)
-
-
-
-#chap6-02c
-import pandas as pd
-#建立一個pandas dataframe
-df = pd.DataFrame({
-   "姓名": ["約翰", "瑪莉", "麥可", "大衛"],
-   "年齡": [16, 17, 16, 18],
-   "性別": ["男", "女", "男", "男"],
-  })
-print("==Test1==")
-print(df)
-print(df.shape)
-#列出所有欄索引標籤(欄位名稱)
-for col in range(df.shape[1]):
-  print(df.columns.values[col],' ',end='')
-print()
-print("==Test2==")
-#列出各列的列索引標籤、表格內容
-for row in range(df.shape[0]):
-  print(df.index.values[row],' ',end='')
-  for col in range(df.shape[1]):
-    print(df.iloc[row][col],' ',end='')
-  print()
-print("==Test3==")
-#比較loc(彈性較大)和iloc顯示表格內容
-#loc使用行索引標籤(column index label)和列索引標籤(row index label)
-print(df.loc[1]["姓名"])
-#iloc使用行索引(column index)和列索引(row index)
-print(df.iloc[1][0])
-
-
-
-
-
-#chap6-02d
-import pandas as pd
-#建立一個pandas dataframe
-df = pd.DataFrame({
-   "姓名": ["約翰", "瑪莉", "麥可", "大衛"],
-   "年齡": [16, 17, 16, 18],
-   "性別": ["男", "女", "男", "男"],
-  })
-print("==Test1==")
-#將dataframe轉成清單list
-alldata=df.to_dict('split')
-#會有3個list構成: columns, index, data
-print(alldata)
-print(alldata["columns"])  
-print(alldata["index"])
-print(alldata["data"])  
-print("==Test2==")
-#列出所有欄索引標籤(欄位名稱)
-for col in range(len(alldata["columns"])):
-  print(alldata["columns"][col],' ',end='')
-print()
-print("==Test3==")
-#列出各列的列索引標籤、欄位內容
-for row in range(len(alldata["index"])):
-  print(alldata["index"][row],' ',end='')
-  for col in range(len(alldata["columns"])):
-    print(alldata["data"][row][col],' ',end='')
-  print()
-  
-  
-
-#chap6-02e
-from pandas import DataFrame as pdDF
-#建立一個pandas dataframe
-df = pdDF({
-   "姓名": ["約翰", "瑪莉", "麥可", "大衛"],
-   "年齡": [16, 17, 16, 18],
-   "性別": ["男", "女", "男", "男"],
-   "成績": [78, 67, 90, 81]
-  })
-print(df)
-#指定顯示dataframe中是數值型態的欄位的最大max()或最小min()數據
-print("最小年齡:", df['年齡'].min())
-print("最高分:", df['成績'].max())
-#describe()可以顯示dataframe中是數值型態的欄位的統計資料
-df.describe()
-
-
-#chap6-02f
-from pandas import DataFrame as pdDF
-#建立一個pandas dataframe
-df = pdDF({
-   "姓名": ["約翰", "瑪莉", "麥可", "大衛"],
-   "年齡": [16, 17, 16, 18],
-   "性別": ["男", "女", "男", "男"],
-   "成績": [78, 67, 90, 81]
-  })
-print(df)
-newrow={"姓名":"珍妮","年齡":17,"性別":"女","成績":87}
-df=df.append(newrow, ignore_index = True)
-print(df)
-
-
-
-#chap6-02g
-from pandas import DataFrame as pdDF
-#建立一個pandas dataframe
-df = pdDF({
-   "姓名": ["約翰", "瑪莉", "麥可", "大衛"],
-   "年齡": [16, 17, 16, 18],
-   "性別": ["男", "女", "男", "男"],
-   "成績": [78, 67, 90, 81]
-  })
-print("==Test1==")
-print(df)
-#刪除指定的欄
-df.drop(['年齡'],inplace=True,axis=1)
-print(df)
-#刪除指定的列
-indexNames=df[df['成績']<80].index
-df.drop(indexNames,inplace=True)
-print(df.shape)
-print("==Test2==")
-#列出所有欄索引(欄位名稱)
-for col in range(df.shape[1]):
-  print(df.columns.values[col],' ',end='')
-print()
-print("==Test3==")
-#使用iloc列出各列的列索引、欄位內容
-for row in range(df.shape[0]):
-  print(df.index.values[row],' ',end='')
-  for col in range(df.shape[1]):
-    print(df.iloc[row][col],' ',end='')
-  print()
-print("==Test4==")
-#列出所有欄索引(欄位名稱)
-for col in range(df.shape[1]):
-  print(df.columns.values[col],' ',end='')
-print()
-print("==Test5==")
-#使用loc列出各列的列索引、欄位內容
-for row in range(df.shape[0]):
-  print(df.index.values[row],' ',end='')
-  for col in range(df.shape[1]):
-    print(df.loc[df.index.values[row]][df.columns.values[col]],' ',end='')
-  print()  
-  
-  
-#chap6-02h
-import pandas as pd
-#建立一個pandas dataframe
-df = pd.DataFrame({
-   "姓名": ["約翰", "瑪莉", "麥可", "大衛"],
-   "年齡": [16, 17, 16, 18],
-   "性別": ["男", "女", "男", "男"],
-   "成績": [78, 67, 90, 81]
-  })
-print("==Test1==")
-print(df)
-print("==Test2==")
-#建立樞紐分析表
-#aggfunc: mean是求平均, sum是求總和
-table=pd.pivot_table(data=df,index=['性別'],columns=['年齡'],values=['成績'],aggfunc={'成績':'mean'})
-print(table)
-#查看欄索引標籤
-#發現是元組tuple型態
-print(table.columns.values)
-#查看列索引標籤
-print(table.index.values)
-print("==Test3==")
-#建立樞紐分析表
-#aggfunc: mean是求平均, sum是求總和
-table=pd.pivot_table(data=df,index=['性別'],values=['成績'],aggfunc={'成績':'sum'})
-print(table)
-#查看欄索引標籤
-print(table.columns.values)
-#查看列索引標籤
-print(table.index.values)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -9637,21 +9390,6 @@ with open(kernel_fn, "w") as f:
 
 print("------------------------------------------------------------")  # 60個
 
-import numpy as np
-n = 100000
-cc = np.sum(4.0 / np.r_[1:n:4, -3:-n:-4])
-print(cc)
-
-print("------------------------------------------------------------")  # 60個
-
-print('積分')
-from sympy import symbols, integrate, sqrt
-x = symbols("x")
-cc = integrate(sqrt(1-x**2), (x, -1, 1)) * 2
-print(cc)
-
-print("------------------------------------------------------------")  # 60個
-
 
 """
 from google.colab import drive
@@ -9738,5 +9476,47 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+
+
+import numpy as np
+
+# 數據處理
+# 正常顯示
+x1 = np.linspace(-1.5, 1.5, 31)
+y1 = np.cos(x1) ** 2
+
+# 移除 y1 > 0.6 的點
+x2 = x1[y1 <= 0.6]
+y2 = y1[y1 <= 0.6]
+
+# 遮罩 y1 > 0.7 的點, 遮罩就是不要的
+y3 = np.ma.masked_where(y1 > 0.7, y1)
+
+# 將 y1 > 0.8 的點設為 NaN
+y4 = y1.copy()
+y4[y4 > 0.8] = np.nan
+
+print("------------------------------------------------------------")  # 60個
+
+
+import numpy as np
+n = 100000
+cc = np.sum(4.0 / np.r_[1:n:4, -3:-n:-4])
+print(cc)
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+print('積分')
+from sympy import symbols, integrate, sqrt
+x = symbols("x")
+cc = integrate(sqrt(1-x**2), (x, -1, 1)) * 2
+print(cc)
+
+print("------------------------------------------------------------")  # 60個
+
+
 
 

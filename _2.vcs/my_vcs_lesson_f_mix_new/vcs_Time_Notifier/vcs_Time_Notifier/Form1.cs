@@ -11,7 +11,24 @@ namespace vcs_Time_Notifier
 {
     public partial class Form1 : Form
     {
+        int check_list_index = 1;
         private const int BORDER = 20;
+        //List<DateTime> check_list_data = new List<DateTime>();
+
+        List<Check_List_Data> check_list_data = new List<Check_List_Data>();
+
+        public class Check_List_Data
+        {
+            public int index;
+            public int type;
+            public DateTime date_time_data;
+            public Check_List_Data(int i, int n, DateTime dt)
+            {
+                this.index = i;
+                this.type = n;
+                this.date_time_data = dt;
+            }
+        }
 
         public Form1()
         {
@@ -64,6 +81,8 @@ namespace vcs_Time_Notifier
             numericUpDown3.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             textBox1.Location = new Point(x_st + dx * 3 + 10, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 3 + 10, y_st + dy * 1);
+            button2.Location = new Point(x_st + dx * 3 + 10, y_st + dy * 2);
+            button3.Location = new Point(x_st + dx * 3 + 10, y_st + dy * 3);
 
             dx = 90;
             rb0.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -91,6 +110,22 @@ namespace vcs_Time_Notifier
             toolStripStatusLabel1.Text = dt_now.ToString();
 
             digitalDisplayControl1.DigitText = DateTime.Now.ToString("HH:mm:ss");
+
+
+            int i;
+            for (i = 0; i < check_list_data.Count; i++)
+            {
+                //richTextBox1.Text += "name : " + folderinfos[i].foldername + " path : " + folderinfos[i].folderpath + " size : " + folderinfos[i].filesize.ToString() + "\n";
+                int ii = check_list_data[i].index;
+                int tt = check_list_data[i].type;
+                DateTime dd = check_list_data[i].date_time_data;
+
+                //if ((dd - dt_now).TotalSeconds < 0)
+                if (dd < dt_now)
+                {
+                    richTextBox1.Text += ii.ToString() + "\t" + tt.ToString() + "\t" + dd.ToString("yyyy/MM/dd HH:mm:ss") + "\t時間到";
+                }
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -136,17 +171,106 @@ namespace vcs_Time_Notifier
 
             richTextBox1.Text += "時間正確\t" + hh.ToString() + " 時 " + mm.ToString() + " 分" + "\n";
 
+            int type = 0;
+            int add_minutes = 0;
+            if (rb0.Checked == true)
+            {
+                type = 0;
+                //add_minutes = 60;
+                add_minutes = 3;
+            }
+            else if (rb1.Checked == true)
+            {
+                type = 1;
+                add_minutes = 60 * 2 - 30;
+            }
+            else if (rb2.Checked == true)
+            {
+                type = 2;
+                add_minutes = 60 * 2 - 10;
+            }
+            else if (rb1.Checked == true)
+            {
+                type = 3;
+                add_minutes = 0;
+            }
+            else
+            {
+                type = 3;
+                add_minutes = 0;
+            }
 
-            //richTextBox1.Text += DateTime.Now.ToString("ss") + " ";
+            int year = (int)numericUpDown1.Value;
+            int month = (int)numericUpDown2.Value;
+            int day = (int)numericUpDown3.Value;
 
+            DateTime dt_target = new DateTime(year, month, day, hh, mm, 0, 0);	//年月日時分秒毫秒
+            dt_target = dt_target.AddMinutes(add_minutes);
+            richTextBox1.Text += "目標 :" + dt_target.ToString("yyyy/MM/dd HH:mm:ss") + "\n";
 
-
-
-            //lb_time1.Text = "PC時間 : " + DateTime.Now.ToString("yyyy" + '/' + "MM" + '/' + "dd ") + weekday + DateTime.Now.ToString(" HH" + ':' + "mm" + ':' + "ss");
-
+            check_list_data.Add(new Check_List_Data(check_list_index, type, dt_target));
+            check_list_index++;
 
 
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            int i;
+            for (i = 0; i < check_list_data.Count; i++)
+            {
+                //richTextBox1.Text += "name : " + folderinfos[i].foldername + " path : " + folderinfos[i].folderpath + " size : " + folderinfos[i].filesize.ToString() + "\n";
+                int ii = check_list_data[i].index;
+                int tt = check_list_data[i].type;
+                DateTime dd = check_list_data[i].date_time_data;
+                richTextBox1.Text += ii.ToString() + "\t" + tt.ToString() + "\t" + dd.ToString("yyyy/MM/dd HH:mm:ss") + "\n";
+            }
+
+            /*
+            check_list_data.Add(type, dt_target);
+
+            foreach (DateTime dddd in check_list_data)
+            {
+                richTextBox1.Text += "目標 :" + dddd.ToString("yyyy/MM/dd HH:mm:ss") + "\n";
+                //this.listBox1.Items.Add(sss);
+            }
+            */
+
+        }
+
+        void remove_check_list_data(int index)
+        {
+            int i;
+            for (i = 0; i < check_list_data.Count; i++)
+            {
+                int ii = check_list_data[i].index;
+                if (ii == index)
+                {
+                    richTextBox1.Text += "找到 index 在i = " + i.ToString() + "\n";
+                    int tt = check_list_data[i].type;
+                    DateTime dd = check_list_data[i].date_time_data;
+                    richTextBox1.Text += ii.ToString() + "\t" + tt.ToString() + "\t" + dd.ToString("yyyy/MM/dd HH:mm:ss") + "\n";
+
+                    richTextBox1.Text += "刪除這個項目\n";
+
+                    check_list_data.RemoveAt(i);
+
+                }
+
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            int index = 3;
+            remove_check_list_data(index);
+        }
     }
 }
+
+
+//check_list_data.Add(p);       //目前只能 儲存/加入 一個路徑
+//check_list_data.Remove(folderBrowserDialog1.SelectedPath);
+//check_list_data.Clear();
+
+

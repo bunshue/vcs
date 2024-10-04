@@ -43,8 +43,6 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
-print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -144,6 +142,15 @@ df3 = df2.drop_duplicates()  # 移除重複資料
 
 print("------------------------------------------------------------")  # 60個
 
+# 多重索引
+df = pd.read_excel('data/test.xlsx', header=[0,1]) # 指定前兩行爲列索引
+print(df)
+print(df.columns.values) # 查看列索引內容
+
+df.columns = ['_'.join(col).strip() for col in df.columns.values] # 重置字段名
+print(df)
+
+print('------------------------------------------------------------')	#60個
 
 print(
     "---- 4444 html與其他 --------------------------------------------------------"
@@ -1071,3 +1078,7 @@ df = pd.read_csv("data/student.csv")
 print(df)
 
 df.to_pickle("tmp_student.pickle")
+
+
+print('------------------------------------------------------------')	#60個
+

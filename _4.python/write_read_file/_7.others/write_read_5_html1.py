@@ -6,7 +6,7 @@ print("------------------------------------------------------------")  # 60個
 print("python寫資料到 html 檔")
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 html_filename = 'tmp_html_data1.html'
 
 import pandas as pd
@@ -26,7 +26,6 @@ import pandas as pd
 data = pd.read_html(html_filename, encoding="utf-8-sig", index_col=0)
 
 print(data[0])
-'''
 
 print("------------------------------------------------------------")  # 60個
 
@@ -111,7 +110,7 @@ print("%s 網頁建置完成" % (html_filename))
 
 print("------------------------------------------------------------")  # 60個
 
-pre_html = '''
+pre_html = """
 <!DOCTYPE html>
 <html>
 <head>
@@ -122,13 +121,14 @@ pre_html = '''
 <h2>中油油價歷史資料（取自中油官方網站）</h2>
 <table width=600 border=1>
 <tr><td>日期</td><td>92無鉛</td><td>95無鉛</td><td>98無鉛</td></tr>
-'''
+"""
 
-post_html = '''
+post_html = """
 </table>
 </body>
 </html>
-'''
+"""
+
 prices = list()
 #item = [cols[0].text, cols[1].text, cols[2].text, cols[3].text]
 prices.append('1234')
@@ -143,12 +143,19 @@ fp = open('tmp_oilprice.html','w')
 fp.write(html_file)
 fp.close()
 
+print("------------------------------------------------------------")  # 60個
 
+from lxml import etree,html
 
+# htm文件路径，以及读取文件
+path = "data/tmp1.htm"
+content = open(path,"rb").read()
+page = html.document_fromstring(content) # 解析文件
+text = page.text_content() # 去除所有标签
+print(text)	 # 输出去除标签后解析结果
 
 print("------------------------------------------------------------")  # 60個
 
-print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")

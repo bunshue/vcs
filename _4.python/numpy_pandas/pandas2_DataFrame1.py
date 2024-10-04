@@ -56,7 +56,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 # 可以使用SSL module把證書驗證改成不需要驗證即可，方法如下:
 import ssl
 
@@ -95,9 +95,18 @@ data_year = [39.4, 26.5, 22.8, 20.0, -0.1, 1675.6, 117.7, 76.8, 1845.4]
 df = pd.DataFrame(datas, columns=columns, index=index)
 print(df)
 
-# 資料運算要做橫向運算
-
-# TBD
+# 資料運算要做橫向運算, df先轉成直向
+df2 = df.T
+print("全年")
+print("歷史最高溫 :", df2["歷史最高溫"].max())
+print("平均高溫 :", df2["平均高溫"].mean())
+print("日均氣溫 :", df2["日均氣溫"].mean())
+print("平均低溫 :", df2["平均低溫"].mean())
+print("歷史最低溫 :", df2["歷史最低溫"].min())
+print("平均降雨量 :", df2["平均降雨量"].sum())
+print("平均降雨天數 :", df2["平均降雨天數"].sum())
+print("平均相對濕度 :", df2["平均相對濕度"].mean())
+print("月均日照時數 :", df2["月均日照時數"].sum())
 
 print("------------------------------------------------------------")  # 60個
 
@@ -120,7 +129,7 @@ def make_data_frame():
         ]
     columns = ["國文", "英文", "數學", "自然", "社會"]
     #columns = ["CC", "DD", "AA", "EE", "BB"]
-    index = ["王小明", "李小美", "陳大同", "林小玉"]
+    index = ["唐三藏", "孫悟空", "豬八戒", "沙悟淨"]
     df = pd.DataFrame(np.array(datas).T, columns=columns, index=index)
     return df
 
@@ -169,7 +178,67 @@ print("------------------------------------------------------------")  # 60個
 print("建立df, 字典 轉 df")
 
 datas = {
-    "姓名": ["王小明", "李小美", "陳大同", "林小玉"],
+    "姓名": ["唐三藏", "孫悟空", "豬八戒", "沙悟淨"],
+    "國文": [65,90,81,79],
+    "英文": [92,72,85,53],
+    "數學": [78,76,91,47],
+    "自然": [83,93,89,94],
+    "社會": [70,56,94,80],
+    }
+df = pd.DataFrame(datas)
+print(df)
+
+print("建立df, 字典 轉 df")
+
+datas = {
+    "姓名": ["唐三藏", "孫悟空", "豬八戒", "沙悟淨"],
+    "國文": [65,90,81,79],
+    "英文": [92,72,85,53],
+    "數學": [78,76,91,47],
+    "自然": [83,93,89,94],
+    "社會": [70,56,94,80],
+    }
+df = pd.DataFrame(datas)
+print(df)
+
+#新增欄位 體育
+df["體育"] = ["58", "99", "63", "85"]
+#print(df["體育"])
+print(df)
+
+print('顯示 英文 欄的資料')
+print(df["英文"])
+print('df反置')
+print(df.T)
+
+print("------------------------------------------------------------")  # 60個
+
+print("字典 轉 df")
+
+datas = {
+    "姓名": ["唐三藏", "孫悟空", "豬八戒", "沙悟淨"],
+    "國文": [65,90,81,79],
+    "英文": [92,72,85,53],
+    "數學": [78,76,91,47],
+    "自然": [83,93,89,94],
+    "社會": [70,56,94,80],
+    }
+df = pd.DataFrame(datas)
+print(df)
+
+print('增加一列  TBD')
+s = pd.Series({"姓名": "白龍馬", "國文": 90, "英文": 81, "數學": 79, "自然": 79, "社會": 79})
+
+print('增加一欄 體育')
+df["體育"] = [60, 99, 65, 75]
+print(df)
+
+sys.exit()
+
+print("------------------------------------------------------------")  # 60個
+
+datas = {
+    "姓名": ["唐三藏", "孫悟空", "豬八戒", "沙悟淨"],
     "國文": [65,90,81,79],
     "英文": [92,72,85,53],
     "數學": [78,76,91,47],
@@ -180,18 +249,85 @@ datas = {
 df = pd.DataFrame(datas)
 print(df)
 
+# 前 index, 後 column
+# index [0, 1, 2, 3] 表示 索引 "唐三藏", "孫悟空", "豬八戒", "沙悟淨"
+# column [3, 4, 5] 表示 欄位 "數學" "自然" "社會"
+df = df.iloc[[0, 1, 2, 3], [3, 4, 5]]
+print(df)
+
+print("------------------------------------------------------------")  # 60個
+
+# 刪除 df 物件的列或行 – drop()
+
+datas = {
+    "姓名": ["唐三藏", "孫悟空", "豬八戒", "沙悟淨"],
+    "國文": [65,90,81,79],
+    "英文": [92,72,85,53],
+}
+df = pd.DataFrame(datas)
+print(df)
+
+print('刪除 索引0 1, 就是 唐三藏 孫悟空')
+df_1 = df.drop([0, 1])
+print(df_1)
+
+print('刪除 欄位 國文')
+df_2 = df.drop("國文", axis=1)
+print(df_2)
+
+print('建立空的df, 再加入資料至df')
+
+df = pd.DataFrame()
+
+columns = ["國文", "英文", "數學", "自然", "社會"]
+
+df["國文"] = [80, 77, 68, 86, 90]
+df["英文"] = [82, 73, 77, 80, 63]
+df["數學"] = [78, 87, 72, 90, 74]
+df["自然"] = [78, 87, 72, 90, 74]
+df["社會"] = [78, 87, 72, 90, 74]
+
+print(df)
+
+print('刪除索引 偶數')
+df = df.drop(np.arange(0, 4, 2))
+print(df)
+
+"""
+df = df.drop("豬八戒", axis=1)
+print(df)
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+# 從 df 物件篩選出想要的資料
+
+datas = {
+    "姓名": ["唐三藏", "孫悟空", "豬八戒", "沙悟淨"],
+    "國文": [65,90,81,79],
+    "英文": [92,72,85,53],
+}
+df = pd.DataFrame(datas)
+print(df)
+print(df.index % 2 == 0)
+print(df[df.index % 2 == 0])
+
+
+df = pd.DataFrame(datas)
+df = df.loc[[1, 2], ["國文", "英文"]]
+print(df)
+
 print("------------------------------------------------------------")  # 60個
 
 print("建立df, 字典 轉 df")
 
 datas = {
-    "國文": {"王小明": 65, "李小美": 90, "陳大同": 81, "林小玉": 79},
-    "英文": {"王小明": 92, "李小美": 72, "陳大同": 85, "林小玉": 53},
-    "數學": {"王小明": 78, "李小美": 76, "陳大同": 91, "林小玉": 47},
-    "自然": {"王小明": 83, "李小美": 93, "陳大同": 89, "林小玉": 94},
-    "社會": {"王小明": 70, "李小美": 56, "陳大同": 94, "林小玉": 80},
+    "國文": {"唐三藏": 65, "孫悟空": 90, "豬八戒": 81, "沙悟淨": 79},
+    "英文": {"唐三藏": 92, "孫悟空": 72, "豬八戒": 85, "沙悟淨": 53},
+    "數學": {"唐三藏": 78, "孫悟空": 76, "豬八戒": 91, "沙悟淨": 47},
+    "自然": {"唐三藏": 83, "孫悟空": 93, "豬八戒": 89, "沙悟淨": 94},
+    "社會": {"唐三藏": 70, "孫悟空": 56, "豬八戒": 94, "沙悟淨": 80},
     }
-
 df = pd.DataFrame(datas)
 print(df)
 
@@ -201,14 +337,24 @@ print('建立空的df, 再加入資料至df')
 
 df = pd.DataFrame()
 
-columns = ["國文", "英文", "數學", "自然", "社會"]
-
-for column in columns:
-    df[column] = np.random.choice(range(1, 11), 10)
-
-df.index = [i for i in range(1, 11)]
-
+columns = ["國文", "英文", "數學"]
+df["國文"] = [80, 77, 68, 86, 90]
+df["英文"] = [82, 73, 77, 80, 63]
+df["數學"] = [78, 87, 72, 90, 74]
+df.index = ["唐三藏", "孫悟空", "豬八戒", "沙悟淨", "白龍馬"]
 print(df)
+
+print('國文 > 75 者')
+df1 = df[df["國文"] >= 75]
+print(df1)
+
+print('英文 > 75 者')
+df2 = df[df["英文"] >= 75]
+print(df2)
+
+print('國文 > 75 且 英文 > 75 者')
+df3 = df.loc[df["國文"] >= 75][df["英文"] >= 75]
+print(df3)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -250,10 +396,17 @@ print(df.values)
 
 print(df.info())
 
+print(df.values)
+print(df.values[2])
+print(df.values[1][2])
+print(len(df))
+print(df.shape)
+
 print('df使用記憶體大小')
 cc = df.info(memory_usage='deep')
 print(cc)
 
+print('檢查df內是否有重複資料')
 print(df.duplicated())
 
 print("df之大小")
@@ -272,20 +425,42 @@ print(df.median())
 print(df.max())
 
 """
-print("李小美的成績(df.values[1])：")
+print("孫悟空的成績(df.values[1])：")
 print(df.values[1])
-print("李小美的英文成績(df.values[1][2])：")
+print("孫悟空的英文成績(df.values[1][2])：")
 print(df.values[1][2])
+
+print("------------------------------------------------------------")  # 60個
+
+datas = {
+    "編號": [1, 2, 3, 4, 1, 5, 6, 3, 5, 7, 8, 9, 10, 10, 11, 12, 8],
+    "姓名": ["鼠", "牛", "虎", "兔", "鼠",
+           "龍", "蛇", "虎", "龍", "馬",
+           "羊", "猴", "雞", "雞", "狗", "豬", "羊"]
+    }
+df = pd.DataFrame(datas)
+
+print("原df")
+print(df)
+
+print('檢查df內是否有重複資料')
+print(df.duplicated())
+
+print('去重函數 drop_duplicates')
+df.drop_duplicates(inplace = True)
+
+print("去重後的df")
+print(df)
 
 print("------------------------------------------------------------")  # 60個
 
 print("建立df, 使用Series 合併1")
 
-se1 = pd.Series({"王小明": 65, "李小美": 90, "陳大同": 81, "林小玉": 79})
-se2 = pd.Series({"王小明": 92, "李小美": 72, "陳大同": 85, "林小玉": 53})
-se3 = pd.Series({"王小明": 78, "李小美": 76, "陳大同": 91, "林小玉": 47})
-se4 = pd.Series({"王小明": 83, "李小美": 93, "陳大同": 89, "林小玉": 94})
-se5 = pd.Series({"王小明": 70, "李小美": 56, "陳大同": 94, "林小玉": 80})
+se1 = pd.Series({"唐三藏": 65, "孫悟空": 90, "豬八戒": 81, "沙悟淨": 79})#國文成績
+se2 = pd.Series({"唐三藏": 92, "孫悟空": 72, "豬八戒": 85, "沙悟淨": 53})#英文成績
+se3 = pd.Series({"唐三藏": 78, "孫悟空": 76, "豬八戒": 91, "沙悟淨": 47})#數學成績
+se4 = pd.Series({"唐三藏": 83, "孫悟空": 93, "豬八戒": 89, "沙悟淨": 94})#自然成績
+se5 = pd.Series({"唐三藏": 70, "孫悟空": 56, "豬八戒": 94, "沙悟淨": 80})#社會成績
 
 # 方法一
 df = pd.concat([se1, se2, se3, se4, se5], axis=0)  # axis=0 : 垂直連接, axis=1 : 水平連接
@@ -300,14 +475,13 @@ print("------------------------------------------------------------")  # 60個
 
 print("建立df, 使用Series 合併2")
 
-s1 = pd.Series(["Bike", "Bus", "Car", "Truck"])
-s2 = pd.Series([3, 4, 6, 2])
-s3 = pd.Series([2, 4, 4, 6])
-data = {"種類": s1, "數量": s2, "輪數": s3}
+s1 = pd.Series(["唐三藏", "孫悟空", "豬八戒", "沙悟淨"])
+s2 = pd.Series([65, 90, 81, 79])#國文成績
+s3 = pd.Series([92, 72, 85, 53])#英文成績
+datas = {"姓名": s1, "國文": s2, "英文": s3}
 
 print("字典 轉 df")
-df = pd.DataFrame(data)
-print(type(df))
+df = pd.DataFrame(datas)
 print(df)
 
 print("------------------------------------------------------------")  # 60個
@@ -356,8 +530,10 @@ datas2 = [
 ]
 
 print("np陣列 轉 df")
-df_a = pd.DataFrame(datas1, columns=list("ABCD"))
-df_b = pd.DataFrame(datas2, columns=list("ABCD"))
+
+columns = list("ABCD")
+df_a = pd.DataFrame(datas1, columns=columns)
+df_b = pd.DataFrame(datas2, columns=columns)
 
 print("合併兩個 df, axis=0 : 垂直連接")
 df = pd.concat([df_a, df_b], axis=0)  # axis=0 : 垂直連接, axis=1 : 水平連接
@@ -434,95 +610,109 @@ print("------------------------------------------------------------")  # 60個
 print("建立df, 字典 轉 df")
 
 datas = {
-    "國文": {"王小明": 65, "李小美": 90, "陳大同": 81, "林小玉": 79},
-    "英文": {"王小明": 92, "李小美": 72, "陳大同": 85, "林小玉": 53},
-    "數學": {"王小明": 78, "李小美": 76, "陳大同": 91, "林小玉": 47},
-    "自然": {"王小明": 83, "李小美": 93, "陳大同": 89, "林小玉": 94},
-    "社會": {"王小明": 70, "李小美": 56, "陳大同": 94, "林小玉": 80},
+    "國文": {"唐三藏": 65, "孫悟空": 90, "豬八戒": 81, "沙悟淨": 79},
+    "英文": {"唐三藏": 92, "孫悟空": 72, "豬八戒": 85, "沙悟淨": 53},
+    "數學": {"唐三藏": 78, "孫悟空": 76, "豬八戒": 91, "沙悟淨": 47},
+    "自然": {"唐三藏": 83, "孫悟空": 93, "豬八戒": 89, "沙悟淨": 94},
+    "社會": {"唐三藏": 70, "孫悟空": 56, "豬八戒": 94, "沙悟淨": 80},
 }
 df = pd.DataFrame(datas)
 print(df)
-
+"""
+print('欄位 自然 的資料')
 print(df["自然"])
+print('欄位 國文 數學 自然 的資料')
 print(df[["國文", "數學", "自然"]])
+print('欄位 國文 >= 80 的資料')
 print(df[df["國文"] >= 80])
+
+print('索引 1 的資料(孫悟空)')
 print(df.values[1])
+print('索引 1 欄位 2 的資料(孫悟空 數學)')
 print(df.values[1][2])
-# loc
-print(df.loc["林小玉", "社會"])
-print(df.loc["王小明", ["國文", "社會"]])
-print(df.loc[["王小明", "李小美"], ["數學", "自然"]])
-print(df.loc["王小明":"陳大同", "數學":"社會"])
-print(df.loc["陳大同", :])
-print(df.loc[:"李小美", "數學":"社會"])
-print(df.loc["李小美":, "數學":"社會"])
-print(df.iloc[3, 4])
-# iloc
-df.iloc[0, [0, 4]]
-df.iloc[[0, 1], [2, 3]]
-df.iloc[0:3, 2:5]
-df.iloc[2, :]
-df.iloc[:2, 2:5]
-df.iloc[1:, 2:5]
+
+print('看 孫悟空 數學 的資料')
+print(df.loc["孫悟空", "數學"])
+
+print('看 唐三藏 國文 社會 的資料')
+print(df.loc["唐三藏", ["國文", "社會"]])
+
+print('看 唐三藏 和 豬八戒 國文 和 社會 的資料')
+print(df.loc[["唐三藏", "豬八戒"], ["國文", "社會"]])
+
+print('看 唐三藏 到 豬八戒 國文 到 數學 的資料')
+print(df.loc["唐三藏":"豬八戒", "國文":"數學"])
+
+print('看 豬八戒 的 所有 資料')
+print(df.loc["豬八戒", :])
+
+print('看 從頭 到 豬八戒 的 數學 到 社會 的資料')
+print(df.loc[:"豬八戒", "數學":"社會"])
+
+print('看 豬八戒 到 末尾 的 數學 到 社會 的資料')
+print(df.loc["豬八戒":, "數學":"社會"])
+
+print('看 索引3欄位4的資料, 即 豬八戒 自然')
+print(df.iloc[2, 3])
+"""
+cc = df.iloc[0, [0, 4]]
+print(cc)
+cc = df.iloc[[0, 1], [2, 3]]
+print(cc)
+
+cc = df.iloc[0:3, 2:5]
+print(cc)
+
+cc = df.iloc[2, :]
+print(cc)
+
+cc = df.iloc[:2, 2:5]
+print(cc)
+
+cc = df.iloc[1:, 2:5]
+print(cc)
+
+
+sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 
 print("建立df, 字典 轉 df")
 
 datas = {
-    "國文": {"王小明": 65, "李小美": 90, "陳大同": 81, "林小玉": 79},
-    "英文": {"王小明": 92, "李小美": 72, "陳大同": 85, "林小玉": 53},
-    "數學": {"王小明": 78, "李小美": 76, "陳大同": 91, "林小玉": 47},
-    "自然": {"王小明": 83, "李小美": 93, "陳大同": 89, "林小玉": 94},
-    "社會": {"王小明": 70, "李小美": 56, "陳大同": 94, "林小玉": 80},
+    "國文": {"唐三藏": 65, "孫悟空": 90, "豬八戒": 81, "沙悟淨": 79},
+    "英文": {"唐三藏": 92, "孫悟空": 72, "豬八戒": 85, "沙悟淨": 53},
+    "數學": {"唐三藏": 78, "孫悟空": 76, "豬八戒": 91, "沙悟淨": 47},
+    "自然": {"唐三藏": 83, "孫悟空": 93, "豬八戒": 89, "沙悟淨": 94},
+    "社會": {"唐三藏": 70, "孫悟空": 56, "豬八戒": 94, "沙悟淨": 80},
 }
 df = pd.DataFrame(datas)
 print(df)
 
-# 修改
-df1 = df.loc["王小明"]["數學"] = 90
+print('修改 沙悟淨 的 英文 為 100')
+df.loc["沙悟淨"]["英文"] = 100
 
-print("修改後的資料 :\n", df, "\n")
+print('修改 唐三藏 的 所有成績為 為 100')
+df.loc["唐三藏", :] = 100
 
-df2 = df.loc["王小明", :] = 80
-
-print("修改後的資料 :\n", df, "\n")
-
-# 刪除
-df.drop("王小明")
-df.drop("數學", axis=1)
-df.drop(["數學", "自然"], axis=1)
-df.drop(df.index[1:4])
-df.drop(df.columns[1:4], axis=1)
-
-print("修改後的資料 :\n", df, "\n")
-
-print("------------------------------------------------------------")  # 60個
-
-print("建立df, 使用Series 合併3")
-
-index = ["鼠", "牛", "虎", "兔", "龍"]
-data1 = [10, 5, 8, 12, 3]
-data2 = [30, 25, 12, 10, 8]
-series1 = pd.Series(data1, index=index)
-series2 = pd.Series(data2, index=index)
-print("2個Series組成一個df")
-df = pd.DataFrame([series1, series2])
+print("新df")
 print(df)
 
-data = {
-    "fruits": ["AAA", "BBB", "CCC", "DDD", "EEE"],
-    "time": [1, 4, 5, 6, 3],
-    "year": [2001, 2002, 2001, 2008, 2006],
-}
-df = pd.DataFrame(data)
-print(df)
+print('刪除 英文 欄位')
+df1 = df.drop("英文", axis=1)
+print(df1)
 
-order_df = pd.DataFrame(
-    [[1000, 2546, 103], [1001, 4352, 101], [1002, 342, 101]],
-    columns=["id", "item_id", "customer_id"],
-)
-print(order_df)
+print('刪除 數學 自然 兩欄位')
+df3 = df.drop(["數學", "自然"], axis=1)
+print(df3)
+
+print('刪除索引 2 3, 即刪除 豬八戒 沙悟淨')
+df4 = df.drop(df.index[2:4])
+print(df4)
+
+print('刪除欄位 1 2, 即刪除 英文 數學')
+df5 = df.drop(df.columns[1:3], axis=1)
+print(df5)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -531,10 +721,10 @@ print("建立df, 使用Series 合併4")
 # 修改 index 和 column 的名稱 –.index、.column
 
 index = ["鼠", "牛", "虎", "兔", "龍"]
-data1 = [10, 5, 8, 12, 3]
-data2 = [30, 25, 12, 10, 8]
-series1 = pd.Series(data1, index=index)
-series2 = pd.Series(data2, index=index)
+datas1 = [10, 5, 8, 12, 3]
+datas2 = [30, 25, 12, 10, 8]
+series1 = pd.Series(datas1, index=index)
+series2 = pd.Series(datas2, index=index)
 
 print("2個Series組成一個df")
 df = pd.DataFrame([series1, series2])
@@ -545,184 +735,22 @@ print(df)
 
 print("------------------------------------------------------------")  # 60個
 
-print("建立df, 使用Series 合併5")
-
-# 加入新的資料列 – append()
-
-data = {
-    "fruits": ["AAA", "BBB", "CCC", "DDD", "EEE"],
-    "year": [2001, 2002, 2001, 2008, 2006],
-    "time": [1, 4, 5, 6, 3],
-}
-
-df = pd.DataFrame(data)
-
-series = pd.Series(["FFF", 2008, 7], index=["fruits", "year", "time"])
-
-# NG
-# df = df.append(series, ignore_index=True)
-# print(df)
-
-index = ["鼠", "牛", "虎", "兔", "龍"]
-data1 = [10, 5, 8, 12, 3]
-data2 = [30, 25, 12, 10, 8]
-data3 = [30, 12, 10, 8, 25, 3]
-
-series1 = pd.Series(data1, index=index)
-series2 = pd.Series(data2, index=index)
-
-print("2個Series組成一個df")
-df = pd.DataFrame([series1, series2])
-
-index.append("pineapple")
-
-series3 = pd.Series(data3, index=index)
-
-# NG
-# df = df.append(series3, ignore_index=True)
-# print(df)
-
-print("------------------------------------------------------------")  # 60個
-
-print("建立df, 使用Series 合併6")
-
-# 加入新的欄位
-
-data = {
-    "fruits": ["AAA", "BBB", "CCC", "DDD", "EEE"],
-    "year": [2001, 2002, 2001, 2008, 2006],
-    "time": [1, 4, 5, 6, 3],
-}
-df = pd.DataFrame(data)
-df["price"] = [150, 120, 100, 300, 150]
-print(df)
-
-index = ["鼠", "牛", "虎", "兔", "龍"]
-data1 = [10, 5, 8, 12, 3]
-data2 = [30, 25, 12, 10, 8]
-series1 = pd.Series(data1, index=index)
-series2 = pd.Series(data2, index=index)
-print("2個Series組成一個df")
-df = pd.DataFrame([series1, series2])
-new_column = pd.Series([15, 7], index=[0, 1])
-df["FFF"] = new_column
-print(df)
-
-print("------------------------------------------------------------")  # 60個
-
-# 取出 DataFrame 當中的元素 –df.loc[]、df.iloc[]
-
-data = {
-    "fruits": ["AAA", "BBB", "CCC", "DDD", "EEE"],
-    "year": [2001, 2002, 2001, 2008, 2006],
-    "time": [1, 4, 5, 6, 3],
-}
-df = pd.DataFrame(data)
-print(df)
-
-df = df.loc[[1, 2], ["time", "year"]]
-print(df)
-
 print('建立空的df, 再加入資料至df')
 
 df = pd.DataFrame()
 
 columns = ["國文", "英文", "數學", "自然", "社會"]
 
-for column in columns:
-    df[column] = np.random.choice(range(1, 11), 10)
+df["國文"] = [80, 77, 68, 86, 90]
+df["英文"] = [82, 73, 77, 80, 63]
+df["數學"] = [78, 87, 72, 90, 74]
+df["自然"] = [78, 87, 72, 90, 74]
+df["社會"] = [78, 87, 72, 90, 74]
 
 print(df)
 
-df = df.loc[range(2, 6), ["CCC", "EEE"]]
-print(df)
-
-data = {
-    "fruits": ["AAA", "BBB", "CCC", "DDD", "EEE"],
-    # ["AAA", "BBB", "CCC", "DDD", "EEE"]
-    "time": [1, 4, 5, 6, 3],
-    "year": [2001, 2002, 2001, 2008, 2006],
-}
-df = pd.DataFrame(data)
-print(df)
-
-df = df.iloc[[1, 3], [0, 2]]
-print(df)
-
-print("------------------------------------------------------------")  # 60個
-
-# 刪除 df 物件的列或行 – drop()
-
-data = {
-    "fruits": ["AAA", "BBB", "CCC", "DDD", "EEE"],
-    "time": [1, 4, 5, 6, 3],
-    "year": [2001, 2002, 2001, 2008, 2006],
-}
-
-df = pd.DataFrame(data)
-print(df)
-
-df_1 = df.drop([0, 1])
-print(df_1)
-
-df_2 = df.drop("year", axis=1)
-print(df_2)
-
-print('建立空的df, 再加入資料至df')
-
-df = pd.DataFrame()
-
-columns = ["國文", "英文", "數學", "自然", "社會"]
-
-for column in columns:
-    df[column] = np.random.choice(range(1, 11), 10)
-
-print(df)
-
-df = df.drop(np.arange(0, 9, 2))
-df = df.drop("DDD", axis=1)
-print(df)
-
-print("------------------------------------------------------------")  # 60個
-
-# 將欄位值依大小排序 – sort_values()
-
-data = {
-    "fruits": ["AAA", "BBB", "CCC", "DDD", "EEE"],
-    "time": [1, 4, 3, 6, 3],
-    "year": [2001, 2002, 2001, 2008, 2006],
-}
-df = pd.DataFrame(data)
-print(df)
-
-print("------------------------------------------------------------")  # 60個
-
-# 從 df 物件篩選出想要的資料
-
-data = {
-    "fruits": ["AAA", "BBB", "CCC", "DDD", "EEE"],
-    "time": [1, 4, 5, 6, 3],
-    "year": [2001, 2002, 2001, 2008, 2006],
-}
-df = pd.DataFrame(data)
-print(df)
-print(df.index % 2 == 0)
-print(df[df.index % 2 == 0])
-
-print('建立空的df, 再加入資料至df')
-
-df = pd.DataFrame()
-
-columns = ["國文", "英文", "數學", "自然", "社會"]
-
-for column in columns:
-    df[column] = np.random.choice(range(1, 11), 10)
-
-print(df)
-
-df = df[df["AAA"] >= 5]
-df = df[df["EEE"] >= 5]
-# df = df.loc[df["AAA"] >= 5][df["EEE"] >= 5]
+print('看 索引 1~3, 數學 社會 成績')
+df = df.loc[range(1, 4), ["數學", "社會"]]
 print(df)
 
 print("------------------------------------------------------------")  # 60個
@@ -779,22 +807,27 @@ print(df2)
 
 print("------------------------------------------------------------")  # 60個
 
-# 於橫向串接時增列上一層的欄位
-
 print("建立df, 使用 合併")
 
-columns = ["AAA", "BBB", "CCC"]
+def make_data_frame():
+    #print("建立df, 二維串列4X5 轉 df, 加上欄名與index")
+    datas = [
+        [65,90,81,79],#國文
+        [92,72,85,53],#英文
+        [78,76,91,47],#數學
+        [83,93,89,94],#自然
+        [70,56,94,80],#社會
+        ]
+    columns = ["國文", "英文", "數學", "自然", "社會"]
+    #columns = ["CC", "DD", "AA", "EE", "BB"]
+    index = ["唐三藏", "孫悟空", "豬八戒", "沙悟淨"]
+    df = pd.DataFrame(np.array(datas).T, columns=columns, index=index)
+    return df
 
-df_data1 = pd.DataFrame()
-for column in columns:
-    df_data1[column] = np.random.choice(range(1, 101), 4)
-df_data1.index = range(1, 5)
+df_data1 = make_data_frame()
 print(df_data1)
 
-df_data2 = pd.DataFrame()
-for column in columns:
-    df_data2[column] = np.random.choice(range(1, 101), 4)
-df_data2.index = range(1, 5)
+df_data2 = make_data_frame()
 print(df_data2)
 
 # 水平連接
@@ -807,36 +840,41 @@ print("------------------------------------------------------------")  # 60個
 
 # 用 merge() 做 DataFrame 的交集合併
 
-data1 = {
-    "fruits": ["AAA", "BBB", "CCC", "DDD", "EEE"],
-    "year": [2001, 2002, 2001, 2008, 2006],
-    "amount": [1, 4, 5, 6, 3],
+datas1 = {
+    "姓名": ["唐三藏", "孫悟空", "豬八戒", "沙悟淨", "白龍馬"],
+    "國文": [65,90,81,79,88],
+    "英文": [92,72,85,53,69],
 }
-df1 = pd.DataFrame(data1)
-print("df1 :\n", df1)
+df1 = pd.DataFrame(datas1)
+print("df1")
+print(df1)
 
-data2 = {
-    "fruits": ["AAA", "BBB", "CCC", "DDD", "FFF"],
-    "year": [2001, 2002, 2001, 2008, 2007],
-    "price": [150, 120, 100, 250, 3000],
+datas2 = {
+    "姓名": ["唐三藏", "孫悟空", "豬八戒", "沙悟淨", "紅孩兒"],
+    "國文": [65,90,81,79,92],
+    "數學": [78,76,91,47,88],
 }
-df2 = pd.DataFrame(data2)
-print("df2 :\n", df2)
+df2 = pd.DataFrame(datas2)
+print("df2")
+print(df2)
 
-df3 = pd.merge(df1, df2, on="fruits", how="inner")
-print("df3 :\n", df3)
+print("pd.merge(), 使用 inner, 取交集")
+df3 = pd.merge(df1, df2, on="姓名", how="inner")
+print("df3")
+print(df3)
 
-# 用 merge() 做 DataFrame 的聯集合併
-df3 = pd.merge(df1, df2, on="fruits", how="outer")
-print("df3 :\n", df3)
+print("pd.merge(), 使用 outer, 取聯集")
+df3 = pd.merge(df1, df2, on="姓名", how="outer")
+print("df3")
+print(df3)
 
-# 透過「具關聯性的欄位」合併多個 DataFrame(一)
+print("------------------------------------------------------------")  # 60個
 
 order_df = pd.DataFrame(
     [[1000, 2546, 103], [1001, 4352, 101], [1002, 342, 101]],
     columns=["id", "item_id", "customer_id"],
 )
-print("order_df :\n", order_df)
+print(order_df)
 
 customer_df = pd.DataFrame(
     [[101, "Tanaka"], [102, "Suzuki"], [103, "Kato"]], columns=["id", "name"]
@@ -851,59 +889,29 @@ print("order_df :\n", order_df)
 
 print("------------------------------------------------------------")  # 60個
 
-# 透過「具關聯性的欄位」合併多個DataFrame (二)
+datas = [
+    [1000, 2546, 103],
+    [1001, 4352, 101],
+    [1002, 342, 101]
+    ]
+order_df = pd.DataFrame(datas,columns=["id", "item_id", "customer_id"])
 
-order_df = pd.DataFrame(
-    [[1000, 2546, 103], [1001, 4352, 101], [1002, 342, 101]],
-    columns=["id", "item_id", "customer_id"],
-)
-
-print("----訂貨紀錄----\n", order_df)
+print("訂貨紀錄")
+print(order_df)
 
 customer_df = pd.DataFrame([["Tanaka"], ["Suzuki"], ["Kato"]], columns=["name"])
 
 customer_df.index = [101, 102, 103]
 
-print("----客戶資訊----\n", customer_df)
+print("客戶資訊")
+print(customer_df)
 
 order_df = pd.merge(
     order_df, customer_df, left_on="customer_id", right_index=True, how="inner"
 )
 
-print("----order_df----\n", order_df)
-
-print("------------------------------------------------------------")  # 60個
-
-# 將 DataFrame 的內容寫入到 CSV 檔
-
-data = {
-    "city": [
-        "Nagano",
-        "Sydney",
-        "Salt Lake City",
-        "Athens",
-        "Torino",
-        "Beijing",
-        "Vancouver",
-        "London",
-        "Sochi",
-        "Rio de Janeiro",
-    ],
-    "year": [1998, 2000, 2002, 2004, 2006, 2008, 2010, 2012, 2014, 2016],
-    "season": [
-        "winter",
-        "summer",
-        "winter",
-        "summer",
-        "winter",
-        "summer",
-        "winter",
-        "summer",
-        "winter",
-        "summer",
-    ],
-}
-df = pd.DataFrame(data)
+print("order_df")
+print(order_df)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -970,100 +978,18 @@ print(sample_df_fill_3)
 
 print("------------------------------------------------------------")  # 60個
 
-# duplicated()、drop_duplicated() - 尋找或刪除 DataFrame 內重複的資料
-
-dupli_df = pd.DataFrame(
-    {"col1": [1, 1, 2, 3, 4, 4, 5, 5], "col2": ["a", "b", "b", "b", "c", "c", "b", "b"]}
-)
-print(dupli_df)
-print(dupli_df.duplicated())
-
-print("------------------------------------------------------------")  # 60個
-
-# 字典 轉 df
-
 datas = {
-    "ID": ["100", "101", "102", "103", "104"],
-    "birth_year": [1990, 1989, 1992, 1997, 1982],
-    "name": [
-        "Hiroshi",
-        "Akiko",
-        "Yuki",
-        "Satoru",
-        "Steeve",
-    ],
-    "city": ["東京", "大阪", "京都", "札幌", "東京"],
-}
-
-df = pd.DataFrame(datas)
-print(df)
-
-#新增欄位 region
-df["region"] = ["AAA", "AAA", "AAA", "AAA", "AAA"]
-print(df["region"])
-
-print(df)
-
-print("------------------------------------------------------------")  # 60個
-
-# 字典 轉 df
-datas = {
-    "ID": ["100", "101", "102", "103", "104"],
-    "name": [
-        "Hiroshi",
-        "Akiko",
-        "Yuki",
-        "Satoru",
-        "Steeve",
-    ],
-    "birth_year": [1990, 1989, 1992, 1997, 1982],
-}
-
-df = pd.DataFrame(datas)
-print(df)
-
-print("------------------------------------------------------------")  # 60個
-
-dates = pd.date_range("20130101", periods=6)
-print(dates)
-
-print("------------------------------------------------------------")  # 60個
-
-datas = [
-    [1,1,1,1],
-    [2,2,2,2],
-    [3,3,3,3],
-    [4,4,4,4],
-    [5,5,5,5],
-    [6,6,6,6]
-]
-
-columns = ["AA", "BB", "CC", "DD"]
-dates = list("ABCDEF")
-
-df = pd.DataFrame(datas, index=dates, columns=columns)
-print(df)
-
-print('顯示B欄的資料')
-print(df["BB"])
-print('df反置')
-print(df.T)
-
-print("------------------------------------------------------------")  # 60個
+    "A": 1.0,
+    "B": pd.Timestamp("20130102"),
+    "C": pd.Series(1, index=list(range(4)), dtype="float32"),
+    "D": np.array([3] * 4, dtype="int32"),
+    "E": pd.Categorical(["test", "train", "test", "train"]),
+    "F": "foo",
+    }
 
 print('字典轉 df')
-df2 = pd.DataFrame(
-    {
-        "A": 1.0,
-        "B": pd.Timestamp("20130102"),
-        "C": pd.Series(1, index=list(range(4)), dtype="float32"),
-        "D": np.array([3] * 4, dtype="int32"),
-        "E": pd.Categorical(["test", "train", "test", "train"]),
-        "F": "foo",
-    }
-)
+df2 = pd.DataFrame(datas)
 print(df2)
-print(df2.dtypes)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1214,65 +1140,55 @@ res = pd.concat([df1, df2], axis=1, join="inner")  # axis=0 : 垂直連接, axis
 res = pd.concat([df1, df2], axis=1, join_axes=[df1.index])  # axis=0 : 垂直連接, axis=1 : 水平連接
 """
 
-# append
 df1 = pd.DataFrame(np.ones((3, 4)) * 0, columns=["a", "b", "c", "d"])
 df2 = pd.DataFrame(np.ones((3, 4)) * 1, columns=["a", "b", "c", "d"])
 df2 = pd.DataFrame(np.ones((3, 4)) * 1, columns=["b", "c", "d", "e"], index=[2, 3, 4])
 
-""" NG append
-res = df1.append(df2, ignore_index=True)
-res = df1.append([df2, df3])
-
-s1 = pd.Series([1, 2, 3, 4], index=["a", "b", "c", "d"])
-res = df1.append(s1, ignore_index=True)
-
-print(res)
-"""
 print("------------------------------------------------------------")  # 60個
 
-# merging two df by key/keys. (may be used in database)
-# simple example
-left = pd.DataFrame(
-    {
-        "key": ["K0", "K1", "K2", "K3"],
-        "A": ["A0", "A1", "A2", "A3"],
-        "B": ["B0", "B1", "B2", "B3"],
+print('使用 pd.merge(), by key/keys')
+
+datas1 = {
+    "key": ["K0", "K1", "K2", "K3"],
+    "A": ["A0", "A1", "A2", "A3"],
+    "B": ["B0", "B1", "B2", "B3"],
     }
-)
-right = pd.DataFrame(
-    {
-        "key": ["K0", "K1", "K2", "K3"],
-        "C": ["C0", "C1", "C2", "C3"],
-        "D": ["D0", "D1", "D2", "D3"],
+
+datas2 = {
+    "key": ["K0", "K1", "K2", "K3"],
+    "C": ["C0", "C1", "C2", "C3"],
+    "D": ["D0", "D1", "D2", "D3"],
     }
-)
-print(left)
-print(right)
-res = pd.merge(left, right, on="key")
+
+df1 = pd.DataFrame(datas1)
+df2 = pd.DataFrame(datas2)
+print(df1)
+print(df2)
+res = pd.merge(df1, df2, on="key")
 print(res)
 
 # consider two keys
-left = pd.DataFrame(
-    {
-        "key1": ["K0", "K0", "K1", "K2"],
-        "key2": ["K0", "K1", "K0", "K1"],
-        "A": ["A0", "A1", "A2", "A3"],
-        "B": ["B0", "B1", "B2", "B3"],
+datas1 = {
+    "key1": ["K0", "K0", "K1", "K2"],
+    "key2": ["K0", "K1", "K0", "K1"],
+    "A": ["A0", "A1", "A2", "A3"],
+    "B": ["B0", "B1", "B2", "B3"],
     }
-)
-right = pd.DataFrame(
-    {
-        "key1": ["K0", "K1", "K1", "K2"],
-        "key2": ["K0", "K0", "K0", "K0"],
-        "C": ["C0", "C1", "C2", "C3"],
-        "D": ["D0", "D1", "D2", "D3"],
+
+datas2 = {
+    "key1": ["K0", "K1", "K1", "K2"],
+    "key2": ["K0", "K0", "K0", "K0"],
+    "C": ["C0", "C1", "C2", "C3"],
+    "D": ["D0", "D1", "D2", "D3"],
     }
-)
-print(left)
-print(right)
-res = pd.merge(left, right, on=["key1", "key2"], how="inner")  # default for how='inner'
+
+df1 = pd.DataFrame(datas1)
+df2 = pd.DataFrame(datas2)
+print(df1)
+print(df2)
+res = pd.merge(df1, df2, on=["key1", "key2"], how="inner")  # default for how='inner'
 # how = ['left', 'right', 'outer', 'inner']
-res = pd.merge(left, right, on=["key1", "key2"], how="left")
+res = pd.merge(df1, df2, on=["key1", "key2"], how="left")
 print(res)
 
 # indicator
@@ -1285,21 +1201,30 @@ res = pd.merge(df1, df2, on="col1", how="outer", indicator=True)
 res = pd.merge(df1, df2, on="col1", how="outer", indicator="indicator_column")
 
 # merged by index
-left = pd.DataFrame(
-    {"A": ["A0", "A1", "A2"], "B": ["B0", "B1", "B2"]}, index=["K0", "K1", "K2"]
-)
-right = pd.DataFrame(
-    {"C": ["C0", "C2", "C3"], "D": ["D0", "D2", "D3"]}, index=["K0", "K2", "K3"]
-)
-print(left)
-print(right)
+datas1 ={"A": ["A0", "A1", "A2"], "B": ["B0", "B1", "B2"]}
+datas2 ={"C": ["C0", "C2", "C3"], "D": ["D0", "D2", "D3"]}
+
+df1 = pd.DataFrame(datas1, index=["K0", "K1", "K2"])
+df2 = pd.DataFrame(datas2, index=["K0", "K2", "K3"])
+print(df1)
+print(df2)
 # left_index and right_index
-res = pd.merge(left, right, left_index=True, right_index=True, how="outer")
-res = pd.merge(left, right, left_index=True, right_index=True, how="inner")
+res = pd.merge(df1, df2, left_index=True, right_index=True, how="outer")
+res = pd.merge(df1, df2, left_index=True, right_index=True, how="inner")
 
 # handle overlapping
-boys = pd.DataFrame({"k": ["K0", "K1", "K2"], "age": [1, 2, 3]})
-girls = pd.DataFrame({"k": ["K0", "K0", "K3"], "age": [4, 5, 6]})
+datas1 = {
+    "k": ["K0", "K1", "K2"],
+    "age": [1, 2, 3]
+    }
+
+datas2 = {
+    "k": ["K0", "K0", "K3"],
+    "age": [4, 5, 6]
+    }
+
+boys = pd.DataFrame(datas1)
+girls = pd.DataFrame(datas2)
 res = pd.merge(boys, girls, on="k", suffixes=["_boy", "_girl"], how="inner")
 print(res)
 
@@ -1316,14 +1241,16 @@ data = data.cumsum()
 ##data.plot()
 
 # DataFrame
-data = pd.DataFrame(
-    np.random.randn(1000, 4), index=np.arange(1000), columns=list("ABCD")
-)
-data = data.cumsum()
+
+datas = np.random.randn(1000, 4)
+columns=list("ABCD")
+index = np.arange(1000)
+df = pd.DataFrame(datas, columns=columns, index=index)
+df = df.cumsum()
 # plot methods:
 # 'bar', 'hist', 'box', 'kde', 'area', scatter', hexbin', 'pie'
-ax = data.plot.scatter(x="A", y="B", color="DarkBlue", label="Class 1")
-data.plot.scatter(x="A", y="C", color="LightGreen", label="Class 2", ax=ax)
+ax = df.plot.scatter(x="A", y="B", color="DarkBlue", label="Class 1")
+df.plot.scatter(x="A", y="C", color="LightGreen", label="Class 2", ax=ax)
 
 plt.show()
 """
@@ -1387,13 +1314,9 @@ print("檢視前幾行")
 cc = movies.head()
 print(cc)
 
-# example method: calculate summary statistics
-cc = movies.describe()  # 方法有()
-print(cc)
-
-# example attribute: number of rows and columns
+# 屬性, number of rows and columns
 print("movies之大小")
-cc = movies.shape  # 屬性無()
+cc = movies.shape
 print(cc)
 
 # example attribute: data type of each column
@@ -2666,13 +2589,11 @@ cc = ratings.columns
 print(cc)
 
 # Index(['user_id', 'movie_id', 'rating', 'timestamp'], dtype='object')
-
 print("檢視前幾行")
 cc = pd.merge(movies, ratings, left_on="m_id", right_on="movie_id").head()
 print(cc)
 
 # What if you want to join on one index?
-
 movies = movies.set_index("m_id")
 print("檢視前幾行")
 cc = movies.head()
@@ -2682,9 +2603,7 @@ print("檢視前幾行")
 cc = pd.merge(movies, ratings, left_index=True, right_on="movie_id").head()
 print(cc)
 
-
 # What if you want to join on two indexes?
-
 ratings = ratings.set_index("movie_id")
 print("檢視前幾行")
 cc = ratings.head()
@@ -3539,19 +3458,19 @@ print(cc)
 
 # 13. Check for duplicate merge keys
 print("合併df")
-left = pd.DataFrame({"color": ["green", "yellow", "red"], "num": [1, 2, 3]})
-print(left)
+df1 = pd.DataFrame({"color": ["green", "yellow", "red"], "num": [1, 2, 3]})
+print(df1)
 
-right = pd.DataFrame(
+df2 = pd.DataFrame(
     {"color": ["green", "yellow", "pink", "green"], "size": ["S", "M", "L", "XL"]}
 )
-print(right)
+print(df2)
 
-pd.merge(left, right, how="inner", validate="one_to_many")
+pd.merge(df1, df2, how="inner", validate="one_to_many")
 print(pd)
 
 # NG
-# pd.merge(left, right, how='inner', validate='many_to_one')
+# pd.merge(df1, df2, how='inner', validate='many_to_one')
 
 # 15. Create an example DataFrame (alternative)
 
@@ -3767,18 +3686,6 @@ print(cc)
 
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-
-# dfclean1.py
 # 讀取資料
 df = pd.read_csv("_new/customer.csv")
 # 空值的處理
@@ -3791,8 +3698,8 @@ print("有空值的欄位數:", df.isnull().any(axis=0).sum())
 print("age欄有空值的記錄:")
 print(df[df["age"].isnull()])
 
+print("------------------------------------------------------------")  # 60個
 
-# dfclean2.py
 # 讀取資料
 df = pd.read_csv("_new/customer.csv")
 # 將age的空值填入0
@@ -3813,8 +3720,8 @@ print(df_sample.head())
 # 刪除不完整的資料
 print(df.dropna())
 
+print("------------------------------------------------------------")  # 60個
 
-# dfclean3.py
 # 讀取資料
 df = pd.read_csv("_new/customer.csv")
 # 資料基本清理
@@ -3836,7 +3743,8 @@ print(df_sample.head())
 df_sample["age"] = df_sample["age"].astype("int32")
 print(df_sample.head())
 
-# dffilter.py
+print("------------------------------------------------------------")  # 60個
+
 # 讀取資料
 df = pd.read_csv("_new/customer.csv")
 # 資料基本清理
@@ -3858,7 +3766,8 @@ print(df_sample[(df_sample["gender"] == "Male") & (df_sample["age"] > 50)])
 # 篩選住在新北市三重區或基隆市中正區的資料
 print(df_sample[(df_sample["area"] == "新北市三重區") | (df_sample["area"] == "基隆市中正區")])
 
-# dfgroupby.py
+print("------------------------------------------------------------")  # 60個
+
 # 讀取資料
 df = pd.read_csv("_new/customer.csv")
 # 資料基本清理
@@ -3888,123 +3797,112 @@ print("------------------------------------------------------------")  # 60個
 
 print("字典 轉 df")
 
-data = {
-    "種類": ["Bike", "Bus", "Car", "Truck"],
-    "數量": [3, 4, 6, 2],
-    "輪數": [2, 4, 4, 6]
+datas = {
+    "姓名": ["唐三藏", "孫悟空", "豬八戒", "沙悟淨"],
+    "國文": [65,90,81,79],
+    "英文": [92,72,85,53],
+    "數學": [78,76,91,47],
+    "自然": [83,93,89,94],
+    "社會": [70,56,94,80],
     }
 
-df = pd.DataFrame(data)
+df = pd.DataFrame(datas)
 print(df)
 
-labels = ["A", "B", "E", "D"]
-df.columns = ["Types", "Count", "Wheels"]
-labels[2] = "C"
-df.index = labels
+df.set_index("姓名", inplace=True)
 print(df)
 
-df.set_index("種類", inplace=True)
-print(df)
-df.reset_index(inplace=True)
-print(df)
-
-print("------------------------------------------------------------")  # 60個
-
-print("字典 轉 df")
-
-data = {
-    "種類": ["Bike", "Bus", "Car", "Truck"],
-    "數量": [3, 4, 6, 2],
-    "輪數": [2, 4, 4, 6]
-    }
-
-df = pd.DataFrame(data)
-
-s = pd.Series({"種類": "Bicycle", "數量": 5, "輪數": 2})
-"""NG
-df2 = df.append(s, ignore_index = True)
-print(df2.tail())
-"""
-df["載客數"] = [1, 20, 4, 2]
-print(df)
-
-print("------------------------------------------------------------")  # 60個
-
-print("字典 轉 df")
-
-data = {
-    "種類": ["Bike", "Bus", "Car", "Truck"],
-    "數量": [3, 4, 6, 2],
-    "輪數": [2, 4, 4, 6]
-    }
-
-df = pd.DataFrame(data)
-df.set_index("種類", inplace=True)
-print(df)
-df2 = df.drop(["Bus", "Truck"])
+print('移除索引 index 豬八戒 沙悟淨')
+df2 = df.drop(["豬八戒", "沙悟淨"])
 print(df2)
+
+print('移除索引 0 2, 即 唐三藏 豬八戒')
 df3 = df.drop(df.index[[0, 2]])
 print(df3)
-df4 = df.drop(["輪數"], axis=1)
+
+print('移除欄位 自然')
+
+df4 = df.drop(["自然"], axis=1)
 print(df4)
 
 print("------------------------------------------------------------")  # 60個
 
 print("字典 轉 df")
 
-data = {
-    "種類": ["Bike", "Bus", "Car", "Truck"],
-    "數量": [3, 4, 6, 2],
-    "輪數": [2, 4, 4, 6]
+datas = {
+    "國文": [65,90,81,79],
+    "英文": [92,72,85,53],
+    "數學": [78,76,91,47],
+    "自然": [83,93,89,94],
+    "社會": [70,56,94,80],
     }
 
-df = pd.DataFrame(data)
-print(df.head(2))
-print(df.tail(3))
-print(df.index)
-print(df.columns)
-print(df.values)
-print(df.values[2])
-print(df.values[1][2])
-print(len(df))
-print(df.shape)
+index = ["唐三藏", "孫悟空", "豬八戒", "沙悟淨"]
+df = pd.DataFrame(datas, index=index)
+print(df)
 
+print(df["國文"])
 
-print("字典 轉 df")
+print(df[["英文", "數學"]])
 
-df = pd.DataFrame(data, index=["A", "B", "C", "D"])
-
-print(df["種類"])
-print(df[["數量", "輪數"]].head(3))
 print(df[0:2])
-print(df["A":"C"])
 
-print(df.loc["A", "數量"])
-print(df.loc[["C", "D"], ["數量", "輪數"]])
+print(df["唐三藏":"豬八戒"])
 
-print(df.loc[:, ["數量", "輪數"]])
-print(df.loc["B":"C", "種類":"數量"])
+print(df.loc["唐三藏", "英文"])
+
+print(df.loc[["豬八戒", "沙悟淨"], ["英文", "數學"]])
+
+print(df.loc[:, ["英文", "數學"]])
+
+print(df.loc["孫悟空":"豬八戒", "國文":"英文"])
 
 print(df.iloc[3])
+
 print(df.iloc[2:4, 1:3])
 
 print("------------------------------------------------------------")  # 60個
 
 print("字典 轉 df")
 
-data = {
-    "種類": ["Bike", "Bus", "Car", "Truck"],
-    "數量": [3, 4, 6, 2],
-    "輪數": ["2", "4", "4", "6"],
-}
+datas = {
+    "國文": [65,90,81,79],
+    "英文": [92,72,85,53],
+    "數學": [78,76,91,47],
+    "自然": ["83","93","89","94"],#字串
+    "社會": [70,56,94,80],
+    }
 
-df = pd.DataFrame(data, index=["A", "B", "C", "D"])
+index = ["唐三藏", "孫悟空", "豬八戒", "沙悟淨"]
+df = pd.DataFrame(datas, index=index)
+print(df)
 
-df["輪數"] = df["輪數"].astype("int64")
-print(df[df.輪數 > 3])
+print('將字串轉成數字')
+df["自然"] = df["自然"].astype("int64")
+print('印出 自然 > 90')
+print(df[df.自然 > 90])
 
-df2 = df.sort_values("數量", ascending=False)
+print('依照 數學 排序')
+df2 = df.sort_values("數學", ascending=False)
 print(df2)
+
+print("------------------------------------------------------------")  # 60個
+
+print("字典 轉 df")
+
+datas = {
+    "國文": [65,90,81,79],
+    "英文": [92,72,85,53],
+    "數學": [78,76,91,47],
+    }
+df = pd.DataFrame(datas)
+print(df)
+
+index = ["唐三藏", "孫悟空", "牛魔王", "沙悟淨"]
+df.columns = ["國文", "英文", "數學"]
+index[2] = "豬八戒" # 修改 索引
+df.index = index
+print(df)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -4135,10 +4033,330 @@ df.plot(kind="barh")
 
 print("------------------------------------------------------------")  # 60個
 
+datas = {
+    "姓名": ["唐三藏", "孫悟空", "豬八戒", "沙悟淨"],
+    "國文": [65,90,81,79],
+    "英文": [92,72,85,53],
+    "數學": [78,76,91,47],
+    "自然": [83,93,89,94],
+    "社會": [70,56,94,80],
+    }
+df = pd.DataFrame(datas)
+print(df)
 
+#取出dataframe其中一欄就是series
+print(df['姓名'])
+print(df['國文'])
+
+#自行建立一個pandas series
+score = pd.Series([780, 670, 900, 810], name="成績")
+print(score)
+#將series加入dataframe導致增加一欄(column)
+
+df['成績'] = score
+print(df)
 
 print("------------------------------------------------------------")  # 60個
 
+datas = {
+    "姓名": ["唐三藏", "孫悟空", "豬八戒", "沙悟淨"],
+    "國文": [65,90,81,79],
+    "英文": [92,72,85,53],
+    "數學": [78,76,91,47],
+    "自然": [83,93,89,94],
+    "社會": [70,56,94,80],
+    }
+df = pd.DataFrame(datas)
+print(df)
+
+print(df.shape)
+#列出所有欄索引標籤(欄位名稱)
+for col in range(df.shape[1]):
+  print(df.columns.values[col],' ',end='')
+print()
+
+#列出各列的列索引標籤、表格內容
+for row in range(df.shape[0]):
+  print(df.index.values[row],' ',end='')
+  for col in range(df.shape[1]):
+    print(df.iloc[row][col],' ',end='')
+  print()
+
+
+#比較loc(彈性較大)和iloc顯示表格內容
+#loc使用行索引標籤(column index label)和列索引標籤(row index label)
+print(df.loc[1]["姓名"])
+#iloc使用行索引(column index)和列索引(row index)
+print(df.iloc[1][0])
+
+print("------------------------------------------------------------")  # 60個
+
+datas = {
+    "姓名": ["唐三藏", "孫悟空", "豬八戒", "沙悟淨"],
+    "國文": [65,90,81,79],
+    "英文": [92,72,85,53],
+    "數學": [78,76,91,47],
+    "自然": [83,93,89,94],
+    "社會": [70,56,94,80],
+    }
+
+df = pd.DataFrame(datas)
+print(df)
+
+#將dataframe轉成清單list
+alldata=df.to_dict('split')
+
+#會有3個list構成: columns, index, data
+print(alldata)
+print(alldata["columns"])  
+print(alldata["index"])
+print(alldata["data"])  
+
+#列出所有欄索引標籤(欄位名稱)
+for col in range(len(alldata["columns"])):
+  print(alldata["columns"][col],' ',end='')
+print()
+
+#列出各列的列索引標籤、欄位內容
+for row in range(len(alldata["index"])):
+  print(alldata["index"][row],' ',end='')
+  for col in range(len(alldata["columns"])):
+    print(alldata["data"][row][col],' ',end='')
+  print()
+
+print("------------------------------------------------------------")  # 60個
+
+datas = {
+    "姓名": ["唐三藏", "孫悟空", "豬八戒", "沙悟淨"],
+    "國文": [65,90,81,79],
+    "英文": [92,72,85,53],
+    "數學": [78,76,91,47],
+    "自然": [83,93,89,94],
+    "社會": [70,56,94,80],
+    }
+df = pd.DataFrame(datas)
+print(df)
+
+#指定顯示dataframe中是數值型態的欄位的最大max()或最小min()數據
+print("數學最低 :", df['數學'].min())
+print("數學最高 :", df['數學'].max())
+
+#刪除指定的欄
+df.drop(['國文'],inplace=True,axis=1)
+print(df)
+
+#刪除指定的列
+indexNames=df[df['社會']<80].index
+df.drop(indexNames,inplace=True)
+
+print(df.shape)
+#列出所有欄索引(欄位名稱)
+for col in range(df.shape[1]):
+  print(df.columns.values[col],' ',end='')
+print()
+
+#使用iloc列出各列的列索引、欄位內容
+for row in range(df.shape[0]):
+  print(df.index.values[row],' ',end='')
+  for col in range(df.shape[1]):
+    print(df.iloc[row][col],' ',end='')
+  print()
+
+#列出所有欄索引(欄位名稱)
+for col in range(df.shape[1]):
+  print(df.columns.values[col],' ',end='')
+print()
+
+#使用loc列出各列的列索引、欄位內容
+for row in range(df.shape[0]):
+  print(df.index.values[row],' ',end='')
+  for col in range(df.shape[1]):
+    print(df.loc[df.index.values[row]][df.columns.values[col]],' ',end='')
+  print()
+  
+print("------------------------------------------------------------")  # 60個
+
+datas = {
+    "姓名": ["唐三藏", "孫悟空", "豬八戒", "沙悟淨"],
+    "國文": [65,90,81,79],
+    "英文": [92,72,85,53],
+    "數學": [78,76,91,47],
+    "自然": [83,93,89,94],
+    "社會": [70,56,94,80],
+    }
+
+datas = {
+    "姓名": ["約翰", "瑪莉", "麥可", "大衛"],
+    "年齡": [16, 17, 16, 18],
+    "性別": ["男", "女", "男", "男"],
+    "成績": [78, 67, 90, 81]
+    }
+df = pd.DataFrame(datas)
+print(df)
+
+#建立樞紐分析表
+#aggfunc: mean是求平均, sum是求總和
+table=pd.pivot_table(data=df,index=['性別'],columns=['年齡'],values=['成績'],aggfunc={'成績':'mean'})
+print(table)
+#查看欄索引標籤
+#發現是元組tuple型態
+print(table.columns.values)
+#查看列索引標籤
+print(table.index.values)
+
+#建立樞紐分析表
+#aggfunc: mean是求平均, sum是求總和
+table=pd.pivot_table(data=df,index=['性別'],values=['成績'],aggfunc={'成績':'sum'})
+print(table)
+#查看欄索引標籤
+print(table.columns.values)
+#查看列索引標籤
+print(table.index.values)
+
+print("------------------------------------------------------------")  # 60個
+
+print("pd.concat() 默認情況下是縱向連接兩個DataFrame")
+
+columns = list("ABCD")
+datas1 = np.ones((3,4))*1
+datas2 = np.ones((3,4))*2
+datas3 = np.ones((3,4))*3
+df1 = pd.DataFrame(datas1, columns=columns)
+df2 = pd.DataFrame(datas2, columns=columns)
+df3 = pd.DataFrame(datas3, columns=columns)
+print("3個 df")
+print(df1)
+print(df2)
+print(df3)
+
+print("使用 concat(), 直向連接, 索引錯誤")
+res = pd.concat([df1,df2,df3])
+print(res)
+
+print("使用 concat(), 直向連接, 重排索引index")
+print("ignore_index = True可以忽略合併時舊的index，改採用自動生成的index")
+res = pd.concat([df1,df2,df3], ignore_index=True)
+print(res)
+
+print("------------------------------------------------------------")  # 60個
+
+print("pd.concat() 合併資料可以使用 join，outer 是聯集(預設)、inner 是交集(如果資料不存在時，NaN)")
+
+datas1 = np.ones((3,4))*1
+datas2 = np.ones((3,4))*2
+df1 = pd.DataFrame(datas1, columns=['A','B','C','D'], index=[1,2,3])
+df2 = pd.DataFrame(datas2, columns=['B','C','D','E'], index=[2,3,4])
+print("2個 df")
+print(df1)
+print(df2)
+
+print("使用 concat 時，預設的 join 模式是 'outer'，會直接把沒有的資料用 NaN 取代")
+res = pd.concat([df1,df2]) # 執行結果相等
+print(res)
+res = pd.concat([df1,df2], join='outer') # 執行結果相等
+print(res)
+
+print("使用 concat 的 join ='inner'，會直接把沒有的資料刪除")
+res = pd.concat([df1,df2], join='inner', ignore_index=True)
+print(res)
+
+print("------------------------------------------------------------")  # 60個
+
+print("Merge() : merge()的默認操作是水平連接兩個DataFrame物件")
+
+datas1 = {
+    'key': ['K0', 'K1', 'K2'],
+    'A': ['A0', 'A1', 'A2'],
+    'B': ['B0', 'B1', 'B2']
+    }
+datas2 = {
+    'key':['K0','K1','K2','K3'],
+    'C':['C0','C1','C2','C3'],
+    'D':['D0','D1','D2','D3']
+    }
+df1 = pd.DataFrame(datas1)
+df2 = pd.DataFrame(datas2)
+print('df1')
+print(df1)
+print('df2')
+print(df2)
+
+print("基於 key 把 df1 與 df2 合併")
+result = pd.merge(df1, df2, on='key')
+print(result)
+
+print("------------------------------")  # 30個
+
+print("merge 多個 key")
+
+datas1 = {
+    'k1':['K0','K0','K1','K2'],
+    'k2':['K0','K1','K0','K1'],
+    'A':['A0','A1','A2','A3'],
+    'B':['B0','B1','B2','B3']
+    }
+
+datas2 = {
+    'k1':['K0','K1','K1','K2'],
+    'k2':['K0','K0','K0','K0'],
+    'C':['C0','C1','C2','C3'],
+    'D':['D0','D1','D2','D3']
+    }
+
+df1 = pd.DataFrame(datas1)
+df2 = pd.DataFrame(datas2)
+
+print('df1')
+print(df1)
+print('df2')
+print(df2)
+print('pd.merge 1')
+res = pd.merge(df1,df2, on=['k1','k2'])              # 執行結果一樣
+print(res)
+
+print('pd.merge 2')
+res = pd.merge(df1,df2, on=['k1','k2'],how='inner')  # 執行結果一樣
+print(res)
+
+print("------------------------------")  # 30個
+
+print("outer right left 模式")
+
+print("outer 模式")
+res = pd.merge(df1,df2, on=['k1','k2'],how='outer')
+print(res)
+
+print("right 模式，保留右半部")
+res = pd.merge(df1,df2, on=['k1','k2'],how='right')
+print(res)
+
+print("left 模式，保留左半部")
+res = pd.merge(df1,df2, on=['k1','k2'],how='left')
+print(res)
+
+print("------------------------------")  # 30個
+
+print("merge合併時，處理相同欄位的衝突，以suffixes區分")
+
+datas1 = {
+    'name':['小黑','小白','小藍','小綠'],
+    'number':[23,32,31,8]
+    }
+datas2 = {
+    'name':['小黑','小白','小藍','小綠'],
+    'number':["台灣", "日本", "荷蘭", "菲律賓"]
+    }
+
+df1 = pd.DataFrame(datas1)
+df2 = pd.DataFrame(datas2)
+
+print("2個 df")
+print(df1)
+print(df2)
+
+print('pd.merge')
+df = pd.merge(df1,df2, on="name", suffixes=["_代號","_國家"])
+print(df)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -4147,18 +4365,17 @@ print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
 sys.exit()
-'''
-print("------------------------------------------------------------")  # 60個
 
+print("------------------------------------------------------------")  # 60個
 
 weight = [3, 48,33,8,38,16,36,29,22,6,12,42]
 name = ["鼠", "牛", "虎", "兔", "龍", "蛇", "馬", "羊", "猴", "雞", "狗", "豬"]
 
-
-# 定義資料 
-df = pd.DataFrame({
+datas = {
     "name": ["鼠", "牛", "虎", "兔", "龍"],
-    "weight": [3, 48, 33, 8, 38]})
+    "weight": [3, 48, 33, 8, 38]
+    }
+df = pd.DataFrame(datas)
 
 print('name')
 print(df["name"])
@@ -4171,11 +4388,6 @@ print(df)
 df = df.sort_values("weight", ascending=False)
 print(df)
 
-#cc = df.describe()  # 資料直列
-cc = df.describe().T  # 資料橫列
-print(cc)
-
-
 #----------------
 
 print('用plt畫pd資料')
@@ -4186,6 +4398,7 @@ df = pd.DataFrame({
     "name": ["鼠", "牛", "虎", "兔", "龍"],
     "weight": [3, 48, 33, 8, 38]})
 
+"""
 # 要強調的扇形的標籤 
 point_label = "虎" 
 # 重點色 
@@ -4201,7 +4414,7 @@ plt.pie(df["weight"], labels=df["name"],
         colors=palette)
 
 plt.show()
-
+"""
 
 #pandas 多圖 無效
 
@@ -4219,20 +4432,21 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
+"""
 cc = pd.merge(df1, df2, how="left", indicator=True).query("_merge == 'left_only'")
 print(cc)
+"""
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-# read / write csv
-
+"""
 # Writing to a SQLite database
 
 weather_df = pd.read_csv("data/weather_2012.csv")
@@ -4267,7 +4481,7 @@ df = pd.read_sql(
     "SELECT * from weather_2012 LIMIT 3", con, index_col=["id", "date_time"]
 )
 print(df)
-
+"""
 print("------------------------------")  # 30個
 
 # 讓我們來看一個更實際的示例，我們有一個包含按年數量銷售的數據集。
@@ -4285,28 +4499,12 @@ print(fruits)
 
 print("------------------------------------------------------------")  # 60個
 
+dates = pd.date_range("20130101", periods=6)
+print(dates)
 
 print("------------------------------------------------------------")  # 60個
 
 """ no file
-# 載入外部檔案並做資料整理
-# 使用 Pandas 讀取 CSV 檔
-
-url = "https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data"
-url = "iris.data"
-df = pd.read_csv(url, header=None)
-df.columns = ["sepal length", "sepal width", "petal length", "petal width", "class"]
-print(df)
-"""
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
 print("Pandas資料讀取與顯示")
 
 url = "xxxx"  # 網頁上有csv的地方
@@ -4344,6 +4542,7 @@ print("口罩何處尋 健保藥局查詢程式")
 # df = pd.read_csv('https://data.nhi.gov.tw/DataSets/DataSetResource.ashx?rId=A21030000I-D21005-001')
 
 df1 = df[["醫事機構名稱", "電話", "地址", "備註"]]
+"""
 
 """
 keyword = input('請輸入查詢縣市：')
@@ -4358,50 +4557,20 @@ else:
     print('請重新輸入查詢縣市資料')
 """
 
+columns = list("ABCDEFGHIJKLMNOPQRSTUVWXY")
+df = pd.DataFrame(np.random.rand(200, 25), columns=columns)
+print(df)
 
-"""
-
-1. 建立df
-2. 各種df資訊
-3. 
-
-"""
-
-
-cc = df.describe()  # 方法有()
-print(cc)
-
-cc = df.shape  # 屬性無()
-print(cc)
-
-
-# 14. Transpose a wide DataFrame
-
-df = pd.DataFrame(np.random.rand(200, 25), columns=list("ABCDEFGHIJKLMNOPQRSTUVWXY"))
-
-cc = df.head()
-print(cc)
-
-cc = df.head().T
-print(cc)
-
-cc = df.describe().T
-print(cc)
-
-
-
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 也可設mingliu或DFKai-SB
-
-
-
-print('df.loc["李小美"]["數學"] (原始)：' + str(df.loc["李小美"]["數學"]))
-df.loc["李小美"]["數學"] = 91
-print('df.loc["李小美"]["數學"] (修改)：' + str(df.loc["李小美"]["數學"]))
-print('df.loc["李小美", :] ->')
-df.loc["李小美", :] = 80
-print(df.loc["李小美", :])
-
-print("------------------------------")  # 30個
+datas = {
+    "姓名": ["唐三藏", "孫悟空", "豬八戒", "沙悟淨"],
+    "國文": [65,90,81,79],
+    "英文": [92,72,85,53],
+    "數學": [78,76,91,47],
+    "自然": [83,93,89,94],
+    "社會": [70,56,94,80],
+    }
+df = pd.DataFrame(datas)
+print(df)
 
 print('df["自然"] ->')
 print(df["自然"])
@@ -4412,39 +4581,22 @@ print(df[df.數學 >= 80])
 
 print("------------------------------")  # 30個
 
-print('df.loc["李小美", :] ->')
-print(df.loc["李小美", :])
-# print(df.loc["李小美"])
-print('df.loc["李小美"]["數學"] ->')
-print(df.loc["李小美"]["數學"])
-print('df.loc[("李小美", "熊小娟") ->')
-print(df.loc[("李小美", "熊小娟"), :])
 print('df.loc[:, "數學"] ->')
 print(df.loc[:, "數學"])
-print('df.loc[("李小美", "熊小娟"), ("數學", "自然")] ->')
-print(df.loc[("李小美", "熊小娟"), ("數學", "自然")])
-print('df.loc["李小美":"熊小娟", "數學":"社會"] ->')
-print(df.loc["李小美":"熊小娟", "數學":"社會"])
-print('df.loc[:黃美麗, "數學":"社會"] ->')
-print(df.loc[:"黃美麗", "數學":"社會"])
-print('df.loc["李小美":, "數學":"社會"] ->')
-print(df.loc["李小美":, "數學":"社會"])
 
-print("修改索引index")
-index[0] = "林晶輝"
-df.index = index
 
-print("修改欄名columns")
-columns[3] = "理化"
-df.columns = columns
-
-print(df)
+print('df.loc["孫悟空":"豬八戒", "數學":"社會"] ->')
+print(df.loc["孫悟空":"豬八戒", "數學":"社會"])
+print('df.loc[:沙悟淨, "數學":"社會"] ->')
+print(df.loc[:"沙悟淨", "數學":"社會"])
+print('df.loc["孫悟空":, "數學":"社會"] ->')
+print(df.loc["孫悟空":, "數學":"社會"])
 
 print("------------------------------")  # 30個
 
 """
-print("移除李小美成績 ->")
-df1 = df.drop("李小美")
+print("移除孫悟空成績 ->")
+df1 = df.drop("孫悟空")
 print(df1)
 print("移除數學科成績 ->")
 df2 = df.drop("數學", axis=1)
@@ -4452,7 +4604,7 @@ print(df2)
 print("移除數學科及自然科成績 ->")
 df3 = df.drop(["數學", "自然"], axis=1)
 print(df3)
-print("移除李小美到熊小娟成績 ->")
+print("移除孫悟空到豬八戒成績 ->")
 df4 = df.drop(df.index[1:4])
 print(df4)
 print("移除數學科到自然科成績 ->")
@@ -4469,10 +4621,32 @@ print("------------------------------")  # 30個
 print("------------------------------")  # 30個
 
 
-
-
 df = pd.read_csv("_new/scores2.csv", header=0, index_col=0)
 print(df)
 
 print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+""" no file
+# 載入外部檔案並做資料整理
+# 使用 Pandas 讀取 CSV 檔
+
+url = "https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data"
+url = "iris.data"
+df = pd.read_csv(url, header=None)
+df.columns = ["sepal length", "sepal width", "petal length", "petal width", "class"]
+print(df)
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+
+# 取出 DataFrame 當中的元素 –df.loc[]、df.iloc[]
+
+df[column] = np.random.choice(range(1, 101), 4)
+df[column] = np.random.choice(range(1, 11), 10)
+df[column] = np.random.choice(range(1, 11), 10)
+      
 

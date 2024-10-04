@@ -44,13 +44,17 @@
             this.rb2 = new System.Windows.Forms.RadioButton();
             this.rb0 = new System.Windows.Forms.RadioButton();
             this.bt_clear = new System.Windows.Forms.Button();
-            this.digitalDisplayControl1 = new Owf.Controls.DigitalDisplayControl();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.lb_check_list = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.digitalDisplayControl1 = new Owf.Controls.DigitalDisplayControl();
             this.statusStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // timer1
@@ -72,7 +76,7 @@
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(128, 17);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(129, 17);
             this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
             // 
             // richTextBox1
@@ -249,6 +253,50 @@
             this.bt_clear.UseVisualStyleBackColor = true;
             this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.button2);
+            this.groupBox2.Controls.Add(this.button3);
+            this.groupBox2.Controls.Add(this.lb_check_list);
+            this.groupBox2.Location = new System.Drawing.Point(563, 141);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(200, 200);
+            this.groupBox2.TabIndex = 52;
+            this.groupBox2.TabStop = false;
+            // 
+            // lb_check_list
+            // 
+            this.lb_check_list.AutoSize = true;
+            this.lb_check_list.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_check_list.ForeColor = System.Drawing.Color.Red;
+            this.lb_check_list.Location = new System.Drawing.Point(6, 30);
+            this.lb_check_list.Name = "lb_check_list";
+            this.lb_check_list.Size = new System.Drawing.Size(110, 24);
+            this.lb_check_list.TabIndex = 67;
+            this.lb_check_list.Text = "check_list";
+            // 
+            // button2
+            // 
+            this.button2.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button2.Location = new System.Drawing.Point(40, 83);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(125, 46);
+            this.button2.TabIndex = 8;
+            this.button2.Text = "測試1";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button3
+            // 
+            this.button3.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button3.Location = new System.Drawing.Point(40, 135);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(125, 46);
+            this.button3.TabIndex = 53;
+            this.button3.Text = "測試2";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
             // digitalDisplayControl1
             // 
             this.digitalDisplayControl1.BackColor = System.Drawing.Color.Transparent;
@@ -259,14 +307,6 @@
             this.digitalDisplayControl1.Name = "digitalDisplayControl1";
             this.digitalDisplayControl1.Size = new System.Drawing.Size(500, 100);
             this.digitalDisplayControl1.TabIndex = 1;
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Location = new System.Drawing.Point(563, 141);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(100, 100);
-            this.groupBox2.TabIndex = 52;
-            this.groupBox2.TabStop = false;
             // 
             // Form1
             // 
@@ -289,6 +329,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -313,6 +355,9 @@
         private System.Windows.Forms.RadioButton rb3;
         private System.Windows.Forms.Button bt_clear;
         private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Label lb_check_list;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
     }
 }
 
