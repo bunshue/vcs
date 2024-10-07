@@ -148,10 +148,10 @@ df = pd.read_csv(filename)
 print(df.head())
 
 filename = "tmp_grades.csv"
-#df.to_csv(filename)
-#df.to_csv(filename, index=False, header=True, columns=["Name", "Sex", "Age"])
-#df.to_csv(filename, index=False)
-#df.to_csv(filename, index=False, encoding="big5")
+# df.to_csv(filename)
+# df.to_csv(filename, index=False, header=True, columns=["Name", "Sex", "Age"])
+# df.to_csv(filename, index=False)
+# df.to_csv(filename, index=False, encoding="big5")
 df.to_csv(filename, index=False, encoding="utf8")
 print("df寫入csv檔案 :", filename)
 
@@ -1189,15 +1189,11 @@ print(df)
 
 import pandas as pd
 
-df = pd.DataFrame({'A': ['foo', 'bar', 'baz'],
-                   'B': [1, 2, 3]})
+df = pd.DataFrame({"A": ["foo", "bar", "baz"], "B": [1, 2, 3]})
 
-df.to_excel('檔案路徑.xlsx', index=False)
+df.to_excel("檔案路徑.xlsx", index=False)
 
 
 import pandas as pd
 
-df = pd.read_excel('檔案路徑.xlsx')
-
-
-
+df = pd.read_excel("檔案路徑.xlsx")

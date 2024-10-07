@@ -17,6 +17,7 @@ print("------------------------------------------------------------")  # 60個
 # 共同
 import os
 import sys
+import time
 import math
 import random
 import numpy as np
@@ -32,7 +33,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 # 裁剪圖片
 
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg"
@@ -427,6 +428,40 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
+# 圖片切分範例
+filename = "data/OlivettiFaces.jpg"
+
+image = cv2.imread(filename)
+
+#轉為灰度圖像
+
+image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)# 彩色轉灰階
+
+# 將人臉圖片提取為 (label:list) 形式
+olivetti_faces = []
+for row in range(20):
+    for column in range(20):
+        olivetti_faces.append(image[row * 57:(row + 1) * 57, column * 47:(column + 1) * 47])
+        
+
+plt.figure(figsize=(12, 8))
+
+for i in range(20):
+    plt.subplot(4, 5, i+1)
+    plt.imshow(olivetti_faces[i], cmap=plt.cm.gray)
+    plt.axis("off")
+
+plt.suptitle('原圖')
+plt.show()
+
+print('存圖')
+
+for row in range(20):
+    for column in range(10):
+        img = image[row * 57:(row + 1) * 57, column * 47:(column + 1) * 47]
+        filename="tmp_" + str(row) + "_" + str(column) + ".jpg"
+        #cv2.imwrite(img=img, filename=filename)
+        print('存檔檔名 :', filename)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -440,7 +475,7 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
-
+sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -646,7 +681,7 @@ cv2.imshow("warpPerspective", r)
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
@@ -667,6 +702,7 @@ cv2.imshow("O", O)
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()
+
 print("------------------------------------------------------------")  # 60個
 
 

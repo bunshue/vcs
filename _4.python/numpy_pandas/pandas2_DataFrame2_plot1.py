@@ -1812,5 +1812,3 @@ df = pd.DataFrame(
     columns=[2015, 2016, 2017, 2018, 2019],
 )
 df.plot(kind="pie", subplots=True, figsize=[20, 20])
-
-

@@ -1,4 +1,54 @@
 
+標準化py文件
+
+ABC.txt
+poem.txt
+article.txt
+big5 gb2312... formats
+	animals.csv
+
+sqlite之簡易版範例 for animals
+簡易之資料庫增刪查改範例
+
+MyDictionary
+
+csv檔 => 字典 = > 資料庫
+
+資料庫曾刪改查搜尋
+
+增刪查改	CDRU
+CRUD
+
+CRUD (新增:Create , 讀取:Read, 更新: Update, 刪除:Delete)
+CRUD
+增	新增:Create	POST
+查	讀取:Read	GET
+改	更新:Update	PUT
+刪	刪除:Delete
+
+增刪查改（英語：CRUD）
+增加（Create，意為「建立」）
+刪除（Delete）
+查詢（Read，意為「讀取」）
+改正（Update，意為「更新」）
+在電腦程式語言中是一連串常見的動作行為
+而其行為通常是為了針對某個特定資源所作出的舉動（例如：建立資料、讀取資料等）
+
+
+ML(2)
+監督式學習	supervised learning
+		分類學習 classification learning
+		回歸學習 regression learning
+無監督學習	un-supervised learning
+		分群 clustering
+
+無監督式學習
+1. 分群 clustering
+2. 分布密度估計 density estimation
+3. 維度約簡 dimensionality reduction
+
+
+
 指定安裝版本
 pip install imageai==2.0.2
 
@@ -880,29 +930,13 @@ re.I / re.IGNORECASE 	忽略大小寫匹配標記
 re.M / re.MULTILINE 	多行匹配標記
 
 
-
-
-
-
-
-
 如何撈出目前已安裝之模組與其版本?以期在另一台電腦上一次安裝
 
 webbrowser如何增加頁箋
 
-
-
-import sys
-print('目前python程式所在位置')
-print(sys.executable)
-
-
 cmd / where python	//了解目前電腦安裝多少版本
 
 cmd / python --version	//了解目前命令提示字元視窗執行Python的版本
-
-
-
 
 
 列出所安裝的模組
@@ -1202,13 +1236,7 @@ data = sp.find_all('span', {'id':'Showtd'})
 rows = data[0].find_all('tr')
 
 
-
 給class用
-print("Python %s on %s\n%s\n(%s)\n" %
-	(sys.version, sys.platform, cprt,
-	self.__class__.__name__))
-
-
 
 Firebase 專案是應用程式的容器
 
@@ -1250,14 +1278,13 @@ cv2.imwrite("face_detection.jpg", image)
 cv2.imwrite('7.jpg', image)
 
 print("------------------------------------------------------------")  # 60個
+
 sys.exit(main(sys.argv[1:], sys.stdout))
 
 sys.stderr.write('%s: %s\n%s' % (sys.argv[0], msg, usage))
 sys.stderr.write("%s: %s\n" % (sys.argv[0], msg))
 
-
 print("%s:%d:%s" % (filename, row, line), end = '')
-
 
 //xil_printf("david0217: %s:%s(%d) ST setup g_exposure = %d\r\n",__FILE__,__func__,__LINE__, g_exposure);
 
@@ -1280,7 +1307,6 @@ __author__ = 'Raymond Hettinger'
 
 print("msgfmt.py", __version__)
 
-
 print('msgid_plural not preceded by msgid on %s:%d' % (infile, lno), file=sys.stderr)
 print('plural without msgid_plural on %s:%d' % (infile, lno), file=sys.stderr)
 print('ERROR: %a -> %a != %a' % (k, locale.normalize(k), v), file=sys.stderr)
@@ -1289,7 +1315,6 @@ print('    %-40s%a,' % ('%a:' % k, v))
 print('#    removed %a' % k)
 print('#    updated %a -> %a to %a' % (k, olddata[k], data[k]))
 
-
 print("------------------------------------------------------------")  # 60個
 
 print(__doc__ % globals())
@@ -1297,6 +1322,7 @@ print(__doc__ % globals())
 print("-"*70)
 
 print("------------------------------------------------------------")  # 60個def chop(line):
+
     if line.endswith("\n"):
         return line[:-1]
     else:
@@ -1507,7 +1533,6 @@ def usage():
 
 sys.stderr.write(msg)
 
-
 print("------------------------------------------------------------")  # 60個
 
 IFTTT	IF This Then That
@@ -1531,8 +1556,6 @@ layout = [[sg.Text('PyInstaller EXE Creator', font='Any 15')],
 
 window = sg.Window('PySimpleGUI EXE Maker', layout, auto_size_text=False, auto_size_buttons=False, default_element_size=(20,1), text_justification='right')
 
-
-
 print("------------------------------------------------------------")  # 60個
 
 @app.route('/user/<username>')
@@ -1553,9 +1576,6 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
 OCR 破解驗證碼
 
 因為驗證碼通常會有很多噪點，
@@ -1707,19 +1727,11 @@ except KeyboardInterrupt:
     print('Rotating Cube, by Al Sweigart al@inventwithpython.com')
     sys.exit()  # When Ctrl-C is pressed, end the program.
 
-
-
 print("------------------------------------------------------------")  # 60個
 
-
 print("------------------------------------------------------------")  # 60個
-
-
-
-
 
 ----------------print 大集合 pppp----------------
-
 
 
 title = "Ming-Chi Institute of Technology"
@@ -2115,6 +2127,7 @@ def pathdirs():
     return dirs
     
 print("------------------------------------------------------------")  # 60個    
+
 系統參數
 sys.path:
         scriptdir = os.path.dirname(sys.argv[0])
@@ -2279,9 +2292,7 @@ pattern = ('這個字串要填入資料 第一筆 {}, 第二筆 {}, 第三筆 {}
 
 print(pattern.format(3, 8, 3, 4, 'dddd'))
 
-
 sys.stdout.flush()
-
 
 print "%s.%s unknown bits %x" % (self.name, name, unk)
                 print "%s.%sunknown integer type %d" % (self.name, name, size)
@@ -2298,6 +2309,7 @@ _directories = sets.Set()
         _directories.add(logical)
 
 print("------------------------------------------------------------")  # 60個
+
 import sys
 
 prog = sys.argv[0]
@@ -2312,6 +2324,7 @@ sys.stderr.write("Check for format or version mismatch.\n")
 
 
 print("------------------------------------------------------------")  # 60個
+
 def usage(code, msg=''):
     print(__doc__ % globals(), file=sys.stderr)
     if msg:
@@ -2366,47 +2379,6 @@ def print_differences(data, olddata):
         # Additions are not mentioned
 
 print("------------------------------------------------------------")  # 60個
-
-
----- sys.version ------------------------------------------------------------
-
-import sys
-print(sys.version)
-
-
-py3 = sys.version_info >= (3, 0)
-
-
-print("------------------------------------------------------------")  # 60個
-    print("Python %s" % sys.version)
-    if sys.version_info < (3, 3):
-        xxxx
-    else:
-    xxxx
-
-
-print("------------------------------------------------------------")  # 60個
-
-import sys, os
-
-version_suffix = "%r%r" % sys.version_info[:2]
-print(version_suffix)
-print("Python%s.dll" % version_suffix)
-
-from _msi import *
-import os, string, re, sys
-
-AMD64 = "AMD64" in sys.version
-Itanium = "Itanium" in sys.version
-Win64 = AMD64 or Itanium
-
-print(sys.version)
-print(AMD64)
-print(Itanium)
-print(Win64)
-
-print("------------------------------------------------------------")  # 60個
-
 
     def print_label(filename, func):
         name = re.split(r'[-.]', filename)[0]
@@ -2483,12 +2455,9 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 __version__ = 1, 7, 0
-
 __version__ = '2.1'
-print('PYTHON %s' % __version__)
 
-LINE = 50
-print('-' * LINE)
+print('PYTHON %s' % __version__)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -2507,23 +2476,10 @@ def prdict(d):
 
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-pppp
-
 print('溫度:{:.1f}, 濕度:{:.0f}%'.format(humi, temp))
 
-
 print("------------------------------------------------------------")  # 60個
+
 import sys
 
 error = 'mkreal error'
@@ -2557,7 +2513,6 @@ else:
 
 class UnsupportedType(TypeError):
     pass
-
 
 p('stringbench v%s' % VERSION)
 p(sys.version)
@@ -2599,6 +2554,7 @@ p("%.2f\t%.2f\t%.1f\t%s" % (
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
+
 self.chars = list(range(256))
 
 print("------------------------------------------------------------")  # 60個
@@ -2630,11 +2586,6 @@ print("------------------------------------------------------------")  # 60個
             else:
                 mapchar = chr(mapvalue)
 
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個mix
 
 #Get a list of module files for a filename, a module or package name, or a directory.
@@ -2655,11 +2606,7 @@ def getFilesForName(name):
 
 print("------------------------------------------------------------")  # 60個
 
-print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
 def wrong_user_display(user_metadata: dict = {"name": "John", "age": 30}):
-
 
 print("------------------------------------------------------------")  # 60個
         words = (
@@ -2677,7 +2624,9 @@ print("------------------------------------------------------------")  # 60個
 
 
 
-print("------------------------------------------------------------")  # 60個self.assertEqual(func(), X + Y)
+print("------------------------------------------------------------")  # 60個
+
+self.assertEqual(func(), X + Y)
 self.assertEqual((cn.id_, cn.user, cn.location), (42, "root", "127.0.0.1"))
 self.assertEqual(customer.resolve_customer_id, 1)
 self.assertFalse(hasattr(cn, "extra"))
@@ -2694,8 +2643,6 @@ self.assertNotEqual(end_line, "[clinic]*/[clinic]*/")
 
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
         for name, group in (
             ('y', -1), ('x', -1),
             ('ch', 0),
@@ -2715,13 +2662,12 @@ print("------------------------------------------------------------")  # 60個
             self.assertEqual(p.group, group)
             self.assertEqual(p.kind, inspect.Parameter.POSITIONAL_ONLY)
 
-        self.assertEqual(function.docstring.strip(), """
+        self.assertEqual(function.docstring.strip(),
 imaginary([[y1, y2,] x1, x2,] ch, [attr1, attr2, attr3, [attr4, attr5,
           attr6]])
 
-
-
 print("------------------------------------------------------------")  # 60個
+                         
 import unittest
 
 #從另一個.py檔取得參數
@@ -2779,17 +2725,11 @@ dddd = list(tk)
 print(dddd)
 #    ['28A2320B', 'FD3F', '4627', '9792', 'A2B38E3C46B0']
 
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("------------------------------------------------------------")  # 60個
 import logging
 
 logger = logging.getLogger("RefactoringTool")
-logger = logging.getLogger("RefactoringTool")
-
 
 logger=self.logger)
 
@@ -2813,13 +2753,10 @@ log_error("Can't parse docstring in %s line %s: %s: %s",
         logger.info('Output in %r will mirror the input directory %r layout.',
                     options.output_dir, input_base_dir)
 
-
-
 print("------------------------------------------------------------")  # 60個
+
     _default_options = {"print_function" : False,
                         "write_unchanged_files" : False}
-
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -2829,9 +2766,8 @@ TOKEN_MAP = {"NAME": token.NAME,
              "NUMBER": token.NUMBER,
              "TOKEN": None}
 
-
-
 print("------------------------------------------------------------")  # 60個
+
 import sys
 import os
 import difflib
@@ -2868,7 +2804,6 @@ print("Sorry, -j isn't supported on this platform.", file=sys.stderr)
 
 print("------------------------------------------------------------")  # 60個
 
-print("------------------------------------------------------------")  # 60個
 import sys
 import ensurepip
 
@@ -2893,11 +2828,6 @@ else:
 
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-
-
-
 def output(string = '', end = '\n'):
     sys.stdout.write(string + end)
 
@@ -2906,20 +2836,9 @@ def output(*strings):
     for s in strings:
         sys.stdout.write(str(s) + "\n")
 
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
-
-
-
-print("------------------------------------------------------------")  # 60個
-
 
 '''
-
 json轉dict
 '''
 import os
@@ -2945,10 +2864,6 @@ def create_dict(entities):
 
 new_html5 = create_dict(get_json(entities_url))
 
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
     print('# Generated by {}.  Do not edit manually.'.format(__file__))
@@ -2964,8 +2879,8 @@ print("------------------------------------------------------------")  # 60個
 
 import locale, copy, io, os, re, struct, sys
 
-
 print("------------------------------------------------------------")  # 60個
+
     def __repr__(self):
         args = ", ".join(map(repr, self.args))
         keywords = ", ".join("{}={!r}".format(k, v)
@@ -2978,6 +2893,7 @@ print("------------------------------------------------------------")  # 60個
                                     keywords=keywords)
 
 print("------------------------------------------------------------")  # 60個    exe_dir, _ = os.path.split(os.path.abspath(executable))
+
     site_prefix = os.path.dirname(exe_dir)
             os.path.join(exe_dir, conf_basename),
             os.path.join(site_prefix, conf_basename)
@@ -2985,8 +2901,8 @@ print("------------------------------------------------------------")  # 60個  
         here = os.path.dirname(os.__file__)
         dirs.extend([os.path.join(here, os.pardir), here, os.curdir])
 
-
 print("------------------------------------------------------------")  # 60個
+
     ckeys = sorted(caps)
     for type in ckeys:
         print(type)
@@ -2997,22 +2913,8 @@ print("------------------------------------------------------------")  # 60個
                 print("  %-15s" % k, e[k])
             print()
 
-
-
 print("------------------------------------------------------------")  # 60個
-import sys
 
-for i in range(32):
-    print(hex(i))
-
-
-print(sys.hexversion)
-
-if sys.hexversion >= 0x02020000:
-    print('aaaaa')
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
 def _recursion222(object):
     print(type(object))
     print(type(object).__name__)
@@ -3025,17 +2927,15 @@ nnnn = _recursion222(object)
 print(nnnn)
 
 print("------------------------------------------------------------")  # 60個
+
 warnings.warn('the formatter module is deprecated and will be removed in '
 	'Python 3.6', PendingDeprecationWarning)
 
 warnings.warn("This class is deprecated, use the netrc module instead",
 	DeprecationWarning, 2)
 
-
-
 print("------------------------------------------------------------")  # 60個
 
-print("------------------------------------------------------------")  # 60個
 import os
 import sys
 
@@ -3057,6 +2957,7 @@ errprint('aaaa', 'bbbb', 'kkkk')
 errprint("Usage:", sys.argv[0], "[-v] file_or_directory ...")
 
 print("------------------------------------------------------------")  # 60個
+
 def errprint(*args):
     strings = map(str, args)
     msg = ' '.join(strings)
@@ -3070,33 +2971,17 @@ errprint("Usage:", __doc__)
 errprint("Skipping file %r; can't parse line %d:\n%s" % (self.fname, srow, line))
 
 print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
+
     with open(filename, encoding=encoding) as f:
         return f.read(), filename
 
-
-
 print("------------------------------------------------------------")  # 60個import os, sys
-
-PYTHONLIB = 'libpython'+sys.version[:3]+'.a'
-PC_PYTHONLIB = 'Python'+sys.version[0]+sys.version[2]+'.dll'
-NM = 'nm -p -g %s'                      # For Linux, use "nm -g %s"
-
-print(PYTHONLIB)
-print(PC_PYTHONLIB)
-print(NM)
 
 # Definition file template
 DEF_TEMPLATE = """\
 EXPORTS
 %s
 """
-
-
-
-
-
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -3109,12 +2994,12 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+
 """
 Synopsis: %(prog)s [-h|-b|-g|-r|-a|-d] [ picklefile ] dbfile
 Read the given picklefile as a series of key/value pairs and write to a new
 hash or btree database using db2pickle.py and reconstitute it to a recno
 database with %(prog)s unless your keys are integers.
-
 """
 import sys
 
@@ -3189,9 +3074,8 @@ def _modname(path):
     filename, ext = os.path.splitext(base)
     return filename.lstrip(".")
 
-
-
 print("------------------------------------------------------------")  # 60個
+
             if filename.endswith((".pyc", ".pyo")):
                 filename = filename[:-1]
 
@@ -3204,28 +3088,10 @@ print("------------------------------------------------------------")  # 60個
                     os.makedirs(dir)
                 modulename = _fullmodname(filename)
 
-
                 s = os.path.expandvars(s)
                 s = os.path.normpath(s)
 
-
-
-
 print("------------------------------------------------------------")  # 60個
-
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個print(sys.getwindowsversion()[:2])
-
-#if sys.getwindowsversion()[:2] >= (6, 0):
-
-sys.getwindowsversion()[3] >= 2)
-
-
-if 'ce' in sys.builtin_module_names:
-    defpath = '\\Windows'
-
 
 drive = os.environ['HOMEDRIVE']
 
@@ -3235,15 +3101,6 @@ drive = os.environ['HOMEDRIVE']
 
     paths = path.split(os.pathsep)
     base, ext = os.path.splitext(executable)
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -3258,12 +3115,6 @@ print("------------------------------------------------------------")  # 60個
 
         ans = list('abc')
         long_ans = list(range(10000))
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -3321,9 +3172,6 @@ print("------------------------------------------------------------")  # 60個
         dir, name = os.path.split(pathname)
         name, ext = os.path.splitext(name)
 
-
-
-
         print()
         print("  %-25s %s" % ("Name", "File"))
         print("  %-25s %s" % ("----", "----"))
@@ -3343,10 +3191,6 @@ print("------------------------------------------------------------")  # 60個
     path[0] = os.path.dirname(script)
 
 
-    print(type(sys.path))
-    print(sys.path)
-
-
     if os.path.isabs(pathname):
         return '/' + '/'.join(components)
     else:
@@ -3357,7 +3201,7 @@ print("------------------------------------------------------------")  # 60個  
             print(file=self.stream)
 
 print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
+
 import os
 import sys
 import stat
@@ -3386,23 +3230,14 @@ print(st)
 isLink = stat.S_ISLNK(st.st_mode)
 print(isLink)
 
-
-
 aaa = splitdrive(filename)
 print(aaa)
 
 bbb = basename(filename)
 print(bbb)
 
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
     def touch(self, mode=0o666, exist_ok=True):
         """
         Create this file with the given access mode, if it doesn't exist.
@@ -3425,8 +3260,6 @@ print("------------------------------------------------------------")  # 60個
             flags |= os.O_EXCL
         fd = self._raw_open(flags, mode)
         os.close(fd)
-
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -3540,25 +3373,13 @@ warnings.warn(
                 source = '<???>'
         self._read(f, source)
 
-
-
-
         elements_added = set()
         for section, keys in dictionary.items():
             section = str(section)
 
 '''
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-
-
-
-print
 name = ['mouse', 'ox', 'tiger']
 weight = [3, 48, 33]
 print('名稱     編號  體重')
@@ -3567,19 +3388,14 @@ for i in range(0, 3):
           str(i+1).rjust(10),
           str(weight[i]).rjust(10))
 
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
+
 print('glob: {}'.format(foldername))
 for fname in glob.glob(foldername, recursive=False):
     print("loading: {}".format(fname))
 
+print("------------------------------------------------------------")  # 60個
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
 print('Python之內建函數')
 r = abs(-10)
 print("abs(-10) = " + str(r))
@@ -3603,10 +3419,12 @@ r = round(3.14568757, 1)
 print("round(3.14568757, 1) = " + str(r))
 
 print("------------------------------------------------------------")  # 60個
+
 print("D:\\Python\\ch08")
 print("HEX: \x48\x45\x58")
 
 print("------------------------------------------------------------")  # 60個
+
 x, y = 10, 20
 s = "Y= {1} X= {0}".format(x, y)
 print(s)
@@ -3620,6 +3438,7 @@ print("八進位: {0:o}".format(200))
 print("十六進位: {0:x}".format(200))
 
 print("------------------------------------------------------------")  # 60個
+
 str1 = 'welcome to python'
 s = str1.capitalize()
 print("str1.capitalize() = " + s)
@@ -3631,11 +3450,8 @@ print("str1.swapcase() = " + s)
 s = str1.replace('python', 'vcs')
 print("str1.replace() = " + s)
 
-
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
 d1 = {x: x*x for x in range(10)}
 print(d1)
 d2 = {x: x*x for x in range(10) if x % 2 == 0}
@@ -3650,11 +3466,7 @@ print(lst3)
 lst4 = [x*2 for x in range(10) if x %2 == 1]
 print(lst4)
 
-
 print("------------------------------------------------------------")  # 60個
-
-
-
 
 # 字元函數
 ch1 = "A"
@@ -3665,7 +3477,6 @@ a = chr(97)
 print("chr(97) = " + a)
 a = ord('B')
 print("ord('B') = " + str(a))
-
 
 split的用法(3)
 str1 = "This is a pen."
@@ -3679,8 +3490,7 @@ lst3 = str3.splitlines()
 print(lst3)
 
 print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
+
 #eval() 和 exec()，能夠將字串轉換成可以運作的程式碼
 
 m = 10
@@ -3701,15 +3511,6 @@ print(a)       # 3
 
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
 字串處理函數
 msg = '''CIA Mark told CIA Linda that the secret USB had given to CIA Peter'''
 print("字串開頭是CIA: ", msg.startswith("CIA"))
@@ -3719,6 +3520,7 @@ msg = msg.replace('Linda','Lxx')
 print("新的msg內容 : ", msg)
 
 print("------------------------------------------------------------")  # 60個
+
 import sys
 import time
 
@@ -3895,15 +3697,12 @@ list 轉 set 轉 list
 
 print('------------------------------------------------------------')	#60個
 
-
         textvars = dict(
             VER='aaaaa',
             FULLVER='bbbbb',
         )
 
-
 print('------------------------------------------------------------')	#60個
-
 
 s = "   this is a sample sentance. this is a cat\n "
 print(s.capitalize())
@@ -3922,16 +3721,6 @@ print(s.zfill(50))
 
 print('------------------------------------------------------------')	#60個
 
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
 for name in sorted(players.keys( )):
     print(name)
     print(f"Hi! {name} 我喜歡看你在 {players[name]} 的表現")
@@ -3940,11 +3729,7 @@ for name in sorted(players.keys( )):
 for team in players.values( ):
     print(team)
     
-    
-
-
 print('------------------------------------------------------------')	#60個
-
 
 height = eval(input("請輸入身高(公分)："))
 weight = eval(input("請輸入體重(公斤)："))
@@ -3954,10 +3739,7 @@ if BMI >= 18.5 and BMI < 24:
 else:
     print(f"{BMI = :5.2f}體重不正常")
     
-    
-    
     print(f"{r1 = :6.4f},    {r2 = :6.4f}")
-    
 
 print('------------------------------------------------------------')	#60個    
 
@@ -4035,10 +3817,6 @@ if num == "y" or num == "Y":
     ans += 16
 
 print(f"讀者的生日日期是 : {ans}")
-
-
-print('------------------------------------------------------------')	#60個
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -4562,10 +4340,6 @@ with open('taipei_sans_tc_beta.ttf', 'wb') as f:
 
 print('------------------------------------------------------------')	#60個
 
-
-
-
-
 text = "這個是測試資料。"
 word1 = "這個是"
 word2 = "那個是"
@@ -4574,7 +4348,6 @@ print("置換前 :", text)
 text = text.replace(word1, word2)
 print("置換後 :", text)
 
-
 plt.plot(x, y)
 plt.plot(x, y, color='y')
 #plt.plot(x, y, color=(1,1,0))  #RGB
@@ -4582,31 +4355,24 @@ plt.plot(x, y, color='y')
 #plt.plot(x, y, color='yellow')  #英文全名
 #plt.plot(x, y, color='0.5')
 
-
 x=[1,2,3,4,5,6,7,8,9,10,11,12]
 y=[16800,20000,21600,25400,12800,20000,25000,14600,32800,25400,18000,10600]
 plt.plot(x, y, marker='d',ms=10, mfc='r', mec='b')
-
 
 x=[1,2,3,4,5,6,7,8,9,10,11,12]
 y=[16800,20000,21600,25400,12800,20000,25000,14600,32800,25400,18000,10600]
 
 plt.plot(x, y, marker='.')
 
-
-
 x=[1,2,3,4,5,6,7,8,9,10,11,12]
 y=[200000,180000,175000,215000,280000,320000,90000,365000,318000,198000,268000,348000]
 
 plt.plot(x, y, marker='*')
 
-
-
 x=[1,2,3,4,5,6,7,8,9,10,11,12]
 y=[200000,180000,175000,215000,280000,320000,90000,365000,318000,198000,268000,348000]
 
 plt.plot(x, y, lw=8, ls='-.')
-
 
 x=[1,2,3,4,5,6,7,8,9,10,11,12]
 y=[200000,180000,175000,215000,280000,320000,90000,365000,318000,198000,268000,348000]
@@ -4623,12 +4389,7 @@ with open('taipei_sans_tc_beta.ttf', 'wb') as f:
   f.write(fontfile.content)
 """
 
-
-
-
-
 同一支小算盤程式(program)執行多次 成為多個獨立的處理程序(process)
-
 
 iris資料
 https://archive.ics.uci.edu/dataset/53/iris
@@ -4636,31 +4397,7 @@ https://archive.ics.uci.edu/dataset/53/iris
 kaggle網站上的iris資料
 https://www.kaggle.com/datasets/uciml/iris
 
-
-import pandas as pd
-df = pd.read_csv('Iris.csv')
-print(df.head())
-print('將Id整欄刪除')
-df = df.drop('Id', axis = 1)
-
-print(df.head())
-
-
 C:\_git\vcs\_4.python>python -m pdb test10_new11.py
-
-
-ML(2)
-監督式學習	supervised learning
-		分類學習 classification learning
-		回歸學習 regression learning
-無監督學習	un-supervised learning
-		分群 clustering
-
-
-無監督式學習
-1. 分群 clustering
-2. 分布密度估計 density estimation
-3. 維度約簡 dimensionality reduction
 
 print("------------------------------------------------------------")  # 60個
 
@@ -4686,18 +4423,8 @@ Python常用模块
 - 数据处理和编码模块: base64 / csv / html.parser / json / xml / ...
 """
 
-
-
-
-
-
-
 git指令
 git.exe pull --progress -v --no-rebase "origin"
-
-
-
-
 
 網路爬蟲（英語：web crawler）
 
@@ -5289,12 +5016,6 @@ for char in special_chars:
 data = data.split()
 print(data)
 
-sys.exit()
-
-
-
-
-
 ------------------------
 
 plt.plot(t, t, 'r--')
@@ -5385,21 +5106,6 @@ https://storage.googleapis.com/tensorflow/tf-keras-datasets/mnist.npz
 
 
 print('------------------------------------------------------------')	#60個
-
-import sys
-import numpy
-import pandas as pd
-import sklearn
-import matplotlib
-import keras
-print("Python version:", sys.version)
-print("Numpy version:", numpy.version.version)
-print("Pandas version:", pd.__version__)
-print("Scikit-learn version:", sklearn.__version__)
-print("Matplotlib version:", matplotlib.__version__)
-print("Keras version:", keras.__version__)
-
-
 
 
 ## 取得發票號碼
@@ -6100,4 +5806,13 @@ print("------------------------------------------------------------")  # 60個
 
 
 ----------------tkinter SP tktk----------------
+
+
+import pandas as pd
+df = pd.read_csv('Iris.csv')
+print(df.head())
+print('將Id整欄刪除')
+df = df.drop('Id', axis = 1)
+
+print(df.head())
 

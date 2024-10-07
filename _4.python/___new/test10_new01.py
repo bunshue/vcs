@@ -27,7 +27,7 @@ import requests
 import numpy as np
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 def printlocal():
     lang = "Java"
     print(f"語言 : {lang}")
@@ -415,61 +415,12 @@ for y in "12345":
 
 print("------------------------------------------------------------")  # 60個
 
-print("2 進位整數運算")
-x = 0b1101  # 這是2進位整數
-print(x)  # 列出10進位的結果
-y = 13  # 這是10進位整數
-print(bin(y))  # 列出轉換成2進位的結果
-print("8 進位整數運算")
-x = 0o57  # 這是8進位整數
-print(x)  # 列出10進位的結果
-y = 47  # 這是10進位整數
-print(oct(y))  # 列出轉換成8進位的結果
-print("16 進位整數運算")
-x = 0x5D  # 這是16進位整數
-print(x)  # 列出10進位的結果
-y = 93  # 這是10進位整數
-print(hex(y))  # 列出轉換成16進位的結果
-
-print("------------------------------------------------------------")  # 60個
-
-x1 = "22"
-x2 = "33"
-x3 = x1 + x2
-print("type(x3) = ", type(x3))
-print("x3 = ", x3)  # 列印字串相加
-x4 = int(x1) + int(x2)
-print("type(x4) = ", type(x4))
-print("x4 = ", x4)  # 列印整數相加
-x5 = "1100"
-print("2進位  '1100' = ", int(x5, 2))
-print("8進位  '22'   = ", int(x1, 8))
-print("16進位 '22'   = ", int(x1, 16))
-print("16進位 '5A'   = ", int("5A", 16))
-
-print("------------------------------------------------------------")  # 60個
-
 str1 = "Hello!\nPython"
 print("不含r字元的輸出")
 print(str1)
 str2 = r"Hello!\nPython"
 print("含r字元的輸出")
 print(str2)
-
-print("------------------------------------------------------------")  # 60個
-
-x1 = 97
-x2 = chr(x1)
-print(x2)  # 輸出數值97的字元
-x3 = ord(x2)
-print(x3)  # 輸出字元x3的Unicode(10進位)碼值
-x4 = "魁"
-print(hex(ord(x4)))  # 輸出字元'魁'的Unicode(16進位)碼值
-
-print("------------------------------------------------------------")  # 60個
-
-x = 100
-print("100的16進位 = %x\n100的 8進位 = %o" % (x, x))
 
 print("------------------------------------------------------------")  # 60個
 
@@ -709,35 +660,6 @@ print(str1)
 str2 = r"Hello!\nPython"
 print("含r字元的輸出, 有r的 後面雙引號內的內容保持不變輸出")
 print(str2)
-
-print("------------------------------------------------------------")  # 60個
-
-x1 = 97
-x2 = chr(x1)
-print(x2)  # 輸出數值97的字元
-x3 = ord(x2)
-print(x3)  # 輸出字元x3的Unicode碼值
-x4 = "魁"
-print(ord(x4))  # 輸出字元'魁'的Unicode碼值
-
-print("------------------------------------------------------------")  # 60個
-
-x = 0x5D  # 這是16進為整數
-print(x)  # 列出10進位的結果
-y = 93  # 這是10進為整數
-# print(hex(y))  # 列出轉換成16進位的結果  fail in sugar
-
-print("------------------------------------------------------------")  # 60個
-
-x = 0b1101  # 這是2進為整數
-print(x)  # 列出10進位的結果
-y = 13  # 這是10進為整數
-print(bin(y))  # 列出轉換成2進位的結果
-
-print("------------------------------------------------------------")  # 60個
-
-x = 100
-print("100的16進位 = %x\n100的 8進位 = %o" % (x, x))
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1304,18 +1226,6 @@ b = 20  # 設定a,b的初值
 print("函數外交換前：a=%d, b=%d" % (a, b))
 swap_test(a, b)  # 函數呼叫
 print("函數外交換後：a=%d, b=%d" % (a, b))
-
-print("------------------------------------------------------------")  # 60個
-
-print("int(9.6)=", int(9.6))
-print("bin(20)=", bin(20))
-# print('hex(66)=',hex(66))  fail in sugar
-print("oct(135)=", oct(135))
-print("float(70)=", float(70))
-print("abs(-3.9)=", abs(-3.9))
-print("chr(69)=", chr(69))
-print("ord('%s')=%d" % ("D", ord("D")))
-print("str(543)=", str(543))
 
 print("------------------------------------------------------------")  # 60個
 
@@ -2855,22 +2765,7 @@ for i in range(0, 1000, 167):
     ccc = getSevSegStr(i, 5)
     print(ccc)
 
-
-
 print("------------------------------------------------------------")  # 60個
-
-st = 10
-sp = 20
-
-for number in range(st, sp):  # Main program loop.
-    # Convert to hexadecimal/binary and remove the prefix:
-    hexNumber = hex(number)[2:].upper()
-    binNumber = bin(number)[2:]
-
-    print('DEC:', number, '   HEX:', hexNumber, '   BIN:', binNumber)
-
-print("------------------------------------------------------------")  # 60個
-
 
 # 函數文件字串 docstring 註明此函數的功能與用法
 def greeting(name):
@@ -5024,84 +4919,6 @@ print("函式外 全域變數n 位址=%d, 值=%d" % (id(n), n))
 
 print("------------------------------------------------------------")  # 60個
 
-print('進位轉換')
-
-number = 255
-print("型別：", type(number))
-print("二進位：", bin(number))
-print("八進位", oct(number))
-print("十六進位", hex(number))
-print("10進位：", number)
-
-# 配合format函式去除前綴字元
-print("二進位：", format(number, "b"))
-print("八進位：", format(number, "o"))
-print("十六進位：", format(number, "x"))
-
-print("------------------------------------------------------------")  # 60個
-
-x1 = "22"
-x2 = "33"
-x3 = x1 + x2
-x4 = int(x1) + int(x2)
-x5 = "11111111"
-print("2進位  '11111111' = ", int(x5, 2))
-print("8進位  '22'   = ", int(x1, 8))
-print("16進位 '22'   = ", int(x1, 16))
-print("16進位 'FF'   = ", int("FF", 16))
-
-print("------------------------------------------------------------")  # 60個
-
-print("2 進位整數運算")
-x = 0b1101  # 這是2進位整數
-print(x)  # 列出10進位的結果
-y = 13  # 這是10進位整數
-print(bin(y))  # 列出轉換成2進位的結果
-print("8 進位整數運算")
-x = 0o57  # 這是8進位整數
-print(x)  # 列出10進位的結果
-y = 47  # 這是10進位整數
-print(oct(y))  # 列出轉換成8進位的結果
-print("16 進位整數運算")
-x = 0x5D  # 這是16進位整數
-print(x)  # 列出10進位的結果
-y = 93  # 這是10進位整數
-print(hex(y))  # 列出轉換成16進位的結果
-
-
-print("------------------------------------------------------------")  # 60個
-
-x = 100
-print("100的16進位 = %x\n100的 8進位 = %o" % (x, x))
-
-print("------------------------------------------------------------")  # 60個
-
-# 將 16 進位數轉為 10 進位
-
-def hex_to_dec():
-    hexnum = "ff"
-    decnum = 0
-
-    for power, digit in enumerate(reversed(hexnum)):
-        if digit.isdigit():
-            digit_num = int(digit)
-        else:
-            digit_num = ord(digit.upper()) - ord("A") + 10
-        decnum += digit_num * (16**power)
-
-    print("十進位結果:", decnum)
-
-
-hex_to_dec()
-
-print("------------------------------------------------------------")  # 60個
-
-print("{:#b}".format(12345))  # 顯示0b11000000111001
-print("{:#o}".format(12345))  # 顯示0o30071
-print("{:#x}".format(12345))  # 顯示0x3039
-
-print("------------------------------------------------------------")  # 60個
-
 #改成動物資料
 soldier0 = {"tag": "red", "score": 3, "speed": "slow"}  # 建立小兵
 soldier1 = {"tag": "blue", "score": 5, "speed": "medium"}
@@ -6342,19 +6159,6 @@ ciphertext = encrypt(msg, encry_dict)
 
 print("原始字串 ", msg)
 print("加密字串 ", ciphertext)
-
-print("------------------------------------------------------------")  # 60個
-
-code1 = "洪"
-print("洪")
-print(hex(ord(code1)))  # 輸出字元'洪'的Unicode(16進位)碼值
-code2 = "錦"
-print("錦")
-print(hex(ord(code2)))  # 輸出字元'錦'的Unicode(16進位)碼值
-code3 = "魁"
-print("魁")
-print(hex(ord(code3)))  # 輸出字元'魁'的Unicode(16進位)碼值
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -8504,12 +8308,6 @@ print("------------------------------------------------------------")  # 60個
 print("os sys 搬出")
 print("------------------------------------------------------------")  # 60個
 
-print("取得系統的預設編碼")
-cc = sys.getdefaultencoding()
-print(cc)
-
-print("------------------------------------------------------------")  # 60個
-
 import sys
 
 # 匯入 指定目錄下的模組
@@ -9101,35 +8899,6 @@ print("現在時間 :", now)
 
 print("------------------------------------------------------------")  # 60個
 
-#字串轉數值,10進位整數
-print(int('13',10))
-#字串轉數值,2進位整數
-print(int('1001',2))
-#字串轉數值,浮點數
-print(float('3.14'))
-
-#ord()是將字元轉成ASCII碼
-#chr()是將ASCII碼轉成字元
-#ord()和chr()互為反函數
-print(chr(ord('A')))
-print(ord(chr(65)))
-
-
-#i的初始值為A字元的ASCII碼(65)，終止值小於Z字元的ASCII碼(90)+1，遞增值為1
-for i in range(ord("A"),ord("Z")+1,1):
-    print(chr(i), end = '')
-  
-#bin()回傳參數的二進位值
-##輸出結果數字前面0b代表二進位(binary)
-print(bin(10))
-#oct()回傳參數的八進位值
-##輸出結果數字前面0o代表八進位(octal)
-print(oct(10))
-#hex()回傳參數的十六進位值
-##輸出結果數字前面0x代表十六進位(hexdecimal)
-print(hex(10))
-
-
 ##預設是取到整數位，根據小數第一位(如果是5要看個位數，奇進偶捨)判別
 print("==Test2==")
 print(round(3.5))
@@ -9248,15 +9017,6 @@ for i in range(4):
 
 print("------------------------------------------------------------")  # 60個
 
-#chap5-06a
-import sys
-#查看搜尋模組套件的路徑優先順序
-for path in sys.path:
-  print(path)
-
-print("------------------------------------------------------------")  # 60個
-
-#chap5-06b
 file1=open("handgame.py","w", encoding = 'UTF-8') #打開檔案，建立handgame.py
 file1.write("import random\n") 
 file1.write("handgesture=['剪刀','石頭','布']\n") 
@@ -9506,14 +9266,359 @@ print(cc)
 
 print("------------------------------------------------------------")  # 60個
 
-
-
-
 print('積分')
 from sympy import symbols, integrate, sqrt
 x = symbols("x")
 cc = integrate(sqrt(1-x**2), (x, -1, 1)) * 2
 print(cc)
+
+print("------------------------------------------------------------")  # 60個
+
+import sys
+
+print('目前python程式所在位置 sys.executable :')
+print(sys.executable)
+
+print("sys.version :")
+print(sys.version)
+print("sys.version_info :")
+print(sys.version_info)
+print("sys.platform :")
+print(sys.platform)
+print('sys.hexversion')
+print(sys.hexversion)
+
+py3 = sys.version_info >= (3, 0)
+print(py3)
+
+if sys.hexversion >= 0x02020000:
+    print('aaaaa')
+
+version_suffix = "%r%r" % sys.version_info[:2]
+print(version_suffix)
+print("Python%s.dll" % version_suffix)
+
+from _msi import *
+import os, string, re, sys
+
+AMD64 = "AMD64" in sys.version
+Itanium = "Itanium" in sys.version
+Win64 = AMD64 or Itanium
+
+print(AMD64)
+print(Itanium)
+print(Win64)
+
+print("取得系統的預設編碼")
+cc = sys.getdefaultencoding()
+print(cc)
+
+print("------------------------------------------------------------")  # 60個
+
+import sys
+#查看搜尋模組套件的路徑優先順序
+for path in sys.path:
+  print(path)
+
+print("------------------------------------------------------------")  # 60個
+
+PYTHONLIB = 'libpython'+sys.version[:3]+'.a'
+PC_PYTHONLIB = 'Python'+sys.version[0]+sys.version[2]+'.dll'
+NM = 'nm -p -g %s'                      # For Linux, use "nm -g %s"
+
+print(PYTHONLIB)
+print(PC_PYTHONLIB)
+print(NM)
+
+print("sys.getwindowsversion()")
+print(sys.getwindowsversion())
+print("sys.getwindowsversion()[:2]")
+print(sys.getwindowsversion()[:2])
+if sys.getwindowsversion()[:2] >= (6, 0):
+    print('bbbbb')
+
+if sys.getwindowsversion()[3] >= 2:
+    print('ccccc')
+
+print("sys.builtin_module_names")
+print(sys.builtin_module_names)
+
+if 'ce' in sys.builtin_module_names:
+    defpath = '\\Windows'
+
+
+print(type(sys.path))
+print(sys.path)
+
+
+import sys
+import numpy
+import pandas as pd
+#import sklearn
+import matplotlib
+#import keras
+print("Python version:", sys.version)
+print("Numpy version:", numpy.version.version)
+print("Pandas version:", pd.__version__)
+#print("Scikit-learn version:", sklearn.__version__)
+print("Matplotlib version:", matplotlib.__version__)
+#print("Keras version:", keras.__version__)
+
+'''
+
+print("2 進位整數運算")
+x = 0b1101  # 這是2進位整數
+print(x)  # 列出10進位的結果
+y = 13  # 這是10進位整數
+print(bin(y))  # 列出轉換成2進位的結果
+print("8 進位整數運算")
+x = 0o57  # 這是8進位整數
+print(x)  # 列出10進位的結果
+y = 47  # 這是10進位整數
+print(oct(y))  # 列出轉換成8進位的結果
+print("16 進位整數運算")
+x = 0x5D  # 這是16進位整數
+print(x)  # 列出10進位的結果
+
+print('十進位 轉 十六進位')
+y = 65535  # 10進位
+print(hex(y))  # 十進位 轉 十六進位
+
+
+'''
+#hex()回傳參數的十六進位值
+##輸出結果數字前面0x代表十六進位(hexdecimal)
+print(hex(10))
+
+x = 0x5D  # 這是16進為整數
+print(x)  # 列出10進位的結果
+
+y = 93  # 這是10進為整數
+# print(hex(y))  # 列出轉換成16進位的結果  fail in sugar
+
+
+print("十六進位", hex(number))
+
+y = 93  # 這是10進位整數
+print(hex(y))  # 列出轉換成16進位的結果
+
+
+for i in range(32):
+    print(hex(i))
+
+
+'''
+
+sys.exit()
+
+
+#字串轉數值,10進位整數
+print(int('13',10))
+#字串轉數值,2進位整數
+print(int('1001',2))
+#字串轉數值,浮點數
+print(float('3.14'))
+
+#ord()是將字元轉成ASCII碼
+#chr()是將ASCII碼轉成字元
+#ord()和chr()互為反函數
+print(chr(ord('A')))
+print(ord(chr(65)))
+
+
+#i的初始值為A字元的ASCII碼(65)，終止值小於Z字元的ASCII碼(90)+1，遞增值為1
+for i in range(ord("A"),ord("Z")+1,1):
+    print(chr(i), end = '')
+  
+#bin()回傳參數的二進位值
+##輸出結果數字前面0b代表二進位(binary)
+print(bin(10))
+#oct()回傳參數的八進位值
+##輸出結果數字前面0o代表八進位(octal)
+print(oct(10))
+
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+x1 = "22"
+x2 = "33"
+x3 = x1 + x2
+print("type(x3) = ", type(x3))
+print("x3 = ", x3)  # 列印字串相加
+x4 = int(x1) + int(x2)
+print("type(x4) = ", type(x4))
+print("x4 = ", x4)  # 列印整數相加
+x5 = "1100"
+print("2進位  '1100' = ", int(x5, 2))
+print("8進位  '22'   = ", int(x1, 8))
+print("16進位 '22'   = ", int(x1, 16))
+print("16進位 '5A'   = ", int("5A", 16))
+
+print("------------------------------------------------------------")  # 60個
+
+
+x1 = 97
+x2 = chr(x1)
+print(x2)  # 輸出數值97的字元
+x3 = ord(x2)
+print(x3)  # 輸出字元x3的Unicode(10進位)碼值
+x4 = "魁"
+print(hex(ord(x4)))  # 輸出字元'魁'的Unicode(16進位)碼值
+
+print("------------------------------------------------------------")  # 60個
+
+x = 100
+print("100的16進位 = %x\n100的 8進位 = %o" % (x, x))
+
+print("------------------------------------------------------------")  # 60個
+
+x1 = 97
+x2 = chr(x1)
+print(x2)  # 輸出數值97的字元
+x3 = ord(x2)
+print(x3)  # 輸出字元x3的Unicode碼值
+x4 = "魁"
+print(ord(x4))  # 輸出字元'魁'的Unicode碼值
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+x = 0b1101  # 這是2進為整數
+print(x)  # 列出10進位的結果
+y = 13  # 這是10進為整數
+print(bin(y))  # 列出轉換成2進位的結果
+
+print("------------------------------------------------------------")  # 60個
+
+x = 100
+print("100的16進位 = %x\n100的 8進位 = %o" % (x, x))
+
+print("------------------------------------------------------------")  # 60個
+
+print("int(9.6)=", int(9.6))
+print("bin(20)=", bin(20))
+
+# print('hex(66)=',hex(66))  fail in sugar
+print("oct(135)=", oct(135))
+print("float(70)=", float(70))
+print("abs(-3.9)=", abs(-3.9))
+print("chr(69)=", chr(69))
+print("ord('%s')=%d" % ("D", ord("D")))
+print("str(543)=", str(543))
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+st = 10
+sp = 20
+
+for number in range(st, sp):  # Main program loop.
+    # Convert to hexadecimal/binary and remove the prefix:
+    hexNumber = hex(number)[2:].upper()
+    binNumber = bin(number)[2:]
+
+    print('DEC:', number, '   HEX:', hexNumber, '   BIN:', binNumber)
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print('進位轉換')
+
+number = 255
+print("型別：", type(number))
+print("二進位：", bin(number))
+print("八進位", oct(number))
+
+print("10進位：", number)
+
+# 配合format函式去除前綴字元
+print("二進位：", format(number, "b"))
+print("八進位：", format(number, "o"))
+print("十六進位：", format(number, "x"))
+
+print("------------------------------------------------------------")  # 60個
+
+x1 = "22"
+x2 = "33"
+x3 = x1 + x2
+x4 = int(x1) + int(x2)
+x5 = "11111111"
+print("2進位  '11111111' = ", int(x5, 2))
+print("8進位  '22'   = ", int(x1, 8))
+print("16進位 '22'   = ", int(x1, 16))
+print("16進位 'FF'   = ", int("FF", 16))
+
+print("------------------------------------------------------------")  # 60個
+
+print("2 進位整數運算")
+x = 0b1101  # 這是2進位整數
+print(x)  # 列出10進位的結果
+y = 13  # 這是10進位整數
+print(bin(y))  # 列出轉換成2進位的結果
+print("8 進位整數運算")
+x = 0o57  # 這是8進位整數
+print(x)  # 列出10進位的結果
+y = 47  # 這是10進位整數
+print(oct(y))  # 列出轉換成8進位的結果
+print("16 進位整數運算")
+x = 0x5D  # 這是16進位整數
+print(x)  # 列出10進位的結果
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+x = 100
+print("100的16進位 = %x\n100的 8進位 = %o" % (x, x))
+
+print("------------------------------------------------------------")  # 60個
+
+# 將 16 進位數轉為 10 進位
+
+def hex_to_dec():
+    hexnum = "ff"
+    decnum = 0
+
+    for power, digit in enumerate(reversed(hexnum)):
+        if digit.isdigit():
+            digit_num = int(digit)
+        else:
+            digit_num = ord(digit.upper()) - ord("A") + 10
+        decnum += digit_num * (16**power)
+
+    print("十進位結果:", decnum)
+
+
+hex_to_dec()
+
+print("------------------------------------------------------------")  # 60個
+
+print("{:#b}".format(12345))  # 顯示0b11000000111001
+print("{:#o}".format(12345))  # 顯示0o30071
+print("{:#x}".format(12345))  # 顯示0x3039
+
+print("------------------------------------------------------------")  # 60個
+
+
+code1 = "洪"
+print("洪")
+print(hex(ord(code1)))  # 輸出字元'洪'的Unicode(16進位)碼值
+code2 = "錦"
+print("錦")
+print(hex(ord(code2)))  # 輸出字元'錦'的Unicode(16進位)碼值
+code3 = "魁"
+print("魁")
+print(hex(ord(code3)))  # 輸出字元'魁'的Unicode(16進位)碼值
+
+
+print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
