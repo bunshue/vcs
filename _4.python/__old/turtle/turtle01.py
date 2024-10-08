@@ -2209,6 +2209,721 @@ print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
 
+def draw_spiral_matrix(size):
+    # 初始化海龜
+    turtle.speed(0)
+    turtle.color("black")
+    turtle.penup()
+    turtle.goto(-size//2, size//2)
+    turtle.pendown()
+
+    # 繪製螺旋矩陣
+    for i in range(size//2):
+        for direction in [(1, 0), (0, -1), (-1, 0), (0, 1)]:
+            dx, dy = direction
+            for j in range(i*2 + 1):
+                turtle.forward(20)
+                turtle.left(90)
+                if j == i:
+                    turtle.penup()
+                    turtle.forward(20)
+                    turtle.pendown()
+            turtle.penup()
+            turtle.goto(turtle.xcor()+dx*20, turtle.ycor()+dy*20)
+            turtle.pendown()
+
+    # 隱藏海龜
+    turtle.hideturtle()
+
+# 畫出螺旋矩陣
+draw_spiral_matrix(10)
+turtle.done()
+
+print("------------------------------------------------------------")  # 60個
+
+def draw_hexagon_spiral(size):
+    # 初始化海龜
+    turtle.speed(0)
+    turtle.color("black")
+    turtle.penup()
+    turtle.goto(0, 0)
+    turtle.pendown()
+
+    # 繪製六邊形螺旋
+    side_length = 10
+    for i in range(size):
+        for j in range(6):
+            turtle.forward(side_length*(i+1))
+            turtle.right(60)
+        turtle.right(60)
+
+    # 隱藏海龜
+    turtle.hideturtle()
+
+# 畫出六邊形螺旋
+draw_hexagon_spiral(10)
+turtle.done()
+
+print("------------------------------------------------------------")  # 60個
+
+wd = turtle.Screen()  #建立名為wd的screen實體
+pen = turtle.Turtle()    # 建立一個名為tu的海龜turtle實體
+pen.forward(50)   #tu往前50pixels
+pen.right(90)  #tu往右轉90度
+pen.forward(150)   #tu往前150pixels
+wd.exitonclick()      #在視窗任一位置按下滑鼠左鍵關閉視窗
+
+print("------------------------------------------------------------")  # 60個
+
+from time import perf_counter
+import statistics
+
+turtle.setup(1200, 600)
+screen = turtle.Screen()
+print(type(screen))
+print(screen)
+
+ANGLES = (0, 3.695220532)  # 直線和斜線的角度
+NUM_RUNS = 20
+SPEED = 0
+
+for angle in ANGLES:
+    times = []
+    for _ in range(NUM_RUNS):
+        line = turtle.Turtle()
+        line.speed(SPEED)  
+        line.hideturtle()
+        line.penup()
+        line.lt(angle)
+        line.setpos(-470, 0)
+        line.pendown()
+        line.showturtle()
+        start_time = perf_counter()
+        line.fd(962)
+        end_time = perf_counter()
+        times.append(end_time - start_time)
+        
+    line_ave = statistics.mean(times)
+    print("Angle {} degrees: average time for {} runs at speed {} = {:.5f}"
+          .format(angle, NUM_RUNS, SPEED, line_ave))
+
+print("------------------------------------------------------------")  # 60個
+
+# 繪製池塘
+pond = turtle.Screen()
+pond.setup(600, 400)
+pond.bgcolor('light blue')
+pond.title("Yertle's Pond")
+
+# 繪製小島
+mud = turtle.Turtle('circle')
+mud.shapesize(stretch_wid=5, stretch_len=5, outline=None)
+mud.pencolor('tan')
+mud.fillcolor('tan')
+
+# 繪製樹幹
+SIDE = 80
+ANGLE = 90
+log = turtle.Turtle()
+log.hideturtle()
+log.pencolor('peru')
+log.fillcolor('peru')
+log.speed(0) # 最快的移動速度
+log.penup()
+log.setpos(215, -30)
+log.lt(45)
+log.begin_fill()
+for _ in range(2):
+    log.fd(SIDE)
+    log.lt(ANGLE)
+    log.fd(SIDE / 4)
+    log.lt(ANGLE)
+log.end_fill()
+
+# 繪製樹洞
+knot = turtle.Turtle()
+knot.hideturtle()
+knot.speed(0) # 最快的移動速度
+knot.penup()
+knot.setpos(245, 5)
+knot.begin_fill()
+knot.circle(5)
+knot.end_fill()
+
+# 繪製鱷龜 Yertle
+yertle = turtle.Turtle('turtle')
+yertle.color('green')
+yertle.speed(1)  # 最慢的移動速度
+yertle.fd(200)
+yertle.lt(180)
+yertle.fd(200)
+yertle.rt(176)
+yertle.fd(205)
+
+print("------------------------------------------------------------")  # 60個
+
+wd = turtle.Screen()  #建立turtle screen實體
+wd.setup(width=.5, height=200) #視窗大小與位置
+wd.title("turtle繪圖真有趣，簡單又易學")
+tu = turtle.Turtle()    # 建立海龜turtle實體
+tu.color('green')
+tu.pensize(5)
+tu.penup()
+tu.setx(-100)
+tu.pendown()
+for x in range(10):
+	tu.circle(30)
+	tu.right(360/10)
+
+tu2 = turtle.Turtle()    # 建立第二個海龜名為tu2
+tu2.color('#FF00FF', '#55CCBB')
+tu2.penup() 
+tu2.goto(120,-120)
+tu2.pendown()
+tu2.begin_fill()
+for x in range(10):
+	tu2.forward(100)
+	tu2.left(720/5)
+tu2.end_fill()  
+
+wd.exitonclick()
+turtle.done()
+
+print("------------------------------------------------------------")  # 60個
+
+wd = turtle.Screen()  #建立turtle screen實體
+wd.setup(width=.3, height=200, startx=None, starty=None) #視窗大小與位置
+wd.bgcolor("green")  #設定底色
+pen = turtle.Turtle()    # 建立一個海龜turtle實體
+pen.shape("arrow")     #海龜樣式
+pen.color("yellow","#ff00ff")  #海龜線條顏色與填色顏色
+pen.pensize(10)   #線條寬度
+pen.speed(3)     #海龜繪圖速度
+pen.forward(50)   
+pen.right(90) 
+pen.forward(50)
+pen.right(90)
+pen.forward(50)
+wd.exitonclick()      
+turtle.done() #結束tutle繪圖
+
+print("------------------------------------------------------------")  # 60個
+
+# Draw chess board borders
+turtle.pensize(3) # Set pen thickness to 3 pixels
+turtle.penup() # Pull the pen up
+turtle.goto(-120, -120)
+turtle.pendown() # Pull the pen down
+turtle.color("red")
+
+for i in range(4):
+    turtle.forward(240) # Draw a line
+    turtle.left(90) # Turn left 90 degrees
+
+# Draw chess board inside
+turtle.color("black")
+for j in range(-120, 90, 60): 
+    for i in range(-120, 120, 60):
+        turtle.penup()
+        turtle.goto(i, j)
+        turtle.pendown()
+
+       # Draw a small rectangle        
+        turtle.begin_fill()
+        for k in range(4):
+            turtle.forward(30) # Draw a line
+            turtle.left(90) # Turn left 90 degrees
+        turtle.end_fill()
+
+for j in range(-90, 120, 60): 
+    for i in range(-90, 120, 60):
+        turtle.penup()
+        turtle.goto(i, j)
+        turtle.pendown()
+
+       # Draw a small rectangle        
+        turtle.begin_fill()
+        for k in range(4):
+            turtle.forward(30) # Draw a line
+            turtle.left(90) # Turn left 90 degrees
+        turtle.end_fill()
+
+turtle.hideturtle()
+
+turtle.done() 
+
+print("------------------------------------------------------------")  # 60個
+
+turtle.pensize(3) # Set pen thickness to 3 pixels
+turtle.penup() # Pull the pen up
+turtle.goto(-200, -50)
+turtle.pendown() # Pull the pen down
+turtle.begin_fill() # Begin to fill color in a shape
+turtle.color("red")
+turtle.circle(40, steps = 3) # Draw a triangle
+turtle.end_fill() # Fill the shape
+
+turtle.penup()
+turtle.goto(-100, -50)
+turtle.pendown()
+turtle.begin_fill() # Begin to fill color in a shape
+turtle.color("blue")
+turtle.circle(40, steps = 4) # Draw a square
+turtle.end_fill() # Fill the shape
+
+turtle.penup()
+turtle.goto(0, -50)
+turtle.pendown()
+turtle.begin_fill() # Begin to fill color in a shape
+turtle.color("green")
+turtle.circle(40, steps = 5) # Draw a pentagon
+turtle.end_fill() # Fill the shape
+
+turtle.penup()
+turtle.goto(100, -50)
+turtle.pendown()
+turtle.begin_fill() # Begin to fill color in a shape
+turtle.color("yellow")
+turtle.circle(40, steps = 6) # Draw a hexagon
+turtle.end_fill() # Fill the shape
+
+turtle.penup()
+turtle.goto(200, -50)
+turtle.pendown()
+turtle.begin_fill() # Begin to fill color in a shape
+turtle.color("purple")
+turtle.circle(40) # Draw a circle
+turtle.end_fill() # Fill the shape
+
+turtle.color("green")
+turtle.penup()
+turtle.goto(-100, 50)
+turtle.pendown()
+turtle.write("Cool Colorful Shapes", 
+  font = ("Times", 18, "bold"))
+turtle.hideturtle()
+
+turtle.done() 
+
+print("------------------------------------------------------------")  # 60個
+
+# Prompt the user for inputing two points
+x1, y1 = eval(input("Enter x1 and y1 for Point 1: "))
+x2, y2 = eval(input("Enter x2 and y2 for Point 2: "))
+              
+# Compute the distance
+distance = ((x1 - x2) ** 2 + (y1 - y2) ** 2) ** 0.5
+
+# Display two points and the connecting line
+turtle.penup()
+turtle.goto(x1, y1) # Move to (x1, y1)
+turtle.pendown()
+turtle.write("Point 1") 
+turtle.goto(x2, y2) # draw a line to (x2, y2)
+turtle.write("Point 2")
+
+# Move to the center point of the line
+turtle.penup()
+turtle.goto((x1 + x2) / 2, (y1 + y2) / 2) 
+turtle.write(distance)
+
+turtle.done() 
+
+print("------------------------------------------------------------")  # 60個
+
+turtle.circle(50)
+
+turtle.done() 
+
+print("------------------------------------------------------------")  # 60個
+
+turtle.color("red", "yellow")
+
+turtle.backward(100)
+turtle.begin_fill()
+for i in range(22):
+    turtle.forward(200)
+    turtle.left(125)
+turtle.end_fill()
+turtle.done()
+
+print("------------------------------------------------------------")  # 60個
+
+turtle.ondrag(turtle.goto)
+
+turtle.done() 
+
+print("------------------------------------------------------------")  # 60個
+
+# HandleMouseClick
+
+def displayMousePoint(x, y):
+    turtle.write("Mouse click at (" + str(x) + ", " +
+        str(y) + ")")
+
+def displayCircle(x, y):
+    turtle.circle(50)
+
+def main():
+    # Bind handlers with the mouse-click event
+    turtle.onclick(displayMousePoint)
+    turtle.onclick(displayCircle, add = True)
+ 
+    turtle.done() 
+
+main()
+
+print("------------------------------------------------------------")  # 60個
+
+# HandleMouseRelease.py
+
+def displaySqaure(x, y):
+    turtle.penup()
+    turtle.goto(x - 100, y - 100)
+    turtle.pendown()
+    turtle.begin_fill()
+    turtle.circle(50, steps = 4)
+    turtle.end_fill()
+
+def main(): 
+    # Bind a handler with the mouse-release event
+    turtle.onrelease(displaySqaure)
+ 
+    turtle.done() 
+
+main()
+
+print("------------------------------------------------------------")  # 60個
+
+# Histogram.py
+
+def main():
+    # Create a list of numbers 
+    list = [32, 23, 45, 34, 4, 90, 23, 25]
+    drawHistogram(list)
+
+    turtle.done() 
+
+def drawHistogram(list):
+    WIDTH = 400 # Width of the histogram
+    HEIGHT = 300 # Height of the histogram
+
+    # Draw a base line
+    turtle.penup()
+    turtle.goto(-WIDTH / 2, -HEIGHT / 2)
+    turtle.pendown()
+    turtle.forward(WIDTH)
+
+    widthOfBar = WIDTH / len(list) # Width of each bar
+
+    for i in range(len(list)):     
+        height = list[i] * HEIGHT / max(list) 
+        drawABar(-WIDTH / 2 + i * widthOfBar, 
+            -HEIGHT / 2, widthOfBar, height)     
+
+    turtle.hideturtle()
+
+def drawABar(i, j, widthOfBar, height):
+    turtle.penup()
+    turtle.goto(i, j)
+    turtle.setheading(90) # Set orientation to north
+    turtle.pendown()
+
+    # turtle.left(90) # Turn left 90 degrees
+    turtle.forward(height) # Draw a vertical line
+    turtle.right(90) # Turn right 90 degrees
+    turtle.forward(widthOfBar) # Draw a horizontal line
+    turtle.right(90) # Turn right 90 degrees
+    turtle.forward(height) # Draw a vertical line
+
+main()
+
+print("------------------------------------------------------------")  # 60個
+
+# OlympicSymbol.py
+
+turtle.color("blue")
+turtle.penup()
+turtle.goto(-110, -25)
+turtle.pendown()
+turtle.circle(45)
+
+turtle.color("black")
+turtle.penup()
+turtle.goto(0, -25)
+turtle.pendown()
+turtle.circle(45)
+
+turtle.color("red")
+turtle.penup()
+turtle.goto(110, -25)
+turtle.pendown()
+turtle.circle(45)
+
+turtle.color("yellow")
+turtle.penup()
+turtle.goto(-55, -75)
+turtle.pendown()
+turtle.circle(45)
+
+turtle.color("green")
+turtle.penup()
+turtle.goto(55, -75)
+turtle.pendown()
+turtle.circle(45)
+
+turtle.done() 
+
+print("------------------------------------------------------------")  # 60個
+
+# PointInCircle.py
+
+x1, y1 = eval(input("Enter the center of a circle x, y: "))
+radius = eval(input("Enter the radius of the circle: "))
+x2, y2 = eval(input("Enter a point x, y: "))
+
+# Draw the circle
+turtle.penup() # Pull the pen up
+turtle.goto(x1, y1 - radius)
+turtle.pendown() # Pull the pen down
+turtle.circle(radius)
+
+# Draw the point
+turtle.penup() # Pull the pen up
+turtle.goto(x2, y2)
+turtle.pendown() # Pull the pen down
+turtle.begin_fill() # Begin to fill color in a shape
+turtle.color("red")
+turtle.circle(3) 
+turtle.end_fill() # Fill the shape
+
+# Display the status
+turtle.penup() # Pull the pen up
+turtle.goto(x1 - 70, y1 - radius - 20)
+turtle.pendown() 
+
+d = ((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1)) ** 0.5
+if d <= radius:
+    turtle.write("The point is inside the circle") 
+else:
+    turtle.write("The point is outside the circle") 
+
+turtle.hideturtle()
+
+turtle.done() 
+
+print("------------------------------------------------------------")  # 60個
+
+# RandomWalk.py
+
+from random import randint
+
+turtle.speed(1) # Set turtle speed to slowest
+
+# Draw 16 by 16 lattices
+turtle.color("gray") # Color for lattice
+x = -80 
+for y in range(-80, 80 + 1, 10):
+    turtle.penup()
+    turtle.goto(x, y) # Draw a horizontal line
+    turtle.pendown()
+    turtle.forward(160)
+
+y = 80
+turtle.right(90)
+for x in range(-80, 80 + 1, 10):
+    turtle.penup()
+    turtle.goto(x, y) # Draw a vertical line
+    turtle.pendown()
+    turtle.forward(160)
+    
+turtle.pensize(3)
+turtle.color("red")
+
+turtle.penup()
+turtle.goto(0, 0) # Go to the center
+turtle.pendown()
+
+x = y = 0 # Current pen location at the center of lattice
+while abs(x) < 80 and abs(y) < 80:    
+    r = randint(0, 3)
+    if r == 0:
+        x += 10  # Walk east
+        turtle.setheading(0)
+        turtle.forward(10)      
+    elif r == 1:
+        y -= 10 # Walk south
+        turtle.setheading(270)
+        turtle.forward(10)      
+    elif r == 2:
+        x -= 10 # Walk west
+        turtle.setheading(180)
+        turtle.forward(10)      
+    elif r == 3:
+        y += 10 # Walk north
+        turtle.setheading(90)
+        turtle.forward(10)      
+
+turtle.done() 
+
+print("------------------------------------------------------------")  # 60個
+
+# SimpleShapes.py
+
+turtle.pensize(3)
+turtle.penup()
+turtle.goto(-200, -50)
+turtle.pendown()
+turtle.circle(40, steps = 3) # Draw a triangle
+
+turtle.penup()
+turtle.goto(-100, -50)
+turtle.pendown()
+turtle.circle(40, steps = 4) # Draw a square
+
+turtle.penup()
+turtle.goto(0, -50)
+turtle.pendown()
+turtle.circle(40, steps = 5) # Draw a pentagon
+
+turtle.penup()
+turtle.goto(100, -50)
+turtle.pendown()
+turtle.circle(40, steps = 6) # Draw a hexagon
+
+turtle.penup()
+turtle.goto(200, -50)
+turtle.pendown()
+turtle.circle(40) # Draw a circle
+
+turtle.done() 
+
+print("------------------------------------------------------------")  # 60個
+
+# TwoChessBoard.py
+
+def main():
+    drawChessboard(-260, -20, -120, 120) # Draw first chess board
+    drawChessboard(20, 260, -120, 120) # Draw second chess board
+
+    turtle.hideturtle()
+    turtle.done() 
+
+# Draw one chess board
+def drawChessboard(startx, endx, starty, endy):
+    # Draw chess board borders
+    turtle.pensize(3) # Set pen thickness to 3 pixels
+    turtle.penup() # Pull the pen up
+    turtle.goto(startx, starty)
+    turtle.pendown() # Pull the pen down
+    turtle.color("red")
+
+    for i in range(4):
+        turtle.forward(240) # Draw a line
+        turtle.left(90) # Turn left 90 degrees
+
+    # Draw chess board inside
+    drawMultipleRectangle(startx, endx, starty, endy)
+    drawMultipleRectangle(startx + 30, endx, starty + 30, endy)
+
+# Draw multiple rectangles
+def drawMultipleRectangle(startx, endx, starty, endy):
+    turtle.color("black")
+    for j in range(starty, endy, 60): 
+        for i in range(startx, endx, 60):
+            fillRectangle(i, j)
+
+# Draw a small rectangle  
+def fillRectangle(i, j):      
+    turtle.penup()
+    turtle.goto(i, j)
+    turtle.pendown()
+    turtle.begin_fill()
+    for k in range(4):
+        turtle.forward(30) # Draw a line
+        turtle.left(90) # Turn left 90 degrees
+    turtle.end_fill()
+
+main()
+
+print("------------------------------------------------------------")  # 60個
+
+# UseCustomTurtleFunctions.py
+
+from UsefulTurtleFunctions import *
+
+# Draw a line from (-50, -50) to (50, 50)
+drawLine(-50, -50, 50, 50)
+
+# Write a text at (-50, -60)
+writeText("Testing useful Turtle functions", -50, -60)
+
+# Draw a point at (0, 0)
+drawPoint(0, 0)
+
+# Draw a circle at (0, 0) with radius 80
+drawCircle(0, 0, 80)
+    
+# Draw a rectangle at (0, 0) with width 60 and height 40
+drawRectangle(0, 0, 60, 40)
+
+turtle.hideturtle()
+turtle.done() 
+
+print("------------------------------------------------------------")  # 60個
+
+# UsefulTurtleFunctions.py
+
+# Draw a line from (x1, y1) to (x2, y2)
+def drawLine(x1, y1, x2, y2):
+    turtle.penup()
+    turtle.goto(x1, y1)
+    turtle.pendown()
+    turtle.goto(x2, y2)
+
+# Write a text at the specified location (x, y)
+def writeText(s, x, y): 
+    turtle.penup() # Pull the pen up
+    turtle.goto(x, y)
+    turtle.pendown() # Pull the pen down
+    turtle.write(s) # Write a string
+
+# Draw a point at the specified location (x, y)
+def drawPoint(x, y): 
+    turtle.penup() # Pull the pen up
+    turtle.goto(x, y)
+    turtle.pendown() # Pull the pen down
+    turtle.begin_fill() # Begin to fill color in a shape
+    turtle.circle(3) 
+    turtle.end_fill() # Fill the shape
+
+# Draw a circle at centered at (x, y) with the specified radius
+def drawCircle(x, y, radius): 
+    turtle.penup() # Pull the pen up
+    turtle.goto(x, y - radius)
+    turtle.pendown() # Pull the pen down
+    turtle.circle(radius) 
+    
+# Draw a rectangle at (x, y) with the specified width and height
+def drawRectangle(x, y, width, height): 
+    turtle.penup() # Pull the pen up
+    turtle.goto(x + width / 2, y + height / 2)
+    turtle.pendown() # Pull the pen down
+    turtle.right(90)
+    turtle.forward(height)
+    turtle.right(90)
+    turtle.forward(width)
+    turtle.right(90)
+    turtle.forward(height)
+    turtle.right(90)
+    turtle.forward(width)
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
 print("------------------------------------------------------------")  # 60個
 
 
@@ -2230,3 +2945,4 @@ turtle.bgcolor("Skyblue")  # 設定背景色
 turtle.bgcolor("Gray21")  # 背景為深灰
 turtle.bgcolor("#363636")  # 設背景為深灰
 turtle.bgcolor("#BEBEBE")  # 背景為灰色 RGB(190, 190, 190)
+
