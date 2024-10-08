@@ -42,10 +42,21 @@ max：最大值
 3. 修改
 4. 合併
 
+print("------------------------------------------------------------")  # 60個
+print("1. 建立 df 的方法")
+print("------------------------------------------------------------")  # 60個
 
+print("------------------------------------------------------------")  # 60個
+print("2. df 的 Info 屬性 與 方法")
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+print("3. 建立 df 的方法")
+print("------------------------------------------------------------")  # 60個
 
 
 """
+
 
 print("------------------------------------------------------------")  # 60個
 
@@ -76,24 +87,6 @@ ssl._create_default_https_context = ssl._create_unverified_context
 
 print("------------------------------------------------------------")  # 60個
 
-print("目前 Pandas 版本 :")
-cc = pd.__version__
-print(cc)
-
-# many
-# pd.show_versions()
-
-print("------------------------------------------------------------")  # 60個
-
-print("建立df, 一維串列 轉 df")
-
-datas = ["唐三藏", "孫悟空", "豬八戒", "沙悟淨"]
-df = pd.DataFrame(datas)
-print(df)
-
-print("------------------------------------------------------------")  # 60個
-
-
 def make_data_frame():
     # print("建立df, 二維串列4X5 轉 df, 加上欄名與index")
     datas = [
@@ -108,9 +101,155 @@ def make_data_frame():
     df = pd.DataFrame(np.array(datas).T, columns=columns, index=index)
     return df
 
+print("------------------------------------------------------------")  # 60個
+
+print("目前 Pandas 版本 :")
+cc = pd.__version__
+print(cc)
+
+# many
+# pd.show_versions()
+
+print("------------------------------------------------------------")  # 60個
+print("1. 建立 df 的方法")
+print("------------------------------------------------------------")  # 60個
+
+print("建立df, 一維串列 轉 df")
+
+datas = ["唐三藏", "孫悟空", "豬八戒", "沙悟淨"]
+df = pd.DataFrame(datas)
+print(df)
+
+print("------------------------------------------------------------")  # 60個
+
+print("建立df, 字典 轉 df")
+
+datas = {
+    "姓名": ["唐三藏", "孫悟空", "豬八戒", "沙悟淨"],
+    "國文": [92, 81, 81, 92],
+    "英文": [89, 79, 82, 72],
+    "數學": [71, 92, 89, 95],
+    "社會": [88, 89, 98, 77],
+    "自然": [95, 74, 89, 85],
+}
+df = pd.DataFrame(datas)
+print(df)
+
+print("------------------------------------------------------------")  # 60個
+
+print("建立df, Series 轉 字典 轉 df")
+
+s1 = pd.Series(["唐三藏", "孫悟空", "豬八戒", "沙悟淨"])
+s2 = pd.Series([65, 90, 81, 79])  # 國文成績
+s3 = pd.Series([92, 72, 85, 53])  # 英文成績
+datas = {"姓名": s1, "國文": s2, "英文": s3}
+
+print("字典 轉 df")
+df = pd.DataFrame(datas)
+print(df)
+
+print("------------------------------------------------------------")  # 60個
+
+print("建立df, 使用Series 合併4")
+
+index = ["國文", "英文", "數學", "社會", "自然"]
+
+datas1 = [92, 89, 71, 88, 95]  # 唐三藏 的成績
+datas2 = [81, 79, 92, 89, 74]  # 孫悟空 的成績
+datas3 = [81, 82, 89, 98, 89]  # 豬八戒 的成績
+datas4 = [92, 72, 95, 77, 85]  # 沙悟淨 的成績
+
+series1 = pd.Series(datas1, index=index)
+series2 = pd.Series(datas2, index=index)
+series3 = pd.Series(datas3, index=index)
+series4 = pd.Series(datas4, index=index)
+
+print("5個Series組成一個df")
+df = pd.DataFrame([series1, series2, series3, series4])
+print(df)
+
+index = ["唐三藏", "孫悟空", "豬八戒", "沙悟淨"]
+df.index = index
+print(df)
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("2. df 的 Info 屬性 與 方法")
+print("------------------------------------------------------------")  # 60個
 
 df = make_data_frame()
 print(df)
+
+
+"""df資訊
+
+print('檢視前幾行')
+cc = df.head()
+print(cc)
+
+print('檢視前2行')
+cc = df.head(2)
+print(cc)
+
+print('檢視後2行')
+cc = df.tail(2)
+print(cc)
+
+print('索引index')
+cc = df.index
+print(cc)
+
+print('欄名columns')
+cc = df.columns
+print(cc)
+
+print('顯示values')
+print(df.values)
+
+print(df.info())
+
+print(df.values)
+print(df.values[2])
+print(df.values[1][2])
+print(len(df))
+print(df.shape)
+
+print('df使用記憶體大小')
+cc = df.info(memory_usage='deep')
+print(cc)
+
+print('檢查df內是否有重複資料')
+print(df.duplicated())
+
+print("df之大小")
+M, N = df.shape
+print(df.shape)
+print('df之大小', M, 'X',N)
+
+print("顯示df之describe(統計資料)")
+print(df.describe())
+
+print(df.count())
+print(df.mean())
+print(df.std())
+print(df.min())
+print(df.median())
+print(df.max())
+
+"""
+
+
+
+
+
 
 # 對 DataFrame 的值做運算
 
@@ -276,7 +415,6 @@ df = df.loc[[1, 2], ["國文", "英文"]]
 print(df)
 
 print("------------------------------------------------------------")  # 60個
-
 
 print("字典 轉 df")
 
@@ -527,62 +665,6 @@ df.plot(xticks=range(0, 4))
 plt.show()
 """
 
-"""df資訊
-
-print('檢視前幾行')
-cc = df.head()
-print(cc)
-
-print('檢視前2行')
-cc = df.head(2)
-print(cc)
-
-print('檢視後2行')
-cc = df.tail(2)
-print(cc)
-
-print('索引index')
-cc = df.index
-print(cc)
-
-print('欄名columns')
-cc = df.columns
-print(cc)
-
-print('顯示values')
-print(df.values)
-
-print(df.info())
-
-print(df.values)
-print(df.values[2])
-print(df.values[1][2])
-print(len(df))
-print(df.shape)
-
-print('df使用記憶體大小')
-cc = df.info(memory_usage='deep')
-print(cc)
-
-print('檢查df內是否有重複資料')
-print(df.duplicated())
-
-print("df之大小")
-M, N = df.shape
-print(df.shape)
-print('df之大小', M, 'X',N)
-
-print("顯示df之describe(統計資料)")
-print(df.describe())
-
-print(df.count())
-print(df.mean())
-print(df.std())
-print(df.min())
-print(df.median())
-print(df.max())
-
-"""
 print("孫悟空的成績(df.values[1])：")
 print(df.values[1])
 print("孫悟空的英文成績(df.values[1][2])：")
@@ -630,19 +712,6 @@ print(df)
 
 # 方法二
 df = pd.DataFrame({"國文": se1, "英文": se2, "數學": se3, "社會": se4, "自然": se5})
-print(df)
-
-print("------------------------------------------------------------")  # 60個
-
-print("建立df, 使用Series 合併2")
-
-s1 = pd.Series(["唐三藏", "孫悟空", "豬八戒", "沙悟淨"])
-s2 = pd.Series([65, 90, 81, 79])  # 國文成績
-s3 = pd.Series([92, 72, 85, 53])  # 英文成績
-datas = {"姓名": s1, "國文": s2, "英文": s3}
-
-print("字典 轉 df")
-df = pd.DataFrame(datas)
 print(df)
 
 print("------------------------------------------------------------")  # 60個
@@ -717,58 +786,48 @@ print("------------------------------------------------------------")  # 60個
 
 print("二維串列 轉 df")
 
-# 由list組成list
-animals = [
-    ["鼠", "mouse", 3, "米老鼠"],
-    ["牛", "ox", 48, "班尼牛"],
-    ["虎", "tiger", 33, "跳跳虎"],
-    ["兔", "rabbit", 8, "彼得兔"],
-    ["龍", "dragon", 38, "逗逗龍"],
-    ["蛇", "snake", 16, "貪吃蛇"],
-    ["馬", "horse", 36, "草泥馬"],
-    ["羊", "goat", 29, "喜羊羊"],
-    ["猴", "monkey", 22, "山道猴"],
-    ["雞", "chicken", 6, "肯德雞"],
-    ["狗", "dog", 12, "貴賓狗"],
-    ["豬", "pig", 42, "佩佩豬"],
+print("建立df, 二維串列 轉 df")
+
+datas = [
+    [92, 81, 81, 92],  # 國文
+    [89, 79, 82, 72],  # 英文
+    [71, 92, 89, 95],  # 數學
+    [88, 89, 98, 77],  # 社會
+    [95, 74, 89, 85],  # 自然
 ]
 
-index = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
-columns = ["中文名", "英文名", "體重", "全名"]
-
-df = pd.DataFrame(animals, columns=columns, index=index)
+columns = ["國文", "英文", "數學", "社會", "自然"]
+index = ["唐三藏", "孫悟空", "豬八戒", "沙悟淨"]
+df = pd.DataFrame(np.array(datas).T, columns=columns, index=index)
 print(df)
 
-for i in range(12):
+for i in range(4):
     print("index :", i, end="\t")
     print("中文名 :", df.iloc[i, 0], end="\t")
-    print("體重 :", df.iloc[i, 2], end="\n")
+    print("數學 :", df.iloc[i, 2], end="\n")
 
-print("全名(第3欄)")
+print("社會(第3欄)")
 print(df.iloc[0:12, 3])
 
-print("全名(部分)")
-print(df.iloc[[3, 6, 9, 11], 3])
+print("社會(部分)")
+print(df.iloc[[0, 1, 3], 3])
 
 print("排序")
-df1 = df.sort_values("體重")
-print("依體重排序, 檢視前幾行")
+df1 = df.sort_values("數學")
+print("依 數學 排序, 檢視前幾行")
 print(df1.head())
 
 print("對df的某欄做運算")
-print("最重 :", df["體重"].max())
-print("最輕 :", df["體重"].min())
-print("總重 :", df["體重"].sum())
-print("平均 :", df["體重"].mean())
+print("最重 :", df["數學"].max())
+print("最輕 :", df["數學"].min())
+print("總重 :", df["數學"].sum())
+print("平均 :", df["數學"].mean())
 
-# print('因為df有字串(中英文), 不能直接做mean(), 但可做 max() min() sum()')
-
+# print('df若有字串(中英文), 不能直接做mean(), 但可做 max() min() sum()')
 # print(df.max()) OK
 # print(df.min()) OK
 # print(df.sum()) OK
 # print(df.mean()) NG
-
-print("------------------------------")  # 30個
 
 print("df.iloc[1, :] ->")
 print(df.iloc[1, :])
@@ -863,30 +922,6 @@ print("修改 唐三藏 的 所有成績為 為 100")
 df.loc["唐三藏", :] = 100
 
 print("新df")
-print(df)
-
-print("------------------------------------------------------------")  # 60個
-
-print("建立df, 使用Series 合併4")
-
-index = ["國文", "英文", "數學", "社會", "自然"]
-
-datas1 = [92, 89, 71, 88, 95]  # 唐三藏 的成績
-datas2 = [81, 79, 92, 89, 74]  # 孫悟空 的成績
-datas3 = [81, 82, 89, 98, 89]  # 豬八戒 的成績
-datas4 = [92, 72, 95, 77, 85]  # 沙悟淨 的成績
-
-series1 = pd.Series(datas1, index=index)
-series2 = pd.Series(datas2, index=index)
-series3 = pd.Series(datas3, index=index)
-series4 = pd.Series(datas4, index=index)
-
-print("5個Series組成一個df")
-df = pd.DataFrame([series1, series2, series3, series4])
-print(df)
-
-index = ["唐三藏", "孫悟空", "豬八戒", "沙悟淨"]
-df.index = index
 print(df)
 
 print("------------------------------------------------------------")  # 60個
@@ -1157,37 +1192,36 @@ print(pd.isnull(df))
 
 print("------------------------------------------------------------")  # 60個
 
-print("建立df 二維串列 二維串列 6X4, 設定欄名")
+print("建立df, 二維串列4X5 轉 df, 加上欄名與index")
 
 datas = [
-    [1, 1, 1, 1],
-    [2, 2, 2, 2],
-    [3, 3, 3, 3],
-    [4, 4, 4, 4],
-    [5, 5, 5, 5],
-    [6, 6, 6, 6],
-]
-
-columns = list("ABCD")
-df = pd.DataFrame(datas, columns=columns)
+    [92, 81, 81, 92],  # 國文
+    [89, 79, 82, 72],  # 英文
+    [71, 92, 89, 95],  # 數學
+    [88, 89, 98, 77],  # 社會
+    [95, 74, 89, 85],  # 自然
+    ]
+columns = ["國文", "英文", "數學", "社會", "自然"]
+index = ["唐三藏", "孫悟空", "豬八戒", "沙悟淨"]
+df = pd.DataFrame(np.array(datas).T, columns=columns, index=index)
 print(df)
 
 print("顯示第0列")
 cc = df.iloc[0]
 print(cc)
 
-print("顯示A欄")
-cc = df.A
+print("顯示 國文 欄")
+cc = df.國文
 print(cc)
 
-print("顯示df之3:5")
+print("顯示df之1:3")
 print(df[3:5])
 
-print("顯示df之A B D欄")
-print(df[["A", "B", "D"]])
+print("顯示df之 國文 英文 社會 欄")
+print(df[["國文", "英文", "社會"]])
 
 print("顯示")
-print(df.loc[3, "A"])
+#print(df.loc[3, 0])
 
 print("顯示")
 print(df.iloc[3, 0])
@@ -1196,13 +1230,15 @@ print("顯示")
 print(df.iloc[2:5, 0:2])
 
 print("顯示")
-print(df[df.C > 0])
+print(df[df.數學 > 80])
 
 print("加入TAG")
-df["TAG"] = ["cat", "dog", "cat", "cat", "cat", "dog"]
+df["TAG"] = ["AAA", "BBB", "AAA", "BBB"]
 print(df)
 
 print(df.groupby("TAG").sum())
+
+sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -2672,7 +2708,7 @@ print(cc)
 
 # create a Series containing the population of two countries
 people = pd.Series([3000000, 85000], index=["Albania", "Andorra"], name="population")
-people
+print(people)
 
 # calculate the total annual beer servings for each country
 print("檢視前幾行")
