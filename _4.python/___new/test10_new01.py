@@ -6262,23 +6262,6 @@ else:
 
 print("------------------------------------------------------------")  # 60個
 
-n = 10
-for i in range(1, n):
-    for j in range(1, n - i + 1):
-        print(j, end="")
-    print()
-
-print("------------------------------------------------------------")  # 60個
-
-names = ["洪錦魁", "洪冰儒", "東霞", "大成"]
-lastname = []
-for name in names:
-    if name.startswith("洪"):  # 是否姓氏洪開頭
-        lastname.append(name)  # 加入串列
-print(lastname)
-
-print("------------------------------------------------------------")  # 60個
-
 sc = [
     [1, "洪錦魁", 80, 95, 88, 0, 0, 0],
     [2, "洪冰儒", 98, 97, 96, 0, 0, 0],
@@ -6813,18 +6796,6 @@ for i1 in range(0, 10):                                 # 第一位數
                                             else:
                                                 print(code)                     # 列印無效碼
 """
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 九九乘法表
-
-for i in range(1, 10):
-    for j in range(1, i + 1):
-        print("{}x{}={} ".format(i, j, i * j), end="")
-    print("")
-
 print("------------------------------------------------------------")  # 60個
 
 """
@@ -7490,24 +7461,6 @@ b = animals.isupper()
 print("animals.isupper() = ", b)
 b = "   ".isspace()
 print('"   ".isspace() = ', b)
-
-print("------------------------------------------------------------")  # 60個
-
-import linecache
-
-filename = 'C:/_git/vcs/_4.python/_data/王之渙_涼州詞.txt'
-filename = 'C:/_git/vcs/_4.python/_data/song1.txt'
-times = 5
-
-getLines = linecache.getlines(filename)
-print(getLines)
-
-#print("取得{}檔案原內容：\n{}".format(filename), getLines)
-
-for i in range(times):
-    random.shuffle(getLines)
-
-print("\n隨機抽取：", random.choice(getLines))
 
 print("------------------------------------------------------------")  # 60個
 

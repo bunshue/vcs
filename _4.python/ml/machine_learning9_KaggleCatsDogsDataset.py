@@ -45,7 +45,7 @@ for subclass in subclasses:
         rand = random.choices(['train/', 'validation/'], [1-validation_split, validation_split])[0]
         os.rename(img_directory + subclass + '/' + img, img_directory + rand + subclass + '/' + img)
     os.rmdir(img_directory + subclass)
-"""  
+"""
 
 print("------------------------------------------------------------")  # 60個
 
@@ -61,4 +61,3 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
-

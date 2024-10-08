@@ -1,4 +1,6 @@
 import turtle
+
+
 def drawShape(sides, length):
     angle = 360.0 / sides
     for side in range(sides):
@@ -23,12 +25,13 @@ def drawTriangle(length):
 def drawCircle(length):
     drawShape(360, length)
 
+
 drawShape(4, 10)
 moveTurtle(60, 30)
 drawShape(3, 20)
 moveTurtle(-100, 20)
 drawSquare(30)
-moveTurtle(- 10, 20)
+moveTurtle(-10, 20)
 drawCircle(1)
 drawCircle(2)
 moveTurtle(75, -75)

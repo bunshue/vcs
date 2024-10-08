@@ -1,4 +1,4 @@
-from TV import TV
+from Class_TV import TV
 
 def main():
     tv1 = TV()

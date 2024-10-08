@@ -1,4 +1,4 @@
-from BinaryTree import BinaryTree
+from Class_BinaryTree import BinaryTree
 
 tree = BinaryTree()
 tree.insert("George")

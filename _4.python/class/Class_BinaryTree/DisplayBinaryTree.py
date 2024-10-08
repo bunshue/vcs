@@ -1,6 +1,6 @@
 import tkinter as tk
 import tkinter.messagebox
-from BinaryTree import BinaryTree 
+from Class_BinaryTree import BinaryTree 
     
 def insert():
     k = int(key.get())

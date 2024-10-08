@@ -1,4 +1,4 @@
-from Map import Map
+from Class_Map import Map
 
 def main():
     # Create a map

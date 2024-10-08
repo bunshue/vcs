@@ -1,4 +1,4 @@
-from Course import Course
+from Class_Course import Course
 
 def main():
     course1 = Course("Data Structures")

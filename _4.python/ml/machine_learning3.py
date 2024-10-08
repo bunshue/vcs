@@ -325,7 +325,7 @@ data = load_digits()
 print(type(data))
 print(len(data))
 
-print('TSNE')
+print("TSNE")
 n_components = 2  # 削減後の次元を2に設定
 model = TSNE(n_components=n_components)
 print(model.fit_transform(data.data))

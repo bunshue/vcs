@@ -9,8 +9,8 @@ print("------------------------------------------------------------")  # 60個
 # 共同
 import os
 import sys
-import math
 import time
+import math
 import random
 import numpy as np
 import pandas as pd
@@ -416,7 +416,6 @@ from sklearn.model_selection import train_test_split
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=3)
 
-import time
 from sklearn.linear_model import LinearRegression
 
 model = LinearRegression()

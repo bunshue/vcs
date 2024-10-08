@@ -1,4 +1,4 @@
-from AVLTree import AVLTree
+from Class_AVLTree import AVLTree
 
 def main():
     tree = AVLTree()

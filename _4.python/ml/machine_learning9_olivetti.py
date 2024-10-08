@@ -73,11 +73,11 @@ print("------------------------------------------------------------")  # 60個
 plt.figure(figsize=(12, 8))
 
 for i in range(20):
-    plt.subplot(4, 5, i+1)
+    plt.subplot(4, 5, i + 1)
     plt.imshow(olivetti_faces.data[i * 10].reshape(64, 64), cmap=plt.cm.gray)
     plt.axis("off")
 
-plt.suptitle('原圖')
+plt.suptitle("原圖")
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
@@ -93,11 +93,11 @@ print("------------------------------------------------------------")  # 60個
 plt.figure(figsize=(12, 8))
 
 for i in range(20):
-    plt.subplot(4, 5, i+1)
+    plt.subplot(4, 5, i + 1)
     plt.imshow(pca.components_[i].reshape(64, 64), cmap=plt.cm.gray)
     plt.axis("off")
 
-plt.suptitle('PCA')
+plt.suptitle("PCA")
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
@@ -108,9 +108,9 @@ from skimage.io import imsave
 face = olivetti_faces.data[0]
 
 # 看一下 Olivetti 臉的樣子
-print('face.shape = ', face.shape)
+print("face.shape = ", face.shape)
 fig = plt.figure(figsize=(12, 8))
-#plt.imshow(face.reshape(64, 64))
+# plt.imshow(face.reshape(64, 64))
 plt.imshow(face.reshape(64, 64), cmap=plt.cm.gray)
 plt.show()
 
@@ -156,15 +156,17 @@ print("Image size: {}x{}\nDataset shape: {}\n".format(w, h, X.shape))
 
 print("------------------------------")  # 30個
 
+
 def plot_gallery(images, titles, h, w, n_row=2, n_col=5):
-    print('R = ', n_row, ', C = ', n_col)
+    print("R = ", n_row, ", C = ", n_col)
     plt.figure(figsize=(12, 8))
-    #plt.subplots_adjust(bottom=0, left=0.01, right=0.99, top=0.90, hspace=0.01)
+    # plt.subplots_adjust(bottom=0, left=0.01, right=0.99, top=0.90, hspace=0.01)
     for i in range(n_row * n_col):
         plt.subplot(n_row, n_col, i + 1)
         plt.imshow(images[i].reshape((h, w)), cmap=plt.cm.gray)
         plt.title(titles[i])
         plt.axis("off")
+
 
 def plot_gallery2(images, titles, h, w, n_row=2, n_col=5):
     plt.figure(figsize=(12, 8))
@@ -191,7 +193,7 @@ for i in range(n_targets):
         sample_images = people_sample_image
     sample_titles.append(target_names[i])
 
-print('plot_gallery 1')
+print("plot_gallery 1")
 plot_gallery(sample_images, sample_titles, h, w, n_row, n_col)
 plt.show()
 
@@ -284,7 +286,7 @@ for c in candidate_components:
     print("Done in {0:.2f}s".format(time.time() - start))
 
 print("Plotting sample image with different number of PCA conpoments ...")
-print('plot_gallery 2')
+print("plot_gallery 2")
 plot_gallery(
     plotting_images,
     plotting_titles,

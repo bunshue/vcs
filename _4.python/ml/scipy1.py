@@ -866,10 +866,17 @@ fig, ax = plt.subplots(1, 1)
 
 a, b = 0.01, 1.25
 
-r = loguniform.rvs(a, b, size=1000) # Random variates
+r = loguniform.rvs(a, b, size=1000)  # Random variates
 
-ax.hist(r, density=True, bins='auto', histtype='stepfilled', alpha=0.2, label = 'Random variates')
-ax.legend(loc='best', frameon=False)
+ax.hist(
+    r,
+    density=True,
+    bins="auto",
+    histtype="stepfilled",
+    alpha=0.2,
+    label="Random variates",
+)
+ax.legend(loc="best", frameon=False)
 
 plt.show()
 
@@ -883,7 +890,7 @@ ax.set_xlabel("Value of random variable")
 ax.xaxis.set_major_locator(plt.FixedLocator([-2, -1, 0]))
 
 ticks = ["$10^{{ {} }}$".format(i) for i in [-2, -1, 0]]
-ax.set_xticklabels(ticks)  
+ax.set_xticklabels(ticks)
 
 plt.show()
 
@@ -897,7 +904,7 @@ ax.set_xlabel("Value of random variable")
 
 ax.xaxis.set_major_locator(plt.FixedLocator([-2, -1, 0]))
 ticks = ["$2^{{ {} }}$".format(i) for i in [-2, -1, 0]]
-ax.set_xticklabels(ticks)  
+ax.set_xticklabels(ticks)
 
 plt.show()
 
