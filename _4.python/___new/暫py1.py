@@ -1,4 +1,155 @@
 
+在tk內顯示opencv
+
+np.meshgrid為numpy之函數
+
+用scatter 用3d表示之
+
+
+#chap9-01a
+#Colab資料夾設定方法
+#!pip install google.colab 
+#安裝python-docx
+!pip install python-docx
+
+import os
+from google.colab import drive
+drive.mount('/content/drive')
+
+
+
+
+
+
+
+唐三藏 Tang
+孫悟空 Monkey
+豬八戒 Pig
+沙悟淨 Sand
+白龍馬 Horse
+
+二郎神
+千里眼 Eye
+順風耳 Ear
+
+牛魔王 Ox
+紅孩兒 Child
+白骨精 Bone
+蜘蛛精 Spider
+
+
+還是應該要有一個vcs螢幕截圖的常駐程式  隨時要用 例如 看yt時
+
+
+[, , , , , 
+, , 87, 98, 97, 87, 79, 74, 79, 82, 79, 73, 87, 90, 71, 82, 92, 92, 86, 94, 85
+, 94, 76, 87, 75, , 89, 85, 82, 87, 88, 78, 94, 93, 92, 87, 72, 95, 99, 83, 89, 85
+, 93, 90, 72, 91, 75, 97, 77, 84, 94, 98, 71, 80, 87, 93, 77, 93, 83, 85, 99, 79, 79, 82, 78, 71
+, 91, 82, 74, 78, 83, 90, 75, 76, 96, 94, 81, 74, 96, 73, 84, 72, 99, 97, 95, 87, 89, 99, 75, 88
+
+
+
+Python的應用領域
+
+目前Python在Web應用開發、雲基礎設施、DevOps、網絡爬蟲開發、數據分析挖掘、機器學習等領域都有著廣泛的應用，因此也產生了Web後端開發、數據接口開發、自動化運維、自動化測試、科學計算和可視化、數據分析、量化交易、機器人開發、圖像識別和處理等一系列的職位。
+
+
+OK
+《Python Cookbook in Chinese》 3rd Edition 翻译
+
+《Python Cookbook》3rd 中文版3.0.0正式发布
+
+在线阅读地址：http://python3-cookbook.readthedocs.org/zh_CN/latest/
+
+最新版(3.0.0)下载
+
+    中文简体版PDF下载地址：https://pan.baidu.com/s/1pL1cI9d
+    中文繁体版PDF下载地址：https://pan.baidu.com/s/1qX97VJI
+
+
+
+《Python 神乎其技》免費教學文章整理
+https://haosquare.com/python-tricks/
+
+
+
+python
+https://pythonziliao.com/post/826.html
+
+
+MediaPipe 解決方案指南
+https://ai.google.dev/edge/mediapipe/solutions/guide?hl=zh-tw
+
+
+安裝MediaPipe執行環境
+https://sites.google.com/view/zsgititit/home/ji-qi-xue-xi/%E5%AE%89%E8%A3%9Dmediapipe%E5%9F%B7%E8%A1%8C%E7%92%B0%E5%A2%83
+
+使用 MediaPipe ( 舊版 )
+https://steam.oxxostudio.tw/category/python/ai/ai-mediapipe.html#google_vignette
+
+安裝 imageai.
+
+pip install cython pillow>=7.0.0 numpy>=1.18.1 opencv-python>=4.1.2 torch>=1.9.0 --extra-index-url https://download.pytorch.org/whl/cpu torchvision>=0.10.0 --extra-index-url https://download.pytorch.org/whl/cpu pytest==7.1.3 tqdm==4.64.1 scipy>=1.7.3 matplotlib>=3.4.3 mock==4.0.3
+
+pip install imageai --upgrade
+
+
+Python的串口使用，自
+https://fantasyhh.github.io/2019/08/01/Arduino-Serial/
+
+
+Matplotlib 立體圖
+https://openhome.cc/Gossip/DCHardWay/Axes3D.html
+
+
+matplotlib的二维作图及三维作图 ax.plot_wireframe， scatter
+https://www.cnblogs.com/tangjunjun/articles/10854423.html
+
+
+
+
+Scikit-learn的基本功能主要被分為六大部分：
+
+1. 分類（Classification），
+2. 回歸（Regression），
+3. 集群(聚類)（Clustering）
+4. 數據降維（Dimensionality reduction）
+5. 模型選擇（Model selection）
+6. 數據前置處理（Preprocessing）。
+
+
+PCA:主成分分析（Principal Component Analysis）
+
+
+1. 載入資料
+2. 資料清理/探索/分析
+3. 進行特徵工程
+4. 資料分割
+5. 選擇演算法
+6. 模型訓練
+7. 模型評估
+
+# 計算準確率
+
+# 混淆矩陣
+
+# 混淆矩陣圖
+不進行特徵縮放
+
+# 計算準確率
+
+
+# 8. 模型評估，暫不進行
+
+# 9. 模型佈署
+
+# 模型存檔
+
+# 10.模型預測
+
+
+
+
 標準化py文件
 
 ABC.txt

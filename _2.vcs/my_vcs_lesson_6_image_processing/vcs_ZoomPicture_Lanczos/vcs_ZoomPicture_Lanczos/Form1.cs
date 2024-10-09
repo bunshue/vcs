@@ -13,6 +13,9 @@ namespace vcs_ZoomPicture_Lanczos
 {
     public partial class Form1 : Form
     {
+        //string filename = @"C:\_git\vcs\_1.data\______test_files1\ims02.bmp";
+        string filename = @"bmp0.bmp";
+
         Bitmap bitmap1;
 
         public Form1()
@@ -22,7 +25,6 @@ namespace vcs_ZoomPicture_Lanczos
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\ims02.bmp";
             bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
             //Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
             pictureBox1.Image = bitmap1;
@@ -39,13 +41,12 @@ namespace vcs_ZoomPicture_Lanczos
             pictureBox1.Size = new Size(640 * 1, 480 * 1);
             pictureBox1.Location = new Point(x_st, y_st);
 
-            x_st = 640; ;
+            x_st = 640;
             y_st = 0;
 
-
             pictureBox2.Size = new Size(640 * 2, 480 * 2);
-            pictureBox2.Location = new Point(x_st, y_st);
-
+            pictureBox2.Size = new Size(800, 800);
+            pictureBox2.Location = new Point(x_st + 20, y_st);
 
             this.WindowState = FormWindowState.Maximized;
 
@@ -57,9 +58,8 @@ namespace vcs_ZoomPicture_Lanczos
         {
             pictureBox2.SizeMode = PictureBoxSizeMode.Normal;
 
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\ims02.bmp";
             Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
-            double k = 2.0;
+            double k = 8.0;
             Bitmap bitmap2 = ZoomLanczos2Apply(bitmap1, k);
             pictureBox2.Image = bitmap2;
             bitmap2.Save("ims02.lanczos.bmp", ImageFormat.Bmp);
@@ -197,7 +197,6 @@ namespace vcs_ZoomPicture_Lanczos
         {
             pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
 
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\ims02.bmp";
             bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
             //Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
             pictureBox2.Image = bitmap1;
@@ -207,7 +206,6 @@ namespace vcs_ZoomPicture_Lanczos
         {
             pictureBox2.SizeMode = PictureBoxSizeMode.Normal;
 
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\ims02.bmp";
             Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
             Bitmap bitmap2 = Zoom2_copy(bitmap1);
             pictureBox2.Image = bitmap2;
@@ -231,10 +229,10 @@ namespace vcs_ZoomPicture_Lanczos
                 for (int i = 0; i < w; i++)
                 {
                     p = src.GetPixel(i, j);
-                    dst.SetPixel(i * 2, j*2, p);
+                    dst.SetPixel(i * 2, j * 2, p);
                     dst.SetPixel(i * 2, j * 2 + 1, p);
-                    dst.SetPixel(i * 2 + 1, j*2, p);
-                    dst.SetPixel(i * 2 + 1, j * 2+1, p);
+                    dst.SetPixel(i * 2 + 1, j * 2, p);
+                    dst.SetPixel(i * 2 + 1, j * 2 + 1, p);
                 }
             }
             return dst;
@@ -244,17 +242,9 @@ namespace vcs_ZoomPicture_Lanczos
         {
             pictureBox2.SizeMode = PictureBoxSizeMode.Normal;
 
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\ims02.bmp";
             bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
             //Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
             pictureBox2.Image = bitmap1;
-
         }
-
-
-
-
-
     }
 }
-

@@ -1028,8 +1028,9 @@ namespace vcs_PictureEnhance_report
         {
             //偽色彩
 
-            string filename1 = @"C:\_git\vcs\_1.data\______test_files1\__pic\_ntuh\op1.jpg";
+            //string filename1 = @"C:\_git\vcs\_1.data\______test_files1\__pic\_ntuh\op1.jpg";
             //string filename1 = @"C:\_git\vcs\_1.data\______test_files1\fakecolor.jpg";
+            string filename1 = @"C:\_git\vcs\_1.data\______test_files1\ims01.bmp";
 
             /*
             //彩色轉灰階
@@ -1189,11 +1190,16 @@ namespace vcs_PictureEnhance_report
         private void button4_Click(object sender, EventArgs e)
         {
             //選取範圍 : 418	149	145	203
-            x_st = 418;
-            y_st = 149;
-            w = 145;
-            h = 203;
-
+            x_st = 320;
+            y_st = 115;
+            w = 200;
+            h = 200;
+            /*
+            draw_x_st = 320;
+            draw_y_st = 115;
+            draw_w = 200;
+            draw_h = 200;
+            */
             reset_picture();
             ImageEnhancement(x_st, y_st, w, h);
 
@@ -1340,6 +1346,19 @@ namespace vcs_PictureEnhance_report
             pictureBox4.Size = new Size(800, 800);
             pictureBox4.Location = new Point(700, 250);
             pictureBox4.BringToFront();
+
+            x_st = 120;
+            y_st = 170;
+            w = 100;
+            h = 100;
+
+            draw_x_st = x_st;
+            draw_y_st = y_st;
+            draw_w = w;
+            draw_h = h;
+
+            bitmap1 = (Bitmap)Image.FromFile(filename1);	//Image.FromFile出來的是Image格式
+            bitmap2 = (Bitmap)bitmap1.Clone();
 
             draw_2d_plot(bitmap2, x_st, y_st, w, h, 1);
         }
@@ -1982,17 +2001,6 @@ namespace vcs_PictureEnhance_report
 
         private void button14_Click(object sender, EventArgs e)
         {
-            draw_x_st = 320;
-            draw_y_st = 115;
-            draw_w = 200;
-            draw_h = 200;
-            richTextBox1.Text += "\n選取範圍 : " + draw_x_st.ToString() + "\t" + draw_y_st.ToString() + "\t" + draw_w.ToString() + "\t" + draw_h.ToString() + "\n";
-            draw_enhanced_image(bitmap2, draw_x_st, draw_y_st, draw_w, draw_h);
-
-            measure_brightness();
-
-            return;
-
             //DrawColorMap
             int w = pictureBox1.ClientSize.Width;
             int h = pictureBox1.ClientSize.Height;
@@ -2739,6 +2747,7 @@ namespace vcs_PictureEnhance_report
             if (((draw_x_st + draw_w) > pb5_width) || ((draw_y_st + draw_h) > pb5_height))
                 return;
 
+            richTextBox1.Text += "draw_2d_plot 1\n";
             Graphics g;
             Bitmap bitmap1;
 
@@ -2851,6 +2860,18 @@ namespace vcs_PictureEnhance_report
             }
             g.DrawString(w.ToString() + " X " + h.ToString() + ", " + point_size.ToString() + "倍", new Font("標楷體", 20), new SolidBrush(Color.Red), new PointF(0, 0));
             pictureBox4.Image = bitmap1;
+
+            Graphics g2 = Graphics.FromImage(bmp);
+            g2.DrawRectangle(Pens.Blue, x_st - 1, y_st - 1, w + 2, h + 2);
+            pictureBox2.Image = bmp;
+
+            Rectangle SelectionRectangle2 = new Rectangle(x_st, y_st, w, h);
+            Bitmap bmp2 = new Bitmap(w, h);
+
+            bmp2 = bmp.Clone(SelectionRectangle2, PixelFormat.DontCare);  //或是 PixelFormat.Format32bppArgb
+            //pictureBox2.Image = bmp2;
+            bmp2.Save("bbbbbdddd.bmp", ImageFormat.Bmp);
+
         }
 
         void printArrayData(int[] array)
@@ -3191,3 +3212,17 @@ namespace vcs_PictureEnhance_report
 
     }
 }
+
+
+/*
+    draw_x_st = 320;
+            draw_y_st = 115;
+            draw_w = 200;
+            draw_h = 200;
+            richTextBox1.Text += "\n選取範圍 : " + draw_x_st.ToString() + "\t" + draw_y_st.ToString() + "\t" + draw_w.ToString() + "\t" + draw_h.ToString() + "\n";
+            draw_enhanced_image(bitmap2, draw_x_st, draw_y_st, draw_w, draw_h);
+
+            measure_brightness();
+
+            return;
+*/
