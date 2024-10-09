@@ -408,6 +408,9 @@ namespace vcs_PictureEnhance_YUV
             this.WindowState = FormWindowState.Maximized;
             bt_open_file_setup();
             bt_exit_setup();
+
+            pictureBox3a.Visible = false;
+            pictureBox3b.Visible = false;
         }
 
         private void bt_open_file_Click(object sender, EventArgs e)
@@ -564,6 +567,10 @@ namespace vcs_PictureEnhance_YUV
             //richTextBox1.Text += "共有 " + (w * h).ToString() + " 個點\n";
             //richTextBox1.Text += "總亮度 " + total_brightness.ToString() + "\n";
             //richTextBox1.Text += "平均亮度 " + (total_brightness / total_points).ToString() + "\n";
+
+            //richTextBox1.Text += "4444\n";
+            //return;
+
             double sd = SD(sd_num);
             //richTextBox1.Text += "標準差 " + sd.ToString("F2") + "\n";
             brightness_sd = sd;
@@ -650,6 +657,7 @@ namespace vcs_PictureEnhance_YUV
             brightness_min_mod = Y_min;
             brightness_ratio_mod = ratio_Y;
 
+            sel = 0;
             if ((sel % 2) == 0)
             {
                 //僅套用到選取的區域
@@ -724,6 +732,7 @@ namespace vcs_PictureEnhance_YUV
 
         void show_part_image(Bitmap bmp, int x_st, int y_st, int w, int h)
         {
+            richTextBox1.Text += "show_part_image(" + x_st.ToString() + ", " + y_st.ToString() + ", " + w.ToString() + ", " + h.ToString() + ")\n";
             if ((x_st < 0) || (x_st >= W))
                 return;
             if ((y_st < 0) || (y_st >= H))
@@ -762,7 +771,7 @@ namespace vcs_PictureEnhance_YUV
             }
 
             //準備放大兩倍
-            //richTextBox1.Text += "x_st = " + x_st.ToString() + ", y_st = " + y_st.ToString() + ", w = " + w.ToString() + ", h = " + h.ToString() + "\n";
+            richTextBox1.Text += "x_st = " + x_st.ToString() + ", y_st = " + y_st.ToString() + ", w = " + w.ToString() + ", h = " + h.ToString() + "\n";
 
             Bitmap bitmap3a = new Bitmap(w * 2, h * 2);
 
@@ -832,7 +841,9 @@ namespace vcs_PictureEnhance_YUV
 
         void draw_enhanced_image(Bitmap bmp, int x_st, int y_st, int w, int h)
         {
+            richTextBox1.Text += "draw_enhanced_image(" + x_st.ToString() + ", " + y_st.ToString() + ", " + w.ToString() + ", " + h.ToString() + ")\n";
             enhance_bitmap_data(bmp, x_st, y_st, w, h);
+            richTextBox1.Text += "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\n";
             show_part_image(bmp, x_st, y_st, w, h);
 
             pictureBox2.Image = bmp;    //把影像增強後的結果顯示出來
@@ -953,6 +964,12 @@ namespace vcs_PictureEnhance_YUV
             //richTextBox1.Text += "共有 " + (w * h).ToString() + " 個點\n";
             //richTextBox1.Text += "總亮度 " + total_brightness.ToString() + "\n";
             //richTextBox1.Text += "平均亮度 " + (total_brightness / total_points).ToString() + "\n";
+            richTextBox1.Text += "1111\n";
+            sd = 0;
+            min = 0;
+            max = 255;
+            avg = 128;
+            return;
             sd = SD(sd_num);
             richTextBox1.Text += "標準差 " + sd.ToString("F2") + "\n";
 
@@ -1862,7 +1879,7 @@ namespace vcs_PictureEnhance_YUV
             }
             //richTextBox1.Text += "\n";
             richTextBox1.Text += "共有 " + total_points.ToString() + " 個點\n";
-            richTextBox1.Text += "總亮度 " + total_brightness.ToString() + "\n";
+            richTextBox1.Text += "1總亮度 " + total_brightness.ToString() + "\n";
             richTextBox1.Text += "平均亮度 " + (total_brightness / total_points).ToString() + "\n";
 
 
@@ -1947,7 +1964,7 @@ namespace vcs_PictureEnhance_YUV
 
 
             richTextBox1.Text += "共有 " + total_points.ToString() + " 個點\n";
-            richTextBox1.Text += "總亮度 " + total_brightness.ToString() + "\n";
+            richTextBox1.Text += "2總亮度 " + total_brightness.ToString() + "\n";
             richTextBox1.Text += "平均亮度 " + (total_brightness / total_points).ToString() + "\n";
 
             Graphics g = Graphics.FromImage(bitmap1);
@@ -1976,6 +1993,18 @@ namespace vcs_PictureEnhance_YUV
 
         private void button14_Click(object sender, EventArgs e)
         {
+            //選取範圍 : 289	115	255	215
+            draw_x_st = 289;
+            draw_y_st = 115;
+            draw_w = 255;
+            draw_h = 215;
+            richTextBox1.Text += "\n選取範圍 : " + draw_x_st.ToString() + "\t" + draw_y_st.ToString() + "\t" + draw_w.ToString() + "\t" + draw_h.ToString() + "\n";
+            draw_enhanced_image(bitmap2, draw_x_st, draw_y_st, draw_w, draw_h);
+
+            measure_brightness();
+
+            return;
+
             //DrawColorMap
             int w = pictureBox1.ClientSize.Width;
             int h = pictureBox1.ClientSize.Height;
@@ -2148,6 +2177,10 @@ namespace vcs_PictureEnhance_YUV
             nud_w.Value = SelectionRectangle.Width;
             nud_h.Value = SelectionRectangle.Height;
 
+            draw_x_st = 289;
+            draw_y_st = 115;
+            draw_w = 255;
+            draw_h = 215;
             richTextBox1.Text += "\n選取範圍 : " + draw_x_st.ToString() + "\t" + draw_y_st.ToString() + "\t" + draw_w.ToString() + "\t" + draw_h.ToString() + "\n";
             draw_enhanced_image(bitmap2, draw_x_st, draw_y_st, draw_w, draw_h);
 
@@ -2160,7 +2193,7 @@ namespace vcs_PictureEnhance_YUV
             //e.Graphics.DrawRectangle(new Pen(Color.Blue, 3), draw_x_st, draw_y_st, draw_w, draw_h);
             e.Graphics.DrawRectangle(new Pen(Color.Blue, 3), draw_x_st - 1, draw_y_st - 1, draw_w + 2, draw_h + 2);
 
-            e.Graphics.DrawString("原圖", new Font("標楷體", 30), new SolidBrush(Color.Red), new PointF(0, 0));
+            //e.Graphics.DrawString("原圖", new Font("標楷體", 30), new SolidBrush(Color.Red), new PointF(0, 0));
         }
 
         int ccc = 0;
@@ -2172,7 +2205,7 @@ namespace vcs_PictureEnhance_YUV
 
             //e.Graphics.DrawString("原圖", new Font("標楷體", 30), new SolidBrush(Color.Red), new PointF(0, 0));
 
-            e.Graphics.DrawString((ccc++).ToString(), new Font("標楷體", 30), new SolidBrush(Color.Red), new PointF(0, 0));
+            //e.Graphics.DrawString((ccc++).ToString(), new Font("標楷體", 30), new SolidBrush(Color.Red), new PointF(0, 0));
 
             //mouseup
 
@@ -2206,6 +2239,7 @@ namespace vcs_PictureEnhance_YUV
 
         void get_brigheness_data(Bitmap bitmap1, int x_st, int y_st, int w, int h)
         {
+            richTextBox1.Text += "(" + x_st.ToString() + ", " + y_st.ToString() + ", " + w.ToString() + ", " + h.ToString() + ")\n";
             brightness_data = new int[256];
 
             int i;
@@ -2251,7 +2285,7 @@ namespace vcs_PictureEnhance_YUV
             }
             //richTextBox1.Text += "\n";
             richTextBox1.Text += "共有 " + total_points.ToString() + " 個點\n";
-            richTextBox1.Text += "總亮度 " + total_brightness.ToString() + "\n";
+            richTextBox1.Text += "3總亮度 " + total_brightness.ToString() + "\n";
             richTextBox1.Text += "平均亮度 " + (total_brightness / total_points).ToString() + "\n";
         }
 
@@ -2264,6 +2298,7 @@ namespace vcs_PictureEnhance_YUV
 
             //量測原圖 bitmap1
 
+            richTextBox1.Text += "1111(" + x_st.ToString() + ", " + y_st.ToString() + ", " + w.ToString() + ", " + h.ToString() + ")\n";
             get_brigheness_data(bitmap1, x_st, y_st, w, h);
 
             int i;
@@ -2297,7 +2332,7 @@ namespace vcs_PictureEnhance_YUV
             richTextBox1.Text += "亮差 : " + (brightness_sp - brightness_st).ToString() + "\n";
 
             richTextBox1.Text += "共有 " + total_points.ToString() + " 個點\n";
-            richTextBox1.Text += "總亮度 " + total_brightness.ToString() + "\n";
+            richTextBox1.Text += "4總亮度 " + total_brightness.ToString() + "\n";
             richTextBox1.Text += "平均亮度 " + (total_brightness / total_points).ToString() + "\n";
 
             //一維陣列用法：
@@ -2342,24 +2377,10 @@ namespace vcs_PictureEnhance_YUV
             ratio = (double)hh2 / most;
             richTextBox1.Text += "ratio = " + ratio.ToString() + "\n";
 
-            //richTextBox1.Text += "上圖之亮度\n";
             for (i = 0; i < 256; i++)
             {
-                richTextBox1.Text += brightness_data[i] + " ";
-                //上圖之亮度
-                //g4.FillRectangle(Brushes.Red, i * 2, hh2 - (float)(brightness_data[i] * ratio), 2, (float)(brightness_data[i] * ratio));
+                g4.FillRectangle(Brushes.Red, i * 2, hh2 - (float)(brightness_data[i] * ratio), 2, (float)(brightness_data[i] * ratio));
             }
-            richTextBox1.Text += "\n";
-            Pen redPen = new Pen(Color.Red, 3);
-            Point[] curvePoints2 = new Point[256];    //一維陣列內有 256 個Point
-
-            for (i = 0; i < 256; i++)
-            {
-                curvePoints2[i].X = i * 2;
-                curvePoints2[i].Y = hh2 - (int)(brightness_data[i] * ratio);
-            }
-            g4.DrawLines(redPen, curvePoints2);   //畫直線
-            //g4.DrawCurve(redPen, curvePoints2); //畫曲線
 
             g4.DrawRectangle(p, 0 + 1, 0 + 1, ww - 2, hh1 - 2);
             g4.DrawRectangle(p, 0 + 1, 0 + 1, ww - 2, hh2 - 2);
@@ -2478,6 +2499,7 @@ namespace vcs_PictureEnhance_YUV
             for (i = 0; i < 256; i++)
             {
                 g4.DrawLine(Pens.Red, 750, hh2 - i, 750 + (int)(brightness_data[i] / rr), hh2 - i);
+
             }
 
             Point[] curvePoints = new Point[256];    //一維陣列內有 256 個Point
@@ -2508,8 +2530,13 @@ namespace vcs_PictureEnhance_YUV
             g4.DrawRectangle(Pens.Red, 800, hh2 - brightness_max_mod, width, brightness_max_mod - brightness_min_mod);
             g4.DrawLine(Pens.Red, 800, hh2 - brightness_avg, 800 + width, hh2 - brightness_avg);
 
+
+
+
+
             //量測修改過的圖 bitmap2
 
+            richTextBox1.Text += "2222(" + x_st.ToString() + ", " + y_st.ToString() + ", " + w.ToString() + ", " + h.ToString() + ")\n";
             get_brigheness_data(bitmap2, x_st, y_st, w, h);
 
             most = 0;
@@ -2542,7 +2569,7 @@ namespace vcs_PictureEnhance_YUV
             richTextBox1.Text += "亮差 : " + (brightness_sp - brightness_st).ToString() + "\n";
 
             richTextBox1.Text += "共有 " + total_points.ToString() + " 個點\n";
-            richTextBox1.Text += "總亮度 " + total_brightness.ToString() + "\n";
+            richTextBox1.Text += "5總亮度 " + total_brightness.ToString() + "\n";
             richTextBox1.Text += "平均亮度 " + (total_brightness / total_points).ToString() + "\n";
 
             //一維陣列用法：
@@ -2565,6 +2592,9 @@ namespace vcs_PictureEnhance_YUV
                 }
             }
 
+            richTextBox1.Text += "3333\n";
+            return;
+
             sd = SD(sd_num);
             //richTextBox1.Text += "標準差 " + sd.ToString("F2") + "\n";
             brightness_sd = sd;
@@ -2585,24 +2615,10 @@ namespace vcs_PictureEnhance_YUV
             ratio = (double)hh2 / most;
             richTextBox1.Text += "ratio = " + ratio.ToString() + "\n";
 
-            //richTextBox1.Text += "下圖之亮度\n";
             for (i = 0; i < 256; i++)
             {
-                //下圖之亮度
-                ////g5.FillRectangle(Brushes.Red, i * 2, hh2 - (float)(brightness_data[i] * ratio), 2, (float)(brightness_data[i] * ratio));
+                g5.FillRectangle(Brushes.Red, i * 2, hh2 - (float)(brightness_data[i] * ratio), 2, (float)(brightness_data[i] * ratio));
             }
-            redPen = new Pen(Color.Red, 3);
-            curvePoints2 = new Point[256];    //一維陣列內有 256 個Point
-
-            for (i = 0; i < 256; i++)
-            {
-                richTextBox1.Text += brightness_data[i] + " ";
-                curvePoints2[i].X = i * 2;
-                curvePoints2[i].Y = hh2 - (int)(brightness_data[i] * ratio);
-            }
-            richTextBox1.Text += "\n";
-            g5.DrawLines(redPen, curvePoints2);   //畫直線
-            //g5.DrawCurve(redPen, curvePoints2); //畫曲線
 
             g5.DrawRectangle(p, 0 + 1, 0 + 1, ww - 2, hh1 - 2);
             g5.DrawRectangle(p, 0 + 1, 0 + 1, ww - 2, hh2 - 2);

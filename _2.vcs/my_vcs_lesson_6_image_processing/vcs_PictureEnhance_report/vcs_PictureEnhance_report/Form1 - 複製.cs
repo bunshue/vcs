@@ -1976,26 +1976,105 @@ namespace vcs_PictureEnhance_YUV
 
         private void button14_Click(object sender, EventArgs e)
         {
-            //DrawColorMap
-            int w = pictureBox1.ClientSize.Width;
-            int h = pictureBox1.ClientSize.Height;
+            int W = 640;
+            int H = 480;
+            bitmap1 = new Bitmap(W, H);
 
-            Graphics g = pictureBox1.CreateGraphics();
-
-            g.Clear(Color.White);
-            Brush b;
             int i;
-            int N = rgb_array.Length / 3;
-            int hh = 7;
-            int border = 20;
-
-            for (i = 0; i < N; i++)
+            int j;
+            for (j = 0; j < H; j++)
             {
-                b = new SolidBrush(Color.FromArgb(255, rgb_array[i, 0], rgb_array[i, 1], rgb_array[i, 2]));
-                //rgb_array
-                //g.FillRectangle(b, w / 10, i * hh + h/10, w / 10 * 8, hh);
-                g.FillRectangle(b, border, i * hh + border, w - border * 2, hh);
+                if (j < H)
+                {
+                    if (j < H / 2)
+                    {
+                        for (i = 0; i < W; i++)
+                        {
+                            bitmap1.SetPixel(i, j, Color.Red);
+                        }
+                    }
+                    else
+                    {
+                        for (i = 0; i < W; i++)
+                        {
+                            bitmap1.SetPixel(i, j, Color.FromArgb(255, 164, 0, 39));
+
+
+
+                        }
+                    }
+                }
             }
+
+            pictureBox1.Image = bitmap1;
+            pictureBox2.Image = bitmap1;
+
+            bitmap2 = bitmap1;
+
+            /*
+            Random r = new Random();
+            for (i = 0; i < 100; i++)
+            {
+                byte R = (byte)r.Next(0, 256);
+                byte G = (byte)r.Next(0, 256);
+                byte B = (byte)r.Next(0, 256);
+                richTextBox1.Text += "前 : " + R.ToString() + ", " + G.ToString() + ", " + B.ToString() + "\n";
+
+                RGB pp = new RGB(R, G, B);
+                YUV yyy = new YUV();
+                yyy = RGBToYUV(pp);
+
+                YUV yyy2 = new YUV(yyy.Y, yyy.U, yyy.V);
+                RGB rrr = new RGB();
+                rrr = YUVToRGB(yyy2);
+
+
+                int sum = ((int)rrr.R - (int)R) * ((int)rrr.R - (int)R) + ((int)rrr.G - (int)G) * ((int)rrr.G - (int)G) + ((int)rrr.B - (int)B) * ((int)rrr.B - (int)B);
+
+                richTextBox1.Text += "後 : " + rrr.R.ToString() + ", " + rrr.G.ToString() + ", " + rrr.B.ToString() + ", 差 : " + sum.ToString() + "\n";
+                delay(10);
+            }
+            */
+
+            Random r = new Random();
+            byte R = 255;
+            byte G = 0;
+            byte B = 0;
+            richTextBox1.Text += "前 : " + R.ToString() + ", " + G.ToString() + ", " + B.ToString() + "\n";
+
+            RGB pp = new RGB(R, G, B);
+            YUV yyy = new YUV();
+            yyy = RGBToYUV(pp);
+
+            YUV yyy2 = new YUV(yyy.Y, yyy.U, yyy.V);
+            RGB rrr = new RGB();
+            rrr = YUVToRGB(yyy2);
+
+
+            int sum = ((int)rrr.R - (int)R) * ((int)rrr.R - (int)R) + ((int)rrr.G - (int)G) * ((int)rrr.G - (int)G) + ((int)rrr.B - (int)B) * ((int)rrr.B - (int)B);
+
+            richTextBox1.Text += "後 : " + rrr.R.ToString() + ", " + rrr.G.ToString() + ", " + rrr.B.ToString() + ", 差 : " + sum.ToString() + "\n";
+
+
+            YUV yyy3 = new YUV(200, yyy.U, yyy.V);
+            rrr = YUVToRGB(yyy3);
+
+            sum = ((int)rrr.R - (int)R) * ((int)rrr.R - (int)R) + ((int)rrr.G - (int)G) * ((int)rrr.G - (int)G) + ((int)rrr.B - (int)B) * ((int)rrr.B - (int)B);
+            richTextBox1.Text += "後 : " + rrr.R.ToString() + ", " + rrr.G.ToString() + ", " + rrr.B.ToString() + ", 差 : " + sum.ToString() + "\n";
+
+
+
+            R = 255;
+            G = 123;
+            B = 123;
+            richTextBox1.Text += "前2 : " + R.ToString() + ", " + G.ToString() + ", " + B.ToString() + "\n";
+            pp = new RGB(R, G, B);
+            yyy = new YUV();
+            yyy = RGBToYUV(pp);
+
+
+            richTextBox1.Text += "得到 : " + yyy.Y.ToString() + ", " + yyy.U.ToString() + ", " + yyy.V.ToString() + "\n";
+
 
         }
 
@@ -2022,8 +2101,8 @@ namespace vcs_PictureEnhance_YUV
 
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
-            bitmap1 = (Bitmap)Image.FromFile(filename1);	//Image.FromFile出來的是Image格式
-            bitmap2 = (Bitmap)bitmap1.Clone();
+            //bitmap1 = (Bitmap)Image.FromFile(filename1);	//Image.FromFile出來的是Image格式
+            //bitmap2 = (Bitmap)bitmap1.Clone();
 
             flag_pictureBox1_mouse_down = true;
             pt_st = e.Location; //起始點座標
@@ -2342,24 +2421,10 @@ namespace vcs_PictureEnhance_YUV
             ratio = (double)hh2 / most;
             richTextBox1.Text += "ratio = " + ratio.ToString() + "\n";
 
-            //richTextBox1.Text += "上圖之亮度\n";
             for (i = 0; i < 256; i++)
             {
-                richTextBox1.Text += brightness_data[i] + " ";
-                //上圖之亮度
-                //g4.FillRectangle(Brushes.Red, i * 2, hh2 - (float)(brightness_data[i] * ratio), 2, (float)(brightness_data[i] * ratio));
+                g4.FillRectangle(Brushes.Red, i * 2, hh2 - (float)(brightness_data[i] * ratio), 2, (float)(brightness_data[i] * ratio));
             }
-            richTextBox1.Text += "\n";
-            Pen redPen = new Pen(Color.Red, 3);
-            Point[] curvePoints2 = new Point[256];    //一維陣列內有 256 個Point
-
-            for (i = 0; i < 256; i++)
-            {
-                curvePoints2[i].X = i * 2;
-                curvePoints2[i].Y = hh2 - (int)(brightness_data[i] * ratio);
-            }
-            g4.DrawLines(redPen, curvePoints2);   //畫直線
-            //g4.DrawCurve(redPen, curvePoints2); //畫曲線
 
             g4.DrawRectangle(p, 0 + 1, 0 + 1, ww - 2, hh1 - 2);
             g4.DrawRectangle(p, 0 + 1, 0 + 1, ww - 2, hh2 - 2);
@@ -2478,6 +2543,7 @@ namespace vcs_PictureEnhance_YUV
             for (i = 0; i < 256; i++)
             {
                 g4.DrawLine(Pens.Red, 750, hh2 - i, 750 + (int)(brightness_data[i] / rr), hh2 - i);
+
             }
 
             Point[] curvePoints = new Point[256];    //一維陣列內有 256 個Point
@@ -2507,6 +2573,10 @@ namespace vcs_PictureEnhance_YUV
 
             g4.DrawRectangle(Pens.Red, 800, hh2 - brightness_max_mod, width, brightness_max_mod - brightness_min_mod);
             g4.DrawLine(Pens.Red, 800, hh2 - brightness_avg, 800 + width, hh2 - brightness_avg);
+
+
+
+
 
             //量測修改過的圖 bitmap2
 
@@ -2585,24 +2655,10 @@ namespace vcs_PictureEnhance_YUV
             ratio = (double)hh2 / most;
             richTextBox1.Text += "ratio = " + ratio.ToString() + "\n";
 
-            //richTextBox1.Text += "下圖之亮度\n";
             for (i = 0; i < 256; i++)
             {
-                //下圖之亮度
-                ////g5.FillRectangle(Brushes.Red, i * 2, hh2 - (float)(brightness_data[i] * ratio), 2, (float)(brightness_data[i] * ratio));
+                g5.FillRectangle(Brushes.Red, i * 2, hh2 - (float)(brightness_data[i] * ratio), 2, (float)(brightness_data[i] * ratio));
             }
-            redPen = new Pen(Color.Red, 3);
-            curvePoints2 = new Point[256];    //一維陣列內有 256 個Point
-
-            for (i = 0; i < 256; i++)
-            {
-                richTextBox1.Text += brightness_data[i] + " ";
-                curvePoints2[i].X = i * 2;
-                curvePoints2[i].Y = hh2 - (int)(brightness_data[i] * ratio);
-            }
-            richTextBox1.Text += "\n";
-            g5.DrawLines(redPen, curvePoints2);   //畫直線
-            //g5.DrawCurve(redPen, curvePoints2); //畫曲線
 
             g5.DrawRectangle(p, 0 + 1, 0 + 1, ww - 2, hh1 - 2);
             g5.DrawRectangle(p, 0 + 1, 0 + 1, ww - 2, hh2 - 2);

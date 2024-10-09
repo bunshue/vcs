@@ -14,7 +14,7 @@ using System.Runtime.InteropServices;
 using AForge.Video;             //需要添加這兩個.dll
 using AForge.Video.DirectShow;
 
-namespace vcs_PictureEnhance_YUV
+namespace vcs_PictureEnhance_report
 {
     public partial class Form1 : Form
     {
@@ -408,6 +408,9 @@ namespace vcs_PictureEnhance_YUV
             this.WindowState = FormWindowState.Maximized;
             bt_open_file_setup();
             bt_exit_setup();
+
+            pictureBox3a.Visible = false;
+            pictureBox3b.Visible = false;
         }
 
         private void bt_open_file_Click(object sender, EventArgs e)
@@ -650,6 +653,7 @@ namespace vcs_PictureEnhance_YUV
             brightness_min_mod = Y_min;
             brightness_ratio_mod = ratio_Y;
 
+            sel = 0;
             if ((sel % 2) == 0)
             {
                 //僅套用到選取的區域
@@ -724,6 +728,7 @@ namespace vcs_PictureEnhance_YUV
 
         void show_part_image(Bitmap bmp, int x_st, int y_st, int w, int h)
         {
+            richTextBox1.Text += "show_part_image(" + x_st.ToString() + ", " + y_st.ToString() + ", " + w.ToString() + ", " + h.ToString() + ")\n";
             if ((x_st < 0) || (x_st >= W))
                 return;
             if ((y_st < 0) || (y_st >= H))
@@ -832,6 +837,7 @@ namespace vcs_PictureEnhance_YUV
 
         void draw_enhanced_image(Bitmap bmp, int x_st, int y_st, int w, int h)
         {
+            richTextBox1.Text += "draw_enhanced_image(" + x_st.ToString() + ", " + y_st.ToString() + ", " + w.ToString() + ", " + h.ToString() + ")\n";
             enhance_bitmap_data(bmp, x_st, y_st, w, h);
             show_part_image(bmp, x_st, y_st, w, h);
 
@@ -1976,6 +1982,17 @@ namespace vcs_PictureEnhance_YUV
 
         private void button14_Click(object sender, EventArgs e)
         {
+            draw_x_st = 320;
+            draw_y_st = 115;
+            draw_w = 200;
+            draw_h = 200;
+            richTextBox1.Text += "\n選取範圍 : " + draw_x_st.ToString() + "\t" + draw_y_st.ToString() + "\t" + draw_w.ToString() + "\t" + draw_h.ToString() + "\n";
+            draw_enhanced_image(bitmap2, draw_x_st, draw_y_st, draw_w, draw_h);
+
+            measure_brightness();
+
+            return;
+
             //DrawColorMap
             int w = pictureBox1.ClientSize.Width;
             int h = pictureBox1.ClientSize.Height;
@@ -2160,7 +2177,7 @@ namespace vcs_PictureEnhance_YUV
             //e.Graphics.DrawRectangle(new Pen(Color.Blue, 3), draw_x_st, draw_y_st, draw_w, draw_h);
             e.Graphics.DrawRectangle(new Pen(Color.Blue, 3), draw_x_st - 1, draw_y_st - 1, draw_w + 2, draw_h + 2);
 
-            e.Graphics.DrawString("原圖", new Font("標楷體", 30), new SolidBrush(Color.Red), new PointF(0, 0));
+            //e.Graphics.DrawString("原圖", new Font("標楷體", 30), new SolidBrush(Color.Red), new PointF(0, 0));
         }
 
         int ccc = 0;
@@ -2172,7 +2189,7 @@ namespace vcs_PictureEnhance_YUV
 
             //e.Graphics.DrawString("原圖", new Font("標楷體", 30), new SolidBrush(Color.Red), new PointF(0, 0));
 
-            e.Graphics.DrawString((ccc++).ToString(), new Font("標楷體", 30), new SolidBrush(Color.Red), new PointF(0, 0));
+            //e.Graphics.DrawString((ccc++).ToString(), new Font("標楷體", 30), new SolidBrush(Color.Red), new PointF(0, 0));
 
             //mouseup
 
@@ -2206,6 +2223,7 @@ namespace vcs_PictureEnhance_YUV
 
         void get_brigheness_data(Bitmap bitmap1, int x_st, int y_st, int w, int h)
         {
+            richTextBox1.Text += "(" + x_st.ToString() + ", " + y_st.ToString() + ", " + w.ToString() + ", " + h.ToString() + ")\n";
             brightness_data = new int[256];
 
             int i;
@@ -2342,7 +2360,7 @@ namespace vcs_PictureEnhance_YUV
             ratio = (double)hh2 / most;
             richTextBox1.Text += "ratio = " + ratio.ToString() + "\n";
 
-            //richTextBox1.Text += "上圖之亮度\n";
+            richTextBox1.Text += "上圖之亮度\n";
             for (i = 0; i < 256; i++)
             {
                 richTextBox1.Text += brightness_data[i] + " ";
@@ -2585,7 +2603,7 @@ namespace vcs_PictureEnhance_YUV
             ratio = (double)hh2 / most;
             richTextBox1.Text += "ratio = " + ratio.ToString() + "\n";
 
-            //richTextBox1.Text += "下圖之亮度\n";
+            richTextBox1.Text += "下圖之亮度\n";
             for (i = 0; i < 256; i++)
             {
                 //下圖之亮度
