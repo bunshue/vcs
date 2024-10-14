@@ -593,9 +593,13 @@ namespace vcs_ImageProcessing2
             string filename2;
 
             if (use_average == true)
-                filename2 = d_name + "\\" + f_name + "_average" + ext_name;
+            {
+                filename2 = "tmp_" + f_name + "_average" + ext_name;
+            }
             else
-                filename2 = d_name + "\\" + f_name + "_grayscale" + ext_name;
+            {
+                filename2 = "tmp_" + f_name + "_grayscale" + ext_name;
+            }
 
             richTextBox1.Text += "filename new = " + filename2 + "\n";
 

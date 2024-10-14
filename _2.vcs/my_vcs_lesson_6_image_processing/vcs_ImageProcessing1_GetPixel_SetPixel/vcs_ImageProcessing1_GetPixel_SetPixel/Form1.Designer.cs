@@ -240,6 +240,7 @@
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(170, 50);
             this.button12.TabIndex = 12;
+            this.button12.Text = "擷取其中一塊";
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
@@ -249,6 +250,7 @@
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(170, 50);
             this.button13.TabIndex = 13;
+            this.button13.Text = "縮圖成一半";
             this.button13.UseVisualStyleBackColor = true;
             this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
@@ -258,6 +260,7 @@
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(170, 50);
             this.button14.TabIndex = 14;
+            this.button14.Text = "轉成藍色系";
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 

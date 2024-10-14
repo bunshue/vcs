@@ -15,6 +15,8 @@ namespace vcs_PictureObscure
 {
     public partial class Form1 : Form
     {
+        string filename = @"C:\_git\vcs\_1.data\______test_files1\elephant.jpg";
+
         // The original image.
         private Bitmap OriginalImage = null;
 
@@ -40,7 +42,26 @@ namespace vcs_PictureObscure
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            try
+            {
+                // Load the image without locking its file.
+                OriginalImage = LoadBitmapUnlocked(filename);
+            }
+            catch (Exception ex)
+            {
+                OriginalImage = null;
+                pictureBox1.Visible = false;
+                MessageBox.Show("Error opening file " + filename + "\n" + ex.Message);
+                return;
+            }
 
+            // Make the fuzzy version of the image.
+            MakeFuzzyImage();
+
+            // Display the current image.
+            VisibleImage = new Bitmap(OriginalImage);
+            pictureBox1.Image = VisibleImage;
+            pictureBox1.Refresh();
         }
 
         // Load a bitmap without locking it.
@@ -202,32 +223,6 @@ namespace vcs_PictureObscure
         }
 
         private void button1_Click(object sender, EventArgs e)
-        {
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\elephant.jpg";
-            try
-            {
-                // Load the image without locking its file.
-                OriginalImage = LoadBitmapUnlocked(filename);
-            }
-            catch (Exception ex)
-            {
-                OriginalImage = null;
-                pictureBox1.Visible = false;
-                MessageBox.Show("Error opening file " + filename + "\n" + ex.Message);
-                return;
-            }
-
-            // Make the fuzzy version of the image.
-            MakeFuzzyImage();
-
-            // Display the current image.
-            VisibleImage = new Bitmap(OriginalImage);
-            pictureBox1.Image = VisibleImage;
-            pictureBox1.Visible = true;
-            pictureBox1.Refresh();
-        }
-
-        private void button3_Click(object sender, EventArgs e)
         {
             //Revert
             // Revert to the original image.

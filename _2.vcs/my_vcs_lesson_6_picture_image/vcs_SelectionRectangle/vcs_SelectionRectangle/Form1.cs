@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.Drawing.Drawing2D;
+
 namespace vcs_SelectionRectangle
 {
     public partial class Form1 : Form
@@ -19,6 +21,10 @@ namespace vcs_SelectionRectangle
         int ResizePin_Style = 1;	//0: 不隱藏, 1: 自動隱藏, 2 : 總是隱藏
         int ResizeLine_Style = 1;	//0: 實線, 1: 虛線
 
+        //方法三
+        string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+        private Bitmap bitmap3 = null;
+
         public Form1()
         {
             InitializeComponent();
@@ -26,11 +32,28 @@ namespace vcs_SelectionRectangle
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            groupBox1.Size = new Size(700, 420);
+            groupBox2.Size = new Size(700, 420);
+            groupBox3.Size = new Size(700, 420);
+            richTextBox1.Size = new Size(700, 420);
+            groupBox1.Location = new Point(10, 10);
+            groupBox2.Location = new Point(10, 10+420+10);
+            groupBox3.Location = new Point(10+700+10, 10);
+            richTextBox1.Location = new Point(10 + 700 + 10, 10+420+10);
+            pictureBox1.Size = new Size(310, 410);
+            pictureBox2.Size = new Size(310, 410);
+            pictureBox3.Size = new Size(310, 410);
+
+            lb_info1.Location = new Point(350, 20);
+            lb_info2.Location = new Point(350, 20);
+            button1.Location = new Point(350, 20+100);
+            button2.Location = new Point(350, 20 + 150);
+
+            this.Size = new Size(1500, 950);
+
             selectionRec1.ResizePinSize = 10;  //改變ResizePin圓直徑大小
             selectionRec1.Create();
 
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\elephant.jpg";
             pictureBox1.Image = Image.FromFile(filename);
 
 
@@ -90,6 +113,15 @@ namespace vcs_SelectionRectangle
             pictureBox2.MouseMove += new MouseEventHandler(pictureBox2_MouseMove);
             pictureBox2.MouseUp += new MouseEventHandler(pictureBox2_MouseUp);
             pictureBox2.Paint += new PaintEventHandler(pictureBox2_Paint);
+
+            //方法三
+            bitmap3 = (Bitmap)Image.FromFile(filename);
+            pictureBox3.Image = bitmap3;
+
+            pictureBox3.MouseDown += new MouseEventHandler(pictureBox3_MouseDown);
+            pictureBox3.MouseMove += new MouseEventHandler(pictureBox3_MouseMove);
+            pictureBox3.MouseUp += new MouseEventHandler(pictureBox3_MouseUp);
+            pictureBox3.Paint += new PaintEventHandler(pictureBox3_Paint);
         }
 
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
@@ -175,6 +207,58 @@ namespace vcs_SelectionRectangle
 
 
 
+        //方法三
 
+        // The rectangle being selected.
+        private Point Point1, Point2;
+        private bool Selecting = false;
+
+        // Start selecting.
+        void pictureBox3_MouseDown(object sender, MouseEventArgs e)
+        {
+            Selecting = true;
+            Point1 = e.Location;
+            Point2 = e.Location;
+        }
+
+
+        // Continue selecting.
+        void pictureBox3_MouseMove(object sender, MouseEventArgs e)
+        {
+            Point2 = e.Location;
+            pictureBox3.Refresh();
+        }
+
+        // Finish selecting.
+        void pictureBox3_MouseUp(object sender, MouseEventArgs e)
+        {
+            Selecting = false;
+
+            Rectangle rect = new Rectangle(
+    (int)Math.Min(Point1.X, Point2.X),
+    (int)Math.Min(Point1.Y, Point2.Y),
+    (int)Math.Abs(Point1.X - Point2.X),
+    (int)Math.Abs(Point1.Y - Point2.Y));
+
+            richTextBox1.Text += rect.ToString() + "\n";
+        }
+
+        // Draw the selection rectangle.
+        void pictureBox3_Paint(object sender, PaintEventArgs e)
+        {
+            if (!Selecting) return;
+            Rectangle rect = new Rectangle(
+                (int)Math.Min(Point1.X, Point2.X),
+                (int)Math.Min(Point1.Y, Point2.Y),
+                (int)Math.Abs(Point1.X - Point2.X),
+                (int)Math.Abs(Point1.Y - Point2.Y));
+            e.Graphics.DrawRectangle(Pens.Yellow, rect);
+            using (Pen pen = new Pen(Color.Red))
+            {
+                pen.DashStyle = DashStyle.Custom;
+                pen.DashPattern = new float[] { 5, 5 };
+                e.Graphics.DrawRectangle(pen, rect);
+            }
+        }
     }
 }

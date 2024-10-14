@@ -34,7 +34,6 @@ namespace _vcs_MakePicture
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
             p = new Pen(foreground_color, 3);
             sb = new SolidBrush(foreground_color);
 
@@ -150,14 +149,26 @@ namespace _vcs_MakePicture
             button68.Location = new Point(x_st + dx * 8, y_st + dy * 6);
             button69.Location = new Point(x_st + dx * 9, y_st + dy * 6);
 
+            button70.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            button71.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+            button72.Location = new Point(x_st + dx * 2, y_st + dy * 7);
+            button73.Location = new Point(x_st + dx * 3, y_st + dy * 7);
+            button74.Location = new Point(x_st + dx * 4, y_st + dy * 7);
+            button75.Location = new Point(x_st + dx * 5, y_st + dy * 7);
+            button76.Location = new Point(x_st + dx * 6, y_st + dy * 7);
+            button77.Location = new Point(x_st + dx * 7, y_st + dy * 7);
+            button78.Location = new Point(x_st + dx * 8, y_st + dy * 7);
+            button79.Location = new Point(x_st + dx * 9, y_st + dy * 7);
+
             button9.Text = word;
 
+            pictureBox1.Size = new Size(640, 480);
             pictureBox1.Location = new Point(10, 10);
 
-            this.Size = new Size(1570, this.Size.Height);
+            this.Size = new Size(1570, 900);
 
-            richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 7);
-            richTextBox1.Size = new Size(this.Width - richTextBox1.Location.X - 50, this.Height - richTextBox1.Location.Y - 50 - 50);
+            richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            richTextBox1.Size = new Size(this.Width - richTextBox1.Location.X - 30, this.Height - richTextBox1.Location.Y - 50);
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 

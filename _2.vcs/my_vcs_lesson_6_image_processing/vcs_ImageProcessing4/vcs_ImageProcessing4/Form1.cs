@@ -187,7 +187,7 @@ namespace vcs_ImageProcessing4
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //旋轉（90度，180度，270度）
+            //旋轉（90度/180度/270度, 3種）
             Bitmap bitmap1 = new Bitmap(filename);
             Bitmap bitmap2 = RotateImage(bitmap1, 90);
             pictureBox1.Image = bitmap2;

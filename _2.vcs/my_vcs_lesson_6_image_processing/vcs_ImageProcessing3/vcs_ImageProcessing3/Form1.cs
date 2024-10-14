@@ -25,7 +25,6 @@ namespace vcs_ImageProcessing3
         string filename = @"C:\_git\vcs\_1.data\______test_files1\elephant.jpg";
         //string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
         //string filename = @"C:\_git\vcs\_1.data\______test_files1\_image_processing\isinbaeva.jpg";
-        //string filename = @"C:\_git\vcs\_1.data\______test_files1\naruto.jpg";
 
         Stopwatch sw = new Stopwatch();
 
@@ -89,7 +88,6 @@ namespace vcs_ImageProcessing3
             button13.Location = new Point(x_st + dx * 0, y_st + dy * 13);
             button14.Location = new Point(x_st + dx * 0, y_st + dy * 14);
             button15.Location = new Point(x_st + dx * 0, y_st + dy * 15);
-
             button16.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             button17.Location = new Point(x_st + dx * 1, y_st + dy * 1);
             button18.Location = new Point(x_st + dx * 1, y_st + dy * 2);
