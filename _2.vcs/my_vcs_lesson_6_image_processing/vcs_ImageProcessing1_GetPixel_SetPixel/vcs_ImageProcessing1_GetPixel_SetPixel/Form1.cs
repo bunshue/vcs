@@ -1,0 +1,366 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+
+using System.IO;
+using System.Threading;
+using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;   //for BitmapData
+
+using System.Runtime.InteropServices;   //for Marshal
+
+namespace vcs_ImageProcessing1_GetPixel_SetPixel
+{
+    public partial class Form1 : Form
+    {
+        string filename = @"C:\_git\vcs\_1.data\______test_files1\elephant.jpg";
+        //string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+        //string filename = @"C:\_git\vcs\_1.data\______test_files1\_image_processing\isinbaeva.jpg";
+        //string filename = @"C:\_git\vcs\_1.data\______test_files1\naruto.jpg";
+
+        Bitmap bitmap1;
+
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            button0.Text = "恢復";
+            reset_pictureBox();
+            show_item_location();
+        }
+
+        void reset_pictureBox()
+        {
+            //讀取圖檔
+            pictureBox1.Image = Image.FromFile(filename);
+        }
+
+        void show_item_location()
+        {
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
+
+            //button
+            x_st = 10;
+            y_st = 10;
+            dx = 170 + 10;
+            dy = 50 + 10;
+
+            button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+            button10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button13.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button14.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            button15.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            button16.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            button17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+            button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
+            button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
+
+            trackBar_R.Location = new Point(x_st + dx * 0, y_st + dy * 10);
+            trackBar_G.Location = new Point(x_st + dx * 0, y_st + dy * 11);
+            trackBar_B.Location = new Point(x_st + dx * 0, y_st + dy * 12);
+
+            tb_R.Location = new Point(x_st + dx * 2 - 80, y_st + dy * 10);
+            tb_G.Location = new Point(x_st + dx * 2 - 80, y_st + dy * 11);
+            tb_B.Location = new Point(x_st + dx * 2 - 80, y_st + dy * 12);
+
+            pictureBox1.Size = new Size(680, 680);
+            pictureBox1.Location = new Point(x_st + dx * 2, 10);
+
+            pictureBox2.Size = new Size(680, 680);
+            pictureBox2.Location = new Point(x_st + dx * 2, 10 + 500);
+
+            richTextBox1.Size = new Size(400, 900);
+            richTextBox1.Location = new Point(x_st + dx * 8, y_st + dy * 0);
+
+            //最大化螢幕
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.WindowState = FormWindowState.Maximized;
+            bt_exit_setup();
+        }
+
+        private void bt_exit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        void bt_exit_setup()
+        {
+            int width = 5;
+            int w = 50; //設定按鈕大小 W
+            int h = 50; //設定按鈕大小 H
+
+            Button bt_exit = new Button();  // 實例化按鈕
+            bt_exit.Name = "bt_exit";
+            bt_exit.Size = new Size(w, h);
+            bt_exit.Text = "";
+            Bitmap bmp = new Bitmap(w, h);
+            Graphics g = Graphics.FromImage(bmp);
+            Pen p = new Pen(Color.Red, width);
+            g.Clear(Color.Pink);
+            g.DrawRectangle(p, width + 1, width + 1, w - 1 - (width + 1) * 2, h - 1 - (width + 1) * 2);
+            g.DrawLine(p, 0, 0, w - 1, h - 1);
+            g.DrawLine(p, w - 1, 0, 0, h - 1);
+            bt_exit.Image = bmp;
+
+            bt_exit.Location = new Point(this.ClientSize.Width - bt_exit.Width, 0);
+            bt_exit.Click += bt_exit_Click;     // 加入按鈕事件
+
+            this.Controls.Add(bt_exit); // 將按鈕加入表單
+            bt_exit.BringToFront();     //移到最上層
+        }
+
+        private void button0_Click(object sender, EventArgs e)
+        {
+            reset_pictureBox();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            //水平Mirror
+            int xx;
+            int yy;
+            int ww;
+            int hh;
+
+            richTextBox1.Text += "水平Mirror處理中~~~~~~\n";
+
+            bitmap1 = new Bitmap(filename);
+            //g = Graphics.FromImage(bitmap1);
+
+            ww = bitmap1.Width / 2;
+            hh = bitmap1.Height / 1;
+
+            for (yy = 0; yy < hh; yy++)
+            {
+                for (xx = 0; xx < ww; xx++)
+                {
+                    Color pp = bitmap1.GetPixel(bitmap1.Width - xx - 1, yy);
+                    bitmap1.SetPixel(bitmap1.Width - xx - 1, yy, bitmap1.GetPixel(xx, yy));
+                    bitmap1.SetPixel(xx, yy, pp);
+                }
+            }
+            pictureBox2.Image = bitmap1;
+            richTextBox1.Text += "處理完成\n";
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            //垂直Mirror
+            int xx;
+            int yy;
+            int ww;
+            int hh;
+
+            richTextBox1.Text += "垂直Mirror處理中~~~~~~\n";
+
+            bitmap1 = new Bitmap(filename);
+            //g = Graphics.FromImage(bitmap1);
+
+            ww = bitmap1.Width / 1;
+            hh = bitmap1.Height / 2;
+
+            for (xx = 0; xx < ww; xx++)
+            {
+                for (yy = 0; yy < hh; yy++)
+                {
+                    Color pp = bitmap1.GetPixel(xx, bitmap1.Height - yy - 1);
+                    bitmap1.SetPixel(xx, bitmap1.Height - yy - 1, bitmap1.GetPixel(xx, yy));
+                    bitmap1.SetPixel(xx, yy, pp);
+                }
+            }
+            pictureBox2.Image = bitmap1;
+            richTextBox1.Text += "處理完成\n";
+
+        }
+
+        void draw_picture(int ratio_r, int ratio_g, int ratio_b)
+        {
+            int xx;
+            int yy;
+            int ww;
+            int hh;
+            Color ppp;
+            int A;
+            int R;
+            int G;
+            int B;
+
+            richTextBox1.Text += "處理中~~~~~~\n";
+
+            bitmap1 = new Bitmap(filename);
+            //g = Graphics.FromImage(bitmap1);
+
+            ww = bitmap1.Width / 2;
+            hh = bitmap1.Height / 2;
+
+            for (yy = 0; yy < hh; yy++)
+            {
+                for (xx = 0; xx < ww; xx++)
+                {
+                    Color pp = bitmap1.GetPixel(xx, yy);
+
+                    A = pp.A;
+                    R = pp.R;
+                    G = pp.G;
+                    B = pp.B;
+
+                    R = R * ratio_r / 100;
+                    if (R > 255)
+                        R = 255;
+                    G = G * ratio_g / 100;
+                    if (G > 255)
+                        G = 255;
+                    B = B * ratio_b / 100;
+                    if (B > 255)
+                        B = 255;
+
+                    ppp = Color.FromArgb(A, R, G, B);
+                    bitmap1.SetPixel(xx, yy, ppp);
+                }
+            }
+            pictureBox2.Image = bitmap1;
+            richTextBox1.Text += "處理完成\n";
+        }
+
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            //R
+            draw_picture(100, 0, 0);
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            //G
+            draw_picture(0, 100, 0);
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            //B
+            draw_picture(0, 0, 100);
+
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            int ratio_r;
+            int ratio_g;
+            int ratio_b;
+            ratio_r = trackBar_R.Value;
+            ratio_g = trackBar_G.Value;
+            ratio_b = trackBar_B.Value;
+
+            draw_picture(ratio_r, ratio_g, ratio_b);
+
+        }
+
+        int ratio = 100;
+        private void button10_Click(object sender, EventArgs e)
+        {
+            if (ratio <= 255)
+            {
+                ratio += 10;
+                richTextBox1.Text += ratio.ToString() + " %\n";
+
+                draw_picture(ratio, ratio, ratio);
+            }
+
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            if (ratio >= 10)
+            {
+                ratio -= 10;
+                richTextBox1.Text += ratio.ToString() + " %\n";
+
+                draw_picture(ratio, ratio, ratio);
+            }
+
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void trackBar_R_Scroll(object sender, EventArgs e)
+        {
+            tb_R.Text = trackBar_R.Value.ToString();
+        }
+
+        private void trackBar_G_Scroll(object sender, EventArgs e)
+        {
+            tb_G.Text = trackBar_G.Value.ToString();
+        }
+
+        private void trackBar_B_Scroll(object sender, EventArgs e)
+        {
+            tb_B.Text = trackBar_B.Value.ToString();
+        }
+    }
+}
+

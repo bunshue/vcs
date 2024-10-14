@@ -42,11 +42,11 @@ edges = [
     [11, 8], [11, 9], [11, 10]
   ]
 
-from tkinter import * # Import tkinter
+import tkinter as tk
 from GraphView import GraphView
 from Graph import Graph
     
-window = Tk() # Create a window
+window = tk.Tk() # Create a window
 window.title("US Map") # Set title
 
 graph = Graph(vertices, edges)
@@ -54,3 +54,4 @@ view = GraphView(graph, window, 750, 410)
 view.pack()
 
 window.mainloop() # Create an event loop
+

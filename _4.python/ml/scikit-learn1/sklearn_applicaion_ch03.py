@@ -1,7 +1,15 @@
 """
 Scikit-learn 詳解與企業應用_機器學習最佳入門與實戰
 
+花萼長度(Sepal.Length)
+花萼寬度(Sepal.Width)
+花瓣長度(Petal.Length)
+花瓣寬度(Petal.Width)。
+['sepal length (cm)', 'sepal width (cm)', 'petal length (cm)', 'petal width (cm)']
+['setosa' 'versicolor' 'virginica']
+
 """
+
 print("------------------------------------------------------------")  # 60個
 
 # 共同
@@ -72,6 +80,24 @@ print(cc)
 print("描述統計量")
 cc = df.describe()
 print(cc)
+
+print("df之大小")
+M, N = df.shape
+print(df.shape)
+print('df之大小', M, 'X',N)
+
+print('iris 資料集欄名columns')
+cc = df.columns
+print(cc)
+
+print('花萼長度')
+print(df['sepal length (cm)'].head())
+print('花萼寬度')
+print(df['sepal width (cm)'].head())
+print('花瓣長度')
+print(df['petal length (cm)'].head())
+print('花瓣寬度')
+print(df['petal width (cm)'].head())
 
 # 箱型圖
 import seaborn as sns
@@ -187,6 +213,7 @@ X_new = [[sepal_length, sepal_width, petal_length, petal_width]]
 X_new = scaler.transform(X_new)
 
 labels = ["setosa", "versicolor", "virginica"]
+# 山鳶尾 變色鳶尾 維吉尼亞鳶尾
 
 print("### 預測品種是：", labels[clf.predict(X_new)[0]])
 

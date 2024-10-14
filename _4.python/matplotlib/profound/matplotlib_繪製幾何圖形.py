@@ -93,11 +93,12 @@ print("------------------------------------------------------------")  # 60個
 from matplotlib.patches import Circle
 import matplotlib.image as img
 
-jk = img.imread("jk.jpg")  # 讀取原始圖像
+filename = "C:/_git/vcs/_1.data/______test_files1/__pic/_angry_bird/Angry-Birds01.jpg"
+image = img.imread(filename)  # 讀取原始圖像
 fig, ax = plt.subplots()  # 建立 axes 軸物件
-im = ax.imshow(jk)  # 顯示 jk 影像物件
+im = ax.imshow(image)  # 顯示 image 影像物件
 # 建立剪輯模式
-patch = Circle((160, 160), radius=150, transform=ax.transData)
+patch = Circle((510, 380), radius=180, transform=ax.transData)
 im.set_clip_path(patch)  # 建立剪輯結果
 ax.axis("off")  # 關閉軸標記與刻度
 
@@ -212,12 +213,13 @@ print("------------------------------------------------------------")  # 60個
 from matplotlib.patches import Rectangle
 import matplotlib.image as img
 
-jk = img.imread("jk.jpg")  # 讀取原始圖像
+filename = "C:/_git/vcs/_1.data/______test_files1/__pic/_angry_bird/Angry-Birds01.jpg"
+image = img.imread(filename)  # 讀取原始圖像
 fig, ax = plt.subplots()  # 建立 axes 軸物件
-im = ax.imshow(jk)  # 顯示 jk 影像物件
+im = ax.imshow(image)  # 顯示 image 影像物件
 ax.add_patch(
     Rectangle(
-        (60, 30), 200, 200, fc="none", ec="g", lw=5  # 矩形 xy  # 寬與高  # 內部顏色  # 矩形框的顏色
+        (350, 220), 320, 320, fc="none", ec="r", lw=5  # 矩形 xy  # 寬與高  # 內部顏色  # 矩形框的顏色
     )
 )  # 矩形線寬
 ax.axis("off")  # 關閉軸標記與刻度
