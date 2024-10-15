@@ -89,35 +89,5 @@ namespace vcs_ImageConversion2.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-        
-        /// <summary>
-        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
-        /// </summary>
-        internal static System.Drawing.Bitmap 图标__163_ {
-            get {
-                object obj = ResourceManager.GetObject("图标__163_", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查詢類似 (圖示) 的類型 System.Drawing.Icon 當地語系化資源。
-        /// </summary>
-        internal static System.Drawing.Icon 图标__23_ {
-            get {
-                object obj = ResourceManager.GetObject("图标__23_", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
-        /// </summary>
-        internal static System.Drawing.Bitmap 图标__28_ {
-            get {
-                object obj = ResourceManager.GetObject("图标__28_", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
     }
 }

@@ -50,7 +50,7 @@ namespace _vcs_MakePicture
             x_st = 850;
             y_st = 10;
             groupBox1.Location = new Point(x_st - 10, y_st);
-            groupBox1.ClientSize = new Size(65 * 8 + 12, 80);
+            groupBox1.ClientSize = new Size(65 * 9 + 12, 80);
 
             x_st = 10;
             y_st = 13;
@@ -65,6 +65,7 @@ namespace _vcs_MakePicture
             bt6.Location = new Point(x_st + dx * 6, y_st + dy * 0);
             bt7.Location = new Point(x_st + dx * 7, y_st + dy * 0);
             bt7.BackgroundImage = Properties.Resources.folder_open;
+            bt8.Location = new Point(x_st + dx * 8, y_st + dy * 0);
 
             //button
             x_st = 850;
@@ -1292,7 +1293,6 @@ namespace _vcs_MakePicture
             pointb = new Point(width * 15 / 16, height * 10 / 16);
             g.DrawLine(p, pointa, pointb);     // Draw line to screen.
 
-
             p = new Pen(foreground_color, 7);
             p.EndCap = System.Drawing.Drawing2D.LineCap.ArrowAnchor;
 
@@ -2234,58 +2234,12 @@ namespace _vcs_MakePicture
             pictureBox1.Image = bitmap1;
 
             string filename = Application.StartupPath + "\\IMG_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
-
             bitmap1.Save(@filename, ImageFormat.Bmp);
-
-            richTextBox1.Text += "存檔成功\n";
             richTextBox1.Text += "已存檔 : " + filename + "\n";
         }
 
-        //C#獲取圖片的指定部分
-        /// <summary>
-        /// 獲取圖片指定部分
-        /// </summary>
-        /// <param name="filename">圖片路徑</param>
-        /// <param name="sx">原始圖片開始截取處的坐標X值</param>
-        /// <param name="sy">原始圖片開始截取處的坐標Y值</param>
-        /// <param name="sWidth">原始圖片的寬度</param>
-        /// <param name="sHeight">原始圖片的高度</param>
-        /// <param name="dx">目標圖片開始繪制處的坐標X值(通常為0)</param>
-        /// <param name="dy">目標圖片開始繪制處的坐標Y值(通常為0)</param>
-        /// <param name="dWidth">目標圖片的寬度</param>
-        /// <param name="dHeight">目標圖片的高度</param>
-        static Bitmap GetPart(string filename, int sx, int sy, int sWidth, int sHeight, int dx, int dy, int dWidth, int dHeight)
-        {
-            Image image = Image.FromFile(filename);
-
-            Bitmap bitmap1 = new Bitmap(dWidth, dHeight);
-            Graphics g = Graphics.FromImage(bitmap1);
-            Rectangle rec1 = new Rectangle(new Point(sx, sy), new Size(sWidth, sHeight));//原圖位置
-            Rectangle rec2 = new Rectangle(new Point(dx, dy), new Size(dWidth, dHeight));//目標位置
-
-            g.DrawImage(image, rec2, rec1, GraphicsUnit.Pixel);
-
-            return bitmap1;
-        }
-
-
         private void button58_Click(object sender, EventArgs e)
         {
-            //取得圖片的一部分
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\SF0.jpg";
-
-            int dd = 500;
-            int sx = 0 + dd * 4;
-            int sy = 0;
-            int sWidth = 700;
-            int sHeight = 735;
-            int dx = 0;
-            int dy = 0;
-            int dWidth = 700;
-            int dHeight = 735;
-
-            bitmap1 = GetPart(filename, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
-            pictureBox1.Image = bitmap1;
         }
 
         private void button59_Click(object sender, EventArgs e)
@@ -2326,7 +2280,6 @@ namespace _vcs_MakePicture
             pictureBox1.Image = bitmap1;
         }
 
-
         private void button60_Click(object sender, EventArgs e)
         {
             string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
@@ -2346,8 +2299,6 @@ namespace _vcs_MakePicture
             String filename1 = filename + ".jpg";
 
             bitmap1.Save(@filename1, ImageFormat.Jpeg);
-
-            richTextBox1.Text += "存檔成功\n";
             richTextBox1.Text += "已存檔 : " + filename1 + "\n";
         }
 
@@ -2381,6 +2332,7 @@ namespace _vcs_MakePicture
 
             filename = Application.StartupPath + "\\IMG_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
             bitmap1.Save(@filename, ImageFormat.Bmp);
+            richTextBox1.Text += "已存檔 : " + filename + "\n";
 
             pictureBox1.Image = bitmap1;
         }
@@ -2416,6 +2368,7 @@ namespace _vcs_MakePicture
 
             filename = Application.StartupPath + "\\IMG_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
             bitmap1.Save(@filename, ImageFormat.Bmp);
+            richTextBox1.Text += "已存檔 : " + filename + "\n";
 
             pictureBox1.Image = bitmap1;
         }
@@ -2488,6 +2441,7 @@ namespace _vcs_MakePicture
 
             filename = Application.StartupPath + "\\IMG_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
             bitmap1.Save(@filename, ImageFormat.Bmp);
+            richTextBox1.Text += "已存檔 : " + filename + "\n";
 
             pictureBox1.Image = bitmap1;
 
@@ -2803,6 +2757,145 @@ namespace _vcs_MakePicture
 
         }
 
+        private void button70_Click(object sender, EventArgs e)
+        {
+            //開圖處理存檔1
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\elephant.jpg";
+            Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
+            pictureBox1.Image = bitmap1;
+
+            //畫在一起
+            Pen p;
+            SolidBrush sb;
+
+            p = new Pen(Color.Red, 1);
+            sb = new SolidBrush(foreground_color);
+
+            int W = bitmap1.Width;
+            int H = bitmap1.Height;
+
+            Graphics g = Graphics.FromImage(bitmap1);
+
+            Point pointa;
+            Point pointb;
+
+            for (int j = 0; j <= H; j += 100)
+            {
+                for (int i = 0; i <= W; i += 100)
+                {
+                    pointa = new Point(i, 0);
+                    pointb = new Point(i, H);
+                    g.DrawLine(p, pointa, pointb);
+                }
+            }
+            for (int j = 0; j <= W; j += 100)
+            {
+                for (int i = 0; i <= H; i += 100)
+                {
+                    pointa = new Point(0, i);
+                    pointb = new Point(W, i);
+                    g.DrawLine(p, pointa, pointb);
+
+                }
+            }
+            pictureBox1.Image = bitmap1;
+        }
+
+        private void button71_Click(object sender, EventArgs e)
+        {
+            //開圖處理存檔2
+        }
+
+        /// 獲取圖片的指定部分
+        /// <summary>
+        /// 獲取圖片指定部分
+        /// </summary>
+        /// <param name="filename">圖片路徑</param>
+        /// <param name="sx">原始圖片開始截取處的坐標X值</param>
+        /// <param name="sy">原始圖片開始截取處的坐標Y值</param>
+        /// <param name="sWidth">原始圖片的寬度</param>
+        /// <param name="sHeight">原始圖片的高度</param>
+        /// <param name="dx">目標圖片開始繪制處的坐標X值(通常為0)</param>
+        /// <param name="dy">目標圖片開始繪制處的坐標Y值(通常為0)</param>
+        /// <param name="dWidth">目標圖片的寬度</param>
+        /// <param name="dHeight">目標圖片的高度</param>
+        static Bitmap GetPart(string filename, int sx, int sy, int sWidth, int sHeight, int dx, int dy, int dWidth, int dHeight)
+        {
+            Image image = Image.FromFile(filename);
+
+            Bitmap bitmap1 = new Bitmap(dWidth, dHeight);
+            Graphics g = Graphics.FromImage(bitmap1);
+            Rectangle rec1 = new Rectangle(new Point(sx, sy), new Size(sWidth, sHeight));//原圖位置
+            Rectangle rec2 = new Rectangle(new Point(dx, dy), new Size(dWidth, dHeight));//目標位置
+
+            g.DrawImage(image, rec2, rec1, GraphicsUnit.Pixel);
+
+            return bitmap1;
+        }
+
+        private void button72_Click(object sender, EventArgs e)
+        {
+            //開圖裁剪存檔
+            //取得圖片的一部分
+            //string filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\SF0.jpg";
+            //string filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\_angry_bird\Angry-Birds01.jpg";
+            //string filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\_MU\id_card_01.jpg";
+            //string filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\_book\20161226161423441.jpg";
+            //string filename = @"C:\_git\vcs\_1.data\______test_files1\elephant.jpg";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\_doraemon\original.jpg";
+
+            int sx = 175;//抓圖位置
+            int sy = 465;
+            int sWidth = 400;//抓圖大小
+            int sHeight = 310;
+            int dx = 0;//貼圖位置
+            int dy = 0;
+            int dWidth = sWidth;//貼圖大小
+            int dHeight = sHeight;
+
+            bitmap1 = GetPart(filename, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
+            pictureBox1.Image = bitmap1;
+
+            filename = Application.StartupPath + "\\pic_part_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
+            bitmap1.Save(@filename, ImageFormat.Bmp);
+            richTextBox1.Text += "已存檔 : " + filename + "\n";
+        }
+
+        private void button73_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button74_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button75_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button76_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button77_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button78_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button79_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void bt0_Click(object sender, EventArgs e)
         {
             openFileDialog1.Filter = "圖片(*.bmp,*.jpg,*.png)|*.bmp;*.jpg;*.png";
@@ -2922,6 +3015,21 @@ namespace _vcs_MakePicture
         {
             //開啟檔案總管
             Process.Start(Application.StartupPath);
+        }
+
+        private void bt8_Click(object sender, EventArgs e)
+        {
+            //picturebox存圖
+            //將pictureBox上的畫面讀出來 畫圖 存檔 ....
+            Bitmap bitmap1 = (Bitmap)pictureBox1.Image;
+            if (bitmap1 == null)
+            {
+                richTextBox1.Text += "pictureBox無資料, 離開\n";
+                return;
+            }
+            string filename = Application.StartupPath + "\\pbx_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
+            bitmap1.Save(@filename, ImageFormat.Bmp);
+            richTextBox1.Text += "已存檔 : " + filename + "\n";
         }
 
         void draw_camera_status_icon(Color back_color)
@@ -3565,5 +3673,6 @@ namespace _vcs_MakePicture
                 g.FillEllipse(sb, new Rectangle(x_st + width / 4, y_st + height / 4, width / 2, height / 2));
             }
         }
+
     }
 }

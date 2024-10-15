@@ -24,6 +24,80 @@ namespace vcs_ImageProcessing1_GetPixel_SetPixel
 
         Bitmap bitmap1;
 
+        public struct RGB
+        {
+            private byte _r;
+            private byte _g;
+            private byte _b;
+
+            public RGB(byte r, byte g, byte b)
+            {
+                this._r = r;
+                this._g = g;
+                this._b = b;
+            }
+
+            public byte R
+            {
+                get { return this._r; }
+                set { this._r = value; }
+            }
+
+            public byte G
+            {
+                get { return this._g; }
+                set { this._g = value; }
+            }
+
+            public byte B
+            {
+                get { return this._b; }
+                set { this._b = value; }
+            }
+
+            public bool Equals(RGB rgb)
+            {
+                return (this.R == rgb.R) && (this.G == rgb.G) && (this.B == rgb.B);
+            }
+        }
+
+        public struct YUV
+        {
+            private double _y;
+            private double _u;
+            private double _v;
+
+            public YUV(double y, double u, double v)
+            {
+                this._y = y;
+                this._u = u;
+                this._v = v;
+            }
+
+            public double Y
+            {
+                get { return this._y; }
+                set { this._y = value; }
+            }
+
+            public double U
+            {
+                get { return this._u; }
+                set { this._u = value; }
+            }
+
+            public double V
+            {
+                get { return this._v; }
+                set { this._v = value; }
+            }
+
+            public bool Equals(YUV yuv)
+            {
+                return (this.Y == yuv.Y) && (this.U == yuv.U) && (this.V == yuv.V);
+            }
+        }
+
         public Form1()
         {
             InitializeComponent();
@@ -39,6 +113,7 @@ namespace vcs_ImageProcessing1_GetPixel_SetPixel
         void reset_pictureBox()
         {
             //讀取圖檔
+            bitmap1 = new Bitmap(filename);
             pictureBox1.Image = Image.FromFile(filename);
         }
 
@@ -81,8 +156,9 @@ namespace vcs_ImageProcessing1_GetPixel_SetPixel
             trackBar_B.Location = new Point(x_st + dx * 0, y_st + dy * 12);
 
             tb_R.Location = new Point(x_st + dx * 2 - 80, y_st + dy * 10);
-            tb_G.Location = new Point(x_st + dx * 2 - 80, y_st + dy * 11);
-            tb_B.Location = new Point(x_st + dx * 2 - 80, y_st + dy * 12);
+            tb_G.Location = new Point(x_st + dx * 2 - 80, y_st + dy * 10 + 40);
+            tb_B.Location = new Point(x_st + dx * 2 - 80, y_st + dy * 10 + 80);
+            bt_apply.Location = new Point(x_st + dx * 2 - 80, y_st + dy * 10 + 120);
 
             pictureBox1.Size = new Size(680, 680);
             pictureBox1.Location = new Point(x_st + dx * 2, 10);
@@ -278,15 +354,6 @@ namespace vcs_ImageProcessing1_GetPixel_SetPixel
 
         private void button9_Click(object sender, EventArgs e)
         {
-            int ratio_r;
-            int ratio_g;
-            int ratio_b;
-            ratio_r = trackBar_R.Value;
-            ratio_g = trackBar_G.Value;
-            ratio_b = trackBar_B.Value;
-
-            draw_picture(ratio_r, ratio_g, ratio_b);
-
         }
 
         int ratio = 100;
@@ -413,12 +480,109 @@ namespace vcs_ImageProcessing1_GetPixel_SetPixel
 
         }
 
+        public static YUV RGBToYUV(RGB rgb)
+        {
+            double y = rgb.R * .299000 + rgb.G * .587000 + rgb.B * .114000;
+            double u = rgb.R * -.168736 + rgb.G * -.331264 + rgb.B * .500000 + 128;
+            double v = rgb.R * .500000 + rgb.G * -.418688 + rgb.B * -.081312 + 128;
+
+            return new YUV(y, u, v);
+        }
+
+        public static RGB YUVToRGB(YUV yuv)
+        {
+            byte r = (byte)(yuv.Y + 1.4075 * (yuv.V - 128));
+            byte g = (byte)(yuv.Y - 0.3455 * (yuv.U - 128) - (0.7169 * (yuv.V - 128)));
+            byte b = (byte)(yuv.Y + 1.7790 * (yuv.U - 128));
+
+            return new RGB(r, g, b);
+        }
+
         private void button15_Click(object sender, EventArgs e)
         {
+            //找過亮
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\ims_image.bmp";
+
+            richTextBox1.Text += "開啟檔案: " + filename + ", 並顯示之\n";
+
+            pictureBox2.Image = Image.FromFile(filename);
+
+            bitmap1 = new Bitmap(filename);
+            pictureBox1.Image = bitmap1;
+
+
+            if (bitmap1 == null)
+            {
+                richTextBox1.Text += "未開啟圖片\n";
+                return;
+            }
+
+            int xx;
+            int yy;
+            Color p;
+
+            for (yy = 0; yy < bitmap1.Height; yy++)
+            {
+                for (xx = 0; xx < bitmap1.Width; xx++)
+                {
+                    p = bitmap1.GetPixel(xx, yy);
+
+                    RGB pp = new RGB(p.R, p.G, p.B);
+                    YUV yyy = new YUV();
+                    yyy = RGBToYUV(pp);
+
+                    if (yyy.Y > 252)
+                    {
+                        //bitmap1.SetPixel(xx, yy, Color.FromArgb((int)yyy.Y, (int)yyy.Y, (int)yyy.Y));
+                        bitmap1.SetPixel(xx, yy, Color.Red);
+                    }
+                    else
+                    {
+                    }
+                }
+            }
+            pictureBox1.Image = bitmap1;
+
         }
 
         private void button16_Click(object sender, EventArgs e)
         {
+            //降亮度
+            if (bitmap1 == null)
+            {
+                richTextBox1.Text += "未開啟圖片\n";
+                return;
+            }
+
+            int xx;
+            int yy;
+            Color p;
+
+            for (yy = 0; yy < bitmap1.Height; yy++)
+            {
+                for (xx = 0; xx < bitmap1.Width; xx++)
+                {
+                    p = bitmap1.GetPixel(xx, yy);
+
+                    RGB pp = new RGB(p.R, p.G, p.B);
+                    YUV yyy = new YUV();
+                    RGB rrr = new RGB();
+                    yyy = RGBToYUV(pp);
+
+                    if (yyy.Y > 50)
+                    {
+                        yyy.Y -= 10;
+                    }
+                    else
+                    {
+                        yyy.Y = 50;
+                    }
+
+                    rrr = YUVToRGB(yyy);
+                    bitmap1.SetPixel(xx, yy, Color.FromArgb(rrr.R, rrr.G, rrr.B));
+                }
+            }
+            pictureBox1.Image = bitmap1;
         }
 
         private void button17_Click(object sender, EventArgs e)
@@ -447,6 +611,19 @@ namespace vcs_ImageProcessing1_GetPixel_SetPixel
         {
             tb_B.Text = trackBar_B.Value.ToString();
         }
+
+        private void bt_apply_Click(object sender, EventArgs e)
+        {
+            int ratio_r;
+            int ratio_g;
+            int ratio_b;
+            ratio_r = trackBar_R.Value;
+            ratio_g = trackBar_G.Value;
+            ratio_b = trackBar_B.Value;
+
+            draw_picture(ratio_r, ratio_g, ratio_b);
+        }
     }
 }
+
 

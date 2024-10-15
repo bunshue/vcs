@@ -13,8 +13,8 @@ namespace vcs_ZoomPicture_Lanczos
 {
     public partial class Form1 : Form
     {
-        //string filename = @"C:\_git\vcs\_1.data\______test_files1\ims02.bmp";
-        string filename = @"bmp0.bmp";
+        string filename = @"C:\_git\vcs\_1.data\______test_files1\ims01.bmp";
+        //string filename = @"bmp0.bmp";
 
         Bitmap bitmap1;
 
@@ -59,7 +59,7 @@ namespace vcs_ZoomPicture_Lanczos
             pictureBox2.SizeMode = PictureBoxSizeMode.Normal;
 
             Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
-            double k = 8.0;
+            double k = 4.0;
             Bitmap bitmap2 = ZoomLanczos2Apply(bitmap1, k);
             pictureBox2.Image = bitmap2;
             bitmap2.Save("ims02.lanczos.bmp", ImageFormat.Bmp);

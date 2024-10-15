@@ -123,6 +123,7 @@
             this.button77 = new System.Windows.Forms.Button();
             this.button78 = new System.Windows.Forms.Button();
             this.button79 = new System.Windows.Forms.Button();
+            this.bt8 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -711,6 +712,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.bt8);
             this.groupBox1.Controls.Add(this.bt7);
             this.groupBox1.Controls.Add(this.bt5);
             this.groupBox1.Controls.Add(this.bt6);
@@ -721,7 +723,7 @@
             this.groupBox1.Controls.Add(this.bt0);
             this.groupBox1.Location = new System.Drawing.Point(118, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(540, 87);
+            this.groupBox1.Size = new System.Drawing.Size(606, 87);
             this.groupBox1.TabIndex = 53;
             this.groupBox1.TabStop = false;
             // 
@@ -903,7 +905,6 @@
             this.button58.Name = "button58";
             this.button58.Size = new System.Drawing.Size(60, 60);
             this.button58.TabIndex = 62;
-            this.button58.Text = "取得圖片的一部分";
             this.button58.UseVisualStyleBackColor = true;
             this.button58.Click += new System.EventHandler(this.button58_Click);
             // 
@@ -1036,6 +1037,7 @@
             this.button70.TabIndex = 74;
             this.button70.Text = "開圖處理存檔1";
             this.button70.UseVisualStyleBackColor = true;
+            this.button70.Click += new System.EventHandler(this.button70_Click);
             // 
             // button71
             // 
@@ -1044,7 +1046,9 @@
             this.button71.Name = "button71";
             this.button71.Size = new System.Drawing.Size(60, 60);
             this.button71.TabIndex = 75;
+            this.button71.Text = "開圖處理存檔2";
             this.button71.UseVisualStyleBackColor = true;
+            this.button71.Click += new System.EventHandler(this.button71_Click);
             // 
             // button72
             // 
@@ -1053,7 +1057,9 @@
             this.button72.Name = "button72";
             this.button72.Size = new System.Drawing.Size(60, 60);
             this.button72.TabIndex = 76;
+            this.button72.Text = "開圖裁剪存檔";
             this.button72.UseVisualStyleBackColor = true;
+            this.button72.Click += new System.EventHandler(this.button72_Click);
             // 
             // button73
             // 
@@ -1063,6 +1069,7 @@
             this.button73.Size = new System.Drawing.Size(60, 60);
             this.button73.TabIndex = 77;
             this.button73.UseVisualStyleBackColor = true;
+            this.button73.Click += new System.EventHandler(this.button73_Click);
             // 
             // button74
             // 
@@ -1072,6 +1079,7 @@
             this.button74.Size = new System.Drawing.Size(60, 60);
             this.button74.TabIndex = 78;
             this.button74.UseVisualStyleBackColor = true;
+            this.button74.Click += new System.EventHandler(this.button74_Click);
             // 
             // button75
             // 
@@ -1081,6 +1089,7 @@
             this.button75.Size = new System.Drawing.Size(60, 60);
             this.button75.TabIndex = 79;
             this.button75.UseVisualStyleBackColor = true;
+            this.button75.Click += new System.EventHandler(this.button75_Click);
             // 
             // button76
             // 
@@ -1090,6 +1099,7 @@
             this.button76.Size = new System.Drawing.Size(60, 60);
             this.button76.TabIndex = 80;
             this.button76.UseVisualStyleBackColor = true;
+            this.button76.Click += new System.EventHandler(this.button76_Click);
             // 
             // button77
             // 
@@ -1099,6 +1109,7 @@
             this.button77.Size = new System.Drawing.Size(60, 60);
             this.button77.TabIndex = 81;
             this.button77.UseVisualStyleBackColor = true;
+            this.button77.Click += new System.EventHandler(this.button77_Click);
             // 
             // button78
             // 
@@ -1108,6 +1119,7 @@
             this.button78.Size = new System.Drawing.Size(60, 60);
             this.button78.TabIndex = 82;
             this.button78.UseVisualStyleBackColor = true;
+            this.button78.Click += new System.EventHandler(this.button78_Click);
             // 
             // button79
             // 
@@ -1117,6 +1129,18 @@
             this.button79.Size = new System.Drawing.Size(60, 60);
             this.button79.TabIndex = 83;
             this.button79.UseVisualStyleBackColor = true;
+            this.button79.Click += new System.EventHandler(this.button79_Click);
+            // 
+            // bt8
+            // 
+            this.bt8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bt8.Location = new System.Drawing.Point(502, 21);
+            this.bt8.Name = "bt8";
+            this.bt8.Size = new System.Drawing.Size(60, 60);
+            this.bt8.TabIndex = 59;
+            this.bt8.Text = "picturebox存圖";
+            this.bt8.UseVisualStyleBackColor = true;
+            this.bt8.Click += new System.EventHandler(this.bt8_Click);
             // 
             // Form1
             // 
@@ -1312,6 +1336,7 @@
         private System.Windows.Forms.Button button77;
         private System.Windows.Forms.Button button78;
         private System.Windows.Forms.Button button79;
+        private System.Windows.Forms.Button bt8;
     }
 }
 

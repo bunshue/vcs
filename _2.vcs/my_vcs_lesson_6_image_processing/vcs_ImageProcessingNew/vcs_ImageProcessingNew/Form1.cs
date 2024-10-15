@@ -620,6 +620,13 @@ namespace vcs_ImageProcessingNew
 
         private void button2_Click(object sender, EventArgs e)
         {
+            //白色轉為透明
+            //C#將圖片白色背景設置為透明
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            Image image = Image.FromFile(filename);
+            Bitmap bitmap1 = new Bitmap(image);
+            bitmap1.MakeTransparent(Color.White);
+            pictureBox1.Image = bitmap1;
         }
 
         private void button3_Click(object sender, EventArgs e)

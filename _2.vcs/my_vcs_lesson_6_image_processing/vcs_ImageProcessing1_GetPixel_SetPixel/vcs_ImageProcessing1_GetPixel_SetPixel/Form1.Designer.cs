@@ -57,6 +57,7 @@
             this.trackBar_B = new System.Windows.Forms.TrackBar();
             this.trackBar_G = new System.Windows.Forms.TrackBar();
             this.trackBar_R = new System.Windows.Forms.TrackBar();
+            this.bt_apply = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_B)).BeginInit();
@@ -164,7 +165,6 @@
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(170, 50);
             this.button9.TabIndex = 9;
-            this.button9.Text = "OK";
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
@@ -204,6 +204,7 @@
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(170, 50);
             this.button16.TabIndex = 18;
+            this.button16.Text = "降亮度";
             this.button16.UseVisualStyleBackColor = true;
             this.button16.Click += new System.EventHandler(this.button16_Click);
             // 
@@ -270,6 +271,7 @@
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(170, 50);
             this.button15.TabIndex = 17;
+            this.button15.Text = "找過亮";
             this.button15.UseVisualStyleBackColor = true;
             this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
@@ -285,9 +287,9 @@
             // tb_B
             // 
             this.tb_B.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_B.Location = new System.Drawing.Point(287, 649);
+            this.tb_B.Location = new System.Drawing.Point(287, 597);
             this.tb_B.Name = "tb_B";
-            this.tb_B.Size = new System.Drawing.Size(71, 36);
+            this.tb_B.Size = new System.Drawing.Size(70, 36);
             this.tb_B.TabIndex = 41;
             this.tb_B.Text = "100";
             this.tb_B.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -295,9 +297,9 @@
             // tb_G
             // 
             this.tb_G.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_G.Location = new System.Drawing.Point(287, 589);
+            this.tb_G.Location = new System.Drawing.Point(287, 555);
             this.tb_G.Name = "tb_G";
-            this.tb_G.Size = new System.Drawing.Size(71, 36);
+            this.tb_G.Size = new System.Drawing.Size(70, 36);
             this.tb_G.TabIndex = 40;
             this.tb_G.Text = "100";
             this.tb_G.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -305,9 +307,9 @@
             // tb_R
             // 
             this.tb_R.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_R.Location = new System.Drawing.Point(287, 522);
+            this.tb_R.Location = new System.Drawing.Point(287, 513);
             this.tb_R.Name = "tb_R";
-            this.tb_R.Size = new System.Drawing.Size(71, 36);
+            this.tb_R.Size = new System.Drawing.Size(70, 36);
             this.tb_R.TabIndex = 39;
             this.tb_R.Text = "100";
             this.tb_R.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -342,11 +344,22 @@
             this.trackBar_R.Value = 100;
             this.trackBar_R.Scroll += new System.EventHandler(this.trackBar_R_Scroll);
             // 
+            // bt_apply
+            // 
+            this.bt_apply.Location = new System.Drawing.Point(288, 639);
+            this.bt_apply.Name = "bt_apply";
+            this.bt_apply.Size = new System.Drawing.Size(70, 35);
+            this.bt_apply.TabIndex = 42;
+            this.bt_apply.Text = "Apply";
+            this.bt_apply.UseVisualStyleBackColor = true;
+            this.bt_apply.Click += new System.EventHandler(this.bt_apply_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1328, 904);
+            this.Controls.Add(this.bt_apply);
             this.Controls.Add(this.tb_B);
             this.Controls.Add(this.tb_G);
             this.Controls.Add(this.tb_R);
@@ -420,6 +433,7 @@
         private System.Windows.Forms.TrackBar trackBar_B;
         private System.Windows.Forms.TrackBar trackBar_G;
         private System.Windows.Forms.TrackBar trackBar_R;
+        private System.Windows.Forms.Button bt_apply;
     }
 }
 

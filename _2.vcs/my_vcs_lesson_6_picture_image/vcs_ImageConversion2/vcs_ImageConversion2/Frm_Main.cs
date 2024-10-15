@@ -50,7 +50,7 @@ namespace vcs_ImageConversion2
                     string ImgType = ImgName.Substring(ImgName.LastIndexOf(".") + 1, ImgName.Length - ImgName.LastIndexOf(".") - 1);
                     fi = new FileInfo(path1[i].ToString());             //實例化FileInfo對象
                     //將每一行數據第一個位置的圖標添加到imageList1中
-                    imageList1.Images.Add(ImgName, Properties.Resources.图标__23_);
+                    //imageList1.Images.Add(ImgName, Properties.Resources.图标__23_);
                     info[1] = ImgName;                      //圖片名稱
                     info[2] = ImgType;                      //圖片類型
                     info[3] = fi.LastWriteTime.ToShortDateString();//圖片最后修改日期
