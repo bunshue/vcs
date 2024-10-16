@@ -1,109 +1,3 @@
-#
-# turtle.py: a Tkinter based turtle graphics module for Python
-# Version 1.1b - 4. 5. 2009
-#
-# Copyright (C) 2006 - 2010  Gregor Lingl
-# email: glingl@aon.at
-#
-# This software is provided 'as-is', without any express or implied
-# warranty.  In no event will the authors be held liable for any damages
-# arising from the use of this software.
-#
-# Permission is granted to anyone to use this software for any purpose,
-# including commercial applications, and to alter it and redistribute it
-# freely, subject to the following restrictions:
-#
-# 1. The origin of this software must not be misrepresented; you must not
-#    claim that you wrote the original software. If you use this software
-#    in a product, an acknowledgment in the product documentation would be
-#    appreciated but is not required.
-# 2. Altered source versions must be plainly marked as such, and must not be
-#    misrepresented as being the original software.
-# 3. This notice may not be removed or altered from any source distribution.
-
-
-"""
-Turtle graphics is a popular way for introducing programming to
-kids. It was part of the original Logo programming language developed
-by Wally Feurzig and Seymour Papert in 1966.
-
-Imagine a robotic turtle starting at (0, 0) in the x-y plane. After an ``import turtle``, give it
-the command turtle.forward(15), and it moves (on-screen!) 15 pixels in
-the direction it is facing, drawing a line as it moves. Give it the
-command turtle.right(25), and it rotates in-place 25 degrees clockwise.
-
-By combining together these and similar commands, intricate shapes and
-pictures can easily be drawn.
-
------ turtle.py
-
-turtle.speed(0)This module is an extended reimplementation of turtle.py from the
-Python standard distribution up to Python 2.5. (See: http://www.python.org)
-
-It tries to keep the merits of turtle.py and to be (nearly) 100%
-compatible with it. This means in the first place to enable the
-learning programmer to use all the commands, classes and methods
-interactively when using the module from within IDLE run with
-the -n switch.
-
-Roughly it has the following features added:
-
-- Better animation of the turtle movements, especially of turning the
-  turtle. So the turtles can more easily be used as a visual feedback
-  instrument by the (beginning) programmer.
-
-- Different turtle shapes, gif-images as turtle shapes, user defined
-  and user controllable turtle shapes, among them compound
-  (multicolored) shapes. Turtle shapes can be stretched and tilted, which
-  makes turtles very versatile geometrical objects.
-
-- Fine control over turtle movement and screen updates via delay(),
-  and enhanced tracer() and speed() methods.
-
-- Aliases for the most commonly used commands, like fd for forward etc.,
-  following the early Logo traditions. This reduces the boring work of
-  typing long sequences of commands, which often occur in a natural way
-  when kids try to program fancy pictures on their first encounter with
-  turtle graphics.
-
-- Turtles now have an undo()-method with configurable undo-buffer.
-
-- Some simple commands/methods for creating event driven programs
-  (mouse-, key-, timer-events). Especially useful for programming games.
-
-- A scrollable Canvas class. The default scrollable Canvas can be
-  extended interactively as needed while playing around with the turtle(s).
-
-- A TurtleScreen class with methods controlling background color or
-  background image, window and canvas size and other properties of the
-  TurtleScreen.
-
-- There is a method, setworldcoordinates(), to install a user defined
-  coordinate-system for the TurtleScreen.
-
-- The implementation uses a 2-vector class named Vec2D, derived from tuple.
-  This class is public, so it can be imported by the application programmer,
-  which makes certain types of computations very natural and compact.
-
-- Appearance of the TurtleScreen and the Turtles at startup/import can be
-  configured by means of a turtle.cfg configuration file.
-  The default configuration mimics the appearance of the old turtle module.
-
-- If configured appropriately the module reads in docstrings from a docstring
-  dictionary in some different language, supplied separately  and replaces
-  the English ones by those read in. There is a utility function
-  write_docstringdict() to write a dictionary with the original (English)
-  docstrings to disc, so it can serve as a template for translations.
-
-Behind the scenes there are some features included with possible
-extensions in mind. These will be commented and documented elsewhere.
-
-"""
-
-_ver = "turtle 1.1b- - for Python 3.1   -  4. 5. 2009"
-
-# print(_ver)
-
 import tkinter as TK
 import types
 import math
@@ -2136,32 +2030,6 @@ class TPen(object):
         return self._drawing
 
     def speed(self, speed=None):
-        """ Return or set the turtle's speed.
-
-        Optional argument:
-        speed -- an integer in the range 0..10 or a speedstring (see below)
-
-        Set the turtle's speed to an integer value in the range 0 .. 10.
-        If no argument is given: return current speed.
-
-        If input is a number greater than 10 or smaller than 0.5,
-        speed is set to 0.
-        Speedstrings  are mapped to speedvalues in the following way:
-            'fastest' :  0
-            'fast'    :  10
-            'normal'  :  6
-            'slow'    :  3
-            'slowest' :  1
-        speeds from 1 to 10 enforce increasingly faster animation of
-        line drawing and turtle turning.
-
-        Attention:
-        speed = 0 : *no* animation takes place. forward/back makes turtle jump
-        and likewise left/right make the turtle turn instantly.
-
-        Example (for a Turtle instance named turtle):
-        >>> turtle.speed(3)
-        """
         speeds = {'fastest':0, 'fast':10, 'normal':6, 'slow':3, 'slowest':1 }
         if speed is None:
             return self._speed
@@ -2174,37 +2042,6 @@ class TPen(object):
         self.pen(speed=speed)
 
     def color(self, *args):
-        """Return or set the pencolor and fillcolor.
-
-        Arguments:
-        Several input formats are allowed.
-        They use 0, 1, 2, or 3 arguments as follows:
-
-        color()
-            Return the current pencolor and the current fillcolor
-            as a pair of color specification strings as are returned
-            by pencolor and fillcolor.
-        color(colorstring), color((r,g,b)), color(r,g,b)
-            inputs as in pencolor, set both, fillcolor and pencolor,
-            to the given value.
-        color(colorstring1, colorstring2),
-        color((r1,g1,b1), (r2,g2,b2))
-            equivalent to pencolor(colorstring1) and fillcolor(colorstring2)
-            and analogously, if the other input format is used.
-
-        If turtleshape is a polygon, outline and interior of that polygon
-        is drawn with the newly set colors.
-        For mor info see: pencolor, fillcolor
-
-        Example (for a Turtle instance named turtle):
-        >>> turtle.color('red', 'green')
-        >>> turtle.color()
-        ('red', 'green')
-        >>> colormode(255)
-        >>> color((40, 80, 120), (160, 200, 240))
-        >>> color()
-        ('#285078', '#a0c8f0')
-        """
         if args:
             l = len(args)
             if l == 1:
@@ -2220,34 +2057,6 @@ class TPen(object):
             return self._color(self._pencolor), self._color(self._fillcolor)
 
     def pencolor(self, *args):
-        """ Return or set the pencolor.
-
-        Arguments:
-        Four input formats are allowed:
-          - pencolor()
-            Return the current pencolor as color specification string,
-            possibly in hex-number format (see example).
-            May be used as input to another color/pencolor/fillcolor call.
-          - pencolor(colorstring)
-            s is a Tk color specification string, such as "red" or "yellow"
-          - pencolor((r, g, b))
-            *a tuple* of r, g, and b, which represent, an RGB color,
-            and each of r, g, and b are in the range 0..colormode,
-            where colormode is either 1.0 or 255
-          - pencolor(r, g, b)
-            r, g, and b represent an RGB color, and each of r, g, and b
-            are in the range 0..colormode
-
-        If turtleshape is a polygon, the outline of that polygon is drawn
-        with the newly set pencolor.
-
-        Example (for a Turtle instance named turtle):
-        >>> turtle.pencolor('brown')
-        >>> tup = (0.2, 0.8, 0.55)
-        >>> turtle.pencolor(tup)
-        >>> turtle.pencolor()
-        '#33cc8c'
-        """
         if args:
             color = self._colorstr(args)
             if color == self._pencolor:
@@ -2257,33 +2066,6 @@ class TPen(object):
             return self._color(self._pencolor)
 
     def fillcolor(self, *args):
-        """ Return or set the fillcolor.
-
-        Arguments:
-        Four input formats are allowed:
-          - fillcolor()
-            Return the current fillcolor as color specification string,
-            possibly in hex-number format (see example).
-            May be used as input to another color/pencolor/fillcolor call.
-          - fillcolor(colorstring)
-            s is a Tk color specification string, such as "red" or "yellow"
-          - fillcolor((r, g, b))
-            *a tuple* of r, g, and b, which represent, an RGB color,
-            and each of r, g, and b are in the range 0..colormode,
-            where colormode is either 1.0 or 255
-          - fillcolor(r, g, b)
-            r, g, and b represent an RGB color, and each of r, g, and b
-            are in the range 0..colormode
-
-        If turtleshape is a polygon, the interior of that polygon is drawn
-        with the newly set fillcolor.
-
-        Example (for a Turtle instance named turtle):
-        >>> turtle.fillcolor('violet')
-        >>> col = turtle.pencolor()
-        >>> turtle.fillcolor(col)
-        >>> turtle.fillcolor(0, .5, 0)
-        """
         if args:
             color = self._colorstr(args)
             if color == self._fillcolor:
@@ -2293,93 +2075,15 @@ class TPen(object):
             return self._color(self._fillcolor)
 
     def showturtle(self):
-        """Makes the turtle visible.
-
-        Aliases: showturtle | st
-
-        No argument.
-
-        Example (for a Turtle instance named turtle):
-        >>> turtle.hideturtle()
-        >>> turtle.showturtle()
-        """
         self.pen(shown=True)
 
     def hideturtle(self):
-        """Makes the turtle invisible.
-
-        Aliases: hideturtle | ht
-
-        No argument.
-
-        It's a good idea to do this while you're in the
-        middle of a complicated drawing, because hiding
-        the turtle speeds up the drawing observably.
-
-        Example (for a Turtle instance named turtle):
-        >>> turtle.hideturtle()
-        """
         self.pen(shown=False)
 
     def isvisible(self):
-        """Return True if the Turtle is shown, False if it's hidden.
-
-        No argument.
-
-        Example (for a Turtle instance named turtle):
-        >>> turtle.hideturtle()
-        >>> print turtle.isvisible():
-        False
-        """
         return self._shown
 
     def pen(self, pen=None, **pendict):
-        """Return or set the pen's attributes.
-
-        Arguments:
-            pen -- a dictionary with some or all of the below listed keys.
-            **pendict -- one or more keyword-arguments with the below
-                         listed keys as keywords.
-
-        Return or set the pen's attributes in a 'pen-dictionary'
-        with the following key/value pairs:
-           "shown"      :   True/False
-           "pendown"    :   True/False
-           "pencolor"   :   color-string or color-tuple
-           "fillcolor"  :   color-string or color-tuple
-           "pensize"    :   positive number
-           "speed"      :   number in range 0..10
-           "resizemode" :   "auto" or "user" or "noresize"
-           "stretchfactor": (positive number, positive number)
-           "shearfactor":   number
-           "outline"    :   positive number
-           "tilt"       :   number
-
-        This dictionary can be used as argument for a subsequent
-        pen()-call to restore the former pen-state. Moreover one
-        or more of these attributes can be provided as keyword-arguments.
-        This can be used to set several pen attributes in one statement.
-
-
-        Examples (for a Turtle instance named turtle):
-        >>> turtle.pen(fillcolor="black", pencolor="red", pensize=10)
-        >>> turtle.pen()
-        {'pensize': 10, 'shown': True, 'resizemode': 'auto', 'outline': 1,
-        'pencolor': 'red', 'pendown': True, 'fillcolor': 'black',
-        'stretchfactor': (1,1), 'speed': 3, 'shearfactor': 0.0}
-        >>> penstate=turtle.pen()
-        >>> turtle.color("yellow","")
-        >>> turtle.penup()
-        >>> turtle.pen()
-        {'pensize': 10, 'shown': True, 'resizemode': 'auto', 'outline': 1,
-        'pencolor': 'yellow', 'pendown': False, 'fillcolor': '',
-        'stretchfactor': (1,1), 'speed': 3, 'shearfactor': 0.0}
-        >>> p.pen(penstate, fillcolor="green")
-        >>> p.pen()
-        {'pensize': 10, 'shown': True, 'resizemode': 'auto', 'outline': 1,
-        'pencolor': 'red', 'pendown': True, 'fillcolor': 'green',
-        'stretchfactor': (1,1), 'speed': 3, 'shearfactor': 0.0}
-        """
         _pd =  {"shown"         : self._shown,
                 "pendown"       : self._drawing,
                 "pencolor"      : self._pencolor,
@@ -3620,22 +3324,8 @@ class RawTurtle(TPen, TNavigator):
             self.undobuffer.pop()
 
     def undo(self):
-        """undo (repeatedly) the last turtle action.
+        #undo (repeatedly) the last turtle action.
 
-        No argument.
-
-        undo (repeatedly) the last turtle action.
-        Number of available undo actions is determined by the size of
-        the undobuffer.
-
-        Example (for a Turtle instance named turtle):
-        >>> for i in range(4):
-        ...     turtle.fd(50); turtle.lt(80)
-        ...
-        >>> for i in range(8):
-        ...     turtle.undo()
-        ...
-        """
         if self.undobuffer is None:
             return
         item = self.undobuffer.pop()
@@ -3692,29 +3382,6 @@ class _Screen(TurtleScreen):
 
     def setup(self, width=_CFG["width"], height=_CFG["height"],
               startx=_CFG["leftright"], starty=_CFG["topbottom"]):
-        """ Set the size and position of the main window.
-
-        Arguments:
-        width: as integer a size in pixels, as float a fraction of the screen.
-          Default is 50% of screen.
-        height: as integer the height in pixels, as float a fraction of the
-          screen. Default is 75% of screen.
-        startx: if positive, starting position in pixels from the left
-          edge of the screen, if negative from the right edge
-          Default, startx=None is to center window horizontally.
-        starty: if positive, starting position in pixels from the top
-          edge of the screen, if negative from the bottom edge
-          Default, starty=None is to center window vertically.
-
-        Examples (for a Screen instance named screen):
-        >>> screen.setup (width=200, height=200, startx=0, starty=0)
-
-        sets window to 200x200 pixels, in upper left of screen
-
-        >>> screen.setup(width=.75, height=0.5, startx=None, starty=None)
-
-        sets window to 75% of screen by 50% of screen and centers
-        """
         if not hasattr(self._root, "set_geometry"):
             return
         sw = self._root.win_width()
@@ -3731,18 +3398,6 @@ class _Screen(TurtleScreen):
         self.update()
 
     def title(self, titlestring):
-        """Set title of turtle-window
-
-        Argument:
-        titlestring -- a string, to appear in the titlebar of the
-                       turtle graphics window.
-
-        This is a method of Screen-class. Not available for TurtleScreen-
-        objects.
-
-        Example (for a Screen instance named screen):
-        >>> screen.title("Welcome to the turtle-zoo!")
-        """
         if _Screen._root is not None:
             _Screen._root.title(titlestring)
         _Screen._title = titlestring
@@ -3758,32 +3413,9 @@ class _Screen(TurtleScreen):
         root.destroy()
 
     def bye(self):
-        """Shut the turtlegraphics window.
-
-        Example (for a TurtleScreen instance named screen):
-        >>> screen.bye()
-        """
         self._destroy()
 
     def exitonclick(self):
-        """Go into mainloop until the mouse is clicked.
-
-        No arguments.
-
-        Bind bye() method to mouseclick on TurtleScreen.
-        If "using_IDLE" - value in configuration dictionary is False
-        (default value), enter mainloop.
-        If IDLE with -n switch (no subprocess) is used, this value should be
-        set to True in turtle.cfg. In this case IDLE's mainloop
-        is active also for the client script.
-
-        This is a method of the Screen-class and not available for
-        TurtleScreen instances.
-
-        Example (for a Screen instance named screen):
-        >>> screen.exitonclick()
-
-        """
         def exitGracefully(x, y):
             """Screen.bye() with two dummy-parameters"""
             self.bye()
@@ -3797,11 +3429,6 @@ class _Screen(TurtleScreen):
 
 
 class Turtle(RawTurtle):
-    """RawTurtle auto-creating (scrolled) canvas.
-
-    When a Turtle object is created or a function derived from some
-    Turtle method is called a TurtleScreen object is automatically created.
-    """
     _pen = None
     _screen = None
 
@@ -4038,7 +3665,7 @@ if __name__ == "__main__":
 
     def demo2():
         """Demo of some new features."""
-        speed(1)
+        speed(0)
         st()
         pensize(3)
         setheading(towards(0, 0))
@@ -4135,6 +3762,6 @@ if __name__ == "__main__":
         tri.write("  Click me!", font = ("Courier", 12, "bold") )
         tri.onclick(baba, 1)
 
-    demo1()
+    #demo1()
     demo2()
-    exitonclick()
+    #exitonclick()

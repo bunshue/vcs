@@ -105,10 +105,6 @@ df2 = df[df["姓名"].str.contains("林")]
 df3 = df[(df["姓名"].str.contains("林")) & (df["班級"].str.contains("一年"))]
 print(df3)
 """
-
-print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
 
 # 索引
@@ -388,6 +384,261 @@ data["num"] = pd.factorize(data["string"])[0]
 df = pd.get_dummies(data["string"], prefix="組別")  # 轉換成onehot類型編碼
 new_data = pd.concat([data, df], axis=1)
 print(new_data)
+
+print("------------------------------------------------------------")  # 60個
+
+results = []
+for num_throws in range(1, 10001):
+    throws = np.random.randint(low=0, high=2, size=num_throws)
+    probability_of_throws = throws.sum()/num_throws
+    results.append(probability_of_throws)
+
+df = pd.DataFrame({"投擲" : results})
+
+df.plot(color="b")
+plt.title("大數法則(Law of Large Numbers)")
+plt.xlabel("投擲次數")
+plt.ylabel("平均機率")
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+results = []
+for num_throws in range(1, 10001):
+    throws = np.random.randint(low=1, high=7, size=num_throws)
+    mask = (throws == 1)
+    probability_of_throws = len(throws[mask])/num_throws    
+    results.append(probability_of_throws)
+
+df = pd.DataFrame({"投擲" : results})
+
+df.plot(color="r")
+plt.title("大數法則(Law of Large Numbers)")
+plt.xlabel("投擲次數")
+plt.ylabel("平均機率")
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+df = pd.read_csv("data/titanic.csv")
+s =  pd.Series([30,1,5,10,30,50,30,15,40,45,30])
+
+print(df["Age"].mode())
+print(s.mode())
+
+print("------------------------------------------------------------")  # 60個
+
+df = pd.read_csv("data/titanic.csv")
+s =  pd.Series([30,1,5,10,30,50,30,15,40,45,30])
+
+print(df["Age"].median())
+print(s.median())
+
+print("------------------------------------------------------------")  # 60個
+
+df = pd.read_csv("data/titanic.csv")
+s =  pd.Series([30,1,5,10,30,50,30,15,40,45,30])
+
+print(df["Age"].quantile(q=0.25))
+print(df["Age"].quantile(q=0.5))
+print(df["Age"].quantile(q=0.75))
+print(s.quantile(q=0.25))
+print(s.quantile(q=0.5))
+print(s.quantile(q=0.75))
+
+print("------------------------------------------------------------")  # 60個
+
+df = pd.read_csv("data/titanic.csv")
+s =  pd.Series([30,1,5,10,30,50,30,15,40,45,30])
+
+print(df["Age"].mean())
+print(s.mean())
+
+print("------------------------------------------------------------")  # 60個
+
+df = pd.read_csv("data/titanic.csv")
+s =  pd.Series([30,1,5,10,30,50,30,15,40,45,30])
+
+print(df["Age"].max() - df["Age"].min())
+print(s.max() - s.min())
+
+print("------------------------------------------------------------")  # 60個
+
+df = pd.read_csv("data/titanic.csv")
+s =  pd.Series([30,1,5,10,30,50,30,15,40,45,30])
+
+print(df["Age"].quantile(0.75) - df["Age"].quantile(0.25))
+print(s.quantile(0.75) - s.quantile(0.25))
+
+print("------------------------------------------------------------")  # 60個
+
+df = pd.read_csv("data/titanic.csv")
+s =  pd.Series([30,1,5,10,30,50,30,15,40,45,30])
+
+print(df["Age"].var())
+print(s.var())
+
+print("------------------------------------------------------------")  # 60個
+
+df = pd.read_csv("data/titanic.csv")
+s =  pd.Series([30,1,5,10,30,50,30,15,40,45,30])
+
+print(df["Age"].std())
+print(s.std())
+
+print("------------------------------------------------------------")  # 60個
+
+df = pd.read_csv("data/titanic.csv")
+s =  pd.Series([30,1,5,10,30,50,30,15,40,45,30])
+
+print(df["Age"].describe())
+print("---------------------------")
+print(s.describe())
+
+print("------------------------------------------------------------")  # 60個
+
+friends = [110, 1017, 1127, 417, 624, 957, 89, 
+           951, 947, 797, 981, 125, 455, 731, 
+           1641, 486, 1307, 472, 1131, 1771, 905,
+           532, 742, 622]
+
+s_friends = pd.Series(friends)
+print(s_friends.describe())
+
+print("------------------------------------------------------------")  # 60個
+
+friends = [110, 1017, 1127, 417, 624, 957, 89, 
+           951, 947, 797, 981, 125, 455, 731, 
+           1641, 486, 1307, 472, 1131, 1771, 905,
+           532, 742, 622]
+
+s_friends = pd.Series(friends)
+m = s_friends.mean()
+print("平均數: ", m)
+s = s_friends.std()
+print("標準差: ", s)
+
+z_scores = []
+for x in friends:
+    z = (x - m)/s   # 公式
+    z_scores.append(z)
+print(z_scores)
+
+print("------------------------------------------------------------")  # 60個
+
+friends = [110, 1017, 1127, 417, 624, 957, 89, 
+           951, 947, 797, 981, 125, 455, 731, 
+           1641, 486, 1307, 472, 1131, 1771, 905,
+           532, 742, 622]
+
+s_friends = pd.Series(friends)
+m = s_friends.mean()
+s = s_friends.std()
+z_scores = []
+for x in friends:
+    z = (x - m)/s   # 公式
+    z_scores.append(z)
+index = np.arange(len(friends))
+plt.bar(index, z_scores)
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+dice = [1, 2, 3, 4, 5, 6]
+sample_means = []
+for x in range(100):
+    sample = np.random.choice(a=dice, size=1)
+    sample_means.append(sample.mean())
+
+df = pd.DataFrame(sample_means)
+df.plot(kind="density")
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+dice = [1, 2, 3, 4, 5, 6]
+sample_means = []
+for x in range(100):
+    sample = np.random.choice(a=dice, size=10)
+    sample_means.append(sample.mean())
+
+df = pd.DataFrame(sample_means)
+df.plot(kind="density")
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+dice = [1, 2, 3, 4, 5, 6]
+sample_means = []
+for x in range(100):
+    sample = np.random.choice(a=dice, size=100)
+    sample_means.append(sample.mean())
+
+df = pd.DataFrame(sample_means)
+df.plot(kind="density")
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+dice = [1, 2, 3, 4, 5, 6]
+population = []
+for x in range(10000):
+    sample = np.random.choice(a=dice, size=100)
+    population.append(sample.mean())
+print("母體平均數:", sum(population)/10000.0)
+  
+size_range = [10, 100, 1000]
+for sample_size in size_range:
+    sample = np.random.choice(a=population, size=sample_size)    
+    sample_mean = sample.mean()
+    print(sample_size, "樣本平均數:", sample_mean)
+
+print("------------------------------------------------------------")  # 60個
+
+population = (["臺灣閩南語"]*7330) + (["臺灣客家語"]*1200) + \
+             (["其他漢語方言"]*1300) + (["原住民語"]*170) 
+sample_size = 1000    
+sample = random.sample(population, sample_size)
+for lang in set(sample):
+    print(lang+"比例估計:", sample.count(lang)/sample_size)
+    
+print("------------------------------------------------------------")  # 60個
+
+voter_gender = np.array((["男"]*352)+(["男"]*315)+ \
+                        (["女"]*217)+(["女"]*331))
+voter_favorite = np.array((["喜歡"]*352)+(["不喜歡"]*315)+ \
+                          (["喜歡"]*217)+(["不喜歡"]*331))
+voters = pd.DataFrame({"gender":voter_gender,
+                       "favorite":voter_favorite})
+voter_tab = pd.crosstab(voters.gender, voters.favorite, margins=True)
+voter_tab.columns = ["喜歡", "不喜歡", "小計"]
+voter_tab.index = ["男", "女", "小計"]
+observed = voter_tab.iloc[0:3, 0:3]
+print(observed)
+
+print("------------------------------------------------------------")  # 60個
+
+voter_gender = np.array((["男"]*352)+(["男"]*315)+ \
+                        (["女"]*217)+(["女"]*331))
+voter_favorite = np.array((["喜歡"]*352)+(["不喜歡"]*315)+ \
+                          (["喜歡"]*217)+(["不喜歡"]*331))
+voters = pd.DataFrame({"gender":voter_gender,
+                       "favorite":voter_favorite})
+voter_tab = pd.crosstab(voters.gender, voters.favorite, margins=True)
+voter_tab.columns = ["喜歡", "不喜歡", "小計"]
+voter_tab.index = ["男", "女", "小計"]
+observed = voter_tab.iloc[0:3, 0:3]
+print(observed)
+print("---------------------------")
+expected = np.outer(voter_tab["小計"][0:2],
+                    voter_tab.loc["小計"][0:2]) / 1215
+expected = pd.DataFrame(expected)
+expected.columns = ["喜歡", "不喜歡"]
+expected.index = ["男", "女"]                   
+print(expected)
+
+print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個
 

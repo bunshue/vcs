@@ -1516,6 +1516,176 @@ pprint.pprint(response.text)
 
 print("------------------------------------------------------------")  # 60個
 
+import requests
+
+r = requests.get("http://www.google.com")
+print(r.status_code)
+
+print("------------------------------------------------------------")  # 60個
+
+r = requests.get("http://www.google.com")
+if r.status_code == 200:
+    print("請求成功...")
+else:
+    print("請求失敗...")
+     
+
+print("------------------------------------------------------------")  # 60個
+
+url = "https://www.googleapis.com/books/v1/volumes"
+
+data = {'q': 'Python',
+        'maxResults': 5, 
+        'projection': 'lite'}
+r = requests.get(url, params=data)
+print(r.json())
+
+print("------------------------------------------------------------")  # 60個
+
+r = requests.get("https://fchart.github.io/test.html")
+print(r.text)
+print(r.encoding)
+
+print("------------------------------------------------------------")  # 60個
+
+r = requests.get("https://fchart.github.io/test.html")
+print(r.text)
+print("----------------------")
+
+r = requests.get("https://fchart.github.io/test.html")
+print(r.content)
+print("----------------------")
+
+r = requests.get("https://fchart.github.io/test.html", stream=True)
+print(r.raw)
+print(r.raw.read(15))
+
+print("------------------------------------------------------------")  # 60個
+
+r = requests.get("https://fchart.github.io/json/Example.json")
+print(r.text)
+print(type(r.text))
+print("----------------------")
+print(r.json())
+print(type(r.json()))
+
+print("------------------------------------------------------------")  # 60個
+
+r = requests.get("http://www.google.com")
+print(r.status_code)
+print(r.status_code == requests.codes.ok)
+
+r = requests.get("http://www.google.com/404")
+print(r.status_code)
+print(r.status_code == requests.codes.ok)
+
+r = requests.get("http://www.google.com")
+print(r.status_code)
+print(r.status_code == requests.codes.all_good)
+
+print("------------------------------------------------------------")  # 60個
+
+""" request fail
+import requests
+
+r = requests.get("http://www.google.com/404")
+print(r.status_code)
+print(r.status_code == requests.codes.ok)
+
+print(r.raise_for_status())
+"""
+print("------------------------------------------------------------")  # 60個
+
+import requests 
+
+r = requests.get("http://www.google.com")
+
+print(r.headers['Content-Type'])
+print(r.headers['Content-Length'])
+print(r.headers['Date'])
+print(r.headers['Server'])
+
+print("------------------------------------------------------------")  # 60個
+
+import requests 
+
+r = requests.get("http://www.google.com")
+
+print(r.headers.get('Content-Type'))
+print(r.headers.get('Content-Length'))
+print(r.headers.get('Date'))
+print(r.headers.get('Server'))
+
+print("------------------------------------------------------------")  # 60個
+
+import requests
+
+session = requests.Session()
+response = session.get("http://www.google.com")
+v = session.cookies.get_dict()
+print(v)
+
+print("------------------------------------------------------------")  # 60個
+
+import requests
+
+url = "https://www.googleapis.com/books/v1/volumes"
+
+url_params = {'q': 'Python',
+              'maxResults': 3, 
+              'projection': 'lite'}
+r = requests.get(url, params=url_params)
+print(r.json())
+
+print("------------------------------------------------------------")  # 60個
+
+import requests
+
+try: 
+    r = requests.get("http://www.google.com", timeout=0.03)
+    print(r.text)
+except requests.exceptions.Timeout as ex:
+    print("錯誤: HTTP請求已經超過時間...\n" + str(ex))
+
+print("------------------------------------------------------------")  # 60個
+
+import requests 
+
+url = 'http://www.google.com/404'
+
+try:
+    r = requests.get(url, timeout=3)
+    r.raise_for_status()
+except requests.exceptions.RequestException as ex1:
+    print("Http請求錯誤: " + str(ex1))
+except requests.exceptions.HTTPError as ex2:
+    print("Http回應錯誤: " + str(ex2))
+except requests.exceptions.ConnectionError as ex3:
+    print("網路連線錯誤: " + str(ex3))
+except requests.exceptions.Timeout as ex4:
+    print("Timeout錯誤: " + str(ex4))     
+
+print("------------------------------------------------------------")  # 60個
+
+import requests   
+
+url = "https://www.ptt.cc/bbs/Gossiping/index.html"
+headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36'}
+cookies = { "over18": "1" }
+r = requests.get(url, cookies=cookies, headers=headers)
+print(r.text)
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")

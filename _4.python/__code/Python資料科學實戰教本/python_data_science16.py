@@ -42,7 +42,7 @@ import pandas as pd
 from sklearn import preprocessing, tree
 from sklearn.model_selection import train_test_split
 
-titanic = pd.read_csv("titanic.csv")
+titanic = pd.read_csv("data/titanic.csv")
 # 轉換欄位值成為數值
 label_encoder = preprocessing.LabelEncoder()
 encoded_class = label_encoder.fit_transform(titanic["PClass"])
@@ -72,7 +72,7 @@ import pandas as pd
 from sklearn import preprocessing, tree
 from sklearn.model_selection import train_test_split
 
-titanic = pd.read_csv("titanic.csv")
+titanic = pd.read_csv("data/titanic.csv")
 # 轉換欄位值成為數值
 label_encoder = preprocessing.LabelEncoder()
 encoded_class = label_encoder.fit_transform(titanic["PClass"])

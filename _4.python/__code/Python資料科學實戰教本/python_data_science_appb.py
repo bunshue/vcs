@@ -25,10 +25,7 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
-
 """ 無檔案 Example.html
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\appb\Ch5_5_1.py
-
 from bs4 import BeautifulSoup
 
 with open("Example.html", "r", encoding="utf8") as fp:
@@ -40,8 +37,6 @@ for child in tag_ul.children:
     print(type(child))
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\appb\Ch5_5_1a.py
 
 from bs4 import BeautifulSoup
 from bs4.element import NavigableString
@@ -57,8 +52,6 @@ for child in tag_ul.children:
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\appb\Ch5_5_2.py
-
 from bs4 import BeautifulSoup
 
 with open("Example.html", "r", encoding="utf8") as fp:
@@ -69,13 +62,7 @@ print(soup.html.head.meta["charset"])
 # 使用div屬性取得第1個<div>標籤
 print(soup.html.body.div.div.p.a.string)
 
-
-
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\appb\Ch5_5_2a.py
 
 from bs4 import BeautifulSoup
 from bs4.element import NavigableString
@@ -90,8 +77,6 @@ for child in tag_ul.contents:
         print(child.span.string)
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\appb\Ch5_5_2b.py
 
 from bs4 import BeautifulSoup
 from bs4.element import NavigableString
@@ -112,8 +97,6 @@ for child in tag_ul.children:
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\appb\Ch5_5_2c.py
-
 from bs4 import BeautifulSoup
 from bs4.element import NavigableString
 
@@ -128,8 +111,6 @@ for child in tag_ul.descendants:
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\appb\Ch5_5_2d.py
-
 from bs4 import BeautifulSoup
 from bs4.element import NavigableString
 
@@ -143,8 +124,6 @@ for string in tag_ul.strings:
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\appb\Ch5_5_3.py
-
 from bs4 import BeautifulSoup
 
 with open("Example.html", "r", encoding="utf8") as fp:
@@ -157,8 +136,6 @@ print(tag_ul.parent.name)
 print(tag_ul.find_parent().name)
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\appb\Ch5_5_3a.py
 
 from bs4 import BeautifulSoup
 from bs4.element import NavigableString
@@ -175,8 +152,6 @@ for tag in tag_ul.find_parents():
     print(tag.name)
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\appb\Ch5_5_4.py
 
 from bs4 import BeautifulSoup
 
@@ -197,8 +172,6 @@ for tag in first_li.find_next_siblings():
     print(tag.name, tag.span.string)
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\appb\Ch5_5_4a.py
 
 from bs4 import BeautifulSoup
 
@@ -221,8 +194,6 @@ for tag in third_li.find_previous_siblings():
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\appb\Ch5_5_5.py
-
 from bs4 import BeautifulSoup
 
 with open("Example.html", "r", encoding="utf8") as fp:
@@ -238,8 +209,6 @@ print(type(tag_previous), tag_previous.name)
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\appb\Ch5_5_5a.py
-
 from bs4 import BeautifulSoup
 from bs4.element import NavigableString
 
@@ -249,11 +218,8 @@ tag_div = soup.find(id = "emails")
 for element in tag_div.next_elements:
     if not isinstance(element, NavigableString):
         print(element.name)
-   
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\appb\Ch5_5_5b.py
 
 from bs4 import BeautifulSoup
 from bs4.element import NavigableString
@@ -268,8 +234,6 @@ for element in tag_div.previous_elements:
 """
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\appb\Ch5_6.py
-
 from bs4 import BeautifulSoup
 
 soup = BeautifulSoup("<b class='score'>Joe</b>", "lxml")    
@@ -283,19 +247,14 @@ print(tag)
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\appb\Ch5_6a.py
-
 from bs4 import BeautifulSoup
 
 soup = BeautifulSoup("<b class='score'>Joe</b>", "lxml")    
 tag = soup.b
 tag.string = "Mary"
 print(tag)
-  
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\appb\Ch5_6b.py
 
 from bs4 import BeautifulSoup
 from bs4.element import NavigableString
@@ -310,11 +269,8 @@ print(tag)
 new_tag = soup.new_tag("a", href="http://www.example.com")
 tag.append(new_tag)
 print(tag)
-  
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\appb\Ch5_6c.py
 
 from bs4 import BeautifulSoup
 
@@ -329,11 +285,8 @@ tag.insert_after(new_string)
 print(soup.p)
 tag.clear()
 print(soup.p)
-  
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\appb\Ch5_6d.py
 
 from bs4 import BeautifulSoup
 
@@ -343,17 +296,8 @@ new_tag = soup.new_tag("i")
 new_tag.string = "Two"
 tag.replace_with(new_tag)
 print(soup.p)
-  
 
 print("------------------------------------------------------------")  # 60個
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\appb\appb-1-1.py
 
 import requests
 
@@ -364,32 +308,21 @@ fp.write(r.text)
 print("寫入檔案 tmp_Example.txt...")
 fp.close()
 
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\appb\appb-1-1a.py
 
 fp = open("tmp_Example.txt", "r", encoding="utf8")
 str = fp.read()
 print("檔案內容:")
 print(str)
 
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\appb\appb-1-1b.py
 
 with open("tmp_Example.txt", "r", encoding="utf8") as fp:
     str = fp.read()
     print("檔案內容:")
     print(str)
 
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\appb\appb-1-1c.py
 
 with open("tmp_Example.txt", "r", encoding="utf8") as fp:
     list1 = fp.readlines()

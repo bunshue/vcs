@@ -1,5 +1,6 @@
 """
-Python資料科學實戰教本
+
+seaborn
 
 
 """
@@ -178,7 +179,7 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-df = pd.read_csv("data/Kobe_stats.csv")
+df = pd.read_csv("_data/Kobe_stats.csv")
 data = pd.DataFrame()
 data["Season"] = pd.to_datetime(df["Season"])
 data["PTS"] = df["PTS"]

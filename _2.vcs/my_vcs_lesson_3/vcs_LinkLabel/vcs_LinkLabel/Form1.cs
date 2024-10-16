@@ -39,5 +39,10 @@ namespace vcs_LinkLabel
             // 開啟郵件軟體連結 david@insighteyes.com
             System.Diagnostics.Process.Start("mailto:david@insighteyes.com");
         }
+
+        private void linkLabel3_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("http://antwrp.gsfc.nasa.gov/apod/ap090628.html");
+        }
     }
 }

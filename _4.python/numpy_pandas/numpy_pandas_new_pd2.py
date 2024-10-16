@@ -26,7 +26,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 hours_phone_used = [0,0,0,1,1.3,1.5,2,2.2,2.6,3.2,4.1,4.4,4.4,5]
 work_performance = [87,89,91,90,82,80,78,81,76,85,80,75,73,72]
 
@@ -176,7 +176,7 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-df = pd.read_csv("test.csv")
+df = pd.read_csv("data2/test.csv")
 # 刪除所有 NaN 的記錄
 df1 = df.dropna()
 print(df1)
@@ -198,7 +198,7 @@ print(df4)
 
 print("------------------------------------------------------------")  # 60個
 
-df = pd.read_csv("test.csv")
+df = pd.read_csv("data2/test.csv")
 # 填補遺失資料
 df1 = df.fillna(value=1)
 print(df1)
@@ -215,19 +215,19 @@ print(df)
 
 print("------------------------------------------------------------")  # 60個
 
-df = pd.read_csv("test.csv")
+df = pd.read_csv("data2/test.csv")
 # 建立布林遮罩
 df1 = pd.isnull(df)
 print(df1)
 
 print("------------------------------------------------------------")  # 60個
 
-df = pd.read_csv("test2.csv")
+df = pd.read_csv("data2/test2.csv")
 print(df)
 
 print("------------------------------------------------------------")  # 60個
 
-df = pd.read_csv("test2.csv")
+df = pd.read_csv("data2/test2.csv")
 print(df.duplicated())
 
 print("------------------------------")  # 30個
@@ -236,14 +236,14 @@ print(df.duplicated("B"))
 
 print("------------------------------------------------------------")  # 60個
 
-df = pd.read_csv("test2.csv")
+df = pd.read_csv("data2/test2.csv")
 
 df1 = df.drop_duplicates()
 print(df1)
 
 print("------------------------------------------------------------")  # 60個
 
-df = pd.read_csv("test2.csv")
+df = pd.read_csv("data2/test2.csv")
 
 df1 = df.drop_duplicates("B")
 print(df1)
@@ -260,7 +260,7 @@ print(df3)
 
 print("------------------------------------------------------------")  # 60個
 
-df = pd.read_csv("test3.csv")
+df = pd.read_csv("data2/test3.csv")
 print(df)
 
 print("------------------------------")  # 30個
@@ -279,7 +279,7 @@ print("------------------------------------------------------------")  # 60個
 
 from sklearn import preprocessing
 
-df = pd.read_csv("test3.csv")
+df = pd.read_csv("data2/test3.csv")
 
 label_encoder = preprocessing.LabelEncoder()
 df["性別"] = label_encoder.fit_transform(df["性別"])
@@ -287,13 +287,13 @@ print(df)
 
 print("------------------------------------------------------------")  # 60個
 
-titanic = pd.read_csv("titanic_data.csv")
+titanic = pd.read_csv("data2/titanic_data.csv")
 # 顯示資料集的形狀
 print(titanic.shape)
 
 print("------------------------------------------------------------")  # 60個
 
-titanic = pd.read_csv("titanic_data.csv")
+titanic = pd.read_csv("data2/titanic_data.csv")
 # 顯示前5筆
 print(titanic.head())
 
@@ -306,10 +306,10 @@ print("------------------------------")  # 30個
 
 # 顯示資料集資訊
 print(titanic.info())
-
+'''
 print("------------------------------------------------------------")  # 60個
 
-titanic = pd.read_csv("titanic_data.csv")
+titanic = pd.read_csv("data2/titanic_data.csv")
 print("---檢查PassengerId欄位是否是唯一值---")
 # 檢查PassengerId欄位是否是唯一值
 print(np.unique(titanic["PassengerId"].values).size)
@@ -375,12 +375,13 @@ titanic.to_csv("tmp_titanic_pre.csv", encoding="utf8")
 print("Title人數:")
 print(titanic["Title"].groupby(titanic["Title"]).size())
 print("---顯示平均生存率---")
+""" NG
 print("平均生存率:")
 print(titanic[["Title","Survived"]].groupby(titanic["Title"]).mean())
-
+"""
 print("------------------------------------------------------------")  # 60個
 
-titanic = pd.read_csv("titanic_pre.csv")
+titanic = pd.read_csv("data2/titanic_pre.csv")
 titanic["Died"] = np.where(titanic["Survived"]==0, 1, 0)
 print(titanic.head())
 
@@ -413,7 +414,7 @@ df.plot(kind="bar")
 df = titanic.drop("PassengerId", axis=1)
 df = df.drop("Died", axis=1)
 df = df.drop("Title", axis=1)
-print(df.corr())
+#print(df.corr()) NG
 df.to_csv("tmp_titanic_train.csv", encoding="utf8")
 
 plt.show()
@@ -441,13 +442,13 @@ print("作業完成")
 print("------------------------------------------------------------")  # 60個
 sys.exit()
 
-df = pd.read_csv("test.csv")
+df = pd.read_csv("data2/test.csv")
 print(df)
 df.to_html("ch13-3-1.html")
 
 print("------------------------------------------------------------")  # 60個
 
-df = pd.read_csv("test.csv")
+df = pd.read_csv("data2/test.csv")
 print(df)
 
 print("------------------------------")  # 30個

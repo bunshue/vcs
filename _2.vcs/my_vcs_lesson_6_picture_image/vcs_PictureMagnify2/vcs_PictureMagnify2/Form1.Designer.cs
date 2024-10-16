@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.label2 = new System.Windows.Forms.Label();
             this.lblmPos = new System.Windows.Forms.Label();
@@ -62,7 +63,7 @@
             this.lblmPos.ForeColor = System.Drawing.Color.Black;
             this.lblmPos.Location = new System.Drawing.Point(83, 122);
             this.lblmPos.Name = "lblmPos";
-            this.lblmPos.Size = new System.Drawing.Size(41, 12);
+            this.lblmPos.Size = new System.Drawing.Size(33, 12);
             this.lblmPos.TabIndex = 3;
             this.lblmPos.Text = "label3";
             // 
@@ -73,7 +74,7 @@
             this.label3.ForeColor = System.Drawing.Color.Black;
             this.label3.Location = new System.Drawing.Point(10, 47);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(125, 12);
+            this.label3.Size = new System.Drawing.Size(128, 12);
             this.label3.TabIndex = 5;
             this.label3.Text = "⊙ 当前像素的RGB值：";
             // 
@@ -95,7 +96,7 @@
             this.lblRGB.ForeColor = System.Drawing.Color.Black;
             this.lblRGB.Location = new System.Drawing.Point(129, 47);
             this.lblRGB.Name = "lblRGB";
-            this.lblRGB.Size = new System.Drawing.Size(41, 12);
+            this.lblRGB.Size = new System.Drawing.Size(33, 12);
             this.lblRGB.TabIndex = 7;
             this.lblRGB.Text = "label5";
             // 
@@ -122,12 +123,13 @@
             this.Controls.Add(this.lblmPos);
             this.Controls.Add(this.label2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Form1";
             this.Text = "屏幕放大镜";
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
+            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

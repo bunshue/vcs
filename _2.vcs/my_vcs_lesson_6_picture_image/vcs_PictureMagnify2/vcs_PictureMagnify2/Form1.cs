@@ -18,22 +18,22 @@ namespace vcs_PictureMagnify2
             InitializeComponent();
         }
 
-        #region 定义快捷键
-        //如果函数执行成功，返回值不为0。       
-        //如果函数执行失败，返回值为0。要得到扩展错误信息，调用GetLastError。        
+        #region 定義快捷鍵
+        //如果函數執行成功，返回值不為0。       
+        //如果函數執行失敗，返回值為0。要得到擴展錯誤信息，調用GetLastError。        
         [DllImport("user32.dll", SetLastError = true)]
         public static extern bool RegisterHotKey(
-        IntPtr hWnd,                //要定义热键的窗口的句柄            
-        int id,                     //定义热键ID（不能与其它ID重复）                       
-        KeyModifiers fsModifiers,   //标识热键是否在按Alt、Ctrl、Shift、Windows等键时才会生效         
-        Keys vk                     //定义热键的内容            
+        IntPtr hWnd,                //要定義熱鍵的窗口的句柄            
+        int id,                     //定義熱鍵ID（不能與其它ID重復）                       
+        KeyModifiers fsModifiers,   //標識熱鍵是否在按Alt、Ctrl、Shift、Windows等鍵時才會生效         
+        Keys vk                     //定義熱鍵的內容            
     );
         [DllImport("user32.dll", SetLastError = true)]
         public static extern bool UnregisterHotKey(
-            IntPtr hWnd,                //要取消热键的窗口的句柄            
-            int id                      //要取消热键的ID            
+            IntPtr hWnd,                //要取消熱鍵的窗口的句柄            
+            int id                      //要取消熱鍵的ID            
         );
-        //定义了辅助键的名称（将数字转变为字符以便于记忆，也可去除此枚举而直接使用数值）        
+        //定義了輔助鍵的名稱（將數字轉變為字符以便于記憶，也可去除此枚舉而直接使用數值）        
         [Flags()]
         public enum KeyModifiers
         {
@@ -45,7 +45,7 @@ namespace vcs_PictureMagnify2
         }
         #endregion
 
-        #region 获取鼠标像素的RGB
+        #region 獲取鼠標像素的RGB
         [DllImport("gdi32.dll")]
         static public extern uint GetPixel(IntPtr hDC, int XPos, int YPos);
         [DllImport("gdi32.dll")]
@@ -80,17 +80,17 @@ namespace vcs_PictureMagnify2
         }
         #endregion
 
-        
-        int screenWidth;        //屏幕宽度
+
+        int screenWidth;        //屏幕寬度
         int screenHeight;       //屏幕高度
-        int mx;                 //鼠标x坐标
-        int my;                 //鼠标y坐标
-        const int imgWidth = 234;//放大后图片的宽度
-        const int imgHeight = 134;//放大后图片的高度
+        int mx;                 //鼠標x坐標
+        int my;                 //鼠標y坐標
+        const int imgWidth = 234;//放大后圖片的寬度
+        const int imgHeight = 134;//放大后圖片的高度
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            this.Location = new Point(0,0);
+            this.Location = new Point(0, 0);
             screenWidth = Screen.PrimaryScreen.WorkingArea.Width;
             screenHeight = Screen.PrimaryScreen.WorkingArea.Height;
             this.TopMost = true;
@@ -101,31 +101,31 @@ namespace vcs_PictureMagnify2
             RegisterHotKey(Handle, 81, KeyModifiers.None, Keys.Escape);
             mx = Control.MousePosition.X;
             my = Control.MousePosition.Y;
-            lblmPos.Text="("+mx.ToString()+","+my.ToString()+")";
-            Point pt = new Point(mx,my);
+            lblmPos.Text = "(" + mx.ToString() + "," + my.ToString() + ")";
+            Point pt = new Point(mx, my);
             Color cl = GetColor(pt);
             lblRGB.Text = "(" + cl.R.ToString() + "," + cl.G.ToString() + "," + cl.B + ")";
-            if (mx <= this.Width&&my<=this.Height)
+            if (mx <= this.Width && my <= this.Height)
             {
-                this.Location = new Point(screenWidth-this.Width,0);
+                this.Location = new Point(screenWidth - this.Width, 0);
             }
-            if (mx >= screenWidth - this.Width&&my<=this.Height)
+            if (mx >= screenWidth - this.Width && my <= this.Height)
             {
-                this.Location = new Point(0,0);
+                this.Location = new Point(0, 0);
             }
-            Bitmap bt = new Bitmap(imgWidth/2,imgHeight/2);
+            Bitmap bt = new Bitmap(imgWidth / 2, imgHeight / 2);
             Graphics g = Graphics.FromImage(bt);
-            g.CopyFromScreen(new Point(Cursor.Position.X-imgWidth/4,Cursor.Position.Y-imgHeight/4),new Point(0,0),new Size(imgWidth/2,imgHeight/2));
+            g.CopyFromScreen(new Point(Cursor.Position.X - imgWidth / 4, Cursor.Position.Y - imgHeight / 4), new Point(0, 0), new Size(imgWidth / 2, imgHeight / 2));
             IntPtr dc1 = g.GetHdc();
             g.ReleaseHdc(dc1);
             pictureBox1.Image = (Image)bt;
-           
+
         }
 
         protected override void WndProc(ref Message m)
         {
             const int WM_HOTKEY = 0x0312;
-            //按快捷键     
+            //按快捷鍵     
             switch (m.Msg)
             {
                 case WM_HOTKEY:
@@ -142,15 +142,15 @@ namespace vcs_PictureMagnify2
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
-            //注销Id号为81的热键设定    
+            //注銷Id號為81的熱鍵設定    
             UnregisterHotKey(Handle, 81);
         }
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
-            g.DrawLine(new Pen(Color.Red), new PointF(pictureBox1.Width / 2, 0), new PointF(pictureBox1.Width / 2,pictureBox1.Height));
-            g.DrawLine(new Pen(Color.Red,2), new PointF(0, pictureBox1.Height / 2), new PointF(pictureBox1.Width, pictureBox1.Height/2));
+            g.DrawLine(new Pen(Color.Red), new PointF(pictureBox1.Width / 2, 0), new PointF(pictureBox1.Width / 2, pictureBox1.Height));
+            g.DrawLine(new Pen(Color.Red, 2), new PointF(0, pictureBox1.Height / 2), new PointF(pictureBox1.Width, pictureBox1.Height / 2));
         }
     }
 }

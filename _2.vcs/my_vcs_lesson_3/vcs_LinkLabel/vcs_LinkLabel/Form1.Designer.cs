@@ -33,6 +33,7 @@
             this.linkLabel2 = new System.Windows.Forms.LinkLabel();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.toolTip2 = new System.Windows.Forms.ToolTip(this.components);
+            this.linkLabel3 = new System.Windows.Forms.LinkLabel();
             this.SuspendLayout();
             // 
             // linkLabel1
@@ -59,11 +60,27 @@
             this.linkLabel2.Text = "linkLabel2";
             this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel2_LinkClicked);
             // 
+            // linkLabel3
+            // 
+            this.linkLabel3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.linkLabel3.LinkArea = new System.Windows.Forms.LinkArea(110, 28);
+            this.linkLabel3.LinkBehavior = System.Windows.Forms.LinkBehavior.AlwaysUnderline;
+            this.linkLabel3.Location = new System.Drawing.Point(47, 195);
+            this.linkLabel3.Name = "linkLabel3";
+            this.linkLabel3.Size = new System.Drawing.Size(532, 39);
+            this.linkLabel3.TabIndex = 3;
+            this.linkLabel3.TabStop = true;
+            this.linkLabel3.Text = "This is a picture of Saturn\'s moon Encaledus taken by the Casinni spacecraft. For" +
+                " more information, visit the Astronomy Picture of the Day web site.";
+            this.linkLabel3.UseCompatibleTextRendering = true;
+            this.linkLabel3.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel3_LinkClicked);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1041, 633);
+            this.Controls.Add(this.linkLabel3);
             this.Controls.Add(this.linkLabel2);
             this.Controls.Add(this.linkLabel1);
             this.Name = "Form1";
@@ -80,6 +97,7 @@
         private System.Windows.Forms.LinkLabel linkLabel2;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.ToolTip toolTip2;
+        private System.Windows.Forms.LinkLabel linkLabel3;
     }
 }
 

@@ -170,14 +170,14 @@ print(predicted_sales)
 
 print("------------------------------------------------------------")  # 60個
 
-raw_df = pd.read_csv("boston.csv", sep="\s+", skiprows=22, header=None)
+raw_df = pd.read_csv("data/boston.csv", sep="\s+", skiprows=22, header=None)
 data = np.hstack([raw_df.values[::2, :], raw_df.values[1::2, :2]])
 target = raw_df.values[1::2, 2]
 print(data.shape)
 
 print("------------------------------------------------------------")  # 60個
 
-raw_df = pd.read_csv("boston.csv", sep="\s+", skiprows=22, header=None)
+raw_df = pd.read_csv("data/boston.csv", sep="\s+", skiprows=22, header=None)
 data = np.hstack([raw_df.values[::2, :], raw_df.values[1::2, :2]])
 target = raw_df.values[1::2, 2]
 feature_names = ['CRIM', 'ZN', 'INDUS', 'CHAS', 'NOX', 'RM',
@@ -193,7 +193,7 @@ print("------------------------------------------------------------")  # 60個
 
 from sklearn.linear_model import LinearRegression
 
-raw_df = pd.read_csv("boston.csv", sep="\s+", skiprows=22, header=None)
+raw_df = pd.read_csv("data/boston.csv", sep="\s+", skiprows=22, header=None)
 data = np.hstack([raw_df.values[::2, :], raw_df.values[1::2, :2]])
 target = raw_df.values[1::2, 2]
 feature_names = ['CRIM', 'ZN', 'INDUS', 'CHAS', 'NOX', 'RM',
@@ -222,7 +222,7 @@ print("------------------------------------------------------------")  # 60個
 
 from sklearn.linear_model import LinearRegression
 
-raw_df = pd.read_csv("boston.csv", sep="\s+", skiprows=22, header=None)
+raw_df = pd.read_csv("data/boston.csv", sep="\s+", skiprows=22, header=None)
 data = np.hstack([raw_df.values[::2, :], raw_df.values[1::2, :2]])
 target = raw_df.values[1::2, 2]
 feature_names = ['CRIM', 'ZN', 'INDUS', 'CHAS', 'NOX', 'RM',
@@ -249,7 +249,7 @@ print("------------------------------------------------------------")  # 60個
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
 
-raw_df = pd.read_csv("boston.csv", sep="\s+", skiprows=22, header=None)
+raw_df = pd.read_csv("data/boston.csv", sep="\s+", skiprows=22, header=None)
 data = np.hstack([raw_df.values[::2, :], raw_df.values[1::2, :2]])
 target = raw_df.values[1::2, 2]
 feature_names = ['CRIM', 'ZN', 'INDUS', 'CHAS', 'NOX', 'RM',
@@ -277,7 +277,7 @@ print("------------------------------------------------------------")  # 60個
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
 
-raw_df = pd.read_csv("boston.csv", sep="\s+", skiprows=22, header=None)
+raw_df = pd.read_csv("data/boston.csv", sep="\s+", skiprows=22, header=None)
 data = np.hstack([raw_df.values[::2, :], raw_df.values[1::2, :2]])
 target = raw_df.values[1::2, 2]
 feature_names = ['CRIM', 'ZN', 'INDUS', 'CHAS', 'NOX', 'RM',
@@ -306,7 +306,7 @@ print("------------------------------------------------------------")  # 60個
 
 from sklearn.linear_model import LinearRegression
 
-raw_df = pd.read_csv("boston.csv", sep="\s+", skiprows=22, header=None)
+raw_df = pd.read_csv("data/boston.csv", sep="\s+", skiprows=22, header=None)
 data = np.hstack([raw_df.values[::2, :], raw_df.values[1::2, :2]])
 target = raw_df.values[1::2, 2]
 feature_names = ['CRIM', 'ZN', 'INDUS', 'CHAS', 'NOX', 'RM',
@@ -331,7 +331,7 @@ print("------------------------------------------------------------")  # 60個
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
 
-raw_df = pd.read_csv("boston.csv", sep="\s+", skiprows=22, header=None)
+raw_df = pd.read_csv("data/boston.csv", sep="\s+", skiprows=22, header=None)
 data = np.hstack([raw_df.values[::2, :], raw_df.values[1::2, :2]])
 target = raw_df.values[1::2, 2]
 feature_names = ['CRIM', 'ZN', 'INDUS', 'CHAS', 'NOX', 'RM',
@@ -364,7 +364,7 @@ from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
 import seaborn as sns
 
-raw_df = pd.read_csv("boston.csv", sep="\s+", skiprows=22, header=None)
+raw_df = pd.read_csv("data/boston.csv", sep="\s+", skiprows=22, header=None)
 data = np.hstack([raw_df.values[::2, :], raw_df.values[1::2, :2]])
 target = raw_df.values[1::2, 2]
 feature_names = ['CRIM', 'ZN', 'INDUS', 'CHAS', 'NOX', 'RM',
@@ -408,7 +408,7 @@ print("------------------------------------------------------------")  # 60個
 
 from sklearn import preprocessing, linear_model
 
-titanic = pd.read_csv("titanic.csv")
+titanic = pd.read_csv("data/titanic.csv")
 print(titanic.info())
 print("---------------------------")
 # 將年齡的空值填入年齡的中位數
@@ -438,7 +438,7 @@ print("------------------------------------------------------------")  # 60個
 
 from sklearn import preprocessing, linear_model
 
-titanic = pd.read_csv("titanic.csv")
+titanic = pd.read_csv("data/titanic.csv")
 print(titanic.info())
 print("---------------------------")
 # 將年齡的空值填入年齡的中位數
@@ -469,7 +469,7 @@ print("------------------------------------------------------------")  # 60個
 
 from sklearn import preprocessing, linear_model
 
-titanic = pd.read_csv("titanic.csv")
+titanic = pd.read_csv("data/titanic.csv")
 print(titanic.info())
 print("---------------------------")
 # 轉換欄位值成為數值

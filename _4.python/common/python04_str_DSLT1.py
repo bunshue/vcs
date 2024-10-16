@@ -4339,13 +4339,129 @@ sex = person.setdefault("sex", "Male")
 print(f"增加sex鍵 {person}")
 print(f"sex = {sex}")
 
-
 print("------------------------------------------------------------")  # 60個
-
-
 
 print('結果')
 for k, v in stat.items():
     print(k, v)
+
+print("------------------------------------------------------------")  # 60個
+
+
+#DSLT
+print('字典')
+d = {"cat": "white", "dog": "black"}  # 建立字典
+print(d["cat"])       # 使用Key取得項目: 顯示 "white"
+print("cat" in d)     # 是否有Key: 顯示 "True"
+d["pig"] = "pink"     # 新增項目
+print(d["pig"])       # 顯示 "pink"
+print(d.get("monkey", "N/A"))  # 取出項目+預設值: 顯示 "N/A"
+print(d.get("pig", "N/A"))     # 取出項目+預設值: 顯示 "pink"
+del d["pig"]          # 使用Key刪除項目
+print(d.get("pig", "N/A"))     # "pig"不存在: 顯示 "N/A"
+
+print("------------------------------------------------------------")  # 60個
+#DSLT
+print("以鍵來走訪字典...")
+d = {"chicken": 2, "dog": 4, "cat": 4, "spider": 8}
+for animal in d:
+    legs = d[animal]
+    print(animal, legs)
+print("走訪字典的鍵和值...")
+d = {"chicken": 2, "dog": 4, "cat": 4, "spider": 8}
+for animal, legs in d.items():
+    print("動物: %s 有 %d 隻腳" % (animal, legs))
+
+print("------------------------------------------------------------")  # 60個
+#DSLT
+animals = {"cat", "dog", "pig"} # 建立集合
+print("cat" in animals)   # 檢查是否有此元素: 顯示 "True"
+print("fish" in animals)  # 顯示 "False"
+animals.add("fish")       # 新增集合元素
+print("fish" in animals)  # 顯示 "True"
+print(len(animals))       # 元素數: 顯示 "4"
+animals.add("cat")        # 新增存在的元素
+print(len(animals))       # 顯示 "4"
+animals.remove('cat')     # 刪除集合元素
+print(len(animals))       # 顯示 "3"
+
+print("------------------------------------------------------------")  # 60個
+
+#DSLT
+
+#集合
+animals = {"cat", "dog", "pig", "fish"} # 建立集合
+for index, animal in enumerate(animals):
+    print('#%d: %s' % (index + 1, animal))
+
+print("------------------------------------------------------------")  # 60個
+
+#集合
+A = {1, 2, 3, 4, 5}
+B = {4, 5, 6, 7, 8}
+print("A = " + str(A))
+print("B = " + str(B))
+# 交集
+C = A & B
+print("A & B = " + str(C))
+C = A.intersection(B)
+print("A.intersection(B) = " + str(C))
+# 聯集
+C = A | B
+print("A | B = " + str(C))
+C = A.union(B)
+print("A.union(B) = " + str(C))
+# 差集
+C = A - B
+print("A - B = " + str(C))
+C = A.difference(B)
+print("A.difference(B) = " + str(C))
+# 對稱差集
+C = A ^ B
+print("A ^ B = " + str(C))
+C = A.symmetric_difference(B)
+print("A.symmetric_difference(B) = " + str(C))
+
+print("------------------------------------------------------------")  # 60個
+#DSLT
+t = (5, 6, 7, 8)  # 建立元組
+print(type(t))    # 顯示 "<class 'tuple'>"
+print(t)          # 顯示 "(5, 6, 7, 8)"
+print(t[0])       # 顯示 "5"
+print(t[1])       # 顯示 "6"
+print(t[-1])      # 顯示 "8"
+print(t[-2])      # 顯示 "7"
+for ele in t:     # 走訪項目
+    print(ele, end=" ")  # 顯示 "5, 6, 7, 8"
+
+print("------------------------------------------------------------")  # 60個
+
+print('對齊方式')
+print('1234567890')
+s = "hello"
+print(s)  # 靠左對齊, 預設
+print(s.rjust(10))# 靠右對齊
+print(s.center(10))  # 置中對齊
+
+print("------------------------------------------------------------")  # 60個
+
+#DSLT
+print("走訪顯示串列的每一個項目...")
+animals = ['cat', 'dog', 'bat']
+for animal in animals:
+    print(animal)
+
+print("走訪顯示串列的每一個項目和索引值...")
+animals = ['cat', 'dog', 'bat']
+for index, animal in enumerate(animals):
+    print(index, animal)
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
 
 

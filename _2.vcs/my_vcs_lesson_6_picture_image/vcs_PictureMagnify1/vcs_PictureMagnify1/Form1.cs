@@ -31,12 +31,17 @@ namespace vcs_PictureMagnify1
         public Form1()
         {
             InitializeComponent();
-            img = Properties.Resources.p135; // 影像從資源載入
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\elephant.jpg";
+            img = new Bitmap(filename);
+
             this.ClientSize = new Size(img.Width, img.Height);// 調整視窗客戶區寬高
 
             if (magnifying_type == 1)       //圓形
             {
-
                 imgDouble = new Bitmap(img.Width * 2, img.Height * 2);　// 新增點陣圖物件
                 Graphics G = Graphics.FromImage(imgDouble); // 由點陣圖物件產生畫布
                 Rectangle rectDest = new Rectangle(0, 0, imgDouble.Width, imgDouble.Height);

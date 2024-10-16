@@ -5,15 +5,16 @@
 
 """
 
-
 import sys
 import time
 import random
-
 import turtle
 
+print("------------------------------------------------------------")  # 60個
 """
 turtle模組方法
+
+turtle = turtle.Turtle()    # 建立海龜turtle實體, 已無需要
 
 移動海龜
 turtle.forward(x)	從目前方向向前走x步
@@ -39,8 +40,12 @@ pu     penup        # 提筆
 pd     pendown      # 下筆
 ht     hideturtle   # 隱藏海龜
        showturtle   # 顯示海龜
-
 """
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
 
 turtle.speed(0)
 
@@ -131,40 +136,6 @@ turtle.end_fill()  # 結束塗色
 
 print("------------------------------------------------------------")  # 60個
 
-t = turtle.Pen()
-t.screen.title("歡迎來到美國")
-t.screen.bgcolor("green")  #設定底色
-t.screen.setup(640, 480)  # 更改視窗寬和高
-width = t.screen.window_width()
-height = t.screen.window_height()
-print("視窗width  = ", width)
-print("視窗height = ", height)
-
-turtle.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-t = turtle.Pen()
-t.screen.setworldcoordinates(0, 0, 800, 800)
-print("列印海龜位置  = ", t.pos())
-#print("目前位置 :", turtle.pos())
-#print("距離原點 :", abs(turtle.pos()))
-t.left(45)
-t.forward(400*1.4143)
-print("列印新海龜位置  = ", t.pos())
-#print("目前位置 :", turtle.pos())
-#print("距離原點 :", abs(turtle.pos()))
-
-turtle.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-wd = turtle.Screen()  #建立turtle screen實體
-wd.setup(width=.5, height=200) #視窗大小與位置
-wd.title("turtle繪圖真有趣，簡單又易學")
-
-print("------------------------------------------------------------")  # 60個
-
 print(turtle.getshapes())  # 列印海龜游標字串
 
 for cursor in turtle.getshapes():
@@ -209,17 +180,15 @@ turtle.pencolor("Red")
 
 turtle.mainloop()
 
-show = turtle.Turtle()  # 建立畫布物件
-show.pencolor("Yellow")  # 畫筆為黃色
+turtle.pencolor("Yellow")  # 畫筆為黃色
 
 turtle.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-show = turtle.Turtle()  # 建立畫布物件
-show.color("Blue", "Gold")  # 設畫筆為藍色，塗滿金黃色
-show.penup()  # 提筆
-show.goto(-50, 50)  # 前往指定位置
+turtle.color("Blue", "Gold")  # 設畫筆為藍色，塗滿金黃色
+turtle.penup()  # 提筆
+turtle.goto(-50, 50)  # 前往指定位置
 
 turtle.mainloop()
 
@@ -382,54 +351,6 @@ turtle.done()
 
 print("------------------------------------------------------------")  # 60個
 
-wd = turtle.Screen()  #建立turtle screen實體
-wd.setup(width=.5, height=200) #視窗大小與位置
-wd.title("turtle繪圖真有趣，簡單又易學")
-
-tu = turtle.Turtle()    # 建立海龜turtle實體
-tu.color('green')
-tu.pensize(5)  # 設定畫筆大小
-tu.penup()  # 提筆
-tu.setx(-100)
-tu.pendown()  # 下筆
-for x in range(10):
-	tu.circle(30)
-	tu.right(360/10)
-
-tu2 = turtle.Turtle()    # 建立第二個海龜名為tu2
-tu2.color('#FF00FF', '#55CCBB')
-tu2.penup()   # 提筆
-tu2.goto(120,-120)
-tu2.pendown()  # 下筆
-tu2.begin_fill()  # 開始塗色
-for x in range(10):
-	tu2.forward(100)
-	tu2.left(720/5)
-tu2.end_fill()  # 結束塗色
-
-wd.exitonclick()#在視窗任一位置按下滑鼠左鍵關閉視窗
-turtle.done()
-
-print("------------------------------------------------------------")  # 60個
-
-wd = turtle.Screen()  #建立turtle screen實體
-wd.setup(width=.3, height=200, startx=None, starty=None) #視窗大小與位置
-wd.bgcolor("green")  #設定底色
-
-turtle.shape("arrow")     #海龜樣式
-turtle.color("yellow","#ff00ff")  #海龜線條顏色與填色顏色
-turtle.pensize(10)  # 設定畫筆大小
-turtle.forward(50)   
-turtle.right(90) 
-turtle.forward(50)
-turtle.right(90)
-turtle.forward(50)
-
-wd.exitonclick()  # 在視窗任一位置按下滑鼠左鍵關閉視窗
-turtle.done() #結束tutle繪圖
-
-print("------------------------------------------------------------")  # 60個
-
 # Draw chess board borders
 turtle.pensize(3)  # 設定畫筆大小
 turtle.penup()  # 提筆
@@ -569,6 +490,48 @@ turtle.home()  # 畫筆回到原點
 turtle.setpos(300, -300)
 
 print("------------------------------------------------------------")  # 60個
+
+print('turtle測試 Screen() 的用法')
+
+screen = turtle.Screen()  #建立turtle screen實體
+#screen.setup(500, 400)  # 設定視窗寬高
+#screen.setup(500, 400, startx=20, starty=50)
+#screen.setup(width=.5, height=400) #視窗大小與位置
+screen.setup(width=.5, height=400, startx=None, starty=None) #視窗大小與位置
+
+screen.title("歡迎來到美國")
+screen.bgcolor("green")  #設定底色
+
+width = screen.window_width()
+height = screen.window_height()
+print("視窗width  = ", width)
+print("視窗height = ", height)
+
+turtle.shape("arrow")     #海龜樣式
+turtle.color("yellow","#ff00ff")  #海龜線條顏色與填色顏色
+turtle.pensize(10)  # 設定畫筆大小
+turtle.forward(100)
+turtle.right(90)
+turtle.forward(50)
+turtle.right(90)
+turtle.forward(100)
+
+screen.setworldcoordinates(0, 0, 800, 800)
+print("列印海龜位置  = ", turtle.pos())
+#print("目前位置 :", turtle.pos())
+#print("距離原點 :", abs(turtle.pos()))
+turtle.left(45)
+turtle.forward(100*1.4143)
+print("列印新海龜位置  = ", turtle.pos())
+#print("目前位置 :", turtle.pos())
+#print("距離原點 :", abs(turtle.pos()))
+
+#turtle.Screen().reset()  # 清空畫布
+
+# 使用screen視窗, 滑鼠點擊退出視窗
+screen.exitonclick()  # 在視窗任一位置按下滑鼠左鍵關閉視窗
+
+print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
 sys.exit()
@@ -646,145 +609,18 @@ h1 = -turtle.window_height() // 2
 
 turtle.pencolor("blue")
 
-tu = turtle.Turtle()    # 建立海龜turtle實體
-tu.color('green')
+turtle.color('green')
 
-tu.penup()  # 提筆
-tu.setx(-100)
-tu.pendown()  # 下筆
+turtle.penup()  # 提筆
+turtle.setx(-100)
+turtle.pendown()  # 下筆
 
-tu2 = turtle.Turtle()    # 建立第二個海龜名為tu2
-tu2.color('#FF00FF', '#55CCBB')
-tu2.penup()  # 提筆
-tu2.goto(120,-120)
-tu2.pendown()  # 下筆
+turtle.color('#FF00FF', '#55CCBB')
+turtle.penup()  # 提筆
+turtle.goto(120,-120)
+turtle.pendown()  # 下筆
 
 turtle.done()
-
-print("------------------------------------------------------------")  # 60個
-print('turtle測試 視窗相關 鍵鼠控制')
-print("------------------------------------------------------------")  # 60個
-
-print('在視窗任一位置按下滑鼠左鍵關閉視窗')
-turtle.exitonclick()  #在視窗任一位置按下滑鼠左鍵關閉視窗
-
-print("------------------------------------------------------------")  # 60個
-
-print("取得滑鼠座標")
-
-def drawPoint(x, y):
-    print("滑鼠座標 :(", x, y, ")")
-    turtle.goto(x, y)
-    turtle.dot(50, "Red")
-
-t = turtle.Pen()
-t.screen.onclick(drawPoint)
-t.screen.mainloop()
-
-turtle.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-# HandleMouseClick
-
-def drawPoint(x, y):
-    print("滑鼠座標 :(", x, y, ")")
-    turtle.goto(x, y)
-    turtle.dot(50, "Red")
-
-def drawPoint2(x, y):
-    turtle.circle(30)
-
-# Bind handlers with the mouse-click event
-t = turtle.Pen()
-t.screen.onclick(drawPoint)
-t.screen.onclick(drawPoint2, add = True) # 附加另一個事件
- 
-turtle.done() 
-
-print("------------------------------------------------------------")  # 60個
-
-
-def fxn1(x,y):
-    print('滑鼠按下')
-    turtle.fillcolor("red") 
-
-def fxn2(x,y):
-    print('滑鼠放開')
-    turtle.fillcolor("black") 
-      
-# set screen and turtle 
-sc=turtle.Screen() 
-sc.setup(400,300) 
-  
-turtle.shape("turtle") 
-turtle.turtlesize(2) 
-  
-# 滑鼠按下事件
-turtle.onclick(fxn1) 
-
-# 滑鼠放開事件  
-turtle.onrelease(fxn2)
-
-print("------------------------------------------------------------")  # 60個
-
-# HandleMouseRelease.py
-
-def displaySqaure(x, y):
-    turtle.penup()  # 提筆
-    turtle.goto(x - 100, y - 100)
-    turtle.pendown()  # 下筆
-    turtle.begin_fill()  # 開始塗色
-    turtle.circle(50)
-    turtle.end_fill()  # 結束塗色
-
-# Bind a handler with the mouse-release event
-turtle.onrelease(displaySqaure)
-turtle.done() 
-
-print("------------------------------------------------------------")  # 60個
-
-def keyRight():
-    turtle.setheading(0)  # 設定海龜方向
-    turtle.forward(50)
-
-
-def keyUp():
-    turtle.setheading(90)  # 設定海龜方向
-    turtle.forward(50)
-
-
-def keyLeft():
-    turtle.setheading(180)  # 設定海龜方向
-    turtle.forward(50)
-
-
-def keyDown():
-    turtle.setheading(270)  # 設定海龜方向
-    turtle.forward(50)
-
-
-t = turtle.Pen()
-t.screen.onkey(keyRight, "Right")
-t.screen.onkey(keyUp, "Up")
-t.screen.onkey(keyLeft, "Left")
-t.screen.onkey(keyDown, "Down")
-t.screen.listen()
-t.screen.mainloop()
-
-turtle.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-wk = turtle.textinput(f'一週七天，按0離開',
-                      '請輸入星期前三個字母：')
-
-if wk==None:
-    print('你按了取消')
-else:
-    print('輸入資料 :', wk)
-
-print("------------------------------------------------------------")  # 60個
 
 # 自動選擇顏色
 colorsList = ["red", "orange", "yellow", "green", "blue", "cyan", "purple", "violet"]
@@ -848,30 +684,22 @@ turtle.undo()
 
 
 
-t = turtle.Pen()
-t.screen.bgcolor("blue")
-t.hideturtle()  # 隱藏海龜
-
 
 """ 新進
 turtle.bk(30)
 turtle.bk(30)
 turtle.bk(4)
-turtle.Screen().reset()
 
 """
 
-#似乎都要用以下這個當結尾，關閉後，才不會有error
+#似乎都要用以下這個當結尾，關閉後，才不會有error   也不是
 turtle.mainloop()
 
 turtle.colormode(255)  # 色彩以數值表示
-show = turtle.Turtle()  # 建立畫布物件
-show.pensize(10)  # 設定畫筆大小
 
-show.color((255, 0, 255), (255, 215, 0))  # 設畫筆為洋紅色，塗滿金黃色
+turtle.pensize(10)  # 設定畫筆大小
 
-show.penup()  # 提筆
-show.goto(-50, 50)  # 前往指定位置
+turtle.color((255, 0, 255), (255, 215, 0))  # 設畫筆為洋紅色，塗滿金黃色
 
 turtle.mainloop()
 
@@ -892,25 +720,12 @@ turtle.hideturtle()  # 隱藏海龜
 turtle.hide()
 turtle.showturtle()  # 顯示海龜
 
-
-
 colors = ['Magenta', 'Gold', 'Cyan', 'PaleGreen',
           'LemonChiffon', 'Orange', 'Pink']   # List
 
 turtle.pencolor(colors [item % len(weeks)]) # 依餘數取色彩值
 
 turtle.color((1.0, 0, 1.0), (1.0, 0.84, 0.0))  # 設畫筆為洋紅色，塗滿金黃色
-
-
-# 使用screen視窗, 滑鼠點擊退出視窗
-screen = turtle.Screen()
-
-screen.setup(500, 400)
-screen.setup(500, 400, startx=20, starty=50)
-screen.setup(width=.5, height=200) #視窗大小與位置
-screen.setup(width=.3, height=200, startx=None, starty=None) #視窗大小與位置
-
-screen.exitonclick()#在視窗任一位置按下滑鼠左鍵關閉視窗
 
 # ----------------------------------------
 
@@ -922,20 +737,6 @@ turtle.home()  # 畫筆回到原點
 colors = ["red", "orange", "yellow", "green", "blue"]
 turtle.color(colors[r % 5])  # 選畫筆顏色
 turtle.width(twidth)  # 設定寬度
-
-print("------------------------------------------------------------")  # 60個
-
-turtle.home()  # 畫筆回到原點
-
-show = turtle.Turtle()  # 建立畫布物件
-show.pencolor("Yellow")  # 畫筆為黃色
-show.pensize(10)  # 設定畫筆大小
-
-turtle.mainloop()  # 開始主事件的循環
-
-show = turtle.Turtle()  # 建立畫布物件
-show.pencolor("Red")  # 畫筆為紅色
-show.pensize(2)  # 設定畫筆大小
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1007,5 +808,14 @@ print("經過時間 :", end_time - start_time, "秒")
 #times 是 list
 import statistics
 line_ave = statistics.mean(times)
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+turtle.color('green')
+turtle.pensize(5)  # 設定畫筆大小
+turtle.color('#FF00FF', '#55CCBB')
 
 

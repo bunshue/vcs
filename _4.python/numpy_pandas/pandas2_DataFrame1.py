@@ -211,6 +211,16 @@ print('欄名columns')
 cc = df.columns
 print(cc)
 
+# every DataFrame has an index (sometimes called the "row labels")
+cc = drinks.index
+print(cc)
+
+# column names are also stored in a special "index" object
+cc = drinks.columns
+print(cc)
+
+
+
 print('顯示values')
 print(df.values)
 
@@ -220,7 +230,6 @@ print(df.values)
 print(df.values[2])
 print(df.values[1][2])
 print(len(df))
-print(df.shape)
 
 print('df使用記憶體大小')
 cc = df.info(memory_usage='deep')
@@ -233,6 +242,34 @@ print("df之大小")
 M, N = df.shape
 print(df.shape)
 print('df之大小', M, 'X',N)
+
+print(df.shape)
+# 列出所有欄索引標籤(欄位名稱)
+for col in range(df.shape[1]):
+    print(df.columns.values[col], " ", end="")
+print()
+
+# 列出各列的列索引標籤、表格內容
+print(df.shape[0])
+print(df.index.values)
+
+print(df.shape)
+# 列出所有欄索引(欄位名稱)
+for col in range(df.shape[1]):
+    print(df.columns.values[col], " ", end="")
+print()
+
+# 列出所有欄索引(欄位名稱)
+for col in range(df.shape[1]):
+    print(df.columns.values[col], " ", end="")
+print()
+
+# 使用loc列出各列的列索引、欄位內容
+for row in range(df.shape[0]):
+    print(df.index.values[row], " ", end="")
+    for col in range(df.shape[1]):
+        print(df.loc[df.index.values[row]][df.columns.values[col]], " ", end="")
+    print()
 
 print("顯示df之describe(統計資料)")
 print(df.describe())
@@ -262,7 +299,7 @@ print(df.sort_index(axis=1, ascending=False))
 print(df.sort_index(axis=0))
 
 """
-print("計算每一科的平均, axis=0 0直1橫")
+print("計算每一科的平均, axis=0, 0直1橫")
 print(df.mean(axis=0))
 
 print("所有人成績 乘 2")
@@ -286,16 +323,6 @@ print("------------------------------------------------------------")  # 60個
 
 df = make_data_frame_from_dict()  # 字典 轉 df
 print(df)
-
-print(df.shape)
-# 列出所有欄索引標籤(欄位名稱)
-for col in range(df.shape[1]):
-    print(df.columns.values[col], " ", end="")
-print()
-
-# 列出各列的列索引標籤、表格內容
-print(df.shape[0])
-print(df.index.values)
 
 print("新增欄位 體育")
 df["體育"] = [88, 98, 80, 94]
@@ -378,23 +405,66 @@ print(df)
 indexNames = df[df["社會"] < 80].index
 df.drop(indexNames, inplace=True)
 
-print(df.shape)
-# 列出所有欄索引(欄位名稱)
-for col in range(df.shape[1]):
-    print(df.columns.values[col], " ", end="")
-print()
+print("------------------------------------------------------------")  # 60個
 
-# 列出所有欄索引(欄位名稱)
-for col in range(df.shape[1]):
-    print(df.columns.values[col], " ", end="")
-print()
+df.set_index("姓名", inplace=True)
+print(df)
 
-# 使用loc列出各列的列索引、欄位內容
-for row in range(df.shape[0]):
-    print(df.index.values[row], " ", end="")
-    for col in range(df.shape[1]):
-        print(df.loc[df.index.values[row]][df.columns.values[col]], " ", end="")
-    print()
+print("移除索引 index 孫悟空 豬八戒")
+df2 = df.drop(["孫悟空", "豬八戒"])
+print(df2)
+
+print("移除索引 0 2, 即 唐三藏 豬八戒")
+df3 = df.drop(df.index[[0, 2]])
+print(df3)
+
+print("移除欄位 自然")
+df4 = df.drop(["自然"], axis=1)
+print(df4)
+
+print("------------------------------------------------------------")  # 60個
+
+print('顯示欄資料')
+print('df["自然"] ->')
+print(df["自然"])
+print('df[["英文", "數學", "自然"] ->')
+print(df[["英文", "數學", "自然"]])
+print("df[df.數學>=80] ->")
+print(df[df.數學 >= 80])
+
+print("------------------------------")  # 30個
+
+print('df.loc[:, "數學"] ->')
+print(df.loc[:, "數學"])
+
+print('df.loc["孫悟空":"豬八戒", "數學":"社會"] ->')
+print(df.loc["孫悟空":"豬八戒", "數學":"社會"])
+print('df.loc[:沙悟淨, "數學":"社會"] ->')
+print(df.loc[:"沙悟淨", "數學":"社會"])
+print('df.loc["孫悟空":, "數學":"社會"] ->')
+print(df.loc["孫悟空":, "數學":"社會"])
+
+print("------------------------------")  # 30個
+
+"""
+print("移除孫悟空成績 ->")
+df1 = df.drop("孫悟空")
+print(df1)
+print("移除數學科成績 ->")
+df2 = df.drop("數學", axis=1)
+print(df2)
+print("移除數學科及自然科成績 ->")
+df3 = df.drop(["數學", "自然"], axis=1)
+print(df3)
+print("移除孫悟空到豬八戒成績 ->")
+df4 = df.drop(df.index[1:4])
+print(df4)
+print("移除數學科到自然科成績 ->")
+df5 = df.drop(df.columns[1:4], axis=1)
+print(df5)
+"""
+
+df.to_csv("tmp_scores3.csv", encoding="utf-8-sig")
 
 print("------------------------------------------------------------")  # 60個
 
@@ -426,26 +496,6 @@ for row in range(len(alldata["index"])):
     for col in range(len(alldata["columns"])):
         print(alldata["data"][row][col], " ", end="")
     print()
-
-print("------------------------------------------------------------")  # 60個
-
-df = make_data_frame_from_dict()  # 字典 轉 df
-print(df)
-
-df.set_index("姓名", inplace=True)
-print(df)
-
-print("移除索引 index 豬八戒 沙悟淨")
-df2 = df.drop(["豬八戒", "沙悟淨"])
-print(df2)
-
-print("移除索引 0 2, 即 唐三藏 豬八戒")
-df3 = df.drop(df.index[[0, 2]])
-print(df3)
-
-print("移除欄位 自然")
-df4 = df.drop(["自然"], axis=1)
-print(df4)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -728,7 +778,7 @@ datas = {
 }
 df = pd.DataFrame(datas)
 print(df)
-"""
+
 print('欄位 自然 的資料')
 print(df["自然"])
 print('欄位 國文 數學 自然 的資料')
@@ -764,7 +814,7 @@ print(df.loc["豬八戒":, "數學":"社會"])
 
 print('看 索引3欄位4的資料, 即 豬八戒 自然')
 print(df.iloc[2, 3])
-"""
+
 cc = df.iloc[0, [0, 4]]
 print(cc)
 cc = df.iloc[[0, 1], [2, 3]]
@@ -796,11 +846,8 @@ datas = {
 df = pd.DataFrame(datas)
 print(df)
 
-print("修改 沙悟淨 的 英文 為 100")
-df.loc["沙悟淨"]["英文"] = 100
-
-print("修改 唐三藏 的 所有成績為 為 100")
-df.loc["唐三藏", :] = 100
+print("修改 孫悟空 的 所有成績為 為 100")
+df.loc["孫悟空", :] = 100
 
 print("新df")
 print(df)
@@ -970,7 +1017,7 @@ sample_df_fill = sample_df.fillna(0)  # 在 NaN 之處填入 0
 
 print(sample_df_fill)
 
-sample_df_fill_2 = sample_df.fillna(method="ffill")
+sample_df_fill_2 = sample_df.ffill()
 
 print(sample_df_fill_2)
 
@@ -1048,9 +1095,10 @@ dates = pd.date_range("20130101", periods=6)
 df = pd.DataFrame(datas, columns=columns, index=dates)
 print(df)
 
+print(df.A)
+
 df.iloc[2, 2] = 1111
 df.loc["2013-01-03", "D"] = 2222
-df.A[df.A > 0] = 0
 df["F"] = np.nan
 df["G"] = pd.Series([1, 2, 3, 4, 5, 6], index=pd.date_range("20130101", periods=6))
 print(df)
@@ -1167,6 +1215,10 @@ print("平均相對濕度 :", df2["平均相對濕度"].mean())
 print("月均日照時數 :", df2["月均日照時數"].sum())
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 # 讀取資料
 df = pd.read_csv("_new/customer.csv")
@@ -1195,8 +1247,8 @@ df_sample["age"] = df_sample["age"].fillna(value=df_sample["age"].mean())
 print(df_sample.head())
 
 # 以前一個值往下填ffill或後一個值往上填bfill
-df_sample["gender"] = df_sample["gender"].fillna(method="ffill")
-df_sample["area"] = df_sample["area"].fillna(method="ffill")
+df_sample["gender"] = df_sample["gender"].ffill()
+df_sample["area"] = df_sample["area"].ffill()
 print(df_sample.head())
 
 # 刪除不完整的資料
@@ -1209,8 +1261,8 @@ df = pd.read_csv("_new/customer.csv")
 # 資料基本清理
 df_sample = df.copy()
 df_sample["age"] = df_sample["age"].fillna(value=df_sample["age"].mean())
-df_sample["gender"] = df_sample["gender"].fillna(method="ffill")
-df_sample["area"] = df_sample["area"].fillna(method="ffill")
+df_sample["gender"] = df_sample["gender"].ffill()
+df_sample["area"] = df_sample["area"].ffill()
 
 # 去除重覆記錄
 df_sample.drop_duplicates(subset="id", keep="first", inplace=True)
@@ -1232,8 +1284,8 @@ df = pd.read_csv("_new/customer.csv")
 # 資料基本清理
 df_sample = df.copy()
 df_sample["age"] = df_sample["age"].fillna(value=df_sample["age"].mean())
-df_sample["gender"] = df_sample["gender"].fillna(method="ffill")
-df_sample["area"] = df_sample["area"].fillna(method="ffill")
+df_sample["gender"] = df_sample["gender"].ffill()
+df_sample["area"] = df_sample["area"].ffill()
 df_sample.drop_duplicates(subset="id", keep="first", inplace=True)
 df_sample["job"] = df_sample["job"].str.strip()
 df_sample["job"] = df_sample["job"].str.replace(" ", "")
@@ -1255,8 +1307,8 @@ df = pd.read_csv("_new/customer.csv")
 # 資料基本清理
 df_sample = df.copy()
 df_sample["age"] = df_sample["age"].fillna(value=df_sample["age"].mean())
-df_sample["gender"] = df_sample["gender"].fillna(method="ffill")
-df_sample["area"] = df_sample["area"].fillna(method="ffill")
+df_sample["gender"] = df_sample["gender"].ffill()
+df_sample["area"] = df_sample["area"].ffill()
 df_sample.drop_duplicates(subset="id", keep="first", inplace=True)
 df_sample["job"] = df_sample["job"].str.strip()
 df_sample["job"] = df_sample["job"].str.replace(" ", "")
@@ -1410,8 +1462,9 @@ print(cc)
 print("對 空資料之處理")
 
 df = pd.read_csv("data/titanic20.csv")
-print("檢視前幾行")
-print(df.head())
+
+#print("檢視前幾行\n", df.head())
+
 print("原df之個數")
 print(len(df))
 print("欄位 Age 為 空資料 之個數")
@@ -1432,7 +1485,8 @@ df["Age"] = df["Age"].fillna(value=age)
 
 print("欄位 Age 為 空資料 之個數")
 print(df["Age"].isnull().sum())
-print(df.head())
+
+#print("檢視前幾行\n", df.head())
 
 print("------------------------------")  # 30個
 
@@ -1444,7 +1498,8 @@ df["Age"] = df["Age"].fillna(value=age)
 
 print("欄位 Age 為 空資料 之個數")
 print(df["Age"].isnull().sum())
-print(df.head())
+
+#print("檢視前幾行\n", df.head())
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1759,17 +1814,13 @@ orders = pd.read_table("http://bit.ly/chiporders")
 # filename = "data/chipotle.tsv"
 # orders = pd.read_csv(filename) # NG
 
-print("檢視前幾行")
-cc = orders.head()
-print(cc)
+print("檢視前幾行\n", orders.head())
 
 # read a dataset of movie reviewers (modifying the default parameter values for read_table)
 user_cols = ["user_id", "age", "gender", "occupation", "zip_code"]
 users = pd.read_table("http://bit.ly/movieusers", sep="|", header=None, names=user_cols)
 
-print("檢視前幾行")
-cc = users.head()
-print(cc)
+print("檢視前幾行\n", users.head())
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1784,9 +1835,7 @@ ufo = pd.read_csv("http://bit.ly/uforeports")
 filename = "data/ufo.csv"
 ufo = pd.read_csv(filename)
 
-print("檢視前幾行")
-cc = ufo.head()
-print(cc)
+#print("檢視前幾行\n", ufo.head())
 
 # select the 'City' Series using bracket notation
 ufo["City"]
@@ -1807,14 +1856,7 @@ print("------------------------------------------------------------")  # 60個
 filename = "data/imdb_1000.csv"
 movies = pd.read_csv(filename)
 
-print("檢視前幾行")
-cc = movies.head()
-print(cc)
-
-# 屬性, number of rows and columns
-print("movies之大小")
-cc = movies.shape
-print(cc)
+#print("檢視前幾行\n", movies.head())
 
 # example attribute: data type of each column
 cc = movies.dtypes
@@ -1885,27 +1927,22 @@ print("------------------------------------------------------------")  # 60個
 filename = "data/ufo.csv"
 ufo = pd.read_csv(filename)
 
-print("檢視前幾行")
-cc = ufo.head()
-print(cc)
+#print("檢視前幾行\n", ufo.head())
 
 # remove a single column (axis=1 refers to columns)
 ufo.drop("Colors Reported", axis=1, inplace=True)
-print("檢視前幾行")
-cc = ufo.head()
-print(cc)
+
+#print("檢視前幾行\n", ufo.head())
 
 # remove multiple columns at once
 ufo.drop(["City", "State"], axis=1, inplace=True)
-print("檢視前幾行")
-cc = ufo.head()
-print(cc)
+
+#print("檢視前幾行\n", ufo.head())
 
 # remove multiple rows at once (axis=0 refers to rows)
 ufo.drop([0, 1], axis=0, inplace=True)
-print("檢視前幾行")
-cc = ufo.head()
-print(cc)
+
+#print("檢視前幾行\n", ufo.head())
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1916,9 +1953,7 @@ print("------------------------------------------------------------")  # 60個
 filename = "data/imdb_1000.csv"
 movies = pd.read_csv(filename)
 
-print("檢視前幾行")
-cc = movies.head()
-print(cc)
+#print("檢視前幾行\n", movies.head())
 
 # sort the 'title' Series in ascending order (returns a Series)
 print("檢視前幾行")
@@ -1956,11 +1991,6 @@ movies = pd.read_csv(filename)
 
 print("檢視前幾行")
 cc = movies.head()
-print(cc)
-
-# examine the number of rows and columns
-print("movies之大小")
-cc = movies.shape
 print(cc)
 
 # create a list in which each element refers to a DataFrame row: True if the row satisfies the condition, False otherwise
@@ -2015,9 +2045,7 @@ print("------------------------------------------------------------")  # 60個
 filename = "data/imdb_1000.csv"
 movies = pd.read_csv(filename)
 
-print("檢視前幾行")
-cc = movies.head()
-print(cc)
+#print("檢視前幾行\n", movies.head())
 
 # filter the DataFrame to only show movies with a 'duration' of at least 200 minutes
 cc = movies[movies.duration >= 200]
@@ -2126,9 +2154,7 @@ print("使用 axis")
 filename = "data/drinks.csv"
 drinks = pd.read_csv(filename)
 
-print("檢視前幾行")
-cc = drinks.head()
-print(cc)
+#print("檢視前幾行\n", drinks.head())
 
 # drop a column (temporarily)
 print("檢視前幾行")
@@ -2171,9 +2197,7 @@ orders = pd.read_table("http://bit.ly/chiporders")
 # filename = "data/chipotle.tsv"
 # orders = pd.read_csv(filename) # NG
 
-print("檢視前幾行")
-cc = orders.head()
-print(cc)
+#print("檢視前幾行\n", orders.head())
 
 # string methods for pandas Series are accessed via 'str'
 print("檢視前幾行")
@@ -2207,9 +2231,7 @@ print("------------------------------------------------------------")  # 60個
 filename = "data/drinks.csv"
 drinks = pd.read_csv(filename)
 
-print("檢視前幾行")
-cc = drinks.head()
-print(cc)
+#print("檢視前幾行\n", drinks.head())
 
 # examine the data type of each Series
 print("檢視資料型態")
@@ -2231,9 +2253,7 @@ orders = pd.read_table("http://bit.ly/chiporders")
 # filename = "data/chipotle.tsv"
 # orders = pd.read_csv(filename) # NG
 
-print("檢視前幾行")
-cc = orders.head()
-print(cc)
+#print("檢視前幾行\n", orders.head())
 
 # examine the data type of each Series
 cc = orders.dtypes
@@ -2288,6 +2308,7 @@ drinks.groupby('continent').mean()
 # side-by-side bar plot of the DataFrame directly above
 drinks.groupby('continent').mean().plot(kind='bar')
 """
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # How do I explore a pandas Series? (video)
@@ -2361,6 +2382,7 @@ movies.genre.value_counts().plot(kind="bar")
 
 plt.show()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # How do I handle missing values in pandas? (video)
@@ -2437,13 +2459,14 @@ cc = ufo["Shape Reported"].value_counts(dropna=False).head()
 print(cc)
 
 # fill in missing values with a specified value
-ufo["Shape Reported"].fillna(value="VARIOUS", inplace=True)
+ufo["Shape Reported"] = ufo["Shape Reported"].fillna(value="VARIOUS")
 
 # confirm that the missing values were filled in
 print("檢視前幾行")
 cc = ufo["Shape Reported"].value_counts().head()
 print(cc)
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # pandas index
@@ -2455,19 +2478,6 @@ drinks = pd.read_csv(filename)
 
 print("檢視前幾行")
 cc = drinks.head()
-print(cc)
-
-# every DataFrame has an index (sometimes called the "row labels")
-cc = drinks.index
-print(cc)
-
-# column names are also stored in a special "index" object
-cc = drinks.columns
-print(cc)
-
-# neither the index nor the columns are included in the shape
-print("drinks之大小")
-cc = drinks.shape
 print(cc)
 
 # index and columns both default to integers if you don't define them
@@ -2729,12 +2739,12 @@ print(cc)
 
 # fill missing values using "backward fill" strategy (doesn't affect the DataFrame since inplace=False)
 print("檢視後幾行")
-cc = ufo.fillna(method="bfill").tail()
+cc = ufo.ffill().tail()
 print(cc)
 
 # compare with "forward fill" strategy (doesn't affect the DataFrame since inplace=False)
 print("檢視後幾行")
-cc = ufo.fillna(method="ffill").tail()
+cc = ufo.ffill().tail()
 print(cc)
 
 print("------------------------------------------------------------")  # 60個
@@ -2824,6 +2834,7 @@ print(cc)
 # create a feature matrix 'X' by selecting two DataFrame columns
 feature_cols = ["Pclass", "Parch"]
 X = train.loc[:, feature_cols]
+
 print("X之大小")
 cc = X.shape
 print(cc)
@@ -3015,10 +3026,6 @@ print("檢視前幾行")
 cc = movies.head()
 print(cc)
 
-print("movies之大小")
-cc = movies.shape
-print(cc)
-
 cc = movies.movie_id.nunique()
 print(cc)
 
@@ -3028,10 +3035,6 @@ rating_cols = ["user_id", "movie_id", "rating", "timestamp"]
 ratings = pd.read_table("data/u.data", sep="\t", header=None, names=rating_cols)
 print("檢視前幾行")
 cc = ratings.head()
-print(cc)
-
-print("ratings之大小")
-cc = ratings.shape
 print(cc)
 
 cc = ratings.movie_id.nunique()
@@ -3061,10 +3064,6 @@ print(cc)
 
 print("檢視前幾行")
 cc = movie_ratings.head()
-print(cc)
-
-print("movie_ratings之大小")
-cc = movie_ratings.shape
 print(cc)
 
 print("movie之大小")
@@ -3923,10 +3922,10 @@ ufo = ufo.set_index("Time")
 cc = ufo.head()
 print(cc)
 
-cc = ufo.resample("Y").State.count().tail()
+cc = ufo.resample("YE").State.count().tail()
 print(cc)
 
-cc = ufo.resample("M").State.count().tail()
+cc = ufo.resample("ME").State.count().tail()
 print(cc)
 
 # 11. Read and write from compressed files
@@ -4382,50 +4381,6 @@ columns = list("ABCDEFGHIJKLMNOPQRSTUVWXY")
 df = pd.DataFrame(np.random.rand(200, 25), columns=columns)
 print(df)
 
-df = make_data_frame_from_dict()  # 字典 轉 df
-print(df)
-
-print('df["自然"] ->')
-print(df["自然"])
-print('df[["國文", "數學", "自然"] ->')
-print(df[["國文", "數學", "自然"]])
-print("df[df.數學>=80] ->")
-print(df[df.數學 >= 80])
-
-print("------------------------------")  # 30個
-
-print('df.loc[:, "數學"] ->')
-print(df.loc[:, "數學"])
-
-print('df.loc["孫悟空":"豬八戒", "數學":"社會"] ->')
-print(df.loc["孫悟空":"豬八戒", "數學":"社會"])
-print('df.loc[:沙悟淨, "數學":"社會"] ->')
-print(df.loc[:"沙悟淨", "數學":"社會"])
-print('df.loc["孫悟空":, "數學":"社會"] ->')
-print(df.loc["孫悟空":, "數學":"社會"])
-
-print("------------------------------")  # 30個
-
-"""
-print("移除孫悟空成績 ->")
-df1 = df.drop("孫悟空")
-print(df1)
-print("移除數學科成績 ->")
-df2 = df.drop("數學", axis=1)
-print(df2)
-print("移除數學科及自然科成績 ->")
-df3 = df.drop(["數學", "自然"], axis=1)
-print(df3)
-print("移除孫悟空到豬八戒成績 ->")
-df4 = df.drop(df.index[1:4])
-print(df4)
-print("移除數學科到自然科成績 ->")
-df5 = df.drop(df.columns[1:4], axis=1)
-print(df5)
-"""
-
-df.to_csv("tmp_scores3.csv", encoding="utf-8-sig")
-
 print("------------------------------")  # 30個
 print("------------------------------")  # 30個
 
@@ -4447,7 +4402,6 @@ print(df)
 """
 
 print("------------------------------------------------------------")  # 60個
-
 
 # 取出 DataFrame 當中的元素 –df.loc[]、df.iloc[]
 
@@ -4472,3 +4426,11 @@ print("交集合併")
 order_df = pd.merge(order_df, customer_df, left_on="數學", right_on="國文", how="inner")
 
 order_df = pd.merge(order_df, customer_df, left_on="數學", right_index=True, how="inner")
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+

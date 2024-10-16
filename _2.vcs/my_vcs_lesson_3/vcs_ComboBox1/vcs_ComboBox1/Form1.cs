@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.IO;
+using System.Collections;   //for Hashtable
 using System.Drawing.Drawing2D; //for LinearGradientBrush   //自繪帶圖片的 ComboBox
 
 namespace vcs_ComboBox1
@@ -131,10 +133,7 @@ namespace vcs_ComboBox1
             //添加DrawItem事件處理函數 
             comboBox4.DrawItem += ComboBox4_DrawItem;
 
-
-
             setup_comboBox5();
-
         }
 
         private void comboBox2_DrawItem(object sender, DrawItemEventArgs e)
@@ -299,6 +298,98 @@ namespace vcs_ComboBox1
             //設置自動完成字串的來源
             comboBox3.AutoCompleteSource = AutoCompleteSource.ListItems;
         }
+
+
+        Hashtable ht = new Hashtable();
+        string foldername = @"C:\_git\vcs\_1.data\______test_files1\__pic\_MU";
+
+        //多層 且指明副檔名
+        public void GetAllFiles(string foldername)
+        {
+            DirectoryInfo di = new DirectoryInfo(foldername);
+            //richTextBox1.Text += "資料夾 : " + di.FullName + "\n";
+            FileSystemInfo[] fileinfo = di.GetFileSystemInfos();
+            foreach (FileSystemInfo fi in fileinfo)
+            {
+                if (fi is DirectoryInfo)
+                {
+                    GetAllFiles(((DirectoryInfo)fi).FullName);
+                }
+                else
+                {
+                    string fullname = fi.FullName;
+                    string shortname = fi.Name;
+                    string ext = fi.Extension.ToLower();
+                    string forename = shortname.Substring(0, shortname.Length - ext.Length);    //前檔名
+
+                    if (ext == ".jpg" || ext == ".jpeg" || ext == ".bmp" || ext == ".png" || ext == ".gif")
+                    {
+                        //ht.add(key, value), key不能重複
+                        ht.Add(forename, fullname);
+
+                        richTextBox1.Text += "加入 前檔名 : " + forename + "\t長檔名 : " + fullname + "\n";
+                    }
+                }
+            }
+        }
+
+        private void showPic(string name)
+        {
+            this.pictureBox1.ImageLocation = name;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //尋找檔案
+            GetAllFiles(foldername);
+
+            foreach (DictionaryEntry de in ht)
+            {
+                this.comboBox6.Items.Add(de.Key);
+            }
+            if (comboBox6.Items.Count > 0)
+                comboBox6.SelectedIndex = 0;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            //顯示
+            richTextBox1.Text += comboBox6.SelectedIndex.ToString() + "\n";
+
+            if (comboBox6.SelectedIndex == -1)
+                return;
+            if (ht.Values.Count > 0)
+            {
+                showPic(ht[this.comboBox6.Text].ToString());
+            }
+            else
+            {
+                MessageBox.Show("目前還沒有圖片相關訊息！！！");
+            }
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            //Info
+            int len = ht.Count;
+
+            richTextBox1.Text += "len = " + len.ToString() + "\n";
+
+            //方法一：遍歷traversal 1:
+            foreach (DictionaryEntry de in ht)
+            {
+                richTextBox1.Text += "key = " + de.Key + "\t" + "value = " + de.Value + "\n";
+            }
+
+            //方法二：遍歷traversal 2:
+            IDictionaryEnumerator d = ht.GetEnumerator();
+            while (d.MoveNext())
+            {
+                //richTextBox1.Text += "key = " + d.Entry.Key + "\t" + "value = " + d.Entry.Value + "\n";
+            }
+
+        }
     }
 
     //自定義組合框項 
@@ -324,4 +415,3 @@ namespace vcs_ComboBox1
         }
     }
 }
-

@@ -32,26 +32,10 @@ namespace vcs_PictureBox
             pictureBox2.Image = null;
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-        }
-
         private void button3_Click(object sender, EventArgs e)
         {
             pictureBox1.Image = null;
             pictureBox2.Image = null;
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            pictureBox1.Height += 10;
-            pictureBox1.Width += 10;
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-            pictureBox1.Height -= 10;
-            pictureBox1.Width -= 10;
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -84,45 +68,11 @@ namespace vcs_PictureBox
             }
         }
 
-        private void button8_Click(object sender, EventArgs e)
-        {
-            pictureBox1.Location = new Point(pictureBox1.Location.X + 5, pictureBox1.Location.Y + 5);
-        }
-
-        private void button7_Click(object sender, EventArgs e)
-        {
-            pictureBox1.Location = new Point(pictureBox1.Location.X - 5, pictureBox1.Location.Y - 5);
-        }
-
-        private void button9_Click(object sender, EventArgs e)
-        {
-            //把pictureBox移到(60, 100)位置
-            int xx = 60;
-            int yy = 100;
-            pictureBox1.Location = new Point(xx, yy);
-        }
-
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             richTextBox1.Text += listBox1.SelectedItem + "\n";
             Image loadedImage = Image.FromFile(listBox1.SelectedItem.ToString());
             pictureBox1.Image = loadedImage;
-        }
-
-        private void button10_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button11_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button12_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
         }
 
         bool flag_mouse_down = false;
