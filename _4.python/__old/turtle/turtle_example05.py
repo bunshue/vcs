@@ -8,55 +8,9 @@ import sys
 import turtle as tu
 
 print('------------------------------------------------------------')	#60個
-
-tu.color('blue')
-for i in range(4):
-    tu.forward(120)
-    tu.left(90)
-tu.done()
-
-print('------------------------------------------------------------')	#60個
-
-circle_colors = ['red', 'yellow', 'blue', 'black', 'gray']
-tu.pensize(3)
-tu.penup()
-for i in range(len(circle_colors)):
-    tu.goto(-200+i*50, 0)
-    tu.pendown()
-    tu.color(circle_colors[i])
-    tu.circle(80,360)
-    tu.penup()
-tu.done()
-
-print('------------------------------------------------------------')	#60個
-
-circle_colors = ['red', 'yellow', 'blue', 'black', 'gray']
-tu.pensize(3)
-tu.penup()
-for i, c in enumerate(circle_colors):
-    tu.goto(-200+i*50, 0)
-    tu.pendown()
-    tu.color(c)
-    tu.circle(80,360)
-    tu.penup()
-tu.done()
-
-print('------------------------------------------------------------')	#60個
-
-#n = int(input("請問要畫幾邊形？"))
-n = 7
-tu.pensize(3)
-tu.color('blue')
-for i in range(n):
-    tu.left(360//n)
-    tu.forward(100)
-tu.goto(0,0)
-tu.done()
-
-print('------------------------------------------------------------')	#60個
-
+'''
 pos_list = list()
-n = int(input("請問要畫幾邊形？"))
+print("請問要畫幾邊形？")
 n = 7
 tu.color('red')
 tu.speed(8)
@@ -101,32 +55,11 @@ for i in range(150):
     tu.left(i//10)
     tu.backward(6)
 tu.done()
-
-print('------------------------------------------------------------')	#60個
-
-tu.color('red')
-tu.begin_fill()
-tu.left(90)
-for i in range(200):
-    tu.right(1)
-    tu.forward(1)
-tu.goto(0,-130)
-tu.goto(-110.96, -20.57)
-tu.penup()
-tu.goto(0,0)
-tu.pendown()
-tu.home()
-tu.left(90)
-for i in range(200):
-    tu.left(1)
-    tu.forward(1)
-tu.end_fill()
-tu.ht()
-tu.done()
-
+'''
 print('------------------------------------------------------------')	#60個
 
 import math
+
 tu.speed(8)
 tu.penup()
 tu.goto(-200,0)
@@ -138,6 +71,7 @@ tu.done()
 print('------------------------------------------------------------')	#60個
 
 import math
+
 tu.speed(8)
 tu.pensize(3)
 tu.penup()
@@ -157,22 +91,9 @@ tu.done()
 print('------------------------------------------------------------')	#60個
 
 import math
-tu.speed(8)
-tu.pensize(3)
-tu.penup()
-tu.goto(150,0)
-tu.color('red')
-tu.pendown()
-for d in range(0, 361, 2):
-    x = 150*math.cos(d*math.pi/180)
-    y = 150*math.sin(d*math.pi/180)
-    tu.goto(x, y)
-tu.done()
 
-print('------------------------------------------------------------')	#60個
-
-import math
 tu.speed(8)
+
 tu.pensize(3)
 tu.penup()
 tu.goto(150,0)
@@ -268,8 +189,4 @@ while not quit:
 pg.quit()
 
 print('------------------------------------------------------------')	#60個
-
-
-
-
 

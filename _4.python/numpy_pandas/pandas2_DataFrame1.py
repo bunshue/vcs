@@ -287,6 +287,16 @@ print("------------------------------------------------------------")  # 60個
 df = make_data_frame_from_dict()  # 字典 轉 df
 print(df)
 
+print(df.shape)
+# 列出所有欄索引標籤(欄位名稱)
+for col in range(df.shape[1]):
+    print(df.columns.values[col], " ", end="")
+print()
+
+# 列出各列的列索引標籤、表格內容
+print(df.shape[0])
+print(df.index.values)
+
 print("新增欄位 體育")
 df["體育"] = [88, 98, 80, 94]
 print(df)
@@ -294,13 +304,13 @@ print(df)
 print("顯示 體育 欄的資料")
 print(df["體育"])
 
-# 刪除 df 物件的列或行 – drop()
+print("刪除 df 的 欄位 或 索引 – drop()")
 
 print("刪除欄位 數學")
 df1 = df.drop("數學", axis=1)
 print(df1)
 
-print("刪除 數學 自然 兩欄位")
+print("刪除欄位 數學 自然")
 df3 = df.drop(["數學", "自然"], axis=1)
 print(df3)
 
@@ -313,66 +323,25 @@ df4 = df.drop(df.index[2:4])
 print(df4)
 
 print("刪除索引 0 1, 即刪除 唐三藏 孫悟空")
-df_1 = df.drop([0, 1])
-print(df_1)
+df5 = df.drop([0, 1])
+print(df5)
 
 print("刪除索引 偶數索引")
-df = df.drop(np.arange(0, 4, 2))
-print(df)
+df6 = df.drop(np.arange(0, 4, 2))
+print(df6)
 
 print("df反置")
-print(df.T)
+df7 = df.T
+print(df7)
 
-print("------------------------------------------------------------")  # 60個
-
-df = make_data_frame_from_dict()  # 字典 轉 df
-print(df)
-
-df.set_index("姓名", inplace=True)
-print(df)
-
-print("移除索引 index 豬八戒 沙悟淨")
-df2 = df.drop(["豬八戒", "沙悟淨"])
-print(df2)
-
-print("移除索引 0 2, 即 唐三藏 豬八戒")
-df3 = df.drop(df.index[[0, 2]])
-print(df3)
-
-print("移除欄位 自然")
-
-df4 = df.drop(["自然"], axis=1)
-print(df4)
-
-print("------------------------------------------------------------")  # 60個
-
-df = make_data_frame_from_dict()  # 字典 轉 df
-print(df)
+df8 = df.loc[[1, 2], ["國文", "英文"]]
+print(df8)
 
 # 前 index, 後 column
 # index [0, 1, 2, 3] 表示 索引 "唐三藏", "孫悟空", "豬八戒", "沙悟淨"
 # column [3, 4, 5] 表示 欄位 "數學" "社會" "自然"
-df = df.iloc[[0, 1, 2, 3], [3, 4, 5]]
-print(df)
-
-print("------------------------------------------------------------")  # 60個
-
-# 從 df 物件篩選出想要的資料
-
-df = make_data_frame_from_dict()  # 字典 轉 df
-print(df)
-
-print(df.index % 2 == 0)
-print(df[df.index % 2 == 0])
-
-df = pd.DataFrame(datas)
-df = df.loc[[1, 2], ["國文", "英文"]]
-print(df)
-
-print("------------------------------------------------------------")  # 60個
-
-df = make_data_frame_from_dict()  # 字典 轉 df
-print(df)
+df9 = df.iloc[[0, 1, 2, 3], [3, 4, 5]]
+print(df9)
 
 # 取出dataframe其中一欄就是series
 print(df["姓名"])
@@ -386,61 +355,16 @@ print(score)
 df["成績"] = score
 print(df)
 
-print("------------------------------------------------------------")  # 60個
-
-df = make_data_frame_from_dict()  # 字典 轉 df
-print(df)
-
-print(df.shape)
-# 列出所有欄索引標籤(欄位名稱)
-for col in range(df.shape[1]):
-    print(df.columns.values[col], " ", end="")
-print()
-
-# 列出各列的列索引標籤、表格內容
-for row in range(df.shape[0]):
-    print(df.index.values[row], " ", end="")
-    for col in range(df.shape[1]):
-        print(df.iloc[row][col], " ", end="")
-    print()
-
+print("從 df 篩選出想要的資料")
+cc = df.index % 2 == 0
+print(cc)
+cc = df[df.index % 2 == 0]
+print(cc)
 
 # 比較loc(彈性較大)和iloc顯示表格內容
 # loc使用行索引標籤(column index label)和列索引標籤(row index label)
-print(df.loc[1]["姓名"])
-# iloc使用行索引(column index)和列索引(row index)
-print(df.iloc[1][0])
-
-print("------------------------------------------------------------")  # 60個
-
-df = make_data_frame_from_dict()  # 字典 轉 df
-print(df)
-
-# 將dataframe轉成清單list
-alldata = df.to_dict("split")
-
-# 會有3個list構成: columns, index, data
-print(alldata)
-print(alldata["columns"])
-print(alldata["index"])
-print(alldata["data"])
-
-# 列出所有欄索引標籤(欄位名稱)
-for col in range(len(alldata["columns"])):
-    print(alldata["columns"][col], " ", end="")
-print()
-
-# 列出各列的列索引標籤、欄位內容
-for row in range(len(alldata["index"])):
-    print(alldata["index"][row], " ", end="")
-    for col in range(len(alldata["columns"])):
-        print(alldata["data"][row][col], " ", end="")
-    print()
-
-print("------------------------------------------------------------")  # 60個
-
-df = make_data_frame_from_dict()  # 字典 轉 df
-print(df)
+cc = df.loc[1]["姓名"]
+print(cc)
 
 # 指定顯示dataframe中是數值型態的欄位的最大max()或最小min()數據
 print("數學最低 :", df["數學"].min())
@@ -460,13 +384,6 @@ for col in range(df.shape[1]):
     print(df.columns.values[col], " ", end="")
 print()
 
-# 使用iloc列出各列的列索引、欄位內容
-for row in range(df.shape[0]):
-    print(df.index.values[row], " ", end="")
-    for col in range(df.shape[1]):
-        print(df.iloc[row][col], " ", end="")
-    print()
-
 # 列出所有欄索引(欄位名稱)
 for col in range(df.shape[1]):
     print(df.columns.values[col], " ", end="")
@@ -478,6 +395,57 @@ for row in range(df.shape[0]):
     for col in range(df.shape[1]):
         print(df.loc[df.index.values[row]][df.columns.values[col]], " ", end="")
     print()
+
+print("------------------------------------------------------------")  # 60個
+
+df = make_data_frame_from_dict()  # 字典 轉 df
+print(df)
+
+print('df 轉 字典')
+alldata = df.to_dict("split")
+print(type(alldata))
+
+# 會有3個list構成: columns, index, data
+print('字典')
+print(alldata)
+print('欄位')
+print(alldata["columns"])
+print('索引')
+print(alldata["index"])
+print('資料')
+print(alldata["data"])
+
+# 列出所有欄索引標籤(欄位名稱)
+for col in range(len(alldata["columns"])):
+    print(alldata["columns"][col], " ", end="")
+print()
+
+# 列出各列的列索引標籤、欄位內容
+for row in range(len(alldata["index"])):
+    print(alldata["index"][row], " ", end="")
+    for col in range(len(alldata["columns"])):
+        print(alldata["data"][row][col], " ", end="")
+    print()
+
+print("------------------------------------------------------------")  # 60個
+
+df = make_data_frame_from_dict()  # 字典 轉 df
+print(df)
+
+df.set_index("姓名", inplace=True)
+print(df)
+
+print("移除索引 index 豬八戒 沙悟淨")
+df2 = df.drop(["豬八戒", "沙悟淨"])
+print(df2)
+
+print("移除索引 0 2, 即 唐三藏 豬八戒")
+df3 = df.drop(df.index[[0, 2]])
+print(df3)
+
+print("移除欄位 自然")
+df4 = df.drop(["自然"], axis=1)
+print(df4)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -746,8 +714,6 @@ print("平均 :", df["數學"].mean())
 
 print("df.iloc[1, :] ->")
 print(df.iloc[1, :])
-print("df.iloc[1][1] ->")
-print(df.iloc[1][1])
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1152,8 +1118,6 @@ df["TAG"] = ["AAA", "BBB", "AAA", "BBB"]
 print(df)
 
 print(df.groupby("TAG").sum())
-
-sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1566,7 +1530,7 @@ print(res)
 
 print("------------------------------------------------------------")  # 60個
 
-print("Merge() : merge()的默認操作是水平連接兩個DataFrame物件")
+print("Merge() : merge()的默認操作是水平連接兩個DataFrame")
 
 datas1 = {
     "key": ["K0", "K1", "K2"],
@@ -4286,7 +4250,6 @@ ax.set_xlabel("Xlabel")
 
 plt.show()
 
-
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
@@ -4300,7 +4263,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -4471,8 +4433,6 @@ df = pd.read_csv("_new/scores2.csv", header=0, index_col=0)
 print(df)
 
 print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
 
 """ no file

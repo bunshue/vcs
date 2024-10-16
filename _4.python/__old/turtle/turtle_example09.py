@@ -37,7 +37,7 @@ pictures can easily be drawn.
 
 ----- turtle.py
 
-This module is an extended reimplementation of turtle.py from the
+turtle.speed(0)This module is an extended reimplementation of turtle.py from the
 Python standard distribution up to Python 2.5. (See: http://www.python.org)
 
 It tries to keep the merits of turtle.py and to be (nearly) 100%

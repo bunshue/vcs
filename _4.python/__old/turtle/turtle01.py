@@ -42,8 +42,7 @@ ht     hideturtle   # 隱藏海龜
 
 """
 
-
-'''
+turtle.speed(0)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -355,6 +354,15 @@ drawCircle(cx, cy, R)
 cx, cy, R = 100, 0, 50
 drawCircle(cx, cy, R)
 
+#畫圓
+x1, y1 = 0, 0
+radius = 150
+turtle.penup()  # 提筆
+turtle.goto(x1, y1 - radius)
+turtle.pendown()  # 下筆
+
+turtle.circle(radius)
+
 turtle.done() 
 
 turtle.mainloop()
@@ -371,294 +379,6 @@ while True:
         break
 turtle.end_fill()  # 結束塗色
 turtle.done()
-
-print("------------------------------------------------------------")  # 60個
-
-turtle.home()  # 畫筆回到原點
-
-turtle.undo()
-
-# 空心星星
-sides = 5  # 星星的個數
-angle = 180 - (180 / sides)  # 每個迴圈海龜轉動角度
-size = 100  # 星星長度
-for x in range(sides):
-    turtle.forward(size)  # 海龜向前繪線移動100
-    turtle.right(angle)  # 海龜方向左轉的度數
-
-turtle.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-# 實心星星
-sides = 5  # 星星的個數
-angle = 180 - (180 / sides)  # 每個迴圈海龜轉動角度
-size = 100  # 星星長度
-turtle.begin_fill()  # 開始塗色
-for x in range(sides):
-    turtle.forward(size)  # 海龜向前繪線移動100
-    turtle.right(angle)  # 海龜方向左轉的度數
-turtle.end_fill()  # 結束塗色
-
-turtle.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-# 實心星星
-
-def stars(sides, size, cr, x, y):
-    t.penup()  # 提筆
-    t.goto(x, y)
-    t.pendown()  # 下筆
-    angle = 180 - (180 / sides)  # 每個迴圈海龜轉動角度
-    t.color(cr)
-    t.begin_fill()  # 開始塗色
-    for x in range(sides):
-        t.forward(size)  # 海龜向前繪線移動100
-        t.right(angle)  # 海龜方向左轉的度數
-    t.end_fill()  # 結束塗色
-
-
-t = turtle.Pen()
-t.screen.bgcolor("blue")
-stars(5, 100, "red", -100, 0)
-stars(5, 100, "green", 0, 0)
-stars(5, 100, "yellow", 100, 0)
-
-turtle.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-
-def stars(sides, size, cr, x, y):
-    t.penup()  # 提筆
-    t.goto(x, y)
-    t.pendown()  # 下筆
-    angle = 180 - (180 / sides)  # 每個迴圈海龜轉動角度
-    t.color(cr)
-    t.begin_fill()  # 開始塗色
-    for x in range(sides):
-        t.forward(size)  # 海龜向前繪線移動100
-        t.right(angle)  # 海龜方向左轉的度數
-    t.end_fill()  # 結束塗色
-
-t = turtle.Pen()
-t.screen.bgcolor("blue")
-
-t.hideturtle()  # 隱藏海龜
-
-color_list = [
-    "yellow",
-    "white",
-    "gold",
-    "pink",
-    "gray",
-    "red",
-    "orange",
-    "aqua",
-    "green",
-]
-while True:
-    ran_sides = random.randint(2, 5) * 2 + 1  # 限制星星角度是5-11的奇數
-    ran_size = random.randint(5, 30)
-    ran_color = random.choice(color_list)
-    ran_x = random.randint(-250, 250)
-    ran_y = random.randint(-250, 250)
-    stars(ran_sides, ran_size, ran_color, ran_x, ran_y)
-
-turtle.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-
-def is_inside():
-    #測試是否在繪布範圍
-    left = (-t.screen.window_width() / 2) + 100  # 左邊牆
-    right = (t.screen.window_width() / 2) - 100  # 右邊牆
-    top = (t.screen.window_height() / 2) - 100  # 上邊牆
-    bottom = (-t.screen.window_height() / 2) + 100  # 下邊牆
-    x, y = t.pos()  # 海龜座標
-    is_inside = (left < x < right) and (bottom < y < top)
-    return is_inside
-
-
-def t_move():
-    colors = ["blue", "pink", "green", "red", "yellow", "aqua"]
-    t.color(random.choice(colors))  # 繪圖顏色
-    t.begin_fill()  # 開始塗色
-    if is_inside():  # 如果在繪布範圍
-        #t.right(random.randint(320, 350))  # 海龜移動角度
-        t.right(random.randint(0, 180))  # 海龜移動角度
-        t.forward(length)
-    else:
-        t.backward(length)
-    t.end_fill()  # 結束塗色
-
-
-length = 100  # 線長
-width = 10  # 線寬
-t = turtle.Pen()
-t.pensize(width)  # 設定畫筆大小
-t.screen.bgcolor("black")  # 畫布背景
-while True:
-    t_move()
-
-turtle.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-
-turtle.penup()  # 提筆
-turtle.forward(150)  # 移動往左
-turtle.pendown()  # 下筆
-
-turtle.penup()  # 提筆
-turtle.forward(100)  # 移動往右
-turtle.pendown()  # 下筆
-step = 5  # 每次增加距離
-for r in range(10, 100 + step, step):
-    turtle.penup()  # 提筆
-    turtle.setpos(150, -100)  # 海龜到點(150,100)
-    turtle.pendown()  # 下筆
-    turtle.circle(r, 90 + r * 2)  # 繪製圓
-
-turtle.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-print('turtle測試 .circle 空心圓')
-
-r = 30  # 半徑
-turtle.penup()  # 提筆
-
-for edge in range(3, 13, 1):  # 繪3 - 12邊圖
-    turtle.pendown()  # 下筆
-    turtle.circle(r, steps=edge)
-    turtle.penup()  # 提筆
-    turtle.forward(60)
-
-turtle.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-print('turtle測試 .circle 實心圓')
-
-turtle.color("white")
-r = 30  # 半徑
-turtle.penup()  # 提筆
-colorsList = ["red", "orange", "yellow", "green", "blue", "cyan", "purple", "violet"]
-for edge in range(3, 13, 1):  # 繪3 - 12邊圖
-    turtle.pendown()  # 下筆
-    turtle.fillcolor(colorsList[edge % 8])
-    turtle.begin_fill()  # 開始塗色
-    turtle.circle(r, steps=edge)
-    turtle.end_fill()  # 結束塗色
-    turtle.penup()  # 提筆
-    turtle.forward(60)
-
-print("------------------------------------------------------------")  # 60個
-
-
-def draw_spiral_matrix(size):
-    # 初始化海龜
-    turtle.color("black")
-    turtle.penup()  # 提筆
-    turtle.goto(-size//2, size//2)
-    turtle.pendown()  # 下筆
-
-    # 繪製螺旋矩陣
-    for i in range(size//2):
-        for direction in [(1, 0), (0, -1), (-1, 0), (0, 1)]:
-            dx, dy = direction
-            for j in range(i*2 + 1):
-                turtle.forward(20)
-                turtle.left(90)
-                if j == i:
-                    turtle.penup()  # 提筆
-                    turtle.forward(20)
-                    turtle.pendown()  # 下筆
-            turtle.penup()  # 提筆
-            turtle.goto(turtle.xcor()+dx*20, turtle.ycor()+dy*20)
-            turtle.pendown()  # 下筆
-
-    turtle.hideturtle()  # 隱藏海龜
-
-# 畫出螺旋矩陣
-draw_spiral_matrix(10)
-turtle.done()
-
-print("------------------------------------------------------------")  # 60個
-
-def draw_hexagon_spiral(size):
-    # 初始化海龜
-    turtle.color("black")
-    turtle.penup()  # 提筆
-    turtle.goto(0, 0)
-    turtle.pendown()  # 下筆
-
-    # 繪製六邊形螺旋
-    side_length = 10
-    for i in range(size):
-        for j in range(6):
-            turtle.forward(side_length*(i+1))
-            turtle.right(60)
-        turtle.right(60)
-
-    turtle.hideturtle()  # 隱藏海龜
-
-# 畫出六邊形螺旋
-draw_hexagon_spiral(10)
-turtle.done()
-
-print("------------------------------------------------------------")  # 60個
-
-# 繪製池塘
-pond = turtle.Screen()
-pond.setup(600, 400)
-pond.bgcolor('light blue')
-pond.title("Yertle's Pond")
-
-# 繪製小島
-mud = turtle.Turtle('circle')
-mud.shapesize(stretch_wid=5, stretch_len=5, outline=None)
-mud.pencolor('tan')
-mud.fillcolor('tan')
-
-# 繪製樹幹
-SIDE = 80
-ANGLE = 90
-log = turtle.Turtle()
-log.hideturtle()  # 隱藏海龜
-log.pencolor('peru')
-log.fillcolor('peru')
-log.penup()  # 提筆
-log.setpos(215, -30)
-log.left(45)
-log.begin_fill()  # 開始塗色
-for _ in range(2):
-    log.forward(SIDE)
-    log.left(ANGLE)
-    log.forward(SIDE / 4)
-    log.left(ANGLE)
-log.end_fill()  # 結束塗色
-
-# 繪製樹洞
-knot = turtle.Turtle()
-knot.hideturtle()  # 隱藏海龜
-knot.penup()  # 提筆
-knot.setpos(245, 5)
-knot.begin_fill()  # 開始塗色
-knot.circle(5)
-knot.end_fill()  # 結束塗色
-
-# 繪製鱷龜 Yertle
-yertle = turtle.Turtle('turtle')
-yertle.color('green')
-yertle.forward(200)
-yertle.left(180)
-yertle.forward(200)
-yertle.right(176)
-yertle.forward(205)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -819,116 +539,6 @@ turtle.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-turtle.shape("turtle")
-
-# 繪製時鐘中間顏色
-turtle.color("white", "aqua")
-turtle.setpos(0, -120)
-turtle.begin_fill()  # 開始塗色
-turtle.circle(120)  # 繪時鐘內圓盤
-turtle.end_fill()  # 結束塗色
-turtle.penup()  # 提筆
-turtle.home()  # 畫筆回到原點
-turtle.pendown()  # 下筆
-turtle.color("black")
-turtle.pensize(5)  # 設定畫筆大小
-
-# 繪製時鐘刻度
-for i in range(1, 13):
-    turtle.penup()  # 提筆
-    turtle.setheading(-30 * i + 90)    # 設定海龜方向  # 設定刻度的角度
-    turtle.forward(180)
-    turtle.pendown()  # 下筆
-    turtle.forward(30)  # 畫時間軸
-    turtle.penup()  # 提筆
-    turtle.forward(20)
-    turtle.write(str(i), align="left")  # 寫上刻度
-    turtle.home()  # 畫筆回到原點
-
-turtle.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-print('特殊完整turtle範例')
-turtle.tracer(0, 0)  # 終止追蹤
-
-colorsList = ["red", "green", "blue"]
-for line in range(400):
-    turtle.color(colorsList[line % 3])
-    turtle.forward(line)
-    turtle.right(119)
-
-turtle.mainloop()
-
-sys.exit()
-
-print("------------------------------------------------------------")  # 60個
-
-print('特殊完整turtle範例')
-# 依據特定階級數繪製Sierpinski三角形
-def sierpinski(order, p1, p2, p3):
-    if order == 0:  # 階級數為0
-        # 將3個點連接繪製成三角形
-        drawLine(p1, p2)
-        drawLine(p2, p3)
-        drawLine(p3, p1)
-    else:
-        # 取得三角形各邊長的中點
-        p12 = midpoint(p1, p2)
-        p23 = midpoint(p2, p3)
-        p31 = midpoint(p3, p1)
-        # 遞迴呼叫處理繪製三角形
-        sierpinski(order - 1, p1, p12, p31)
-        sierpinski(order - 1, p12, p2, p23)
-        sierpinski(order - 1, p31, p23, p3)
-
-
-# 繪製p1和p2之間的線條
-def drawLine(p1, p2):
-    turtle.penup()  # 提筆
-    turtle.setpos(p1[0], p1[1])
-    turtle.pendown()  # 下筆
-    turtle.setpos(p2[0], p2[1])
-    turtle.penup()  # 提筆
-    turtle.setheading(0)  # 設定海龜方向
-
-
-# 傳回2點的中間值
-def midpoint(p1, p2):
-    p = [0, 0]  # 初值設定
-    p[0] = (p1[0] + p2[0]) / 2
-    p[1] = (p1[1] + p2[1]) / 2
-    return p
-
-
-p1 = [0, 866//4]
-p2 = [-1000//4, -866//4]
-p3 = [1000//4, -866//4]
-#階級數
-order = 4
-sierpinski(order, p1, p2, p3)
-
-turtle.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-print('特殊完整turtle範例')
-n = 300
-step = 10
-colorsList = ["red", "orange", "yellow", "green", "blue", "cyan", "purple", "violet"]
-for i in range(0, n + step, step):
-    turtle.color(random.choice(colorsList))  # 使用不同顏色
-    turtle.setpos(i, 0)
-    turtle.setpos(0, n - i)
-    turtle.setpos(-i, 0)
-    turtle.setpos(0, i - n)
-    turtle.setpos(i, 0)
-
-turtle.mainloop()
-
-sys.exit()
-print("------------------------------------------------------------")  # 60個
-
 turtle.color("black")
 turtle.pensize = 10
 
@@ -963,158 +573,8 @@ print("作業完成")
 print("------------------------------------------------------------")  # 60個
 sys.exit()
 
-# 使用screen視窗, 滑鼠點擊退出視窗
-screen = turtle.Screen()
-
-screen.setup(500, 400)
-screen.setup(500, 400, startx=20, starty=50)
-screen.setup(width=.5, height=200) #視窗大小與位置
-screen.setup(width=.3, height=200, startx=None, starty=None) #視窗大小與位置
-
-screen.exitonclick()#在視窗任一位置按下滑鼠左鍵關閉視窗
-
-# ----------------------------------------
-
-time.sleep(1)
-time.sleep(0.2)
-
-turtle.home()  # 畫筆回到原點
-
-colors = ["red", "orange", "yellow", "green", "blue"]
-turtle.color(colors[r % 5])  # 選畫筆顏色
-turtle.width(twidth)  # 設定寬度
-
 print("------------------------------------------------------------")  # 60個
 
-turtle.home()  # 畫筆回到原點
-
-show = turtle.Turtle()  # 建立畫布物件
-show.pencolor("Yellow")  # 畫筆為黃色
-show.pensize(10)  # 設定畫筆大小
-
-turtle.mainloop()  # 開始主事件的循環
-
-show = turtle.Turtle()  # 建立畫布物件
-show.pencolor("Red")  # 畫筆為紅色
-show.pensize(2)  # 設定畫筆大小
-
-print("------------------------------------------------------------")  # 60個
-
-turtle.forward(50)  # 前進=fd  vs backward後退
-
-turtle.pensize(width=5)  # 設定畫筆大小
-turtle.width(width=5)  # 同上
-turtle.setpos(-200, 0)
-
-turtle.done()  # 最後用
-
-
-
-
-
-#6種
-arrow, turtle, circle, square, triangle, classic(預設)
-w = W / 3
-h = H / 3
-turtle.goto(w, 0)
-turtle.goto(w, h)
-turtle.goto(-w, h)
-turtle.goto(-w, -h)
-turtle.goto(w, -h)
-turtle.home()  # 畫筆回到原點
-
-#畫筆上色
-#turtle.color(colorstring)
-turtle.color((r,g,b))   #浮點數
-turtle.color(r,g,b)     #16進制表示
-turtle.color('#FF0000') #紅色
-
-turtle.done() #結束tutle繪圖
-
-turtle.reset()  # 清空畫布
-
-
-
-turtle.color("red", "yellow")
-turtle.begin_fill()  # 開始塗色
-# draw
-turtle.end_fill()  # 結束塗色
-
-turtle.bgcolor("#87CEEB")
-
-turtle.pensize(10)  # 設定畫筆大小
-
-turtle.penup()  # 提筆
-
-turtle.setposition(x, y)
-
-turtle.pendown()  # 下筆
-
-
-# 量測時間
-
-import time
-
-start_time = time.perf_counter()
-
-R = 200
-turtle.circle(R)  #逆時針空心圓
-
-end_time = time.perf_counter()
-
-print("經過時間 :", end_time - start_time, "秒")
-
-#取平均
-#times 是 list
-import statistics
-line_ave = statistics.mean(times)
-
-print("------------------------------------------------------------")  # 60個
-
-
-"""
-turtle.speed(N)  #設定畫筆移動速度 1~10
-0  最快
-1  最慢
-6  正常
-10 快
-
-"""
-
-turtle.color("red", "yellow")
-
-
-print("------------------------------------------------------------")  # 60個
-
-turtle.ondrag(turtle.goto)
-
-turtle.done() 
-
-print("------------------------------------------------------------")  # 60個
-
-
-x1, y1 = 0, 0
-radius = 150
-x2, y2 = 150, 100
-
-
-turtle.penup()  # 提筆
-
-turtle.goto(x1, y1 - radius)
-
-turtle.pendown()  # 下筆
-
-turtle.circle(radius)
-
-turtle.penup()  # 提筆
-
-turtle.goto(x1 - 70, y1 - radius - 20)
-
-turtle.pendown()  # 下筆
-
-turtle.done() 
-
-print("------------------------------------------------------------")  # 60個
 
 for _ in range(5):
     # 預設畫筆形狀 為 小箭頭
@@ -1131,7 +591,6 @@ for _ in range(5):
     turtle.shape("arrow")  # 設畫筆形狀 為 大箭頭
     turtle.forward(30)
     turtle.stamp()
-
 
 
 turtle.shape("turtle")  # 設畫筆形狀是海龜
@@ -1176,82 +635,14 @@ turtle.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-turtle.hideturtle()  # 隱藏海龜
-turtle.hide()
-
-turtle.showturtle()  # 顯示海龜
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-
-
-
-colors = ['Magenta', 'Gold', 'Cyan', 'PaleGreen',
-          'LemonChiffon', 'Orange', 'Pink']   # List
-
-weeks = ["AAA", "BBB", "CCC", "DDD", "EEE", "FFF", "GGG"]
-
-# 畫一個螺旋形
-for item in range(120):
-   turtle.pencolor(colors [item % len(weeks)]) # 依餘數取色彩值   
-   turtle.penup()  # 提筆
-   # draw
-   turtle.pendown()  # 下筆
-
-print("------------------------------------------------------------")  # 60個
-
-    
-""" 新進
-turtle.bk(30)
-turtle.bk(30)
-turtle.bk(4)
-turtle.Screen().reset()
-
-"""
-
-#似乎都要用以下這個當結尾，關閉後，才不會有error
-turtle.mainloop()
-
-turtle.colormode(255)  # 色彩以數值表示
-show = turtle.Turtle()  # 建立畫布物件
-show.pensize(10)  # 設定畫筆大小
-
-show.color((255, 0, 255), (255, 215, 0))  # 設畫筆為洋紅色，塗滿金黃色
-
-show.penup()  # 提筆
-show.goto(-50, 50)  # 前往指定位置
-
-turtle.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-show = turtle.Turtle()  # 建立畫布物件
-show.pensize(10)  # 設定畫筆大小
-
-show.color((1.0, 0, 1.0), (1.0, 0.84, 0.0))  # 設畫筆為洋紅色，塗滿金黃色
-show.penup()  # 提筆
-show.goto(-60, 80)  # 前往指定位置
-
-turtle.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
 tines = ["Red", "Yellow", "Orange", "Purple", "Cyan", "Pink", "LightGreen", "Bisque"]
 # 方法choice()讓畫筆色彩隨機變
 turtle.pencolor(random.choice(tines))
-
 
 # 視窗寬度
 w1 = -turtle.window_width() // 2
 # 視窗高度
 h1 = -turtle.window_height() // 2
-
-
-
-
-turtle.hideturtle()  # 隱藏海龜
 
 turtle.pencolor("blue")
 
@@ -1393,18 +784,6 @@ if wk==None:
 else:
     print('輸入資料 :', wk)
 
-
-print("------------------------------------------------------------")  # 60個
-
-
-turtle.setpos(x, y - 50)  # 設定繪圓起點
-
-turtle.circle(50, steps = 4)
-
-
-
-'''
-
 print("------------------------------------------------------------")  # 60個
 
 # 自動選擇顏色
@@ -1415,12 +794,218 @@ for i in range(30):
     #turtle.circle(r+i)
     turtle.circle(50+i, steps = i+1)
 
-sys.exit()
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+print('turtle測試 .circle 空心圓')
 
+r = 30  # 半徑
+turtle.penup()  # 提筆
+
+for edge in range(3, 13, 1):  # 繪3 - 12邊圖
+    turtle.pendown()  # 下筆
+    turtle.circle(r, steps=edge)
+    turtle.penup()  # 提筆
+    turtle.forward(60)
+
+turtle.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+print('turtle測試 .circle 實心圓')
+
+turtle.color("white")
+r = 30  # 半徑
+turtle.penup()  # 提筆
+colorsList = ["red", "orange", "yellow", "green", "blue", "cyan", "purple", "violet"]
+for edge in range(3, 13, 1):  # 繪3 - 12邊圖
+    turtle.pendown()  # 下筆
+    turtle.fillcolor(colorsList[edge % 8])
+    turtle.begin_fill()  # 開始塗色
+    turtle.circle(r, steps=edge)
+    turtle.end_fill()  # 結束塗色
+    turtle.penup()  # 提筆
+    turtle.forward(60)
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("零散的")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+turtle.ondrag(turtle.goto)
+
+turtle.home()  # 畫筆回到原點
+
+turtle.undo()
+
+
+
+t = turtle.Pen()
+t.screen.bgcolor("blue")
+t.hideturtle()  # 隱藏海龜
+
+
+""" 新進
+turtle.bk(30)
+turtle.bk(30)
+turtle.bk(4)
+turtle.Screen().reset()
+
+"""
+
+#似乎都要用以下這個當結尾，關閉後，才不會有error
+turtle.mainloop()
+
+turtle.colormode(255)  # 色彩以數值表示
+show = turtle.Turtle()  # 建立畫布物件
+show.pensize(10)  # 設定畫筆大小
+
+show.color((255, 0, 255), (255, 215, 0))  # 設畫筆為洋紅色，塗滿金黃色
+
+show.penup()  # 提筆
+show.goto(-50, 50)  # 前往指定位置
+
+turtle.mainloop()
+
+
+
+"""
+turtle.speed(N)  #設定畫筆移動速度 1~10
+0  最快
+1  最慢
+6  正常
+10 快
+
+"""
+
+turtle.color("red", "yellow")
+
+turtle.hideturtle()  # 隱藏海龜
+turtle.hide()
+turtle.showturtle()  # 顯示海龜
+
+
+
+colors = ['Magenta', 'Gold', 'Cyan', 'PaleGreen',
+          'LemonChiffon', 'Orange', 'Pink']   # List
+
+turtle.pencolor(colors [item % len(weeks)]) # 依餘數取色彩值
+
+turtle.color((1.0, 0, 1.0), (1.0, 0.84, 0.0))  # 設畫筆為洋紅色，塗滿金黃色
+
+
+# 使用screen視窗, 滑鼠點擊退出視窗
+screen = turtle.Screen()
+
+screen.setup(500, 400)
+screen.setup(500, 400, startx=20, starty=50)
+screen.setup(width=.5, height=200) #視窗大小與位置
+screen.setup(width=.3, height=200, startx=None, starty=None) #視窗大小與位置
+
+screen.exitonclick()#在視窗任一位置按下滑鼠左鍵關閉視窗
+
+# ----------------------------------------
+
+time.sleep(1)
+time.sleep(0.2)
+
+turtle.home()  # 畫筆回到原點
+
+colors = ["red", "orange", "yellow", "green", "blue"]
+turtle.color(colors[r % 5])  # 選畫筆顏色
+turtle.width(twidth)  # 設定寬度
+
+print("------------------------------------------------------------")  # 60個
+
+turtle.home()  # 畫筆回到原點
+
+show = turtle.Turtle()  # 建立畫布物件
+show.pencolor("Yellow")  # 畫筆為黃色
+show.pensize(10)  # 設定畫筆大小
+
+turtle.mainloop()  # 開始主事件的循環
+
+show = turtle.Turtle()  # 建立畫布物件
+show.pencolor("Red")  # 畫筆為紅色
+show.pensize(2)  # 設定畫筆大小
+
+print("------------------------------------------------------------")  # 60個
+
+turtle.forward(50)  # 前進=fd  vs backward後退
+
+turtle.pensize(width=5)  # 設定畫筆大小
+turtle.width(width=5)  # 同上
+turtle.setpos(-200, 0)
+
+turtle.done()  # 最後用
+
+
+
+
+
+#6種
+arrow, turtle, circle, square, triangle, classic(預設)
+w = W / 3
+h = H / 3
+turtle.goto(w, 0)
+turtle.goto(w, h)
+turtle.goto(-w, h)
+turtle.goto(-w, -h)
+turtle.goto(w, -h)
+turtle.home()  # 畫筆回到原點
+
+#畫筆上色
+#turtle.color(colorstring)
+turtle.color((r,g,b))   #浮點數
+turtle.color(r,g,b)     #16進制表示
+turtle.color('#FF0000') #紅色
+
+turtle.done() #結束tutle繪圖
+
+turtle.reset()  # 清空畫布
+
+
+
+turtle.color("red", "yellow")
+turtle.begin_fill()  # 開始塗色
+# draw
+turtle.end_fill()  # 結束塗色
+
+turtle.bgcolor("#87CEEB")
+
+turtle.pensize(10)  # 設定畫筆大小
+
+turtle.penup()  # 提筆
+
+turtle.setposition(x, y)
+
+turtle.pendown()  # 下筆
+
+
+# 量測時間
+
+import time
+
+start_time = time.perf_counter()
+
+R = 200
+turtle.circle(R)  #逆時針空心圓
+
+end_time = time.perf_counter()
+
+print("經過時間 :", end_time - start_time, "秒")
+
+#取平均
+#times 是 list
+import statistics
+line_ave = statistics.mean(times)
 
 
