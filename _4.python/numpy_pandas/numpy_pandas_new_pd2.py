@@ -30,18 +30,6 @@ print("------------------------------------------------------------")  # 60個
 hours_phone_used = [0,0,0,1,1.3,1.5,2,2.2,2.6,3.2,4.1,4.4,4.4,5]
 work_performance = [87,89,91,90,82,80,78,81,76,85,80,75,73,72]
 
-df = pd.DataFrame({"手機使用時間(小時)":hours_phone_used,
-                   "工作效率":work_performance})
-
-df.plot(kind="scatter", x="手機使用時間(小時)", y="工作效率")
-plt.title("手機使用時數與工作效率")
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-hours_phone_used = [0,0,0,1,1.3,1.5,2,2.2,2.6,3.2,4.1,4.4,4.4,5]
-work_performance = [87,89,91,90,82,80,78,81,76,85,80,75,73,72]
-
 x = np.array(hours_phone_used)
 y = np.array(work_performance)
 n = len(x)
@@ -56,127 +44,38 @@ print("x偏差*y編差和:", diff.sum())
 covar = diff.sum()/n
 print("共變異數:", covar)
 
-print("------------------------------------------------------------")  # 60個
-
-hours_phone_used = [0,0,0,1,1.3,1.5,2,2.2,2.6,3.2,4.1,4.4,4.4,5]
-work_performance = [87,89,91,90,82,80,78,81,76,85,80,75,73,72]
-
-x = np.array(hours_phone_used)
-y = np.array(work_performance)
-n = len(x)
-x_mean = x.mean()
-y_mean = y.mean()
-
-diff = (x-x_mean)*(y-y_mean)
-covar = diff.sum()/n
-print("共變異數:", covar)
-
 corr = covar/(x.std()*y.std())
 print("相關係數:", corr)
+
 print("------------------------------")  # 30個
 
 df = pd.DataFrame({"手機使用時間(小時)":hours_phone_used,
                    "工作效率":work_performance})
-print(df.corr())
 
-print("------------------------------------------------------------")  # 60個
+print('用pd算相關係數')
+print("相關係數:", df.corr())
 
-from sklearn import preprocessing
-
-f_tracking= [110, 1018, 1130, 417, 626,
-             957, 90, 951, 946, 797,
-             981, 125, 456, 731, 1640,
-             486, 1309, 472, 1133, 1773,
-             906, 532, 742, 621, 855]
-happiness = [0.3, 0.8, 0.5, 0.4, 0.6,
-             0.4, 0.7, 0.5, 0.4, 0.3, 
-             0.3, 0.6, 0.2, 0.8, 1,
-             0.6, 0.2, 0.7, 0.5, 0.7,
-             0.1, 0.4, 0.3, 0.6, 0.3]
-
-df = pd.DataFrame({"FB追蹤數" : f_tracking,
-                   "快樂程度" : happiness})
-print(df.head())
-
-print("------------------------------")  # 30個
-
-df_scaled = pd.DataFrame(preprocessing.scale(df), 
-            columns=["標準化FB追蹤數", "標準化快樂程度"])
-print(df_scaled.head())
-
-df_scaled.plot(kind="scatter", x="標準化FB追蹤數", y="標準化快樂程度")
+df.plot(kind="scatter", x="手機使用時間(小時)", y="工作效率")
+plt.title("手機使用時數與工作效率")
 plt.show()
 
-print("------------------------------")  # 30個
+import seaborn as sns  # 海生, 自動把圖畫得比較好看
 
-from sklearn import preprocessing
-
-f_tracking= [110, 1018, 1130, 417, 626,
-             957, 90, 951, 946, 797,
-             981, 125, 456, 731, 1640,
-             486, 1309, 472, 1133, 1773,
-             906, 532, 742, 621, 855]
-happiness = [0.3, 0.8, 0.5, 0.4, 0.6,
-             0.4, 0.7, 0.5, 0.4, 0.3, 
-             0.3, 0.6, 0.2, 0.8, 1,
-             0.6, 0.2, 0.7, 0.5, 0.7,
-             0.1, 0.4, 0.3, 0.6, 0.3]
-
-df = pd.DataFrame({"FB追蹤數" : f_tracking,
-                   "快樂程度" : happiness})
-print(df.head())
-
-print("------------------------------")  # 30個
-
-scaler = preprocessing.StandardScaler()
-np_std = scaler.fit_transform(df)
-df_std = pd.DataFrame(np_std,
-         columns=["標準化FB追蹤數", "標準化快樂程度"])
-print(df_std.head())
-
-df_std.plot(kind="scatter", x="標準化FB追蹤數", y="標準化快樂程度")
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-from sklearn import preprocessing
-
-f_tracking= [110, 1018, 1130, 417, 626,
-             957, 90, 951, 946, 797,
-             981, 125, 456, 731, 1640,
-             486, 1309, 472, 1133, 1773,
-             906, 532, 742, 621, 855]
-happiness = [0.3, 0.8, 0.5, 0.4, 0.6,
-             0.4, 0.7, 0.5, 0.4, 0.3, 
-             0.3, 0.6, 0.2, 0.8, 1,
-             0.6, 0.2, 0.7, 0.5, 0.7,
-             0.1, 0.4, 0.3, 0.6, 0.3]
-
-df = pd.DataFrame({"FB追蹤數" : f_tracking,
-                   "快樂程度" : happiness})
-print(df.head())
-print("------------------------------")  # 30個
-
-df_scaled = pd.DataFrame(preprocessing.scale(df), 
-            columns=["標準化FB追蹤數", "標準化快樂程度"])
-print(df_scaled.head())
-df_scaled.plot(kind="scatter", x="標準化FB追蹤數", y="標準化快樂程度")
-
-print("------------------------------")  # 30個
-
-scaler = preprocessing.MinMaxScaler(feature_range=(0, 1))
-np_minmax = scaler.fit_transform(df)
-df_minmax = pd.DataFrame(np_minmax,
-            columns=["最小最大值縮放FB追蹤數", "最小最大值縮放快樂程度"])
-print(df_minmax.head())
-
-df_minmax.plot(kind="scatter", x="最小最大值縮放FB追蹤數",
-               y="最小最大值縮放快樂程度")
+sns.heatmap(df.corr(),linewidths=0.1,vmax=1.0, square=True,linecolor='white', annot=True)
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
 df = pd.read_csv("data2/test.csv")
+print(df)
+
+cc = df.info()
+print(cc)
+
+df.corr().to_html("test_csv_corr2html.html")
+
+df.to_html("test_csv2html.html")
+
 # 刪除所有 NaN 的記錄
 df1 = df.dropna()
 print(df1)
@@ -196,14 +95,20 @@ print("------------------------------")  # 30個
 df4 = df.dropna(subset=["B", "C"])
 print(df4)
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
-df = pd.read_csv("data2/test.csv")
 # 填補遺失資料
-df1 = df.fillna(value=1)
-print(df1)
+df5 = df.fillna(value=1)
+print(df5)
 
 print("------------------------------")  # 30個
+
+# 建立布林遮罩
+df6 = pd.isnull(df)
+print(df6)
+
+print("------------------------------")  # 30個
+
 
 df["B"] = df["B"].fillna(df["B"].mean())
 print(df)
@@ -213,47 +118,25 @@ print("------------------------------")  # 30個
 df["C"] = df["C"].fillna(df["C"].median())
 print(df)
 
-print("------------------------------------------------------------")  # 60個
-
-df = pd.read_csv("data2/test.csv")
-# 建立布林遮罩
-df1 = pd.isnull(df)
-print(df1)
-
+sys.exit()
+5
 print("------------------------------------------------------------")  # 60個
 
 df = pd.read_csv("data2/test2.csv")
 print(df)
 
-print("------------------------------------------------------------")  # 60個
-
-df = pd.read_csv("data2/test2.csv")
 print(df.duplicated())
-
-print("------------------------------")  # 30個
-
-print(df.duplicated("B"))
-
-print("------------------------------------------------------------")  # 60個
-
-df = pd.read_csv("data2/test2.csv")
 
 df1 = df.drop_duplicates()
 print(df1)
 
-print("------------------------------------------------------------")  # 60個
-
-df = pd.read_csv("data2/test2.csv")
+print(df.duplicated("B"))
 
 df1 = df.drop_duplicates("B")
 print(df1)
 
-print("------------------------------")  # 30個
-
 df2 = df.drop_duplicates("B", keep="last")
 print(df2)
-
-print("------------------------------")  # 30個
 
 df3 = df.drop_duplicates("B", keep=False)
 print(df3)
@@ -277,39 +160,19 @@ print(df)
 
 print("------------------------------------------------------------")  # 60個
 
-from sklearn import preprocessing
-
-df = pd.read_csv("data2/test3.csv")
-
-label_encoder = preprocessing.LabelEncoder()
-df["性別"] = label_encoder.fit_transform(df["性別"])
-print(df)
-
-print("------------------------------------------------------------")  # 60個
-
 titanic = pd.read_csv("data2/titanic_data.csv")
 # 顯示資料集的形狀
 print(titanic.shape)
 
-print("------------------------------------------------------------")  # 60個
-
-titanic = pd.read_csv("data2/titanic_data.csv")
 # 顯示前5筆
 print(titanic.head())
-
-print("------------------------------")  # 30個
 
 # 顯示統計摘要資訊
 print(titanic.describe())
 
-print("------------------------------")  # 30個
-
 # 顯示資料集資訊
 print(titanic.info())
-'''
-print("------------------------------------------------------------")  # 60個
 
-titanic = pd.read_csv("data2/titanic_data.csv")
 print("---檢查PassengerId欄位是否是唯一值---")
 # 檢查PassengerId欄位是否是唯一值
 print(np.unique(titanic["PassengerId"].values).size)
@@ -421,17 +284,216 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
+from sklearn import preprocessing
 
+f_tracking= [110, 1018, 1130, 417, 626,
+             957, 90, 951, 946, 797,
+             981, 125, 456, 731, 1640,
+             486, 1309, 472, 1133, 1773,
+             906, 532, 742, 621, 855]
+happiness = [0.3, 0.8, 0.5, 0.4, 0.6,
+             0.4, 0.7, 0.5, 0.4, 0.3, 
+             0.3, 0.6, 0.2, 0.8, 1,
+             0.6, 0.2, 0.7, 0.5, 0.7,
+             0.1, 0.4, 0.3, 0.6, 0.3]
+
+df = pd.DataFrame({"FB追蹤數" : f_tracking,
+                   "快樂程度" : happiness})
+print(df.head())
+
+print("------------------------------")  # 30個
+
+df_scaled = pd.DataFrame(preprocessing.scale(df), 
+            columns=["標準化FB追蹤數", "標準化快樂程度"])
+print(df_scaled.head())
+
+df_scaled.plot(kind="scatter", x="標準化FB追蹤數", y="標準化快樂程度")
+plt.show()
+
+print("------------------------------")  # 30個
+
+from sklearn import preprocessing
+
+f_tracking= [110, 1018, 1130, 417, 626,
+             957, 90, 951, 946, 797,
+             981, 125, 456, 731, 1640,
+             486, 1309, 472, 1133, 1773,
+             906, 532, 742, 621, 855]
+happiness = [0.3, 0.8, 0.5, 0.4, 0.6,
+             0.4, 0.7, 0.5, 0.4, 0.3, 
+             0.3, 0.6, 0.2, 0.8, 1,
+             0.6, 0.2, 0.7, 0.5, 0.7,
+             0.1, 0.4, 0.3, 0.6, 0.3]
+
+df = pd.DataFrame({"FB追蹤數" : f_tracking,
+                   "快樂程度" : happiness})
+print(df.head())
+
+print("------------------------------")  # 30個
+
+scaler = preprocessing.StandardScaler()
+np_std = scaler.fit_transform(df)
+df_std = pd.DataFrame(np_std,
+         columns=["標準化FB追蹤數", "標準化快樂程度"])
+print(df_std.head())
+
+df_std.plot(kind="scatter", x="標準化FB追蹤數", y="標準化快樂程度")
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
+from sklearn import preprocessing
 
+f_tracking= [110, 1018, 1130, 417, 626,
+             957, 90, 951, 946, 797,
+             981, 125, 456, 731, 1640,
+             486, 1309, 472, 1133, 1773,
+             906, 532, 742, 621, 855]
+happiness = [0.3, 0.8, 0.5, 0.4, 0.6,
+             0.4, 0.7, 0.5, 0.4, 0.3, 
+             0.3, 0.6, 0.2, 0.8, 1,
+             0.6, 0.2, 0.7, 0.5, 0.7,
+             0.1, 0.4, 0.3, 0.6, 0.3]
 
+df = pd.DataFrame({"FB追蹤數" : f_tracking,
+                   "快樂程度" : happiness})
+print(df.head())
+print("------------------------------")  # 30個
+
+df_scaled = pd.DataFrame(preprocessing.scale(df), 
+            columns=["標準化FB追蹤數", "標準化快樂程度"])
+print(df_scaled.head())
+df_scaled.plot(kind="scatter", x="標準化FB追蹤數", y="標準化快樂程度")
+
+print("------------------------------")  # 30個
+
+scaler = preprocessing.MinMaxScaler(feature_range=(0, 1))
+np_minmax = scaler.fit_transform(df)
+df_minmax = pd.DataFrame(np_minmax,
+            columns=["最小最大值縮放FB追蹤數", "最小最大值縮放快樂程度"])
+print(df_minmax.head())
+
+df_minmax.plot(kind="scatter", x="最小最大值縮放FB追蹤數",
+               y="最小最大值縮放快樂程度")
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
+from sklearn import preprocessing
+
+df = pd.read_csv("data2/test3.csv")
+
+label_encoder = preprocessing.LabelEncoder()
+df["性別"] = label_encoder.fit_transform(df["性別"])
+print(df)
+
+print("------------------------------------------------------------")  # 60個
+
+"""
+数据相关性分析中，经常用到data.corr()函数，data.corr()表示了data中的两个变量之间的相关性，取值范围为[-1,1],取值接近-1，表示反相关，类似反比例函数，取值接近1，表正相关。
+DataFrame.corr()函数使用说明如下：
+
+DataFrame.corr(method='pearson', min_periods=1)
+
+参数说明：
+method：可选值为{‘pearson’, ‘kendall’, ‘spearman’}
+pearson：Pearson相关系数来衡量两个数据集合是否在一条线上面，即针对线性数据的相关系数计算，针对非线性                                           数据便会有误差。
+kendall：用于反映分类变量相关性的指标，即针对无序序列的相关系数，非正太分布的数据
+spearman：非线性的，非正太分析的数据的相关系数
+min_periods：样本最少的数据量
+返回值：各类型之间的相关系数DataFrame表格。
+"""
+import seaborn as sns  # 海生, 自動把圖畫得比較好看
+import numpy as np
+
+df = pd.DataFrame([[1,6,7,5,1],[2,10,8,3,4],[3,4,0,10,2]],columns=['val1','val2','val3','val4','val5'])
+print(df)
 
 
+#5个变量的数据如表所示
+#各变量数据相关性的热力图
+
+sns.heatmap(df.corr(),linewidths=0.1,vmax=1.0, square=True,linecolor='white', annot=True)
+plt.show()
+
+#从图中可以看出，val2和val3的相关性最高为0.83，其次是val2和val5。
+'''
+print("------------------------------------------------------------")  # 60個
+
+"""
+pandas相关系数-DataFrame.corr()参数详解
+
+DataFrame.corr(method='pearson', min_periods=1)
+
+参数说明：
+method：可选值为{‘pearson’, ‘kendall’, ‘spearman’}
+               pearson：Pearson相关系数来衡量两个数据集合是否在一条线上面，即针对线性数据的相关系数计算，针对非线性数据便会有误差。
+                kendall：用于反映分类变量相关性的指标，即针对无序序列的相关系数，非正太分布的数据
+                spearman：非线性的，非正太分布的数据的相关系数
+min_periods：样本最少的数据量
+
+返回值：各类型之间的相关系数DataFrame表格。
+"""
+
+import seaborn as sns  # 海生, 自動把圖畫得比較好看
+
+x=[a for a in range(11)]
+
+def y1_x(x):
+    return x*2
+
+def y2_x(x):
+    return x**2//4
+
+def y3_x(x):
+    return (x-5)**2
+
+def y4_x(x):
+    return 10 - x
+
+y1=[y1_x(i) for i in x]
+y2=[y2_x(i) for i in x]
+y3=[y3_x(i) for i in x]
+y4=[y4_x(i) for i in x]
+
+print('x :', x)
+print('y1 :', y1)
+print('y2 :', y2)
+print('y3 :', y3)
+print('y4 :', y4)
+
+df=pd.DataFrame({'x':x,'y1':y1,'y2':y2,'y3':y3,'y4':y4})
+print(df)
+print(df.columns)
+
+columns = ["x", "2倍", "平方除4", "(減5)平方", "10-x"]
+df.columns = columns
+
+df.plot(kind="line", legend=True, title="線圖", figsize=[10, 5])
+
+cc = df.head()
+print(cc)
+ 
+cc = df.corr()
+print(cc)
+
+plt.figure(figsize=(12, 8))
+plt.subplot(221)
+sns.heatmap(cc,annot=True,cmap='coolwarm')
+
+cc = df.corr(method='spearman')
+print(cc)
+plt.subplot(222)
+sns.heatmap(cc,annot=True,cmap='coolwarm')
+ 
+cc = df.corr(method='kendall')
+print(cc)
+plt.subplot(223)
+sns.heatmap(cc,annot=True,cmap='coolwarm')
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
@@ -441,23 +503,4 @@ print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
 sys.exit()
-
-df = pd.read_csv("data2/test.csv")
-print(df)
-df.to_html("ch13-3-1.html")
-
-print("------------------------------------------------------------")  # 60個
-
-df = pd.read_csv("data2/test.csv")
-print(df)
-
-print("------------------------------")  # 30個
-
-df.info()
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-df.corr().to_html("ch13-1-3.html")
 

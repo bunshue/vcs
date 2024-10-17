@@ -7,16 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+//調整 pictureBox1 大小，用zoom模式顯示圖片
+
 namespace vcs_ZoomPicture3
 {
     public partial class Form1 : Form
     {
-        // The image's original size.
         private int width;
         private int height;
-
-        // The current scale.
-        private float ImageScale = 1.0f;
+        private float ImageScale = 1.0f; //縮放比例
 
         public Form1()
         {
@@ -55,7 +54,9 @@ namespace vcs_ZoomPicture3
             height = pictureBox1.Image.Height;
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.Size = new Size(width, height);
+            pictureBox1.Location = new Point(0, 0);
             this.MouseWheel += new MouseEventHandler(pictureBox1_MouseWheel);
+            this.ClientSize = new Size(pictureBox1.Size.Width, pictureBox1.Size.Height);
         }
 
         // Respond to the mouse wheel.
@@ -66,16 +67,19 @@ namespace vcs_ZoomPicture3
 
             // Update the drawing based upon the mouse wheel scrolling.
             ImageScale += e.Delta * scale_per_delta;
-            if (ImageScale < 0) ImageScale = 0;
+            if (ImageScale < 0)
+            {
+                ImageScale = 0;
+            }
 
             // Size the image.
             pictureBox1.Size = new Size(
                 (int)(width * ImageScale),
                 (int)(height * ImageScale));
 
-            // Display the new scale.
+            this.ClientSize = new Size(pictureBox1.Size.Width, pictureBox1.Size.Height);
+
             this.Text = "縮放比例 : " + ImageScale.ToString("p0");
         }
-
     }
 }

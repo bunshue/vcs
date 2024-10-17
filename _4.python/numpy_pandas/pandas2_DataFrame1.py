@@ -113,6 +113,37 @@ def make_data_frame_from_dict():
 
 print("------------------------------------------------------------")  # 60個
 
+df = make_data_frame_from_dict()  # 字典 轉 df
+print(df)
+
+print('df寫讀檔案')
+
+df.to_csv("tmp_df_aaaa.csv", encoding="utf-8-sig")
+
+# 11. Read and write from compressed files
+
+# df存檔
+df.to_csv("tmp_df.csv")
+# 存檔 並壓縮
+df.to_csv("tmp_df.csv.zip")
+df.to_csv("tmp_df.csv.gz")
+df.to_csv("tmp_df.csv.bz2")
+df.to_csv("tmp_df.csv.xz")
+
+# 直接讀取壓縮檔
+#df_new = pd.read_csv("tmp_df.csv.gz", index_col="Time", parse_dates=["Time"])
+df_new = pd.read_csv("tmp_df.csv.gz")
+cc = df_new.head()
+print(cc)
+
+print("比較df是否相同")
+cc = df_new.equals(df)
+print(cc)
+
+
+sys.exit()
+
+
 print("目前 Pandas 版本 :")
 cc = pd.__version__
 print(cc)
@@ -188,7 +219,6 @@ print("------------------------------------------------------------")  # 60個
 df = make_data_frame()
 print(df)
 
-
 """df資訊
 
 print('檢視前幾行')
@@ -211,21 +241,9 @@ print('欄名columns')
 cc = df.columns
 print(cc)
 
-# every DataFrame has an index (sometimes called the "row labels")
-cc = drinks.index
-print(cc)
-
-# column names are also stored in a special "index" object
-cc = drinks.columns
-print(cc)
-
-
-
-print('顯示values')
-print(df.values)
-
 print(df.info())
 
+print('顯示values')
 print(df.values)
 print(df.values[2])
 print(df.values[1][2])
@@ -244,20 +262,10 @@ print(df.shape)
 print('df之大小', M, 'X',N)
 
 print(df.shape)
-# 列出所有欄索引標籤(欄位名稱)
-for col in range(df.shape[1]):
-    print(df.columns.values[col], " ", end="")
-print()
 
 # 列出各列的列索引標籤、表格內容
 print(df.shape[0])
 print(df.index.values)
-
-print(df.shape)
-# 列出所有欄索引(欄位名稱)
-for col in range(df.shape[1]):
-    print(df.columns.values[col], " ", end="")
-print()
 
 # 列出所有欄索引(欄位名稱)
 for col in range(df.shape[1]):
@@ -331,17 +339,23 @@ print(df)
 print("顯示 體育 欄的資料")
 print(df["體育"])
 
+print("------------------------------------------------------------")  # 60個
+
 print("刪除 df 的 欄位 或 索引 – drop()")
 
+df = make_data_frame_from_dict()  # 字典 轉 df
+print(df)
+
 print("刪除欄位 數學")
-df1 = df.drop("數學", axis=1)
+#df1 = df.drop("數學", axis=1) # same
+df1 = df.drop(["數學"], axis=1)
 print(df1)
 
 print("刪除欄位 數學 自然")
 df3 = df.drop(["數學", "自然"], axis=1)
 print(df3)
 
-print("刪除欄位 1 2, 即刪除 英文 數學")
+print("刪除欄位 1 2, 即刪除 國文 英文")
 df5 = df.drop(df.columns[1:3], axis=1)
 print(df5)
 
@@ -356,6 +370,58 @@ print(df5)
 print("刪除索引 偶數索引")
 df6 = df.drop(np.arange(0, 4, 2))
 print(df6)
+
+print('找出 社會 < 85 的資料')
+print(df[df["社會"] < 85])
+print('找出 社會 < 85 的資料 的 索引')
+print(df[df["社會"] < 85].index)
+print('刪除 社會 < 85 的資料 列')
+idx = df[df["社會"] < 85].index
+df7 = df.drop(idx)
+print(df7)
+
+print('重建df')
+df = make_data_frame_from_dict()  # 字典 轉 df
+
+df.set_index("姓名", inplace=True)
+print(df)
+
+print("移除索引 index 孫悟空 豬八戒")
+df2 = df.drop(["孫悟空", "豬八戒"])
+print(df2)
+
+print("移除索引 0 2, 即 唐三藏 豬八戒")
+df3 = df.drop(df.index[[0, 2]])
+print(df3)
+
+print("移除欄位 自然")
+df4 = df.drop(["自然"], axis=1)
+print(df4)
+
+# 不可重建
+#print('重建df')
+#df = make_data_frame_from_dict()  # 字典 轉 df
+
+print("移除孫悟空成績 ->")
+df1 = df.drop("孫悟空")
+print(df1)
+print("移除數學科成績 ->")
+df2 = df.drop("數學", axis=1)
+print(df2)
+print("移除數學科及自然科成績 ->")
+df3 = df.drop(["數學", "自然"], axis=1)
+print(df3)
+print("移除孫悟空到豬八戒成績 ->")
+df4 = df.drop(df.index[1:4])
+print(df4)
+print("移除數學科到自然科成績 ->")
+df5 = df.drop(df.columns[1:4], axis=1)
+print(df5)
+
+print("------------------------------")  # 30個
+
+print('重建df')
+df = make_data_frame_from_dict()  # 字典 轉 df
 
 print("df反置")
 df7 = df.T
@@ -397,31 +463,6 @@ print(cc)
 print("數學最低 :", df["數學"].min())
 print("數學最高 :", df["數學"].max())
 
-# 刪除指定的欄
-df.drop(["國文"], inplace=True, axis=1)
-print(df)
-
-# 刪除指定的列
-indexNames = df[df["社會"] < 80].index
-df.drop(indexNames, inplace=True)
-
-print("------------------------------------------------------------")  # 60個
-
-df.set_index("姓名", inplace=True)
-print(df)
-
-print("移除索引 index 孫悟空 豬八戒")
-df2 = df.drop(["孫悟空", "豬八戒"])
-print(df2)
-
-print("移除索引 0 2, 即 唐三藏 豬八戒")
-df3 = df.drop(df.index[[0, 2]])
-print(df3)
-
-print("移除欄位 自然")
-df4 = df.drop(["自然"], axis=1)
-print(df4)
-
 print("------------------------------------------------------------")  # 60個
 
 print('顯示欄資料')
@@ -446,25 +487,6 @@ print(df.loc["孫悟空":, "數學":"社會"])
 
 print("------------------------------")  # 30個
 
-"""
-print("移除孫悟空成績 ->")
-df1 = df.drop("孫悟空")
-print(df1)
-print("移除數學科成績 ->")
-df2 = df.drop("數學", axis=1)
-print(df2)
-print("移除數學科及自然科成績 ->")
-df3 = df.drop(["數學", "自然"], axis=1)
-print(df3)
-print("移除孫悟空到豬八戒成績 ->")
-df4 = df.drop(df.index[1:4])
-print(df4)
-print("移除數學科到自然科成績 ->")
-df5 = df.drop(df.columns[1:4], axis=1)
-print(df5)
-"""
-
-df.to_csv("tmp_scores3.csv", encoding="utf-8-sig")
 
 print("------------------------------------------------------------")  # 60個
 

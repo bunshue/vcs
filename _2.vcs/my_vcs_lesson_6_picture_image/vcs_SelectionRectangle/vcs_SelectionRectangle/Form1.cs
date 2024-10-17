@@ -22,6 +22,7 @@ namespace vcs_SelectionRectangle
         int ResizeLine_Style = 1;	//0: 實線, 1: 虛線
 
         //方法三
+        Rectangle selectionRec3 = new Rectangle();
         string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
         private Bitmap bitmap3 = null;
 
@@ -32,36 +33,38 @@ namespace vcs_SelectionRectangle
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            groupBox1.Size = new Size(700, 420);
-            groupBox2.Size = new Size(700, 420);
-            groupBox3.Size = new Size(700, 420);
-            richTextBox1.Size = new Size(700, 420);
+            groupBox1.Size = new Size(500, 420);
+            groupBox2.Size = new Size(500, 420);
+            groupBox3.Size = new Size(500, 420);
+            groupBox5.Size = new Size(500, 420);
+            richTextBox1.Size = new Size(500, 420);
             groupBox1.Location = new Point(10, 10);
-            groupBox2.Location = new Point(10, 10+420+10);
-            groupBox3.Location = new Point(10+700+10, 10);
-            richTextBox1.Location = new Point(10 + 700 + 10, 10+420+10);
+            groupBox2.Location = new Point(10, 10 + 420 + 10);
+            groupBox3.Location = new Point(10 + 500 + 10, 10);
+            groupBox5.Location = new Point(10 + 500 + 10 + 500 + 10, 10);
+            richTextBox1.Location = new Point(10 + 500 + 10 + 500 + 10, 10 + 420 + 10);
             pictureBox1.Size = new Size(310, 410);
             pictureBox2.Size = new Size(310, 410);
             pictureBox3.Size = new Size(310, 410);
+            pictureBox5.Size = new Size(310, 410);
 
-            lb_info1.Location = new Point(350, 20);
-            lb_info2.Location = new Point(350, 20);
-            button1.Location = new Point(350, 20+100);
-            button2.Location = new Point(350, 20 + 150);
+            lb_info1.Location = new Point(320, 20);
+            lb_info2.Location = new Point(320, 20);
+            lb_info3.Location = new Point(320, 20);
+            button1.Location = new Point(320, 20 + 100);
+            button2.Location = new Point(320, 20 + 150);
 
-            this.Size = new Size(1500, 950);
+            this.Size = new Size(1600, 920);
 
             selectionRec1.ResizePinSize = 10;  //改變ResizePin圓直徑大小
             selectionRec1.Create();
 
             pictureBox1.Image = Image.FromFile(filename);
 
-
             pictureBox1.MouseDown += new MouseEventHandler(pictureBox1_MouseDown);
             pictureBox1.MouseMove += new MouseEventHandler(pictureBox1_MouseMove);
             pictureBox1.MouseUp += new MouseEventHandler(pictureBox1_MouseUp);
             pictureBox1.Paint += new PaintEventHandler(pictureBox1_Paint);
-
 
             //方法二
             //避免生成矩形框後出現的閃爍
@@ -234,30 +237,37 @@ namespace vcs_SelectionRectangle
         {
             Selecting = false;
 
-            Rectangle rect = new Rectangle(
+            selectionRec3 = new Rectangle(
     (int)Math.Min(Point1.X, Point2.X),
     (int)Math.Min(Point1.Y, Point2.Y),
     (int)Math.Abs(Point1.X - Point2.X),
     (int)Math.Abs(Point1.Y - Point2.Y));
 
-            richTextBox1.Text += rect.ToString() + "\n";
+            richTextBox1.Text += selectionRec3.ToString() + "\n";
+            lb_info3.Text = "(" + e.X.ToString() + ", " + e.Y.ToString() + ")\n"
+    + "x = " + selectionRec3.X.ToString() + ", y = " + selectionRec3.Y.ToString()
+    + "\nW = " + selectionRec3.Width.ToString() + ", H = " + selectionRec3.Height.ToString();
+
         }
 
         // Draw the selection rectangle.
         void pictureBox3_Paint(object sender, PaintEventArgs e)
         {
-            if (!Selecting) return;
-            Rectangle rect = new Rectangle(
+            if (!Selecting)
+            {
+                return;
+            }
+            selectionRec3 = new Rectangle(
                 (int)Math.Min(Point1.X, Point2.X),
                 (int)Math.Min(Point1.Y, Point2.Y),
                 (int)Math.Abs(Point1.X - Point2.X),
                 (int)Math.Abs(Point1.Y - Point2.Y));
-            e.Graphics.DrawRectangle(Pens.Yellow, rect);
+            e.Graphics.DrawRectangle(Pens.Yellow, selectionRec3);
             using (Pen pen = new Pen(Color.Red))
             {
                 pen.DashStyle = DashStyle.Custom;
                 pen.DashPattern = new float[] { 5, 5 };
-                e.Graphics.DrawRectangle(pen, rect);
+                e.Graphics.DrawRectangle(pen, selectionRec3);
             }
         }
     }

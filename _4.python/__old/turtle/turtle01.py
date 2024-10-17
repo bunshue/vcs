@@ -43,11 +43,14 @@ ht     hideturtle   # 隱藏海龜
 """
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-
-
 turtle.speed(0)
+turtle.speed(5)
+
+W = 800
+H = 600
+x_st = 20
+y_st = 20
+turtle.setup(W, H, x_st, y_st)  # 指定畫布的大小與位置
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -817,5 +820,54 @@ print("------------------------------------------------------------")  # 60個
 turtle.color('green')
 turtle.pensize(5)  # 設定畫筆大小
 turtle.color('#FF00FF', '#55CCBB')
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+t = turtle.Pen()
+t.shape('turtle'); t.width(2);
+colorsList = ['red', 'orange', 'yellow', 'green', 'blue', 'cyan', 'purple', 'black']
+colorsIndex = 0
+for sides in range(3,9):
+    ang = 360/sides   
+    t.color(colorsList[colorsIndex % 8])
+    colorsIndex += 1
+    for i in range(1,sides+1):
+        t.forward(100); t.left(ang)
+
+print("------------------------------------------------------------")  # 60個
+
+colorsList = ['red', 'orange', 'yellow', 'green', 'blue', 'cyan', 'purple', 'black']
+t.color(colorsList[0])
+
+print("------------------------------------------------------------")  # 60個
+
+# reserved
+t = turtle.Pen()
+t.shape('turtle'); t.width(3)
+SL = 100
+sides = 9
+Trans = 2*np.sin(np.pi/sides); R = SL/Trans
+ang = 360/sides
+colorsList = ['red', 'orange', 'yellow', 'green', 'blue', 'cyan', 'purple', 'black']
+t.up(); t.right(90); t.forward(R); t.left(90); t.down()  #move only
+t.circle(R)
+t.up(); t.home(); t.right(90+ang/2); t.forward(R); t.left(90+ang/2); t.down()  #move only
+for i in range(1, sides+1):
+    if (i == sides):
+        t.speed(5)
+    else:
+        t.color(colorsList[(i-1)%8])
+    SLn = np.sin(i*np.pi/sides)*2*R
+    for j in range(1,sides+1):
+        t.forward(SLn);  t.left(i*ang)
+    print(i, i*ang, SLn)
+    t.left(ang/2) 
+
+print("------------------------------------------------------------")  # 60個
 
 

@@ -24,12 +24,6 @@ print(dir(random))
 
 print('------------------------------------------------------------')	#60個
 
-import tkinter.messagebox
-    
-
-tkinter.messagebox.showinfo("Insertion Status", str(k) + " is already in the tree")
-tkinter.messagebox.showinfo("Deletion Status", str(k) + " is not in the tree")
-
 
 
 print('------------------------------------------------------------')	#60個
