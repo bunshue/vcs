@@ -176,11 +176,12 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
-tk.Label(window, text = "tk開啟cv").pack()
+tk.Label(window, text="tk開啟cv").pack()
 
 import cv2
 
 filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
+
 
 def load_picture_color():
     img = cv2.imread(filename)
@@ -221,7 +222,7 @@ def click_picture_button():
 
 from PIL import ImageTk, Image
 
-tk.Label(window, text = "圖片做成的按鈕").pack()
+tk.Label(window, text="圖片做成的按鈕").pack()
 
 filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 
@@ -234,7 +235,7 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
-tk.Label(window, text = "按鈕屬性 : normal / active / disabled").pack()
+tk.Label(window, text="按鈕屬性 : normal / active / disabled").pack()
 
 print("Button state...")
 

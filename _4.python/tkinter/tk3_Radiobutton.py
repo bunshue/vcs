@@ -22,7 +22,8 @@ print("------------------------------------------------------------")  # 60個
 def do_select_string9():
     label_selection_string9.config(text="s9你選擇了 :" + var_string9.get())
 
-tk.Label(window, text = "一個一個建立Radiobutton").pack()
+
+tk.Label(window, text="一個一個建立Radiobutton").pack()
 
 var_string9 = tk.StringVar()
 var_string9.set("")  # 預設
@@ -79,12 +80,14 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
+
 def do_select_int3():
     selected_item = var_int3.get()
     label_selection_int3.config(text=items3i[selected_item][0])
     print("i3你選擇了 :", var_int3.get())
 
-tk.Label(window, text = "用字典串列元組 一次建立一組Radiobutton").pack()
+
+tk.Label(window, text="用字典串列元組 一次建立一組Radiobutton").pack()
 
 items3i = (("AAA", 0), ("BBB", 1), ("CCC", 2))
 print(type(items3i))
@@ -110,7 +113,8 @@ print("------------------------------------------------------------")  # 60個
 def do_select_string1():
     print("s1你選擇了 :", var_string1.get())
 
-tk.Label(window, text = "用字典串列元組 一次建立一組Radiobutton").pack()
+
+tk.Label(window, text="用字典串列元組 一次建立一組Radiobutton").pack()
 
 items1s = [("AAA", 0), ("BBB", 1), ("CCC", 2)]
 
@@ -132,13 +136,13 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
-tk.Label(window, text = "使用 lambda").pack()
+tk.Label(window, text="使用 lambda").pack()
 
-rb1 = ttk.Radiobutton(window,text="AAA",command=lambda: print("lambda 你選擇了 : AAA"))
+rb1 = ttk.Radiobutton(window, text="AAA", command=lambda: print("lambda 你選擇了 : AAA"))
 rb1.pack()
-rb2 = ttk.Radiobutton(window,text="BBB",command=lambda: print("lambda 你選擇了 : BBB"))
+rb2 = ttk.Radiobutton(window, text="BBB", command=lambda: print("lambda 你選擇了 : BBB"))
 rb2.pack()
-rb3 = ttk.Radiobutton(window,text="CCC",command=lambda: print("lambda 你選擇了 : CCC"))
+rb3 = ttk.Radiobutton(window, text="CCC", command=lambda: print("lambda 你選擇了 : CCC"))
 rb3.pack()
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
@@ -251,7 +255,7 @@ def do_select_int6():
     print(items6[var_int6.get()])
 
 
-tk.Label(window, text = "用字典串列元組 一次建立一組Radiobutton").pack()
+tk.Label(window, text="用字典串列元組 一次建立一組Radiobutton").pack()
 
 items6 = {0: "AAA", 1: "BBB", 2: "CCC"}
 
@@ -273,7 +277,7 @@ def do_select_int7():
     print(items7i[var_int7.get()])  # 列出所選城市
 
 
-tk.Label(window, text = "用字典串列元組 一次建立一組Radiobutton").pack()
+tk.Label(window, text="用字典串列元組 一次建立一組Radiobutton").pack()
 
 items7i = {0: "AAA", 1: "BBB", 2: "CCC"}
 
@@ -341,7 +345,7 @@ def do_select_inta():
     print(itemsa[var_inta.get()])  # 列出所選城市
 
 
-tk.Label(window, text = "用字典串列元組 一次建立一組Radiobutton").pack()
+tk.Label(window, text="用字典串列元組 一次建立一組Radiobutton").pack()
 
 itemsa = {0: "AAA", 1: "BBB", 2: "CCC"}
 
@@ -756,11 +760,11 @@ def radCall():
     select_value = radVar.get()
     print(select_value)
     if select_value == 0:
-        window.configure(background='red')  # 設置整個界面的背景顏色
+        window.configure(background="red")  # 設置整個界面的背景顏色
     elif select_value == 1:
-        window.configure(background='green')
+        window.configure(background="green")
     elif select_value == 2:
-        window.configure(background='blue')
+        window.configure(background="blue")
 
 
 radVar = tk.IntVar()  # 通過tk.IntVar(),獲取單選按鈕value參數對應的值
@@ -775,4 +779,3 @@ for col in range(3):
 window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
-

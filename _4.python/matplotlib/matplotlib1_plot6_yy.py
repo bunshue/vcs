@@ -33,7 +33,7 @@ print("使用 plt.subplots() 做一圖")
 x = np.linspace(0, 10, 50)
 y = np.sin(x)
 
-#fig, ax = plt.subplots() same
+# fig, ax = plt.subplots() same
 fig, ax = plt.subplots(1, 1)
 
 ax.plot(x, y, "r-o", label="Sin(x)")
@@ -64,13 +64,13 @@ sinhs = np.sinh(x)
 fig, ax = plt.subplots()
 ax2 = ax.twinx()  # 使用相同的 x 軸
 
-#第1軸
+# 第1軸
 ax.plot(x, sinus, "r-o", label="Sin(x)")
 ax.set_xlabel("弧度", color="green")
 ax.set_ylabel("Sin(x)", color="red")
 ax.legend(loc="best")
 
-#第2軸
+# 第2軸
 ax2.plot(x, sinhs, "g--", label="Sinh(x)")
 ax2.set_ylabel("Sinh(x)", color="blue")
 ax2.legend(loc="best")
@@ -124,7 +124,7 @@ for tick in ax.xaxis.get_ticklabels():
     tick.set_fontsize("large")
     tick.set_fontname("Times New Roman")
     tick.set_color("blue")
-    tick.set_weight("bold")   
+    tick.set_weight("bold")
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
@@ -273,22 +273,55 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-dists = {"區名": ["中正區", "板橋區", "桃園區", "北屯區", 
-                  "安南區", "三民區", "大安區", "永和區", 
-                  "八德區", "前鎮區", "鳳山區", 
-                  "信義區", "新店區"],
-         "人口": [159598, 551452, 441287, 275207,
-                  192327, 343203, 309835, 222531,
-                  198473, 189623, 359125, 
-                  225561, 302070],
-         "面積": [7.6071, 23.1373, 34.8046, 62.7034, 
-                  107.2016, 19.7866, 11.3614, 5.7138, 
-                  33.7111, 19.1207, 26.7590, 
-                  11.2077, 120.2255]}
+dists = {
+    "區名": [
+        "中正區",
+        "板橋區",
+        "桃園區",
+        "北屯區",
+        "安南區",
+        "三民區",
+        "大安區",
+        "永和區",
+        "八德區",
+        "前鎮區",
+        "鳳山區",
+        "信義區",
+        "新店區",
+    ],
+    "人口": [
+        159598,
+        551452,
+        441287,
+        275207,
+        192327,
+        343203,
+        309835,
+        222531,
+        198473,
+        189623,
+        359125,
+        225561,
+        302070,
+    ],
+    "面積": [
+        7.6071,
+        23.1373,
+        34.8046,
+        62.7034,
+        107.2016,
+        19.7866,
+        11.3614,
+        5.7138,
+        33.7111,
+        19.1207,
+        26.7590,
+        11.2077,
+        120.2255,
+    ],
+}
 
-df = pd.DataFrame(dists, 
-                  columns=["人口", "面積"],
-                  index=dists["區名"])
+df = pd.DataFrame(dists, columns=["人口", "面積"], index=dists["區名"])
 print(df)
 fig, ax = plt.subplots()
 fig.suptitle("分區統計")
@@ -296,19 +329,11 @@ ax.set_ylabel("人口")
 ax.set_xlabel("分區")
 ax2 = ax.twinx()  # 使用相同的 x 軸
 ax2.set_ylabel("面積")
-df["人口"].plot( ax=ax, 
-                 style="b--o",
-                 use_index=True,
-                 rot=90)
-df["面積"].plot( ax=ax2, 
-                 style="g-s",
-                 use_index=True,
-                 rot=90)
+df["人口"].plot(ax=ax, style="b--o", use_index=True, rot=90)
+df["面積"].plot(ax=ax2, style="g-s", use_index=True, rot=90)
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
-
-
 
 
 print("------------------------------------------------------------")  # 60個

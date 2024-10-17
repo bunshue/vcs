@@ -8,8 +8,9 @@ turtle.speed(0)
 
 print("------------------------------------------------------------")  # 60個
 
+
 def is_inside():
-    #測試是否在繪布範圍
+    # 測試是否在繪布範圍
     left = (-t.screen.window_width() / 2) + 100  # 左邊牆
     right = (t.screen.window_width() / 2) - 100  # 右邊牆
     top = (t.screen.window_height() / 2) - 100  # 上邊牆
@@ -24,7 +25,7 @@ def t_move():
     t.color(random.choice(colors))  # 繪圖顏色
     t.begin_fill()  # 開始塗色
     if is_inside():  # 如果在繪布範圍
-        #t.right(random.randint(320, 350))  # 海龜移動角度
+        # t.right(random.randint(320, 350))  # 海龜移動角度
         t.right(random.randint(0, 180))  # 海龜移動角度
         t.forward(length)
     else:
@@ -61,7 +62,7 @@ turtle.pensize(5)  # 設定畫筆大小
 # 繪製時鐘刻度
 for i in range(1, 13):
     turtle.penup()  # 提筆
-    turtle.setheading(-30 * i + 90)    # 設定海龜方向  # 設定刻度的角度
+    turtle.setheading(-30 * i + 90)  # 設定海龜方向  # 設定刻度的角度
     turtle.forward(180)
     turtle.pendown()  # 下筆
     turtle.forward(30)  # 畫時間軸
@@ -74,7 +75,7 @@ turtle.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-print('特殊完整turtle範例')
+print("特殊完整turtle範例")
 turtle.tracer(0, 0)  # 終止追蹤
 
 colorsList = ["red", "green", "blue"]
@@ -87,7 +88,9 @@ turtle.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-print('特殊完整turtle範例')
+print("特殊完整turtle範例")
+
+
 # 依據特定階級數繪製Sierpinski三角形
 def sierpinski(order, p1, p2, p3):
     if order == 0:  # 階級數為0
@@ -124,10 +127,10 @@ def midpoint(p1, p2):
     return p
 
 
-p1 = [0, 866//4]
-p2 = [-1000//4, -866//4]
-p3 = [1000//4, -866//4]
-#階級數
+p1 = [0, 866 // 4]
+p2 = [-1000 // 4, -866 // 4]
+p3 = [1000 // 4, -866 // 4]
+# 階級數
 order = 4
 sierpinski(order, p1, p2, p3)
 
@@ -135,7 +138,7 @@ turtle.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-print('特殊完整turtle範例')
+print("特殊完整turtle範例")
 n = 300
 step = 10
 colorsList = ["red", "orange", "yellow", "green", "blue", "cyan", "purple", "violet"]
@@ -156,14 +159,14 @@ def draw_spiral_matrix(size):
     # 初始化海龜
     turtle.color("black")
     turtle.penup()  # 提筆
-    turtle.goto(-size//2, size//2)
+    turtle.goto(-size // 2, size // 2)
     turtle.pendown()  # 下筆
 
     # 繪製螺旋矩陣
-    for i in range(size//2):
+    for i in range(size // 2):
         for direction in [(1, 0), (0, -1), (-1, 0), (0, 1)]:
             dx, dy = direction
-            for j in range(i*2 + 1):
+            for j in range(i * 2 + 1):
                 turtle.forward(20)
                 turtle.left(90)
                 if j == i:
@@ -171,10 +174,11 @@ def draw_spiral_matrix(size):
                     turtle.forward(20)
                     turtle.pendown()  # 下筆
             turtle.penup()  # 提筆
-            turtle.goto(turtle.xcor()+dx*20, turtle.ycor()+dy*20)
+            turtle.goto(turtle.xcor() + dx * 20, turtle.ycor() + dy * 20)
             turtle.pendown()  # 下筆
 
     turtle.hideturtle()  # 隱藏海龜
+
 
 # 畫出螺旋矩陣
 draw_spiral_matrix(10)
@@ -194,11 +198,12 @@ def draw_hexagon_spiral(size):
     side_length = 10
     for i in range(size):
         for j in range(6):
-            turtle.forward(side_length*(i+1))
+            turtle.forward(side_length * (i + 1))
             turtle.right(60)
         turtle.right(60)
 
     turtle.hideturtle()  # 隱藏海龜
+
 
 # 畫出六邊形螺旋
 draw_hexagon_spiral(10)
@@ -210,22 +215,22 @@ print("------------------------------------------------------------")  # 60個
 # 繪製池塘
 pond = turtle.Screen()
 pond.setup(600, 400)
-pond.bgcolor('light blue')
+pond.bgcolor("light blue")
 pond.title("Yertle's Pond")
 
 # 繪製小島
-mud = turtle.Turtle('circle')
+mud = turtle.Turtle("circle")
 mud.shapesize(stretch_wid=5, stretch_len=5, outline=None)
-mud.pencolor('tan')
-mud.fillcolor('tan')
+mud.pencolor("tan")
+mud.fillcolor("tan")
 
 # 繪製樹幹
 SIDE = 80
 ANGLE = 90
 log = turtle.Turtle()
 log.hideturtle()  # 隱藏海龜
-log.pencolor('peru')
-log.fillcolor('peru')
+log.pencolor("peru")
+log.fillcolor("peru")
 log.penup()  # 提筆
 log.setpos(215, -30)
 log.left(45)
@@ -247,8 +252,8 @@ knot.circle(5)
 knot.end_fill()  # 結束塗色
 
 # 繪製鱷龜 Yertle
-yertle = turtle.Turtle('turtle')
-yertle.color('green')
+yertle = turtle.Turtle("turtle")
+yertle.color("green")
 yertle.forward(200)
 yertle.left(180)
 yertle.forward(200)
@@ -257,7 +262,7 @@ yertle.forward(205)
 
 print("------------------------------------------------------------")  # 60個
 
-turtle.color('red', 'yellow')
+turtle.color("red", "yellow")
 turtle.begin_fill()
 while True:
     turtle.forward(200)
@@ -269,4 +274,3 @@ turtle.end_fill()
 turtle.done()
 
 print("------------------------------------------------------------")  # 60個
-

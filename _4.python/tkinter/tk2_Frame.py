@@ -147,7 +147,7 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
-#AddressBook, Grid範例
+# AddressBook, Grid範例
 
 frame1 = tk.Frame(window, bg="pink")
 frame1.pack()

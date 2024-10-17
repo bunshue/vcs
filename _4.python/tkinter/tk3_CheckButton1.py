@@ -372,6 +372,7 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
+
 def do_cb_select7():  # 回應核取方塊變數狀態
     print("目前選取的動物 :", var1.get(), var2.get(), var3.get())
 
@@ -431,7 +432,6 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
     fill=tk.X, padx=5, pady=5
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
-
 
 
 window.mainloop()

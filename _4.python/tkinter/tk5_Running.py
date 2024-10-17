@@ -14,26 +14,31 @@ print("------------------------------------------------------------")  # 60個
 
 running = True
 
+
 def stop_running_and_exit():
     global running
     running = False
     window.destroy()
 
+
 def stop_running_and_exit2():
     global running
     running = False
+
 
 # 傳回球的隨機顏色
 def getRandomColor():
     colorlist = ["red", "green", "blue", "aqua", "gold", "purple"]
     return random.choice(colorlist)
-        
+
+
 # 傳回球的隨機顏色 #RRGGBB
 def getRandomColor():
     color = "#"
     for j in range(6):
-        color += toHexChar(random.randint(0, 15)) # Add a random digit
+        color += toHexChar(random.randint(0, 15))  # Add a random digit
     return color
+
 
 # Convert an integer to a single hex digit in a character
 def toHexChar(hexValue):
@@ -41,8 +46,9 @@ def toHexChar(hexValue):
         return chr(hexValue + ord("0"))
     else:  # 10 <= hexValue <= 15
         return chr(hexValue - 10 + ord("A"))
-        
-print("------------------------------------------------------------")	#60個
+
+
+print("------------------------------------------------------------")  # 60個
 '''
 
 def run_digital_clock(label1):                     # 數字變數內容的更動
@@ -543,74 +549,86 @@ print("------------------------------------------------------------")  # 60個
 # 定義Ball類別
 class Ball:
     def __init__(self):
-        self.x = W / 2              # 發球的x軸座標 
-        self.y = 0                      # 發球的y軸座標 
-        self.dx = 3                     # 每次移動x距離
-        self.dy = 3                     # 每次移動y距離
-        self.radius = 5                 # 求半徑
-        self.color = getRandomColor()         # 隨機取得球的顏色
+        self.x = W / 2  # 發球的x軸座標
+        self.y = 0  # 發球的y軸座標
+        self.dx = 3  # 每次移動x距離
+        self.dy = 3  # 每次移動y距離
+        self.radius = 5  # 求半徑
+        self.color = getRandomColor()  # 隨機取得球的顏色
 
-def addBall():                          # 增加球
+
+def addBall():  # 增加球
     ballList.append(Ball())
 
-def removeBall():                       # 刪除串列最後一個球 
+
+def removeBall():  # 刪除串列最後一個球
     ballList.pop()
 
-def stop():                             # 動畫停止
+
+def stop():  # 動畫停止
     global ballRunning
     ballRunning = True
-    
-def resume():                           # 恢復動畫
+
+
+def resume():  # 恢復動畫
     global ballRunning
     ballRunning = False
-    animate()   
-                                
-def animate():                          # 球體移動
+    animate()
+
+
+def animate():  # 球體移動
     global ballRunning
     while not ballRunning:
-        canvas.after(sleepTime)         
-        canvas.update()                 # 更新
-        canvas.delete("ball")             
-        for ball in ballList:           # 更新所有球
+        canvas.after(sleepTime)
+        canvas.update()  # 更新
+        canvas.delete("ball")
+        for ball in ballList:  # 更新所有球
             redisplayBall(ball)
-    
-def redisplayBall(ball):                # 重新顯示球
+
+
+def redisplayBall(ball):  # 重新顯示球
     if ball.x > W or ball.x < 0:
-        ball.dx = -ball.dx            
+        ball.dx = -ball.dx
     if ball.y > H or ball.y < 0:
-        ball.dy = -ball.dy   
+        ball.dy = -ball.dy
     ball.x += ball.dx
     ball.y += ball.dy
-    canvas.create_oval(ball.x - ball.radius, ball.y - ball.radius,
-                       ball.x + ball.radius, ball.y + ball.radius,
-                       fill = ball.color, tags = "ball")
-     
+    canvas.create_oval(
+        ball.x - ball.radius,
+        ball.y - ball.radius,
+        ball.x + ball.radius,
+        ball.y + ball.radius,
+        fill=ball.color,
+        tags="ball",
+    )
+
+
 window = tk.Tk()
 window.title("Bouncing Ball 1")
 
-ballList = []                           # 建立球的串列
+ballList = []  # 建立球的串列
 W, H = 400, 260
 canvas = tk.Canvas(window, width=W, height=H)
 canvas.pack()
-        
-frame = tk.Frame(window)                       # 建立下方功能紐
+
+frame = tk.Frame(window)  # 建立下方功能紐
 frame.pack()
 
-btnStop = tk.Button(frame, text = "暫停", command = stop)
-btnStop.pack(side = tk.LEFT)
-btnResume = tk.Button(frame, text = "恢復",command = resume)
-btnResume.pack(side = tk.LEFT)
-btnAdd = tk.Button(frame, text = "增加球", command = addBall)
-btnAdd.pack(side = tk.LEFT)
-btnRemove = tk.Button(frame, text = "減少球", command = removeBall)
-btnRemove.pack(side = tk.LEFT)
-btnExit = tk.Button(frame, text = "結束", command=window.destroy)
-btnExit.pack(side = tk.LEFT)
-        
-sleepTime = 50                          # 動畫速度 
+btnStop = tk.Button(frame, text="暫停", command=stop)
+btnStop.pack(side=tk.LEFT)
+btnResume = tk.Button(frame, text="恢復", command=resume)
+btnResume.pack(side=tk.LEFT)
+btnAdd = tk.Button(frame, text="增加球", command=addBall)
+btnAdd.pack(side=tk.LEFT)
+btnRemove = tk.Button(frame, text="減少球", command=removeBall)
+btnRemove.pack(side=tk.LEFT)
+btnExit = tk.Button(frame, text="結束", command=window.destroy)
+btnExit.pack(side=tk.LEFT)
+
+sleepTime = 50  # 動畫速度
 ballRunning = False
 animate()
-        
+
 window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
@@ -696,7 +714,9 @@ class BounceBalls:
 
         self.width = 350  # Width of the self.canvas
         self.height = 150  # Width of the self.canvas
-        self.canvas = tk.Canvas(window, bg="white", width=self.width, height=self.height)
+        self.canvas = tk.Canvas(
+            window, bg="white", width=self.width, height=self.height
+        )
         self.canvas.pack()
 
         frame = tk.Frame(window)
@@ -756,6 +776,7 @@ class BounceBalls:
             tags="ball",
         )
 
+
 print("目前無法移動中關閉視窗")
 BounceBalls()  # Create GUI
 
@@ -767,7 +788,4 @@ print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
-
-

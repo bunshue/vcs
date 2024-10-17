@@ -104,10 +104,10 @@ fig.subplots_adjust()
 x = np.linspace(0, 2 * np.pi, num=100, endpoint=True)
 y = np.sin(x)
 
-ax1.plot(x,y)
+ax1.plot(x, y)
 ax1.set_title("左圖", color="b")
 
-ax2.plot(x,y)
+ax2.plot(x, y)
 ax2.set_title("右圖", color="b")
 
 plt.show()
@@ -142,7 +142,6 @@ ax6.plot(x, y)
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------------------------------------")  # 60個

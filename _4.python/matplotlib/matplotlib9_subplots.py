@@ -89,8 +89,8 @@ print("------------------------------------------------------------")  # 60個
 print("1 X 2 子圖")
 
 fig, ax = plt.subplots(nrows=1, ncols=2, figsize=(8, 4))  # 建立2個子圖
-#fig, ax = plt.subplots(1, 2)  # 建立2個子圖 same
-#fig, ax = plt.subplots(2)  # 建立2個子圖 same
+# fig, ax = plt.subplots(1, 2)  # 建立2個子圖 same
+# fig, ax = plt.subplots(2)  # 建立2個子圖 same
 
 ax[0].plot(x, y)  # 子圖索引 0
 ax[1].plot(x, y)  # 子圖索引 1
@@ -103,9 +103,9 @@ print("1 X 3 子圖")
 
 fig, ax = plt.subplots(1, 3, figsize=(8, 4))
 
-ax[0].plot(x,y0, label="sin")
-ax[1].plot(x,y1, label="cos")
-ax[2].plot(x,y2, label="tan")
+ax[0].plot(x, y0, label="sin")
+ax[1].plot(x, y1, label="cos")
+ax[2].plot(x, y2, label="tan")
 ax[0].legend()
 ax[1].legend()
 ax[2].legend()
@@ -130,7 +130,7 @@ print("------------------------------------------------------------")  # 60個
 print("2 X 2 子圖")
 
 fig, ax = plt.subplots(nrows=2, ncols=2)  # 建立 2 X 2 子圖
-#fig, ax = plt.subplots(2, 2)  # 建立 2 X 2 子圖 #same
+# fig, ax = plt.subplots(2, 2)  # 建立 2 X 2 子圖 #same
 fig.suptitle("用fig ax畫圖, 四張子圖")
 
 ax[0, 0].plot(x, y, "r")  # 子圖索引 0,0
@@ -397,7 +397,6 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
 
 
@@ -440,8 +439,6 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 
 
-
-
 # 2D random walk
 # fig2, ax2 = plt.subplots(num="Figure_2")
 # ax2.legend(loc='best')
@@ -453,4 +450,3 @@ ax.set_xlabel('弧度')
 """
 
 print("------------------------------------------------------------")  # 60個
-

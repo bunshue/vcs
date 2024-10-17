@@ -85,6 +85,7 @@ ssl._create_default_https_context = ssl._create_unverified_context
 
 print("------------------------------------------------------------")  # 60個
 
+
 def make_data_frame():
     # print("建立df, 二維串列4X5 轉 df, 加上欄名與index")
     datas = [
@@ -99,6 +100,7 @@ def make_data_frame():
     df = pd.DataFrame(np.array(datas).T, columns=columns, index=index)
     return df
 
+
 def make_data_frame_from_dict():
     datas = {
         "姓名": ["唐三藏", "孫悟空", "豬八戒", "沙悟淨"],
@@ -107,16 +109,17 @@ def make_data_frame_from_dict():
         "數學": [71, 92, 89, 95],
         "社會": [88, 89, 98, 77],
         "自然": [95, 74, 89, 85],
-        }
+    }
     df = pd.DataFrame(datas)
     return df
+
 
 print("------------------------------------------------------------")  # 60個
 
 df = make_data_frame_from_dict()  # 字典 轉 df
 print(df)
 
-print('df寫讀檔案')
+print("df寫讀檔案")
 
 df.to_csv("tmp_df_aaaa.csv", encoding="utf-8-sig")
 
@@ -131,7 +134,7 @@ df.to_csv("tmp_df.csv.bz2")
 df.to_csv("tmp_df.csv.xz")
 
 # 直接讀取壓縮檔
-#df_new = pd.read_csv("tmp_df.csv.gz", index_col="Time", parse_dates=["Time"])
+# df_new = pd.read_csv("tmp_df.csv.gz", index_col="Time", parse_dates=["Time"])
 df_new = pd.read_csv("tmp_df.csv.gz")
 cc = df_new.head()
 print(cc)
@@ -347,7 +350,7 @@ df = make_data_frame_from_dict()  # 字典 轉 df
 print(df)
 
 print("刪除欄位 數學")
-#df1 = df.drop("數學", axis=1) # same
+# df1 = df.drop("數學", axis=1) # same
 df1 = df.drop(["數學"], axis=1)
 print(df1)
 
@@ -371,16 +374,16 @@ print("刪除索引 偶數索引")
 df6 = df.drop(np.arange(0, 4, 2))
 print(df6)
 
-print('找出 社會 < 85 的資料')
+print("找出 社會 < 85 的資料")
 print(df[df["社會"] < 85])
-print('找出 社會 < 85 的資料 的 索引')
+print("找出 社會 < 85 的資料 的 索引")
 print(df[df["社會"] < 85].index)
-print('刪除 社會 < 85 的資料 列')
+print("刪除 社會 < 85 的資料 列")
 idx = df[df["社會"] < 85].index
 df7 = df.drop(idx)
 print(df7)
 
-print('重建df')
+print("重建df")
 df = make_data_frame_from_dict()  # 字典 轉 df
 
 df.set_index("姓名", inplace=True)
@@ -399,8 +402,8 @@ df4 = df.drop(["自然"], axis=1)
 print(df4)
 
 # 不可重建
-#print('重建df')
-#df = make_data_frame_from_dict()  # 字典 轉 df
+# print('重建df')
+# df = make_data_frame_from_dict()  # 字典 轉 df
 
 print("移除孫悟空成績 ->")
 df1 = df.drop("孫悟空")
@@ -420,7 +423,7 @@ print(df5)
 
 print("------------------------------")  # 30個
 
-print('重建df')
+print("重建df")
 df = make_data_frame_from_dict()  # 字典 轉 df
 
 print("df反置")
@@ -465,7 +468,7 @@ print("數學最高 :", df["數學"].max())
 
 print("------------------------------------------------------------")  # 60個
 
-print('顯示欄資料')
+print("顯示欄資料")
 print('df["自然"] ->')
 print(df["自然"])
 print('df[["英文", "數學", "自然"] ->')
@@ -493,18 +496,18 @@ print("------------------------------------------------------------")  # 60個
 df = make_data_frame_from_dict()  # 字典 轉 df
 print(df)
 
-print('df 轉 字典')
+print("df 轉 字典")
 alldata = df.to_dict("split")
 print(type(alldata))
 
 # 會有3個list構成: columns, index, data
-print('字典')
+print("字典")
 print(alldata)
-print('欄位')
+print("欄位")
 print(alldata["columns"])
-print('索引')
+print("索引")
 print(alldata["index"])
-print('資料')
+print("資料")
 print(alldata["data"])
 
 # 列出所有欄索引標籤(欄位名稱)
@@ -542,7 +545,7 @@ datas = {
 df = pd.DataFrame(datas)
 print(df)
 
-print('建立樞紐分析表 pivot_table')
+print("建立樞紐分析表 pivot_table")
 # aggfunc: mean是求平均, sum是求總和
 table = pd.pivot_table(
     data=df, index=["性別"], columns=["年齡"], values=["成績"], aggfunc={"成績": "mean"}
@@ -554,7 +557,7 @@ print(table.columns.values)
 # 查看列索引標籤
 print(table.index.values)
 
-print('建立樞紐分析表 pivot_table')
+print("建立樞紐分析表 pivot_table")
 # aggfunc: mean是求平均, sum是求總和
 table = pd.pivot_table(data=df, index=["性別"], values=["成績"], aggfunc={"成績": "sum"})
 print(table)
@@ -600,7 +603,7 @@ df["英文"] = [89, 79, 82, 72]
 df["數學"] = [71, 92, 89, 95]
 df["社會"] = [88, 89, 98, 77]
 df["自然"] = [95, 74, 89, 85]
-#df.index = ["唐三藏", "孫悟空", "豬八戒", "沙悟淨"] 不能設定文字
+# df.index = ["唐三藏", "孫悟空", "豬八戒", "沙悟淨"] 不能設定文字
 print(df)
 
 print("看 索引 1~3, 數學 社會 成績")
@@ -627,7 +630,7 @@ print(df.values[1][2])
 
 print("------------------------------------------------------------")  # 60個
 
-print('有重複資料之df')
+print("有重複資料之df")
 
 datas = [
     [92, 81, 92, 81, 92, 81],  # 國文
@@ -635,7 +638,7 @@ datas = [
     [71, 92, 71, 89, 95, 89],  # 數學
     [88, 89, 88, 98, 77, 98],  # 社會
     [95, 74, 95, 89, 85, 89],  # 自然
-    ]
+]
 columns = ["國文", "英文", "數學", "社會", "自然"]
 index = ["唐三藏", "孫悟空", "唐三藏", "豬八戒", "沙悟淨", "豬八戒"]
 df = pd.DataFrame(np.array(datas).T, columns=columns, index=index)
@@ -801,40 +804,40 @@ datas = {
 df = pd.DataFrame(datas)
 print(df)
 
-print('欄位 自然 的資料')
+print("欄位 自然 的資料")
 print(df["自然"])
-print('欄位 國文 數學 自然 的資料')
+print("欄位 國文 數學 自然 的資料")
 print(df[["國文", "數學", "自然"]])
-print('欄位 國文 >= 80 的資料')
+print("欄位 國文 >= 80 的資料")
 print(df[df["國文"] >= 80])
 
-print('索引 1 的資料(孫悟空)')
+print("索引 1 的資料(孫悟空)")
 print(df.values[1])
-print('索引 1 欄位 2 的資料(孫悟空 數學)')
+print("索引 1 欄位 2 的資料(孫悟空 數學)")
 print(df.values[1][2])
 
-print('看 孫悟空 數學 的資料')
+print("看 孫悟空 數學 的資料")
 print(df.loc["孫悟空", "數學"])
 
-print('看 唐三藏 國文 社會 的資料')
+print("看 唐三藏 國文 社會 的資料")
 print(df.loc["唐三藏", ["國文", "社會"]])
 
-print('看 唐三藏 和 豬八戒 國文 和 社會 的資料')
+print("看 唐三藏 和 豬八戒 國文 和 社會 的資料")
 print(df.loc[["唐三藏", "豬八戒"], ["國文", "社會"]])
 
-print('看 唐三藏 到 豬八戒 國文 到 數學 的資料')
+print("看 唐三藏 到 豬八戒 國文 到 數學 的資料")
 print(df.loc["唐三藏":"豬八戒", "國文":"數學"])
 
-print('看 豬八戒 的 所有 資料')
+print("看 豬八戒 的 所有 資料")
 print(df.loc["豬八戒", :])
 
-print('看 從頭 到 豬八戒 的 數學 到 社會 的資料')
+print("看 從頭 到 豬八戒 的 數學 到 社會 的資料")
 print(df.loc[:"豬八戒", "數學":"社會"])
 
-print('看 豬八戒 到 末尾 的 數學 到 社會 的資料')
+print("看 豬八戒 到 末尾 的 數學 到 社會 的資料")
 print(df.loc["豬八戒":, "數學":"社會"])
 
-print('看 索引3欄位4的資料, 即 豬八戒 自然')
+print("看 索引3欄位4的資料, 即 豬八戒 自然")
 print(df.iloc[2, 3])
 
 cc = df.iloc[0, [0, 4]]
@@ -1151,7 +1154,7 @@ datas = [
     [71, 92, 89, 95],  # 數學
     [88, 89, 98, 77],  # 社會
     [95, 74, 89, 85],  # 自然
-    ]
+]
 columns = ["國文", "英文", "數學", "社會", "自然"]
 index = ["唐三藏", "孫悟空", "豬八戒", "沙悟淨"]
 df = pd.DataFrame(np.array(datas).T, columns=columns, index=index)
@@ -1172,7 +1175,7 @@ print("顯示df之 國文 英文 社會 欄")
 print(df[["國文", "英文", "社會"]])
 
 print("顯示")
-#print(df.loc[3, 0])
+# print(df.loc[3, 0])
 
 print("顯示")
 print(df.iloc[3, 0])
@@ -1485,7 +1488,7 @@ print("對 空資料之處理")
 
 df = pd.read_csv("data/titanic20.csv")
 
-#print("檢視前幾行\n", df.head())
+# print("檢視前幾行\n", df.head())
 
 print("原df之個數")
 print(len(df))
@@ -1508,7 +1511,7 @@ df["Age"] = df["Age"].fillna(value=age)
 print("欄位 Age 為 空資料 之個數")
 print(df["Age"].isnull().sum())
 
-#print("檢視前幾行\n", df.head())
+# print("檢視前幾行\n", df.head())
 
 print("------------------------------")  # 30個
 
@@ -1521,7 +1524,7 @@ df["Age"] = df["Age"].fillna(value=age)
 print("欄位 Age 為 空資料 之個數")
 print(df["Age"].isnull().sum())
 
-#print("檢視前幾行\n", df.head())
+# print("檢視前幾行\n", df.head())
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1609,16 +1612,12 @@ print("------------------------------------------------------------")  # 60個
 
 print("Merge() : merge()的默認操作是水平連接兩個DataFrame")
 
-datas1 = {
-    "key": ["K0", "K1", "K2"],
-    "A": ["A0", "A1", "A2"],
-    "B": ["B0", "B1", "B2"]
-    }
+datas1 = {"key": ["K0", "K1", "K2"], "A": ["A0", "A1", "A2"], "B": ["B0", "B1", "B2"]}
 datas2 = {
     "key": ["K0", "K1", "K2", "K3"],
     "C": ["C0", "C1", "C2", "C3"],
     "D": ["D0", "D1", "D2", "D3"],
-    }
+}
 df1 = pd.DataFrame(datas1)
 df2 = pd.DataFrame(datas2)
 print("df1")
@@ -1857,7 +1856,7 @@ ufo = pd.read_csv("http://bit.ly/uforeports")
 filename = "data/ufo.csv"
 ufo = pd.read_csv(filename)
 
-#print("檢視前幾行\n", ufo.head())
+# print("檢視前幾行\n", ufo.head())
 
 # select the 'City' Series using bracket notation
 ufo["City"]
@@ -1878,7 +1877,7 @@ print("------------------------------------------------------------")  # 60個
 filename = "data/imdb_1000.csv"
 movies = pd.read_csv(filename)
 
-#print("檢視前幾行\n", movies.head())
+# print("檢視前幾行\n", movies.head())
 
 # example attribute: data type of each column
 cc = movies.dtypes
@@ -1949,22 +1948,22 @@ print("------------------------------------------------------------")  # 60個
 filename = "data/ufo.csv"
 ufo = pd.read_csv(filename)
 
-#print("檢視前幾行\n", ufo.head())
+# print("檢視前幾行\n", ufo.head())
 
 # remove a single column (axis=1 refers to columns)
 ufo.drop("Colors Reported", axis=1, inplace=True)
 
-#print("檢視前幾行\n", ufo.head())
+# print("檢視前幾行\n", ufo.head())
 
 # remove multiple columns at once
 ufo.drop(["City", "State"], axis=1, inplace=True)
 
-#print("檢視前幾行\n", ufo.head())
+# print("檢視前幾行\n", ufo.head())
 
 # remove multiple rows at once (axis=0 refers to rows)
 ufo.drop([0, 1], axis=0, inplace=True)
 
-#print("檢視前幾行\n", ufo.head())
+# print("檢視前幾行\n", ufo.head())
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1975,7 +1974,7 @@ print("------------------------------------------------------------")  # 60個
 filename = "data/imdb_1000.csv"
 movies = pd.read_csv(filename)
 
-#print("檢視前幾行\n", movies.head())
+# print("檢視前幾行\n", movies.head())
 
 # sort the 'title' Series in ascending order (returns a Series)
 print("檢視前幾行")
@@ -2067,7 +2066,7 @@ print("------------------------------------------------------------")  # 60個
 filename = "data/imdb_1000.csv"
 movies = pd.read_csv(filename)
 
-#print("檢視前幾行\n", movies.head())
+# print("檢視前幾行\n", movies.head())
 
 # filter the DataFrame to only show movies with a 'duration' of at least 200 minutes
 cc = movies[movies.duration >= 200]
@@ -2176,7 +2175,7 @@ print("使用 axis")
 filename = "data/drinks.csv"
 drinks = pd.read_csv(filename)
 
-#print("檢視前幾行\n", drinks.head())
+# print("檢視前幾行\n", drinks.head())
 
 # drop a column (temporarily)
 print("檢視前幾行")
@@ -2219,7 +2218,7 @@ orders = pd.read_table("http://bit.ly/chiporders")
 # filename = "data/chipotle.tsv"
 # orders = pd.read_csv(filename) # NG
 
-#print("檢視前幾行\n", orders.head())
+# print("檢視前幾行\n", orders.head())
 
 # string methods for pandas Series are accessed via 'str'
 print("檢視前幾行")
@@ -2253,7 +2252,7 @@ print("------------------------------------------------------------")  # 60個
 filename = "data/drinks.csv"
 drinks = pd.read_csv(filename)
 
-#print("檢視前幾行\n", drinks.head())
+# print("檢視前幾行\n", drinks.head())
 
 # examine the data type of each Series
 print("檢視資料型態")
@@ -2275,7 +2274,7 @@ orders = pd.read_table("http://bit.ly/chiporders")
 # filename = "data/chipotle.tsv"
 # orders = pd.read_csv(filename) # NG
 
-#print("檢視前幾行\n", orders.head())
+# print("檢視前幾行\n", orders.head())
 
 # examine the data type of each Series
 cc = orders.dtypes
@@ -3688,19 +3687,19 @@ print(cc)
 
 # 22. Create a pivot table
 
-print('建立樞紐分析表 pivot_table')
+print("建立樞紐分析表 pivot_table")
 cc = titanic.pivot_table(
     index="Sex", columns="Pclass", values="Survived", aggfunc="mean"
 )
 print(cc)
 
-print('建立樞紐分析表 pivot_table')
+print("建立樞紐分析表 pivot_table")
 cc = titanic.pivot_table(
     index="Sex", columns="Pclass", values="Survived", aggfunc="mean", margins=True
 )
 print(cc)
 
-print('建立樞紐分析表 pivot_table')
+print("建立樞紐分析表 pivot_table")
 cc = titanic.pivot_table(
     index="Sex", columns="Pclass", values="Survived", aggfunc="count", margins=True
 )
@@ -3914,7 +3913,7 @@ print(cc)
 cca = pd.crosstab(titanic.Sex, titanic.Pclass, margins=True)
 print(cc)
 
-print('建立樞紐分析表 pivot_table')
+print("建立樞紐分析表 pivot_table")
 cc = titanic.pivot_table(
     index="Sex", columns="Pclass", values="Survived", aggfunc="count", margins=True
 )
@@ -4125,7 +4124,7 @@ print(ser.index)
 
 print(ser.unstack())
 
-print('建立樞紐分析表 pivot_table')
+print("建立樞紐分析表 pivot_table")
 df = stocks.pivot_table(values="Close", index="Symbol", columns="Date")
 print(df)
 
@@ -4451,8 +4450,3 @@ order_df = pd.merge(order_df, customer_df, left_on="數學", right_index=True, h
 
 
 print("------------------------------------------------------------")  # 60個
-
-
-
-
-

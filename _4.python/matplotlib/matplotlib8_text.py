@@ -264,7 +264,6 @@ print("------------------------------------------------------------")  # 60個
 plt.subplot(232)
 
 
-
 print("------------------------------------------------------------")  # 60個
 plt.subplot(233)
 
@@ -300,7 +299,6 @@ plt.plot(x_st, y_st, "r-o")  # 畫基準點
 
 print("------------------------------------------------------------")  # 60個
 plt.subplot(235)
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -356,9 +354,8 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-#寫字
-plt.text(1,0,'sin(x)',fontsize=20)
-
+# 寫字
+plt.text(1, 0, "sin(x)", fontsize=20)
 
 
 plt.text(0.5, 0.5, "subplot(2,2,1)", ha="center", va="center", size=20, alpha=0.5)
@@ -372,8 +369,12 @@ plt.text(0.5, 0.5, "Axes 3", ha="center", va="center", size=24, alpha=0.5)
 plt.text(0.5, 0.5, "Axes 4", ha="center", va="center", size=24, alpha=0.5)
 plt.text(0.5, 0.5, "Axes 5", ha="center", va="center", size=24, alpha=0.5)
 
-plt.text(0.2, 0.5, "axes([0.1, 0.1, .8, .8])", ha="center", va="center", size=20, alpha=0.5)
-plt.text(0.5, 0.5, "axes([.5, .5, .3, .3])", ha="center", va="center", size=16, alpha=0.5)
+plt.text(
+    0.2, 0.5, "axes([0.1, 0.1, .8, .8])", ha="center", va="center", size=20, alpha=0.5
+)
+plt.text(
+    0.5, 0.5, "axes([.5, .5, .3, .3])", ha="center", va="center", size=16, alpha=0.5
+)
 
 plt.text(0.15, 0.5, "subplot(1,2,1)", fontsize="16", c="b")
 plt.text(0.15, 0.5, "subplot(2,2,2)", fontsize="16", c="m")
@@ -381,4 +382,3 @@ plt.text(0.15, 0.5, "subplot(2,2,4)", fontsize="16", c="m")
 plt.text(0.15, 0.5, "subplot(1,2,1)", fontsize="16", c="b")
 plt.text(0.15, 0.5, "subplot(2,2,2)", fontsize="16", c="m")
 plt.text(0.15, 0.5, "subplot(2,2,4)", fontsize="16", c="m")
-

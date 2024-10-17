@@ -462,7 +462,3 @@ plt.pie(
     radius=0.7,
     colors=["lightgreen", "yellow"],
 )
-
-
-
-

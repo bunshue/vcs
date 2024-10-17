@@ -1,4 +1,4 @@
-#各種檔案寫讀範例 dicom
+# 各種檔案寫讀範例 dicom
 
 # dcm_qt_tree.py
 """View DICOM files in a tree using Qt and PySide"""
@@ -12,6 +12,7 @@ import pydicom
 import sys
 from PySide import QtGui
 import collections
+
 
 class DicomTree(object):
     def __init__(self, filename):
@@ -52,10 +53,10 @@ class DicomTree(object):
         for k in dic:
             v = dic[k]
             if isinstance(v, dict):
-                item = QtGui.QStandardItem(k + ':' + str(v))
+                item = QtGui.QStandardItem(k + ":" + str(v))
                 parent.appendRow(self.recurse_dic_to_item(v, item))
             else:
-                item = QtGui.QStandardItem(k + ': ' + str(v))
+                item = QtGui.QStandardItem(k + ": " + str(v))
                 parent.appendRow(item)
         return parent
 
@@ -70,9 +71,9 @@ class DicomTree(object):
             dic[data_element.name] = items
             i = 0
             for dataset_item in data_element:
-                items['item ' + str(i)] = self.dataset_to_dic(dataset_item)
+                items["item " + str(i)] = self.dataset_to_dic(dataset_item)
                 i += 1
-        elif data_element.name != 'Pixel Data':
+        elif data_element.name != "Pixel Data":
             dic[data_element.name] = data_element.value
         return dic
 
@@ -94,14 +95,15 @@ class DicomTree(object):
         app.exec_()
         return tree
 
-filename1 = 'data/test.dcm'
-filename2 = 'data/ims000525.dcm'
+
+filename1 = "data/test.dcm"
+filename2 = "data/ims000525.dcm"
 
 dicomTree = DicomTree(filename1)
 dicomTree.show_tree()
 
-'''
+"""
 import pydicom
 from pydicom.data import get_testdata_files
 from pydicom.data import get_testdata_file
-'''
+"""

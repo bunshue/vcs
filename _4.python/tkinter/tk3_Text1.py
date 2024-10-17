@@ -15,7 +15,7 @@ window = tk.Tk()
 window.geometry("600x800")
 window.title("Text 1")
 
-tk.Label(window, text = "不可改動之Text").pack()
+tk.Label(window, text="不可改動之Text").pack()
 
 text3 = tk.Text(window, width=30, height=4)
 text3.pack()
@@ -98,7 +98,8 @@ def saveFile():
     filename = "tmp_write_file.txt"
     with open(filename, "w") as output:
         output.write(textContent)
-        print('儲存完成, 檔案 :', filename)
+        print("儲存完成, 檔案 :", filename)
+
 
 bt_set_data = tk.Button(window, text="set data", command=set_data)  # 放入清空按鈕
 bt_set_data.pack()
@@ -114,7 +115,7 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
-tk.Label(window, text = "文字對齊方式").pack()
+tk.Label(window, text="文字對齊方式").pack()
 
 text5 = tk.Text(window, width=50, height=4, padx=15, pady=15)
 text5.pack()
@@ -174,10 +175,10 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
-tk.Label(window, text = "設定書籤在第5、第8行").pack()
+tk.Label(window, text="設定書籤在第5、第8行").pack()
 
 text_b = tk.Text(window, width=30, height=6)
-#text_b.pack(fill=tk.BOTH, expand=True)
+# text_b.pack(fill=tk.BOTH, expand=True)
 text_b.pack()
 
 text_b.insert(tk.END, "第1行\n")
@@ -308,7 +309,7 @@ window = tk.Tk()
 window.geometry("600x400")
 window.title("Text + Scrollbar use window")
 
-tk.Label(window, text = "有水平/垂直捲軸之Text window").pack()
+tk.Label(window, text="有水平/垂直捲軸之Text window").pack()
 
 xscrollbar = tk.Scrollbar(window, orient=tk.HORIZONTAL)  # x軸scrollbar物件
 yscrollbar = tk.Scrollbar(window, orient=tk.VERTICAL)  # y軸scrollbar物件
@@ -336,7 +337,7 @@ text = """故人西辭黃鶴樓，
 text1.insert(tk.END, text)
 
 window.mainloop()
-        
+
 print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
@@ -346,7 +347,7 @@ window.title("Text + Scrollbar use frame")
 frame1 = tk.Frame(window)
 frame1.pack()
 
-tk.Label(frame1, text = "有水平/垂直捲軸之Text frame").pack()
+tk.Label(frame1, text="有水平/垂直捲軸之Text frame").pack()
 
 xscrollbar = tk.Scrollbar(frame1, orient=tk.HORIZONTAL)  # x軸scrollbar物件
 yscrollbar = tk.Scrollbar(frame1, orient=tk.VERTICAL)  # y軸scrollbar物件
@@ -383,7 +384,7 @@ window = tk.Tk()
 window.geometry("600x800")
 window.title("ScrolledText 測試")
 
-tk.Label(window, text = "有水平/垂直捲軸之Text ScrolledText").pack()
+tk.Label(window, text="有水平/垂直捲軸之Text ScrolledText").pack()
 
 # 滾動文本框
 scrolled_text = scrolledtext.ScrolledText(window, width=50, height=4)

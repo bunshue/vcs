@@ -1,11 +1,11 @@
 import turtle
 import random
 
-#一大堆turtle範例
+# 一大堆turtle範例
 
 import sys
 
-'''
+"""
 print('------------------------------------------------------------')	#60個
 print('畫一個五角星形 空心')
 t = turtle.Pen()
@@ -33,9 +33,9 @@ for x in range(1, 37):
     t.left(90)
     t.forward(100)
     t.left(100)
-'''
+"""
 
-'''
+"""
 print('------------------------------------------------------------')	#60個
 print('畫八卦形')
 
@@ -264,17 +264,16 @@ for line in range(200):
     
 print('------------------------------------------------------------')	#60個
 
-'''
-print('畫不同色筆連線')
+"""
+print("畫不同色筆連線")
 
-turtle.tracer(0,0)                      # 終止追蹤
+turtle.tracer(0, 0)  # 終止追蹤
 t = turtle.Pen()
 
-colorsList = ['red','green','blue']
-for line in range(400):            
+colorsList = ["red", "green", "blue"]
+for line in range(400):
     t.color(colorsList[line % 3])
     t.forward(line)
     t.right(119)
 
-print('------------------------------------------------------------')	#60個
-
+print("------------------------------------------------------------")  # 60個

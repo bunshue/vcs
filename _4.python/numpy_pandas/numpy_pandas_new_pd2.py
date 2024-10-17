@@ -437,32 +437,37 @@ min_periods：样本最少的数据量
 
 import seaborn as sns  # 海生, 自動把圖畫得比較好看
 
-x=[a for a in range(11)]
+x = [a for a in range(11)]
+
 
 def y1_x(x):
-    return x*2
+    return x * 2
+
 
 def y2_x(x):
-    return x**2//4
+    return x**2 // 4
+
 
 def y3_x(x):
-    return (x-5)**2
+    return (x - 5) ** 2
+
 
 def y4_x(x):
     return 10 - x
 
-y1=[y1_x(i) for i in x]
-y2=[y2_x(i) for i in x]
-y3=[y3_x(i) for i in x]
-y4=[y4_x(i) for i in x]
 
-print('x :', x)
-print('y1 :', y1)
-print('y2 :', y2)
-print('y3 :', y3)
-print('y4 :', y4)
+y1 = [y1_x(i) for i in x]
+y2 = [y2_x(i) for i in x]
+y3 = [y3_x(i) for i in x]
+y4 = [y4_x(i) for i in x]
 
-df=pd.DataFrame({'x':x,'y1':y1,'y2':y2,'y3':y3,'y4':y4})
+print("x :", x)
+print("y1 :", y1)
+print("y2 :", y2)
+print("y3 :", y3)
+print("y4 :", y4)
+
+df = pd.DataFrame({"x": x, "y1": y1, "y2": y2, "y3": y3, "y4": y4})
 print(df)
 print(df.columns)
 
@@ -473,23 +478,23 @@ df.plot(kind="line", legend=True, title="線圖", figsize=[10, 5])
 
 cc = df.head()
 print(cc)
- 
+
 cc = df.corr()
 print(cc)
 
 plt.figure(figsize=(12, 8))
 plt.subplot(221)
-sns.heatmap(cc,annot=True,cmap='coolwarm')
+sns.heatmap(cc, annot=True, cmap="coolwarm")
 
-cc = df.corr(method='spearman')
+cc = df.corr(method="spearman")
 print(cc)
 plt.subplot(222)
-sns.heatmap(cc,annot=True,cmap='coolwarm')
- 
-cc = df.corr(method='kendall')
+sns.heatmap(cc, annot=True, cmap="coolwarm")
+
+cc = df.corr(method="kendall")
 print(cc)
 plt.subplot(223)
-sns.heatmap(cc,annot=True,cmap='coolwarm')
+sns.heatmap(cc, annot=True, cmap="coolwarm")
 
 plt.show()
 
@@ -503,4 +508,3 @@ print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
 sys.exit()
-

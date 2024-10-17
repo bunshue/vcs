@@ -110,14 +110,14 @@ animals = ["鼠", "牛", "虎", "兔"]
 weights2 = [3, 48, 33, 8]
 
 plt.xlim(0, 50)
-plt.barh(animals, weights2, color=["red", "green", "blue", "yellow"])  #橫向bar圖
+plt.barh(animals, weights2, color=["red", "green", "blue", "yellow"])  # 橫向bar圖
 
 """
 #顯示數值 1
 for i in range(len(animals)):
     plt.text(weights2[i], i, weights2[i])
 """
-#顯示數值 2
+# 顯示數值 2
 for y, x in enumerate(weights2):
     plt.text(x, y, "%s" % x, ha="center")
 
@@ -163,7 +163,7 @@ print("將字典直接輸出給barh圖, 加error")
 data = {"鼠": 3, "牛": 48, "虎": 33, "兔": 8}
 error = [3, 10, 5, 8]
 
-#橫向bar圖
+# 橫向bar圖
 plt.barh(
     list(data.keys()),
     list(data.values()),
@@ -177,7 +177,6 @@ plt.barh(
 plt.subplot(233)
 
 
-
 # 第四張圖
 plt.subplot(234)
 
@@ -185,7 +184,7 @@ colors = ["b", "g", "r", "y", "c"]
 animals = ["鼠", "牛", "虎", "兔", "龍"]
 weights = [3, 48, 33, 8, 38]
 
-plt.barh(animals, weights, color=colors)  #橫向bar圖
+plt.barh(animals, weights, color=colors)  # 橫向bar圖
 
 # 第五張圖
 plt.subplot(235)
@@ -244,7 +243,7 @@ plt.subplot(233)
 
 x = ["第1學期", "第2學期", "第3學期", "第4學期", "第5學期", "第6學期", "第7學期", "第8學期"]
 s = [95.3, 94.2, 91.4, 96.2, 92.3, 93.6, 89.4, 91.2]
-plt.barh(x, s)  #橫向bar圖
+plt.barh(x, s)  # 橫向bar圖
 plt.ylabel("平均分數")
 plt.title("大學四年各學期的平均分數")
 
@@ -254,7 +253,7 @@ plt.subplot(234)
 
 x = ["第1學期", "第2學期", "第3學期", "第4學期", "第5學期", "第6學期", "第7學期", "第8學期"]
 s = [95.3, 94.2, 91.4, 96.2, 92.3, 93.6, 89.4, 91.2]
-plt.barh(x, s)  #橫向bar圖
+plt.barh(x, s)  # 橫向bar圖
 plt.ylabel("平均分數")
 plt.title("大學四年各學期的平均分數")
 
@@ -316,7 +315,7 @@ plt.subplot(232)
 
 x = ["鼠", "牛", "虎", "兔", "龍"]
 s = [3, 48, 33, 8, -38]
-plt.barh(x, s, color="red")  #橫向bar圖
+plt.barh(x, s, color="red")  # 橫向bar圖
 
 
 # 第三張圖
@@ -327,8 +326,8 @@ cost = [250, 280, 310, 290]
 quarter = ["Q1", "Q2", "Q3", "Q4"]
 
 barH = 0.5
-plt.barh(quarter, revenue, color="g", height=barH, label="收入")  #橫向bar圖
-plt.barh(quarter, -np.array(cost), color="m", height=barH, label="支出")  #橫向bar圖
+plt.barh(quarter, revenue, color="g", height=barH, label="收入")  # 橫向bar圖
+plt.barh(quarter, -np.array(cost), color="m", height=barH, label="支出")  # 橫向bar圖
 
 plt.title("公司收支表")
 plt.xlabel("收入與支出")
@@ -351,8 +350,8 @@ plt.subplot(235)
 x = np.arange(0.6, 6)
 A = np.random.randint(1, 15, 6)
 B = np.random.randint(1, 15, 6)
-plt.barh(x, A, fc="#e63946", ec="none")  #橫向bar圖
-plt.barh(x, -B, fc="#7fb069", ec="none")  #橫向bar圖
+plt.barh(x, A, fc="#e63946", ec="none")  # 橫向bar圖
+plt.barh(x, -B, fc="#7fb069", ec="none")  # 橫向bar圖
 
 plt.title("雙向的長條圖")
 
@@ -460,7 +459,6 @@ plt.subplot(234)
 
 # 第五張圖
 plt.subplot(235)
-
 
 
 # 第六張圖
@@ -797,9 +795,9 @@ labels = ["2023年", "2024年", "2025年"]  # 年度刻度標籤
 # ax = fig.add_axes([0.15,0.15,0.7,0.7])
 barH = 0.25  # 橫條圖高度
 
-plt.barh(X + 0.00, AAA, color="r", height=barH, label="AAA")  #橫向bar圖
-plt.barh(X + barH, BBB, color="g", height=barH, label="BBB")  #橫向bar圖
-plt.barh(X + barH * 2, CCC, color="b", height=barH, label="CCC")  #橫向bar圖
+plt.barh(X + 0.00, AAA, color="r", height=barH, label="AAA")  # 橫向bar圖
+plt.barh(X + barH, BBB, color="g", height=barH, label="BBB")  # 橫向bar圖
+plt.barh(X + barH * 2, CCC, color="b", height=barH, label="CCC")  # 橫向bar圖
 
 plt.title("銷售報表")
 plt.xlabel("數量")
@@ -818,11 +816,13 @@ CCC = [5200, 4930, 5350]  # CCC線條
 year = ["2023年", "2024年", "2025年"]  # 年度
 
 barH = 0.35  # 橫條圖高度
-plt.barh(year, AAA, color="green", height=barH, label="AAA")  #橫向bar圖
-plt.barh(year, BBB, color="yellow", height=barH, left=np.array(AAA), label="BBB")  #橫向bar圖
+plt.barh(year, AAA, color="green", height=barH, label="AAA")  # 橫向bar圖
+plt.barh(
+    year, BBB, color="yellow", height=barH, left=np.array(AAA), label="BBB"
+)  # 橫向bar圖
 plt.barh(
     year, CCC, color="red", height=barH, left=np.array(AAA) + np.array(BBB), label="CCC"
-)  #橫向bar圖
+)  # 橫向bar圖
 
 plt.title("銷售報表")
 plt.xlabel("數量")
@@ -847,10 +847,10 @@ plt.xticks(index[0::2], labels)
 plt.subplot(236)
 
 labels = ["Python", "C++", "Java", "JS", "C", "C#"]
-index = np.arange(len(labels)*2)
+index = np.arange(len(labels) * 2)
 ratings = [5.168, 5.726, 14.988, 3.165, 11.857, 4.453]
 change = [1.12, 0.3, -1.69, 0.29, 3.41, -0.45]
- 
+
 plt.bar(index[0::2], ratings, label="使用率")
 plt.bar(index[1::2], change, label="增減值", color="r")
 plt.legend()
@@ -935,8 +935,7 @@ plt.show()
 
 width = 0.35  # 長條圖寬度
 plt.bar(x, values, width)  # 繪製長條圖
-#x用名稱 
+# x用名稱
 plt.xticks(x, names)  # x 軸刻度
-#y設定範圍刻距
+# y設定範圍刻距
 plt.yticks(np.arange(0, 50, 5))  # y 軸刻度
-

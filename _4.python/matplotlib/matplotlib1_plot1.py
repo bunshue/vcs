@@ -405,6 +405,3 @@ plt.plot(seq, data3, "-^")
 plt.plot(seq, data4, "-s")
 plt.plot(x1, y1, "go-")
 plt.plot(x2, y2, "m.-")
-
-
-

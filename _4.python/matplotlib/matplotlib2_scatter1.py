@@ -522,8 +522,8 @@ print("------------------------------------------------------------")  # 60個
 print("散佈圖")
 
 x = np.arange(6)
-y = x/3 - 1
-t = x/3  # 色彩隨 x 軸值變化
+y = x / 3 - 1
+t = x / 3  # 色彩隨 x 軸值變化
 
 plt.scatter(x, y, c=t, s=500, cmap="rainbow")
 plt.scatter(x, y, c=x, s=500, cmap="rainbow", marker="*")  # 繪製 sin
@@ -535,8 +535,8 @@ plt.scatter(x, y, c="blue", marker=".")
 plt.scatter(x, y, color="lightgreen", edgecolor="b", s=80)
 plt.scatter(x, y, c=y, cmap="rainbow")
 plt.scatter(x, y, s=300, c=y, cmap="hsv")  # 色彩隨y軸值變化
-plt.scatter(x, y, s = 100, c = 'b', alpha = 0.5)   # 設定透明度為 0.5
-plt.scatter(x, y, s = 100, c = 'r', alpha = 0.5)   # 設定透明度為 0.5
+plt.scatter(x, y, s=100, c="b", alpha=0.5)  # 設定透明度為 0.5
+plt.scatter(x, y, s=100, c="r", alpha=0.5)  # 設定透明度為 0.5
 
 N = 50
 x = np.linspace(0, 6.2, N)  # 建立含 N 個元素的陣列
@@ -780,7 +780,6 @@ x = np.random.randn(N)
 y = np.random.randn(N)
 
 
-
 """ fail
 #zip 高級組合法
 
@@ -808,4 +807,3 @@ y = np.random.randint(30, size=N)
 plt.scatter(x, y, s=size, c=color, cmap="Greens", norm=norm)
 plt.scatter(x, y, s=size, alpha=0.5, c=color, cmap="Greens", norm=norm)
 plt.scatter(x, y, s=size, alpha=0.5, c=color, cmap="jet", norm=norm)
-

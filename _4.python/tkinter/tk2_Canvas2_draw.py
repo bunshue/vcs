@@ -20,10 +20,10 @@ window.title("tk畫圖大集合 1")
 print("建立畫布")
 width = W - 20
 height = H - 20
-canvas1 = tk.Canvas(window, bg="pink", width=width, height=height-30)
+canvas1 = tk.Canvas(window, bg="pink", width=width, height=height - 30)
 canvas1.pack()
 
-#基準線
+# 基準線
 canvas1.create_line(0, H // 3 * 1, W, H // 3 * 1)
 canvas1.create_line(0, H // 3 * 2, W, H // 3 * 2)
 canvas1.create_line(W // 3 * 1, 0, W // 3 * 1, H)
@@ -31,17 +31,17 @@ canvas1.create_line(W // 3 * 2, 0, W // 3 * 2, H)
 
 # create_line 繪製直線 (x1, y1)-(x2, y2)
 x1, y1, x2, y2 = 20, 20, 120, 20
-canvas1.create_line(x1, y1, x2, y2) #零點黑線
+canvas1.create_line(x1, y1, x2, y2)  # 零點黑線
 x1, y1, x2, y2 = x1, y1 + 20, x2, y2 + 20
 canvas1.create_line(x1, y1, x2, y2, fill="gray50")
 x1, y1, x2, y2 = x1, y1 + 20, x2, y2 + 20
 canvas1.create_line(x1, y1, x2, y2, fill="red", dash=(4, 4))
 x1, y1, x2, y2 = x1, y1 + 20, x2, y2 + 20
-canvas1.create_line(x1, y1, x2, y2, width=5)#粗線
+canvas1.create_line(x1, y1, x2, y2, width=5)  # 粗線
 x1, y1, x2, y2 = x1, y1 + 20, x2, y2 + 20
-canvas1.create_line(x1, y1, x2, y2, width=10, fill="blue")#顏色線
+canvas1.create_line(x1, y1, x2, y2, width=10, fill="blue")  # 顏色線
 x1, y1, x2, y2 = x1, y1 + 20, x2, y2 + 20
-canvas1.create_line(x1, y1, x2, y2, dash=(10, 2, 2, 2)) #點線
+canvas1.create_line(x1, y1, x2, y2, dash=(10, 2, 2, 2))  # 點線
 x1, y1, x2, y2 = x1, y1 + 20, x2, y2 + 20
 canvas1.create_line(x1, y1, x2, y2, fill="#FF0000")
 
@@ -163,7 +163,9 @@ x_st, y_st, x_sp, y_sp = x_st + dx, y_st, x_sp + dx, y_sp
 canvas1.create_arc(x_st, y_st, x_sp, y_sp, style=tk.ARC, width=5, start=0, extent=180)
 
 x_st, y_st, x_sp, y_sp = x_st + dx, y_st, x_sp + dx, y_sp
-canvas1.create_arc(x_st, y_st, x_sp, y_sp, style=tk.ARC, width=5, start=90, extent=180, outline='blue')
+canvas1.create_arc(
+    x_st, y_st, x_sp, y_sp, style=tk.ARC, width=5, start=90, extent=180, outline="blue"
+)
 
 x_st, y_st, x_sp, y_sp = x_st + dx, y_st, x_sp + dx, y_sp
 canvas1.create_arc(x_st, y_st, x_sp, y_sp, style=tk.ARC, extent=180)
@@ -175,60 +177,60 @@ x_st, y_st, x_sp, y_sp = x_st + dx, y_st, x_sp + dx, y_sp
 canvas1.create_arc(x_st, y_st, x_sp, y_sp, style=tk.PIESLICE, start=30, extent=120)
 
 x_st, y_st, x_sp, y_sp = x_st + dx, y_st, x_sp + dx, y_sp
-canvas1.create_arc(x_st, y_st, x_sp, y_sp, start = 0, extent = 90, width = 5, fill = "red")
+canvas1.create_arc(x_st, y_st, x_sp, y_sp, start=0, extent=90, width=5, fill="red")
 
 # create_polygon 繪製多邊形
 x_st = 400
 y_st = 280
 canvas1.create_polygon(
-    x_st+40,
-    y_st+40,
-    x_st+60,
-    y_st+20,
-    x_st+80,
-    y_st+40,
-    x_st+80,
-    y_st+80,
-    x_st+40,
-    y_st+80,
+    x_st + 40,
+    y_st + 40,
+    x_st + 60,
+    y_st + 20,
+    x_st + 80,
+    y_st + 40,
+    x_st + 80,
+    y_st + 80,
+    x_st + 40,
+    y_st + 80,
 )  # 無參數, 黑色實心
 
 # 空心 外框線
 canvas1.create_polygon(
-    x_st+100,
-    y_st+40,
-    x_st+120,
-    y_st+20,
-    x_st+140,
-    y_st+40,
-    x_st+140,
-    y_st+80,
-    x_st+100,
-    y_st+80,
+    x_st + 100,
+    y_st + 40,
+    x_st + 120,
+    y_st + 20,
+    x_st + 140,
+    y_st + 40,
+    x_st + 140,
+    y_st + 80,
+    x_st + 100,
+    y_st + 80,
     fill="",
     outline="red",
 )
 
 # 實心
 canvas1.create_polygon(
-    x_st+160, y_st+80, x_st+200, y_st+80, x_st+180, y_st+20, fill="green"
+    x_st + 160, y_st + 80, x_st + 200, y_st + 80, x_st + 180, y_st + 20, fill="green"
 )
 
 # 實心 外框線
 canvas1.create_polygon(
-    x_st+220,
-    y_st+80,
-    x_st+260,
-    y_st+80,
-    x_st+240,
-    y_st+20,
+    x_st + 220,
+    y_st + 80,
+    x_st + 260,
+    y_st + 80,
+    x_st + 240,
+    y_st + 20,
     fill="blue",
     outline="yellow",
     width=5,
 )
 
 # create_text 繪製文字
-x_st, y_st = 200, H // 2+50
+x_st, y_st = 200, H // 2 + 50
 dy = 40
 canvas1.create_text(x_st, y_st, text="歡迎來到美國1")  # 無參數
 x_st, y_st = x_st, y_st + dy
@@ -259,12 +261,13 @@ x_st, y_st = x_st, y_st + dy
 canvas1.create_text(x_st, y_st, text="歡迎來到美國5", font=("Arial", 36))
 
 x_st, y_st = x_st, y_st + dy
-canvas1.create_text(x_st+2, y_st+2,						# 使用create_text方法在座標（302，77）處繪制文字
-		text = '陰影效果'					# 所繪制文字的內容
-		,fill = 'gray')						# 所繪制文字的彩色為灰色
-canvas1.create_text(x_st, y_st,
-		text = '陰影效果',
-		fill = 'blue')
+canvas1.create_text(
+    x_st + 2,
+    y_st + 2,  # 使用create_text方法在座標（302，77）處繪制文字
+    text="陰影效果",  # 所繪制文字的內容
+    fill="gray",
+)  # 所繪制文字的彩色為灰色
+canvas1.create_text(x_st, y_st, text="陰影效果", fill="blue")
 
 print("------------------------------------------------------------")  # 60個
 
@@ -273,16 +276,16 @@ yHeight = 250
 
 x_center, y_center, r = 1080, 500, 100
 x, y = [], []
-for i in range(12):         # 建立圓外圍12個點
-    x.append(x_center + r * math.cos(30*i*math.pi/180))
-    y.append(y_center + r * math.sin(30*i*math.pi/180))
-for i in range(12):         # 執行12個點彼此連線
+for i in range(12):  # 建立圓外圍12個點
+    x.append(x_center + r * math.cos(30 * i * math.pi / 180))
+    y.append(y_center + r * math.sin(30 * i * math.pi / 180))
+for i in range(12):  # 執行12個點彼此連線
     for j in range(12):
-        canvas1.create_line(x[i],y[i],x[j],y[j])
+        canvas1.create_line(x[i], y[i], x[j], y[j])
 
 print("------------------------------------------------------------")  # 60個
 
-print('製作格線 NXN')
+print("製作格線 NXN")
 
 x_st = 1080
 y_st = 305
@@ -290,44 +293,49 @@ w = 10
 h = 10
 COLUMN = 10
 ROW = 10
-W = (COLUMN-1)*w
-H = (ROW-1)*h
+W = (COLUMN - 1) * w
+H = (ROW - 1) * h
 
 for i in range(COLUMN):
-    #垂直線
-    canvas1.create_line(x_st+h*i, y_st, x_st+h*i, y_st+H)
+    # 垂直線
+    canvas1.create_line(x_st + h * i, y_st, x_st + h * i, y_st + H)
 
 for i in range(ROW):
-    #水平線
-    canvas1.create_line(x_st, y_st+h*i, x_st+W, y_st+h*i)
-        
+    # 水平線
+    canvas1.create_line(x_st, y_st + h * i, x_st + W, y_st + h * i)
+
 print("------------------------------------------------------------")  # 60個
 
 xWidth = 350
 yHeight = 200
-#x_st, y_st, x_sp, y_sp = 400, H//2, 400+280, H//2+200  # 左上-右下
-x_st, y_st = 400+20, 600+20
+# x_st, y_st, x_sp, y_sp = 400, H//2, 400+280, H//2+200  # 左上-右下
+x_st, y_st = 400 + 20, 600 + 20
 
 for i in range(8):
     # 無參數, 空心1點, 黑線
-    obj = canvas1.create_rectangle(x_st+i*10, y_st+i*10, x_st+xWidth-i*10, y_st+yHeight-i*10)
+    obj = canvas1.create_rectangle(
+        x_st + i * 10, y_st + i * 10, x_st + xWidth - i * 10, y_st + yHeight - i * 10
+    )
     obj_coord = canvas1.coords(obj)
     print("此物件座標 :", obj_coord)
 
 print("------------------------------------------------------------")  # 60個
 
-x_st, y_st = 800+20, 600+20
+x_st, y_st = 800 + 20, 600 + 20
 
-for i in range(30):                 # 隨機繪50個不同位置與大小的矩形
+for i in range(30):  # 隨機繪50個不同位置與大小的矩形
     x1, y1 = random.randint(1, 320), random.randint(1, 200)
     x2, y2 = random.randint(1, 320), random.randint(1, 200)
-    if x1 > x2: x1,x2 = x2,x1       # 確保左上角x座標小於右下角x座標
-    if y1 > y2: y1,y2 = y2,y1       # 確保左上角y座標小於右下角y座標
-    canvas1.create_rectangle(x_st+x1, y_st+y1, x_st+x2, y_st+y2)
+    if x1 > x2:
+        x1, x2 = x2, x1  # 確保左上角x座標小於右下角x座標
+    if y1 > y2:
+        y1, y2 = y2, y1  # 確保左上角y座標小於右下角y座標
+    canvas1.create_rectangle(x_st + x1, y_st + y1, x_st + x2, y_st + y2)
 
 print("------------------------------------------------------------")  # 60個
 
 # 使用 tags
+
 
 def drawCanvas():
     print("在 Canvas 上畫一些東西")
@@ -336,21 +344,27 @@ def drawCanvas():
     radius = 50
     for i in range(0, 8):
         canvas1.create_oval(
-            x_st + 50 * i, y_st, x_st + 50 * i + radius, y_st + radius, tags="tags_example"
+            x_st + 50 * i,
+            y_st,
+            x_st + 50 * i + radius,
+            y_st + radius,
+            tags="tags_example",
         )
         canvas1.create_oval(
             x_st + 50 * i, y_st + 75, x_st + 50 * i + radius, y_st + 75 + radius
         )
 
+
 def deleteCanvas():
     print("刪除 Canvas 上畫的部分東西")
     canvas1.delete("tags_example")
 
+
 button2 = tk.Button(window, text="在 Canvas 上畫一些東西", command=drawCanvas)
-button2.pack(side = tk.LEFT)
+button2.pack(side=tk.LEFT)
 
 button3 = tk.Button(window, text="刪除 Canvas 上畫的部分東西", command=deleteCanvas)
-button3.pack(side = tk.LEFT)
+button3.pack(side=tk.LEFT)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -398,8 +412,3 @@ canvas1.create_arc(x_st+3, y_st+3, x_sp, y_sp,
 
 
 """
-
-
-
-
-
