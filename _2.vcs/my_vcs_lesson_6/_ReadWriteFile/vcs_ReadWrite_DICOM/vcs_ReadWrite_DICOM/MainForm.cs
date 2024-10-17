@@ -69,6 +69,14 @@ namespace vcs_ReadWrite_DICOM
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            imagePanelControl.Size = new Size(800, 600);
+            imagePanelControl.Location = new Point(200, 10);
+
+            richTextBox1.Size = new Size(250, 600);
+            richTextBox1.Location = new Point(1020, 10);
+
+            this.Size = new Size(1300, 750);
+
             dd = new DicomDecoder();
             pixels8 = new List<byte>();
             pixels16 = new List<ushort>();

@@ -75,35 +75,6 @@ def show_PIL(dataset):
     im.show()
 
 
-def show_image(data, block=True, master=None):
-    print("show_image")
-    frame = tk.Frame(master=master, background="#000")
-
-    if "SeriesDescription" in data and "InstanceNumber" in data:
-        print("1111")
-        title = ", ".join(
-            ("Ser: " + data.SeriesDescription, "Img: " + str(data.InstanceNumber))
-        )
-    else:
-        print("2222")
-        title = "pydicom image"
-
-    print(title)
-    frame.master.title(title)
-
-    photo_image = get_PIL_image(data)
-    photo_image = ImageTk.PhotoImage(photo_image)
-    label = tk.Label(frame, image=photo_image, background="#000")
-
-    # keep a reference to avoid disappearance upon garbage collection
-    label.photo_reference = photo_image
-    label.grid()
-    frame.grid()
-
-    if block:
-        frame.mainloop()
-
-
 def show_PIL_in_tk(dataset):
     """Display an image using the Python Imaging Library (PIL)"""
     im = get_PIL_image(dataset)
@@ -116,6 +87,33 @@ filename1 = "data/CT_small.dcm"
 filename2 = "data/ims000525.dcm"
 filename3 = "data/test.dcm"
 
-df = pydicom.dcmread(filename3)
+ds = pydicom.dcmread(filename3)
 
-show_image(df)
+block = True
+master = None
+
+frame = tk.Frame(master=master, background="#000")
+
+if "SeriesDescription" in ds and "InstanceNumber" in ds:
+    print("1111")
+    title = ", ".join(
+        ("Ser: " + ds.SeriesDescription, "Img: " + str(ds.InstanceNumber))
+    )
+else:
+    print("2222")
+    title = "pydicom image"
+
+print(title)
+frame.master.title(title)
+
+photo_image = get_PIL_image(ds)
+photo_image = ImageTk.PhotoImage(photo_image)
+label = tk.Label(frame, image=photo_image, background="#000")
+
+# keep a reference to avoid disappearance upon garbage collection
+label.photo_reference = photo_image
+label.grid()
+frame.grid()
+
+if block:
+    frame.mainloop()

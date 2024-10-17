@@ -39,7 +39,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 print(
     "---- scipy.integrate 積分 --------------------------------------------------------"
 )  # 60個
@@ -976,7 +976,7 @@ plt.plot(x, stats.norm.pdf(x, 2, 1),
 plt.legend()
 plt.title("常態分配PDF的機率")
 plt.show()
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 from scipy.stats import norm

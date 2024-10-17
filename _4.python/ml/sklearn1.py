@@ -121,9 +121,6 @@ print(binaryX[0:5, :])
 
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-
 print("線性回歸的範例 1")
 
 from sklearn.linear_model import LinearRegression
@@ -153,7 +150,6 @@ for i in range(11):
 
 plt.plot(X, y, "ro-")
 plt.plot(xx, yy, "go:")
-
 
 plt.show()
 
@@ -885,10 +881,7 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-'''
-
 print("迴歸效果評估")
-
 
 print("MSE均方誤差")
 
@@ -1040,9 +1033,307 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
+from sklearn import preprocessing
+
+f_tracking = [
+    110,
+    1018,
+    1130,
+    417,
+    626,
+    957,
+    90,
+    951,
+    946,
+    797,
+    981,
+    125,
+    456,
+    731,
+    1640,
+    486,
+    1309,
+    472,
+    1133,
+    1773,
+    906,
+    532,
+    742,
+    621,
+    855,
+]
+happiness = [
+    0.3,
+    0.8,
+    0.5,
+    0.4,
+    0.6,
+    0.4,
+    0.7,
+    0.5,
+    0.4,
+    0.3,
+    0.3,
+    0.6,
+    0.2,
+    0.8,
+    1,
+    0.6,
+    0.2,
+    0.7,
+    0.5,
+    0.7,
+    0.1,
+    0.4,
+    0.3,
+    0.6,
+    0.3,
+]
+
+df = pd.DataFrame({"FB追蹤數": f_tracking, "快樂程度": happiness})
+print(df.head())
+
+print("------------------------------")  # 30個
+
+df_scaled = pd.DataFrame(preprocessing.scale(df), columns=["標準化FB追蹤數", "標準化快樂程度"])
+print(df_scaled.head())
+
+df_scaled.plot(kind="scatter", x="標準化FB追蹤數", y="標準化快樂程度")
+plt.show()
+
+print("------------------------------")  # 30個
+
+from sklearn import preprocessing
+
+f_tracking = [
+    110,
+    1018,
+    1130,
+    417,
+    626,
+    957,
+    90,
+    951,
+    946,
+    797,
+    981,
+    125,
+    456,
+    731,
+    1640,
+    486,
+    1309,
+    472,
+    1133,
+    1773,
+    906,
+    532,
+    742,
+    621,
+    855,
+]
+happiness = [
+    0.3,
+    0.8,
+    0.5,
+    0.4,
+    0.6,
+    0.4,
+    0.7,
+    0.5,
+    0.4,
+    0.3,
+    0.3,
+    0.6,
+    0.2,
+    0.8,
+    1,
+    0.6,
+    0.2,
+    0.7,
+    0.5,
+    0.7,
+    0.1,
+    0.4,
+    0.3,
+    0.6,
+    0.3,
+]
+
+df = pd.DataFrame({"FB追蹤數": f_tracking, "快樂程度": happiness})
+print(df.head())
+
+print("------------------------------")  # 30個
+
+scaler = preprocessing.StandardScaler()
+np_std = scaler.fit_transform(df)
+df_std = pd.DataFrame(np_std, columns=["標準化FB追蹤數", "標準化快樂程度"])
+print(df_std.head())
+
+df_std.plot(kind="scatter", x="標準化FB追蹤數", y="標準化快樂程度")
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
+from sklearn import preprocessing
+
+f_tracking = [
+    110,
+    1018,
+    1130,
+    417,
+    626,
+    957,
+    90,
+    951,
+    946,
+    797,
+    981,
+    125,
+    456,
+    731,
+    1640,
+    486,
+    1309,
+    472,
+    1133,
+    1773,
+    906,
+    532,
+    742,
+    621,
+    855,
+]
+happiness = [
+    0.3,
+    0.8,
+    0.5,
+    0.4,
+    0.6,
+    0.4,
+    0.7,
+    0.5,
+    0.4,
+    0.3,
+    0.3,
+    0.6,
+    0.2,
+    0.8,
+    1,
+    0.6,
+    0.2,
+    0.7,
+    0.5,
+    0.7,
+    0.1,
+    0.4,
+    0.3,
+    0.6,
+    0.3,
+]
+
+df = pd.DataFrame({"FB追蹤數": f_tracking, "快樂程度": happiness})
+print(df.head())
+print("------------------------------")  # 30個
+
+df_scaled = pd.DataFrame(preprocessing.scale(df), columns=["標準化FB追蹤數", "標準化快樂程度"])
+print(df_scaled.head())
+df_scaled.plot(kind="scatter", x="標準化FB追蹤數", y="標準化快樂程度")
+
+print("------------------------------")  # 30個
+
+scaler = preprocessing.MinMaxScaler(feature_range=(0, 1))
+np_minmax = scaler.fit_transform(df)
+df_minmax = pd.DataFrame(np_minmax, columns=["最小最大值縮放FB追蹤數", "最小最大值縮放快樂程度"])
+print(df_minmax.head())
+
+df_minmax.plot(kind="scatter", x="最小最大值縮放FB追蹤數", y="最小最大值縮放快樂程度")
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+from sklearn import preprocessing
+
+df = pd.read_csv("data/test3.csv")
+
+label_encoder = preprocessing.LabelEncoder()
+df["性別"] = label_encoder.fit_transform(df["性別"])
+print(df)
+'''
+print("------------------------------------------------------------")  # 60個
+
+# How do I use pandas with scikit-learn to create Kaggle submissions? (video)
+
+# 讀取[Kaggle's Titanic competition]資料集至df
+# train = pd.read_csv('http://bit.ly/kaggletrain')
+filename = "data/titanic_train.csv"
+train = pd.read_csv(filename)
+
+print("檢視前幾行")
+cc = train.head()
+print(cc)
+
+# create a feature matrix 'X' by selecting two DataFrame columns
+feature_cols = ["Pclass", "Parch"]
+X = train.loc[:, feature_cols]
+
+print("X之大小")
+cc = X.shape
+print(cc)
+
+# create a response vector 'y' by selecting a Series
+y = train.Survived
+print("y之大小")
+cc = y.shape
+print(cc)
+
+# fit a classification model to the training data
+from sklearn.linear_model import LogisticRegression
+
+logreg = LogisticRegression()
+logreg.fit(X, y)
+
+# read the testing dataset from Kaggle's Titanic competition into a DataFrame
+test = pd.read_csv("http://bit.ly/kaggletest")
+print("檢視前幾行")
+cc = test.head()
+print(cc)
+
+# create a feature matrix from the testing data that matches the training data
+X_new = test.loc[:, feature_cols]
+print("X_new之大小")
+cc = X_new.shape
+print(cc)
+
+# use the fitted model to make predictions for the testing set observations
+new_pred_class = logreg.predict(X_new)
+
+# create a DataFrame of passenger IDs and testing set predictions
+print("檢視前幾行")
+cc = pd.DataFrame({"PassengerId": test.PassengerId, "Survived": new_pred_class}).head()
+print(cc)
+
+# ensure that PassengerID is the first column by setting it as the index
+print("檢視前幾行")
+cc = (
+    pd.DataFrame({"PassengerId": test.PassengerId, "Survived": new_pred_class})
+    .set_index("PassengerId")
+    .head()
+)
+print(cc)
+
+print("df轉csv")
+pd.DataFrame({"PassengerId": test.PassengerId, "Survived": new_pred_class}).set_index(
+    "PassengerId"
+).to_csv("tmp_sub.csv")
+
+print("df轉pickle")
+train.to_pickle("tmp_train.pkl")
+
+print("pickle轉df")
+print("檢視前幾行")
+cc = pd.read_pickle("tmp_train.pkl").head()
+print(cc)
 
 print("------------------------------------------------------------")  # 60個
 

@@ -38,8 +38,12 @@ rt     right        # 順時針轉N度
 lt     left         # 逆時針轉N度
 pu     penup        # 提筆
 pd     pendown      # 下筆
-ht     hideturtle   # 隱藏海龜
-       showturtle   # 顯示海龜
+st     showturtle   # 顯示海龜
+ht     hideturtle   # 隱藏海龜 turtle.hide()
+
+isdown()  # 是否正在下筆
+isvisible() # 是否可見海龜       
+
 """
 print("------------------------------------------------------------")  # 60個
 
@@ -55,7 +59,7 @@ turtle.setup(W, H, x_st, y_st)  # 指定畫布的大小與位置
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
+'''
 print("turtle測試 setheading() stamp()")
 
 # 設定海龜方向 0 : 正右, 90 : 正上, 180 : 正左, 270 : 正下
@@ -714,10 +718,6 @@ turtle.speed(N)  #設定畫筆移動速度 1~10
 
 turtle.color("red", "yellow")
 
-turtle.hideturtle()  # 隱藏海龜
-turtle.hide()
-turtle.showturtle()  # 顯示海龜
-
 colors = [
     "Magenta",
     "Gold",
@@ -879,3 +879,64 @@ for i in range(1, sides + 1):
     t.left(ang / 2)
 
 print("------------------------------------------------------------")  # 60個
+
+'''
+
+#漸層色
+
+turtle.goto(-200, 0)
+"""
+dist = turtle.distance(0, 200)  # 計算兩點距離
+print(dist)
+
+turtle.colormode(255)
+for i in range(0, 16):
+    turtle.pensize(10)
+    turtle.color(255 - 15 * i, 0, 15 * i)
+    turtle.forward(30)
+"""
+
+turtle.goto(-200, -200)
+cc = turtle.towards(200, 200)
+print('目前海龜看向某點的角度 :', cc)
+
+turtle.speed(0)
+turtle.goto(200, 200)
+turtle.st()
+turtle.pensize(3)
+turtle.setheading(turtle.towards(0, 0))
+
+cc = turtle.towards(0, 0)
+print(cc)
+
+radius = turtle.distance(0, 0) / 2.0
+turtle.rt(90)
+for _ in range(18):
+    #switchpen()
+    turtle.circle(radius, 10)
+
+"""
+while undobufferentries():
+    turtle.undo()
+"""
+#turtle.reset()#清除畫布
+
+#退後10步
+for _ in range(10):
+    turtle.undo()
+
+"""
+turtle.resizemode("auto")
+
+def baba(xdummy, ydummy):
+    turtle.clearscreen()
+    turtle.bye()
+
+turtle.write("點我離開", font=("Courier", 12, "bold"))
+turtle.write("CAUGHT! ", font=("Arial", 16, "bold"), align="right")
+turtle.pencolor("red")
+
+
+turtle.onclick(baba, 1)
+
+"""

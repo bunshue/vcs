@@ -1,6 +1,6 @@
-import tkinter as tk
 import pydicom
 
+import tkinter as tk
 from tkinter import tix
 from tkinter.constants import *
 
@@ -60,8 +60,6 @@ def recurse_tree(tree, dataset, parent, hide=False):
                 tree.hlist.hide_entry(item_id)
                 recurse_tree(tree, dataset, item_id, hide=True)
 
-
-import pydicom
 
 filename = "data/CT_small.dcm"
 

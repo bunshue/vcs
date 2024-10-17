@@ -1,8 +1,29 @@
 # 各種檔案寫讀範例 dicom
 
+import pydicom
+
 print("------------------------------------------------------------")  # 60個
 
-import pydicom
+# 共同
+import os
+import sys
+import time
+import math
+import random
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+# 設定中文字型及負號正確顯示
+# 設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
+# 設定負號
+plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+plt.rcParams["font.size"] = 12  # 設定字型大小
+
+print("------------------------------------------------------------")  # 60個
+
 from pydicom.data import get_testdata_files
 from pydicom.data import get_testdata_file
 
@@ -13,13 +34,36 @@ filename3 = "data/CT_small.dcm"
 ds = pydicom.dcmread(filename1)
 # ds = pydicom.dcmread(filename2, force=True)
 
+"""
+#ds全部資訊
+print(type(ds))
+print(len(ds))
 print(ds)
+for _ in ds:
+    print(_)
+"""
+
 print(ds.PatientID)
 print(ds.PatientName)
 print(ds[0x10, 0x10].value)
 print(ds.PatientSex)
 print(ds.PatientBirthDate)
 print(ds.PatientAge)
+print(ds.ImageType)
+print(ds.InstanceCreationDate)
+print(ds.InstanceCreationTime)
+print(ds.StudyDate)
+print(ds.ContentDate)
+print(ds.StudyTime)
+print(ds.ContentTime)
+print(ds.AccessionNumber)
+print(ds.Modality)
+print(ds.StudyDescription)
+print(ds.DerivationDescription)
+print(ds.SoftwareVersions)
+print(ds.NumberOfFrames)
+print(ds.Rows)
+print(ds.Columns)
 
 dataset = pydicom.dcmread(filename1)
 
@@ -35,9 +79,6 @@ for de in data_elements:
     print(dataset.data_element(de))
 
 print("------------------------------------------------------------")  # 60個
-
-import matplotlib.pyplot as plt
-import pydicom
 
 ds = pydicom.dcmread(filename3)
 plt.imshow(ds.pixel_array, cmap=plt.cm.bone)
@@ -57,27 +98,36 @@ ds = pydicom.dcmread(filename1)
 # 更改 Patient Name 資料
 # ds.PhotometricInterpretation = "gary"
 
-# 另存 DICOM 檔案，指定存檔位置
-filename = "change_info.dcm"
+# 存檔
+filename = "tmp_modify_info1.dcm"
 ds.save_as(filename)
-
-print(f"File {filename1} processed and saved as {filename}")
+print("存檔完成, 檔案 :", filename)
 
 print("------------------------------------------------------------")  # 60個
 
-import logging
-import pydicom
+print("讀 改寫 dicom 檔案")
+from pydicom.filereader import dcmread
+
+dataset = dcmread(filename1)
+dataset.PatientName = "anonymous"
+
+# 存檔
+filename = "tmp_modify_info2.dcm"
+dataset.save_as(filename)
+print("存檔完成, 檔案 :", filename)
+
+print("------------------------------------------------------------")  # 60個
 
 
 def show_patient_IDs(file_list=None):
-    logger = logging.getLogger("show_patient_IDs")
+    
     if file_list is None:
         file_list = []
     for file_name in file_list:
         try:
-            logger.info(f"reading: {file_name}")
+            
             f = pydicom.dcmread(file_name)
-            logger.info("finished reading")
+            
             patient_id = f.get("PatientID", "No ID")
             print(file_name, "has patient id of", patient_id)
         except Exception:
@@ -97,15 +147,13 @@ file_list.append(filename3)
 
 show_patient_IDs(file_list)
 
-
 print("------------------------------------------------------------")  # 60個
-
 
 """
 #修改資料內容
 dataset.data_element('PatientBirthDate').value = '19000101'
 
-#另存新檔
+# 存檔
 dataset.save_as('kkkk.dcm')
 """
 
@@ -115,18 +163,7 @@ ds = dcmread(filename)
 
 print(ds.SeriesNumber)
 
-
 """
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("讀 改寫 dicom 檔案")
-from pydicom.filereader import dcmread
-
-dataset = dcmread(filename1)
-dataset.PatientName = "anonymous"
-dataset.save_as("file2.dcm")
 
 print("------------------------------------------------------------")  # 60個
 
@@ -151,3 +188,192 @@ print(is_dicom(filename4))
 print(is_dicom(filename1))
 
 print("------------------------------------------------------------")  # 60個
+
+
+'''
+#取得pydicom內建的dicom檔案
+from pydicom.data import get_testdata_file
+
+filename = get_testdata_file("CT_small.dcm")
+print(filename)
+
+ds = pydicom.dcmread(filename)
+pixel_bytes = ds.PixelData
+
+#使用 array
+arr = ds.pixel_array
+print(arr.shape)
+print(len(arr))
+print(arr)
+
+"""
+elem = ds['PatientName']
+print(elem)
+cc = elem.VR, elem.value
+print(cc)
+
+# same
+elem = ds[0x0010,0x0010]
+print(elem)
+cc = elem.VR, elem.value
+print(cc)
+
+#cc = ds.SoftwareVersions
+print(ds.SoftwareVersions)
+
+del ds.SoftwareVersions  #刪除資料
+#print(ds.SoftwareVersions)
+"""
+
+
+from pydicom.tag import Tag
+t1 = Tag(0x00100010) # all of these are equivalent
+t2 = Tag(0x10,0x10)
+t3 = Tag((0x10, 0x10))
+t4 = Tag("PatientName")
+print(t1)
+print(t2)
+print(t3)
+print(t4)
+
+
+print("------------------------------------------------------------")  # 60個
+
+from pydicom.data import get_testdata_file
+filename = get_testdata_file("rtplan.dcm")
+ds = pydicom.dcmread(filename)  # plan dataset
+ds.PatientName
+
+#'Last^First^mid^pre'
+cc = ds.dir("setup")  # get a list of tags with "setup" somewhere in the name
+print(cc)
+#['PatientSetupSequence']
+cc = ds.PatientSetupSequence[0]
+print(cc)
+
+#(0018, 5100) Patient Position                    CS: 'HFS'
+#(300a, 0182) Patient Setup Number                IS: '1'
+#(300a, 01b2) Setup Technique Description         ST: ''
+
+cc = ds.PatientSetupSequence[0].PatientPosition = "HFP"
+print(cc)
+
+ds.save_as("tmp_rtplan2.dcm")
+
+print("------------------------------------------------------------")  # 60個
+
+from typing import List, Tuple
+
+from pydicom import dcmread
+from pydicom.data import get_testdata_file
+from pydicom.encaps import encapsulate, encapsulate_extended
+from pydicom.uid import JPEG2000Lossless
+
+path = get_testdata_file("CT_small.dcm")
+ds = dcmread(path)
+
+ds.file_meta.TransferSyntaxUID = JPEG2000Lossless
+
+ds.is_little_endian = True
+ds.is_implicit_VR = False
+
+# Save
+
+print("------------------------------------------------------------")  # 60個
+
+#壓縮
+from pydicom.data import get_testdata_file
+from pydicom.uid import RLELossless
+
+ds = get_testdata_file("CT_small.dcm", read=True)
+ds.compress(RLELossless)
+ds.save_as("tmp_CT_small_rle.dcm")
+
+"""
+# Will set `ds.is_little_endian` and `ds.is_implicit_VR` automatically
+ds.compress(RLELossless, encoding_plugin='pylibjpeg')
+ds.save_as("tmp_CT_small_rle2.dcm")
+"""
+
+# Requires a JPEG 2000 compatible image data handler
+ds = get_testdata_file("US1_J2KR.dcm", read=True)
+arr = ds.pixel_array
+ds.PhotometricInterpretation = 'RGB'
+ds.compress(RLELossless, arr)
+ds.save_as("tmp_US1_RLE.dcm")
+
+print("------------------------------------------------------------")  # 60個
+
+from pydicom import dcmread
+from pydicom.data import get_testdata_file
+ct_filename = get_testdata_file("CT_small.dcm")
+ds = dcmread(ct_filename)
+print(ds)
+
+print("看 (0009, 1001) 的資料")
+cc = ds[0x00091001].value
+print(cc)
+
+
+block = ds.private_block(0x0009, 'GEMS_IDEN_01')
+cc = block[0x01]
+print(cc)
+#(0009, 1001) [Full fidelity]                     LO: 'GE_GENESIS_FF'
+cc = block[0x01].value
+print(cc)
+#'GE_GENESIS_FF'
+
+print('設定新值')
+
+block = ds.private_block(0x000b, "Insight Medical Solutions", create=True)
+block.add_new(0x01, "SH", "Aries 1.0.5")
+print(ds)
+
+#移除設定
+#ds.remove_private_tags()
+
+print("------------------------------------------------------------")  # 60個
+
+import matplotlib.pyplot as plt
+import pydicom
+from pydicom.data import get_testdata_files
+filename = get_testdata_files("CT_small.dcm")[0]
+ds = pydicom.dcmread(filename)
+plt.imshow(ds.pixel_array, cmap=plt.cm.bone) # doctest: +ELLIPSIS
+plt.show()
+'''
+
+print("------------------------------------------------------------")  # 60個
+"""
+from pydicom.data import get_testdata_files
+fpath = get_testdata_files("MR-SIEMENS-DICOM-WithOverlays.dcm")[0]
+ds = pydicom.dcmread(fpath)
+elem = ds[0x6000, 0x3000]  # returns a DataElement
+print(elem)
+#(6000, 3000) Overlay Data
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+from pydicom import dcmread
+from pydicom.data import get_testdata_file
+fpath = get_testdata_file("waveform_ecg.dcm")
+ds = dcmread(fpath)
+cc = ds.WaveformSequence
+print(cc)
+
+#<Sequence, length 2>
+multiplex = ds.WaveformSequence[0]
+cc = multiplex.NumberOfWaveformChannels
+print(cc)
+#12
+cc = multiplex.SamplingFrequency
+print(cc)
+#"1000.0"
+cc = multiplex['WaveformData']
+print(cc)
+#(5400, 1010) Waveform Data
+
+print("------------------------------------------------------------")  # 60個
+
+

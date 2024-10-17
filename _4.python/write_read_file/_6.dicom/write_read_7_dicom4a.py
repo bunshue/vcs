@@ -1,7 +1,27 @@
 import pydicom
 import PIL.Image
-import numpy as np
 
+print("------------------------------------------------------------")  # 60個
+
+# 共同
+import os
+import sys
+import time
+import math
+import random
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+# 設定中文字型及負號正確顯示
+# 設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
+# 設定負號
+plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+plt.rcParams["font.size"] = 12  # 設定字型大小
+
+print("------------------------------------------------------------")  # 60個
 
 def get_LUT_value(data, window, level):
     """Apply the RGB Look-Up Table for the given
@@ -63,22 +83,25 @@ def loadPIL_LUT(dataset):
     return im
 
 
-def show_file(fullPath):
-    ds = pydicom.dcmread(str(fullPath))
-    # change strings to unicode
-    ds.decode()
-    if "PixelData" in ds:
-        print("aaaaaaa")
-        dImage = loadPIL_LUT(ds)
-        if dImage is not None:
-            print("bbbbb")
-            dImage.show()
-
-
 print("讀取dicom檔案內的圖片")
 
 filename1 = "data/CT_small.dcm"
 filename2 = "data/ims000525.dcm"
 filename3 = "data/test.dcm"
 
-show_file(filename3)
+ds = pydicom.dcmread(filename3)
+ds.decode()
+if "PixelData" in ds:
+    print("aaaaaaa")
+    dImage = loadPIL_LUT(ds)
+    if dImage is not None:
+        print("bbbbb")
+        #dImage.show() #  直接顯示
+        plt.imshow(dImage, cmap="gray")  # 顯示黑白圖片
+        plt.title("原始圖像")
+        plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個

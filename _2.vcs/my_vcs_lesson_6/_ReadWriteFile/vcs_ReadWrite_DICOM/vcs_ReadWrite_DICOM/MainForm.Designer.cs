@@ -43,9 +43,9 @@
             this.rbZoom1_1 = new System.Windows.Forms.RadioButton();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.bnOpen2 = new System.Windows.Forms.Button();
+            this.bt_clear = new System.Windows.Forms.Button();
             this.windowLevelControl = new vcs_ReadWrite_DICOM.WindowLevelGraphControl();
             this.imagePanelControl = new vcs_ReadWrite_DICOM.ImagePanelControl();
-            this.bt_clear = new System.Windows.Forms.Button();
             this.gbViewSettings.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -198,9 +198,9 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(1037, 8);
+            this.richTextBox1.Location = new System.Drawing.Point(329, 5);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(254, 600);
+            this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 15;
             this.richTextBox1.Text = "";
             // 
@@ -213,6 +213,16 @@
             this.bnOpen2.Text = "Open DICOM Image 2";
             this.bnOpen2.UseVisualStyleBackColor = true;
             this.bnOpen2.Click += new System.EventHandler(this.bnOpen2_Click);
+            // 
+            // bt_clear
+            // 
+            this.bt_clear.Location = new System.Drawing.Point(349, 31);
+            this.bt_clear.Name = "bt_clear";
+            this.bt_clear.Size = new System.Drawing.Size(75, 38);
+            this.bt_clear.TabIndex = 17;
+            this.bt_clear.Text = "Clear";
+            this.bt_clear.UseVisualStyleBackColor = true;
+            this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
             // 
             // windowLevelControl
             // 
@@ -229,25 +239,15 @@
             this.imagePanelControl.CausesValidation = false;
             this.imagePanelControl.Location = new System.Drawing.Point(205, 8);
             this.imagePanelControl.Name = "imagePanelControl";
-            this.imagePanelControl.Size = new System.Drawing.Size(800, 600);
+            this.imagePanelControl.Size = new System.Drawing.Size(100, 100);
             this.imagePanelControl.TabIndex = 1;
             this.imagePanelControl.TabStop = false;
-            // 
-            // bt_clear
-            // 
-            this.bt_clear.Location = new System.Drawing.Point(1216, 565);
-            this.bt_clear.Name = "bt_clear";
-            this.bt_clear.Size = new System.Drawing.Size(75, 38);
-            this.bt_clear.TabIndex = 17;
-            this.bt_clear.Text = "Clear";
-            this.bt_clear.UseVisualStyleBackColor = true;
-            this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1303, 724);
+            this.ClientSize = new System.Drawing.Size(594, 721);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.bnOpen2);
             this.Controls.Add(this.richTextBox1);
