@@ -67,6 +67,30 @@ print(ds.target)
 df = pd.DataFrame(ds.data, columns=ds.feature_names)
 # print(df)
 
+""" 測試 df
+df.to_csv("tmp_iris1.csv")
+df.to_csv("tmp_iris2.csv", encoding="utf8")
+df.to_csv("tmp_iris3.csv", encoding="utf-8-sig")
+
+
+df1 = pd.read_csv("tmp_iris1.csv")
+print(df1)
+
+df2 = pd.read_csv("tmp_iris2.csv")
+print(df2)
+
+df3 = pd.read_csv("tmp_iris3.csv")
+print(df3)
+
+print("比較df是否相同")
+cc = df.equals(df1)
+print(cc)
+cc = df.equals(df2)
+print(cc)
+cc = df.equals(df3)
+print(cc)
+"""
+
 # 資料集目標
 y = ds.target
 # print(y)

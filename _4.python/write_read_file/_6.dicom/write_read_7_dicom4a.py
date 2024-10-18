@@ -49,36 +49,41 @@ def loadPIL_LUT(dataset):
 
     # can only apply LUT if these values exist
     if ("WindowWidth" not in dataset) or ("WindowCenter" not in dataset):
+        print('1111')
         bits = dataset.BitsAllocated
         samples = dataset.SamplesPerPixel
         if bits == 8 and samples == 1:
+            print('L')
             mode = "L"
         elif bits == 8 and samples == 3:
+            print('RGB')
             mode = "RGB"
         # not sure about this -- PIL source says is
         # 'experimental' and no documentation.
         elif bits == 16:
+            print('16')
             # Also, should bytes swap depending
             # on endian of file and system??
             mode = "I;16"
         else:
+            print('XXXX')
             msg = "Don't know PIL mode for %d BitsAllocated" % (bits)
             msg += " and %d SamplesPerPixel" % (samples)
             raise TypeError(msg)
         size = (dataset.Columns, dataset.Rows)
+        print(size)
 
-        # Recommended to specify all details by
-        # http://www.pythonware.com/library/pil/handbook/image.htm
         im = PIL.Image.frombuffer(mode, size, dataset.PixelData, "raw", mode, 0, 1)
     else:
+        print('2222')
         ew = dataset["WindowWidth"]
         ec = dataset["WindowCenter"]
+        print(ew)
+        print(ec)
         ww = int(ew.value[0] if ew.VM > 1 else ew.value)
         wc = int(ec.value[0] if ec.VM > 1 else ec.value)
         image = get_LUT_value(dataset.pixel_array, ww, wc)
 
-        # Convert mode to L since LUT has only 256 values:
-        # http://www.pythonware.com/library/pil/handbook/image.htm
         im = PIL.Image.fromarray(image).convert("L")  # 轉換成灰階圖像
     return im
 
@@ -91,15 +96,18 @@ filename3 = "data/test.dcm"
 
 ds = pydicom.dcmread(filename3)
 ds.decode()
+
 if "PixelData" in ds:
-    print("aaaaaaa")
+    print('有 影像資料')
     dImage = loadPIL_LUT(ds)
     if dImage is not None:
-        print("bbbbb")
+        print("有 影像資料")
         #dImage.show() #  直接顯示
         plt.imshow(dImage, cmap="gray")  # 顯示黑白圖片
         plt.title("原始圖像")
         plt.show()
+else:
+    print('無 影像資料')
 
 print("------------------------------------------------------------")  # 60個
 

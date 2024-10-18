@@ -1,6 +1,18 @@
+"""
 # 各種檔案寫讀範例 dicom
 
+MR-SIEMENS-DICOM-WithOverlays.dcm
+US1_J2KR.dcm
+須將檔案下載在
+C:\\Users\\david\\.pydicom\\data\\ 2 dcm files
+C:\\Users\\070601\\.pydicom\\data
+檔案在
+C:\_git\vcs\_4.python\__code\pydicom-data-master\data_store\data
+
+"""
 import pydicom
+from pydicom.data import get_testdata_file
+from pydicom.data import get_testdata_files
 
 print("------------------------------------------------------------")  # 60個
 
@@ -23,9 +35,6 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-
-from pydicom.data import get_testdata_files
-from pydicom.data import get_testdata_file
 
 filename1 = "data/test.dcm"
 filename2 = "data/ims000525.dcm"
@@ -106,6 +115,7 @@ print("存檔完成, 檔案 :", filename)
 print("------------------------------------------------------------")  # 60個
 
 print("讀 改寫 dicom 檔案")
+
 from pydicom.filereader import dcmread
 
 dataset = dcmread(filename1)
@@ -189,10 +199,7 @@ print(is_dicom(filename1))
 
 print("------------------------------------------------------------")  # 60個
 
-
-'''
 #取得pydicom內建的dicom檔案
-from pydicom.data import get_testdata_file
 
 filename = get_testdata_file("CT_small.dcm")
 print(filename)
@@ -225,8 +232,8 @@ del ds.SoftwareVersions  #刪除資料
 #print(ds.SoftwareVersions)
 """
 
-
 from pydicom.tag import Tag
+
 t1 = Tag(0x00100010) # all of these are equivalent
 t2 = Tag(0x10,0x10)
 t3 = Tag((0x10, 0x10))
@@ -236,10 +243,8 @@ print(t2)
 print(t3)
 print(t4)
 
-
 print("------------------------------------------------------------")  # 60個
 
-from pydicom.data import get_testdata_file
 filename = get_testdata_file("rtplan.dcm")
 ds = pydicom.dcmread(filename)  # plan dataset
 ds.PatientName
@@ -265,7 +270,6 @@ print("------------------------------------------------------------")  # 60個
 from typing import List, Tuple
 
 from pydicom import dcmread
-from pydicom.data import get_testdata_file
 from pydicom.encaps import encapsulate, encapsulate_extended
 from pydicom.uid import JPEG2000Lossless
 
@@ -277,12 +281,9 @@ ds.file_meta.TransferSyntaxUID = JPEG2000Lossless
 ds.is_little_endian = True
 ds.is_implicit_VR = False
 
-# Save
-
 print("------------------------------------------------------------")  # 60個
 
 #壓縮
-from pydicom.data import get_testdata_file
 from pydicom.uid import RLELossless
 
 ds = get_testdata_file("CT_small.dcm", read=True)
@@ -305,7 +306,7 @@ ds.save_as("tmp_US1_RLE.dcm")
 print("------------------------------------------------------------")  # 60個
 
 from pydicom import dcmread
-from pydicom.data import get_testdata_file
+
 ct_filename = get_testdata_file("CT_small.dcm")
 ds = dcmread(ct_filename)
 print(ds)
@@ -334,29 +335,23 @@ print(ds)
 
 print("------------------------------------------------------------")  # 60個
 
-import matplotlib.pyplot as plt
-import pydicom
-from pydicom.data import get_testdata_files
 filename = get_testdata_files("CT_small.dcm")[0]
 ds = pydicom.dcmread(filename)
 plt.imshow(ds.pixel_array, cmap=plt.cm.bone) # doctest: +ELLIPSIS
 plt.show()
-'''
 
 print("------------------------------------------------------------")  # 60個
-"""
-from pydicom.data import get_testdata_files
+
 fpath = get_testdata_files("MR-SIEMENS-DICOM-WithOverlays.dcm")[0]
 ds = pydicom.dcmread(fpath)
 elem = ds[0x6000, 0x3000]  # returns a DataElement
 print(elem)
 #(6000, 3000) Overlay Data
-"""
 
 print("------------------------------------------------------------")  # 60個
 
 from pydicom import dcmread
-from pydicom.data import get_testdata_file
+
 fpath = get_testdata_file("waveform_ecg.dcm")
 ds = dcmread(fpath)
 cc = ds.WaveformSequence

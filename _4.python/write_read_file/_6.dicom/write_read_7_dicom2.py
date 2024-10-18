@@ -1,18 +1,8 @@
 # 各種檔案寫讀範例 dicom
 
-# dcm_qt_tree.py
-"""View DICOM files in a tree using Qt and PySide"""
-# Copyright (c) 2013 Padraig Looney
-# This file is released under the
-# pydicom (https://github.com/pydicom/pydicom)
-# license, see the file LICENSE available at
-# (https://github.com/pydicom/pydicom)
-
-import pydicom
 import sys
-from PySide import QtGui
+import pydicom
 import collections
-
 
 class DicomTree(object):
     def __init__(self, filename):
@@ -20,53 +10,23 @@ class DicomTree(object):
 
     def show_tree(self):
         ds = self.dicom_to_dataset(self.filename)
-        dic = self.dataset_to_dic(ds)
-        model = self.dic_to_model(dic)
-        self.display(model)
-
-    def array_to_model(self, array):
-        model = QtGui.QStandardItemModel()
-        parentItem = model.invisibleRootItem()
-        for ntuple in array:
-            tag = ntuple[0]
-            value = ntuple[1]
-            if isinstance(value, dict):
-                self.recurse_dic_to_item(value, parentItem)
-            else:
-                item = QtGui.QStandardItem(tag + str(value))
-                parentItem.appendRow(item)
-        return parentItem
-
-    def dic_to_model(self, dic):
-        model = QtGui.QStandardItemModel()
-        parentItem = model.invisibleRootItem()
-        self.recurse_dic_to_item(dic, parentItem)
-        return model
-
-    def dataset_to_array(self, dataset):
+        print(ds)
         array = []
-        for data_element in dataset:
+        for data_element in ds:
             array.append(self.data_element_to_dic(data_element))
-        return array
-
-    def recurse_dic_to_item(self, dic, parent):
-        for k in dic:
-            v = dic[k]
-            if isinstance(v, dict):
-                item = QtGui.QStandardItem(k + ":" + str(v))
-                parent.appendRow(self.recurse_dic_to_item(v, item))
-            else:
-                item = QtGui.QStandardItem(k + ": " + str(v))
-                parent.appendRow(item)
-        return parent
+        
+        dic = self.dataset_to_dic(ds)
+        self.display()
 
     def dicom_to_dataset(self, filename):
         dataset = pydicom.dcmread(filename, force=True)
         return dataset
 
     def data_element_to_dic(self, data_element):
+        #print(data_element)
         dic = collections.OrderedDict()
         if data_element.VR == "SQ":
+            print('Get SQ')
             items = collections.OrderedDict()
             dic[data_element.name] = items
             i = 0
@@ -75,25 +35,20 @@ class DicomTree(object):
                 i += 1
         elif data_element.name != "Pixel Data":
             dic[data_element.name] = data_element.value
+        else:
+            print('Get Pixel Data')
+        #print(dic)
         return dic
 
     def dataset_to_dic(self, dataset):
         dic = collections.OrderedDict()
         for data_element in dataset:
             dic.update(self.data_element_to_dic(data_element))
+        #print(dic)
         return dic
 
-    def display(self, model):
-        app = QtGui.QApplication.instance()
-
-        # create QApplication if it doesnt exist
-        if not app:
-            app = QtGui.QApplication(sys.argv)
-        tree = QtGui.QTreeView()
-        tree.setModel(model)
-        tree.show()
-        app.exec_()
-        return tree
+    def display(self):
+        print('display 現在的檔案是 :', self.filename)
 
 
 filename1 = "data/test.dcm"
@@ -102,8 +57,3 @@ filename2 = "data/ims000525.dcm"
 dicomTree = DicomTree(filename1)
 dicomTree.show_tree()
 
-"""
-import pydicom
-from pydicom.data import get_testdata_files
-from pydicom.data import get_testdata_file
-"""

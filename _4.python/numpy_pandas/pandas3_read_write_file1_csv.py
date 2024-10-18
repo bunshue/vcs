@@ -70,7 +70,7 @@ ssl._create_default_https_context = ssl._create_unverified_context
 
 print("------------------------------------------------------------")  # 60個
 
-'''
+
 print("------------------------------------------------------------")  # 60個
 print("簡易讀取csv檔")
 print("------------------------------------------------------------")  # 60個
@@ -139,7 +139,7 @@ print(df.index)
 
 print("df 之 某欄")
 print(df["數學"])
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 filename = "http://bit.ly/gradescsv"
@@ -1140,12 +1140,6 @@ df = pd.read_csv(filename, header=1, index_col=1)
 print(df)
 """
 
-
-df.to_html("tmp8-4-3a-01.html")
-df.to_html("tmp8-2-2a-01.html")
-df.to_html("tmp8-2-5a.html")
-
-
 filename = "tmp_ExpensesRecord.csv"
 df.to_csv(filename)
 print("df寫入csv檔案 :", filename)
@@ -1170,30 +1164,278 @@ filename = "tmp_district.csv"
 df3.to_csv(filename, encoding="big5", index=False)
 print("df寫入csv檔案 :", filename)
 
-
-print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
 
 # 匯入CSV格式的檔案
 df = pd.read_csv("tmp_dists2.csv", encoding="utf8")
 print(df)
 
-
 print("pd讀取csv檔案 :", filename)
 print("跳過索引")
 df = pd.read_csv(filename, encoding="utf-8-sig", index_col=0)
 print(df)
 
+print("------------------------------------------------------------")  # 60個
+
+data = {
+    "種類": ["Bike", "Bus", "Car", "Truck"],
+    "數量": [3, 4, 6, 2],
+    "輪數": ["2", "4", "4", "6"],
+}
+df = pd.DataFrame(data, index=["A", "B", "C", "D"])
+
+filename = "tmp_vehicles.csv"
+df.to_csv(filename, index=False, encoding="big5")
+print("df寫入csv檔案 :", filename)
+
+filename = "tmp_vehicles.csv"
+print("pd讀取csv檔案 :", filename)
+df1 = pd.read_csv(filename, encoding="big5")
+print(df1)
+
+print("------------------------------------------------------------")  # 60個
+
+# NYC 311 service request dataset
+csv_filename = "C:/_git/vcs/_big_files/311-service-requests.csv"
+print("pd讀取csv檔案 :", csv_filename)
+requests = pd.read_csv(csv_filename, dtype="unicode")
+
+cc = requests["Incident Zip"].unique()
+print(cc)
+
+print("------------------------------------------------------------")  # 60個
+
+# Fixing the nan values and string/float confusion
+
+na_values = ["NO CLUE", "N/A", "0"]
+csv_filename = "C:/_git/vcs/_big_files/311-service-requests.csv"
+print("pd讀取csv檔案 :", csv_filename)
+requests = pd.read_csv(csv_filename, na_values=na_values, dtype={"Incident Zip": str})
+
+cc = requests["Incident Zip"].unique()
+print(cc)
+
+# What's up with the dashes?
+
+rows_with_dashes = requests["Incident Zip"].str.contains("-").fillna(False)
+cc = len(requests[rows_with_dashes])
+print(cc)
+
+print(requests[rows_with_dashes])
+
+# But then my friend Dave pointed out that 9-digit zip codes are normal.
+# Let's look at all the zip codes with more than 5 digits, make sure they're okay, and then truncate them.
+long_zip_codes = requests["Incident Zip"].str.len() > 5
+cc = requests["Incident Zip"][long_zip_codes].unique()
+print(cc)
+
+requests["Incident Zip"] = requests["Incident Zip"].str.slice(0, 5)
+
+# Earlier I thought 00083 was a broken zip code, but turns out Central Park's zip code 00083!
+# Shows what I know. I'm still concerned about the 00000 zip codes, though: let's look at that.
+cc = requests[requests["Incident Zip"] == "00000"]
+print(cc)
+
+zero_zips = requests["Incident Zip"] == "00000"
+requests.loc[zero_zips, "Incident Zip"] = np.nan
+
+# fail
+# unique_zips = requests['Incident Zip'].unique()
+# unique_zips.sort()
+# cc = unique_zips
+# print(cc)
+zips = requests["Incident Zip"]
+# Let's say the zips starting with '0' and '1' are okay, for now. (this isn't actually true -- 13221 is in Syracuse, and why?)
+is_close = zips.str.startswith("0") | zips.str.startswith("1")
+# There are a bunch of NaNs, but we're not interested in them right now, so we'll say they're False
+is_far = ~(is_close) & zips.notnull()
+
+cc = zips[is_far]
+print(cc)
+
+cc = requests[is_far][["Incident Zip", "Descriptor", "City"]].sort_values(
+    "Incident Zip"
+)
+print(cc)
+
+cc = requests["City"].str.upper().value_counts()
+print(cc)
+
+print("------------------------------------------------------------")  # 60個
+
+# Putting it together
+
+na_values = ["NO CLUE", "N/A", "0"]
+csv_filename = "C:/_git/vcs/_big_files/311-service-requests.csv"
+print("pd讀取csv檔案 :", csv_filename)
+requests = pd.read_csv(csv_filename, na_values=na_values, dtype={"Incident Zip": str})
+
+
+def fix_zip_codes(zips):
+    # Truncate everything to length 5
+    zips = zips.str.slice(0, 5)
+    # Set 00000 zip codes to nan
+    zero_zips = zips == "00000"
+    zips[zero_zips] = np.nan
+    return zips
+
+
+requests["Incident Zip"] = fix_zip_codes(requests["Incident Zip"])
+
+cc = requests["Incident Zip"].unique()
+print(cc)
+
+print("------------------------------------------------------------")  # 60個
+
+# Parsing Unix timestamps
+
+# Read it, and remove the last row
+popcon = pd.read_csv(
+    "data/popularity-contest",
+    sep=" ",
+)[:-1]
+popcon.columns = ["atime", "ctime", "package-name", "mru-program", "tag"]
+
+print(popcon[:5])
+
+popcon["atime"] = popcon["atime"].astype(int)
+popcon["ctime"] = popcon["ctime"].astype(int)
+
+popcon["atime"] = pd.to_datetime(popcon["atime"], unit="s")
+popcon["ctime"] = pd.to_datetime(popcon["ctime"], unit="s")
+
+print(popcon["atime"].dtype)
+
+print(popcon[:5])
+
+print("------------------------------------------------------------")  # 60個
+
+popcon = popcon[popcon["atime"] > "1970-01-01"]
+
+# 不包含lib的
+nonlibraries = popcon[~popcon["package-name"].str.contains("lib")]
+
+cc = nonlibraries.sort_values("ctime", ascending=False)[:10]
+print(cc)
+
+print("------------------------------------------------------------")  # 60個
+
+# use_pivot_sum
+
+filename = "data\ordersList.csv"
+print("pd讀取csv檔案 :", filename)
+print("跳過標題")
+df = pd.read_csv(filename, encoding="utf-8", header=0)
+
+print(
+    df.pivot_table(
+        index="品名",
+        columns="客戶名稱",
+        values="金額",
+        fill_value=0,
+        margins=True,
+        aggfunc="sum",
+    )
+)
+
+print(
+    df.pivot_table(index="品名", columns="客戶名稱", values="金額", fill_value=0, margins=True)
+)
+
+print("------------------------------------------------------------")  # 60個
+
+print("df 轉 檔案")
+
+data = {
+    "中文名": ["鼠", "牛", "虎", "兔"],
+    "英文名": ["mouse", "ox", "tiger", "rabbit"],
+    "體重": [3, 48, 33, 8],
+    "全名": ["米老鼠", "班尼牛", "跳跳虎", "彼得兔"],
+}
+df = pd.DataFrame(data, index=["1", "2", "3", "4"])
+
+df.to_csv("tmp_write_read_csv06.csv", index=False, encoding="big5")
+
+print("檔案 轉 df")
+df = pd.read_csv("tmp_write_read_csv06.csv", encoding="big5")
+print(df)
+
+print("------------------------------------------------------------")  # 60個
 
 import pandas as pd
 
-df = pd.DataFrame({"A": ["foo", "bar", "baz"], "B": [1, 2, 3]})
+cities = pd.read_csv("data/california_cities.csv")
 
-df.to_excel("檔案路徑.xlsx", index=False)
+print(cities.head())
+
+# extracting the data we ar interested in
+latitude, longitude = cities["latd"], cities["longd"]
+population, area = cities["population_total"], cities["area_total_km2"]
+
+# to scatter the points, using size and color but without label
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn
+
+seaborn.set()
+plt.scatter(
+    longitude,
+    latitude,
+    label=None,
+    c=np.log10(population),
+    cmap="viridis",
+    s=area,
+    linewidth=0,
+    alpha=0.5,
+)
+# plt.axis(aspect='equal') NG
+plt.xlabel("Longitude")
+plt.ylabel("Longitude")
+plt.colorbar(label="log$_{10}$(population)")
+plt.clim(3, 7)
+# now we will craete a legend, we will plot empty lists with the desired size and label
+for area in [100, 300, 500]:
+    plt.scatter([], [], c="k", alpha=0.3, s=area, label=str(area) + "km$^2$")
+plt.legend(scatterpoints=1, frameon=False, labelspacing=1, title="City Areas")
+plt.title("Area and Population of California Cities")
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
 
 
-import pandas as pd
 
-df = pd.read_excel("檔案路徑.xlsx")
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+"""
+
+filename = "tmp_動物資料0.csv"
+df.to_csv(filename)  # 預設為 儲存index行
+
+filename = "tmp_動物資料1.csv"
+df.to_csv(filename, index=False)  # 不儲存index行
+
+filename = "tmp_動物資料2.csv"
+df.to_csv(filename, index=True)  # 儲存index行
+
+df.to_csv("tmp_datas11.csv",index=False,encoding="utf8")
+
+df2 = pd.read_csv("tmp_datas11.csv", encoding="utf8")
+
+
+print("df存成csv檔")
+df.to_csv("tmp_olympics.csv")
+
+
+print("csv檔案轉df")
+df = pd.read_csv("data/student.csv")
+print(df)
+
+
+
+
+"""
+

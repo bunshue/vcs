@@ -114,39 +114,6 @@ def make_data_frame_from_dict():
     return df
 
 
-print("------------------------------------------------------------")  # 60個
-
-df = make_data_frame_from_dict()  # 字典 轉 df
-print(df)
-
-print("df寫讀檔案")
-
-df.to_csv("tmp_df_aaaa.csv", encoding="utf-8-sig")
-
-# 11. Read and write from compressed files
-
-# df存檔
-df.to_csv("tmp_df.csv")
-# 存檔 並壓縮
-df.to_csv("tmp_df.csv.zip")
-df.to_csv("tmp_df.csv.gz")
-df.to_csv("tmp_df.csv.bz2")
-df.to_csv("tmp_df.csv.xz")
-
-# 直接讀取壓縮檔
-# df_new = pd.read_csv("tmp_df.csv.gz", index_col="Time", parse_dates=["Time"])
-df_new = pd.read_csv("tmp_df.csv.gz")
-cc = df_new.head()
-print(cc)
-
-print("比較df是否相同")
-cc = df_new.equals(df)
-print(cc)
-
-
-sys.exit()
-
-
 print("目前 Pandas 版本 :")
 cc = pd.__version__
 print(cc)
@@ -991,69 +958,6 @@ print(df3)
 
 print("------------------------------------------------------------")  # 60個
 
-# 處理 DataFrame 中的缺漏值
-# 用 dropna() 刪除含有 NaN ( 缺漏值 ) 的列
-
-#   借用 NumPy 的 np.nan 來設定 NaN 值
-
-sample_df = pd.DataFrame(np.random.rand(8, 4))
-
-#   設定亂數種子為 0
-
-#   用 NumPy 隨機產生 8x4 的亂數資料並轉成 DataFrame
-
-sample_df.iloc[1, 0] = np.nan
-
-sample_df.iloc[2, 2] = np.nan
-
-sample_df.iloc[6, 1] = np.nan
-
-sample_df.iloc[5:, 3] = np.nan
-
-#   將部分值改成 NaN
-
-print(sample_df)
-
-#   檢視 DataFrame
-
-sample_df_dropped = sample_df.dropna()
-
-print(sample_df_dropped)
-
-sample_df_dropped_2 = sample_df[[0, 1, 2]].dropna()
-
-print(sample_df_dropped_2)
-
-print("------------------------------------------------------------")  # 60個
-
-# 用 fllna() 填補 NaN 值
-
-sample_df = pd.DataFrame(np.random.rand(8, 4))
-
-sample_df.iloc[1, 0] = np.nan
-
-sample_df.iloc[2, 2] = np.nan
-
-sample_df.iloc[6, 1] = np.nan
-
-sample_df.iloc[5:, 3] = np.nan
-
-sample_df_fill = sample_df.fillna(0)  # 在 NaN 之處填入 0
-
-print(sample_df_fill)
-
-sample_df_fill_2 = sample_df.ffill()
-
-print(sample_df_fill_2)
-
-print(sample_df)
-
-sample_df_fill_3 = sample_df.fillna(sample_df.mean())
-
-print(sample_df_fill_3)
-
-print("------------------------------------------------------------")  # 60個
-
 datas = {
     "A": 1.0,
     "B": pd.Timestamp("20130102"),
@@ -1130,22 +1034,6 @@ print(df)
 
 print("------------------------------------------------------------")  # 60個
 
-datas = np.arange(24).reshape((6, 4))
-columns = ["A", "B", "C", "D"]
-dates = pd.date_range("20130101", periods=6)
-
-df = pd.DataFrame(datas, columns=columns, index=dates)
-
-df.iloc[0, 1] = np.nan
-df.iloc[1, 2] = np.nan
-print(df.dropna(axis=0, how="any"))  # how={'any', 'all'}
-print(df.fillna(value=0))
-
-print("空資料 :")
-print(pd.isnull(df))
-
-print("------------------------------------------------------------")  # 60個
-
 print("建立df, 二維串列4X5 轉 df, 加上欄名與index")
 
 datas = [
@@ -1193,6 +1081,146 @@ print(df)
 print(df.groupby("TAG").sum())
 
 print("------------------------------------------------------------")  # 60個
+
+df = pd.read_csv("data2/test3.csv")
+print(df)
+
+print("------------------------------")  # 30個
+
+size_mapping = {"XXL": 5, "XL": 4, "L": 3, "M": 2, "S": 1, "XS": 0}
+
+df["尺寸"] = df["尺寸"].map(size_mapping)
+print(df)
+
+print("------------------------------------------------------------")  # 60個
+
+titanic = pd.read_csv("data2/titanic_data.csv")
+# 顯示資料集的形狀
+print(titanic.shape)
+
+# 顯示前5筆
+print(titanic.head())
+
+# 顯示統計摘要資訊
+print(titanic.describe())
+
+# 顯示資料集資訊
+print(titanic.info())
+
+print("---檢查PassengerId欄位是否是唯一值---")
+print(np.unique(titanic["PassengerId"].values).size)
+
+print("---指定DataFrame物件的索引欄位---")
+titanic.set_index(["PassengerId"], inplace=True)
+print(titanic.head())
+
+print("---新增SexCode欄位---")
+titanic["SexCode"] = np.where(titanic["Sex"] == "female", 1, 0)
+print(titanic.head())
+
+print("---PCass欄位轉換成數值資料---")
+class_mapping = {"1st": 1, "2nd": 2, "3rd": 3}
+titanic["PClass"] = titanic["PClass"].map(class_mapping)
+print(titanic.head())
+
+print("---檢查Age欄位的遺漏值有多少---")
+print(titanic.isnull().sum())
+print(sum(titanic["Age"].isnull()))
+
+print("---補值成平均值---")
+avg_age = titanic["Age"].mean()
+titanic["Age"].fillna(avg_age, inplace=True)
+print(sum(titanic["Age"].isnull()))
+
+print("---顯示性別人數和計算平均年齡---")
+print("性別人數:")
+print(titanic["Sex"].groupby(titanic["Sex"]).size())
+print(titanic.groupby("Sex")["Age"].mean())
+
+print("---處理姓名欄位---")
+
+import re
+
+patt = re.compile(r"\,\s(\S+\s)")
+titles = []
+for index, row in titanic.iterrows():
+    m = re.search(patt, row["Name"])
+    if m is None:
+        title = "Mrs" if row["SexCode"] == 1 else "Mr"
+    else:
+        title = m.group(0)
+        title = re.sub(r",", "", title).strip()
+        if title[0] != "M":
+            title = "Mrs" if row["SexCode"] == 1 else "Mr"
+        else:
+            if title[0] == "M" and title[1] == "a":
+                title = "Mrs" if row["SexCode"] == 1 else "Mr"
+    titles.append(title)
+titanic["Title"] = titles
+
+print("Title類別:")
+print(np.unique(titles).shape[0], np.unique(titles))
+
+print("---修正類別錯誤顯示Titel人數---")
+titanic["Title"] = titanic["Title"].replace("Mlle", "Miss")
+titanic["Title"] = titanic["Title"].replace("Ms", "Miss")
+titanic.to_csv("tmp_titanic_pre.csv", encoding="utf8")
+print("Title人數:")
+print(titanic["Title"].groupby(titanic["Title"]).size())
+print("---顯示平均生存率---")
+""" NG
+print("平均生存率:")
+print(titanic[["Title","Survived"]].groupby(titanic["Title"]).mean())
+"""
+print("------------------------------------------------------------")  # 60個
+
+titanic = pd.read_csv("data2/titanic_pre.csv")
+titanic["Died"] = np.where(titanic["Survived"] == 0, 1, 0)
+print(titanic.head())
+
+print("------------------------------")  # 30個
+
+# 繪出直方圖的年齡分佈, 生存或死亡
+titanic["Age"].plot(kind="hist", bins=15)
+df = titanic[titanic.Survived == 0]
+df["Age"].plot(kind="hist", bins=15)
+df = titanic[titanic.Survived == 1]
+df["Age"].plot(kind="hist", bins=15)
+
+# 分類顯示Title欄位的生存和死亡數
+fig, axes = plt.subplots(nrows=1, ncols=2)
+df = titanic[["Survived", "Died"]].groupby(titanic["Title"]).sum()
+df.plot(kind="bar", ax=axes[0])
+df = titanic[["Survived", "Died"]].groupby(titanic["Title"]).mean()
+df.plot(kind="bar", ax=axes[1])
+
+# 分類顯示Sex欄位的生存和死亡數
+fig, axes = plt.subplots(nrows=1, ncols=2)
+df = titanic[["Survived", "Died"]].groupby(titanic["Sex"]).sum()
+df.plot(kind="bar", ax=axes[0])
+df = titanic[["Survived", "Died"]].groupby(titanic["Sex"]).mean()
+df.plot(kind="bar", ax=axes[1])
+
+# 分類顯示PClass欄位的生存和死亡數
+df = titanic[["Survived", "Died"]].groupby(titanic["PClass"]).sum()
+df.plot(kind="bar")
+df = titanic[["Survived", "Died"]].groupby(titanic["PClass"]).mean()
+df.plot(kind="bar")
+
+# 計算相關係數
+df = titanic.drop("PassengerId", axis=1)
+df = df.drop("Died", axis=1)
+df = df.drop("Title", axis=1)
+# print(df.corr()) NG
+df.to_csv("tmp_titanic_train.csv", encoding="utf8")
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
 
 # 新竹市氣象資料1992_2020
 
@@ -1245,6 +1273,139 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+print("刪除 df 的 欄位 或 索引 – drop() + 缺失資料處理")
+
+""" data/data_with_NaN.csv
+     A    B    C    D
+0  0.5  0.9  0.4  NaN
+1  0.8  0.6  NaN  NaN
+2  0.7  0.3  0.8  0.9
+3  0.8  0.3  NaN  0.2
+4  0.9  NaN  0.7  0.3
+5  0.2  0.7  0.6  NaN
+"""
+df = pd.read_csv("data/data_with_NaN.csv")
+
+# df 轉 html
+# df.to_html("test_csv2html.html")
+
+print("df 原始資料")
+print(df)
+
+# 刪除所有 NaN 的記錄
+df1 = df.dropna()
+print("df1 有任何NaN的列 刪除")
+print(df1)
+
+df2 = df.dropna(how="any")
+print("df2 有任何NaN的列 刪除")
+print(df2)
+
+df3 = df.dropna(how="all")
+print("df3 全部都NaN的列 刪除")
+print(df3)
+
+df4 = df.dropna(subset=["B", "C"])
+print("df4 B C 欄有NaN的列 刪除")
+print(df4)
+
+df5 = pd.isnull(df)
+print("df5 建立布林遮罩")
+print(df5)
+
+df6 = df.fillna(value=1)
+print("df6 將 df 的 缺失資料 補值 寫入數值")
+print(df6)
+
+print("df 欄位B 的 缺失資料 補值 補上原先欄位B 的 平均數")
+df["B"] = df["B"].fillna(df["B"].mean())
+print(df)
+
+print("df 欄位C 的 缺失資料 補值 補上原先欄位C 的 中位數")
+df["C"] = df["C"].fillna(df["C"].median())
+print(df)
+
+print("------------------------------------------------------------")  # 60個
+
+datas = np.arange(24).reshape((6, 4))
+columns = ["A", "B", "C", "D"]
+dates = pd.date_range("20130101", periods=6)
+
+df = pd.DataFrame(datas, columns=columns, index=dates)
+
+df.iloc[0, 1] = np.nan
+df.iloc[1, 2] = np.nan
+print(df.dropna(axis=0, how="any"))  # how={'any', 'all'}
+print(df.fillna(value=0))
+
+print("空資料 :")
+print(pd.isnull(df))
+
+print("------------------------------------------------------------")  # 60個
+
+# 處理 DataFrame 中的缺漏值
+# 用 dropna() 刪除含有 NaN ( 缺漏值 ) 的列
+
+#   借用 NumPy 的 np.nan 來設定 NaN 值
+
+df = pd.DataFrame(np.random.rand(8, 4))
+
+#   設定亂數種子為 0
+
+#   用 NumPy 隨機產生 8x4 的亂數資料並轉成 DataFrame
+
+df.iloc[1, 0] = np.nan
+
+df.iloc[2, 2] = np.nan
+
+df.iloc[6, 1] = np.nan
+
+df.iloc[5:, 3] = np.nan
+
+#   將部分值改成 NaN
+
+print(df)
+
+#   檢視 DataFrame
+
+df_dropped = df.dropna()
+
+print(df_dropped)
+
+df_dropped_2 = df[[0, 1, 2]].dropna()
+
+print(df_dropped_2)
+
+print("------------------------------------------------------------")  # 60個
+
+# 用 fllna() 填補 NaN 值
+
+df = pd.DataFrame(np.random.rand(8, 4))
+
+df.iloc[1, 0] = np.nan
+
+df.iloc[2, 2] = np.nan
+
+df.iloc[6, 1] = np.nan
+
+df.iloc[5:, 3] = np.nan
+
+df_fill = df.fillna(0)  # 在 NaN 之處填入 0
+
+print(df_fill)
+
+df_fill_2 = df.ffill()
+
+print(df_fill_2)
+
+print(df)
+
+df_fill_3 = df.fillna(df.mean())
+
+print(df_fill_3)
+
+print("------------------------------------------------------------")  # 60個
+
 # 讀取資料
 df = pd.read_csv("_new/customer.csv")
 # 空值的處理
@@ -1261,6 +1422,7 @@ print("------------------------------------------------------------")  # 60個
 
 # 讀取資料
 df = pd.read_csv("_new/customer.csv")
+
 # 將age的空值填入0
 df_sample = df.copy()
 df_sample["age"] = df_sample["age"].fillna(value=0)
@@ -1283,6 +1445,7 @@ print("------------------------------------------------------------")  # 60個
 
 # 讀取資料
 df = pd.read_csv("_new/customer.csv")
+
 # 資料基本清理
 df_sample = df.copy()
 df_sample["age"] = df_sample["age"].fillna(value=df_sample["age"].mean())
@@ -1306,6 +1469,7 @@ print("------------------------------------------------------------")  # 60個
 
 # 讀取資料
 df = pd.read_csv("_new/customer.csv")
+
 # 資料基本清理
 df_sample = df.copy()
 df_sample["age"] = df_sample["age"].fillna(value=df_sample["age"].mean())
@@ -1329,6 +1493,7 @@ print("------------------------------------------------------------")  # 60個
 
 # 讀取資料
 df = pd.read_csv("_new/customer.csv")
+
 # 資料基本清理
 df_sample = df.copy()
 df_sample["age"] = df_sample["age"].fillna(value=df_sample["age"].mean())
@@ -3878,7 +4043,8 @@ print(cc)
 
 # df存檔
 ufo.to_csv("tmp_ufo.csv")
-# 存檔 並壓縮
+
+# df存檔 並壓縮
 ufo.to_csv("tmp_ufo.csv.zip")
 ufo.to_csv("tmp_ufo.csv.gz")
 ufo.to_csv("tmp_ufo.csv.bz2")
@@ -4373,5 +4539,67 @@ order_df = pd.merge(order_df, customer_df, left_on="數學", right_on="國文", 
 
 order_df = pd.merge(order_df, customer_df, left_on="數學", right_index=True, how="inner")
 
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("測試完成部分")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("df寫讀檔案")
+
+df = make_data_frame_from_dict()  # 字典 轉 df
+print(df)
+
+df.to_csv("tmp_df_aaaa.csv", encoding="utf-8-sig")
+
+# 11. Read and write from compressed files
+
+# df存檔
+df.to_csv("tmp_df.csv")
+# df存檔 並壓縮
+df.to_csv("tmp_df.csv.zip")
+df.to_csv("tmp_df.csv.gz")
+df.to_csv("tmp_df.csv.bz2")
+df.to_csv("tmp_df.csv.xz")
+
+# 直接讀取壓縮檔
+# df_new = pd.read_csv("tmp_df.csv.gz", index_col="Time", parse_dates=["Time"])
+df_new = pd.read_csv("tmp_df.csv.gz")
+cc = df_new.head()
+print(cc)
+
+print("比較df是否相同")
+cc = df_new.equals(df)
+print(cc)
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+df = pd.read_csv("data2/test2.csv")
+print(df)
+
+print(df.duplicated())
+
+df1 = df.drop_duplicates()
+print(df1)
+
+print(df.duplicated("B"))
+
+df1 = df.drop_duplicates("B")
+print(df1)
+
+df2 = df.drop_duplicates("B", keep="last")
+print(df2)
+
+df3 = df.drop_duplicates("B", keep=False)
+print(df3)
 
 print("------------------------------------------------------------")  # 60個

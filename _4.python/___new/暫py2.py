@@ -1,7 +1,40 @@
+
 """
 python / vcs 暫存片段程式
 
 """
+
+
+turtle --- 龜圖學
+
+源码： Lib/turtle.py
+https://docs.python.org/zh-tw/3.8/library/turtle.html
+https://docs.python.org/zh-tw/3.8/library/turtle.html
+
+
+
+
+for i in [9.4, 9.5, 9.6, 9.7]:
+    j= round(i)
+    print(j)
+
+
+    j= round(i, 0)
+    j= round(i, 1)
+    j= round(i, 1)
+    j= round(i, 1)
+    j= round(i, 2)
+    j= round(i, 2)
+    j= round(i, 1)
+
+
+
+
+color('red', 'yellow')
+
+tu.home()
+
+tu.ht()
 
 
 

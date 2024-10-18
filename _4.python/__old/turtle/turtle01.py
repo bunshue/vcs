@@ -882,7 +882,7 @@ print("------------------------------------------------------------")  # 60個
 
 '''
 
-#漸層色
+# 漸層色
 
 turtle.goto(-200, 0)
 """
@@ -898,7 +898,7 @@ for i in range(0, 16):
 
 turtle.goto(-200, -200)
 cc = turtle.towards(200, 200)
-print('目前海龜看向某點的角度 :', cc)
+print("目前海龜看向某點的角度 :", cc)
 
 turtle.speed(0)
 turtle.goto(200, 200)
@@ -912,16 +912,16 @@ print(cc)
 radius = turtle.distance(0, 0) / 2.0
 turtle.rt(90)
 for _ in range(18):
-    #switchpen()
+    # switchpen()
     turtle.circle(radius, 10)
 
 """
 while undobufferentries():
     turtle.undo()
 """
-#turtle.reset()#清除畫布
+# turtle.reset()#清除畫布
 
-#退後10步
+# 退後10步
 for _ in range(10):
     turtle.undo()
 

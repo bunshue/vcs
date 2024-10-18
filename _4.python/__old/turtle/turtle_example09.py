@@ -2574,7 +2574,7 @@ class RawTurtle(TPen, TNavigator):
             self.undobuffer = Tbuffer(size)
 
     def undobufferentries(self):
-        print('x')
+        print("x")
         """Return count of entries in the undobuffer.
 
         No argument.
@@ -4018,7 +4018,7 @@ if __name__ == "__main__":
         tri.speed(6)
         setheading(towards(turtle))
         count = 1
-        
+
         while tri.distance(turtle) > 4:
             turtle.fd(3.5)
             turtle.lt(0.6)
@@ -4029,7 +4029,6 @@ if __name__ == "__main__":
                 tri.stamp()
                 switchpen()
             count += 1
-        
 
     # demo1()
     demo2()

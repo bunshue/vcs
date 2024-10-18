@@ -2,6 +2,9 @@
 Scikit-learn 詳解與企業應用_機器學習最佳入門與實戰
 
 """
+
+from sklearn import datasets
+
 print("------------------------------------------------------------")  # 60個
 
 # 共同
@@ -32,7 +35,6 @@ print("------------------------------------------------------------")  # 60個
 
 # SelectFromModel
 
-from sklearn import datasets
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
@@ -43,6 +45,7 @@ from sklearn.svm import SVC
 
 X, y = datasets.load_iris(return_X_y=True)
 cc = X.shape
+print("X.shape")
 print(cc)
 
 # SelectFromModel特徵選取
@@ -51,9 +54,10 @@ svc = SVC(kernel="linear", C=1)
 clf = SelectFromModel(estimator=svc, threshold="mean")
 X_new = clf.fit_transform(X, y)
 cc = X_new.shape
+print("X_new.shape")
 print(cc)
 
-# 特徵是否被選取
+print("特徵是否被選取")
 cc = clf.get_support()
 print(cc)
 
@@ -61,20 +65,18 @@ print(cc)
 
 # 4. 資料分割
 
-# 選擇2個特徵
+print("選擇2個特徵")
 X = X_new
 
-# 資料分割
+print("資料分割")
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
-# 查看陣列維度
+print("查看陣列維度")
 cc = X_train.shape, X_test.shape, y_train.shape, y_test.shape
 print(cc)
-
 # ((120, 2), (30, 2), (120,), (30,))
 
-# 特徵縮放
-
+print("特徵縮放")
 scaler = StandardScaler()
 X_train_std = scaler.fit_transform(X_train)
 X_test_std = scaler.transform(X_test)
@@ -94,25 +96,22 @@ clf.fit(X_train_std, y_train)
 y_pred = clf.predict(X_test_std)
 print(y_pred)
 
-# 計算準確率
+print("計算準確率")
 print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
-
 # 96.67%
 
-# 混淆矩陣
 from sklearn.metrics import confusion_matrix
 
+print("混淆矩陣")
 print(confusion_matrix(y_test, y_pred))
 
-# 混淆矩陣圖
 from sklearn.metrics import ConfusionMatrixDisplay
-import matplotlib.pyplot as plt
-
+print("混淆矩陣圖")
 disp = ConfusionMatrixDisplay(confusion_matrix=confusion_matrix(y_test, y_pred))
 disp.plot()
 plt.show()
 
-# 使用全部特徵
+print("使用全部特徵")
 
 # 載入資料集
 X, y = datasets.load_iris(return_X_y=True)
@@ -120,8 +119,9 @@ X, y = datasets.load_iris(return_X_y=True)
 # 資料分割
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
-# 查看陣列維度
+print("查看陣列維度")
 print(X_train.shape, X_test.shape, y_train.shape, y_test.shape)
+# (120, 4) (30, 4) (120,) (30,)
 
 # 特徵縮放
 scaler = StandardScaler()
@@ -134,19 +134,19 @@ from sklearn.linear_model import LogisticRegression
 clf = LogisticRegression()
 clf.fit(X_train_std, y_train)
 
-# 模型計分
+print("模型計分")
 y_pred = clf.predict(X_test_std)
 print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
 
-# (120, 4) (30, 4) (120,) (30,)
 # 93.33%
+
+sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 順序特徵選取(Sequential Feature Selection)
 
-from sklearn import datasets
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
@@ -206,23 +206,20 @@ print(y_pred)
 
 # 計算準確率
 print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
-
 # 86.67%
 
-# 混淆矩陣
 from sklearn.metrics import confusion_matrix
 
+print("混淆矩陣")
 print(confusion_matrix(y_test, y_pred))
 
-# 混淆矩陣圖
 from sklearn.metrics import ConfusionMatrixDisplay
-import matplotlib.pyplot as plt
-
+print("混淆矩陣圖")
 disp = ConfusionMatrixDisplay(confusion_matrix=confusion_matrix(y_test, y_pred))
 disp.plot()
 plt.show()
 
-# 使用全部特徵
+print("使用全部特徵")
 
 # 載入資料集
 X, y = datasets.load_iris(return_X_y=True)
@@ -258,8 +255,6 @@ print("------------------------------------------------------------")  # 60個
 
 # 建立測試資料
 
-import numpy as np
-
 # 固定隨機種子
 np.random.seed(2342347)
 
@@ -282,13 +277,8 @@ from matplotlib import pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 from mpl_toolkits.mplot3d import proj3d
 
-# 修正中文亂碼
-plt.rcParams["font.sans-serif"] = ["Arial Unicode MS"]
-plt.rcParams["axes.unicode_minus"] = False
-
 fig = plt.figure(figsize=(8, 8))
 ax = fig.add_subplot(111, projection="3d")
-plt.rcParams["legend.fontsize"] = 10
 ax.plot(
     class1_sample[0, :],
     class1_sample[1, :],
@@ -441,13 +431,7 @@ print("------------------------------------------------------------")  # 60個
 
 # PCA 個案實作
 
-from sklearn import datasets
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-
 # 1. 載入資料
-
 ds = datasets.load_wine()
 df = pd.DataFrame(ds.data, columns=ds.feature_names)
 cc = df.head()
@@ -605,13 +589,7 @@ print("------------------------------------------------------------")  # 60個
 
 # Scikit-learn PCA 實作
 
-from sklearn import datasets
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-
 # 1. 載入資料
-
 ds = datasets.load_wine()
 df = pd.DataFrame(ds.data, columns=ds.feature_names)
 cc = df.head()
@@ -776,13 +754,7 @@ print("------------------------------------------------------------")  # 60個
 
 # LDA 個案實作
 
-from sklearn import datasets
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-
 # 1. 載入資料
-
 ds = datasets.load_wine()
 df = pd.DataFrame(ds.data, columns=ds.feature_names)
 cc = df.head()
@@ -968,13 +940,7 @@ print("------------------------------------------------------------")  # 60個
 
 # Scikit-learn LDA實作
 
-from sklearn import datasets
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-
 # 1. 載入資料
-
 ds = datasets.load_wine()
 df = pd.DataFrame(ds.data, columns=ds.feature_names)
 cc = df.head()
@@ -1113,10 +1079,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # Scikit-learn LDA實作
-
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
 
 # 載入資料
 
@@ -1266,7 +1228,6 @@ print("------------------------------------------------------------")  # 60個
 # 使用PCA及KernelPCA進行影像去躁
 # KernelPCA_image_denoising
 
-import numpy as np
 from sklearn.datasets import fetch_openml
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.model_selection import train_test_split
@@ -1292,12 +1253,6 @@ noise = rng.normal(scale=0.25, size=X_train.shape)
 X_train_noisy = X_train + noise
 
 # 繪製原圖及加入雜訊的影像
-
-import matplotlib.pyplot as plt
-
-plt.rcParams["font.sans-serif"] = ["Arial Unicode MS"]
-plt.rcParams["axes.unicode_minus"] = False
-
 
 # 繪圖函數
 def plot_digits(X, title):
@@ -1357,10 +1312,8 @@ print("------------------------------------------------------------")  # 60個
 
 # t-SNE測試
 
-import numpy as np
 from sklearn.manifold import TSNE
 from sklearn.decomposition import PCA
-import matplotlib.pyplot as plt
 
 # 生成3個集群資料
 
@@ -1512,7 +1465,6 @@ print("------------------------------------------------------------")  # 60個
 
 # 使用BOW猜測文章大意
 
-import numpy as np
 from sklearn.feature_extraction.text import CountVectorizer
 
 # 載入資料
@@ -1584,8 +1536,6 @@ print("------------------------------------------------------------")  # 60個
 
 # 使用BOW猜測文章大意
 
-import numpy as np
-import pandas as pd
 from sklearn.feature_extraction.text import CountVectorizer
 
 # 測試資料
@@ -1626,11 +1576,8 @@ from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
 from nltk import WordNetLemmatizer
-import matplotlib.pyplot as plt
 from wordcloud import WordCloud
 from math import log, sqrt
-import pandas as pd
-import numpy as np
 import re
 
 # 讀取資料集
@@ -1750,6 +1697,7 @@ from sklearn.metrics import classification_report, confusion_matrix
 
 print(classification_report(y_test, y_pred))
 
+print("混淆矩陣")
 cc = confusion_matrix(y_test, y_pred)
 print(cc)
 
@@ -1771,3 +1719,4 @@ print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
 sys.exit()
+

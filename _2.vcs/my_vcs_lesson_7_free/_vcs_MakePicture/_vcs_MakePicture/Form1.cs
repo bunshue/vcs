@@ -3673,6 +3673,5 @@ namespace _vcs_MakePicture
                 g.FillEllipse(sb, new Rectangle(x_st + width / 4, y_st + height / 4, width / 2, height / 2));
             }
         }
-
     }
 }

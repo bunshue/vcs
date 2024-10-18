@@ -17,7 +17,7 @@ csv_reader = csv.reader(csvfile, delimiter="\t")  # 建立reader物件使用 '\t
 
 4. csv.DictReader()
 
-5. pandas(搬走)
+5. pandas df = pd.DataFrame (搬走)
 
 6. 應用範例
 
@@ -465,3 +465,4 @@ print()
 
 
 #地點,日期,天文曙光始,航海曙光始,民用曙光始,日出時刻,方位,過中天,仰角,日沒時刻,方位,民用暮光終,航海暮光終,天文暮光終
+
