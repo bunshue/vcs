@@ -458,7 +458,7 @@ df3.sort_values(by=["順序"])
 
 print(df3)
 
-df3.plot()
+df3.plot()  # 無參數, 預設就是 line
 
 plt.show()
 
@@ -602,7 +602,7 @@ print(fixed_df[:3])
 
 print(fixed_df["Berri 1"])
 
-fixed_df["Berri 1"].plot()
+fixed_df["Berri 1"].plot()  # 無參數, 預設就是 line
 
 plt.show()
 
@@ -621,7 +621,7 @@ df = pd.read_csv(
     dayfirst=True,
     index_col="Date",
 )
-df["Berri 1"].plot()
+df["Berri 1"].plot()  # 無參數, 預設就是 line
 
 plt.show()
 
@@ -646,7 +646,7 @@ bikes = pd.read_csv(
     dayfirst=True,
     index_col="Date",
 )
-bikes["Berri 1"].plot()
+bikes["Berri 1"].plot()  # 無參數, 預設就是 line
 plt.show()
 
 berri_bikes = bikes[["Berri 1"]].copy()
@@ -771,7 +771,7 @@ print("------------------------------------------------------------")  # 60個
 temperatures = weather_mar2012[[u'Temp (C)']].copy()
 print(temperatures.head)
 temperatures.loc[:,'Hour'] = weather_mar2012.index.hour
-temperatures.groupby('Hour').aggregate(np.median).plot()
+temperatures.groupby('Hour').aggregate(np.median).plot()  # 無參數, 預設就是 line
 
 plt.show()
 """
@@ -822,7 +822,7 @@ print(is_snowing[:5])
 
 # More useful!
 is_snowing = is_snowing.astype(float)
-is_snowing.plot()
+is_snowing.plot()  # 無參數, 預設就是 line
 
 plt.show()
 
@@ -962,7 +962,7 @@ print(s.resample("1m").sum())
 
 plt.figure(figsize=(10, 6))
 cs = s.cumsum()
-cs.plot()
+cs.plot()  # 無參數, 預設就是 line
 plt.title("aaa")
 plt.show()
 
@@ -1018,12 +1018,12 @@ df = pd.DataFrame(dists)
 print(df)
 
 # df.to_html("ch9-4-2-01.html")  #df轉html
-df.plot()
+df.plot()  # 無參數, 預設就是 line
 
 df2 = pd.DataFrame(dists, columns=["population"], index=dists["name"])
 print(df2)
 # df2.to_html("ch9-4-2-02.html")  #df轉html
-df2.plot()
+df2.plot()  # 無參數, 預設就是 line
 
 plt.title("eee")
 plt.show()
@@ -1157,13 +1157,10 @@ print("------------------------------------------------------------")  # 60個
 weight = [3, 48, 33, 8, 38, 16, 36, 29, 22, 6, 12, 42]
 animals = ["鼠", "牛", "虎", "兔", "龍", "蛇", "馬", "羊", "猴", "雞", "狗", "豬"]
 
-x = pd.Series(weight)
+x = pd.Series(weight, index=animals)
 
 x.plot(kind="bar", rot=0)
-x.plot()
-
-x = pd.Series(weight, index=animals)
-x.plot()
+x.plot()  # 無參數, 預設就是 line
 
 plt.show()
 
@@ -1172,16 +1169,12 @@ print("------------------------------------------------------------")  # 60個
 weight = [3, 48, 33, 8, 38, 16, 36, 29, 22, 6, 12, 42]
 animals = ["鼠", "牛", "虎", "兔", "龍", "蛇", "馬", "羊", "猴", "雞", "狗", "豬"]
 
-fruits = ["蘋果", "梨子", "香蕉", "橙子"]
-percentage = [30, 10, 40, 20]
-
-
-s = pd.Series(percentage, index=fruits, name="水果")
+s = pd.Series(weight, index=animals, name="動物")
 print(s)
 
-# s.plot(kind="pie")
+#s.plot(kind="pie") # 無 explode
 
-explode = [0.1, 0.3, 0.1, 0.3]
+explode = [0.1, 0.3, 0.1, 0.3, 0.1, 0.3, 0.1, 0.3, 0.1, 0.3, 0.1, 0.3]
 s.plot(kind="pie", figsize=(6, 6), explode=explode)
 
 plt.show()
@@ -1192,7 +1185,7 @@ print("------------------------------------------------------------")  # 60個
 data1 = pd.Series({"鼠": 3, "牛": 48, "虎": 33, "兔": 8, "龍": 38})
 print(data1)
 
-data1.name = ""
+data1.name = "動物"
 
 # 控制餅圖為正圓
 plt.axes(aspect="equal")
@@ -1218,7 +1211,7 @@ print("------------------------------------------------------------")  # 60個
 s = pd.Series(np.random.randn(1000), index=pd.date_range("1/1/2000", periods=1000))
 s = s.cumsum()  # 計算累積值 cumulative sum
 
-s.plot()
+s.plot()  # 無參數, 預設就是 line
 
 plt.show()
 
@@ -1226,7 +1219,7 @@ plt.show()
 df = pd.DataFrame(np.random.randn(1000, 4), index=s.index, columns=list("ABCD"))
 df = df.cumsum()
 
-df.plot()
+df.plot()  # 無參數, 預設就是 line
 
 plt.show()
 
@@ -1236,7 +1229,7 @@ print("------------------------------------------------------------")  # 60個
 Pandas繪圖筆記
 有以下類型的圖
 
-折線圖df.plot()
+折線圖df.plot()  # 無參數, 預設就是 line
 柱狀圖df.plot(kind='bar')
 橫向柱狀圖df.plot(kind='barh')
 直方圖df.plot(kind='hist')
@@ -1497,7 +1490,7 @@ df.index = df["Month"]  # 自定列索引為Month內容
 
 print(df[["Green Island", "Guguan"]].head())
 
-df[["Green Island", "Guguan"]].plot()
+df[["Green Island", "Guguan"]].plot()  # 無參數, 預設就是 line
 
 plt.show()
 
@@ -1509,7 +1502,7 @@ df.index = df["Month"]  # 自定列索引為Month內容
 df = df.drop("Month", axis=1)  # 刪除原本的月份行資料
 print(df.head())
 
-df.plot()
+df.plot()  # 無參數, 預設就是 line
 
 plt.show()
 
@@ -1529,7 +1522,7 @@ m = [4522, 3101, 5211, 4613]
 s = pd.Series(m, index=a)
 print(s)
 
-s.plot()
+s.plot()  # 無參數, 預設就是 line
 
 plt.show()
 
@@ -1546,7 +1539,7 @@ s = pd.Series(m, index=a)
 
 print(s)
 
-s.plot()
+s.plot()  # 無參數, 預設就是 line
 
 plt.show()
 
@@ -1556,7 +1549,7 @@ s.index = ["EAST", "WEST", "SOUTH", "NORTH"]
 
 print(s)
 
-s.plot()
+s.plot()  # 無參數, 預設就是 line
 
 plt.show()
 
@@ -1576,7 +1569,7 @@ df1 = df["Green Island"]
 print(df1.head())
 
 # Step 02
-df1.plot()
+df1.plot()  # 無參數, 預設就是 line
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
@@ -1589,7 +1582,7 @@ print(df2.head())
 
 # Step 04
 
-df2.plot()
+df2.plot()  # 無參數, 預設就是 line
 
 plt.show()
 
@@ -1605,7 +1598,7 @@ print(df_T.head())
 
 df3 = df_T[3]
 
-df3.plot()
+df3.plot()  # 無參數, 預設就是 line
 
 plt.show()
 
@@ -1738,7 +1731,6 @@ df.to_html("tmp_ch9-4-4.html")
 
 print("------------------------------------------------------------")  # 60個
 
-
 """
 
 #準備做 pandas 多圖 TBD
@@ -1774,7 +1766,7 @@ ax2.set_xlabel('Xlabel')
 
 plt.show()
 """
-
+print("------------------------------------------------------------")  # 60個
 
 # pd_plot1.py
 
@@ -1812,3 +1804,170 @@ df = pd.DataFrame(
     columns=[2015, 2016, 2017, 2018, 2019],
 )
 df.plot(kind="pie", subplots=True, figsize=[20, 20])
+
+print("------------------------------------------------------------")  # 60個
+
+#from pandas import Series, DataFrame
+
+weight = [3, 48, 33, 8, 38, 16, 36, 29, 22, 6, 12, 42]
+animals = ["鼠", "牛", "虎", "兔", "龍", "蛇", "馬", "羊", "猴", "雞", "狗", "豬"]
+
+x = pd.Series(weight, index = animals)
+
+x.plot()  # 無參數, 預設就是 line
+
+x.plot(kind="bar", rot=45)  # bar 圖
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+# Series的索引會被作為subplot的 X軸，可以使用參數 use_index = False 來禁用該功能
+# X軸的刻度可以透過 xticks 和 xlim 選向來調整
+# Y軸的刻度可以透過 yticks 和 ylim 選向來調整
+
+N = 10
+# DataFrame的 plot()方法會在subplot中為每個 column繪製一條線，並自動創建legend
+df = pd.DataFrame(np.random.randn(N, 4).cumsum(0), 
+               index = np.arange(0, 100, N), 
+               columns = ['A', 'B', 'C', 'D'])
+print(df)
+
+
+df.plot()  # 無參數, 預設就是 line
+plt.show()
+
+
+#柱狀圖
+
+# 設定 kind = 'bar' 或 'barh' 即可繪製柱狀圖
+# Series和 DataFrame的 索引會被當作subplot的 X軸(bar)或 Y軸(barh)
+
+fig, axes = plt.subplots(2, 1)
+data = pd.Series(np.random.rand(16), index = list('abcedfghijklmnop'))
+data.plot(ax = axes[0], kind = 'bar')
+data.plot(ax = axes[1], kind = 'barh')
+
+plt.show()
+
+
+
+df = pd.DataFrame(np.random.rand(6, 4), 
+               index = ['one', 'two', 'three', 'four', 'five', 'six'], 
+               columns = pd.Index(['A', 'B', 'C', 'D'], name = 'Genus'))
+print(df)
+
+# DataFrame的每一 row的值分為一組
+
+# DataFrame的每一 row的值分為一組
+# columns 索引的 name屬性 被用來做為 legend的標題
+df.plot(kind = 'bar')
+
+plt.show()
+
+
+
+# 設定 stacked = True, 可繪製 堆積柱狀圖
+df.plot(kind = 'barh', stacked = True)
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+s = pd.Series([2, 3, 5, 2, 5, 6, 7, 8, 9, 10, 13, 2, 3, 4, 7, 8, 9, 0, 0, 2, 2, 1])
+
+# 用Series的 value_counts()直接繪製柱狀圖，表達每個數字出現的次數
+vc = s.value_counts()
+vc.plot(kind = 'bar')
+plt.show()
+
+
+
+tips = pd.read_csv('data/tips.csv')
+cc = tips[:5]
+print(cc)
+
+
+# 用 crosstab()方法創建一個 交叉表，預設統計 發生的次數(計數)
+party_counts = pd.crosstab(tips.day , tips['size'])
+print(party_counts)
+
+party_counts.plot(kind = 'bar')
+plt.show()
+
+""" NG
+party_counts = party_counts.ix[:, 2:5]
+party_counts.plot(kind = 'bar', stacked = True)
+plt.show()
+"""
+
+print(party_counts)
+
+party_counts = party_counts.div(party_counts.sum(1), axis = 0)
+print(party_counts)
+
+cc = party_counts.sum(1)
+print(cc)
+
+party_counts.plot(kind = 'bar', stacked = True)
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+#直方圖(histogram)和密度圖
+
+tips = pd.read_csv('data/tips.csv')
+cc = tips[:5]
+print(cc)
+
+# 可以用 plot(kind = 'hist') 來繪製直方圖
+tips.total_bill.plot(kind = 'hist', bins = 50)
+plt.title('total_bill')
+plt.show()
+
+
+# 也可以用 hist() 來繪製直方圖
+tips.total_bill.hist(bins = 50)
+plt.title('total_bill')
+plt.show()
+
+
+# tip比例 直方圖
+tip_ratios = (tips.tip / tips.total_bill)
+tip_ratios.hist(bins = 50)
+plt.title('tip ratio')
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+#散佈圖(scatter plot)
+
+macro = pd.read_csv('data/macrodata.csv')
+cc = macro[:5]
+print(cc)
+
+data = macro[['cpi', 'm1', 'tbilrate', 'unemp']]
+cc = data[:5]
+print(cc)
+
+# diff(): 以上下元素的差異值填入
+trans_data = np.log(data).diff().dropna()
+cc = trans_data[:5]
+print(cc)
+
+# plt.scatter()可以繪製散佈圖，標示每一個資料row的 兩個columns的數據分布
+plt.scatter(trans_data.m1, trans_data.unemp)
+plt.title('Changes in log({0}) vs. log({1})'.format('m1', 'unemp'))
+plt.show()
+
+trans_data.plot.scatter('m1', 'unemp')
+plt.show()
+
+""" NG
+# pandas 提供了 scatter_matrix()函數，方便由DataFrame繪製散佈圖
+# 會自動的產生各個columns之間的 scatter diagram
+pd.scatter_matrix(trans_data, color = 'k', alpha = 0.3)
+plt.show()
+"""
+
+

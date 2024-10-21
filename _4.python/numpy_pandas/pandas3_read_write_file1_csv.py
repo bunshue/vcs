@@ -155,7 +155,6 @@ filename = "tmp_grades.csv"
 df.to_csv(filename, index=False, encoding="utf8")
 print("df寫入csv檔案 :", filename)
 
-
 print("pd讀取http csv檔案 :", filename)
 df2 = pd.read_csv(filename)
 print(df2.head())
@@ -368,7 +367,6 @@ df_state[:10].Time.plot(kind="bar")
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
-
 
 filename = "data/iris_sample.csv"
 

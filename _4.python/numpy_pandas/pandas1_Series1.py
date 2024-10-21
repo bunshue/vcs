@@ -1,3 +1,5 @@
+import sys
+import numpy as np
 import pandas as pd
 
 print("------------------------------------------------------------")  # 60個
@@ -111,16 +113,21 @@ print("------------------------------------------------------------")  # 60個
 
 # 單取出「索引值」或者「內容值」-.index、.values
 
-index = ["鼠", "牛", "虎", "兔", "龍"]
-data = [10, 5, 8, 12, 3]
-series = pd.Series(data, index=index)
+index = ["鼠", "牛", "虎", "兔", "龍", "蛇", "馬", "羊", "猴", "雞", "狗", "豬"]
+weight = [3, 48, 33, 8, 38, 16, 36, 29, 22, 6, 12, 42]
+
+series = pd.Series(weight, index=index)
 print(series)
 
 series_index = series.index
 series_values = series.values
-
 print(series_index)
 print(series_values)
+
+print("畫出來")
+series.plot()
+
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -210,9 +217,7 @@ print(se[2])
 print("-" * 6)
 print(se[2:5])
 
-
 print("------------------------------------------------------------")  # 60個
-
 
 lst = ["Bike", "Bus", "Car", "Truck"]
 print(type(lst))
@@ -224,6 +229,13 @@ print(s)
 
 print("------------------------------------------------------------")  # 60個
 
+# Series
+#data = pd.Series(np.random.randn(1000), index=np.arange(1000))
+data = s2 = pd.Series([65, 90, 81, 79])  # 國文成績
+#data = data.cumsum()
+data.plot()
+
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 

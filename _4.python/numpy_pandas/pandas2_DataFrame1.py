@@ -223,9 +223,6 @@ print('df使用記憶體大小')
 cc = df.info(memory_usage='deep')
 print(cc)
 
-print('檢查df內是否有重複資料')
-print(df.duplicated())
-
 print("df之大小")
 M, N = df.shape
 print(df.shape)
@@ -258,25 +255,14 @@ print(df.std())
 print(df.min())
 print(df.median())
 print(df.max())
+print(df.sum())
+
+# print('df若有字串(中英文), 不能直接做mean(), 但可做 max() min() sum()')
 
 """
 
 # 對 DataFrame 的值做運算
 
-"""
-# 排序
-print('排序, 依 國文 欄, 預設為上升')
-print(df.sort_values(by="國文"))#預設上升
-#print(df.sort_values(by="國文", ascending=True))#上升
-#print(df.sort_values(by="國文", ascending=False))#下降
-df = df.sort_values(by=["英文", "自然"], ascending=True)
-print(df)
-
-print("排序 axis=1, 依column欄名排序, 橫向, 下降")
-print(df.sort_index(axis=1, ascending=False))
-print(df.sort_index(axis=0))
-
-"""
 print("計算每一科的平均, axis=0, 0直1橫")
 print(df.mean(axis=0))
 
@@ -306,8 +292,19 @@ print("新增欄位 體育")
 df["體育"] = [88, 98, 80, 94]
 print(df)
 
-print("顯示 體育 欄的資料")
-print(df["體育"])
+print("移除欄位 自然")
+df4 = df.drop(["自然"], axis=1)
+print(df4)
+
+print("顯示 數學 欄的資料")
+cc = df["數學"]
+print(cc)
+
+print("對df的某欄做運算")
+print("最重 :", df["數學"].max())
+print("最輕 :", df["數學"].min())
+print("總重 :", df["數學"].sum())
+print("平均 :", df["數學"].mean())
 
 print("------------------------------------------------------------")  # 60個
 
@@ -364,10 +361,6 @@ print("移除索引 0 2, 即 唐三藏 豬八戒")
 df3 = df.drop(df.index[[0, 2]])
 print(df3)
 
-print("移除欄位 自然")
-df4 = df.drop(["自然"], axis=1)
-print(df4)
-
 # 不可重建
 # print('重建df')
 # df = make_data_frame_from_dict()  # 字典 轉 df
@@ -397,9 +390,6 @@ print("df反置")
 df7 = df.T
 print(df7)
 
-df8 = df.loc[[1, 2], ["國文", "英文"]]
-print(df8)
-
 # 前 index, 後 column
 # index [0, 1, 2, 3] 表示 索引 "唐三藏", "孫悟空", "豬八戒", "沙悟淨"
 # column [3, 4, 5] 表示 欄位 "數學" "社會" "自然"
@@ -424,15 +414,6 @@ print(cc)
 cc = df[df.index % 2 == 0]
 print(cc)
 
-# 比較loc(彈性較大)和iloc顯示表格內容
-# loc使用行索引標籤(column index label)和列索引標籤(row index label)
-cc = df.loc[1]["姓名"]
-print(cc)
-
-# 指定顯示dataframe中是數值型態的欄位的最大max()或最小min()數據
-print("數學最低 :", df["數學"].min())
-print("數學最高 :", df["數學"].max())
-
 print("------------------------------------------------------------")  # 60個
 
 print("顯示欄資料")
@@ -444,16 +425,6 @@ print("df[df.數學>=80] ->")
 print(df[df.數學 >= 80])
 
 print("------------------------------")  # 30個
-
-print('df.loc[:, "數學"] ->')
-print(df.loc[:, "數學"])
-
-print('df.loc["孫悟空":"豬八戒", "數學":"社會"] ->')
-print(df.loc["孫悟空":"豬八戒", "數學":"社會"])
-print('df.loc[:沙悟淨, "數學":"社會"] ->')
-print(df.loc[:"沙悟淨", "數學":"社會"])
-print('df.loc["孫悟空":, "數學":"社會"] ->')
-print(df.loc["孫悟空":, "數學":"社會"])
 
 print("------------------------------")  # 30個
 
@@ -555,10 +526,6 @@ print("英文 > 75 者")
 df2 = df[df["英文"] >= 75]
 print(df2)
 
-print("國文 > 75 且 英文 > 75 者")
-df3 = df.loc[df["國文"] >= 75][df["英文"] >= 75]
-print(df3)
-
 print("------------------------------------------------------------")  # 60個
 
 print("建立空的df, 再加入資料至df")
@@ -573,52 +540,6 @@ df["自然"] = [95, 74, 89, 85]
 # df.index = ["唐三藏", "孫悟空", "豬八戒", "沙悟淨"] 不能設定文字
 print(df)
 
-print("看 索引 1~3, 數學 社會 成績")
-df = df.loc[range(1, 4), ["數學", "社會"]]
-print(df)
-
-print("------------------------------------------------------------")  # 60個
-
-print("簡單df操作")
-
-df = make_data_frame()
-print(df)
-
-"""
-print("畫出來")
-df.plot(xticks=range(0, 4))
-plt.show()
-"""
-
-print("孫悟空的成績(df.values[1])：")
-print(df.values[1])
-print("孫悟空的英文成績(df.values[1][2])：")
-print(df.values[1][2])
-
-print("------------------------------------------------------------")  # 60個
-
-print("有重複資料之df")
-
-datas = [
-    [92, 81, 92, 81, 92, 81],  # 國文
-    [89, 79, 89, 82, 72, 82],  # 英文
-    [71, 92, 71, 89, 95, 89],  # 數學
-    [88, 89, 88, 98, 77, 98],  # 社會
-    [95, 74, 95, 89, 85, 89],  # 自然
-]
-columns = ["國文", "英文", "數學", "社會", "自然"]
-index = ["唐三藏", "孫悟空", "唐三藏", "豬八戒", "沙悟淨", "豬八戒"]
-df = pd.DataFrame(np.array(datas).T, columns=columns, index=index)
-print(df)
-
-print("檢查df內是否有重複資料")
-print(df.duplicated())
-
-print("去重函數 drop_duplicates")
-df.drop_duplicates(inplace=True)
-
-print("去重後的df")
-print(df)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -731,32 +652,6 @@ for i in range(4):
     print("中文名 :", df.iloc[i, 0], end="\t")
     print("數學 :", df.iloc[i, 2], end="\n")
 
-print("社會(第3欄)")
-print(df.iloc[0:12, 3])
-
-print("社會(部分)")
-print(df.iloc[[0, 1, 3], 3])
-
-print("排序")
-df1 = df.sort_values("數學")
-print("依 數學 排序, 檢視前幾行")
-print(df1.head())
-
-print("對df的某欄做運算")
-print("最重 :", df["數學"].max())
-print("最輕 :", df["數學"].min())
-print("總重 :", df["數學"].sum())
-print("平均 :", df["數學"].mean())
-
-# print('df若有字串(中英文), 不能直接做mean(), 但可做 max() min() sum()')
-# print(df.max()) OK
-# print(df.min()) OK
-# print(df.sum()) OK
-# print(df.mean()) NG
-
-print("df.iloc[1, :] ->")
-print(df.iloc[1, :])
-
 print("------------------------------------------------------------")  # 60個
 
 print("建立df, 字典 轉 df")
@@ -782,47 +677,6 @@ print("索引 1 的資料(孫悟空)")
 print(df.values[1])
 print("索引 1 欄位 2 的資料(孫悟空 數學)")
 print(df.values[1][2])
-
-print("看 孫悟空 數學 的資料")
-print(df.loc["孫悟空", "數學"])
-
-print("看 唐三藏 國文 社會 的資料")
-print(df.loc["唐三藏", ["國文", "社會"]])
-
-print("看 唐三藏 和 豬八戒 國文 和 社會 的資料")
-print(df.loc[["唐三藏", "豬八戒"], ["國文", "社會"]])
-
-print("看 唐三藏 到 豬八戒 國文 到 數學 的資料")
-print(df.loc["唐三藏":"豬八戒", "國文":"數學"])
-
-print("看 豬八戒 的 所有 資料")
-print(df.loc["豬八戒", :])
-
-print("看 從頭 到 豬八戒 的 數學 到 社會 的資料")
-print(df.loc[:"豬八戒", "數學":"社會"])
-
-print("看 豬八戒 到 末尾 的 數學 到 社會 的資料")
-print(df.loc["豬八戒":, "數學":"社會"])
-
-print("看 索引3欄位4的資料, 即 豬八戒 自然")
-print(df.iloc[2, 3])
-
-cc = df.iloc[0, [0, 4]]
-print(cc)
-cc = df.iloc[[0, 1], [2, 3]]
-print(cc)
-
-cc = df.iloc[0:3, 2:5]
-print(cc)
-
-cc = df.iloc[2, :]
-print(cc)
-
-cc = df.iloc[:2, 2:5]
-print(cc)
-
-cc = df.iloc[1:, 2:5]
-print(cc)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -995,12 +849,6 @@ print(df.loc["20130102"])
 print(df.loc[:, ["A", "B"]])
 print(df.loc["20130102", ["A", "B"]])
 
-# select by position: iloc
-print(df.iloc[3])
-print(df.iloc[3, 1])
-print(df.iloc[3:5, 0:2])
-print(df.iloc[[1, 2, 4], [0, 2]])
-
 """ no ix
 # mixed selection: ix
 print(df.ix[:3, ["A", "C"]])
@@ -1048,10 +896,6 @@ index = ["唐三藏", "孫悟空", "豬八戒", "沙悟淨"]
 df = pd.DataFrame(np.array(datas).T, columns=columns, index=index)
 print(df)
 
-print("顯示第0列")
-cc = df.iloc[0]
-print(cc)
-
 print("顯示 國文 欄")
 cc = df.國文
 print(cc)
@@ -1063,15 +907,6 @@ print("顯示df之 國文 英文 社會 欄")
 print(df[["國文", "英文", "社會"]])
 
 print("顯示")
-# print(df.loc[3, 0])
-
-print("顯示")
-print(df.iloc[3, 0])
-
-print("顯示")
-print(df.iloc[2:5, 0:2])
-
-print("顯示")
 print(df[df.數學 > 80])
 
 print("加入TAG")
@@ -1079,18 +914,6 @@ df["TAG"] = ["AAA", "BBB", "AAA", "BBB"]
 print(df)
 
 print(df.groupby("TAG").sum())
-
-print("------------------------------------------------------------")  # 60個
-
-df = pd.read_csv("data2/test3.csv")
-print(df)
-
-print("------------------------------")  # 30個
-
-size_mapping = {"XXL": 5, "XL": 4, "L": 3, "M": 2, "S": 1, "XS": 0}
-
-df["尺寸"] = df["尺寸"].map(size_mapping)
-print(df)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1128,8 +951,8 @@ print(titanic.isnull().sum())
 print(sum(titanic["Age"].isnull()))
 
 print("---補值成平均值---")
-avg_age = titanic["Age"].mean()
-titanic["Age"].fillna(avg_age, inplace=True)
+VALUE = titanic["Age"].mean()
+titanic["Age"].fillna(value=VALUE, inplace=True)  # 將指定欄位內空資料填入指定數值
 print(sum(titanic["Age"].isnull()))
 
 print("---顯示性別人數和計算平均年齡---")
@@ -1273,60 +1096,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("刪除 df 的 欄位 或 索引 – drop() + 缺失資料處理")
-
-""" data/data_with_NaN.csv
-     A    B    C    D
-0  0.5  0.9  0.4  NaN
-1  0.8  0.6  NaN  NaN
-2  0.7  0.3  0.8  0.9
-3  0.8  0.3  NaN  0.2
-4  0.9  NaN  0.7  0.3
-5  0.2  0.7  0.6  NaN
-"""
-df = pd.read_csv("data/data_with_NaN.csv")
-
-# df 轉 html
-# df.to_html("test_csv2html.html")
-
-print("df 原始資料")
-print(df)
-
-# 刪除所有 NaN 的記錄
-df1 = df.dropna()
-print("df1 有任何NaN的列 刪除")
-print(df1)
-
-df2 = df.dropna(how="any")
-print("df2 有任何NaN的列 刪除")
-print(df2)
-
-df3 = df.dropna(how="all")
-print("df3 全部都NaN的列 刪除")
-print(df3)
-
-df4 = df.dropna(subset=["B", "C"])
-print("df4 B C 欄有NaN的列 刪除")
-print(df4)
-
-df5 = pd.isnull(df)
-print("df5 建立布林遮罩")
-print(df5)
-
-df6 = df.fillna(value=1)
-print("df6 將 df 的 缺失資料 補值 寫入數值")
-print(df6)
-
-print("df 欄位B 的 缺失資料 補值 補上原先欄位B 的 平均數")
-df["B"] = df["B"].fillna(df["B"].mean())
-print(df)
-
-print("df 欄位C 的 缺失資料 補值 補上原先欄位C 的 中位數")
-df["C"] = df["C"].fillna(df["C"].median())
-print(df)
-
-print("------------------------------------------------------------")  # 60個
-
 datas = np.arange(24).reshape((6, 4))
 columns = ["A", "B", "C", "D"]
 dates = pd.date_range("20130101", periods=6)
@@ -1336,7 +1105,9 @@ df = pd.DataFrame(datas, columns=columns, index=dates)
 df.iloc[0, 1] = np.nan
 df.iloc[1, 2] = np.nan
 print(df.dropna(axis=0, how="any"))  # how={'any', 'all'}
-print(df.fillna(value=0))
+
+VALUE = 0
+print(df.fillna(value=VALUE))  # 將df內空資料填入指定數值
 
 print("空資料 :")
 print(pd.isnull(df))
@@ -1347,68 +1118,32 @@ print("------------------------------------------------------------")  # 60個
 # 用 dropna() 刪除含有 NaN ( 缺漏值 ) 的列
 
 #   借用 NumPy 的 np.nan 來設定 NaN 值
-
 df = pd.DataFrame(np.random.rand(8, 4))
 
 #   設定亂數種子為 0
-
 #   用 NumPy 隨機產生 8x4 的亂數資料並轉成 DataFrame
 
 df.iloc[1, 0] = np.nan
-
 df.iloc[2, 2] = np.nan
-
 df.iloc[6, 1] = np.nan
-
 df.iloc[5:, 3] = np.nan
 
 #   將部分值改成 NaN
-
 print(df)
 
 #   檢視 DataFrame
-
 df_dropped = df.dropna()
-
 print(df_dropped)
-
 df_dropped_2 = df[[0, 1, 2]].dropna()
-
 print(df_dropped_2)
-
-print("------------------------------------------------------------")  # 60個
-
-# 用 fllna() 填補 NaN 值
-
-df = pd.DataFrame(np.random.rand(8, 4))
-
-df.iloc[1, 0] = np.nan
-
-df.iloc[2, 2] = np.nan
-
-df.iloc[6, 1] = np.nan
-
-df.iloc[5:, 3] = np.nan
-
-df_fill = df.fillna(0)  # 在 NaN 之處填入 0
-
-print(df_fill)
-
-df_fill_2 = df.ffill()
-
-print(df_fill_2)
-
-print(df)
-
-df_fill_3 = df.fillna(df.mean())
-
-print(df_fill_3)
 
 print("------------------------------------------------------------")  # 60個
 
 # 讀取資料
 df = pd.read_csv("_new/customer.csv")
-# 空值的處理
+print(df)
+
+print("空值的處理")
 
 print("各欄位有 空資料 的個數 :")
 print(df.isnull().sum())
@@ -1416,106 +1151,106 @@ print(df.isnull().sum())
 print("有空值的記錄筆數:", df.isnull().any(axis=1).sum())
 print("有空值的欄位數:", df.isnull().any(axis=0).sum())
 print("age欄有空值的記錄:")
-print(df[df["age"].isnull()])
-
-print("------------------------------------------------------------")  # 60個
-
-# 讀取資料
-df = pd.read_csv("_new/customer.csv")
-
-# 將age的空值填入0
-df_sample = df.copy()
-df_sample["age"] = df_sample["age"].fillna(value=0)
-print(df_sample.head())
-
-# 將age的空值填入平均值
-df_sample = df.copy()
-df_sample["age"] = df_sample["age"].fillna(value=df_sample["age"].mean())
-print(df_sample.head())
-
-# 以前一個值往下填ffill或後一個值往上填bfill
-df_sample["gender"] = df_sample["gender"].ffill()
-df_sample["area"] = df_sample["area"].ffill()
-print(df_sample.head())
-
-# 刪除不完整的資料
-print(df.dropna())
-
-print("------------------------------------------------------------")  # 60個
-
-# 讀取資料
-df = pd.read_csv("_new/customer.csv")
-
-# 資料基本清理
-df_sample = df.copy()
-df_sample["age"] = df_sample["age"].fillna(value=df_sample["age"].mean())
-df_sample["gender"] = df_sample["gender"].ffill()
-df_sample["area"] = df_sample["area"].ffill()
-
-# 去除重覆記錄
-df_sample.drop_duplicates(subset="id", keep="first", inplace=True)
-print(df_sample.head())
-
-# 去除欄位中的空白
-df_sample["job"] = df_sample["job"].str.strip()
-df_sample["job"] = df_sample["job"].str.replace(" ", "")
-print(df_sample.head())
-
-# 轉換值的格式
-df_sample["age"] = df_sample["age"].astype("int32")
-print(df_sample.head())
-
-print("------------------------------------------------------------")  # 60個
-
-# 讀取資料
-df = pd.read_csv("_new/customer.csv")
-
-# 資料基本清理
-df_sample = df.copy()
-df_sample["age"] = df_sample["age"].fillna(value=df_sample["age"].mean())
-df_sample["gender"] = df_sample["gender"].ffill()
-df_sample["area"] = df_sample["area"].ffill()
-df_sample.drop_duplicates(subset="id", keep="first", inplace=True)
-df_sample["job"] = df_sample["job"].str.strip()
-df_sample["job"] = df_sample["job"].str.replace(" ", "")
-df_sample["age"] = df_sample["age"].astype("int32")
-
-# 篩選女性的資料
-print(df_sample[(df_sample["gender"] == "Female")])
-
-# 篩選男性且大於50歲的資料
-print(df_sample[(df_sample["gender"] == "Male") & (df_sample["age"] > 50)])
-
-# 篩選住在新北市三重區或基隆市中正區的資料
-print(df_sample[(df_sample["area"] == "新北市三重區") | (df_sample["area"] == "基隆市中正區")])
-
-print("------------------------------------------------------------")  # 60個
-
-# 讀取資料
-df = pd.read_csv("_new/customer.csv")
-
-# 資料基本清理
-df_sample = df.copy()
-df_sample["age"] = df_sample["age"].fillna(value=df_sample["age"].mean())
-df_sample["gender"] = df_sample["gender"].ffill()
-df_sample["area"] = df_sample["area"].ffill()
-df_sample.drop_duplicates(subset="id", keep="first", inplace=True)
-df_sample["job"] = df_sample["job"].str.strip()
-df_sample["job"] = df_sample["job"].str.replace(" ", "")
-df_sample["age"] = df_sample["age"].astype("int32")
-
-# 客戶中男女生的平均年齡
-print(df_sample.groupby("gender")["age"].mean())
+df2 = df[df["age"].isnull()]
+print(df2)
 
 print("------------------------------")  # 30個
 
-# 客戶中住各區的人數
-print(df_sample.groupby("area")["id"].count())
+print("將age的空值填入0")
+df_sample = df.copy()
+VALUE = 0
+df_sample["age"] = df_sample["age"].fillna(value=VALUE)  # 將指定欄位內空資料填入指定數值
+print(df_sample.head())
+
+print("將age的空值填入平均值")
+df_sample = df.copy()
+VALUE = df_sample["age"].mean()
+df_sample["age"] = df_sample["age"].fillna(value=VALUE)  # 將指定欄位內空資料填入指定數值
+print(df_sample.head())
+
+df_sample["gender"] = df_sample["gender"].ffill()  #ffill()拿前一個值往下填, 承上
+df_sample["area"] = df_sample["area"].ffill()  #ffill()拿前一個值往下填, 承上
+print(df_sample.head())
+
+print("刪除不完整的資料")
+df3 = df.dropna()
+print(df3)
 
 print("------------------------------")  # 30個
 
-# 客戶中男女生的平均年齡、最年長及最年輕的年齡
-print(df_sample.groupby("gender")["age"].agg(["mean", "max", "min"]))
+print("資料基本清理")
+df_sample = df.copy()
+VALUE = df_sample["age"].mean()
+df_sample["age"] = df_sample["age"].fillna(value=VALUE)  # 將指定欄位內空資料填入指定數值
+df_sample["gender"] = df_sample["gender"].ffill()  #ffill()拿前一個值往下填, 承上
+df_sample["area"] = df_sample["area"].ffill()  #ffill()拿前一個值往下填, 承上
+
+print("去除重覆記錄")
+df_sample.drop_duplicates(subset="id", keep="first", inplace=True)
+print(df_sample.head())
+
+print("去除欄位中的空白")
+df_sample["job"] = df_sample["job"].str.strip()
+df_sample["job"] = df_sample["job"].str.replace(" ", "")
+print(df_sample.head())
+
+print("轉換值的格式")
+df_sample["age"] = df_sample["age"].astype("int32")
+print(df_sample.head())
+
+print("------------------------------")  # 30個
+
+print("資料基本清理")
+df_sample = df.copy()
+VALUE = value=df_sample["age"].mean()
+df_sample["age"] = df_sample["age"].fillna(VALUE)  # 將指定欄位內空資料填入指定數值
+df_sample["gender"] = df_sample["gender"].ffill()  #ffill()拿前一個值往下填, 承上
+df_sample["area"] = df_sample["area"].ffill()  #ffill()拿前一個值往下填, 承上
+df_sample.drop_duplicates(subset="id", keep="first", inplace=True)
+df_sample["job"] = df_sample["job"].str.strip()
+df_sample["job"] = df_sample["job"].str.replace(" ", "")
+df_sample["age"] = df_sample["age"].astype("int32")
+
+print("篩選女性的資料")
+cc = df_sample[(df_sample["gender"] == "Female")]
+print(cc)
+
+print("篩選男性且大於50歲的資料")
+cc = df_sample[(df_sample["gender"] == "Male") & (df_sample["age"] > 50)]
+print(cc)
+
+print("篩選住在新北市三重區或基隆市中正區的資料")
+cc = df_sample[(df_sample["area"] == "新北市三重區") | (df_sample["area"] == "基隆市中正區")]
+print(cc)
+
+print("------------------------------")  # 30個
+
+print("資料基本清理")
+df_sample = df.copy()
+VALUE = value=df_sample["age"].mean()
+df_sample["age"] = df_sample["age"].fillna(VALUE)  # 將指定欄位內空資料填入指定數值
+df_sample["gender"] = df_sample["gender"].ffill()  #ffill()拿前一個值往下填, 承上
+df_sample["area"] = df_sample["area"].ffill()  #ffill()拿前一個值往下填, 承上
+df_sample.drop_duplicates(subset="id", keep="first", inplace=True)
+df_sample["job"] = df_sample["job"].str.strip()
+df_sample["job"] = df_sample["job"].str.replace(" ", "")
+df_sample["age"] = df_sample["age"].astype("int32")
+
+print("客戶中男女生的平均年齡")
+cc = df_sample.groupby("gender")["age"].mean()
+print(cc)
+
+print("------------------------------")  # 30個
+
+print("客戶中住各區的人數")
+cc = df_sample.groupby("area")["id"].count()
+print(cc)
+
+print("------------------------------")  # 30個
+
+print("客戶中男女生的平均年齡、最年長及最年輕的年齡")
+cc = df_sample.groupby("gender")["age"].agg(["mean", "max", "min"])
+print(cc)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1548,53 +1283,6 @@ print(df.loc[["豬八戒", "沙悟淨"], ["英文", "數學"]])
 print(df.loc[:, ["英文", "數學"]])
 
 print(df.loc["孫悟空":"豬八戒", "國文":"英文"])
-
-print(df.iloc[3])
-
-print(df.iloc[2:4, 1:3])
-
-print("------------------------------------------------------------")  # 60個
-
-print("字典 轉 df")
-
-datas = {
-    "國文": [92, 81, 81, 92],
-    "英文": [89, 79, 82, 72],
-    "數學": [71, 92, 89, 95],
-    "社會": [88, 89, 98, 77],
-    "自然": ["95", "74", "89", "85"],  # 字串
-}
-
-index = ["唐三藏", "孫悟空", "豬八戒", "沙悟淨"]
-df = pd.DataFrame(datas, index=index)
-print(df)
-
-print("將字串轉成數字")
-df["自然"] = df["自然"].astype("int64")
-print("印出 自然 > 90")
-print(df[df.自然 > 90])
-
-print("依照 數學 排序")
-df2 = df.sort_values("數學", ascending=False)
-print(df2)
-
-print("------------------------------------------------------------")  # 60個
-
-print("字典 轉 df")
-
-datas = {
-    "國文": [92, 81, 81, 92],
-    "英文": [89, 79, 82, 72],
-    "數學": [71, 92, 89, 95],
-}
-df = pd.DataFrame(datas)
-print(df)
-
-index = ["唐三藏", "孫悟空", "牛魔王", "沙悟淨"]
-df.columns = ["國文", "英文", "數學"]
-index[2] = "豬八戒"  # 修改 索引
-df.index = index
-print(df)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1670,8 +1358,8 @@ print("------------------------------")  # 30個
 df = pd.read_csv("data/titanic20.csv")
 
 print("將原df之 Age為空資料 之列 填入20")
-age = 20
-df["Age"] = df["Age"].fillna(value=age)
+VALUE = 20
+df["Age"] = df["Age"].fillna(value=VALUE)  # 將指定欄位內空資料填入指定數值
 
 print("欄位 Age 為 空資料 之個數")
 print(df["Age"].isnull().sum())
@@ -1683,28 +1371,13 @@ print("------------------------------")  # 30個
 df = pd.read_csv("data/titanic20.csv")
 
 print("將原df之 Age為空資料 之列 填入 Age 之平均")
-age = df["Age"].mean()
-df["Age"] = df["Age"].fillna(value=age)
+VALUE = df["Age"].mean()
+df["Age"] = df["Age"].fillna(value=VALUE)  # 將指定欄位內空資料填入指定數值
 
 print("欄位 Age 為 空資料 之個數")
 print(df["Age"].isnull().sum())
 
 # print("檢視前幾行\n", df.head())
-
-print("------------------------------------------------------------")  # 60個
-
-df = pd.read_csv("_new/sales.csv")
-df1 = df.drop_duplicates("Country")
-print(df1)
-
-print("------------------------------------------------------------")  # 60個
-
-df = pd.read_csv("_new/shoes.csv")
-print(df)
-size_mapping = {"XXL": 5, "XL": 4, "L": 3, "M": 2, "S": 1, "XS": 0}
-
-df["Size"] = df["Size"].map(size_mapping)
-print(df)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1971,30 +1644,6 @@ print(res)
 
 print("------------------------------------------------------------")  # 60個
 
-"""
-print("畫出來")
-
-# Series
-data = pd.Series(np.random.randn(1000), index=np.arange(1000))
-data = data.cumsum()
-##data.plot()
-
-# DataFrame
-
-datas = np.random.randn(1000, 4)
-columns=list("ABCD")
-index = np.arange(1000)
-df = pd.DataFrame(datas, columns=columns, index=index)
-df = df.cumsum()
-# plot methods:
-# 'bar', 'hist', 'box', 'kde', 'area', scatter', hexbin', 'pie'
-ax = df.plot.scatter(x="A", y="B", color="DarkBlue", label="Class 1")
-df.plot.scatter(x="A", y="C", color="LightGreen", label="Class 2", ax=ax)
-
-plt.show()
-"""
-print("------------------------------------------------------------")  # 60個
-
 # 讀取[Chipotle快餐數據]資料集至df
 orders = pd.read_table("http://bit.ly/chiporders")
 # filename = "data/chipotle.tsv"
@@ -2142,11 +1791,13 @@ movies = pd.read_csv(filename)
 # print("檢視前幾行\n", movies.head())
 
 # sort the 'title' Series in ascending order (returns a Series)
+print("將 欄位 title 讀出並排序 升冪")
 print("檢視前幾行")
 cc = movies.title.sort_values().head()
 print(cc)
 
 # sort in descending order instead
+print("將 欄位 title 讀出並排序 降冪")
 print("檢視前幾行")
 cc = movies.title.sort_values(ascending=False).head()
 print(cc)
@@ -2645,7 +2296,8 @@ cc = ufo["Shape Reported"].value_counts(dropna=False).head()
 print(cc)
 
 # fill in missing values with a specified value
-ufo["Shape Reported"] = ufo["Shape Reported"].fillna(value="VARIOUS")
+VALUE = "VARIOUS"
+ufo["Shape Reported"] = ufo["Shape Reported"].fillna(value=VALUE)  # 將指定欄位內空資料填入指定數值
 
 # confirm that the missing values were filled in
 print("檢視前幾行")
@@ -2925,12 +2577,12 @@ print(cc)
 
 # fill missing values using "backward fill" strategy (doesn't affect the DataFrame since inplace=False)
 print("檢視後幾行")
-cc = ufo.ffill().tail()
+cc = ufo.ffill().tail()  #ffill()拿前一個值往下填, 承上
 print(cc)
 
 # compare with "forward fill" strategy (doesn't affect the DataFrame since inplace=False)
 print("檢視後幾行")
-cc = ufo.ffill().tail()
+cc = ufo.ffill().tail()  #ffill()拿前一個值往下填, 承上
 print(cc)
 
 print("------------------------------------------------------------")  # 60個
@@ -3465,10 +3117,12 @@ print(cc)
 cc = pd.to_numeric(df.col_three, errors="coerce")
 print(cc)
 
-cc = pd.to_numeric(df.col_three, errors="coerce").fillna(0)
+VALUE = 0
+cc = pd.to_numeric(df.col_three, errors="coerce").fillna(value=VALUE)  # 將指定欄位內空資料填入指定數值
 print(cc)
 
-df = df.apply(pd.to_numeric, errors="coerce").fillna(0)
+VALUE = 0
+df = df.apply(pd.to_numeric, errors="coerce").fillna(vlaue=VALUE)  # 將指定欄位內空資料填入指定數值
 print(df)
 
 print(df.dtypes)
@@ -4307,25 +3961,6 @@ sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 
-weight = [3, 48, 33, 8, 38, 16, 36, 29, 22, 6, 12, 42]
-name = ["鼠", "牛", "虎", "兔", "龍", "蛇", "馬", "羊", "猴", "雞", "狗", "豬"]
-
-datas = {"name": ["鼠", "牛", "虎", "兔", "龍"], "weight": [3, 48, 33, 8, 38]}
-df = pd.DataFrame(datas)
-
-print("name")
-print(df["name"])
-
-print("weight")
-print(df["weight"])
-
-print(df)
-# 排序, 依 weight 排序
-df = df.sort_values("weight", ascending=False)
-print(df)
-
-# ----------------
-
 print("用plt畫pd資料")
 
 print("只變更要強調的扇形的顏色")
@@ -4449,9 +4084,6 @@ print("資料排序")
 # df1 = df[['醫事機構名稱','電話','地址','備註']]
 # 把幾個欄位的資料抓出來
 
-# 排序
-df1.sort_values(["地址", "電話"], ascending=[True, False])
-
 print("資料篩選")
 mask = df1["地址"].str.startswith("苗栗縣")
 cc = df1[mask]
@@ -4502,20 +4134,7 @@ print(df)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-""" no file
-# 載入外部檔案並做資料整理
-# 使用 Pandas 讀取 CSV 檔
-
-url = "https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data"
-url = "iris.data"
-df = pd.read_csv(url, header=None)
-df.columns = ["sepal length", "sepal width", "petal length", "petal width", "class"]
-print(df)
-"""
-
-print("------------------------------------------------------------")  # 60個
-
-# 取出 DataFrame 當中的元素 –df.loc[]、df.iloc[]
+# 取出 DataFrame 當中的元素 –df.loc[]
 
 df[column] = np.random.choice(range(1, 101), 4)
 df[column] = np.random.choice(range(1, 11), 10)
@@ -4575,31 +4194,560 @@ cc = df_new.equals(df)
 print(cc)
 
 print("------------------------------------------------------------")  # 60個
-
-
+print("重複資料處理")
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-
-
-df = pd.read_csv("data2/test2.csv")
+datas = [
+    ["2019/10/22","Tom", "USA",32434],
+    ["2019/10/22","Joe", "China",16543],
+    ["2019/10/22","Jack", "Canada",1564],
+    ["2019/10/22","Joe", "China",16543],
+    ["2019/10/22","Mary", "Japan",5000],
+    ["2019/10/22","Tom", "USA",32434],
+    ["2019/10/23","Jinie", "Brazil",5243],
+    ["2019/10/23","Jane", "USA",5000],
+    ["2019/10/23","John", "Canada",2346],
+    ["2019/10/23","Joe", "Brazil",6643],
+    ["2019/10/23","Jack", "Japan",6465],
+    ["2019/10/23","Jinie", "Brazil",5243],
+]
+columns = ["Date", "Sales Rep", "Country", "Amount"]
+df = pd.DataFrame(datas, columns=columns)
 print(df)
 
+
+print("去重函數 drop_duplicates, 依據欄位 Country")
+print("欄位 Country 有一樣的, 即刪除")
+df1 = df.drop_duplicates("Country")
+print('df1')
+print(df1)
+
+print("去重函數 drop_duplicates, 依據欄位 Country, keep=last")
+print("欄位 Country 有一樣的, 保留後者")
+df2 = df.drop_duplicates("Country", keep="last")
+print(df2)
+
+print("去重函數 drop_duplicates, 依據欄位 Country, keep=False")
+print("欄位 Country 有一樣的, 皆刪除")
+df3 = df.drop_duplicates("Country", keep=False)
+print(df3)
+
+print("------------------------------------------------------------")  # 60個
+
+datas = [
+    [0.7, 0.3, 0.8, 0.9],
+    [0.8, 0.6, 0.4, 0.8],
+    [0.7, 0.3, 0.8, 0.9],
+    [0.8, 0.3, 0.5, 0.2],
+    [0.9, 0.3, 0.7, 0.3],
+    [0.7, 0.3, 0.8, 0.9],
+]
+columns = ["A", "B", "C", "D"]
+df = pd.DataFrame(datas, columns=columns)
+print(df)
+
+print("檢查df內是否有重複資料, 整列都重複的")
 print(df.duplicated())
 
+print("去重函數 drop_duplicates, 整列都重複的, 刪除之")
 df1 = df.drop_duplicates()
 print(df1)
 
+print("檢查df內是否有重複資料, 依據欄位 B")
 print(df.duplicated("B"))
 
+print("去重函數 drop_duplicates, 依據欄位 B")
+print("欄位 B 有一樣的, 即刪除")
 df1 = df.drop_duplicates("B")
 print(df1)
 
+print("去重函數 drop_duplicates, 依據欄位 B, keep=last")
+print("欄位 B 有一樣的, 保留後者")
 df2 = df.drop_duplicates("B", keep="last")
 print(df2)
 
+print("去重函數 drop_duplicates, 依據欄位 B, keep=False")
+print("欄位 B 有一樣的, 皆刪除")
 df3 = df.drop_duplicates("B", keep=False)
 print(df3)
 
 print("------------------------------------------------------------")  # 60個
+
+print("有重複資料之df")
+
+datas = [
+    [92, 81, 92, 81, 92, 81],  # 國文
+    [89, 79, 89, 82, 72, 82],  # 英文
+    [71, 92, 71, 89, 95, 89],  # 數學
+    [88, 89, 88, 98, 77, 98],  # 社會
+    [95, 74, 95, 89, 85, 89],  # 自然
+]
+columns = ["國文", "英文", "數學", "社會", "自然"]
+index = ["唐三藏", "孫悟空", "唐三藏", "豬八戒", "沙悟淨", "豬八戒"]
+df = pd.DataFrame(np.array(datas).T, columns=columns, index=index)
+print(df)
+
+print("檢查df內是否有重複資料")
+print(df.duplicated())
+
+print("去重後的df")
+print(df)
+
+print("去重後的df")
+print(df)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("字典 轉 df")
+
+datas = {
+    "國文": [92, 81, 81, 92],
+    "英文": [89, 79, 82, 72],
+    "數學": [71, 92, 89, 95],
+    "社會": [88, 89, 98, 77],
+    "自然": ["95", "74", "89", "85"],  # 字串
+}
+
+index = ["唐三藏", "孫悟空", "豬八戒", "沙悟淨"]
+df = pd.DataFrame(datas, index=index)
+print(df)
+
+print("將字串轉成數字")
+df["自然"] = df["自然"].astype("int64")
+print(df)
+
+print("------------------------------------------------------------")  # 60個
+
+print("字典 轉 df")
+
+datas = {
+    "國文": [92, 81, 81, 92],
+    "英文": [89, 79, 82, 72],
+    "數學": [71, 92, 89, 95],
+}
+df = pd.DataFrame(datas)
+print(df)
+
+index = ["唐三藏", "孫悟空", "牛魔王", "沙悟淨"]
+df.columns = ["國文", "英文", "數學"]
+index[2] = "豬八戒"  # 修改 索引
+df.index = index
+print(df)
+
+print("------------------------------------------------------------")  # 60個
+
+print('修改 索引')
+df = make_data_frame_from_dict()  # 字典 轉 df
+print(df)
+
+print("重新設定索引index")
+index = ["唐三藏", "孫悟空", "豬八戒", "沙悟淨"]
+df.index = index
+print(df)
+
+print("重新設定索引index")
+index = ["Tang", "Monkey", "Pig", "Sand"]
+df.index = index
+print(df)
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("過濾資料與排序")
+print("------------------------------------------------------------")  # 60個
+
+df = make_data_frame_from_dict()  # 字典 轉 df
+print(df)
+
+print("將 df 的 數學 成績讀出並排序")
+cc = df.數學.sort_values()
+print(cc)
+
+print("印出 數學 > 90 的資料")
+df1 = df[df.數學 > 90]
+print(df1)
+
+print("依照 數學 排序 降冪")
+df2 = df.sort_values("數學", ascending=False)
+print(df2)
+
+print("依照 數學 排序 升冪")
+df3 = df.sort_values("數學", ascending=True)
+print(df3)
+
+print("依照 數學 排序 預設為 升冪")
+df4 = df.sort_values("數學")
+print(df4)
+
+print("依照 國文/英文 排序 升冪/降冪")
+df5 = df.sort_values(["國文", "英文"], ascending=[True, False])
+print(df5)
+
+print('排序, 依 數學 欄, 預設為上升')
+print(df.sort_values(by="數學"))#預設上升
+print(df.sort_values(by="數學", ascending=True))#上升
+print(df.sort_values(by="數學", ascending=False))#下降
+df = df.sort_values(by=["國文", "英文"], ascending=True)
+print(df)
+
+print("排序 axis=1, 依column欄名排序, 橫向, 下降")
+print(df.sort_index(axis=1, ascending=False))
+print(df.sort_index(axis=0))
+
+print("------------------------------------------------------------")  # 60個
+
+df = make_data_frame_from_dict()  # 字典 轉 df
+print(df)
+
+print("------------------------------------------------------------")  # 60個
+
+weight = [3, 48, 33, 8, 38, 16, 36, 29, 22, 6, 12, 42]
+name = ["鼠", "牛", "虎", "兔", "龍", "蛇", "馬", "羊", "猴", "雞", "狗", "豬"]
+
+datas = {"name": ["鼠", "牛", "虎", "兔", "龍"], "weight": [3, 48, 33, 8, 38]}
+df = pd.DataFrame(datas)
+print(df)
+
+print("name")
+print(df["name"])
+
+print("weight")
+print(df["weight"])
+
+print("------------------------------------------------------------")  # 60個
+
+""" data2/test3.csv
+性別,尺寸,價格
+male,XL,800
+female,M,400
+not specified,XXL,300
+male,L,500
+female,S,700
+female,XS,850
+"""
+
+print('df內容的資料對應')
+
+df = pd.read_csv("data2/test3.csv")
+print(df)
+
+size_mapping = {"XXL": 666, "XL": 555, "L": 444, "M": 333, "S": 222, "XS": 111}
+df["尺寸"] = df["尺寸"].map(size_mapping)
+print(df)
+
+print("------------------------------------------------------------")  # 60個
+
+print('測試 cumsum()')
+df = make_data_frame_from_dict()  # 字典 轉 df
+print(df)
+
+df = df.cumsum()#依欄位, 逐列累加
+print(df)
+
+print("------------------------------------------------------------")  # 60個
+
+print('pd 之 plot 之 scatter')
+N = 1000
+datas = np.random.randn(N, 2)
+
+columns=list("AB")
+index = np.arange(N)
+df = pd.DataFrame(datas, columns=columns, index=index)
+#print(df)
+
+ax = df.plot.scatter(x="A", y="B", color="DarkBlue", label="Class 1")
+#df.plot.scatter(x="A", y="B", color="LightGreen", label="Class 2", ax=ax)
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+N = 1000
+N = 100
+datas = np.random.randn(N, 4)
+
+#print("建立 3x2 個0-9(含) 的整數隨機數")
+#datas = np.random.randint(0, 10, size=(N, 4))
+#print(datas)
+
+columns=list("ABCD")
+index = np.arange(N)
+df = pd.DataFrame(datas, columns=columns, index=index)
+#print(df)
+
+#df = df.cumsum()#依欄位, 逐列累加
+#print(df)
+
+# plot methods:
+# 'bar', 'hist', 'box', 'kde', 'area', scatter', hexbin', 'pie'
+ax = df.plot.scatter(x="A", y="B", color="DarkBlue", label="Class 1")
+#df.plot.scatter(x="A", y="C", color="LightGreen", label="Class 2", ax=ax)
+
+df.plot.scatter(x="A", y="B", color="red", label="Class B", ax=ax)
+df.plot.scatter(x="A", y="C", color="green", label="Class C", ax=ax)
+df.plot.scatter(x="A", y="D", color="blue", label="Class D", ax=ax)
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+""" no file
+# 載入外部檔案並做資料整理
+# 使用 Pandas 讀取 CSV 檔
+
+url = "https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data"
+url = "iris.data"
+df = pd.read_csv(url, header=None)
+df.columns = ["sepal length", "sepal width", "petal length", "petal width", "class"]
+print(df)
+"""
+print("------------------------------------------------------------")  # 60個
+
+print("簡單df操作")
+
+df = make_data_frame()
+print(df)
+
+"""
+print("畫出來")
+df.plot(xticks=range(0, 4))
+plt.show()
+"""
+
+print("孫悟空的成績(df.values[1])：")
+print(df.values[1])
+print("孫悟空的英文成績(df.values[1][2])：")
+print(df.values[1][2])
+
+print("------------------------------------------------------------")  # 60個
+
+print("空資料的處理 填值 fillna 填補 NaN 值")
+
+df = pd.DataFrame(np.random.rand(8, 4))
+print(df)
+#       R  C
+df.iloc[1, 0] = np.nan
+df.iloc[2, 2] = np.nan
+df.iloc[6, 1] = np.nan
+df.iloc[5:, 3] = np.nan
+print(df)
+
+print('------------------------------')	#30個
+
+VALUE = 0
+df_fill = df.fillna(value=VALUE)  # 將df內空資料填入指定數值
+print(df_fill)
+
+print('------------------------------')	#30個
+
+df_fill_2 = df.ffill()  #ffill()拿前一個值往下填, 承上
+print(df_fill_2)
+
+print('------------------------------')	#30個
+
+df_fill_3 = df.bfill()  #bfill()拿下一個值往上填, 承下
+print(df_fill_3)
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("刪除 df 的 欄位 或 索引 – drop() + 缺失資料處理")
+
+""" data/data_with_NaN.csv
+     A    B    C    D
+0  0.5  0.9  0.4  NaN
+1  0.8  0.6  NaN  NaN
+2  0.7  0.3  0.8  0.9
+3  0.8  0.3  NaN  0.2
+4  0.9  NaN  0.7  0.3
+5  0.2  0.7  0.6  NaN
+"""
+df = pd.read_csv("data/data_with_NaN.csv")
+
+# df 轉 html
+# df.to_html("test_csv2html.html")
+
+print("df 原始資料")
+print(df)
+
+# 刪除所有 NaN 的記錄
+df1 = df.dropna()
+print("df1 有任何NaN的列 刪除")
+print(df1)
+
+df2 = df.dropna(how="any")
+print("df2 有任何NaN的列 刪除")
+print(df2)
+
+df3 = df.dropna(how="all")
+print("df3 全部都NaN的列 刪除")
+print(df3)
+
+df4 = df.dropna(subset=["B", "C"])
+print("df4 B C 欄有NaN的列 刪除")
+print(df4)
+
+df5 = pd.isnull(df)
+print("df5 建立布林遮罩")
+print(df5)
+
+print("空資料 :")
+print(pd.isnull(df))
+
+VALUE = 1
+df6 = df.fillna(value=VALUE)  # 將df內空資料填入指定數值
+print(df6)
+
+print("df 欄位B 的 缺失資料 補值 補上原先欄位B 的 平均數")
+VALUE = df["B"].mean()
+df["B"] = df["B"].fillna(value=VALUE)  # 將指定欄位內空資料填入指定數值
+print(df)
+
+print("df 欄位C 的 缺失資料 補值 補上原先欄位C 的 中位數")
+VALUE = df["C"].median()
+df["C"] = df["C"].fillna(value=VALUE)  # 將指定欄位內空資料填入指定數值
+print(df)
+
+print("------------------------------------------------------------")  # 60個
+
+print('測試 iloc(R, C)')
+df = make_data_frame_from_dict()  # 字典 轉 df
+print(df)
+
+print("顯示第0列, 即索引0, 唐三藏的成績")
+cc = df.iloc[0]
+print(cc)
+
+print("用iloc取得每一個欄位的資料")
+#             R  C
+print(df.iloc[1, 0])
+print(df.iloc[2, 3])
+print(df.iloc[2:, 3])
+print(df.iloc[2:5, 0:2])
+
+cc = df.iloc[0, [0, 4]]
+print(cc)
+cc = df.iloc[[0, 1], [2, 3]]
+print(cc)
+cc = df.iloc[0:3, 2:5]
+print(cc)
+cc = df.iloc[2, :]
+print(cc)
+cc = df.iloc[:2, 2:5]
+print(cc)
+cc = df.iloc[1:, 2:5]
+print(cc)
+cc = df.iloc[[1, 2, 3], [0, 2]]
+print(cc)
+
+print("社會(第3欄)")
+print(df.iloc[0:12, 3])
+
+print("社會(部分)")
+print(df.iloc[[0, 1, 3], 3])
+
+print("df.iloc[1, :] ->")
+print(df.iloc[1, :])
+
+"""
+#       R  C
+df.iloc[1, 0] = np.nan
+df.iloc[2, 2] = np.nan
+df.iloc[6, 1] = np.nan
+df.iloc[5:, 3] = np.nan
+print(df)
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+print('測試 loc(R, C)')
+df = make_data_frame_from_dict()  # 字典 轉 df
+print(df)
+
+# 比較loc(彈性較大)和iloc顯示表格內容
+# loc使用行索引標籤(column index label)和列索引標籤(row index label)
+cc = df.loc[1]["姓名"]
+print(cc)
+
+df8 = df.loc[[1, 2], ["國文", "英文"]]
+print(df8)
+
+print('數學成績')
+print(df.loc[:, "數學"])
+
+print('df.loc["孫悟空":"豬八戒", "數學":"社會"] ->')
+print(df.loc["孫悟空":"豬八戒", "數學":"社會"])
+print('df.loc[:沙悟淨, "數學":"社會"] ->')
+print(df.loc[:"沙悟淨", "數學":"社會"])
+print('df.loc["孫悟空":, "數學":"社會"] ->')
+print(df.loc["孫悟空":, "數學":"社會"])
+
+print("國文 > 75 且 英文 > 75 者")
+df3 = df.loc[df["國文"] >= 75][df["英文"] >= 75]
+print(df3)
+
+print("看 索引 1~3, 數學 社會 成績")
+df4 = df.loc[range(1, 4), ["數學", "社會"]]
+print(df4)
+
+print("顯示")
+#print(df.loc[3, 0])
+
+print("------------------------------------------------------------")  # 60個
+
+print("建立df, 字典 轉 df")
+
+datas = {
+    "國文": {"唐三藏": 65, "孫悟空": 90, "豬八戒": 81, "沙悟淨": 79},
+    "英文": {"唐三藏": 92, "孫悟空": 72, "豬八戒": 85, "沙悟淨": 53},
+    "數學": {"唐三藏": 78, "孫悟空": 76, "豬八戒": 91, "沙悟淨": 47},
+    "社會": {"唐三藏": 70, "孫悟空": 56, "豬八戒": 94, "沙悟淨": 80},
+    "自然": {"唐三藏": 83, "孫悟空": 93, "豬八戒": 89, "沙悟淨": 94},
+}
+df = pd.DataFrame(datas)
+print(df)
+
+print("欄位 自然 的資料")
+print(df["自然"])
+print("欄位 國文 數學 自然 的資料")
+print(df[["國文", "數學", "自然"]])
+print("欄位 國文 >= 80 的資料")
+print(df[df["國文"] >= 80])
+
+print("索引 1 的資料(孫悟空)")
+print(df.values[1])
+print("索引 1 欄位 2 的資料(孫悟空 數學)")
+print(df.values[1][2])
+
+print("看 孫悟空 數學 的資料")
+print(df.loc["孫悟空", "數學"])
+
+print("看 唐三藏 國文 社會 的資料")
+print(df.loc["唐三藏", ["國文", "社會"]])
+
+print("看 唐三藏 和 豬八戒 國文 和 社會 的資料")
+print(df.loc[["唐三藏", "豬八戒"], ["國文", "社會"]])
+
+print("看 唐三藏 到 豬八戒 國文 到 數學 的資料")
+print(df.loc["唐三藏":"豬八戒", "國文":"數學"])
+
+print("看 豬八戒 的 所有 資料")
+print(df.loc["豬八戒", :])
+
+print("看 從頭 到 豬八戒 的 數學 到 社會 的資料")
+print(df.loc[:"豬八戒", "數學":"社會"])
+
+print("看 豬八戒 到 末尾 的 數學 到 社會 的資料")
+print(df.loc["豬八戒":, "數學":"社會"])
+
+print("------------------------------------------------------------")  # 60個
+
+
+"""
+color="DarkBlue"
+color="LightGreen"
+
+"""
+
+
