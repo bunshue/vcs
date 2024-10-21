@@ -1168,8 +1168,8 @@ VALUE = df_sample["age"].mean()
 df_sample["age"] = df_sample["age"].fillna(value=VALUE)  # 將指定欄位內空資料填入指定數值
 print(df_sample.head())
 
-df_sample["gender"] = df_sample["gender"].ffill()  #ffill()拿前一個值往下填, 承上
-df_sample["area"] = df_sample["area"].ffill()  #ffill()拿前一個值往下填, 承上
+df_sample["gender"] = df_sample["gender"].ffill()  # ffill()拿前一個值往下填, 承上
+df_sample["area"] = df_sample["area"].ffill()  # ffill()拿前一個值往下填, 承上
 print(df_sample.head())
 
 print("刪除不完整的資料")
@@ -1182,8 +1182,8 @@ print("資料基本清理")
 df_sample = df.copy()
 VALUE = df_sample["age"].mean()
 df_sample["age"] = df_sample["age"].fillna(value=VALUE)  # 將指定欄位內空資料填入指定數值
-df_sample["gender"] = df_sample["gender"].ffill()  #ffill()拿前一個值往下填, 承上
-df_sample["area"] = df_sample["area"].ffill()  #ffill()拿前一個值往下填, 承上
+df_sample["gender"] = df_sample["gender"].ffill()  # ffill()拿前一個值往下填, 承上
+df_sample["area"] = df_sample["area"].ffill()  # ffill()拿前一個值往下填, 承上
 
 print("去除重覆記錄")
 df_sample.drop_duplicates(subset="id", keep="first", inplace=True)
@@ -1202,10 +1202,10 @@ print("------------------------------")  # 30個
 
 print("資料基本清理")
 df_sample = df.copy()
-VALUE = value=df_sample["age"].mean()
+VALUE = value = df_sample["age"].mean()
 df_sample["age"] = df_sample["age"].fillna(VALUE)  # 將指定欄位內空資料填入指定數值
-df_sample["gender"] = df_sample["gender"].ffill()  #ffill()拿前一個值往下填, 承上
-df_sample["area"] = df_sample["area"].ffill()  #ffill()拿前一個值往下填, 承上
+df_sample["gender"] = df_sample["gender"].ffill()  # ffill()拿前一個值往下填, 承上
+df_sample["area"] = df_sample["area"].ffill()  # ffill()拿前一個值往下填, 承上
 df_sample.drop_duplicates(subset="id", keep="first", inplace=True)
 df_sample["job"] = df_sample["job"].str.strip()
 df_sample["job"] = df_sample["job"].str.replace(" ", "")
@@ -1227,10 +1227,10 @@ print("------------------------------")  # 30個
 
 print("資料基本清理")
 df_sample = df.copy()
-VALUE = value=df_sample["age"].mean()
+VALUE = value = df_sample["age"].mean()
 df_sample["age"] = df_sample["age"].fillna(VALUE)  # 將指定欄位內空資料填入指定數值
-df_sample["gender"] = df_sample["gender"].ffill()  #ffill()拿前一個值往下填, 承上
-df_sample["area"] = df_sample["area"].ffill()  #ffill()拿前一個值往下填, 承上
+df_sample["gender"] = df_sample["gender"].ffill()  # ffill()拿前一個值往下填, 承上
+df_sample["area"] = df_sample["area"].ffill()  # ffill()拿前一個值往下填, 承上
 df_sample.drop_duplicates(subset="id", keep="first", inplace=True)
 df_sample["job"] = df_sample["job"].str.strip()
 df_sample["job"] = df_sample["job"].str.replace(" ", "")
@@ -2577,12 +2577,12 @@ print(cc)
 
 # fill missing values using "backward fill" strategy (doesn't affect the DataFrame since inplace=False)
 print("檢視後幾行")
-cc = ufo.ffill().tail()  #ffill()拿前一個值往下填, 承上
+cc = ufo.ffill().tail()  # ffill()拿前一個值往下填, 承上
 print(cc)
 
 # compare with "forward fill" strategy (doesn't affect the DataFrame since inplace=False)
 print("檢視後幾行")
-cc = ufo.ffill().tail()  #ffill()拿前一個值往下填, 承上
+cc = ufo.ffill().tail()  # ffill()拿前一個值往下填, 承上
 print(cc)
 
 print("------------------------------------------------------------")  # 60個
@@ -4198,18 +4198,18 @@ print("重複資料處理")
 print("------------------------------------------------------------")  # 60個
 
 datas = [
-    ["2019/10/22","Tom", "USA",32434],
-    ["2019/10/22","Joe", "China",16543],
-    ["2019/10/22","Jack", "Canada",1564],
-    ["2019/10/22","Joe", "China",16543],
-    ["2019/10/22","Mary", "Japan",5000],
-    ["2019/10/22","Tom", "USA",32434],
-    ["2019/10/23","Jinie", "Brazil",5243],
-    ["2019/10/23","Jane", "USA",5000],
-    ["2019/10/23","John", "Canada",2346],
-    ["2019/10/23","Joe", "Brazil",6643],
-    ["2019/10/23","Jack", "Japan",6465],
-    ["2019/10/23","Jinie", "Brazil",5243],
+    ["2019/10/22", "Tom", "USA", 32434],
+    ["2019/10/22", "Joe", "China", 16543],
+    ["2019/10/22", "Jack", "Canada", 1564],
+    ["2019/10/22", "Joe", "China", 16543],
+    ["2019/10/22", "Mary", "Japan", 5000],
+    ["2019/10/22", "Tom", "USA", 32434],
+    ["2019/10/23", "Jinie", "Brazil", 5243],
+    ["2019/10/23", "Jane", "USA", 5000],
+    ["2019/10/23", "John", "Canada", 2346],
+    ["2019/10/23", "Joe", "Brazil", 6643],
+    ["2019/10/23", "Jack", "Japan", 6465],
+    ["2019/10/23", "Jinie", "Brazil", 5243],
 ]
 columns = ["Date", "Sales Rep", "Country", "Amount"]
 df = pd.DataFrame(datas, columns=columns)
@@ -4219,7 +4219,7 @@ print(df)
 print("去重函數 drop_duplicates, 依據欄位 Country")
 print("欄位 Country 有一樣的, 即刪除")
 df1 = df.drop_duplicates("Country")
-print('df1')
+print("df1")
 print(df1)
 
 print("去重函數 drop_duplicates, 依據欄位 Country, keep=last")
@@ -4337,7 +4337,7 @@ print(df)
 
 print("------------------------------------------------------------")  # 60個
 
-print('修改 索引')
+print("修改 索引")
 df = make_data_frame_from_dict()  # 字典 轉 df
 print(df)
 
@@ -4385,10 +4385,10 @@ print("依照 國文/英文 排序 升冪/降冪")
 df5 = df.sort_values(["國文", "英文"], ascending=[True, False])
 print(df5)
 
-print('排序, 依 數學 欄, 預設為上升')
-print(df.sort_values(by="數學"))#預設上升
-print(df.sort_values(by="數學", ascending=True))#上升
-print(df.sort_values(by="數學", ascending=False))#下降
+print("排序, 依 數學 欄, 預設為上升")
+print(df.sort_values(by="數學"))  # 預設上升
+print(df.sort_values(by="數學", ascending=True))  # 上升
+print(df.sort_values(by="數學", ascending=False))  # 下降
 df = df.sort_values(by=["國文", "英文"], ascending=True)
 print(df)
 
@@ -4428,7 +4428,7 @@ female,S,700
 female,XS,850
 """
 
-print('df內容的資料對應')
+print("df內容的資料對應")
 
 df = pd.read_csv("data2/test3.csv")
 print(df)
@@ -4439,26 +4439,26 @@ print(df)
 
 print("------------------------------------------------------------")  # 60個
 
-print('測試 cumsum()')
+print("測試 cumsum()")
 df = make_data_frame_from_dict()  # 字典 轉 df
 print(df)
 
-df = df.cumsum()#依欄位, 逐列累加
+df = df.cumsum()  # 依欄位, 逐列累加
 print(df)
 
 print("------------------------------------------------------------")  # 60個
 
-print('pd 之 plot 之 scatter')
+print("pd 之 plot 之 scatter")
 N = 1000
 datas = np.random.randn(N, 2)
 
-columns=list("AB")
+columns = list("AB")
 index = np.arange(N)
 df = pd.DataFrame(datas, columns=columns, index=index)
-#print(df)
+# print(df)
 
 ax = df.plot.scatter(x="A", y="B", color="DarkBlue", label="Class 1")
-#df.plot.scatter(x="A", y="B", color="LightGreen", label="Class 2", ax=ax)
+# df.plot.scatter(x="A", y="B", color="LightGreen", label="Class 2", ax=ax)
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
@@ -4467,22 +4467,22 @@ N = 1000
 N = 100
 datas = np.random.randn(N, 4)
 
-#print("建立 3x2 個0-9(含) 的整數隨機數")
-#datas = np.random.randint(0, 10, size=(N, 4))
-#print(datas)
+# print("建立 3x2 個0-9(含) 的整數隨機數")
+# datas = np.random.randint(0, 10, size=(N, 4))
+# print(datas)
 
-columns=list("ABCD")
+columns = list("ABCD")
 index = np.arange(N)
 df = pd.DataFrame(datas, columns=columns, index=index)
-#print(df)
+# print(df)
 
-#df = df.cumsum()#依欄位, 逐列累加
-#print(df)
+# df = df.cumsum()#依欄位, 逐列累加
+# print(df)
 
 # plot methods:
 # 'bar', 'hist', 'box', 'kde', 'area', scatter', hexbin', 'pie'
 ax = df.plot.scatter(x="A", y="B", color="DarkBlue", label="Class 1")
-#df.plot.scatter(x="A", y="C", color="LightGreen", label="Class 2", ax=ax)
+# df.plot.scatter(x="A", y="C", color="LightGreen", label="Class 2", ax=ax)
 
 df.plot.scatter(x="A", y="B", color="red", label="Class B", ax=ax)
 df.plot.scatter(x="A", y="C", color="green", label="Class C", ax=ax)
@@ -4533,20 +4533,20 @@ df.iloc[6, 1] = np.nan
 df.iloc[5:, 3] = np.nan
 print(df)
 
-print('------------------------------')	#30個
+print("------------------------------")  # 30個
 
 VALUE = 0
 df_fill = df.fillna(value=VALUE)  # 將df內空資料填入指定數值
 print(df_fill)
 
-print('------------------------------')	#30個
+print("------------------------------")  # 30個
 
-df_fill_2 = df.ffill()  #ffill()拿前一個值往下填, 承上
+df_fill_2 = df.ffill()  # ffill()拿前一個值往下填, 承上
 print(df_fill_2)
 
-print('------------------------------')	#30個
+print("------------------------------")  # 30個
 
-df_fill_3 = df.bfill()  #bfill()拿下一個值往上填, 承下
+df_fill_3 = df.bfill()  # bfill()拿下一個值往上填, 承下
 print(df_fill_3)
 
 print("------------------------------------------------------------")  # 60個
@@ -4611,7 +4611,7 @@ print(df)
 
 print("------------------------------------------------------------")  # 60個
 
-print('測試 iloc(R, C)')
+print("測試 iloc(R, C)")
 df = make_data_frame_from_dict()  # 字典 轉 df
 print(df)
 
@@ -4661,7 +4661,7 @@ print(df)
 
 print("------------------------------------------------------------")  # 60個
 
-print('測試 loc(R, C)')
+print("測試 loc(R, C)")
 df = make_data_frame_from_dict()  # 字典 轉 df
 print(df)
 
@@ -4673,7 +4673,7 @@ print(cc)
 df8 = df.loc[[1, 2], ["國文", "英文"]]
 print(df8)
 
-print('數學成績')
+print("數學成績")
 print(df.loc[:, "數學"])
 
 print('df.loc["孫悟空":"豬八戒", "數學":"社會"] ->')
@@ -4692,7 +4692,7 @@ df4 = df.loc[range(1, 4), ["數學", "社會"]]
 print(df4)
 
 print("顯示")
-#print(df.loc[3, 0])
+# print(df.loc[3, 0])
 
 print("------------------------------------------------------------")  # 60個
 
@@ -4751,3 +4751,64 @@ color="LightGreen"
 """
 
 
+"""
+
+import pandas as pd
+df = pd.read_csv('Iris.csv')
+print(df.head())
+print('將Id整欄刪除')
+df = df.drop('Id', axis = 1)
+
+print(df.head())
+
+
+
+
+
+"""
+
+
+"""
+
+pandas主要之資料型態:
+1. Series	一維資料結構
+2. DataFrame	二維資料結構
+
+
+
+pandas 可以說像是 Python 中的 Excel
+
+不只 CSV 檔, 很多資料檔案, 像 Excel 檔都很容易在 pandas 完成。使用法是這樣:
+
+df2 = pd.read_excel('filename.xls', 'sheetname')
+其中 sheetname 那裡要放工作表的名稱, 如果是中文的最好改成英文。
+
+Pandas 有兩個基本資料結構:
+1. DataFrame: 可以想成一個表格。
+2. Series: 表格的某一列、某一行, 基本上就是我們以前的 list 或 array
+
+一個 DataFrame, 我們有 index (列的名稱), columns (行的名稱)。
+series 大概就是一個 list, 一個 array。其實更精準的說, 其實是一個有 "index" 的 array。
+
+
+"""
+
+
+"""
+應該是pandas/data_frame才有的語法
+df_sbike.median().plot(kind="bar")
+weekday_counts.plot(kind='bar')
+
+"""
+
+
+"""
+
+use_pivot 看encoding
+import pandas as pd
+df = pd.read_csv("..\data\ordersList.csv",encoding="utf-8",header = 0)
+print(df.pivot_table(index="品名",columns="客戶名稱", values="金額", fill_value=0, margins=True, aggfunc="sum"))
+
+print(df.pivot_table(index="品名",columns="客戶名稱", values="金額", fill_value=0, margins=True ))
+
+"""

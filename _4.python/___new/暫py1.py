@@ -6,7 +6,6 @@ np.meshgrid為numpy之函數
 用scatter 用3d表示之
 
 
-#chap9-01a
 #Colab資料夾設定方法
 #!pip install google.colab 
 #安裝python-docx
@@ -15,11 +14,6 @@ np.meshgrid為numpy之函數
 import os
 from google.colab import drive
 drive.mount('/content/drive')
-
-
-
-
-
 
 
 唐三藏 Tang
@@ -104,8 +98,6 @@ https://openhome.cc/Gossip/DCHardWay/Axes3D.html
 
 matplotlib的二维作图及三维作图 ax.plot_wireframe， scatter
 https://www.cnblogs.com/tangjunjun/articles/10854423.html
-
-
 
 
 Scikit-learn的基本功能主要被分為六大部分：
@@ -198,10 +190,6 @@ ML(2)
 2. 分布密度估計 density estimation
 3. 維度約簡 dimensionality reduction
 
-
-
-指定安裝版本
-pip install imageai==2.0.2
 
 
 selenium模組 : 瀏覽器自動化操作
@@ -456,17 +444,11 @@ isinf(x, y)	是否inf
 ord() 查詢某個字元的ASCII值
 chr() 將ASCII的值轉換成英文字母
 
-安裝opencv
-
-pip install opencv-python
-
 
 C:\_git\vcs\_4.python\__code\高效率Python自動化工作術\chap10
 
 PySimpleGUI	建立應用程式的函示庫
 mutagen	讀取與存寫語音檔的函示庫
-
-pip install mutagen
 
 
 PySimpleGUI的零件一欄表
@@ -836,10 +818,6 @@ AttributeError: module 'PIL.Image' has no attribute 'ANTIALIAS'
   resized_pil = pilim.resize(newsize[::-1], Image.LANCZOS)
 
 
-
-# 更新pip程式
-cmd > python.exe -m pip install --upgrade pip
-
 Python風格樣式
 
 PEP8 是 Python 社群共通的風格指南
@@ -878,6 +856,15 @@ uncompromising
     比較級：more uncompro
 
 
+# 更新pip程式
+cmd > python.exe -m pip install --upgrade pip
+
+指定安裝版本
+pip install imageai==2.0.2
+
+安裝opencv
+pip install opencv-python
+
 pip install pytube3
 pip install jupyter
 
@@ -909,11 +896,6 @@ openpyxl==2.1.5
 
 《幸運的基督徒》
 有15個基督徒和15個非基督徒在海上遇險，為了能讓一部分人活下來不得不將其中15個人扔到海里面去，有個人想了個辦法就是大家圍成一個圈，由某個人開始從1報數，報到9的人就扔到海里面，他後面的人接著從1開始報數，報到9的人繼續扔到海里面，直到扔掉15個人。由於上帝的保佑，15個基督徒都倖免於難，問這些人最開始是怎麼站的，哪些位置是基督徒哪些位置是非基督徒。
-"""
-
-
-
-
 
 
 Python機器學習
@@ -922,19 +904,12 @@ Python機器學習
 3. Keras深度學習
 
 
-
-
-
-
-"""
 python的日期當中分成
 1. date(日期)
 2. time(時間)
 3. datetime(混合date跟time)
 4. timedelta(計算歷時期間的型態)
 5. timezone(處理時區資訊的型態)
-
-"""
 
 
 名称：Black
@@ -1140,7 +1115,6 @@ python_data_type
 [] 串列		L
 () 元組		T
 
-
 python預設基本函數
 range
 int
@@ -1149,38 +1123,9 @@ str
 
 檔案讀寫 jieba用
 
-
 # - pandas学习参考： [十分钟搞定pandas](http://www.cnblogs.com/chaosimple/p/4153083.html)
 
 print('------------------------------------------------------------')	#60個
-
-pip install 套件名稱
-
-pip uninstall 想移除的套件名稱
-
-pip show 想查詢的套件名稱
-
-
-pip list
-
-
-pip語法
-
-pip uninstall keras -y
-pip uninstall keras-nightly -y
-pip uninstall keras-Preprocessing -y
-pip uninstall keras-vis -y
-pip uninstall tensorflow -y
-pip uninstall h5py -y
-
-pip install tensorflow==1.13.1
-pip install keras==2.0.8
-pip install h5py==2.10.0
-
-
-更新套件
-pip install yfinance -U
-
 
 標準list  由list組成的list
 
@@ -2266,7 +2211,7 @@ for語法
         print('取得特定資料夾:', rcs_dir)
 
 def pathdirs():
-    """Convert sys.path into a list of absolute, existing, unique paths."""
+    # Convert sys.path into a list of absolute, existing, unique paths.
     dirs = []
     normdirs = []
     for dir in sys.path:
@@ -2287,7 +2232,7 @@ sys.path:
         sys.path.insert(0, '.')
 
 def cli():
-    """Command-line interface (looks at sys.argv to decide what to do)."""
+    # Command-line interface (looks at sys.argv to decide what to do).
     import getopt
     class BadUsage(Exception): pass
 
@@ -2309,8 +2254,8 @@ print("------------------------------------------------------------")  # 60個
 
 
     def _dbg(self, level, msg):
-        """Write debugging output to sys.stderr.
-        """
+        # Write debugging output to sys.stderr.
+        
         if level <= self.debug:
             print(msg, file=sys.stderr)
 
@@ -2926,7 +2871,7 @@ import shutil
 import optparse
 
 def diff_texts(a, b, filename):
-    """Return a unified diff of two strings."""
+    # Return a unified diff of two strings.
     a = a.splitlines()
     b = b.splitlines()
     return difflib.unified_diff(a, b, filename, filename,
@@ -3001,13 +2946,13 @@ from html.entities import html5
 entities_url = 'http://dev.w3.org/html5/spec/entities.json'
 
 def get_json(url):
-    """Download the json file from the url and returns a decoded object."""
+    # Download the json file from the url and returns a decoded object.
     with urlopen(url) as f:
         data = f.read().decode('utf-8')
     return json.loads(data)
 
 def create_dict(entities):
-    """Create the html5 dict from the decoded json object."""
+    # Create the html5 dict from the decoded json object.
     new_html5 = {}
     for name, value in entities.items():
         new_html5[name.lstrip('&')] = value['characters']
@@ -4247,24 +4192,6 @@ np.arange(3, 10, 0.5)
 
 A = np.arange(10)
 
-
-pandas 可以說像是 Python 中的 Excel
-
-不只 CSV 檔, 很多資料檔案, 像 Excel 檔都很容易在 pandas 完成。使用法是這樣:
-
-df2 = pd.read_excel('filename.xls', 'sheetname')
-其中 sheetname 那裡要放工作表的名稱, 如果是中文的最好改成英文。
-
-Pandas 有兩個基本資料結構:
-1. DataFrame: 可以想成一個表格。
-2. Series: 表格的某一列、某一行, 基本上就是我們以前的 list 或 array
-
-一個 DataFrame, 我們有 index (列的名稱), columns (行的名稱)。
-series 大概就是一個 list, 一個 array。其實更精準的說, 其實是一個有 "index" 的 array。
-
-print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
 
 print 格式化
@@ -4297,23 +4224,12 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-
-
-'''
-
         return "%s %s %2d %02d:%02d:%02d %04d" % (
             _DAYNAMES[weekday],
             _MONTHNAMES[self._month],
             self._day,
             self._hour, self._minute, self._second,
             self._year)
-
-
-
-
-'''
-
-
 
 print("------------------------------------------------------------")  # 60個
 innum = 0
@@ -4327,24 +4243,6 @@ print("最大數為：%d" % max(list1))
 print("最小數為：%d" % min(list1))
 print("輸入數的總和為：%d" % sum(list1))
 print("輸入數由大到小排序為：{}".format(sorted(list1, reverse=True)))
-
-
-
-print("------------------------------------------------------------")  # 60個
-
------------------------------------- 
-  
-  
-
----
-應該是pandas/data_frame才有的語法
-df_sbike.median().plot(kind="bar")
-weekday_counts.plot(kind='bar')
-
-
----
-
-print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
@@ -4619,23 +4517,10 @@ df.iloc[nnn, nnn]	iloc使用index來取資料
 
 建立-讀取-儲存
 
-10張以上的subplot要怎麼寫
-
 ok 但是可以看看medium的英文網站
 https://medium.com/py-tips-conceptes/%E6%9C%AC%E6%96%87%E7%B4%80%E9%8C%84python%E7%B9%AA%E5%9C%96%E7%9A%84%E6%96%B9%E6%B3%95-%E4%BD%BF%E7%94%A8-seaborn-255b0006eb3e
 
-
 #cv2.imwrite('test.jpg',img) 偽寫入
-
-
-use_pivot 看encoding
-import pandas as pd
-df = pd.read_csv("..\data\ordersList.csv",encoding="utf-8",header = 0)
-print(df.pivot_table(index="品名",columns="客戶名稱", values="金額", fill_value=0, margins=True, aggfunc="sum"))
-
-print(df.pivot_table(index="品名",columns="客戶名稱", values="金額", fill_value=0, margins=True ))
-
-
 
 excel相關之python套件
 
@@ -4694,21 +4579,13 @@ x = np.arange(0, 2 * np.pi, 0.02)
 x = np.linspace(0, 2 * np.pi, num = 100)	#頭, 尾, 點數(含頭尾)
 logspace
 
-pandas主要之資料型態:
-1. Series	一維資料結構
-2. DataFrame	二維資料結構
-
-
 1.SVM-支持向量机
 
 其实SVM最开始主要用于分类，在维基百科上的解释，Support Vector Machines are learning models used for classification
 
-
-
 SVM = Support Vector Machine 是 支持向量机
 SVC = Support Vector Classification就是 支持向量机 用于分类
 SVR = Support Vector Regression.就是 支持向量机 用于回归分析
-
 
 big
 https://www.flag.com.tw/VIP/Bonus#class01
@@ -5959,11 +5836,56 @@ print("------------------------------------------------------------")  # 60個
 ----------------tkinter SP tktk----------------
 
 
-import pandas as pd
-df = pd.read_csv('Iris.csv')
-print(df.head())
-print('將Id整欄刪除')
-df = df.drop('Id', axis = 1)
 
-print(df.head())
+
+本書各章pip安裝的套件清單
+
+第9章: Python 3.9
+pip install pywin32==303
+第10章: Python 3.9
+pip install opencv-python==4.5.4.60
+pip install imutils==0.5.4
+第12章: Python 3.9
+pip install mediapipe==0.8.9.1
+pip install cvzone==1.5.3
+pip install <下載的Dlib的.whl檔>
+pip install face-recognition==1.3.0
+第15章: Python 3.9
+pip install https://github.com/google-coral/pycoral/releases/download/v2.0.0/tflite_runtime-2.5.0.post1-cp39-cp39-win_amd64.whl
+pip install pytesseract==0.3.8
+第16章: Python 3.9
+pip install torch==1.10.2
+pip install torchvision==0.11.3
+pip install torchaudio==0.10.2
+
+
+
+
+pip install 套件名稱
+
+pip uninstall 想移除的套件名稱
+
+pip show 想查詢的套件名稱
+
+
+pip list
+
+
+pip語法
+
+pip uninstall keras -y
+pip uninstall keras-nightly -y
+pip uninstall keras-Preprocessing -y
+pip uninstall keras-vis -y
+pip uninstall tensorflow -y
+pip uninstall h5py -y
+
+pip install tensorflow==1.13.1
+pip install keras==2.0.8
+pip install h5py==2.10.0
+
+
+更新套件
+pip install yfinance -U
+
 

@@ -31,7 +31,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 name = ["鼠", "牛", "虎", "兔"]
 weight = [3, 48, 33, 8]
 
@@ -1806,13 +1806,11 @@ df = pd.DataFrame(
 df.plot(kind="pie", subplots=True, figsize=[20, 20])
 
 print("------------------------------------------------------------")  # 60個
-
-#from pandas import Series, DataFrame
-
+'''
 weight = [3, 48, 33, 8, 38, 16, 36, 29, 22, 6, 12, 42]
 animals = ["鼠", "牛", "虎", "兔", "龍", "蛇", "馬", "羊", "猴", "雞", "狗", "豬"]
 
-x = pd.Series(weight, index = animals)
+x = pd.Series(weight, index=animals)
 
 x.plot()  # 無參數, 預設就是 line
 
@@ -1828,9 +1826,11 @@ print("------------------------------------------------------------")  # 60個
 
 N = 10
 # DataFrame的 plot()方法會在subplot中為每個 column繪製一條線，並自動創建legend
-df = pd.DataFrame(np.random.randn(N, 4).cumsum(0), 
-               index = np.arange(0, 100, N), 
-               columns = ['A', 'B', 'C', 'D'])
+df = pd.DataFrame(
+    np.random.randn(N, 4).cumsum(0),
+    index=np.arange(0, 100, N),
+    columns=["A", "B", "C", "D"],
+)
 print(df)
 
 
@@ -1838,37 +1838,37 @@ df.plot()  # 無參數, 預設就是 line
 plt.show()
 
 
-#柱狀圖
+# 柱狀圖
 
 # 設定 kind = 'bar' 或 'barh' 即可繪製柱狀圖
 # Series和 DataFrame的 索引會被當作subplot的 X軸(bar)或 Y軸(barh)
 
 fig, axes = plt.subplots(2, 1)
-data = pd.Series(np.random.rand(16), index = list('abcedfghijklmnop'))
-data.plot(ax = axes[0], kind = 'bar')
-data.plot(ax = axes[1], kind = 'barh')
+data = pd.Series(np.random.rand(16), index=list("abcedfghijklmnop"))
+data.plot(ax=axes[0], kind="bar")
+data.plot(ax=axes[1], kind="barh")
 
 plt.show()
 
 
-
-df = pd.DataFrame(np.random.rand(6, 4), 
-               index = ['one', 'two', 'three', 'four', 'five', 'six'], 
-               columns = pd.Index(['A', 'B', 'C', 'D'], name = 'Genus'))
+df = pd.DataFrame(
+    np.random.rand(6, 4),
+    index=["one", "two", "three", "four", "five", "six"],
+    columns=pd.Index(["A", "B", "C", "D"], name="Genus"),
+)
 print(df)
 
 # DataFrame的每一 row的值分為一組
 
 # DataFrame的每一 row的值分為一組
 # columns 索引的 name屬性 被用來做為 legend的標題
-df.plot(kind = 'bar')
+df.plot(kind="bar")
 
 plt.show()
 
 
-
 # 設定 stacked = True, 可繪製 堆積柱狀圖
-df.plot(kind = 'barh', stacked = True)
+df.plot(kind="barh", stacked=True)
 
 plt.show()
 
@@ -1878,21 +1878,20 @@ s = pd.Series([2, 3, 5, 2, 5, 6, 7, 8, 9, 10, 13, 2, 3, 4, 7, 8, 9, 0, 0, 2, 2, 
 
 # 用Series的 value_counts()直接繪製柱狀圖，表達每個數字出現的次數
 vc = s.value_counts()
-vc.plot(kind = 'bar')
+vc.plot(kind="bar")
 plt.show()
 
 
-
-tips = pd.read_csv('data/tips.csv')
+tips = pd.read_csv("data/tips.csv")
 cc = tips[:5]
 print(cc)
 
 
 # 用 crosstab()方法創建一個 交叉表，預設統計 發生的次數(計數)
-party_counts = pd.crosstab(tips.day , tips['size'])
+party_counts = pd.crosstab(tips.day, tips["size"])
 print(party_counts)
 
-party_counts.plot(kind = 'bar')
+party_counts.plot(kind="bar")
 plt.show()
 
 """ NG
@@ -1903,50 +1902,50 @@ plt.show()
 
 print(party_counts)
 
-party_counts = party_counts.div(party_counts.sum(1), axis = 0)
+party_counts = party_counts.div(party_counts.sum(1), axis=0)
 print(party_counts)
 
 cc = party_counts.sum(1)
 print(cc)
 
-party_counts.plot(kind = 'bar', stacked = True)
+party_counts.plot(kind="bar", stacked=True)
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#直方圖(histogram)和密度圖
+# 直方圖(histogram)和密度圖
 
-tips = pd.read_csv('data/tips.csv')
+tips = pd.read_csv("data/tips.csv")
 cc = tips[:5]
 print(cc)
 
 # 可以用 plot(kind = 'hist') 來繪製直方圖
-tips.total_bill.plot(kind = 'hist', bins = 50)
-plt.title('total_bill')
+tips.total_bill.plot(kind="hist", bins=50)
+plt.title("total_bill")
 plt.show()
 
 
 # 也可以用 hist() 來繪製直方圖
-tips.total_bill.hist(bins = 50)
-plt.title('total_bill')
+tips.total_bill.hist(bins=50)
+plt.title("total_bill")
 plt.show()
 
 
 # tip比例 直方圖
-tip_ratios = (tips.tip / tips.total_bill)
-tip_ratios.hist(bins = 50)
-plt.title('tip ratio')
+tip_ratios = tips.tip / tips.total_bill
+tip_ratios.hist(bins=50)
+plt.title("tip ratio")
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#散佈圖(scatter plot)
+# 散佈圖(scatter plot)
 
-macro = pd.read_csv('data/macrodata.csv')
+macro = pd.read_csv("data/macrodata.csv")
 cc = macro[:5]
 print(cc)
 
-data = macro[['cpi', 'm1', 'tbilrate', 'unemp']]
+data = macro[["cpi", "m1", "tbilrate", "unemp"]]
 cc = data[:5]
 print(cc)
 
@@ -1957,10 +1956,10 @@ print(cc)
 
 # plt.scatter()可以繪製散佈圖，標示每一個資料row的 兩個columns的數據分布
 plt.scatter(trans_data.m1, trans_data.unemp)
-plt.title('Changes in log({0}) vs. log({1})'.format('m1', 'unemp'))
+plt.title("Changes in log({0}) vs. log({1})".format("m1", "unemp"))
 plt.show()
 
-trans_data.plot.scatter('m1', 'unemp')
+trans_data.plot.scatter("m1", "unemp")
 plt.show()
 
 """ NG
@@ -1969,5 +1968,3 @@ plt.show()
 pd.scatter_matrix(trans_data, color = 'k', alpha = 0.3)
 plt.show()
 """
-
-

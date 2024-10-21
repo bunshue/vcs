@@ -85,6 +85,7 @@
             this.button50 = new System.Windows.Forms.Button();
             this.button51 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.bt8 = new System.Windows.Forms.Button();
             this.bt7 = new System.Windows.Forms.Button();
             this.bt5 = new System.Windows.Forms.Button();
             this.bt6 = new System.Windows.Forms.Button();
@@ -123,7 +124,6 @@
             this.button77 = new System.Windows.Forms.Button();
             this.button78 = new System.Windows.Forms.Button();
             this.button79 = new System.Windows.Forms.Button();
-            this.bt8 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -727,6 +727,17 @@
             this.groupBox1.TabIndex = 53;
             this.groupBox1.TabStop = false;
             // 
+            // bt8
+            // 
+            this.bt8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bt8.Location = new System.Drawing.Point(502, 21);
+            this.bt8.Name = "bt8";
+            this.bt8.Size = new System.Drawing.Size(60, 60);
+            this.bt8.TabIndex = 59;
+            this.bt8.Text = "picturebox存圖";
+            this.bt8.UseVisualStyleBackColor = true;
+            this.bt8.Click += new System.EventHandler(this.bt8_Click);
+            // 
             // bt7
             // 
             this.bt7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
@@ -905,6 +916,7 @@
             this.button58.Name = "button58";
             this.button58.Size = new System.Drawing.Size(60, 60);
             this.button58.TabIndex = 62;
+            this.button58.Text = "灰階測試";
             this.button58.UseVisualStyleBackColor = true;
             this.button58.Click += new System.EventHandler(this.button58_Click);
             // 
@@ -1130,17 +1142,6 @@
             this.button79.TabIndex = 83;
             this.button79.UseVisualStyleBackColor = true;
             this.button79.Click += new System.EventHandler(this.button79_Click);
-            // 
-            // bt8
-            // 
-            this.bt8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.bt8.Location = new System.Drawing.Point(502, 21);
-            this.bt8.Name = "bt8";
-            this.bt8.Size = new System.Drawing.Size(60, 60);
-            this.bt8.TabIndex = 59;
-            this.bt8.Text = "picturebox存圖";
-            this.bt8.UseVisualStyleBackColor = true;
-            this.bt8.Click += new System.EventHandler(this.bt8_Click);
             // 
             // Form1
             // 

@@ -230,9 +230,9 @@ print(s)
 print("------------------------------------------------------------")  # 60個
 
 # Series
-#data = pd.Series(np.random.randn(1000), index=np.arange(1000))
+# data = pd.Series(np.random.randn(1000), index=np.arange(1000))
 data = s2 = pd.Series([65, 90, 81, 79])  # 國文成績
-#data = data.cumsum()
+# data = data.cumsum()
 data.plot()
 
 plt.show()

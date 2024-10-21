@@ -2240,6 +2240,46 @@ namespace _vcs_MakePicture
 
         private void button58_Click(object sender, EventArgs e)
         {
+            //灰階測試
+            int i;
+            int j;
+            int W = 512;
+            int H = 512;
+
+            int width;
+            int height;
+
+            Pen p1;
+            Pen p2;
+
+            width = W;
+            height = H;
+
+            bitmap1 = new Bitmap(width, height);
+
+            g = Graphics.FromImage(bitmap1);
+
+            p1 = new Pen(Color.Black, 1);
+            p2 = new Pen(Color.Pink, 1);
+
+            int xx;
+            int yy;
+
+            for (yy = 0; yy < height; yy++)
+            {
+                for (xx = 0; xx < width; xx++)
+                {
+                    //bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x11, 0x33, 0x55));
+                    bitmap1.SetPixel(xx, yy, background_color);
+                }
+            }
+
+
+            pictureBox1.Image = bitmap1;
+
+
+
+
         }
 
         private void button59_Click(object sender, EventArgs e)
