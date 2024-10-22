@@ -31,294 +31,54 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-'''
-name = ["鼠", "牛", "虎", "兔"]
-weight = [3, 48, 33, 8]
 
-print("建立 DataFrame")
-df = pd.DataFrame()
-df["name"] = name
-df["weight"] = weight
+
+def make_data_frame_from_dict():
+    datas = {
+        "姓名": ["唐三藏", "孫悟空", "豬八戒", "沙悟淨"],
+        "國文": [92, 81, 81, 92],
+        "英文": [89, 79, 82, 72],
+        "數學": [71, 92, 89, 95],
+        "社會": [88, 89, 98, 77],
+        "自然": [95, 74, 89, 85],
+    }
+    df = pd.DataFrame(datas)
+    return df
+
+
+df = make_data_frame_from_dict()  # 字典 轉 df
 print(df)
 
-"""
-df.index = df["name"]
-df["weight"].plot(kind="pie", autopct="%.0f%%", title = '派圖', fontsize = 12)
-"""
+index=["唐三藏", "孫悟空", "豬八戒", "沙悟淨"]
+df.index = index
 
-"""
-df["weight"].plot(kind = 'line', title = '線圖', fontsize = 12)
-"""
+print("長條圖")
+df.plot(kind="bar", title="DataFrame畫圖 長條圖", fontsize=12, rot=-45)
+plt.show()
 
-df["weight"].plot(kind="bar", title="長條圖", fontsize=12)
+print("線圖")
+# DataFrame的 plot()方法會在subplot中為每個 column繪製一條線，並自動創建legend
+df.plot(title = 'DataFrame畫圖 線圖')  # 無參數, 預設就是 line
 
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#                  2015,2016,2017,2018,2019
-df = pd.DataFrame(
-    [
-        [250, 320, 300, 312, 280],  # 北部
-        [280, 300, 280, 290, 310],  # 中部
-        [220, 280, 250, 305, 250],
-    ],  # 南部
-    index=["北部", "中部", "南部"],
-    columns=[2015, 2016, 2017, 2018, 2019],
-)
+print('將df內眾多資料 取出一些欄位 畫圖')
+filename = 'data/Kobe_stats.csv'
 
-df.plot(kind="line", title="線圖", figsize=[10, 5])
-plt.show()
-
-df.plot(kind="bar", title="長條圖", figsize=[10, 5])
-plt.show()
-
-df.plot(kind="barh", title="橫條圖", figsize=[10, 5])
-plt.show()
-
-df.plot(kind="bar", stacked=True, title="堆疊圖", figsize=[10, 5])
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-#                  2015,2016,2017,2018,2019
-df = pd.DataFrame(
-    [
-        [250, 320, 300, 312, 280],  # 北部
-        [280, 300, 280, 290, 310],  # 中部
-        [220, 280, 250, 305, 250],
-    ],  # 南部
-    index=["北部", "中部", "南部"],
-    columns=[2015, 2016, 2017, 2018, 2019],
-)
-g1 = df.iloc[0].plot(
-    kind="line",
-    legend=True,
-    xticks=range(2015, 2020),
-    title="公司分區年度銷售表",
-    figsize=[10, 5],
-)
-g1 = df.iloc[1].plot(kind="line", legend=True, xticks=range(2015, 2020))
-g1 = df.iloc[2].plot(kind="line", legend=True, xticks=range(2015, 2020))
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-#                  2015,2016,2017,2018,2019
-df = pd.DataFrame(
-    [
-        [250, 320, 300, 312, 280],  # 北部
-        [280, 300, 280, 290, 310],  # 中部
-        [220, 280, 250, 305, 250],
-    ],  # 南部
-    index=["北部", "中部", "南部"],
-    columns=[2015, 2016, 2017, 2018, 2019],
-)
-df.plot(kind="pie", subplots=True, figsize=[14, 6])  # 繪圖 plot
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-
-#     "國文", "數學", "英文", "自然", "社會"
-datas = [
-    [65, 92, 78, 83, 70],  # 學生A
-    [90, 72, 76, 93, 56],  # 學生B
-    [81, 85, 91, 89, 77],  # 學生C
-    [79, 53, 47, 94, 80],
-]  # 學生D
-indexs = ["林大明", "陳聰明", "黃美麗", "熊小娟"]
-columns = ["國文", "數學", "英文", "自然", "社會"]
-
-df = pd.DataFrame(datas, columns=columns, index=indexs)
-df.plot(kind="bar", title="一年甲班成績單", fontsize=12)
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-#      "國文","數學","英文","自然","社會"
-datas = [
-    [65, 92, 78, 83, 70],  # 學生A
-    [90, 72, 76, 93, 56],  # 學生B
-    [81, 85, 91, 89, 77],  # 學生C
-    [79, 53, 47, 94, 80],
-]  # 學生D
-columns = ["國文", "數學", "英文", "自然", "社會"]
-
-df = pd.DataFrame(datas, index=list(range(1, 5)), columns=columns)
-df.plot(xticks=range(1, 5), title="一年甲班成績單", fontsize=12)
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-""" no file
-filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_csv/python_ReadWrite_CSV5_Kobe_stats.csv'
-
-df = pd.read_csv(filename)
-
-data = pd.DataFrame()
-data["Season"] = pd.to_datetime(df["Season"])
-data["PTS"] = df["PTS"]
-data["AST"] = df["AST"]
-data["REB"] = df["TRB"]
-
-data = data.set_index("Season")
-data.plot(kind = 'line')
-
-plt.show()
-"""
-print("------------------------------------------------------------")  # 60個
-
-""" no file
-filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_csv/python_ReadWrite_CSV5_HOU_players_stats.csv'
-df = pd.read_csv(filename)
-df_grouped = df.groupby("Pos")
-points = df_grouped["PTS/G"].mean()
-
-data = pd.DataFrame()
-data["Points"] = points
-points.plot(kind = 'bar')
-
-plt.show()
-"""
-
-print("------------------------------------------------------------")  # 60個
-
-filename = "data/hours_used_performance.csv"
-df = pd.read_csv(filename)
-df.plot(kind="scatter", x="hours_used", y="work_performance")
-print("係數矩陣 :", df.corr())
-
-print("------------------------------------------------------------")  # 60個
-
-""" no sklearn
-filename = 'data/fb_tracking_happiness.csv'
-df = pd.read_csv(filename)
-print(df.head())
-
-from sklearn import preprocessing
-
-scaler = preprocessing.StandardScaler()
-np_std = scaler.fit_transform(df)
-df_std = pd.DataFrame(np_std, columns=["fb_tracking_s", "happiness_s"])
-print(df_std.head())
-
-df_std.plot(kind = "scatter", x = "fb_tracking_s", y = "happiness_s")
-
-print('------------------------------------------------------------')	#60個
-
-filename = 'data/fb_tracking_happiness.csv'
-df = pd.read_csv(filename)
-print(df.head())
-
-from sklearn import preprocessing
-
-scaler = preprocessing.MinMaxScaler(feature_range=(0, 1))
-np_minmax = scaler.fit_transform(df)
-df_minmax = pd.DataFrame(np_minmax, columns=["fb_tracking_m", "happiness_m"])
-print(df_minmax.head())
-
-df_minmax.plot(kind = "scatter", x = "fb_tracking_m", y = "happiness_m")
-
-plt.show()
-"""
-print("------------------------------------------------------------")  # 60個
-
-# df = pd.DataFrame(np.random.randn(3,3), columns=list("甲乙丙"))
+df = pd.read_csv(filename) # Kobe的資料, 很多
 # print(df)
 
-# df = pd.DataFrame(np.random.randn(5, 3), index=list(range(1,6)), columns=list("ABC"))
+print("建立空的df, 再加入資料至df")
+df2 = pd.DataFrame()
+df2["Season"] = pd.to_datetime(df["Season"])
+df2["PTS"] = df["PTS"]
+df2["AST"] = df["AST"]
+df2["REB"] = df["TRB"]
 
-#                    A  B  C  D  E
-df = pd.DataFrame(
-    [
-        [65, 92, 78, 83, 70],
-        [90, 72, 76, 93, 56],
-        [81, 85, 91, 89, 77],
-        [79, 53, 47, 94, 80],
-    ],
-    index=list(range(1, 5)),
-    columns=list("ABCDE"),
-)
-
-print("原資料 :\n", df)
-
-print("常用統計數據")
-print(df.describe())
-
-print("相關係數")
-print(df.corr())
-
-print("df轉csv")
-df.to_csv("tmp_df_data1.csv")
-
-print("data_frame 畫點圖")
-
-x = df.A.values
-y = df.B.values
-
-plt.scatter(x, y)
-
-print("存圖")
-plt.savefig("tmp_df_data.png")
-
-plt.show()
-
-"""
-loc 的用法
-df.loc[列的範圍, 行的範圍]
-
-df.loc[2:3, "B":"C"]
-
-
-列或行只要一個
-df.loc[2, "B"]
-
-df.loc[2, "B"]=-1
-"""
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-# Python繪圖的方法-使用 pandas
-# pandas 繪圖
-
-data = np.random.randn(1000, 4)
-
-df = pd.DataFrame(data=data, index=np.arange(1000), columns=["a", "b", "c", "d"])
-
-# line plot
-
-fig, axs = plt.subplots(2, 1, sharex=True)
-df.plot(y=["a"], kind="line", ax=axs[0], title="ax1")
-df.plot(y=["b", "c", "d"], kind="line", ax=axs[1], title="ax2", figsize=(10, 8))
-axs[0].set_ylabel("ylabel")
-axs[1].set_ylabel("ylabel")
-axs[1].set_xlabel("Xlabel")
-fig.suptitle("This is a somewhat long figure title", fontsize=16)
-
-plt.show()
-
-fig, axs = plt.subplots(1, 2, sharey=True)
-df.plot(y=["a"], kind="line", ax=axs[0], legend=False)
-df.plot(y=["b", "c", "d"], kind="line", ax=axs[1], figsize=(20, 5))
-
-# 設定title
-axs[0].set_title("ax1")
-axs[1].set_title("ax2")
-
-# 設定label
-axs[0].set_xlabel("xlabel")
-axs[1].set_xlabel("xlabel")
-axs[0].set_xlabel("ylabel")
-
-# 調整各個圖的間距
-plt.subplots_adjust(hspace=0.5, wspace=0.1)
+df2 = df2.set_index("Season")
+df2.plot(kind = 'line')
 
 plt.show()
 
@@ -347,27 +107,6 @@ df.plot.bar(y="speed", rot=45, ax=axs[0])
 df.plot.bar(y=["speed", "lifespan"], rot=45, ax=axs[1])
 plt.subplots_adjust(wspace=0.1)
 plt.suptitle("Bar chart")
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-# scatter plot chart
-
-fig, axs = plt.subplots(1, 2, figsize=(20, 8), sharey=False)
-df = pd.DataFrame(
-    [[5.1, 3.5, 0], [4.9, 3.0, 0], [7.0, 3.2, 1], [6.4, 3.2, 1], [5.9, 3.0, 2]],
-    columns=["length", "width", "species"],
-)
-df.plot.scatter(
-    x="length", y="width", s=50, marker="*", c="species", colormap="viridis", ax=axs[0]
-)  # s設定點的大小
-df.plot.bar(y=["length"], rot=45, ax=axs[1])
-axs[1].set_xlabel("xlabel")
-axs[1].set_ylabel("ylabel")
-axs[1].legend(loc=2)
-plt.suptitle("scatter plot")
-plt.subplots_adjust(wspace=0.1)
 
 plt.show()
 
@@ -421,7 +160,7 @@ from matplotlib import style
 
 style.use("fivethirtyeight")
 
-dictionary1 = {
+datas = {
     "順序": [1, 2, 3, 4],
     "中文名": ["鼠", "牛", "虎", "兔"],
     "英文名": ["mouse", "ox", "tiger", "rabbit"],
@@ -429,7 +168,7 @@ dictionary1 = {
     "代表": ["米老鼠", "班尼牛", "跳跳虎", "彼得兔"],
 }
 print("字典轉DataFrame")
-df1 = pd.DataFrame(dictionary1)
+df1 = pd.DataFrame(datas)
 print(df1)
 
 print("-----------------")
@@ -1133,16 +872,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-x = np.linspace(0, 2 * np.pi, 50)
-y = np.sin(x)
-
-df = pd.DataFrame({"x": x, "y": y})
-
-df.plot(kind="scatter", x="x", y="y", title="Sin(x)")
-
-plt.title("lll")
-plt.show()
-
 print("------------------------------------------------------------")  # 60個
 
 iris = pd.read_csv("data/iris.csv")
@@ -1394,7 +1123,6 @@ plt.show()
 sns.clustermap(fp,cmap='coolwarm',standard_scale=1)
 
 sns.lmplot(x='total_bill',y='tip',data=tips,hue='sex',markers=['o','v'],scatter_kws={'s':100})
-
 
 sns.lmplot(x='total_bill',y='tip',data=tips,col='sex',row='time',aspect=1,size=4)
 """
@@ -1652,48 +1380,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-# 散佈圖：氣溫與紅茶銷售量之間的相關性
-
-df = pd.read_csv("data/紅茶銷售量.csv")
-print(df)
-
-df.plot(kind="scatter", x="temperature", y="sale")
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-# 散佈圖
-
-df = pd.read_csv("data/sunshine.csv")
-print(df)
-
-df.plot(kind="scatter", x="SunShine", y="Temperature")
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-# 設定散佈圖X、Y軸的座標值
-
-df.plot(kind="scatter", x="SunShine", y="Temperature")
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-df.plot(kind="scatter", x="SunShine", y="Temperature", xlim=(0, 200), ylim=(0, 40))
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-df = pd.read_csv("data/NBA_players_salary_stats_2018.csv")
-df.plot(kind="scatter", x="PTS", y="salary", title="Scatter Plot of NBA Salary and PTS")
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
 
 
@@ -1714,9 +1400,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-
 # 如果是pandas資料 用 plt畫圖的 要改成pandas資料之使用
-
 
 # df 轉  html
 
@@ -1730,24 +1414,8 @@ print(df)
 df.to_html("tmp_ch9-4-4.html")
 
 print("------------------------------------------------------------")  # 60個
-
 """
-
 #準備做 pandas 多圖 TBD
-
-name = ["鼠", "牛", "虎", "兔"]
-weight = [3, 48, 33, 8]
-
-print('建立 DataFrame')
-df = pd.DataFrame()
-df["name"] = name
-df["weight"] = weight
-print(df)
-
-df["weight"].plot(kind = 'line', title = '線圖', fontsize = 12)
-
-plt.show()
-
 
 df = pd.DataFrame(np.random.randint(1, 7, 6000),columns = ['one'])
 df['two'] = df['one'] + np.random.randint(1, 7, 6000)
@@ -1757,12 +1425,10 @@ df.plot.hist(bins=12, alpha=0.5,ax=ax1)
 ax1.set_title('Hist. plot')
 ax1.set_xlabel('Xlabel')
 
-
 fig,ax2=plt.subplots(1,2,figsize=(10,8))
 df.plot.hist(bins=12, alpha=0.5,ax=ax2)
 ax2.set_title('Hist. plot')
 ax2.set_xlabel('Xlabel')
-
 
 plt.show()
 """
@@ -1806,7 +1472,146 @@ df = pd.DataFrame(
 df.plot(kind="pie", subplots=True, figsize=[20, 20])
 
 print("------------------------------------------------------------")  # 60個
-'''
+
+# 散佈圖
+
+N = 100
+print("建立 N X 2 個 0-100(含) 的整數隨機數")
+datas = np.random.randint(0, 100, size=(N, 2))
+#print(datas)
+
+columns = ["XXXX", "YYYY"]
+df = pd.DataFrame(datas, columns=columns)
+# print(df)
+print("相關係數矩陣 :", df.corr())
+
+#df.plot(kind="scatter", x="XXXX", y="YYYY")
+df.plot(kind="scatter", x="XXXX", y="YYYY", title="Scatter Plot")
+
+# 設定散佈圖X、Y軸的座標值
+#df.plot(kind="scatter", x="XXXX", y="YYYY", xlim=(-20, 120), ylim=(-20, 120))
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+N = 100
+xx = np.random.randint(0, 100, N)
+yy = np.random.randint(0, 100, N)
+cc = np.random.randint(0, 100, N)
+x = np.linspace(0, 2 * np.pi, 50)
+y = np.sin(x)
+
+df = pd.DataFrame({"XXXX": xx, "YYYY": yy, "COLOR": cc})
+
+# scatter plot 1
+#df.plot(kind="scatter", x="XXXX", y="YYYY", title="Scatter Plot")
+
+# scatter plot 2 + 設定點的大小 + 顏色
+df.plot.scatter(x="XXXX", y="YYYY", s=50, marker="*", c="COLOR", colormap="viridis")
+
+#plt.title("Scatter Plot") same
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+weight = [3, 48, 33, 8, 38, 16, 36, 29, 22, 6, 12, 42]
+name = ["鼠", "牛", "虎", "兔", "龍", "蛇", "馬", "羊", "猴", "雞", "狗", "豬"]
+
+print("建立空的df, 再加入資料至df")
+df = pd.DataFrame()
+df["name"] = name
+df["weight"] = weight
+print(df)
+print(df["name"])
+print(df["weight"])
+
+df.index = df["name"]
+df["weight"].plot(kind='line', title='線圖', fontsize=12)
+df["weight"].plot(kind='bar', title='長條圖', fontsize=12)
+
+#df["weight"].plot(kind="pie", autopct="%.0f%%", title = '派圖', fontsize = 12)
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+print("建立df, 一維串列 轉 df")
+
+weight = [3, 48, 33, 8, 38, 16, 36, 29, 22, 6, 12, 42]
+animals = ["鼠", "牛", "虎", "兔", "龍", "蛇", "馬", "羊", "猴", "雞", "狗", "豬"]
+df = pd.DataFrame(weight, index=animals)
+print(df)
+
+#只畫一圖
+df.plot(kind="line")
+plt.show()
+
+#畫 2X1 圖
+fig, axes = plt.subplots(2, 1)
+df.plot(ax=axes[0], kind="line")
+df.plot(ax=axes[1], kind="line")
+plt.show()
+
+#畫 2X2 圖
+fig, axes = plt.subplots(2, 2)
+df.plot(ax=axes[0, 0], kind="line")
+df.plot(ax=axes[0, 1], kind="line")
+df.plot(ax=axes[1, 0], kind="line")
+df.plot(ax=axes[1, 1], kind="line")
+plt.show()
+
+#畫 1X2 圖
+fig, axes = plt.subplots(1, 2, figsize=(14, 6), sharey=False)
+
+df.plot(ax=axes[0], kind="line")
+df.plot(ax=axes[1], kind="line", rot=45)
+
+axes[1].set_xlabel("XXXX")
+axes[1].set_ylabel("YYYY")
+#axes[1].legend(loc=2)
+
+plt.suptitle("畫 1X2 圖")
+plt.subplots_adjust(wspace=0.1)
+plt.show()
+
+#畫 2X1 圖
+
+
+data = np.random.randn(1000, 4)
+
+df = pd.DataFrame(data=data, index=np.arange(1000), columns=["a", "b", "c", "d"])
+
+#畫 2X1 圖
+
+fig, axs = plt.subplots(2, 1, sharex=True)
+df.plot(ax=axs[0], y=["a"], kind="line", title="ax1")
+df.plot(ax=axs[1], y=["b", "c", "d"], kind="line", title="ax2", figsize=(10, 8))
+
+axs[0].set_ylabel("ylabel")
+axs[1].set_ylabel("ylabel")
+axs[1].set_xlabel("Xlabel")
+fig.suptitle("This is a somewhat long figure title", fontsize=16)
+plt.show()
+
+fig, axs = plt.subplots(1, 2, sharey=True)
+df.plot(y=["a"], kind="line", ax=axs[0], legend=False)
+df.plot(y=["b", "c", "d"], kind="line", ax=axs[1], figsize=(20, 5))
+# 設定title
+axs[0].set_title("ax1")
+axs[1].set_title("ax2")
+# 設定label
+axs[0].set_xlabel("xlabel")
+axs[1].set_xlabel("xlabel")
+axs[0].set_xlabel("ylabel")
+# 調整各個圖的間距
+plt.subplots_adjust(hspace=0.5, wspace=0.1)
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+print('Series畫圖')
 weight = [3, 48, 33, 8, 38, 16, 36, 29, 22, 6, 12, 42]
 animals = ["鼠", "牛", "虎", "兔", "龍", "蛇", "馬", "羊", "猴", "雞", "狗", "豬"]
 
@@ -1814,7 +1619,7 @@ x = pd.Series(weight, index=animals)
 
 x.plot()  # 無參數, 預設就是 line
 
-x.plot(kind="bar", rot=45)  # bar 圖
+x.plot(kind="bar", rot=45, title = 'Series畫圖')  # bar 圖
 
 plt.show()
 
@@ -1825,31 +1630,22 @@ print("------------------------------------------------------------")  # 60個
 # Y軸的刻度可以透過 yticks 和 ylim 選向來調整
 
 N = 10
-# DataFrame的 plot()方法會在subplot中為每個 column繪製一條線，並自動創建legend
 df = pd.DataFrame(
-    np.random.randn(N, 4).cumsum(0),
-    index=np.arange(0, 100, N),
-    columns=["A", "B", "C", "D"],
+    np.random.randn(N, 5).cumsum(0),
+    #index=np.arange(0, 100, N),
+    index=list("ABCDEFGHIJ"),
+    columns=["國文", "英文", "數學", "社會", "自然"],
 )
 print(df)
 
-
-df.plot()  # 無參數, 預設就是 line
+df.plot(title = 'DataFrame畫圖')  # 無參數, 預設就是 line
 plt.show()
 
+data = pd.Series(np.random.rand(16), index=list("ABCDEFGHIJKLMNOP"))
 
 # 柱狀圖
-
 # 設定 kind = 'bar' 或 'barh' 即可繪製柱狀圖
 # Series和 DataFrame的 索引會被當作subplot的 X軸(bar)或 Y軸(barh)
-
-fig, axes = plt.subplots(2, 1)
-data = pd.Series(np.random.rand(16), index=list("abcedfghijklmnop"))
-data.plot(ax=axes[0], kind="bar")
-data.plot(ax=axes[1], kind="barh")
-
-plt.show()
-
 
 df = pd.DataFrame(
     np.random.rand(6, 4),
@@ -1859,33 +1655,30 @@ df = pd.DataFrame(
 print(df)
 
 # DataFrame的每一 row的值分為一組
-
-# DataFrame的每一 row的值分為一組
 # columns 索引的 name屬性 被用來做為 legend的標題
 df.plot(kind="bar")
 
 plt.show()
 
-
 # 設定 stacked = True, 可繪製 堆積柱狀圖
 df.plot(kind="barh", stacked=True)
-
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
 s = pd.Series([2, 3, 5, 2, 5, 6, 7, 8, 9, 10, 13, 2, 3, 4, 7, 8, 9, 0, 0, 2, 2, 1])
-
+print(s)
 # 用Series的 value_counts()直接繪製柱狀圖，表達每個數字出現的次數
 vc = s.value_counts()
 vc.plot(kind="bar")
+
 plt.show()
 
+print("------------------------------------------------------------")  # 60個
 
 tips = pd.read_csv("data/tips.csv")
 cc = tips[:5]
 print(cc)
-
 
 # 用 crosstab()方法創建一個 交叉表，預設統計 發生的次數(計數)
 party_counts = pd.crosstab(tips.day, tips["size"])
@@ -1968,3 +1761,171 @@ plt.show()
 pd.scatter_matrix(trans_data, color = 'k', alpha = 0.3)
 plt.show()
 """
+
+print("------------------------------------------------------------")  # 60個
+
+df = pd.read_csv("_new/2330_2019_9.csv")
+
+print("建立空的df, 再加入資料至df")
+data = pd.DataFrame()
+data["Date"] = pd.to_datetime(df["Date"])
+data["Adj Close"] = df["Adj Close"]
+data["High"] = df["High"]
+data["Low"] = df["Low"]
+data = data.set_index("Date")
+
+data.plot(kind="line")
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+df = pd.read_csv("_new/drinks.csv")
+print(df)
+
+df.set_index("Type", inplace=True)
+df.plot(kind="bar")
+df.plot(kind="barh")
+
+plt.show()
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("pd 之 plot 之 scatter")
+
+N = 1000
+datas = np.random.randn(N, 2)
+
+columns = list("AB")
+index = np.arange(N)
+df = pd.DataFrame(datas, columns=columns, index=index)
+# print(df)
+
+ax = df.plot.scatter(x="A", y="B", color="DarkBlue", label="Class 1")
+# df.plot.scatter(x="A", y="B", color="LightGreen", label="Class 2", ax=ax)
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+N = 1000
+N = 100
+datas = np.random.randn(N, 4)
+
+# print("建立 3x2 個0-9(含) 的整數隨機數")
+# datas = np.random.randint(0, 10, size=(N, 4))
+# print(datas)
+
+columns = list("ABCD")
+index = np.arange(N)
+df = pd.DataFrame(datas, columns=columns, index=index)
+# print(df)
+
+# df = df.cumsum()#依欄位, 逐列累加
+# print(df)
+
+# plot methods:
+# 'bar', 'hist', 'box', 'kde', 'area', scatter', hexbin', 'pie'
+ax = df.plot.scatter(x="A", y="B", color="DarkBlue", label="Class 1")
+# df.plot.scatter(x="A", y="C", color="LightGreen", label="Class 2", ax=ax)
+
+df.plot.scatter(x="A", y="B", color="red", label="Class B", ax=ax)
+df.plot.scatter(x="A", y="C", color="green", label="Class C", ax=ax)
+df.plot.scatter(x="A", y="D", color="blue", label="Class D", ax=ax)
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+"""
+應該是pandas/data_frame才有的語法
+df_sbike.median().plot(kind="bar")
+weekday_counts.plot(kind='bar')
+
+"""
+
+
+
+print("用plt畫pd資料")
+
+print("只變更要強調的扇形的顏色")
+
+datas = {
+    "name": ["鼠", "牛", "虎", "兔", "龍"],
+    "weight": [3, 48, 33, 8, 38]
+    }
+df = pd.DataFrame(datas)
+print(df)
+
+"""
+# 要強調的扇形的標籤 
+point_label = "虎" 
+# 重點色 
+point_color = "#CC0000"
+
+# 調整特定標籤的顏色
+palette = sns.color_palette("binary", len(df)) 
+for i in df[df.name == point_label].index.values:
+    palette[i] = point_color 
+
+plt.pie(df["weight"], labels=df["name"],
+        autopct="%1.1f%%", startangle=90, counterclock=False,
+        colors=palette)
+
+plt.show()
+"""
+
+# pandas 多圖 無效
+
+fig, ax = plt.subplots(1, 1, figsize=(10, 8))
+df = pd.DataFrame(np.random.randint(1, 7, 6000), columns=["one"])
+df["two"] = df["one"] + np.random.randint(1, 7, 6000)
+df.plot.hist(bins=12, alpha=0.5, ax=ax)
+ax.set_title("Hist. plot")
+ax.set_xlabel("Xlabel")
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+
+"""
+print("畫出來")
+df.plot(xticks=range(0, 4))
+plt.show()
+"""
+
+
+
+
+"""
+df.plot(kind="line", title="線圖", figsize=[10, 5])
+df.plot(kind="bar", title="長條圖", figsize=[10, 5])
+df.plot(kind="barh", title="橫條圖", figsize=[10, 5])
+df.plot(kind="bar", stacked=True, title="堆疊圖", figsize=[10, 5])
+
+g1 = df.iloc[0].plot(
+    kind="line",
+    legend=True,
+    xticks=range(2015, 2020),
+    title="公司分區年度銷售表",
+    figsize=[10, 5],
+)
+g1 = df.iloc[1].plot(kind="line", legend=True, xticks=range(2015, 2020))
+g1 = df.iloc[2].plot(kind="line", legend=True, xticks=range(2015, 2020))
+
+df.plot(kind="pie", subplots=True, figsize=[14, 6])  # 繪圖 plot
+
+"""
+
+
+
+

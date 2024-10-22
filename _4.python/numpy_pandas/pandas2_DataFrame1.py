@@ -1040,10 +1040,7 @@ df.to_csv("tmp_titanic_train.csv", encoding="utf8")
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
-
 
 # 新竹市氣象資料1992_2020
 
@@ -1378,26 +1375,6 @@ print("欄位 Age 為 空資料 之個數")
 print(df["Age"].isnull().sum())
 
 # print("檢視前幾行\n", df.head())
-
-print("------------------------------------------------------------")  # 60個
-
-df = pd.read_csv("_new/2330_2019_9.csv")
-data = pd.DataFrame()
-data["Date"] = pd.to_datetime(df["Date"])
-data["Adj Close"] = df["Adj Close"]
-data["High"] = df["High"]
-data["Low"] = df["Low"]
-data = data.set_index("Date")
-
-data.plot(kind="line")
-
-print("------------------------------------------------------------")  # 60個
-
-df = pd.read_csv("_new/drinks.csv")
-print(df)
-df.set_index("Type", inplace=True)
-df.plot(kind="bar")
-df.plot(kind="barh")
 
 print("------------------------------------------------------------")  # 60個
 
@@ -2144,6 +2121,7 @@ drinks.groupby('continent').mean()
 
 # side-by-side bar plot of the DataFrame directly above
 drinks.groupby('continent').mean().plot(kind='bar')
+plt.show()
 """
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -2728,7 +2706,7 @@ print(cc)
 # plot the number of UFO reports per year (line plot is the default)
 ufo.Year.value_counts().sort_index().plot()
 
-# plt.show()
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -3961,43 +3939,6 @@ sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 
-print("用plt畫pd資料")
-
-print("只變更要強調的扇形的顏色")
-
-df = pd.DataFrame({"name": ["鼠", "牛", "虎", "兔", "龍"], "weight": [3, 48, 33, 8, 38]})
-
-"""
-# 要強調的扇形的標籤 
-point_label = "虎" 
-# 重點色 
-point_color = "#CC0000"
-
-# 調整特定標籤的顏色
-palette = sns.color_palette("binary", len(df)) 
-for i in df[df.name == point_label].index.values:
-    palette[i] = point_color 
-
-plt.pie(df["weight"], labels=df["name"],
-        autopct="%1.1f%%", startangle=90, counterclock=False,
-        colors=palette)
-
-plt.show()
-"""
-
-# pandas 多圖 無效
-
-fig, ax = plt.subplots(1, 1, figsize=(10, 8))
-df = pd.DataFrame(np.random.randint(1, 7, 6000), columns=["one"])
-df["two"] = df["one"] + np.random.randint(1, 7, 6000)
-df.plot.hist(bins=12, alpha=0.5, ax=ax)
-ax.set_title("Hist. plot")
-ax.set_xlabel("Xlabel")
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
 print("------------------------------------------------------------")  # 60個
 
 """
@@ -4403,21 +4344,6 @@ print(df)
 
 print("------------------------------------------------------------")  # 60個
 
-weight = [3, 48, 33, 8, 38, 16, 36, 29, 22, 6, 12, 42]
-name = ["鼠", "牛", "虎", "兔", "龍", "蛇", "馬", "羊", "猴", "雞", "狗", "豬"]
-
-datas = {"name": ["鼠", "牛", "虎", "兔", "龍"], "weight": [3, 48, 33, 8, 38]}
-df = pd.DataFrame(datas)
-print(df)
-
-print("name")
-print(df["name"])
-
-print("weight")
-print(df["weight"])
-
-print("------------------------------------------------------------")  # 60個
-
 """ data2/test3.csv
 性別,尺寸,價格
 male,XL,800
@@ -4448,50 +4374,6 @@ print(df)
 
 print("------------------------------------------------------------")  # 60個
 
-print("pd 之 plot 之 scatter")
-N = 1000
-datas = np.random.randn(N, 2)
-
-columns = list("AB")
-index = np.arange(N)
-df = pd.DataFrame(datas, columns=columns, index=index)
-# print(df)
-
-ax = df.plot.scatter(x="A", y="B", color="DarkBlue", label="Class 1")
-# df.plot.scatter(x="A", y="B", color="LightGreen", label="Class 2", ax=ax)
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-N = 1000
-N = 100
-datas = np.random.randn(N, 4)
-
-# print("建立 3x2 個0-9(含) 的整數隨機數")
-# datas = np.random.randint(0, 10, size=(N, 4))
-# print(datas)
-
-columns = list("ABCD")
-index = np.arange(N)
-df = pd.DataFrame(datas, columns=columns, index=index)
-# print(df)
-
-# df = df.cumsum()#依欄位, 逐列累加
-# print(df)
-
-# plot methods:
-# 'bar', 'hist', 'box', 'kde', 'area', scatter', hexbin', 'pie'
-ax = df.plot.scatter(x="A", y="B", color="DarkBlue", label="Class 1")
-# df.plot.scatter(x="A", y="C", color="LightGreen", label="Class 2", ax=ax)
-
-df.plot.scatter(x="A", y="B", color="red", label="Class B", ax=ax)
-df.plot.scatter(x="A", y="C", color="green", label="Class C", ax=ax)
-df.plot.scatter(x="A", y="D", color="blue", label="Class D", ax=ax)
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
 """ no file
 # 載入外部檔案並做資料整理
 # 使用 Pandas 讀取 CSV 檔
@@ -4508,12 +4390,6 @@ print("簡單df操作")
 
 df = make_data_frame()
 print(df)
-
-"""
-print("畫出來")
-df.plot(xticks=range(0, 4))
-plt.show()
-"""
 
 print("孫悟空的成績(df.values[1])：")
 print(df.values[1])
@@ -4794,12 +4670,6 @@ series 大概就是一個 list, 一個 array。其實更精準的說, 其實是�
 """
 
 
-"""
-應該是pandas/data_frame才有的語法
-df_sbike.median().plot(kind="bar")
-weekday_counts.plot(kind='bar')
-
-"""
 
 
 """
@@ -4812,3 +4682,56 @@ print(df.pivot_table(index="品名",columns="客戶名稱", values="金額", fil
 print(df.pivot_table(index="品名",columns="客戶名稱", values="金額", fill_value=0, margins=True ))
 
 """
+
+
+# df = pd.DataFrame(np.random.randn(3,3), columns=list("甲乙丙"))
+# print(df)
+
+# df = pd.DataFrame(np.random.randn(5, 3), index=list(range(1,6)), columns=list("ABC"))
+
+#                    A  B  C  D  E
+df = pd.DataFrame(
+    [
+        [65, 92, 78, 83, 70],
+        [90, 72, 76, 93, 56],
+        [81, 85, 91, 89, 77],
+        [79, 53, 47, 94, 80],
+    ],
+    index=list(range(1, 5)),
+    columns=list("ABCDE"),
+)
+
+print("原資料 :\n", df)
+
+print("常用統計數據")
+print(df.describe())
+
+print("相關係數")
+print(df.corr())
+
+print("df轉csv")
+df.to_csv("tmp_df_data1.csv")
+
+print("data_frame 畫點圖")
+
+x = df.A.values
+y = df.B.values
+
+"""
+loc 的用法
+df.loc[列的範圍, 行的範圍]
+
+df.loc[2:3, "B":"C"]
+
+
+列或行只要一個
+df.loc[2, "B"]
+
+df.loc[2, "B"]=-1
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+

@@ -2241,45 +2241,54 @@ namespace _vcs_MakePicture
         private void button58_Click(object sender, EventArgs e)
         {
             //灰階測試
+            int ratio = 50;
             int i;
             int j;
-            int W = 512;
-            int H = 512;
 
-            int width;
-            int height;
+            int W = 8 * ratio;
+            int H = 8 * ratio;
+            //int H = 30;
+
+            int width = W + 200;
+            int height = H + 200;
 
             Pen p1;
             Pen p2;
 
-            width = W;
-            height = H;
-
             bitmap1 = new Bitmap(width, height);
 
             g = Graphics.FromImage(bitmap1);
+            g.FillRectangle(Brushes.Black, new Rectangle(0, 0, width, height));
+            g.FillRectangle(Brushes.White, new Rectangle(50, 50, width - 100, height - 100));
 
             p1 = new Pen(Color.Black, 1);
             p2 = new Pen(Color.Pink, 1);
 
             int xx;
             int yy;
+            int x_st = 100;
+            int y_st = 100;
 
-            for (yy = 0; yy < height; yy++)
+            for (yy = 0; yy < H; yy++)
             {
-                for (xx = 0; xx < width; xx++)
+                for (xx = 0; xx < W; xx++)
                 {
                     //bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x11, 0x33, 0x55));
-                    bitmap1.SetPixel(xx, yy, background_color);
+                    //bitmap1.SetPixel(xx, yy, background_color);
+
+                    int hh = yy / ratio;
+                    int gray = 4 * (xx / ratio) + hh * 32;
+
+                    bitmap1.SetPixel(x_st + xx, y_st + yy, Color.FromArgb(255, gray, gray, gray));
+                    //richTextBox1.Text += gray.ToString() + " ";
                 }
+                //richTextBox1.Text += "\n";
             }
 
+            bitmap1.Save("aaaa.bmp", ImageFormat.Bmp);
 
+            pictureBox1.Size = new Size(600, 600);
             pictureBox1.Image = bitmap1;
-
-
-
-
         }
 
         private void button59_Click(object sender, EventArgs e)
