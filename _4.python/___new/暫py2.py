@@ -1,3 +1,15 @@
+ 
+        mode = os.lstat(long_filename).st_mode
+        if stat.S_ISDIR(mode):
+            print('folder')
+        elif stat.S_ISREG(mode):
+            print('file')
+        else:
+            # Unknown file type, print a message
+            print("Skipping %s" % long_filename)
+
+
+
 1. 撈出指定資料夾下所有檔案
 2. + 分辨檔案型態
 3. + 過濾檔案大小

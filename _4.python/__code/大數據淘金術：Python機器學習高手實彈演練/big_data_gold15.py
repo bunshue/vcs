@@ -186,3 +186,52 @@ print('------------------------------------------------------------')	#60個
 
 
 
+import os
+import sys
+
+import numpy as np
+import pandas as pd
+
+print('------------------------------------------------------------')	#60個
+
+import warnings
+warnings.filterwarnings('ignore')
+
+
+import cv2
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+cv_img = cv2.imread(filename)
+width=cv_img.shape[1]
+height=cv_img.shape[0]
+print(width)
+print(height)
+
+from PIL import Image
+
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+
+img = Image.open(filename)
+
+mask = np.zeros([10, 5, 3], dtype=np.uint8)
+#print(mask)
+occlusion = np.logical_not(mask[:, :, -1]).astype(np.uint8)
+
+#print(mask)
+
+#mask[:, :, i] = mask[:, :, i] * occlusion
+#occlusion = np.logical_and(occlusion, np.logical_not(mask[:, :, i]))
+
+print('------------------------------------------------------------')	#60個
+
+sys.path.append(os.path.dirname(os.getcwd()))
+import skimage.io
+
+ROOT_DIR = os.getcwd()
+sys.path.append(ROOT_DIR)
+
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+image = skimage.io.imread(filename)
+
+print('------------------------------------------------------------')	#60個
+
+

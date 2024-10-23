@@ -1,7 +1,7 @@
 """
 各種方法的 ls dir
 
-print('ls 測試 os.walk')
+print('ls 測試 os.walk')  # 多層
 print('ls 測試 os.listdir')
 print('ls 測試 glob.glob') 轉出一層
 
@@ -25,15 +25,54 @@ import datetime
 
 foldername = "C:/_git/vcs/_1.data/______test_files3/DrAP_test"
 foldername = "C:/_git/vcs/_1.data/______test_files3/DrAP_test/_good1/_good4/_good5"
-foldername = "C:/_git/vcs/_1.data/______test_files3/DrAP_test6"
+foldername = "C:/_git/vcs/_1.data/______test_files3/DrAP_test6" # 較少
+
+print("------------------------------------------------------------")  # 60個
+'''
+print('取得檔案大小, 2個方法')
+
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+filesize = os.stat(filename).st_size
+print("容量 :", filesize, "位元組")
+filesize = os.path.getsize(filename)
+print("容量 :", filesize, "位元組")
+
+print("------------------------------------------------------------")  # 60個
+
+print("檢查檔案副檔名")
+
+def is_image(filename):
+    f = filename.lower()
+    return (
+        f.endswith(".png")
+        or f.endswith(".jpg")
+        or f.endswith(".jpeg")
+        or f.endswith(".bmp")
+        or f.endswith(".gif")
+        or ".jpg" in f
+        or f.endswith(".svg")
+    )
+
+filename1 = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+filename2 = 'C:/_git/vcs/_1.data/______test_files1/__RW/_word/python_docx1.docx'
+filename3 = 'C:/_git/vcs/_1.data/______test_files2/output.avi'
+
+for filename in sorted([filename1, filename2, filename3]):
+    print(filename)
+    print(is_image(filename))
+
+print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 print("ls 測試 os.walk ST")
 print("------------------------------------------------------------")  # 60個
 
-print("轉出多層 os.walk 1 + 僅顯示檔案")
+print("轉出多層 os.walk 1")
 foldername = "C:/_git/vcs/_1.data/______test_files3/DrAP_test6"
 
+total_folders = 0
+total_files = 0
+total_size = 0
 all_files = list()
 
 """ 分開寫
@@ -45,63 +84,20 @@ for dirName, sub_dirNames, fileNames in os.walk(foldername):
 """
 
 for item in os.walk(foldername):  # 多層
-    # print(item)
-    print("資料夾 :", item[0])
-    print("子資料夾:", item[1])
-    print("檔案:", item[2])
-    for _ in item[2]:
-        file = item[0] + "/" + _
-        # print(file)
-        all_files.append(file)
-        # 計算檔案大小
-        # filesize = os.stat(file).st_size
-        # print(filesize)
-    print("------------------------------")  # 30個
-
-print("顯示結果:")
-for _ in all_files:
-    print(_)
-
-print("------------------------------------------------------------")  # 60個
-
-print("轉出多層 os.walk")
-
-foldername = "C:/_git/vcs/_1.data/______test_files3/DrAP_test6"
-
-allfilesize = 0
-for item in os.walk(foldername):
-    # item[0]是路徑名稱，item[2]是檔案清單
-    for fname in item[2]:
-        # 取出檔名完整路徑
-        ffname = os.path.join(item[0], fname)
-        # 取出檔案大小
-        size = os.path.getsize(ffname)
-        allfilesize += size
-
-print("總容量 : " + str(allfilesize) + " 拜")
-
-print("------------------------------------------------------------")  # 60個
-
-print("轉出多層 os.walk 2 + 處理")
-foldername = "C:/_git/vcs/_1.data/______test_files3/DrAP_test6"
-
-total_folders = 0
-total_files = 0
-total_size = 0
-all_files = list()
-for item in os.walk(foldername):  # 多層
     total_folders += 1
+    # item[0]是路徑名稱，item[2]是檔案清單
     # print(item)
     print("資料夾 :", item[0])
     print("子資料夾:", item[1])
     print("檔案:", item[2])
-    total_files += len(item[2])
-    for _ in item[2]:
-        file = item[0] + "/" + _
-        all_files.append(file)
-        # 計算檔案大小
-        filesize = os.stat(file).st_size
-        # print(filesize)
+    print("檔案個數:", len(item[2]))
+    for fname in item[2]:
+        #ffname = item[0] + "/" + fname  # 取出檔名完整路徑 same
+        ffname = os.path.join(item[0], fname)  # 取出檔名完整路徑
+        print(ffname)
+        total_files += 1
+        all_files.append(ffname)
+        filesize = os.stat(ffname).st_size  # 取出檔案大小
         total_size += filesize
     print("------------------------------")  # 30個
 
@@ -115,39 +111,34 @@ print("包含 :", total_files, "個檔案,", total_folders, "個資料夾")
 print("顯示結果:")
 for _ in all_files:
     print(_)
+print("總容量 : " + str(total_size) + " 拜")
 
 print("------------------------------------------------------------")  # 60個
 
-print("轉出多層 os.walk 3")
+print("轉出多層 os.walk 2")
 foldername = "C:/_git/vcs/_1.data/______test_files3/DrAP_test6"
-
-filenames = os.walk(foldername)  # 多層
-print(type(filenames))  # 很奇怪的結構
-# print(filenames)
-
-allfiles = []
+all_files = list()
 
 # foldername 檔案所在資料夾
 # subdir     檔案所在位置的其他資料夾
 # files      檔案名稱
-for foldername, subdir, files in filenames:
+for foldername, subdir, files in os.walk(foldername):  # 多層
     if "folder_xxxxx" in subdir:  # 某些資料夾下的檔案不要處理
         print("某些資料夾下的檔案不要處理")
         subdir.remove("folder_xxxxx")
-    for filename in files:  # 取得所有檔案，存入 allfiles 串列中
+    for filename in files:  # 取得所有檔案，存入 all_files 串列中
         # print('檔案所在資料夾 :', foldername)
         # print('檔案所在位置的其他資料夾 :', subdir)
         # print('檔案名稱', filename)
-        # allfiles.append(foldername + '/' + filename)   #絕對路徑
+        # all_files.append(foldername + '/' + filename)   #絕對路徑
         long_filename = os.path.join(foldername, filename)  # 取得檔案的絕對路徑
-        filesize = os.stat(long_filename).st_size
 
-        allfiles.append(long_filename)  # 絕對路徑
+        all_files.append(long_filename)  # 絕對路徑
 
-print(len(allfiles))
+print(len(all_files))
 
-if len(allfiles) > 0:
-    for filename in allfiles:
+if len(all_files) > 0:
+    for filename in all_files:
         # print(filename)
         if not os.path.exists(filename):
             print("檔案不存在")
@@ -166,13 +157,13 @@ if len(allfiles) > 0:
     # print(long_filename)
 
 # 分析
-if len(allfiles) > 0:
-    for filename in allfiles:
+if len(all_files) > 0:
+    for filename in all_files:
         # print(filename)
         if filename.endswith(".jpg") or filename.endswith(".png"):
             print("取得圖檔 :", filename)
 
-    for filename in allfiles:
+    for filename in all_files:
         ext = filename.split(".")[-1]
         print("副檔名 :", ext)
         if ext == "png" or ext == "jpg":
@@ -202,18 +193,12 @@ print("轉出一層 os.listdir 1")
 # foldername = "/"  # 根目錄
 foldername = "C:/_git/vcs/_1.data/______test_files3/DrAP_test6"
 
-filenames = os.listdir(foldername)  # 轉出一層, 指定目錄, 若無參數, 就是當前目錄
-# print(filenames)
+#filenames = os.listdir(".")  # 搜尋目前工作目錄下的檔案
 
+filenames = os.listdir(foldername)  # 轉出一層, 指定目錄, 若無參數, 就是當前目錄
+print("轉出一層(資料夾+檔案)\n", filenames)
 print("當前目錄下共有 :", len(filenames), "個項目(資料夾+檔案)")
 
-filenames = os.listdir(foldername)  # 轉出一層
-print("資料夾裡的文件與資料夾:{}".format(filenames))
-
-filenames = os.listdir(foldername)  # 轉出一層
-print(filenames)
-
-filenames = os.listdir(foldername)  # 轉出一層
 for filename in filenames:
     print(filename)
     long_filename = os.path.join(foldername, filename)  # 取得檔案的絕對路徑
@@ -228,14 +213,8 @@ print(zz)
 
 print("------------------------------------------------------------")  # 60個
 
-foldername = "C:/_git/vcs/_1.data/______test_files3/DrAP_test6"
-print(os.listdir(foldername))
-print(os.listdir("."))  # 這代表目前工作目錄
 
-print("------------------------------------------------------------")  # 60個
-
-
-# 可統計資料夾或檔案的大小
+# 統計資料夾或檔案的大小
 def getFolderSize(pathname):
     size = 0
 
@@ -244,7 +223,7 @@ def getFolderSize(pathname):
         for subdirectory in lst:
             size += getFolderSize(pathname + "\\" + subdirectory)
     else:  # 是檔案才要統計大小
-        size += os.path.getsize(pathname)
+        size += os.path.getsize(pathname)  # 取出檔案大小
     return size
 
 
@@ -278,64 +257,6 @@ dirTree(foldername)
 
 print("------------------------------------------------------------")  # 60個
 
-print("轉出多層 os.listdir 7 callback")
-
-
-def list_files1(foldername, callback):
-    for filename in os.listdir(foldername):  # 轉出一層
-        long_filename = os.path.join(foldername, filename)  # 取得檔案的絕對路徑
-        mode = os.lstat(long_filename).st_mode
-        if stat.S_ISDIR(mode):
-            # It's a directory, recurse into it
-            list_files1(long_filename, callback)
-        elif stat.S_ISREG(mode):
-            # It's a file, call the callback function
-            callback(long_filename)
-        else:
-            # Unknown file type, print a message
-            print("Skipping %s" % long_filename)
-
-
-def visitfile(file):
-    print("visiting", file)
-
-
-list_files1(foldername, visitfile)
-
-print("------------------------------------------------------------")  # 60個
-
-print("顯示資料夾內的特定格式的檔案")
-
-
-def is_image(filename):
-    f = filename.lower()
-    return (
-        f.endswith(".png")
-        or f.endswith(".jpg")
-        or f.endswith(".jpeg")
-        or f.endswith(".bmp")
-        or f.endswith(".gif")
-        or ".jpg" in f
-        or f.endswith(".svg")
-    )
-
-
-def find_similar_images(foldername):
-    image_filenames = []
-    image_filenames += [
-        os.path.join(foldername, path)
-        for path in os.listdir(foldername)  # 轉出一層
-        if is_image(path)
-    ]
-    for img in sorted(image_filenames):
-        print(img)
-
-
-foldername = "C:/_git/vcs/_1.data/______test_files3/DrAP_test6"
-find_similar_images(foldername)
-
-print("------------------------------------------------------------")  # 60個
-
 
 def _listFiles(files, foldername):
     for filename in os.listdir(foldername):  # 轉出一層
@@ -346,7 +267,7 @@ def _listFiles(files, foldername):
             files.append(long_filename)
 
 
-def read_files(foldername, showProgress=False, readPixelData=False, force=False):
+def read_files(foldername):
     print(foldername)
 
     filelist = []
@@ -364,7 +285,7 @@ def read_files(foldername, showProgress=False, readPixelData=False, force=False)
 
 print("轉出多層 os.listdir 8")
 foldername = "C:/_git/vcs/_1.data/______test_files3/DrAP_test6"
-all_series = read_files(foldername, True, False, False)
+all_series = read_files(foldername)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -661,15 +582,15 @@ for filename in filenames:
     print()
 
 # 計算檔案容量
-allfilesize = 0
+total_size = 0
 for filename in filenames:
     print(f"{filename} : {os.path.getsize(filename)} bytes")
     print("檔案 : " + filename + ", 大小 : " + str(os.path.getsize(filename)) + " 拜")
     pathname, short_filename = os.path.split(filename)
     print(short_filename)
-    allfilesize += os.path.getsize(filename)
+    total_size += os.path.getsize(filename)  # 取出檔案大小
 
-print("總容量 : " + str(allfilesize) + " 拜")
+print("總容量 : " + str(total_size) + " 拜")
 
 # 撈出一層後 檢查是否是需要的附檔名
 py = []
@@ -821,7 +742,7 @@ for entry in os.scandir(foldername):
     da = datetime.datetime.utcfromtimestamp(info.st_mtime)
     dstr = da.strftime("%d/%m/%Y")
     if entry.is_file():
-        size = int(os.path.getsize(entry.name) / 1024)
+        size = int(os.path.getsize(entry.name) / 1024)  # 取出檔案大小
         ext = os.path.splitext(entry.name)
         print(
             entry.name,
@@ -1074,11 +995,11 @@ print("------------------------------------------------------------")  # 60個
 
 print("用 os.path.getsize 取得 檔案 大小")
 filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
-print(filename, ":", os.path.getsize(filename))
+print(filename, ":", os.path.getsize(filename))  # 取出檔案大小
 
 print("用 os.path.getsize 取得 資料夾 大小, fail, 所以不能用這個方法取得資料夾大小")
 foldername = "C:/_git/vcs/_1.data/______test_files3/DrAP_test6"
-print(foldername, ":", os.path.getsize(foldername))
+print(foldername, ":", os.path.getsize(foldername))  # 取出檔案大小 FAIL
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1298,7 +1219,7 @@ print("檔案名稱 : ", os.path.getmtime(filename_r))
 
 import os.path
 
-filesize = os.path.getsize(filename_r)
+filesize = os.path.getsize(filename_r)  # 取出檔案大小
 print("filesize : ", filesize)
 
 print("檔案時間 : ", os.path.getmtime(filename_r))
@@ -1310,7 +1231,7 @@ print("檔案是否存在 : ", os.path.isfile(filename_r))
 filename = os.path.abspath("test10_new10.py")
 if os.path.exists(filename):  # 檢查檔案是否存在
     print("完整路徑名稱：" + filename)
-    print("檔案大小：", os.path.getsize(filename))
+    print("檔案大小：", os.path.getsize(filename))  # 取出檔案大小
 
 
 """
@@ -1348,7 +1269,7 @@ filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 
 if os.path.exists(filename):
     print("完整路徑名稱:", filename)
-    print("檔案大小:", os.path.getsize(filename))
+    print("檔案大小:", os.path.getsize(filename))  # 取出檔案大小
 
     basename = os.path.basename(filename)
     print("最後的檔案或路徑名稱:", basename)
@@ -1391,7 +1312,7 @@ if os.path.exists(filename+'_wm.png'):
 print("拷貝檔案")
 
 imageno = 1
-for f in allfiles:
+for f in all_files:
     print("全檔名 : " + f)
     dirname, filename = f.split("\\")
     print("資料夾 : " + dirname)
@@ -1423,7 +1344,7 @@ if os.path.exists(target_dir):
 split用法 TBD
 os.mkdir(target_dir)
 imageno = 0
-for f in allfiles:
+for f in all_files:
   dirname, filename = f.split('/')
   mainname, extname = filename.split('.')
   targetfile = target_dir + '/' + str(imageno) + '.' + extname
@@ -2581,5 +2502,86 @@ foldername = "C:/_git/vcs/_1.data/______test_files3/DrAP_test"
 
 cc = recursedown(foldername)
 print(cc)
-
+'''
 print("------------------------------------------------------------")  # 60個
+
+TB = 1024 * 1024 * 1024 * 1024  # 定義TB的計算常量
+GB = 1024 * 1024 * 1024  # 定義GB的計算常量
+MB = 1024 * 1024  # 定義MB的計算常量
+KB = 1024  # 定義KB的計算常量
+
+
+def ByteConversionTBGBMBKB(size):
+    if size < 0:
+        return "不合法的數值"
+    elif size / TB >= 1024:  # 如果目前Byte的值大於等於1024TB
+        return "無法表示"
+    elif size / TB >= 1:  # 如果目前Byte的值大於等於1TB
+        return format(size / TB, ".2f") + " TB"  # 將其轉換成TB
+    elif size / GB >= 1:  # 如果目前Byte的值大於等於1GB
+        return format(size / GB, ".2f") + " GB"  # 將其轉換成GB
+    elif size / MB >= 1:  # 如果目前Byte的值大於等於1MB
+        return format(size / MB, ".2f") + " MB"  # 將其轉換成MB
+    elif size / KB >= 1:  # 如果目前Byte的值大於等於1KB
+        return format(size / KB, ".2f") + " KB"  # 將其轉換成KB
+    else:
+        return str(size) + " Byte"  # 顯示Byte值
+
+"""
+filesize = 123456
+print("filesize = ", filesize, "\t檔案大小 : ", ByteConversionTBGBMBKB(filesize))
+print("大小:\t", filesize, " 拜")
+print("大小:\t", ByteConversionTBGBMBKB(filesize))
+"""
+
+def check_video_filename(filename):
+    f = filename.lower()
+    return (
+        f.endswith(".mp4")
+        or f.endswith(".avi")
+        or f.endswith(".wmv")
+        or f.endswith(".ogg")
+        or f.endswith(".ogg")
+        or ".ogg" in f
+        or f.endswith(".ogg")
+    )
+
+
+
+
+print("轉出多層 os.walk 1 AP專用")
+
+foldername = "D:/內視鏡影片/_ims影片1"
+
+total_folders = 0
+total_files = 0
+total_size = 0
+all_files = list()
+
+for item in os.walk(foldername):  # 多層
+    total_folders += 1
+    for fname in item[2]:
+        #ffname = item[0] + "/" + fname  # 取出檔名完整路徑 same
+        ffname = os.path.join(item[0], fname)  # 取出檔名完整路徑
+        #print(ffname)
+        if check_video_filename(ffname)==True:
+            total_files += 1
+            all_files.append(ffname)
+            filesize = os.stat(ffname).st_size  # 取出檔案大小
+            total_size += filesize
+    print("------------------------------")  # 30個
+
+if total_folders > 0:
+    total_folders -= 1
+
+print("位置 :", foldername)
+print("容量 :", total_size, "位元組")
+print("包含 :", total_files, "個檔案,", total_folders, "個資料夾")
+
+print("顯示結果:")
+for _ in all_files:
+    print(_)
+print("總容量 : " + str(total_size) + " 拜")
+print("總容量 : ", ByteConversionTBGBMBKB(total_size))
+
+

@@ -110,6 +110,7 @@ print("------------------------------------------------------------")  # 60個
 # 共同
 import os
 import sys
+import time
 import math
 import random
 import numpy as np
@@ -123,7 +124,7 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 # 設定負號
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
-'''
+
 print('------------------------------------------------------------')	#60個
 
 filename1 = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/red_300X300.bmp'
@@ -357,8 +358,6 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-'''
-
 """
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 
@@ -462,3 +461,16 @@ if __name__ == '__main__':
 """
 
 print('------------------------------------------------------------')	#60個
+
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+#filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_gif/SpongeBob.gif'
+
+from PIL import Image
+img = Image.open(filename)
+print(img.mode)
+
+#01   Img_8 = img.convert("P")
+#02   Img_8.save('xxx.png')
+
+
+
