@@ -7,29 +7,29 @@ Copyright (c), 2000-2006, eGenix.com Software GmbH (info@egenix.com)
 See the documentation for further information on copyrights,
 or contact the author. All Rights Reserved.
 """
-__version__ = '1.2'
+__version__ = "1.2"
 
 # Name (defaults to program name)
-name = ''
-optionlist = None   # List of passed options
+name = ""
+optionlist = None  # List of passed options
+
 
 class MyLog(object):
-
     options = []
     # Header (default to program name)
-    header = ''
+    header = ""
 
     # Synopsis (%(name)s is replaced by the program name)
-    synopsis = '%(name)s [option] files...'
+    synopsis = "%(name)s [option] files..."
 
     # General information printed after the possible options (optional)
-    about = ''
+    about = ""
 
     # Copyright to show
     copyright = __copyright__
 
     # Version (optional)
-    version = ''
+    version = ""
 
     def __init__(self, log):
         self.log = log
@@ -52,106 +52,100 @@ class MyLog(object):
         return self.log
 
     def path_mtime(self, filename):
-        filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+        filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
         return os.stat(filename)
 
     def print_header(self):
-
-        print('-'*72)
+        print("-" * 72)
         print(self.header % self.__dict__)
-        print('-'*72)
+        print("-" * 72)
         print()
 
-    def handle__copyright(self,arg):
-
+    def handle__copyright(self, arg):
         self.print_header()
         copyright = self.copyright % self.__dict__
         print(copyright.strip())
         print()
         return 0
 
-    def help(self,note=''):
-
+    def help(self, note=""):
         if self.synopsis:
-            print('Synopsis:')
+            print("Synopsis:")
             # To remain backward compatible:
             try:
                 synopsis = self.synopsis % self.name
             except (NameError, KeyError, TypeError):
                 synopsis = self.synopsis % self.__dict__
-            print(' ' + synopsis)
+            print(" " + synopsis)
         print()
         self.print_options()
         if self.version:
-            print('Version:')
-            print(' %s' % self.version)
+            print("Version:")
+            print(" %s" % self.version)
             print()
         if self.about:
             about = self.about % self.__dict__
             print(about.strip())
             print()
         if note:
-            print('-'*72)
-            print('Note:',note)
+            print("-" * 72)
+            print("Note:", note)
             print()
 
-    def notice(self,note):
-
-        print('-'*72)
-        print('Note:',note)
-        print('-'*72)
+    def notice(self, note):
+        print("-" * 72)
+        print("Note:", note)
+        print("-" * 72)
         print()
 
     def print_options(self):
-
         options = self.options
-        print('Options and default settings:')
+        print("Options and default settings:")
         if not options:
-            print('  None')
+            print("  None")
             return
-        int = [x for x in options if x.prefix == '--']
-        short = [x for x in options if x.prefix == '-']
+        int = [x for x in options if x.prefix == "--"]
+        short = [x for x in options if x.prefix == "-"]
         items = short + int
         for o in options:
-            print(' ',o)
+            print(" ", o)
         print()
 
-
-        
 
 log = []
 
 ccc = MyLog(log)
 
-filename = 'kkkkk.dat'
+filename = "kkkkk.dat"
 ccc.set_filename(filename)
 
 ddd = ccc.get_filename()
 print(ddd)
 
-mesg1 = 'aaaa'
-mesg2 = 'bbbb'
-mesg3 = 'cccc'
+mesg1 = "aaaa"
+mesg2 = "bbbb"
+mesg3 = "cccc"
 
 ccc.log_message(mesg1)
 ccc.log_message(mesg2)
 ccc.log_message(mesg3)
 
 lineno = 123
-for_output = 'cccc.txt'
+for_output = "cccc.txt"
 msg = "Line %d: could not convert: %s"
 ccc.log_message(msg % (lineno, for_output))
 
 ddd = ccc.get_log()
 print(ddd)
 
-eee = ccc.path_mtime('aaaaa')
+eee = ccc.path_mtime("aaaaa")
 print(type(eee))
 print(eee)
 
-fff = ccc.handle__copyright('tttt')
+fff = ccc.handle__copyright("tttt")
 
-ggg = ccc.help('222')
+ggg = ccc.help("222")
+
 
 class BufferedSubFile(object):
     def __init__(self):
@@ -168,7 +162,7 @@ class BufferedSubFile(object):
             mesg = self.mesg_stack.pop()
             self.mesg_count -= 1
         else:
-            mesg = '無資料'
+            mesg = "無資料"
         return mesg
 
     def close(self):
@@ -178,9 +172,9 @@ class BufferedSubFile(object):
 
 
 ccc = BufferedSubFile()
-ccc.push_mesg('aaa')
-ccc.push_mesg('bbb')
-ccc.push_mesg('ccc')
+ccc.push_mesg("aaa")
+ccc.push_mesg("bbb")
+ccc.push_mesg("ccc")
 
 ppp = ccc.pop_mesg()
 print(ppp)
@@ -192,12 +186,3 @@ ppp = ccc.pop_mesg()
 print(ppp)
 ppp = ccc.pop_mesg()
 print(ppp)
-
-
-
-
-
-
-
-
-

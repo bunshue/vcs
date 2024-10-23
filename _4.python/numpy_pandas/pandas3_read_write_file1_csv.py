@@ -1360,8 +1360,6 @@ print(df)
 
 print("------------------------------------------------------------")  # 60個
 
-import pandas as pd
-
 cities = pd.read_csv("data/california_cities.csv")
 
 print(cities.head())
@@ -1371,8 +1369,7 @@ latitude, longitude = cities["latd"], cities["longd"]
 population, area = cities["population_total"], cities["area_total_km2"]
 
 # to scatter the points, using size and color but without label
-import numpy as np
-import matplotlib.pyplot as plt
+
 import seaborn
 
 seaborn.set()
@@ -1403,6 +1400,13 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
+sys.exit()
+
+print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 

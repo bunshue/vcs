@@ -26,12 +26,10 @@ import datetime
 foldername = "C:/_git/vcs/_1.data/______test_files3/DrAP_test"
 foldername = "C:/_git/vcs/_1.data/______test_files3/DrAP_test/_good1/_good4/_good5"
 foldername = "C:/_git/vcs/_1.data/______test_files3/DrAP_test6"
-'''
-print("------------------------------------------------------------")  # 60個
 
-print(
-    "ls 測試 os.walk ST------------------------------------------------------------"
-)  # 60個
+print("------------------------------------------------------------")  # 60個
+print("ls 測試 os.walk ST")
+print("------------------------------------------------------------")  # 60個
 
 print("轉出多層 os.walk 1 + 僅顯示檔案")
 foldername = "C:/_git/vcs/_1.data/______test_files3/DrAP_test6"
@@ -46,21 +44,21 @@ for dirName, sub_dirNames, fileNames in os.walk(foldername):
     print("目前檔案名稱串列:   ", fileNames, "\n")
 """
 
-for item in os.walk(foldername): # 多層
+for item in os.walk(foldername):  # 多層
     # print(item)
     print("資料夾 :", item[0])
     print("子資料夾:", item[1])
     print("檔案:", item[2])
     for _ in item[2]:
         file = item[0] + "/" + _
-        #print(file)
+        # print(file)
         all_files.append(file)
-        #計算檔案大小
-        #filesize = os.stat(file).st_size
-        #print(filesize)
+        # 計算檔案大小
+        # filesize = os.stat(file).st_size
+        # print(filesize)
     print("------------------------------")  # 30個
 
-print('顯示結果:')
+print("顯示結果:")
 for _ in all_files:
     print(_)
 
@@ -79,7 +77,7 @@ for item in os.walk(foldername):
         # 取出檔案大小
         size = os.path.getsize(ffname)
         allfilesize += size
-        
+
 print("總容量 : " + str(allfilesize) + " 拜")
 
 print("------------------------------------------------------------")  # 60個
@@ -91,7 +89,7 @@ total_folders = 0
 total_files = 0
 total_size = 0
 all_files = list()
-for item in os.walk(foldername): # 多層
+for item in os.walk(foldername):  # 多層
     total_folders += 1
     # print(item)
     print("資料夾 :", item[0])
@@ -101,7 +99,7 @@ for item in os.walk(foldername): # 多層
     for _ in item[2]:
         file = item[0] + "/" + _
         all_files.append(file)
-        #計算檔案大小
+        # 計算檔案大小
         filesize = os.stat(file).st_size
         # print(filesize)
         total_size += filesize
@@ -114,7 +112,7 @@ print("位置 :", foldername)
 print("容量 :", total_size, "位元組")
 print("包含 :", total_files, "個檔案,", total_folders, "個資料夾")
 
-print('顯示結果:')
+print("顯示結果:")
 for _ in all_files:
     print(_)
 
@@ -189,18 +187,19 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-print(
-    "ls 測試 os.walk SP------------------------------------------------------------"
-)  # 60個
+print("------------------------------------------------------------")  # 60個
+print("ls 測試 os.walk SP")
+print("------------------------------------------------------------")  # 60個
 
-print(
-    "ls 測試 os.listdir ST------------------------------------------------------------"
-)  # 60個
+
+print("------------------------------------------------------------")  # 60個
+print("ls 測試 os.listdir ST")
+print("------------------------------------------------------------")  # 60個
 
 print("轉出一層 os.listdir 1")
 
-#foldername = "."  # 當前目錄
-#foldername = "/"  # 根目錄
+# foldername = "."  # 當前目錄
+# foldername = "/"  # 根目錄
 foldername = "C:/_git/vcs/_1.data/______test_files3/DrAP_test6"
 
 filenames = os.listdir(foldername)  # 轉出一層, 指定目錄, 若無參數, 就是當前目錄
@@ -231,9 +230,10 @@ print("------------------------------------------------------------")  # 60個
 
 foldername = "C:/_git/vcs/_1.data/______test_files3/DrAP_test6"
 print(os.listdir(foldername))
-print(os.listdir("."))                  # 這代表目前工作目錄
+print(os.listdir("."))  # 這代表目前工作目錄
 
 print("------------------------------------------------------------")  # 60個
+
 
 # 可統計資料夾或檔案的大小
 def getFolderSize(pathname):
@@ -253,6 +253,7 @@ totalsizes = getFolderSize(foldername)
 print("資料夾大小 : ", totalsizes, "拜")
 
 print("------------------------------------------------------------")  # 60個
+
 
 def dirTree(foldername, level=0):
     if level > 1:
@@ -279,6 +280,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("轉出多層 os.listdir 7 callback")
 
+
 def list_files1(foldername, callback):
     for filename in os.listdir(foldername):  # 轉出一層
         long_filename = os.path.join(foldername, filename)  # 取得檔案的絕對路徑
@@ -304,6 +306,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("顯示資料夾內的特定格式的檔案")
 
+
 def is_image(filename):
     f = filename.lower()
     return (
@@ -326,6 +329,7 @@ def find_similar_images(foldername):
     ]
     for img in sorted(image_filenames):
         print(img)
+
 
 foldername = "C:/_git/vcs/_1.data/______test_files3/DrAP_test6"
 find_similar_images(foldername)
@@ -594,13 +598,14 @@ report()
 
 print("------------------------------------------------------------")  # 60個
 
-print(
-    "ls 測試 os.listdir SP------------------------------------------------------------"
-)  # 60個
+print("------------------------------------------------------------")  # 60個
+print("ls 測試 os.listdir SP")
+print("------------------------------------------------------------")  # 60個
 
-print(
-    "ls 測試 glob.glob ST------------------------------------------------------------"
-)  # 60個
+
+print("------------------------------------------------------------")  # 60個
+print("ls 測試 glob.glob ST")
+print("------------------------------------------------------------")  # 60個
 
 print("轉出一層")
 print("轉出一層 指名 檔案格式")
@@ -632,12 +637,12 @@ filenames = (
 
 print("共有", len(filenames), "個檔案")
 
-#簡單列出
+# 簡單列出
 print(filenames)
 for filename in filenames:
     print(filename)
 
-#檢查檔案或資料夾
+# 檢查檔案或資料夾
 for filename in filenames:
     print(filename)
     if os.path.isfile(filename):
@@ -655,7 +660,7 @@ for filename in filenames:
     print("新全檔名", long_filename)
     print()
 
-#計算檔案容量
+# 計算檔案容量
 allfilesize = 0
 for filename in filenames:
     print(f"{filename} : {os.path.getsize(filename)} bytes")
@@ -666,7 +671,7 @@ for filename in filenames:
 
 print("總容量 : " + str(allfilesize) + " 拜")
 
-#撈出一層後 檢查是否是需要的附檔名
+# 撈出一層後 檢查是否是需要的附檔名
 py = []
 for filename in filenames:
     if filename.endswith(".py"):  # 以.py為副檔名
@@ -675,7 +680,7 @@ print(py)
 
 print("------------------------------------------------------------")  # 60個
 
-print('使用萬用字元')
+print("使用萬用字元")
 
 # 使用 [jJ][pP][gG] 萬用字元，抓出副檔名不論大小寫的 jpg 檔案
 jpg = glob.glob("C:/_git/vcs/_1.data/______test_files3/DrAP_test6/*.[jJ][pP][gG]")
@@ -779,9 +784,9 @@ for i in imgs:
 
 print("------------------------------------------------------------")  # 60個
 
-print(
-    "ls 測試 glob.glob SP------------------------------------------------------------"
-)  # 60個
+print("------------------------------------------------------------")  # 60個
+print("ls 測試 glob.glob SP")
+print("------------------------------------------------------------")  # 60個
 
 sys.exit()
 print("------------------------------------------------------------")  # 60個
@@ -2525,43 +2530,44 @@ for filename in files:
     pathlib.Path(filename).touch()
 """
 print("------------------------------------------------------------")  # 60個
-'''
+
 
 print("------------------------------------------------------------")  # 60個
 
-#建立資料夾
+# 建立資料夾
 target_dir = "tmp_test_create_folder"
-#準備輸出資料夾 若不存在, 則建立
+# 準備輸出資料夾 若不存在, 則建立
 if not os.path.exists(target_dir):
     os.mkdir(target_dir)
-    #os.makedirs(target_dir, exist_ok = True)
+    # os.makedirs(target_dir, exist_ok = True)
 else:
-    print('資料夾已存在')
+    print("資料夾已存在")
 
 print("------------------------------------------------------------")  # 60個
+
 
 def recursedown(dirname):
     try:
         names = os.listdir(dirname)  # 轉出一層
-        #print(names)
+        # print(names)
     except OSError as msg:
-        err('%s: cannot list directory: %r\n' % (dirname, msg))
+        err("%s: cannot list directory: %r\n" % (dirname, msg))
         return 1
     names.sort()
     subdirs = []
     for name in names:
         if name in (os.curdir, os.pardir):
-            print('skip')
+            print("skip")
             continue
         fullname = os.path.join(dirname, name)
         if os.path.islink(fullname):
-            print('是一個link')
+            print("是一個link")
             pass
         elif os.path.isdir(fullname):
-            print('是一個資料夾')
+            print("是一個資料夾")
             subdirs.append(fullname)
         else:
-            #print("a")
+            # print("a")
             pass
     bad = 0
     for fullname in subdirs:
@@ -2570,12 +2576,10 @@ def recursedown(dirname):
     print(subdirs)
     return bad
 
+
 foldername = "C:/_git/vcs/_1.data/______test_files3/DrAP_test"
 
 cc = recursedown(foldername)
 print(cc)
 
 print("------------------------------------------------------------")  # 60個
-  
-
-

@@ -853,8 +853,8 @@ print(animals.count("虎"))
 print("虎 出現的索引位置 :")
 print(animals.index("虎"))
 
-#print("象 出現的索引位置 :") # 出現錯誤
-#print(animals.index("象"))
+# print("象 出現的索引位置 :") # 出現錯誤
+# print(animals.index("象"))
 
 print("------------------------------------------------------------")  # 60個
 
@@ -3207,7 +3207,7 @@ print(persons)
 
 print("------------------------------------------------------------")  # 60個
 
-#串列的切片 
+# 串列的切片
 james = [23, 19, 22, 31, 18]  # 定義james串列
 print("列印james第1-3場得分", james[0:3])
 print("列印james第2-4場得分", james[1:4])
@@ -3315,7 +3315,6 @@ print("本學期考最差的分數為", min(score))
 print("本學期考最好的分數為", max(score))
 
 print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -3517,8 +3516,6 @@ print("列出mysports位址     = ", id(mysports))
 print("列出friendsports位址 = ", id(friendsports))
 print("我喜歡的最新運動     = ", mysports)
 print("我朋友喜歡的最新運動 = ", friendsports)
-
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -3875,12 +3872,11 @@ for player in players:
     print(player)
 
 
-
 print("------------------------------------------------------------")  # 60個
 
-print('enumerate 的用法')
+print("enumerate 的用法")
 
-print('字串轉串列')
+print("字串轉串列")
 animal_string = "鼠牛虎兔龍蛇馬羊猴雞狗豬"
 animal_list = list(animal_string)
 
@@ -3889,40 +3885,40 @@ for i, ani in enumerate(animal_list):
 
 print("------------------------------------------------------------")  # 60個
 
-print('字串轉串列')
+print("字串轉串列")
 animal_string = "鼠牛虎兔龍蛇馬羊猴雞狗豬"
 animal_list = list(animal_string)
 
 print(type(animal_list))
 
-print('字串切片 slicing')
+print("字串切片 slicing")
 
 n = 3
 m = 9
 
-print('第n個')
+print("第n個")
 cc = animal_list[n]
 print(cc)
-print('第n個 到 第m-1個')
+print("第n個 到 第m-1個")
 cc = animal_list[n:m]
 print(cc)
-print('第n個 到 最後一個')
+print("第n個 到 最後一個")
 cc = animal_list[n:]
 print(cc)
-print('第0個 到 第m-1個')
+print("第0個 到 第m-1個")
 cc = animal_list[:m]
 print(cc)
-print('全部')
+print("全部")
 cc = animal_list[:]
 print(cc)
-print('反相')
+print("反相")
 cc = animal_list[::-1]
 print(cc)
 
 print("------------------------------------------------------------")  # 60個
 
 msg = "CIA Mark told CIA Linda that the secret USB had given to CIA Peter"
-print("CIA最後出現位置: ", msg.rfind("CIA",0,len(msg)))
+print("CIA最後出現位置: ", msg.rfind("CIA", 0, len(msg)))
 print("CIA最後出現位置: ", msg.rfind("CIA"))
 
 print("------------------------------------------------------------")  # 60個
@@ -4275,7 +4271,6 @@ connect = "*"  # 普通字元
 print(connect.join(path))
 
 
-
 print("------------------------------------------------------------")  # 60個
 
 # 將串列轉成字典
@@ -4341,27 +4336,27 @@ print(f"sex = {sex}")
 
 print("------------------------------------------------------------")  # 60個
 
-print('結果')
+print("結果")
 for k, v in stat.items():
     print(k, v)
 
 print("------------------------------------------------------------")  # 60個
 
 
-#DSLT
-print('字典')
+# DSLT
+print("字典")
 d = {"cat": "white", "dog": "black"}  # 建立字典
-print(d["cat"])       # 使用Key取得項目: 顯示 "white"
-print("cat" in d)     # 是否有Key: 顯示 "True"
-d["pig"] = "pink"     # 新增項目
-print(d["pig"])       # 顯示 "pink"
+print(d["cat"])  # 使用Key取得項目: 顯示 "white"
+print("cat" in d)  # 是否有Key: 顯示 "True"
+d["pig"] = "pink"  # 新增項目
+print(d["pig"])  # 顯示 "pink"
 print(d.get("monkey", "N/A"))  # 取出項目+預設值: 顯示 "N/A"
-print(d.get("pig", "N/A"))     # 取出項目+預設值: 顯示 "pink"
-del d["pig"]          # 使用Key刪除項目
-print(d.get("pig", "N/A"))     # "pig"不存在: 顯示 "N/A"
+print(d.get("pig", "N/A"))  # 取出項目+預設值: 顯示 "pink"
+del d["pig"]  # 使用Key刪除項目
+print(d.get("pig", "N/A"))  # "pig"不存在: 顯示 "N/A"
 
 print("------------------------------------------------------------")  # 60個
-#DSLT
+# DSLT
 print("以鍵來走訪字典...")
 d = {"chicken": 2, "dog": 4, "cat": 4, "spider": 8}
 for animal in d:
@@ -4373,30 +4368,30 @@ for animal, legs in d.items():
     print("動物: %s 有 %d 隻腳" % (animal, legs))
 
 print("------------------------------------------------------------")  # 60個
-#DSLT
-animals = {"cat", "dog", "pig"} # 建立集合
-print("cat" in animals)   # 檢查是否有此元素: 顯示 "True"
+# DSLT
+animals = {"cat", "dog", "pig"}  # 建立集合
+print("cat" in animals)  # 檢查是否有此元素: 顯示 "True"
 print("fish" in animals)  # 顯示 "False"
-animals.add("fish")       # 新增集合元素
+animals.add("fish")  # 新增集合元素
 print("fish" in animals)  # 顯示 "True"
-print(len(animals))       # 元素數: 顯示 "4"
-animals.add("cat")        # 新增存在的元素
-print(len(animals))       # 顯示 "4"
-animals.remove('cat')     # 刪除集合元素
-print(len(animals))       # 顯示 "3"
+print(len(animals))  # 元素數: 顯示 "4"
+animals.add("cat")  # 新增存在的元素
+print(len(animals))  # 顯示 "4"
+animals.remove("cat")  # 刪除集合元素
+print(len(animals))  # 顯示 "3"
 
 print("------------------------------------------------------------")  # 60個
 
-#DSLT
+# DSLT
 
-#集合
-animals = {"cat", "dog", "pig", "fish"} # 建立集合
+# 集合
+animals = {"cat", "dog", "pig", "fish"}  # 建立集合
 for index, animal in enumerate(animals):
-    print('#%d: %s' % (index + 1, animal))
+    print("#%d: %s" % (index + 1, animal))
 
 print("------------------------------------------------------------")  # 60個
 
-#集合
+# 集合
 A = {1, 2, 3, 4, 5}
 B = {4, 5, 6, 7, 8}
 print("A = " + str(A))
@@ -4423,36 +4418,36 @@ C = A.symmetric_difference(B)
 print("A.symmetric_difference(B) = " + str(C))
 
 print("------------------------------------------------------------")  # 60個
-#DSLT
+# DSLT
 t = (5, 6, 7, 8)  # 建立元組
-print(type(t))    # 顯示 "<class 'tuple'>"
-print(t)          # 顯示 "(5, 6, 7, 8)"
-print(t[0])       # 顯示 "5"
-print(t[1])       # 顯示 "6"
-print(t[-1])      # 顯示 "8"
-print(t[-2])      # 顯示 "7"
-for ele in t:     # 走訪項目
+print(type(t))  # 顯示 "<class 'tuple'>"
+print(t)  # 顯示 "(5, 6, 7, 8)"
+print(t[0])  # 顯示 "5"
+print(t[1])  # 顯示 "6"
+print(t[-1])  # 顯示 "8"
+print(t[-2])  # 顯示 "7"
+for ele in t:  # 走訪項目
     print(ele, end=" ")  # 顯示 "5, 6, 7, 8"
 
 print("------------------------------------------------------------")  # 60個
 
-print('對齊方式')
-print('1234567890')
+print("對齊方式")
+print("1234567890")
 s = "hello"
 print(s)  # 靠左對齊, 預設
-print(s.rjust(10))# 靠右對齊
+print(s.rjust(10))  # 靠右對齊
 print(s.center(10))  # 置中對齊
 
 print("------------------------------------------------------------")  # 60個
 
-#DSLT
+# DSLT
 print("走訪顯示串列的每一個項目...")
-animals = ['cat', 'dog', 'bat']
+animals = ["cat", "dog", "bat"]
 for animal in animals:
     print(animal)
 
 print("走訪顯示串列的每一個項目和索引值...")
-animals = ['cat', 'dog', 'bat']
+animals = ["cat", "dog", "bat"]
 for index, animal in enumerate(animals):
     print(index, animal)
 
@@ -4461,7 +4456,3 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
-
-
-

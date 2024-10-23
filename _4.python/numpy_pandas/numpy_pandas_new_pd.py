@@ -26,13 +26,6 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-"""
-import pandas as pd
-import matplotlib.pyplot as plt
-
-# 繪圖中文字型
-plt.rcParams["font.sans-serif"] = "mingliu"
-plt.rcParams["axes.unicode_minus"] = False
 
 df = pd.read_excel("1111data.xlsx")
 city = ["台北", "新北", "桃園", "台中", "台南", "高雄"]  # 六都
@@ -49,13 +42,7 @@ ser.plot(kind="pie", title="六都電腦職缺數量", figsize=(6, 6))  # 繪製
 print("------------------------------------------------------------")  # 60個
 
 # 1111salary.py
-import pandas as pd
 import re
-import matplotlib.pyplot as plt
-
-# 繪圖中文字型
-plt.rcParams["font.sans-serif"] = "mingliu"
-plt.rcParams["axes.unicode_minus"] = False
 
 df = pd.read_excel("1111data.xlsx")
 city = ["台北", "新北", "桃園", "台中", "台南", "高雄"]  # 六都
@@ -82,9 +69,7 @@ ser.plot(kind="bar", title="六都電腦職缺薪資", figsize=(5, 5))  # 繪製
 
 print("------------------------------------------------------------")  # 60個
 
-
 # dataframe.py
-import pandas as pd
 
 columns = ["姓名", "班級"]
 data = [
@@ -104,7 +89,7 @@ df2 = df[df["姓名"].str.contains("林")]
 # print(df2)
 df3 = df[(df["姓名"].str.contains("林")) & (df["班級"].str.contains("一年"))]
 print(df3)
-"""
+
 print("------------------------------------------------------------")  # 60個
 
 # 索引
@@ -212,7 +197,6 @@ df['rolling'] = df['val'].rolling(7).mean()
 """
 print("------------------------------------------------------------")  # 60個
 
-
 # 時區轉換
 
 import pytz
@@ -272,7 +256,6 @@ df1 = df.pivot(index="時間", columns="學科", values="分數")
 print(df, df1)
 
 print("------------------------------------------------------------")  # 60個
-
 
 print("基本類型轉換")
 
@@ -335,12 +318,10 @@ print(data[data["year"] < 2050])
 
 data["val1"] = data["val1"].apply(lambda x: 1 if x == "+" else x)
 
-
 print("去重處理")
 
 print(data.drop_duplicates(keep="last"))
 print(data.drop_duplicates(keep="last", subset="year"))
-
 
 print("------------------------------------------------------------")  # 60個
 

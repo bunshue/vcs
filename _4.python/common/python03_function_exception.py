@@ -1387,23 +1387,23 @@ print("串列的平方值: ", squarelist)
 print("------------------------------------------------------------")  # 60個
 
 try:
-    a=int(input("請輸入第一個整數："))
-    b=int(input("請輸入第二個整數："))
+    a = int(input("請輸入第一個整數："))
+    b = int(input("請輸入第二個整數："))
     r = a / b
-    print("r=",r)
+    print("r=", r)
 except ValueError:
-    print("發生輸入非數值的錯誤!")   
+    print("發生輸入非數值的錯誤!")
 except Exception as e:
-    print("發生",e,"的錯誤，包括分母為 0 的錯誤!") 
+    print("發生", e, "的錯誤，包括分母為 0 的錯誤!")
 
 print("------------------------------------------------------------")  # 60個
 
-filename=input("請輸入檔案名稱：")
+filename = input("請輸入檔案名稱：")
 
 try:
-    f=open(filename,'r')
+    f = open(filename, "r")
     for line in f:
-        print(line,end="")
+        print(line, end="")
     f.close()
 except:
     print("檔案不存在或無法開啟檔案!")
