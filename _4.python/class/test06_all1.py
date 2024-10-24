@@ -71,6 +71,22 @@ class shape:
     def __init__(self, x, y):
         self.x = x
         self.y = y
+
+    def info(self):
+        return (self.x, self.y)
+
+
+a = shape(100, 200)
+b = shape(200, 300)
+print(a.info())
+print(b.info())
+
+print("------------------------------------------------------------")  # 60個
+
+class shape:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
         
     def info(self):
         return (self.x, self.y)
@@ -194,7 +210,6 @@ average = vicky.score(98, 65, 81)
 print(f"Vicky 平均分數：{average:.3f}")
 
 print("------------------------------------------------------------")  # 60個
-'''
 
 
 class Score:
@@ -322,15 +337,376 @@ m1.display()
 
 print("------------------------------------------------------------")  # 60個
 
+# 父類別
+class Rectangle:
+    def __init__(self, width, height):
+        self.width = width  # 定義共用屬性
+        self.height = height  # 定義共用屬性
+
+    def area(self):  # 定義共用方法
+        return self.width * self.height
+
+# 子類別 Triangle, 繼承 Rectangle
+#三角形 繼承 矩形, 可用area(), 新增area2()
+class Triangle(Rectangle):
+    def area2(self):  # 定義子類別的共用方法
+        return (self.width * self.height) / 2
+
+print('父類別 Rectangle')
+rectangle = Rectangle(5, 6)  # 建立 rectangle 物件
+print("rectangle 矩形面積 :", rectangle.area())  # 30
+
+print('子類別 Triangle, 繼承 Rectangle')
+triangle = Triangle(5, 6)  # 建立 triangle 物件
+print("triangle 矩形面積 :", triangle.area())  # 30
+print("triangle 三角形面積 :", triangle.area2())  # 15
+
+print("------------------------------------------------------------")  # 60個
+
+class City:
+    def __init__(self, name):
+        self.name = name
+
+    def equals(self, city2):
+        return self.name.upper() == city2.name.upper()
+
+    def __eq__(self, city2):
+        return self.name.upper() == city2.name.upper()
+
+city1 = City("Taipei")
+city2 = City("taipei")
+city3 = City("myhome")
+print(city1.equals(city2))
+print(city1.equals(city3))
+print(city1 == city2)
+print(city1 == city3)
+
+print("------------------------------------------------------------")  # 60個
+
+print("測試hasattr功能")
+print("內建函數 (function) hasattr() ，判斷參數 (parameter) name 是否為 object 的屬性名稱")
+
+
+class Demo:
+    def __init__(self, i):
+        self.i = i
+        self.x = "xxx"
+        self.y = "yyy"
+        self.z = "zzz"
+
+    def __str__(self):
+        return str(self.i)
+
+    def hello(self):
+        print("hello " + self.__str__())
+
+
+d = Demo(22)
+
+print(hasattr(d, "t"))  # 不是
+print(hasattr(d, "u"))  # 不是
+print(hasattr(d, "v"))  # 不是
+print(hasattr(d, "w"))  # 不是
+print(hasattr(d, "x"))  # 是
+print(hasattr(d, "y"))  # 是
+print(hasattr(d, "z"))  # 是
 
 print("------------------------------------------------------------")  # 60個
 
 
+class poker:
+    def __init__(self):
+        self.deck = [i for i in range(52)]
+        random.shuffle(self.deck)
+        self.card_type = ["黑桃", "紅心", "梅花", "方塊"]
+        self.index = 0
+
+    def decode(self, card):
+        suit = self.card_type[card // 13]
+        no = card % 13 + 1
+        if no == 1:
+            no = "A"
+        elif no > 10:
+            no = chr((no - 11) + ord("J"))
+        return (suit, str(no))
+
+    def showAll(self):
+        for card in self.deck:
+            print(self.decode(card), end="")
+        print()
+
+    def dealFive(self):
+        for i in range(5):
+            print(self.decode(self.deck[self.index]), end="")
+            self.index += 1
+        print()
+
+    def oneMore(self):
+        print(self.decode(self.deck[self.index]), end="")
+        self.index += 1
+        print()
+
+    def shuffle(self):
+        random.shuffle(self.deck)
+        self.index = 0
+
+"""
+p = poker()
+p.showAll()
+print("------")
+p.dealFive()
+for i in range(3):
+    p.oneMore()
+print("------")
+p.shuffle()
+p.showAll()
+print("------")
+p.dealFive()
+"""
+
 print("------------------------------------------------------------")  # 60個
 
 
+# 宣告類別
+class Motor:
+    def __init__(self):
+        # 屬性
+        self.name = "CCCCCC"
+        self.color = "XXXXXX"
+
+    # 打印物件訊息
+    def __repr__(self):
+        return f"Motor({self.name, self.color})"
+
+    # 定義方法一：取得名稱和顏色
+    def setupCar(self, name, color):
+        self.name = name
+        self.color = color
+
+    # 定義方法二：輸出名稱和顏色
+    def showMessage(self):
+        print(f"款式:{self.name:6s},", f"顏色:{self.color:4s}")
+
+
+# 產生物件
+car1 = Motor()  # 物件1
+car1.showMessage()  # 呼叫方法
+car1.setupCar("Vios", "極光藍")
+car1.showMessage()  # 呼叫方法
+
+car2 = Motor()  # 物件2
+car2.showMessage()
+car2.setupCar("Altiss", "炫魅紅")
+car2.showMessage()
+
+print("打印物件訊息, 使用__repr__")
+print(car1)
+print(car2)
+
 print("------------------------------------------------------------")  # 60個
 
+
+# 宣告類別
+class newClass:
+    # __new__()建構物件
+    def __new__(Kind, name):
+        if name != "":
+            print("物件已建構")
+            return object.__new__(Kind)
+        else:
+            print("物件未建構")
+            return None
+
+    # __init__()初始化物件
+    def __init__(self, name):
+        print("物件初始化...")
+        print(name)
+
+
+# 產生物件
+x = newClass("")
+print()
+y = newClass("Second")
+
+
+print("------------------------------------------------------------")  # 60個
+
+# 父類別 Plant
+class Plant:
+    def __init__(self, name):
+        self.name = name
+
+    def show(self):
+        print("plant", self.name)
+
+# 子類別 Fruit, 繼承 Plant
+class Fruit(Plant):
+    def show(self):
+        print("fruit", self.name)
+
+print('父類別 Plant')
+p = Plant("banana")
+p.show()
+
+print('子類別 Fruit, 繼承 Plant')
+f = Fruit("banana")
+f.show()
+
+print("------------------------------------------------------------")  # 60個
+
+class Fib:
+    def __init__(self, max):
+        self.max = max
+
+    def __iter__(self):
+        self.a = 0
+        self.b = 1
+        return self
+
+    def __next__(self):
+        fib = self.a
+        if fib > self.max:
+            raise StopIteration
+        self.a, self.b = self.b, self.a + self.b
+        return fib
+
+
+for i in Fib(100):
+    print(i)
+
+print("------------------------------------------------------------")  # 60個
+'''
+
+
+class fruit:
+    color = "red"
+
+    def taste(self):
+        return "delicious"
+
+
+apple = fruit()
+cc = apple.color
+print(cc)
+
+cc = apple.taste()
+print(cc)
+
+print("------------------------------------------------------------")  # 60個
+
+
+class Date:
+    def setDate(self, birthday):  # 第一種方法
+        self.birthday = birthday
+
+    def showDate(self):  # 第二種方法
+        print("出生年月日:", self.birthday)
+
+
+d1 = Date()  # 第一個物件
+d1.setDate("民國67年7月3日")  # 呼叫方法時傳入字串
+d1.showDate()
+d2 = Date()  # 第二個物件
+d2.setDate([67, 7, 3])  # 呼叫方法時傳入串列
+
+print("------------------------------------------------------------")  # 60個
+
+def bar(self, name):
+    self._name = name
+
+
+def foo(self, course_name):
+    print('%s正在学习%s.' % (self._name, course_name))
+
+
+Student = type('Student', (object,), dict(__init__=bar, study=foo))
+stu1 = Student('骆昊')
+stu1.study('Python程序设计')
+
+print("------------------------------------------------------------")  # 60個
+
+def _foo():
+    print('test')
+
+
+class Student(object):
+
+    # __init__是一个特殊方法用于在创建对象时进行初始化操作
+    # 通过这个方法我们可以为学生对象绑定name和age两个属性
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def study(self, course_name):
+        print('%s正在学习%s.' % (self.name, course_name))
+
+    # PEP 8要求标识符的名字用全小写多个单词用下划线连接
+    # 但是很多程序员和公司更倾向于使用驼峰命名法(驼峰标识)
+    def watch_av(self):
+        if self.age < 18:
+            print('%s只能观看《熊出没》.' % self.name)
+        else:
+            print('%s正在观看岛国大电影.' % self.name)
+
+
+stu1 = Student('骆昊', 38)
+stu1.study('Python程序设计')
+stu1.watch_av()
+stu2 = Student('王大锤', 15)
+stu2.study('思想品德')
+stu2.watch_av()
+
+print("------------------------------------------------------------")  # 60個
+
+class Rect(object):
+    """矩形类"""
+
+    def __init__(self, width=0, height=0):
+        """初始化方法"""
+        self.__width = width
+        self.__height = height
+
+    def perimeter(self):
+        """计算周长"""
+        return (self.__width + self.__height) * 2
+
+    def area(self):
+        """计算面积"""
+        return self.__width * self.__height
+
+    def __str__(self):
+        """矩形对象的字符串表达式"""
+        return '矩形[%f,%f]' % (self.__width, self.__height)
+
+    def __del__(self):
+        """析构器"""
+        print('销毁矩形对象')
+
+
+rect1 = Rect()
+print(rect1)
+print(rect1.perimeter())
+print(rect1.area())
+rect2 = Rect(3.5, 4.5)
+print(rect2)
+print(rect2.perimeter())
+print(rect2.area())
+
+print("------------------------------------------------------------")  # 60個
+
+class Test:
+
+    def __init__(self, foo):
+        self.__foo = foo
+
+    def __bar(self):
+        print(self.__foo)
+        print('__bar')
+
+
+test = Test('hello')
+test._Test__bar()
+print(test._Test__foo)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -342,9 +718,6 @@ print("------------------------------------------------------------")  # 60個
 
 
 sys.exit()
-
-
-print("Class測試")
 
 
 class animalBaseClass:
@@ -399,65 +772,6 @@ nyoro = snakeClass(0)
 nyoro.walk()
 nyoro.cry()
 nyoro.getLegsNum()
-
-print("------------------------------------------------------------")  # 60個
-
-print("求面積")
-
-
-class Rectangle:  # 定義父類別
-    def __init__(self, width, height):
-        self.width = width  # 定義共用屬性
-        self.height = height  # 定義共用屬性
-
-    def area(self):  # 定義共用方法
-        return self.width * self.height
-
-
-class Triangle(Rectangle):  # 定義子類別
-    def area2(self):  # 定義子類別的共用方法
-        return (self.width * self.height) / 2
-
-
-triangle = Triangle(5, 6)  # 建立 triangle 物件
-print("矩形面積=", triangle.area())  # 30
-print("三角形面積=", triangle.area2())  # 15
-
-
-print("------------------------------------------------------------")  # 60個
-
-print("Class測試")
-
-
-class fruit:
-    color = "red"
-
-    def taste(self):
-        return "delicious"
-
-
-apple = fruit()
-cc = apple.color
-print(cc)
-
-cc = apple.taste()
-print(cc)
-
-print("------------------------------------------------------------")  # 60個
-
-
-class staff:
-    def __init__(self, bonus):
-        self.bonus = bonus
-
-    def salary(self):
-        salary = 10000 + self.bonus
-        return salary
-
-
-yamamoto = staff(50000)
-money = yamamoto.salary()
-print(money)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -553,7 +867,6 @@ v1.displayVehicle()  # 呼叫方法
 c1 = Car("Ford", "GT350")
 c1.displayVehicle()  # 呼叫方法
 
-
 print("------------------------------------------------------------")  # 60個
 
 
@@ -571,74 +884,19 @@ print("銀行服務理念是 ", userbank.motto())
 
 print("------------------------------------------------------------")  # 60個
 
-print("建一個測試list")
+
+class staff:
+    def __init__(self, bonus):
+        self.bonus = bonus
+
+    def salary(self):
+        salary = 10000 + self.bonus
+        return salary
 
 
-class User:
-    user_id: int
-    first_name: str
-    last_name: str
-
-
-USERS = [(i, f"first_name_{i}", f"last_name_{i}") for i in range(2_0)]
-
-print(type(USERS))
-print(USERS)
-
-
-def show_price(price: float) -> str:
-    return "$ {0:,.2f}".format(price)
-
-
-print(show_price(1000))
-#    '$ 1,000.00'
-
-print(show_price(1_250.75))
-#    '$ 1,250.75'
-
-print("------------------------------------------------------------")  # 60個
-
-print("測試hasattr功能")
-print("內建函數 (function) hasattr() ，判斷參數 (parameter) name 是否為 object 的屬性名稱")
-
-
-class Demo:
-    def __init__(self, i):
-        self.i = i
-        self.x = "xxx"
-        self.y = "yyy"
-        self.z = "zzz"
-
-    def __str__(self):
-        return str(self.i)
-
-    def hello(self):
-        print("hello " + self.__str__())
-
-
-d = Demo(22)
-
-print(hasattr(d, "t"))  # 不是
-print(hasattr(d, "u"))  # 不是
-print(hasattr(d, "v"))  # 不是
-print(hasattr(d, "w"))  # 不是
-print(hasattr(d, "x"))  # 是
-print(hasattr(d, "y"))  # 是
-print(hasattr(d, "z"))  # 是
-
-print("------------------------------------------------------------")  # 60個
-
-
-class fruit:
-    color = "red"
-
-    def taste(self):
-        return "delicious"
-
-
-apple = fruit()
-apple.color
-apple.taste()
+yamamoto = staff(50000)
+money = yamamoto.salary()
+print(money)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -774,78 +1032,6 @@ nyoro.getLegsNum()
 
 print("------------------------------------------------------------")  # 60個
 
-
-class shape:
-    def __init__(self, x, y):
-        self.x = x
-        self.y = y
-
-    def info(self):
-        return (self.x, self.y)
-
-
-if __name__ == "__main__":
-    a = shape(100, 200)
-    b = shape(200, 300)
-    print(a.info())
-    print(b.info())
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-class poker:
-    def __init__(self):
-        self.deck = [i for i in range(52)]
-        random.shuffle(self.deck)
-        self.card_type = ["黑桃", "紅心", "梅花", "方塊"]
-        self.index = 0
-
-    def decode(self, card):
-        suit = self.card_type[card // 13]
-        no = card % 13 + 1
-        if no == 1:
-            no = "A"
-        elif no > 10:
-            no = chr((no - 11) + ord("J"))
-        return (suit, str(no))
-
-    def showAll(self):
-        for card in self.deck:
-            print(self.decode(card), end="")
-        print()
-
-    def dealFive(self):
-        for i in range(5):
-            print(self.decode(self.deck[self.index]), end="")
-            self.index += 1
-        print()
-
-    def oneMore(self):
-        print(self.decode(self.deck[self.index]), end="")
-        self.index += 1
-        print()
-
-    def shuffle(self):
-        random.shuffle(self.deck)
-        self.index = 0
-
-
-if __name__ == "__main__":
-    p = poker()
-    p.showAll()
-    print("------")
-    p.dealFive()
-    for i in range(3):
-        p.oneMore()
-    print("------")
-    p.shuffle()
-    p.showAll()
-    print("------")
-    p.dealFive()
-
-print("------------------------------------------------------------")  # 60個
-
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
@@ -941,23 +1127,6 @@ class Company:  # 定義公司類別
     def slogan(self):
         print("優良品質 創新研發 強力行銷")
 
-
-print("------------------------------------------------------------")  # 60個
-
-
-class Date:
-    def setDate(self, birthday):  # 第一種方法
-        self.birthday = birthday
-
-    def showDate(self):  # 第二種方法
-        print("出生年月日:", self.birthday)
-
-
-d1 = Date()  # 第一個物件
-d1.setDate("民國67年7月3日")  # 呼叫方法時傳入字串
-d1.showDate()
-d2 = Date()  # 第二個物件
-d2.setDate([67, 7, 3])  # 呼叫方法時傳入串列
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1690,10 +1859,7 @@ ivan.get_money()  # 取得資產明細
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch12\ch12_16.py
 
-
-# ch12_16
 class Father:
     """定義父親的資產"""
 
@@ -1921,45 +2087,6 @@ print("grandfa屬於Grandfather類別: ", isinstance(grandfa, Grandfather))
 print("------------------------------------------------------------")  # 60個
 
 
-# 宣告類別
-class Motor:
-    def __init__(self):
-        # 屬性
-        self.name = "CCCCCC"
-        self.color = "XXXXXX"
-
-    # 打印物件訊息
-    def __repr__(self):
-        return f"Motor({self.name, self.color})"
-
-    # 定義方法一：取得名稱和顏色
-    def setupCar(self, name, color):
-        self.name = name
-        self.color = color
-
-    # 定義方法二：輸出名稱和顏色
-    def showMessage(self):
-        print(f"款式:{self.name:6s},", f"顏色:{self.color:4s}")
-
-
-# 產生物件
-car1 = Motor()  # 物件1
-car1.showMessage()  # 呼叫方法
-car1.setupCar("Vios", "極光藍")
-car1.showMessage()  # 呼叫方法
-
-car2 = Motor()  # 物件2
-car2.showMessage()
-car2.setupCar("Altiss", "炫魅紅")
-car2.showMessage()
-
-print("打印物件訊息, 使用__repr__")
-print(car1)
-print(car2)
-
-print("------------------------------------------------------------")  # 60個
-
-
 # 建立類別，產生物件能以不同再別做存取
 class Student:
     def message(self, name):  # 方法一
@@ -1975,32 +2102,6 @@ s1.showMessage()
 s2 = Student()  # 第二個物件
 s2.message(78.566)  # 呼叫方法時傳入浮點數值
 s2.showMessage()
-
-print("------------------------------------------------------------")  # 60個
-
-
-# 宣告類別
-class newClass:
-    # __new__()建構物件
-    def __new__(Kind, name):
-        if name != "":
-            print("物件已建構")
-            return object.__new__(Kind)
-        else:
-            print("物件未建構")
-            return None
-
-    # __init__()初始化物件
-    def __init__(self, name):
-        print("物件初始化...")
-        print(name)
-
-
-# 產生物件
-x = newClass("")
-print()
-y = newClass("Second")
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -2026,34 +2127,6 @@ Joe = Son()
 print("呼叫函數，繼承自父類別的函數")
 Joe.walking()
 
-
-print("------------------------------------------------------------")  # 60個
-
-
-# 類和繼承
-class Plant:
-    def __init__(self, name):
-        self.name = name
-
-    def show(self):
-        print("plant", self.name)
-
-
-p = Plant("banana")
-p.show()
-
-# plant banana
-
-
-class Fruit(Plant):
-    def show(self):
-        print("fruit", self.name)
-
-
-f = Fruit("banana")
-f.show()
-
-# fruit banana
 
 print("------------------------------------------------------------")  # 60個
 
@@ -2394,6 +2467,8 @@ dog3 = DOG("Chow Chow", "Medium", 3, "Brown")
 print(dog3)
 dog3.Sit()  # 坐
 dog3.Run()  # 跑
+
+
 print("------------------------------------------------------------")  # 60個
 
 
@@ -2422,6 +2497,7 @@ class M(B, A, Z):
 
 
 print(M.mro())
+
 # 輸出
 # [<class '__main__.M'>, <class '__main__.B'>,
 #  <class '__main__.A'>, <class '__main__.X'>,
@@ -3027,63 +3103,6 @@ print(a)
 print("------------------------------------------------------------")  # 60個
 
 
-class Fib:
-    def __init__(self, max):
-        self.max = max
-
-    def __iter__(self):
-        self.a = 0
-        self.b = 1
-        return self
-
-    def __next__(self):
-        fib = self.a
-        if fib > self.max:
-            raise StopIteration
-        self.a, self.b = self.b, self.a + self.b
-        return fib
-
-
-for i in Fib(100):
-    print(i)
-
-print("------------------------------------------------------------")  # 60個
-
-
-class City:
-    def __init__(self, name):
-        self.name = name
-
-    def equals(self, city2):
-        return self.name.upper() == city2.name.upper()
-
-
-one = City("Taipei")
-two = City("taipei")
-three = City("myhome")
-print(one.equals(two))
-print(one.equals(three))
-
-print("------------------------------------------------------------")  # 60個
-
-
-class City:
-    def __init__(self, name):
-        self.name = name
-
-    def __eq__(self, city2):
-        return self.name.upper() == city2.name.upper()
-
-
-one = City("Taipei")
-two = City("taipei")
-three = City("myhome")
-print(one == two)
-print(one == three)
-
-print("------------------------------------------------------------")  # 60個
-
-
 # 定義 Inventory 類別來管理商品庫存
 class Inventory:
     # 初始化方法，建立一個空的商品字典
@@ -3160,21 +3179,6 @@ manager.remove_student(1)  # 移除學生ID為 1 的學生
 
 # 用 print(manager.students) 來查看學生字典的當前狀態
 print(manager.students)  # 輸出：{}
-
-print("------------------------------------------------------------")  # 60個
-
-
-class Square:
-    def __init__(self, sideLen):
-        self.__sideLen = sideLen
-
-    @property
-    def area(self):
-        return self.__sideLen**2
-
-
-obj = Square(10)
-print(obj.area)
 
 print("------------------------------------------------------------")  # 60個
 

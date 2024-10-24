@@ -1369,14 +1369,11 @@ print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
 
-
 # import os
 # os.chdir('/content/drive/MyDrive/Colab Notebooks')  # Colab 換路徑使用
 
 
 # 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\linebot\ch6\code11.py
-
-
 
 
 # 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\linebot\ch3\code01.py
@@ -1389,4 +1386,3 @@ print("------------------------------------------------------------")  # 60個
 
 # import os
 # os.chdir('/content/drive/MyDrive/Colab Notebooks')  # Colab 換路徑使用
-

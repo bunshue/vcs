@@ -261,14 +261,8 @@ for i in catlist:
   os.remove('PetImages/Cat/' + i)
 for i in doglist:
   os.remove('PetImages/Dog/' + i)
-  
-
-
-
 
 print('------------------------------------------------------------')	#60個
-
-
 
 一檔從頭讀到尾
 text = open(path.join(d, 'test.txt'),'r',encoding = 'utf-8').read()
@@ -512,8 +506,6 @@ Thread.Sleep(500);
 System.Diagnostics.Debug.Print("即時運算視窗輸出除錯訊息 測試訊息！！！Form1！！！ title = " + title + "  " + aa.ToString());
 
 
-
-
 plt.title("軸範圍: " + str(plt.axis()))
 
 #marker
@@ -666,23 +658,6 @@ import os
 print('Current directory is ',os.getcwd())
 
 
-import sys
-
-print(sys.argv[:])
-
-
-print('開啟 notepad')
-import os
-import win32process
-import win32event
-#os.system('makecode.py test.c')
-handle = win32process.CreateProcess('c:\\windows\\notepad.exe', '', None , None , 0 ,win32process. CREATE_NO_WINDOW , None , None ,win32process.STARTUPINFO())
-win32event.WaitForSingleObject(handle[0], -1)
-print('notepad ended!')
-
-
-
-
 import os  # 匯入os模組
 
 i = 1
@@ -818,7 +793,6 @@ img_url = "https://upload.wikimedia.org/wikipedia/commons/8/8b/%E8%A5%BF%E8%9E%B
     # 關閉檔案
     fH.close()
     f.close()
-    # os.system('tmp_Masks.html')    # 開啟網頁
 
 -----
 
@@ -859,7 +833,6 @@ else:
 
 filename = 'aaaaa.html'
 
-#os.system(filename)  # 開啟網頁
 print("%s 網頁建置完成" % (filename))
 
 print("------------------------------------------------------------")  # 60個

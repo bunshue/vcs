@@ -262,6 +262,8 @@ for arg in sys.argv:
     print(sys.argv[i])
     i += 1
 
+print(sys.argv[:])
+
 print("------------------------------------------------------------")  # 60個
 
 print("目前路徑 : ", sys.path)
@@ -271,12 +273,15 @@ print(sys.path)
 print("------------------------------------------------------------")  # 60個
 
 print("系統命令")
-os.system("cls")  # 在cmd視窗下清除螢幕
-os.system("clear")
+os.system("cls")  # 在cmd視窗下清除螢幕 for Windows
+os.system("clear")  # 在cmd視窗下清除螢幕 for non-Windows
 os.system("ls")
 # os.system('pause') 暫停
 os.system("mkdir tmp_dir2")  # 建立 tmp_dir2 目錄
 os.system("copy python00.py tmp_dir2\tmp_python00.py")  # 複製檔案
+
+print("執行python程式")
+#os.system('makecode.py test.c')
 
 print("製作cmd指令")
 """
@@ -286,6 +291,12 @@ if os.system(cmd) != 0:
 
 os.system('cmd')
 """
+
+
+#用預設程式開啟檔案
+#os.system('filename.png')  #開啟圖片
+#os.system('filename.html')    # 開啟網頁
+
 
 print("------------------------------------------------------------")  # 60個
 
@@ -820,3 +831,20 @@ print("作業系統：", sys.platform)
 
 
 print("------------------------------------------------------------")  # 60個
+
+print('記事本 開啟')
+import os
+import win32process
+import win32event
+
+handle = win32process.CreateProcess('c:\\windows\\notepad.exe', '', None , None , 0 ,win32process. CREATE_NO_WINDOW , None , None ,win32process.STARTUPINFO())
+win32event.WaitForSingleObject(handle[0], -1)
+print('記事本 關閉')
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+

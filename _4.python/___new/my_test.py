@@ -138,43 +138,39 @@ compoare_count = 0
 for i in range(N):
     same_data = False
     if data_list_same[i] == True:
-        print('已經被找到過, 跳過')
+        print("已經被找到過, 跳過")
         continue
-    for j in range(i + 1 , N):
-        print('compare ', i, j, end = " ")
+    for j in range(i + 1, N):
+        print("compare ", i, j, end=" ")
         compoare_count += 1
         if data_list[i] == data_list[j]:
             if same_data == False:
-                print('找到相同')
+                print("找到相同")
                 same_data = True
                 data_list_same[i] = True
                 data_list_same[j] = True
                 data_list_same_found.append(data_list[i])
                 data_list_same_found.append(data_list[j])
             else:
-                print('又找到相同')
+                print("又找到相同")
                 data_list_same[j] = True
                 data_list_same_found.append(data_list[j])
         else:
-            print('不同')
+            print("不同")
     print()
 print()
 
-print('共比較 :', compoare_count, '次')
+print("共比較 :", compoare_count, "次")
 
 print(data_list_same)
 print()
 print(data_list_same_found)
 print()
-    
-print("------------------------------------------------------------")  # 60個
-
-
-
 
 print("------------------------------------------------------------")  # 60個
 
 
+print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個

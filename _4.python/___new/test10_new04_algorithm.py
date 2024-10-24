@@ -89,7 +89,7 @@ directions = [  # 使用串列設計走迷宮方向
 
 
 def maze_solve(x, y, goal_x, goal_y):
-    #解迷宮程式 x, y是迷宮入口, goal_x, goal_y是迷宮出口
+    # 解迷宮程式 x, y是迷宮入口, goal_x, goal_y是迷宮出口
     maze[x][y] = 2
     stack = []  # 建立路徑堆疊
     stack.append((x, y))  # 將路徑push入堆疊
@@ -142,7 +142,7 @@ directions = [  # 使用串列設計走迷宮方向
 
 
 def maze_solve(x, y, goal_x, goal_y):
-    #解迷宮程式 x, y是迷宮入口, goal_x, goal_y是迷宮出口
+    # 解迷宮程式 x, y是迷宮入口, goal_x, goal_y是迷宮出口
     maze[x][y] = 2
     stack = []  # 建立路徑堆疊
     stack.append((x, y))  # 將路徑push入堆疊
@@ -183,6 +183,7 @@ print("mysum = ", mysum(data))
 
 
 print("------------------------------------------------------------")  # 60個
+
 
 def is_OK(row, col):
     # 檢查是否可以放在此row, col位置
@@ -236,6 +237,7 @@ for i in range(SIZE):  # 繪製結果圖
 
 print("------------------------------------------------------------")  # 60個
 
+
 class Queens:
     def __init__(self):
         self.queens = size * [-1]  # 預設皇后位置
@@ -288,6 +290,7 @@ for name in range(len(people)):
 
 
 print("------------------------------------------------------------")  # 60個
+
 
 def dfs(graph, node, path=[]):
     # 深度優先搜尋法
@@ -383,6 +386,7 @@ print("列出已搜尋名單 : ", not_dealer)
 
 print("------------------------------------------------------------")  # 60個
 
+
 def banana_dealer(name):
     # 回應是不是賣香蕉的經銷商
     if name == "Banana":
@@ -422,6 +426,7 @@ print("列出已搜尋名單 : ", not_dealer)
 
 
 print("------------------------------------------------------------")  # 60個
+
 
 def bfs(graph, start):
     # 寬度優先搜尋法
@@ -485,6 +490,7 @@ print(bfs(graph, "A"))
 
 print("------------------------------------------------------------")  # 60個
 
+
 def is_exit(node):
     # 回應是否出口
     if node == "K":
@@ -527,6 +533,7 @@ print(bfs(graph, "A"))
 
 print("------------------------------------------------------------")  # 60個
 
+
 def dijkstra(graph, start):
     visited = []
     index = start
@@ -564,6 +571,7 @@ print(rtn)
 
 
 print("------------------------------------------------------------")  # 60個
+
 
 def get_edges(graph):
     # 建立邊線資訊
@@ -617,6 +625,7 @@ rtn = bellman_ford(graph, "A")
 print(rtn)
 
 print("------------------------------------------------------------")  # 60個
+
 
 def get_edges(graph):
     # 建立邊線資訊
@@ -672,6 +681,7 @@ print(rtn)
 
 print("------------------------------------------------------------")  # 60個
 
+
 def get_edges(graph):
     # 建立邊線資訊
     n1 = []  # 線段的節點1
@@ -725,6 +735,7 @@ print(rtn)
 
 print("------------------------------------------------------------")  # 60個
 
+
 def subset_generator(data):
     # 子集合生成函數, data須是可迭代物件
     final_subset = [[]]  # 空集合也算是子集合
@@ -739,6 +750,7 @@ for s in subset:
     print(s)
 
 print("------------------------------------------------------------")  # 60個
+
 
 def subset_generator(data):
     final_subset = [[]]  # 空集合也算是子集合
@@ -769,6 +781,7 @@ print("商品組合 = {},\n商品價值 = {}".format(product, max_value))
 
 print("------------------------------------------------------------")  # 60個
 
+
 def knapsack(W, wt, val):
     # 動態規劃演算法
     n = len(val)
@@ -793,6 +806,7 @@ print("商品價值 : ", knapsack(bag_weight, weight, value))
 
 
 print("------------------------------------------------------------")  # 60個
+
 
 def traveling(W, wt, val):
     # 動態規劃演算法
@@ -862,7 +876,7 @@ subText = end23 + front3
 encry_dict = dict(zip(abc, subText))  # 建立字典
 print("列印編碼字典\n", encry_dict)  # 列印字典
 
-#msgTest = input("請輸入原始字串 : ")
+# msgTest = input("請輸入原始字串 : ")
 print("請輸入原始字串 : ")
 msgTest = "america"
 
@@ -879,6 +893,7 @@ print("加密字串 ", ciphertext)
 print("------------------------------------------------------------")  # 60個
 
 import string
+
 
 def encrypt(text, encryDict):  # 加密文件
     cipher = []
@@ -959,6 +974,7 @@ for i in range(k):
 """
 print("------------------------------------------------------------")  # 60個
 
+
 def gold(W, wt, val):
     # 動態規劃演算法
     n = len(val)
@@ -983,6 +999,7 @@ print("最大產值 = {} 公斤".format(gold(gold_weight, weight, value)))
 
 
 print("------------------------------------------------------------")  # 60個
+
 
 def mymax(nLst):
     if len(nLst) == 2:
@@ -1031,6 +1048,7 @@ print(dfs(graph, "F", "G"))
 
 print("------------------------------------------------------------")  # 60個
 
+
 def fruits_bag(W, wt, val):
     # 動態規劃演算法
     n = len(val)
@@ -1078,7 +1096,7 @@ subText = end23 + front3
 encry_dict = dict(zip(abc, subText))  # 建立字典
 print("列印編碼字典\n", encry_dict)  # 列印字典
 
-#msgTest = input("請輸入原始字串 : ")
+# msgTest = input("請輸入原始字串 : ")
 msgTest = "this is a lion mouse"
 
 cipher = []
@@ -1091,6 +1109,7 @@ print("原始字串 ", msgTest)
 print("加密字串 ", ciphertext)
 
 print("------------------------------------------------------------")  # 60個
+
 
 class Node:
     # 節點
@@ -1153,8 +1172,6 @@ while not q.empty():
 print("------------------------------------------------------------")  # 60個
 
 
-
-
 print("------------------------------------------------------------")  # 60個
 
 
@@ -1166,7 +1183,8 @@ print("------------------------------------------------------------")  # 60個
 sys.exit()
 
 
-#測 radios.items()
+# 測 radios.items()
+
 
 def greedy(radios, cities):
     # 貪婪演算法
@@ -1196,12 +1214,7 @@ radios["電台 5"] = set(["台南", "高雄"])
 print(greedy(radios, cities))  # 電台, 城市
 
 
-
-
-
-
-
-#測dict用
+# 測dict用
 things = {
     "iWatch手錶": (15000, 0.1),  # 定義商品
     "Asus  筆電": (35000, 0.7),
@@ -1220,7 +1233,7 @@ for i in range(len(th)):
     print("{0:8s}{1:10d}{2:10.2f}".format(th[i][0], th[i][1][0], th[i][1][1]))
 
 
-#字典
+# 字典
 animals = {
     "鼠": (15000, 0.1),
     "牛": (35000, 0.7),
@@ -1241,7 +1254,7 @@ for i in range(len(th)):
 print("------------------------------------------------------------")  # 60個
 
 
-#測試array
+# 測試array
 from array import *
 
 x = array("l", [1, 11, 22, 33, 44, 55])
@@ -1257,7 +1270,6 @@ else:
         print(data)
 
 print("------------------------------------------------------------")  # 60個
-
 
 
 program = [
@@ -1277,7 +1289,4 @@ for i in range(len(program)):
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
-
-

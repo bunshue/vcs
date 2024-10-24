@@ -18,8 +18,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-
-
 """ wait long
 print("requests 1")
 import requests
@@ -193,7 +191,6 @@ for game in soup.findAll("h2"):
     print(game.text)
 
 
-
 print("------------------------------------------------------------")  # 60個
 
 
@@ -202,7 +199,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-#htmlparse01
+# htmlparse01
 
 import sys
 import requests
@@ -304,31 +301,31 @@ import os, shutil
 from bs4 import BeautifulSoup
 
 # 若程式的路徑有images資料即刪除，否則即建立images
-folder="images"
+folder = "images"
 if os.path.exists(folder):
     shutil.rmtree(folder)
 os.mkdir(folder)
 
-urlstr='http://www.drmaster.com.tw/Publish_Newbook.asp'
-response=requests.get(urlstr)
-response.encoding="utf-8"
-bs=BeautifulSoup(response.text, 'html.parser')
-listImageUrl=bs.select('td a img')
+urlstr = "http://www.drmaster.com.tw/Publish_Newbook.asp"
+response = requests.get(urlstr)
+response.encoding = "utf-8"
+bs = BeautifulSoup(response.text, "html.parser")
+listImageUrl = bs.select("td a img")
 # 逐一取得博碩新書圖檔並放入images資料夾下
-n=0
+n = 0
 for link in listImageUrl:
-    print(link.get('src'))
-    imgUrl=link.get('src')
-    if("http" in imgUrl):   
-        imgName=imgUrl.split('/')[-1]
-        response= requests.get(imgUrl) 
-        f=open(folder +'/' + imgName,'wb')  	# 指定開啟檔案路徑
+    print(link.get("src"))
+    imgUrl = link.get("src")
+    if "http" in imgUrl:
+        imgName = imgUrl.split("/")[-1]
+        response = requests.get(imgUrl)
+        f = open(folder + "/" + imgName, "wb")  # 指定開啟檔案路徑
         # 將response.content二進位內容寫入指定的圖檔名稱
-        f.write(response.content) 
+        f.write(response.content)
         f.close()
-        print("%s 下載完成" %(imgName))
-        n+=1
-print('共下載 %d 張圖檔' %(n))
+        print("%s 下載完成" % (imgName))
+        n += 1
+print("共下載 %d 張圖檔" % (n))
 
 
 print("------------------------------------------------------------")  # 60個
@@ -339,59 +336,59 @@ import os, shutil
 from bs4 import BeautifulSoup
 
 # 若程式的路徑有images資料即刪除，否則即建立images
-folder="images"
+folder = "images"
 if os.path.exists(folder):
     shutil.rmtree(folder)
 os.mkdir(folder)
-pageName='newbook.html'
+pageName = "newbook.html"
 if os.path.exists(pageName):
     os.remove(pageName)
 
-urlstr='http://www.drmaster.com.tw/Publish_Newbook.asp'
-response=requests.get(urlstr)
-response.encoding="utf-8"
-bs=BeautifulSoup(response.text, 'html.parser')
-listImageUrl=bs.select('td a img')
-listImageUrlOk=[]
-listBookName=bs.select('.style2')
+urlstr = "http://www.drmaster.com.tw/Publish_Newbook.asp"
+response = requests.get(urlstr)
+response.encoding = "utf-8"
+bs = BeautifulSoup(response.text, "html.parser")
+listImageUrl = bs.select("td a img")
+listImageUrlOk = []
+listBookName = bs.select(".style2")
 # 逐一取得博碩新書圖檔並放入images資料夾下
 for link in listImageUrl:
-    imgUrl=link.get('src')
-    if("http" in imgUrl):   
-        imgName=imgUrl.split('/')[-1]
+    imgUrl = link.get("src")
+    if "http" in imgUrl:
+        imgName = imgUrl.split("/")[-1]
         listImageUrlOk.append(imgName)
-        response= requests.get(imgUrl) 
-        f=open(folder +'/' + imgName,'wb')  	# 指定開啟檔案路徑
+        response = requests.get(imgUrl)
+        f = open(folder + "/" + imgName, "wb")  # 指定開啟檔案路徑
         # 將response.content二進位內容寫入指定的圖檔名稱
-        f.write(response.content) 
+        f.write(response.content)
         f.close()
-        print("%s 下載完成" %(imgName))
+        print("%s 下載完成" % (imgName))
 
-f=open(pageName,'w',encoding='utf-8')
-f.write('<html>\n')
+f = open(pageName, "w", encoding="utf-8")
+f.write("<html>\n")
 f.write('<meta charset="utf-8">\n')
-f.write('<body>\n')
-f.write('<table border>\n')
-f.write('<tr><td>書號</td><td>圖</td><td>書名</td></tr>\n')
+f.write("<body>\n")
+f.write("<table border>\n")
+f.write("<tr><td>書號</td><td>圖</td><td>書名</td></tr>\n")
 for n in range(len(listBookName)):
-    f.write('<tr>\n')
-    f.write('<td>%s</td>\n' %(listImageUrlOk[n].split('.')[0]))
-    f.write('<td><img src="images/%s" width="100"></td>\n' %(listImageUrlOk[n]))
-    f.write('<td>%s</td>\n' %(listBookName[n].text))
-    f.write('</tr>\n')
-f.write('</table>\n')
-f.write('</body>\n')
-f.write('</html>\n')
+    f.write("<tr>\n")
+    f.write("<td>%s</td>\n" % (listImageUrlOk[n].split(".")[0]))
+    f.write('<td><img src="images/%s" width="100"></td>\n' % (listImageUrlOk[n]))
+    f.write("<td>%s</td>\n" % (listBookName[n].text))
+    f.write("</tr>\n")
+f.write("</table>\n")
+f.write("</body>\n")
+f.write("</html>\n")
 f.close()
 os.system(pageName)
-print('%s 網頁建置成功' %(pageName))
+print("%s 網頁建置成功" % (pageName))
 
 print("------------------------------------------------------------")  # 60個
 
 
 from bs4 import BeautifulSoup
 
-htmlContent='''
+htmlContent = """
 <html>
 <head>
 <title>碁峰暢銷書籍</title>
@@ -411,102 +408,90 @@ htmlContent='''
 <p><a href="https://www.facebook.com/dtcbook" id="linkDtc" target="_blank">DTC粉專</a></p>
 </body>
 </html>
-'''
-bs=BeautifulSoup(htmlContent, 'html.parser')
+"""
+bs = BeautifulSoup(htmlContent, "html.parser")
 print(bs.title)
 print(bs.title.text)
 print()
-print(bs.find('h3'))
-print(bs.find('h3').text)
+print(bs.find("h3"))
+print(bs.find("h3").text)
 print()
-print(bs.find('a', {'target':'_blank'}))
-print(bs.find('a', {'target':'_blank'}).text)
+print(bs.find("a", {"target": "_blank"}))
+print(bs.find("a", {"target": "_blank"}).text)
 print()
-print(bs.select('.blueText'))
-print(bs.select('.blueText')[0].text)
+print(bs.select(".blueText"))
+print(bs.select(".blueText")[0].text)
 print()
-print(bs.select('#linkDtc'))
-print(bs.select('#linkDtc')[0].text)
-print()               
-link1=bs.find_all('a')
+print(bs.select("#linkDtc"))
+print(bs.select("#linkDtc")[0].text)
+print()
+link1 = bs.find_all("a")
 for n in range(0, len(link1)):
     print(link1[n].text)
-print()    
-data=bs.find('ul')
-link2=data.find_all('a')
+print()
+data = bs.find("ul")
+link2 = data.find_all("a")
 for n in range(0, len(link2)):
     print(link2[n].text)
 
 
-
-
 print("------------------------------------------------------------")  # 60個
 
 
-
-
-
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python全面攻略_從程式新人到開發設計的快速學習\ch14\code\htmlparse03.py
+# 檔案 : C:\_git\vcs\_4.python\__code\Python全面攻略_從程式新人到開發設計的快速學習\ch14\code\htmlparse03.py
 
 import requests
 from bs4 import BeautifulSoup
 
-urlstr='http://www.drmaster.com.tw/Publish_Newbook.asp'
+urlstr = "http://www.drmaster.com.tw/Publish_Newbook.asp"
 
-responseObj=requests.get(urlstr)
-responseObj.encoding="utf-8"
-bs=BeautifulSoup(responseObj.text, 'html.parser')
+responseObj = requests.get(urlstr)
+responseObj.encoding = "utf-8"
+bs = BeautifulSoup(responseObj.text, "html.parser")
 print(bs.title.text)
-data=bs.select('.style2')
-count=len(data)
-print("共 %d 筆新書記錄" %(count))
+data = bs.select(".style2")
+count = len(data)
+print("共 %d 筆新書記錄" % (count))
 
 for book in data:
     print(book.text)
-    
-    
-    
+
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python全面攻略_從程式新人到開發設計的快速學習\ch14\code\htmlparse04.py
+# 檔案 : C:\_git\vcs\_4.python\__code\Python全面攻略_從程式新人到開發設計的快速學習\ch14\code\htmlparse04.py
 
 import requests
+
 # 指定圖片網址
-img_url='http://www.drmaster.com.tw/Cover/MP22030.png'
-imgName=img_url.split('/')[-1]
-response= requests.get(img_url) 
-f=open(imgName,'wb')  	# 指定開啟檔案路徑
+img_url = "http://www.drmaster.com.tw/Cover/MP22030.png"
+imgName = img_url.split("/")[-1]
+response = requests.get(img_url)
+f = open(imgName, "wb")  # 指定開啟檔案路徑
 # 將response.content二進位內容寫入為MP22030.png
-f.write(response.content)  			
-print('%s 下載完畢' %(imgName))
+f.write(response.content)
+print("%s 下載完畢" % (imgName))
 f.close()
 
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python全面攻略_從程式新人到開發設計的快速學習\ch14\code\htmlparse05.py
+# 檔案 : C:\_git\vcs\_4.python\__code\Python全面攻略_從程式新人到開發設計的快速學習\ch14\code\htmlparse05.py
 
 import requests
 from bs4 import BeautifulSoup
 
-urlstr='http://www.drmaster.com.tw/Publish_Newbook.asp'
+urlstr = "http://www.drmaster.com.tw/Publish_Newbook.asp"
 
-responseObj=requests.get(urlstr)
-responseObj.encoding="utf-8"
-bs=BeautifulSoup(responseObj.text, 'html.parser')
+responseObj = requests.get(urlstr)
+responseObj.encoding = "utf-8"
+bs = BeautifulSoup(responseObj.text, "html.parser")
 
-data=bs.select('td a img')
+data = bs.select("td a img")
 
 for book in data:
-    if("http" in book.get('src')):
-        print(book.get('src'))
-
-print("------------------------------------------------------------")  # 60個
-
-
-
+    if "http" in book.get("src"):
+        print(book.get("src"))
 
 print("------------------------------------------------------------")  # 60個
 
@@ -516,6 +501,8 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
+
+print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個

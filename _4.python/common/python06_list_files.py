@@ -25,7 +25,7 @@ import datetime
 
 foldername = "C:/_git/vcs/_1.data/______test_files3/DrAP_test"
 foldername = "C:/_git/vcs/_1.data/______test_files3/DrAP_test/_good1/_good4/_good5"
-foldername = "C:/_git/vcs/_1.data/______test_files3/DrAP_test6" # 較少
+foldername = "C:/_git/vcs/_1.data/______test_files3/DrAP_test6"  # 較少
 
 print("------------------------------------------------------------")  # 60個
 '''
@@ -2073,11 +2073,10 @@ import ctypes
 def genwincodec():
     import platform
 
-    code = '''\
-"""Python Character Mapping Codec %s generated on Windows:
+    code = ''' """Python Character Mapping Codec %s generated on Windows:
 %s with the command:
   python Tools/unicode/genwincodec.py %s
-"""#"
+"""  # "
 ''' % (
         "cp950",
         " ".join(platform.win32_ver()),
@@ -2527,12 +2526,14 @@ def ByteConversionTBGBMBKB(size):
     else:
         return str(size) + " Byte"  # 顯示Byte值
 
+
 """
 filesize = 123456
 print("filesize = ", filesize, "\t檔案大小 : ", ByteConversionTBGBMBKB(filesize))
 print("大小:\t", filesize, " 拜")
 print("大小:\t", ByteConversionTBGBMBKB(filesize))
 """
+
 
 def check_video_filename(filename):
     f = filename.lower()
@@ -2547,11 +2548,10 @@ def check_video_filename(filename):
     )
 
 
-
-
 print("轉出多層 os.walk 1 AP專用")
 
 foldername = "D:/內視鏡影片/_ims影片1"
+foldername = "F:/_________AP_kilo_F/__ap0117"
 
 total_folders = 0
 total_files = 0
@@ -2561,14 +2561,20 @@ all_files = list()
 for item in os.walk(foldername):  # 多層
     total_folders += 1
     for fname in item[2]:
-        #ffname = item[0] + "/" + fname  # 取出檔名完整路徑 same
+        # ffname = item[0] + "/" + fname  # 取出檔名完整路徑 same
         ffname = os.path.join(item[0], fname)  # 取出檔名完整路徑
-        #print(ffname)
-        if check_video_filename(ffname)==True:
+        # print(ffname)
+        if check_video_filename(ffname) == True:
             total_files += 1
-            all_files.append(ffname)
             filesize = os.stat(ffname).st_size  # 取出檔案大小
             total_size += filesize
+            all_files.append(ffname + " " + ByteConversionTBGBMBKB(filesize))
+            abspath = os.path.abspath(ffname)
+            directory, short_filename = os.path.split(abspath)
+            # print("全檔名", ffname)
+            # print("全檔名", abspath)
+            # print("資料夾", directory)
+            # print("短檔名", short_filename)
     print("------------------------------")  # 30個
 
 if total_folders > 0:
@@ -2581,7 +2587,19 @@ print("包含 :", total_files, "個檔案,", total_folders, "個資料夾")
 print("顯示結果:")
 for _ in all_files:
     print(_)
-print("總容量 : " + str(total_size) + " 拜")
+
 print("總容量 : ", ByteConversionTBGBMBKB(total_size))
 
+"""
+#呼叫 potplayer 播放之
+1. 容量 特大/特小 的 影片檔案
+2. 格式 特大/特小 的 影片檔案
+3. 檔名含有關鍵字 的 影片檔案
 
+
+os.system("notepad " + filename_r)
+
+all_filename :  "D:\vcs\04_能臣之路.rmvb" "D:\vcs\07_深谋远虑.rmvb" "D:\vcs\09_一决雌雄.rmvb"
+
+
+"""

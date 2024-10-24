@@ -240,21 +240,6 @@ https://mofanpy.com/
 https://github.com/MorvanZhou
 
 
-from os import system
-
-"""
-import platform
-
-os_name = platform.system().lower()
-    if 'windows' in os_name:
-        system('cls')
-    else:
-        system('clear')
-
-
-"""
-
-
 turtle 指令
 turtle.Screen().reset()
 
@@ -1015,13 +1000,6 @@ pip install XXXX.whl
 
 套件(package) : 多個模組組合在一起
 套件就是一個模組庫 函式庫
-
-
-
-#用預設程式開啟檔案
-os.system('Histogram.png')  #開啟柱狀圖Histogram.png圖片
-
-
 
 
 Numpy 知識
@@ -1812,12 +1790,6 @@ try:
         print('a')
 
         time.sleep(1)  # Pause for a bit.
-
-        # Clear the screen:
-        if sys.platform == 'win32':
-            os.system('cls')  # Windows uses the cls command.
-        else:
-            os.system('clear')  # macOS and Linux use the clear command.
 
 except KeyboardInterrupt:
     print('Rotating Cube, by Al Sweigart al@inventwithpython.com')
@@ -2794,6 +2766,7 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+
 class BaseTokenizer:
     """
     >>> tk = BaseTokenizer("28a2320b-fd3f-4627-9792-a2b38e3c46b0")
@@ -3617,83 +3590,6 @@ print("新的msg內容 : ", msg)
 
 print("------------------------------------------------------------")  # 60個
 
-import sys
-import time
-
-SYSTIMES_IMPLEMENTATION = None
-USE_WIN32PROCESS_GETPROCESSTIMES = 'win32process.GetProcessTimes()'
-
-import win32process
-SYSTIMES_IMPLEMENTATION = USE_WIN32PROCESS_GETPROCESSTIMES
-
-WIN32_PROCESS_TIMES_TICKS_PER_SECOND = 1e7
-def win32process_getprocesstimes_systimes():
-    d = win32process.GetProcessTimes(win32process.GetCurrentProcess())
-    return (d['UserTime'] / WIN32_PROCESS_TIMES_TICKS_PER_SECOND,
-            d['KernelTime'] / WIN32_PROCESS_TIMES_TICKS_PER_SECOND)
-
-systimes = win32process_getprocesstimes_systimes
-
-def processtime():
-    user, system = systimes()
-    return user + system
-
-def some_workload1():
-    x = 0
-    for i in range(10000000):
-        x = x + 1
-    print(x)
-
-def some_workload2():
-    x = 0.0
-    for i in range(10000000):
-        x += i
-    print(x)
-
-if __name__ == '__main__':
-    print('Using %s as timer' % SYSTIMES_IMPLEMENTATION)
-    print()
-    
-    print('Testing systimes() under load conditions')
-    t0 = systimes()
-    some_workload1()
-    t1 = systimes()
-    print('before:', t0)
-    print('after:', t1)
-    print('differences:', (t1[0] - t0[0], t1[1] - t0[1]))
-
-
-    print('Testing systimes() under load conditions')
-    t0 = systimes()
-    some_workload1()
-    t1 = systimes()
-    print('before:', t0)
-    print('after:', t1)
-    print('differences:', (t1[0] - t0[0], t1[1] - t0[1]))
-    
-
-    print('Testing systimes() under load conditions 2222')
-    t0 = systimes()
-    some_workload2()
-    t1 = systimes()
-    print('before:', t0)
-    print('after:', t1)
-    print('differences:', (t1[0] - t0[0], t1[1] - t0[1]))
-
-
-    print('Testing systimes() under idle conditions')
-    t0 = systimes()
-    time.sleep(1)
-    t1 = systimes()
-    print('before:', t0)
-    print('after:', t1)
-    print('differences:', (t1[0] - t0[0], t1[1] - t0[1]))
-    print()
-
-    print(processtime())
-
-print("------------------------------------------------------------")  # 60個
-
 檢查touch
 
     mtime = None
@@ -4208,20 +4104,6 @@ print(f"在{name}, 我的輸出是 {output:.2f}。")
 行家超愛的 list comprehension
 [i**2 for i in range(10)]
 
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
 
         return "%s %s %2d %02d:%02d:%02d %04d" % (
@@ -4232,6 +4114,7 @@ print("------------------------------------------------------------")  # 60個
             self._year)
 
 print("------------------------------------------------------------")  # 60個
+
 innum = 0
 list1 = []
 while(innum != -1):
@@ -4295,7 +4178,6 @@ len([1, 2, 3]) 	3 				長度
 3 in [1, 2, 3] 	True 				成員
 for x in [1, 2, 3]: print x, 	1 2 3 		迭代
 
-
 print('------------------------------------------------------------')	#60個
 
 # *args 與 **kwargs 選用性與關鍵字參數
@@ -4353,8 +4235,6 @@ import zipfile
 
 with zipfile.ZipFile('檔案路徑.zip', 'r') as zip_ref:
     zip_ref.extractall('解壓縮目標資料夾')
-
-
 
 """
 程式名稱：九九乘法表
@@ -4548,9 +4428,6 @@ plt.xticks([])  #隱藏x座標
 plt.yticks([])  #隱藏y座標
 
 
-
-
-
 df的方法
 
 
@@ -4671,19 +4548,7 @@ df.kurt()	峰度
 在RGB各區間的分量
 
 
-"""
-
-
-
-"""
-
-
-
-
-
             三维2D图
-            文本
-            分绘
 
 線圖
 Axes3D.plot()
@@ -4746,9 +4611,6 @@ print("顯示8進位數: " + '\123')
 print("顯示倒退一個字元: " + '\b' + "xyz")
 print("顯示空字元: " + "xy\0z")
 print("雙引號的應用->\n\"跳脫字元的綜合運用\"")
-
-
-
 
 print("------------------------------------------------------------")  # 60個
 基本用range
@@ -4905,9 +4767,6 @@ print("------------------------------------------------------------")  # 60個
 >>> math.ceil(3.4)
 >>> math.ceil(3.4)
 >>> math.ceil(3.4)
-
-
-
 
 08.3.4 enumerate function
 
@@ -5113,11 +4972,6 @@ plt.ylim(-1.3, 1.3)
 
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-
-
-
 下載
 https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz
 將檔案改名成
@@ -5153,11 +5007,6 @@ invoice.get_current()
 ```
 {'title': '109年11月、12月', '特別獎': '77815838', '特獎': '39993297', '頭獎': '59028801、02813820、06896234', '增開六獎': '011、427'}
 ```
-
-
-
-
-
 
 
 
@@ -5254,204 +5103,6 @@ haar_flags = 0
             '  -> relative error = %r'
             )
         return template % (first, second, tol, rel, abs_err, rel_err)
-
-class Test:
-
-    def __init__(self, foo):
-        self.__foo = foo
-
-    def __bar(self):
-        print(self.__foo)
-        print('__bar')
-
-
-def main():
-    test = Test('hello')
-    test._Test__bar()
-    print(test._Test__foo)
-
-
-if __name__ == "__main__":
-    main()
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python-100-Days-zh_TW-master\Day01-15\code\Day08\circle.py
-
-"""
-练习
-修一个游泳池 半径(以米为单位)在程序运行时输入 游泳池外修一条3米宽的过道
-过道的外侧修一圈围墙 已知过道的造价为25元每平米 围墙的造价为32.5元每米
-输出围墙和过道的总造价分别是多少钱(精确到小数点后2位)
-
-Version: 0.1
-Author: 骆昊
-Date: 2018-03-08
-"""
-
-import math
-
-
-class Circle(object):
-
-    def __init__(self, radius):
-        self._radius = radius
-
-    @property
-    def radius(self):
-        return self._radius
-
-    @radius.setter
-    def radius(self, radius):
-        self._radius = radius if radius > 0 else 0
-
-    @property
-    def perimeter(self):
-        return 2 * math.pi * self._radius
-
-    @property
-    def area(self):
-        return math.pi * self._radius * self._radius
-
-
-if __name__ == '__main__':  
-    radius = float(input('请输入游泳池的半径: '))
-    small = Circle(radius)
-    big = Circle(radius + 3)
-    print('围墙的造价为: ￥%.1f元' % (big.perimeter * 115))
-    print('过道的造价为: ￥%.1f元' % ((big.area - small.area) * 65))
-
-
-print("------------------------------------------------------------")  # 60個
-
-"""
-另一种创建类的方式
-
-Version: 0.1
-Author: 骆昊
-Date: 2018-03-08
-"""
-
-
-def bar(self, name):
-    self._name = name
-
-
-def foo(self, course_name):
-    print('%s正在学习%s.' % (self._name, course_name))
-
-
-def main():
-    Student = type('Student', (object,), dict(__init__=bar, study=foo))
-    stu1 = Student('骆昊')
-    stu1.study('Python程序设计')
-
-
-if __name__ == '__main__':
-    main()  
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python-100-Days-zh_TW-master\Day01-15\code\Day08\rect.py
-
-"""
-定义和使用矩形类
-
-Version: 0.1
-Author: 骆昊
-Date: 2018-03-08
-"""
-
-
-class Rect(object):
-    """矩形类"""
-
-    def __init__(self, width=0, height=0):
-        """初始化方法"""
-        self.__width = width
-        self.__height = height
-
-    def perimeter(self):
-        """计算周长"""
-        return (self.__width + self.__height) * 2
-
-    def area(self):
-        """计算面积"""
-        return self.__width * self.__height
-
-    def __str__(self):
-        """矩形对象的字符串表达式"""
-        return '矩形[%f,%f]' % (self.__width, self.__height)
-
-    def __del__(self):
-        """析构器"""
-        print('销毁矩形对象')
-
-
-if __name__ == '__main__':
-    rect1 = Rect()
-    print(rect1)
-    print(rect1.perimeter())
-    print(rect1.area())
-    rect2 = Rect(3.5, 4.5)
-    print(rect2)
-    print(rect2.perimeter())
-    print(rect2.area())
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python-100-Days-zh_TW-master\Day01-15\code\Day08\student.py
-
-"""
-定义和使用学生类
-
-Version: 0.1
-Author: 骆昊
-Date: 2018-03-08
-"""
-
-
-def _foo():
-    print('test')
-
-
-class Student(object):
-
-    # __init__是一个特殊方法用于在创建对象时进行初始化操作
-    # 通过这个方法我们可以为学生对象绑定name和age两个属性
-    def __init__(self, name, age):
-        self.name = name
-        self.age = age
-
-    def study(self, course_name):
-        print('%s正在学习%s.' % (self.name, course_name))
-
-    # PEP 8要求标识符的名字用全小写多个单词用下划线连接
-    # 但是很多程序员和公司更倾向于使用驼峰命名法(驼峰标识)
-    def watch_av(self):
-        if self.age < 18:
-            print('%s只能观看《熊出没》.' % self.name)
-        else:
-            print('%s正在观看岛国大电影.' % self.name)
-
-
-def main():
-    stu1 = Student('骆昊', 38)
-    stu1.study('Python程序设计')
-    stu1.watch_av()
-    stu2 = Student('王大锤', 15)
-    stu2.study('思想品德')
-    stu2.watch_av()
-
-
-if __name__ == '__main__':
-    main()
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------------------------------------")  # 60個
 

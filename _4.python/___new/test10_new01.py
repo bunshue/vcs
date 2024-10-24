@@ -9333,12 +9333,12 @@ print("16 進位整數運算")
 x = 0x5D  # 這是16進位整數
 print(x)  # 列出10進位的結果
 
-print('十進位 轉 十六進位')
+print("十進位 轉 十六進位")
 y = 65535  # 10進位
 print(hex(y))  # 十進位 轉 十六進位
 
 
-'''
+"""
 #hex()回傳參數的十六進位值
 ##輸出結果數字前面0x代表十六進位(hexdecimal)
 print(hex(10))
@@ -9360,38 +9360,35 @@ for i in range(32):
     print(hex(i))
 
 
-'''
+"""
 
 sys.exit()
 
 
-#字串轉數值,10進位整數
-print(int('13',10))
-#字串轉數值,2進位整數
-print(int('1001',2))
-#字串轉數值,浮點數
-print(float('3.14'))
+# 字串轉數值,10進位整數
+print(int("13", 10))
+# 字串轉數值,2進位整數
+print(int("1001", 2))
+# 字串轉數值,浮點數
+print(float("3.14"))
 
-#ord()是將字元轉成ASCII碼
-#chr()是將ASCII碼轉成字元
-#ord()和chr()互為反函數
-print(chr(ord('A')))
+# ord()是將字元轉成ASCII碼
+# chr()是將ASCII碼轉成字元
+# ord()和chr()互為反函數
+print(chr(ord("A")))
 print(ord(chr(65)))
 
 
-#i的初始值為A字元的ASCII碼(65)，終止值小於Z字元的ASCII碼(90)+1，遞增值為1
-for i in range(ord("A"),ord("Z")+1,1):
-    print(chr(i), end = '')
-  
-#bin()回傳參數的二進位值
+# i的初始值為A字元的ASCII碼(65)，終止值小於Z字元的ASCII碼(90)+1，遞增值為1
+for i in range(ord("A"), ord("Z") + 1, 1):
+    print(chr(i), end="")
+
+# bin()回傳參數的二進位值
 ##輸出結果數字前面0b代表二進位(binary)
 print(bin(10))
-#oct()回傳參數的八進位值
+# oct()回傳參數的八進位值
 ##輸出結果數字前面0o代表八進位(octal)
 print(oct(10))
-
-
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -9467,7 +9464,6 @@ print("str(543)=", str(543))
 print("------------------------------------------------------------")  # 60個
 
 
-
 st = 10
 sp = 20
 
@@ -9476,13 +9472,12 @@ for number in range(st, sp):  # Main program loop.
     hexNumber = hex(number)[2:].upper()
     binNumber = bin(number)[2:]
 
-    print('DEC:', number, '   HEX:', hexNumber, '   BIN:', binNumber)
+    print("DEC:", number, "   HEX:", hexNumber, "   BIN:", binNumber)
 
 print("------------------------------------------------------------")  # 60個
 
 
-
-print('進位轉換')
+print("進位轉換")
 
 number = 255
 print("型別：", type(number))
@@ -9525,7 +9520,6 @@ x = 0x5D  # 這是16進位整數
 print(x)  # 列出10進位的結果
 
 
-
 print("------------------------------------------------------------")  # 60個
 
 x = 100
@@ -9534,6 +9528,7 @@ print("100的16進位 = %x\n100的 8進位 = %o" % (x, x))
 print("------------------------------------------------------------")  # 60個
 
 # 將 16 進位數轉為 10 進位
+
 
 def hex_to_dec():
     hexnum = "ff"
@@ -9574,7 +9569,3 @@ print(hex(ord(code3)))  # 輸出字元'魁'的Unicode(16進位)碼值
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
-
-
-
-
