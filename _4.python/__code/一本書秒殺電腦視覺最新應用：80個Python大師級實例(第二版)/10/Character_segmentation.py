@@ -4,11 +4,8 @@ from PIL import Image
 import os.path
 from skimage import io,data
 
-
+# 图像拉伸函数
 def stretch(img):
-    '''
-    图像拉伸函数
-    '''
     maxi=float(img.max())
     mini=float(img.min())
 
@@ -18,10 +15,8 @@ def stretch(img):
 
     return img
 
+# 二值化处理函数
 def dobinaryzation(img):
-    '''
-    二值化处理函数
-    '''
     maxi=float(img.max())
     mini=float(img.min())
 
@@ -31,10 +26,8 @@ def dobinaryzation(img):
     #返回二值化后的黑白图像
     return thresh
 
+# 寻找矩形轮廓
 def find_rectangle(contour):
-    '''
-    寻找矩形轮廓
-    '''
     y,x=[],[]
 
     for p in contour:
@@ -43,10 +36,8 @@ def find_rectangle(contour):
 
     return [min(y),min(x),max(y),max(x)]
 
+# 定位车牌号
 def locate_license(img,afterimg):
-    '''
-    定位车牌号
-    '''
     #contours, hierarchy = cv2.findContours(binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
     contours,hierarchy=cv2.findContours(img,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
 
@@ -89,10 +80,8 @@ def locate_license(img,afterimg):
 
     return block[maxindex][0]
 
+#预处理函数
 def find_license(img):
-    '''
-    预处理函数
-    '''
     m=400*img.shape[0]/img.shape[1]
 
     #压缩图像
@@ -104,7 +93,7 @@ def find_license(img):
     #灰度拉伸
     stretchedimg=stretch(gray_img)
 
-    '''进行开运算，用来去除噪声'''
+    #进行开运算，用来去除噪声
     r=16
     h=w=r*2+1
     kernel=np.zeros((h,w),np.uint8)
@@ -120,7 +109,7 @@ def find_license(img):
     #canny边缘检测
     canny=cv2.Canny(binaryimg,binaryimg.shape[0],binaryimg.shape[1])
 
-    '''消除小的区域，保留大块的区域，从而定位车牌'''
+    #消除小的区域，保留大块的区域，从而定位车牌
     #进行闭运算
     kernel=np.ones((5,19),np.uint8)
     closingimg=cv2.morphologyEx(canny,cv2.MORPH_CLOSE,kernel)
@@ -137,10 +126,8 @@ def find_license(img):
 
     return rect,img
 
+# 图像分割函数
 def cut_license(afterimg,rect):
-    '''
-    图像分割函数
-    '''
     #转换为宽度和高度
     rect[2]=rect[2]-rect[0]
     rect[3]=rect[3]-rect[1]
@@ -159,10 +146,8 @@ def cut_license(afterimg,rect):
 
     return img_show
 
+#车牌图片二值化
 def deal_license(licenseimg):
-    '''
-    车牌图片二值化
-    '''
     #车牌变为灰度图像
     gray_img=cv2.cvtColor(licenseimg,cv2.COLOR_BGR2GRAY)
 
@@ -207,9 +192,9 @@ if __name__=='__main__':
     cv2.waitKey(0)
 
     #分割字符
-    '''
-    判断底色和字色
-    '''
+
+    #判断底色和字色
+
     #记录黑白像素总和
     white=[]
     black=[]

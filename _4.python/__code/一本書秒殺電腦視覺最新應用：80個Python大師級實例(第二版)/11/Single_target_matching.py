@@ -38,3 +38,4 @@ print('匹配值 :', strmin_val)
 cv2.imshow(strText, target)
 cv2.waitKey()
 cv2.destroyAllWindows()
+

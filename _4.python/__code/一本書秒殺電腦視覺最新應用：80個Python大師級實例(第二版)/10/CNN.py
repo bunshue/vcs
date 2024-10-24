@@ -1,9 +1,9 @@
-#导入必要的编程库
 import matplotlib.pyplot as plt
 import numpy as np
 import tensorflow as tf
 from tensorflow.contrib.learn.python.learn.datasets.mnist import read_data_sets
 from tensorflow.python.framework import ops
+
 ops.reset_default_graph()
 # 开始计算图会话
 sess = tf.Session()

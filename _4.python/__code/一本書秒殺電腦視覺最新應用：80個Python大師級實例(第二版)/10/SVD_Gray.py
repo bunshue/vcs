@@ -17,6 +17,7 @@ def svd_restore(sigma, u, v, K):
     Image.fromarray(SigRecon).save("svd_" + str(K) + "_" +image_file) #保存灰度图
     
 image_file = u'frog.jpg'
+
 if __name__ == '__main__':
     im = Image.open(image_file)    #打开图像文件
     im = im.convert('L')           #将原图像转化为灰度图

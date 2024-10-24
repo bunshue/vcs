@@ -223,15 +223,4 @@ occlusion = np.logical_not(mask[:, :, -1]).astype(np.uint8)
 
 print('------------------------------------------------------------')	#60個
 
-sys.path.append(os.path.dirname(os.getcwd()))
-import skimage.io
-
-ROOT_DIR = os.getcwd()
-sys.path.append(ROOT_DIR)
-
-filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
-image = skimage.io.imread(filename)
-
-print('------------------------------------------------------------')	#60個
-
 

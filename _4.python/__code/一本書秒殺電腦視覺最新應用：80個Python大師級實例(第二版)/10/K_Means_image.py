@@ -14,6 +14,7 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microso
 plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 warnings.filterwarnings('ignore')
+
 #original = mpl.image.imread('frog.jpg')
 original = plt.imread('frog.jpg')
 width,height,depth = original.shape

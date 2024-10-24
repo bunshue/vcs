@@ -843,7 +843,10 @@ print('記事本 關閉')
 
 print("------------------------------------------------------------")  # 60個
 
+sys.path.append(os.path.dirname(os.getcwd()))
 
+ROOT_DIR = os.getcwd()
+sys.path.append(ROOT_DIR)
 
 print("------------------------------------------------------------")  # 60個
 

@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 from scipy import ndimage as ndi
 from skimage import morphology,color,data,filter
+
 image =color.rgb2gray(data.camera())
 
 #plt.rcParams['font.sans-serif'] =['SimHei']  #显示中文标签
@@ -28,6 +29,6 @@ ax2.set_title("标记")
 ax3.imshow(labels, cmap=plt.cm.spectral, interpolation='nearest')
 ax3.set_title("分割")
 for ax in axes:
- ax.axis('off')
+    ax.axis('off')
 fig.tight_layout()
 plt.show()

@@ -18,12 +18,38 @@ namespace vcs_Test_Notifier
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            label1.Text += "程式啟動後";
-
+            this.WindowState = FormWindowState.Minimized;
         }
 
+        int cnt = 0;
         private void timer1_Tick(object sender, EventArgs e)
         {
+            cnt++;
+            if (cnt == 10)
+            {
+                this.WindowState = FormWindowState.Normal;
+                this.TopMost = true;
+                cnt = 0;
+
+                richTextBox1.Text += "Here 1111\n";
+            }
+            else if (cnt == 15)
+            {
+                if (this.WindowState == FormWindowState.Minimized)
+                {
+                    this.WindowState = FormWindowState.Normal;
+                    this.TopMost = true;
+                    cnt = 0;
+                    richTextBox1.Text += "Here 2222\n";
+                }
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.TopMost = false;
+            this.WindowState = FormWindowState.Minimized;
+            cnt = 0;
 
         }
     }

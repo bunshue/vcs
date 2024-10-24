@@ -58,7 +58,7 @@ print("------------------------------------------------------------")  # 60個
 
 from PIL import Image   # Importing Image class from PIL module
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 
 print("------------------------------------------------------------")  # 60個
 
@@ -185,10 +185,10 @@ print('------------------------------------------------------------')	#60個
 
 print("------------------------------------------------------------")  # 60個
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 
-img=skimage.io.imread(filename)
-skimage.io.imshow(img)
+image = skimage.io.imread(filename)
+skimage.io.imshow(image)
 
 plt.show()
 
@@ -968,7 +968,6 @@ print(mat)
 #即像素最小值由51變為0，最大值由153變為255，整體進行了拉伸，但是數據類型沒有變，還是uint8
 #前面我們講過，可以通過img_as_float()函數將unit8類型轉換為float型，實際上還有更簡單的方法，就是乘以1.0
 
-import numpy as np
 image = np.array([51, 102, 153], dtype=np.uint8)
 print(image*1.0)
 
@@ -1650,6 +1649,101 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
+
+print("------------------------------------------------------------")  # 60個
+
+import matplotlib.cm as cm
+
+depth = 4
+filter_shape = (3, 3) 
+   
+w_shape = (depth, 3, filter_shape[0], filter_shape[1]) 
+dist = np.random.uniform(-0.2, 0.2, size=w_shape)
+output = 5
+
+astronaut = skimage.data.astronaut()
+img = np.asarray(astronaut, dtype='float32') / 255
+filtered_img = img.transpose(2, 0, 1).reshape(1, 3, 512, 512)
+
+plt.axis('off')
+plt.imshow(img)
+plt.show()
+
+for img in range(depth):
+  fig = plt.figure()   
+  plt.axis( 'off')   
+  plt.imshow(filtered_img[0, img, :, :, ], cmap = cm.gray)
+  plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+print("RGB - LAB 轉換")
+
+red = [255, 0, 0]
+green = [0, 255, 0]
+blue = [0, 0, 255]
+cyan = [0, 255, 255]
+magenta = [255, 0, 255]
+yellow = [255, 255, 0]
+
+import numpy as np
+import skimage
+
+def get_lab_from_rgb(color):
+    rgb = np.array(color, dtype=np.uint8)
+    lab = skimage.color.rgb2lab(rgb, illuminant="D65")
+    print(lab)
+
+get_lab_from_rgb(red)
+get_lab_from_rgb(green)
+get_lab_from_rgb(blue)
+get_lab_from_rgb(cyan)
+get_lab_from_rgb(magenta)
+get_lab_from_rgb(yellow)
+
+
+
+
+color = red
+rgb = np.array(color, dtype=np.uint8)
+lab = skimage.color.rgb2lab(rgb, illuminant="D65")
+print(lab)
+
+
+
+
+
+lab1 = [53.24058794, 80.09230823, 67.20275104]
+lab2 = [ 87.73509949, -86.18302974,  83.17970318]
+lab3 = [  32.29567257,   79.18559091, -107.85730021]
+lab4 = [ 91.11330144, -48.09059623, -14.12632982]
+lab5 = [ 60.32350653,  98.23305386, -60.82101524]
+lab6 = [ 97.13950704, -21.55468102,  94.47812228]
+
+
+def get_rgb_from_lab(lab):
+    rgb = skimage.color.lab2rgb(lab, illuminant="D50")
+    print(rgb)
+    #print(round(rgb[0]*255))
+    #print(round(rgb[1]*255))
+    #print(round(rgb[2]*255))
+    rgb = np.array(rgb*256, dtype=np.uint8)
+    print(rgb)
+
+"""    
+rgb = skimage.color.lab2rgb(lab1, illuminant="D65")
+#print(round(rgb[0]*255))
+#print(round(rgb[1]*255))
+#print(round(rgb[2]*255))
+rgb = np.array(rgb*256, dtype=np.uint8)
+print(rgb)
+"""
+get_rgb_from_lab(lab1)
+get_rgb_from_lab(lab2)
+get_rgb_from_lab(lab3)
+get_rgb_from_lab(lab4)
+get_rgb_from_lab(lab5)
+get_rgb_from_lab(lab6)
 
 print("------------------------------------------------------------")  # 60個
 

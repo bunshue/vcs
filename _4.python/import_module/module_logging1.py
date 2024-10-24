@@ -345,9 +345,10 @@ f.write("# Date: %s\n" % time.ctime())
 f.close()
 '''
 print("------------------------------------------------------------")  # 60個
-
-
-
+import logging
+logger = logging.getLogger("show_patient_IDs")
+logger.info(f"reading: {file_name}")
+logger.info("finished reading")
 
 print("------------------------------------------------------------")  # 60個
 

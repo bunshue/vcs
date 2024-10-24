@@ -115,6 +115,7 @@ LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
           verbose=0)
 
 import skimage
+
 test_image = skimage.data.astronaut()        
 test_image = skimage.color.rgb2gray(test_image)        
 test_image = skimage.transform.rescale(test_image, 0.5)        

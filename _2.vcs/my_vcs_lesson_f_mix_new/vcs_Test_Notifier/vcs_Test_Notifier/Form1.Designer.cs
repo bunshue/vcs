@@ -31,6 +31,8 @@
             this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -41,7 +43,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(311, 168);
             this.label1.TabIndex = 0;
-            this.label1.Text = "程式啟動後\r\n最小化至系統列\r\n每一秒檢查一次\r\n10分鐘後跳到最上層顯示\r\n人按ack後 再最小化至系統列\r\n直到10分鐘後再跳出來\r\n ";
+            this.label1.Text = "程式啟動後\r\n最小化至系統列\r\n每一秒檢查一次\r\n10分鐘後跳到最上層顯示\r\n人按ack後 再最小化至系統列\r\n直到10分鐘後再跳出來\r\n最好能做到快捷鍵\r\n";
             // 
             // timer1
             // 
@@ -49,11 +51,31 @@
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(384, 30);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(370, 445);
+            this.richTextBox1.TabIndex = 1;
+            this.richTextBox1.Text = "";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(103, 364);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(157, 96);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "我知道了";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(766, 487);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.label1);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -67,6 +89,8 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.Button button1;
     }
 }
 

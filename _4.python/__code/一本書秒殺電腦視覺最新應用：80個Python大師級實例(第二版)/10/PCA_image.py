@@ -1,8 +1,9 @@
-
 import cv2
 import numpy as np
-"""创建 eigValPct(eigVals, percentage)"""
-#函数传入的参数是特征值eigVals和百分比percentage，返回需要降到的维度数num
+
+# 创建 eigValPct(eigVals, percentage)
+# 函数传入的参数是特征值eigVals和百分比percentage，返回需要降到的维度数num
+
 def eigValPct(eigVals, percentage):
     sortArray=np.sort(eigVals)[::-1] # 特征值从大到小排序
     pct = np.sum(sortArray)*percentage
@@ -14,9 +15,11 @@ def eigValPct(eigVals, percentage):
         if tmp>=pct:
             return num
 
-"""创建 im_PCA(dataMat, percentage=0.9)
+"""
+创建 im_PCA(dataMat, percentage=0.9)
 函数有两个参数，其中dataMat是已经转换成矩阵matrix形式的数据集，每列表示一个维度；
-其中的percentage表示取前多少个特征需要达到的方差占比，默认为0.9"""
+其中的percentage表示取前多少个特征需要达到的方差占比，默认为0.9
+"""
 
 def im_PCA(dataMat, percentage=0.9):
     meanVals = np.mean(dataMat, axis=0)
@@ -62,9 +65,9 @@ cv2.imshow('blue', blue)
 cv2.imshow('reconMat', np.array(reconMat, dtype='uint8'))
 cv2.waitKey(0)
 
-
-"""使用sklearn的PCA方法"""
+# 使用sklearn的PCA方法
 from sklearn.decomposition import PCA
+
 pca = PCA(n_components=426).fit(blue)
 # 降维
 x_new = pca.transform(blue)

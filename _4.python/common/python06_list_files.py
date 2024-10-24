@@ -2551,7 +2551,7 @@ def check_video_filename(filename):
 print("轉出多層 os.walk 1 AP專用")
 
 foldername = "D:/內視鏡影片/_ims影片1"
-foldername = "F:/_________AP_kilo_F/__ap0117"
+#foldername = "F:/_________AP_kilo_F/__ap0117"
 
 total_folders = 0
 total_files = 0
@@ -2595,11 +2595,15 @@ print("總容量 : ", ByteConversionTBGBMBKB(total_size))
 1. 容量 特大/特小 的 影片檔案
 2. 格式 特大/特小 的 影片檔案
 3. 檔名含有關鍵字 的 影片檔案
-
+4. 將找到的資料存成文字檔
+5. 一次播放找到符合條件的影片檔案
 
 os.system("notepad " + filename_r)
 
 all_filename :  "D:\vcs\04_能臣之路.rmvb" "D:\vcs\07_深谋远虑.rmvb" "D:\vcs\09_一决雌雄.rmvb"
 
+video_player_path_kilo = "xxxx"
+
+video_player_path_sugar = "xxxx"
 
 """

@@ -1,6 +1,8 @@
 #opencv模板匹配----多目标匹配
+
 import cv2
-import numpy
+import numpy as np
+
 red = (0, 0, 255)
 linewidth = 3
 
@@ -33,7 +35,7 @@ numOfloc = 1
 #第一次筛选----规定匹配阈值，将满足阈值的从result中提取出来
 #对于cv2.TM_SQDIFF及cv2.TM_SQDIFF_NORMED方法设置匹配阈值为0.01
 threshold = 0.01
-loc = numpy.where(result<threshold)
+loc = np.where(result<threshold)
 #遍历提取出来的位置
 for other_loc in zip(*loc[::-1]):
     #第二次筛选----将位置偏移小于5个像素的结果舍去
