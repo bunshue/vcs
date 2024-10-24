@@ -871,6 +871,8 @@ df.to_pickle("tmp_student.pickle")
 df.to_html("tmp8-4-3a-01.html")
 df.to_html("tmp8-2-2a-01.html")
 df.to_html("tmp8-2-5a.html")
-
+df.to_html("ch9-4-2-01.html")  #df轉html
+df.to_html("ch9-4-2-02.html")  #df轉html
+df.to_html("ch9-4-3.html")  #df轉html
 
 print("------------------------------------------------------------")  # 60個

@@ -7,12 +7,68 @@ Pandas繪圖 用matplotlib顯示
 柱狀圖df.plot(kind='bar')
 橫向柱狀圖df.plot(kind='barh')
 直方圖df.plot(kind='hist')
-KDE圖df.plot(kind='kde')
+核密度(KDE)圖df.plot(kind='kde')
 面積圖df.plot(kind='area')
 圓餅圖df.plot(kind='pie')
 散佈圖df.plot(kind='scatter')
 六角形箱體圖df.plot(kind='hexbin')
 箱形圖df.plot(kind='box')
+
+print("折線圖")
+df.plot(x="監測月份", y="PM25", title="監測月份與PM2.5的關係")
+
+df.plot(x="監測月份", y="PM10", title="監測月份與PM10的關係")
+
+print("柱狀圖")
+df.plot(kind="bar", x="監測月份", y="PM25", title="監測月份與PM2.5的關係")
+
+print("橫向柱狀圖")
+df.plot(kind="barh", x="監測月份", y="PM25", title="監測月份與PM2.5的關係")
+
+print("直方圖")
+df.plot(kind="hist", x="監測月份", y="PM25", title="監測月份與PM2.5的關係")
+
+print("核密度(KDE)圖, 需要 scipy")
+df.plot(kind="kde", x="監測月份", y="PM25", title="監測月份與PM2.5的關係")
+
+print("面積圖")
+df.plot(kind="area", x="監測月份", y="PM25", title="監測月份與PM2.5的關係")
+
+print("圓餅圖")
+df.plot(kind="pie", x="監測月份", y="PM25", title="監測月份與PM2.5的關係", autopct="%1.2f%%")
+
+print("散佈圖")
+df.plot(kind="scatter", x="PM25", y="PM10", title="PM2.5與PM10的關係")  # X,Y需為數值
+
+print("六角形箱體圖")
+df.plot(kind="hexbin", x="PM25", y="PM10", title="PM2.5與PM10的關係")  # X,Y需為數值
+
+print("箱形圖")
+df.plot(kind="box", x="PM25", y="PM10", title="監測月份與PM2.5的關係")  # X,Y需為數值
+
+df.plot(kind="line", title="線圖", figsize=[10, 5])
+df.plot(kind="bar", title="長條圖", figsize=[10, 5])
+df.plot(kind="barh", title="橫條圖", figsize=[10, 5])
+df.plot(kind="bar", stacked=True, title="堆疊圖", figsize=[10, 5])
+df.plot(kind="pie", subplots=True, figsize=[14, 6])
+
+df["1st"].plot(kind="pie", title="Proportion of each area")
+df["1st"].plot(kind="pie", colors=["red", "#00FF00", "blue", "yellow"])
+df["1st"].plot(kind="pie", fontsize=12)
+df["1st"].plot(kind="pie", figsize=(1, 1))
+df["1st"].plot(kind="pie", figsize=(4, 4))
+df["1st"].plot(kind="pie", autopct="%.2f")
+df["1st"].plot(kind="pie", autopct="%.0f%%")
+
+# 掌握分佈局勢的直方圖
+df["第1次期中考"].plot(kind="bar")
+df["第1次期中考"].plot(kind="hist", bins=10)
+
+# 直方圖 hist
+df["第1次平時考"].plot(kind="hist")
+df["第1次平時考"].plot(kind="hist", bins=20)
+df["第1次平時考"].plot(kind="hist", bins=40)
+df["第1次平時考"].plot(kind="hist", color="blue", edgecolor="orange")
 
 """
 
@@ -45,6 +101,7 @@ print("------------------------------------------------------------")  # 60個
 print("DataFrame 畫圖")
 print("------------------------------------------------------------")  # 60個
 
+
 def make_data_frame_from_dict():
     datas = {
         "姓名": ["唐三藏", "孫悟空", "豬八戒", "沙悟淨"],
@@ -61,35 +118,40 @@ def make_data_frame_from_dict():
 df = make_data_frame_from_dict()  # 字典 轉 df
 print(df)
 
-index=["唐三藏", "孫悟空", "豬八戒", "沙悟淨"]
+index = ["唐三藏", "孫悟空", "豬八戒", "沙悟淨"]
 df.index = index
 
-df.plot(kind="bar", title="長條圖", fontsize=12, rot=-45)
+print("長條圖")
+df.plot(kind="bar", title="長條圖", fontsize=12, rot=-15)
 plt.show()
 
-# DataFrame的 plot()方法會在subplot中為每個 column繪製一條線，並自動創建legend
-df.plot(title = '線圖')  # 無參數, 預設就是 line
-
+print("線圖 為每個欄位畫一條線")
+df.plot(title="線圖")  # 無參數, 預設就是 line
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
+print("線圖 只看一欄位")
+df["英文"].plot()  # 無參數, 預設就是 line
+plt.show()
 
-print('將df內眾多資料 取出一些欄位 畫圖')
-filename = 'data/Kobe_stats.csv'
+#df.plot.hist(y="lifespan", rot=45)  # rot表示xstick旋轉的角度
 
-df = pd.read_csv(filename) # Kobe的資料, 很多
-# print(df)
+print("線圖 看一些欄位")
+df[["英文", "數學"]].plot()  # 無參數, 預設就是 line
+plt.show()
 
+# 取出2欄資料並畫出
+df2 = df[["英文", "數學"]]
+df2.plot()  # 無參數, 預設就是 line
+plt.show()
+
+print("線圖 看一些欄位")
 print("建立空的df, 再加入資料至df")
 df2 = pd.DataFrame()
-df2["Season"] = pd.to_datetime(df["Season"])
-df2["PTS"] = df["PTS"]
-df2["AST"] = df["AST"]
-df2["REB"] = df["TRB"]
+df2["英文"] = df["英文"]
+df2["數學"] = df["數學"]
+df2.index = df.index
 
-df2 = df2.set_index("Season")
 df2.plot()  # 無參數, 預設就是 line
-
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
@@ -98,26 +160,47 @@ yyyymmdd = "20240101"
 DAYS = 366
 datas = np.random.randn(DAYS, 4)
 index = pd.date_range(yyyymmdd, periods=DAYS)
-print('從', yyyymmdd, '開始的', DAYS, '天\n', index)
+print("從", yyyymmdd, "開始的", DAYS, "天\n", index)
 df = pd.DataFrame(datas, index=index, columns=list("ABCD"))
 df = df.cumsum()
 
-df.plot()  # 無參數, 預設就是 line
+df.plot(title="線圖")  # 無參數, 預設就是 line
 
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-print("柱圖")
+print("直方圖")
 
-fig, ax = plt.subplots(1, 1, figsize=(8, 6))
-df = pd.DataFrame(np.random.randint(1, 7, 6000), columns=["one"])
+datas = np.random.randn(1000, 3)
 
-df["two"] = df["one"] + np.random.randint(1, 7, 6000)
-df.plot.hist(bins=12, alpha=0.5, ax=ax)
+df = pd.DataFrame(datas, columns=["A", "B", "C"])
+df["A"] = df["A"] - 3
+df["C"] = df["C"] + 3
 
-ax.set_xlabel("Xlabel")
-ax.set_title("柱圖")
+#df.plot.hist(bins=30, alpha=0.3, title="直方圖") # same
+df.plot(kind="hist", bins=30, alpha=0.3, title="直方圖")
+
+#ax.set_xlabel("Xlabel")
+#ax.set_title("直方圖")
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+print("核密度(KDE)圖, 需要 scipy")
+
+N = 500
+mu = 85
+sigma = 20
+datas1 = np.random.normal(mu, sigma, N)
+
+mu = 65
+sigma = 20
+datas2 = np.random.normal(mu, sigma, N)
+
+df = pd.DataFrame({"x": datas1,"y": datas2})
+df.plot.kde()
 
 plt.show()
 
@@ -130,103 +213,24 @@ columns = ["AAA", "BBB", "CCC", "DDD"]
 
 df = pd.DataFrame(datas, columns=columns)
 
-df.boxplot(column=["AAA", "BBB", "CCC", "DDD"])
+df.boxplot()
 
+plt.title("箱圖")
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#需要 scipy
-print("kde圖")
+print("箱圖")
 
-speed = [0.1, 17.5, 40, 48, 52, 69, 88]
-lifespan = [2, 8, 70, 1.5, 25, 12, 28]
-index = ["snail", "pig", "elephant", "rabbit", "giraffe", "coyote", "horse"]
-df = pd.DataFrame({"speed": speed, "lifespan": lifespan}, index=index)
-ax = df.plot.hist(y="lifespan", rot=45)  # rot表示xstick旋轉的角度
+df = pd.read_csv("data/iris.csv")
 
-plt.show()
+df.boxplot(column="sepal_length", by="target", figsize=(8, 6))
 
-df = pd.DataFrame(
-    {
-        "x": [1, 2, 2.5, 3, 3.5, 4, 5],
-        "y": [4, 4, 4.5, 5, 5.5, 6, 6],
-    }
-)
-df.plot.kde()
-
+plt.title("箱圖")
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-mu = 170
-sigma = 10
-N = 500
-datas = np.random.normal(mu, sigma, N)
-
-df = pd.DataFrame(datas)
-
-# df.hist() same
-df.plot(kind="hist", bins=50)
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-dists = {
-    "姓名": [
-        "Zhongzheng",
-        "Banqiao",
-        "Taoyuan",
-        "Beitun",
-        "Annan",
-        "Sanmin",
-        "Daan",
-        "Yonghe",
-        "Bade",
-        "Cianjhen",
-        "Fengshan",
-        "Xinyi",
-        "Xindian",
-    ],
-    "體重": [
-        159598,
-        551452,
-        441287,
-        275207,
-        192327,
-        343203,
-        309835,
-        222531,
-        198473,
-        189623,
-        359125,
-        225561,
-        302070,
-    ],
-}
-df = pd.DataFrame(dists)
-print(df)
-
-df.plot()  # 無參數, 預設就是 line
-plt.title("全部")
-
-df2 = pd.DataFrame(dists, columns=["體重"], index=dists["姓名"])
-print(df2)
-df2.plot()  # 無參數, 預設就是 line
-plt.title("體重")
-
-print("------------------------------")  # 30個
-
-df = pd.DataFrame(dists, columns=["體重"], index=dists["姓名"])
-print(df)
-df.plot(xticks=range(len(df.index)), use_index=True)
-plt.title("加刻度")
-df.plot(xticks=range(len(df.index)), use_index=True, rot=90)
-plt.title("加刻度+旋轉")
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
 
 dists = {
     "區名": [
@@ -277,23 +281,12 @@ dists = {
 }
 
 df = pd.DataFrame(dists, columns=["人口", "面積"], index=dists["區名"])
-#print(df)
+# print(df)
 
 df["面積"] *= 1000
 df.plot(xticks=range(len(df.index)), use_index=True, rot=45, figsize=(8, 6))
 
 plt.title("人口 / 面積")
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-print("箱圖")
-
-iris = pd.read_csv("data/iris.csv")
-
-iris.boxplot(column="sepal_length", by="target", figsize=(8, 6))
-
-plt.title("箱圖")
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
@@ -304,29 +297,19 @@ df = df.drop("AREA", axis=1)
 print(df)
 
 df["1st"].plot(kind="pie", autopct="%.2f%%")
-# df["1st"].plot(kind="pie")
-plt.title('第一季')
+plt.title("第一季")
 plt.show()
 
 df.plot(kind="bar", rot=0)  # 旋轉X軸標籤角度
-plt.title('年度 bar圖')
+plt.title("年度 bar圖")
 plt.show()
 
 df.plot(kind="barh")
-plt.title('年度 barh圖')
+plt.title("年度 barh圖")
 plt.show()
 
-"""
-df["1st"].plot(kind="pie", title="Proportion of each area")
-df["1st"].plot(kind="pie", colors=["red", "#00FF00", "blue", "yellow"])
-df["1st"].plot(kind="pie", fontsize=12)
-df["1st"].plot(kind="pie", figsize=(1, 1))
-df["1st"].plot(kind="pie", figsize=(4, 4))
-df["1st"].plot(kind="pie", autopct="%.2f")
-df["1st"].plot(kind="pie", autopct="%.0f%%")
-"""
 print("------------------------------------------------------------")  # 60個
-
+'''
 # 折線圖
 
 df = pd.read_csv("data/觀光人數統計.csv")
@@ -334,27 +317,11 @@ df.index = df["Month"]  # 自定列索引為Month內容
 df = df.drop("Month", axis=1)  # 刪除原本的月份行資料
 print(df)
 
-#畫全部df
-df.plot()  # 無參數, 預設就是 line
-
-#畫2欄
-df[["Green Island", "Guguan"]].plot()  # 無參數, 預設就是 line
-
 # 折線圖 + 參數
 df.plot(linewidth=2, linestyle=":", title="Number of visitors")
-
-#取出1欄資料並畫出
-df1 = df["Green Island"]
-df1.plot()  # 無參數, 預設就是 line
-
-#取出2欄資料並畫出
-df2 = df[["Green Island", "Guguan"]]
-df2.plot()  # 無參數, 預設就是 line
-
 plt.show()
 
-#三月 資料
-
+# 三月 資料
 df_T = df.T
 print(df_T.head())
 
@@ -370,6 +337,7 @@ df = pd.DataFrame(
     index=["北部", "中部", "南部"],
     columns=[2015, 2016, 2017, 2018, 2019],
 )
+
 """
 g1 = df.plot(kind="bar", title="長條圖", figsize=[10, 5])
 g2 = df.plot(kind="barh", title="橫條圖", figsize=[10, 5])
@@ -385,10 +353,10 @@ g4 = df.iloc[0].plot(
 )
 g4 = df.iloc[1].plot(kind="line", legend=True, xticks=range(2015, 2020))
 g4 = df.iloc[2].plot(kind="line", legend=True, xticks=range(2015, 2020))
+plt.show()
 
-#派圖
-df.plot(kind="pie", subplots=True, figsize=[20, 20])
-
+# 派圖
+df.plot(kind="pie", subplots=True, figsize=[16, 6])
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
@@ -434,7 +402,7 @@ df.plot.scatter(x="XXXX", y="YYYY", s=50, marker="*", c="COLOR", colormap="virid
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 weight = [3, 48, 33, 8, 38, 16, 36, 29, 22, 6, 12, 42]
 name = ["鼠", "牛", "虎", "兔", "龍", "蛇", "馬", "羊", "猴", "雞", "狗", "豬"]
 
@@ -531,17 +499,15 @@ tips = pd.read_csv("data/tips.csv")
 cc = tips[:5]
 print(cc)
 
-# 可以用 plot(kind = 'hist') 來繪製直方圖
+# 用 plot(kind = 'hist') 繪製直方圖
 tips.total_bill.plot(kind="hist", bins=50)
 plt.title("total_bill")
 plt.show()
 
-
-# 也可以用 hist() 來繪製直方圖
+# 用 hist() 繪製直方圖
 tips.total_bill.hist(bins=50)
 plt.title("total_bill")
 plt.show()
-
 
 # tip比例 直方圖
 tip_ratios = tips.tip / tips.total_bill
@@ -608,9 +574,7 @@ df.plot(kind="barh")
 
 plt.show()
 
-
 print("------------------------------------------------------------")  # 60個
-
 
 print("pd 之 plot 之 scatter")
 
@@ -657,18 +621,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-
-
-"""
-應該是pandas/data_frame才有的語法
-df_sbike.median().plot(kind="bar")
-weekday_counts.plot(kind='bar')
-
-"""
-
-
 print("用plt畫pd資料")
 
 print("只變更要強調的扇形的顏色")
@@ -694,17 +646,6 @@ plt.pie(df["weight"], labels=df["name"],
 
 plt.show()
 """
-
-# pandas 多圖 無效
-
-fig, ax = plt.subplots(1, 1, figsize=(10, 8))
-df = pd.DataFrame(np.random.randint(1, 7, 6000), columns=["one"])
-df["two"] = df["one"] + np.random.randint(1, 7, 6000)
-df.plot.hist(bins=12, alpha=0.5, ax=ax)
-ax.set_title("Hist. plot")
-ax.set_xlabel("Xlabel")
-
-plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -738,93 +679,11 @@ df.plot(xticks=range(0, 4))
 plt.show()
 """
 
-
-"""
-df.plot(kind="line", title="線圖", figsize=[10, 5])
-df.plot(kind="bar", title="長條圖", figsize=[10, 5])
-df.plot(kind="barh", title="橫條圖", figsize=[10, 5])
-df.plot(kind="bar", stacked=True, title="堆疊圖", figsize=[10, 5])
-df.plot(kind="pie", subplots=True, figsize=[14, 6])
-
-"""
-
-
 ax = df.plot.bar(rot=-45)  # rot表示xstick旋轉的角度
 ax.legend(loc=2)  # legend的位置可以用loc調整
 
-
 from matplotlib import style
-
 style.use("fivethirtyeight")
-
-
-"""
-df = pd.DataFrame(np.random.randn(100, 4), columns=list("ABCD"))
-print("df轉csv")
-df.to_csv("tmp_df_data2.csv")
-
-df = pd.read_csv("tmp_df_data2.csv", index_col=0)
-print(df.shape)
-print(df.head(5))
-"""
-
-
-# df.to_html("ch9-4-2-01.html")  #df轉html
-# df2.to_html("ch9-4-2-02.html")  #df轉html
-
-# df.to_html("ch9-4-3.html")  #df轉html
-
-
-"""
-print("折線圖")
-df.plot(x="監測月份", y="PM25", title="監測月份與PM2.5的關係")
-
-df.plot(x="監測月份", y="PM10", title="監測月份與PM10的關係")
-
-print("柱狀圖")
-df.plot(kind="bar", x="監測月份", y="PM25", title="監測月份與PM2.5的關係")
-
-print("橫向柱狀圖")
-df.plot(kind="barh", x="監測月份", y="PM25", title="監測月份與PM2.5的關係")
-
-print("直方圖")
-df.plot(kind="hist", x="監測月份", y="PM25", title="監測月份與PM2.5的關係")
-
-"""
-print("核密度(KDE)圖")
-df.plot(kind="kde", x="監測月份", y="PM25", title="監測月份與PM2.5的關係")
-"""
-
-print("面積圖")
-df.plot(kind="area", x="監測月份", y="PM25", title="監測月份與PM2.5的關係")
-
-print("圓餅圖")
-df.plot(kind="pie", x="監測月份", y="PM25", title="監測月份與PM2.5的關係", autopct="%1.2f%%")
-
-print("散佈圖")
-df.plot(kind="scatter", x="PM25", y="PM10", title="PM2.5與PM10的關係")  # X,Y需為數值
-
-print("六角形箱體圖")
-df.plot(kind="hexbin", x="PM25", y="PM10", title="PM2.5與PM10的關係")  # X,Y需為數值
-
-print("箱形圖")
-df.plot(kind="box", x="PM25", y="PM10", title="監測月份與PM2.5的關係")  # X,Y需為數值
-"""
-
-
-# 掌握分佈局勢的直方圖
-
-df["第1次期中考"].plot(kind="bar")
-df["第1次期中考"].plot(kind="hist", bins=10)
-
-# 直方圖 hist
-df["第1次平時考"].plot(kind="hist")
-df["第1次平時考"].plot(kind="hist", bins=20)
-df["第1次平時考"].plot(kind="hist", bins=40)
-df["第1次平時考"].plot(kind="hist", color="blue", edgecolor="orange")
-
-print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -853,6 +712,16 @@ df.plot.bar(ax=axs[0], y="speed", rot=-45)
 df.plot.bar(ax=axs[1], y=["speed", "lifespan"], rot=45)
 plt.subplots_adjust(wspace=0.1)
 plt.suptitle("1 X 2 bar圖")
+
+plt.show()
+
+# 2 X 1
+fig, ax = plt.subplots(2, 1, figsize=(10, 8))
+df = pd.DataFrame(np.random.randint(1, 7, 6000), columns=["one"])
+df["two"] = df["one"] + np.random.randint(1, 7, 6000)
+df.plot.hist(ax=ax[0], bins=12, alpha=0.5)
+#ax.set_title("Hist. plot")
+#ax.set_xlabel("Xlabel")
 
 plt.show()
 
@@ -899,7 +768,6 @@ plt.show()
 
 # 畫 2X1 圖
 
-
 data = np.random.randn(1000, 4)
 
 df = pd.DataFrame(data=data, index=np.arange(1000), columns=["a", "b", "c", "d"])
@@ -942,7 +810,13 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
+plt.title("體重")
+plt.title("加刻度+旋轉")
 
-print("------------------------------------------------------------")  # 60個
+df2 = pd.DataFrame(dists, columns=["體重"], index=dists["姓名"])
+df = pd.DataFrame(dists, columns=["體重"], index=dists["姓名"])
 
-print("------------------------------------------------------------")  # 60個
+df.plot(xticks=range(len(df.index)), use_index=True)
+df.plot(xticks=range(len(df.index)), use_index=True, rot=90)
+
+

@@ -789,5 +789,31 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
+dice = [1, 2, 3, 4, 5, 6]
+population = []
+for x in range(10000):
+    sample = np.random.choice(a=dice, size=100)
+    population.append(sample.mean())
+print("母體平均數:", sum(population) / 10000.0)
+
+size_range = [10, 100, 1000]
+for sample_size in size_range:
+    sample = np.random.choice(a=population, size=sample_size)
+    sample_mean = sample.mean()
+    print(sample_size, "樣本平均數:", sample_mean)
 
 print("------------------------------------------------------------")  # 60個
+
+population = (
+    (["臺灣閩南語"] * 7330) + (["臺灣客家語"] * 1200) + (["其他漢語方言"] * 1300) + (["原住民語"] * 170)
+)
+sample_size = 1000
+sample = random.sample(population, sample_size)
+for lang in set(sample):
+    print(lang + "比例估計:", sample.count(lang) / sample_size)
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+

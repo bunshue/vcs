@@ -1397,6 +1397,13 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
+df = pd.DataFrame(np.random.randn(100, 4), columns=list("ABCD"))
+print("df轉csv")
+df.to_csv("tmp_df_data2.csv")
+
+df = pd.read_csv("tmp_df_data2.csv", index_col=0)
+print(df.shape)
+print(df.head(5))
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1439,3 +1446,5 @@ print(df)
 
 
 """
+
+

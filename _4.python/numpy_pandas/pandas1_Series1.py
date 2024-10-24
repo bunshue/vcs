@@ -203,6 +203,236 @@ print('Series累計 :\n', s2)
 
 print("------------------------------------------------------------")  # 60個
 
+df = pd.read_excel("1111data.xlsx")
+city = ["台北", "新北", "桃園", "台中", "台南", "高雄"]  # 六都
+citycount = []  # 存六都工作職缺數量的串列
+for i in range(len(city)):
+    df1 = df[df["工作地點"].str.contains(city[i])]  # 取出包含指定地點的資料
+    citycount.append(len(df1))
+
+ser = pd.Series(citycount, index=city)  # 串列轉Series
+print(ser)
+plt.axis("off")
+ser.plot(kind="pie", title="六都電腦職缺數量", figsize=(6, 6))  # 繪製圓餅圖
+
+print("------------------------------------------------------------")  # 60個
+
+# 1111salary.py
+import re
+
+df = pd.read_excel("1111data.xlsx")
+city = ["台北", "新北", "桃園", "台中", "台南", "高雄"]  # 六都
+salarylist = []
+for i in range(len(city)):
+    df1 = df[(df["工作地點"].str.contains(city[i])) & (df["薪資"].str.contains("月薪"))]
+    indexlist = df1.index  # 取得資料索引
+    total = 0  # 薪資總額
+    for j in range(len(df1)):
+        salarytem = df1["薪資"][indexlist[j]].replace(",", "")  # 以資料索引取得資料
+        salanum = re.findall(r"\d+\.?\d*", salarytem)  # 取出資料中的數值
+        if len(salanum) == 1:  # 若是1個數值即為薪資
+            salary = int(salanum[0])
+        else:  # 若是2個數值則取平均數
+            salary = (int(salanum[0]) + int(salanum[1])) / 2
+        total += salary
+    salarycity = int(total / len(df1))  # 平均薪資
+    salarylist.append(salarycity)
+
+ser = pd.Series(salarylist, index=city)  # 串列轉Series
+print(ser)
+plt.ylabel("單位：元")
+ser.plot(kind="bar", title="六都電腦職缺薪資", figsize=(5, 5))  # 繪製長條圖
+
+print("------------------------------------------------------------")  # 60個
+
+df = pd.read_csv("data/titanic.csv")
+s = pd.Series([30, 1, 5, 10, 30, 50, 30, 15, 40, 45, 30])
+
+print(df["Age"].mode())
+print(s.mode())
+
+print("------------------------------------------------------------")  # 60個
+
+df = pd.read_csv("data/titanic.csv")
+s = pd.Series([30, 1, 5, 10, 30, 50, 30, 15, 40, 45, 30])
+
+print(df["Age"].median())
+print(s.median())
+
+print("------------------------------------------------------------")  # 60個
+
+df = pd.read_csv("data/titanic.csv")
+s = pd.Series([30, 1, 5, 10, 30, 50, 30, 15, 40, 45, 30])
+
+print(df["Age"].quantile(q=0.25))
+print(df["Age"].quantile(q=0.5))
+print(df["Age"].quantile(q=0.75))
+print(s.quantile(q=0.25))
+print(s.quantile(q=0.5))
+print(s.quantile(q=0.75))
+
+print("------------------------------------------------------------")  # 60個
+
+df = pd.read_csv("data/titanic.csv")
+s = pd.Series([30, 1, 5, 10, 30, 50, 30, 15, 40, 45, 30])
+
+print(df["Age"].mean())
+print(s.mean())
+
+print("------------------------------------------------------------")  # 60個
+
+df = pd.read_csv("data/titanic.csv")
+s = pd.Series([30, 1, 5, 10, 30, 50, 30, 15, 40, 45, 30])
+
+print(df["Age"].max() - df["Age"].min())
+print(s.max() - s.min())
+
+print("------------------------------------------------------------")  # 60個
+
+df = pd.read_csv("data/titanic.csv")
+s = pd.Series([30, 1, 5, 10, 30, 50, 30, 15, 40, 45, 30])
+
+print(df["Age"].quantile(0.75) - df["Age"].quantile(0.25))
+print(s.quantile(0.75) - s.quantile(0.25))
+
+print("------------------------------------------------------------")  # 60個
+
+df = pd.read_csv("data/titanic.csv")
+s = pd.Series([30, 1, 5, 10, 30, 50, 30, 15, 40, 45, 30])
+
+print(df["Age"].var())
+print(s.var())
+
+print("------------------------------------------------------------")  # 60個
+
+df = pd.read_csv("data/titanic.csv")
+s = pd.Series([30, 1, 5, 10, 30, 50, 30, 15, 40, 45, 30])
+
+print(df["Age"].std())
+print(s.std())
+
+print("------------------------------------------------------------")  # 60個
+
+df = pd.read_csv("data/titanic.csv")
+s = pd.Series([30, 1, 5, 10, 30, 50, 30, 15, 40, 45, 30])
+
+print(df["Age"].describe())
+print("---------------------------")
+print(s.describe())
+
+print("------------------------------------------------------------")  # 60個
+
+friends = [
+    110,
+    1017,
+    1127,
+    417,
+    624,
+    957,
+    89,
+    951,
+    947,
+    797,
+    981,
+    125,
+    455,
+    731,
+    1641,
+    486,
+    1307,
+    472,
+    1131,
+    1771,
+    905,
+    532,
+    742,
+    622,
+]
+
+s_friends = pd.Series(friends)
+print(s_friends.describe())
+
+print("------------------------------------------------------------")  # 60個
+
+friends = [
+    110,
+    1017,
+    1127,
+    417,
+    624,
+    957,
+    89,
+    951,
+    947,
+    797,
+    981,
+    125,
+    455,
+    731,
+    1641,
+    486,
+    1307,
+    472,
+    1131,
+    1771,
+    905,
+    532,
+    742,
+    622,
+]
+
+s_friends = pd.Series(friends)
+m = s_friends.mean()
+print("平均數: ", m)
+s = s_friends.std()
+print("標準差: ", s)
+
+z_scores = []
+for x in friends:
+    z = (x - m) / s  # 公式
+    z_scores.append(z)
+print(z_scores)
+
+print("------------------------------------------------------------")  # 60個
+
+friends = [
+    110,
+    1017,
+    1127,
+    417,
+    624,
+    957,
+    89,
+    951,
+    947,
+    797,
+    981,
+    125,
+    455,
+    731,
+    1641,
+    486,
+    1307,
+    472,
+    1131,
+    1771,
+    905,
+    532,
+    742,
+    622,
+]
+
+s_friends = pd.Series(friends)
+m = s_friends.mean()
+s = s_friends.std()
+z_scores = []
+for x in friends:
+    z = (x - m) / s  # 公式
+    z_scores.append(z)
+index = np.arange(len(friends))
+plt.bar(index, z_scores)
+plt.show()
+
 
 
 print("------------------------------------------------------------")  # 60個

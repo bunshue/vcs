@@ -21,33 +21,27 @@ print("------------------------------------------------------------")  # 60個
 """
 
 """
-!cat ex1.csv
+!cat data3/ex1.csv
 
 a,b,c,d,message
 1,2,3,4,hello
 5,6,7,8,world
 9,10,11,12,foo
 
-!type ex1.csv
-
-a,b,c,d,message
-1,2,3,4,hello
-5,6,7,8,world
-9,10,11,12,foo
 """
 
 # read_csv 讀入 csv檔案
-df = pd.read_csv("ex1.csv")
+df = pd.read_csv("data3/ex1.csv")
 print(df)
 
 
 # 也可以讀入table，不過需要指定分隔符號
-df = pd.read_table("ex1.csv", sep=",")
+df = pd.read_table("data3/ex1.csv", sep=",")
 print(df)
 
 # 沒有欄位名稱列的檔案
 """
-!type ex2.csv
+!type data3/ex2.csv
 
 1,2,3,4,hello
 5,6,7,8,world
@@ -55,29 +49,29 @@ print(df)
 """
 # 預設會把第一列當作 欄位名稱列
 df = pd.read_csv(
-    "ex2.csv",
+    "data3/ex2.csv",
 )
 print(df)
 
 # 標示沒有欄位名稱列
-df = pd.read_csv("ex2.csv", header=None)
+df = pd.read_csv("data3/ex2.csv", header=None)
 print(df)
 
 # 自定義 欄位名稱
 fields = ["a", "b", "c", "d", "message"]
-df = pd.read_csv("ex2.csv", names=fields)
+df = pd.read_csv("data3/ex2.csv", names=fields)
 print(df)
 
 # 可以 使用 index_col 參數，將某一欄設定為DataFrame的索引
 fields = ["a", "b", "c", "d", "message"]
-df = pd.read_csv("ex2.csv", names=fields, index_col="message")
+df = pd.read_csv("data3/ex2.csv", names=fields, index_col="message")
 print(df)
 
 # 可以 使用 index_col 參數，將多個欄設定為DataFrame的層次化索引
 """
-!type ex3.csv
+!type data3/ex3.csv
 """
-df = pd.read_csv("ex3.csv", index_col=["key1", "key2"])
+df = pd.read_csv("data3/ex3.csv", index_col=["key1", "key2"])
 print(df)
 """
 key1,key2,value1,value2
@@ -94,13 +88,16 @@ two,d,15,16
 # 如果不是以固定的分隔符號來分隔字段，可以用 read_table + regex 作為 sep參數
 # 由於列名比資料列的數量少，因此read_table推斷第一列應該是DataFrame的索引
 # 以不定數量的空白做分隔
-#!type "ex3 - 1.csv"
-df = pd.read_table("ex3 - 1.csv", sep="\s+")
+
+#!type "data3/ex3 - 1.csv"
+
+df = pd.read_table("data3/ex3 - 1.csv", sep="\s+")
 print(df)
 
 # 讀檔時，可以用 skiprows 來跳過指定的 rows
-#!type ex4.csv
-df = pd.read_csv("ex4.csv", skiprows=[0, 2, 3], index_col="message")
+#!type data3/ex4.csv
+
+df = pd.read_csv("data3/ex4.csv", skiprows=[0, 2, 3], index_col="message")
 print(df)
 """
 # hey!
@@ -113,8 +110,9 @@ a,b,c,d,message
 """
 # 缺失數據的處理
 # read_csv 會自動判斷，然後以NaN標示缺失數據的位置
-#!type ex5.csv
-df = pd.read_csv("ex5.csv", index_col="something")
+#!type data3/ex5.csv
+
+df = pd.read_csv("data3/ex5.csv", index_col="something")
 print(df)
 
 """
@@ -133,19 +131,20 @@ print(cc)
 
 
 # na_values 參數可指定用於標示缺失數據的字串
-df = pd.read_csv("ex5.csv", index_col="something", na_values=["NULL"])
+df = pd.read_csv("data3/ex5.csv", index_col="something", na_values=["NULL"])
 print(df)
 
 # 為各列分別指定不同的 缺失值標示字串
 sentinels = {"message": ["foo", "NA"], "something": ["two"]}
-df = pd.read_csv("ex5.csv", na_values=sentinels)
+df = pd.read_csv("data3/ex5.csv", na_values=sentinels)
 print(df)
 
 print("逐塊讀取文本文件")
 
 # 設定 nrows參數，設定讀入的列數
-#!type ex5.csv
-df = pd.read_csv("ex5.csv", nrows=2)
+#!type data3/ex5.csv
+
+df = pd.read_csv("data3/ex5.csv", nrows=2)
 print(df)
 """
 something,a,b,c,d,message
@@ -155,9 +154,9 @@ three,9,10,11,12,foo
 """
 # 如果要逐塊讀取，則設定chunksize
 """
-!type ex5.csv
+!type data3/ex5.csv
 """
-chunker = pd.read_csv("ex5.csv", chunksize=2)
+chunker = pd.read_csv("data3/ex5.csv", chunksize=2)
 print(chunker)
 """
 something,a,b,c,d,message
@@ -174,9 +173,9 @@ print(tot)
 print("將數據寫出到文本格式")
 
 """
-!type ex5.csv
+!type data3/ex5.csv
 """
-df = pd.read_csv("ex5.csv")
+df = pd.read_csv("data3/ex5.csv")
 print(df)
 """
 something,a,b,c,d,message
@@ -264,10 +263,10 @@ ts = pd.Series(np.arange(7), index=dates)
 print(ts)
 
 print("Series物件 也有to_csv方法")
-ts.to_csv("treseries.csv")
+ts.to_csv("tmp_treseries.csv")
 
 """
-!type "treseries.csv"
+!type "tmp_treseries.csv"
 
 2000-01-01,0
 2000-01-02,1
@@ -279,10 +278,10 @@ ts.to_csv("treseries.csv")
 """
 
 print("Series類別 也有to_csv方法 (頂層)")
-pd.Series.to_csv(ts, "treseries.csv")
+pd.Series.to_csv(ts, "tmp_treseries.csv")
 
 """
-!type "treseries.csv
+!type "tmp_treseries.csv
 
 2000-01-01,0
 2000-01-02,1
@@ -296,7 +295,7 @@ pd.Series.to_csv(ts, "treseries.csv")
 # 使用 from_csv 將檔案讀入成為 Series
 # 有 date欄位，須設定 parse_dates 參數
 """ NG
-ts = pd.Series.from_csv('treseries.csv', parse_dates = True)
+ts = pd.Series.from_csv('tmp_treseries.csv', parse_dates = True)
 print(ts)
 """
 
@@ -381,7 +380,7 @@ print("------------------------------------------------------------")  # 60個
 print("二進制數據格式")
 
 # pandas物件都有一個 save方法，可以將物件數據以pickle的形式保存到硬碟
-df = pd.read_csv("ex1.csv")
+df = pd.read_csv("data3/ex1.csv")
 print(df)
 
 cc = type(df)
@@ -407,7 +406,7 @@ print(cc)
 print("讀取 Microsoft Excel文件")
 """ NG
 # 使用 ExcelFile 方法
-xls_file = pd.ExcelFile('test.xls', header = None)
+xls_file = pd.ExcelFile('data3/test.xls', header = None)
 table = xls_file.parse('Sheet1')
 print(table)
 
