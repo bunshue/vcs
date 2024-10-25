@@ -27,7 +27,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 """
 基本形態學濾波
 
@@ -87,7 +87,10 @@ skimage.morphology.octahedron： 八面體
 skimage.morphology.binary_dilation(image, selem=None）
 
 用此函數比處理灰度圖像要快。
+"""
+print("------------------------------------------------------------")  # 60個
 
+"""
 2、腐蝕（erosion)
 
 函數：skimage.morphology.erosion(image, selem=None）
@@ -125,6 +128,10 @@ plt.show()
 skimage.morphology.binary_erosion(image, selem=None）
 用此函數比處理灰度圖像要快。
 
+"""
+print("------------------------------------------------------------")  # 60個
+
+"""
 3、開運算（opening)
 
 函數：skimage.morphology.openning(image, selem=None）
@@ -133,7 +140,9 @@ selem表示結構元素，用于設定局部區域的形狀和大小。
 """
 
 img = skimage.color.rgb2gray(skimage.io.imread("data/mor.bmp"))
-dst = skimage.morphology.opening(img, skimage.morphology.disk(9))  # 用邊長為9的圓形濾波器進行膨脹濾波
+
+# 用邊長為9的圓形濾波器進行膨脹濾波
+dst = skimage.morphology.opening(img, skimage.morphology.disk(9))
 
 plt.figure("morphology 開運算", figsize=(8, 8))
 plt.subplot(121)
@@ -154,7 +163,10 @@ plt.show()
 skimage.morphology.binary_opening(image, selem=None）
 
 用此函數比處理灰度圖像要快。
+"""
+print("------------------------------------------------------------")  # 60個
 
+"""
 4、閉運算（closing)
 
 函數：skimage.morphology.closing(image, selem=None）
@@ -165,7 +177,9 @@ selem表示結構元素，用于設定局部區域的形狀和大小。
 """
 
 img = skimage.color.rgb2gray(skimage.io.imread("data/mor.bmp"))
-dst = skimage.morphology.closing(img, skimage.morphology.disk(9))  # 用邊長為5的圓形濾波器進行膨脹濾波
+
+# 用邊長為5的圓形濾波器進行膨脹濾波
+dst = skimage.morphology.closing(img, skimage.morphology.disk(9))
 
 plt.figure("morphology 閉運算", figsize=(8, 8))
 plt.subplot(121)
@@ -187,6 +201,10 @@ skimage.morphology.binary_closing(image, selem=None）
 
 用此函數比處理灰度圖像要快。
 
+"""
+print("------------------------------------------------------------")  # 60個
+
+"""
 5、白帽（white-tophat)
 
 函數：skimage.morphology.white_tophat(image, selem=None）
@@ -212,8 +230,9 @@ plt.axis("off")
 
 plt.show()
 
-"""
+print("------------------------------------------------------------")  # 60個
 
+"""
 6、黑帽（black-tophat)
 
 函數：skimage.morphology.black_tophat(image, selem=None）
@@ -245,6 +264,10 @@ print("------------------------------------------------------------")  # 60個
 高級濾波
 本文提供更多更強大的濾波方法，這些方法放在filters.rank子模塊內。
 這些方法需要用戶自己設定濾波器的形狀和大小，因此需要導入morphology模塊來設定。
+"""
+print("------------------------------------------------------------")  # 60個
+'''
+"""
 1、autolevel
 這個詞在photoshop里面翻譯成自動色階，用局部直方圖來對圖片進行濾波分級。
 該濾波器局部地拉伸灰度像素值的直方圖，以覆蓋整個像素值范圍。
@@ -252,13 +275,14 @@ print("------------------------------------------------------------")  # 60個
 selem表示結構化元素，用于設定濾波器。
 """
 
-from skimage.morphology import disk
 import skimage.filters.rank as sfr
 
 # img =skimage.color.rgb2gray(skimage.data.lena())
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg"
 img = skimage.io.imread(filename, True)  # True:轉為灰階
-auto = sfr.autolevel(img, disk(5))  # 半徑為5的圓形濾波器
+
+# 半徑為5的圓形濾波器
+auto = sfr.autolevel(img, skimage.morphology.disk(5))
 
 plt.figure("filters", figsize=(8, 8))
 plt.subplot(121)
@@ -271,17 +295,17 @@ plt.imshow(auto, plt.cm.gray)
 
 plt.show()
 
+print("------------------------------------------------------------")  # 60個
+
 """
 2、bottomhat 與 tophat
 
 bottomhat: 此濾波器先計算圖像的形態學閉運算，然后用原圖像減去運算的結果值，有點像黑帽操作。
-
 bottomhat: 此濾波器先計算圖像的形態學開運算，然后用原圖像減去運算的結果值，有點像白帽操作。
 
 格式：
 
 skimage.filters.rank.bottomhat(image, selem）
-
 skimage.filters.rank.tophat(image, selem）
 
 selem表示結構化元素，用于設定濾波器。
@@ -291,13 +315,14 @@ selem表示結構化元素，用于設定濾波器。
 
 """沒有 bottomhat
 
-from skimage.morphology import disk
 import skimage.filters.rank as sfr
 
 #img =skimage.color.rgb2gray(skimage.data.lena())
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg'
 img=skimage.io.imread(filename, True)   #True:轉為灰階
-auto =sfr.bottomhat(img, disk(5))  #半徑為5的圓形濾波器
+
+#半徑為5的圓形濾波器
+auto =sfr.bottomhat(img, skimage.morphology.disk(5))
 
 plt.figure('filters',figsize=(8,8))
 plt.subplot(121)
@@ -313,21 +338,19 @@ plt.show()
 
 """
 3、enhance_contrast
-
 對比度增強。求出局部區域的最大值和最小值，然后看當前點像素值最接近最大值還是最小值，然后替換為最大值或最小值。
-
 函數： enhance_contrast(image, selem）
-
 selem表示結構化元素，用于設定濾波器。
 """
 
-from skimage.morphology import disk
 import skimage.filters.rank as sfr
 
 # img = skimage.color.rgb2gray(skimage.data.lena())
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg"
 img = skimage.io.imread(filename, True)  # True:轉為灰階
-auto = sfr.enhance_contrast(img, disk(5))  # 半徑為5的圓形濾波器
+
+# 半徑為5的圓形濾波器
+auto = sfr.enhance_contrast(img, skimage.morphology.disk(5))
 
 plt.figure("filters", figsize=(8, 8))
 plt.subplot(121)
@@ -350,13 +373,14 @@ plt.show()
 selem表示結構化元素，用于設定濾波器。
 """
 
-from skimage.morphology import disk
 import skimage.filters.rank as sfr
 
 # img = skimage.color.rgb2gray(skimage.data.lena())
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg"
 img = skimage.io.imread(filename, True)  # True:轉為灰階
-dst = sfr.entropy(img, disk(5))  # 半徑為5的圓形濾波器
+
+# 半徑為5的圓形濾波器
+dst = sfr.entropy(img, skimage.morphology.disk(5))
 
 plt.figure("filters", figsize=(8, 8))
 plt.subplot(121)
@@ -371,21 +395,19 @@ plt.show()
 
 """
 5、equalize
-
 均衡化濾波。利用局部直方圖對圖像進行均衡化濾波。
-
 函數格式：equalize(image, selem）
-
 selem表示結構化元素，用于設定濾波器。
 """
 
-from skimage.morphology import disk
 import skimage.filters.rank as sfr
 
 # img = skimage.color.rgb2gray(skimage.data.lena())
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg"
 img = skimage.io.imread(filename, True)  # True:轉為灰階
-dst = sfr.equalize(img, disk(5))  # 半徑為5的圓形濾波器
+
+# 半徑為5的圓形濾波器
+dst = sfr.equalize(img, skimage.morphology.disk(5))
 
 plt.figure("filters", figsize=(8, 8))
 plt.subplot(121)
@@ -400,21 +422,19 @@ plt.show()
 
 """
 6、gradient
-
 返回圖像的局部梯度值（如：最大值-最小值），用此梯度值代替區域內所有像素值。
-
 函數格式：gradient(image, selem）
-
 selem表示結構化元素，用于設定濾波器。
 """
 
-from skimage.morphology import disk
 import skimage.filters.rank as sfr
 
 # img = skimage.color.rgb2gray(skimage.data.lena())
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg"
 img = skimage.io.imread(filename, True)  # True:轉為灰階
-dst = sfr.gradient(img, disk(5))  # 半徑為5的圓形濾波器
+
+# 半徑為5的圓形濾波器
+dst = sfr.gradient(img, skimage.morphology.disk(5))
 
 plt.figure("filters", figsize=(8, 8))
 plt.subplot(121)
@@ -433,40 +453,31 @@ plt.show()
 濾波方式很多，下面不再一一詳細講解，僅給出核心代碼，所有的函數調用方式都是一樣的。
 
 最大值濾波器（maximum):返回圖像局部區域的最大值，用此最大值代替該區域內所有像素值。
-
-dst =sfr.maximum(img, disk(5)) 
+dst =sfr.maximum(img, skimage.morphology.disk(5)) 
 
 最小值濾波器（minimum)：返回圖像局部區域內的最小值，用此最小值取代該區域內所有像素值。
-
-dst =sfr.minimum(img, disk(5))
+dst =sfr.minimum(img, skimage.morphology.disk(5))
 
 均值濾波器（mean) : 返回圖像局部區域內的均值，用此均值取代該區域內所有像素值。
-
-dst =sfr.mean(img, disk(5)) 
+dst =sfr.mean(img, skimage.morphology.disk(5)) 
 
 中值濾波器（median): 返回圖像局部區域內的中值，用此中值取代該區域內所有像素值。
-
-dst =sfr.median(img, disk(5))
+dst =sfr.median(img, skimage.morphology.disk(5))
 
 莫代爾濾波器（modal) : 返回圖像局部區域內的modal值，用此值取代該區域內所有像素值。
-
-dst =sfr.modal(img, disk(5))
+dst =sfr.modal(img, skimage.morphology.disk(5))
 
 otsu閾值濾波（otsu): 返回圖像局部區域內的otsu閾值，用此值取代該區域內所有像素值。
-
-dst =sfr.otsu(img, disk(5))
+dst =sfr.otsu(img, skimage.morphology.disk(5))
 
 閾值濾波（threshhold): 將圖像局部區域中的每個像素值與均值比較，大于則賦值為1，小于賦值為0，得到一個二值圖像。
-
-dst =sfr.threshold(img, disk(5)) 
+dst =sfr.threshold(img, skimage.morphology.disk(5)) 
 
 減均值濾波（subtract_mean):  將局部區域中的每一個像素，減去該區域中的均值。
-
-dst =sfr.subtract_mean(img, disk(5))
+dst =sfr.subtract_mean(img, skimage.morphology.disk(5))
 
 求和濾波（sum) :求局部區域的像素總和，用此值取代該區域內所有像素值。
-
-dst =sfr.sum(img, disk(5))
+dst =sfr.sum(img, skimage.morphology.disk(5))
 """
 
 print("------------------------------------------------------------")  # 60個
@@ -475,25 +486,22 @@ print("------------------------------------------------------------")  # 60個
 霍夫線變換
 
 在圖片處理中，霍夫變換主要是用來檢測圖片中的幾何形狀，包括直線、圓、橢圓等。
-
 在skimage中，霍夫變換是放在tranform模塊內，本篇主要講解霍夫線變換。
-
-對于平面中的一條直線，在笛卡爾坐標系中，可用y=mx+b來表示，其中m為斜率，b為截距。但是如果直線是一條垂直線，則m為無窮大，所有通常我們在另一坐標系中表示直線，即極坐標系下的r=xcos(theta)+ysin(theta)。即可用（r,theta）來表示一條直線。其中r為該直線到原點的距離，theta為該直線的垂線與x軸的夾角。如下圖所示。
-
-對于一個給定的點（x0,y0), 我們在極坐標下繪出所有通過它的直線（r,theta)，將得到一條正弦曲線。如果將圖片中的所有非0點的正弦曲線都繪制出來，則會存在一些交點。所有經過這個交點的正弦曲線，說明都擁有同樣的(r,theta), 意味著這些點在一條直線上。
-
-發上圖所示，三個點(對應圖中的三條正弦曲線）在一條直線上，因為這三個曲線交于一點，具有相同的（r, theta)。霍夫線變換就是利用這種方法來尋找圖中的直線。
-
+對于平面中的一條直線，在笛卡爾坐標系中，可用y=mx+b來表示，其中m為斜率，b為截距。
+但是如果直線是一條垂直線，則m為無窮大，所有通常我們在另一坐標系中表示直線，
+即極坐標系下的r=xcos(theta)+ysin(theta)。即可用（r,theta）來表示一條直線。
+其中r為該直線到原點的距離，theta為該直線的垂線與x軸的夾角。如下圖所示。
+對于一個給定的點（x0,y0), 我們在極坐標下繪出所有通過它的直線（r,theta)，
+將得到一條正弦曲線。如果將圖片中的所有非0點的正弦曲線都繪制出來，則會存在一些交點。
+所有經過這個交點的正弦曲線，說明都擁有同樣的(r,theta), 意味著這些點在一條直線上。
+發上圖所示，三個點(對應圖中的三條正弦曲線）在一條直線上，因為這三個曲線交于一點，
+具有相同的（r, theta)。霍夫線變換就是利用這種方法來尋找圖中的直線。
 函數：skimage.transform.hough_line(img)
 
 返回三個值：
-
 h: 霍夫變換累積器
-
 theta: 點與x軸的夾角集合，一般為0-179度
-
 distance: 點到原點的距離，即上面的所說的r.
-
 """
 
 # 構建測試圖片
@@ -524,15 +532,10 @@ ax1.axis("image")
 plt.show()
 
 """
-
 從右邊那張圖可以看出，有兩個交點，說明原圖像中有兩條直線。
-
 如果我們要把圖中的兩條直線繪制出來，則需要用到另外一個函數：
-
 skimage.transform.hough_line_peaks(hspace, angles, dists）
-
 用這個函數可以取出峰值點，即交點，也即原圖中的直線。
-
 返回的參數與輸入的參數一樣。我們修改一下上邊的程序，在原圖中將兩直線繪制出來。
 """
 
@@ -576,27 +579,18 @@ plt.show()
 
 """
 注意，繪制線條的時候，要從極坐標轉換為笛卡爾坐標，公式為：
-
  ???
-
 skimage還提供了另外一個檢測直線的霍夫變換函數，概率霍夫線變換：
-
 skimage.transform.probabilistic_hough_line(img, threshold=10, line_length=5,line_gap=3)
 
 參數：
-
 img: 待檢測的圖像。
-
 threshold： 閾值，可先項，默認為10
-
 line_length: 檢測的最短線條長度，默認為50
-
 line_gap: 線條間的最大間隙。增大這個值可以合并破碎的線條。默認為10
 
 返回：
-
 lines: 線條列表, 格式如((x0, y0), (x1, y0))，標明開始點和結束點。
-
 下面，我們用canny算子提取邊緣，然后檢測哪些邊緣是直線？
 """
 
@@ -638,25 +632,19 @@ print("------------------------------------------------------------")  # 60個
 
 """
 霍夫圓和橢圓變換
-
 在極坐標中，圓的表示方式為：
-
 x=x0+rcosθ
-
 y=y0+rsinθ
-
 圓心為(x0,y0),r為半徑，θ為旋轉度數，值范圍為0-359
-
-如果給定圓心點和半徑，則其它點是否在圓上，我們就能檢測出來了。在圖像中，我們將每個非0像素點作為圓心點，以一定的半徑進行檢測，如果有一個點在圓上，我們就對這個圓心累加一次。如果檢測到一個圓，那么這個圓心點就累加到最大，成為峰值。因此，在檢測結果中，一個峰值點，就對應一個圓心點。
-
+如果給定圓心點和半徑，則其它點是否在圓上，我們就能檢測出來了。
+在圖像中，我們將每個非0像素點作為圓心點，以一定的半徑進行檢測，
+如果有一個點在圓上，我們就對這個圓心累加一次。
+如果檢測到一個圓，那么這個圓心點就累加到最大，成為峰值。
+因此，在檢測結果中，一個峰值點，就對應一個圓心點。
 霍夫圓檢測的函數：
-
 skimage.transform.hough_circle(image, radius)
-
 radius是一個數組，表示半徑的集合，如[3，4，5，6]
-
 返回一個3維的數組（radius index, M, N), 第一維表示半徑的索引，后面兩維表示圖像的尺寸。
-
 例1：繪制兩個圓形，用霍夫圓變換將它們檢測出來。
 """
 
@@ -700,9 +688,7 @@ ax1.set_title("detected image")
 plt.show()
 
 """
-
 結果圖如下：原圖中的圓用白色繪制，檢測出的圓用紅色繪制。
-
 例2，檢測出下圖中存在的硬幣。
 """
 
@@ -746,23 +732,15 @@ plt.show()
 
 """
 橢圓變換是類似的，使用函數為：
-
 skimage.transform.hough_ellipse(img,accuracy, threshold, min_size, max_size)
-
 輸入參數：
-
 img: 待檢測圖像。
-
 accuracy: 使用在累加器上的短軸二進制尺寸，是一個double型的值，默認為1
-
 thresh: 累加器閾值，默認為4
-
 min_size: 長軸最小長度，默認為4
-
 max_size: 短軸最大長度，默認為None,表示圖片最短邊的一半。
-
-返回一個 [(accumulator, y0, x0, a, b, orientation)] 數組，accumulator表示累加器，（y0,x0)表示橢圓中心點，（a,b)分別表示長短軸，orientation表示橢圓方向
-
+返回一個 [(accumulator, y0, x0, a, b, orientation)] 數組，
+accumulator表示累加器，（y0,x0)表示橢圓中心點，（a,b)分別表示長短軸，orientation表示橢圓方向
 例：檢測出咖啡圖片中的橢圓杯口
 """
 
@@ -800,7 +778,6 @@ ax2.imshow(edges)
 
 plt.show()
 
-
 #霍夫橢圓變換速度非常慢，應避免圖像太大。
 """
 
@@ -810,7 +787,8 @@ print("------------------------------------------------------------")  # 60個
 """
 邊緣與輪廓
 
-在前面的python數字圖像處理（10）：圖像簡單濾波 中，我們已經講解了很多算子用來檢測邊緣，其中用得最多的canny算子邊緣檢測。
+在前面的python數字圖像處理（10）：圖像簡單濾波 中，我們已經講解了很多算子用來檢測邊緣，
+其中用得最多的canny算子邊緣檢測。
 
 本篇我們講解一些其它方法來檢測輪廓。
 
@@ -887,35 +865,20 @@ plt.show()
 """
 
 2、逼近多邊形曲線
-
 逼近多邊形曲線有兩個函數：subdivide_polygon（)和 approximate_polygon（）
-
 subdivide_polygon（)采用B樣條（B-Splines)來細分多邊形的曲線，該曲線通常在凸包線的內部。
-
 函數格式為：
-
 skimage.measure.subdivide_polygon(coords, degree=2, preserve_ends=False)
-
 coords: 坐標點序列。
-
 degree: B樣條的度數，默認為2
-
 preserve_ends: 如果曲線為非閉合曲線，是否保存開始和結束點坐標，默認為false
-
 返回細分為的坐標點序列。
-
 approximate_polygon（）是基于Douglas-Peucker算法的一種近似曲線模擬。它根據指定的容忍值來近似一條多邊形曲線鏈，該曲線也在凸包線的內部。
-
 函數格式為:
-
 skimage.measure.approximate_polygon(coords, tolerance)
-
 coords: 坐標點序列
-
 tolerance: 容忍值
-
 返回近似的多邊形曲線坐標序列。
-
 """
 
 # 生成二值測試圖像
@@ -977,22 +940,14 @@ print("------------------------------------------------------------")  # 60個
 
 """
 高級形態學處理
-
 形態學處理，除了最基本的膨脹、腐蝕、開/閉運算、黑/白帽處理外，還有一些更高級的運用，如凸包，連通區域標記，刪除小塊區域等。
-
 1、凸包
-
 凸包是指一個凸多邊形，這個凸多邊形將圖片中所有的白色像素點都包含在內。
-
 函數為：
-
 skimage.morphology.convex_hull_image(image)
-
 輸入為二值圖像，輸出一個邏輯二值圖像。在凸包內的點為True, 否則為False
-
 """
 """ pic NG
-
 #生成二值測試圖像
 img = skimage.color.rgb2gray(skimage.data.horse())
 img = (img<0.5)*1
@@ -1040,22 +995,16 @@ ax1.set_title('convex_hull image')
 plt.show()
 """
 
+print("------------------------------------------------------------")  # 60個
 
 """
 2、連通區域標記
-
 在二值圖像中，如果兩個像素點相鄰且值相同（同為0或同為1），那么就認為這兩個像素點在一個相互連通的區域內。而同一個連通區域的所有像素點，都用同一個數值來進行標記，這個過程就叫連通區域標記。在判斷兩個像素是否相鄰時，我們通常采用4連通或8連通判斷。在圖像中，最小的單位是像素，每個像素周圍有8個鄰接像素，常見的鄰接關系有2種：4鄰接與8鄰接。4鄰接一共4個點，即上下左右，如下左圖所示。8鄰接的點一共有8個，包括了對角線位置的點，如下右圖所示。
-
 在skimage包中，我們采用measure子模塊下的label（）函數來實現連通區域標記。
-
 函數格式：
-
 skimage.measure.label（image,connectivity=None)
-
 參數中的image表示需要處理的二值圖像，connectivity表示連接的模式，1代表4鄰接，2代表8鄰接。
-
 輸出一個標記數組（labels), 從0開始標記。
-
 """
 
 import scipy.ndimage as ndi
@@ -1092,7 +1041,8 @@ plt.show()
 
 結果如圖：有10個連通的區域，標記為0-9
 
-如果想分別對每一個連通區域進行操作，比如計算面積、外接矩形、凸包面積等，則需要調用measure子模塊的regionprops（）函數。該函數格式為：
+如果想分別對每一個連通區域進行操作，比如計算面積、外接矩形、凸包面積等，
+則需要調用measure子模塊的regionprops（）函數。該函數格式為：
 
 skimage.measure.regionprops(label_image)
 
@@ -1111,10 +1061,15 @@ extent  	float 	區域面積和邊界外接框面積的比率
 filled_area 	int 	區域和外接框之間填充的像素點總數
 perimeter  	float 	區域周長
 label 	int 	區域標記
+"""
 
+print("------------------------------------------------------------")  # 60個
+
+"""
 3、刪除小塊區域
 
-有些時候，我們只需要一些大塊區域，那些零散的、小塊的區域，我們就需要刪除掉，則可以使用morphology子模塊的remove_small_objects（)函數。
+有些時候，我們只需要一些大塊區域，那些零散的、小塊的區域，我們就需要刪除掉，
+則可以使用morphology子模塊的remove_small_objects（)函數。
 
 函數格式：skimage.morphology.remove_small_objects(ar, min_size=64, connectivity=1, in_place=False)
 
@@ -1156,11 +1111,12 @@ ax2.imshow(dst, plt.cm.gray, interpolation="nearest")
 fig.tight_layout()
 plt.show()
 
-"""
-在此例中，我們將面積小于300的小塊區域刪除（由1變為0），結果如下圖：
 
- 4、綜合示例：閾值分割+閉運算+連通區域標記+刪除小區塊+分色顯示
-"""
+# 在此例中，我們將面積小于300的小塊區域刪除（由1變為0），結果如下圖：
+
+print("------------------------------------------------------------")  # 60個
+
+# 4、綜合示例：閾值分割+閉運算+連通區域標記+刪除小區塊+分色顯示
 
 import matplotlib.patches as mpatches
 
@@ -1324,15 +1280,13 @@ ax2.contour(data, [0.5], colors="w")  # 顯示輪廓線
 fig.tight_layout()
 plt.show()
 
+print("------------------------------------------------------------")  # 60個
+
 """
 2、分水嶺算法
-
 分水嶺在地理學上就是指一個山脊，水通常會沿著山脊的兩邊流向不同的“匯水盆”。分水嶺算法是一種用于圖像分割的經典算法，是基于拓撲理論的數學形態學的分割方法。如果圖像中的目標物體是連在一起的，則分割起來會更困難，分水嶺算法經常用于處理這類問題，通常會取得比較好的效果。
-
 分水嶺算法可以和距離變換結合，尋找“匯水盆地”和“分水嶺界限”，從而對圖像進行分割。二值圖像的距離變換就是每一個像素點到最近非零值像素點的距離，我們可以使用scipy包來計算距離變換。
-
 在下面的例子中，需要將兩個重疊的圓分開。我們先計算圓上的這些白色像素點到黑色背景像素點的距離變換，選出距離變換中的最大值作為初始標記點（如果是反色的話，則是取最小值），從這些標記點開始的兩個匯水盆越集越大，最后相交于分山嶺。從分山嶺處斷開，我們就得到了兩個分離的圓。
-
 例1：基于距離變換的分山嶺圖像分割
 """
 
@@ -1355,6 +1309,7 @@ local_maxi = skimage.feature.peak_local_max(
 )  # 尋找峰值
 
 markers = ndi.label(local_maxi)[0]  # 初始標記點
+
 """沒有watershed
 labels = skimage.morphology.watershed(-distance, markers, mask=image) #基于距離變換的分水嶺算法
 
@@ -1380,7 +1335,8 @@ plt.show()
 
 """
 
-分水嶺算法也可以和梯度相結合，來實現圖像分割。一般梯度圖像在邊緣處有較高的像素值，而在其它地方則有較低的像素值，理想情況 下，分山嶺恰好在邊緣。因此，我們可以根據梯度來尋找分山嶺。
+分水嶺算法也可以和梯度相結合，來實現圖像分割。一般梯度圖像在邊緣處有較高的像素值，
+而在其它地方則有較低的像素值，理想情況 下，分山嶺恰好在邊緣。因此，我們可以根據梯度來尋找分山嶺。
 
 例2：基于梯度的分水嶺圖像分割
 """
@@ -1418,7 +1374,6 @@ fig.tight_layout()
 plt.show()
 
 """
-
 print("------------------------------------------------------------")  # 60個
 
 """
@@ -1830,7 +1785,6 @@ print("PIL_realROF")
 
 import scipy.ndimage
 
-# from scipy.misc import imsave
 # from PCV.tools import rof
 
 # 檔案 => PIL影像 => 灰階 => numpy陣列
@@ -1874,7 +1828,6 @@ print("PIL_ROF")
 
 import scipy.ndimage
 
-# from scipy.misc import imsave
 # from PCV.tools import rof
 
 # 創建合成圖像與噪聲
