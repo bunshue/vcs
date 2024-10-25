@@ -21,20 +21,21 @@ namespace vcs_Form7_FormLoad1
         private void Form1_Load(object sender, EventArgs e)
         {
             //窗體顯示特效
-            Opacity = 0.0; //窗體透明度為0
+            //要先將Form1的屬性的Opacity設為0
+            //Opacity = 0.0; //窗體透明度為0
 
             timer1.Enabled = true;
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            double d = 0.10;
+            double d = 0.08;
             if (showing)
             {
                 if (Opacity + d >= 1.0)
                 {
                     Opacity = 1.0;
-                    timer1.Stop();
+                    timer1.Enabled = false;
                     label1.Text += ", 啟動完成";
                 }
                 else
@@ -57,4 +58,3 @@ namespace vcs_Form7_FormLoad1
         }
     }
 }
-

@@ -1,6 +1,5 @@
 import os
 import time
-from datetime import datetime
 from playsound import playsound
 import cv2 as cv
 
@@ -15,24 +14,23 @@ contents = sorted(os.listdir())
 
 # 偵測人臉並判斷是否開火
 for image in contents:
-    print(f"\nMotion detected...{datetime.now()}")
     discharge_weapon = True
-    print("你已經進入射擊區域。\
-               請停止腳步，立即把頭轉向槍的位置。 \
-               當你聽到聲響，你只有 5 秒鐘的時間能通過。")
-    time.sleep(3)
-    
+   
     img_gray = cv.imread(image, cv.IMREAD_GRAYSCALE)
     height, width = img_gray.shape
     cv.imshow(f'Motion detected {image}', img_gray)
     cv.waitKey(2000)
     cv.destroyWindow(f'Motion detected {image}')
+    print('a')
 
     # 找到偵測到的人臉矩形
-    face_rect_list = []  
+    face_rect_list = []
+    print('b')
     face_rect_list.append(face_cascade.detectMultiScale(image=img_gray,
                                                         scaleFactor=1.1,
                                                         minNeighbors=5))
+    print('c')
+
     print(f"Searching {image} for eyes.")
     for rect in face_rect_list:
         for (x, y, w, h) in rect:
@@ -65,5 +63,3 @@ for image in contents:
         cv.waitKey(2000) # 視窗停滯 2 秒
         cv.destroyWindow('Mutant') # 關閉視窗
         time.sleep(3)  # 暫停程式 3 秒
-
-

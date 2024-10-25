@@ -11,6 +11,26 @@ namespace vcs_Time_Notifier
 {
     public partial class Form1 : Form
     {
+        //移動無邊框窗體 ST
+        private const int WM_NCHITTEST = 0x84;
+        private const int HTCLIENT = 0x1;
+        private const int HTCAPTION = 0x2;
+
+        protected override void WndProc(ref Message m)
+        {
+            switch (m.Msg)
+            {
+                case WM_NCHITTEST:
+                    base.WndProc(ref m);
+                    if ((int)m.Result == HTCLIENT)
+                        m.Result = (IntPtr)HTCAPTION;
+                    return;
+                    break;
+            }
+            base.WndProc(ref m);
+        }
+        //移動無邊框窗體 SP
+
         int check_list_index = 1;
         private const int BORDER = 20;
         //List<DateTime> check_list_data = new List<DateTime>();
@@ -48,6 +68,7 @@ namespace vcs_Time_Notifier
             numericUpDown3.Value = dt.Day;
 
             textBox1.Text = dt.ToString("HHmm");
+            this.FormBorderStyle = FormBorderStyle.None;//設定無邊框
         }
 
         void show_item_location()
@@ -90,8 +111,12 @@ namespace vcs_Time_Notifier
             rb2.Location = new Point(x_st + dx * 2, y_st + dy * 1);
             rb3.Location = new Point(x_st + dx * 3 + 10, y_st + dy * 1);
 
-            richTextBox1.Location = new Point(BORDER + 500 + BORDER, BORDER);
-            richTextBox1.Size = new Size(300, 500);
+            button4.Size = new Size(140, 80);
+            button5.Size = new Size(140, 80);
+            button4.Location = new Point(BORDER + 500 + BORDER, BORDER);
+            button5.Location = new Point(BORDER + 500 + BORDER+160, BORDER);
+            richTextBox1.Location = new Point(BORDER + 500 + BORDER, BORDER+100);
+            richTextBox1.Size = new Size(300, 400);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             W = BORDER + 500 + BORDER + 300 + BORDER;
@@ -264,6 +289,16 @@ namespace vcs_Time_Notifier
         {
             int index = 3;
             remove_check_list_data(index);
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            //我知道了
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

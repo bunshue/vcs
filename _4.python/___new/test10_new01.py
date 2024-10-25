@@ -7306,15 +7306,6 @@ finally:
 
 print("------------------------------------------------------------")  # 60個
 
-""" fail
-from pytube import YouTube
-yt = YouTube("https://www.youtube.com/watch?v=52B8s2zrdeE")
-stream = yt.streams.filter(file_extension='mp4', res='360p').first()
-stream.download("c:\\dddddddddd")
-"""
-
-print("------------------------------------------------------------")  # 60個
-
 
 def phi(n):
     presult = 0

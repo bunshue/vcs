@@ -18,6 +18,7 @@ print('ls 測試 glob.glob') 轉出一層
 
 import os
 import sys
+import cv2
 import glob
 import stat
 import time
@@ -2607,3 +2608,261 @@ video_player_path_kilo = "xxxx"
 video_player_path_sugar = "xxxx"
 
 """
+
+
+print("------------------------------------------------------------")  # 60個
+
+def get_video_info(video):
+    video_info = {}
+    
+    video_info['width'] = int(video.get(cv2.CAP_PROP_FRAME_WIDTH))
+    video_info['height'] = int(video.get(cv2.CAP_PROP_FRAME_HEIGHT))
+    video_info['frames'] = int(video.get(cv2.CAP_PROP_FRAME_COUNT))
+    video_info['fps'] = video.get(cv2.CAP_PROP_FPS)
+    video_info['length'] = video.get(cv2.CAP_PROP_FRAME_COUNT) / video.get(cv2.CAP_PROP_FPS)
+    print(type(video_info))
+    return video_info
+
+video_filename = 'C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4'
+vid = cv2.VideoCapture(video_filename)
+
+video_info = get_video_info(vid)
+print(video_info)
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+filesize = 123456
+print('filesize = ', filesize , '\t檔案大小 : ', ByteConversionTBGBMBKB(filesize))
+
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+filesize = os.stat(filename).st_size
+
+print('檔案大小:\t', filesize, ' 拜')
+print('檔案大小:\t', ByteConversionTBGBMBKB(filesize))
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+"""
+分析
+
+if file.endswith('.jpg') or file.endswith('.png'):
+
+    for file in files:  # 取得所有 .png .jpg 檔，存入 allfiles 串列中
+        ext = file.split('.')[-1]
+        if ext == "png" or ext == "jpg":
+            allfiles.append(foldername +'/'+file)
+
+
+      for file in allfiles:  
+         filename = file.split('.')[0] #主檔名         
+
+
+   if basename == target_foldername:  # 輸出資料夾不再重複處理
+      continue
+
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+def test_get_filename(foldername):
+
+    #foldername = 'C:/_git/vcs/_1.data/______test_files3/DrAP_test'
+
+    print('------------------------------------------------------------')	#60個
+    print('ls 測試 os.walk')
+    print('------------------------------------------------------------')	#60個
+
+    print('撈出資料夾下所有檔案, 多層1')
+    print('搜尋路徑：', foldername)
+    filenames = os.walk(foldername)
+    print(type(filenames))  #很奇怪的結構
+    #print(filenames)
+
+    allfiles = []
+
+    #foldername 檔案所在資料夾
+    #subdir     檔案所在位置的其他資料夾
+    #files      檔案名稱
+    for foldername, subdir, files in filenames:
+        if 'folder_xxxxx' in subdir:  #某些資料夾下的檔案不要處理
+            print('某些資料夾下的檔案不要處理')
+            subdir.remove('folder_xxxxx')
+        for filename in files:  # 取得所有檔案，存入 allfiles 串列中
+            #print('檔案所在資料夾 :', foldername)
+            #print('檔案所在位置的其他資料夾 :', subdir)
+            #print('檔案名稱', filename)
+            #allfiles.append(foldername + '/' + filename)   #絕對路徑
+            long_filename = os.path.join(foldername, filename)  # 取得檔案的絕對路徑
+            filesize = os.stat(long_filename).st_size
+            
+            allfiles.append(long_filename)   #絕對路徑
+            
+            
+
+    print(len(allfiles))
+
+    if len(allfiles) > 0:
+        for filename in allfiles:
+            #print(filename)
+            if not os.path.exists(filename):
+                print('檔案不存在')
+            else:
+                abspath = os.path.abspath(filename)
+                directory, short_filename = os.path.split(abspath)
+                print('全檔名', abspath)
+                print('檔案大小', os.stat(abspath).st_size)
+                print('資料夾', directory)
+                print('短檔名', short_filename)
+                #long_filename = os.path.join('新資料夾', short_filename)    # 取得檔案的絕對路徑
+                #print('新全檔名', long_filename)
+                print()
+
+        #long_filename = os.path.join(foldername, filename)  # 取得檔案的絕對路徑
+        #print(long_filename)
+
+
+"""
+foldername = 'C:/_git/vcs/_1.data/______test_files3/DrAP_test'
+test_get_filename(foldername)
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+print('------------------------------------------------------------')	#60個
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+print(filename)
+filename = os.path.normcase(filename)
+print(filename)
+
+print('------------------------------------------------------------')	#60個
+
+
+
+filename = 'C:/aaa/bbb/ccc/ddd/eee.jpg'
+
+name = filename.split('/')
+print(type(name))
+print(len(name))
+print(name)
+
+
+print('------------------------------------------------------------')	#60個
+
+
+from os.path import abspath
+
+def _basename(path):
+    # A basename() variant which first strips the trailing slash, if present.
+    # Thus we always get the last component of the path, even for directories.
+    sep = os.path.sep + (os.path.altsep or '')
+    return os.path.basename(path.rstrip(sep))
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+base_name = _basename(filename)
+print(base_name)
+
+src = abspath(base_name)
+print(src)
+
+zip_filename = base_name + ".zip"
+print(zip_filename)
+
+print('------------------------------------------------------------')	#60個
+
+foldername = 'C:/_git/vcs/_1.data/______test_files2'
+
+normdir = os.path.normcase(foldername)
+print(normdir)
+
+print('------------------------------------------------------------')	#60個
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+
+print('尋找python程式碼的所在地')
+
+module_name = 'pytube'
+code_place = os.path.dirname(__import__(module_name).__file__)
+print(code_place)
+
+
+print('取得相對路徑')
+foldername = 'C:/_git/vcs/_1.data/______test_files1/'
+fn = os.path.relpath(foldername, code_place)
+
+print(fn)
+
+print('------------------------------------------------------------')	#60個
+
+
+foldername = 'C:/_git/vcs/_1.data/______test_files5'
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+
+name = os.path.basename(filename)
+
+print(name)
+
+
+print('------------------------------------------------------------')	#60個
+
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+
+if filename.endswith(".jpg"):
+    # It is a module -- insert its dir into sys.path and try to
+    # import it. If it is part of a package, that possibly
+    # won't work because of package imports.
+    dirname, filename = os.path.split(filename)
+    print(filename[:-3])
+
+
+
+print('------------------------------------------------------------')	#60個
+
+print('將主檔名中不合法的字元去除')
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+
+m_filename = ""
+for c in filename:
+   #print(c)
+   if c == " " or c == "." or c == "," or c == "、" or c == "，" or c == "(" or c == ")":
+      m_filename += ""  # 去除不合法字元
+   else:
+      m_filename += c
+
+print(filename)
+print(m_filename)
+
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+

@@ -30,7 +30,7 @@ namespace vcs_Form8_FormMove1
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            this.FormBorderStyle = FormBorderStyle.None;//設定無邊框
         }
 
         //移動無邊框窗體 ST
@@ -40,5 +40,11 @@ namespace vcs_Form8_FormMove1
             SendMessage(this.Handle, WM_SYSCOMMAND, SC_MOVE + HTCAPTION, 0);
         }
         //移動無邊框窗體 SP
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }
+

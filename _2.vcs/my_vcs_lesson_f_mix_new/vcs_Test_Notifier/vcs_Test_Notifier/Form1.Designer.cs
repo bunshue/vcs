@@ -33,6 +33,7 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -61,19 +62,30 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(103, 364);
+            this.button1.Location = new System.Drawing.Point(28, 368);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(157, 96);
+            this.button1.Size = new System.Drawing.Size(144, 92);
             this.button1.TabIndex = 2;
             this.button1.Text = "我知道了";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(214, 368);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(144, 92);
+            this.button2.TabIndex = 3;
+            this.button2.Text = "離開";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(766, 487);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.label1);
@@ -91,6 +103,7 @@
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
     }
 }
 

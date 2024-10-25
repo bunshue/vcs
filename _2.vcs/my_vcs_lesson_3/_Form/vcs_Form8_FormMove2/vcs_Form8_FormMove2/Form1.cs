@@ -38,7 +38,13 @@ namespace vcs_Form8_FormMove2
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            this.FormBorderStyle = FormBorderStyle.None;//設定無邊框
+        }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
+

@@ -59,6 +59,7 @@ print("誤差 :", err)
 
 print("------------------------------------------------------------")  # 60個
 
+
 # 計算半徑為r的圓的圓周
 def calc_area(r):
     return 2 * math.pi * r
@@ -908,8 +909,8 @@ print("------------------------------------------------------------")  # 60個
 from scipy import stats
 
 n = 5
-p = 1/6
-for k in range(n+1):
+p = 1 / 6
+for k in range(n + 1):
     v = stats.binom.pmf(k, n, p)
     print(k, v)
 
@@ -917,9 +918,7 @@ print("------------------------------------------------------------")  # 60個
 
 from scipy import stats
 
-fair_dice_rolls = stats.binom.rvs(n=5, 
-                                  p=1/6,
-                                  size=10000)
+fair_dice_rolls = stats.binom.rvs(n=5, p=1 / 6, size=10000)
 print(fair_dice_rolls)
 df = pd.DataFrame(fair_dice_rolls)
 df.hist(range=(-0.5, 5.5), bins=6)
@@ -929,9 +928,7 @@ print("------------------------------------------------------------")  # 60個
 
 from scipy import stats
 
-fair_dice_rolls = stats.binom.rvs(n=10, 
-                                  p=0.5,
-                                  size=10000)
+fair_dice_rolls = stats.binom.rvs(n=10, p=0.5, size=10000)
 print(fair_dice_rolls)
 df = pd.DataFrame(fair_dice_rolls)
 df.hist(range=(-0.5, 10.5), bins=11)
@@ -942,8 +939,8 @@ print("------------------------------------------------------------")  # 60個
 from scipy import stats
 
 n = 10
-p = 1/2
-for k in range(n+1):
+p = 1 / 2
+for k in range(n + 1):
     v = stats.binom.pmf(k, n, p)
     print(k, v)
 
@@ -961,13 +958,10 @@ print("------------------------------------------------------------")  # 60個
 
 from scipy import stats
 
-x = [x/10.0 for x in range(-50, 60)]
-plt.plot(x, stats.norm.pdf(x, 0, 1),
-       'r-', lw=1, alpha=0.6, label='mu=0,sigma=1')
-plt.plot(x, stats.norm.pdf(x, 0, 2),
-       'b--', lw=1, alpha=0.6, label='mu=0,sigma=2')
-plt.plot(x, stats.norm.pdf(x, 2, 1),
-       'g-.', lw=1, alpha=0.6, label='mu=2,sigma=1')
+x = [x / 10.0 for x in range(-50, 60)]
+plt.plot(x, stats.norm.pdf(x, 0, 1), "r-", lw=1, alpha=0.6, label="mu=0,sigma=1")
+plt.plot(x, stats.norm.pdf(x, 0, 2), "b--", lw=1, alpha=0.6, label="mu=0,sigma=2")
+plt.plot(x, stats.norm.pdf(x, 2, 1), "g-.", lw=1, alpha=0.6, label="mu=2,sigma=1")
 plt.legend()
 plt.title("常態分配PDF的機率")
 plt.show()

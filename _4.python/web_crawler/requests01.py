@@ -1,7 +1,6 @@
 # Python 測試 requests
 
 print("------------------------------------------------------------")  # 60個
-print("準備工作")
 
 import re
 import os
@@ -14,6 +13,11 @@ import pprint
 import random
 import requests
 from datetime import datetime
+
+print("------------------------------------------------------------")  # 60個
+
+import ssl
+ssl._create_default_https_context = ssl._create_stdlib_context
 
 print("------------------------------------------------------------")  # 60個
 
@@ -52,7 +56,7 @@ def get_html_data_from_url(url):
     return html_data.text
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 print("Response 物件資訊")
 url = "https://www.books.com.tw/web/sys_cebbotm/cebook/1003/?loc=P_0001_2_003"  # 博客來網址
 response = requests.get(url)
@@ -110,7 +114,9 @@ with urllib.request.urlopen(url) as response:
     print("伺服器狀態碼", response.getcode())
     print("網頁表頭", response.getheaders())
     zct_str = response.read().decode("UTF-8")
-print("將網頁資料轉成字串格式", zct_str)
+
+# OK, many
+# print("將網頁資料轉成字串格式", zct_str)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -138,8 +144,8 @@ url = "http://tw.yahoo.com"
 html_data = get_html_data1(url)
 if html_data:
     print("擷取網頁資料 OK")
-    # print(html_data.text)  #OK many
-    # pprint.pprint(html_data.text)  #OK many
+    # print(html_data.text)  # OK, many
+    # pprint.pprint(html_data.text)  # OK, many
 else:
     print("無法取得網頁資料")
 
@@ -176,21 +182,7 @@ fo.write(html_data.text)
 fo.close()
 
 print("------------------------------------------------------------")  # 60個
-print("requests 測試 11 對網頁資料處理 尋找單字出現次數")
 
-url = "https://www.ptt.cc/bbs/hotboards.html"
-html_data_text = get_html_data_from_url(url)
-
-lines = html_data_text.splitlines()  # 將網頁資料一行一行地分割成串列
-
-n = 0
-for line in lines:
-    if "音樂" in line:
-        n += 1
-
-print("找到 {} 次!".format(n))
-
-print("------------------------------------------------------------")  # 60個
 print("requests 測試 13 讀取網頁上的csv檔")
 
 print("教育部統計處資料")
@@ -321,116 +313,44 @@ for item in reversed(json_data):  # 反向排序, 利用 reversed 反轉了排�
 
 print("------------------------------------------------------------")  # 60個
 
-print("requests 測試 22")
-
-print("抓取網頁中的電話號碼 用 re")
-
-url = "https://www.taichung.gov.tw/10179/12034/"
-
-html = requests.get(url).text
-
-regex04a = r"\(\d{2}\)\d{4}-?\d{4}"
-regex04b = r"\d{2}-\d{4}-?\d{4}"
-regex0800 = r"0800-\d{6}"
-matches = re.findall(regex04a, html)
-matches += re.findall(regex04b, html)
-matches += re.findall(regex0800, html)
-""" many
-for match in matches:
-    print('抓到符合條件的 : ', match)
-    
-print('全部資料')
-print(matches)
-"""
-print("------------------------------------------------------------")  # 60個
-
-print("抓取網頁中的e-mail地址 用 re")
-
-regex = r"([a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9.]+)"
-url = "http://csharphelper.com/blog/"
-
-html = requests.get(url, verify=False).text
-
-emails = re.findall(regex, html)
-for email in emails:
-    print(email)
-
-print("------------------------------------------------------------")  # 60個
-
-print("抓取網頁內的所有圖片連結")
-
-url = "https://www.bagong.cn/dog/"
-
-html = requests.get(url).text
-
-regex = r"https?://.+.jpg"
-photos = re.findall(regex, html)
-
-""" many
-for photo in photos:
-    print("取得連結 :", photo)
-"""
-
-print("------------------------------------------------------------")  # 60個
-
-import urllib.parse
-
-print("聯合新聞網之即時新聞 標題 與 連結")
-
-url = "https://udn.com/api/more?page=2&id=&channelId=1&cate_id=0&type=breaknews&totalRecNo=6561"
-html = requests.get(url).text
-json_data = json.loads(html)
-
-""" many
-titles = json_data['lists']
-for title in titles:
-    print(title['title'])
-    print(urllib.parse.urljoin("https://udn.com", title['titleLink']))
-"""
-print("------------------------------------------------------------")  # 60個
-
-print("各國GDP資料 用pd處理網頁上的csv檔案")
+print("各國GDP資料 csv/xlsx格式, 用pd處理網頁上的 csv / xlsx 檔案")
 
 import pandas as pd
 
-# 讀入csv 文字檔
+# 讀取網頁上的 csv 檔
 csv_file = "https://storage.googleapis.com/learn_pd_like_tidyverse/gapminder.csv"
-gdp = pd.read_csv(csv_file)
-print("------------------------------------------------")
-print(type(gdp))
-print("------------------------------------------------")
-print(gdp.head())
-print("------------------------------------------------")
+df = pd.read_csv(csv_file)
+print("------------------------------")  # 30個
+print(df.head())
+print("------------------------------")  # 30個
 
-print("用pd處理網頁上的 excel 檔案")
-
-# 讀入excel 試算表
+# 讀取網頁上的 excel 檔
 xlsx_file = "https://storage.googleapis.com/learn_pd_like_tidyverse/gapminder.xlsx"
-gapminder = pd.read_excel(xlsx_file)
-print("------------------------------------------------")
-print(type(gapminder))
-print("------------------------------------------------")
-print(gapminder.head())
-print("------------------------------------------------")
+df = pd.read_excel(xlsx_file)
+print("------------------------------")  # 30個
+print(df.head())
+print("------------------------------")  # 30個
+
+# 兩個方法得到的df是一樣的
 
 print("用list 標註變數名稱從DataFrame選出country 與continent 欄位：")
-print(gapminder[["country", "continent"]])
+print(df[["country", "continent"]])
 
-print("------------------------------------------------")
+print("------------------------------")  # 30個
 print("選一個變數且沒有以list 標註，選出欄位資料，型別為Series")
-country = gapminder["country"]
+country = df["country"]
 print(type(country))
-print("------------------------------------------------")
+print("------------------------------")  # 30個
 print("聚合函數計算sum，計算2007 年全球人口總數：")
-aa = gapminder[gapminder["year"] == 2007][["pop"]].sum()
+aa = df[df["year"] == 2007][["pop"]].sum()
 print(aa)
-print("------------------------------------------------")
+print("------------------------------")  # 30個
 print("計算2007 年全球的平均壽命、平均財富：")
-bb = gapminder[gapminder["year"] == 2007][["lifeExp", "gdpPercap"]].mean()
+bb = df[df["year"] == 2007][["lifeExp", "gdpPercap"]].mean()
 print(bb)
-print("------------------------------------------------")
+print("------------------------------")  # 30個
 print("groupby群組計算2007 年各洲人口總數：")
-cc = gapminder[gapminder["year"] == 2007].groupby(by="continent")["pop"].sum()
+cc = df[df["year"] == 2007].groupby(by="continent")["pop"].sum()
 print(cc)
 
 print("------------------------------------------------------------")  # 60個
@@ -559,6 +479,7 @@ csv_write.writerows(output)  # 多行寫入 CSV
 """
 print("------------------------------------------------------------")  # 60個
 
+""" NG
 url = "一般天氣預報 - 今明 36 小時天氣預報 JSON 連結"
 response = requests.get(url)  # 取得 JSON 檔案的內容為文字
 response_json = response.json()  # response轉成json格式
@@ -644,10 +565,13 @@ for i in weather[a]:
 show = show.strip(",")  # 移除結尾逗號
 b = input(f"請輸入{a}的其中一個地點\n( {show} )\n")  # 讓使用者輸入觀測地點名稱
 print(f"{a}{b}，{weather[a][b]}。")  # 顯示結果
-
+"""
 print("------------------------------------------------------------")  # 60個
 
+print('台灣銀行 匯率查詢')
+
 url = "https://rate.bot.com.tw/xrt/flcsv/0/day"  # 牌告匯率 CSV 網址
+
 response = requests.get(url)  # 爬取網址內容
 response.encoding = "utf-8"  # 調整回應訊息編碼為 utf-8，避免編碼不同造成亂碼
 rt = response.text  # 以文字模式讀取內容
@@ -658,13 +582,6 @@ for i in rts:  # 讀取串列的每個項目
         print(a[0] + ": " + a[12])  # 取出第一個 ( 0 ) 和第十三個項目 ( 12 )
     except:
         break
-
-print("------------------------------------------------------------")  # 60個
-
-data = {"name": "oxxo", "age": "18"}
-url = "http://127.0.0.1:5000/"
-response = requests.post(url, data=data)  # 發送 POST 請求
-print(response.text)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -990,16 +907,8 @@ tree = html.fromstring(response.text)
 print('美金：' + str(tree.xpath('//html/body/div[1]/main/div[3]/table/tbody/tr[1]/td[3]/text()')[0]))
 print('日圓：' + str(tree.xpath('//html/body/div[1]/main/div[3]/table/tbody/tr[8]/td[3]/text()')[0]))
 """
-
 print("------------------------------------------------------------")  # 60個
-print("字串處理 技巧")
 
-print("教育部統計處資料 很多")
-url = "https://stats.moe.gov.tw/files/detail/{}/{}_student.csv"
-for year in range(106, 110):
-    print(url.format(year, year))
-
-print("------------------------------------------------------------")  # 60個
 print("requests 測試 16 字串處理 技巧")
 
 url = "https://www.nkust.edu.tw/p/403-1000-14-{}.php?Lang=zh-tw"
@@ -1023,9 +932,6 @@ for pg_no, page in enumerate(pages, 1):
     print("存檔檔案 :", filename)
     time.sleep(3)
     print("=========================")
-
-print("------------------------------------------------")
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1083,187 +989,8 @@ print(response)
 response = os.popen(f"ping -c 3 -i 1 {hostname}").read()
 print(response)
 """
-
+'''
 print("------------------------------------------------------------")  # 60個
-print("Youtube pytube ST")
-print("------------------------------------------------------------")  # 60個
-
-from pytube import YouTube
-
-url = "https://www.youtube.com/watch?v=R93ce4FZGbc"  # baby shark 的音樂
-yt = YouTube(url)
-
-print('影片標題 :', yt.title)
-print('影片長度 :', yt.length, '秒')
-print('影片作者 :', yt.author)
-print('影片作者頻道網址 :', yt.channel_url)
-print('影片縮圖網址 :', yt.thumbnail_url)
-print('影片觀看數 :', yt.views)
-print('取得所有語系 :', yt.captions)
-
-print("------------------------------------------------------------")  # 60個
-"""
-from pytube import YouTube
-
-url = "https://www.youtube.com/watch?v=R93ce4FZGbc"
-yt = YouTube(url)
-print("download...1")
-yt.streams.filter().get_highest_resolution().download(filename="baby_shart.mp4")
-# 下載最高畫質影片，如果沒有設定 filename，則以原本影片的 title 作為檔名
-print("ok!")
-
-print("------------------------------------------------------------")  # 60個
-
-from pytube import YouTube
-
-url = "https://www.youtube.com/watch?v=R93ce4FZGbc"
-yt = YouTube(url)
-print("download...2")
-yt.streams.filter().get_by_resolution("360p").download(filename="oxxostudio_360p.mp4")
-# 下載 480p 的影片畫質
-print("ok!")
-"""
-print("------------------------------------------------------------")  # 60個
-
-"""
-from pytube import YouTube
-
-url = "https://www.youtube.com/watch?v=R93ce4FZGbc"
-yt = YouTube(url)
-print(yt.streams.all())
-"""
-print("------------------------------------------------------------")  # 60個
-
-""" fail
-from pytube import YouTube
-
-
-def onProgress(stream, chunk, remains):
-    total = stream.filesize  # 取得完整尺寸
-    percent = (total - remains) / total * 100  # 減去剩餘尺寸 ( 剩餘尺寸會抓取存取的檔案大小 )
-    print(f"下載中… {percent:05.2f}", end="\r")  # 顯示進度，\r 表示不換行，在同一行更新
-
-
-print("download...3")
-url = "https://www.youtube.com/watch?v=R93ce4FZGbc"
-yt = YouTube(url, on_progress_callback=onProgress)
-yt.streams.filter().get_highest_resolution().download(filename="oxxostudio.mp4")
-# on_progress_callback 參數等於 onProgress 函式
-print()
-print("ok!")
-"""
-print("------------------------------------------------------------")  # 60個
-
-""" fail
-from pytube import YouTube
-
-url = "https://www.youtube.com/watch?v=R93ce4FZGbc"
-yt = YouTube(url)
-print("download...4")
-yt.streams.filter().get_audio_only().download(filename="oxxostudio.mp3")
-# 儲存為 mp3
-print("ok!")
-"""
-print("------------------------------------------------------------")  # 60個
-
-from pytube import YouTube
-from bs4 import BeautifulSoup
-
-url = "https://www.youtube.com/watch?v=R93ce4FZGbc"
-yt = YouTube(url)
-print('取得所有語系 :', yt.captions)
-caption = yt.captions.get_by_language_code("en")  # 取得英文語系
-xml = caption.xml_captions  # 將語系轉換成 xml
-# print(xml)
-
-
-def xml2srt(text):
-    soup = BeautifulSoup(text)  # 使用 BeautifulSoup 轉換 xml
-    ps = soup.findAll("p")  # 取出所有 p tag 內容
-
-    output = ""  # 輸出的內容
-    num = 0  # 每段字幕編號
-    for i, p in enumerate(ps):
-        try:
-            a = p["a"]  # 如果是自動字幕，濾掉有 a 屬性的 p tag
-        except:
-            try:
-                num = num + 1  # 每段字幕編號加 1
-                text = p.text  # 取出每段文字
-                t = int(p["t"])  # 開始時間
-                d = int(p["d"])  # 持續時間
-
-                h, tm = divmod(t, (60 * 60 * 1000))  # 轉換取得小時、剩下的毫秒數
-                m, ts = divmod(tm, (60 * 1000))  # 轉換取得分鐘、剩下的毫秒數
-                s, ms = divmod(ts, 1000)  # 轉換取得秒數、毫秒
-
-                t2 = t + d  # 根據持續時間，計算結束時間
-                if t2 > int(ps[i + 1]["t"]):
-                    t2 = int(ps[i + 1]["t"])  # 如果時間算出來比下一段長，採用下一段的時間
-                h2, tm = divmod(t2, (60 * 60 * 1000))  # 轉換取得小時、剩下的毫秒數
-                m2, ts = divmod(tm, (60 * 1000))  # 轉換取得分鐘、剩下的毫秒數
-                s2, ms2 = divmod(ts, 1000)  # 轉換取得秒數、毫秒
-
-                output = output + str(num) + "\n"  # 產生輸出的檔案，\n 表示換行
-                output = (
-                    output
-                    + f"{h:02d}:{m:02d}:{s:02d},{ms:03d} --> {h2:02d}:{m2:02d}:{s2:02d},{ms2:03d}"
-                    + "\n"
-                )
-                output = output + text + "\n"
-                output = output + "\n"
-            except:
-                pass
-
-    return output
-
-
-# print(xml2srt(xml))
-with open("tmp_oxxostudio.srt", "w") as f1:
-    f1.write(xml2srt(xml))  # 儲存為 srt
-
-print("下載字幕 ok!")
-
-print("------------------------------------------------------------")  # 60個
-
-from pytube import Playlist, YouTube
-
-url = "https://www.youtube.com/watch?v=mOPRaLPh-YU&list=PL9ACDjBMkp9wViVmgpYweGkNqh62pHspF"
-
-playlist = Playlist(url)  # 讀取影片清單
-
-#print(playlist.video_urls)  # 印出清單結果
-for _ in playlist.video_urls:
-    print(_)
-
-"""
-['https://www.youtube.com/watch?v=mOPRaLPh-YU',
- 'https://www.youtube.com/watch?v=wARhTJH1fJI',
- 'https://www.youtube.com/watch?v=WLjePGUCRqc']
-"""
-
-""" fail
-print("download...5")
-for i in playlist.video_urls:
-    print(i)
-    yt = YouTube(i)  # 讀取影片
-    yt.streams.filter().get_highest_resolution().download()  # 下載為最高畫質影片
-print("ok!")
-"""
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("Youtube pytube SP")
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
 
 print("將網頁上的檔案存成本地檔案 csv / jpg / png")
 
@@ -1394,11 +1121,6 @@ print("偽裝瀏覽器擷取網路資料成功")
 
 print("------------------------------------------------------------")  # 60個
 
-
-
- 
-print("------------------------------------------------------------")  # 60個
-
 url = "https://www.google.com/"
 # 假的 headers 資訊
 headers = {
@@ -1409,30 +1131,18 @@ response = requests.get(url, headers=headers)
 response.encoding = "utf8"
 print(response.text)
 
+print("------------------------------------------------------------")  # 60個
 
-print('簡易 requests.get(url)')
-
-print("#台灣水庫即時水情")
+print("台灣水庫即時水情")
 url = "https://water.taiwanstat.com/"  # 台灣水庫即時水情
-response = requests.get(url)
-response.encoding = "utf-8"  # 因為該網頁編碼為 utf-8，加上 .encoding 避免亂碼
-print(response.text)  # 讀取並印出 text 屬性
+#url = "https://invoice.etax.nat.gov.tw/index.html"
+#url = "https://data.kcg.gov.tw/dataset/6f29f6f4-2549-4473-aa90-bf60d10895dc/resource/30dfc2cf-17b5-4a40-8bb7-c511ea166bd3/download/lightrailtraffic.json"
 
-print("------------------------------------------------------------")  # 60個
-
-url = "https://invoice.etax.nat.gov.tw/index.html"
 response = requests.get(url)  # 取得網頁內容
-response.encoding = "utf-8"  # 因為該網頁編碼為 utf-8，加上 .encoding 避免亂碼
-print(response.text)
-
-print("------------------------------------------------------------")  # 60個
-
-url = "https://data.kcg.gov.tw/dataset/6f29f6f4-2549-4473-aa90-bf60d10895dc/resource/30dfc2cf-17b5-4a40-8bb7-c511ea166bd3/download/lightrailtraffic.json"
-response = requests.get(url)
 response.encoding = "utf-8"  # 因為該網頁編碼為 utf-8，加上 .encoding 避免亂碼
 
 print("response內的text")
-print(response.text)
+print(response.text)  # 讀取並印出 text 屬性
 
 print("response轉成json格式")
 print(response.json())
@@ -1447,41 +1157,6 @@ json_data = json.loads(response.text)
 print(json_data)
 
 print("------------------------------------------------------------")  # 60個
-
-print("拆解網頁資料")
-url = "https://today.line.me/tw/v2/article/oqay0ro"
-response = requests.get(url)
-
-# 取得文章的原始碼後，使用 split 字串拆分的方式，拆解出 articleId
-article_id = response.text.split("<script>")[1].split('id:"article:')[1].split(":")[0]
-print(article_id)
-
-print("------------------------------------------------------------")  # 60個
-
-print("拆解網頁資料")
-
-print("查詢一個網頁有出現的詞的次數 聯合新聞網之即時新聞 關鍵字")
-
-url = "https://udn.com/news/breaknews/1/99#breaknews"
-
-response = requests.get(url)
-html = response.text
-print(response.status_code)
-
-text = "賴"
-print("要查詢的詞 :", text)
-print("出現次數 :", html.count(text))
-
-text = "總統"
-print("要查詢的詞 :", text)
-print("出現次數 :", html.count(text))
-
-text = "委員"
-print("要查詢的詞 :", text)
-print("出現次數 :", html.count(text))
-
-print("------------------------------------------------------------")  # 60個
-
 
 print("儲存網頁內容, 天瓏書局")
 url = "http://www.tenlong.com.tw"  # 天瓏書局
@@ -1504,31 +1179,12 @@ print("------------------------------------------------------------")  # 60個
 
 
 """ many
-
-print('------------------------------------------------------------')	#60個
-
 import pprint
 
 url = 'http://tw.yahoo.com'
 response = requests.get(url)
 pprint.pprint(response.text)
 """
-
-print("------------------------------------------------------------")  # 60個
-
-import requests
-
-r = requests.get("http://www.google.com")
-print(r.status_code)
-
-print("------------------------------------------------------------")  # 60個
-
-r = requests.get("http://www.google.com")
-if r.status_code == 200:
-    print("請求成功...")
-else:
-    print("請求失敗...")
-     
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1572,31 +1228,22 @@ print(type(r.json()))
 print("------------------------------------------------------------")  # 60個
 
 r = requests.get("http://www.google.com")
+
+if r.status_code == 200:
+    print("請求成功...")
+else:
+    print("請求失敗...")
+
 print(r.status_code)
 print(r.status_code == requests.codes.ok)
-
-r = requests.get("http://www.google.com/404")
-print(r.status_code)
-print(r.status_code == requests.codes.ok)
-
-r = requests.get("http://www.google.com")
-print(r.status_code)
 print(r.status_code == requests.codes.all_good)
 
-print("------------------------------------------------------------")  # 60個
-
-""" request fail
-import requests
-
 r = requests.get("http://www.google.com/404")
 print(r.status_code)
 print(r.status_code == requests.codes.ok)
-
 print(r.raise_for_status())
-"""
-print("------------------------------------------------------------")  # 60個
 
-import requests 
+print("------------------------------------------------------------")  # 60個
 
 r = requests.get("http://www.google.com")
 
@@ -1605,12 +1252,6 @@ print(r.headers['Content-Length'])
 print(r.headers['Date'])
 print(r.headers['Server'])
 
-print("------------------------------------------------------------")  # 60個
-
-import requests 
-
-r = requests.get("http://www.google.com")
-
 print(r.headers.get('Content-Type'))
 print(r.headers.get('Content-Length'))
 print(r.headers.get('Date'))
@@ -1618,16 +1259,12 @@ print(r.headers.get('Server'))
 
 print("------------------------------------------------------------")  # 60個
 
-import requests
-
 session = requests.Session()
 response = session.get("http://www.google.com")
 v = session.cookies.get_dict()
 print(v)
 
 print("------------------------------------------------------------")  # 60個
-
-import requests
 
 url = "https://www.googleapis.com/books/v1/volumes"
 
@@ -1639,8 +1276,6 @@ print(r.json())
 
 print("------------------------------------------------------------")  # 60個
 
-import requests
-
 try: 
     r = requests.get("http://www.google.com", timeout=0.03)
     print(r.text)
@@ -1648,8 +1283,6 @@ except requests.exceptions.Timeout as ex:
     print("錯誤: HTTP請求已經超過時間...\n" + str(ex))
 
 print("------------------------------------------------------------")  # 60個
-
-import requests 
 
 url = 'http://www.google.com/404'
 
@@ -1666,8 +1299,6 @@ except requests.exceptions.Timeout as ex4:
     print("Timeout錯誤: " + str(ex4))     
 
 print("------------------------------------------------------------")  # 60個
-
-import requests   
 
 url = "https://www.ptt.cc/bbs/Gossiping/index.html"
 headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36'}
@@ -1693,4 +1324,133 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+print("對抓取到的網頁資料做處理")
+print("------------------------------------------------------------")  # 60個
+
+print("requests 測試 11 對網頁資料處理 尋找單字出現次數")
+
+url = "https://www.ptt.cc/bbs/hotboards.html"
+html_data_text = get_html_data_from_url(url)
+
+lines = html_data_text.splitlines()  # 將網頁資料一行一行地分割成串列
+
+n = 0
+for line in lines:
+    if "音樂" in line:
+        n += 1
+
+print("找到 {} 次!".format(n))
+
+print("------------------------------------------------------------")  # 60個
+
+print("requests 測試 22")
+
+print("抓取網頁中的電話號碼 用 re")
+
+url = "https://www.taichung.gov.tw/10179/12034/"
+
+html = requests.get(url).text
+
+regex04a = r"\(\d{2}\)\d{4}-?\d{4}"
+regex04b = r"\d{2}-\d{4}-?\d{4}"
+regex0800 = r"0800-\d{6}"
+matches = re.findall(regex04a, html)
+matches += re.findall(regex04b, html)
+matches += re.findall(regex0800, html)
+""" many
+for match in matches:
+    print('抓到符合條件的 : ', match)
+    
+print('全部資料')
+print(matches)
+"""
+print("------------------------------------------------------------")  # 60個
+
+print("抓取網頁中的e-mail地址 用 re")
+
+regex = r"([a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9.]+)"
+url = "http://csharphelper.com/blog/"
+
+html = requests.get(url, verify=False).text
+
+emails = re.findall(regex, html)
+for email in emails:
+    print(email)
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("抓取網頁內的所有圖片連結")
+
+url = "https://www.bagong.cn/dog/"
+
+html = requests.get(url).text
+
+regex = r"https?://.+.jpg"
+photos = re.findall(regex, html)
+
+""" many
+for photo in photos:
+    print("取得連結 :", photo)
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+import urllib.parse
+
+print("聯合新聞網之即時新聞 標題 與 連結")
+
+url = "https://udn.com/api/more?page=2&id=&channelId=1&cate_id=0&type=breaknews&totalRecNo=6561"
+html = requests.get(url).text
+json_data = json.loads(html)
+
+""" many
+titles = json_data['lists']
+for title in titles:
+    print(title['title'])
+    print(urllib.parse.urljoin("https://udn.com", title['titleLink']))
+"""
+print("------------------------------------------------------------")  # 60個
+
+print("拆解網頁資料")
+url = "https://today.line.me/tw/v2/article/oqay0ro"
+response = requests.get(url)
+
+# 取得文章的原始碼後，使用 split 字串拆分的方式，拆解出 articleId
+article_id = response.text.split("<script>")[1].split('id:"article:')[1].split(":")[0]
+print(article_id)
+
+print("------------------------------------------------------------")  # 60個
+
+print("拆解網頁資料")
+
+print("查詢一個網頁有出現的詞的次數 聯合新聞網之即時新聞 關鍵字")
+
+url = "https://udn.com/news/breaknews/1/99#breaknews"
+
+response = requests.get(url)
+html = response.text
+print(response.status_code)
+
+text = "賴"
+print("要查詢的詞 :", text)
+print("出現次數 :", html.count(text))
+
+text = "總統"
+print("要查詢的詞 :", text)
+print("出現次數 :", html.count(text))
+
+text = "委員"
+print("要查詢的詞 :", text)
+print("出現次數 :", html.count(text))
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------")  # 30個
 

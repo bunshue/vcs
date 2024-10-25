@@ -247,26 +247,6 @@ turtle.Screen().reset()
 做一個完整版 TextEditor 大整理
 
 
-
-import cv2
-
-video_filename = 'C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4'
-
-cap = cv2.VideoCapture(video_filename)
-
-width = cap.get(cv2.CAP_PROP_FRAME_WIDTH)
-height = cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
-print("影格尺寸:", width, "x", height)
-
-fourcc = int(cap.get(cv2.CAP_PROP_FOURCC))
-codec = (chr(fourcc&0xFF)+chr((fourcc>>8)&0xFF)+
-        chr((fourcc>>16)&0xFF)+chr((fourcc>>24)&0xFF))
-print("Codec編碼:", codec)
-
-
-
-
-
 def msgShow():
     label["text"] = "I love Python"
     label["bg"] = "lightyellow"
@@ -1194,6 +1174,9 @@ print('------------------------------------------------------------')	#60個
 '''
 
 ----------------常用的程式片段 ST cccc----------------
+
+import datetime
+print(f"現在時刻 : {datetime.datetime.now()}")
 
 foldername = 'C:/_git/vcs/_1.data/______test_files5'
 

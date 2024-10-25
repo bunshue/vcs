@@ -26,7 +26,7 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 """
 基本形態學濾波
@@ -43,49 +43,43 @@ selem表示結構元素，用于設定局部區域的形狀和大小。
 """
 
 img = skimage.data.checkerboard()
-dst1 = skimage.morphology.dilation(img, skimage.morphology.square(5))  #用邊長為5的正方形濾波器進行膨脹濾波
-dst2 = skimage.morphology.dilation(img, skimage.morphology.square(15))  #用邊長為15的正方形濾波器進行膨脹濾波
 
-plt.figure('morphology',figsize=(8,8))
+# 用邊長為5的正方形濾波器進行膨脹濾波
+dst1 = skimage.morphology.dilation(img, skimage.morphology.square(5))
+
+# 用邊長為15的正方形濾波器進行膨脹濾波
+dst2 = skimage.morphology.dilation(img, skimage.morphology.square(15))
+
+plt.figure("膨脹", figsize=(8, 8))
 plt.subplot(131)
-plt.title('origin image')
-plt.imshow(img,plt.cm.gray)
+plt.title("原圖")
+plt.imshow(img, plt.cm.gray)
 
 plt.subplot(132)
-plt.title('morphological image')
-plt.imshow(dst1,plt.cm.gray)
+plt.title("白色膨脹1")
+plt.imshow(dst1, plt.cm.gray)
 
 plt.subplot(133)
-plt.title('morphological image')
-plt.imshow(dst2,plt.cm.gray)
+plt.title("白色膨脹2")
+plt.imshow(dst2, plt.cm.gray)
 
 plt.show()
-
 
 """
 
 分別用邊長為5或15的正方形濾波器對棋盤圖片進行膨脹操作，結果如下：
-
 可見濾波器的大小，對操作結果的影響非常大。一般設置為奇數。
 
 除了正方形的濾波器外，濾波器的形狀還有一些，現列舉如下：
 
 skimage.morphology.morphology.square: 正方形
-
 skimage.morphology.disk:  平面圓形
-
 skimage.morphology.ball: 球形
-
 skimage.morphology.cube: 立方體形
-
 skimage.morphology.diamond: 鉆石形
-
 skimage.morphology.rectangle: 矩形
-
 skimage.morphology.star: 星形
-
 skimage.morphology.octagon: 八角形
-
 skimage.morphology.octahedron： 八面體
 
 注意，如果處理圖像為二值圖像（只有0和1兩個值），則可以調用：
@@ -103,54 +97,54 @@ selem表示結構元素，用于設定局部區域的形狀和大小。
 和膨脹相反的操作，將0值擴充到鄰近像素。擴大黑色部分，減小白色部分。可用來提取骨干信息，去掉毛刺，去掉孤立的像素。
 """
 
-img= skimage.data.checkerboard()
-dst1 = skimage.morphology.erosion(img, skimage.morphology.square(5))  #用邊長為5的正方形濾波器進行膨脹濾波
-dst2 = skimage.morphology.erosion(img, skimage.morphology.square(25))  #用邊長為25的正方形濾波器進行膨脹濾波
+img = skimage.data.checkerboard()
 
-plt.figure('morphology',figsize=(8,8))
+# 用邊長為5的正方形濾波器進行膨脹濾波
+dst1 = skimage.morphology.erosion(img, skimage.morphology.square(5))
+
+# 用邊長為25的正方形濾波器進行膨脹濾波
+dst2 = skimage.morphology.erosion(img, skimage.morphology.square(25))
+
+plt.figure("腐蝕", figsize=(8, 8))
 plt.subplot(131)
-plt.title('origin image')
-plt.imshow(img,plt.cm.gray)
+plt.title("原圖")
+plt.imshow(img, plt.cm.gray)
 
 plt.subplot(132)
-plt.title('morphological image')
-plt.imshow(dst1,plt.cm.gray)
+plt.title("白色腐蝕1")
+plt.imshow(dst1, plt.cm.gray)
 
 plt.subplot(133)
-plt.title('morphological image')
-plt.imshow(dst2,plt.cm.gray)
+plt.title("白色腐蝕2")
+plt.imshow(dst2, plt.cm.gray)
 
 plt.show()
 
 """
 注意，如果處理圖像為二值圖像（只有0和1兩個值），則可以調用：
-
 skimage.morphology.binary_erosion(image, selem=None）
-
 用此函數比處理灰度圖像要快。
 
 3、開運算（opening)
 
 函數：skimage.morphology.openning(image, selem=None）
-
 selem表示結構元素，用于設定局部區域的形狀和大小。
-
 先腐蝕再膨脹，可以消除小物體或小斑塊。
 """
 
-img = skimage.color.rgb2gray(skimage.io.imread('data/mor.bmp'))
-dst = skimage.morphology.opening(img, skimage.morphology.disk(9))  #用邊長為9的圓形濾波器進行膨脹濾波
+img = skimage.color.rgb2gray(skimage.io.imread("data/mor.bmp"))
+dst = skimage.morphology.opening(img, skimage.morphology.disk(9))  # 用邊長為9的圓形濾波器進行膨脹濾波
 
-plt.figure('morphology',figsize=(8,8))
+plt.figure("morphology 開運算", figsize=(8, 8))
 plt.subplot(121)
-plt.title('origin image')
-plt.imshow(img,plt.cm.gray)
-plt.axis('off')
+plt.title("原圖")
+plt.imshow(img, plt.cm.gray)
+plt.axis("off")
 
 plt.subplot(122)
-plt.title('morphological image')
-plt.imshow(dst,plt.cm.gray)
-plt.axis('off')
+plt.title("開運算")
+plt.imshow(dst, plt.cm.gray)
+plt.axis("off")
 
 plt.show()
 
@@ -170,19 +164,19 @@ selem表示結構元素，用于設定局部區域的形狀和大小。
 先膨脹再腐蝕，可用來填充孔洞。
 """
 
-img = skimage.color.rgb2gray(skimage.io.imread('data/mor.bmp'))
-dst = skimage.morphology.closing(img, skimage.morphology.disk(9))  #用邊長為5的圓形濾波器進行膨脹濾波
+img = skimage.color.rgb2gray(skimage.io.imread("data/mor.bmp"))
+dst = skimage.morphology.closing(img, skimage.morphology.disk(9))  # 用邊長為5的圓形濾波器進行膨脹濾波
 
-plt.figure('morphology',figsize=(8,8))
+plt.figure("morphology 閉運算", figsize=(8, 8))
 plt.subplot(121)
-plt.title('origin image')
-plt.imshow(img,plt.cm.gray)
-plt.axis('off')
+plt.title("原圖")
+plt.imshow(img, plt.cm.gray)
+plt.axis("off")
 
 plt.subplot(122)
-plt.title('morphological image')
-plt.imshow(dst,plt.cm.gray)
-plt.axis('off')
+plt.title("閉運算")
+plt.imshow(dst, plt.cm.gray)
+plt.axis("off")
 
 plt.show()
 
@@ -202,19 +196,19 @@ selem表示結構元素，用于設定局部區域的形狀和大小。
 將原圖像減去它的開運算值，返回比結構化元素小的白點
 """
 
-img = skimage.color.rgb2gray(skimage.io.imread('data/mor.bmp'))
-dst = skimage.morphology.white_tophat(img, skimage.morphology.square(21))  
+img = skimage.color.rgb2gray(skimage.io.imread("data/mor.bmp"))
+dst = skimage.morphology.white_tophat(img, skimage.morphology.square(21))
 
-plt.figure('morphology',figsize=(8,8))
+plt.figure("morphology 白帽", figsize=(8, 8))
 plt.subplot(121)
-plt.title('origin image')
-plt.imshow(img,plt.cm.gray)
-plt.axis('off')
+plt.title("原圖")
+plt.imshow(img, plt.cm.gray)
+plt.axis("off")
 
 plt.subplot(122)
-plt.title('morphological image')
-plt.imshow(dst,plt.cm.gray)
-plt.axis('off')
+plt.title("白帽")
+plt.imshow(dst, plt.cm.gray)
+plt.axis("off")
 
 plt.show()
 
@@ -229,23 +223,23 @@ selem表示結構元素，用于設定局部區域的形狀和大小。
 將原圖像減去它的閉運算值，返回比結構化元素小的黑點，且將這些黑點反色。
 """
 
-img = skimage.color.rgb2gray(skimage.io.imread('data/mor.bmp'))
-dst = skimage.morphology.black_tophat(img, skimage.morphology.square(21))  
+img = skimage.color.rgb2gray(skimage.io.imread("data/mor.bmp"))
+dst = skimage.morphology.black_tophat(img, skimage.morphology.square(21))
 
-plt.figure('morphology',figsize=(8,8))
+plt.figure("morphology 黑帽", figsize=(8, 8))
 plt.subplot(121)
-plt.title('origin image')
-plt.imshow(img,plt.cm.gray)
-plt.axis('off')
+plt.title("原圖")
+plt.imshow(img, plt.cm.gray)
+plt.axis("off")
 
 plt.subplot(122)
-plt.title('morphological image')
-plt.imshow(dst,plt.cm.gray)
-plt.axis('off')
+plt.title("黑帽")
+plt.imshow(dst, plt.cm.gray)
+plt.axis("off")
 
 plt.show()
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 """
 高級濾波
@@ -261,19 +255,19 @@ selem表示結構化元素，用于設定濾波器。
 from skimage.morphology import disk
 import skimage.filters.rank as sfr
 
-#img =skimage.color.rgb2gray(skimage.data.lena())
-filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg'
-img=skimage.io.imread(filename, True)   #True:轉為灰階
-auto =sfr.autolevel(img, disk(5))  #半徑為5的圓形濾波器
+# img =skimage.color.rgb2gray(skimage.data.lena())
+filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg"
+img = skimage.io.imread(filename, True)  # True:轉為灰階
+auto = sfr.autolevel(img, disk(5))  # 半徑為5的圓形濾波器
 
-plt.figure('filters',figsize=(8,8))
+plt.figure("filters", figsize=(8, 8))
 plt.subplot(121)
-plt.title('origin image')
-plt.imshow(img,plt.cm.gray)
+plt.title("原圖")
+plt.imshow(img, plt.cm.gray)
 
 plt.subplot(122)
-plt.title('filted image')
-plt.imshow(auto,plt.cm.gray)
+plt.title("濾波")
+plt.imshow(auto, plt.cm.gray)
 
 plt.show()
 
@@ -307,11 +301,11 @@ auto =sfr.bottomhat(img, disk(5))  #半徑為5的圓形濾波器
 
 plt.figure('filters',figsize=(8,8))
 plt.subplot(121)
-plt.title('origin image')
+plt.title('原圖')
 plt.imshow(img,plt.cm.gray)
 
 plt.subplot(122)
-plt.title('filted image')
+plt.title('濾波')
 plt.imshow(auto,plt.cm.gray)
 
 plt.show()
@@ -330,19 +324,19 @@ selem表示結構化元素，用于設定濾波器。
 from skimage.morphology import disk
 import skimage.filters.rank as sfr
 
-#img = skimage.color.rgb2gray(skimage.data.lena())
-filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg'
-img = skimage.io.imread(filename, True)   #True:轉為灰階
-auto = sfr.enhance_contrast(img, disk(5))  #半徑為5的圓形濾波器
+# img = skimage.color.rgb2gray(skimage.data.lena())
+filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg"
+img = skimage.io.imread(filename, True)  # True:轉為灰階
+auto = sfr.enhance_contrast(img, disk(5))  # 半徑為5的圓形濾波器
 
-plt.figure('filters',figsize=(8,8))
+plt.figure("filters", figsize=(8, 8))
 plt.subplot(121)
-plt.title('origin image')
-plt.imshow(img,plt.cm.gray)
+plt.title("原圖")
+plt.imshow(img, plt.cm.gray)
 
 plt.subplot(122)
-plt.title('filted image')
-plt.imshow(auto,plt.cm.gray)
+plt.title("濾波")
+plt.imshow(auto, plt.cm.gray)
 
 plt.show()
 
@@ -359,19 +353,19 @@ selem表示結構化元素，用于設定濾波器。
 from skimage.morphology import disk
 import skimage.filters.rank as sfr
 
-#img = skimage.color.rgb2gray(skimage.data.lena())
-filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg'
-img = skimage.io.imread(filename, True)   #True:轉為灰階
-dst = sfr.entropy(img, disk(5))  #半徑為5的圓形濾波器
+# img = skimage.color.rgb2gray(skimage.data.lena())
+filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg"
+img = skimage.io.imread(filename, True)  # True:轉為灰階
+dst = sfr.entropy(img, disk(5))  # 半徑為5的圓形濾波器
 
-plt.figure('filters',figsize=(8,8))
+plt.figure("filters", figsize=(8, 8))
 plt.subplot(121)
-plt.title('origin image')
-plt.imshow(img,plt.cm.gray)
+plt.title("原圖")
+plt.imshow(img, plt.cm.gray)
 
 plt.subplot(122)
-plt.title('filted image')
-plt.imshow(dst,plt.cm.gray)
+plt.title("濾波")
+plt.imshow(dst, plt.cm.gray)
 
 plt.show()
 
@@ -388,19 +382,19 @@ selem表示結構化元素，用于設定濾波器。
 from skimage.morphology import disk
 import skimage.filters.rank as sfr
 
-#img = skimage.color.rgb2gray(skimage.data.lena())
-filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg'
-img = skimage.io.imread(filename, True)   #True:轉為灰階
-dst = sfr.equalize(img, disk(5))  #半徑為5的圓形濾波器
+# img = skimage.color.rgb2gray(skimage.data.lena())
+filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg"
+img = skimage.io.imread(filename, True)  # True:轉為灰階
+dst = sfr.equalize(img, disk(5))  # 半徑為5的圓形濾波器
 
-plt.figure('filters',figsize=(8,8))
+plt.figure("filters", figsize=(8, 8))
 plt.subplot(121)
-plt.title('origin image')
-plt.imshow(img,plt.cm.gray)
+plt.title("原圖")
+plt.imshow(img, plt.cm.gray)
 
 plt.subplot(122)
-plt.title('filted image')
-plt.imshow(dst,plt.cm.gray)
+plt.title("濾波")
+plt.imshow(dst, plt.cm.gray)
 
 plt.show()
 
@@ -417,19 +411,19 @@ selem表示結構化元素，用于設定濾波器。
 from skimage.morphology import disk
 import skimage.filters.rank as sfr
 
-#img = skimage.color.rgb2gray(skimage.data.lena())
-filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg'
-img = skimage.io.imread(filename, True)   #True:轉為灰階
-dst = sfr.gradient(img, disk(5))  #半徑為5的圓形濾波器
+# img = skimage.color.rgb2gray(skimage.data.lena())
+filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg"
+img = skimage.io.imread(filename, True)  # True:轉為灰階
+dst = sfr.gradient(img, disk(5))  # 半徑為5的圓形濾波器
 
-plt.figure('filters',figsize=(8,8))
+plt.figure("filters", figsize=(8, 8))
 plt.subplot(121)
-plt.title('origin image')
-plt.imshow(img,plt.cm.gray)
+plt.title("原圖")
+plt.imshow(img, plt.cm.gray)
 
 plt.subplot(122)
-plt.title('filted image')
-plt.imshow(dst,plt.cm.gray)
+plt.title("濾波")
+plt.imshow(dst, plt.cm.gray)
 
 plt.show()
 
@@ -475,7 +469,7 @@ dst =sfr.subtract_mean(img, disk(5))
 dst =sfr.sum(img, disk(5))
 """
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 """
 霍夫線變換
@@ -503,29 +497,29 @@ distance: 點到原點的距離，即上面的所說的r.
 """
 
 # 構建測試圖片
-image = np.zeros((100, 100))  #背景圖
-idx = np.arange(25, 75)    #25-74序列
+image = np.zeros((100, 100))  # 背景圖
+idx = np.arange(25, 75)  # 25-74序列
 image[idx[::-1], idx] = 255  # 線條\
-image[idx, idx] = 255        # 線條/
+image[idx, idx] = 255  # 線條/
 
 # hough線變換
 h, theta, d = skimage.transform.hough_line(image)
 
-#生成一個一行兩列的窗口（可顯示兩張圖片）.
+# 生成一個一行兩列的窗口（可顯示兩張圖片）.
 fig, (ax0, ax1) = plt.subplots(1, 2, figsize=(8, 6))
 plt.tight_layout()
 
-#顯示原始圖片
+# 顯示原始圖片
 ax0.imshow(image, plt.cm.gray)
-ax0.set_title('Input image')
+ax0.set_title("Input image")
 ax0.set_axis_off()
 
-#顯示hough變換所得數據
+# 顯示hough變換所得數據
 ax1.imshow(np.log(1 + h))
-ax1.set_title('Hough transform')
-ax1.set_xlabel('Angles (degrees)')
-ax1.set_ylabel('Distance (pixels)')
-ax1.axis('image')
+ax1.set_title("Hough transform")
+ax1.set_xlabel("Angles (degrees)")
+ax1.set_ylabel("Distance (pixels)")
+ax1.axis("image")
 
 plt.show()
 
@@ -543,39 +537,39 @@ skimage.transform.hough_line_peaks(hspace, angles, dists）
 """
 
 # 構建測試圖片
-image = np.zeros((100, 100))  #背景圖
-idx = np.arange(25, 75)    #25-74序列
+image = np.zeros((100, 100))  # 背景圖
+idx = np.arange(25, 75)  # 25-74序列
 image[idx[::-1], idx] = 255  # 線條\
-image[idx, idx] = 255        # 線條/
+image[idx, idx] = 255  # 線條/
 
 # hough線變換
 h, theta, d = skimage.transform.hough_line(image)
 
-#生成一個一行三列的窗口（可顯示三張圖片）.
-fig, (ax0, ax1,ax2) = plt.subplots(1, 3, figsize=(8, 6))
+# 生成一個一行三列的窗口（可顯示三張圖片）.
+fig, (ax0, ax1, ax2) = plt.subplots(1, 3, figsize=(8, 6))
 plt.tight_layout()
 
-#顯示原始圖片
+# 顯示原始圖片
 ax0.imshow(image, plt.cm.gray)
-ax0.set_title('Input image')
+ax0.set_title("Input image")
 ax0.set_axis_off()
 
-#顯示hough變換所得數據
+# 顯示hough變換所得數據
 ax1.imshow(np.log(1 + h))
-ax1.set_title('Hough transform')
-ax1.set_xlabel('Angles (degrees)')
-ax1.set_ylabel('Distance (pixels)')
-ax1.axis('image')
+ax1.set_title("Hough transform")
+ax1.set_xlabel("Angles (degrees)")
+ax1.set_ylabel("Distance (pixels)")
+ax1.axis("image")
 
-#顯示檢測出的線條
+# 顯示檢測出的線條
 ax2.imshow(image, plt.cm.gray)
 row1, col1 = image.shape
 for _, angle, dist in zip(*skimage.transform.hough_line_peaks(h, theta, d)):
     y0 = (dist - 0 * np.cos(angle)) / np.sin(angle)
     y1 = (dist - col1 * np.cos(angle)) / np.sin(angle)
-    ax2.plot((0, col1), (y0, y1), '-r')
+    ax2.plot((0, col1), (y0, y1), "-r")
 ax2.axis((0, col1, row1, 0))
-ax2.set_title('Detected lines')
+ax2.set_title("Detected lines")
 ax2.set_axis_off()
 
 plt.show()
@@ -606,39 +600,40 @@ lines: 線條列表, 格式如((x0, y0), (x1, y0))，標明開始點和結束點
 下面，我們用canny算子提取邊緣，然后檢測哪些邊緣是直線？
 """
 
-#使用Probabilistic Hough Transform.
+# 使用Probabilistic Hough Transform.
 image = skimage.data.camera()
 edges = skimage.feature.canny(image, sigma=2, low_threshold=1, high_threshold=25)
-lines = skimage.transform.probabilistic_hough_line(edges, threshold=10, line_length=5,line_gap=3)
+lines = skimage.transform.probabilistic_hough_line(
+    edges, threshold=10, line_length=5, line_gap=3
+)
 
 # 創建顯示窗口.
 fig, (ax0, ax1, ax2) = plt.subplots(1, 3, figsize=(16, 6))
 plt.tight_layout()
 
-#顯示原圖像
+# 顯示原圖像
 ax0.imshow(image, plt.cm.gray)
-ax0.set_title('Input image')
+ax0.set_title("Input image")
 ax0.set_axis_off()
 
-#顯示canny邊緣
+# 顯示canny邊緣
 ax1.imshow(edges, plt.cm.gray)
-ax1.set_title('Canny edges')
+ax1.set_title("Canny edges")
 ax1.set_axis_off()
 
-#用plot繪制出所有的直線
+# 用plot繪制出所有的直線
 ax2.imshow(edges * 0)
 for line in lines:
     p0, p1 = line
     ax2.plot((p0[0], p1[0]), (p0[1], p1[1]))
 row2, col2 = image.shape
 ax2.axis((0, col2, row2, 0))
-ax2.set_title('Probabilistic Hough')
+ax2.set_title("Probabilistic Hough")
 ax2.set_axis_off()
 
 plt.show()
 
-
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
 """
@@ -665,42 +660,42 @@ radius是一個數組，表示半徑的集合，如[3，4，5，6]
 例1：繪制兩個圓形，用霍夫圓變換將它們檢測出來。
 """
 
-img = np.zeros((250, 250,3), dtype=np.uint8)
-rr, cc = skimage.draw.circle_perimeter(60, 60, 50)  #以半徑50畫一個圓
-rr1, cc1 = skimage.draw.circle_perimeter(150, 150, 60) #以半徑60畫一個圓
-img[cc, rr,:] =255
-img[cc1, rr1,:] =255
+img = np.zeros((250, 250, 3), dtype=np.uint8)
+rr, cc = skimage.draw.circle_perimeter(60, 60, 50)  # 以半徑50畫一個圓
+rr1, cc1 = skimage.draw.circle_perimeter(150, 150, 60)  # 以半徑60畫一個圓
+img[cc, rr, :] = 255
+img[cc1, rr1, :] = 255
 
-fig, (ax0,ax1) = plt.subplots(1,2, figsize=(8, 5))
+fig, (ax0, ax1) = plt.subplots(1, 2, figsize=(8, 5))
 
-ax0.imshow(img)  #顯示原圖
-ax0.set_title('origin image')
+ax0.imshow(img)  # 顯示原圖
+ax0.set_title("原圖")
 
-hough_radii = np.arange(50, 80, 5)  #半徑范圍
-hough_res = skimage.transform.hough_circle(img[:,:,0], hough_radii)  #圓變換 
+hough_radii = np.arange(50, 80, 5)  # 半徑范圍
+hough_res = skimage.transform.hough_circle(img[:, :, 0], hough_radii)  # 圓變換
 
-centers = []  #保存所有圓心點坐標
-accums = []   #累積值
-radii = []    #半徑
+centers = []  # 保存所有圓心點坐標
+accums = []  # 累積值
+radii = []  # 半徑
 
 for radius, h in zip(hough_radii, hough_res):
-    #每一個半徑值，取出其中兩個圓
+    # 每一個半徑值，取出其中兩個圓
     num_peaks = 2
-    peaks =skimage.feature.peak_local_max(h, num_peaks=num_peaks) #取出峰值
+    peaks = skimage.feature.peak_local_max(h, num_peaks=num_peaks)  # 取出峰值
     centers.extend(peaks)
     accums.extend(h[peaks[:, 0], peaks[:, 1]])
     radii.extend([radius] * num_peaks)
 
-#畫出最接近的圓
-image =np.copy(img)
+# 畫出最接近的圓
+image = np.copy(img)
 for idx in np.argsort(accums)[::-1][:2]:
     center_x, center_y = centers[idx]
     radius = radii[idx]
     cx, cy = skimage.draw.circle_perimeter(center_y, center_x, radius)
-    image[cy, cx] =(255,0,0)
+    image[cy, cx] = (255, 0, 0)
 
 ax1.imshow(image)
-ax1.set_title('detected image')
+ax1.set_title("detected image")
 
 plt.show()
 
@@ -711,39 +706,41 @@ plt.show()
 例2，檢測出下圖中存在的硬幣。
 """
 
-image = skimage.util.img_as_ubyte(skimage.data.coins()[0:95, 70:370]) #裁剪原圖片
-edges = skimage.feature.canny(image, sigma=3, low_threshold=10, high_threshold=50) #檢測canny邊緣
+image = skimage.util.img_as_ubyte(skimage.data.coins()[0:95, 70:370])  # 裁剪原圖片
+edges = skimage.feature.canny(
+    image, sigma=3, low_threshold=10, high_threshold=50
+)  # 檢測canny邊緣
 
-fig, (ax0,ax1) = plt.subplots(1,2, figsize=(8, 5))
+fig, (ax0, ax1) = plt.subplots(1, 2, figsize=(8, 5))
 
-ax0.imshow(edges, cmap=plt.cm.gray)  #顯示canny邊緣
-ax0.set_title('original image')
+ax0.imshow(edges, cmap=plt.cm.gray)  # 顯示canny邊緣
+ax0.set_title("original image")
 
-hough_radii = np.arange(15, 30, 2)  #半徑范圍
-hough_res = skimage.transform.hough_circle(edges, hough_radii)  #圓變換 
+hough_radii = np.arange(15, 30, 2)  # 半徑范圍
+hough_res = skimage.transform.hough_circle(edges, hough_radii)  # 圓變換
 
-centers = []  #保存中心點坐標
-accums = []   #累積值
-radii = []    #半徑
+centers = []  # 保存中心點坐標
+accums = []  # 累積值
+radii = []  # 半徑
 
 for radius, h in zip(hough_radii, hough_res):
-    #每一個半徑值，取出其中兩個圓
+    # 每一個半徑值，取出其中兩個圓
     num_peaks = 2
-    peaks = skimage.feature.peak_local_max(h, num_peaks=num_peaks) #取出峰值
+    peaks = skimage.feature.peak_local_max(h, num_peaks=num_peaks)  # 取出峰值
     centers.extend(peaks)
     accums.extend(h[peaks[:, 0], peaks[:, 1]])
     radii.extend([radius] * num_peaks)
 
-#畫出最接近的5個圓
+# 畫出最接近的5個圓
 image = skimage.color.gray2rgb(image)
 for idx in np.argsort(accums)[::-1][:5]:
     center_x, center_y = centers[idx]
     radius = radii[idx]
     cx, cy = skimage.draw.circle_perimeter(center_y, center_x, radius)
-    image[cy, cx] = (255,0,0)
+    image[cy, cx] = (255, 0, 0)
 
 ax1.imshow(image)
-ax1.set_title('detected image')
+ax1.set_title("detected image")
 
 plt.show()
 
@@ -807,7 +804,7 @@ plt.show()
 #霍夫橢圓變換速度非常慢，應避免圖像太大。
 """
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
 """
@@ -921,31 +918,35 @@ tolerance: 容忍值
 
 """
 
-#生成二值測試圖像
-hand = np.array([[1.64516129, 1.16145833],
-                 [1.64516129, 1.59375],
-                 [1.35080645, 1.921875],
-                 [1.375, 2.18229167],
-                 [1.68548387, 1.9375],
-                 [1.60887097, 2.55208333],
-                 [1.68548387, 2.69791667],
-                 [1.76209677, 2.56770833],
-                 [1.83064516, 1.97395833],
-                 [1.89516129, 2.75],
-                 [1.9516129, 2.84895833],
-                 [2.01209677, 2.76041667],
-                 [1.99193548, 1.99479167],
-                 [2.11290323, 2.63020833],
-                 [2.2016129, 2.734375],
-                 [2.25403226, 2.60416667],
-                 [2.14919355, 1.953125],
-                 [2.30645161, 2.36979167],
-                 [2.39112903, 2.36979167],
-                 [2.41532258, 2.1875],
-                 [2.1733871, 1.703125],
-                 [2.07782258, 1.16666667]])
+# 生成二值測試圖像
+hand = np.array(
+    [
+        [1.64516129, 1.16145833],
+        [1.64516129, 1.59375],
+        [1.35080645, 1.921875],
+        [1.375, 2.18229167],
+        [1.68548387, 1.9375],
+        [1.60887097, 2.55208333],
+        [1.68548387, 2.69791667],
+        [1.76209677, 2.56770833],
+        [1.83064516, 1.97395833],
+        [1.89516129, 2.75],
+        [1.9516129, 2.84895833],
+        [2.01209677, 2.76041667],
+        [1.99193548, 1.99479167],
+        [2.11290323, 2.63020833],
+        [2.2016129, 2.734375],
+        [2.25403226, 2.60416667],
+        [2.14919355, 1.953125],
+        [2.30645161, 2.36979167],
+        [2.39112903, 2.36979167],
+        [2.41532258, 2.1875],
+        [2.1733871, 1.703125],
+        [2.07782258, 1.16666667],
+    ]
+)
 
-#檢測所有圖形的輪廓
+# 檢測所有圖形的輪廓
 new_hand = hand.copy()
 for _ in range(5):
     new_hand = skimage.measure.subdivide_polygon(new_hand, degree=2)
@@ -955,20 +956,20 @@ appr_hand = skimage.measure.approximate_polygon(new_hand, tolerance=0.02)
 
 print("Number of coordinates:", len(hand), len(new_hand), len(appr_hand))
 
-fig, axes= plt.subplots(2,2, figsize=(9, 8))
-ax0,ax1,ax2,ax3=axes.ravel()
+fig, axes = plt.subplots(2, 2, figsize=(9, 8))
+ax0, ax1, ax2, ax3 = axes.ravel()
 
-ax0.plot(hand[:, 0], hand[:, 1],'r')
-ax0.set_title('original hand')
-ax1.plot(new_hand[:, 0], new_hand[:, 1],'g')
-ax1.set_title('subdivide_polygon')
-ax2.plot(appr_hand[:, 0], appr_hand[:, 1],'b')
-ax2.set_title('approximate_polygon')
+ax0.plot(hand[:, 0], hand[:, 1], "r")
+ax0.set_title("original hand")
+ax1.plot(new_hand[:, 0], new_hand[:, 1], "g")
+ax1.set_title("subdivide_polygon")
+ax2.plot(appr_hand[:, 0], appr_hand[:, 1], "b")
+ax2.set_title("approximate_polygon")
 
-ax3.plot(hand[:, 0], hand[:, 1],'r')
-ax3.plot(new_hand[:, 0], new_hand[:, 1],'g')
-ax3.plot(appr_hand[:, 0], appr_hand[:, 1],'b')
-ax3.set_title('all')
+ax3.plot(hand[:, 0], hand[:, 1], "r")
+ax3.plot(new_hand[:, 0], new_hand[:, 1], "g")
+ax3.plot(appr_hand[:, 0], appr_hand[:, 1], "b")
+ax3.set_title("all")
 
 plt.show()
 
@@ -1059,27 +1060,29 @@ skimage.measure.label（image,connectivity=None)
 
 import scipy.ndimage as ndi
 
-#編寫一個函數來生成原始二值圖像
+
+# 編寫一個函數來生成原始二值圖像
 def microstructure(l=256):
     n = 5
-    x, y = np.ogrid[0:l, 0:l]  #生成網絡
+    x, y = np.ogrid[0:l, 0:l]  # 生成網絡
     mask = np.zeros((l, l))
     points = l * np.random.rand(2, n**2)
     mask[(points[0]).astype(np.int), (points[1]).astype(np.int)] = 1
-    mask = ndi.gaussian_filter(mask, sigma=l/(4.*n)) #高斯濾波
+    mask = ndi.gaussian_filter(mask, sigma=l / (4.0 * n))  # 高斯濾波
     return mask > mask.mean()
 
-data = microstructure(l=128)*1 #生成測試圖片
 
-labels = skimage.measure.label(data,connectivity=2)  #8連通區域標記
-dst = skimage.color.label2rgb(labels)  #根據不同的標記顯示不同的顏色
-print('regions number:',labels.max()+1)  #顯示連通區域塊數(從0開始標記)
+data = microstructure(l=128) * 1  # 生成測試圖片
+
+labels = skimage.measure.label(data, connectivity=2)  # 8連通區域標記
+dst = skimage.color.label2rgb(labels)  # 根據不同的標記顯示不同的顏色
+print("regions number:", labels.max() + 1)  # 顯示連通區域塊數(從0開始標記)
 
 fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(8, 4))
-ax1.imshow(data, plt.cm.gray, interpolation='nearest')
-ax1.axis('off')
-ax2.imshow(dst,interpolation='nearest')
-ax2.axis('off')
+ax1.imshow(data, plt.cm.gray, interpolation="nearest")
+ax1.axis("off")
+ax2.imshow(dst, interpolation="nearest")
+ax2.axis("off")
 
 fig.tight_layout()
 plt.show()
@@ -1130,23 +1133,25 @@ in_place: bool型值，如果為True,表示直接在輸入圖像中刪除小塊�
 
 import scipy.ndimage as ndi
 
-#編寫一個函數來生成原始二值圖像
+
+# 編寫一個函數來生成原始二值圖像
 def microstructure(l=256):
     n = 5
-    x, y = np.ogrid[0:l, 0:l]  #生成網絡
+    x, y = np.ogrid[0:l, 0:l]  # 生成網絡
     mask = np.zeros((l, l))
     points = l * np.random.rand(2, n**2)
     mask[(points[0]).astype(np.int), (points[1]).astype(np.int)] = 1
-    mask = ndi.gaussian_filter(mask, sigma=l/(4.*n)) #高斯濾波
+    mask = ndi.gaussian_filter(mask, sigma=l / (4.0 * n))  # 高斯濾波
     return mask > mask.mean()
 
-data = microstructure(l=128) #生成測試圖片
 
-dst = skimage.morphology.remove_small_objects(data,min_size=300,connectivity=1)
+data = microstructure(l=128)  # 生成測試圖片
+
+dst = skimage.morphology.remove_small_objects(data, min_size=300, connectivity=1)
 
 fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(8, 4))
-ax1.imshow(data, plt.cm.gray, interpolation='nearest')
-ax2.imshow(dst,plt.cm.gray,interpolation='nearest')
+ax1.imshow(data, plt.cm.gray, interpolation="nearest")
+ax2.imshow(dst, plt.cm.gray, interpolation="nearest")
 
 fig.tight_layout()
 plt.show()
@@ -1159,39 +1164,39 @@ plt.show()
 
 import matplotlib.patches as mpatches
 
-#加載并裁剪硬幣圖片
+# 加載并裁剪硬幣圖片
 image = skimage.data.coins()[50:-50, 50:-50]
 
-thresh =filters.threshold_otsu(image) #閾值分割
-bw = skimage.morphology.closing(image > thresh, skimage.morphology.square(3)) #閉運算
+thresh = filters.threshold_otsu(image)  # 閾值分割
+bw = skimage.morphology.closing(image > thresh, skimage.morphology.square(3))  # 閉運算
 
-cleared = bw.copy()  #復制
-skimage.segmentation.clear_border(cleared)  #清除與邊界相連的目標物
+cleared = bw.copy()  # 復制
+skimage.segmentation.clear_border(cleared)  # 清除與邊界相連的目標物
 
-label_image = skimage.measure.label(cleared)  #連通區域標記
-borders = np.logical_xor(bw, cleared) #異或
+label_image = skimage.measure.label(cleared)  # 連通區域標記
+borders = np.logical_xor(bw, cleared)  # 異或
 label_image[borders] = -1
-image_label_overlay =skimage.color.label2rgb(label_image, image=image) #不同標記用不同顏色顯示
+image_label_overlay = skimage.color.label2rgb(label_image, image=image)  # 不同標記用不同顏色顯示
 
-fig,(ax0,ax1)= plt.subplots(1,2, figsize=(8, 6))
-ax0.imshow(cleared,plt.cm.gray)
+fig, (ax0, ax1) = plt.subplots(1, 2, figsize=(8, 6))
+ax0.imshow(cleared, plt.cm.gray)
 ax1.imshow(image_label_overlay)
 
-for region in skimage.measure.regionprops(label_image): #循環得到每一個連通區域屬性集
-    
-    #忽略小區域
+for region in skimage.measure.regionprops(label_image):  # 循環得到每一個連通區域屬性集
+    # 忽略小區域
     if region.area < 100:
         continue
 
-    #繪制外包矩形
+    # 繪制外包矩形
     minr, minc, maxr, maxc = region.bbox
-    rect = mpatches.Rectangle((minc, minr), maxc - minc, maxr - minr,
-                              fill=False, edgecolor='red', linewidth=2)
+    rect = mpatches.Rectangle(
+        (minc, minr), maxc - minc, maxr - minr, fill=False, edgecolor="red", linewidth=2
+    )
     ax1.add_patch(rect)
 fig.tight_layout()
 plt.show()
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 """
 骨架提取與分水嶺算法
@@ -1209,15 +1214,15 @@ morphology子模塊提供了兩個函數用于骨架提取，分別是Skeletoniz
 輸入和輸出都是一幅二值圖像。
 """
 
-#創建一個二值圖像用于測試
+# 創建一個二值圖像用于測試
 image = np.zeros((400, 400))
 
-#生成目標對象1(白色U型)
+# 生成目標對象1(白色U型)
 image[10:-10, 10:100] = 1
 image[-100:-10, 10:-10] = 1
 image[10:-10, -100:-10] = 1
 
-#生成目標對象2（X型）
+# 生成目標對象2（X型）
 rs, cs = skimage.draw.line(250, 150, 10, 280)
 for i in range(10):
     image[rs + i, cs] = 1
@@ -1225,26 +1230,26 @@ rs, cs = skimage.draw.line(10, 150, 250, 280)
 for i in range(20):
     image[rs + i, cs] = 1
 
-#生成目標對象3（O型）
+# 生成目標對象3（O型）
 ir, ic = np.indices(image.shape)
-circle1 = (ic - 135)**2 + (ir - 150)**2 < 30**2
-circle2 = (ic - 135)**2 + (ir - 150)**2 < 20**2
+circle1 = (ic - 135) ** 2 + (ir - 150) ** 2 < 30**2
+circle2 = (ic - 135) ** 2 + (ir - 150) ** 2 < 20**2
 image[circle1] = 1
 image[circle2] = 0
 
-#實施骨架算法
-skeleton =skimage.morphology.skeletonize(image)
+# 實施骨架算法
+skeleton = skimage.morphology.skeletonize(image)
 
-#顯示結果
+# 顯示結果
 fig, (ax1, ax2) = plt.subplots(nrows=1, ncols=2, figsize=(8, 4))
 
 ax1.imshow(image, cmap=plt.cm.gray)
-ax1.axis('off')
-ax1.set_title('原圖')
+ax1.axis("off")
+ax1.set_title("原圖")
 
 ax2.imshow(skeleton, cmap=plt.cm.gray)
-ax2.axis('off')
-ax2.set_title('骨架skeleton')
+ax2.axis("off")
+ax2.set_title("骨架skeleton")
 
 fig.tight_layout()
 plt.show()
@@ -1289,30 +1294,32 @@ return_distance: bool型值，默認為False. 如果為True, 則除了返回骨�
 
 import scipy.ndimage as ndi
 
-#編寫一個函數，生成測試圖像
+
+# 編寫一個函數，生成測試圖像
 def microstructure(l=256):
     n = 5
     x, y = np.ogrid[0:l, 0:l]
     mask = np.zeros((l, l))
     points = l * np.random.rand(2, n**2)
     mask[(points[0]).astype(np.int), (points[1]).astype(np.int)] = 1
-    mask = ndi.gaussian_filter(mask, sigma=l/(4.*n))
+    mask = ndi.gaussian_filter(mask, sigma=l / (4.0 * n))
     return mask > mask.mean()
 
-data = microstructure(l=64) #生成測試圖像
 
-#計算中軸和距離變換值
+data = microstructure(l=64)  # 生成測試圖像
+
+# 計算中軸和距離變換值
 skel, distance = skimage.morphology.medial_axis(data, return_distance=True)
 
-#中軸上的點到背景像素點的距離
+# 中軸上的點到背景像素點的距離
 dist_on_skel = distance * skel
 
 fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(8, 4))
-ax1.imshow(data, cmap=plt.cm.gray, interpolation='nearest')
-#用光譜色顯示中軸
-#ax2.imshow(dist_on_skel, cmap=plt.cm.spectral, interpolation='nearest')
-ax2.imshow(dist_on_skel, interpolation='nearest')
-ax2.contour(data, [0.5], colors='w')  #顯示輪廓線
+ax1.imshow(data, cmap=plt.cm.gray, interpolation="nearest")
+# 用光譜色顯示中軸
+# ax2.imshow(dist_on_skel, cmap=plt.cm.spectral, interpolation='nearest')
+ax2.imshow(dist_on_skel, interpolation="nearest")
+ax2.contour(data, [0.5], colors="w")  # 顯示輪廓線
 
 fig.tight_layout()
 plt.show()
@@ -1331,22 +1338,23 @@ plt.show()
 
 from scipy import ndimage as ndi
 
-#創建兩個帶有重疊圓的圖像
+# 創建兩個帶有重疊圓的圖像
 x, y = np.indices((80, 80))
 x1, y1, x2, y2 = 28, 28, 44, 52
 r1, r2 = 16, 20
-mask_circle1 = (x - x1)**2 + (y - y1)**2 < r1**2
-mask_circle2 = (x - x2)**2 + (y - y2)**2 < r2**2
+mask_circle1 = (x - x1) ** 2 + (y - y1) ** 2 < r1**2
+mask_circle2 = (x - x2) ** 2 + (y - y2) ** 2 < r2**2
 image = np.logical_or(mask_circle1, mask_circle2)
 
-#現在我們用分水嶺算法分離兩個圓
-distance = ndi.distance_transform_edt(image) #距離變換
-#local_maxi = skimage.feature.peak_local_max(distance, indices=False, footprint=np.ones((3, 3)),
+# 現在我們用分水嶺算法分離兩個圓
+distance = ndi.distance_transform_edt(image)  # 距離變換
+# local_maxi = skimage.feature.peak_local_max(distance, indices=False, footprint=np.ones((3, 3)),
 #                            labels=image)   #尋找峰值
-local_maxi =skimage.feature.peak_local_max(distance, footprint=np.ones((3, 3)),
-                            labels=image)   #尋找峰值
+local_maxi = skimage.feature.peak_local_max(
+    distance, footprint=np.ones((3, 3)), labels=image
+)  # 尋找峰值
 
-markers = ndi.label(local_maxi)[0] #初始標記點
+markers = ndi.label(local_maxi)[0]  # 初始標記點
 """沒有watershed
 labels = skimage.morphology.watershed(-distance, markers, mask=image) #基于距離變換的分水嶺算法
 
@@ -1411,7 +1419,7 @@ plt.show()
 
 """
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 """
 圖像中的像素訪問
@@ -1429,18 +1437,18 @@ pip install scipy
 
 """
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 from PIL import Image
 from PIL import ImageFilter
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/elephant.jpg'
+filename = "C:/_git/vcs/_1.data/______test_files1/elephant.jpg"
 
 print("------------------------------------------------------------")  # 60個
 
 from scipy.ndimage import gaussian_filter
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 print("de-noise")
 
@@ -1448,34 +1456,40 @@ import scipy.misc
 import scipy.signal
 import scipy.ndimage
 
-#中值濾波函數
+
+# 中值濾波函數
 def medium_filter(im, x, y, step):
-    sum_s=[]
-    for k in range(-int(step/2),int(step/2)+1):
-        for m in range(-int(step/2),int(step/2)+1):
-            sum_s.append(im[x+k][y+m])
+    sum_s = []
+    for k in range(-int(step / 2), int(step / 2) + 1):
+        for m in range(-int(step / 2), int(step / 2) + 1):
+            sum_s.append(im[x + k][y + m])
     sum_s.sort()
-    return sum_s[(int(step*step/2)+1)]
-#均值濾波函數
+    return sum_s[(int(step * step / 2) + 1)]
+
+
+# 均值濾波函數
 def mean_filter(im, x, y, step):
     sum_s = 0
-    for k in range(-int(step/2),int(step/2)+1):
-        for m in range(-int(step/2),int(step/2)+1):
-            sum_s += im[x+k][y+m] / (step*step)
+    for k in range(-int(step / 2), int(step / 2) + 1):
+        for m in range(-int(step / 2), int(step / 2) + 1):
+            sum_s += im[x + k][y + m] / (step * step)
     return sum_s
+
 
 def convert_2d(r):
     n = 3
     # 3*3濾波器，每個系數都是1/9
     window = np.ones((n, n)) / n**2
-    #使用濾波器卷積圖像
+    # 使用濾波器卷積圖像
     # mode = same 表示輸出尺寸等于輸入尺寸
     # boundary 表示采用對稱邊界條件處理圖像邊緣
-    s = scipy.signal.convolve2d(r, window, mode='same', boundary='symm')
+    s = scipy.signal.convolve2d(r, window, mode="same", boundary="symm")
     return s.astype(np.uint8)
-#添加噪聲
+
+
+# 添加噪聲
 def add_salt_noise(image):
-    rows, cols, dims = image.shape 
+    rows, cols, dims = image.shape
     R = np.mat(image[:, :, 0])
     G = np.mat(image[:, :, 1])
     B = np.mat(image[:, :, 2])
@@ -1483,7 +1497,7 @@ def add_salt_noise(image):
     Grey_gs = R * 0.299 + G * 0.587 + B * 0.114
     snr = 0.9
     mu = 0
-    sigma = 0.12    
+    sigma = 0.12
     noise_num = int((1 - snr) * rows * cols)
 
     for i in range(noise_num):
@@ -1492,49 +1506,50 @@ def add_salt_noise(image):
         if random.randint(0, 1) == 0:
             Grey_sp[rand_x, rand_y] = 0
         else:
-            Grey_sp[rand_x, rand_y] = 255    
+            Grey_sp[rand_x, rand_y] = 255
     Grey_gs = Grey_gs + np.random.normal(0, 48, Grey_gs.shape)
     Grey_gs = Grey_gs - np.full(Grey_gs.shape, np.min(Grey_gs))
     Grey_gs = Grey_gs * 255 / np.max(Grey_gs)
     Grey_gs = Grey_gs.astype(np.uint8)
-    
+
     # 中值濾波
     Grey_sp_mf = scipy.ndimage.median_filter(Grey_sp, (8, 8))
     Grey_gs_mf = scipy.ndimage.median_filter(Grey_gs, (8, 8))
-    
+
     # 均值濾波
     n = 3
-    window = np.ones((n, n)) / n ** 2
+    window = np.ones((n, n)) / n**2
     Grey_sp_me = convert_2d(Grey_sp)
     Grey_gs_me = convert_2d(Grey_gs)
 
     plt.subplot(231)
-    plt.title('椒鹽噪聲')
-    plt.imshow(Grey_sp, cmap='gray')
+    plt.title("椒鹽噪聲")
+    plt.imshow(Grey_sp, cmap="gray")
 
     plt.subplot(232)
-    plt.title('高斯噪聲')
-    plt.imshow(Grey_gs, cmap='gray')
+    plt.title("高斯噪聲")
+    plt.imshow(Grey_gs, cmap="gray")
 
     plt.subplot(233)
-    plt.title('椒鹽噪聲的中值濾波')
-    plt.imshow(Grey_sp_mf, cmap='gray')
+    plt.title("椒鹽噪聲的中值濾波")
+    plt.imshow(Grey_sp_mf, cmap="gray")
 
     plt.subplot(234)
-    plt.title('高斯噪聲的中值濾波')
-    plt.imshow(Grey_gs_mf, cmap='gray')
+    plt.title("高斯噪聲的中值濾波")
+    plt.imshow(Grey_gs_mf, cmap="gray")
 
     plt.subplot(235)
-    plt.title('椒鹽噪聲的均值濾波')
-    plt.imshow(Grey_sp_me, cmap='gray')
+    plt.title("椒鹽噪聲的均值濾波")
+    plt.imshow(Grey_sp_me, cmap="gray")
 
     plt.subplot(236)
-    plt.title('高斯噪聲的均值濾波')
-    plt.imshow(Grey_gs_me, cmap='gray')
+    plt.title("高斯噪聲的均值濾波")
+    plt.imshow(Grey_gs_me, cmap="gray")
 
     plt.show()
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.png'
+
+filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.png"
 
 plt.figure(
     num="影像處理",
@@ -1556,10 +1571,10 @@ print("PIL_derivative")
 
 import scipy.ndimage
 
-filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
 
 # 檔案 => PIL影像 => 灰階 => numpy陣列
-image=np.array(Image.open(filename).convert('L'))
+image = np.array(Image.open(filename).convert("L"))
 
 plt.figure(
     num="PIL_derivative",
@@ -1571,28 +1586,28 @@ plt.figure(
     frameon=True,
 )
 
-plt.gray()  #不使用顏色信息, 將圖像以灰階方式顯示
+plt.gray()  # 不使用顏色信息, 將圖像以灰階方式顯示
 
 plt.subplot(141)
-plt.title(u'(a)原圖')
+plt.title("(a)原圖")
 plt.imshow(image)
 # sobel算子
-imagex=np.zeros(image.shape)
-scipy.ndimage.sobel(image,1,imagex)
+imagex = np.zeros(image.shape)
+scipy.ndimage.sobel(image, 1, imagex)
 
 plt.subplot(142)
-plt.title(u'(b)x方向差分')
+plt.title("(b)x方向差分")
 plt.imshow(imagex)
-imagey=np.zeros(image.shape)
-scipy.ndimage.sobel(image,0,imagey)
+imagey = np.zeros(image.shape)
+scipy.ndimage.sobel(image, 0, imagey)
 
 plt.subplot(143)
-plt.title(u'(c)y方向差分')
+plt.title("(c)y方向差分")
 plt.imshow(imagey)
-mag=255-np.sqrt(imagex**2+imagey**2)
+mag = 255 - np.sqrt(imagex**2 + imagey**2)
 
 plt.subplot(144)
-plt.title(u'(d)梯度幅值')
+plt.title("(d)梯度幅值")
 plt.imshow(mag)
 
 plt.show()
@@ -1604,10 +1619,10 @@ print("PIL_fuzzy")
 import scipy.ndimage
 from matplotlib.font_manager import FontProperties
 
-filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
 
 # 檔案 => PIL影像 => 灰階 => numpy陣列
-image=np.array(Image.open(filename).convert('L'))
+image = np.array(Image.open(filename).convert("L"))
 
 plt.figure(
     num="PIL_fuzzy",
@@ -1619,23 +1634,23 @@ plt.figure(
     frameon=True,
 )
 
-plt.gray()  #不使用顏色信息, 將圖像以灰階方式顯示
+plt.gray()  # 不使用顏色信息, 將圖像以灰階方式顯示
 
 plt.subplot(141)
-plt.title(u'原圖')
+plt.title("原圖")
 plt.imshow(image)
 
-for bi,blur in enumerate([2,4,8]):
-    image2=np.zeros(image.shape)
-    image2=scipy.ndimage.gaussian_filter(image,blur)
-    image2=np.uint8(image2)
-    imageNum=str(blur)
-    plt.subplot(1,4,2+bi)
-    plt.title(u'標準差為'+imageNum)
+for bi, blur in enumerate([2, 4, 8]):
+    image2 = np.zeros(image.shape)
+    image2 = scipy.ndimage.gaussian_filter(image, blur)
+    image2 = np.uint8(image2)
+    imageNum = str(blur)
+    plt.subplot(1, 4, 2 + bi)
+    plt.title("標準差為" + imageNum)
     plt.imshow(image2)
 
-#如果是彩色圖像，則分別對三個通道進行模糊
-#for bi, blur in enumerate([2,4,8]):
+# 如果是彩色圖像，則分別對三個通道進行模糊
+# for bi, blur in enumerate([2,4,8]):
 #  image2 = np.zeros(image.shape)
 #  for i in range(3):
 #    image2[:, :, i] = filters.gaussian_filter(image[:, :, i], blur)
@@ -1651,23 +1666,29 @@ print("PIL_gaussian")
 
 import scipy.ndimage
 
+
 def imx(image, sigma):
     imagex = np.zeros(image.shape)
     scipy.ndimage.gaussian_filter(image, sigma, (0, 1), imagex)
     return imagex
+
+
 def imy(image, sigma):
     imagey = np.zeros(image.shape)
     scipy.ndimage.gaussian_filter(image, sigma, (1, 0), imagey)
     return imagey
+
+
 def mag(image, sigma):
     # 還有gaussian_gradient_magnitude()
-    imagemag = 255 - np.sqrt(imagex ** 2 + imagey ** 2)
+    imagemag = 255 - np.sqrt(imagex**2 + imagey**2)
     return imagemag
 
-filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+
+filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
 
 # 檔案 => PIL影像 => 灰階 => numpy陣列
-image = np.array(Image.open(filename).convert('L'))
+image = np.array(Image.open(filename).convert("L"))
 
 plt.figure(
     num="PIL_gaussian",
@@ -1679,26 +1700,26 @@ plt.figure(
     frameon=True,
 )
 
-plt.gray()  #不使用顏色信息, 將圖像以灰階方式顯示
+plt.gray()  # 不使用顏色信息, 將圖像以灰階方式顯示
 sigma = [2, 5, 10]
-for i in  sigma:
-    plt.subplot(3, 4, 4*(sigma.index(i))+1)
+for i in sigma:
+    plt.subplot(3, 4, 4 * (sigma.index(i)) + 1)
     plt.imshow(image)
-    imagex=imx(image, i)
-    plt.subplot(3, 4, 4*(sigma.index(i))+2)
+    imagex = imx(image, i)
+    plt.subplot(3, 4, 4 * (sigma.index(i)) + 2)
     plt.imshow(imagex)
-    imagey=imy(image, i)
-    plt.subplot(3, 4, 4*(sigma.index(i))+3)
+    imagey = imy(image, i)
+    plt.subplot(3, 4, 4 * (sigma.index(i)) + 3)
     plt.imshow(imagey)
-    imagemag=mag(image, i)
-    plt.subplot(3, 4, 4*(sigma.index(i))+4)
+    imagemag = mag(image, i)
+    plt.subplot(3, 4, 4 * (sigma.index(i)) + 4)
     plt.imshow(imagemag)
 
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1706,7 +1727,7 @@ print("PIL_opening")
 
 from PIL import Image
 
-#measurements模塊實現二值圖像的計數和度量功能，morphology模塊實現形態學操作
+# measurements模塊實現二值圖像的計數和度量功能，morphology模塊實現形態學操作
 import scipy.ndimage
 
 # 加載圖像和閾值，以確保它是二進制的
@@ -1722,32 +1743,34 @@ plt.figure(
 )
 
 # 檔案 => PIL影像 => 灰階 => numpy陣列
-image = np.array(Image.open('data/castle.jpg').convert('L'))
+image = np.array(Image.open("data/castle.jpg").convert("L"))
 
-plt.gray()  #不使用顏色信息, 將圖像以灰階方式顯示
+plt.gray()  # 不使用顏色信息, 將圖像以灰階方式顯示
 
 plt.subplot(221)
 plt.imshow(image)
-plt.title(u'原圖')
-image = (image < 128)
-labels, nbr_objects = scipy.ndimage.label(image) #圖像的灰度值表示對象的標簽
-print ("Number of objects:", nbr_objects)
+plt.title("原圖")
+image = image < 128
+labels, nbr_objects = scipy.ndimage.label(image)  # 圖像的灰度值表示對象的標簽
+print("Number of objects:", nbr_objects)
 
 plt.subplot(222)
 plt.imshow(labels)
-plt.title(u'標記後的圖')
-#形態學——使物體分離更好
-image_open = scipy.ndimage.binary_opening(image, np.ones((9, 5)), iterations=4) #開操作，第二個參數為結構元素，iterations覺定執行該操作的次數
+plt.title("標記後的圖")
+# 形態學——使物體分離更好
+image_open = scipy.ndimage.binary_opening(
+    image, np.ones((9, 5)), iterations=4
+)  # 開操作，第二個參數為結構元素，iterations覺定執行該操作的次數
 
 plt.subplot(223)
 plt.imshow(image_open)
-plt.title(u'開運算後的圖像')
+plt.title("開運算後的圖像")
 labels_open, nbr_objects_open = scipy.ndimage.label(image_open)
-print ("Number of objects:", nbr_objects_open)
+print("Number of objects:", nbr_objects_open)
 
 plt.subplot(224)
 plt.imshow(labels_open)
-plt.title(u'開運算後進行標記後的圖像')
+plt.title("開運算後進行標記後的圖像")
 
 plt.show()
 
@@ -1755,12 +1778,12 @@ print("------------------------------------------------------------")  # 60個
 
 print("PIL_PCA")
 
-#measurements模塊實現二值圖像的計數和度量功能，morphology模塊實現形態學操作
+# measurements模塊實現二值圖像的計數和度量功能，morphology模塊實現形態學操作
 import scipy.ndimage
 
 # 加載圖像和閾值，以確保它是二進制的
 # 檔案 => PIL影像 => 灰階 => numpy陣列
-image = np.array(Image.open('data/castle.jpg').convert('L'))
+image = np.array(Image.open("data/castle.jpg").convert("L"))
 
 plt.figure(
     num="PIL_PCA",
@@ -1772,30 +1795,32 @@ plt.figure(
     frameon=True,
 )
 
-plt.gray()  #不使用顏色信息, 將圖像以灰階方式顯示
+plt.gray()  # 不使用顏色信息, 將圖像以灰階方式顯示
 
 plt.subplot(221)
 plt.imshow(image)
-plt.title(u'原圖')
-image = (image < 128)
-labels, nbr_objects = scipy.ndimage.label(image) #圖像的灰度值表示對象的標簽
-print ("Number of objects:", nbr_objects)
+plt.title("原圖")
+image = image < 128
+labels, nbr_objects = scipy.ndimage.label(image)  # 圖像的灰度值表示對象的標簽
+print("Number of objects:", nbr_objects)
 
 plt.subplot(222)
 plt.imshow(labels)
-plt.title(u'標記後的圖')
-#形態學——使物體分離更好
-image_open = scipy.ndimage.binary_opening(image, np.ones((9, 5)), iterations=4) #開操作，第二個參數為結構元素，iterations覺定執行該操作的次數
+plt.title("標記後的圖")
+# 形態學——使物體分離更好
+image_open = scipy.ndimage.binary_opening(
+    image, np.ones((9, 5)), iterations=4
+)  # 開操作，第二個參數為結構元素，iterations覺定執行該操作的次數
 
 plt.subplot(223)
 plt.imshow(image_open)
-plt.title(u'開運算後的圖像')
+plt.title("開運算後的圖像")
 labels_open, nbr_objects_open = scipy.ndimage.label(image_open)
-print ("Number of objects:", nbr_objects_open)
+print("Number of objects:", nbr_objects_open)
 
 plt.subplot(224)
 plt.imshow(labels_open)
-plt.title(u'開運算後進行標記後的圖像')
+plt.title("開運算後進行標記後的圖像")
 
 plt.show()
 
@@ -1804,14 +1829,15 @@ print("------------------------------------------------------------")  # 60個
 print("PIL_realROF")
 
 import scipy.ndimage
-#from scipy.misc import imsave
-#from PCV.tools import rof
+
+# from scipy.misc import imsave
+# from PCV.tools import rof
 
 # 檔案 => PIL影像 => 灰階 => numpy陣列
-image = np.array(Image.open('data/girl.jpg').convert('L'))
+image = np.array(Image.open("data/girl.jpg").convert("L"))
 
-#U,T = rof.denoise(image,image)
-G = scipy.ndimage.gaussian_filter(image,10)
+# U,T = rof.denoise(image,image)
+G = scipy.ndimage.gaussian_filter(image, 10)
 
 plt.figure(
     num="PIL_realROF",
@@ -1823,22 +1849,22 @@ plt.figure(
     frameon=True,
 )
 
-plt.gray()  #不使用顏色信息, 將圖像以灰階方式顯示
+plt.gray()  # 不使用顏色信息, 將圖像以灰階方式顯示
 
-plt.subplot(1,3,1)
+plt.subplot(1, 3, 1)
 plt.imshow(image)
-#plt.axis('equal')
-plt.title(u'原噪聲圖像')
+# plt.axis('equal')
+plt.title("原噪聲圖像")
 
-plt.subplot(1,3,2)
+plt.subplot(1, 3, 2)
 plt.imshow(G)
-#plt.axis('equal')
-plt.title(u'高斯模糊後的圖像')
+# plt.axis('equal')
+plt.title("高斯模糊後的圖像")
 
-plt.subplot(1,3,3)
-#plt.imshow(U)
-#plt.axis('equal')
-plt.title(u'ROF降噪後的圖像')
+plt.subplot(1, 3, 3)
+# plt.imshow(U)
+# plt.axis('equal')
+plt.title("ROF降噪後的圖像")
 
 plt.show()
 
@@ -1847,17 +1873,18 @@ print("------------------------------------------------------------")  # 60個
 print("PIL_ROF")
 
 import scipy.ndimage
-#from scipy.misc import imsave
-#from PCV.tools import rof
+
+# from scipy.misc import imsave
+# from PCV.tools import rof
 
 # 創建合成圖像與噪聲
-image = np.zeros((500,500))
-image[100:400,100:400] = 128
-image[200:300,200:300] = 255
-image = image + 30*np.random.standard_normal((500,500))
-#roll()函數：循環滾動數組中的元素，計算領域元素的差異。linalg.norm()函數可以衡量兩個數組見得差異
-#U,T = rof.denoise(image,image)  
-G = scipy.ndimage.gaussian_filter(image,10)
+image = np.zeros((500, 500))
+image[100:400, 100:400] = 128
+image[200:300, 200:300] = 255
+image = image + 30 * np.random.standard_normal((500, 500))
+# roll()函數：循環滾動數組中的元素，計算領域元素的差異。linalg.norm()函數可以衡量兩個數組見得差異
+# U,T = rof.denoise(image,image)
+G = scipy.ndimage.gaussian_filter(image, 10)
 
 plt.figure(
     num="PIL_ROF",
@@ -1869,34 +1896,34 @@ plt.figure(
     frameon=True,
 )
 
-plt.gray()  #不使用顏色信息, 將圖像以灰階方式顯示
+plt.gray()  # 不使用顏色信息, 將圖像以灰階方式顯示
 
-plt.subplot(1,3,1)
+plt.subplot(1, 3, 1)
 plt.imshow(image)
-#plt.axis('equal')
-plt.title(u'原噪聲圖像')
+# plt.axis('equal')
+plt.title("原噪聲圖像")
 
-plt.subplot(1,3,2)
+plt.subplot(1, 3, 2)
 plt.imshow(G)
-#plt.axis('equal')
-plt.title(u'高斯模糊後的圖像')
+# plt.axis('equal')
+plt.title("高斯模糊後的圖像")
 
-plt.subplot(1,3,3)
-#plt.imshow(U)
-#plt.axis('equal')
-plt.title(u'ROF降噪後的圖像')
+plt.subplot(1, 3, 3)
+# plt.imshow(U)
+# plt.axis('equal')
+plt.title("ROF降噪後的圖像")
 
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-filename = 'C:/_git/vcs/_4.python/_data/elephant.jpg'
+filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
 
-im = np.array(Image.open(filename).convert('L'))
+im = np.array(Image.open(filename).convert("L"))
 plt.gray()
-plt.subplot(2,2,1)
-plt.axis('off')
-plt.title('Original Image')
+plt.subplot(2, 2, 1)
+plt.axis("off")
+plt.title("Original Image")
 plt.imshow(im)
 
 for bi, blur in enumerate([2, 5, 10]):
@@ -1906,31 +1933,28 @@ for bi, blur in enumerate([2, 5, 10]):
     im2 = np.uint8(im2)
     imNum = str(blur)
     plt.subplot(2, 2, 2 + bi)
-    plt.axis('off')
-    plt.title('GaussVar = ' + imNum)
+    plt.axis("off")
+    plt.title("GaussVar = " + imNum)
     plt.imshow(im2)
 
 plt.show()
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 image = skimage.color.rgb2gray(skimage.data.chelsea())
 hogVec, hogVis = skimage.feature.hog(image, visualize=True)
 
-fig, ax = plt.subplots(1, 2, figsize=(12, 6),
-                       subplot_kw=dict(xticks=[],
-                                       yticks=[]))
-ax[0].imshow(image, cmap='gray')
-ax[0].set_title('input image')
+fig, ax = plt.subplots(1, 2, figsize=(12, 6), subplot_kw=dict(xticks=[], yticks=[]))
+ax[0].imshow(image, cmap="gray")
+ax[0].set_title("input image")
 ax[1].imshow(hogVis)
 ax[1].set_title("extarcting features from image")
 plt.show()
 
 
+print("------------------------------------------------------------")  # 60個
 
-print('------------------------------------------------------------')	#60個
-
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
@@ -1938,4 +1962,3 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
-

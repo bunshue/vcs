@@ -45,9 +45,11 @@
             this.rb0 = new System.Windows.Forms.RadioButton();
             this.bt_clear = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.lb_check_list = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
+            this.lb_check_list = new System.Windows.Forms.Label();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
             this.digitalDisplayControl1 = new Owf.Controls.DigitalDisplayControl();
             this.statusStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -76,7 +78,7 @@
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(129, 17);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(128, 17);
             this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
             // 
             // richTextBox1
@@ -264,17 +266,6 @@
             this.groupBox2.TabIndex = 52;
             this.groupBox2.TabStop = false;
             // 
-            // lb_check_list
-            // 
-            this.lb_check_list.AutoSize = true;
-            this.lb_check_list.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_check_list.ForeColor = System.Drawing.Color.Red;
-            this.lb_check_list.Location = new System.Drawing.Point(6, 30);
-            this.lb_check_list.Name = "lb_check_list";
-            this.lb_check_list.Size = new System.Drawing.Size(110, 24);
-            this.lb_check_list.TabIndex = 67;
-            this.lb_check_list.Text = "check_list";
-            // 
             // button2
             // 
             this.button2.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
@@ -297,6 +288,39 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
+            // lb_check_list
+            // 
+            this.lb_check_list.AutoSize = true;
+            this.lb_check_list.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_check_list.ForeColor = System.Drawing.Color.Red;
+            this.lb_check_list.Location = new System.Drawing.Point(6, 30);
+            this.lb_check_list.Name = "lb_check_list";
+            this.lb_check_list.Size = new System.Drawing.Size(110, 24);
+            this.lb_check_list.TabIndex = 67;
+            this.lb_check_list.Text = "check_list";
+            // 
+            // button4
+            // 
+            this.button4.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button4.Location = new System.Drawing.Point(680, 37);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(80, 80);
+            this.button4.TabIndex = 8;
+            this.button4.Text = "我知道了";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // button5
+            // 
+            this.button5.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button5.Location = new System.Drawing.Point(766, 37);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(80, 80);
+            this.button5.TabIndex = 53;
+            this.button5.Text = "離開";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
             // digitalDisplayControl1
             // 
             this.digitalDisplayControl1.BackColor = System.Drawing.Color.Transparent;
@@ -313,6 +337,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1016, 461);
+            this.Controls.Add(this.button5);
+            this.Controls.Add(this.button4);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.groupBox1);
@@ -358,6 +384,8 @@
         private System.Windows.Forms.Label lb_check_list;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button5;
     }
 }
 

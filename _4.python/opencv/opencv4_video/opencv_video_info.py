@@ -1,5 +1,4 @@
 import cv2
-import time
 import urllib
 import urllib.request  # 用來建立請求
 
@@ -8,6 +7,7 @@ print("------------------------------------------------------------")  # 60個
 # 共同
 import os
 import sys
+import time
 import math
 import random
 import numpy as np
@@ -24,6 +24,26 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
+video_filename = 'C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4'
+
+cap = cv2.VideoCapture(video_filename)
+
+width = cap.get(cv2.CAP_PROP_FRAME_WIDTH)
+height = cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
+print("影格尺寸:", width, "x", height)
+
+fourcc = int(cap.get(cv2.CAP_PROP_FOURCC))
+codec = (chr(fourcc&0xFF)+chr((fourcc>>8)&0xFF)+
+        chr((fourcc>>16)&0xFF)+chr((fourcc>>24)&0xFF))
+print("Codec編碼:", codec)
+
+
+
+
+
+sys.exit()
+
+print("------------------------------------------------------------")  # 60個
 
 def show_video_info(video_filename):
     video = cv2.VideoCapture(video_filename)
@@ -313,8 +333,6 @@ cap.release()
 print("------------------------------------------------------------")  # 60個
 
 print("取得影片參數")
-
-import cv2
 
 VideoCapture_parameters = [
     "視頻文件的當前位置（播放）以毫秒為單位",

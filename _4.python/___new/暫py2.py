@@ -1,3 +1,16 @@
+
+import matplotlib.pyplot as plt
+也就是說，我們繪圖實際上用的是matplotlib包的pyplot模塊。
+
+
+print("字串處理 技巧")
+
+print("教育部統計處資料 很多")
+url = "https://stats.moe.gov.tw/files/detail/{}/{}_student.csv"
+for year in range(106, 110):
+    print(url.format(year, year))
+
+
  
         mode = os.lstat(long_filename).st_mode
         if stat.S_ISDIR(mode):
@@ -14,6 +27,10 @@
 2. + 分辨檔案型態
 3. + 過濾檔案大小
 4. + 過濾影片格式 > 1080p, < 720p 者
+
+搜尋模式:
+'全部', '檔案大小', '影像大小', '影片時長', '相似檔名', '零容量檔案'
+
 
 
 """
