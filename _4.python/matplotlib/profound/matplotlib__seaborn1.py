@@ -30,7 +30,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 # 共同參數
 x = np.linspace(0, 2 * np.pi, 30)
 y = np.sin(x)
@@ -218,9 +218,8 @@ sns.histplot(np.random.binomial(n=5, p=0.75, size=1000), kde=False)
 plt.title("二項式分布 Binomial")
 
 plt.show()
-'''
-print("------------------------------------------------------------")  # 60個
 
+print("------------------------------------------------------------")  # 60個
 
 data = pd.read_csv("_data/president_heights.csv")
 print(data.head())
@@ -250,6 +249,124 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
+x = [0,0.5,1,1.5,2,2.5,3,3.5,4,4.5,5,
+     5.5,6,6.5,7,7.5,8,8.5,9,9.5,10]
+sinus = [math.sin(v) for v in x]
+cosinus = [math.cos(v) for v in x]
+
+sns.set()
+fig, axes = plt.subplots(1,2, figsize=(6,4))
+ax1 = sns.lineplot(x=x, y=sinus, ax=axes[0])
+ax2 = sns.scatterplot(x=x, y=cosinus, ax=axes[1])
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+ 
+x = [0,0.5,1,1.5,2,2.5,3,3.5,4,4.5,5,
+     5.5,6,6.5,7,7.5,8,8.5,9,9.5,10]
+sinus = [math.sin(v) for v in x]
+cosinus = [math.cos(v) for v in x]
+
+df = pd.DataFrame()
+df["x"] = x
+df["sin"]= sinus
+df["cos"] = cosinus
+print(df.head())
+
+df2 = pd.melt(df, id_vars=['x'], value_vars=['sin', 'cos'])
+print(df2.head())
+
+sns.set()
+sns.relplot(x="x", y="value", kind="scatter", col="variable", data=df2)
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+x = [0,0.5,1,1.5,2,2.5,3,3.5,4,4.5,5,
+     5.5,6,6.5,7,7.5,8,8.5,9,9.5,10]
+sinus = [math.sin(v) for v in x]
+
+sns.set_style("whitegrid")
+sns.lineplot(x=x, y=sinus)
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+x = [0,0.5,1,1.5,2,2.5,3,3.5,4,4.5,5,
+     5.5,6,6.5,7,7.5,8,8.5,9,9.5,10]
+sinus = [math.sin(v) for v in x]
+
+sns.set_style("whitegrid")
+sns.lineplot(x=x, y=sinus)
+sns.despine()
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+x = [0,0.5,1,1.5,2,2.5,3,3.5,4,4.5,5,
+     5.5,6,6.5,7,7.5,8,8.5,9,9.5,10]
+sinus = [math.sin(v) for v in x]
+
+sns.set_style("darkgrid", {"axes.axisbelow": False})
+sns.lineplot(x=x, y=sinus)
+
+plt.show()
+
+print(sns.axes_style())
+
+print("------------------------------------------------------------")  # 60個
+
+x = [0,0.5,1,1.5,2,2.5,3,3.5,4,4.5,5,
+     5.5,6,6.5,7,7.5,8,8.5,9,9.5,10]
+sinus = [math.sin(v) for v in x]
+
+plt.rcParams["axes.unicode_minus"] = False
+sns.set_style("darkgrid", {"axes.axisbelow": False,
+                           "font.sans-serif":['Microsoft JhengHei']})
+sns.lineplot(x=x, y=sinus)
+plt.title("Sinus三角函數的波型")
+plt.xlim(-2, 12)
+plt.ylim(-2, 2)
+plt.xlabel("x")
+plt.ylabel("sin(x)")
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+x = [0,0.5,1,1.5,2,2.5,3,3.5,4,4.5,5,
+     5.5,6,6.5,7,7.5,8,8.5,9,9.5,10]
+sinus = [math.sin(v) for v in x]
+cosinus = [math.cos(v) for v in x]
+
+df = pd.DataFrame()
+df["x"] = x
+df["sin"]= sinus
+df["cos"] = cosinus
+print(df.head())
+
+df2 = pd.melt(df, id_vars=['x'], value_vars=['sin', 'cos'])
+print(df2.head())
+
+sns.set()
+sns.relplot(x="x", y="value", kind="scatter", col="variable",
+            height=4, aspect=1.2, data=df2)
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+df = pd.read_csv("_data/Kobe_stats.csv")
+data = pd.DataFrame()
+data["Season"] = pd.to_datetime(df["Season"])
+data["PTS"] = df["PTS"]
+
+sns.set()
+sns.relplot(x="Season", y="PTS", data=data, kind="line")
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 

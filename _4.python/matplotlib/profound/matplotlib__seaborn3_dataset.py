@@ -7,6 +7,16 @@
 
 print("------------------------------------------------------------")  # 60個
 
+import seaborn as sns  # 海生, 自動把圖畫得比較好看
+
+import ssl
+ssl._create_default_https_context = ssl._create_stdlib_context
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
 # 共同
 import os
 import sys
@@ -27,7 +37,344 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
-import seaborn as sns  # 海生, 自動把圖畫得比較好看
+df = sns.load_dataset("tips")  # 示例中的基本數據
+print(df.head())
+
+print("------------------------------------------------------------")  # 60個
+
+print(sns.get_dataset_names())
+
+print("------------------------------------------------------------")  # 60個
+
+df = sns.load_dataset("tips")  # 示例中的基本數據
+
+sns.set()
+sns.relplot(x="total_bill", y="tip", data=df)
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+df = sns.load_dataset("tips")  # 示例中的基本數據
+
+sns.set()
+sns.relplot(x="total_bill", y="tip", hue="smoker", data=df)
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+df = sns.load_dataset("tips")  # 示例中的基本數據
+
+sns.set()
+sns.relplot(x="total_bill", y="tip", hue="smoker",
+            style="smoker", data=df)
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+df = sns.load_dataset("fmri")  # 示例中的基本數據
+
+sns.set()
+sns.relplot(x="timepoint", y="signal", data=df, kind="line")
+
+sns.relplot(x="timepoint", y="signal", ci=None, data=df, kind="line")
+sns.relplot(x="timepoint", y="signal", ci="sd", data=df, kind="line")
+
+sns.relplot(x="timepoint", y="signal", 
+            estimator=None, data=df, kind="line")
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+df = sns.load_dataset("tips")  # 示例中的基本數據
+
+sns.set()
+sns.histplot(df["total_bill"], kde=False)
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+df = sns.load_dataset("tips")  # 示例中的基本數據
+
+sns.set()
+sns.histplot(df["total_bill"], kde=False)
+sns.histplot(df["total_bill"], kde=False, bins=20, color="red")
+sns.histplot(df["total_bill"], kde=False, bins=30, color="green")
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+df = sns.load_dataset("tips")  # 示例中的基本數據
+
+sns.set()
+sns.kdeplot(df["total_bill"], label="default")
+sns.kdeplot(df["total_bill"], bw_adjust=2, label="bw_adjust: 2")
+sns.kdeplot(df["total_bill"], bw_adjust=5, label="bw_adjust: 5")
+plt.legend()
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+df = sns.load_dataset("tips")  # 示例中的基本數據
+
+sns.set()
+sns.histplot(df["total_bill"], kde=True)
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+df = sns.load_dataset("tips")  # 示例中的基本數據
+
+sns.set()
+sns.displot(df["total_bill"], kde=True, rug=True)
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+df = sns.load_dataset("iris")  # 示例中的基本數據
+
+print(df.head())
+
+print("------------------------------------------------------------")  # 60個
+
+df = sns.load_dataset("iris")  # 示例中的基本數據
+
+sns.set()
+sns.jointplot(x="petal_length", y="petal_width", data=df)
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+df = sns.load_dataset("iris")  # 示例中的基本數據
+
+sns.set()
+sns.jointplot(x="petal_length", y="petal_width", kind="hex", data=df)
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+df = sns.load_dataset("iris")  # 示例中的基本數據
+
+sns.set()
+sns.jointplot(x="petal_length", y="petal_width", kind="kde", data=df)
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+df = sns.load_dataset("iris")  # 示例中的基本數據
+
+sns.set()
+sns.pairplot(df)
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+df = sns.load_dataset("iris")  # 示例中的基本數據
+
+sns.set()
+sns.pairplot(df, kind="scatter", diag_kind="kde",
+             hue="species", palette="husl")
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+df = sns.load_dataset("iris")  # 示例中的基本數據
+
+sns.set()
+sns.stripplot(x="species", y="sepal_length", data=df)
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+df = sns.load_dataset("iris")  # 示例中的基本數據
+
+sns.set()
+sns.stripplot(x="species", y="sepal_length", jitter=False, data=df)
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+df = sns.load_dataset("iris")  # 示例中的基本數據
+
+sns.set()
+sns.swarmplot(x="species", y="sepal_length", data=df)
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+df = sns.load_dataset("iris")  # 示例中的基本數據
+
+sns.set()
+sns.boxplot(x="species", y="petal_length", data=df)
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+df = sns.load_dataset("tips")  # 示例中的基本數據
+
+sns.set()
+sns.violinplot(x="day", y="total_bill", data=df)
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+df = sns.load_dataset("tips")  # 示例中的基本數據
+
+sns.set()
+sns.violinplot(x="day", y="total_bill", hue="sex", data=df)
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+df = sns.load_dataset("tips")  # 示例中的基本數據
+
+sns.set()
+sns.violinplot(x="day", y="total_bill", hue="sex", 
+               split=True, data=df)
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+df = sns.load_dataset("tips")  # 示例中的基本數據
+
+sns.set()
+sns.barplot(x="sex", y="total_bill", hue="day", data=df)
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+df = sns.load_dataset("tips")  # 示例中的基本數據
+
+sns.set()
+sns.countplot(x="sex", data=df)
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+df = sns.load_dataset("tips")  # 示例中的基本數據
+
+sns.set()
+sns.pointplot(x="sex", y="total_bill", hue="day", data=df)
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+df = sns.load_dataset("tips")  # 示例中的基本數據
+
+sns.set()
+sns.catplot(x="day", y="total_bill", data=df,
+               kind="bar", hue="sex")
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+df = sns.load_dataset("tips")  # 示例中的基本數據
+
+sns.set()
+sns.catplot(x="day", y="total_bill", data=df,
+               kind="bar", col="sex")
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+df = sns.load_dataset("tips")  # 示例中的基本數據
+
+sns.set()
+sns.catplot(x="sex", y="total_bill", data=df,
+               kind="bar", col="day", col_wrap=2)
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+df = sns.load_dataset("iris")  # 示例中的基本數據
+
+sns.set()
+sns.boxplot(x="petal_length", y="species", data=df)
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+df = sns.load_dataset("iris")  # 示例中的基本數據
+
+sns.set()
+sns.boxplot(data=df, orient="h")
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+df = sns.load_dataset("tips")  # 示例中的基本數據
+
+sns.set()
+sns.regplot(x="total_bill", y="tip", data=df)
+sns.lmplot(x="total_bill", y="tip", data=df)
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+df = sns.load_dataset("tips")  # 示例中的基本數據
+
+sns.set()
+sns.regplot(x=df["total_bill"], y=df["tip"])
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+df = sns.load_dataset("anscombe")  # 示例中的基本數據
+
+sns.set()
+sns.lmplot(x="x", y="y", col="dataset", hue="dataset", data=df,
+           col_wrap=2, ci=None, height=4)
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+df = sns.load_dataset("anscombe")  # 示例中的基本數據
+
+sns.set()
+sns.lmplot(x="x", y="y", data=df.query("dataset=='II'"), order=2)
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+df = sns.load_dataset("anscombe")  # 示例中的基本數據
+
+sns.set()
+sns.residplot(x="x", y="y", data=df.query("dataset=='III'"))
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+tips=sns.load_dataset("tips")  # 示例中的基本數據
+
+# violinplot小提琴圖
+sns.violinplot(x="day", y="total_bill", hue="sex", split=True, data=tips)
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+
+
 #import statsmodels.api as sm # 示例使用了statsmodels庫中的自帶的數據
 #import matplotlib as mpl
 
@@ -495,29 +842,7 @@ sns.violinplot(x=iris.species, y=iris.sepal_length, ax=axs[1])
 
 plt.show()
 
-
 print("------------------------------------------------------------")  # 60個
-
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("作業完成")
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
 
 # 匯入data
 fmri = sns.load_dataset("fmri")  # 觀察fmri的資料型態是pandas
@@ -730,6 +1055,10 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
+print("------------------------------------------------------------")  # 60個
 
 
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
 

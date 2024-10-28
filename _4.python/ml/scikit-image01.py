@@ -8,7 +8,7 @@ io 	        讀取、保存和顯示圖片或視頻
 data    	圖片資料模組, 提供一些測試圖片和樣本數據
 color 	        色彩處理模組, 顏色空間變換
 filters 	圖像增強、邊緣檢測、排序濾波器、自動閾值等
-draw  	        操作于numpy數組上的基本圖形繪制，包括線條、矩形、圓和文本等
+draw  	        操作于numpy數組上的基本圖形繪製，包括線條、矩形、圓和文本等
 transform 	幾何變換或其它變換，如旋轉、拉伸和拉東變換等
 morphology 	形態學操作，如開閉運算、骨架提取等
 exposure 	圖片強度調整，如亮度調整、直方圖均衡等
@@ -28,6 +28,7 @@ hubble_deep_field     星空圖片        text	            文字圖片
 clock	              時鐘圖片        immunohistochemistry  結腸圖片
 
 """
+
 print("------------------------------------------------------------")  # 60個
 
 import skimage
@@ -51,7 +52,7 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 # 設定負號
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
-
+'''
 print("------------------------------------------------------------")  # 60個
 
 print("scikit-image 版本 :", skimage.__version__)
@@ -78,13 +79,6 @@ print(pixel)
 for i in range(H // 3):
     for j in range(W // 3):
         image[i, j, :] = 0
-
-
-img = skimage.data.chelsea()
-R = img[:, :, 0]
-skimage.io.imshow(R)
-plt.title("紅色單通道")
-plt.show()
 
 plt.imshow(image, cmap=plt.cm.gray)
 plt.show()
@@ -166,27 +160,19 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-# 顯示紅色單通道圖片
-
-img = skimage.data.chelsea()
-R = img[:, :, 0]
-skimage.io.imshow(R)
-plt.title("紅色單通道")
-plt.show()
-
 # 修改像素值
 # 對小貓圖片隨機添加椒鹽噪聲
 
-img = skimage.data.chelsea()
+image = skimage.data.chelsea()
 
 # 隨機生成5000個椒鹽
-R, C, D = img.shape
+R, C, D = image.shape
 for i in range(5000):
     x = np.random.randint(0, R)
     y = np.random.randint(0, C)
-    img[x, y, :] = 255
+    image[x, y, :] = 255
 
-skimage.io.imshow(img)
+skimage.io.imshow(image)
 plt.title("加椒鹽")
 plt.show()
 
@@ -295,13 +281,13 @@ print("------------------------------------------------------------")  # 60個
 對多個像素點進行操作，使用數組切片方式訪問。
 切片方式返回的是以指定間隔下標訪問 該數組的像素值。
 下面是有關灰度圖像的一些例子：
-img[i,:] = im[j,:] # 將第 j 行的數值賦值給第 i 行
-img[:,i] = 100 # 將第 i 列的所有數值設為 100
-img[:100,:50].sum() # 計算前 100 行、前 50 列所有數值的和
-img[50:100,50:100] # 50~100 行，50~100 列（不包括第 100 行和第 100 列）
-img[i].mean() # 第 i 行所有數值的平均值
-img[:,-1] # 最後一列
-img[-2,:] (or im[-2]) # 倒數第二行
+image[i,:] = im[j,:] # 將第 j 行的數值賦值給第 i 行
+image[:,i] = 100 # 將第 i 列的所有數值設為 100
+image[:100,:50].sum() # 計算前 100 行、前 50 列所有數值的和
+image[50:100,50:100] # 50~100 行，50~100 列（不包括第 100 行和第 100 列）
+image[i].mean() # 第 i 行所有數值的平均值
+image[:,-1] # 最後一列
+image[-2,:] (or im[-2]) # 倒數第二行
 """
 
 # 最後我們再看兩個對像素值進行訪問和改變的例子：
@@ -310,31 +296,35 @@ img[-2,:] (or im[-2]) # 倒數第二行
 print("二值化做法")
 
 print("1. 讀取圖片(RGB)")
-img = skimage.data.chelsea()
+image = skimage.data.chelsea()
 print("2. RGB 轉 灰階 rgb2gray")
-img_gray = skimage.color.rgb2gray(img)
+image_gray = skimage.color.rgb2gray(image)
 
 print("3. 遍歷所有點, 二值化處理")
-R, C = img_gray.shape
+R, C = image_gray.shape
 for i in range(R):
     for j in range(C):
-        if img_gray[i, j] <= 0.5:
-            img_gray[i, j] = 0
+        if image_gray[i, j] <= 0.5:
+            image_gray[i, j] = 0
         else:
-            img_gray[i, j] = 1
+            image_gray[i, j] = 1
 
-skimage.io.imshow(img_gray)
+skimage.io.imshow(image_gray)
 plt.show()
 
-# 這個例子，使用了color模塊的rgb2gray（）函數，將彩色三通道圖片轉換成灰度圖。轉換結果為float64類型的數組，范圍為[0,1]之間。
+# 這個例子，使用了color模塊的rgb2gray（）函數，將彩色三通道圖片轉換成灰度圖。
+# 轉換結果為float64類型的數組，范圍為[0,1]之間。
 
-img = skimage.data.chelsea()
-reddish = img[:, :, 0] > 170
-img[reddish] = [0, 255, 0]
-skimage.io.imshow(img)
+image = skimage.data.chelsea()
+
+reddish = image[:, :, 0] > 170
+image[reddish] = [0, 255, 0]
+
+skimage.io.imshow(image)
 plt.show()
 
-# 這個例子先對R通道的所有像素值進行判斷，如果大于170，則將這個地方的像素值變為[0,255,0], 即G通道值為255，R和B通道值為0。
+# 這個例子先對R通道的所有像素值進行判斷，如果大于170，則將這個地方的像素值變為[0,255,0],
+# 即G通道值為255，R和B通道值為0。
 
 print("------------------------------------------------------------")  # 60個
 
@@ -342,19 +332,20 @@ print("------------------------------------------------------------")  # 60個
 
 # 顏色空間及其轉換
 # 通過圖像的顏色空間轉換來改變數據類型。
-# 常用的顏色空間有灰度空間、rgb空間、hsv空間和cmyk空間。顏色空間轉換以後，圖片類型都變成了float型。
+# 常用的顏色空間有灰度空間、rgb空間、hsv空間和cmyk空間。
+# 顏色空間轉換以後，圖片類型都變成了float型。
 # 所有的顏色空間轉換函數，都放在skimage的color模塊內。
 
 # rgb轉灰度圖
 
 print("讀取圖片(RGB)")
-img = skimage.data.chelsea()
+image = skimage.data.chelsea()
 # 數據類型
-# print(img.dtype)
-# print(img.dtype.name)
+# print(image.dtype)
+# print(image.dtype.name)
 
 print("RGB 轉 灰階 rgb2gray")
-gray = skimage.color.rgb2gray(img)
+gray = skimage.color.rgb2gray(image)
 
 skimage.io.imshow(gray)
 plt.show()
@@ -374,55 +365,56 @@ skimage.color.convert_colorspace(arr, fromspace, tospace)
 """
 
 print("RGB 轉 HSV")
-img = skimage.data.chelsea()
-hsv = skimage.color.convert_colorspace(img, "RGB", "HSV")
+image = skimage.data.chelsea()
+hsv = skimage.color.convert_colorspace(image, "RGB", "HSV")
 skimage.io.imshow(hsv)
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
 # 在color模塊的顏色空間轉換函數中，還有一個比較有用的函數是
-# skimage.color.label2rgb(arr), 可以根據標簽值對圖片進行著色。以後的圖片分類後著色就可以用這個函數。
+# skimage.color.label2rgb(arr), 可以根據標簽值對圖片進行著色。
+# 以後的圖片分類後著色就可以用這個函數。
 # 例：將astronaut圖片分成三類，然後用默認顏色對三類進行著色
 
-img = skimage.data.astronaut()
+image1 = skimage.data.astronaut()
 
 print("RGB 轉 灰階 rgb2gray")
-gray = skimage.color.rgb2gray(img)
+image_gray = skimage.color.rgb2gray(image1)
 
-R, C = gray.shape
+R, C = image_gray.shape
 labels = np.zeros([R, C])
 for i in range(R):
     for j in range(C):
-        if gray[i, j] < 0.4:
+        if image_gray[i, j] < 0.4:
             labels[i, j] = 0
-        elif gray[i, j] < 0.75:
+        elif image_gray[i, j] < 0.75:
             labels[i, j] = 1
         else:
             labels[i, j] = 2
-dst = skimage.color.label2rgb(labels)
+image2 = skimage.color.label2rgb(labels)
 
-skimage.io.imshow(dst)
+skimage.io.imshow(image2)
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
 """
-#圖像的繪制
-實際上前面我們就已經用到了圖像的繪制，如：
-skimage.io.imshow(img)  
-這一行代碼的實質是利用matplotlib包對圖片進行繪制，
-繪制成功後，返回一個matplotlib類型的數據。
+#圖像的繪製
+實際上前面我們就已經用到了圖像的繪製，如：
+skimage.io.imshow(image)  
+這一行代碼的實質是利用matplotlib包對圖片進行繪製，
+繪製成功後，返回一個matplotlib類型的數據。
 
 因此，我們也可以這樣寫：
 
 import matplotlib.pyplot as plt
-plt.imshow(img)
+plt.imshow(image)
 
 imshow()函數格式為：
 matplotlib.pyplot.imshow(X, cmap=None)
-X: 要繪制的圖像或數組。
-cmap: 顏色圖譜（colormap), 默認繪制為RGB(A)顏色空間。
+X: 要繪製的圖像或數組。
+cmap: 顏色圖譜（colormap), 默認繪製為RGB(A)顏色空間。
 
 其它可選的顏色圖譜如下列表：
 顏色圖譜	描述
@@ -438,9 +430,9 @@ viridis 	藍-綠-黃	winter 		藍-綠
 
 用的比較多的有gray,jet等，如：
 plt.imshow(image,plt.cm.gray)
-plt.imshow(img,cmap=plt.cm.jet)
+plt.imshow(image,cmap=plt.cm.jet)
 
-在窗口上繪制完圖片後，返回一個AxesImage對象。
+在窗口上繪製完圖片後，返回一個AxesImage對象。
 要在窗口上顯示這個對象，我們可以調用show()函數來進行顯示，
 但進行練習的時候（ipython環境中），
 一般我們可以省略show（）函數，也能自動顯示出來。
@@ -450,42 +442,53 @@ print("------------------------------------------------------------")  # 60個
 print("子圖的寫法1")
 
 filename = "C:/_git/vcs/_4.python/opencv/data/rgb512.bmp"
-img = skimage.io.imread(filename)  # 讀取檔案
+
+image = skimage.io.imread(filename)  # 讀取檔案
+R = image[:, :, 0]
+G = image[:, :, 1]
+B = image[:, :, 2]
 
 plt.figure(num="RGB分離", figsize=(10, 10))
 
 plt.subplot(221)
-plt.imshow(img)
+plt.imshow(image)
 plt.title("原圖")
 
 plt.subplot(222)
-plt.imshow(img[:, :, 0], plt.cm.gray)  # 畫灰度圖
+plt.imshow(R, plt.cm.gray)  # 畫灰度圖
 plt.title("R通道")
 plt.axis("off")
 
 plt.subplot(223)
-plt.imshow(img[:, :, 1], plt.cm.gray)  # 畫灰度圖
+plt.imshow(G, plt.cm.gray)  # 畫灰度圖
 plt.title("G通道")
 plt.axis("off")
 
 plt.subplot(224)
-plt.imshow(img[:, :, 2], plt.cm.gray)  # 畫灰度圖
+plt.imshow(B, plt.cm.gray)  # 畫灰度圖
 plt.title("B通道")
 plt.axis("off")
 
+plt.suptitle("RGB分離")
 plt.show()
 
+print("------------------------------------------------------------")  # 60個
+
 """
-在圖片繪制過程中，我們用matplotlib.pyplot模塊下的figure（）函數來創建顯示窗口，該函數的格式為：
+在圖片繪製過程中，我們用matplotlib.pyplot模塊下的figure（）函數來創建顯示窗口，該函數的格式為：
 matplotlib.pyplot.figure(num=None, figsize=None, dpi=None, facecolor=None, edgecolor=None)
 所有參數都是可選的，都有默認值，因此調用該函數時可以不帶任何參數，其中：
-num: 整型或字符型都可以。如果設置為整型，則該整型數字表示窗口的序號。如果設置為字符型，則該字符串表示窗口的名稱。用該參數來命名窗口，如果兩個窗口序號或名相同，則後一個窗口會覆蓋前一個窗口。
+num: 整型或字符型都可以。如果設置為整型，則該整型數字表示窗口的序號。
+如果設置為字符型，則該字符串表示窗口的名稱。
+用該參數來命名窗口，如果兩個窗口序號或名相同，則後一個窗口會覆蓋前一個窗口。
 figsize: 設置窗口大小。是一個tuple型的整數，如figsize=（8，8）
 dpi: 整形數字，表示窗口的分辨率。
 facecolor: 窗口的背景顏色。
 edgecolor: 窗口的邊框顏色。
 
-用figure()函數創建的窗口，只能顯示一幅圖片，如果想要顯示多幅圖片，則需要將這個窗口再劃分為幾個子圖，在每個子圖中顯示不同的圖片。我們可以使用subplot（）函數來劃分子圖，函數格式為：
+用figure()函數創建的窗口，只能顯示一幅圖片，
+如果想要顯示多幅圖片，則需要將這個窗口再劃分為幾個子圖，在每個子圖中顯示不同的圖片。
+我們可以使用subplot（）函數來劃分子圖，函數格式為：
 matplotlib.pyplot.subplot(nrows, ncols, plot_number)
 nrows: 子圖的行數。
 ncols: 子圖的列數。
@@ -494,14 +497,14 @@ plot_number: 當前子圖的編號。
 
 print("子圖的寫法2")
 
-img = skimage.data.immunohistochemistry()
-hsv = skimage.color.rgb2hsv(img)
+image = skimage.data.immunohistochemistry()
+hsv = skimage.color.rgb2hsv(image)
 
 fig, axes = plt.subplots(2, 2, figsize=(7, 6))
 ax0, ax1, ax2, ax3 = axes.ravel()
 
-ax0.imshow(img)
-ax0.set_title("Original image")
+ax0.imshow(image)
+ax0.set_title("原圖")
 
 ax1.imshow(hsv[:, :, 0], cmap=plt.cm.gray)
 ax1.set_title("H")
@@ -517,6 +520,7 @@ for ax in axes.ravel():
 
 fig.tight_layout()  # 自動調整subplot間的參數
 
+plt.suptitle("RGB 轉 HSV")
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
@@ -532,8 +536,8 @@ fig, axes = plt.subplots(2, 2, figsize=(7, 6))
 ax0, ax1, ax2, ax3 = axes.ravel()
 
 創建了2行2列4個子圖，分別取名為ax0,ax1,ax2和ax3, 每個子圖的標題用set_title()函數來設置，如：
-ax0.imshow(img)
-ax0.set_title("Original image")
+ax0.imshow(image)
+ax0.set_title("原圖")
 
 如果有多個子圖，我們還可以使用tight_layout()函數來調整顯示的布局，該函數格式為：
 matplotlib.pyplot.tight_layout(pad=1.08, h_pad=None, w_pad=None, rect=None)
@@ -547,13 +551,13 @@ plt.tight_layout()  #自動調整subplot間的參數
 """
 
 """
-最後總結一下，繪制和顯示圖片常用到的函數有：
+最後總結一下，繪製和顯示圖片常用到的函數有：
 函數名 	功能 	調用格式
 figure 	創建一個顯示窗口 	plt.figure(num=1,figsize=(8,8)
-imshow 	繪制圖片 	plt.imshow(image)
+imshow 	繪製圖片 	plt.imshow(image)
 show 	顯示窗口 	plt.show()
 subplot 	劃分子圖 	plt.subplot(2,2,1)
-title 	設置子圖標題(與subplot結合使用） 	plt.title('origin image')
+title 	設置子圖標題(與subplot結合使用） 	plt.title('原圖')
 axis 	是否顯示坐標尺 	plt.axis('off')
 subplots 	創建帶有多個子圖的窗口 	fig,axes=plt.subplots(2,2,figsize=(8,8))
 ravel 	為每個子圖設置變量 	ax0,ax1,ax2,ax3=axes.ravel()
@@ -565,11 +569,13 @@ print("------------------------------------------------------------")  # 60個
 
 """
 圖像的批量處理
-有些時候，我們不僅要對一張圖片進行處理，可能還會對一批圖片處理。這時候，我們可以通過循環來執行處理，也可以調用程序自帶的圖片集合來處理。
+有些時候，我們不僅要對一張圖片進行處理，可能還會對一批圖片處理。
+這時候，我們可以通過循環來執行處理，也可以調用程序自帶的圖片集合來處理。
 圖片集合函數為：
 skimage.io.ImageCollection(load_pattern,load_func=None)
-這個函數是放在io模塊內的，帶兩個參數，第一個參數load_pattern, 表示圖片組的路徑，可以是一個str字符串。第二個參數load_func是一個回調函數，我們對圖片進行批量處理就可以通過這個回調函數實現。回調函數默認為imread(),即默認這個函數是批量讀取圖片。
-
+這個函數是放在io模塊內的，帶兩個參數，第一個參數load_pattern, 表示圖片組的路徑，可以是一個str字符串。
+第二個參數load_func是一個回調函數，我們對圖片進行批量處理就可以通過這個回調函數實現。
+回調函數默認為imread(),即默認這個函數是批量讀取圖片。
 """
 
 # string = 'C:/_git/vcs/_1.data/______test_files1/__pic/_angry_bird/*.jpg'
@@ -599,8 +605,11 @@ print(len(coll))
 print("------------------------------------------------------------")  # 60個
 
 """
-注意這個地方'd:/pic/*.jpg:d:/pic/*.png' ，是兩個字符串合在一起的，第一個是'd:/pic/*.jpg', 第二個是'd:/pic/*.png' ，合在一起後，中間用冒號來隔開，這樣就可以把d:/pic/文件夾下的jpg和png格式的圖片都讀取出來。如果還想讀取存放在其它地方的圖片，也可以一并加進去，只是中間同樣用冒號來隔開。
-skimage.io.ImageCollection()這個函數省略第二個參數，就是批量讀取。如果我們不是想批量讀取，而是其它批量操作，如批量轉換為灰度圖，那又該怎么做呢？
+注意這個地方'd:/pic/*.jpg:d:/pic/*.png' ，是兩個字符串合在一起的，第一個是'd:/pic/*.jpg',
+第二個是'd:/pic/*.png' ，合在一起後，中間用冒號來隔開，這樣就可以把d:/pic/文件夾下的jpg和png格式的圖片都讀取出來。
+如果還想讀取存放在其它地方的圖片，也可以一并加進去，只是中間同樣用冒號來隔開。
+skimage.io.ImageCollection()這個函數省略第二個參數，就是批量讀取。
+如果我們不是想批量讀取，而是其它批量操作，如批量轉換為灰度圖，那又該怎么做呢？
 那就需要先定義一個函數，然後將這個函數作為第二個參數，如：
 """
 
@@ -632,7 +641,8 @@ class AVILoader:
 avi_load = AVILoader()
 
 frames = range(0, 1000, 10)  # 0, 10, 20, ...
-ic = skimage.io.ImageCollection(frames, load_func=avi_load)
+# NG in kilo
+#ic = skimage.io.ImageCollection(frames, load_func=avi_load)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -699,58 +709,54 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-# 圖像的形變與縮放 skimage.transform
-
-print("測試 skimage.transform.resize() 改變圖片尺寸")
-print("測試 skimage.transform.rescale() 等比例縮放")
-
-image = skimage.data.chelsea()
-image2 = skimage.transform.resize(image, (200, 100))
-
-plt.figure("transform() : resize() rescale()")
-
-plt.subplot(131)
-plt.title("原圖")
-plt.imshow(image, plt.cm.gray)
-
-plt.subplot(132)
-plt.title("resize, 縮小又變形")
-plt.imshow(image2, plt.cm.gray)
-
-plt.subplot(133)
-image4 = skimage.transform.rescale(image, 0.1)  # 縮小為原來圖片大小的0.1倍
-plt.title("rescale, 等比例縮小")
-plt.imshow(image4, plt.cm.gray)
-
-plt.show()
-
-
 """
 skimage.transform.rotate(image, angle[, ...],resize=False)
 angle參數是個float類型數，表示旋轉的度數
 resize用于控制在旋轉時，是否改變大小 ，默認為False
 """
 
+# 圖像的形變與縮放 skimage.transform
+
+print("測試 skimage.transform.resize() 改變圖片尺寸")
+print("測試 skimage.transform.rescale() 等比例縮放")
 print("測試 skimage.transform.rotate() 旋轉")
 
-image = skimage.data.camera()
+image = skimage.data.chelsea()
 print(image.shape)  # 圖片原始大小
-image1 = skimage.transform.rotate(image, 30)  # 旋轉30度，不改變大小
-print(image1.shape)
-image2 = skimage.transform.rotate(image, 30, resize=True)  # 旋轉30度，同時改變大小
-print(image2.shape)
 
-plt.figure("transform() : resize() 旋轉")
+image2 = skimage.transform.resize(image, (200, 100))
+image3 = skimage.transform.rescale(image, 0.1)  # 縮小為原來圖片大小的0.1倍
+image4 = skimage.transform.rotate(image, 30)  # 旋轉30度，不改變大小
+image5 = skimage.transform.rotate(image, 30, resize=True)  # 旋轉30度，同時改變大小
 
-plt.subplot(121)
-plt.title("旋轉30度, 不改變大小")
-plt.imshow(image1, plt.cm.gray)
+print(image4.shape)
+print(image5.shape)
 
-plt.subplot(122)
-plt.title("旋轉30度, 改變大小")
+plt.figure("transform() : resize() rescale() rotate() 旋轉")
+
+plt.subplot(231)
+plt.title("原圖")
+plt.imshow(image, plt.cm.gray)
+
+plt.subplot(232)
+plt.title("resize, 縮小又變形")
 plt.imshow(image2, plt.cm.gray)
 
+plt.subplot(233)
+plt.title("rescale, 等比例縮小")
+plt.imshow(image3, plt.cm.gray)
+
+plt.subplot(234)
+plt.title("旋轉30度, 不改變大小")
+plt.imshow(image4, plt.cm.gray)
+
+plt.subplot(235)
+plt.title("旋轉30度, 改變大小")
+plt.imshow(image5, plt.cm.gray)
+
 plt.show()
+
+print("------------------------------------------------------------")  # 60個
 
 """
 4、圖像金字塔
@@ -768,7 +774,9 @@ downscale控制著金字塔的縮放比例
 image = skimage.data.astronaut()  # 載入宇航員圖片
 R, C, D = image.shape  # 獲取圖片的行數，列數和通道數
 
-pyramid = tuple(skimage.transform.pyramid_gaussian(image, downscale=2))  # 產生高斯金字塔圖像
+pyramid = tuple(
+    skimage.transform.pyramid_gaussian(image, downscale=2)
+)  # 產生高斯金字塔圖像
 # 共生成了log(512)=9幅金字塔圖像，加上原始圖像共10幅，pyramid[0]-pyramid[1]
 
 """
@@ -780,7 +788,6 @@ composite_image = np.ones((R, C + 256, 3), dtype=np.double)  #生成背景
 除了高斯金字塔外，還有其它的金字塔，如：
 skimage.transform.pyramid_laplacian(image, downscale=2)
 """
-
 print("------------------------------------------------------------")  # 60個
 
 """
@@ -796,26 +803,28 @@ gamma參數默認為1，原像不發生變化 。
 """
 
 # img_as_float() 將 unit8 轉換為 float
-image = skimage.img_as_float(skimage.data.moon())
-gam1 = skimage.exposure.adjust_gamma(image, 2)  # 調暗
-gam2 = skimage.exposure.adjust_gamma(image, 0.5)  # 調亮
-plt.figure("adjust_gamma", figsize=(8, 8))
+image1 = skimage.img_as_float(skimage.data.moon())
+image2 = skimage.exposure.adjust_gamma(image1, 2)  # 調暗
+image3 = skimage.exposure.adjust_gamma(image1, 0.5)  # 調亮
+
+plt.figure("調整Gamma值", figsize=(10, 6))
 
 plt.subplot(131)
-plt.title("origin image")
-plt.imshow(image, plt.cm.gray)
+plt.title("原圖")
+plt.imshow(image1, plt.cm.gray)
 plt.axis("off")
 
 plt.subplot(132)
-plt.title("gamma=2")
-plt.imshow(gam1, plt.cm.gray)
+plt.title("gamma=2, 調暗")
+plt.imshow(image2, plt.cm.gray)
 plt.axis("off")
 
 plt.subplot(133)
-plt.title("gamma=0.5")
-plt.imshow(gam2, plt.cm.gray)
+plt.title("gamma=0.5, 調亮")
+plt.imshow(image3, plt.cm.gray)
 plt.axis("off")
 
+plt.suptitle("調整Gamma值")
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
@@ -827,27 +836,29 @@ print("------------------------------------------------------------")  # 60個
 """
 
 # img_as_float() 將 unit8 轉換為 float
-image = skimage.img_as_float(skimage.data.moon())
-gam1 = skimage.exposure.adjust_log(image)  # 對數調整
-plt.figure("adjust_gamma", figsize=(8, 8))
+image1 = skimage.img_as_float(skimage.data.moon())
+image2 = skimage.exposure.adjust_log(image1)  # 對數調整
+
+plt.figure("調整Gamma值, log對數調整", figsize=(10, 6))
 
 plt.subplot(121)
-plt.title("origin image")
-plt.imshow(image, plt.cm.gray)
+plt.title("原圖")
+plt.imshow(image1, plt.cm.gray)
 plt.axis("off")
 
 plt.subplot(122)
-plt.title("log")
-plt.imshow(gam1, plt.cm.gray)
+plt.title("log對數調整")
+plt.imshow(image2, plt.cm.gray)
 plt.axis("off")
 
+plt.suptitle("調整Gamma值, log對數調整")
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
 """
 3、判斷圖像對比度是否偏低
-函數：is_low_contrast(img)
+函數：is_low_contrast(image)
 返回一個bool型值
 """
 
@@ -934,10 +945,10 @@ print(hist2)
 # 分成兩個bin，每個bin的統計量是一樣的，但numpy返回的是每個bin的兩端的范圍值，而skimage返回的是每個bin的中間值
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 """
-繪制直方圖
-繪圖都可以調用matplotlib.pyplot庫來進行，其中的hist函數可以直接繪制直方圖。
+繪製直方圖
+繪圖都可以調用matplotlib.pyplot庫來進行，其中的hist函數可以直接繪製直方圖。
 調用方式：
 n, bins, patches = plt.hist(arr, bins=10, density=False, facecolor='black', edgecolor='black',alpha=1，histtype='bar')
 hist的參數非常多，但常用的就這六個，只有第一個是必須的，後面四個可選
@@ -954,12 +965,16 @@ bins: 返回各個bin的區間范圍
 patches: 返回每個bin里面包含的數據，是一個list
 """
 
-img = skimage.data.camera()
-plt.figure("hist")
-arr = img.flatten()
+image = skimage.data.camera()
+
+plt.figure("影像直方圖")
+
+arr = image.flatten()
 n, bins, patches = plt.hist(
     arr, bins=256, density=True, edgecolor="None", facecolor="red"
 )
+
+plt.title("影像直方圖")
 plt.show()
 
 """
@@ -978,12 +993,17 @@ print("------------------------------------------------------------")  # 60個
 一般來說直方圖都是征對灰度圖的，如果要畫rgb圖像的三通道直方圖，實際上就是三個直方圖的疊加。
 """
 
-img = skimage.data.astronaut()
-ar = img[:, :, 0].flatten()
+image = skimage.data.astronaut()
+
+R = image[:, :, 0]
+G = image[:, :, 1]
+B = image[:, :, 2]
+
+ar = R.flatten()
 plt.hist(ar, bins=256, density=True, facecolor="r", edgecolor="r", stacked=1)
-ag = img[:, :, 1].flatten()
+ag = G.flatten()
 plt.hist(ag, bins=256, density=True, facecolor="g", edgecolor="g", stacked=1)
-ab = img[:, :, 2].flatten()
+ab = B.flatten()
 plt.hist(ab, bins=256, density=True, facecolor="b", edgecolor="b")
 plt.show()
 
@@ -999,21 +1019,25 @@ print("------------------------------------------------------------")  # 60個
 從而擴展取值的動態范圍，提高了對比度和灰度色調的變化，使圖像更加清晰。
 """
 
-img = skimage.data.moon()
+image = skimage.data.moon()
 plt.figure("hist", figsize=(8, 8))
 
-arr = img.flatten()
+arr = image.flatten()
 plt.subplot(221)
-plt.imshow(img, plt.cm.gray)  # 原始圖像
+plt.imshow(image, plt.cm.gray)  # 原始圖像
 plt.subplot(222)
-plt.hist(arr, bins=256, density=True, edgecolor="None", facecolor="red")  # 原始圖像直方圖
+plt.hist(
+    arr, bins=256, density=True, edgecolor="None", facecolor="red"
+)  # 原始圖像直方圖
 
-img1 = skimage.exposure.equalize_hist(img)
-arr1 = img1.flatten()
+image1 = skimage.exposure.equalize_hist(image)
+arr1 = image1.flatten()
 plt.subplot(223)
-plt.imshow(img1, plt.cm.gray)  # 均衡化圖像
+plt.imshow(image1, plt.cm.gray)  # 均衡化圖像
 plt.subplot(224)
-plt.hist(arr1, bins=256, density=True, edgecolor="None", facecolor="red")  # 均衡化直方圖
+plt.hist(
+    arr1, bins=256, density=True, edgecolor="None", facecolor="red"
+)  # 均衡化直方圖
 
 plt.show()
 
@@ -1043,8 +1067,8 @@ sobel算子可用來檢測邊緣
 函數格式為：skimage.filters.sobel(image, mask=None)
 """
 
-img = skimage.data.camera()
-edges = skimage.filters.sobel(img)
+image = skimage.data.camera()
+edges = skimage.filters.sobel(image)
 plt.imshow(edges, plt.cm.gray)
 plt.show()
 
@@ -1052,22 +1076,22 @@ plt.show()
 2、roberts算子
 roberts算子和sobel算子一樣，用于檢測邊緣
 調用格式也是一樣的：
-edges = skimage.filters.roberts(img)
+edges = skimage.filters.roberts(image)
 3、scharr算子
 功能同sobel，調用格式：
-edges = skimage.filters.scharr(img)
+edges = skimage.filters.scharr(image)
 4、prewitt算子
 功能同sobel，調用格式：
-edges = skimage.filters.prewitt(img)
+edges = skimage.filters.prewitt(image)
 5、canny算子
 canny算子也是用于提取邊緣特征，但它不是放在filters模塊，而是放在feature模塊
 函數格式：skimage.feature.canny(image，sigma=1.0)
 可以修改sigma的值來調整效果
 """
 
-img = skimage.data.camera()
-edges1 = skimage.feature.canny(img)  # sigma=1
-edges2 = skimage.feature.canny(img, sigma=3)  # sigma=3
+image = skimage.data.camera()
+edges1 = skimage.feature.canny(image)  # sigma=1
+edges2 = skimage.feature.canny(image, sigma=3)  # sigma=3
 
 plt.figure("canny", figsize=(8, 8))
 plt.subplot(121)
@@ -1087,8 +1111,8 @@ gabor濾波可用來進行邊緣檢測和紋理特征提取。
 """
 
 """ #沒有 gabor_filter
-img = skimage.data.camera()
-filt_real, filt_imag = skimage.filters.gabor_filter(img,frequency=0.6)   
+image = skimage.data.camera()
+filt_real, filt_imag = skimage.filters.gabor_filter(image, frequency=0.6)   
 
 plt.figure('gabor',figsize=(8,8))
 
@@ -1119,9 +1143,9 @@ print("------------------------------------------------------------")  # 60個
 
 """ #沒有 gaussian_filter
 
-img = skimage.data.astronaut()
-edges1 = skimage.filters.gaussian_filter(img,sigma=0.4)   #sigma=0.4
-edges2 = skimage.filters.gaussian_filter(img,sigma=5)   #sigma=5
+image = skimage.data.astronaut()
+edges1 = skimage.filters.gaussian_filter(image, sigma=0.4)   #sigma=0.4
+edges2 = skimage.filters.gaussian_filter(image, sigma=5)   #sigma=5
 
 plt.figure('gaussian',figsize=(8,8))
 plt.subplot(121)
@@ -1143,10 +1167,10 @@ print("------------------------------------------------------------")  # 60個
 需要用skimage.morphology模塊來設置濾波器的形狀。
 """
 
-img = skimage.data.camera()
+image = skimage.data.camera()
 
-edges1 = skimage.filters.median(img, skimage.morphology.disk(5))
-edges2 = skimage.filters.median(img, skimage.morphology.disk(9))
+edges1 = skimage.filters.median(image, skimage.morphology.disk(5))
+edges2 = skimage.filters.median(image, skimage.morphology.disk(9))
 
 plt.figure("median", figsize=(8, 8))
 
@@ -1170,10 +1194,10 @@ print("------------------------------------------------------------")  # 60個
 垂直邊緣檢測： sobel_v, prewitt_v, scharr_v
 """
 
-img = skimage.data.camera()
+image = skimage.data.camera()
 
-edges1 = skimage.filters.sobel_h(img)
-edges2 = skimage.filters.sobel_v(img)
+edges1 = skimage.filters.sobel_h(image)
+edges2 = skimage.filters.sobel_v(image)
 
 plt.figure("sobel_v_h", figsize=(8, 8))
 
@@ -1200,17 +1224,17 @@ print("------------------------------------------------------------")  # 60個
 roberts_neg_diag(image）
 """
 
-img = skimage.data.camera()
-dst = skimage.filters.roberts_neg_diag(img)
+image1 = skimage.data.camera()
+image2 = skimage.filters.roberts_neg_diag(image1)
 
 plt.figure("filters", figsize=(8, 8))
 plt.subplot(121)
-plt.title("origin image")
-plt.imshow(img, plt.cm.gray)
+plt.title("原圖")
+plt.imshow(image1, plt.cm.gray)
 
 plt.subplot(122)
 plt.title("filted image")
-plt.imshow(dst, plt.cm.gray)
+plt.imshow(image2, plt.cm.gray)
 
 plt.show()
 
@@ -1222,17 +1246,17 @@ plt.show()
 roberts_pos_diag(image）
 """
 
-img = skimage.data.camera()
-dst = skimage.filters.roberts_pos_diag(img)
+image1 = skimage.data.camera()
+image2 = skimage.filters.roberts_pos_diag(image1)
 
 plt.figure("filters", figsize=(8, 8))
 plt.subplot(121)
-plt.title("origin image")
-plt.imshow(img, plt.cm.gray)
+plt.title("原圖")
+plt.imshow(image1, plt.cm.gray)
 
 plt.subplot(122)
 plt.title("filted image")
-plt.imshow(dst, plt.cm.gray)
+plt.imshow(image2, plt.cm.gray)
 
 plt.show()
 
@@ -1254,17 +1278,17 @@ skimage.filters.threshold_otsu(image, nbins=256)
 
 image = skimage.data.camera()
 thresh = skimage.filters.threshold_otsu(image)  # 返回一個閾值
-dst = (image <= thresh) * 1.0  # 根據閾值進行分割
+image2 = (image <= thresh) * 1.0  # 根據閾值進行分割
 
 plt.figure("thresh", figsize=(8, 8))
 
 plt.subplot(121)
-plt.title("original image")
+plt.title("原圖")
 plt.imshow(image, plt.cm.gray)
 
 plt.subplot(122)
 plt.title("binary image")
-plt.imshow(dst, plt.cm.gray)
+plt.imshow(image2, plt.cm.gray)
 
 plt.show()
 
@@ -1306,23 +1330,23 @@ method: 用來確定自適應閾值的方法，有'mean', 'generic', 'gaussian' 
 #沒有 threshold_adaptive
 
 image = skimage.data.camera()
-dst = skimage.filters.threshold_adaptive(image, 15) #返回一個閾值圖像
+image2 = skimage.filters.threshold_adaptive(image, 15) #返回一個閾值圖像
 plt.figure('thresh',figsize=(8,8))
 plt.subplot(121)
-plt.title('original image')
+plt.title('原圖')
 plt.imshow(image,plt.cm.gray)
 
 plt.subplot(122)
 plt.title('binary image')
-plt.imshow(dst,plt.cm.gray)
+plt.imshow(image2,plt.cm.gray)
 
 plt.show()
 """
 
 """
 大家可以修改block_size的大小和method值來查看更多的效果。如：
-dst1 = skimage.filters.threshold_adaptive(image,31,'mean') 
-dst2 = skimage.filters.threshold_adaptive(image,5,'median')
+image1 = skimage.filters.threshold_adaptive(image,31,'mean') 
+image2 = skimage.filters.threshold_adaptive(image,5,'median')
 """
 
 print("------------------------------------------------------------")  # 60個
@@ -1346,20 +1370,20 @@ dist = np.random.uniform(-0.2, 0.2, size=w_shape)
 output = 5
 
 astronaut = skimage.data.astronaut()
-img = np.asarray(astronaut, dtype="float32") / 255
-filtered_img = img.transpose(2, 0, 1).reshape(1, 3, 512, 512)
+image = np.asarray(astronaut, dtype="float32") / 255
+filtered_image = image.transpose(2, 0, 1).reshape(1, 3, 512, 512)
 
 plt.axis("off")
-plt.imshow(img)
+plt.imshow(image)
 plt.show()
 
-for img in range(depth):
+for image in range(depth):
     fig = plt.figure()
     plt.axis("off")
     plt.imshow(
-        filtered_img[
+        filtered_image[
             0,
-            img,
+            image,
             :,
             :,
         ],

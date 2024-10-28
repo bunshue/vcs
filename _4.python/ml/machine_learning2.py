@@ -517,6 +517,7 @@ print(tt)
 
 plt.hist(data)
 
+plt.title('normal distribution')
 plt.show()
 
 print("------------------------------------------------------------")  # 60個

@@ -287,149 +287,10 @@ text = open(path.join(d, 'test.txt'),'r').read()
 
 是否一個 原本開啟後是亂碼的檔案 加上 encoding = xxx 或 .decode xxx 就會好
 
-
 text = 'abcd'
 text.startswith('ab')
 
-
-
-
 print('------------------------------------------------------------')	#60個
-
-
-        private void toggleOption(int camIndex, int optionIndex, bool value)
-        {
-            switch (optionIndex)
-            {
-                case 0:
-                    this.CamMonitor[camIndex].MotionDetection = value;
-                    break;
-                case 1:
-                    this.CamMonitor[camIndex].RecordOnMotion = value;
-                    break;
-                case 2:
-                    this.CamMonitor[camIndex].BeepOnMotion = value;
-                    break;
-            }
-        }
-
-
-print('------------------------------------------------------------')	#60個
-
-MotionDetection1_CheckedChanged(object sender, EventArgs e)
-this.toggleOption(0, 0, true);
-this.toggleOption(0, 0, false);
-
-AutoRecord1_CheckedChanged(object sender, EventArgs e)
-this.toggleOption(0, 1, true);
-this.toggleOption(0, 1, false);
-
-BeepOnMotionCheck1_CheckedChanged(object sender, EventArgs e)
-this.toggleOption(0, 2, true);
-this.toggleOption(0, 2, false);
-
-
-
-
-print('------------------------------------------------------------')	#60個
-
-        
-
-        public FilterInfoCollection USBWebcams = null;
-        public VideoCaptureDevice Cam = null;
-
-        void Init_WebcamSetup()
-        {
-            //richTextBox1.Text += "重新抓取USB影像\t";
-            USBWebcams = new FilterInfoCollection(FilterCategory.VideoInputDevice);
-            if (USBWebcams.Count > 0)  // The quantity of WebCam must be more than 0.
-            {
-                //button12.Enabled = false;
-                Cam = new VideoCaptureDevice(USBWebcams[0].MonikerString);  //實例化對象
-                Cam.NewFrame += new NewFrameEventHandler(Cam_NewFrame);
-                Cam.Start();   // WebCam starts capturing images.
-                //richTextBox1.Text += "有影像裝置\n";
-
-                Cam.VideoResolution = Cam.VideoCapabilities[0];
-
-                string webcam_name = string.Empty;
-
-                int ww;
-                int hh;
-                ww = Cam.VideoCapabilities[0].FrameSize.Width;
-                hh = Cam.VideoCapabilities[0].FrameSize.Height;
-
-                webcam_name = USBWebcams[0].Name + " " + Cam.VideoCapabilities[0].FrameSize.Width.ToString() + " X " + Cam.VideoCapabilities[0].FrameSize.Height.ToString() + " @ " + Cam.VideoCapabilities[0].AverageFrameRate.ToString() + " Hz";
-                this.Text = webcam_name;
-
-                if (Screen.PrimaryScreen.Bounds.Width == 1920)
-                {
-                    if (ww >= Screen.PrimaryScreen.Bounds.Width)
-                    {
-                        pictureBox1.Size = new Size(1920, 1080);
-                        pictureBox1.Location = new Point(0, 0);
-                        this.FormBorderStyle = FormBorderStyle.None;
-                        this.WindowState = FormWindowState.Maximized;
-                        //this.Size = new Size(pictureBox1.Size.Width + 200, pictureBox1.Size.Height + 200);
-                    }
-                    else if (ww < Screen.PrimaryScreen.Bounds.Width)
-                    {
-                        pictureBox1.Size = new Size(ww, hh);
-                        pictureBox1.Location = new Point(140, 60);
-                        this.FormBorderStyle = FormBorderStyle.FixedSingle;
-                        this.WindowState = FormWindowState.Normal;
-                        this.ClientSize = new Size(pictureBox1.Location.X + pictureBox1.Width + 50, pictureBox1.Location.Y + pictureBox1.Height + 50);
-                    }
-                }
-            }
-            else
-            {
-                //button12.Enabled = true;
-                //richTextBox1.Text += "無影像裝置\n";
-            }
-
-
-        }
-
-
-print('------------------------------------------------------------')	#60個
-
-
-plt.savefig('tmp_event.png', dpi=300) 	# 將圓餅圖出成圖片，檔名為event.png 
-
-
-
-
-            this.FormBorderStyle = FormBorderStyle.None;
-            this.WindowState = FormWindowState.Maximized;
-            this.pictureBox1.Focus();
-
-
-#通用
-Form1_Load()
-Form1_FormClosing()
-show_item_location()
-bt_clear_Click()
-delay()
-show_main_message()
-timer_display_Tick()
------------------------------------
-#相機一般
-Init_WebcamSetup()
-Start_Webcam()
-Stop_Webcam()
-Cam_NewFrame()
-save_image_to_drive()
-timer_fps_Tick()
------------------------------------
-#相機錄影
-do_record()
------------------------------------
-#相機按鈕
-bt_start_Click()
-bt_stop_Click()
-bt_record_start_Click()
-bt_record_stop_Click()
 
 #x = np.linspace(-np.pi, np.pi, num=100, endpoint=True)
 #c, s, t = np.cos(x), np.sin(x), np.tan(x)
@@ -445,21 +306,6 @@ plt.pie(df["weight"], labels=df["name"],
 plt.show()
 
 print('------------------------------------------------------------')	#60個
-
-            ManagementObjectSearcher searcher = new ManagementObjectSearcher("select * from Win32_Processor");
-            foreach (ManagementObject myobject in searcher.Get())
-            {
-                lblCPU.Text = myobject["LoadPercentage"].ToString() + " %";
-                //label2.Text = lblCPU.Text;
-                label2.Text = "CPU使用率：" + lblCPU.Text;
-                mheight = Convert.ToInt32(myobject["LoadPercentage"].ToString());
-                if (mheight == 100)
-                    panel3.Height = 100;
-                CreateImage();
-            }
-
-
-
 
     start = time()
 
@@ -555,57 +401,6 @@ plt.title(str(locs1) + "\n" + str(locs2))
 
 
 
-
-//vcs最小化錄影
-
-//公用變數
-VideoFileWriter writer = new VideoFileWriter();
-
-//開啟檔案
-//writer.Open(filename, W, H, fps);
-
-//寫入影格
-//writer.WriteVideoFrame(bitmap1);
-
-//關閉檔案
-writer.Close();
-
-
-        private void DoRecord()
-        {
-            VideoFileWriter writer = new VideoFileWriter();
-
-            writer.Open(RecordingFilename, this.Width, this.Height, 30);
-
-
-                        Bitmap bitmap1 = frames.Dequeue();
-                        writer.WriteVideoFrame(bitmap1);
-
-
-            writer.Close();
-        }
-
-宣告QUEUE
-
-Queue<Bitmap> frames = new Queue<Bitmap>(); // Queue that stores frames to be written by the recorder thread
-
-加入資料
-frames.Enqueue((Bitmap)bitmap1.Clone());
-
-
-取出資料
-if (frames.Count > 0)
-{
-    try
-    {
-        Bitmap bitmap1 = frames.Dequeue();
-        writer.WriteVideoFrame(bitmap1);
-    }
-    catch (Exception ex)
-    {
-        Console.WriteLine("xxx錯誤訊息e03 : " + ex.Message);
-    }
-}
 
 print("------------------------------------------------------------")  # 60個
 
