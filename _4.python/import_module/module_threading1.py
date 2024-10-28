@@ -25,19 +25,20 @@ multiprocessing.Queue
 
 print("有參數 thread")
 
+
 def do_something(content):
     count = 0
     while True:
-        print(content, end='')
+        print(content, end="")
         time.sleep(0.1)
         count += 1
         if count > 100:
             break
-    print('\n', content, '已完成')
+    print("\n", content, "已完成")
 
 
-threading.Thread(target=do_something, args=('A', ), daemon=True).start()
-threading.Thread(target=do_something, args=('B', ), daemon=True).start()
+threading.Thread(target=do_something, args=("A",), daemon=True).start()
+threading.Thread(target=do_something, args=("B",), daemon=True).start()
 
 sys.exit()
 
@@ -80,6 +81,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("有參數 thread")
 
+
 def thread_ex0(name, num):
     print("啟動 thread :", name + str(num))
     i = 1
@@ -92,7 +94,8 @@ def thread_ex0(name, num):
             break
     print(name + str(num), "已完成")
 
-print('開兩個 thread, 分別進行')
+
+print("開兩個 thread, 分別進行")
 
 # 建立新的執行緒
 thread_ex0a = threading.Thread(target=thread_ex0, args=("執行緒", 1))
@@ -125,7 +128,8 @@ def t3(count, mark):
         time.sleep(random.random())
     print(" t3 結束")
 
-print('開三個 thread, 分別進行')
+
+print("開三個 thread, 分別進行")
 
 tt1 = threading.Thread(target=t1)
 tt2 = threading.Thread(target=t2)
@@ -135,7 +139,7 @@ tt1.start()
 tt2.start()
 tt3.start()
 
-print('等待這三個 thread 分別做完工作')
+print("等待這三個 thread 分別做完工作")
 
 tt1.join()
 tt2.join()
@@ -146,6 +150,7 @@ print("\n全部完成工作")
 print("------------------------------------------------------------")  # 60個
 
 print("有參數 thread")
+
 
 def thread_ex5(name, num):
     print("啟動 thread :", name + str(num))
@@ -733,6 +738,7 @@ p3.start()
 
 print("------------------------------------------------------------")  # 60個
 
+
 # 消費者thread
 def threadConsumer(cond):
     global commonResource
@@ -939,7 +945,6 @@ for thread in threads:
 print("\n完成")
 
 print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------------------------------------")  # 60個

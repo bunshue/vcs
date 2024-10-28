@@ -17,9 +17,11 @@ from datetime import datetime
 print("------------------------------------------------------------")  # 60個
 
 import ssl
+
 ssl._create_default_https_context = ssl._create_stdlib_context
 
 print("------------------------------------------------------------")  # 60個
+
 
 # 無參數
 def get_html_data1(url):
@@ -55,11 +57,14 @@ def get_html_data_from_url(url):
     html_data.encoding = "UTF-8"  # 或是 unicode 也可, 指定編碼方式
     return html_data.text
 
+
 print("------------------------------------------------------------")  # 60個
-'''
+
 print("Response 物件資訊")
+
 url = "https://www.books.com.tw/web/sys_cebbotm/cebook/1003/?loc=P_0001_2_003"  # 博客來網址
 response = requests.get(url)
+
 # 印出<class 'requests.models.Response'>，表示response為Response物件
 print("物件型別：", type(response))
 print("網址：", response.url)
@@ -180,6 +185,114 @@ html_data = get_html_data2(url, params)
 fo = open("tmp_wiki搜尋結果2" + search_word + ".html", "w", encoding="utf-8")
 fo.write(html_data.text)
 fo.close()
+
+print("------------------------------------------------------------")  # 60個
+
+print("測試 cookies over18, 無 cookies 抓網頁")
+
+url = "https://www.ptt.cc/bbs/Gossiping/index.html"
+url = "https://www.ptt.cc/bbs/Beauty/M.1707360497.A.39D.html"
+
+print("無 cookies 抓不到網頁資料")
+response = requests.get(url)
+print(response.text)
+
+print("------------------------------------------------------------")  # 60個
+
+print("測試 cookies over18, 有 cookies 抓網頁")
+
+url = "https://www.ptt.cc/bbs/Gossiping/index.html"
+url = "https://www.ptt.cc/bbs/Beauty/M.1707360497.A.39D.html"
+
+print("有 cookies 可以抓到網頁資料")
+cookies = {"over18": "1"}
+response = requests.get(url, cookies=cookies)
+print(response.text)
+
+print("------------------------------------------------------------")  # 60個
+
+url = "https://www.ptt.cc/bbs/Gossiping/index.html"
+headers = {
+    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36"
+}
+cookies = {"over18": "1"}
+r = requests.get(url, cookies=cookies, headers=headers)
+print(r.text)
+
+print("------------------------------------------------------------")  # 60個
+
+print("測試 headers, 無 headers 抓網頁, ck101 網頁")
+
+# 怎麼無headers 也是OK?
+url = "https://ck101.tw/thread-5778209-1-1.html"
+# url ='https://www.dcard.tw/f/stock/p/237123381'
+
+response = requests.get(url)
+
+print(response)
+print(response.status_code)
+print(response.text)
+
+print("------------------------------------------------------------")  # 60個
+
+print("測試 headers, 有 headers 抓網頁, ck101 網頁")
+
+url = "https://ck101.tw/thread-5778209-1-1.html"
+# url ='https://www.dcard.tw/f/stock/p/237123381'
+
+headers = {
+    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36"
+}
+response = requests.get(url, headers=headers)
+print(response)
+print(response.text)
+
+print("------------------------------------------------------------")  # 60個
+
+print("測試 headers, 無 headers 抓網頁, 金石堂官網")
+print("不支持直接讀取網頁, 要使用偽裝瀏覽器")
+
+url = "https://www.kingstone.com.tw/"
+
+try:
+    response = requests.get(url)
+    response.raise_for_status()  # 如果發生錯誤的話, 會丟出 exception
+except Exception as err:  # err是系統內建的錯誤訊息
+    print(f"網頁下載失敗: {err}")
+print("程式繼續執行 ... ")
+
+print("------------------------------")  # 30個
+
+print("測試 headers, 無 headers 抓網頁, 金石堂官網")
+print("使用偽裝瀏覽器")
+
+headers = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 6.1; WOW64)\
+            AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.101\
+            Safari/537.36",
+}
+url = "https://www.kingstone.com.tw/"
+
+try:
+    response = requests.get(url, headers=headers)
+    response.raise_for_status()  # 如果發生錯誤的話, 會丟出 exception
+except Exception as err:  # err是系統內建的錯誤訊息
+    print(f"網頁下載失敗: {err}")
+print("程式繼續執行 ... ")
+
+print("偽裝瀏覽器擷取網路資料成功")
+
+print("------------------------------------------------------------")  # 60個
+
+url = "https://www.google.com/"
+# 假的 headers 資訊
+headers = {
+    "user-agent": "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36"
+}
+# 加入 headers 資訊
+response = requests.get(url, headers=headers)
+response.encoding = "utf8"
+print(response.text)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -447,7 +560,10 @@ print("測試一個 echo 函數")
 params = {"name": "david", "age": "18"}
 # 加入參數
 url = "https://script.google.com/macros/s/AKfycbw5PnzwybI_VoZaHz65TpA5DYuLkxIF-HUGjJ6jRTOje0E6bVo/exec"
-response = requests.get(url,params=params,)
+response = requests.get(
+    url,
+    params=params,
+)
 print(response.text)
 
 print("------------------------------------------------------------")  # 60個
@@ -568,7 +684,7 @@ print(f"{a}{b}，{weather[a][b]}。")  # 顯示結果
 """
 print("------------------------------------------------------------")  # 60個
 
-print('台灣銀行 匯率查詢')
+print("台灣銀行 匯率查詢")
 
 url = "https://rate.bot.com.tw/xrt/flcsv/0/day"  # 牌告匯率 CSV 網址
 
@@ -643,12 +759,16 @@ import pandas as pd
 
 datestr = "20240716"
 
-url = "https://www.twse.com.tw/exchangeReport/MI_INDEX?response=csv&date=" + datestr + "&type=ALLBUT0999"
+url = (
+    "https://www.twse.com.tw/exchangeReport/MI_INDEX?response=csv&date="
+    + datestr
+    + "&type=ALLBUT0999"
+)
 print(url)
 
 # 下載股價
 response = requests.get(url)
-#print(response.text)
+# print(response.text)
 
 r_text = response.text.split("\n")
 
@@ -660,7 +780,7 @@ df = pd.read_csv(StringIO(data), header=0)
 
 df = df.drop(columns=["Unnamed: 16"])
 
-stock_symbol = "2330" #台積電
+stock_symbol = "2330"  # 台積電
 filter_df = df[df["證券代號"] == stock_symbol]
 print(filter_df)
 
@@ -981,17 +1101,6 @@ print("Host :", socket.gethostbyname(hostname))
 
 print("------------------------------------------------------------")  # 60個
 
-"""
-hostname = "google.com"
-response = os.system("ping -c 3 -i 1 " + hostname)
-print(response)
-
-response = os.popen(f"ping -c 3 -i 1 {hostname}").read()
-print(response)
-"""
-'''
-print("------------------------------------------------------------")  # 60個
-
 print("將網頁上的檔案存成本地檔案 csv / jpg / png")
 
 url = "https://stats.moe.gov.tw/files/detail/111/111_student.csv"
@@ -1035,108 +1144,10 @@ print("存檔檔案 :", filename)
 
 print("------------------------------------------------------------")  # 60個
 
-print("測試 cookies over18, 無 cookies 抓網頁")
-
-url = "https://www.ptt.cc/bbs/Gossiping/index.html"
-url = "https://www.ptt.cc/bbs/Beauty/M.1707360497.A.39D.html"
-
-print('無 cookies 抓不到網頁資料')
-response = requests.get(url)
-print(response.text)
-
-print("------------------------------------------------------------")  # 60個
-
-print("測試 cookies over18, 有 cookies 抓網頁")
-
-url = "https://www.ptt.cc/bbs/Gossiping/index.html"
-url = "https://www.ptt.cc/bbs/Beauty/M.1707360497.A.39D.html"
-
-print('有 cookies 可以抓到網頁資料')
-cookies = {"over18": "1"}
-response = requests.get(url, cookies=cookies)
-print(response.text)
-
-print("------------------------------------------------------------")  # 60個
-
-print("測試 headers, 無 headers 抓網頁, ck101 網頁")
-
-# 怎麼無headers 也是OK?
-url = "https://ck101.tw/thread-5778209-1-1.html"
-# url ='https://www.dcard.tw/f/stock/p/237123381'
-
-response = requests.get(url)
-
-print(response)
-print(response.status_code)
-print(response.text)
-
-print("------------------------------------------------------------")  # 60個
-
-print("測試 headers, 有 headers 抓網頁, ck101 網頁")
-
-url = "https://ck101.tw/thread-5778209-1-1.html"
-# url ='https://www.dcard.tw/f/stock/p/237123381'
-
-headers = {
-    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36"
-}
-response = requests.get(url, headers=headers)
-print(response)
-print(response.text)
-
-print("------------------------------------------------------------")  # 60個
-
-print("測試 headers, 無 headers 抓網頁, 金石堂官網")
-print("不支持直接讀取網頁, 要使用偽裝瀏覽器")
-
-url = "https://www.kingstone.com.tw/"
-
-try:
-    response = requests.get(url)
-    response.raise_for_status()  # 如果發生錯誤的話, 會丟出 exception
-except Exception as err:  # err是系統內建的錯誤訊息
-    print(f"網頁下載失敗: {err}")
-print("程式繼續執行 ... ")
-
-print("------------------------------")  # 30個
-
-print("測試 headers, 無 headers 抓網頁, 金石堂官網")
-print("使用偽裝瀏覽器")
-
-headers = {
-    "User-Agent": "Mozilla/5.0 (Windows NT 6.1; WOW64)\
-            AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.101\
-            Safari/537.36",
-}
-url = "https://www.kingstone.com.tw/"
-
-try:
-    response = requests.get(url, headers=headers)
-    response.raise_for_status()  # 如果發生錯誤的話, 會丟出 exception
-except Exception as err:  # err是系統內建的錯誤訊息
-    print(f"網頁下載失敗: {err}")
-print("程式繼續執行 ... ")
-
-print("偽裝瀏覽器擷取網路資料成功")
-
-print("------------------------------------------------------------")  # 60個
-
-url = "https://www.google.com/"
-# 假的 headers 資訊
-headers = {
-    "user-agent": "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36"
-}
-# 加入 headers 資訊
-response = requests.get(url, headers=headers)
-response.encoding = "utf8"
-print(response.text)
-
-print("------------------------------------------------------------")  # 60個
-
 print("台灣水庫即時水情")
 url = "https://water.taiwanstat.com/"  # 台灣水庫即時水情
-#url = "https://invoice.etax.nat.gov.tw/index.html"
-#url = "https://data.kcg.gov.tw/dataset/6f29f6f4-2549-4473-aa90-bf60d10895dc/resource/30dfc2cf-17b5-4a40-8bb7-c511ea166bd3/download/lightrailtraffic.json"
+# url = "https://invoice.etax.nat.gov.tw/index.html"
+# url = "https://data.kcg.gov.tw/dataset/6f29f6f4-2549-4473-aa90-bf60d10895dc/resource/30dfc2cf-17b5-4a40-8bb7-c511ea166bd3/download/lightrailtraffic.json"
 
 response = requests.get(url)  # 取得網頁內容
 response.encoding = "utf-8"  # 因為該網頁編碼為 utf-8，加上 .encoding 避免亂碼
@@ -1144,8 +1155,10 @@ response.encoding = "utf-8"  # 因為該網頁編碼為 utf-8，加上 .encoding
 print("response內的text")
 print(response.text)  # 讀取並印出 text 屬性
 
+""" NG
 print("response轉成json格式")
 print(response.json())
+"""
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1190,9 +1203,7 @@ print("------------------------------------------------------------")  # 60個
 
 url = "https://www.googleapis.com/books/v1/volumes"
 
-data = {'q': 'Python',
-        'maxResults': 5, 
-        'projection': 'lite'}
+data = {"q": "Python", "maxResults": 5, "projection": "lite"}
 r = requests.get(url, params=data)
 print(r.json())
 
@@ -1247,15 +1258,15 @@ print("------------------------------------------------------------")  # 60個
 
 r = requests.get("http://www.google.com")
 
-print(r.headers['Content-Type'])
-print(r.headers['Content-Length'])
-print(r.headers['Date'])
-print(r.headers['Server'])
+print(r.headers["Content-Type"])
+print(r.headers["Content-Length"])
+print(r.headers["Date"])
+print(r.headers["Server"])
 
-print(r.headers.get('Content-Type'))
-print(r.headers.get('Content-Length'))
-print(r.headers.get('Date'))
-print(r.headers.get('Server'))
+print(r.headers.get("Content-Type"))
+print(r.headers.get("Content-Length"))
+print(r.headers.get("Date"))
+print(r.headers.get("Server"))
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1268,15 +1279,13 @@ print("------------------------------------------------------------")  # 60個
 
 url = "https://www.googleapis.com/books/v1/volumes"
 
-url_params = {'q': 'Python',
-              'maxResults': 3, 
-              'projection': 'lite'}
+url_params = {"q": "Python", "maxResults": 3, "projection": "lite"}
 r = requests.get(url, params=url_params)
 print(r.json())
 
 print("------------------------------------------------------------")  # 60個
 
-try: 
+try:
     r = requests.get("http://www.google.com", timeout=0.03)
     print(r.text)
 except requests.exceptions.Timeout as ex:
@@ -1284,7 +1293,7 @@ except requests.exceptions.Timeout as ex:
 
 print("------------------------------------------------------------")  # 60個
 
-url = 'http://www.google.com/404'
+url = "http://www.google.com/404"
 
 try:
     r = requests.get(url, timeout=3)
@@ -1296,15 +1305,7 @@ except requests.exceptions.HTTPError as ex2:
 except requests.exceptions.ConnectionError as ex3:
     print("網路連線錯誤: " + str(ex3))
 except requests.exceptions.Timeout as ex4:
-    print("Timeout錯誤: " + str(ex4))     
-
-print("------------------------------------------------------------")  # 60個
-
-url = "https://www.ptt.cc/bbs/Gossiping/index.html"
-headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36'}
-cookies = { "over18": "1" }
-r = requests.get(url, cookies=cookies, headers=headers)
-print(r.text)
+    print("Timeout錯誤: " + str(ex4))
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1447,10 +1448,16 @@ print("出現次數 :", html.count(text))
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------")  # 30個
 
+hostname = "google.com"
+response = os.system("ping -c 3 -i 1 " + hostname)
+print(response)
+
+response = os.popen(f"ping -c 3 -i 1 {hostname}").read()
+print(response)
+
+print("------------------------------------------------------------")  # 60個

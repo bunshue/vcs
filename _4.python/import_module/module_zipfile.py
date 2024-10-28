@@ -404,10 +404,11 @@ files.close()
 print("------------------------------------------------------------")  # 60個
 
 import zipfile
-with zipfile.ZipFile('data/kagglecatsanddogs_3367a.zip', 'r') as zip:
+
+with zipfile.ZipFile("data/kagglecatsanddogs_3367a.zip", "r") as zip:
     for i in zip.namelist():
-        #print(i)
-        if i.startswith('kagglecatsanddogs_3367a/PetImages'):
+        # print(i)
+        if i.startswith("kagglecatsanddogs_3367a/PetImages"):
             print(i)
             zip.extract(i)
 

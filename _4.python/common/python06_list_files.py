@@ -904,7 +904,7 @@ print("------------------------------------------------------------")  # 60個
 #mkdir多一層保護
 foldername = "ttttttttttttttttttt"
 try:
-    os.mkdir(foldername)
+    os.mkdir(foldername).exit
     print("已建立資料夾 :", foldername)
 except OSError as msg:
     print('%s: 建立資料夾失敗 (%s)' % (foldername, str(msg)))
@@ -2505,6 +2505,8 @@ print(cc)
 '''
 print("------------------------------------------------------------")  # 60個
 
+print('test start')
+
 TB = 1024 * 1024 * 1024 * 1024  # 定義TB的計算常量
 GB = 1024 * 1024 * 1024  # 定義GB的計算常量
 MB = 1024 * 1024  # 定義MB的計算常量
@@ -2551,8 +2553,11 @@ def check_video_filename(filename):
 
 print("轉出多層 os.walk 1 AP專用")
 
-foldername = "D:/內視鏡影片/_ims影片1"
+#foldername = "D:/內視鏡影片/_ims影片1"
 #foldername = "F:/_________AP_kilo_F/__ap0117"
+foldername = "D:/內視鏡影片/_ims影片1"
+#foldername = f"D:\vcs\astro\_DATA2\_________整理_mp3\_音樂"
+foldername = "D:/vcs/astro/_DATA2/_________整理_mp3/_音樂"
 
 total_folders = 0
 total_files = 0
@@ -2569,7 +2574,8 @@ for item in os.walk(foldername):  # 多層
             total_files += 1
             filesize = os.stat(ffname).st_size  # 取出檔案大小
             total_size += filesize
-            all_files.append(ffname + " " + ByteConversionTBGBMBKB(filesize))
+            #all_files.append(ffname + " " + ByteConversionTBGBMBKB(filesize))
+            all_files.append(ffname)
             abspath = os.path.abspath(ffname)
             directory, short_filename = os.path.split(abspath)
             # print("全檔名", ffname)
@@ -2585,11 +2591,18 @@ print("位置 :", foldername)
 print("容量 :", total_size, "位元組")
 print("包含 :", total_files, "個檔案,", total_folders, "個資料夾")
 
+"""
 print("顯示結果:")
 for _ in all_files:
-    print(_)
+    print(_, end = " ")
+"""
 
-print("總容量 : ", ByteConversionTBGBMBKB(total_size))
+string_video_filenames = ""
+for _ in all_files:
+    string_video_filenames += _+" "
+
+#print("總容量 : ", ByteConversionTBGBMBKB(total_size))
+
 
 """
 #呼叫 potplayer 播放之
@@ -2598,18 +2611,35 @@ print("總容量 : ", ByteConversionTBGBMBKB(total_size))
 3. 檔名含有關鍵字 的 影片檔案
 4. 將找到的資料存成文字檔
 5. 一次播放找到符合條件的影片檔案
+"""
+"""
+# 目前在python使用potplayer, 無法一次播放2個檔案......
 
-os.system("notepad " + filename_r)
+video_filename = 'C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4'
 
-all_filename :  "D:\vcs\04_能臣之路.rmvb" "D:\vcs\07_深谋远虑.rmvb" "D:\vcs\09_一决雌雄.rmvb"
+#os.system("notepad " + filename_r)
+
+all_filename = "D:\vcs\04_能臣之路.rmvb " + "D:\vcs\07_深谋远虑.rmvb " + "D:\vcs\09_一决雌雄.rmvb"
 
 video_player_path_kilo = "xxxx"
 
-video_player_path_sugar = "xxxx"
+video_player_path_sugar = "D:/___backup/PotPlayer/PotPlayerMini64.exe"
+
+cmd = "D:/___backup/PotPlayer/PotPlayerMini64.exe spiderman1.mp4 spiderman2.mp4"
+os.system(cmd)
+
+cmd = video_player_path_sugar + " " + video_filename
+print(cmd)
+os.system(cmd)
+
+video_filename = 'C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4'
+
+os.system(video_player_path_sugar+ " " + video_filename)
+
+#os.system(video_player_path_sugar+ " " + string_video_filenames)
+#os.system(video_player_path_sugar)
 
 """
-
-
 print("------------------------------------------------------------")  # 60個
 
 def get_video_info(video):
@@ -2643,12 +2673,7 @@ filesize = os.stat(filename).st_size
 print('檔案大小:\t', filesize, ' 拜')
 print('檔案大小:\t', ByteConversionTBGBMBKB(filesize))
 
-
-
-
 print("------------------------------------------------------------")  # 60個
-
-
 
 """
 分析
@@ -2660,10 +2685,8 @@ if file.endswith('.jpg') or file.endswith('.png'):
         if ext == "png" or ext == "jpg":
             allfiles.append(foldername +'/'+file)
 
-
       for file in allfiles:  
          filename = file.split('.')[0] #主檔名         
-
 
    if basename == target_foldername:  # 輸出資料夾不再重複處理
       continue
@@ -2671,7 +2694,6 @@ if file.endswith('.jpg') or file.endswith('.png'):
 """
 
 print("------------------------------------------------------------")  # 60個
-
 
 
 def test_get_filename(foldername):
@@ -2736,8 +2758,6 @@ foldername = 'C:/_git/vcs/_1.data/______test_files3/DrAP_test'
 test_get_filename(foldername)
 """
 
-print("------------------------------------------------------------")  # 60個
-
 print('------------------------------------------------------------')	#60個
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
@@ -2746,8 +2766,6 @@ filename = os.path.normcase(filename)
 print(filename)
 
 print('------------------------------------------------------------')	#60個
-
-
 
 filename = 'C:/aaa/bbb/ccc/ddd/eee.jpg'
 

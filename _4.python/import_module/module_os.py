@@ -17,50 +17,46 @@ import os
 
 print("------------------------------------------------------------")  # 60個
 
-print('取得環境變數')
+print("取得環境變數")
 
 """用法
 os.getenv(key, default = None)
 """
 
-print('key存在')
-key = 'HOME'
+print("key存在")
+key = "HOME"
 value = os.getenv(key)
 print("取得 :", value)
 
-print('key不存在')
+print("key不存在")
 value = os.getenv("OPENAI_API_KEY")
 print("取得 :", value)
 
-print('key不存在, 使用預設值')
+print("key不存在, 使用預設值")
 value = os.getenv("OPENAI_API_KEY", "抱歉, API key不存在")
 print("取得 :", value)
 
-print('預設環境變數')
+print("預設環境變數")
 
-key = 'TEMP'
+key = "TEMP"
 value = os.getenv(key)
 print("TEMP取得 :", value)
 
-key = 'TMP'
+key = "TMP"
 value = os.getenv(key)
 print("TMP取得 :", value)
 
-key = 'PATH'
+key = "PATH"
 value = os.getenv(key)
 print("PATH取得 :", value)
 
 print("------------------------------------------------------------")  # 60個
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
-
-print('------------------------------------------------------------')	#60個
-
-
-
+print("------------------------------------------------------------")  # 60個
 
 
 """
@@ -81,4 +77,3 @@ os.system("cls")  # 在cmd視窗下清除螢幕
 
 
 """
-

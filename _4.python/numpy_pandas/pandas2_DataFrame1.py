@@ -112,7 +112,7 @@ def make_data_frame_from_dict():
     df = pd.DataFrame(datas)
     return df
 
-
+'''
 print("目前 Pandas 版本 :")
 cc = pd.__version__
 print(cc)
@@ -416,9 +416,11 @@ print(cc)
 print("------------------------------------------------------------")  # 60個
 
 print("顯示欄資料")
+print('取出1欄資料')
 print('df["自然"] ->')
 print(df["自然"])
 print('df[["英文", "數學", "自然"] ->')
+print('取出3欄資料')
 print(df[["英文", "數學", "自然"]])
 print("df[df.數學>=80] ->")
 print(df[df.數學 >= 80])
@@ -703,6 +705,7 @@ print(df)
 print("欄位 自然 的資料")
 print(df["自然"])
 print("欄位 國文 數學 自然 的資料")
+print('取出3欄資料')
 print(df[["國文", "數學", "自然"]])
 print("欄位 國文 >= 80 的資料")
 print(df[df["國文"] >= 80])
@@ -938,6 +941,7 @@ print("顯示df之1:3")
 print(df[3:5])
 
 print("顯示df之 國文 英文 社會 欄")
+print('取出3欄資料')
 print(df[["國文", "英文", "社會"]])
 
 print("顯示")
@@ -1301,6 +1305,7 @@ print(df)
 
 print(df["國文"])
 
+print('取出2欄資料')
 print(df[["英文", "數學"]])
 
 print(df[0:2])
@@ -4115,16 +4120,12 @@ df[column] = np.random.choice(range(1, 101), 4)
 df[column] = np.random.choice(range(1, 11), 10)
 df[column] = np.random.choice(range(1, 11), 10)
 
-
 datas = ["唐三藏", "孫悟空", "豬八戒", "沙悟淨", "白龍馬", "牛魔王", "紅孩兒", "蜘蛛精", "白骨精"]
-
 
 print("增加一列  TBD")
 s = pd.Series({"姓名": "白龍馬", "國文": 84, "英文": 91, "數學": 82, "社會": 95, "自然": 92})
 
-
 datas = np.random.randint(6, 16, (4, 5))  # 整數數字6~12 10X5
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -4133,9 +4134,7 @@ order_df = pd.merge(order_df, customer_df, left_on="數學", right_on="國文", 
 
 order_df = pd.merge(order_df, customer_df, left_on="數學", right_index=True, how="inner")
 
-
 print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------------------------------------")  # 60個
 print("測試完成部分")  # 60個
@@ -4621,6 +4620,7 @@ print(df)
 print("欄位 自然 的資料")
 print(df["自然"])
 print("欄位 國文 數學 自然 的資料")
+print('取出3欄資料')
 print(df[["國文", "數學", "自然"]])
 print("欄位 國文 >= 80 的資料")
 print(df[df["國文"] >= 80])
@@ -6001,335 +6001,56 @@ air_quality_renamed = air_quality.rename(
 # 將 columns 名稱全部更改微小寫
 air_quality_renamed = air_quality_renamed.rename(columns=str.lower)
 """
-
+'''
 print("------------------------------------------------------------")  # 60個
 
-
-df = pd.DataFrame(
-    {"中文名": ["鼠", "牛", "虎", "兔"], "英文名": ["mouse", "ox", "tiger", "rabbit"]}
-)
-print(df[["中文名", "英文名"]])
-
-print("------------------------------------------------------------")  # 60個
-
-dists = {
-    "name": [
-        "中正區",
-        "板橋區",
-        "桃園區",
-        "北屯區",
-        "安南區",
-        "三民區",
-        "大安區",
-        "永和區",
-        "八德區",
-        "前鎮區",
-        "鳳山區",
-        "信義區",
-        "新店區",
+score_data = {
+    "姓名": [
+        "唐三藏",
+        "孫悟空",
+        "豬八戒",
+        "沙悟淨",
     ],
-    "population": [
-        159598,
-        551452,
-        441287,
-        275207,
-        192327,
-        343203,
-        309835,
-        222531,
-        198473,
-        189623,
-        359125,
-        225561,
-        302070,
+    "國文": [
+        92,
+        81,
+        81,
+        92,
     ],
-    "city": [
-        "台北市",
-        "新北市",
-        "桃園市",
-        "台中市",
-        "台南市",
-        "高雄市",
-        "台北市",
-        "新北市",
-        "桃園市",
-        "高雄市",
-        "高雄市",
-        "台北市",
-        "新北市",
+    "英文": [
+        89,
+        79,
+        82,
+        72,
+    ],
+    "數學": [
+        71,
+        92,
+        89,
+        95,
     ],
 }
-df = pd.DataFrame(dists)
+
+student_name = [
+    "唐三藏",
+    "孫悟空",
+    "豬八戒",
+    "沙悟淨",
+]
+
+df = pd.DataFrame(score_data, columns=["國文", "英文", "數學"], index=student_name)
 print(df)
 
 print("------------------------------------------------------------")  # 60個
 
-dists = {
-    "name": [
-        "中正區",
-        "板橋區",
-        "桃園區",
-        "北屯區",
-        "安南區",
-        "三民區",
-        "大安區",
-        "永和區",
-        "八德區",
-        "前鎮區",
-        "鳳山區",
-        "信義區",
-        "新店區",
-    ],
-    "population": [
-        159598,
-        551452,
-        441287,
-        275207,
-        192327,
-        343203,
-        309835,
-        222531,
-        198473,
-        189623,
-        359125,
-        225561,
-        302070,
-    ],
-    "city": [
-        "台北市",
-        "新北市",
-        "桃園市",
-        "台中市",
-        "台南市",
-        "高雄市",
-        "台北市",
-        "新北市",
-        "桃園市",
-        "高雄市",
-        "高雄市",
-        "台北市",
-        "新北市",
-    ],
-}
-
-ordinals = [
-    "first",
-    "second",
-    "third",
-    "fourth",
-    "fifth",
-    "sixth",
-    "seventh",
-    "eigth",
-    "ninth",
-    "tenth",
-    "eleventh",
-    "twelvth",
-    "thirteenth",
-]
-df = pd.DataFrame(dists, index=ordinals)
+df = pd.DataFrame(score_data, columns=["國文", "英文", "數學"], index=score_data["姓名"])
 print(df)
 
 print("------------------------------")  # 30個
 
-df2 = pd.DataFrame(dists)
-df2.index = ordinals
+df2 = pd.DataFrame(score_data, index=student_name)
+df2.columns = ["姓名", "國文", "英文", "數學"]
 print(df2)
-
-print("------------------------------------------------------------")  # 60個
-
-dists = {
-    "name": [
-        "中正區",
-        "板橋區",
-        "桃園區",
-        "北屯區",
-        "安南區",
-        "三民區",
-        "大安區",
-        "永和區",
-        "八德區",
-        "前鎮區",
-        "鳳山區",
-        "信義區",
-        "新店區",
-    ],
-    "population": [
-        159598,
-        551452,
-        441287,
-        275207,
-        192327,
-        343203,
-        309835,
-        222531,
-        198473,
-        189623,
-        359125,
-        225561,
-        302070,
-    ],
-    "city": [
-        "台北市",
-        "新北市",
-        "桃園市",
-        "台中市",
-        "台南市",
-        "高雄市",
-        "台北市",
-        "新北市",
-        "桃園市",
-        "高雄市",
-        "高雄市",
-        "台北市",
-        "新北市",
-    ],
-}
-
-ordinals = [
-    "first",
-    "second",
-    "third",
-    "fourth",
-    "fifth",
-    "sixth",
-    "seventh",
-    "eigth",
-    "ninth",
-    "tenth",
-    "eleventh",
-    "twelvth",
-    "thirteenth",
-]
-df = pd.DataFrame(dists, columns=["name", "city", "population"], index=ordinals)
-print(df)
-
-print("------------------------------")  # 30個
-
-df2 = pd.DataFrame(dists, index=ordinals)
-df2.columns = ["name", "city", "population"]
-print(df2)
-
-print("------------------------------------------------------------")  # 60個
-
-dists = {
-    "name": [
-        "中正區",
-        "板橋區",
-        "桃園區",
-        "北屯區",
-        "安南區",
-        "三民區",
-        "大安區",
-        "永和區",
-        "八德區",
-        "前鎮區",
-        "鳳山區",
-        "信義區",
-        "新店區",
-    ],
-    "population": [
-        159598,
-        551452,
-        441287,
-        275207,
-        192327,
-        343203,
-        309835,
-        222531,
-        198473,
-        189623,
-        359125,
-        225561,
-        302070,
-    ],
-    "city": [
-        "台北市",
-        "新北市",
-        "桃園市",
-        "台中市",
-        "台南市",
-        "高雄市",
-        "台北市",
-        "新北市",
-        "桃園市",
-        "高雄市",
-        "高雄市",
-        "台北市",
-        "新北市",
-    ],
-}
-
-df = pd.DataFrame(dists, columns=["name", "population"], index=dists["city"])
-print(df)
-
-print("------------------------------------------------------------")  # 60個
-
-dists = {
-    "name": [
-        "中正區",
-        "板橋區",
-        "桃園區",
-        "北屯區",
-        "安南區",
-        "三民區",
-        "大安區",
-        "永和區",
-        "八德區",
-        "前鎮區",
-        "鳳山區",
-        "信義區",
-        "新店區",
-    ],
-    "population": [
-        159598,
-        551452,
-        441287,
-        275207,
-        192327,
-        343203,
-        309835,
-        222531,
-        198473,
-        189623,
-        359125,
-        225561,
-        302070,
-    ],
-    "city": [
-        "台北市",
-        "新北市",
-        "桃園市",
-        "台中市",
-        "台南市",
-        "高雄市",
-        "台北市",
-        "新北市",
-        "桃園市",
-        "高雄市",
-        "高雄市",
-        "台北市",
-        "新北市",
-    ],
-}
-
-ordinals = [
-    "first",
-    "second",
-    "third",
-    "fourth",
-    "fifth",
-    "sixth",
-    "seventh",
-    "eigth",
-    "ninth",
-    "tenth",
-    "eleventh",
-    "twelvth",
-    "thirteenth",
-]
-df = pd.DataFrame(dists, columns=["name", "population"], index=dists["city"])
-print(df.T)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -6446,7 +6167,6 @@ data = pd.DataFrame({
 # 使用 KNN 算法填充缺失值
 imputer = KNNImputer(n_neighbors=2)
 data_imputed = pd.DataFrame(imputer.fit_transform(data), columns=data.columns)
-
 
 """
 KNN 算法基本概念

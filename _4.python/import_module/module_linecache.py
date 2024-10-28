@@ -19,4 +19,3 @@ for i in range(times):
 print("\n隨機抽取：", random.choice(getLines))
 
 print("------------------------------------------------------------")  # 60個
-

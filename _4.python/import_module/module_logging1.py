@@ -42,9 +42,7 @@ print("------------------------------------------------------------")  # 60個
 
 import logging
 
-logging.basicConfig(
-    filename="tmp_log_filename02.txt",
-    level=logging.DEBUG)
+logging.basicConfig(filename="tmp_log_filename02.txt", level=logging.DEBUG)
 
 logging.debug("logging message, DEBUG")
 logging.info("logging message, INFO")
@@ -57,9 +55,8 @@ print("------------------------------------------------------------")  # 60個
 import logging
 
 logging.basicConfig(
-    filename="tmp_log_filename06.txt",
-    level=logging.DEBUG,
-    format="%(asctime)s")
+    filename="tmp_log_filename06.txt", level=logging.DEBUG, format="%(asctime)s"
+)
 
 
 print("------------------------------------------------------------")  # 60個
@@ -69,7 +66,8 @@ import logging
 logging.basicConfig(
     filename="tmp_log_filename07.txt",
     level=logging.DEBUG,
-    format="%(asctime)s : %(message)s")
+    format="%(asctime)s : %(message)s",
+)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -109,7 +107,8 @@ print("start here")
 logging.basicConfig(
     filename="tmp_log_filename08.txt",
     level=logging.INFO,
-    format="*** %(levelname)s %(message)s")
+    format="*** %(levelname)s %(message)s",
+)
 
 log = logging.getLogger("multissl")
 
@@ -137,9 +136,7 @@ mesg2 = "bbbb"
 function_name = "cccc"
 number = 1234
 
-logging.basicConfig(
-    filename="tmp_log_filename09.txt",
-    level=logging.INFO)
+logging.basicConfig(filename="tmp_log_filename09.txt", level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 logger.info("Sending %r to %r, function : %s", mesg1, mesg2, function_name)
@@ -152,14 +149,14 @@ logger.exception("Error in %s", function_name)
 logging.basicConfig(
     filename="tmp_log_filename10.txt",
     level=logging.INFO,
-    format="%(levelname)s: %(message)s")
+    format="%(levelname)s: %(message)s",
+)
 
 logger = logging.getLogger(__name__)
 
 logging.basicConfig(
-    filename="tmp_log_filename11.txt",
-    level=logging.INFO,
-    format="%(message)s")
+    filename="tmp_log_filename11.txt", level=logging.INFO, format="%(message)s"
+)
 
 logger = logging.getLogger(__name__)
 
@@ -170,7 +167,7 @@ import logging
 logging.basicConfig(
     filename="tmp_log_filename12.txt",
     level=logging.DEBUG,
-    format="%(asctime)s - %(levelname)s : %(message)s"
+    format="%(asctime)s - %(levelname)s : %(message)s",
 )
 
 logging.debug("logging message.")
@@ -297,7 +294,7 @@ logging.debug("程式結束")
 
 
 print("------------------------------------------------------------")  # 60個
-'''
+"""
 import logging
 
 # 獲取logger對象,取名mylog
@@ -343,9 +340,10 @@ f = open("tmp_log_filename32.txt", "w")
 f.write("# BUILD INFO\n")
 f.write("# Date: %s\n" % time.ctime())
 f.close()
-'''
+"""
 print("------------------------------------------------------------")  # 60個
 import logging
+
 logger = logging.getLogger("show_patient_IDs")
 logger.info(f"reading: {file_name}")
 logger.info("finished reading")
@@ -353,17 +351,13 @@ logger.info("finished reading")
 print("------------------------------------------------------------")  # 60個
 
 
-
-
 print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -375,5 +369,3 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
-
