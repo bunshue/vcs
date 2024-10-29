@@ -1,3 +1,19 @@
+各種演算法
+
+迴歸類：
+LinearRegression
+SimpleLinearRegression
+SMOreg
+
+決策樹＋迴歸：
+M5P
+
+決策樹：
+RandomTree
+REPTree
+
+
+
 
 import matplotlib.pyplot as plt
 也就是說，我們繪圖實際上用的是matplotlib包的pyplot模塊。

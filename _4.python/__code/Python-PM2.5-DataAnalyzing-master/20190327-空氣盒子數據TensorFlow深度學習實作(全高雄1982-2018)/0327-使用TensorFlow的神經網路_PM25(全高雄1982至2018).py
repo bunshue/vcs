@@ -39,7 +39,8 @@ mpl.rcParams['font.sans-serif'] = ['Microsoft YaHei']
 # 指定默認字形：解決plot不能顯示中文問題
 mpl.rcParams['axes.unicode_minus'] = False
 
-df=pd.read_excel('KH-1982-2018.xlsx')
+filename = "C:/_git/vcs/_4.python/__code/Python-PM2.5-DataAnalyzing-master/_ok/KH-1982-2018.xlsx"
+df=pd.read_excel(filename)
 
 #檢查屬性
 
@@ -111,7 +112,8 @@ import tensorflow as tf
 from sklearn.metrics import explained_variance_score,mean_absolute_error,median_absolute_error
 from sklearn.model_selection import train_test_split  
 
-df=pd.read_excel('KH-1982-2018.xlsx')
+filename = "C:/_git/vcs/_4.python/__code/Python-PM2.5-DataAnalyzing-master/_ok/KH-1982-2018.xlsx"
+df=pd.read_excel(filename)
 # execute the describe() function and transpose the output so that it doesn't overflow the width of the screen
 cc = df.describe().T
 print(cc)
