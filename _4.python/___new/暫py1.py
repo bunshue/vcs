@@ -1,4 +1,65 @@
 
+
+C:\Users\070601>pip show scikit-learn
+C:\Users\070601>pip show pytube
+C:\Users\070601>python --version
+C:\Users\070601>python -m pip install --upgrade pip
+C:\Users\070601>pip --version
+
+
+也可以針對特定套件顯示更詳細的套件資訊
+pip show <package-name>
+pip show pytube
+
+
+如何使用 pip 一次安裝多個套件
+
+每次換環境就需要重新安裝套件，輸入指令重新安裝很麻煩，所以我們通常都會將要安裝的套件寫在 txt 檔案裡面，只需要 install 這個文字檔就可以一次安裝所有需要的套件囉！
+
+ pip 安裝 requirements.txt 內的清單：
+$ pip install -r requirements.txt 
+
+2. 將安裝過的套件建立成 requirements.txt 文件清單：
+$ pip freeze > requirements.txt
+
+Python PIP 使用 requirements.txt 管理套件相依性
+
+PIP 倒出現有環境套件
+
+    $ pip freeze > requirements.txt # requirements.txt 如下述格式
+    pylint==1.6.5
+    PyMySQL==0.6.7
+
+PIP 安裝 requirements.txt 的套件
+
+    $ pip install -r requirements.txt
+
+
+
+
+更新pip程式
+python.exe -m pip install --upgrade pip
+
+
+Python Requirements File
+
+將目前電腦上的安裝套件存成檔案
+pip freeze > requirements.txt
+
+由requirements.txt安裝套件
+pip install -r requirements.txt
+
+檢查所有套件有無更新版本
+pip list --outdated
+
+更新套件
+pip install -U XXXXXXX
+
+
+又安裝又更新所有套件
+pip install -U -r requirements.txt
+
+
 在tk內顯示opencv
 
 np.meshgrid為numpy之函數
