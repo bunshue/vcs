@@ -7,8 +7,6 @@
 
 print("------------------------------------------------------------")  # 60個
 
-import seaborn as sns  # 海生, 自動把圖畫得比較好看
-
 import ssl
 ssl._create_default_https_context = ssl._create_stdlib_context
 
@@ -26,6 +24,7 @@ import random
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns  # 海生, 自動把圖畫得比較好看
 
 font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示

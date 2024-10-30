@@ -3,6 +3,8 @@ pip install scikit-learn
 
 """
 
+import sklearn
+
 print("------------------------------------------------------------")  # 60個
 
 # 共同
@@ -14,6 +16,7 @@ import random
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns  # 海生, 自動把圖畫得比較好看
 
 font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
@@ -24,17 +27,15 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-'''
-import sklearn as skl
 
-print(skl.__version__)
+import ssl
+ssl._create_default_https_context = ssl._create_stdlib_context
+
+print("------------------------------------------------------------")  # 60個
 
 from sklearn import datasets, svm, metrics
-
+print(sklearn.__version__)
 print(dir(datasets))
-
-import sklearn
-
 print(sklearn)
 
 print("------------------------------------------------------------")  # 60個
@@ -187,8 +188,6 @@ else:
 
 print("------------------------------------------------------------")  # 60個
 
-import seaborn as sns  # 海生, 自動把圖畫得比較好看
-
 iris = sns.load_dataset("iris")
 iris.head()
 
@@ -199,10 +198,6 @@ print(iris)
 print("cccc")
 
 print("------------------------------------------------------------")  # 60個
-
-# seaborn
-
-import seaborn as sns  # 海生, 自動把圖畫得比較好看
 
 import plotly.offline
 import plotly.express as px
@@ -1259,7 +1254,7 @@ df = pd.read_csv("data/test3.csv")
 label_encoder = preprocessing.LabelEncoder()
 df["性別"] = label_encoder.fit_transform(df["性別"])
 print(df)
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 # How do I use pandas with scikit-learn to create Kaggle submissions? (video)

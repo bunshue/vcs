@@ -6,47 +6,34 @@ webbrowser.open("http://xkcd.com/353/")
 
 print("------------------------------------------------------------")  # 60個
 
-import webbrowser
-
 address = "花蓮市中正路"
 webbrowser.open("http://www.google.com.tw/maps/place/" + address)
 
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-
-import webbrowser
-
 print("用預設的瀏覽器開啟網頁")
 url = "https://zh.wikipedia.org/wiki/Wikipedia:%E9%A6%96%E9%A1%B5"
-print(url)
 webbrowser.open(url)
 
-
 """
-print('用預設瀏覽器開啟網頁')
+print('用預設瀏覽器開啟html檔案')
 import webbrowser
-filename = 'C:/_git/vcs/_1.data/______test_files1/beautifulsoup_data.html'
+filename = "xxxxx.html"
 webbrowser.open(filename)
 """
 
-
-print("webbrowser")
-import webbrowser
-
-url = "http://www.mcut.edu.tw"
-webbrowser.open(url)
+# 使用默認瀏覽器打開 html 文件
+webbrowser.open("tmp_導出圖表.html", new=1)
 
 print("------------------------------------------------------------")  # 60個
 
-print("webbrowser")
 # address = input("請輸入地址 : ")
 address = "新竹市東區榮光里中華路二段445號"
 
 url = "http://www.google.com.tw/maps/place/" + address
-
 webbrowser.open(url)
+
+print("------------------------------------------------------------")  # 60個
 
 # re 使用
 
@@ -73,11 +60,6 @@ else:
     print("網頁下載失敗")
 
 print("------------------------------------------------------------")  # 60個
-
-import webbrowser
-
-# 使用默認瀏覽器打開 html 文件
-webbrowser.open("tmp_導出圖表.html", new=1)
 
 print("------------------------------------------------------------")  # 60個
 

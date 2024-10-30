@@ -10,6 +10,7 @@ import os
 import sys
 import time
 import math
+import time
 import random
 import numpy as np
 import pandas as pd
@@ -198,9 +199,292 @@ wedgeprops：設置圓餅塊的屬性，例如邊框顏色、寬度等。
 """
 
 print("------------------------------------------------------------")  # 60個
+
+x = np.linspace(0, 2*np.pi, 100)
+y = np.sin(x)
+z = np.cos(x)
+
+# Create Plot
+fig, axes = plt.subplots(2, 3)
+
+# Plot Data
+axes[0, 0].plot(x, y)
+axes[0, 1].plot(x, y)
+axes[0, 2].plot(x, y)
+axes[1, 0].plot(x, y)
+axes[1, 1].plot(x, y)
+axes[1, 2].plot(x, y)
+
+
+axes[0, 0].set_xlabel('x')
+axes[0, 0].set_ylabel('y')
+axes[0, 0].set_title('第一張圖')
+axes[0, 0].grid(True)
+
+plt.show()
+
 print("------------------------------------------------------------")  # 60個
+
+Z = np.random.uniform(0, 1, (8, 8))
+plt.imshow(Z)
+
+plt.show()
+
 print("------------------------------------------------------------")  # 60個
+
+Z = np.random.uniform(0, 1, (8, 8))
+plt.contourf(Z)
+
+plt.show()
+
 print("------------------------------------------------------------")  # 60個
+
+Z = np.random.normal(0, 1, 100)
+plt.hist(Z)
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+# Create an error bar plot
+X = np.arange(5)
+Y = np.random.uniform(0, 1, 5)
+plt.errorbar(X, Y, Y / 4)
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+# Create a box plot
+Z = np.random.normal(0, 1, (100, 3))
+plt.boxplot(Z)
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+# Create a figure with two subplots (vertically stacked)
+X = np.linspace(0, 10, 100)
+Y1, Y2 = np.sin(X), np.cos(X)
+fig, (ax1, ax2) = plt.subplots(2, 1)
+ax1.plot(X, Y1, color="C1")
+ax2.plot(X, Y2, color="C0")
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+# Create a figure with two subplots (horizontally aligned)
+X = np.linspace(0, 10, 100)
+Y1, Y2 = np.sin(X), np.cos(X)
+fig, (ax1, ax2) = plt.subplots(1, 2)
+ax1.plot(Y1, X, color="C1")
+ax2.plot(Y2, X, color="C0")
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+#Figure, axes & spines
+
+# Create a 3x3 grid of subplots
+fig, axs = plt.subplots(3, 3)
+
+# Set face colors for specific subplots
+axs[0, 0].set_facecolor("#ddddff")
+axs[2, 2].set_facecolor("#ffffdd")
+
+# Create a 3x3 grid of subplots
+fig, axs = plt.subplots(3, 3)
+
+# Add a grid specification and set face color for a specific subplot
+gs = fig.add_gridspec(3, 3)
+ax = fig.add_subplot(gs[0, :])
+ax.set_facecolor("#ddddff")
+
+# Create a figure with a single subplot
+fig, ax = plt.subplots()
+
+# Remove top and right spines from the subplot
+ax.spines["top"].set_color("None")
+ax.spines["right"].set_color("None")
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+#Ticks & labels
+
+from matplotlib.ticker import MultipleLocator as ML
+from matplotlib.ticker import ScalarFormatter as SF
+
+# Create a figure with a single subplot
+fig, ax = plt.subplots()
+
+# Set minor tick locations and formatter for the x-axis
+ax.xaxis.set_minor_locator(ML(0.2))
+ax.xaxis.set_minor_formatter(SF())
+
+# Rotate minor tick labels on the x-axis
+ax.tick_params(axis='x', which='minor', rotation=90)
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+#Lines & markers
+
+# Generate data and create a plot
+X = np.linspace(0.1, 10 * np.pi, 1000)
+Y = np.sin(X)
+plt.plot(X, Y, "C1o:", markevery=25, mec="1.0")
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+#Scales & projections
+
+# Create a figure with a single subplot
+fig, ax = plt.subplots()
+
+# Set x-axis scale to logarithmic
+ax.set_xscale("log")
+
+# Plot data with specified formatting
+ax.plot(X, Y, "C1o-", markevery=25, mec="1.0")
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+#Text & ornaments
+
+# Create a figure with a single subplot
+fig, ax = plt.subplots()
+
+# Fill the area between horizontal lines with a curve
+ax.fill_betweenx([-1, 1], [0], [2*np.pi])
+
+# Add a text annotation to the plot
+ax.text(0, -1, r" Period $\Phi$")
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+#Legend
+
+# Create a figure with a single subplot
+fig, ax = plt.subplots()
+
+# Plot sine and cosine curves with specified colors and labels
+ax.plot(X, np.sin(X), "C0", label="Sine")
+ax.plot(X, np.cos(X), "C1", label="Cosine")
+
+# Add a legend with customized positioning and formatting
+ax.legend(bbox_to_anchor=(0, 1, 1, 0.1), ncol=2, mode="expand", loc="lower left")
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+#Annotation
+
+# Create a figure with a single subplot
+fig, ax = plt.subplots()
+
+ax.plot(X, Y, "C1o:", markevery=25, mec="1.0")
+
+# Add an annotation "A" with an arrow
+ax.annotate("A", (X[250], Y[250]), (X[250], -1),
+            ha="center", va="center",
+            arrowprops={"arrowstyle": "->", "color": "C1"})
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+#Colors
+
+from matplotlib.patches import Rectangle
+import matplotlib.colors as mcolors
+
+
+def plot_colortable(colors, *, ncols=4, sort_colors=True):
+
+    cell_width = 212
+    cell_height = 22
+    swatch_width = 48
+    margin = 12
+
+    # Sort colors by hue, saturation, value and name.
+    if sort_colors is True:
+        names = sorted(
+            colors, key=lambda c: tuple(mcolors.rgb_to_hsv(mcolors.to_rgb(c))))
+    else:
+        names = list(colors)
+
+    n = len(names)
+    nrows = math.ceil(n / ncols)
+
+    width = cell_width * 4 + 2 * margin
+    height = cell_height * nrows + 2 * margin
+    dpi = 72
+
+    fig, ax = plt.subplots(figsize=(width / dpi, height / dpi), dpi=dpi)
+    fig.subplots_adjust(margin/width, margin/height,
+                        (width-margin)/width, (height-margin)/height)
+    ax.set_xlim(0, cell_width * 4)
+    ax.set_ylim(cell_height * (nrows-0.5), -cell_height/2.)
+    ax.yaxis.set_visible(False)
+    ax.xaxis.set_visible(False)
+    ax.set_axis_off()
+
+    for i, name in enumerate(names):
+        row = i % nrows
+        col = i // nrows
+        y = row * cell_height
+
+        swatch_start_x = cell_width * col
+        text_pos_x = cell_width * col + swatch_width + 7
+
+        ax.text(text_pos_x, y, name, fontsize=14,
+                horizontalalignment='left',
+                verticalalignment='center')
+
+        ax.add_patch(
+            Rectangle(xy=(swatch_start_x, y-9), width=swatch_width,
+                      height=18, facecolor=colors[name], edgecolor='0.7')
+        )
+
+    return fig
+
+# CSS Colors
+plot_colortable(mcolors.CSS4_COLORS)
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+# Get a list of named colors
+named_colors = plt.colormaps()  
+print("Colors:",named_colors)
+
+print("------------------------------------------------------------")  # 60個
+
+# 存檔
+
+plt.savefig('tmp_aaa.png')
+
+# Save the figure as a PNG file with higher resolution (300 dpi)
+fig.savefig("tmp_bbb.png", dpi=300)
+
+# Save the figure as a PDF file
+fig.savefig("tmp_ccc.pdf")
+
+print("------------------------------------------------------------")  # 60個
+
 
 
 
@@ -220,36 +504,4 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-
-
-# 繪製折線圖並自定義參數
-plt.plot(x, y, color='b', linestyle='--', linewidth=2.0, marker='o', markersize=8, markerfacecolor='red', markeredgecolor='blue', label='數據1')
-
-# 設定刻度標籤
-plt.xticks([1, 2, 3, 4, 5])
-plt.yticks([2, 3, 5, 7, 11])
-
-"""
-參數說明
-顏色和樣式
-color：設定折線的顏色，例如 'r'（紅色），'#00FF00'（綠色）。
-linestyle：設定折線的樣式，例如 '-'（實線），'--'（虛線），'-.'（點劃線），':'（點線）。
-linewidth：設定折線的寬度，例如 2.0。
-標記
-marker：設定數據點的標記樣式，例如 'o'（圓點），'s'（正方形），'^'（三角形）。
-markersize：設定標記的大小，例如 8。
-markerfacecolor：設定標記內部顏色。
-markeredgecolor：設定標記邊緣顏色。
-刻度和網格
-plt.xticks() 和 plt.yticks()：設定刻度標籤。
-plt.grid()：顯示或隱藏網格線。
-圖形大小和分辨率
-plt.figure(figsize=(width, height), dpi=dpi)：設定圖形大小和分辨率。
-"""
-
-"""
-儲存圖表
-# 圖片繪製完後，使用? plt.savefig 來儲存圖片
-plt.savefig('tmp_plot.png')
-"""
 

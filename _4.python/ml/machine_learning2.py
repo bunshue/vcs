@@ -1,6 +1,6 @@
 """
 
-kilo 不可安裝 pip install sklearn
+
 
 
 """
@@ -16,6 +16,7 @@ import random
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns  # 海生, 自動把圖畫得比較好看
 
 font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
@@ -26,7 +27,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 """ 還沒好
 #通過euclidean_distances計算向量之間的距離
 
@@ -49,7 +50,6 @@ for x,y in [[0,1],[0,2],[1,2]]:
 """
 
 import matplotlib
-import seaborn as sns
 import matplotlib as mpl
 
 print('------------------------------------------------------------')	#60個
@@ -358,7 +358,6 @@ print(tt)
 
 print('------------------------------------------------------------')	#60個
 
-
 #Singular value decomposition and LSA
 model = TruncatedSVD(2)
 data_n = model.fit_transform(data)
@@ -390,7 +389,6 @@ similarity = np.asarray(np.asmatrix(data_n) * np.asmatrix(data_n).T)
 tt = pd.DataFrame(similarity, index = corpus, columns = corpus).head(10)
 print(tt)
 
-import seaborn as sns
 sns.heatmap(similarity, cmap = 'Reds')
 
 plt.show()
@@ -400,10 +398,7 @@ print(pd.DataFrame(model.components_,index=['component_1','component_2'],columns
 print('------------------------------------------------------------')	#60個
 print('------------------------------------------------------------')	#60個
 
-import seaborn as sns
-
 print('房價')
-#from __future__ import print_function
 
 import scipy.stats as stats
 
@@ -474,11 +469,8 @@ print(res)
 
 plt.show()
 
-'''
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-# import seaborn as sns
 
 from scipy.stats import norm
 
@@ -775,42 +767,6 @@ P_i500 * p_x_given_y_1("i500", person["Gender"][0]) * p_x_given_y_2(
 ) * p_x_given_y_2(
     person["Size"][0], i500_size_mean, i500_size_variance
 )
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-"""
-
-
-
-"""
-
-print("------------------------------------------------------------")  # 60個
-
-# 共同
-import os
-import sys
-import math
-import random
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-
-font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
-# 設定中文字型及負號正確顯示
-# 設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
-# 設定負號
-plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
-plt.rcParams["font.size"] = 12  # 設定字型大小
-
-print("------------------------------------------------------------")  # 60個
-
-import matplotlib
-import seaborn as sns
-
-# from __future__ import print_function
 
 print("------------------------------------------------------------")  # 60個
 

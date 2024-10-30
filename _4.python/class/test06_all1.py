@@ -4,7 +4,8 @@ import time
 import random
 
 print("------------------------------------------------------------")  # 60個
-'''
+
+
 class Myclass:
     """文件字串實例
     Myclass類別的應用"""
@@ -67,6 +68,7 @@ print("圓形的直徑 : ", A.getDiameter())
 
 print("------------------------------------------------------------")  # 60個
 
+
 class shape:
     def __init__(self, x, y):
         self.x = x
@@ -83,18 +85,20 @@ print(b.info())
 
 print("------------------------------------------------------------")  # 60個
 
+
 class shape:
     def __init__(self, x, y):
         self.x = x
         self.y = y
-        
+
     def info(self):
         return (self.x, self.y)
-    
+
     def move(self, dx, dy):
         self.x += dx
         self.y += dy
-    
+
+
 class circle(shape):
     def __init__(self, x, y, r):
         super().__init__(x, y)
@@ -102,13 +106,14 @@ class circle(shape):
 
     def info(self):
         return ("圓形", self.x, self.y, self.r)
-    
+
+
 class rectangle(shape):
     def __init__(self, x, y, w, h):
         super().__init__(x, y)
         self.w = w
         self.h = h
-    
+
     def info(self):
         return ("矩形", self.x, self.y, self.w, self.h)
 
@@ -120,82 +125,154 @@ d = rectangle(100, 200, 50, 50)
 shapes = [a, b, c, d]
 for s in shapes:
     print("info :", s.info())
-        
+
 print("D info :", d.info())
 print("D 往x前進50點，y後退20點")
 d.move(50, -20)
 print("D info :", d.info())
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-class MobilePhone: #基礎類別
+
+# 狗類基底類別
+class DOG:
+    # 建構式！
+    def __init__(self, breed, size, age, color):
+        self.Breed = breed
+        self.Size = size
+        self.Age = age
+        self.Color = color
+
+    # Eat方法
+    def Eat(self):
+        print("I am a " + self.Breed + ", now I'm eating.")
+
+    # Sleep方法
+    def Sleep(self):
+        print("I am a " + self.Breed + ", now I'm sleeping.")
+
+    # Sit方法
+    def Sit(self):
+        print("I am a " + self.Breed + ", now I'm sitting.")
+
+    # Run方法
+    def Run(self):
+        print("I am a " + self.Breed + ", now I'm running.")
+
+    # __str__方法，將物件用字串表達
+    def __str__(self):
+        return (
+            "I am a "
+            + self.Breed
+            + ", I'm "
+            + str(self.Age)
+            + " years old, my body size is "
+            + self.Size
+            + " and my color is "
+            + self.Color
+            + "."
+        )
+
+
+# 實體化第一隻狗
+dog1 = DOG("Neapolitan Mastiff", "Large", 5, "Black")
+print(dog1)
+dog1.Eat()  # 吃
+dog1.Sleep()  # 睡
+
+# 實體化第二隻狗
+dog2 = DOG("Maltese", "Small", 2, "White")
+print(dog2)
+dog2.Sleep()  # 睡
+dog2.Sit()  # 坐
+
+# 實體化第三隻狗
+dog3 = DOG("Chow Chow", "Medium", 3, "Brown")
+print(dog3)
+dog3.Sit()  # 坐
+dog3.Run()  # 跑
+
+print("------------------------------------------------------------")  # 60個
+
+
+# 手機類基底類別
+class MobilePhone:
     def touch(self):
-        print('我能提供螢幕觸控操作的功能')
-        
-class HTC(MobilePhone): #衍生類別
+        print("我能提供螢幕觸控操作的功能")
+
+
+# HTC類衍生類別(繼承 手機類基底類別)
+class HTC(MobilePhone):
     def touch(self):
         MobilePhone.touch(self)
-        print('我也能提供多點觸控的操作方式')
+        print("我也能提供多點觸控的操作方式")
 
-#產生子類別實體
+
+# 產生子類別實體
 u11 = HTC()
 u11.touch()
 
 print("------------------------------------------------------------")  # 60個
 
+
 class CoffeeMaker:
     def __init__(self):
-        self.power = False     # 初始化咖啡機電源：關
-        self.waterTemp = 20    # 室溫水的溫度，攝氏20度
-        
+        self.power = False  # 初始化咖啡機電源：關
+        self.waterTemp = 20  # 室溫水的溫度，攝氏20度
+
     def switchPower(self):
         self.power = ~self.power  # 切換開關就是這樣做的！
-        
+
     def getWaterTemp(self):
         return self.waterTemp  # 回傳咖啡機水溫
-    
+
     def heatWater(self):
         # 將水加熱到可沖咖啡的溫度：攝氏90度
-        print('正在加熱水溫')
+        print("正在加熱水溫")
         self.waterTemp = 90
-        print('完成！')
-        
+        print("完成！")
+
     def brewCoffee(self):
-        if self.power:         # 一切要咖啡機開了才可以！
-            print('開始沖泡咖啡...')
-            if self.waterTemp<90:
-                print('水溫不足')
+        if self.power:  # 一切要咖啡機開了才可以！
+            print("開始沖泡咖啡...")
+            if self.waterTemp < 90:
+                print("水溫不足")
                 self.heatWater()  # 呼叫物件方法，加熱水溫
-            print('沖泡咖啡...')
-            print('完成！')
+            print("沖泡咖啡...")
+            print("完成！")
         else:
-            print('未開機')
-        
-cm1 = CoffeeMaker()    # 咖啡機一號出現了！
-cm1.brewCoffee()       # 直接沖咖啡？能沖才有鬼
-cm1.switchPower()      # 先開電源，正解
-cm1.brewCoffee()       # 順利沖咖啡了！
+            print("未開機")
+
+
+cm1 = CoffeeMaker()  # 咖啡機一號出現了！
+cm1.brewCoffee()  # 直接沖咖啡？能沖才有鬼
+cm1.switchPower()  # 先開電源，正解
+cm1.brewCoffee()  # 順利沖咖啡了！
 
 print("------------------------------------------------------------")  # 60個
 
+
 class Book:
-    #定義方法一：取得書籍名稱和價格
+    # 定義方法一：取得書籍名稱和價格
     def setInfo(self, title, price):
         self.title = title
         self.price = price
-    #定義方法二：輸出書籍名稱和價格
+
+    # 定義方法二：輸出書籍名稱和價格
     def showInfo(self):
-        print('書籍名稱:{0:6s}, 價格:{1:4s}元'.format(
-            self.title, self.price))
+        print("書籍名稱:{0:6s}, 價格:{1:4s}元".format(self.title, self.price))
+
+
 # 產生物件
-book1=Book()#物件1
-book1.setInfo('Python一週速成', '360')
-book1.showInfo() #呼叫方法
-book2=Book()#物件2
-book2.setInfo('網路行銷與社群行銷', '520')
+book1 = Book()  # 物件1
+book1.setInfo("Python一週速成", "360")
+book1.showInfo()  # 呼叫方法
+book2 = Book()  # 物件2
+book2.setInfo("網路行銷與社群行銷", "520")
 book2.showInfo()
 
 print("------------------------------------------------------------")  # 60個
+
 
 # 宣告類別
 class student:
@@ -337,6 +414,7 @@ m1.display()
 
 print("------------------------------------------------------------")  # 60個
 
+
 # 父類別
 class Rectangle:
     def __init__(self, width, height):
@@ -346,22 +424,25 @@ class Rectangle:
     def area(self):  # 定義共用方法
         return self.width * self.height
 
+
 # 子類別 Triangle, 繼承 Rectangle
-#三角形 繼承 矩形, 可用area(), 新增area2()
+# 三角形 繼承 矩形, 可用area(), 新增area2()
 class Triangle(Rectangle):
     def area2(self):  # 定義子類別的共用方法
         return (self.width * self.height) / 2
 
-print('父類別 Rectangle')
+
+print("父類別 Rectangle")
 rectangle = Rectangle(5, 6)  # 建立 rectangle 物件
 print("rectangle 矩形面積 :", rectangle.area())  # 30
 
-print('子類別 Triangle, 繼承 Rectangle')
+print("子類別 Triangle, 繼承 Rectangle")
 triangle = Triangle(5, 6)  # 建立 triangle 物件
 print("triangle 矩形面積 :", triangle.area())  # 30
 print("triangle 三角形面積 :", triangle.area2())  # 15
 
 print("------------------------------------------------------------")  # 60個
+
 
 class City:
     def __init__(self, name):
@@ -372,6 +453,7 @@ class City:
 
     def __eq__(self, city2):
         return self.name.upper() == city2.name.upper()
+
 
 city1 = City("Taipei")
 city2 = City("taipei")
@@ -449,6 +531,7 @@ class poker:
     def shuffle(self):
         random.shuffle(self.deck)
         self.index = 0
+
 
 """
 p = poker()
@@ -531,6 +614,7 @@ y = newClass("Second")
 
 print("------------------------------------------------------------")  # 60個
 
+
 # 父類別 Plant
 class Plant:
     def __init__(self, name):
@@ -539,20 +623,23 @@ class Plant:
     def show(self):
         print("plant", self.name)
 
+
 # 子類別 Fruit, 繼承 Plant
 class Fruit(Plant):
     def show(self):
         print("fruit", self.name)
 
-print('父類別 Plant')
+
+print("父類別 Plant")
 p = Plant("banana")
 p.show()
 
-print('子類別 Fruit, 繼承 Plant')
+print("子類別 Fruit, 繼承 Plant")
 f = Fruit("banana")
 f.show()
 
 print("------------------------------------------------------------")  # 60個
+
 
 class Fib:
     def __init__(self, max):
@@ -575,17 +662,16 @@ for i in Fib(100):
     print(i)
 
 print("------------------------------------------------------------")  # 60個
-'''
 
 
-class fruit:
+class newFruit:
     color = "red"
 
     def taste(self):
         return "delicious"
 
 
-apple = fruit()
+apple = newFruit()
 cc = apple.color
 print(cc)
 
@@ -611,26 +697,27 @@ d2.setDate([67, 7, 3])  # 呼叫方法時傳入串列
 
 print("------------------------------------------------------------")  # 60個
 
+
 def bar(self, name):
     self._name = name
 
 
 def foo(self, course_name):
-    print('%s正在学习%s.' % (self._name, course_name))
+    print("%s正在学习%s." % (self._name, course_name))
 
 
-Student = type('Student', (object,), dict(__init__=bar, study=foo))
-stu1 = Student('骆昊')
-stu1.study('Python程序设计')
+Student = type("Student", (object,), dict(__init__=bar, study=foo))
+stu1 = Student("骆昊")
+stu1.study("Python程序设计")
 
 print("------------------------------------------------------------")  # 60個
 
+
 def _foo():
-    print('test')
+    print("test")
 
 
 class Student(object):
-
     # __init__是一个特殊方法用于在创建对象时进行初始化操作
     # 通过这个方法我们可以为学生对象绑定name和age两个属性
     def __init__(self, name, age):
@@ -638,25 +725,26 @@ class Student(object):
         self.age = age
 
     def study(self, course_name):
-        print('%s正在学习%s.' % (self.name, course_name))
+        print("%s正在学习%s." % (self.name, course_name))
 
     # PEP 8要求标识符的名字用全小写多个单词用下划线连接
     # 但是很多程序员和公司更倾向于使用驼峰命名法(驼峰标识)
     def watch_av(self):
         if self.age < 18:
-            print('%s只能观看《熊出没》.' % self.name)
+            print("%s只能观看《熊出没》." % self.name)
         else:
-            print('%s正在观看岛国大电影.' % self.name)
+            print("%s正在观看岛国大电影." % self.name)
 
 
-stu1 = Student('骆昊', 38)
-stu1.study('Python程序设计')
+stu1 = Student("骆昊", 38)
+stu1.study("Python程序设计")
 stu1.watch_av()
-stu2 = Student('王大锤', 15)
-stu2.study('思想品德')
+stu2 = Student("王大锤", 15)
+stu2.study("思想品德")
 stu2.watch_av()
 
 print("------------------------------------------------------------")  # 60個
+
 
 class Rect(object):
     """矩形类"""
@@ -676,17 +764,18 @@ class Rect(object):
 
     def __str__(self):
         """矩形对象的字符串表达式"""
-        return '矩形[%f,%f]' % (self.__width, self.__height)
+        return "矩形[%f,%f]" % (self.__width, self.__height)
 
     def __del__(self):
         """析构器"""
-        print('销毁矩形对象')
+        print("销毁矩形对象")
 
 
 rect1 = Rect()
 print(rect1)
 print(rect1.perimeter())
 print(rect1.area())
+
 rect2 = Rect(3.5, 4.5)
 print(rect2)
 print(rect2.perimeter())
@@ -694,17 +783,17 @@ print(rect2.area())
 
 print("------------------------------------------------------------")  # 60個
 
-class Test:
 
+class Test:
     def __init__(self, foo):
         self.__foo = foo
 
     def __bar(self):
         print(self.__foo)
-        print('__bar')
+        print("__bar")
 
 
-test = Test('hello')
+test = Test("hello")
 test._Test__bar()
 print(test._Test__foo)
 
@@ -715,11 +804,68 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+print("檢查至此")
+print("------------------------------------------------------------")  # 60個
+
+print("繼承")
 
 
-sys.exit()
+# 動物類基底類別
+class animalBaseClass:
+    animallegs = 4
+
+    def walk(self):
+        print("走動")
+
+    def cry(self):
+        print("吼叫")
+
+    def getLegsNum(self):
+        print(self.animallegs)
 
 
+# 狗類衍生類別(繼承 動物類基底類別)
+class dogClass(animalBaseClass):
+    def __init__(self):
+        print("我是小狗")
+
+
+david = dogClass()
+david.walk()
+david.cry()
+david.getLegsNum()
+
+print("------------------------------------------------------------")  # 60個
+
+
+# 動物類基底類別
+class animalBaseClass:
+    animallegs = 2
+
+    def walk(self):
+        print("走動")
+
+    def cry(self):
+        print("吼叫")
+
+
+# 鳥類衍生類別(繼承 動物類基底類別)
+class birdClass(animalBaseClass):
+    def __init__(self):
+        print("我是小鳥")
+
+    def cry(self):
+        print("啾啾")
+
+
+bryan = birdClass()
+bryan.walk()
+bryan.cry()
+
+print("------------------------------------------------------------")  # 60個
+
+
+# 動物類基底類別
 class animalBaseClass:
     def __init__(self, num):
         self.animallegs = num
@@ -734,6 +880,51 @@ class animalBaseClass:
         print(self.animallegs)
 
 
+# 蛇類衍生類別(繼承 動物類基底類別)
+class snakeClass(animalBaseClass):
+    def __init__(self, num):
+        parent_class = super(snakeClass, self)
+        parent_class.__init__(num)
+        print("我是蛇")
+
+
+steve = snakeClass(0)
+steve.getLegsNum()
+
+print("------------------------------------------------------------")  # 60個
+
+
+# 蛇類衍生類別(繼承 動物類基底類別)
+class snakeClass(animalBaseClass):
+    def __init__(self):
+        snake_leg = 0
+        parent_class = super(snakeClass, self)
+        parent_class.__init__(snake_leg)
+        print("我是蛇")
+
+
+steve = snakeClass()
+steve.getLegsNum()
+
+print("------------------------------------------------------------")  # 60個
+
+
+# 動物類基底類別
+class animalBaseClass:
+    def __init__(self, num):
+        self.animallegs = num
+
+    def walk(self):
+        print("走動")
+
+    def cry(self):
+        print("吼叫")
+
+    def getLegsNum(self):
+        print(self.animallegs)
+
+
+# 狗類衍生類別(繼承 動物類基底類別)
 class dogClass(animalBaseClass):
     def __init__(self, num):
         parent_class = super(dogClass, self)
@@ -741,6 +932,7 @@ class dogClass(animalBaseClass):
         print("我是小狗")
 
 
+# 鳥類衍生類別(繼承 動物類基底類別)
 class birdClass(animalBaseClass):
     def __init__(self, num):
         parent_class = super(birdClass, self)
@@ -751,6 +943,7 @@ class birdClass(animalBaseClass):
         print("啾啾")
 
 
+# 蛇類衍生類別(繼承 動物類基底類別)
 class snakeClass(animalBaseClass):
     def __init__(self, num):
         parent_class = super(snakeClass, self)
@@ -758,20 +951,20 @@ class snakeClass(animalBaseClass):
         print("我是蛇")
 
 
-wanko = dogClass(4)
-wanko.walk()
-wanko.cry()
-wanko.getLegsNum()
+david = dogClass(4)
+david.walk()
+david.cry()
+david.getLegsNum()
 
-piyo_suke = birdClass(2)
-piyo_suke.walk()
-piyo_suke.cry()
-piyo_suke.getLegsNum()
+bryan = birdClass(2)
+bryan.walk()
+bryan.cry()
+bryan.getLegsNum()
 
-nyoro = snakeClass(0)
-nyoro.walk()
-nyoro.cry()
-nyoro.getLegsNum()
+steve = snakeClass(0)
+steve.walk()
+steve.cry()
+steve.getLegsNum()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -799,6 +992,60 @@ print("s1.whoami(): ", s1.whoami())
 # 存取資料欄位
 print("s1.name: ", s1.name)
 print("s1.grade: ", s1.grade)
+
+print("------------------------------------------------------------")  # 60個
+
+
+# 定義Student類別
+class Student:
+    # 建構子
+    def __init__(self, name, grade):
+        self.name = name
+        self.grade = grade
+
+    # 方法
+    def displayStudent(self):
+        print("姓名 = " + self.name)
+        print("成績 = " + str(self.grade))
+
+    def whoami(self):
+        return self.name
+
+
+# 使用類別建立物件
+s1 = Student("陳會安", 85)
+s1.displayStudent()  # 呼叫方法
+print("s1.whoami() = " + s1.whoami())
+# 存取資料欄位
+print("s1.name = " + s1.name)
+print("s1.grade = " + str(s1.grade))
+
+print("------------------------------------------------------------")  # 60個
+
+
+# 定義Student類別
+class Student:
+    # 建構子
+    def __init__(self, name, grade):
+        self.name = name
+        self.__grade = grade
+
+    # 方法
+    def displayStudent(self):
+        print("姓名 = " + self.name)
+        print("成績 = " + str(self.__getGrade()))
+
+    def __getGrade(self):
+        return self.__grade
+
+
+# 使用類別建立物件
+s1 = Student("陳會安", 85)
+s1.displayStudent()  # 呼叫方法
+# print("s1.__getGrade() = " + str(s1.__getGrade()))
+# 存取資料欄位
+print("s1.name = " + s1.name)
+# print(s1.__grade)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -869,18 +1116,72 @@ c1.displayVehicle()  # 呼叫方法
 
 print("------------------------------------------------------------")  # 60個
 
-
-class Banks:
-    # 定義銀行類別
-    title = "Taipei Bank"  # 定義屬性
-
-    def motto(self):  # 定義方法
-        return "以客為尊"
+print("兩棲動物")
 
 
-userbank = Banks()  # 定義物件userbank
-print("目前服務銀行是 ", userbank.title)
-print("銀行服務理念是 ", userbank.motto())
+class Vehicle:
+    def __init__(self):
+        print("Vehicle-start")
+        print("Vehicle-done")
+
+
+class WheeledVehicle(Vehicle):
+    def __init__(self):
+        print("WheeledVehicle-start")
+        super().__init__()
+        print("WheeledVehicle-done")
+
+
+class WaterVehicle(Vehicle):
+    def __init__(self):
+        print("WaterVehicle-start")
+        super().__init__()
+        print("WaterVehicle-done")
+
+
+class Amphibian(WheeledVehicle, WaterVehicle):
+    def __init__(self):
+        print("Amphibian-start")
+        super().__init__()
+        print("Amphibian-done")
+
+
+amphibian = Amphibian()
+
+Amphibian.mro()
+
+print("------------------------------------------------------------")  # 60個
+
+
+# 定義 Vehicle 類別來表示車輛
+class Vehicle:
+    # 初始化方法，設置車輛的製造商、型號和生產年份
+    def __init__(self, make, model, year):
+        self.make = make  # 車輛的製造商
+        self.model = model  # 車輛的型號
+        self.year = year  # 車輛的生產年份
+
+    # 方法回傳車輛的基本資料
+    def get_info(self):
+        # 回傳格式化的車輛資料字串
+        return f"{self.year} {self.make} {self.model}"
+
+
+# 使用 Vehicle 類別來建立車輛物件並獲取車輛資料
+car = Vehicle("Lexus", "ES 300h", 2025)  # 建立一個 Vehicle 對象
+info = car.get_info()  # get_info方法獲取車輛資料
+print(info)  # 輸出：'2025 ES 300h'
+
+print("------------------------------------------------------------")  # 60個
+
+
+class staff:
+    def salary(self):
+        return "10000元"
+
+
+yamamoto = staff()
+yamamoto.salary()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -897,17 +1198,6 @@ class staff:
 yamamoto = staff(50000)
 money = yamamoto.salary()
 print(money)
-
-print("------------------------------------------------------------")  # 60個
-
-
-class staff:
-    def salary(self):
-        return "10000元"
-
-
-yamamoto = staff()
-yamamoto.salary()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -941,105 +1231,16 @@ yamamoto.salary()
 print("------------------------------------------------------------")  # 60個
 
 
-class animalBaseClass:
-    animallegs = 4
-
-    def walk(self):
-        print("走動")
-
-    def cry(self):
-        print("吼叫")
-
-    def getLegsNum(self):
-        print(self.animallegs)
-
-
-class dogClass(animalBaseClass):
-    def __init__(self):
-        print("我是小狗")
-
-
-wanko = dogClass()
-wanko.walk()
-wanko.cry()
-wanko.getLegsNum()
-
 print("------------------------------------------------------------")  # 60個
 
-
-class animalBaseClass:
-    animallegs = 2
-
-    def walk(self):
-        print("走動")
-
-    def cry(self):
-        print("吼叫")
-
-
-class birdClass(animalBaseClass):
-    def __init__(self):
-        print("我是小鳥")
-
-    def cry(self):
-        print("啾啾")
-
-
-piyo_suke = birdClass()
-piyo_suke.walk()
-piyo_suke.cry()
-
-print("------------------------------------------------------------")  # 60個
-
-
-class animalBaseClass:
-    def __init__(self, num):
-        self.animallegs = num
-
-    def walk(self):
-        print("走動")
-
-    def cry(self):
-        print("吼叫")
-
-    def getLegsNum(self):
-        print(self.animallegs)
-
-
-class snakeClass(animalBaseClass):
-    def __init__(self, num):
-        parent_class = super(snakeClass, self)
-        parent_class.__init__(num)
-        print("我是蛇")
-
-
-nyoro = snakeClass(0)
-nyoro.getLegsNum()
-
-print("------------------------------------------------------------")  # 60個
-
-
-class snakeClass(animalBaseClass):
-    def __init__(self):
-        snake_leg = 0
-        parent_class = super(snakeClass, self)
-        parent_class.__init__(snake_leg)
-        print("我是蛇")
-
-
-nyoro = snakeClass()
-nyoro.getLegsNum()
-
-print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
 
+# 動物類基底類別
 class Animals1:
-    """Animals1類別, 這是基底類別"""
-
     def __init__(self, animal_name, animal_age):
         self.name = animal_name  # 紀錄動物名稱
         self.age = animal_age  # 紀錄動物年齡
@@ -1048,9 +1249,8 @@ class Animals1:
         print(self.name.title(), " is running")
 
 
+# 狗類衍生類別(繼承 動物類基底類別)
 class Dogs(Animals1):
-    """Dogs類別, 這是Animal的衍生類別"""
-
     def __init__(self, dog_name, dog_age):
         super().__init__("My pet " + dog_name.title(), dog_age)
 
@@ -1070,9 +1270,8 @@ mydog.sleeping()
 print("------------------------------------------------------------")  # 60個
 
 
+# 動物類基底類別
 class Animals2:
-    """Animals2類別, 這是基底類別"""
-
     def __init__(self, animal_name):
         self.name = animal_name  # 紀錄動物名稱
 
@@ -1083,9 +1282,8 @@ class Animals2:
         return " sleeping"
 
 
+# 狗類衍生類別(繼承 動物類基底類別)
 class Dogs(Animals2):
-    """Dogs類別, 這是Animal的衍生類別"""
-
     def __init__(self, dog_name):  # 紀錄動物名稱
         super().__init__(dog_name.title())
 
@@ -1286,8 +1484,9 @@ alice.feature4()
 
 print("------------------------------------------------------------")  # 60個
 
+print("繼承, 子類別方法 覆寫 父類別方法")
 
-# 子類別覆寫父類別的方法
+
 class Normal:  # 父類別
     def subsidy(self, income):
         self.money = income
@@ -1371,6 +1570,7 @@ print("要付給這位工讀生的薪水總額:", obj1.pay(), "元")
 
 print("------------------------------------------------------------")  # 60個
 
+print("繼承, 子類別方法 覆寫 父類別方法")
 # 在子類別呼叫父類別方法—使用super()函式
 
 
@@ -1414,6 +1614,21 @@ class Human(Animal):  # 子類別
 
 
 man = Human("黃種人")  # 子類別實體
+
+print("------------------------------------------------------------")  # 60個
+
+
+class Banks:
+    # 定義銀行類別
+    title = "Taipei Bank"  # 定義屬性
+
+    def motto(self):  # 定義方法
+        return "以客為尊"
+
+
+userbank = Banks()  # 定義物件userbank
+print("目前服務銀行是 ", userbank.title)
+print("銀行服務理念是 ", userbank.motto())
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1780,9 +1995,8 @@ print("Hung's banks  = ", hungbank.bank_title())  # 列印銀行名稱
 print("------------------------------------------------------------")  # 60個
 
 
+# 動物類基底類別
 class Animals:
-    """Animals類別, 這是基底類別"""
-
     def __init__(self, animal_name, animal_age):
         self.name = animal_name  # 紀錄動物名稱
         self.age = animal_age  # 紀錄動物年齡
@@ -1791,9 +2005,8 @@ class Animals:
         print(self.name.title(), " is running")
 
 
+# 狗類衍生類別(繼承 動物類基底類別)
 class Dogs(Animals):
-    """Dogs類別, 這是Animal的衍生類別"""
-
     def __init__(self, dog_name, dog_age):
         super().__init__("My pet " + dog_name.title(), dog_age)
 
@@ -1809,9 +2022,8 @@ mydog.run()
 print("------------------------------------------------------------")  # 60個
 
 
+# 祖父類基底類別
 class Grandfather:
-    """定義祖父的資產"""
-
     def __init__(self):
         self.grandfathermoney = 10000
 
@@ -1819,9 +2031,8 @@ class Grandfather:
         print("Grandfather's information")
 
 
-class Father(Grandfather):  # 父類別是Grandfather
-    """定義父親的資產"""
-
+# 父親類衍生類別(繼承 祖父類基底類別)
+class Father(Grandfather):
     def __init__(self):
         self.fathermoney = 8000
         super().__init__()
@@ -1830,9 +2041,8 @@ class Father(Grandfather):  # 父類別是Grandfather
         print("Father's information")
 
 
-class Ivan(Father):  # 父類別是Father
-    """定義Ivan的資產"""
-
+# 伊凡類衍生類別(繼承 父親類基底類別)
+class Ivan(Father):
     def __init__(self):
         self.ivanmoney = 3000
         super().__init__()
@@ -1860,24 +2070,21 @@ ivan.get_money()  # 取得資產明細
 print("------------------------------------------------------------")  # 60個
 
 
+# 父親類基底類別
 class Father:
-    """定義父親的資產"""
-
     def __init__(self):
         self.fathermoney = 10000
 
 
-class Ira(Father):  # 父類別是Father
-    """定義Ira的資產"""
-
+# 伊拉類衍生類別(繼承 父親類基底類別)
+class Ira(Father):
     def __init__(self):
         self.iramoney = 8000
         super().__init__()
 
 
-class Ivan(Father):  # 父類別是Father
-    """定義Ivan的資產"""
-
+# 伊凡類衍生類別(繼承 父親類基底類別)
+class Ivan(Father):
     def __init__(self):
         self.ivanmoney = 3000
         super().__init__()
@@ -1899,9 +2106,8 @@ ivan.get_money()  # 取得資產明細
 print("------------------------------------------------------------")  # 60個
 
 
+# 動物類基底類別
 class Animals:
-    """Animals類別, 這是基底類別"""
-
     def __init__(self, animal_name):
         self.name = animal_name  # 紀錄動物名稱
 
@@ -1912,9 +2118,8 @@ class Animals:
         return " sleeping"
 
 
+# 狗類衍生類別(繼承 動物類基底類別)
 class Dogs(Animals):
-    """Dogs類別, 這是Animal的衍生類別"""
-
     def __init__(self, dog_name):  # 紀錄動物名稱
         super().__init__(dog_name.title())
 
@@ -1949,30 +2154,26 @@ doing(my_monkey)
 print("------------------------------------------------------------")  # 60個
 
 
+# 祖父類基底類別
 class Grandfather:
-    """定義祖父類別"""
-
     def action1(self):
         print("Grandfather")
 
 
+# 父親類衍生類別(繼承 祖父類基底類別)
 class Father(Grandfather):
-    """定義父親類別"""
-
     def action2(self):  # 定義action2()
         print("Father")
 
 
+# 叔叔類衍生類別(繼承 祖父類基底類別)
 class Uncle(Grandfather):
-    """定義叔父類別"""
-
     def action2(self):  # 定義action2()
         print("Uncle")
 
 
+# 伊凡類衍生類別(繼承 父親類基底類別 和 叔叔類基底類別)
 class Ivan(Father, Uncle):
-    """定義Ivan類別"""
-
     def action3(self):
         print("Ivan")
 
@@ -1985,30 +2186,26 @@ ivan.action1()  # 順序 Ivan -> Father -> Grandfather
 print("------------------------------------------------------------")  # 60個
 
 
+# 祖父類基底類別
 class Grandfather:
-    """定義祖父類別"""
-
     def action1(self):
         print("Grandfather")
 
 
+# 父親類衍生類別(繼承 祖父類基底類別)
 class Father(Grandfather):
-    """定義父親類別"""
-
     def action3(self):  # 定義action3()
         print("Father")
 
 
+# 叔叔類衍生類別(繼承 祖父類基底類別)
 class Uncle(Grandfather):
-    """定義叔父類別"""
-
     def action2(self):  # 定義action2()
         print("Uncle")
 
 
+# 伊凡類衍生類別(繼承 父親類基底類別 和 叔叔類基底類別)
 class Ivan(Father, Uncle):
-    """定義Ivan類別"""
-
     def action4(self):
         print("Ivan")
 
@@ -2022,21 +2219,18 @@ ivan.action1()  # 順序 Ivan -> Father -> Uncle -> Grandfather
 print("------------------------------------------------------------")  # 60個
 
 
+# 祖父類基底類別
 class Grandfather:
-    """定義祖父類別"""
-
     pass
 
 
+# 父親類衍生類別(繼承 祖父類基底類別)
 class Father(Grandfather):
-    """定義父親類別"""
-
     pass
 
 
+# 伊凡類衍生類別(繼承 父親類基底類別)
 class Ivan(Father):
-    """定義Ivan類別"""
-
     def fn(self):
         pass
 
@@ -2052,21 +2246,18 @@ print("ivan物件fn方法類型 : ", type(ivan.fn))
 print("------------------------------------------------------------")  # 60個
 
 
+# 祖父類基底類別
 class Grandfather:
-    """定義祖父類別"""
-
     pass
 
 
+# 父親類衍生類別(繼承 祖父類基底類別)
 class Father(Grandfather):
-    """定義父親類別"""
-
     pass
 
 
+# 伊凡類衍生類別(繼承 父親類基底類別)
 class Ivan(Father):
-    """定義Ivan類別"""
-
     def fn(self):
         pass
 
@@ -2106,13 +2297,13 @@ s2.showMessage()
 print("------------------------------------------------------------")  # 60個
 
 
-# 產生父類別 或稱 基礎類別
+# 父類基底類別
 class Father:
     def walking(self):
         print("父類別之函數 AAAAA")
 
 
-# 產生子類別 或稱 衍生類別
+# 子類衍生類別(繼承 父類基底類別)
 class Son(Father):
     pass
     """同名的函數，若有，則使用子類別之函數
@@ -2127,6 +2318,28 @@ Joe = Son()
 print("呼叫函數，繼承自父類別的函數")
 Joe.walking()
 
+
+print("------------------------------------------------------------")  # 60個
+
+
+# 父類基底類別
+class Father:
+    def __init__(self):
+        self.__address = "台北市羅斯福路"
+
+    def getaddr(self):
+        return self.__address
+
+
+# 子類衍生類別(繼承 父類基底類別)
+class Son(Father):
+    pass
+
+
+hung = Father()
+ivan = Son()
+print("父類別 : ", hung.getaddr())
+print("子類別 : ", ivan.getaddr())
 
 print("------------------------------------------------------------")  # 60個
 
@@ -2180,68 +2393,6 @@ stu1.tostring()  # 相同輸出，物件也可以呼叫類別方法
 
 print("------------------------------------------------------------")  # 60個
 
-
-# 定義DOG類別
-class DOG:
-    # 建構式！
-    def __init__(self, breed, size, age, color):
-        self.Breed = breed
-        self.Size = size
-        self.Age = age
-        self.Color = color
-
-    # Eat方法
-    def Eat(self):
-        print("I am a " + self.Breed + ", now I'm eating.")
-
-    # Sleep方法
-    def Sleep(self):
-        print("I am a " + self.Breed + ", now I'm sleeping.")
-
-    # Sit方法
-    def Sit(self):
-        print("I am a " + self.Breed + ", now I'm sitting.")
-
-    # Run方法
-    def Run(self):
-        print("I am a " + self.Breed + ", now I'm running.")
-
-    # __str__方法，將物件用字串表達
-    def __str__(self):
-        return (
-            "I am a "
-            + self.Breed
-            + ", I'm "
-            + str(self.Age)
-            + " years old, my body size is "
-            + self.Size
-            + " and my color is "
-            + self.Color
-            + "."
-        )
-
-
-# 實體化第一隻狗
-dog1 = DOG("Neapolitan Mastiff", "Large", 5, "Black")
-print(dog1)
-dog1.Eat()  # 吃
-dog1.Sleep()  # 睡
-
-# 實體化第二隻狗
-dog2 = DOG("Maltese", "Small", 2, "White")
-print(dog2)
-dog2.Sleep()  # 睡
-dog2.Sit()  # 坐
-
-# 實體化第三隻狗
-dog3 = DOG("Chow Chow", "Medium", 3, "Brown")
-print(dog3)
-dog3.Sit()  # 坐
-dog3.Run()  # 跑
-
-print("------------------------------------------------------------")  # 60個
-
-
 print("繼承")
 
 
@@ -2267,19 +2418,22 @@ a = A(4, 5)
 
 print("------------------------------------------------------------")  # 60個
 
-print("繼承")
+print("繼承, 子類別方法 覆寫 父類別方法")
 
 
+# 動物類基底類別
 class Animal:
     def shout(self):
         print("動物吼")
 
 
+# 狗類衍生類別(繼承 動物類基底類別)
 class Dog(Animal):
     def shout(self):  # 覆寫Animal的shout
         print("汪！")
 
 
+# 貓類衍生類別(繼承 動物類基底類別)
 class Cat(Animal):
     def shout(self):  # 覆寫Animal的shout
         print("喵～")
@@ -2295,12 +2449,14 @@ print("------------------------------------------------------------")  # 60個
 print("繼承")
 
 
+# A類基底類別
 class A:
     def __init__(self):
         self.x = 3
         self.__pi = 3.14
 
 
+# B類衍生類別(繼承 A類基底類別)
 class B(A):
     def bar(self):
         # return self.__pi 這樣寫會錯！！
@@ -2313,43 +2469,10 @@ print(b1.bar())  # 3.14
 
 print("------------------------------------------------------------")  # 60個
 
-print("兩棲動物")
+print("繼承, 子類別方法 覆寫 父類別方法")
 
 
-class Vehicle:
-    def __init__(self):
-        print("Vehicle-start")
-        print("Vehicle-done")
-
-
-class WheeledVehicle(Vehicle):
-    def __init__(self):
-        print("WheeledVehicle-start")
-        super().__init__()
-        print("WheeledVehicle-done")
-
-
-class WaterVehicle(Vehicle):
-    def __init__(self):
-        print("WaterVehicle-start")
-        super().__init__()
-        print("WaterVehicle-done")
-
-
-class Amphibian(WheeledVehicle, WaterVehicle):
-    def __init__(self):
-        print("Amphibian-start")
-        super().__init__()
-        print("Amphibian-done")
-
-
-amphibian = Amphibian()
-
-Amphibian.mro()
-
-print("------------------------------------------------------------")  # 60個
-
-
+# 鳥類基底類別
 class Bird:  # 父類別
     def fly(self):
         print("大多數鳥能飛翔")
@@ -2361,6 +2484,7 @@ class Bird:  # 父類別
         print("我是鳥類")
 
 
+# 鸚鵡類衍生類別(繼承 鳥類基底類別)
 class Parrot(Bird):  # 繼承Bird
     def fly(self):  # 覆寫方法
         print("鸚鵡能飛翔")
@@ -2369,6 +2493,7 @@ class Parrot(Bird):  # 繼承Bird
         print("鸚鵡不能游水")
 
 
+# 企鵝類衍生類別(繼承 鳥類基底類別)
 class Penguin(Bird):  # 繼承Bird
     def fly(self):  # 覆寫方法
         print("企鵝不能飛翔")
@@ -2401,7 +2526,7 @@ display_test(p2)
 print("------------------------------------------------------------")  # 60個
 
 
-# 定義ANIMAL類別
+# 動物類基底類別
 class ANIMAL:
     # 建構式！
     def __init__(self, age, color):
@@ -2413,7 +2538,7 @@ class ANIMAL:
         return "I'm " + str(self.Age) + " years old, my color is " + self.Color
 
 
-# 定義DOG類別，繼承ANIMAL類別哦！
+# 狗類衍生類別(繼承 動物類基底類別)
 class DOG(ANIMAL):
     # 建構式！
     def __init__(self, breed, size, age, color):
@@ -2470,6 +2595,8 @@ dog3.Run()  # 跑
 
 
 print("------------------------------------------------------------")  # 60個
+
+print("多重繼承")
 
 
 class X:
@@ -2597,26 +2724,6 @@ print("Car4 type:", car4.carType())
 print("------------------------------------------------------------")  # 60個
 
 
-class Father:
-    def __init__(self):
-        self.__address = "台北市羅斯福路"
-
-    def getaddr(self):
-        return self.__address
-
-
-class Son(Father):
-    pass
-
-
-hung = Father()
-ivan = Son()
-print("父類別 : ", hung.getaddr())
-print("子類別 : ", ivan.getaddr())
-
-print("------------------------------------------------------------")  # 60個
-
-
 class Person:
     def __init__(self, name):
         self.name = name
@@ -2653,9 +2760,8 @@ ivan.job()
 print("------------------------------------------------------------")  # 60個
 
 
+# 動物類基底類別
 class Animals:
-    """Animals類別, 這是基底類別"""
-
     def __init__(self, animal_name, animal_age):
         self.name = animal_name  # 紀錄動物名稱
         self.age = animal_age  # 紀錄動物年齡
@@ -2664,9 +2770,8 @@ class Animals:
         print(self.name.title(), " is running")
 
 
+# 狗類衍生類別(繼承 動物類基底類別)
 class Dogs(Animals):
-    """Dogs類別, 這是Animal的衍生類別"""
-
     def __init__(self, dog_name, dog_age):
         super().__init__("My pet " + dog_name.title(), dog_age)
 
@@ -2682,9 +2787,8 @@ mydog.run()
 print("------------------------------------------------------------")  # 60個
 
 
+# 動物類基底類別
 class Animals:
-    """Animals類別, 這是基底類別"""
-
     def __init__(self, animal_name, animal_age):
         self.name = animal_name  # 紀錄動物名稱
         self.age = animal_age  # 紀錄動物年齡
@@ -2693,9 +2797,8 @@ class Animals:
         print(self.name.title(), " is running")
 
 
+# 狗類衍生類別(繼承 動物類基底類別)
 class Dogs(Animals):
-    """Dogs類別, 這是Animal的衍生類別"""
-
     def __init__(self, dog_name, dog_age):
         super().__init__("My pet " + dog_name.title(), dog_age)
 
@@ -2715,9 +2818,8 @@ mydog.sleeping()
 print("------------------------------------------------------------")  # 60個
 
 
+# 祖父類基底類別
 class Grandfather:
-    """定義祖父的資產"""
-
     def __init__(self):
         self.grandfathermoney = 10000
 
@@ -2725,9 +2827,8 @@ class Grandfather:
         print("Grandfather's information")
 
 
-class Father(Grandfather):  # 父類別是Grandfather
-    """定義父親的資產"""
-
+# 父親類衍生類別(繼承 祖父類基底類別)
+class Father(Grandfather):
     def __init__(self):
         self.fathermoney = 8000
         super().__init__()
@@ -2736,9 +2837,8 @@ class Father(Grandfather):  # 父類別是Grandfather
         print("Father's information")
 
 
-class Ivan(Father):  # 父類別是Father
-    """定義Ivan的資產"""
-
+# 伊凡類衍生類別(繼承 父親類基底類別)
+class Ivan(Father):
     def __init__(self):
         self.ivanmoney = 3000
         super().__init__()
@@ -2766,24 +2866,21 @@ ivan.get_money()  # 取得資產明細
 print("------------------------------------------------------------")  # 60個
 
 
+# 父親類基底類別
 class Father:
-    """定義父親的資產"""
-
     def __init__(self):
         self.fathermoney = 10000
 
 
-class Ira(Father):  # 父類別是Father
-    """定義Ira的資產"""
-
+# 伊拉類衍生類別(繼承 父親類基底類別)
+class Ira(Father):
     def __init__(self):
         self.iramoney = 8000
         super().__init__()
 
 
-class Ivan(Father):  # 父類別是Father
-    """定義Ivan的資產"""
-
+# 伊凡類衍生類別(繼承 父親類基底類別)
+class Ivan(Father):
     def __init__(self):
         self.ivanmoney = 3000
         super().__init__()
@@ -2816,9 +2913,8 @@ hung.interest()
 print("------------------------------------------------------------")  # 60個
 
 
+# 動物類基底類別
 class Animals:
-    """Animals類別, 這是基底類別"""
-
     def __init__(self, animal_name):
         self.name = animal_name  # 紀錄動物名稱
 
@@ -2829,9 +2925,8 @@ class Animals:
         return " sleeping"
 
 
+# 狗類衍生類別(繼承 動物類基底類別)
 class Dogs(Animals):
-    """Dogs類別, 這是Animal的衍生類別"""
-
     def __init__(self, dog_name):  # 紀錄動物名稱
         super().__init__(dog_name.title())
 
@@ -2866,30 +2961,26 @@ doing(my_monkey)
 print("------------------------------------------------------------")  # 60個
 
 
+# 祖父類基底類別
 class Grandfather:
-    """定義祖父類別"""
-
     def action1(self):
         print("Grandfather")
 
 
+# 父親類衍生類別(繼承 祖父類基底類別)
 class Father(Grandfather):
-    """定義父親類別"""
-
     def action2(self):  # 定義action2()
         print("Father")
 
 
+# 叔叔類衍生類別(繼承 祖父類基底類別)
 class Uncle(Grandfather):
-    """定義叔父類別"""
-
     def action2(self):  # 定義action2()
         print("Uncle")
 
 
+# 伊凡類衍生類別(繼承 父親類基底類別 和 叔叔類基底類別)
 class Ivan(Father, Uncle):
-    """定義Ivan類別"""
-
     def action3(self):
         print("Ivan")
 
@@ -2902,30 +2993,26 @@ ivan.action1()  # 順序 Ivan -> Father -> Grandfather
 print("------------------------------------------------------------")  # 60個
 
 
+# 祖父類基底類別
 class Grandfather:
-    """定義祖父類別"""
-
     def action1(self):
         print("Grandfather")
 
 
+# 父親類衍生類別(繼承 祖父類基底類別)
 class Father(Grandfather):
-    """定義父親類別"""
-
     def action3(self):  # 定義action3()
         print("Father")
 
 
+# 叔叔類衍生類別(繼承 祖父類基底類別)
 class Uncle(Grandfather):
-    """定義叔父類別"""
-
     def action2(self):  # 定義action2()
         print("Uncle")
 
 
+# 伊凡類衍生類別(繼承 父親類基底類別 和 叔叔類基底類別)
 class Ivan(Father, Uncle):
-    """定義Ivan類別"""
-
     def action4(self):
         print("Ivan")
 
@@ -2983,21 +3070,18 @@ x = C()
 print("------------------------------------------------------------")  # 60個
 
 
+# 祖父類基底類別
 class Grandfather:
-    """定義祖父類別"""
-
     pass
 
 
+# 父親類衍生類別(繼承 祖父類基底類別)
 class Father(Grandfather):
-    """定義父親類別"""
-
     pass
 
 
+# 伊凡類衍生類別(繼承 父親類基底類別)
 class Ivan(Father):
-    """定義Ivan類別"""
-
     def fn(self):
         pass
 
@@ -3013,21 +3097,18 @@ print("ivan物件fn方法類型 : ", type(ivan.fn))
 print("------------------------------------------------------------")  # 60個
 
 
+# 祖父類基底類別
 class Grandfather:
-    """定義祖父類別"""
-
     pass
 
 
+# 父親類衍生類別(繼承 祖父類基底類別)
 class Father(Grandfather):
-    """定義父親類別"""
-
     pass
 
 
+# 伊凡類衍生類別(繼承 父親類基底類別)
 class Ivan(Father):
-    """定義Ivan類別"""
-
     def fn(self):
         pass
 
@@ -3134,28 +3215,6 @@ print(inventory.items)  # 輸出：{'apple': 7}
 print("------------------------------------------------------------")  # 60個
 
 
-# 定義 Vehicle 類別來表示車輛
-class Vehicle:
-    # 初始化方法，設置車輛的製造商、型號和生產年份
-    def __init__(self, make, model, year):
-        self.make = make  # 車輛的製造商
-        self.model = model  # 車輛的型號
-        self.year = year  # 車輛的生產年份
-
-    # 方法回傳車輛的基本資料
-    def get_info(self):
-        # 回傳格式化的車輛資料字串
-        return f"{self.year} {self.make} {self.model}"
-
-
-# 使用 Vehicle 類別來建立車輛物件並獲取車輛資料
-car = Vehicle("Lexus", "ES 300h", 2025)  # 建立一個 Vehicle 對象
-info = car.get_info()  # get_info方法獲取車輛資料
-print(info)  # 輸出：'2025 ES 300h'
-
-print("------------------------------------------------------------")  # 60個
-
-
 # 定義 StudentManager 類別來管理學生資料
 class StudentManager:
     # 初始化方法, 建立一個空的學生字典
@@ -3200,60 +3259,6 @@ one = Counter()
 two = Counter()
 three = Counter()
 Counter.show_counter()
-
-print("------------------------------------------------------------")  # 60個
-
-
-# 定義Student類別
-class Student:
-    # 建構子
-    def __init__(self, name, grade):
-        self.name = name
-        self.grade = grade
-
-    # 方法
-    def displayStudent(self):
-        print("姓名 = " + self.name)
-        print("成績 = " + str(self.grade))
-
-    def whoami(self):
-        return self.name
-
-
-# 使用類別建立物件
-s1 = Student("陳會安", 85)
-s1.displayStudent()  # 呼叫方法
-print("s1.whoami() = " + s1.whoami())
-# 存取資料欄位
-print("s1.name = " + s1.name)
-print("s1.grade = " + str(s1.grade))
-
-print("------------------------------------------------------------")  # 60個
-
-
-# 定義Student類別
-class Student:
-    # 建構子
-    def __init__(self, name, grade):
-        self.name = name
-        self.__grade = grade
-
-    # 方法
-    def displayStudent(self):
-        print("姓名 = " + self.name)
-        print("成績 = " + str(self.__getGrade()))
-
-    def __getGrade(self):
-        return self.__grade
-
-
-# 使用類別建立物件
-s1 = Student("陳會安", 85)
-s1.displayStudent()  # 呼叫方法
-# print("s1.__getGrade() = " + str(s1.__getGrade()))
-# 存取資料欄位
-print("s1.name = " + s1.name)
-# print(s1.__grade)
 
 print("------------------------------------------------------------")  # 60個
 

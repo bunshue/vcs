@@ -1,5 +1,7 @@
 """
-IntroductiontoPandas
+
+
+
 
 """
 
@@ -24,9 +26,6 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-'''
-import pandas as pd
-from pandas import Series, DataFrame
 
 # Series 由一組 索引標籤+數據 組成，就如同Excel中的單一個 column
 
@@ -37,7 +36,7 @@ from pandas import Series, DataFrame
 #建構 Series物件的方式，索引不一定是數字
 
 # 指定索引
-s = Series([4, 7, -5, 3], index = ['d', 'b', 'a', 'c'])
+s = pd.Series([4, 7, -5, 3], index = ['d', 'b', 'a', 'c'])
 s
 
 # 用索引取值
@@ -65,7 +64,7 @@ dt
 
 #Series等同是一個有序的字典
 
-s1 = Series(dt)
+s1 = pd.Series(dt)
 s1
 
 s1.index
@@ -73,7 +72,7 @@ s1.index
 # 建構Series的時候指定 index
 # 其中 index California 在 dt中找不到，因此對應的value就標示為 NaN
 states = ['Utah', 'California', 'Ohio', 'Oregon', 'Texas']
-s2 = Series(dt, index = states)
+s2 = pd.Series(dt, index = states)
 s2
 
 #pandas的頂級函式都可以對Series物件做廣播運算
@@ -125,7 +124,7 @@ DataFrame可以被視為由一個或多個Series所組成的字典，等同是Ex
 data = {'state': ['Ohio', 'Ohio', 'Ohio', 'Nevada', 'Nevada'], 
         'year': [2000, 2001, 2002, 2001, 2002], 
         'pop': [1.5, 1.7, 3.6, 2.4, 2.9]}
-frame = DataFrame(data)
+frame = pd.DataFrame(data)
 frame
 
 #以字典建立DataFrame的時候，可以用columns參數指定 columns名稱與排序
@@ -134,14 +133,14 @@ frame
 data = {'state': ['Ohio', 'Ohio', 'Ohio', 'Nevada', 'Nevada'], 
         'year': [2000, 2001, 2002, 2001, 2002], 
         'pop': [1.5, 1.7, 3.6, 2.4, 2.9]}
-frame = DataFrame(data, columns = ['state', 'year', 'pop'])
+frame = pd.DataFrame(data, columns = ['state', 'year', 'pop'])
 frame
 
 # 找不到的column以NaN表示
 data = {'state': ['Ohio', 'Ohio', 'Ohio', 'Nevada', 'Nevada'], 
         'year': [2000, 2001, 2002, 2001, 2002], 
         'pop': [1.5, 1.7, 3.6, 2.4, 2.9]}
-frame = DataFrame(data,
+frame = pd.DataFrame(data,
                   columns = ['state', 'year', 'pop', 'debt'],
                   index = ['one', 'two', 'three', 'four', 'five']
                  )
@@ -191,7 +190,7 @@ frame
 #如果將Series填入DataFrame，會依據index自動對齊
 
 # 使用Series並指定index，並將之填入一個DataFrame, 則DataFrame中空缺的位置都會被填上NaN
-s = Series([-1.2, -1.5, -1.7], index = ['two', 'four', 'five'])
+s = pd.Series([-1.2, -1.5, -1.7], index = ['two', 'four', 'five'])
 frame.debt = s
 frame
 
@@ -213,7 +212,7 @@ pop = {'Nevada': {2001: 2.4, 2002: 2.9},
        'Ohio': {2000: 1.5, 2001: 1.7, 2002: 3.6}}
 pop
 
-frame = DataFrame(pop)
+frame = pd.DataFrame(pop)
 frame
 
 # 也可以進行轉置
@@ -222,7 +221,7 @@ frame.T
 #如果使用雙層字典來建立DataFrame，且指定的 row Index中沒有對準字典中的內層key，則以指定的row Index為準，沒對到的會被標示為NaN
 
 # 內層的鍵會被合併、排序，但如果顯示地指定了索引，則不會合併或排序
-DataFrame(pop, index = [2001, 2002, 2003])
+pd.DataFrame(pop, index = [2001, 2002, 2003])
 
 # 可以設置 rows, columns 的名稱
 frame.index.name = 'year'
@@ -236,7 +235,7 @@ v
 #索引(Index)物件
 #建構Series或者DataFrame的時候，所用到的任何數組或其他序列的標籤都會被轉換為一個 Index物件####
 
-obj = Series(range(3), name = 'd', index = ['a', 'b', 'c'])
+obj = pd.Series(range(3), name = 'd', index = ['a', 'b', 'c'])
 obj
 
 index = obj.index
@@ -262,7 +261,7 @@ obj.index = index
 obj
 
 # 用Index物件來指定Series的index
-obj2 = Series([1.5, -2.5, 0], index = index)
+obj2 = pd.Series([1.5, -2.5, 0], index = index)
 obj2
 
 obj2.index is index
@@ -282,7 +281,7 @@ frame
 
 #重新索引###
 
-obj = Series([4.5, 7.2, -5.3, 3.6], index = ['d', 'b', 'a', 'c'])
+obj = pd.Series([4.5, 7.2, -5.3, 3.6], index = ['d', 'b', 'a', 'c'])
 obj
 
 #reindex()用來移動row或者column的排列
@@ -293,7 +292,7 @@ obj.reindex(['a', 'b', 'c', 'd', 'e'])
 # 可以指定 空缺資料的填充值 fill_value
 obj.reindex(['a', 'b', 'c', 'd', 'e'], fill_value = 0)
 
-obj = Series(['blue', 'purple', 'yellow'], index = [0, 2, 4])
+obj = pd.Series(['blue', 'purple', 'yellow'], index = [0, 2, 4])
 obj
 
 #reindex()會依照指定的方式重新排列rows或者columns，可以指定若遇空缺時，插入rows或者columns的方式
@@ -302,7 +301,7 @@ obj
 obj.reindex(range(6), method = 'ffill')
 
 # 如果只傳入一個序列，則 .reindex()會優先對 row重新索引
-frame = DataFrame(np.arange(9).reshape((3, 3)),
+frame = pd.DataFrame(np.arange(9).reshape((3, 3)),
                   index = ['a', 'c', 'd'], 
                   columns = ['Ohio', 'Texas', 'California'])
 frame
@@ -333,7 +332,7 @@ frame.ix[['a', 'b', 'c', 'd'],
 #丟棄(drop)指定軸上的項###
 """
 # 以一個索引數組指定要刪除的元素
-obj = Series(np.arange(5.), index = ['a', 'b', 'c', 'd', 'e'])
+obj = pd.Series(np.arange(5.), index = ['a', 'b', 'c', 'd', 'e'])
 obj
 
 new_obj = obj.drop(['c'])
@@ -343,7 +342,7 @@ new_obj = obj.drop(['c', 'd'])
 new_obj
 
 # 對於 DataFrame，可以刪除任意軸上的索引值
-data = DataFrame(np.arange(16).reshape((4, 4)),
+data = pd.DataFrame(np.arange(16).reshape((4, 4)),
                  index = ['Ohio', 'Colorado', 'Utah', 'New York'], 
                  columns = ['one', 'two', 'three', 'four'])
 data
@@ -360,7 +359,7 @@ data.drop(['two', 'four'], axis = 1)
 #索引、選取、過濾###
 
 # Series的索引值不只是整數
-obj = Series(np.arange(4.), index = ['a', 'b', 'c', 'd'])
+obj = pd.Series(np.arange(4.), index = ['a', 'b', 'c', 'd'])
 obj
 
 # 單一值，不顯示索引
@@ -389,7 +388,7 @@ obj['b':'c'] = 5
 obj
 
 # 對於 DataFrame 索引，其實就是獲取一個或多個列
-data = DataFrame(np.arange(16).reshape((4, 4)),
+data = pd.DataFrame(np.arange(16).reshape((4, 4)),
                  index = ['Ohio', 'Colorado', 'Utah', 'New York'], 
                  columns = ['one', 'two', 'three', 'four'])
 data
@@ -441,8 +440,8 @@ print("------------------------------------------------------------")  # 60個
 
 #在將對象相加時，若存在不同的索引，則結果的索引就是該索引對的聯集。
 
-s1 = Series([7.3, -2.5, 3.4, 1.5], index = ['a', 'c', 'd', 'e'])
-s2 = Series([-2.1, 3.6, -1.5, 4, 3.1], index = ['a', 'c', 'e', 'f', 'g'])
+s1 = pd.Series([7.3, -2.5, 3.4, 1.5], index = ['a', 'c', 'd', 'e'])
+s2 = pd.Series([-2.1, 3.6, -1.5, 4, 3.1], index = ['a', 'c', 'e', 'f', 'g'])
 
 s1
 s2
@@ -451,10 +450,10 @@ s2
 s1 + s2
 
 # 對於 DataFrame，索引自動對齊會發生在row 和 column方向
-df1 = DataFrame(np.arange(9.).reshape((3, 3)),
+df1 = pd.DataFrame(np.arange(9.).reshape((3, 3)),
                 index = ['Ohio', 'Texas', 'Colorado'], 
                 columns = list('bcd'))
-df2 = DataFrame(np.arange(12.).reshape((4, 3)),
+df2 = pd.DataFrame(np.arange(12.).reshape((4, 3)),
                 index = ['Utah', 'Ohio', 'Texas', 'Oregon'], 
                 columns = list('bde'))
 
@@ -467,9 +466,9 @@ print("------------------------------------------------------------")  # 60個
 
 #在算術方法中填充值###
 
-df1 = DataFrame(np.arange(12.).reshape((3, 4)),
+df1 = pd.DataFrame(np.arange(12.).reshape((3, 4)),
                 columns = list('abcd'))
-df2 = DataFrame(np.arange(20.).reshape((4, 5)),
+df2 = pd.DataFrame(np.arange(20.).reshape((4, 5)),
                 columns = list('abcde'))
 
 df1
@@ -493,7 +492,7 @@ arr[0]
 arr - arr[0]
 
 # DataFrame 和 Series 之間也是如此
-df = DataFrame(np.arange(12.).reshape((4, 3)),
+df = pd.DataFrame(np.arange(12.).reshape((4, 3)),
                columns = list("bde"), 
                index = ['Utah', 'Ohio', 'Texas', 'Oregon'])
 df
@@ -521,7 +520,7 @@ df.add(s2, axis = 0)
 
 #NumPy的 ufuncs (元素級數組方法) 也可用於操作pandas物件
 
-frame = DataFrame(np.random.randn(4, 3),
+frame = pd.DataFrame(np.random.randn(4, 3),
                   columns = list('bde'),
                   index = ['Utah', 'Ohio', 'Texas', 'Oregon'])
 frame
@@ -541,7 +540,7 @@ frame
 
 # 返回 由多個值組成的Series
 def f(x):
-    return Series([x.min(), x.max()], index = ['min', 'max'])
+    return pd.Series([x.min(), x.max()], index = ['min', 'max'])
 frame.apply(f) # 會對每個column操作 f，每個column傳回一個Series，再重新組合成DataFrame
 
 
@@ -559,7 +558,7 @@ f2.map(f)
 #排序####
 
 # 可以使用 sort_index方法 來對軸索引排序
-obj = Series(range(4), index = list('dabc'))
+obj = pd.Series(range(4), index = list('dabc'))
 obj
 
 # 可以使用 sort_index方法 來對軸索引排序
@@ -567,7 +566,7 @@ obj
 obj.sort_index()
 
 # DataFrame 也可以使用 sort_index 並指定軸來排序索引
-frame = DataFrame(np.arange(8).reshape((2, 4)),
+frame = pd.DataFrame(np.arange(8).reshape((2, 4)),
                   index = ['three', 'one'],
                   columns = list('dabc')
                  )
@@ -594,7 +593,7 @@ print(obj)
 obj.sort_values()
 
 # 要根據一個或多個column中的值來排序，可以使用 sort_values()
-frame = DataFrame({'b': [4, 7, -3, 2], 'a': [0, 1, 0, 1]})
+frame = pd.DataFrame({'b': [4, 7, -3, 2], 'a': [0, 1, 0, 1]})
 frame
 
 # 使用 sort_values() 根據值來排序
@@ -607,7 +606,7 @@ print("------------------------------------------------------------")  # 60個
 
 #彙總和計算描述統計
 
-df = DataFrame([[1.4, np.nan], [7.1, -4.5], 
+df = pd.DataFrame([[1.4, np.nan], [7.1, -4.5], 
                [np.nan, np.nan], [0.75, -1.3]], 
                index = list('abcd'), 
                columns = ['one', 'two'])
@@ -634,7 +633,7 @@ df.cumsum()
 df.describe()
 
 # describe 對非數字資料，產生另外一種統計數字
-obj = Series(list('aabc') * 4)
+obj = pd.Series(list('aabc') * 4)
 obj
 
 obj.describe()
@@ -652,8 +651,8 @@ all_data = {}
 for ticker in ['AAPL', 'IBM', 'MSFT', 'GOOG']:
     all_data[ticker] = web.get_data_yahoo(ticker, '1/1/2013', '1/1/2015')
     
-price = DataFrame({tic: data['Adj Close'] for tic, data in all_data.items()})
-volume = DataFrame({tic: data['Volume'] for tic, data in all_data.items()})
+price = pd.DataFrame({tic: data['Adj Close'] for tic, data in all_data.items()})
+volume = pd.DataFrame({tic: data['Volume'] for tic, data in all_data.items()})
 
 # 百分比變化
 returns = price.pct_change()
@@ -683,7 +682,7 @@ print("------------------------------------------------------------")  # 60個
 
 #唯一值、值計數與成員資格
 
-obj = Series(list('cadaabbcc'))
+obj = pd.Series(list('cadaabbcc'))
 obj
 
 # uniquie 唯一值
@@ -708,7 +707,7 @@ mask
 #處理缺失數據(missing data)
 
 # 以NaN標示缺失數據
-s = Series(['aardradf', 'asdfasfas', np.nan, 'asdfasfasf'])
+s = pd.Series(['aardradf', 'asdfasfas', np.nan, 'asdfasfasf'])
 s
 
 # 用 isnull()來檢驗NaN
@@ -720,40 +719,39 @@ s.isnull()
 
 #濾除缺失數據
 
-from numpy import nan as NA
-data = Series([1, NA, 3.5, NA, 7])
+data = pd.Series([1, np.nan, 3.5, np.nan, 7])
 data
 
-# 用 dropna()捨棄 NA，index 並不會重新設定
+# 用 dropna()捨棄 np.nan，index 並不會重新設定
 data.dropna()
 
 # 也可透過 boolean型索引過濾
 data[data.notnull()]
 
-# 對 DataFrame來說，dropna()預設捨棄任何有NA的row
-df = DataFrame([[1., 6.5, 3.], [1., NA, NA], [NA, NA, NA],[NA, 6.5, 3.]])
+# 對 DataFrame來說，dropna()預設捨棄任何有np.nan的row
+df = pd.DataFrame([[1., 6.5, 3.], [1., np.nan, np.nan], [np.nan, np.nan, np.nan],[np.nan, 6.5, 3.]])
 df
 
-# dropna()預設捨棄任何有NA的row
+# dropna()預設捨棄任何有np.nan的row
 df.dropna()
 
-# 若傳入 how='all'，則只捨棄 所有數值皆為NA的那個row
+# 若傳入 how='all'，則只捨棄 所有數值皆為np.nan的那個row
 df.dropna(how='all')
 
 # 要用這種方式捨棄column，則需傳入 axis=1即可
-df[3] = NA
+df[3] = np.nan
 df
 
-# 傳入 axis=1，捨棄整列為NA的column
+# 傳入 axis=1，捨棄整列為np.nan的column
 df.dropna(axis = 1, how = 'all')
 
 # 使用 thresh 參數，只留下一部分觀測數據
-df = DataFrame(np.random.randn(7, 3))
+df = pd.DataFrame(np.random.randn(7, 3))
 df
 
 """
-df.ix[:4, 1] = NA
-df.ix[:2, 2] = NA
+df.ix[:4, 1] = np.nan
+df.ix[:2, 2] = np.nan
 df
 """
 
@@ -774,9 +772,9 @@ df
 
 """
 # 差值的方法 ffill, bfill
-df = DataFrame(np.random.randn(6, 3))
-df.ix[2:, 1] = NA
-df.ix[4:, 2] = NA
+df = pd.DataFrame(np.random.randn(6, 3))
+df.ix[2:, 1] = np.nan
+df.ix[4:, 2] = np.nan
 df
 """
 
@@ -793,7 +791,7 @@ df.fillna(df.mean())
 
 # 使用 MultiIndex 索引的Series的格式化輸出形式
 # 可以用一維的方式來表達二維的資料，以低維度的形式來處理高維度的資料
-s = Series(np.random.randn(10),
+s = pd.Series(np.random.randn(10),
            index = [list('aaabbbccdd'),  [1, 2, 3, 1, 2, 3, 1, 2, 2, 3]])
 s
 s.index
@@ -813,7 +811,7 @@ s.unstack()
 s.unstack().stack()
 
 # 對於一個 DataFrame，每條軸都可以有分層索引
-df = DataFrame(np.arange(12).reshape((4, 3)), 
+df = pd.DataFrame(np.arange(12).reshape((4, 3)), 
                index = [['a', 'a', 'b', 'b'], [1, 2, 1, 2]], 
                columns = [['Ohio', 'Ohio', 'Colorado'], ['Green', 'Red', 'Green']])
 df
@@ -856,7 +854,7 @@ df.sum(axis = 1, level = 'color')
 #使用DataFrame的列###
 
 # 將 DataFrame的一個或多個列當作行索引來用，或者希望將行索引變成DataFrame的列
-df = DataFrame({'a': range(7), 'b': range(7, 0, -1), 
+df = pd.DataFrame({'a': range(7), 'b': range(7, 0, -1), 
                 'c': ['one', 'one', 'one', 'two', 'two', 'two', 'two'], 
                 'd': [0, 1, 2, 0, 1, 2, 3]})
 df
@@ -877,10 +875,6 @@ df2
 df2.reset_index()
 
 print("------------------------------------------------------------")  # 60個
-'''
-
-
-print("------------------------------------------------------------")  # 60個
 
 """
 ETL : Extract-Transform-Load,中文可譯為"抽取-轉換-載入"。
@@ -890,8 +884,6 @@ ETL : extract, transform and load
 extract, transform and load,
 """
 
-from pandas import Series, DataFrame
-import pandas as pd
 import re
 
 
@@ -899,9 +891,9 @@ import re
 #數據庫風格的DataFrame合併
 
 # pandas 的 merge() 方法
-df1 = DataFrame({'key': list('bbacaabd'), 
+df1 = pd.DataFrame({'key': list('bbacaabd'), 
                  'data1': range(8)})
-df2 = DataFrame({'key': list('abd'), 
+df2 = pd.DataFrame({'key': list('abd'), 
                  'data2': range(3)})
 
 df1
@@ -914,9 +906,9 @@ pd.merge(df1, df2)
 pd.merge(df1, df2, on = 'key')
 
 # 如果兩個物件的列名不同，也可以分別指定
-df3 = DataFrame({'lkey': list('bbacaabd'), 
+df3 = pd.DataFrame({'lkey': list('bbacaabd'), 
                  'data1': range(8)})
-df4 = DataFrame({'rkey': list('abd'), 
+df4 = pd.DataFrame({'rkey': list('abd'), 
                  'data2': range(3)})
 df3
 df4
@@ -938,9 +930,9 @@ pd.merge(df3, df4, left_on = 'lkey', right_on = 'rkey', how = 'left')
 pd.merge(df3, df4, left_on = 'lkey', right_on = 'rkey', how = 'right')
 
 # 多對多的合併
-df1 = DataFrame({'key': list('bbacab'), 
+df1 = pd.DataFrame({'key': list('bbacab'), 
                 'data1': range(6)})
-df2 = DataFrame({'key': list('ababd'), 
+df2 = pd.DataFrame({'key': list('ababd'), 
                 'data2': range(5)})
 df1
 df2
@@ -953,10 +945,10 @@ pd.merge(df1, df2, on = 'key', how = 'inner')
 # inner join 是求交集，所以不會有 NaN的值出現
 
 # 可以根據多個 keys來 join
-df1 = DataFrame({'key1': ['foo', 'foo', 'bar'], 
+df1 = pd.DataFrame({'key1': ['foo', 'foo', 'bar'], 
                  'key2': ['one', 'two', 'one'], 
                  'data': [1, 2, 3]})
-df2 = DataFrame({'key1': ['foo', 'foo', 'bar', 'bar'], 
+df2 = pd.DataFrame({'key1': ['foo', 'foo', 'bar', 'bar'], 
                  'key2': ['one', 'one', 'one', 'two'], 
                  'data': [4, 5, 6, 7]})
 
@@ -981,10 +973,10 @@ print("------------------------------------------------------------")  # 60個
 #索引上的合併
 
 # 使用DataFrame的索引作為 join的 key
-dfl = DataFrame({'key': list('abaabc'), 
+dfl = pd.DataFrame({'key': list('abaabc'), 
                  'value': range(6)})
 # dfr 以 ['a', 'b'] 作為索引
-dfr = DataFrame({'value': [3.5, 7]}, index = list('ab'))
+dfr = pd.DataFrame({'value': [3.5, 7]}, index = list('ab'))
 
 dfl
 
@@ -995,10 +987,10 @@ dfr
 pd.merge(dfl, dfr, left_on = 'key', right_index = True, how = 'outer', suffixes = ['_left', '_right'], sort = True)
 
 # 階層化索引
-dfl = DataFrame({'key1': ['Ohio', 'Ohio', 'Ohio', 'Nevada', 'Nevada'], 
+dfl = pd.DataFrame({'key1': ['Ohio', 'Ohio', 'Ohio', 'Nevada', 'Nevada'], 
                  'key2': [2000, 2001, 2002, 2001, 2002], 
                  'data': np.arange(5.)})
-dfr = DataFrame(np.arange(12).reshape((6, 2)), 
+dfr = pd.DataFrame(np.arange(12).reshape((6, 2)), 
                 columns = ['data1', 'data2'],
                 index = [['Nevada', 'Nevada', 'Ohio', 'Ohio', 'Ohio', 'Ohio'],
                          [2001, 2000, 2000, 2000, 2001, 2002]])
@@ -1013,10 +1005,10 @@ dfr
 pd.merge(dfl, dfr, left_on = ['key1', 'key2'], right_index = True, how = 'outer', suffixes = ['_left', '_right'], sort = True)
 
 # 同時使用合併雙方的索引
-dfl = DataFrame([[1., 2.], [3., 4.], [5., 6.]], 
+dfl = pd.DataFrame([[1., 2.], [3., 4.], [5., 6.]], 
                 index = list('ace'), 
                 columns = ['Ohio', 'Nevada'])
-dfr = DataFrame([[7., 8.], [9., 10.], [11., 12.], [13., 14]],
+dfr = pd.DataFrame([[7., 8.], [9., 10.], [11., 12.], [13., 14]],
                 index = list('bcde'), 
                 columns = ['Missouri', 'Alabama'])
 dfl
@@ -1036,9 +1028,9 @@ arr
 np.concatenate([arr, arr], axis = 1)
 
 # pandas 有 concat()方法
-s1 = Series([0, 1], index = ['a', 'b'])
-s2 = Series([2, 3, 4], index = ['c', 'd', 'e'])
-s3 = Series([5, 6], index = ['f', 'g'])
+s1 = pd.Series([0, 1], index = ['a', 'b'])
+s2 = pd.Series([2, 3, 4], index = ['c', 'd', 'e'])
+s3 = pd.Series([5, 6], index = ['f', 'g'])
 sc = pd.concat([s1, s2, s3])
 sc
 type(sc)
@@ -1079,10 +1071,10 @@ result
 
 # 同樣的邏輯對 DataFrame也是一樣的
 # 沿著 axis = 1 做 concat，keys就會成為 列頭
-df1 = DataFrame(np.arange(6).reshape((3, 2)), 
+df1 = pd.DataFrame(np.arange(6).reshape((3, 2)), 
                 index = ['a', 'b', 'c'], 
                 columns = ['one', 'two'])
-df2 = DataFrame(5 + np.arange(4).reshape((2, 2)), 
+df2 = pd.DataFrame(5 + np.arange(4).reshape((2, 2)), 
                 index = ['a', 'c'], 
                 columns = ['three', 'four'])
 pd.concat([df1, df2], axis = 1, keys = ['level1', 'level2'])
@@ -1095,8 +1087,8 @@ pd.concat({'level1': df1, 'level2': df2}, axis = 1)
 pd.concat({'level1': df1, 'level2': df2}, axis = 1, names = ['upper', 'lower'])
 
 # 和當下分析工作無關的row索引
-df1 = DataFrame(np.random.randn(3, 4), columns = list('abcd'))
-df2 = DataFrame(np.random.randn(2, 3), columns = list('bda'))
+df1 = pd.DataFrame(np.random.randn(3, 4), columns = list('abcd'))
+df2 = pd.DataFrame(np.random.randn(2, 3), columns = list('bda'))
 df1
 df2
 
@@ -1111,9 +1103,9 @@ print("------------------------------------------------------------")  # 60個
 #合併重疊數據
 
 # NumPy的 where 函數
-a = Series([np.nan, 2.5, np.nan, 3.5, 4.5, np.nan], 
+a = pd.Series([np.nan, 2.5, np.nan, 3.5, 4.5, np.nan], 
            index = list('abcdef'))
-b = Series(np.arange(len(a)), dtype = np.float64, 
+b = pd.Series(np.arange(len(a)), dtype = np.float64, 
            index = list('abcdef')) 
 a
 #b[-1] = np.nan
@@ -1130,10 +1122,10 @@ a[2:]
 b[:-2].combine_first(a[2:])
 
 # 對於DataFrame，combine_first的功能就像是在對缺失數據 打補釘
-df1 = DataFrame({'a': [1., np.nan, 5., np.nan], 
+df1 = pd.DataFrame({'a': [1., np.nan, 5., np.nan], 
                  'b': [np.nan, 2., np.nan, 5.], 
                  'c': list(range(2, 18, 4))})
-df2 = DataFrame({'a': [5., 4., np.nan, 3., 7.], 
+df2 = pd.DataFrame({'a': [5., 4., np.nan, 3., 7.], 
                  'b': [np.nan, 3., 4., 6., 8.]})
 df1
 df2
@@ -1148,7 +1140,7 @@ df1.combine_first(df2)
 # stack: 將 column 旋轉為 row
 # unstack: 將 row 旋轉為 column
 
-df = DataFrame(np.arange(6).reshape((2, 3)), 
+df = pd.DataFrame(np.arange(6).reshape((2, 3)), 
                index = pd.Index(['Ohio', 'Colorado'], name = 'state'), 
                columns = pd.Index(['one', 'two', 'three'], name = 'number'))
 df               
@@ -1171,8 +1163,8 @@ s.unstack(0)
 s.unstack('state')
 
 # 如果不是所有的級別值都可以在分組中找到的話，則unstack操作可以會產生缺失數據
-s1 = Series([0, 1, 2, 3], index = list('abcd'))
-s2 = Series([4, 5, 6], index = list('cde'))
+s1 = pd.Series([0, 1, 2, 3], index = list('abcd'))
+s2 = pd.Series([4, 5, 6], index = list('cde'))
 data2 = pd.concat([s1, s2], keys = ['one', 'two'])
 data2
 
@@ -1187,7 +1179,7 @@ data2.unstack().stack()
 #data2.unstack().stack(dropna = False)
 
 # unstack操作中，旋轉軸的級別將會成為結果中的最低級別
-df = DataFrame({'left': s, 'right': s + 5}, 
+df = pd.DataFrame({'left': s, 'right': s + 5}, 
                columns = pd.Index(['left', 'right'], name = 'side'))
 df
 
@@ -1210,7 +1202,8 @@ ldata_string = """
 """
 
 import json
-df = DataFrame(json.loads(ldata_string))
+
+df = pd.DataFrame(json.loads(ldata_string))
 df
 # 長格式 
 # 好處: 值的種類可以隨時增加或減少
@@ -1242,7 +1235,7 @@ print("------------------------------------------------------------")  # 60個
 #數據轉換
 #移除重複數據
 
-data = DataFrame({'k1': ['one'] * 3 + ['two'] * 4, 
+data = pd.DataFrame({'k1': ['one'] * 3 + ['two'] * 4, 
                   'k2': [1, 1, 2, 3, 3, 4, 4,]})
 data
 
@@ -1270,7 +1263,7 @@ print("------------------------------------------------------------")  # 60個
 
 #利用函數或映射進行數據轉換
 
-data = DataFrame({'food':['bacon', 'pulled pork', 'bacon', 'Pastrami', 'corned beef', 'Bacon', 'pastrami', 'honey ham', 'nova lox'], 
+data = pd.DataFrame({'food':['bacon', 'pulled pork', 'bacon', 'Pastrami', 'corned beef', 'Bacon', 'pastrami', 'honey ham', 'nova lox'], 
                   'ounces': [4, 3, 12, 6, 7.5, 8, 3, 5, 6]})
 data
 
@@ -1295,7 +1288,7 @@ print("------------------------------------------------------------")  # 60個
 
 #替換值
 
-data = Series([1., -999., 2., -999., -1000., 3.,])
+data = pd.Series([1., -999., 2., -999., -1000., 3.,])
 data
 
 # 用 replace()方法來置換數值
@@ -1316,7 +1309,7 @@ print("------------------------------------------------------------")  # 60個
 #重新命名軸索引
 #軸標籤也可以進行轉換，或者就地修改
 
-data = DataFrame(np.arange(12).reshape((3, 4)), 
+data = pd.DataFrame(np.arange(12).reshape((3, 4)), 
                  index = pd.Index(['Ohio', 'Colorado', 'New York'], name = 'state'), 
                  columns = pd.Index(['one', 'two', 'three', 'four'], name = 'quarter'))
 data
@@ -1343,7 +1336,7 @@ print("------------------------------------------------------------")  # 60個
 
 # 常態分布陣列
 np.random.seed(12345)
-df = DataFrame(np.random.randn(1000, 4))
+df = pd.DataFrame(np.random.randn(1000, 4))
 df.describe()
 
 # 找出某列中，絕對值大於3的數值
@@ -1363,7 +1356,7 @@ print("------------------------------------------------------------")  # 60個
 #字符串操作
 #pandas中向量化的字串函數
 
-data = Series({'Dave': 'dave@google.com', 
+data = pd.Series({'Dave': 'dave@google.com', 
         'Steve': 'steve@gmail.com',
         'Rob': 'rob@gmail.com', 
         'Wes': np.nan})
@@ -1401,14 +1394,11 @@ print("------------------------------------------------------------")  # 60個
 #  GroupBy
 # Group By: split-apply-combine
 
-from pandas import Series, DataFrame
-import pandas as pd
-
 #GroupBy技術
 
 #分組運算是一種 Split-Apply-Combine的過程，類似於MapReduce的模式
 
-df = DataFrame({'key1' : ['a', 'a', 'b', 'b', 'a'],
+df = pd.DataFrame({'key1' : ['a', 'a', 'b', 'b', 'a'],
                 'key2' : ['one', 'two', 'one', 'two', 'one'],
                 'data1' : np.random.randn(5),
                 'data2' : np.random.randn(5)}, columns = ['key1', 'key2', 'data1', 'data2'])
@@ -1480,7 +1470,7 @@ df.groupby(['key1', 'key2'])['data2'].mean()
 
 #通過字典或Series進行分組
 
-people = DataFrame(np.random.randn(5, 5),
+people = pd.DataFrame(np.random.randn(5, 5),
                    columns=['a', 'b', 'c', 'd', 'e'],
                    index=['Joe', 'Steve', 'Wes', 'Jim', 'Travis'])
 # NG
@@ -1494,7 +1484,7 @@ mapping = {'a': 'red', 'b': 'red', 'c': 'blue',
 grouped_by_column = people.groupby(mapping, axis = 1)
 grouped_by_column.sum()
 
-map_series = Series(mapping)
+map_series = pd.Series(mapping)
 map_series
 
 # 也可以將mapping關係的Series物件傳給 groupby()
@@ -1517,7 +1507,7 @@ people.groupby([len, key_list]).min()
 columns = pd.MultiIndex.from_arrays([['US', 'US', 'US', 'JP', 'JP'],
                                      [1, 3, 5, 1, 3]], names=['cty', 'tenor'])
 
-hier_df = DataFrame(np.random.randn(4, 5), columns=columns)
+hier_df = pd.DataFrame(np.random.randn(4, 5), columns=columns)
 hier_df
 
 hier_df.groupby(level = 'cty', axis = 1).count()
@@ -1701,7 +1691,7 @@ print("------------------------------------------------------------")  # 60個
 
 #範例: 分組加權平均數和相關係數
 
-df = DataFrame({'category': ['a', 'a', 'a', 'a', 'b', 'b', 'b', 'b'],
+df = pd.DataFrame({'category': ['a', 'a', 'a', 'a', 'b', 'b', 'b', 'b'],
                 'data': np.random.randn(8),
                 'weights': np.random.rand(8)})
 df
@@ -1762,7 +1752,7 @@ print("------------------------------------------------------------")  # 60個
 #交叉表(crosstab)
 #用於計算 分組頻率 的特殊 透視表(pivot)
 
-data = DataFrame(
+data = pd.DataFrame(
                 {'Sample': list(range(1, 11)),
                  'Gender': [random.choice(['Female', 'Male']) for i in range(10)],
                  'Handedness': [random.choice(['Right-handed', 'Left-handed']) for i in range(10)]

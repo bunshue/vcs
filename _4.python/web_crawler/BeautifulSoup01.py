@@ -94,6 +94,12 @@ Python簡單易學又有趣
     </a>
 </div>
 
+<h1 class="large">我是標題</h1>
+<div>
+<p>我是段落</p>
+<img src="https://www.w3.org/html/logo/downloads/HTML5_Logo_256.png" alt="我是圖片">
+<a href="http://www.e-happy.com.tw">我是超連結</a>
+</div>
 
 </body>
 """
@@ -113,6 +119,13 @@ print("網頁標題 上層")
 print(soup.title.parent.name)
 print("網頁標題 上一層Tag")
 print(soup.title.parent)
+
+print(soup.find("title"))  # 傳回網頁含<title>~</title>
+print(soup.find("title").text)  # 傳回網頁<title>標籤內的資料
+
+# print("取得 h1: ", soup.h1)
+# print("取得 p: ", soup.p)
+
 
 print("------------------------------")  # 30個
 print("網頁html語法區塊：")
@@ -197,15 +210,15 @@ string_html_data = """
 </body>
 """
 soup = BeautifulSoup(string_html_data, "html.parser")
-print('soup.p')
+print("soup.p")
 print(soup.p)
 print('soup.p["class"]')
 print(soup.p["class"])
-print('soup.a')
+print("soup.a")
 print(soup.a)
 print('soup.find_all("a")')
 print(soup.find_all("a"))
-print('一一列出連結')
+print("一一列出連結")
 for link in soup.find_all("a"):
     print(link.get("href"))
 print(soup.select("a"))
@@ -295,8 +308,6 @@ data1 = soup.find("a", {"id": "link1"})
 print(data1.get("href"))  # http://example.com/elsie
 print(data1["href"])  # http://example.com/elsie
 
-sys.exit()
-
 print("------------------------------------------------------------")  # 60個
 
 print("BeautifulSoup 測試 2")
@@ -334,16 +345,43 @@ print("------------------------------------------------------------")  # 60個
 
 print("BeautifulSoup 測試 1")
 
-# 讀檔
-filename = "C:/_git/vcs/_1.data/______test_files1/beautifulsoup_data.html"
-
-string_html_data = ""
-with open(filename, "r", encoding="big5") as file:
-    string_html_data = file.read()
+string_html_data = """
+<html>
+  <head><meta charset="big5"><title>Perl學習手札</title></head>
+  <body>
+    <div class="content">
+      <img src="https://easun.org/perl/perl-toc/index_2.png">
+    </div>
+    <p class="header">
+      <h1>h1 : Perl學習手札</h1>
+    </p>
+    <h2 class="heading">h2 : 第一章 : 關於Perl</h2>
+    <h2 class="heading" id="this">h2 : 第二章 : 純量變數</h2>
+    <h2 class="heading">h2 : 第三章 : 串列與陣列</h2>
+    <div class="content">
+      <div class="item1">
+        <a href="https://easun.org/perl/perl-toc/ch04.html" class="red" id="link1">第四章 : 基本的控制結構</a>
+        <br>
+        <a href="https://easun.org/perl/perl-toc/ch05.html" class="red" id="link2">第五章 : 雜湊(Hash)</a>
+      </div>
+      <a href="https://easun.org/perl/perl-toc/ch06.html" class="blue" id="link3">第六章 : 副常式</a>
+      <br>
+    </div>
+    <p id="p1">p1 : 第七章 : 正規表示式</p>
+    <p id="p2" class='red'>p2 : 第八章 : 更多關於正規表示式</p>
+    <div class="main">
+     <div class="container">
+      <p>p : 對於我們剛剛提出來的資料結構需求，希望能把相同的東西簡單的存取，並且讓它們能被歸納在一起。陣列正是解決這個問題的方案，也就是把一堆性質接近的變數放在同一個資料結構裡，這樣可以很方便的處理跟存取。</p>
+     </div>
+    </div>
+  </body>
+</html>
+"""
 
 print("解讀本地網頁資料1")
 
 soup = BeautifulSoup(string_html_data, "html.parser")
+
 print("取得<h1>??</h1>: ", soup.find("h1"))  # 印出整行資料
 print("取得<h1>??</h1>: ", soup.find("h1").text)  # 只印出text部分
 print("取得全部 title h1: ", soup.find_all(["title", "h1"]))  # [..., ...]
@@ -360,9 +398,7 @@ print("取得超連結")
 cc = soup.select("#link1")
 print("取得link1: ", cc)  # 印出整行資料
 print("取得link1 text: ", cc[0].text)  # 只印出text部分
-print(
-    "取得link1 get : ", cc[0].get("href")
-)  # https://easun.org/perl/perl-toc/ch01.html
+print("取得link1 get : ", cc[0].get("href"))  # https://easun.org/perl/perl-toc/ch01.html
 print("取得link1 href: ", cc[0]["href"])  # https://easun.org/perl/perl-toc/ch01.html
 
 print("取得圖片超連結")
@@ -538,102 +574,134 @@ print("共下載", n, "張圖片")
 
 print("------------------------------------------------------------")  # 60個
 
-fp = open("myhtml.html", encoding="utf-8")
-soup = BeautifulSoup(fp, "lxml")
+string_html_data = """
+<!doctype html>
+<html>
+<head>
+   <meta charset="utf-8">
+   <title>洪錦魁著作</title>
+   <style>
+      h1#author { width:400px; height:50px; text-align:center;
+	     background:linear-gradient(to right,yellow,green);
+      }
+	  h1#content { width:400px; height:50px;
+		 background:linear-gradient(to right,yellow,red); 
+      }
+      section { background:linear-gradient(to right bottom,yellow,gray); }
+   </style>
+</head>
+<body>
+<h1 id="author">洪錦魁</h1>
+<img src="hung.jpg" width="100">
+<section>
+   <h1 id="content">一個人的極境旅行 - 南極大陸北極海</h1>
+   <p>2015/2016年<strong>洪錦魁</strong>一個人到南極</p>
+   <img src="travel.jpg" width="300"
+</section>
+<section>
+   <h1 id="content">HTML5+CSS3王者歸來</h1>
+   <p>本書講解網頁設計使用HTML5+CSS3</p>
+   <img src="html5.jpg" width="300">
+</section>
+</body>
+</html>
+"""
+
+soup = BeautifulSoup(string_html_data, "lxml")
 
 print("------------------------------")  # 30個
 
-objTag = soup.find("h1")
-print("資料型態       = ", type(objTag))
-print("列印Tag        = ", objTag)
-print("Text屬性內容   = ", objTag.text)
-print("String屬性內容 = ", objTag.string)
+cc = soup.find("h1")
+print("資料型態       = ", type(cc))
+print("列印Tag        = ", cc)
+print("Text屬性內容   = ", cc.text)
+print("String屬性內容 = ", cc.string)
 
 print("------------------------------")  # 30個
 
-objTag = soup.find_all("h1")
-print("資料型態    = ", type(objTag))  # 列印資料型態
-print("列印Tag串列 = ", objTag)  # 列印串列
+cc = soup.find_all("h1")
+print("資料型態    = ", type(cc))  # 列印資料型態
+print("列印Tag串列 = ", cc)  # 列印串列
 print("以下是列印串列元素 : ")
-for data in objTag:  # 列印串列元素內容
-    print(data.text)
+for c in cc:  # 列印串列元素內容
+    print(c.text)
 
 print("------------------------------")  # 30個
 
-objTag = soup.find_all("h1", limit=2)
-for data in objTag:  # 列印串列元素內容
-    print(data.text)
+cc = soup.find_all("h1", limit=2)
+for c in cc:  # 列印串列元素內容
+    print(c.text)
 
 print("------------------------------")  # 30個
 
-objTag = soup.find_all("h1")
-print("資料型態    = ", type(objTag))  # 列印資料型態
-print("列印Tag串列 = ", objTag)  # 列印串列
+cc = soup.find_all("h1")
+print("資料型態    = ", type(cc))  # 列印資料型態
+print("列印Tag串列 = ", cc)  # 列印串列
 print("\n使用Text屬性列印串列元素 : ")
-for data in objTag:  # 列印串列元素內容
-    print(data.text)
+for c in cc:  # 列印串列元素內容
+    print(c.text)
 print("\n使用getText()方法列印串列元素 : ")
-for data in objTag:
-    print(data.getText())
+for c in cc:
+    print(c.getText())
 
 print("------------------------------")  # 30個
 
-objTag = soup.find(id="author")
-print(objTag)
-print(objTag.text)
+cc = soup.find(id="author")
+print(cc)
+print(cc.text)
 
 print("------------------------------")  # 30個
 
-objTag = soup.find_all(id="content")
-for tag in objTag:
-    print(tag)
-    print(tag.text)
+cc = soup.find_all(id="content")
+for c in cc:
+    print(c)
+    print(c.text)
 
 print("------------------------------")  # 30個
 
-objTag = soup.select("#author")
-print("資料型態     = ", type(objTag))  # 列印資料型態
-print("串列長度     = ", len(objTag))  # 列印串列長度
-print("元素資料型態 = ", type(objTag[0]))  # 列印元素資料型態
-print("元素內容     = ", objTag[0].getText())  # 列印元素內容
+cc = soup.select("#author")
+print("資料型態     = ", type(cc))  # 列印資料型態
+print("串列長度     = ", len(cc))  # 列印串列長度
+print("元素資料型態 = ", type(cc[0]))  # 列印元素資料型態
+print("元素內容     = ", cc[0].getText())  # 列印元素內容
 
 print("------------------------------")  # 30個
 
-objTag = soup.select("#author")
-print("列出串列元素的資料型態    = ", type(objTag[0]))
-print(objTag[0])
-print("列出str()轉換過的資料型態 = ", type(str(objTag[0])))
-print(str(objTag[0]))
+cc = soup.select("#author")
+print("列出串列元素的資料型態    = ", type(cc[0]))
+print(cc[0])
+print("列出str()轉換過的資料型態 = ", type(str(cc[0])))
+print(str(cc[0]))
 
 print("------------------------------")  # 30個
 
-objTag = soup.select("#author")
-print(str(objTag[0].attrs))
+cc = soup.select("#author")
+print(str(cc[0].attrs))
 
 print("------------------------------")  # 30個
 
-pObjTag = soup.select("p")
-print("含<p>標籤的串列長度 = ", len(pObjTag))
-for pObj in pObjTag:
-    print(str(pObjTag))  # 內部有子標籤<strong>字串
-    print(pObj.getText())  # 沒有子標籤
-    print(pObj.text)  # 沒有子標籤
+cc = soup.select("p")
+print("含<p>標籤的串列長度 = ", len(cc))
+for c in cc:
+    print(str(cc))  # 內部有子標籤<strong>字串
+    print(c.getText())  # 沒有子標籤
+    print(c.text)  # 沒有子標籤
 
 print("------------------------------")  # 30個
 
-imgTag = soup.select("img")
-print("含<img>標籤的串列長度 = ", len(imgTag))
-for img in imgTag:
-    print(img)
+cc = soup.select("img")
+print("含<img>標籤的串列長度 = ", len(cc))
+for c in cc:
+    print(c)
 
 print("------------------------------")  # 30個
 
-imgTag = soup.select("img")
-print("含<img>標籤的串列長度 = ", len(imgTag))
-for img in imgTag:
-    print("列印標籤串列 = ", img)
-    print("列印圖檔     = ", img.get("src"))
-    print("列印圖檔     = ", img["src"])
+cc = soup.select("img")
+print("含<img>標籤的串列長度 = ", len(cc))
+for c in cc:
+    print("列印標籤串列 = ", c)
+    print("列印圖檔     = ", c.get("src"))
+    print("列印圖檔     = ", c["src"])
 
 print("------------------------------------------------------------")  # 60個
 
@@ -667,16 +735,6 @@ for link in all_links:
     if href != None and href.startswith("http://"):
         print("取得資料")
         print(href)
-
-print("------------------------------------------------------------")  # 60個
-
-print("BeautifulSoup 測試 3")
-
-url = "http://ehappy.tw/bsdemo1.htm"
-soup = get_soup_from_url(url)
-
-print("取得 h1: ", soup.h1)
-print("取得 p: ", soup.p)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -3106,15 +3164,12 @@ print("------------------------------------------------------------")  # 60個
 # taiwanlottery SP
 print("------------------------------------------------------------")  # 60個
 
-url = "http://ehappy.tw/bsdemo1.htm"
-html = requests.get(url)
-html.encoding = "UTF-8"
-soup = BeautifulSoup(html.text, "lxml")
-
-print(soup.h1)
-print(soup.p)
 
 print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個
 
@@ -3128,8 +3183,3 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
-
-print(soup.find("title"))  # 傳回網頁含<title>~</title>
-print(soup.find("title").text)  # 傳回網頁<title>標籤內的資料
-
-

@@ -1,5 +1,45 @@
 
 
+plt.plot(X, Y, color="black")
+plt.plot(X, Y, linestyle="--")
+plt.plot(X, Y, linewidth=5)
+plt.plot(X, Y, marker="o")
+
+
+
+# 繪製折線圖並自定義參數
+plt.plot(x, y, color='b', linestyle='--', linewidth=2.0, marker='o', markersize=8, markerfacecolor='red', markeredgecolor='blue', label='數據1')
+
+# 設定刻度標籤
+plt.xticks([1, 2, 3, 4, 5])
+plt.yticks([2, 3, 5, 7, 11])
+
+"""
+參數說明
+顏色和樣式
+color：設定折線的顏色，例如 'r'（紅色），'#00FF00'（綠色）。
+linestyle：設定折線的樣式，例如 '-'（實線），'--'（虛線），'-.'（點劃線），':'（點線）。
+linewidth：設定折線的寬度，例如 2.0。
+標記
+marker：設定數據點的標記樣式，例如 'o'（圓點），'s'（正方形），'^'（三角形）。
+markersize：設定標記的大小，例如 8。
+markerfacecolor：設定標記內部顏色。
+markeredgecolor：設定標記邊緣顏色。
+刻度和網格
+plt.xticks() 和 plt.yticks()：設定刻度標籤。
+plt.grid()：顯示或隱藏網格線。
+圖形大小和分辨率
+plt.figure(figsize=(width, height), dpi=dpi)：設定圖形大小和分辨率。
+"""
+
+"""
+儲存圖表
+# 圖片繪製完後，使用? plt.savefig 來儲存圖片
+plt.savefig('tmp_plot.png')
+"""
+
+
+
 plt.xlabel("X軸", loc="left")
 plt.ylabel("Y軸", loc="top")
 plt.legend(loc=1)
