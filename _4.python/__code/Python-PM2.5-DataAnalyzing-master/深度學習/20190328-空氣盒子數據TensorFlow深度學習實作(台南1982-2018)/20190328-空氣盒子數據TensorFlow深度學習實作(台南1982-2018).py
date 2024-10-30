@@ -13,6 +13,7 @@ import random
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns  # 海生, 自動把圖畫得比較好看
 
 font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
@@ -25,11 +26,7 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 print("------------------------------------------------------------")  # 60個
 
 #時間序列繪圖
-#初始環境設定
 
-import pandas as pd  
-import numpy as np  
-import matplotlib.pyplot as plt  
 import seaborn as seabornInstance 
 from sklearn.model_selection import train_test_split 
 from sklearn.linear_model import LinearRegression
@@ -99,17 +96,15 @@ plt.grid(which='major', linestyle='-', linewidth='0.5', color='green')
 plt.grid(which='minor', linestyle=':', linewidth='0.5', color='black')
 plt.show()
 
-from sklearn.metrics import mean_absolute_error, median_absolute_error  
+from sklearn.metrics import mean_absolute_error, median_absolute_error
+
 print("The Explained Variance: %.2f" % regressor.score(X_test, y_test))  
 print("The Mean Absolute Error: %.2f " % mean_absolute_error(y_test, y_pred))  
 print("The Median Absolute Error: %.2f " % median_absolute_error(y_test, y_pred))  
 
-
 #神經網路
 
-import pandas as pd  
-import numpy as np  
-import tensorflow as tf  
+import tensorflow as tf
 from sklearn.metrics import explained_variance_score,mean_absolute_error,median_absolute_error
 from sklearn.model_selection import train_test_split  
 
@@ -160,8 +155,6 @@ for i in range(100):
 
 cc = evaluations[0]
 print(cc)
-
-import matplotlib.pyplot as plt  
 
 # manually set the parameters of the figure to and appropriate size
 plt.rcParams['figure.figsize'] = [14, 10]

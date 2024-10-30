@@ -7,10 +7,6 @@ sns.set() 繪圖風格設置
 
 print("------------------------------------------------------------")  # 60個
 
-import seaborn as sns  # 海生, 自動把圖畫得比較好看
-
-print("------------------------------------------------------------")  # 60個
-
 # 共同
 import os
 import sys
@@ -20,6 +16,7 @@ import random
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns  # 海生, 自動把圖畫得比較好看
 
 font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
@@ -32,10 +29,10 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 print("------------------------------------------------------------")  # 60個
 
 import ssl
+
 ssl._create_default_https_context = ssl._create_stdlib_context
 
 print("------------------------------------------------------------")  # 60個
-'''
 
 """
 超详细Seaborn绘图 ——（一）barplot
@@ -45,12 +42,6 @@ Seaborn是基于matplotlib的图形可视化python包。它提供了一种高度
 
 cc = sns.__version__
 print(cc)
-
-"""
-import matplotlib.pyplot as plt
-import numpy as np
-import pandas as pd
-"""
 
 """
 # 显示正负号与中文不显示问题
@@ -144,11 +135,11 @@ kwargs：< key, value mappings >
 """
 
 plt.figure(dpi=150)
-x = ['金融','农业','制造业','新能源']
+x = ["金融", "农业", "制造业", "新能源"]
 y = [164, 86, 126, 53]
 sns.barplot(x=x, y=y)
-#sns.barplot(y)
-#通过saturation调整饱和度，默认值为0.75
+# sns.barplot(y)
+# 通过saturation调整饱和度，默认值为0.75
 plt.show()
 
 
@@ -157,27 +148,27 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#还可以选用Seaborn的内置数据集来进行可视化处理
+# 还可以选用Seaborn的内置数据集来进行可视化处理
 
-#首先导入数据集
+# 首先导入数据集
 
-tips = sns.load_dataset('tips')
+tips = sns.load_dataset("tips")
 
 cc = tips.head(5)
 print(cc)
 
 
-#可以通过tips.info()查看数据集的一些具体信息
+# 可以通过tips.info()查看数据集的一些具体信息
 cc = tips.info()
 print(cc)
 
 
-#总共有7个特征，244条数据。接下来进行可视化处理
+# 总共有7个特征，244条数据。接下来进行可视化处理
 
-#通过添加hue来绘制一组由两个变量嵌套分组的垂直条形图
+# 通过添加hue来绘制一组由两个变量嵌套分组的垂直条形图
 
 plt.figure(dpi=150)
-sns.barplot(x = 'day', y = 'tip', data = tips, hue = 'sex')
+sns.barplot(x="day", y="tip", data=tips, hue="sex")
 plt.show()
 
 """
@@ -188,65 +179,88 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 
 
-#绘制水平的条形图
+# 绘制水平的条形图
 
 plt.figure(dpi=150)
-sns.barplot(y = 'day', x = 'tip', data = tips)
+sns.barplot(y="day", x="tip", data=tips)
 plt.show()
 
 
-#要是觉得这个默认的色系不好看，可以使用一个不同的调色盘来绘制图案
+# 要是觉得这个默认的色系不好看，可以使用一个不同的调色盘来绘制图案
 
 plt.figure(dpi=150)
-sns.barplot(x = 'size', y = 'tip', data = tips, palette="Blues_d")
+sns.barplot(x="size", y="tip", data=tips, palette="Blues_d")
 plt.show()
 
 
-#对于palette的一些具体说明，会在后续慢慢阐述。
+# 对于palette的一些具体说明，会在后续慢慢阐述。
 
-#用误差条显示平均值的标准误差
+# 用误差条显示平均值的标准误差
 
 plt.figure(dpi=150)
-sns.barplot(x = 'size', y = 'tip', data = tips, palette="Blues_d", ci=95)
+sns.barplot(x="size", y="tip", data=tips, palette="Blues_d", ci=95)
 plt.show()
 
 
-#还可以个性化误差线（调整线的颜色和厚度）
+# 还可以个性化误差线（调整线的颜色和厚度）
 
 plt.figure(dpi=150)
-sns.barplot(x = 'size', y = 'tip', data = tips, palette="plasma_r", ci=95,
-           errcolor='yellow', errwidth=2, alpha=0.3)
+sns.barplot(
+    x="size",
+    y="tip",
+    data=tips,
+    palette="plasma_r",
+    ci=95,
+    errcolor="yellow",
+    errwidth=2,
+    alpha=0.3,
+)
 plt.show()
 
 
-#给误差条增加"端点"
+# 给误差条增加"端点"
 
 plt.figure(dpi=150)
-sns.barplot(x = 'size', y = 'tip', data = tips, palette="plasma_r", ci=95,
-           errcolor='yellow', errwidth=2, capsize=0.1,alpha=0.3)
+sns.barplot(
+    x="size",
+    y="tip",
+    data=tips,
+    palette="plasma_r",
+    ci=95,
+    errcolor="yellow",
+    errwidth=2,
+    capsize=0.1,
+    alpha=0.3,
+)
 plt.show()
 
-#在使用hue后，柱形本身的宽度会发生改变。若想保持柱形原宽度，可以设置dodge=False
+# 在使用hue后，柱形本身的宽度会发生改变。若想保持柱形原宽度，可以设置dodge=False
 
 plt.figure(dpi=150)
 tips["weekend"] = tips["day"].isin(["Sat", "Sun"])
-sns.barplot(x="day", y="total_bill", hue="weekend",data=tips, dodge=False)
+sns.barplot(x="day", y="total_bill", hue="weekend", data=tips, dodge=False)
 
 plt.show()
 
-#还可以用plt.bar中的一些参数
+# 还可以用plt.bar中的一些参数
 
 
 plt.figure(dpi=150)
-sns.set_style('white')
-sns.barplot(x="day", y="total_bill", data=tips,
-            linewidth=2.5, facecolor=(1, 1, 1, 0),
-            errcolor=".2", edgecolor=".2")
+sns.set_style("white")
+sns.barplot(
+    x="day",
+    y="total_bill",
+    data=tips,
+    linewidth=2.5,
+    facecolor=(1, 1, 1, 0),
+    errcolor=".2",
+    edgecolor=".2",
+)
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#超详细Seaborn绘图 ——（二）boxplot & boxenplot
+# 超详细Seaborn绘图 ——（二）boxplot & boxenplot
 
 """
 箱形图（Box-plot）又称为盒须图、盒式图或箱线图，是一种用作显示一组数据分散情况资料的统计图。
@@ -363,84 +377,77 @@ kwargs：键值映射
 
 """
 
-import matplotlib.pyplot as plt
-import seaborn as sns
-import numpy as np
-import pandas as pd
-
 # 显示正负号与中文不显示问题
-plt.rcParams['axes.unicode_minus'] = False
-sns.set_style('darkgrid', {'font.sans-serif':['SimHei', 'Arial']})
+plt.rcParams["axes.unicode_minus"] = False
+sns.set_style("darkgrid", {"font.sans-serif": ["SimHei", "Arial"]})
 
 # 去除部分warning
 import warnings
-warnings.filterwarnings('ignore')
+
+warnings.filterwarnings("ignore")
 
 plt.figure(dpi=150)
-L = [3,2,1,0,4]
+L = [3, 2, 1, 0, 4]
 sns.boxplot(L)
 plt.show()
 
 
 s = pd.Series(L)
-print('平均数：',s.median())
-print('')
-print('下四分位数：',s.quantile(0.25))
-print('')
-print('中位数:',s.quantile(0.5))
-print('')
-print('上四分位数：',s.quantile(0.75))
+print("平均数：", s.median())
+print("")
+print("下四分位数：", s.quantile(0.25))
+print("")
+print("中位数:", s.quantile(0.5))
+print("")
+print("上四分位数：", s.quantile(0.75))
 
 print("------------------------------------------------------------")  # 60個
 
-#导入tips数据集进行后续的操作
+# 导入tips数据集进行后续的操作
 
 plt.figure(dpi=150)
-tips = sns.load_dataset('tips')
-sns.boxplot(x='day',y='tip',data=tips)
+tips = sns.load_dataset("tips")
+sns.boxplot(x="day", y="tip", data=tips)
 
 plt.show()
 
-#根据 2 个分类变量嵌套分组绘制一个箱型图
+# 根据 2 个分类变量嵌套分组绘制一个箱型图
 
 plt.figure(dpi=150)
-tips = sns.load_dataset('tips')
-sns.boxplot(x='day',y='tip',hue='sex',data=tips)
+tips = sns.load_dataset("tips")
+sns.boxplot(x="day", y="tip", hue="sex", data=tips)
 
 plt.show()
 
-#通过显式传入参数指定顺序控制箱型图的显示顺序
+# 通过显式传入参数指定顺序控制箱型图的显示顺序
 
 plt.figure(dpi=150)
-tips = sns.load_dataset('tips')
-sns.boxplot(x='day',y='tip',hue='sex',data=tips,
-           order=['Sun','Sat','Fri','Thur'])
+tips = sns.load_dataset("tips")
+sns.boxplot(x="day", y="tip", hue="sex", data=tips, order=["Sun", "Sat", "Fri", "Thur"])
 
 plt.show()
 
-#通过palette修改每个类别的颜色
+# 通过palette修改每个类别的颜色
 
 plt.figure(dpi=150)
-tips = sns.load_dataset('tips')
-sns.boxplot(x='day',y='tip',hue='sex',data=tips,
-           palette='Set2',saturation=0.4)
+tips = sns.load_dataset("tips")
+sns.boxplot(x="day", y="tip", hue="sex", data=tips, palette="Set2", saturation=0.4)
 
 plt.show()
 
-#变成横向的
+# 变成横向的
 
 plt.figure(dpi=150)
-tips = sns.load_dataset('tips')
-sns.boxplot(y='day',x='tip',hue='sex',data=tips,
-           palette='Set2',saturation=0.4)
+tips = sns.load_dataset("tips")
+sns.boxplot(y="day", x="tip", hue="sex", data=tips, palette="Set2", saturation=0.4)
 
 plt.show()
 
-#修改异常点的大小
+# 修改异常点的大小
 
 plt.figure(dpi=150)
-tips = sns.load_dataset('tips')
-sns.boxplot(x='day',y='tip',hue='sex',data=tips,fliersize=1)
+tips = sns.load_dataset("tips")
+sns.boxplot(x="day", y="tip", hue="sex", data=tips, fliersize=1)
 
 plt.show()
 
@@ -457,19 +464,19 @@ plt.show()
 """
 
 plt.figure(dpi=150)
-L = [3,2,1,0,4,8]
+L = [3, 2, 1, 0, 4, 8]
 sns.boxplot(L)
 plt.show()
 
 s = pd.Series(L)
 
-print('平均数：',s.median())
-print('')
-print('下四分位数：',s.quantile(0.25))
-print('')
-print('中位数:',s.quantile(0.5))
-print('')
-print('上四分位数：',s.quantile(0.75))
+print("平均数：", s.median())
+print("")
+print("下四分位数：", s.quantile(0.25))
+print("")
+print("中位数:", s.quantile(0.5))
+print("")
+print("上四分位数：", s.quantile(0.75))
 
 
 """
@@ -481,16 +488,16 @@ print('上四分位数：',s.quantile(0.75))
 """
 
 plt.figure(dpi=150)
-L = [3,2,1,0,4,8]
-sns.boxplot(L,whis=3)
+L = [3, 2, 1, 0, 4, 8]
+sns.boxplot(L, whis=3)
 
 plt.show()
 
-#突出中位数的置信区间
+# 突出中位数的置信区间
 
 plt.figure(dpi=150)
-tips = sns.load_dataset('tips')
-sns.boxplot(x='day',y='tip',hue='sex',data=tips,notch=True)
+tips = sns.load_dataset("tips")
+sns.boxplot(x="day", y="tip", hue="sex", data=tips, notch=True)
 
 plt.show()
 
@@ -521,7 +528,7 @@ outlier_prop：float
 
 """
 
-#绘制一个独立的横向增强箱型图
+# 绘制一个独立的横向增强箱型图
 
 plt.figure(dpi=150)
 tips = sns.load_dataset("tips")
@@ -529,64 +536,59 @@ sns.boxenplot(x=tips["total_bill"])
 
 plt.show()
 
-#根据分类变量分组绘制一个纵向的增强箱型图
+# 根据分类变量分组绘制一个纵向的增强箱型图
 
 plt.figure(dpi=150)
 tips = sns.load_dataset("tips")
-sns.boxenplot(x='day',y='total_bill',data=tips)
+sns.boxenplot(x="day", y="total_bill", data=tips)
 
 plt.show()
 
-#根据 2 个分类变量嵌套分组绘制一个增强箱型图
+# 根据 2 个分类变量嵌套分组绘制一个增强箱型图
 
 plt.figure(dpi=150)
 tips = sns.load_dataset("tips")
-sns.boxenplot(x='day',y='total_bill',hue='smoker',data=tips)
+sns.boxenplot(x="day", y="total_bill", hue="smoker", data=tips)
 
 plt.show()
 
-#改变盒形图数目
+# 改变盒形图数目
 
 plt.figure(dpi=150)
 tips = sns.load_dataset("tips")
-sns.boxenplot(x='day',y='total_bill',hue='smoker',data=tips,
-             k_depth='tukey')
-
-plt.show()
-
-plt.figure(dpi=150)
-tips = sns.load_dataset("tips")
-sns.boxenplot(x='day',y='total_bill',hue='smoker',data=tips,
-             k_depth='trustworthy')
-
-plt.show()
-
-#控制增强箱型图宽度
-
-plt.figure(dpi=150)
-tips = sns.load_dataset("tips")
-sns.boxenplot(x='day',y='total_bill',hue='smoker',data=tips,
-             scale='linear')
+sns.boxenplot(x="day", y="total_bill", hue="smoker", data=tips, k_depth="tukey")
 
 plt.show()
 
 plt.figure(dpi=150)
 tips = sns.load_dataset("tips")
-sns.boxenplot(x='day',y='total_bill',hue='smoker',data=tips,
-             scale='exponential')
+sns.boxenplot(x="day", y="total_bill", hue="smoker", data=tips, k_depth="trustworthy")
+
+plt.show()
+
+# 控制增强箱型图宽度
+
+plt.figure(dpi=150)
+tips = sns.load_dataset("tips")
+sns.boxenplot(x="day", y="total_bill", hue="smoker", data=tips, scale="linear")
 
 plt.show()
 
 plt.figure(dpi=150)
 tips = sns.load_dataset("tips")
-sns.boxenplot(x='day',y='total_bill',hue='smoker',data=tips,
-             scale='area')
+sns.boxenplot(x="day", y="total_bill", hue="smoker", data=tips, scale="exponential")
+
+plt.show()
+
+plt.figure(dpi=150)
+tips = sns.load_dataset("tips")
+sns.boxenplot(x="day", y="total_bill", hue="smoker", data=tips, scale="area")
 
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#超详细Seaborn绘图 ——（三）violinplot
+# 超详细Seaborn绘图 ——（三）violinplot
 
 """
 一、基础概念
@@ -627,14 +629,10 @@ scale_hue：{bool}
 """
 
 
-
-
-
 print("------------------------------------------------------------")  # 60個
 
 
-
-#超详细Seaborn绘图 ——（五）pointplot
+# 超详细Seaborn绘图 ——（五）pointplot
 
 """
 pointplot，如其名，就是点图。点图代表散点图位置的数值变量的中心趋势估计，并使用误差线提供关于该估计的不确定性的一些指示。
@@ -689,7 +687,7 @@ capsize：float
 
 print("------------------------------------------------------------")  # 60個
 
-#绘制最简单的pointplot
+# 绘制最简单的pointplot
 
 plt.figure(dpi=150)
 tips = sns.load_dataset("tips")
@@ -699,93 +697,104 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#绘制两个变量的pointplot
+# 绘制两个变量的pointplot
 
 plt.figure(dpi=150)
-sns.pointplot(x="time", y="total_bill",hue='smoker' ,data=tips)
+sns.pointplot(x="time", y="total_bill", hue="smoker", data=tips)
 
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#通过dodge避免重叠
+# 通过dodge避免重叠
 
 plt.figure(dpi=150)
-sns.pointplot(x="time", y="total_bill",hue='smoker',
-              dodge=True,data=tips)
-
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-
-#以列表的形式修改每个分类变量标记点的样式以及线的样式
-
-plt.figure(dpi=150)
-sns.pointplot(x="time", y="total_bill", hue="smoker",data=tips,
-              markers=["o", "x"],linestyles=["-", "--"],dodge=True)
+sns.pointplot(x="time", y="total_bill", hue="smoker", dodge=True, data=tips)
 
 
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#取消点与点之间的连线
+
+# 以列表的形式修改每个分类变量标记点的样式以及线的样式
 
 plt.figure(dpi=150)
-sns.pointplot(x="tip", y="day", data=tips,
-              markers='h',join=False)
+sns.pointplot(
+    x="time",
+    y="total_bill",
+    hue="smoker",
+    data=tips,
+    markers=["o", "x"],
+    linestyles=["-", "--"],
+    dodge=True,
+)
+
 
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#用中位数作为集中趋势的估计
+# 取消点与点之间的连线
+
+plt.figure(dpi=150)
+sns.pointplot(x="tip", y="day", data=tips, markers="h", join=False)
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+# 用中位数作为集中趋势的估计
 
 from numpy import median
+
 plt.figure(dpi=150)
-sns.pointplot(x="tip", y="day", data=tips,
-              markers='h',estimator=median)
+sns.pointplot(x="tip", y="day", data=tips, markers="h", estimator=median)
 
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
 
-#用误差线显示均值的标准误差
+# 用误差线显示均值的标准误差
 
 from numpy import median
+
 plt.figure(dpi=150)
-sns.pointplot(x="day", y="tip", data=tips,
-              markers='h',errwidth=1,ci=68,
-             capsize=0.2)
+sns.pointplot(x="day", y="tip", data=tips, markers="h", errwidth=1, ci=68, capsize=0.2)
 
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-
-#显示观测值的标准偏差而不是置信区间
+# 显示观测值的标准偏差而不是置信区间
 
 from numpy import median
+
 plt.figure(dpi=150)
-sns.pointplot(x="day", y="tip", data=tips,
-              markers='h',errwidth=1,ci='sd',
-             capsize=0.2)
+sns.pointplot(
+    x="day", y="tip", data=tips, markers="h", errwidth=1, ci="sd", capsize=0.2
+)
 
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-
-#还可以通过ci=None取消误差线的展示
+# 还可以通过ci=None取消误差线的展示
 
 from numpy import median
+
 plt.figure(dpi=150)
-sns.pointplot(x="day", y="tip", data=tips,
-              markers='h',errwidth=1,ci=None,
-             linestyles=':',capsize=0.2)
+sns.pointplot(
+    x="day",
+    y="tip",
+    data=tips,
+    markers="h",
+    errwidth=1,
+    ci=None,
+    linestyles=":",
+    capsize=0.2,
+)
 
 plt.show()
 
@@ -809,12 +818,9 @@ Seaborn 提供了一個簡單且美觀的方式來進行資料視覺化，尤其
 成對圖 sns.pairplot: 當你需要同時查看多個變數之間的兩兩關係時，使用成對關係圖。
 
 """
-'''
-#散佈圖 sns.scatterplot 
-#用於顯示兩個數值變量之間的關係，並可以通過顏色和大小來表示其他維度。
 
-import seaborn as sns
-import matplotlib.pyplot as plt
+# 散佈圖 sns.scatterplot
+# 用於顯示兩個數值變量之間的關係，並可以通過顏色和大小來表示其他維度。
 
 # 加載內建的 iris 數據集
 iris = sns.load_dataset("iris")
@@ -831,18 +837,24 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#散佈圖參數調整
-
-import seaborn as sns
-import matplotlib.pyplot as plt
+# 散佈圖參數調整
 
 # 生成樣本數據
 tips = sns.load_dataset("tips")
 
 # 繪製散佈圖
-sns.scatterplot(data=tips, x="total_bill", y="tip", hue="day", style="time", size="size", palette="viridis", alpha=0.7)
+sns.scatterplot(
+    data=tips,
+    x="total_bill",
+    y="tip",
+    hue="day",
+    style="time",
+    size="size",
+    palette="viridis",
+    alpha=0.7,
+)
 
-plt.title('Scatterplot of Total Bill vs Tip')
+plt.title("Scatterplot of Total Bill vs Tip")
 plt.show()
 
 """
@@ -857,8 +869,8 @@ alpha：設置點的透明度
 """
 print("------------------------------------------------------------")  # 60個
 
-#折線圖 sns.lineplot 
-#用於顯示數值變量隨著某一維度（通常是時間）變化的趨勢。
+# 折線圖 sns.lineplot
+# 用於顯示數值變量隨著某一維度（通常是時間）變化的趨勢。
 
 # 加載內建的 flights 數據集
 flights = sns.load_dataset("flights")
@@ -874,11 +886,20 @@ plt.show()
 """
 print("------------------------------------------------------------")  # 60個
 
-#折線圖參數調整
+# 折線圖參數調整
 # 繪製折線圖
-sns.lineplot(data=tips, x="size", y="total_bill", hue="day", style="time", markers=True, dashes=False, errorbar="sd")
+sns.lineplot(
+    data=tips,
+    x="size",
+    y="total_bill",
+    hue="day",
+    style="time",
+    markers=True,
+    dashes=False,
+    errorbar="sd",
+)
 
-plt.title('Lineplot of Total Bill by Party Size')
+plt.title("Lineplot of Total Bill by Party Size")
 plt.show()
 
 """
@@ -893,8 +914,8 @@ errorbar：設置置信區間
 """
 print("------------------------------------------------------------")  # 60個
 
-#柱狀圖 sns.barplot 
-#用於顯示類別變量與數值變量之間的關係，通常用於比較不同組別的平均值。
+# 柱狀圖 sns.barplot
+# 用於顯示類別變量與數值變量之間的關係，通常用於比較不同組別的平均值。
 
 # 繪製柱狀圖
 sns.barplot(x="species", y="sepal_width", data=iris)
@@ -907,12 +928,14 @@ plt.show()
 """
 print("------------------------------------------------------------")  # 60個
 
-#柱狀圖參數調整
+# 柱狀圖參數調整
 
 # 繪製條形圖
-sns.barplot(data=tips, x="day", y="total_bill", hue="sex", errorbar="sd", palette="coolwarm")
+sns.barplot(
+    data=tips, x="day", y="total_bill", hue="sex", errorbar="sd", palette="coolwarm"
+)
 
-plt.title('Barplot of Total Bill by Day and Sex')
+plt.title("Barplot of Total Bill by Day and Sex")
 plt.show()
 
 """
@@ -927,8 +950,8 @@ palette：設置顏色調色盤
 
 print("------------------------------------------------------------")  # 60個
 
-#直方圖 sns.histplot 
-#用於顯示數值變量的分佈情況，可以用於單一變量或多變量的直方圖繪製。
+# 直方圖 sns.histplot
+# 用於顯示數值變量的分佈情況，可以用於單一變量或多變量的直方圖繪製。
 
 # 繪製直方圖
 sns.histplot(iris["sepal_length"], kde=True)
@@ -942,11 +965,11 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#直方圖參數調整
+# 直方圖參數調整
 # 繪製直方圖
 sns.histplot(data=tips, x="total_bill", hue="sex", bins=20, kde=True, palette="magma")
 
-plt.title('Histogram of Total Bill')
+plt.title("Histogram of Total Bill")
 plt.show()
 
 """
@@ -960,8 +983,8 @@ kde：設置是否顯示核密度估計
 """
 print("------------------------------------------------------------")  # 60個
 
-#熱力圖 sns.heatmap 
-#用於顯示矩陣數據的顏色編碼表示，通常用於顯示相關矩陣或數據透視表。
+# 熱力圖 sns.heatmap
+# 用於顯示矩陣數據的顏色編碼表示，通常用於顯示相關矩陣或數據透視表。
 
 """NG
 # 繪製熱力圖
@@ -1001,8 +1024,8 @@ linecolor：設置格子之間的間隔線顏色
 print("------------------------------------------------------------")  # 60個
 
 
-#成對圖 sns.pairplot 
-#用於顯示數據集中所有變量之間的成對關係，特別適合初步探索數據的關聯性。
+# 成對圖 sns.pairplot
+# 用於顯示數據集中所有變量之間的成對關係，特別適合初步探索數據的關聯性。
 
 # 繪製成對圖
 sns.pairplot(iris, hue="species")
@@ -1017,11 +1040,11 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 
 
-#成對圖參數調整
+# 成對圖參數調整
 # 繪製成對關係圖
 sns.pairplot(data=tips, hue="sex", palette="husl", kind="scatter", diag_kind="kde")
 
-plt.title('Pairplot of Tips Dataset')
+plt.title("Pairplot of Tips Dataset")
 plt.show()
 """
 參數說明
@@ -1032,8 +1055,8 @@ diag_kind：設置對角線圖的類型（如 hist 或 kde）
 """
 print("------------------------------------------------------------")  # 60個
 
-#箱線圖 sns.boxplot 
-#用於顯示數值變量的分佈情況及其異常值，通常用於比較多個組別的數值變量。
+# 箱線圖 sns.boxplot
+# 用於顯示數值變量的分佈情況及其異常值，通常用於比較多個組別的數值變量。
 
 # 繪製箱線圖
 sns.boxplot(x="species", y="sepal_length", data=iris)
@@ -1047,11 +1070,11 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#箱線圖參數調整
+# 箱線圖參數調整
 # 繪製箱線圖
 sns.boxplot(data=tips, x="day", y="total_bill", hue="sex", palette="Set2", fliersize=5)
 
-plt.title('Boxplot of Total Bill by Day and Sex')
+plt.title("Boxplot of Total Bill by Day and Sex")
 plt.show()
 
 """
@@ -1068,11 +1091,9 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-

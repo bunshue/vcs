@@ -42,25 +42,25 @@ plt.figure(
 # 第一張圖
 plt.subplot(221, projection="aitoff")
 # 地理投影圖表 Aitoff
-plt.title("地理投影 = Aitoff",c='b')
+plt.title("地理投影 = Aitoff", c="b")
 plt.grid(True)
 
 # 第二張圖
 plt.subplot(222, projection="hammer")
 # 地理投影圖表 Hammer
-plt.title("地理投影 = Hammer",c='b')
+plt.title("地理投影 = Hammer", c="b")
 plt.grid(True)
 
 # 第三張圖
 plt.subplot(223, projection="lambert")
 # 地理投影圖表 Lambert
-plt.title("地理投影 = Lambert",c='b')
+plt.title("地理投影 = Lambert", c="b")
 plt.grid(True)
 
 # 第四張圖
 plt.subplot(224, projection="mollweide")
 # 地理投影圖表 Mollweide
-plt.title("地理投影 = Mollweide",c='b')
+plt.title("地理投影 = Mollweide", c="b")
 plt.grid(True)
 
 plt.show()

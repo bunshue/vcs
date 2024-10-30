@@ -40,7 +40,7 @@ y2 = np.tan(x)
 
 print("------------------------------------------------------------")  # 60個
 
-print('無海生')
+print("無海生")
 
 plt.plot(x, y)
 plt.title("無海生")
@@ -48,18 +48,21 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-print('前面加兩行變海生, 引用與設定')
+print("前面加兩行變海生, 引用與設定")
 
 import seaborn as sns  # 海生, 自動把圖畫得比較好看
 
-#sns.set()
-#sns.set(color_codes=True)
+# sns.set()
+# sns.set(color_codes=True)
 sns.set(rc={"figure.figsize": (6, 4)})
 
-#海生的中文設定 5 行
-font_filename = ("C:/_git/vcs/_1.data/______test_files1/_font/TaipeiSansTCBeta-Regular.ttf")
+# 海生的中文設定 5 行
+font_filename = (
+    "C:/_git/vcs/_1.data/______test_files1/_font/TaipeiSansTCBeta-Regular.ttf"
+)
 import matplotlib as mpl
 import matplotlib.font_manager as fm
+
 fm.fontManager.addfont(font_filename)
 mpl.rc("font", family="Taipei Sans TC Beta")
 
@@ -70,7 +73,7 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-print('用海生的函數畫圖')
+print("用海生的函數畫圖")
 
 """
 N = 1000
@@ -80,7 +83,7 @@ print('海生函數 histplot')
 sns.histplot(x, kde=False)
 """
 
-print('海生函數 lineplot')
+print("海生函數 lineplot")
 sns.lineplot(data=y)
 
 plt.title("用海生的函數畫圖")
@@ -89,9 +92,9 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-N = 1000 # 樣本數
-μ = 87 # 平均值
-σ = 2.5 # 標準差
+N = 1000  # 樣本數
+μ = 87  # 平均值
+σ = 2.5  # 標準差
 x = np.random.randn(N) * σ + μ
 
 print("平均值 :", x.mean())
@@ -99,7 +102,7 @@ print("標準差 :", x.std())
 
 import seaborn as sns
 
-#sns.displot(x)
+# sns.displot(x)
 sns.histplot(x)
 
 plt.show()
@@ -141,7 +144,7 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-N = 10000 # 樣本數
+N = 10000  # 樣本數
 mu = 0  # 平均值
 sigma = 1  # 標準差
 
@@ -153,7 +156,7 @@ peak = 8  # mode尖峰值
 right = 10
 x3 = np.random.triangular(left, peak, right, N)
 
-bins = 50 # 束
+bins = 50  # 束
 
 plt.figure(figsize=(12, 6))
 
@@ -172,11 +175,11 @@ plt.title("均勻分布 + kdeplot")
 plt.subplot(133)
 
 plt.hist(x3, bins, density=True)
-#sns.kdeplot(x3)  # 核密度估計圖, 多了外圍那圈
+# sns.kdeplot(x3)  # 核密度估計圖, 多了外圍那圈
 plt.title("np.random.triangular")
 
-#用density
-#plt.hist(x3, bins, density=True)
+# 用density
+# plt.hist(x3, bins, density=True)
 
 plt.show()
 
@@ -199,6 +202,7 @@ plt.show()
 
 # 多此三行 變成海生風格
 import seaborn as sns
+
 sns.set()
 plt.rcParams[
     "font.sans-serif"
@@ -213,7 +217,7 @@ print("------------------------------------------------------------")  # 60個
 plt.xlabel("銷售張數")
 plt.ylabel("成功次數")
 sns.histplot(np.random.binomial(n=5, p=0.75, size=1000), kde=False)
-#sns.histplot(np.random.binomial(n=10, p=0.35, size=1000), kde=False)
+# sns.histplot(np.random.binomial(n=10, p=0.35, size=1000), kde=False)
 
 plt.title("二項式分布 Binomial")
 
@@ -249,32 +253,30 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-x = [0,0.5,1,1.5,2,2.5,3,3.5,4,4.5,5,
-     5.5,6,6.5,7,7.5,8,8.5,9,9.5,10]
+x = [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10]
 sinus = [math.sin(v) for v in x]
 cosinus = [math.cos(v) for v in x]
 
 sns.set()
-fig, axes = plt.subplots(1,2, figsize=(6,4))
+fig, axes = plt.subplots(1, 2, figsize=(6, 4))
 ax1 = sns.lineplot(x=x, y=sinus, ax=axes[0])
 ax2 = sns.scatterplot(x=x, y=cosinus, ax=axes[1])
 
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
- 
-x = [0,0.5,1,1.5,2,2.5,3,3.5,4,4.5,5,
-     5.5,6,6.5,7,7.5,8,8.5,9,9.5,10]
+
+x = [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10]
 sinus = [math.sin(v) for v in x]
 cosinus = [math.cos(v) for v in x]
 
 df = pd.DataFrame()
 df["x"] = x
-df["sin"]= sinus
+df["sin"] = sinus
 df["cos"] = cosinus
 print(df.head())
 
-df2 = pd.melt(df, id_vars=['x'], value_vars=['sin', 'cos'])
+df2 = pd.melt(df, id_vars=["x"], value_vars=["sin", "cos"])
 print(df2.head())
 
 sns.set()
@@ -284,8 +286,7 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-x = [0,0.5,1,1.5,2,2.5,3,3.5,4,4.5,5,
-     5.5,6,6.5,7,7.5,8,8.5,9,9.5,10]
+x = [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10]
 sinus = [math.sin(v) for v in x]
 
 sns.set_style("whitegrid")
@@ -295,8 +296,7 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-x = [0,0.5,1,1.5,2,2.5,3,3.5,4,4.5,5,
-     5.5,6,6.5,7,7.5,8,8.5,9,9.5,10]
+x = [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10]
 sinus = [math.sin(v) for v in x]
 
 sns.set_style("whitegrid")
@@ -307,8 +307,7 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-x = [0,0.5,1,1.5,2,2.5,3,3.5,4,4.5,5,
-     5.5,6,6.5,7,7.5,8,8.5,9,9.5,10]
+x = [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10]
 sinus = [math.sin(v) for v in x]
 
 sns.set_style("darkgrid", {"axes.axisbelow": False})
@@ -320,13 +319,13 @@ print(sns.axes_style())
 
 print("------------------------------------------------------------")  # 60個
 
-x = [0,0.5,1,1.5,2,2.5,3,3.5,4,4.5,5,
-     5.5,6,6.5,7,7.5,8,8.5,9,9.5,10]
+x = [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10]
 sinus = [math.sin(v) for v in x]
 
 plt.rcParams["axes.unicode_minus"] = False
-sns.set_style("darkgrid", {"axes.axisbelow": False,
-                           "font.sans-serif":['Microsoft JhengHei']})
+sns.set_style(
+    "darkgrid", {"axes.axisbelow": False, "font.sans-serif": ["Microsoft JhengHei"]}
+)
 sns.lineplot(x=x, y=sinus)
 plt.title("Sinus三角函數的波型")
 plt.xlim(-2, 12)
@@ -338,23 +337,23 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-x = [0,0.5,1,1.5,2,2.5,3,3.5,4,4.5,5,
-     5.5,6,6.5,7,7.5,8,8.5,9,9.5,10]
+x = [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10]
 sinus = [math.sin(v) for v in x]
 cosinus = [math.cos(v) for v in x]
 
 df = pd.DataFrame()
 df["x"] = x
-df["sin"]= sinus
+df["sin"] = sinus
 df["cos"] = cosinus
 print(df.head())
 
-df2 = pd.melt(df, id_vars=['x'], value_vars=['sin', 'cos'])
+df2 = pd.melt(df, id_vars=["x"], value_vars=["sin", "cos"])
 print(df2.head())
 
 sns.set()
-sns.relplot(x="x", y="value", kind="scatter", col="variable",
-            height=4, aspect=1.2, data=df2)
+sns.relplot(
+    x="x", y="value", kind="scatter", col="variable", height=4, aspect=1.2, data=df2
+)
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
@@ -378,7 +377,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
@@ -387,16 +385,14 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-#sns折線圖的繪製範例
-#sns.set(style="whitegrid", font="meiryo")
+# sns折線圖的繪製範例
+# sns.set(style="whitegrid", font="meiryo")
 
 # 繪製折線圖
-#sns.set(style="white", font="meiryo")
+# sns.set(style="white", font="meiryo")
 
 # 調整資料的格式
-#sns.set(style="white", font="meiryo") 
-#sns.set(style="white", font="meiryo") 
+# sns.set(style="white", font="meiryo")
+# sns.set(style="white", font="meiryo")
 
-#ax.legend(loc="lower left", bbox_to_anchor=(1, 0))
-
-
+# ax.legend(loc="lower left", bbox_to_anchor=(1, 0))

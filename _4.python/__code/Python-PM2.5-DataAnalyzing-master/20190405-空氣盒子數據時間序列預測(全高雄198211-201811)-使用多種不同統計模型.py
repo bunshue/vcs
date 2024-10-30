@@ -24,43 +24,41 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
-#以每月平均資料進行分析
-#+12代表未來12個月的數值
+# 以每月平均資料進行分析
+# +12代表未來12個月的數值
 
-import matplotlib.pyplot as plt
-
-#Autoregression (AR)
+# Autoregression (AR)
 
 # AR example
 from statsmodels.tsa.ar_model import AR
-import pandas as pd
+
 # contrived dataset
-data = pd.read_excel('TimeSeries_198211-201811b.xlsx').PM25
+data = pd.read_excel("data/TimeSeries_198211-201811b.xlsx").PM25
 # fit model
 model = AR(data)
 model_fit = model.fit()
 # make prediction
-yhat = model_fit.predict(len(data), len(data)+12)
+yhat = model_fit.predict(len(data), len(data) + 12)
 print(yhat)
 plt.plot(yhat)
-plt.yticks([30,40])
+plt.yticks([30, 40])
 
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#Moving Average (MA)
+# Moving Average (MA)
 
 from statsmodels.tsa.arima_model import ARMA
 from random import random
 
 # contrived dataset
-data = pd.read_excel('TimeSeries_198211-201811.xlsx').PM25
+data = pd.read_excel("data/TimeSeries_198211-201811.xlsx").PM25
 # fit model
 model = ARMA(data, order=(0, 1))
 model_fit = model.fit(disp=False)
 # make prediction
-yhat = model_fit.predict(len(data), len(data)+12)
+yhat = model_fit.predict(len(data), len(data) + 12)
 print(yhat)
 plt.plot(yhat)
 
@@ -68,18 +66,19 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#Autoregressive Moving Average (ARMA)
+# Autoregressive Moving Average (ARMA)
 
 # ARMA example
 from statsmodels.tsa.arima_model import ARMA
 from random import random
+
 # contrived dataset
-data = pd.read_excel('TimeSeries_198211-201811.xlsx').PM25
+data = pd.read_excel("data/TimeSeries_198211-201811.xlsx").PM25
 # fit model
 model = ARMA(data, order=(2, 1))
 model_fit = model.fit(disp=False)
 # make prediction
-yhat = model_fit.predict(len(data), len(data)+12)
+yhat = model_fit.predict(len(data), len(data) + 12)
 print(yhat)
 plt.plot(yhat)
 
@@ -87,18 +86,19 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#Autoregressive Integrated Moving Average (ARIMA)
+# Autoregressive Integrated Moving Average (ARIMA)
 
 # ARIMA example
 from statsmodels.tsa.arima_model import ARIMA
 from random import random
+
 # contrived dataset
-data = pd.read_excel('TimeSeries_198211-201811.xlsx').PM25
+data = pd.read_excel("data/TimeSeries_198211-201811.xlsx").PM25
 # fit model
 model = ARIMA(data, order=(1, 1, 1))
 model_fit = model.fit(disp=False)
 # make prediction
-yhat = model_fit.predict(len(data), len(data)+12, typ='levels')
+yhat = model_fit.predict(len(data), len(data) + 12, typ="levels")
 print(yhat)
 plt.plot(yhat)
 
@@ -106,18 +106,20 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#Seasonal Autoregressive Integrated Moving-Average with Exogenous Regressors (SARIMAX)
+# Seasonal Autoregressive Integrated Moving-Average with Exogenous Regressors (SARIMAX)
 
 # SARIMA example
 from statsmodels.tsa.statespace.sarimax import SARIMAX
 from random import random
+
 # contrived dataset
-data = pd.read_excel('TimeSeries_198211-201811.xlsx').PM25
+data = pd.read_excel("data/TimeSeries_198211-201811.xlsx").PM25
+
 # fit model
 model = SARIMAX(data, order=(1, 1, 1), seasonal_order=(1, 1, 1, 1))
 model_fit = model.fit(disp=False)
 # make prediction
-yhat = model_fit.predict(len(data), len(data)+12)
+yhat = model_fit.predict(len(data), len(data) + 12)
 print(yhat)
 plt.plot(yhat)
 
@@ -125,18 +127,20 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#Simple Exponential Smoothing (SES)
+# Simple Exponential Smoothing (SES)
 
 # SES example
 from statsmodels.tsa.holtwinters import SimpleExpSmoothing
 from random import random
+
 # contrived dataset
-data = pd.read_excel('TimeSeries_198211-201811.xlsx').PM25
+data = pd.read_excel("data/TimeSeries_198211-201811.xlsx").PM25
+
 # fit model
 model = SimpleExpSmoothing(data)
 model_fit = model.fit()
 # make prediction
-yhat = model_fit.predict(len(data), len(data)+12)
+yhat = model_fit.predict(len(data), len(data) + 12)
 print(yhat)
 plt.plot(yhat)
 
@@ -145,17 +149,15 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 
 
+print("------------------------------------------------------------")  # 60個
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
+print("------------------------------------------------------------")  # 60個
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
 
-print('------------------------------------------------------------')	#60個
-
-print('------------------------------------------------------------')	#60個
-print('作業完成')
-print('------------------------------------------------------------')	#60個
-
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個

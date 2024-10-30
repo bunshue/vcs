@@ -24,6 +24,7 @@ import random
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns  # 海生, 自動把圖畫得比較好看
 
 font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
@@ -35,51 +36,49 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
-import pandas as pd
-import numpy as np
-import seaborn as sns
-
-pd.set_option("display.max_rows", 1000)    #設定最大能顯示1000rows
-pd.set_option("display.max_columns", 1000) #設定最大能顯示1000columns
+pd.set_option("display.max_rows", 1000)  # 設定最大能顯示1000rows
+pd.set_option("display.max_columns", 1000)  # 設定最大能顯示1000columns
 from pylab import mpl
-mpl.rcParams['font.sans-serif'] = ['Microsoft YaHei']
-# 指定默認字形：解決plot不能顯示中文問題
-mpl.rcParams['axes.unicode_minus'] = False
 
-df = pd.read_excel('KH-1982-2018.xlsx')
+mpl.rcParams["font.sans-serif"] = ["Microsoft YaHei"]
+# 指定默認字形：解決plot不能顯示中文問題
+mpl.rcParams["axes.unicode_minus"] = False
+
+df = pd.read_excel("data/KH-1982-2018.xlsx")
 cc = df.head()
 print(cc)
 
 cc = df.columns
 print(cc)
 
-df["SO2"] = pd.to_numeric(df.SO2, errors='coerce')
-df["CO"] = pd.to_numeric(df.CO, errors='coerce')
-#df["CO2"] = pd.to_numeric(df.CO2, errors='coerce')
-df["O3"] = pd.to_numeric(df.O3, errors='coerce')
-df["PM25"] = pd.to_numeric(df.PM25, errors='coerce')
-df["Nox"] = pd.to_numeric(df.Nox, errors='coerce')
-df["NO"] = pd.to_numeric(df.NO, errors='coerce')
-df["NO2"] = pd.to_numeric(df.NO2, errors='coerce')
-df["THC"] = pd.to_numeric(df.THC, errors='coerce')
-df["NMHC"] = pd.to_numeric(df.NMHC, errors='coerce')
-df["CH4"] = pd.to_numeric(df.CH4, errors='coerce')
-df["WindSpeed"] = pd.to_numeric(df.WindSpeed, errors='coerce')
-df["TEMP"] = pd.to_numeric(df.TEMP, errors='coerce')
-df["Humidity"] = pd.to_numeric(df.Humidity, errors='coerce')
+df["SO2"] = pd.to_numeric(df.SO2, errors="coerce")
+df["CO"] = pd.to_numeric(df.CO, errors="coerce")
+# df["CO2"] = pd.to_numeric(df.CO2, errors='coerce')
+df["O3"] = pd.to_numeric(df.O3, errors="coerce")
+df["PM25"] = pd.to_numeric(df.PM25, errors="coerce")
+df["Nox"] = pd.to_numeric(df.Nox, errors="coerce")
+df["NO"] = pd.to_numeric(df.NO, errors="coerce")
+df["NO2"] = pd.to_numeric(df.NO2, errors="coerce")
+df["THC"] = pd.to_numeric(df.THC, errors="coerce")
+df["NMHC"] = pd.to_numeric(df.NMHC, errors="coerce")
+df["CH4"] = pd.to_numeric(df.CH4, errors="coerce")
+df["WindSpeed"] = pd.to_numeric(df.WindSpeed, errors="coerce")
+df["TEMP"] = pd.to_numeric(df.TEMP, errors="coerce")
+df["Humidity"] = pd.to_numeric(df.Humidity, errors="coerce")
 
 cc = df.dtypes
 print(cc)
 
-import matplotlib.pyplot as plt
-plt.style.use('ggplot')
-plt.rcParams["figure.figsize"] = [16,9]
+plt.style.use("ggplot")
+plt.rcParams["figure.figsize"] = [16, 9]
 
-X = df.drop(['PM25'], axis=1)
+X = df.drop(["PM25"], axis=1)
 
 from sklearn.model_selection import train_test_split
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=.3, random_state=12)
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.3, random_state=12
+)
 
 cc = X_train.shape, y_train.shape
 print(cc)
@@ -108,25 +107,23 @@ linear_regression_score = regr.score(X_test, y_test)
 cc = linear_regression_score
 print(cc)
 
-#0.9101721045818417
+# 0.9101721045818417
 
 from math import sqrt
 
 # The coefficients
-print('Coefficients: \n', regr.coef_)
+print("Coefficients: \n", regr.coef_)
 # The mean squared error
-print("Root mean squared error: %.2f"
-      % sqrt(mean_squared_error(y_test, lin_pred)))
+print("Root mean squared error: %.2f" % sqrt(mean_squared_error(y_test, lin_pred)))
 # The absolute squared error
-print("Mean absolute error: %.2f"
-      % mean_absolute_error(y_test, lin_pred))
+print("Mean absolute error: %.2f" % mean_absolute_error(y_test, lin_pred))
 # Explained variance score: 1 is perfect prediction
-print('R-squared: %.2f' % r2_score(y_test, lin_pred))
+print("R-squared: %.2f" % r2_score(y_test, lin_pred))
 
 plt.scatter(y_test, lin_pred)
-plt.xlabel('Measured')
-plt.ylabel('Predicted')
-plt.title('Linear Regression Predicted vs Actual')
+plt.xlabel("Measured")
+plt.ylabel("Predicted")
+plt.title("Linear Regression Predicted vs Actual")
 
 plt.show()
 
@@ -155,24 +152,22 @@ neural_network_regression_score = mlp.score(X_test, y_test)
 cc = neural_network_regression_score
 print(cc)
 
-#0.8532397997401182
+# 0.8532397997401182
 
 # Make predictions using the testing set
 nnr_pred = mlp.predict(X_test)
 
 # The mean squared error
-print("Root mean squared error: %.2f"
-      % sqrt(mean_squared_error(y_test, nnr_pred)))
+print("Root mean squared error: %.2f" % sqrt(mean_squared_error(y_test, nnr_pred)))
 # The absolute squared error
-print("Mean absolute error: %.2f"
-      % mean_absolute_error(y_test, nnr_pred))
+print("Mean absolute error: %.2f" % mean_absolute_error(y_test, nnr_pred))
 # Explained variance score: 1 is perfect prediction
-print('R-squared: %.2f' % r2_score(y_test, nnr_pred))
+print("R-squared: %.2f" % r2_score(y_test, nnr_pred))
 
 plt.scatter(y_test, nnr_pred)
-plt.xlabel('Measured')
-plt.ylabel('Predicted')
-plt.title('Neural Network Regression Predicted vs Actual')
+plt.xlabel("Measured")
+plt.ylabel("Predicted")
+plt.title("Neural Network Regression Predicted vs Actual")
 
 plt.show()
 
@@ -184,29 +179,38 @@ lasso = Lasso()
 
 lasso.fit(X_train, y_train)
 
-Lasso(alpha=1.0, copy_X=True, fit_intercept=True, max_iter=1000,
-   normalize=False, positive=False, precompute=False, random_state=None,
-   selection='cyclic', tol=0.0001, warm_start=False)
+Lasso(
+    alpha=1.0,
+    copy_X=True,
+    fit_intercept=True,
+    max_iter=1000,
+    normalize=False,
+    positive=False,
+    precompute=False,
+    random_state=None,
+    selection="cyclic",
+    tol=0.0001,
+    warm_start=False,
+)
 
 # Score the model
 lasso_score = lasso.score(X_test, y_test)
 cc = lasso_score
 print(cc)
 
-#0.8873130463758103
+# 0.8873130463758103
 
 # Make predictions using the testing set
 lasso_pred = lasso.predict(X_test)
 
-print("Root mean squared error: %.2f"
-      % sqrt(mean_squared_error(y_test, lasso_pred)))
+print("Root mean squared error: %.2f" % sqrt(mean_squared_error(y_test, lasso_pred)))
 
-#Root mean squared error: 4.19
+# Root mean squared error: 4.19
 
 plt.scatter(y_test, lasso_pred)
-plt.xlabel('Measured')
-plt.ylabel('Predicted')
-plt.title('Lasso Predicted vs Actual')
+plt.xlabel("Measured")
+plt.ylabel("Predicted")
+plt.title("Lasso Predicted vs Actual")
 
 plt.show()
 
@@ -227,15 +231,16 @@ elasticnet_score = elasticnet.score(X_test, y_test)
 cc = elasticnet_score
 print(cc)
 
-#0.888862421794889
+# 0.888862421794889
 
 elasticnet_pred = elasticnet.predict(X_test)
 
 # The mean squared error
-print("Root mean squared error: %.2f"
-      % sqrt(mean_squared_error(y_test, elasticnet_pred)))
+print(
+    "Root mean squared error: %.2f" % sqrt(mean_squared_error(y_test, elasticnet_pred))
+)
 
-#Root mean squared error: 4.16
+# Root mean squared error: 4.16
 
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
@@ -260,19 +265,17 @@ decision_forest_score = regr_rf.score(X_test, y_test)
 cc = decision_forest_score
 print(cc)
 
-#0.9023960871039343
+# 0.9023960871039343
 
 # Make predictions using the testing set
 regr_rf_pred = regr_rf.predict(X_test)
 
 # The mean squared error
-print("Root mean squared error: %.2f"
-      % sqrt(mean_squared_error(y_test, regr_rf_pred)))
+print("Root mean squared error: %.2f" % sqrt(mean_squared_error(y_test, regr_rf_pred)))
 # The absolute squared error
-print("Mean absolute error: %.2f"
-      % mean_absolute_error(y_test, regr_rf_pred))
+print("Mean absolute error: %.2f" % mean_absolute_error(y_test, regr_rf_pred))
 # Explained variance score: 1 is perfect prediction
-print('R-squared: %.2f' % r2_score(y_test, regr_rf_pred))
+print("R-squared: %.2f" % r2_score(y_test, regr_rf_pred))
 
 cc = X.columns
 print(cc)
@@ -281,19 +284,19 @@ features = X.columns
 importances = regr_rf.feature_importances_
 indices = np.argsort(importances)
 
-plt.title('Feature Importances')
-plt.barh(range(len(indices)), importances[indices], color='b', align='center')
+plt.title("Feature Importances")
+plt.barh(range(len(indices)), importances[indices], color="b", align="center")
 plt.yticks(range(len(indices)), features[indices])
-plt.xlabel('Relative Importance')
+plt.xlabel("Relative Importance")
 
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
 plt.scatter(y_test, regr_rf_pred)
-plt.xlabel('Measured')
-plt.ylabel('Predicted')
-plt.title('Decision Forest Predicted vs Actual')
+plt.xlabel("Measured")
+plt.ylabel("Predicted")
+plt.title("Decision Forest Predicted vs Actual")
 
 plt.show()
 
@@ -317,32 +320,33 @@ extratree_score = extra_tree.score(X_test, y_test)
 cc = extratree_score
 print(cc)
 
-#0.9167571974098775
+# 0.9167571974098775
 
 extratree_pred = extra_tree.predict(X_test)
 
-print("Root mean squared error: %.2f"
-      % sqrt(mean_squared_error(y_test, extratree_pred)))
+print(
+    "Root mean squared error: %.2f" % sqrt(mean_squared_error(y_test, extratree_pred))
+)
 
-#Root mean squared error: 3.60
+# Root mean squared error: 3.60
 
 features = X.columns
 importances = extra_tree.feature_importances_
 indices = np.argsort(importances)
 
-plt.title('Feature Importances')
-plt.barh(range(len(indices)), importances[indices], color='b', align='center')
+plt.title("Feature Importances")
+plt.barh(range(len(indices)), importances[indices], color="b", align="center")
 plt.yticks(range(len(indices)), features[indices])
-plt.xlabel('Relative Importance')
+plt.xlabel("Relative Importance")
 
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
 plt.scatter(y_test, extratree_pred)
-plt.xlabel('Measured')
-plt.ylabel('Predicted')
-plt.title('Extra Trees Predicted vs Actual')
+plt.xlabel("Measured")
+plt.ylabel("Predicted")
+plt.title("Extra Trees Predicted vs Actual")
 
 plt.show()
 
@@ -355,7 +359,7 @@ from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 # Create Decision Tree Regressor object
 tree_1 = DecisionTreeRegressor()
 
-tree_2 = AdaBoostRegressor(DecisionTreeRegressor(), n_estimators=200, learning_rate=.1)
+tree_2 = AdaBoostRegressor(DecisionTreeRegressor(), n_estimators=200, learning_rate=0.1)
 
 # Train the model using the training sets
 tree_1.fit(X_train, y_train)
@@ -374,29 +378,27 @@ AdaBoostRegressor(base_estimator=DecisionTreeRegressor(criterion='mse', max_dept
 cc = tree_1.score(X_test, y_test)
 print(cc)
 
-#0.8654467934849918
+# 0.8654467934849918
 
 # Score the boosted decision tree model
 boosted_tree_score = tree_2.score(X_test, y_test)
 cc = boosted_tree_score
 print(cc)
 
-#0.892229896203619
+# 0.892229896203619
 
 # Make predictions using the testing set
 tree_1_pred = tree_1.predict(X_test)
 tree_2_pred = tree_2.predict(X_test)
 
 # The coefficients
-print('Coefficients: \n', regr.coef_)
+print("Coefficients: \n", regr.coef_)
 # The mean squared error
-print("Root mean squared error: %.2f"
-      % sqrt(mean_squared_error(y_test, tree_2_pred)))
+print("Root mean squared error: %.2f" % sqrt(mean_squared_error(y_test, tree_2_pred)))
 # The absolute squared error
-print("Mean absolute error: %.2f"
-      % mean_absolute_error(y_test, tree_2_pred))
+print("Mean absolute error: %.2f" % mean_absolute_error(y_test, tree_2_pred))
 # Explained variance score: 1 is perfect prediction
-print('R-squared: %.2f' % r2_score(y_test, tree_2_pred))
+print("R-squared: %.2f" % r2_score(y_test, tree_2_pred))
 
 """
 Coefficients: 
@@ -412,28 +414,28 @@ features = X.columns
 importances = tree_2.feature_importances_
 indices = np.argsort(importances)
 
-plt.title('Feature Importances')
-plt.barh(range(len(indices)), importances[indices], color='b', align='center')
+plt.title("Feature Importances")
+plt.barh(range(len(indices)), importances[indices], color="b", align="center")
 plt.yticks(range(len(indices)), features[indices])
-plt.xlabel('Relative Importance')
+plt.xlabel("Relative Importance")
 
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
 plt.scatter(y_test, tree_1_pred)
-plt.xlabel('Measured')
-plt.ylabel('Predicted')
-plt.title('Decision Tree Predicted vs Actual')
+plt.xlabel("Measured")
+plt.ylabel("Predicted")
+plt.title("Decision Tree Predicted vs Actual")
 
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
 plt.scatter(y_test, tree_2_pred)
-plt.xlabel('Measured')
-plt.ylabel('Predicted')
-plt.title('Boosted Decision Tree Predicted vs Actual')
+plt.xlabel("Measured")
+plt.ylabel("Predicted")
+plt.title("Boosted Decision Tree Predicted vs Actual")
 
 plt.show()
 
@@ -441,7 +443,7 @@ print("------------------------------------------------------------")  # 60個
 
 from xgboost.sklearn import XGBRegressor
 
-#Fitting XGB regressor 
+# Fitting XGB regressor
 xboost = XGBRegressor(n_estimators=200)
 
 xboost.fit(X_train, y_train)
@@ -459,20 +461,19 @@ xgb_score = xboost.score(X_test, y_test)
 cc = xgb_score
 print(cc)
 
-#0.8902505097601974
+# 0.8902505097601974
 
-#Predict 
+# Predict
 xboost_pred = xboost.predict(X_test)
 
-print("Root mean squared error: %.2f"
-      % sqrt(mean_squared_error(y_test, xboost_pred)))
+print("Root mean squared error: %.2f" % sqrt(mean_squared_error(y_test, xboost_pred)))
 
-#Root mean squared error: 4.13
+# Root mean squared error: 4.13
 
 plt.scatter(y_test, xboost_pred)
-plt.xlabel('Measured')
-plt.ylabel('Predicted')
-plt.title('XGBoost Predicted vs Actual')
+plt.xlabel("Measured")
+plt.ylabel("Predicted")
+plt.title("XGBoost Predicted vs Actual")
 
 plt.show()
 
@@ -489,32 +490,26 @@ print("Boosted decision tree score: ", boosted_tree_score)
 print("XGBoost score:", xgb_score)
 print("\n")
 print("RMSE:")
-print("Linear regression RMSE: %.2f"
-      % sqrt(mean_squared_error(y_test, lin_pred)))
-print("Neural network RMSE: %.2f"
-      % sqrt(mean_squared_error(y_test, nnr_pred)))
-print("Lasso RMSE: %.2f"
-      % sqrt(mean_squared_error(y_test, lasso_pred)))
-print("ElasticNet RMSE: %.2f"
-      % sqrt(mean_squared_error(y_test, elasticnet_pred)))
-print("Decision forest RMSE: %.2f"
-      % sqrt(mean_squared_error(y_test, regr_rf_pred)))
-print("Extra Trees RMSE: %.2f"
-      % sqrt(mean_squared_error(y_test, extratree_pred)))
-print("Boosted decision tree RMSE: %.2f"
-      % sqrt(mean_squared_error(y_test, tree_2_pred)))
-print("XGBoost RMSE: %.2f"
-      % sqrt(mean_squared_error(y_test, xboost_pred)))
+print("Linear regression RMSE: %.2f" % sqrt(mean_squared_error(y_test, lin_pred)))
+print("Neural network RMSE: %.2f" % sqrt(mean_squared_error(y_test, nnr_pred)))
+print("Lasso RMSE: %.2f" % sqrt(mean_squared_error(y_test, lasso_pred)))
+print("ElasticNet RMSE: %.2f" % sqrt(mean_squared_error(y_test, elasticnet_pred)))
+print("Decision forest RMSE: %.2f" % sqrt(mean_squared_error(y_test, regr_rf_pred)))
+print("Extra Trees RMSE: %.2f" % sqrt(mean_squared_error(y_test, extratree_pred)))
+print(
+    "Boosted decision tree RMSE: %.2f" % sqrt(mean_squared_error(y_test, tree_2_pred))
+)
+print("XGBoost RMSE: %.2f" % sqrt(mean_squared_error(y_test, xboost_pred)))
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-print('------------------------------------------------------------')	#60個
-print('作業完成')
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個

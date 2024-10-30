@@ -1,7 +1,7 @@
-# -*- coding: UTF-8 -*-
-import requests      # 匯入 requests 套件
+import requests
 import pandas as pd
 import ssl
+
 ssl._create_default_https_context = ssl._create_unverified_context
 url = 'http://opendata.epa.gov.tw/webapi/Data/REWIQA/?$orderby=SiteName&$skip=0&$top=1000&format=csv'
 df = pd.read_csv(url)

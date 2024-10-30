@@ -24,13 +24,11 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
-import pandas as pd
-
-features = pd.read_excel('20160101-20190101(Daily)隨機森林.xlsx')
+features = pd.read_excel("20160101-20190101(Daily)隨機森林.xlsx")
 cc = features.head(5)
 print(cc)
 
-print('The shape of our features is:', features.shape)
+print("The shape of our features is:", features.shape)
 
 cc = features.describe()
 print(cc)
@@ -39,18 +37,15 @@ print(cc)
 features = pd.get_dummies(features)
 
 # Display the first 5 rows of the last 12 columns
-cc = features.iloc[:,5:].head(5)
+cc = features.iloc[:, 5:].head(5)
 print(cc)
 
-# Use numpy to convert to arrays
-import numpy as np
-
 # Labels are the values we want to predict
-labels = np.array(features['PM25'])
+labels = np.array(features["PM25"])
 
 # Remove the labels from the features
 # axis 1 refers to the columns
-features= features.drop('PM25', axis = 1)
+features = features.drop("PM25", axis=1)
 
 # Saving feature names for later use
 feature_list = list(features.columns)
@@ -62,18 +57,20 @@ features = np.array(features)
 from sklearn.model_selection import train_test_split
 
 # Split the data into training and testing sets
-train_features, test_features, train_labels, test_labels = train_test_split(features, labels, test_size = 0.25, random_state = 42)
+train_features, test_features, train_labels, test_labels = train_test_split(
+    features, labels, test_size=0.25, random_state=42
+)
 
-print('Training Features Shape:', train_features.shape)
-print('Training Labels Shape:', train_labels.shape)
-print('Testing Features Shape:', test_features.shape)
-print('Testing Labels Shape:', test_labels.shape)
+print("Training Features Shape:", train_features.shape)
+print("Training Labels Shape:", train_labels.shape)
+print("Testing Features Shape:", test_features.shape)
+print("Testing Labels Shape:", test_labels.shape)
 
 # Import the model we are using
 from sklearn.ensemble import RandomForestRegressor
 
 # Instantiate model with 1000 decision trees
-rf = RandomForestRegressor(n_estimators = 60, random_state = 42)
+rf = RandomForestRegressor(n_estimators=60, random_state=42)
 
 # Train the model on training data
 rf.fit(train_features, train_labels)
@@ -94,49 +91,50 @@ predictions = rf.predict(test_features)
 errors = abs(predictions - test_labels)
 
 # Print out the mean absolute error (mae)
-print('Mean Absolute Error:', round(np.mean(errors), 2), 'degrees.')
+print("Mean Absolute Error:", round(np.mean(errors), 2), "degrees.")
 
-#Mean Absolute Error: 8.93 degrees.
+# Mean Absolute Error: 8.93 degrees.
 
 # Get numerical feature importances
 importances = list(rf.feature_importances_)
 
 # List of tuples with variable and importance
-feature_importances = [(feature, round(importance, 2)) for feature, importance in zip(feature_list, importances)]
+feature_importances = [
+    (feature, round(importance, 2))
+    for feature, importance in zip(feature_list, importances)
+]
 
 # Sort the feature importances by most important first
-feature_importances = sorted(feature_importances, key = lambda x: x[1], reverse = True)
+feature_importances = sorted(feature_importances, key=lambda x: x[1], reverse=True)
 
-# Print out the feature and importances 
-[print('Variable: {:20} Importance: {}'.format(*pair)) for pair in feature_importances];
-
-# Import matplotlib for plotting and use magic command for Jupyter Notebooks
-import matplotlib.pyplot as plt
+# Print out the feature and importances
+[print("Variable: {:20} Importance: {}".format(*pair)) for pair in feature_importances]
 
 # Set the style
-plt.style.use('fivethirtyeight')
+plt.style.use("fivethirtyeight")
 
 # list of x locations for plotting
 x_values = list(range(len(importances)))
 
 # Make a bar chart
-plt.bar(x_values, importances, orientation = 'vertical')
+plt.bar(x_values, importances, orientation="vertical")
 
 # Tick labels for x axis
-plt.xticks(x_values, feature_list, rotation='vertical')
+plt.xticks(x_values, feature_list, rotation="vertical")
 
 # Axis labels and title
-plt.ylabel('Importance'); plt.xlabel('Variable'); plt.title('Variable Importances');
+plt.ylabel("Importance")
+plt.xlabel("Variable")
+plt.title("Variable Importances")
 
 plt.show()
 
 
-
 # New random forest with only the two most important variables
-rf_most_important = RandomForestRegressor(n_estimators= 1000, random_state=42)
+rf_most_important = RandomForestRegressor(n_estimators=1000, random_state=42)
 
 # Extract the two most important features
-important_indices = [feature_list.index('O3'), feature_list.index('TEMP')]
+important_indices = [feature_list.index("O3"), feature_list.index("TEMP")]
 train_important = train_features[:, important_indices]
 test_important = test_features[:, important_indices]
 
@@ -149,12 +147,12 @@ predictions = rf_most_important.predict(test_important)
 errors = abs(predictions - test_labels)
 
 # Display the performance metrics
-print('Mean Absolute Error:', round(np.mean(errors), 2), 'degrees.')
+print("Mean Absolute Error:", round(np.mean(errors), 2), "degrees.")
 
-#Mean Absolute Error: 11.31 degrees.
+# Mean Absolute Error: 11.31 degrees.
 
 # Limit depth of tree to 3 levels
-rf_small = RandomForestRegressor(n_estimators=20, max_depth = 3)
+rf_small = RandomForestRegressor(n_estimators=20, max_depth=3)
 rf_small.fit(train_features, train_labels)
 
 # Extract the small tree
@@ -183,50 +181,60 @@ NameError: name 'export_graphviz' is not defined
 """
 
 from IPython.display import Image
-from IPython.core.display import HTML 
+from IPython.core.display import HTML
 
 PATH = "small_tree222.png"
-Image(filename = PATH , width=850, height=600)
+Image(filename=PATH, width=850, height=600)
 
 # Use datetime for creating date objects for plotting
 import datetime
 
 # Dates of training values
-months = features[:, feature_list.index('month')]
-days = features[:, feature_list.index('day')]
-years = features[:, feature_list.index('year')]
+months = features[:, feature_list.index("month")]
+days = features[:, feature_list.index("day")]
+years = features[:, feature_list.index("year")]
 
 # List and then convert to datetime object
-dates = [str(int(year)) + '-' + str(int(month)) + '-' + str(int(day)) for year, month, day in zip(years, months, days)]
-dates = [datetime.datetime.strptime(date, '%Y-%m-%d') for date in dates]
+dates = [
+    str(int(year)) + "-" + str(int(month)) + "-" + str(int(day))
+    for year, month, day in zip(years, months, days)
+]
+dates = [datetime.datetime.strptime(date, "%Y-%m-%d") for date in dates]
 
 # Dataframe with true values and dates
-true_data = pd.DataFrame(data = {'date': dates, 'actual': labels})
+true_data = pd.DataFrame(data={"date": dates, "actual": labels})
 
 # Dates of predictions
-months = test_features[:, feature_list.index('month')]
-days = test_features[:, feature_list.index('day')]
-years = test_features[:, feature_list.index('year')]
+months = test_features[:, feature_list.index("month")]
+days = test_features[:, feature_list.index("day")]
+years = test_features[:, feature_list.index("year")]
 
 # Column of dates
-test_dates = [str(int(year)) + '-' + str(int(month)) + '-' + str(int(day)) for year, month, day in zip(years, months, days)]
+test_dates = [
+    str(int(year)) + "-" + str(int(month)) + "-" + str(int(day))
+    for year, month, day in zip(years, months, days)
+]
 
 # Convert to datetime objects
-test_dates = [datetime.datetime.strptime(date, '%Y-%m-%d') for date in test_dates]
+test_dates = [datetime.datetime.strptime(date, "%Y-%m-%d") for date in test_dates]
 
 # Dataframe with predictions and dates
-predictions_data = pd.DataFrame(data = {'date': test_dates, 'prediction': predictions})
+predictions_data = pd.DataFrame(data={"date": test_dates, "prediction": predictions})
 
 # Plot the actual values
-plt.plot(true_data['date'], true_data['actual'], 'b-', label = 'actual')
+plt.plot(true_data["date"], true_data["actual"], "b-", label="actual")
 
 # Plot the predicted values
-plt.plot(predictions_data['date'], predictions_data['prediction'], 'ro', label = 'prediction')
-plt.xticks(rotation = '60'); 
+plt.plot(
+    predictions_data["date"], predictions_data["prediction"], "ro", label="prediction"
+)
+plt.xticks(rotation="60")
 plt.legend()
 
 # Graph labels
-plt.xlabel('Date'); plt.ylabel('Maximum Temperature (F)'); plt.title('Actual and Predicted Values');
+plt.xlabel("Date")
+plt.ylabel("Maximum Temperature (F)")
+plt.title("Actual and Predicted Values")
 
 plt.show()
 
@@ -245,14 +253,12 @@ ValueError: 'month' is not in list
  
 """
 
+print("------------------------------------------------------------")  # 60個
 
+print("------------------------------------------------------------")  # 60個
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
 
-print('------------------------------------------------------------')	#60個
-
-print('------------------------------------------------------------')	#60個
-print('作業完成')
-print('------------------------------------------------------------')	#60個
-
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
