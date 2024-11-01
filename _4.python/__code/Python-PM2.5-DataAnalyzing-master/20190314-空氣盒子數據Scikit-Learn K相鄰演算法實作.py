@@ -25,17 +25,20 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
-df = pd.read_csv("data/200811-201811c.csv")
-"""
-cc = df.head()
+df = pd.read_csv("data/200811-201811c.csv")  # 共有 1447 筆資料
+cc = df.head(10)
 print(cc)
+
+#資料長度
+print(len(df))
+print(len(df["PM25"]))
 
 cc = df.info()
 print(cc)
 
 cc = df.describe()
 print(cc)
-"""
+
 # Danger分類點說明
 # 對敏感族群不健康為PM2.5數值在35.5以上
 # 載入標準化比例尺（StandardScaler）套件

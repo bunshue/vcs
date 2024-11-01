@@ -25,10 +25,6 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
-from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LinearRegression
-from sklearn import metrics
-
 df = pd.read_excel("20160101-20190101(Daily)迴歸分析.xlsx")
 # print(df)
 
@@ -61,24 +57,28 @@ X = df[
 
 y = df["PM25"].values
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
+# 將資料分成訓練組及測試組
+from sklearn.model_selection import train_test_split
 
-regressor = LinearRegression()
-regressor.fit(X_train, y_train)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)# 訓練組8成, 測試組2成
 
-LinearRegression(copy_X=True, fit_intercept=True, n_jobs=None, normalize=False)
+# 載入線性迴歸，並訓練模型
+from sklearn.linear_model import LinearRegression
 
+linear_regression = LinearRegression()
+linear_regression.fit(X_train, y_train)
+
+"""
 sns.heatmap(df.corr())
-
 plt.show()
 
 cc = df.corr()
 print(cc)
+"""
+y_pred = linear_regression.predict(X_test)
 
-y_pred = regressor.predict(X_test)
 
-
-df = pd.DataFrame({"Actual": y_test, "Predicted": y_pred})
+df = pd.DataFrame({"測試資料": y_test, "預測結果": y_pred})
 df1 = df.head(25)
 # print(df1)
 
@@ -87,9 +87,21 @@ plt.grid(which="major", linestyle="-", linewidth="0.5", color="green")
 plt.grid(which="minor", linestyle=":", linewidth="0.5", color="black")
 plt.show()
 
-print("Mean Absolute Error:", metrics.mean_absolute_error(y_test, y_pred))
-print("Mean Squared Error:", metrics.mean_squared_error(y_test, y_pred))
-print("Root Mean Squared Error:", np.sqrt(metrics.mean_squared_error(y_test, y_pred)))
+# 載入迴歸常見的評估指標
+from sklearn import metrics
+print("評估 測試資料 與 預測結果 的差異")
+
+# Mean Absolute Error (MAE)代表平均誤差，公式為所有實際值及預測值相減的絕對值平均。
+cc = metrics.mean_absolute_error(y_test, y_pred)
+print("MAE : Mean Absolute Error :", cc)
+
+# Mean Squared Error (MSE)比起MSE可以拉開誤差差距，算是蠻常用的指標，公式所有實際值及預測值相減的平方的平均
+cc = metrics.mean_squared_error(y_test, y_pred)
+print("MSE : Mean Squared Error :", cc)
+
+# Root Mean Squared Error (RMSE)代表MSE的平方根。比起MSE更為常用，因為更容易解釋y。
+cc = np.sqrt(metrics.mean_squared_error(y_test, y_pred))
+print("RMS : Root Mean Squared Error :", cc)
 
 print("------------------------------------------------------------")  # 60個
 

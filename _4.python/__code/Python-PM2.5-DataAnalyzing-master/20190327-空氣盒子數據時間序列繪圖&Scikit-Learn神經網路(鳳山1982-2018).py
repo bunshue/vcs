@@ -28,12 +28,6 @@ print("------------------------------------------------------------")  # 60個
 pd.set_option("display.max_rows", 1000)  # 設定最大能顯示1000rows
 pd.set_option("display.max_columns", 1000)  # 設定最大能顯示1000columns
 
-from pylab import mpl
-
-mpl.rcParams["font.sans-serif"] = ["Microsoft YaHei"]
-# 指定默認字形：解決plot不能顯示中文問題
-mpl.rcParams["axes.unicode_minus"] = False
-
 df = pd.read_excel("data/鳳山.xlsx")
 cc = df.head()
 print(cc)
@@ -69,8 +63,6 @@ plt.xlabel("年")
 plt.ylabel("PM2.5值")
 plt.title("PM2.5趨勢變化")
 plt.show()
-
-from datetime import datetime
 
 df["Time"] = pd.to_datetime(df["Time"])
 df = df.rename(columns={"Time": "Date"})

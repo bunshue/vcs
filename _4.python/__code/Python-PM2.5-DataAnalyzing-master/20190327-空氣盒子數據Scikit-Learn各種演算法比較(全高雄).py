@@ -73,37 +73,32 @@ plt.style.use("ggplot")
 plt.rcParams["figure.figsize"] = [16, 9]
 
 X = df.drop(["PM25"], axis=1)
+y = df.drop(["CO"], axis=1) # ???
 
+# 將資料分成訓練組及測試組
 from sklearn.model_selection import train_test_split
 
 X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.3, random_state=12
-)
+)  # 訓練組7成, 測試組3成
 
-cc = X_train.shape, y_train.shape
-print(cc)
+print(X.shape)
+print(y.shape)
+print(X_train.shape)
+print(X_test.shape)
+print(y_train.shape)
+print(y_test.shape)
 
-cc = X_test.shape, y_test.shape
-print(cc)
-
-cc = X.columns
-print(cc)
-
+# 載入線性迴歸，並訓練模型
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 
-# Create linear regression object
-regr = LinearRegression()
+linear_regression = LinearRegression()
+linear_regression.fit(X_train, y_train)
 
-regr.fit(X_train, y_train)
+lin_pred = linear_regression.predict(X_test)
 
-"""
-LinearRegression(copy_X=True, fit_intercept=True, n_jobs=None,
-         normalize=False)
-"""
-lin_pred = regr.predict(X_test)
-
-linear_regression_score = regr.score(X_test, y_test)
+linear_regression_score = linear_regression.score(X_test, y_test)
 cc = linear_regression_score
 print(cc)
 
@@ -112,7 +107,7 @@ print(cc)
 from math import sqrt
 
 # The coefficients
-print("Coefficients: \n", regr.coef_)
+print("Coefficients: \n", linear_regression.coef_)
 # The mean squared error
 print("Root mean squared error: %.2f" % sqrt(mean_squared_error(y_test, lin_pred)))
 # The absolute squared error
@@ -276,9 +271,6 @@ print("Root mean squared error: %.2f" % sqrt(mean_squared_error(y_test, regr_rf_
 print("Mean absolute error: %.2f" % mean_absolute_error(y_test, regr_rf_pred))
 # Explained variance score: 1 is perfect prediction
 print("R-squared: %.2f" % r2_score(y_test, regr_rf_pred))
-
-cc = X.columns
-print(cc)
 
 features = X.columns
 importances = regr_rf.feature_importances_

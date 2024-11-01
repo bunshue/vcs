@@ -24,26 +24,28 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
-# 引入模組與資料
-
-features = pd.read_csv("data/200811-201811.csv")
-cc = features.head(5)
+df = pd.read_csv("data/200811-201811.csv")  # 共有 687 筆資料
+"""
+cc = df.head(10)
 print(cc)
 
-# 探索資料
+#資料長度
+print(len(df))
+print(len(df["PM25"]))
 
-print("The shape of our features is:", features.shape)
-
-cc = features.describe()
+cc = df.info()
 print(cc)
+
+cc = df.describe()
+print(cc)
+"""
 
 # One-Hot Encoding
-
 # One-hot encode the data using pandas get_dummies
-features = pd.get_dummies(features)
+df = pd.get_dummies(df)
 
 # Display the first 5 rows of the last 12 columns
-features.iloc[:, 5:].head(5)
+df.iloc[:, 5:].head(5)
 
 # 特徵轉換
 
@@ -51,48 +53,51 @@ features.iloc[:, 5:].head(5)
 import numpy as np
 
 # Labels are the values we want to predict
-labels = np.array(features["PM25"])
+labels = np.array(df["PM25"])
 
-# Remove the labels from the features
 # axis 1 refers to the columns
-features = features.drop("PM25", axis=1)
+df = df.drop("PM25", axis=1)
 
 # Saving feature names for later use
-feature_list = list(features.columns)
+feature_list = list(df.columns)
 
 # Convert to numpy array
-features = np.array(features)
+df = np.array(df)
 
 # 將資料分成訓練組及測試組
-
-# Using Skicit-learn to split data into training and testing sets
 from sklearn.model_selection import train_test_split
 
 # Split the data into training and testing sets
 train_features, test_features, train_labels, test_labels = train_test_split(
-    features, labels, test_size=0.25, random_state=42
-)
+    df, labels, test_size=0.25, random_state=42
+)  # 訓練組7.5成, 測試組2.5成
 
+"""
+print(X.shape)
+print(y.shape)
+print(X_train.shape)
+print(X_test.shape)
+print(y_train.shape)
+print(y_test.shape)
+"""
 print("Training Features Shape:", train_features.shape)
 print("Training Labels Shape:", train_labels.shape)
 print("Testing Features Shape:", test_features.shape)
 print("Testing Labels Shape:", test_labels.shape)
 
-# 使用隨機森林演算法
-
-# Import the model we are using
+# 載入隨機森林演算法，並訓練模型
 from sklearn.ensemble import RandomForestRegressor
 
 # Instantiate model with 1000 decision trees
-rf = RandomForestRegressor(n_estimators=1000, random_state=42)
+random_forest_regressor = RandomForestRegressor(n_estimators=1000, random_state=42)
 
 # Train the model on training data
-rf.fit(train_features, train_labels)
+random_forest_regressor.fit(train_features, train_labels)
 
 # 進行預測
 
 # Use the forest's predict method on the test data
-predictions = rf.predict(test_features)
+predictions = random_forest_regressor.predict(test_features)
 
 # Calculate the absolute errors
 errors = abs(predictions - test_labels)
@@ -109,14 +114,14 @@ from sklearn.tree import export_graphviz
 import pydot
 
 # Pull out one tree from the forest
-tree = rf.estimators_[5]
+tree = random_forest_regressor.estimators_[5]
 
 # Import tools needed for visualization
 from sklearn.tree import export_graphviz
 import pydot
 
 # Pull out one tree from the forest
-tree = rf.estimators_[5]
+tree = random_forest_regressor.estimators_[5]
 
 # Export the image to a dot file
 export_graphviz(
@@ -140,7 +145,7 @@ plt.show()
 # 變數特徵的重要程度
 
 # Get numerical feature importances
-importances = list(rf.feature_importances_)
+importances = list(random_forest_regressor.feature_importances_)
 
 # List of tuples with variable and importance
 feature_importances = [

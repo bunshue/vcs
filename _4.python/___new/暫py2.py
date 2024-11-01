@@ -1,3 +1,12 @@
+#np算4分位數
+print("25th percentile =", np.percentile(height, 25))
+print("Median =", np.median(height))
+print("75th percentile =", np.percentile(height, 75))
+
+
+
+
+
 各種演算法
 
 迴歸類：

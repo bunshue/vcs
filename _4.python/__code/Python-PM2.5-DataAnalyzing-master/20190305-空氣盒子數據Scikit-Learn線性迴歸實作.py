@@ -24,21 +24,22 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 df = pd.read_csv("data/200811-201811a.csv")  # 共有 1447 筆資料
+"""
 cc = df.head(10)
 print(cc)
 
 #資料長度
-#print(len(df))
-#print(len(df["PM25"]))
+print(len(df))
+print(len(df["PM25"]))
 
 cc = df.info()
 print(cc)
 
 cc = df.describe()
 print(cc)
-
+"""
 plt.scatter(df["PM25"], df["CO"], c='yellow')
 plt.scatter(df["PM25"][:100], df["CO"][:100], c='r')
 plt.scatter(df["PM25"][100:200], df["CO"][100:200], c='g')
@@ -52,7 +53,8 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-# sns.distplot(df["PM25"])  # old
+# 使用 distplot() / histplot() 來看PM2.5主要集中的區間
+# sns.distplot(df["PM25"])  # deprecated
 sns.histplot(df["PM25"])
 
 plt.title("PM25濃度統計")
@@ -64,7 +66,6 @@ X = df["PM25"].values.reshape(-1, 1) # 轉成 1447 X 1
 y = df["CO"].values.reshape(-1, 1)  # 轉成 1447 X 1
 
 # 將資料分成訓練組及測試組
-
 from sklearn.model_selection import train_test_split
 
 # test_size代表測試組比例。random_state代表設定隨機種子，讓測試結果可被重複
@@ -83,16 +84,17 @@ print(y_test.shape)
 # 載入線性迴歸，並訓練模型
 from sklearn.linear_model import LinearRegression
 
-regressor = LinearRegression()
-regressor.fit(X_train, y_train)  # training the algorithm
+linear_regression = LinearRegression()
+linear_regression.fit(X_train, y_train)
 
-print("截距b :", regressor.intercept_)
+# 取得截距。如果公式是y=ax+b，b即是截距
+print("截距b :", linear_regression.intercept_)
 
 # 取得迴歸係數，並用Data Frame顯示
-print("迴歸係數 :", regressor.coef_)
+print("迴歸係數 :", linear_regression.coef_)
 
 # 預測, 使用測試組資料來預測結果
-y_pred = regressor.predict(X_test)
+y_pred = linear_regression.predict(X_test)
 
 df = pd.DataFrame({"測試資料": y_test.flatten(), "預測結果": y_pred.flatten()})
 #print(df)
@@ -142,7 +144,7 @@ cc = np.sqrt(metrics.mean_squared_error(y_test, y_pred))
 print("RMS : Root Mean Squared Error :", cc)
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 
@@ -188,8 +190,8 @@ X = df[
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
 
-regressor = LinearRegression()
-regressor.fit(X_train, y_train)
+linear_regression = LinearRegression()
+linear_regression.fit(X_train, y_train)
 
 """
 LinearRegression(copy_X=True, fit_intercept=True, n_jobs=None,
@@ -197,11 +199,11 @@ LinearRegression(copy_X=True, fit_intercept=True, n_jobs=None,
 """
 
 """ NG
-coeff_df = pd.DataFrame(regressor.coef_,X.columns,columns=['Coefficient'])  
+coeff_df = pd.DataFrame(linear_regression.coef_,X.columns,columns=['Coefficient'])  
 print(coeff_df)
 """
 
-y_pred = regressor.predict(X_test)
+y_pred = linear_regression.predict(X_test)
 
 df = pd.DataFrame({"測試資料": y_test, "預測結果": y_pred})
 

@@ -28,23 +28,27 @@ print("------------------------------------------------------------")  # 60個
 # 時間序列繪圖
 # 初始環境設定
 
-from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LinearRegression
-from sklearn import metrics
-from pylab import mpl
+df = pd.read_excel("data/鳳山.xlsx")  # 共有 417 筆資料
+"""
+cc = df.head(10)
+print(cc)
 
-mpl.rcParams["font.sans-serif"] = ["Microsoft YaHei"]
-# 指定默認字形：解決plot不能顯示中文問題
-mpl.rcParams["axes.unicode_minus"] = False
+#資料長度
+print(len(df))
+print(len(df["PM25"]))
 
-df = pd.read_excel("data/鳳山.xlsx")
+cc = df.info()
+print(cc)
 
-# 檢查屬性
+cc = df.describe()
+print(cc)
+"""
+
+print("檢查屬性")
 cc = df.dtypes
 print(cc)
 
-# 屬性轉換
-
+print("屬性轉換")
 df["SO2"] = pd.to_numeric(df.SO2, errors="coerce")
 df["CO"] = pd.to_numeric(df.CO, errors="coerce")
 # df["CO2"] = pd.to_numeric(df.CO2, errors='coerce')
@@ -63,6 +67,7 @@ df["Humidity"] = pd.to_numeric(df.Humidity, errors="coerce")
 cc = df.head(10)
 print(cc)
 
+print("檢查屬性")
 cc = df.dtypes
 print(cc)
 
@@ -112,20 +117,29 @@ X = df[
 
 y = df["PM25"]
 
+# 將資料分成訓練組及測試組
+from sklearn.model_selection import train_test_split
+
 X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.2, random_state=12
-)
+)  # 訓練組8成, 測試組2成
 
-regressor = LinearRegression()
-regressor.fit(X_train, y_train)
+print(X.shape)
+print(y.shape)
+print(X_train.shape)
+print(X_test.shape)
+print(y_train.shape)
+print(y_test.shape)
 
-"""
-LinearRegression(copy_X=True, fit_intercept=True, n_jobs=None,
-         normalize=False)
-"""
-y_pred = regressor.predict(X_test)
+# 載入線性迴歸，並訓練模型
+from sklearn.linear_model import LinearRegression
 
-df = pd.DataFrame({"Actual": y_test, "Predicted": y_pred})
+linear_regression = LinearRegression()
+linear_regression.fit(X_train, y_train)
+
+y_pred = linear_regression.predict(X_test)
+
+df = pd.DataFrame({"測試資料": y_test, "預測結果": y_pred})
 
 df1 = df.head(20)
 
@@ -136,9 +150,12 @@ plt.grid(which="major", linestyle="-", linewidth="0.5", color="green")
 plt.grid(which="minor", linestyle=":", linewidth="0.5", color="black")
 plt.show()
 
+# 載入迴歸常見的評估指標
+from sklearn import metrics
+print("評估 測試資料 與 預測結果 的差異")
 from sklearn.metrics import mean_absolute_error, median_absolute_error
 
-print("The Explained Variance: %.2f" % regressor.score(X_test, y_test))
+print("The Explained Variance: %.2f" % linear_regression.score(X_test, y_test))
 print("The Mean Absolute Error: %.2f " % mean_absolute_error(y_test, y_pred))
 print("The Median Absolute Error: %.2f " % median_absolute_error(y_test, y_pred))
 
@@ -150,9 +167,8 @@ from sklearn.metrics import (
     mean_absolute_error,
     median_absolute_error,
 )
-from sklearn.model_selection import train_test_split
 
-df = pd.read_excel("data/鳳山.xlsx")
+df = pd.read_excel("data/鳳山.xlsx")  # 共有 417 筆資料
 # execute the describe() function and transpose the output so that it doesn't overflow the width of the screen
 cc = df.describe().T
 print(cc)
@@ -177,12 +193,18 @@ X = df[
     ]
 ]
 y = df["PM25"]
+
+# 將資料分成訓練組及測試組
+from sklearn.model_selection import train_test_split
+
 X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.2, random_state=23
-)
+)  # 訓練組8成, 測試組2成
+
 X_test, X_val, y_test, y_val = train_test_split(
     X_test, y_test, test_size=0.5, random_state=23
-)
+)  # 訓練組5成, 測試組5成
+
 cc = X_train.shape, X_test.shape, X_val.shape
 print(cc)
 
@@ -260,3 +282,11 @@ print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
+
+
+
+#useless
+mpl.rcParams["font.sans-serif"] = ["Microsoft YaHei"]
+mpl.rcParams["axes.unicode_minus"] = False
+
+from pylab import mpl

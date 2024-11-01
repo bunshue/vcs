@@ -136,15 +136,18 @@ regressor = tf.estimator.DNNRegressor(feature_columns=feature_cols,
 
 
 def wx_input_fn(X, y=None, num_epochs=None, shuffle=True, batch_size=400):  
-    return tf.estimator.inputs.pandas_input_fn(x=X,
+    return tf.compat.v1.estimator.inputs.pandas_input_fn(x=X,
                                                y=y,
                                                num_epochs=num_epochs,
                                                shuffle=shuffle,
                                                batch_size=batch_size)
 
+# tf.estimator.inputs.numpy_input_fn替换为tf.compat.v1.estimator.inputs.numpy_input_fn
+
 wx_input_fn(X, y=None, num_epochs=None, shuffle=True, batch_size=400)
 
 evaluations = []  
+
 STEPS = 400  
 for i in range(100):  
     regressor.train(input_fn=wx_input_fn(X_train, y=y_train), steps=STEPS)
