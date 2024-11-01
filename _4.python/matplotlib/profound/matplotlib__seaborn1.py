@@ -7,10 +7,6 @@ sns.set() 繪圖風格設置
 
 print("------------------------------------------------------------")  # 60個
 
-import seaborn as sns  # 海生, 自動把圖畫得比較好看
-
-print("------------------------------------------------------------")  # 60個
-
 # 共同
 import os
 import sys
@@ -20,6 +16,7 @@ import random
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns  # 海生, 自動把圖畫得比較好看
 
 font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
@@ -40,8 +37,6 @@ y2 = np.tan(x)
 
 print("------------------------------------------------------------")  # 60個
 
-print("無海生")
-
 plt.plot(x, y)
 plt.title("無海生")
 plt.show()
@@ -49,8 +44,6 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 
 print("前面加兩行變海生, 引用與設定")
-
-import seaborn as sns  # 海生, 自動把圖畫得比較好看
 
 # sns.set()
 # sns.set(color_codes=True)
@@ -67,7 +60,7 @@ fm.fontManager.addfont(font_filename)
 mpl.rc("font", family="Taipei Sans TC Beta")
 
 plt.plot(x, y)
-plt.title("seaborn 使用海生")
+plt.title("使用海生")
 
 plt.show()
 
@@ -99,8 +92,6 @@ x = np.random.randn(N) * σ + μ
 
 print("平均值 :", x.mean())
 print("標準差 :", x.std())
-
-import seaborn as sns
 
 # sns.displot(x)
 sns.histplot(x)
@@ -195,15 +186,17 @@ y2 = np.tan(x)
 print("------------------------------------------------------------")  # 60個
 
 plt.plot(x, y)
-plt.title("原圖, 無海生")
+plt.title("無海生")
 plt.show()
+
+print("------------------------------------------------------------")  # 60個
 
 # plt.xkcd()  #加此行變成搞笑風格
 
-# 多此三行 變成海生風格
-import seaborn as sns
+# 多此二行 變成海生風格
 
 sns.set()
+
 plt.rcParams[
     "font.sans-serif"
 ] = "Microsoft JhengHei"  # 海生設定中文字型 將字體換成 Microsoft JhengHei
@@ -240,15 +233,13 @@ print("25th percentile =", np.percentile(height, 25))
 print("Median =", np.median(height))
 print("75th percentile =", np.percentile(height, 75))
 
-import matplotlib.pyplot as plt
-import seaborn as sns
-
 sns.set()
 
 plt.hist(height)
 plt.title("Height Distribution of Presidents of USA")
 plt.xlabel("height(cm)")
 plt.ylabel("Number")
+
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
@@ -258,6 +249,7 @@ sinus = [math.sin(v) for v in x]
 cosinus = [math.cos(v) for v in x]
 
 sns.set()
+
 fig, axes = plt.subplots(1, 2, figsize=(6, 4))
 ax1 = sns.lineplot(x=x, y=sinus, ax=axes[0])
 ax2 = sns.scatterplot(x=x, y=cosinus, ax=axes[1])
@@ -280,6 +272,7 @@ df2 = pd.melt(df, id_vars=["x"], value_vars=["sin", "cos"])
 print(df2.head())
 
 sns.set()
+
 sns.relplot(x="x", y="value", kind="scatter", col="variable", data=df2)
 
 plt.show()
@@ -290,6 +283,7 @@ x = [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 
 sinus = [math.sin(v) for v in x]
 
 sns.set_style("whitegrid")
+
 sns.lineplot(x=x, y=sinus)
 
 plt.show()
@@ -300,6 +294,7 @@ x = [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 
 sinus = [math.sin(v) for v in x]
 
 sns.set_style("whitegrid")
+
 sns.lineplot(x=x, y=sinus)
 sns.despine()
 
@@ -311,6 +306,7 @@ x = [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 
 sinus = [math.sin(v) for v in x]
 
 sns.set_style("darkgrid", {"axes.axisbelow": False})
+
 sns.lineplot(x=x, y=sinus)
 
 plt.show()
@@ -351,20 +347,25 @@ df2 = pd.melt(df, id_vars=["x"], value_vars=["sin", "cos"])
 print(df2.head())
 
 sns.set()
+
 sns.relplot(
     x="x", y="value", kind="scatter", col="variable", height=4, aspect=1.2, data=df2
 )
+
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
 df = pd.read_csv("_data/Kobe_stats.csv")
+
 data = pd.DataFrame()
 data["Season"] = pd.to_datetime(df["Season"])
 data["PTS"] = df["PTS"]
 
 sns.set()
+
 sns.relplot(x="Season", y="PTS", data=data, kind="line")
+
 plt.show()
 
 print("------------------------------------------------------------")  # 60個

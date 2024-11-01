@@ -25,14 +25,8 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
-# from sklearn.model_selection import train_test_split
-# from sklearn.linear_model import LinearRegression
-# from sklearn import metrics
-
-# 匯入練習資料
-
 df = pd.read_csv("data/200811-201811b.csv")
-
+"""
 cc = df.head(20)
 print(cc)
 
@@ -41,6 +35,7 @@ print(cc)
 
 cc = df.describe()
 print(cc)
+"""
 
 # 用圖表探索資料
 # 利用distplot來看PM2.5主要集中的區間
@@ -75,6 +70,7 @@ X = df[
         "Humidity",
     ]
 ]
+
 y = df["PM25"]
 
 # 將資料分成訓練組及測試組
@@ -108,23 +104,19 @@ print("截距b:", lm.intercept_)
 # 截距b: 4.194703731759336
 
 # 取得迴歸係數，並用Data Frame顯示
-
 print(lm.coef_)
 
 # 列出訓練的變數
-
 print(X_train.columns)
 
 # 預測
-
 # 使用測試組資料來預測結果
-
 predictions = lm.predict(X_test)
 
 df = pd.DataFrame({"Actual": y_test, "Predicted": y_pred})
+print(df)
 
 df1 = df.head(20)
-
 print(df1)
 
 # 比較實際PM2.5及預測PM2.5的關係
@@ -139,38 +131,26 @@ plt.grid(which="minor", linestyle=":", linewidth="0.5", color="black")
 plt.show()
 
 # 看實際值及預測值之間的殘差分佈圖
-
 sns.distplot((y_test - predictions))
 
 plt.show()
 
 
 # 載入迴歸常見的評估指標
-
 from sklearn import metrics
+print("評估 測試資料 與 預測結果 的差異")
 
 # Mean Absolute Error (MAE)代表平均誤差，公式為所有實際值及預測值相減的絕對值平均。
-
-metrics.mean_absolute_error(y_test, predictions)
-
-# 5.694068343810315
+cc = metrics.mean_absolute_error(y_test, predictions)
+print("MAE : Mean Absolute Error :", cc)
 
 # Mean Squared Error (MSE)比起MSE可以拉開誤差差距，算是蠻常用的指標，公式所有實際值及預測值相減的平方的平均
-
-metrics.mean_squared_error(y_test, predictions)
-
-# 54.77458000595562
+cc = metrics.mean_squared_error(y_test, predictions)
+print("MSE : Mean Squared Error :", cc)
 
 # Root Mean Squared Error (RMSE)代表MSE的平方根。比起MSE更為常用，因為更容易解釋y。
-
-np.sqrt(metrics.mean_squared_error(y_test, predictions))
-
-# 7.400985069972484
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
+cc = np.sqrt(metrics.mean_squared_error(y_test, predictions))
+print("RMS : Root Mean Squared Error :", cc)
 
 print("------------------------------------------------------------")  # 60個
 

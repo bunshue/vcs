@@ -24,95 +24,152 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-
-import seaborn as seabornInstance
-from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LinearRegression
-from sklearn import metrics
-
-dataset = pd.read_csv("data//200811-201811a.csv")
-
-cc = dataset.describe()
+'''
+df = pd.read_csv("data/200811-201811a.csv")  # 共有 1447 筆資料
+cc = df.head(10)
 print(cc)
 
-dataset.plot(x="PM25", y="CO", style="o")
-plt.title("PM25 vs CO")
+#資料長度
+#print(len(df))
+#print(len(df["PM25"]))
+
+cc = df.info()
+print(cc)
+
+cc = df.describe()
+print(cc)
+
+plt.scatter(df["PM25"], df["CO"], c='yellow')
+plt.scatter(df["PM25"][:100], df["CO"][:100], c='r')
+plt.scatter(df["PM25"][100:200], df["CO"][100:200], c='g')
+plt.scatter(df["PM25"][200:300], df["CO"][200:300], c='b')
+
 plt.xlabel("PM25")
 plt.ylabel("CO")
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-plt.figure(figsize=(10, 5))
-plt.tight_layout()
-
-seabornInstance.distplot(dataset["PM25"])
+plt.title("PM25 對比 CO")
 
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-X = dataset["PM25"].values.reshape(-1, 1)
-y = dataset["CO"].values.reshape(-1, 1)
+# sns.distplot(df["PM25"])  # old
+sns.histplot(df["PM25"])
+
+plt.title("PM25濃度統計")
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+X = df["PM25"].values.reshape(-1, 1) # 轉成 1447 X 1
+y = df["CO"].values.reshape(-1, 1)  # 轉成 1447 X 1
+
+# 將資料分成訓練組及測試組
+
+from sklearn.model_selection import train_test_split
+
+# test_size代表測試組比例。random_state代表設定隨機種子，讓測試結果可被重複
 
 X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.4, random_state=101
-)
+)  # 訓練組6成, 測試組4成
+
+print(X.shape)
+print(y.shape)
+print(X_train.shape)
+print(X_test.shape)
+print(y_train.shape)
+print(y_test.shape)
+
+# 載入線性迴歸，並訓練模型
+from sklearn.linear_model import LinearRegression
 
 regressor = LinearRegression()
 regressor.fit(X_train, y_train)  # training the algorithm
 
-"""
-LinearRegression(copy_X=True, fit_intercept=True, n_jobs=None,
-         normalize=False)
-"""
+print("截距b :", regressor.intercept_)
 
-# To retrieve the intercept:
-print(regressor.intercept_)
+# 取得迴歸係數，並用Data Frame顯示
+print("迴歸係數 :", regressor.coef_)
 
-# For retrieving the slope:
-print(regressor.coef_)
-
+# 預測, 使用測試組資料來預測結果
 y_pred = regressor.predict(X_test)
 
-df = pd.DataFrame({"Actual": y_test.flatten(), "Predicted": y_pred.flatten()})
-print(df)
+df = pd.DataFrame({"測試資料": y_test.flatten(), "預測結果": y_pred.flatten()})
+#print(df)
 
-print("------------------------------------------------------------")  # 60個
+print("畫出前 N 筆")
+N = 20
+df1 = df.head(N)
 
-df1 = df.head(25)
-df1.plot(kind="bar", figsize=(10, 5))
-plt.grid(which="major", linestyle="-", linewidth="0.5", color="green")
-plt.grid(which="minor", linestyle=":", linewidth="0.5", color="black")
+plt.figure(figsize=(10, 5))
+
+#df1.plot(kind="bar", figsize=(10, 5)) # 直接把整個df畫出來
+
+x1 = np.arange(len(df1["測試資料"])) - 0.2
+x2 = np.arange(len(df1["預測結果"])) + 0.2
+plt.bar(x1, df1["測試資料"], width=0.4, ec="none", fc="#e63946")
+plt.bar(x2, df1["預測結果"], width=0.4, ec="none", fc="#7fb069")
+
+plt.plot(df1["測試資料"], 'r', label="測試資料")
+plt.plot(df1["預測結果"], 'g', label="預測結果")
+plt.legend()
+plt.grid()
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-plt.scatter(X_test, y_test, color="gray")
-plt.plot(X_test, y_pred, color="red", linewidth=2)
+#測試組資料來預測結果
+
+plt.scatter(X_test, y_test, color="gray", label="測試資料")
+plt.plot(X_test, y_pred, color="red", linewidth=5, label="預測結果")
+plt.title("測試資料(灰) 對比 預測結果(紅)")
 plt.show()
 
-print("Mean Absolute Error:", metrics.mean_absolute_error(y_test, y_pred))
-print("Mean Squared Error:", metrics.mean_squared_error(y_test, y_pred))
-print("Root Mean Squared Error:", np.sqrt(metrics.mean_squared_error(y_test, y_pred)))
+# 載入迴歸常見的評估指標
+from sklearn import metrics
+print("評估 測試資料 與 預測結果 的差異")
+
+# Mean Absolute Error (MAE)代表平均誤差，公式為所有實際值及預測值相減的絕對值平均。
+cc = metrics.mean_absolute_error(y_test, y_pred)
+print("MAE : Mean Absolute Error :", cc)
+
+# Mean Squared Error (MSE)比起MSE可以拉開誤差差距，算是蠻常用的指標，公式所有實際值及預測值相減的平方的平均
+cc = metrics.mean_squared_error(y_test, y_pred)
+print("MSE : Mean Squared Error :", cc)
+
+# Root Mean Squared Error (RMSE)代表MSE的平方根。比起MSE更為常用，因為更容易解釋y。
+cc = np.sqrt(metrics.mean_squared_error(y_test, y_pred))
+print("RMS : Root Mean Squared Error :", cc)
 
 print("------------------------------------------------------------")  # 60個
-
-import seaborn as seabornInstance
+'''
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
-from sklearn import metrics
 
-dataset = pd.read_csv("data/200811-201811a.csv")
+df = pd.read_csv("data/200811-201811a.csv")
+"""
+print(df)
 
-cc = dataset.describe()
+cc = df.describe()
 print(cc)
 
-dataset.isnull().any()
+cc = df.isnull().any()
+print(cc)
+"""
+df = df.fillna(method="ffill") # 將空值填入, ffill()拿前一個值往下填, 承上
+print(df)
 
-dataset = dataset.fillna(method="ffill")
+y = df["PM25"].values
 
-X = dataset[
+#sns.distplot(df["PM25"])  # old
+sns.histplot(df["PM25"])
+
+plt.title("PM25濃度統計")
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+X = df[
     [
         "SO2",
         "CO",
@@ -128,15 +185,6 @@ X = dataset[
         "Humidity",
     ]
 ].values
-
-y = dataset["PM25"].values
-
-plt.figure(figsize=(10, 5))
-plt.tight_layout()
-seabornInstance.distplot(dataset["PM25"])
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
 
@@ -155,10 +203,9 @@ print(coeff_df)
 
 y_pred = regressor.predict(X_test)
 
-df = pd.DataFrame({"Actual": y_test, "Predicted": y_pred})
+df = pd.DataFrame({"測試資料": y_test, "預測結果": y_pred})
 
 df1 = df.head(25)
-
 print(df1)
 
 df1.plot(kind="bar", figsize=(10, 8))
@@ -166,9 +213,21 @@ plt.grid(which="major", linestyle="-", linewidth="0.5", color="green")
 plt.grid(which="minor", linestyle=":", linewidth="0.5", color="black")
 plt.show()
 
-print("Mean Absolute Error:", metrics.mean_absolute_error(y_test, y_pred))
-print("Mean Squared Error:", metrics.mean_squared_error(y_test, y_pred))
-print("Root Mean Squared Error:", np.sqrt(metrics.mean_squared_error(y_test, y_pred)))
+# 載入迴歸常見的評估指標
+from sklearn import metrics
+print("評估 測試資料 與 預測結果 的差異")
+
+# Mean Absolute Error (MAE)代表平均誤差，公式為所有實際值及預測值相減的絕對值平均。
+cc = metrics.mean_absolute_error(y_test, y_pred)
+print("MAE : Mean Absolute Error :", cc)
+
+# Mean Squared Error (MSE)比起MSE可以拉開誤差差距，算是蠻常用的指標，公式所有實際值及預測值相減的平方的平均
+cc = metrics.mean_squared_error(y_test, y_pred)
+print("MSE : Mean Squared Error :", cc)
+
+# Root Mean Squared Error (RMSE)代表MSE的平方根。比起MSE更為常用，因為更容易解釋y。
+cc = np.sqrt(metrics.mean_squared_error(y_test, y_pred))
+print("RMS : Root Mean Squared Error :", cc)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -208,9 +267,7 @@ df = df.fillna(0)
 # df.dtypes
 
 # 存檔至新的CSV
-df.to_csv("tmp_200811-201811a.csv", encoding="utf8")
-
-print("------------------------------------------------------------")  # 60個
+# df.to_csv("tmp_200811-201811a.csv", encoding="utf8")
 
 print("------------------------------------------------------------")  # 60個
 
@@ -219,3 +276,12 @@ print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
+
+"""
+plt.figure(figsize=(10, 5))
+plt.tight_layout()
+
+
+plt.grid(which="major", linestyle="-", linewidth="0.5", color="green")
+plt.grid(which="minor", linestyle=":", linewidth="0.5", color="black")
+"""

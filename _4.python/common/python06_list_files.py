@@ -1918,11 +1918,7 @@ print("目前位置 : ", pwd)
 cur_path = os.getcwd()  # 取得目前路徑
 print("現在路徑：" + cur_path)
 
-"""
-cur_path = os.getcwd() # 取得目前路徑
-file=cur_path + "\dir2\copyfile.py" 
-os.system("notepad " + file)  # 以記事本開啟 copyfile.py 檔
-"""
+cur_path = os.getcwd()  # 取得目前路徑
 
 print(os.sep)
 print(os.altsep)
@@ -2007,20 +2003,6 @@ os.remove(os.path.join(lib_dir, "win32", "dbi.pyd.old"))
 
 
 
-import os
-
-開啟外部程式
-#rc = os.system("nasm -f win64 -DNEAR -Ox -g ms\\uptable.asm")
-
-rc = os.system('calc')
-
-os.system('cls') #在cmd視窗下清除螢幕
-
-os.system('cls' if os.name == 'nt' else 'clear')
-
-
-
-
 TEST_SUPPORT_DIR = os.path.dirname(os.path.abspath(__file__))
 TEST_HOME_DIR = os.path.dirname(TEST_SUPPORT_DIR)
 self._environ = os.environ
@@ -2039,14 +2021,7 @@ cur_path = os.path.dirname(__file__) # 取得目前路徑
 
 
 import os
-
 cur_path=os.path.dirname(__file__) # 取得目前路徑  
-os.system("cls")  # 清除螢幕
-os.system("mkdir dir2")  # 建立 dir2 目錄
-os.system("copy ossystem.py dir2\copyfile.py") # 複製檔案 
-file=cur_path + "\dir2\copyfile.py" 
-os.system("notepad " + file)  # 以記事本開啟 copyfile.py 檔
-
 
 cur_path = os.path.dirname(__file__) # 取得目前路徑
 
@@ -2502,7 +2477,7 @@ foldername = "C:/_git/vcs/_1.data/______test_files3/DrAP_test"
 
 cc = recursedown(foldername)
 print(cc)
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 print('test start')
@@ -2602,44 +2577,36 @@ for _ in all_files:
     string_video_filenames += _+" "
 
 #print("總容量 : ", ByteConversionTBGBMBKB(total_size))
-
+'''
 
 """
 #呼叫 potplayer 播放之
 1. 容量 特大/特小 的 影片檔案
 2. 格式 特大/特小 的 影片檔案
-3. 檔名含有關鍵字 的 影片檔案
-4. 將找到的資料存成文字檔
-5. 一次播放找到符合條件的影片檔案
+3. 時間 特長/特短 的 影片檔案
+4. 檔名含有關鍵字 的 影片檔案
+5. 將找到的資料存成文字檔
+6. 一次播放找到符合條件的影片檔案
 """
-"""
-# 目前在python使用potplayer, 無法一次播放2個檔案......
+
+# 目前在python使用potplayer, 無法一次播放2個檔案, 改成使用播放清單
+
+video_player_path_kilo = "xxxx"
+video_player_path_sugar = "D:/___backup/PotPlayer/PotPlayerMini64.exe"
 
 video_filename = 'C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4'
 
-#os.system("notepad " + filename_r)
-
-all_filename = "D:\vcs\04_能臣之路.rmvb " + "D:\vcs\07_深谋远虑.rmvb " + "D:\vcs\09_一决雌雄.rmvb"
-
-video_player_path_kilo = "xxxx"
-
-video_player_path_sugar = "D:/___backup/PotPlayer/PotPlayerMini64.exe"
-
-cmd = "D:/___backup/PotPlayer/PotPlayerMini64.exe spiderman1.mp4 spiderman2.mp4"
+cmd = "D:/___backup/PotPlayer/PotPlayerMini64.exe cccc.dpl"
 os.system(cmd)
+
 
 cmd = video_player_path_sugar + " " + video_filename
 print(cmd)
 os.system(cmd)
 
-video_filename = 'C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4'
-
-os.system(video_player_path_sugar+ " " + video_filename)
-
-#os.system(video_player_path_sugar+ " " + string_video_filenames)
+#os.system(video_player_path_sugar + " " + video_filenames)
 #os.system(video_player_path_sugar)
 
-"""
 print("------------------------------------------------------------")  # 60個
 
 def get_video_info(video):
@@ -2659,13 +2626,10 @@ vid = cv2.VideoCapture(video_filename)
 video_info = get_video_info(vid)
 print(video_info)
 
-
 print("------------------------------------------------------------")  # 60個
-
 
 filesize = 123456
 print('filesize = ', filesize , '\t檔案大小 : ', ByteConversionTBGBMBKB(filesize))
-
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 filesize = os.stat(filename).st_size
@@ -2883,4 +2847,36 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+
+os.system 整理
+
+
+
+import os
+
+開啟外部程式
+#rc = os.system("nasm -f win64 -DNEAR -Ox -g ms\\uptable.asm")
+
+rc = os.system('calc')
+
+os.system('cls') #在cmd視窗下清除螢幕
+
+os.system('cls' if os.name == 'nt' else 'clear')
+
+
+
+
+file=cur_path + "\dir2\copyfile.py" 
+os.system("notepad " + file)  # 以記事本開啟 copyfile.py 檔
+
+os.system("cls")  # 清除螢幕
+os.system("mkdir dir2")  # 建立 dir2 目錄
+os.system("copy ossystem.py dir2\copyfile.py") # 複製檔案 
+file=cur_path + "\dir2\copyfile.py" 
+os.system("notepad " + file)  # 以記事本開啟 copyfile.py 檔
+
+
+
+
+#os.system("notepad " + filename_r)
 

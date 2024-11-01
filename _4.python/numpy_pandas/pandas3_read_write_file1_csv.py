@@ -75,7 +75,7 @@ print("------------------------------------------------------------")  # 60個
 print("簡易讀取csv檔")
 print("------------------------------------------------------------")  # 60個
 
-"""
+""" data/animals.csv
 中文名,英文名,體重,全名
 鼠,mouse,3,米老鼠
 牛,ox,48,班尼牛
@@ -89,8 +89,6 @@ filename = "data/animals.csv"
 print("讀取csv檔案 :", filename)
 df = pd.read_csv(filename)
 print(df)
-print(df.head())
-print(df.info())
 
 print("------------------------------------------------------------")  # 60個
 
@@ -110,7 +108,7 @@ print("csv檔案 轉 df")
 filename = "data/animals.csv"
 
 df = pd.read_csv(filename)
-print(df.head(5))
+print(df)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -145,7 +143,7 @@ print("------------------------------------------------------------")  # 60個
 filename = "http://bit.ly/gradescsv"
 print("pd讀取http csv檔案 :", filename)
 df = pd.read_csv(filename)
-print(df.head())
+print(df)
 
 filename = "tmp_grades.csv"
 # df.to_csv(filename)
@@ -157,7 +155,7 @@ print("df寫入csv檔案 :", filename)
 
 print("pd讀取http csv檔案 :", filename)
 df2 = pd.read_csv(filename)
-print(df2.head())
+print(df2)
 
 print("比較df是否相同")
 cc = df.equals(df2)
@@ -168,7 +166,7 @@ print("------------------------------------------------------------")  # 60個
 filename = "data/python_ReadWrite_CSV6_score.csv"
 print("pd讀取csv檔案 :", filename)
 df = pd.read_csv(filename, encoding="UTF-8")
-print(df.head())
+print(df)
 print("數學平均", np.mean(df["數學"]))
 print("數學中位數", np.median(df["數學"]))
 
@@ -177,9 +175,7 @@ print("------------------------------------------------------------")  # 60個
 filename = "data/grades.csv"
 print("pd讀取csv檔案 :", filename)
 df = pd.read_csv(filename)
-
-print("df的前5筆資料")
-print(df.head())
+print(df)
 
 print("國文成績")
 print(df["國文"])
@@ -210,22 +206,22 @@ print(df.describe())  # 顯示統計資料
 print(df.國文.corr(df.數學))
 
 df["總級分"] = df[["國文", "英文", "數學", "社會", "自然"]].sum(1)
-print(df.head())
+print(df)
 
 df["主科"] = df.數學 * 1.5 + df.英文
 
-print(df.head())
+print(df)
 
-print(df.sort_values(by="總級分", ascending=False).head(20))
+print(df.sort_values(by="總級分", ascending=False))
 
-print(df.sort_values(by=["主科", "總級分"], ascending=False).head(20))
+print(df.sort_values(by=["主科", "總級分"], ascending=False))
 
 print("------------------------------------------------------------")  # 60個
 
 filename = "data/ExpensesRecord.csv"
 print("pd讀取csv檔案 :", filename)
 df = pd.read_csv(filename)
-print(df.head(5))
+print(df)
 print(df["說明"])
 print(df[["說明", "支出金額"]])
 
@@ -251,8 +247,7 @@ df["酒店等級"] = df.酒店信息.str.extract("\n(.*)")
 print("ttttt4")
 df["價格"] = df.路線信息.str.extract("(\d+)起/人")
 print("ttttt5")
-print(df.head())
-print(df.info())
+print(df)
 
 print("酒店等級 :", df["酒店等級"])
 print("酒店評分 :", df["酒店評分"])
@@ -326,7 +321,7 @@ def format_data(df):
 filename = "data/dress.csv"
 print("pd讀取csv檔案 :", filename)
 df = pd.read_csv(filename)
-# print(df.head())
+# print(df)
 
 # 刪除缺失值個數>100的列
 for column in df.columns:
@@ -351,7 +346,7 @@ print("用 Groupby 看美國哪裡最容易看到 UFO")
 filename = "http://bit.ly/uforeports"
 print("pd讀取http csv檔案 :", filename)
 df = pd.read_csv(filename)
-print(df.head())
+print(df)
 
 df_state = df.groupby("State").count()
 print(df_state)
@@ -360,7 +355,7 @@ df_state.sort_values(by="Time", ascending=False)
 print(df_state)
 
 df_state.sort_values(by="Time", ascending=False, inplace=True)
-print(df_state.head(10))
+print(df_state)
 
 df_state[:10].Time.plot(kind="bar")
 
@@ -389,9 +384,6 @@ print(iris.shape)
 
 print("資料.type")
 print(type(iris))
-
-print("資料.head()")
-print(iris.head())
 
 print("size")
 print(np.unique(iris["花萼長度"].values).size)
@@ -446,10 +438,8 @@ filename = "data/missing_data.csv"
 df = pd.read_csv(filename)
 print(df)
 
-print("資料結構訊息", df.info(), "\n")
-
 df1 = df.dropna()
-print("清除NA\n", df1, "\n")
+print("清除NA\n", df1)
 
 df2 = df.dropna(how="any")
 print(df2)
@@ -524,27 +514,15 @@ titanic = pd.read_csv(filename)
 
 print("資料shape")
 print(titanic.shape)
-print()
-
-print("資料")
-print(titanic)
-print()
-
-print("資料.head()")
-print(titanic.head())
-print()
 
 print("size")
 print(np.unique(titanic["PassengerId"].values).size)
-print()
 
 titanic.set_index(["PassengerId"], inplace=True)
 print(titanic.head())
-print()
 
 titanic["SexCode"] = np.where(titanic["Sex"] == "female", 1, 0)
 print(titanic.head())
-print()
 
 print("------------------------------")  # 30個
 
@@ -552,7 +530,7 @@ from sklearn import preprocessing
 
 label_encoder = preprocessing.LabelEncoder()
 titanic["PClass"] = label_encoder.fit_transform(titanic["PClass"])
-print(titanic.head())
+print(titanic)
 
 print("isnull().sum()")
 print(titanic.isnull().sum())
@@ -578,7 +556,7 @@ print("------------------------------")  # 30個
 
 print("3333")
 titanic["Died"] = np.where(titanic["Survived"] == 0, 1, 0)
-print(titanic.head())
+print(titanic)
 
 titanic["Age"].plot(kind="hist", bins=15)
 df = titanic[titanic.Survived == 0]
@@ -674,32 +652,25 @@ df = pd.DataFrame(dists)
 print("------------------------------------------------------------")  # 60個
 
 df = pd.read_csv("data/dists.csv", encoding="utf8")
-print(df.head())
+print(df)
 
 df.columns = ["區", "人口", "直轄市"]
-print(df.head(4))
-
+print(df)
 print(df.index)
-
 print(df.columns)
-
 print(df.values)
 
 print("資料數= ", len(df))
-
 print("形狀= ", df.shape)
-
-cc = df.info()
-print(cc)
 
 for index, row in df.iterrows():
     print(index, row["city"], row["name"], row["population"])
 
 df2 = df.set_index("city")
-print(df2.head())
+print(df2)
 
 df3 = df2.reset_index()
-print(df3.head())
+print(df3)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1078,11 +1049,10 @@ print("------------------------------------------------------------")  # 60個
 print("讀寫CSV文件")
 
 df = pd.DataFrame({"Name": ["Smith", "Lucy"], "Age": ["25", "20"], "Sex": ["男", "女"]})
-print(df.info())  # 顯示dataframe相關信息
+
 df.to_csv("tmp.csv", index=False, header=True, columns=["Name", "Sex", "Age"])
 
 df1 = pd.read_csv("tmp.csv")
-print(df1.info())
 print(df1)
 
 print("------------------------------------------------------------")  # 60個
@@ -1107,16 +1077,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 準備移出
-
-"""
-print('資料結構訊息', df.info())
-print('資料shape :', df.shape)
-print('資料內容\n', df)
-print('資料head\n', df.head())
-print(type(df))
-print(df)
-print(df.shape)
-"""
 
 
 """ 看起來以下4種皆不好
@@ -1447,4 +1407,16 @@ print(df)
 
 """
 
+
+
+
+"""
+print('資料結構訊息', df.info())
+print('資料shape :', df.shape)
+print('資料內容\n', df)
+print('資料head\n', df.head())
+print(type(df))
+print(df)
+print(df.shape)
+"""
 

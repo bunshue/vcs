@@ -851,3 +851,28 @@ sys.path.append(ROOT_DIR)
 print("------------------------------------------------------------")  # 60個
 
 
+
+"""
+
+
+所有版本
+
+
+1. 作業系統
+
+2. Python
+
+3. 各套件
+cc = sns.__version__
+print(cc)
+
+
+print("目前 Pandas 版本 :")
+cc = pd.__version__
+print(cc)
+
+# many
+# pd.show_versions()
+
+"""
+

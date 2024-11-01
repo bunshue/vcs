@@ -25,21 +25,26 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
-# 匯入資料
-
 df = pd.read_csv("data/200811-201811c.csv")
+"""
 cc = df.head()
-# Danger分類點說明
-# 對敏感族群不健康為PM2.5數值在35.5以上
 print(cc)
 
+cc = df.info()
+print(cc)
+
+cc = df.describe()
+print(cc)
+"""
+# Danger分類點說明
+# 對敏感族群不健康為PM2.5數值在35.5以上
 # 載入標準化比例尺（StandardScaler）套件
 
 from sklearn.preprocessing import StandardScaler
 
 # 將Danger中特徵中移除，作為要預測的對象
 scaler = StandardScaler()
-scaler.fit(df.drop("Danger", axis=1))
+scaler.fit(df.drop("Danger", axis=1))  # 刪除 "Danger" 這一欄的資料
 scaled_features = scaler.transform(df.drop("Danger", axis=1))
 
 df_feat = pd.DataFrame(scaled_features, columns=df.columns[:-1])
@@ -66,10 +71,11 @@ knn.fit(X_train, y_train)
 pred = knn.predict(X_test)
 
 # 使用混淆矩陣
-
 from sklearn.metrics import classification_report, confusion_matrix
 
+print("混淆矩陣")
 print(confusion_matrix(y_test, pred))
+print("classification_report")
 print(classification_report(y_test, pred))
 
 # 利用 For迴圈，選擇K值
@@ -77,14 +83,16 @@ print(classification_report(y_test, pred))
 error_rate = []
 
 for i in range(1, 60):
+    print("選擇K值 :", i)
     knn = KNeighborsClassifier(n_neighbors=i)
     knn.fit(X_train, y_train)
     pred_i = knn.predict(X_test)
     error_rate.append(np.mean(pred_i != y_test))
 
+print('錯誤率 :', error_rate)
 
 # 將k=1~60的錯誤率製圖畫出。k=23之後，錯誤率就在5%-6%之間震盪，
-plt.figure(figsize=(10, 6))
+plt.figure(figsize=(12, 6))
 plt.plot(
     range(1, 60),
     error_rate,
@@ -94,26 +102,23 @@ plt.plot(
     markerfacecolor="red",
     markersize=10,
 )
-plt.title("Error Rate vs. K Value")
 plt.xlabel("K")
 plt.ylabel("Error Rate")
+plt.title("Error Rate vs. K Value")
 
 plt.show()
 
 
-# 選擇K值=7
+print("選擇 K值 = 7")
 
 knn = KNeighborsClassifier(n_neighbors=7)
-
 knn.fit(X_train, y_train)
 pred = knn.predict(X_test)
 
-print("WITH K=7")
-print("\n")
+print("混淆矩陣")
 print(confusion_matrix(y_test, pred))
-print("\n")
+print("classification_report")
 print(classification_report(y_test, pred))
-
 
 # 顯示所有特徵
 
@@ -138,22 +143,14 @@ classes = {0: "Safe", 1: "Danger"}
 
 x_new = [[1, 0.3, 1, 1, 2, 1, 1, 1, 0.1, 1, 0.5, 30, 50]]
 y_predict = knn.predict(x_new)
+print('Safe 或 Danger ?')
 print(classes[y_predict[0]])
-
 # Safe
 
-# 評估KNN的準確率
-
+print("評估KNN的準確率")
 cc = knn.score(X_test, y_test)
 print(cc)
-
 # 0.9287356321839081
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
