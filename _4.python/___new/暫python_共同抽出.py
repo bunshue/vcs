@@ -1,4 +1,13 @@
 
+OK 但應該沒需要
+from pylab import mpl
+
+mpl.rcParams["font.sans-serif"] = ["Microsoft YaHei"]
+# 指定默認字形：解決plot不能顯示中文問題
+mpl.rcParams["axes.unicode_minus"] = False
+
+
+
 
 plt.plot(X, Y, color="black")
 plt.plot(X, Y, linestyle="--")

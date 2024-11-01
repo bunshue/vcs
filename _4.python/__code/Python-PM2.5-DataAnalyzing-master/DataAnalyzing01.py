@@ -20,7 +20,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 filename = "data/AQI_20231124.csv"
 df = pd.read_csv(filename)
 print(df.head())
@@ -45,7 +45,7 @@ print(df.sort_index(ascending=False).head())
 
 print(df.shape)
 
-print(df.mean())
+#print(df.mean())  # NG, 包含字串
 
 AQI_filter = df["aqi"] > 60
 
@@ -65,7 +65,7 @@ plt.show()
 
 print(pic)
 
-print(df.corr())
+#print(df.corr())  # NG, 包含字串
 
 print("------------------------------------------------------------")  # 60個
 
@@ -104,7 +104,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("PM2.5與風向之關聯性")
 
-df = pd.read_excel("data/abc.xlsx")
+df = pd.read_excel("abc.xlsx")
 
 x = df.WindDirec
 
@@ -122,7 +122,7 @@ plt.show()
 from IPython.display import Image
 from IPython.core.display import HTML
 
-PATH = "PM25.png"  # 圖片路徑
+PATH = "tree.png"  # 圖片路徑
 
 Image(filename=PATH, width=600, height=600)
 
@@ -221,10 +221,10 @@ sns.pairplot(df, vars=["PM2.5", "AQI", "WindSpeed"], kind="reg")
 
 plt.show()
 
-
-cc = df.corr()
+"""
+cc = df.corr()  # NG, 包含字串
 print(cc)
-
+"""
 
 pic = df.plot(
     kind="scatter", x="WindSpeed", y="PM2.5", title="風速與PM2.5之關係"
@@ -279,7 +279,7 @@ print(df.dtypes)
 
 print(df.describe())
 
-print(df.corr())
+#print(df.corr())  # NG, 包含字串
 
 df.plot(x="監測月份", y=["PM25"], title="2017年度鳳山區PM2.5變化圖")
 plt.show()
@@ -405,7 +405,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-
 plt.style.use("fivethirtyeight")
 
 # 空氣盒子數據溫度與空污
@@ -414,7 +413,7 @@ plt.style.use("fivethirtyeight")
 
 # df = pd.read_csv("200811-201811.csv")
 # df=pd.read_excel('20160101-20190101(Daily).xlsx')
-df = pd.read_excel("KH-1982-2018.xlsx")
+df = pd.read_excel("data/KH-1982-2018.xlsx")
 cc = df.isnull().sum()
 print(cc)
 
@@ -468,7 +467,7 @@ plt.style.use("fivethirtyeight")
 # 使用三種不同的資料
 
 # df = pd.read_csv("200811-201811.csv")  #高雄2008年至2018年之資料
-df = pd.read_excel("KH-1982-2018.xlsx")  # 高雄1982年至2018年之資料
+df = pd.read_excel("data/KH-1982-2018.xlsx")  # 高雄1982年至2018年之資料
 
 cc = df.isnull().sum()
 print(cc)
@@ -539,7 +538,7 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-
+'''
 print("------------------------------------------------------------")  # 60個
 
 
@@ -555,7 +554,7 @@ print("------------------------------------------------------------")  # 60個
 
 # 初始環境設定
 
-df = pd.read_csv("200811-201811.csv")
+df = pd.read_csv("data/200811-201811.csv")
 pd.set_option("display.max_rows", 1000)  # 設定最大能顯示1000rows
 pd.set_option("display.max_columns", 1000)  # 設定最大能顯示1000columns
 from pylab import mpl
@@ -585,7 +584,7 @@ mpl.rcParams["axes.unicode_minus"] = False
 
 # 3.讀取檔案
 
-df = pd.read_csv(r"C:\Users\user01\Desktop\空氣品質監測-高雄市-2018年9月份-每日監測值.csv")
+df = pd.read_csv(r"data/AQI_20231124.csv")
 
 # 兩個df的差別
 # 1)在前方加r，就不用反斜線
