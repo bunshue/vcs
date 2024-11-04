@@ -3,6 +3,8 @@ import sys
 import numpy as np
 import pandas as pd
 
+import tensorflow as tf
+
 print('------------------------------------------------------------')	#60個
 
 """
@@ -21,7 +23,7 @@ C:/Users/070601/.keras/models/
 #from keras.applications.resnet50 import ResNet50
 from tensorflow.keras.applications.resnet50 import ResNet50
 #from keras.preprocessing import image
-from keras.utils import image_utils
+#from keras.utils import image_utils
 
 #from keras.applications.resnet50 import preprocess_input, decode_predictions
 from tensorflow.keras.applications.resnet50 import preprocess_input, decode_predictions
@@ -31,9 +33,9 @@ print(model.summary()) # 顯示模型基本信息
 
 img_path = 'elephant.jpg' 
 #img = image.load_img(img_path, target_size=(224, 224))
-img = image_utils.load_img(img_path, target_size=(224, 224))
+img = tf.keras.utils.load_img(img_path, target_size=(224, 224))
 #x = image.img_to_array(img)
-x = image_utils.img_to_array(img)
+x = tf.keras.utils.img_to_array(img)
 x = np.expand_dims(x, axis=0) 
 x = preprocess_input(x) 
 

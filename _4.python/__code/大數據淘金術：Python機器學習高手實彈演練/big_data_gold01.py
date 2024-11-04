@@ -16,6 +16,7 @@ import random
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns  # 海生, 自動把圖畫得比較好看
 
 font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
@@ -24,10 +25,6 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 # 設定負號
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
-
-print("------------------------------------------------------------")  # 60個
-
-import seaborn as sns
 
 print("------------------------------------------------------------")  # 60個
 
@@ -52,8 +49,6 @@ delta = timedelta(days=3) # 通過指定時定差獲取
 print(d1+delta)# 利用時間段計算新日期時間
 
 # 時間戳
-
-import time
 print(time.time())
 
 d = datetime.now()
@@ -69,6 +64,7 @@ d = datetime.strptime('2019-03-27', '%Y-%m-%d')
 print(d)
 
 from dateutil.parser import parse
+
 d = parse('2019/03/27')
 print(d)
 print(str(d))
@@ -82,7 +78,6 @@ print('------------------------------------------------------------')	#60個
 # jointplot兩變量圖
 
 import statsmodels.api as sm
-import seaborn as sns
 
 sns.set(style="darkgrid")
 data = sm.datasets.ccard.load_pandas().data
@@ -163,6 +158,7 @@ print('------------------------------------------------------------')	#60個
 
 
 from xml.dom import minidom
+
 with open('tmp_test_dom.xml','r') as fh:
     dom = minidom.parse(fh) # 獲取dom對象
     root = dom.documentElement # 獲取根節點
@@ -290,7 +286,6 @@ print('------------------------------------------------------------')	#60個
 
 print('信息量和熵')
 
-import math
 def entropy(*c):
     if(len(c)<=0):
         return -1
@@ -500,6 +495,468 @@ for t in trials.trials:
     print(t['result'])
 
 print('------------------------------------------------------------')	#60個
+'''
+# 做時序圖觀察基本的趨勢和週期
+data = pd.read_csv('AirPassengers.csv')
+ts = data['#Passengers']
+plt.plot(ts)
+
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+# 分析平穩性，正態性，週期性；並對數據進行轉換
+ts_log = np.log(ts)
+ts_diff = ts_log.diff(1) 
+ts_diff = ts_diff.dropna() 
+plt.plot(ts_diff)
+
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+
+# 做自相關和偏自相關圖，確定模型階次
+from statsmodels.graphics.tsaplots import plot_acf
+from statsmodels.graphics.tsaplots import plot_pacf
+
+f = plot_acf(ts_diff)
+plt.show()
+
+f = plot_pacf(ts_diff, method='ols')
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+""" fail
+# 訓練模型
+from statsmodels.tsa.arima_model import ARIMA
+
+model = ARIMA(ts_log, order=(2, 1, 2))  
+results_ARIMA = model.fit(disp=-1)  
+plt.plot(ts_diff, color='#ffff00')
+plt.plot(results_ARIMA.fittedvalues, color='#0000ff')
+
+plt.show()
+"""
+
+print('------------------------------------------------------------')	#60個
+
+""" fail
+# 轉換回原始波形
+pred_diff = pd.Series(results_ARIMA.fittedvalues, copy=True)
+pred_diff_cumsum = pred_diff.cumsum()
+pred_log = pd.Series(ts_log.ix[0], index=ts_log.index)
+pred_log = pred_log.add(pred_diff_cumsum,fill_value=0)
+pred = np.exp(pred_log)
+plt.plot(ts)
+plt.plot(pred)
+
+plt.show()
+"""
+
+'''
+print('------------------------------------------------------------')	#60個
+
+print('傅里葉變換')
+
+# 將頻域數據轉換成時序數據
+# bins爲頻域數據，n設置使用前多少個頻域數據，loop設置生成數據的長度
+def fft_combine(bins, n, loops=1):
+    length = int(len(bins) * loops)
+    data = np.zeros(length)
+    index = loops * np.arange(0, length, 1.0) / length * (2 * np.pi)
+    for k, p in enumerate(bins[:n]):
+        if k != 0 : p *= 2 # 除去直流成分之外, 其餘的係數都乘2
+        data += np.real(p) * np.cos(k*index) # 餘弦成分的係數爲實數部分
+        data -= np.imag(p) * np.sin(k*index) # 正弦成分的係數爲負的虛數部分
+    return index, data
+
+if __name__ == '__main__':
+    data = pd.read_csv('AirPassengers.csv')
+    ts = data['#Passengers']
+
+    # 平穩化
+    ts_log = np.log(ts)
+    ts_diff = ts_log.diff(1) # 差分
+    ts_diff = ts_diff.dropna() # 去除空數據
+    fy = np.fft.fft(ts_diff)
+    print(fy[:10]) # 顯示前10個頻域數據
+    conv1 = np.real(np.fft.ifft(fy)) # 逆變換
+    index, conv2 = fft_combine(fy / len(ts_diff), int(len(fy)/2-1), 1.3) # 只關心一半數據
+    plt.plot(ts_diff)
+    plt.plot(conv1 - 0.5) # 爲看清楚，將顯示區域下拉0.5
+    plt.plot(conv2 - 1)
+    plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+print('小波變換')
+
+import pywt
+
+data = pd.read_csv('AirPassengers.csv')
+ts = data['#Passengers']
+ts_log = np.log(ts)
+ts_diff = ts_log.diff(1) 
+ts_diff = ts_diff.dropna() 
+
+cA,cD = pywt.dwt(ts_diff, 'db2')
+cD = np.zeros(len(cD))
+new_data = pywt.idwt(cA, cD, 'db2')
+
+plt.plot(ts_diff)
+plt.plot(new_data - 0.5) 
+plt.show()
+
+
+print('------------------------------------------------------------')	#60個
+
+""" pip 失敗
+import warnings
+warnings.filterwarnings('ignore')
+
+import tushare as ts
+from fbprophet import Prophet
+import datetime
+
+# 數據準備
+base = ts.get_hist_data('000002')
+df = pd.DataFrame()
+df['y'] = base['volume']
+df['ds'] = base.index
+
+# 日期插補
+ds = df['ds'].min()
+arr = []
+while ds < df['ds'].max():
+    ds = str(pd.to_datetime(ds) + datetime.timedelta(days=1))[:10]
+    if ds not in np.array(df['ds']):
+        arr.append({'ds':ds, 'y':0}) # 以字典方式加入數組
+tmp = pd.DataFrame(arr)
+df = pd.concat([tmp, df])
+df = df.reset_index(drop=True)
+df = df.sort_values(['ds'])
+
+
+holidays = pd.read_csv('holiday.csv')
+
+prophet = Prophet(holidays=holidays) 
+prophet.fit(df)  
+future = prophet.make_future_dataframe(freq='D',periods=30)  # 測試之後三十天
+forecasts = prophet.predict(future)  
+
+prophet.plot(forecasts).show() 
+prophet.plot_components(forecasts).show() 
+plt.show()
+"""
+print('------------------------------------------------------------')	#60個
+
+import warnings
+warnings.filterwarnings('ignore')
+
+import cv2
+
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+cv_img = cv2.imread(filename)
+width=cv_img.shape[1]
+height=cv_img.shape[0]
+print(width)
+print(height)
+
+from PIL import Image
+
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+
+img = Image.open(filename)
+
+mask = np.zeros([10, 5, 3], dtype=np.uint8)
+#print(mask)
+occlusion = np.logical_not(mask[:, :, -1]).astype(np.uint8)
+
+#print(mask)
+
+#mask[:, :, i] = mask[:, :, i] * occlusion
+#occlusion = np.logical_and(occlusion, np.logical_not(mask[:, :, i]))
+
+print('------------------------------------------------------------')	#60個
+
+# SnowNLP用法
+
+from snownlp import SnowNLP
+
+s = SnowNLP("跟框架學代碼設計，跟應用學功能設計")
+print(s.words) # 分詞
+print(s.sentiments) # 消極or積極，結果在0-1之間
+print(s.tags) # 詞性標註
+print(s.keywords(3)) #　關鍵詞
+print(s.summary(3)) # 摘要
+print(s.tf) # tf
+print(s.idf) # idf
+
+print('------------------------------------------------------------')	#60個
+
+from sklearn.model_selection import train_test_split
+import warnings 
+import re
+import tools # 工具實現在tools.py文件中
+
+warnings.filterwarnings("ignore")
+
+# 讀訓練數據
+data = pd.read_csv('data/weibo_train_data.txt',sep='\t',header=None)
+data = tools.prepare(data)
+data = tools.add_features(data)
+
+# 切分訓練集和驗證集
+train,val = train_test_split(data, test_size=0.2, random_state=0)
+val = val.reset_index(drop=True)
+
+# 按用戶分組
+if True:
+    grp = train.groupby('uid')
+    user_data = pd.DataFrame()
+    user_data['f'] = grp['f'].mean()
+    user_data['c'] = grp['c'].mean()
+    user_data['l'] = grp['l'].mean()
+else:
+    user_data = pd.read_csv("train_user.csv")
+user_data_2 = user_data.rename(columns={'l':'avg_l','c':'avg_c','f':'avg_f'})
+print(user_data.head())
+
+print('------------------------------------------------------------')	#60個
+
+# 模型訓練
+import xgboost as xgb
+
+def testme_f(preds,dtrain):
+    labels=pd.Series(dtrain.get_label())
+    tmp = pd.DataFrame()
+    d = ((preds - labels)/(labels + 5.0)).apply(lambda x: abs(x))
+    count_i = labels
+    precision = 1 - d
+    sign = np.sign(precision - 0.8).apply(lambda x: 0 if x == -1 else 1)
+    count_i[count_i > 50] = 50
+    count_1 = sum((count_i + 1) * sign)
+    count_2 = sum(count_i + 1)
+    return 'testme', 1 - count_1/count_2
+
+def testme_lc(preds,dtrain):
+    labels=pd.Series(dtrain.get_label())
+    tmp = pd.DataFrame()
+    d = ((preds - labels)/(labels + 3.0)).apply(lambda x: abs(x))
+    count_i = labels
+    precision = 1 - d
+    sign = np.sign(precision - 0.8).apply(lambda x: 0 if x == -1 else 1)
+    count_i[count_i > 25] = 25
+    count_1 = sum((count_i + 1) * sign)
+    count_2 = sum(count_i + 1)
+    return 'testme', 1 - count_1/count_2
+
+def calc(grp1, grp2, features, key, params, feval):
+    train_X = grp1[features]
+    train_Y = grp1[key]
+    val_X = grp2[features]
+    val_Y = grp2[key]
+    dtrain = xgb.DMatrix(train_X, train_Y)
+    dval = xgb.DMatrix(val_X, val_Y)
+    watchlist  = [(dtrain,'train'),(dval,'val')]
+    model = xgb.train(params,dtrain, evals=watchlist, feval=feval, 
+                      num_boost_round=200, early_stopping_rounds=10)
+    model.save_model('model_'+key)
+    dic = model.get_fscore()
+    dic2= sorted(dic.items(), key=lambda d:d[1], reverse = True)
+    print("feature importance", dic2)
+    return model
+
+params={
+    'max_depth':7,
+    'subsample':0.7,
+    'eta': 0.05,
+    'seed':5,
+    'objective':'reg:linear'
+}
+
+print('------------------------------------------------------------')	#60個
+
+# 提取關鍵詞
+import jieba
+
+# tmp=data.sample(n = 100000) # adjust
+tmp = data.sample(n = 1000)
+arr = tmp['content'].unique()
+print(len(arr))
+arr_all = []
+for i in arr:
+    arr = jieba.cut(i, cut_all=True)
+    arr_zh = [i for i in arr if len(re.findall(r"^[#\+a-z0-9A-Z\\-_]+$",i,re.M)) == 0 and len(i) > 1]
+    arr_all.extend(arr_zh)
+print(len(arr_all))
+
+result = pd.value_counts(arr_all)
+arr_word = []
+for key,value in result.items():
+    if value > 5:
+        arr_word.append(key)
+print(arr_word)
+
+print('------------------------------------------------------------')	#60個
+
+# 從文字中提取特徵
+from scipy import stats
+
+def get_dic(arr_word, dst, count, data):
+    print(len(arr_word))
+    dic_key = {}
+    for idx,i in enumerate(arr_word):
+        df1 = data[data['content'].str.contains(i)==False]
+        df2 = data[data['content'].str.contains(i)==True]
+        ret2 = stats.levene(df1[dst], df2[dst])
+        if ret2[1] < 0.05:
+            dic_key[i] = [ret2[1], df2[dst].mean(), len(df2)]
+            print(idx, i, dic_key[i], len(dic_key))
+            if len(dic_key) > count:
+                break
+    return dic_key
+
+dic_key_f = get_dic(arr_word, 'f', 100, data[:100000])
+dic_key_c = get_dic(arr_word, 'c', 50, data[:100000])
+dic_key_l = get_dic(arr_word, 'l', 100, data[:100000])
+
+print('------------------------------------------------------------')	#60個
+
+val = pd.merge(val, user_data_2, on='uid', how='left')
+train = pd.merge(train, user_data_2, on='uid', how='left')
+
+# 生成新模型
+def calc_dic(train, val, dst, dic):
+    train_new = train.copy()
+    for key in dic.keys():
+        #print(key)
+        train_new[key] = train['content'].str.contains(key).apply(lambda x: 1 if x else 0)
+    val_new = val.copy()
+    for key in dic.keys():
+        val_new[key] = val['content'].str.contains(key).apply(lambda x: 1 if x else 0)
+    features = ['weekday', 'hour',
+           'c_has_link', 'c_has_at', 'c_has_ex', 'c_has_video', 'c_has_ads',
+           'c_has_share', 'c_has_it', 'avg_l', 'avg_c', 'avg_f', 'c_has_topic']
+    features_new = features + list(dic.keys())
+    model = calc(train_new, val_new, features_new, dst, params, testme_f)
+    return model
+
+model_f = calc_dic(train, val, 'f', dic_key_f)
+model_c = calc_dic(train, val, 'c', dic_key_c)
+model_l = calc_dic(train, val, 'l', dic_key_l)
+
+
+print('------------------------------------------------------------')	#60個
+
+# 保存模型
+dic = {}
+dic['model_f'] = model_f
+dic['model_c'] = model_c
+dic['model_l'] = model_l
+dic['dic_key_f'] = dic_key_f
+dic['dic_key_c'] = dic_key_c
+dic['dic_key_l'] = dic_key_l
+dic['user_data_2'] = user_data_2
+
+""" import fail
+from sklearn.externals import joblib
+joblib.dump(dic, 'model.pkl')
+"""
+
+print('------------------------------------------------------------')	#60個
+
+def do_pred(model, val, dic):
+    val_new = val.copy()
+    for key in dic.keys():
+        val_new[key] = val['content'].str.contains(key).apply(lambda x: 1 if x else 0)
+    features = ['weekday', 'hour',
+           'c_has_link', 'c_has_at', 'c_has_ex', 'c_has_video', 'c_has_ads',
+           'c_has_share', 'c_has_it', 'avg_l', 'avg_c', 'avg_f', 'c_has_topic']
+    features_new = features + list(dic.keys())
+    tmp = val_new[features_new]
+    dtest = xgb.DMatrix(tmp)
+    out = model.predict(dtest)
+    out = pd.Series(out).apply(lambda x:int(x))
+    return out
+
+def do_pred_all(df):
+    out = df.copy()
+    out['f'] = do_pred(model_f, df, dic_key_f)
+    out['l'] = do_pred(model_l, df, dic_key_l)
+    out['c'] = do_pred(model_c, df, dic_key_c)
+    return out
+
+# 對驗證集預測
+out = do_pred_all(val)
+print(tools.do_score(val, out))
+
+# 預測並生成提交數據
+test = pd.read_csv('data/weibo_predict_data.txt',sep='\t',header=None)
+test = tools.prepare(test)
+test = tools.add_features(test)
+test = pd.merge(test, user_data_2, on='uid', how='left')
+test = test.fillna(0)
+out = do_pred_all(test)
+out['ss'] = out['f'].astype(str) + "," + out['c'].astype(str) + ',' + out['l'].astype(str)
+out = out[['uid','mid','ss']]
+print(out.shape)
+print(out.head())
+out.to_csv("result_190624.txt", index=False, header=None, sep='\t')
+
+print('------------------------------------------------------------')	#60個
+
+""" some fail
+df = pd.read_csv('data/weibo_train_data.txt',sep='\t',header=None)
+df = df.rename(columns={0:'uid',1:'m',2:'datetime',3:'f',4:'c',5:'l'})
+print(df.shape)
+
+print(df[5:10])
+df[6:10].to_csv('weibo.csv',index=False, encoding='gbk',header=None)
+
+print('------------------------------------------------------------')	#60個
+
+counts = df[3].value_counts()
+print(type(counts))
+plt.plot(counts)
+
+plt.show()
+
+
+df[3].value_counts()
+print(len(df[df[3] == 0])/len(df))
+print(len(df[df[3] < 50])/len(df))
+
+
+grp = df.groupby(0)
+print(len(grp))
+
+df['feed_back'] = df[3]+df[4]+df[5]
+
+
+counts = grp['feed_back'].count()
+#plt.hist(counts, 200)
+
+means = grp['feed_back'].mean()
+count = 0
+for i in means:
+    print(i)
+    if i == 0:
+        count += 1
+print(count)
+
+
+means[means>500]
+#print(df[df[0]=='6a989f414896b3ecec9ec9571d2489c5'])
+
+"""
+
+print('------------------------------------------------------------')	#60個
+
+
+
 
 
 print('------------------------------------------------------------')	#60個

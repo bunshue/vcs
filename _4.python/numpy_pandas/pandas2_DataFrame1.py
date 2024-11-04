@@ -66,6 +66,7 @@ import random
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns  # 海生, 自動把圖畫得比較好看
 
 font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
@@ -74,7 +75,7 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 # 設定負號
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 # 可以使用SSL module把證書驗證改成不需要驗證即可，方法如下:
@@ -8842,7 +8843,7 @@ print(fullname)
 
 """
 
-'''
+
 
 
 datas = [
@@ -8859,7 +8860,7 @@ df = pd.DataFrame(np.array(datas).T, columns=columns)
 print(df)
 print(df["國文"])
 
-import seaborn as sns  # 海生, 自動把圖畫得比較好看
+
 
 # 使用 df.corr() 先做出各變數間的關係係數，再用heatmap作圖
 sns.heatmap(df.corr())
@@ -8867,5 +8868,21 @@ sns.heatmap(df.corr())
 plt.title("關係係數")
 plt.show()
 
+
+""" 測不出來
+pd.describe_option('display')
+
+#pd.set_option('display.max_columns', None) # 设置显示所有列
+pd.set_option('display.max_columns', 8)
+
+#pd.set_option("display.max_rows", 1000)  # 設定最大能顯示1000rows
+#pd.set_option("display.max_columns", 1000)  # 設定最大能顯示1000columns
+
+df = pd.DataFrame(np.random.rand(80, 4))
+print(df)
     
+
+"""
+
+
 

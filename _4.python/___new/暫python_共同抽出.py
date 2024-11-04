@@ -1,8 +1,5 @@
 
 
-pd.set_option("display.max_rows", 1000)  # 設定最大能顯示1000rows
-pd.set_option("display.max_columns", 1000)  # 設定最大能顯示1000columns
-
 from pylab import mpl
 mpl.rcParams["font.sans-serif"] = ["Microsoft YaHei"]
 # 指定默認字形：解決plot不能顯示中文問題

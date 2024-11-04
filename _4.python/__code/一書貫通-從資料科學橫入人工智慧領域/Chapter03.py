@@ -171,13 +171,13 @@ print(cc)
 # - pandas可以读取文本文件、json、数据库、Excel等文件
 # - 使用read_csv方法读取以逗号分隔的文本文件作为DataFrame，其它还有类似read_table, read_excel, read_html, read_sql等等方法
 
-one = pd.read_csv('One.csv',sep=",")  # same
-one = pd.read_csv('One.csv')
+one = pd.read_csv('data/One.csv',sep=",")  # same
+one = pd.read_csv('data/One.csv')
 cc = one.head()
 print(cc)
 
 
-hsb2 = pd.read_table('hsb2.txt')
+hsb2 = pd.read_table('data/hsb2.txt')
 cc = hsb2.head()
 print(cc)
 
@@ -185,7 +185,7 @@ html = pd.read_html('http://www.fdic.gov/bank/individual/failed/banklist.html') 
 print(html)
 
 #xls = pd.read_excel('hsb2.xlsx', sheetname=0) NG
-xls = pd.read_excel('hsb2.xlsx')
+xls = pd.read_excel('data/hsb2.xlsx')
 cc = xls.head()
 print(cc)
 
@@ -200,5 +200,17 @@ print(keyword.kwlist)
 
 print("------------------------------------------------------------")  # 60個
 
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
+sys.exit()
+
+
+print("------------------------------------------------------------")  # 60個
 
 

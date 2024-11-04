@@ -20,30 +20,38 @@
 # |high_avg|高出当地平均收入|
 # |edu_class|教育等级：小学及以下开通=0，中学=1，本科=2，研究生=3|
 
-# In[1]:
-
 #get_ipython().magic('matplotlib inline')
 
-import matplotlib.pyplot as plt
+print("------------------------------------------------------------")  # 60個
+
+# 共同
 import os
+import sys
+import time
+import math
+import random
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns  # 海生, 自動把圖畫得比較好看
+
+font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+# 設定中文字型及負號正確顯示
+# 設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
+# 設定負號
+plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+plt.rcParams["font.size"] = 12  # 設定字型大小
+
+print("------------------------------------------------------------")  # 60個
+
 import statsmodels.api as sm
 from statsmodels.formula.api import ols
 
-os.chdir(r"D:\Python_book\7Linearmodel")
-#pd.set_option('display.max_columns', 8)
-
-
 # 导入数据和数据清洗
-
-# In[2]:
 
 raw = pd.read_csv(r'creditcard_exp.csv', skipinitialspace=True)
 raw.head()
-
-
-# In[3]:
 
 exp = raw[raw['avg_exp'].notnull()].copy().iloc[:, 2:].drop('age2',axis=1)
 
@@ -55,13 +63,9 @@ exp.describe(include='all')
 # ### 相关性分析
 # 散点图
 
-# In[4]:
-
 exp.plot('Income', 'avg_exp', kind='scatter')
 plt.show()
 
-
-# In[5]:
 
 exp[['Income', 'avg_exp', 'Age', 'dist_home_val']].corr(method='pearson')
 
@@ -69,21 +73,14 @@ exp[['Income', 'avg_exp', 'Age', 'dist_home_val']].corr(method='pearson')
 # ## 线性回归算法
 # ### 简单线性回归
 
-# In[6]:
-
 lm_s = ols('avg_exp ~ Income+Age+dist_home_val', data=exp).fit()
-lm_s.summary()
-
-
+cc = lm_s.summary()
+print(cc)
 
 # Predict-在原始数据集上得到预测值和残差
 
-# In[7]:
-
-lm_s.summary()
-
-
-# In[8]:
+cc = lm_s.summary()
+print(cc)
 
 pd.DataFrame([lm_s.predict(exp), lm_s.resid], index=['predict', 'resid']
             ).T.head()
@@ -91,25 +88,19 @@ pd.DataFrame([lm_s.predict(exp), lm_s.resid], index=['predict', 'resid']
 
 # 在待预测数据集上得到预测值
 
-# In[9]:
-
 lm_s.predict(exp_new)[:5]
 
 
 # ### 多元线性回归
 
-# In[10]:
-
 lm_m = ols('avg_exp ~ Age + Income + dist_home_val + dist_avg_income',
            data=exp).fit()
-lm_m.summary()
-
+cc = lm_m.summary()
+print(cc)
 
 # ### 多元线性回归的变量筛选
 
-# In[11]:
-
-'''forward select'''
+#forward select
 def forward_select(data, response):
     remaining = set(data.columns)
     remaining.remove(response)
@@ -139,8 +130,6 @@ def forward_select(data, response):
     return(model)
 
 
-# In[12]:
-
 data_for_select = exp[['avg_exp', 'Income', 'Age', 'dist_home_val', 
                        'dist_avg_income']]
 lm_m = forward_select(data=data_for_select, response='avg_exp')
@@ -150,75 +139,57 @@ print(lm_m.rsquared)
 # # 线性回归的诊断
 # ### 残差分析
 
-# In[13]:
-
 ana1 = lm_s
 
-
-# In[14]:
 
 exp['Pred'] = ana1.predict(exp)
 exp['resid'] = ana1.resid
 exp.plot('Pred', 'resid',kind='scatter')
 plt.show()
 
-# In[15]:
 # 遇到异方差情况,教科书上会介绍使用加权最小二乘法，但是实际上最常用的是对被解释变量取对数
 ana1 = ols('avg_exp ~ Income', exp).fit()
-ana1.summary()
-# In[15]:
+cc = ana1.summary()
+print(cc)
 
 ana2 = ols('avg_exp_ln ~ Income', exp).fit()
 exp['Pred'] = ana2.predict(exp)
 exp['resid'] = ana2.resid
 exp.plot('Income', 'resid',kind='scatter')
-#ana2.summary()
-#plt.show()
+cc = ana2.summary()
+print(cc)
+
+plt.show()
 
 
 # 取对数会使模型更有解释意义
 
-# In[16]:
-
 exp['Income_ln'] = np.log(exp['Income'])
-
-
-# In[17]:
 
 ana3 = ols('avg_exp_ln ~ Income_ln', exp).fit()
 exp['Pred'] = ana3.predict(exp)
 exp['resid'] = ana3.resid
 exp.plot('Income_ln', 'resid',kind='scatter')
 plt.show()
-#%%
-ana3.summary()
+cc = ana3.summary()
+print(cc)
 
 # 寻找最优的模型
-
-# In[18]:
 
 r_sq = {'exp~Income':ana1.rsquared, 'ln(exp)~Income':ana2.rsquared, 
         'ln(exp)~ln(Income)':ana3.rsquared}
 print(r_sq)
 
-
 # ### 强影响点分析
-
-# In[19]:
 
 exp['resid_t'] = (exp['resid'] - exp['resid'].mean()) / exp['resid'].std()
 
 
 # Find outlier：
 
-# In[20]:
-
 exp[abs(exp['resid_t']) > 2]
 
-
 # Drop outlier
-
-# In[21]:
 
 exp2 = exp[abs(exp['resid_t']) <= 2].copy()
 ana4 = ols('avg_exp_ln ~ Income_ln', exp2).fit()
@@ -227,49 +198,35 @@ exp2['resid'] = ana4.resid
 exp2.plot('Income', 'resid', kind='scatter')
 plt.show()
 
-
-# In[22]:
-
 ana4.rsquared
 
 
 # statemodels包提供了更多强影响点判断指标
 
-# In[23]:
-
 from statsmodels.stats.outliers_influence import OLSInfluence
 
-OLSInfluence(ana3).summary_frame().head()
-
+cc = OLSInfluence(ana3).summary_frame().head()
+print(cc)
 
 # ### 增加变量
 # 经过单变量线性回归的处理，我们基本对模型的性质有了一定的了解，接下来可以放入更多的连续型解释变量。在加入变量之前，要注意变量的函数形式转变。比如当地房屋均价、当地平均收入，其性质和个人收入一样，都需要取对数
 
-# In[24]:
-
 exp2['dist_home_val_ln'] = np.log(exp2['dist_home_val'])
 exp2['dist_avg_income_ln'] = np.log(exp2['dist_avg_income'])
 
-ana5 = ols('''avg_exp_ln ~ Age + Income_ln + 
-           dist_home_val_ln + dist_avg_income_ln''', exp2).fit()
-ana5.summary()
-
+ana5 = ols("""avg_exp_ln ~ Age + Income_ln + 
+           dist_home_val_ln + dist_avg_income_ln""", exp2).fit()
+cc = ana5.summary()
+print(cc)
 
 # ### 多重共线性分析
 
-# In[25]:
-
 # Step regression is not always work.
-
-
-# In[26]:
 
 ana5.bse # The standard errors of the parameter estimates
 
 
 # The function "statsmodels.stats.outliers_influence.variance_inflation_factor" uses "OLS" to fit data, and it will generates a wrong rsquared. So define it ourselves!
-
-# In[27]:
 
 def vif(df, col_i):
     cols = list(df.columns)
@@ -280,8 +237,6 @@ def vif(df, col_i):
     return 1. / (1. - r2)
 
 
-# In[28]:
-
 exog = exp2[['Income_ln', 'dist_home_val_ln',
              'dist_avg_income_ln']]
 
@@ -291,12 +246,7 @@ for i in exog.columns:
 
 # Income_ln与dist_avg_income_ln具有共线性，使用“高出平均收入的比率”代替其中一个
 
-# In[29]:
-
 exp2['high_avg_ratio'] = exp2['high_avg'] / exp2['dist_avg_income']
-
-
-# In[30]:
 
 exog1 = exp2[['high_avg_ratio', 'dist_home_val_ln', 
               'dist_avg_income_ln']]
@@ -304,59 +254,43 @@ exog1 = exp2[['high_avg_ratio', 'dist_home_val_ln',
 for i in exog1.columns:
     print(i, '\t', vif(df=exog1, col_i=i))
 
-
-# In[31]:
-
 var_select = exp2[['avg_exp_ln', 'high_avg_ratio', 
                    'dist_home_val_ln', 'dist_avg_income_ln']]
 ana7 = forward_select(data=var_select, response='avg_exp_ln')
 print(ana7.rsquared)
 
-
-# In[32]:
-
-formula8 = '''
+formula8 = """
 avg_exp_ln ~ dist_avg_income_ln + dist_home_val_ln + 
 C(gender) + C(Ownrent) + C(Selfempl) + C(edu_class)
-'''
+"""
 ana8 = ols(formula8, exp2).fit()
-ana8.summary()
+cc = ana8.summary()
+print(cc)
 
-
-# In[33]:
-
-formula9 = '''
+formula9 = """
 avg_exp_ln ~ dist_avg_income_ln + dist_home_val_ln + 
 C(Selfempl) + C(gender):C(edu_class)
-'''
+"""
 ana9 = ols(formula9, exp2).fit()
-ana9.summary()
+cc = ana9.summary()
+print(cc)
 
 
 # ## 正则算法
 # ### 岭回归
 
-# In[34]:
-
 lmr = ols('avg_exp ~ Income + dist_home_val + dist_avg_income',
           data=exp).fit_regularized(alpha=1, L1_wt=0)
 
-lmr.summary()
 # L1_wt参数为0则使用岭回归，为1使用lasso
 
 
-# ### LASSO算法
-
-# In[35]:
+#LASSO算法
 
 lmr1 = ols('avg_exp ~ Age + Income + dist_home_val + dist_avg_income',
            data=exp).fit_regularized(alpha=1, L1_wt=1)
-lmr1.summary()
-
 
 # ### 使用scikit-learn进行正则化参数调优
-
-# In[36]:
 
 from sklearn.preprocessing import StandardScaler
 
@@ -366,9 +300,6 @@ scaler = StandardScaler()  # 标准化
 X = scaler.fit_transform(exp[continuous_xcols])
 y = exp['avg_exp_ln']
 
-
-# In[37]:
-
 from sklearn.linear_model import RidgeCV
 
 alphas = np.logspace(-2, 3, 100, base=10)
@@ -377,21 +308,12 @@ alphas = np.logspace(-2, 3, 100, base=10)
 rcv = RidgeCV(alphas=alphas, store_cv_values=True) 
 rcv.fit(X, y)
 
-
-# In[38]:
-
 print('The best alpha is {}'.format(rcv.alpha_))
 print('The r-square is {}'.format(rcv.score(X, y))) 
 # Default score is rsquared
 
-
-# In[39]:
-
 X_new = scaler.transform(exp_new[continuous_xcols])
 np.exp(rcv.predict(X_new)[:5])
-
-
-# In[40]:
 
 cv_values = rcv.cv_values_
 n_fold, n_alphas = cv_values.shape
@@ -409,16 +331,12 @@ plt.legend(loc="best")
 plt.show()
 
 
-# In[41]:
-
-rcv.coef_
-
+cc = rcv.coef_
+print(cc)
 
 # 手动选择正则化系数——根据业务判断
 
 # 岭迹图
-
-# In[42]:
 
 from sklearn.linear_model import Ridge
 
@@ -430,9 +348,6 @@ for alpha in alphas:
     ridge.fit(X, y)
     coefs.append(ridge.coef_)
 
-
-# In[43]:
-
 ax = plt.gca()
 
 ax.plot(alphas, coefs)
@@ -441,31 +356,22 @@ plt.xlabel('alpha')
 plt.ylabel('weights')
 plt.title('Ridge coefficients as a function of the regularization')
 plt.axis('tight')
+
 plt.show()
-
-
-# In[44]:
 
 ridge.set_params(alpha=40)
 ridge.fit(X, y)
 ridge.coef_
 
 
-# In[45]:
-
-ridge.score(X, y)
-
+cc = ridge.score(X, y)
+print(cc)
 
 # 预测
 
-# In[46]:
-
 np.exp(ridge.predict(X_new)[:5])
 
-
 # lasso
-
-# In[54]:
 
 from sklearn.linear_model import LassoCV
 
@@ -477,9 +383,6 @@ print('The best alpha is {}'.format(lcv.alpha_))
 print('The r-square is {}'.format(lcv.score(X, y))) 
 # Default score is rsquared
 
-
-# In[49]:
-
 from sklearn.linear_model import Lasso
 
 lasso = Lasso()
@@ -490,8 +393,6 @@ for alpha in lasso_alphas:
     lasso_coefs.append(lasso.coef_)
 
 
-# In[50]:
-
 ax = plt.gca()
 
 ax.plot(lasso_alphas, lasso_coefs)
@@ -500,17 +401,12 @@ plt.xlabel('alpha')
 plt.ylabel('weights')
 plt.title('Lasso coefficients as a function of the regularization')
 plt.axis('tight')
+
 plt.show()
 
-
-# In[51]:
-
-lcv.coef_
-
+print(lcv.coef_)
 
 # 弹性网络
-
-# In[52]:
 
 from sklearn.linear_model import ElasticNetCV
 
@@ -518,9 +414,6 @@ l1_ratio = [.1, .5, .7, .9, .95, .99]
 
 encv = ElasticNetCV(l1_ratio=l1_ratio)
 encv.fit(X, y)
-
-
-# In[53]:
 
 print('The best l1_ratio is {}'.format(encv.l1_ratio_))
 print('The best alpha is {}'.format(encv.alpha_))

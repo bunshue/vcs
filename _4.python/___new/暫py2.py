@@ -1,10 +1,26 @@
+
+
+
+import seaborn as sns  # 海生, 自動把圖畫得比較好看
+
+a.to_excel('closeprice.xls')
+
+
+
+
+pandas.plot是matplotlib.pyplot.plot的简单包装
+
+.ix is deprecated. Please use
+.loc for label based indexing or   <= 用這個 
+.iloc for positional indexing
+
+
+
+
 #np算4分位數
 print("25th percentile =", np.percentile(height, 25))
 print("Median =", np.median(height))
 print("75th percentile =", np.percentile(height, 75))
-
-
-
 
 
 各種演算法
