@@ -69,9 +69,6 @@ df["Humidity"] = pd.to_numeric(df.Humidity, errors="coerce")
 cc = df.dtypes
 print(cc)
 
-plt.style.use("ggplot")
-plt.rcParams["figure.figsize"] = [16, 9]
-
 X = df.drop(["PM25"], axis=1)
 y = df.drop(["CO"], axis=1) # ???
 
@@ -104,12 +101,10 @@ print(cc)
 
 # 0.9101721045818417
 
-from math import sqrt
-
 # The coefficients
 print("Coefficients: \n", linear_regression.coef_)
 # The mean squared error
-print("Root mean squared error: %.2f" % sqrt(mean_squared_error(y_test, lin_pred)))
+print("Root mean squared error: %.2f" % math.sqrt(mean_squared_error(y_test, lin_pred)))
 # The absolute squared error
 print("Mean absolute error: %.2f" % mean_absolute_error(y_test, lin_pred))
 # Explained variance score: 1 is perfect prediction
@@ -127,7 +122,8 @@ print("------------------------------------------------------------")  # 60個
 from sklearn.neural_network import MLPRegressor
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 
-# Create MLPRegressor object
+print("使用 多層感知機(Multi-Layer Perceptron, MLP)")
+
 mlp = MLPRegressor()
 
 mlp.fit(X_train, y_train)
@@ -153,7 +149,7 @@ print(cc)
 nnr_pred = mlp.predict(X_test)
 
 # The mean squared error
-print("Root mean squared error: %.2f" % sqrt(mean_squared_error(y_test, nnr_pred)))
+print("Root mean squared error: %.2f" % math.sqrt(mean_squared_error(y_test, nnr_pred)))
 # The absolute squared error
 print("Mean absolute error: %.2f" % mean_absolute_error(y_test, nnr_pred))
 # Explained variance score: 1 is perfect prediction
@@ -167,6 +163,11 @@ plt.title("Neural Network Regression Predicted vs Actual")
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
+
+"""
+最小絕對值收斂和選擇算子、套索算法
+Lasso算法(least absolute shrinkage and selection operator）
+"""
 
 from sklearn.linear_model import Lasso
 
@@ -198,7 +199,7 @@ print(cc)
 # Make predictions using the testing set
 lasso_pred = lasso.predict(X_test)
 
-print("Root mean squared error: %.2f" % sqrt(mean_squared_error(y_test, lasso_pred)))
+print("Root mean squared error: %.2f" % math.sqrt(mean_squared_error(y_test, lasso_pred)))
 
 # Root mean squared error: 4.19
 
@@ -232,7 +233,7 @@ elasticnet_pred = elasticnet.predict(X_test)
 
 # The mean squared error
 print(
-    "Root mean squared error: %.2f" % sqrt(mean_squared_error(y_test, elasticnet_pred))
+    "Root mean squared error: %.2f" % math.sqrt(mean_squared_error(y_test, elasticnet_pred))
 )
 
 # Root mean squared error: 4.16
@@ -266,7 +267,7 @@ print(cc)
 regr_rf_pred = regr_rf.predict(X_test)
 
 # The mean squared error
-print("Root mean squared error: %.2f" % sqrt(mean_squared_error(y_test, regr_rf_pred)))
+print("Root mean squared error: %.2f" % math.sqrt(mean_squared_error(y_test, regr_rf_pred)))
 # The absolute squared error
 print("Mean absolute error: %.2f" % mean_absolute_error(y_test, regr_rf_pred))
 # Explained variance score: 1 is perfect prediction
@@ -317,7 +318,7 @@ print(cc)
 extratree_pred = extra_tree.predict(X_test)
 
 print(
-    "Root mean squared error: %.2f" % sqrt(mean_squared_error(y_test, extratree_pred))
+    "Root mean squared error: %.2f" % math.sqrt(mean_squared_error(y_test, extratree_pred))
 )
 
 # Root mean squared error: 3.60
@@ -350,12 +351,11 @@ from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 
 # Create Decision Tree Regressor object
 tree_1 = DecisionTreeRegressor()
-
-tree_2 = AdaBoostRegressor(DecisionTreeRegressor(), n_estimators=200, learning_rate=0.1)
+# NG tree_2 = AdaBoostRegressor(DecisionTreeRegressor(), n_estimators=200, learning_rate=0.1)
 
 # Train the model using the training sets
 tree_1.fit(X_train, y_train)
-tree_2.fit(X_train, y_train)
+# NG tree_2.fit(X_train, y_train)
 
 """
 AdaBoostRegressor(base_estimator=DecisionTreeRegressor(criterion='mse', max_depth=None, max_features=None,
@@ -372,25 +372,29 @@ print(cc)
 
 # 0.8654467934849918
 
+"""NG 
 # Score the boosted decision tree model
 boosted_tree_score = tree_2.score(X_test, y_test)
 cc = boosted_tree_score
 print(cc)
-
 # 0.892229896203619
 
 # Make predictions using the testing set
+"""
 tree_1_pred = tree_1.predict(X_test)
-tree_2_pred = tree_2.predict(X_test)
+
+"""
+#tree_2_pred = tree_2.predict(X_test)
 
 # The coefficients
 print("Coefficients: \n", regr.coef_)
 # The mean squared error
-print("Root mean squared error: %.2f" % sqrt(mean_squared_error(y_test, tree_2_pred)))
+print("Root mean squared error: %.2f" % math.sqrt(mean_squared_error(y_test, tree_2_pred)))
 # The absolute squared error
 print("Mean absolute error: %.2f" % mean_absolute_error(y_test, tree_2_pred))
 # Explained variance score: 1 is perfect prediction
 print("R-squared: %.2f" % r2_score(y_test, tree_2_pred))
+"""
 
 """
 Coefficients: 
@@ -402,6 +406,7 @@ Mean absolute error: 3.09
 R-squared: 0.89
 """
 
+""" NG
 features = X.columns
 importances = tree_2.feature_importances_
 indices = np.argsort(importances)
@@ -412,7 +417,7 @@ plt.yticks(range(len(indices)), features[indices])
 plt.xlabel("Relative Importance")
 
 plt.show()
-
+"""
 print("------------------------------------------------------------")  # 60個
 
 plt.scatter(y_test, tree_1_pred)
@@ -424,15 +429,16 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
+""" NG
 plt.scatter(y_test, tree_2_pred)
 plt.xlabel("Measured")
 plt.ylabel("Predicted")
 plt.title("Boosted Decision Tree Predicted vs Actual")
 
 plt.show()
-
+"""
 print("------------------------------------------------------------")  # 60個
-
+""" kilo 不能用 xgboost
 from xgboost.sklearn import XGBRegressor
 
 # Fitting XGB regressor
@@ -440,15 +446,6 @@ xboost = XGBRegressor(n_estimators=200)
 
 xboost.fit(X_train, y_train)
 
-"""
-XGBRegressor(base_score=0.5, booster='gbtree', colsample_bylevel=1,
-       colsample_bytree=1, gamma=0, importance_type='gain',
-       learning_rate=0.1, max_delta_step=0, max_depth=3,
-       min_child_weight=1, missing=None, n_estimators=200, n_jobs=1,
-       nthread=None, objective='reg:linear', random_state=0, reg_alpha=0,
-       reg_lambda=1, scale_pos_weight=1, seed=None, silent=True,
-       subsample=1)
-"""
 xgb_score = xboost.score(X_test, y_test)
 cc = xgb_score
 print(cc)
@@ -458,7 +455,7 @@ print(cc)
 # Predict
 xboost_pred = xboost.predict(X_test)
 
-print("Root mean squared error: %.2f" % sqrt(mean_squared_error(y_test, xboost_pred)))
+print("Root mean squared error: %.2f" % math.sqrt(mean_squared_error(y_test, xboost_pred)))
 
 # Root mean squared error: 4.13
 
@@ -468,7 +465,7 @@ plt.ylabel("Predicted")
 plt.title("XGBoost Predicted vs Actual")
 
 plt.show()
-
+"""
 print("------------------------------------------------------------")  # 60個
 
 print("Scores:")
@@ -482,16 +479,14 @@ print("Boosted decision tree score: ", boosted_tree_score)
 print("XGBoost score:", xgb_score)
 print("\n")
 print("RMSE:")
-print("Linear regression RMSE: %.2f" % sqrt(mean_squared_error(y_test, lin_pred)))
-print("Neural network RMSE: %.2f" % sqrt(mean_squared_error(y_test, nnr_pred)))
-print("Lasso RMSE: %.2f" % sqrt(mean_squared_error(y_test, lasso_pred)))
-print("ElasticNet RMSE: %.2f" % sqrt(mean_squared_error(y_test, elasticnet_pred)))
-print("Decision forest RMSE: %.2f" % sqrt(mean_squared_error(y_test, regr_rf_pred)))
-print("Extra Trees RMSE: %.2f" % sqrt(mean_squared_error(y_test, extratree_pred)))
-print(
-    "Boosted decision tree RMSE: %.2f" % sqrt(mean_squared_error(y_test, tree_2_pred))
-)
-print("XGBoost RMSE: %.2f" % sqrt(mean_squared_error(y_test, xboost_pred)))
+print("Linear regression RMSE: %.2f" % math.sqrt(mean_squared_error(y_test, lin_pred)))
+print("Neural network RMSE: %.2f" % math.sqrt(mean_squared_error(y_test, nnr_pred)))
+print("Lasso RMSE: %.2f" % math.sqrt(mean_squared_error(y_test, lasso_pred)))
+print("ElasticNet RMSE: %.2f" % math.sqrt(mean_squared_error(y_test, elasticnet_pred)))
+print("Decision forest RMSE: %.2f" % math.sqrt(mean_squared_error(y_test, regr_rf_pred)))
+print("Extra Trees RMSE: %.2f" % math.sqrt(mean_squared_error(y_test, extratree_pred)))
+# NG print("Boosted decision tree RMSE: %.2f" % math.sqrt(mean_squared_error(y_test, tree_2_pred)))
+print("XGBoost RMSE: %.2f" % math.sqrt(mean_squared_error(y_test, xboost_pred)))
 
 print("------------------------------------------------------------")  # 60個
 
@@ -505,3 +500,9 @@ print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
+
+
+#plt.style.use("ggplot")
+#plt.rcParams["figure.figsize"] = [16, 9]
+
+

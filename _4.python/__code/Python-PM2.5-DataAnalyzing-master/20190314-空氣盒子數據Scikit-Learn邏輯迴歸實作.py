@@ -66,13 +66,21 @@ print("------------------------------------------------------------")  # 60個
 X = df.drop("Danger", axis=1)
 y = df["Danger"]
 
+# 將資料分成訓練組及測試組
 from sklearn.model_selection import train_test_split
 
 X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.75, random_state=42
-)
+)  # 訓練組2.5成, 測試組7.5成
 
-# 載入邏輯迴歸
+print(X.shape)
+print(y.shape)
+print(X_train.shape)
+print(X_test.shape)
+print(y_train.shape)
+print(y_test.shape)
+
+# 載入邏輯迴歸，並訓練模型
 from sklearn.linear_model import LogisticRegression
 
 logistic_regression = LogisticRegression(solver="liblinear")

@@ -1,12 +1,12 @@
 
-OK 但應該沒需要
-from pylab import mpl
 
+pd.set_option("display.max_rows", 1000)  # 設定最大能顯示1000rows
+pd.set_option("display.max_columns", 1000)  # 設定最大能顯示1000columns
+
+from pylab import mpl
 mpl.rcParams["font.sans-serif"] = ["Microsoft YaHei"]
 # 指定默認字形：解決plot不能顯示中文問題
 mpl.rcParams["axes.unicode_minus"] = False
-
-
 
 
 plt.plot(X, Y, color="black")
@@ -43,11 +43,8 @@ plt.figure(figsize=(width, height), dpi=dpi)：設定圖形大小和分辨率。
 
 """
 儲存圖表
-# 圖片繪製完後，使用? plt.savefig 來儲存圖片
 plt.savefig('tmp_plot.png')
 """
-
-
 
 plt.xlabel("X軸", loc="left")
 plt.ylabel("Y軸", loc="top")

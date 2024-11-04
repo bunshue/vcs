@@ -99,7 +99,7 @@ y_pred = linear_regression.predict(X_test)
 df = pd.DataFrame({"測試資料": y_test.flatten(), "預測結果": y_pred.flatten()})
 #print(df)
 
-print("畫出前 N 筆")
+print("畫出前 N 筆, 比較實際PM2.5及預測PM2.5的關係")
 N = 20
 df1 = df.head(N)
 
@@ -189,14 +189,20 @@ X = df[
 ].values
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
+# 訓練組8成, 測試組2成
 
+print(X.shape)
+print(y.shape)
+print(X_train.shape)
+print(X_test.shape)
+print(y_train.shape)
+print(y_test.shape)
+
+# 載入線性迴歸，並訓練模型
+from sklearn.linear_model import LinearRegression
+  
 linear_regression = LinearRegression()
 linear_regression.fit(X_train, y_train)
-
-"""
-LinearRegression(copy_X=True, fit_intercept=True, n_jobs=None,
-         normalize=False)
-"""
 
 """ NG
 coeff_df = pd.DataFrame(linear_regression.coef_,X.columns,columns=['Coefficient'])  
@@ -211,8 +217,7 @@ df1 = df.head(25)
 print(df1)
 
 df1.plot(kind="bar", figsize=(10, 8))
-plt.grid(which="major", linestyle="-", linewidth="0.5", color="green")
-plt.grid(which="minor", linestyle=":", linewidth="0.5", color="black")
+
 plt.show()
 
 # 載入迴歸常見的評估指標
@@ -236,14 +241,6 @@ print("------------------------------------------------------------")  # 60個
 # 2008年11月至2018年11月資料清洗
 
 df = pd.read_csv("data/200811-201811a.csv")
-
-pd.set_option("display.max_rows", 1000)  # 設定最大能顯示1000rows
-pd.set_option("display.max_columns", 1000)  # 設定最大能顯示1000columns
-
-from pylab import mpl
-
-mpl.rcParams["font.sans-serif"] = ["Microsoft YaHei"]
-mpl.rcParams["axes.unicode_minus"] = False
 
 # df.dtypes
 
@@ -286,4 +283,15 @@ plt.tight_layout()
 
 plt.grid(which="major", linestyle="-", linewidth="0.5", color="green")
 plt.grid(which="minor", linestyle=":", linewidth="0.5", color="black")
+
 """
+
+
+
+pd.set_option("display.max_rows", 1000)  # 設定最大能顯示1000rows
+pd.set_option("display.max_columns", 1000)  # 設定最大能顯示1000columns
+
+from pylab import mpl
+mpl.rcParams["font.sans-serif"] = ["Microsoft YaHei"]
+mpl.rcParams["axes.unicode_minus"] = False
+

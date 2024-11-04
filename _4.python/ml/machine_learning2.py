@@ -51,7 +51,7 @@ for x,y in [[0,1],[0,2],[1,2]]:
 
 import matplotlib
 import matplotlib as mpl
-
+'''
 print('------------------------------------------------------------')	#60個
 
 from sklearn.metrics.pairwise import euclidean_distances
@@ -105,7 +105,7 @@ doc_df = pd.DataFrame(data.toarray(), index = text, columns = vectorizer.get_fea
 
 print(doc_df)
 
-print('------------------------------------------------------------')	#60個
+print('------------------------------')	#30個
 
 from sklearn.metrics.pairwise import cosine_similarity
 cos_sims = cosine_similarity(doc_df)
@@ -114,7 +114,7 @@ print(cos_sims)
 sims_df = pd.DataFrame(cos_sims, index = text, columns = text)
 print(sims_df)
 
-print('------------------------------------------------------------')	#60個
+print('------------------------------')	#30個
 
 #tf-idf
 
@@ -124,20 +124,16 @@ features = vectorizer.get_feature_names_out()
 for word in features:
     print(word)
 
-print('------------------------------------------------------------')	#60個
+print('------------------------------')	#30個
 
 pd.set_option('display.precision', 2)
 doc_df = pd.DataFrame(data.toarray(), index = text, columns = vectorizer.get_feature_names_out()).head(10)
 print(doc_df)
 
 print('------------------------------------------------------------')	#60個
+'''
 
-#normalize
-#get_feature_names
-#get_feature_names_out
-
-print('------------------------------------------------------------')	#60個
-
+'''
 x = np.array([i * np.pi / 180 for i in range(60, 300, 4)])
 np.random.seed(10)  #Setting seed for reproducability
 y = np.sin(x) + np.random.normal(0, 0.15, len(x))
@@ -154,7 +150,7 @@ for i in range(2, 16):
 tt = data.head()
 print(tt)
 
-print('------------------------------------------------------------')	#60個
+print('------------------------------')	#30個
 
 from sklearn.linear_model import LinearRegression
 
@@ -186,8 +182,6 @@ def linear_regression(data, power, models_to_plot):
     
     return ret
 
-plt.rcParams['figure.figsize'] = 12, 8
-
 #Initialize a dataframe to store the results:
 col = ['rss','intercept'] + ['coef_x_%d' % i for i in range(1, 16)]
 ind = ['model_pow_%d' % i for i in range(1, 16)]
@@ -202,15 +196,14 @@ for i in range(1,16):
 
 plt.show()
 
-print('------------------------------------------------------------')	#60個
-
+print('------------------------------')	#30個
 
 #Set the display format to be scientific for ease of analysis
 pd.options.display.float_format = '{:,.2g}'.format
 tt = coef_matrix_simple
 print(tt)
 
-print('------------------------------------------------------------')	#60個
+print('------------------------------')	#30個
 
 #L2 Normalization Ridge Regression
 
@@ -257,22 +250,21 @@ for i in range(10):
 
 plt.show()        
 
-print('------------------------------------------------------------')	#60個
+print('------------------------------')	#30個
 
 pd.options.display.float_format = '{:,.2g}'.format
 tt = coef_matrix_ridge
 
 print(tt)
 
-print('------------------------------------------------------------')	#60個
+print('------------------------------')	#30個
 
 #有多少個系數為0
 
 coef_matrix_ridge.apply(lambda x: sum(x.values==0),axis=1)
 
-print('------------------------------------------------------------')	#60個
+print('------------------------------')	#30個
 
-""" fail
 #L1 Regulariztion Lass Regression
 
 from sklearn.linear_model import Lasso
@@ -281,7 +273,7 @@ def lasso_regression(data, predictors, alpha, models_to_plot={}):
     #Fit the model
     #lassoreg = Lasso(alpha=alpha,normalize=True, max_iter=1e5)
     lassoreg = Lasso(alpha=alpha, max_iter=1e5)
-    lassoreg.fit(data[predictors],data['y'])
+    lassoreg.fit(data[predictors], data['y'])
     y_pred = lassoreg.predict(data[predictors])
     
     #Return the result in pre-defined format
@@ -315,14 +307,14 @@ coef_matrix_lasso = pd.DataFrame(index=ind, columns=col)
 #Define the models to plot
 models_to_plot = {1e-10:231, 1e-5:232,1e-4:233, 1e-3:234, 1e-2:235, 1:236}
 
+""" NG
 #Iterate over the 10 alpha values:
 for i in range(10):
     coef_matrix_lasso.iloc[i,] = lasso_regression(data, predictors, alpha_lasso[i], models_to_plot)
-
+"""
 plt.show()
 
-
-print('------------------------------------------------------------')	#60個
+print('------------------------------')	#30個
 
 pd.options.display.float_format = '{:,.2g}'.format
 tt = coef_matrix_lasso
@@ -330,12 +322,10 @@ print(tt)
 
 
 coef_matrix_lasso.apply(lambda x: sum(x.values==0),axis=1)
-
-"""
-
+'''
 print('------------------------------------------------------------')	#60個
 print('------------------------------------------------------------')	#60個
-
+'''
 from sklearn.feature_extraction.text import  CountVectorizer
 from sklearn.preprocessing import Normalizer
 from sklearn.decomposition import TruncatedSVD
@@ -356,7 +346,7 @@ vectorizer.get_feature_names_out()
 tt = pd.DataFrame(data.toarray(), index=corpus, columns=vectorizer.get_feature_names_out()).head(10)
 print(tt)
 
-print('------------------------------------------------------------')	#60個
+print('------------------------------')	#30個
 
 #Singular value decomposition and LSA
 model = TruncatedSVD(2)
@@ -383,7 +373,7 @@ plt.title('Plot of points agains LSA principal components')
 
 plt.show()
 
-print('------------------------------------------------------------')	#60個
+print('------------------------------')	#30個
 
 similarity = np.asarray(np.asmatrix(data_n) * np.asmatrix(data_n).T)
 tt = pd.DataFrame(similarity, index = corpus, columns = corpus).head(10)
@@ -394,10 +384,10 @@ sns.heatmap(similarity, cmap = 'Reds')
 plt.show()
 
 print(pd.DataFrame(model.components_,index=['component_1','component_2'],columns=vectorizer.get_feature_names_out()).T)
-
+'''
 print('------------------------------------------------------------')	#60個
 print('------------------------------------------------------------')	#60個
-
+'''
 print('房價')
 
 import scipy.stats as stats
@@ -412,7 +402,7 @@ sns.distplot(train['SalePrice'])
 
 plt.show()
 
-print('------------------------------------------------------------')	#60個
+print('------------------------------')	#30個
 
 #另一種查看是否服從正態分布的可視化方法
 
@@ -440,7 +430,7 @@ sns.distplot(y, kde=False, fit=st.lognorm)
 
 plt.show()
 
-print('------------------------------------------------------------')	#60個
+print('------------------------------')	#30個
 
 #另一種查看是否服從正態分布的可視化方法
 
@@ -452,7 +442,7 @@ res = st.probplot(train['SalePrice'], plot=plt)
 
 plt.show()
 
-print('------------------------------------------------------------')	#60個
+print('------------------------------')	#30個
 
 #把房價做對數變換后再看
 SalePrice_log = np.log(train['SalePrice'])
@@ -468,9 +458,10 @@ res = st.probplot(SalePrice_log, plot=plt)
 print(res)
 
 plt.show()
-
+'''
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+'''
 
 from scipy.stats import norm
 
@@ -492,12 +483,19 @@ mu, sigma = 1.6, 0.2
 
 h = 1.8
 
+#rvs: 隨機變量
 data = norm.rvs(loc=mu, scale=sigma, size=N)
+#print(data)
 
-print(data)
+bins = 50  # 束
+plt.hist(data, bins=bins)
 
-print("------------------------------------------------------------")  # 60個
+plt.title('normal distribution')
+plt.show()
 
+print('------------------------------')	#30個
+
+#pdf: 概率密度函數
 tt = norm.pdf(x=1.8, loc=1.6, scale=0.2)
 print(tt)
 
@@ -507,12 +505,7 @@ print(tt)
 tt = loglikelihood(data, mu, sigma)
 print(tt)
 
-plt.hist(data)
-
-plt.title('normal distribution')
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
+print('------------------------------')	#30個
 
 mus = [1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2.0]
 sigma = 0.1
@@ -532,9 +525,10 @@ plt.figure(figsize=(6, 4))
 # sns.pointplot(df['mu'],df['-logl']) fail
 
 plt.show()
-
+'''
 print("------------------------------------------------------------")  # 60個
-
+print("------------------------------------------------------------")  # 60個
+'''
 neg_data = "data/neg.csv"
 pos_data = "data/pos.csv"
 
@@ -572,7 +566,7 @@ corpus_df = pd.concat((neg_df, pos_df))
 tt = corpus_df.head(5)
 print(tt)
 
-print("------------------------------------------------------------")  # 60個
+print('------------------------------')	#30個
 
 from sklearn.feature_extraction.text import CountVectorizer
 
@@ -590,9 +584,10 @@ example_counts = cv.transform(examples)
 predictions = classifier.predict(example_counts)
 
 print(predictions)
-
+'''
 print("------------------------------------------------------------")  # 60個
-
+print("------------------------------------------------------------")  # 60個
+'''
 # Create an empty dataframe
 data = pd.DataFrame()
 
@@ -617,20 +612,7 @@ data["Team"] = ["i100", "i100", "i500", "i100", "i500", "i100", "i500", "i100"]
 # View the data
 print(data)
 
-print("------------------------------------------------------------")  # 60個
-
-person = pd.DataFrame()
-
-# Create some feature values for this single row
-person["Height"] = [6]
-person["Weight"] = [130]
-person["Size"] = [8]
-person["Gender"] = ["female"]
-# View the data
-print(person)
-
-
-print("------------------------------------------------------------")  # 60個
+print('------------------------------')	#30個
 
 df1 = (
     data.groupby(["Team", "Gender"])
@@ -646,9 +628,7 @@ df3["p"] = df3["cnt"] * 1.0 / df3["total"]
 df3 = df3.reset_index()
 print(df3)
 
-
-print("------------------------------------------------------------")  # 60個
-
+print('------------------------------')	#30個
 
 def p_x_given_y_1(team, gender):
     return df3["p"][df3["Team"] == team][df3["Gender"] == gender].values[0]
@@ -657,9 +637,7 @@ def p_x_given_y_1(team, gender):
 print(p_x_given_y_1("i100", "female"))
 # 0.4
 
-
-print("------------------------------------------------------------")  # 60個
-
+print('------------------------------')	#30個
 
 # 計算先驗
 # Number of i100
@@ -671,7 +649,6 @@ n_i500 = data["Team"][data["Team"] == "i500"].count()
 # Total rows
 total_ppl = data["Team"].count()
 
-
 # Number of males divided by the total rows
 P_i100 = n_i100 * 1.0 / total_ppl
 
@@ -680,28 +657,24 @@ P_i500 = n_i500 * 1.0 / total_ppl
 
 print(P_i100, P_i500)
 
-
-print("------------------------------------------------------------")  # 60個
-
+print('------------------------------')	#30個
+""" NG data_means
 # Group the data by gender and calculate the means of each feature
 data_means = data.groupby("Team").mean()
 
 # View the values
 print(data_means)
-
-print("------------------------------------------------------------")  # 60個
-
-
+"""
+print('------------------------------')	#30個
+""" NG data_variance
 # Group the data by gender and calculate the variance of each feature
 data_variance = data.groupby("Team").var()
 
 # View the values
 print(data_variance)
-
-
-print("------------------------------------------------------------")  # 60個
-
-
+"""
+print('------------------------------')	#30個
+""" data_means / data_variance
 # 計算我們需要的均值方差
 # Means for i100
 i100_height_mean = data_means["Height"][data_means.index == "i100"].values[0]
@@ -722,13 +695,21 @@ i500_size_mean = data_means["Size"][data_means.index == "i500"].values[0]
 i500_height_variance = data_variance["Height"][data_variance.index == "i500"].values[0]
 i500_weight_variance = data_variance["Weight"][data_variance.index == "i500"].values[0]
 i500_size_variance = data_variance["Size"][data_variance.index == "i500"].values[0]
+"""
 
-
-print("------------------------------------------------------------")  # 60個
-
+print('------------------------------')	#30個
 
 # 接下來，我們寫個公式來計算高斯分布的概率
 
+person = pd.DataFrame()
+
+# Create some feature values for this single row
+person["Height"] = [6]
+person["Weight"] = [130]
+person["Size"] = [8]
+person["Gender"] = ["female"]
+# View the data
+print(person)
 
 def p_x_given_y_2(x, mean_y, variance_y):
     # Input the arguments into a probability density function
@@ -745,9 +726,9 @@ def p_x_given_y_2(x, mean_y, variance_y):
 tt = person["Gender"][0]
 print(tt)
 
+print('------------------------------')	#30個
 
-print("------------------------------------------------------------")  # 60個
-
+""" NG
 P_i100 * p_x_given_y_1("i100", person["Gender"][0]) * p_x_given_y_2(
     person["Height"][0], i100_height_mean, i100_height_variance
 ) * p_x_given_y_2(
@@ -755,10 +736,10 @@ P_i100 * p_x_given_y_1("i100", person["Gender"][0]) * p_x_given_y_2(
 ) * p_x_given_y_2(
     person["Size"][0], i100_size_mean, i100_size_variance
 )
+"""
 
-
-print("------------------------------------------------------------")  # 60個
-
+print('------------------------------')	#30個
+""" NG
 # Numerator of the posterior if the unclassified observation is a female
 P_i500 * p_x_given_y_1("i500", person["Gender"][0]) * p_x_given_y_2(
     person["Height"][0], i500_height_mean, i500_height_variance
@@ -767,9 +748,12 @@ P_i500 * p_x_given_y_1("i500", person["Gender"][0]) * p_x_given_y_2(
 ) * p_x_given_y_2(
     person["Size"][0], i500_size_mean, i500_size_variance
 )
-
+"""
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+'''
 
+'''
 from sklearn.datasets import make_regression
 
 X, y = make_regression(n_samples=100, n_features=3)
@@ -778,21 +762,19 @@ print(X.shape, y.shape)
 
 y = y.reshape((-1, 1))
 
-# (100, 3) (100,)
-
 plt.figure(figsize=(9, 4))
 
 plt.plot(y, alpha=0.5, linewidth=3)
-
 plt.show()
+
+print('------------------------------')	#30個
 
 from sklearn.linear_model import LinearRegression
 
-model = LinearRegression()
+linear_regression = LinearRegression()
+linear_regression.fit(X, y)
 
-model.fit(X, y)
-
-y_pred_sk = model.predict(X)
+y_pred_sk = linear_regression.predict(X)
 
 plt.figure(figsize=(9, 4))
 
@@ -802,9 +784,11 @@ plt.plot(y, alpha=0.8, linewidth=5)
 plt.plot(y_pred_sk, color="g")
 plt.plot(y_pred_sk, linewidth=1)
 
-plt.legend()
+#plt.legend()
 
 plt.show()
+
+print('------------------------------')	#30個
 
 
 def gd(X, y, theta, l_rate, iterations):
@@ -873,12 +857,12 @@ plt.plot(y_predict, linewidth=2)
 
 plt.show()
 
-print(model.coef_)
-
+print(linear_regression.coef_)
 # array([[48.54597102, 82.31351886,  8.52184984]])
-
+'''
 print("------------------------------------------------------------")  # 60個
-
+print("------------------------------------------------------------")  # 60個
+'''
 np.random.seed(3)
 num_pos = 500
 
@@ -892,7 +876,7 @@ plt.scatter(X[:, 0], X[:, 1], c=y)
 
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
+print('------------------------------')	#30個
 
 from sklearn import linear_model
 
@@ -900,28 +884,18 @@ clf = linear_model.LogisticRegression()
 
 clf.fit(X, y)
 
-"""
-LogisticRegression(C=1.0, class_weight=None, dual=False, fit_intercept=True,
-,          intercept_scaling=1, max_iter=100, multi_class='ovr', n_jobs=1,
-,          penalty='l2', random_state=None, solver='liblinear', tol=0.0001,
-,          verbose=0, warm_start=False)
-"""
-
 y_pred = clf.predict(X)
 
 print(np.sum(y_pred.reshape(-1, 1) == y.reshape(-1, 1)) * 1.0 / len(y))
-
 # 0.99
 
 from sklearn.metrics import confusion_matrix
 
 print(confusion_matrix(y, y_pred))
-
 # [[495   5]
 # [  5 495]]
 
-
-print("------------------------------------------------------------")  # 60個
+print('------------------------------')	#30個
 
 # 繪制分類邊界
 
@@ -946,7 +920,7 @@ def plot_decision_boundary(pred_func, X, y, title):
 
 plot_decision_boundary(lambda x: clf.predict(x), X, y, "logistic regression prediction")
 
-print("------------------------------------------------------------")  # 60個
+print('------------------------------')	#30個
 
 
 def sigmoid(z):
@@ -988,6 +962,7 @@ theta, accu = logistic_regression(X, y, 1, 2000)
 
 print(accu)
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 plt.style.use("bmh")
@@ -1126,25 +1101,24 @@ array([[-599.88926069],
 """
 print(accu)
 
+'''
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 
 """
 探索性數據分析（EDA）
 
-EDA指對已有的數據用可視化等手段探索數據的結構和規律的一種數據分析方法，其目的是最大化對數據的直覺，完成這個事情的方法是結合統計學的圖形以各種形式展現出來。
-
-在深入機器學習或統計建模之前，EDA是一個重要的步驟，這是因為它提供了為現有問題開發適當模型并正確解釋其結果所需的來龍去脈。
-
+EDA指對已有的數據用可視化等手段探索數據的結構和規律的一種數據分析方法，
+其目的是最大化對數據的直覺，完成這個事情的方法是結合統計學的圖形以各種形式展現出來。
+在深入機器學習或統計建模之前，EDA是一個重要的步驟，
+這是因為它提供了為現有問題開發適當模型并正確解釋其結果所需的來龍去脈。
 EDA通常涉及以下幾種方法的組合：
-
 .原始數據集中每個字段的單變量可視化和匯總統計
-
 .數據集中每個變量與感興趣目標變量之間的關系的雙變量可視化和匯總統計
-
 .多元可視化以了解數據中不同字段之間的交互作用
-
-.降維以了解數據,通過將數據折疊成幾個小數據點讓觀察值聚類成有區別的小組，可以更容易地識別行為模式
-
+.降維以了解數據,通過將數據折疊成幾個小數據點讓觀察值聚類成有區別的小組，
+可以更容易地識別行為模式
 """
 
 import scipy.stats as stats
@@ -1354,6 +1328,8 @@ print(df)
 # 2.2 異常值分析
 # 對saleprice做標準化后再看
 
+"""
+# NG
 saleprice_scaled = StandardScaler().fit_transform(train["SalePrice"][:, np.newaxis])
 low_range = saleprice_scaled[saleprice_scaled[:, 0].argsort()][:10]
 high_range = saleprice_scaled[saleprice_scaled[:, 0].argsort()][-10:]
@@ -1361,57 +1337,36 @@ print("outer range (low) of the distribution:")
 print(low_range)
 print("\nouter range (high) of the distribution:")
 print(high_range)
+"""
+
 
 """
 outer range (low) of the distribution:
-
 [[-1.83870376]
-
  [-1.83352844]
-
  [-1.80092766]
-
  [-1.78329881]
-
  [-1.77448439]
-
  [-1.62337999]
-
  [-1.61708398]
-
  [-1.58560389]
-
  [-1.58560389]
-
  [-1.5731    ]]
 
-
-
 outer range (high) of the distribution:
-
 [[ 3.82897043]
-
  [ 4.04098249]
-
  [ 4.49634819]
-
  [ 4.71041276]
-
  [ 4.73032076]
-
  [ 5.06214602]
-
  [ 5.42383959]
-
  [ 5.59185509]
-
  [ 7.10289909]
-
  [ 7.22881942]]
 
 d:\Anaconda2\lib\site-packages\sklearnutils\validation.py:420: DataConversionWarning: Data with input dtype int64 was converted to float64 by StandardScaler.
   warnings.warn(msg, DataConversionWarning)
-
 d:\Anaconda2\lib\site-packages\sklearnutils\validation.py:420: DataConversionWarning: Data with input dtype int64 was converted to float64 by StandardScaler.
   warnings.warn(msg, DataConversionWarning)
 """
@@ -1923,38 +1878,48 @@ print(error(Y, Ypred))
 """
 
 d:\Anaconda2\lib\site-packages\sklearn\linear_model\least_angle.py:334: ConvergenceWarning: Early stopping the lars path, as the residues are small and the current value of alpha is no longer well controlled. 87 iterations, alpha=8.170e-04, previous alpha=2.386e-06, with an active set of 70 regressors.
-
   ConvergenceWarning)
-
 d:\Anaconda2\lib\site-packages\sklearn\linear_model\least_angle.py:334: ConvergenceWarning: Early stopping the lars path, as the residues are small and the current value of alpha is no longer well controlled. 79 iterations, alpha=6.065e-04, previous alpha=1.923e-06, with an active set of 70 regressors.
-
   ConvergenceWarning)
-
 0.12548614477031952
-
 ​"""
 
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
 print("作業完成")
-
-print("------------------------------------------------------------")  # 60個
-
 print("------------------------------------------------------------")  # 60個
 
 
-print("------------------------------------------------------------")  # 60個
+#normalize
+#get_feature_names
+#get_feature_names_out
+
+#plt.rcParams['figure.figsize'] = 12, 8
 
 
-print("------------------------------------------------------------")  # 60個
+print('------------------------------------------------------------')	#60個
 
 
-print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-print("作業完成")
-print("------------------------------------------------------------")  # 60個

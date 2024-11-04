@@ -568,3 +568,25 @@ print("------------------------------------------------------------")  # 60個
 
 
 pd.options.mode.chained_assignment = None  # 取消顯示pandas資料重設警告
+
+df.to_csv("New_Data.csv", encoding="utf8")  # 存檔至New_Data.csv中
+df.to_json("New_Data.json", encoding="utf8")  # 存檔至New_Data.json
+df.to_excel("New_Data.xlsx", encoding="utf8")  # 存檔至New_Data.xlsx
+
+df.to_csv("New_Data.csv", encoding="utf8")  # 存檔至New_Data.csv中
+df.to_json("New_Data.json", encoding="utf8")  # 存檔至New_Data.json
+df.to_excel("New_Data.xlsx", encoding="utf8")  # 存檔至New_Data.xlsx
+
+# 存檔至新的CSV
+new_df.to_csv("2014-2018.csv", encoding="utf8")
+
+# df.to_csv('New_Data.csv',encoding='utf8')  #存檔至New_Data.csv中
+# df.to_excel('New_Data.xlsx', encoding='utf8')#存檔至New_Data.xlsx
+
+# 存檔至新的CSV
+new_df.to_csv("2014-2018.csv", encoding="utf8")
+
+
+
+
+

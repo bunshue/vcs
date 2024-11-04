@@ -3,8 +3,6 @@ Iris 的
 
 """
 
-# import keras
-
 print("------------------------------------------------------------")  # 60個
 
 # 共同
@@ -26,7 +24,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-"""
+
 df = pd.read_csv('data/iris.csv')
 
 print(df.shape)
@@ -42,19 +40,19 @@ Y = df["target"].map(target_mapping)
 colmap = np.array(["r", "g", "y"])
 plt.figure(figsize=(10,5))
 
-plt.subplot(1, 2, 1)
+plt.subplot(121)
 plt.subplots_adjust(hspace = .5)
 plt.scatter(df["sepal_length"], df["sepal_width"], color=colmap[Y])
-plt.xlabel("Sepal Length")
-plt.ylabel("Sepal Width")
+plt.xlabel("Sepal Length 花萼長")
+plt.ylabel("Sepal Width 花萼寬")
 
-plt.subplot(1, 2, 2)
+plt.subplot(122)
 plt.scatter(df["petal_length"], df["petal_width"], color=colmap[Y])
-plt.xlabel("Petal Length")
-plt.ylabel("Petal Width")
+plt.xlabel("Petal Length 花瓣長")
+plt.ylabel("Petal Width 花瓣寬")
 
 plt.show()
-"""
+
 print("------------------------------------------------------------")  # 60個
 
 from sklearn.datasets import load_iris
@@ -103,7 +101,6 @@ print(model.means_)  # 各ガウス分布の平均
 print(model.covariances_)  # 各ガウス分布の分散
 
 print("------------------------------------------------------------")  # 60個
-
 
 # 決策樹 (decision tree)
 

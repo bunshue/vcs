@@ -37,7 +37,7 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 # 設定負號
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
-
+'''
 print("------------------------------------------------------------")  # 60個
 
 print(
@@ -1165,8 +1165,106 @@ print(chi_squared, p_value)
 
 crit = stats.chi2.ppf(q=0.95, df=df)
 print("臨界區: ", crit)
+'''
+print("------------------------------------------------------------")  # 60個
+
+"""
+【Python笔记】Scipy.stats.norm函数解析
+scipy.stats.norm函数 可以实现正态分布（也就是高斯分布）
+pdf ——概率密度函数
+norm.pdf(x, loc, scale)等同于norm.pdf(y) / scale ，其中 y = (x - loc) / scale
+"""
+
+from scipy import stats
+
+plt.figure(figsize=(12,8))
+x=np.linspace(-5,5,num=20)
+
+plt.subplot(2,2,1)
+# 第1种调用方式
+gauss1=stats.norm(loc=0,scale=2) # loc: mean 均值， scale: standard deviation 标准差
+gauss2=stats.norm(loc=1,scale=3) 
+y1=gauss1.pdf(x)
+y2=gauss2.pdf(x)
+
+plt.plot(x,y1,color='orange',label='u=0,sigma=2')
+plt.plot(x,y2,color='green',label='u=1,sigma=3')
+plt.legend(loc='upper right')
+
+plt.subplot(2,2,2)
+# 第2种调用方式
+y1=stats.norm.pdf(x,loc=0,scale=2)
+y2=stats.norm.pdf(x,loc=1,scale=3)
+
+plt.plot(x,y1,color='r',label='u=0,sigma=2')
+plt.plot(x,y2,color='b',label='u=1,sigma=3')
+plt.legend(loc='upper right')
+
+
+# stats.norm.pdf 和 stats.norm.rvs的区别
+plt.subplot(2,2,3)
+y1=stats.norm.rvs(loc=0,scale=2,size=20)
+y2=stats.norm.rvs(loc=1,scale=3,size=20)
+
+plt.plot(x,y1,color='black',linestyle=':',label='u=0,sigma=2')
+plt.plot(x,y2,color='purple',label='u=1,sigma=3')
+plt.legend(loc='upper right')
+
+plt.subplot(2,2,4)
+y1=sorted(stats.norm.rvs(loc=0,scale=2,size=20))
+y2=sorted(stats.norm.rvs(loc=1,scale=3,size=20))
+
+plt.plot(x,y1,color='black',linestyle=':',label='u=0,sigma=2')
+plt.plot(x,y2,color='purple',label='u=1,sigma=3')
+plt.legend(loc='upper right')
+
+plt.show()
+
+"""
+图221 和 图222 是代表调用stats.norm.pdf方法，画出均值为u，方差为sigma的概率密度分布图。
+
+图223 和 图224 是代表调用stats.norm.rvs方法，rvs:随机变量（就是从这个分布中抽一些样本），而不是概率密度分布哦！
+"""
+
+print(gauss1) 
+# <scipy.stats._distn_infrastructure.rv_frozen object at 0x121F7DB0>
+
+print(stats.norm.rvs(loc=0,scale=2,size=10))
+# [ 4.04968057 -0.85376074  4.62058049  1.25731984 -0.11082284 -2.63972507 0.81014329 -0.37101067 -0.20334414  2.65743079]
+
+"""
+stats.norm主要公共方法如下：
+
+rvs:随机变量（就是从这个分布中抽一些样本）
+pdf：概率密度函数。
+cdf：累计分布函数
+sf：残存函数（1-CDF）
+ppf：分位点函数（CDF的逆）
+isf：逆残存函数（sf的逆）
+stats:返回均值，方差，（费舍尔）偏态，（费舍尔）峰度。
+moment:分布的非中心矩。
+"""
+
+
+
+
 
 print("------------------------------------------------------------")  # 60個
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")

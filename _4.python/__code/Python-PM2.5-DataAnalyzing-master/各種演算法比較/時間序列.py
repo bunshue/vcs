@@ -28,11 +28,20 @@ print("------------------------------------------------------------")  # 60個
 sns.set()
 
 df = pd.read_excel("20160101-20190101(Daily)時間序列.xlsx")
-cc = df.head()
+"""
+cc = df.head(10)
 print(cc)
+
+#資料長度
+print(len(df))
+print(len(df["PM25"]))
 
 cc = df.info()
 print(cc)
+
+cc = df.describe()
+print(cc)
+"""
 
 df.Date = pd.to_datetime(df.Date)
 df.set_index("Date", inplace=True)

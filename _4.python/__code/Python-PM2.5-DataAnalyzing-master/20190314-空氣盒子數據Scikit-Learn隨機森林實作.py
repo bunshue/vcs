@@ -49,9 +49,6 @@ df.iloc[:, 5:].head(5)
 
 # 特徵轉換
 
-# Use numpy to convert to arrays
-import numpy as np
-
 # Labels are the values we want to predict
 labels = np.array(df["PM25"])
 
@@ -109,7 +106,6 @@ print("Mean Absolute Error:", round(np.mean(errors), 2), "degrees.")
 
 # 繪製決策樹
 
-# Import tools needed for visualization
 from sklearn.tree import export_graphviz
 import pydot
 
@@ -161,9 +157,6 @@ feature_importances = sorted(feature_importances, key=lambda x: x[1], reverse=Tr
 
 # 視覺化變數特徵的重要程度
 
-# Import matplotlib for plotting and use magic command for Jupyter Notebooks
-import matplotlib.pyplot as plt
-
 # Set the style
 plt.style.use("fivethirtyeight")
 
@@ -204,11 +197,11 @@ errors = abs(predictions - test_labels)
 
 # Display the performance metrics
 print("Mean Absolute Error:", round(np.mean(errors), 2), "degrees.")
-
 # Mean Absolute Error: 7.32 degrees.
 
 
-# 建立小顆的決測樹
+# 建立小棵的決測樹
+from sklearn.tree import export_graphviz
 
 # Limit depth of tree to 3 levels
 rf_small = RandomForestRegressor(n_estimators=10, max_depth=3)

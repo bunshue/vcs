@@ -1,4 +1,6 @@
 
+python 之 ''' 與  ''' 內, 不可以存在 \
+
 
 C:\Users\070601>pip show scikit-learn
 C:\Users\070601>pip show pytube

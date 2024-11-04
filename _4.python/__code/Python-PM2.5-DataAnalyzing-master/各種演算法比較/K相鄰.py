@@ -26,8 +26,21 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 print("------------------------------------------------------------")  # 60個
 
 df = pd.read_excel("20160101-20190101(Daily)K相鄰.xlsx")
-cc = df.head()
+"""
+cc = df.head(10)
 print(cc)
+
+#資料長度
+print(len(df))
+print(len(df["PM25"]))
+
+cc = df.info()
+print(cc)
+
+cc = df.describe()
+print(cc)
+"""
+
 # Danger分類點說明
 # 對敏感族群不健康為PM2.5數值在35.5以上
 
@@ -115,10 +128,8 @@ print(confusion_matrix(y_test, pred))
 print("\n")
 print(classification_report(y_test, pred))
 
-
 cc = df.head(1)
 print(cc)
-
 
 # 0:Safe   對一般人無害
 # 1:Danger 對敏感族群有害

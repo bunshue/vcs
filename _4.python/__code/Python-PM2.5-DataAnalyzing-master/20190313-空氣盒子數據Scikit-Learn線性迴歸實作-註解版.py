@@ -26,6 +26,7 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 print("------------------------------------------------------------")  # 60個
 
 df = pd.read_csv("data/200811-201811b.csv")  # 共有 1447 筆資料
+"""
 cc = df.head(10)
 print(cc)
 
@@ -38,7 +39,7 @@ print(cc)
 
 cc = df.describe()
 print(cc)
-
+"""
 plt.scatter(df["PM25"], df["CO"], c='yellow')
 plt.scatter(df["PM25"][:100], df["CO"][:100], c='r')
 plt.scatter(df["PM25"][100:200], df["CO"][100:200], c='g')
@@ -93,7 +94,6 @@ X = df[
 y = df["PM25"]
 
 # 將資料分成訓練組及測試組
-
 from sklearn.model_selection import train_test_split
 
 # test_size代表測試組比例。random_state代表設定隨機種子，讓測試結果可被重複
@@ -115,11 +115,8 @@ from sklearn.linear_model import LinearRegression
 linear_regression = LinearRegression()
 linear_regression.fit(X_train, y_train)
 
-y_pred = linear_regression.predict(X_test)
-
 # 取得截距。如果公式是y=ax+b，b即是截距
 print("截距b:", linear_regression.intercept_)
-
 # 截距b: 4.194703731759336
 
 # 取得迴歸係數，並用Data Frame顯示
@@ -128,18 +125,15 @@ print("迴歸係數 :", linear_regression.coef_)
 # 列出訓練的變數
 print(X_train.columns)
 
-# 預測
-# 使用測試組資料來預測結果
+# 預測, 使用測試組資料來預測結果
 y_pred = linear_regression.predict(X_test)
 
 df = pd.DataFrame({"測試資料": y_test, "預測結果": y_pred})
 #print(df)
 
-print("畫出前 N 筆")
+print("畫出前 N 筆, 比較實際PM2.5及預測PM2.5的關係")
 N = 20
 df1 = df.head(N)
-
-# 比較實際PM2.5及預測PM2.5的關係
 
 plt.figure(figsize=(10, 5))
 
@@ -147,17 +141,13 @@ plt.scatter(y_test, y_pred)
 
 plt.show()
 
-
 df1.plot(kind="bar", figsize=(10, 8))
-plt.grid(which="major", linestyle="-", linewidth="0.5", color="green")
-plt.grid(which="minor", linestyle=":", linewidth="0.5", color="black")
 plt.show()
 
 # 看實際值及預測值之間的殘差分佈圖
 sns.distplot((y_test - y_pred))
 
 plt.show()
-
 
 # 載入迴歸常見的評估指標
 from sklearn import metrics
@@ -182,3 +172,5 @@ print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
+
+

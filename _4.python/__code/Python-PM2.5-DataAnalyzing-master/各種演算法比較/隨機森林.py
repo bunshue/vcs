@@ -24,79 +24,75 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
-features = pd.read_excel("20160101-20190101(Daily)隨機森林.xlsx")
-cc = features.head(5)
+df = pd.read_excel("20160101-20190101(Daily)隨機森林.xlsx")
+"""
+cc = df.head(10)
 print(cc)
 
-print("The shape of our features is:", features.shape)
+#資料長度
+print(len(df))
+print(len(df["PM25"]))
 
-cc = features.describe()
+cc = df.info()
 print(cc)
 
+cc = df.describe()
+print(cc)
+"""
 # One-hot encode the data using pandas get_dummies
-features = pd.get_dummies(features)
+df = pd.get_dummies(df)
 
 # Display the first 5 rows of the last 12 columns
-cc = features.iloc[:, 5:].head(5)
+cc = df.iloc[:, 5:].head(5)
 print(cc)
 
 # Labels are the values we want to predict
-labels = np.array(features["PM25"])
+labels = np.array(df["PM25"])
 
-# Remove the labels from the features
+# Remove the labels from the df
 # axis 1 refers to the columns
-features = features.drop("PM25", axis=1)
+df = df.drop("PM25", axis=1)
 
 # Saving feature names for later use
-feature_list = list(features.columns)
+feature_list = list(df.columns)
 
 # Convert to numpy array
-features = np.array(features)
+df = np.array(df)
 
-# Using Skicit-learn to split data into training and testing sets
+# 將資料分成訓練組及測試組
 from sklearn.model_selection import train_test_split
+#X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)# 訓練組8成, 測試組2成
+X_train, X_test, y_train, y_test = train_test_split(df, labels, test_size=0.25, random_state=42)# 訓練組7.5成, 測試組2.5成
 
-# Split the data into training and testing sets
-train_features, test_features, train_labels, test_labels = train_test_split(
-    features, labels, test_size=0.25, random_state=42
-)
+print("Training Features Shape:", X_train.shape)
+print("Training Labels Shape:", y_train.shape)
+print("Testing Features Shape:", X_test.shape)
+print("Testing Labels Shape:", y_test.shape)
 
-print("Training Features Shape:", train_features.shape)
-print("Training Labels Shape:", train_labels.shape)
-print("Testing Features Shape:", test_features.shape)
-print("Testing Labels Shape:", test_labels.shape)
-
-# Import the model we are using
+# 載入隨機森林演算法，並訓練模型
 from sklearn.ensemble import RandomForestRegressor
 
 # Instantiate model with 1000 decision trees
-rf = RandomForestRegressor(n_estimators=60, random_state=42)
+random_forest_regressor = RandomForestRegressor(n_estimators=60, random_state=42)
 
 # Train the model on training data
-rf.fit(train_features, train_labels)
+random_forest_regressor.fit(X_train, y_train)
 
-"""
-RandomForestRegressor(bootstrap=True, criterion='mse', max_depth=None,
-           max_features='auto', max_leaf_nodes=None,
-           min_impurity_decrease=0.0, min_impurity_split=None,
-           min_samples_leaf=1, min_samples_split=2,
-           min_weight_fraction_leaf=0.0, n_estimators=60, n_jobs=None,
-           oob_score=False, random_state=42, verbose=0, warm_start=False)
-"""
+# 進行預測
 
 # Use the forest's predict method on the test data
-predictions = rf.predict(test_features)
+predictions = random_forest_regressor.predict(X_test)
 
 # Calculate the absolute errors
-errors = abs(predictions - test_labels)
+errors = abs(predictions - y_test)
 
 # Print out the mean absolute error (mae)
-print("Mean Absolute Error:", round(np.mean(errors), 2), "degrees.")
+print("MAE : Mean Absolute Error:", round(np.mean(errors), 2), "degrees.")
 
 # Mean Absolute Error: 8.93 degrees.
 
 # Get numerical feature importances
-importances = list(rf.feature_importances_)
+importances = list(random_forest_regressor.feature_importances_)
 
 # List of tuples with variable and importance
 feature_importances = [
@@ -130,55 +126,49 @@ plt.title("Variable Importances")
 plt.show()
 
 
+# 計算MAE
+
 # New random forest with only the two most important variables
 rf_most_important = RandomForestRegressor(n_estimators=1000, random_state=42)
 
-# Extract the two most important features
+# Extract the two most important df
 important_indices = [feature_list.index("O3"), feature_list.index("TEMP")]
-train_important = train_features[:, important_indices]
-test_important = test_features[:, important_indices]
+train_important = X_train[:, important_indices]
+test_important = X_test[:, important_indices]
 
 # Train the random forest
-rf_most_important.fit(train_important, train_labels)
+rf_most_important.fit(train_important, y_train)
 
 # Make predictions and determine the error
 predictions = rf_most_important.predict(test_important)
 
-errors = abs(predictions - test_labels)
+errors = abs(predictions - y_test)
 
 # Display the performance metrics
-print("Mean Absolute Error:", round(np.mean(errors), 2), "degrees.")
-
+print("MAE : Mean Absolute Error:", round(np.mean(errors), 2), "degrees.")
 # Mean Absolute Error: 11.31 degrees.
+
+
+# 建立小棵的決測樹
+from sklearn.tree import export_graphviz
+import pydot
 
 # Limit depth of tree to 3 levels
 rf_small = RandomForestRegressor(n_estimators=20, max_depth=3)
-rf_small.fit(train_features, train_labels)
+rf_small.fit(X_train, y_train)
 
 # Extract the small tree
 tree_small = rf_small.estimators_[5]
 
-""" NG
 # Save the tree as a png image
 export_graphviz(tree_small, out_file = 'small_tree222.dot', feature_names = feature_list, rounded = True, precision = 1)
 
 (graph, ) = pydot.graph_from_dot_file('small_tree222.dot')
 
-graph.write_png('tmp_small_tree222.png');
-"""
+# NG
+# graph.write_png('tmp_small_tree222.png');
 
-"""
----------------------------------------------------------------------------
-NameError                                 Traceback (most recent call last)
-<ipython-input-15-11ed89fa73ca> in <module>
-      7 
-      8 # Save the tree as a png image
-----> 9 export_graphviz(tree_small, out_file = 'small_tree222.dot', feature_names = feature_list, rounded = True, precision = 1)
-     10 
-     11 (graph, ) = pydot.graph_from_dot_file('small_tree222.dot')
 
-NameError: name 'export_graphviz' is not defined
-"""
 
 from IPython.display import Image
 from IPython.core.display import HTML
@@ -190,9 +180,9 @@ Image(filename=PATH, width=850, height=600)
 import datetime
 
 # Dates of training values
-months = features[:, feature_list.index("month")]
-days = features[:, feature_list.index("day")]
-years = features[:, feature_list.index("year")]
+months = df[:, feature_list.index("month")]
+days = df[:, feature_list.index("day")]
+years = df[:, feature_list.index("year")]
 
 # List and then convert to datetime object
 dates = [
@@ -205,9 +195,9 @@ dates = [datetime.datetime.strptime(date, "%Y-%m-%d") for date in dates]
 true_data = pd.DataFrame(data={"date": dates, "actual": labels})
 
 # Dates of predictions
-months = test_features[:, feature_list.index("month")]
-days = test_features[:, feature_list.index("day")]
-years = test_features[:, feature_list.index("year")]
+months = X_test[:, feature_list.index("month")]
+days = X_test[:, feature_list.index("day")]
+years = X_test[:, feature_list.index("year")]
 
 # Column of dates
 test_dates = [

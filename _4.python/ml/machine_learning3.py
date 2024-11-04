@@ -18,8 +18,9 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 # 設定負號
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
-'''
+
 print("------------------------------------------------------------")  # 60個
+print('------------------------------------------------------------')	#60個
 """
 #學習分類
 from sklearn.datasets import load_breast_cancer
@@ -31,14 +32,88 @@ y = data.target
 X = X[:, :10]
 
 from sklearn.linear_model import LogisticRegression
-model = LogisticRegression()
+logistic_regression = LogisticRegression()
+logistic_regression.fit(X, y)
 
-model.fit(X, y)
-
-y_pred = model.predict(X)
+y_pred = logistic_regression.predict(X)
 
 from sklearn.metrics import accuracy_score
 accuracy_score(y, y_pred)
+"""
+print('------------------------------------------------------------')	#60個
+print('------------------------------------------------------------')	#60個
+
+print('葡萄酒數據集')
+from sklearn.datasets import load_wine
+
+"""
+葡萄酒數據集/紅酒資料庫
+Classes          3
+Sample per class 59/71/48(共178筆資料)
+Samples total    178
+Dimensionality    13
+Features         real, positive
+"""
+
+data = load_wine()
+cc = data.target[[10, 80, 140]]
+print(cc)
+#array([0, 1, 2])
+
+print("data.data.shape, 數據集資料 形狀")
+print(data.data.shape)
+
+print("data.feature_names, 數據集 欄位 的名稱 ")
+print(data.feature_names)
+print("data.target, target 類的名稱, 分類結果, 就是等級 0 1 2")
+print(data.target)
+print("data.target_names, target 類的名稱")
+print(data.target_names)
+print("data.frame")
+print(data.frame)
+""" many
+print("data.DESCR, 數據集的完整描述")
+print(data.DESCR)
+print("data")
+print(data)
+"""
+
+# data.feature_names, 數據集 列 的名稱
+cc = data.data[:, [0]]  # alcohol
+cc = data.data[:, [1]]  # malic_acid
+cc = data.data[:, [2]]  # ash
+cc = data.data[:, [3]]  # alcalinity_of_ash
+cc = data.data[:, [4]]  # magnesium
+cc = data.data[:, [5]]  # total_phenols
+cc = data.data[:, [6]]  # flavanoids
+cc = data.data[:, [7]]  # nonflavanoid_phenols
+cc = data.data[:, [8]]  # proanthocyanins
+cc = data.data[:, [9]]  # color_intensity
+cc = data.data[:, [10]]  # hue
+cc = data.data[:, [11]]  # od280/od315_of_diluted_wines
+cc = data.data[:, [12]]  # proline
+
+print('------------------------------------------------------------')	#60個
+
+# 支持向量機
+
+from sklearn import svm
+from sklearn import datasets
+from sklearn.model_selection import train_test_split
+
+wine = datasets.load_wine()  #load進wine的資料庫
+
+X = wine.data
+y = wine.target
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3) 
+
+clf = svm.SVC(gamma=0.001, decision_function_shape='ovo')
+clf.fit(X_train, y_train) 
+
+dec = clf.decision_function(X_test)
+cc = dec.shape[1]   #n_class * (n_class - 1) / 2 =  3*2/2 = 3
+print(cc)
 
 print('------------------------------------------------------------')	#60個
 
@@ -70,16 +145,16 @@ from sklearn.datasets import load_wine
 
 data = load_wine()
 
-x3 = data.data[:, [0]]
-y3 = data.data[:, [9]]
+x3 = data.data[:, [0]]  # alcohol
+y3 = data.data[:, [9]]  # color_intensity
 
 plt.subplot(121)
 plt.scatter(x3, y3)
-plt.title('wine')
 
 plt.subplot(122)
-plt.hist(y3, bins = 5)
-plt.title('wine')
+plt.hist(y3, bins = 50)
+
+plt.suptitle('wine')
 
 plt.show()
 
@@ -108,7 +183,7 @@ plt.show()
 print(df.corr())
 print(df.describe())
 
-print('------------------------------------------------------------')	#60個
+print('------------------------------')	#30個
 
 print('使用 scatter_matrix')
 from pandas.plotting import scatter_matrix
@@ -120,19 +195,22 @@ _ = scatter_matrix(df.iloc[:, [0, 9, -1]])
 plt.show()
 
 print('------------------------------------------------------------')	#60個
+print('------------------------------------------------------------')	#60個
 
 from sklearn.linear_model import LinearRegression
 
 X = [[10.0], [8.0], [13.0], [9.0], [11.0], [14.0], [6.0], [4.0], [12.0], [7.0], [5.0]]
 y = [8.04, 6.95, 7.58, 8.81, 8.33, 9.96, 7.24, 4.26, 10.84, 4.82, 5.68]
-model = LinearRegression()
-model.fit(X, y) 
-print(model.intercept_) # 切片 
-print(model.coef_) # 傾き
 
-y_pred = model.predict([[0], [1]]) 
+linear_regression = LinearRegression()
+linear_regression.fit(X, y) 
+print(linear_regression.intercept_) # 切片 
+print(linear_regression.coef_) # 傾き
+
+y_pred = linear_regression.predict([[0], [1]]) 
 print(y_pred) # x=0, x=1に対する予測結果
 
+print('------------------------------------------------------------')	#60個
 print('------------------------------------------------------------')	#60個
 
 from sklearn.preprocessing import PolynomialFeatures
@@ -148,6 +226,7 @@ test_y = np.sin(test_X * 2 * np.pi) + np.random.normal(0, 0.2, test_size)
 poly = PolynomialFeatures(6) # 次數は6
 train_poly_X = poly.fit_transform(train_X.reshape(train_size, 1))
 test_poly_X = poly.fit_transform(test_X.reshape(test_size, 1))
+
 model = Ridge(alpha=1.0)
 model.fit(train_poly_X, train_y)
 train_pred_y = model.predict(train_poly_X)
@@ -156,15 +235,18 @@ print(mean_squared_error(train_pred_y, train_y))
 print(mean_squared_error(test_pred_y, test_y))
 
 print('------------------------------------------------------------')	#60個
+print('------------------------------------------------------------')	#60個
 
 from sklearn.linear_model import LogisticRegression
 
 X_train = np.r_[np.random.normal(3, 1, size=50), np.random.normal(-1, 1, size=50)].reshape((100, -1))
 y_train = np.r_[np.ones(50), np.zeros(50)]
-model = LogisticRegression()
-model.fit(X_train, y_train)
-print(model.predict_proba([[0], [1], [2]])[:, 1])
 
+logistic_regression = LogisticRegression()
+logistic_regression.fit(X_train, y_train)
+print(logistic_regression.predict_proba([[0], [1], [2]])[:, 1])
+
+print('------------------------------------------------------------')	#60個
 print('------------------------------------------------------------')	#60個
 
 from sklearn.svm import LinearSVC
@@ -182,6 +264,7 @@ y_pred = model.predict(X_test)
 print(accuracy_score(y_pred, y_test)) # 評価
 
 print('------------------------------------------------------------')	#60個
+print('------------------------------------------------------------')	#60個
 
 from sklearn.svm import SVC
 from sklearn.datasets import make_gaussian_quantiles
@@ -196,6 +279,7 @@ model.fit(X_train, y_train)
 y_pred = model.predict(X_test)
 print(accuracy_score(y_pred, y_test))
 
+print('------------------------------------------------------------')	#60個
 print('------------------------------------------------------------')	#60個
 
 from sklearn.naive_bayes import MultinomialNB
@@ -213,6 +297,7 @@ model.fit(X_train, y_train) # 學習
 print(model.predict([[0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0]])) # 評価
 
 print('------------------------------------------------------------')	#60個
+print('------------------------------------------------------------')	#60個
 
 from sklearn.datasets import load_wine
 from sklearn.ensemble import RandomForestClassifier
@@ -228,9 +313,6 @@ y_pred = model.predict(X_test)
 print(accuracy_score(y_pred, y_test)) # 評価
 
 print('------------------------------------------------------------')	#60個
-"""
-
-
 print("------------------------------------------------------------")  # 60個
 
 from sklearn.neighbors import KNeighborsClassifier
@@ -246,6 +328,7 @@ model.fit(X_train, y_train)  # 學習
 y_pred = model.predict(X_test)
 print(accuracy_score(y_pred, y_test))  # 評価
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 from sklearn.decomposition import TruncatedSVD
@@ -268,6 +351,7 @@ print(model.explained_variance_ratio_)  # 寄与率
 print(sum(model.explained_variance_ratio_))  # 累積寄与率
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 from sklearn.decomposition import NMF
 
@@ -284,6 +368,7 @@ H = model.components_
 print(W)
 print(H)
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 from sklearn.datasets import fetch_20newsgroups
@@ -303,6 +388,7 @@ print(model.components_)  # 各トピックが持つ単語分布
 print(model.transform(tf))  # トピックで表現された文書
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 """ import fail
 from sklearn.datasets import samples_generator
@@ -316,7 +402,7 @@ n_components=n_components)
 model.fit(data)
 print(model.transform(data)) # 変換したデータ
 """
-'''
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 from sklearn.manifold import TSNE
@@ -332,10 +418,10 @@ model = TSNE(n_components=n_components)
 print(model.fit_transform(data.data))
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-# 分類問題における評価方法
+# 學習分類
 from sklearn.datasets import load_breast_cancer
-
 data = load_breast_cancer()
 X = data.data
 y = 1 - data.target
@@ -344,9 +430,9 @@ y = 1 - data.target
 X = X[:, :10]
 from sklearn.linear_model import LogisticRegression
 
-model_lor = LogisticRegression()
-model_lor.fit(X, y)
-y_pred = model_lor.predict(X)
+logistic_regression = LogisticRegression()
+logistic_regression.fit(X, y)
+y_pred = logistic_regression.predict(X)
 
 print("------------------------------")  # 30個
 
@@ -388,11 +474,11 @@ f1_score(y, y_pred)
 print("------------------------------")  # 30個
 
 print("予測確率")
-model_lor.predict_proba(X)
+logistic_regression.predict_proba(X)
 
 print("------------------------------")  # 30個
 
-y_pred2 = (model_lor.predict_proba(X)[:, 1] > 0.1).astype(np.int)
+y_pred2 = (logistic_regression.predict_proba(X)[:, 1] > 0.1).astype(np.int)
 print(confusion_matrix(y, y_pred2))
 
 print(accuracy_score(y, y_pred2))
@@ -403,7 +489,7 @@ print("------------------------------")  # 30個
 print("ROC曲線・AUC")
 from sklearn.metrics import roc_curve
 
-probas = model_lor.predict_proba(X)
+probas = logistic_regression.predict_proba(X)
 fpr, tpr, thresholds = roc_curve(y, probas[:, 1])
 
 print("------------------------------")  # 30個
@@ -442,7 +528,7 @@ from sklearn.metrics import r2_score
 
 print(r2_score(y, y_pred))
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 print("異なるアルゴリズムを利用した場合との比較")
 
@@ -467,7 +553,7 @@ print(r2_score(y, y_svr_pred))  # 決定係数
 print(model_svr_linear.coef_)  # 傾き
 print(model_svr_linear.intercept_)  # 切片
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 print("ハイパーパラメータの設定")
 
@@ -485,6 +571,7 @@ test_y_pred = model_svr_rbf_1.predict(test_X)
 print(mean_squared_error(test_y, test_y_pred))  # 平均二乗誤差
 print(r2_score(test_y, test_y_pred))  # 決定係数
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("学習データと検証データに分割")
@@ -520,7 +607,7 @@ from sklearn.metrics import accuracy_score
 print(accuracy_score(y_train, y_train_pred))
 print(accuracy_score(y_test, y_test_pred))
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 print("交差検証（クロスバリデーション）")
 
@@ -533,6 +620,7 @@ cross_val_score(model_rfc_1, X, y, cv=cv, scoring="accuracy")
 
 cross_val_score(model_rfc_1, X, y, cv=cv, scoring="f1")
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("ハイパーパラメータの探索")
@@ -559,6 +647,7 @@ print(grid_search.best_params_)
 
 grid_search = GridSearchCV(model_rfc_2, param_grid, cv=cv, scoring="f1")
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("機械学習モデルへの適用")
@@ -595,6 +684,7 @@ predicted = model.predict(X_test_tfidf)
 np.mean(predicted == twenty_test.target)
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 # 変換後のベクトルデータを入力として機械学習モデルを適用する
 
@@ -617,8 +707,6 @@ predicted = model.predict(data[n_samples // 2 :])
 print(metrics.classification_report(expected, predicted))
 
 print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
 
 print("產生測試資料 並畫出")
@@ -640,6 +728,7 @@ plt.grid(True)
 
 plt.show()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # StandardScaler
@@ -687,8 +776,7 @@ print(predictions)
 print(knn.score(dx_train, dy_train))
 print(knn.score(dx_test, dy_test))
 
-sys.exit()
-
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 邏輯斯迴歸 (logistic regression)
@@ -707,13 +795,14 @@ dx_train, dx_test, dy_train, dy_test = train_test_split(
     dx_std, dy, test_size=0.2, random_state=0
 )
 
-log_reg = LogisticRegression()
-log_reg.fit(dx_train, dy_train)
-predictions = log_reg.predict(dx_test)
+logistic_regression = LogisticRegression()
+logistic_regression.fit(dx_train, dy_train)
+predictions = logistic_regression.predict(dx_test)
 
-print(log_reg.score(dx_train, dy_train))
-print(log_reg.score(dx_test, dy_test))
+print(logistic_regression.score(dx_train, dy_train))
+print(logistic_regression.score(dx_test, dy_test))
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 線性支援向量機 (Linear SVM)
@@ -737,6 +826,7 @@ predictions = linear_svm.predict(dx_test)
 print(linear_svm.score(dx_train, dy_train))
 print(linear_svm.score(dx_test, dy_test))
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 非線性 SVM
@@ -773,6 +863,7 @@ print(svm.score(dx_train, dy_train))
 print(svm.score(dx_test, dy_test))
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 # k-fold 交叉驗證法
 
@@ -801,6 +892,7 @@ print(val_score.mean().round(3))
 
 print(forest.score(dx_test, dy_test).round(3))
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 產生預測結果報告
@@ -832,10 +924,6 @@ print(forest.score(dx_test, dy_test).round(3))
 print(classification_report(dy_test, predictions))
 
 print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
 
 # 13-1-1 最近 k 鄰數量：n_neighbors
@@ -875,6 +963,7 @@ plt.grid(True)
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 # 13-1-2 用 GridSearchCV 自動搜尋最佳 k 值
 
@@ -897,6 +986,7 @@ print("Best params:", model.best_params_)  # 傳回最佳參數
 print("CV score:", model.best_score_.round(3))
 print("Test score:", model.score(dx_test, dy_test).round(3))
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 13-2-1 邏輯斯迴歸的 C：常規化強度
@@ -921,9 +1011,9 @@ x = [10**n for n in range(-4, 5)]
 x_str = [str(n) for n in x]  # X 軸各數值『名稱』
 
 for c in x:
-    log_reg = LogisticRegression(C=c, max_iter=1000).fit(dx_train, dy_train)
-    cv_scores.append(cross_val_score(log_reg, dx_train, dy_train, cv=5).mean())
-    test_scores.append(log_reg.score(dx_test, dy_test))
+    logistic_regression = LogisticRegression(C=c, max_iter=1000).fit(dx_train, dy_train)
+    cv_scores.append(cross_val_score(logistic_regression, dx_train, dy_train, cv=5).mean())
+    test_scores.append(logistic_regression.score(dx_test, dy_test))
 
 plt.title("Logistic Regression hyperparameter")
 plt.plot(x_str, cv_scores, label="CV score")
@@ -935,6 +1025,7 @@ plt.grid(True)
 
 plt.show()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 13-2-2 線性 SVC 的 C：常規化強度
@@ -973,6 +1064,7 @@ plt.grid(True)
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 # 13-3-1 C, gamma 與 kernel 參數
 
@@ -1000,6 +1092,7 @@ print("Best params: ", model.best_params_)
 print("CV score:", model.best_score_.round(3))
 print("Test score:", model.score(dx_test, dy_test).round(3))
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 13-3-2 使用 RandomizedSearchCV 更快速尋找較適當的參數
@@ -1033,6 +1126,7 @@ print("Best params:", model.best_params_)
 print("CV score:", model.best_score_.round(3))
 print("Test score:", model.score(dx_test, dy_test).round(3))
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 13-4-1 決策樹的最大深度：max_depth
@@ -1075,6 +1169,7 @@ plt.grid(True)
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 from sklearn.datasets import load_breast_cancer
 from sklearn.preprocessing import StandardScaler
@@ -1093,6 +1188,7 @@ model = DecisionTreeClassifier(max_depth=3).fit(dx_train, dy_train)
 
 print(export_text(model, feature_names=feature_names))
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 13-4-2 隨機森林的規模 n_estimators 與亂數種子 random_state
@@ -1134,16 +1230,8 @@ plt.grid(True)
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
-
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
@@ -1152,3 +1240,5 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+
+

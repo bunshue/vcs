@@ -55,7 +55,6 @@ cc = df_feat.head()
 print(cc)
 
 # 將資料分成訓練組及測試組
-
 from sklearn.model_selection import train_test_split
 
 X = df_feat
@@ -65,7 +64,6 @@ X_train, X_test, y_train, y_test = train_test_split(
 )
 
 # 使用KNN演算法
-
 from sklearn.neighbors import KNeighborsClassifier
 
 # 從k值=1開始測試

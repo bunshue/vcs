@@ -26,8 +26,20 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 print("------------------------------------------------------------")  # 60個
 
 df = pd.read_excel("20160101-20190101(Daily)迴歸分析.xlsx")
-# print(df)
+"""
+cc = df.head(10)
+print(cc)
 
+#資料長度
+print(len(df))
+print(len(df["PM25"]))
+
+cc = df.info()
+print(cc)
+
+cc = df.describe()
+print(cc)
+"""
 cc = df.set_index("Date")
 print(cc)
 
@@ -59,7 +71,6 @@ y = df["PM25"].values
 
 # 將資料分成訓練組及測試組
 from sklearn.model_selection import train_test_split
-
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)# 訓練組8成, 測試組2成
 
 # 載入線性迴歸，並訓練模型

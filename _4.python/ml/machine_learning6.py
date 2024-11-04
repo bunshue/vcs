@@ -15,6 +15,7 @@ import random
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns  # 海生, 自動把圖畫得比較好看
 
 font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
@@ -25,7 +26,6 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-
 
 """
 # load_boston 已被移除 但可以試一下 從 warning 訊息
@@ -126,7 +126,6 @@ plot_model(clf, to_file='model.png')
 
 print("------------------------------------------------------------")  # 60個
 
-
 print("學習曲線和驗證曲線")
 
 from sklearn import datasets
@@ -187,8 +186,6 @@ print("------------------------------------------------------------")  # 60個
 from pandas import Series, DataFrame
 
 # 繪圖分析
-import seaborn as sns
-
 sns.set_style("whitegrid")
 
 # 機器學習
@@ -199,7 +196,6 @@ from sklearn.ensemble import RandomForestClassifier  # 隨機森林
 # from sklearn.neighbors import KneighborsClassifier # K近鄰
 from sklearn.naive_bayes import GaussianNB  # 數據集和數據處理
 
-
 print("------------------------------------------------------------")  # 60個
 
 titanic_df = pd.read_csv("data/train.csv")
@@ -208,9 +204,7 @@ print(titanic_df.head())
 print(titanic_df.info())
 print(titanic_df.describe())
 
-
 print("------------------------------------------------------------")  # 60個
-
 
 facet = sns.FacetGrid(titanic_df, hue="Survived", aspect=4)
 facet.map(sns.kdeplot, "Age", shade=True)

@@ -74,7 +74,7 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 # 設定負號
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
-
+'''
 print("------------------------------------------------------------")  # 60個
 
 # 可以使用SSL module把證書驗證改成不需要驗證即可，方法如下:
@@ -8842,5 +8842,30 @@ print(fullname)
 
 """
 
+'''
 
+
+datas = [
+    [92, 81, 81, 92],  # 國文
+    [89, 79, 82, 72],  # 英文
+    [71, 92, 89, 95],  # 數學
+    [88, 89, 98, 77],  # 社會
+    [71, 92, 89, 95],  # 自然
+]
+
+columns = ["國文", "英文", "數學", "社會", "自然"]
+#df = pd.DataFrame(datas.T, columns=columns)
+df = pd.DataFrame(np.array(datas).T, columns=columns)
+print(df)
+print(df["國文"])
+
+import seaborn as sns  # 海生, 自動把圖畫得比較好看
+
+# 使用 df.corr() 先做出各變數間的關係係數，再用heatmap作圖
+sns.heatmap(df.corr())
+
+plt.title("關係係數")
+plt.show()
+
+    
 

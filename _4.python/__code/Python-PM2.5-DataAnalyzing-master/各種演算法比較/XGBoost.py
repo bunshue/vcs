@@ -25,12 +25,22 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 print("------------------------------------------------------------")  # 60個
 
 df = pd.read_excel("20160101-20190101(Daily)XGBoost.xlsx")
+"""
+cc = df.head(10)
+print(cc)
 
-print(df.keys())
-print(df.shape)
+#資料長度
+print(len(df))
+print(len(df["PM25"]))
 
 cc = df.info()
 print(cc)
+
+cc = df.describe()
+print(cc)
+"""
+print(df.keys())
+print(df.shape)
 
 import xgboost as xgb
 from sklearn.metrics import mean_squared_error

@@ -21,6 +21,7 @@ import random
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns  # 海生, 自動把圖畫得比較好看
 
 font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
@@ -124,7 +125,6 @@ print("花瓣寬度")
 print(df["petal width (cm)"].head())
 
 # 箱型圖
-import seaborn as sns
 
 sns.boxplot(data=df)
 plt.title("鳶尾花資料分布箱型圖")
@@ -136,7 +136,6 @@ print(cc)
 
 print("y 各類別資料筆數統計")
 """
-import seaborn as sns
 sns.countplot(x=y)
 plt.title('y 各類別資料筆數統計')
 plt.show()
@@ -200,7 +199,6 @@ print(confusion_matrix(y_test, y_pred))
 
 print("混淆矩陣圖")
 from sklearn.metrics import ConfusionMatrixDisplay
-import matplotlib.pyplot as plt
 
 disp = ConfusionMatrixDisplay(
     confusion_matrix=confusion_matrix(y_test, y_pred), display_labels=ds.target_names
@@ -263,8 +261,6 @@ print(ds.DESCR)
 
 print("資料集的特徵(X)")
 
-import pandas as pd
-
 df = pd.DataFrame(ds.data, columns=ds.feature_names)
 print(df)
 
@@ -323,20 +319,14 @@ print("n_classes: %d" % n_classes)
 print(ds.target_names)
 
 # 是否有含遺失值(Missing value)
-import numpy as np
 
 cc = np.isnan(X).sum()
 print(cc)
 
-
 print("# y 各類別資料筆數統計")
-import pandas as pd
 
 df_y = pd.DataFrame({"code": y})
 df_y["name"] = df_y["code"].map(dict(enumerate(ds.target_names)))
-
-import seaborn as sns
-import matplotlib.pyplot as plt
 
 sns.countplot(x="name", data=df_y)
 plt.xticks(rotation=30)
@@ -394,7 +384,6 @@ print(confusion_matrix(y_test, y_pred))
 
 print("混淆矩陣圖")
 from sklearn.metrics import ConfusionMatrixDisplay
-import matplotlib.pyplot as plt
 
 disp = ConfusionMatrixDisplay(
     confusion_matrix=confusion_matrix(y_test, y_pred), display_labels=ds.target_names
@@ -457,8 +446,6 @@ print(X.shape)
 
 # 繪圖
 
-import matplotlib.pyplot as plt
-
 # 樣本點的形狀
 markers = ["x", "o", "^"]
 
@@ -479,10 +466,7 @@ X, y, centers = make_blobs(
     n_samples=100, centers=3, cluster_std=1, n_features=2, return_centers=True
 )
 print(X.shape)
-
 print(centers)
-
-import matplotlib.pyplot as plt
 
 # 樣本點的形狀
 markers = ["x", "o", "^"]
@@ -558,9 +542,6 @@ print("------------------------------------------------------------")  # 60個
 
 # 鐵達尼號資料清理
 
-import seaborn as sns
-import pandas as pd
-
 # 載入鐵達尼號資料集
 
 df = sns.load_dataset("titanic")
@@ -629,8 +610,6 @@ cc = df.info()
 print(cc)
 
 # 離群值(Outlier) 處理
-
-import matplotlib.pyplot as plt
 
 plt.boxplot(df.age)
 plt.show()
@@ -762,7 +741,6 @@ print("------------------------------------------------------------")  # 60個
 # Scikit-learn 前置處理
 # 遺失值(Missing value)處理
 
-import numpy as np
 from sklearn.impute import SimpleImputer
 
 # 以平均數填補
@@ -774,9 +752,6 @@ imp.fit([[1, 2], [np.nan, 3], [7, 6]])
 X = [[np.nan, 2], [6, np.nan], [7, 6]]
 print(imp.transform(X))
 
-import seaborn as sns
-import pandas as pd
-
 df = sns.load_dataset("titanic")
 
 imp = SimpleImputer(missing_values=pd.NA, strategy="median")
@@ -785,7 +760,6 @@ imp.fit_transform(df.age.values.reshape(-1, 1))
 
 # 多變數(Multivariate)
 
-import numpy as np
 from sklearn.experimental import enable_iterative_imputer
 from sklearn.impute import IterativeImputer
 
@@ -816,8 +790,6 @@ print("------------------------------------------------------------")  # 60個
 
 # 類別變數編碼
 # 測試資料
-
-import pandas as pd
 
 df = pd.DataFrame(
     [
@@ -939,7 +911,6 @@ print("------------------------------------------------------------")  # 60個
 
 # 頻率轉換、合併多個表格
 
-import pandas as pd
 import yfinance as yf
 
 # 下載每日股價
@@ -1106,8 +1077,6 @@ print(kurtosis(df["sepal length (cm)"], axis=0, bias=True))
 # -0.5735679489249765
 
 # 直方圖
-import seaborn as sns
-
 sns.histplot(x="sepal length (cm)", data=df)
 plt.show()
 
@@ -1116,7 +1085,6 @@ sns.kdeplot(x="sepal length (cm)", data=df)
 plt.show()
 
 # 右偏
-import numpy as np
 
 data1 = np.random.normal(0, 1, 500)
 data2 = np.random.normal(5, 1, 100)
@@ -1126,7 +1094,6 @@ pd.DataFrame(data).skew()
 plt.show()
 
 # 右偏
-import numpy as np
 
 data1 = np.random.normal(0, 1, 100)
 data2 = np.random.normal(5, 1, 500)
@@ -1151,7 +1118,6 @@ cc = df.isnull().sum()
 print(cc)
 
 print("y 各類別資料筆數統計")
-import seaborn as sns
 
 sns.countplot(x=y)
 plt.title("y 各類別資料筆數統計")
@@ -1214,7 +1180,6 @@ print(confusion_matrix(y_test, y_pred))
 
 print("混淆矩陣圖")
 from sklearn.metrics import ConfusionMatrixDisplay
-import matplotlib.pyplot as plt
 
 disp = ConfusionMatrixDisplay(
     confusion_matrix=confusion_matrix(y_test, y_pred), display_labels=ds.target_names
@@ -1283,7 +1248,6 @@ print("------------------------------------------------------------")  # 60個
 from sklearn import datasets, preprocessing
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
-import pandas as pd
 
 # 載入資料集
 
@@ -1294,7 +1258,6 @@ print(cc)
 # 2. 資料清理、資料探索與分析
 
 # y 各類別資料筆數統計
-import seaborn as sns
 
 sns.countplot(x="y", data=df)
 plt.show()
@@ -1397,7 +1360,6 @@ print(confusion_matrix(y_test, y_pred))
 
 # 混淆矩陣圖
 from sklearn.metrics import ConfusionMatrixDisplay
-import matplotlib.pyplot as plt
 
 disp = ConfusionMatrixDisplay(confusion_matrix=confusion_matrix(y_test, y_pred))
 disp.plot()
@@ -1415,15 +1377,11 @@ print(classification_report(y_test, y_pred))
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
 # 計程車小費資料集EDA
 
 from sklearn import datasets, preprocessing
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error, r2_score
-import pandas as pd
-import seaborn as sns
-import numpy as np
 
 # 載入資料集
 
@@ -1550,7 +1508,6 @@ print("------------------------------------------------------------")  # 60個
 from sklearn import datasets
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
-import numpy as np
 
 # 測試資料
 data = np.array([[-1, 2], [-0.5, 6], [0, 10], [1, 18]])
@@ -1630,7 +1587,6 @@ print(confusion_matrix(y_test, y_pred))
 
 # 混淆矩陣圖
 from sklearn.metrics import ConfusionMatrixDisplay
-import matplotlib.pyplot as plt
 
 disp = ConfusionMatrixDisplay(confusion_matrix=confusion_matrix(y_test, y_pred))
 disp.plot()
@@ -1653,7 +1609,6 @@ print("------------------------------------------------------------")  # 60個
 from sklearn import datasets
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
-import numpy as np
 
 # 測試資料
 data = np.array([[0, 0], [0, 0], [1, 1], [1, 1]])
@@ -1732,7 +1687,6 @@ print(confusion_matrix(y_test, y_pred))
 
 # 混淆矩陣圖
 from sklearn.metrics import ConfusionMatrixDisplay
-import matplotlib.pyplot as plt
 
 disp = ConfusionMatrixDisplay(confusion_matrix=confusion_matrix(y_test, y_pred))
 disp.plot()
@@ -1754,7 +1708,6 @@ print("------------------------------------------------------------")  # 60個
 # 簡單測試
 
 # 測試資料
-import numpy as np
 
 data = np.array([[1.0, -1.0, 2.0], [2.0, 0.0, 0.0], [0.0, 1.0, -1.0]])
 print(data)
@@ -1835,7 +1788,6 @@ print(confusion_matrix(y_test, y_pred))
 
 # 混淆矩陣圖
 from sklearn.metrics import ConfusionMatrixDisplay
-import matplotlib.pyplot as plt
 
 disp = ConfusionMatrixDisplay(confusion_matrix=confusion_matrix(y_test, y_pred))
 disp.plot()
@@ -1854,7 +1806,6 @@ print("------------------------------------------------------------")  # 60個
 # RobustScaler
 
 # 測試資料
-import numpy as np
 
 data = np.array([[1.0, -2.0, 2.0], [-2.0, 1.0, 3.0], [4.0, 1.0, -2.0]])
 print(data)
@@ -1866,10 +1817,6 @@ cc = scaler.fit_transform(data)
 print(cc)
 
 # 驗證
-
-import matplotlib.pyplot as plt
-import pandas as pd
-
 
 def get_box_plot_data(data, bp):
     rows_list = []
@@ -1967,7 +1914,6 @@ print(confusion_matrix(y_test, y_pred))
 
 # 混淆矩陣圖
 from sklearn.metrics import ConfusionMatrixDisplay
-import matplotlib.pyplot as plt
 
 disp = ConfusionMatrixDisplay(confusion_matrix=confusion_matrix(y_test, y_pred))
 disp.plot()
@@ -2018,14 +1964,10 @@ print(cc)
 print(clf.pvalues_)
 
 # 顯示特徵名稱
-import numpy as np
 
 ds = datasets.load_iris()
 cc = np.array(ds.feature_names)[clf.scores_.argsort()[-2:][::-1]]
 print(cc)
-
-# 另一種寫法
-import pandas as pd
 
 X = pd.DataFrame(ds.data, columns=ds.feature_names)
 clf = SelectKBest(chi2, k=2)
@@ -2087,7 +2029,6 @@ print(confusion_matrix(y_test, y_pred))
 
 # 混淆矩陣圖
 from sklearn.metrics import ConfusionMatrixDisplay
-import matplotlib.pyplot as plt
 
 disp = ConfusionMatrixDisplay(
     confusion_matrix=confusion_matrix(y_test, y_pred), display_labels=ds.target_names
@@ -2205,7 +2146,6 @@ print(confusion_matrix(y_test, y_pred))
 
 # 混淆矩陣圖
 from sklearn.metrics import ConfusionMatrixDisplay
-import matplotlib.pyplot as plt
 
 disp = ConfusionMatrixDisplay(confusion_matrix=confusion_matrix(y_test, y_pred))
 disp.plot()
@@ -2322,7 +2262,6 @@ print(confusion_matrix(y_test, y_pred))
 
 # 混淆矩陣圖
 from sklearn.metrics import ConfusionMatrixDisplay
-import matplotlib.pyplot as plt
 
 disp = ConfusionMatrixDisplay(confusion_matrix=confusion_matrix(y_test, y_pred))
 disp.plot()
@@ -2437,7 +2376,6 @@ print(confusion_matrix(y_test, y_pred))
 
 # 混淆矩陣圖
 from sklearn.metrics import ConfusionMatrixDisplay
-import matplotlib.pyplot as plt
 
 disp = ConfusionMatrixDisplay(confusion_matrix=confusion_matrix(y_test, y_pred))
 disp.plot()
