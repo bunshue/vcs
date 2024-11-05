@@ -1,9 +1,3 @@
-str1 = "  Python is a \nprogramming language.\n\r   "
-
-str2 = str1.replace("\n", "").replace("\r", "")
-print("'" + str2 + "'")
-print("'" + str2.strip() + "'")
-
 print('------------------------------------------------------------')	#60個
 
 import string
@@ -77,51 +71,6 @@ for item in list1:
 
 print("------------------------------------------------------------")  # 60個
 
-import re
-
-phone = "0938-111-4567 # Pyhone Number"
-
-num = re.sub(r"#.*$", "", phone)
-print(num)
-num = re.sub(r"\D", "", phone)
-print(num)
-
-print("------------------------------------------------------------")  # 60個
-
-import re
-
-str1 = "上映日期: 2021-04-21"
-match = re.findall(r"[0-9]{4}\-[0-9]{2}\-[0-9]{2}", str1)
-if match:
-    print(match[0])
-else:
-    print("沒有找到符合的字串!")
-
-print("------------------------------------------------------------")  # 60個
-
-import re
-
-str1 = """Joe's email is joe@gmail.com,  
-Tom's email is tom@yahoo.com"""
-match = re.findall(r"[\w.-]+@[A-Za-z0-9_.-]+", str1)
-if match:
-    print(match[0], match[1])
-else:
-    print("沒有找到符合的字串!")
-
-print("------------------------------------------------------------")  # 60個
-
-import re
-
-str1 = "促銷價: $128.95"
-match = re.findall(r"[0-9]+\.*[0-9]*", str1)
-if match:
-    print(match[0])
-else:
-    print("沒有找到符合的字串!")
-
-print("------------------------------------------------------------")  # 60個
-
 import requests
 from bs4 import BeautifulSoup
 import csv
@@ -141,58 +90,6 @@ with open(csvfile, 'w+', newline='', encoding="utf-8") as fp:
         for cell in row.findAll(["td", "th"]):
             rowList.append(cell.get_text().replace("\n", "").replace("\r", ""))
         writer.writerow(rowList)
-
-print("------------------------------------------------------------")  # 60個
-
-import json
-
-data = {
-   "name": "Joe Chen", 
-   "score": 95, 
-   "tel": "0933123456"         
-}
-
-json_str = json.dumps(data)
-print(json_str)
-data2 = json.loads(json_str)
-print(data2)
-
-print("------------------------------------------------------------")  # 60個
-
-import json
-
-data = {
-   "name": "Joe Chen", 
-   "score": 95, 
-   "tel": "0933123456"        
-}
-
-jsonfile = "tmp_Example.json"
-with open(jsonfile, 'w') as fp:
-    json.dump(data, fp)    
-
-print("------------------------------------------------------------")  # 60個
-
-import json
-
-jsonfile = "tmp_Example.json"
-with open(jsonfile, 'r') as fp:
-    data = json.load(fp)
-json_str = json.dumps(data)    
-print(json_str)  
-
-print("------------------------------------------------------------")  # 60個
-
-import json
-import requests
-
-url = "https://fchart.github.io/json/GoogleBooks.json"
-jsonfile = "tmp_Books.json"
-r = requests.get(url)
-r.encoding = "utf8"
-json_data = json.loads(r.text)
-with open(jsonfile, 'w') as fp:
-    json.dump(json_data, fp)    
 
 print("------------------------------------------------------------")  # 60個
 
@@ -268,8 +165,6 @@ conn.close()  # 關閉資料庫連接
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch05\ch5-3-3a.py
-
 import sqlite3
 
 book = "D0002,MySQL資料庫系統,600"
@@ -288,8 +183,6 @@ conn.close()  # 關閉資料庫連接
 
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch05\ch5-3-3b.py
 
 import sqlite3
 
@@ -394,8 +287,6 @@ db.close()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch05\ch5-4-2b.py
-
 import pymysql
 
 d = {
@@ -424,8 +315,6 @@ db.close()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch05\ch5-4-2c.py
-
 import pymysql
 
 db = pymysql.connect(host="localhost",user="root",password="",database="mybook",charset="utf8")
@@ -448,8 +337,6 @@ db.close()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch05\ch5-4-2d.py
-
 import pymysql
 
 db = pymysql.connect(host="localhost",user="root",password="",database="mybook",charset="utf8")
@@ -469,9 +356,6 @@ db.close()
 
 print("------------------------------------------------------------")  # 60個
 
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch05\ch5-5-3.py
-
 import pymongo
 
 client = pymongo.MongoClient("localhost", 27017)
@@ -484,8 +368,6 @@ for item in collection.find({"gender":"f"}):
     print(item)
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch05\ch5-5-3a.py
 
 import pymongo
 
@@ -505,8 +387,6 @@ result = collection.insert_one(std)
 print("新增1筆: {0}".format(result.inserted_id))
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch05\ch5-5-3b.py
 
 import pymongo
 

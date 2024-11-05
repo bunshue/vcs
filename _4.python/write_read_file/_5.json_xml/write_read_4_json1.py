@@ -37,7 +37,7 @@ import json
 import datetime
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 print('串列 轉 json')
 
 # 串列
@@ -1014,7 +1014,7 @@ print(data)
 
 key = 'bbb'
 print(data[key])
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 data = {
@@ -1109,8 +1109,60 @@ print()
 #access word 'Maple'
 print(data_dict['items']['item'][0]["topping"][6]["type"])
 
+print("------------------------------------------------------------")  # 60個
+
+import json
+
+data = {
+   "name": "Joe Chen", 
+   "score": 95, 
+   "tel": "0933123456"         
+}
+
+json_str = json.dumps(data)
+print(json_str)
+data2 = json.loads(json_str)
+print(data2)
 
 print("------------------------------------------------------------")  # 60個
+
+import json
+
+data = {
+   "name": "Joe Chen", 
+   "score": 95, 
+   "tel": "0933123456"        
+}
+
+jsonfile = "tmp_Example.json"
+with open(jsonfile, 'w') as fp:
+    json.dump(data, fp)    
+
+print("------------------------------------------------------------")  # 60個
+
+import json
+
+jsonfile = "tmp_Example.json"
+with open(jsonfile, 'r') as fp:
+    data = json.load(fp)
+json_str = json.dumps(data)    
+print(json_str)  
+
+print("------------------------------------------------------------")  # 60個
+
+import json
+import requests
+
+url = "https://fchart.github.io/json/GoogleBooks.json"
+jsonfile = "tmp_Books.json"
+r = requests.get(url)
+r.encoding = "utf8"
+json_data = json.loads(r.text)
+with open(jsonfile, 'w') as fp:
+    json.dump(json_data, fp)    
+
+print("------------------------------------------------------------")  # 60個
+
 
 
 print("------------------------------------------------------------")  # 60個

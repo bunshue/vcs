@@ -420,9 +420,67 @@ plt.plot(x_test, regr.predict(x_test), "r")
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+from sklearn import neighbors
+
+X = pd.DataFrame({
+   "耐酸性": [7, 7, 3, 1],
+   "強度":   [7, 4, 4, 4]
+})
+
+y = np.array([0, 0, 1, 1])
+k = 3
+
+knn = neighbors.KNeighborsClassifier(n_neighbors=k)
+knn.fit(X, y)
+
+# 預測新產品[3,7]的分類 1:好 0:壞
+new_tissue = pd.DataFrame(np.array([[3, 7]]),
+                          columns=["耐酸性", "強度"])
+pred = knn.predict(new_tissue)
+print(pred)
+
+print("------------------------------------------------------------")  # 60個
+
+from sklearn import cluster
+
+df = pd.DataFrame({
+   "length": [51, 46, 51, 45, 51, 50, 33,
+              38, 37, 33, 33, 21, 23, 24],
+   "weight": [10.2, 8.8, 8.1, 7.7, 9.8, 7.2, 4.8,
+              4.6, 3.5, 3.3, 4.3, 2.0, 1.0, 2.0]
+})
+k = 3
+
+kmeans = cluster.KMeans(n_clusters=k, random_state=12)
+kmeans.fit(df)
+print(kmeans.labels_)
+
+colmap = np.array(["r", "g", "y"])
+plt.scatter(df["length"], df["weight"], color=colmap[kmeans.labels_])
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
 
 
 print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
+sys.exit()
+
+
 
 
 print("------------------------------------------------------------")  # 60個
