@@ -1,4 +1,5 @@
 """
+線性迴歸2
 迴歸法預測函數
 
 
@@ -23,6 +24,10 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 # 設定負號
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
+
+print("------------------------------------------------------------")  # 60個
+
+import sklearn.linear_model
 
 print("------------------------------------------------------------")  # 60個
 
@@ -75,9 +80,9 @@ X = x.reshape(len(x), 1)
 print(x.shape)
 print(X.shape)
 
-svr_lin.fit(X, y)
+svr_lin.fit(X, y)  # 學習訓練.fit
 
-y_pred = svr_lin.predict(X)
+y_pred = svr_lin.predict(X)  # 預測.predict
 
 plt.scatter(x, y)
 plt.plot(x, y_pred, "r")
@@ -90,17 +95,13 @@ plt.show()
 # 當然可以預測沒出現過的...
 # 注意資料的輸入方式。
 
-print(svr_lin.predict([[6.2]]))
-
-print(svr_lin.predict([[6.2], [7.4], [8]]))
-
+print(svr_lin.predict([[6.2]]))  # 預測.predict
+print(svr_lin.predict([[6.2], [7.4], [8]]))  # 預測.predict
 
 # 方法二
-# 做線性迴歸有很多套件, 但我們這裡用 sklearn 裡的 LinearRegression 來做, 嗯, 線性迴歸。
 
-from sklearn.linear_model import LinearRegression
-
-regr = LinearRegression()
+# 做線性迴歸, 用 sklearn 裡的 LinearRegression 來做線性迴歸
+linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
 
 """
 這裡要注意我們本來的 x 是
@@ -111,13 +112,9 @@ regr = LinearRegression()
 
 X = x.reshape(len(x), 1)
 
-# step 2. fit 學習、訓練
-regr.fit(X, y)
+linear_regression.fit(X, y)  # 學習訓練.fit
 
-# LinearRegression(copy_X=True, fit_intercept=True, n_jobs=1, normalize=False)
-
-# step 3. predict 預測
-y_pred = regr.predict(X)
+y_pred = linear_regression.predict(X)  # 預測.predict
 
 plt.scatter(x, y)
 plt.plot(x, y_pred, "r")
@@ -185,25 +182,25 @@ x_train = x_train.reshape(len(x_train), 1)
 x_test = x_test.reshape(len(x_test), 1)
 
 # 接下來就是召喚 LinearRegression 學習機了。
-# 接著進入 AI 建模三部曲。
-# step 1. 開一台「線性迴歸機」
-from sklearn.linear_model import LinearRegression
+
+# 做線性迴歸, 用 sklearn 裡的 LinearRegression 來做線性迴歸
+linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
 
 # 從現在的線性迴歸, 到等一下的機器學習, 再到之後的神經網路。我們每一次其實就是先開一台空的「函數學習機」, 現在我們要開一台「迴歸機」。
-regr = LinearRegression()
+
 # 因為線性迴歸實在太簡單, 通常也不太需要調校什麼, 我們就可以直接訓練了。訓練就用 fit, 然後把訓練資料餵進去...
 
-# step 2. fit 學習、訓練
-regr.fit(x_train, y_train)
+linear_regression.fit(x_train, y_train)  # 學習訓練.fit
 
 # 然後就學完了!　我們來試用一下。因為我們的學數學習機喜歡一次吃很多資料一起告訴你答案, 所以就算只有一筆也要這樣下指令。
 print("打印一些結果")
-print(regr.predict([[1.3]]))
-print(regr.predict([[2.7], [1.5]]))
+print(linear_regression.predict([[1.3]]))  # 預測.predict
+print(linear_regression.predict([[2.7], [1.5]]))  # 預測.predict
 
 # 我們當然可以餵測試資料進去, 畢竟只有這些我們是有答案、但我們的學習機是還沒學過的。
-# step 3. predict 預測
-y_pred = regr.predict(x_test)
+
+y_pred = linear_regression.predict(x_test)  # 預測.predict
+
 plt.plot(x_test, y_pred, "r")
 # plt.plot(x_test.ravel(), y_pred, 'g')
 plt.scatter(x_test, y_test)
@@ -214,8 +211,8 @@ plt.show()
 # 計算分數
 from sklearn.metrics import mean_squared_error, r2_score
 
-mse_t = mean_squared_error(y_train, regr.predict(x_train))
-r2_t = r2_score(y_train, regr.predict(x_train))
+mse_t = mean_squared_error(y_train, linear_regression.predict(x_train))
+r2_t = r2_score(y_train, linear_regression.predict(x_train))
 
 print("訓練資料")
 print("MSE =", mse_t)
@@ -229,7 +226,7 @@ print(f"MSE = {mse:.4f}")
 print(f"R2 = {r2:.4f}")
 
 plt.scatter(x_train, y_train)
-plt.plot(x_train, regr.predict(x_train), "r")
+plt.plot(x_train, linear_regression.predict(x_train), "r")
 plt.title("訓練結果")
 plt.show()
 
@@ -243,9 +240,9 @@ plt.show()
 
 svr_lin = SVR(kernel="linear", C=1e3)
 X_train = x_train.reshape(len(x_train), 1)
-svr_lin.fit(X_train, y_train)
+svr_lin.fit(X_train, y_train)  # 學習訓練.fit
 
-Y_train = svr_lin.predict(X_train)
+Y_train = svr_lin.predict(X_train)  # 預測.predict
 
 plt.scatter(x_train, y_train)  # 原始訓練資料
 
@@ -256,7 +253,7 @@ plt.show()
 # 用測試資料試試我們預測準不準
 
 X_test = x_test.reshape(len(x_test), 1)
-Y_test = svr_lin.predict(X_test)
+Y_test = svr_lin.predict(X_test)  # 預測.predict
 mse = np.sum((Y_test - y_test) ** 2) / len(y_test)
 print("MSE =", mse)
 
@@ -268,11 +265,13 @@ plt.show()
 # 用訓練資料來 fit 函數 方法二
 # 記得現在我們只用 80% 的資料去訓練。
 
-regr = LinearRegression()
-X_train = x_train.reshape(len(x_train), 1)
-regr.fit(X_train, y_train)
+# 做線性迴歸, 用 sklearn 裡的 LinearRegression 來做線性迴歸
+linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
 
-Y_train = regr.predict(X_train)
+X_train = x_train.reshape(len(x_train), 1)
+linear_regression.fit(X_train, y_train)  # 學習訓練.fit
+
+Y_train = linear_regression.predict(X_train)  # 預測.predict
 
 plt.scatter(x_train, y_train)  # 原始訓練資料
 plt.plot(x_train, Y_train, "r")
@@ -281,7 +280,7 @@ plt.show()
 
 # 用測試資料試試我們預測準不準
 X_test = x_test.reshape(len(x_test), 1)
-Y_test = regr.predict(X_test)
+Y_test = linear_regression.predict(X_test)
 mse = np.sum((Y_test - y_test) ** 2) / len(y_test)
 
 print("MSE =", mse)
@@ -317,16 +316,16 @@ svr_poly = SVR(kernel="poly", C=1e3, degree=4)
 
 X_train = x_train.reshape(len(x_train), 1)
 
-svr_rbf.fit(X_train, y_train)
-svr_lin.fit(X_train, y_train)
-svr_poly.fit(X_train, y_train)
+svr_rbf.fit(X_train, y_train)  # 學習訓練.fit
+svr_lin.fit(X_train, y_train)  # 學習訓練.fit
+svr_poly.fit(X_train, y_train)  # 學習訓練.fit
 
 # 看看訓練成果
 
 X = x.reshape(len(x), 1)
-Y_rbf = svr_rbf.predict(X)
-Y_lin = svr_lin.predict(X)
-Y_poly = svr_poly.predict(X)
+Y_rbf = svr_rbf.predict(X)  # 預測.predict
+Y_lin = svr_lin.predict(X)  # 預測.predict
+Y_poly = svr_poly.predict(X)  # 預測.predict
 
 plt.scatter(x, y)
 plt.plot(x, Y_rbf, label="rbf")
@@ -339,16 +338,15 @@ plt.show()
 
 # 標準線性學
 
-regr_lin = LinearRegression()
+# 做線性迴歸, 用 sklearn 裡的 LinearRegression 來做線性迴歸
+linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
 
 X = x.reshape(len(x), 1)
 
-regr_lin.fit(X, y)
-
-# LinearRegression(copy_X=True, fit_intercept=True, n_jobs=1, normalize=False)
+linear_regression.fit(X, y)  # 學習訓練.fit
 
 plt.scatter(x, y)
-plt.plot(x, regr_lin.predict(X), "r")
+plt.plot(x, linear_regression.predict(X), "r")
 plt.title("標準線性學")
 plt.show()
 
@@ -358,11 +356,9 @@ plt.show()
 
 X_poly = np.array([[k, k**2, k**3, k**4, k**5, k**6] for k in x])
 
-regr_poly = LinearRegression()
+regr_poly = sklearn.linear_model.LinearRegression()  # 函數學習機
 
-regr_poly.fit(X_poly, y)
-
-# LinearRegression(copy_X=True, fit_intercept=True, n_jobs=1, normalize=False)
+regr_poly.fit(X_poly, y)  # 學習訓練.fit
 
 plt.scatter(x, y)
 plt.plot(x, regr_poly.predict(X_poly), "r")
@@ -394,11 +390,9 @@ X_rbf = np.array(
     ]
 )
 
-regr_rbf = LinearRegression()
+regr_rbf = sklearn.linear_model.LinearRegression()  # 函數學習機
 
-regr_rbf.fit(X_rbf, y)
-
-# LinearRegression(copy_X=True, fit_intercept=True, n_jobs=1, normalize=False)
+regr_rbf.fit(X_rbf, y)  # 學習訓練.fit
 
 plt.scatter(x, y)
 
@@ -409,7 +403,7 @@ plt.show()
 
 # 三種一起比較
 
-Y_lin = regr_lin.predict(X)
+Y_lin = linear_regression.predict(X)
 Y_poly = regr_poly.predict(X_poly)
 Y_rbf = regr_rbf.predict(X_rbf)
 

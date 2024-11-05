@@ -34,6 +34,28 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
+print("畫出 mnist 數據集訓練資料的前10筆... 久")
+
+from keras.datasets import mnist
+
+(train_feature, train_label), (test_feature, test_label) = mnist.load_data()
+
+def show_images_labels_predictions(images,labels,start_id,num=10):
+    plt.gcf().set_size_inches(12, 14)
+    if num>25: num=25 
+    for i in range(num):
+        ax=plt.subplot(5,5, i+1)
+        ax.imshow(images[start_id], cmap='binary')  #顯示黑白圖片
+        title = 'label = ' + str(labels[start_id])
+        ax.set_title(title,fontsize=12)  # X,Y軸不顯示刻度
+        ax.set_xticks([]);ax.set_yticks([])        
+        start_id+=1 
+    plt.show()
+
+show_images_labels_predictions(train_feature,train_label,0,10)
+
+print("------------------------------------------------------------")  # 60個
+
 import tensorflow as tf
 from urllib.request import urlretrieve
 import gradio as gr
@@ -101,7 +123,9 @@ print("------------------------------------------------------------")  # 60個
 # https://waternotetw.blogspot.com/2018/03/keras-mnist.html
 
 # 匯入Keras及相關模組
-from keras.utils import np_utils  # 匯入keras.utils因為後續要將label標籤轉換為One-hotencoding
+# 匯入keras.utils因為後續要將label標籤轉換為One-hotencoding
+#from keras.utils import np_utils old 改如下
+from tensorflow.python.keras.utils import np_utils
 
 np.random.seed(10)  # 設定seed可以讓每次需要隨機產生的資料，都有相同的輸出
 
@@ -215,7 +239,8 @@ mnist.close()
 x_train = x_train / 255
 x_test = x_test / 255
 
-from keras.utils import np_utils
+#from keras.utils import np_utils old 改如下
+from tensorflow.python.keras.utils import np_utils
 
 y_train = np_utils.to_categorical(y_train, 10)
 y_test = np_utils.to_categorical(y_test, 10)
@@ -235,8 +260,8 @@ model.compile(loss="mse", optimizer=SGD(learning_rate=0.087), metrics=["accuracy
 
 print("aaaaaaa3")
 
-# model.fit(x_train, y_train, batch_size = 100, epochs = 20)
-model.fit(x_train, y_train, batch_size=2000, epochs=1)
+# model.fit(x_train, y_train, batch_size = 100, epochs = 20)  # 學習訓練.fit
+model.fit(x_train, y_train, batch_size=2000, epochs=1)  # 學習訓練.fit
 
 print(y_train[33])
 

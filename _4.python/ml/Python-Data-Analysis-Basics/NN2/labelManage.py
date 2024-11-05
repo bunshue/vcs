@@ -1,4 +1,5 @@
-from keras.utils import np_utils
+#from keras.utils import np_utils old 改如下
+from tensorflow.python.keras.utils import np_utils
 from keras.datasets import mnist
 
 (train_feature, train_label), (test_feature, test_label) = mnist.load_data()

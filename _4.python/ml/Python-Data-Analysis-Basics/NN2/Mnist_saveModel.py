@@ -1,5 +1,6 @@
 import numpy as np
-from keras.utils import np_utils
+#from keras.utils import np_utils old 改如下
+from tensorflow.python.keras.utils import np_utils
 np.random.seed(10)
 from keras.datasets import mnist
 from keras.models import Sequential

@@ -5,7 +5,8 @@ from keras.models import Sequential
 from keras.layers.core import Dense, Activation
 from keras.layers import Convolution2D, MaxPooling2D, Flatten
 from keras.layers import Dropout
-from keras.utils import np_utils
+#from keras.utils import np_utils old 改如下
+from tensorflow.python.keras.utils import np_utils
 
 batch_size = 100     
 hidden_neurons = 200

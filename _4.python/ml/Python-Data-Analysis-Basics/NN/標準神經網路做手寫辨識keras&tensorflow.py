@@ -154,7 +154,8 @@ y_train[9487]
 等等。因為分類問題基本上都要做這件事, Keras 其實已幫我們準備好套件!
 """
 
-from keras.utils import np_utils
+#from keras.utils import np_utils old 改如下
+from tensorflow.python.keras.utils import np_utils
 
 y_train = np_utils.to_categorical(y_train, 10)
 y_test = np_utils.to_categorical(y_test, 10)
@@ -348,7 +349,9 @@ mnist.close()
 x_train = x_train/255
 x_test = x_test/255
 
-from keras.utils import np_utils
+#from keras.utils import np_utils old 改如下
+from tensorflow.python.keras.utils import np_utils
+
 y_train = np_utils.to_categorical(y_train, 10)
 y_test = np_utils.to_categorical(y_test, 10)
 

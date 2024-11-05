@@ -35,7 +35,8 @@ from keras.layers import Dense, Activation
 from keras.layers import Convolution2D, MaxPooling2D
 from keras.layers import Dropout, Flatten
 
-from keras.utils import np_utils
+#from keras.utils import np_utils old 改如下
+from tensorflow.python.keras.utils import np_utils
 
 input_size = 784
 batch_size = 100     

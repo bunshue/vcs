@@ -21,6 +21,12 @@ f(x)=y
 
 最基本的方式, 一個是 SVM, 一個是 K-Means。
 
+
+做法 :
+1. SVM 函數學習機
+2. 學習訓練.fit
+3: 預測.predict
+
 """
 
 print("------------------------------------------------------------")  # 60個
@@ -85,32 +91,30 @@ plt.grid()
 
 from sklearn.svm import SVC
 
-# step 1: 打開一台 SVM 函數學習機
+# SVM 函數學習機
 clf = SVC()
 # clf = SVC(gamma = 'auto')
 
-# step 2: 學習, 訓練
-clf.fit(x, y)
+clf.fit(x, y)  # 學習訓練.fit
 
-# step 3: 預測
-y_pred = clf.predict(x)
+y_pred = clf.predict(x)  # 預測.predict
 
 print("原始 x 資料 :", x)
 print("原始 y 資料 :", y, "\t=> 目標")
 print("用原始 x 資料預測的結果 :", y_pred)
 
 print("預測結果")
-print(clf.predict([[-0.8, -1]]))
+print(clf.predict([[-0.8, -1]]))  # 預測.predict
 
 xx = -5
 yy = -4
 print("使用(%d, %d)做預測, 結果 :" % (xx, yy), clf.predict([[xx, yy]]))
-print(clf.predict([[xx, yy]]))
+print(clf.predict([[xx, yy]]))  # 預測.predict
 
 xx = yy = np.arange(-7, 7, 0.2)
 X, Y = np.meshgrid(xx, yy)
 P = np.c_[X.ravel(), Y.ravel()]
-z = clf.predict(P)
+z = clf.predict(P)  # 預測.predict
 Z = z.reshape(X.shape)
 
 plt.subplot(232)
@@ -125,7 +129,7 @@ print("------------------------------------------------------------")  # 60個
 # 再來視覺化一下我們的成果
 gd = np.array([[i, j] for i in np.arange(-7, 7, 0.2) for j in np.arange(-7, 7, 0.2)])
 
-gdc = clf.predict(gd)
+gdc = clf.predict(gd)  # 預測.predict
 
 plt.subplot(233)
 # plt.scatter(gd[:, 0], gd[:, 1], s = 100, c = gdc)
@@ -140,7 +144,7 @@ plt.grid()
 # 視覺化成果之一
 x1, x2 = np.meshgrid(np.arange(-7, 7, 0.2), np.arange(-7, 7, 0.2))
 X = np.c_[x1.ravel(), x2.ravel()]
-c = clf.predict(X)
+c = clf.predict(X)  # 預測.predict
 
 plt.subplot(234)
 plt.scatter(X[:, 0], X[:, 1], s=100, c=c)
@@ -153,7 +157,7 @@ plt.grid()
 
 x1, x2 = np.meshgrid(np.arange(-7, 7, 0.2), np.arange(-7, 7, 0.2))
 X = np.c_[x1.ravel(), x2.ravel()]
-Z = clf.predict(X)
+Z = clf.predict(X)  # 預測.predict
 
 z = Z.reshape(x1.shape)
 
@@ -182,7 +186,7 @@ xx = [1, 2, 3, 4]
 yy = [5, 6, 7, 8]
 list(zip(xx, yy))
 
-Z = clf.predict(list(zip(X, Y)))
+Z = clf.predict(list(zip(X, Y)))  # 預測.predict
 
 plt.subplot(236)
 plt.scatter(X, Y, s=50, c=Z)
@@ -226,19 +230,17 @@ plt.grid()
 
 from sklearn.svm import SVC
 
-# step 1: 打開一台 SVM 函數學習機
+# SVM 函數學習機
 clf = SVC()
 # clf = SVC(gamma = 'auto')
 
-# step 2: 學習, 訓練
-clf.fit(x, y)
+clf.fit(x, y)  # 學習訓練.fit
 
-# step 3: 預測
-y_pred = clf.predict(x)
+y_pred = clf.predict(x)  # 預測.predict
 
 # 來看預測的結果
 print("真實目標 :", y)
-print("預測結果 :", clf.predict(x))
+print("預測結果 :", clf.predict(x))  # 預測.predict
 print("預測差值 :", clf.predict(x) - y)
 
 # 這裡看看我們可愛的 SVM, 把我們訓練資料學得怎麼樣。

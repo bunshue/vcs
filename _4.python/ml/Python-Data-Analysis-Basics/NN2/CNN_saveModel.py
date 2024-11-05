@@ -1,4 +1,5 @@
-from keras.utils import np_utils
+#from keras.utils import np_utils old 改如下
+from tensorflow.python.keras.utils import np_utils
 from keras.datasets import mnist
 from keras.models import Sequential
 from keras.layers import Conv2D,MaxPooling2D,Flatten,Dense

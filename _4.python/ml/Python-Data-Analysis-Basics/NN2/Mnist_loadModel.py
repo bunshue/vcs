@@ -35,5 +35,5 @@ model = load_model('Mnist_mlp_model.h5')
 predict_x=model.predict(test_feature_normalize)
 classes_x=np.argmax(predict_x,axis=1)
 
-show_images_labels_predictions(test_feature,test_label,prediction,0)
+show_images_labels_predictions(test_feature,test_label,predict_x,0)
 

@@ -17,7 +17,8 @@ Thank you for supporting!
 import numpy as np
 np.random.seed(1337)  # for reproducibility
 from keras.datasets import mnist
-from keras.utils import np_utils
+#from keras.utils import np_utils old 改如下
+from tensorflow.python.keras.utils import np_utils
 from keras.models import Sequential
 from keras.layers import Dense, Activation, Convolution2D, MaxPooling2D, Flatten
 from keras.optimizers import Adam

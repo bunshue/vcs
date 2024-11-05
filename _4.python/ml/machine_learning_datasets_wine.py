@@ -53,7 +53,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 
 """
 讀入葡萄酒品種分類資料集
@@ -275,10 +275,51 @@ plt.title("畫圖，脯氨酸 vs 酒種")
 plt.show()
 
 #11.結論(2)：脯氨酸，是影響酒種的關鍵因素
-
-
-
+'''
 print("------------------------------------------------------------")  # 60個
+
+
+"""
+#Scikit-learn_Toy datasets
+
+#載入酒類資料集
+
+"""
+
+from sklearn import datasets
+
+ds = datasets.load_wine()
+
+print("資料集說明")
+
+print(ds.DESCR)
+
+print("資料集的特徵(X)")
+
+df = pd.DataFrame(ds.data, columns=ds.feature_names)
+print(df)
+
+print("資料集的目標(Y)")
+print(ds.target)
+
+print("目標(Y)的名稱，即標註(Label)")
+print(ds.target_names)
+
+print("觀察資料集彙總資訊")
+cc = df.info()
+print(cc)
+
+print("描述統計量")
+cc = df.describe()
+print(cc)
+
+print("另一種載入資料集的方法")
+
+X, y = datasets.load_wine(return_X_y=True)
+print(X)
+
+print(y)
+
 
 
 print("------------------------------------------------------------")  # 60個

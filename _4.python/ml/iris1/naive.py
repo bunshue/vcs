@@ -1,3 +1,7 @@
+"""
+單純貝氏分類器 naive Bayes classifier
+"""
+
 from sklearn.datasets import fetch_20newsgroups
 from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import TfidfVectorizer
