@@ -23,22 +23,6 @@ print("Median =", np.median(height))
 print("75th percentile =", np.percentile(height, 75))
 
 
-各種演算法
-
-迴歸類：
-LinearRegression
-SimpleLinearRegression
-SMOreg
-
-決策樹＋迴歸：
-M5P
-
-決策樹：
-RandomTree
-REPTree
-
-
-
 
 import matplotlib.pyplot as plt
 也就是說，我們繪圖實際上用的是matplotlib包的pyplot模塊。
@@ -802,35 +786,10 @@ os.chdir('/content/drive/MyDrive/Colab Notebooks')  # Colab 換路徑使用
     elif k == ord('r'):
         draw = np.zeros((h,w,4), dtype='uint8')
 
-
-#下載台北思源黑體並命名 taipei_sans_tc_beta.ttf
-https://drive.google.com/uc?id=1eGAsTN1HBpJAkeVM57_C7ccp7hbgSz3_&export=download
-https://drive.google.com/uc?id=1eGAsTN1HBpJAkeVM57_C7ccp7hbgSz3_
-
-# 將字型加入 matplotlib
-from matplotlib.font_manager import fontManager
-fontManager.addfont('TaipeiSansTCBeta-Regular.ttf')
-
-plt.rcParams['font.sans-serif'] = ['Taipei Sans TC Beta'] #輸入中文
-
-
 lost
 1. UCI波士頓的房價資料集 (https://archive.ics.uci.edu/ml/machine-learning-databases/housing/)
 Home - UCI Machine Learning Repository
 https://archive.ics.uci.edu/
-
-
-
-隨機森林(Random Forest)
-
-隨機森林(Random Forest)是用隨機選取部分資料的方式 建立多棵決策數，
-每一棵樹都會有自己的預測結果，之後再進行多數決，決定最後的預測結果。
-
-
-集群的應用
-影像壓縮(Image Compression)
-
-利用集群將相近的顏色以質心取代，就可以達到減色的效果，減色後可以較少的位元來儲存或傳輸影像，達到影像壓縮的效益。
 
 
 GET  爬蟲，取得網站的靜態資料

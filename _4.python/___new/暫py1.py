@@ -163,48 +163,6 @@ matplotlib的二维作图及三维作图 ax.plot_wireframe， scatter
 https://www.cnblogs.com/tangjunjun/articles/10854423.html
 
 
-Scikit-learn的基本功能主要被分為六大部分：
-
-1. 分類（Classification），
-2. 回歸（Regression），
-3. 集群(聚類)（Clustering）
-4. 數據降維（Dimensionality reduction）
-5. 模型選擇（Model selection）
-6. 數據前置處理（Preprocessing）。
-
-
-PCA:主成分分析（Principal Component Analysis）
-
-
-1. 載入資料
-2. 資料清理/探索/分析
-3. 進行特徵工程
-4. 資料分割
-5. 選擇演算法
-6. 模型訓練
-7. 模型評估
-
-# 計算準確率
-
-# 混淆矩陣
-
-# 混淆矩陣圖
-不進行特徵縮放
-
-# 計算準確率
-
-
-# 8. 模型評估，暫不進行
-
-# 9. 模型佈署
-
-# 模型存檔
-
-# 10.模型預測
-
-
-
-
 標準化py文件
 
 ABC.txt
@@ -239,20 +197,6 @@ CRUD
 改正（Update，意為「更新」）
 在電腦程式語言中是一連串常見的動作行為
 而其行為通常是為了針對某個特定資源所作出的舉動（例如：建立資料、讀取資料等）
-
-
-ML(2)
-監督式學習	supervised learning
-		分類學習 classification learning
-		回歸學習 regression learning
-無監督學習	un-supervised learning
-		分群 clustering
-
-無監督式學習
-1. 分群 clustering
-2. 分布密度估計 density estimation
-3. 維度約簡 dimensionality reduction
-
 
 
 selenium模組 : 瀏覽器自動化操作

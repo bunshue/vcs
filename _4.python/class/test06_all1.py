@@ -5,22 +5,171 @@ import random
 
 print("------------------------------------------------------------")  # 60個
 
+# 此程式單純類別定義,沒有任何輸出到螢幕的執行結果
+class Company:  # 定義公司類別
+    name = "賺大錢有限公司"
 
-class Myclass:
-    # 文件字串實例, Myclass類別的應用
+    def slogan(self):
+        print("優良品質 創新研發 強力行銷")
+
+print("------------------------------------------------------------")  # 60個
+
+
+class student:
+    def score(self, s1, s2, s3):
+        return (s1 + s2 + s3) / 3
+
+
+print("建立物件 vicky")
+vicky = student()
+# 呼叫score()方法並傳入引數
+average = vicky.score(98, 65, 81)
+print(f"Vicky 平均分數：{average:.3f}")
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("文件字串 docstring 的用法, 要用3引號包起來")
+class MyClass1:
+    """文件字串用法, MyClass1類別的應用"""
 
     def __init__(self, x):
         self.x = x
 
-    def printMe(self):
-        # 文字檔字串實例, Myclass類別內printMe方法的應用
-        print("Hi", self.x)
+    def showInfo(self):
+        """文字字串用法, MyClass1類別內showInfo方法的應用"""
+        print("資料內容 :", self.x)
+
+print("建立物件 myObj")
+myObj = MyClass1(123)
+myObj.showInfo()
+print(myObj.__doc__)  # 列印MyClass1文件字串docstring
+print(myObj.showInfo.__doc__)  # 列印showInfo文件字串docstring
+
+print("------------------------------------------------------------")  # 60個
+
+"""
+class MyClass2:
+    def __init__(self, x):
+        self.x = x
+
+    def __bar(self):
+        print(self.x)
+        print("__bar")
 
 
-data = Myclass(100)
-data.printMe()
-print(data.__doc__)  # 列印Myclass文件字串docstring
-print(data.printMe.__doc__)  # 列印printMe文件字串docstring
+print("建立物件 myObj")
+myObj = MyClass2("hello")
+myObj.__bar()
+
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+
+class MyClass2:
+    color = "red"
+
+    def MyFunction(self):
+        return "Good"
+
+
+print("建立物件 myObj")
+myObj = MyClass2()
+print('預設屬性')
+cc = myObj.color
+print(cc)
+
+print('方法')
+cc = myObj.MyFunction()
+print(cc)
+
+
+print("------------------------------------------------------------")  # 60個
+
+class Name:
+    def __init__(self, name):
+        self.name = name
+
+    def __str__(self):
+        return f"{self.name}"
+
+    __repr__ = __str__
+
+
+a = Name("Hung")
+print(a)
+
+print("------------------------------------------------------------")  # 60個
+
+
+class MyClass3:
+    # __new__()建構物件
+    def __new__(Kind, name):
+        if name != "":
+            print("物件已建構")
+            return object.__new__(Kind)
+        else:
+            print("物件未建構")
+            return None
+
+    # __init__()初始化物件
+    def __init__(self, name):
+        print("物件初始化...")
+        print(name)
+
+
+print("建立物件 x")
+x = MyClass3("")
+
+print("建立物件 y")
+y = MyClass3("Second")
+
+print("------------------------------------------------------------")  # 60個
+
+
+class Book:
+    def setInfo(self, title, price):
+        self.title = title
+        self.price = price
+
+    def showInfo(self):
+        print("書籍名稱:{0:6s}, 價格:{1:4s}元".format(self.title, self.price))
+
+
+print("建立物件 book1")
+book1 = Book()
+book1.setInfo("Python一週速成", "360")
+book1.showInfo()
+
+print("------------------------------------------------------------")  # 60個
+
+#使用內建屬性
+
+class Tom:  # 父類別
+    def __init__(self):
+        self.height1 = 178
+
+
+class Andy(Tom):  # 父類別是Tom
+    def __init__(self):
+        self.height2 = 180
+        super().__init__()
+
+
+class Michael(Tom):  # 父類別是Tom
+    def __init__(self):
+        self.height3 = 185
+        super().__init__()
+
+    def display(self):
+        print("父親Tom的身高:", self.height1, "公分")
+        print("兄弟Andy的身高:", Andy().height2, "公分")
+        print("自己Michael的身高:", m1.height3, "公分")
+
+
+m1 = Michael()
+m1.display()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -54,7 +203,7 @@ class Circle(Geometric):
     def getColor(self):
         return color
 
-
+print("建立物件 A")
 A = Circle(5)
 print("圓形的顏色 : ", A.color)
 print("圓形的半徑 : ", A.getRadius())
@@ -67,23 +216,7 @@ print("圓形的直徑 : ", A.getDiameter())
 print("------------------------------------------------------------")  # 60個
 
 
-class shape:
-    def __init__(self, x, y):
-        self.x = x
-        self.y = y
-
-    def info(self):
-        return (self.x, self.y)
-
-
-a = shape(100, 200)
-b = shape(200, 300)
-print(a.info())
-print(b.info())
-
-print("------------------------------------------------------------")  # 60個
-
-
+# shape類基底類別
 class shape:
     def __init__(self, x, y):
         self.x = x
@@ -97,6 +230,7 @@ class shape:
         self.y += dy
 
 
+# circle類衍生類別(繼承 shape類基底類別)
 class circle(shape):
     def __init__(self, x, y, r):
         super().__init__(x, y)
@@ -106,6 +240,7 @@ class circle(shape):
         return ("圓形", self.x, self.y, self.r)
 
 
+# rectangle類衍生類別(繼承 shape類基底類別)
 class rectangle(shape):
     def __init__(self, x, y, w, h):
         super().__init__(x, y)
@@ -116,10 +251,22 @@ class rectangle(shape):
         return ("矩形", self.x, self.y, self.w, self.h)
 
 
+print("建立物件 a")
 a = shape(100, 200)
+print(a.info())
+
+print("建立物件 b")
 b = shape(200, 300)
+print(b.info())
+
+print("建立物件 c")
 c = circle(100, 200, 50)
+print(c.info())
+
+print("建立物件 d")
 d = rectangle(100, 200, 50, 50)
+print(d.info())
+
 shapes = [a, b, c, d]
 for s in shapes:
     print("info :", s.info())
@@ -242,49 +389,11 @@ class CoffeeMaker:
             print("未開機")
 
 
+print("建立物件 cm1")
 cm1 = CoffeeMaker()  # 咖啡機一號出現了！
 cm1.brewCoffee()  # 直接沖咖啡？能沖才有鬼
 cm1.switchPower()  # 先開電源，正解
 cm1.brewCoffee()  # 順利沖咖啡了！
-
-print("------------------------------------------------------------")  # 60個
-
-
-class Book:
-    # 定義方法一：取得書籍名稱和價格
-    def setInfo(self, title, price):
-        self.title = title
-        self.price = price
-
-    # 定義方法二：輸出書籍名稱和價格
-    def showInfo(self):
-        print("書籍名稱:{0:6s}, 價格:{1:4s}元".format(self.title, self.price))
-
-
-print("建立物件 book1")
-book1 = Book()
-book1.setInfo("Python一週速成", "360")
-book1.showInfo()  # 呼叫方法
-
-print("建立物件 book2")
-book2 = Book()
-book2.setInfo("網路行銷與社群行銷", "520")
-book2.showInfo()
-
-print("------------------------------------------------------------")  # 60個
-
-
-# 宣告類別
-class student:
-    def score(self, s1, s2, s3):
-        return (s1 + s2 + s3) / 3
-
-
-print("建立物件 vicky")
-vicky = student()
-# 呼叫score()方法並傳入引數
-average = vicky.score(98, 65, 81)
-print(f"Vicky 平均分數：{average:.3f}")
 
 print("------------------------------------------------------------")  # 60個
 
@@ -302,16 +411,19 @@ class Score:
     sc = property(getscore, setscore)  # Python 風格
 
 
+print("建立物件 stu")
 stu = Score(50)
 print(stu.getscore())
 stu.score = 100  # 無效
 print(stu.getscore())
 
+print("建立物件 stu")
 stu = Score(0)
 print(stu.getscore())
 stu.setscore(80)
 print(stu.getscore())
 
+print("建立物件 stu")
 stu = Score(0)
 print(stu.sc)
 stu.sc = 80
@@ -319,21 +431,30 @@ print(stu.sc)
 
 print("------------------------------------------------------------")  # 60個
 
-
+print('函數使用物件')
 class Point:
     def __init__(self, x, y):
         self.x, self.y = x, y
 
 
-def adapt_point(point):
-    return "%f;%f" % (point.x, point.y)
+def function_use_object(point):
+    mesg = "物件資訊 :" + "%f;%f" % (point.x, point.y)
+    return mesg
 
 
-p1 = Point(4.0, -3.2)
-p2 = Point(8.0, 1.2)
+print("建立物件 point1")
+point1 = Point(4.0, -3.2)
 
-print(adapt_point(p1))
-print(adapt_point(p2))
+print("建立物件 point2")
+point2 = Point(8.0, 1.2)
+
+print('函數, 傳入一個物件')
+cc = function_use_object(point1)
+print(cc)
+
+print('函數, 傳入一個物件')
+cc = function_use_object(point2)
+print(cc)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -351,10 +472,12 @@ class Point:
         y = self.y + other.y
         return Point(x, y)
 
+print("建立物件 point1")
+point1 = Point(1, 2)
 
-p1 = Point(1, 2)
-p2 = Point(2, 3)
-print(p1 + p2)  # (3, 5)
+print("建立物件 point2")
+point2 = Point(2, 3)
+print(point1 + point2)  # (3, 5)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -385,35 +508,6 @@ print("dddd", badline, repr(line))
 
 
 print("------------------------------------------------------------")  # 60個
-
-
-class Tom:  # 父類別
-    def __init__(self):
-        self.height1 = 178
-
-
-class Andy(Tom):  # 父類別是Tom
-    def __init__(self):
-        self.height2 = 180
-        super().__init__()
-
-
-class Michael(Tom):  # 父類別是Tom
-    def __init__(self):
-        self.height3 = 185
-        super().__init__()
-
-    def display(self):
-        print("父親Tom的身高:", self.height1, "公分")
-        print("兄弟Andy的身高:", Andy().height2, "公分")
-        print("自己Michael的身高:", m1.height3, "公分")
-
-
-m1 = Michael()
-m1.display()
-
-print("------------------------------------------------------------")  # 60個
-
 
 # 父類別
 class Rectangle:
@@ -550,7 +644,6 @@ p.dealFive()
 print("------------------------------------------------------------")  # 60個
 
 
-# 宣告類別
 class Motor:
     def __init__(self):
         # 屬性
@@ -586,32 +679,6 @@ car2.showMessage()
 print("打印物件訊息, 使用__repr__")
 print(car1)
 print(car2)
-
-print("------------------------------------------------------------")  # 60個
-
-
-# 宣告類別
-class newClass:
-    # __new__()建構物件
-    def __new__(Kind, name):
-        if name != "":
-            print("物件已建構")
-            return object.__new__(Kind)
-        else:
-            print("物件未建構")
-            return None
-
-    # __init__()初始化物件
-    def __init__(self, name):
-        print("物件初始化...")
-        print(name)
-
-
-print("建立物件 x")
-x = newClass("")
-
-print("建立物件 y")
-y = newClass("Second")
 
 print("------------------------------------------------------------")  # 60個
 
@@ -665,23 +732,6 @@ for i in Fib(100):
 print("------------------------------------------------------------")  # 60個
 
 
-class newFruit:
-    color = "red"
-
-    def taste(self):
-        return "delicious"
-
-
-apple = newFruit()
-cc = apple.color
-print(cc)
-
-cc = apple.taste()
-print(cc)
-
-print("------------------------------------------------------------")  # 60個
-
-
 class Date:
     def setDate(self, birthday):  # 第一種方法
         self.birthday = birthday
@@ -690,11 +740,14 @@ class Date:
         print("出生年月日:", self.birthday)
 
 
-d1 = Date()  # 第一個物件
-d1.setDate("民國67年7月3日")  # 呼叫方法時傳入字串
-d1.showDate()
-d2 = Date()  # 第二個物件
-d2.setDate([67, 7, 3])  # 呼叫方法時傳入串列
+print("建立物件 date1")
+date1 = Date()  # 第一個物件
+date1.setDate("民國67年7月3日")  # 呼叫方法時傳入字串
+date1.showDate()
+
+print("建立物件 date2")
+date2 = Date()  # 第二個物件
+date2.setDate([67, 7, 3])  # 呼叫方法時傳入串列
 
 print("------------------------------------------------------------")  # 60個
 
@@ -737,9 +790,12 @@ class Student(object):
             print("%s正在觀看島國大電影." % self.name)
 
 
+print("建立物件 stu1")
 stu1 = Student("駱昊", 38)
 stu1.study("Python程序設計")
 stu1.watch_av()
+
+print("建立物件 stu2")
 stu2 = Student("王大錘", 15)
 stu2.study("思想品德")
 stu2.watch_av()
@@ -772,11 +828,13 @@ class Rect(object):
         print("銷毀矩形對象")
 
 
+print("建立物件 rect1")
 rect1 = Rect()
 print(rect1)
 print(rect1.perimeter())
 print(rect1.area())
 
+print("建立物件 rect2")
 rect2 = Rect(3.5, 4.5)
 print(rect2)
 print(rect2.perimeter())
@@ -784,21 +842,6 @@ print(rect2.area())
 
 print("------------------------------------------------------------")  # 60個
 
-
-class Test:
-    def __init__(self, foo):
-        self.__foo = foo
-
-    def __bar(self):
-        print(self.__foo)
-        print("__bar")
-
-
-test = Test("hello")
-test._Test__bar()
-print(test._Test__foo)
-
-print("------------------------------------------------------------")  # 60個
 
 # 父類基底類別
 class Father:
@@ -1094,6 +1137,138 @@ flying_test(p2)
 # 傳入物件測試
 display_test(p1)
 display_test(p2)
+
+print("------------------------------------------------------------")  # 60個
+
+class Wage:
+    def __init__(self, fee=200, hour=80):
+        self.fee = fee
+        self.hour = hour
+
+    def getArea(self):
+        return self.fee * self.hour
+
+
+tom = Wage()
+print("透過init()方法預設值的總薪資: ", tom.getArea(), "元")
+
+jane = Wage(250, 100)
+print("透過init()方法傳入參數的總薪資: ", jane.getArea(), "元")
+
+print("------------------------------------------------------------")  # 60個
+
+class Wage:
+    def __init__(self, h=80):
+        self.__hour = h
+
+    def getHour(self):
+        return self.__hour
+
+    def pay(self):
+        return hour_fee * self.__hour
+
+
+hour_fee = 200
+obj1 = Wage(100)
+print("每小時基本工資為:", hour_fee, "元")
+print("總共工作的小時數:", obj1.getHour())
+print("要付給這位工讀生的薪水總額:", obj1.pay(), "元")
+
+print("------------------------------------------------------------")  # 60個
+
+print("繼承, 子類別方法 覆寫 父類別方法")
+
+
+class Normal:  # 父類別
+    def subsidy(self, income):
+        self.money = income
+        if self.money >= 500000:
+            print("小康家庭補助金額：", end=" ")
+            return 5000
+
+
+class Poor(Normal):  # 子類別
+    def subsidy(self, income):  # 覆寫subsidy方法
+        self.money = income
+        if self.money < 300000:
+            print("中低收入家庭補助金額：", end=" ")
+            return 10000
+
+
+print("建立物件 student1")
+student1 = Normal()  # 建立父類別物件
+print(student1.subsidy(780000), "元")
+
+print("建立物件 student2")
+student2 = Poor()  # 建立子類別物件
+print(student2.subsidy(250000), "元")
+
+print("------------------------------------------------------------")  # 60個
+
+# 多型實作
+class Colleague:  # 父類別
+    def __init__(self, name, income):
+        self.name = name
+        self.income = income
+
+    def bonus(self):
+        return self.income
+
+    def title(self):
+        return self.name
+
+
+class Manager(Colleague):  # 子類別
+    def bonus(self):
+        return self.income * 1.5
+
+
+class Director(Colleague):  # 子類別
+    def bonus(self):
+        return self.income * 1.2
+
+
+print("===============================")
+obj1 = Colleague("一般性員工", 50000)  # 父類別物件
+print("{:8s} 紅利 {:,}".format(obj1.title(), obj1.bonus()))
+
+print("===============================")
+obj2 = Manager("經理級年終", 80000)  # 子類別物件
+print("{:8s} 紅利 {:,}".format(obj2.title(), obj2.bonus()))
+
+print("===============================")
+obj3 = Director("芏任級年終", 65000)  # 子類別物件
+print("{:8s} 紅利 {:,}".format(obj3.title(), obj3.bonus()))
+print("===============================")
+
+print("------------------------------------------------------------")  # 60個
+
+print("繼承, 子類別方法 覆寫 父類別方法")
+# 在子類別呼叫父類別方法—使用super()函式
+
+
+class Weekday:  # 父類別
+    def display(self, pay):
+        self.price = pay
+        print("歡迎來購物")
+        print("購買總金額{:,}".format(self.price))
+
+
+class Holiday(Weekday):  # 子類別
+    def display(self, pay):  # 覆寫display方法
+        super().display(pay)
+        if self.price >= 15000:
+            self.price *= 0.8
+        else:
+            self.price
+        print("8折 {:,}".format(self.price))
+
+
+monday = Weekday()  # 父類別物件
+monday.display(25000)
+
+Christmas = Holiday()  # 子類別物件
+Christmas.display(18000)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1431,8 +1606,37 @@ c1.displayVehicle()  # 呼叫方法
 
 print("------------------------------------------------------------")  # 60個
 
-print("兩棲動物")
+print("多重繼承")
+print('mro() : 決定多重繼承的順序')
 
+class X:
+    pass
+
+
+class Y:
+    pass
+
+
+class Z:
+    pass
+
+
+class A(X, Y):
+    pass
+
+
+class B(Y, Z):
+    pass
+
+
+class M(B, A, Z):
+    pass
+
+print("多重繼承的順序 :", M.mro())
+
+print("------------------------------------------------------------")  # 60個
+
+print("兩棲動物")
 
 class Vehicle:
     def __init__(self):
@@ -1463,7 +1667,7 @@ class Amphibian(WheeledVehicle, WaterVehicle):
 
 amphibian = Amphibian()
 
-Amphibian.mro()
+print("多重繼承的順序 :", Amphibian.mro())
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1628,35 +1832,6 @@ doing(my_monkey)
 print("------------------------------------------------------------")  # 60個
 
 
-# 此程式單純類別定義,沒有任何輸出到螢幕的執行結果
-class Company:  # 定義公司類別
-    name = "賺大錢有限公司"
-
-    def slogan(self):
-        print("優良品質 創新研發 強力行銷")
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-class Wage:
-    def __init__(self, fee=200, hour=80):
-        self.fee = fee
-        self.hour = hour
-
-    def getArea(self):
-        return self.fee * self.hour
-
-
-tom = Wage()
-print("透過init()方法預設值的總薪資: ", tom.getArea(), "元")
-
-jane = Wage(250, 100)
-print("透過init()方法傳入參數的總薪資: ", jane.getArea(), "元")
-
-print("------------------------------------------------------------")  # 60個
-
-
 class Animal:  # 祖父類別
     def feature1(self):
         print("大多數動物能自發且獨立地移動")
@@ -1801,122 +1976,6 @@ alice.feature4()
 
 print("------------------------------------------------------------")  # 60個
 
-print("繼承, 子類別方法 覆寫 父類別方法")
-
-
-class Normal:  # 父類別
-    def subsidy(self, income):
-        self.money = income
-        if self.money >= 500000:
-            print("小康家庭補助金額：", end=" ")
-            return 5000
-
-
-class Poor(Normal):  # 子類別
-    def subsidy(self, income):  # 覆寫subsidy方法
-        self.money = income
-        if self.money < 300000:
-            print("中低收入家庭補助金額：", end=" ")
-            return 10000
-
-
-print("建立物件 student1")
-student1 = Normal()  # 建立父類別物件
-print(student1.subsidy(780000), "元")
-
-print("建立物件 student2")
-student2 = Poor()  # 建立子類別物件
-print(student2.subsidy(250000), "元")
-
-print("------------------------------------------------------------")  # 60個
-
-
-# 多型實作
-class Colleague:  # 父類別
-    def __init__(self, name, income):
-        self.name = name
-        self.income = income
-
-    def bonus(self):
-        return self.income
-
-    def title(self):
-        return self.name
-
-
-class Manager(Colleague):  # 子類別
-    def bonus(self):
-        return self.income * 1.5
-
-
-class Director(Colleague):  # 子類別
-    def bonus(self):
-        return self.income * 1.2
-
-
-print("===============================")
-obj1 = Colleague("一般性員工", 50000)  # 父類別物件
-print("{:8s} 紅利 {:,}".format(obj1.title(), obj1.bonus()))
-
-print("===============================")
-obj2 = Manager("經理級年終", 80000)  # 子類別物件
-print("{:8s} 紅利 {:,}".format(obj2.title(), obj2.bonus()))
-
-print("===============================")
-obj3 = Director("芏任級年終", 65000)  # 子類別物件
-print("{:8s} 紅利 {:,}".format(obj3.title(), obj3.bonus()))
-print("===============================")
-
-print("------------------------------------------------------------")  # 60個
-
-
-class Wage:
-    def __init__(self, h=80):
-        self.__hour = h
-
-    def getHour(self):
-        return self.__hour
-
-    def pay(self):
-        return hour_fee * self.__hour
-
-
-hour_fee = 200
-obj1 = Wage(100)
-print("每小時基本工資為:", hour_fee, "元")
-print("總共工作的小時數:", obj1.getHour())
-print("要付給這位工讀生的薪水總額:", obj1.pay(), "元")
-
-print("------------------------------------------------------------")  # 60個
-
-print("繼承, 子類別方法 覆寫 父類別方法")
-# 在子類別呼叫父類別方法—使用super()函式
-
-
-class Weekday:  # 父類別
-    def display(self, pay):
-        self.price = pay
-        print("歡迎來購物")
-        print("購買總金額{:,}".format(self.price))
-
-
-class Holiday(Weekday):  # 子類別
-    def display(self, pay):  # 覆寫display方法
-        super().display(pay)
-        if self.price >= 15000:
-            self.price *= 0.8
-        else:
-            self.price
-        print("8折 {:,}".format(self.price))
-
-
-monday = Weekday()  # 父類別物件
-monday.display(25000)
-
-Christmas = Holiday()  # 子類別物件
-Christmas.display(18000)
-
-print("------------------------------------------------------------")  # 60個
 
 # __init__()方法呼叫super()
 
@@ -2529,44 +2588,6 @@ print(dog3)
 dog3.Sit()  # 坐
 dog3.Run()  # 跑
 
-
-print("------------------------------------------------------------")  # 60個
-
-print("多重繼承")
-
-
-class X:
-    pass
-
-
-class Y:
-    pass
-
-
-class Z:
-    pass
-
-
-class A(X, Y):
-    pass
-
-
-class B(Y, Z):
-    pass
-
-
-class M(B, A, Z):
-    pass
-
-
-print(M.mro())
-
-# 輸出
-# [<class '__main__.M'>, <class '__main__.B'>,
-#  <class '__main__.A'>, <class '__main__.X'>,
-#  <class '__main__.Y'>, <class '__main__.Z'>,
-#  <class 'object'>]
-
 print("------------------------------------------------------------")  # 60個
 
 
@@ -2659,21 +2680,13 @@ print("Car4 type:", car4.carType())
 
 print("------------------------------------------------------------")  # 60個
 
-
 class Person:
-    def __init__(self, name):
-        self.name = name
+    def interest(self):
+        print("Smiling is my interest")
 
 
-class LawerPerson(Person):
-    def __init__(self, name):
-        self.name = name + "律師"
-
-
-hung = Person("洪錦魁")
-lawer = LawerPerson("洪錦魁")
-print(hung.name)
-print(lawer.name)
+hung = Person()
+hung.interest()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -2697,14 +2710,22 @@ print("------------------------------------------------------------")  # 60個
 
 
 class Person:
-    def interest(self):
-        print("Smiling is my interest")
+    def __init__(self, name):
+        self.name = name
 
 
-hung = Person()
-hung.interest()
+class LawerPerson(Person):
+    def __init__(self, name):
+        self.name = name + "律師"
+
+
+hung = Person("洪錦魁")
+lawer = LawerPerson("洪錦魁")
+print(hung.name)
+print(lawer.name)
 
 print("------------------------------------------------------------")  # 60個
+
 
 
 # 動物類基底類別
@@ -2751,9 +2772,6 @@ my_dog = Dogs("gimi")  # Dogs物件
 doing(my_dog)
 my_monkey = Monkeys("taylor")  # Monkeys物件
 doing(my_monkey)
-
-print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -2811,47 +2829,6 @@ def myFun():
 
 
 myFun()
-
-print("------------------------------------------------------------")  # 60個
-
-
-class Name:
-    def __init__(self, name):
-        self.name = name
-
-
-a = Name("Hung")
-print(a)
-
-print("------------------------------------------------------------")  # 60個
-
-
-class Name:
-    def __init__(self, name):
-        self.name = name
-
-    def __str__(self):
-        return f"{self.name}"
-
-
-a = Name("Hung")
-print(a)
-
-print("------------------------------------------------------------")  # 60個
-
-
-class Name:
-    def __init__(self, name):
-        self.name = name
-
-    def __str__(self):
-        return f"{self.name}"
-
-    __repr__ = __str__
-
-
-a = Name("Hung")
-print(a)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -2955,4 +2932,13 @@ print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
+
+
+"""
+
+
+__xxx 屬性要前綴雙底線
+
+
+"""
 

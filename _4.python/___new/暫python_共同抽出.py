@@ -1,5 +1,19 @@
 
 
+
+#下載台北思源黑體並命名 taipei_sans_tc_beta.ttf
+https://drive.google.com/uc?id=1eGAsTN1HBpJAkeVM57_C7ccp7hbgSz3_&export=download
+https://drive.google.com/uc?id=1eGAsTN1HBpJAkeVM57_C7ccp7hbgSz3_
+
+# 將字型加入 matplotlib
+from matplotlib.font_manager import fontManager
+fontManager.addfont('TaipeiSansTCBeta-Regular.ttf')
+
+plt.rcParams['font.sans-serif'] = ['Taipei Sans TC Beta'] #輸入中文
+
+
+
+
 from pylab import mpl
 mpl.rcParams["font.sans-serif"] = ["Microsoft YaHei"]
 # 指定默認字形：解決plot不能顯示中文問題

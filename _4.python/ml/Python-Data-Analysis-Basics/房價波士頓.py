@@ -5,11 +5,26 @@
 
 """
 
-import sys
-import numpy as np
-import matplotlib.pyplot as plt
+print("------------------------------------------------------------")  # 60個
 
+# 共同
+import os
+import sys
+import time
+import math
+import random
+import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns  # 海生, 自動把圖畫得比較好看
+
+font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+# 設定中文字型及負號正確顯示
+# 設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
+# 設定負號
+plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
@@ -314,11 +329,13 @@ print("回帰問題における評価方法")
 
 """
 from sklearn.datasets import load_boston
+
 data = load_boston()
 X = data.data[:, [5,]]
 y = data.target
 
 from sklearn.linear_model import LinearRegression
+
 model_lir = LinearRegression()
 model_lir.fit(X, y)
 y_pred = model_lir.predict(X)
@@ -326,8 +343,6 @@ y_pred = model_lir.predict(X)
 print(model_lir.coef_)
 print(model_lir.intercept_)
 
-
-import matplotlib.pyplot as plt
 fig, ax = plt.subplots()
 ax.scatter(X, y, color='pink', marker='s', label='data set')
 ax.plot(X, y_pred, color='blue', label='regression curve')
@@ -342,8 +357,6 @@ print("------------------------------------------------------------")  # 60個
 """
 #波士頓房價資料
 
-import seaborn as sns
-
 data_url = "http://lib.stat.cmu.edu/datasets/boston"
 raw_df = pd.read_csv(data_url, sep="\s+", skiprows=22, header=None)
 print(raw_df.head())
@@ -353,10 +366,12 @@ target = raw_df.values[1::2, 2]
 print(target)
 
 from sklearn.datasets import fetch_california_housing
+
 housing = fetch_california_housing()
 print(housing)
 
 from sklearn.datasets import fetch_openml
+
 housing = fetch_openml(name="house_prices", as_frame=True)
 
 print(housing)
@@ -375,5 +390,11 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-
+print("------------------------------------------------------------")  # 60個
 print("作業完成")
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
