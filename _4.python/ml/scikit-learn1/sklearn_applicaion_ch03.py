@@ -21,12 +21,10 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 # 人臉辨識資料集(Labeled Faces in the Wild, LFW)
 
 from sklearn.datasets import fetch_lfw_people
-
-# 載入資料集
 
 ds = fetch_lfw_people(min_faces_per_person=70, resize=0.4)
 
@@ -138,8 +136,6 @@ print("------------------------------------------------------------")  # 60個
 # 新聞資料集
 
 from sklearn.datasets import fetch_20newsgroups
-
-# 載入資料集
 
 # 篩選新聞類別
 categories = [
@@ -473,8 +469,6 @@ from sklearn import datasets, preprocessing
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 
-# 載入資料集
-
 df = pd.read_csv("./data/banking.csv")
 cc = df.head()
 print(cc)
@@ -607,8 +601,6 @@ from sklearn import datasets, preprocessing
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error, r2_score
 
-# 載入資料集
-
 df = sns.load_dataset("tips")
 cc = df.head()
 print(cc)
@@ -723,309 +715,11 @@ print(
 # 8. 模型評估，暫不進行
 
 # 9. 模型佈署，暫不進行
-
+'''
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# Min-max scaling
-
-from sklearn import datasets
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score
-
-# 測試資料
-data = np.array([[-1, 2], [-0.5, 6], [0, 10], [1, 18]])
-print(data)
-
-from sklearn.preprocessing import MinMaxScaler
-
-scaler = MinMaxScaler()
-cc = scaler.fit_transform(data)
-print(cc)
-
-# 驗證
-
-# 計算最大值、最小值
-max1 = np.max(data, axis=0)
-min1 = np.min(data, axis=0)
-print(max1, min1)
-
-# Min-max scaling 計算
-cc = (data - min1) / (max1 - min1)
-print(cc)
-
-# 載入資料集
-
-# X, y = datasets.load_iris(return_X_y=True)
-X, y = datasets.load_breast_cancer(return_X_y=True)
-
-# 3. 不須進行特徵工程
-
-# 4. 資料分割
-
-# 資料分割
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
-
-# 查看陣列維度
-cc = X_train.shape, X_test.shape, y_train.shape, y_test.shape
-print(cc)
-
-# ((455, 30), (114, 30), (455,), (114,))
-
-# 特徵縮放
-
-scaler = MinMaxScaler()
-X_train_std = scaler.fit_transform(X_train)
-X_test_std = scaler.transform(X_test)
-
-# 5. 選擇演算法
-
-from sklearn.linear_model import LogisticRegression
-
-clf = LogisticRegression()
-
-# 6. 模型訓練
-
-clf.fit(X_train_std, y_train)
-"""
-LogisticRegression()
-
-In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook.
-On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.
-"""
-
-# 7. 模型計分
-
-y_pred = clf.predict(X_test_std)
-print(y_pred)
-
-# 計算準確率
-print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
-
-# 98.25%
-
-# 混淆矩陣
-from sklearn.metrics import confusion_matrix
-
-print(confusion_matrix(y_test, y_pred))
-
-# 混淆矩陣圖
-from sklearn.metrics import ConfusionMatrixDisplay
-
-disp = ConfusionMatrixDisplay(confusion_matrix=confusion_matrix(y_test, y_pred))
-disp.plot()
-plt.show()
-
-# 不進行特徵縮放
-
-clf.fit(X_train, y_train)
-y_pred = clf.predict(X_test)
-# 計算準確率
-print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
-
-# 96.49%
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# 標準化(Standardization)
-
-from sklearn import datasets
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score
-
-# 測試資料
-data = np.array([[0, 0], [0, 0], [1, 1], [1, 1]])
-print(data)
-
-from sklearn.preprocessing import StandardScaler
-
-scaler = StandardScaler()
-cc = scaler.fit_transform(data)
-print(cc)
-
-cc = scaler.mean_
-print(cc)
-
-# 驗證
-
-# 計算平均數、標準差
-mean1 = np.mean(data, axis=0)
-std1 = np.std(data, axis=0)
-print(mean1, std1)
-
-# 標準化計算
-cc = (data - mean1) / std1
-print(cc)
-
-# 載入資料集
-
-# X, y = datasets.load_iris(return_X_y=True)
-X, y = datasets.load_breast_cancer(return_X_y=True)
-
-# 3. 不須進行特徵工程
-
-# 4. 資料分割
-
-# 資料分割
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
-
-# 查看陣列維度
-cc = X_train.shape, X_test.shape, y_train.shape, y_test.shape
-print(cc)
-
-# 特徵縮放
-
-scaler = StandardScaler()
-X_train_std = scaler.fit_transform(X_train)
-X_test_std = scaler.transform(X_test)
-
-# 5. 選擇演算法
-
-from sklearn.linear_model import LogisticRegression
-
-clf = LogisticRegression()
-
-# 6. 模型訓練
-
-clf.fit(X_train_std, y_train)
-"""
-LogisticRegression()
-
-In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook.
-On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.
-"""
-
-# 7. 模型計分
-
-y_pred = clf.predict(X_test_std)
-print(y_pred)
-
-# 計算準確率
-print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
-
-# 混淆矩陣
-from sklearn.metrics import confusion_matrix
-
-print(confusion_matrix(y_test, y_pred))
-
-# 混淆矩陣圖
-from sklearn.metrics import ConfusionMatrixDisplay
-
-disp = ConfusionMatrixDisplay(confusion_matrix=confusion_matrix(y_test, y_pred))
-disp.plot()
-plt.show()
-
-# 不進行特徵縮放
-
-clf.fit(X_train, y_train)
-y_pred = clf.predict(X_test)
-# 計算準確率
-print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
-
-# 92.98%
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# MaxAbsScaler
-# 簡單測試
-
-# 測試資料
-
-data = np.array([[1.0, -1.0, 2.0], [2.0, 0.0, 0.0], [0.0, 1.0, -1.0]])
-print(data)
-
-from sklearn.preprocessing import MaxAbsScaler
-
-scaler = MaxAbsScaler()
-cc = scaler.fit_transform(data)
-print(cc)
-
-# 驗證
-
-# 計算最大值
-max1 = np.max(data, axis=0)
-
-# MaxAbsScaler計算
-cc = data / max1
-print(cc)
-
-# 載入資料集
-
-from sklearn import datasets
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score
-
-# X, y = datasets.load_iris(return_X_y=True)
-X, y = datasets.load_breast_cancer(return_X_y=True)
-
-# 3. 不須進行特徵工程
-
-# 4. 資料分割
-
-# 資料分割
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
-
-# 查看陣列維度
-cc = X_train.shape, X_test.shape, y_train.shape, y_test.shape
-print(cc)
-
-# ((455, 30), (114, 30), (455,), (114,))
-
-# 特徵縮放
-
-scaler = MaxAbsScaler()
-X_train_std = scaler.fit_transform(X_train)
-X_test_std = scaler.transform(X_test)
-
-# 5. 選擇演算法
-
-from sklearn.linear_model import LogisticRegression
-
-clf = LogisticRegression()
-
-# 6. 模型訓練
-
-clf.fit(X_train_std, y_train)
-
-"""
-LogisticRegression()
-
-In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook.
-On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.
-"""
-# 7. 模型計分
-
-y_pred = clf.predict(X_test_std)
-print(y_pred)
-
-# 計算準確率
-print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
-
-# 96.49%
-
-# 混淆矩陣
-from sklearn.metrics import confusion_matrix
-
-print(confusion_matrix(y_test, y_pred))
-
-# 混淆矩陣圖
-from sklearn.metrics import ConfusionMatrixDisplay
-
-disp = ConfusionMatrixDisplay(confusion_matrix=confusion_matrix(y_test, y_pred))
-disp.plot()
-plt.show()
-
-# 不進行特徵縮放
-
-clf.fit(X_train, y_train)
-y_pred = clf.predict(X_test)
-# 計算準確率
-print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
+'''
 
 # RobustScaler
 
@@ -1079,79 +773,8 @@ print(median1, scale1)
 cc = (data - median1) / scale1
 print(cc)
 
-# 載入資料集
+'''
 
-from sklearn import datasets
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score
-
-# X, y = datasets.load_iris(return_X_y=True)
-X, y = datasets.load_breast_cancer(return_X_y=True)
-
-# 3. 不須進行特徵工程
-
-# 4. 資料分割
-
-# 資料分割
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
-
-# 查看陣列維度
-cc = X_train.shape, X_test.shape, y_train.shape, y_test.shape
-print(cc)
-
-# 特徵縮放
-
-scaler = RobustScaler()
-X_train_std = scaler.fit_transform(X_train)
-X_test_std = scaler.transform(X_test)
-
-# 5. 選擇演算法
-
-from sklearn.linear_model import LogisticRegression
-
-clf = LogisticRegression()
-
-# 6. 模型訓練
-
-clf.fit(X_train_std, y_train)
-"""
-LogisticRegression()
-
-In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook.
-On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.
-"""
-
-# 7. 模型計分
-
-y_pred = clf.predict(X_test_std)
-print(y_pred)
-
-# 計算準確率
-print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
-
-# 95.61%
-
-# 混淆矩陣
-from sklearn.metrics import confusion_matrix
-
-print(confusion_matrix(y_test, y_pred))
-
-# 混淆矩陣圖
-from sklearn.metrics import ConfusionMatrixDisplay
-
-disp = ConfusionMatrixDisplay(confusion_matrix=confusion_matrix(y_test, y_pred))
-disp.plot()
-plt.show()
-
-# 不進行特徵縮放
-
-clf.fit(X_train, y_train)
-y_pred = clf.predict(X_test)
-
-# 計算準確率
-print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
-
-# 94.74%
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1164,8 +787,6 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 from sklearn.feature_selection import SelectKBest
 from sklearn.feature_selection import chi2
-
-# 載入資料集
 
 X, y = datasets.load_iris(return_X_y=True)
 print(X.shape)
@@ -1262,7 +883,6 @@ plt.show()
 
 # 使用全部特徵
 
-# 載入資料集
 X, y = datasets.load_iris(return_X_y=True)
 
 # 資料分割
@@ -1299,8 +919,6 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 from sklearn.feature_selection import SelectPercentile, chi2
-
-# 載入資料集
 
 X, y = datasets.load_digits(return_X_y=True)
 print(X.shape)
@@ -1377,7 +995,6 @@ plt.show()
 
 # 使用全部特徵
 
-# 載入資料集
 X, y = datasets.load_digits(return_X_y=True)
 
 # 資料分割
@@ -1493,7 +1110,6 @@ plt.show()
 
 # 使用全部特徵
 
-# 載入資料集
 X, y = datasets.load_digits(return_X_y=True)
 
 # 資料分割
@@ -1607,7 +1223,6 @@ plt.show()
 
 # 使用全部特徵
 
-# 載入資料集
 X, y = datasets.load_iris(return_X_y=True)
 
 # 資料分割

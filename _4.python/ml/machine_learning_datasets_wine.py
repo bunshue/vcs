@@ -30,6 +30,14 @@ import sklearn.model_selection as ms
 train_x, test_x, train_y, test_y = ms.train_test_split(wine.data, wine.target, test_size=0.2)
 
 
+葡萄酒數據集/紅酒資料庫
+Classes          3
+Sample per class 59/71/48(共178筆資料)
+Samples total    178
+Dimensionality    13
+Features         real, positive
+
+
 """
 
 print("------------------------------------------------------------")  # 60個
@@ -53,7 +61,227 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-'''
+
+from sklearn import datasets
+from sklearn.datasets import load_wine
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print('葡萄酒數據集')
+
+data = load_wine()
+cc = data.target[[10, 80, 140]]
+print(cc)
+#array([0, 1, 2])
+
+print("data.data.shape, 數據集資料 形狀")
+print(data.data.shape)
+
+print("data.feature_names, 數據集 欄位 的名稱 ")
+print(data.feature_names)
+print("data.target, target 類的名稱, 分類結果, 就是等級 0 1 2")
+print(data.target)
+print("data.target_names, target 類的名稱")
+print(data.target_names)
+print("data.frame")
+print(data.frame)
+""" many
+print("data.DESCR, 數據集的完整描述")
+print(data.DESCR)
+print("data")
+print(data)
+"""
+
+# data.feature_names, 數據集 列 的名稱
+cc = data.data[:, [0]]  # alcohol
+cc = data.data[:, [1]]  # malic_acid
+cc = data.data[:, [2]]  # ash
+cc = data.data[:, [3]]  # alcalinity_of_ash
+cc = data.data[:, [4]]  # magnesium
+cc = data.data[:, [5]]  # total_phenols
+cc = data.data[:, [6]]  # flavanoids
+cc = data.data[:, [7]]  # nonflavanoid_phenols
+cc = data.data[:, [8]]  # proanthocyanins
+cc = data.data[:, [9]]  # color_intensity
+cc = data.data[:, [10]]  # hue
+cc = data.data[:, [11]]  # od280/od315_of_diluted_wines
+cc = data.data[:, [12]]  # proline
+
+print('------------------------------------------------------------')	#60個
+print('------------------------------------------------------------')	#60個
+
+# 支持向量機
+
+from sklearn import svm
+from sklearn.model_selection import train_test_split
+
+wine = datasets.load_wine()
+
+X = wine.data
+y = wine.target
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3) 
+
+clf = svm.SVC(gamma=0.001, decision_function_shape='ovo')
+clf.fit(X_train, y_train) 
+
+dec = clf.decision_function(X_test)
+cc = dec.shape[1]   #n_class * (n_class - 1) / 2 =  3*2/2 = 3
+print(cc)
+
+print('------------------------------------------------------------')	#60個
+print('------------------------------------------------------------')	#60個
+
+data = load_wine()
+
+X = data.data[:, [0, 9]]
+
+from sklearn.cluster import KMeans
+n_clusters = 3
+model = KMeans(n_clusters = n_clusters)
+
+pred = model.fit_predict(X)
+
+fig, ax = plt.subplots()
+ax.scatter(X[pred == 0, 0], X[pred == 0, 1], color = 'red', marker = 's', label = 'Label1')
+ax.scatter(X[pred == 1, 0], X[pred == 1, 1], color = 'blue', marker = 's', label = 'Label2')
+ax.scatter(X[pred == 2, 0], X[pred == 2, 1], color = 'green', marker = 's', label = 'Label3')
+ax.scatter(model.cluster_centers_[:, 0], model.cluster_centers_[:, 1], s = 200, color = 'yellow', marker = "*", label = "center")
+ax.legend()
+plt.title('wine')
+
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+print('------------------------------------------------------------')	#60個
+
+data = load_wine()
+
+x3 = data.data[:, [0]]  # alcohol
+y3 = data.data[:, [9]]  # color_intensity
+
+plt.subplot(121)
+plt.scatter(x3, y3)
+
+plt.subplot(122)
+plt.hist(y3, bins = 50)
+
+plt.suptitle('wine')
+
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+print('------------------------------------------------------------')	#60個
+
+data = load_wine()
+df_X = pd.DataFrame(data.data, columns = data.feature_names)
+print(df_X.head())
+
+df_y = pd.DataFrame(data.target, columns = ["kind(target)"])
+print(df_y.head())
+
+df = pd.concat([df_X, df_y], axis = 1)
+print(df.head())
+
+plt.subplot(121)
+plt.hist(df.loc[:, "alcohol"])
+
+plt.subplot(122)
+plt.boxplot(df.loc[:, "alcohol"])
+
+plt.show()
+
+print(df.corr())
+print(df.describe())
+
+print('------------------------------')	#30個
+
+print('使用 scatter_matrix')
+from pandas.plotting import scatter_matrix
+
+_ = scatter_matrix(df, figsize = (15, 15))
+plt.show()
+
+_ = scatter_matrix(df.iloc[:, [0, 9, -1]])
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+
+# データ読み込み
+data = load_wine()
+X_train, X_test, y_train, y_test = train_test_split(data.data, data.target, test_size=0.3)
+model = RandomForestClassifier() 
+model.fit(X_train, y_train) # 學習
+y_pred = model.predict(X_test) 
+print(accuracy_score(y_pred, y_test)) # 評価
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# k-fold 交叉驗證法
+
+from sklearn.model_selection import train_test_split, cross_val_score
+from sklearn.preprocessing import StandardScaler
+from sklearn.ensemble import RandomForestClassifier
+
+dx, dy = load_wine(return_X_y=True)
+dx_std = StandardScaler().fit_transform(dx)
+dx_train, dx_test, dy_train, dy_test = train_test_split(
+    dx_std, dy, test_size=0.2, random_state=0
+)
+
+forest = RandomForestClassifier()
+
+forest.fit(dx_train, dy_train)
+
+val_score = cross_val_score(forest, dx_train, dy_train, cv=5)
+
+predictions = forest.predict(dx_test)
+
+print(forest.score(dx_train, dy_train).round(3))
+
+print(val_score.mean().round(3))
+
+print(forest.score(dx_test, dy_test).round(3))
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 產生預測結果報告
+
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import classification_report
+
+dx, dy = load_wine(return_X_y=True)
+
+dx_std = StandardScaler().fit_transform(dx)
+
+dx_train, dx_test, dy_train, dy_test = train_test_split(
+    dx_std, dy, test_size=0.2, random_state=0
+)
+
+forest = RandomForestClassifier()
+
+forest.fit(dx_train, dy_train)
+
+predictions = forest.predict(dx_test)
+
+print(forest.score(dx_train, dy_train).round(3))
+
+print(forest.score(dx_test, dy_test).round(3))
+
+print(classification_report(dy_test, predictions))
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 """
 讀入葡萄酒品種分類資料集
@@ -275,23 +503,13 @@ plt.title("畫圖，脯氨酸 vs 酒種")
 plt.show()
 
 #11.結論(2)：脯氨酸，是影響酒種的關鍵因素
-'''
+
 print("------------------------------------------------------------")  # 60個
-
-
-"""
-#Scikit-learn_Toy datasets
-
-#載入酒類資料集
-
-"""
-
-from sklearn import datasets
+print("------------------------------------------------------------")  # 60個
 
 ds = datasets.load_wine()
 
 print("資料集說明")
-
 print(ds.DESCR)
 
 print("資料集的特徵(X)")
@@ -317,10 +535,7 @@ print("另一種載入資料集的方法")
 
 X, y = datasets.load_wine(return_X_y=True)
 print(X)
-
 print(y)
-
-
 
 print("------------------------------------------------------------")  # 60個
 

@@ -134,6 +134,8 @@ plt.scatter(x[:, 0], x[:, 1], c=clf.labels_, cmap="Paired")
 plt.contourf(xm, ym, Z, alpha=0.3, cmap="Paired")
 plt.title("使用Mean Shift")
 
+plt.show()
+
 print("------------------------------------------------------------")  # 60個
 
 
@@ -173,7 +175,6 @@ plt.title("訓練好的結果3")
 plt.subplot(235)
 plt.scatter(gd[:, 0], gd[:, 1], s=50, cmap=plt.cm.Set1, c=gdc)
 plt.title("訓練好的結果4")
-
 
 # 畫完整分類
 # 和以前一樣, 未來新的資料進來, 我們訓練好的也可以再做分類。
@@ -239,8 +240,8 @@ print(clf.labels_)
 # 畫出分類結果
 plt.scatter(x[:, 0], x[:, 1], c=clf.labels_)
 plt.title("分類結果")
-plt.show()
 
+plt.show()
 
 # 看來還不錯! 我們仿之前 SVC 中介紹的畫法, 看 KMeans 到底怎麼分的。
 x1, y1 = np.meshgrid(np.arange(-3, 3, 0.02), np.arange(-4, 4, 0.02))
@@ -248,8 +249,8 @@ Z = clf.predict(np.c_[x1.ravel(), y1.ravel()])  # 預測.predict
 Z = Z.reshape(x1.shape)
 plt.scatter(x[:, 0], x[:, 1], s=70, c=clf.labels_)
 plt.contourf(x1, y1, Z, alpha=0.3)
-plt.show()
 
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 

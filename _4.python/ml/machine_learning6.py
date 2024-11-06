@@ -100,61 +100,6 @@ plot_model(clf, to_file='model.png')
 
 print("------------------------------------------------------------")  # 60個
 
-print("學習曲線和驗證曲線")
-
-from sklearn import datasets
-from sklearn.ensemble import RandomForestClassifier
-
-
-def draw_curve(params, train_score, test_score):
-    train_mean = np.mean(train_score, axis=1)  # 均值
-    train_std = np.std(train_score, axis=1)  # 標準差
-    test_mean = np.mean(test_score, axis=1)
-    test_std = np.std(test_score, axis=1)
-    plt.plot(params, train_mean, "--", color="g", label="training")
-    plt.fill_between(
-        params, train_mean + train_std, train_mean - train_std, alpha=0.2, color="g"
-    )  # 以半透明方式繪圖區域
-    plt.plot(params, test_mean, "o-", color="b", label="testing")
-    plt.fill_between(
-        params, test_mean + test_std, test_mean - test_std, alpha=0.2, color="b"
-    )
-    plt.grid()  # 顯示網格
-    plt.legend()  # 顯示圖例文字
-    plt.ylim(0.5, 1.05)  # 設定y軸顯示範圍
-    plt.show()
-
-
-from sklearn.model_selection import learning_curve
-
-breast_cancer = datasets.load_breast_cancer()
-X = breast_cancer.data
-y = breast_cancer.target
-
-clf = RandomForestClassifier()
-params = np.linspace(0.1, 1.0, 10)  # 從0.1到1，切分成10份
-train_sizes, train_score, test_score = learning_curve(
-    clf, X, y, train_sizes=params, cv=10, scoring="accuracy"
-)  # 10折交叉驗證
-draw_curve(params, train_score, test_score)
-
-
-from sklearn.model_selection import validation_curve
-
-params = [10, 20, 40, 80, 160, 240]
-train_score, test_score = validation_curve(
-    RandomForestClassifier(),
-    X,
-    y,
-    param_name="n_estimators",
-    cv=10,
-    scoring="accuracy",
-    param_range=params,
-)
-draw_curve(params, train_score, test_score)
-
-print("------------------------------------------------------------")  # 60個
-
 # 數據集和數據處理
 
 from pandas import Series, DataFrame

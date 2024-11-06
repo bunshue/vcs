@@ -121,39 +121,6 @@ np.set_printoptions(precision=3)
 print(binaryX[0:5, :])
 
 print("------------------------------------------------------------")  # 60個
-
-print("線性回歸的範例 1")
-
-from sklearn.linear_model import LinearRegression
-
-lm = LinearRegression()
-X = [[1], [2], [3], [4], [5]]
-y = [88, 72, 90, 76, 92]
-lm.fit(X, y)
-print("第6次考試分數：", lm.predict([[6]]))
-
-print("線性回歸的範例 2")
-
-from sklearn.linear_model import LinearRegression
-
-lm = LinearRegression()
-X = [[1], [2], [3], [4], [5]]
-y = [1, 4, 9, 16, 25]
-lm.fit(X, y)
-
-xx = np.linspace(0, 10, 11)
-yy = np.linspace(0, 10, 11)
-for i in range(11):
-    print(i)
-    print("第", i, "項", lm.predict([[i]]))
-    xx[i] = i
-    yy[i] = lm.predict([[i]])
-
-plt.plot(X, y, "ro-")
-plt.plot(xx, yy, "go:")
-
-plt.show()
-
 print("------------------------------------------------------------")  # 60個
 
 from scipy.linalg import norm
@@ -219,7 +186,8 @@ from sklearn.datasets import make_blobs
 
 x, y = make_blobs(n_samples=500, centers=3, n_features=2, random_state=0)
 plt.scatter(x[:, 0], x[:, 1], c=y)
-plt.show()
+
+#plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -270,20 +238,18 @@ print("------------------------------------------------------------")  # 60個
 
 from sklearn import datasets
 
-np.random.seed(3)  # 設計隨機數種子
 x, y = datasets.make_regression(n_features=1, noise=20)
 plt.xlim(-3, 3)
 plt.ylim(-150, 150)
 plt.scatter(x, y)
 
-plt.show()
+#plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
 from sklearn import datasets
 from sklearn.model_selection import train_test_split
 
-np.random.seed(3)  # 設計隨機數種子
 x, y = datasets.make_regression(n_features=1, noise=20)
 x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2)
 
@@ -293,63 +259,11 @@ plt.scatter(x_train, y_train, label="訓練數據")
 plt.scatter(x_test, y_test, label="測試數據")
 plt.legend()
 
-plt.show()
+#plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
 from sklearn import datasets
-from sklearn.model_selection import train_test_split
-from sklearn import linear_model
-from sklearn.metrics import r2_score
-
-np.random.seed(3)  # 設計隨機數種子
-x, y = datasets.make_regression(n_features=1, noise=20)
-x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2)
-
-regression = linear_model.LinearRegression()  # 建立線性模組物件
-regression.fit(x_train, y_train)
-print(f"斜率  = {regression.coef_[0].round(2)}")
-print(f"截距  = {regression.intercept_.round(2)}")
-
-print("------------------------------------------------------------")  # 60個
-
-from sklearn import datasets
-from sklearn.model_selection import train_test_split
-from sklearn import linear_model
-from sklearn.metrics import r2_score
-
-np.random.seed(3)  # 設計隨機數種子
-x, y = datasets.make_regression(n_features=1, noise=20)
-x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2)
-
-regression = linear_model.LinearRegression()  # 建立線性模組物件
-regression.fit(x_train, y_train)
-print(f"斜率  = {regression.coef_[0].round(2)}")
-print(f"截距  = {regression.intercept_.round(2)}")
-
-y_pred = regression.predict(x_test)
-plt.xlim(-3, 3)
-plt.ylim(-150, 150)
-plt.scatter(x_train, y_train, label="訓練數據")
-plt.scatter(x_test, y_test, label="測試數據")
-# 使用測試數據 x_test 和此 x_test 預測的 y_pred 繪製迴歸直線
-plt.plot(x_test, y_pred, color="red")
-
-# 將測試的 y 與預測的 y_pred 計算決定係數
-r2 = r2_score(y_test, y_pred)
-print(f"決定係數 = {r2.round(2)}")
-
-plt.legend()
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-from sklearn import datasets
-
-np.random.seed(3)  # 設定隨機數種子值
-
-# np.random.seed(5)                                       # 設定隨機數種子值
 
 # 建立 300 個點, n_features = 2
 data, label = datasets.make_blobs(n_samples=300, n_features=2)
@@ -359,14 +273,13 @@ plt.scatter(data[:, 0], data[:, 1], marker="o", edgecolor="black")
 
 plt.title("無監督學習")
 
-plt.show()
+#plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
 from sklearn import datasets
 from sklearn import cluster
 
-np.random.seed(3)  # 設定隨機數種子值
 # 建立 300 個點, n_features = 2
 data, label = datasets.make_blobs(n_samples=300, n_features=2)
 
@@ -380,7 +293,6 @@ print("------------------------------------------------------------")  # 60個
 from sklearn import datasets
 from sklearn import cluster
 
-np.random.seed(3)  # 設定隨機數種子值
 # 建立 300 個點, n_features = 2
 data, label = datasets.make_blobs(n_samples=300, n_features=2)
 
@@ -394,7 +306,8 @@ plt.scatter(data[:, 0], data[:, 1], marker="o", c=e.labels_)
 # 用紅色標記群集中心
 plt.scatter(e.cluster_centers_[:, 0], e.cluster_centers_[:, 1], marker="*", color="red")
 plt.title("無監督學習")
-plt.show()
+
+#plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -436,7 +349,7 @@ print(f"分類 : {label}")
 plt.scatter(data[:, 0], data[:, 1], c=label, cmap="bwr")
 plt.grid(True)
 
-plt.show()
+#plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -459,7 +372,7 @@ plt.subplot(122)
 plt.scatter(d_sta[:, 0], d_sta[:, 1], c=label, cmap="bwr")
 plt.grid(True)
 
-plt.show()
+#plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -657,7 +570,7 @@ plt.scatter(data[:, 0], data[:, 1], marker="o", edgecolor="black")
 
 plt.title("無監督學習", fontsize=16)
 
-plt.show()
+#plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -695,8 +608,9 @@ plt.scatter(data[:, 0], data[:, 1], marker="o", c=e.labels_)
 plt.scatter(e.cluster_centers_[:, 0], e.cluster_centers_[:, 1], marker="*", color="red")
 plt.title("無監督學習", fontsize=16)
 
-plt.show()
+#plt.show()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 from keras.models import Sequential
@@ -705,9 +619,7 @@ from keras.utils import to_categorical
 from sklearn.preprocessing import StandardScaler
 from sklearn import preprocessing
 
-np.random.seed(7)  # 固定亂數種子
-
-df = pd.read_csv("iris.csv")
+df = pd.read_csv("data/iris.csv")
 
 label_encoder = preprocessing.LabelEncoder()
 df["target"] = label_encoder.fit_transform(df["target"])
@@ -744,136 +656,6 @@ Y_target = dataset[:, 4][120:].astype(int)
 print(Y_target)
 
 print("------------------------------------------------------------")  # 60個
-
-# 線性回歸
-
-print("------------------------------------------------------------")  # 60個
-
-from sklearn import linear_model
-
-# x = np.array([[22], [26], [23], [28], [27], [32], [30]])      # 溫度
-# y = np.array([[15], [35], [21], [62], [48], [101], [86]])     # 飲料銷售數量
-# x = np.array([0.0, 1.0, 2.0, 3.0, 4.0, 5.0], dtype = float)
-# y = np.array([0.0, 1.0, 2.0, 5.0, 4.0, 5.0], dtype = float)
-xs = np.array([[0.0], [1.0], [2.0], [3.0], [4.0], [5.0]], dtype=float)
-ys = np.array([[0.0], [1.0], [2.0], [5.0], [4.0], [5.0]], dtype=float)
-
-regression = linear_model.LinearRegression()  # 建立線性模組物件
-regression.fit(xs, ys)
-a = regression.coef_[0][0]  # 取出斜率
-b = regression.intercept_[0]  # 取出截距
-print(f"斜率  = {a.round(2)}")
-print(f"截距  = {b.round(2)}")
-
-# 畫 理論值 y = x
-plt.plot([-1, 12], [-1, 12], "lime", lw=3, label="理論值 y = x")
-
-y2 = a * xs + b
-plt.plot(xs, ys, "b-o", lw=1, ms=10, label="實驗值")
-plt.plot(xs, y2, "r", lw=2, label="迴歸直線")  # 繪製迴歸直線
-
-xx = 10
-predicted = a * xx + b
-print(f"x = 10 的 預測值 = {predicted}")
-plt.plot(xx, predicted, "ro", lw=1, ms=12, label="預測值")
-
-xmin, xmax, ymin, ymax = -1, 12, -1, 12
-plt.axis([xmin, xmax, ymin, ymax])  # 設定各軸顯示範圍
-plt.legend()
-plt.grid()
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-from sklearn import datasets
-
-np.random.seed(3)  # 設計隨機數種子
-x, y = datasets.make_regression(n_samples=100, n_features=1, noise=20)
-plt.xlim(-3, 3)
-plt.ylim(-150, 150)
-plt.scatter(x, y)
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-from sklearn import datasets
-from sklearn.model_selection import train_test_split
-
-np.random.seed(3)  # 設計隨機數種子
-x, y = datasets.make_regression(n_samples=100, n_features=1, noise=20)
-# 數據分割為x_train,y_train訓練數據, x_test,y_test測試數據
-x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2)
-
-plt.xlim(-3, 3)
-plt.ylim(-150, 150)
-plt.scatter(x_train, y_train, label="訓練數據")
-plt.scatter(x_test, y_test, label="測試數據")
-plt.legend()
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-from sklearn import datasets
-from sklearn.model_selection import train_test_split
-from sklearn import linear_model
-from sklearn.metrics import r2_score
-
-np.random.seed(3)  # 設計隨機數種子
-print("製作原始資料 x, y")
-x, y = datasets.make_regression(n_samples=10, n_features=1, noise=20)
-
-# 數據分割為x_train,y_train訓練數據80%, x_test,y_test測試數據20%
-x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2)
-
-regression = linear_model.LinearRegression()  # 建立線性模組物件
-regression.fit(x_train, y_train)
-print(f"斜率  = {regression.coef_[0].round(2)}")
-print(f"截距  = {regression.intercept_.round(2)}")
-
-print("預測")
-y_pred = regression.predict(x_test)
-
-plt.xlim(-3, 3)
-plt.ylim(-150, 150)
-plt.scatter(x, y, c="blue", marker="o", lw=8, label="原始資料")
-plt.scatter(x_train, y_train, c="red", marker="o", lw=4, label="訓練數據")
-plt.scatter(x_test, y_test, c="green", marker="o", lw=4, label="測試數據")
-
-# 使用測試數據 x_test 和此 x_test 預測的 y_pred 繪製迴歸直線
-plt.plot(x_test, y_pred, color="red", label="迴歸直線")
-
-print("x_test")
-print(x_test)
-print("y_pred")
-print(y_pred)
-
-# 將測試的 y 與預測的 y_pred 計算決定係數
-r2 = r2_score(y_test, y_pred)
-
-print(f"決定係數 = {r2.round(2)}")
-
-"""
-print('原始資料')
-print(x)
-print()
-print(y)
-print('train')
-print(x_train)
-print()
-print(y_train)
-print('test')
-print(x_test)
-print()
-print(y_test)
-"""
-
-plt.legend()
-
-plt.show()
-
 print("------------------------------------------------------------")  # 60個
 
 print("迴歸效果評估")
@@ -951,7 +733,8 @@ print(roc_auc_score(y_real, y_score))  # AUC值
 
 fpr, tpr, thresholds = roc_curve(y_real, y_score)
 plt.plot(fpr, tpr)  # 繪圖
-plt.show()
+
+#plt.show()
 
 # P-R曲線
 from sklearn.metrics import precision_recall_curve
@@ -959,7 +742,7 @@ from sklearn.metrics import precision_recall_curve
 precision, recall, _ = precision_recall_curve(y_real, y_score)
 plt.plot(recall, precision)
 
-plt.show()
+#plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -974,48 +757,6 @@ print(classification_report(y_real, y_pred))
 
 print("------------------------------------------------------------")  # 60個
 
-print("K近鄰算法")
-
-from sklearn import neighbors, datasets
-from sklearn.model_selection import train_test_split
-
-data = datasets.load_breast_cancer()
-X = data.data  # 自變量
-y = data.target  # 因變量
-x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.1, random_state=0)
-clf = neighbors.KNeighborsClassifier(5)  # 設鄰居數爲5個
-clf.fit(x_train, y_train)  # 訓練模型
-print(clf.score(x_test, y_test))  # 給模型打分
-print(clf.predict([x_test[0]]), y_test[0], clf.predict_proba([x_test[0]]))
-
-print("------------------------------------------------------------")  # 60個
-
-from sklearn.metrics import accuracy_score
-from scipy.spatial import distance
-import operator
-
-
-def classify(inX, dataSet, labels, k):
-    # S=np.cov(dataSet.T)   #協方差矩陣，爲計算馬氏距離
-    # SI = np.linalg.inv(S)  #協方差矩陣的逆矩陣
-    # distances = np.array(distance.cdist(dataSet, [inX], 'mahalanobis', VI=SI)).reshape(-1)
-    distances = np.array(distance.cdist(dataSet, [inX], "euclidean").reshape(-1))
-    sortedDistIndicies = distances.argsort()  # 取排序的索引，用於label排序
-    classCount = {}
-    for i in range(k):  # 訪問距離最近的五個實例
-        voteILabel = labels[sortedDistIndicies[i]]
-        classCount[voteILabel] = classCount.get(voteILabel, 0) + 1
-    sortedClassCount = sorted(
-        classCount.items(), key=operator.itemgetter(1), reverse=True
-    )
-    return sortedClassCount[0][0]  # 取最多的分類
-
-
-ret = [classify(x_test[i], x_train, y_train, 5) for i in range(len(x_test))]
-print(accuracy_score(y_test, ret))
-
-print("------------------------------------------------------------")  # 60個
-
 print("聚類算法")
 
 from sklearn.datasets import make_blobs  # 數據支持
@@ -1024,7 +765,8 @@ from sklearn.cluster import KMeans  # 聚類方法
 X, y = make_blobs(n_samples=100, random_state=150)
 y_pred = KMeans(n_clusters=3, random_state=5).fit_predict(X)  # 訓練
 plt.scatter(X[:, 0], X[:, 1], c=y_pred)
-plt.show()
+
+#plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1094,7 +836,8 @@ df_scaled = pd.DataFrame(preprocessing.scale(df), columns=["標準化FB追蹤數
 print(df_scaled.head())
 
 df_scaled.plot(kind="scatter", x="標準化FB追蹤數", y="標準化快樂程度")
-plt.show()
+
+#plt.show()
 
 print("------------------------------")  # 30個
 
@@ -1166,7 +909,8 @@ df_std = pd.DataFrame(np_std, columns=["標準化FB追蹤數", "標準化快樂�
 print(df_std.head())
 
 df_std.plot(kind="scatter", x="標準化FB追蹤數", y="標準化快樂程度")
-plt.show()
+
+#plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1243,7 +987,8 @@ df_minmax = pd.DataFrame(np_minmax, columns=["最小最大值縮放FB追蹤數",
 print(df_minmax.head())
 
 df_minmax.plot(kind="scatter", x="最小最大值縮放FB追蹤數", y="最小最大值縮放快樂程度")
-plt.show()
+
+#plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1718,3 +1463,4 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+

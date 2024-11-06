@@ -1,7 +1,0 @@
-Data Manipulaiion
-=================
-
-- Numpy
-- Pandas
-
-

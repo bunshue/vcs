@@ -40,18 +40,17 @@ print("------------------------------------------------------------")  # 60個
     找出符合資料規律的直線，就叫線性迴歸。
 
 建立迴歸資料
-在sklearn中很方便的是它內涵豐富的函數可以使用，所以要建立隨機資料只需要：
+在sklearn中很方便的是它內涵豐富的函數可以使用，所以要建立隨機資料只需要： make_regression
 """
 
 from sklearn import datasets
-
 X,y = datasets.make_regression(n_samples=200,n_features=1,n_targets=1,noise=10)
 
 #使用make_regression()方法，建立200個樣本(samples)，只有一種特徵(features)和一種標籤類別（label），我們將noise設為10，這樣資料會比較分散一點（上述參數都可以自行設定）。
 
 
 plt.scatter(X,y,linewidths=0.1)
-#plt.show()
+plt.show()
 
 """
 LinearRegression
@@ -72,7 +71,7 @@ linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
 將資料放進模型內訓練：
 """
 
-linear_regression.fit(X,y)
+linear_regression.fit(X,y)  # 學習訓練.fit
 
 #因為要再繪出預測的資料圖，所以將預測資料放到predict變數內：
 
@@ -82,8 +81,8 @@ predict = linear_regression.predict(X[:200,:])
 
 plt.plot(X,predict,c="red")
 plt.scatter(X,y)
-#plt.show()
 
+plt.show()
 
 """
 中間的紅色線就是我們用LinearRegression找出的線，這樣就完成線性迴歸預測了。
@@ -95,41 +94,231 @@ plt.scatter(X,y)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-temperatures = np.array([29, 28, 34, 31,
-                         25, 29, 32, 31,
-                         24, 33, 25, 31,
-                         26, 30])
-drink_sales = np.array([7.7, 6.2, 9.3, 8.4,
-                        5.9, 6.4, 8.0, 7.5,
-                        5.8, 9.1, 5.1, 7.3,
-                        6.5, 8.4])
-X = pd.DataFrame(temperatures, columns=["氣溫"])
-target = pd.DataFrame(drink_sales, columns=["營業額"])
-y = target["營業額"]
+from sklearn import datasets
+from sklearn.model_selection import train_test_split
+from sklearn import linear_model
+from sklearn.metrics import r2_score
 
-# 做線性迴歸, 用 sklearn 裡的 LinearRegression 來做線性迴歸
-linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
+x, y = datasets.make_regression(n_features=1, noise=20)
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2)
 
-linear_regression.fit(X, y)
-print("迴歸係數:", linear_regression.coef_)
-print("截距:", linear_regression.intercept_ )
+regression = linear_model.LinearRegression()  # 建立線性模組物件
+regression.fit(x_train, y_train)
+print(f"斜率  = {regression.coef_[0].round(2)}")
+print(f"截距  = {regression.intercept_.round(2)}")
 
-# 預測氣溫26, 30度的業績
-new_temperatures = pd.DataFrame(np.array([26, 30]),
-                                columns=["氣溫"])
-predicted_sales = linear_regression.predict(new_temperatures)
-print(predicted_sales)
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+from sklearn import datasets
+from sklearn.model_selection import train_test_split
+from sklearn import linear_model
+from sklearn.metrics import r2_score
+
+x, y = datasets.make_regression(n_features=1, noise=20)
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2)
+
+regression = linear_model.LinearRegression()  # 建立線性模組物件
+regression.fit(x_train, y_train)
+print(f"斜率  = {regression.coef_[0].round(2)}")
+print(f"截距  = {regression.intercept_.round(2)}")
+
+y_pred = regression.predict(x_test)
+plt.xlim(-3, 3)
+plt.ylim(-150, 150)
+plt.scatter(x_train, y_train, label="訓練數據")
+plt.scatter(x_test, y_test, label="測試數據")
+# 使用測試數據 x_test 和此 x_test 預測的 y_pred 繪製迴歸直線
+plt.plot(x_test, y_pred, color="red")
+
+# 將測試的 y 與預測的 y_pred 計算決定係數
+r2 = r2_score(y_test, y_pred)
+# print(f"決定係數 = {r2.round(2)}") NG
+
+plt.legend()
+
+#plt.show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+from sklearn import linear_model
+
+# x = np.array([[22], [26], [23], [28], [27], [32], [30]])      # 溫度
+# y = np.array([[15], [35], [21], [62], [48], [101], [86]])     # 飲料銷售數量
+# x = np.array([0.0, 1.0, 2.0, 3.0, 4.0, 5.0], dtype = float)
+# y = np.array([0.0, 1.0, 2.0, 5.0, 4.0, 5.0], dtype = float)
+xs = np.array([[0.0], [1.0], [2.0], [3.0], [4.0], [5.0]], dtype=float)
+ys = np.array([[0.0], [1.0], [2.0], [5.0], [4.0], [5.0]], dtype=float)
+
+regression = linear_model.LinearRegression()  # 建立線性模組物件
+regression.fit(xs, ys)
+a = regression.coef_[0][0]  # 取出斜率
+b = regression.intercept_[0]  # 取出截距
+print(f"斜率  = {a.round(2)}")
+print(f"截距  = {b.round(2)}")
+
+# 畫 理論值 y = x
+plt.plot([-1, 12], [-1, 12], "lime", lw=3, label="理論值 y = x")
+
+y2 = a * xs + b
+plt.plot(xs, ys, "b-o", lw=1, ms=10, label="實驗值")
+plt.plot(xs, y2, "r", lw=2, label="迴歸直線")  # 繪製迴歸直線
+
+xx = 10
+predicted = a * xx + b
+print(f"x = 10 的 預測值 = {predicted}")
+plt.plot(xx, predicted, "ro", lw=1, ms=12, label="預測值")
+
+xmin, xmax, ymin, ymax = -1, 12, -1, 12
+plt.axis([xmin, xmax, ymin, ymax])  # 設定各軸顯示範圍
+plt.legend()
+plt.grid()
+
+#plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
+from sklearn import datasets
+
+x, y = datasets.make_regression(n_samples=100, n_features=1, noise=20)
+plt.xlim(-3, 3)
+plt.ylim(-150, 150)
+plt.scatter(x, y)
+
+#plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+from sklearn import datasets
+from sklearn.model_selection import train_test_split
+
+x, y = datasets.make_regression(n_samples=100, n_features=1, noise=20)
+# 數據分割為x_train,y_train訓練數據, x_test,y_test測試數據
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2)
+
+plt.xlim(-3, 3)
+plt.ylim(-150, 150)
+plt.scatter(x_train, y_train, label="訓練數據")
+plt.scatter(x_test, y_test, label="測試數據")
+plt.legend()
+
+#plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+from sklearn import datasets
+from sklearn.model_selection import train_test_split
+from sklearn import linear_model
+from sklearn.metrics import r2_score
+
+print("製作原始資料 x, y")
+x, y = datasets.make_regression(n_samples=10, n_features=1, noise=20)
+
+# 數據分割為x_train,y_train訓練數據80%, x_test,y_test測試數據20%
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2)
+
+regression = linear_model.LinearRegression()  # 建立線性模組物件
+regression.fit(x_train, y_train)
+print(f"斜率  = {regression.coef_[0].round(2)}")
+print(f"截距  = {regression.intercept_.round(2)}")
+
+print("預測")
+y_pred = regression.predict(x_test)
+
+plt.xlim(-3, 3)
+plt.ylim(-150, 150)
+plt.scatter(x, y, c="blue", marker="o", lw=8, label="原始資料")
+plt.scatter(x_train, y_train, c="red", marker="o", lw=4, label="訓練數據")
+plt.scatter(x_test, y_test, c="green", marker="o", lw=4, label="測試數據")
+
+# 使用測試數據 x_test 和此 x_test 預測的 y_pred 繪製迴歸直線
+plt.plot(x_test, y_pred, color="red", label="迴歸直線")
+
+print("x_test")
+print(x_test)
+print("y_pred")
+print(y_pred)
+
+# 將測試的 y 與預測的 y_pred 計算決定係數
+r2 = r2_score(y_test, y_pred)
+
+# print(f"決定係數 = {r2.round(2)}") NG
+
+"""
+print('原始資料')
+print(x)
+print()
+print(y)
+print('train')
+print(x_train)
+print()
+print(y_train)
+print('test')
+print(x_test)
+print()
+print(y_test)
+"""
+
+plt.legend()
+
+#plt.show()
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("線性回歸的範例 1")
+
+from sklearn.linear_model import LinearRegression
+
+lm = LinearRegression()
+X = [[1], [2], [3], [4], [5]]
+y = [88, 72, 90, 76, 92]
+lm.fit(X, y)
+print("第6次考試分數：", lm.predict([[6]]))
+
+print("線性回歸的範例 2")
+
+from sklearn.linear_model import LinearRegression
+
+lm = LinearRegression()
+X = [[1], [2], [3], [4], [5]]
+y = [1, 4, 9, 16, 25]
+lm.fit(X, y)
+
+xx = np.linspace(0, 10, 11)
+yy = np.linspace(0, 10, 11)
+for i in range(11):
+    print(i)
+    print("第", i, "項", lm.predict([[i]]))
+    xx[i] = i
+    yy[i] = lm.predict([[i]])
+
+plt.plot(X, y, "ro-")
+plt.plot(xx, yy, "go:")
+
+plt.show()
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+
+# 氣溫
 temperatures = np.array([29, 28, 34, 31,
                          25, 29, 32, 31,
                          24, 33, 25, 31,
                          26, 30])
+
+# 營業額
 drink_sales = np.array([7.7, 6.2, 9.3, 8.4,
                         5.9, 6.4, 8.0, 7.5,
                         5.8, 9.1, 5.1, 7.3,
                         6.5, 8.4])
+
 X = pd.DataFrame(temperatures, columns=["氣溫"])
 target = pd.DataFrame(drink_sales, columns=["營業額"])
 y = target["營業額"]
@@ -137,7 +326,10 @@ y = target["營業額"]
 # 做線性迴歸, 用 sklearn 裡的 LinearRegression 來做線性迴歸
 linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
 
-linear_regression.fit(X, y)
+linear_regression.fit(X, y)  # 學習訓練.fit
+print("迴歸係數:", linear_regression.coef_)
+print("截距:", linear_regression.intercept_ )
+
 # 預測氣溫26, 30度的業績
 new_temperatures = pd.DataFrame(np.array([26, 30]),
                                 columns=["氣溫"])
@@ -152,8 +344,9 @@ plt.plot(new_temperatures["氣溫"], predicted_sales,
          color="red", marker="o", markersize=10)
 plt.title("使用當日氣溫來預測當日的業積")
 
-#plt.show()
+plt.show()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 heights = np.array([147.9, 163.5, 159.8, 155.1,
@@ -169,7 +362,7 @@ y = target["體重"]
 # 做線性迴歸, 用 sklearn 裡的 LinearRegression 來做線性迴歸
 linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
 
-linear_regression.fit(X, y)
+linear_regression.fit(X, y)  # 學習訓練.fit
 print("迴歸係數:", linear_regression.coef_)
 print("截距:", linear_regression.intercept_ )
 
@@ -186,8 +379,9 @@ plt.plot(new_heights["身高"], predicted_weights,
          color="red", marker="o", markersize=10)
 plt.title("使用學生的身高來預測體重")
 
-#plt.show()
+plt.show()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 waist_heights = np.array([[67,160], [68,165], [70,167], 
@@ -204,7 +398,7 @@ y = target["體重"]
 # 做線性迴歸, 用 sklearn 裡的 LinearRegression 來做線性迴歸
 linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
 
-linear_regression.fit(X, y)
+linear_regression.fit(X, y)  # 學習訓練.fit
 print("迴歸係數:", linear_regression.coef_)
 print("截距:", linear_regression.intercept_ )
 
@@ -215,6 +409,7 @@ new_waist_heights = pd.DataFrame(np.array([[66, 164],
 predicted_weights = linear_regression.predict(new_waist_heights)
 print(predicted_weights)
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 area_dists = np.array([[10,80], [8,0], [8,200], 
@@ -231,7 +426,7 @@ y = target["月營收"]
 # 做線性迴歸, 用 sklearn 裡的 LinearRegression 來做線性迴歸
 linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
 
-linear_regression.fit(X, y)
+linear_regression.fit(X, y)  # 學習訓練.fit
 print("迴歸係數:", linear_regression.coef_)
 print("截距:", linear_regression.intercept_ )
 
@@ -256,7 +451,7 @@ plt.title("原始資料")
 plt.legend()
 plt.grid()
 
-#plt.show()
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -277,7 +472,7 @@ plt.title("線性迴歸")
 plt.legend()
 plt.grid()
 
-#plt.show()
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -323,7 +518,7 @@ plt.title("訓練結果")
 plt.legend()
 plt.grid()
 
-#plt.show()
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -342,7 +537,7 @@ plt.title("看誤差")
 plt.legend()
 plt.grid()
 
-#plt.show()
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -373,7 +568,7 @@ plt.title("不是線性的目標函數 f(x) = sin(3.2x) + 0.8x")
 plt.legend()
 plt.grid()
 
-#plt.show()
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -393,7 +588,7 @@ plt.title("使用 標準線性學習機 學習的結果")
 plt.legend()
 plt.grid()
 
-#plt.show()
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -413,7 +608,7 @@ plt.title("使用 6 次多項式 學習的結果")
 plt.legend()
 plt.grid()
 
-#plt.show()
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -451,7 +646,7 @@ plt.title("使用 RBF 學習的結果")
 plt.legend()
 plt.grid()
 
-#plt.show()
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -469,11 +664,9 @@ plt.title("三種一起比較")
 plt.legend()
 plt.grid()
 
-#plt.show()
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
 
 # SVR 迴歸的預測
@@ -493,7 +686,7 @@ plt.scatter(x, y)
 plt.plot(x, y, "lime")
 plt.title("理想資料")
 
-#plt.show()
+plt.show()
 
 # 加入 noise 項, 假設 f(x)+ε(x), 也就是都有個 noise 項。
 
@@ -503,7 +696,7 @@ plt.scatter(x, y)
 plt.plot(x, 1.2 * x + 0.8, "lime")
 plt.title("理想資料加上雜訊")
 
-#plt.show()
+plt.show()
 
 # 做線性迴歸找出那條線
 
@@ -537,7 +730,7 @@ plt.plot(x, 1.2 * x + 0.8, "lime")
 
 plt.title("SVR線性迴歸1")
 
-#plt.show()
+plt.show()
 
 # 當然可以預測沒出現過的...
 # 注意資料的輸入方式。
@@ -567,7 +760,7 @@ plt.scatter(x, y)
 plt.plot(x, y_pred, "r")
 plt.title("線性迴歸2")
 
-#plt.show()
+plt.show()
 
 # 2. 標準函數訓練及測試
 # 分訓練資料、測試資料
@@ -655,7 +848,7 @@ plt.scatter(x_test, y_test)
 # plt.scatter(x_test.ravel(), y_test)
 plt.title("原始測試資料")
 
-#plt.show()
+plt.show()
 
 # 計算分數
 from sklearn.metrics import mean_squared_error, r2_score
@@ -678,13 +871,13 @@ plt.scatter(x_train, y_train)
 plt.plot(x_train, linear_regression.predict(x_train), "r")
 plt.title("訓練結果")
 
-#plt.show()
+plt.show()
 
 # 我們在「訓練」這個函數時只有以下這些資料。
 plt.scatter(x_train, y_train)  # 原始訓練資料
 plt.title("原始訓練資料")
 
-#plt.show()
+plt.show()
 
 # 用訓練資料來 fit 函數 方法一
 # 記得現在我們只用 80% 的資料去訓練。
@@ -700,7 +893,7 @@ plt.scatter(x_train, y_train)  # 原始訓練資料
 plt.plot(x_train, Y_train, "r")
 plt.title("訓練資料2")
 
-#plt.show()
+plt.show()
 
 # 用測試資料試試我們預測準不準
 
@@ -713,7 +906,7 @@ plt.scatter(x_test, y_test)
 plt.scatter(x_test, Y_test, c="r")
 plt.title("測試結果1")
 
-#plt.show()
+plt.show()
 
 # 用訓練資料來 fit 函數 方法二
 # 記得現在我們只用 80% 的資料去訓練。
@@ -730,7 +923,7 @@ plt.scatter(x_train, y_train)  # 原始訓練資料
 plt.plot(x_train, Y_train, "r")
 plt.title("線性回歸測試結果")
 
-#plt.show()
+plt.show()
 
 # 用測試資料試試我們預測準不準
 X_test = x_test.reshape(len(x_test), 1)
@@ -743,7 +936,7 @@ plt.scatter(x_test, y_test, c="b")
 plt.scatter(x_test, Y_test, c="r")
 plt.title("測試結果2")
 
-#plt.show()
+plt.show()
 
 # 3. 不是線性的目標函數
 # 這裡我們用個非線性的函數來生假數據:
@@ -759,7 +952,7 @@ y = np.sin(3.2 * x) + 0.8 * x + 0.3 * np.random.randn(N)
 plt.plot(x, y)
 plt.title("待處理的資料 f = sin(3.2x) + 0.8x + noise")
 
-#plt.show()
+plt.show()
 
 # 使用SVR
 
@@ -791,7 +984,7 @@ plt.plot(x, Y_poly, label="polynomial")
 plt.legend()
 plt.title("比較各種方法")
 
-#plt.show()
+plt.show()
 
 # 標準線性學
 
@@ -806,7 +999,7 @@ plt.scatter(x, y)
 plt.plot(x, linear_regression.predict(X), "r")
 plt.title("標準線性學")
 
-#plt.show()
+plt.show()
 
 # 果然超級不準, 該如何是好?
 # 多項式
@@ -814,15 +1007,15 @@ plt.title("標準線性學")
 
 X_poly = np.array([[k, k**2, k**3, k**4, k**5, k**6] for k in x])
 
-regr_poly = sklearn.linear_model.LinearRegression()  # 函數學習機
+regression_poly = sklearn.linear_model.LinearRegression()  # 函數學習機
 
-regr_poly.fit(X_poly, y)  # 學習訓練.fit
+regression_poly.fit(X_poly, y)  # 學習訓練.fit
 
 plt.scatter(x, y)
-plt.plot(x, regr_poly.predict(X_poly), "r")
+plt.plot(x, regression_poly.predict(X_poly), "r")
 plt.title("多項式")
 
-#plt.show()
+plt.show()
 
 # 用 RBF
 # ϕi=e−∥x−ci∥2/2σ2
@@ -848,22 +1041,22 @@ X_rbf = np.array(
     ]
 )
 
-regr_rbf = sklearn.linear_model.LinearRegression()  # 函數學習機
+regression_rbf = sklearn.linear_model.LinearRegression()  # 函數學習機
 
-regr_rbf.fit(X_rbf, y)  # 學習訓練.fit
+regression_rbf.fit(X_rbf, y)  # 學習訓練.fit
 
 plt.scatter(x, y)
 
-plt.plot(x, regr_rbf.predict(X_rbf), "r")
+plt.plot(x, regression_rbf.predict(X_rbf), "r")
 plt.title("RBF")
 
-#plt.show()
+plt.show()
 
 # 三種一起比較
 
 Y_lin = linear_regression.predict(X)
-Y_poly = regr_poly.predict(X_poly)
-Y_rbf = regr_rbf.predict(X_rbf)
+Y_poly = regression_poly.predict(X_poly)
+Y_rbf = regression_rbf.predict(X_rbf)
 
 plt.scatter(x, y)
 plt.plot(x, Y_lin, label="linear")
@@ -872,7 +1065,7 @@ plt.plot(x, Y_rbf, label="rbf")
 plt.legend()
 plt.title("三種一起比較")
 
-#plt.show()
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
