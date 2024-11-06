@@ -49,11 +49,15 @@ namespace vcs_HotKey
             RegisterHotKey(Handle, 200, 2, Keys.Right); // 熱鍵二 : Ctrl + 右
             RegisterHotKey(Handle, 300, 2, Keys.Up);    // 熱鍵三 : Ctrl + 上
             RegisterHotKey(Handle, 400, 2, Keys.Down);  // 熱鍵四 : Ctrl + 下
+
+            string mesg = "注冊了四個熱鍵\n熱鍵一 : Ctrl + 左\n熱鍵二 : Ctrl + 右\n熱鍵三 : Ctrl + 上\n熱鍵四 : Ctrl + 下\n";
+            label1.Text = "你按了 " + mesg;
+            label2.Text = "";
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            //最後別忘了在程序退出時取消熱鍵的注冊
+            //在程序退出時取消熱鍵的注冊
             UnregisterHotKey(Handle, 100); //卸載第1個快捷鍵
             UnregisterHotKey(Handle, 200); //缷載第2個快捷鍵
             UnregisterHotKey(Handle, 300); //卸載第3個快捷鍵
@@ -102,9 +106,13 @@ namespace vcs_HotKey
                 mesg = "Ctrl + 下";
             else
                 mesg = "XXXX";
-            label1.Text = "你按了 " + mesg;
+            label2.Text = "你按了 " + mesg;
             richTextBox1.Text += "你按了 " + mesg + "\n";
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
         }
     }
 }
-

@@ -25,7 +25,7 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 # 設定負號
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
-
+'''
 print("------------------------------------------------------------")  # 60個
 
 """ 還沒好
@@ -51,7 +51,7 @@ for x,y in [[0,1],[0,2],[1,2]]:
 
 import matplotlib
 import matplotlib as mpl
-'''
+
 print('------------------------------------------------------------')	#60個
 
 from sklearn.metrics.pairwise import euclidean_distances
@@ -72,6 +72,7 @@ dist = euclidean_distances(rating_matrix)
 print(dist)
 
 from sklearn.metrics.pairwise import cosine_similarity
+
 sim = cosine_similarity(rating_matrix)
 print(sim)
 
@@ -108,6 +109,7 @@ print(doc_df)
 print('------------------------------')	#30個
 
 from sklearn.metrics.pairwise import cosine_similarity
+
 cos_sims = cosine_similarity(doc_df)
 print(cos_sims)
 
@@ -131,11 +133,8 @@ doc_df = pd.DataFrame(data.toarray(), index = text, columns = vectorizer.get_fea
 print(doc_df)
 
 print('------------------------------------------------------------')	#60個
-'''
 
-'''
 x = np.array([i * np.pi / 180 for i in range(60, 300, 4)])
-np.random.seed(10)  #Setting seed for reproducability
 y = np.sin(x) + np.random.normal(0, 0.15, len(x))
 data = pd.DataFrame(np.column_stack([x, y]), columns = ['x', 'y'])
 data.head(10)
@@ -320,12 +319,11 @@ pd.options.display.float_format = '{:,.2g}'.format
 tt = coef_matrix_lasso
 print(tt)
 
-
 coef_matrix_lasso.apply(lambda x: sum(x.values==0),axis=1)
-'''
+
 print('------------------------------------------------------------')	#60個
 print('------------------------------------------------------------')	#60個
-'''
+
 from sklearn.feature_extraction.text import  CountVectorizer
 from sklearn.preprocessing import Normalizer
 from sklearn.decomposition import TruncatedSVD
@@ -384,10 +382,10 @@ sns.heatmap(similarity, cmap = 'Reds')
 plt.show()
 
 print(pd.DataFrame(model.components_,index=['component_1','component_2'],columns=vectorizer.get_feature_names_out()).T)
-'''
+
 print('------------------------------------------------------------')	#60個
 print('------------------------------------------------------------')	#60個
-'''
+
 print('房價')
 
 import scipy.stats as stats
@@ -458,10 +456,10 @@ res = st.probplot(SalePrice_log, plot=plt)
 print(res)
 
 plt.show()
-'''
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
+
 
 from scipy.stats import norm
 
@@ -525,10 +523,10 @@ plt.figure(figsize=(6, 4))
 # sns.pointplot(df['mu'],df['-logl']) fail
 
 plt.show()
-'''
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
+
 neg_data = "data/neg.csv"
 pos_data = "data/pos.csv"
 
@@ -584,10 +582,10 @@ example_counts = cv.transform(examples)
 predictions = classifier.predict(example_counts)
 
 print(predictions)
-'''
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
+
 # Create an empty dataframe
 data = pd.DataFrame()
 
@@ -753,21 +751,78 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 '''
 
-'''
+
+"""
+sklearn 使用make_regression生成回归样本数据及NumPy拟合
+
+1. 介绍
+sklearn的make_regression函数能生成回归样本数据。
+
+2. 函数语法
+make_regression(n_samples=100, n_features=100, n_informative=10, n_targets=1, bias=0.0, 
+                effective_rank=None, tail_strength=0.5, noise=0.0, shuffle=True, coef=False, random_state=None)
+
+3. 参数说明：
+n_samples：样本数
+n_features：特征数(自变量个数)
+n_informative：参与建模特征数
+n_targets：因变量个数
+noise：噪音
+bias：偏差(截距)
+coef：是否输出coef标识
+random_state：随机状态若为固定值则每次产生的数据都一样
+
+"""
+
 from sklearn.datasets import make_regression
+X,Y=make_regression(n_samples=10, n_features=1,n_targets=1,noise=1.5,random_state=1)
 
-X, y = make_regression(n_samples=100, n_features=3)
 
-print(X.shape, y.shape)
+X.shape,Y.shape
 
-y = y.reshape((-1, 1))
-
-plt.figure(figsize=(9, 4))
-
-plt.plot(y, alpha=0.5, linewidth=3)
+import matplotlib.pyplot as plt
+plt.scatter(
+    X, #x坐标
+    Y, #y坐标
+);
 plt.show()
 
-print('------------------------------')	#30個
+
+#5. 用NumPy实现拟合
+#Numpy拟合基于最小二乘法
+
+plt.scatter(
+    X, #x坐标
+    Y, #y坐标
+);
+
+import numpy as np
+#用一次多项式拟合，相当于线性拟合
+z1 = np.polyfit(X.reshape(10), Y, 1)
+p1 = np.poly1d(z1)
+print (z1)
+print (p1)
+
+y = z1[0] * X + z1[1]
+plt.plot(X, y,c='red')
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+sys.exit()
+
+'''
+from sklearn.datasets import make_regression
+N = 50
+X, y = make_regression(n_samples=N, n_features=3)
+print(X.shape, y.shape)
+print(X)
+print(y)
+
+y = y.reshape((-1, 1))
+#print(y)
 
 from sklearn.linear_model import LinearRegression
 
@@ -775,14 +830,12 @@ linear_regression = LinearRegression()
 linear_regression.fit(X, y)
 
 y_pred_sk = linear_regression.predict(X)
+#print(y_pred_sk)
 
 plt.figure(figsize=(9, 4))
 
-plt.plot(y, color="r")
-plt.plot(y, alpha=0.8, linewidth=5)
-
-plt.plot(y_pred_sk, color="g")
-plt.plot(y_pred_sk, linewidth=1)
+plt.plot(y, color="r", linewidth=10)
+plt.plot(y_pred_sk, color="g", linewidth=4)
 
 #plt.legend()
 
@@ -859,11 +912,11 @@ plt.show()
 
 print(linear_regression.coef_)
 # array([[48.54597102, 82.31351886,  8.52184984]])
+
 '''
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 '''
-np.random.seed(3)
 num_pos = 500
 
 subset1 = np.random.multivariate_normal([0, 0], [[1, 0.6], [0.6, 1]], num_pos)
@@ -961,17 +1014,17 @@ def logistic_regression(X, y, l_rate, iterations, add_intercept=True):
 theta, accu = logistic_regression(X, y, 1, 2000)
 
 print(accu)
+'''
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
+import matplotlib
 
 plt.style.use("bmh")
 colors = ["#A60628", "#467821"]
 plt.cmap = matplotlib.colors.ListedColormap(colors)
 
 matplotlib.rcParams["figure.figsize"] = (10.0, 6.0)
-
-np.random.seed(3)
 
 num_pos = 500
 
@@ -1044,15 +1097,7 @@ plot_decision_boundary(lambda x: clf.predict(x), X, y, "logistic regression pred
 
 plt.show()
 
-"""
-d:\Anaconda2\lib\site-packages\numpy\ma\core.py:6442: MaskedArrayFutureWarning: In the future the default for ma.maximum.reduce will be axis=0, not the current None, to match np.maximum.reduce. Explicitly pass 0 or None to silence this warning.
-
-  return self.reduce(a)
-
-d:\Anaconda2\lib\site-packages\numpy\ma\core.py:6442: MaskedArrayFutureWarning: In the future the default for ma.minimum.reduce will be axis=0, not the current None, to match np.minimum.reduce. Explicitly pass 0 or None to silence this warning.
-
-  return self.reduce(a)
-"""
+print('------------------------------')	#30個
 
 
 def sigmoid(z):
@@ -1101,10 +1146,8 @@ array([[-599.88926069],
 """
 print(accu)
 
-'''
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
 
 """
 探索性數據分析（EDA）
@@ -1365,10 +1408,6 @@ outer range (high) of the distribution:
  [ 7.10289909]
  [ 7.22881942]]
 
-d:\Anaconda2\lib\site-packages\sklearnutils\validation.py:420: DataConversionWarning: Data with input dtype int64 was converted to float64 by StandardScaler.
-  warnings.warn(msg, DataConversionWarning)
-d:\Anaconda2\lib\site-packages\sklearnutils\validation.py:420: DataConversionWarning: Data with input dtype int64 was converted to float64 by StandardScaler.
-  warnings.warn(msg, DataConversionWarning)
 """
 
 # 低房價并沒有太多異常，但是高房價有兩個超過了7，雖然不一定是異常值，但是要小心
@@ -1874,20 +1913,8 @@ print(error(Y, Ypred))
 
 """
 
-
-"""
-
-d:\Anaconda2\lib\site-packages\sklearn\linear_model\least_angle.py:334: ConvergenceWarning: Early stopping the lars path, as the residues are small and the current value of alpha is no longer well controlled. 87 iterations, alpha=8.170e-04, previous alpha=2.386e-06, with an active set of 70 regressors.
-  ConvergenceWarning)
-d:\Anaconda2\lib\site-packages\sklearn\linear_model\least_angle.py:334: ConvergenceWarning: Early stopping the lars path, as the residues are small and the current value of alpha is no longer well controlled. 79 iterations, alpha=6.065e-04, previous alpha=1.923e-06, with an active set of 70 regressors.
-  ConvergenceWarning)
-0.12548614477031952
-​"""
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-
 
 
 
@@ -1922,4 +1949,9 @@ print("------------------------------------------------------------")  # 60個
 print('------------------------------------------------------------')	#60個
 
 
+
+
+np.random.seed(3)
+np.random.seed(10)  #Setting seed for reproducability
+np.random.seed(3)
 

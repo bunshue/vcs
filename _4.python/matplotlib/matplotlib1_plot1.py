@@ -345,6 +345,12 @@ plt.xticks(range(len(animals.values())), animals.keys(), rotation=30)
 print("------------------------------------------------------------")  # 60個
 plt.subplot(233)
 
+t = np.arange(-6, 6, 0.1)
+S = 1/(1+(np.e**(-t)))
+
+plt.plot(t, S)
+plt.title("sigmoid函數")
+
 print("------------------------------------------------------------")  # 60個
 plt.subplot(234)
 

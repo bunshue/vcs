@@ -27,15 +27,6 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
-x = np.linspace(0, 10, 50)
-sinus = np.sin(x)
-cosinus = np.cos(x)
-plt.plot(x, sinus, x, cosinus)
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
 df = pd.read_csv("data/iris_ds.csv")
 df.shape
 

@@ -41,12 +41,10 @@ print(iris.target_names)
 
 print("------------------------------------------------------------")  # 60個
 
-
 from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.preprocessing import StandardScaler
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -54,7 +52,6 @@ from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.preprocessing import StandardScaler
-import joblib
 
 print("save model")
 
@@ -69,10 +66,31 @@ x_test = std.transform(x_test)
 
 knn = KNeighborsClassifier(n_neighbors=5)
 knn.fit(x_train, y_train)
-joblib.dump(knn, "data/iris.pkl")
+
+import joblib
+joblib.dump(knn, "tmp_iris.pkl")
 
 print("------------------------------------------------------------")  # 60個
 
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+
+iris = load_iris()
+x_train, x_test, y_train, y_test = train_test_split(
+    iris.data, iris.target, test_size=0.2
+)
+std = StandardScaler()
+x_train = std.fit_transform(x_train)
+x_test = std.transform(x_test)
+
+import joblib
+knnmodel = joblib.load("tmp_iris.pkl")
+
+score = knnmodel.score(x_test, y_test)
+print(score)
+
+print("------------------------------------------------------------")  # 60個
 
 iris = load_iris()
 
@@ -314,6 +332,22 @@ space = hp.choice('classifier_type', [ # 定義可選參數
 best = fmin(f, space, algo=tpe.suggest, max_evals=100)
 print('best:',best) 
 """
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+
+iris = load_iris()
+print("原始_特徵：{}, 原始_目標：{}".format(iris.data.shape, iris.target.shape))
+x_train, x_test, y_train, y_test = train_test_split(
+    iris.data, iris.target, test_size=0.2
+)
+print("訓練_特徵：{}, 訓練_目標：{}".format(x_train.shape, y_train.shape))
+print("測試_特徵：{}, 測試_目標：{}".format(x_test.shape, y_test.shape))
+
 print("------------------------------------------------------------")  # 60個
 
 
