@@ -134,7 +134,38 @@ cv2.destroyAllWindows()  # 關閉所有 OpenCV 視窗
 
 print("------------------------------------------------------------")  # 60個
 
+xml_filename = "C:/_git/vcs/_1.data/______test_files1/_material/_face-detection/haarcascades/haarcascade_frontalface_default.xml"
+
+filename = 'C:/_git/vcs/_4.python/_data/elephant.jpg'
+
+import cv2
+
+face_cascade_classifier = cv2.CascadeClassifier(xml_filename)
+
+img = cv2.imread(filename)
+
+#轉灰階
+gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
+#臉部偵測
+faces = face_cascade_classifier.detectMultiScale(gray, 1.1, 4)
+
+#標示出來
+for (x, y, w, h) in faces:
+    cv2.rectangle(img, (x, y), (x + w, y + h), (0, 0, 255), 5)
+
+cv2.imshow('img', img)
+cv2.waitKey()
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
+print("------------------------------------------------------------")  # 60個
+
 print("------------------------------------------------------------")  # 60個
 

@@ -44,16 +44,6 @@ rng = RandomState(0)
 
 print("------------------------------------------------------------")  # 60個
 
-# 讀取數據集
-
-"""
-#指定下載位置
-data_home='data\\'
-olivetti_faces = fetch_olivetti_faces(data_home=data_home,shuffle=True, random_state=rng)
-olivetti_faces = fetch_olivetti_faces(data_home=data_home)
-"""
-
-# 未指定下載位置, 下載至 C:/Users/070601/scikit_learn_data/olivetti_py3.pkz
 olivetti_faces = fetch_olivetti_faces()
 
 print("olivetti_faces 資料型態")
@@ -134,15 +124,11 @@ print("Olivetti 資料集 SP")
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
 print("Olivetti 資料集 ST")
 
 from sklearn.datasets import fetch_olivetti_faces
 
-data_home = "datasets/"
-olivetti_faces = fetch_olivetti_faces(data_home=data_home)
-
-print("------------------------------")  # 30個
+olivetti_faces = fetch_olivetti_faces()
 
 X = olivetti_faces.data
 y = olivetti_faces.target

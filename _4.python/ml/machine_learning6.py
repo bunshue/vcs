@@ -27,32 +27,6 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
-"""
-# load_boston 已被移除 但可以試一下 從 warning 訊息
-
-from sklearn import ensemble
-from sklearn import datasets
-from sklearn.metrics import mean_squared_error
-from sklearn.model_selection import train_test_split
-
-boston = datasets.load_boston() # 讀取Sklearn自帶的數據集
-X_train,X_test,y_train,y_test = train_test_split(boston.data, boston.target,
-                                                 test_size=0.2,random_state=13)
-params = {'n_estimators': 200, 'max_depth': 5, 
-          'min_samples_split': 5,'learning_rate': 0.01,
-          'loss': 'ls', 'random_state': 0}
-clf = ensemble.GradientBoostingRegressor(**params)
-clf.fit(X_train, y_train) # 訓練模型
-print("MSE: %.2f" % mean_squared_error(y_test, clf.predict(X_test)))
-
-test_score = []
-for i, y_pred in enumerate(clf.staged_predict(X_test)):
-    test_score.append(clf.loss_(y_test, y_pred)) # 計算測試集誤差
-plt.plot(clf.train_score_, 'y-') # 黃色(淺色)
-plt.plot(test_score, 'b-') # 藍色(深色)
-
-plt.show()
-"""
 
 print("------------------------------------------------------------")  # 60個
 

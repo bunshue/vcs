@@ -331,8 +331,154 @@ model = tf.keras.models.load_model(mnist_model_filename)
 
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+from tensorflow.keras.datasets import mnist
+
+# 載入 MNIST 資料集, 如果是第一次載入會自行下載資料集
+(X_train, Y_train), (X_test, Y_test) = mnist.load_data()
+
+# 顯示 Numpy 二維陣列內容
+print(X_train[0])
+print(Y_train[0])   # 標籤資料
+     
+plt.imshow(X_train[0], cmap="gray")
+plt.title("顯示數字圖片 Label: " + str(Y_train[0]))
+plt.axis("off")
+
+plt.show()
+   
+
+sub_plot= 330
+for i in range(0, 9):
+    ax = plt.subplot(sub_plot+i+1)
+    ax.imshow(X_train[i], cmap="gray")
+    ax.set_title("Label: " + str(Y_train[i]))
+    ax.axis("off")
+
+plt.subplots_adjust(hspace = .5)
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+from tensorflow.keras.datasets import mnist
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense
+from tensorflow.keras.layers import Flatten
+from tensorflow.keras.layers import Conv2D
+from tensorflow.keras.layers import MaxPooling2D
+from tensorflow.keras.layers import Dropout
+from tensorflow.keras.utils import to_categorical
+
+# 載入資料集
+(X_train, Y_train), (X_test, Y_test) = mnist.load_data()
+
+# 將圖片轉換成 4D 張量
+X_train = X_train.reshape(X_train.shape[0], 28, 28, 1).astype("float32")
+X_test = X_test.reshape(X_test.shape[0], 28, 28, 1).astype("float32")
+
+# 因為是固定範圍, 所以執行正規化, 從 0-255 至 0-1
+X_train = X_train / 255
+X_test = X_test / 255
+
+# One-hot編碼
+Y_train = to_categorical(Y_train)
+Y_test = to_categorical(Y_test)
+
+# 定義模型
+model = Sequential()
+model.add(Conv2D(16, kernel_size=(5, 5), padding="same",
+                 input_shape=(28, 28, 1), activation="relu"))
+model.add(MaxPooling2D(pool_size=(2, 2)))
+model.add(Conv2D(32, kernel_size=(5, 5), padding="same",
+                 activation="relu"))
+model.add(MaxPooling2D(pool_size=(2, 2)))
+model.add(Dropout(0.5))
+model.add(Flatten())
+model.add(Dense(128, activation="relu"))
+model.add(Dropout(0.5))
+model.add(Dense(10, activation="softmax"))
+
+cc = model.summary()   # 顯示模型摘要資訊
+print(cc)
+
+# 編譯模型
+model.compile(loss="categorical_crossentropy", optimizer="adam",
+              metrics=["accuracy"])
+
+# 訓練模型
+history = model.fit(X_train, Y_train, validation_split=0.2,
+                    epochs=10, batch_size=128, verbose=2)
+
+# 評估模型
+loss, accuracy = model.evaluate(X_train, Y_train, verbose=0)
+print("訓練資料集的準確度 = {:.2f}".format(accuracy))
+loss, accuracy = model.evaluate(X_test, Y_test, verbose=0)
+print("測試資料集的準確度 = {:.2f}".format(accuracy))
+
+#訓練資料集的準確度 = 0.99
+#測試資料集的準確度 = 0.99
+
+# 顯示圖表來分析模型的訓練過程
+import matplotlib.pyplot as plt
+# 顯示訓練和驗證損失
+loss = history.history["loss"]
+epochs = range(1, len(loss)+1)
+val_loss = history.history["val_loss"]
+plt.plot(epochs, loss, "bo-", label="Training Loss")
+plt.plot(epochs, val_loss, "ro--", label="Validation Loss")
+plt.title("Training and Validation Loss")
+plt.xlabel("Epochs")
+plt.ylabel("Loss")
+plt.legend()
+
+plt.show()
+
+# 顯示訓練和驗證準確度
+acc = history.history["accuracy"]
+epochs = range(1, len(acc)+1)
+val_acc = history.history["val_accuracy"]
+plt.plot(epochs, acc, "bo-", label="Training Acc")
+plt.plot(epochs, val_acc, "ro--", label="Validation Acc")
+plt.title("Training and Validation Accuracy")
+plt.xlabel("Epochs")
+plt.ylabel("Accuracy")
+plt.legend()
+
+plt.show()
+
+# 載入資料集
+(X_train, Y_train), (X_test, Y_test) = mnist.load_data()
+# 選一個測試的數字圖片 
+i = 7
+digit = X_test[i].reshape(28, 28)
+# 將圖片轉換成 4D 張量
+X_test_digit = X_test[i].reshape(1, 28, 28, 1).astype("float32")
+# 因為是固定範圍, 所以執行正規化, 從 0-255 至 0-1
+X_test_digit = X_test_digit / 255
+# 繪出數字圖片
+plt.figure()
+plt.title("Example of Digit:" + str(Y_test[i]))
+plt.imshow(digit, cmap="gray")
+plt.axis("off")
+plt.show()
+
+#(-0.5, 27.5, 27.5, -0.5)
+
+# 預測結果的機率
+probs = model.predict(X_test_digit, batch_size=1)[0]
+print(probs)
+plt.title("Probabilities for Each Digit Class")
+plt.bar(np.arange(10), probs.reshape(10), align="center")
+plt.xticks(np.arange(10),np.arange(10).astype(str))
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
 
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
