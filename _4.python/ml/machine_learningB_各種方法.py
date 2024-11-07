@@ -38,37 +38,39 @@ Target為一年後患疾病的定量指標。
 建立線性多元回歸的預測模型,只取Age(年齡)、Sex(性別)、Body mass index(體質指數)、Average Blood Pressure(平均血壓)作為解釋變數,產生模型,並匯出散佈圖來比較預測一年後患疾病的定量指標和實際一年後患疾病的定量指標結果。
 """
 
-#題目1
+# 題目1
 from sklearn import datasets
 from sklearn.linear_model import LinearRegression
 
-#載入資料集
+# 載入資料集
 diabetes = datasets.load_diabetes()
 
-#print(diabetes.DESCR)
-print('keys')
+# print(diabetes.DESCR)
+print("keys")
 print(diabetes.keys())
-print('feature_names')
-print(diabetes.feature_names) 
-#['age', 'sex', 'bmi', 'bp', 's1', 's2', 's3', 's4', 's5', 's6']
+print("feature_names")
+print(diabetes.feature_names)
+# ['age', 'sex', 'bmi', 'bp', 's1', 's2', 's3', 's4', 's5', 's6']
 
 X = pd.DataFrame(diabetes.data, columns=diabetes.feature_names)
-target = pd.DataFrame(diabetes.target ,columns=["Target"])
+target = pd.DataFrame(diabetes.target, columns=["Target"])
 
 print("Target為一年後患疾病的定量指標")
-y = target["Target"] #Series
+y = target["Target"]  # Series
 print()
 print(y)
 print()
 
 lm = LinearRegression()
-lm.fit(X,y)
+lm.fit(X, y)
 
-print("迴歸係數:", lm.coef_)#迴歸係數: [ -10.01219782 -239.81908937  519.83978679  324.39042769 -792.18416163 476.74583782  101.04457032  177.06417623  751.27932109   67.62538639]
-print("截距:", lm.intercept_) #截距: 152.1334841628965
+print(
+    "迴歸係數:", lm.coef_
+)  # 迴歸係數: [ -10.01219782 -239.81908937  519.83978679  324.39042769 -792.18416163 476.74583782  101.04457032  177.06417623  751.27932109   67.62538639]
+print("截距:", lm.intercept_)  # 截距: 152.1334841628965
 
 predicted_diabetes = lm.predict(X)
-plt.scatter(y ,predicted_diabetes)
+plt.scatter(y, predicted_diabetes)
 plt.xlabel("Quantitative Measure")
 plt.ylabel("Predicted Quantitative Measure")
 plt.title("Quantitative Measure vs Predicted Quantitative Measure")
@@ -126,21 +128,21 @@ OpenCV 專題實作篇part 1-擴增實境AR (ho~ho~ho~)
 """
 
 
-
 print("------------------------------------------------------------")  # 60個
+
 
 def plot_decision_regions(X, y, classifier, test_idx=None, resolution=0.02):
     # setup markers generator and color map
-    markers = ('s', 'x', 'o', '^', 'v')
-    colors = ('red', 'blue', 'lightgreen', 'gray', 'cyan')
-    cmap = ListedColormap(colors[:len(np.unique(y))])
+    markers = ("s", "x", "o", "^", "v")
+    colors = ("red", "blue", "lightgreen", "gray", "cyan")
+    cmap = ListedColormap(colors[: len(np.unique(y))])
 
     # plot the decision surface
     x1_min, x1_max = X[:, 0].min() - 1, X[:, 0].max() + 1
     x2_min, x2_max = X[:, 1].min() - 1, X[:, 1].max() + 1
     xx1, xx2 = np.meshgrid(
-        np.arange(x1_min, x1_max, resolution),
-        np.arange(x2_min, x2_max, resolution))
+        np.arange(x1_min, x1_max, resolution), np.arange(x2_min, x2_max, resolution)
+    )
 
     z = classifier.predict(np.array([xx1.ravel(), xx2.ravel()]).T)
     z = z.reshape(xx1.shape)
@@ -157,7 +159,8 @@ def plot_decision_regions(X, y, classifier, test_idx=None, resolution=0.02):
             alpha=0.8,
             c=cmap(idx),
             marker=markers[idx],
-            label=cl)
+            label=cl,
+        )
 
     # hightlight test samples
     if test_idx:
@@ -165,12 +168,14 @@ def plot_decision_regions(X, y, classifier, test_idx=None, resolution=0.02):
         plt.scatter(
             X_test[:, 0],
             X_test[:, 1],
-            #c='',
+            # c='',
             alpha=1.0,
             linewidth=1,
-            marker='o',
+            marker="o",
             s=55,
-            label='test set')
+            label="test set",
+        )
+
 
 print("------------------------------------------------------------")  # 60個
 
@@ -194,10 +199,11 @@ def do_linear_regression():
     diabetes = datasets.load_diabetes()
 
     X = diabetes.data[:, np.newaxis, 2]
-    print("Data shape: ", X.shape)  
+    print("Data shape: ", X.shape)
 
     x_train, x_test, y_train, y_test = train_test_split(
-        X, diabetes.target, test_size=0.1, random_state=4)
+        X, diabetes.target, test_size=0.1, random_state=4
+    )
 
     regr = linear_model.LinearRegression()
 
@@ -205,14 +211,14 @@ def do_linear_regression():
 
     y_pred = regr.predict(x_test)
 
-    plt.scatter(x_test, y_test, color='black')
-    plt.plot(x_test, y_pred, color='blue', linewidth=3)
+    plt.scatter(x_test, y_test, color="black")
+    plt.plot(x_test, y_pred, color="blue", linewidth=3)
     plt.show()
 
 
-print('線性迴歸')
+print("線性迴歸")
 do_linear_regression()
-    
+
 print("------------------------------------------------------------")  # 60個
 
 cl_num = 3
@@ -221,11 +227,10 @@ thr = [0.00001, 0.00001, 0.00001]
 
 
 def dist(x, y, mu_x, mu_y):
-    return ((mu_x - x)**2 + (mu_y - y)**2)
+    return (mu_x - x) ** 2 + (mu_y - y) ** 2
 
 
 def cluster(x, y, mu_x, mu_y):
-
     cls_ = dict()
     for i in range(data_num):
         dists = []
@@ -246,7 +251,6 @@ def re_mu(cls_, mu_x, mu_y):
     new_muY = []
 
     for key, values in cls_.items():
-
         if len(values) == 0:
             values.append([mu_x[key], mu_y[key]])
 
@@ -265,7 +269,6 @@ def re_mu(cls_, mu_x, mu_y):
 
 
 def do_k_means():
-
     x = np.random.randint(0, 500, data_num)
     y = np.random.randint(0, 500, data_num)
 
@@ -276,20 +279,22 @@ def do_k_means():
 
     new_muX, new_muY = re_mu(cls_, mu_x, mu_y)
 
-    while any((abs(np.array(new_muX) - np.array(mu_x)) > thr)) != False or any(
-        (abs(np.array(new_muY) - np.array(mu_y)) > thr)) != False:
+    while (
+        any((abs(np.array(new_muX) - np.array(mu_x)) > thr)) != False
+        or any((abs(np.array(new_muY) - np.array(mu_y)) > thr)) != False
+    ):
         mu_x = new_muX
         mu_y = new_muY
         cls_ = cluster(x, y, mu_x, mu_y)
         new_muX, new_muY = re_mu(cls_, mu_x, mu_y)
 
-    print('Done')
+    print("Done")
 
     plt.scatter(x, y)
     plt.scatter(new_muX, new_muY)
     plt.show()
 
-    colors = ['r', 'b', 'g']
+    colors = ["r", "b", "g"]
     for key, values in cls_.items():
         cx = []
         cy = []
@@ -300,7 +305,8 @@ def do_k_means():
 
     plt.show()
 
-print('K-Means')
+
+print("K-Means")
 do_k_means()
 
 print("------------------------------------------------------------")  # 60個
@@ -312,6 +318,7 @@ from sklearn.svm import SVC
 from sklearn.metrics import accuracy_score
 from matplotlib.colors import ListedColormap
 
+
 def do_svm():
     iris = datasets.load_iris()
     X = iris.data[:, [2, 3]]
@@ -321,14 +328,15 @@ def do_svm():
     y = y[boolarr]
 
     X_train, X_test, y_train, y_test = train_test_split(
-        X, y, test_size=0.3, random_state=0)
+        X, y, test_size=0.3, random_state=0
+    )
 
     sc = StandardScaler()
     sc.fit(X_train)
     X_train_std = sc.transform(X_train)
     X_test_std = sc.transform(X_test)
 
-    svm = SVC(kernel='linear', C=1.0, random_state=0)
+    svm = SVC(kernel="linear", C=1.0, random_state=0)
     svm.fit(X_train_std, y_train)
     y_pred = svm.predict(X_test_std)
 
@@ -338,16 +346,15 @@ def do_svm():
     X_combined_std = np.vstack((X_train_std, X_test_std))
     y_combined_std = np.hstack((y_train, y_test))
     plot_decision_regions(
-        X=X_combined_std,
-        y=y_combined_std,
-        classifier=svm,
-        test_idx=range(50, 100))
-    plt.xlabel('sepal length [standarlized]')
-    plt.ylabel('petal length [standarlized]')
-    plt.legend(loc='upper left')
+        X=X_combined_std, y=y_combined_std, classifier=svm, test_idx=range(50, 100)
+    )
+    plt.xlabel("sepal length [standarlized]")
+    plt.ylabel("petal length [standarlized]")
+    plt.legend(loc="upper left")
     plt.show()
 
-print('SVM')
+
+print("SVM")
 do_svm()
 
 print("------------------------------------------------------------")  # 60個
@@ -360,20 +367,25 @@ def do_svm_kernel():
     X_xor = np.random.randn(200, 2)
     y_xor = np.logical_xor(X_xor[:, 0] > 0, X_xor[:, 1] > 0)
     y_xor = np.where(y_xor, 1, -1)
-    
-    plt.scatter(X_xor[y_xor==1, 0], X_xor[y_xor==1, 1], c='b', marker='x', label='1')
-    plt.scatter(X_xor[y_xor==-1, 0], X_xor[y_xor==-1, 1], c='r', marker='s', label='-1')
+
+    plt.scatter(
+        X_xor[y_xor == 1, 0], X_xor[y_xor == 1, 1], c="b", marker="x", label="1"
+    )
+    plt.scatter(
+        X_xor[y_xor == -1, 0], X_xor[y_xor == -1, 1], c="r", marker="s", label="-1"
+    )
     plt.ylim(-3.0)
     plt.legend()
     plt.show()
 
-    svm = SVC(kernel='rbf', random_state=0, gamma=0.6, C=10.0)
+    svm = SVC(kernel="rbf", random_state=0, gamma=0.6, C=10.0)
     svm.fit(X_xor, y_xor)
     plot_decision_regions(X_xor, y_xor, classifier=svm)
-    plt.legend(loc='upper left')
+    plt.legend(loc="upper left")
     plt.show()
 
-print('SVN Kernel')
+
+print("SVN Kernel")
 do_svm_kernel()
 
 print("------------------------------------------------------------")  # 60個
@@ -384,25 +396,26 @@ from sklearn.model_selection import train_test_split
 from matplotlib.colors import ListedColormap
 
 
-
 def do_decision_tree():
-  iris = datasets.load_iris()
-  x_train, x_test, y_train, y_test = train_test_split(iris.data[:, [2, 3]], iris.target, test_size=0.25, random_state=4)
-  clf = DecisionTreeClassifier(criterion='entropy', max_depth=3, random_state=0)
-  clf.fit(x_train, y_train)
-  y_pred = clf.predict(x_test)
+    iris = datasets.load_iris()
+    x_train, x_test, y_train, y_test = train_test_split(
+        iris.data[:, [2, 3]], iris.target, test_size=0.25, random_state=4
+    )
+    clf = DecisionTreeClassifier(criterion="entropy", max_depth=3, random_state=0)
+    clf.fit(x_train, y_train)
+    y_pred = clf.predict(x_test)
 
-  X_combined = np.vstack((x_train, x_test))
-  y_combined = np.hstack((y_train, y_test))
-  
-  plot_decision_regions(X_combined, y_combined, classifier=clf)
-  plt.xlabel('petal length [cm]')
-  plt.ylabel('petal width [cm]')
-  plt.legend(loc='upper left')
-  plt.show()
+    X_combined = np.vstack((x_train, x_test))
+    y_combined = np.hstack((y_train, y_test))
+
+    plot_decision_regions(X_combined, y_combined, classifier=clf)
+    plt.xlabel("petal length [cm]")
+    plt.ylabel("petal width [cm]")
+    plt.legend(loc="upper left")
+    plt.show()
 
 
-print('決策樹')
+print("決策樹")
 do_decision_tree()
 
 print("------------------------------------------------------------")  # 60個
@@ -414,23 +427,27 @@ from sklearn.model_selection import train_test_split
 
 
 def do_random_forest():
-  iris = datasets.load_iris()
-  x_train, x_test, y_train, y_test = train_test_split(iris.data[:, [2, 3]], iris.target, test_size=0.25, random_state=4)
-  clf = RandomForestClassifier(n_estimators=20, max_depth=4)
-  clf.fit(x_train, y_train)
-  y_pred = clf.predict(x_test)
+    iris = datasets.load_iris()
+    x_train, x_test, y_train, y_test = train_test_split(
+        iris.data[:, [2, 3]], iris.target, test_size=0.25, random_state=4
+    )
+    clf = RandomForestClassifier(n_estimators=20, max_depth=4)
+    clf.fit(x_train, y_train)
+    y_pred = clf.predict(x_test)
 
-  X_combined = np.vstack((x_train, x_test))
-  y_combined = np.hstack((y_train, y_test))
-  
-  plot_decision_regions(X_combined, y_combined, classifier=clf, test_idx=range(105, 150))
-  plt.xlabel('petal length [cm]')
-  plt.ylabel('petal width [cm]')
-  plt.legend(loc='upper left')
-  plt.show()
+    X_combined = np.vstack((x_train, x_test))
+    y_combined = np.hstack((y_train, y_test))
+
+    plot_decision_regions(
+        X_combined, y_combined, classifier=clf, test_idx=range(105, 150)
+    )
+    plt.xlabel("petal length [cm]")
+    plt.ylabel("petal width [cm]")
+    plt.legend(loc="upper left")
+    plt.show()
 
 
-print('隨機森林')
+print("隨機森林")
 do_random_forest()
 
 print("------------------------------------------------------------")  # 60個
@@ -460,32 +477,34 @@ class Perceptron:
 
     def predict(self, X):
         return np.where(self.net_input(X) >= 0.0, 1, -1)
-  
+
 
 def do_perceptrons():
-    df = pd.read_csv('https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data', header=None)
+    df = pd.read_csv(
+        "https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data",
+        header=None,
+    )
     X = df.iloc[0:100, [0, 2]].values
     y = df.iloc[0:100, 4].values
-    y = np.where(y == 'Iris-setosa', -1, 1)
-    
-    plt.scatter(X[:50, 0], X[:50, 1], color='red', marker='o', label='setosa')
+    y = np.where(y == "Iris-setosa", -1, 1)
+
+    plt.scatter(X[:50, 0], X[:50, 1], color="red", marker="o", label="setosa")
     plt.scatter(
-        X[50:100, 0],
-        X[50:100, 1],
-        color='blue',
-        marker='x',
-        label='versicolor')
-    plt.xlabel('petal length')
-    plt.ylabel('sepal length')
-    plt.legend(loc='upper left')
+        X[50:100, 0], X[50:100, 1], color="blue", marker="x", label="versicolor"
+    )
+    plt.xlabel("petal length")
+    plt.ylabel("sepal length")
+    plt.legend(loc="upper left")
     plt.show()
 
-print('perceptrons 感知器 前饋神經網路')
+
+print("perceptrons 感知器 前饋神經網路")
 do_perceptrons()
 
 print("------------------------------------------------------------")  # 60個
 
 import tensorflow as tf
+
 
 def _height(x, y):
     # z = np.sqrt(x**2 + y**2)
@@ -502,11 +521,11 @@ def do_adative_learning_rate():
     mul2 = tf.multiply(b, tf.square(y))
     output = tf.add(mul1, mul2)
 
-    gradient_op = tf.train.GradientDescentOptimizer(
-        learning_rate=0.4).minimize(output)
+    gradient_op = tf.train.GradientDescentOptimizer(learning_rate=0.4).minimize(output)
 
     momentum_op = tf.train.MomentumOptimizer(
-        learning_rate=0.035, momentum=0.9).minimize(output)
+        learning_rate=0.035, momentum=0.9
+    ).minimize(output)
 
     adagrad_op = tf.train.AdagradOptimizer(learning_rate=2).minimize(output)
 
@@ -539,20 +558,19 @@ def do_adative_learning_rate():
         Z = _height(X, Y)
 
         plt.figure(figsize=(8, 4))
-        cs = plt.contourf(X, Y, Z, 15, alpha=0.75, cmap='rainbow')
+        cs = plt.contourf(X, Y, Z, 15, alpha=0.75, cmap="rainbow")
         # cs = plt.contour(X, Y, Z, 15, cmap='rainbow')
-        plt.plot(start_x, start_y, c='b')
-        plt.title('rms')
+        plt.plot(start_x, start_y, c="b")
+        plt.title("rms")
         for xt, yt in zip(start_x, start_y):
-            plt.scatter(xt, yt, c='b')
+            plt.scatter(xt, yt, c="b")
         plt.show()
 
 
-print('adative_learning_rate')
+print("adative_learning_rate")
 do_adative_learning_rate()
 
 print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -563,6 +581,4 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
-

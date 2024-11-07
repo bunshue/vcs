@@ -775,36 +775,41 @@ random_state：随机状态若为固定值则每次产生的数据都一样
 """
 
 from sklearn.datasets import make_regression
-X,Y=make_regression(n_samples=10, n_features=1,n_targets=1,noise=1.5,random_state=1)
+
+X, Y = make_regression(
+    n_samples=10, n_features=1, n_targets=1, noise=1.5, random_state=1
+)
 
 
-X.shape,Y.shape
+X.shape, Y.shape
 
 import matplotlib.pyplot as plt
+
 plt.scatter(
-    X, #x坐标
-    Y, #y坐标
-);
+    X,  # x坐标
+    Y,  # y坐标
+)
 plt.show()
 
 
-#5. 用NumPy实现拟合
-#Numpy拟合基于最小二乘法
+# 5. 用NumPy实现拟合
+# Numpy拟合基于最小二乘法
 
 plt.scatter(
-    X, #x坐标
-    Y, #y坐标
-);
+    X,  # x坐标
+    Y,  # y坐标
+)
 
 import numpy as np
-#用一次多项式拟合，相当于线性拟合
+
+# 用一次多项式拟合，相当于线性拟合
 z1 = np.polyfit(X.reshape(10), Y, 1)
 p1 = np.poly1d(z1)
-print (z1)
-print (p1)
+print(z1)
+print(p1)
 
 y = z1[0] * X + z1[1]
-plt.plot(X, y,c='red')
+plt.plot(X, y, c="red")
 
 plt.show()
 
@@ -813,7 +818,7 @@ print("------------------------------------------------------------")  # 60個
 
 sys.exit()
 
-'''
+"""
 from sklearn.datasets import make_regression
 N = 50
 X, y = make_regression(n_samples=N, n_features=3)
@@ -913,10 +918,10 @@ plt.show()
 print(linear_regression.coef_)
 # array([[48.54597102, 82.31351886,  8.52184984]])
 
-'''
+"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
+"""
 num_pos = 500
 
 subset1 = np.random.multivariate_normal([0, 0], [[1, 0.6], [0.6, 1]], num_pos)
@@ -1014,7 +1019,7 @@ def logistic_regression(X, y, l_rate, iterations, add_intercept=True):
 theta, accu = logistic_regression(X, y, 1, 2000)
 
 print(accu)
-'''
+"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -1097,7 +1102,7 @@ plot_decision_boundary(lambda x: clf.predict(x), X, y, "logistic regression pred
 
 plt.show()
 
-print('------------------------------')	#30個
+print("------------------------------")  # 30個
 
 
 def sigmoid(z):
@@ -1917,9 +1922,8 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 from sklearn.linear_model import LinearRegression
 
@@ -1927,15 +1931,15 @@ X = [[10.0], [8.0], [13.0], [9.0], [11.0], [14.0], [6.0], [4.0], [12.0], [7.0], 
 y = [8.04, 6.95, 7.58, 8.81, 8.33, 9.96, 7.24, 4.26, 10.84, 4.82, 5.68]
 
 linear_regression = LinearRegression()
-linear_regression.fit(X, y) 
-print(linear_regression.intercept_) # 切片 
-print(linear_regression.coef_) # 傾き
+linear_regression.fit(X, y)
+print(linear_regression.intercept_)  # 切片
+print(linear_regression.coef_)  # 傾き
 
-y_pred = linear_regression.predict([[0], [1]]) 
-print(y_pred) # x=0, x=1に対する予測結果
+y_pred = linear_regression.predict([[0], [1]])
+print(y_pred)  # x=0, x=1に対する予測結果
 
-print('------------------------------------------------------------')	#60個
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 from sklearn.preprocessing import PolynomialFeatures
 from sklearn.linear_model import Ridge
@@ -1947,7 +1951,7 @@ train_X = np.random.uniform(low=0, high=1.2, size=train_size)
 test_X = np.random.uniform(low=0.1, high=1.3, size=test_size)
 train_y = np.sin(train_X * 2 * np.pi) + np.random.normal(0, 0.2, train_size)
 test_y = np.sin(test_X * 2 * np.pi) + np.random.normal(0, 0.2, test_size)
-poly = PolynomialFeatures(6) # 次數は6
+poly = PolynomialFeatures(6)  # 次數は6
 train_poly_X = poly.fit_transform(train_X.reshape(train_size, 1))
 test_poly_X = poly.fit_transform(test_X.reshape(test_size, 1))
 
@@ -1958,20 +1962,22 @@ test_pred_y = model.predict(test_poly_X)
 print(mean_squared_error(train_pred_y, train_y))
 print(mean_squared_error(test_pred_y, test_y))
 
-print('------------------------------------------------------------')	#60個
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 from sklearn.linear_model import LogisticRegression
 
-X_train = np.r_[np.random.normal(3, 1, size=50), np.random.normal(-1, 1, size=50)].reshape((100, -1))
+X_train = np.r_[
+    np.random.normal(3, 1, size=50), np.random.normal(-1, 1, size=50)
+].reshape((100, -1))
 y_train = np.r_[np.ones(50), np.zeros(50)]
 
 logistic_regression = LogisticRegression()
 logistic_regression.fit(X_train, y_train)
 print(logistic_regression.predict_proba([[0], [1], [2]])[:, 1])
 
-print('------------------------------------------------------------')	#60個
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 from sklearn.svm import LinearSVC
 from sklearn.datasets import make_blobs
@@ -1982,13 +1988,13 @@ from sklearn.metrics import accuracy_score
 centers = [(-1, -0.125), (0.5, 0.5)]
 X, y = make_blobs(n_samples=50, n_features=2, centers=centers, cluster_std=0.3)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
-model = LinearSVC() 
-model.fit(X_train, y_train) # 學習
-y_pred = model.predict(X_test) 
-print(accuracy_score(y_pred, y_test)) # 評価
+model = LinearSVC()
+model.fit(X_train, y_train)  # 學習
+y_pred = model.predict(X_test)
+print(accuracy_score(y_pred, y_test))  # 評価
 
-print('------------------------------------------------------------')	#60個
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 from sklearn.svm import SVC
 from sklearn.datasets import make_gaussian_quantiles
@@ -2003,34 +2009,30 @@ model.fit(X_train, y_train)
 y_pred = model.predict(X_test)
 print(accuracy_score(y_pred, y_test))
 
-print('------------------------------------------------------------')	#60個
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 from sklearn.naive_bayes import MultinomialNB
 
 # データ生成
-X_train = [[1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-[0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0],
-[1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0],
-[0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0],
-[0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0],
-[0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1]]
+X_train = [
+    [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0],
+    [1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0],
+    [0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1],
+]
 y_train = [1, 1, 1, 0, 0, 0]
 model = MultinomialNB()
-model.fit(X_train, y_train) # 學習
-print(model.predict([[0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0]])) # 評価
+model.fit(X_train, y_train)  # 學習
+print(model.predict([[0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0]]))  # 評価
 
-print('------------------------------------------------------------')	#60個
-print('------------------------------------------------------------')	#60個
-
-
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 
-
-
-
-
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 from sklearn.neighbors import KNeighborsClassifier
@@ -2284,7 +2286,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -2502,7 +2503,6 @@ print(svm.score(dx_test, dy_test))
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -3273,13 +3273,12 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-#normalize
-#get_feature_names
-#get_feature_names_out
+# normalize
+# get_feature_names
+# get_feature_names_out
 
-#plt.rcParams['figure.figsize'] = 12, 8
+# plt.rcParams['figure.figsize'] = 12, 8
 
 np.random.seed(3)
-np.random.seed(10)  #Setting seed for reproducability
+np.random.seed(10)  # Setting seed for reproducability
 np.random.seed(3)
-

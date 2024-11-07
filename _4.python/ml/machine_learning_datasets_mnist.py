@@ -40,19 +40,23 @@ from keras.datasets import mnist
 
 (train_feature, train_label), (test_feature, test_label) = mnist.load_data()
 
-def show_images_labels_predictions(images,labels,start_id,num=10):
+
+def show_images_labels_predictions(images, labels, start_id, num=10):
     plt.gcf().set_size_inches(12, 14)
-    if num>25: num=25 
+    if num > 25:
+        num = 25
     for i in range(num):
-        ax=plt.subplot(5,5, i+1)
-        ax.imshow(images[start_id], cmap='binary')  #顯示黑白圖片
-        title = 'label = ' + str(labels[start_id])
-        ax.set_title(title,fontsize=12)  # X,Y軸不顯示刻度
-        ax.set_xticks([]);ax.set_yticks([])        
-        start_id+=1 
+        ax = plt.subplot(5, 5, i + 1)
+        ax.imshow(images[start_id], cmap="binary")  # 顯示黑白圖片
+        title = "label = " + str(labels[start_id])
+        ax.set_title(title, fontsize=12)  # X,Y軸不顯示刻度
+        ax.set_xticks([])
+        ax.set_yticks([])
+        start_id += 1
     plt.show()
 
-show_images_labels_predictions(train_feature,train_label,0,10)
+
+show_images_labels_predictions(train_feature, train_label, 0, 10)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -124,7 +128,7 @@ print("------------------------------------------------------------")  # 60個
 
 # 匯入Keras及相關模組
 # 匯入keras.utils因為後續要將label標籤轉換為One-hotencoding
-#from keras.utils import np_utils old 改如下
+# from keras.utils import np_utils old 改如下
 from tensorflow.python.keras.utils import np_utils
 
 np.random.seed(10)  # 設定seed可以讓每次需要隨機產生的資料，都有相同的輸出
@@ -239,7 +243,7 @@ mnist.close()
 x_train = x_train / 255
 x_test = x_test / 255
 
-#from keras.utils import np_utils old 改如下
+# from keras.utils import np_utils old 改如下
 from tensorflow.python.keras.utils import np_utils
 
 y_train = np_utils.to_categorical(y_train, 10)
@@ -340,23 +344,23 @@ from tensorflow.keras.datasets import mnist
 
 # 顯示 Numpy 二維陣列內容
 print(X_train[0])
-print(Y_train[0])   # 標籤資料
-     
+print(Y_train[0])  # 標籤資料
+
 plt.imshow(X_train[0], cmap="gray")
 plt.title("顯示數字圖片 Label: " + str(Y_train[0]))
 plt.axis("off")
 
 plt.show()
-   
 
-sub_plot= 330
+
+sub_plot = 330
 for i in range(0, 9):
-    ax = plt.subplot(sub_plot+i+1)
+    ax = plt.subplot(sub_plot + i + 1)
     ax.imshow(X_train[i], cmap="gray")
     ax.set_title("Label: " + str(Y_train[i]))
     ax.axis("off")
 
-plt.subplots_adjust(hspace = .5)
+plt.subplots_adjust(hspace=0.5)
 
 plt.show()
 
@@ -388,11 +392,17 @@ Y_test = to_categorical(Y_test)
 
 # 定義模型
 model = Sequential()
-model.add(Conv2D(16, kernel_size=(5, 5), padding="same",
-                 input_shape=(28, 28, 1), activation="relu"))
+model.add(
+    Conv2D(
+        16,
+        kernel_size=(5, 5),
+        padding="same",
+        input_shape=(28, 28, 1),
+        activation="relu",
+    )
+)
 model.add(MaxPooling2D(pool_size=(2, 2)))
-model.add(Conv2D(32, kernel_size=(5, 5), padding="same",
-                 activation="relu"))
+model.add(Conv2D(32, kernel_size=(5, 5), padding="same", activation="relu"))
 model.add(MaxPooling2D(pool_size=(2, 2)))
 model.add(Dropout(0.5))
 model.add(Flatten())
@@ -400,16 +410,16 @@ model.add(Dense(128, activation="relu"))
 model.add(Dropout(0.5))
 model.add(Dense(10, activation="softmax"))
 
-cc = model.summary()   # 顯示模型摘要資訊
+cc = model.summary()  # 顯示模型摘要資訊
 print(cc)
 
 # 編譯模型
-model.compile(loss="categorical_crossentropy", optimizer="adam",
-              metrics=["accuracy"])
+model.compile(loss="categorical_crossentropy", optimizer="adam", metrics=["accuracy"])
 
 # 訓練模型
-history = model.fit(X_train, Y_train, validation_split=0.2,
-                    epochs=10, batch_size=128, verbose=2)
+history = model.fit(
+    X_train, Y_train, validation_split=0.2, epochs=10, batch_size=128, verbose=2
+)
 
 # 評估模型
 loss, accuracy = model.evaluate(X_train, Y_train, verbose=0)
@@ -417,14 +427,15 @@ print("訓練資料集的準確度 = {:.2f}".format(accuracy))
 loss, accuracy = model.evaluate(X_test, Y_test, verbose=0)
 print("測試資料集的準確度 = {:.2f}".format(accuracy))
 
-#訓練資料集的準確度 = 0.99
-#測試資料集的準確度 = 0.99
+# 訓練資料集的準確度 = 0.99
+# 測試資料集的準確度 = 0.99
 
 # 顯示圖表來分析模型的訓練過程
 import matplotlib.pyplot as plt
+
 # 顯示訓練和驗證損失
 loss = history.history["loss"]
-epochs = range(1, len(loss)+1)
+epochs = range(1, len(loss) + 1)
 val_loss = history.history["val_loss"]
 plt.plot(epochs, loss, "bo-", label="Training Loss")
 plt.plot(epochs, val_loss, "ro--", label="Validation Loss")
@@ -437,7 +448,7 @@ plt.show()
 
 # 顯示訓練和驗證準確度
 acc = history.history["accuracy"]
-epochs = range(1, len(acc)+1)
+epochs = range(1, len(acc) + 1)
 val_acc = history.history["val_accuracy"]
 plt.plot(epochs, acc, "bo-", label="Training Acc")
 plt.plot(epochs, val_acc, "ro--", label="Validation Acc")
@@ -450,7 +461,7 @@ plt.show()
 
 # 載入資料集
 (X_train, Y_train), (X_test, Y_test) = mnist.load_data()
-# 選一個測試的數字圖片 
+# 選一個測試的數字圖片
 i = 7
 digit = X_test[i].reshape(28, 28)
 # 將圖片轉換成 4D 張量
@@ -464,14 +475,14 @@ plt.imshow(digit, cmap="gray")
 plt.axis("off")
 plt.show()
 
-#(-0.5, 27.5, 27.5, -0.5)
+# (-0.5, 27.5, 27.5, -0.5)
 
 # 預測結果的機率
 probs = model.predict(X_test_digit, batch_size=1)[0]
 print(probs)
 plt.title("Probabilities for Each Digit Class")
 plt.bar(np.arange(10), probs.reshape(10), align="center")
-plt.xticks(np.arange(10),np.arange(10).astype(str))
+plt.xticks(np.arange(10), np.arange(10).astype(str))
 
 plt.show()
 

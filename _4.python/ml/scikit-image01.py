@@ -1026,18 +1026,14 @@ arr = image.flatten()
 plt.subplot(221)
 plt.imshow(image, plt.cm.gray)  # 原始圖像
 plt.subplot(222)
-plt.hist(
-    arr, bins=256, density=True, edgecolor="None", facecolor="red"
-)  # 原始圖像直方圖
+plt.hist(arr, bins=256, density=True, edgecolor="None", facecolor="red")  # 原始圖像直方圖
 
 image1 = skimage.exposure.equalize_hist(image)
 arr1 = image1.flatten()
 plt.subplot(223)
 plt.imshow(image1, plt.cm.gray)  # 均衡化圖像
 plt.subplot(224)
-plt.hist(
-    arr1, bins=256, density=True, edgecolor="None", facecolor="red"
-)  # 均衡化直方圖
+plt.hist(arr1, bins=256, density=True, edgecolor="None", facecolor="red")  # 均衡化直方圖
 
 plt.show()
 

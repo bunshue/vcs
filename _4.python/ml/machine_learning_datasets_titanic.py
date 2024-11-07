@@ -286,8 +286,7 @@ print("---------------------------")
 age_median = np.nanmedian(titanic["Age"])
 print("年齡中位數", age_median)
 print("---------------------------")
-new_age = np.where(titanic["Age"].isnull(), 
-                   age_median, titanic["Age"])
+new_age = np.where(titanic["Age"].isnull(), age_median, titanic["Age"])
 titanic["Age"] = new_age
 print(titanic)
 print("---------------------------")
@@ -295,15 +294,13 @@ print("---------------------------")
 label_encoder = preprocessing.LabelEncoder()
 encoded_class = label_encoder.fit_transform(titanic["PClass"])
 
-X = pd.DataFrame([encoded_class, 
-                  titanic["SexCode"],
-                  titanic["Age"]]).T
+X = pd.DataFrame([encoded_class, titanic["SexCode"], titanic["Age"]]).T
 y = titanic["Survived"]
 
 logistic = linear_model.LogisticRegression()
 logistic.fit(X, y)
 print("迴歸係數:", logistic.coef_)
-print("截距:", logistic.intercept_ )
+print("截距:", logistic.intercept_)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -314,16 +311,13 @@ print(titanic.info())
 print("---------------------------")
 # 將年齡的空值填入年齡的中位數
 age_median = np.nanmedian(titanic["Age"])
-new_age = np.where(titanic["Age"].isnull(), 
-                   age_median, titanic["Age"])
+new_age = np.where(titanic["Age"].isnull(), age_median, titanic["Age"])
 titanic["Age"] = new_age
 # 轉換欄位值成為數值
 label_encoder = preprocessing.LabelEncoder()
 encoded_class = label_encoder.fit_transform(titanic["PClass"])
 
-X = pd.DataFrame([encoded_class, 
-                  titanic["SexCode"],
-                  titanic["Age"]]).T
+X = pd.DataFrame([encoded_class, titanic["SexCode"], titanic["Age"]]).T
 y = titanic["Survived"]
 
 logistic = linear_model.LogisticRegression()
@@ -333,7 +327,7 @@ preds = logistic.predict(X)
 print(pd.crosstab(preds, titanic["Survived"]))
 
 print("---------------------------")
-print((805+265)/(805+185+58+265))
+print((805 + 265) / (805 + 185 + 58 + 265))
 print(logistic.score(X, y))
 
 print("------------------------------------------------------------")  # 60個
@@ -347,20 +341,19 @@ print("---------------------------")
 label_encoder = preprocessing.LabelEncoder()
 encoded_class = label_encoder.fit_transform(titanic["PClass"])
 
-X = pd.DataFrame([encoded_class, 
-                  titanic["SexCode"]]).T
+X = pd.DataFrame([encoded_class, titanic["SexCode"]]).T
 y = titanic["Survived"]
 
 logistic = linear_model.LogisticRegression()
 logistic.fit(X, y)
 print("迴歸係數:", logistic.coef_)
-print("截距:", logistic.intercept_ )
+print("截距:", logistic.intercept_)
 print("---------------------------")
 preds = logistic.predict(X)
 print(pd.crosstab(preds, titanic["Survived"]))
 
 print("---------------------------")
-print((840+222)/(840+222+23+228))
+print((840 + 222) / (840 + 222 + 23 + 228))
 print(logistic.score(X, y))
 
 print("------------------------------------------------------------")  # 60個
@@ -377,13 +370,11 @@ titanic = pd.read_csv("data/titanic_ds.csv")
 label_encoder = preprocessing.LabelEncoder()
 encoded_class = label_encoder.fit_transform(titanic["PClass"])
 
-X = pd.DataFrame([titanic["SexCode"],
-                  encoded_class]).T
+X = pd.DataFrame([titanic["SexCode"], encoded_class]).T
 X.columns = ["SexCode", "PClass"]
 y = titanic["Survived"]
 
-XTrain, XTest, yTrain, yTest = train_test_split(X, y, test_size=0.25,
-                                                random_state=1)
+XTrain, XTest, yTrain, yTest = train_test_split(X, y, test_size=0.25, random_state=1)
 
 dtree = tree.DecisionTreeClassifier()
 dtree.fit(XTrain, yTrain)
@@ -391,10 +382,10 @@ dtree.fit(XTrain, yTrain)
 print("準確率:", dtree.score(XTest, yTest))
 print("---------------------------")
 preds = dtree.predict_proba(X=XTest)
-print(pd.crosstab(preds[:,0], columns=[XTest["PClass"],
-                                       XTest["SexCode"]]))
-pd.crosstab(preds[:,0], columns=[XTest["PClass"],
-                                       XTest["SexCode"]]).to_html("tmp_ch16-1-2.html")
+print(pd.crosstab(preds[:, 0], columns=[XTest["PClass"], XTest["SexCode"]]))
+pd.crosstab(preds[:, 0], columns=[XTest["PClass"], XTest["SexCode"]]).to_html(
+    "tmp_ch16-1-2.html"
+)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -407,21 +398,17 @@ titanic = pd.read_csv("data/titanic_ds.csv")
 label_encoder = preprocessing.LabelEncoder()
 encoded_class = label_encoder.fit_transform(titanic["PClass"])
 
-X = pd.DataFrame([titanic["SexCode"],
-                  encoded_class]).T
+X = pd.DataFrame([titanic["SexCode"], encoded_class]).T
 X.columns = ["SexCode", "PClass"]
 y = titanic["Survived"]
 
-XTrain, XTest, yTrain, yTest = train_test_split(X, y, test_size=0.25,
-                                                random_state=1)
+XTrain, XTest, yTrain, yTest = train_test_split(X, y, test_size=0.25, random_state=1)
 
 dtree = tree.DecisionTreeClassifier()
 dtree.fit(XTrain, yTrain)
 
 with open("tmp_tree.dot", "w") as f:
-    f = tree.export_graphviz(dtree,
-                             feature_names=["Sex", "Class"],
-                             out_file=f)
+    f = tree.export_graphviz(dtree, feature_names=["Sex", "Class"], out_file=f)
 
 print("------------------------------------------------------------")  # 60個
 

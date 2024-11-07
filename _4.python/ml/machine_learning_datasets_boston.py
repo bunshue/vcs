@@ -363,31 +363,10 @@ print(data)
 target = raw_df.values[1::2, 2]
 print(target)
 
-from sklearn.datasets import fetch_california_housing
-
-housing = fetch_california_housing()
-print(housing)
-
-from sklearn.datasets import fetch_openml
-
-housing = fetch_openml(name="house_prices", as_frame=True)
-
-print(housing)
-
-
-sns.set(rc={'figure.figsize':(11.7,8.27)})
-sns.distplot(housing.MedHouseVal, bins=30)
-
-
-plt.grid()
-plt.show()
-
-
 """
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -402,8 +381,21 @@ print("------------------------------------------------------------")  # 60個
 raw_df = pd.read_csv("data/boston.csv", sep="\s+", skiprows=22, header=None)
 data = np.hstack([raw_df.values[::2, :], raw_df.values[1::2, :2]])
 target = raw_df.values[1::2, 2]
-feature_names = ['CRIM', 'ZN', 'INDUS', 'CHAS', 'NOX', 'RM',
-                 'AGE', 'DIS', 'RAD', 'TAX', 'PTRATIO', 'B', 'LSTAT']
+feature_names = [
+    "CRIM",
+    "ZN",
+    "INDUS",
+    "CHAS",
+    "NOX",
+    "RM",
+    "AGE",
+    "DIS",
+    "RAD",
+    "TAX",
+    "PTRATIO",
+    "B",
+    "LSTAT",
+]
 X = pd.DataFrame(data, columns=feature_names)
 print(X.head())
 
@@ -418,8 +410,21 @@ from sklearn.linear_model import LinearRegression
 raw_df = pd.read_csv("data/boston.csv", sep="\s+", skiprows=22, header=None)
 data = np.hstack([raw_df.values[::2, :], raw_df.values[1::2, :2]])
 target = raw_df.values[1::2, 2]
-feature_names = ['CRIM', 'ZN', 'INDUS', 'CHAS', 'NOX', 'RM',
-                 'AGE', 'DIS', 'RAD', 'TAX', 'PTRATIO', 'B', 'LSTAT']
+feature_names = [
+    "CRIM",
+    "ZN",
+    "INDUS",
+    "CHAS",
+    "NOX",
+    "RM",
+    "AGE",
+    "DIS",
+    "RAD",
+    "TAX",
+    "PTRATIO",
+    "B",
+    "LSTAT",
+]
 X = pd.DataFrame(data, columns=feature_names)
 target = pd.DataFrame(target, columns=["MEDV"])
 y = target["MEDV"]
@@ -427,7 +432,7 @@ y = target["MEDV"]
 lm = LinearRegression()
 lm.fit(X, y)
 print("迴歸係數:", lm.coef_)
-print("截距:", lm.intercept_ )
+print("截距:", lm.intercept_)
 print("---------------------------")
 coef = pd.DataFrame(feature_names, columns=["features"])
 coef["estimatedCoefficients"] = lm.coef_
@@ -447,8 +452,21 @@ from sklearn.linear_model import LinearRegression
 raw_df = pd.read_csv("data/boston.csv", sep="\s+", skiprows=22, header=None)
 data = np.hstack([raw_df.values[::2, :], raw_df.values[1::2, :2]])
 target = raw_df.values[1::2, 2]
-feature_names = ['CRIM', 'ZN', 'INDUS', 'CHAS', 'NOX', 'RM',
-                 'AGE', 'DIS', 'RAD', 'TAX', 'PTRATIO', 'B', 'LSTAT']
+feature_names = [
+    "CRIM",
+    "ZN",
+    "INDUS",
+    "CHAS",
+    "NOX",
+    "RM",
+    "AGE",
+    "DIS",
+    "RAD",
+    "TAX",
+    "PTRATIO",
+    "B",
+    "LSTAT",
+]
 X = pd.DataFrame(data, columns=feature_names)
 target = pd.DataFrame(target, columns=["MEDV"])
 y = target["MEDV"]
@@ -474,14 +492,26 @@ from sklearn.model_selection import train_test_split
 raw_df = pd.read_csv("data/boston.csv", sep="\s+", skiprows=22, header=None)
 data = np.hstack([raw_df.values[::2, :], raw_df.values[1::2, :2]])
 target = raw_df.values[1::2, 2]
-feature_names = ['CRIM', 'ZN', 'INDUS', 'CHAS', 'NOX', 'RM',
-                 'AGE', 'DIS', 'RAD', 'TAX', 'PTRATIO', 'B', 'LSTAT']
+feature_names = [
+    "CRIM",
+    "ZN",
+    "INDUS",
+    "CHAS",
+    "NOX",
+    "RM",
+    "AGE",
+    "DIS",
+    "RAD",
+    "TAX",
+    "PTRATIO",
+    "B",
+    "LSTAT",
+]
 X = pd.DataFrame(data, columns=feature_names)
 target = pd.DataFrame(target, columns=["MEDV"])
 y = target["MEDV"]
 
-XTrain, XTest, yTrain, yTest = train_test_split(X, y, test_size=0.33,
-                                                random_state=5)
+XTrain, XTest, yTrain, yTest = train_test_split(X, y, test_size=0.33, random_state=5)
 lm = LinearRegression()
 lm.fit(XTrain, yTrain)
 
@@ -502,22 +532,34 @@ from sklearn.model_selection import train_test_split
 raw_df = pd.read_csv("data/boston.csv", sep="\s+", skiprows=22, header=None)
 data = np.hstack([raw_df.values[::2, :], raw_df.values[1::2, :2]])
 target = raw_df.values[1::2, 2]
-feature_names = ['CRIM', 'ZN', 'INDUS', 'CHAS', 'NOX', 'RM',
-                 'AGE', 'DIS', 'RAD', 'TAX', 'PTRATIO', 'B', 'LSTAT']
+feature_names = [
+    "CRIM",
+    "ZN",
+    "INDUS",
+    "CHAS",
+    "NOX",
+    "RM",
+    "AGE",
+    "DIS",
+    "RAD",
+    "TAX",
+    "PTRATIO",
+    "B",
+    "LSTAT",
+]
 X = pd.DataFrame(data, columns=feature_names)
 target = pd.DataFrame(target, columns=["MEDV"])
 y = target["MEDV"]
 
-XTrain, XTest, yTrain, yTest = train_test_split(X, y, test_size=0.33,
-                                                random_state=5)
+XTrain, XTest, yTrain, yTest = train_test_split(X, y, test_size=0.33, random_state=5)
 lm = LinearRegression()
 lm.fit(XTrain, yTrain)
 
 pred_train = lm.predict(XTrain)
 pred_test = lm.predict(XTest)
 
-MSE_train = np.mean((yTrain-pred_train)**2)
-MSE_test = np.mean((yTest-pred_test)**2)
+MSE_train = np.mean((yTrain - pred_train) ** 2)
+MSE_test = np.mean((yTest - pred_test) ** 2)
 print("訓練資料的MSE:", MSE_train)
 print("測試資料的MSE:", MSE_test)
 print("---------------------------")
@@ -531,8 +573,21 @@ from sklearn.linear_model import LinearRegression
 raw_df = pd.read_csv("data/boston.csv", sep="\s+", skiprows=22, header=None)
 data = np.hstack([raw_df.values[::2, :], raw_df.values[1::2, :2]])
 target = raw_df.values[1::2, 2]
-feature_names = ['CRIM', 'ZN', 'INDUS', 'CHAS', 'NOX', 'RM',
-                 'AGE', 'DIS', 'RAD', 'TAX', 'PTRATIO', 'B', 'LSTAT']
+feature_names = [
+    "CRIM",
+    "ZN",
+    "INDUS",
+    "CHAS",
+    "NOX",
+    "RM",
+    "AGE",
+    "DIS",
+    "RAD",
+    "TAX",
+    "PTRATIO",
+    "B",
+    "LSTAT",
+]
 X = pd.DataFrame(data, columns=feature_names)
 target = pd.DataFrame(target, columns=["MEDV"])
 y = target["MEDV"]
@@ -543,7 +598,7 @@ lm.fit(X, y)
 predicted_price = lm.predict(X)
 print(predicted_price[0:5])
 print("---------------------------")
-MSE = np.mean((y-predicted_price)**2)
+MSE = np.mean((y - predicted_price) ** 2)
 print("MSE:", MSE)
 print("---------------------------")
 print("R-squared:", lm.score(X, y))
@@ -556,24 +611,34 @@ from sklearn.model_selection import train_test_split
 raw_df = pd.read_csv("data/boston.csv", sep="\s+", skiprows=22, header=None)
 data = np.hstack([raw_df.values[::2, :], raw_df.values[1::2, :2]])
 target = raw_df.values[1::2, 2]
-feature_names = ['CRIM', 'ZN', 'INDUS', 'CHAS', 'NOX', 'RM',
-                 'AGE', 'DIS', 'RAD', 'TAX', 'PTRATIO', 'B', 'LSTAT']
+feature_names = [
+    "CRIM",
+    "ZN",
+    "INDUS",
+    "CHAS",
+    "NOX",
+    "RM",
+    "AGE",
+    "DIS",
+    "RAD",
+    "TAX",
+    "PTRATIO",
+    "B",
+    "LSTAT",
+]
 X = pd.DataFrame(data, columns=feature_names)
 target = pd.DataFrame(target, columns=["MEDV"])
 y = target["MEDV"]
 
-XTrain, XTest, yTrain, yTest = train_test_split(X, y, test_size=0.33,
-                                                random_state=5)
+XTrain, XTest, yTrain, yTest = train_test_split(X, y, test_size=0.33, random_state=5)
 lm = LinearRegression()
 lm.fit(XTrain, yTrain)
 
 pred_train = lm.predict(XTrain)
 pred_test = lm.predict(XTest)
 
-plt.scatter(pred_train, yTrain-pred_train,
-            c="b", s=40, alpha=0.5, label="訓練資料集")
-plt.scatter(pred_test, yTest-pred_test,
-            c="r", s=40, label="測試資料集")
+plt.scatter(pred_train, yTrain - pred_train, c="b", s=40, alpha=0.5, label="訓練資料集")
+plt.scatter(pred_test, yTest - pred_test, c="r", s=40, label="測試資料集")
 plt.hlines(y=0, xmin=0, xmax=50)
 plt.title("殘差圖(Residual Plot)")
 plt.ylabel("殘差值(Residual Value)")
@@ -589,22 +654,35 @@ import seaborn as sns
 raw_df = pd.read_csv("data/boston.csv", sep="\s+", skiprows=22, header=None)
 data = np.hstack([raw_df.values[::2, :], raw_df.values[1::2, :2]])
 target = raw_df.values[1::2, 2]
-feature_names = ['CRIM', 'ZN', 'INDUS', 'CHAS', 'NOX', 'RM',
-                 'AGE', 'DIS', 'RAD', 'TAX', 'PTRATIO', 'B', 'LSTAT']
+feature_names = [
+    "CRIM",
+    "ZN",
+    "INDUS",
+    "CHAS",
+    "NOX",
+    "RM",
+    "AGE",
+    "DIS",
+    "RAD",
+    "TAX",
+    "PTRATIO",
+    "B",
+    "LSTAT",
+]
 X = pd.DataFrame(data, columns=feature_names)
 target = pd.DataFrame(target, columns=["MEDV"])
 y = target["MEDV"]
 
-XTrain, XTest, yTrain, yTest = train_test_split(X, y, test_size=0.33,
-                                                random_state=5)
+XTrain, XTest, yTrain, yTest = train_test_split(X, y, test_size=0.33, random_state=5)
 lm = LinearRegression()
 lm.fit(XTrain, yTrain)
 
 pred_train = lm.predict(XTrain)
 pred_test = lm.predict(XTest)
 
-sns.set_style("darkgrid", {"axes.axisbelow": False,
-                       "font.sans-serif":['Microsoft JhengHei']})
+sns.set_style(
+    "darkgrid", {"axes.axisbelow": False, "font.sans-serif": ["Microsoft JhengHei"]}
+)
 
 df = pd.DataFrame({"x": pred_train, "y": yTrain})
 df2 = pd.DataFrame({"x": pred_test, "y": yTest})
@@ -615,7 +693,6 @@ plt.ylabel("殘差值(Residual Value)")
 plt.legend()
 
 plt.show()
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -725,8 +802,6 @@ for i in range(5):
 print("平均方差：{}".format(merror))
 
 
-
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -811,12 +886,8 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -831,5 +902,3 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
-
-

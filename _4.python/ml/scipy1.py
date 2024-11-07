@@ -1177,46 +1177,46 @@ norm.pdf(x, loc, scale)等同于norm.pdf(y) / scale ，其中 y = (x - loc) / sc
 
 from scipy import stats
 
-plt.figure(figsize=(12,8))
-x=np.linspace(-5,5,num=20)
+plt.figure(figsize=(12, 8))
+x = np.linspace(-5, 5, num=20)
 
-plt.subplot(2,2,1)
+plt.subplot(2, 2, 1)
 # 第1种调用方式
-gauss1=stats.norm(loc=0,scale=2) # loc: mean 均值， scale: standard deviation 标准差
-gauss2=stats.norm(loc=1,scale=3) 
-y1=gauss1.pdf(x)
-y2=gauss2.pdf(x)
+gauss1 = stats.norm(loc=0, scale=2)  # loc: mean 均值， scale: standard deviation 标准差
+gauss2 = stats.norm(loc=1, scale=3)
+y1 = gauss1.pdf(x)
+y2 = gauss2.pdf(x)
 
-plt.plot(x,y1,color='orange',label='u=0,sigma=2')
-plt.plot(x,y2,color='green',label='u=1,sigma=3')
-plt.legend(loc='upper right')
+plt.plot(x, y1, color="orange", label="u=0,sigma=2")
+plt.plot(x, y2, color="green", label="u=1,sigma=3")
+plt.legend(loc="upper right")
 
-plt.subplot(2,2,2)
+plt.subplot(2, 2, 2)
 # 第2种调用方式
-y1=stats.norm.pdf(x,loc=0,scale=2)
-y2=stats.norm.pdf(x,loc=1,scale=3)
+y1 = stats.norm.pdf(x, loc=0, scale=2)
+y2 = stats.norm.pdf(x, loc=1, scale=3)
 
-plt.plot(x,y1,color='r',label='u=0,sigma=2')
-plt.plot(x,y2,color='b',label='u=1,sigma=3')
-plt.legend(loc='upper right')
+plt.plot(x, y1, color="r", label="u=0,sigma=2")
+plt.plot(x, y2, color="b", label="u=1,sigma=3")
+plt.legend(loc="upper right")
 
 
 # stats.norm.pdf 和 stats.norm.rvs的区别
-plt.subplot(2,2,3)
-y1=stats.norm.rvs(loc=0,scale=2,size=20)
-y2=stats.norm.rvs(loc=1,scale=3,size=20)
+plt.subplot(2, 2, 3)
+y1 = stats.norm.rvs(loc=0, scale=2, size=20)
+y2 = stats.norm.rvs(loc=1, scale=3, size=20)
 
-plt.plot(x,y1,color='black',linestyle=':',label='u=0,sigma=2')
-plt.plot(x,y2,color='purple',label='u=1,sigma=3')
-plt.legend(loc='upper right')
+plt.plot(x, y1, color="black", linestyle=":", label="u=0,sigma=2")
+plt.plot(x, y2, color="purple", label="u=1,sigma=3")
+plt.legend(loc="upper right")
 
-plt.subplot(2,2,4)
-y1=sorted(stats.norm.rvs(loc=0,scale=2,size=20))
-y2=sorted(stats.norm.rvs(loc=1,scale=3,size=20))
+plt.subplot(2, 2, 4)
+y1 = sorted(stats.norm.rvs(loc=0, scale=2, size=20))
+y2 = sorted(stats.norm.rvs(loc=1, scale=3, size=20))
 
-plt.plot(x,y1,color='black',linestyle=':',label='u=0,sigma=2')
-plt.plot(x,y2,color='purple',label='u=1,sigma=3')
-plt.legend(loc='upper right')
+plt.plot(x, y1, color="black", linestyle=":", label="u=0,sigma=2")
+plt.plot(x, y2, color="purple", label="u=1,sigma=3")
+plt.legend(loc="upper right")
 
 plt.show()
 
@@ -1226,10 +1226,10 @@ plt.show()
 图223 和 图224 是代表调用stats.norm.rvs方法，rvs:随机变量（就是从这个分布中抽一些样本），而不是概率密度分布哦！
 """
 
-print(gauss1) 
+print(gauss1)
 # <scipy.stats._distn_infrastructure.rv_frozen object at 0x121F7DB0>
 
-print(stats.norm.rvs(loc=0,scale=2,size=10))
+print(stats.norm.rvs(loc=0, scale=2, size=10))
 # [ 4.04968057 -0.85376074  4.62058049  1.25731984 -0.11082284 -2.63972507 0.81014329 -0.37101067 -0.20334414  2.65743079]
 
 """
@@ -1246,21 +1246,13 @@ moment:分布的非中心矩。
 """
 
 
-
+print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
 
 
-
-
 print("------------------------------------------------------------")  # 60個
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------------------------------------")  # 60個

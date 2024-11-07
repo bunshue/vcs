@@ -93,20 +93,26 @@ print("------------------------------------------------------------")  # 60個
 
 
 from sklearn.datasets import fetch_20newsgroups
+
 data = fetch_20newsgroups()
 print(data.target_names)
-     
+
 """
 Downloading 20news dataset. This may take a few minutes.
 Downloading dataset from https://ndownloader.figshare.com/files/5975967 (14 MB)
 """
 
-#['alt.atheism', 'comp.graphics', 'comp.os.ms-windows.misc', 'comp.sys.ibm.pc.hardware', 'comp.sys.mac.hardware', 'comp.windows.x', 'misc.forsale', 'rec.autos', 'rec.motorcycles', 'rec.sport.baseball', 'rec.sport.hockey', 'sci.crypt', 'sci.electronics', 'sci.med', 'sci.space', 'soc.religion.christian', 'talk.politics.guns', 'talk.politics.mideast', 'talk.politics.misc', 'talk.religion.misc']
+# ['alt.atheism', 'comp.graphics', 'comp.os.ms-windows.misc', 'comp.sys.ibm.pc.hardware', 'comp.sys.mac.hardware', 'comp.windows.x', 'misc.forsale', 'rec.autos', 'rec.motorcycles', 'rec.sport.baseball', 'rec.sport.hockey', 'sci.crypt', 'sci.electronics', 'sci.med', 'sci.space', 'soc.religion.christian', 'talk.politics.guns', 'talk.politics.mideast', 'talk.politics.misc', 'talk.religion.misc']
 
 
-categories = ['talk.religion.misc', 'soc.religion.christian', 'sci.space', 'comp.graphics']
-train = fetch_20newsgroups(subset='train', categories=categories)
-test = fetch_20newsgroups(subset='test', categories=categories)
+categories = [
+    "talk.religion.misc",
+    "soc.religion.christian",
+    "sci.space",
+    "comp.graphics",
+]
+train = fetch_20newsgroups(subset="train", categories=categories)
+test = fetch_20newsgroups(subset="test", categories=categories)
 
 print(train.data[5])
 
@@ -117,49 +123,58 @@ from sklearn.pipeline import make_pipeline
 model = make_pipeline(TfidfVectorizer(), MultinomialNB())
 model.fit(train.data, train.target)
 labels = model.predict(test.data)
-     
+
 
 from sklearn.metrics import confusion_matrix
+
 mat = confusion_matrix(test.target, labels)
 import seaborn as sns
 import matplotlib.pyplot as plt
-sns.heatmap(mat.T,square=True,annot=True,fmt='d',cbar=False,
-            xticklabels=train.target_names,yticklabels=train.target_names)
-plt.xlabel('True Label')
+
+sns.heatmap(
+    mat.T,
+    square=True,
+    annot=True,
+    fmt="d",
+    cbar=False,
+    xticklabels=train.target_names,
+    yticklabels=train.target_names,
+)
+plt.xlabel("True Label")
 plt.ylabel("Predicted Label")
 plt.show()
-     
+
 """
 /usr/local/lib/python3.6/dist-packages/statsmodels/tools/_testing.py:19: FutureWarning: pandas.util.testing is deprecated. Use the functions in the public API at pandas.testing instead.
   import pandas.util.testing as tm
 """
 
-def predict_category(s, train=train,model=model):
+
+def predict_category(s, train=train, model=model):
     pred = model.predict([s])
     print(train.target_names[pred[0]])
-     
+
 
 predict_category("sending a payload to the ISS")
-     
 
-#sci.space
+
+# sci.space
 
 
 predict_category("discussing islam vs atheism")
-     
 
-#soc.religion.christian
+
+# soc.religion.christian
 
 
 predict_category("determining the screen resolution")
-     
 
-#comp.graphics
+
+# comp.graphics
 
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -175,4 +190,3 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-

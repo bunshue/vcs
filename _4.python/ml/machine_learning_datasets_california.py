@@ -28,6 +28,20 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
+
+
+from sklearn.datasets import fetch_california_housing
+
+print("------------------------------------------------------------")  # 60個
+
+
+housing = fetch_california_housing()
+print(housing)
+
+
+print("------------------------------------------------------------")  # 60個
+
+
 """
 from sklearn.datasets import fetch_california_housing
 
@@ -210,5 +224,3 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
-

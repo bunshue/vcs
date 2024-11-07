@@ -10,22 +10,7 @@
     Finding the curve that best fits your data is called regression, and when that curve is a straight line, it's called linear regression.
     找出符合資料規律的直線，就叫線性迴歸。
 
-建立迴歸資料
-在sklearn中很方便的是它內涵豐富的函數可以使用，所以要建立隨機資料只需要： make_regression
-
-
-
-1. 數據
-2. 分類
-3. 學習機
-4. 學習訓練
-5. 預測
-6. 儲存預測模型/讀取預測模型並預測
-7. 畫圖
-
-
-
-
+建立迴歸資料 make_regression
 
 """
 
@@ -57,23 +42,23 @@ from sklearn import datasets
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print('使用 make_regression')
-#使用make_regression()方法，建立200個樣本(samples)，
-#只有一種特徵(features)和一種標籤類別（label），
-#我們將noise設為10，這樣資料會比較分散一點。
+print("使用 make_regression")
+# 使用make_regression()方法，建立200個樣本(samples)，
+# 只有一種特徵(features)和一種標籤類別（label），
+# 我們將noise設為10，這樣資料會比較分散一點。
 
-X,y = datasets.make_regression(n_samples=200,n_features=1,n_targets=1,noise=10)
+X, y = datasets.make_regression(n_samples=200, n_features=1, n_targets=1, noise=10)
 
 # 做線性迴歸, 用 sklearn 裡的 LinearRegression 來做線性迴歸
 linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
 
-linear_regression.fit(X,y)  # 學習訓練.fit
+linear_regression.fit(X, y)  # 學習訓練.fit
 
-#因為要再繪出預測的資料圖，所以將預測資料放到predict變數內：
-predict = linear_regression.predict(X[:200,:])  # 預測.predict
+# 因為要再繪出預測的資料圖，所以將預測資料放到predict變數內：
+predict = linear_regression.predict(X[:200, :])  # 預測.predict
 
-plt.scatter(X,y,linewidths=0.1)
-plt.plot(X,predict,c="red")  # 用線性迴歸找出的線
+plt.scatter(X, y, linewidths=0.1)
+plt.plot(X, predict, c="red")  # 用線性迴歸找出的線
 
 plt.show()
 
@@ -193,16 +178,12 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 氣溫
-temperatures = np.array([29, 28, 34, 31,
-                         25, 29, 32, 31,
-                         24, 33, 25, 31,
-                         26, 30])
+temperatures = np.array([29, 28, 34, 31, 25, 29, 32, 31, 24, 33, 25, 31, 26, 30])
 
 # 營業額
-drink_sales = np.array([7.7, 6.2, 9.3, 8.4,
-                        5.9, 6.4, 8.0, 7.5,
-                        5.8, 9.1, 5.1, 7.3,
-                        6.5, 8.4])
+drink_sales = np.array(
+    [7.7, 6.2, 9.3, 8.4, 5.9, 6.4, 8.0, 7.5, 5.8, 9.1, 5.1, 7.3, 6.5, 8.4]
+)
 
 X = pd.DataFrame(temperatures, columns=["氣溫"])
 target = pd.DataFrame(drink_sales, columns=["營業額"])
@@ -213,7 +194,7 @@ linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
 
 linear_regression.fit(X, y)  # 學習訓練.fit
 print("迴歸係數:", linear_regression.coef_)
-print("截距:", linear_regression.intercept_ )
+print("截距:", linear_regression.intercept_)
 
 # 預測氣溫26, 30度的業績
 new_temperatures = pd.DataFrame(np.array([26, 30]), columns=["氣溫"])
@@ -226,8 +207,9 @@ plt.scatter(temperatures, drink_sales)  # 繪點
 regression_sales = linear_regression.predict(X)  # 預測.predict
 
 plt.plot(temperatures, regression_sales, color="blue")
-plt.plot(new_temperatures["氣溫"], predicted_sales, 
-         color="red", marker="o", markersize=10)
+plt.plot(
+    new_temperatures["氣溫"], predicted_sales, color="red", marker="o", markersize=10
+)
 plt.title("使用當日氣溫來預測當日的業積")
 
 plt.show()
@@ -235,12 +217,10 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-heights = np.array([147.9, 163.5, 159.8, 155.1,
-                    163.3, 158.7, 172.0, 161.2,
-                    153.9, 161.6])
-weights = np.array([41.7, 60.2, 47.0, 53.2,
-                    48.3, 55.2, 58.5, 49.0,
-                    46.7, 52.5])
+heights = np.array(
+    [147.9, 163.5, 159.8, 155.1, 163.3, 158.7, 172.0, 161.2, 153.9, 161.6]
+)
+weights = np.array([41.7, 60.2, 47.0, 53.2, 48.3, 55.2, 58.5, 49.0, 46.7, 52.5])
 X = pd.DataFrame(heights, columns=["身高"])
 target = pd.DataFrame(weights, columns=["體重"])
 y = target["體重"]
@@ -250,7 +230,7 @@ linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
 
 linear_regression.fit(X, y)  # 學習訓練.fit
 print("迴歸係數:", linear_regression.coef_)
-print("截距:", linear_regression.intercept_ )
+print("截距:", linear_regression.intercept_)
 
 # 預測身高150, 160, 170的體重
 new_heights = pd.DataFrame(np.array([150, 160, 170]), columns=["身高"])
@@ -271,13 +251,21 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-waist_heights = np.array([[67,160], [68,165], [70,167], 
-                          [65,170], [80,165], [85,167],
-                          [78,178], [79,182], [95,175],
-                          [89,172]])
-weights = np.array([50, 60, 65, 65,
-                    70, 75, 80, 85,
-                    90, 81])
+waist_heights = np.array(
+    [
+        [67, 160],
+        [68, 165],
+        [70, 167],
+        [65, 170],
+        [80, 165],
+        [85, 167],
+        [78, 178],
+        [79, 182],
+        [95, 175],
+        [89, 172],
+    ]
+)
+weights = np.array([50, 60, 65, 65, 70, 75, 80, 85, 90, 81])
 X = pd.DataFrame(waist_heights, columns=["腰圍", "身高"])
 target = pd.DataFrame(weights, columns=["體重"])
 y = target["體重"]
@@ -287,25 +275,31 @@ linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
 
 linear_regression.fit(X, y)  # 學習訓練.fit
 print("迴歸係數:", linear_regression.coef_)
-print("截距:", linear_regression.intercept_ )
+print("截距:", linear_regression.intercept_)
 
 # 預測腰圍和身高[66,164],[82,172]的體重
-new_waist_heights = pd.DataFrame(np.array([[66, 164],
-                                           [82, 172]]),
-                                 columns=["腰圍", "身高"])
+new_waist_heights = pd.DataFrame(np.array([[66, 164], [82, 172]]), columns=["腰圍", "身高"])
 predicted_weights = linear_regression.predict(new_waist_heights)  # 預測.predict
 print(predicted_weights)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-area_dists = np.array([[10,80], [8,0], [8,200], 
-                       [5,200], [7,300], [8,230],
-                       [7,40], [9,0], [6,330],
-                       [9,180]])
-sales = np.array([46.9, 36.6, 37.1, 20.8,
-                    24.6, 29.7, 36.6, 43.6,
-                    19.8, 36.4])
+area_dists = np.array(
+    [
+        [10, 80],
+        [8, 0],
+        [8, 200],
+        [5, 200],
+        [7, 300],
+        [8, 230],
+        [7, 40],
+        [9, 0],
+        [6, 330],
+        [9, 180],
+    ]
+)
+sales = np.array([46.9, 36.6, 37.1, 20.8, 24.6, 29.7, 36.6, 43.6, 19.8, 36.4])
 X = pd.DataFrame(area_dists, columns=["店面積", "距捷運"])
 target = pd.DataFrame(sales, columns=["月營收"])
 y = target["月營收"]
@@ -315,7 +309,7 @@ linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
 
 linear_regression.fit(X, y)  # 學習訓練.fit
 print("迴歸係數:", linear_regression.coef_)
-print("截距:", linear_regression.intercept_ )
+print("截距:", linear_regression.intercept_)
 
 # 預測腰面積和距離[10,100]的營業額
 new_area_dists = pd.DataFrame(np.array([[10, 100]]), columns=["店面積", "距捷運"])
@@ -990,9 +984,6 @@ print(
 # 9. 模型佈署，暫不進行
 
 
-
-
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -1006,6 +997,3 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
-
-

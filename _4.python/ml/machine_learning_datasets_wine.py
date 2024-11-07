@@ -68,12 +68,12 @@ from sklearn.datasets import load_wine
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print('葡萄酒數據集')
+print("葡萄酒數據集")
 
 data = load_wine()
 cc = data.target[[10, 80, 140]]
 print(cc)
-#array([0, 1, 2])
+# array([0, 1, 2])
 
 print("data.data.shape, 數據集資料 形狀")
 print(data.data.shape)
@@ -108,8 +108,8 @@ cc = data.data[:, [10]]  # hue
 cc = data.data[:, [11]]  # od280/od315_of_diluted_wines
 cc = data.data[:, [12]]  # proline
 
-print('------------------------------------------------------------')	#60個
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 # 支持向量機
 
@@ -121,40 +121,48 @@ wine = datasets.load_wine()
 X = wine.data
 y = wine.target
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3) 
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
 
-clf = svm.SVC(gamma=0.001, decision_function_shape='ovo')
-clf.fit(X_train, y_train) 
+clf = svm.SVC(gamma=0.001, decision_function_shape="ovo")
+clf.fit(X_train, y_train)
 
 dec = clf.decision_function(X_test)
-cc = dec.shape[1]   #n_class * (n_class - 1) / 2 =  3*2/2 = 3
+cc = dec.shape[1]  # n_class * (n_class - 1) / 2 =  3*2/2 = 3
 print(cc)
 
-print('------------------------------------------------------------')	#60個
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 data = load_wine()
 
 X = data.data[:, [0, 9]]
 
 from sklearn.cluster import KMeans
+
 n_clusters = 3
-model = KMeans(n_clusters = n_clusters)
+model = KMeans(n_clusters=n_clusters)
 
 pred = model.fit_predict(X)
 
 fig, ax = plt.subplots()
-ax.scatter(X[pred == 0, 0], X[pred == 0, 1], color = 'red', marker = 's', label = 'Label1')
-ax.scatter(X[pred == 1, 0], X[pred == 1, 1], color = 'blue', marker = 's', label = 'Label2')
-ax.scatter(X[pred == 2, 0], X[pred == 2, 1], color = 'green', marker = 's', label = 'Label3')
-ax.scatter(model.cluster_centers_[:, 0], model.cluster_centers_[:, 1], s = 200, color = 'yellow', marker = "*", label = "center")
+ax.scatter(X[pred == 0, 0], X[pred == 0, 1], color="red", marker="s", label="Label1")
+ax.scatter(X[pred == 1, 0], X[pred == 1, 1], color="blue", marker="s", label="Label2")
+ax.scatter(X[pred == 2, 0], X[pred == 2, 1], color="green", marker="s", label="Label3")
+ax.scatter(
+    model.cluster_centers_[:, 0],
+    model.cluster_centers_[:, 1],
+    s=200,
+    color="yellow",
+    marker="*",
+    label="center",
+)
 ax.legend()
-plt.title('wine')
+plt.title("wine")
 
 plt.show()
 
-print('------------------------------------------------------------')	#60個
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 data = load_wine()
 
@@ -165,23 +173,23 @@ plt.subplot(121)
 plt.scatter(x3, y3)
 
 plt.subplot(122)
-plt.hist(y3, bins = 50)
+plt.hist(y3, bins=50)
 
-plt.suptitle('wine')
+plt.suptitle("wine")
 
 plt.show()
 
-print('------------------------------------------------------------')	#60個
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 data = load_wine()
-df_X = pd.DataFrame(data.data, columns = data.feature_names)
+df_X = pd.DataFrame(data.data, columns=data.feature_names)
 print(df_X.head())
 
-df_y = pd.DataFrame(data.target, columns = ["kind(target)"])
+df_y = pd.DataFrame(data.target, columns=["kind(target)"])
 print(df_y.head())
 
-df = pd.concat([df_X, df_y], axis = 1)
+df = pd.concat([df_X, df_y], axis=1)
 print(df.head())
 
 plt.subplot(121)
@@ -195,12 +203,12 @@ plt.show()
 print(df.corr())
 print(df.describe())
 
-print('------------------------------')	#30個
+print("------------------------------")  # 30個
 
-print('使用 scatter_matrix')
+print("使用 scatter_matrix")
 from pandas.plotting import scatter_matrix
 
-_ = scatter_matrix(df, figsize = (15, 15))
+_ = scatter_matrix(df, figsize=(15, 15))
 plt.show()
 
 _ = scatter_matrix(df.iloc[:, [0, 9, -1]])
@@ -215,11 +223,13 @@ from sklearn.metrics import accuracy_score
 
 # データ読み込み
 data = load_wine()
-X_train, X_test, y_train, y_test = train_test_split(data.data, data.target, test_size=0.3)
-model = RandomForestClassifier() 
-model.fit(X_train, y_train) # 學習
-y_pred = model.predict(X_test) 
-print(accuracy_score(y_pred, y_test)) # 評価
+X_train, X_test, y_train, y_test = train_test_split(
+    data.data, data.target, test_size=0.3
+)
+model = RandomForestClassifier()
+model.fit(X_train, y_train)  # 學習
+y_pred = model.predict(X_test)
+print(accuracy_score(y_pred, y_test))  # 評価
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -289,9 +299,10 @@ print("------------------------------------------------------------")  # 60個
 """
 
 import sklearn.datasets as ds
+
 wine = ds.load_wine()
 
-#先看資料集的keys:
+# 先看資料集的keys:
 
 """
 winde.target，有三種酒類
@@ -300,26 +311,26 @@ winde.target，有三種酒類
 值：2：代表Barbera酒
 """
 
-#看wine資料集的keys：
+# 看wine資料集的keys：
 cc = wine.keys()
 print(cc)
 
 print(wine.data.shape)
 print(wine.target.shape)
 
-#data(特徵資料)的內容
+# data(特徵資料)的內容
 print(wine.data)
 
 
-#data(特徵資料（各種變數x1,x2,x3....）)總共幾筆
+# data(特徵資料（各種變數x1,x2,x3....）)總共幾筆
 print(wine.data.shape)
 
-#(178, 13)
+# (178, 13)
 
-#target：wine葡萄酒品種的目標值
+# target：wine葡萄酒品種的目標值
 print(wine.target)
 
-#target：葡萄酒品種，總共幾筆
+# target：葡萄酒品種，總共幾筆
 print(wine.target.shape)
 
 """
@@ -348,20 +359,49 @@ wine的數據有13種特徵欄位，而每個特徵變數有的意義分別為�
 13.proline：脯氨酸
 """
 
-#5.練習5：把data資料轉成pandas的dataframe數據格式（變數df_x）
+# 5.練習5：把data資料轉成pandas的dataframe數據格式（變數df_x）
 
 df_x = pd.DataFrame(wine.data, columns=wine.feature_names)
 
-c1 = ["酒精濃度","蘋果酸","灰","灰的鹼度","鎂","總酚","黃酮類化合物","非黃烷類酚類","原花青素","色彩強度","色調","稀釋酒","脯氨酸"]
+c1 = [
+    "酒精濃度",
+    "蘋果酸",
+    "灰",
+    "灰的鹼度",
+    "鎂",
+    "總酚",
+    "黃酮類化合物",
+    "非黃烷類酚類",
+    "原花青素",
+    "色彩強度",
+    "色調",
+    "稀釋酒",
+    "脯氨酸",
+]
 
-#設定英文欄位
+# 設定英文欄位
 import pandas as pd
+
 df_x = pd.DataFrame(wine.data, columns=wine.feature_names)
 print(df_x)
 
 
-#設定中文欄位
-c1 = ["酒精濃度","蘋果酸","灰","灰的鹼度","鎂","總酚","黃酮類化合物","非黃烷類酚類","原花青素","色彩強度","色調","稀釋酒","脯氨酸"]
+# 設定中文欄位
+c1 = [
+    "酒精濃度",
+    "蘋果酸",
+    "灰",
+    "灰的鹼度",
+    "鎂",
+    "總酚",
+    "黃酮類化合物",
+    "非黃烷類酚類",
+    "原花青素",
+    "色彩強度",
+    "色調",
+    "稀釋酒",
+    "脯氨酸",
+]
 df_x = pd.DataFrame(wine.data, columns=c1)
 print(df_x)
 
@@ -410,23 +450,24 @@ winde.target，有三種酒類
 值：2：代表Barbera酒
 """
 
-#1.步驟1：先建立數學模型(邏輯斯模型logistic regression model)
+# 1.步驟1：先建立數學模型(邏輯斯模型logistic regression model)
 import sklearn.linear_model as lm
+
 model = lm.LogisticRegression()
 
-#2.步驟2：讓模型model學習歷史數據
+# 2.步驟2：讓模型model學習歷史數據
 model.fit(df_x, df_y)
 
-#3.步驟3：讓模型model進行預測:model.predict(dataframe())
-#數據差別在[6]==>黃酮類化合物==>3.76
+# 3.步驟3：讓模型model進行預測:model.predict(dataframe())
+# 數據差別在[6]==>黃酮類化合物==>3.76
 print("預測這個紅酒A的酒種：")
-t1 =[[13.53,    3.10,   2.74,   24.5,   96.0,   2.05,   3.76,   0.56,   1.35,   9.20,   0.61,   1.60,   560.0]]
+t1 = [[13.53, 3.10, 2.74, 24.5, 96.0, 2.05, 3.76, 0.56, 1.35, 9.20, 0.61, 1.60, 560.0]]
 model.predict(t1)
 
-#數據差別在[6]==>黃酮類化合物==>0.76
+# 數據差別在[6]==>黃酮類化合物==>0.76
 print("預測這個紅酒B的酒種：")
-t2 =[[13.53,    3.10,   2.74,   24.5,   96.0,   2.05,   0.76,   0.56,   1.35,   9.20,   0.61,   1.60,   560.0]]
-#t1 =[[13.53,   3.10,   2.74,   24.5,   96.0,   2.05,   3.76,   0.56,   1.35,   9.20,   0.61,   1.60,   560.0]]
+t2 = [[13.53, 3.10, 2.74, 24.5, 96.0, 2.05, 0.76, 0.56, 1.35, 9.20, 0.61, 1.60, 560.0]]
+# t1 =[[13.53,   3.10,   2.74,   24.5,   96.0,   2.05,   3.76,   0.56,   1.35,   9.20,   0.61,   1.60,   560.0]]
 model.predict(t2)
 
 """
@@ -450,8 +491,8 @@ plt.scatter(t1[0][6], model.predict(t1), label="預測紅酒A",color="red")
 """
 
 plt.scatter(df_x["黃酮類化合物"], df_y, label="實際數據")
-plt.scatter(t1[0][6], model.predict(t1), label="預測紅酒A",color="red")
-plt.scatter(t2[0][6], model.predict(t2), label="預測紅酒B",color="orange")
+plt.scatter(t1[0][6], model.predict(t1), label="預測紅酒A", color="red")
+plt.scatter(t2[0][6], model.predict(t2), label="預測紅酒B", color="orange")
 
 plt.legend()
 plt.xlabel("黃酮類化合物")
@@ -478,23 +519,24 @@ model.predict(t1)
 """
 
 from pickle import TUPLE3
-#(1).步驟3：讓模型model進行預測:model.predict(dataframe())
-#數據差別在[12]==>脯氨酸==>1560.0
+
+# (1).步驟3：讓模型model進行預測:model.predict(dataframe())
+# 數據差別在[12]==>脯氨酸==>1560.0
 print("預測這個紅酒C的酒種：")
-t3 =[[13.53,    3.10,   2.74,   24.5,   96.0,   2.05,   3.76,   0.56,   1.35,   9.20,   0.61,   1.60,   1560.0]]
+t3 = [[13.53, 3.10, 2.74, 24.5, 96.0, 2.05, 3.76, 0.56, 1.35, 9.20, 0.61, 1.60, 1560.0]]
 model.predict(t3)
 
 
-#(2).步驟3：讓模型model進行預測:model.predict(dataframe())
-#數據差別在[12]==>脯氨酸==>560.0
+# (2).步驟3：讓模型model進行預測:model.predict(dataframe())
+# 數據差別在[12]==>脯氨酸==>560.0
 print("預測這個紅酒D的酒種：")
-t4 =[[13.53,    3.10,   2.74,   24.5,   96.0,   2.05,   3.76,   0.56,   1.35,   9.20,   0.61,   1.60,   560.0]]
+t4 = [[13.53, 3.10, 2.74, 24.5, 96.0, 2.05, 3.76, 0.56, 1.35, 9.20, 0.61, 1.60, 560.0]]
 model.predict(t4)
 
 
 plt.scatter(df_x["脯氨酸"], df_y, label="實際數據")
-plt.scatter(t3[0][12], model.predict(t3), label="預測紅酒C",color="red")
-plt.scatter(t4[0][12], model.predict(t4), label="預測紅酒D",color="orange")
+plt.scatter(t3[0][12], model.predict(t3), label="預測紅酒C", color="red")
+plt.scatter(t4[0][12], model.predict(t4), label="預測紅酒D", color="orange")
 
 plt.legend()
 plt.xlabel("脯氨酸")
@@ -502,7 +544,7 @@ plt.ylabel("酒種")
 plt.title("畫圖，脯氨酸 vs 酒種")
 plt.show()
 
-#11.結論(2)：脯氨酸，是影響酒種的關鍵因素
+# 11.結論(2)：脯氨酸，是影響酒種的關鍵因素
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

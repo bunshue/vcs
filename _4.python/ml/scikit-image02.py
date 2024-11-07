@@ -1132,9 +1132,7 @@ skimage.segmentation.clear_border(cleared)  # 清除與邊界相連的目標物
 label_image = skimage.measure.label(cleared)  # 連通區域標記
 borders = np.logical_xor(bw, cleared)  # 異或
 label_image[borders] = -1
-image_label_overlay = skimage.color.label2rgb(
-    label_image, image=image
-)  # 不同標記用不同顏色顯示
+image_label_overlay = skimage.color.label2rgb(label_image, image=image)  # 不同標記用不同顏色顯示
 
 fig, (ax0, ax1) = plt.subplots(1, 2, figsize=(8, 6))
 ax0.imshow(cleared, plt.cm.gray)

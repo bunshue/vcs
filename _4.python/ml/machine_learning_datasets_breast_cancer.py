@@ -39,7 +39,7 @@ print("------------------------------------------------------------")  # 60個
 ds = datasets.load_breast_cancer()
 """
 
-#學習分類
+# 學習分類
 
 data = load_breast_cancer()
 
@@ -49,12 +49,14 @@ y = data.target
 X = X[:, :10]
 
 from sklearn.linear_model import LogisticRegression
+
 logistic_regression = LogisticRegression()
 logistic_regression.fit(X, y)
 
 y_pred = logistic_regression.predict(X)
 
 from sklearn.metrics import accuracy_score
+
 accuracy_score(y, y_pred)
 
 
@@ -73,7 +75,6 @@ from sklearn.linear_model import LogisticRegression
 logistic_regression = LogisticRegression()
 logistic_regression.fit(X, y)
 y_pred = logistic_regression.predict(X)
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -188,7 +189,7 @@ print("耗時 : {0:.6f}".format(time.time() - start))
 
 plt.show()
 
-print("------------------------------")	#30個
+print("------------------------------")  # 30個
 
 import warnings
 
@@ -259,7 +260,7 @@ print("best param: {0}\nbest score: {1}".format(clf.best_params_, clf.best_score
 # plot_param_curve(plt, gammas, clf.cv_results_, xlabel='gamma')
 # plt.show()
 
-print("------------------------------")	#30個
+print("------------------------------")  # 30個
 
 from common.utils import plot_learning_curve
 from sklearn.model_selection import ShuffleSplit
@@ -277,7 +278,7 @@ print("耗時 : {0:.6f}".format(time.time() - start))
 
 plt.show()
 
-print("------------------------------")	#30個
+print("------------------------------")  # 30個
 
 print("多項式核函數")
 
@@ -317,7 +318,7 @@ print("耗時 : {0:.6f}".format(time.time() - start))
 
 plt.show()
 
-print("------------------------------")	#30個
+print("------------------------------")  # 30個
 
 print("多項式 LinearSVC")
 
@@ -390,19 +391,27 @@ from sklearn import metrics
 from sklearn.model_selection import train_test_split
 
 np.set_printoptions(precision=2)
-#pd.set_option('precision', 2)
+# pd.set_option('precision', 2)
 
 # Support Vector Machines (SVM)
 
 X, y = datasets.load_breast_cancer(return_X_y=True)
-X_train, X_test, y_train, y_test = \
-    train_test_split(X, y, test_size=0.5, stratify=y, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.5, stratify=y, random_state=42
+)
 
 # %%
 # Preprocessing: unequal variance of input features, requires scaling for svm.
 
-ax = sns.displot(x=X_train.std(axis=0), kind="kde", bw_adjust=.2, cut=0,
-                 fill=True, height=3, aspect=1.5,)
+ax = sns.displot(
+    x=X_train.std(axis=0),
+    kind="kde",
+    bw_adjust=0.2,
+    cut=0,
+    fill=True,
+    height=3,
+    aspect=1.5,
+)
 _ = ax.set_xlabels("Std-dev").tight_layout()
 
 scaler = StandardScaler()
@@ -413,7 +422,7 @@ X_test = scaler.fit_transform(X_test)
 # Fit-predict
 # Probalility is a logistic of the decision_function
 
-svm = SVC(kernel='rbf', probability=True).fit(X_train, y_train)
+svm = SVC(kernel="rbf", probability=True).fit(X_train, y_train)
 y_pred = svm.predict(X_test)
 y_score = svm.decision_function(X_test)
 y_prob = svm.predict_proba(X_test)[:, 1]
@@ -423,19 +432,22 @@ _ = ax.set_axis_labels("decision function", "Probability").tight_layout()
 
 # %% Scores
 
-print("bAcc: %.2f, AUC: %.2f (AUC with proba: %.2f)" % (
-      metrics.balanced_accuracy_score(y_true=y_test, y_pred=y_pred),
-      metrics.roc_auc_score(y_true=y_test, y_score=y_score),
-      metrics.roc_auc_score(y_true=y_test, y_score=y_prob)))
+print(
+    "bAcc: %.2f, AUC: %.2f (AUC with proba: %.2f)"
+    % (
+        metrics.balanced_accuracy_score(y_true=y_test, y_pred=y_pred),
+        metrics.roc_auc_score(y_true=y_test, y_score=y_score),
+        metrics.roc_auc_score(y_true=y_test, y_score=y_prob),
+    )
+)
 
 # Usefull internals: indices of support vectors within original X
 np.all(X_train[svm.support_, :] == svm.support_vectors_)
 
 
-
 from sklearn.ensemble import RandomForestClassifier
 
-forest = RandomForestClassifier(n_estimators = 100)
+forest = RandomForestClassifier(n_estimators=100)
 forest.fit(X_train, y_train)
 
 y_pred = forest.predict(X_test)
@@ -444,9 +456,13 @@ y_prob = forest.predict_proba(X_test)[:, 1]
 
 # %% Scores
 
-print("bAcc: %.2f, AUC: %.2f " % (
-      metrics.balanced_accuracy_score(y_true=y_test, y_pred=y_pred),
-      metrics.roc_auc_score(y_true=y_test, y_score=y_prob)))
+print(
+    "bAcc: %.2f, AUC: %.2f "
+    % (
+        metrics.balanced_accuracy_score(y_true=y_test, y_pred=y_pred),
+        metrics.roc_auc_score(y_true=y_test, y_score=y_prob),
+    )
+)
 
 # %%
 # Extra Trees (Low Variance)
@@ -460,16 +476,21 @@ print("bAcc: %.2f, AUC: %.2f " % (
 
 from sklearn.ensemble import GradientBoostingClassifier
 
-gb = GradientBoostingClassifier(n_estimators=100, learning_rate=0.1,
-                                subsample=0.5, random_state=0)
+gb = GradientBoostingClassifier(
+    n_estimators=100, learning_rate=0.1, subsample=0.5, random_state=0
+)
 gb.fit(X_train, y_train)
 
 y_pred = gb.predict(X_test)
 y_prob = gb.predict_proba(X_test)[:, 1]
 
-print("bAcc: %.2f, AUC: %.2f " % (
-      metrics.balanced_accuracy_score(y_true=y_test, y_pred=y_pred),
-      metrics.roc_auc_score(y_true=y_test, y_score=y_prob)))
+print(
+    "bAcc: %.2f, AUC: %.2f "
+    % (
+        metrics.balanced_accuracy_score(y_true=y_test, y_pred=y_pred),
+        metrics.roc_auc_score(y_true=y_test, y_score=y_prob),
+    )
+)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -602,7 +623,7 @@ model.fit(dx_train, dy_train)  # 用最佳模型來做訓練
 
 print("Best params:", model.best_params_)  # 傳回最佳參數
 print("CV score:", model.best_score_.round(3))
-#print("Test score:", model.score(dx_test, dy_test).round(3))
+# print("Test score:", model.score(dx_test, dy_test).round(3))
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -628,7 +649,9 @@ x_str = [str(n) for n in x]  # X 軸各數值『名稱』
 
 for c in x:
     logistic_regression = LogisticRegression(C=c, max_iter=1000).fit(dx_train, dy_train)
-    cv_scores.append(cross_val_score(logistic_regression, dx_train, dy_train, cv=5).mean())
+    cv_scores.append(
+        cross_val_score(logistic_regression, dx_train, dy_train, cv=5).mean()
+    )
     test_scores.append(logistic_regression.score(dx_test, dy_test))
 
 plt.title("Logistic Regression hyperparameter")
@@ -903,7 +926,7 @@ clf.fit(x_train, y_train)  # 訓練模型
 print(clf.score(x_test, y_test))  # 給模型打分
 print(clf.predict([x_test[0]]), y_test[0], clf.predict_proba([x_test[0]]))
 
-print("------------------------------")	#30個
+print("------------------------------")  # 30個
 
 from sklearn.metrics import accuracy_score
 from scipy.spatial import distance
@@ -1250,6 +1273,7 @@ print(cc)
 # 特徵縮放
 
 from sklearn.preprocessing import RobustScaler
+
 scaler = RobustScaler()
 X_train_std = scaler.fit_transform(X_train)
 X_test_std = scaler.transform(X_test)
@@ -1303,12 +1327,8 @@ print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
 # 94.74%
 
 
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-
-
 
 
 print("------------------------------------------------------------")  # 60個

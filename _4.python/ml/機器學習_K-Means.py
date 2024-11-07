@@ -7,12 +7,6 @@ K-Means 自動分類
 # 我們介紹一個很好用的 unsupervised learning, 叫 K-Means。
 # 我們可以指定把我們資料分成幾類, 然後它就會快速分好!
 
-做法 :
-1. 製做一個 K-Means 分類器
-2. 學習訓練.fit
-3: 預測.predict
-step
-
 K-means Clustering 集群分析
 
 k-平均演算法（英文：k-means clustering，以下簡稱為 k-means ）
@@ -48,22 +42,22 @@ print("------------------------------------------------------------")  # 60個
 
 # 隨機生成 200 個點，然後用 k-means 將他們分成 5 群：
 
-x = np.random.rand(200,2)  # 將200個值隨機分佈在2維上
+x = np.random.rand(200, 2)  # 將200個值隨機分佈在2維上
 clf = KMeans(n_clusters=5)  # 分成5類
 clf.fit(x)
 
 # 將點逐一染色
-for i in range(0,100):
+for i in range(0, 100):
     if clf.labels_[i] == 0:
-        plt.scatter(x[i][0], x[i][1], color='red')
+        plt.scatter(x[i][0], x[i][1], color="red")
     elif clf.labels_[i] == 1:
-        plt.scatter(x[i][0], x[i][1], color='blue')
+        plt.scatter(x[i][0], x[i][1], color="blue")
     elif clf.labels_[i] == 2:
-        plt.scatter(x[i][0], x[i][1], color='green')
+        plt.scatter(x[i][0], x[i][1], color="green")
     elif clf.labels_[i] == 3:
-        plt.scatter(x[i][0], x[i][1], color='pink')
+        plt.scatter(x[i][0], x[i][1], color="pink")
     elif clf.labels_[i] == 4:
-        plt.scatter(x[i][0], x[i][1], color='orange')
+        plt.scatter(x[i][0], x[i][1], color="orange")
 
 plt.autoscale()
 plt.grid()
@@ -210,17 +204,17 @@ print("------------------------------------------------------------")  # 60個
 
 import pickle
 
-print('把模型儲存起來')
+print("把模型儲存起來")
 
 f = open("tmp_clf.pkl", "wb")
 pickle.dump(clf, f)
 f.close()
 
-print('把模型讀出來')
+print("把模型讀出來")
 f = open("tmp_clf.pkl", "rb")
 clf2 = pickle.load(f)
 
-#預測
+# 預測
 print(clf2.predict([[3, 4]]))  # 預測.predict
 
 f.close()
@@ -283,5 +277,3 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
-
