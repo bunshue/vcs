@@ -1,5 +1,5 @@
 """
-機器學習入門
+
 
 
 """
@@ -11,7 +11,6 @@ import os
 import sys
 import time
 import math
-import time
 import random
 import numpy as np
 import pandas as pd
@@ -26,449 +25,1426 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
+'''
+N = 200
 
-"""
-01.讀入基本套件
+X = np.linspace(0, 1, N)
+y = np.sqrt(X) + 0.2 * np.random.rand(N) - 0.1
 
-機器學習其實基本上和我們一直以來說的一樣, 就是我們要學一個未知的函數
-f(x)=y
+X = X.reshape(-1, 1)
+y = y.reshape(-1, 1)
 
-如果是分類, 基本上就是有一筆資料 x=(x1,x2,…,xk), 我們想知道這
-f(x)=y,其中的 y 就是某一個類別。
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import PolynomialFeatures
+from sklearn.linear_model import LinearRegression
 
-這種學函數的方法, 又可以分為:
 
-    supervised learning
-    unsupervised learning
+def polynomial_model(degree=1):
+    polynomial_features = PolynomialFeatures(degree=degree, include_bias=False)
+    linear_regression = LinearRegression()
+    pipeline = Pipeline(
+        [
+            ("polynomial_features", polynomial_features),
+            ("linear_regression", linear_regression),
+        ]
+    )
+    return pipeline
 
-其中的 supervised learning 就是我們有一組知道答案的訓練資料, 然後找到我們要的函數。而 unsupervised learning 就神了, 我們不知道答案, 卻要電腦自己去學!
 
-做數據分析, 幾乎每一次都要讀入這些套件!
-"""
+print("------------------------------------------------------------")  # 60個
 
-# 02. 關於 overfitting
+from sklearn.model_selection import learning_curve
+from sklearn.model_selection import ShuffleSplit
 
+
+def plot_learning_curve(
+    estimator,
+    title,
+    X,
+    y,
+    ylim=None,
+    cv=None,
+    n_jobs=1,
+    train_sizes=np.linspace(0.1, 1.0, 5),
+):
+    """
+    Generate a simple plot of the test and training learning curve.
+
+    Parameters
+    ----------
+    estimator : object type that implements the "fit" and "predict" methods
+        An object of that type which is cloned for each validation.
+
+    title : string
+        Title for the chart.
+
+    X : array-like, shape (n_samples, n_features)
+        Training vector, where n_samples is the number of samples and
+        n_features is the number of features.
+
+    y : array-like, shape (n_samples) or (n_samples, n_features), optional
+        Target relative to X for classification or regression;
+        None for unsupervised learning.
+
+    ylim : tuple, shape (ymin, ymax), optional
+        Defines minimum and maximum yvalues plotted.
+
+    cv : int, cross-validation generator or an iterable, optional
+        Determines the cross-validation splitting strategy.
+        Possible inputs for cv are:
+          - None, to use the default 3-fold cross-validation,
+          - integer, to specify the number of folds.
+          - An object to be used as a cross-validation generator.
+          - An iterable yielding train/test splits.
+
+        For integer/None inputs, if ``y`` is binary or multiclass,
+        :class:`StratifiedKFold` used. If the estimator is not a classifier
+        or if ``y`` is neither binary nor multiclass, :class:`KFold` is used.
+
+        Refer :ref:`User Guide <cross_validation>` for the various
+        cross-validators that can be used here.
+
+    n_jobs : integer, optional
+        Number of jobs to run in parallel (default 1).
+    """
+    plt.title(title)
+    if ylim is not None:
+        plt.ylim(*ylim)
+    plt.xlabel("Training examples")
+    plt.ylabel("Score")
+    train_sizes, train_scores, test_scores = learning_curve(
+        estimator, X, y, cv=cv, n_jobs=n_jobs, train_sizes=train_sizes
+    )
+    train_scores_mean = np.mean(train_scores, axis=1)
+    train_scores_std = np.std(train_scores, axis=1)
+    test_scores_mean = np.mean(test_scores, axis=1)
+    test_scores_std = np.std(test_scores, axis=1)
+    plt.grid()
+
+    plt.fill_between(
+        train_sizes,
+        train_scores_mean - train_scores_std,
+        train_scores_mean + train_scores_std,
+        alpha=0.1,
+        color="r",
+    )
+    plt.fill_between(
+        train_sizes,
+        test_scores_mean - test_scores_std,
+        test_scores_mean + test_scores_std,
+        alpha=0.1,
+        color="g",
+    )
+    plt.plot(train_sizes, train_scores_mean, "o--", color="r", label="Training score")
+    plt.plot(
+        train_sizes, test_scores_mean, "o-", color="g", label="Cross-validation score"
+    )
+
+    plt.legend(loc="best")
+    return plt
+
+
+# 為了讓學習曲線更平滑，交叉驗證數據集的得分計算 10 次，每次都重新選中 20% 的數據計算一遍
+cv = ShuffleSplit(n_splits=10, test_size=0.2, random_state=0)
+titles = [
+    "Learning Curves (Under Fitting)",
+    "Learning Curves",
+    "Learning Curves (Over Fitting)",
+]
+degrees = [1, 3, 10]
+
+plt.figure(figsize=(18, 4))
+for i in range(len(degrees)):
+    plt.subplot(1, 3, i + 1)
+    plot_learning_curve(
+        polynomial_model(degrees[i]), titles[i], X, y, ylim=(0.75, 1.01), cv=cv
+    )
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+# from sklearn.datasets.samples_generator import make_blobs    old
+from sklearn.datasets import make_blobs
+
+# 生成數據
+centers = [[-2, 2], [2, 2], [0, 4]]
+X, y = make_blobs(n_samples=60, centers=centers, random_state=0, cluster_std=0.60)
+
+# 畫出數據
 plt.figure(figsize=(12, 8))
-
-x = np.linspace(0, 1, 20)
-y = -((x - 1) ** 2) + 1
-
-plt.subplot(211)
-X = np.linspace(0, 1, 20)
-Y = -((X - 1) ** 2) + 1 + 0.08 * np.random.randn(20)
-plt.scatter(X, Y, c="r", s=50)
-plt.plot(x, y)
-plt.grid()
-plt.title("aaaa")
-
-plt.subplot(212)
-z = np.polyfit(X, Y, 19)
-p = np.poly1d(z)
-plt.plot(x, p(x), "r")
-plt.scatter(X, Y, c="r", s=50)
-plt.plot(x, y)
-plt.ylim(0, 2)
-plt.grid()
-plt.title("這叫很低的 bias, 很高的 variance")
+c = np.array(centers)
+plt.scatter(X[:, 0], X[:, 1], c=y, s=100, cmap="cool")  # 畫出樣本
+plt.scatter(c[:, 0], c[:, 1], s=100, marker="^", c="orange")  # 畫出中心點
 
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-"""
-03. 迴歸法預測函數
-03-1. 假的數據真的迴歸
-做一條直線
+from sklearn.neighbors import KNeighborsClassifier
+
+# 模型訓練
+k = 5
+clf = KNeighborsClassifier(n_neighbors=k)
+clf.fit(X, y)
+
+# 進行預測
+X_sample = [0, 2]
+X_sample = np.array(X_sample).reshape(1, -1)
+y_sample = clf.predict(X_sample)
+neighbors = clf.kneighbors(X_sample, return_distance=False)
+
+# 畫出示意圖
+plt.figure(figsize=(12, 8))
+plt.scatter(X[:, 0], X[:, 1], c=y, s=100, cmap="cool")  # 樣本
+plt.scatter(c[:, 0], c[:, 1], s=100, marker="^", c="k")  # 中心點
+plt.scatter(X_sample[0][0], X_sample[0][1], marker="x", s=100, cmap="cool")  # 待預測的點
+
+for i in neighbors[0]:
+    # 預測點與距離最近的 5 個樣本的連線
+    plt.plot([X[i][0], X_sample[0][0]], [X[i][1], X_sample[0][1]], "k--", linewidth=0.6)
 
-我們來一條線, 比如說 f(x) = 1.2x + 0.8 + noise
-"""
-
-N = 50
-x = np.linspace(0, 1, N)
-y = 1.2 * x + 0.8 + 0.2 * np.random.randn(N)
-
-plt.scatter(x, y)
-
-plt.grid()
-plt.title("aaaa")
-
-plt.show()
-
-
-"""
-分訓練資料、測試資料
-
-一般我們想要看算出來的逼近函數在預測上是不是可靠, 會把一些資料留給「測試」,
-就是不讓電腦在計算時「看到」這些測試資料。
-等函數學成了以後, 再來測試準不準確。這是我們可以用
-
-sklearn.model_selection 裡的 train_test_split
-
-來亂數選一定百分比的資料來用。
-"""
-from sklearn.model_selection import train_test_split
-
-# 把原來的 x, y 中的 80% 給 training data, 20% 給 testing data。
-
-x_train, x_test, y_train, y_test = train_test_split(
-    x, y, test_size=0.2, random_state=9487
-)
-
-# len(x_train)    #80%
-# len(x_test)     #20%
-
-"""
-【重點】注意輸入格式
-只有一個 feature 時, 我們要小心的是, 很多機器學習、深度學習的套件, 都不希望我們用
-x=[x1,x2,…,xn]
-這樣子去做, 而是希望變成
-x=[[x1],[x2],…,[xn]]
-這種形式!
-"""
-
-xx = np.array([3, 9, 8, 1, 2])
-yy = np.array([1, 3, 9, 2, 4])
-
-"""
-xx.shape
-xx.reshape(5,1)
-xx = xx.reshape(len(xx),1)
-"""
-
-# 正式轉我們的訓練資料
-
-x_train = x_train.reshape(len(x_train), 1)
-x_test = x_test.reshape(len(x_test), 1)
-
-# step 1. 開一台「線性迴歸機」
-
-from sklearn.linear_model import LinearRegression
-
-regr = LinearRegression()
-
-# step 2. fit 學習、訓練
-
-regr.fit(x_train, y_train)
-
-# step 3. predict 預測
-
-Ypred = regr.predict(x_test)
-
-# x: x_test
-# y: Ypred
-# x_test.ravel()
-
-plt.plot(x_test.ravel(), Ypred, "r")
-
-plt.scatter(x_test.ravel(), y_test)
-
-plt.grid()
-plt.title("aaaa")
-plt.show()
-
-
-# 計算分數
-from sklearn.metrics import mean_squared_error, r2_score
-
-mse_t = mean_squared_error(y_train, regr.predict(x_train))
-r2_t = r2_score(y_train, regr.predict(x_train))
-print("訓練資料")
-print("MSE =", mse_t)
-print("R2 =", r2_t)
-
-mse = mean_squared_error(y_test, Ypred)
-r2 = r2_score(y_test, Ypred)
-print("測試資料")
-print(f"MSE = {mse:.4f}")
-print(f"R2 = {r2:.4f}")
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-"""
-在金融預測上的應用
-
-神經網路
-連 SVM 都沒辦法, 那一定是方法還不夠高級, 所以我們用更高級的神經網路來做做看!
-"""
-
-from keras.models import Sequential
-from keras.layers import Dense, Activation
-from keras.optimizers import SGD
-
-# [2] 打造我們的神經網路函數學習機
-
-model = Sequential()
-model.add(Dense(20, input_dim=5))
-model.add(Activation("relu"))
-model.add(Dense(20))
-model.add(Activation("relu"))
-model.add(Dense(1))
-model.add(Activation("sigmoid"))
-model.compile(loss="binary_crossentropy", optimizer="adam", metrics=["accuracy"])
-
-# 看一下我們神經網路長什麼樣子, 有沒有做錯。
-
-model.summary()
-
-""" TBD
-#[3] 訓練
-
-model.fit(x_train, yb_train, batch_size=100, epochs=20)
-
-
-#[4] 預測
-
-#看起來不太妙, 我們來試試預測...
-
-NN_pred = model.predict_classes(x_test)
-
-YP_NN = yb_test[(NN_pred==1).ravel()]
-
-len(YP_NN)
-
-458
-
-len(YP_NN[YP_NN == 1])
-
-246
-
-246/458
-
-0.537117903930131
-
-結果真是慘慘慘, 怎麼會這樣呢?
-
-"""
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-"""
-13.畫我們練習成果的討論
-"""
-
-# 02 [練習] 圖形化我們的成果
-
-# 1. 上次的成果拿回來使用
-
-# 記得上次我們做了個鳶尾花分類器。
-# 1.1 找回我們的分類器
-
-from sklearn.externals import joblib
-
-clf = joblib.load("iris_clf_01.pkl")
-
-# 真的可以用了嗎?
-
-print(clf.predict([[2, 3]]))
-
-
-# 可以! 太棒了!
-# 1.2 看看我們分類的全貌
-
-# 我們用一下之前的方式, 畫出我們想要看到我們可愛的 SVM 是怎麼以花萼長度、花萼寬度來分類的。
-# 上次我們用了 Python 所謂 "list comprehension" 的作法 (本質上是 for 迴圈), 現在我們換個方式看來比較「高級」的方式。
-
-xt, yt = np.meshgrid(np.arange(-2, 2, 0.5), np.arange(-1, 1, 0.5))
-
-print(xt)
-print(yt)
-
-# 看得出來 meshgrid 做了什麼呢? 基本上它就是說我們在 x, y 兩個指定範圍的長方型當中, 依我們指定的間隔找出格點。
-# 這些格點的座標分成 x 座標一個 array, y 座標一個。x 或 y 座標的 array, 的座標是一列一列標記的。
-# 要是你覺得這樣的表示法很討厭, 我們也可以讓它變一長串的向量。
-
-print(xt.ravel())
-
-# 注意這其實原來的 xt 並沒有變哦。
-
-print(xt)
-
-# 我們可以把 (x,y) 一點一點的座標收集起來嗎?
-
-print(np.c_[xt.ravel(), yt.ravel()])
-
-
-# 把資料的型式這樣變來變去會是數據分析非常非常常做的事情。
-# 我們經這麼多廢話後終於可以來做正事。
-
-xx, yy = np.meshgrid(np.arange(3, 8.5, 0.2), np.arange(1.5, 5.0, 0.2))
-
-Z = clf.predict(np.c_[xx.ravel(), yy.ravel()])
-
-plt.scatter(xx.ravel(), yy.ravel(), s=50, c=Z)
-plt.show()
-
-# 雖然看來我們用了比較多白痴的方法做出一樣的事, 不過一些技巧之後也可以常常使用。
-# 1.3 快速換個配色
-
-plt.scatter(xx.ravel(), yy.ravel(), s=50, c=Z, cmap=plt.cm.coolwarm, alpha=0.8)
-plt.show()
-
-
-plt.scatter(xx.ravel(), yy.ravel(), s=50, c=Z, cmap=plt.cm.prism, alpha=0.8)
-plt.show()
-
-
-# 1.4 取回鳶尾花訓練資料
-
-from sklearn.datasets import load_iris
-
-iris = load_iris()
-
-x = iris.data[:, :2]
-
-y = iris.target
-
-# 我們來畫畫比較。
-
-plt.subplot(121)
-
-plt.scatter(x[:, 0], x[:, 1], s=50, c=y)
-
-plt.subplot(122)
-
-plt.scatter(x[:, 0], x[:, 1], s=50, c=clf.predict(x))
-
-plt.show()
-
-# 左邊的是訓練資料, 右邊是用我們 SVM 分類器分出來的。你有看出差異嗎? 是不是很難看出? 我們來用用另一個方式。
-
-# 1.5 畫圖的另一個方式
-
-xx, yy = np.meshgrid(np.arange(3, 8.5, 0.02), np.arange(1.5, 5.0, 0.02))
-Z = clf.predict(np.c_[xx.ravel(), yy.ravel()])
-Z = Z.reshape(xx.shape)
-plt.contourf(xx, yy, Z, cmap=plt.cm.coolwarm, alpha=0.8)
-plt.show()
-
-
-Z = Z.reshape(xx.shape)
-plt.contourf(xx, yy, Z, cmap=plt.cm.coolwarm, alpha=0.8)
-plt.scatter(x[:, 0], x[:, 1], s=50, c=y, cmap=plt.cm.coolwarm)
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-# 打開一個線性迴歸的函數學習機
+# 生成訓練樣本
+N = 40
+X = 5 * np.random.rand(N, 1)
+y = np.cos(X).ravel()
 
-from sklearn.linear_model import LinearRegression
+# 添加一些噪聲
+y += 0.2 * np.random.rand(N) - 0.1
 
-regr = LinearRegression()
+# 訓練模型
+from sklearn.neighbors import KNeighborsRegressor
 
-# 造資料, 調整成 sklearn 會接受的形狀
-
-x = np.linspace(0, 5, 100)
-y = 1.9 * x + 0.8 + 0.5 * np.random.randn(100)
-
-X = x.reshape(len(x), 1)
-
-# 把資料放進函數學習機，開始它的訓練
-
-regr.fit(X, y)
-
-# 用 predict 看一下訓練的成果，順便畫個圖
-
-Y = regr.predict(X)
-
-plt.scatter(x, y)
-plt.plot(x, Y, "r")
-plt.show()
-
-# 結果看起來不錯，會有微小誤差的原因，則是因為真實世界的資料有不可避免的雜訊
-
-print("------------------------------------------------------------")  # 60個
-
-from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LinearRegression
-
-# 均勻地在 0 到 5 之間取一百個點，再隨便決定一個函數，叫做 y = f(x) = 1.9x + 0.8 好了
-# 為了增加真實感，加上一點雜訊
-
-x = np.linspace(0, 5, 100)
-y = 1.9 * x + 0.8 + 0.5 * np.random.randn(100)
-
-# 開開心心地讓 sklearn 幫我們分離出訓練資料跟測試資料，測試資料的比例是 0.3 的話，
-# 訓練資料就會自動是 0.7 了呢，真是方便！
-# random_state 可以是耍寶用的 87 ，要選其他數字也當然可以
-
-x_train, x_test, y_train, y_test = train_test_split(
-    x, y, test_size=0.3, random_state=87
-)
-x_train = x_train.reshape(len(x_train), 1)
-x_test = x_test.reshape(len(x_test), 1)
-
-# 一樣叫出一個線性迴歸的函數學習機，再放進「訓練資料」讓它開始訓練
-
-regr = LinearRegression()
-regr.fit(x_train, y_train)
-
-# 用 plot 把「訓練資料」的正確答案畫成一條線，再把模型 predict 出來的結果描點畫在同一張圖上
-# 可以清楚的看到結果
-
-plt.scatter(x_train, y_train)
-plt.plot(x_train, regr.predict(x_train), "r")
-plt.show()
-
-
-# 跟上面一樣的做法，只是這次對象換成「測試資料」
-
-plt.scatter(x_test, y_test)
-plt.plot(x_test, regr.predict(x_test), "r")
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-from sklearn import neighbors
-
-X = pd.DataFrame({
-   "耐酸性": [7, 7, 3, 1],
-   "強度":   [7, 4, 4, 4]
-})
-
-y = np.array([0, 0, 1, 1])
-k = 3
-
-knn = neighbors.KNeighborsClassifier(n_neighbors=k)
+k = 5
+knn = KNeighborsRegressor(k)
 knn.fit(X, y)
 
-# 預測新產品[3,7]的分類 1:好 0:壞
-new_tissue = pd.DataFrame(np.array([[3, 7]]),
-                          columns=["耐酸性", "強度"])
-pred = knn.predict(new_tissue)
-print(pred)
+# 生成足夠密集的點并進行預測
+T = np.linspace(0, 5, 500)[:, np.newaxis]
+y_pred = knn.predict(T)
+print(knn.score(X, y))
+
+# 畫出擬合曲線
+plt.figure(figsize=(12, 8))
+plt.scatter(X, y, c="g", label="data", s=100)  # 畫出訓練樣本
+plt.plot(T, y_pred, c="k", label="prediction", lw=4)  # 畫出擬合曲線
+plt.axis("tight")
+plt.title("KNeighborsRegressor (k = %i)" % k)
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 加載數據
+data = pd.read_csv("datasets/pima-indians-diabetes/diabetes.csv")
+print("dataset shape {}".format(data.shape))
+
+print(data.head())
+
+print(data.groupby("Outcome").size())
+
+X = data.iloc[:, 0:8]
+Y = data.iloc[:, 8]
+print("shape of X {}; shape of Y {}".format(X.shape, Y.shape))
+
+print("------------------------------")  # 30個
+
+from sklearn.model_selection import train_test_split
+
+X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2)
+
+from sklearn.neighbors import KNeighborsClassifier, RadiusNeighborsClassifier
+
+models = []
+models.append(("KNN", KNeighborsClassifier(n_neighbors=2)))
+models.append(
+    ("KNN with weights", KNeighborsClassifier(n_neighbors=2, weights="distance"))
+)
+models.append(
+    (
+        "Radius Neighbors",
+        RadiusNeighborsClassifier(
+            #    n_neighbors=2, radius=500.0)))
+            radius=500.0
+        ),
+    )
+)
+
+results = []
+for name, model in models:
+    model.fit(X_train, Y_train)
+    results.append((name, model.score(X_test, Y_test)))
+for i in range(len(results)):
+    print("name: {}; score: {}".format(results[i][0], results[i][1]))
+
+from sklearn.model_selection import KFold
+from sklearn.model_selection import cross_val_score
+
+results = []
+for name, model in models:
+    kfold = KFold(n_splits=10)
+    cv_result = cross_val_score(model, X, Y, cv=kfold)
+    results.append((name, cv_result))
+for i in range(len(results)):
+    print("name: {}; cross val score: {}".format(results[i][0], results[i][1].mean()))
+
+print("------------------------------")  # 30個
+
+# 模型訓練
+
+knn = KNeighborsClassifier(n_neighbors=2)
+knn.fit(X_train, Y_train)
+train_score = knn.score(X_train, Y_train)
+test_score = knn.score(X_test, Y_test)
+print("train score: {}; test score: {}".format(train_score, test_score))
+
+from sklearn.model_selection import ShuffleSplit
+from common.utils import plot_learning_curve
+
+knn = KNeighborsClassifier(n_neighbors=2)
+cv = ShuffleSplit(n_splits=10, test_size=0.2, random_state=0)
+plt.figure(figsize=(10, 6))
+plot_learning_curve(
+    plt, knn, "Learn Curve for KNN Diabetes", X, Y, ylim=(0.0, 1.01), cv=cv
+)
+
+plt.show()
+
+print("------------------------------")  # 30個
+
+# 數據可視化
+
+from sklearn.feature_selection import SelectKBest
+
+selector = SelectKBest(k=2)
+X_new = selector.fit_transform(X, Y)
+print(X_new[0:5])
+
+results = []
+for name, model in models:
+    kfold = KFold(n_splits=10)
+    cv_result = cross_val_score(model, X_new, Y, cv=kfold)
+    results.append((name, cv_result))
+for i in range(len(results)):
+    print("name: {}; cross val score: {}".format(results[i][0], results[i][1].mean()))
+
+# 畫出數據
+plt.figure(figsize=(10, 6))
+plt.ylabel("BMI")
+plt.xlabel("Glucose")
+plt.scatter(X_new[Y == 0][:, 0], X_new[Y == 0][:, 1], c="r", s=20, marker="o")  # 畫出樣本
+plt.scatter(X_new[Y == 1][:, 0], X_new[Y == 1][:, 1], c="g", s=20, marker="^")  # 畫出樣本
+
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-from sklearn import cluster
+N = 200
 
-df = pd.DataFrame({
-   "length": [51, 46, 51, 45, 51, 50, 33,
-              38, 37, 33, 33, 21, 23, 24],
-   "weight": [10.2, 8.8, 8.1, 7.7, 9.8, 7.2, 4.8,
-              4.6, 3.5, 3.3, 4.3, 2.0, 1.0, 2.0]
-})
-k = 3
+X = np.linspace(-2 * np.pi, 2 * np.pi, N)
+Y = np.sin(X) + 0.2 * np.random.rand(N) - 0.1
+X = X.reshape(-1, 1)
+Y = Y.reshape(-1, 1)
 
-kmeans = cluster.KMeans(n_clusters=k, random_state=12)
-kmeans.fit(df)
-print(kmeans.labels_)
+from sklearn.linear_model import LinearRegression
+from sklearn.preprocessing import PolynomialFeatures
+from sklearn.pipeline import Pipeline
 
-colmap = np.array(["r", "g", "y"])
-plt.scatter(df["length"], df["weight"], color=colmap[kmeans.labels_])
+
+def polynomial_model(degree=1):
+    polynomial_features = PolynomialFeatures(degree=degree, include_bias=False)
+    linear_regression = LinearRegression()
+    pipeline = Pipeline(
+        [
+            ("polynomial_features", polynomial_features),
+            ("linear_regression", linear_regression),
+        ]
+    )
+    return pipeline
+
+
+from sklearn.metrics import mean_squared_error
+
+degrees = [2, 3, 5, 10]
+results = []
+for d in degrees:
+    model = polynomial_model(degree=d)
+    model.fit(X, Y)
+    train_score = model.score(X, Y)
+    mse = mean_squared_error(Y, model.predict(X))
+    results.append({"model": model, "degree": d, "score": train_score, "mse": mse})
+for r in results:
+    print(
+        "degree: {}; train score: {}; mean squared error: {}".format(
+            r["degree"], r["score"], r["mse"]
+        )
+    )
+
+print("------------------------------")  # 30個
+
+from matplotlib.figure import SubplotParams
+
+plt.figure(figsize=(12, 6), dpi=200, subplotpars=SubplotParams(hspace=0.3))
+for i, r in enumerate(results):
+    fig = plt.subplot(2, 2, i + 1)
+    plt.xlim(-8, 8)
+    plt.title("LinearRegression degree={}".format(r["degree"]))
+    plt.scatter(X, Y, s=5, c="b", alpha=0.5)
+    plt.plot(X, r["model"].predict(X), "r-")
+
+plt.show()
+'''
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+'''
+print('titanic')
+
+
+def read_dataset(fname):
+    # 指定第一列作為行索引
+    data = pd.read_csv(fname, index_col=0)
+    # 丟棄無用的數據
+    data.drop(["Name", "Ticket", "Cabin"], axis=1, inplace=True)
+    # 處理性別數據
+    data["Sex"] = (data["Sex"] == "male").astype("int")
+    # 處理登船港口數據
+    labels = data["Embarked"].unique().tolist()
+    data["Embarked"] = data["Embarked"].apply(lambda n: labels.index(n))
+    # 處理缺失數據
+    data = data.fillna(0)
+    return data
+
+
+train = read_dataset("datasets/titanic/train.csv")
+print(train.head())
+
+from sklearn.model_selection import train_test_split
+
+y = train["Survived"].values
+X = train.drop(["Survived"], axis=1).values
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+print("train dataset: {0}; test dataset: {1}".format(X_train.shape, X_test.shape))
+
+from sklearn.tree import DecisionTreeClassifier
+
+clf = DecisionTreeClassifier()
+clf.fit(X_train, y_train)
+train_score = clf.score(X_train, y_train)
+test_score = clf.score(X_test, y_test)
+print("train score: {0}; test score: {1}".format(train_score, test_score))
+
+#sys.exit()
+
+print("------------------------------------------------------------")  # 60個
+
+from sklearn.tree import export_graphviz
+
+with open("titanic.dot", "w") as f:
+    f = export_graphviz(clf, out_file=f)
+
+# 1. 在電腦上安裝 graphviz
+# 2. 運行 `dot -Tpng titanic.dot -o titanic.png`
+# 3. 在當前目錄查看生成的決策樹 titanic.png
+
+
+# 參數選擇 max_depth
+def cv_score(d):
+    clf = DecisionTreeClassifier(max_depth=d)
+    clf.fit(X_train, y_train)
+    tr_score = clf.score(X_train, y_train)
+    cv_score = clf.score(X_test, y_test)
+    return (tr_score, cv_score)
+
+
+depths = range(2, 15)
+scores = [cv_score(d) for d in depths]
+tr_scores = [s[0] for s in scores]
+cv_scores = [s[1] for s in scores]
+
+best_score_index = np.argmax(cv_scores)
+best_score = cv_scores[best_score_index]
+best_param = depths[best_score_index]
+print("best param: {0}; best score: {1}".format(best_param, best_score))
+
+plt.figure(figsize=(10, 6), dpi=144)
+plt.grid()
+plt.xlabel("max depth of decision tree")
+plt.ylabel("score")
+plt.plot(depths, cv_scores, ".g-", label="cross-validation score")
+plt.plot(depths, tr_scores, ".r--", label="training score")
+plt.legend()
 
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
 
+# 訓練模型，并計算評分
+def cv_score(val):
+    clf = DecisionTreeClassifier(criterion="gini", min_impurity_decrease=val)
+    clf.fit(X_train, y_train)
+    tr_score = clf.score(X_train, y_train)
+    cv_score = clf.score(X_test, y_test)
+    return (tr_score, cv_score)
 
 
+# 指定參數范圍，分別訓練模型，并計算評分
+values = np.linspace(0, 0.005, 50)
+scores = [cv_score(v) for v in values]
+tr_scores = [s[0] for s in scores]
+cv_scores = [s[1] for s in scores]
+
+# 找出評分最高的模型參數
+best_score_index = np.argmax(cv_scores)
+best_score = cv_scores[best_score_index]
+best_param = values[best_score_index]
+print("best param: {0}; best score: {1}".format(best_param, best_score))
+
+# 畫出模型參數與模型評分的關系
+plt.figure(figsize=(10, 6), dpi=144)
+plt.grid()
+plt.xlabel("threshold of entropy")
+plt.ylabel("score")
+plt.plot(values, cv_scores, ".g-", label="cross-validation score")
+plt.plot(values, tr_scores, ".r--", label="training score")
+plt.legend()
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
 
 
+def plot_curve(train_sizes, cv_results, xlabel):
+    train_scores_mean = cv_results["mean_train_score"]
+    train_scores_std = cv_results["std_train_score"]
+    test_scores_mean = cv_results["mean_test_score"]
+    test_scores_std = cv_results["std_test_score"]
+    plt.figure(figsize=(10, 6), dpi=144)
+    plt.title("parameters turning")
+    plt.grid()
+    plt.xlabel(xlabel)
+    plt.ylabel("score")
+    plt.fill_between(
+        train_sizes,
+        train_scores_mean - train_scores_std,
+        train_scores_mean + train_scores_std,
+        alpha=0.1,
+        color="r",
+    )
+    plt.fill_between(
+        train_sizes,
+        test_scores_mean - test_scores_std,
+        test_scores_mean + test_scores_std,
+        alpha=0.1,
+        color="g",
+    )
+    plt.plot(train_sizes, train_scores_mean, ".--", color="r", label="Training score")
+    plt.plot(
+        train_sizes, test_scores_mean, ".-", color="g", label="Cross-validation score"
+    )
+
+    plt.legend(loc="best")
+
+
+from sklearn.model_selection import GridSearchCV
+
+thresholds = np.linspace(0, 0.005, 50)
+# Set the parameters by cross-validation
+param_grid = {"min_impurity_decrease": thresholds}
+
+clf = GridSearchCV(DecisionTreeClassifier(), param_grid, cv=5, return_train_score=True)
+clf.fit(X, y)
+print("best param: {0}\nbest score: {1}".format(clf.best_params_, clf.best_score_))
+
+plot_curve(thresholds, clf.cv_results_, xlabel="gini thresholds")
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+from sklearn.model_selection import GridSearchCV
+
+entropy_thresholds = np.linspace(0, 0.01, 50)
+gini_thresholds = np.linspace(0, 0.005, 50)
+
+# Set the parameters by cross-validation
+param_grid = [
+    {"criterion": ["entropy"], "min_impurity_decrease": entropy_thresholds},
+    {"criterion": ["gini"], "min_impurity_decrease": gini_thresholds},
+    {"max_depth": range(2, 10)},
+    {"min_samples_split": range(2, 30, 2)},
+]
+
+clf = GridSearchCV(DecisionTreeClassifier(), param_grid, cv=5, return_train_score=True)
+clf.fit(X, y)
+print("best param: {0}\nbest score: {1}".format(clf.best_params_, clf.best_score_))
+
+print("------------------------------------------------------------")  # 60個
+
+print("生成決策樹圖形")
+
+clf = DecisionTreeClassifier(
+    criterion="entropy", min_impurity_decrease=0.002857142857142857
+)
+clf.fit(X_train, y_train)
+train_score = clf.score(X_train, y_train)
+test_score = clf.score(X_test, y_test)
+print("train score: {0}; test score: {1}".format(train_score, test_score))
+
+# 導出 titanic.dot 文件
+with open("titanic.dot", "w") as f:
+    f = export_graphviz(clf, out_file=f)
+
+# 1. 在電腦上安裝 graphviz
+# 2. 運行 `dot -Tpng titanic.dot -o titanic.png`
+# 3. 在當前目錄查看生成的決策樹 titanic.png
+
+print("------------------------------------------------------------")  # 60個
+
+class1 = np.array([[1, 1], [1, 3], [2, 1], [1, 2], [2, 2]])
+class2 = np.array([[4, 4], [5, 5], [5, 4], [5, 3], [4, 5], [6, 4]])
+
+plt.figure(figsize=(8, 6), dpi=144)
+
+plt.title("Decision Boundary")
+
+plt.xlim(0, 8)
+plt.ylim(0, 6)
+ax = plt.gca()  # gca 代表當前坐標軸，即 'get current axis'
+ax.spines["right"].set_color("none")  # 隱藏坐標軸
+ax.spines["top"].set_color("none")
+
+plt.scatter(class1[:, 0], class1[:, 1], marker="o")
+plt.scatter(class2[:, 0], class2[:, 1], marker="s")
+plt.plot([1, 5], [5, 1], "-r")
+plt.arrow(4, 4, -1, -1, shape="full", color="r")
+plt.plot([3, 3], [0.5, 6], "--b")
+plt.arrow(4, 4, -1, 0, shape="full", color="b", linestyle="--")
+plt.annotate(
+    r"margin 1",
+    xy=(3.5, 4),
+    xycoords="data",
+    xytext=(3.1, 4.5),
+    fontsize=10,
+    arrowprops=dict(arrowstyle="->", connectionstyle="arc3,rad=.2"),
+)
+plt.annotate(
+    r"margin 2",
+    xy=(3.5, 3.5),
+    xycoords="data",
+    xytext=(4, 3.5),
+    fontsize=10,
+    arrowprops=dict(arrowstyle="->", connectionstyle="arc3,rad=.2"),
+)
+plt.annotate(
+    r"support vector",
+    xy=(4, 4),
+    xycoords="data",
+    xytext=(5, 4.5),
+    fontsize=10,
+    arrowprops=dict(arrowstyle="->", connectionstyle="arc3,rad=.2"),
+)
+plt.annotate(
+    r"support vector",
+    xy=(2, 2),
+    xycoords="data",
+    xytext=(0.5, 1.5),
+    fontsize=10,
+    arrowprops=dict(arrowstyle="->", connectionstyle="arc3,rad=.2"),
+)
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+plt.figure(figsize=(8, 6), dpi=144)
+
+plt.title("Support Vector Machine")
+
+plt.xlim(0, 8)
+plt.ylim(0, 6)
+ax = plt.gca()  # gca 代表當前坐標軸，即 'get current axis'
+ax.spines["right"].set_color("none")  # 隱藏坐標軸
+ax.spines["top"].set_color("none")
+
+plt.scatter(class1[:, 0], class1[:, 1], marker="o")
+plt.scatter(class2[:, 0], class2[:, 1], marker="s")
+plt.plot([1, 5], [5, 1], "-r")
+plt.plot([0, 4], [4, 0], "--b", [2, 6], [6, 2], "--b")
+plt.arrow(4, 4, -1, -1, shape="full", color="b")
+plt.annotate(
+    r"$w^T x + b = 0$",
+    xy=(5, 1),
+    xycoords="data",
+    xytext=(6, 1),
+    fontsize=10,
+    arrowprops=dict(arrowstyle="->", connectionstyle="arc3,rad=.2"),
+)
+plt.annotate(
+    r"$w^T x + b = 1$",
+    xy=(6, 2),
+    xycoords="data",
+    xytext=(7, 2),
+    fontsize=10,
+    arrowprops=dict(arrowstyle="->", connectionstyle="arc3,rad=.2"),
+)
+plt.annotate(
+    r"$w^T x + b = -1$",
+    xy=(3.5, 0.5),
+    xycoords="data",
+    xytext=(4.5, 0.2),
+    fontsize=10,
+    arrowprops=dict(arrowstyle="->", connectionstyle="arc3,rad=.2"),
+)
+plt.annotate(
+    r"d",
+    xy=(3.5, 3.5),
+    xycoords="data",
+    xytext=(2, 4.5),
+    fontsize=10,
+    arrowprops=dict(arrowstyle="->", connectionstyle="arc3,rad=.2"),
+)
+plt.annotate(
+    r"A",
+    xy=(4, 4),
+    xycoords="data",
+    xytext=(5, 4.5),
+    fontsize=10,
+    arrowprops=dict(arrowstyle="->", connectionstyle="arc3,rad=.2"),
+)
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+from sklearn.datasets import make_blobs
+
+plt.figure(figsize=(13, 6), dpi=144)
+
+# sub plot 1
+plt.subplot(1, 2, 1)
+
+X, y = make_blobs(
+    n_samples=100,
+    n_features=2,
+    centers=[(1, 1), (2, 2)],
+    random_state=4,
+    shuffle=False,
+    cluster_std=0.4,
+)
+
+plt.title("Non-linear Separatable")
+
+plt.xlim(0, 3)
+plt.ylim(0, 3)
+ax = plt.gca()  # gca 代表當前坐標軸，即 'get current axis'
+ax.spines["right"].set_color("none")  # 隱藏坐標軸
+ax.spines["top"].set_color("none")
+
+plt.scatter(X[y == 0][:, 0], X[y == 0][:, 1], marker="o")
+plt.scatter(X[y == 1][:, 0], X[y == 1][:, 1], marker="s")
+plt.plot([0.5, 2.5], [2.5, 0.5], "-r")
+
+# sub plot 2
+plt.subplot(1, 2, 2)
+
+class1 = np.array([[1, 1], [1, 3], [2, 1], [1, 2], [2, 2], [1.5, 1.5], [1.2, 1.7]])
+class2 = np.array(
+    [[4, 4], [5, 5], [5, 4], [5, 3], [4, 5], [6, 4], [5.5, 3.5], [4.5, 4.5], [2, 1.5]]
+)
+
+plt.title("Slack Variable")
+
+plt.xlim(0, 7)
+plt.ylim(0, 7)
+ax = plt.gca()  # gca 代表當前坐標軸，即 'get current axis'
+ax.spines["right"].set_color("none")  # 隱藏坐標軸
+ax.spines["top"].set_color("none")
+
+plt.scatter(class1[:, 0], class1[:, 1], marker="o")
+plt.scatter(class2[:, 0], class2[:, 1], marker="s")
+plt.plot([1, 5], [5, 1], "-r")
+plt.plot([0, 4], [4, 0], "--b", [2, 6], [6, 2], "--b")
+plt.arrow(2, 1.5, 2.25, 2.25, shape="full", color="b")
+plt.annotate(
+    r"violate margin rule.",
+    xy=(2, 1.5),
+    xycoords="data",
+    xytext=(0.2, 0.5),
+    fontsize=10,
+    arrowprops=dict(arrowstyle="->", connectionstyle="arc3,rad=.2"),
+)
+plt.annotate(
+    r"normal sample. $\epsilon = 0$",
+    xy=(4, 5),
+    xycoords="data",
+    xytext=(4.5, 5.5),
+    fontsize=10,
+    arrowprops=dict(arrowstyle="->", connectionstyle="arc3,rad=.2"),
+)
+plt.annotate(
+    r"$\epsilon > 0$",
+    xy=(3, 2.5),
+    xycoords="data",
+    xytext=(3, 1.5),
+    fontsize=10,
+    arrowprops=dict(arrowstyle="->", connectionstyle="arc3,rad=.2"),
+)
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+plt.figure(figsize=(8, 4), dpi=144)
+
+plt.title("Cost")
+
+plt.xlim(0, 4)
+plt.ylim(0, 2)
+plt.xlabel("$y^{(i)} (w^T x^{(i)} + b)$")
+plt.ylabel("Cost")
+ax = plt.gca()  # gca 代表當前坐標軸，即 'get current axis'
+ax.spines["right"].set_color("none")  # 隱藏坐標軸
+ax.spines["top"].set_color("none")
+
+plt.plot([0, 1], [1.5, 0], "-r")
+plt.plot([1, 3], [0.015, 0.015], "-r")
+plt.annotate(
+    r"$J_i = R \epsilon_i$ for $y^{(i)} (w^T x^{(i)} + b) \geq 1 - \epsilon_i$",
+    xy=(0.7, 0.5),
+    xycoords="data",
+    xytext=(1, 1),
+    fontsize=10,
+    arrowprops=dict(arrowstyle="->", connectionstyle="arc3,rad=.2"),
+)
+plt.annotate(
+    r"$J_i = 0$ for $y^{(i)} (w^T x^{(i)} + b) \geq 1$",
+    xy=(1.5, 0),
+    xycoords="data",
+    xytext=(1.8, 0.2),
+    fontsize=10,
+    arrowprops=dict(arrowstyle="->", connectionstyle="arc3,rad=.2"),
+)
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+plt.figure(figsize=(13, 6), dpi=144)
+
+class1 = np.array([[1, 1], [1, 2], [1, 3], [2, 1], [2, 2], [3, 2], [4, 1], [5, 1]])
+class2 = np.array(
+    [[2.2, 4], [1.5, 5], [1.8, 4.6], [2.4, 5], [3.2, 5], [3.7, 4], [4.5, 4.5], [5.4, 3]]
+)
+
+# sub plot 1
+plt.subplot(1, 2, 1)
+
+plt.title("Non-linear Separatable in Low Dimension")
+
+plt.xlim(0, 6)
+plt.ylim(0, 6)
+plt.yticks(())
+plt.xlabel("X1")
+ax = plt.gca()  # gca 代表當前坐標軸，即 'get current axis'
+ax.spines["right"].set_color("none")  # 隱藏坐標軸
+ax.spines["top"].set_color("none")
+ax.spines["left"].set_color("none")
+
+plt.scatter(class1[:, 0], np.zeros(class1[:, 0].shape[0]) + 0.05, marker="o")
+plt.scatter(class2[:, 0], np.zeros(class2[:, 0].shape[0]) + 0.05, marker="s")
+
+# sub plot 2
+plt.subplot(1, 2, 2)
+
+plt.title("Linear Separatable in High Dimension")
+
+plt.xlim(0, 6)
+plt.ylim(0, 6)
+plt.xlabel("X1")
+plt.ylabel("X2")
+ax = plt.gca()  # gca 代表當前坐標軸，即 'get current axis'
+ax.spines["right"].set_color("none")  # 隱藏坐標軸
+ax.spines["top"].set_color("none")
+
+plt.scatter(class1[:, 0], class1[:, 1], marker="o")
+plt.scatter(class2[:, 0], class2[:, 1], marker="s")
+plt.plot([1, 5], [3.8, 2], "-r")
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+
+def plot_hyperplane(clf, X, y, h=0.02, draw_sv=True, title="hyperplan"):
+    # create a mesh to plot in
+    x_min, x_max = X[:, 0].min() - 1, X[:, 0].max() + 1
+    y_min, y_max = X[:, 1].min() - 1, X[:, 1].max() + 1
+    xx, yy = np.meshgrid(np.arange(x_min, x_max, h), np.arange(y_min, y_max, h))
+
+    plt.title(title)
+    plt.xlim(xx.min(), xx.max())
+    plt.ylim(yy.min(), yy.max())
+    plt.xticks(())
+    plt.yticks(())
+
+    Z = clf.predict(np.c_[xx.ravel(), yy.ravel()])
+    # Put the result into a color plot
+    Z = Z.reshape(xx.shape)
+    plt.contourf(xx, yy, Z, cmap="hot", alpha=0.5)
+
+    markers = ["o", "s", "^"]
+    colors = ["b", "r", "c"]
+    labels = np.unique(y)
+    for label in labels:
+        plt.scatter(
+            X[y == label][:, 0],
+            X[y == label][:, 1],
+            c=colors[label],
+            marker=markers[label],
+        )
+    if draw_sv:
+        sv = clf.support_vectors_
+        plt.scatter(sv[:, 0], sv[:, 1], c="y", marker="x")
+
+
+from sklearn import svm
+from sklearn.datasets import make_blobs
+
+X, y = make_blobs(n_samples=100, centers=2, random_state=0, cluster_std=0.3)
+clf = svm.SVC(C=1.0, kernel="linear")
+clf.fit(X, y)
+
+plt.figure(figsize=(12, 4), dpi=144)
+plot_hyperplane(clf, X, y, h=0.01, title="Maximum Margin Hyperplan")
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+from sklearn import svm
+from sklearn.datasets import make_blobs
+
+X, y = make_blobs(n_samples=100, centers=3, random_state=0, cluster_std=0.8)
+clf_linear = svm.SVC(C=1.0, kernel="linear")
+clf_poly = svm.SVC(C=1.0, kernel="poly", degree=3)
+clf_rbf = svm.SVC(C=1.0, kernel="rbf", gamma=0.5)
+clf_rbf2 = svm.SVC(C=1.0, kernel="rbf", gamma=0.1)
+
+plt.figure(figsize=(10, 10), dpi=144)
+
+clfs = [clf_linear, clf_poly, clf_rbf, clf_rbf2]
+titles = [
+    "Linear Kernel",
+    "Polynomial Kernel with Degree=3",
+    "Gaussian Kernel with $\gamma=0.5$",
+    "Gaussian Kernel with $\gamma=0.1$",
+]
+for clf, i in zip(clfs, range(len(clfs))):
+    clf.fit(X, y)
+    plt.subplot(2, 2, i + 1)
+    plot_hyperplane(clf, X, y, title=titles[i])
+
+plt.show()
+'''
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+from sklearn.datasets import load_files
+
+""" 缺資料
+print("loading train dataset ...")
+t = time.time()
+news_train = load_files('datasets/mlcomp/379/train')
+print("summary: {0} documents in {1} categories.".format(
+    len(news_train.data), len(news_train.target_names)))
+print("done in {0} seconds".format(time.time() - t))
+
+from sklearn.feature_extraction.text import TfidfVectorizer
+
+print("vectorizing train dataset ...")
+t = time.time()
+vectorizer = TfidfVectorizer(encoding='latin-1')
+X_train = vectorizer.fit_transform((d for d in news_train.data))
+print("n_samples: %d, n_features: %d" % X_train.shape)
+print("number of non-zero features in sample [{0}]: {1}".format(
+    news_train.filenames[0], X_train[0].getnnz()))
+print("done in {0} seconds".format(time.time() - t))
+
+print("------------------------------")  # 30個
+
+from sklearn.naive_bayes import MultinomialNB
+
+print("traning models ...".format(time.time() - t))
+t = time.time()
+y_train = news_train.target
+clf = MultinomialNB(alpha=0.0001)
+clf.fit(X_train, y_train)
+train_score = clf.score(X_train, y_train)
+print("train score: {0}".format(train_score))
+print("done in {0} seconds".format(time.time() - t))
+"""
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+""" 缺資料
+print("loading test dataset ...")
+t = time.time()
+news_test = load_files('datasets/mlcomp/379/test')
+print("summary: {0} documents in {1} categories.".format(
+    len(news_test.data), len(news_test.target_names)))
+print("done in {0} seconds".format(time.time() - t))
+
+print("------------------------------")  # 30個
+
+print("vectorizing test dataset ...")
+t = time.time()
+X_test = vectorizer.transform((d for d in news_test.data))
+y_test = news_test.target
+print("n_samples: %d, n_features: %d" % X_test.shape)
+print("number of non-zero features in sample [{0}]: {1}".format(
+    news_test.filenames[0], X_test[0].getnnz()))
+print("done in %fs" % (time.time() - t))
+
+print("------------------------------")  # 30個
+
+pred = clf.predict(X_test[0])
+print("predict: {0} is in category {1}".format(
+    news_test.filenames[0], news_test.target_names[pred[0]]))
+print("actually: {0} is in category {1}".format(
+    news_test.filenames[0], news_test.target_names[news_test.target[0]]))
+
+print("------------------------------")  # 30個
+
+print("predicting test dataset ...")
+t = time.time()
+pred = clf.predict(X_test)
+print("done in %fs" % (time.time() - t))
+
+print("------------------------------")  # 30個
+
+from sklearn.metrics import classification_report
+
+print("classification report on test set for classifier:")
+print(clf)
+print(classification_report(y_test, pred,
+                            target_names=news_test.target_names))
+
+print("------------------------------")  # 30個
+
+from sklearn.metrics import confusion_matrix
+
+cm = confusion_matrix(y_test, pred)
+print("confusion matrix:")
+print(cm)
+
+print("------------------------------")  # 30個
+
+# Show confusion matrix
+plt.figure(figsize=(8, 8), dpi=144)
+plt.title('Confusion matrix of the classifier')
+ax = plt.gca()                                  
+ax.spines['right'].set_color('none')            
+ax.spines['top'].set_color('none')
+ax.spines['bottom'].set_color('none')
+ax.spines['left'].set_color('none')
+ax.xaxis.set_ticks_position('none')
+ax.yaxis.set_ticks_position('none')
+ax.set_xticklabels([])
+ax.set_yticklabels([])
+plt.matshow(cm, fignum=1, cmap='gray')
+plt.colorbar()
+
+plt.show()
+"""
+print("------------------------------------------------------------")  # 60個
+
+print("PCA 算法模擬")
+
+A = np.array([[3, 2000], [2, 3000], [4, 5000], [5, 8000], [1, 2000]], dtype="float")
+
+# 數據歸一化
+mean = np.mean(A, axis=0)
+norm = A - mean
+# 數據縮放
+scope = np.max(norm, axis=0) - np.min(norm, axis=0)
+norm = norm / scope
+print(norm)
+
+U, S, V = np.linalg.svd(np.dot(norm.T, norm))
+print(U)
+
+U_reduce = U[:, 0].reshape(2, 1)
+print(U_reduce)
+
+R = np.dot(norm, U_reduce)
+print(R)
+
+Z = np.dot(R, U_reduce.T)
+print(Z)
+
+print(np.multiply(Z, scope) + mean)
+
+print("------------------------------")  # 30個
+
+print("使用 sklearn 包實現")
+
+from sklearn.decomposition import PCA
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import MinMaxScaler
+
+
+def std_PCA(**argv):
+    scaler = MinMaxScaler()
+    pca = PCA(**argv)
+    pipeline = Pipeline([("scaler", scaler), ("pca", pca)])
+    return pipeline
+
+
+pca = std_PCA(n_components=1)
+R2 = pca.fit_transform(A)
+print(R2)
+
+print(pca.inverse_transform(R2))
+
+print("------------------------------------------------------------")  # 60個
+
+print("降維及恢復示意圖")
+
+plt.figure(figsize=(8, 8), dpi=144)
+
+plt.title("Physcial meanings of PCA")
+
+ymin = xmin = -1
+ymax = xmax = 1
+plt.xlim(xmin, xmax)
+plt.ylim(ymin, ymax)
+ax = plt.gca()  # gca 代表當前坐標軸，即 'get current axis'
+ax.spines["right"].set_color("none")  # 隱藏坐標軸
+ax.spines["top"].set_color("none")
+
+plt.scatter(norm[:, 0], norm[:, 1], marker="s", c="b")
+plt.scatter(Z[:, 0], Z[:, 1], marker="o", c="r")
+plt.arrow(0, 0, U[0][0], U[1][0], color="r", linestyle="-")
+plt.arrow(0, 0, U[0][1], U[1][1], color="r", linestyle="--")
+plt.annotate(
+    r"$U_{reduce} = u^{(1)}$",
+    xy=(U[0][0], U[1][0]),
+    xycoords="data",
+    xytext=(U_reduce[0][0] + 0.2, U_reduce[1][0] - 0.1),
+    fontsize=10,
+    arrowprops=dict(arrowstyle="->", connectionstyle="arc3,rad=.2"),
+)
+plt.annotate(
+    r"$u^{(2)}$",
+    xy=(U[0][1], U[1][1]),
+    xycoords="data",
+    xytext=(U[0][1] + 0.2, U[1][1] - 0.1),
+    fontsize=10,
+    arrowprops=dict(arrowstyle="->", connectionstyle="arc3,rad=.2"),
+)
+plt.annotate(
+    r"raw data",
+    xy=(norm[0][0], norm[0][1]),
+    xycoords="data",
+    xytext=(norm[0][0] + 0.2, norm[0][1] - 0.2),
+    fontsize=10,
+    arrowprops=dict(arrowstyle="->", connectionstyle="arc3,rad=.2"),
+)
+plt.annotate(
+    r"projected data",
+    xy=(Z[0][0], Z[0][1]),
+    xycoords="data",
+    xytext=(Z[0][0] + 0.2, Z[0][1] - 0.1),
+    fontsize=10,
+    arrowprops=dict(arrowstyle="->", connectionstyle="arc3,rad=.2"),
+)
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+from sklearn.datasets import make_blobs
+
+X, y = make_blobs(
+    n_samples=200,
+    n_features=2,
+    centers=4,
+    cluster_std=1,
+    center_box=(-10.0, 10.0),
+    shuffle=True,
+    random_state=1,
+)
+
+plt.figure(figsize=(6, 4), dpi=144)
+plt.xticks(())
+plt.yticks(())
+plt.scatter(X[:, 0], X[:, 1], s=20, marker="o")
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+from sklearn.cluster import KMeans
+
+n_clusters = 3
+kmean = KMeans(n_clusters=n_clusters)
+kmean.fit(X)
+print("kmean: k={}, cost={}".format(n_clusters, int(kmean.score(X))))
+
+labels = kmean.labels_
+centers = kmean.cluster_centers_
+markers = ["o", "^", "*"]
+colors = ["r", "b", "y"]
+
+plt.figure(figsize=(6, 4), dpi=144)
+plt.xticks(())
+plt.yticks(())
+
+# 畫樣本
+for c in range(n_clusters):
+    cluster = X[labels == c]
+    plt.scatter(cluster[:, 0], cluster[:, 1], marker=markers[c], s=20, c=colors[c])
+# 畫出中心點
+plt.scatter(centers[:, 0], centers[:, 1], marker="o", c="white", alpha=0.9, s=300)
+for i, c in enumerate(centers):
+    plt.scatter(c[0], c[1], marker="$%d$" % i, s=50, c=colors[i])
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+
+def fit_plot_kmean_model(n_clusters, X):
+    plt.xticks(())
+    plt.yticks(())
+
+    # 使用 k-均值算法進行擬合
+    kmean = KMeans(n_clusters=n_clusters)
+    kmean.fit_predict(X)
+
+    labels = kmean.labels_
+    centers = kmean.cluster_centers_
+    markers = ["o", "^", "*", "s"]
+    colors = ["r", "b", "y", "k"]
+
+    # 計算成本
+    score = kmean.score(X)
+    plt.title("k={}, score={}".format(n_clusters, (int)(score)))
+
+    # 畫樣本
+    for c in range(n_clusters):
+        cluster = X[labels == c]
+        plt.scatter(cluster[:, 0], cluster[:, 1], marker=markers[c], s=20, c=colors[c])
+    # 畫出中心點
+    plt.scatter(centers[:, 0], centers[:, 1], marker="o", c="white", alpha=0.9, s=300)
+    for i, c in enumerate(centers):
+        plt.scatter(c[0], c[1], marker="$%d$" % i, s=50, c=colors[i])
+
+
+from sklearn.cluster import KMeans
+
+n_clusters = [2, 3, 4]
+
+plt.figure(figsize=(10, 3), dpi=144)
+for i, c in enumerate(n_clusters):
+    plt.subplot(1, 3, i + 1)
+    fit_plot_kmean_model(c, X)
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+from time import time
+from sklearn.datasets import load_files
+
+""" 無檔案
+print("loading documents ...")
+t = time()
+docs = load_files('datasets/clustering/data')
+print("summary: {0} documents in {1} categories.".format(
+    len(docs.data), len(docs.target_names)))
+print("done in {0} seconds".format(time() - t))
+
+from sklearn.feature_extraction.text import TfidfVectorizer
+
+max_features = 20000
+print("vectorizing documents ...")
+t = time()
+vectorizer = TfidfVectorizer(max_df=0.4, 
+                             min_df=2, 
+                             max_features=max_features, 
+                             encoding='latin-1')
+X = vectorizer.fit_transform((d for d in docs.data))
+print("n_samples: %d, n_features: %d" % X.shape)
+print("number of non-zero features in sample [{0}]: {1}".format(
+    docs.filenames[0], X[0].getnnz()))
+print("done in {0} seconds".format(time() - t))
+
+print("------------------------------------------------------------")  # 60個
+
+from sklearn.cluster import KMeans
+
+print("clustering documents ...")
+t = time()
+n_clusters = 4
+kmean = KMeans(n_clusters=n_clusters, 
+               max_iter=100,
+               tol=0.01,
+               verbose=1,
+               n_init=3)
+kmean.fit(X)
+print("kmean: k={}, cost={}".format(n_clusters, int(kmean.inertia_)))
+print("done in {0} seconds".format(time() - t))
+
+print(len(kmean.labels_))
+
+cc = kmean.labels_[1000:1010]
+print(cc)
+
+cc = docs.filenames[1000:1010]
+print(cc)
+
+print('------------------------------')	#30個
+
+#from __future__ import print_function
+
+print("Top terms per cluster:")
+
+order_centroids = kmean.cluster_centers_.argsort()[:, ::-1]
+
+terms = vectorizer.get_feature_names()
+for i in range(n_clusters):
+    print("Cluster %d:" % i, end='')
+    for ind in order_centroids[i, :10]:
+        print(' %s' % terms[ind], end='')
+    print()
+
+a = np.array([[20, 10, 30, 40], [100, 300, 200, 400], [1, 5, 3, 2]])
+cc = a.argsort()[:, ::-1]
+print(cc)
+
+a = np.array([10, 30, 20, 40])
+cc = a.argsort()[::-1]
+print(cc)
+"""
+print("------------------------------------------------------------")  # 60個
+
+from sklearn import metrics
+
+label_true = np.random.randint(1, 4, 6)
+label_pred = np.random.randint(1, 4, 6)
+print(
+    "Adjusted Rand-Index for random sample: %.3f"
+    % metrics.adjusted_rand_score(label_true, label_pred)
+)
+label_true = [1, 1, 3, 3, 2, 2]
+label_pred = [3, 3, 2, 2, 1, 1]
+print(
+    "Adjusted Rand-Index for same structure sample: %.3f"
+    % metrics.adjusted_rand_score(label_true, label_pred)
+)
+
+from sklearn import metrics
+
+label_true = [1, 1, 2, 2]
+label_pred = [2, 2, 1, 1]
+print(
+    "Homogeneity score for same structure sample: %.3f"
+    % metrics.homogeneity_score(label_true, label_pred)
+)
+label_true = [1, 1, 2, 2]
+label_pred = [0, 1, 2, 3]
+print(
+    "Homogeneity score for each cluster come from only one class: %.3f"
+    % metrics.homogeneity_score(label_true, label_pred)
+)
+label_true = [1, 1, 2, 2]
+label_pred = [1, 2, 1, 2]
+print(
+    "Homogeneity score for each cluster come from two class: %.3f"
+    % metrics.homogeneity_score(label_true, label_pred)
+)
+label_true = np.random.randint(1, 4, 6)
+label_pred = np.random.randint(1, 4, 6)
+print(
+    "Homogeneity score for random sample: %.3f"
+    % metrics.homogeneity_score(label_true, label_pred)
+)
+
+from sklearn import metrics
+
+label_true = [1, 1, 2, 2]
+label_pred = [2, 2, 1, 1]
+print(
+    "Completeness score for same structure sample: %.3f"
+    % metrics.completeness_score(label_true, label_pred)
+)
+label_true = [0, 1, 2, 3]
+label_pred = [1, 1, 2, 2]
+print(
+    "Completeness score for each class assign to only one cluster: %.3f"
+    % metrics.completeness_score(label_true, label_pred)
+)
+label_true = [1, 1, 2, 2]
+label_pred = [1, 2, 1, 2]
+print(
+    "Completeness score for each class assign to two class: %.3f"
+    % metrics.completeness_score(label_true, label_pred)
+)
+label_true = np.random.randint(1, 4, 6)
+label_pred = np.random.randint(1, 4, 6)
+print(
+    "Completeness score for random sample: %.3f"
+    % metrics.completeness_score(label_true, label_pred)
+)
+
+from sklearn import metrics
+
+label_true = [1, 1, 2, 2]
+label_pred = [2, 2, 1, 1]
+print(
+    "V-measure score for same structure sample: %.3f"
+    % metrics.v_measure_score(label_true, label_pred)
+)
+label_true = [0, 1, 2, 3]
+label_pred = [1, 1, 2, 2]
+print(
+    "V-measure score for each class assign to only one cluster: %.3f"
+    % metrics.v_measure_score(label_true, label_pred)
+)
+print(
+    "V-measure score for each class assign to only one cluster: %.3f"
+    % metrics.v_measure_score(label_pred, label_true)
+)
+label_true = [1, 1, 2, 2]
+label_pred = [1, 2, 1, 2]
+print(
+    "V-measure score for each class assign to two class: %.3f"
+    % metrics.v_measure_score(label_true, label_pred)
+)
+"""
+from sklearn import metrics
+
+labels = docs.target
+print("Homogeneity: %0.3f" % metrics.homogeneity_score(labels, kmean.labels_))
+print("Completeness: %0.3f" % metrics.completeness_score(labels, kmean.labels_))
+print("V-measure: %0.3f" % metrics.v_measure_score(labels, kmean.labels_))
+print("Adjusted Rand-Index: %.3f"
+      % metrics.adjusted_rand_score(labels, kmean.labels_))
+print("Silhouette Coefficient: %0.3f"
+      % metrics.silhouette_score(X, kmean.labels_, sample_size=1000))
+"""
 print("------------------------------------------------------------")  # 60個
 
 
@@ -477,10 +1453,4 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
-print("------------------------------------------------------------")  # 60個
-sys.exit()
-
-
-
-
 print("------------------------------------------------------------")  # 60個

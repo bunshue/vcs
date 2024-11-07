@@ -13,6 +13,11 @@ K-Means 自動分類
 3: 預測.predict
 step
 
+K-means Clustering 集群分析
+
+k-平均演算法（英文：k-means clustering，以下簡稱為 k-means ）
+是一種非監督式的學習方法，其主要的目標是對未標記的資料進行分群。
+
 """
 
 print("------------------------------------------------------------")  # 60個
@@ -37,15 +42,37 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
-plt.figure(
-    num="K-Means",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
+from sklearn.cluster import KMeans
+
+print("------------------------------------------------------------")  # 60個
+
+# 隨機生成 200 個點，然後用 k-means 將他們分成 5 群：
+
+x = np.random.rand(200,2)  # 將200個值隨機分佈在2維上
+clf = KMeans(n_clusters=5)  # 分成5類
+clf.fit(x)
+
+# 將點逐一染色
+for i in range(0,100):
+    if clf.labels_[i] == 0:
+        plt.scatter(x[i][0], x[i][1], color='red')
+    elif clf.labels_[i] == 1:
+        plt.scatter(x[i][0], x[i][1], color='blue')
+    elif clf.labels_[i] == 2:
+        plt.scatter(x[i][0], x[i][1], color='green')
+    elif clf.labels_[i] == 3:
+        plt.scatter(x[i][0], x[i][1], color='pink')
+    elif clf.labels_[i] == 4:
+        plt.scatter(x[i][0], x[i][1], color='orange')
+
+plt.autoscale()
+plt.grid()
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+plt.figure(num="K-Means", figsize=(12, 8))
 
 # 生成任意 N 點
 N = 100
@@ -58,10 +85,8 @@ plt.subplot(131)
 plt.scatter(x[:, 0], x[:, 1], cmap="Paired")
 plt.title("原始資料")
 
-from sklearn.cluster import KMeans
-
 # 記得要告訴 K-Means 要分成幾類 (我們這裡是 3 類)
-clf = KMeans(n_clusters=3)
+clf = KMeans(n_clusters=3)  # 分成3群
 
 clf.fit(x)  # 學習訓練.fit
 
@@ -101,15 +126,7 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-plt.figure(
-    num="Means Shift",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
+plt.figure(num="Means Shift", figsize=(12, 8))
 
 # Mean Shift
 # Mean Shift 也會自動分類
@@ -193,12 +210,17 @@ print("------------------------------------------------------------")  # 60個
 
 import pickle
 
-f = open("clf.pkl", "wb")
+print('把模型儲存起來')
+
+f = open("tmp_clf.pkl", "wb")
 pickle.dump(clf, f)
 f.close()
 
-f = open("clf.pkl", "rb")
+print('把模型讀出來')
+f = open("tmp_clf.pkl", "rb")
 clf2 = pickle.load(f)
+
+#預測
 print(clf2.predict([[3, 4]]))  # 預測.predict
 
 f.close()
@@ -224,11 +246,10 @@ plt.show()
 
 # 到現在我們有點熟了, 就是要把 KMeans 函數學習機找來。
 
-from sklearn.cluster import KMeans
+# 然後打開一台「KMeans 函數學習機」。這次我們第一次設參數!
+# 那是因為我們至少要讓 KMeans 學習機知道要分幾類。
 
-# 然後打開一台「KMeans 函數學習機」。這次我們第一次設參數! 那是因為我們至少要讓 KMeans 學習機知道要分幾類。
-
-clf = KMeans(n_clusters=3)
+clf = KMeans(n_clusters=3)  # 分成3群
 
 # 接著一樣是訓練。注意現在我們沒有標準答案, 所以只有 x 的資料。
 

@@ -77,7 +77,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 # 可以使用SSL module把證書驗證改成不需要驗證即可，方法如下:
 import ssl
 ssl._create_default_https_context = ssl._create_unverified_context
@@ -2909,23 +2909,6 @@ cc = pd.merge(A, B, how="right")
 print(cc)
 
 print("------------------------------------------------------------")  # 60個
-
-print("Create a datetime column from a DataFrame")
-
-# create an example DataFrame
-df = pd.DataFrame(
-    [[12, 25, 2017, 10], [1, 15, 2018, 11]], columns=["month", "day", "year", "hour"]
-)
-print(df)
-
-# new: create a datetime column from the entire DataFrame
-print(pd.to_datetime(df))
-
-# new: create a datetime column from a subset of columns
-print(pd.to_datetime(df[["month", "day", "year"]]))
-
-print(df)
-
 print("------------------------------------------------------------")  # 60個
 
 print("Create a category column during file reading")
@@ -4043,56 +4026,38 @@ dates = pd.date_range("20130101", periods=6)
 print(dates)
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-""" no file
-print("Pandas資料讀取與顯示")
 
-url = "xxxx"  # 網頁上有csv的地方
-df = pd.read_csv(
-    "https://data.nhi.gov.tw/DataSets/DataSetResource.ashx?rId=A21030000I-D21005-001"
-)
+df = make_data_frame_from_dict()  # 字典 轉 df
+print(df)
 
 print("資料排序")
 
-# df1 = df[['醫事機構名稱','電話','地址','備註']]
 # 把幾個欄位的資料抓出來
+df1 = df[['國文', '英文', '數學']]
+print(df1)
+
 
 print("資料篩選")
-mask = df1["地址"].str.startswith("苗栗縣")
+mask = df["姓名"].str.startswith("孫")
 cc = df1[mask]
 print(cc)
 
+print(df1)
+
 print("新增欄位(columns)")
-df1.insert(1, "縣市", df1["地址"].str.slice(0, 3, 1))
-df1.insert(2, "地區", df1["地址"].str.slice(3, 6, 1))
+df1.insert(3, "體育", "0")
+df1.insert(4, "工藝", "0")
 
 print(df1)
 
-print("資料統計")
+print('依照英文成績排序')
+df1 = df1.sort_values("英文", ascending=False)
+print(df1)
 
-df2 = df1[["醫事機構名稱", "縣市"]].groupby("縣市").count()
-df2.columns = ["總計"]
-df2.sort_values("總計", ascending=False)
-
-print("口罩何處尋 健保藥局查詢程式")
-
-# df = pd.read_csv('https://data.nhi.gov.tw/DataSets/DataSetResource.ashx?rId=A21030000I-D21005-001')
-
-df1 = df[["醫事機構名稱", "電話", "地址", "備註"]]
-"""
-
-"""
-keyword = input('請輸入查詢縣市：')
-
-if keyword != '':
-    mask = df1['地址'].str.startswith(keyword.replace('台', '臺'))
-    if len(df1[mask]) > 0:
-        display(df1[mask])
-    else:
-        print('請輸入正確資料！')
-else:
-    print('請重新輸入查詢縣市資料')
-"""
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 columns = list("ABCDEFGHIJKLMNOPQRSTUVWXY")
 df = pd.DataFrame(np.random.rand(200, 25), columns=columns)
@@ -4783,103 +4748,6 @@ print(df.index)  # 顯示行索引
 print(df.columns)  # 顯示列索引
 
 print("------------------------------------------------------------")  # 60個
-
-from datetime import datetime
-
-# Pandas日期時間處理
-# 時間點TimeStamp
-
-t = pd.to_datetime("2019-03-01 00:00:00")  # 從字符串轉換
-print(type(t), t)
-t = pd.to_datetime(datetime.now())  # 從datetime格式轉換
-print(type(t), t)
-
-# 時間間隔
-t1 = pd.to_datetime("2019-03-01 00:00:00")
-t2 = pd.to_datetime(datetime.now())
-delta = t2 - t1  # 通過TimeStamp相減獲取
-print(type(delta), delta, delta.days, delta.seconds)
-
-delta = pd.Timedelta(days=27)  # 構造時間間隔爲27天
-print(t2 + delta)
-
-# 時間段Period
-t = pd.to_datetime(datetime.now())
-p = pd.Period(t, freq="H")
-print(p, p.start_time, p.end_time)  # 顯示時間段起止時間
-
-# 批量轉換
-arr = ["2019-03-01", "2019-03-02", "2019-03-03"]
-df = pd.DataFrame({"d": arr})
-df["d"] = pd.to_datetime(df["d"])
-print(df)
-
-print("------------------------------------------------------------")  # 60個
-
-# 時間序列操作
-# 時間日期類型索引
-df.index = pd.to_datetime(df["d"])  # 本例中使用了上例中構造的df[‘d’]
-print(df.index)
-
-df = pd.DataFrame()
-df["date"] = pd.date_range(start="2017-12-30", end="2019-01-05", freq="d")  # 創建時間數據
-df["val"] = df["date"].apply(lambda x: x.weekday())  # 計算該日是星期幾
-df.set_index("date", inplace=True)  # 設置時間索引
-print(df.head(3))  # 顯示前三條
-
-# 時間段類型索引
-df_period = df.to_period(freq="M")  # 按月創建時間段
-print(type(df_period.index))  # 查看類型
-print(len(df_period))  # 查看記錄個數，與原記錄個數一致
-print(df_period.head(3))
-
-print(df_period.index[0].start_time, df_period.index[0].end_time)
-print(df_period.index[1].start_time, df_period.index[1].end_time)
-print(df.index.is_unique, df_period.index.is_unique)
-
-df_dt = df_period.to_timestamp()
-print(df_dt.head(3))
-print(type(df_dt.index))
-
-print("------------------------------------------------------------")  # 60個
-""" no df
-# 篩選和切分
-print(df['2019'])  # 篩選2019全年數據
-print(df['2019-01'])  #  篩選2019年一月全月數據
-print(df['2018':'2019'].head()) # 篩選2018年初到2019年底的所有數據
-print(df['2018-12-31':].head()) # 篩選2018-12-31及之後的數據
-
-# 重採樣
-tmp = df.resample('w').sum() # 使用疊加方式按周重採樣
-print(tmp.head(3))
-
-tmp = df.resample('M').ohlc() # 使用用ohlc方式按月降採樣
-print(tmp.head(3))
-
-tmp = df.resample('M').sum().to_period('M') # 按月降採樣，同時將時間變爲時間段
-print(tmp.head(3))
-
-df1 = pd.DataFrame({'val':[8,7,6]})
-df1.index = pd.to_datetime(['2019-03-01','2019-03-15','2019-03-31']) # 僅含三條數據
-df2 = df1.resample('D').interpolate() # 用插值方式升採樣
-print(len(df2))
-print(df2.head(3))
-
-df3 = df1.asfreq('D')
-print(df3.head(3))
-
-# 偏移
-df['prev'] = df['val'].shift() # 取前一條數據的val值作爲當前記錄中prev字段的值
-print(df.head(3))
-
-# 計算滑動窗口
-df['sw'] = df['val'].rolling(window=3).mean() # 計算窗口中數據的均值
-print(df.head(3))
-
-df['emw_3'] = df['val'].ewm(span=3).mean()
-df['emw_7'] = df['val'].ewm(span=7).mean()
-df['rolling'] = df['val'].rolling(7).mean()
-"""
 print("------------------------------------------------------------")  # 60個
 
 # 時區轉換
@@ -8883,6 +8751,136 @@ print(df)
     
 
 """
+'''
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("Create a datetime column from a DataFrame")
+
+# create an example DataFrame
+df = pd.DataFrame(
+    [[2017, 12, 25], [2018, 1, 15]], columns=["year", "month", "day"]
+)
+print(df)
+
+# new: create a datetime column from the entire DataFrame
+cc = pd.to_datetime(df)
+print(cc)
+
+# new: create a datetime column from a subset of columns
+cc = pd.to_datetime(df[["month", "day", "year"]])
+print(cc)
 
 
+# convert a single string to datetime format (outputs a timestamp object)
+ts = pd.to_datetime("1/1/1999")
+print(ts)
 
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+from datetime import datetime
+
+# Pandas日期時間處理
+# 時間點TimeStamp
+
+t = pd.to_datetime("2019-03-01 00:00:00")  # 從字符串轉換
+print(type(t), t)
+t = pd.to_datetime(datetime.now())  # 從datetime格式轉換
+print(type(t), t)
+
+# 時間間隔
+t1 = pd.to_datetime("2019-03-01 00:00:00")
+t2 = pd.to_datetime(datetime.now())
+delta = t2 - t1  # 通過TimeStamp相減獲取
+print(type(delta), delta, delta.days, delta.seconds)
+
+delta = pd.Timedelta(days=27)  # 構造時間間隔爲27天
+print(t2 + delta)
+
+# 時間段Period
+t = pd.to_datetime(datetime.now())
+p = pd.Period(t, freq="H")
+print(p, p.start_time, p.end_time)  # 顯示時間段起止時間
+
+# 批量轉換
+arr = ["2019-03-01", "2019-03-02", "2019-03-03"]
+df = pd.DataFrame({"d": arr})
+df["d"] = pd.to_datetime(df["d"])
+print(df)
+
+print("------------------------------------------------------------")  # 60個
+
+# 時間序列操作
+# 時間日期類型索引
+df.index = pd.to_datetime(df["d"])  # 本例中使用了上例中構造的df[‘d’]
+print(df.index)
+
+df = pd.DataFrame()
+df["date"] = pd.date_range(start="2017-12-30", end="2019-01-05", freq="d")  # 創建時間數據
+df["val"] = df["date"].apply(lambda x: x.weekday())  # 計算該日是星期幾
+df.set_index("date", inplace=True)  # 設置時間索引
+print(df.head(3))  # 顯示前三條
+
+# 時間段類型索引
+df_period = df.to_period(freq="M")  # 按月創建時間段
+print(type(df_period.index))  # 查看類型
+print(len(df_period))  # 查看記錄個數，與原記錄個數一致
+print(df_period.head(3))
+
+print(df_period.index[0].start_time, df_period.index[0].end_time)
+print(df_period.index[1].start_time, df_period.index[1].end_time)
+print(df.index.is_unique, df_period.index.is_unique)
+
+df_dt = df_period.to_timestamp()
+print(df_dt.head(3))
+print(type(df_dt.index))
+
+print("------------------------------------------------------------")  # 60個
+""" no df
+# 篩選和切分
+print(df['2019'])  # 篩選2019全年數據
+print(df['2019-01'])  #  篩選2019年一月全月數據
+print(df['2018':'2019'].head()) # 篩選2018年初到2019年底的所有數據
+print(df['2018-12-31':].head()) # 篩選2018-12-31及之後的數據
+
+# 重採樣
+tmp = df.resample('w').sum() # 使用疊加方式按周重採樣
+print(tmp.head(3))
+
+tmp = df.resample('M').ohlc() # 使用用ohlc方式按月降採樣
+print(tmp.head(3))
+
+tmp = df.resample('M').sum().to_period('M') # 按月降採樣，同時將時間變爲時間段
+print(tmp.head(3))
+
+df1 = pd.DataFrame({'val':[8,7,6]})
+df1.index = pd.to_datetime(['2019-03-01','2019-03-15','2019-03-31']) # 僅含三條數據
+df2 = df1.resample('D').interpolate() # 用插值方式升採樣
+print(len(df2))
+print(df2.head(3))
+
+df3 = df1.asfreq('D')
+print(df3.head(3))
+
+# 偏移
+df['prev'] = df['val'].shift() # 取前一條數據的val值作爲當前記錄中prev字段的值
+print(df.head(3))
+
+# 計算滑動窗口
+df['sw'] = df['val'].rolling(window=3).mean() # 計算窗口中數據的均值
+print(df.head(3))
+
+df['emw_3'] = df['val'].ewm(span=3).mean()
+df['emw_7'] = df['val'].ewm(span=7).mean()
+df['rolling'] = df['val'].rolling(7).mean()
+"""
+print("------------------------------------------------------------")  # 60個
+
+
+"""
+dates = pd.date_range("20130101", periods=6)
+
+
+"""

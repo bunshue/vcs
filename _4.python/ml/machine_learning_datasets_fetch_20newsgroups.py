@@ -69,6 +69,23 @@ print(score)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+# 新聞資料集
+
+from sklearn.datasets import fetch_20newsgroups
+
+# 篩選新聞類別
+categories = [
+    "alt.atheism",
+    "talk.religion.misc",
+    "comp.graphics",
+    "sci.space",
+]
+
+data_train = fetch_20newsgroups(
+    subset="train",
+    categories=categories,
+    shuffle=True,
+)
 
 
 print("------------------------------------------------------------")  # 60個

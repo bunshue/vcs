@@ -1918,16 +1918,1347 @@ print("------------------------------------------------------------")  # 60個
 
 
 
+print("------------------------------------------------------------")  # 60個
+print('------------------------------------------------------------')	#60個
 
+from sklearn.linear_model import LinearRegression
+
+X = [[10.0], [8.0], [13.0], [9.0], [11.0], [14.0], [6.0], [4.0], [12.0], [7.0], [5.0]]
+y = [8.04, 6.95, 7.58, 8.81, 8.33, 9.96, 7.24, 4.26, 10.84, 4.82, 5.68]
+
+linear_regression = LinearRegression()
+linear_regression.fit(X, y) 
+print(linear_regression.intercept_) # 切片 
+print(linear_regression.coef_) # 傾き
+
+y_pred = linear_regression.predict([[0], [1]]) 
+print(y_pred) # x=0, x=1に対する予測結果
+
+print('------------------------------------------------------------')	#60個
+print('------------------------------------------------------------')	#60個
+
+from sklearn.preprocessing import PolynomialFeatures
+from sklearn.linear_model import Ridge
+from sklearn.metrics import mean_squared_error
+
+train_size = 20
+test_size = 12
+train_X = np.random.uniform(low=0, high=1.2, size=train_size)
+test_X = np.random.uniform(low=0.1, high=1.3, size=test_size)
+train_y = np.sin(train_X * 2 * np.pi) + np.random.normal(0, 0.2, train_size)
+test_y = np.sin(test_X * 2 * np.pi) + np.random.normal(0, 0.2, test_size)
+poly = PolynomialFeatures(6) # 次數は6
+train_poly_X = poly.fit_transform(train_X.reshape(train_size, 1))
+test_poly_X = poly.fit_transform(test_X.reshape(test_size, 1))
+
+model = Ridge(alpha=1.0)
+model.fit(train_poly_X, train_y)
+train_pred_y = model.predict(train_poly_X)
+test_pred_y = model.predict(test_poly_X)
+print(mean_squared_error(train_pred_y, train_y))
+print(mean_squared_error(test_pred_y, test_y))
+
+print('------------------------------------------------------------')	#60個
+print('------------------------------------------------------------')	#60個
+
+from sklearn.linear_model import LogisticRegression
+
+X_train = np.r_[np.random.normal(3, 1, size=50), np.random.normal(-1, 1, size=50)].reshape((100, -1))
+y_train = np.r_[np.ones(50), np.zeros(50)]
+
+logistic_regression = LogisticRegression()
+logistic_regression.fit(X_train, y_train)
+print(logistic_regression.predict_proba([[0], [1], [2]])[:, 1])
+
+print('------------------------------------------------------------')	#60個
+print('------------------------------------------------------------')	#60個
+
+from sklearn.svm import LinearSVC
+from sklearn.datasets import make_blobs
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+
+# データ生成
+centers = [(-1, -0.125), (0.5, 0.5)]
+X, y = make_blobs(n_samples=50, n_features=2, centers=centers, cluster_std=0.3)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
+model = LinearSVC() 
+model.fit(X_train, y_train) # 學習
+y_pred = model.predict(X_test) 
+print(accuracy_score(y_pred, y_test)) # 評価
+
+print('------------------------------------------------------------')	#60個
+print('------------------------------------------------------------')	#60個
+
+from sklearn.svm import SVC
+from sklearn.datasets import make_gaussian_quantiles
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+
+# データ生成
+X, y = make_gaussian_quantiles(n_features=2, n_classes=2, n_samples=300)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
+model = SVC()
+model.fit(X_train, y_train)
+y_pred = model.predict(X_test)
+print(accuracy_score(y_pred, y_test))
+
+print('------------------------------------------------------------')	#60個
+print('------------------------------------------------------------')	#60個
+
+from sklearn.naive_bayes import MultinomialNB
+
+# データ生成
+X_train = [[1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+[0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0],
+[1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0],
+[0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0],
+[0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0],
+[0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1]]
+y_train = [1, 1, 1, 0, 0, 0]
+model = MultinomialNB()
+model.fit(X_train, y_train) # 學習
+print(model.predict([[0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0]])) # 評価
+
+print('------------------------------------------------------------')	#60個
+print('------------------------------------------------------------')	#60個
+
+
+
+
+
+
+
+
+print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
+
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.datasets import make_moons
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+
+# データ生成
+X, y = make_moons(noise=0.3)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
+model = KNeighborsClassifier()
+model.fit(X_train, y_train)  # 學習
+y_pred = model.predict(X_test)
+print(accuracy_score(y_pred, y_test))  # 評価
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+from sklearn.decomposition import TruncatedSVD
+
+data = [
+    [1, 0, 0, 0],
+    [1, 0, 0, 0],
+    [1, 1, 0, 0],
+    [0, 1, 0, 0],
+    [0, 0, 1, 1],
+    [0, 0, 1, 0],
+    [0, 0, 1, 1],
+    [0, 0, 0, 1],
+]
+n_components = 2  # 潜在変数の数
+model = TruncatedSVD(n_components=n_components)
+model.fit(data)
+print(model.transform(data))  # 変換したデータ
+print(model.explained_variance_ratio_)  # 寄与率
+print(sum(model.explained_variance_ratio_))  # 累積寄与率
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+from sklearn.decomposition import NMF
+
+# from sklearn.datasets.samples_generator import make_blobs old
+from sklearn.datasets import make_blobs
+
+centers = [[5, 10, 5], [10, 4, 10], [6, 8, 8]]
+X, _ = make_blobs(centers=centers)  # centersを中心としたデータを生成
+n_components = 2  # 潜在変数の数
+model = NMF(n_components=n_components)
+model.fit(X)
+W = model.transform(X)  # 分解後の行列
+H = model.components_
+print(W)
+print(H)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+from sklearn.datasets import fetch_20newsgroups
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.decomposition import LatentDirichletAllocation
+
+# removeで本文以外の情報を取り除く
+data = fetch_20newsgroups(remove=("headers", "footers", "quotes"))
+max_features = 1000
+# 文書 データをベクトルに変換
+tf_vectorizer = CountVectorizer(max_features=max_features, stop_words="english")
+tf = tf_vectorizer.fit_transform(data.data)
+n_topics = 20
+model = LatentDirichletAllocation(n_components=n_topics)
+model.fit(tf)
+print(model.components_)  # 各トピックが持つ単語分布
+print(model.transform(tf))  # トピックで表現された文書
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+""" import fail
+from sklearn.datasets import samples_generator
+from sklearn.manifold import LocallyLinearEmbedding
+
+data, color = samples_generator.make_swiss_roll(n_samples=1500)
+n_neighbors = 12 # 近傍点の数 
+n_components = 2 # 削減後の次元数
+model = LocallyLinearEmbedding(n_neighbors=n_neighbors,
+n_components=n_components)
+model.fit(data)
+print(model.transform(data)) # 変換したデータ
+"""
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+from sklearn.manifold import TSNE
+from sklearn.datasets import load_digits
+
+data = load_digits()
+print(type(data))
+print(len(data))
+
+print("TSNE")
+n_components = 2  # 削減後の次元を2に設定
+model = TSNE(n_components=n_components)
+print(model.fit_transform(data.data))
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------")  # 30個
+
+print("混同行列")
+
+from sklearn.metrics import confusion_matrix
+
+cm = confusion_matrix(y, y_pred)
+print(cm)
+
+print("------------------------------")  # 30個
+
+print("正解率")
+from sklearn.metrics import accuracy_score
+
+accuracy_score(y, y_pred)
+
+print("------------------------------")  # 30個
+
+print("適合率")
+from sklearn.metrics import precision_score
+
+precision_score(y, y_pred)
+
+print("------------------------------")  # 30個
+
+print("再現率")
+from sklearn.metrics import recall_score
+
+recall_score(y, y_pred)
+
+print("------------------------------")  # 30個
+
+print("F値")
+from sklearn.metrics import f1_score
+
+f1_score(y, y_pred)
+
+print("------------------------------")  # 30個
+
+print("予測確率")
+logistic_regression.predict_proba(X)
+
+print("------------------------------")  # 30個
+
+y_pred2 = (logistic_regression.predict_proba(X)[:, 1] > 0.1).astype(np.int)
+print(confusion_matrix(y, y_pred2))
+
+print(accuracy_score(y, y_pred2))
+print(recall_score(y, y_pred2))
+
+print("------------------------------")  # 30個
+
+print("ROC曲線・AUC")
+from sklearn.metrics import roc_curve
+
+probas = logistic_regression.predict_proba(X)
+fpr, tpr, thresholds = roc_curve(y, probas[:, 1])
+
+print("------------------------------")  # 30個
+
+plt.style.use("fivethirtyeight")
+
+fig, ax = plt.subplots()
+fig.set_size_inches(4.8, 5)
+
+ax.step(fpr, tpr, "gray")
+ax.fill_between(fpr, tpr, 0, color="skyblue", alpha=0.8)
+ax.set_xlabel("False Positive Rate")
+ax.set_ylabel("True Positive Rate")
+ax.set_facecolor("xkcd:white")
+plt.show()
+
+print("------------------------------")  # 30個
+
+from sklearn.metrics import roc_auc_score
+
+roc_auc_score(y, probas[:, 1])
+
+print("------------------------------")  # 30個
+
+print("平均二乗誤差")
+
+from sklearn.metrics import mean_squared_error
+
+mean_squared_error(y, y_pred)
+
+print("------------------------------")  # 30個
+
+print("決定係数")
+
+from sklearn.metrics import r2_score
+
+print(r2_score(y, y_pred))
+
+print("------------------------------")  # 30個
+
+print("異なるアルゴリズムを利用した場合との比較")
+
+from sklearn.svm import SVR
+
+model_svr_linear = SVR(C=0.01, kernel="linear")
+model_svr_linear.fit(X, y)
+y_svr_pred = model_svr_linear.predict(X)
+print(y_svr_pred)
+
+"""
+fig, ax = plt.subplots()
+ax.scatter(X, y, color='pink', marker='s', label='data set')
+ax.plot(X, y_pred, color='blue', label='regression curve')
+ax.plot(X, y_svr_pred, color='red', label='SVR')
+ax.legend()
+plt.show()
+"""
+
+print(mean_squared_error(y, y_svr_pred))  # 平均二乗誤差
+print(r2_score(y, y_svr_pred))  # 決定係数
+print(model_svr_linear.coef_)  # 傾き
+print(model_svr_linear.intercept_)  # 切片
+
+print("------------------------------")  # 30個
+
+print("ハイパーパラメータの設定")
+
+model_svr_rbf = SVR(C=1.0, kernel="rbf")
+model_svr_rbf.fit(X, y)
+y_svr_pred = model_svr_rbf.predict(X)
+print(mean_squared_error(y, y_svr_pred))  # 平均二乗誤差
+print(r2_score(y, y_svr_pred))  # 決定係数
+
+train_X, test_X = X[:400], X[400:]
+train_y, test_y = y[:400], y[400:]
+model_svr_rbf_1 = SVR(C=1.0, kernel="rbf")
+model_svr_rbf_1.fit(train_X, train_y)
+test_y_pred = model_svr_rbf_1.predict(test_X)
+print(mean_squared_error(test_y, test_y_pred))  # 平均二乗誤差
+print(r2_score(test_y, test_y_pred))  # 決定係数
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
 
 
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("機械学習モデルへの適用")
+
+from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
+from sklearn.svm import LinearSVC
+from sklearn.datasets import fetch_20newsgroups
+
+categories = ["alt.atheism", "soc.religion.christian", "comp.graphics", "sci.med"]
+remove = ("headers", "footers", "quotes")
+twenty_train = fetch_20newsgroups(
+    subset="train", remove=remove, categories=categories
+)  # 学習データ
+twenty_test = fetch_20newsgroups(
+    subset="test", remove=remove, categories=categories
+)  # 検証データ
+
+count_vect = CountVectorizer()  # 単語カウント
+X_train_counts = count_vect.fit_transform(twenty_train.data)
+X_test_count = count_vect.transform(twenty_test.data)
+
+model = LinearSVC()
+model.fit(X_train_counts, twenty_train.target)
+predicted = model.predict(X_test_count)
+np.mean(predicted == twenty_test.target)
+
+tf_vec = TfidfVectorizer()  # tf-idf
+X_train_tfidf = tf_vec.fit_transform(twenty_train.data)
+X_test_tfidf = tf_vec.transform(twenty_test.data)
+
+model = LinearSVC()
+model.fit(X_train_tfidf, twenty_train.target)
+predicted = model.predict(X_test_tfidf)
+np.mean(predicted == twenty_test.target)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 変換後のベクトルデータを入力として機械学習モデルを適用する
+
+from sklearn import datasets
+from sklearn import metrics
+from sklearn.ensemble import RandomForestClassifier
+
+digits = datasets.load_digits()
+
+n_samples = len(digits.images)
+data = digits.images.reshape((n_samples, -1))
+
+model = RandomForestClassifier(n_estimators=10)
+
+model.fit(data[: n_samples // 2], digits.target[: n_samples // 2])
+
+expected = digits.target[n_samples // 2 :]
+predicted = model.predict(data[n_samples // 2 :])
+
+print(metrics.classification_report(expected, predicted))
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("產生測試資料 並畫出")
+
+from sklearn.datasets import make_blobs
+
+N = 500
+print("產生", N, "筆資料 2維 2群")
+dx, dy = make_blobs(n_samples=N, n_features=2, centers=2, random_state=0)
+
+print(dx.shape)
+print(dy.shape)
+# print(dx)
+# print(dy)
+
+plt.scatter(dx.T[0], dx.T[1], c=dy, cmap="Dark2")
+plt.title("dx的分佈狀況, dy是用顏色表示")
+plt.grid(True)
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# StandardScaler
+# 將資料常態分布化，平均值會變為0, 標準差變為1，使離群值影響降低
+# MinMaxScaler與StandardScaler類似
+
+from sklearn.datasets import make_blobs
+from sklearn.preprocessing import StandardScaler
+
+N = 500
+print("產生", N, "筆資料 2維 2群")
+dx, dy = make_blobs(n_samples=N, n_features=2, centers=2, random_state=0)
+
+dx_std = StandardScaler().fit_transform(dx)
+
+plt.scatter(dx_std.T[0], dx_std.T[1], c=dy, cmap="Dark2")
+plt.grid(True)
+
+plt.show()
+
+# 分割訓練資料集和測試資料集
+from sklearn.model_selection import train_test_split
+
+dx_train, dx_test, dy_train, dy_test = train_test_split(
+    dx_std, dy, test_size=0.2, random_state=0
+)
+
+print(dx.shape)
+print(dx_train.shape)
+print(dx_test.shape)
+
+print(dy.shape)
+print(dy_train.shape)
+print(dy_test.shape)
+
+# k 最近鄰演算法 (KNN)
+from sklearn.neighbors import KNeighborsClassifier
+
+knn = KNeighborsClassifier(n_neighbors=5)
+knn.fit(dx_train, dy_train)
+predictions = knn.predict(dx_test)
+
+print(dy_test)
+print(predictions)
+print(knn.score(dx_train, dy_train))
+print(knn.score(dx_test, dy_test))
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 邏輯斯迴歸 (logistic regression)
+
+from sklearn.datasets import make_blobs
+from sklearn.preprocessing import StandardScaler
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+
+print("產生500筆資料 2維 2群")
+dx, dy = make_blobs(n_samples=500, n_features=2, centers=2, random_state=0)
+
+dx_std = StandardScaler().fit_transform(dx)
+
+dx_train, dx_test, dy_train, dy_test = train_test_split(
+    dx_std, dy, test_size=0.2, random_state=0
+)
+
+logistic_regression = LogisticRegression()
+logistic_regression.fit(dx_train, dy_train)
+predictions = logistic_regression.predict(dx_test)
+
+print(logistic_regression.score(dx_train, dy_train))
+print(logistic_regression.score(dx_test, dy_test))
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 線性支援向量機 (Linear SVM)
+
+from sklearn.datasets import make_blobs
+from sklearn.preprocessing import StandardScaler
+from sklearn.model_selection import train_test_split
+from sklearn.svm import LinearSVC
+
+print("產生500筆資料 2維 2群")
+dx, dy = make_blobs(n_samples=500, n_features=2, centers=2, random_state=0)
+dx_std = StandardScaler().fit_transform(dx)
+dx_train, dx_test, dy_train, dy_test = train_test_split(
+    dx_std, dy, test_size=0.2, random_state=0
+)
+
+linear_svm = LinearSVC()
+linear_svm.fit(dx_train, dy_train)
+predictions = linear_svm.predict(dx_test)
+
+print(linear_svm.score(dx_train, dy_train))
+print(linear_svm.score(dx_test, dy_test))
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 非線性 SVM
+
+from sklearn.datasets import make_moons
+from sklearn.preprocessing import StandardScaler
+from sklearn.model_selection import train_test_split
+from sklearn.svm import LinearSVC, SVC
+
+dx, dy = make_moons(n_samples=500, noise=0.15, random_state=0)
+
+dx_train, dx_test, dy_train, dy_test = train_test_split(
+    StandardScaler().fit_transform(dx), dy, test_size=0.2, random_state=0
+)
+
+linear_svm = LinearSVC()
+
+linear_svm.fit(dx_train, dy_train)
+
+predictions = linear_svm.predict(dx_test)
+
+svm = SVC()
+
+svm.fit(dx_train, dy_train)
+
+predictions = svm.predict(dx_test)
+
+print(linear_svm.score(dx_train, dy_train))
+
+print(linear_svm.score(dx_test, dy_test))
+
+print(svm.score(dx_train, dy_train))
+
+print(svm.score(dx_test, dy_test))
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 6-1 探索性資料分析──以Titanic(鐵達尼號)之生還預測為例
+# 資料科學 0. 問個感興趣的問題
+
+# 資料科學 1. 資料取得
+# 資料科學1.1 自建資料或下載資料後上傳到雲端硬碟
+
+# train.csv行資料說明.jpg
+# 資料科學1.2 讀取Google雲端硬碟中的csv檔
+# 資料科學1.3 將行列結構的資料建立為Pandas的資料框
+
+filename = "data/titanic.csv"
+df = pd.read_csv(filename)
+"""
+print(df)
+print(df.info())
+print(df.describe())
+"""
+
+# 資料科學2.3 資料清理
+# 缺失值的補值或刪除
+
+print(df.isnull())
+
+print(df.isnull().sum())
+
+print(df.isnull().count())
+
+print(df.isnull().sum() / df.isnull().count() * 100)
+
+df[df["Age"].isnull() == True]
+
+df["Age"] = df["Age"].fillna(df["Age"].mean())
+
+print(df)
+
+df[df["Embarked"].isnull()]
+
+df["Embarked"].value_counts()
+
+df["Embarked"] = df["Embarked"].fillna("S")
+
+df.loc[[61, 829], :]  # 顯示列索引61,829的資料
+
+print(df.info())
+
+df = df.drop("Cabin", axis=1)
+
+print(df.info())
+
+# 刪除重複值或異常值
+df[df.duplicated()]
+
+# 資料轉換
+print(df.head())
+
+s = {"female": 0, "male": 1}
+df["Sex"] = df["Sex"].map(s)
+e = {"S": 0, "C": 1, "Q": 2}
+df["Embarked"] = df["Embarked"].map(e)
+print(df.head())
+
+# 資料科學3. 探索性資料分析
+# 資料科學3.1 觀察資料的分佈(統計)
+
+print(df.head())
+
+# 資料科學3.2 資料視覺化
+# 1.全體乘客生還、死亡的比例
+
+print(df["Survived"].value_counts())
+
+df["Survived"].value_counts().plot(kind="pie", autopct="%1.2f%%")
+plt.show()
+
+print("------------------------------")  # 30個
+
+# 2.男性、女性乘客的比例
+
+print(df["Sex"].value_counts())
+
+df["Sex"].value_counts().plot(kind="pie", autopct="%1.2f%%")
+plt.show()
+
+print("------------------------------")  # 30個
+
+# 3.搭1等艙、2等艙、3等艙的乘客比例
+
+print(df["Pclass"].value_counts())
+
+df["Pclass"].value_counts().plot(kind="pie", autopct="%1.2f%%")
+plt.show()
+
+print("------------------------------")  # 30個
+
+# 4.進一步探討性別與生還的關係
+
+# 女、男乘客的人數
+
+print(df.groupby(["Sex"])["PassengerId"].count())
+
+# 不同性別的生還和死亡人數
+
+print(df.groupby(["Sex", "Survived"])["PassengerId"].count())
+
+df.groupby(["Sex", "Survived"])["PassengerId"].count().plot(kind="bar", rot=1)
+plt.show()
+
+print("------------------------------")  # 30個
+
+# 不同性別生還人數/不同性別人數
+
+ss = (
+    df.groupby(["Sex", "Survived"])["PassengerId"].count()
+    / df.groupby(["Sex"])["PassengerId"].count()
+    * 100
+)
+print(ss)
+
+ss.plot(kind="bar", color=["r", "g"], rot=0)
+plt.show()
+
+print("------------------------------")  # 30個
+
+# 5.進一步探討艙等與生還的關係
+
+# 三種艙等的生還和死亡人數
+
+print(df.groupby(["Pclass", "Survived"])["PassengerId"].count())
+
+df.groupby(["Pclass", "Survived"])["PassengerId"].count().plot(kind="bar", rot=0)
+plt.show()
+
+print("------------------------------")  # 30個
+
+# 不同艙等生還人數/不同艙等人數
+
+ps = (
+    df.groupby(["Pclass", "Survived"])["PassengerId"].count()
+    / df.groupby(["Pclass"])["PassengerId"].count()
+    * 100
+)
+print(ps)
+
+ps.plot(kind="bar", rot=0)
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 6-2 探索性資料分析──以 Iris 的花種分類為例
+# 資料科學0. 感興趣的問題
+
+# 資料科學1. 資料取得
+# 資料科學1.1 自建資料或從網路下載資料後上傳到雲端硬碟
+
+# Iris.jpg
+# 資料科學1.2 讀取Google雲端硬碟中的csv檔
+# 資料科學1.3 將行列結構的資料建立為Pandas的資料框
+
+filename = "data/Iris2.csv"
+df = pd.read_csv(filename)
+print(df)
+
+df = df.drop("Id", axis=1)
+print(df.head())
+
+# 資料科學2. 資料處理
+# 資料科學2.1 由列資料了解資料集
+
+print(df.head())
+
+# 資料科學2.2 了解行資料的標題與資料型別(整數、浮點數、字串等)
+
+print(df.info())
+
+# 資料科學2.3 資料清理
+
+# 缺失值的補值或刪除
+
+print(df.info())
+
+# 刪除重複值或異常值
+
+print(df[df.duplicated()])
+
+df = df.drop_duplicates()
+
+print(df[df.duplicated()])
+
+df.reset_index(drop=True)  # 將列索引重新編號
+
+# 資料轉換
+
+s = {"Iris-setosa": 0, "Iris-versicolor": 1, "Iris-virginica": 2}
+df["Species"] = df["Species"].map(s)
+print(df.head())
+
+# 資料科學3. 探索性資料分析
+# 資料科學3.1 觀察資料的分佈(統計)
+print(df.head())
+
+# 資料科學3.2 資料視覺化
+
+c = {0: "r", 1: "g", 2: "b"}
+df["colors"] = df["Species"].map(c)
+print(df)
+
+df.plot(kind="scatter", x="SepalLengthCm", y="Species", c=df["colors"])
+plt.show()
+
+print("------------------------------")  # 30個
+
+# (圖)-不同欄位和「類別(Species)」所繪製的散佈圖
+# (a)花萼長度
+df.plot(kind="scatter", x="SepalLengthCm", y="Species", c=df["colors"])
+plt.show()
+
+print("------------------------------")  # 30個
+
+# (b)花萼寬度
+df.plot(kind="scatter", x="SepalWidthCm", y="Species", c=df["colors"])
+plt.show()
+
+print("------------------------------")  # 30個
+
+# (c)花瓣長度
+df.plot(kind="scatter", x="PetalLengthCm", y="Species", c=df["colors"])
+plt.show()
+
+print("------------------------------")  # 30個
+
+# (d)花瓣寬度
+df.plot(kind="scatter", x="PetalWidthCm", y="Species", c=df["colors"])
+plt.show()
+
+print("------------------------------")  # 30個
+
+# (圖)-2個欄位組合所繪製的散佈圖
+# (a)花萼長度 vs. 花萼寬度
+df.plot(kind="scatter", x="SepalLengthCm", y="SepalWidthCm", c=df["colors"])
+plt.show()
+
+print("------------------------------")  # 30個
+
+# (b)花瓣長度 vs. 花瓣寬度
+df.plot(kind="scatter", x="PetalLengthCm", y="PetalWidthCm", c=df["colors"])
+plt.show()
+
+print("------------------------------")  # 30個
+
+# (c)花萼長度 vs. 花瓣寬度
+df.plot(kind="scatter", x="SepalLengthCm", y="PetalWidthCm", c=df["colors"])
+plt.show()
+
+print("------------------------------")  # 30個
+
+# (d)花瓣長度 vs. 花萼寬度
+df.plot(kind="scatter", x="PetalLengthCm", y="SepalWidthCm", c=df["colors"])
+plt.show()
+
+print("------------------------------")  # 30個
+
+# (e)花萼長度 vs. 花瓣長度
+df.plot(kind="scatter", x="SepalLengthCm", y="PetalLengthCm", c=df["colors"])
+plt.show()
+
+print("------------------------------")  # 30個
+
+# (f)花萼寬度 vs. 花瓣寬度
+df.plot(kind="scatter", x="SepalWidthCm", y="PetalWidthCm", c=df["colors"])
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 氣溫
+t = [17, 17, 17, 22, 19, 21, 17, 17, 22, 24, 21, 21, 21, 17, 25, 21, 20, 19, 19, 22]
+
+# 飲料銷售量
+q = [
+    386,
+    360,
+    383,
+    146,
+    300,
+    254,
+    403,
+    381,
+    269,
+    99,
+    171,
+    204,
+    213,
+    279,
+    97,
+    262,
+    262,
+    225,
+    240,
+    226,
+]
+
+df = pd.DataFrame()
+
+df["T"] = t  # 行資料：氣溫
+
+df["Q"] = q  # 行資料：銷售量
+
+print(df.head())
+
+df.plot(kind="scatter", x="T", y="Q")
+plt.show()
+
+df_X = df[["T"]]  # 雙層的中括號(特徵值)，設定成資料框
+df_y = df["Q"]  # 單層的中括號(標籤)，設定成序列
+print(df_X.head())
+
+print(df_y.head())
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 8-2 機器學習實作
+
+# 8-2-1 提出具體的假設
+# 8-2-2 找出機器學習模型
+# 挑選模型：匯入線性迴歸模型
+
+from sklearn.linear_model import LinearRegression
+
+# 學習訓練：建立並訓練線性迴歸模型
+
+lm = LinearRegression()  # 建立新模型 lm
+lm.fit(df_X, df_y)  # 訓練模型
+
+# LinearRegression(copy_X=True, fit_intercept=True, n_jobs=None, normalize=False)
+
+# 測試評估
+# 決定模型：取出線性迴歸模型的 m、b 參數
+
+print("線性迴歸的模型為 y = f(x) = mx +b")
+print("m 為 ", lm.coef_)
+print("b 為 ", lm.intercept_)
+
+# 線性迴歸的模型為 y = f(x) = mx +b
+# m 為  [-33.19704219]
+# b 為  920.2809917355372
+
+# 進行預測
+
+temp = [[23]]  # 輸入特徵值(氣溫)
+p = lm.predict(temp)  # 輸出標籤(預測的銷售量)
+print(p)
+
+# [156.74902131]
+
+temp = [[23], [18], [36]]
+p = lm.predict(temp)
+print(p)
+
+# [ 156.74902131  322.73423227 -274.81252719]
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 機器學習前準備─以Iris為例
+
+# 1. 資料取得
+
+filename = "data/Iris2.csv"
+
+df = pd.read_csv(filename)
+
+df = df.drop("Id", axis=1)
+
+print(df.head())
+
+# 2. 資料處理
+
+df.info()
+
+df = df.drop_duplicates()  # 刪除重複列
+df.reset_index(drop=True)  # 將列索引重新編號
+s = {"Iris-setosa": 0, "Iris-versicolor": 1, "Iris-virginica": 2}
+df["Species"] = df["Species"].map(s)
+df.info()
+
+# 3. 探索性資料分析
+print(df.head())
+"""
+#4. 機器學習做資料分析
+9-2 機器學習實作──以Iris為例
+9-2-1 提出具體的假設
+9-2-2 找出機器學習模型
+挑選模型：匯入 KNN 模型
+"""
+
+from sklearn.neighbors import KNeighborsClassifier
+
+# 學習訓練：建立並訓練 KNN 模型
+
+df_X = df[["SepalLengthCm", "SepalWidthCm", "PetalLengthCm", "PetalWidthCm"]]
+df_y = df["Species"]
+
+from sklearn.model_selection import train_test_split
+
+X_train, X_test, y_train, y_test = train_test_split(df_X, df_y, test_size=0.2)
+
+k = 1
+knn = KNeighborsClassifier(n_neighbors=k)  # 建立新模型 knn
+
+knn.fit(X_train, y_train)  # 用 training data 去訓練模型
+
+# 測試評估
+
+print("----KNN模式訓練後，取test data 進行分類的正確率計算-------")
+
+print("準確率:", knn.score(X_test, y_test))
+
+s = []
+for i in range(3, 11):
+    k = i
+    knn = KNeighborsClassifier(n_neighbors=k)
+    knn.fit(X_train, y_train)  # 用 training data 去訓練模型
+    print("k =", k, " 準確率:", knn.score(X_test, y_test))  # 用 test data 檢測模型的準確率
+    s.append(knn.score(X_test, y_test))
+
+k = 8
+knn = KNeighborsClassifier(n_neighbors=k)
+knn.fit(X_train, y_train)
+
+# 加廣知識：視覺化圖表來顯示準確率
+
+df_knn = pd.DataFrame()
+df_knn["s"] = s
+df_knn.index = [3, 4, 5, 6, 7, 8, 9, 10]
+df_knn.plot(grid=True)
+
+plt.show()
+
+print("分類的預測結果：")
+pred = knn.predict(X_test)  # 產生Test data預測結果
+print(pred)
+
+print(y_test.values)  # 觀察Test data真實數據
+
+# 加廣知識：利用values屬性做橫式顯示
+
+print(y_test)
+
+print(y_test.values)
+
+from sklearn.metrics import accuracy_score
+
+accuracy_score(y_test, pred)
+
+# 1.0
+
+from sklearn.metrics import confusion_matrix
+
+confusion_matrix(y_test, pred)
+
+# 加深知識：交叉驗證概念
+
+from sklearn.model_selection import cross_val_score
+
+s = cross_val_score(knn, df_X, df_y, scoring="accuracy", cv=10)
+print("交叉驗證每次的準確率：", s)
+print("交叉驗證得到的平均準確率：", s.mean())
+
+# 決定模型
+# 進行分類預測
+
+new = [[6.6, 3.1, 5.2, 2.4]]
+v = knn.predict(new)
+if v == 0:
+    s = "Iris-Setosa"
+elif v == 1:
+    s = "Iris-Versicolour"
+elif v == 2:
+    s = "Iris-Virginica"
+else:
+    s = "錯誤"
+print("預測結果為：", s)
+
+# 預測結果為： 錯誤
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 機器學習前準備─以Titanic為例
+
+# 1. 資料取得
+
+filename = "data/titanic.csv"
+df = pd.read_csv(filename)
+print(df.head())
+
+# 2. 資料處理
+df.info()
+
+df["Age"] = df["Age"].fillna(df["Age"].mean())
+df["Embarked"] = df["Embarked"].fillna("S")
+df = df.drop("Cabin", axis=1)
+print("重複值：", df[df.duplicated()])  # 檢查有無重複值
+
+df["Sex"] = df["Sex"].map({"female": 0, "male": 1})
+df["Embarked"] = df["Embarked"].map({"S": 0, "C": 1, "Q": 2})
+print(df.head())
+
+# 重複值： Empty DataFrame
+
+# 3. 探索性資料分析
+
+print(df.head())
+
+"""
+4. 機器學習做資料分析
+9-4 機器學習實作─以Titanic為例
+9-4-1 提出具體的假設
+9-4-2 找出機器學習模型
+挑選模型：匯入 KNN 模型
+"""
+
+from sklearn.neighbors import KNeighborsClassifier
+
+# 學習訓練：建立並訓練 KNN 模型
+
+df_X = df[["Sex", "Pclass"]]
+df_y = df["Survived"]
+
+from sklearn.model_selection import train_test_split
+
+X_train, X_test, y_train, y_test = train_test_split(df_X, df_y, test_size=0.2)
+
+k = 1
+knn = KNeighborsClassifier(n_neighbors=k)
+
+knn.fit(X_train, y_train)
+
+# 測試評估
+
+print("----KNN模式訓練後，取test data 進行分類的準確率計算-------")
+print("準確率:", knn.score(X_test, y_test))
+
+s = []
+for i in range(3, 11):
+    k = i
+    knn = KNeighborsClassifier(n_neighbors=k)
+    knn.fit(X_train, y_train)  # 用 training data 去訓練模型
+    print("k =", k, " 準確率:", knn.score(X_test, y_test))  # 用 test data 檢測模型的準確率
+    s.append(knn.score(X_test, y_test))
+
+k = 4
+knn = KNeighborsClassifier(n_neighbors=k)
+knn.fit(X_train, y_train)
+
+print("分類的預測結果：")
+pred = knn.predict(X_test)
+print(pred)  # 觀察預測結果
+
+print("真實數據：")
+print(y_test.values)  # 觀察真實數據(Test data)
+
+from sklearn.metrics import accuracy_score
+
+accuracy_score(y_test, pred)
+
+# 0.7541899441340782
+
+from sklearn.metrics import confusion_matrix
+
+confusion_matrix(y_test, pred)
+
+from sklearn.model_selection import cross_val_score
+
+s = cross_val_score(knn, df_X, df_y, scoring="accuracy", cv=10)
+print("準確率：", s)
+print("平均準確率：", s.mean())
+print("最高：", s.max())
+print("最差：", s.min())
+
+# 決定模型
+# 進行分類預測
+
+print("-----------(1)電影中兩位主角的生還推測-------------")
+
+Rose = [[0, 1]]  # 女性 頭等艙 蘿絲（Rose DeWitt Bukater）
+Jack = [[1, 3]]  # 男性 三等艙 傑克（Jack Dawson）
+v = knn.predict(Rose)
+if v == 1:
+    s = "生還"
+else:
+    s = "死亡"
+print("Rose能生還嗎 ? ", s)  # Rose為女性,及坐頭等艙
+
+v = knn.predict(Jack)
+if v == 1:
+    s = "生還"
+else:
+    s = "死亡"
+
+print("Jack能生還嗎 ? ", s)  # Jack為男性,及坐三等艙
+
+# 真實的伊西多和伊達·斯特勞斯（Isidor and Ida Straus）夫婦 (You stay, I stay)
+# http://www.epochtimes.com/b5/17/12/6/n9931745.htm
+# Isidor 美國梅西百貨創辦人之一
+
+print("-----(2)真實的伊西多和伊達·斯特勞斯夫婦的生還推測-------")
+Mrs = [[0, 1]]  # 女性 頭等艙 Straus, Mrs. Isidor (Rosalie Ida Blun)
+Mr = [[1, 1]]  # 男性 頭等艙 Straus, Mr. Isidor
+v = knn.predict(Mrs)
+if v == 1:
+    s = "生還"
+else:
+    s = "死亡"
+print("Mrs. Straus能生還嗎 ? ", s)  # Ida為女性,及坐頭等艙，可優先搭乘救生艇存活
+
+v = knn.predict(Mr)  # Isidor的生存率有多高呢？
+if v == 1:
+    s = "生還"
+else:
+    s = "死亡"
+print("Mr. Straus能生還嗎 ? ", s)
+
+# 真實的 Mrs. Brown
+# https://hokkfabrica.com/her-story-margaret-brown-from-titanic/
+#
+
+print("-----------(3)真實的Mrs. Brown的生還推測-------------")
+
+# 女性 頭等艙 Brown, Mrs. James Joseph (Margaret Tobin) 故事中的暴發戶 對Jack很友善
+Brown = [[0, 1]]
+v = knn.predict(Brown)  # Mrs. Brown呢？
+if v == 1:
+    s = "生還"
+else:
+    s = "死亡"
+print("Mrs. Brown能生還嗎 ? ", s)
+
+print("-------------- (5)若你也搭上了鐵達尼號呢？ ----------------")
+
+# s=input('您的性別（0：女，1：男），請輸入代碼？ ')
+s = 1
+# c=input('搭乘的船艙艙等（1：S艙，2：C艙，3：Q艙），請輸入代碼？ ')
+c = 3
+you = [[int(s), int(c)]]
+v = knn.predict(you)
+if v == 1:
+    print("預測為:幸運生還")
+else:
+    print("預測為:無法生還")
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 10-1 機器學習前準備
+# 1. 資料取得
+
+filename = "data/Iris2.csv"
+df = pd.read_csv(filename)
+
+df = df.drop("Id", axis=1)
+
+print(df.head())
+
+# 2. 資料處理
+
+print(df.info())
+
+df = df.drop_duplicates()  # 刪除重複列
+
+df.reset_index(drop=True)  # 將列索引重新編號
+
+s = {"Iris-setosa": 0, "Iris-versicolor": 1, "Iris-virginica": 2}
+
+df["Species"] = df["Species"].map(s)
+
+print(df.info())
+
+# 3. 探索性資料分析
+print(df.head())
+
+# 4. 機器學習做資料分析
+# 10-2 機器學習實作
+# 挑選模型：匯入 K- 平均法模型
+
+from sklearn.cluster import KMeans
+
+# 學習訓練：建立並訓練 K-平均法模型
+
+df_X = df[["SepalLengthCm", "SepalWidthCm", "PetalLengthCm", "PetalWidthCm"]]
+k = 1
+km = KMeans(n_clusters=k)
+km.fit(df_X)
+
+# 測試評估
+
+print("分群準確性:", km.inertia_)
+
+# 分群準確性: 663.895238095238
+
+s = []
+for k in range(1, 15):
+    km = KMeans(n_clusters=k)
+    km.fit(df_X)
+    s.append(km.inertia_)
+
+print(s)
+
+# [663.895238095238, 151.77145833333336, 77.91989035087718, 56.64237065018315, 45.816421929824564, 38.380978808131445, 34.1150969785575, 29.771330051212402, 27.730401211361738, 25.771261585636587, 24.236889472455648, 22.68941452991453, 21.258278047116285, 19.7686452991453]
+
+# 看視覺化圖表決定參數K值
+df_kmeans = pd.DataFrame()
+df_kmeans["inertia_"] = s
+df_kmeans.index = list(range(1, 15))
+df_kmeans.plot(grid=True)
+plt.show()
+
+k = 3
+km = KMeans(n_clusters=k)
+km.fit(df_X)
+
+print("分群的預測結果：")
+pred = km.fit_predict(df_X)
+print(pred)
+
+# 決定模型
+# 進行分群預測
+
+df1 = df_X.copy()
+df1["pred"] = pred
+
+c = {0: "r", 1: "g", 2: "b"}
+
+df1["colors"] = df1["pred"].map(c)
+df1.plot(kind="scatter", x="SepalLengthCm", y="SepalWidthCm", c=df1["colors"])
+
+plt.show()
+
+# 給一朵鳶尾花的4個特徵值：「花萼長度 6.6公分、花萼寬度 3.1公分、花瓣長度 5.2公分、花寬度 2.4公分」
+
+new = [[6.6, 3.1, 5.2, 2.4]]
+
+v = km.predict(new)
+
+print("預測結果為：", v)
+
+# 預測結果為： [0]
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
@@ -1939,17 +3270,14 @@ print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
 
+print("------------------------------------------------------------")  # 60個
+
+
 #normalize
 #get_feature_names
 #get_feature_names_out
 
 #plt.rcParams['figure.figsize'] = 12, 8
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
 
 np.random.seed(3)
 np.random.seed(10)  #Setting seed for reproducability

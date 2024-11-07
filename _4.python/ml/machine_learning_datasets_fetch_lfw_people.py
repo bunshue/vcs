@@ -3,6 +3,9 @@ Face-Detection
 
 fetch_lfw_people
 
+人臉辨識資料集(Labeled Faces in the Wild, LFW)
+
+
 """
 
 print("------------------------------------------------------------")  # 60個
@@ -16,6 +19,7 @@ import random
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns  # 海生, 自動把圖畫得比較好看
 
 font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
@@ -167,9 +171,130 @@ plt.show()
 
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+from sklearn.datasets import fetch_lfw_people
+
+ds = fetch_lfw_people(min_faces_per_person=70, resize=0.4)
+
+# 2. 資料清理、資料探索與分析
+
+# 資料集說明
+print(ds.DESCR)
+
+# 資料維度
+n_samples, h, w = ds.images.shape
+
+X = ds.data
+n_features = X.shape[1]
+
+# the label to predict is the id of the person
+y = ds.target
+target_names = ds.target_names
+n_classes = target_names.shape[0]
+
+print("Total dataset size:")
+print("n_samples: %d" % n_samples)
+print("n_features: %d" % n_features)
+print("n_classes: %d" % n_classes)
+
+print(ds.target_names)
+
+# 是否有含遺失值(Missing value)
+
+cc = np.isnan(X).sum()
+print(cc)
+
+print("# y 各類別資料筆數統計")
+
+df_y = pd.DataFrame({"code": y})
+df_y["name"] = df_y["code"].map(dict(enumerate(ds.target_names)))
+
+sns.countplot(x="name", data=df_y)
+plt.xticks(rotation=30)
+
+plt.show()
+
+print("以Pandas函數統計各類別資料筆數")
+pd.Series(y).value_counts()
+
+# 3. 不須進行特徵工程
+
+# 4. 資料分割
+
+# 資料分割
+from sklearn.model_selection import train_test_split
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+# 查看陣列維度
+cc = X_train.shape, X_test.shape, y_train.shape, y_test.shape
+print(cc)
+
+# 特徵縮放
+
+from sklearn.preprocessing import StandardScaler
+
+scaler = StandardScaler()
+X_train_std = scaler.fit_transform(X_train)
+X_test_std = scaler.transform(X_test)
+
+# 5. 選擇演算法
+
+from sklearn.linear_model import LogisticRegression
+
+clf = LogisticRegression(max_iter=500)
+
+# 6. 模型訓練
+
+clf.fit(X_train_std, y_train)
+
+# 7. 模型計分
+
+y_pred = clf.predict(X_test_std)
+print(y_pred)
+
+print("計算準確率 測試目標 與 預測目標 接近程度")
+from sklearn.metrics import accuracy_score
+
+print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
+
+print("混淆矩陣")
+from sklearn.metrics import confusion_matrix
+
+print(confusion_matrix(y_test, y_pred))
+
+print("混淆矩陣圖")
+from sklearn.metrics import ConfusionMatrixDisplay
+
+disp = ConfusionMatrixDisplay(
+    confusion_matrix=confusion_matrix(y_test, y_pred), display_labels=ds.target_names
+)
+disp.plot()
+plt.xticks(rotation=30)
+plt.show()
+
+# 8. 模型評估，暫不進行
+
+# 9. 模型佈署
+
+# 10.模型預測，暫不進行
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")

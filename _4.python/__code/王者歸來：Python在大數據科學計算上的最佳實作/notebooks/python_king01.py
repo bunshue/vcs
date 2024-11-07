@@ -86,7 +86,7 @@ import pylab as pl
 pl.plot(var_range, p)
 pl.axvline(var, 0, 1, c="r")
 pl.show()
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 foldername = 'C:/_git/vcs/_1.data/______test_files1/__pic//_scenery'
@@ -106,5 +106,49 @@ print(length)
 for i in range(length):
     print(imgs[i].shape)
 """
+
+
+
+df = pd.DataFrame(np.random.randint(0, 100, (10, 4)), columns=["A", "B", "C", "D"])
+
+"""
+from scpy2.common import GraphvizMPLTransform
+import pylab as pl
+fig = pl.figure()
+
+#%dot GraphvizMPLTransform.graphviz(fig.transFigure)
+"""
+
+from sympy import symbols, solve
+a, b, c, x = symbols("a,b,c,x")
+
+cc =  solve(a * x ** 2 + b * x + c, x)
+print(cc)
+
+
+
+'''
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+
+
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
 
 

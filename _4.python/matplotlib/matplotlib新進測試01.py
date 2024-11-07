@@ -488,18 +488,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-""" 久
-# 繪制心形隱函數曲面
-# pip install mayavi
-
-from mayavi import mlab
-
-x, y, z = np.mgrid[-3:3:100j, -1:1:100j, -3:3:100j]
-f = (x**2 + 9.0/4*y**2 + z**2 - 1)**3 - x**2 * z**3 - 9.0/80 * y**2 * z**3
-contour = mlab.contour3d(x, y, z, f, contours=[0], color=(1, 0, 0))
-"""
-print("------------------------------------------------------------")  # 60個
-
 # 資訊圖表的視覺化手法
 
 from PIL import Image, ImageOps
