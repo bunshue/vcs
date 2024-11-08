@@ -1,11 +1,15 @@
 """
 OpenCV
 
+OpenCV-圖形處理和電腦視覺
+
+
 """
 
 print("------------------------------------------------------------")  # 60個
 
 import cv2
+import pylab as pl
 
 print("------------------------------------------------------------")  # 60個
 
@@ -28,12 +32,9 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
+
 '''
-import pylab as pl
-
-#OpenCV-圖形處理和電腦視覺
-
-filename = "lena.jpg"
+filename = "data/lena.jpg"
 img = cv2.imread( filename ) #❶
 print(type(img), img.shape, img.dtype)
 cv2.namedWindow("demo1")     #❷
@@ -42,7 +43,7 @@ cv2.waitKey(0)  #❹;
 
 print("------------------------------------------------------------")  # 60個
 
-filename = "lena.jpg"
+filename = "data/lena.jpg"
 img = cv2.imread( filename )
 cv2.namedWindow("demo1")
 cv2.imshow("demo1", img)
@@ -76,9 +77,9 @@ z4[:, :, :3] = z3
 for dtype, img in product(["uint8", "uint16"], [z1, z3, z4]):
     nchannel = 1 if img.ndim == 2 else img.shape[2]
     img = (img * np.iinfo(dtype).max).astype(dtype)
-    fn = "{}_{}.png".format(dtype, nchannel)
+    fn = "tmp_{}_{}.png".format(dtype, nchannel)
     cv2.imwrite(fn, img)
-'''
+
 from glob import glob
 from IPython import display
 
@@ -98,9 +99,9 @@ def f(fn, flag):
 
 #圖形輸出
 
-img = cv2.imread("lena.jpg")
+img = cv2.imread("data/lena.jpg")
 for quality in [90, 60, 30]:
-    cv2.imwrite("lena_q{:02d}.jpg".format(quality), img, 
+    cv2.imwrite("tmp_lena_q{:02d}.jpg".format(quality), img, 
                 [cv2.IMWRITE_JPEG_QUALITY, quality])
 
 from matplotlib.cm import ScalarMappable
@@ -178,17 +179,14 @@ res, frame50 = video.read()
 print("CURRENT FRAME:", video.get(cv2.CAP_PROP_POS_FRAMES))
 video.release()
 
-sys.exit()
-
 print("------------------------------------------------------------")  # 60個
-
-import pylab as pl
+print("------------------------------------------------------------")  # 60個
 
 #圖形處理
 #二維卷冊積
 
 #%fig=使用filter2D()製作的各種圖形處理效果
-src = cv2.imread("lena.jpg")
+src = cv2.imread("data/lena.jpg")
 
 kernels = [ 
     (u"低通濾波器",np.array([[1,  1, 1],[1, 2, 1],[1, 1, 1]])*0.1),
@@ -206,7 +204,6 @@ for ax, (name, kernel) in zip(axes, kernels):
     ax.axis("off")
 fig.subplots_adjust(0.02, 0, 0.98, 1, 0.02, 0)
 
-
 img = np.random.rand(1000,1000) #❶
 
 row = cv2.getGaussianKernel(7, -1) #❷
@@ -218,6 +215,11 @@ img2 = cv2.filter2D(img, -1, kernel) #❹
 img3 = cv2.sepFilter2D(img, -1, row, col) #❺
 print("error=", np.max(np.abs(img2[:] - img3[:])))
 
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 #形態學運算
 
 #    scpy2.opencv.morphology_demo：示範OpenCV中的各種形態學運算。
@@ -225,7 +227,7 @@ print("error=", np.max(np.abs(img2[:] - img3[:])))
 #填充-floodFill
 
 #%fig=示範floodFill()的填充效果
-img = cv2.imread("coins.png")
+img = cv2.imread("data/coins.png")
 seed1 = 344, 188
 seed2 = 152, 126
 diff = (13, 13, 13)
@@ -238,6 +240,8 @@ fig, axes = pl.subplots(1, 2, figsize=(9, 4))
 axes[0].imshow(~mask, cmap="gray")
 axes[1].imshow(img);
 
+plt.show()
+
 #    scpy2.opencv.floodfill_demo：示範填充函數floodFill()的各個參數的用法。
 
 #去瑕疵-inpaint
@@ -246,16 +250,13 @@ axes[1].imshow(img);
 
 print("------------------------------------------------------------")  # 60個
 
-import numpy as np
-import pylab as pl
-import cv2
 from numpy import fft
 
 #圖形變換
 #幾何變換
 
 #%fig=對圖形進行仿射變換
-img = cv2.imread("lena.jpg")
+img = cv2.imread("data/lena.jpg")
 h, w = img.shape[:2]
 src = np.array([[0, 0], [w - 1, 0], [0, h - 1]], dtype=np.float32)  #❶
 dst = np.array([[300, 300], [873, 78], [161, 923]], dtype=np.float32)  #❷
@@ -281,7 +282,7 @@ for p1, p2 in zip(src, dst):
 
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 #%fig=對圖形進行透視變換
 src = np.array(
@@ -314,11 +315,12 @@ print("------------------------------------------------------------")  # 60個
 
 """
     SOURCE
-    scpy2.opencv.warp_demo：仿射變換和透視變換的示範程式，可以透過滑鼠拖曳圖中藍色三角形和四邊形的頂點，進一步決定原始圖形各個頂角經由變換之後的座標。
+    scpy2.opencv.warp_demo：仿射變換和透視變換的示範程式，
+    可以透過滑鼠拖曳圖中藍色三角形和四邊形的頂點，
+    進一步決定原始圖形各個頂角經由變換之後的座標。
 
 """
 
-#%hide
 #%exec_python -m scpy2.opencv.warp_demo
 
 """
@@ -380,7 +382,7 @@ print("------------------------------------------------------------")  # 60個
 """
 
 #%fig=使用remap()實現圖形拖曳效果
-img = cv2.imread("lena.jpg")
+img = cv2.imread("data/lena.jpg")
 h, w = img.shape[:2]
 gridy, gridx = np.mgrid[:h, :w]  # ❶
 tx, ty = 313, 316
@@ -398,7 +400,7 @@ offsety_blur = cv2.GaussianBlur(offsety, (0, 0), sigma)
 img2 = cv2.remap(img,
                  (offsetx_blur + gridx).astype("f4"),
                  (offsety_blur + gridy).astype("f4"), cv2.INTER_LINEAR)
-#%hide
+
 fig, ax = pl.subplots(1, 1, figsize=(8, 8))
 fig.subplots_adjust(0, 0, 1, 1, 0, 0)
 ax.imshow(img2[:, :, ::-1])
@@ -412,14 +414,12 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-
-#%hide
 #%exec_python -m scpy2.opencv.remap_demo
 
 #直方圖
 
-#%fig=`lena.jpg`的三個通道的直方圖統計、通道0和通道2的二維直方圖統計
-img = cv2.imread("lena.jpg")
+#%fig=`data/lena.jpg`的三個通道的直方圖統計、通道0和通道2的二維直方圖統計
+img = cv2.imread("data/lena.jpg")
 fig, ax = pl.subplots(1, 2, figsize=(12, 5))
 colors = ["blue", "green", "red"]
 
@@ -438,8 +438,7 @@ ax[1].set_xlabel("red");
 
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
-
+print("------------------------------")  # 30個
 
 result = cv2.calcHist([img],
                       channels=(0, 1, 2),
@@ -451,10 +450,13 @@ print(cc)
 
 #(30, 20, 10)
 
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 #直方圖反向映射
 
 #%fig=使用calcBackProject()尋找圖形中橙子部分
-img = cv2.imread("fruits_section.jpg")  # ❶
+img = cv2.imread("data/fruits_section.jpg")  # ❶
 img_hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
 
 result = cv2.calcHist([img_hsv], [0, 1], None,  # ❷
@@ -462,7 +464,7 @@ result = cv2.calcHist([img_hsv], [0, 1], None,  # ❷
 
 result /= np.max(result) / 255  # ❸
 
-img2 = cv2.imread("fruits.jpg")  # ❹
+img2 = cv2.imread("data/fruits.jpg")  # ❹
 img_hsv2 = cv2.cvtColor(img2, cv2.COLOR_BGR2HSV)
 
 img_bp = cv2.calcBackProject([img_hsv2],  # ❺
@@ -473,7 +475,7 @@ img_bp = cv2.calcBackProject([img_hsv2],  # ❺
 _, img_th = cv2.threshold(img_bp, 180, 255, cv2.THRESH_BINARY)  # ❻
 struct = np.ones((3, 3), np.uint8)
 img_mp = cv2.morphologyEx(img_th, cv2.MORPH_CLOSE, struct, iterations=5)  # ❼
-#%hide
+
 fig, axes = pl.subplots(2, 3, figsize=(9, 6))
 fig.subplots_adjust(0, 0, 1, 1, 0.01, 0.01)
 axes[0, 0].imshow(img[:, :, ::-1])
@@ -488,6 +490,7 @@ for axe in axes.flat:
 
 plt.show()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 #直方圖比對
@@ -512,8 +515,8 @@ def histogram_match(src, dst):
 
     return res, (cdf_src, cdf_dst, cdf_res)
 
-src = cv2.imread("autumn.jpg")
-dst = cv2.imread("summer.jpg")
+src = cv2.imread("data/autumn.jpg")
+dst = cv2.imread("data/summer.jpg")
 
 res, cdfs = histogram_match(src, dst)
 
@@ -541,9 +544,10 @@ for ax, cdf in zip((axb, axg, axr), zip(*cdfs)):
     ax.set_ylim(0, 1.1)
 
 plt.show()
-
+'''
 print("------------------------------------------------------------")  # 60個
-
+print("------------------------------------------------------------")  # 60個
+'''
 #二維離散傅立葉變換
 
 from numpy import fft
@@ -564,9 +568,12 @@ np.allclose(x, x2) # 和原始訊號進行比較
 
 #True
 
-#%fig=（左上）用fft2()計算的頻域訊號，（中上）使用fftshift()移位之後的頻域訊號，（其它）各個領域所對應的空域訊號
+#%fig=（左上）用fft2()計算的頻域訊號，
+#（中上）使用fftshift()移位之後的頻域訊號，
+#（其它）各個領域所對應的空域訊號
+
 N = 256
-img = cv2.imread("lena.jpg", cv2.IMREAD_GRAYSCALE)
+img = cv2.imread("data/lena.jpg", cv2.IMREAD_GRAYSCALE)
 img = cv2.resize(img, (N, N))
 img_freq = fft.fft2(img)
 img_mag = np.log10(np.abs(img_freq))
@@ -578,7 +585,9 @@ rects = [(80, 125, 85, 130), (90, 90, 95, 95),
 """
     SOURCE
 
-    scpy2.opencv.fft2d_demo：示範二維離散傅立葉變換，使用者在左側的頻域模值圖形上用滑鼠繪制隱藏區域，右側的圖形為頻域訊號經由隱藏處理之後所轉換成的空域訊號。
+    scpy2.opencv.fft2d_demo：示範二維離散傅立葉變換，
+    使用者在左側的頻域模值圖形上用滑鼠繪制隱藏區域，
+    右側的圖形為頻域訊號經由隱藏處理之後所轉換成的空域訊號。
 """
 
 #%fig=(左上)用fft2()計算的頻域訊號，(中上)使用fftshift()移位之後的頻域訊號，(其它)各個領域所對應的空域訊號
@@ -591,7 +600,7 @@ for i, (x0, y0, x1, y1) in enumerate(rects):
     img_freq2 = img_freq * mask  # ❺
     img_filtered = fft.ifft2(img_freq).real  # ❻
     filtered_results.append(img_filtered)
-#%hide
+
 fig, axes = pl.subplots(2, 3, figsize=(9, 6))
 axes = axes.ravel()
 axes[0].imshow(img_mag, cmap=pl.cm.gray)
@@ -613,17 +622,14 @@ for ax in axes:
 fig.subplots_adjust(0.01, 0.01, 0.99, 0.99, 0.02, 0.02)
 
 plt.show()
-
+'''
 print("------------------------------------------------------------")  # 60個
-
-"""
-#%hide
-#%exec_python -m scpy2.opencv.fft2d_demo
-
+print("------------------------------------------------------------")  # 60個
+'''
 #用二元視覺圖形計算深度訊息
 
-img_left = cv2.pyrDown(cv2.imread('aloeL.jpg'))
-img_right = cv2.pyrDown(cv2.imread('aloeR.jpg'))
+img_left = cv2.pyrDown(cv2.imread('data/aloeL.jpg'))
+img_right = cv2.pyrDown(cv2.imread('data/aloeR.jpg'))
 
 img_left = cv2.cvtColor(img_left, cv2.COLOR_BGR2RGB)
 img_right = cv2.cvtColor(img_right, cv2.COLOR_BGR2RGB)
@@ -642,88 +648,29 @@ stereo_parameters = dict(
     P2 = 2400)
 
 stereo = cv2.StereoSGBM(**stereo_parameters)
-disparity = stereo.compute(img_left, img_right).astype(np.float32) / 16
+# NG disparity = stereo.compute(img_left, img_right).astype(np.float32) / 16
 
 #%fig=用remap重疊左右兩幅圖形
 h, w = img_left.shape[:2]
 ygrid, xgrid = np.mgrid[:h, :w]
 ygrid = ygrid.astype(np.float32)
 xgrid = xgrid.astype(np.float32)
-res = cv2.remap(img_right, xgrid - disparity, ygrid, cv2.INTER_LINEAR)
+# NG res = cv2.remap(img_right, xgrid - disparity, ygrid, cv2.INTER_LINEAR)
 
 fig, axes = pl.subplots(1, 3, figsize=(9, 3))
 axes[0].imshow(img_left)
 axes[0].imshow(img_right, alpha=0.5)
-axes[1].imshow(disparity, cmap="gray")
+#axes[1].imshow(disparity, cmap="gray")
 axes[2].imshow(img_left)
-axes[2].imshow(res, alpha=0.5)
+#axes[2].imshow(res, alpha=0.5)
 for ax in axes:
     ax.axis("off")
 fig.subplots_adjust(0, 0, 1, 1, 0, 0);
 
 plt.show()
 
-
-Bf = w * 0.8
-x = (xgrid - w * 0.5)
-y = (ygrid - h * 0.5)
-d = (disparity + 1e-6)
-z = (Bf / d).ravel()
-x = (x / d).ravel()
-y = -(y / d).ravel()
-
-mask = (z > 0) & (z < 30)
-points = np.c_[x, y, z][mask]
-colors = img_left.reshape(-1, 3)[mask]
-
 print("------------------------------------------------------------")  # 60個
-
-#%fig=使用VTK顯示3D點雲
-from tvtk.api import tvtk
-from tvtk.tools import ivtk
-from pyface.api import GUI
-
-poly = tvtk.PolyData()
-poly.points = points #所有座標點
-poly.verts = np.arange(len(points)).reshape(-1, 1) #所有頂點與座標點對應
-poly.point_data.scalars = colors.astype(np.uint8) #座標點的彩色，必須使用uint8
-
-m = tvtk.PolyDataMapper()
-m.set_input_data(poly)
-a = tvtk.Actor(mapper=m) 
-
-from scpy2 import vtk_scene, vtk_scene_to_array
-scene = vtk_scene([a], viewangle=22)
-scene.camera.position = (0 , 20, -60)
-scene.camera.view_up = 0, 1, 0
-#%array_image vtk_scene_to_array(scene)
-"""
-
-"""
-    SOURCE
-
-    scpy2.opencv.stereo_demo：使用二元視覺圖形計算深度訊息的示範程式。
-"""
-
 print("------------------------------------------------------------")  # 60個
-
-""" no module
-from scpy2.tvtk.tvtkhelp import ivtk_scene
-
-scene = ivtk_scene([a])
-scene.scene.isometric_view()
-scene.scene.camera.position = (0 , 20, -50)
-scene.scene.camera.view_up = 0, 1, 0
-
-#%hide
-#%exec_python -m scpy2.opencv.stereo_demo
-
-"""
-
-print("------------------------------------------------------------")  # 60個
-
-import pylab as pl
-import cv2
 
 #圖形識別
 #用Hough變換檢驗直線和圓
@@ -734,31 +681,30 @@ import cv2
 """
 #檢驗線段
 
-"""
 #%figonly=用r和θ表示的直線
-from scpy2.matplotlib import make_zerocross_axes
-   
-ax = make_zerocross_axes(figsize=(6, 6), loc=111)
     
 x = [-2, 5]
 y = [5, -1]
-ax.plot(x, y)
 
 from sympy import Point, Line
 from sympy import Point, Line
+
 line = Line(Point(x[0], y[0]), Point(x[1], y[1]))
 seg = line.perpendicular_segment(Point(0, 0))
 
-ax.plot([seg.p1.x, seg.p2.x], [seg.p1.y, seg.p2.y], "--o", color="gray")
+plt.plot([seg.p1.x, seg.p2.x], [seg.p1.y, seg.p2.y], "--o", color="gray")
+
 from matplotlib.patches import Wedge
+
 angle = np.rad2deg(np.arctan2(float(seg.p2.y), float(seg.p2.x)))
 theta = Wedge((0, 0), 1, 0, angle, alpha=0.3)
-ax.add_patch(theta)
-ax.text(1, 0.5, r"$\theta$", fontsize="large")
-ax.text(0.8, 1.1, r"$r$", fontsize="large");
+#plt.add_patch(theta)
+plt.text(1, 0.5, r"$\theta$", fontsize="large")
+plt.text(0.8, 1.1, r"$r$", fontsize="large");
 
 plt.show()
-"""
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 #%figonly=霍夫變換示意圖
@@ -787,12 +733,13 @@ ax2.plot(theta, r, "--")
 ax2.set_xlim(0, np.max(theta));
 
 plt.show()
-
+'''
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
+'''
 #%fig=使用HoughLinesP()檢驗圖形中的直線
-img = cv2.imread("building.jpg", cv2.IMREAD_GRAYSCALE)
+img = cv2.imread("data/building.jpg", cv2.IMREAD_GRAYSCALE)
 img_binary = cv2.Canny(img, 100, 255)
 lines = cv2.HoughLinesP(img_binary, rho=1, theta=np.deg2rad(0.1),
                         threshold=96, minLineLength=33,
@@ -808,11 +755,12 @@ ax.axis("off");
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 #檢驗圓形
 
 #%fig=使用HoughCircles()檢驗圖形中的圓形
-img = cv2.imread("coins.png", cv2.IMREAD_GRAYSCALE)
+img = cv2.imread("data/coins.png", cv2.IMREAD_GRAYSCALE)
 img_blur = cv2.GaussianBlur(img, (0, 0), 1.8) #❶
 circles = cv2.HoughCircles(img_blur, cv2.HOUGH_GRADIENT, dp=2.0, minDist=20.0,
                  param1=170, param2=44, minRadius=16, maxRadius=40)
@@ -831,6 +779,7 @@ ax.axis("off");
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 #圖形分割
 #Mean-Shift法
@@ -838,7 +787,7 @@ print("------------------------------------------------------------")  # 60個
 #%fig=使用pyrMeanShiftFiltering()進行圖形分割，從左到右參數sr分別為20, 40, 80
 fig, axes = pl.subplots(1, 3, figsize=(9, 3))
 
-img = cv2.imread("fruits.jpg")
+img = cv2.imread("data/fruits.jpg")
 
 srs = [20, 40, 80]
 for ax, sr in zip(axes, srs):
@@ -850,17 +799,18 @@ for ax, sr in zip(axes, srs):
 fig.subplots_adjust(0.02, 0, 0.98, 1, 0.02, 0) 
 
 plt.show()
-
+'''
 print("------------------------------------------------------------")  # 60個
-
+'''
 #分水嶺算法
 
-img = cv2.imread("pills.png")
+img = cv2.imread("data/pills.png")
 img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 img_gray = cv2.blur(img_gray, (15, 15)) #❶
 _, img_binary = cv2.threshold(img_gray, 150, 255, cv2.THRESH_BINARY) #❷
 peaks = img_gray == cv2.dilate(img_gray, np.ones((7, 7)), 1) #❸
-peaks &= img_binary
+
+# NG peaks &= img_binary
 peaks[1, 1] = True  #❹
 
 from scipy.ndimage import label
@@ -869,10 +819,12 @@ cv2.watershed(img, markers)
 
 """
     SOURCE
-scpy2.opencv.watershed_demo：分水嶺算法的示範程式。用滑鼠在圖形上繪制起始區域，起始區域將使用“目前標簽”填充，按滑鼠右鍵切換到下一個標簽。每次繪制起始區域之後，將顯示分割的結果。
+scpy2.opencv.watershed_demo：分水嶺算法的示範程式。
+用滑鼠在圖形上繪制起始區域，起始區域將使用“目前標簽”填充，
+按滑鼠右鍵切換到下一個標簽。每次繪制起始區域之後，將顯示分割的結果。
 """
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 #%figonly=使用watershed分割藥丸
 fig, axes = pl.subplots(1, 2, figsize=(10, 3))
@@ -891,16 +843,16 @@ for ax in axes:
 fig.subplots_adjust(0, 0, 1, 1, 0, 0);
 
 plt.show()
-
+'''
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-#%hide
-#%exec_python -m scpy2.opencv.watershed_demo
 """
+# 無 SURF() 函數
 #SURF特征比對
 
 #%fig=SURF()找到的關鍵點和每個關鍵點的局部圖形
-img_gray1 = cv2.imread("lena.jpg", cv2.IMREAD_GRAYSCALE) #❶
+img_gray1 = cv2.imread("data/lena.jpg", cv2.IMREAD_GRAYSCALE) #❶
 surf = cv2.SURF(2000, 2)  #❷
 key_points1 = surf.detect(img_gray1) #❸
 key_points1.sort(key=lambda kp:kp.size, reverse=True) #❹
@@ -908,7 +860,7 @@ key_points1.sort(key=lambda kp:kp.size, reverse=True) #❹
 img_color1 = cv2.cvtColor(img_gray1, cv2.COLOR_GRAY2RGB)
 cv2.drawKeypoints(img_color1, key_points1[:25], img_color1, color=(255, 0, 0),  #❺
                   flags=cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
-#%hide
+
 from scpy2.utils.image import concat_keypoints
 
 img_keypoints = concat_keypoints(img_gray1, key_points1[:25], 5, 5, scale=2)
@@ -922,7 +874,7 @@ print(cc)
 
 #(145, 128)
 
-img_gray2 = cv2.imread("lena2.jpg", cv2.IMREAD_GRAYSCALE)
+img_gray2 = cv2.imread("dat/lena2.jpg", cv2.IMREAD_GRAYSCALE)
 img_color2 = cv2.cvtColor(img_gray2, cv2.COLOR_GRAY2RGB)
 surf2 = cv2.SURF(2000, 2)  
 key_points2, features2 = surf2.detectAndCompute(img_gray2, None)
@@ -954,7 +906,9 @@ matched_positions2 = key_positions2[index2[best_index]]
 
 matrix, mask = cv2.findHomography(matched_positions1, matched_positions2, cv2.RANSAC) #❷
 
-#scpy2.opencv.surf_demo：SURF圖形比對示範程式。用滑鼠修改右側圖形的四個角的位置計算出透視變換之後的圖形，然後在原始圖形和變換之後的圖形之間搜尋比對點，並計算透視變換的矩陣。
+#scpy2.opencv.surf_demo：SURF圖形比對示範程式。
+#用滑鼠修改右側圖形的四個角的位置計算出透視變換之後的圖形，
+#然後在原始圖形和變換之後的圖形之間搜尋比對點，並計算透視變換的矩陣。
 """
 
 """ no module
@@ -978,22 +932,18 @@ ax.add_collection(line_collection);
 
 plt.show()
 
-#%hide
-#%exec_python -m scpy2.opencv.surf_demo
-
 """
 print("------------------------------------------------------------")  # 60個
-
-import pylab as pl
+print("------------------------------------------------------------")  # 60個
+'''
 from numpy import fft
 
 #形狀與結構分析
 #輪廓檢驗
 
-#%hide
 #%exec_python -m scpy2.opencv.findcontours_demo
 
-img_coin = cv2.imread("coins.png", cv2.IMREAD_COLOR)
+img_coin = cv2.imread("data/coins.png", cv2.IMREAD_COLOR)
 img_coin_gray = cv2.cvtColor(img_coin, cv2.COLOR_BGR2GRAY)
 img_coin_blur = cv2.GaussianBlur(img_coin_gray, (0, 0), 1.5, 1.5)
 img_coin_binary = cv2.Canny(img_coin_blur.copy(), 60, 60)
@@ -1020,11 +970,12 @@ cv2.drawContours(img_coin, coin_contours, -1, (255, 0, 0))
 
 cv2.imshow("demo1", img_coin)
 cv2.waitKey(0)
+'''
 
-#%hide
-#%array_image img_coin_binary; img_coin
-
-img_pattern = cv2.imread("nested_patterns.png")
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+'''
+img_pattern = cv2.imread("data/nested_patterns.png")
 img_pattern_gray = cv2.cvtColor(img_pattern, cv2.COLOR_BGR2GRAY)
 _, img_pattern_binary = cv2.threshold(img_pattern_gray, 100, 255, cv2.THRESH_BINARY)
 contours, hierarchy = cv2.findContours(img_pattern_binary.copy(),
@@ -1081,14 +1032,15 @@ ax.set_xlim(0, img_pattern.shape[1])
 ax.set_ylim(img_pattern.shape[0], 0);
 
 plt.show()
-
+'''
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 #輪廓比對
 
-img_patterns = cv2.imread("patterns.png", cv2.IMREAD_GRAYSCALE)
+img_patterns = cv2.imread("data/patterns.png", cv2.IMREAD_GRAYSCALE)
 patterns, _ = cv2.findContours(img_patterns, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-img_targets = cv2.imread("targets.png", cv2.IMREAD_GRAYSCALE)
+img_targets = cv2.imread("data/targets.png", cv2.IMREAD_GRAYSCALE)
 targets, _ = cv2.findContours(img_targets, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
 patterns = [pattern - np.min(pattern, 0, keepdims=True) for pattern in patterns] #❶
@@ -1159,8 +1111,8 @@ ax.autoscale();
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-import pylab as pl
 
 """
 型態轉換
@@ -1169,8 +1121,7 @@ import pylab as pl
 points = np.random.rand(20, 2).astype(np.float32)
 (x, y), (w, h), angle = cv2.minAreaRect(points)
 
-
-
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 

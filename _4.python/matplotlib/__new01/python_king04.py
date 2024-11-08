@@ -28,39 +28,23 @@ print("------------------------------------------------------------")  # 60個
 '''
 x = np.linspace(0, 10, 1000)
 y = np.sin(x)
-z = np.cos(x**2)
+z = np.cos(x)
 
-plt.figure(figsize=(8,4)) #❷
+plt.plot(x,y,color="red")
+plt.plot(x,z,"b--")
 
-plt.plot(x,y,label="$sin(x)$",color="red",linewidth=2) #❸
-plt.plot(x,z,"b--",label="$cos(x^2)$") #❹
-
-plt.xlabel("Time(s)") #❺
-plt.ylabel("Volt") 
-plt.title("PyPlot First Example") 
 plt.ylim(-1.2,1.2) 
-plt.legend() 
 
-""" NG
+
 import io
 buf = io.BytesIO() # 建立一個用來儲存圖形內容的BytesIO物件
-plt.savefig(buf, fmt="png") # 將圖形以png格式儲存進buf中
+plt.savefig(buf, format="png") # 將圖形以png格式儲存進buf中
 cc = buf.getvalue()[:20] # 顯示圖形內容的前20個位元組
 print(cc)
-"""
 
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
-
-
-#面對物件模式繪圖
-
-fig = plt.gcf()
-axes = plt.gca()
-print(fig, axes)
-
-#Figure(640x320) Axes(0.125,0.1;0.775x0.8)
 
 #組態屬性
 
@@ -71,28 +55,9 @@ line = plt.plot(x, 0.05*x*x)[0] # plot傳回一個清單
 line.set_alpha(0.5) # 呼叫Line2D物件的set_*()方法設定屬性值
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
-
-lines = plt.plot(x, np.sin(x), x, np.cos(x))
-plt.show()
 
 print("------------------------------------------------------------")  # 60個
-
-print('????')
-plt.setp(lines, color="r", linewidth=4.0);
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-
-print(line.get_linewidth())
-print(plt.getp(lines[0], "color")) # 傳回color屬性
-
-#2.0
-#r
-
-print("------------------------------------------------------------")  # 60個
-
+"""
 #繪制多子圖
 
 #%fig[1x2]=在Figure物件中建立多個子圖
@@ -101,50 +66,12 @@ for idx, color in enumerate("rgbyck"):
     #plt.subplot(321+idx, axisbg=color)  # NG
 
 plt.show()
-
+"""
 print("------------------------------------------------------------")  # 60個
 
 plt.subplot(221) # 第一行的左圖
 plt.subplot(222) # 第一行的右圖
-plt.subplot(212) # 第二整行;
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-
-#%hide
-plt.close("all")
-
-#%fig[1x2]=同時在多幅圖表、多個子圖中進行繪圖
-plt.figure(1) # 建立圖表1
-plt.figure(2) # 建立圖表2
-ax1 = plt.subplot(121) # 在圖表2中建立子圖1
-ax2 = plt.subplot(122) # 在圖表2中建立子圖2
-
-x = np.linspace(0, 3, 100)
-for i in range(5):
-    plt.figure(1)  #❶ 選取圖表1
-    plt.plot(x, np.exp(i*x/3))
-    plt.sca(ax1)   #❷ 選取圖表2的子圖1
-    plt.plot(x, np.sin(i*x))
-    plt.sca(ax2)  # 選取圖表2的子圖2
-    plt.plot(x, np.cos(i*x))
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-#也可以不呼叫sca()指定目前子圖，而直接呼叫ax1和ax2的plot()方法繪圖。
-
-#%nofig
-fig, axes = plt.subplots(2, 3)
-[a, b, c], [d, e, f] = axes
-print(axes.shape)
-print(b)
-
-#(2, 3)
-#Axes(0.398529,0.536364;0.227941x0.363636)
+plt.subplot(212) # 第二整行
 
 plt.show()
 
@@ -158,7 +85,7 @@ ax2 = plt.subplot2grid((3, 3), (0, 2), rowspan=2)
 ax3 = plt.subplot2grid((3, 3), (1, 0), rowspan=2)
 ax4 = plt.subplot2grid((3, 3), (2, 1), colspan=2)
 ax5 = plt.subplot2grid((3, 3), (1, 1));
-#%hide
+
 for idx, ax in enumerate(fig.axes, 1):
     ax.text(0.5, 0.5, "ax{}".format(idx), ha="center", va="center", fontsize=16)
 
@@ -169,34 +96,24 @@ print("------------------------------------------------------------")  # 60個
 #組態檔
 import matplotlib
 
-from os import path
-path.abspath(matplotlib.get_configdir())
+os.path.abspath(matplotlib.get_configdir())
 
-#u'C:\\Users\\RY\\Dropbox\\scipybook2\\settings\\.matplotlib'
+os.path.abspath(matplotlib.matplotlib_fname())
 
-path.abspath(matplotlib.matplotlib_fname())
-
-#u'C:\\Users\\RY\\Dropbox\\scipybook2\\settings\\.matplotlib\\matplotlibrc'
-
-print(matplotlib.rc_params())
-
-print(matplotlib.rcParams)
-
-plt.close("all")
+#print(matplotlib.rc_params())
+#print(matplotlib.rcParams)
 
 matplotlib.rcParams["lines.marker"] = "o"
 plt.plot([1,2,3,2])
 
 matplotlib.rc("lines", marker="x", linewidth=2, color="red")
-
 matplotlib.rcdefaults()
-
 matplotlib.rcParams.update( matplotlib.rc_params() )
 
 #透過pyplot模組也可以使用rcParams、rc和rcdefaults。
 
 from matplotlib import style
-print(style.available)
+#print(style.available)
 
 #[u'dark_background', u'bmh', u'grayscale', u'ggplot', u'fivethirtyeight']
 
@@ -210,18 +127,14 @@ plt.close("all")
 
 x = np.linspace(0, 10, 1000)
 y = np.sin(x)
-z = np.cos(x**2)
+z = np.cos(x)
 
 plt.figure(figsize=(8,4))
 
-plt.plot(x,y,label="$sin(x)$",linewidth=2)
-plt.plot(x,z,"--",label="$cos(x^2)$")
+plt.plot(x,y,linewidth=2)
+plt.plot(x,z,"--")
 
-plt.xlabel("Time(s)")
-plt.ylabel("Volt") 
-plt.title("ggplot style") 
 plt.ylim(-1.2,1.2) 
-plt.legend();
 
 plt.show()
 
@@ -240,8 +153,6 @@ print(fontManager.ttflist[0].fname)
 plt.close("all")
 
 #%fig=顯示系統中所有的中文字型名
-import os
-from os import path
 
 fig = plt.figure(figsize=(8, 7))
 ax = fig.add_subplot(111)
@@ -250,13 +161,13 @@ plt.xticks([])
 plt.yticks([])
 x, y = 0.05, 0.05
 fonts = [font.name for font in fontManager.ttflist if 
-             path.exists(font.fname) and os.stat(font.fname).st_size>1e6] #❶
+             os.path.exists(font.fname) and os.stat(font.fname).st_size>1e6]
 font = set(fonts)
 dy = (1.0 - y) / (len(fonts) // 4 + (len(fonts)%4 != 0))
 
 for font in fonts:
     t = ax.text(x, y + dy / 2, u"中文字型", 
-                {'fontname':font, 'fontsize':14}, transform=ax.transAxes) #❷
+                {'fontname':font, 'fontsize':14}, transform=ax.transAxes)
     ax.text(x, y, font, {'fontsize':12}, transform=ax.transAxes)
     x += 0.25
     if x >= 1.0:
@@ -268,13 +179,14 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 
 from matplotlib.font_manager import FontProperties
-font = FontProperties(fname=r"c:\windows\fonts\simsun.ttc", size=14) #❶
 
-t = np.linspace(0, 10, 1000)
-y = np.sin(t)
-plt.close("all")
-plt.plot(t, y)
-plt.xlabel(u"時間", fontproperties=font) #❷
+font = FontProperties(fname=r"c:\windows\fonts\simsun.ttc", size=14)
+
+x = np.linspace(0, 10, 1000)
+y = np.sin(x)
+
+plt.plot(x, y)
+plt.xlabel(u"時間", fontproperties=font)
 plt.ylabel(u"振幅", fontproperties=font)
 plt.title(u"正弦波", fontproperties=font)
 
@@ -293,11 +205,8 @@ plt.xlabel(0.5 ,0.5, u"中文字型")
 """
 print("------------------------------------------------------------")  # 60個
 
-from matplotlib import pyplot as plt
-
 #Artist物件
 
-#%nofig
 from matplotlib import pyplot as plt
 
 fig = plt.figure()
@@ -325,11 +234,9 @@ print(cc)
 
 #Artist的屬性
 
-#%hide_output
 fig = plt.figure()
 fig.patch.set_color("g") # 設定背景彩色為綠色
 
-#%nofig
 line = plt.plot([1, 2, 3, 2, 1], lw=4)[0]
 line.set_alpha(0.5)
 
@@ -337,17 +244,19 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-line.set(alpha=0.5, zorder=2);
+line.set(alpha=0.5, zorder=2)
+plt.show()
 
 cc = plt.getp(fig.patch)
 print(cc)
 
-#%hide
 plt.close("all")
+'''
 
+print("------------------------------------------------------------")  # 60個
+'''
 #Figure容器
 
-#%nofig
 fig = plt.figure()
 ax1 = fig.add_subplot(211)
 ax2 = fig.add_axes([0.1, 0.1, 0.7, 0.3])
@@ -359,14 +268,11 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-
 for ax in fig.axes:
     ax.grid(True)
 
-#%hide
 plt.close("all")
 
-#%hide_output
 from matplotlib.lines import Line2D
 fig = plt.figure()
 line1 = Line2D(
@@ -377,7 +283,6 @@ fig.lines.extend([line1, line2])
 
 #Axes容器
 
-#%nofig
 fig = plt.figure()
 ax = fig.add_subplot(111)
 ax.patch.set_facecolor("green")
@@ -393,7 +298,6 @@ print(cc)
 
 #True
 
-#%nofig
 fig, ax = plt.subplots()
 n, bins, rects = ax.hist(np.random.randn(1000), 50, facecolor="blue")
 cc = rects[0] is ax.patches[0]
@@ -403,9 +307,9 @@ print(cc)
 
 plt.show()
 
+'''
 print("------------------------------------------------------------")  # 60個
-
-#%nofig
+'''
 fig, ax = plt.subplots()
 rect = plt.Rectangle((1,1), width=5, height=12)
 
@@ -415,8 +319,6 @@ ax.add_patch(rect) # 將rect加入進ax
 #cc = rect.get_axes()
 #print(cc)
 
-
-#%nofig
 fig, ax = plt.subplots()
 t = ax.scatter(np.random.rand(20), np.random.rand(20))
 print(t, t in ax.collections)
@@ -427,7 +329,6 @@ print("------------------------------------------------------------")  # 60個
 
 #Axis容器
 
-#%nofig
 fig, ax = plt.subplots()
 axis = ax.xaxis
 
@@ -462,17 +363,19 @@ plt.show()
 
 print(axis.get_minor_locator()) # 計算副刻度位置的物件
 print(axis.get_major_locator()) # 計算主刻度位置的物件
-
+'''
 print("------------------------------------------------------------")  # 60個
-
+'''
 #%fig=組態X軸的刻度線的位置和文字，並開啟副刻度線
+
 from fractions import Fraction
-from matplotlib.ticker import MultipleLocator, FuncFormatter #❶
+from matplotlib.ticker import MultipleLocator, FuncFormatter
+
 x = np.arange(0, 4*np.pi, 0.01)
 fig, ax = plt.subplots(figsize=(8,4))
 plt.plot(x, np.sin(x), x, np.cos(x))
 
-def pi_formatter(x, pos): #❷
+def pi_formatter(x, pos):
     frac = Fraction(int(np.round(x / (np.pi/4))), 4)
     d, n = frac.denominator, frac.numerator
     if frac == 0:
@@ -492,8 +395,6 @@ plt.xlim(0, np.max(x))
 # 設定圖的底邊距
 plt.subplots_adjust(bottom = 0.15)
 
-plt.grid() #開啟網格
-
 # 主刻度為pi/4
 ax.xaxis.set_major_locator( MultipleLocator(np.pi/4) ) #❸
 
@@ -508,29 +409,18 @@ for tick in ax.xaxis.get_major_ticks():
     tick.label1.set_fontsize(16)
 
 plt.show()
-
+'''
 print("------------------------------------------------------------")  # 60個
 
-#Artist物件的關系
-
-#%nofig
-fig = plt.figure()
-plt.subplot(211)
-plt.bar([1, 2, 3], [1, 2, 3])
-plt.subplot(212)
-plt.plot([1, 2, 3]);
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
+''' annotate
 #座標變換和注解
 
 #%fig=為圖表加入各種注解元素
-def func1(x): #❶
+
+def func1(x):
     return 0.6*x + 0.3
 
-def func2(x): #❶
+def func2(x):
     return 0.4*x*x + 0.1*x + 0.2
     
 def find_curve_intersects(x, y1, y2):
@@ -540,7 +430,7 @@ def find_curve_intersects(x, y1, y2):
     d1, d2 = d[idx], d[idx+1]
     return -d1*(x2-x1)/(d2-d1) + x1
 
-x = np.linspace(-3,3,100) #❷
+x = np.linspace(-3,3,100)
 f1 = func1(x)
 f2 = func2(x)
 fig, ax = plt.subplots(figsize=(8,4))
@@ -554,6 +444,7 @@ ax.plot(x2, func1(x2), "o")
 ax.fill_between(x, f1, f2, where=f1>f2, facecolor="green", alpha=0.5) #❹
 
 from matplotlib import transforms
+
 trans = transforms.blended_transform_factory(ax.transData, ax.transAxes)
 ax.fill_between([x1, x2], 0, 1, transform=trans, alpha=0.1) #❺
 
@@ -645,8 +536,14 @@ print(cc)
 ax.set_xscale("log") # 將X軸改為對數座標
 # dddd %dot GraphvizMPLTransform.graphviz(ax.transScale)
 ax.set_xscale("linear") # 將X軸改為線性座標
+'''
 
+print("------------------------------------------------------------")  # 60個
+
+'''
 #製作陰影效果
+
+from matplotlib import transforms
 
 #%fig=使用座標變換繪制的帶陰影的曲線
 fig, ax = plt.subplots()
@@ -655,8 +552,8 @@ y = np.sin(2*np.pi*x)
 
 N = 7 # 陰影的條數
 for i in range(N, 0, -1):
-    offset = transforms.ScaledTranslation(i, -i, transforms.IdentityTransform()) #❶
-    shadow_trans = plt.gca().transData + offset #❷
+    offset = transforms.ScaledTranslation(i, -i, transforms.IdentityTransform())
+    shadow_trans = plt.gca().transData + offset
     ax.plot(x,y,linewidth=4,color="black", 
         transform=shadow_trans,  #❸
         alpha=(N-i)/2.0/N)
@@ -671,9 +568,10 @@ print(cc)
 
 print(ax.transData.transform((0,0))) # 對(0,0)進行資料座標變換
 print(shadow_trans.transform((0,0))) # 對(0,0)進行資料座標變換和偏移變換
-
+'''
 print("------------------------------------------------------------")  # 60個
 
+'''
 #加入注解
 
 #%fig=三個座標系中的文字
@@ -684,17 +582,19 @@ fig, ax = plt.subplots(figsize=(8,4))
 ax.plot(x,y)
 
 for i, (_x, _y) in enumerate(zip(x, y)):
-    ax.text(_x, _y, str(i), color="red", fontsize=i+10) #❶
+    ax.text(_x, _y, str(i), color="red", fontsize=i+10)
 
 ax.text(0.5, 0.8, u"子圖座標系中的文字", color="blue", ha="center", 
-    transform=ax.transAxes) #❷
+    transform=ax.transAxes)
     
 plt.figtext(0.1, 0.92, u"圖表座標系中的文字", color="green") #❸;
 
 plt.show()
+'''
 
 print("------------------------------------------------------------")  # 60個
 
+'''
 from matplotlib import pyplot as plt
 from matplotlib import collections as mc
 
@@ -717,9 +617,10 @@ ax.invert_yaxis()
 ax.autoscale();
 
 plt.show()
-
+'''
 print("------------------------------------------------------------")  # 60個
 
+'''
 #集合
 #曲線集合(LineCollection)
 
@@ -750,8 +651,6 @@ for ax in ax1, ax2:
 
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
-
 print("number of lc1 paths:", len(lc1.get_paths()))
 print("number of lc1 colors:", len(lc1.get_edgecolors()))
 print("number of lc2 colors:", len(lc2.get_edgecolors()))
@@ -760,8 +659,12 @@ print(np.all(lc2.get_edgecolors() == lc2.cmap(lc2.norm(lc2.get_array()))))
 print(lc1.get_transforms()) # 路徑變換
 print(lc1.get_transform() is ax1.transData) # 主變換為資料座標變換物件
 print(lc1.get_offset_transform(), lc1.get_offsets())
+'''
+print("------------------------------------------------------------")  # 60個
 
+'''
 from scipy.integrate import odeint
+from matplotlib import collections as mc
 
 def field(s, t):
     x, y = s
@@ -812,12 +715,17 @@ for ax in ax1, ax2:
 
 plt.show()
 
+'''
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+'''
 #多邊形集合(PolyCollection)
 
 #%fig=用PolyCollection繪制大量多邊形
 from numpy.random import randint, rand, uniform
+from matplotlib import collections as mc
 
 def star_polygon(x, y, r, theta, n, s): 
     angles = np.arange(0, 2*np.pi, 2*np.pi/2/n) + theta
@@ -847,12 +755,13 @@ plt.show()
 
 print("length of facecolors:", len(polygons.get_facecolors()))
 print("length of edgecolors:", len(polygons.get_edgecolors()))
-
+'''
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+'''
 #路徑集合(PathCollection)
 
-#%nofig
 N = 30
 np.random.seed(42)
 x = np.random.rand(N)
@@ -864,8 +773,6 @@ fig, ax = plt.subplots()
 pc = ax.scatter(x, y, s=size, c=value)
 
 plt.show()
-
-print("------------------------------------------------------------")  # 60個
 
 print(pc.get_transforms().shape)
 print(pc.get_transforms()[0]) #索引為0的點對應的縮放矩陣
@@ -879,8 +786,14 @@ print(pc.get_transform())
 
 #cc = pc.get_offset_position()
 #print(cc)
+'''
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
+'''
 #橢圓集合(EllipseCollection)
+
+from matplotlib import collections as mc
 
 #%fig=`EllipseColletion`的`unit`參數：`unit='x'`（左圖）、`unit='xy'`（右圖）
 angles = np.linspace(0, 2*np.pi, 12, endpoint=False)
@@ -902,9 +815,11 @@ axes[1].add_collection(ec1)
 axes[1].axis((-5, 5, -5, 5))
 #axes[1].set_aspect("equal")
 plt.show()
-
+'''
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+'''
 #資料空間中的圓形集合物件
 
 from matplotlib.collections import CircleCollection, Collection
@@ -921,11 +836,11 @@ class DataCircleCollection(CircleCollection):
         ms[:, 0, 0] = self._sizes
         ms[:, 1, 1] = self._sizes
         ms[:, 2, 2] = 1
-        self._transforms = ms #❶
+        self._transforms = ms
 
         m = ax.transData.get_affine().get_matrix().copy()
         m[:2, 2:] = 0
-        self.set_transform(Affine2D(m)) #❷
+        self.set_transform(Affine2D(m))
 
         return Collection.draw(self, render)
 
@@ -946,9 +861,9 @@ axe.axis((0, 512, 512, 0))
 axe.axis("off");
 
 plt.show()
-
+'''
 print("------------------------------------------------------------")  # 60個
-
+'''
 from matplotlib import pyplot as plt
 
 #繪圖函數簡介
@@ -968,16 +883,18 @@ for ax, fname in zip(axes.ravel(), functions):
     ax.set_ylim(0, 1.5)
 
 plt.show()
-
+'''
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+'''
 #極座標圖
 
 #%fig=極座標中的圓、螺旋線和玫瑰線
 theta = np.arange(0, 2*np.pi, 0.02)
 
-plt.subplot(121, polar=True) #❶
-plt.plot(theta, 1.6*np.ones_like(theta), linewidth=2) #❷
+plt.subplot(121, polar=True)
+plt.plot(theta, 1.6*np.ones_like(theta), linewidth=2)
 plt.plot(3*theta, theta/3, "--", linewidth=2)
 
 plt.subplot(122, polar=True)
@@ -987,17 +904,19 @@ plt.rgrids(np.arange(0.5, 2, 0.5), angle=45) #❸
 plt.thetagrids([0, 45]) #❹;
 
 plt.show()
-
+'''
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 """ NG
 #柱狀圖
 
 #%fig=中國男女人口的年齡分佈圖
 data = np.loadtxt("china_population.txt", encoding='UTF-8-sig')
-width = (data[1,0] - data[0,0])*0.4 #❶
+width = (data[1,0] - data[0,0])*0.4
 plt.figure(figsize=(8, 4))
 c1, c2 = plt.rcParams['axes.color_cycle'][:2]
-plt.bar(data[:,0]-width, data[:,1]/1e7, width, color=c1, label=u"男") #❷
+plt.bar(data[:,0]-width, data[:,1]/1e7, width, color=c1, label=u"男")
 plt.bar(data[:,0], data[:,2]/1e7, width, color=c2, label=u"女") #❸
 plt.xlim(-width, 100)
 plt.xlabel(u"年齡")
@@ -1007,7 +926,7 @@ plt.legend();
 plt.show()
 """
 print("------------------------------------------------------------")  # 60個
-
+'''
 #雜湊圖
 
 #%fig=可指定點的彩色和大小的雜湊
@@ -1020,9 +939,11 @@ plt.xlim(0, 1)
 plt.ylim(0, 1);
 
 plt.show()
-
+'''
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+'''
 #圖形
 
 img = plt.imread("lena.jpg")
@@ -1035,25 +956,26 @@ fig.subplots_adjust(0, 0, 1, 1, 0.05, 0.05)
 
 axes = axes.ravel()
 
-axes[0].imshow(img)                        #❶
-axes[1].imshow(img, origin="lower")        #❷
-axes[2].imshow(img * 1.0)                  #❸
-axes[3].imshow(img / 255.0)                #❹
-axes[4].imshow(np.clip(img / 200.0, 0, 1)) #❺
+axes[0].imshow(img)
+axes[1].imshow(img, origin="lower")
+axes[2].imshow(img * 1.0)
+axes[3].imshow(img / 255.0)
+axes[4].imshow(np.clip(img / 200.0, 0, 1))
 
-axe_img = axes[5].imshow(img[:, :, 0])     #❻
+axe_img = axes[5].imshow(img[:, :, 0])
 plt.colorbar(axe_img, ax=axes[5])
 
-axe_img = axes[6].imshow(img[:, :, 0], cmap="copper") #❼
+axe_img = axes[6].imshow(img[:, :, 0], cmap="copper")
 plt.colorbar(axe_img, ax=axes[6])
 
 for ax in axes:
     ax.set_axis_off()
 
 plt.show()
-
+'''
 print("------------------------------------------------------------")  # 60個
-
+print("------------------------------------------------------------")  # 60個
+'''
 import matplotlib.cm as cm
 
 """ NG
@@ -1065,41 +987,43 @@ print(cc)
 
 #%fig=使用imshow()可視化二元函數
 y, x = np.ogrid[-2:2:200j, -2:2:200j]
-z = x * np.exp( - x**2 - y**2) #❶
+z = x * np.exp( - x**2 - y**2)
 
-extent = [np.min(x), np.max(x), np.min(y), np.max(y)] #❷
+extent = [np.min(x), np.max(x), np.min(y), np.max(y)]
 
 plt.figure(figsize=(10,3))
 plt.subplot(121)
-plt.imshow(z, extent=extent, origin="lower") #❷
+plt.imshow(z, extent=extent, origin="lower")
 plt.colorbar()
 plt.subplot(122)
 plt.imshow(z, extent=extent, cmap=cm.gray, origin="lower")
 plt.colorbar();
 
 plt.show()
-
+'''
 print("------------------------------------------------------------")  # 60個
-
+print("------------------------------------------------------------")  # 60個
+'''
 #相等線圖
 
 #%fig=用contour(左)和contourf(右)描繪相等線圖
-y, x = np.ogrid[-2:2:200j, -3:3:300j] #❶
+y, x = np.ogrid[-2:2:200j, -3:3:300j]
 z = x * np.exp( - x**2 - y**2) 
 
 extent = [np.min(x), np.max(x), np.min(y), np.max(y)]
 
 plt.figure(figsize=(10,4))
 plt.subplot(121)
-cs = plt.contour(z, 10, extent=extent) #❷
+cs = plt.contour(z, 10, extent=extent)
 plt.clabel(cs) #❸
 plt.subplot(122)
 plt.contourf(x.reshape(-1), y.reshape(-1), z, 20) #❹;
 
 plt.show()
-
+'''
 print("------------------------------------------------------------")  # 60個
-
+print("------------------------------------------------------------")  # 60個
+'''
 #若果需要對雜湊點資料繪制相等線圖，
 #可以先使用scipy.interpolate模組中提供的插值函數將雜湊點資料插值為網格資料。
 
@@ -1110,19 +1034,17 @@ f = (x**2 + y**2)**4 - (x**2 - y**2)**2
 plt.figure(figsize=(9, 4))
 plt.subplot(121)
 extent = [np.min(x), np.max(x), np.min(y), np.max(y)]
-cs = plt.contour(f, extent=extent, levels=[0, 0.1],    #❶
+cs = plt.contour(f, extent=extent, levels=[0, 0.1],
      colors=["b", "r"], linestyles=["solid", "dashed"], linewidths=[2, 2])
 
 plt.subplot(122)
 """ NG
-for c in cs.collections: #❷
+for c in cs.collections:
     data = c.get_paths()[0].vertices
     plt.plot(data[:,0], data[:,1], 
         color=c.get_color()[0],  linewidth=c.get_linewidth()[0])
 """
 plt.show()
-
-print("------------------------------------------------------------")  # 60個
 
 print(cs)
 #cs.collections    
@@ -1134,9 +1056,13 @@ cc = len(cs.collections[0].get_paths())
 print(cc)
 
 path = cs.collections[0].get_paths()[0]
-cc = path.vertices
-print(cc)
+#cc = os.path.vertices
+#print(cc)
+'''
 
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+'''
 #四邊形網格
 
 X = np.array([[0, 1, 2], 
@@ -1151,10 +1077,11 @@ plt.pcolormesh(X, Y, Z)
 plt.margins(0.1);
 
 plt.show()
-
+'''
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
+'''
 #%fig=使用pcolormesh()繪制復數平面上的座標變換
 def make_mesh(n):
     x, y = np.mgrid[-10:0:n*1j, -5:5:n*1j]
@@ -1176,10 +1103,11 @@ axes[2].pcolormesh(s2.real, s2.imag, np.abs(s2), rasterized=True)
 axes[3].pcolormesh(z2.real, z2.imag, np.abs(s2), rasterized=True);
 
 plt.show()
-
+'''
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
+'''
 #%fig=使用pcolormesh()繪制極座標中的網格
 def func(theta, r):
     y = theta * np.sin(r)
@@ -1192,9 +1120,11 @@ ax=plt.subplot(111, projection="polar", aspect=1.)
 ax.pcolormesh(T, R, Z, rasterized=True);
 
 plt.show()
-
+'''
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+'''
 #三角網格
 
 with open("diffusion.txt", encoding='UTF-8-sig') as f:
@@ -1219,19 +1149,20 @@ values = data["values"].squeeze()
 fig, ax = plt.subplots(figsize=(12, 4.5))
 ax.set_aspect("equal")
 
-mapper = ax.tripcolor(X, Y, triangles, values, cmap="gray") #❶
+mapper = ax.tripcolor(X, Y, triangles, values, cmap="gray")
 plt.colorbar(mapper, label=u"溫度")
 
-plt.triplot(X, Y, triangles, lw=0.5, alpha=0.3, color="k") #❷
+plt.triplot(X, Y, triangles, lw=0.5, alpha=0.3, color="k")
 
 Xc = X[triangles].mean(axis=1)
 Yc = Y[triangles].mean(axis=1)
 plt.tricontour(Xc, Yc, values, 10) #❸;
 
 plt.show()
-
+'''
 print("------------------------------------------------------------")  # 60個
-
+print("------------------------------------------------------------")  # 60個
+'''
 #箭頭圖
 
 #%fig=用quiver()繪制向量場
@@ -1254,9 +1185,11 @@ plt.colorbar();
 plt.gca().set_aspect("equal")
 
 plt.show()
-
+'''
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+'''
 #%fig=使用箭頭表示參數曲線的切線方向
 n = 40
 arrow_size = 16
@@ -1286,9 +1219,11 @@ plt.xlim([-1.5, 1.5])
 plt.ylim([-1.5, 1.5])
 
 plt.show()
-
+'''
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+'''
 #%fig=使用quiver()繪制神經網路結構示意圖
 levels = [4, 5, 3, 2]
 x = np.linspace(0, 1, len(levels))
@@ -1311,15 +1246,17 @@ plt.gca().axis("off")
 plt.margins(0.1, 0.1)
 
 plt.show()
-
+'''
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+'''
 #3D繪圖
 
 #%fig=使用mplot3D繪制的3D曲面圖
-import mpl_toolkits.mplot3d #❶
+import mpl_toolkits.mplot3d
 
-x, y = np.mgrid[-2:2:20j, -2:2:20j] #❷
+x, y = np.mgrid[-2:2:20j, -2:2:20j]
 z = x * np.exp( - x**2 - y**2)
 
 fig = plt.figure(figsize=(8, 6))
@@ -1330,7 +1267,8 @@ ax.set_ylabel("Y")
 ax.set_zlabel("Z");
 
 plt.show()
-
+'''
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 #matplotlib技巧集
@@ -1422,8 +1360,8 @@ line, = ax.plot(x, np.sin(x))
 
 def on_key_press(event):
     if event.key in 'rgbcmyk':
-        line.set_color(event.key)  #❶
-    fig.canvas.draw_idle()         #❷
+        line.set_color(event.key)
+    fig.canvas.draw_idle()        
 
 fig.canvas.mpl_disconnect(fig.canvas.manager.key_press_handler_id)
 fig.canvas.mpl_connect('key_press_event', on_key_press);
@@ -1473,11 +1411,11 @@ class PatchMover(object):
         fig.canvas.mpl_connect('button_release_event', self.on_release)
         fig.canvas.mpl_connect('motion_notify_event', self.on_motion)
 
-    def on_press(self, event): #❶
+    def on_press(self, event):
         patches = self.ax.patches[:]
         patches.sort(key=lambda patch:patch.get_zorder())
         for patch in reversed(patches):
-            if patch.contains_point((event.x, event.y)):  #❷
+            if patch.contains_point((event.x, event.y)): 
                 self.selected_patch = patch
                 self.start_mouse_pos = np.array([event.xdata, event.ydata])
                 self.start_patch_pos = patch.xy
@@ -1546,9 +1484,9 @@ class CurveHighLighter(object):
         self.alpha = alpha
         self.linewidth = 3
         
-        ax.figure.canvas.mpl_connect('motion_notify_event', self.on_move) #❶
+        ax.figure.canvas.mpl_connect('motion_notify_event', self.on_move)
         
-    def highlight(self, target): #❷
+    def highlight(self, target):
         need_redraw = False
         if target is None:
             for line in self.ax.lines:
@@ -1598,24 +1536,22 @@ line, = ax.plot(x, np.sin(x), lw=2)
 
 def update_data(line):
     x[:] += 0.1
-    line.set_ydata(np.sin(x)) #❷
+    line.set_ydata(np.sin(x))
     fig.canvas.draw()         #❸
 
-timer = fig.canvas.new_timer(interval=50) #❶
+timer = fig.canvas.new_timer(interval=50)
 timer.add_callback(update_data, line)
 timer.start()
 
 print("------------------------------------------------------------")  # 60個
 
-'''
-
 #使用快取快速重繪圖表
 
 fig, ax = plt.subplots()
 x = np.linspace(0, 10, 1000)
-line, = ax.plot(x, np.sin(x), lw=2, animated=True) #❶
+line, = ax.plot(x, np.sin(x), lw=2, animated=True)
 
-fig.canvas.draw() #❷
+fig.canvas.draw()
 background = fig.canvas.copy_from_bbox(ax.bbox) #❸
 
 def update_data(line):
@@ -1638,30 +1574,29 @@ fig, ax = plt.subplots()
 
 x = np.linspace(0, 4*np.pi, 200)
 y = np.sin(x)
-line, = ax.plot(x, y, lw=2, animated=True) #❶
+line, = ax.plot(x, y, lw=2, animated=True)
 
 def update_line(i):
     y = np.sin(x + i*2*np.pi/100)
     line.set_ydata(y)
-    return [line] #❷
+    return [line]
 
 ani = FuncAnimation(fig, update_line, blit=True, interval=25, frames=100) #❸
 
 #matplotlib會使用系統中安裝的視訊壓縮軟體（如ffmpeg.exe）產生視訊檔案。請讀者確認視訊壓縮軟體的可執行檔案的路徑是否在PATH環境變數中。
 
-ani.save('sin_wave.mp4', fps=25)
+ani.save('tmp_sin_wave.mp4', fps=25)
 
 #加入GUI面板
 
 #scpy2.matplotlib.gui_panel：提供了TK與QT界面庫的滑標控制項面板類別TkSliderPanel和QtSliderPanel。tk_panel_demo.py和qt_panel_demo.py為其示範程式。
 
 import matplotlib
-
-matplotlib.use("TkAgg")  #❶
+matplotlib.use("TkAgg") 
 
 import pylab as pl
 
-def exp_sin(x, A, f, z, p): #❷
+def exp_sin(x, A, f, z, p):
     return A * np.sin(2 * np.pi * f * x + p)  * np.exp(z * x)
 
 fig, ax = pl.subplots()
@@ -1729,3 +1664,8 @@ with open(filename, "r", encoding='UTF-8-sig') as f:
 
 
 """
+
+plt.close("all")
+
+plt.close("all")
+

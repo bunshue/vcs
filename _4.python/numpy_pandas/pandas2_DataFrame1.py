@@ -33,6 +33,9 @@ min：最小值
 75%：第三四分位数（Q3）
 max：最大值
 
+df的計算要純數值才可以計算 : mean() corr()
+字串(中英文)可使用 : max() min() sum()')
+
 """
 
 
@@ -203,7 +206,11 @@ print('欄名columns')
 cc = df.columns
 print(cc)
 
+print('顯示資料的狀態與資訊')
 print(df.info())
+
+# 檢查屬性
+print(df.dtypes)
 
 print('顯示values')
 print(df.values)
@@ -248,8 +255,6 @@ print(df.min())
 print(df.median())
 print(df.max())
 print(df.sum())
-
-# print('df若有字串(中英文), 不能直接做mean(), 但可做 max() min() sum()')
 
 """
 
@@ -1062,11 +1067,9 @@ df.plot(kind="bar")
 df = titanic[["Survived", "Died"]].groupby(titanic["PClass"]).mean()
 df.plot(kind="bar")
 
-# 計算相關係數
 df = titanic.drop("PassengerId", axis=1)
 df = df.drop("Died", axis=1)
 df = df.drop("Title", axis=1)
-# print(df.corr()) NG
 df.to_csv("tmp_titanic_train.csv", encoding="utf8")
 
 plt.show()
@@ -3100,8 +3103,6 @@ df = pd.DataFrame(
 )
 print(df)
 
-print(df.dtypes)
-
 cc = df.astype({"col_one": "float", "col_two": "float"}).dtypes
 print(cc)
 
@@ -3115,8 +3116,6 @@ print(cc)
 VALUE = 0
 df = df.apply(pd.to_numeric, errors="coerce").fillna(vlaue=VALUE)  # 將指定欄位內空資料填入指定數值
 print(df)
-
-print(df.dtypes)
 
 # 8. Reduce DataFrame size
 
@@ -3502,11 +3501,6 @@ print(cc)
 )
 """
 
-""" NG
-import pandas_profiling
-pandas_profiling.ProfileReport(titanic)
-"""
-
 print("------------------------------------------------------------")  # 60個
 
 drinks = pd.read_csv("http://bit.ly/drinksbycountry")
@@ -3666,8 +3660,6 @@ print(df)
 
 df["date"] = pd.to_datetime(df[["month", "day", "year"]])
 print(df)
-
-print(df.dtypes)
 
 # 10. Resample a datetime column
 
@@ -4687,7 +4679,7 @@ print("原資料 :\n", df)
 print("常用統計數據")
 print(df.describe())
 
-print("相關係數")
+print("相關係數, df要純數值才可以計算相關係數")
 print(df.corr())
 
 print("df轉csv")
@@ -7913,7 +7905,7 @@ print(df.國文.mean())
 print("標準差")
 print(df.國文.std())
 
-# print('係數矩陣 :', df.corr())
+# print('相關係數 :', df.corr())
 
 # 只算兩科間的相關係數當然也可以。
 print('計算兩科的相關係數')
@@ -8727,15 +8719,6 @@ columns = ["國文", "英文", "數學", "社會", "自然"]
 df = pd.DataFrame(np.array(datas).T, columns=columns)
 print(df)
 print(df["國文"])
-
-
-
-# 使用 df.corr() 先做出各變數間的關係係數，再用heatmap作圖
-sns.heatmap(df.corr())
-
-plt.title("關係係數")
-plt.show()
-
 
 """ 測不出來
 pd.describe_option('display')

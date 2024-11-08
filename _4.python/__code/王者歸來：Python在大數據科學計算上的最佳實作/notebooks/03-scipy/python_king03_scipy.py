@@ -22,20 +22,20 @@ print("------------------------------------------------------------")  # 60個
 
 import pylab as pl
 import scipy  # SciPy-數值計算庫
+from scipy import constants  # 常數
 from scipy import stats
 from scipy import optimize
 from scipy import linalg  # 線性代數-linalg, 解線性方程式群組
 from scipy import integrate
 from scipy import interpolate  # 插值-interpolate
 from scipy import spatial #空間算法庫-spatial
-from scipy.integrate import odeint
+from scipy import signal#訊號處理-signal
+from scipy import sparse#稀疏矩陣-sparse
+from scipy.sparse import csgraph
 from scipy.integrate import odeint 
 from scipy.integrate import ode
 
-from scipy import constants as C
-import scipy.special as S
-
-from math import sin, cos
+import scipy.special
 
 print("------------------------------------------------------------")  # 60個
 
@@ -43,38 +43,36 @@ scipy.__version__
 
 #常量和特殊函數
 
-print(C.c) # 真空中的光速
-print(C.h) # 普朗克常量
+print(constants.c) # 真空中的光速
+print(constants.h) # 普朗克常量
 
-cc = C.physical_constants["electron mass"]
+cc = constants.physical_constants["electron mass"]
 print(cc)
 
 #(9.10938291e-31, 'kg', 4e-38)
 
 # 1英裡等於多少米, 1英寸等於多少米, 1克等於多少公斤, 1磅等於多少公斤
 
-print(C.mile)
-print(C.inch)
-print(C.gram)
-print(C.pound)
+print(constants.mile)
+print(constants.inch)
+print(constants.gram)
+print(constants.pound)
 
+print(scipy.special.gamma(4))
+print(scipy.special.gamma(0.5))
+print(scipy.special.gamma(1+1j)) # gamma函數支援復數
+print(scipy.special.gamma(1000))
 
-
-print(S.gamma(4))
-print(S.gamma(0.5))
-print(S.gamma(1+1j)) # gamma函數支援復數
-print(S.gamma(1000))
-
-cc = S.gammaln(1000)
+cc = scipy.special.gammaln(1000)
 print(cc)
 
 print(1 + 1e-20)
 print(np.log(1+1e-20))
-print(S.log1p(1e-20))
+print(scipy.special.log1p(1e-20))
 
 m = np.linspace(0.1, 0.9, 4)
 u = np.linspace(-10, 10, 200)
-results = S.ellipj(u[:, None], m[None, :])
+results = scipy.special.ellipj(u[:, None], m[None, :])
 
 print([y.shape for y in results])
 
@@ -90,7 +88,7 @@ for ax, y, label in zip(axes.ravel(), results, labels):
     
 axes[1, 1].legend(["$m={:g}$".format(m_) for m_ in m], loc="best", ncol=2)
 
-plt.show()
+#plt.show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -102,7 +100,7 @@ def f(x): #❶
     x0, x1, x2 = x.tolist() #❷
     return [
         5*x1+3,
-        4*x0*x0 - 2*sin(x1*x2),
+        4*x0*x0 - 2*math.sin(x1*x2),
         x1*x2 - 1.5
     ]
 
@@ -118,7 +116,7 @@ def j(x): #❶
     x0, x1, x2 = x.tolist()
     return [
         [0, 5, 0],
-        [8*x0, -2*x2*cos(x1*x2), -2*x1*cos(x1*x2)],
+        [8*x0, -2*x2*math.cos(x1*x2), -2*x1*math.cos(x1*x2)],
         [0, x2, x1]
     ]
  
@@ -190,7 +188,7 @@ ax2.set_xlabel("$k$")
 ax2.set_ylabel("$b$")
 ax2.set_zlabel("$error$");
 
-plt.show()
+#plt.show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -232,7 +230,7 @@ plt.plot(x, y0, label=u"真實資料")
 plt.plot(x, func(x, plsq[0]), label=u"擬合資料")
 plt.legend(loc="best");
 
-plt.show()
+#plt.show()
 
 #真實際參數數: [10, 0.34, 0.5235987755982988]
 #擬合參數 [ 10.25218748   0.3423992    0.50817424]
@@ -332,7 +330,7 @@ for ax, method in zip(axes.ravel(), methods):
     ax.set_aspect("equal")
     ax.set_title(method)
 
-plt.show()
+#plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -364,7 +362,7 @@ plt.plot(x, y1, "o", label=u"帶噪聲的實驗資料")
 plt.plot(x, y0, label=u"真實資料")
 plt.plot(x, func(x, result.x), label=u"擬合資料")
 plt.legend(loc="best")
-plt.show()
+#plt.show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -441,7 +439,7 @@ ax2.plot(H2, linewidth=2, label=u"最小二乘解H2", alpha=0.7)
 ax2.legend(loc="best", ncol=2)
 ax2.set_xlim(0, len(H2));
 
-plt.show()
+#plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -474,7 +472,7 @@ ax.set_aspect("equal")
 ax.set_xlim(-0.5, 1.1)
 ax.set_ylim(-0.5, 1.1);
 
-plt.show()
+#plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -510,7 +508,7 @@ Z = ellipse(p, X, Y)
 pl.plot(x, y, "ro", alpha=0.5)
 pl.contour(X, Y, Z, levels=[0]);
 
-plt.show()
+#plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -529,7 +527,7 @@ print(Vh.shape)
 #%fig=按從大到小排序的奇異值
 pl.semilogy(s, lw=3);
 
-plt.show()
+#plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -585,7 +583,7 @@ ax1.legend(loc="best")
 ax2.plot(t, cdf)
 ax2.plot(t, X.cdf(t), alpha=0.6); 
 
-plt.show()
+#plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -633,7 +631,7 @@ mean, std = stats.norm.fit(samples_mean)
 pl.plot(x, stats.norm(mean, std).pdf(x), alpha=0.8, label=u"正態分佈擬合")
 pl.legend();
 
-plt.show()
+#plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -646,7 +644,7 @@ for bw in [0.2, 0.3, 0.6, 1.0]:
 
 pl.legend(loc="best");
 
-plt.show()
+#plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -666,7 +664,7 @@ y_binom_n2 = stats.binom.pmf(x, n2, lambda_ / n2)
 y_poisson = stats.poisson.pmf(x, lambda_)
 print(np.max(np.abs(y_binom_n1 - y_poisson)))
 print(np.max(np.abs(y_binom_n2 - y_poisson)))
-#%hide
+
 fig, (ax1, ax2) = pl.subplots(1, 2, figsize=(7.5, 2.5))
 
 ax1.plot(x, y_binom_n1, label=u"binom", lw=2)
@@ -680,7 +678,7 @@ for n, ax in zip((n1, n2), (ax1, ax2)):
     ax.legend()
 fig.subplots_adjust(0.1, 0.15, 0.95, 0.90, 0.2, 0.1);
 
-plt.show()
+#plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -703,7 +701,7 @@ max_error1 = np.max(np.abs(dist1 - poisson1))
 max_error2 = np.max(np.abs(dist2 - poisson2))         
 print("time={}, max_error={}".format(times[0], max_error1))
 print("time={}, max_error={}".format(times[1], max_error2))
-#%hide
+
 fig, (ax1, ax2) = pl.subplots(1, 2, figsize=(7.5, 2.5))
 
 ax1.plot(x1, dist1, "-o", lw=2, label=u"統計結果")
@@ -719,7 +717,7 @@ for ax, time in zip((ax1, ax2), times):
     
 fig.subplots_adjust(0.1, 0.15, 0.95, 0.90, 0.2, 0.1);
 
-plt.show()
+#plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -739,7 +737,7 @@ time = 1000
 ks = 1, 2
 x1, gamma1, dist1 = sim_gamma(lambda_, time, ks[0])
 x2, gamma2, dist2 = sim_gamma(lambda_, time, ks[1])
-#%hide
+
 fig, (ax1, ax2) = pl.subplots(1, 2, figsize=(7.5, 2.5))
 
 ax1.plot(x1, dist1,  lw=2, label=u"統計結果")
@@ -755,7 +753,7 @@ for ax, k in zip((ax1, ax2), ks):
     
 fig.subplots_adjust(0.1, 0.15, 0.95, 0.90, 0.2, 0.1);
 
-plt.show()
+#plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -798,7 +796,7 @@ ax2.plot(np.diff(bins), count, ".", alpha=0.3, rasterized=True)
 ax2.set_xlabel(u"公共汽車車的時間間隔")
 ax2.set_ylabel(u"等待人數");
 
-plt.show()
+#plt.show()
 
 t = 10.0 / 3  # 兩輛公共汽車車之間的平均時間間隔
 bus_interval = stats.gamma(1, scale=t)
@@ -820,7 +818,7 @@ sample_dist, x = np.histogram(t_samples, bins=100, density=True) #❸
 x = 0.5 * (x[:-1] + x[1:])
 t_dist = stats.t(n-1).pdf(x)
 print("max error:", np.max(np.abs(sample_dist - t_dist)))
-#%hide
+
 pl.plot(x, sample_dist, lw=2, label=u"樣本分佈")
 pl.plot(x, t_dist, lw=2, alpha=0.6, label=u"t分佈")
 pl.xlim(-5, 5)
@@ -828,7 +826,7 @@ pl.legend(loc="best");
 
 #max error: 0.00658734287935
 
-plt.show()
+#plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -845,10 +843,9 @@ ax2.plot(x, stats.t(40-1).sf(x), label=u"df=39", lw=2, alpha=0.6)
 ax2.plot(x, stats.norm.sf(x), "k--", label=u"norm")
 ax2.legend();
 
-plt.show()
+#plt.show()
 
 print("------------------------------------------------------------")  # 60個
-
 
 n = 30
 np.random.seed(42)
@@ -877,7 +874,7 @@ plt.fill_between(x[mask], y[mask], color="red", alpha=0.5)
 plt.axhline(color="k", lw=0.5)
 plt.xlim(-5, 5);
 
-plt.show()
+#plt.show()
 
 print("------------------------------------------------------------")  # 60個
 """ NG
@@ -918,14 +915,14 @@ sample_dist, bins = np.histogram(cs, bins=100, range=(0, 20), density=True)
 x = 0.5 * (bins[:-1] + bins[1:])
 chi2_dist = stats.chi2.pdf(x, 4) 
 print("max error:", np.max(np.abs(sample_dist - chi2_dist)))
-#%hide
+
 pl.plot(x, sample_dist, lw=2, label=u"樣本分佈")
 pl.plot(x, chi2_dist, lw=2, alpha=0.6, label=u"$\chi ^{2}$分佈")
 pl.legend(loc="best");
 
 #max error: 0.00340194486328
 
-plt.show()
+#plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -944,7 +941,7 @@ pl.plot(x, k(x), lw=2, color="red", alpha=0.6, label=u"樣本分佈")
 pl.legend(loc="best")
 pl.xlim(0, 10);
 
-plt.show()
+#plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -984,7 +981,7 @@ pl.text(chi2, 0.015, r"$\chi^2_2$", fontsize=14)
 pl.ylim(0, 0.2)
 pl.xlim(0, 20);
 
-plt.show()
+#plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1047,7 +1044,6 @@ t = np.arange(0, 30, 0.02) # 建立時間點
 # 呼叫ode對lorenz進行求解, 用兩個不同的初值 
 track1 = odeint(lorenz, (0.0, 1.00, 0.0), t, args=(10.0, 28.0, 3.0)) #❷
 track2 = odeint(lorenz, (0.0, 1.01, 0.0), t, args=(10.0, 28.0, 3.0)) #❸
-#%hide
 
 from mpl_toolkits.mplot3d import Axes3D
 
@@ -1056,7 +1052,7 @@ ax = Axes3D(fig)
 ax.plot(track1[:,0], track1[:,1], track1[:,2], lw=1)
 ax.plot(track2[:,0], track2[:,1], track2[:,2], lw=1);
 
-plt.show()
+#plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1074,14 +1070,14 @@ init_status = 0.0, 0.0
 args = m, k, b, F
 t = np.arange(0, 2, 0.01)
 result = odeint(mass_spring_damper, init_status, t, args)
-#%hide
+
 fig, (ax1, ax2) = pl.subplots(2, 1)
 ax1.plot(t, result[:, 0], label=u"位移")
 ax1.legend()
 ax2.plot(t, result[:, 1], label=u"速度")
 ax2.legend();
 
-plt.show()
+#plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1166,7 +1162,7 @@ def pid_control_system(kp, ki, kd, dt, target=1.0):
 
 t, F_arr, result = pid_control_system(50.0, 100.0, 10.0, 0.001)
 print(u"控制力的終值:", F_arr[-1])
-#%hide
+
 fig, (ax1, ax2, ax3) = pl.subplots(3, 1, figsize=(6, 6))
 ax1.plot(t, result[:, 0], label=u"位移")
 ax1.legend(loc="best")
@@ -1177,7 +1173,7 @@ ax3.legend(loc="best");
 
 #控制力的終值: 19.9434046839
 
-plt.show()
+#plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1201,7 +1197,7 @@ t, F_arr, result = pid_control_system(kp, ki, kd, 0.01)
 idx = np.argmin(np.abs(t - 0.5))
 x, u = result[idx]
 print("t={}, x={:g}, u={:g}".format(t[idx], x, u))
-#%hide
+
 fig, (ax1, ax2, ax3) = pl.subplots(3, 1, figsize=(6, 6))
 ax1.plot(t, result[:, 0], label=u"位移")
 ax1.legend(loc="best")
@@ -1210,13 +1206,10 @@ ax2.legend(loc="best")
 ax3.plot(t, F_arr, label=u"控制力")
 ax3.legend(loc="best");
 
-plt.show()
+#plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-from scipy import signal
-
-#訊號處理-signal
 #中值濾波
 
 #%fig=使用中值濾波剔除瞬間噪聲
@@ -1232,7 +1225,7 @@ pl.legend(loc="best");
 
 #True
 
-plt.show()
+#plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1270,13 +1263,13 @@ pl.figure(figsize=(8, 2.5))
 pl.plot(freq, power, label=u"帶通IIR濾波器的頻率響應") 
 pl.plot(t[index]/2.0*4000, out[index], label=u"頻率掃描波測量的頻譜", alpha=0.6) #❻
 pl.legend(loc="best")
-#%hide
+
 pl.title(u"頻率掃描波測量的濾波器頻譜")
 pl.ylim(-100,20)
 pl.ylabel(u"增益(dB)")
 pl.xlabel(u"頻率(Hz)");
 
-plt.show()
+#plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1293,14 +1286,14 @@ plant = signal.lti(numerator, denominator) #❶
 t = np.arange(0, 2, 0.01)
 _, x_step = plant.step(T=t) #❷
 _, x_sin, _ = signal.lsim(plant, U=np.sin(np.pi*t), T=t) #❸
-#%hide
+
 pl.plot(t, x_step, label=u"階躍響應")
 pl.plot(t, x_sin, label=u"正弦波響應")
 pl.legend(loc="best")
 pl.xlabel(u"時間（秒）")
 pl.ylabel(u"位移（米）");
 
-plt.show()
+#plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1363,7 +1356,7 @@ ax.legend(loc="best", ncol=2)
 ax.set_xlabel(u"時間（秒）")
 ax.set_ylabel(u"位移（米）");
 
-plt.show()
+#plt.show()
 
 _, f, _ = signal.lsim(pi_ctrl, U=1-x, T=t)
 
@@ -1391,7 +1384,7 @@ ax2.legend(loc="best")
 ax1.set_title(u"目的系統的位移")
 ax2.set_title(u"控制力");
 
-plt.show()
+#plt.show()
 """
 print("------------------------------------------------------------")  # 60個
 
@@ -1413,7 +1406,7 @@ for kind in ['nearest', 'zero', 'slinear', 'quadratic']:
 
 pl.legend(loc='lower right');
 
-plt.show()
+#plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1443,7 +1436,7 @@ pl.plot(sx2, sy2, linewidth=2, label=u"spline曲線")
 pl.plot(x2, np.sin(x2), label=u"無噪聲曲線")
 pl.legend();
 
-plt.show()
+#plt.show()
 
 print(np.array_str( spline2.roots(), precision=3 ))
 #[  3.288   6.329   9.296  12.578  15.75   18.805]
@@ -1470,7 +1463,7 @@ for level in [0.5, 0.75, -0.5, -0.75]:
     xr = spline2.roots_at(level) #❸
     pl.plot(xr, spline2(xr), "ro")
 
-plt.show()
+#plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1492,7 +1485,7 @@ for s in (0, 1e-4):
     
 pl.legend();
 
-plt.show()
+#plt.show()
 
 print("------------------------------------------------------------")  # 60個
 """ NG
@@ -1512,7 +1505,7 @@ pl.legend(loc="best")
 pl.grid()
 pl.margins(0.1, 0.1)
 
-plt.show()
+#plt.show()
 """
 print("------------------------------------------------------------")  # 60個
 
@@ -1534,7 +1527,7 @@ newfunc = interpolate.interp2d(x, y, fvals, kind='cubic') #❸
 xnew = np.linspace(-1,1,100)
 ynew = np.linspace(-1,1,100)
 fnew = newfunc(xnew, ynew) #❹
-#%hide
+
 pl.subplot(121)
 pl.imshow(fvals, extent=[-1,1,-1,1], cmap=pl.cm.jet, interpolation='nearest', origin="lower")
 pl.title("fvals")
@@ -1543,7 +1536,7 @@ pl.imshow(fnew, extent=[-1,1,-1,1], cmap=pl.cm.jet, interpolation='nearest', ori
 pl.title("fnew")
 pl.show()
 
-plt.show()
+#plt.show()
 """
 print("------------------------------------------------------------")  # 60個
 
@@ -1571,7 +1564,7 @@ methods = 'nearest', 'linear', 'cubic'
 
 zgs = [interpolate.griddata((x, y), z, xi, method=method).reshape(100, 100) 
     for method in methods]
-#%hide
+
 fig, axes = pl.subplots(1, 3, figsize=(11.5, 3.5))
 
 for ax, method, zg in zip(axes, methods, zgs):
@@ -1579,7 +1572,7 @@ for ax, method, zg in zip(axes, methods, zgs):
     ax.set_xlabel(method)
     ax.scatter(x, y, c=z)
 
-plt.show()
+#plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1595,7 +1588,7 @@ funcs = ['multiquadric', 'gaussian', 'linear']
 nx = np.linspace(-3, 4, 100)
 rbfs = [Rbf(x1, y1, function=fname) for fname in funcs] #❶
 rbf_ys = [rbf(nx) for rbf in rbfs] #❷
-#%hide
+
 pl.plot(x1, y1, "o")
 for fname, ny in zip(funcs, rbf_ys):
     pl.plot(nx, ny, label=fname, lw=2)
@@ -1603,7 +1596,7 @@ for fname, ny in zip(funcs, rbf_ys):
 pl.ylim(-1.0, 1.5)
 pl.legend();
 
-plt.show()
+#plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1619,14 +1612,14 @@ linear [-0.26666667  0.6         0.73333333 -0.9       ]
 #%fig=二維徑向基函數插值
 rbfs = [Rbf(x, y, z, function=fname) for fname in funcs]
 rbf_zg = [rbf(xg, yg).reshape(xg.shape) for rbf in rbfs]
-#%hide
+
 fig, axes = pl.subplots(1, 3, figsize=(11.5, 3.5))
 for ax, fname, zg in zip(axes, funcs, rbf_zg):
     ax.imshow(zg, extent=[-1,1,-1,1], cmap=pl.cm.jet, interpolation='nearest', origin="lower")
     ax.set_xlabel(fname)
     ax.scatter(x, y, c=z)
 
-plt.show()
+#plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1634,24 +1627,19 @@ print("------------------------------------------------------------")  # 60個
 epsilons = 0.1, 0.15, 0.3
 rbfs = [Rbf(x, y, z, function="gaussian", epsilon=eps) for eps in epsilons]
 zgs = [rbf(xg, yg).reshape(xg.shape) for rbf in rbfs]
-#%hide
+
 fig, axes = pl.subplots(1, 3, figsize=(11.5, 3.5))
 for ax, eps, zg in zip(axes, epsilons, zgs):
     ax.imshow(zg, extent=[-1,1,-1,1], cmap=pl.cm.jet, interpolation='nearest', origin="lower")
     ax.set_xlabel("eps=%g" % eps)
     ax.scatter(x, y, c=z)
 
-plt.show()
+#plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-from scipy import sparse
-from scipy.sparse import csgraph
-
-#稀疏矩陣-sparse
 #稀疏矩陣的儲存形式
 
-from scipy import sparse
 a = sparse.dok_matrix((10, 5))
 a[2:5, 3] = 1.0, 2.0, 3.0
 print(a.keys())
@@ -1712,8 +1700,6 @@ values = np.ones(edges.shape[0])
 w = sparse.coo_matrix((values, (edges[:, 0], edges[:, 1])),  #❷
                       shape=(bimg.size, bimg.size))
 
-from scipy.sparse import csgraph
-
 startid = sy * W + sx
 endid   = ey * W + ex
 d, p = csgraph.dijkstra(w, indices=[startid], return_predecessors=True, directed=False)
@@ -1743,7 +1729,7 @@ for ax in axes:
     ax.axis("off")
 fig.subplots_adjust(0, 0, 1, 1, 0, 0)
 
-plt.show()
+#plt.show()
 """
 print("------------------------------------------------------------")  # 60個
 
@@ -1786,7 +1772,7 @@ img2 = dilation_demo(a)
 img3 = dilation_demo(a, [[1,1,1],[1,1,1],[1,1,1]])
 show_image(img1, img2, img3)
 
-plt.show()
+#plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1796,7 +1782,7 @@ img5 = dilation_demo(a, [[0,1,0],[0,1,0],[0,1,0]])
 img6 = dilation_demo(a, [[0,1,0],[0,1,0],[0,0,0]])
 show_image(img4, img5, img6)
 
-plt.show()
+#plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1811,7 +1797,7 @@ img2 = erosion_demo(a)
 img3 = erosion_demo(a, [[1,1,1],[1,1,1],[1,1,1]])
 show_image(img1, img2, img3)
 
-plt.show()
+#plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1830,7 +1816,7 @@ img3 = hitmiss_demo(a, [[0,0,0],[0,0,0],[1,1,1]], [[1,0,0],[0,1,0],[0,0,0]])
 
 show_image(img1, img2, img3)
 
-plt.show()
+#plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1862,7 +1848,7 @@ def skeletonize(img):
 
 a = pl.imread("scipy_morphology_demo2.png")[:,:,0].astype(np.uint8)
 b = skeletonize(a)
-#%hide
+
 _, (ax1, ax2) = pl.subplots(1, 2, figsize=(9, 3))
 ax1.imshow(a, cmap="gray", interpolation="nearest")
 ax2.imshow(b, cmap="gray", interpolation="nearest")
@@ -1870,7 +1856,7 @@ ax1.set_axis_off()
 ax2.set_axis_off()
 pl.subplots_adjust(0.02, 0, 0.98, 1, 0.02, 0)
 
-plt.show()
+#plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1880,6 +1866,7 @@ squares = pl.imread("suqares.jpg")
 squares = (squares[:,:,0] < 200).astype(np.uint8) 
 
 from scipy.ndimage import morphology
+
 squares_dt = morphology.distance_transform_cdt(squares)
 print("各種距離值", np.unique(squares_dt))
 
@@ -1928,12 +1915,11 @@ for ax in axes.ravel():
     
 fig.subplots_adjust(wspace=0.01, hspace=0.01)
 
-plt.show()
+#plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
 import pylab as pl
-
 
 #計算最近旁點
 
@@ -1996,11 +1982,12 @@ ax1.set_xlabel(u"搜尋最近的3個近旁點")
 ax2.set_xlabel(u"搜尋距離在0.2之內的所有近旁點")
 ax3.set_xlabel(u"搜尋所有距離在0.08到0.1之間的點對");
 
-plt.show()
+#plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
 from scipy.spatial import distance
+
 dist1 = distance.squareform(distance.pdist(points))
 dist2 = distance.cdist(points, targets)
 print(dist1.shape)
@@ -2053,7 +2040,7 @@ def _():
 
 _()
 
-plt.show()
+#plt.show()
 
 class KdSearch(object):
     def __init__(self, start, end, leafsize=10):
@@ -2094,7 +2081,7 @@ for i, pos in enumerate(points2d):
     pl.text(pos[0], pos[1], str(i), color="blue")
 ax.add_artist(poly);
 
-plt.show()
+#plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -2143,7 +2130,7 @@ for ax in ax1, ax2:
     ax.set_xlim(0, 1)
     ax.set_ylim(0, 1)
 
-plt.show()
+#plt.show()
 
 print(vo.point_region)
 print(vo.regions[6])
@@ -2187,7 +2174,7 @@ ax.add_artist(c)
 
 #r =  0.174278456762 , center =  [ 0.46973363  0.59356531]
 
-plt.show()
+#plt.show()
 """
 print("------------------------------------------------------------")  # 60個
 
@@ -2218,7 +2205,7 @@ for i, (cx, cy) in enumerate(vo.vertices):
 ax.set_xlim(0, 300)
 ax.set_ylim(0, 300);
 
-plt.show()
+#plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
