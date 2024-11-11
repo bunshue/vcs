@@ -366,8 +366,8 @@ class AST_Tests(unittest.TestCase):
         import pickle
         mods = [pickle]
         try:
-            import cPickle
-            mods.append(cPickle)
+            import pickle
+            mods.append(pickle)
         except ImportError:
             pass
         protocols = [0, 1, 2]

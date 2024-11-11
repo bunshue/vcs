@@ -37,14 +37,10 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 # 設定負號
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
-'''
+
 print("------------------------------------------------------------")  # 60個
-
-print(
-    "---- scipy.integrate 積分 --------------------------------------------------------"
-)  # 60個
-
-print("積分")
+print("scipy.integrate 積分")
+print("------------------------------------------------------------")  # 60個
 
 
 def my_funciton1(x):
@@ -73,11 +69,15 @@ print(s)
 x = s[0] / 0.011
 print(x)
 
+
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("scipy.special")
 print("------------------------------------------------------------")  # 60個
 
-print(
-    "---- scipy.special --------------------------------------------------------"
-)  # 60個
 
 a = scipy.special.exp10(3)
 print("10^3 =", a)
@@ -91,9 +91,12 @@ print("sind(90) =", c)
 d = scipy.special.cosdg(45)
 print("cosd(45) =", d)
 
-print(
-    "---- scipy.interpolate --------------------------------------------------------"
-)  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("scipy.interpolate")
+print("------------------------------------------------------------")  # 60個
+
 
 print("內插法1")
 
@@ -132,11 +135,10 @@ plt.grid()
 
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
 
-print(
-    "---- scipy.optimize --------------------------------------------------------"
-)  # 60個
+print("------------------------------------------------------------")  # 60個
+print("scipy.optimize")
+print("------------------------------------------------------------")  # 60個
 
 
 def f(x):
@@ -279,11 +281,10 @@ plt.text(
 )
 plt.plot(r.x, f(r.x), "-o")  # 標記
 
-print("------------------------------------------------------------")  # 60個
 
-print(
-    "---- scipy.stats --------------------------------------------------------"
-)  # 60個
+print("------------------------------------------------------------")  # 60個
+print("scipy.stats")
+print("------------------------------------------------------------")  # 60個
 
 
 def normal_pdf(x, mu, sigma):
@@ -324,9 +325,9 @@ print(desc)
 desc = scipy.stats.describe(samples2, axis=1)
 print(desc)
 
-print(
-    "---- scipy.signal --------------------------------------------------------"
-)  # 60個
+print("------------------------------------------------------------")  # 60個
+print("scipy.signal")
+print("------------------------------------------------------------")  # 60個
 
 t = np.linspace(6, 10, 500)
 w = scipy.signal.chirp(t, f0=4, f1=2, t1=5, method="linear")
@@ -436,12 +437,11 @@ print(scipy.spatial.distance.pdist(matV, "jaccard"))
 
 print("------------------------------------------------------------")  # 60個
 
+print("------------------------------------------------------------")  # 60個
+print("scipy.stats.norm")
+print("------------------------------------------------------------")  # 60個
 
-print(
-    "---- scipy.stats.norm --------------------------------------------------------"
-)  # 60個
-
-# MH采样
+# MH採樣
 
 data = np.random.randn(200)
 print("平均 :", np.mean(data))
@@ -637,6 +637,10 @@ print((np.mean(arr2) - 92) / (np.std(arr2) / np.sqrt(len(arr2) - 1)))
 
 print("------------------------------------------------------------")  # 60個
 
+print("------------------------------------------------------------")  # 60個
+print("from scipy import stats")
+print("------------------------------------------------------------")  # 60個
+
 from scipy import stats
 
 print("正態性檢驗")
@@ -707,6 +711,7 @@ print(stats.kruskal(A, B, C))
 
 print("------------------------------------------------------------")  # 60個
 
+# 目前kilo只能用 pip install statsmodels==0.13.2
 import statsmodels.api as sm
 import scipy.stats as stats
 
@@ -1025,7 +1030,7 @@ population_mean = sum(population) / 10000.0
 sample_size = 1000
 intervals = []
 sample_means = []
-
+""" NG
 for sample in range(25):
     sample = np.random.choice(a=population, size=sample_size)
     sample_mean = sample.mean()
@@ -1046,7 +1051,7 @@ plt.errorbar(
 )
 plt.hlines(xmin=0, xmax=25, y=population_mean, linewidth=2.0, color="red")
 plt.show()
-
+"""
 print("------------------------------------------------------------")  # 60個
 
 from scipy import stats
@@ -1165,7 +1170,7 @@ print(chi_squared, p_value)
 
 crit = stats.chi2.ppf(q=0.95, df=df)
 print("臨界區: ", crit)
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 """
@@ -1244,7 +1249,6 @@ isf：逆残存函数（sf的逆）
 stats:返回均值，方差，（费舍尔）偏态，（费舍尔）峰度。
 moment:分布的非中心矩。
 """
-
 
 print("------------------------------------------------------------")  # 60個
 

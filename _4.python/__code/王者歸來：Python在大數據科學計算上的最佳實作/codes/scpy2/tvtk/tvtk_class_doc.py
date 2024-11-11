@@ -1,8 +1,7 @@
-# -*- coding: utf-8 -*-
 """
 显示TVTK的类的继承树以及文档，支持简单的搜索功能。
 """
-import cPickle, os.path, gzip
+import pickle, os.path, gzip
 from traits.api import (HasTraits, Instance, Any, List, Str,
     Property, Code, Int, cached_property, Bool)
 from traitsui.api import (View, Item, TreeEditor, HSplit, Group, VSplit,
@@ -70,13 +69,13 @@ if not os.path.exists(CACHE_FILE):
             
     print "saving cache"
     f = gzip.GzipFile(CACHE_FILE, "wb")
-    cPickle.dump(SubClasses, f)
+    pickle.dump(SubClasses, f)
     f.close()
     print "done"
 else:
     print "reading cache"
     f = gzip.GzipFile(CACHE_FILE, "rb")
-    SubClasses = cPickle.load(f)
+    SubClasses = pickle.load(f)
     f.close()
     print "done"
 

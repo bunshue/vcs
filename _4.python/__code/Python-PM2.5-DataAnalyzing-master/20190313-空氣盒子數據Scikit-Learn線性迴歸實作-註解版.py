@@ -25,21 +25,14 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
+import sklearn.linear_model
+from sklearn import datasets
+from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
+
+print("------------------------------------------------------------")  # 60個
+
 df = pd.read_csv("data/200811-201811b.csv")  # 共有 1447 筆資料
-"""
-cc = df.head(10)
-print(cc)
 
-#資料長度
-print(len(df))
-print(len(df["PM25"]))
-
-cc = df.info()
-print(cc)
-
-cc = df.describe()
-print(cc)
-"""
 plt.scatter(df["PM25"], df["CO"], c='yellow')
 plt.scatter(df["PM25"][:100], df["CO"][:100], c='r')
 plt.scatter(df["PM25"][100:200], df["CO"][100:200], c='g')
@@ -51,24 +44,21 @@ plt.title("PM25 對比 CO")
 
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
-# 使用 distplot() / histplot() 來看PM2.5主要集中的區間
-# sns.distplot(df["PM25"])  # deprecated
+# 用 histplot() 看PM2.5主要集中的區間
 sns.histplot(df["PM25"])
-
 plt.title("PM25濃度統計")
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 # 使用 df.corr() 先做出各變數間的關係係數，再用heatmap作圖
 sns.heatmap(df.corr())
-
 plt.title("關係係數")
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 # 訓練線性模型
 
@@ -99,7 +89,7 @@ from sklearn.model_selection import train_test_split
 # test_size代表測試組比例。random_state代表設定隨機種子，讓測試結果可被重複
 
 X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.4, random_state=101
+    X, y, test_size=0.4, random_state=9487
 )  # 訓練組6成, 測試組4成
 
 print(X.shape)
@@ -109,11 +99,12 @@ print(X_test.shape)
 print(y_train.shape)
 print(y_test.shape)
 
-# 載入線性迴歸，並訓練模型
-from sklearn.linear_model import LinearRegression
+# 做線性迴歸, 用 sklearn 裡的 LinearRegression 來做線性迴歸
+linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
 
-linear_regression = LinearRegression()
-linear_regression.fit(X_train, y_train)
+linear_regression.fit(X_train, y_train)  # 學習訓練.fit
+print(f"斜率  = {linear_regression.coef_[0].round(2)}")
+print(f"截距  = {linear_regression.intercept_.round(2)}")
 
 # 取得截距。如果公式是y=ax+b，b即是截距
 print("截距b:", linear_regression.intercept_)
@@ -126,7 +117,7 @@ print("迴歸係數 :", linear_regression.coef_)
 print(X_train.columns)
 
 # 預測, 使用測試組資料來預測結果
-y_pred = linear_regression.predict(X_test)
+y_pred = linear_regression.predict(X_test)  # 預測.predict
 
 df = pd.DataFrame({"測試資料": y_test, "預測結果": y_pred})
 #print(df)
@@ -170,6 +161,7 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
+sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 

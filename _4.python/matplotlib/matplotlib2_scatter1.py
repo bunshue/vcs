@@ -94,7 +94,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 plt.figure(
     num="scatter 集合 1",
     figsize=(12, 8),
@@ -462,8 +462,20 @@ plt.scatter(x, y, c=color, s=size, alpha=0.3, cmap="viridis", norm=changecolor)
 # plt.colorbar()
 
 plt.show()
-
+'''
 print("------------------------------------------------------------")  # 60個
+
+#雜湊圖
+
+#%fig=可指定點的彩色和大小的雜湊
+x = np.random.random(100)
+y = np.random.random(100)
+plt.scatter(x, y, s=x*1000, c=y, marker=(5, 1), 
+            alpha=0.8, lw=2, facecolors="none")
+plt.xlim(0, 1)
+plt.ylim(0, 1);
+
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

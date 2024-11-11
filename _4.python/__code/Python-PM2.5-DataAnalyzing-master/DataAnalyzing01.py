@@ -20,49 +20,18 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-'''
-df = pd.read_csv("data/200811-201811.csv")
-
-N = 5
-print('df.nlargest() 找出df的某欄位中最大的資料, ', N, '筆')
-cc = df.nlargest(N, "PM25")
-print(cc)
-
-print('df.nsmallest() 找出df的某欄位中最大的資料, ', N, '筆')
-cc = df.nsmallest(N, "PM25")
-print(cc)
-
-print('刪除SO2和CO這兩個欄位')
-df = df.drop(labels=["SO2", "CO"], axis="columns")
-
-print('依欄位 PM25 排序')
-dfSort = df.sort_values(by="PM25", ascending=False)
-cc = dfSort.head(20)
-print(cc)
-
-print('取得兩欄位數據')
-cc = df[["WindSpeed", "TEMP"]]  # 顯示Columns(列)為AQI及WindSpeed的數據
-print(cc)
-
-print('取得df中 欄位O3的資料 < 15 的資料')
-cc = df[df.O3 < 15]
-print(cc)
-
-print('取得df中 欄位PM25 < 30 且 欄位TEMP > 30 的資料')
-cc = df[(df.PM25 < 30) & (df.TEMP > 30)]
-print(cc)
-
-df.plot(kind="scatter", x="TEMP", y="PM25", title="溫度與PM2.5之關係")
-
-#plt.show()
-
 print("------------------------------------------------------------")  # 60個
 
 #df = pd.read_csv("data/198207-201811.csv")
 df = pd.read_csv("data/200811-201811.csv")
+cc = df.head()
+print(cc)
+
+print('屬性轉換 前, 顯示 df 之屬性')
+cc = df.dtypes
+print(cc)
 
 # 屬性轉換
-
 df["SO2"] = pd.to_numeric(df.SO2, errors="coerce")
 df["CO"] = pd.to_numeric(df.CO, errors="coerce")
 #df["CO2"] = pd.to_numeric(df.CO2, errors="coerce")
@@ -78,22 +47,8 @@ df["WindSpeed"] = pd.to_numeric(df.WindSpeed, errors="coerce")
 df["TEMP"] = pd.to_numeric(df.TEMP, errors="coerce")
 df["Humidity"] = pd.to_numeric(df.Humidity, errors="coerce")
 
-cc = df.head()
-print(cc)
-
-print('顯示 df 之屬性')
+print('屬性轉換 後, 顯示 df 之屬性')
 cc = df.dtypes
-print(cc)
-
-# 處理缺失值
-
-new_df = df.dropna()
-
-cc = new_df.head()
-print(cc)
-
-print('顯示 new_df 之屬性')
-cc = new_df.dtypes
 print(cc)
 
 print("------------------------------------------------------------")  # 60個
@@ -102,7 +57,7 @@ print("------------------------------------------------------------")  # 60個
 # 3.讀取檔案
 df = pd.read_excel("data/KH-1982-2018.xlsx")
 """
-df = pd.read_csv(r"data/AQI_20231124.csv")
+df = pd.read_csv(r"data/AQI_20231124.csv") # 共 85 筆資料
 
 # 兩個df的差別
 # 1)在前方加r，就不用反斜線
@@ -111,12 +66,16 @@ df = pd.read_csv(r"data/AQI_20231124.csv")
 # 4.資料操作
 # 4.1基本操作
 
-df[["AQI"]]  # 顯示Columns(列)為AQI的數據
-df.AQI  # 顯示Columns(列)為AQI的數據
-df.columns = ["XXX", "XXX", "XXX"]  # 重新命名欄位
-df.T  # 行與列互換
-"""
+cc = df[["aqi"]]  # 顯示Columns(列)為aqi的數據
+print(cc)
 
+cc = df.aqi  # 顯示Columns(列)為aqi的數據
+print(cc)
+
+cc = df.T  # 行與列互換
+print(cc)
+
+"""
 # 4.2 iloc,loc,ix方法
 df.iloc[4]  # 顯示第4筆資料的所有數據
 df1 = df.set_index(["測站"])  # 將測站設定為索引(即擺到第一行第一列)
@@ -141,7 +100,7 @@ df.sort_index(ascending=True).head(100)  # 升階排序
 df.sort_index(ascending=False).head(100)  # 降階排序
 
 # 4.6備註
-# 基本上df[['AQI']]和df.AQI功能一樣
+# 基本上df[['aqi']]和df.aqi功能一樣
 # iloc只對數值類型有用，loc只對字串類型有用，ix混合iloc與loc(但不建議，易失敗)
 
 # 5.字串處理
@@ -152,32 +111,32 @@ df["PM2.5"].str.upper()  # 讓字串全部變成大寫
 df["PM2.5"] = df["PM2.5"].str.replace("要改變的字串", "想改變成的字串")
 
 # 5.2找出資料
-df[df.AQI.startswith("高雄市")]  # 顯示出高雄市開頭的資料
-df[df.AQI.endswith("高雄市")]  # 顯示出高雄市做為結尾的資料
+df[df.aqi.startswith("高雄市")]  # 顯示出高雄市開頭的資料
+df[df.aqi.endswith("高雄市")]  # 顯示出高雄市做為結尾的資料
 
 # 6.來一點複雜操作
 
 df[
-    ["AQI", "WindSpeed"]
-]  # 顯示Columns(列)為AQI及WindSpeed的數據df[df.AQI<50]          #顯示AQI<50的數值
-df[(df.AQI < 30) & (df.WindSpeed > 2)]  # 列出AQI值大於30且風速大於2的數值
-df["AQI"] / 2  # 將所有AQI值除以2(+,-,*,/皆適用)
+    ["aqi", "WindSpeed"]
+]  # 顯示Columns(列)為aqi及WindSpeed的數據df[df.aqi<50]          #顯示aqi<50的數值
+df[(df.aqi < 30) & (df.WindSpeed > 2)]  # 列出aqi值大於30且風速大於2的數值
+df["aqi"] / 2  # 將所有aqi值除以2(+,-,*,/皆適用)
 # -----------------------------------------
-AQI_filter = df["AQI"] > 60  # 使用布林，當AQI>60為True，<60為False
+aqi_filter = df["aqi"] > 60  # 使用布林，當aqi>60為True，<60為False
 
-Bad_AQI = df[AQI_filter]  # 將過濾後的數值存入至Bad_AQI
-Bad_AQI.head()  # 只顯示AQI>60的資料
+Bad_aqi = df[aqi_filter]  # 將過濾後的數值存入至Bad_aqi
+Bad_aqi.head()  # 只顯示aqi>60的資料
 
-AQI_filter_2 = (df["AQI"] > 60) & (df["PM2.5"] > 40)
-# 使用布林，條件是AQI>60且PM2.5數值超過40
+aqi_filter_2 = (df["aqi"] > 60) & (df["PM2.5"] > 40)
+# 使用布林，條件是aqi>60且PM2.5數值超過40
 
-Bad_AQI_PM = df[AQI_filter_2]  # 將過濾後的數值存入至Bad_AQI_PM
-Bad_AQI_PM.head()  # 只顯示AQI>60且PM2.5>40的資料
+Bad_aqi_PM = df[aqi_filter_2]  # 將過濾後的數值存入至Bad_aqi_PM
+Bad_aqi_PM.head()  # 只顯示aqi>60且PM2.5>40的資料
 
 # 7.繪圖與存檔
 # 7.1資料視覺化
 
-df.plot(x="SiteName", y=["AQI"])  # 進行繪圖(X軸為地點,Y軸為AQI數值)
+df.plot(x="SiteName", y=["aqi"])  # 進行繪圖(X軸為地點,Y軸為aqi數值)
 pic = df.plot(
     kind="scatter", x="WindSpeed", y="PM2.5", title="風速與PM2.5之關係"
 )  # 製作散布圖,X軸風速,Y軸為PM2.5指數
@@ -201,9 +160,9 @@ print(df["aqi"])
 print(df.sort_index(ascending=True).head())
 print(df.sort_index(ascending=False).head())
 
-AQI_filter = df["aqi"] > 60
+aqi_filter = df["aqi"] > 60
 
-YYY = df[AQI_filter]
+YYY = df[aqi_filter]
 
 print(YYY.head())
 
@@ -490,7 +449,7 @@ ax = df.plot(kind="scatter", x="TEMP", y="PM25")
 
 ax.set_title("TEMP v.s. PM25")
 #plt.show()
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 # 空氣盒子數據PM25與各項因子之視覺化散布圖
@@ -651,4 +610,9 @@ pd.set_option("display.max_columns", 1000) #設定最大能顯示1000columns
 print("------------------------------------------------------------")  # 60個
 
 
+
+
+#df畫兩欄位的 散布圖
+df.plot(kind="scatter", x="TEMP", y="PM25", title="溫度與PM2.5之關係")
+plt.show()
 

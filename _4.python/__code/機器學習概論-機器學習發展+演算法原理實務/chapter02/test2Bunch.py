@@ -1,6 +1,5 @@
 import os 
 import jieba
-#import cPickle as pickle
 import pickle
 from sklearn.datasets.base import Bunch
 

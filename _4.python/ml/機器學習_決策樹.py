@@ -1,7 +1,8 @@
 """
-時間序列
+機器學習_決策樹
 
 """
+
 print("------------------------------------------------------------")  # 60個
 
 # 共同
@@ -25,100 +26,40 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
-sns.set()
-
-df = pd.read_excel("20160101-20190101(Daily)時間序列.xlsx")
-"""
-cc = df.head(10)
-print(cc)
-
-#資料長度
-print(len(df))
-print(len(df["PM25"]))
-
-cc = df.info()
-print(cc)
-
-cc = df.describe()
-print(cc)
-"""
-print(df.keys())
-print(df.shape)
-
-df.Date = pd.to_datetime(df.Date)
-df.set_index("Date", inplace=True)
-
-cc = df.head(5)
-print(cc)
-
-CH4 = df[["CH4"]]
-CH4.rolling(12).mean().plot(figsize=(20, 10), linewidth=5, fontsize=20)
-plt.xlabel("Year", fontsize=20)
-plt.title("PM2.5", fontsize=40)
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-PM25 = df[["PM25"]]
-PM25.rolling(12).mean().plot(figsize=(20, 10), linewidth=5, fontsize=20)
-plt.xlabel("Year", fontsize=20)
-plt.title("PM2.5", fontsize=40)
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-O3 = df[["O3"]]
-O3.rolling(12).mean().plot(figsize=(20, 10), linewidth=5, fontsize=20)
-plt.xlabel("Year", fontsize=20)
-plt.title("O3", fontsize=40)
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-CO = df[["CO"]]
-CO.rolling(12).mean().plot(figsize=(20, 10), linewidth=5, fontsize=20)
-plt.xlabel("Year", fontsize=20)
-plt.title("CO", fontsize=40)
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-CH4 = df[["CH4"]]
-CH4.rolling(12).mean().plot(figsize=(20, 10), linewidth=5, fontsize=20)
-plt.xlabel("Year", fontsize=20)
-plt.title("CH4", fontsize=40)
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-df_rm = pd.concat(
-    [
-        PM25.rolling(12).mean(),
-        O3.rolling(12).mean(),
-        CO.rolling(12).mean(),
-        CH4.rolling(12).mean(),
-    ],
-    axis=1,
-)
-df_rm.plot(figsize=(20, 10), linewidth=5, fontsize=20)
-plt.xlabel("Year", fontsize=20)
-
-plt.show()
+import sklearn.linear_model
+from sklearn import datasets
+from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
 
 print("------------------------------------------------------------")  # 60個
 
 
-print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
+sys.exit()
 
 print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+

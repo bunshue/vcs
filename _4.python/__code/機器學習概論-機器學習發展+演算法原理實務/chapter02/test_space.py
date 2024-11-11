@@ -2,7 +2,7 @@ import os
 #引入Bunch类
 from sklearn.datasets.base import Bunch
 #引入持久化类
-import cPickle as pickle
+import pickle
 from sklearn import feature_extraction  
 from sklearn.feature_extraction.text import TfidfTransformer  
 from sklearn.feature_extraction.text import TfidfVectorizer  

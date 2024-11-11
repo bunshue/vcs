@@ -30,181 +30,16 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 print("------------------------------------------------------------")  # 60個
 
 import ssl
-
 ssl._create_default_https_context = ssl._create_stdlib_context
 
 print("------------------------------------------------------------")  # 60個
 
 from sklearn import datasets, svm, metrics
 
-print(sklearn.__version__)
-print(dir(datasets))
-print(sklearn)
-
-print("------------------------------------------------------------")  # 60個
-
-"""
-01.讀入基本套件
-
-機器學習其實基本上和我們一直以來說的一樣, 就是我們要學一個未知的函數
-f(x)=y
-
-如果是分類, 基本上就是有一筆資料 x=(x1,x2,…,xk), 我們想知道這
-f(x)=y,其中的 y 就是某一個類別。
-
-這種學函數的方法, 又可以分為:
-
-    supervised learning
-    unsupervised learning
-
-其中的 supervised learning 就是我們有一組知道答案的訓練資料, 然後找到我們要的函數。而 unsupervised learning 就神了, 我們不知道答案, 卻要電腦自己去學!
-
-做數據分析, 幾乎每一次都要讀入這些套件!
-"""
-
-# 02. 關於 overfitting
-
-plt.figure(figsize=(12, 8))
-
-x = np.linspace(0, 1, 20)
-y = -((x - 1) ** 2) + 1
-
-plt.subplot(211)
-X = np.linspace(0, 1, 20)
-Y = -((X - 1) ** 2) + 1 + 0.08 * np.random.randn(20)
-plt.scatter(X, Y, c="r", s=50)
-plt.plot(x, y)
-plt.grid()
-plt.title("aaaa")
-
-plt.subplot(212)
-z = np.polyfit(X, Y, 19)
-p = np.poly1d(z)
-plt.plot(x, p(x), "r")
-plt.scatter(X, Y, c="r", s=50)
-plt.plot(x, y)
-plt.ylim(0, 2)
-plt.grid()
-plt.title("這叫很低的 bias, 很高的 variance")
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-"""
-03. 迴歸法預測函數
-03-1. 假的數據真的迴歸
-做一條直線
-
-我們來一條線, 比如說 f(x) = 1.2x + 0.8 + noise
-"""
-
-N = 50
-x = np.linspace(0, 1, N)
-y = 1.2 * x + 0.8 + 0.2 * np.random.randn(N)
-
-plt.scatter(x, y)
-
-plt.grid()
-plt.title("aaaa")
-
-plt.show()
-
-
-"""
-分訓練資料、測試資料
-
-一般我們想要看算出來的逼近函數在預測上是不是可靠, 會把一些資料留給「測試」,
-就是不讓電腦在計算時「看到」這些測試資料。
-等函數學成了以後, 再來測試準不準確。這是我們可以用
-
-sklearn.model_selection 裡的 train_test_split
-
-來亂數選一定百分比的資料來用。
-"""
-from sklearn.model_selection import train_test_split
-
-# 把原來的 x, y 中的 80% 給 training data, 20% 給 testing data。
-
-x_train, x_test, y_train, y_test = train_test_split(
-    x, y, test_size=0.2, random_state=9487
-)
-
-# len(x_train)    #80%
-# len(x_test)     #20%
-
-"""
-【重點】注意輸入格式
-只有一個 feature 時, 我們要小心的是, 很多機器學習、深度學習的套件, 都不希望我們用
-x=[x1,x2,…,xn]
-這樣子去做, 而是希望變成
-x=[[x1],[x2],…,[xn]]
-這種形式!
-"""
-
-xx = np.array([3, 9, 8, 1, 2])
-yy = np.array([1, 3, 9, 2, 4])
-
-"""
-xx.shape
-xx.reshape(5,1)
-xx = xx.reshape(len(xx),1)
-"""
-
-# 正式轉我們的訓練資料
-
-x_train = x_train.reshape(len(x_train), 1)
-x_test = x_test.reshape(len(x_test), 1)
-
-# step 1. 開一台「線性迴歸機」
-
-from sklearn.linear_model import LinearRegression
-
-regr = LinearRegression()
-
-# step 2. fit 學習、訓練
-
-regr.fit(x_train, y_train)
-
-# step 3. predict 預測
-
-Ypred = regr.predict(x_test)
-
-# x: x_test
-# y: Ypred
-# x_test.ravel()
-
-plt.plot(x_test.ravel(), Ypred, "r")
-
-plt.scatter(x_test.ravel(), y_test)
-
-plt.grid()
-plt.title("aaaa")
-plt.show()
-
-
-# 計算分數
-from sklearn.metrics import mean_squared_error, r2_score
-
-mse_t = mean_squared_error(y_train, regr.predict(x_train))
-r2_t = r2_score(y_train, regr.predict(x_train))
-print("訓練資料")
-print("MSE =", mse_t)
-print("R2 =", r2_t)
-
-mse = mean_squared_error(y_test, Ypred)
-r2 = r2_score(y_test, Ypred)
-print("測試資料")
-print(f"MSE = {mse:.4f}")
-print(f"R2 = {r2:.4f}")
-
-
-print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 """
 在金融預測上的應用
-
 神經網路
 連 SVM 都沒辦法, 那一定是方法還不夠高級, 所以我們用更高級的神經網路來做做看!
 """
@@ -264,7 +99,7 @@ print("------------------------------------------------------------")  # 60個
 """
 13.畫我們練習成果的討論
 """
-
+""" no clf
 # 02 [練習] 圖形化我們的成果
 
 # 1. 上次的成果拿回來使用
@@ -279,7 +114,6 @@ clf = joblib.load("iris_clf_01.pkl")
 # 真的可以用了嗎?
 
 print(clf.predict([[2, 3]]))
-
 
 # 可以! 太棒了!
 # 1.2 看看我們分類的全貌
@@ -327,7 +161,6 @@ plt.show()
 plt.scatter(xx.ravel(), yy.ravel(), s=50, c=Z, cmap=plt.cm.prism, alpha=0.8)
 plt.show()
 
-
 # 1.4 取回鳶尾花訓練資料
 
 from sklearn.datasets import load_iris
@@ -360,81 +193,11 @@ Z = Z.reshape(xx.shape)
 plt.contourf(xx, yy, Z, cmap=plt.cm.coolwarm, alpha=0.8)
 plt.show()
 
-
 Z = Z.reshape(xx.shape)
 plt.contourf(xx, yy, Z, cmap=plt.cm.coolwarm, alpha=0.8)
 plt.scatter(x[:, 0], x[:, 1], s=50, c=y, cmap=plt.cm.coolwarm)
 plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-# 打開一個線性迴歸的函數學習機
-
-from sklearn.linear_model import LinearRegression
-
-regr = LinearRegression()
-
-# 造資料, 調整成 sklearn 會接受的形狀
-
-x = np.linspace(0, 5, 100)
-y = 1.9 * x + 0.8 + 0.5 * np.random.randn(100)
-
-X = x.reshape(len(x), 1)
-
-# 把資料放進函數學習機，開始它的訓練
-
-regr.fit(X, y)
-
-# 用 predict 看一下訓練的成果，順便畫個圖
-
-Y = regr.predict(X)
-
-plt.scatter(x, y)
-plt.plot(x, Y, "r")
-plt.show()
-
-# 結果看起來不錯，會有微小誤差的原因，則是因為真實世界的資料有不可避免的雜訊
-
-print("------------------------------------------------------------")  # 60個
-
-from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LinearRegression
-
-# 均勻地在 0 到 5 之間取一百個點，再隨便決定一個函數，叫做 y = f(x) = 1.9x + 0.8 好了
-# 為了增加真實感，加上一點雜訊
-
-x = np.linspace(0, 5, 100)
-y = 1.9 * x + 0.8 + 0.5 * np.random.randn(100)
-
-# 開開心心地讓 sklearn 幫我們分離出訓練資料跟測試資料，測試資料的比例是 0.3 的話，
-# 訓練資料就會自動是 0.7 了呢，真是方便！
-# random_state 可以是耍寶用的 87 ，要選其他數字也當然可以
-
-x_train, x_test, y_train, y_test = train_test_split(
-    x, y, test_size=0.3, random_state=87
-)
-x_train = x_train.reshape(len(x_train), 1)
-x_test = x_test.reshape(len(x_test), 1)
-
-# 一樣叫出一個線性迴歸的函數學習機，再放進「訓練資料」讓它開始訓練
-
-regr = LinearRegression()
-regr.fit(x_train, y_train)
-
-# 用 plot 把「訓練資料」的正確答案畫成一條線，再把模型 predict 出來的結果描點畫在同一張圖上
-# 可以清楚的看到結果
-
-plt.scatter(x_train, y_train)
-plt.plot(x_train, regr.predict(x_train), "r")
-plt.show()
-
-
-# 跟上面一樣的做法，只是這次對象換成「測試資料」
-
-plt.scatter(x_test, y_test)
-plt.plot(x_test, regr.predict(x_test), "r")
-plt.show()
-
+"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 

@@ -25,6 +25,10 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 # 設定負號
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
+
+print("------------------------------------------------------------")  # 60個
+
+import sklearn.linear_model
 '''
 print("------------------------------------------------------------")  # 60個
 
@@ -151,7 +155,6 @@ print(tt)
 
 print('------------------------------')	#30個
 
-from sklearn.linear_model import LinearRegression
 
 def linear_regression(data, power, models_to_plot):
     #initialize predictors:
@@ -160,16 +163,16 @@ def linear_regression(data, power, models_to_plot):
         predictors.extend(['x_%d'%i for i in range(2, power + 1)])
     
     #Fit the model
-    #linreg = LinearRegression(normalize=True)
-    linreg = LinearRegression()
-    linreg.fit(data[predictors],data['y'])
-    y_pred = linreg.predict(data[predictors])
+    # 做線性迴歸, 用 sklearn 裡的 LinearRegression 來做線性迴歸
+    linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
+    linear_regression.fit(data[predictors],data['y'])  # 學習訓練.fit
+    y_pred = linear_regression.predict(data[predictors])  # 預測.predict
     
     #Return the result in pre-defined format
     rss = sum((y_pred-data['y']) ** 2)
     ret = [rss]
-    ret.extend([linreg.intercept_])
-    ret.extend(linreg.coef_)
+    ret.extend([linear_regression.intercept_])
+    ret.extend(linear_regression.coef_)
     
     #Check if a plot is to be made for the entered power
     if power in models_to_plot:
@@ -211,8 +214,8 @@ from sklearn.linear_model import Ridge
 def ridge_regression(data, predictors, alpha, models_to_plot={}):
     #ridgereg = Ridge(alpha=alpha,normalize=True)
     ridgereg = Ridge(alpha=alpha)
-    ridgereg.fit(data[predictors],data['y'])
-    y_pred = ridgereg.predict(data[predictors])
+    ridgereg.fit(data[predictors],data['y'])  # 學習訓練.fit
+    y_pred = ridgereg.predict(data[predictors])  # 預測.predict
     
     #Return the result in pre-defined format
     rss = sum((y_pred-data['y'])**2)
@@ -272,8 +275,8 @@ def lasso_regression(data, predictors, alpha, models_to_plot={}):
     #Fit the model
     #lassoreg = Lasso(alpha=alpha,normalize=True, max_iter=1e5)
     lassoreg = Lasso(alpha=alpha, max_iter=1e5)
-    lassoreg.fit(data[predictors], data['y'])
-    y_pred = lassoreg.predict(data[predictors])
+    lassoreg.fit(data[predictors], data['y'])  # 學習訓練.fit
+    y_pred = lassoreg.predict(data[predictors])  # 預測.predict
     
     #Return the result in pre-defined format
     rss = sum((y_pred-data['y'])**2)
@@ -575,11 +578,11 @@ from sklearn.naive_bayes import MultinomialNB
 
 classifier = MultinomialNB()
 targets = corpus_df["label"].values
-classifier.fit(counts, targets)
+classifier.fit(counts, targets)  # 學習訓練.fit
 
 examples = ["這 本 書 真差", "這個 電影 還 可 以"]
 example_counts = cv.transform(examples)
-predictions = classifier.predict(example_counts)
+predictions = classifier.predict(example_counts)  # 預測.predict
 
 print(predictions)
 
@@ -749,411 +752,10 @@ P_i500 * p_x_given_y_1("i500", person["Gender"][0]) * p_x_given_y_2(
 """
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
 '''
 
-
-"""
-sklearn 使用make_regression生成回归样本数据及NumPy拟合
-
-1. 介绍
-sklearn的make_regression函数能生成回归样本数据。
-
-2. 函数语法
-make_regression(n_samples=100, n_features=100, n_informative=10, n_targets=1, bias=0.0, 
-                effective_rank=None, tail_strength=0.5, noise=0.0, shuffle=True, coef=False, random_state=None)
-
-3. 参数说明：
-n_samples：样本数
-n_features：特征数(自变量个数)
-n_informative：参与建模特征数
-n_targets：因变量个数
-noise：噪音
-bias：偏差(截距)
-coef：是否输出coef标识
-random_state：随机状态若为固定值则每次产生的数据都一样
-
-"""
-
-from sklearn.datasets import make_regression
-
-X, Y = make_regression(
-    n_samples=10, n_features=1, n_targets=1, noise=1.5, random_state=1
-)
-
-
-X.shape, Y.shape
-
-import matplotlib.pyplot as plt
-
-plt.scatter(
-    X,  # x坐标
-    Y,  # y坐标
-)
-plt.show()
-
-
-# 5. 用NumPy实现拟合
-# Numpy拟合基于最小二乘法
-
-plt.scatter(
-    X,  # x坐标
-    Y,  # y坐标
-)
-
-import numpy as np
-
-# 用一次多项式拟合，相当于线性拟合
-z1 = np.polyfit(X.reshape(10), Y, 1)
-p1 = np.poly1d(z1)
-print(z1)
-print(p1)
-
-y = z1[0] * X + z1[1]
-plt.plot(X, y, c="red")
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-sys.exit()
-
-"""
-from sklearn.datasets import make_regression
-N = 50
-X, y = make_regression(n_samples=N, n_features=3)
-print(X.shape, y.shape)
-print(X)
-print(y)
-
-y = y.reshape((-1, 1))
-#print(y)
-
-from sklearn.linear_model import LinearRegression
-
-linear_regression = LinearRegression()
-linear_regression.fit(X, y)
-
-y_pred_sk = linear_regression.predict(X)
-#print(y_pred_sk)
-
-plt.figure(figsize=(9, 4))
-
-plt.plot(y, color="r", linewidth=10)
-plt.plot(y_pred_sk, color="g", linewidth=4)
-
-#plt.legend()
-
-plt.show()
-
-print('------------------------------')	#30個
-
-
-def gd(X, y, theta, l_rate, iterations):
-    cost_history = [0] * iterations
-
-    m = X.shape[0]
-
-    for epoch in range(iterations):
-        y_hat = X.dot(theta)
-
-        loss = y_hat - y
-
-        gradient = X.T.dot(loss) / m
-
-        theta = theta - l_rate * gradient
-
-        cost = np.dot(loss.T, loss)
-
-        cost_history[epoch] = cost[0, 0]
-
-    return theta, cost_history
-
-
-def sgd(X, y, theta, l_rate, iterations):
-    cost_history = [0] * iterations
-
-    for epoch in range(iterations):
-        for i, row in enumerate(X):
-            yhat = np.dot(row, theta)
-
-            loss = yhat[0] - y[i]
-
-            theta = theta - l_rate * loss * row.reshape((-1, 1))
-
-            cost_history[epoch] += loss**2
-
-    return theta, cost_history
-
-
-def predict(X, theta):
-    return np.dot(X, theta)
-
-
-theta = np.random.rand(X.shape[1], 1)
-
-iterations = 100
-
-l_rate = 0.1
-
-theta, cost_history = gd(X, y, theta, l_rate, iterations)
-
-print(theta.T)
-
-# array([[ 1.12259549, 64.22439151, 84.34968956]])
-
-y_predict = predict(X, theta)
-
-y_predict = predict(X, theta)
-
-plt.figure(figsize=(9, 4))
-
-plt.plot(y, color="r")
-plt.plot(y, alpha=0.3, linewidth=5)
-plt.plot(y_predict, color="g")
-plt.plot(y_predict, linewidth=2)
-
-plt.show()
-
-print(linear_regression.coef_)
-# array([[48.54597102, 82.31351886,  8.52184984]])
-
-"""
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-"""
-num_pos = 500
-
-subset1 = np.random.multivariate_normal([0, 0], [[1, 0.6], [0.6, 1]], num_pos)
-subset2 = np.random.multivariate_normal([0.5, 4], [[1, 0.6], [0.6, 1]], num_pos)
-
-X = np.vstack((subset1, subset2))
-y = np.hstack((np.zeros(num_pos), np.ones(num_pos)))
-
-plt.scatter(X[:, 0], X[:, 1], c=y)
-
-plt.show()
-
-print('------------------------------')	#30個
-
-from sklearn import linear_model
-
-clf = linear_model.LogisticRegression()
-
-clf.fit(X, y)
-
-y_pred = clf.predict(X)
-
-print(np.sum(y_pred.reshape(-1, 1) == y.reshape(-1, 1)) * 1.0 / len(y))
-# 0.99
-
-from sklearn.metrics import confusion_matrix
-
-print(confusion_matrix(y, y_pred))
-# [[495   5]
-# [  5 495]]
-
-print('------------------------------')	#30個
-
-# 繪制分類邊界
-
-
-def plot_decision_boundary(pred_func, X, y, title):
-    # Set min and max values and give it some padding
-    x_min, x_max = X[:, 0].min() - 0.5, X[:, 0].max() + 0.5
-    y_min, y_max = X[:, 1].min() - 0.5, X[:, 1].max() + 0.5
-    h = 0.01
-    # Generate a grid of points with distance h between them
-    xx, yy = np.meshgrid(np.arange(x_min, x_max, h), np.arange(y_min, y_max, h))
-    # Predict the function value for the whole grid (get class for each grid point)
-    Z = pred_func(np.c_[xx.ravel(), yy.ravel()])
-    Z = Z.reshape(xx.shape)
-    # print(Z)
-    # Plot the contour and training examples
-    plt.contourf(xx, yy, Z, alpha=0.3)
-    plt.scatter(X[:, 0], X[:, 1], c=y, s=40, alpha=0.8)
-    plt.title(title)
-    plt.show()
-
-
-plot_decision_boundary(lambda x: clf.predict(x), X, y, "logistic regression prediction")
-
-print('------------------------------')	#30個
-
-
-def sigmoid(z):
-    return 1 / (1 + np.exp(-z))
-
-
-def log_likelihood(X, y, theta):
-    scores = np.dot(X, theta)
-    ll = np.sum(y * scores - np.log(1 + np.exp(scores)))
-    return ll
-
-
-def logistic_regression(X, y, l_rate, iterations, add_intercept=True):
-    if add_intercept:
-        intercept = np.ones((X.shape[0], 1))
-        X = np.hstack((intercept, X))
-
-    theta = np.zeros(X.shape[1]).reshape(-1, 1)
-    y = y.reshape(-1, 1)
-    accu_history = [0] * iterations
-    ll_history = [0.0] * iterations
-    for epoch in range(iterations):
-        x_theta = np.dot(X, theta)
-        y_hat = sigmoid(x_theta)
-        error = y - y_hat
-        gradient = np.dot(X.T, error)
-        theta = theta + l_rate * gradient
-        preds = np.round(y_hat)
-
-        accu = np.sum(preds == y) * 1.0 / len(y)
-        accu_history[epoch] = accu
-
-        if epoch % 100 == 0:
-            print("After iter {}; accuracy: {}".format(epoch + 1, accu))
-    return theta, accu_history
-
-
-theta, accu = logistic_regression(X, y, 1, 2000)
-
-print(accu)
-"""
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-import matplotlib
-
-plt.style.use("bmh")
-colors = ["#A60628", "#467821"]
-plt.cmap = matplotlib.colors.ListedColormap(colors)
-
-matplotlib.rcParams["figure.figsize"] = (10.0, 6.0)
-
-num_pos = 500
-
-# Bivariate normal distribution mean [0, 0] [0.5, 4], with a covariance matrix
-
-subset1 = np.random.multivariate_normal([0, 0], [[1, 0.6], [0.6, 1]], num_pos)
-
-subset2 = np.random.multivariate_normal([0.5, 4], [[1, 0.6], [0.6, 1]], num_pos)
-
-X = np.vstack((subset1, subset2))
-
-y = np.hstack((np.zeros(num_pos), np.ones(num_pos)))
-
-plt.scatter(X[:, 0], X[:, 1], c=y, cmap=plt.cmap, marker="o", s=40)
-
-plt.show()
-
-from sklearn import linear_model
-
-clf = linear_model.LogisticRegression()
-clf.fit(X, y)
-print(clf.intercept_, clf.coef_, clf.classes_)
-# (array([-5.7268742]), array([[-1.43492343,  3.15471817]]), array([0., 1.]))
-
-y_pred = clf.predict(X)
-print(y_pred.shape)
-print(np.sum(y_pred.reshape(-1, 1) == y.reshape(-1, 1)) * 1.0 / len(y))
-
-# (1000L,)
-# 0.99
-
-from sklearn.metrics import confusion_matrix
-
-print(confusion_matrix(y, y_pred))
-sns.heatmap(confusion_matrix(y, y_pred))
-
-plt.show()
-
-"""
-[[495   5]
-
- [  5 495]]
-"""
-
-# 繪制分類邊界
-plt.style.use("bmh")
-
-
-def plot_decision_boundary(pred_func, X, y, title):
-    # Set min and max values and give it some padding
-    x_min, x_max = X[:, 0].min() - 0.5, X[:, 0].max() + 0.5
-    y_min, y_max = X[:, 1].min() - 0.5, X[:, 1].max() + 0.5
-    h = 0.01
-    # Generate a grid of points with distance h between them
-    xx, yy = np.meshgrid(np.arange(x_min, x_max, h), np.arange(y_min, y_max, h))
-    # Predict the function value for the whole grid (get class for each grid point)
-    Z = pred_func(np.c_[xx.ravel(), yy.ravel()])
-    Z = Z.reshape(xx.shape)
-    # print(Z)
-    # Plot the contour and training examples
-    plt.contourf(xx, yy, Z, alpha=0.3)
-    plt.scatter(X[:, 0], X[:, 1], c=y, s=40, alpha=0.8, cmap=plt.cmap)
-    plt.title(title)
-    plt.show()
-
-
-# run on the training dataset with predict function
-
-plot_decision_boundary(lambda x: clf.predict(x), X, y, "logistic regression prediction")
-
-plt.show()
-
-print("------------------------------")  # 30個
-
-
-def sigmoid(z):
-    return 1 / (1 + np.exp(-z))
-
-
-def log_likelihood(X, y, theta):
-    scores = np.dot(X, theta)
-    ll = np.sum(y * scores - np.log(1 + np.exp(scores)))
-    return ll
-
-
-def logistic_regression(X, y, l_rate, iterations, add_intercept=True):
-    if add_intercept:
-        intercept = np.ones((X.shape[0], 1))
-        X = np.hstack((intercept, X))
-    theta = np.zeros(X.shape[1]).reshape(-1, 1)
-    y = y.reshape(-1, 1)
-    accu_history = [0] * iterations
-    ll_history = [0.0] * iterations
-    for epoch in range(iterations):
-        x_theta = np.dot(X, theta)
-        y_hat = sigmoid(x_theta)
-        error = y - y_hat
-        gradient = np.dot(X.T, error)
-        theta = theta + l_rate * gradient
-        preds = np.round(y_hat)
-
-        accu = np.sum(preds == y) * 1.0 / len(y)
-        accu_history[epoch] = accu
-
-        if epoch % 5 == 0:
-            print("After iter {}; accuracy: {}".format(epoch + 1, accu))
-
-    return theta, accu_history
-
-
-theta, accu = logistic_regression(X, y, 1, 500)
-
-print(theta)
-
-"""
-array([[-599.88926069],
-,       [-181.5414528 ],
-,       [ 328.95859873]])
-"""
-print(accu)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
+''' 一個很大的範例
 """
 探索性數據分析（EDA）
 
@@ -1183,12 +785,8 @@ from sklearn.preprocessing import StandardScaler
 # pd.options.display.max_rows = 1000
 # pd.options.display.max_columns = 20
 
-print("------------------------------------------------------------")  # 60個
-
 train = pd.read_csv("data/houseprice.csv")
 print(train.head(3))
-
-print("------------------------------------------------------------")  # 60個
 
 print("訓練數據集基本信息")
 
@@ -1788,11 +1386,16 @@ tsne = model.fit_transform(X)
 
 std = StandardScaler()
 s = std.fit_transform(X)
+
 pca = PCA(n_components=40)
-pca.fit(s)
+
+pca.fit(s)  # 學習訓練.fit
+
 pc = pca.transform(s)
+
 kmeans = KMeans(n_clusters=5)
-kmeans.fit(pc)
+
+kmeans.fit(pc)  # 學習訓練.fit
 
 fr = pd.DataFrame({"tsne1": tsne[:, 0], "tsne2": tsne[:, 1], "cluster": kmeans.labels_})
 sns.lmplot(data=fr, x="tsne1", y="tsne2", hue="cluster", fit_reg=False)
@@ -1803,9 +1406,7 @@ print(np.sum(pca.explained_variance_ratio_))
 
 """
 0.846903058622
-
 看起來聚集趨勢并不明顯，所以分段回歸的意義似乎不大。
-
 另外40個主成分能解釋84%的方差。
 """
 
@@ -1910,17 +1511,19 @@ lasso = linear_model.LassoLarsCV(max_iter=10000)
 X = train[features].fillna(0.).values
 Y = train['SalePrice'].values
 
-lasso.fit(X, np.log(Y))
+lasso.fit(X, np.log(Y))  # 學習訓練.fit
 
 #反log1p變換
-Ypred = np.exp(lasso.predict(X))
+Ypred = np.exp(lasso.predict(X))  # 預測.predict
 print(error(Y, Ypred))
 
 """
-
+# 一個很大的範例
+'''
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+'''
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1956,12 +1559,12 @@ train_poly_X = poly.fit_transform(train_X.reshape(train_size, 1))
 test_poly_X = poly.fit_transform(test_X.reshape(test_size, 1))
 
 model = Ridge(alpha=1.0)
-model.fit(train_poly_X, train_y)
-train_pred_y = model.predict(train_poly_X)
-test_pred_y = model.predict(test_poly_X)
+model.fit(train_poly_X, train_y)  # 學習訓練.fit
+train_pred_y = model.predict(train_poly_X)  # 預測.predict
+test_pred_y = model.predict(test_poly_X)  # 預測.predict
 print(mean_squared_error(train_pred_y, train_y))
 print(mean_squared_error(test_pred_y, test_y))
-
+'''
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -1972,12 +1575,12 @@ X_train = np.r_[
 ].reshape((100, -1))
 y_train = np.r_[np.ones(50), np.zeros(50)]
 
-logistic_regression = LogisticRegression()
-logistic_regression.fit(X_train, y_train)
-print(logistic_regression.predict_proba([[0], [1], [2]])[:, 1])
+# 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
+logistic_regression = LogisticRegression()  # 邏輯迴歸函數學習機
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
+logistic_regression.fit(X_train, y_train)  # 學習訓練.fit
+
+print(logistic_regression.predict_proba([[0], [1], [2]])[:, 1])
 
 from sklearn.svm import LinearSVC
 from sklearn.datasets import make_blobs
@@ -1989,8 +1592,8 @@ centers = [(-1, -0.125), (0.5, 0.5)]
 X, y = make_blobs(n_samples=50, n_features=2, centers=centers, cluster_std=0.3)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
 model = LinearSVC()
-model.fit(X_train, y_train)  # 學習
-y_pred = model.predict(X_test)
+model.fit(X_train, y_train)  # 學習訓練.fit
+y_pred = model.predict(X_test)  # 預測.predict
 print(accuracy_score(y_pred, y_test))  # 評価
 
 print("------------------------------------------------------------")  # 60個
@@ -2004,9 +1607,13 @@ from sklearn.metrics import accuracy_score
 # データ生成
 X, y = make_gaussian_quantiles(n_features=2, n_classes=2, n_samples=300)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
+
 model = SVC()
-model.fit(X_train, y_train)
-y_pred = model.predict(X_test)
+
+model.fit(X_train, y_train)  # 學習訓練.fit
+
+y_pred = model.predict(X_test)  # 預測.predict
+
 print(accuracy_score(y_pred, y_test))
 
 print("------------------------------------------------------------")  # 60個
@@ -2024,9 +1631,12 @@ X_train = [
     [0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1],
 ]
 y_train = [1, 1, 1, 0, 0, 0]
+
 model = MultinomialNB()
-model.fit(X_train, y_train)  # 學習
-print(model.predict([[0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0]]))  # 評価
+
+model.fit(X_train, y_train)  # 學習訓練.fit
+
+print(model.predict([[0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0]]))  # 預測.predict
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -2043,9 +1653,13 @@ from sklearn.metrics import accuracy_score
 # データ生成
 X, y = make_moons(noise=0.3)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
+
 model = KNeighborsClassifier()
-model.fit(X_train, y_train)  # 學習
-y_pred = model.predict(X_test)
+
+model.fit(X_train, y_train)  # 學習訓練.fit
+
+y_pred = model.predict(X_test)  # 預測.predict
+
 print(accuracy_score(y_pred, y_test))  # 評価
 
 print("------------------------------------------------------------")  # 60個
@@ -2064,8 +1678,11 @@ data = [
     [0, 0, 0, 1],
 ]
 n_components = 2  # 潜在変数の数
+
 model = TruncatedSVD(n_components=n_components)
-model.fit(data)
+
+model.fit(data)  # 學習訓練.fit
+
 print(model.transform(data))  # 変換したデータ
 print(model.explained_variance_ratio_)  # 寄与率
 print(sum(model.explained_variance_ratio_))  # 累積寄与率
@@ -2081,8 +1698,11 @@ from sklearn.datasets import make_blobs
 centers = [[5, 10, 5], [10, 4, 10], [6, 8, 8]]
 X, _ = make_blobs(centers=centers)  # centersを中心としたデータを生成
 n_components = 2  # 潜在変数の数
+
 model = NMF(n_components=n_components)
-model.fit(X)
+
+model.fit(X)  # 學習訓練.fit
+
 W = model.transform(X)  # 分解後の行列
 H = model.components_
 print(W)
@@ -2102,8 +1722,11 @@ max_features = 1000
 tf_vectorizer = CountVectorizer(max_features=max_features, stop_words="english")
 tf = tf_vectorizer.fit_transform(data.data)
 n_topics = 20
+
 model = LatentDirichletAllocation(n_components=n_topics)
-model.fit(tf)
+
+model.fit(tf)  # 學習訓練.fit
+
 print(model.components_)  # 各トピックが持つ単語分布
 print(model.transform(tf))  # トピックで表現された文書
 
@@ -2117,9 +1740,13 @@ from sklearn.manifold import LocallyLinearEmbedding
 data, color = samples_generator.make_swiss_roll(n_samples=1500)
 n_neighbors = 12 # 近傍点の数 
 n_components = 2 # 削減後の次元数
+
 model = LocallyLinearEmbedding(n_neighbors=n_neighbors,
+
 n_components=n_components)
-model.fit(data)
+
+model.fit(data)  # 學習訓練.fit
+
 print(model.transform(data)) # 変換したデータ
 """
 print("------------------------------------------------------------")  # 60個
@@ -2142,7 +1769,7 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------")  # 30個
-
+''' NG
 print("混同行列")
 
 from sklearn.metrics import confusion_matrix
@@ -2242,8 +1869,10 @@ print("異なるアルゴリズムを利用した場合との比較")
 from sklearn.svm import SVR
 
 model_svr_linear = SVR(C=0.01, kernel="linear")
-model_svr_linear.fit(X, y)
-y_svr_pred = model_svr_linear.predict(X)
+
+model_svr_linear.fit(X, y)  # 學習訓練.fit
+
+y_svr_pred = model_svr_linear.predict(X)  # 預測.predict
 print(y_svr_pred)
 
 """
@@ -2265,19 +1894,24 @@ print("------------------------------")  # 30個
 print("ハイパーパラメータの設定")
 
 model_svr_rbf = SVR(C=1.0, kernel="rbf")
-model_svr_rbf.fit(X, y)
-y_svr_pred = model_svr_rbf.predict(X)
+
+model_svr_rbf.fit(X, y)  # 學習訓練.fit
+
+y_svr_pred = model_svr_rbf.predict(X)  # 預測.predict
 print(mean_squared_error(y, y_svr_pred))  # 平均二乗誤差
 print(r2_score(y, y_svr_pred))  # 決定係数
 
 train_X, test_X = X[:400], X[400:]
 train_y, test_y = y[:400], y[400:]
+
 model_svr_rbf_1 = SVR(C=1.0, kernel="rbf")
-model_svr_rbf_1.fit(train_X, train_y)
-test_y_pred = model_svr_rbf_1.predict(test_X)
+
+model_svr_rbf_1.fit(train_X, train_y)  # 學習訓練.fit
+
+test_y_pred = model_svr_rbf_1.predict(test_X)  # 預測.predict
 print(mean_squared_error(test_y, test_y_pred))  # 平均二乗誤差
 print(r2_score(test_y, test_y_pred))  # 決定係数
-
+'''
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -2309,8 +1943,10 @@ X_train_counts = count_vect.fit_transform(twenty_train.data)
 X_test_count = count_vect.transform(twenty_test.data)
 
 model = LinearSVC()
-model.fit(X_train_counts, twenty_train.target)
-predicted = model.predict(X_test_count)
+
+model.fit(X_train_counts, twenty_train.target)  # 學習訓練.fit
+
+predicted = model.predict(X_test_count)  # 預測.predict
 np.mean(predicted == twenty_test.target)
 
 tf_vec = TfidfVectorizer()  # tf-idf
@@ -2318,8 +1954,10 @@ X_train_tfidf = tf_vec.fit_transform(twenty_train.data)
 X_test_tfidf = tf_vec.transform(twenty_test.data)
 
 model = LinearSVC()
-model.fit(X_train_tfidf, twenty_train.target)
-predicted = model.predict(X_test_tfidf)
+
+model.fit(X_train_tfidf, twenty_train.target)  # 學習訓練.fit
+
+predicted = model.predict(X_test_tfidf)  # 預測.predict
 np.mean(predicted == twenty_test.target)
 
 print("------------------------------------------------------------")  # 60個
@@ -2338,10 +1976,10 @@ data = digits.images.reshape((n_samples, -1))
 
 model = RandomForestClassifier(n_estimators=10)
 
-model.fit(data[: n_samples // 2], digits.target[: n_samples // 2])
+model.fit(data[: n_samples // 2], digits.target[: n_samples // 2])  # 學習訓練.fit
 
 expected = digits.target[n_samples // 2 :]
-predicted = model.predict(data[n_samples // 2 :])
+predicted = model.predict(data[n_samples // 2 :])  # 預測.predict
 
 print(metrics.classification_report(expected, predicted))
 
@@ -2407,8 +2045,10 @@ print(dy_test.shape)
 from sklearn.neighbors import KNeighborsClassifier
 
 knn = KNeighborsClassifier(n_neighbors=5)
-knn.fit(dx_train, dy_train)
-predictions = knn.predict(dx_test)
+
+knn.fit(dx_train, dy_train)  # 學習訓練.fit
+
+predictions = knn.predict(dx_test)  # 預測.predict
 
 print(dy_test)
 print(predictions)
@@ -2418,12 +2058,11 @@ print(knn.score(dx_test, dy_test))
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 邏輯斯迴歸 (logistic regression)
+# 邏輯迴歸 (logistic regression)
 
 from sklearn.datasets import make_blobs
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LogisticRegression
 
 print("產生500筆資料 2維 2群")
 dx, dy = make_blobs(n_samples=500, n_features=2, centers=2, random_state=0)
@@ -2434,12 +2073,15 @@ dx_train, dx_test, dy_train, dy_test = train_test_split(
     dx_std, dy, test_size=0.2, random_state=0
 )
 
-logistic_regression = LogisticRegression()
-logistic_regression.fit(dx_train, dy_train)
-predictions = logistic_regression.predict(dx_test)
+# 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
+clf = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
 
-print(logistic_regression.score(dx_train, dy_train))
-print(logistic_regression.score(dx_test, dy_test))
+clf.fit(dx_train, dy_train)  # 學習訓練.fit
+
+predictions = clf.predict(dx_test)  # 預測.predict
+
+print(clf.score(dx_train, dy_train))
+print(clf.score(dx_test, dy_test))
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -2459,8 +2101,10 @@ dx_train, dx_test, dy_train, dy_test = train_test_split(
 )
 
 linear_svm = LinearSVC()
-linear_svm.fit(dx_train, dy_train)
-predictions = linear_svm.predict(dx_test)
+
+linear_svm.fit(dx_train, dy_train)  # 學習訓練.fit
+
+predictions = linear_svm.predict(dx_test)  # 預測.predict
 
 print(linear_svm.score(dx_train, dy_train))
 print(linear_svm.score(dx_test, dy_test))
@@ -2483,15 +2127,15 @@ dx_train, dx_test, dy_train, dy_test = train_test_split(
 
 linear_svm = LinearSVC()
 
-linear_svm.fit(dx_train, dy_train)
+linear_svm.fit(dx_train, dy_train)  # 學習訓練.fit
 
-predictions = linear_svm.predict(dx_test)
+predictions = linear_svm.predict(dx_test)  # 預測.predict
 
 svm = SVC()
 
-svm.fit(dx_train, dy_train)
+svm.fit(dx_train, dy_train)  # 學習訓練.fit
 
-predictions = svm.predict(dx_test)
+predictions = svm.predict(dx_test)  # 預測.predict
 
 print(linear_svm.score(dx_train, dy_train))
 
@@ -2783,96 +2427,6 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 氣溫
-t = [17, 17, 17, 22, 19, 21, 17, 17, 22, 24, 21, 21, 21, 17, 25, 21, 20, 19, 19, 22]
-
-# 飲料銷售量
-q = [
-    386,
-    360,
-    383,
-    146,
-    300,
-    254,
-    403,
-    381,
-    269,
-    99,
-    171,
-    204,
-    213,
-    279,
-    97,
-    262,
-    262,
-    225,
-    240,
-    226,
-]
-
-df = pd.DataFrame()
-
-df["T"] = t  # 行資料：氣溫
-
-df["Q"] = q  # 行資料：銷售量
-
-print(df.head())
-
-df.plot(kind="scatter", x="T", y="Q")
-plt.show()
-
-df_X = df[["T"]]  # 雙層的中括號(特徵值)，設定成資料框
-df_y = df["Q"]  # 單層的中括號(標籤)，設定成序列
-print(df_X.head())
-
-print(df_y.head())
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# 8-2 機器學習實作
-
-# 8-2-1 提出具體的假設
-# 8-2-2 找出機器學習模型
-# 挑選模型：匯入線性迴歸模型
-
-from sklearn.linear_model import LinearRegression
-
-# 學習訓練：建立並訓練線性迴歸模型
-
-lm = LinearRegression()  # 建立新模型 lm
-lm.fit(df_X, df_y)  # 訓練模型
-
-# LinearRegression(copy_X=True, fit_intercept=True, n_jobs=None, normalize=False)
-
-# 測試評估
-# 決定模型：取出線性迴歸模型的 m、b 參數
-
-print("線性迴歸的模型為 y = f(x) = mx +b")
-print("m 為 ", lm.coef_)
-print("b 為 ", lm.intercept_)
-
-# 線性迴歸的模型為 y = f(x) = mx +b
-# m 為  [-33.19704219]
-# b 為  920.2809917355372
-
-# 進行預測
-
-temp = [[23]]  # 輸入特徵值(氣溫)
-p = lm.predict(temp)  # 輸出標籤(預測的銷售量)
-print(p)
-
-# [156.74902131]
-
-temp = [[23], [18], [36]]
-p = lm.predict(temp)
-print(p)
-
-# [ 156.74902131  322.73423227 -274.81252719]
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 # 機器學習前準備─以Iris為例
 
 # 1. 資料取得
@@ -2919,7 +2473,7 @@ X_train, X_test, y_train, y_test = train_test_split(df_X, df_y, test_size=0.2)
 k = 1
 knn = KNeighborsClassifier(n_neighbors=k)  # 建立新模型 knn
 
-knn.fit(X_train, y_train)  # 用 training data 去訓練模型
+knn.fit(X_train, y_train)  # 學習訓練.fit
 
 # 測試評估
 
@@ -2931,13 +2485,14 @@ s = []
 for i in range(3, 11):
     k = i
     knn = KNeighborsClassifier(n_neighbors=k)
-    knn.fit(X_train, y_train)  # 用 training data 去訓練模型
+    knn.fit(X_train, y_train)  # 學習訓練.fit
     print("k =", k, " 準確率:", knn.score(X_test, y_test))  # 用 test data 檢測模型的準確率
     s.append(knn.score(X_test, y_test))
 
 k = 8
 knn = KNeighborsClassifier(n_neighbors=k)
-knn.fit(X_train, y_train)
+
+knn.fit(X_train, y_train)  # 學習訓練.fit
 
 # 加廣知識：視覺化圖表來顯示準確率
 
@@ -2949,7 +2504,7 @@ df_knn.plot(grid=True)
 plt.show()
 
 print("分類的預測結果：")
-pred = knn.predict(X_test)  # 產生Test data預測結果
+pred = knn.predict(X_test)  # 預測.predict
 print(pred)
 
 print(y_test.values)  # 觀察Test data真實數據
@@ -2982,7 +2537,7 @@ print("交叉驗證得到的平均準確率：", s.mean())
 # 進行分類預測
 
 new = [[6.6, 3.1, 5.2, 2.4]]
-v = knn.predict(new)
+v = knn.predict(new)  # 預測.predict
 if v == 0:
     s = "Iris-Setosa"
 elif v == 1:
@@ -3046,7 +2601,7 @@ X_train, X_test, y_train, y_test = train_test_split(df_X, df_y, test_size=0.2)
 k = 1
 knn = KNeighborsClassifier(n_neighbors=k)
 
-knn.fit(X_train, y_train)
+knn.fit(X_train, y_train)  # 學習訓練.fit
 
 # 測試評估
 
@@ -3057,16 +2612,17 @@ s = []
 for i in range(3, 11):
     k = i
     knn = KNeighborsClassifier(n_neighbors=k)
-    knn.fit(X_train, y_train)  # 用 training data 去訓練模型
+    knn.fit(X_train, y_train)  # 學習訓練.fit
     print("k =", k, " 準確率:", knn.score(X_test, y_test))  # 用 test data 檢測模型的準確率
     s.append(knn.score(X_test, y_test))
 
 k = 4
 knn = KNeighborsClassifier(n_neighbors=k)
-knn.fit(X_train, y_train)
+
+knn.fit(X_train, y_train)  # 學習訓練.fit
 
 print("分類的預測結果：")
-pred = knn.predict(X_test)
+pred = knn.predict(X_test)  # 預測.predict
 print(pred)  # 觀察預測結果
 
 print("真實數據：")
@@ -3097,14 +2653,14 @@ print("-----------(1)電影中兩位主角的生還推測-------------")
 
 Rose = [[0, 1]]  # 女性 頭等艙 蘿絲（Rose DeWitt Bukater）
 Jack = [[1, 3]]  # 男性 三等艙 傑克（Jack Dawson）
-v = knn.predict(Rose)
+v = knn.predict(Rose)  # 預測.predict
 if v == 1:
     s = "生還"
 else:
     s = "死亡"
 print("Rose能生還嗎 ? ", s)  # Rose為女性,及坐頭等艙
 
-v = knn.predict(Jack)
+v = knn.predict(Jack)  # 預測.predict
 if v == 1:
     s = "生還"
 else:
@@ -3119,14 +2675,14 @@ print("Jack能生還嗎 ? ", s)  # Jack為男性,及坐三等艙
 print("-----(2)真實的伊西多和伊達·斯特勞斯夫婦的生還推測-------")
 Mrs = [[0, 1]]  # 女性 頭等艙 Straus, Mrs. Isidor (Rosalie Ida Blun)
 Mr = [[1, 1]]  # 男性 頭等艙 Straus, Mr. Isidor
-v = knn.predict(Mrs)
+v = knn.predict(Mrs)  # 預測.predict
 if v == 1:
     s = "生還"
 else:
     s = "死亡"
 print("Mrs. Straus能生還嗎 ? ", s)  # Ida為女性,及坐頭等艙，可優先搭乘救生艇存活
 
-v = knn.predict(Mr)  # Isidor的生存率有多高呢？
+v = knn.predict(Mr)  # Isidor的生存率有多高呢？  # 預測.predict
 if v == 1:
     s = "生還"
 else:
@@ -3141,7 +2697,7 @@ print("-----------(3)真實的Mrs. Brown的生還推測-------------")
 
 # 女性 頭等艙 Brown, Mrs. James Joseph (Margaret Tobin) 故事中的暴發戶 對Jack很友善
 Brown = [[0, 1]]
-v = knn.predict(Brown)  # Mrs. Brown呢？
+v = knn.predict(Brown)  # Mrs. Brown呢？  # 預測.predict
 if v == 1:
     s = "生還"
 else:
@@ -3155,7 +2711,7 @@ s = 1
 # c=input('搭乘的船艙艙等（1：S艙，2：C艙，3：Q艙），請輸入代碼？ ')
 c = 3
 you = [[int(s), int(c)]]
-v = knn.predict(you)
+v = knn.predict(you)  # 預測.predict
 if v == 1:
     print("預測為:幸運生還")
 else:
@@ -3201,8 +2757,10 @@ from sklearn.cluster import KMeans
 
 df_X = df[["SepalLengthCm", "SepalWidthCm", "PetalLengthCm", "PetalWidthCm"]]
 k = 1
+
 km = KMeans(n_clusters=k)
-km.fit(df_X)
+
+km.fit(df_X)  # 學習訓練.fit
 
 # 測試評估
 
@@ -3213,7 +2771,7 @@ print("分群準確性:", km.inertia_)
 s = []
 for k in range(1, 15):
     km = KMeans(n_clusters=k)
-    km.fit(df_X)
+    km.fit(df_X)  # 學習訓練.fit
     s.append(km.inertia_)
 
 print(s)
@@ -3229,7 +2787,8 @@ plt.show()
 
 k = 3
 km = KMeans(n_clusters=k)
-km.fit(df_X)
+
+km.fit(df_X)  # 學習訓練.fit
 
 print("分群的預測結果：")
 pred = km.fit_predict(df_X)
@@ -3252,7 +2811,7 @@ plt.show()
 
 new = [[6.6, 3.1, 5.2, 2.4]]
 
-v = km.predict(new)
+v = km.predict(new)  # 預測.predict
 
 print("預測結果為：", v)
 

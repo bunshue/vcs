@@ -27,7 +27,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 plt.figure(
     num="plot 集合 1 函數曲線",
     figsize=(12, 8),
@@ -329,9 +329,25 @@ plt.xticks(xt, ["" for q in range(len(xt))])
 plt.yticks(yt, ["" for q in range(len(yt))])
 
 plt.show()
-
+'''
 print("------------------------------------------------------------")  # 60個
 
+#極座標圖
+
+#極座標中的圓、螺旋線和玫瑰線
+theta = np.arange(0, 2*np.pi, 0.02)
+
+plt.subplot(121, polar=True)
+plt.plot(theta, 1.6*np.ones_like(theta), linewidth=2)
+plt.plot(3*theta, theta/3, "--", linewidth=2)
+
+plt.subplot(122, polar=True)
+plt.plot(theta, 1.4*np.cos(5*theta), "--", linewidth=2)
+plt.plot(theta, 1.8*np.cos(4*theta), linewidth=2)
+plt.rgrids(np.arange(0.5, 2, 0.5), angle=45)
+plt.thetagrids([0, 45])
+
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 

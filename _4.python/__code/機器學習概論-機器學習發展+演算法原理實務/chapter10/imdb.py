@@ -1,4 +1,4 @@
-import cPickle
+import pickle
 import gzip
 import os
 
@@ -110,8 +110,8 @@ def load_data(path="imdb.pkl", n_words=100000, valid_portion=0.1, maxlen=None,
     else:
         f = open(path, 'rb')
 
-    train_set = cPickle.load(f)
-    test_set = cPickle.load(f)
+    train_set = pickle.load(f)
+    test_set = pickle.load(f)
     f.close()
     if maxlen:
         new_train_set_x = []

@@ -40,6 +40,8 @@ print(cc)
 cc = df.describe()
 print(cc)
 """
+print(df.keys())
+print(df.shape)
 
 # Danger分類點說明
 # 對敏感族群不健康為PM2.5數值在35.5以上
@@ -104,6 +106,7 @@ plt.ylabel("Error Rate")
 
 plt.show()
 
+print("------------------------------------------------------------")  # 60個
 
 knn = KNeighborsClassifier(n_neighbors=1)
 

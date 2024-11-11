@@ -38,33 +38,28 @@ from scipy.integrate import ode
 import scipy.special
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 scipy.__version__
 
-#常量和特殊函數
-
+print("常量和特殊函數")
 print(constants.c) # 真空中的光速
 print(constants.h) # 普朗克常量
 
+print("一個電子的質量")
 cc = constants.physical_constants["electron mass"]
 print(cc)
 
-#(9.10938291e-31, 'kg', 4e-38)
+print("一英里 = ? 公尺\t", constants.mile)
+print("一英吋 = ? 公尺\t", constants.inch)
+print("一公克 = ? 公斤\t", constants.gram)
+print("一英鎊 = ? 公斤\t", constants.pound)
 
-# 1英裡等於多少米, 1英寸等於多少米, 1克等於多少公斤, 1磅等於多少公斤
-
-print(constants.mile)
-print(constants.inch)
-print(constants.gram)
-print(constants.pound)
-
+print('Gamma函數')
 print(scipy.special.gamma(4))
 print(scipy.special.gamma(0.5))
-print(scipy.special.gamma(1+1j)) # gamma函數支援復數
+print(scipy.special.gamma(1+1j)) # gamma函數支援複數
 print(scipy.special.gamma(1000))
-
-cc = scipy.special.gammaln(1000)
-print(cc)
+print(scipy.special.gammaln(1000))
 
 print(1 + 1e-20)
 print(np.log(1+1e-20))
@@ -76,9 +71,7 @@ results = scipy.special.ellipj(u[:, None], m[None, :])
 
 print([y.shape for y in results])
 
-#[(200, 4), (200, 4), (200, 4), (200, 4)]
-
-#%figonly=使用廣播計算得到的`ellipj()`傳回值
+# 使用廣播計算得到的`ellipj()`傳回值
 fig, axes = pl.subplots(2, 2, figsize=(12, 4))
 labels = ["$sn$", "$cn$", "$dn$", "$\phi$"]
 for ax, y, label in zip(axes.ravel(), results, labels):
@@ -96,7 +89,7 @@ print("------------------------------------------------------------")  # 60個
 #擬合與改善-optimize
 #非線性方程式群組求解
 
-def f(x): #❶
+def f(x):
     x0, x1, x2 = x.tolist() #❷
     return [
         5*x1+3,
@@ -109,10 +102,8 @@ result = optimize.fsolve(f, [1,1,1]) #❸
 print(result)
 print(f(result))
 
-[-0.70622057 -0.6        -2.5       ]
-[0.0, -9.126033262418787e-14, 5.329070518200751e-15]
 
-def j(x): #❶
+def j(x):
     x0, x1, x2 = x.tolist()
     return [
         [0, 5, 0],
@@ -124,15 +115,12 @@ result = optimize.fsolve(f, [1,1,1], fprime=j) #❷
 print(result)
 print(f(result))
 
-[-0.70622057 -0.6        -2.5       ]
-[0.0, -9.126033262418787e-14, 5.329070518200751e-15]
-
 #最小二乘擬合
 
 X = np.array([ 8.19,  2.72,  6.39,  8.71,  4.7 ,  2.66,  3.78])
 Y = np.array([ 7.01,  2.78,  6.47,  6.71,  4.1 ,  4.23,  4.05])
 
-def residuals(p): #❶
+def residuals(p):
     "計算以p為參數的直線和原始資料之間的誤差"
     k, b = p
     return Y - (k*X + b)
@@ -144,7 +132,7 @@ print("k =",k, "b =",b)
 
 #k = 0.613495349193 b = 1.79409254326
 
-#%figonly=最小化正方形面積之和（左），誤差曲面（右）
+# 最小化正方形面積之和（左），誤差曲面（右）
 scale_k = 1.0
 scale_b = 10.0
 scale_error = 1000.0
@@ -193,8 +181,8 @@ ax2.set_zlabel("$error$");
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-#%fig=帶噪聲的正弦波擬合
-def func(x, p): #❶
+# 帶噪聲的正弦波擬合
+def func(x, p):
     """
     資料擬合所用的函數: A*sin(2*pi*k*x + theta)
     """
@@ -210,8 +198,8 @@ def residuals(p, y, x): #❷
 x = np.linspace(0, 2*np.pi, 100)
 A, k, theta = 10, 0.34, np.pi/6 # 真實資料的函數參數
 y0 = func(x, [A, k, theta]) # 真實資料
+
 # 加入噪聲之後的實驗資料
-np.random.seed(0)
 y1 = y0 + 2 * np.random.randn(len(x)) #❸
 
 p0 = [7, 0.40, 0] # 第一次猜測的函數擬合參數
@@ -232,9 +220,6 @@ plt.legend(loc="best");
 
 #plt.show()
 
-#真實際參數數: [10, 0.34, 0.5235987755982988]
-#擬合參數 [ 10.25218748   0.3423992    0.50817424]
-
 
 def func2(x, A, k, theta):
     return A*np.sin(2*np.pi*k*x+theta)   
@@ -242,14 +227,10 @@ def func2(x, A, k, theta):
 popt, _ = optimize.curve_fit(func2, x, y1, p0=p0)
 print(popt)
 
-#[ 10.25218748   0.3423992    0.50817424]
-
 popt, _ = optimize.curve_fit(func2, x, y1, p0=[10, 1, 0])
 print(u"真實際參數數:", [A, k, theta])
 print(u"擬合參數", popt)
 
-#真實際參數數: [10, 0.34, 0.5235987755982988]
-#擬合參數 [ 0.71093473  1.02074599 -0.1277666 ]
 
 #計算函數局域最小值
 
@@ -298,16 +279,8 @@ for method in methods:
     print("{:12s}: min={:12g}, f count={:3d}, fprime count={:3d}, fhess count={:3d}".format(
         method, float(res["fun"]), len(f_points), len(fprime_points), len(fhess_points)))
 
-"""
-Nelder-Mead : min= 5.30934e-10, f count=125, fprime count=  0, fhess count=  0
-Powell      : min=           0, f count= 52, fprime count=  0, fhess count=  0
-CG          : min=  7.6345e-15, f count= 34, fprime count= 34, fhess count=  0
-BFGS        : min= 2.31605e-16, f count= 40, fprime count= 40, fhess count=  0
-Newton-CG   : min= 5.22666e-10, f count= 60, fprime count= 97, fhess count= 38
-L-BFGS-B    : min=  6.5215e-15, f count= 33, fprime count= 33, fhess count=  0
-"""
 
-#%figonly=各種改善算法的搜尋路徑
+# 各種改善算法的搜尋路徑
 def draw_fmin_demo(f_points, fprime_points, ax):
     xmin, xmax = -3, 3
     ymin, ymax = -3, 3
@@ -333,8 +306,9 @@ for ax, method in zip(axes.ravel(), methods):
 #plt.show()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-#計算全域最小值
+print("計算全域最小值")
 
 def func(x, p):
     A, k, theta = p
@@ -346,7 +320,7 @@ def func_error(p, y, x):
 x = np.linspace(0, 2*np.pi, 100)
 A, k, theta = 10, 0.34, np.pi/6 
 y0 = func(x, [A, k, theta])
-np.random.seed(0)
+
 y1 = y0 + 2 * np.random.randn(len(x))
 
 result = optimize.basinhopping(func_error, (1, 1, 1),
@@ -355,9 +329,7 @@ result = optimize.basinhopping(func_error, (1, 1, 1),
                                         "args":(y1, x)})
 print(result.x)
 
-#[ 10.25218694  -0.34239909   2.63341582]
-
-#%figonly=用`basinhopping()`擬合正弦波
+# 用`basinhopping()`擬合正弦波
 plt.plot(x, y1, "o", label=u"帶噪聲的實驗資料")
 plt.plot(x, y0, label=u"真實資料")
 plt.plot(x, func(x, result.x), label=u"擬合資料")
@@ -366,6 +338,8 @@ plt.legend(loc="best")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
+print("線性代數-linalg, 解線性方程式群組")
 
 m, n = 500, 50
 A = np.random.rand(m, m)
@@ -383,9 +357,7 @@ X3 = linalg.lu_solve(luf, B)
 cc = np.allclose(X1, X3)
 print(cc)
 
-
 M, N = 1000, 100
-np.random.seed(0)
 A = np.random.rand(M, M)
 B = np.random.rand(M, N)
 Ai = linalg.inv(A)
@@ -398,13 +370,15 @@ cc = linalg.lu_factor(A)
 print(cc)
 cc = linalg.lu_solve(luf, B)
 print(cc)
-
+'''
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+'''
 #最小二乘解
 
 from numpy.lib.stride_tricks import as_strided
 
-def make_data(m, n, noise_scale): #❶
-    np.random.seed(42)
+def make_data(m, n, noise_scale):
     x = np.random.standard_normal(m) 
     h = np.random.standard_normal(n) 
     y = np.convolve(x, h) 
@@ -427,7 +401,7 @@ print("Average error of H2:", np.mean(np.abs(h[:80] - H2)))
 #Average error of H1: 0.301548854044
 #Average error of H2: 0.295842215834
 
-#%figonly=實際的系統參數與最小二乘解的比較
+# 實際的系統參數與最小二乘解的比較
 fig, (ax1, ax2) = pl.subplots(2, 1, figsize=(6, 4))
 ax1.plot(h, linewidth=2, label=u"實際的系統參數")
 ax1.plot(H1, linewidth=2, label=u"最小二乘解H1", alpha=0.7)
@@ -440,17 +414,18 @@ ax2.legend(loc="best", ncol=2)
 ax2.set_xlim(0, len(H2));
 
 #plt.show()
-
+'''
 print("------------------------------------------------------------")  # 60個
 
-#特征值和特征向量
+'''
+print("特徵值 和 特徵向量")
 
 A = np.array([[1, -0.3], [-0.1, 0.9]])
 evalues, evectors = linalg.eig(A)
 print(evalues)
 print(evectors)
 
-#%figonly=線性變換將藍色箭頭變換為紅色箭頭
+# 線性變換將藍色箭頭變換為紅色箭頭
 points = np.array([[0, 1.0], [1.0, 0], [1, 1]])
 
 def draw_arrows(points, **kw):
@@ -473,10 +448,9 @@ ax.set_xlim(-0.5, 1.1)
 ax.set_ylim(-0.5, 1.1);
 
 #plt.show()
-
+'''
 print("------------------------------------------------------------")  # 60個
 
-np.random.seed(42)
 t = np.random.uniform(0, 2*np.pi, 60)
 
 alpha = 0.4
@@ -491,14 +465,14 @@ D = np.c_[x**2, x*y, y**2, x, y, np.ones_like(x)]
 A = np.dot(D.T, D)
 C = np.zeros((6, 6))
 C[[0, 1, 2], [2, 1, 0]] = 2, -1, 2
-evalues, evectors = linalg.eig(A, C)     #❶
+evalues, evectors = linalg.eig(A, C)    
 evectors = np.real(evectors)
 err = np.mean(np.dot(D, evectors)**2, 0) #❷
 p = evectors[:, np.argmin(err) ]         #❸
 print(p)
 
 
-#%figonly=用廣義特征向量計算的擬合橢圓
+# 用廣義特征向量計算的擬合橢圓
 def ellipse(p, x, y):
     a, b, c, d, e, f = p
     return a*x**2 + b*x*y + c*y**2 + d*x + e*y + f
@@ -524,7 +498,7 @@ print(s.shape)
 print(Vh.shape)
 
 
-#%fig=按從大到小排序的奇異值
+# 按從大到小排序的奇異值
 pl.semilogy(s, lw=3);
 
 #plt.show()
@@ -538,7 +512,7 @@ print(np.allclose(img, composite(U, s, Vh, len(s))))
 
 #True
 
-#%fig=原始圖形、使用10、20、50個向量合成的圖形（從左到右）
+# 原始圖形、使用10、20、50個向量合成的圖形（從左到右）
 img10 = composite(U, s, Vh, 10)
 img20 = composite(U, s, Vh, 20)
 img50 = composite(U, s, Vh, 50)
@@ -565,7 +539,7 @@ print(cc)
 cc = stats.norm.fit(x) # 得到隨機序列期望值和標准差
 print(cc)
 
-pdf, t = np.histogram(x, bins=100, normed=True)  #❶
+pdf, t = np.histogram(x, bins=100, normed=True) 
 t = (t[:-1] + t[1:]) * 0.5 #❷
 cdf = np.cumsum(pdf) * (t[1] - t[0]) #❸
 p_error = pdf - X.pdf(t)
@@ -575,7 +549,7 @@ print("max pdf error: {}, max cdf error: {}".format(
 
 #max pdf error: 0.0217211429624, max cdf error: 0.0209887986472
 
-#%figonly=正態分佈的機率密度函數（左）和累積分佈函數（右）
+# 正態分佈的機率密度函數（左）和累積分佈函數（右）
 fig, (ax1, ax2) = pl.subplots(1, 2, figsize=(7, 2))
 ax1.plot(t, pdf, label=u"統計值")
 ax1.plot(t, X.pdf(t), label=u"理論值", alpha=0.6)
@@ -614,14 +588,13 @@ dice = stats.rv_discrete(values=(x, p))
 cc = dice.rvs(size=20)
 print(cc)
 
-np.random.seed(42)
 samples = dice.rvs(size=(20000, 50))
 samples_mean = np.mean(samples, axis=1)
 print(samples_mean)
 
 #核密度估計
 
-#%fig=核密度估計能更準確地表示隨機變數的機率密度函數
+# 核密度估計能更準確地表示隨機變數的機率密度函數
 _, bins, step = pl.hist(
     samples_mean, bins=100, histtype="step", label=u"直方圖統計")
 kde = stats.kde.gaussian_kde(samples_mean)
@@ -635,7 +608,7 @@ pl.legend();
 
 print("------------------------------------------------------------")  # 60個
 
-#%fig=`bw_method`參數越大核密度估計曲線越平順
+# `bw_method`參數越大核密度估計曲線越平順
 for bw in [0.2, 0.3, 0.6, 1.0]:
     kde = stats.gaussian_kde([-1, 0, 1], bw_method=bw)
     x = np.linspace(-5, 5, 1000)
@@ -653,7 +626,7 @@ print("------------------------------------------------------------")  # 60個
 cc = stats.binom.pmf(range(6), 5, 1/6.0)
 print(cc)
 
-#%fig=當n足夠大時二項分佈和泊松分佈近似相等
+# 當n足夠大時二項分佈和泊松分佈近似相等
 lambda_ = 10.0
 x = np.arange(20)
 
@@ -682,11 +655,10 @@ fig.subplots_adjust(0.1, 0.15, 0.95, 0.90, 0.2, 0.1);
 
 print("------------------------------------------------------------")  # 60個
 
-#%fig=類比泊松分佈
-np.random.seed(42)
+# 類比泊松分佈
 
 def sim_poisson(lambda_, time):
-    t = np.random.uniform(0, time, size=lambda_ * time) #❶
+    t = np.random.uniform(0, time, size=lambda_ * time)
     count, time_edges = np.histogram(t, bins=time, range=(0, time))  #❷
     dist, count_edges = np.histogram(count, bins=20, range=(0, 20), density=True) #❸
     x = count_edges[:-1]
@@ -722,9 +694,9 @@ fig.subplots_adjust(0.1, 0.15, 0.95, 0.90, 0.2, 0.1);
 print("------------------------------------------------------------")  # 60個
 
 
-#%fig=類比伽瑪分佈
+# 類比伽瑪分佈
 def sim_gamma(lambda_, time, k):
-    t = np.random.uniform(0, time, size=int(lambda_ * time)) #❶
+    t = np.random.uniform(0, time, size=int(lambda_ * time))
     t.sort()  #❷
     interval = t[k:] - t[:-k] #❸
     dist, interval_edges = np.histogram(interval, bins=100, density=True) #❹
@@ -761,7 +733,7 @@ T = 100000
 A_count = T // 5
 B_count = T // 10
 
-A_time = np.random.uniform(0, T, A_count) #❶
+A_time = np.random.uniform(0, T, A_count)
 B_time = np.random.uniform(0, T, B_count)
 
 bus_time = np.concatenate((A_time, B_time)) #❷
@@ -777,7 +749,7 @@ print(cc)
 cc = np.mean(np.diff(bus_time)) * 60
 print(cc)
 
-#%figonly=觀察者偏差
+# 觀察者偏差
 
 import matplotlib.gridspec as gridspec
 
@@ -809,10 +781,10 @@ print("------------------------------------------------------------")  # 60個
 
 #學生t-分佈與t檢驗
 
-#%fig=類比學生t-分佈
+# 類比學生t-分佈
 mu = 0.0
 n = 10
-samples = stats.norm(mu).rvs(size=(100000, n)) #❶
+samples = stats.norm(mu).rvs(size=(100000, n))
 t_samples = (np.mean(samples, axis=1) - mu) / np.std(samples, ddof=1, axis=1) * n**0.5 #❷
 sample_dist, x = np.histogram(t_samples, bins=100, density=True) #❸
 x = 0.5 * (x[:-1] + x[1:])
@@ -831,7 +803,7 @@ pl.legend(loc="best");
 print("------------------------------------------------------------")  # 60個
 
 
-#%figonly=當`df`增大，學生t-分佈趨向於正態分佈
+# 當`df`增大，學生t-分佈趨向於正態分佈
 fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(7.5, 2.5))
 ax1.plot(x, stats.t(6-1).pdf(x), label=u"df=5", lw=2)
 ax1.plot(x, stats.t(40-1).pdf(x), label=u"df=39", lw=2, alpha=0.6)
@@ -848,7 +820,6 @@ ax2.legend();
 print("------------------------------------------------------------")  # 60個
 
 n = 30
-np.random.seed(42)
 s = stats.norm.rvs(loc=1, scale=0.8, size=n)
 
 t = (np.mean(s) - 0.5) / (np.std(s, ddof=1) / np.sqrt(n))
@@ -862,7 +833,7 @@ print(stats.ttest_1samp(s, 1), stats.ttest_1samp(s, 0.9))
 #-1.14501736704
 #(-1.1450173670383303, 0.26156414618801477) (-0.38429702545421962, 0.70356191034252025)
 
-#%fig=紅色部分為`ttest_1samp()`計算的p值
+# 紅色部分為`ttest_1samp()`計算的p值
 x = np.linspace(-5, 5, 500)
 y = stats.t(n-1).pdf(x)
 plt.plot(x, y, lw=2)
@@ -894,20 +865,18 @@ tr = (np.mean(r, axis=1) - mean) / (np.std(r, ddof=1, axis=1) / np.sqrt(n))
 cc = np.mean(np.abs(tr) > np.abs(ts))
 print(cc)
 
-np.random.seed(42)
-
 s1 = stats.norm.rvs(loc=1, scale=1.0, size=20)
 s2 = stats.norm.rvs(loc=1.5, scale=0.5, size=20)
 s3 = stats.norm.rvs(loc=1.5, scale=0.5, size=25)
 
-print(stats.ttest_ind(s1, s2, equal_var=False)) #❶
+print(stats.ttest_ind(s1, s2, equal_var=False))
 print(stats.ttest_ind(s2, s3, equal_var=True))  #❷
 
 print("------------------------------------------------------------")  # 60個
 
 #卡方分佈和卡方檢驗
 
-#%fig=使用隨機數驗證卡方分佈
+# 使用隨機數驗證卡方分佈
 a = np.random.normal(size=(300000, 4))
 cs = np.sum(a**2, axis=1)
 
@@ -926,12 +895,11 @@ pl.legend(loc="best");
 
 print("------------------------------------------------------------")  # 60個
 
-#%fig=類比卡方分佈
+# 類比卡方分佈
 repeat_count = 60000
 n, k = 100, 5
 
-np.random.seed(42)
-ball_ids = np.random.randint(0, k, size=(repeat_count, n)) #❶
+ball_ids = np.random.randint(0, k, size=(repeat_count, n))
 counts = np.apply_along_axis(np.bincount, 1, ball_ids, minlength=k) #❷
 cs2 = np.sum((counts - n/k)**2.0/(n/k), axis=1) #❸
 k = stats.kde.gaussian_kde(cs2) #❹
@@ -952,7 +920,6 @@ def choose_balls(probabilities, size):
     counts = np.bincount(s)    
     return counts
 
-np.random.seed(42)
 counts1 = choose_balls([0.18, 0.24, 0.25, 0.16, 0.17], 400)
 counts2 = choose_balls([0.2]*5, 400)
 
@@ -968,7 +935,7 @@ print("chi2 =", chi2, "p2 =", p2)
 #chi1 = 11.375 p1 = 0.0226576012398
 #chi2 = 2.55 p2 = 0.635705452704
 
-#%figonly=卡方檢驗計算的機率為陰影部分的面積
+# 卡方檢驗計算的機率為陰影部分的面積
 x = np.linspace(0, 30, 200)
 CHI2 = stats.chi2(4)
 pl.plot(x, CHI2.pdf(x), "k", lw=2)
@@ -1030,10 +997,10 @@ print("------------------------------------------------------------")  # 60個
 
 # 目前畫不出來
 
-#%fig=洛倫茨吸引子：微小的初值差別也會顯著地影響運動軌跡
+# 洛倫茨吸引子：微小的初值差別也會顯著地影響運動軌跡
 
 
-def lorenz(w, t, p, r, b): #❶
+def lorenz(w, t, p, r, b):
     # 舉出位置向量w，和三個參數p, r, b計算出
     # dx/dt, dy/dt, dz/dt的值
     x, y, z = w.tolist()
@@ -1064,7 +1031,7 @@ def mass_spring_damper(xu, t, m, k, b, F):
     du = (F - k*x - b*u)/m
     return dx, du 
 
-#%fig=滑動區塊的速度和位移曲線
+# 滑動區塊的速度和位移曲線
 m, b, k, F = 1.0, 10.0, 20.0, 1.0
 init_status = 0.0, 0.0
 args = m, k, b, F
@@ -1082,7 +1049,7 @@ ax2.legend();
 print("------------------------------------------------------------")  # 60個
 
 
-class MassSpringDamper(object): #❶
+class MassSpringDamper(object):
     
     def __init__(self, m, k, b, F):
         self.m, self.k, self.b, self.F = m, k, b, F
@@ -1132,7 +1099,7 @@ class PID(object):
         self.last_error = error
         return p + i + d
 
-#%fig=使用PID控制器讓滑動區塊停在位移為1.0處
+# 使用PID控制器讓滑動區塊停在位移為1.0處
 def pid_control_system(kp, ki, kd, dt, target=1.0):
     system = MassSpringDamper(m=m, k=k, b=b, F=0.0)
     pid = PID(kp, ki, kd, dt)
@@ -1148,7 +1115,7 @@ def pid_control_system(kp, ki, kd, dt, target=1.0):
     
     while r.successful() and r.t + dt < 2.0:
         r.integrate(r.t + dt)
-        err = target - r.y[0]  #❶
+        err = target - r.y[0] 
         F = pid.update(err)    #❷
         system.F = F           #❸
         t.append(r.t)
@@ -1191,7 +1158,7 @@ opt_k = optimize.basinhopping(eval_func, (10, 10, 10),
                                minimizer_kwargs=kwargs)
 print(opt_k.x)
 
-#%fig=改善PID的參數降低控制響應時間
+# 改善PID的參數降低控制響應時間
 kp, ki, kd = opt_k.x
 t, F_arr, result = pid_control_system(kp, ki, kd, 0.01)
 idx = np.argmin(np.abs(t - 0.5))
@@ -1212,10 +1179,10 @@ print("------------------------------------------------------------")  # 60個
 
 #中值濾波
 
-#%fig=使用中值濾波剔除瞬間噪聲
+# 使用中值濾波剔除瞬間噪聲
 t = np.arange(0, 20, 0.1)
 x = np.sin(t)
-x[np.random.randint(0, len(t), 20)] += np.random.standard_normal(20)*0.6 #❶
+x[np.random.randint(0, len(t), 20)] += np.random.standard_normal(20)*0.6
 x2 = signal.medfilt(x, 5) #❷
 x3 = signal.order_filter(x, np.ones(5), 2)
 print(np.all(x2 == x3))
@@ -1238,7 +1205,7 @@ sampling_rate = 8000.0
 # 阻帶為<0.1*4000, >0.6*4000
 # 通帶增益的最大衰減值為2dB
 # 阻帶的最小衰減值為40dB
-b, a = signal.iirdesign([0.2, 0.5], [0.1, 0.6], 2, 40) #❶
+b, a = signal.iirdesign([0.2, 0.5], [0.1, 0.6], 2, 40)
 
 # 使用freq計算濾波器的頻率響應
 w, h = signal.freqz(b, a) #❷
@@ -1247,10 +1214,10 @@ w, h = signal.freqz(b, a) #❷
 power = 20*np.log10(np.clip(np.abs(h), 1e-8, 1e100)) #❸
 freq = w / np.pi * sampling_rate / 2
 
-#%fig=用頻率掃描波測量的頻率響應
+# 用頻率掃描波測量的頻率響應
 # 產生2秒鍾的取樣頻率為sampling_rate Hz的頻率掃描訊號
 # 開始頻率為0， 結束頻率為sampling_rate/2
-t = np.arange(0, 2, 1/sampling_rate) #❶
+t = np.arange(0, 2, 1/sampling_rate)
 sweep = signal.chirp(t, f0=0, t1=2, f1=sampling_rate/2) #❷
 # 對頻率掃描訊號進行濾波
 out = signal.lfilter(b, a, sweep) #❸
@@ -1275,13 +1242,13 @@ print("------------------------------------------------------------")  # 60個
 
 #連續時間線性系統
 
-#%fig=系統的階躍響應和正弦波響應
+# 系統的階躍響應和正弦波響應
 m, b, k = 1.0, 10, 20
 
 numerator = [1]
 denominator = [m, b, k]
 
-plant = signal.lti(numerator, denominator) #❶
+plant = signal.lti(numerator, denominator)
 
 t = np.arange(0, 2, 0.01)
 _, x_step = plant.step(T=t) #❷
@@ -1310,7 +1277,7 @@ class SYS(object):
         self.num = num
         self.den = den
         
-    def feedback(self): #❶
+    def feedback(self):
         return self / (self + 1)
         
     def __mul__(self, s):
@@ -1336,9 +1303,9 @@ class SYS(object):
     def __iter__(self): #❷
         return iter((self.num, self.den))    
 
-#%fig=使用PI控制器的控制系統的階躍響應
+# 使用PI控制器的控制系統的階躍響應
 M, b, k = 1.0, 10, 20
-plant = SYS([1], [M, b, k]) #❶
+plant = SYS([1], [M, b, k])
 
 pi_settings = [(10, 1e-10), (200, 1e-10),
                (200, 100),  (50, 100)]
@@ -1372,7 +1339,7 @@ _, x3 = signal.step(lp_feedback, T=t)
 pid_out = (pid_ctrl * lp) / (pid_ctrl * plant + 1)
 _, f3 = signal.step(pid_out, T=t)
 
-#%figonly=滑動區塊的位移以及控制力
+# 滑動區塊的位移以及控制力
 fig, (ax1, ax2) = pl.subplots(1, 2, figsize=(10, 3))
 ax1.plot(t, x, label=u"PI控制")
 ax1.plot(t, x2, label=u"PID控制")
@@ -1392,7 +1359,7 @@ print("------------------------------------------------------------")  # 60個
 #高次interp1d()插值的運算量很大，因此對於點數較多的資料，
 #建議使用後面介紹的UnivariateSpline()。
 
-#%fig=`interp1d`的各階插值
+# `interp1d`的各階插值
 
 x = np.linspace(0, 10, 11)
 y = np.sin(x)
@@ -1400,7 +1367,7 @@ y = np.sin(x)
 xnew = np.linspace(0, 10, 101)
 pl.plot(x,y,'ro')
 for kind in ['nearest', 'zero', 'slinear', 'quadratic']:
-    f = interpolate.interp1d(x,y,kind=kind) #❶
+    f = interpolate.interp1d(x,y,kind=kind)
     ynew = f(xnew) #❷
     pl.plot(xnew, ynew, label=str(kind))
 
@@ -1412,11 +1379,11 @@ print("------------------------------------------------------------")  # 60個
 
 #外推和Spline擬合
 
-#%fig=使用UnivariateSpline進行插值：外推（上），資料擬合（下）
+# 使用UnivariateSpline進行插值：外推（上），資料擬合（下）
 x1 = np.linspace(0, 10, 20)
 y1 = np.sin(x1)
 sx1 = np.linspace(0, 12, 100)
-sy1 = interpolate.UnivariateSpline(x1, y1, s=0)(sx1) #❶
+sy1 = interpolate.UnivariateSpline(x1, y1, s=0)(sx1)
 
 x2 = np.linspace(0, 20, 200)
 y2 = np.sin(x2) + np.random.standard_normal(len(x2))*0.2
@@ -1443,8 +1410,8 @@ print(np.array_str( spline2.roots(), precision=3 ))
 
 print("------------------------------------------------------------")  # 60個
 
-#%fig=計算Spline與水平線的交點
-def roots_at(self, v): #❶
+# 計算Spline與水平線的交點
+def roots_at(self, v):
     coeff = self.get_coeffs()
     coeff -= v
     try:
@@ -1469,7 +1436,7 @@ print("------------------------------------------------------------")  # 60個
 
 #參數插值
 
-#%fig=使用參數插值連線二維平面上的點
+# 使用參數插值連線二維平面上的點
 x = [ 4.913,  4.913,  4.918,  4.938,  4.955,  4.949,  4.911,
       4.848,  4.864,  4.893,  4.935,  4.981,  5.01 ,  5.021]
 
@@ -1479,7 +1446,7 @@ y = [ 5.2785,  5.2875,  5.291 ,  5.289 ,  5.28  ,  5.26  ,  5.245 ,
 pl.plot(x, y, "o")
 
 for s in (0, 1e-4):
-    tck, t = interpolate.splprep([x, y], s=s) #❶
+    tck, t = interpolate.splprep([x, y], s=s)
     xi, yi = interpolate.splev(np.linspace(t[0], t[-1], 200), tck) #❷
     pl.plot(xi, yi, lw=2, label=u"s=%g" % s)
     
@@ -1491,7 +1458,7 @@ print("------------------------------------------------------------")  # 60個
 """ NG
 #單調插值
 
-#%fig=單調插值能確保兩個點之間的曲線為單調遞增或遞減
+# 單調插值能確保兩個點之間的曲線為單調遞增或遞減
 x = [0, 1, 2, 3, 4, 5]
 y = [1, 2, 1.5, 2.5, 3, 2.5]
 xs = np.linspace(x[0], x[-1], 100)
@@ -1512,8 +1479,8 @@ print("------------------------------------------------------------")  # 60個
 """ interp2d removed
 #多維插值
 
-#%fig=使用interp2d類別進行二維插值
-def func(x, y): #❶
+# 使用interp2d類別進行二維插值
+def func(x, y):
     return (x+y)*np.exp(-5.0*(x**2 + y**2))
 
 # X-Y軸分為15*15的網格
@@ -1540,7 +1507,7 @@ pl.show()
 """
 print("------------------------------------------------------------")  # 60個
 
-def func(x, y): #❶
+def func(x, y):
     return (x+y)*np.exp(-5.0*(x**2 + y**2))
 
 #griddata
@@ -1549,10 +1516,9 @@ def func(x, y): #❶
 #若果K維空間中每個維度的取值範圍相差較大，則應先將資料正式化，
 #然後使用griddata()進行插值運算。
 
-#%fig=使用gridata進行二維插值
+# 使用gridata進行二維插值
 # 計算隨機N個點的座標，以及這些點對應的函數值
 N = 200
-np.random.seed(42)
 x = np.random.uniform(-1, 1, N)
 y = np.random.uniform(-1, 1, N)
 z = func(x, y)
@@ -1578,7 +1544,7 @@ print("------------------------------------------------------------")  # 60個
 
 #徑向基函數插值
 
-#%fig=一維RBF插值
+# 一維RBF插值
 from scipy.interpolate import Rbf
 
 x1 = np.array([-1, 0, 2.0, 1.0])
@@ -1586,7 +1552,7 @@ y1 = np.array([1.0, 0.3, -0.5, 0.8])
 
 funcs = ['multiquadric', 'gaussian', 'linear']
 nx = np.linspace(-3, 4, 100)
-rbfs = [Rbf(x1, y1, function=fname) for fname in funcs] #❶
+rbfs = [Rbf(x1, y1, function=fname) for fname in funcs]
 rbf_ys = [rbf(nx) for rbf in rbfs] #❷
 
 pl.plot(x1, y1, "o")
@@ -1609,7 +1575,7 @@ gaussian [ 1.78016841 -1.83986382 -1.69565607  2.5266374 ]
 linear [-0.26666667  0.6         0.73333333 -0.9       ]
 """
 
-#%fig=二維徑向基函數插值
+# 二維徑向基函數插值
 rbfs = [Rbf(x, y, z, function=fname) for fname in funcs]
 rbf_zg = [rbf(xg, yg).reshape(xg.shape) for rbf in rbfs]
 
@@ -1623,7 +1589,7 @@ for ax, fname, zg in zip(axes, funcs, rbf_zg):
 
 print("------------------------------------------------------------")  # 60個
 
-#%fig=`epsilon`參數指定徑向基函數中資料點的作用範圍
+# `epsilon`參數指定徑向基函數中資料點的作用範圍
 epsilons = 0.1, 0.15, 0.3
 rbfs = [Rbf(x, y, z, function="gaussian", epsilon=eps) for eps in epsilons]
 zgs = [rbf(xg, yg).reshape(xg.shape) for rbf in rbfs]
@@ -1675,7 +1641,7 @@ print(cc)
 img = pl.imread("maze.png")
 sx, sy = (400, 979)
 ex, ey = (398,  25)
-bimg = np.all(img > 0.81, axis=2) #❶
+bimg = np.all(img > 0.81, axis=2)
 H, W = bimg.shape
 
 x0, x1 = np.where(bimg[H//2, :]==0)[0][[0, -1]] #❷
@@ -1694,7 +1660,7 @@ y, x = np.where(mask)
 idx = y * W + x
 hedge = np.c_[idx, idx + 1]
 
-edges = np.vstack([vedge, hedge]) #❶
+edges = np.vstack([vedge, hedge])
 
 values = np.ones(edges.shape[0])
 w = sparse.coo_matrix((values, (edges[:, 0], edges[:, 1])),  #❷
@@ -1719,7 +1685,7 @@ while True:
     node_id = p[0, node_id]
 path = np.array(path)
 
-#%figonly=用dijkstra計算最短路徑
+# 用dijkstra計算最短路徑
 x, y = path % W, path // W
 img[y, x, :] = 0
 fig, axes = pl.subplots(1, 2, figsize=(16, 12))
@@ -1757,7 +1723,7 @@ def show_image(*imgs):
 
 #膨脹和腐蝕
 
-#%fig=四連通和八連通的膨脹運算
+# 四連通和八連通的膨脹運算
 from scipy.ndimage import morphology
 
 def dilation_demo(a, structure=None):
@@ -1776,7 +1742,7 @@ show_image(img1, img2, img3)
 
 print("------------------------------------------------------------")  # 60個
 
-#%fig=不同結構元素的膨脹效果
+# 不同結構元素的膨脹效果
 img4 = dilation_demo(a, [[0,0,0],[1,1,1],[0,0,0]])
 img5 = dilation_demo(a, [[0,1,0],[0,1,0],[0,1,0]])
 img6 = dilation_demo(a, [[0,1,0],[0,1,0],[0,0,0]])
@@ -1786,7 +1752,7 @@ show_image(img4, img5, img6)
 
 print("------------------------------------------------------------")  # 60個
 
-#%fig=四連通和八連通的腐蝕運算
+# 四連通和八連通的腐蝕運算
 def erosion_demo(a, structure=None):
     b = morphology.binary_erosion(a, structure)
     img = expand_image(a, 255)
@@ -1803,7 +1769,7 @@ print("------------------------------------------------------------")  # 60個
 
 #Hit和Miss
 
-#%fig=Hit和Miss運算
+# Hit和Miss運算
 def hitmiss_demo(a, structure1, structure2):
     b = morphology.binary_hit_or_miss(a, structure1, structure2)
     img = expand_image(a, 100)
@@ -1821,9 +1787,9 @@ show_image(img1, img2, img3)
 print("------------------------------------------------------------")  # 60個
 
 
-#%fig=使用Hit和Miss進行細線化運算
+# 使用Hit和Miss進行細線化運算
 def skeletonize(img):
-    h1 = np.array([[0, 0, 0],[0, 1, 0],[1, 1, 1]]) #❶
+    h1 = np.array([[0, 0, 0],[0, 1, 0],[1, 1, 1]])
     m1 = np.array([[1, 1, 1],[0, 0, 0],[0, 0, 0]]) 
     h2 = np.array([[0, 0, 0],[1, 1, 0],[0, 1, 0]]) 
     m2 = np.array([[0, 1, 1],[0, 0, 1],[0, 0, 0]])    
@@ -1874,8 +1840,7 @@ squares_core = (squares_dt > 8).astype(np.uint8)
 
 from scipy.ndimage.measurements import label, center_of_mass
 
-def random_palette(labels, count, seed=1):
-    np.random.seed(seed)
+def random_palette(labels, count):
     palette = np.random.rand(count+1, 3)
     palette[0,:] = 0
     return palette[labels]
@@ -1887,7 +1852,7 @@ cores = random_palette(labels, count)
 
 index = morphology.distance_transform_cdt(1-squares_core, 
                                           return_distances=False, 
-                                          return_indices=True) #❶
+                                          return_indices=True)
 near_labels = labels[index[0], index[1]] #❷
 
 mask = (squares - squares_core).astype(bool)
@@ -1895,7 +1860,7 @@ labels2 = labels.copy()
 labels2[mask] = near_labels[mask] #❸
 separated = random_palette(labels2, count)
 
-#%figonly=矩形區域分割算法各個步驟的輸出圖形
+# 矩形區域分割算法各個步驟的輸出圖形
 fig, axes = pl.subplots(2, 3, figsize=(7.5, 5.0), )
 fig.delaxes(axes[1, 2])
 axes[0, 0].imshow(squares, cmap="gray");
@@ -1929,7 +1894,6 @@ print(x[idx], x[idx - 1]) #距離0.5最近的數是這兩個數中的一個
 
 #0.542258714465 0.492205345391
 
-np.random.seed(42)
 N = 100
 points = np.random.uniform(-1, 1, (N, 2))
 kd = spatial.cKDTree(points)
@@ -1946,7 +1910,7 @@ print(idx2)
 idx3 = kd.query_pairs(0.1) - kd.query_pairs(0.08)
 print(idx3)
 
-#%figonly=用cKDTree尋找近旁點
+# 用cKDTree尋找近旁點
 x, y = points.T
 colors = "r", "b", "g", "y", "k"
 
@@ -2013,7 +1977,7 @@ def naive_count_at(start, end, time):
     mask = (start < time) & (end > time)
     return np.sum(mask)
 
-#%figonly=使用二維K-d樹搜尋指定區間的線上使用者
+# 使用二維K-d樹搜尋指定區間的線上使用者
 def _():
     N = 100
     start = np.random.uniform(0, 100, N)
@@ -2067,13 +2031,12 @@ print("------------------------------------------------------------")  # 60個
 
 #凸包
 
-np.random.seed(42)
 points2d = np.random.rand(10, 2)
 ch2d = spatial.ConvexHull(points2d)
 print(ch2d.simplices)
 print(ch2d.vertices)
 
-#%fig=二維平面上的凸包
+# 二維平面上的凸包
 poly = pl.Polygon(points2d[ch2d.vertices], fill=None, lw=2, color="r", alpha=0.5)
 ax = pl.subplot(aspect="equal")
 pl.plot(points2d[:, 0], points2d[:, 1], "go")
@@ -2085,7 +2048,6 @@ ax.add_artist(poly);
 
 print("------------------------------------------------------------")  # 60個
 
-np.random.seed(42)
 points3d = np.random.rand(40, 3)
 ch3d = spatial.ConvexHull(points3d)
 cc = ch3d.simplices.shape
@@ -2105,7 +2067,7 @@ bound = np.array([[-100, -100], [-100,  100],
                   [ 100,  100], [ 100, -100]])
 vo2 = spatial.Voronoi(np.vstack((points2d, bound)))
 
-#%figonly=沃羅諾伊圖將空間分割為多個區域
+# 沃羅諾伊圖將空間分割為多個區域
 fig, (ax1, ax2) = pl.subplots(1, 2, figsize=(9, 4.5))
 ax1.set_aspect("equal")
 ax2.set_aspect("equal")
@@ -2137,15 +2099,14 @@ print(vo.regions[6])
 
 print("------------------------------------------------------------")  # 60個
 
-#%fig=使用沃羅諾伊圖計算最大空圓
+# 使用沃羅諾伊圖計算最大空圓
 from collections import defaultdict
 
 n = 50
-np.random.seed(42)
 points2d = np.random.rand(n, 2)
 vo = spatial.Voronoi(points2d)
 ch = spatial.ConvexHull(points2d)
-poly = pl.Polygon(points2d[ch.vertices]) #❶
+poly = pl.Polygon(points2d[ch.vertices])
 vs = vo.vertices
 convexhull_mask = [poly.contains_point(p, radius=0) for p in vs] #❷
 
@@ -2191,7 +2152,7 @@ vo = spatial.Voronoi(points2d)
 print(dy.simplices)
 print(vo.vertices)
 
-#%fig=德勞內三角形的外接圓與圓心
+# 德勞內三角形的外接圓與圓心
 cx, cy = vo.vertices.T
 
 ax = pl.subplot(aspect="equal")
@@ -2209,11 +2170,17 @@ ax.set_ylim(0, 300);
 
 print("------------------------------------------------------------")  # 60個
 
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
+sys.exit()
 
 
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
+
+np.random.seed(42)
+
 

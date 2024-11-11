@@ -80,7 +80,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 # 可以使用SSL module把證書驗證改成不需要驗證即可，方法如下:
 import ssl
 ssl._create_default_https_context = ssl._create_unverified_context
@@ -552,7 +552,7 @@ se5 = pd.Series({"唐三藏": 83, "孫悟空": 93, "豬八戒": 89, "沙悟淨":
 
 # 方法一
 df = pd.concat([se1, se2, se3, se4, se5], axis=0)  # axis=0 : 垂直連接, axis=1 : 水平連接
-df.columns = ["國文", "英文", "數學", "社會", "自然"]
+df.columns = ["國文", "英文", "數學", "社會", "自然"]  # 重新命名欄位
 print(df)
 
 # 方法二
@@ -1164,9 +1164,9 @@ df.iloc[5:, 3] = np.nan
 print(df)
 
 #   檢視 DataFrame
-df_dropped = df.dropna()
+df_dropped = df.dropna()  # dropna()刪除含有NaN的列
 print(df_dropped)
-df_dropped_2 = df[[0, 1, 2]].dropna()
+df_dropped_2 = df[[0, 1, 2]].dropna()  # dropna()刪除含有NaN的列
 print(df_dropped_2)
 
 print("------------------------------------------------------------")  # 60個
@@ -1205,7 +1205,7 @@ df_sample["area"] = df_sample["area"].ffill()  # ffill()拿前一個值往下填
 print(df_sample.head())
 
 print("刪除不完整的資料")
-df3 = df.dropna()
+df3 = df.dropna()  # dropna()刪除含有NaN的列
 print(df3)
 
 print("------------------------------")  # 30個
@@ -3031,7 +3031,7 @@ print(df)
 df = df.rename({"col one": "col_one", "col two": "col_two"}, axis="columns")
 print(df)
 
-cc = df.columns = ["col_one", "col_two"]
+cc = df.columns = ["col_one", "col_two"]  # 重新命名欄位
 print(cc)
 
 # replace
@@ -4254,7 +4254,7 @@ df = pd.DataFrame(datas)
 print(df)
 
 index = ["唐三藏", "孫悟空", "牛魔王", "沙悟淨"]
-df.columns = ["國文", "英文", "數學"]
+df.columns = ["國文", "英文", "數學"]  # 重新命名欄位
 index[2] = "豬八戒"  # 修改 索引
 df.index = index
 print(df)
@@ -4364,7 +4364,7 @@ print("------------------------------------------------------------")  # 60個
 url = "https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data"
 url = "iris.data"
 df = pd.read_csv(url, header=None)
-df.columns = ["sepal length", "sepal width", "petal length", "petal width", "class"]
+df.columns = ["sepal length", "sepal width", "petal length", "petal width", "class"]  # 重新命名欄位
 print(df)
 """
 print("------------------------------------------------------------")  # 60個
@@ -4431,7 +4431,7 @@ print("df 原始資料")
 print(df)
 
 # 刪除所有 NaN 的記錄
-df1 = df.dropna()
+df1 = df.dropna()  # dropna()刪除含有NaN的列
 print("df1 有任何NaN的列 刪除")
 print(df1)
 
@@ -5946,7 +5946,7 @@ print(percent_missing)
 
 #刪除缺失值
 # 刪除所有含有缺失值的觀測值（列）
-data.dropna()
+data.dropna()  # dropna()刪除含有NaN的列
 
 # 刪除所有含有缺失值的觀測值（欄）
 data.dropna(axis=1)
@@ -6837,7 +6837,7 @@ data = pd.Series([1, np.nan, 3.5, np.nan, 7])
 data
 
 # 用 dropna()捨棄 np.nan，index 並不會重新設定
-data.dropna()
+data.dropna()  # dropna()刪除含有NaN的列
 
 # 也可透過 boolean型索引過濾
 data[data.notnull()]
@@ -6847,7 +6847,7 @@ df = pd.DataFrame([[1., 6.5, 3.], [1., np.nan, np.nan], [np.nan, np.nan, np.nan]
 df
 
 # dropna()預設捨棄任何有np.nan的row
-df.dropna()
+df.dropna()  # dropna()刪除含有NaN的列
 
 # 若傳入 how='all'，則只捨棄 所有數值皆為np.nan的那個row
 df.dropna(how='all')
@@ -7822,7 +7822,7 @@ close_px = pd.read_csv('../data/stock_px.csv',
 close_px[:6]
 
 # 計算 日收益率 與 SPX之間的年度相關係數組成的DataFrame
-rets = close_px.pct_change().dropna()
+rets = close_px.pct_change().dropna()  # dropna()刪除含有NaN的列
 rets[:6]
 
 # 與 SPX之間的相關係數
@@ -8060,7 +8060,7 @@ filename = "data/missing_data.csv"
 df = pd.read_csv(filename)
 print(df)
 
-df1 = df.dropna()
+df1 = df.dropna()  # dropna()刪除含有NaN的列
 print("清除NA\n", df1)
 
 df2 = df.dropna(how="any")
@@ -8276,7 +8276,7 @@ print("------------------------------------------------------------")  # 60個
 df = pd.read_csv("data/dists.csv", encoding="utf8")
 print(df)
 
-df.columns = ["區", "人口", "直轄市"]
+df.columns = ["區", "人口", "直轄市"]  # 重新命名欄位
 print(df)
 print(df.index)
 print(df.columns)
@@ -8731,10 +8731,7 @@ pd.set_option('display.max_columns', 8)
 
 df = pd.DataFrame(np.random.rand(80, 4))
 print(df)
-    
-
 """
-'''
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -8867,3 +8864,49 @@ dates = pd.date_range("20130101", periods=6)
 
 
 """
+
+
+
+
+"""
+df = pd.read_csv("data/200811-201811.csv")
+
+N = 5
+print('df.nlargest() 找出df的某欄位中最大的資料, ', N, '筆')
+cc = df.nlargest(N, "PM25")
+print(cc)
+
+print('df.nsmallest() 找出df的某欄位中最小的資料, ', N, '筆')
+cc = df.nsmallest(N, "PM25")
+print(cc)
+
+print('刪除SO2和CO這兩個欄位')
+df = df.drop(labels=["SO2", "CO"], axis="columns")
+
+print('依欄位 PM25 排序')
+dfSort = df.sort_values(by="PM25", ascending=False)
+cc = dfSort.head(20)
+print(cc)
+
+print('取得兩欄位數據')
+cc = df[["WindSpeed", "TEMP"]]  # 顯示Columns(列)為AQI及WindSpeed的數據
+print(cc)
+
+print('取得df中 欄位O3的資料 < 15 的資料')
+cc = df[df.O3 < 15]
+print(cc)
+
+print('取得df中 欄位PM25 < 30 且 欄位TEMP > 30 的資料')
+cc = df[(df.PM25 < 30) & (df.TEMP > 30)]
+print(cc)
+"""
+
+
+arr = ["2024-11-01", "2024-11-02", "2024-11-03"]
+amount = [123, 456, 789]
+df = pd.DataFrame()
+df["date"] = pd.to_datetime(arr)
+df["amount"] = amount
+print(df)
+
+

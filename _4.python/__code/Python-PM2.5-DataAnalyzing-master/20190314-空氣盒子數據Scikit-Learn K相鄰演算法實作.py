@@ -29,16 +29,6 @@ df = pd.read_csv("data/200811-201811c.csv")  # 共有 1447 筆資料
 cc = df.head(10)
 print(cc)
 
-#資料長度
-print(len(df))
-print(len(df["PM25"]))
-
-cc = df.info()
-print(cc)
-
-cc = df.describe()
-print(cc)
-
 # Danger分類點說明
 # 對敏感族群不健康為PM2.5數值在35.5以上
 # 載入標準化比例尺（StandardScaler）套件
@@ -60,7 +50,7 @@ from sklearn.model_selection import train_test_split
 X = df_feat
 y = df["Danger"]
 X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.30, random_state=101
+    X, y, test_size=0.30, random_state=9487
 )
 
 # 使用KNN演算法
