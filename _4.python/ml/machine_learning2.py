@@ -29,7 +29,7 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 print("------------------------------------------------------------")  # 60個
 
 import sklearn.linear_model
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 """ 還沒好
@@ -61,24 +61,48 @@ print('------------------------------------------------------------')	#60個
 from sklearn.metrics.pairwise import euclidean_distances
 
 rating_matrix = np.array(
-    [[4, 3, 0, 0, 5, 0],
-     [5, 0, 4, 0, 4, 0],
-     [4, 0, 5, 3, 4, 0],
-     [0, 3, 0, 0, 0, 5],
-     [0, 4, 0, 0, 0, 4],
-     [0, 0, 2, 4, 0, 5]
+    [[4, 3, 0, 0, 5, 0],  # r1
+     [5, 0, 4, 0, 4, 0],  # r2
+     [4, 0, 5, 3, 4, 0],  # r3
+     [0, 3, 0, 0, 0, 5],  # r4
      ]
 )
+
+"""
+歐幾里得距離 (Euclidean distance)
+    0, r1*r2, r1*r3, r1*r4
+-----,     0, r2*r3, r2*r4
+-----, -----,     0, r3*r4
+-----, -----, -----,     0
+"""
 
 print('歐幾里得距離 (Euclidean distance)')
 
 dist = euclidean_distances(rating_matrix)
 print(dist)
 
+sys.exit()
+
 from sklearn.metrics.pairwise import cosine_similarity
 
 sim = cosine_similarity(rating_matrix)
 print(sim)
+
+sys.exit()
+
+
+X = [[0, 1], [1, 1]]
+# distance between rows of X
+cc = euclidean_distances(X, X)
+print(cc)
+
+# get distance to origin
+cc = euclidean_distances(X, [[0, 0]])
+print(cc)
+
+
+
+sys.exit()
 
 print('------------------------------------------------------------')	#60個
 
@@ -752,8 +776,6 @@ P_i500 * p_x_given_y_1("i500", person["Gender"][0]) * p_x_given_y_2(
 """
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-'''
 
 ''' 一個很大的範例
 """
@@ -1523,7 +1545,7 @@ print(error(Y, Ypred))
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-'''
+
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1564,7 +1586,7 @@ train_pred_y = model.predict(train_poly_X)  # 預測.predict
 test_pred_y = model.predict(test_poly_X)  # 預測.predict
 print(mean_squared_error(train_pred_y, train_y))
 print(mean_squared_error(test_pred_y, test_y))
-'''
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 

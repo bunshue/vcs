@@ -53,6 +53,13 @@ plt.show()
 
 print("------------------------------")  # 30個
 
+# 使用 df.corr() 先做出各變數間的關係係數，再用heatmap作圖
+sns.heatmap(df.corr())
+plt.title("關係係數")
+plt.show()
+
+print("------------------------------")  # 30個
+
 X = df["PM25"].values.reshape(-1, 1) # 轉成 1447 X 1
 y = df["CO"].values.reshape(-1, 1)  # 轉成 1447 X 1
 
@@ -149,6 +156,10 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
+# 訓練線性模型
+
+# X是想探索的自變數，Y是依變數。
+
 X = df[
     [
         "SO2",
@@ -164,7 +175,9 @@ X = df[
         "TEMP",
         "Humidity",
     ]
-].values
+]
+
+y = df["PM25"]
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=9487)
 # 訓練組8成, 測試組2成
@@ -188,14 +201,37 @@ coeff_df = pd.DataFrame(linear_regression.coef_,X.columns,columns=['Coefficient'
 print(coeff_df)
 """
 
-y_pred = linear_regression.predict(X_test)
+# 取得截距。如果公式是y=ax+b，b即是截距
+print("截距b:", linear_regression.intercept_)
+# 截距b: 4.194703731759336
+
+# 取得迴歸係數，並用Data Frame顯示
+print("迴歸係數 :", linear_regression.coef_)
+
+# 列出訓練的變數
+print(X_train.columns)
+
+# 預測, 使用測試組資料來預測結果
+y_pred = linear_regression.predict(X_test)  # 預測.predict
 
 df = pd.DataFrame({"測試資料": y_test, "預測結果": y_pred})
+#print(df)
 
-df1 = df.head(25)
-print(df1)
+print("畫出前 N 筆, 比較實際PM2.5及預測PM2.5的關係")
+N = 20
+df1 = df.head(N)
+
+plt.figure(figsize=(10, 5))
+
+plt.scatter(y_test, y_pred)
+
+plt.show()
 
 df1.plot(kind="bar", figsize=(10, 8))
+plt.show()
+
+# 看實際值及預測值之間的殘差分佈圖
+sns.distplot((y_test - y_pred))
 
 plt.show()
 
