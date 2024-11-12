@@ -24,7 +24,15 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
-df = pd.read_csv("data/200811-201811.csv")  # 共有 687 筆資料
+from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
+from sklearn.ensemble import RandomForestRegressor
+
+print("------------------------------------------------------------")  # 60個
+
+df = pd.read_csv("data/200811-201811.csv")  # 共有 687 筆資料, 13欄位
+cc = df.head(10)
+print(cc)
+
 """
 cc = df.head(10)
 print(cc)
@@ -40,34 +48,43 @@ cc = df.describe()
 print(cc)
 """
 
-# One-Hot Encoding
+# One-Hot Encoding, 看不出差別
 # One-hot encode the data using pandas get_dummies
 df = pd.get_dummies(df)
+cc = df.head(10)
+print(cc)
 
-# Display the first 5 rows of the last 12 columns
-df.iloc[:, 5:].head(5)
+# 從第5欄開始到最後欄
+cc = df.iloc[:, 5:].head(10)
+print(cc)
 
 # 特徵轉換
 
 # Labels are the values we want to predict
 labels = np.array(df["PM25"])
+# labels 要預測的項目
 
+
+print(df.shape)
+
+# 把這欄砍掉
 # axis 1 refers to the columns
 df = df.drop("PM25", axis=1)
+print(df.shape)
 
 # Saving feature names for later use
 feature_list = list(df.columns)
+print(feature_list)
 
 # Convert to numpy array
+print('df 轉 np.array')
 df = np.array(df)
 
-# 將資料分成訓練組及測試組
-from sklearn.model_selection import train_test_split
-
-# Split the data into training and testing sets
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+# x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2)
 train_features, test_features, train_labels, test_labels = train_test_split(
-    df, labels, test_size=0.25, random_state=42
-)  # 訓練組7.5成, 測試組2.5成
+    df, labels, test_size=0.2)
+# 訓練組8成, 測試組2成
 
 """
 print(X.shape)
@@ -82,21 +99,16 @@ print("Training Labels Shape:", train_labels.shape)
 print("Testing Features Shape:", test_features.shape)
 print("Testing Labels Shape:", test_labels.shape)
 
-# 載入隨機森林演算法，並訓練模型
-from sklearn.ensemble import RandomForestRegressor
-
-# Instantiate model with 1000 decision trees
+# 隨機森林演算法, 用 sklearn 裡的 RandomForestRegressor 來做隨機森林演算法
+# 使用 1000棵 決策樹
 random_forest_regressor = RandomForestRegressor(n_estimators=1000, random_state=42)
 
-# Train the model on training data
-random_forest_regressor.fit(train_features, train_labels)
+random_forest_regressor.fit(train_features, train_labels)  # 學習訓練.fit
 
-# 進行預測
+# 預測
+predictions = random_forest_regressor.predict(test_features)  # 預測.predict
 
-# Use the forest's predict method on the test data
-predictions = random_forest_regressor.predict(test_features)
-
-# Calculate the absolute errors
+# 計算誤差
 errors = abs(predictions - test_labels)
 
 # Print out the mean absolute error (mae)
@@ -180,6 +192,8 @@ plt.show()
 # 計算MAE
 
 # New random forest with only the two most important variables
+# 隨機森林演算法, 用 sklearn 裡的 RandomForestRegressor 來做隨機森林演算法
+# 使用 1000棵 決策樹
 rf_most_important = RandomForestRegressor(n_estimators=1000, random_state=42)
 
 # Extract the two most important features
@@ -187,12 +201,12 @@ important_indices = [feature_list.index("NO2"), feature_list.index("TEMP")]
 train_important = train_features[:, important_indices]
 test_important = test_features[:, important_indices]
 
-# Train the random forest
-rf_most_important.fit(train_important, train_labels)
+rf_most_important.fit(train_important, train_labels)  # 學習訓練.fit
 
-# Make predictions and determine the error
-predictions = rf_most_important.predict(test_important)
+# 預測
+predictions = rf_most_important.predict(test_important)  # 預測.predict
 
+# 計算誤差
 errors = abs(predictions - test_labels)
 
 # Display the performance metrics
@@ -204,8 +218,11 @@ print("Mean Absolute Error:", round(np.mean(errors), 2), "degrees.")
 from sklearn.tree import export_graphviz
 
 # Limit depth of tree to 3 levels
+# 隨機森林演算法, 用 sklearn 裡的 RandomForestRegressor 來做隨機森林演算法
+# 使用 10棵 決策樹, 最多3層
 rf_small = RandomForestRegressor(n_estimators=10, max_depth=3)
-rf_small.fit(train_features, train_labels)
+
+rf_small.fit(train_features, train_labels)  # 學習訓練.fit
 
 # Extract the small tree
 tree_small = rf_small.estimators_[5]

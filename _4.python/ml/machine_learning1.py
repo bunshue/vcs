@@ -3,6 +3,8 @@
 
 預設方法建立資料集
 
+一些簡易的運算
+
 """
 
 print("------------------------------------------------------------")  # 60個
@@ -49,7 +51,7 @@ print(dir(datasets))
 print(sklearn)
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 print("分類資料集")
 
 X, y = make_classification(
@@ -58,7 +60,7 @@ X, y = make_classification(
     n_features=20,
     n_informative=15,
     n_redundant=5,
-    random_state=5,
+    random_state=9487,
 )
 print(X.shape)
 
@@ -117,7 +119,7 @@ print("------------------------------------------------------------")  # 60個
 print("迴歸資料集")
 
 X, y, coef = make_regression(
-    n_samples=100, n_features=1, noise=20, coef=True, random_state=123
+    n_samples=100, n_features=1, noise=20, coef=True, random_state=9487
 )
 print(X.shape)
 
@@ -199,7 +201,7 @@ random_state：随机状态若为固定值则每次产生的数据都一样
 from sklearn.datasets import make_regression
 
 X, Y = make_regression(
-    n_samples=10, n_features=1, n_targets=1, noise=1.5, random_state=1
+    n_samples=10, n_features=1, n_targets=1, noise=1.5, random_state=9487
 )
 
 
@@ -343,16 +345,146 @@ print(linear_regression.coef_)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+'''
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
+
+
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
+
+print("迴歸效果評估")
+
+print("MSE均方誤差")
+
+from sklearn.metrics import mean_squared_error
+
+y_true = [1, 1.25, 2.37]
+y_pred = [1, 1, 2]
+print(mean_squared_error(y_true, y_pred))
+
+print("MAE平均絕對誤差")
+from sklearn.metrics import mean_absolute_error
+
+y_true = [1, 1.25, 2.37]
+y_pred = [1, 1, 2]
+print(mean_absolute_error(y_true, y_pred))
+
+print("R-Squared擬合度")
+from sklearn.metrics import r2_score
+
+y_true = [1, 1.25, 2.37]
+y_pred = [1, 1, 2]
+print(r2_score(y_true, y_pred))
+
+print("------------------------------------------------------------")  # 60個
+
+print("分類效果評估")
+print("FP/FN/TP/TN")
+
+y_pred = [0, 0, 0, 1, 1, 1, 0, 1, 0, 0]  # 預測值
+y_real = [0, 1, 1, 1, 1, 1, 0, 0, 0, 0]  # 實際值
+
+from sklearn.metrics import confusion_matrix
+
+cm = confusion_matrix(y_real, y_pred)
+tn, fp, fn, tp = cm.ravel()
+print("tn", tn, "fp", fp, "fn", fn, "tp", tp)
+
+print("準確率")
+from sklearn.metrics import accuracy_score
+
+print(accuracy_score(y_real, y_pred))
+
+print("召回率")
+from sklearn.metrics import recall_score
+
+print(recall_score(y_real, y_pred))
+
+print("精度")
+from sklearn.metrics import precision_score
+
+print(precision_score(y_real, y_pred))
+
+print("F值")
+
+from sklearn.metrics import f1_score
+from sklearn.metrics import fbeta_score
+
+print(f1_score(y_real, y_pred))  # 計算f1
+print(fbeta_score(y_real, y_pred, beta=2))  # 計算fn
+
+print("Logloss")
+from sklearn.metrics import log_loss
+
+y_real = [0, 1, 1, 1, 1, 1, 0, 0, 0, 0]
+y_score = [0.9, 0.75, 0.86, 0.47, 0.55, 0.56, 0.74, 0.22, 0.5, 0.26]
+print(log_loss(y_real, y_score))
+
+print("ROC曲線和AUC")
+from sklearn.metrics import roc_auc_score, roc_curve
+
+print(roc_auc_score(y_real, y_score))  # AUC值
+
+fpr, tpr, thresholds = roc_curve(y_real, y_score)
+plt.plot(fpr, tpr)  # 繪圖
+
+# plt.show()
+
+# P-R曲線
+from sklearn.metrics import precision_recall_curve
+
+precision, recall, _ = precision_recall_curve(y_real, y_score)
+plt.plot(recall, precision)
+
+# plt.show()
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("多指標評分")
+
+from sklearn.metrics import classification_report
+
+y_real = [0, 1, 1, 1, 1, 1, 0, 0, 0, 0]
+y_score = [0.9, 0.75, 0.86, 0.47, 0.55, 0.56, 0.74, 0.22, 0.5, 0.26]
+y_pred = [round(i) for i in y_score]
+print(classification_report(y_real, y_pred))
+
+print("------------------------------------------------------------")  # 60個
+
+print("聚類算法")
+
+from sklearn.datasets import make_blobs  # 數據支持
+from sklearn.cluster import KMeans  # 聚類方法
+
+X, y = make_blobs(n_samples=100, random_state=9487)
+y_pred = KMeans(n_clusters=3, random_state=9487).fit_predict(X)  # 訓練
+plt.scatter(X[:, 0], X[:, 1], c=y_pred)
+
+# plt.show()
+
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個

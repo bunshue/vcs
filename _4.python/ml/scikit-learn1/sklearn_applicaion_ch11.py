@@ -23,16 +23,17 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
+
+from sklearn import datasets
+from sklearn.model_selection import train_test_split
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 11_01_self_training
 
 # 自我訓練(Self-training)測試
 
-import numpy as np
-import matplotlib.pyplot as plt
-from sklearn import datasets
-from sklearn.model_selection import train_test_split
 from sklearn.svm import SVC
 from sklearn.semi_supervised import SelfTrainingClassifier
 
@@ -101,6 +102,10 @@ print(cc)
 
 # 0.7666666666666667
 
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 # 完整資料進行模型評估
 
 rng = np.random.RandomState(42)
@@ -136,9 +141,7 @@ print("------------------------------------------------------------")  # 60個
 # 標註傳播(Label propagation)測試
 
 import numpy as np
-from sklearn import datasets
 from sklearn.datasets import make_classification
-from sklearn.model_selection import train_test_split
 from sklearn.semi_supervised import LabelPropagation
 
 # 載入資料集
@@ -209,9 +212,7 @@ print("------------------------------------------------------------")  # 60個
 # LabelSpreading 測試
 
 import numpy as np
-from sklearn import datasets
 from sklearn.datasets import make_classification
-from sklearn.model_selection import train_test_split
 from sklearn.semi_supervised import LabelSpreading
 
 # 載入資料集
@@ -280,10 +281,7 @@ print("------------------------------------------------------------")  # 60個
 
 # Label Propagation digits active learning
 
-import numpy as np
-import matplotlib.pyplot as plt
 from scipy import stats
-from sklearn import datasets
 from sklearn.semi_supervised import LabelSpreading
 from sklearn.metrics import classification_report, confusion_matrix
 
@@ -383,12 +381,9 @@ print("------------------------------------------------------------")  # 60個
 # How to calculate shapley values from scratch
 
 import random
-import numpy as np
-from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LogisticRegression
 from sklearn.pipeline import make_pipeline
-from sklearn import datasets
 
 # 載入資料
 
@@ -472,8 +467,6 @@ print(f"Shaply value calulated from shap: {shap_values[1][j]:.5}")
 # 範例2. 自行計算 Shapley value
 # 載入套件
 
-import pandas as pd
-import matplotlib.pyplot as plt
 from sklearn.tree import DecisionTreeRegressor, plot_tree
 
 # 載入資料
@@ -614,8 +607,6 @@ print("------------------------------------------------------------")  # 60個
 # SHAP套件測試
 # An introduction to explainable AI with Shapley values
 
-import numpy as np
-import pandas as pd
 import shap
 from sklearn.linear_model import LinearRegression
 from sklearn.preprocessing import StandardScaler
@@ -735,7 +726,6 @@ shap.plots.force(shap_values_ebm[sample_ind])
 Visualization omitted, Javascript library not loaded!
 Have you run `initjs()` in this notebook? If this notebook was from another user you must also trust this notebook (File -> Trust notebook). If you are viewing this notebook on github the Javascript has been stripped for security. If you are using JupyterLab this error is because a JupyterLab extension has not yet been written.
 """
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -743,14 +733,8 @@ print("------------------------------------------------------------")  # 60個
 
 # MLflow 測試
 
-from sklearn import datasets
-import os
 import warnings
-import sys
-import pandas as pd
-import numpy as np
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
-from sklearn.model_selection import train_test_split
 from sklearn.linear_model import ElasticNet
 import mlflow
 import mlflow.sklearn
@@ -800,6 +784,9 @@ print(cc)
 #平均分數: 0.9303030303030303, 標準差: 0.08393720596645175
 """
 
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 # 使用迴歸模型
 
 from sklearn.linear_model import RidgeCV
@@ -837,6 +824,20 @@ scores = cross_val_score(svc, X_test_std, y_test, cv=10)
 print(f"平均分數: {np.mean(scores)}, 標準差: {np.std(scores)}")
 
 # 平均分數: -1.0399780386178537, 標準差: 0.36412901584183494
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")

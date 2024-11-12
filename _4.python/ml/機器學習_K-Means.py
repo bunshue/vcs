@@ -1,6 +1,8 @@
 """
 機器學習 K-Means
 
+K-平均演算法（英文：k-means clustering）
+
 K-Means 自動分類
 
 # K-Means 會自動分類!
@@ -41,70 +43,64 @@ from sklearn.cluster import KMeans
 
 print("------------------------------------------------------------")  # 60個
 
-# 隨機生成 200 個點，然後用 k-means 將他們分成 5 群：
+# 隨機生成 N 個點，然後用 k-means 將他們分成 5 群
+N = 50
+x = np.random.rand(N, 2)  # N X 2 亂數陣列
 
-x = np.random.rand(200, 2)  # 將200個值隨機分佈在2維上
+clf = KMeans(n_clusters=5)  # K-平均演算法, 分成5群
 
-clf = KMeans(n_clusters=5)  # 分成5類
 clf.fit(x)  # 學習訓練.fit
 
+# 訓練好的結果, 放在神秘的 labels_ 之下
+cc = clf.labels_
+print("訓練好的結果 :\n", cc)
+
 # 將點逐一染色
-for i in range(0, 100):
-    if clf.labels_[i] == 0:
+for i in range(0, N):
+    if cc[i] == 0:
         plt.scatter(x[i][0], x[i][1], color="red")
-    elif clf.labels_[i] == 1:
+    elif cc[i] == 1:
         plt.scatter(x[i][0], x[i][1], color="blue")
-    elif clf.labels_[i] == 2:
+    elif cc[i] == 2:
         plt.scatter(x[i][0], x[i][1], color="green")
-    elif clf.labels_[i] == 3:
+    elif cc[i] == 3:
         plt.scatter(x[i][0], x[i][1], color="pink")
-    elif clf.labels_[i] == 4:
+    elif cc[i] == 4:
         plt.scatter(x[i][0], x[i][1], color="orange")
 
-plt.autoscale()
 plt.grid()
 
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-plt.figure(num="K-Means", figsize=(12, 8))
+plt.figure(num="K-平均演算法", figsize=(12, 6))
 
-# 生成任意 N 點
+# 隨機生成 N 個點，然後用 k-means 將他們分成 5 群
 N = 100
 x = np.random.rand(N, 2)  # N X 2 亂數陣列
 
-print(x.shape)
-print(x)
 plt.subplot(131)
-# plt.scatter(x[:, 0], x[:, 1], s = 50)
-plt.scatter(x[:, 0], x[:, 1], cmap="Paired")
+plt.scatter(x[:, 0], x[:, 1], s = 50)
 plt.title("原始資料")
 
-# 記得要告訴 K-Means 要分成幾類 (我們這裡是 3 類)
-clf = KMeans(n_clusters=3)  # 分成3群
+clf = KMeans(n_clusters=3)  # K-平均演算法, 分成3群
 
 clf.fit(x)  # 學習訓練.fit
 
-# 訓練好的結果, 在神秘的 labels_ 之下。
-Z = clf.labels_
-print("訓練好的結果1 :")
-print(Z)
+# 訓練好的結果, 放在神秘的 labels_ 之下
+cc = clf.labels_
+print("訓練好的結果 :\n", cc)
 
-# 當然我們還是有 predict, 所以也可以用 predict 預測,
-# 但這電腦自己分的, 答案自然 100% 相同!
-print(clf.predict(x))  # 預測.predict
+print("預測.predict, 這電腦自己分的, 答案自然 100% 相同")
+y_pred = clf.predict(x)  # 預測.predict
+print(y_pred)
 
-y_prd = clf.predict(x)  # 預測.predict
-
-# 我們可以檢查一下, 確認答案是不是真的一樣!
-print(np.array_equal(clf.labels_, clf.predict(x)))  # 預測.predict
+# clf.labels_ 與 clf.predict(x) 必相同
 
 plt.subplot(132)
-plt.scatter(x[:, 0], x[:, 1], s=50, c=Z)
-plt.title("訓練好的結果1")
-
-# 預測函數 predict
+plt.scatter(x[:, 0], x[:, 1], s=50, c=cc)
+plt.title("訓練好的結果")
 
 x0 = y0 = np.arange(-0.2, 1.2, 0.02)
 xm, ym = np.meshgrid(x0, y0)
@@ -114,9 +110,8 @@ z = clf.predict(P)  # 預測.predict
 Z = z.reshape(xm.shape)
 plt.subplot(133)
 plt.contourf(xm, ym, Z, alpha=0.3)
-# plt.scatter(x[:, 0], x[:, 1], c = clf.labels_)
-plt.scatter(x[:, 0], x[:, 1], s=50, c=clf.labels_, cmap="Paired")
-plt.title("訓練好的結果2")
+plt.scatter(x[:, 0], x[:, 1], s=50, c=cc, cmap="Paired")
+plt.title("訓練好的結果")
 
 plt.show()
 
@@ -124,16 +119,21 @@ print("------------------------------------------------------------")  # 60個
 
 plt.figure(num="Means Shift", figsize=(12, 8))
 
-# Mean Shift
-# Mean Shift 也會自動分類
+# Mean Shift 自動分類
 # 有時我們甚至不想告訴電腦, 你自動分類應該分成幾類。這時 Mean Shift 可以幫我們。
+
+# 隨機生成 N 個點，然後用 Mean Shift 將他們分成 ? 群
+N = 100
+x = np.random.rand(N, 2)  # N X 2 亂數陣列
 
 from sklearn.cluster import MeanShift
 
 # 打開 MeanShift 函數學習機, 這裡的 bandwidth 是控制分類要寬鬆一點, 還是嚴一點
+
 clf = MeanShift(bandwidth=0.2)
 
 clf.fit(x)  # 學習訓練.fit
+cc = clf.labels_  # 訓練好的結果
 
 x0 = y0 = np.arange(-0.2, 1.2, 0.02)
 xm, ym = np.meshgrid(x0, y0)
@@ -143,19 +143,31 @@ z = clf.predict(P)  # 預測.predict
 Z = z.reshape(xm.shape)
 
 plt.subplot(231)
-plt.scatter(x[:, 0], x[:, 1], c=clf.labels_, cmap="Paired")
+plt.scatter(x[:, 0], x[:, 1], s=50, c=cc, cmap="Paired")
 plt.contourf(xm, ym, Z, alpha=0.3, cmap="Paired")
-plt.title("使用Mean Shift")
+plt.title("標準 Mean Shift分類")
 
-plt.show()
+print("------------------------------")	#30個
 
-print("------------------------------------------------------------")  # 60個
+# 畫完整分類
+
+gd = np.array([[i, j] for i in np.arange(-4, 4, 0.4) for j in np.arange(-3, 3, 0.4)])
+gdc = clf.predict(gd)  # 預測.predict
+
+plt.subplot(232)
+plt.scatter(gd[:, 0], gd[:, 1], s=50, cmap=plt.cm.coolwarm, c=gdc)
+#plt.scatter(gd[:, 0], gd[:, 1], s=50, cmap=plt.cm.prism, c=gdc)  # cmap
+#plt.scatter(gd[:, 0], gd[:, 1], s=50, cmap=plt.cm.Set1, c=gdc)  # cmap
+plt.title("訓練好的結果")
+
+print("------------------------------")	#30個
 
 
-# 觀察 bandwidth 對分類的影響。
-def my_mean_shift(b=0.2):
-    clf = MeanShift(bandwidth=b)
+# 觀察 bandwidth 對分類的影響
+def my_mean_shift(bw=0.2):
+    clf = MeanShift(bandwidth=bw)
     clf.fit(x)  # 學習訓練.fit
+    cc = clf.labels_  # 訓練好的結果
 
     x0 = y0 = np.arange(-0.2, 1.2, 0.02)
     xm, ym = np.meshgrid(x0, y0)
@@ -164,41 +176,22 @@ def my_mean_shift(b=0.2):
     z = clf.predict(P)  # 預測.predict
     Z = z.reshape(xm.shape)
 
-    plt.scatter(x[:, 0], x[:, 1], c=clf.labels_, cmap="Paired")
+    plt.scatter(x[:, 0], x[:, 1], c=cc, cmap="Paired")
     plt.contourf(xm, ym, Z, alpha=0.3, cmap="Paired")
+    plt.title("Mean Shift, bw =" + str(bw))
 
-
-plt.subplot(232)
-my_mean_shift(0.2)  # (0.1, 0.3, 0.02)
-
-# 畫完整分類
-# 和以前一樣, 未來新的資料進來, 我們訓練好的也可以再做分類。
-
-gd = np.array([[i, j] for i in np.arange(-4, 4, 0.4) for j in np.arange(-3, 3, 0.4)])
-gdc = clf.predict(gd)  # 預測.predict
 
 plt.subplot(233)
-plt.scatter(gd[:, 0], gd[:, 1], s=50, cmap=plt.cm.coolwarm, c=gdc)
-plt.title("訓練好的結果2")
+my_mean_shift(0.1)
 
 plt.subplot(234)
-plt.scatter(gd[:, 0], gd[:, 1], s=50, cmap=plt.cm.prism, c=gdc)
-plt.title("訓練好的結果3")
+my_mean_shift(0.3)
 
 plt.subplot(235)
-plt.scatter(gd[:, 0], gd[:, 1], s=50, cmap=plt.cm.Set1, c=gdc)
-plt.title("訓練好的結果4")
+my_mean_shift(0.4)
 
-# 畫完整分類
-# 和以前一樣, 未來新的資料進來, 我們訓練好的也可以再做分類。
-
-x1, x2 = np.meshgrid(np.arange(-0.2, 1.2, 0.02), np.arange(-0.2, 1.2, 0.02))
-Z = clf.predict(np.c_[x1.ravel(), x2.ravel()])  # 預測.predict
-z = Z.reshape(x1.shape)
 plt.subplot(236)
-plt.contourf(x1, x2, z, alpha=0.3)
-plt.scatter(x[:, 0], x[:, 1], s=100, c=clf.labels_)
-plt.title("畫完整分類")
+my_mean_shift(0.05)
 
 plt.show()
 
@@ -220,54 +213,6 @@ clf2 = pickle.load(f)
 print(clf2.predict([[3, 4]]))  # 預測.predict
 
 f.close()
-
-print("------------------------------------------------------------")  # 60個
-
-"""
-4. K-Means 是神奇的自動分類機
-
-我們來學一個「非監督式」的學習, 也就是我們沒有「標準答案」, 但要讓機器做出來。
-比如說我們有一堆資料, 不知怎麼分類, 現在我們想叫電腦去分, 只告訴他要分幾類...
-然後 1, 2, 3! 就神奇的分好了!
-"""
-
-# 生成任意 N 點
-N = 100
-x = np.random.randn(N, 2)  # N X 2 常態亂數陣列
-
-# 看一下我們的資料。
-plt.scatter(x[:, 0], x[:, 1], s=50)
-plt.title("原始資料")
-plt.show()
-
-# 到現在我們有點熟了, 就是要把 KMeans 函數學習機找來。
-
-# 然後打開一台「KMeans 函數學習機」。這次我們第一次設參數!
-# 那是因為我們至少要讓 KMeans 學習機知道要分幾類。
-
-clf = KMeans(n_clusters=3)  # 分成3群
-
-# 接著一樣是訓練。注意現在我們沒有標準答案, 所以只有 x 的資料。
-
-clf.fit(x)  # 學習訓練.fit
-
-# 分類好的結果 KMeans 會神秘的放在 clf.labels_
-print(clf.labels_)
-
-# 畫出分類結果
-plt.scatter(x[:, 0], x[:, 1], c=clf.labels_)
-plt.title("分類結果")
-
-plt.show()
-
-# 看來還不錯! 我們仿之前 SVC 中介紹的畫法, 看 KMeans 到底怎麼分的。
-x1, y1 = np.meshgrid(np.arange(-3, 3, 0.02), np.arange(-4, 4, 0.02))
-Z = clf.predict(np.c_[x1.ravel(), y1.ravel()])  # 預測.predict
-Z = Z.reshape(x1.shape)
-plt.scatter(x[:, 0], x[:, 1], s=70, c=clf.labels_)
-plt.contourf(x1, y1, Z, alpha=0.3)
-
-plt.show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -341,10 +286,14 @@ def do_k_means():
 
     print("Done")
 
+    plt.subplot(121)
+
     plt.scatter(x, y)
     plt.scatter(new_muX, new_muY)
-    plt.show()
+    #plt.show()
 
+
+    plt.subplot(122)
     colors = ["r", "b", "g"]
     for key, values in cls_.items():
         cx = []
@@ -357,7 +306,7 @@ def do_k_means():
     plt.show()
 
 
-print("K-Means")
+print("自己做 K-Means")
 do_k_means()
 
 print("------------------------------------------------------------")  # 60個
@@ -379,6 +328,15 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
-
+sys.exit()
 
 print("------------------------------------------------------------")  # 60個
+"""
+#plt.autoscale()
+
+# 我們可以檢查一下, 確認答案是不是真的一樣!
+print(np.array_equal(clf.labels_, clf.predict(x)))  # 預測.predict
+
+
+
+"""

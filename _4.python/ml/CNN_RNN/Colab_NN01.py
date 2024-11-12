@@ -11,6 +11,7 @@ print("------------------------------------------------------------")  # 60個
 # 共同
 import os
 import sys
+import time
 import math
 import random
 import numpy as np
@@ -27,41 +28,36 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
-#tensorflow_version
-
+print('載入 mnist')
 from tensorflow.keras.datasets import mnist
 
-#(x_train, y_train), (x_test, y_test) = mnist.load_data() 改成以下4行
+#(x_train, y_train), (x_test, y_test) = mnist.load_data()  # 或改成以下4行
+
 mnist = np.load(mnist_npz_filename)
 x_train, y_train = mnist['x_train'], mnist['y_train']  
 x_test, y_test = mnist['x_test'], mnist['y_test']  
 mnist.close()
 
-print(len(x_train))
 
-print(len(x_test))
+print('訓練資料長度 :', len(x_train))
+print('測試資料長度 :', len(x_test))
+
+
+print('看第 1234 筆訓練資料')
 
 n = 1234
-
-print(x_train[n])
+print('內容 :', x_train[n])
+print('大小 :', x_train[n].shape)
+print('目標 :', y_train[n])
 
 plt.imshow(x_train[n], cmap='Greys')
-
-print(x_train[n].shape)
-
-#(28, 28)
-
-print(y_train[n])
-
-#3
-
-#np.array([43, 3, 12, 44])/44
-#array([0.97727273, 0.06818182, 0.27272727, 1.        ])
+#plt.show()
 
 x_train = x_train.reshape(60000, 784) / 255
 x_test = x_test.reshape(10000, 784) / 255
 
 from tensorflow.keras.utils import to_categorical
+
 y_train = to_categorical(y_train, 10)
 y_test = to_categorical(y_test, 10)
 
@@ -83,28 +79,74 @@ model.add(Dense(10, activation='softmax'))
 model.compile(loss='mse', optimizer=SGD(lr=0.087), metrics=['accuracy'])
 model.summary()
 
-#Step02. fit
+print("x_train.shape :", x_train.shape)
 
+# 學習訓練.fit
+# 共有N個樣品, 一次做 batch_size 個, 一輪需要做 N / batch_size 次
 #model.fit(x_train, y_train, batch_size=100, epochs=10)
-model.fit(x_train, y_train, batch_size=1000, epochs=10)
+#model.fit(x_train, y_train, batch_size=1000, epochs=10)
+model.fit(x_train, y_train, batch_size=2000, epochs=1) # 遞迴 epochs 次
 
-# step03. predict
+y_pred = model.predict_step(x_test)  # 預測.predict
+print(y_pred)
+
+n = 5566
+print('神經網路預測', y_pred[n])
+print(y_pred[n].shape)
+
+plt.imshow(x_test[n].reshape(28,28), cmap='Greys')
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print('寫入 模型 TBD')
+
+print('------------------------------------------------------------')	#60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+sys.exit()
+
+print('讀取 模型')
+from tensorflow.keras.models import load_model
+
+model = load_model('mynn01.h5')
+
+from tensorflow.keras.datasets import mnist
+
+(x_train, y_train), (x_test, y_test) = mnist.load_data()
+
+"""
+mnist = np.load(mnist_npz_filename)
+x_train, y_train = mnist['x_train'], mnist['y_train']
+x_test, y_test = mnist['x_test'], mnist['y_test']
+mnist.close()
+"""
+
+x_test = x_test.reshape(10000, 784)/255
+
 y_pred = model.predict_classes(x_test)
 
 print(y_pred)
 
-n = 5566
+def myNN(n):
+  k = int(n)
+  print('可愛神經網路預測', y_pred[k])
+  plt.imshow(x_test[k].reshape(28,28), cmap='Greys')
 
-print('神經網路預測', y_pred[n])
-
-plt.imshow(x_test[n].reshape(28,28), cmap='Greys')
-
-#神經網路預測 1
-
-print('------------------------------------------------------------')	#60個
+myNN(9487)
 
 
 print('------------------------------------------------------------')	#60個
+
 
 
 print('------------------------------------------------------------')	#60個

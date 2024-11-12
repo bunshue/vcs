@@ -30,9 +30,6 @@ print("------------------------------------------------------------")  # 60個
 # 整體學習的錯誤率計算
 
 from scipy.special import comb
-import math
-import numpy as np
-import matplotlib.pyplot as plt
 
 # 計算整體學習的錯誤率
 
@@ -90,7 +87,6 @@ print("------------------------------------------------------------")  # 60個
 
 from sklearn import datasets
 from sklearn.model_selection import train_test_split
-import numpy as np
 
 # 載入資料集
 
@@ -203,9 +199,6 @@ print("------------------------------------------------------------")  # 60個
 
 from sklearn import datasets
 from sklearn.model_selection import train_test_split
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
 
 # 載入資料集
 
@@ -321,7 +314,6 @@ from numpy import mean
 from numpy import std
 from sklearn.model_selection import RepeatedStratifiedKFold
 from sklearn.neighbors import KNeighborsClassifier
-import matplotlib.pyplot as plt
 
 
 # get the dataset
@@ -380,7 +372,6 @@ print("------------------------------------------------------------")  # 60個
 
 from sklearn import datasets
 from sklearn.model_selection import train_test_split
-import numpy as np
 
 # 載入資料集
 
@@ -468,10 +459,6 @@ print("------------------------------------------------------------")  # 60個
 
 # Bagging演算法測試
 
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-
 from sklearn.ensemble import AdaBoostClassifier
 from sklearn.tree import DecisionTreeClassifier
 
@@ -533,7 +520,6 @@ print("------------------------------------------------------------")  # 60個
 
 from sklearn import datasets
 from sklearn.model_selection import train_test_split
-import numpy as np
 
 # 載入資料集
 
@@ -716,7 +702,6 @@ Successfully installed xgboost-1.7.3
 
 from sklearn import datasets
 from sklearn.model_selection import train_test_split
-import numpy as np
 
 # 載入資料集
 
@@ -760,6 +745,10 @@ print(f"平均分數: {np.mean(scores)}, 標準差: {np.std(scores)}")
 
 # 平均分數: -5473.1857409034155, 標準差: 3004.388074594913
 
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 # 使用分類模型
 
 from xgboost import XGBClassifier
@@ -781,7 +770,6 @@ print("------------------------------------------------------------")  # 60個
 
 from sklearn import datasets
 from sklearn.model_selection import train_test_split
-import numpy as np
 
 # 載入資料集
 
@@ -830,6 +818,10 @@ scores = cross_val_score(model, X_test, y_test, cv=10)
 print(f"平均分數: {np.mean(scores)}, 標準差: {np.std(scores)}")
 
 # 平均分數: 0.9303030303030303, 標準差: 0.08393720596645175
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 # 使用迴歸模型
 

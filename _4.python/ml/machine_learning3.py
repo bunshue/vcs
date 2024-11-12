@@ -37,7 +37,7 @@ print("------------------------------------------------------------")  # 60個
 from sklearn import datasets, svm, metrics
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 """
 在金融預測上的應用
 神經網路
@@ -66,7 +66,7 @@ model.summary()
 """ TBD
 #[3] 訓練
 
-model.fit(x_train, yb_train, batch_size=100, epochs=20)
+model.fit(x_train, yb_train, batch_size=100, epochs=20)  # 學習訓練.fit
 
 
 #[4] 預測
@@ -200,6 +200,9 @@ plt.show()
 """
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+'''
+'''
+print('K-近鄰演算法（K Nearest Neighbor）')
 
 from sklearn import neighbors
 
@@ -208,16 +211,18 @@ X = pd.DataFrame({"耐酸性": [7, 7, 3, 1], "強度": [7, 4, 4, 4]})
 y = np.array([0, 0, 1, 1])
 k = 3
 
-knn = neighbors.KNeighborsClassifier(n_neighbors=k)
-knn.fit(X, y)
+knn = neighbors.KNeighborsClassifier(n_neighbors=k)  # K近鄰演算法（K Nearest Neighbor）
+
+knn.fit(X, y)  # 學習訓練.fit
 
 # 預測新產品[3,7]的分類 1:好 0:壞
 new_tissue = pd.DataFrame(np.array([[3, 7]]), columns=["耐酸性", "強度"])
 pred = knn.predict(new_tissue)
 print(pred)
-
+'''
 print("------------------------------------------------------------")  # 60個
-
+print("------------------------------------------------------------")  # 60個
+'''
 from sklearn import cluster
 
 df = pd.DataFrame(
@@ -244,18 +249,16 @@ df = pd.DataFrame(
 k = 3
 
 kmeans = cluster.KMeans(n_clusters=k, random_state=12)
-kmeans.fit(df)
+
+kmeans.fit(df)  # 學習訓練.fit
+
 print(kmeans.labels_)
 
 colmap = np.array(["r", "g", "y"])
 plt.scatter(df["length"], df["weight"], color=colmap[kmeans.labels_])
 
 plt.show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
+'''
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -276,7 +279,7 @@ y_train = data[label]
 automl = autosklearn.classification.AutoSklearnClassifier(
     time_left_for_this_task=120, per_run_time_limit=120, # 兩分鐘
     include_estimators=["random_forest"])
-automl.fit(X_train, y_train)
+automl.fit(X_train, y_train)  # 學習訓練.fit
 print(automl.score(X_train, y_train))
 """
 
@@ -319,7 +322,7 @@ from keras.utils import plot_model
 x_train = x_train.reshape(x_train.shape + (1,))
 x_test = x_test.reshape(x_test.shape + (1,))
 clf = ImageClassifier(verbose=True, augment=False)
-clf.fit(x_train, y_train, time_limit=500 * 60)
+clf.fit(x_train, y_train, time_limit=500 * 60)  # 學習訓練.fit
 clf.final_fit(x_train, y_train, x_test, y_test, retrain=True)
 y = clf.evaluate(x_test, y_test)
 print(y * 100)
@@ -328,6 +331,9 @@ plot_model(clf, to_file='model.png')
 """
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+'''
+# titanic ST
 
 # 數據集和數據處理
 
@@ -341,18 +347,16 @@ from sklearn.linear_model import LogisticRegression  # 邏輯迴歸
 from sklearn.svm import SVC, LinearSVC  # 支持向量機
 from sklearn.ensemble import RandomForestClassifier  # 隨機森林
 
-# from sklearn.neighbors import KneighborsClassifier # K近鄰
+# from sklearn.neighbors import KneighborsClassifier # K近鄰演算法（K Nearest Neighbor）
 from sklearn.naive_bayes import GaussianNB  # 數據集和數據處理
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")	#30個
 
 titanic_df = pd.read_csv("data/train.csv")
 test_df = pd.read_csv("data/test.csv")
 print(titanic_df.head())
 print(titanic_df.info())
 print(titanic_df.describe())
-
-print("------------------------------------------------------------")  # 60個
 
 facet = sns.FacetGrid(titanic_df, hue="Survived", aspect=4)
 facet.map(sns.kdeplot, "Age", shade=True)
@@ -365,8 +369,7 @@ average_age = titanic_df[["Age", "Survived"]].groupby(["Age"], as_index=False).m
 sns.barplot(x="Age", y="Survived", data=average_age)
 plt.show()
 
-
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")	#30個
 
 
 def get_person(passenger):  # 小於16歲的分類爲兒童
@@ -393,7 +396,7 @@ def conv(df):
 titanic_df = conv(titanic_df)
 test_df = conv(test_df)
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")	#30個
 
 # 生成模型所需的訓練集和測試集
 X_train = titanic_df.drop("Survived", axis=1)
@@ -403,11 +406,16 @@ X_test = test_df.copy()
 from sklearn.linear_model import LogisticRegression
 
 logreg = LogisticRegression()  # 初始化模型
-logreg.fit(X_train, Y_train)  # 訓練模型
-print(logreg.score(X_train, Y_train))  # 模型評分
-Y_pred = logreg.predict(X_test)  # 預測
 
+logreg.fit(X_train, Y_train)  # 學習訓練.fit
+
+print(logreg.score(X_train, Y_train))  # 模型評分
+
+Y_pred = logreg.predict(X_test)  # 預測
+'''
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 
 """
 實際數據請從天池競賽平臺下載
@@ -463,11 +471,11 @@ print('------------------------------------------------------------')	#60個
 clf = GradientBoostingRegressor(criterion='mse', random_state=0) # GBDT迴歸
 
 if True: # 用於本地測試
-    clf.fit(x_train, y_train)
+    clf.fit(x_train, y_train)  # 學習訓練.fit
     mse = mean_squared_error(y_val, [round(i) for i in clf.predict(x_val)])
     print("MSE: %.4f" % mse)
 else: # 用於遠程提交
-    clf.fit(x, y) # 全量數據訓練
+    clf.fit(x, y) # 全量數據訓練  # 學習訓練.fit
     df = pd.DataFrame()
     df['id'] = test.id
     df['happiness'] = clf.predict(x_test[features])
@@ -579,7 +587,7 @@ baseline = 0.4887 # 誤差baseline
 for i in features:
     features_new = [x for x in features if x != i]
     clf = GradientBoostingRegressor(criterion='mse', random_state=0)
-    clf.fit(x_train[features_new], y_train)
+    clf.fit(x_train[features_new], y_train)  # 學習訓練.fit
     mse = mean_squared_error(y_val, [round(i) for i in clf.predict(x_val[features_new])])
     if mse < baseline:
         print("remove", i, "MSE: %.4f" % mse)
@@ -590,7 +598,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
+'''
 # 1. Rescale Data
 # 將資料比例縮放到0與1之間# Rescale data (between 0 and 1)
 
@@ -625,7 +633,7 @@ array = dataframe.values
 # separate array into input and output components
 X = array[:, 0:8]
 Y = array[:, 8]
-scaler = StandardScaler().fit(X)
+scaler = StandardScaler().fit(X)  # 學習訓練.fit
 rescaledX = scaler.transform(X)
 # summarize transformed data
 np.set_printoptions(precision=3)
@@ -645,7 +653,7 @@ array = dataframe.values
 # separate array into input and output components
 X = array[:, 0:8]
 Y = array[:, 8]
-scaler = Normalizer().fit(X)
+scaler = Normalizer().fit(X)  # 學習訓練.fit
 normalizedX = scaler.transform(X)
 # summarize transformed data
 np.set_printoptions(precision=3)
@@ -665,7 +673,7 @@ array = dataframe.values
 # separate array into input and output components
 X = array[:, 0:8]
 Y = array[:, 8]
-binarizer = Binarizer(threshold=0.0).fit(X)
+binarizer = Binarizer(threshold=0.0).fit(X)  # 學習訓練.fit
 binaryX = binarizer.transform(X)
 # summarize transformed data
 np.set_printoptions(precision=3)
@@ -835,7 +843,7 @@ from sklearn import cluster
 data, label = datasets.make_blobs(n_samples=300, n_features=2)
 
 e = cluster.KMeans(n_clusters=3)  # k-mean方法建立 3 個群集中心物件
-e.fit(data)  # 將數據帶入物件, 做群集分析
+e.fit(data)  # 將數據帶入物件, 做群集分析  # 學習訓練.fit
 print(e.labels_)  # 列印群集類別標籤
 print(e.cluster_centers_)  # 列印群集中心
 
@@ -848,7 +856,7 @@ from sklearn import cluster
 data, label = datasets.make_blobs(n_samples=300, n_features=2)
 
 e = cluster.KMeans(n_clusters=3)  # k-mean方法建立 3 個群集中心物件
-e.fit(data)  # 將數據帶入物件, 做群集分析
+e.fit(data)  # 將數據帶入物件, 做群集分析  # 學習訓練.fit
 print(e.labels_)  # 列印群集類別標籤
 print(e.cluster_centers_)  # 列印群集中心
 
@@ -877,7 +885,7 @@ dx_train, dx_test, label_train, label_test = train_test_split(
 # 建立分類模型
 lo_model = LogisticRegression()
 # 建立訓練數據模型
-lo_model.fit(dx_train, label_train)
+lo_model.fit(dx_train, label_train)  # 學習訓練.fit
 # 對測試數據做預測
 pred = lo_model.predict(dx_test)
 # 輸出測試數據的 label
@@ -950,7 +958,7 @@ print("------------------------------------------------------------")  # 60個
 from sklearn.datasets import make_blobs
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
-from sklearn.neighbors import KNeighborsClassifier
+from sklearn.neighbors import KNeighborsClassifier  # K近鄰演算法（K Nearest Neighbor）
 
 data, label = make_blobs(n_samples=200, n_features=2, centers=2, random_state=0)
 d_sta = StandardScaler().fit_transform(data)  # 標準化
@@ -959,9 +967,9 @@ dx_train, dx_test, label_train, label_test = train_test_split(
     d_sta, label, test_size=0.2, random_state=0
 )
 # 建立分類模型
-k_model = KNeighborsClassifier(n_neighbors=5)  # k = 5
+k_model = KNeighborsClassifier(n_neighbors=5)  # k = 5  # K近鄰演算法（K Nearest Neighbor）
 # 建立訓練數據模型
-k_model.fit(dx_train, label_train)
+k_model.fit(dx_train, label_train)  # 學習訓練.fit
 # 對測試數據做預測
 pred = k_model.predict(dx_test)
 # 輸出測試數據的 label
@@ -988,7 +996,7 @@ dx_train, dx_test, label_train, label_test = train_test_split(
 # 建立分類模型
 lo_model = LogisticRegression()
 # 建立訓練數據模型
-lo_model.fit(dx_train, label_train)
+lo_model.fit(dx_train, label_train)  # 學習訓練.fit
 # 對測試數據做預測
 pred = lo_model.predict(dx_test)
 # 輸出測試數據的 label
@@ -1015,7 +1023,7 @@ dx_train, dx_test, label_train, label_test = train_test_split(
 # 建立分類模型
 svm_model = LinearSVC()
 # 建立訓練數據模型
-svm_model.fit(dx_train, label_train)
+svm_model.fit(dx_train, label_train)  # 學習訓練.fit
 # 對測試數據做預測
 pred = svm_model.predict(dx_test)
 # 輸出測試數據的 label
@@ -1042,7 +1050,7 @@ dx_train, dx_test, label_train, label_test = train_test_split(
 )
 # 線性SVM 建立分類模型, 建立訓練數據模型, 對測試數據做預測
 svm_model = LinearSVC()
-svm_model.fit(dx_train, label_train)
+svm_model.fit(dx_train, label_train)  # 學習訓練.fit
 pred = svm_model.predict(dx_test)
 # 輸出線性SVM準確性
 print(f"線性訓練資料的準確性 = {svm_model.score(dx_train, label_train)}")
@@ -1205,120 +1213,11 @@ print(Y_pred)
 
 Y_target = dataset[:, 4][120:].astype(int)
 print(Y_target)
-
+'''
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("迴歸效果評估")
-
-print("MSE均方誤差")
-
-from sklearn.metrics import mean_squared_error
-
-y_true = [1, 1.25, 2.37]
-y_pred = [1, 1, 2]
-print(mean_squared_error(y_true, y_pred))
-
-print("MAE平均絕對誤差")
-from sklearn.metrics import mean_absolute_error
-
-y_true = [1, 1.25, 2.37]
-y_pred = [1, 1, 2]
-print(mean_absolute_error(y_true, y_pred))
-
-print("R-Squared擬合度")
-from sklearn.metrics import r2_score
-
-y_true = [1, 1.25, 2.37]
-y_pred = [1, 1, 2]
-print(r2_score(y_true, y_pred))
-
 print("------------------------------------------------------------")  # 60個
-
-print("分類效果評估")
-print("FP/FN/TP/TN")
-
-y_pred = [0, 0, 0, 1, 1, 1, 0, 1, 0, 0]  # 預測值
-y_real = [0, 1, 1, 1, 1, 1, 0, 0, 0, 0]  # 實際值
-
-from sklearn.metrics import confusion_matrix
-
-cm = confusion_matrix(y_real, y_pred)
-tn, fp, fn, tp = cm.ravel()
-print("tn", tn, "fp", fp, "fn", fn, "tp", tp)
-
-print("準確率")
-from sklearn.metrics import accuracy_score
-
-print(accuracy_score(y_real, y_pred))
-
-print("召回率")
-from sklearn.metrics import recall_score
-
-print(recall_score(y_real, y_pred))
-
-print("精度")
-from sklearn.metrics import precision_score
-
-print(precision_score(y_real, y_pred))
-
-print("F值")
-
-from sklearn.metrics import f1_score
-from sklearn.metrics import fbeta_score
-
-print(f1_score(y_real, y_pred))  # 計算f1
-print(fbeta_score(y_real, y_pred, beta=2))  # 計算fn
-
-print("Logloss")
-from sklearn.metrics import log_loss
-
-y_real = [0, 1, 1, 1, 1, 1, 0, 0, 0, 0]
-y_score = [0.9, 0.75, 0.86, 0.47, 0.55, 0.56, 0.74, 0.22, 0.5, 0.26]
-print(log_loss(y_real, y_score))
-
-print("ROC曲線和AUC")
-from sklearn.metrics import roc_auc_score, roc_curve
-
-print(roc_auc_score(y_real, y_score))  # AUC值
-
-fpr, tpr, thresholds = roc_curve(y_real, y_score)
-plt.plot(fpr, tpr)  # 繪圖
-
-# plt.show()
-
-# P-R曲線
-from sklearn.metrics import precision_recall_curve
-
-precision, recall, _ = precision_recall_curve(y_real, y_score)
-plt.plot(recall, precision)
-
-# plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-print("多指標評分")
-
-from sklearn.metrics import classification_report
-
-y_real = [0, 1, 1, 1, 1, 1, 0, 0, 0, 0]
-y_score = [0.9, 0.75, 0.86, 0.47, 0.55, 0.56, 0.74, 0.22, 0.5, 0.26]
-y_pred = [round(i) for i in y_score]
-print(classification_report(y_real, y_pred))
-
-print("------------------------------------------------------------")  # 60個
-
-print("聚類算法")
-
-from sklearn.datasets import make_blobs  # 數據支持
-from sklearn.cluster import KMeans  # 聚類方法
-
-X, y = make_blobs(n_samples=100, random_state=150)
-y_pred = KMeans(n_clusters=3, random_state=5).fit_predict(X)  # 訓練
-plt.scatter(X[:, 0], X[:, 1], c=y_pred)
-
-# plt.show()
-
 print("------------------------------------------------------------")  # 60個
 
 from sklearn import preprocessing
@@ -1552,6 +1451,9 @@ df["性別"] = label_encoder.fit_transform(df["性別"])
 print(df)
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# titanic
 
 # How do I use pandas with scikit-learn to create Kaggle submissions? (video)
 
@@ -1626,9 +1528,8 @@ print("檢視前幾行")
 cc = pd.read_pickle("tmp_train.pkl").head()
 print(cc)
 
+# titanic SP
 print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
 
 from sklearn import neighbors, datasets, preprocessing
@@ -1650,7 +1551,7 @@ X_train = scaler.transform(X_train)
 X_test = scaler.transform(X_test)
 
 # Create a K-Nearest Neighbors classifier
-knn = neighbors.KNeighborsClassifier(n_neighbors=5)
+knn = neighbors.KNeighborsClassifier(n_neighbors=5)  # K近鄰演算法（K Nearest Neighbor）
 
 # Train the classifier on the training data
 knn.fit(X_train, y_train)
@@ -1705,7 +1606,7 @@ print("------------------------------------------------------------")  # 60個
 
 # Import necessary classes from sklearn libraries
 from sklearn.linear_model import LogisticRegression
-from sklearn.neighbors import KNeighborsClassifier
+from sklearn.neighbors import KNeighborsClassifier  # K近鄰演算法（K Nearest Neighbor）
 from sklearn.svm import SVC
 from sklearn.cluster import KMeans
 from sklearn.decomposition import PCA
@@ -1715,7 +1616,7 @@ from sklearn.decomposition import PCA
 lr = LogisticRegression(max_iter=1000)
 
 # k-Nearest Neighbors classifier with 5 neighbors
-knn = KNeighborsClassifier(n_neighbors=5)
+knn = KNeighborsClassifier(n_neighbors=5)  # K近鄰演算法（K Nearest Neighbor）
 
 # Support Vector Machine classifier
 svc = SVC()
@@ -1797,8 +1698,6 @@ print("\nNormalized X_train:\n", normalized_X[:5], "\n     ...")
 print("\nNormalized X_test:\n", normalized_X_test[:5], "\n     ...")
 
 # Binarization
-
-import numpy as np
 from sklearn.preprocessing import Binarizer
 
 # Create a sample data array
@@ -1839,8 +1738,6 @@ print("Decoded labels:", decoded_labels)
 print("------------------------------------------------------------")  # 60個
 
 # Imputing Missing Values
-
-import numpy as np
 from sklearn.impute import SimpleImputer
 
 # Sample data with missing values
@@ -1860,8 +1757,6 @@ print(imputed_data)
 print("------------------------------------------------------------")  # 60個
 
 # Generating Polynomial Features
-
-import numpy as np
 from sklearn.preprocessing import PolynomialFeatures
 
 # Sample data
@@ -2146,11 +2041,11 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-from sklearn.neighbors import KNeighborsClassifier
+from sklearn.neighbors import KNeighborsClassifier  # K近鄰演算法（K Nearest Neighbor）
 
 # 模型訓練
 k = 5
-clf = KNeighborsClassifier(n_neighbors=k)
+clf = KNeighborsClassifier(n_neighbors=k)  # K近鄰演算法（K Nearest Neighbor）
 clf.fit(X, y)
 
 # 進行預測
@@ -2222,7 +2117,8 @@ from sklearn.model_selection import train_test_split
 
 X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2)
 
-from sklearn.neighbors import KNeighborsClassifier, RadiusNeighborsClassifier
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.neighbors import RadiusNeighborsClassifier
 
 models = []
 models.append(("KNN", KNeighborsClassifier(n_neighbors=2)))
@@ -2261,7 +2157,7 @@ print("------------------------------")  # 30個
 
 # 模型訓練
 
-knn = KNeighborsClassifier(n_neighbors=2)
+knn = KNeighborsClassifier(n_neighbors=2)  # K近鄰演算法（K Nearest Neighbor）
 knn.fit(X_train, Y_train)
 train_score = knn.score(X_train, Y_train)
 test_score = knn.score(X_test, Y_test)
@@ -2270,7 +2166,7 @@ print("train score: {}; test score: {}".format(train_score, test_score))
 from sklearn.model_selection import ShuffleSplit
 from common.utils import plot_learning_curve
 
-knn = KNeighborsClassifier(n_neighbors=2)
+knn = KNeighborsClassifier(n_neighbors=2)  # K近鄰演算法（K Nearest Neighbor）
 cv = ShuffleSplit(n_splits=10, test_size=0.2, random_state=0)
 plt.figure(figsize=(10, 6))
 plot_learning_curve(
@@ -2366,7 +2262,7 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("titanic")
+print("titanic ST")
 
 
 def read_dataset(fname):

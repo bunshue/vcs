@@ -71,6 +71,85 @@ def plot_decision_regions(X, y, classifier, test_idx=None, resolution=0.02):
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+from sklearn import datasets
+from sklearn.preprocessing import StandardScaler
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+from matplotlib.colors import ListedColormap
+
+
+def do_svm():
+    iris = datasets.load_iris()
+    X = iris.data[:, [2, 3]]
+    y = iris.target
+    X = np.array([m for m, n in zip(X, y) if n != 2])
+    boolarr = y != 2
+    y = y[boolarr]
+
+    X_train, X_test, y_train, y_test = train_test_split(
+        X, y, test_size=0.3, random_state=9487
+    )
+
+    sc = StandardScaler()
+    sc.fit(X_train)  # 學習訓練.fit
+    X_train_std = sc.transform(X_train)
+    X_test_std = sc.transform(X_test)
+
+    svm = SVC(kernel="linear", C=1.0, random_state=9487)  # SVM 函數學習機
+    svm.fit(X_train_std, y_train)  # 學習訓練.fit
+    y_pred = svm.predict(X_test_std)  # 預測.predict
+
+    print("Misclassified smaples: %d" % (y_test != y_pred).sum())
+    print("Accuracy: %0.2f" % accuracy_score(y_test, y_pred))
+
+    X_combined_std = np.vstack((X_train_std, X_test_std))
+    y_combined_std = np.hstack((y_train, y_test))
+    plot_decision_regions(
+        X=X_combined_std, y=y_combined_std, classifier=svm, test_idx=range(50, 100)
+    )
+    plt.xlabel("sepal length [standarlized]")
+    plt.ylabel("petal length [standarlized]")
+    plt.legend(loc="upper left")
+    plt.show()
+
+
+print("SVM")
+do_svm()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+from matplotlib.colors import ListedColormap
+
+
+def do_svm_kernel():
+    X_xor = np.random.randn(200, 2)
+    y_xor = np.logical_xor(X_xor[:, 0] > 0, X_xor[:, 1] > 0)
+    y_xor = np.where(y_xor, 1, -1)
+
+    plt.scatter(
+        X_xor[y_xor == 1, 0], X_xor[y_xor == 1, 1], c="b", marker="x", label="1"
+    )
+    plt.scatter(
+        X_xor[y_xor == -1, 0], X_xor[y_xor == -1, 1], c="r", marker="s", label="-1"
+    )
+    plt.ylim(-3.0)
+    plt.legend()
+    plt.show()
+
+    svm = SVC(kernel="rbf", random_state=9487, gamma=0.6, C=10.0)  # SVM 函數學習機
+    svm.fit(X_xor, y_xor)  # 學習訓練.fit
+    plot_decision_regions(X_xor, y_xor, classifier=svm)
+    plt.legend(loc="upper left")
+    plt.show()
+
+
+print("SVN Kernel")
+do_svm_kernel()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 from sklearn import datasets, metrics
 from sklearn.tree import DecisionTreeClassifier, DecisionTreeRegressor
 from sklearn.model_selection import train_test_split
@@ -252,6 +331,8 @@ print("adative_learning_rate")
 do_adative_learning_rate()
 
 print("------------------------------------------------------------")  # 60個
+
+
 
 
 print("------------------------------------------------------------")  # 60個

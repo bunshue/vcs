@@ -21,6 +21,9 @@ f(x)=y
 
 最基本的方式, 一個是 SVM, 一個是 K-Means。
 
+# Supervised Learning SVM
+
+
 """
 
 print("------------------------------------------------------------")  # 60個
@@ -34,6 +37,7 @@ import random
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns  # 海生, 自動把圖畫得比較好看
 
 font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
@@ -45,8 +49,10 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
-# Supervised Learning SVM
+from sklearn.svm import SVC
 
+print("------------------------------------------------------------")  # 60個
+'''
 plt.figure(
     num="SVM 支援向量機",
     figsize=(12, 8),
@@ -81,13 +87,9 @@ plt.scatter(x[:, 0], x[:, 1], c=y, s=100, cmap="Paired")  # c = y 就是指定�
 xmin, xmax, ymin, ymax = -8, 8, -8, 8
 plt.axis([xmin, xmax, ymin, ymax])  # 設定各軸顯示範圍
 plt.title("原始資料, 6個點, 2個類別")
-plt.grid()
 
-from sklearn.svm import SVC
-
-# SVM 函數學習機
-clf = SVC()
-# clf = SVC(gamma = 'auto')
+clf = SVC()  # SVM 函數學習機
+# clf = SVC(gamma = 'auto')  # SVM 函數學習機
 
 clf.fit(x, y)  # 學習訓練.fit
 
@@ -98,11 +100,7 @@ print("原始 y 資料 :", y, "\t=> 目標")
 print("用原始 x 資料預測的結果 :", y_pred)
 
 print("預測結果")
-print(clf.predict([[-0.8, -1]]))  # 預測.predict
-
-xx = -5
-yy = -4
-print("使用(%d, %d)做預測, 結果 :" % (xx, yy), clf.predict([[xx, yy]]))
+xx, yy = -0.8, -1
 print(clf.predict([[xx, yy]]))  # 預測.predict
 
 xx = yy = np.arange(-7, 7, 0.2)
@@ -111,62 +109,59 @@ P = np.c_[X.ravel(), Y.ravel()]
 z = clf.predict(P)  # 預測.predict
 Z = z.reshape(X.shape)
 
+print("------------------------------")	#30個
+
+print('顯示結果 1')
+
 plt.subplot(232)
 plt.contourf(X, Y, Z, alpha=0.3, cmap="Paired")
 plt.scatter(x[:, 0], x[:, 1], c=y, cmap="Paired")
-xmin, xmax, ymin, ymax = -8, 8, -8, 8
-plt.axis([xmin, xmax, ymin, ymax])  # 設定各軸顯示範圍
-plt.title("預測的結果")
+plt.title("預測的結果1")
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")	#30個
 
-# 再來視覺化一下我們的成果
-
-gd = np.array([[i, j] for i in np.arange(-7, 7, 0.2) for j in np.arange(-7, 7, 0.2)])
-
-gdc = clf.predict(gd)  # 預測.predict
-
-plt.subplot(233)
-# plt.scatter(gd[:, 0], gd[:, 1], s = 100, c = gdc)
-plt.scatter(gd[:, 0], gd[:, 1], s=100, c=2 - gdc)
-plt.scatter(x[:, 0], x[:, 1], s=100, c=y)  # 依據y給定顏色
-plt.scatter(xx, yy, c="r", s=100)
-xmin, xmax, ymin, ymax = -8, 8, -8, 8
-plt.axis([xmin, xmax, ymin, ymax])  # 設定各軸顯示範圍
-plt.title("預測的結果")
-plt.grid()
-
-# 視覺化成果之一
-
-x1, x2 = np.meshgrid(np.arange(-7, 7, 0.2), np.arange(-7, 7, 0.2))
-X = np.c_[x1.ravel(), x2.ravel()]
-c = clf.predict(X)  # 預測.predict
-
-plt.subplot(234)
-plt.scatter(X[:, 0], X[:, 1], s=100, c=c)
-xmin, xmax, ymin, ymax = -8, 8, -8, 8
-plt.axis([xmin, xmax, ymin, ymax])  # 設定各軸顯示範圍
-plt.title("預測的結果")
-plt.grid()
-
-# 視覺化成果之二
-
+print('顯示結果 2')
 x1, x2 = np.meshgrid(np.arange(-7, 7, 0.2), np.arange(-7, 7, 0.2))
 X = np.c_[x1.ravel(), x2.ravel()]
 Z = clf.predict(X)  # 預測.predict
 
 z = Z.reshape(x1.shape)
 
-plt.subplot(235)
+plt.subplot(233)
 plt.contourf(x1, x2, z, alpha=0.3)
 plt.scatter(x[:, 0], x[:, 1], s=100, c=y)
-xmin, xmax, ymin, ymax = -8, 8, -8, 8
-plt.axis([xmin, xmax, ymin, ymax])  # 設定各軸顯示範圍
-plt.title("預測的結果")
-plt.grid()
+plt.title("預測的結果2")
 
-# 視覺化成果之三
+print("------------------------------")	#30個
+
+print('顯示結果 3')
+
+gd = np.array([[i, j] for i in np.arange(-7, 7, 0.2) for j in np.arange(-7, 7, 0.2)])
+
+gdc = clf.predict(gd)  # 預測.predict
+
+plt.subplot(234)
+# plt.scatter(gd[:, 0], gd[:, 1], s = 100, c = gdc)
+plt.scatter(gd[:, 0], gd[:, 1], s=100, c=2 - gdc)
+plt.scatter(x[:, 0], x[:, 1], s=100, c=y)  # 依據y給定顏色
+plt.scatter(xx, yy, c="r", s=100)
+plt.title("預測的結果3")
+
+print("------------------------------")	#30個
+
+print('顯示結果 4')
+
+x1, x2 = np.meshgrid(np.arange(-7, 7, 0.2), np.arange(-7, 7, 0.2))
+X = np.c_[x1.ravel(), x2.ravel()]
+c = clf.predict(X)  # 預測.predict
+
+plt.subplot(235)
+plt.scatter(X[:, 0], X[:, 1], s=10, c=c)
+plt.title("預測的結果4")
+
+print("------------------------------")	#30個
+
+print('顯示結果 5')
 
 x = np.linspace(-7, 7, 30)
 y = np.linspace(-7, 7, 30)
@@ -187,13 +182,10 @@ Z = clf.predict(list(zip(X, Y)))  # 預測.predict
 
 plt.subplot(236)
 plt.scatter(X, Y, s=50, c=Z)
-xmin, xmax, ymin, ymax = -8, 8, -8, 8
-plt.axis([xmin, xmax, ymin, ymax])  # 設定各軸顯示範圍
-plt.title("預測的結果")
-plt.grid()
+plt.title("預測的結果5")
 
 plt.show()
-
+'''
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -224,13 +216,18 @@ x, y = make_classification(
 )
 plt.subplot(231)
 plt.scatter(x[:, 0], x[:, 1], s=50, c=y)
+plt.title('用 make_classification 造數據, 3群')
 plt.grid()
 
-from sklearn.svm import SVC
+"""
+print(len(x))
+print(len(y))
+print(x)
+print(y)
+"""
 
-# SVM 函數學習機
-clf = SVC()
-# clf = SVC(gamma = 'auto')
+clf = SVC()  # SVM 函數學習機
+# clf = SVC(gamma = 'auto')  # SVM 函數學習機
 
 clf.fit(x, y)  # 學習訓練.fit
 
@@ -238,24 +235,24 @@ y_pred = clf.predict(x)  # 預測.predict
 
 # 來看預測的結果
 print("真實目標 :", y)
-print("預測結果 :", clf.predict(x))  # 預測.predict
-print("預測差值 :", clf.predict(x) - y)
+print("預測結果 :", y_pred)
+print("預測差值 :", y_pred - y)
 
 # 這裡看看我們可愛的 SVM, 把我們訓練資料學得怎麼樣。
 plt.subplot(232)
-plt.scatter(x[:, 0], x[:, 1], s=50, c=clf.predict(x))
+plt.scatter(x[:, 0], x[:, 1], s=50, c=y_pred)
 plt.grid()
 
 # 如果沒錯的會用一個顏色, 錯了就用其他顏色表示
 plt.subplot(233)
-plt.scatter(x[:, 0], x[:, 1], s=50, c=clf.predict(x) - y)
+plt.scatter(x[:, 0], x[:, 1], s=50, c=y_pred - y)
 plt.title("畫出預測差異")
 plt.grid()
 
 # 方法一 點圖
 gd = np.array([[i, j] for i in np.arange(-4, 4, 0.4) for j in np.arange(-3, 4, 0.4)])
 
-gdc = clf.predict(gd)
+gdc = clf.predict(gd)  # 預測.predict
 plt.subplot(234)
 plt.scatter(gd[:, 0], gd[:, 1], s=100, c=gdc)
 plt.title("點圖")
@@ -264,7 +261,7 @@ plt.grid()
 # 方法二 等高線圖
 x1, x2 = np.meshgrid(np.arange(-4, 4, 0.02), np.arange(-3, 4, 0.02))
 X = np.c_[x1.ravel(), x2.ravel()]
-Z = clf.predict(X)
+Z = clf.predict(X)  # 預測.predict
 
 z = Z.reshape(x1.shape)
 
@@ -279,83 +276,6 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-from sklearn import datasets
-from sklearn.preprocessing import StandardScaler
-from sklearn.model_selection import train_test_split
-from sklearn.svm import SVC
-from sklearn.metrics import accuracy_score
-from matplotlib.colors import ListedColormap
-
-
-def do_svm():
-    iris = datasets.load_iris()
-    X = iris.data[:, [2, 3]]
-    y = iris.target
-    X = np.array([m for m, n in zip(X, y) if n != 2])
-    boolarr = y != 2
-    y = y[boolarr]
-
-    X_train, X_test, y_train, y_test = train_test_split(
-        X, y, test_size=0.3, random_state=0
-    )
-
-    sc = StandardScaler()
-    sc.fit(X_train)
-    X_train_std = sc.transform(X_train)
-    X_test_std = sc.transform(X_test)
-
-    svm = SVC(kernel="linear", C=1.0, random_state=0)
-    svm.fit(X_train_std, y_train)
-    y_pred = svm.predict(X_test_std)
-
-    print("Misclassified smaples: %d" % (y_test != y_pred).sum())
-    print("Accuracy: %0.2f" % accuracy_score(y_test, y_pred))
-
-    X_combined_std = np.vstack((X_train_std, X_test_std))
-    y_combined_std = np.hstack((y_train, y_test))
-    plot_decision_regions(
-        X=X_combined_std, y=y_combined_std, classifier=svm, test_idx=range(50, 100)
-    )
-    plt.xlabel("sepal length [standarlized]")
-    plt.ylabel("petal length [standarlized]")
-    plt.legend(loc="upper left")
-    plt.show()
-
-
-print("SVM")
-do_svm()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-from sklearn.svm import SVC
-from matplotlib.colors import ListedColormap
-
-
-def do_svm_kernel():
-    X_xor = np.random.randn(200, 2)
-    y_xor = np.logical_xor(X_xor[:, 0] > 0, X_xor[:, 1] > 0)
-    y_xor = np.where(y_xor, 1, -1)
-
-    plt.scatter(
-        X_xor[y_xor == 1, 0], X_xor[y_xor == 1, 1], c="b", marker="x", label="1"
-    )
-    plt.scatter(
-        X_xor[y_xor == -1, 0], X_xor[y_xor == -1, 1], c="r", marker="s", label="-1"
-    )
-    plt.ylim(-3.0)
-    plt.legend()
-    plt.show()
-
-    svm = SVC(kernel="rbf", random_state=0, gamma=0.6, C=10.0)
-    svm.fit(X_xor, y_xor)
-    plot_decision_regions(X_xor, y_xor, classifier=svm)
-    plt.legend(loc="upper left")
-    plt.show()
-
-
-print("SVN Kernel")
-do_svm_kernel()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -373,3 +293,8 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+
+"""
+xmin, xmax, ymin, ymax = -8, 8, -8, 8
+#plt.axis([xmin, xmax, ymin, ymax])  # 設定各軸顯示範圍
+"""
