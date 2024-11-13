@@ -15,6 +15,7 @@ print("------------------------------------------------------------")  # 60個
 # 共同
 import os
 import sys
+import time
 import math
 import random
 import numpy as np
@@ -29,8 +30,8 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
-print('------------------------------------------------------------')	#60個
-'''
+print("------------------------------------------------------------")  # 60個
+"""
 from tensorflow.keras.datasets import mnist
 
 #(x_train, y_train), (x_test, y_test) = mnist.load_data() 改成以下4行
@@ -96,8 +97,8 @@ model.add(Flatten())
 model.add(Dense(54, activation='relu'))
 model.add(Dense(10, activation='softmax'))
 
-#看一下我們的神經網路
-model.summary()
+print("檢視神經網路")
+model.summary()  #檢視神經網路
 
 # 3*3 (權重) + 1 (bias)
 #(3*3+1)*16 = 160
@@ -107,12 +108,9 @@ model.summary()
 model.compile(loss='mse', optimizer=SGD(lr=0.087),
              metrics=['accuracy'])
 
-#Step 2. fit
-
-model.fit(x_train, y_train, batch_size=128, epochs=12)
+model.fit(x_train, y_train, batch_size=128, epochs=12)  # 學習訓練.fit
 
 #Step 3. 預測
-
 result = model.predict_classes(x_test)
 
 def my_predict(n):
@@ -130,14 +128,14 @@ print('測試資料的正確率為', acc)
 
 #把我們的 model 存起來
 model.save('myCNNmodel.h5')
-'''
+"""
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-print('------------------------------------------------------------')	#60個
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
 """
@@ -153,11 +151,11 @@ print('------------------------------------------------------------')	#60個
 
 from keras.datasets import mnist
 
-#(x_train, y_train), (x_test, y_test) = mnist.load_data() 改成以下4行
+# (x_train, y_train), (x_test, y_test) = mnist.load_data() 改成以下4行
 mnist = np.load(mnist_npz_filename)
-x_train, y_train = mnist['x_train'], mnist['y_train']  
-x_test, y_test = mnist['x_test'], mnist['y_test']  
-mnist.close()  
+x_train, y_train = mnist["x_train"], mnist["y_train"]
+x_test, y_test = mnist["x_test"], mnist["y_test"]
+mnist.close()
 
 """
 輸入格式整理
@@ -169,24 +167,24 @@ mnist.close()
 
 print(x_train[1234].shape)
 
-#(28, 28)
+# (28, 28)
 
 # CNN 要的是 (28, 28, 1)
 
-#確認一下...
+# 確認一下...
 
-x_train = x_train.reshape(60000, 28, 28, 1)/255
-x_test = x_test.reshape(10000, 28, 28, 1)/255
+x_train = x_train.reshape(60000, 28, 28, 1) / 255
+x_test = x_test.reshape(10000, 28, 28, 1) / 255
 
-#原來 28x28 矩陣...
+# 原來 28x28 矩陣...
 
 print(x_train[1234].shape)
 
-#(28, 28, 1)
+# (28, 28, 1)
 
 X = x_train[1234]
 X = X.reshape(28, 28)
-plt.imshow(X,  cmap='Greys')
+plt.imshow(X, cmap="Greys")
 
 """
 輸出格式整理
@@ -196,9 +194,9 @@ plt.imshow(X,  cmap='Greys')
 
 print(y_train[1234])
 
-#3
+# 3
 
-#from keras.utils import np_utils old 改如下
+# from keras.utils import np_utils old 改如下
 from tensorflow.python.keras.utils import np_utils
 
 y_train = np_utils.to_categorical(y_train, 10)
@@ -206,10 +204,10 @@ y_test = np_utils.to_categorical(y_test, 10)
 
 print(y_train[1234])
 
-#array([0., 0., 0., 1., 0., 0., 0., 0., 0., 0.], dtype=float32)
+# array([0., 0., 0., 1., 0., 0., 0., 0., 0., 0.], dtype=float32)
 
-#x_train = x_train/255
-#x_test = x_test/255
+# x_train = x_train/255
+# x_test = x_test/255
 
 """
 2-3 打造你的 CNN
@@ -244,59 +242,57 @@ from keras.optimizers import SGD
 
 model = Sequential()
 
-#第一個隱藏層一樣要告訴 Keras 我們輸入長什麼樣子。padding 設成 same 是每個 filter 會輸出原來 28x28 一樣大小的矩陣。
+# 第一個隱藏層一樣要告訴 Keras 我們輸入長什麼樣子。padding 設成 same 是每個 filter 會輸出原來 28x28 一樣大小的矩陣。
 
-model.add(Conv2D(10, (3, 3), padding='same', input_shape=(28, 28, 1),
-                activation='relu'))
+model.add(
+    Conv2D(10, (3, 3), padding="same", input_shape=(28, 28, 1), activation="relu")
+)
 
-#Max-Pooling!
+# Max-Pooling!
 
-model.add(MaxPool2D(pool_size=(2,2)))
+model.add(MaxPool2D(pool_size=(2, 2)))
 
-#第二次 Convolution!
+# 第二次 Convolution!
 
-model.add(Conv2D(20, (3, 3), padding='same',
-                activation='relu'))
+model.add(Conv2D(20, (3, 3), padding="same", activation="relu"))
 
-#再 Max-Pooling!
+# 再 Max-Pooling!
 
-model.add(MaxPool2D(pool_size=(2,2)))
+model.add(MaxPool2D(pool_size=(2, 2)))
 
-#第三次 Convolution!
+# 第三次 Convolution!
 
-model.add(Conv2D(40, (3, 3), padding='same',
-                activation='relu'))
+model.add(Conv2D(40, (3, 3), padding="same", activation="relu"))
 
-#Max-Pooling 最終回。
+# Max-Pooling 最終回。
 
-model.add(MaxPool2D(pool_size=(2,2)))
+model.add(MaxPool2D(pool_size=(2, 2)))
 
-#然後我們要送進一般的神經網路了。記得這是要拉平的, 還在 Keras 會幫我們做!
+# 然後我們要送進一般的神經網路了。記得這是要拉平的, 還在 Keras 會幫我們做!
 
 model.add(Flatten())
-model.add(Dense(5, activation='relu'))
-model.add(Dense(8, activation='relu'))
-model.add(Dense(20, activation='relu'))
+model.add(Dense(5, activation="relu"))
+model.add(Dense(8, activation="relu"))
+model.add(Dense(20, activation="relu"))
 
-#輸出和上次一樣!
-model.add(Dense(10, activation='softmax'))
+# 輸出和上次一樣!
+model.add(Dense(10, activation="softmax"))
 
-#組裝
-#和之前比較不一樣的是我們還要做 compile 才正式把我們的神經網路建好。
+# 組裝
+# 和之前比較不一樣的是我們還要做 compile 才正式把我們的神經網路建好。
 
-#model.compile(loss="categorical_crossentropy",
+# model.compile(loss="categorical_crossentropy",
 #              optimizer=Adadelta(),
 #              metrics=['accuracy'])
 
-model.compile(loss='mse', optimizer=SGD(lr=0.07), metrics=['accuracy'])
+model.compile(loss="mse", optimizer=SGD(lr=0.07), metrics=["accuracy"])
 
-#檢視我們的神經網路
-model.summary()
+print("檢視神經網路")
+model.summary()  # 檢視神經網路
 
-#1-4 訓練
-model.fit(x_train, y_train, batch_size=100, epochs=10)
+model.fit(x_train, y_train, batch_size=100, epochs=10)  # 學習訓練.fit
 
-#這裡因為第一次訓練有點遜 (CNN 標準), 所以我再執行 fit 一次, 因此實際上是訓練了 20 次。
+# 這裡因為第一次訓練有點遜 (CNN 標準), 所以我再執行 fit 一次, 因此實際上是訓練了 20 次。
 
 """
 2-5 結果測試
@@ -307,37 +303,38 @@ model.fit(x_train, y_train, batch_size=100, epochs=10)
 
 score = model.evaluate(x_test, y_test)
 
-#我們來看成績, 順便用 Python 3.6 開始的 f-string format 方式。
-print(f'測試資料的 loss: {score[0]:.5f}')
-print(f'測試資料的正確率: {score[1]}')
+# 我們來看成績, 順便用 Python 3.6 開始的 f-string format 方式。
+print(f"測試資料的 loss: {score[0]:.5f}")
+print(f"測試資料的正確率: {score[1]}")
 
-#測試資料的 loss: 0.02530
-#測試資料的正確率: 0.8328999876976013
+# 測試資料的 loss: 0.02530
+# 測試資料的正確率: 0.8328999876976013
 
-#儲存結果
-#結果看來還不差, 所以我們把結果存起來。上次我們介紹分別存架構和權重的方法, 這次我們看看怎麼樣一次就存入權重 + 結構!
+# 儲存結果
+# 結果看來還不差, 所以我們把結果存起來。上次我們介紹分別存架構和權重的方法, 這次我們看看怎麼樣一次就存入權重 + 結構!
 
-model.save('myCNNmodel.h5')
+model.save("myCNNmodel.h5")
 
-#欣賞一下成果
-#我們示範一下怎麼讀回我們的神經網路。你會發現讀回來之後就可以直接使用了!!
+# 欣賞一下成果
+# 我們示範一下怎麼讀回我們的神經網路。你會發現讀回來之後就可以直接使用了!!
 
 del model
-#先把我們原來的 model 刪掉, 保證接下來的是讀進來的。我們要用一個 load_model 的函式。
+# 先把我們原來的 model 刪掉, 保證接下來的是讀進來的。我們要用一個 load_model 的函式。
 
 from keras.models import load_model
-model = load_model('myCNNmodel.h5')
 
-#我們用另一個方式: 每次選 5 個顯示, 看是不是有正確辨識。
+model = load_model("myCNNmodel.h5")
+
+# 我們用另一個方式: 每次選 5 個顯示, 看是不是有正確辨識。
 
 predict = model.predict_classes(x_test)
 
-#看來真的可以直接用!!
+# 看來真的可以直接用!!
 pick = np.random.randint(1, 9999, 5)
 
 for i in range(5):
-    plt.subplot(1, 5,i + 1)
-    plt.imshow(x_test[pick[i]].reshape(28, 28), cmap = 'Greys')
+    plt.subplot(1, 5, i + 1)
+    plt.imshow(x_test[pick[i]].reshape(28, 28), cmap="Greys")
     plt.title(predict[pick[i]])
     plt.axis("off")
 
@@ -346,52 +343,46 @@ for i in range(5):
 我們到此, 基本上是「亂做」的神經網路。有些同學在不斷試驗的過程中, 可能會發現有時會出現很糟糕的結果。因此, 接下來我們要介紹怎麼樣用些簡單的手法, 能讓學習效果比較穩定, 而且有可能可以增加學習效率。
 """
 
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-
-
-
-
-print('------------------------------------------------------------')	#60個
-print('------------------------------------------------------------')	#60個
-
-#把我們訓練好神經網路讀回來用的方式
+# 把我們訓練好神經網路讀回來用的方式
 
 mnist_npz_filename = "C:/_git/vcs/_big_files/mnist.npz"
 
 print("------------------------------------------------------------")  # 60個
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 from tensorflow.keras.models import load_model
 
-model = load_model('myCNNmodel.h5')
+model = load_model("myCNNmodel.h5")
 
 from tensorflow.keras.datasets import mnist
 
 # (x_train, y_train), (x_test, y_test) = mnist.load_data() 改成以下4行
-mnist = np.load(mnist_npz_filename)  
-x_train, y_train = mnist['x_train'], mnist['y_train']  
-x_test, y_test = mnist['x_test'], mnist['y_test']  
-mnist.close()  
+mnist = np.load(mnist_npz_filename)
+x_train, y_train = mnist["x_train"], mnist["y_train"]
+x_test, y_test = mnist["x_test"], mnist["y_test"]
+mnist.close()
 
 x_test = x_test.reshape(10000, 28, 28, 1) / 255
 
 result = model.predict_classes(x_test)
 
+
 def myCNN(n):
-    print('我的 CNN 說是', result[n])
-    X = x_test[n].reshape(28,28)
-    plt.imshow(X, cmap='Greys')
+    print("我的 CNN 說是", result[n])
+    X = x_test[n].reshape(28, 28)
+    plt.imshow(X, cmap="Greys")
+
 
 n = 999
 
 myCNN(n)
 
 
-print('------------------------------------------------------------')	#60個
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 
-
-print('------------------------------------------------------------')	#60個
-
-
+print("------------------------------------------------------------")  # 60個

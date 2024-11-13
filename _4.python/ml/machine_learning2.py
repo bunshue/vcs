@@ -35,23 +35,25 @@ print("------------------------------------------------------------")  # 60個
 import matplotlib
 import matplotlib as mpl
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-print('測試 euclidean_distances 歐幾里得距離 (Euclidean distance)')
+print("測試 euclidean_distances 歐幾里得距離 (Euclidean distance)")
 from sklearn.metrics.pairwise import euclidean_distances
 
 X = np.array(
-    [[4, 3, 0, 0, 5, 0],  # r1
-     [5, 0, 4, 0, 4, 0],  # r2
-     [4, 0, 5, 3, 4, 0],  # r3
-     [0, 3, 0, 0, 0, 5],  # r4
-     ]
+    [
+        [4, 3, 0, 0, 5, 0],  # r1
+        [5, 0, 4, 0, 4, 0],  # r2
+        [4, 0, 5, 3, 4, 0],  # r3
+        [0, 3, 0, 0, 0, 5],  # r4
+    ]
 )
 
 X = np.array(
-    [[4, 3, 0, 0, 5, 0, 4, 3, 0, 0, 5, 0],  # r1
-     [5, 0, 4, 0, 4, 0, 5, 0, 4, 0, 4, 0],  # r2
-     ]
+    [
+        [4, 3, 0, 0, 5, 0, 4, 3, 0, 0, 5, 0],  # r1
+        [5, 0, 4, 0, 4, 0, 5, 0, 4, 0, 4, 0],  # r2
+    ]
 )
 
 
@@ -96,39 +98,40 @@ for x,y in [[0,1],[0,2],[1,2]]:
 
 """
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-print('測試 cosine_similarity')
+print("測試 cosine_similarity")
 from sklearn.metrics.pairwise import cosine_similarity
 
 X = np.array(
-    [[4, 3, 0, 0, 5, 0],  # r1
-     [5, 0, 4, 0, 4, 0],  # r2
-     [4, 0, 5, 3, 4, 0],  # r3
-     [0, 3, 0, 0, 0, 5],  # r4
-     ]
+    [
+        [4, 3, 0, 0, 5, 0],  # r1
+        [5, 0, 4, 0, 4, 0],  # r2
+        [4, 0, 5, 3, 4, 0],  # r3
+        [0, 3, 0, 0, 0, 5],  # r4
+    ]
 )
 
 sim = cosine_similarity(X)
 print(sim)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 # 計算相似度
 
 from sklearn.metrics.pairwise import euclidean_distances
-from sklearn.metrics.pairwise import cosine_similarity 
+from sklearn.metrics.pairwise import cosine_similarity
 
 # 每個人的特徵向量
-x       = [1.0, 1.0, 1.0] # 嫌犯 X 的特徵 
-kitty   = [ .2,  .7,  .2] # kitty 的特徵  
-pikachu = [ .4,  .8,  .9] # 皮卡丘 的特徵 
-sonic   = [ .8,  .8,  .3] # 索尼克 的特徵
+x = [1.0, 1.0, 1.0]  # 嫌犯 X 的特徵
+kitty = [0.2, 0.7, 0.2]  # kitty 的特徵
+pikachu = [0.4, 0.8, 0.9]  # 皮卡丘 的特徵
+sonic = [0.8, 0.8, 0.3]  # 索尼克 的特徵
 
 # 把特徵向量集合成一個串列，好讓 sklearn 方便直接計算任兩個向量間的相似度
-feature_vectors = [x, kitty, pikachu, sonic] # 
+feature_vectors = [x, kitty, pikachu, sonic]  #
 print("Feature vectors:")
-print(feature_vectors) 
+print(feature_vectors)
 print()
 
 # 計算任兩個向量間的歐幾里德距離
@@ -143,9 +146,9 @@ cosine_similarity_metrix = cosine_similarity(feature_vectors)
 print(cosine_similarity_metrix)
 print()
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-'''
+"""
 from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
 
 text = ["小貝來到北京清華大學",
@@ -199,9 +202,9 @@ print('------------------------------')	#30個
 pd.set_option('display.precision', 2)
 doc_df = pd.DataFrame(data.toarray(), index = text, columns = vectorizer.get_feature_names_out()).head(10)
 print(doc_df)
-'''
-print('------------------------------------------------------------')	#60個
-'''
+"""
+print("------------------------------------------------------------")  # 60個
+"""
 x = np.array([i * np.pi / 180 for i in range(60, 300, 4)])
 y = np.sin(x) + np.random.normal(0, 0.15, len(x))
 data = pd.DataFrame(np.column_stack([x, y]), columns = ['x', 'y'])
@@ -328,9 +331,9 @@ print('------------------------------')	#30個
 #有多少個系數為0
 
 coef_matrix_ridge.apply(lambda x: sum(x.values==0),axis=1)
-'''
-print('------------------------------------------------------------')	#60個
-print('------------------------------------------------------------')	#60個
+"""
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 '''
 #L1 Regulariztion Lass Regression
 
@@ -389,9 +392,9 @@ print(tt)
 
 coef_matrix_lasso.apply(lambda x: sum(x.values==0),axis=1)
 '''
-print('------------------------------------------------------------')	#60個
-print('------------------------------------------------------------')	#60個
-'''
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+"""
 from sklearn.feature_extraction.text import  CountVectorizer
 from sklearn.preprocessing import Normalizer
 from sklearn.decomposition import TruncatedSVD
@@ -450,10 +453,10 @@ sns.heatmap(similarity, cmap = 'Reds')
 plt.show()
 
 print(pd.DataFrame(model.components_,index=['component_1','component_2'],columns=vectorizer.get_feature_names_out()).T)
-'''
-print('------------------------------------------------------------')	#60個
-print('------------------------------------------------------------')	#60個
-'''
+"""
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+"""
 print('房價')
 
 import scipy.stats as stats
@@ -528,10 +531,10 @@ res = st.probplot(SalePrice_log, plot=plt)
 print(res)
 plt.title('SalePrice log')
 plt.show()
-'''
+"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
+"""
 
 from scipy.stats import norm
 
@@ -632,7 +635,7 @@ example_counts = cv.transform(examples)
 predictions = classifier.predict(example_counts)  # 預測.predict
 
 print('預測結果 :', predictions)
-'''
+"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -657,38 +660,35 @@ df["Weight"] = [180, 190, 170, 165, 100, 150, 130, 150]
 df["Size"] = [12, 11, 12, 10, 6, 8, 7, 9]
 df["Team"] = ["i100", "i100", "i500", "i100", "i500", "i100", "i500", "i100"]
 
-print('df:\n', df)
+print("df:\n", df)
 
-print('------------------------------')	#30個
+print("------------------------------")  # 30個
 
 df1 = (
-    df.groupby(["Team", "Gender"])
-    .size()
-    .rename("cnt")
-    .reset_index()
-    .set_index("Team")
+    df.groupby(["Team", "Gender"]).size().rename("cnt").reset_index().set_index("Team")
 )
-print('df1:\n', df1)
+print("df1:\n", df1)
 
 df2 = pd.DataFrame(df.groupby(["Team"]).size().rename("total"))
-print('df2:\n', df2)
+print("df2:\n", df2)
 
 df3 = df1.merge(df2, left_index=True, right_index=True)
 df3["p"] = df3["cnt"] * 1.0 / df3["total"]
 df3 = df3.reset_index()
-print('df3:\n', df3)
+print("df3:\n", df3)
 
-print('------------------------------')	#30個
+print("------------------------------")  # 30個
+
 
 def p_x_given_y_1(team, gender):
     return df3["p"][df3["Team"] == team][df3["Gender"] == gender].values[0]
 
 
-print('p_x_given_y_1')
+print("p_x_given_y_1")
 print(p_x_given_y_1("i100", "female"))
 # 0.4
 
-print('------------------------------')	#30個
+print("------------------------------")  # 30個
 
 # 計算先驗
 # Number of i100
@@ -728,7 +728,8 @@ df["Weight"] = [130]
 df["Size"] = [8]
 df["Gender"] = ["female"]
 
-print('df:\n', df)
+print("df:\n", df)
+
 
 def p_x_given_y_2(x, mean_y, variance_y):
     # Input the arguments into a probability density function
@@ -747,11 +748,8 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -2050,12 +2048,8 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-
 
 
 ''' 一個很大的範例
@@ -2825,7 +2819,6 @@ print(error(Y, Ypred))
 '''
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------------------------------------")  # 60個

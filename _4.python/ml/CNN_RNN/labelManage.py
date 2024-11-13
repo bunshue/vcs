@@ -1,4 +1,4 @@
-#from keras.utils import np_utils old 改如下
+# from keras.utils import np_utils old 改如下
 from tensorflow.python.keras.utils import np_utils
 from keras.datasets import mnist
 
@@ -7,4 +7,3 @@ from keras.datasets import mnist
 print(train_label[0:5])
 train_label_onehot = np_utils.to_categorical(train_label)
 print(train_label_onehot[0:5])
-

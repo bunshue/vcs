@@ -1198,7 +1198,6 @@ x資料不能直接用 要改成X
 """
 
 
-
 """
 再來很重要, 從現在到以後, 很多學函數的方法, 都要求我們訓練資料要排成一列一列的。也就說原本的
 [x1,x2,…,x80]
@@ -1208,26 +1207,21 @@ x資料不能直接用 要改成X
 """
 
 
-
-
-#測試資料型態
+# 測試資料型態
 xxx = np.array([3, 9, 8, 1, 2])
 yyy = np.array([1, 3, 9, 2, 4])
 
-print('目前 xxx 是個 5 維向量')
+print("目前 xxx 是個 5 維向量")
 print(xxx.shape)
 
-#xxx訓練資料要轉為 NX1 陣列
+# xxx訓練資料要轉為 NX1 陣列
 xxx = xxx.reshape(len(xxx), 1)
 print(xxx.shape)
-
 
 
 print("打印一些結果")
 print(linear_regression.predict([[1.3]]))  # 預測.predict
 print(linear_regression.predict([[2.7], [1.5]]))  # 預測.predict
-
-
 
 
 # 預測
@@ -1244,7 +1238,6 @@ p = linear_regression.predict(temp)  # 預測.predict
 print(p)
 
 
-
 # SVR 函數學習機, rbf / linear / poly
 
 
@@ -1253,9 +1246,7 @@ plt.xlim(-3, 3)
 plt.ylim(-150, 150)
 
 
-
-
-#-------------------------
+# -------------------------
 
 """
 linear_regression.fit(xs, ys)  # 學習訓練.fit
@@ -1285,20 +1276,20 @@ plt.plot(xxx, predicted, "ro", lw=1, ms=12, label="預測值")
 
 """
 
-#預測
+# 預測
 cc = linear_regression.predict([[6]])  # 預測.predict
 
 
 plt.plot(xxx, yyy, "go:")
 
 
-#資料的寫法
+# 資料的寫法
 X = [[1], [2], [3], [4], [5]]
 y = [88, 72, 90, 76, 92]
 linear_regression.fit(X, y)  # 學習訓練.fit
 
 
-#資料的寫法
+# 資料的寫法
 # x = np.array([[22], [26], [23], [28], [27], [32], [30]])      # 溫度
 # y = np.array([[15], [35], [21], [62], [48], [101], [86]])     # 飲料銷售數量
 # x = np.array([0.0, 1.0, 2.0, 3.0, 4.0, 5.0], dtype = float)
@@ -1321,4 +1312,3 @@ y1 真實資料
    其他迴歸
 
 """
-

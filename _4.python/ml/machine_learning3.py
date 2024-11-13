@@ -30,11 +30,15 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 print("------------------------------------------------------------")  # 60個
 
 import ssl
+
 ssl._create_default_https_context = ssl._create_stdlib_context
 
 print("------------------------------------------------------------")  # 60個
 
-from sklearn import datasets, svm, metrics
+from sklearn import datasets
+from sklearn import metrics
+from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
+from sklearn.datasets import make_blobs
 
 print("------------------------------------------------------------")  # 60個
 '''
@@ -201,7 +205,7 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 '''
-'''
+"""
 print('K-近鄰演算法（K Nearest Neighbor）')
 
 from sklearn import neighbors
@@ -219,10 +223,10 @@ knn.fit(X, y)  # 學習訓練.fit
 new_tissue = pd.DataFrame(np.array([[3, 7]]), columns=["耐酸性", "強度"])
 pred = knn.predict(new_tissue)
 print(pred)
-'''
+"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
+"""
 from sklearn import cluster
 
 df = pd.DataFrame(
@@ -248,7 +252,7 @@ df = pd.DataFrame(
 )
 k = 3
 
-kmeans = cluster.KMeans(n_clusters=k, random_state=12)
+kmeans = cluster.KMeans(n_clusters=k, random_state=9487)
 
 kmeans.fit(df)  # 學習訓練.fit
 
@@ -258,7 +262,7 @@ colmap = np.array(["r", "g", "y"])
 plt.scatter(df["length"], df["weight"], color=colmap[kmeans.labels_])
 
 plt.show()
-'''
+"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -332,7 +336,7 @@ plot_model(clf, to_file='model.png')
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
+"""
 # titanic ST
 
 # 數據集和數據處理
@@ -412,7 +416,7 @@ logreg.fit(X_train, Y_train)  # 學習訓練.fit
 print(logreg.score(X_train, Y_train))  # 模型評分
 
 Y_pred = logreg.predict(X_test)  # 預測
-'''
+"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -455,20 +459,23 @@ for col in data.columns:
         
 x = data[features] # 自變量
 y = data[label] # 目標變量
-x_train, x_val, y_train, y_val = train_test_split(x, y, test_size=0.25, random_state=0)
+
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+x_train, x_val, y_train, y_val = train_test_split(x, y, test_size=0.2, random_state=9487)
+# 訓練組8成, 測試組2成
+
 x_train = x_train.fillna(x.mean()) # 空值填充訓練集
 x_val = x_val.fillna(x.mean()) # 空值填充驗證集
 x_test = test.fillna(x.mean()) # 空值填充測試集
 x = x.fillna(x.mean()) # 空值填充全集
 
-
 print('------------------------------------------------------------')	#60個
 
 # 訓練模型生成提交數據
 
-#clf = RandomForestRegressor(criterion='mse', random_state=0) # 隨機森林迴歸
-#clf = GradientBoostingClassifier(criterion='mse',random_state=0) # GBDT分類
-clf = GradientBoostingRegressor(criterion='mse', random_state=0) # GBDT迴歸
+#clf = RandomForestRegressor(criterion='mse', random_state=9487) # 隨機森林迴歸
+#clf = GradientBoostingClassifier(criterion='mse',random_state=9487) # GBDT分類
+clf = GradientBoostingRegressor(criterion='mse', random_state=9487) # GBDT迴歸
 
 if True: # 用於本地測試
     clf.fit(x_train, y_train)  # 學習訓練.fit
@@ -527,7 +534,11 @@ data_all = pd.concat([data,test]) # 優化點二
 data = data[data['happiness'] > 0] # 去掉因變量缺失的數據
 x = data[features] # 自變量
 y = data[label] # 目標變量
-x_train, x_val, y_train, y_val = train_test_split(x, y, test_size=0.25, random_state=0)
+
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+x_train, x_val, y_train, y_val = train_test_split(x, y, test_size=0.2, random_state=9487)
+# 訓練組8成, 測試組2成
+
 x_train = x_train.fillna(data_all[features].mean()) # 空值填充訓練集
 x_val = x_val.fillna(data_all[features].mean()) # 空值填充驗證集
 x_test = test.fillna(data_all[features].mean()) # 空值填充測試集
@@ -550,7 +561,7 @@ my_params = {"booster":'gbtree','eta': 0.005, 'max_depth': 6, 'subsample': 0.7,
 
 train_preds = np.zeros(len(data)) # 用於保存預測結果
 test_preds = np.zeros(len(test))
-kf = KFold(len(data), n_folds = 5, shuffle=True, random_state=0) # 5折交叉驗證
+kf = KFold(len(data), n_folds = 5, shuffle=True, random_state=9487) # 5折交叉驗證
 for fold, (trn_idx, val_idx) in enumerate(kf):
     print("fold {}".format(fold+1))
     train_data = xgb.DMatrix(data[features].iloc[trn_idx], data[label].iloc[trn_idx]) # 訓練集
@@ -586,7 +597,7 @@ from sklearn.ensemble import GradientBoostingRegressor
 baseline = 0.4887 # 誤差baseline
 for i in features:
     features_new = [x for x in features if x != i]
-    clf = GradientBoostingRegressor(criterion='mse', random_state=0)
+    clf = GradientBoostingRegressor(criterion='mse', random_state=9487)
     clf.fit(x_train[features_new], y_train)  # 學習訓練.fit
     mse = mean_squared_error(y_val, [round(i) for i in clf.predict(x_val[features_new])])
     if mse < baseline:
@@ -598,7 +609,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
+"""
 # 1. Rescale Data
 # 將資料比例縮放到0與1之間# Rescale data (between 0 and 1)
 
@@ -711,106 +722,70 @@ if result > 0.2:
     print("OK, 一個漢堡蛋")
 else:
     print("Sorry, 無法接受訂餐")
-
+"""
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-iris = sns.load_dataset("iris")
-iris.head()
-
-sns.set()
-sns.pairplot(iris, hue="species", height=3)
-
-print(iris)
-print("cccc")
-
-print("------------------------------------------------------------")  # 60個
-
-import plotly.offline
-import plotly.express as px
-import plotly.graph_objects as go
-import plotly.subplots
-
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"
-
-tips = sns.load_dataset("tips")
-print(tips)
-
-print("------------------------------------------------------------")  # 60個
-
-# 怎麼選最好參數、model？
 # 製造像真的一様的數據
-
-# from sklearn.datasets.samples_generator import make_blobs old
-from sklearn.datasets import make_blobs
-
-x, y = make_blobs(n_samples=500, centers=3, n_features=2, random_state=0)
+N = 500
+GROUPS = 3
+x, y = make_blobs(n_samples=N, centers=GROUPS, n_features=2, random_state=9487)
 plt.scatter(x[:, 0], x[:, 1], c=y)
 
-# plt.show()
+plt.show()
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 # Cross Validation
 from sklearn.model_selection import cross_val_score
 from sklearn.svm import SVC
 
+print("使用 SVC")
+# 非線性SVM 建立分類模型, 建立訓練數據模型, 對測試數據做預測
 clf = SVC()
 # clf = SVC(gamma = 'scale')
 
-# 看一下五次的成績
 scores = cross_val_score(clf, x, y, cv=5)
-print(scores)
+print("看一下五次的成績 :", scores)
+print("平均 :", scores.mean())
 
-# 很快的算一下平均
-print(scores.mean())
+print("------------------------------")  # 30個
 
-print("------------------------------------------------------------")  # 60個
-
-# 試用 Decision Tree
+print("使用 Decision Tree")
 from sklearn.tree import DecisionTreeClassifier
 
 clf = DecisionTreeClassifier()
 
-# 看一下五次的成績
 scores = cross_val_score(clf, x, y, cv=5)
-print(scores)
+print("看一下五次的成績 :", scores)
+print("平均 :", scores.mean())
 
-# 很快的算一下平均
-print(scores.mean())
+print("------------------------------")  # 30個
 
-print("------------------------------------------------------------")  # 60個
-
-# 試用 Random Forest
+print("使用 Random Forest")
 
 from sklearn.ensemble import RandomForestClassifier
 
 clf = RandomForestClassifier(n_estimators=100)
 
-# 看一下五次的成績
 scores = cross_val_score(clf, x, y, cv=5)
-print(scores)
-
-# 很快的算一下平均
-print(scores.mean())
+print("看一下五次的成績 :", scores)
+print("平均 :", scores.mean())
 
 print("------------------------------------------------------------")  # 60個
-
-from sklearn import datasets
+print("------------------------------------------------------------")  # 60個
 
 x, y = datasets.make_regression(n_features=1, noise=20)
+
 plt.xlim(-3, 3)
 plt.ylim(-150, 150)
 plt.scatter(x, y)
 
-# plt.show()
+plt.show()
 
-print("------------------------------------------------------------")  # 60個
-
-from sklearn import datasets
-from sklearn.model_selection import train_test_split
-
-x, y = datasets.make_regression(n_features=1, noise=20)
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
 x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2)
+# 訓練組8成, 測試組2成
 
 plt.xlim(-3, 3)
 plt.ylim(-150, 150)
@@ -818,11 +793,10 @@ plt.scatter(x_train, y_train, label="訓練數據")
 plt.scatter(x_test, y_test, label="測試數據")
 plt.legend()
 
-# plt.show()
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
-
-from sklearn import datasets
+print("------------------------------------------------------------")  # 60個
 
 # 建立 300 個點, n_features = 2
 data, label = datasets.make_blobs(n_samples=300, n_features=2)
@@ -832,11 +806,11 @@ plt.scatter(data[:, 0], data[:, 1], marker="o", edgecolor="black")
 
 plt.title("無監督學習")
 
-# plt.show()
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-from sklearn import datasets
 from sklearn import cluster
 
 # 建立 300 個點, n_features = 2
@@ -848,8 +822,8 @@ print(e.labels_)  # 列印群集類別標籤
 print(e.cluster_centers_)  # 列印群集中心
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-from sklearn import datasets
 from sklearn import cluster
 
 # 建立 300 個點, n_features = 2
@@ -866,41 +840,46 @@ plt.scatter(data[:, 0], data[:, 1], marker="o", c=e.labels_)
 plt.scatter(e.cluster_centers_[:, 0], e.cluster_centers_[:, 1], marker="*", color="red")
 plt.title("無監督學習")
 
-# plt.show()
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-from sklearn.datasets import make_blobs
 from sklearn.preprocessing import StandardScaler
-from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 
-data, label = make_blobs(n_samples=1000, n_features=2, centers=2, random_state=5)
+data, label = make_blobs(n_samples=1000, n_features=2, centers=2, random_state=9487)
 d_sta = StandardScaler().fit_transform(data)  # 標準化
 
-# 分割數據為訓練數據和測試數據
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
 dx_train, dx_test, label_train, label_test = train_test_split(
-    d_sta, label, test_size=0.2, random_state=0
+    d_sta, label, test_size=0.2, random_state=9487
 )
+# 訓練組8成, 測試組2成
+
 # 建立分類模型
 lo_model = LogisticRegression()
+
 # 建立訓練數據模型
 lo_model.fit(dx_train, label_train)  # 學習訓練.fit
+
 # 對測試數據做預測
 pred = lo_model.predict(dx_test)
+
 # 輸出測試數據的 label
 print(label_test)
+
 # 輸出預測數據的 label
 print(pred)
+
 # 輸出準確性
 print(f"訓練資料的準確性 = {lo_model.score(dx_train, label_train)}")
 print(f"測試資料的準確性 = {lo_model.score(dx_test, label_test)}")
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-from sklearn.datasets import make_blobs
-
-data, label = make_blobs(n_samples=10, n_features=2, centers=2, random_state=0)
+data, label = make_blobs(n_samples=10, n_features=2, centers=2, random_state=9487)
 print(data)
 print(label)
 print(f"分類 : {label}")
@@ -908,14 +887,14 @@ print(f"分類 : {label}")
 plt.scatter(data[:, 0], data[:, 1], c=label, cmap="bwr")
 plt.grid(True)
 
-# plt.show()
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-from sklearn.datasets import make_blobs
 from sklearn.preprocessing import StandardScaler
 
-data, label = make_blobs(n_samples=10, n_features=2, centers=2, random_state=0)
+data, label = make_blobs(n_samples=10, n_features=2, centers=2, random_state=9487)
 
 print(data)
 print(label)
@@ -931,20 +910,21 @@ plt.subplot(122)
 plt.scatter(d_sta[:, 0], d_sta[:, 1], c=label, cmap="bwr")
 plt.grid(True)
 
-# plt.show()
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-from sklearn.datasets import make_blobs
 from sklearn.preprocessing import StandardScaler
-from sklearn.model_selection import train_test_split
 
-data, label = make_blobs(n_samples=200, n_features=2, centers=2, random_state=0)
+data, label = make_blobs(n_samples=200, n_features=2, centers=2, random_state=9487)
 d_sta = StandardScaler().fit_transform(data)  # 標準化
-# 分割數據為訓練數據和測試數據
+
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
 dx_train, dx_test, label_train, label_test = train_test_split(
-    d_sta, label, test_size=0.2, random_state=0
+    d_sta, label, test_size=0.2, random_state=9487
 )
+# 訓練組8成, 測試組2成
 
 print(f"特徵數據外形 : {d_sta.shape}")
 print(f"訓練數據外形 : {dx_train.shape}")
@@ -954,174 +934,209 @@ print(f"訓練數據外形 : {label_train.shape}")
 print(f"測試數據外形 : {label_test.shape}")
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-from sklearn.datasets import make_blobs
 from sklearn.preprocessing import StandardScaler
-from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier  # K近鄰演算法（K Nearest Neighbor）
 
-data, label = make_blobs(n_samples=200, n_features=2, centers=2, random_state=0)
+data, label = make_blobs(n_samples=200, n_features=2, centers=2, random_state=9487)
 d_sta = StandardScaler().fit_transform(data)  # 標準化
-# 分割數據為訓練數據和測試數據
+
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
 dx_train, dx_test, label_train, label_test = train_test_split(
-    d_sta, label, test_size=0.2, random_state=0
+    d_sta, label, test_size=0.2, random_state=9487
 )
+# 訓練組8成, 測試組2成
+
 # 建立分類模型
 k_model = KNeighborsClassifier(n_neighbors=5)  # k = 5  # K近鄰演算法（K Nearest Neighbor）
+
 # 建立訓練數據模型
 k_model.fit(dx_train, label_train)  # 學習訓練.fit
+
 # 對測試數據做預測
 pred = k_model.predict(dx_test)
+
 # 輸出測試數據的 label
 print(label_test)
+
 # 輸出預測數據的 label
 print(pred)
+
 # 輸出準確性
 print(f"訓練資料的準確性 = {k_model.score(dx_train, label_train)}")
 print(f"測試資料的準確性 = {k_model.score(dx_test, label_test)}")
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-from sklearn.datasets import make_blobs
 from sklearn.preprocessing import StandardScaler
-from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 
-data, label = make_blobs(n_samples=200, n_features=2, centers=2, random_state=0)
+data, label = make_blobs(n_samples=200, n_features=2, centers=2, random_state=9487)
 d_sta = StandardScaler().fit_transform(data)  # 標準化
-# 分割數據為訓練數據和測試數據
+
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
 dx_train, dx_test, label_train, label_test = train_test_split(
-    d_sta, label, test_size=0.2, random_state=0
+    d_sta, label, test_size=0.2, random_state=9487
 )
+# 訓練組8成, 測試組2成
+
 # 建立分類模型
 lo_model = LogisticRegression()
+
 # 建立訓練數據模型
 lo_model.fit(dx_train, label_train)  # 學習訓練.fit
+
 # 對測試數據做預測
 pred = lo_model.predict(dx_test)
+
 # 輸出測試數據的 label
 print(label_test)
+
 # 輸出預測數據的 label
 print(pred)
+
 # 輸出準確性
 print(f"訓練資料的準確性 = {lo_model.score(dx_train, label_train)}")
 print(f"測試資料的準確性 = {lo_model.score(dx_test, label_test)}")
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-from sklearn.datasets import make_blobs
 from sklearn.preprocessing import StandardScaler
-from sklearn.model_selection import train_test_split
 from sklearn.svm import LinearSVC
 
-data, label = make_blobs(n_samples=200, n_features=2, centers=2, random_state=0)
+data, label = make_blobs(n_samples=200, n_features=2, centers=2, random_state=9487)
 d_sta = StandardScaler().fit_transform(data)  # 標準化
-# 分割數據為訓練數據和測試數據
+
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
 dx_train, dx_test, label_train, label_test = train_test_split(
-    d_sta, label, test_size=0.2, random_state=0
+    d_sta, label, test_size=0.2, random_state=9487
 )
+# 訓練組8成, 測試組2成
+
 # 建立分類模型
 svm_model = LinearSVC()
+
 # 建立訓練數據模型
 svm_model.fit(dx_train, label_train)  # 學習訓練.fit
+
 # 對測試數據做預測
 pred = svm_model.predict(dx_test)
+
 # 輸出測試數據的 label
 print(label_test)
+
 # 輸出預測數據的 label
 print(pred)
+
 # 輸出準確性
 print(f"訓練資料的準確性 = {svm_model.score(dx_train, label_train)}")
 print(f"測試資料的準確性 = {svm_model.score(dx_test, label_test)}")
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 from sklearn.datasets import make_moons
 from sklearn.preprocessing import StandardScaler
-from sklearn.model_selection import train_test_split
 from sklearn.svm import LinearSVC, SVC
 
-data, label = make_moons(n_samples=200, noise=0.2, random_state=0)
+data, label = make_moons(n_samples=200, noise=0.2, random_state=9487)
 
 d_sta = StandardScaler().fit_transform(data)  # 標準化
-# 分割數據為訓練數據和測試數據
+
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
 dx_train, dx_test, label_train, label_test = train_test_split(
-    d_sta, label, test_size=0.2, random_state=0
+    d_sta, label, test_size=0.2, random_state=9487
 )
+# 訓練組8成, 測試組2成
+
 # 線性SVM 建立分類模型, 建立訓練數據模型, 對測試數據做預測
 svm_model = LinearSVC()
+
 svm_model.fit(dx_train, label_train)  # 學習訓練.fit
+
 pred = svm_model.predict(dx_test)
+
 # 輸出線性SVM準確性
 print(f"線性訓練資料的準確性 = {svm_model.score(dx_train, label_train)}")
 print(f"線性測試資料的準確性 = {svm_model.score(dx_test, label_test)}")
 print("=" * 50)
+
 # 非線性SVM 建立分類模型, 建立訓練數據模型, 對測試數據做預測
 svm = SVC()
 svm.fit(dx_train, label_train)
 pred = svm.predict(dx_test)
+
 # 輸出非線性SVM準確性
 print(f"非線性訓練資料的準確性 = {svm.score(dx_train, label_train)}")
 print(f"非線性測試資料的準確性 = {svm.score(dx_test, label_test)}")
 
 print("------------------------------------------------------------")  # 60個
 
-from sklearn import datasets
-
 data, label = datasets.load_iris(return_X_y=True)
+
 print("鳶尾花花萼和花瓣數據")
 print(data[0:5])
 print(f"分類 : {label[0:5]}")
 
 print("------------------------------------------------------------")  # 60個
 
-from sklearn import datasets
-from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
 
 data, label = datasets.load_iris(return_X_y=True)
-# 分割數據為訓練數據和測試數據
+
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
 dx_train, dx_test, label_train, label_test = train_test_split(
-    data, label, test_size=0.2, random_state=0
+    data, label, test_size=0.2, random_state=9487
 )
+# 訓練組8成, 測試組2成
+
 # 建立分類模型
 tree_model = DecisionTreeClassifier()
+
 # 建立訓練數據模型
 tree_model.fit(dx_train, label_train)
+
 # 對測試數據做預測
 pred = tree_model.predict(dx_test)
+
 # 輸出準確性
 print(f"訓練資料的準確性 = {tree_model.score(dx_train, label_train)}")
 print(f"測試資料的準確性 = {tree_model.score(dx_test, label_test)}")
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-from sklearn import datasets
-from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 
 data, label = datasets.load_iris(return_X_y=True)
-# 分割數據為訓練數據和測試數據
+
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
 dx_train, dx_test, label_train, label_test = train_test_split(
-    data, label, test_size=0.2, random_state=0
+    data, label, test_size=0.2, random_state=9487
 )
+# 訓練組8成, 測試組2成
+
 # 建立分類模型
 forest_model = RandomForestClassifier()
+
 # 建立訓練數據模型
 forest_model.fit(dx_train, label_train)
+
 # 對測試數據做預測
 pred = forest_model.predict(dx_test)
+
 # 輸出準確性
 print(f"訓練資料的準確性 = {forest_model.score(dx_train, label_train)}")
 print(f"測試資料的準確性 = {forest_model.score(dx_test, label_test)}")
 
 print("------------------------------------------------------------")  # 60個
 
-from sklearn import datasets
-
 # 建立 300 個點, n_features = 2, centers = 3
 data, label = datasets.make_blobs(
-    n_samples=300, n_features=2, centers=3, random_state=10
+    n_samples=300, n_features=2, centers=3, random_state=9487
 )
 
 # 繪圓點, 圓點用黑色外框
@@ -1129,16 +1144,16 @@ plt.scatter(data[:, 0], data[:, 1], marker="o", edgecolor="black")
 
 plt.title("無監督學習", fontsize=16)
 
-# plt.show()
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-from sklearn import datasets
 from sklearn import cluster
 
 # 建立 300 個點, n_features = 2, centers = 3
 data, label = datasets.make_blobs(
-    n_samples=300, n_features=2, centers=3, random_state=10
+    n_samples=300, n_features=2, centers=3, random_state=9487
 )
 
 e = cluster.KMeans(n_clusters=3)  # k-mean方法建立 3 個群集中心物件
@@ -1148,12 +1163,11 @@ print(e.cluster_centers_)  # 列印群集中心
 
 print("------------------------------------------------------------")  # 60個
 
-from sklearn import datasets
 from sklearn import cluster
 
 # 建立 300 個點, n_features = 2, centers = 3
 data, label = datasets.make_blobs(
-    n_samples=300, n_features=2, centers=3, random_state=10
+    n_samples=300, n_features=2, centers=3, random_state=9487
 )
 
 e = cluster.KMeans(n_clusters=3)  # k-mean方法建立 3 個群集中心物件
@@ -1167,11 +1181,12 @@ plt.scatter(data[:, 0], data[:, 1], marker="o", c=e.labels_)
 plt.scatter(e.cluster_centers_[:, 0], e.cluster_centers_[:, 1], marker="*", color="red")
 plt.title("無監督學習", fontsize=16)
 
-# plt.show()
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+""" 訓練久
 from keras.models import Sequential
 from keras.layers import Dense
 from keras.utils import to_categorical
@@ -1213,13 +1228,13 @@ print(Y_pred)
 
 Y_target = dataset[:, 4][120:].astype(int)
 print(Y_target)
-'''
+"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
+"""
 from sklearn import preprocessing
 
 f_tracking = [
@@ -1287,7 +1302,7 @@ print(df_scaled.head())
 
 df_scaled.plot(kind="scatter", x="標準化FB追蹤數", y="標準化快樂程度")
 
-# plt.show()
+plt.show()
 
 print("------------------------------")  # 30個
 
@@ -1360,10 +1375,10 @@ print(df_std.head())
 
 df_std.plot(kind="scatter", x="標準化FB追蹤數", y="標準化快樂程度")
 
-# plt.show()
-
+plt.show()
+"""
 print("------------------------------------------------------------")  # 60個
-
+"""
 from sklearn import preprocessing
 
 f_tracking = [
@@ -1438,7 +1453,7 @@ print(df_minmax.head())
 
 df_minmax.plot(kind="scatter", x="最小最大值縮放FB追蹤數", y="最小最大值縮放快樂程度")
 
-# plt.show()
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1533,7 +1548,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 from sklearn import neighbors, datasets, preprocessing
-from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 
 # Load the Iris dataset
@@ -1542,8 +1556,9 @@ iris = datasets.load_iris()
 # Split the dataset into features (X) and target (y)
 X, y = iris.data[:, :2], iris.target
 
-# Split the dataset into training and testing sets
-X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=33)
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=9487)
+# 訓練組8成, 測試組2成
 
 # Standardize the features using StandardScaler
 scaler = preprocessing.StandardScaler().fit(X_train)
@@ -1569,11 +1584,6 @@ print("Accuracy:", accuracy)
 
 print("------------------------------------------------------------")  # 60個
 
-# Loading The Data
-
-from sklearn import datasets
-
-# Load the Iris dataset
 iris = datasets.load_iris()
 
 # Split the dataset into features (X) and target (y)
@@ -1583,16 +1593,12 @@ X, y = iris.data, iris.target
 print("Size of X:", X.shape)  #  (150, 4)
 print("Size of y:", y.shape)  #  (150, )
 
-print("------------------------------------------------------------")  # 60個
-
-# Training And Test Data
-
-# Import train_test_split from sklearn
-from sklearn.model_selection import train_test_split
-
 # Split the data into training and test sets with test_size=0.2 (20% for test set)
 X, y = iris.data, iris.target
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
+
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=9487)
+# 訓練組8成, 測試組2成
 
 # Print the sizes of the arrays
 print("Size of X_train:", X_train.shape)
@@ -1878,14 +1884,10 @@ print("Best cross-validation score:", grid.best_score_)
 best_knn = grid.best_estimator_
 test_accuracy = best_knn.score(X_test, y_test)
 print("Test set accuracy:", test_accuracy)
-
-
-print("------------------------------------------------------------")  # 60個
-
-
+"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
+'''
 N = 200
 
 X = np.linspace(0, 1, N)
@@ -2005,7 +2007,7 @@ def plot_learning_curve(
 
 
 # 為了讓學習曲線更平滑，交叉驗證數據集的得分計算 10 次，每次都重新選中 20% 的數據計算一遍
-cv = ShuffleSplit(n_splits=10, test_size=0.2, random_state=0)
+cv = ShuffleSplit(n_splits=10, test_size=0.2, random_state=9487)
 titles = [
     "Learning Curves (Under Fitting)",
     "Learning Curves",
@@ -2024,12 +2026,9 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-# from sklearn.datasets.samples_generator import make_blobs    old
-from sklearn.datasets import make_blobs
-
 # 生成數據
 centers = [[-2, 2], [2, 2], [0, 4]]
-X, y = make_blobs(n_samples=60, centers=centers, random_state=0, cluster_std=0.60)
+X, y = make_blobs(n_samples=60, centers=centers, random_state=9487, cluster_std=0.60)
 
 # 畫出數據
 plt.figure(figsize=(12, 8))
@@ -2111,11 +2110,10 @@ X = data.iloc[:, 0:8]
 Y = data.iloc[:, 8]
 print("shape of X {}; shape of Y {}".format(X.shape, Y.shape))
 
-print("------------------------------")  # 30個
 
-from sklearn.model_selection import train_test_split
-
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
 X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2)
+# 訓練組8成, 測試組2成
 
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.neighbors import RadiusNeighborsClassifier
@@ -2167,7 +2165,7 @@ from sklearn.model_selection import ShuffleSplit
 from common.utils import plot_learning_curve
 
 knn = KNeighborsClassifier(n_neighbors=2)  # K近鄰演算法（K Nearest Neighbor）
-cv = ShuffleSplit(n_splits=10, test_size=0.2, random_state=0)
+cv = ShuffleSplit(n_splits=10, test_size=0.2, random_state=9487)
 plt.figure(figsize=(10, 6))
 plot_learning_curve(
     plt, knn, "Learn Curve for KNN Diabetes", X, Y, ylim=(0.0, 1.01), cv=cv
@@ -2201,9 +2199,10 @@ plt.scatter(X_new[Y == 0][:, 0], X_new[Y == 0][:, 1], c="r", s=20, marker="o")  
 plt.scatter(X_new[Y == 1][:, 0], X_new[Y == 1][:, 1], c="g", s=20, marker="^")  # 畫出樣本
 
 plt.show()
-
+'''
 print("------------------------------------------------------------")  # 60個
-
+print("------------------------------------------------------------")  # 60個
+"""
 N = 200
 
 X = np.linspace(-2 * np.pi, 2 * np.pi, N)
@@ -2249,7 +2248,7 @@ print("------------------------------")  # 30個
 
 from matplotlib.figure import SubplotParams
 
-plt.figure(figsize=(12, 6), dpi=200, subplotpars=SubplotParams(hspace=0.3))
+plt.figure(figsize=(12, 8), subplotpars=SubplotParams(hspace=0.3))
 for i, r in enumerate(results):
     fig = plt.subplot(2, 2, i + 1)
     plt.xlim(-8, 8)
@@ -2258,10 +2257,10 @@ for i, r in enumerate(results):
     plt.plot(X, r["model"].predict(X), "r-")
 
 plt.show()
-
+"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
+"""
 print("titanic ST")
 
 
@@ -2280,17 +2279,18 @@ def read_dataset(fname):
     return data
 
 
-train = read_dataset("datasets/titanic/train.csv")
+train = read_dataset("datasets/titanic/train.csv") # 共891筆資料, 8欄位
 print(train.head())
 
-from sklearn.model_selection import train_test_split
-
+# 把 "Survived"欄位拿出來當訓練目標 => y
 y = train["Survived"].values
+
+# 把 "Survived"欄位從原訓練資料移除 => X
 X = train.drop(["Survived"], axis=1).values
 
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
-
-print("train dataset: {0}; test dataset: {1}".format(X_train.shape, X_test.shape))
+# 訓練組8成, 測試組2成
 
 from sklearn.tree import DecisionTreeClassifier
 
@@ -2298,15 +2298,15 @@ clf = DecisionTreeClassifier()
 clf.fit(X_train, y_train)
 train_score = clf.score(X_train, y_train)
 test_score = clf.score(X_test, y_test)
-print("train score: {0}; test score: {1}".format(train_score, test_score))
 
-# sys.exit()
+print("train_score :", train_score)
+print("test_score :", test_score)
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 from sklearn.tree import export_graphviz
 
-with open("titanic.dot", "w") as f:
+with open("tmp_titanic1.dot", "w") as f:
     f = export_graphviz(clf, out_file=f)
 
 # 1. 在電腦上安裝 graphviz
@@ -2333,7 +2333,7 @@ best_score = cv_scores[best_score_index]
 best_param = depths[best_score_index]
 print("best param: {0}; best score: {1}".format(best_param, best_score))
 
-plt.figure(figsize=(10, 6), dpi=144)
+plt.figure(figsize=(10, 6))
 plt.grid()
 plt.xlabel("max depth of decision tree")
 plt.ylabel("score")
@@ -2343,8 +2343,7 @@ plt.legend()
 
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
-
+print("------------------------------")  # 30個
 
 # 訓練模型，并計算評分
 def cv_score(val):
@@ -2368,7 +2367,7 @@ best_param = values[best_score_index]
 print("best param: {0}; best score: {1}".format(best_param, best_score))
 
 # 畫出模型參數與模型評分的關系
-plt.figure(figsize=(10, 6), dpi=144)
+plt.figure(figsize=(10, 6))
 plt.grid()
 plt.xlabel("threshold of entropy")
 plt.ylabel("score")
@@ -2378,7 +2377,7 @@ plt.legend()
 
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 
 def plot_curve(train_sizes, cv_results, xlabel):
@@ -2386,7 +2385,7 @@ def plot_curve(train_sizes, cv_results, xlabel):
     train_scores_std = cv_results["std_train_score"]
     test_scores_mean = cv_results["mean_test_score"]
     test_scores_std = cv_results["std_test_score"]
-    plt.figure(figsize=(10, 6), dpi=144)
+    plt.figure(figsize=(10, 6))
     plt.title("parameters turning")
     plt.grid()
     plt.xlabel(xlabel)
@@ -2427,7 +2426,7 @@ plot_curve(thresholds, clf.cv_results_, xlabel="gini thresholds")
 
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 from sklearn.model_selection import GridSearchCV
 
@@ -2446,7 +2445,7 @@ clf = GridSearchCV(DecisionTreeClassifier(), param_grid, cv=5, return_train_scor
 clf.fit(X, y)
 print("best param: {0}\nbest score: {1}".format(clf.best_params_, clf.best_score_))
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 print("生成決策樹圖形")
 
@@ -2459,34 +2458,42 @@ test_score = clf.score(X_test, y_test)
 print("train score: {0}; test score: {1}".format(train_score, test_score))
 
 # 導出 titanic.dot 文件
-with open("titanic.dot", "w") as f:
+with open("tmp_titanic2.dot", "w") as f:
     f = export_graphviz(clf, out_file=f)
 
 # 1. 在電腦上安裝 graphviz
 # 2. 運行 `dot -Tpng titanic.dot -o titanic.png`
 # 3. 在當前目錄查看生成的決策樹 titanic.png
+"""
+
+print("titanic SP")
 
 print("------------------------------------------------------------")  # 60個
-
+print("------------------------------------------------------------")  # 60個
+"""
 class1 = np.array([[1, 1], [1, 3], [2, 1], [1, 2], [2, 2]])
 class2 = np.array([[4, 4], [5, 5], [5, 4], [5, 3], [4, 5], [6, 4]])
 
-plt.figure(figsize=(8, 6), dpi=144)
+plt.figure(figsize=(8, 6))
 
 plt.title("Decision Boundary")
 
 plt.xlim(0, 8)
 plt.ylim(0, 6)
+
 ax = plt.gca()  # gca 代表當前坐標軸，即 'get current axis'
 ax.spines["right"].set_color("none")  # 隱藏坐標軸
 ax.spines["top"].set_color("none")
 
 plt.scatter(class1[:, 0], class1[:, 1], marker="o")
 plt.scatter(class2[:, 0], class2[:, 1], marker="s")
-plt.plot([1, 5], [5, 1], "-r")
+
+plt.plot([1, 5], [5, 1], "r-")
 plt.arrow(4, 4, -1, -1, shape="full", color="r")
-plt.plot([3, 3], [0.5, 6], "--b")
+
+plt.plot([3, 3], [0.5, 6], "b--")
 plt.arrow(4, 4, -1, 0, shape="full", color="b", linestyle="--")
+
 plt.annotate(
     r"margin 1",
     xy=(3.5, 4),
@@ -2495,6 +2502,7 @@ plt.annotate(
     fontsize=10,
     arrowprops=dict(arrowstyle="->", connectionstyle="arc3,rad=.2"),
 )
+
 plt.annotate(
     r"margin 2",
     xy=(3.5, 3.5),
@@ -2503,6 +2511,7 @@ plt.annotate(
     fontsize=10,
     arrowprops=dict(arrowstyle="->", connectionstyle="arc3,rad=.2"),
 )
+
 plt.annotate(
     r"support vector",
     xy=(4, 4),
@@ -2511,6 +2520,7 @@ plt.annotate(
     fontsize=10,
     arrowprops=dict(arrowstyle="->", connectionstyle="arc3,rad=.2"),
 )
+
 plt.annotate(
     r"support vector",
     xy=(2, 2),
@@ -2522,23 +2532,27 @@ plt.annotate(
 
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
-plt.figure(figsize=(8, 6), dpi=144)
+plt.figure(figsize=(8, 6))
 
 plt.title("Support Vector Machine")
 
 plt.xlim(0, 8)
 plt.ylim(0, 6)
+
 ax = plt.gca()  # gca 代表當前坐標軸，即 'get current axis'
 ax.spines["right"].set_color("none")  # 隱藏坐標軸
 ax.spines["top"].set_color("none")
 
 plt.scatter(class1[:, 0], class1[:, 1], marker="o")
 plt.scatter(class2[:, 0], class2[:, 1], marker="s")
+
 plt.plot([1, 5], [5, 1], "-r")
 plt.plot([0, 4], [4, 0], "--b", [2, 6], [6, 2], "--b")
+
 plt.arrow(4, 4, -1, -1, shape="full", color="b")
+
 plt.annotate(
     r"$w^T x + b = 0$",
     xy=(5, 1),
@@ -2547,6 +2561,7 @@ plt.annotate(
     fontsize=10,
     arrowprops=dict(arrowstyle="->", connectionstyle="arc3,rad=.2"),
 )
+
 plt.annotate(
     r"$w^T x + b = 1$",
     xy=(6, 2),
@@ -2555,6 +2570,7 @@ plt.annotate(
     fontsize=10,
     arrowprops=dict(arrowstyle="->", connectionstyle="arc3,rad=.2"),
 )
+
 plt.annotate(
     r"$w^T x + b = -1$",
     xy=(3.5, 0.5),
@@ -2563,6 +2579,7 @@ plt.annotate(
     fontsize=10,
     arrowprops=dict(arrowstyle="->", connectionstyle="arc3,rad=.2"),
 )
+
 plt.annotate(
     r"d",
     xy=(3.5, 3.5),
@@ -2571,6 +2588,7 @@ plt.annotate(
     fontsize=10,
     arrowprops=dict(arrowstyle="->", connectionstyle="arc3,rad=.2"),
 )
+
 plt.annotate(
     r"A",
     xy=(4, 4),
@@ -2581,12 +2599,11 @@ plt.annotate(
 )
 
 plt.show()
-
+"""
 print("------------------------------------------------------------")  # 60個
-
-from sklearn.datasets import make_blobs
-
-plt.figure(figsize=(13, 6), dpi=144)
+print("------------------------------------------------------------")  # 60個
+"""
+plt.figure(figsize=(13, 6))
 
 # sub plot 1
 plt.subplot(1, 2, 1)
@@ -2595,7 +2612,7 @@ X, y = make_blobs(
     n_samples=100,
     n_features=2,
     centers=[(1, 1), (2, 2)],
-    random_state=4,
+    random_state=9487,
     shuffle=False,
     cluster_std=0.4,
 )
@@ -2659,10 +2676,11 @@ plt.annotate(
 )
 
 plt.show()
-
+"""
 print("------------------------------------------------------------")  # 60個
-
-plt.figure(figsize=(8, 4), dpi=144)
+print("------------------------------------------------------------")  # 60個
+"""
+plt.figure(figsize=(8, 4))
 
 plt.title("Cost")
 
@@ -2694,10 +2712,11 @@ plt.annotate(
 )
 
 plt.show()
-
+"""
 print("------------------------------------------------------------")  # 60個
-
-plt.figure(figsize=(13, 6), dpi=144)
+print("------------------------------------------------------------")  # 60個
+"""
+plt.figure(figsize=(13, 6))
 
 class1 = np.array([[1, 1], [1, 2], [1, 3], [2, 1], [2, 2], [3, 2], [4, 1], [5, 1]])
 class2 = np.array(
@@ -2739,10 +2758,11 @@ plt.scatter(class2[:, 0], class2[:, 1], marker="s")
 plt.plot([1, 5], [3.8, 2], "-r")
 
 plt.show()
-
+"""
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
+"""
 def plot_hyperplane(clf, X, y, h=0.02, draw_sv=True, title="hyperplan"):
     # create a mesh to plot in
     x_min, x_max = X[:, 0].min() - 1, X[:, 0].max() + 1
@@ -2775,30 +2795,24 @@ def plot_hyperplane(clf, X, y, h=0.02, draw_sv=True, title="hyperplan"):
         plt.scatter(sv[:, 0], sv[:, 1], c="y", marker="x")
 
 
-from sklearn import svm
-from sklearn.datasets import make_blobs
-
-X, y = make_blobs(n_samples=100, centers=2, random_state=0, cluster_std=0.3)
-clf = svm.SVC(C=1.0, kernel="linear")
+X, y = make_blobs(n_samples=100, centers=2, random_state=9487, cluster_std=0.3)
+clf = sklearn.svm.SVC(C=1.0, kernel="linear")
 clf.fit(X, y)
 
-plt.figure(figsize=(12, 4), dpi=144)
+plt.figure(figsize=(12, 4))
 plot_hyperplane(clf, X, y, h=0.01, title="Maximum Margin Hyperplan")
 
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
-from sklearn import svm
-from sklearn.datasets import make_blobs
+X, y = make_blobs(n_samples=100, centers=3, random_state=9487, cluster_std=0.8)
+clf_linear = sklearn.svm.SVC(C=1.0, kernel="linear")
+clf_poly = sklearn.svm.SVC(C=1.0, kernel="poly", degree=3)
+clf_rbf = sklearn.svm.SVC(C=1.0, kernel="rbf", gamma=0.5)
+clf_rbf2 = sklearn.svm.SVC(C=1.0, kernel="rbf", gamma=0.1)
 
-X, y = make_blobs(n_samples=100, centers=3, random_state=0, cluster_std=0.8)
-clf_linear = svm.SVC(C=1.0, kernel="linear")
-clf_poly = svm.SVC(C=1.0, kernel="poly", degree=3)
-clf_rbf = svm.SVC(C=1.0, kernel="rbf", gamma=0.5)
-clf_rbf2 = svm.SVC(C=1.0, kernel="rbf", gamma=0.1)
-
-plt.figure(figsize=(10, 10), dpi=144)
+plt.figure(figsize=(10, 10))
 
 clfs = [clf_linear, clf_poly, clf_rbf, clf_rbf2]
 titles = [
@@ -2813,7 +2827,7 @@ for clf, i in zip(clfs, range(len(clfs))):
     plot_hyperplane(clf, X, y, title=titles[i])
 
 plt.show()
-
+"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -2908,7 +2922,7 @@ print(cm)
 print("------------------------------")  # 30個
 
 # Show confusion matrix
-plt.figure(figsize=(8, 8), dpi=144)
+plt.figure(figsize=(8, 8))
 plt.title('Confusion matrix of the classifier')
 ax = plt.gca()                                  
 ax.spines['right'].set_color('none')            
@@ -2925,7 +2939,8 @@ plt.colorbar()
 plt.show()
 """
 print("------------------------------------------------------------")  # 60個
-
+print("------------------------------------------------------------")  # 60個
+"""
 print("PCA 算法模擬")
 
 A = np.array([[3, 2000], [2, 3000], [4, 5000], [5, 8000], [1, 2000]], dtype="float")
@@ -2974,11 +2989,11 @@ print(R2)
 
 print(pca.inverse_transform(R2))
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 print("降維及恢復示意圖")
 
-plt.figure(figsize=(8, 8), dpi=144)
+plt.figure(figsize=(8, 8))
 
 plt.title("Physcial meanings of PCA")
 
@@ -3028,12 +3043,10 @@ plt.annotate(
 )
 
 plt.show()
-
+"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-from sklearn.datasets import make_blobs
-
+"""
 X, y = make_blobs(
     n_samples=200,
     n_features=2,
@@ -3041,17 +3054,17 @@ X, y = make_blobs(
     cluster_std=1,
     center_box=(-10.0, 10.0),
     shuffle=True,
-    random_state=1,
+    random_state=9487,
 )
 
-plt.figure(figsize=(6, 4), dpi=144)
+plt.figure(figsize=(6, 4))
 plt.xticks(())
 plt.yticks(())
 plt.scatter(X[:, 0], X[:, 1], s=20, marker="o")
 
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 from sklearn.cluster import KMeans
 
@@ -3065,7 +3078,7 @@ centers = kmean.cluster_centers_
 markers = ["o", "^", "*"]
 colors = ["r", "b", "y"]
 
-plt.figure(figsize=(6, 4), dpi=144)
+plt.figure(figsize=(6, 4))
 plt.xticks(())
 plt.yticks(())
 
@@ -3080,7 +3093,7 @@ for i, c in enumerate(centers):
 
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 
 def fit_plot_kmean_model(n_clusters, X):
@@ -3114,13 +3127,13 @@ from sklearn.cluster import KMeans
 
 n_clusters = [2, 3, 4]
 
-plt.figure(figsize=(10, 3), dpi=144)
+plt.figure(figsize=(10, 3))
 for i, c in enumerate(n_clusters):
     plt.subplot(1, 3, i + 1)
     fit_plot_kmean_model(c, X)
 
 plt.show()
-
+"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -3199,8 +3212,6 @@ print(cc)
 """
 print("------------------------------------------------------------")  # 60個
 
-from sklearn import metrics
-
 label_true = np.random.randint(1, 4, 6)
 label_pred = np.random.randint(1, 4, 6)
 print(
@@ -3213,8 +3224,6 @@ print(
     "Adjusted Rand-Index for same structure sample: %.3f"
     % metrics.adjusted_rand_score(label_true, label_pred)
 )
-
-from sklearn import metrics
 
 label_true = [1, 1, 2, 2]
 label_pred = [2, 2, 1, 1]
@@ -3241,8 +3250,6 @@ print(
     % metrics.homogeneity_score(label_true, label_pred)
 )
 
-from sklearn import metrics
-
 label_true = [1, 1, 2, 2]
 label_pred = [2, 2, 1, 1]
 print(
@@ -3268,8 +3275,6 @@ print(
     % metrics.completeness_score(label_true, label_pred)
 )
 
-from sklearn import metrics
-
 label_true = [1, 1, 2, 2]
 label_pred = [2, 2, 1, 1]
 print(
@@ -3293,8 +3298,6 @@ print(
     % metrics.v_measure_score(label_true, label_pred)
 )
 """
-from sklearn import metrics
-
 labels = docs.target
 print("Homogeneity: %0.3f" % metrics.homogeneity_score(labels, kmean.labels_))
 print("Completeness: %0.3f" % metrics.completeness_score(labels, kmean.labels_))

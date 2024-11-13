@@ -81,7 +81,7 @@ N = 100
 x = np.random.rand(N, 2)  # N X 2 亂數陣列
 
 plt.subplot(131)
-plt.scatter(x[:, 0], x[:, 1], s = 50)
+plt.scatter(x[:, 0], x[:, 1], s=50)
 plt.title("原始資料")
 
 clf = KMeans(n_clusters=3)  # K-平均演算法, 分成3群
@@ -147,7 +147,7 @@ plt.scatter(x[:, 0], x[:, 1], s=50, c=cc, cmap="Paired")
 plt.contourf(xm, ym, Z, alpha=0.3, cmap="Paired")
 plt.title("標準 Mean Shift分類")
 
-print("------------------------------")	#30個
+print("------------------------------")  # 30個
 
 # 畫完整分類
 
@@ -156,11 +156,11 @@ gdc = clf.predict(gd)  # 預測.predict
 
 plt.subplot(232)
 plt.scatter(gd[:, 0], gd[:, 1], s=50, cmap=plt.cm.coolwarm, c=gdc)
-#plt.scatter(gd[:, 0], gd[:, 1], s=50, cmap=plt.cm.prism, c=gdc)  # cmap
-#plt.scatter(gd[:, 0], gd[:, 1], s=50, cmap=plt.cm.Set1, c=gdc)  # cmap
+# plt.scatter(gd[:, 0], gd[:, 1], s=50, cmap=plt.cm.prism, c=gdc)  # cmap
+# plt.scatter(gd[:, 0], gd[:, 1], s=50, cmap=plt.cm.Set1, c=gdc)  # cmap
 plt.title("訓練好的結果")
 
-print("------------------------------")	#30個
+print("------------------------------")  # 30個
 
 
 # 觀察 bandwidth 對分類的影響
@@ -290,8 +290,7 @@ def do_k_means():
 
     plt.scatter(x, y)
     plt.scatter(new_muX, new_muY)
-    #plt.show()
-
+    # plt.show()
 
     plt.subplot(122)
     colors = ["r", "b", "g"]
@@ -313,12 +312,8 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-
 
 
 print("------------------------------------------------------------")  # 60個

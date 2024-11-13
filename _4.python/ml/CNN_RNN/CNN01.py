@@ -257,7 +257,9 @@ model.add(Flatten())
 model.add(Dense(256, activation="sigmoid"))
 model.add(Dense(128, activation="relu"))
 model.add(Dense(10, activation="softmax"))
-model.summary()
+
+print("檢視神經網路")
+model.summary()  # 檢視神經網路
 
 # Final 使用 CNN 辨識手寫數字圖片
 
@@ -319,8 +321,8 @@ model.compile(loss="categorical_crossentropy", optimizer="sgd", metrics=["accura
 
 """
 #做很久
-#model.fit(X_train, y_train, batch_size = 128, epochs = 5, verbose = 1)
-model.fit(X_train, y_train, batch_size = 1280, epochs = 1, verbose = 1)
+#model.fit(X_train, y_train, batch_size = 128, epochs = 5, verbose = 1)# 學習訓練.fit
+model.fit(X_train, y_train, batch_size = 1280, epochs = 1, verbose = 1)# 學習訓練.fit
 
 # 計算準確率
 scores = model.evaluate(X_test, y_test, verbose=1)
@@ -342,7 +344,8 @@ pred = np.argmax(model.predict(X_test[0:10]), axis=1)
 
 print(pred)
 
-model.summary()
+print("檢視神經網路")
+model.summary()  #檢視神經網路
 
 """
 
@@ -399,8 +402,8 @@ model.compile(loss="categorical_crossentropy", optimizer="adam", metrics=["accur
 
 """
 # 訓練模型 做很久
-#model.fit(X_train, y_train, batch_size=128, epochs=10, validation_split=0.2)
-model.fit(X_train, y_train, batch_size=1280, epochs=1, validation_split=0.2)
+#model.fit(X_train, y_train, batch_size=128, epochs=10, validation_split=0.2)# 學習訓練.fit
+model.fit(X_train, y_train, batch_size=1280, epochs=1, validation_split=0.2)# 學習訓練.fit
 
 # 計算準確率
 scores = model.evaluate(X_test, y_test, verbose=1)
@@ -426,7 +429,8 @@ pred = np.argmax(model.predict(X_test[0:10]), axis=1)
 
 print(pred)
 
-model.summary()
+print("檢視神經網路")
+model.summary()  #檢視神經網路
 
 """
 print("------------------------------------------------------------")  # 60個
@@ -519,7 +523,7 @@ datagen = ImageDataGenerator(zca_whitening=True)
 
 # 白化處理
 
-datagen.fit(X_train)
+datagen.fit(X_train)# 學習訓練.fit
 
 g = datagen.flow(X_train, y_train, shuffle=False)
 
@@ -619,6 +623,7 @@ model.compile(optimizer="sgd", loss="categorical_crossentropy", metrics=["accura
 """
 # 執行訓練
 # 做很久
+# 學習訓練.fit
 history = model.fit(X_train, y_train, batch_size=32, epochs=3, validation_data=(X_test, y_test))
 
 # 做可視化處理
@@ -691,6 +696,7 @@ model.compile(loss='categorical_crossentropy',
               metrics=['accuracy'])
 
 # 訓練批量是32, epoch是3
+# 學習訓練.fit
 model.fit(X_train, y_train, validation_data=(X_test, y_test), batch_size=32, epochs=5)
 
 # 評估準確度

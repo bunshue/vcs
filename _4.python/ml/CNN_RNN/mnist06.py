@@ -49,21 +49,21 @@ from tensorflow.keras.datasets import mnist
 
 """
 
-#1. 讀入 MNSIT 數據集
+# 1. 讀入 MNSIT 數據集
 from keras.datasets import mnist
 
-#(x_train, y_train), (x_test, y_test) = mnist.load_data() 改成以下4行
+# (x_train, y_train), (x_test, y_test) = mnist.load_data() 改成以下4行
 mnist = np.load(mnist_npz_filename)
-x_train, y_train = mnist['x_train'], mnist['y_train']  
-x_test, y_test = mnist['x_test'], mnist['y_test']  
-mnist.close()  
+x_train, y_train = mnist["x_train"], mnist["y_train"]
+x_test, y_test = mnist["x_test"], mnist["y_test"]
+mnist.close()
 
-#我們來看看訓練資料是不是 6 萬筆、測試資料是不是有 1 萬筆。
+# 我們來看看訓練資料是不是 6 萬筆、測試資料是不是有 1 萬筆。
 
-print('訓練資料x長度 :', len(x_train))
-print('訓練資料y長度 :', len(y_train))
-print('測試資料x長度 :', len(x_test))
-print('測試資料y長度 :', len(y_test))
+print("訓練資料x長度 :", len(x_train))
+print("訓練資料y長度 :", len(y_train))
+print("測試資料x長度 :", len(x_test))
+print("測試資料y長度 :", len(y_test))
 
 RATIO = 4
 
@@ -72,10 +72,10 @@ y_train = y_train[: int(len(y_train) / RATIO)]
 x_test = x_test[: int(len(x_test) / RATIO)]
 y_test = y_test[: int(len(y_test) / RATIO)]
 
-print('訓練資料x長度 :', len(x_train))
-print('訓練資料y長度 :', len(y_train))
-print('測試資料x長度 :', len(x_test))
-print('測試資料y長度 :', len(y_test))
+print("訓練資料x長度 :", len(x_train))
+print("訓練資料y長度 :", len(y_train))
+print("測試資料x長度 :", len(x_test))
+print("測試資料y長度 :", len(y_test))
 
 """
 2.2.2 數據庫的內容
@@ -84,24 +84,24 @@ print('測試資料y長度 :', len(y_test))
 而輸出 (y) 當然就是「正確答案」
 """
 
-fig = plt.figure(figsize = (10, 10))
+fig = plt.figure(figsize=(10, 10))
 for i in range(100):
     ax = plt.subplot2grid((10, 10), (int(i / 10), int(i % 10)))
-    ax.imshow(x_train[i], cmap = plt.cm.gray)
-    ax.axis('off')
-plt.suptitle('畫前100筆資料')
+    ax.imshow(x_train[i], cmap=plt.cm.gray)
+    ax.axis("off")
+plt.suptitle("畫前100筆資料")
 plt.show()
 
-#編號87的訓練資料
+# 編號87的訓練資料
 # x_train[87]
 
-#因為是圖檔, 當然可以顯示出來!
-plt.imshow(x_train[87], cmap = 'Greys')
-plt.title('編號87的訓練資料')
+# 因為是圖檔, 當然可以顯示出來!
+plt.imshow(x_train[87], cmap="Greys")
+plt.title("編號87的訓練資料")
 plt.show()
 
-print('編號87的訓練資料 的 shape :', x_train[87].shape)
-print('編號87的訓練資料 的 目標  :', y_train[87])
+print("編號87的訓練資料 的 shape :", x_train[87].shape)
+print("編號87的訓練資料 的 目標  :", y_train[87])
 
 """
 2.2.3 輸入格式整理
@@ -112,10 +112,10 @@ print('編號87的訓練資料 的 目標  :', y_train[87])
 因此我們要用 reshape 調校一下。
 """
 
-print('訓練資料 x_train.shape =', x_train.shape)
-print('測試資料 x_test.shape =', x_test.shape)
+print("訓練資料 x_train.shape =", x_train.shape)
+print("測試資料 x_test.shape =", x_test.shape)
 
-#我們做一下 normalization, 把所有的數字都改為 0 到 1 之間。
+# 我們做一下 normalization, 把所有的數字都改為 0 到 1 之間。
 x_train = x_train / 255
 x_test = x_test / 255
 
@@ -154,19 +154,19 @@ y_train[9487]
 等等。因為分類問題基本上都要做這件事, Keras 其實已幫我們準備好套件!
 """
 
-#from keras.utils import np_utils old 改如下
+# from keras.utils import np_utils old 改如下
 from tensorflow.python.keras.utils import np_utils
 
 y_train = np_utils.to_categorical(y_train, 10)
 y_test = np_utils.to_categorical(y_test, 10)
 
-#我們來看看剛剛是 9 的 87 號數據的答案。
+# 我們來看看剛剛是 9 的 87 號數據的答案。
 
-print('編號87的訓練資料 的 目標  :', y_train[87])
+print("編號87的訓練資料 的 目標  :", y_train[87])
 
-#array([0., 0., 0., 0., 0., 0., 0., 0., 0., 1.], dtype=float32)
+# array([0., 0., 0., 0., 0., 0., 0., 0., 0., 1.], dtype=float32)
 #       0   1   2   3   4   5   6   7   8   9
-#和我們想的一樣! 至此我們可以打造我們的神經網路了。
+# 和我們想的一樣! 至此我們可以打造我們的神經網路了。
 
 
 """
@@ -184,7 +184,7 @@ print('編號87的訓練資料 的 目標  :', y_train[87])
     Activation Function 唯一指名 relu
 """
 
-#於是從 Keras 把相關套件讀進來。
+# 於是從 Keras 把相關套件讀進來。
 from keras.models import Sequential
 from keras.layers import Dense, Flatten
 from keras.optimizers import SGD
@@ -195,7 +195,7 @@ from keras.optimizers import SGD
 標準一層一層傳遞的神經網路叫 Sequential, 於是我們打開一個空的神經網路。
 """
 
-model = Sequential()    #打開一個空的神經網路
+model = Sequential()  # 打開一個空的神經網路
 
 """
 我們每次用 add 去加一層, 從第一個隱藏層開始。
@@ -203,26 +203,26 @@ model = Sequential()    #打開一個空的神經網路
 而全連結的神經網路其實都是一個向量輸入, 也就是要先「拉平」。
 """
 
-#第一層 用 6 個神經元
-model.add(Flatten(input_shape = (28, 28)))
-model.add(Dense(6, activation = 'relu'))
+# 第一層 用 6 個神經元
+model.add(Flatten(input_shape=(28, 28)))
+model.add(Dense(6, activation="relu"))
 
 """
 第二層 hidden layer 因為前面輸出是 6, 現在輸入是 28, 就不用再說了!
 這裡的 28 只告訴 Keras, 我們第二層是用 28 個神經元!
 """
-#第二層 用 28 個神經元
-model.add(Dense(28, activation  = 'relu'))
+# 第二層 用 28 個神經元
+model.add(Dense(28, activation="relu"))
 
-#第三層 用 2 個神經元
-model.add(Dense(2, activation = 'relu'))
+# 第三層 用 2 個神經元
+model.add(Dense(2, activation="relu"))
 
-#輸出有 10 個數字, 所以輸出層的神經元是 10 個!
-#而如果我們的網路輸出是 (y1,y2,…,y10) 我們還希望 10∑i=1yi=1
-#這可能嗎, 結果是很容易, 就用 softmax 當激發函數就可以!!
-model.add(Dense(10, activation = 'softmax'))
+# 輸出有 10 個數字, 所以輸出層的神經元是 10 個!
+# 而如果我們的網路輸出是 (y1,y2,…,y10) 我們還希望 10∑i=1yi=1
+# 這可能嗎, 結果是很容易, 就用 softmax 當激發函數就可以!!
+model.add(Dense(10, activation="softmax"))
 
-#至此我們的第一個神經網路就建好了!
+# 至此我們的第一個神經網路就建好了!
 
 """
 2.3.3 組裝
@@ -237,7 +237,7 @@ metrics=['accuracy']
 本行基本上和我們的神經網路功能沒有什麼關係。
 """
 
-model.compile(loss = 'mse', optimizer = SGD(lr = 0.087), metrics = ['accuracy'])
+model.compile(loss="mse", optimizer=SGD(lr=0.087), metrics=["accuracy"])
 
 """
 2-4 檢視我們的神經網路
@@ -245,8 +245,8 @@ model.compile(loss = 'mse', optimizer = SGD(lr = 0.087), metrics = ['accuracy'])
 我們可以檢視我們神經網路的架構, 可以確認一下是不是和我們想像的一樣。
 2.4.1 看 model 的 summary
 """
-
-print(model.summary())
+print("檢視神經網路")
+model.summary()  # 檢視神經網路
 
 """
 很快算算參數數目和我們想像是否是一樣的!
@@ -266,75 +266,77 @@ print(model.summary())
 於是最精彩的就來了。你要有等待的心理準備...
 """
 
-N = 600 #每 N 筆調一次參數
-EPOCHS = 1 #訓練次數
+N = 600  # 每 N 筆調一次參數
+EPOCHS = 1  # 訓練次數
 
-print('資料共有 :', len(x_train), '筆, 每', N, '筆調一次參數, 共需調', len(x_train)/N, '次')
-print('訓練次數 :', EPOCHS);
+print("資料共有 :", len(x_train), "筆, 每", N, "筆調一次參數, 共需調", len(x_train) / N, "次")
+print("訓練次數 :", EPOCHS)
 
-model.fit(x_train, y_train, batch_size = N, epochs = EPOCHS)
+model.fit(x_train, y_train, batch_size=N, epochs=EPOCHS)  # 學習訓練.fit
 
-#2-6 試用我們的結果
-#我們 "predict" 放的是我們神經網路的學習結果。
-#這裡用 predict_classes 會讓我們 Keras 選 10 個輸出機率最大的那類。
+# 2-6 試用我們的結果
+# 我們 "predict" 放的是我們神經網路的學習結果。
+# 這裡用 predict_classes 會讓我們 Keras 選 10 個輸出機率最大的那類。
 
-#predict = model.predict_classes(x_test) 改成以下一行
+# predict = model.predict_classes(x_test) 改成以下一行
 
 predict = model.predict_step(x_test)
-print('aaaaaaa')
+print("aaaaaaa")
 print(predict)
 predict = (model.predict(x_test) > 0.5).astype("int32")
-print('bbbbbbb')
+print("bbbbbbb")
 print(predict)
 
-#array([7, 2, 1, ..., 7, 7, 0]) 有問題~~~~~~~~
+# array([7, 2, 1, ..., 7, 7, 0]) 有問題~~~~~~~~
 
-#寫個小程式, 秀出某測試資料的樣子, 還有我們可愛神經網路辨識的結果。
+# 寫個小程式, 秀出某測試資料的樣子, 還有我們可愛神經網路辨識的結果。
+
 
 def test(num):
-    plt.imshow(x_test[num], cmap = 'Greys')
-    print('num =', num)
-    print('神經網路判斷為 : ', predict[num])
+    plt.imshow(x_test[num], cmap="Greys")
+    print("num =", num)
+    print("神經網路判斷為 : ", predict[num])
     print()
+
 
 predict_number = 87
 test(predict_number)
 plt.show()
-print('神經網路判斷為 : ', predict[predict_number])
+print("神經網路判斷為 : ", predict[predict_number])
 
-#神經網路判斷為 : 3
+# 神經網路判斷為 : 3
 
-#到底測試資料總的狀況如何呢? 我們可以給我們神經網路「考一下試」。
+# 到底測試資料總的狀況如何呢? 我們可以給我們神經網路「考一下試」。
 
 score = model.evaluate(x_test, y_test)
 
 print()
-print('------------------------------------------------------------')
-print('loss:', score[0])
-print('正確率', score[1])
+print("------------------------------------------------------------")
+print("loss:", score[0])
+print("正確率", score[1])
 
-#loss: 0.06821700274944305
-#正確率 0.4345
+# loss: 0.06821700274944305
+# 正確率 0.4345
 
 
-#2-7 訓練好的神經網路存起來!
-#如果對訓練成果滿意, 我們當然不想每次都再訓練一次! 我們可以把神經網路的架構和訓練好的參數都存起來, 以供日後使用!
-#pip install h5py
+# 2-7 訓練好的神經網路存起來!
+# 如果對訓練成果滿意, 我們當然不想每次都再訓練一次! 我們可以把神經網路的架構和訓練好的參數都存起來, 以供日後使用!
+# pip install h5py
 
 model_json = model.to_json()
-open('stupid_model.json', 'w').write(model_json)
-model.save_weights('stupid_model_weights.h5')
-
-                                                                                  
-print('------------------------------------------------------------')	#60個
+open("stupid_model.json", "w").write(model_json)
+model.save_weights("stupid_model_weights.h5")
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-print('------------------------------------------------------------')	#60個
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
 
 """ 暫存
 
@@ -365,7 +367,7 @@ model.add(Dense(20, activation='relu'))
 """
 
 
-print('使用TensorFlow')
+print("使用TensorFlow")
 
 
 """
@@ -381,107 +383,106 @@ Keras 可以用各種不同的深度學習套件當底層, 指定用 Tensorflow 
 
 import tensorflow as tf
 
-#1. 讀入 MNSIT 數據集
+# 1. 讀入 MNSIT 數據集
 
-#from tensorflow.keras.datasets import mnist
-#(x_train, y_train), (x_test, y_test) = mnist.load_data()
+# from tensorflow.keras.datasets import mnist
+# (x_train, y_train), (x_test, y_test) = mnist.load_data()
 
-#1. 讀入 MNSIT 數據集
-#from keras.datasets import mnist
+# 1. 讀入 MNSIT 數據集
+# from keras.datasets import mnist
 
-#(x_train, y_train), (x_test, y_test) = mnist.load_data() 改成以下4行
+# (x_train, y_train), (x_test, y_test) = mnist.load_data() 改成以下4行
 mnist = np.load(mnist_npz_filename)
-x_train, y_train = mnist['x_train'], mnist['y_train']  
-x_test, y_test = mnist['x_test'], mnist['y_test']  
-mnist.close()  
+x_train, y_train = mnist["x_train"], mnist["y_train"]
+x_test, y_test = mnist["x_test"], mnist["y_test"]
+mnist.close()
 
-#2. 欣賞數據集內容
+# 2. 欣賞數據集內容
 len(x_train)
-#60000
+# 60000
 
 len(x_test)
-#10000
+# 10000
 
 n = 9487
 
 print(x_train[n])
 print(y_train[n])
 
-#1
+# 1
 
-plt.imshow(x_train[n], cmap='Greys')
+plt.imshow(x_train[n], cmap="Greys")
 
 
-#3. 資料整理
+# 3. 資料整理
 
-#先看個範例, 因為 numpy 「廣播」的特性, 我們對 array 中所有數字要同除以一個數可瞬間完成!
+# 先看個範例, 因為 numpy 「廣播」的特性, 我們對 array 中所有數字要同除以一個數可瞬間完成!
 
-np.array([3, 78, 95, 99])/100
+np.array([3, 78, 95, 99]) / 100
 
-#array([0.03, 0.78, 0.95, 0.99])
+# array([0.03, 0.78, 0.95, 0.99])
 
-#現在才是我們真的要做的, 這個動作叫 "normalization"。
+# 現在才是我們真的要做的, 這個動作叫 "normalization"。
 
-x_train = x_train/255
+x_train = x_train / 255
 
-x_test = x_test/255
+x_test = x_test / 255
 
 x_train.shape
 
 (60000, 28, 28)
 
-#28*28 = 784
+# 28*28 = 784
 
 x_train = x_train.reshape(60000, 784)
 x_test = x_test.reshape(10000, 784)
 
 from tensorflow.keras.utils import to_categorical
+
 y_train = to_categorical(y_train, 10)
 y_test = to_categorical(y_test, 10)
 y_train[9487]
 
 
-#打造神經網路
+# 打造神經網路
 
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
 from tensorflow.keras.optimizers import SGD
 
 model = Sequential()
-model.add(Dense(87, input_dim=784, activation='relu'))
-model.add(Dense(87, activation='relu'))
-model.add(Dense(10, activation='softmax'))
+model.add(Dense(87, input_dim=784, activation="relu"))
+model.add(Dense(87, activation="relu"))
+model.add(Dense(10, activation="softmax"))
 
-#4. 組裝我們的神經網路
+# 4. 組裝我們的神經網路
 
-model.compile(loss='mse', optimizer=SGD(lr=0.087), metrics=['accuracy'])
+model.compile(loss="mse", optimizer=SGD(lr=0.087), metrics=["accuracy"])
 
-model.summary()
+print("檢視神經網路")
+model.summary()  # 檢視神經網路
 
-#784*87 + 87 = 68295
+# 784*87 + 87 = 68295
 
-#5. 訓練
+# 5. 訓練
 
-#model.fit(x_train, y_train, batch_size = 100, epochs = 20)
-#model.fit(x_train, y_train, batch_size = 1200, epochs = 1)
-model.fit(x_train, y_train, batch_size = 2400, epochs = 1)
+# model.fit(x_train, y_train, batch_size = 100, epochs = 20)# 學習訓練.fit
+# model.fit(x_train, y_train, batch_size = 1200, epochs = 1)# 學習訓練.fit
+model.fit(x_train, y_train, batch_size=2400, epochs=1)  # 學習訓練.fit
 
-#6. 訓練成果
+# 6. 訓練成果
 
-#result = model.predict_classes(x_test) #old
+# result = model.predict_classes(x_test) #old
 
 result = model.predict_step(x_test)
 
 n = 9999
 
-print('神經網路預測是:', result[n])
+print("神經網路預測是:", result[n])
 
-plt.imshow(x_test[n].reshape(28,28), cmap='Greys')
+plt.imshow(x_test[n].reshape(28, 28), cmap="Greys")
 
-#神經網路預測是: 6
-
-
+# 神經網路預測是: 6
 
 
-print('作業完成')
-
+print("作業完成")
