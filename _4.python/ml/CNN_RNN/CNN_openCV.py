@@ -31,6 +31,7 @@ model.compile(
     metrics=["accuracy"],
 )
 
+
 def CNN():
     img_rows = 28
     img_cols = 28
@@ -73,14 +74,14 @@ while 1:
     cv2.imshow("image", img)
     k = cv2.waitKey(1) & 0xFF
     if k == ord("s"):
-        print('Save')
+        print("Save")
         cv2.imwrite("tmp_1.jpg", img)
         CNN()
     elif k == ord("c"):
-        print('Clear')
+        print("Clear")
         img = np.full(shape=(28, 28, 1), fill_value=0, dtype=np.uint8)
     elif k == 27:
-        print('ESC')
+        print("ESC")
         break
 
 cv2.destroyAllWindows()

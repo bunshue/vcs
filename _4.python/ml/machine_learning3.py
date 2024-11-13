@@ -204,28 +204,7 @@ plt.show()
 """
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
-"""
-print('K-近鄰演算法（K Nearest Neighbor）')
 
-from sklearn import neighbors
-
-X = pd.DataFrame({"耐酸性": [7, 7, 3, 1], "強度": [7, 4, 4, 4]})
-
-y = np.array([0, 0, 1, 1])
-k = 3
-
-knn = neighbors.KNeighborsClassifier(n_neighbors=k)  # K近鄰演算法（K Nearest Neighbor）
-
-knn.fit(X, y)  # 學習訓練.fit
-
-# 預測新產品[3,7]的分類 1:好 0:壞
-new_tissue = pd.DataFrame(np.array([[3, 7]]), columns=["耐酸性", "強度"])
-pred = knn.predict(new_tissue)
-print(pred)
-"""
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
 """
 from sklearn import cluster
 
@@ -1863,7 +1842,7 @@ print("Test set accuracy:", test_accuracy)
 """
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
+
 N = 200
 
 X = np.linspace(0, 1, N)
@@ -1999,78 +1978,7 @@ for i in range(len(degrees)):
     )
 
 plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-# 生成數據
-centers = [[-2, 2], [2, 2], [0, 4]]
-X, y = make_blobs(n_samples=60, centers=centers, random_state=9487, cluster_std=0.60)
-
-# 畫出數據
-plt.figure(figsize=(12, 8))
-c = np.array(centers)
-plt.scatter(X[:, 0], X[:, 1], c=y, s=100, cmap="cool")  # 畫出樣本
-plt.scatter(c[:, 0], c[:, 1], s=100, marker="^", c="orange")  # 畫出中心點
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-from sklearn.neighbors import KNeighborsClassifier  # K近鄰演算法（K Nearest Neighbor）
-
-# 模型訓練
-k = 5
-clf = KNeighborsClassifier(n_neighbors=k)  # K近鄰演算法（K Nearest Neighbor）
-clf.fit(X, y)
-
-# 進行預測
-X_sample = [0, 2]
-X_sample = np.array(X_sample).reshape(1, -1)
-y_sample = clf.predict(X_sample)
-neighbors = clf.kneighbors(X_sample, return_distance=False)
-
-# 畫出示意圖
-plt.figure(figsize=(12, 8))
-plt.scatter(X[:, 0], X[:, 1], c=y, s=100, cmap="cool")  # 樣本
-plt.scatter(c[:, 0], c[:, 1], s=100, marker="^", c="k")  # 中心點
-plt.scatter(X_sample[0][0], X_sample[0][1], marker="x", s=100, cmap="cool")  # 待預測的點
-
-for i in neighbors[0]:
-    # 預測點與距離最近的 5 個樣本的連線
-    plt.plot([X[i][0], X_sample[0][0]], [X[i][1], X_sample[0][1]], "k--", linewidth=0.6)
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-# 生成訓練樣本
-N = 40
-X = 5 * np.random.rand(N, 1)
-y = np.cos(X).ravel()
-
-# 添加一些噪聲
-y += 0.2 * np.random.rand(N) - 0.1
-
-# 訓練模型
-from sklearn.neighbors import KNeighborsRegressor
-
-k = 5
-knn = KNeighborsRegressor(k)
-knn.fit(X, y)
-
-# 生成足夠密集的點并進行預測
-T = np.linspace(0, 5, 500)[:, np.newaxis]
-y_pred = knn.predict(T)
-print(knn.score(X, y))
-
-# 畫出擬合曲線
-plt.figure(figsize=(12, 8))
-plt.scatter(X, y, c="g", label="data", s=100)  # 畫出訓練樣本
-plt.plot(T, y_pred, c="k", label="prediction", lw=4)  # 畫出擬合曲線
-plt.axis("tight")
-plt.title("KNeighborsRegressor (k = %i)" % k)
-plt.show()
-
+'''
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -2175,7 +2083,7 @@ plt.scatter(X_new[Y == 0][:, 0], X_new[Y == 0][:, 1], c="r", s=20, marker="o")  
 plt.scatter(X_new[Y == 1][:, 0], X_new[Y == 1][:, 1], c="g", s=20, marker="^")  # 畫出樣本
 
 plt.show()
-'''
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 """

@@ -25,1294 +25,1109 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 07_01_svm_from_scratch
-# 自行開發支援向量機分類器，並進行鳶尾花(Iris)品種的辨識
+""" 久
+#08_01_tensorflow_mnist
 
-from sklearn import datasets
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score
-import numpy as np
+import tensorflow as tf
 
-# SVM 演算法
+#載入 MNIST 手寫阿拉伯數字資料集
 
+(x_train, y_train),(x_test, y_test) = tf.keras.datasets.mnist.load_data()
 
-class SVM:
-    def __init__(self, learning_rate=1e-3, lambda_param=1e-2, n_iters=1000):
-        self.lr = learning_rate
-        self.lambda_param = lambda_param
-        self.n_iters = n_iters
-        self.w = None
-        self.b = None
+#特徵縮放
 
-    # 初始化權重、偏差
-    def _init_weights_bias(self, X):
-        n_features = X.shape[1]
-        self.w = np.zeros(n_features)
-        self.b = 0
+# 特徵縮放至 (0, 1) 之間
+x_train, x_test = x_train / 255.0, x_test / 255.0
 
-    # 類別代碼：-1, 1
-    def _get_cls_map(self, y):
-        return np.where(y <= 0, -1, 1)
+#模型訓練
 
-    # 限制條件：y(wx + b) >= 1
-    def _satisfy_constraint(self, x, idx):
-        linear_model = np.dot(x, self.w) + self.b
-        return self.cls_map[idx] * linear_model >= 1
+# 建立模型
+model = tf.keras.models.Sequential([
+  tf.keras.layers.Flatten(input_shape=(28, 28)),
+  tf.keras.layers.Dense(128, activation='relu'),
+  tf.keras.layers.Dropout(0.2),
+  tf.keras.layers.Dense(10, activation='softmax')
+])
 
-    # 反向傳導
-    def _get_gradients(self, constrain, x, idx):
-        if constrain:
-            dw = self.lambda_param * self.w
-            db = 0
-            return dw, db
+print('aa')
+# 設定優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
+model.compile(optimizer='adam',
+              loss='sparse_categorical_crossentropy',
+              metrics=['accuracy'])
 
-        dw = self.lambda_param * self.w - np.dot(self.cls_map[idx], x)
-        db = -self.cls_map[idx]
-        return dw, db
-
-    # 更新權重、偏差
-    def _update_weights_bias(self, dw, db):
-        self.w -= self.lr * dw
-        self.b -= self.lr * db
-
-    # 訓練
-    def fit(self, X, y):
-        self._init_weights_bias(X)
-        self.cls_map = self._get_cls_map(y)
-
-        for _ in range(self.n_iters):
-            for idx, x in enumerate(X):
-                constrain = self._satisfy_constraint(x, idx)
-                dw, db = self._get_gradients(constrain, x, idx)
-                self._update_weights_bias(dw, db)
-
-    # 預測
-    def predict(self, X):
-        estimate = np.dot(X, self.w) + self.b
-        prediction = np.sign(estimate)
-        return np.where(prediction == -1, 0, 1)
+print('bb')
+# 模型訓練，epochs：執行週期，validation_split：驗證資料佔 20%
+model.fit(x_train, y_train, epochs=5, validation_split=0.2)
 
 
-# 載入資料集
-
-X, y = datasets.load_iris(return_X_y=True)
-
-# 資料分割
-
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
-
-# 特徵縮放
-
-from sklearn.preprocessing import StandardScaler
-
-scaler = StandardScaler()
-X_train_std = scaler.fit_transform(X_train)
-X_test_std = scaler.transform(X_test)
-
-# 選擇演算法
-
-clf = SVM(learning_rate=1e-2, lambda_param=1e-3, n_iters=5000)
-
-# 模型訓練
-
-clf.fit(X_train_std, y_train)
-
-# 模型評分
-
-# 計算準確率
-y_pred = clf.predict(X_test_std)
-print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
-
-# 73.33%
+print('cc')
+#模型評估
+model.evaluate(x_test, y_test)
+"""
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 以Scikit-learn SVM進行鳶尾花(Iris)品種的辨識
+# 08_02_k_fold_cross_validation
+# Scikit-learn K折交叉驗證法
 
 from sklearn import datasets
+from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score
 import numpy as np
 
 # 載入資料集
-
-X, y = datasets.load_iris(return_X_y=True)
+X, y = datasets.load_diabetes(return_X_y=True)
 
 # 資料分割
-
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 # 特徵縮放
-
-from sklearn.preprocessing import StandardScaler
-
 scaler = StandardScaler()
 X_train_std = scaler.fit_transform(X_train)
 X_test_std = scaler.transform(X_test)
 
 # 模型訓練
 
-from sklearn.svm import SVC
+from sklearn.linear_model import LinearRegression
 
-clf = SVC(probability=True)
+clf = LinearRegression()
 clf.fit(X_train_std, y_train)
 
 # 模型評分
 
-# 計算準確率
-y_pred = clf.predict(X_test_std)
-print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
+print(f"R2={clf.score(X_test_std, y_test)}")
 
-# 100.00%
+# R2=0.41738354865811345
 
-cc = clf.support_vectors_
+# K折測試
+
+from sklearn.model_selection import KFold
+
+kf = KFold(n_splits=5)
+for i, (train_index, test_index) in enumerate(kf.split(X_train_std)):
+    print(f"Fold {i}:")
+    print(f"  Train: index={train_index}")
+    print(f"  Test:  index={test_index}")
+
+# K折驗證
+
+score = []
+for i, (train_index, test_index) in enumerate(kf.split(X_train_std)):
+    X_new = X_train_std[train_index]
+    y_new = y_train[train_index]
+    clf.fit(X_new, y_new)
+    score_fold = clf.score(X_train_std[test_index], y_train[test_index])
+    score.append(score_fold)
+    print(f"Fold {i} 分數: {np.mean(score)}")
+print(f"平均值: {np.mean(score)}")
+print(f"標準差: {np.std(score)}")
+
+# 效能調校
+
+from sklearn.linear_model import Lasso
+from sklearn.model_selection import GridSearchCV
+
+lasso = Lasso(random_state=0, max_iter=10000)
+
+# 正則化強度：3種選擇
+alphas = np.logspace(-4, -0.5, 30)
+# 強迫係數(權重)須為正數
+positive = (True, False)
+tuned_parameters = [{"alpha": alphas, "positive": positive}]
+
+# 效能調校
+clf = GridSearchCV(lasso, tuned_parameters, cv=5, refit=False)
+clf.fit(X, y)
+
+scores_mean = clf.cv_results_["mean_test_score"]
+scores_std = clf.cv_results_["std_test_score"]
+print("平均分數:\n", scores_mean, "\n標準差:\n", scores_std)
+
+# 取得最高分數
+cc = np.max(clf.cv_results_["mean_test_score"])
 print(cc)
 
-cc = clf.support_
+# 參數組合
+cc = clf.param_grid
 print(cc)
 
-cc = clf.predict_proba(X_test)
+# 取得最佳參數組合
+cc = clf.best_params_
 print(cc)
 
-cc = clf.predict_log_proba(X_test)
+# 驗證
+from math import floor
+
+index = np.argmax(clf.cv_results_["mean_test_score"])
+cc = index, clf.cv_results_["mean_test_score"][index], alphas[floor((index - 1) / 2)]
+print(cc)
+
+cc = clf.best_score_
+print(cc)
+
+# 以最佳參數組合重新訓練
+
+clf = Lasso(random_state=0, max_iter=10000, alpha=0.07880462815669913, positive=False)
+clf.fit(X_train_std, y_train)
+cc = clf.score(X_test_std, y_test)
 print(cc)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-"""
-SVM優點：
+# 08_03_pipeline_cross_validation
 
-    切出來的線很漂亮，擁有最大margin的特性
-    可以很容易透過更換Kernel，做出非線性的線（非線性的決策邊界）
+# Scikit-learn 管線測試
 
-SVM缺點：
-
-    效能較不佳，由於時間複雜度為O(n²)當有超過一萬筆資料時，運算速度會慢上許多
-
-"""
-
+import numpy as np
 from sklearn import datasets
+from sklearn.preprocessing import StandardScaler
+from sklearn.model_selection import train_test_split
+from sklearn.pipeline import make_pipeline
+from sklearn.decomposition import PCA
+from sklearn.linear_model import Lasso
+from sklearn.metrics import r2_score
+
+# 載入資料集
+X, y = datasets.load_diabetes(return_X_y=True)
+
+# 資料分割
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+# 建立管線：特徵縮放、特徵萃取、模型訓練
+
+pipe_lr = make_pipeline(
+    StandardScaler(), PCA(n_components=5), Lasso(random_state=0, max_iter=10000)
+)
+pipe_lr.fit(X_train, y_train)
+
+"""
+Pipeline(steps=[('standardscaler', StandardScaler()),
+                ('pca', PCA(n_components=5)),
+                ('lasso', Lasso(max_iter=10000, random_state=0))])
+"""
+
+# 模型評估
+
+# y_pred = pipe_lr.predict(X_test)
+print(f"R2={pipe_lr.score(X_test, y_test)}")
+
+# 管線結合K折交叉驗證
+
+from sklearn.model_selection import cross_val_score
+
+scores = cross_val_score(estimator=pipe_lr, X=X_test, y=y_test, cv=10, n_jobs=-1)
+print(f"K折分數: %s" % scores)
+print(f"平均值: {np.mean(scores):.3f}, 標準差: {np.std(scores):.3f}")
+
+# 管線結合K折交叉驗證、效能調校
+
+from sklearn.model_selection import GridSearchCV
+
+# 正則化強度：3種選擇
+alphas = np.logspace(-4, -0.5, 30)
+# 強迫係數(權重)須為正數
+positive = (True, False)
+tuned_parameters = [{"lasso__alpha": alphas, "lasso__positive": positive}]
+
+# 效能調校
+clf = GridSearchCV(pipe_lr, tuned_parameters, cv=5, refit=False)
+clf.fit(X, y)
+
+scores_mean = clf.cv_results_["mean_test_score"]
+scores_std = clf.cv_results_["std_test_score"]
+print("平均分數:\n", scores_mean, "\n標準差:\n", scores_std)
+
+# 取得最佳參數組合
+cc = clf.best_params_
+print(cc)
+
+# 驗證
+from math import floor
+
+index = np.argmax(clf.cv_results_["mean_test_score"])
+cc = index, clf.cv_results_["mean_test_score"][index], clf.best_score_
+print(cc)
+
+# 以最佳參數組合重新訓練
+
+pipe_lr = make_pipeline(
+    StandardScaler(),
+    PCA(n_components=5),
+    Lasso(
+        random_state=0,
+        max_iter=10000,
+        alpha=clf.best_params_["lasso__alpha"],
+        positive=clf.best_params_["lasso__positive"],
+    ),
+)
+pipe_lr.fit(X_train, y_train)
+cc = pipe_lr.score(X_test, y_test)
+print(cc)
+
+from sklearn.pipeline import Pipeline
+
+pipe_lr = Pipeline(
+    [
+        ("scaler", StandardScaler()),
+        ("pca", PCA(n_components=5)),
+        (
+            "lasso",
+            Lasso(
+                random_state=0,
+                max_iter=10000,
+                alpha=clf.best_params_["lasso__alpha"],
+                positive=clf.best_params_["lasso__positive"],
+            ),
+        ),
+    ]
+)
+pipe_lr.fit(X_train, y_train)
+cc = pipe_lr.score(X_test, y_test)
+print(cc)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 08_04_confusion_matrix
+
+# 計算及繪製混淆矩陣
+
+# 載入資料
+y_true = [0, 0, 0, 1, 1, 1, 1, 1]
+y_pred = [0, 1, 0, 1, 0, 1, 0, 1]
+
+y_true = [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1]
+y_pred = [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0]
+
+# 真實的資料
+y_true = np.random.randint(2, size=100)
+
+# 預測的資料
+y_pred = np.random.randint(2, size=100)
+
+# 計算混淆矩陣
+
+from sklearn.metrics import confusion_matrix
+
+cc = confusion_matrix(y_true, y_pred)
+print(cc)
+
+from sklearn.metrics import confusion_matrix
+
+cc = confusion_matrix(y_true, y_pred, labels=[1, 0])
+print(cc)
+
+# 取得混淆矩陣的4個格子
+tn, fp, fn, tp = confusion_matrix(y_true, y_pred).ravel()
+cc = tn, fp, fn, tp
+print(cc)
+
+# 繪製混淆矩陣
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
+import matplotlib.pyplot as plt
+
+ConfusionMatrixDisplay.from_predictions(
+    y_true, y_pred, labels=[1, 0], display_labels=["真", "偽"]
+)
+
+plt.show()
+
+# 方法 2
+cm = confusion_matrix(y_true, y_pred, labels=[1, 0])
+disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=["真", "偽"])
+disp.plot()
+plt.show()
+
+# 方法 3
+fig, ax = plt.subplots(figsize=(5, 5))
+
+# 顯示矩陣
+ax.matshow(cm, cmap=plt.cm.Blues, alpha=0.3)
+
+# 按 [1, 0] 順序
+for i in range(cm.shape[0] - 1, -1, -1):
+    for j in range(cm.shape[1] - 1, -1, -1):
+        ax.text(x=j, y=i, s=cm[i, j], va="center", ha="center")
+
+# 置換刻度
+ax.set_xticks(range(cm.shape[0]), labels=["真", "偽"], fontsize=14)
+ax.set_yticks(range(cm.shape[1]), labels=["真", "偽"], fontsize=14)
+
+# 設定標籤
+plt.xlabel("Predicted label", fontsize=16)
+plt.ylabel("True label", fontsize=16)
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 08_05_confusion_matrix_multiple-categories
+
+# 計算及繪製多分類混淆矩陣
+
+y_true = [2, 0, 2, 2, 0, 1]
+y_pred = [0, 0, 2, 2, 0, 2]
+
+# 計算混淆矩陣
+
+from sklearn.metrics import confusion_matrix
+
+cc = confusion_matrix(y_true, y_pred)
+print(cc)
+
+# 繪製混淆矩陣
+
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
+import matplotlib.pyplot as plt
+
+ConfusionMatrixDisplay.from_predictions(y_true, y_pred)
+plt.show()
+
+# 方法 2
+cm = confusion_matrix(y_true, y_pred)
+disp = ConfusionMatrixDisplay(confusion_matrix=cm)
+disp.plot()
+plt.show()
+
+# 方法 3
+fig, ax = plt.subplots(figsize=(5, 5))
+
+# 顯示矩陣
+ax.matshow(cm, cmap=plt.cm.Blues, alpha=0.3)
+
+# 按 [1, 0] 順序
+for i in range(cm.shape[0]):
+    for j in range(cm.shape[1]):
+        ax.text(x=j, y=i, s=cm[i, j], va="center", ha="center")
+
+# 置換刻度 NG
+# ax.set_xticks(range(cm.shape[0]), fontsize=14)
+# ax.set_yticks(range(cm.shape[1]), fontsize=14)
+
+# 設定標籤
+plt.xlabel("Predicted label", fontsize=16)
+plt.ylabel("True label", fontsize=16)
+plt.show()
+
+# 繪製混淆矩陣
+
+import numpy as np
+from sklearn import svm, datasets
+from sklearn.model_selection import train_test_split
+
+# 載入資料
+ds = datasets.load_iris()
+X, y = ds.data, ds.target
+
+# 分割資料
+X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=0)
+
+# 模型訓練
+clf = svm.SVC(kernel="linear", C=0.01).fit(X_train, y_train)
+
+y_pred = clf.predict(X_test)
+
+# 設定顯示小數點位數
+np.set_printoptions(precision=2)
+
+# Plot non-normalized confusion matrix
+titles_options = [("正常的混淆矩陣", None), ("正規化混淆矩陣", "true")]
+
+f, axes = plt.subplots(1, 2, figsize=(14, 5), sharey="row")
+for i, (title, normalize) in enumerate(titles_options):
+    cm = ConfusionMatrixDisplay.from_predictions(
+        y_test,
+        y_pred,
+        ax=axes[i],
+        cmap=plt.cm.Blues,
+        display_labels=ds.target_names,
+        normalize=normalize,
+    )
+    #     cm.plot(ax=axes[i])
+    cm.ax_.set_title(title, fontsize=16)
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 08_06_performance_metrics
+
+# 計算及繪製混淆矩陣
+
+import numpy as np
 import pandas as pd
-import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-# 載入Iris資料集
-iris = datasets.load_iris()
+# 載入資料
 
-x = pd.DataFrame(iris["data"], columns=iris["feature_names"])
-print("target_names: " + str(iris["target_names"]))
-y = pd.DataFrame(iris["target"], columns=["target"])
-iris_data = pd.concat([x, y], axis=1)
-iris_data = iris_data[["sepal length (cm)", "petal length (cm)", "target"]]
-iris_data = iris_data[iris_data["target"].isin([0, 1])]
-cc = iris_data.head(3)
+df = pd.read_csv("C:/_git/vcs/_big_files/Scikit-learn_data/creditcard.csv")
+cc = df.head()
 print(cc)
 
-# 將資料分為Train以及Test並將特徵標準化
+
+# 觀察目標變數的各類別筆數
+
+cc = df.Class.value_counts()
+print(cc)
+
+sns.countplot(x="Class", data=df)
+plt.show()
+
+# 模型訓練與預測
+
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+
+X, y = df.drop(["Time", "Amount", "Class"], axis=1), df["Class"]
+
+# 分割資料
+X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=0)
+
+# 模型訓練
+clf = LogisticRegression().fit(X_train, y_train)
+
+# 預測
+y_pred = clf.predict(X_test)
+
+# 準確率
+cc = accuracy_score(y_test, y_pred)
+print(cc)
+
+# 計算混淆矩陣
+
+# 取得混淆矩陣的4個格子
+from sklearn.metrics import confusion_matrix
+
+tn, fp, fn, tp = confusion_matrix(y_test, y_pred).ravel()
+print(tn, fp, fn, tp)
+
+# (71072, 10, 40, 80)
+
+# 常用的效能衡量指標計算
+
+print(f"準確率(Accuracy)={(tn+tp) / (tn+fp+fn+tp)}")
+print(f"精確率(Precision)={(tp) / (fp+tp)}")
+print(f"召回率(Recall)={(tp) / (fn+tp)}")
+print(f"F1 score={(2*tp) / (2*tp+fp+fn)}")
+
+"""
+準確率(Accuracy)=0.9992977725344794
+精確率(Precision)=0.8888888888888888
+召回率(Recall)=0.6666666666666666
+F1 score=0.7619047619047619
+"""
+
+# Scikit-learn 分類報表
+
+from sklearn.metrics import classification_report
+
+print(classification_report(y_test, y_pred))
+
+# weighted average 驗算
+cc = (1.00 * 71082 + 0.89 * 120) / (71082 + 120)
+print(cc)
+
+# 多類別的分類報表
+
+# 3 類別
+y_true = [0, 1, 2, 2, 2]
+y_pred = [0, 0, 2, 2, 1]
+print(classification_report(y_true, y_pred))
+
+# 多類別的分類報表
+
+# 3 類別
+y_pred = [1, 2, 0]
+y_true = [1, 1, 1]
+print(classification_report(y_true, y_pred, labels=[1, 2, 3]))
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+"""
+ROC曲線
+Receiver operating characteristic curve
+接收者操作特徵曲線
+"""
+# 08_07_ draw_roc
+
+# 繪製ROC曲線
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+# 載入資料
+
+import pandas as pd
+
+df = pd.read_csv("./data/roc_test_data.csv")
+print(df)
+
+"""
+繪製ROC曲線
+
+    計算第二欄的真(1)與假(0)的個數，假設分別為P及N，Y軸切成P格，X軸切成N格，如下圖。
+    以第一欄降冪排序，從大排到小。
+    依序掃描第二欄，若是1，就往『上』畫一格，反之，若是0，就往『右』畫一格，直到最後一列，如下圖。
+"""
+
+# 計算P及N個數
+
+# 計算第二欄的真(1)與假(0)的個數，假設分別為P及N
+P = df[df["actual"] == 1].shape[0]
+N = df[df["actual"] == 0].shape[0]
+print(f"P={P}, N={N}")
+
+# X、Y軸每一格的大小
+cc = y_unit = 1 / P
+print(cc)
+cc = X_unit = 1 / N
+print(cc)
+
+# P=11, N=7
+
+# 根據第1欄降冪排序
+
+df2 = df.sort_values(by="predict", ascending=False)
+print(df2)
+
+# 掃描表格每一列，第二欄若是1，就往『上』畫一格，反之，若是0，就往『右』畫一格
+
+X, y = [], []
+current_X, current_y = 0, 0
+for row in df2.itertuples():
+    # 若是1，Y加1
+    if row[2] == 1:
+        current_y += y_unit
+    else:  # 若是0，X加1
+        current_X += X_unit
+    # 儲存每一點X/Y座標
+    X.append(current_X)
+    y.append(current_y)
+
+X = np.array(X)
+y = np.array(y)
+print(X, y)
+
+# 繪製ROC曲線
+
+plt.title("ROC 曲線")
+plt.plot(X, y, color="orange")
+plt.plot([0, 1], [0, 1], "r--")
+plt.xlim([0, 1])
+plt.ylim([0, 1])
+plt.ylabel("真陽率")
+plt.xlabel("偽陽率")
+plt.show()
+
+# Scikit-Learn 作法
+
+from sklearn.metrics import roc_curve, roc_auc_score, auc
+
+fpr, tpr, threshold = roc_curve(df["actual"], df["predict"])
+print(f"偽陽率:\n{fpr}\n\n真陽率:\n{tpr}\n\n決策門檻:{threshold}")
+
+"""
+偽陽率:
+[0.         0.         0.         0.14285714 0.14285714 0.28571429
+ 0.28571429 0.57142857 0.57142857 0.71428571 0.71428571 1.        ]
+
+真陽率:
+[0.         0.09090909 0.27272727 0.27272727 0.63636364 0.63636364
+ 0.81818182 0.81818182 0.90909091 0.90909091 1.         1.        ]
+
+決策門檻:[1.99 0.99 0.8  0.73 0.56 0.48 0.42 0.32 0.22 0.11 0.1  0.03]
+"""
+
+# 繪製ROC曲線
+
+auc1 = auc(fpr, tpr)
+plt.title("ROC 曲線")
+plt.plot(fpr, tpr, color="orange", label="AUC = %0.2f" % auc1)
+plt.legend(loc="lower right")
+plt.plot([0, 1], [0, 1], "r--")
+plt.xlim([0, 1])
+plt.ylim([0, 1])
+plt.ylabel("真陽率")
+plt.xlabel("偽陽率")
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 08_08_roc_breast_cancer
+
+# 實作乳癌診斷，並繪製ROC曲線
+
+import matplotlib.pyplot as plt
+import pandas as pd
+import numpy as np
+from sklearn import datasets
+
+# 載入資料
+
+data = datasets.load_breast_cancer()
+
+# 資料分割
 
 from sklearn.model_selection import train_test_split
 
 X_train, X_test, y_train, y_test = train_test_split(
-    iris_data[["sepal length (cm)", "petal length (cm)"]],
-    iris_data[["target"]],
-    test_size=0.3,
-    random_state=0,
+    data.data[:, :6], data.target, test_size=0.20
 )
-
-from sklearn.preprocessing import StandardScaler
-
-sc = StandardScaler()
-sc.fit(X_train)
-X_train_std = sc.transform(X_train)
-X_test_std = sc.transform(X_test)
-
-# 載入SVM中的SVC，並將kernel設為線性（SVM的Kernel可以換成非線性），並將Probability設為True
-
-from sklearn.svm import SVC
-
-svm = SVC(kernel="linear", probability=True)
-
-svm.fit(X_train_std, y_train["target"].values)
-
-""" Out
-SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
-  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
-  max_iter=-1, probability=True, random_state=None, shrinking=True,
-  tol=0.001, verbose=False)
-
-SVC是SVM用C++語言實作的版本，背後是libsvm
-
-"""
-
-cc = svm.predict(X_test_std)
-print(cc)
-
-cc = y_test["target"].values
-print(cc)
-
-error = 0
-for i, v in enumerate(svm.predict(X_test_std)):
-    if v != y_test["target"].values[i]:
-        error += 1
-print(error)
-
-cc = svm.predict_proba(X_test_std)
-print(cc)
-
-from matplotlib.colors import ListedColormap
-
-
-def plot_decision_regions(X, y, classifier, test_idx=None, resolution=0.02):
-    # setup marker generator and color map
-    markers = ("s", "x", "o", "^", "v")
-    colors = ("red", "blue", "lightgreen", "gray", "cyan")
-    cmap = ListedColormap(colors[: len(np.unique(y))])
-
-    # plot the decision surface
-    x1_min, x1_max = X[:, 0].min() - 1, X[:, 0].max() + 1
-    x2_min, x2_max = X[:, 1].min() - 1, X[:, 1].max() + 1
-    xx1, xx2 = np.meshgrid(
-        np.arange(x1_min, x1_max, resolution), np.arange(x2_min, x2_max, resolution)
-    )
-    Z = classifier.predict(np.array([xx1.ravel(), xx2.ravel()]).T)
-    Z = Z.reshape(xx1.shape)
-    plt.contourf(xx1, xx2, Z, alpha=0.4, cmap=cmap)
-    plt.xlim(xx1.min(), xx1.max())
-    plt.ylim(xx2.min(), xx2.max())
-
-    for idx, cl in enumerate(np.unique(y)):
-        plt.scatter(
-            x=X[y == cl, 0],
-            y=X[y == cl, 1],
-            alpha=0.6,
-            c=cmap(idx),
-            edgecolor="black",
-            marker=markers[idx],
-            label=cl,
-        )
-
-    # highlight test samples
-    if test_idx:
-        # plot all samples
-        if not versiontuple(np.__version__) >= versiontuple("1.9.0"):
-            X_test, y_test = X[list(test_idx), :], y[list(test_idx)]
-            warnings.warn("Please update to NumPy 1.9.0 or newer")
-        else:
-            X_test, y_test = X[test_idx, :], y[test_idx]
-
-        plt.scatter(
-            X_test[:, 0],
-            X_test[:, 1],
-            c="",
-            alpha=1.0,
-            edgecolor="black",
-            linewidths=1,
-            marker="o",
-            s=55,
-            label="test set",
-        )
-
-
-plot_decision_regions(X_train_std, y_train["target"].values, classifier=svm)
-plt.xlabel("sepal length [standardized]")
-plt.ylabel("petal width [standardized]")
-plt.legend(loc="upper left")
-plt.tight_layout()
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# 07_03_svm _sample_weight
-
-# 不平衡的資料集利用sample_weight矯正
-
-import numpy as np
-import matplotlib.pyplot as plt
-from sklearn import svm
-
-# 生成隨機資料
-
-np.random.seed(0)
-# 20筆資料，前10筆+1
-X = np.r_[np.random.randn(10, 2) + [1, 1], np.random.randn(10, 2)]
-# y 前10筆為1，後10筆為-1
-y = [1] * 10 + [-1] * 10
-print(X)
-print(y)
-
-# 指定不同權重
-
-# 初始權重為隨機亂數
-modified_weight = abs(np.random.randn(len(X)))
-
-# 後5筆權重乘以 5
-modified_weight[15:] *= 5
-# 第10筆權重乘以 15
-modified_weight[9] *= 15
-print(modified_weight)
-
-# 無加權的模型訓練
-
-clf_no_weights = svm.SVC(gamma=1)
-clf_no_weights.fit(X, y)
-
-"""
-SVC(gamma=1)
-"""
-
-# 加權的模型訓練
-
-clf_weights = svm.SVC(gamma=1)
-clf_weights.fit(X, y, sample_weight=modified_weight)
-
-"""
-SVC(gamma=1)
-"""
-
-# 決策邊界函數
-
-
-def plot_decision_function(classifier, sample_weight, axis, title):
-    # plot the decision function
-    xx, yy = np.meshgrid(np.linspace(-4, 5, 500), np.linspace(-4, 5, 500))
-
-    Z = classifier.decision_function(np.c_[xx.ravel(), yy.ravel()])
-    Z = Z.reshape(xx.shape)
-
-    # plot the line, the points, and the nearest vectors to the plane
-    axis.contourf(xx, yy, Z, alpha=0.75, cmap=plt.cm.bone)
-    axis.scatter(
-        X[:, 0],
-        X[:, 1],
-        c=y,
-        s=100 * sample_weight,
-        alpha=0.9,
-        cmap=plt.cm.bone,
-        edgecolors="black",
-    )
-
-    axis.axis("off")
-    axis.set_title(title)
-
-
-# 繪圖比較兩個模型
-
-# plt.rcParams['font.sans-serif'] = ['Arial Unicode MS']
-# plt.rcParams['axes.unicode_minus'] = False
-
-fig, axes = plt.subplots(1, 2, figsize=(14, 6))
-
-# 權重全部為 1
-constant_weight = np.ones(len(X))
-plot_decision_function(clf_no_weights, constant_weight, axes[0], "無加權的模型")
-
-# 權重全部為 1
-plot_decision_function(clf_weights, modified_weight, axes[1], "加權的模型")
-plt.show()
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# 07_04_svm_kernels
-
-# 非線性分割SVM測試
-
-import numpy as np
-import matplotlib.pyplot as plt
-from sklearn import svm
-
-# 生成隨機資料
-
-# 16筆資料，分兩類
-X = np.c_[
-    (0.4, -0.7),
-    (-1.5, -1),
-    (-1.4, -0.9),
-    (-1.3, -1.2),
-    (-1.1, -0.2),
-    (-1.2, -0.4),
-    (-0.5, 1.2),
-    (-1.5, 2.1),
-    (1, 1),
-    (1.3, 0.8),
-    (1.2, 0.5),
-    (0.2, -2),
-    (0.5, -2.4),
-    (0.2, -2.3),
-    (0, -2.7),
-    (1.3, 2.1),
-].T
-Y = [0] * 8 + [1] * 8
-
-print(X)
-print(Y)
-
-# 繪圖比較三種 kernels 模型
-
-plt.figure(figsize=(12, 4))
-plt.subplot(1, 3, 1)
-for fignum, kernel in enumerate(["linear", "poly", "rbf"]):
-    clf = svm.SVC(kernel=kernel, gamma=2)
-    clf.fit(X, Y)
-
-    plt.subplot(1, 3, fignum + 1)
-    plt.scatter(
-        clf.support_vectors_[:, 0],
-        clf.support_vectors_[:, 1],
-        s=80,
-        facecolors="none",
-        zorder=10,
-        edgecolors="r",
-    )
-    colors = np.array(["yellow", "lightgreen"])
-    plt.scatter(X[:, 0], X[:, 1], c=colors[Y], zorder=10, cmap=plt.cm.Paired)
-
-    x_min, x_max, y_min, y_max = -3, 3, -3, 3
-    XX, YY = np.mgrid[x_min:x_max:200j, y_min:y_max:200j]
-    Z = clf.decision_function(np.c_[XX.ravel(), YY.ravel()])
-    Z = Z.reshape(XX.shape)
-    plt.pcolormesh(XX, YY, Z > 0, cmap=plt.cm.Paired)
-    plt.contour(
-        XX,
-        YY,
-        Z,
-        colors=["k", "k", "k"],
-        linestyles=["--", "-", "--"],
-        levels=[-0.5, 0, 0.5],
-    )
-
-    plt.xlim(x_min, x_max)
-    plt.ylim(y_min, y_max)
-    plt.xticks(())
-    plt.yticks(())
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# 07_05_svr_kernels
-
-# 房價預測
-
-from sklearn.preprocessing import StandardScaler
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import r2_score, mean_squared_error, mean_absolute_error
-import matplotlib.pyplot as plt
-import numpy as np
-import pandas as pd
-
-# 載入 Boston 房價資料集
-
-with open("./data/housing.data", encoding="utf8") as f:
-    data = f.readlines()
-all_fields = []
-for line in data:
-    line2 = line[1:].replace("   ", " ").replace("  ", " ")
-    fields = []
-    for item in line2.split(" "):
-        fields.append(float(item.strip()))
-        if len(fields) == 14:
-            all_fields.append(fields)
-df = pd.DataFrame(all_fields)
-df.columns = "CRIM,ZN,INDUS,CHAS,NOX,RM,AGE,DIS,RAD,TAX,PTRATIO,B,LSTAT,MEDV".split(",")
-cc = df.head()
-print(cc)
-
-# 2. 資料清理、資料探索與分析
-
-# 觀察資料集彙總資訊
-cc = df.info()
-print(cc)
-
-# 描述統計量
-cc = df.describe()
-print(cc)
-
-# 是否有含遺失值(Missing value)
-cc = df.isnull().sum()
-print(cc)
-
-# 繪圖
-
-# 直方圖
-import seaborn as sns
-
-X, y = df.drop("MEDV", axis=1).values, df.MEDV.values
-sns.histplot(x=y)
-plt.show()
-
-# 3. 不須進行特徵工程
-
-# 4. 資料分割
-
-# 資料分割
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
-
-# 查看陣列維度
-cc = X_train.shape, X_test.shape, y_train.shape, y_test.shape
-print(cc)
-
-# 特徵縮放
-
-scaler = StandardScaler()
-X_train_std = scaler.fit_transform(X_train)
-X_test_std = scaler.transform(X_test)
-
-# 5. 選擇演算法
-
-from sklearn.svm import SVR
-
-model = SVR(kernel="linear")
-
-# 6. 模型訓練
-
-model.fit(X_train_std, y_train)
-
-"""
-SVR(kernel='linear')
-"""
-
-# 7. 模型評分
-
-# R2、MSE、MAE
-y_pred = model.predict(X_test_std)
-print(f"R2 = {r2_score(y_test, y_pred)*100:.2f}")
-print(f"MSE = {mean_squared_error(y_test, y_pred)}")
-print(f"MAE = {mean_absolute_error(y_test, y_pred)}")
-
-"""
-R2 = 69.56
-MSE = 19.12608965301932
-MAE = 3.198509245210469
-"""
-
-# 取得偏差項及權重
-cc = model.intercept_, model.coef_
-print(cc)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# 07_06_svm_faces recognition
-
-# SVM人臉辨識
-
-from time import time
-import matplotlib.pyplot as plt
-from sklearn.model_selection import train_test_split
-from sklearn.datasets import fetch_lfw_people
-from sklearn.metrics import classification_report
-from sklearn.metrics import ConfusionMatrixDisplay
-from sklearn.decomposition import PCA
-
-# 載入資料集
-
-lfw_people = fetch_lfw_people(min_faces_per_person=70, resize=0.4)
-n_samples, h, w = lfw_people.images.shape
-
-X = lfw_people.data
-n_features = X.shape[1]
-y = lfw_people.target
-target_names = lfw_people.target_names
-n_classes = target_names.shape[0]
-
-print("Total dataset size:")
-print(f"n_samples: {n_samples}")
-print(f"n_features: {n_features}")
-print(f"n_classes: {n_classes}")
-
-"""
-Total dataset size:
-n_samples: 1288
-n_features: 1850
-n_classes: 7
-"""
-
-# 資料分割
-
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
-
-# 特徵縮放
-
-from sklearn.preprocessing import StandardScaler
-
-scaler = StandardScaler()
-X_train_std = scaler.fit_transform(X_train)
-X_test_std = scaler.transform(X_test)
-
-# 使用 PCA 萃取 150 個特徵
-
-n_components = 150
-
-t0 = time()
-pca = PCA(n_components=n_components, svd_solver="randomized", whiten=True).fit(X_train)
-
-X_train_pca = pca.transform(X_train)
-X_test_pca = pca.transform(X_test)
-print(f"轉換耗時: {(time() - t0):.3f}s")
-
-# 轉換耗時: 0.183s
 
 # 模型訓練
 
+from sklearn.preprocessing import StandardScaler
 from sklearn.svm import SVC
+from sklearn.pipeline import make_pipeline
 
-clf = SVC(kernel="rbf", class_weight="balanced")
-clf.fit(X_train_pca, y_train)
+pipe = make_pipeline(StandardScaler(), SVC(probability=True))
+
+pipe.fit(X_train, y_train)
 
 """
-SVC(class_weight='balanced')
+Pipeline(steps=[('standardscaler', StandardScaler()),
+                ('svc', SVC(probability=True))])
 """
 
-# 模型評分
+# 模型預測
 
-# 計算準確率
+y_pred_proba = pipe.predict_proba(X_test)
+cc = np.around(y_pred_proba, 2)
+print(cc)
+
+# 預測值(第2欄)與實際值合併
+
+df = pd.DataFrame({"predict": np.around(y_pred_proba[:, 1], 2), "actual": y_test})
+print(df)
+
+# 依預測值降冪排序
+
+df2 = df.sort_values(by="predict", ascending=False)
+print(df2)
+
+# 繪製ROC曲線
+
+from sklearn.metrics import roc_curve, roc_auc_score, auc
+
+fpr, tpr, threshold = roc_curve(df["actual"], df["predict"])
+auc1 = auc(fpr, tpr)
+plt.title("ROC 曲線")
+plt.plot(fpr, tpr, color="orange", label="AUC = %0.2f" % auc1)
+plt.legend(loc="lower right")
+plt.plot([0, 1], [0, 1], "r--")
+plt.xlim([0, 1])
+plt.ylim([0, 1])
+plt.ylabel("真陽率")
+plt.xlabel("偽陽率")
+plt.show()
+
+cc = roc_auc_score(df2.actual, df2.predict)
+print(cc)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 08_09_ credit_card_fraud_detection
+
+# 信用卡詐欺偵測
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# 載入資料
+
+df = pd.read_csv("C:/_git/vcs/_big_files/Scikit-learn_data/creditcard.csv")
+cc = df.head()
+print(cc)
+
+# 觀察目標變數的各類別筆數
+
+cc = df.Class.value_counts()
+print(cc)
+
+sns.countplot(x="Class", data=df)
+plt.show()
+
+# 模型訓練與評估
+
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 
-y_pred = clf.predict(X_test_pca)
-print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
+X, y = df.drop(["Time", "Amount", "Class"], axis=1), df["Class"]
+
+# 分割資料
+X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=0)
+
+# 模型訓練
+clf = LogisticRegression().fit(X_train, y_train)
+
+# 預測
+y_pred = clf.predict(X_test)
+
+# 準確率
+cc = accuracy_score(y_test, y_pred)
+print(cc)
+
+# K折交叉驗證
+
+from sklearn.model_selection import cross_val_score
+
+scores = cross_val_score(estimator=clf, X=X_test, y=y_test, cv=10, n_jobs=-1)
+print(f"K折分數: %s" % scores)
+print(f"平均值: {np.mean(scores):.3f}, 標準差: {np.std(scores):.3f}")
+
+"""
+K折分數: [0.99915742 0.99929785 0.9988764  0.9997191  0.99901685 0.99901685
+ 0.9991573  0.99957865 0.9988764  0.9994382 ]
+平均值: 0.999, 標準差: 0.000
+"""
 
 # 分類報告
 
-y_pred = clf.predict(X_test_pca)
-print(classification_report(y_test, y_pred, target_names=target_names))
-
-# 混淆矩陣圖
-
-ConfusionMatrixDisplay.from_estimator(
-    clf, X_test_pca, y_test, display_labels=target_names, xticks_rotation=30
-)
-plt.show()
-
-# 結合圖像與預測結果驗證
-
-
-def plot_gallery(images, titles, h, w, n_row=3, n_col=4):
-    """Helper function to plot a gallery of portraits"""
-    plt.figure(figsize=(1.8 * n_col, 2.4 * n_row))
-    plt.subplots_adjust(bottom=0, left=0.01, right=0.99, top=0.90, hspace=0.35)
-    for i in range(n_row * n_col):
-        plt.subplot(n_row, n_col, i + 1)
-        plt.imshow(images[i].reshape((h, w)), cmap=plt.cm.gray)
-        plt.title(titles[i], size=12)
-        plt.xticks(())
-        plt.yticks(())
-
-
-def title(y_pred, y_test, target_names, i):
-    pred_name = target_names[y_pred[i]].rsplit(" ", 1)[-1]
-    true_name = target_names[y_test[i]].rsplit(" ", 1)[-1]
-    return f"predicted: {pred_name}\ntrue:         {true_name}"
-
-
-prediction_titles = [
-    title(y_pred, y_test, target_names, i) for i in range(y_pred.shape[0])
-]
-
-plot_gallery(X_test, prediction_titles, h, w, n_row=6, n_col=4)
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# 07_06_svm_faces recognition_org
-
-# Faces recognition example using eigenfaces and SVMs
-
-# The dataset used in this example is a preprocessed excerpt of the "Labeled Faces in the Wild", aka LFW_:
-
-# http://vis-www.cs.umass.edu/lfw/lfw-funneled.tgz (233MB)
-
-from time import time
-import matplotlib.pyplot as plt
-
-from sklearn.model_selection import train_test_split
-from sklearn.model_selection import RandomizedSearchCV
-from sklearn.datasets import fetch_lfw_people
 from sklearn.metrics import classification_report
-from sklearn.metrics import ConfusionMatrixDisplay
-from sklearn.preprocessing import StandardScaler
-from sklearn.decomposition import PCA
-from sklearn.svm import SVC
-from scipy.stats import loguniform
 
-# Download the data, if not already on disk and load it as numpy arrays
+print(classification_report(y_test, y_pred))
 
-lfw_people = fetch_lfw_people(min_faces_per_person=70, resize=0.4)
+# 繪製ROC曲線
 
-# introspect the images arrays to find the shapes (for plotting)
-n_samples, h, w = lfw_people.images.shape
+from sklearn.metrics import roc_curve, roc_auc_score, auc
 
-# for machine learning we use the 2 data directly (as relative pixel
-# positions info is ignored by this model)
-X = lfw_people.data
-n_features = X.shape[1]
-
-# the label to predict is the id of the person
-y = lfw_people.target
-target_names = lfw_people.target_names
-n_classes = target_names.shape[0]
-
-print("Total dataset size:")
-print("n_samples: %d" % n_samples)
-print("n_features: %d" % n_features)
-print("n_classes: %d" % n_classes)
-
-# Split into a training set and a test and keep 25% of the data for testing.
-
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.25, random_state=42
-)
-
-scaler = StandardScaler()
-X_train = scaler.fit_transform(X_train)
-X_test = scaler.transform(X_test)
-
-# Compute a PCA (eigenfaces) on the face dataset (treated as unlabeled dataset): unsupervised feature extraction / dimensionality reduction
-
-n_components = 150
-
-print(
-    "Extracting the top %d eigenfaces from %d faces" % (n_components, X_train.shape[0])
-)
-t0 = time()
-pca = PCA(n_components=n_components, svd_solver="randomized", whiten=True).fit(X_train)
-print("done in %0.3fs" % (time() - t0))
-
-eigenfaces = pca.components_.reshape((n_components, h, w))
-
-print("Projecting the input data on the eigenfaces orthonormal basis")
-t0 = time()
-X_train_pca = pca.transform(X_train)
-X_test_pca = pca.transform(X_test)
-print("done in %0.3fs" % (time() - t0))
-
-# Train a SVM classification model
-
-print("Fitting the classifier to the training set")
-t0 = time()
-param_grid = {
-    "C": loguniform(1e3, 1e5),
-    "gamma": loguniform(1e-4, 1e-1),
-}
-clf = RandomizedSearchCV(
-    SVC(kernel="rbf", class_weight="balanced"), param_grid, n_iter=10
-)
-clf = clf.fit(X_train_pca, y_train)
-print("done in %0.3fs" % (time() - t0))
-print("Best estimator found by grid search:")
-print(clf.best_estimator_)
-
-# Quantitative evaluation of the model quality on the test set
-
-print("Predicting people's names on the test set")
-t0 = time()
-y_pred = clf.predict(X_test_pca)
-print("done in %0.3fs" % (time() - t0))
-
-print(classification_report(y_test, y_pred, target_names=target_names))
-ConfusionMatrixDisplay.from_estimator(
-    clf, X_test_pca, y_test, display_labels=target_names, xticks_rotation="vertical"
-)
-plt.tight_layout()
+y_pred_proba = clf.predict_proba(X_test)[:, 1]
+fpr, tpr, threshold = roc_curve(y_test, y_pred_proba)
+auc1 = auc(fpr, tpr)
+plt.title("ROC 曲線")
+plt.plot(fpr, tpr, color="orange", label="AUC = %0.2f" % auc1)
+plt.legend(loc="lower right")
+plt.plot([0, 1], [0, 1], "r--")
+plt.xlim([0, 1])
+plt.ylim([0, 1])
+plt.ylabel("真陽率")
+plt.xlabel("偽陽率")
 plt.show()
 
-# Predicting people's names on the test set
+# 從寬認定詐欺行為
 
-# Qualitative evaluation of the predictions using matplotlib
+y_pred_proba = clf.predict_proba(X_test)[:, 1]
+y_pred = y_pred_proba >= 0.3
+print(classification_report(y_test, y_pred))
 
+# Over-sampling -- SMOTE
 
-def plot_gallery(images, titles, h, w, n_row=3, n_col=4):
-    """Helper function to plot a gallery of portraits"""
-    plt.figure(figsize=(1.8 * n_col, 2.4 * n_row))
-    plt.subplots_adjust(bottom=0, left=0.01, right=0.99, top=0.90, hspace=0.35)
-    for i in range(n_row * n_col):
-        plt.subplot(n_row, n_col, i + 1)
-        plt.imshow(images[i].reshape((h, w)), cmap=plt.cm.gray)
-        plt.title(titles[i], size=12)
-        plt.xticks(())
-        plt.yticks(())
+# !pip install -U imbalanced-learn
 
+from imblearn.over_sampling import SMOTE
+from imblearn.metrics import classification_report_imbalanced
 
-# plot the result of the prediction on a portion of the test set
+print(df.Class.value_counts())
+smote = SMOTE()
+X_new, y_new = smote.fit_resample(X, y)
+cc = len(y_new[y_new == 0]), len(y_new[y_new == 1])
+print(cc)
 
+# 模型訓練與評估
 
-def title(y_pred, y_test, target_names, i):
-    pred_name = target_names[y_pred[i]].rsplit(" ", 1)[-1]
-    true_name = target_names[y_test[i]].rsplit(" ", 1)[-1]
-    return "predicted: %s\ntrue:      %s" % (pred_name, true_name)
+# 分割資料
+X_train, X_test, y_train, y_test = train_test_split(X_new, y_new)
 
+# 模型訓練
+clf = LogisticRegression().fit(X_train, y_train)
 
-prediction_titles = [
-    title(y_pred, y_test, target_names, i) for i in range(y_pred.shape[0])
-]
+# 預測
+y_pred = clf.predict(X_test)
 
-plot_gallery(X_test, prediction_titles, h, w)
+# 準確率
+cc = accuracy_score(y_test, y_pred)
+print(cc)
 
-# plot the gallery of the most significative eigenfaces
+# K折交叉驗證
 
-eigenface_titles = ["eigenface %d" % i for i in range(eigenfaces.shape[0])]
-plot_gallery(eigenfaces, eigenface_titles, h, w)
+from sklearn.model_selection import cross_val_score
 
-plt.show()
+scores = cross_val_score(estimator=clf, X=X_test, y=y_test, cv=10, n_jobs=-1)
+print(f"K折分數: %s" % scores)
+print(f"平均值: {np.mean(scores):.3f}, 標準差: {np.std(scores):.3f}")
+
+"""
+K折分數: [0.94499156 0.94379572 0.94569499 0.94541362 0.94442881 0.94288126
+ 0.94231851 0.95040799 0.94336968 0.94379177]
+平均值: 0.945, 標準差: 0.002
+"""
+
+# 分類報告
+
+from sklearn.metrics import classification_report
+
+print(classification_report(y_test, y_pred))
+
+# imbalanced-learn 分類報告
+
+from imblearn.metrics import classification_report_imbalanced
+
+print(classification_report_imbalanced(y_test, y_pred))
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 07_07_decision_tree_from_scratch
 
-# 自行開發決策樹
 
-from sklearn import datasets
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 09_01_simple_kmeans_from_scratch
+# 自行開發K-Means
+
+import pandas as pd
 import numpy as np
 import math
 
-# 計算熵(entropy)
+# K-Means演算法類別
 
 
-# 熵公式
-def entropy_func(c, n):
-    return -(c * 1.0 / n) * math.log(c * 1.0 / n, 2)
-    # gini
-    # return 1-(c*1.0/n)**2
-
-
-"""
-# 熵公式
-def entropy_func(c, n):
-    # return -(c*1.0/n)*math.log(c*1.0/n, 2)
-    # gini
-    return 1 - (c * 1.0 / n) ** 2
-"""
-
-
-# 依特徵值切割成兩類，分別計算熵，再加總
-# 計算同一節點內的熵，只有兩個類別
-def entropy_cal(c1, c2):
-    if c1 == 0 or c2 == 0:
-        return 0
-    return entropy_func(c1, c1 + c2) + entropy_func(c2, c1 + c2)
-
-
-# 視每個特徵都是類別變數，依每個類別切割，分別計算熵
-# 計算同一節點內的熵，多個類別
-def entropy_of_one_division(division):
-    s = 0
-    n = len(division)
-    classes = set(division)
-    # 計算每一類別的熵，再加總
-    for c in classes:
-        n_c = sum(division == c)
-        e = n_c * 1.0 / n * entropy_cal(sum(division == c), sum(division != c))
-        s += e
-    return s, n
-
-
-# 依分割條件計算熵
-def get_entropy(y_predict, y_real):
-    if len(y_predict) != len(y_real):
-        print("They have to be the same length")
-        return None
-    n = len(y_real)
-    # 左節點
-    s_true, n_true = entropy_of_one_division(y_real[y_predict])
-    # 右節點
-    s_false, n_false = entropy_of_one_division(y_real[~y_predict])
-    # 左、右節點加權總和
-    s = n_true * 1.0 / n * s_true + n_false * 1.0 / n * s_false
-    return s
-
-
-# 決策樹演算法類別
-
-
-class DecisionTreeClassifier(object):
-    def __init__(self, max_depth=3):
-        self.depth = 0
-        self.max_depth = max_depth
-
+class Kmeans(object):
     # 訓練
-    def fit(self, x, y, par_node={}, depth=0):
-        if par_node is None:
-            return None
-        elif len(y) == 0:
-            return None
-        elif self.all_same(y):
-            return {"val": float(y[0])}
-        elif depth >= self.max_depth:
-            return None
-        else:
-            # 計算資訊增益
-            col, cutoff, entropy = self.find_best_split_of_all(x, y)
-            if cutoff is not None:
-                y_left = y[x[:, col] < cutoff]
-                y_right = y[x[:, col] >= cutoff]
-                par_node = {
-                    "col": feature_names[col],
-                    "index_col": int(col),
-                    "cutoff": float(cutoff),
-                    "val": float(np.round(np.mean(y))),
-                }
-                par_node["left"] = self.fit(
-                    x[x[:, col] < cutoff], y_left, {}, depth + 1
-                )
-                par_node["right"] = self.fit(
-                    x[x[:, col] >= cutoff], y_right, {}, depth + 1
-                )
-                self.depth += 1
-            self.trees = par_node
-            return par_node
+    def fit(self, df, k=3):
+        # 任意分成K組
+        df["group"] = k - 1
+        n = len(df) // 3
+        # 前 k-1 組
+        for i in range(k - 1):
+            for j in range(n):
+                df.loc[i * k + j, "group"] = i
+        # print(df)
 
-    # 比較所有特徵找到最佳切割條件
-    def find_best_split_of_all(self, x, y):
-        col = None
-        min_entropy = 1
-        cutoff = None
-        for i, c in enumerate(x.T):
-            entropy, cur_cutoff = self.find_best_split(c, y)
-            if entropy == 0:  # 找到最佳切割條件
-                return i, cur_cutoff, entropy
-            elif entropy <= min_entropy:
-                min_entropy = entropy
-                col = i
-                cutoff = cur_cutoff
-        return col, cutoff, min_entropy
+        # 重覆第EM步驟，直到資料所屬組別不再變動為止
+        prev_df = pd.DataFrame()
+        while not df.equals(prev_df):
+            group_mean = df.groupby("group")["goals"].mean()
+            print(group_mean)
+            prev_df = df.copy()
+            for i, row in prev_df.iterrows():
+                df.loc[i, "group"] = np.argmin(np.abs(group_mean - row["goals"]))
 
-    # 根據一個特徵找到最佳切割條件
-    def find_best_split(self, col, y):
-        min_entropy = 10
-        n = len(y)
-        for value in set(col):
-            y_predict = col < value
-            my_entropy = get_entropy(y_predict, y)
-            if my_entropy <= min_entropy:
-                min_entropy = my_entropy
-                cutoff = value
-        return min_entropy, cutoff
-
-    # 檢查是否節點中所有樣本均屬同一類
-    def all_same(self, items):
-        return all(x == items[0] for x in items)
+        self.group_mean = group_mean
+        return df
 
     # 預測
     def predict(self, x):
-        tree = self.trees
-        results = np.array([0] * len(x))
-        for i, c in enumerate(x):
-            try:
-                results[i] = self._get_prediction(c)
-            except:
-                pass
-        return results
-
-    # 預測一筆
-    def _get_prediction(self, row):
-        cur_layer = self.trees
-        while cur_layer is not None and cur_layer.get("cutoff"):
-            if row[cur_layer["index_col"]] < cur_layer["cutoff"]:
-                cur_layer = cur_layer["left"]
-            else:
-                cur_layer = cur_layer["right"]
-        else:
-            return cur_layer.get("val") if cur_layer is not None else None
+        return np.argmin(np.abs(self.group_mean - x))
 
 
 # 載入資料集
 
-# ds = datasets.load_iris()
-
-ds = datasets.load_wine()
-
-feature_names = ds.feature_names
-X, y = ds.data, ds.target
-
-# 資料分割
-
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
-
-# 選擇演算法
+df = pd.read_csv("./data/kmeans_data.csv")
+print(df)
 
 # 模型訓練
 
-import json
+model = Kmeans()
+clusters = model.fit(df)
+print(clusters)
 
-clf = DecisionTreeClassifier()
-output = clf.fit(X_train, y_train)
-# output
-print(json.dumps(output, indent=4))
+# 分組結果
+grouped_df = clusters.groupby("group")
+for key, item in grouped_df:
+    print(f"group {key}:")
+    print(item["player"].values, "\n")
 
-# 模型評分
+# 預測
 
-# 計算準確率
-y_pred = clf.predict(X_test)
-print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
-
-# 30.56%
+# 預測10個進球數
+cc = model.predict(10)  # 第一組
+print(cc)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 07_08_scikit-learn_decision_tree
+# 09_02_kmeans_from_scratch
 
-# Scikit-learn決策樹演算法
+# 自行開發K-Means
+
+import pandas as pd
+import numpy as np
+import math
+import random
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# 歐幾里得距離函數
+
+
+def euclidean(point, data):
+    return np.sqrt(np.sum((point - data) ** 2, axis=1))
+
+
+# K-Means演算法類別
+
+
+class KMeans:
+    def __init__(self, n_clusters=8, max_iter=300):
+        self.n_clusters = n_clusters  # 組數
+        self.max_iter = max_iter  # EM 最大次數
+
+    # 訓練
+    def fit(self, X_train):
+        # 生成1個質心
+        self.centroids = [random.choice(X_train)]
+        # 生成其他 n-1 個質心
+        for _ in range(self.n_clusters - 1):
+            # Calculate distances from points to the centroids
+            dists = np.sum(
+                [euclidean(centroid, X_train) for centroid in self.centroids], axis=0
+            )
+            # 正規化
+            dists /= np.sum(dists)
+            # 依據距離作為機率，隨機產生質心
+            new_centroid_idx = np.random.choice(range(len(X_train)), size=1, p=dists)[0]
+            self.centroids += [X_train[new_centroid_idx]]
+
+        iteration = 0
+        prev_centroids = [np.zeros(X_train.shape[1])] * self.n_clusters
+        while (
+            np.not_equal(self.centroids, prev_centroids).any()
+            and iteration < self.max_iter
+        ):
+            # 找到最近的質心
+            sorted_points = [[] for _ in range(self.n_clusters)]
+            for x in X_train:
+                dists = euclidean(x, self.centroids)
+                centroid_idx = np.argmin(dists)
+                sorted_points[centroid_idx].append(x)
+
+            # 尋找新質心
+            prev_centroids = self.centroids
+            self.centroids = [np.mean(cluster, axis=0) for cluster in sorted_points]
+            for i, centroid in enumerate(self.centroids):
+                # 如果組內沒有任何樣本點，沿用上次的質心
+                if np.isnan(centroid).any():
+                    self.centroids[i] = prev_centroids[i]
+            iteration += 1
+        # print(iteration)
+
+    # 模型評估
+    def evaluate(self, X):
+        centroids = []
+        centroid_idxs = []
+        for x in X:
+            dists = euclidean(x, self.centroids)
+            centroid_idx = np.argmin(dists)
+            centroids.append(self.centroids[centroid_idx])
+            centroid_idxs.append(centroid_idx)
+
+        return centroids, centroid_idxs
+
+
+# 生成分類資料
+
+from sklearn.datasets import make_blobs
+
+X_train, true_labels = make_blobs(n_samples=100, centers=5, random_state=42)
+plt.scatter(X_train[:, 0], X_train[:, 1])
+plt.show()
+
+# 模型訓練
+
+from sklearn.preprocessing import StandardScaler
+
+# 標準化
+X_train = StandardScaler().fit_transform(X_train)
+
+# 訓練
+kmeans = KMeans(n_clusters=5)
+kmeans.fit(X_train)
+
+# 模型評估
+
+class_centers, classification = kmeans.evaluate(X_train)
+sns.scatterplot(
+    x=[X[0] for X in X_train],
+    y=[X[1] for X in X_train],
+    hue=true_labels,
+    style=classification,
+    palette="deep",
+    legend=None,
+)
+plt.plot(
+    [x for x, _ in kmeans.centroids],
+    [y for _, y in kmeans.centroids],
+    "*",
+    markersize=20,
+    color="r",
+)
+plt.title("k-means")
+plt.show()
+
+# 鳶尾花資料集測試
+
+from sklearn import datasets
+
+X, y = datasets.load_iris(return_X_y=True)
+
+# 標準化
+X_train = StandardScaler().fit_transform(X)
+
+# 訓練
+kmeans = KMeans(n_clusters=3)
+kmeans.fit(X_train)
+
+# 7
+
+# 模型評估
+
+from sklearn.metrics import accuracy_score
+
+_, y_pred = kmeans.evaluate(X_train)
+print(accuracy_score(y, y_pred))
+
+# 0.22
+
+# 驗證
+
+# 實際值
+cc = ",".join([str(i) for i in y])
+print(cc)
+
+# 預測值
+cc = ",".join([str(i) for i in y_pred])
+print(cc)
+
+p = pd.Series(y_pred)
+print(p[p == 1].index)
+
+p = pd.Series(y)
+print(p[p == 0].index)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 09_03_Scikit-learn_kmeans
+
+# 鳶尾花資料集測試
 
 from sklearn import datasets
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 import numpy as np
-import math
+import matplotlib.pyplot as plt
+from sklearn.preprocessing import StandardScaler
 
 # 載入資料集
 
-ds = datasets.load_wine()
-feature_names = ds.feature_names
-X, y = ds.data, ds.target
+X, y = datasets.load_iris(return_X_y=True)
 
 # 資料分割
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
-
-# 模型訓練
-
-from sklearn.tree import DecisionTreeClassifier
-
-clf = DecisionTreeClassifier()  # criterion='entropy')
-clf.fit(X_train, y_train)
-
-# DecisionTreeClassifier()
-
-# 模型評分
-
-# 計算準確率
-y_pred = clf.predict(X_test)
-print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
-
-# 繪製樹狀圖
-
-import matplotlib.pyplot as plt
-
-from sklearn.tree import plot_tree
-
-plt.figure(figsize=(14, 10))
-plot_tree(clf, feature_names=feature_names)
-plt.show()
-
-
-# 使用 graphviz 繪製圖形
-"""
-安裝
-    安裝 graphviz (https://graphviz.org/download/)
-    將安裝路徑的bin加入環境變數Path中(C:\Program Files (x86)\Graphviz2.XX\bin)
-    pip install graphviz pydotplus
-"""
-from pydotplus import graph_from_dot_data
-from sklearn.tree import export_graphviz
-
-dot_data = export_graphviz(
-    clf,
-    filled=True,
-    rounded=True,
-    class_names=ds.target_names,
-    feature_names=ds.feature_names,
-    out_file=None,
-)
-graph = graph_from_dot_data(dot_data)
-# graph.write_png('tmp_wine_tree.png')  NG
-
-# dot 格式存檔
-
-dot_data = export_graphviz(
-    clf,
-    filled=True,
-    rounded=True,
-    class_names=ds.target_names,
-    feature_names=ds.feature_names,
-    out_file="tmp_wine_tree.dot",
-)
-
-# 取得樹狀圖的相關資訊
-
-n_nodes = clf.tree_.node_count
-children_left = clf.tree_.children_left
-children_right = clf.tree_.children_right
-feature = clf.tree_.feature
-threshold = clf.tree_.threshold
-
-node_depth = np.zeros(shape=n_nodes, dtype=np.int64)
-is_leaves = np.zeros(shape=n_nodes, dtype=bool)
-stack = [(0, -1)]  # seed is the root node id and its parent depth
-while len(stack) > 0:
-    node_id, parent_depth = stack.pop()
-    node_depth[node_id] = parent_depth + 1
-
-    # If we have a test node
-    if children_left[node_id] != children_right[node_id]:
-        stack.append((children_left[node_id], parent_depth + 1))
-        stack.append((children_right[node_id], parent_depth + 1))
-    else:
-        is_leaves[node_id] = True
-
-print(f"樹狀圖共有{n_nodes}個節點:")
-for i in range(n_nodes):
-    depth = node_depth[i] * "\t"
-    if is_leaves[i]:
-        print(f"{depth}node={i} leaf node.")
-    else:
-        print(
-            f"{depth}node={i} child node: go to node {children_left[i]} if X[:, "
-            + f"{feature[i]}] <= {threshold[i]} else to node {children_right[i]}."
-        )
-print()
-
-node_indicator = clf.decision_path(X)
-leave_id = clf.apply(X)
-sample_id = 0
-node_index = node_indicator.indices[
-    node_indicator.indptr[sample_id] : node_indicator.indptr[sample_id + 1]
-]
-
-print(f"Rules used to predict sample {sample_id}: ")
-for node_id in node_index:
-    if leave_id[sample_id] == node_id:
-        continue
-
-    if X[sample_id, feature[node_id]] <= threshold[node_id]:
-        threshold_sign = "<="
-    else:
-        threshold_sign = ">"
-
-    print(
-        "decision id node {} : (X[{}, {}] (= {}) {} {})".format(
-            node_id,
-            sample_id,
-            feature[node_id],
-            X[sample_id, feature[node_id]],
-            threshold_sign,
-            threshold[node_id],
-        )
-    )
-
-# For a group of samples, we have the following common node.
-sample_ids = [0, 1]
-common_nodes = node_indicator.toarray()[sample_ids].sum(axis=0) == len(sample_ids)
-
-common_node_id = np.arange(n_nodes)[common_nodes]
-
-print(
-    "\nThe following samples %s share the node %s in the tree"
-    % (sample_ids, common_node_id)
-)
-print("It is %s %% of all nodes." % (100 * len(common_node_id) / n_nodes,))
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# 07_09_scikit-learn_decision_tree_regression
-
-# Scikit-learn迴歸樹測試
-
-import numpy as np
-from sklearn.tree import DecisionTreeRegressor
-import matplotlib.pyplot as plt
-
-# 生成隨機資料
-
-rng = np.random.RandomState(1)
-X = np.sort(5 * rng.rand(80, 1), axis=0)
-y = np.sin(X).ravel()
-y[::5] += 3 * (0.5 - rng.rand(16))
-
-# 訓練兩個模型
-
-regr_1 = DecisionTreeRegressor(max_depth=2)
-regr_1.fit(X, y)
-regr_2 = DecisionTreeRegressor(max_depth=5)
-regr_2.fit(X, y)
-
-# DecisionTreeRegressor(max_depth=5)
-
-# 預測
-
-X_test = np.arange(0.0, 5.0, 0.01)[:, np.newaxis]
-y_1 = regr_1.predict(X_test)
-y_2 = regr_2.predict(X_test)
-
-# 模型繪圖
-
-plt.scatter(X, y, s=20, edgecolor="black", c="darkorange", label="data")
-plt.plot(X_test, y_1, color="cornflowerblue", label="max_depth=2", linewidth=2)
-plt.plot(X_test, y_2, color="yellowgreen", label="max_depth=5", linewidth=2)
-plt.xlabel("data")
-plt.ylabel("target")
-plt.title("Decision Tree Regression")
-plt.legend()
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# 07_10_decision_tree_regression_boston
-
-# 房價預測
-
-from sklearn.preprocessing import StandardScaler
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import r2_score, mean_squared_error, mean_absolute_error
-import matplotlib.pyplot as plt
-import numpy as np
-import pandas as pd
-
-# 載入 Boston 房價資料集
-
-with open("./data/housing.data", encoding="utf8") as f:
-    data = f.readlines()
-all_fields = []
-for line in data:
-    line2 = line[1:].replace("   ", " ").replace("  ", " ")
-    fields = []
-    for item in line2.split(" "):
-        fields.append(float(item.strip()))
-        if len(fields) == 14:
-            all_fields.append(fields)
-df = pd.DataFrame(all_fields)
-df.columns = "CRIM,ZN,INDUS,CHAS,NOX,RM,AGE,DIS,RAD,TAX,PTRATIO,B,LSTAT,MEDV".split(",")
-cc = df.head()
-print(cc)
-
-# 2. 資料清理、資料探索與分析
-
-# 是否有含遺失值(Missing value)
-cc = df.isnull().sum()
-print(cc)
-
-# 繪圖
-
-# 直方圖
-import seaborn as sns
-
-X, y = df.drop("MEDV", axis=1).values, df.MEDV.values
-sns.histplot(x=y)
-plt.show()
-
-# 3. 不須進行特徵工程
-
-# 4. 資料分割
-
-# 資料分割
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
-
-# 查看陣列維度
-cc = X_train.shape, X_test.shape, y_train.shape, y_test.shape
-print(cc)
 
 # 特徵縮放
 
@@ -1320,257 +1135,1387 @@ scaler = StandardScaler()
 X_train_std = scaler.fit_transform(X_train)
 X_test_std = scaler.transform(X_test)
 
-# 5. 選擇演算法
+# 選擇演算法
 
-from sklearn.tree import DecisionTreeRegressor
+from sklearn.cluster import KMeans
 
-model = DecisionTreeRegressor()
+model = KMeans(n_clusters=3, init="k-means++", n_init="auto")
 
-# 6. 模型訓練
+# 模型訓練
 
 model.fit(X_train_std, y_train)
 
-# DecisionTreeRegressor()
+# KMeans(n_clusters=3, n_init='auto')
 
-# 7. 模型評分
-
-# R2、MSE、MAE
-y_pred = model.predict(X_test_std)
-print(f"R2 = {r2_score(y_test, y_pred)*100:.2f}")
-print(f"MSE = {mean_squared_error(y_test, y_pred)}")
-print(f"MAE = {mean_absolute_error(y_test, y_pred)}")
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# 07_11_decision_tree_multioutput_face_completion
-
-# 使用Scikit-learn各種迴歸演算法預測人臉下半部
-
-import numpy as np
-import matplotlib.pyplot as plt
-from sklearn.datasets import fetch_olivetti_faces
-from sklearn.utils.validation import check_random_state
-from sklearn.tree import DecisionTreeRegressor
-from sklearn.neighbors import KNeighborsRegressor
-from sklearn.linear_model import LinearRegression
-from sklearn.linear_model import RidgeCV
-
-# 載入資料集
-
-data, targets = fetch_olivetti_faces(return_X_y=True)
-
-# 資料分割
-
-train = data[targets < 30]
-test = data[targets >= 30]
-
-# 模型訓練
-
-n_pixels = data.shape[1]
-# 人臉上半部為 X，人臉下半部為 Y
-X_train = train[:, : (n_pixels + 1) // 2]
-y_train = train[:, n_pixels // 2 :]
-
-# 使用各種迴歸演算法
-ESTIMATORS = {
-    "迴歸樹": DecisionTreeRegressor(),
-    "KNN": KNeighborsRegressor(),
-    "Linear regression": LinearRegression(),
-    "Ridge": RidgeCV(),
-}
-
-# 訓練
-for name, estimator in ESTIMATORS.items():
-    estimator.fit(X_train, y_train)
-
-# 測試 5 筆資料
-
-n_faces = 5
-rng = check_random_state(4)
-face_ids = rng.randint(test.shape[0], size=(n_faces,))
-test = test[face_ids, :]
-
-X_test = test[:, : (n_pixels + 1) // 2]
-y_test = test[:, n_pixels // 2 :]
-
-# 預測
-y_test_predict = dict()
-for name, estimator in ESTIMATORS.items():
-    y_test_predict[name] = estimator.predict(X_test)
-
-# 依照各種迴歸演算法測試結果繪製人臉
-
-# 設定圖片寬/高
-image_shape = (64, 64)
-
-n_cols = 1 + len(ESTIMATORS)
-plt.figure(figsize=(2.0 * n_cols, 2.26 * n_faces))
-plt.suptitle("預測人臉下半部", size=16)
-
-# 繪圖
-for i in range(n_faces):
-    true_face = np.hstack((X_test[i], y_test[i]))
-
-    if i > 0:
-        sub = plt.subplot(n_faces, n_cols, i * n_cols + 1)
-    else:
-        sub = plt.subplot(n_faces, n_cols, i * n_cols + 1, title="true faces")
-
-    sub.axis("off")
-    sub.imshow(
-        true_face.reshape(image_shape), cmap=plt.cm.gray, interpolation="nearest"
-    )
-
-    # 依照各種迴歸演算法繪製人臉
-    for j, est in enumerate(sorted(ESTIMATORS)):
-        completed_face = np.hstack((X_test[i], y_test_predict[est][i]))
-
-        if i:
-            sub = plt.subplot(n_faces, n_cols, i * n_cols + 2 + j)
-
-        else:
-            sub = plt.subplot(n_faces, n_cols, i * n_cols + 2 + j, title=est)
-
-        sub.axis("off")
-        sub.imshow(
-            completed_face.reshape(image_shape),
-            cmap=plt.cm.gray,
-            interpolation="nearest",
-        )
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# 07_12_scikit-learn_random_forest
-# Scikit-learn決策樹演算法
-
-from sklearn import datasets
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score
-import numpy as np
-import math
-
-# 載入資料集
-
-ds = datasets.load_wine()
-feature_names = ds.feature_names
-X, y = ds.data, ds.target
-
-# 資料分割
-
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
-
-# 模型訓練
-
-from sklearn.ensemble import RandomForestClassifier
-
-clf = RandomForestClassifier(n_estimators=50)
-clf.fit(X_train, y_train)
-
-# RandomForestClassifier(n_estimators=50)
-
-# 模型評分
+# 模型評估
 
 # 計算準確率
-y_pred = clf.predict(X_test)
+y_pred = model.predict(X_test_std)
 print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
 
-# 97.22%
+# 6.67%
 
-# 特徵重要性
-
-cc = clf.feature_importances_
+# 比較實際值與預測值
+cc = ",".join([str(i) for i in y_test]), ",".join([str(i) for i in y_pred])
 print(cc)
 
-print(feature_names)
+cc = [i for i, j in enumerate(y_test) if j == 0] == [
+    i for i, j in enumerate(y_pred) if j == 1
+]
+print(cc)
+
+# 模型評估：資料點與所屬質心距離的平方和
+
+cc = model.inertia_
+print(cc)
+
+# 111.5372270434027
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 09_04_kmeans_optimization_elbow
+
+# 轉折判斷法(Elbow)
+
+import numpy as np
+
+# 生成分類資料
+
+from sklearn.datasets import make_blobs
+
+X, y = make_blobs(
+    n_samples=150,
+    n_features=2,
+    centers=3,
+    cluster_std=0.5,
+    shuffle=True,
+    random_state=0,
+)
+
+# 訓練模型
+
+from sklearn.cluster import KMeans
+
+km = KMeans(
+    n_clusters=3, init="random", n_init=10, max_iter=300, tol=1e-04, random_state=0
+)
+
+# 模型評估
+
+# 顯示失真(Distortion)的程度
+y_km = km.fit_predict(X)
+print("Distortion: %.2f" % km.inertia_)
+
+# Distortion: 72.48
+
+# 轉折判斷法(Elbow)
+
+distortions = []
+# 測試 1~10 群的失真
+for i in range(1, 11):
+    km = KMeans(n_clusters=i, init="k-means++", n_init=10, max_iter=300, random_state=0)
+    km.fit(X)
+    distortions.append(km.inertia_)
 
 # 繪圖
 
 import matplotlib.pyplot as plt
+
+plt.plot(range(1, 11), distortions, marker="o")
+plt.xlabel("集群數量", fontsize=14)
+plt.ylabel("失真", fontsize=14)
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 09_05_kmeans_optimization_silhouette
+
+# 輪廓圖分析(Silhouette Analysis)
+
+from sklearn.cluster import KMeans
+import numpy as np
+from matplotlib import cm
+from sklearn.metrics import silhouette_samples
+from sklearn.datasets import make_blobs
+import matplotlib.pyplot as plt
+
+# 生成分類資料
+
+X, y = make_blobs(
+    n_samples=150,
+    n_features=2,
+    centers=3,
+    cluster_std=0.5,
+    shuffle=True,
+    random_state=0,
+)
+
+# 訓練模型
+
+km = KMeans(
+    n_clusters=2, init="k-means++", n_init=10, max_iter=300, tol=1e-04, random_state=0
+)
+y_km = km.fit_predict(X)
+
+# 輪廓係數
+
+cluster_labels = np.unique(y_km)
+n_clusters = cluster_labels.shape[0]
+silhouette_vals = silhouette_samples(X, y_km, metric="euclidean")
+silhouette_vals
+
+# 繪製輪廓圖
+
+# 輪廓圖
+y_ax_lower, y_ax_upper = 0, 0
+yticks = []
+for i, c in enumerate(cluster_labels):
+    c_silhouette_vals = silhouette_vals[y_km == c]
+    c_silhouette_vals.sort()
+    y_ax_upper += len(c_silhouette_vals)
+    color = cm.jet(float(i) / n_clusters)
+    plt.barh(
+        range(y_ax_lower, y_ax_upper),
+        c_silhouette_vals,
+        height=1.0,
+        edgecolor="none",
+        color=color,
+    )
+
+    yticks.append((y_ax_lower + y_ax_upper) / 2.0)
+    y_ax_lower += len(c_silhouette_vals)
+
+# 輪廓係數平均數的垂直線
+silhouette_avg = np.mean(silhouette_vals)
+plt.axvline(silhouette_avg, color="red", linestyle="--")
+
+plt.yticks(yticks, cluster_labels + 1)
+plt.ylabel("集群", fontsize=14)
+plt.xlabel("輪廓係數", fontsize=14)
+plt.show()
+
+# 使用3個集群訓練模型
+
+km = KMeans(
+    n_clusters=3, init="k-means++", n_init=10, max_iter=300, tol=1e-04, random_state=0
+)
+y_km = km.fit_predict(X)
+
+# 繪製輪廓圖
+
+cluster_labels = np.unique(y_km)
+n_clusters = cluster_labels.shape[0]
+silhouette_vals = silhouette_samples(X, y_km, metric="euclidean")
+
+# 輪廓圖
+y_ax_lower, y_ax_upper = 0, 0
+yticks = []
+for i, c in enumerate(cluster_labels):
+    c_silhouette_vals = silhouette_vals[y_km == c]
+    c_silhouette_vals.sort()
+    y_ax_upper += len(c_silhouette_vals)
+    color = cm.jet(float(i) / n_clusters)
+    plt.barh(
+        range(y_ax_lower, y_ax_upper),
+        c_silhouette_vals,
+        height=1.0,
+        edgecolor="none",
+        color=color,
+    )
+
+    yticks.append((y_ax_lower + y_ax_upper) / 2.0)
+    y_ax_lower += len(c_silhouette_vals)
+
+# 輪廓係數平均數的垂直線
+silhouette_avg = np.mean(silhouette_vals)
+plt.axvline(silhouette_avg, color="red", linestyle="--")
+
+plt.yticks(yticks, cluster_labels + 1)
+plt.ylabel("集群", fontsize=14)
+plt.xlabel("輪廓係數", fontsize=14)
+plt.show()
+
+# 計算輪廓分數
+
+from sklearn.metrics import silhouette_score
+
+cc = silhouette_score(X, y)
+print(cc)
+
+# 0.7143417887288687
+
+# 依據輪廓分數找最佳集群數量
+
+# 測試 2~10 群的分數
+silhouette_score_list = []
+print("輪廓分數:")
+for i in range(2, 11):
+    km = KMeans(n_clusters=i, init="k-means++", n_init=10, max_iter=300, random_state=0)
+    km.fit(X)
+    y_km = km.fit_predict(X)
+    silhouette_score_list.append(silhouette_score(X, y_km))
+    print(f"{i}:{silhouette_score_list[-1]:.2f}")
+
+print(f"最大值 {np.argmax(silhouette_score_list)+2}: {np.max(silhouette_score_list):.2f}")
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 09_06_agglomerative_hierarchical_clustering
+
+# 凝聚階層集群(Agglomerative Hierarchical Clustering, AHC)
+
 import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+# 生成資料
+
+np.random.seed(123)
+variables = ["X", "Y", "Z"]
+labels = ["ID_0", "ID_1", "ID_2", "ID_3", "ID_4"]
+
+X = np.random.random_sample([5, 3]) * 10
+df = pd.DataFrame(X, columns=variables, index=labels)
+print(df)
+
+# 計算集群彼此間的距離
+
+from scipy.spatial.distance import pdist, squareform
+
+row_dist = pd.DataFrame(
+    squareform(pdist(df, metric="euclidean")), columns=labels, index=labels
+)
+print(row_dist)
+
+# 計算平均連結距離
+
+from scipy.cluster.hierarchy import linkage
+
+row_clusters = linkage(pdist(df, metric="euclidean"), method="average")
+pd.DataFrame(
+    row_clusters,
+    columns=["row label 1", "row label 2", "distance", "no. of items in clust."],
+    index=["cluster %d" % (i + 1) for i in range(row_clusters.shape[0])],
+)
+
+# 繪製樹狀圖(dendrogram)
+
+from scipy.cluster.hierarchy import dendrogram
+
+row_dendr = dendrogram(row_clusters, labels=labels)
+plt.ylabel("歐幾里德距離", fontsize=14)
+plt.show()
+
+# 繪製熱力圖
+
+fig = plt.figure(figsize=(8, 8), facecolor="white")
+axd = fig.add_axes([0.09, 0.1, 0.2, 0.6])  # x-pos, y-pos, width, height
+
+# 樹狀圖顯示在左邊
+row_dendr = dendrogram(row_clusters, orientation="left")
+
+# 降冪排序
+df_rowclust = df.iloc[row_dendr["leaves"][::-1]]
+
+# 不顯示刻度
+axd.set_xticks([])
+axd.set_yticks([])
+
+# 不顯示座標軸
+for i in axd.spines.values():
+    i.set_visible(False)
+
+# 繪製熱力圖
+axm = fig.add_axes([0.23, 0.1, 0.6, 0.6])  # x-pos, y-pos, width, height
+cax = axm.matshow(df_rowclust, interpolation="nearest", cmap="hot_r")
+fig.colorbar(cax)
+axm.set_xticklabels([""] + list(df_rowclust.columns))
+axm.set_yticklabels([""] + list(df_rowclust.index))
+plt.show()
+
+# Scikit-learn AgglomerativeClustering
+
+from sklearn.cluster import AgglomerativeClustering
+
+# 分 3 類
+ac = AgglomerativeClustering(n_clusters=3, metric="euclidean", linkage="complete")
+labels = ac.fit_predict(X)
+print("Cluster labels: %s" % labels)
+
+# Cluster labels: [1 0 0 2 1]
+
+# 分 2 類
+ac = AgglomerativeClustering(n_clusters=2, metric="euclidean", linkage="complete")
+labels = ac.fit_predict(X)
+print("Cluster labels: %s" % labels)
+
+# Cluster labels: [0 1 1 0 0]
+
+# 使用鳶尾花資料集測試
+
+from sklearn.datasets import load_iris
+
+
+# 繪製樹狀圖
+def plot_dendrogram(model, **kwargs):
+    # 計算每個集群的筆數
+    counts = np.zeros(model.children_.shape[0])
+    n_samples = len(model.labels_)
+    for i, merge in enumerate(model.children_):
+        current_count = 0
+        for child_idx in merge:
+            if child_idx < n_samples:
+                current_count += 1  # leaf node
+            else:
+                current_count += counts[child_idx - n_samples]
+        counts[i] = current_count
+
+    linkage_matrix = np.column_stack(
+        [model.children_, model.distances_, counts]
+    ).astype(float)
+
+    # 繪製樹狀圖
+    dendrogram(linkage_matrix, **kwargs)
+
+
+# 載入資料集
+X, _ = load_iris(return_X_y=True)
+
+# distance_threshold=0 表示會建立完整的樹狀圖(dendrogram)
+model = AgglomerativeClustering(distance_threshold=0, n_clusters=None)
+
+model = model.fit(X)
+plt.title("Hierarchical Clustering Dendrogram")
+plot_dendrogram(model, truncate_mode="level", p=3)  # 限制 3 層
+plt.ylabel("歐幾里德距離", fontsize=14)
+plt.xlabel("每個集群的筆數", fontsize=14)
+plt.show()
+
+# 各種距離衡量方式的比較
+
+import time
+import matplotlib.pyplot as plt
+import numpy as np
+
+from sklearn.cluster import AgglomerativeClustering
+from sklearn.neighbors import kneighbors_graph
+
+# Generate sample data
+n_samples = 1500
+np.random.seed(0)
+t = 1.5 * np.pi * (1 + 3 * np.random.rand(1, n_samples))
+x = t * np.cos(t)
+y = t * np.sin(t)
+
+
+X = np.concatenate((x, y))
+X += 0.7 * np.random.randn(2, n_samples)
+X = X.T
+
+# Create a graph capturing local connectivity. Larger number of neighbors
+# will give more homogeneous clusters to the cost of computation
+# time. A very large number of neighbors gives more evenly distributed
+# cluster sizes, but may not impose the local manifold structure of
+# the data
+knn_graph = kneighbors_graph(X, 30, include_self=False)
+
+for connectivity in (None, knn_graph):
+    for n_clusters in (30, 3):
+        plt.figure(figsize=(10, 4))
+        for index, linkage in enumerate(("average", "complete", "ward", "single")):
+            plt.subplot(1, 4, index + 1)
+            model = AgglomerativeClustering(
+                linkage=linkage, connectivity=connectivity, n_clusters=n_clusters
+            )
+            t0 = time.time()
+            model.fit(X)
+            elapsed_time = time.time() - t0
+            plt.scatter(X[:, 0], X[:, 1], c=model.labels_, cmap=plt.cm.nipy_spectral)
+            plt.title(
+                "linkage=%s\n(time %.2fs)" % (linkage, elapsed_time),
+                fontdict=dict(verticalalignment="top"),
+            )
+            plt.axis("equal")
+            plt.axis("off")
+
+            plt.subplots_adjust(bottom=0, top=0.89, wspace=0, left=0, right=1)
+            plt.suptitle(
+                "n_cluster=%i, connectivity=%r"
+                % (n_clusters, connectivity is not None),
+                size=17,
+            )
+            plt.tight_layout()
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 09_07_dbscan_simple_test
+
+# 以密度為基礎的集群(Density-based spatial clustering of applications with noise, DBSCAN)
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.cluster import DBSCAN
+
+# 生成資料
+
+X = np.array([[1, 2], [2, 2], [2, 3], [8, 7], [8, 8], [25, 80]])
+print(X)
+
+# 模型訓練
+
+model = DBSCAN(eps=3, min_samples=2).fit(X)
+print(model.labels_)
+
+# 生成更多資料，且非線性
+
+from sklearn.datasets import make_moons
+
+X, y = make_moons(n_samples=200, noise=0.05, random_state=0)
+plt.scatter(X[:, 0], X[:, 1])
+plt.show()
+
+# 模型訓練，繪製結果
+
+db = DBSCAN(eps=0.2, min_samples=5, metric="euclidean")
+y_pred = db.fit_predict(X)
+plt.scatter(
+    X[y_pred == 0, 0],
+    X[y_pred == 0, 1],
+    c="lightblue",
+    marker="o",
+    s=40,
+    edgecolor="black",
+    label="cluster 1",
+)
+plt.scatter(
+    X[y_pred == 1, 0],
+    X[y_pred == 1, 1],
+    c="red",
+    marker="s",
+    s=40,
+    edgecolor="black",
+    label="cluster 2",
+)
+plt.legend()
+plt.show()
+
+# 另一個範例，參閱Demo of DBSCAN clustering algorithm
+
+from sklearn.datasets import make_blobs
+from sklearn.preprocessing import StandardScaler
+
+centers = [[1, 1], [-1, -1], [1, -1]]
+X, labels_true = make_blobs(
+    n_samples=750, centers=centers, cluster_std=0.4, random_state=0
+)
+
+X = StandardScaler().fit_transform(X)
+
+# 繪製資料
+
+plt.figure(figsize=(10, 8))
+plt.scatter(X[:, 0], X[:, 1])
+plt.show()
+
+# 模型訓練
+
+labels = DBSCAN(eps=0.3, min_samples=10).fit_predict(X)
+
+# 計算集群內樣本數、雜訊點個數
+n_clusters_ = len(set(labels)) - (1 if -1 in labels else 0)
+n_noise_ = list(labels).count(-1)
+
+print(f"集群數={n_clusters_}")
+print(f"雜訊點個數={n_noise_}")
+
+# 集群數=3
+# 雜訊點個數=18
+
+# 模型評估
+
+from sklearn import metrics
+
+print(f"Homogeneity: {metrics.homogeneity_score(labels_true, labels):.3f}")
+print(f"Completeness: {metrics.completeness_score(labels_true, labels):.3f}")
+print(f"V-measure: {metrics.v_measure_score(labels_true, labels):.3f}")
+print(f"Adjusted Rand Index: {metrics.adjusted_rand_score(labels_true, labels):.3f}")
+print(
+    "Adjusted Mutual Information:"
+    f" {metrics.adjusted_mutual_info_score(labels_true, labels):.3f}"
+)
+print(f"Silhouette Coefficient: {metrics.silhouette_score(X, labels):.3f}")
+
+"""
+Homogeneity: 0.953
+Completeness: 0.883
+V-measure: 0.917
+Adjusted Rand Index: 0.952
+Adjusted Mutual Information: 0.916
+Silhouette Coefficient: 0.626
+"""
+
+# 繪製結果
+
+plt.figure(figsize=(10, 8))
+unique_labels = set(labels)
+core_samples_mask = np.zeros_like(labels, dtype=bool)
+core_samples_mask[db.core_sample_indices_] = True
+
+colors = [plt.cm.Spectral(each) for each in np.linspace(0, 1, len(unique_labels))]
+for k, col in zip(unique_labels, colors):
+    if k == -1:
+        # Black used for noise.
+        col = [0, 0, 0, 1]
+
+    class_member_mask = labels == k
+
+    xy = X[class_member_mask & core_samples_mask]
+    plt.plot(
+        xy[:, 0],
+        xy[:, 1],
+        "o",
+        markerfacecolor=tuple(col),
+        markeredgecolor="k",
+        markersize=14,
+    )
+
+    xy = X[class_member_mask & ~core_samples_mask]
+    plt.plot(
+        xy[:, 0],
+        xy[:, 1],
+        "o",
+        markerfacecolor=tuple(col),
+        markeredgecolor="k",
+        markersize=6,
+    )
+
+plt.title(f"Estimated number of clusters: {n_clusters_}")
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 09_08_gmm_test
+# GMM測試，程式修改自Python Data Science Handbook 範例05.12-Gaussian-Mixtures.ipynb
+
+import matplotlib.pyplot as plt
 import seaborn as sns
 
-plt.figure(figsize=(10, 6))
-df = pd.DataFrame(
-    {"feature_names": feature_names, "feature_importance": clf.feature_importances_}
-)
-df.sort_values(by=["feature_importance"], ascending=False, inplace=True)
-sns.barplot(x=df["feature_importance"], y=df["feature_names"])
+sns.set()
+import numpy as np
+
+# 生成分類資料
+
+from sklearn.datasets import make_blobs
+
+X, y_true = make_blobs(n_samples=400, centers=4, cluster_std=0.60, random_state=0)
+X = X[:, ::-1]  # 特徵互調順序，繪圖效果較佳
+print(X[:10])
+
+# 進行 K-Means 集群，並繪圖
+
+from sklearn.cluster import KMeans
+
+kmeans = KMeans(4, init="k-means++", n_init=10, random_state=0)
+labels = kmeans.fit(X).predict(X)
+plt.scatter(X[:, 0], X[:, 1], c=labels, s=40, cmap="viridis")
 plt.show()
 
-# 使用Permutation importance評估特徵重要性
+# 繪製集群範圍
 
-from sklearn.inspection import permutation_importance
+from sklearn.cluster import KMeans
+from scipy.spatial.distance import cdist
 
-result = permutation_importance(
-    clf, X_test, y_test, n_repeats=10, random_state=42, n_jobs=2
-)
 
-sorted_importances_idx = result.importances_mean.argsort()
-importances = pd.DataFrame(
-    result.importances[sorted_importances_idx].T,
-    columns=np.array(feature_names)[sorted_importances_idx],
-)
+def plot_kmeans(kmeans, X, n_clusters=4, rseed=0, ax=None):
+    labels = kmeans.fit_predict(X)
 
-ax = importances.plot.box(vert=False, whis=10, figsize=(10, 6))
-ax.set_title("Permutation Importances (test set)")
-ax.axvline(x=0, color="k", linestyle="--")
-ax.set_xlabel("Decrease in accuracy score")
-ax.figure.tight_layout()
+    # 繪製樣本點
+    ax = ax or plt.gca()
+    ax.axis("equal")
+    ax.scatter(X[:, 0], X[:, 1], c=labels, s=40, cmap="viridis", zorder=2)
+
+    # 以最大半徑繪製集群範圍
+    centers = kmeans.cluster_centers_
+    radii = [cdist(X[labels == i], [center]).max() for i, center in enumerate(centers)]
+    for c, r in zip(centers, radii):
+        ax.add_patch(
+            plt.Circle(c, r, fc="#CCCCCC", lw=3, color="k", alpha=0.5, zorder=1)
+        )
+
+
+kmeans = KMeans(n_clusters=4, init="k-means++", n_init=10, random_state=0)
+plot_kmeans(kmeans, X)
+plt.show()
+
+# 生成長條型資料
+
+rng = np.random.RandomState(13)
+X_stretched = np.dot(X, rng.randn(2, 2))
+
+kmeans = KMeans(n_clusters=4, init="k-means++", n_init=10, random_state=0)
+plot_kmeans(kmeans, X_stretched)
+plt.show()
+
+# 改用GMM
+
+from sklearn.mixture import GaussianMixture
+
+gmm = GaussianMixture(n_components=4).fit(X)
+labels = gmm.predict(X)
+plt.scatter(X[:, 0], X[:, 1], c=labels, s=40, cmap="viridis")
+plt.show()
+
+# 屬於各集群的機率
+
+probs = gmm.predict_proba(X)
+print(probs[:5].round(3))
+
+# 繪製集群範圍
+
+from matplotlib.patches import Ellipse
+
+
+# 繪製橢圓
+def draw_ellipse(position, covariance, ax=None, **kwargs):
+    """Draw an ellipse with a given position and covariance"""
+    ax = ax or plt.gca()
+
+    # Convert covariance to principal axes
+    if covariance.shape == (2, 2):
+        U, s, Vt = np.linalg.svd(covariance)
+        angle = np.degrees(np.arctan2(U[1, 0], U[0, 0]))
+        width, height = 2 * np.sqrt(s)
+    else:
+        angle = 0
+        width, height = 2 * np.sqrt(covariance)
+
+    # Draw the Ellipse
+    for nsig in range(1, 4):
+        ax.add_patch(Ellipse(position, nsig * width, nsig * height, angle, **kwargs))
+
+
+# 繪製GMM範圍
+def plot_gmm(gmm, X, label=True, ax=None):
+    ax = ax or plt.gca()
+    labels = gmm.fit(X).predict(X)
+    if label:
+        ax.scatter(X[:, 0], X[:, 1], c=labels, s=40, cmap="viridis", zorder=2)
+    else:
+        ax.scatter(X[:, 0], X[:, 1], s=40, zorder=2)
+    ax.axis("equal")
+
+    # soft-edged sphere
+    w_factor = 0.2 / gmm.weights_.max()
+    for pos, covar, w in zip(gmm.means_, gmm.covariances_, gmm.weights_):
+        draw_ellipse(pos, covar, alpha=w * w_factor)
+
+
+gmm = GaussianMixture(n_components=4, random_state=42)
+plot_gmm(gmm, X)
+plt.show()
+
+# 使用 GMM對長條型資料進行集群
+
+gmm = GaussianMixture(n_components=4, covariance_type="full", random_state=42)
+plot_gmm(gmm, X_stretched)
+plt.show()
+
+# 測試非線性資料
+
+from sklearn.datasets import make_moons
+
+Xmoon, ymoon = make_moons(200, noise=0.05, random_state=0)
+plt.scatter(Xmoon[:, 0], Xmoon[:, 1])
+plt.show()
+
+# GMM 集群：設定2個集群
+
+gmm2 = GaussianMixture(n_components=2, covariance_type="full", random_state=0)
+plot_gmm(gmm2, Xmoon)
+plt.show()
+
+# GMM 集群：設定16個集群
+
+gmm16 = GaussianMixture(n_components=16, covariance_type="full", random_state=0)
+plot_gmm(gmm16, Xmoon, label=False)
+plt.show()
+
+# 以模型生成資料
+
+Xnew, _ = gmm16.sample(400)
+plt.scatter(Xnew[:, 0], Xnew[:, 1])
+plt.show()
+
+# 以AIC/BIC決定最佳集群數量
+
+n_components = np.arange(1, 21)
+models = [
+    GaussianMixture(n, covariance_type="full", random_state=0).fit(Xmoon)
+    for n in n_components
+]
+
+plt.plot(n_components, [m.bic(Xmoon) for m in models], label="BIC")
+plt.plot(n_components, [m.aic(Xmoon) for m in models], label="AIC")
+plt.legend(loc="best")
+plt.xlabel("n_components")
+plt.show()
+
+# 生成手寫阿拉伯數字
+
+from sklearn.datasets import load_digits
+
+digits = load_digits()
+cc = digits.data.shape
+print(cc)
+
+# (1797, 64)
+
+# 顯示前 100 筆手寫阿拉伯數字
+
+
+def plot_digits(data):
+    fig, ax = plt.subplots(
+        10, 10, figsize=(8, 8), subplot_kw=dict(xticks=[], yticks=[])
+    )
+    fig.subplots_adjust(hspace=0.05, wspace=0.05)
+    for i, axi in enumerate(ax.flat):
+        im = axi.imshow(data[i].reshape(8, 8), cmap="binary")
+        im.set_clim(0, 16)
+
+
+plot_digits(digits.data)
+plt.show()
+
+# 降維
+
+from sklearn.decomposition import PCA
+
+pca = PCA(0.99, whiten=True)
+data = pca.fit_transform(digits.data)
+print(data.shape)
+
+# (1797, 41)
+
+# 以AIC決定最佳集群數量
+
+n_components = np.arange(50, 210, 10)
+models = [GaussianMixture(n, covariance_type="full") for n in n_components]
+aics = [model.fit(data).aic(data) for model in models]
+plt.plot(n_components, aics)
+plt.show()
+
+# 以AIC決定最佳集群數量=110
+# 設定集群數量=110
+
+gmm = GaussianMixture(110, covariance_type="full", random_state=0)
+gmm.fit(data)
+print(gmm.converged_)
+
+# True
+
+# Now we can draw samples of 100 new points within this 41-dimensional projected space, using the GMM as a generative model:
+
+# 生成100個樣本
+
+data_new, _ = gmm.sample(100)
+digits_new = pca.inverse_transform(data_new)
+plot_digits(digits_new)
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 07_13_chaid_three_cat
+# 09_09_image_compression
 
-from seaborn import load_dataset
+# 影像壓縮(Image Compression)
 
-df = load_dataset("titanic")
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.utils import shuffle
+from sklearn.datasets import load_sample_image
+from sklearn.cluster import KMeans
+
+# 載入測試圖片
+
+flower = load_sample_image("flower.jpg")
+plt.axis("off")
+plt.imshow(flower)
+plt.show()
+
+# 存檔
+plt.imsave("tmp_flower.jpg", flower)
+
+# 正規化、取得圖片寬高及顏色維度、將寬高轉為一維
+
+# 正規化
+flower = np.array(flower, dtype=np.float64) / 255
+
+# 取得圖片寬高及顏色維度
+w, h, d = tuple(flower.shape)
+
+# 將寬高轉為一維
+image_array = np.reshape(flower, (w * h, d))
+print(w, h, d)
+
+# (427, 640, 3)
+
+# 模型訓練及預測
+
+# 隨機抽樣1000個像素
+image_sample = shuffle(image_array, random_state=42)[:1000]
+
+# K-Means模型訓練， 設定64個集群
+kmeans = KMeans(n_clusters=64, random_state=42).fit(image_sample)
+
+# 對所有像素進行集群
+labels = kmeans.predict(image_array)
+
+# 重建影像的函數
+
+
+def reconstruct_image(cluster_centers, labels, w, h):
+    d = cluster_centers.shape[1]
+    image = np.zeros((w, h, d))
+    label_index = 0
+    for i in range(w):
+        for j in range(h):
+            # 以質心取代原圖像顏色
+            image[i][j] = cluster_centers[labels[label_index]]
+            label_index += 1
+    return image
+
+
+# 比較原圖與減色後的圖片
+
+plt.figure(figsize=(14, 7))
+
+# 原圖
+plt.subplot(1, 2, 1)
+plt.axis("off")
+plt.title("原圖")
+plt.imshow(flower)
+
+plt.subplot(1, 2, 2)
+plt.axis("off")
+plt.title("重建的影像")
+plt.imshow(reconstruct_image(kmeans.cluster_centers_, labels, w, h))
+plt.show()
+
+# 再使用K-Means，設定4個集群
+
+# K-Means模型訓練， 設定4個集群
+kmeans = KMeans(n_clusters=4, random_state=42).fit(image_sample)
+
+# 對所有像素進行集群
+labels = kmeans.predict(image_array)
+
+plt.figure(figsize=(14, 7))
+# 原圖
+plt.subplot(1, 2, 1)
+plt.axis("off")
+plt.title("原圖")
+plt.imshow(flower)
+
+plt.subplot(1, 2, 2)
+plt.axis("off")
+plt.title("重建的影像")
+plt.imshow(reconstruct_image(kmeans.cluster_centers_, labels, w, h))
+plt.show()
+
+# 存檔
+plt.imsave(
+    "tmp_flower_kmeans.jpg", reconstruct_image(kmeans.cluster_centers_, labels, w, h)
+)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 09_10_customer_segmentation
+# 客戶區隔(Customer segmentation)
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# 載入資料集
+df = pd.read_csv(
+    "C:/_git/vcs/_big_files/Scikit-learn_data/invoice.csv", encoding="ISO-8859-1"
+)
+
+# 只分析英國的顧客
+df = df[df.Country == "United Kingdom"]
 cc = df.head()
 print(cc)
 
-df.embarked = df.embarked.fillna(method="ffill")
-cc = df.head()
+# 描述統計量
+# df.describe().T
+
+# 資料清理
+
+# 移除非購買記錄
+
+# 移除數量<=0的交易記錄
+df = df[df["Quantity"] > 0]
+
+# 移除單價<=0的交易記錄
+df = df[df["UnitPrice"] > 0]
+print(df.Quantity.describe())
+cc = df.UnitPrice.describe()
 print(cc)
 
-from CHAID import Tree
+# 刪除 Missing Value
+df.dropna(subset=["CustomerID"], inplace=True)
 
-independent_variable_columns = ["sex", "embarked"]
-dep_variable = "survived"
-tree = Tree.from_pandas_df(
-    df,
-    dict(zip(independent_variable_columns, ["nominal"] * 3)),
-    dep_variable,
-    dep_variable_type="categorical",
-    max_depth=5,
-    min_parent_node_size=2,
-    alpha_merge=0.1,
+# 檢查 Missing Value
+cc = df.isnull().sum()
+print(cc)
+
+# 找出資料集的最近購買日期
+
+# 找出資料集的最近購買日期
+print(df["InvoiceDate"].max())
+
+# 日期轉 YYYY-MM-DD
+cc = df["date"] = pd.DatetimeIndex(df.InvoiceDate).date
+print(cc)
+
+# 計算 Recency
+
+# 計算每個顧客的最近購買日期
+recency_df = df.groupby(["CustomerID"], as_index=False)["date"].max()
+recency_df.columns = ["CustomerID", "LastPurchaseDate"]
+
+# 計算每個顧客的上次消費的日期距今天數
+now = df["date"].max()
+recency_df["Recency"] = recency_df.LastPurchaseDate.apply(lambda x: (now - x).days)
+cc = recency_df.head()
+print(cc)
+
+recency_df.drop(columns=["LastPurchaseDate"], inplace=True)
+
+# 計算 Frequency
+
+# 計算每個顧客的消費次數
+frequency_df = df.copy()
+frequency_df.drop_duplicates(
+    subset=["CustomerID", "InvoiceNo"], keep="first", inplace=True
 )
-tree.print_tree()
+frequency_df = frequency_df.groupby("CustomerID", as_index=False)["InvoiceNo"].count()
+frequency_df.columns = ["CustomerID", "Frequency"]
+cc = frequency_df.head()
+print(cc)
 
-from CHAID import Tree
+# 計算 Monetary
 
-independent_variable_columns = ["fare", "sex", "embarked"]
-dep_variable = "survived"
-tree = Tree.from_pandas_df(
-    df,
-    dict(zip(independent_variable_columns, ["ordinal"] + ["nominal"] * 3)),
-    dep_variable,
-    dep_variable_type="categorical",
-    max_depth=5,
-    min_parent_node_size=2,
-    alpha_merge=0.1,
+# 計算每個顧客的累計消費金額
+df["Total_cost"] = df["UnitPrice"] * df["Quantity"]
+monetary_df = df.groupby("CustomerID", as_index=False)["Total_cost"].sum()
+monetary_df.columns = ["CustomerID", "Monetary"]
+cc = monetary_df.head()
+print(cc)
+
+# 合併 RFM
+
+rf = recency_df.merge(frequency_df, left_on="CustomerID", right_on="CustomerID")
+rfm = rf.merge(monetary_df, left_on="CustomerID", right_on="CustomerID")
+rfm.set_index("CustomerID", inplace=True)
+cc = rfm.head()
+print(cc)
+
+# 驗算
+
+cc = df[df.CustomerID == 12346.0]
+print(cc)
+
+import datetime as dt
+
+now = dt.date(2011, 12, 9)
+cc = (now - dt.date(2011, 1, 18)).days == 325
+print(cc)
+
+# True
+
+# 使用K-Means進行集群
+
+from sklearn.cluster import KMeans
+
+# 複製資料
+rfm_segmentation = rfm.copy()
+
+# 轉折判斷法
+Nc = range(1, 20)
+kmeans = [KMeans(n_clusters=i, init="k-means++", n_init="auto") for i in Nc]
+for i in range(len(kmeans)):
+    kmeans[i].fit(rfm_segmentation)
+score = [kmeans[i].score(rfm_segmentation) for i in range(len(kmeans))]
+wcss = [kmeans[i].inertia_ for i in range(len(kmeans))]
+
+plt.plot(Nc, score)
+plt.xticks(range(0, 20, 2))
+plt.xlabel("Number of Clusters")
+plt.ylabel("Score")
+plt.title("Elbow Curve")
+plt.show()
+
+plt.plot(Nc, wcss)
+plt.xticks(range(0, 20, 2))
+plt.xlabel("Number of Clusters")
+plt.ylabel("wcss")
+plt.title("Elbow Curve")
+plt.show()
+
+# 分成3群
+
+X = rfm_segmentation.copy()
+kmeans = KMeans(
+    n_clusters=3, init="k-means++", n_init=10, max_iter=300, random_state=0
+).fit(X)
+
+# 新增欄位，加入集群代碼
+rfm_segmentation["cluster"] = kmeans.labels_
+
+# 觀看集群 0 的前 10 筆資料
+cc = rfm_segmentation[rfm_segmentation.cluster == 0].head(10)
+print(cc)
+
+# 計算每群筆數
+
+cc = rfm_segmentation["cluster"].value_counts()
+print(cc)
+
+# 輪廓係數
+
+from sklearn.metrics import silhouette_samples
+
+y_km = rfm_segmentation["cluster"]
+cluster_labels = np.unique(y_km)
+n_clusters = cluster_labels.shape[0]
+silhouette_vals = silhouette_samples(X, y_km, metric="euclidean")
+cc = silhouette_vals
+print(cc)
+
+# 繪製輪廓圖
+
+from matplotlib import cm
+
+# 輪廓圖
+y_ax_lower, y_ax_upper = 0, 0
+yticks = []
+for i, c in enumerate(cluster_labels):
+    c_silhouette_vals = silhouette_vals[y_km == c]
+    c_silhouette_vals.sort()
+    y_ax_upper += len(c_silhouette_vals)
+    color = cm.jet(float(i) / n_clusters)
+    plt.barh(
+        range(y_ax_lower, y_ax_upper),
+        c_silhouette_vals,
+        height=1.0,
+        edgecolor="none",
+        color=color,
+    )
+
+    yticks.append((y_ax_lower + y_ax_upper) / 2.0)
+    y_ax_lower += len(c_silhouette_vals)
+
+# 輪廓係數平均數的垂直線
+silhouette_avg = np.mean(silhouette_vals)
+plt.axvline(silhouette_avg, color="red", linestyle="--")
+
+plt.yticks(yticks, cluster_labels + 1)
+plt.ylabel("集群", fontsize=14)
+plt.xlabel("輪廓係數", fontsize=14)
+plt.tight_layout()
+plt.show()
+
+# 依據輪廓分數找最佳集群數量
+
+# 測試 2~20 群的分數
+from sklearn.metrics import silhouette_score
+
+silhouette_score_list = []
+print("輪廓分數:")
+for i in range(2, 21):
+    km = KMeans(n_clusters=i, init="k-means++", n_init=10, max_iter=300, random_state=0)
+    km.fit(X)
+    y_km = km.fit_predict(X)
+    silhouette_score_list.append(silhouette_score(X, y_km))
+    print(f"{i}:{silhouette_score_list[-1]:.2f}")
+
+print(f"最大值 {np.argmax(silhouette_score_list)+2}: {np.max(silhouette_score_list):.2f}")
+
+for i in range(2, 21):
+    km = KMeans(
+        n_clusters=i, init="k-means++", n_init=10, max_iter=300, random_state=0
+    ).fit(X)
+
+    # 新增欄位，加入集群代碼
+    y_km = km.labels_
+    cluster_labels = np.unique(y_km)
+    n_clusters = cluster_labels.shape[0]
+    silhouette_vals = silhouette_samples(X, y_km, metric="euclidean")
+
+    # 輪廓圖
+    y_ax_lower, y_ax_upper = 0, 0
+    yticks = []
+    for i, c in enumerate(cluster_labels):
+        c_silhouette_vals = silhouette_vals[y_km == c]
+        c_silhouette_vals.sort()
+        y_ax_upper += len(c_silhouette_vals)
+        color = cm.jet(float(i) / n_clusters)
+        plt.barh(
+            range(y_ax_lower, y_ax_upper),
+            c_silhouette_vals,
+            height=1.0,
+            edgecolor="none",
+            color=color,
+        )
+
+        yticks.append((y_ax_lower + y_ax_upper) / 2.0)
+        y_ax_lower += len(c_silhouette_vals)
+
+    # 輪廓係數平均數的垂直線
+    silhouette_avg = np.mean(silhouette_vals)
+    plt.axvline(silhouette_avg, color="red", linestyle="--")
+
+    plt.yticks(yticks, cluster_labels + 1)
+    plt.ylabel("集群", fontsize=14)
+    plt.xlabel("輪廓係數", fontsize=14)
+    plt.tight_layout()
+    plt.show()
+
+# RFM 分組
+
+
+# 四分位數分組
+def RScore(x, p, d):
+    if x <= d[p][0.25]:
+        return 1
+    elif x <= d[p][0.50]:
+        return 2
+    elif x <= d[p][0.75]:
+        return 3
+    else:
+        return 4
+
+
+def FMScore(x, p, d):
+    if x <= d[p][0.25]:
+        return 4
+    elif x <= d[p][0.50]:
+        return 3
+    elif x <= d[p][0.75]:
+        return 2
+    else:
+        return 1
+
+
+# 四分位數(quantile)
+quantile = rfm.quantile(q=[0.25, 0.5, 0.75])
+print(quantile)
+
+cc = quantile.to_dict()
+print(cc)
+
+# RFM依四分位數給分
+
+rfm_segmentation["R_Quartile"] = rfm_segmentation["Recency"].apply(
+    RScore, args=("Recency", quantile)
 )
-tree.print_tree()
+rfm_segmentation["F_Quartile"] = rfm_segmentation["Frequency"].apply(
+    FMScore, args=("Frequency", quantile)
+)
+rfm_segmentation["M_Quartile"] = rfm_segmentation["Monetary"].apply(
+    FMScore, args=("Monetary", quantile)
+)
+cc = rfm_segmentation.head()
+print(cc)
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
+# 合併 RFM 分數
+rfm_segmentation["RFMScore"] = (
+    rfm_segmentation.R_Quartile.map(str)
+    + rfm_segmentation.F_Quartile.map(str)
+    + rfm_segmentation.M_Quartile.map(str)
+)
+cc = rfm_segmentation.head()
+print(cc)
+
+# 計算 RFM 總分
+rfm_segmentation["Total_score"] = (
+    rfm_segmentation["R_Quartile"]
+    + rfm_segmentation["F_Quartile"]
+    + rfm_segmentation["M_Quartile"]
+)
+
+cc = rfm_segmentation.head()
+print(cc)
+
+print("客戶篩選：")
+print("Best Customers: ", len(rfm_segmentation[rfm_segmentation["RFMScore"] == "111"]))
+print("Loyal Customers: ", len(rfm_segmentation[rfm_segmentation["F_Quartile"] == 1]))
+print("Big Spenders: ", len(rfm_segmentation[rfm_segmentation["M_Quartile"] == 1]))
+print("Almost Lost: ", len(rfm_segmentation[rfm_segmentation["RFMScore"] == "134"]))
+print("Lost Customers: ", len(rfm_segmentation[rfm_segmentation["RFMScore"] == "344"]))
+print(
+    "Lost Cheap Customers: ",
+    len(rfm_segmentation[rfm_segmentation["RFMScore"] == "444"]),
+)
+"""
+客戶篩選：
+Best Customers:  423
+Loyal Customers:  791
+Big Spenders:  980
+Almost Lost:  31
+Lost Customers:  187
+Lost Cheap Customers:  396
+"""
+# 依分數顯示客戶名單
+cc = rfm_segmentation.sort_values(
+    by=["RFMScore", "Monetary"], ascending=[True, False]
+).head(10)
+print(cc)
+
+# 依RFM級數顯示每一組的平均消費金額
+cc = rfm_segmentation.groupby("RFMScore")["Monetary"].mean().head(10)
+print(cc)
+
+# 依RFM總分顯示每一組的平均消費金額
+cc = rfm_segmentation.groupby("Total_score")["Monetary"].mean()
+
+# 依RFM總分作圖，總分 3,4,5 有最高消費金額
+rfm_segmentation.groupby("Total_score")["Monetary"].mean().plot(
+    kind="bar", colormap="Blues_r"
+)
+plt.show()
+
+# 依RFM總分作圖，總分 3,4,5 有最高消費次數
+rfm_segmentation.groupby("Total_score")["Frequency"].mean().plot(
+    kind="bar", colormap="Blues_r"
+)
+plt.show()
+
+# 依RFM總分作圖，總分 10,11,12 Recency最高
+rfm_segmentation.groupby("Total_score")["Recency"].mean().plot(
+    kind="bar", colormap="Blues_r"
+)
+plt.show()
+
+# 依據輪廓分數找最佳集群數量
+
+# 測試 2~20 群的分數
+from sklearn.metrics import silhouette_score
+
+X = rfm_segmentation[["R_Quartile", "F_Quartile", "M_Quartile"]]
+silhouette_score_list = []
+print("輪廓分數:")
+for i in range(2, 21):
+    km = KMeans(n_clusters=i, init="k-means++", n_init=10, max_iter=300, random_state=0)
+    km.fit(X)
+    y_km = km.fit_predict(X)
+    silhouette_score_list.append(silhouette_score(X, y_km))
+    print(f"{i}:{silhouette_score_list[-1]:.2f}")
+
+print(f"最大值 {np.argmax(silhouette_score_list)+2}: {np.max(silhouette_score_list):.2f}")
+
+for i in range(2, 21):
+    km = KMeans(
+        n_clusters=i, init="k-means++", n_init=10, max_iter=300, random_state=0
+    ).fit(X)
+
+    # 新增欄位，加入集群代碼
+    y_km = km.labels_
+    cluster_labels = np.unique(y_km)
+    n_clusters = cluster_labels.shape[0]
+    silhouette_vals = silhouette_samples(X, y_km, metric="euclidean")
+
+    # 輪廓圖
+    y_ax_lower, y_ax_upper = 0, 0
+    yticks = []
+    for i, c in enumerate(cluster_labels):
+        c_silhouette_vals = silhouette_vals[y_km == c]
+        c_silhouette_vals.sort()
+        y_ax_upper += len(c_silhouette_vals)
+        color = cm.jet(float(i) / n_clusters)
+        plt.barh(
+            range(y_ax_lower, y_ax_upper),
+            c_silhouette_vals,
+            height=1.0,
+            edgecolor="none",
+            color=color,
+        )
+
+        yticks.append((y_ax_lower + y_ax_upper) / 2.0)
+        y_ax_lower += len(c_silhouette_vals)
+
+    # 輪廓係數平均數的垂直線
+    silhouette_avg = np.mean(silhouette_vals)
+    plt.axvline(silhouette_avg, color="red", linestyle="--")
+
+    plt.yticks(yticks, cluster_labels + 1)
+    plt.ylabel("集群", fontsize=14)
+    plt.xlabel("輪廓係數", fontsize=14)
+    plt.tight_layout()
+    plt.show()
+
+# 分成4個集群
+
+kmeans = KMeans(n_clusters=4, random_state=0).fit(X)
+
+# 新增欄位，加入集群代碼
+rfm_segmentation["cluster"] = kmeans.labels_
+
+# 觀看集群 0 的前 10 筆資料
+cc = rfm_segmentation[rfm_segmentation.cluster == 0].head(10)
+print(cc)
+
+from mpl_toolkits.mplot3d import Axes3D
+import matplotlib.colors as mcolors
+
+fig = plt.figure(figsize=(12, 8))
+dx = fig.add_subplot(111, projection="3d")
+colors = ["green", "blue", "red", "yellow"]
+
+for i in range(rfm_segmentation.cluster.nunique()):
+    dx.scatter(
+        rfm_segmentation[rfm_segmentation.cluster == i].R_Quartile,
+        rfm_segmentation[rfm_segmentation.cluster == i].F_Quartile,
+        rfm_segmentation[rfm_segmentation.cluster == i].M_Quartile,
+        c=colors[i],
+        label="Cluster " + str(i),
+        s=10,
+        alpha=1.0,
+    )
+
+dx.set_xlabel("Recency", fontsize=14)
+dx.set_ylabel("Frequency", fontsize=14)
+dx.set_zlabel("Monetary", fontsize=14)
+dx.legend(fontsize=12)
+plt.tight_layout()
+plt.show()
+
+cc = rfm_segmentation.cluster.value_counts()
+print(cc)
+
+cc = rfm_segmentation.groupby("cluster")[
+    ["R_Quartile", "F_Quartile", "M_Quartile", "Total_score"]
+].mean()
+print(cc)
+
+# 結論
+# 集群 1為VIP，其他依序為3、2、0。
 
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
 sys.exit()
+
+

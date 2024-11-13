@@ -27,15 +27,15 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
-np.random.seed(0)  #for reproducibility            
-
 from keras.datasets import mnist
+
+print("------------------------------------------------------------")  # 60個
+
 from keras.models import Sequential 
 from keras.layers import Dense, Activation
 from keras.layers import Convolution2D, MaxPooling2D
 from keras.layers import Dropout, Flatten
 
-#from keras.utils import np_utils old 改如下
 from tensorflow.python.keras.utils import np_utils
 
 input_size = 784

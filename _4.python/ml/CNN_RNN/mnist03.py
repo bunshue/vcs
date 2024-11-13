@@ -180,10 +180,8 @@ plt.imshow(X, cmap="Greys")
 """
 
 print(y_train[1234])
-
 # 3
 
-# from keras.utils import np_utils old 改如下
 from tensorflow.python.keras.utils import np_utils
 
 y_train = np_utils.to_categorical(y_train, 10)

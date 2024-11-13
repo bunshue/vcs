@@ -15,6 +15,7 @@ import random
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns  # 海生, 自動把圖畫得比較好看
 
 font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
@@ -25,6 +26,11 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
+
+from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
+
+print("------------------------------------------------------------")  # 60個
+
 
 print("數字 資料集 ST")
 
@@ -160,22 +166,19 @@ print("------------------------------")  # 30個
 print("shape of raw image data: {0}".format(digits.images.shape))
 print("shape of data: {0}".format(digits.data.shape))
 
-# 把数据分成训练数据集和测试数据集
-from sklearn.model_selection import train_test_split
-
-Xtrain, Xtest, Ytrain, Ytest = train_test_split(
-    digits.data, digits.target, test_size=0.20, random_state=2
-)
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+Xtrain, Xtest, Ytrain, Ytest = train_test_split(digits.data, digits.target, test_size=0.2)
+# 訓練組8成, 測試組2成
 
 # 使用支持向量机来训练模型
 from sklearn import svm
 
 clf = svm.SVC(gamma=0.001, C=100.0, probability=True)
-clf.fit(Xtrain, Ytrain)
+
+clf.fit(Xtrain, Ytrain)  # 學習訓練.fit
 
 # 评估模型的准确度
 from sklearn.metrics import accuracy_score
-
 Ypred = clf.predict(Xtest)
 print(accuracy_score(Ytest, Ypred))
 
@@ -226,7 +229,6 @@ print("------------------------------------------------------------")  # 60個
 
 from sklearn.datasets import load_digits
 from sklearn.neural_network import MLPClassifier
-from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 
 # データ読み込み
@@ -234,9 +236,14 @@ data = load_digits()
 X = data.images.reshape(len(data.images), -1)
 y = data.target
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+# 訓練組8成, 測試組2成
+
 model = model = MLPClassifier(hidden_layer_sizes=(16,))
-model.fit(X_train, y_train)  # 學習
+
+model.fit(X_train, y_train)  # 學習訓練.fit
+
 y_pred = model.predict(X_test)
 print(accuracy_score(y_pred, y_test))  # 評価
 
@@ -275,7 +282,7 @@ def plts():
 
 def svms():
     # 学习并返回识别结果
-    svc.fit(digits.data[:1791], digits.target[:1791])  # 训练
+    svc.fit(digits.data[:1791], digits.target[:1791])  # 學習訓練.fit
     res = svc.predict(digits.data[1791:1797])  # 识别
     return list(res)
 

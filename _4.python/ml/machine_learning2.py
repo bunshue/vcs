@@ -748,30 +748,6 @@ print(tt)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-from sklearn.linear_model import LinearRegression
-
-X = [[10.0], [8.0], [13.0], [9.0], [11.0], [14.0], [6.0], [4.0], [12.0], [7.0], [5.0]]
-y = [8.04, 6.95, 7.58, 8.81, 8.33, 9.96, 7.24, 4.26, 10.84, 4.82, 5.68]
-
-linear_regression = LinearRegression()
-linear_regression.fit(X, y)
-print(linear_regression.intercept_)  # 切片
-print(linear_regression.coef_)  # 傾き
-
-y_pred = linear_regression.predict([[0], [1]])
-print(y_pred)  # x=0, x=1に対する予測結果
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 from sklearn.preprocessing import PolynomialFeatures
 from sklearn.linear_model import Ridge
 from sklearn.metrics import mean_squared_error
@@ -782,12 +758,16 @@ train_X = np.random.uniform(low=0, high=1.2, size=train_size)
 test_X = np.random.uniform(low=0.1, high=1.3, size=test_size)
 train_y = np.sin(train_X * 2 * np.pi) + np.random.normal(0, 0.2, train_size)
 test_y = np.sin(test_X * 2 * np.pi) + np.random.normal(0, 0.2, test_size)
+
 poly = PolynomialFeatures(6)  # 次數は6
+
 train_poly_X = poly.fit_transform(train_X.reshape(train_size, 1))
 test_poly_X = poly.fit_transform(test_X.reshape(test_size, 1))
 
 model = Ridge(alpha=1.0)
+
 model.fit(train_poly_X, train_y)  # 學習訓練.fit
+
 train_pred_y = model.predict(train_poly_X)  # 預測.predict
 test_pred_y = model.predict(test_poly_X)  # 預測.predict
 print(mean_squared_error(train_pred_y, train_y))
@@ -795,20 +775,6 @@ print(mean_squared_error(test_pred_y, test_y))
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-from sklearn.linear_model import LogisticRegression
-
-X_train = np.r_[
-    np.random.normal(3, 1, size=50), np.random.normal(-1, 1, size=50)
-].reshape((100, -1))
-y_train = np.r_[np.ones(50), np.zeros(50)]
-
-# 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
-logistic_regression = LogisticRegression()  # 邏輯迴歸函數學習機
-
-logistic_regression.fit(X_train, y_train)  # 學習訓練.fit
-
-print(logistic_regression.predict_proba([[0], [1], [2]])[:, 1])
 
 from sklearn.svm import LinearSVC
 from sklearn.datasets import make_blobs

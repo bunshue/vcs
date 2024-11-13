@@ -37,9 +37,16 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
+from sklearn import linear_model
+
 import sklearn.linear_model
 from sklearn import datasets
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
+
+# 載入迴歸常見的評估指標
+from sklearn.metrics import mean_squared_error
+from sklearn.metrics import r2_score
+from sklearn.metrics import accuracy_score
 
 print("------------------------------------------------------------")  # 60個
 
@@ -118,7 +125,6 @@ plt.plot(x_test, y_pred, color="red", label="迴歸直線")
 # 將測試的 y 與預測的 y_pred 計算 決定係數r2
 
 print('計算 真實測試資料(y_test) 和 預測資料(Y_test)的 r2_score')
-from sklearn.metrics import r2_score
 r2 = r2_score(y_test, y_pred)
 # print(f"決定係數 = {r2.round(2)}") NG
 
@@ -377,12 +383,10 @@ mse = np.sum((y_test - Y_test) ** 2) / len(y_test)
 print("MSE =", mse)
 
 print('計算 真實測試資料(y_test) 和 預測資料(Y_test)的 MSE')
-from sklearn.metrics import mean_squared_error
 mse = mean_squared_error(y_test, Y_test)
 print(f"MSE = {mse:.4f}")
 
 print('計算 真實測試資料(y_test) 和 預測資料(Y_test)的 r2_score')
-from sklearn.metrics import r2_score
 r2 = r2_score(y_test, Y_test)
 print(f"R2 = {r2:.4f}")
 
@@ -485,21 +489,17 @@ plt.grid()
 plt.show()
 
 print('計算 真實測試資料(y_test) 和 預測資料(Y_test)的 MSE')
-from sklearn.metrics import mean_squared_error
 mse_t = mean_squared_error(y_train, linear_regression.predict(x_train))
 print("MSE =", mse_t)
 
 print('計算 真實測試資料(y_test) 和 預測資料(Y_test)的 r2_score')
-from sklearn.metrics import r2_score
 r2_t = r2_score(y_train, linear_regression.predict(x_train))
 print("R2 =", r2_t)
 
 print('計算 真實測試資料(y_test) 和 預測資料(Y_test)的 MSE')
-from sklearn.metrics import mean_squared_error
 mse = mean_squared_error(y_test, y_pred)
 print(f"MSE = {mse:.4f}")
 
-from sklearn.metrics import r2_score
 r2 = r2_score(y_test, y_pred)
 print(f"R2 = {r2:.4f}")
 
@@ -705,7 +705,7 @@ print("資料來源 : 內建資料 1 計程車小費資料集EDA")
 
 # 計程車小費資料集EDA
 
-from sklearn import datasets, preprocessing
+from sklearn import preprocessing
 
 df = sns.load_dataset("tips")
 cc = df.head()
@@ -799,17 +799,17 @@ y_pred = linear_regression.predict(X_test_std)  # 預測.predict
 
 # 計算分數 計算 r2、MSE
 print('計算 真實測試資料(y_test) 和 預測資料(Y_test)的 MSE')
-from sklearn.metrics import mean_squared_error
 mse = mean_squared_error(y_test, y_pred)
 print(f"MSE = {mse:.4f}")
 
 print('計算 真實測試資料(y_test) 和 預測資料(Y_test)的 r2_score')
-from sklearn.metrics import r2_score
 r2 = r2_score(y_test, y_pred)
 print(f"R2 = {r2:.4f}")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
+print("資料來源 : 檔案資料")
 
 df = pd.read_excel("C:/_git/vcs/_4.python/__code/Python-PM2.5-DataAnalyzing-master/各種演算法比較/20160101-20190101(Daily)迴歸分析.xlsx")
 
@@ -883,8 +883,7 @@ plt.grid(which="major", linestyle="-", linewidth="0.5", color="green")
 plt.grid(which="minor", linestyle=":", linewidth="0.5", color="black")
 plt.show()
 
-# 載入迴歸常見的評估指標
-from sklearn import metrics
+# 標準
 print("評估 測試資料 與 預測結果 的差異")
 
 # Mean Absolute Error (MAE)代表平均誤差，公式為所有實際值及預測值相減的絕對值平均。
@@ -902,41 +901,17 @@ print("RMS : Root Mean Squared Error :", cc)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+print("資料來源 : 自建 ddddd")
+
 N = 50
 x = np.linspace(0, 1, N)
 y = 1.2 * x + 0.8 + 0.2 * np.random.randn(N)
-
-plt.scatter(x, y)
-
-plt.grid()
-plt.title("真實資料")
-
-plt.show()
 
 # 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
 x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2)
 # 訓練組8成, 測試組2成
 
-"""
-【重點】注意輸入格式
-只有一個 feature 時, 我們要小心的是, 很多機器學習、深度學習的套件, 都不希望我們用
-x=[x1,x2,…,xn]
-這樣子去做, 而是希望變成
-x=[[x1],[x2],…,[xn]]
-這種形式!
-"""
-
-xx = np.array([3, 9, 8, 1, 2])
-yy = np.array([1, 3, 9, 2, 4])
-
-"""
-xx.shape
-xx.reshape(5,1)
-xx = xx.reshape(len(xx),1)
-"""
-
 # 正式轉我們的訓練資料
-
 x_train = x_train.reshape(len(x_train), 1)
 x_test = x_test.reshape(len(x_test), 1)
 
@@ -947,45 +922,28 @@ linear_regression.fit(x_train, y_train)  # 學習訓練.fit
 
 y_pred = linear_regression.predict(x_test)  # 預測.predict
 
-# x: x_test
-# y: y_pred
-# x_test.ravel()
+plt.scatter(x, y, c='b', label="真實資料")
 
-plt.plot(x_test.ravel(), y_pred, "r")
+plt.plot(x_test.ravel(), y_pred, "r", label="線性迴歸")
 
-plt.scatter(x_test.ravel(), y_test)
+plt.scatter(x_test.ravel(), y_test, c='r', label="預測資料")
 
 plt.grid()
-plt.title("aaaa")
+
 plt.show()
 
-
-# 計算分數
-from sklearn.metrics import mean_squared_error, r2_score
-
-mse_t = mean_squared_error(y_train, linear_regression.predict(x_train))
-r2_t = r2_score(y_train, linear_regression.predict(x_train))
-print("訓練資料")
-print("MSE =", mse_t)
-print("R2 =", r2_t)
-
-mse = mean_squared_error(y_test, y_pred)
-r2 = r2_score(y_test, y_pred)
-print("測試資料")
-print(f"MSE = {mse:.4f}")
-print(f"R2 = {r2:.4f}")
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 做線性迴歸, 用 sklearn 裡的 LinearRegression 來做線性迴歸
-linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
+print("資料來源 : 自建 dddddddd")
 
-# 造資料, 調整成 sklearn 會接受的形狀
 x = np.linspace(0, 5, 100)
 y = 1.9 * x + 0.8 + 0.5 * np.random.randn(100)
 
 X = x.reshape(len(x), 1)
+
+# 做線性迴歸, 用 sklearn 裡的 LinearRegression 來做線性迴歸
+linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
 
 linear_regression.fit(X, y)  # 學習訓練.fit
 
@@ -1004,10 +962,6 @@ print("------------------------------")  # 30個
 
 x = np.linspace(0, 5, 100)
 y = 1.9 * x + 0.8 + 0.5 * np.random.randn(100)
-
-# 開開心心地讓 sklearn 幫我們分離出訓練資料跟測試資料，測試資料的比例是 0.3 的話，
-# 訓練資料就會自動是 0.7 了呢，真是方便！
-# random_state 可以是耍寶用的 87 ，要選其他數字也當然可以
 
 # 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
 x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2)
@@ -1038,6 +992,7 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+print("資料來源 : 內建 糖尿病")
 
 """
 Machine Learning 練習篇-Multiple Regression多元回歸糖尿病案例
@@ -1056,9 +1011,7 @@ Target為一年後患疾病的定量指標。
 """
 
 # 題目1
-from sklearn import datasets
 
-# 載入資料集
 diabetes = datasets.load_diabetes()
 
 # print(diabetes.DESCR)
@@ -1125,6 +1078,7 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+print("資料來源 : 內建 糖尿病")
 
 """
 糖尿病数据（适用于回归任务）
@@ -1137,9 +1091,6 @@ Target为一年后患疾病的定量指标，因此适合与回归任务
 
 """
 
-from sklearn import datasets, linear_model
-from sklearn.metrics import mean_squared_error, r2_score, accuracy_score
-
 
 def do_linear_regression():
     diabetes = datasets.load_diabetes()
@@ -1151,6 +1102,7 @@ def do_linear_regression():
         X, diabetes.target, test_size=0.1, random_state=4
     )
 
+    # 做線性迴歸, 用 sklearn 裡的 LinearRegression 來做線性迴歸
     linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
 
     linear_regression.fit(x_train, y_train)  # 學習訓練.fit
@@ -1168,6 +1120,36 @@ do_linear_regression()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+print("資料來源 : 自建資料 ddddd")
+
+print('線性迴歸, 輸入資料的寫法')
+X = [[10.0], [8.0], [13.0], [9.0], [11.0], [14.0], [6.0], [4.0], [12.0], [7.0], [5.0]]
+y = [8.04, 6.95, 7.58, 8.81, 8.33, 9.96, 7.24, 4.26, 10.84, 4.82, 5.68]
+
+# 做線性迴歸, 用 sklearn 裡的 LinearRegression 來做線性迴歸
+linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
+
+linear_regression.fit(X, y)
+print("迴歸係數(斜率):", linear_regression.coef_)
+print("截距:", linear_regression.intercept_)
+
+print('預測的寫法')
+y_pred = linear_regression.predict([[0], [1]])
+print(y_pred)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
@@ -1180,31 +1162,6 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
-"""
-x資料不能直接用 要改成X
-原來我們 x 的資料型態是
-[x1,x2,…,x50],
-但 sklearn 希望每個 x 是個向量, 也就是:
-[[x1],[x2],…,[x50]]
-"""
-
-
-"""
-這裡要注意我們本來的 x 是
-[x1,x2,…,x50]
-但現在要的是
-[[x1],[x2],…,[x50]]
-"""
-
-
-"""
-再來很重要, 從現在到以後, 很多學函數的方法, 都要求我們訓練資料要排成一列一列的。也就說原本的
-[x1,x2,…,x80]
-要換成這樣
-[[x1],[x2],…,[x80]]
-好在我們學過 reshape, 這小事...
-"""
 
 
 # 測試資料型態
@@ -1312,3 +1269,4 @@ y1 真實資料
    其他迴歸
 
 """
+
