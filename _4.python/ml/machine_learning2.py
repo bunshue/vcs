@@ -29,6 +29,7 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 print("------------------------------------------------------------")  # 60個
 
 import sklearn.linear_model
+from sklearn.model_selection import train_test_split
 
 print("------------------------------------------------------------")  # 60個
 
@@ -638,7 +639,7 @@ print('預測結果 :', predictions)
 """
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
+'''
 # 1. 建立空的df
 df = pd.DataFrame()
 
@@ -811,16 +812,24 @@ print(logistic_regression.predict_proba([[0], [1], [2]])[:, 1])
 
 from sklearn.svm import LinearSVC
 from sklearn.datasets import make_blobs
-from sklearn.model_selection import train_test_split
+
 from sklearn.metrics import accuracy_score
 
 # データ生成
 centers = [(-1, -0.125), (0.5, 0.5)]
-X, y = make_blobs(n_samples=50, n_features=2, centers=centers, cluster_std=0.3)
+
+N = 50
+print("產生", N, "筆資料 2維 2群")
+X, y = make_blobs(n_samples=N, n_features=2, centers=centers, cluster_std=0.3)
+
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
+
 model = LinearSVC()
+
 model.fit(X_train, y_train)  # 學習訓練.fit
+
 y_pred = model.predict(X_test)  # 預測.predict
+
 print(accuracy_score(y_pred, y_test))  # 評価
 
 print("------------------------------------------------------------")  # 60個
@@ -828,7 +837,6 @@ print("------------------------------------------------------------")  # 60個
 
 from sklearn.svm import SVC
 from sklearn.datasets import make_gaussian_quantiles
-from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 
 # データ生成
@@ -864,30 +872,6 @@ model = MultinomialNB()
 model.fit(X_train, y_train)  # 學習訓練.fit
 
 print(model.predict([[0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0]]))  # 預測.predict
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.datasets import make_moons
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score
-
-# データ生成
-X, y = make_moons(noise=0.3)
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
-
-model = KNeighborsClassifier()
-
-model.fit(X_train, y_train)  # 學習訓練.fit
-
-y_pred = model.predict(X_test)  # 預測.predict
-
-print(accuracy_score(y_pred, y_test))  # 評価
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -956,7 +940,7 @@ model.fit(tf)  # 學習訓練.fit
 
 print(model.components_)  # 各トピックが持つ単語分布
 print(model.transform(tf))  # トピックで表現された文書
-
+'''
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -978,7 +962,7 @@ print(model.transform(data)) # 変換したデータ
 """
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
+"""
 from sklearn.manifold import TSNE
 from sklearn.datasets import load_digits
 
@@ -990,7 +974,7 @@ print("TSNE")
 n_components = 2  # 削減後の次元を2に設定
 model = TSNE(n_components=n_components)
 print(model.fit_transform(data.data))
-
+"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -1138,14 +1122,6 @@ model_svr_rbf_1.fit(train_X, train_y)  # 學習訓練.fit
 test_y_pred = model_svr_rbf_1.predict(test_X)  # 預測.predict
 print(mean_squared_error(test_y, test_y_pred))  # 平均二乗誤差
 print(r2_score(test_y, test_y_pred))  # 決定係数
-'''
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1209,90 +1185,17 @@ expected = digits.target[n_samples // 2 :]
 predicted = model.predict(data[n_samples // 2 :])  # 預測.predict
 
 print(metrics.classification_report(expected, predicted))
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("產生測試資料 並畫出")
-
-from sklearn.datasets import make_blobs
-
-N = 500
-print("產生", N, "筆資料 2維 2群")
-dx, dy = make_blobs(n_samples=N, n_features=2, centers=2, random_state=0)
-
-print(dx.shape)
-print(dy.shape)
-# print(dx)
-# print(dy)
-
-plt.scatter(dx.T[0], dx.T[1], c=dy, cmap="Dark2")
-plt.title("dx的分佈狀況, dy是用顏色表示")
-plt.grid(True)
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# StandardScaler
-# 將資料常態分布化，平均值會變為0, 標準差變為1，使離群值影響降低
-# MinMaxScaler與StandardScaler類似
-
-from sklearn.datasets import make_blobs
-from sklearn.preprocessing import StandardScaler
-
-N = 500
-print("產生", N, "筆資料 2維 2群")
-dx, dy = make_blobs(n_samples=N, n_features=2, centers=2, random_state=0)
-
-dx_std = StandardScaler().fit_transform(dx)
-
-plt.scatter(dx_std.T[0], dx_std.T[1], c=dy, cmap="Dark2")
-plt.grid(True)
-
-plt.show()
-
-# 分割訓練資料集和測試資料集
-from sklearn.model_selection import train_test_split
-
-dx_train, dx_test, dy_train, dy_test = train_test_split(
-    dx_std, dy, test_size=0.2, random_state=0
-)
-
-print(dx.shape)
-print(dx_train.shape)
-print(dx_test.shape)
-
-print(dy.shape)
-print(dy_train.shape)
-print(dy_test.shape)
-
-# k 最近鄰演算法 (KNN)
-from sklearn.neighbors import KNeighborsClassifier
-
-knn = KNeighborsClassifier(n_neighbors=5)
-
-knn.fit(dx_train, dy_train)  # 學習訓練.fit
-
-predictions = knn.predict(dx_test)  # 預測.predict
-
-print(dy_test)
-print(predictions)
-print(knn.score(dx_train, dy_train))
-print(knn.score(dx_test, dy_test))
-
+'''
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 邏輯迴歸 (logistic regression)
-
 from sklearn.datasets import make_blobs
 from sklearn.preprocessing import StandardScaler
-from sklearn.model_selection import train_test_split
 
-print("產生500筆資料 2維 2群")
-dx, dy = make_blobs(n_samples=500, n_features=2, centers=2, random_state=0)
+N = 500
+print("產生", N, "筆資料 2維 2群")
+dx, dy = make_blobs(n_samples=N, n_features=2, centers=2, random_state=0)
 
 dx_std = StandardScaler().fit_transform(dx)
 
@@ -1317,12 +1220,14 @@ print("------------------------------------------------------------")  # 60個
 
 from sklearn.datasets import make_blobs
 from sklearn.preprocessing import StandardScaler
-from sklearn.model_selection import train_test_split
 from sklearn.svm import LinearSVC
 
-print("產生500筆資料 2維 2群")
-dx, dy = make_blobs(n_samples=500, n_features=2, centers=2, random_state=0)
+N = 500
+print("產生", N, "筆資料 2維 2群")
+dx, dy = make_blobs(n_samples=N, n_features=2, centers=2, random_state=0)
+
 dx_std = StandardScaler().fit_transform(dx)
+
 dx_train, dx_test, dy_train, dy_test = train_test_split(
     dx_std, dy, test_size=0.2, random_state=0
 )
@@ -1343,7 +1248,6 @@ print("------------------------------------------------------------")  # 60個
 
 from sklearn.datasets import make_moons
 from sklearn.preprocessing import StandardScaler
-from sklearn.model_selection import train_test_split
 from sklearn.svm import LinearSVC, SVC
 
 dx, dy = make_moons(n_samples=500, noise=0.15, random_state=0)
@@ -1375,6 +1279,7 @@ print(svm.score(dx_test, dy_test))
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1693,8 +1598,6 @@ from sklearn.neighbors import KNeighborsClassifier
 df_X = df[["SepalLengthCm", "SepalWidthCm", "PetalLengthCm", "PetalWidthCm"]]
 df_y = df["Species"]
 
-from sklearn.model_selection import train_test_split
-
 X_train, X_test, y_train, y_test = train_test_split(df_X, df_y, test_size=0.2)
 
 k = 1
@@ -1820,8 +1723,6 @@ from sklearn.neighbors import KNeighborsClassifier
 
 df_X = df[["Sex", "Pclass"]]
 df_y = df["Survived"]
-
-from sklearn.model_selection import train_test_split
 
 X_train, X_test, y_train, y_test = train_test_split(df_X, df_y, test_size=0.2)
 

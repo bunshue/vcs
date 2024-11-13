@@ -595,8 +595,8 @@ series = df.copy()
 ar = ARIMA(df, order=(1, 0, 0))
 model = ar.fit()
 
-# 顯示模型訓練報告
-print(model.summary())
+print("檢視神經網路")
+model.summary()  # 檢視神經網路
 
 cc = model.params
 print(cc)

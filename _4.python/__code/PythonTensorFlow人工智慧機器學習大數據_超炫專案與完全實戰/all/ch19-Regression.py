@@ -19,7 +19,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 plt.plot([1, 2, 3, 4], [0, 0.3, 0.6, 0.9], "rx")
 plt.plot([1, 2, 3, 4], [0, 0.3, 0.6, 0.9], "g--")
 
@@ -42,7 +42,7 @@ for X1 in X:
     i = i + 1
 
 print("誤差值", sum1 / 30)
-
+'''
 print("------------------------------------------------------------")  # 60個
 
 # 05-Regression.py
@@ -50,22 +50,26 @@ print("------------------------------------------------------------")  # 60個
 from sklearn import linear_model
 
 x_values = pd.DataFrame([1, 2, 3, 4])
-y_values = pd.DataFrame([0, 0.3, 0.6, 0.9])
+y_values = pd.DataFrame([1, 3, 3, 4])
+
 x_test = pd.DataFrame([1.5, 3, 5])
 
 # train model on data
 body_reg = linear_model.LinearRegression()
-body_reg.fit(x_values, y_values)
 
+body_reg.fit(x_values, y_values)
 
 y_test_predict = body_reg.predict(x_test)
 print(" body_reg.predict(x_text)", y_test_predict)
 
 # visualize results
 plt.scatter(x_values, y_values)
-plt.scatter(x_test, y_test_predict, color="red")
-plt.plot(x_test, y_test_predict, color="blue")
+#plt.scatter(x_test, y_test_predict, color="red")
+#plt.plot(x_test, y_test_predict, color="blue")
+plt.plot(x_test, y_test_predict, "ro-")
 plt.show()
+
+sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 

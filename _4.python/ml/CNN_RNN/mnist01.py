@@ -1,10 +1,37 @@
 """
+標準 神經網路 做手寫辨識
 
+Keras 可以用各種不同的深度學習套件當底層, 指定用 Tensorflow 以確保執行的一致性。
 
+%env KERAS_BACKEND=tensorflow
 
-"""
+讀入 MNIST 數據庫
 
+MNIST 是有一堆 0-9 的手寫數字圖庫。有 6 萬筆訓練資料, 1 萬筆測試資料。
+它是 "Modified" 版的 NIST 數據庫, 原來的版本有更多資料。
+這個 Modified 的版本是由 LeCun, Cortes, 及 Burges 等人做的。可以參考這個數據庫的原始網頁。
+
+MNIST 可以說是 Deep Learning 最有名的範例, 它被 Deep Learning 大師 Hinton 稱為「機器學習的果蠅」。
+2.2.1 由 Keras 讀入 MNIST
+
+Keras 很貼心的幫我們準備好 MNIST 數據庫, 我們可以這樣讀進來 (第一次要花點時間)。
+http://yann.lecun.com/exdb/mnist/
+
+用tensorflow讀入 MNSIT 數據集
+from tensorflow.keras.datasets import mnist
+(x_train, y_train), (x_test, y_test) = mnist.load_data()
+
+# 標準 1 遠端檔案
+(x_train, y_train), (x_test, y_test) = mnist.load_data()
+
+# 標準 2 本地檔案
 mnist_npz_filename = "C:/_git/vcs/_big_files/mnist.npz"
+
+mnist = np.load(mnist_npz_filename)
+x_train, y_train = mnist["x_train"], mnist["y_train"]
+x_test, y_test = mnist["x_test"], mnist["y_test"]
+mnist.close()
+"""
 
 print("------------------------------------------------------------")  # 60個
 
@@ -28,20 +55,15 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
-print("載入 mnist")
+from keras.datasets import mnist
 from tensorflow.keras.datasets import mnist
 
-# (x_train, y_train), (x_test, y_test) = mnist.load_data()  # 或改成以下4行
+print("------------------------------------------------------------")  # 60個
 
-mnist = np.load(mnist_npz_filename)
-x_train, y_train = mnist["x_train"], mnist["y_train"]
-x_test, y_test = mnist["x_test"], mnist["y_test"]
-mnist.close()
-
+(x_train, y_train), (x_test, y_test) = mnist.load_data()
 
 print("訓練資料長度 :", len(x_train))
 print("測試資料長度 :", len(x_test))
-
 
 print("看第 1234 筆訓練資料")
 
@@ -51,7 +73,7 @@ print("大小 :", x_train[n].shape)
 print("目標 :", y_train[n])
 
 plt.imshow(x_train[n], cmap="Greys")
-# plt.show()
+plt.show()
 
 x_train = x_train.reshape(60000, 784) / 255
 x_test = x_test.reshape(10000, 784) / 255
@@ -102,13 +124,7 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-import numpy as np
-
-# from keras.utils import np_utils old 改如下
 from tensorflow.python.keras.utils import np_utils
-
-np.random.seed(10)
-from keras.datasets import mnist
 from keras.models import Sequential
 from keras.layers import Dense
 
@@ -153,13 +169,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("寫入 模型")
 
-import numpy as np
-
-# from keras.utils import np_utils old 改如下
 from tensorflow.python.keras.utils import np_utils
-
-np.random.seed(10)
-from keras.datasets import mnist
 from keras.models import Sequential
 from keras.layers import Dense
 
@@ -224,16 +234,7 @@ from tensorflow.keras.models import load_model
 
 model = load_model("mynn01.h5")
 
-from tensorflow.keras.datasets import mnist
-
 (x_train, y_train), (x_test, y_test) = mnist.load_data()
-
-"""
-mnist = np.load(mnist_npz_filename)
-x_train, y_train = mnist['x_train'], mnist['y_train']
-x_test, y_test = mnist['x_test'], mnist['y_test']
-mnist.close()
-"""
 
 x_test = x_test.reshape(10000, 784) / 255
 
@@ -254,4 +255,72 @@ myNN(9487)
 print("------------------------------------------------------------")  # 60個
 
 
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print('看 label')
+# from keras.utils import np_utils old 改如下
+from tensorflow.python.keras.utils import np_utils
+
+(train_feature, train_label), (test_feature, test_label) = mnist.load_data()
+
+print(train_label[0:5])
+train_label_onehot = np_utils.to_categorical(train_label)
+print(train_label_onehot[0:5])
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print('看 graph')
+
+(train_feature, train_label), (test_feature, test_label) = mnist.load_data()
+
+train_feature_vector = train_feature.reshape(len(train_feature), 784).astype("float32")
+# print(train_feature_vector[0])
+train_feature_normalize = train_feature_vector / 255
+print(train_feature_normalize[0])
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+""" 一些 fail
+print('Auto-Keras')
+
+from keras.datasets import mnist
+from autokeras import ImageClassifier
+from autokeras.constant import Constant
+import autokeras
+from keras.utils import plot_model
+    
+(x_train, y_train), (x_test, y_test) = mnist.load_data()
+x_train = x_train.reshape(x_train.shape + (1,))
+x_test = x_test.reshape(x_test.shape + (1,))
+clf = ImageClassifier(verbose=True, augment=False)
+clf.fit(x_train, y_train, time_limit=500 * 60)  # 學習訓練.fit
+clf.final_fit(x_train, y_train, x_test, y_test, retrain=True)
+y = clf.evaluate(x_test, y_test)
+print(y * 100)
+clf.export_keras_model('model.h5')
+plot_model(clf, to_file='model.png')
+"""
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

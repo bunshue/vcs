@@ -26,8 +26,10 @@ def show_images_labels_predictions(images, labels, predictions, start_id, num=10
 
 
 (train_feature, train_label), (test_feature, test_label) = mnist.load_data()
+
 test_feature_vector = test_feature.reshape(len(test_feature), 784).astype("float32")
 test_feature_normalize = test_feature_vector / 255
+
 model = load_model("Mnist_mlp_model.h5")
 
 # prediction=model.predict_classes(test_feature_normalize)  #預測

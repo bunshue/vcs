@@ -23,9 +23,11 @@ np.random.shuffle(X)    # randomize the data
 Y = 0.5 * X + 2 + np.random.normal(0, 0.05, (200, ))
 X_train, Y_train = X[:160], Y[:160]     # first 160 data points
 X_test, Y_test = X[160:], Y[160:]       # last 40 data points
+
 model = Sequential()
-model.add(Dense(output_dim=1, input_dim=1))
+model.add(Dense(output_dim=1, input_dim=1)) # fails here
 model.compile(loss='mse', optimizer='sgd')
+
 for step in range(301):
     cost = model.train_on_batch(X_train, Y_train)
 
@@ -37,6 +39,7 @@ del model  # deletes the existing model
 # load
 model = load_model('my_model.h5')
 print('test after load: ', model.predict(X_test[0:2]))
+
 """
 # save and load weights
 model.save_weights('my_model_weights.h5')
@@ -47,6 +50,3 @@ from keras.models import model_from_json
 json_string = model.to_json()
 model = model_from_json(json_string)
 """
-
-
-

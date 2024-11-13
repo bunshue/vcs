@@ -28,7 +28,7 @@ print("------------------------------------------------------------")  # 60個
 # 時間序列繪圖
 # 初始環境設定
 
-df = pd.read_excel("data/鳳山.xlsx")  # 共有 417 筆資料
+df = pd.read_excel("鳳山.xlsx")  # 共有 417 筆資料
 """
 cc = df.head(10)
 print(cc)
@@ -168,7 +168,7 @@ from sklearn.metrics import (
     median_absolute_error,
 )
 
-df = pd.read_excel("data/鳳山.xlsx")  # 共有 417 筆資料
+df = pd.read_excel("鳳山.xlsx")  # 共有 417 筆資料
 # execute the describe() function and transpose the output so that it doesn't overflow the width of the screen
 cc = df.describe().T
 print(cc)
@@ -283,10 +283,3 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-
-
-#useless
-mpl.rcParams["font.sans-serif"] = ["Microsoft YaHei"]
-mpl.rcParams["axes.unicode_minus"] = False
-
-from pylab import mpl

@@ -8,6 +8,7 @@ import numpy as np
 import random
 from sum_tree import sum_tree
 from sklearn.externals import joblib
+
 '''这是训练和测试赛车应用的主要模块'''
 if __name__ == "__main__":
     #定义用于训练模型的参数

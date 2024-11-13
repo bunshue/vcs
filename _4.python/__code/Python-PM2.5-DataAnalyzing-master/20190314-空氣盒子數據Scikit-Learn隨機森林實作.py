@@ -13,6 +13,7 @@ import random
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns  # 海生, 自動把圖畫得比較好看
 
 font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
@@ -30,8 +31,6 @@ from sklearn.ensemble import RandomForestRegressor
 print("------------------------------------------------------------")  # 60個
 
 df = pd.read_csv("data/200811-201811.csv")  # 共有 687 筆資料, 13欄位
-cc = df.head(10)
-print(cc)
 
 """
 cc = df.head(10)
@@ -111,10 +110,8 @@ predictions = random_forest_regressor.predict(test_features)  # 預測.predict
 # 計算誤差
 errors = abs(predictions - test_labels)
 
-# Print out the mean absolute error (mae)
-print("Mean Absolute Error:", round(np.mean(errors), 2), "degrees.")
+print("MAE : Mean Absolute Error:", round(np.mean(errors), 2), "degrees.")
 
-# Mean Absolute Error: 3.84 degrees.
 
 # 繪製決策樹
 
@@ -210,12 +207,11 @@ predictions = rf_most_important.predict(test_important)  # 預測.predict
 errors = abs(predictions - test_labels)
 
 # Display the performance metrics
-print("Mean Absolute Error:", round(np.mean(errors), 2), "degrees.")
-# Mean Absolute Error: 7.32 degrees.
-
+print("MAE : Mean Absolute Error:", round(np.mean(errors), 2), "degrees.")
 
 # 建立小棵的決測樹
 from sklearn.tree import export_graphviz
+import pydot
 
 # Limit depth of tree to 3 levels
 # 隨機森林演算法, 用 sklearn 裡的 RandomForestRegressor 來做隨機森林演算法

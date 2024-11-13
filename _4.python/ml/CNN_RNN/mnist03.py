@@ -8,8 +8,6 @@ Yann LeCun 被譽為 Deep Learning 的三巨頭之一。
 
 """
 
-mnist_npz_filename = "C:/_git/vcs/_big_files/mnist.npz"
-
 print("------------------------------------------------------------")  # 60個
 
 # 共同
@@ -34,14 +32,7 @@ print("------------------------------------------------------------")  # 60個
 """
 from tensorflow.keras.datasets import mnist
 
-#(x_train, y_train), (x_test, y_test) = mnist.load_data() 改成以下4行
-mnist = np.load(mnist_npz_filename)
-x_train, y_train = mnist['x_train'], mnist['y_train']  
-x_test, y_test = mnist['x_test'], mnist['y_test']  
-mnist.close()  
-
-print(x_train.shape)
-#(60000, 28, 28)
+(x_train, y_train), (x_test, y_test) = mnist.load_data()
 
 #Channel
 
@@ -151,11 +142,7 @@ print("------------------------------------------------------------")  # 60個
 
 from keras.datasets import mnist
 
-# (x_train, y_train), (x_test, y_test) = mnist.load_data() 改成以下4行
-mnist = np.load(mnist_npz_filename)
-x_train, y_train = mnist["x_train"], mnist["y_train"]
-x_test, y_test = mnist["x_test"], mnist["y_test"]
-mnist.close()
+(x_train, y_train), (x_test, y_test) = mnist.load_data()
 
 """
 輸入格式整理
@@ -346,9 +333,7 @@ for i in range(5):
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 把我們訓練好神經網路讀回來用的方式
-
-mnist_npz_filename = "C:/_git/vcs/_big_files/mnist.npz"
+# 把訓練好神經網路讀回來用的方式
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -359,11 +344,7 @@ model = load_model("myCNNmodel.h5")
 
 from tensorflow.keras.datasets import mnist
 
-# (x_train, y_train), (x_test, y_test) = mnist.load_data() 改成以下4行
-mnist = np.load(mnist_npz_filename)
-x_train, y_train = mnist["x_train"], mnist["y_train"]
-x_test, y_test = mnist["x_test"], mnist["y_test"]
-mnist.close()
+(x_train, y_train), (x_test, y_test) = mnist.load_data()
 
 x_test = x_test.reshape(10000, 28, 28, 1) / 255
 

@@ -310,30 +310,6 @@ ml_predictor = Predictor(type_of_estimator='classifier',
 model = ml_predictor.train(data)
 model.score(data, data.vote)
 """
-
-print("------------------------------------------------------------")  # 60個
-
-""" 一些 fail
-print('Auto-Keras')
-
-from keras.datasets import mnist
-from autokeras import ImageClassifier
-from autokeras.constant import Constant
-import autokeras
-from keras.utils import plot_model
-    
-(x_train, y_train), (x_test, y_test) = mnist.load_data()
-x_train = x_train.reshape(x_train.shape + (1,))
-x_test = x_test.reshape(x_test.shape + (1,))
-clf = ImageClassifier(verbose=True, augment=False)
-clf.fit(x_train, y_train, time_limit=500 * 60)  # 學習訓練.fit
-clf.final_fit(x_train, y_train, x_test, y_test, retrain=True)
-y = clf.evaluate(x_test, y_test)
-print(y * 100)
-clf.export_keras_model('model.h5')
-plot_model(clf, to_file='model.png')
-"""
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 """

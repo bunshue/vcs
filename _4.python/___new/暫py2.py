@@ -1,4 +1,15 @@
 
+
+
+特徵資料（花萼長、寬等等）
+標籤	屬種。
+
+
+
+
+
+
+
 1. 數據
 2. 分類
 3. 函數學習機
@@ -31,6 +42,15 @@
 程式內不允許有 \ 反切
 
 print("------------------------------------------------------------")  # 60個
+
+
+
+
+#useless
+mpl.rcParams["font.sans-serif"] = ["Microsoft YaHei"]
+mpl.rcParams["axes.unicode_minus"] = False
+
+
 
 
 from google.colab import drive

@@ -5,8 +5,6 @@ CNN
 
 """
 
-mnist_npz_filename = "C:/_git/vcs/_big_files/mnist.npz"
-
 print("------------------------------------------------------------")  # 60個
 
 # 共同
@@ -270,13 +268,7 @@ from tensorflow.keras.models import Sequential, load_model
 from tensorflow.keras.utils import to_categorical
 from tensorflow.keras.utils import plot_model
 
-# 下載數據
-
-# (X_train, y_train), (X_test, y_test) = mnist.load_data() 改成以下4行
-mnist = np.load(mnist_npz_filename)
-X_train, y_train = mnist["x_train"], mnist["y_train"]
-X_test, y_test = mnist["x_test"], mnist["y_test"]
-mnist.close()
+(X_train, y_train), (X_test, y_test) = mnist.load_data()
 
 # 訓練數據300張, 測試數據100張
 
@@ -561,11 +553,7 @@ from tensorflow.keras.layers import (
 from tensorflow.keras.models import Sequential, load_model
 from tensorflow.keras.utils import to_categorical
 
-# (X_train, y_train), (X_test, y_test) = mnist.load_data() 改成以下4行
-mnist = np.load(mnist_npz_filename)
-X_train, y_train = mnist["x_train"], mnist["y_train"]
-X_test, y_test = mnist["x_test"], mnist["y_test"]
-mnist.close()
+(X_train, y_train), (X_test, y_test) = mnist.load_data()
 
 X_train = np.reshape(a=X_train, newshape=(-1, 28, 28, 1))
 

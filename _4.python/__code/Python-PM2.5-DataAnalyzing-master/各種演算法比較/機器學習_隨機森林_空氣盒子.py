@@ -25,7 +25,13 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
+from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
+from sklearn.ensemble import RandomForestRegressor
+
+print("------------------------------------------------------------")  # 60個
+
 df = pd.read_excel("20160101-20190101(Daily)隨機森林.xlsx")
+
 """
 cc = df.head(10)
 print(cc)
@@ -40,30 +46,49 @@ print(cc)
 cc = df.describe()
 print(cc)
 """
+
+# One-Hot Encoding, 看不出差別
 # One-hot encode the data using pandas get_dummies
 df = pd.get_dummies(df)
-
-# Display the first 5 rows of the last 12 columns
-cc = df.iloc[:, 5:].head(5)
+cc = df.head(10)
 print(cc)
+
+# 從第5欄開始到最後欄
+cc = df.iloc[:, 5:].head(10)
+print(cc)
+
+# 特徵轉換
 
 # Labels are the values we want to predict
 labels = np.array(df["PM25"])
+# labels 要預測的項目
 
-# Remove the labels from the df
+# 把這欄砍掉
 # axis 1 refers to the columns
 df = df.drop("PM25", axis=1)
+print(df.shape)
 
 # Saving feature names for later use
 feature_list = list(df.columns)
+print(feature_list)
 
 # Convert to numpy array
+print('df 轉 np.array')
 df = np.array(df)
 
 # 將資料分成訓練組及測試組
 from sklearn.model_selection import train_test_split
 #X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)# 訓練組8成, 測試組2成
 X_train, X_test, y_train, y_test = train_test_split(df, labels, test_size=0.25, random_state=42)# 訓練組7.5成, 測試組2.5成
+
+"""
+print(X.shape)
+print(y.shape)
+print(X_train.shape)
+print(X_test.shape)
+print(y_train.shape)
+print(y_test.shape)
+"""
 
 print("Training Features Shape:", X_train.shape)
 print("Training Labels Shape:", y_train.shape)
@@ -73,24 +98,18 @@ print("Testing Labels Shape:", y_test.shape)
 # 載入隨機森林演算法，並訓練模型
 from sklearn.ensemble import RandomForestRegressor
 
-# Instantiate model with 1000 decision trees
+# 隨機森林演算法, 用 sklearn 裡的 RandomForestRegressor 來做隨機森林演算法
+# 使用 1000棵 決策樹
 random_forest_regressor = RandomForestRegressor(n_estimators=60, random_state=42)
 
-# Train the model on training data
-random_forest_regressor.fit(X_train, y_train)
+random_forest_regressor.fit(X_train, y_train)  # 學習訓練.fit
+# 預測
+predictions = random_forest_regressor.predict(X_test)  # 預測.predict
 
-# 進行預測
-
-# Use the forest's predict method on the test data
-predictions = random_forest_regressor.predict(X_test)
-
-# Calculate the absolute errors
+# 計算誤差
 errors = abs(predictions - y_test)
 
-# Print out the mean absolute error (mae)
 print("MAE : Mean Absolute Error:", round(np.mean(errors), 2), "degrees.")
-
-# Mean Absolute Error: 8.93 degrees.
 
 # Get numerical feature importances
 importances = list(random_forest_regressor.feature_importances_)
@@ -106,6 +125,8 @@ feature_importances = sorted(feature_importances, key=lambda x: x[1], reverse=Tr
 
 # Print out the feature and importances
 [print("Variable: {:20} Importance: {}".format(*pair)) for pair in feature_importances]
+
+# 視覺化變數特徵的重要程度
 
 # Set the style
 plt.style.use("fivethirtyeight")
@@ -126,10 +147,11 @@ plt.title("Variable Importances")
 
 plt.show()
 
-
 # 計算MAE
 
 # New random forest with only the two most important variables
+# 隨機森林演算法, 用 sklearn 裡的 RandomForestRegressor 來做隨機森林演算法
+# 使用 1000棵 決策樹
 rf_most_important = RandomForestRegressor(n_estimators=1000, random_state=42)
 
 # Extract the two most important df
@@ -140,21 +162,22 @@ test_important = X_test[:, important_indices]
 # Train the random forest
 rf_most_important.fit(train_important, y_train)
 
-# Make predictions and determine the error
-predictions = rf_most_important.predict(test_important)
+# 預測
+predictions = rf_most_important.predict(test_important)  # 預測.predict
 
+# 計算誤差
 errors = abs(predictions - y_test)
 
 # Display the performance metrics
 print("MAE : Mean Absolute Error:", round(np.mean(errors), 2), "degrees.")
-# Mean Absolute Error: 11.31 degrees.
-
 
 # 建立小棵的決測樹
 from sklearn.tree import export_graphviz
 import pydot
 
 # Limit depth of tree to 3 levels
+# 隨機森林演算法, 用 sklearn 裡的 RandomForestRegressor 來做隨機森林演算法
+# 使用 10棵 決策樹, 最多3層
 rf_small = RandomForestRegressor(n_estimators=20, max_depth=3)
 rf_small.fit(X_train, y_train)
 
@@ -169,17 +192,21 @@ export_graphviz(tree_small, out_file = 'small_tree222.dot', feature_names = feat
 # NG
 # graph.write_png('tmp_small_tree222.png');
 
-
-
 from IPython.display import Image
 from IPython.core.display import HTML
 
 PATH = "small_tree222.png"
 Image(filename=PATH, width=850, height=600)
+plt.show()
 
 # Use datetime for creating date objects for plotting
 import datetime
 
+print(feature_list)
+
+sys.exit()
+
+print('這個df資料裡面根本沒有年月日資料可取出')
 # Dates of training values
 months = df[:, feature_list.index("month")]
 days = df[:, feature_list.index("day")]
@@ -228,21 +255,6 @@ plt.ylabel("Maximum Temperature (F)")
 plt.title("Actual and Predicted Values")
 
 plt.show()
-
-"""
----------------------------------------------------------------------------
-ValueError                                Traceback (most recent call last)
-<ipython-input-17-e76cdb8cf408> in <module>
-      3 
-      4 # Dates of training values
-----> 5 months = features[:, feature_list.index('month')]
-      6 days = features[:, feature_list.index('day')]
-      7 years = features[:, feature_list.index('year')]
-
-ValueError: 'month' is not in list
-
- 
-"""
 
 print("------------------------------------------------------------")  # 60個
 

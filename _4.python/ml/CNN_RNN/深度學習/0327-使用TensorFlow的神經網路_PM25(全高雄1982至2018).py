@@ -30,22 +30,15 @@ print("------------------------------------------------------------")  # 60個
 from sklearn.model_selection import train_test_split 
 from sklearn.linear_model import LinearRegression
 from sklearn import metrics
-from pylab import mpl
 
-mpl.rcParams['font.sans-serif'] = ['Microsoft YaHei']  
-# 指定默認字形：解決plot不能顯示中文問題
-mpl.rcParams['axes.unicode_minus'] = False
-
-filename = "C:/_git/vcs/_4.python/__code/Python-PM2.5-DataAnalyzing-master/data/KH-1982-2018.xlsx"
+filename = "KH-1982-2018.xlsx"
 df=pd.read_excel(filename)
 
 #檢查屬性
-
 cc = df.dtypes
 print(cc)
 
 #屬性轉換
-
 df["SO2"] = pd.to_numeric(df.SO2, errors='coerce')
 df["CO"] = pd.to_numeric(df.CO, errors='coerce')
 #df["CO2"] = pd.to_numeric(df.CO2, errors='coerce')
@@ -106,7 +99,7 @@ import tensorflow as tf
 from sklearn.metrics import explained_variance_score,mean_absolute_error,median_absolute_error
 from sklearn.model_selection import train_test_split  
 
-filename = "C:/_git/vcs/_4.python/__code/Python-PM2.5-DataAnalyzing-master/data/KH-1982-2018.xlsx"
+filename = "KH-1982-2018.xlsx"
 df=pd.read_excel(filename)
 # execute the describe() function and transpose the output so that it doesn't overflow the width of the screen
 cc = df.describe().T

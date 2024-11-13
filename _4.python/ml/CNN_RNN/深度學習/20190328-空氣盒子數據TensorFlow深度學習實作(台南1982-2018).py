@@ -30,21 +30,14 @@ print("------------------------------------------------------------")  # 60個
 from sklearn.model_selection import train_test_split 
 from sklearn.linear_model import LinearRegression
 from sklearn import metrics
-from pylab import mpl
-
-mpl.rcParams['font.sans-serif'] = ['Microsoft YaHei']  
-# 指定默認字形：解決plot不能顯示中文問題
-mpl.rcParams['axes.unicode_minus'] = False
 
 df=pd.read_excel('Tainan_198211-201811.xlsx')
 
 #檢查屬性
-
 cc = df.dtypes
 print(cc)
 
 #屬性轉換
-
 df["SO2"] = pd.to_numeric(df.SO2, errors='coerce')
 df["CO"] = pd.to_numeric(df.CO, errors='coerce')
 df["CO2"] = pd.to_numeric(df.CO2, errors='coerce')

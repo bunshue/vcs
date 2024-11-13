@@ -83,7 +83,7 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("集群資料集")
+print("make_blobs 集群資料集")
 
 X, y, centers = make_blobs(
     n_samples=100, centers=3, cluster_std=1, n_features=2, return_centers=True

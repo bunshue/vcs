@@ -26,7 +26,7 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
-df = pd.read_excel("data/KH-1982-2018b.xlsx")
+df = pd.read_excel("KH-1982-2018b.xlsx")
 
 # df.dtypes
 

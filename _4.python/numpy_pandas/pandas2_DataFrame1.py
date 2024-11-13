@@ -8910,3 +8910,62 @@ df["amount"] = amount
 print(df)
 
 
+
+
+
+
+""" 準備要看的df函數
+df1 = df.set_index(["sitename"])  # 將測站設定為索引(即擺到第一行第一列)
+df1 = df1.reset_index(["sitename"])  # 恢復原本設置
+
+# 刪除資料
+df.drop(labels=["SO2", "CO"], axis="columns")  # 刪除SO2和CO這兩個欄位
+df = df.drop_duplicates()  # 刪除重複的資料
+# axis=0和asxis='row'一樣
+# axis=1和axis='columns'一樣
+
+# 處理NaN資料
+df.dropna()  # 刪除NaN的資料
+df = df.dropna()  # 將刪除後的資料存到變數
+df.dropna(axis=1)  # 删除所有包含空值的列
+df = df.fillna(0)  # 把NaN資料替換成0
+df["A"].fillna(value=df["A"].mean())  # 把NaN值改成該屬性的所有平均值
+
+# 指定特殊需求
+df.sort_index(ascending=True).head(100)  # 升階排序
+df.sort_index(ascending=False).head(100)  # 降階排序
+
+# 4.6備註
+# 基本上df[['aqi']]和df.aqi功能一樣
+# iloc只對數值類型有用，loc只對字串類型有用，ix混合iloc與loc(但不建議，易失敗)
+
+# 5.字串處理
+# 5.1大小寫與字串變更
+df["PM2.5"].str.title()  # 讓字串第一個字為大寫
+df["PM2.5"].str.lower()  # 讓字串全部變成小寫
+df["PM2.5"].str.upper()  # 讓字串全部變成大寫
+df["PM2.5"] = df["PM2.5"].str.replace("要改變的字串", "想改變成的字串")
+
+# 5.2找出資料
+df[df.aqi.startswith("高雄市")]  # 顯示出高雄市開頭的資料
+df[df.aqi.endswith("高雄市")]  # 顯示出高雄市做為結尾的資料
+
+# 6.來一點複雜操作
+
+df[
+    ["aqi", "WindSpeed"]
+]  # 顯示Columns(列)為aqi及WindSpeed的數據df[df.aqi<50]          #顯示aqi<50的數值
+df[(df.aqi < 30) & (df.WindSpeed > 2)]  # 列出aqi值大於30且風速大於2的數值
+df["aqi"] / 2  # 將所有aqi值除以2(+,-,*,/皆適用)
+# -----------------------------------------
+aqi_filter = df["aqi"] > 60  # 使用布林，當aqi>60為True，<60為False
+
+Bad_aqi = df[aqi_filter]  # 將過濾後的數值存入至Bad_aqi
+Bad_aqi.head()  # 只顯示aqi>60的資料
+
+aqi_filter_2 = (df["aqi"] > 60) & (df["PM2.5"] > 40)
+# 使用布林，條件是aqi>60且PM2.5數值超過40
+
+Bad_aqi_PM = df[aqi_filter_2]  # 將過濾後的數值存入至Bad_aqi_PM
+Bad_aqi_PM.head()  # 只顯示aqi>60且PM2.5>40的資料
+"""

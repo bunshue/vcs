@@ -13,6 +13,7 @@ import random
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns  # 海生, 自動把圖畫得比較好看
 
 font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
@@ -25,12 +26,21 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 print("------------------------------------------------------------")  # 60個
 
 df = pd.read_excel("data/KH-1982-2018b.xlsx")
+cc = df.head(10)
+print(cc)
 
-print(df.keys())
-print(df.shape)
+#資料長度
+print(len(df))
+print(len(df["PM25"]))
 
 cc = df.info()
 print(cc)
+
+cc = df.describe()
+print(cc)
+
+print(df.keys())
+print(df.shape)
 
 import xgboost as xgb
 from sklearn.metrics import mean_squared_error
@@ -94,7 +104,6 @@ plt.rcParams["figure.figsize"] = [15, 6]
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------------------------------------")  # 60個
 
