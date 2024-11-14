@@ -5,10 +5,7 @@ sepal:【植】萼片
 from sklearn.neural_network.multilayer_perceptron import MLPClassifier
 from sklearn import datasets
 
-# Since the book came out, the cross_validation method has been moved to
-# the model_selection library from the cross_validation library
-#from sklearn.cross_validation import train_test_split
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
  
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import accuracy_score

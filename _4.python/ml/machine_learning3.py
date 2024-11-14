@@ -1,9 +1,3 @@
-"""
-pip install scikit-learn
-
-"""
-
-import sklearn
 
 print("------------------------------------------------------------")  # 60個
 
@@ -35,6 +29,7 @@ ssl._create_default_https_context = ssl._create_stdlib_context
 
 print("------------------------------------------------------------")  # 60個
 
+import sklearn
 from sklearn import datasets
 from sklearn import metrics
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料

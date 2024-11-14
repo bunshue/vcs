@@ -167,7 +167,9 @@ print("shape of raw image data: {0}".format(digits.images.shape))
 print("shape of data: {0}".format(digits.data.shape))
 
 # 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
-Xtrain, Xtest, Ytrain, Ytest = train_test_split(digits.data, digits.target, test_size=0.2)
+Xtrain, Xtest, Ytrain, Ytest = train_test_split(
+    digits.data, digits.target, test_size=0.2
+)
 # 訓練組8成, 測試組2成
 
 # 使用支持向量机来训练模型
@@ -179,6 +181,7 @@ clf.fit(Xtrain, Ytrain)  # 學習訓練.fit
 
 # 评估模型的准确度
 from sklearn.metrics import accuracy_score
+
 Ypred = clf.predict(Xtest)
 print(accuracy_score(Ytest, Ypred))
 

@@ -8,7 +8,7 @@
 # In[ ]:
 
 
-get_ipython().magic('matplotlib inline')
+#get_ipython().magic('matplotlib inline')
 import os
 import numpy as np
 from scipy import stats
@@ -109,6 +109,8 @@ for k in range(1, 30):
 from sklearn.grid_search import ParameterGrid
 from sklearn.grid_search import GridSearchCV 
 from sklearn.cross_validation import KFold
+
+sys.exit()
 
 n_samples = len(train_data)
 kf = KFold(n=n_samples, n_folds=3)

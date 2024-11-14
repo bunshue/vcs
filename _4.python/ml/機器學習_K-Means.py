@@ -43,6 +43,42 @@ from sklearn.cluster import KMeans
 
 print("------------------------------------------------------------")  # 60個
 
+print("聚類算法 KMeans")
+
+from sklearn.datasets import make_blobs
+
+N = 10
+GROUPS = 3
+
+print("make_blobs,", N, "個樣本, 分成", GROUPS, "群")
+X, y, centers = make_blobs(
+    n_samples=N, centers=GROUPS, random_state=9487, return_centers=True
+)
+
+print(GROUPS, "群 的中心點 :")
+print(centers)
+print(X.shape)
+
+color = "b"
+plt.scatter(X[:, 0], X[:, 1], c=color)
+plt.show()
+
+"""
+X, y, centers = make_blobs(
+    n_samples=N, centers=GROUPS, cluster_std=1, n_features=2, return_centers=True
+)
+"""
+
+from sklearn.cluster import KMeans  # 聚類方法
+
+y_pred = KMeans(n_clusters=3, random_state=9487).fit_predict(X)  # 訓練
+
+plt.scatter(X[:, 0], X[:, 1], c=y_pred)
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
 # 隨機生成 N 個點，然後用 k-means 將他們分成 5 群
 N = 50
 x = np.random.rand(N, 2)  # N X 2 亂數陣列

@@ -49,20 +49,22 @@ from sklearn.neighbors import KNeighborsClassifier
 
 iris = datasets.load_iris()
 
-#定義特徵資料：
+# 定義特徵資料：
 iris_data = iris.data
 iris_label = iris.target
 
-#可以印出前三筆資料：
+# 可以印出前三筆資料：
 
 cc = iris_data[0:3]
 print(cc)
 
-train_data , test_data , train_label , test_label = train_test_split(iris_data,iris_label,test_size=0.2)
+train_data, test_data, train_label, test_label = train_test_split(
+    iris_data, iris_label, test_size=0.2
+)
 
-knn = KNeighborsClassifier() #使用KNeighbors分類法
+knn = KNeighborsClassifier()  # 使用KNeighbors分類法
 
-knn.fit(train_data,train_label)
+knn.fit(train_data, train_label)
 
 y_pred = knn.predict(test_data)
 
@@ -86,8 +88,8 @@ dx, dy = make_blobs(n_samples=N, n_features=2, centers=2, random_state=0)
 
 print(dx.shape)
 print(dy.shape)
-#print(dx)
-#print(dy)
+# print(dx)
+# print(dy)
 
 plt.subplot(121)
 plt.scatter(dx.T[0], dx.T[1], c=dy, cmap="Dark2")
@@ -156,7 +158,7 @@ print(accuracy_score(y_pred, y_test))  # 評価
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print('K-近鄰演算法（K Nearest Neighbor）')
+print("K-近鄰演算法（K Nearest Neighbor）")
 
 from sklearn import neighbors
 
@@ -249,10 +251,8 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------------------------------------")  # 60個

@@ -38,27 +38,8 @@ import matplotlib as mpl
 
 print("------------------------------------------------------------")  # 60個
 
-print("測試 euclidean_distances 歐幾里得距離 (Euclidean distance)")
-from sklearn.metrics.pairwise import euclidean_distances
-
-X = np.array(
-    [
-        [4, 3, 0, 0, 5, 0],  # r1
-        [5, 0, 4, 0, 4, 0],  # r2
-        [4, 0, 5, 3, 4, 0],  # r3
-        [0, 3, 0, 0, 0, 5],  # r4
-    ]
-)
-
-X = np.array(
-    [
-        [4, 3, 0, 0, 5, 0, 4, 3, 0, 0, 5, 0],  # r1
-        [5, 0, 4, 0, 4, 0, 5, 0, 4, 0, 4, 0],  # r2
-    ]
-)
-
-
 """
+計算相似度
 #sklearn sklearn向量距離計算
 
 通過 euclidean_distances 計算多個向量間的歐氏距離。
@@ -70,39 +51,10 @@ X = np.array(
 -----, -----, -----,     0
 """
 
-dist = euclidean_distances(X)
-print(dist)
-
-X = [[0, 1], [1, 1]]
-# distance between rows of X
-cc = euclidean_distances(X, X)
-print(cc)
-
-# get distance to origin
-cc = euclidean_distances(X, [[0, 0]])
-print(cc)
-
-"""
-#通過euclidean_distances計算向量之間的距離
-#sklearn sklearn向量距離計算
-
 from sklearn.metrics.pairwise import euclidean_distances
-from sklearn.feature_extraction.text import CountVectorizer
- 
-corpus = ['UNC played Duke in basketball','Duke lost the basketball game','I ate a sandwich']# 文集
-vectorizer =CountVectorizer()#
-counts = vectorizer.fit_transform(corpus).todense() #得到文集corpus的特征向量，并將其轉為密集矩陣
-print(counts)
-for x,y in [[0,1],[0,2],[1,2]]:
-    dist = euclidean_distances(counts[x],counts[y])
-    print('文檔{}與文檔{}的距離{}'.format(x,y,dist))
-
-"""
-
-print("------------------------------------------------------------")  # 60個
-
-print("測試 cosine_similarity")
 from sklearn.metrics.pairwise import cosine_similarity
+
+print("測試 euclidean_distances 歐幾里得距離 (Euclidean distance)")
 
 X = np.array(
     [
@@ -113,24 +65,57 @@ X = np.array(
     ]
 )
 
+"""
+X = np.array(
+    [
+        [4, 3, 0, 0, 5, 0, 4, 3, 0, 0, 5, 0],  # r1
+        [5, 0, 4, 0, 4, 0, 5, 0, 4, 0, 4, 0],  # r2
+    ]
+)
+"""
+
+dist = euclidean_distances(X)
+print(dist)
+
+print("測試 cosine_similarity")
 sim = cosine_similarity(X)
 print(sim)
 
-print("------------------------------------------------------------")  # 60個
+print("兩列之間的距離")
+X = [[0, 1], [1, 1]]
+cc = euclidean_distances(X, X)
+print(cc)
 
-# 計算相似度
+print("與原點之間的距離")
+cc = euclidean_distances(X, [[0, 0]])
+print(cc)
 
-from sklearn.metrics.pairwise import euclidean_distances
-from sklearn.metrics.pairwise import cosine_similarity
+print("比較字串的距離")
+
+from sklearn.feature_extraction.text import CountVectorizer
+
+corpus = ["I am a good student", "I am a good teacher", "This is a pencil"]  # 文集
+
+vectorizer = CountVectorizer()
+counts = vectorizer.fit_transform(corpus).todense()  # 得到文集corpus的特征向量，並將其轉為密集矩陣
+print(counts)
+
+""" kilo OK, 但是 sugar不OK
+for x,y in [[0,1],[0,2],[1,2]]:
+    dist = euclidean_distances(counts[x],counts[y])
+    print('文檔{}與文檔{}的距離{}'.format(x,y,dist))
+"""
+
+print("比較幾個向量的距離")
 
 # 每個人的特徵向量
-x = [1.0, 1.0, 1.0]  # 嫌犯 X 的特徵
-kitty = [0.2, 0.7, 0.2]  # kitty 的特徵
-pikachu = [0.4, 0.8, 0.9]  # 皮卡丘 的特徵
-sonic = [0.8, 0.8, 0.3]  # 索尼克 的特徵
+vector1 = [1.0, 1.0, 1.0]  # 嫌犯 1 的特徵
+vector2 = [0.2, 0.7, 0.2]  # 嫌犯 2 的特徵
+vector3 = [0.4, 0.8, 0.9]  # 嫌犯 3 的特徵
+vector4 = [0.8, 0.8, 0.3]  # 嫌犯 4 的特徵
 
 # 把特徵向量集合成一個串列，好讓 sklearn 方便直接計算任兩個向量間的相似度
-feature_vectors = [x, kitty, pikachu, sonic]  #
+feature_vectors = [vector1, vector2, vector3, vector4]
 print("Feature vectors:")
 print(feature_vectors)
 print()
@@ -148,7 +133,6 @@ print(cosine_similarity_metrix)
 print()
 
 print("------------------------------------------------------------")  # 60個
-
 """
 from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
 
@@ -177,6 +161,7 @@ print(data.todense())
 doc_df = pd.DataFrame(data.toarray(), index = text, columns = vectorizer.get_feature_names_out()).head(10)
 
 print(doc_df)
+print(doc_df.columns)
 
 print('------------------------------')	#30個
 
@@ -203,13 +188,20 @@ print('------------------------------')	#30個
 pd.set_option('display.precision', 2)
 doc_df = pd.DataFrame(data.toarray(), index = text, columns = vectorizer.get_feature_names_out()).head(10)
 print(doc_df)
+
 """
+
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 """
-x = np.array([i * np.pi / 180 for i in range(60, 300, 4)])
-y = np.sin(x) + np.random.normal(0, 0.15, len(x))
+x = np.array([i * np.pi / 180 for i in range(0, 370, 10)])
+#y = np.sin(x) + np.random.normal(0, 0.15, len(x))
+y = np.sin(x)
+
 data = pd.DataFrame(np.column_stack([x, y]), columns = ['x', 'y'])
-data.head(10)
+#data.head(10)
+print(data)
 plt.scatter(data['x'], data['y'], s = 30)
 
 plt.show()
@@ -225,15 +217,17 @@ print('------------------------------')	#30個
 
 
 def linear_regression(data, power, models_to_plot):
+    print('power =', power)
     #initialize predictors:
     predictors = ['x']
     if power >= 2:
         predictors.extend(['x_%d'%i for i in range(2, power + 1)])
     
-    #Fit the model
     # 做線性迴歸, 用 sklearn 裡的 LinearRegression 來做線性迴歸
     linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
+    
     linear_regression.fit(data[predictors],data['y'])  # 學習訓練.fit
+    
     y_pred = linear_regression.predict(data[predictors])  # 預測.predict
     
     #Return the result in pre-defined format
@@ -244,6 +238,8 @@ def linear_regression(data, power, models_to_plot):
     
     #Check if a plot is to be made for the entered power
     if power in models_to_plot:
+        print(power)
+        print(models_to_plot[power])
         plt.subplot(models_to_plot[power])
         plt.tight_layout()
         plt.plot(data['x'], y_pred, lw = 3)
@@ -255,13 +251,17 @@ def linear_regression(data, power, models_to_plot):
 #Initialize a dataframe to store the results:
 col = ['rss','intercept'] + ['coef_x_%d' % i for i in range(1, 16)]
 ind = ['model_pow_%d' % i for i in range(1, 16)]
+
 coef_matrix_simple = pd.DataFrame(index = ind, columns = col)
+print('1111')
+print(coef_matrix_simple)
 
 #Define the powers for which a plot is required:
 models_to_plot = {1:231,3:232,6:233,9:234,12:235,15:236}
 
 #Iterate through all powers and assimilate results
 for i in range(1,16):
+    print("i =", i)
     coef_matrix_simple.iloc[i-1,0:i+2] = linear_regression(data, power=i, models_to_plot=models_to_plot)
 
 plt.show()
@@ -270,10 +270,13 @@ print('------------------------------')	#30個
 
 #Set the display format to be scientific for ease of analysis
 pd.options.display.float_format = '{:,.2g}'.format
-tt = coef_matrix_simple
-print(tt)
+
+print('2222')
+print(coef_matrix_simple)
 
 print('------------------------------')	#30個
+
+# Ridge Regression 嶺迴歸
 
 #L2 Normalization Ridge Regression
 
@@ -332,70 +335,10 @@ print('------------------------------')	#30個
 #有多少個系數為0
 
 coef_matrix_ridge.apply(lambda x: sum(x.values==0),axis=1)
-"""
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
-#L1 Regulariztion Lass Regression
 
-from sklearn.linear_model import Lasso
-
-def lasso_regression(data, predictors, alpha, models_to_plot={}):
-    #Fit the model
-    #lassoreg = Lasso(alpha=alpha,normalize=True, max_iter=1e5)
-    lassoreg = Lasso(alpha=alpha, max_iter=1e5)
-    lassoreg.fit(data[predictors], data['y'])  # 學習訓練.fit
-    y_pred = lassoreg.predict(data[predictors])  # 預測.predict
-    
-    #Return the result in pre-defined format
-    rss = sum((y_pred-data['y'])**2)
-    ret = [rss]
-    ret.extend([lassoreg.intercept_])
-    ret.extend(lassoreg.coef_)
-    
-    #Check if a plot is to be made for the entered alpha
-    if alpha in models_to_plot:
-        plt.subplot(models_to_plot[alpha])
-        plt.tight_layout()
-        plt.plot(data['x'],y_pred,lw=3)
-        plt.plot(data['x'],data['y'],'.')
-        plt.title('Plot for alpha: %.3g'%alpha)
-    
-    return ret
-
-#Initialize predictors to all 15 powers of x
-predictors=['x']
-predictors.extend(['x_%d'%i for i in range(2,16)])
-
-#Define the alpha values to test
-alpha_lasso = [1e-15, 1e-10, 1e-8, 1e-5,1e-4, 1e-3,1e-2, 1, 5, 10]
-
-#Initialize the dataframe to store coefficients
-col = ['rss','intercept'] + ['coef_x_%d'%i for i in range(1,16)]
-ind = ['alpha_%.2g'%alpha_lasso[i] for i in range(0,10)]
-coef_matrix_lasso = pd.DataFrame(index=ind, columns=col)
-
-#Define the models to plot
-models_to_plot = {1e-10:231, 1e-5:232,1e-4:233, 1e-3:234, 1e-2:235, 1:236}
-
-""" NG
-#Iterate over the 10 alpha values:
-for i in range(10):
-    coef_matrix_lasso.iloc[i,] = lasso_regression(data, predictors, alpha_lasso[i], models_to_plot)
-"""
-plt.show()
-
-print('------------------------------')	#30個
-
-pd.options.display.float_format = '{:,.2g}'.format
-tt = coef_matrix_lasso
-print(tt)
-
-coef_matrix_lasso.apply(lambda x: sum(x.values==0),axis=1)
-'''
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-"""
 from sklearn.feature_extraction.text import  CountVectorizer
 from sklearn.preprocessing import Normalizer
 from sklearn.decomposition import TruncatedSVD
@@ -449,6 +392,8 @@ similarity = np.asarray(np.asmatrix(data_n) * np.asmatrix(data_n).T)
 tt = pd.DataFrame(similarity, index = corpus, columns = corpus).head(10)
 print(tt)
 
+print(similarity)
+ 
 sns.heatmap(similarity, cmap = 'Reds')
 
 plt.show()
@@ -458,69 +403,64 @@ print(pd.DataFrame(model.components_,index=['component_1','component_2'],columns
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 """
-print('房價')
+print('房價, 共 1460 筆資料 81欄位')
 
 import scipy.stats as stats
 
-train = pd.read_csv(u'data/houseprice.csv')
+train = pd.read_csv(u'data/houseprice.csv') # 共 1460 筆資料 81欄位
+print(len(train))
+print(train.shape)
 print(train.head(3))
-
-import scipy.stats as st
-
-plt.figure()
-sns.histplot(train['SalePrice'])
-plt.title('SalePrice')
-plt.show()
-
-print('------------------------------')	#30個
-
-#另一種查看是否服從正態分布的可視化方法
-
-plt.figure()
-res = st.probplot(train['SalePrice'], plot=plt)
-plt.title('SalePrice')
-plt.show()
 
 y = train['SalePrice']
 
-plt.figure(1)
+sns.histplot(y)
+plt.xlabel('售價區間')
+plt.ylabel('賣出件數')
+plt.title('統計 售價區間 / 賣出件數')
+plt.show()
+
+#另一種查看是否服從正態分布的可視化方法
+import scipy.stats as st
+
+res = st.probplot(y, plot=plt)
+plt.ylabel('售價區間')
+plt.xlabel('賣出件數')
+plt.title('統計 售價區間 / 賣出件數')
+plt.show()
+
 sns.distplot(y,kde=False)
-plt.title('SalePrice')
+plt.xlabel('售價區間')
+plt.ylabel('賣出件數')
+plt.title('統計 售價區間 / 賣出件數')
 plt.show()
 
-plt.figure(2)
 sns.distplot(y, kde=True, fit=st.johnsonsu)
-plt.title('Johnson SU')
+plt.title('使用 Johnson SU')
 plt.show()
 
-plt.figure(3)
 sns.distplot(y, kde=False, fit=st.norm)
-plt.title('Normal')
+plt.title('使用 Normal')
 plt.show()
 
-plt.figure(4)
 sns.distplot(y, kde=False, fit=st.lognorm)
-plt.title('Log Normal')
+plt.title('使用 Log Normal')
 plt.show()
-
-print('------------------------------')	#30個
 
 #另一種查看是否服從正態分布的可視化方法
 
-plt.figure()
-sns.distplot(train['SalePrice'], fit=st.norm)
-plt.title('SalePrice')
+sns.distplot(y, fit=st.norm)
+plt.title('使用 Normal')
 plt.show()
 
-plt.figure()
-res = st.probplot(train['SalePrice'], plot=plt)
+res = st.probplot(y, plot=plt)
 plt.title('SalePrice')
 plt.show()
 
 print('------------------------------')	#30個
 
 #把房價做對數變換后再看
-SalePrice_log = np.log(train['SalePrice'])
+SalePrice_log = np.log(y)
  
 #transformed histogram and normal probability plot
 sns.distplot(SalePrice_log, fit=st.norm);
@@ -536,7 +476,6 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 """
-
 from scipy.stats import norm
 
 
@@ -565,8 +504,6 @@ bins = 50  # 束
 plt.hist(data, bins=bins)
 plt.title('normal distribution')
 plt.show()
-
-print('------------------------------')	#30個
 
 #pdf: 概率密度函數
 tt = norm.pdf(x=1.8, loc=1.6, scale=0.2)
@@ -636,10 +573,11 @@ example_counts = cv.transform(examples)
 predictions = classifier.predict(example_counts)  # 預測.predict
 
 print('預測結果 :', predictions)
-"""
+
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
+
 # 1. 建立空的df
 df = pd.DataFrame()
 
@@ -747,7 +685,9 @@ print(tt)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+"""
 
+"""
 from sklearn.preprocessing import PolynomialFeatures
 from sklearn.linear_model import Ridge
 from sklearn.metrics import mean_squared_error
@@ -772,10 +712,10 @@ train_pred_y = model.predict(train_poly_X)  # 預測.predict
 test_pred_y = model.predict(test_poly_X)  # 預測.predict
 print(mean_squared_error(train_pred_y, train_y))
 print(mean_squared_error(test_pred_y, test_y))
-
+"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
+"""
 from sklearn.svm import LinearSVC
 from sklearn.datasets import make_blobs
 
@@ -797,10 +737,10 @@ model.fit(X_train, y_train)  # 學習訓練.fit
 y_pred = model.predict(X_test)  # 預測.predict
 
 print(accuracy_score(y_pred, y_test))  # 評価
-
+"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
+"""
 from sklearn.svm import SVC
 from sklearn.datasets import make_gaussian_quantiles
 from sklearn.metrics import accuracy_score
@@ -816,10 +756,10 @@ model.fit(X_train, y_train)  # 學習訓練.fit
 y_pred = model.predict(X_test)  # 預測.predict
 
 print(accuracy_score(y_pred, y_test))
-
+"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
+"""
 from sklearn.naive_bayes import MultinomialNB
 
 # データ生成
@@ -838,10 +778,10 @@ model = MultinomialNB()
 model.fit(X_train, y_train)  # 學習訓練.fit
 
 print(model.predict([[0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0]]))  # 預測.predict
-
+"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
+"""
 from sklearn.decomposition import TruncatedSVD
 
 data = [
@@ -863,13 +803,12 @@ model.fit(data)  # 學習訓練.fit
 print(model.transform(data))  # 変換したデータ
 print(model.explained_variance_ratio_)  # 寄与率
 print(sum(model.explained_variance_ratio_))  # 累積寄与率
-
+"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 from sklearn.decomposition import NMF
 
-# from sklearn.datasets.samples_generator import make_blobs old
 from sklearn.datasets import make_blobs
 
 centers = [[5, 10, 5], [10, 4, 10], [6, 8, 8]]
@@ -884,6 +823,8 @@ W = model.transform(X)  # 分解後の行列
 H = model.components_
 print(W)
 print(H)
+
+sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -906,7 +847,7 @@ model.fit(tf)  # 學習訓練.fit
 
 print(model.components_)  # 各トピックが持つ単語分布
 print(model.transform(tf))  # トピックで表現された文書
-'''
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
