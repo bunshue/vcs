@@ -1,17 +1,11 @@
-# View more python tutorials on my Youtube and Youku channel!!!
-
-# Youtube video tutorial: https://www.youtube.com/channel/UCdyjiB5H8Pu7aDTNVXTTpcg
-# Youku video tutorial: http://i.youku.com/pythontutorial
-
 # 12 - regularization
-"""
-Please note, this code is only for python 3+. If you are using python 2+, please modify the code accordingly.
-"""
+
 from __future__ import print_function
 import theano
 from sklearn.datasets import load_boston
 import theano.tensor as T
 import numpy as np
+import matplotlib.pyplot as plt
 
 
 class Layer(object):
@@ -49,8 +43,9 @@ l1 = Layer(x, 13, 50, T.tanh)
 l2 = Layer(l1.outputs, 50, 1, None)
 
 # the way to compute cost
-cost = T.mean(T.square(l2.outputs - y))
-
+cost = T.mean(T.square(l2.outputs - y))      # without regularization
+# cost = T.mean(T.square(l2.outputs - y)) + 0.1 * ((l1.W ** 2).sum() + (l2.W ** 2).sum())  # with l2 regularization
+# cost = T.mean(T.square(l2.outputs - y)) + 0.1 * (abs(l1.W).sum() + abs(l2.W).sum())  # with l1 regularization
 gW1, gb1, gW2, gb2 = T.grad(cost, [l1.W, l1.b, l2.W, l2.b])
 
 learning_rate = 0.01
@@ -64,11 +59,18 @@ train = theano.function(
 compute_cost = theano.function(inputs=[x, y], outputs=cost)
 
 # record cost
-
+train_err_list = []
+test_err_list = []
+learning_time = []
 for i in range(1000):
     train(x_train, y_train)
     if i % 10 == 0:
         # record cost
-        pass
+        train_err_list.append(compute_cost(x_train, y_train))
+        test_err_list.append(compute_cost(x_test, y_test))
+        learning_time.append(i)
 
 # plot cost history
+plt.plot(learning_time, train_err_list, 'r-')
+plt.plot(learning_time, test_err_list, 'b--')
+plt.show()

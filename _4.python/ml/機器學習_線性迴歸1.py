@@ -45,8 +45,8 @@ from sklearn.model_selection import train_test_split  # 資料分割 => 訓練�
 
 # 載入迴歸常見的評估指標
 from sklearn.metrics import mean_squared_error  # 均方誤差 Mean Squared Error (MSE)
-from sklearn.metrics import mean_absolute_error # 平均絕對誤差 Mean Absolute Error (MAE)
-from sklearn.metrics import r2_score # R-Squared擬合度
+from sklearn.metrics import mean_absolute_error  # 平均絕對誤差 Mean Absolute Error (MAE)
+from sklearn.metrics import r2_score  # R-Squared擬合度
 from sklearn.metrics import accuracy_score  # 沒用到
 
 print("------------------------------------------------------------")  # 60個
@@ -76,6 +76,7 @@ def evaluate_result(y_test, y_pred):
     print("計算 真實測試資料(y_test) 和 預測資料(y_pred) 的 決定係數r2 r2_score")
     r2 = r2_score(y_test, y_pred)
     print(f"決定係數R2 = {r2:.4f}")
+
 
 print("------------------------------------------------------------")  # 60個
 

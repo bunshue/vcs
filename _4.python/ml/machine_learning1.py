@@ -180,8 +180,6 @@ plt.subplot(236)
 plt.title("xxx")
 
 
-
-
 plt.show()
 
 
@@ -360,7 +358,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
 
 print("分類效果評估")
@@ -470,10 +467,8 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -512,18 +507,26 @@ make_blobs对于各簇的中心和标准偏差提供了更方便的控制选项�
 比如说，相关的、冗余的、没有信息量的特征；每个类分成多个正态分布簇；特征空间的线性变换等等。
 """
 
-#make_classification()生成二分类数据集
+# make_classification()生成二分类数据集
 
-X,y = make_classification(n_samples=1000, n_features=5,n_redundant=0,n_clusters_per_class=1,n_informative=1, n_classes=2, random_state=20)
- 
+X, y = make_classification(
+    n_samples=1000,
+    n_features=5,
+    n_redundant=0,
+    n_clusters_per_class=1,
+    n_informative=1,
+    n_classes=2,
+    random_state=20,
+)
+
 # scatter plot, dots colored by class value
-df = pd.DataFrame(dict(x=X[:,0], y=X[:,1], label=y))
-colors = {0:'red', 1:'blue'}
+df = pd.DataFrame(dict(x=X[:, 0], y=X[:, 1], label=y))
+colors = {0: "red", 1: "blue"}
 fig, ax = plt.subplots()
-grouped = df.groupby('label')
+grouped = df.groupby("label")
 for key, group in grouped:
-    group.plot(ax=ax, kind='scatter', x='x', y='y', label=key, color=colors[key])
- 
+    group.plot(ax=ax, kind="scatter", x="x", y="y", label=key, color=colors[key])
+
 print(X.shape, y.shape)
 plt.show()
 
@@ -535,32 +538,36 @@ plt.show()
 """
 
 # make_blobs: Generate isotropic Gaussian blobs for clustering. Of course, can also be used for classfication problem.
-    
-X, y = make_blobs(n_samples=1000, centers=3, n_features=2,random_state=10)
-     
-# scatter plot, dots colored by class value
-df = pd.DataFrame(dict(x=X[:,0], y=X[:,1], label=y))
-colors = {0:'red', 1:'blue',2:'y'}
-fig, ax = plt.subplots()
-grouped = df.groupby('label')
-for key, group in grouped:
-    group.plot(ax=ax, kind='scatter', x='x', y='y', label=key, color=colors[key])
 
- 
+X, y = make_blobs(n_samples=1000, centers=3, n_features=2, random_state=10)
+
+# scatter plot, dots colored by class value
+df = pd.DataFrame(dict(x=X[:, 0], y=X[:, 1], label=y))
+colors = {0: "red", 1: "blue", 2: "y"}
+fig, ax = plt.subplots()
+grouped = df.groupby("label")
+for key, group in grouped:
+    group.plot(ax=ax, kind="scatter", x="x", y="y", label=key, color=colors[key])
+
+
 plt.show()
- 
 
-X, y = make_blobs(n_samples=[100,300,250,400], n_features=2,
-                      centers=[[100,120],[250,300], [700,150],[300,500]],
-                      cluster_std=50, random_state=111)
-     
+
+X, y = make_blobs(
+    n_samples=[100, 300, 250, 400],
+    n_features=2,
+    centers=[[100, 120], [250, 300], [700, 150], [300, 500]],
+    cluster_std=50,
+    random_state=111,
+)
+
 # scatter plot, dots colored by class value
-df = pd.DataFrame(dict(x=X[:,0], y=X[:,1], label=y))
-colors = {0:'red', 1:'blue',2:'y', 3: 'green'}
+df = pd.DataFrame(dict(x=X[:, 0], y=X[:, 1], label=y))
+colors = {0: "red", 1: "blue", 2: "y", 3: "green"}
 fig, ax = plt.subplots()
-grouped = df.groupby('label')
+grouped = df.groupby("label")
 for key, group in grouped:
-    group.plot(ax=ax, kind='scatter', x='x', y='y', label=key, color=colors[key])
+    group.plot(ax=ax, kind="scatter", x="x", y="y", label=key, color=colors[key])
 
 plt.show()
 
@@ -576,14 +583,14 @@ plt.show()
 # 经常用于非线性分类示例。
 
 # generate 2d classification dataset
-X, y = make_moons(n_samples=1000,shuffle=True, noise=0.1, random_state=10)
+X, y = make_moons(n_samples=1000, shuffle=True, noise=0.1, random_state=10)
 # scatter plot, dots colored by class value
-df = pd.DataFrame(dict(x=X[:,0], y=X[:,1], label=y))
-colors = {0:'red', 1:'blue'}
+df = pd.DataFrame(dict(x=X[:, 0], y=X[:, 1], label=y))
+colors = {0: "red", 1: "blue"}
 fig, ax = plt.subplots()
-grouped = df.groupby('label')
+grouped = df.groupby("label")
 for key, group in grouped:
-    group.plot(ax=ax, kind='scatter', x='x', y='y', label=key, color=colors[key])
+    group.plot(ax=ax, kind="scatter", x="x", y="y", label=key, color=colors[key])
 
 plt.show()
 
@@ -592,19 +599,21 @@ plt.show()
 顾名思义，每个类别的样本构成一个圆形。
 """
 # make_circles: generates a binary classification problem with datasets that fall into concentric circles.
-# Make a large circle containing a smaller circle in 2d. 
+# Make a large circle containing a smaller circle in 2d.
 # A simple toy dataset to visualize clustering and classification algorithms, suitable for algorithms that can learn complex non-linear manifolds.
 
 
 # generate 2d classification dataset
-X, y = make_circles(n_samples=1000, noise=0.05) # 'noise' is used to control the amount of noise in the shapes.
+X, y = make_circles(
+    n_samples=1000, noise=0.05
+)  # 'noise' is used to control the amount of noise in the shapes.
 # scatter plot, dots colored by class value
-df = pd.DataFrame(dict(x=X[:,0], y=X[:,1], label=y))
-colors = {0:'red', 1:'blue'}
-fig, ax = plt.subplots(figsize=[6,6])
-grouped = df.groupby('label')
+df = pd.DataFrame(dict(x=X[:, 0], y=X[:, 1], label=y))
+colors = {0: "red", 1: "blue"}
+fig, ax = plt.subplots(figsize=[6, 6])
+grouped = df.groupby("label")
 for key, group in grouped:
-    group.plot(ax=ax, kind='scatter', x='x', y='y', label=key, color=colors[key])
+    group.plot(ax=ax, kind="scatter", x="x", y="y", label=key, color=colors[key])
 
 plt.show()
 
@@ -615,18 +624,18 @@ make_gaussian_quantiles()首先生成一个多维正态分布样本集，然后�
 以一维正态分布为例，大致来说就是这样分割的。假设n_classes = 3，因此对应的两个分割用的分位点就是33%和66%。取样本中位于[0, 33%]分位区间的作为第一类，位于[33%, 66%]分位区间的作为第二类，位于[66%, 100%]分位区间的作为第三类。对于多维数据，是基于对应的𝜒2分布的分位数来进行分类。
 """
 from sklearn.datasets import make_gaussian_quantiles
-     
-data, target = make_gaussian_quantiles(n_samples=1500, cov=1.0, n_classes=3)
-     
-# scatter plot, dots colored by class value
-df = pd.DataFrame(dict(x=data[:,0], y=data[:,1], label=target))
-colors = {0:'red', 1:'blue', 2:'k'}
-fig, ax = plt.subplots(figsize=[6,6])
-grouped = df.groupby('label')
-for key, group in grouped:
-    group.plot(ax=ax, kind='scatter', x='x', y='y', label=key, color=colors[key])
 
-plt.show() 
+data, target = make_gaussian_quantiles(n_samples=1500, cov=1.0, n_classes=3)
+
+# scatter plot, dots colored by class value
+df = pd.DataFrame(dict(x=data[:, 0], y=data[:, 1], label=target))
+colors = {0: "red", 1: "blue", 2: "k"}
+fig, ax = plt.subplots(figsize=[6, 6])
+grouped = df.groupby("label")
+for key, group in grouped:
+    group.plot(ax=ax, kind="scatter", x="x", y="y", label=key, color=colors[key])
+
+plt.show()
 
 """
 7. make_hastie_10_2
@@ -636,44 +645,45 @@ T. Hastie, R. Tibshirani and J. Friedman, “Elements of Statistical Learning Ed
 y[i] = 1 if np.sum(X[i] ** 2) > 9.34 else -1
 """
 from sklearn.datasets import make_hastie_10_2
-     
+
 data, target = make_hastie_10_2(n_samples=1000, random_state=42)
-     
-#target[target==-1] = 0  # 原数据集生成的target为[1,-1],这里变换为[1,0]
-#target = target.astype('int32') # 变换成整数
-     
+
+# target[target==-1] = 0  # 原数据集生成的target为[1,-1],这里变换为[1,0]
+# target = target.astype('int32') # 变换成整数
+
 df = pd.DataFrame(data)
-df['target'] = target
-         
+df["target"] = target
+
 print(df)
 
 """
 这是一个10维的数据，所以不容易以散点图的形式进行图示化。以下通过图示的方式看看各个维度是不是独立同分布（i.i.d）的标准高斯分布。
 """
 from scipy.stats import norm
-plt.figure(figsize=(20,6))
+
+plt.figure(figsize=(20, 6))
 for k in range(10):
-    df[k].plot(kind='kde',secondary_y=True,label='feature#'+str(k))
-        
-x = np.linspace(-8,8, 1000)
-plt.plot(x, norm.pdf(x),'r-', lw=2, alpha=0.6, label='theoretic std norm pdf')
-     
+    df[k].plot(kind="kde", secondary_y=True, label="feature#" + str(k))
+
+x = np.linspace(-8, 8, 1000)
+plt.plot(x, norm.pdf(x), "r-", lw=2, alpha=0.6, label="theoretic std norm pdf")
+
 plt.legend()
 plt.show()
 
-#如上图可知，10个特征分量确实基本上都是与标准正态分布吻合的。
+# 如上图可知，10个特征分量确实基本上都是与标准正态分布吻合的。
 
 
 """
 8. 多标签数据集生成
 多标签数据集用于当存在多各类别，而待分类的数据可能属于其中的一类或者同时属于多个类别，或者甚至不属于任何类别。比如说，当需要识别在一张图像中所包含的交通信号等的类型。一张图片可能不包含信号灯，也可能只包含一个红灯或绿灯或黄灯，也可能同时包含一个红灯和绿灯（如果这张图片覆盖了一个十字路口的两个方向的信号灯的话）。
 """
-     
+
 from sklearn.datasets import make_multilabel_classification as make_ml_clf
-    
-x, y = make_ml_clf(n_samples=1000, n_features=10,n_classes=3, random_state=0)
+
+x, y = make_ml_clf(n_samples=1000, n_features=10, n_classes=3, random_state=0)
 print(x.shape, y.shape)
-print(y[:10,:])
+print(y[:10, :])
 
 """
 可以看出，由于是多分类（本例是3分类）多标签的，所以target(label)采用了one-hot编码的形式，每个数据样本的label中可能有一个或多个1，表示属于1个类别或者多个类别。当然，虽然以上没有显示出来，也存在不属于任何类别的样本，即其label为全零向量。
@@ -687,9 +697,9 @@ make_biclusters用于生成具有恒定块对角线结构(constant block diagona
 from sklearn.datasets import make_biclusters
 
 data, rows, columns = make_biclusters(
-    shape=(300, 300), n_clusters=5, noise=5,
-    shuffle=False, random_state=0)
-     
+    shape=(300, 300), n_clusters=5, noise=5, shuffle=False, random_state=0
+)
+
 plt.matshow(data, cmap=plt.cm.Blues)
 plt.title("Original dataset")
 plt.show()
@@ -699,10 +709,11 @@ plt.show()
 make_checkerboard()用于生成一个具有棋盘格结构的数组，以进行双向聚类。
 """
 from sklearn.datasets import make_checkerboard
+
 data, rows, columns = make_checkerboard(
-    shape=(300, 300), n_clusters=5, noise=5,
-    shuffle=False, random_state=0)
-     
+    shape=(300, 300), n_clusters=5, noise=5, shuffle=False, random_state=0
+)
+
 plt.matshow(data, cmap=plt.cm.Blues)
 plt.title("Original dataset")
 plt.show()
@@ -711,12 +722,8 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -738,3 +745,10 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+
+X, y = make_regression(n_samples=100, n_features=1, n_targets=1, noise=10)
+plt.scatter(X, y)
+plt.show()
+
+
+
