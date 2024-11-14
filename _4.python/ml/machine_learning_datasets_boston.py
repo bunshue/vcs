@@ -27,6 +27,27 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
+
+#波士頓房價資料
+#data_url = "http://lib.stat.cmu.edu/datasets/boston"
+boston_filename = "data/datasets_boston.csv" # 上述網址存成的檔案
+
+#from sklearn.datasets import load_boston # 廢棄
+
+print("------------------------------------------------------------")  # 60個
+
+
+from sklearn import datasets
+from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import train_test_split
+
+raw_df = pd.read_csv(boston_filename, sep="\s+", skiprows=22, header=None)
+print(raw_df.head())
+data = np.hstack([raw_df.values[::2, :], raw_df.values[1::2, :2]])
+print(data)
+target = raw_df.values[1::2, 2]
+print(target)
+
 print("------------------------------------------------------------")  # 60個
 
 """ 無資料
@@ -36,8 +57,6 @@ print("------------------------------------------------------------")  # 60個
 SciKit-Learn 有許多 "Toy Datasets" 可以讓我們玩玩。
 
 今天我們要使用的是「波士頓房價資料」。
-
-from sklearn.datasets import load_boston
 
 boston_dataset = load_boston()
 
@@ -325,16 +344,12 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-print("回帰問題における評価方法")
-
 """
-from sklearn.datasets import load_boston
+print("線性迴歸")
 
 data = load_boston()
 X = data.data[:, [5,]]
 y = data.target
-
-from sklearn.linear_model import LinearRegression
 
 model_lir = LinearRegression()
 model_lir.fit(X, y)
@@ -353,32 +368,20 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-"""
-#波士頓房價資料
-data_url = "http://lib.stat.cmu.edu/datasets/boston"
-raw_df = pd.read_csv(data_url, sep="\s+", skiprows=22, header=None)
-print(raw_df.head())
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+raw_df = pd.read_csv(boston_filename, sep="\s+", skiprows=22, header=None)
 data = np.hstack([raw_df.values[::2, :], raw_df.values[1::2, :2]])
+target = raw_df.values[1::2, 2]
 print(data)
-target = raw_df.values[1::2, 2]
 print(target)
-
-"""
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-raw_df = pd.read_csv("data/boston.csv", sep="\s+", skiprows=22, header=None)
-data = np.hstack([raw_df.values[::2, :], raw_df.values[1::2, :2]])
-target = raw_df.values[1::2, 2]
 print(data.shape)
 
 print("------------------------------------------------------------")  # 60個
 
-raw_df = pd.read_csv("data/boston.csv", sep="\s+", skiprows=22, header=None)
+raw_df = pd.read_csv(boston_filename, sep="\s+", skiprows=22, header=None)
 data = np.hstack([raw_df.values[::2, :], raw_df.values[1::2, :2]])
 target = raw_df.values[1::2, 2]
 feature_names = [
@@ -405,9 +408,7 @@ print(target.head())
 
 print("------------------------------------------------------------")  # 60個
 
-from sklearn.linear_model import LinearRegression
-
-raw_df = pd.read_csv("data/boston.csv", sep="\s+", skiprows=22, header=None)
+raw_df = pd.read_csv(boston_filename, sep="\s+", skiprows=22, header=None)
 data = np.hstack([raw_df.values[::2, :], raw_df.values[1::2, :2]])
 target = raw_df.values[1::2, 2]
 feature_names = [
@@ -447,9 +448,7 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-from sklearn.linear_model import LinearRegression
-
-raw_df = pd.read_csv("data/boston.csv", sep="\s+", skiprows=22, header=None)
+raw_df = pd.read_csv(boston_filename, sep="\s+", skiprows=22, header=None)
 data = np.hstack([raw_df.values[::2, :], raw_df.values[1::2, :2]])
 target = raw_df.values[1::2, 2]
 feature_names = [
@@ -486,10 +485,7 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-from sklearn.linear_model import LinearRegression
-from sklearn.model_selection import train_test_split
-
-raw_df = pd.read_csv("data/boston.csv", sep="\s+", skiprows=22, header=None)
+raw_df = pd.read_csv(boston_filename, sep="\s+", skiprows=22, header=None)
 data = np.hstack([raw_df.values[::2, :], raw_df.values[1::2, :2]])
 target = raw_df.values[1::2, 2]
 feature_names = [
@@ -526,10 +522,7 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-from sklearn.linear_model import LinearRegression
-from sklearn.model_selection import train_test_split
-
-raw_df = pd.read_csv("data/boston.csv", sep="\s+", skiprows=22, header=None)
+raw_df = pd.read_csv(boston_filename, sep="\s+", skiprows=22, header=None)
 data = np.hstack([raw_df.values[::2, :], raw_df.values[1::2, :2]])
 target = raw_df.values[1::2, 2]
 feature_names = [
@@ -568,9 +561,7 @@ print("測試資料的R-squared:", lm.score(XTest, yTest))
 
 print("------------------------------------------------------------")  # 60個
 
-from sklearn.linear_model import LinearRegression
-
-raw_df = pd.read_csv("data/boston.csv", sep="\s+", skiprows=22, header=None)
+raw_df = pd.read_csv(boston_filename, sep="\s+", skiprows=22, header=None)
 data = np.hstack([raw_df.values[::2, :], raw_df.values[1::2, :2]])
 target = raw_df.values[1::2, 2]
 feature_names = [
@@ -605,10 +596,7 @@ print("R-squared:", lm.score(X, y))
 
 print("------------------------------------------------------------")  # 60個
 
-from sklearn.linear_model import LinearRegression
-from sklearn.model_selection import train_test_split
-
-raw_df = pd.read_csv("data/boston.csv", sep="\s+", skiprows=22, header=None)
+raw_df = pd.read_csv(boston_filename, sep="\s+", skiprows=22, header=None)
 data = np.hstack([raw_df.values[::2, :], raw_df.values[1::2, :2]])
 target = raw_df.values[1::2, 2]
 feature_names = [
@@ -647,11 +635,7 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-from sklearn.linear_model import LinearRegression
-from sklearn.model_selection import train_test_split
-import seaborn as sns
-
-raw_df = pd.read_csv("data/boston.csv", sep="\s+", skiprows=22, header=None)
+raw_df = pd.read_csv(boston_filename, sep="\s+", skiprows=22, header=None)
 data = np.hstack([raw_df.values[::2, :], raw_df.values[1::2, :2]])
 target = raw_df.values[1::2, 2]
 feature_names = [
@@ -694,6 +678,7 @@ plt.legend()
 
 plt.show()
 
+print('aaaaaaaaaaaaa bbbbbbbbbbbbbbbb  cccccccccccccccccccccccc')
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -702,11 +687,10 @@ print("------------------------------------------------------------")  # 60個
 # load_boston 已被移除 但可以試一下 從 warning 訊息
 
 from sklearn import ensemble
-from sklearn import datasets
 from sklearn.metrics import mean_squared_error
-from sklearn.model_selection import train_test_split
 
 boston = datasets.load_boston() # 讀取Sklearn自帶的數據集
+
 X_train,X_test,y_train,y_test = train_test_split(boston.data, boston.target,
                                                  test_size=0.2,random_state=13)
 params = {'n_estimators': 200, 'max_depth': 5, 
@@ -730,8 +714,7 @@ print("------------------------------------------------------------")  # 60個
 
 
 """ 無 boston
-from sklearn.model_selection import train_test_split
-from sklearn.datasets import load_boston
+
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import mean_squared_error
 
@@ -768,9 +751,8 @@ print("平均方差：{}".format(merror))
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-from sklearn.model_selection import train_test_split
+""" 無 load_boston
 from sklearn.linear_model import SGDRegressor
-from sklearn.datasets import load_boston
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import mean_squared_error
 
@@ -800,15 +782,13 @@ for i in range(5):
     merror = mean_squared_error(y_real, y_predict)
 
 print("平均方差：{}".format(merror))
-
+"""
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
 """ 波士頓房價 資料庫已移除
-
-from sklearn.datasets import load_boston
 
 boston = load_boston()
 X = boston.data
@@ -819,11 +799,7 @@ print(X[0])
 
 print(boston.feature_names)
 
-from sklearn.model_selection import train_test_split
-
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=3)
-
-from sklearn.linear_model import LinearRegression
 
 model = LinearRegression()
 
@@ -836,7 +812,6 @@ print('耗時 : {0:.6f}; train_score: {1:0.6f}; cv_score: {2:.6f}'.format(time.p
 
 print("------------------------------")  # 30個
 
-from sklearn.linear_model import LinearRegression
 from sklearn.preprocessing import PolynomialFeatures
 from sklearn.pipeline import Pipeline
 
@@ -883,11 +858,9 @@ print("------------------------------------------------------------")  # 60個
 
 """ boston 移除
 from __future__ import print_function
-from sklearn import datasets
-from sklearn.linear_model import LinearRegression
-import matplotlib.pyplot as plt
 
 loaded_data = datasets.load_boston()
+
 data_X = loaded_data.data
 data_y = loaded_data.target
 
@@ -908,10 +881,9 @@ print("------------------------------------------------------------")  # 60個
 
 """
 from __future__ import print_function
-from sklearn import datasets
-from sklearn.linear_model import LinearRegression
 
 loaded_data = datasets.load_boston()
+
 data_X = loaded_data.data
 data_y = loaded_data.target
 

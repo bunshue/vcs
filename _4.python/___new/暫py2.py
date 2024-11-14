@@ -1,4 +1,39 @@
 
+是何用意?
+#from __future__ import print_function
+
+
+
+
+""" 加州房價
+from sklearn.datasets import fetch_california_housing
+housing = fetch_california_housing()
+
+
+Ames房價 愛俄華州的一個城市
+from sklearn.datasets import fetch_openml
+housing = fetch_openml(name="house_prices", as_frame=True)
+
+"""
+
+
+
+
+
+    有监督学习
+        数据预处理
+        简单线性回归
+        多元线性回归
+        逻辑回归
+        k近邻法(k-NN)
+        支持向量机(SVM)
+        决策树
+        随机森林
+    无监督学习
+        K-均值聚类
+        层次聚类
+
+
 
 
 特徵資料（花萼長、寬等等）
