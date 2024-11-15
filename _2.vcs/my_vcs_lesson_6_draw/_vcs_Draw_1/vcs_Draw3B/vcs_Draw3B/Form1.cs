@@ -18,7 +18,6 @@ namespace vcs_Draw3B
         int W = 250;
         int H = 250;
 
-        Graphics g_spiral;  //for draw spiral
         Graphics ge;    //for draw ellipse
         Graphics gs;    //for draw star
         private const int EllipseMargin = 10;
@@ -33,14 +32,6 @@ namespace vcs_Draw3B
         Graphics g_progressbar;
 
         private int CurrentValue = 0;   //指南針
-
-        #region 畫字
-        string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_txt\琵琶行s.txt";
-        int word_position = 0;
-        string word_string = "";
-        Bitmap bmp;
-        Graphics gw;
-        #endregion
 
         //箱中球 ST
         BallInABox ball;   // 宣告 一個箱中球 物件
@@ -79,20 +70,6 @@ namespace vcs_Draw3B
             //create bitmap
             bmp_progressbar = new Bitmap(W_progressbar, H_progressbar);
             timer_progressbar.Enabled = true;
-
-            #region 畫字
-            //讀取檔案
-            word_string = File.ReadAllText(filename, System.Text.Encoding.Default);
-            //richTextBox1.Text += "檔案內容 : " + word_string + "\n";
-            //richTextBox1.Text += "長度：" + word_string.Length.ToString() + "\n";
-            bmp = new Bitmap(pictureBox_word.ClientSize.Width, pictureBox_word.ClientSize.Height);
-            gw = Graphics.FromImage(bmp);
-            timer_word.Enabled = true;
-            #endregion
-
-            g_spiral = pictureBox_spiral.CreateGraphics();
-            draw_spiral();
-            timer_spiral.Enabled = true;
 
             ge = pictureBox_ellipse.CreateGraphics();
             gs = pictureBox_star.CreateGraphics();
@@ -154,7 +131,6 @@ namespace vcs_Draw3B
             dx = 160;
             dy = 50;
 
-            pictureBox_spiral.Size = new Size(W, H);
             pictureBox_star.Size = new Size(W, H);
             pictureBox_polygon.Size = new Size(W, H);
             pictureBox_round.Size = new Size(W, H);
@@ -172,7 +148,6 @@ namespace vcs_Draw3B
             dx = W + 70;
             dy = H + 45;
 
-            pictureBox_spiral.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             pictureBox_star.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             pictureBox_polygon.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             pictureBox_round.Location = new Point(x_st + dx * 4, y_st + dy * 0);
@@ -183,7 +158,6 @@ namespace vcs_Draw3B
 
             groupBox1.Location = new Point(x_st + dx * 5, y_st + dy * 0 + 50);
             pictureBox_ellipse.Location = new Point(x_st + dx * 4 - 40, y_st + dy * 1);
-            pictureBox_word.Location = new Point(x_st + dx * 1, y_st + dy * 2 + 120 * 3);
 
             pictureBox_progressbar.Location = new Point(x_st + dx * 3 - 80, y_st + dy * 2 + 80 - 100);
             pictureBox_rectangle.Location = new Point(x_st + dx * 3 - 80, y_st + dy * 2 + 100);
@@ -237,23 +211,6 @@ namespace vcs_Draw3B
         private void bt_clear_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
-        }
-
-        private void DrawPoint(Graphics g, int cx, int cy, int size, Color c)
-        {
-            // Create a new pen.
-            //顏色、線寬分開寫
-            //Pen p = new Pen(c);
-            // Set the pen's width.
-            //p.Width = linewidth;
-
-            //顏色、線寬寫在一起
-            Pen p = new Pen(c, size);
-
-            // Draw the circle
-            g.DrawEllipse(p, new Rectangle(cx, cy, size, size));
-            //Dispose of the pen.
-            p.Dispose();
         }
 
         //delay 10000 約 10秒
@@ -546,42 +503,7 @@ namespace vcs_Draw3B
             }
         }
 
-        #region 畫字
-        void draw_word()
-        {
-            //g.DrawRectangle(Pens.Red, 0, 0, 100 - 1, 100 - 1);
-
-            Font f = new Font("標楷體", 60);
-            int tmp_width = 0;
-            int tmp_height = 0;
-            string str = word_string[word_position].ToString();
-
-            tmp_width = gw.MeasureString(str, f).ToSize().Width;
-            tmp_height = gw.MeasureString(str, f).ToSize().Height;
-
-            //richTextBox1.Text += tmp_width.ToString() + " " + tmp_height.ToString() + "\n";
-
-            gw.Clear(Color.LightGray);
-            gw.DrawRectangle(Pens.Red, 0, 0, tmp_width - 1, tmp_height - 1);
-
-            gw.DrawString(str, new Font("標楷體", 50), Brushes.Navy, 10, 10);
-
-            word_position++;
-            if (word_position >= word_string.Length)
-                word_position = 0;
-
-            pictureBox_word.Image = bmp;
-        }
-
-        private void timer_word_Tick(object sender, EventArgs e)
-        {
-            draw_word();
-        }
-        #endregion
-
-
         //指南針ST
-
         private void pictureBox_compass2_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
@@ -931,49 +853,6 @@ namespace vcs_Draw3B
         private void timer_round_Tick(object sender, EventArgs e)
         {
             draw_spin_signal();
-        }
-
-        int angle = 0;
-        int rr = 30;
-        void draw_spiral()
-        {
-            if (angle == 0)
-            {
-                g_spiral.Clear(Color.White);
-            }
-
-            int W = pictureBox_spiral.ClientSize.Width;
-            int H = pictureBox_spiral.ClientSize.Height;
-
-            //螺旋
-            int cx = W / 2;
-            int cy = H / 2;
-            int dx;
-            int dy;
-            int x_st = 0;
-            int y_st = 0;
-            dx = (int)(rr * Math.Cos(angle * Math.PI / 180));
-            dy = (int)(rr * Math.Sin(angle * Math.PI / 180));
-            x_st = cx + dx;
-            y_st = cy + dy;
-
-            Random rand = new Random();
-            DrawPoint(g_spiral, x_st, y_st, 5, Color.FromArgb(rand.Next(256), rand.Next(256), rand.Next(256)));
-
-            if ((angle % 30) == 0)
-                rr++;
-
-            angle += 10;
-            if (angle >= 3000)
-            {
-                angle = 0;
-                rr = 30;
-            }
-        }
-
-        private void timer_spiral_Tick(object sender, EventArgs e)
-        {
-            draw_spiral();
         }
 
         int Sect = 20;

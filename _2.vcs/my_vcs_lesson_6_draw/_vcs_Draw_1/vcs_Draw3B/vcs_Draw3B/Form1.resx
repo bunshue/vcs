@@ -118,45 +118,39 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <metadata name="timer_draw_ellipse.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>186, 17</value>
+    <value>21, 14</value>
   </metadata>
   <metadata name="timer_draw_star.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>328, 21</value>
+    <value>185, 15</value>
   </metadata>
   <metadata name="timer_draw_polygon.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>455, 24</value>
+    <value>312, 12</value>
   </metadata>
   <metadata name="timer_draw_rectangle.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>618, 24</value>
+    <value>468, 23</value>
   </metadata>
   <metadata name="timer_progressbar.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>976, 23</value>
-  </metadata>
-  <metadata name="timer_word.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>30, 54</value>
+    <value>349, 90</value>
   </metadata>
   <metadata name="timer_compass.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>148, 54</value>
+    <value>14, 54</value>
   </metadata>
   <metadata name="timer_round.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>384, 57</value>
-  </metadata>
-  <metadata name="timer_spiral.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>490, 57</value>
+    <value>176, 53</value>
   </metadata>
   <metadata name="timer_circular.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>609, 57</value>
+    <value>459, 56</value>
   </metadata>
   <metadata name="timer_ball.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>739, 57</value>
+    <value>337, 49</value>
   </metadata>
   <metadata name="timer_ball_in_box.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>848, 57</value>
+    <value>19, 88</value>
   </metadata>
   <metadata name="timer_double_circle.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>980, 61</value>
+    <value>175, 90</value>
   </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>163</value>
+    <value>105</value>
   </metadata>
 </root>

@@ -31,7 +31,6 @@
             this.components = new System.ComponentModel.Container();
             this.bt_clear = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.pictureBox_spiral = new System.Windows.Forms.PictureBox();
             this.pictureBox_ellipse = new System.Windows.Forms.PictureBox();
             this.timer_draw_ellipse = new System.Windows.Forms.Timer(this.components);
             this.pictureBox_star = new System.Windows.Forms.PictureBox();
@@ -42,8 +41,6 @@
             this.timer_draw_rectangle = new System.Windows.Forms.Timer(this.components);
             this.pictureBox_progressbar = new System.Windows.Forms.PictureBox();
             this.timer_progressbar = new System.Windows.Forms.Timer(this.components);
-            this.pictureBox_word = new System.Windows.Forms.PictureBox();
-            this.timer_word = new System.Windows.Forms.Timer(this.components);
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.pictureBox_compass1 = new System.Windows.Forms.PictureBox();
             this.pictureBox_compass2 = new System.Windows.Forms.PictureBox();
@@ -52,7 +49,6 @@
             this.timer_compass = new System.Windows.Forms.Timer(this.components);
             this.pictureBox_round = new System.Windows.Forms.PictureBox();
             this.timer_round = new System.Windows.Forms.Timer(this.components);
-            this.timer_spiral = new System.Windows.Forms.Timer(this.components);
             this.pictureBox_circular = new System.Windows.Forms.PictureBox();
             this.timer_circular = new System.Windows.Forms.Timer(this.components);
             this.pictureBox_ball = new System.Windows.Forms.PictureBox();
@@ -61,13 +57,11 @@
             this.timer_ball_in_box = new System.Windows.Forms.Timer(this.components);
             this.pictureBox_double_circle = new System.Windows.Forms.PictureBox();
             this.timer_double_circle = new System.Windows.Forms.Timer(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_spiral)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_ellipse)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_star)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_polygon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_rectangle)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_progressbar)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_word)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_compass1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_compass2)).BeginInit();
@@ -81,7 +75,7 @@
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(1316, 537);
+            this.bt_clear.Location = new System.Drawing.Point(309, 219);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(70, 30);
             this.bt_clear.TabIndex = 54;
@@ -91,20 +85,11 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(1063, 394);
+            this.richTextBox1.Location = new System.Drawing.Point(279, 149);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(323, 211);
+            this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 53;
             this.richTextBox1.Text = "";
-            // 
-            // pictureBox_spiral
-            // 
-            this.pictureBox_spiral.BackColor = System.Drawing.Color.White;
-            this.pictureBox_spiral.Location = new System.Drawing.Point(12, 12);
-            this.pictureBox_spiral.Name = "pictureBox_spiral";
-            this.pictureBox_spiral.Size = new System.Drawing.Size(50, 50);
-            this.pictureBox_spiral.TabIndex = 55;
-            this.pictureBox_spiral.TabStop = false;
             // 
             // pictureBox_ellipse
             // 
@@ -152,7 +137,7 @@
             // 
             // pictureBox_rectangle
             // 
-            this.pictureBox_rectangle.Location = new System.Drawing.Point(68, 511);
+            this.pictureBox_rectangle.Location = new System.Drawing.Point(12, 199);
             this.pictureBox_rectangle.Name = "pictureBox_rectangle";
             this.pictureBox_rectangle.Size = new System.Drawing.Size(50, 50);
             this.pictureBox_rectangle.TabIndex = 62;
@@ -166,7 +151,7 @@
             // 
             // pictureBox_progressbar
             // 
-            this.pictureBox_progressbar.Location = new System.Drawing.Point(68, 455);
+            this.pictureBox_progressbar.Location = new System.Drawing.Point(12, 143);
             this.pictureBox_progressbar.Name = "pictureBox_progressbar";
             this.pictureBox_progressbar.Size = new System.Drawing.Size(50, 50);
             this.pictureBox_progressbar.TabIndex = 64;
@@ -177,27 +162,13 @@
             this.timer_progressbar.Interval = 50;
             this.timer_progressbar.Tick += new System.EventHandler(this.timer_progressbar_Tick);
             // 
-            // pictureBox_word
-            // 
-            this.pictureBox_word.BackColor = System.Drawing.Color.LightGray;
-            this.pictureBox_word.Location = new System.Drawing.Point(91, 624);
-            this.pictureBox_word.Name = "pictureBox_word";
-            this.pictureBox_word.Size = new System.Drawing.Size(120, 120);
-            this.pictureBox_word.TabIndex = 65;
-            this.pictureBox_word.TabStop = false;
-            // 
-            // timer_word
-            // 
-            this.timer_word.Interval = 1000;
-            this.timer_word.Tick += new System.EventHandler(this.timer_word_Tick);
-            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.pictureBox_compass1);
             this.groupBox1.Controls.Add(this.pictureBox_compass2);
             this.groupBox1.Controls.Add(this.lblDegrees);
             this.groupBox1.Controls.Add(this.hbarDegrees);
-            this.groupBox1.Location = new System.Drawing.Point(939, 12);
+            this.groupBox1.Location = new System.Drawing.Point(410, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(274, 365);
             this.groupBox1.TabIndex = 66;
@@ -266,10 +237,6 @@
             this.timer_round.Interval = 1000;
             this.timer_round.Tick += new System.EventHandler(this.timer_round_Tick);
             // 
-            // timer_spiral
-            // 
-            this.timer_spiral.Tick += new System.EventHandler(this.timer_spiral_Tick);
-            // 
             // pictureBox_circular
             // 
             this.pictureBox_circular.Location = new System.Drawing.Point(12, 87);
@@ -336,33 +303,29 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1398, 786);
+            this.ClientSize = new System.Drawing.Size(1031, 605);
             this.Controls.Add(this.pictureBox_double_circle);
             this.Controls.Add(this.pictureBox_ball_in_box);
             this.Controls.Add(this.pictureBox_ball);
             this.Controls.Add(this.pictureBox_circular);
             this.Controls.Add(this.pictureBox_round);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.pictureBox_word);
             this.Controls.Add(this.pictureBox_progressbar);
             this.Controls.Add(this.pictureBox_rectangle);
             this.Controls.Add(this.pictureBox_polygon);
             this.Controls.Add(this.pictureBox_star);
             this.Controls.Add(this.pictureBox_ellipse);
-            this.Controls.Add(this.pictureBox_spiral);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.richTextBox1);
             this.Name = "Form1";
             this.Text = "Form1";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_spiral)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_ellipse)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_star)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_polygon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_rectangle)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_progressbar)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_word)).EndInit();
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_compass1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_compass2)).EndInit();
@@ -379,7 +342,6 @@
 
         private System.Windows.Forms.Button bt_clear;
         private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.PictureBox pictureBox_spiral;
         private System.Windows.Forms.PictureBox pictureBox_ellipse;
         private System.Windows.Forms.Timer timer_draw_ellipse;
         private System.Windows.Forms.PictureBox pictureBox_star;
@@ -390,8 +352,6 @@
         private System.Windows.Forms.Timer timer_draw_rectangle;
         private System.Windows.Forms.PictureBox pictureBox_progressbar;
         private System.Windows.Forms.Timer timer_progressbar;
-        private System.Windows.Forms.PictureBox pictureBox_word;
-        private System.Windows.Forms.Timer timer_word;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.PictureBox pictureBox_compass1;
         private System.Windows.Forms.PictureBox pictureBox_compass2;
@@ -400,7 +360,6 @@
         private System.Windows.Forms.Timer timer_compass;
         private System.Windows.Forms.PictureBox pictureBox_round;
         private System.Windows.Forms.Timer timer_round;
-        private System.Windows.Forms.Timer timer_spiral;
         private System.Windows.Forms.PictureBox pictureBox_circular;
         private System.Windows.Forms.Timer timer_circular;
         private System.Windows.Forms.PictureBox pictureBox_ball;

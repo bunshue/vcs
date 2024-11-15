@@ -152,6 +152,7 @@ import joblib
 joblib.dump(encoder, "tmp_color.joblib")
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 # 頻率轉換、合併多個表格
 
@@ -238,6 +239,7 @@ cc = scaler.fit_transform(data)
 print(cc)
 
 # 驗證
+
 
 def get_box_plot_data(data, bp):
     rows_list = []
@@ -358,6 +360,7 @@ print("混淆矩陣")
 print(confusion_matrix(y_test, y_pred))
 
 from sklearn.metrics import ConfusionMatrixDisplay
+
 print("混淆矩陣圖")
 disp = ConfusionMatrixDisplay(confusion_matrix=confusion_matrix(y_test, y_pred))
 disp.plot()
@@ -466,6 +469,7 @@ print("混淆矩陣")
 print(confusion_matrix(y_test, y_pred))
 
 from sklearn.metrics import ConfusionMatrixDisplay
+
 print("混淆矩陣圖")
 disp = ConfusionMatrixDisplay(confusion_matrix=confusion_matrix(y_test, y_pred))
 disp.plot()
@@ -1505,6 +1509,7 @@ noise = rng.normal(scale=0.25, size=X_train.shape)
 X_train_noisy = X_train + noise
 
 # 繪製原圖及加入雜訊的影像
+
 
 # 繪圖函數
 def plot_digits(X, title):

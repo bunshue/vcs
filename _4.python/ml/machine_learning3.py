@@ -35,68 +35,8 @@ from sklearn.model_selection import train_test_split  # 資料分割 => 訓練�
 from sklearn.datasets import make_blobs
 
 print("------------------------------------------------------------")  # 60個
-'''
-"""
-在金融預測上的應用
-神經網路
-連 SVM 都沒辦法, 那一定是方法還不夠高級, 所以我們用更高級的神經網路來做做看!
-"""
-
-from keras.models import Sequential
-from keras.layers import Dense, Activation
-from keras.optimizers import SGD
-
-# [2] 打造我們的神經網路函數學習機
-
-model = Sequential()
-model.add(Dense(20, input_dim=5))
-model.add(Activation("relu"))
-model.add(Dense(20))
-model.add(Activation("relu"))
-model.add(Dense(1))
-model.add(Activation("sigmoid"))
-model.compile(loss="binary_crossentropy", optimizer="adam", metrics=["accuracy"])
-
-# 看一下我們神經網路長什麼樣子, 有沒有做錯。
-
-model.summary()
-
-""" TBD
-#[3] 訓練
-
-model.fit(x_train, yb_train, batch_size=100, epochs=20)  # 學習訓練.fit
-
-
-#[4] 預測
-
-#看起來不太妙, 我們來試試預測...
-
-NN_pred = model.predict_classes(x_test)
-
-YP_NN = yb_test[(NN_pred==1).ravel()]
-
-len(YP_NN)
-
-458
-
-len(YP_NN[YP_NN == 1])
-
-246
-
-246/458
-
-0.537117903930131
-
-結果真是慘慘慘, 怎麼會這樣呢?
-
-"""
-
-print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-"""
-13.畫我們練習成果的討論
-"""
 """ no clf
 # 02 [練習] 圖形化我們的成果
 
@@ -1134,55 +1074,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-""" 訓練久
-from keras.models import Sequential
-from keras.layers import Dense
-from keras.utils import to_categorical
-from sklearn.preprocessing import StandardScaler
-from sklearn import preprocessing
-
-df = pd.read_csv("data/iris.csv")
-
-label_encoder = preprocessing.LabelEncoder()
-df["target"] = label_encoder.fit_transform(df["target"])
-
-dataset = df.values
-np.random.shuffle(dataset)
-X = dataset[:, 0:4].astype(float)
-Y = to_categorical(dataset[:, 4])
-
-X = StandardScaler().fit_transform(X)  # 標準化
-
-X_train, Y_train = X[:120], Y[:120]
-X_test, Y_test = X[120:], Y[120:]
-
-model = Sequential()
-model.add(Dense(6, input_shape=(4,), activation="relu"))
-model.add(Dense(6, activation="relu"))
-model.add(Dense(3, activation="softmax"))
-
-print(model.summary())
-
-model.compile(loss="categorical_crossentropy", optimizer="adam", metrics=["accuracy"])
-
-model.fit(X_train, Y_train, epochs=100, batch_size=5)
-
-loss, accuracy = model.evaluate(X_test, Y_test)
-print("Accuracy = {:.2f}".format(accuracy))
-
-# Y_pred = model.predict_classes(X_test)
-Y_pred = model.predict_step(X_test)
-print(Y_pred)
-
-Y_target = dataset[:, 4][120:].astype(int)
-print(Y_target)
-"""
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
 """
 from sklearn import preprocessing
 
@@ -1972,7 +1863,7 @@ for i in range(len(degrees)):
     )
 
 plt.show()
-'''
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 

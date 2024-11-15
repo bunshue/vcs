@@ -57,6 +57,7 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
+import joblib
 from sklearn import datasets
 from sklearn.datasets import load_iris
 
@@ -68,37 +69,24 @@ print(iris.keys())
 print("---------------------------")
 print(iris.data.shape)
 print("---------------------------")
-print(iris.feature_names)
-print("---------------------------")
-print(iris.DESCR)
-
 
 iris = load_iris()
 print("特徵值：")
 print(iris.data[0:3])
 print("目標值：")
 print(iris.target)
-print("特徵名稱：")
+print("特徵名稱(資料集欄位)：")
 print(iris.feature_names)
 print("目標名稱：")
 print(iris.target_names)
-
-
 print("鳶尾花資料集描述")
 print(iris.DESCR)
-
-print("資料集欄位")
-print(iris.feature_names)
-
 print("資料集資料")
 print(iris.data)
-
 print("資料集目標名稱")
 print(iris.target_names)
-
 print("資料集目標")
 print(iris.target)
-
 print("看鳶尾花數據庫的features")
 print(iris.feature_names)
 
@@ -282,25 +270,16 @@ disp.plot()
 plt.title("混淆矩陣圖")
 # plt.show()
 
-# 8. 模型評估，暫不進行
+print("將 模型存檔 使用 joblib")
+joblib.dump(clf, "tmp_my_model_clf1.joblib")
+joblib.dump(scaler, "tmp_my_model_scaler1.joblib")
 
-# 9. 模型佈署
+print("------------------------------")  # 30個
 
-# 模型存檔
-import joblib
-
-joblib.dump(clf, "tmp_model.joblib")
-joblib.dump(scaler, "tmp_scaler.joblib")
-
-print("------------------------------------------------------------")  # 60個
-
-import joblib
-
-# 10.模型預測
-
+print("讀取模型")
 # 載入模型與標準化轉換模型
-clf = joblib.load("tmp_model.joblib")
-scaler = joblib.load("tmp_scaler.joblib")
+clf = joblib.load("tmp_my_model_clf1.joblib")
+scaler = joblib.load("tmp_my_model_scaler1.joblib")
 
 # 測試資料
 sepal_length, sepal_width, petal_length, petal_width = 5.8, 3.5, 4.4, 1.3
@@ -497,25 +476,16 @@ disp.plot()
 plt.title("混淆矩陣圖")
 # plt.show()
 
-# 8. 模型評估，暫不進行
+print("將 模型存檔 使用 joblib")
+joblib.dump(clf, "tmp_my_model_clf2.joblib")
+joblib.dump(scaler, "tmp_my_model_scaler2.joblib")
 
-# 9. 模型佈署
+print("------------------------------")  # 60個
 
-# 模型存檔
-import joblib
-
-joblib.dump(clf, "tmp_model.joblib")
-joblib.dump(scaler, "tmp_scaler.joblib")
-
-print("------------------------------------------------------------")  # 60個
-
-import joblib
-
-# 10.模型預測
-
+print("讀取模型")
 # 載入模型與標準化轉換模型
-clf = joblib.load("tmp_model.joblib")
-scaler = joblib.load("tmp_scaler.joblib")
+clf = joblib.load("tmp_my_model_clf2.joblib")
+scaler = joblib.load("tmp_my_model_scaler2.joblib")
 
 # 測試資料
 sepal_length, sepal_width, petal_length, petal_width = 5.8, 3.5, 4.4, 1.3
@@ -807,6 +777,7 @@ plt.ylabel("Petal Width 花瓣寬")
 print("------------------------------------------------------------")  # 60個
 
 iris = datasets.load_iris()
+
 X = pd.DataFrame(iris.data, columns=iris.feature_names)
 y = pd.DataFrame(iris.target, columns=["Species"])
 df = pd.concat([X, y], axis=1)
@@ -818,6 +789,7 @@ print("------------------------------------------------------------")  # 60個
 from sklearn.decomposition import PCA
 
 iris = datasets.load_iris()
+
 n_components = 2  # 削減後の次元を2に設定
 model = PCA(n_components=n_components)
 model = model.fit(iris.data)
@@ -828,6 +800,7 @@ print("------------------------------------------------------------")  # 60個
 from sklearn.cluster import KMeans
 
 iris = datasets.load_iris()
+
 n_clusters = 3  # クラスタ数を3に設定
 model = KMeans(n_clusters=n_clusters)
 model.fit(iris.data)
@@ -839,6 +812,7 @@ print("------------------------------------------------------------")  # 60個
 from sklearn.mixture import GaussianMixture
 
 iris = datasets.load_iris()
+
 n_components = 3  # ガウス分布の数
 model = GaussianMixture(n_components=n_components)
 model.fit(iris.data)
@@ -1558,8 +1532,6 @@ from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.preprocessing import StandardScaler
 
-print("save model")
-
 iris = load_iris()
 x_train, x_test, y_train, y_test = train_test_split(
     iris.data, iris.target, test_size=0.2
@@ -1572,12 +1544,10 @@ x_test = std.transform(x_test)
 knn = KNeighborsClassifier(n_neighbors=5)
 knn.fit(x_train, y_train)
 
-import joblib
+print("將 模型存檔 使用 joblib")
+joblib.dump(knn, "tmp_my_model_iris.joblib")
 
-joblib.dump(knn, "tmp_iris.pkl")
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 60個
 
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
@@ -1590,9 +1560,8 @@ std = StandardScaler()
 x_train = std.fit_transform(x_train)
 x_test = std.transform(x_test)
 
-import joblib
-
-knnmodel = joblib.load("tmp_iris.pkl")
+print("讀取模型")
+knnmodel = joblib.load("tmp_my_model_iris.joblib")
 
 score = knnmodel.score(x_test, y_test)
 print(score)
@@ -1612,22 +1581,6 @@ knn.fit(x_train, y_train)
 y_predict = knn.predict(x_test)
 print("預測結果：{}".format(y_predict))
 print("準確率：{}".format(knn.score(x_test, y_test)))
-
-print("------------------------------------------------------------")  # 60個
-
-""" fail
-from sklearn import svm
-from sklearn import datasets
-from sklearn.externals import joblib
-
-clf = svm.SVC()
-iris = datasets.load_iris()
-clf.fit(iris.data, iris.target)
-joblib.dump(clf, "tmp3.pkl")
-
-clf1 = joblib.load("tmp3.pkl")
-print(clf1.predict(iris.data[:2]))
-"""
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

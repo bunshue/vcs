@@ -50,17 +50,8 @@ namespace vcs_Draw3E
             dx = 160;
             dy = 50;
 
-            pictureBox0.Size = new Size(W, H);
             //pictureBox1.Size = new Size(W, H);
             pictureBox1.Size = new Size(280, 200);
-            pictureBox2.Size = new Size(W, H);
-            pictureBox3.Size = new Size(W, H);
-            pictureBox4.Size = new Size(W, H);
-            pictureBox5.Size = new Size(W, H);
-            pictureBox6.Size = new Size(W, H);
-            pictureBox7.Size = new Size(W, H);
-            pictureBox8.Size = new Size(W, H);
-            pictureBox9.Size = new Size(W, H);
 
 
             x_st = 10;
@@ -68,16 +59,7 @@ namespace vcs_Draw3E
             dx = W + 70;
             dy = H + 45;
 
-            pictureBox0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             pictureBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            pictureBox2.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            pictureBox3.Location = new Point(x_st + dx * 3, y_st + dy * 0);
-            pictureBox4.Location = new Point(x_st + dx * 4, y_st + dy * 0);
-            pictureBox5.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            pictureBox6.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            pictureBox7.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-            pictureBox8.Location = new Point(x_st + dx * 3, y_st + dy * 1);
-            pictureBox9.Location = new Point(x_st + dx * 4, y_st + dy * 1);
 
             x_st = 1810;
             y_st = 80;
@@ -127,60 +109,6 @@ namespace vcs_Draw3E
         private void bt_clear_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
-        }
-
-        private void pictureBox0_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void pictureBox1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void pictureBox2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void pictureBox3_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void pictureBox4_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void pictureBox5_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void pictureBox6_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void pictureBox7_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void pictureBox8_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void pictureBox9_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void timer0_Tick(object sender, EventArgs e)
-        {
         }
 
         //for pictureBox1 ST
@@ -306,51 +234,11 @@ namespace vcs_Draw3E
         }
         //for pictureBox1 SP
 
-        private void timer2_Tick(object sender, EventArgs e)
-        {
-
-        }
-
-        private void timer3_Tick(object sender, EventArgs e)
-        {
-
-        }
-
-        private void timer4_Tick(object sender, EventArgs e)
-        {
-
-        }
-
-        private void timer5_Tick(object sender, EventArgs e)
-        {
-
-        }
-
-        private void timer6_Tick(object sender, EventArgs e)
-        {
-
-        }
-
-        private void timer7_Tick(object sender, EventArgs e)
-        {
-
-        }
-
-        private void timer8_Tick(object sender, EventArgs e)
-        {
-
-        }
-
-        private void timer9_Tick(object sender, EventArgs e)
-        {
-
-        }
-
         //for random color ST
         void draw_random_color()
         {
-            int x_st = 10;
-            int y_st = 670;
+            int x_st = 250;
+            int y_st = 250;
             int WIDTH = 40;
             for (int i = 1; i < lb_color.Length; i++)
             {

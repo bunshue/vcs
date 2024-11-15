@@ -32,7 +32,8 @@ from keras.datasets import mnist
 print("------------------------------------------------------------")  # 60個
 
 from keras.models import Sequential 
-from keras.layers.core import Dense, Activation
+#from keras.layers.core import Dense, Activation 改為以下
+from tensorflow.python.keras.layers.core import Dense,Activation
 from tensorflow.python.keras.utils import np_utils
 
 #(X_train, Y_train), (X_test, Y_test) = mnist.load_data() 改成以下4行

@@ -2,7 +2,8 @@ import numpy
 
 from keras.datasets import cifar10
 from keras.models import Sequential 
-from keras.layers.core import Dense, Activation
+#from keras.layers.core import Dense, Activation 改為以下
+from tensorflow.python.keras.layers.core import Dense,Activation
 from keras.layers import Convolution2D, MaxPooling2D, Flatten
 from keras.layers import Dropout
 from tensorflow.python.keras.utils import np_utils

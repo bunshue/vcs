@@ -84,26 +84,26 @@ def plot_error_rate(er_train, er_test):
 
 """ MAIN SCRIPT ============================================================="""
 if __name__ == "__main__":
-    print('aa')
+    print("aa")
     # Read data
     x, y = make_hastie_10_2()
-    print('bb')
+    print("bb")
     df = pd.DataFrame(x)
     df["Y"] = y
 
     # Split into training and test set
     train, test = train_test_split(df, test_size=0.2)
-    
+
     X_train, Y_train = train.iloc[:, :-1], train.iloc[:, -1]
     X_test, Y_test = test.iloc[:, :-1], test.iloc[:, -1]
 
-    print('cc')
+    print("cc")
 
     # Fit a simple decision tree first
     clf_tree = DecisionTreeClassifier(max_depth=1, random_state=1)
     er_tree = generic_clf(Y_train, X_train, Y_test, X_test, clf_tree)
 
-    print('dd')
+    print("dd")
 
     # Fit Adaboost classifier using a decision tree as base estimator
     # Test with different number of iterations
