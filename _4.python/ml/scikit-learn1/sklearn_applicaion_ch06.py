@@ -497,7 +497,7 @@ test_ax.set_xlabel("Feature #0")
 _ = test_ax.set_title("Testing data")
 plt.show()
 
-# 使用Scikit-Learn LinearRegression類別驗算
+print("使用sklearn的 邏輯迴歸 LogisticRegression()")
 
 from sklearn.linear_model import LogisticRegression
 

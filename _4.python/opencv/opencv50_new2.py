@@ -30,15 +30,16 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
-#[OpenCV][Python]印出圖像中文字的位置及高寬
+# [OpenCV][Python]印出圖像中文字的位置及高寬
 # 本文將說明如何去辨識出圖片文字​位置及高寬。
+
 
 def read_posion(img):
     # 輸入背景黑色，物件白色的圖
     num_labels, labels, stats, _ = cv2.connectedComponentsWithStats(img, connectivity=8)
     components = []
     # boxes_data = []
-    for i in range(1, num_labels): # 跳過背景
+    for i in range(1, num_labels):  # 跳過背景
         x, y, w, h, _ = stats[i]
         components.append((x, y, w, h))
 
@@ -53,26 +54,29 @@ def read_posion(img):
             current_component[0] = min(current_component[0], components[i][0])  # X 取最小值
             current_component[1] = min(current_component[1], components[i][1])  # Y 取最小值
             current_component[2] = max(current_component[2], components[i][2])  # w 取最大值
-            current_component[3] = abs(components[i][1] - current_component[1]) + components[i][3] # h 取 Y2 - Y1 + H2
+            current_component[3] = (
+                abs(components[i][1] - current_component[1]) + components[i][3]
+            )  # h 取 Y2 - Y1 + H2
         else:
             merged_components.append(tuple(current_component[:4]))
             current_component = list(components[i][:4])
 
-    #合併最後一個OCR結果
+    # 合併最後一個OCR結果
     merged_components.append(tuple(current_component[:4]))
 
     return merged_components
 
-filename = 'data/captcha.png'
-    
+
+filename = "data/captcha.png"
+
 img = cv2.imread(filename)
 gray_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 box = read_posion(gray_img)
 
-for i,data in enumerate(box):
-    x,y,h,w = data
-    #印出OCR 位置，高寬
-    print(f'第{i}個OCR，x:{x},y:{y},h:{h},w:{w}')
+for i, data in enumerate(box):
+    x, y, h, w = data
+    # 印出OCR 位置，高寬
+    print(f"第{i}個OCR，x:{x},y:{y},h:{h},w:{w}")
 
 
 """
@@ -122,7 +126,7 @@ print("------------------------------------------------------------")  # 60個
 
 # OpenCV如何讀取特定時間區段？
 
-video_filename = 'C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4'
+video_filename = "C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4"
 
 # 影片捕捉物件
 cap = cv2.VideoCapture(video_filename)
@@ -153,12 +157,12 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-#[Python]使用NumPy 進行影像黑白反轉
+# [Python]使用NumPy 進行影像黑白反轉
 
 import cv2
 import numpy as np
 
-filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
 
 # 讀取影像（灰階模式）
 image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
@@ -167,8 +171,8 @@ image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
 inverted_image = 255 - image
 
 # 顯示原影像和反轉後的影像
-cv2.imshow('Original Image', image)
-cv2.imshow('Inverted Image', inverted_image)
+cv2.imshow("Original Image", image)
+cv2.imshow("Inverted Image", inverted_image)
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()
@@ -177,16 +181,10 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 
 
-
-
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
-
-
-
 
 
 print("------------------------------------------------------------")  # 60個

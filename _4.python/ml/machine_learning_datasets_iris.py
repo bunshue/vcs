@@ -1,4 +1,5 @@
 """
+Iris 鳶尾花
 Iris 鳶尾花數據庫 150筆資料 4個欄位 3種品種 每種50筆資料
 
 花萼長度(Sepal.Length)
@@ -31,7 +32,6 @@ Iris 鳶尾花數據庫 150筆資料 4個欄位 3種品種 每種50筆資料
 4. 花瓣寬度(Petal Width)：計算單位是公分。
 5. 類別(Class)：可分為Setosa，Versicolor和Virginica三個品種。
 
-
 """
 
 print("------------------------------------------------------------")  # 60個
@@ -60,7 +60,257 @@ print("------------------------------------------------------------")  # 60個
 import joblib
 from sklearn import datasets
 from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
 
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+filename = "data/iris_sample.csv"
+
+iris = pd.read_csv(filename)
+
+"""
+共有五個欄位：
+1. 花萼長度(Sepal Length)：計算單位是公分。
+2. 花萼寬度(Sepal Width)：計算單位是公分。
+3. 花瓣長度(Petal Length) ：計算單位是公分。
+4. 花瓣寬度(Petal Width)：計算單位是公分。
+5. 類別(Class)：可分為Setosa，Versicolor和Virginica三個品種。
+"""
+
+print("資料")
+print(iris)
+
+print("資料shape")
+print(iris.shape)
+
+print("資料.type")
+print(type(iris))
+
+print("size")
+print(np.unique(iris["花萼長度"].values).size)
+print()
+
+cccc = np.where(iris["類別"] == "versicolor", 1, 0)
+print("抓出versicolor :", cccc)
+print()
+
+color = ["r", "y", "b"]
+species = ["Setosa", "Versicolour", "Virginica"]
+Setosa = []
+Versicolour = []
+Virginica = []
+
+print(type(iris))
+print(len(iris))
+print(iris.shape)
+
+# sepal_length,sepal_width,petal_length,petal_width,species
+print(iris["花萼長度"])
+
+print(len(iris["花萼長度"]))
+
+print(iris["花萼長度"][0])
+
+# 不同种类保存为不同的列表
+for i in range(len(iris)):
+    if iris["類別"][i] == "setosa":
+        Setosa.append(1)
+        Versicolour.append(0)
+        Virginica.append(0)
+    elif iris["類別"][i] == "versicolor":
+        Setosa.append(0)
+        Versicolour.append(1)
+        Virginica.append(0)
+    elif iris["類別"][i] == "virginica":
+        Setosa.append(0)
+        Versicolour.append(0)
+        Virginica.append(1)
+
+print("Setosa :", Setosa)
+print("Versicolour :", Versicolour)
+print("Virginica :", Virginica)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+filename = "data/iris_sample.csv"
+
+iris = pd.read_csv(filename)
+"""
+#sepal_length, sepal_width, petal_length, petal_width, species
+共有五個欄位：
+1. 花萼長度(Sepal Length)：計算單位是公分。
+2. 花萼寬度(Sepal Width)：計算單位是公分。
+3. 花瓣長度(Petal Length) ：計算單位是公分。
+4. 花瓣寬度(Petal Width)：計算單位是公分。
+5. 類別(Class)：可分為Setosa，Versicolor和Virginica三個品種。
+"""
+
+# print('全部資料')
+# print(iris)
+
+print("資料.shape :", iris.shape)
+print("資料.type :", type(iris))
+print("資料.長度 :", len(iris))
+print("資料.head()")
+print(iris.head())
+
+print("花萼長度資料 :")
+print(iris["花萼長度"])
+print()
+print("花萼長度資料長度 :", len(iris["花萼長度"]))
+print("花萼長度資料之第 0 筆資料 :", iris["花萼長度"][0])
+
+print("花萼長度 不同的數字 size :", np.unique(iris["花萼長度"].values).size)
+print("花萼寬度 不同的數字 size :", np.unique(iris["花萼寬度"].values).size)
+print("花瓣長度 不同的數字 size :", np.unique(iris["花瓣長度"].values).size)
+print("花瓣寬度 不同的數字 size :", np.unique(iris["花瓣寬度"].values).size)
+print("花萼長度 :")
+print(iris["花萼長度"].values)
+print("花萼寬度 :")
+print(iris["花萼寬度"].values)
+print("花瓣長度 :")
+print(iris["花瓣長度"].values)
+print("花瓣寬度 :")
+print(iris["花瓣寬度"].values)
+
+class1 = np.where(iris["類別"] == "setosa", 1, 0)
+print("抓出versicolor :", class1)
+class2 = np.where(iris["類別"] == "versicolor", 1, 0)
+print("抓出versicolor :", class2)
+class3 = np.where(iris["類別"] == "virginica", 1, 0)
+print("抓出versicolor :", class3)
+
+Setosa = []
+Versicolour = []
+Virginica = []
+
+# 不同种类保存为不同的列表
+for i in range(len(iris)):
+    if iris["類別"][i] == "setosa":
+        Setosa.append(
+            (iris["花萼長度"][i], iris["花萼寬度"][i], iris["花瓣長度"][i], iris["花瓣寬度"][i])
+        )
+    elif iris["類別"][i] == "versicolor":
+        Versicolour.append(
+            (iris["花萼長度"][i], iris["花萼寬度"][i], iris["花瓣長度"][i], iris["花瓣寬度"][i])
+        )
+    elif iris["類別"][i] == "virginica":
+        Virginica.append(
+            (iris["花萼長度"][i], iris["花萼寬度"][i], iris["花瓣長度"][i], iris["花瓣寬度"][i])
+        )
+
+print("Setosa :", Setosa)
+print("Versicolour :", Versicolour)
+print("Virginica :", Virginica)
+
+plt.scatter(
+    x=np.array(Setosa)[:, 0],  # Setosa种类的花瓣的长度
+    y=np.array(Setosa)[:, 1],  # Setosa种类的花瓣的宽度
+    s=80,
+    c="red",
+    label="Setosa",
+)
+
+plt.scatter(
+    x=np.array(Versicolour)[:, 0],  # Versicolour种类的花瓣的长度
+    y=np.array(Versicolour)[:, 1],  # Versicolour种类的花瓣的宽度
+    s=50,
+    c="green",
+    label="Versicolour",
+)
+
+plt.scatter(
+    x=np.array(Virginica)[:, 0],  # Virginica种类的花瓣的长度
+    y=np.array(Virginica)[:, 1],  # Virginica种类的花瓣的宽度
+    s=20,
+    c="blue",
+    label="Virginica",
+)
+
+# 添加轴标签和标题
+plt.title("花瓣长度与宽度的关系", fontsize=20)
+plt.xlabel("花瓣的长度", fontsize=15)
+plt.ylabel("花瓣的宽度", fontsize=15)
+plt.legend(loc="best")  # 添加图例
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+"""
+import matplotlib as mpl
+
+# 获取图的坐标信息
+ax = plt.gca()
+# 设置日期的显示格式
+date_format = mpl.dates.DateFormatter("%m-%d")
+ax.xaxis.set_major_formatter(date_format)
+# 设置x轴显示多少个日期刻度
+# xlocator = mpl.ticker.LinearLocator(10)
+# 设置x轴每个刻度的间隔天数
+xlocator = mpl.ticker.MultipleLocator(7)
+ax.xaxis.set_major_locator(xlocator)
+# 为了避免x轴刻度标签的紧凑，将刻度标签旋转45度
+plt.xticks(rotation = 45)
+
+# 添加y轴标签
+plt.ylabel('人数')
+# 添加图形标题
+plt.title('每天微信文章阅读人数与人次趋势')
+# 添加图例
+plt.legend()
+# 显示图形
+plt.show()
+"""
+
+
+"""
+# 读入数据
+iris = pd.read_csv(r'F:\\python_Data_analysis_and_mining\\06\\iris.csv')
+print(iris.shape)
+# 绘制散点图
+plt.scatter(x = iris.Petal_Width, # 指定散点图的x轴数据
+y = iris.Petal_Length, # 指定散点图的y轴数据
+color = 'steelblue' # 指定散点图中点的颜色
+)
+# 添加x轴和y轴标签
+plt.xlabel('花瓣宽度')
+plt.ylabel('花瓣长度')
+# 添加标题
+plt.title('鸢尾花的花瓣宽度与长度关系')
+# 显示图形
+plt.show()
+
+# Pandas模块绘制散点图
+# 绘制散点图
+iris.plot(x = 'Petal_Width', y = 'Petal_Length', kind = 'scatter', title = '鸢尾花的花瓣宽度与长度关系')
+# 修改x轴和y轴标签
+plt.xlabel('花瓣宽度')
+plt.ylabel('花瓣长度')
+# 显示图形
+plt.show()
+
+# seaborn模块绘制分组散点图
+sns.lmplot(x = 'Petal_Width', # 指定x轴变量
+y = 'Petal_Length', # 指定y轴变量
+hue = 'Species', # 指定分组变量
+data = iris, # 指定绘图数据集
+legend_out = False, # 将图例呈现在图框内
+truncate = True # 根据实际的数据范围，对拟合线作截断操作
+)
+# 修改x轴和y轴标签
+plt.xlabel('花瓣宽度')
+plt.ylabel('花瓣长度')
+# 添加标题
+plt.title('鸢尾花的花瓣宽度与长度关系')
+# 显示图形
+plt.show()
+"""
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 iris = datasets.load_iris()
@@ -152,7 +402,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 from sklearn import preprocessing
-from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 
 iris = datasets.load_iris()
@@ -220,9 +469,10 @@ print(cc)
 # 指定X，並轉為 Numpy 陣列
 X = df.values
 
-# 資料分割
 # 訓練資料, 測試資料, 訓練目標, 測試目標
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)  # 8成訓練 2成測試
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+# 訓練組8成, 測試組2成
 
 # 查看陣列維度
 cc = X_train.shape, X_test.shape, y_train.shape, y_test.shape
@@ -296,7 +546,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 from sklearn import preprocessing
-from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 
 iris = datasets.load_iris()
@@ -426,9 +675,10 @@ print(cc)
 # 指定X，並轉為 Numpy 陣列
 X = df.values
 
-# 資料分割
 # 訓練資料, 測試資料, 訓練目標, 測試目標
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)  # 8成訓練 2成測試
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+# 訓練組8成, 測試組2成
 
 # 查看陣列維度
 cc = X_train.shape, X_test.shape, y_train.shape, y_test.shape
@@ -545,7 +795,6 @@ plt.ylabel("花瓣寬度(Petal Width)")
 print("------------------------------------------------------------")  # 60個
 
 from sklearn import neighbors
-from sklearn.model_selection import train_test_split
 
 iris = datasets.load_iris()
 
@@ -554,7 +803,10 @@ X.columns = ["sepal_length", "sepal_width", "petal_length", "petal_width"]
 target = pd.DataFrame(iris.target, columns=["target"])
 y = target["target"]
 
-XTrain, XTest, yTrain, yTest = train_test_split(X, y, test_size=0.33, random_state=1)
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+XTrain, XTest, yTrain, yTest = train_test_split(X, y, test_size=0.2)
+# 訓練組8成, 測試組2成
+
 k = 3
 
 knn = neighbors.KNeighborsClassifier(n_neighbors=k)
@@ -569,7 +821,6 @@ print(yTest.values)
 print("------------------------------------------------------------")  # 60個
 
 from sklearn import neighbors
-from sklearn.model_selection import train_test_split
 
 iris = datasets.load_iris()
 
@@ -578,7 +829,9 @@ X.columns = ["sepal_length", "sepal_width", "petal_length", "petal_width"]
 target = pd.DataFrame(iris.target, columns=["target"])
 y = target["target"]
 
-XTrain, XTest, yTrain, yTest = train_test_split(X, y, test_size=0.33, random_state=1)
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+XTrain, XTest, yTrain, yTest = train_test_split(X, y, test_size=0.2)
+# 訓練組8成, 測試組2成
 
 Ks = np.arange(1, round(0.2 * len(XTrain) + 1))
 accuracies = []
@@ -710,7 +963,6 @@ print(sm.confusion_matrix(y, pred_y))
 print("------------------------------------------------------------")  # 60個
 
 from sklearn import tree
-from sklearn.model_selection import train_test_split
 
 iris = datasets.load_iris()
 
@@ -718,7 +970,9 @@ X = pd.DataFrame(iris.data, columns=iris.feature_names)
 target = pd.DataFrame(iris.target, columns=["target"])
 y = target["target"]
 
-XTrain, XTest, yTrain, yTest = train_test_split(X, y, test_size=0.33, random_state=1)
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+XTrain, XTest, yTrain, yTest = train_test_split(X, y, test_size=0.2)
+# 訓練組8成, 測試組2成
 
 dtree = tree.DecisionTreeClassifier(max_depth=8)
 dtree.fit(XTrain, yTrain)
@@ -732,7 +986,6 @@ print(yTest.values)
 print("------------------------------------------------------------")  # 60個
 
 from sklearn import tree
-from sklearn.model_selection import train_test_split
 
 iris = datasets.load_iris()
 
@@ -740,7 +993,9 @@ X = pd.DataFrame(iris.data, columns=iris.feature_names)
 target = pd.DataFrame(iris.target, columns=["target"])
 y = target["target"]
 
-XTrain, XTest, yTrain, yTest = train_test_split(X, y, test_size=0.33, random_state=1)
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+XTrain, XTest, yTrain, yTest = train_test_split(X, y, test_size=0.2)
+# 訓練組8成, 測試組2成
 
 dtree = tree.DecisionTreeClassifier(max_depth=8)
 dtree.fit(XTrain, yTrain)
@@ -824,7 +1079,6 @@ print("------------------------------------------------------------")  # 60個
 
 # 決策樹 (decision tree)
 
-from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
 
 dx, dy = datasets.load_iris(return_X_y=True)
@@ -832,9 +1086,9 @@ dx, dy = datasets.load_iris(return_X_y=True)
 print(dx[0])
 print(dy[0])
 
-dx_train, dx_test, dy_train, dy_test = train_test_split(
-    dx, dy, test_size=0.2, random_state=0
-)
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+dx_train, dx_test, dy_train, dy_test = train_test_split(dx, dy, test_size=0.2)
+# 訓練組8成, 測試組2成
 
 tree = DecisionTreeClassifier()
 
@@ -850,14 +1104,13 @@ print("------------------------------------------------------------")  # 60個
 
 # 隨機森林 (random forest)
 
-from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 
 dx, dy = datasets.load_iris(return_X_y=True)
 
-dx_train, dx_test, dy_train, dy_test = train_test_split(
-    dx, dy, test_size=0.2, random_state=0
-)
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+dx_train, dx_test, dy_train, dy_test = train_test_split(dx, dy, test_size=0.2)
+# 訓練組8成, 測試組2成
 
 forest = RandomForestClassifier()
 
@@ -871,8 +1124,6 @@ print(forest.score(dx_test, dy_test))
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-from sklearn.model_selection import train_test_split
 
 iris = load_iris()
 
@@ -912,11 +1163,9 @@ y = iris.target
 X = x[:, 2:]  # 2~末 花瓣
 Y = y
 
-# 切分訓練及測試資料。
-# 用 80% 當訓練資料, 留 20% 看我們做得如何?
-x_train, x_test, y_train, y_test = train_test_split(
-    X, Y, test_size=0.2, random_state=87
-)
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size=0.2)
+# 訓練組8成, 測試組2成
 
 # 看一下整筆數據的分佈。
 plt.scatter(X[:, 0], X[:, 1], c=Y, cmap="Paired")
@@ -1132,7 +1381,10 @@ plt.scatter(X[:, 0], X[:, 1], c=y, cmap="Paired")
 
 # 看來好像真的會比較容易切開, 我們來試試是否真的這樣。先來分訓練和測試資料。
 
-x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+# 訓練組8成, 測試組2成
+
 # 再來進入標準程序。
 # step 1: 打造函數學習機
 
@@ -1163,8 +1415,6 @@ plt.scatter(X[:, 0], X[:, 1], c=y, cmap="Paired")
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-from sklearn.model_selection import train_test_split
-
 # 把鳶尾花的資料集讀進來
 
 iris = load_iris()
@@ -1177,13 +1427,13 @@ Y = iris.target
 # 分好訓練跟測試資料，再把「正確答案」的分佈畫一下做個確認
 
 X = X[:, :2]
-x_train, x_test, y_train, y_test = train_test_split(
-    X, Y, test_size=0.2, random_state=87
-)
+
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size=0.2)
+# 訓練組8成, 測試組2成
 
 plt.scatter(x_train[:, 0], x_train[:, 1], c=y_train)
-# plt.show()
-
+plt.show()
 
 # 設定一個 SVM 的函數學習機，把訓練資料放進去 train
 
@@ -1281,14 +1531,17 @@ plt.scatter(X[:, 0], X[:, 1], c=clf.labels_)
 
 # 跟前面 SVM 的結果好像還真的有點像
 from sklearn.svm import SVC
-from sklearn.model_selection import train_test_split
 
 X_SVM = X[:, :2]
-x_train, x_test, y_train, y_test = train_test_split(
-    X_SVM, Y, test_size=0.2, random_state=87
-)
+
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+x_train, x_test, y_train, y_test = train_test_split(X_SVM, Y, test_size=0.2)
+# 訓練組8成, 測試組2成
+
 clf = SVC()
+
 clf.fit(x_train, y_train)
+
 y_predict = clf.predict(x_test)
 
 plt.scatter(x_test[:, 0], x_test[:, 1], c=y_predict)
@@ -1342,9 +1595,9 @@ y = iris.target
 X = x[:, :2]
 Y = y
 
-from sklearn.model_selection import train_test_split
-
-x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size=0.2, random_state=0)
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size=0.2)
+# 訓練組8成, 測試組2成
 
 plt.scatter(X[:, 0], X[:, 1], c=Y, cmap="Paired")
 plt.title("原始資料")
@@ -1389,7 +1642,9 @@ X = pca.transform(x)
 plt.scatter(X[:, 0], X[:, 1], c=y, cmap="Paired")
 # plt.show()
 
-x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+# 訓練組8成, 測試組2成
 
 clf = SVC(gamma="scale")
 
@@ -1528,20 +1783,23 @@ print(Y_target)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.preprocessing import StandardScaler
 
 iris = load_iris()
-x_train, x_test, y_train, y_test = train_test_split(
-    iris.data, iris.target, test_size=0.2
-)
+
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+x_train, x_test, y_train, y_test = train_test_split(iris.data, iris.target, test_size=0.2)
+# 訓練組8成, 測試組2成
 
 std = StandardScaler()
+
 x_train = std.fit_transform(x_train)
+
 x_test = std.transform(x_test)
 
 knn = KNeighborsClassifier(n_neighbors=5)
+
 knn.fit(x_train, y_train)
 
 print("將 模型存檔 使用 joblib")
@@ -1549,15 +1807,18 @@ joblib.dump(knn, "tmp_my_model_iris.joblib")
 
 print("------------------------------")  # 60個
 
-from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 
 iris = load_iris()
-x_train, x_test, y_train, y_test = train_test_split(
-    iris.data, iris.target, test_size=0.2
-)
+
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+x_train, x_test, y_train, y_test = train_test_split(iris.data, iris.target, test_size=0.2)
+# 訓練組8成, 測試組2成
+
 std = StandardScaler()
+
 x_train = std.fit_transform(x_train)
+
 x_test = std.transform(x_test)
 
 print("讀取模型")
@@ -1570,14 +1831,20 @@ print("------------------------------------------------------------")  # 60個
 
 iris = load_iris()
 
-x_train, x_test, y_train, y_test = train_test_split(
-    iris.data, iris.target, test_size=0.2
-)
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+x_train, x_test, y_train, y_test = train_test_split(iris.data, iris.target, test_size=0.2)
+# 訓練組8成, 測試組2成
+
 std = StandardScaler()
+
 x_train = std.fit_transform(x_train)
+
 x_test = std.transform(x_test)
+
 knn = KNeighborsClassifier(n_neighbors=5)
+
 knn.fit(x_train, y_train)
+
 y_predict = knn.predict(x_test)
 print("預測結果：{}".format(y_predict))
 print("準確率：{}".format(knn.score(x_test, y_test)))
@@ -1599,8 +1866,6 @@ print("------------------------------------------------------------")  # 60個
 print("數學方法降維")
 
 from sklearn.decomposition import PCA
-from sklearn import datasets
-import seaborn as sns
 
 iris = datasets.load_iris()
 data = pd.DataFrame(iris.data, columns=["SpealLen", "SpealWid", "PetalLen", "PetalWid"])
@@ -1631,15 +1896,19 @@ plt.scatter(data1[:, 0], data1[:, 1], c=np.array(iris.target), cmap=plt.cm.coppe
 print("------------------------------------------------------------")  # 60個
 
 from sklearn import svm
-from sklearn.model_selection import train_test_split
 
 iris = load_iris()
 
 X = iris.data  # 獲取自變量
 y = iris.target  # 獲取因變量
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
+
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+# 訓練組8成, 測試組2成
+
 clf = svm.SVC(C=0.8, kernel="rbf", gamma=1)  # 高斯核，鬆弛度0.8
 # clf = svm.SVC(C=0.5, kernel='linear') # 線性核，鬆弛度0.5
+
 clf.fit(X_train, y_train.ravel())
 
 print("trian pred:%.3f" % (clf.score(X_train, y_train)))  # 對訓練集打分
@@ -1657,7 +1926,6 @@ print("------------------------------------------------------------")  # 60個
 
 print("決策樹")
 
-from sklearn.model_selection import train_test_split  # 切分數據集工具
 from sklearn import tree  # 決策樹工具
 import pydotplus  # 做圖工具
 import io
@@ -1665,10 +1933,17 @@ import io
 iris = load_iris()
 X = iris.data  # 獲取自變量
 y = iris.target  # 獲取因變量
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
+
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+# 訓練組8成, 測試組2成
+
 clf = tree.DecisionTreeClassifier(max_depth=5)
+
 clf.fit(X_train, y_train)  # 訓練模型
+
 print("score:", clf.score(X_test, y_test))  # 模型打分
+
 # 生成決策樹圖片
 dot_data = io.StringIO()
 tree.export_graphviz(
@@ -1689,14 +1964,15 @@ print("------------------------------------------------------------")  # 60個
 
 print("切分數據集與交叉驗證")
 
-from sklearn.model_selection import train_test_split
-
 iris = load_iris()
 X = iris.data
 y = iris.target
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.3, random_state=10
-)
+
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+# 訓練組8成, 測試組2成
+
+# ????
 X_train, X_test = train_test_split(X, test_size=0.3, random_state=10)
 
 print("------------------------------------------------------------")  # 60個
@@ -1704,13 +1980,15 @@ print("------------------------------------------------------------")  # 60個
 
 """ some fail
 from sklearn.cross_validation import KFold
-from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 from sklearn.svm import SVC
 
 iris = load_iris()
-X_train,X_test,y_train,y_test=train_test_split(iris.data,iris.target,
-                                               test_size=0.3,random_state=10)
+
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+X_train, X_test, y_train, y_test = train_test_split(iris.data, iris.target, test_size=0.3)
+# 訓練組8成, 測試組2成
+
 num = 5 # 5折交叉驗證
 train_preds = np.zeros(X_train.shape[0]) # 用於保存預測結果
 test_preds = np.zeros((X_test.shape[0], num))
@@ -1794,19 +2072,17 @@ print('best:',best)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-from sklearn.model_selection import train_test_split
-
 iris = load_iris()
 print("原始_特徵：{}, 原始_目標：{}".format(iris.data.shape, iris.target.shape))
-x_train, x_test, y_train, y_test = train_test_split(
-    iris.data, iris.target, test_size=0.2
-)
+
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+x_train, x_test, y_train, y_test = train_test_split(iris.data, iris.target, test_size=0.2)
+# 訓練組8成, 測試組2成
+
 print("訓練_特徵：{}, 訓練_目標：{}".format(x_train.shape, y_train.shape))
 print("測試_特徵：{}, 測試_目標：{}".format(x_test.shape, y_test.shape))
 
 print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
 
 

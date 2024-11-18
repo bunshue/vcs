@@ -78,6 +78,7 @@ def process(image):
             cv2.circle(image, (int(int(x) + 200), int(y)), 10, (0, 255, 255))
     return image
 
+
 """
 video_filename = "C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4"
 #video_filename = "D:/內視鏡影片/_ims影片2/180824-1025.mp4"

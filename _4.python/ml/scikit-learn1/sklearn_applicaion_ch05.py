@@ -3,8 +3,6 @@ Scikit-learn 詳解與企業應用_機器學習最佳入門與實戰
 
 """
 
-from sklearn import datasets
-
 print("------------------------------------------------------------")  # 60個
 
 # 共同
@@ -28,10 +26,13 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
+import sklearn.linear_model
+from sklearn import datasets
+from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
+'''
 # 類別變數編碼
 # 測試資料
 
@@ -290,7 +291,6 @@ print("------------------------------------------------------------")  # 60個
 # SelectFromModel
 
 from sklearn.preprocessing import StandardScaler
-from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 from sklearn.feature_selection import SelectFromModel
 from sklearn.svm import SVC
@@ -336,18 +336,14 @@ X_train_std = scaler.fit_transform(X_train)
 X_test_std = scaler.transform(X_test)
 
 # 5. 選擇演算法
-
 from sklearn.linear_model import LogisticRegression
 
 clf = LogisticRegression()
 
-# 6. 模型訓練
-
-clf.fit(X_train_std, y_train)
+clf.fit(X_train_std, y_train)  # 學習訓練.fit
 
 # 7. 模型計分
-
-y_pred = clf.predict(X_test_std)
+y_pred = clf.predict(X_test_std)  # 預測.predict
 print(y_pred)
 
 print("計算準確率")
@@ -387,15 +383,14 @@ X_test_std = scaler.transform(X_test)
 from sklearn.linear_model import LogisticRegression
 
 clf = LogisticRegression()
-clf.fit(X_train_std, y_train)
+
+clf.fit(X_train_std, y_train)  # 學習訓練.fit
 
 print("模型計分")
-y_pred = clf.predict(X_test_std)
+y_pred = clf.predict(X_test_std)  # 預測.predict
 print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
 
 # 93.33%
-
-sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -403,7 +398,6 @@ print("------------------------------------------------------------")  # 60個
 # 順序特徵選取(Sequential Feature Selection)
 
 from sklearn.preprocessing import StandardScaler
-from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 from sklearn.feature_selection import SequentialFeatureSelector
 from sklearn.svm import SVC
@@ -450,13 +444,10 @@ from sklearn.linear_model import LogisticRegression
 
 clf = LogisticRegression()
 
-# 6. 模型訓練
-
-clf.fit(X_train_std, y_train)
+clf.fit(X_train_std, y_train)  # 學習訓練.fit
 
 # 7. 模型計分
-
-y_pred = clf.predict(X_test_std)
+y_pred = clf.predict(X_test_std)  # 預測.predict
 print(y_pred)
 
 # 計算準確率
@@ -495,10 +486,11 @@ X_test_std = scaler.transform(X_test)
 from sklearn.linear_model import LogisticRegression
 
 clf = LogisticRegression()
-clf.fit(X_train_std, y_train)
+
+clf.fit(X_train_std, y_train)  # 學習訓練.fit
 
 # 模型計分
-y_pred = clf.predict(X_test_std)
+y_pred = clf.predict(X_test_std)  # 預測.predict
 print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
 
 # (120, 4) (30, 4) (120,) (30,)
@@ -694,13 +686,10 @@ cc = df.head()
 print(cc)
 
 # 2. 資料清理、資料探索與分析
-
 # 資料集說明
 # print(ds.DESCR)
 
 # 3. 資料分割
-
-from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 
 # 指定X、Y
@@ -756,14 +745,11 @@ from sklearn.linear_model import LogisticRegression
 
 clf = LogisticRegression()
 
-# 6. 模型訓練
-
-clf.fit(X_train_pca, y_train)
+clf.fit(X_train_pca, y_train)  # 學習訓練.fit
 
 # 7. 模型計分
-
 # 計算準確率
-y_pred = clf.predict(X_test_pca)
+y_pred = clf.predict(X_test_pca)  # 預測.predict
 print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
 
 # 100.00%
@@ -785,7 +771,7 @@ def plot_decision_regions(X, y, classifier, resolution=0.02):
     xx1, xx2 = np.meshgrid(
         np.arange(x1_min, x1_max, resolution), np.arange(x2_min, x2_max, resolution)
     )
-    Z = classifier.predict(np.array([xx1.ravel(), xx2.ravel()]).T)
+    Z = classifier.predict(np.array([xx1.ravel(), xx2.ravel()]).T)  # 預測.predict
     Z = Z.reshape(xx1.shape)
     plt.contourf(xx1, xx2, Z, alpha=0.4, cmap=cmap)
     plt.xlim(xx1.min(), xx1.max())
@@ -827,14 +813,14 @@ scaler = StandardScaler()
 X_train_std = scaler.fit_transform(X_train)
 X_test_std = scaler.transform(X_test)
 
-# 模型訓練
 from sklearn.linear_model import LogisticRegression
 
 clf = LogisticRegression()
-clf.fit(X_train_std, y_train)
+
+clf.fit(X_train_std, y_train)  # 學習訓練.fit
 
 # 模型計分
-y_pred = clf.predict(X_test_std)
+y_pred = clf.predict(X_test_std)  # 預測.predict
 print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
 
 # (142, 13) (36, 13) (142,) (36,)
@@ -857,8 +843,6 @@ print(cc)
 # print(ds.DESCR)
 
 # 3. 資料分割
-
-from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 
 # 指定X、Y
@@ -896,14 +880,11 @@ from sklearn.linear_model import LogisticRegression
 
 clf = LogisticRegression()
 
-# 6. 模型訓練
-
-clf.fit(X_train_pca, y_train)
+clf.fit(X_train_pca, y_train)  # 學習訓練.fit
 
 # 7. 模型計分
-
 # 計算準確率
-y_pred = clf.predict(X_test_pca)
+y_pred = clf.predict(X_test_pca)  # 預測.predict
 print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
 
 # 97.22%
@@ -925,7 +906,7 @@ def plot_decision_regions(X, y, classifier, resolution=0.02):
     xx1, xx2 = np.meshgrid(
         np.arange(x1_min, x1_max, resolution), np.arange(x2_min, x2_max, resolution)
     )
-    Z = classifier.predict(np.array([xx1.ravel(), xx2.ravel()]).T)
+    Z = classifier.predict(np.array([xx1.ravel(), xx2.ravel()]).T)  # 預測.predict
     Z = Z.reshape(xx1.shape)
     plt.contourf(xx1, xx2, Z, alpha=0.4, cmap=cmap)
     plt.xlim(xx1.min(), xx1.max())
@@ -971,10 +952,11 @@ X_test_std = scaler.transform(X_test)
 from sklearn.linear_model import LogisticRegression
 
 clf = LogisticRegression()
-clf.fit(X_train_std, y_train)
+
+clf.fit(X_train_std, y_train)  # 學習訓練.fit
 
 # 模型計分
-y_pred = clf.predict(X_test_std)
+y_pred = clf.predict(X_test_std)  # 預測.predict
 print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
 
 # (142, 13) (36, 13) (142,) (36,)
@@ -1022,8 +1004,6 @@ print(cc)
 # print(ds.DESCR)
 
 # 3. 資料分割
-
-from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 
 # 指定X、Y
@@ -1104,19 +1084,16 @@ cc = X_train_pca.shape, X_test_pca.shape
 print(cc)
 
 # 5. 選擇演算法
-
 from sklearn.linear_model import LogisticRegression
 
 clf = LogisticRegression()
 
 # 6. 模型訓練
-
-clf.fit(X_train_pca, y_train)
+clf.fit(X_train_pca, y_train)  # 學習訓練.fit
 
 # 7. 模型計分
-
 # 計算準確率
-y_pred = clf.predict(X_test_pca)
+y_pred = clf.predict(X_test_pca)  # 預測.predict
 print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
 
 # 繪製決策邊界(Decision regions)
@@ -1136,7 +1113,7 @@ def plot_decision_regions(X, y, classifier, resolution=0.02):
     xx1, xx2 = np.meshgrid(
         np.arange(x1_min, x1_max, resolution), np.arange(x2_min, x2_max, resolution)
     )
-    Z = classifier.predict(np.array([xx1.ravel(), xx2.ravel()]).T)
+    Z = classifier.predict(np.array([xx1.ravel(), xx2.ravel()]).T)  # 預測.predict
     Z = Z.reshape(xx1.shape)
     plt.contourf(xx1, xx2, Z, alpha=0.4, cmap=cmap)
     plt.xlim(xx1.min(), xx1.max())
@@ -1182,10 +1159,11 @@ X_test_std = scaler.transform(X_test)
 from sklearn.linear_model import LogisticRegression
 
 clf = LogisticRegression()
-clf.fit(X_train_std, y_train)
+
+clf.fit(X_train_std, y_train)  # 學習訓練.fit
 
 # 模型計分
-y_pred = clf.predict(X_test_std)
+y_pred = clf.predict(X_test_std)  # 預測.predict
 print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
 
 # (142, 13) (36, 13) (142,) (36,)
@@ -1208,8 +1186,6 @@ print(cc)
 # print(ds.DESCR)
 
 # 3. 資料分割
-
-from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 
 # 指定X、Y
@@ -1242,19 +1218,17 @@ cc = X_train_lda.shape, X_test_lda.shape, lda.explained_variance_ratio_
 print(cc)
 
 # 5. 選擇演算法
-
 from sklearn.linear_model import LogisticRegression
 
 clf = LogisticRegression()
 
 # 6. 模型訓練
-
-clf.fit(X_train_lda, y_train)
+clf.fit(X_train_lda, y_train)  # 學習訓練.fit
 
 # 7. 模型計分
 
 # 計算準確率
-y_pred = clf.predict(X_test_lda)
+y_pred = clf.predict(X_test_lda)  # 預測.predict
 print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
 
 # 100.00%
@@ -1276,7 +1250,7 @@ def plot_decision_regions(X, y, classifier, resolution=0.02):
     xx1, xx2 = np.meshgrid(
         np.arange(x1_min, x1_max, resolution), np.arange(x2_min, x2_max, resolution)
     )
-    Z = classifier.predict(np.array([xx1.ravel(), xx2.ravel()]).T)
+    Z = classifier.predict(np.array([xx1.ravel(), xx2.ravel()]).T)  # 預測.predict
     Z = Z.reshape(xx1.shape)
     plt.contourf(xx1, xx2, Z, alpha=0.4, cmap=cmap)
     plt.xlim(xx1.min(), xx1.max())
@@ -1322,10 +1296,11 @@ X_test_std = scaler.transform(X_test)
 from sklearn.linear_model import LogisticRegression
 
 clf = LogisticRegression()
-clf.fit(X_train_std, y_train)
+
+clf.fit(X_train_std, y_train)  # 學習訓練.fit
 
 # 模型計分
-y_pred = clf.predict(X_test_std)
+y_pred = clf.predict(X_test_std)  # 預測.predict
 print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
 
 # (142, 13) (36, 13) (142,) (36,)
@@ -1337,9 +1312,7 @@ print("------------------------------------------------------------")  # 60個
 # Scikit-learn LDA實作
 
 # 載入資料
-
 from sklearn.datasets import make_circles
-from sklearn.model_selection import train_test_split
 
 X, y = make_circles(n_samples=1_000, factor=0.3, noise=0.05, random_state=0)
 
@@ -1367,7 +1340,7 @@ kernel_pca = KernelPCA(
     n_components=None, kernel="rbf", gamma=10, fit_inverse_transform=True, alpha=0.1
 )
 
-X_test_pca = pca.fit(X_train).transform(X_test)
+X_test_pca = pca.fit(X_train).transform(X_test)  # 學習訓練.fit
 
 # 繪製原始測試資料及經PCA轉換後的新資料
 
@@ -1394,7 +1367,7 @@ kernel_pca = KernelPCA(
     n_components=None, kernel="rbf", gamma=10, fit_inverse_transform=True, alpha=0.1
 )
 
-X_test_kernel_pca = kernel_pca.fit(X_train).transform(X_test)
+X_test_kernel_pca = kernel_pca.fit(X_train).transform(X_test)  # 學習訓練.fit
 
 fig, (orig_data_ax, kernel_pca_proj_ax) = plt.subplots(ncols=2, figsize=(10, 4))
 
@@ -1412,7 +1385,6 @@ plt.show()
 # 載入上/下弦月資料
 
 from sklearn.datasets import make_moons
-from sklearn.model_selection import train_test_split
 
 # X, y = make_moons(n_samples=1_000, noise=0.05, random_state=0)
 X, y = make_moons(n_samples=1000, random_state=123)
@@ -1439,7 +1411,7 @@ kernel_pca = KernelPCA(
     n_components=None, kernel="rbf", gamma=10, fit_inverse_transform=True, alpha=0.1
 )
 
-X_test_pca = pca.fit(X_train).transform(X_test)
+X_test_pca = pca.fit(X_train).transform(X_test)  # 學習訓練.fit
 
 fig, (orig_data_ax, pca_proj_ax) = plt.subplots(ncols=2, figsize=(10, 4))
 
@@ -1462,7 +1434,7 @@ from sklearn.decomposition import KernelPCA
 
 kernel_pca = KernelPCA(n_components=None, kernel="rbf", gamma=15)
 
-X_test_kernel_pca = kernel_pca.fit(X_train).transform(X_test)
+X_test_kernel_pca = kernel_pca.fit(X_train).transform(X_test)  # 學習訓練.fit
 
 fig, (orig_data_ax, kernel_pca_proj_ax) = plt.subplots(ncols=2, figsize=(10, 4))
 
@@ -1486,7 +1458,6 @@ print("------------------------------------------------------------")  # 60個
 
 from sklearn.datasets import fetch_openml
 from sklearn.preprocessing import MinMaxScaler
-from sklearn.model_selection import train_test_split
 
 # 載入資料
 
@@ -1535,8 +1506,9 @@ kernel_pca = KernelPCA(
     n_components=400, kernel="rbf", gamma=1e-3, fit_inverse_transform=True, alpha=5e-3
 )
 
-pca.fit(X_train_noisy)
-_ = kernel_pca.fit(X_train_noisy)
+pca.fit(X_train_noisy)  # 學習訓練.fit
+
+_ = kernel_pca.fit(X_train_noisy)  # 學習訓練.fit
 
 # 使用 inverse_transform 重建影像
 
@@ -1926,25 +1898,21 @@ for i in tfidf_matrix.toarray()[0]:
 print(no)
 
 # 資料分割
-
-from sklearn.model_selection import train_test_split
-
 X_train, X_test, y_train, y_test = train_test_split(
     tfidf_matrix.toarray(), labels, test_size=0.2
 )
 
-# 模型訓練
-
 from sklearn.linear_model import LogisticRegression
 
 clf = LogisticRegression()
-clf.fit(X_train, y_train)
+
+clf.fit(X_train, y_train)  # 學習訓練.fit
 
 # 模型評分
 
 from sklearn.metrics import accuracy_score
 
-y_pred = clf.predict(X_test)
+y_pred = clf.predict(X_test)  # 預測.predict
 cc = accuracy_score(y_pred, y_test)
 print(cc)
 
@@ -1969,14 +1937,13 @@ message_processed_list = (
     "Free entry in 2 a wkly comp to win FA Cup final tkts 21st May 2005. Text FA to 87121 to receive entry question(std txt rate)T&C's apply 08452810075over18's",
 )
 X_new = tfidf_vectorizer.transform(message_processed_list)
-cc = clf.predict(X_new.toarray())
+cc = clf.predict(X_new.toarray())  # 預測.predict
 print(cc)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-# 簡單線性迴歸
-# linear_regression
+'''
+# 線性迴歸
 
 # OLS 公式
 # y = wx + b
@@ -2001,15 +1968,15 @@ print(f"w={coef[0]}, b={coef[1]}")
 
 # w=0.061159358661554586, b=-116.35631056117121
 
-# 使用Scikit-Learn LinearRegression類別驗算
-
-from sklearn.linear_model import LinearRegression
+print("使用sklearn的 線性迴歸 LinearRegression()")
 
 X, y = df[["year"]].values, df["pop"].values
 
-lr = LinearRegression()
-lr.fit(X, y)
-cc = lr.coef_, lr.intercept_
+linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
+
+linear_regression.fit(X, y)  # 學習訓練.fit
+
+cc = linear_regression.coef_, linear_regression.intercept_
 print(cc)
 
 # (array([0.06115936]), -116.3563105611711)
@@ -2021,8 +1988,6 @@ print(2050 * coef[0] + coef[1])
 # 9.02037469501569
 
 print("使用矩陣計算")
-
-import numpy as np
 
 X = df[["year"]].values
 
@@ -2072,14 +2037,13 @@ X2 = np.concatenate((X, one), axis=1)
 w = np.linalg.inv(X2.T @ X2) @ X2.T @ y
 print(w)
 
-print("以Scikit-Learn的線性迴歸驗證")
+print("使用sklearn的 線性迴歸 LinearRegression()")
 
-from sklearn.linear_model import LinearRegression
+linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
 
-lr = LinearRegression()
-lr.fit(X, y)
+linear_regression.fit(X, y)  # 學習訓練.fit
 
-print(lr.coef_, lr.intercept_)
+print(linear_regression.coef_, linear_regression.intercept_)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -2089,11 +2053,7 @@ print("------------------------------------------------------------")  # 60個
 # 房價預測
 
 from sklearn.preprocessing import StandardScaler
-from sklearn.model_selection import train_test_split
 from sklearn.metrics import r2_score, mean_squared_error, mean_absolute_error
-import matplotlib.pyplot as plt
-import numpy as np
-import pandas as pd
 
 # 載入 Boston 房價資料集
 
@@ -2127,8 +2087,6 @@ cc = df.isnull().sum()
 print(cc)
 
 # 直方圖
-import seaborn as sns
-
 X, y = df.drop("MEDV", axis=1).values, df.MEDV.values
 sns.histplot(x=y)
 plt.show()
@@ -2150,29 +2108,23 @@ scaler = StandardScaler()
 X_train_std = scaler.fit_transform(X_train)
 X_test_std = scaler.transform(X_test)
 
-# 5. 選擇演算法
+linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
 
-from sklearn.linear_model import LinearRegression
-
-model = LinearRegression()
-
-# 6. 模型訓練
-
-model.fit(X_train_std, y_train)
+linear_regression.fit(X_train_std, y_train)  # 學習訓練.fit
 
 # 7. 模型評分
 
 # R2、MSE、MAE
-y_pred = model.predict(X_test_std)
+y_pred = linear_regression.predict(X_test_std)  # 預測.predict
 print(f"R2 = {r2_score(y_test, y_pred)*100:.2f}")
 print(f"MSE = {mean_squared_error(y_test, y_pred)}")
 print(f"MAE = {mean_absolute_error(y_test, y_pred)}")
 
 print("權重")
-print(model.coef_)
+print(linear_regression.coef_)
 
 print("偏差(Bias)")
-print(model.intercept_)
+print(linear_regression.intercept_)
 
 # 8. 模型評估，暫不進行
 
@@ -2181,16 +2133,16 @@ print(model.intercept_)
 # 模型存檔
 import joblib
 
-joblib.dump(model, "tmp_lr_model.joblib")
-joblib.dump(scaler, "tmp_lr_scaler.joblib")
+joblib.dump(linear_regression, "tmp_linear_regression_model.joblib")
+joblib.dump(scaler, "tmp_linear_regression_scaler.joblib")
 
 # 10.模型預測
 
 import joblib
 
 # 載入模型與標準化轉換模型
-model = joblib.load("tmp_lr_model.joblib")
-scaler = joblib.load("tmp_lr_scaler.joblib")
+linear_regression2 = joblib.load("tmp_linear_regression_model.joblib")
+scaler = joblib.load("tmp_linear_regression_scaler.joblib")
 
 list1 = [0 for _ in range(13)]
 
@@ -2211,7 +2163,7 @@ list1[12] = 12.0  # 低下階級的比例
 X_new = [list1]
 X_new = scaler.transform(X_new)
 
-print(f"### 預測房價：{model.predict(X_new)[0]:.2f}")
+print(f"### 預測房價：{linear_regression2.predict(X_new)[0]:.2f}")  # 預測.predict
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -2219,9 +2171,6 @@ print("------------------------------------------------------------")  # 60個
 # 05_04_nonlinear_regression.ipynb
 
 # 以二次迴歸預測世界人口數
-
-import numpy as np
-import pandas as pd
 
 # 載入資料集
 
@@ -2232,12 +2181,7 @@ X, y = df[["year"]].values, df["pop"].values
 
 coef = np.polyfit(X.reshape(-1), y, deg=2)
 print(f"y={coef[0]} X^2 + {coef[1]} X + {coef[2]}")
-
 # y=-0.0002668845596210234 X^2 + 1.1420418251266993 X + -1210.2427271938489
-
-# 繪圖
-
-import matplotlib.pyplot as plt
 
 plt.figure(figsize=(8, 6))
 plt.rcParams["font.sans-serif"] = ["Arial Unicode MS"]
@@ -2270,20 +2214,20 @@ print(cc)
 
 # (151, 2)
 
-# 使用Scikit-Learn LinearRegression類別驗算
+print("使用sklearn的 線性迴歸 LinearRegression()")
 
-from sklearn.linear_model import LinearRegression
+linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
 
-lr = LinearRegression()
-lr.fit(X_new, y)
-cc = lr.coef_, lr.intercept_
+linear_regression.fit(X_new, y)  # 學習訓練.fit
+
+cc = linear_regression.coef_, linear_regression.intercept_
 print(cc)
 
 # (array([-2.66884560e-04,  1.14204183e+00]), -1210.242727194026)
 
 print("使用公式預測2050年人口數")
 
-print((2050**2) * lr.coef_[0] + 2050 * lr.coef_[1] + lr.intercept_)
+print((2050**2) * linear_regression.coef_[0] + 2050 * linear_regression.coef_[1] + linear_regression.intercept_)
 
 # 9.36065250853244
 
@@ -2339,13 +2283,11 @@ scaler = StandardScaler()
 X_train_std = scaler.fit_transform(X_train)
 X_test_std = scaler.transform(X_test)
 
-# 模型訓練
+linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
 
-from sklearn.linear_model import LinearRegression
+linear_regression.fit(X_train_std, y_train)  # 學習訓練.fit
 
-lr = LinearRegression()
-lr.fit(X_train_std, y_train)
-cc = lr.coef_, lr.intercept_
+cc = linear_regression.coef_, linear_regression.intercept_
 print(cc)
 
 # 模型評分
@@ -2353,7 +2295,7 @@ print(cc)
 from sklearn.metrics import r2_score, mean_squared_error, mean_absolute_error
 
 # R2、MSE、MAE
-y_pred = lr.predict(X_test_std)
+y_pred = linear_regression.predict(X_test_std)  # 預測.predict
 print(f"R2 = {r2_score(y_test, y_pred)*100:.2f}")
 print(f"MSE = {mean_squared_error(y_test, y_pred)}")
 print(f"MAE = {mean_absolute_error(y_test, y_pred)}")
@@ -2370,10 +2312,11 @@ scaler = StandardScaler()
 X_train_std = scaler.fit_transform(X_train)
 X_test_std = scaler.transform(X_test)
 
-lr = LinearRegression()
-lr.fit(X_train_std, y_train)
+linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
 
-y_pred = lr.predict(X_test_std)
+linear_regression.fit(X_train_std, y_train)  # 學習訓練.fit
+
+y_pred = linear_regression.predict(X_test_std)  # 預測.predict
 print(f"R2 = {r2_score(y_test, y_pred)*100:.2f}")
 print(f"MSE = {mean_squared_error(y_test, y_pred)}")
 print(f"MAE = {mean_absolute_error(y_test, y_pred)}")
@@ -2398,13 +2341,11 @@ plt.scatter(X, y, color="blue", alpha=0.5)
 plt.title("測試資料")
 plt.show()
 
-# 模型訓練
+linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
 
-from sklearn.linear_model import LinearRegression
+linear_regression.fit(X, y)  # 學習訓練.fit
 
-lr = LinearRegression()
-lr.fit(X, y)
-cc = lr.coef_, lr.intercept_
+cc = linear_regression.coef_, linear_regression.intercept_
 print(cc)
 
 print("製造離群值")
@@ -2414,42 +2355,29 @@ print(y[0])
 # 製造離群值
 y[0] += 2000
 
-# 模型訓練
+linear_regression2 = sklearn.linear_model.LinearRegression()  # 函數學習機
 
-from sklearn.linear_model import LinearRegression
+linear_regression2.fit(X, y)  # 學習訓練.fit
 
-lr2 = LinearRegression()
-lr2.fit(X, y)
-cc = lr2.coef_, lr2.intercept_
+cc = linear_regression2.coef_, linear_regression2.intercept_
 print(cc)
-
-# 繪圖比較
-
-from matplotlib import pyplot as plt
-import numpy as np
 
 fig = plt.figure(figsize=(8, 8))
 plt.scatter(X, y, color="blue", alpha=0.5)
 
 line_X = np.array([-3, 3])
-plt.plot(line_X, line_X * lr.coef_ + lr.intercept_, c="green", label="原迴歸線")
-plt.plot(line_X, line_X * lr2.coef_ + lr2.intercept_, c="red", label="新迴歸線")
+plt.plot(line_X, line_X * linear_regression.coef_ + linear_regression.intercept_, c="green", label="原迴歸線")
+plt.plot(line_X, line_X * linear_regression2.coef_ + linear_regression2.intercept_, c="red", label="新迴歸線")
 plt.title("測試資料")
 plt.legend()
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
+'''
 # 05_07_regression_vs_time_series
 
 # 迴歸(Regression)與時間序列(Time Series) 比較
-
-import os
-import numpy as np
-from matplotlib import pyplot as plt
-import seaborn as sns
-import pandas as pd
 
 # 載入資料集
 
@@ -2478,15 +2406,17 @@ plt.show()
 
 # 迴歸(Regression)
 
-from sklearn.linear_model import LinearRegression
 from sklearn.metrics import r2_score, mean_squared_error
 
-lr = LinearRegression()
+linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
+
 # X = df.index.astype(str).map(lambda x:x[:4]+x[5:7]).values.reshape(df.shape[0], -1)
 X = np.arange(df.shape[0]).reshape(-1, 1)
 y = df["Passengers"]
-lr.fit(X, y)
-pred = lr.predict(X)
+
+linear_regression.fit(X, y)  # 學習訓練.fit
+
+pred = linear_regression.predict(X)  # 預測.predict
 print("MSE =", mean_squared_error(y, pred))
 
 # MSE = 2091.7994339346533
@@ -2543,7 +2473,8 @@ series = df.copy()
 
 # AR(1) 模型訓練
 ar = ARIMA(df, order=(1, 0, 0))
-model = ar.fit()
+
+model = ar.fit()  # 學習訓練.fit
 
 print("檢視神經網路")
 model.summary()  # 檢視神經網路
@@ -2571,8 +2502,7 @@ print(f"AR MSE = {(np.sum(model.resid**2) / len(model.resid)):.2f}")
 # AR MSE = 1301.63
 
 # 使用迴歸驗證
-
-lr2 = LinearRegression()
+linear_regression2 = sklearn.linear_model.LinearRegression()  # 函數學習機
 
 # 複製資料
 series2 = series.copy()
@@ -2582,15 +2512,15 @@ series2["Passengers_1"] = series2["Passengers"].shift(-1)
 series2.dropna(inplace=True)
 X = series2["Passengers"].values.reshape(series2.shape[0], -1)
 
-# 模型訓練
-lr2.fit(X, series2["Passengers_1"])
-cc = lr2.coef_, lr2.intercept_
+linear_regression2.fit(X, series2["Passengers_1"])  # 學習訓練.fit
+
+cc = linear_regression2.coef_, linear_regression2.intercept_
 print(cc)
 
 # (array([0.95893198]), 13.705504997522155)
 
 series2["TS"] = model.fittedvalues
-series2["LR"] = lr2.coef_ * series["Passengers"] + lr2.intercept_
+series2["LR"] = linear_regression2.coef_ * series["Passengers"] + linear_regression2.intercept_
 series2["LR"].plot(color="green", linestyle="-.", lw=2, legend="LR")
 series2["TS"].plot(figsize=(12, 6), color="red", linestyle=":", lw=2, legend="TS")
 plt.show()
@@ -2621,10 +2551,11 @@ print(cc)
 
 # AR(1) 模型訓練
 ar_1 = ARIMA(X_train[["Passengers"]], order=(1, 0, 0))
-model_1 = ar_1.fit()
+
+model_1 = ar_1.fit()  # 學習訓練.fit
 
 # 預測 12 個月
-pred = model_1.predict(X_train.shape[0], X_train.shape[0] + test_size - 1)
+pred = model_1.predict(X_train.shape[0], X_train.shape[0] + test_size - 1)  # 預測.predict
 
 # 繪圖
 plt.rcParams["font.sans-serif"] = ["Arial Unicode MS"]
@@ -2715,10 +2646,10 @@ import statsmodels.api as sm
 ar_diff = sm.tsa.statespace.SARIMAX(
     X_train[["Passengers"]], order=(1, 2, 1), seasonal_order=(1, 2, 1, 12)
 )
-model_diff = ar_diff.fit()
+model_diff = ar_diff.fit()  # 學習訓練.fit
 
 # 預測 12 個月
-pred = model_diff.predict(X_train.shape[0], X_train.shape[0] + 12 - 1, dynamic=True)
+pred = model_diff.predict(X_train.shape[0], X_train.shape[0] + 12 - 1, dynamic=True)  # 預測.predict
 print(pred)
 
 df_diff["pred"] = np.concatenate((model_diff.fittedvalues.values, pred.values))
@@ -2805,16 +2736,12 @@ print("MSE=", MSE)
 結論：時間序列預測準確率比迴歸高
 時間序列 MSE： 340， 迴歸 MSE： 2091
 """
-
+'''
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 05_08_regularization
-
 # L1、L2 regularization的計算與強度比較
-
-import pandas as pd
-import numpy as np
 
 # 權重
 W = np.array([-1, 5, 3, -9]).reshape(2, 2)
@@ -2842,9 +2769,6 @@ print("------------------------------------------------------------")  # 60個
 
 # 過度擬合與regularization
 
-import pandas as pd
-import numpy as np
-
 # 載入房價資料集
 
 # 載入訓練資料
@@ -2863,17 +2787,20 @@ X_train, X_test, y_train, y_test = train_test_split(
 
 # 模型訓練與評分
 
-from sklearn.linear_model import LinearRegression, Ridge, Lasso
+from sklearn.linear_model import LinearRegression
+from sklearn.linear_model import Ridge
+from sklearn.linear_model import Lasso
 
 # 模型訓練
-lr_model = LinearRegression()
-lr_model.fit(X_train, y_train)
+linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
 
-print(f"訓練判定係數: {lr_model.score(X_train, y_train)}")
-print(f"測試判定係數: {lr_model.score(X_test, y_test)}")
+linear_regression.fit(X_train, y_train)  # 學習訓練.fit
+
+print(f"訓練判定係數: {linear_regression.score(X_train, y_train)}")
+print(f"測試判定係數: {linear_regression.score(X_test, y_test)}")
 
 # 模型評分
-y_pred = lr_model.predict(X_test)
+y_pred = linear_regression.predict(X_test)  # 預測.predict
 
 # 訓練判定係數: 0.7268827869293253
 # 測試判定係數: 0.7254687959254533
@@ -2917,8 +2844,7 @@ steps = [
 ]
 pipeline = Pipeline(steps)
 
-# 模型訓練
-pipeline.fit(X_train, y_train)
+pipeline.fit(X_train, y_train)  # 學習訓練.fit
 
 # 模型評分
 print(f"訓練判定係數: {pipeline.score(X_train, y_train)}")
@@ -2936,7 +2862,8 @@ steps = [
 ]
 
 ridge_pipe = Pipeline(steps)
-ridge_pipe.fit(X_train, y_train)
+
+ridge_pipe.fit(X_train, y_train)  # 學習訓練.fit
 
 # 模型評分
 print(f"訓練判定係數: {ridge_pipe.score(X_train, y_train)}")
@@ -2955,7 +2882,7 @@ steps = [
 
 lasso_pipe = Pipeline(steps)
 
-lasso_pipe.fit(X_train, y_train)
+lasso_pipe.fit(X_train, y_train)  # 學習訓練.fit
 
 # 模型評分
 print(f"訓練判定係數: {lasso_pipe.score(X_train, y_train)}")

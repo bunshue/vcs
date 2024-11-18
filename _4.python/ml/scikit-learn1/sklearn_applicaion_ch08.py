@@ -13,6 +13,7 @@ import random
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns  # 海生, 自動把圖畫得比較好看
 
 font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
@@ -24,8 +25,9 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
+import sklearn.linear_model
 from sklearn import datasets
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -77,7 +79,7 @@ plt.show()
 """ no df
 #模型訓練
 model = Kmeans()
-model.fit(df)
+model.fit(df)  # 學習訓練.fit
 
 #預測
 cc = model.predict(10)
@@ -90,11 +92,7 @@ print("------------------------------------------------------------")  # 60個
 # 10_02_majority_voting
 # 多數決演算法(VotingClassifier)測試
 
-from sklearn import datasets
-from sklearn.model_selection import train_test_split
-
 # 載入資料集
-
 X, y = datasets.load_breast_cancer(return_X_y=True)
 
 # 資料分割
@@ -117,7 +115,7 @@ from sklearn.naive_bayes import GaussianNB
 
 estimators = [("svc", SVC()), ("rf", RandomForestClassifier()), ("nb", GaussianNB())]
 clf = VotingClassifier(estimators)
-clf.fit(X_train_std, y_train)
+clf.fit(X_train_std, y_train)  # 學習訓練.fit
 
 """
 VotingClassifier(estimators=[('svc', SVC()), ('rf', RandomForestClassifier()),
@@ -128,31 +126,30 @@ VotingClassifier(estimators=[('svc', SVC()), ('rf', RandomForestClassifier()),
 
 # 計算準確率
 print(f"{clf.score(X_test_std, y_test)*100:.2f}%")
-
 # 97.37%
 
 # 個別模型評估
 
 svc = SVC()
-svc.fit(X_train_std, y_train)
+
+svc.fit(X_train_std, y_train)  # 學習訓練.fit
 print(f"{svc.score(X_test_std, y_test)*100:.2f}%")
 
 # 98.25%
 
 rf = RandomForestClassifier()
-rf.fit(X_train_std, y_train)
-print(f"{rf.score(X_test_std, y_test)*100:.2f}%")
 
+rf.fit(X_train_std, y_train)  # 學習訓練.fit
+print(f"{rf.score(X_test_std, y_test)*100:.2f}%")
 # 98.25%
 
 nb = GaussianNB()
-nb.fit(X_train_std, y_train)
-print(f"{nb.score(X_test_std, y_test)*100:.2f}%")
 
+nb.fit(X_train_std, y_train)  # 學習訓練.fit
+print(f"{nb.score(X_test_std, y_test)*100:.2f}%")
 # 93.86%
 
 # 模型預測
-
 cc = clf.predict(X_test_std)
 print(cc)
 
@@ -202,19 +199,13 @@ print("------------------------------------------------------------")  # 60個
 
 # Bagging演算法測試
 
-from sklearn import datasets
-from sklearn.model_selection import train_test_split
-
 # 載入資料集
-
 X, y = datasets.load_breast_cancer(return_X_y=True)
 
 # 資料分割
-
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 # 特徵縮放
-
 from sklearn.preprocessing import StandardScaler
 
 scaler = StandardScaler()
@@ -227,8 +218,10 @@ from sklearn.ensemble import BaggingClassifier
 from sklearn.naive_bayes import GaussianNB
 
 base_estimator = GaussianNB()
+
 clf = BaggingClassifier(estimator=base_estimator, n_estimators=50)
-clf.fit(X_train_std, y_train)
+
+clf.fit(X_train_std, y_train)  # 學習訓練.fit
 
 """
 BaggingClassifier(estimator=GaussianNB(), n_estimators=50)
@@ -238,15 +231,13 @@ BaggingClassifier(estimator=GaussianNB(), n_estimators=50)
 
 # 計算準確率
 print(f"{clf.score(X_test_std, y_test)*100:.2f}%")
-
 # 90.35%
 
 # 個別模型評估
-
 nb = GaussianNB()
-nb.fit(X_train_std, y_train)
-print(f"{nb.score(X_test_std, y_test)*100:.2f}%")
 
+nb.fit(X_train_std, y_train)  # 學習訓練.fit
+print(f"{nb.score(X_test_std, y_test)*100:.2f}%")
 # 90.35%
 
 # 模型預測
@@ -375,15 +366,10 @@ print("------------------------------------------------------------")  # 60個
 
 # 自行開發Adaboost
 
-from sklearn import datasets
-from sklearn.model_selection import train_test_split
-
 # 載入資料集
-
 X, y = datasets.load_breast_cancer(return_X_y=True)
 y[y == 0] = -1
 # X, y = datasets.make_hastie_10_2()
-
 print(y)
 
 # 資料分割
@@ -409,7 +395,7 @@ def Adaboost(Y_train, X_train, Y_test, X_test, M, clf):
     # 訓練 M 次
     for i in range(M):
         # 訓練
-        clf.fit(X_train, Y_train, sample_weight=w)
+        clf.fit(X_train, Y_train, sample_weight=w)  # 學習訓練.fit
         pred_train_i = clf.predict(X_train)
         pred_test_i = clf.predict(X_test)
 
@@ -446,16 +432,12 @@ pred = Adaboost(y_train, X_train, y_test, X_test, 50, weak_learner)
 
 # 計算準確率
 print(f"{(1-pred[1])*100:.2f}%")
-
 # 97.37%
 
 # 個別模型評估
-
-weak_learner.fit(X_train, y_train)
+weak_learner.fit(X_train, y_train)  # 學習訓練.fit
 print(f"{weak_learner.score(X_test, y_test)*100:.2f}%")
-
 # 93.86%
-
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -470,7 +452,6 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.metrics import accuracy_score
 from sklearn.model_selection import cross_val_score
 from sklearn.model_selection import cross_val_predict
-from sklearn.model_selection import train_test_split
 from sklearn.model_selection import learning_curve
 
 from sklearn.datasets import load_digits
@@ -499,10 +480,10 @@ clf = AdaBoostClassifier(DecisionTreeClassifier())
 scores_ada = cross_val_score(clf, X, y, cv=6)
 cc = scores_ada.mean()
 print(cc)
-
 # 0.8019435154217764
 
-clf.fit(X, y)
+clf.fit(X, y)  # 學習訓練.fit
+
 cc = clf.estimator_errors_
 print(cc)
 
@@ -523,19 +504,13 @@ print("------------------------------------------------------------")  # 60個
 
 # 自行開發『梯度提升決策樹』(Gradient Boosting Decision Tree)
 
-from sklearn import datasets
-from sklearn.model_selection import train_test_split
-
 # 載入資料集
-
 X, y = datasets.load_diabetes(return_X_y=True)
 
 # 資料分割
-
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 # 建立Gradient Boost模型
-
 from sklearn.tree import DecisionTreeRegressor
 
 
@@ -577,7 +552,7 @@ class GradientBooster:
             min_samples_leaf=self.min_samples_leaf,
             max_features=self.max_features,
         )
-        base.fit(X, y)
+        base.fit(X, y)  # 學習訓練.fit
         return base
 
     # 預測
@@ -619,8 +594,6 @@ models, losses, pred = G.train(X_train, y_train)
 
 # 繪製損失函數
 
-import seaborn as sns
-
 sns.set_style("darkgrid")
 ax = sns.lineplot(x=range(1000), y=losses)
 ax.set(xlabel="Epoch", ylabel="Loss", title="Loss vs Epoch")
@@ -640,7 +613,9 @@ print("RMSE:", np.sqrt(mean_squared_error(y_test, y_pred)))
 model = DecisionTreeRegressor(
     max_depth=8, min_samples_split=5, min_samples_leaf=5, max_features=3
 )
-model.fit(X_train, y_train)
+
+model.fit(X_train, y_train)  # 學習訓練.fit
+
 y_pred = model.predict(X_test)
 print("RMSE:", np.sqrt(mean_squared_error(y_test, y_pred)))
 
@@ -658,7 +633,9 @@ model = GradientBoostingRegressor(
     min_samples_leaf=5,
     max_features=3,
 )
-model.fit(X_train, y_train)
+
+model.fit(X_train, y_train)  # 學習訓練.fit
+
 y_pred = model.predict(X_test)
 print("RMSE:", np.sqrt(mean_squared_error(y_test, y_pred)))
 
@@ -674,7 +651,8 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 clf = GradientBoostingClassifier(
     n_estimators=100, learning_rate=1.0, max_depth=1, random_state=0
-).fit(X_train, y_train)
+).fit(X_train, y_train)  # 學習訓練.fit
+
 cc = clf.score(X_test, y_test)
 print(cc)
 
@@ -705,23 +683,18 @@ Successfully installed xgboost-1.7.3
 
 """
 
-from sklearn import datasets
-from sklearn.model_selection import train_test_split
-
 # 載入資料集
-
 X, y = datasets.load_diabetes(return_X_y=True)
 
 # 資料分割
-
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 # 模型訓練
-
 from xgboost import XGBRegressor
 
 model = XGBRegressor()
-model.fit(X_train, y_train)
+
+model.fit(X_train, y_train)  # 學習訓練.fit
 
 """
 XGBRegressor(base_score=None, booster=None, callbacks=None,
@@ -760,8 +733,11 @@ from xgboost import XGBClassifier
 
 X, y = datasets.load_breast_cancer(return_X_y=True)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
 model = XGBClassifier()
-model.fit(X_train, y_train)
+
+model.fit(X_train, y_train)  # 學習訓練.fit
+
 scores = cross_val_score(model, X_test, y_test, cv=10)
 print(f"平均分數: {np.mean(scores)}, 標準差: {np.std(scores)}")
 
@@ -773,19 +749,13 @@ print("------------------------------------------------------------")  # 60個
 # 10_08_stacking
 # 堆疊(Stacking)測試
 
-from sklearn import datasets
-from sklearn.model_selection import train_test_split
-
 # 載入資料集
-
 X, y = datasets.load_breast_cancer(return_X_y=True)
 
 # 資料分割
-
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 # 模型訓練
-
 from sklearn.linear_model import LogisticRegression
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.tree import DecisionTreeClassifier
@@ -806,7 +776,7 @@ def get_models():
 estimators = get_models()
 model = StackingClassifier(estimators=estimators, final_estimator=LogisticRegression())
 
-model.fit(X_train, y_train)
+model.fit(X_train, y_train)  # 學習訓練.fit
 
 """
 StackingClassifier(estimators=[('knn', KNeighborsClassifier()),
@@ -849,14 +819,17 @@ model = StackingRegressor(
     estimators=estimators,
     final_estimator=RandomForestRegressor(n_estimators=10, random_state=42),
 )
-model.fit(X_train_std, y_train)
+
+model.fit(X_train_std, y_train)  # 學習訓練.fit
+
 scores = cross_val_score(model, X_test_std, y_test, cv=10)
 print(f"平均分數: {np.mean(scores)}, 標準差: {np.std(scores)}")
-
 # 平均分數: 0.12143159519945441, 標準差: 0.4732757387323812
 
 svc = LinearSVR()
-svc.fit(X_train_std, y_train)
+
+svc.fit(X_train_std, y_train)  # 學習訓練.fit
+
 scores = cross_val_score(svc, X_test_std, y_test, cv=10)
 print(f"平均分數: {np.mean(scores)}, 標準差: {np.std(scores)}")
 
@@ -898,7 +871,7 @@ print(type(y_30_index))
 # 模型訓練
 
 base_classifier = SVC(kernel="rbf", gamma=0.5, probability=True)
-clf = SelfTrainingClassifier(base_classifier).fit(X_train, y_30)
+clf = SelfTrainingClassifier(base_classifier).fit(X_train, y_30)  # 學習訓練.fit
 
 # 繪製決策邊界
 
@@ -923,20 +896,15 @@ plt.scatter(X_train[:, 0], X_train[:, 1], c=colors, edgecolors="black")
 plt.show()
 
 # SVM 模型評估
-
-base_classifier.fit(X_train, y_30)
+base_classifier.fit(X_train, y_30)  # 學習訓練.fit
 cc = base_classifier.score(X_test, y_test)
 print(cc)
-
 # 0.6666666666666666
 
 # Self-training 模型評估
-
 cc = clf.score(X_test, y_test)
 print(cc)
-
 # 0.7666666666666667
-
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -949,14 +917,16 @@ random_unlabeled_points = rng.rand(y.shape[0]) < 0.3
 y[random_unlabeled_points] = -1
 
 svc = SVC(probability=True, gamma="auto")
+
 self_training_model = SelfTrainingClassifier(svc)
-self_training_model.fit(X, y)
+
+self_training_model.fit(X, y)  # 學習訓練.fit
 
 """
 SelfTrainingClassifier(base_estimator=SVC(gamma='auto', probability=True))
 """
 
-svc.fit(X[y >= 0], y[y >= 0])
+svc.fit(X[y >= 0], y[y >= 0])  # 學習訓練.fit
 cc = svc.score(X, y)
 print(cc)
 
@@ -1007,7 +977,9 @@ print(cc)
 # Label propagation 模型訓練與評估
 
 clf = LabelPropagation()
-clf.fit(X_train_mixed, y_train_mixed)
+
+clf.fit(X_train_mixed, y_train_mixed)  # 學習訓練.fit
+
 cc = clf.score(X_test, y_test)
 print(cc)
 
@@ -1018,7 +990,9 @@ print(cc)
 from sklearn.linear_model import LogisticRegression
 
 clf2 = LogisticRegression()
-clf2.fit(X_train_lab, y_train_lab)
+
+clf2.fit(X_train_lab, y_train_lab)  # 學習訓練.fit
+
 cc = clf2.score(X_test, y_test)
 print(cc)
 
@@ -1034,7 +1008,9 @@ print(cc)
 # 再依Label propagation傳播結果進行模型訓練與評估
 
 clf3 = LogisticRegression()
-clf3.fit(X_train_mixed, tran_labels)
+
+clf3.fit(X_train_mixed, tran_labels)  # 學習訓練.fit
+
 cc = clf3.score(X_test, y_test)
 print(cc)
 # 0.862
@@ -1077,7 +1053,9 @@ print(cc)
 # LabelSpreading 模型訓練與評估
 
 clf = LabelSpreading()
-clf.fit(X_train_mixed, y_train_mixed)
+
+clf.fit(X_train_mixed, y_train_mixed)  # 學習訓練.fit
+
 cc = clf.score(X_test, y_test)
 print(cc)
 # 0.854
@@ -1087,7 +1065,9 @@ print(cc)
 from sklearn.linear_model import LogisticRegression
 
 clf2 = LogisticRegression()
-clf2.fit(X_train_lab, y_train_lab)
+
+clf2.fit(X_train_lab, y_train_lab)  # 學習訓練.fit
+
 cc = clf2.score(X_test, y_test)
 print(cc)
 
@@ -1103,10 +1083,11 @@ print(cc)
 # 再依LabelSpreading傳播結果進行模型訓練與評估
 
 clf3 = LogisticRegression()
-clf3.fit(X_train_mixed, tran_labels)
+
+clf3.fit(X_train_mixed, tran_labels)  # 學習訓練.fit
+
 cc = clf3.score(X_test, y_test)
 print(cc)
-
 # 0.858
 
 print("------------------------------------------------------------")  # 60個
@@ -1150,7 +1131,8 @@ for i in range(max_iterations):
 
     # LabelSpreading 模型訓練
     lp_model = LabelSpreading(gamma=0.25, max_iter=20)
-    lp_model.fit(X, y_train)
+    
+    lp_model.fit(X, y_train)  # 學習訓練.fit
 
     # 預測
     predicted_labels = lp_model.transduction_[unlabeled_indices]
@@ -1231,7 +1213,8 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 # 模型訓練
 
 clf = make_pipeline(StandardScaler(), LogisticRegression())
-clf.fit(X_train.values, y_train)
+
+clf.fit(X_train.values, y_train)  # 學習訓練.fit
 
 """
 Pipeline(steps=[('standardscaler', StandardScaler()),
@@ -1327,7 +1310,9 @@ y = df["MEDV"]
 df = df[["RM", "LSTAT", "DIS", "NOX"]]
 
 clf = DecisionTreeRegressor(max_depth=3)
-clf.fit(df, y)
+
+clf.fit(df, y)  # 學習訓練.fit
+
 fig = plt.figure(figsize=(20, 5))
 ax = fig.add_subplot(111)
 _ = plot_tree(clf, ax=ax, feature_names=df.columns)
@@ -1443,7 +1428,6 @@ print("------------------------------------------------------------")  # 60個
 # An introduction to explainable AI with Shapley values
 
 import shap
-from sklearn.linear_model import LinearRegression
 from sklearn.preprocessing import StandardScaler
 
 # 載入資料集
@@ -1466,11 +1450,13 @@ y = df["median_house_value"]
 # X2 = scaler.fit_transform(X)
 # X = pd.DataFrame(X2, columns=X.columns)
 
-model = LinearRegression()
-model.fit(X, y)
+linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
+
+linear_regression.fit(X, y)  # 學習訓練.fit
+
 print("Model coefficients:")
 for i in range(X.shape[1]):
-    print(X.columns[i], "=", model.coef_[i].round(5))
+    print(X.columns[i], "=", linear_regression.coef_[i].round(5))
 
 # 單一特徵影響力
 
@@ -1478,7 +1464,7 @@ feature_name = "median_income"
 X100 = shap.utils.sample(X, 100)
 shap.partial_dependence_plot(
     feature_name,
-    model.predict,
+    linear_regression.predict,
     X100,
     ice=False,
     model_expected_value=True,
@@ -1488,11 +1474,11 @@ shap.partial_dependence_plot(
 # 衡量特徵Shapley value
 
 sample_ind = 20  # 第 21 筆資料
-explainer = shap.Explainer(model.predict, X100)
+explainer = shap.Explainer(linear_regression.predict, X100)
 shap_values = explainer(X)
 shap.partial_dependence_plot(
     feature_name,
-    model.predict,
+    linear_regression.predict,
     X100,
     model_expected_value=True,
     feature_expected_value=True,
@@ -1523,7 +1509,8 @@ import interpret.glassbox
 
 # 使用 Boosting 演算法
 model_ebm = interpret.glassbox.ExplainableBoostingRegressor(interactions=0)
-model_ebm.fit(X, y)
+
+model_ebm.fit(X, y)  # 學習訓練.fit
 
 # 加法模型 Shapley value
 explainer_ebm = shap.Explainer(model_ebm.predict, X100)
@@ -1591,7 +1578,8 @@ l1_ratio = 1
 with mlflow.start_run():
     # 模型訓練
     model = ElasticNet(alpha=alpha, l1_ratio=l1_ratio)
-    model.fit(X_train, y_train)
+    
+    model.fit(X_train, y_train)  # 學習訓練.fit
 
     # 模型評估
     pred = model.predict(X_test)
@@ -1643,7 +1631,8 @@ model = StackingRegressor(
     estimators=estimators,
     final_estimator=RandomForestRegressor(n_estimators=10, random_state=42),
 )
-model.fit(X_train_std, y_train)
+model.fit(X_train_std, y_train)  # 學習訓練.fit
+
 from sklearn.model_selection import cross_val_score
 
 scores = cross_val_score(model, X_test_std, y_test, cv=10)
@@ -1652,7 +1641,8 @@ print(f"平均分數: {np.mean(scores)}, 標準差: {np.std(scores)}")
 # 平均分數: 0.12143159519945441, 標準差: 0.4732757387323812
 
 svc = LinearSVR()
-svc.fit(X_train_std, y_train)
+
+svc.fit(X_train_std, y_train)  # 學習訓練.fit
 from sklearn.model_selection import cross_val_score
 
 scores = cross_val_score(svc, X_test_std, y_test, cv=10)

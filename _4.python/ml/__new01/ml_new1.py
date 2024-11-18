@@ -16,6 +16,7 @@ import random
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns  # 海生, 自動把圖畫得比較好看
 
 font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
@@ -27,10 +28,18 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
+import sklearn.linear_model
+from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+'''
 # 數據預處理（Data Preprocessing）
 
-''' 未知
 import sklearn
+print("Sklearn verion is {}".format(sklearn.__version__))
+
 from sklearn.impute import SimpleImputer
 
 #This block is an example used to learn SimpleImputer
@@ -38,29 +47,30 @@ imp_mean = SimpleImputer(missing_values=np.nan, strategy='mean')
 imp_mean.fit([[7, 2, 3], [4, np.nan, 6], [10, 5, 9]])
 X = [[np.nan, 2, 3], [4, np.nan, 6], [10, np.nan, 9]]
 print(imp_mean.transform(X))
-print("Sklearn verion is {}".format(sklearn.__version__))
 
 from sklearn.preprocessing import OneHotEncoder
 
 enc = OneHotEncoder(handle_unknown='ignore')
 X = [['Male', 1], ['Female', 3], ['Female', 2]]
-"""
->>> enc.fit(X)
-OneHotEncoder(handle_unknown='ignore')
->>> enc.categories_
-[array(['Female', 'Male'], dtype=object), array([1, 2, 3], dtype=object)]
->>> enc.transform([['Female', 1], ['Male', 4]]).toarray()
-array([[1., 0., 1., 0., 0.],
-       [0., 1., 0., 0., 0.]])
->>> enc.inverse_transform([[0, 1, 1, 0, 0], [0, 0, 0, 1, 0]])
-array([['Male', 1],
-       [None, 2]], dtype=object)
->>> enc.get_feature_names(['gender', 'group'])
-array(['gender_Female', 'gender_Male', 'group_1', 'group_2', 'group_3'],
-  dtype=object)
-"""
-'''
 
+enc.fit(X)
+
+cc = enc.categories_
+print(cc)
+
+cc = enc.transform([['Female', 1], ['Male', 4]]).toarray()
+print(cc)
+
+cc = enc.inverse_transform([[0, 1, 1, 0, 0], [0, 0, 0, 1, 0]])
+print(cc)
+
+cc = enc.get_feature_names(['gender', 'group'])
+print(cc)
+
+'''
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+'''
 dataset = pd.read_csv("data/Data.csv")
 # 不包括最后一列的所有列
 X = dataset.iloc[:, :-1].values  # //.iloc[行，列]
@@ -110,7 +120,6 @@ imputer = imputer.fit(X[ : , 1:3])
 X[ : , 1:3] = imputer.transform(X[ : , 1:3])
 """
 
-
 # Step 4: Encoding categorical data
 # 第四步：解析分類數據
 # 分類數據指的是含有標簽值而不是數字值的變量。取值范圍通常是固定的。
@@ -158,12 +167,9 @@ Y =  labelencoder_Y.fit_transform(Y)
 # 兩者比例一般是80:20。
 # 我們導入sklearn.model_selection庫中的train_test_split()方法。
 
-from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
-
-X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2, random_state=0)
-
-print("---------------------")
-print("Step 5: Splitting the datasets into training sets and Test sets")
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2)
+# 訓練組8成, 測試組2成
 print("X_train")
 print(X_train)
 print("X_test")
@@ -193,51 +199,39 @@ print("X_train")
 print(X_train)
 print("X_test")
 print(X_test)
-
+'''
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("簡單線性回歸")
 
-"""
-#讀取資料
 dataset = pd.read_csv('data/studentscores.csv')
-print(dataset)
-df = dataset.sort_values("Scores",ascending=False)
-print(df)
-dataset.head(30)
+X = dataset.iloc[:, :1].values
+Y = dataset.iloc[:, 1].values
 
-print(dataset.head(30))
-
-#這里我們需要使用pandas的iloc(區分于loc根據index來索引，iloc利用行號來索引)方法來對數據進行處理，第一個參數為行號，:表示全部行，第二個參數 ：1表示截到第1列(也就是取第0列)
-
-#X = dataset.iloc[ : ,   : 1 ].values
-#Y = dataset.iloc[ : , 1 ].values
+# 這里我們需要使用pandas的iloc(區分于loc根據index來索引，
+# iloc利用行號來索引)方法來對數據進行處理，第一個參數為行號，
+# :表示全部行，第二個參數 ：1表示截到第1列(也就是取第0列)
+# X = dataset.iloc[ : ,   : 1 ].values
+# Y = dataset.iloc[ : , 1 ].values
 
 X = dataset.iloc[ 0: 25,   : 1 ].values
 Y = dataset.iloc[ 0: 25, -1: ].values
-print("X:",X)
-print("Y:",Y)
+#print("X:",X)
+#print("Y:",Y)
 
-#導入sklearn庫的cross_validation類來對數據進行訓練集、測試集劃分
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2)
+# 訓練組8成, 測試組2成
+#print(X_train, X_test)
+#print(Y_train, Y_test)
 
-from sklearn.model_selection import train_test_split
-#拆分數據，0.25作為測試集
-X_train, X_test, Y_train, Y_test = train_test_split( X, Y, test_size = 1/4, random_state = 0) 
-print(X_train,X_test)
-print(Y_train,Y_test)
+linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
 
-
-#訓練線性回歸
-# Fitting Simple Linear Regression Model to the training set
-from sklearn.linear_model import LinearRegression
-#使用訓練集對模型進行訓練
-regressor = LinearRegression()
-regressor = regressor.fit(X_train, Y_train)
+linear_regression.fit(X_train, Y_train)  # 學習訓練.fit
 
 #預測結果
-
-Y_pred = regressor.predict(X_test)
+Y_pred = linear_regression.predict(X_test)
 print(Y_pred)
 print(Y_test)
 
@@ -245,8 +239,8 @@ print(Y_test)
 #散點圖
 plt.scatter(X_train , Y_train, color = 'red')
 #線圖
-plt.plot(X_train , regressor.predict(X_train), 'bo-')
-#plt.plot(X_train , regressor.predict(X_train), color ='blue')
+plt.plot(X_train , linear_regression.predict(X_train), 'bo-')
+#plt.plot(X_train , linear_regression.predict(X_train), color ='blue')
 
 plt.show()
 
@@ -254,13 +248,13 @@ plt.show()
 plt.scatter(X_test , Y_test, color = 'red')
 #線圖
 plt.plot(X_test ,Y_pred, 'bo-')
-#plt.plot(X_test , regressor.predict(X_test), color ='blue')
+#plt.plot(X_test , linear_regression.predict(X_test), color ='blue')
 
 plt.show()
 
 print(X_test,Y_test)
 
-"""
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("簡單線性回歸")
@@ -269,44 +263,37 @@ dataset = pd.read_csv("data/studentscores.csv")
 X = dataset.iloc[:, :1].values
 Y = dataset.iloc[:, 1].values
 
-from sklearn.model_selection import train_test_split
-
-X_train, X_test, Y_train, Y_test = train_test_split(
-    X, Y, test_size=1 / 4, random_state=0
-)
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2)
+# 訓練組8成, 測試組2成
 
 # 第二步：訓練集使用簡單線性回歸模型來訓練
 
-from sklearn.linear_model import LinearRegression
+linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
 
-regressor = LinearRegression()
-regressor = regressor.fit(X_train, Y_train)
+linear_regression.fit(X_train, Y_train)  # 學習訓練.fit
 
 # 第三步：預測結果
-
-Y_pred = regressor.predict(X_test)
+Y_pred = linear_regression.predict(X_test)
 
 # 第四步：可視化
 # 訓練集結果可視化
 
 plt.scatter(X_train, Y_train, color="red")
-plt.plot(X_train, regressor.predict(X_train), color="blue")
+plt.plot(X_train, linear_regression.predict(X_train), color="blue")
 plt.show()
 
 # 測試集結果可視化
 
 plt.scatter(X_test, Y_test, color="red")
-plt.plot(X_test, regressor.predict(X_test), color="blue")
+plt.plot(X_test, linear_regression.predict(X_test), color="blue")
 plt.show()
 
-
-print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("多元线性回归（Multiple Linear Regression）")
 
-'''
 #讀取資料
 dataset = pd.read_csv('data/50_Startups.csv')
 X = dataset.iloc[ : , :-1].values
@@ -348,18 +335,22 @@ print("onehot:")
 print(X[:10])
 
 """
-
-
 躲避虚拟变量陷阱
-
-在回归预测中我们需要所有的数据都是numeric的，但是会有一些非numeric的数据，比如国家，省，部门，性别。这时候我们需要设置虚拟变量（Dummy variable）。做法是将此变量中的每一个值，衍生成为新的变量，是设为1，否设为0.举个例子，“性别”这个变量,我们可以虚拟出“男”和”女”两虚拟变量，男性的话“男”值为1，”女”值为0；女性的话“男”值为0，”女”值为1。
-
-但是要注意，这时候虚拟变量陷阱就出现了。就拿性别来说，其实一个虚拟变量就够了，比如 1 的时候是“男”， 0 的时候是”非男”，即为女。如果设置两个虚拟变量“男”和“女”，语义上来说没有问题，可以理解，但是在回归预测中会多出一个变量，多出的这个变量将会对回归预测结果产生影响。一般来说，如果虚拟变量要比实际变量的种类少一个。
-
-在多重线性回归中，变量不是越多越好，而是选择适合的变量。这样才会对结果准确预测。如果category类的特征都放进去，拟合的时候，所有权重的计算，都可以有两种方法实现，一种是提高某个category的w，一种是降低其他category的w，这两种效果是等效的，也就是发生了共线性,虚拟变量系数相加和为1，出现完全共线陷阱。
-
+在回归预测中我们需要所有的数据都是numeric的，但是会有一些非numeric的数据，
+比如国家，省，部门，性别。这时候我们需要设置虚拟变量（Dummy variable）。
+做法是将此变量中的每一个值，衍生成为新的变量，是设为1，否设为0.
+举个例子，“性别”这个变量,我们可以虚拟出“男”和”女”两虚拟变量，
+男性的话“男”值为1，”女”值为0；女性的话“男”值为0，”女”值为1。
+但是要注意，这时候虚拟变量陷阱就出现了。
+就拿性别来说，其实一个虚拟变量就够了，比如 1 的时候是“男”， 0 的时候是”非男”，即为女。
+如果设置两个虚拟变量“男”和“女”，语义上来说没有问题，可以理解，
+但是在回归预测中会多出一个变量，多出的这个变量将会对回归预测结果产生影响。
+一般来说，如果虚拟变量要比实际变量的种类少一个。
+在多重线性回归中，变量不是越多越好，而是选择适合的变量。这样才会对结果准确预测。
+如果category类的特征都放进去，拟合的时候，所有权重的计算，都可以有两种方法实现，
+一种是提高某个category的w，一种是降低其他category的w，这两种效果是等效的，
+也就是发生了共线性,虚拟变量系数相加和为1，出现完全共线陷阱。
 但是下面测试尽然和想法不一致。。。
-
 """
 
 # Avoiding Dummy Variable Trap
@@ -370,10 +361,13 @@ print(X)
 
 #拆分数据集为训练集和测试集
 # Splitting the dataset into the Training set and Test set
-from sklearn.model_selection import train_test_split
 
-X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size = 0.2, random_state = 0)
-X1_train, X1_test, Y1_train, Y1_test = train_test_split(X1, Y, test_size = 0.2, random_state = 0)
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2)
+# 訓練組8成, 測試組2成
+
+X1_train, X1_test, Y1_train, Y1_test = train_test_split(X1, Y, test_size=0.2)
+
 print(X_test)
 print(Y_test)
 print(X1_test)
@@ -382,21 +376,20 @@ print(Y1_test)
 
 #第2步：在训练集上训练多元线性回归模型
 # Fitting Multiple Linear Regression to the Training set
-from sklearn.linear_model import LinearRegression
 
-regressor = LinearRegression()
-regressor.fit(X_train, Y_train)
-regressor1 = LinearRegression()
-regressor1.fit(X1_train, Y1_train)
+linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
 
+linear_regression.fit(X_train, Y_train)  # 學習訓練.fit
 
-LinearRegression()
+linear_regression2 = sklearn.linear_model.LinearRegression()  # 函數學習機
+
+linear_regression2.fit(X1_train, Y1_train)  # 學習訓練.fit
 
 #第3步：在测试集上预测结果
 
 # Predicting the Test set results
-y_pred = regressor.predict(X_test)
-y1_pred = regressor1.predict(X1_test)
+y_pred = linear_regression.predict(X_test)
+y1_pred = linear_regression2.predict(X1_test)
 
 print(y_pred)
 print(y1_pred)
@@ -404,11 +397,11 @@ print(y1_pred)
 # regression evaluation
 from sklearn.metrics import r2_score
 print(r2_score(Y_test, y_pred))
-'''
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+""" NG OneHotEncoder
 dataset = pd.read_csv("data/50_Startups.csv")
 X = dataset.iloc[:, :-1].values
 Y = dataset.iloc[:, 4].values
@@ -426,25 +419,18 @@ X = onehotencoder.fit_transform(X).toarray()
 
 X = X[:, 1:]
 
-# 拆分数据集为训练集和测试集
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2)
+# 訓練組8成, 測試組2成
 
-from sklearn.model_selection import train_test_split
+linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
 
-X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2, random_state=0)
-
-# 第2步： 在训练集上训练多元线性回归模型
-
-from sklearn.linear_model import LinearRegression
-
-regressor = LinearRegression()
-regressor.fit(X_train, Y_train)
+linear_regression.fit(X_train, Y_train)  # 學習訓練.fit
 
 # Step 3: 在测试集上预测结果
-
-y_pred = regressor.predict(X_test)
+y_pred = linear_regression.predict(X_test)
 print(y_pred)
-
-
+"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -454,12 +440,9 @@ dataset = pd.read_csv("data/Social_Network_Ads.csv")
 X = dataset.iloc[:, [2, 3]].values
 Y = dataset.iloc[:, 4].values
 
-# 将数据集分成训练集和测试集
-from sklearn.model_selection import train_test_split
-
-X_train, X_test, y_train, y_test = train_test_split(
-    X, Y, test_size=0.25, random_state=0
-)
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.2)
+# 訓練組8成, 測試組2成
 
 # 特征缩放
 
@@ -472,15 +455,17 @@ X_test = sc.transform(X_test)
 
 # 第二步：逻辑回归模型
 
-# 该项工作的库将会是一个线性模型库，之所以被称为线性是因为逻辑回归是一个线性分类器，这意味着我们在二维空间中，我们两类用户（购买和不购买）将被一条直线分割。然后导入逻辑回归类。下一步我们将创建该类的对象，它将作为我们训练集的分类器。
+# 该项工作的库将会是一个线性模型库，之所以被称为线性是因为逻辑回归是一个线性分类器，
+# 这意味着我们在二维空间中，我们两类用户（购买和不购买）将被一条直线分割。
+# 然后导入逻辑回归类。下一步我们将创建该类的对象，它将作为我们训练集的分类器。
 
 # 将逻辑回归应用于训练集
 # Fitting Logistic Regression to the Training set
 from sklearn.linear_model import LogisticRegression
 
 classifier = LogisticRegression()
-classifier.fit(X_train, y_train)
 
+classifier.fit(X_train, y_train)  # 學習訓練.fit
 
 # Predicting the Test set results
 # 第3步：预测
@@ -490,7 +475,8 @@ y_pred = classifier.predict(X_test)
 
 # 第4步：评估预测
 
-# 我们预测了测试集。 现在我们将评估逻辑回归模型是否正确的学习和理解。因此这个混淆矩阵将包含我们模型的正确和错误的预测。
+# 我们预测了测试集。 现在我们将评估逻辑回归模型是否正确的学习和理解。
+# 因此这个混淆矩阵将包含我们模型的正确和错误的预测。
 
 # Making the Confusion Matrix
 # 生成混淆矩阵
@@ -576,13 +562,9 @@ print(dataset)
 X = dataset.iloc[:, [2, 3]].values
 y = dataset.iloc[:, 4].values
 
-# 第三步：将数据划分成训练集和测试集
-# Splitting the dataset into the Training set and Test set
-from sklearn.model_selection import train_test_split
-
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.25, random_state=0
-)
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+# 訓練組8成, 測試組2成
 
 # 第四步：特征缩放
 # Feature Scaling
@@ -598,10 +580,14 @@ X_test = sc.transform(X_test)
 
 from sklearn.neighbors import KNeighborsClassifier
 
-# 设置好相关的参数 n_neighbors = 5(K值的选择，默认选择5)、 metric = 'minkowski'(距离度量的选择，这里选择的是闵氏距离(默认参数))、 p = 2 (距离度量metric的附属参数，只用于闵氏距离和带权重闵氏距离中p值的选择，p=1为曼哈顿距离， p=2为欧式距离。默认为2)
+# 设置好相关的参数 n_neighbors = 5(K值的选择，默认选择5)、
+# metric = 'minkowski'(距离度量的选择，这里选择的是闵氏距离(默认参数))、
+# p = 2 (距离度量metric的附属参数，只用于闵氏距离和带权重闵氏距离中p值的选择，
+# p=1为曼哈顿距离， p=2为欧式距离。默认为2)
 
 classifier = KNeighborsClassifier(n_neighbors=5, metric="minkowski", p=2)
-classifier.fit(X_train, y_train)
+
+classifier.fit(X_train, y_train)  # 學習訓練.fit
 
 KNeighborsClassifier(
     algorithm="auto",
@@ -633,20 +619,16 @@ print(cm)
 print(classification_report(y_test, y_pred))
 
 """
-
-
-
 [[64  4]
  [ 3 29]]
-
     预测值
     0   1
 实0 64  4   
 际1 3   29
 值
-
-预测集中的0总共有68个，1总共有32个。 在这个混淆矩阵中，实际有68个0，但K-NN预测出有67(64+3)个0，其中有3个实际上是1。 同时K-NN预测出有33(4+29)个1，其中4个实际上是0。
-
+预测集中的0总共有68个，1总共有32个。
+在这个混淆矩阵中，实际有68个0，但K-NN预测出有67(64+3)个0，其中有3个实际上是1。
+同时K-NN预测出有33(4+29)个1，其中4个实际上是0。
 """
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -657,13 +639,9 @@ dataset = pd.read_csv("data/Social_Network_Ads.csv")
 X = dataset.iloc[:, [2, 3]].values
 y = dataset.iloc[:, 4].values
 
-# 第三步：拆分数据集为训练集合和测试集合
-# Splitting the dataset into the Training set and Test set
-from sklearn.model_selection import train_test_split
-
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.25, random_state=0
-)
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+# 訓練組8成, 測試組2成
 
 # 第四步：特征量化
 # Feature Scaling
@@ -678,7 +656,8 @@ X_test = sc.fit_transform(X_test)
 from sklearn.svm import SVC
 
 classifier = SVC(kernel="linear", random_state=0)
-classifier.fit(X_train, y_train)
+
+classifier.fit(X_train, y_train)  # 學習訓練.fit
 
 SVC(
     C=1.0,
@@ -782,12 +761,9 @@ dataset = pd.read_csv("data/Social_Network_Ads.csv")
 X = dataset.iloc[:, [2, 3]].values
 y = dataset.iloc[:, 4].values
 
-# Splitting the dataset into the Training set and Test set
-from sklearn.model_selection import train_test_split
-
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.25, random_state=0
-)
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+# 訓練組8成, 測試組2成
 
 # Feature Scaling
 from sklearn.preprocessing import StandardScaler
@@ -800,7 +776,8 @@ X_test = sc.transform(X_test)
 from sklearn.tree import DecisionTreeClassifier
 
 classifier = DecisionTreeClassifier(criterion="entropy", random_state=0)
-classifier.fit(X_train, y_train)
+
+classifier.fit(X_train, y_train)  # 學習訓練.fit
 
 # Predicting the Test set results
 y_pred = classifier.predict(X_test)
@@ -878,12 +855,9 @@ dataset = pd.read_csv("data/Social_Network_Ads.csv")
 X = dataset.iloc[:, [2, 3]].values
 y = dataset.iloc[:, 4].values
 
-# Splitting the dataset into the Training set and Test set
-from sklearn.model_selection import train_test_split
-
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.25, random_state=0
-)
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+# 訓練組8成, 測試組2成
 
 # Feature Scaling 特征缩放
 from sklearn.preprocessing import StandardScaler
@@ -898,7 +872,8 @@ from sklearn.ensemble import RandomForestClassifier
 classifier = RandomForestClassifier(
     n_estimators=10, criterion="entropy", random_state=0
 )
-classifier.fit(X_train, y_train)
+
+classifier.fit(X_train, y_train)  # 學習訓練.fit
 
 # Predicting the Test set results
 y_pred = classifier.predict(X_test)
@@ -972,19 +947,17 @@ print("------------------------------------------------------------")  # 60個
 
 # pip install tf-nightly
 
-
 # import tensorflow.keras as keras
 
-# 导入tensorflow
 import tensorflow as tf
-
 print(tf.__version__)
 
 
 """
-
 下载mnist数据
-keras默认从(https://storage.googleapis.com/tensorflow/tf-keras-datasets/mnist.npz)下载，但国内很难连上， 可以参考(http://www.cnblogs.com/shinny/p/9283372.html)。手动下载mnist.npz，然后修改mnist.py中的引用路径。 如果找不到mnist.py，可以用everthing搜索。
+keras默认从(https://storage.googleapis.com/tensorflow/tf-keras-datasets/mnist.npz)下载，
+但国内很难连上， 可以参考(http://www.cnblogs.com/shinny/p/9283372.html)。
+手动下载mnist.npz，然后修改mnist.py中的引用路径。 如果找不到mnist.py，可以用everthing搜索。
 mnist.npz已上传到datasets文件夹，可从这里下载。
 """
 
@@ -1016,7 +989,8 @@ model.add(tf.keras.layers.Dense(10, activation=tf.nn.softmax))
 model.compile(
     optimizer="adam", loss="sparse_categorical_crossentropy", metrics=["accuracy"]
 )
-model.fit(x_train, y_train, epochs=3)
+
+model.fit(x_train, y_train, epochs=3)  # 學習訓練.fit
 
 
 val_loss, val_acc = model.evaluate(x_test, y_test)
@@ -1080,7 +1054,8 @@ for category in CATEGORIES:
 print("看下array的形状")
 print(img_array.shape)
 
-# 我们可以看到这是一张很大的图片，并且拥有RGB3个通道，这并不是我们想要的，所以接下来我们将要进行的操作会使图像变小，并且只剩下灰度：
+# 我们可以看到这是一张很大的图片，并且拥有RGB3个通道，这并不是我们想要的，
+# 所以接下来我们将要进行的操作会使图像变小，并且只剩下灰度：
 
 print("resize")
 IMG_SIZE = 100
@@ -1089,7 +1064,9 @@ new_array = cv2.resize(img_array, (IMG_SIZE, IMG_SIZE))
 plt.imshow(new_array, cmap="gray")
 plt.show()
 
-# 接下来，我们将要创建所有这些培训数据，但是，首先，我们应该留出一些图像进行最终测试。我将手动创建一个名为Testing的目录，然后在其中创建2个目录，一个用于Dog，一个用于Cat。从这里开始，我将把Dog和Cat的前15张图像移到训练版本中。确保移动它们，而不是复制。我们将使用它进行最终测试。
+# 接下来，我们将要创建所有这些培训数据，但是，首先，我们应该留出一些图像进行最终测试。
+# 我将手动创建一个名为Testing的目录，然后在其中创建2个目录，一个用于Dog，一个用于Cat。
+# 从这里开始，我将把Dog和Cat的前15张图像移到训练版本中。确保移动它们，而不是复制。我们将使用它进行最终测试。
 
 print("訓練資料")
 training_data = []
@@ -1118,14 +1095,17 @@ create_training_data()
 print(len(training_data))
 
 # 我们有大约25,000张图片。
-# 我们要做的一件事是确保我们的数据是平衡的。在这个数据集的情况下，我可以看到数据集开始时是平衡的。平衡，我的意思是每个班级都有相同数量的例子（相同数量的狗和猫）。如果不平衡，您要么将类权重传递给模型，以便它可以适当地测量误差，或者通过将较大的集修剪为与较小集相同的大小来平衡样本。
+# 我们要做的一件事是确保我们的数据是平衡的。在这个数据集的情况下，
+# 我可以看到数据集开始时是平衡的。平衡，我的意思是每个班级都有相同数量的例子（相同数量的狗和猫）。
+# 如果不平衡，您要么将类权重传递给模型，以便它可以适当地测量误差，或者通过将较大的集修剪为与较小集相同的大小来平衡样本。
 # 现在数据集中要么全是dog要么全是cat，因此接下来要引入随机：
 
 import random
 
 random.shuffle(training_data)
 
-# 我们的training_data是一个列表，这意味着它是可变的，所以它现在很好地改组了。我们可以通过迭代几个初始样本并打印出类来确认这一点：
+# 我们的training_data是一个列表，这意味着它是可变的，所以它现在很好地改组了。
+# 我们可以通过迭代几个初始样本并打印出类来确认这一点：
 
 for sample in training_data[:10]:
     print(sample[1])
@@ -1166,23 +1146,19 @@ y = pickle.load(pickle_in)
 # 以上就是这次的关于数据集操作的全部任务。
 
 """
-
 基础知识
-
 基本的CNN结构如下： Convolution(卷积) -> Pooling(池化) -> Convolution -> Pooling -> Fully Connected Layer(全连接层) -> Output
-
-Convolution（卷积）是获取原始数据并从中创建特征映射的行为。Pooling(池化)是下采样，通常以“max-pooling”的形式，我们选择一个区域，然后在该区域中取最大值，这将成为整个区域的新值。Fully Connected Layers(全连接层)是典型的神经网络，其中所有节点都“完全连接”。卷积层不像传统的神经网络那样完全连接。
-
-卷积：我们将采用某个窗口，并在该窗口中查找要素,该窗口的功能现在只是新功能图中的一个像素大小的功能，但实际上我们将有多层功能图。接下来，我们将该窗口滑过并继续该过程,继续此过程，直到覆盖整个图像。
-
+Convolution（卷积）是获取原始数据并从中创建特征映射的行为。
+Pooling(池化)是下采样，通常以“max-pooling”的形式，我们选择一个区域，然后在该区域中取最大值，这将成为整个区域的新值。
+Fully Connected Layers(全连接层)是典型的神经网络，其中所有节点都“完全连接”。卷积层不像传统的神经网络那样完全连接。
+卷积：我们将采用某个窗口，并在该窗口中查找要素,该窗口的功能现在只是新功能图中的一个像素大小的功能，但实际上我们将有多层功能图。
+接下来，我们将该窗口滑过并继续该过程,继续此过程，直到覆盖整个图像。
 池化：最常见的池化形式是“最大池化”，其中我们简单地获取窗口中的最大值，并且该值成为该区域的新值。
-
-全连接层：每个卷积和池化步骤都是隐藏层。在此之后，我们有一个完全连接的层，然后是输出层。完全连接的层是典型的神经网络（多层感知器）类型的层，与输出层相同。
+全连接层：每个卷积和池化步骤都是隐藏层。在此之后，我们有一个完全连接的层，然后是输出层。
+完全连接的层是典型的神经网络（多层感知器）类型的层，与输出层相同。
 注意
-
 本次代码中所需的X.pickle和y.pickle为上一篇的输出，路径请根据自己的情况更改！
 """
-
 
 import tensorflow as tf
 from tensorflow.keras.datasets import cifar10
@@ -1220,44 +1196,39 @@ model.add(Activation("sigmoid"))
 
 model.compile(loss="binary_crossentropy", optimizer="adam", metrics=["accuracy"])
 
-model.fit(X, y, batch_size=32, epochs=3, validation_split=0.3)
+model.fit(X, y, batch_size=32, epochs=3, validation_split=0.3)  # 學習訓練.fit
 
 
 """
-在仅仅三个epoches之后，我们的验证准确率为71％。如果我们继续进行更多的epoches，我们可能会做得更好，但我们应该讨论我们如何知道我们如何做。为了解决这个问题，我们可以使用TensorFlow附带的TensorBoard，它可以帮助您在训练模型时可视化模型。
-
+在仅仅三个epoches之后，我们的验证准确率为71％。
+如果我们继续进行更多的epoches，我们可能会做得更好，但我们应该讨论我们如何知道我们如何做。
+为了解决这个问题，我们可以使用TensorFlow附带的TensorBoard，它可以帮助您在训练模型时可视化模型。
 我们将在下一个教程中讨论TensorBoard以及对我们模型的各种调整！
-
-
-
 """
-
 
 # 这是Python，TensorFlow和Keras教程系列的深度学习基础知识的第4部分。
-
-# 在这一部分，我们将讨论的是TensorBoard。TensorBoard是一个方便的应用程序，允许您在浏览器中查看模型或模型的各个方面。我们将TensorBoard与Keras一起使用的方式是通过Keras回调。实际上有很多Keras回调，你可以自己制作。
-
+# 在这一部分，我们将讨论的是TensorBoard。
+# TensorBoard是一个方便的应用程序，允许您在浏览器中查看模型或模型的各个方面。
+# 我们将TensorBoard与Keras一起使用的方式是通过Keras回调。实际上有很多Keras回调，你可以自己制作。
 from tensorflow.keras.callbacks import TensorBoard
-
 # Using TensorFlow backend.
-
 # 创建TensorBoard回调对象
 NAME = "Cats-vs-dogs-CNN"
 
 tensorboard = TensorBoard(log_dir="logs/{}".format(NAME))
 
 """
-最终，你会希望获得更多的自定义NAME，但现在这样做。因此，这将保存模型的训练数据logs/NAME，然后由TensorBoard读取。
-
-最后，我们可以通过将它添加到.fit方法中来将此回调添加到我们的模型中，例如：
-
+最终，你会希望获得更多的自定义NAME，但现在这样做。
+因此，这将保存模型的训练数据logs/NAME，然后由TensorBoard读取。
+最后，我们可以通过将它添加到.fit方法中来将此回调添加到我们的模型中，
+例如：
 model.fit(X, y,
           batch_size=32,
           epochs=3,
           validation_split=0.3,
-          callbacks=[tensorboard])
-
-请注意，这callbacks是一个列表。您也可以将其他回调传递到此列表中。我们的模型还没有定义，所以现在让我们把它们放在一起：
+          callbacks=[tensorboard])  # 學習訓練.fit
+请注意，这callbacks是一个列表。您也可以将其他回调传递到此列表中。
+我们的模型还没有定义，所以现在让我们把它们放在一起：
 """
 import tensorflow as tf
 from tensorflow.keras.datasets import cifar10
@@ -1305,17 +1276,17 @@ model.compile(
     metrics=["accuracy"],
 )
 
-model.fit(X, y, batch_size=32, epochs=3, validation_split=0.3, callbacks=[tensorboard])
-
-
-"""
-运行此之后，您应该有一个名为的新目录logs。我们现在可以使用tensorboard从这个目录中可视化初始结果。打开控制台，切换到工作目录，然后键入：tensorboard --logdir=logs/。您应该看到一个通知：TensorBoard 1.10.0 at http://H-PC:6006 (Press CTRL+C to quit)“h-pc”是您机器的名称。打开浏览器并前往此地址。你应该看到类似的东西：
-
-
+model.fit(X, y, batch_size=32, epochs=3, validation_split=0.3, callbacks=[tensorboard])  # 學習訓練.fit
 
 """
+运行此之后，您应该有一个名为的新目录logs。我们现在可以使用tensorboard从这个目录中可视化初始结果。
+打开控制台，切换到工作目录，然后键入：tensorboard --logdir=logs/。
+您应该看到一个通知：TensorBoard 1.10.0 at http://H-PC:6006 (Press CTRL+C to quit)“h-pc”是您机器的名称。
+打开浏览器并前往此地址。你应该看到类似的东西：
+"""
 
-# 现在我们可以看到我们的模型随着时间的推移。让我们改变模型中的一些东西。首先，我们从未在密集层中添加激活。另外，让我们尝试整体较小的模型：
+# 现在我们可以看到我们的模型随着时间的推移。让我们改变模型中的一些东西。
+# 首先，我们从未在密集层中添加激活。另外，让我们尝试整体较小的模型：
 
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Dropout, Activation, Flatten
@@ -1361,14 +1332,19 @@ model.compile(
     metrics=["accuracy"],
 )
 
-model.fit(X, y, batch_size=32, epochs=10, validation_split=0.3, callbacks=[tensorboard])
+model.fit(X, y, batch_size=32, epochs=10, validation_split=0.3, callbacks=[tensorboard])  # 學習訓練.fit
 
-# 除此之外，我还改名为NAME = "Cats-vs-dogs-64x2-CNN"。不要忘记这样做，否则你会偶然附加到你以前的型号的日志，它看起来不太好。我们现在检查TensorBoard：
+# 除此之外，我还改名为NAME = "Cats-vs-dogs-64x2-CNN"。
+# 不要忘记这样做，否则你会偶然附加到你以前的型号的日志，它看起来不太好。我们现在检查TensorBoard：
 
 """
-看起来更好！但是，您可能会立即注意到验证丢失的形状。损失是衡量错误的标准，看起来很明显，在我们的第四个时代之后，事情开始变得糟糕。
-有趣的是，我们的验证准确性仍然持续，但我想它最终会开始下降。更可能的是，第一件遭受的事情确实是你的验证损失。这应该提醒你，你几乎肯定会开始过度适应。这种情况发生的原因是该模型不断尝试减少样本损失。
-在某些时候，模型不是学习关于实际数据的一般事物，而是开始只记忆输入数据。如果你继续这样做，是的，样本中的“准确性”会上升，但你的样本，以及你试图为模型提供的任何新数据可能会表现得很差。
+看起来更好！但是，您可能会立即注意到验证丢失的形状。
+损失是衡量错误的标准，看起来很明显，在我们的第四个时代之后，事情开始变得糟糕。
+有趣的是，我们的验证准确性仍然持续，但我想它最终会开始下降。
+更可能的是，第一件遭受的事情确实是你的验证损失。这应该提醒你，你几乎肯定会开始过度适应。
+这种情况发生的原因是该模型不断尝试减少样本损失。
+在某些时候，模型不是学习关于实际数据的一般事物，而是开始只记忆输入数据。
+如果你继续这样做，是的，样本中的“准确性”会上升，但你的样本，以及你试图为模型提供的任何新数据可能会表现得很差。
 """
 
 

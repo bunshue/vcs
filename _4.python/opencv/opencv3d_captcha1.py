@@ -14,7 +14,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 
 print("------------------------------------------------------------")  # 60個
 
-filename = 'C:/_git/vcs/_4.python/opencv/data/captcha/captcha03.png"
+filename = "C:/_git/vcs/_4.python/opencv/data/captcha/captcha03.png"
 
 image = cv2.imread(filename)  # 讀取本機圖片
 

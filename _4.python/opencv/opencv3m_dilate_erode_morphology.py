@@ -35,10 +35,11 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
+
 def draw_line(image):
     H = image.shape[0]
     W = image.shape[1]
-    #print(image.shape, H // 100, W // 100)
+    # print(image.shape, H // 100, W // 100)
     for i in range(H // 100 + 1):
         cv2.line(image, (0, 100 * i), (W, 100 * i), (0, 0, 100), 2)  # 畫線 水平線 R
 
@@ -47,8 +48,9 @@ def draw_line(image):
             image, (100 * i, 0), (100 * i, H), (0, 100, 0), 2, lineType=cv2.LINE_AA
         )  # 畫線 垂直線 G
 
+
 print("------------------------------------------------------------")  # 60個
-'''
+"""
 print("dilate 擴大 膨脹 效果")
 
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/kernel.bmp"
@@ -177,7 +179,7 @@ plt.suptitle("白色區域被侵蝕、縮小了")
 plt.tight_layout()
 plt.show()
 
-'''
+"""
 print("------------------------------------------------------------")  # 60個
 
 print("erode-dilate")
@@ -185,8 +187,8 @@ print("erode-dilate")
 filename = "data/flower.png"
 filename = "C:/_git/vcs/_4.python/opencv/data/dilate_erode1.png"
 filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
-#filename = "C:/_git/vcs/_4.python/_data/bear.jpg"
-#filename = "C:/_git/vcs/_4.python/_data/panda.jpg"
+# filename = "C:/_git/vcs/_4.python/_data/bear.jpg"
+# filename = "C:/_git/vcs/_4.python/_data/panda.jpg"
 
 
 original_img = cv2.imread(filename)
@@ -209,7 +211,7 @@ cv2.imshow("RedThresh", RedThresh)  # 紅色閾值圖像
 # OpenCV定義的結構矩形元素
 kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (3, 3))
 
-eroded  = cv2.erode( RedThresh, kernel)  # 腐蝕圖像
+eroded = cv2.erode(RedThresh, kernel)  # 腐蝕圖像
 dilated = cv2.dilate(RedThresh, kernel)  # 膨脹圖像
 
 cv2.imshow("Eroded Image", eroded)  # 顯示腐蝕后的圖像
@@ -260,7 +262,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("morphology 形態學")
 
-#original_img = cv2.imread("data/lena.png")
+# original_img = cv2.imread("data/lena.png")
 original_img = cv2.imread("data/lena.png", 0)
 
 kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (3, 3))  # 定義矩形結構元素
@@ -921,13 +923,13 @@ while True:
     r = cv2.getTrackbarPos("r", "morphology")
     # 得到當前的i值
     i = cv2.getTrackbarPos("i", "morphology")
-    
+
     # 創建結構元
     s = cv2.getStructuringElement(cv2.MORPH_RECT, (2 * r + 1, 2 * r + 1))
-    
+
     # 形態學處理
     d = cv2.morphologyEx(I, cv2.MORPH_GRADIENT, s, iterations=i)
-    
+
     # 顯示效果
     cv2.imshow("morphology", d)
 

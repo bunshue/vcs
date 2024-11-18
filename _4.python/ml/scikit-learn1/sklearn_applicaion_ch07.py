@@ -13,6 +13,7 @@ import random
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns  # 海生, 自動把圖畫得比較好看
 
 font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
@@ -21,6 +22,12 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 # 設定負號
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
+
+print("------------------------------------------------------------")  # 60個
+
+import sklearn.linear_model
+from sklearn import datasets
+from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -71,10 +78,7 @@ print("------------------------------------------------------------")  # 60個
 # 08_02_k_fold_cross_validation
 # Scikit-learn K折交叉驗證法
 
-from sklearn import datasets
 from sklearn.preprocessing import StandardScaler
-from sklearn.model_selection import train_test_split
-import numpy as np
 
 # 載入資料集
 X, y = datasets.load_diabetes(return_X_y=True)
@@ -91,7 +95,8 @@ X_test_std = scaler.transform(X_test)
 
 from sklearn.linear_model import LinearRegression
 
-clf = LinearRegression()
+clf = sklearn.linear_model.LinearRegression()  # 函數學習機
+
 clf.fit(X_train_std, y_train)
 
 # 模型評分
@@ -180,10 +185,7 @@ print("------------------------------------------------------------")  # 60個
 
 # Scikit-learn 管線測試
 
-import numpy as np
-from sklearn import datasets
 from sklearn.preprocessing import StandardScaler
-from sklearn.model_selection import train_test_split
 from sklearn.pipeline import make_pipeline
 from sklearn.decomposition import PCA
 from sklearn.linear_model import Lasso
@@ -327,7 +329,6 @@ print(cc)
 
 # 繪製混淆矩陣
 from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
-import matplotlib.pyplot as plt
 
 ConfusionMatrixDisplay.from_predictions(
     y_true, y_pred, labels=[1, 0], display_labels=["真", "偽"]
@@ -372,16 +373,13 @@ y_true = [2, 0, 2, 2, 0, 1]
 y_pred = [0, 0, 2, 2, 0, 2]
 
 # 計算混淆矩陣
-
 from sklearn.metrics import confusion_matrix
 
 cc = confusion_matrix(y_true, y_pred)
 print(cc)
 
 # 繪製混淆矩陣
-
 from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
-import matplotlib.pyplot as plt
 
 ConfusionMatrixDisplay.from_predictions(y_true, y_pred)
 plt.show()
@@ -414,9 +412,7 @@ plt.show()
 
 # 繪製混淆矩陣
 
-import numpy as np
-from sklearn import svm, datasets
-from sklearn.model_selection import train_test_split
+from sklearn import svm
 
 # 載入資料
 ds = datasets.load_iris()
@@ -458,13 +454,6 @@ print("------------------------------------------------------------")  # 60個
 
 # 計算及繪製混淆矩陣
 
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
-
-# 載入資料
-
 df = pd.read_csv("C:/_git/vcs/_big_files/Scikit-learn_data/creditcard.csv")
 cc = df.head()
 print(cc)
@@ -481,7 +470,6 @@ plt.show()
 # 模型訓練與預測
 
 from sklearn.linear_model import LogisticRegression
-from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 
 X, y = df.drop(["Time", "Amount", "Class"], axis=1), df["Class"]
@@ -559,12 +547,7 @@ Receiver operating characteristic curve
 
 # 繪製ROC曲線
 
-import numpy as np
-import matplotlib.pyplot as plt
-
 # 載入資料
-
-import pandas as pd
 
 df = pd.read_csv("./data/roc_test_data.csv")
 print(df)
@@ -665,19 +648,9 @@ print("------------------------------------------------------------")  # 60個
 
 # 實作乳癌診斷，並繪製ROC曲線
 
-import matplotlib.pyplot as plt
-import pandas as pd
-import numpy as np
-from sklearn import datasets
-
-# 載入資料
-
 data = datasets.load_breast_cancer()
 
 # 資料分割
-
-from sklearn.model_selection import train_test_split
-
 X_train, X_test, y_train, y_test = train_test_split(
     data.data[:, :6], data.target, test_size=0.20
 )
@@ -739,11 +712,6 @@ print("------------------------------------------------------------")  # 60個
 
 # 信用卡詐欺偵測
 
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
-
 # 載入資料
 
 df = pd.read_csv("C:/_git/vcs/_big_files/Scikit-learn_data/creditcard.csv")
@@ -758,10 +726,7 @@ print(cc)
 sns.countplot(x="Class", data=df)
 plt.show()
 
-# 模型訓練與評估
-
 from sklearn.linear_model import LogisticRegression
-from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 
 X, y = df.drop(["Time", "Amount", "Class"], axis=1), df["Class"]
@@ -879,16 +844,8 @@ print(classification_report_imbalanced(y_test, y_pred))
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 # 09_01_simple_kmeans_from_scratch
 # 自行開發K-Means
-
-import pandas as pd
-import numpy as np
-import math
 
 # K-Means演算法類別
 
@@ -951,13 +908,6 @@ print("------------------------------------------------------------")  # 60個
 # 09_02_kmeans_from_scratch
 
 # 自行開發K-Means
-
-import pandas as pd
-import numpy as np
-import math
-import random
-import matplotlib.pyplot as plt
-import seaborn as sns
 
 # 歐幾里得距離函數
 
@@ -1068,8 +1018,6 @@ plt.show()
 
 # 鳶尾花資料集測試
 
-from sklearn import datasets
-
 X, y = datasets.load_iris(return_X_y=True)
 
 # 標準化
@@ -1111,25 +1059,18 @@ print("------------------------------------------------------------")  # 60個
 
 # 09_03_Scikit-learn_kmeans
 
-# 鳶尾花資料集測試
+# 鳶尾花資料集
 
-from sklearn import datasets
-from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
-import numpy as np
-import matplotlib.pyplot as plt
 from sklearn.preprocessing import StandardScaler
 
 # 載入資料集
-
 X, y = datasets.load_iris(return_X_y=True)
 
 # 資料分割
-
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 # 特徵縮放
-
 scaler = StandardScaler()
 X_train_std = scaler.fit_transform(X_train)
 X_test_std = scaler.transform(X_test)
@@ -1177,8 +1118,6 @@ print("------------------------------------------------------------")  # 60個
 
 # 轉折判斷法(Elbow)
 
-import numpy as np
-
 # 生成分類資料
 
 from sklearn.datasets import make_blobs
@@ -1217,10 +1156,6 @@ for i in range(1, 11):
     km.fit(X)
     distortions.append(km.inertia_)
 
-# 繪圖
-
-import matplotlib.pyplot as plt
-
 plt.plot(range(1, 11), distortions, marker="o")
 plt.xlabel("集群數量", fontsize=14)
 plt.ylabel("失真", fontsize=14)
@@ -1234,11 +1169,9 @@ print("------------------------------------------------------------")  # 60個
 # 輪廓圖分析(Silhouette Analysis)
 
 from sklearn.cluster import KMeans
-import numpy as np
 from matplotlib import cm
 from sklearn.metrics import silhouette_samples
 from sklearn.datasets import make_blobs
-import matplotlib.pyplot as plt
 
 # 生成分類資料
 
@@ -1366,12 +1299,7 @@ print("------------------------------------------------------------")  # 60個
 
 # 凝聚階層集群(Agglomerative Hierarchical Clustering, AHC)
 
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-
 # 生成資料
-
 np.random.seed(123)
 variables = ["X", "Y", "Z"]
 labels = ["ID_0", "ID_1", "ID_2", "ID_3", "ID_4"]
@@ -1495,10 +1423,6 @@ plt.show()
 
 # 各種距離衡量方式的比較
 
-import time
-import matplotlib.pyplot as plt
-import numpy as np
-
 from sklearn.cluster import AgglomerativeClustering
 from sklearn.neighbors import kneighbors_graph
 
@@ -1557,13 +1481,9 @@ print("------------------------------------------------------------")  # 60個
 
 # 以密度為基礎的集群(Density-based spatial clustering of applications with noise, DBSCAN)
 
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
 from sklearn.cluster import DBSCAN
 
 # 生成資料
-
 X = np.array([[1, 2], [2, 2], [2, 3], [8, 7], [8, 8], [25, 80]])
 print(X)
 
@@ -1704,14 +1624,9 @@ print("------------------------------------------------------------")  # 60個
 # 09_08_gmm_test
 # GMM測試，程式修改自Python Data Science Handbook 範例05.12-Gaussian-Mixtures.ipynb
 
-import matplotlib.pyplot as plt
-import seaborn as sns
-
 sns.set()
-import numpy as np
 
 # 生成分類資料
-
 from sklearn.datasets import make_blobs
 
 X, y_true = make_blobs(n_samples=400, centers=4, cluster_std=0.60, random_state=0)
@@ -1936,8 +1851,6 @@ print("------------------------------------------------------------")  # 60個
 
 # 影像壓縮(Image Compression)
 
-import numpy as np
-import matplotlib.pyplot as plt
 from sklearn.utils import shuffle
 from sklearn.datasets import load_sample_image
 from sklearn.cluster import KMeans
@@ -2039,11 +1952,6 @@ print("------------------------------------------------------------")  # 60個
 
 # 09_10_customer_segmentation
 # 客戶區隔(Customer segmentation)
-
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
 
 # 載入資料集
 df = pd.read_csv(

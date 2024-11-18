@@ -290,6 +290,7 @@ image[:] = (200, 200, 200)  # 將所有點著色
 
 print("畫標示頁箋")
 
+
 # 用 putText 繪製物件偵測的標籤
 def drawBoundingBox(image, bboxs):
     for box in bboxs:
@@ -328,19 +329,19 @@ def draw_line(image):
 
 bboxs = []
 box = {}
-box['label'] = 'object 1'
-box['x1'] = 40
-box['y1'] = 40
-box['x2'] = 180
-box['y2'] = 180
+box["label"] = "object 1"
+box["x1"] = 40
+box["y1"] = 40
+box["x2"] = 180
+box["y2"] = 180
 bboxs.append(box)
-box2 = {'label' : 'object 2', 'x1' : 300, 'y1' : 200, 'x2' : 600, 'y2' : 440}
+box2 = {"label": "object 2", "x1": 300, "y1": 200, "x2": 600, "y2": 440}
 bboxs.append(box2)
 drawBoundingBox(image, bboxs)
 
 draw_line(image)
 
-cv2.imshow('OpenCV Draw 3', image)
+cv2.imshow("OpenCV Draw 3", image)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 

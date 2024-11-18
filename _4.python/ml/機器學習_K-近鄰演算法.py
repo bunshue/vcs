@@ -38,14 +38,17 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
+from sklearn.neighbors import KNeighborsClassifier  # K近鄰演算法（K Nearest Neighbor, KNN）
+from sklearn.neighbors import KNeighborsRegressor
+
 from sklearn import datasets
-from sklearn.model_selection import train_test_split
-from sklearn.neighbors import KNeighborsClassifier
+from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
 
 """
 2019.01.02 更新 ：
 由於 sklearn.cross_validation 方法要被棄用了，所以必須改成 sklearn.model_selection。
 """
+print("------------------------------------------------------------")  # 60個
 
 iris = datasets.load_iris()
 
@@ -62,11 +65,11 @@ train_data, test_data, train_label, test_label = train_test_split(
     iris_data, iris_label, test_size=0.2
 )
 
-knn = KNeighborsClassifier()  # 使用KNeighbors分類法
+knn = KNeighborsClassifier()  # K近鄰演算法（K Nearest Neighbor, KNN）
 
 knn.fit(train_data, train_label)
 
-y_pred = knn.predict(test_data)
+y_pred = knn.predict(test_data)  # 預測.predict
 
 print("預測結果")
 print(y_pred)
@@ -121,60 +124,54 @@ print(dy.shape)
 print(dy_train.shape)
 print(dy_test.shape)
 
-# k 最近鄰演算法 (KNN)
-from sklearn.neighbors import KNeighborsClassifier
-
-knn = KNeighborsClassifier(n_neighbors=5)
+knn = KNeighborsClassifier(n_neighbors=5)  # K近鄰演算法（K Nearest Neighbor, KNN）
 
 knn.fit(dx_train, dy_train)  # 學習訓練.fit
 
-predictions = knn.predict(dx_test)  # 預測.predict
+y_pred = knn.predict(dx_test)  # 預測.predict
+print(y_pred)
 
 print(dy_test)
-print(predictions)
 print(knn.score(dx_train, dy_train))
 print(knn.score(dx_test, dy_test))
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-from sklearn.neighbors import KNeighborsClassifier
 from sklearn.datasets import make_moons
-from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 
 # データ生成
 X, y = make_moons(noise=0.3)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
 
-model = KNeighborsClassifier()
+knn = KNeighborsClassifier()  # K近鄰演算法（K Nearest Neighbor, KNN）
 
-model.fit(X_train, y_train)  # 學習訓練.fit
+knn.fit(X_train, y_train)  # 學習訓練.fit
 
-y_pred = model.predict(X_test)  # 預測.predict
+y_pred = knn.predict(X_test)  # 預測.predict
 
 print(accuracy_score(y_pred, y_test))  # 評価
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("K-近鄰演算法（K Nearest Neighbor）")
-
-from sklearn import neighbors
+print("K-近鄰演算法（K Nearest Neighbor, KNN）")
 
 X = pd.DataFrame({"耐酸性": [7, 7, 3, 1], "強度": [7, 4, 4, 4]})
 
 y = np.array([0, 0, 1, 1])
 k = 3
 
-knn = neighbors.KNeighborsClassifier(n_neighbors=k)  # K近鄰演算法（K Nearest Neighbor）
+knn = KNeighborsClassifier(n_neighbors=k)  # K近鄰演算法（K Nearest Neighbor, KNN）
 
 knn.fit(X, y)  # 學習訓練.fit
 
 # 預測新產品[3,7]的分類 1:好 0:壞
 new_tissue = pd.DataFrame(np.array([[3, 7]]), columns=["耐酸性", "強度"])
-pred = knn.predict(new_tissue)
-print(pred)
+
+y_pred = knn.predict(new_tissue)  # 預測.predict
+print(y_pred)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -184,28 +181,26 @@ centers = [[-2, 2], [2, 2], [0, 4]]
 X, y = make_blobs(n_samples=60, centers=centers, random_state=9487, cluster_std=0.60)
 
 # 畫出數據
-plt.figure(figsize=(12, 8))
 c = np.array(centers)
 plt.scatter(X[:, 0], X[:, 1], c=y, s=100, cmap="cool")  # 畫出樣本
 plt.scatter(c[:, 0], c[:, 1], s=100, marker="^", c="orange")  # 畫出中心點
 
 plt.show()
 
-from sklearn.neighbors import KNeighborsClassifier  # K近鄰演算法（K Nearest Neighbor）
-
-# 模型訓練
 k = 5
-clf = KNeighborsClassifier(n_neighbors=k)  # K近鄰演算法（K Nearest Neighbor）
-clf.fit(X, y)
+knn = KNeighborsClassifier(n_neighbors=k)  # K近鄰演算法（K Nearest Neighbor, KNN）
+
+knn.fit(X, y)
 
 # 進行預測
 X_sample = [0, 2]
 X_sample = np.array(X_sample).reshape(1, -1)
-y_sample = clf.predict(X_sample)
-neighbors = clf.kneighbors(X_sample, return_distance=False)
+
+y_pred = knn.predict(X_sample)  # 預測.predict
+
+neighbors = knn.kneighbors(X_sample, return_distance=False)
 
 # 畫出示意圖
-plt.figure(figsize=(12, 8))
 plt.scatter(X[:, 0], X[:, 1], c=y, s=100, cmap="cool")  # 樣本
 plt.scatter(c[:, 0], c[:, 1], s=100, marker="^", c="k")  # 中心點
 plt.scatter(X_sample[0][0], X_sample[0][1], marker="x", s=100, cmap="cool")  # 待預測的點
@@ -227,26 +222,90 @@ y = np.cos(X).ravel()
 # 添加一些噪聲
 y += 0.2 * np.random.rand(N) - 0.1
 
-# 訓練模型
-from sklearn.neighbors import KNeighborsRegressor
-
 k = 5
 knn = KNeighborsRegressor(k)
 knn.fit(X, y)
 
 # 生成足夠密集的點并進行預測
 T = np.linspace(0, 5, 500)[:, np.newaxis]
-y_pred = knn.predict(T)
+
+y_pred = knn.predict(T)  # 預測.predict
 print(knn.score(X, y))
 
 # 畫出擬合曲線
-plt.figure(figsize=(12, 8))
 plt.scatter(X, y, c="g", label="data", s=100)  # 畫出訓練樣本
 plt.plot(T, y_pred, c="k", label="prediction", lw=4)  # 畫出擬合曲線
-plt.axis("tight")
 plt.title("KNeighborsRegressor (k = %i)" % k)
+plt.axis("tight")
 plt.show()
 
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+from sklearn import datasets
+from sklearn.neighbors import KNeighborsClassifier
+
+iris = datasets.load_iris()
+iris_X = iris.data
+iris_y = iris.target
+
+print(iris_X[:2, :])
+print(iris_y)
+
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+X_train, X_test, y_train, y_test = train_test_split(iris_X, iris_y, test_size=0.2)
+# 訓練組8成, 測試組2成
+
+knn = KNeighborsClassifier()
+knn.fit(X_train, y_train)
+print(knn.predict(X_test))
+print(y_test)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# from __future__ import print_function
+from sklearn.datasets import load_iris
+from sklearn.neighbors import KNeighborsClassifier
+
+iris = load_iris()
+X = iris.data
+y = iris.target
+
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+# 訓練組8成, 測試組2成
+
+knn = KNeighborsClassifier(n_neighbors=5)
+knn.fit(X_train, y_train)
+y_pred = knn.predict(X_test)
+print(knn.score(X_test, y_test))
+
+""" some NG
+# this is cross_val_score #
+from sklearn.cross_validation import cross_val_score
+
+knn = KNeighborsClassifier(n_neighbors=5)
+scores = cross_val_score(knn, X, y, cv=5, scoring="accuracy")
+print(scores)
+
+# this is how to use cross_val_score to choose model and configs #
+from sklearn.cross_validation import cross_val_score
+import matplotlib.pyplot as plt
+
+k_range = range(1, 31)
+k_scores = []
+for k in k_range:
+    knn = KNeighborsClassifier(n_neighbors=k)
+    ##    loss = -cross_val_score(knn, X, y, cv=10, scoring='mean_squared_error') # for regression
+    scores = cross_val_score(knn, X, y, cv=10, scoring="accuracy")  # for classification
+    k_scores.append(scores.mean())
+
+plt.plot(k_range, k_scores)
+plt.xlabel("Value of K for KNN")
+plt.ylabel("Cross-Validated Accuracy")
+plt.show()
+"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 

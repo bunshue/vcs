@@ -91,7 +91,7 @@ yy0 = np.sin(3.2 * x) + 0.8 * x
 yy1 = np.sin(3.2 * x) + 0.8 * x + 0.3 * np.random.randn(N)
 """
 print("------------------------------------------------------------")  # 60個
-
+'''
 print("資料來源 : 建立迴歸資料 make_regression 1 無 / 有 資料分割")
 
 N = 100
@@ -225,10 +225,10 @@ x = xx
 y0 = yy0  # 理想資料
 y1 = yy1  # 真實資料
 
-linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
-
 X = x.reshape(len(x), 1)  # x訓練資料要轉為 NX1 陣列
-y1 = y1.reshape(len(y1), 1)
+# y1 = y1.reshape(len(y1), 1) 可以不用
+
+linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
 
 linear_regression.fit(X, y1)  # 學習訓練.fit
 
@@ -295,146 +295,97 @@ evaluate_result(y_test, y_pred)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("資料來源 : 自建資料 7c SVR線性迴歸")
+print("資料來源 : 自建資料 7c SVR(linear) 迴歸")
 
 x = xx
 y0 = yy0  # 理想資料
 y1 = yy1  # 真實資料
-
-# 做線性迴歸, 用 sklearn 裡的 SVR 來做線性迴歸
-svr_lin = sklearn.svm.SVR(kernel="linear", C=1e3)  # SVR 函數學習機, linear
-
 X = x.reshape(len(x), 1)  # x訓練資料要轉為 NX1 陣列
 
-svr_lin.fit(X, y1)  # 學習訓練.fit
+# 迴歸, 用 sklearn 裡的 SVR 的 linear 來做迴歸
+svr_lin = sklearn.svm.SVR(kernel="linear", C=1e3)  # SVR 函數學習機, linear
 
-y_pred = svr_lin.predict(X)  # 預測.predict
+svr_lin.fit(X, y1)  # 學習訓練.fit, SVR(linear) 迴歸
+
+y_pred_lin = svr_lin.predict(X)  # 預測.predict, SVR(linear)
 
 plt.plot(x, y0, "lime", lw=5, label="理想資料")  # 理想資料, y = x 綠線
 plt.plot(x, y1, "bo-", label="真實資料")  # 真實資料, 藍點藍線
-plt.plot(x, y_pred, color="r", marker="o", markersize=8, label="SVR線性迴歸")  # SVR線性迴歸
+plt.plot(x, y_pred_lin, color="r", marker="o", markersize=8, label="SVR線性迴歸")  # SVR線性迴歸
 
-plt.title("SVR線性迴歸1")
-# plt.axis([0, 10, 0, 10])  # 設定各軸顯示範圍
+plt.title("SVR(linear) 迴歸")
+plt.axis([0, 10, 0, 10])  # 設定各軸顯示範圍
 plt.legend()
 plt.grid()
-
-plt.show()
-
-print("------------------------------")  # 30個
-
-# 用訓練資料來 fit 函數 方法一
-# 記得現在我們只用 80% 的資料去訓練。
-
-# 做線性迴歸, 用 sklearn 裡的 SVR 來做線性迴歸
-svr_lin = sklearn.svm.SVR(kernel="linear", C=1e3)  # SVR 函數學習機, linear
-
-X_train = x_train.reshape(len(x_train), 1)
-
-svr_lin.fit(X_train, y_train)  # 學習訓練.fit
-
-Y_train = svr_lin.predict(X_train)  # 預測.predict
-
-plt.scatter(x_train, y_train)  # 原始訓練資料
-
-plt.plot(x_train, Y_train, color="r", marker="o", markersize=8, label="訓練資料2")  # 訓練資料2
-
-plt.title("訓練資料2")
-
-plt.show()
-
-# 用測試資料試試我們預測準不準
-
-X_test = x_test.reshape(len(x_test), 1)
-Y_test = svr_lin.predict(X_test)  # 預測.predict
-
-plt.scatter(x_test, y_test)
-plt.scatter(x_test, Y_test, c="r")
-plt.title("測試結果1")
-
-plt.show()
-
-# 使用SVR
-
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
-x_train, x_test, y_train, y_test = train_test_split(
-    x, y1, test_size=0.2, random_state=9487
-)
-# 訓練組8成, 測試組2成
-
-# 準備生這個函數
-
-# 做線性迴歸, 用 sklearn 裡的 SVR 來做線性迴歸
-svr_rbf = sklearn.svm.SVR(kernel="rbf", C=1e3, gamma=0.3)  # SVR 函數學習機, rbf
-
-# 做線性迴歸, 用 sklearn 裡的 SVR 來做線性迴歸
-svr_lin = sklearn.svm.SVR(kernel="linear", C=1e3)  # SVR 函數學習機, linear
-
-# 做線性迴歸, 用 sklearn 裡的 SVR 來做線性迴歸
-svr_poly = sklearn.svm.SVR(kernel="poly", C=1e3, degree=4)  # SVR 函數學習機, poly
-
-X_train = x_train.reshape(len(x_train), 1)
-
-svr_rbf.fit(X_train, y_train)  # 學習訓練.fit
-svr_lin.fit(X_train, y_train)  # 學習訓練.fit
-svr_poly.fit(X_train, y_train)  # 學習訓練.fit
-
-# 看看訓練成果
-
-X = x.reshape(len(x), 1)
-
-y_pred_rbf = svr_rbf.predict(X)  # 預測.predict
-y_pred_lin = svr_lin.predict(X)  # 預測.predict
-y_pred_poly = svr_poly.predict(X)  # 預測.predict
-
-plt.scatter(x, y1, s=100, c="r", label="原始資料")
-plt.plot(x, y_pred_rbf, label="rbf")
-plt.plot(x, y_pred_lin, label="linear")
-plt.plot(x, y_pred_poly, label="polynomial")
-
-plt.legend()
-plt.title("比較各種方法")
-
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("資料來源 : 自建資料 7d 各種方法比較")
+print("資料來源 : 自建資料 7c SVR(rbf/linear/poly) 迴歸")
 
 x = xx
 y0 = yy0  # 理想資料
 y1 = yy1  # 真實資料
+X = x.reshape(len(x), 1)  # x訓練資料要轉為 NX1 陣列
 
-print("------------------------------")  # 30個
-# 使用 線性學習機 學習
+# 迴歸, 用 sklearn 裡的 SVR 的 rbf 來做迴歸
+svr_rbf = sklearn.svm.SVR(kernel="rbf", C=1e3, gamma=0.3)  # SVR 函數學習機, rbf
 
-linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
-X = x.reshape(len(x), 1)
-linear_regression.fit(X, y1)  # 學習訓練.fit
+# 迴歸, 用 sklearn 裡的 SVR 的 linear 來做迴歸
+svr_lin = sklearn.svm.SVR(kernel="linear", C=1e3)  # SVR 函數學習機, linear
 
-y_pred_lin = linear_regression.predict(X)  # 預測.predict
+# 迴歸, 用 sklearn 裡的 SVR 的 poly 來做迴歸
+svr_poly = sklearn.svm.SVR(kernel="poly", C=1e3, degree=4)  # SVR 函數學習機, poly
 
-print("------------------------------")  # 30個
-# 使用 6 次多項式 學習
+svr_rbf.fit(X, y1)  # 學習訓練.fit, SVR(rbf) 迴歸
+svr_lin.fit(X, y1)  # 學習訓練.fit, SVR(linear) 迴歸
+svr_poly.fit(X, y1)  # 學習訓練.fit, SVR(poly) 迴歸
 
-X_poly = np.array([[k, k**2, k**3, k**4, k**5, k**6] for k in x])
-regression_poly = sklearn.linear_model.LinearRegression()  # 函數學習機
-regression_poly.fit(X_poly, y1)  # 學習訓練.fit
-y_pred_poly = regression_poly.predict(X_poly)  # 預測.predict
+y_pred_rbf = svr_rbf.predict(X)  # 預測.predict, SVR(rbf)
+y_pred_lin = svr_lin.predict(X)  # 預測.predict, SVR(linear)
+y_pred_poly = svr_poly.predict(X)  # 預測.predict, SVR(poly)
 
-print("------------------------------")  # 30個
+plt.plot(x, y0, "lime", lw=5, label="理想資料")  # 理想資料, y = x 綠線
+plt.plot(x, y1, "bo-", label="真實資料")  # 真實資料, 藍點藍線
+plt.plot(x, y_pred_rbf, color="m", marker="o", markersize=8, label="rbf")  # SVR(rbf)
+plt.plot(x, y_pred_lin, color="r", marker="o", markersize=8, label="linear")  # SVR(linear)
+plt.plot(x, y_pred_poly, color="y", marker="o", markersize=8, label="poly")  # SVR(poly)
+plt.title("SVR(rbf/linear/poly) 迴歸")
+plt.axis([0, 10, 0, 10])  # 設定各軸顯示範圍
+plt.legend()
+plt.grid()
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
 # 使用 Radial Basis Function (RBF)
 # （高斯）徑向基函數核（英語：Radial basis function kernel），或稱為RBF核
-
-
 def RBF(x, center, sigma):
     k = np.exp(-((x - center) ** 2) / (2 * sigma**2))
     return k
 
 
-sigma = 0.3
+print("資料來源 : 自建資料 7d 線性/多項式/RBF")
 
+x = xx
+y0 = yy0  # 理想資料
+y1 = yy1  # 真實資料
+
+# 使用 線性學習機 學習
+linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
+X = x.reshape(len(x), 1)
+linear_regression.fit(X, y1)  # 學習訓練.fit
+
+# 使用 6 次多項式 學習
+X_poly = np.array([[k, k**2, k**3, k**4, k**5, k**6] for k in x])
+regression_poly = sklearn.linear_model.LinearRegression()  # 函數學習機
+regression_poly.fit(X_poly, y1)  # 學習訓練.fit
+
+# 使用 RBF
+sigma = 0.3
 X_rbf = np.array(
     [
         [
@@ -447,18 +398,15 @@ X_rbf = np.array(
         for k in x
     ]
 )
-
 regression_rbf = sklearn.linear_model.LinearRegression()  # 函數學習機
 regression_rbf.fit(X_rbf, y1)  # 學習訓練.fit
+
+y_pred_lin = linear_regression.predict(X)  # 預測.predict
+y_pred_poly = regression_poly.predict(X_poly)  # 預測.predict
 y_pred_rbf = regression_rbf.predict(X_rbf)  # 預測.predict
-
-
-print("------------------------------")  # 30個
-# 三種一起比較
 
 plt.plot(x, y0, color="lime", label="理想資料")  # 理想資料
 plt.plot(x, y1, color="m", marker="o", markersize=8, label="真實資料")  # 線性迴歸曲線
-
 plt.plot(x, y_pred_lin, "r", label="線性學習機 預測結果")
 plt.plot(x, y_pred_poly, "g", label="6次多項式 預測結果")
 plt.plot(x, y_pred_rbf, "b", label="RBF 預測結果")
@@ -466,7 +414,6 @@ plt.plot(x, y_pred_rbf, "b", label="RBF 預測結果")
 plt.title("各種方法比較")
 plt.legend()
 plt.grid()
-
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
@@ -474,18 +421,25 @@ print("------------------------------------------------------------")  # 60個
 
 print("資料來源 : 內建資料 1 計程車小費資料集EDA")
 
+"""
 # 計程車小費資料集EDA
+
+共244筆資料, 7個欄位
+
+
+"""
 
 from sklearn import preprocessing
 
 df = sns.load_dataset("tips")
-cc = df.head()
+cc = df.head(30)
 print(cc)
 
-# 2. 資料清理、資料探索與分析
+# 資料清理、資料探索與分析
 
 # 對小費繪製直方圖
 sns.histplot(x="tip", data=df)
+plt.title('小費統計')
 plt.show()
 
 df["log_tip"] = np.log(df["tip"])
@@ -494,17 +448,24 @@ plt.show()
 
 # 散佈圖
 sns.scatterplot(x="total_bill", y="tip", data=df)
+plt.xlabel('全車資')
+plt.ylabel('小費')
 plt.show()
 
 # 三維散佈圖
 sns.scatterplot(x="total_bill", y="tip", hue="sex", data=df)
+plt.xlabel('全車資')
+plt.ylabel('小費')
 plt.show()
 
 # joint plot
 sns.jointplot(data=df, x="total_bill", y="tip", hue="day")
+plt.xlabel('全車資')
+plt.ylabel('小費')
 plt.show()
 
-df.day.unique()
+cc = df.day.unique()
+print(cc)
 
 # ['Sun', 'Sat', 'Thur', 'Fri']
 # Categories (4, object): ['Thur', 'Fri', 'Sat', 'Sun']
@@ -512,10 +473,14 @@ df.day.unique()
 # 觀察週間對小費的影響
 
 sns.barplot(x="day", y="tip", data=df)
+plt.xlabel('星期幾')
+plt.ylabel('小費')
 plt.show()
 
 # 箱型圖
 sns.boxplot(x="day", y="tip", data=df)
+plt.xlabel('星期幾')
+plt.ylabel('小費')
 plt.show()
 
 # 類別變數轉換為數值
@@ -527,25 +492,29 @@ df.time = df.time.map({"Lunch": 0, "Dinner": 1}).astype(int)
 cc = df.info()
 print(cc)
 
-# 繪製pair plot
+print("繪製pair plot")
 sns.pairplot(data=df, height=1)
+plt.title("繪製pair plot")
 plt.show()
 
-# 熱力圖
+print("熱力圖")
 sns.heatmap(data=df.corr(), annot=True, fmt=".2f", linewidths=0.5)
+plt.title("熱力圖")
 plt.show()
 
 cc = df.isna().sum()
 print(cc)
 
-# 3. 不須進行特徵工程
+# 不須進行特徵工程
 
-# 4. 資料分割
+# 資料分割
 
 # 指定X，並轉為 Numpy 陣列
 X = df.drop("tip", axis=1).values
 y = df.tip.values
 print(y)
+
+# 真正開始分析資料
 
 # 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
@@ -569,17 +538,21 @@ y_pred = linear_regression.predict(X_test_std)  # 預測.predict
 
 print("評估 測試資料 與 預測結果 的差異")
 evaluate_result(y_test, y_pred)
-
+'''
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
+'''
 print("資料來源 : 檔案資料")
 
+# 共 15188 筆資料, 16欄位
 df = pd.read_excel(
     "C:/_git/vcs/_4.python/__code/Python-PM2.5-DataAnalyzing-master/各種演算法比較/20160101-20190101(Daily)迴歸分析.xlsx"
 )
 
-"""
+print("df 111")
+print(df.columns)
+print(df.shape)
+print(df)
 cc = df.head(10)
 print(cc)
 
@@ -592,15 +565,18 @@ print(cc)
 
 cc = df.describe()
 print(cc)
-"""
-cc = df.set_index("Date")
+
+print(df.columns)
+cc = df.set_index("Date") # 將Date欄位設定為索引欄位
+print("df 222")
+print(df.columns)
+print(df.shape)
 print(cc)
 
-"""
-df.dtypes
-df.isnull().sum()
-df.isnull().any()
-"""
+print(df.dtypes)
+print(df.isnull().sum())
+print(df.isnull().any())
+
 
 x = df[
     [
@@ -655,91 +631,7 @@ evaluate_result(y_test, y_pred)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-print("資料來源 : 自建 ddddd")
-
-N = 50
-x = np.linspace(0, 1, N)
-y = 1.2 * x + 0.8 + 0.2 * np.random.randn(N)
-
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
-x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2)
-# 訓練組8成, 測試組2成
-
-# 正式轉我們的訓練資料
-x_train = x_train.reshape(len(x_train), 1)
-x_test = x_test.reshape(len(x_test), 1)
-
-linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
-
-linear_regression.fit(x_train, y_train)  # 學習訓練.fit
-
-y_pred = linear_regression.predict(x_test)  # 預測.predict
-
-plt.scatter(x, y, c="b", label="真實資料")
-
-plt.plot(
-    x_test.ravel(), y_pred, color="r", marker="o", markersize=8, label="線性迴歸"
-)  # 線性迴歸曲線
-
-plt.scatter(x_test.ravel(), y_test, c="r", label="預測資料")
-
-plt.grid()
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("資料來源 : 自建 dddddddd")
-
-x = np.linspace(0, 5, 100)
-y = 1.9 * x + 0.8 + 0.5 * np.random.randn(100)
-
-X = x.reshape(len(x), 1)
-
-linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
-
-linear_regression.fit(X, y)  # 學習訓練.fit
-
-Y = linear_regression.predict(X)  # 預測.predict
-
-plt.scatter(x, y)
-plt.plot(x, Y, "r")
-plt.show()
-
-# 結果看起來不錯，會有微小誤差的原因，則是因為真實世界的資料有不可避免的雜訊
-
-print("------------------------------")  # 30個
-
-# 均勻地在 0 到 5 之間取一百個點，再隨便決定一個函數，叫做 y = f(x) = 1.9x + 0.8 好了
-# 為了增加真實感，加上一點雜訊
-
-x = np.linspace(0, 5, 100)
-y = 1.9 * x + 0.8 + 0.5 * np.random.randn(100)
-
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
-x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2)
-# 訓練組8成, 測試組2成
-
-x_train = x_train.reshape(len(x_train), 1)
-x_test = x_test.reshape(len(x_test), 1)
-
-linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
-
-linear_regression.fit(x_train, y_train)  # 學習訓練.fit
-
-print("畫 訓練資料")
-y_pred = linear_regression.predict(x_train)
-plt.scatter(x_train, y_train)
-plt.plot(x_train, y_pred, "r")
-plt.show()
-
-print("畫 測試資料")
-y_pred = linear_regression.predict(x_test)
-plt.scatter(x_test, y_test)
-plt.plot(x_test, y_pred, "r")
-plt.show()
+'''
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1020,7 +912,6 @@ plt.scatter(X, y, c="blue", marker="o", lw=0.1, label="真實資料")
 
 # 標準
 plt.plot(x, y1, "bo-", label="真實資料")  # 真實資料, 藍點藍線
-plt.scatter(x, y1, s=100, c="b", label="真實資料")  # 真實資料, 藍點
 plt.scatter(x, y1, s=100, c="b", label="真實資料")  # 真實資料, 藍點
 plt.plot(x, Y, color="r", marker="o", markersize=8, label="線性迴歸")  # 線性迴歸曲線
 
