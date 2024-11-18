@@ -22,6 +22,16 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
+EPOCHS = 1  # 遞迴次數, 訓練次數
+
+import tensorflow as tf
+
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense
+from tensorflow.keras.optimizers import SGD
+
+print("------------------------------------------------------------")  # 60個
+'''
 """
 在金融預測上的應用
 神經網路
@@ -34,6 +44,7 @@ from keras.optimizers import SGD
 
 # [2] 打造我們的神經網路函數學習機
 
+print("建立神經網路1")
 model = Sequential()
 model.add(Dense(20, input_dim=5))
 model.add(Activation("relu"))
@@ -43,12 +54,11 @@ model.add(Dense(1))
 model.add(Activation("sigmoid"))
 model.compile(loss="binary_crossentropy", optimizer="adam", metrics=["accuracy"])
 
-# 看一下我們神經網路長什麼樣子, 有沒有做錯。
+print("檢視神經網路")
+model.summary()  # 檢視神經網路
 
-model.summary()
 
 """ TBD
-#[3] 訓練
 
 model.fit(x_train, yb_train, batch_size=100, epochs=20)  # 學習訓練.fit
 
@@ -104,12 +114,14 @@ X = StandardScaler().fit_transform(X)  # 標準化
 X_train, Y_train = X[:120], Y[:120]
 X_test, Y_test = X[120:], Y[120:]
 
+print("建立神經網路2")
 model = Sequential()
 model.add(Dense(6, input_shape=(4,), activation="relu"))
 model.add(Dense(6, activation="relu"))
 model.add(Dense(3, activation="softmax"))
 
-print(model.summary())
+print("檢視神經網路")
+model.summary()  # 檢視神經網路
 
 model.compile(loss="categorical_crossentropy", optimizer="adam", metrics=["accuracy"])
 
@@ -128,568 +140,6 @@ print(Y_target)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-#pip install pydot
-
-mnist_npz_filename = "C:/_git/vcs/_big_files/mnist.npz"
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# Final 建構神經網路模型
-
-from tensorflow.keras.datasets import mnist
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense
-from tensorflow.keras.utils import plot_model
-from tensorflow.keras.utils import to_categorical
-
-# (X_train, y_train), (X_test, y_test) = mnist.load_data() 改成以下4行
-mnist = np.load(mnist_npz_filename)
-X_train, y_train = mnist["x_train"], mnist["y_train"]
-X_test, y_test = mnist["x_test"], mnist["y_test"]
-mnist.close()
-
-X_train = X_train.reshape(X_train.shape[0], 784)
-
-X_test = X_test.reshape(X_test.shape[0], 784)
-
-y_train = to_categorical(y_train)
-
-y_test = to_categorical(y_test)
-
-model = Sequential()
-
-model.add(Dense(256, activation="sigmoid", input_dim=784))
-
-model.add(Dense(128, activation="relu"))
-
-model.add(Dense(10, activation="softmax"))
-
-model.compile(optimizer="rmsprop", loss="binary_crossentropy", metrics=["accuracy"])
-
-# plot_model(model, show_shapes=True, show_layer_names=False)
-# 目前plot_model不能用
-
-print("------------------------------------------------------------")  # 60個
-
-# Final 訓練模型
-
-from tensorflow.keras.datasets import mnist
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense
-from tensorflow.keras.utils import plot_model
-from tensorflow.keras.utils import to_categorical
-
-# (X_train, y_train), (X_test, y_test) = mnist.load_data() 改成以下4行
-mnist = np.load(mnist_npz_filename)
-X_train, y_train = mnist["x_train"], mnist["y_train"]
-X_test, y_test = mnist["x_test"], mnist["y_test"]
-mnist.close()
-
-X_train = X_train.reshape(X_train.shape[0], 784)
-X_test = X_test.reshape(X_test.shape[0], 784)
-
-y_train = to_categorical(y_train)
-y_test = to_categorical(y_test)
-
-model = Sequential()
-
-model.add(Dense(256, activation="sigmoid", input_dim=784))
-model.add(Dense(128, activation="relu"))
-model.add(Dense(10, activation="softmax"))
-model.compile(optimizer="rmsprop", loss="binary_crossentropy", metrics=["accuracy"])
-
-# 跑很久
-"""
-#history = model.fit(X_train, y_train, verbose=1, batch_size=32,epochs=3)
-history = model.fit(X_train, y_train, verbose=1, batch_size=960,epochs=1)
-
-plt.plot(history.history["accuracy"], label="accuracy")
-
-plt.ylabel("accuracy")
-
-plt.xlabel("epoch")
-
-plt.legend(loc="best")
-
-plt.show()
-"""
-print("------------------------------------------------------------")  # 60個
-
-# Final 評估模型成效
-
-from tensorflow.keras.datasets import mnist
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense
-from tensorflow.keras.utils import plot_model
-from tensorflow.keras.utils import to_categorical
-
-# (X_train, y_train), (X_test, y_test) = mnist.load_data() 改成以下4行
-mnist = np.load(mnist_npz_filename)
-X_train, y_train = mnist["x_train"], mnist["y_train"]
-X_test, y_test = mnist["x_test"], mnist["y_test"]
-mnist.close()
-
-X_train = X_train.reshape(X_train.shape[0], 784)
-
-X_test = X_test.reshape(X_test.shape[0], 784)
-
-y_train = to_categorical(y_train)
-
-y_test = to_categorical(y_test)
-
-model = Sequential()
-
-model.add(Dense(256, activation="sigmoid", input_dim=784))
-
-model.add(Dense(128, activation="relu"))
-
-model.add(Dense(10, activation="softmax"))
-
-model.compile(optimizer="rmsprop", loss="binary_crossentropy", metrics=["accuracy"])
-
-model.fit(X_train, y_train, verbose=0)
-
-score = model.evaluate(X_test, y_test, verbose=0)
-
-print("evaluate loss: {0[0]}\nevaluate acc: {0[1]}".format(score))
-
-# evaluate loss: 0.0431341715157032
-# evaluate acc: 0.9291999936103821
-
-print("------------------------------------------------------------")  # 60個
-
-# Final 用模型預測答案
-
-from tensorflow.keras.datasets import mnist
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense
-from tensorflow.keras.utils import plot_model
-from tensorflow.keras.utils import to_categorical
-
-# (X_train, y_train), (X_test, y_test) = mnist.load_data() 改成以下4行
-mnist = np.load(mnist_npz_filename)
-X_train, y_train = mnist["x_train"], mnist["y_train"]
-X_test, y_test = mnist["x_test"], mnist["y_test"]
-mnist.close()
-
-X_train = X_train.reshape(X_train.shape[0], 784)
-
-X_test = X_test.reshape(X_test.shape[0], 784)
-
-y_train = to_categorical(y_train)
-
-y_test = to_categorical(y_test)
-
-model = Sequential()
-
-model.add(Dense(256, activation="sigmoid", input_dim=784))
-
-model.add(Dense(128, activation="relu"))
-
-model.add(Dense(10, activation="softmax"))
-
-model.compile(optimizer="rmsprop", loss="binary_crossentropy", metrics=["accuracy"])
-
-model.fit(X_train, y_train, verbose=0)
-
-for i in range(10):
-    plt.subplot(1, 10, i + 1)
-    plt.imshow(X_test[i].reshape((28, 28)), "gray")
-
-plt.show()
-
-pred = np.argmax(model.predict(X_test[0:10]), axis=1)
-
-print(pred)
-
-print("------------------------------------------------------------")  # 60個
-"""
-#建構神經網路模型
-
-from tensorflow.keras.datasets import mnist
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense,Dropout
-from tensorflow.keras import optimizers
-from tensorflow.keras.utils import to_categorical
-
-#(X_train, y_train), (X_test, y_test) = mnist.load_data() 改成以下4行
-mnist = np.load(mnist_npz_filename)
-X_train, y_train = mnist['x_train'], mnist['y_train']  
-X_test, y_test = mnist['x_test'], mnist['y_test']  
-mnist.close()  
-
-X_train = X_train.reshape(X_train.shape[0], 784)
-
-X_test = X_test.reshape(X_test.shape[0], 784)
-
-y_train = to_categorical(y_train)
-
-y_test = to_categorical(y_test)
-
-model = Sequential()
-
-#超參數設定(一)：隱藏層的數量、隱藏層設計多少神經元
-model.add(Dense(256, activation='sigmoid', input_dim=784))
-model.add(Dense(128, activation='relu'))
-
-#超參數設定(二)：加入Dropout層
-model.add(Dropout(rate=0.5))
-model.add(Dense(10, activation='softmax'))
-
-#超參數設定(三)：損失函數與優化器
-sgd = optimizers.SGD(learning_rate=0.01)
-model.compile(optimizer=sgd,loss='categorical_crossentropy',metrics=['accuracy'])
-
-#超參數設定(四)：batch_size
-
-#超參數設定(五)：epochs
-model.fit(X_train, y_train, verbose=0, batch_size=32,epochs=3)
-
-score = model.evaluate(X_test, y_test, verbose=0)
-
-print("evaluate loss: {0[0]}\nevaluate acc: {0[1]}".format(score))
-
-#evaluate loss: 0.2699148654937744
-#evaluate acc: 0.9211999773979187
-
-#超參數設定(一)：隱藏層的數量、隱藏層設計多少神經元
-
-from tensorflow.keras.datasets import mnist
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense,Dropout
-from tensorflow.keras import optimizers
-from tensorflow.keras.utils import to_categorical
-
-#(X_train, y_train), (X_test, y_test) = mnist.load_data() 改成以下4行
-mnist = np.load(mnist_npz_filename)
-X_train, y_train = mnist['x_train'], mnist['y_train']
-X_test, y_test = mnist['x_test'], mnist['y_test']
-mnist.close()
-
-X_train = X_train.reshape(X_train.shape[0], 784)
-
-X_test = X_test.reshape(X_test.shape[0], 784)
-
-y_train = to_categorical(y_train)
-
-y_test = to_categorical(y_test)
-
-model = Sequential()
-
-#超參數設定(一)：隱藏層的數量、隱藏層設計多少神經元
-
-model.add(Dense(256, activation='sigmoid', input_dim=784))
-
-def funcA():
-    model.add(Dense(128, activation='sigmoid'))
-
-def funcB():
-    model.add(Dense(128, activation='sigmoid'))
-    model.add(Dense(128, activation='sigmoid'))
-    model.add(Dense(128, activation='sigmoid'))
-
-def funcC():
-    model.add(Dense(1568, activation='sigmoid'))
-
-# 選用模型A時就將B和C這兩行註解掉
-# ---------------------------
-funcA()
-
-#funcB()
-
-#funcC()
-
-# ---------------------------
-
-model.add(Dropout(rate=0.5))
-
-model.add(Dense(10, activation='softmax'))
-
-sgd = optimizers.SGD(learning_rate=0.01)
-
-model.compile(optimizer=sgd,loss='categorical_crossentropy',metrics=['accuracy'])
-
-model.fit(X_train, y_train, verbose=0, batch_size=32,epochs=3)
-
-score = model.evaluate(X_test, y_test, verbose=0)
-
-print("evaluate loss: {0[0]}\nevaluate acc: {0[1]}".format(score))
-
-#evaluate loss: 0.2971647381782532
-#evaluate acc: 0.9146999716758728
-
-#15-3 超參數設定(二)：加入Dropout層
-
-from tensorflow.keras.datasets import mnist
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense,Dropout
-from tensorflow.keras import optimizers
-from tensorflow.keras.utils import to_categorical
-
-#(X_train, y_train), (X_test, y_test) = mnist.load_data() 改成以下4行
-mnist = np.load(mnist_npz_filename)
-X_train, y_train = mnist['x_train'], mnist['y_train']
-X_test, y_test = mnist['x_test'], mnist['y_test']
-mnist.close()
-
-X_train = X_train.reshape(X_train.shape[0], 784)
-
-X_test = X_test.reshape(X_test.shape[0], 784)
-
-y_train = to_categorical(y_train)
-
-y_test = to_categorical(y_test)
-
-model = Sequential()
-
-model.add(Dense(256, activation='sigmoid', input_dim=784))
-
-model.add(Dense(128, activation='relu'))
-
-#超參數設定(二)：Dropout
-
-#model.add(Dropout(rate=0.5))
-
-model.add(Dense(10, activation='softmax'))
-
-sgd = optimizers.SGD(learning_rate=0.01)
-
-model.compile(optimizer=sgd,loss='categorical_crossentropy',metrics=['accuracy'])
-
-model.fit(X_train, y_train, verbose=0, batch_size=32,epochs=3)
-
-score = model.evaluate(X_test, y_test, verbose=0)
-
-print("evaluate loss: {0[0]}\nevaluate acc: {0[1]}".format(score))
-
-#evaluate loss: 0.25099998712539673
-#evaluate acc: 0.9276999831199646
-
-#15-4 超參數設定(三)：損失函數與優化器
-
-from tensorflow.keras.datasets import mnist
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense,Dropout
-from tensorflow.keras import optimizers
-from tensorflow.keras.utils import to_categorical
-
-#(X_train, y_train), (X_test, y_test) = mnist.load_data() 改成以下4行
-mnist = np.load(mnist_npz_filename)
-X_train, y_train = mnist['x_train'], mnist['y_train']
-X_test, y_test = mnist['x_test'], mnist['y_test']
-mnist.close()
-
-X_train = X_train.reshape(X_train.shape[0], 784)
-
-X_test = X_test.reshape(X_test.shape[0], 784)
-
-y_train = to_categorical(y_train)
-
-y_test = to_categorical(y_test)
-
-model = Sequential()
-
-model.add(Dense(256, activation='sigmoid', input_dim=784))
-model.add(Dense(128, activation='relu'))
-model.add(Dropout(rate=0.5))
-model.add(Dense(10, activation='softmax'))
-
-#超參數設定(三)：優化器與學習率
-
-def funcA():
-    global lr
-    lr = 0.01
-
-def funcB():
-    global lr
-    lr = 0.1
-
-def funcC():
-    global lr
-    lr = 1.0
-
-# 選用模型A時就將B和C這兩行註解掉
-# ---------------------------
-
-funcA()
-#funcB()
-#funcC()
-
-# ---------------------------
-
-sgd = optimizers.SGD(learning_rate=lr)
-
-model.compile(optimizer=sgd,loss='categorical_crossentropy',metrics=['accuracy'])
-
-model.fit(X_train, y_train, verbose=0, batch_size=32,epochs=3)
-
-score = model.evaluate(X_test, y_test, verbose=0)
-
-print("evaluate loss: {0[0]}\nevaluate acc: {0[1]}".format(score))
-
-#evaluate loss: 0.2721501886844635
-
-#evaluate acc: 0.9229000210762024
-
-print('------------------------------------------------------------')	#60個
-"""
-# 超參數設定(四)：batch_size
-
-from tensorflow.keras.datasets import mnist
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense, Dropout
-from tensorflow.keras import optimizers
-from tensorflow.keras.utils import to_categorical
-
-# (X_train, y_train), (X_test, y_test) = mnist.load_data() 改成以下4行
-mnist = np.load(mnist_npz_filename)
-X_train, y_train = mnist["x_train"], mnist["y_train"]
-X_test, y_test = mnist["x_test"], mnist["y_test"]
-mnist.close()
-
-X_train = X_train.reshape(X_train.shape[0], 784)
-
-X_test = X_test.reshape(X_test.shape[0], 784)
-
-y_train = to_categorical(y_train)
-
-y_test = to_categorical(y_test)
-
-model = Sequential()
-
-model.add(Dense(256, activation="sigmoid", input_dim=784))
-model.add(Dense(128, activation="relu"))
-model.add(Dropout(rate=0.5))
-model.add(Dense(10, activation="softmax"))
-
-sgd = optimizers.SGD(learning_rate=0.01)
-
-model.compile(optimizer=sgd, loss="categorical_crossentropy", metrics=["accuracy"])
-
-# 超參數設定(四)：batch_size
-
-
-def funcA():
-    global batch_size
-    batch_size = 16
-
-
-def funcB():
-    global batch_size
-    batch_size = 32
-
-
-def funcC():
-    global batch_size
-    batch_size = 64
-
-
-# 選用模型A時就將B和C這兩行註解掉
-# ---------------------------
-
-funcA()
-
-# funcB()
-
-# funcC()
-
-# ---------------------------
-
-model.fit(X_train, y_train, verbose=0, batch_size=batch_size, epochs=3)
-
-score = model.evaluate(X_test, y_test, verbose=0)
-
-print("evaluate loss: {0[0]}\nevaluate acc: {0[1]}".format(score))
-
-# evaluate loss: 0.2627638280391693
-# evaluate acc: 0.92330002784729
-
-print("------------------------------------------------------------")  # 60個
-
-# 超參數設定(五)：epochs
-
-from tensorflow.keras.datasets import mnist
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense, Dropout
-from tensorflow.keras import optimizers
-from tensorflow.keras.utils import to_categorical
-
-# (X_train, y_train), (X_test, y_test) = mnist.load_data() 改成以下4行
-mnist = np.load(mnist_npz_filename)
-X_train, y_train = mnist["x_train"], mnist["y_train"]
-X_test, y_test = mnist["x_test"], mnist["y_test"]
-mnist.close()
-
-X_train = X_train.reshape(X_train.shape[0], 784)
-
-X_test = X_test.reshape(X_test.shape[0], 784)
-
-y_train = to_categorical(y_train)
-
-y_test = to_categorical(y_test)
-
-model = Sequential()
-
-model.add(Dense(256, activation="sigmoid", input_dim=784))
-
-model.add(Dense(128, activation="relu"))
-
-model.add(Dropout(rate=0.5))
-
-model.add(Dense(10, activation="softmax"))
-
-sgd = optimizers.SGD(learning_rate=0.01)
-
-model.compile(optimizer=sgd, loss="categorical_crossentropy", metrics=["accuracy"])
-
-# 超參數設定(五)：epochs
-
-
-def funcA():
-    global epochs
-    epochs = 5
-
-
-def funcB():
-    global epochs
-    epochs = 10
-
-
-def funcC():
-    global epochs
-    epochs = 60
-
-
-# ---------------------------
-# epochs: 5
-
-
-funcA()
-
-# epochs: 10
-
-# funcB()
-
-# epochs: 60
-
-# funcC()
-
-# ---------------------------
-
-"""
-#做很久
-model.fit(X_train, y_train, verbose=1, batch_size=32,epochs=epochs)
-score = model.evaluate(X_test, y_test, verbose=0)
-
-print("evaluate loss: {0[0]}\nevaluate acc: {0[1]}".format(score))
-
-#evaluate loss: 0.23109018802642822
-
-#evaluate acc: 0.9323999881744385
-"""
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
@@ -887,15 +337,17 @@ plt.suptitle("Pooling result", fontsize=12)
 
 plt.show()
 
+'''
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # Final 用 tf.Keras 建構 CNN 模型
 
 from tensorflow.keras.layers import Activation, Dense, Conv2D, MaxPooling2D, Flatten
-from tensorflow.keras.models import Sequential, load_model
+from tensorflow.keras.models import load_model
 from tensorflow.keras.utils import to_categorical
 
-# 建立模型物件
+print("建立神經網路13")
 model = Sequential()
 
 # 卷積層與池化層--------------------------------------------------------------
@@ -924,96 +376,18 @@ model.add(Dense(10, activation="softmax"))
 print("檢視神經網路")
 model.summary()  # 檢視神經網路
 
-# Final 使用 CNN 辨識手寫數字圖片
 
-from tensorflow.keras.datasets import mnist
-from tensorflow.keras.layers import Dense, Dropout, Flatten, Activation
-from tensorflow.keras.layers import Conv2D, MaxPooling2D
-from tensorflow.keras.models import Sequential, load_model
-from tensorflow.keras.utils import to_categorical
-from tensorflow.keras.utils import plot_model
 
-(X_train, y_train), (X_test, y_test) = mnist.load_data()
 
-# 訓練數據300張, 測試數據100張
-
-# Conv層接收的是4軸維陣列(batch_size, 垂直尺寸, 水平尺寸, 顏色通道數)
-
-# 因為MNIST中的數據是單通道, 含batch_size的話僅是三維數據, 所以要先轉換為四維數據
-
-X_train = X_train.reshape(-1, 28, 28, 1)
-
-X_test = X_test.reshape(-1, 28, 28, 1)
-
-y_train = to_categorical(y_train)
-
-y_test = to_categorical(y_test)
-
-# 建立模型物件
-
-model = Sequential()
-
-# --------------------------------------------------------------
-
-# 計算準確率
-
-model.add(Conv2D(32, kernel_size=(3, 3), activation="relu", input_shape=(28, 28, 1)))
-
-model.add(Conv2D(filters=64, kernel_size=(3, 3), activation="relu"))
-
-model.add(MaxPooling2D(pool_size=(2, 2)))
-
-model.add(Dropout(0.5))
-
-model.add(Flatten())
-
-model.add(Dense(128, activation="relu"))
-
-model.add(Dropout(0.5))
-
-model.add(Dense(10, activation="softmax"))
-
-# --------------------------------------------------------------
-model.compile(loss="categorical_crossentropy", optimizer="sgd", metrics=["accuracy"])
-
-"""
-#做很久
-#model.fit(X_train, y_train, batch_size = 128, epochs = 5, verbose = 1)# 學習訓練.fit
-model.fit(X_train, y_train, batch_size = 1280, epochs = 1, verbose = 1)# 學習訓練.fit
-
-# 計算準確率
-scores = model.evaluate(X_test, y_test, verbose=1)
-print('Test loss:', scores[0])
-print('Test accuracy:', scores[1])
-
-# 將前10張圖片畫出來
-for i in range(10):
-    plt.subplot(2, 5, i+1)
-    plt.imshow(X_test[i].reshape((28,28)), 'gray')
-
-plt.suptitle("The first ten of the test data",fontsize=20)
-
-plt.show()
-
-# 顯示前10張圖片的預測結果
-
-pred = np.argmax(model.predict(X_test[0:10]), axis=1)
-
-print(pred)
-
-print("檢視神經網路")
-model.summary()  #檢視神經網路
-
-"""
-
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # Final 使用 CNN 辨識 cifar10 圖片資料集
 
 from tensorflow.keras.datasets import cifar10
-from tensorflow.keras.layers import Dense, Dropout, Flatten, Activation
+from tensorflow.keras.layers import Dropout, Flatten, Activation
 from tensorflow.keras.layers import Conv2D, MaxPooling2D
-from tensorflow.keras.models import Sequential, load_model
+from tensorflow.keras.models import load_model
 from tensorflow.keras.utils import to_categorical
 from tensorflow.keras.utils import plot_model
 
@@ -1035,8 +409,7 @@ y_train = to_categorical(y_train)
 
 y_test = to_categorical(y_test)
 
-# 建立模型物件
-
+print("建立神經網路15")
 model = Sequential()
 
 model.add(
@@ -1094,8 +467,8 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-'''
-#標準化
+
+# 標準化
 
 from tensorflow.keras.datasets import cifar10
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
@@ -1112,13 +485,12 @@ for i in range(10):
     plt.subplot(2, 5, i + 1)
     plt.imshow(X_train[i])
 
-plt.suptitle('The original image', fontsize=12)
+plt.suptitle("The original image", fontsize=12)
 plt.show()
 
 # 建立 ImageDataGenerator 的操作物件
 
-datagen = ImageDataGenerator(samplewise_center=True, 
-                samplewise_std_normalization=True)
+datagen = ImageDataGenerator(samplewise_center=True, samplewise_std_normalization=True)
 
 # 進行標準化
 
@@ -1132,19 +504,19 @@ X_batch *= 127.0 / max(abs(X_batch.min()), X_batch.max())
 
 X_batch += 127.0
 
-X_batch = X_batch.astype('uint8')
+X_batch = X_batch.astype("uint8")
 
 for i in range(10):
     plt.subplot(2, 5, i + 1)
     plt.imshow(X_batch[i])
 
-plt.suptitle('Standardization result', fontsize=12)
+plt.suptitle("Standardization result", fontsize=12)
 
 plt.show()
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-#白化
+# 白化
 
 from tensorflow.keras.datasets import cifar10
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
@@ -1170,7 +542,7 @@ for i in range(10):
     plt.subplot(2, 5, i + 1)
     plt.imshow(X_train[i])
 
-plt.suptitle('The original image', fontsize=12)
+plt.suptitle("The original image", fontsize=12)
 
 plt.show()
 
@@ -1180,7 +552,7 @@ datagen = ImageDataGenerator(zca_whitening=True)
 
 # 白化處理
 
-datagen.fit(X_train)# 學習訓練.fit
+datagen.fit(X_train)  # 學習訓練.fit
 
 g = datagen.flow(X_train, y_train, shuffle=False)
 
@@ -1192,108 +564,17 @@ X_batch *= 127.0 / max(abs(X_batch.min()), abs(X_batch.max()))
 
 X_batch += 127
 
-X_batch = X_batch.astype('uint8')
+X_batch = X_batch.astype("uint8")
 
 for i in range(10):
     plt.subplot(2, 5, i + 1)
     plt.imshow(X_batch[i])
 
-plt.suptitle('Whitening result', fontsize=12)
+plt.suptitle("Whitening result", fontsize=12)
 
 plt.show()
-'''
+
 print("------------------------------------------------------------")  # 60個
-
-# 批次正規化
-
-from tensorflow.keras.datasets import mnist
-from tensorflow.keras.layers import (
-    Activation,
-    Conv2D,
-    Dense,
-    Flatten,
-    MaxPooling2D,
-    BatchNormalization,
-)
-from tensorflow.keras.models import Sequential, load_model
-from tensorflow.keras.utils import to_categorical
-
-(X_train, y_train), (X_test, y_test) = mnist.load_data()
-
-X_train = np.reshape(a=X_train, newshape=(-1, 28, 28, 1))
-
-X_test = np.reshape(a=X_test, newshape=(-1, 28, 28, 1))
-
-y_train = to_categorical(y_train)
-
-y_test = to_categorical(y_test)
-
-# 使用 ReLU 函數當做啟動函數
-
-model = Sequential()
-
-model.add(
-    Conv2D(
-        input_shape=(28, 28, 1),
-        filters=32,
-        kernel_size=(2, 2),
-        strides=(1, 1),
-        padding="same",
-    )
-)
-
-model.add(MaxPooling2D(pool_size=(2, 2)))
-
-model.add(Conv2D(filters=32, kernel_size=(2, 2), strides=(1, 1), padding="same"))
-
-model.add(MaxPooling2D(pool_size=(2, 2)))
-
-model.add(Flatten())
-
-model.add(Dense(256))
-
-# 批次正規化
-
-model.add(BatchNormalization())
-
-model.add(Activation("relu"))
-
-model.add(Dense(128))
-
-# 批次正規化
-
-model.add(BatchNormalization())
-
-model.add(Activation("relu"))
-
-model.add(Dense(10))
-
-model.add(Activation("softmax"))
-
-# 執行compile
-model.compile(optimizer="sgd", loss="categorical_crossentropy", metrics=["accuracy"])
-
-"""
-# 執行訓練
-# 做很久
-# 學習訓練.fit
-history = model.fit(X_train, y_train, batch_size=32, epochs=3, validation_data=(X_test, y_test))
-
-# 做可視化處理
-
-plt.plot(history.history['accuracy'], label='acc', ls='-', marker='o')
-
-plt.plot(history.history['val_accuracy'], label='val_acc', ls='-', marker='x')
-
-plt.ylabel('accuracy')
-
-plt.xlabel('epoch')
-
-plt.suptitle("model", fontsize=12)
-
-plt.show()
-"""
-
 print("------------------------------------------------------------")  # 60個
 
 # 遷移學習
@@ -1304,7 +585,7 @@ print("------------------------------------------------------------")  # 60個
 from tensorflow.keras import optimizers
 from tensorflow.keras.applications.vgg16 import VGG16
 from tensorflow.keras.datasets import cifar10
-from tensorflow.keras.layers import Dense, Dropout, Flatten, Input
+from tensorflow.keras.layers import Dropout, Flatten, Input
 from tensorflow.keras.models import Model, Sequential
 from tensorflow.keras.utils import to_categorical
 
@@ -1374,19 +655,86 @@ pred = np.argmax(model.predict(X_test[0:10]), axis=1)
 print(pred)
 """
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
+import numpy               
+
+from keras.datasets import cifar10
+from keras.models import Sequential 
+#from keras.layers.core import Dense, Activation 改為以下
+from tensorflow.python.keras.layers.core import Dense,Activation
+from keras.layers import Convolution2D, MaxPooling2D, Flatten
+from keras.layers import Dropout
+from tensorflow.python.keras.utils import np_utils
+
+batch_size = 100     
+hidden_neurons = 200
+classes = 10     
+epochs = 20
+
+(X_train, Y_train), (X_test, Y_test) = cifar10.load_data()
+"""
+下載
+https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz
+將檔案改名成
+cifar-10-batches-py.tar.gz
+放在C:/Users/070601/.keras/datasets/之下
+"""
+
+Y_train = np_utils.to_categorical(Y_train, classes)     
+Y_test = np_utils.to_categorical(Y_test, classes)
+
+model = Sequential() 
+model.add(Convolution2D(32, (3, 3), input_shape=(32, 32, 3)))
+model.add(Activation('relu'))
+model.add(Convolution2D(32, (3, 3)))  
+model.add(Activation('relu'))
+model.add(MaxPooling2D(pool_size=(2, 2)))
+model.add(Dropout(0.25))   
+
+model.add(Convolution2D(64, (3, 3))) 
+model.add(Activation('relu'))     
+model.add(Convolution2D(64, (3, 3)))     
+model.add(Activation('relu'))     
+model.add(MaxPooling2D(pool_size=(2, 2)))     
+model.add(Dropout(0.25))
+               
+model.add(Flatten())
+ 
+model.add(Dense(hidden_neurons)) 
+model.add(Activation('relu')) 
+model.add(Dropout(0.5))      
+model.add(Dense(classes)) 
+model.add(Activation('softmax'))
+
+model.compile(loss='categorical_crossentropy', metrics=['accuracy'], optimizer='adadelta')
+
+model.fit(X_train, Y_train, batch_size=batch_size, epochs=epochs, validation_split = 0.1, verbose=1)
+
+score = model.evaluate(X_test, Y_test, verbose=1)
+print('Test accuracy:', score[1]) 
+
+numpy.set_printoptions(threshold='nan')  
+index = 0   
+for layer in model.layers:       
+  filename = "conv_layer_" + str(index)       
+  f1 = open(filename, 'w+')       
+  f1.write(repr(layer.get_weights()))       
+  f1.close()       
+  print (filename + " has been opened and closed")     
+  index = index+1
+
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
+print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
@@ -1395,4 +743,3 @@ sys.exit()
 
 
 print("------------------------------------------------------------")  # 60個
-

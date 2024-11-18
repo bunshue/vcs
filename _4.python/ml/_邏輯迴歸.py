@@ -39,10 +39,10 @@ group0 = np.random.normal(-1, 1, size=N)
 group1 = np.random.normal(3, 1, size=N)
 
 x = np.r_[group0, group1]
-X = x.reshape((N*2, -1))
+X = x.reshape((N * 2, -1))
 print(X)
 
-y = np.r_[np.zeros(N), np.ones(N)] # 目標,前半0, 後半1
+y = np.r_[np.zeros(N), np.ones(N)]  # 目標,前半0, 後半1
 print(y)
 
 # 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
@@ -50,8 +50,8 @@ logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸�
 
 logistic_regression.fit(X, y)  # 學習訓練.fit
 
-#yy = np.array([-5, -4, -3, -2, -1, 0, 1, 2 ,3, 4, 5])  # 真實資料
-#YY = yy.reshape(len(yy), 1)
+# yy = np.array([-5, -4, -3, -2, -1, 0, 1, 2 ,3, 4, 5])  # 真實資料
+# YY = yy.reshape(len(yy), 1)
 
 y_pred = logistic_regression.predict(X)  # 預測.predict
 print(y_pred)
@@ -65,9 +65,11 @@ plt.hist(group1, alpha=0.3, label="第1群, 對應到1")
 plt.legend()
 
 plt.subplot(212)
-plt.plot(range(len(y_pred)), y_pred, color="lime", marker="o", markersize=10, label="預測結果")
-plt.plot(range(len(y_pred_prob)), y_pred_prob[:, 0], 'ro-', label="對應到第0群的機率")
-plt.plot(range(len(y_pred_prob)), y_pred_prob[:, 1], 'go-', label="對應到第1群的機率")
+plt.plot(
+    range(len(y_pred)), y_pred, color="lime", marker="o", markersize=10, label="預測結果"
+)
+plt.plot(range(len(y_pred_prob)), y_pred_prob[:, 0], "ro-", label="對應到第0群的機率")
+plt.plot(range(len(y_pred_prob)), y_pred_prob[:, 1], "go-", label="對應到第1群的機率")
 plt.legend()
 plt.show()
 
@@ -172,11 +174,13 @@ print("混淆矩陣 :\n", cc)
 
 # 混淆矩陣圖
 from sklearn.metrics import ConfusionMatrixDisplay
+
 disp = ConfusionMatrixDisplay(confusion_matrix=confusion_matrix(y_test, y_pred))
 disp.plot()
 plt.show()
 
 from sklearn.metrics import classification_report
+
 cc = classification_report(y_test, y_pred)
 print("分類報告 :\n", cc)
 
@@ -204,14 +208,14 @@ y = np.hstack((np.zeros(N), np.ones(N)))  # 目標,前半0, 後半1
 print(X)
 print()
 
-#plt.scatter(X[:, 0], X[:, 1], c=y)
-#plt.scatter(X[:, 0], X[:, 1], c=y, cmap=plt.cmap, marker="o", s=40)
-plt.scatter(X[:N, 0], X[:N, 1], c='r', label="第0群, 對應到0")
-plt.scatter(X[N:N*2-1, 0], X[N:N*2-1, 1], c='g', label="第1群, 對應到1")
+# plt.scatter(X[:, 0], X[:, 1], c=y)
+# plt.scatter(X[:, 0], X[:, 1], c=y, cmap=plt.cmap, marker="o", s=40)
+plt.scatter(X[:N, 0], X[:N, 1], c="r", label="第0群, 對應到0")
+plt.scatter(X[N : N * 2 - 1, 0], X[N : N * 2 - 1, 1], c="g", label="第1群, 對應到1")
 plt.legend()
 plt.show()
 
-print('------------------------------')	#30個
+print("------------------------------")  # 30個
 
 # 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
 logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
@@ -239,11 +243,11 @@ print("正確率 :", cc)
 cc = confusion_matrix(y, y_pred)
 print("混淆矩陣 :\n", cc)
 
-print('繪製熱圖')
+print("繪製熱圖")
 sns.heatmap(confusion_matrix(y, y_pred))
 plt.show()
 
-print('繪制分類邊界')
+print("繪制分類邊界")
 plt.style.use("bmh")
 
 # Set min and max values and give it some padding
@@ -259,7 +263,7 @@ Z = Z.reshape(xx.shape)
 # Plot the contour and training examples
 plt.contourf(xx, yy, Z, alpha=0.3)
 plt.scatter(X[:, 0], X[:, 1], c=y, s=40, alpha=0.8)
-#plt.scatter(X[:, 0], X[:, 1], c=y, s=40, alpha=0.8, cmap=plt.cmap)
+# plt.scatter(X[:, 0], X[:, 1], c=y, s=40, alpha=0.8, cmap=plt.cmap)
 plt.title("logistic regression prediction")
 
 plt.show()
@@ -276,9 +280,10 @@ def log_likelihood(X, y, theta):
     ll = np.sum(y * scores - np.log(1 + np.exp(scores)))
     return ll
 
-#l_rate, iterations = 1, 500
+
+# l_rate, iterations = 1, 500
 l_rate, iterations = 1, 2000
-add_intercept=True
+add_intercept = True
 
 if add_intercept:
     intercept = np.ones((X.shape[0], 1))
@@ -300,7 +305,7 @@ for epoch in range(iterations):
     accu = np.sum(preds == y) * 1.0 / len(y)
     accu_history[epoch] = accu
 
-    #if epoch % 5 == 0:
+    # if epoch % 5 == 0:
     if epoch % 100 == 0:
         print("After iter {}; accuracy: {}".format(epoch + 1, accu))
 
@@ -313,11 +318,13 @@ print(accu_history)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-df = pd.read_csv("C:/_git/vcs/_4.python/__code/Python-PM2.5-DataAnalyzing-master/data/200811-201811d.csv")
+df = pd.read_csv(
+    "C:/_git/vcs/_4.python/__code/Python-PM2.5-DataAnalyzing-master/data/200811-201811d.csv"
+)
 cc = df.head()
 print(cc)
 
-#print(df[df.數學 >= 80])
+# print(df[df.數學 >= 80])
 
 cc = df[df.PM25 > 30]
 print(cc)
@@ -363,7 +370,7 @@ plt.show()
 print("------------------------------")  # 30個
 
 X = df.drop("Danger", axis=1)
-y = df["Danger"] # 目標, 0 : 不危險, 1 : 危險
+y = df["Danger"]  # 目標, 0 : 不危險, 1 : 危險
 
 # 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
@@ -376,7 +383,9 @@ print(X_test.shape)
 print(y_train.shape)
 print(y_test.shape)
 
-logistic_regression = sklearn.linear_model.LogisticRegression(solver="liblinear")  # 邏輯迴歸函數學習機
+logistic_regression = sklearn.linear_model.LogisticRegression(
+    solver="liblinear"
+)  # 邏輯迴歸函數學習機
 logistic_regression.fit(X_train, y_train)
 
 y_pred = logistic_regression.predict(X_test)  # 預測.predict
@@ -385,6 +394,7 @@ cc = confusion_matrix(y_test, y_pred)
 print("混淆矩陣 :\n", cc)
 
 from sklearn.metrics import classification_report
+
 cc = classification_report(y_test, y_pred)
 print("分類報告 :\n", cc)
 
@@ -399,7 +409,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.feature_selection import SelectKBest
 from sklearn.feature_selection import chi2
 
-print('鳶尾花資料集')
+print("鳶尾花資料集")
 X, y = datasets.load_iris(return_X_y=True)
 print(X.shape)
 
@@ -419,7 +429,7 @@ cc = logistic_regression.pvalues_
 print(cc)
 
 # 顯示特徵名稱
-print('鳶尾花資料集')
+print("鳶尾花資料集")
 ds = datasets.load_iris()
 cc = np.array(ds.feature_names)[logistic_regression.scores_.argsort()[-2:][::-1]]
 print(cc)
@@ -467,6 +477,7 @@ print("混淆矩陣 :\n", cc)
 
 # 混淆矩陣圖
 from sklearn.metrics import ConfusionMatrixDisplay
+
 disp = ConfusionMatrixDisplay(
     confusion_matrix=confusion_matrix(y_test, y_pred), display_labels=ds.target_names
 )
@@ -474,7 +485,7 @@ disp.plot()
 plt.show()
 
 # 使用全部特徵
-print('鳶尾花資料集')
+print("鳶尾花資料集")
 X, y = datasets.load_iris(return_X_y=True)
 
 # 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
@@ -510,7 +521,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.feature_selection import SelectPercentile
 from sklearn.feature_selection import chi2
 
-print('數字資料集')
+print("數字資料集")
 X, y = datasets.load_digits(return_X_y=True)
 print(X.shape)
 
@@ -565,12 +576,13 @@ print("混淆矩陣 :\n", cc)
 
 # 混淆矩陣圖
 from sklearn.metrics import ConfusionMatrixDisplay
+
 disp = ConfusionMatrixDisplay(confusion_matrix=confusion_matrix(y_test, y_pred))
 disp.plot()
 plt.show()
 
 # 使用全部特徵
-print('數字資料集')
+print("數字資料集")
 X, y = datasets.load_digits(return_X_y=True)
 
 # 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
@@ -605,7 +617,7 @@ from sklearn import datasets
 from sklearn.preprocessing import StandardScaler
 from sklearn.feature_selection import GenericUnivariateSelect, chi2
 
-print('數字資料集')
+print("數字資料集")
 X, y = datasets.load_digits(return_X_y=True)
 print(X.shape)
 
@@ -661,12 +673,13 @@ print("混淆矩陣 :\n", cc)
 
 # 混淆矩陣圖
 from sklearn.metrics import ConfusionMatrixDisplay
+
 disp = ConfusionMatrixDisplay(confusion_matrix=confusion_matrix(y_test, y_pred))
 disp.plot()
 plt.show()
 
 # 使用全部特徵
-print('數字資料集')
+print("數字資料集")
 X, y = datasets.load_digits(return_X_y=True)
 
 # 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
@@ -695,14 +708,14 @@ print(cc)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-#遞迴特徵消去法(Recursive feature elimination)
+# 遞迴特徵消去法(Recursive feature elimination)
 
 from sklearn import datasets
 from sklearn.preprocessing import StandardScaler
 from sklearn.feature_selection import RFE
 from sklearn.svm import SVC
 
-print('鳶尾花資料集')
+print("鳶尾花資料集")
 X, y = datasets.load_iris(return_X_y=True)
 print(X.shape)
 
@@ -753,12 +766,13 @@ print("混淆矩陣 :\n", cc)
 
 # 混淆矩陣圖
 from sklearn.metrics import ConfusionMatrixDisplay
+
 disp = ConfusionMatrixDisplay(confusion_matrix=confusion_matrix(y_test, y_pred))
 disp.plot()
 plt.show()
 
 # 使用全部特徵
-print('鳶尾花資料集')
+print("鳶尾花資料集")
 X, y = datasets.load_iris(return_X_y=True)
 
 # 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
@@ -807,4 +821,3 @@ print("------------------------------------------------------------")  # 60個
 
 # 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
 logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
-

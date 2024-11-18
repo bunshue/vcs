@@ -33,7 +33,6 @@ from sklearn import datasets
 
 print("------------------------------------------------------------")  # 60個
 
-'''
 #MLPClassifier（多層感知器分類器）
 
 from sklearn.neural_network import MLPClassifier
@@ -331,117 +330,6 @@ for s in X:
   print(s, nn.predict(s))
 
 nn.plot_decision_regions(X, y)
-'''
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-''' 久
-mnist_npz_filename = "C:/_git/vcs/_big_files/mnist.npz"
-
-from keras.datasets import mnist
-
-from keras.models import Sequential 
-#from keras.layers.core import Dense, Activation 改為以下
-from tensorflow.python.keras.layers.core import Dense,Activation
-
-from tensorflow.python.keras.utils import np_utils
-
-#(X_train, Y_train), (X_test, Y_test) = mnist.load_data() 改成以下4行
-mnist = np.load(mnist_npz_filename)
-X_train, Y_train = mnist['x_train'], mnist['y_train']  
-X_test, Y_test = mnist['x_test'], mnist['y_test']  
-mnist.close()  
-
-X_train = X_train.reshape(60000, 784)     
-X_test = X_test.reshape(10000, 784)
-
-classes = 10
-Y_train = np_utils.to_categorical(Y_train, classes)     
-Y_test = np_utils.to_categorical(Y_test, classes)
-
-input_size = 784
-batch_size = 100     
-hidden_neurons = 100     
-epochs = 30
-
-model = Sequential()     
-model.add(Dense(hidden_neurons, input_dim=input_size)) 
-model.add(Activation('sigmoid'))     
-model.add(Dense(classes, input_dim=hidden_neurons)) 
-model.add(Activation('softmax'))
-
-model.compile(loss='categorical_crossentropy', metrics=['accuracy'], optimizer='sgd')
-
-model.fit(X_train, Y_train, batch_size=batch_size, epochs=epochs, verbose=1)
-
-score = model.evaluate(X_test, Y_test, verbose=1)
-print('Test accuracy:', score[1]) 
-
-
-weights = model.layers[0].get_weights()
-
-import matplotlib.pyplot as plt     
-import matplotlib.cm as cm 
-import numpy
-
-fig = plt.figure()
-  
-w = weights[0].T          
-for neuron in range(hidden_neurons):         
-    ax = fig.add_subplot(10, 10, neuron+1)
-    ax.axis("off")
-    ax.imshow(numpy.reshape(w[neuron], (28, 28)), cmap = cm.Greys_r)
-
-plt.savefig("neuron_images.png", dpi=300)    
-plt.show()  
-'''
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-#restricted_boltzmann_machine
-
-#import tensorflow as tf
-import tensorflow.compat.v1 as tf # 強制使用tensorflow 1.0
-tf.disable_v2_behavior()
-
-#from tensorflow.examples.tutorials.mnist import input_data
-
-VISIBLE_NODES = 784
-HIDDEN_NODES = 400
-LEARNING_RATE = 0.01
-
-#mnist = input_data.read_data_sets("MNIST_data/")
-
-#import tensorflow as tf
-(train_images, train_labels), (test_images, test_labels) = tf.keras.datasets.mnist.load_data()
-
-input_placeholder = tf.placeholder("float", shape=(None, VISIBLE_NODES))
-
-weights = tf.Variable(tf.random_normal((VISIBLE_NODES, HIDDEN_NODES), mean=0.0, stddev=1. / VISIBLE_NODES))
-hidden_bias = tf.Variable(tf.zeros([HIDDEN_NODES]))
-visible_bias = tf.Variable(tf.zeros([VISIBLE_NODES]))
-
-hidden_activation = tf.nn.sigmoid(tf.matmul(input_placeholder, weights) + hidden_bias)
-visible_reconstruction = tf.nn.sigmoid(tf.matmul(hidden_activation, tf.transpose(weights)) + visible_bias)
-
-final_hidden_activation = tf.nn.sigmoid(tf.matmul(visible_reconstruction, weights) + hidden_bias)
-
-positive_phase = tf.matmul(tf.transpose(input_placeholder), hidden_activation)
-negative_phase = tf.matmul(tf.transpose(visible_reconstruction), final_hidden_activation)
-
-weight_update = weights.assign_add(LEARNING_RATE * (positive_phase - negative_phase))
-visible_bias_update = visible_bias.assign_add(LEARNING_RATE *
-                                              tf.reduce_mean(input_placeholder - visible_reconstruction, 0))
-hidden_bias_update = hidden_bias.assign_add(LEARNING_RATE *
-                                            tf.reduce_mean(hidden_activation - final_hidden_activation, 0))
-
-train_op = tf.group(weight_update, visible_bias_update, hidden_bias_update)
-
-loss_op = tf.reduce_sum(tf.square(input_placeholder - visible_reconstruction))
-
-session = tf.Session()  # tensorflow 1.0才有的指令
-
-session.run(tf.initialize_all_variables())
-
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

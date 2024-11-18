@@ -1789,7 +1789,9 @@ from sklearn.preprocessing import StandardScaler
 iris = load_iris()
 
 # 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
-x_train, x_test, y_train, y_test = train_test_split(iris.data, iris.target, test_size=0.2)
+x_train, x_test, y_train, y_test = train_test_split(
+    iris.data, iris.target, test_size=0.2
+)
 # 訓練組8成, 測試組2成
 
 std = StandardScaler()
@@ -1812,7 +1814,9 @@ from sklearn.preprocessing import StandardScaler
 iris = load_iris()
 
 # 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
-x_train, x_test, y_train, y_test = train_test_split(iris.data, iris.target, test_size=0.2)
+x_train, x_test, y_train, y_test = train_test_split(
+    iris.data, iris.target, test_size=0.2
+)
 # 訓練組8成, 測試組2成
 
 std = StandardScaler()
@@ -1832,7 +1836,9 @@ print("------------------------------------------------------------")  # 60個
 iris = load_iris()
 
 # 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
-x_train, x_test, y_train, y_test = train_test_split(iris.data, iris.target, test_size=0.2)
+x_train, x_test, y_train, y_test = train_test_split(
+    iris.data, iris.target, test_size=0.2
+)
 # 訓練組8成, 測試組2成
 
 std = StandardScaler()
@@ -2076,7 +2082,9 @@ iris = load_iris()
 print("原始_特徵：{}, 原始_目標：{}".format(iris.data.shape, iris.target.shape))
 
 # 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
-x_train, x_test, y_train, y_test = train_test_split(iris.data, iris.target, test_size=0.2)
+x_train, x_test, y_train, y_test = train_test_split(
+    iris.data, iris.target, test_size=0.2
+)
 # 訓練組8成, 測試組2成
 
 print("訓練_特徵：{}, 訓練_目標：{}".format(x_train.shape, y_train.shape))

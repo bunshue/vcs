@@ -1,4 +1,9 @@
 
+python如何像C/vcs一樣
+可以知道目前程式跑到第幾行?
+
+
+
 是何用意?
 #from __future__ import print_function
 

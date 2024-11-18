@@ -43,7 +43,8 @@ from sklearn.cluster import KMeans  # 聚類方法
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-print('無 sklearn之kmeans 1')
+print("無 sklearn之kmeans 1")
+
 
 def kmeans(x, y, cx, cy):
     """目前功能只是繪群集元素點"""
@@ -67,7 +68,7 @@ kmeans(x, y, cluster_x, cluster_y)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-print('無 sklearn之kmeans 2')
+print("無 sklearn之kmeans 2")
 
 
 def length(x1, y1, x2, y2):
@@ -126,7 +127,7 @@ kmeans(x, y, cluster_x, cluster_y)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-print('無 sklearn之kmeans 3')
+print("無 sklearn之kmeans 3")
 
 
 def length(x1, y1, x2, y2):
@@ -192,7 +193,7 @@ cluster_number = 3  # 群集中心數量
 
 seeds = 50  # 元素數量
 limits = 100  # 值在(100, 100)內
-#或
+# 或
 seeds = 100  # 元素數量
 limits = 500  # 值在(300, 300)內
 
