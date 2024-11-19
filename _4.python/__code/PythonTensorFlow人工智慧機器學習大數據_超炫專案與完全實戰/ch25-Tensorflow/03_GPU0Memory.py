@@ -7,4 +7,3 @@ hello = tf.constant('Hello, TensorFlow!')
 gpu_options = tf.compat.v1.GPUOptions(per_process_gpu_memory_fraction=0.2) # 内存尺寸20%
 sess = tf.compat.v1.Session(config=tf.compat.v1.ConfigProto(gpu_options=gpu_options))
 print(sess.run(hello))
-

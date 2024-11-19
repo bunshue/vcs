@@ -32,21 +32,6 @@ MNIST 可以說是 Deep Learning 最有名的範例, 它被 Deep Learning 大師
 Keras 很貼心的幫我們準備好 MNIST 數據庫, 我們可以這樣讀進來 (第一次要花點時間)。
 http://yann.lecun.com/exdb/mnist/
 
-用tensorflow讀入 MNSIT 數據集
-from tensorflow.keras.datasets import mnist
-(x_train, y_train), (x_test, y_test) = mnist.load_data()
-
-# 標準 1 遠端檔案
-(x_train, y_train), (x_test, y_test) = mnist.load_data()
-
-# 標準 2 本地檔案
-mnist_npz_filename = "C:/_git/vcs/_big_files/mnist.npz"
-
-mnist = np.load(mnist_npz_filename)
-x_train, y_train = mnist["x_train"], mnist["y_train"]
-x_test, y_test = mnist["x_test"], mnist["y_test"]
-mnist.close()
-
 """
 print("------------------------------------------------------------")  # 60個
 
@@ -74,6 +59,7 @@ print("------------------------------------------------------------")  # 60個
 # 共同
 BATCH_SIZE = 300  # 每 BATCH_SIZE 筆調一次參數
 EPOCHS = 1  # 遞迴次數, 訓練次數
+
 mnist_npz_filename = "C:/_git/vcs/_big_files/mnist.npz"
 
 from tensorflow.keras.datasets import mnist
@@ -85,12 +71,58 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
 from tensorflow.keras.optimizers import SGD#優化器
 
+def load_mnist_data(RATIO=1):
+    # 載入 MNIST 資料庫的訓練資料，並自動分為『訓練組』及『測試組』
+    (x_train, y_train), (x_test, y_test) = mnist.load_data()
+    x_train = x_train[: int(len(x_train) / RATIO)]
+    y_train = y_train[: int(len(y_train) / RATIO)]
+    x_test = x_test[: int(len(x_test) / RATIO)]
+    y_test = y_test[: int(len(y_test) / RATIO)]
+    print("訓練資料x長度 :", len(x_train))
+    print("訓練資料y長度 :", len(y_train))
+    print("測試資料x長度 :", len(x_test))
+    print("測試資料y長度 :", len(y_test))
+    return (x_train, y_train), (x_test, y_test)
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
+print('各種讀取資料集的方法')
+
+# 將minst資料集放在 系統 位置
+# 下載minst資料集檔案
+# 資料集檔案位置: C:/Users/070601/.keras/datasets/mnist.npz
+#用tensorflow讀入 MNSIT 數據集
+from tensorflow.keras.datasets import mnist
+(x_train, y_train), (x_test, y_test) = mnist.load_data()
+
+# 標準 1 遠端檔案
+(x_train, y_train), (x_test, y_test) = mnist.load_data()
+
 """
+# 標準 2 本地檔案
+mnist_npz_filename = "C:/_git/vcs/_big_files/mnist.npz"
+
+mnist = np.load(mnist_npz_filename)
+x_train, y_train = mnist["x_train"], mnist["y_train"]
+x_test, y_test = mnist["x_test"], mnist["y_test"]
+mnist.close()
+"""
+
+# MNIST手寫數字辨識資料集
+# MNIST資料集是由60,000筆 訓練資料 train data
+# 10,000筆 測試資料 test data 所組成
+
+# 查看 mnist資料集 內容
+# 訓練資料 : (60000, 28, 28) #共60000張圖片資料，圖片像素28*28
+# 測試資料 : (10000, 28, 28) #共10000張圖片資料，圖片像素28*28
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 print("畫出 mnist 數據集訓練資料的前10筆... 久")
 
-(train_feature, train_label), (test_feature, test_label) = mnist.load_data()
+(x_train, y_train), (x_test, y_test) = load_mnist_data()
 
 
 def show_images_labels_predictions(images, labels, start_id, num=10):
@@ -105,11 +137,11 @@ def show_images_labels_predictions(images, labels, start_id, num=10):
         ax.set_xticks([])
         ax.set_yticks([])
         start_id += 1
-    plt.show()
+    #plt.show()
 
 
-show_images_labels_predictions(train_feature, train_label, 0, 10)
-"""
+show_images_labels_predictions(x_train, y_train, 0, 10)
+
 print("------------------------------------------------------------")  # 60個
 
 from urllib.request import urlretrieve
@@ -128,29 +160,19 @@ model = tf.keras.models.load_model(mnist_model_filename)
 )
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 print("畫出 mnist 數據集訓練資料的前256筆... 久")
 
-# MNIST手寫數字辨識資料集
-# MNIST資料集是由60,000筆 訓練資料 train data
-# 10,000筆 測試資料 test data 所組成
+(x_train, y_train), (x_test, y_test) = load_mnist_data()
 
-# 方法一 將minst資料集放在 系統 位置
-# 下載minst資料集檔案
-# 資料集檔案位置: C:/Users/070601/.keras/datasets/mnist.npz
-(x_train, y_train), (x_test, y_test) = mnist.load_data()
+# 我們來看看訓練資料是不是 6 萬筆、測試資料是不是有 1 萬筆。
 
-"""
-#方法二 將minst資料集放在 特定 位置
-mnist = np.load(mnist_npz_filename)
-x_train, y_train = mnist["x_train"], mnist["y_train"]
-x_test, y_test = mnist["x_test"], mnist["y_test"]
-mnist.close()
-"""
+print("訓練資料x長度 :", len(x_train))
+print("訓練資料y長度 :", len(y_train))
+print("測試資料x長度 :", len(x_test))
+print("測試資料y長度 :", len(y_test))
 
-# 查看 mnist資料集 內容
-# 訓練資料 : (60000, 28, 28) #共60000張圖片資料，圖片像素28*28
-# 測試資料 : (10000, 28, 28) #共10000張圖片資料，圖片像素28*28
 
 print("訓練資料 X(image)長度 :", len(x_train))
 print("訓練資料 Y(label)長度 :", len(y_train))
@@ -168,11 +190,11 @@ for i in range(256):
     ax.imshow(x_train[i], cmap=plt.cm.gray)
     ax.axis("off")
 plt.suptitle("畫前256筆資料")
-plt.show()
+#plt.show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-"""
+
 # https://waternotetw.blogspot.com/2018/03/keras-mnist.html
 
 # 匯入Keras及相關模組
@@ -180,8 +202,8 @@ print("------------------------------------------------------------")  # 60個
 
 from tensorflow.python.keras.utils import np_utils
 
-# (x_train, y_train), (x_test, y_test) = mnist.load_data()
-(x_train_image, y_train_label), (x_test_image, y_test_label) = mnist.load_data()
+# (x_train, y_train), (x_test, y_test) = load_mnist_data()
+(x_train_image, y_train_label), (x_test_image, y_test_label) = load_mnist_data()
 
 # 查看mnist資料集筆數
 # 60,000筆的train data(訓練資料)與10,000筆的test data(測試資料)
@@ -199,7 +221,7 @@ def plot_image(image):  # 定義plot_image函數，傳入image作為參數
     fig = plt.gcf()  # 設定顯示圖形的大小
     fig.set_size_inches(2, 2)
     plt.imshow(image, cmap="binary")  # 傳入參數image、28*28像素的圖形，camp="binary"表示以黑白色顯示
-    plt.show()  # 顯示圖片
+    #plt.show()  # 顯示圖片
 
 
 print("顯示第1筆訓練資料 圖形")
@@ -228,7 +250,7 @@ def plot_images_labels(
         ax.set_xticks([])
         ax.set_yticks([])  # 設定不顯示刻度
         idx += 1  # 讀取下一筆
-    plt.show()  # 開始繪圖
+    #plt.show()  # 開始繪圖
 
 
 print("顯示 第0到第9筆 訓練資料")
@@ -267,15 +289,11 @@ y_TestOneHot = np_utils.to_categorical(y_test_label)
 
 print("輸出One-hot encoding轉換結果")
 print(y_TrainOneHot[:5])
-"""
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# (x_train, y_train), (x_test, y_test) = mnist.load_data() 改成以下4行
-mnist = np.load(mnist_npz_filename)
-x_train, y_train = mnist["x_train"], mnist["y_train"]
-x_test, y_test = mnist["x_test"], mnist["y_test"]
-mnist.close()
+(x_train, y_train), (x_test, y_test) = load_mnist_data(10)
 
 x_train = x_train / 255
 x_test = x_test / 255
@@ -322,29 +340,17 @@ print(y_test[2])
 # array([0., 1., 0., 0., 0., 0., 0., 0., 0., 0.], dtype = float32)
 
 print("預測")
-print(model.predict(np.array([x_test[87]])))
-# print(model.predict_classes(np.array([x_test[87]])))
-# array([3])
+# y_pred = model.predict_classes(x_test) # TensorFlow2.6已刪除predict_classes()
+predict_x = model.predict(x_test)
+classes_x = np.argmax(predict_x, axis=1)
+y_pred = classes_x
 
-print("預測")
-# predict = model.predict_classes(x_test)
-predict = model.predict_step(x_test)
+def test(n):
+    print("神經網路判斷為:", y_pred[n])
+    plt.imshow(x_test[n], cmap="Greys")
+    #plt.show()
 
-print(predict)
-
-# array([7, 2, 1, ..., 4, 5, 6])
-
-
-def test(測試編號):
-    plt.imshow(x_test[測試編號], cmap="Greys")
-    print("神經網路判斷為:", predict[測試編號])
-
-
-test(1287)
-
-plt.show()
-
-# 神經網路判斷為: 8
+test(123)
 
 """
 print("久 .evaluate()...")
@@ -359,28 +365,8 @@ print("正確率", score[1])
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-"""
-from urllib.request import urlretrieve
-import gradio as gr
-from PIL import Image
 
-# Loading the MNIST model and data
-# 可下載最新之 .h5 檔案
-# urlretrieve("https://gr-models.s3-us-west-2.amazonaws.com/mnist-model.h5", "mnist-model.h5")
-# mnist-model.h5 路徑不能含中文
-mnist_model_filename = "C:/_git/vcs/_big_files/mnist-model.h5"
-model = tf.keras.models.load_model(mnist_model_filename)
-
-(x_train, y_train), (x_test, y_test) = tf.keras.datasets.mnist.load_data(
-    path="mnist.npz"
-)
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# 載入 MNIST 資料集, 如果是第一次載入會自行下載資料集
-(X_train, Y_train), (X_test, Y_test) = mnist.load_data()
+(X_train, Y_train), (X_test, Y_test) = load_mnist_data()
 
 # 顯示 Numpy 二維陣列內容
 print(X_train[0])
@@ -390,7 +376,7 @@ plt.imshow(X_train[0], cmap="gray")
 plt.title("顯示數字圖片 Label: " + str(Y_train[0]))
 plt.axis("off")
 
-plt.show()
+#plt.show()
 
 
 sub_plot = 330
@@ -402,19 +388,18 @@ for i in range(0, 9):
 
 plt.subplots_adjust(hspace=0.5)
 plt.title('前9張圖')
-plt.show()
-"""
+#plt.show()
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-"""
+
 from tensorflow.keras.layers import Flatten
 from tensorflow.keras.layers import Conv2D
 from tensorflow.keras.layers import MaxPooling2D
 from tensorflow.keras.layers import Dropout
 from tensorflow.keras.utils import to_categorical
 
-# 載入資料集
-(X_train, Y_train), (X_test, Y_test) = mnist.load_data()
+(X_train, Y_train), (X_test, Y_test) = load_mnist_data()
 
 # 將圖片轉換成 4D 張量
 X_train = X_train.reshape(X_train.shape[0], 28, 28, 1).astype("float32")
@@ -486,7 +471,7 @@ plt.xlabel("Epochs")
 plt.ylabel("Loss")
 plt.legend()
 
-plt.show()
+#plt.show()
 
 # 顯示訓練和驗證準確度
 acc = history.history["accuracy"]
@@ -499,10 +484,10 @@ plt.xlabel("Epochs")
 plt.ylabel("Accuracy")
 plt.legend()
 
-plt.show()
+#plt.show()
 
-# 載入資料集
-(X_train, Y_train), (X_test, Y_test) = mnist.load_data()
+(X_train, Y_train), (X_test, Y_test) = load_mnist_data()
+
 # 選一個測試的數字圖片
 i = 7
 digit = X_test[i].reshape(28, 28)
@@ -515,7 +500,7 @@ plt.figure()
 plt.title("Example of Digit:" + str(Y_test[i]))
 plt.imshow(digit, cmap="gray")
 plt.axis("off")
-plt.show()
+#plt.show()
 
 # (-0.5, 27.5, 27.5, -0.5)
 
@@ -526,19 +511,12 @@ plt.title("Probabilities for Each Digit Class")
 plt.bar(np.arange(10), probs.reshape(10), align="center")
 plt.xticks(np.arange(10), np.arange(10).astype(str))
 
-plt.show()
-"""
+#plt.show()
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# (x_train, y_train), (x_test, y_test) = mnist.load_data() 改成以下4行
-mnist = np.load(mnist_npz_filename)
-x_train, y_train = mnist["x_train"], mnist["y_train"]
-x_test, y_test = mnist["x_test"], mnist["y_test"]
-mnist.close()
-
-print("訓練資料長度 :", len(x_train))
-print("測試資料長度 :", len(x_test))
+(x_train, y_train), (x_test, y_test) = load_mnist_data()
 
 n = 1234
 print("看第", n, "筆訓練資料")
@@ -546,7 +524,7 @@ print("內容 :", x_train[n])
 print("大小 :", x_train[n].shape)
 print("目標 :", y_train[n])
 plt.imshow(x_train[n], cmap="Greys")
-plt.show()
+#plt.show()
 
 x_train = x_train.reshape(60000, 784) / 255
 x_test = x_test.reshape(10000, 784) / 255
@@ -571,34 +549,38 @@ model.add(Dense(100, activation="relu"))
 model.add(Dense(10, activation="softmax"))  # 輸出層的神經元 10 個
 
 # 組裝神經網路, 編譯模型 : 選擇損失函數、優化方法及成效衡量方式
-model.compile(loss="mse", optimizer=SGD(lr=0.087), metrics=["accuracy"])
+model.compile(loss="mse", optimizer=SGD(learning_rate=0.087), metrics=["accuracy"])
 
 print("檢視神經網路")
 model.summary()  # 檢視神經網路
 
 print("x_train.shape :", x_train.shape)
-
+""" 久
 # 學習訓練.fit
 # 共有N個樣品, 一次做 BATCH_SIZE 個, 一輪需要做 N / BATCH_SIZE 次
 # model.fit(x_train, y_train, batch_size=100, epochs=EPOCHS)# 學習訓練.fit
 # model.fit(x_train, y_train, batch_size=1000, epochs=EPOCHS)# 學習訓練.fit
 model.fit(x_train, y_train, batch_size=2000, epochs=EPOCHS)  # 學習訓練.fit
 
-y_pred = model.predict_step(x_test)  # 預測.predict
+# y_pred = model.predict_classes(x_test) # TensorFlow2.6已刪除predict_classes()
+predict_x = model.predict(x_test)
+classes_x = np.argmax(predict_x, axis=1)
+y_pred = classes_x
+
 # print(y_pred)
 
 n = 1234
 
 plt.imshow(x_test[n].reshape(28, 28), cmap="Greys")
-plt.show()
+#plt.show()
 
 print("神經網路預測第", n, "筆訓練資料")
 print(y_pred[n])
 print(y_pred[n].shape)
 
 plt.plot(y_pred[n])
-plt.show()
-
+#plt.show()
+"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -606,11 +588,7 @@ from tensorflow.python.keras.utils import np_utils
 from keras.models import Sequential
 from keras.layers import Dense
 
-#(train_feature, train_label), (test_feature, test_label) = mnist.load_data()
-mnist = np.load(mnist_npz_filename)
-train_feature, train_label = mnist["x_train"], mnist["y_train"]
-test_feature, test_label = mnist["x_test"], mnist["y_test"]
-mnist.close()
+(train_feature, train_label), (test_feature, test_label) = load_mnist_data()
 
 train_feature_vector = train_feature.reshape(len(train_feature), 784).astype("float32")
 test_feature_vector = test_feature.reshape(len(test_feature), 784).astype("float32")
@@ -662,11 +640,7 @@ from tensorflow.python.keras.utils import np_utils
 from keras.models import Sequential
 from keras.layers import Dense
 
-#(train_feature, train_label), (test_feature, test_label) = mnist.load_data()
-mnist = np.load(mnist_npz_filename)
-train_feature, train_label = mnist["x_train"], mnist["y_train"]
-test_feature, test_label = mnist["x_test"], mnist["y_test"]
-mnist.close()
+(train_feature, train_label), (test_feature, test_label) = load_mnist_data()
 
 train_feature_vector = train_feature.reshape(len(train_feature), 784).astype("float32")
 test_feature_vector = test_feature.reshape(len(test_feature), 784).astype("float32")
@@ -704,7 +678,7 @@ model.fit(
     batch_size=2000,
     verbose=2,
 )
-
+"""
 print("久 .evaluate()...")
 # 評估準確率
 scores = model.evaluate(test_feature_normalize, test_label_onehot)
@@ -712,32 +686,34 @@ print("\n準確率=", scores[1])
 
 print("將 模型存檔 存成 h5")
 model.save("tmp_Mnist_mlp_model.h5")
-
+"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("讀取模型, 並使用之")
+print("讀取模型, 並使用之 MLP")
 
 from tensorflow.keras.models import load_model
 
-model = load_model("tmp_mnist_mlp_model.h5")
+# 別人訓練出來的模型
+model = load_model("Mnist_mlp_model.h5")
 
-(x_train, y_train), (x_test, y_test) = mnist.load_data()
+(x_train, y_train), (x_test, y_test) = load_mnist_data(10)
 
-x_test = x_test.reshape(10000, 784) / 255
+x_test = x_test.reshape(len(x_test), 784) / 255
 
-y_pred = model.predict_classes(x_test)
-
-print(y_pred)
-
+# y_pred = model.predict_classes(x_test) # TensorFlow2.6已刪除predict_classes()
+predict_x = model.predict(x_test)
+classes_x = np.argmax(predict_x, axis=1)
+y_pred = classes_x
 
 def myNN(n):
     k = int(n)
     print("神經網路預測", y_pred[k])
     plt.imshow(x_test[k].reshape(28, 28), cmap="Greys")
+    #plt.show()
 
 
-myNN(9487)
+myNN(123)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -745,11 +721,7 @@ print("------------------------------------------------------------")  # 60個
 print("看 label")
 from tensorflow.python.keras.utils import np_utils
 
-#(train_feature, train_label), (test_feature, test_label) = mnist.load_data()
-mnist = np.load(mnist_npz_filename)
-train_feature, train_label = mnist["x_train"], mnist["y_train"]
-test_feature, test_label = mnist["x_test"], mnist["y_test"]
-mnist.close()
+(train_feature, train_label), (test_feature, test_label) = load_mnist_data()
 
 print(train_label[0:5])
 train_label_onehot = np_utils.to_categorical(train_label)
@@ -760,11 +732,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("看 graph")
 
-#(train_feature, train_label), (test_feature, test_label) = mnist.load_data()
-mnist = np.load(mnist_npz_filename)
-train_feature, train_label = mnist["x_train"], mnist["y_train"]
-test_feature, test_label = mnist["x_test"], mnist["y_test"]
-mnist.close()
+(train_feature, train_label), (test_feature, test_label) = load_mnist_data()
 
 train_feature_vector = train_feature.reshape(len(train_feature), 784).astype("float32")
 # print(train_feature_vector[0])
@@ -783,24 +751,24 @@ from autokeras.constant import Constant
 import autokeras
 from keras.utils import plot_model
     
-(x_train, y_train), (x_test, y_test) = mnist.load_data()
+(x_train, y_train), (x_test, y_test) = load_mnist_data()
+
 x_train = x_train.reshape(x_train.shape + (1,))
 x_test = x_test.reshape(x_test.shape + (1,))
+
 clf = ImageClassifier(verbose=True, augment=False)
+
 clf.fit(x_train, y_train, time_limit=500 * 60)  # 學習訓練.fit
+
 clf.final_fit(x_train, y_train, x_test, y_test, retrain=True)
 
 print("久 .evaluate()...")
 y = clf.evaluate(x_test, y_test)
 print(y * 100)
 
-clf.export_keras_model('model.h5')
+clf.export_keras_model('tmp_model.h5')
 plot_model(clf, to_file='model.png')
 """
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 """
@@ -818,8 +786,7 @@ from tensorflow.python.keras.utils import np_utils
 
 from matplotlib import pyplot as plt
 
-# 載入 MNIST 資料庫的訓練資料，並自動分為『訓練組』及『測試組』
-(X_train, y_train), (X_test, y_test) = mnist.load_data()
+(X_train, y_train), (X_test, y_test) = load_mnist_data()
 
 print("建立神經網路6")
 model = Sequential()  # 建立空白的神經網路模型(CNN), 函數學習機, 簡單的線性執行的模型
@@ -884,7 +851,6 @@ print('done')
 """
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
 """
 CNN 還是手寫辨識
 Yann LeCun 被譽為 Deep Learning 的三巨頭之一。
@@ -892,25 +858,21 @@ Yann LeCun 被譽為 Deep Learning 的三巨頭之一。
 """
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
 """
-(x_train, y_train), (x_test, y_test) = mnist.load_data()
+(x_train, y_train), (x_test, y_test) = load_mnist_data()
 
-#Channel
-
-#CNN 要注意一張圖有多少個 channel, 開始我們因為只有灰階, 所以只有一個 channel。因此我們要轉一下我們的資料格式:
-
-#(28,28) --> (28, 28, 1)
+# Channel
+# CNN 要注意一張圖有多少個 channel, 開始我們因為只有灰階, 所以只有一個 channel。
+# 因此我們要轉一下我們的資料格式:
+# (28,28) --> (28, 28, 1)
 
 x_train = x_train.reshape(60000, 28, 28, 1) / 255
 x_test = x_test.reshape(10000, 28, 28, 1) / 255
 
 print(x_train[87].shape)
-
 #(28, 28, 1)
 
 print(y_train[87])
-
 #9
 
 from tensorflow.keras.utils import to_categorical
@@ -958,19 +920,25 @@ model.summary()  #檢視神經網路
 #(3*3*16+1)*32 = 4640
 
 # 組裝神經網路, 編譯模型 : 選擇損失函數、優化方法及成效衡量方式
-model.compile(loss='mse', optimizer=SGD(lr=0.087), metrics=['accuracy'])
+model.compile(loss='mse', optimizer=SGD(learning_rate=0.087), metrics=['accuracy'])
 
 model.fit(x_train, y_train, batch_size=128, epochs=EPOCHS)  # 學習訓練.fit
 
 #預測
-result = model.predict_classes(x_test)
+# y_pred = model.predict_classes(x_test) # TensorFlow2.6已刪除predict_classes()
+predict_x = model.predict(x_test)
+classes_x = np.argmax(predict_x, axis=1)
+y_pred = classes_x
+
 
 def my_predict(n):
-    print('我可愛的 CNN 預測是', result[n])
+    print('我可愛的 CNN 預測是', y_pred[n])
     X = x_test[n].reshape(28,28)
     plt.imshow(X, cmap='Greys')
+    #plt.show()
 
-print(my_predict(50))
+n = 123
+my_predict(n)
 
 print("久 .evaluate()...")
 score = model.evaluate(x_test, y_test)
@@ -986,31 +954,28 @@ print("------------------------------------------------------------")  # 60個
 
 """
 2-1 初始準備
-
 基本上和之前是一樣的, 我們就不再說明。
-
 2-2 讀入 MNIST 數據庫
 由 Keras 讀入 MNIST
-
 基本上和我們上次一樣, 這次因為 Keras 已偷偷把數據庫存在你的電腦, 所以會快很多!
 """
 
-(x_train, y_train), (x_test, y_test) = mnist.load_data()
+(x_train, y_train), (x_test, y_test) = load_mnist_data()
 
 """
 輸入格式整理
-
-如果你還記得, 我們每筆輸入資料都是 28x28 的陣列, CNN 其實就是吃「圖」的, 所以基本上不用像之前把每筆資料拉平。「但。是。」平常的圖都有 R, G, B 三個 channels, 每個 channel 都是一個矩陣, 也就是一張圖可能是三個矩陣! 我們是灰階, 也就是只有一個 channel。但這件事也要明確的告訴 Keras。
-
+如果你還記得, 我們每筆輸入資料都是 28x28 的陣列, CNN 其實就是吃「圖」的,
+所以基本上不用像之前把每筆資料拉平。
+「但。是。」平常的圖都有 R, G, B 三個 channels, 每個 channel 都是一個矩陣,
+也就是一張圖可能是三個矩陣! 我們是灰階, 也就是只有一個 channel。
+但這件事也要明確的告訴 Keras。
 換句話說, 我們的輸入每筆資料型式要從 (28, 28) 換成 (28, 28, 1)!
 """
 
 print(x_train[1234].shape)
 
 # (28, 28)
-
 # CNN 要的是 (28, 28, 1)
-
 # 確認一下...
 
 x_train = x_train.reshape(60000, 28, 28, 1) / 255
@@ -1028,7 +993,6 @@ plt.imshow(X, cmap="Greys")
 
 """
 輸出格式整理
-
 和上次一樣, 我們用標準 1-hot 方式處理。
 """
 
@@ -1122,11 +1086,12 @@ model.add(Dense(10, activation="softmax"))  # 輸出層的神經元 10 個
 #              metrics=['accuracy'])
 
 # 組裝神經網路, 編譯模型 : 選擇損失函數、優化方法及成效衡量方式
-model.compile(loss="mse", optimizer=SGD(lr=0.07), metrics=["accuracy"])
+model.compile(loss="mse", optimizer=SGD(learning_rate=0.07), metrics=["accuracy"])
 
 print("檢視神經網路")
 model.summary()  # 檢視神經網路
 
+''' skip
 print("久 .fit()...")
 model.fit(x_train, y_train, batch_size=BATCH_SIZE, epochs=EPOCHS)  # 學習訓練.fit
 
@@ -1166,7 +1131,10 @@ model = load_model("myCNNmodel.h5")
 
 # 我們用另一個方式: 每次選 5 個顯示, 看是不是有正確辨識。
 
-predict = model.predict_classes(x_test)
+# y_pred = model.predict_classes(x_test) # TensorFlow2.6已刪除predict_classes()
+predict_x = model.predict(x_test)
+classes_x = np.argmax(predict_x, axis=1)
+y_pred = classes_x
 
 # 看來真的可以直接用!!
 pick = np.random.randint(1, 9999, 5)
@@ -1174,41 +1142,42 @@ pick = np.random.randint(1, 9999, 5)
 for i in range(5):
     plt.subplot(1, 5, i + 1)
     plt.imshow(x_test[pick[i]].reshape(28, 28), cmap="Greys")
-    plt.title(predict[pick[i]])
+    plt.title(y_pred[pick[i]])
     plt.axis("off")
 
 """
 小結論
-我們到此, 基本上是「亂做」的神經網路。有些同學在不斷試驗的過程中, 可能會發現有時會出現很糟糕的結果。因此, 接下來我們要介紹怎麼樣用些簡單的手法, 能讓學習效果比較穩定, 而且有可能可以增加學習效率。
+我們到此, 基本上是「亂做」的神經網路。
+有些同學在不斷試驗的過程中, 可能會發現有時會出現很糟糕的結果。
+因此, 接下來我們要介紹怎麼樣用些簡單的手法, 能讓學習效果比較穩定, 而且有可能可以增加學習效率。
 """
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 把訓練好神經網路讀回來用的方式
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
+print("讀取模型, 並使用之 CNN")
 
 from tensorflow.keras.models import load_model
 
-model = load_model("myCNNmodel.h5")
+# 別人訓練出來的模型
+model = load_model("Mnist_cnn_model.h5")
 
-(x_train, y_train), (x_test, y_test) = mnist.load_data()
+(x_train, y_train), (x_test, y_test) = load_mnist_data(10)
 
-x_test = x_test.reshape(10000, 28, 28, 1) / 255
+x_test = x_test.reshape(len(x_test), 28, 28, 1) / 255
 
-result = model.predict_classes(x_test)
-
+#y_pred = model.predict_classes(x_test) # TensorFlow2.6已刪除predict_classes()
+predict_x = model.predict(x_test)
+classes_x = np.argmax(predict_x, axis=1)
+y_pred = classes_x
 
 def myCNN(n):
-    print("我的 CNN 說是", result[n])
+    print("CNN神經網路預測 :", y_pred[n])
     X = x_test[n].reshape(28, 28)
     plt.imshow(X, cmap="Greys")
+    #plt.show()
 
 
-n = 999
-
+n = 123
 myCNN(n)
 
 print("------------------------------------------------------------")  # 60個
@@ -1236,7 +1205,7 @@ def show_images_labels_predictions(images, labels, predictions, start_id, num=10
         ax.set_xticks([])
         ax.set_yticks([])
         start_id += 1
-    plt.show()
+    #plt.show()
 
 
 files = glob.glob("imagedata\*.jpg")  # 建立測試資料
@@ -1255,36 +1224,22 @@ test_label = np.array(test_label)  # 串列轉為矩陣
 test_feature_vector = test_feature.reshape(len(test_feature), 784).astype("float32")
 test_feature_normalize = test_feature_vector / 255
 
+# 別人訓練出來的模型
 model = load_model("Mnist_mlp_model.h5")
 
-prediction = model.predict_classes(test_feature_normalize)
+# y_pred = model.predict_classes(test_feature_normalize) # TensorFlow2.6已刪除predict_classes()
+predict_x = model.predict(test_feature_normalize)
+classes_x = np.argmax(predict_x, axis=1)
+y_pred = classes_x
+
 show_images_labels_predictions(
-    test_feature, test_label, prediction, 0, len(test_feature)
+    test_feature, test_label, y_pred, 0, len(test_feature)
 )
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-(x_train, y_train), (x_test, y_test) = mnist.load_data()
-
-# 我們來看看訓練資料是不是 6 萬筆、測試資料是不是有 1 萬筆。
-
-print("訓練資料x長度 :", len(x_train))
-print("訓練資料y長度 :", len(y_train))
-print("測試資料x長度 :", len(x_test))
-print("測試資料y長度 :", len(y_test))
-
-RATIO = 12
-
-x_train = x_train[: int(len(x_train) / RATIO)]
-y_train = y_train[: int(len(y_train) / RATIO)]
-x_test = x_test[: int(len(x_test) / RATIO)]
-y_test = y_test[: int(len(y_test) / RATIO)]
-
-print("訓練資料x長度 :", len(x_train))
-print("訓練資料y長度 :", len(y_train))
-print("測試資料x長度 :", len(x_test))
-print("測試資料y長度 :", len(y_test))
+(x_train, y_train), (x_test, y_test) = load_mnist_data(12)
 
 """
 2.2.2 數據庫的內容
@@ -1444,7 +1399,7 @@ metrics=['accuracy']
 """
 
 # 組裝神經網路, 編譯模型 : 選擇損失函數、優化方法及成效衡量方式
-model.compile(loss="mse", optimizer=SGD(lr=0.087), metrics=["accuracy"])
+model.compile(loss="mse", optimizer=SGD(learning_rate=0.087), metrics=["accuracy"])
 
 """
 2-4 檢視我們的神經網路
@@ -1491,19 +1446,16 @@ print(len(y_train))
 
 model.fit(x_train, y_train, batch_size=BATCH_SIZE, epochs=EPOCHS)  # 學習訓練.fit
 
-# 2-6 試用我們的結果
-# 我們 "predict" 放的是我們神經網路的學習結果。
-# 這裡用 predict_classes 會讓我們 Keras 選 10 個輸出機率最大的那類。
+# y_pred = model.predict_classes(x_test) # TensorFlow2.6已刪除predict_classes()
+predict_x = model.predict(x_test)
+classes_x = np.argmax(predict_x, axis=1)
+y_pred = classes_x
 
-# predict = model.predict_classes(x_test) 改成以下一行
+print(y_pred)
 
-print("預測1 :")
-predict = model.predict_step(x_test)
-print(predict)
-
-print("預測2 :")
-predict = (model.predict(x_test) > 0.5).astype("int32")
-print(predict)
+print("預測2")
+y_pred = (model.predict_classes(x_test) > 0.5).astype("int32")
+print(y_pred)
 
 # array([7, 2, 1, ..., 7, 7, 0]) 有問題~~~~~~~~
 # 寫個小程式, 秀出某測試資料的樣子, 還有我們可愛神經網路辨識的結果。
@@ -1512,14 +1464,14 @@ print(predict)
 def test(num):
     plt.imshow(x_test[num], cmap="Greys")
     print("num =", num)
-    print("神經網路判斷為 : ", predict[num])
+    print("神經網路判斷為 : ", y_pred[num])
     print()
 
 
-predict_number = 87
-test(predict_number)
+n = 123
+test(n)
 # plt.show()
-print("神經網路判斷為 : ", predict[predict_number])
+print("神經網路判斷為 : ", y_pred[n])
 
 # 神經網路判斷為 : 3   有問題~~~~~~~
 # 到底測試資料總的狀況如何呢? 我們可以給我們神經網路「考一下試」。
@@ -1547,11 +1499,11 @@ print("正確率", score[1])
 model_json = model.to_json()
 open("tmp_stupid_model.json", "w").write(model_json)
 model.save_weights("tmp_stupid_model_weights.h5")
-
+'''
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-(x_train, y_train), (x_test, y_test) = mnist.load_data()
+(x_train, y_train), (x_test, y_test) = load_mnist_data()
 
 x_train = x_train / 255
 x_test = x_test / 255
@@ -1586,7 +1538,7 @@ print(x_train[n])
 print(y_train[n])
 # 1
 plt.imshow(x_train[n], cmap="Greys")
-plt.show()
+#plt.show()
 
 
 # 3. 資料整理
@@ -1628,7 +1580,7 @@ model.add(Dense(87, activation="relu"))
 model.add(Dense(10, activation="softmax"))  # 輸出層的神經元 10 個
 
 # 組裝神經網路, 編譯模型 : 選擇損失函數、優化方法及成效衡量方式
-model.compile(loss="mse", optimizer=SGD(lr=0.087), metrics=["accuracy"])
+model.compile(loss="mse", optimizer=SGD(learning_rate=0.087), metrics=["accuracy"])
 
 print("檢視神經網路")
 model.summary()  # 檢視神經網路
@@ -1640,13 +1592,13 @@ model.summary()  # 檢視神經網路
 # model.fit(x_train, y_train, batch_size = 1200, epochs=EPOCHS)# 學習訓練.fit
 model.fit(x_train, y_train, batch_size=2400, epochs=EPOCHS)  # 學習訓練.fit
 
-# 6. 訓練成果
-# result = model.predict_classes(x_test) #old
-result = model.predict_step(x_test)
+# y_pred = model.predict_classes(x_test) # TensorFlow2.6已刪除predict_classes()
+predict_x = model.predict(x_test)
+classes_x = np.argmax(predict_x, axis=1)
+y_pred = classes_x
 
-n = 9999
-
-print("神經網路預測是:", result[n])
+n = 123
+print("神經網路預測是:", y_pred[n])
 
 plt.imshow(x_test[n].reshape(28, 28), cmap="Greys")
 
@@ -1654,7 +1606,7 @@ plt.imshow(x_test[n].reshape(28, 28), cmap="Greys")
 """
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
+""" 久
 from keras.models import load_model
 
 
@@ -1676,29 +1628,23 @@ def show_images_labels_predictions(images, labels, predictions, start_id, num=10
         ax.set_xticks([])
         ax.set_yticks([])
         start_id += 1
-    plt.show()
+    #plt.show()
 
 
-#(train_feature, train_label), (test_feature, test_label) = mnist.load_data()
-mnist = np.load(mnist_npz_filename)
-train_feature, train_label = mnist["x_train"], mnist["y_train"]
-test_feature, test_label = mnist["x_test"], mnist["y_test"]
-mnist.close()
+(train_feature, train_label), (test_feature, test_label) = load_mnist_data()
 
 test_feature_vector = test_feature.reshape(len(test_feature), 784).astype("float32")
 test_feature_normalize = test_feature_vector / 255
 
+# 別人訓練出來的模型
 model = load_model("Mnist_mlp_model.h5")
 
-# prediction=model.predict_classes(test_feature_normalize)  #預測
-
-# 在TensorFlow 2.6版本中删除了这个predict_classes函数。
-# 改用
-""" 久
+# y_pred = model.predict_classes(test_feature_normalize) # TensorFlow2.6已刪除predict_classes()
 predict_x = model.predict(test_feature_normalize)
 classes_x = np.argmax(predict_x, axis=1)
+y_pred = classes_x
 
-show_images_labels_predictions(test_feature, test_label, predict_x, 0)
+show_images_labels_predictions(test_feature, test_label, y_pred, 0)
 """
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1709,11 +1655,7 @@ from tensorflow.keras.datasets import mnist
 from tensorflow.keras.utils import plot_model
 from tensorflow.keras.utils import to_categorical
 
-# (X_train, y_train), (X_test, y_test) = mnist.load_data() 改成以下4行
-mnist = np.load(mnist_npz_filename)
-X_train, y_train = mnist["x_train"], mnist["y_train"]
-X_test, y_test = mnist["x_test"], mnist["y_test"]
-mnist.close()
+(X_train, y_train), (X_test, y_test) = load_mnist_data()
 
 X_train = X_train.reshape(X_train.shape[0], 784)
 
@@ -1743,11 +1685,7 @@ print("------------------------------------------------------------")  # 60個
 from tensorflow.keras.utils import plot_model
 from tensorflow.keras.utils import to_categorical
 
-# (X_train, y_train), (X_test, y_test) = mnist.load_data() 改成以下4行
-mnist = np.load(mnist_npz_filename)
-X_train, y_train = mnist["x_train"], mnist["y_train"]
-X_test, y_test = mnist["x_test"], mnist["y_test"]
-mnist.close()
+(X_train, y_train), (X_test, y_test) = load_mnist_data()
 
 X_train = X_train.reshape(X_train.shape[0], 784)
 X_test = X_test.reshape(X_test.shape[0], 784)
@@ -1778,18 +1716,14 @@ plt.xlabel("epoch")
 
 plt.legend(loc="best")
 
-plt.show()
+#plt.show()
 """
 print("------------------------------------------------------------")  # 60個
 
 from tensorflow.keras.utils import plot_model
 from tensorflow.keras.utils import to_categorical
 
-# (X_train, y_train), (X_test, y_test) = mnist.load_data() 改成以下4行
-mnist = np.load(mnist_npz_filename)
-X_train, y_train = mnist["x_train"], mnist["y_train"]
-X_test, y_test = mnist["x_test"], mnist["y_test"]
-mnist.close()
+(X_train, y_train), (X_test, y_test) = load_mnist_data()
 
 X_train = X_train.reshape(X_train.shape[0], 784)
 
@@ -1825,11 +1759,7 @@ print("------------------------------------------------------------")  # 60個
 from tensorflow.keras.utils import plot_model
 from tensorflow.keras.utils import to_categorical
 
-# (X_train, y_train), (X_test, y_test) = mnist.load_data() 改成以下4行
-mnist = np.load(mnist_npz_filename)
-X_train, y_train = mnist["x_train"], mnist["y_train"]
-X_test, y_test = mnist["x_test"], mnist["y_test"]
-mnist.close()
+(X_train, y_train), (X_test, y_test) = load_mnist_data()
 
 X_train = X_train.reshape(X_train.shape[0], 784)
 
@@ -1857,7 +1787,7 @@ for i in range(10):
     plt.subplot(1, 10, i + 1)
     plt.imshow(X_test[i].reshape((28, 28)), "gray")
 
-plt.show()
+#plt.show()
 
 pred = np.argmax(model.predict(X_test[0:10]), axis=1)
 
@@ -1869,11 +1799,7 @@ from tensorflow.keras.layers import Dropout
 from tensorflow.keras import optimizers
 from tensorflow.keras.utils import to_categorical
 
-#(X_train, y_train), (X_test, y_test) = mnist.load_data() 改成以下4行
-mnist = np.load(mnist_npz_filename)
-X_train, y_train = mnist['x_train'], mnist['y_train']  
-X_test, y_test = mnist['x_test'], mnist['y_test']  
-mnist.close()  
+(X_train, y_train), (X_test, y_test) = load_mnist_data()
 
 X_train = X_train.reshape(X_train.shape[0], 784)
 
@@ -1916,11 +1842,7 @@ from tensorflow.keras.layers import Dropout
 from tensorflow.keras import optimizers
 from tensorflow.keras.utils import to_categorical
 
-#(X_train, y_train), (X_test, y_test) = mnist.load_data() 改成以下4行
-mnist = np.load(mnist_npz_filename)
-X_train, y_train = mnist['x_train'], mnist['y_train']
-X_test, y_test = mnist['x_test'], mnist['y_test']
-mnist.close()
+(X_train, y_train), (X_test, y_test) = load_mnist_data()
 
 X_train = X_train.reshape(X_train.shape[0], 784)
 
@@ -1984,11 +1906,7 @@ from tensorflow.keras.layers import Dropout
 from tensorflow.keras import optimizers
 from tensorflow.keras.utils import to_categorical
 
-#(X_train, y_train), (X_test, y_test) = mnist.load_data() 改成以下4行
-mnist = np.load(mnist_npz_filename)
-X_train, y_train = mnist['x_train'], mnist['y_train']
-X_test, y_test = mnist['x_test'], mnist['y_test']
-mnist.close()
+(X_train, y_train), (X_test, y_test) = load_mnist_data()
 
 X_train = X_train.reshape(X_train.shape[0], 784)
 
@@ -2031,11 +1949,7 @@ from tensorflow.keras.layers import Dropout
 from tensorflow.keras import optimizers
 from tensorflow.keras.utils import to_categorical
 
-#(X_train, y_train), (X_test, y_test) = mnist.load_data() 改成以下4行
-mnist = np.load(mnist_npz_filename)
-X_train, y_train = mnist['x_train'], mnist['y_train']
-X_test, y_test = mnist['x_test'], mnist['y_test']
-mnist.close()
+(X_train, y_train), (X_test, y_test) = load_mnist_data()
 
 X_train = X_train.reshape(X_train.shape[0], 784)
 
@@ -2080,11 +1994,7 @@ from tensorflow.keras.layers import Dropout
 from tensorflow.keras import optimizers
 from tensorflow.keras.utils import to_categorical
 
-# (X_train, y_train), (X_test, y_test) = mnist.load_data() 改成以下4行
-mnist = np.load(mnist_npz_filename)
-X_train, y_train = mnist["x_train"], mnist["y_train"]
-X_test, y_test = mnist["x_test"], mnist["y_test"]
-mnist.close()
+(X_train, y_train), (X_test, y_test) = load_mnist_data()
 
 X_train = X_train.reshape(X_train.shape[0], 784)
 
@@ -2127,11 +2037,7 @@ from tensorflow.keras.layers import Dropout
 from tensorflow.keras import optimizers
 from tensorflow.keras.utils import to_categorical
 
-# (X_train, y_train), (X_test, y_test) = mnist.load_data() 改成以下4行
-mnist = np.load(mnist_npz_filename)
-X_train, y_train = mnist["x_train"], mnist["y_train"]
-X_test, y_test = mnist["x_test"], mnist["y_test"]
-mnist.close()
+(X_train, y_train), (X_test, y_test) = load_mnist_data()
 
 X_train = X_train.reshape(X_train.shape[0], 784)
 
@@ -2183,11 +2089,7 @@ from tensorflow.keras.models import load_model
 from tensorflow.keras.utils import to_categorical
 from tensorflow.keras.utils import plot_model
 
-# (X_train, y_train), (X_test, y_test) = mnist.load_data()
-mnist = np.load(mnist_npz_filename)
-X_train, y_train = mnist["x_train"], mnist["y_train"]
-X_test, y_test = mnist["x_test"], mnist["y_test"]
-mnist.close()
+(X_train, y_train), (X_test, y_test) = load_mnist_data()
 
 # 訓練數據300張, 測試數據100張
 
@@ -2246,7 +2148,7 @@ for i in range(10):
 
 plt.suptitle("The first ten of the test data",fontsize=20)
 
-plt.show()
+#plt.show()
 
 # 顯示前10張圖片的預測結果
 
@@ -2263,8 +2165,6 @@ model.summary()  #檢視神經網路
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
-
 # 批次正規化
 
 from tensorflow.keras.layers import (
@@ -2278,12 +2178,7 @@ from tensorflow.keras.layers import (
 from tensorflow.keras.models import load_model
 from tensorflow.keras.utils import to_categorical
 
-# (X_train, y_train), (X_test, y_test) = mnist.load_data()
-mnist = np.load(mnist_npz_filename)
-X_train, y_train = mnist["x_train"], mnist["y_train"]
-X_test, y_test = mnist["x_test"], mnist["y_test"]
-mnist.close()
-
+(X_train, y_train), (X_test, y_test) = load_mnist_data()
 
 X_train = np.reshape(a=X_train, newshape=(-1, 28, 28, 1))
 
@@ -2357,7 +2252,7 @@ plt.xlabel('epoch')
 
 plt.suptitle("model", fontsize=12)
 
-plt.show()
+#plt.show()
 """
 
 
@@ -2388,10 +2283,7 @@ import numpy as np
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
 """ 缺檔案
-import tensorflow as tf
-
 model = tf.keras.models.load_model('keras_model.h5', compile=False)   # 載入 model
 data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)           # 設定資料陣列
 
@@ -2429,8 +2321,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 """ 缺檔案
-import tensorflow as tf
-
 model = tf.keras.models.load_model('keras_model.h5', compile=False)  # 載入模型
 data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)          # 設定資料陣列
 
@@ -2482,8 +2372,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 """ 缺檔案
-import tensorflow as tf
-
 from PIL import ImageFont, ImageDraw, Image  # 載入 PIL 相關函式庫
 
 fontpath = 'NotoSansTC-Regular.otf'          # 設定字型路徑
@@ -2535,8 +2423,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 """ 缺檔案
-import tensorflow as tf
-
 model = tf.keras.models.load_model('keras_model.h5', compile=False)  # 載入模型
 data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)          # 設定資料陣列
 
@@ -2585,8 +2471,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 """ 缺檔案
-import tensorflow as tf
-
 from PIL import ImageFont, ImageDraw, Image  # 載入 PIL 相關函式庫
 
 fontpath = 'NotoSansTC-Regular.otf'          # 設定字型路徑
@@ -2639,7 +2523,7 @@ print("------------------------------------------------------------")  # 60個
 from keras.datasets import mnist
 from keras import utils
 
-(x_train, y_train), (x_test, y_test) = mnist.load_data()  # 載入訓練集
+(x_train, y_train), (x_test, y_test) = load_mnist_data()
 
 # 訓練集資料
 x_train = x_train.reshape(x_train.shape[0], -1)  # 轉換資料形狀
@@ -2654,7 +2538,7 @@ y_test = y_test.astype(np.float32)
 knn = cv2.ml.KNearest_create()  # 建立 KNN 訓練方法
 knn.setDefaultK(5)  # 參數設定
 knn.setIsClassifier(True)
-
+""" 久
 print("training...")
 knn.train(x_train, cv2.ml.ROW_SAMPLE, y_train)  # 開始訓練
 knn.save("tmp_mnist_knn.xml")  # 儲存訓練模型
@@ -2669,7 +2553,7 @@ test_ret = test_ret.reshape(
 test_sum = test_ret == y_test
 acc = test_sum.mean()  # 得到準確率
 print(acc)
-
+"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 """ need Webcam
@@ -2735,11 +2619,7 @@ from keras.models import Sequential
 from tensorflow.python.keras.layers.core import Dense,Activation
 from tensorflow.python.keras.utils import np_utils
 
-#(X_train, Y_train), (X_test, Y_test) = mnist.load_data() 改成以下4行
-mnist = np.load(mnist_npz_filename)
-X_train, Y_train = mnist['x_train'], mnist['y_train']  
-X_test, Y_test = mnist['x_test'], mnist['y_test']  
-mnist.close()  
+(X_train, Y_train), (X_test, Y_test) = load_mnist_data()
 
 X_train = X_train.reshape(60000, 784)     
 X_test = X_test.reshape(10000, 784)
@@ -2763,10 +2643,10 @@ model.add(Activation('softmax'))
 # 組裝神經網路, 編譯模型 : 選擇損失函數、優化方法及成效衡量方式
 model.compile(loss='categorical_crossentropy', metrics=['accuracy'], optimizer='sgd')
 
+""" long
 # 共有N個樣品, 一次做 BATCH_SIZE 個, 一輪需要做 N / BATCH_SIZE 次
 model.fit(X_train, Y_train, batch_size=BATCH_SIZE, epochs=EPOCHS, verbose=1)
 
-sys.exit()
 score = model.evaluate(X_test, Y_test, verbose=1)
 print('Test accuracy:', score[1]) 
 
@@ -2785,8 +2665,8 @@ for neuron in range(hidden_neurons):
     ax.imshow(numpy.reshape(w[neuron], (28, 28)), cmap = cm.Greys_r)
 
 plt.savefig("neuron_images.png", dpi=300)    
-plt.show()  
-
+#plt.show()  
+"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -2804,8 +2684,7 @@ LEARNING_RATE = 0.01
 
 #mnist = input_data.read_data_sets("MNIST_data/")
 
-#import tensorflow as tf
-(train_images, train_labels), (test_images, test_labels) = tf.keras.datasets.mnist.load_data()
+(train_images, train_labels), (test_images, test_labels) = load_mnist_data()
 
 input_placeholder = tf.placeholder("float", shape=(None, VISIBLE_NODES))
 
@@ -2844,11 +2723,7 @@ from keras.models import Sequential
 from tensorflow.python.keras.layers.core import Dense,Activation
 from tensorflow.python.keras.utils import np_utils
 
-#(X_train, Y_train), (X_test, Y_test) = mnist.load_data() 改成以下4行
-mnist = np.load(mnist_npz_filename)
-X_train, Y_train = mnist['x_train'], mnist['y_train']
-X_test, Y_test = mnist['x_test'], mnist['y_test']
-mnist.close()
+(X_train, Y_train), (X_test, Y_test) = load_mnist_data()
 
 X_train = X_train.reshape(60000, 784)     
 X_test = X_test.reshape(10000, 784)
@@ -2899,11 +2774,7 @@ input_size = 784
 hidden_neurons = 200
 classes = 10     
 
-#(X_train, Y_train), (X_test, Y_test) = mnist.load_data() 改成以下4行
-mnist = np.load(mnist_npz_filename)
-X_train, Y_train = mnist['x_train'], mnist['y_train']
-X_test, Y_test = mnist['x_test'], mnist['y_test']
-mnist.close()  
+(X_train, Y_train), (X_test, Y_test) = load_mnist_data()
 
 X_train = X_train.reshape(60000, 28, 28, 1)     
 X_test = X_test.reshape(10000, 28, 28, 1)
@@ -2970,7 +2841,7 @@ from keras.optimizers import Adam #優化器
 
 # download the mnist to the path '~/.keras/datasets/' if it is the first time to be called
 # X shape (60,000 28x28), y shape (10,000, )
-(X_train, y_train), (X_test, y_test) = mnist.load_data()
+(X_train, y_train), (X_test, y_test) = load_mnist_data()
 
 # data pre-processing
 X_train = X_train.reshape(-1, 1,28, 28)/255.
@@ -3016,7 +2887,7 @@ model.add(Dense(10))
 model.add(Activation('softmax'))
 
 # Another way to define your optimizer(優化器)
-adam = Adam(lr=1e-4)
+adam = Adam(learning_rate=1e-4)
 
 """ NG
 # 組裝神經網路, 編譯模型 : 選擇損失函數、優化方法及成效衡量方式
@@ -3052,3 +2923,35 @@ sys.exit()
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
+
+# (x_train, y_train), (x_test, y_test) = mnist.load_data() 改成以下4行
+mnist = np.load(mnist_npz_filename)
+x_train, y_train = mnist["x_train"], mnist["y_train"]
+x_test, y_test = mnist["x_test"], mnist["y_test"]
+mnist.close()
+
+
+# 我們 "predict" 放的是我們神經網路的學習結果。
+# 這裡用 predict_classes 會讓我們 Keras 選 10 個輸出機率最大的那類。
+
+# y_pred = model.predict_classes(x_test) # TensorFlow2.6已刪除predict_classes()
+predict_x = model.predict(x_test)
+classes_x = np.argmax(predict_x, axis=1)
+y_pred = classes_x
+
+
+
+# 我們 "predict" 放的是我們神經網路的學習結果。
+# 這裡用 predict_classes 會讓我們 Keras 選 10 個輸出機率最大的那類。
+
+# 方法一 將minst資料集放在 系統 位置
+# 下載minst資料集檔案
+# 資料集檔案位置: C:/Users/070601/.keras/datasets/mnist.npz
+(x_train, y_train), (x_test, y_test) = mnist.load_data()
+
+"""
+#方法二 將minst資料集放在 特定 位置
+mnist = np.load(mnist_npz_filename)
+
+
+

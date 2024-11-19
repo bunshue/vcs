@@ -31,8 +31,6 @@ model.add(tf.keras.layers.Dense(units=10,
 model.add(tf.keras.layers.Dense(units=2,
                  activation=tf.nn.softmax ))  #tf.nn.softmax
 
-
-
 model.compile(optimizer='adam',
               loss='sparse_categorical_crossentropy',
               metrics=['accuracy'])
@@ -40,7 +38,6 @@ model.compile(optimizer='adam',
 model.fit(x_train, y_train,
           epochs=20,
           batch_size=128)
-
 
 #測試
 x_test=np.array([[0.22],[0.31],[1.22],[1.33]])
@@ -53,6 +50,10 @@ predict = model.predict(x_test)
 print("predict:",predict)
 print("Ans:",np.argmax(predict[0]),np.argmax(predict[1]),np.argmax(predict[2]),np.argmax(predict[3]))
 
-predict2 = model.predict_classes(x_test)
-print("predict_classes:",predict2)
+# y_pred = model.predict_classes(x_test) # TensorFlow2.6已刪除predict_classes()
+predict_x = model.predict(x_test)
+classes_x = np.argmax(predict_x, axis=1)
+y_pred = classes_x
+
+print("predict_classes:",y_pred)
 print("y_test",y_test[:])

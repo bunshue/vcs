@@ -41,10 +41,12 @@ def CNN():
     # 標準化輸入資料
     x_test /= 255
     # 輸出結果
-    predict = model.predict(x_test)
-    print(predict[0])
-    predict2 = model.predict_step(x_test)
-    print("predict_classes:", predict2)
+
+    # y_pred = model.predict_classes(x_test) # TensorFlow2.6已刪除predict_classes()
+    predict_x = model.predict(x_test)
+    classes_x = np.argmax(predict_x, axis=1)
+    y_pred = classes_x
+    print("predict_classes:", y_pred)
 
 
 img = np.full(shape=(28, 28, 1), fill_value=0, dtype=np.uint8)

@@ -44,7 +44,11 @@ test_feature_vector = test_feature.reshape(len(test_feature), 28, 28, 1).astype(
 test_feature_normalize = test_feature_vector / 255
 model = load_model("Mnist_cnn_model.h5")
 
-prediction = model.predict_classes(test_feature_normalize)
+# y_pred = model.predict_classes(test_feature_normalize) # TensorFlow2.6已刪除predict_classes()
+predict_x = model.predict(test_feature_normalize)
+classes_x = np.argmax(predict_x, axis=1)
+y_pred = classes_x
+
 show_images_labels_predictions(
-    test_feature, test_label, prediction, 0, len(test_feature)
+    test_feature, test_label, y_pred, 0, len(test_feature)
 )

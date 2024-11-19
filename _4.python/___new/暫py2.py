@@ -1,4 +1,13 @@
 
+"""
+**Source** Kevin Markham https://github.com/justmarkham/python-reference
+
+"""
+
+
+
+
+
 python如何像C/vcs一樣
 可以知道目前程式跑到第幾行?
 

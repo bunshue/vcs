@@ -63,13 +63,14 @@ model.summary()  # 檢視神經網路
 model.fit(x_train, yb_train, batch_size=100, epochs=20)  # 學習訓練.fit
 
 
-#[4] 預測
+#預測
 
-#看起來不太妙, 我們來試試預測...
+# y_pred = model.predict_classes(x_test) # TensorFlow2.6已刪除predict_classes()
+predict_x = model.predict(x_test)
+classes_x = np.argmax(predict_x, axis=1)
+y_pred = classes_x
 
-NN_pred = model.predict_classes(x_test)
-
-YP_NN = yb_test[(NN_pred==1).ravel()]
+YP_NN = yb_test[(y_pred==1).ravel()]
 
 len(YP_NN)
 
@@ -130,9 +131,12 @@ model.fit(X_train, Y_train, epochs=100, batch_size=5)
 loss, accuracy = model.evaluate(X_test, Y_test)
 print("Accuracy = {:.2f}".format(accuracy))
 
-# Y_pred = model.predict_classes(X_test)
-Y_pred = model.predict_step(X_test)
-print(Y_pred)
+# y_pred = model.predict_classes(X_test) # TensorFlow2.6已刪除predict_classes()
+predict_x = model.predict(X_test)
+classes_x = np.argmax(predict_x, axis=1)
+y_pred = classes_x
+
+print(y_pred)
 
 Y_target = dataset[:, 4][120:].astype(int)
 print(Y_target)

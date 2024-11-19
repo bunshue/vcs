@@ -58,8 +58,10 @@ print(
     np.argmax(predict[3]),
 )
 
-""" NG
-predict2 = model.predict_classes(x_test)
-print("predict_classes:",predict2)
+# y_pred = model.predict_classes(x_test) # TensorFlow2.6已刪除predict_classes()
+predict_x = model.predict(x_test)
+classes_x = np.argmax(predict_x, axis=1)
+y_pred = classes_x
+
+print("predict_classes:",y_pred)
 print("y_test",y_test[:])
-"""
