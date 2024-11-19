@@ -5463,7 +5463,7 @@ print("Top terms per cluster:")
 
 order_centroids = kmean.cluster_centers_.argsort()[:, ::-1]
 
-terms = vectorizer.get_feature_names()
+terms = vectorizer.get_feature_names_out()
 for i in range(n_clusters):
     print("Cluster %d:" % i, end='')
     for ind in order_centroids[i, :10]:
@@ -5607,11 +5607,6 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
-
-# normalize
-# get_feature_names
-# get_feature_names_out
 
 # plt.rcParams['figure.figsize'] = 12, 8
 

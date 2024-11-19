@@ -7,4 +7,4 @@ data = dict.fit_transform([{'膚色':'黃','身高':176},
 print('one-hot編碼：')
 print(data)
 print('特徵名稱：')
-print(dict.get_feature_names())
+print(dict.get_feature_names_out())

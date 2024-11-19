@@ -49,6 +49,4 @@ predict_x = model.predict(test_feature_normalize)
 classes_x = np.argmax(predict_x, axis=1)
 y_pred = classes_x
 
-show_images_labels_predictions(
-    test_feature, test_label, y_pred, 0, len(test_feature)
-)
+show_images_labels_predictions(test_feature, test_label, y_pred, 0, len(test_feature))

@@ -69,7 +69,8 @@ import tensorflow as tf
 
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
-from tensorflow.keras.optimizers import SGD#優化器
+from tensorflow.keras.optimizers import SGD  # 優化器
+
 
 def load_mnist_data(RATIO=1):
     # 載入 MNIST 資料庫的訓練資料，並自動分為『訓練組』及『測試組』
@@ -84,16 +85,18 @@ def load_mnist_data(RATIO=1):
     print("測試資料y長度 :", len(y_test))
     return (x_train, y_train), (x_test, y_test)
 
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print('各種讀取資料集的方法')
+print("各種讀取資料集的方法")
 
 # 將minst資料集放在 系統 位置
 # 下載minst資料集檔案
 # 資料集檔案位置: C:/Users/070601/.keras/datasets/mnist.npz
-#用tensorflow讀入 MNSIT 數據集
+# 用tensorflow讀入 MNSIT 數據集
 from tensorflow.keras.datasets import mnist
+
 (x_train, y_train), (x_test, y_test) = mnist.load_data()
 
 # 標準 1 遠端檔案
@@ -137,7 +140,7 @@ def show_images_labels_predictions(images, labels, start_id, num=10):
         ax.set_xticks([])
         ax.set_yticks([])
         start_id += 1
-    #plt.show()
+    # plt.show()
 
 
 show_images_labels_predictions(x_train, y_train, 0, 10)
@@ -190,7 +193,7 @@ for i in range(256):
     ax.imshow(x_train[i], cmap=plt.cm.gray)
     ax.axis("off")
 plt.suptitle("畫前256筆資料")
-#plt.show()
+# plt.show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -221,7 +224,7 @@ def plot_image(image):  # 定義plot_image函數，傳入image作為參數
     fig = plt.gcf()  # 設定顯示圖形的大小
     fig.set_size_inches(2, 2)
     plt.imshow(image, cmap="binary")  # 傳入參數image、28*28像素的圖形，camp="binary"表示以黑白色顯示
-    #plt.show()  # 顯示圖片
+    # plt.show()  # 顯示圖片
 
 
 print("顯示第1筆訓練資料 圖形")
@@ -250,7 +253,7 @@ def plot_images_labels(
         ax.set_xticks([])
         ax.set_yticks([])  # 設定不顯示刻度
         idx += 1  # 讀取下一筆
-    #plt.show()  # 開始繪圖
+    # plt.show()  # 開始繪圖
 
 
 print("顯示 第0到第9筆 訓練資料")
@@ -306,7 +309,7 @@ y_test = np_utils.to_categorical(y_test, 10)
 from keras.models import Sequential
 from keras.layers import Dense
 from keras.layers import Flatten
-from keras.optimizers import SGD#優化器
+from keras.optimizers import SGD  # 優化器
 
 print("建立神經網路1")
 model = Sequential()  # 建立空白的神經網路模型(CNN), 函數學習機, 簡單的線性執行的模型
@@ -345,10 +348,12 @@ predict_x = model.predict(x_test)
 classes_x = np.argmax(predict_x, axis=1)
 y_pred = classes_x
 
+
 def test(n):
     print("神經網路判斷為:", y_pred[n])
     plt.imshow(x_test[n], cmap="Greys")
-    #plt.show()
+    # plt.show()
+
 
 test(123)
 
@@ -376,7 +381,7 @@ plt.imshow(X_train[0], cmap="gray")
 plt.title("顯示數字圖片 Label: " + str(Y_train[0]))
 plt.axis("off")
 
-#plt.show()
+# plt.show()
 
 
 sub_plot = 330
@@ -387,8 +392,8 @@ for i in range(0, 9):
     ax.axis("off")
 
 plt.subplots_adjust(hspace=0.5)
-plt.title('前9張圖')
-#plt.show()
+plt.title("前9張圖")
+# plt.show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -434,7 +439,7 @@ model.add(Dense(128, activation="relu"))
 model.add(Dropout(0.5))
 
 # 設定輸出層
-model.add(Dense(10, activation="softmax")) # 輸出層的神經元 10 個
+model.add(Dense(10, activation="softmax"))  # 輸出層的神經元 10 個
 
 cc = model.summary()  # 顯示模型摘要資訊
 print(cc)
@@ -447,7 +452,7 @@ model.compile(loss="categorical_crossentropy", optimizer="adam", metrics=["accur
 history = model.fit(
     X_train, Y_train, validation_split=0.2, epochs=EPOCHS, batch_size=2000, verbose=2
 )  # 學習訓練.fit
-  
+
 # 評估模型
 print("久 .evaluate()...")
 loss, accuracy = model.evaluate(X_train, Y_train, verbose=0)
@@ -471,7 +476,7 @@ plt.xlabel("Epochs")
 plt.ylabel("Loss")
 plt.legend()
 
-#plt.show()
+# plt.show()
 
 # 顯示訓練和驗證準確度
 acc = history.history["accuracy"]
@@ -484,7 +489,7 @@ plt.xlabel("Epochs")
 plt.ylabel("Accuracy")
 plt.legend()
 
-#plt.show()
+# plt.show()
 
 (X_train, Y_train), (X_test, Y_test) = load_mnist_data()
 
@@ -500,7 +505,7 @@ plt.figure()
 plt.title("Example of Digit:" + str(Y_test[i]))
 plt.imshow(digit, cmap="gray")
 plt.axis("off")
-#plt.show()
+# plt.show()
 
 # (-0.5, 27.5, 27.5, -0.5)
 
@@ -511,7 +516,7 @@ plt.title("Probabilities for Each Digit Class")
 plt.bar(np.arange(10), probs.reshape(10), align="center")
 plt.xticks(np.arange(10), np.arange(10).astype(str))
 
-#plt.show()
+# plt.show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -524,7 +529,7 @@ print("內容 :", x_train[n])
 print("大小 :", x_train[n].shape)
 print("目標 :", y_train[n])
 plt.imshow(x_train[n], cmap="Greys")
-#plt.show()
+# plt.show()
 
 x_train = x_train.reshape(60000, 784) / 255
 x_test = x_test.reshape(10000, 784) / 255
@@ -706,11 +711,12 @@ predict_x = model.predict(x_test)
 classes_x = np.argmax(predict_x, axis=1)
 y_pred = classes_x
 
+
 def myNN(n):
     k = int(n)
     print("神經網路預測", y_pred[k])
     plt.imshow(x_test[k].reshape(28, 28), cmap="Greys")
-    #plt.show()
+    # plt.show()
 
 
 myNN(123)
@@ -1036,7 +1042,7 @@ CNN 一個小技巧是每層的 filters 數目是越來越多, 上課同學建�
 from keras.models import Sequential
 from keras.layers import Dense, Activation, Flatten
 from keras.layers import Conv2D, MaxPool2D
-from keras.optimizers import SGD# 優化器
+from keras.optimizers import SGD  # 優化器
 
 print("建立神經網路8")
 model = Sequential()  # 建立空白的神經網路模型(CNN), 函數學習機, 簡單的線性執行的模型
@@ -1516,7 +1522,7 @@ y_test = np_utils.to_categorical(y_test, 10)
 from keras.models import Sequential
 from keras.layers import Dense
 from keras.layers import Flatten
-from keras.optimizers import SGD # 優化器
+from keras.optimizers import SGD  # 優化器
 
 print("建立神經網路10")
 model = Sequential()  # 建立空白的神經網路模型(CNN), 函數學習機, 簡單的線性執行的模型
@@ -1538,7 +1544,7 @@ print(x_train[n])
 print(y_train[n])
 # 1
 plt.imshow(x_train[n], cmap="Greys")
-#plt.show()
+# plt.show()
 
 
 # 3. 資料整理
@@ -1650,6 +1656,7 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 from tensorflow.keras.datasets import mnist
+
 # from keras.datasets import mnist
 
 from tensorflow.keras.utils import plot_model
@@ -1787,7 +1794,7 @@ for i in range(10):
     plt.subplot(1, 10, i + 1)
     plt.imshow(X_test[i].reshape((28, 28)), "gray")
 
-#plt.show()
+# plt.show()
 
 pred = np.argmax(model.predict(X_test[0:10]), axis=1)
 
@@ -2614,34 +2621,35 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 from keras.datasets import mnist
-from keras.models import Sequential 
-#from keras.layers.core import Dense, Activation 改為以下
-from tensorflow.python.keras.layers.core import Dense,Activation
+from keras.models import Sequential
+
+# from keras.layers.core import Dense, Activation 改為以下
+from tensorflow.python.keras.layers.core import Dense, Activation
 from tensorflow.python.keras.utils import np_utils
 
 (X_train, Y_train), (X_test, Y_test) = load_mnist_data()
 
-X_train = X_train.reshape(60000, 784)     
+X_train = X_train.reshape(60000, 784)
 X_test = X_test.reshape(10000, 784)
 
 classes = 10
-Y_train = np_utils.to_categorical(Y_train, classes)     
+Y_train = np_utils.to_categorical(Y_train, classes)
 Y_test = np_utils.to_categorical(Y_test, classes)
 
 input_size = 784
 batch_size = BATCH_SIZE
-hidden_neurons = 100     
+hidden_neurons = 100
 
 print("建立神經網路24")
 model = Sequential()  # 建立空白的神經網路模型(CNN), 函數學習機, 簡單的線性執行的模型
 
-model.add(Dense(hidden_neurons, input_dim=input_size)) 
-model.add(Activation('sigmoid'))     
-model.add(Dense(classes, input_dim=hidden_neurons)) 
-model.add(Activation('softmax'))
+model.add(Dense(hidden_neurons, input_dim=input_size))
+model.add(Activation("sigmoid"))
+model.add(Dense(classes, input_dim=hidden_neurons))
+model.add(Activation("softmax"))
 
 # 組裝神經網路, 編譯模型 : 選擇損失函數、優化方法及成效衡量方式
-model.compile(loss='categorical_crossentropy', metrics=['accuracy'], optimizer='sgd')
+model.compile(loss="categorical_crossentropy", metrics=["accuracy"], optimizer="sgd")
 
 """ long
 # 共有N個樣品, 一次做 BATCH_SIZE 個, 一輪需要做 N / BATCH_SIZE 次
@@ -2670,41 +2678,54 @@ plt.savefig("neuron_images.png", dpi=300)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-#restricted_boltzmann_machine
+# restricted_boltzmann_machine
 
-#import tensorflow as tf
-import tensorflow.compat.v1 as tf # 強制使用tensorflow 1.0
+# import tensorflow as tf
+import tensorflow.compat.v1 as tf  # 強制使用tensorflow 1.0
+
 tf.disable_v2_behavior()
 
-#from tensorflow.examples.tutorials.mnist import input_data
+# from tensorflow.examples.tutorials.mnist import input_data
 
 VISIBLE_NODES = 784
 HIDDEN_NODES = 400
 LEARNING_RATE = 0.01
 
-#mnist = input_data.read_data_sets("MNIST_data/")
+# mnist = input_data.read_data_sets("MNIST_data/")
 
 (train_images, train_labels), (test_images, test_labels) = load_mnist_data()
 
 input_placeholder = tf.placeholder("float", shape=(None, VISIBLE_NODES))
 
-weights = tf.Variable(tf.random_normal((VISIBLE_NODES, HIDDEN_NODES), mean=0.0, stddev=1. / VISIBLE_NODES))
+weights = tf.Variable(
+    tf.random_normal(
+        (VISIBLE_NODES, HIDDEN_NODES), mean=0.0, stddev=1.0 / VISIBLE_NODES
+    )
+)
 hidden_bias = tf.Variable(tf.zeros([HIDDEN_NODES]))
 visible_bias = tf.Variable(tf.zeros([VISIBLE_NODES]))
 
 hidden_activation = tf.nn.sigmoid(tf.matmul(input_placeholder, weights) + hidden_bias)
-visible_reconstruction = tf.nn.sigmoid(tf.matmul(hidden_activation, tf.transpose(weights)) + visible_bias)
+visible_reconstruction = tf.nn.sigmoid(
+    tf.matmul(hidden_activation, tf.transpose(weights)) + visible_bias
+)
 
-final_hidden_activation = tf.nn.sigmoid(tf.matmul(visible_reconstruction, weights) + hidden_bias)
+final_hidden_activation = tf.nn.sigmoid(
+    tf.matmul(visible_reconstruction, weights) + hidden_bias
+)
 
 positive_phase = tf.matmul(tf.transpose(input_placeholder), hidden_activation)
-negative_phase = tf.matmul(tf.transpose(visible_reconstruction), final_hidden_activation)
+negative_phase = tf.matmul(
+    tf.transpose(visible_reconstruction), final_hidden_activation
+)
 
 weight_update = weights.assign_add(LEARNING_RATE * (positive_phase - negative_phase))
-visible_bias_update = visible_bias.assign_add(LEARNING_RATE *
-                                              tf.reduce_mean(input_placeholder - visible_reconstruction, 0))
-hidden_bias_update = hidden_bias.assign_add(LEARNING_RATE *
-                                            tf.reduce_mean(hidden_activation - final_hidden_activation, 0))
+visible_bias_update = visible_bias.assign_add(
+    LEARNING_RATE * tf.reduce_mean(input_placeholder - visible_reconstruction, 0)
+)
+hidden_bias_update = hidden_bias.assign_add(
+    LEARNING_RATE * tf.reduce_mean(hidden_activation - final_hidden_activation, 0)
+)
 
 train_op = tf.group(weight_update, visible_bias_update, hidden_bias_update)
 
@@ -2718,38 +2739,41 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 from keras.datasets import mnist
-from keras.models import Sequential 
-#from keras.layers.core import Dense, Activation 改為以下
-from tensorflow.python.keras.layers.core import Dense,Activation
+from keras.models import Sequential
+
+# from keras.layers.core import Dense, Activation 改為以下
+from tensorflow.python.keras.layers.core import Dense, Activation
 from tensorflow.python.keras.utils import np_utils
 
 (X_train, Y_train), (X_test, Y_test) = load_mnist_data()
 
-X_train = X_train.reshape(60000, 784)     
+X_train = X_train.reshape(60000, 784)
 X_test = X_test.reshape(10000, 784)
 
-X_train = X_train.astype('float32')
-X_test = X_test.astype('float32')
-X_train /= 255     
+X_train = X_train.astype("float32")
+X_test = X_test.astype("float32")
+X_train /= 255
 X_test /= 255
 
 classes = 10
-Y_train = np_utils.to_categorical(Y_train, classes)     
+Y_train = np_utils.to_categorical(Y_train, classes)
 Y_test = np_utils.to_categorical(Y_test, classes)
 
 input_size = 784
-hidden_neurons = 400     
+hidden_neurons = 400
 
 print("建立神經網路25")
 model = Sequential()  # 建立空白的神經網路模型(CNN), 函數學習機, 簡單的線性執行的模型
 
-model.add(Dense(hidden_neurons, input_dim=input_size)) 
-model.add(Activation('relu'))     
-model.add(Dense(classes, input_dim=hidden_neurons)) 
-model.add(Activation('softmax'))
+model.add(Dense(hidden_neurons, input_dim=input_size))
+model.add(Activation("relu"))
+model.add(Dense(classes, input_dim=hidden_neurons))
+model.add(Activation("softmax"))
 
 # 組裝神經網路, 編譯模型 : 選擇損失函數、優化方法及成效衡量方式
-model.compile(loss='categorical_crossentropy', metrics=['accuracy'], optimizer='adadelta')
+model.compile(
+    loss="categorical_crossentropy", metrics=["accuracy"], optimizer="adadelta"
+)
 """ NG
 model.fit(X_train, Y_train, batch_size=BATCH_SIZE, epochs=EPOCHS, verbose=1)
 
@@ -2763,7 +2787,7 @@ from keras.datasets import mnist
 
 print("------------------------------------------------------------")  # 60個
 
-from keras.models import Sequential 
+from keras.models import Sequential
 from keras.layers import Dense, Activation
 from keras.layers import Convolution2D, MaxPooling2D
 from keras.layers import Dropout, Flatten
@@ -2772,40 +2796,42 @@ from tensorflow.python.keras.utils import np_utils
 
 input_size = 784
 hidden_neurons = 200
-classes = 10     
+classes = 10
 
 (X_train, Y_train), (X_test, Y_test) = load_mnist_data()
 
-X_train = X_train.reshape(60000, 28, 28, 1)     
+X_train = X_train.reshape(60000, 28, 28, 1)
 X_test = X_test.reshape(10000, 28, 28, 1)
 
-X_train = X_train.astype('float32')     
-X_test = X_test.astype('float32')     
-X_train /= 255     
+X_train = X_train.astype("float32")
+X_test = X_test.astype("float32")
+X_train /= 255
 X_test /= 255
 
-Y_train = np_utils.to_categorical(Y_train, classes)     
+Y_train = np_utils.to_categorical(Y_train, classes)
 Y_test = np_utils.to_categorical(Y_test, classes)
 
 print("建立神經網路26")
 model = Sequential()  # 建立空白的神經網路模型(CNN), 函數學習機, 簡單的線性執行的模型
 
 model.add(Convolution2D(32, (3, 3), input_shape=(28, 28, 1)))
-model.add(Activation('relu'))
-model.add(Convolution2D(32, (3, 3)))  
-model.add(Activation('relu'))
-model.add(MaxPooling2D(pool_size=(2, 2))) 
-model.add(Dropout(0.25))  
-               
+model.add(Activation("relu"))
+model.add(Convolution2D(32, (3, 3)))
+model.add(Activation("relu"))
+model.add(MaxPooling2D(pool_size=(2, 2)))
+model.add(Dropout(0.25))
+
 model.add(Flatten())
- 
-model.add(Dense(hidden_neurons)) 
-model.add(Activation('relu'))      
-model.add(Dense(classes)) 
-model.add(Activation('softmax'))
-     
+
+model.add(Dense(hidden_neurons))
+model.add(Activation("relu"))
+model.add(Dense(classes))
+model.add(Activation("softmax"))
+
 # 組裝神經網路, 編譯模型 : 選擇損失函數、優化方法及成效衡量方式
-model.compile(loss='categorical_crossentropy', metrics=['accuracy'], optimizer='adadelta')
+model.compile(
+    loss="categorical_crossentropy", metrics=["accuracy"], optimizer="adadelta"
+)
 """ 久
 model.fit(X_train, Y_train, batch_size=BATCH_SIZE, epochs=EPOCHS, validation_split = 0.1, verbose=1)
 
@@ -2832,20 +2858,21 @@ Thank you for supporting!
 # os.environ['KERAS_BACKEND']='tensorflow'
 
 import numpy as np
+
 np.random.seed(1337)  # for reproducibility
 from keras.datasets import mnist
 from tensorflow.python.keras.utils import np_utils
 from keras.models import Sequential
 from keras.layers import Dense, Activation, Convolution2D, MaxPooling2D, Flatten
-from keras.optimizers import Adam #優化器
+from keras.optimizers import Adam  # 優化器
 
 # download the mnist to the path '~/.keras/datasets/' if it is the first time to be called
 # X shape (60,000 28x28), y shape (10,000, )
 (X_train, y_train), (X_test, y_test) = load_mnist_data()
 
 # data pre-processing
-X_train = X_train.reshape(-1, 1,28, 28)/255.
-X_test = X_test.reshape(-1, 1,28, 28)/255.
+X_train = X_train.reshape(-1, 1, 28, 28) / 255.0
+X_test = X_test.reshape(-1, 1, 28, 28) / 255.0
 y_train = np_utils.to_categorical(y_train, num_classes=10)
 y_test = np_utils.to_categorical(y_test, num_classes=10)
 
@@ -2853,26 +2880,30 @@ print("建立神經網路27")
 model = Sequential()  # 建立空白的神經網路模型(CNN), 函數學習機, 簡單的線性執行的模型
 
 # Conv layer 1 output shape (32, 28, 28)
-model.add(Convolution2D(
-    filters=32,
-    kernel_size=(5, 5),
-    #border_mode='same',     # Padding method
-    #dim_ordering='th',      # if use tensorflow, to set the input dimension order to theano ("th") style, but you can change it.
-    input_shape=(28,28,1)
-    ))
+model.add(
+    Convolution2D(
+        filters=32,
+        kernel_size=(5, 5),
+        # border_mode='same',     # Padding method
+        # dim_ordering='th',      # if use tensorflow, to set the input dimension order to theano ("th") style, but you can change it.
+        input_shape=(28, 28, 1),
+    )
+)
 
-model.add(Activation('relu'))
+model.add(Activation("relu"))
 
 # Pooling layer 1 (max pooling) output shape (32, 14, 14)
-model.add(MaxPooling2D(
-    pool_size=(2, 2),
-    strides=(2, 2),
-    #border_mode='same',    # Padding method
-))
+model.add(
+    MaxPooling2D(
+        pool_size=(2, 2),
+        strides=(2, 2),
+        # border_mode='same',    # Padding method
+    )
+)
 
 # Conv layer 2 output shape (64, 14, 14)
 model.add(Convolution2D(64, 5, 5))
-model.add(Activation('relu'))
+model.add(Activation("relu"))
 
 # Pooling layer 2 (max pooling) output shape (64, 7, 7)
 model.add(MaxPooling2D(pool_size=(2, 2)))
@@ -2880,11 +2911,11 @@ model.add(MaxPooling2D(pool_size=(2, 2)))
 # Fully connected layer 1 input shape (64 * 7 * 7) = (3136), output shape (1024)
 model.add(Flatten())
 model.add(Dense(1024))
-model.add(Activation('relu'))
+model.add(Activation("relu"))
 
 # Fully connected layer 2 to shape (10) for 10 classes
 model.add(Dense(10))
-model.add(Activation('softmax'))
+model.add(Activation("softmax"))
 
 # Another way to define your optimizer(優化器)
 adam = Adam(learning_rate=1e-4)
@@ -2906,6 +2937,711 @@ loss, accuracy = model.evaluate(X_test, y_test)
 print('\ntest loss: ', loss)
 print('\ntest accuracy: ', accuracy)
 """
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+"""
+
+
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+# 共同
+import os
+import sys
+import time
+import math
+import random
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+# 設定中文字型及負號正確顯示
+# 設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
+# 設定負號
+plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+plt.rcParams["font.size"] = 12  # 設定字型大小
+
+print("------------------------------------------------------------")  # 60個
+
+import tensorflow as tf
+import keras
+
+os.environ["TF_CPP_MIN_LOG_LEVEL"] = "2"
+
+print("------------------------------------------------------------")  # 60個
+
+
+# 顯示資料內容
+def printMatrixE(a):
+    return
+    rows = a.shape[0]
+    cols = a.shape[1]
+    for i in range(0, rows):
+        str1 = ""
+        for j in range(0, cols):
+            str1 = str1 + ("%3.0f " % a[i, j])
+        print(str1)
+    print("")
+
+
+print("------------------------------------------------------------")  # 60個
+
+(x_train, y_train), (x_test, y_test) = keras.datasets.mnist.load_data()
+
+print("x_train = " + str(x_train.shape))
+print("y_train = " + str(y_train.shape))
+
+print("------------------------------------------------------------")  # 60個
+
+# from tensorflow.examples.tutorials.mnist
+# from tensorflow.examples.tutorials.mnist import input_data
+
+(x_train, y_train), (x_test, y_test) = keras.datasets.mnist.load_data()
+print("x_train = " + str(x_train.shape))
+print("y_train = " + str(y_train.shape))
+
+printMatrixE(x_train[0])
+print("y_train[0] = " + str(y_train[0]))
+
+print("------------------------------------------------------------")  # 60個
+
+# from tensorflow.examples.tutorials.mnist
+
+(x_train, y_train), (x_test, y_test) = keras.datasets.mnist.load_data()
+print("x_train = " + str(x_train.shape))
+print("y_train = " + str(y_train.shape))
+
+printMatrixE(x_train[0])
+
+# 顯示其中的圖形
+num = 0
+plt.title("x_train[%d]  Label: %d" % (num, y_train[num]))
+plt.imshow(x_train[num], cmap=plt.get_cmap("gray_r"))
+# plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+# from tensorflow.examples.tutorials.mnist
+
+(x_train, y_train), (x_test, y_test) = keras.datasets.mnist.load_data()
+print("x_train = " + str(x_train.shape))
+print("y_train = " + str(y_train.shape))
+
+printMatrixE(x_train[0])
+
+# 顯示其中的圖形
+num = 0
+plt.title("x_train[%d]  Label: %d" % (num, y_train[num]))
+plt.imshow(x_train[num], cmap=plt.get_cmap("gray_r"))
+# plt.show()
+
+
+def display_mult_flat(start, stop, label):
+    images = x_train[start].reshape([1, 784])  # 784=28*28
+    for i in range(start + 1, stop):
+        label2 = int(y_train[i])
+        if label == label2:
+            images = np.concatenate((images, x_train[i].reshape([1, 28 * 28])))
+    plt.imshow(images, cmap=plt.get_cmap("gray_r"))
+    # plt.show()
+
+
+display_mult_flat(0, 2000, 7)
+display_mult_flat(0, 2000, 1)
+
+print("------------------------------------------------------------")  # 60個
+
+# from tensorflow.examples.tutorials.mnist
+
+(x_train, y_train), (x_test, y_test) = keras.datasets.mnist.load_data()
+print("x_train = " + str(x_train.shape))
+print("y_train = " + str(y_train.shape))
+
+from sklearn.datasets import load_digits
+
+# 影像的類別數目
+num_classes = 10
+
+# 輸入的手寫影像解析度
+img_rows, img_cols = 28, 28
+
+(x_train, y_train), (x_test, y_test) = keras.datasets.mnist.load_data()
+
+print("x_train before reshape:", x_train.shape)
+# 將原始資料轉為正確的影像排列方式
+dim = img_rows * img_cols * 1
+x_train = x_train.reshape(x_train.shape[0], dim)
+x_test = x_test.reshape(x_test.shape[0], dim)
+print("x_train after reshape:", x_train.shape)
+
+# 標準化輸入資料
+print("x_train before div 255:", x_train[0][180:195])
+x_train = x_train.astype("float32")
+x_test = x_test.astype("float32")
+x_train /= 255
+x_test /= 255
+print("x_train before div 255 ", x_train[0][180:195])
+
+
+print("y_train shape:", y_train.shape)
+print(y_train[:10])
+# 將數字轉為 One-hot 向量
+category = 10
+y_train2 = tf.keras.utils.to_categorical(y_train, category)
+y_test2 = tf.keras.utils.to_categorical(y_test, category)
+print("y_train2 to_categorical shape=", y_train2.shape)  # 輸出 (60000, 10)
+print(y_train2[:10])
+
+print("------------------------------------------------------------")  # 60個
+
+# from tensorflow.examples.tutorials.mnist
+
+(x_train, y_train), (x_test, y_test) = keras.datasets.mnist.load_data()
+print("x_train = " + str(x_train.shape))
+print("y_train = " + str(y_train.shape))
+
+from sklearn.datasets import load_digits
+
+# 影像的類別數目
+num_classes = 10
+
+# 輸入的手寫影像解析度
+img_rows, img_cols = 28, 28
+
+(x_train, y_train), (x_test, y_test) = keras.datasets.mnist.load_data()
+
+print("x_train before reshape:", x_train.shape)
+# 將原始資料轉為正確的影像排列方式
+dim = img_rows * img_cols * 1
+x_train = x_train.reshape(x_train.shape[0], dim)
+x_test = x_test.reshape(x_test.shape[0], dim)
+print("x_train after reshape:", x_train.shape)
+
+# 標準化輸入資料
+print("x_train before div 255:", x_train[0][180:195])
+x_train = x_train.astype("float32")
+x_test = x_test.astype("float32")
+x_train /= 255
+x_test /= 255
+print("x_train before div 255 ", x_train[0][180:195])
+
+
+print("y_train shape:", y_train.shape)
+print(y_train[:10])
+# 將數字轉為 One-hot 向量
+category = 10
+y_train2 = tf.keras.utils.to_categorical(y_train, category)
+y_test2 = tf.keras.utils.to_categorical(y_test, category)
+print("y_train2 to_categorical shape=", y_train2.shape)  # 輸出 (60000, 10)
+print(y_train2[:10])
+
+
+# 建立模型
+model = tf.keras.models.Sequential()
+model.add(
+    tf.keras.layers.Dense(units=10, activation=tf.nn.relu, input_dim=dim)
+)  # 784=28*28
+model.add(tf.keras.layers.Dense(units=10, activation=tf.nn.relu))
+model.add(tf.keras.layers.Dense(units=category, activation=tf.nn.softmax))
+model.compile(
+    optimizer=tf.keras.optimizers.Adam(lr=0.001),
+    loss=tf.keras.losses.categorical_crossentropy,
+    metrics=["accuracy"],
+)
+# 設定模型的 Loss 函數、Optimizer 以及用來判斷模型好壞的依據（metrics）
+
+# 顯示模型
+model.summary()
+
+# 訓練模型
+history = model.fit(
+    x_train,
+    y_train2,  # 進行訓練的因和果的資料
+    batch_size=1000,  # 設定每次訓練的筆數
+    epochs=200,  # 設定訓練的次數，也就是機器學習的次數
+    verbose=1,
+)
+
+# 測試
+score = model.evaluate(x_test, y_test2, batch_size=128)  # 計算測試正確率
+print("score:", score)  # 輸出測試正確率
+predict = model.predict(x_test)  # 取得每一個結果的機率
+print(
+    "Ans:",
+    np.argmax(predict[0]),
+    np.argmax(predict[1]),
+    np.argmax(predict[2]),
+    np.argmax(predict[3]),
+)  # 取得預測答案1
+
+# y_pred = model.predict_classes(x_test[:10]) # TensorFlow2.6已刪除predict_classes()
+predict_x = model.predict(x_test[:10])
+classes_x = np.argmax(predict_x, axis=1)
+y_pred = classes_x
+
+print("predict_classes:", y_pred[:10])  # 輸出預測答案2
+print("y_test", y_test[:10])  # 實際測試的果
+
+print("------------------------------------------------------------")  # 60個
+
+import tensorflow as tf
+from sklearn.datasets import load_digits
+
+# 載入資料（將資料打散，放入 train 與 test 資料集）
+# (x_train, y_train), (x_test, y_test) = tf.keras.datasets.mnist.load_data()
+
+from keras.datasets import fashion_mnist
+from tensorflow.keras.datasets import mnist
+
+# (x_train, y_train), (x_test, y_test) = fashion_mnist.load_data()
+(x_train, y_train), (x_test, y_test) = mnist.load_data()
+
+# 載入資料（將資料打散，放入 train 與 test 資料集）
+(x_train, y_train), (x_test, y_test) = tf.keras.datasets.mnist.load_data()
+
+# x_train=x_train[:1000]
+# x_test=x_test[:1000]
+# y_train=y_train[:1000]
+# y_test=y_test[:1000]
+
+# 將原始資料轉為正確的影像排列方式
+x_train = x_train.reshape(x_train.shape[0], 28, 28, 1)
+x_test = x_test.reshape(x_test.shape[0], 28, 28, 1)
+
+# 標準化輸入資料
+x_train = x_train.astype("float32")
+x_test = x_test.astype("float32")
+x_train /= 255
+x_test /= 255
+
+print("x_train shape:", x_train.shape)
+print(x_train.shape[0], "train samples")
+print(x_test.shape[0], "test samples")
+
+# 將數字轉為 One-hot 向量
+y_train2 = tf.keras.utils.to_categorical(y_train, 10)
+y_test2 = tf.keras.utils.to_categorical(y_test, 10)
+
+# 建立模型
+model = tf.keras.models.Sequential()
+
+# 加入 2D 的 Convolution Layer，接著一層 ReLU 的 Activation 函數
+model.add(
+    tf.keras.layers.Conv2D(
+        filters=3,
+        kernel_size=(3, 3),
+        padding="same",
+        activation="relu",
+        input_shape=(28, 28, 1),
+    )
+)
+# 2D 的 Max-Pooling Layer
+model.add(tf.keras.layers.MaxPool2D(pool_size=(2, 2)))
+# 2D 的 Convolution Layer
+model.add(
+    tf.keras.layers.Conv2D(
+        filters=9, kernel_size=(2, 2), padding="same", activation="relu"
+    )  # or filters=3
+)
+# Dropout Layer
+model.add(tf.keras.layers.Dropout(rate=0.33))
+
+# 將 2D 影像轉為 1D 向量
+model.add(tf.keras.layers.Flatten())
+# 連接 Fully Connected Layer，接著一層 ReLU 的 Activation 函數
+model.add(tf.keras.layers.Dense(10, activation="relu"))
+
+# or
+# model.add(tf.keras.layers.Dense(50, activation="relu"))
+# model.add(tf.keras.layers.Dense(50, activation="relu"))
+# model.add(tf.keras.layers.Dense(50, activation="relu"))
+
+# 連接 Fully Connected Layer，接著一層 Softmax 的 Activation 函數
+model.add(tf.keras.layers.Dense(units=10, activation=tf.nn.softmax))
+
+# 設定模型的 Loss 函數、Optimizer 以及用來判斷模型好壞的依據（metrics）
+model.compile(
+    loss=tf.keras.losses.categorical_crossentropy,
+    optimizer=tf.keras.optimizers.Adadelta(),
+    metrics=["accuracy"],
+)
+
+model.summary()
+
+model.fit(x_train, y_train2, batch_size=1024, epochs=20, verbose=1)
+
+# 測試
+score = model.evaluate(x_test, y_test2, batch_size=128)
+# 輸出結果
+print("score:", score)
+
+predict = model.predict(x_test)
+print(
+    "Ans:",
+    np.argmax(predict[0]),
+    np.argmax(predict[1]),
+    np.argmax(predict[2]),
+    np.argmax(predict[3]),
+)
+
+# y_pred = model.predict_classes(x_test) # TensorFlow2.6已刪除predict_classes()
+predict_x = model.predict(x_test)
+classes_x = np.argmax(predict_x, axis=1)
+y_pred = classes_x
+
+print("predict_classes:", y_pred)
+print("y_test", y_test[:])
+
+# 保存模型架構
+with open("model.json", "w") as json_file:
+    json_file.write(tmp_model.to_json())
+# 保存模型權重
+model.save_weights("tmp_model.h5")
+
+print("------------------------------------------------------------")  # 60個
+
+from sklearn.datasets import load_digits
+from tensorflow.keras.callbacks import TensorBoard
+
+# 影像的類別數目
+category = 10
+
+# 載入資料（將資料打散，放入 train 與 test 資料集）
+(x_train, y_train), (x_test, y_test) = tf.keras.datasets.mnist.load_data()
+
+# 將原始資料轉為正確的影像排列方式
+x_train = x_train.reshape(x_train.shape[0], 28, 28, 1)
+x_test = x_test.reshape(x_test.shape[0], 28, 28, 1)
+
+
+# 標準化輸入資料
+x_train = x_train.astype("float32")
+x_test = x_test.astype("float32")
+x_train /= 255
+x_test /= 255
+
+print("x_train shape:", x_train.shape)
+print(x_train.shape[0], "train samples")
+print(x_test.shape[0], "test samples")
+
+# 將數字轉為 One-hot 向量
+y_train2 = tf.keras.utils.to_categorical(y_train, category)
+y_test2 = tf.keras.utils.to_categorical(y_test, category)
+
+
+# 建立模型
+model = tf.keras.models.Sequential()
+
+# 加入 2D 的 Convolution Layer，接著一層 ReLU 的 Activation 函數
+model.add(
+    tf.keras.layers.Conv2D(
+        filters=32,
+        kernel_size=(3, 3),
+        padding="same",
+        activation="relu",
+        input_shape=(28, 28, 1),
+    )
+)
+
+model.add(
+    tf.keras.layers.Conv2D(
+        filters=40, kernel_size=(2, 2), padding="same", activation="relu"
+    )
+)
+
+# 2D 的 Max-Pooling Layer
+model.add(tf.keras.layers.MaxPool2D(pool_size=(2, 2)))
+
+# 2D 的 Convolution Layer
+model.add(
+    tf.keras.layers.Conv2D(
+        filters=40, kernel_size=(2, 2), padding="same", activation="relu"
+    )
+)
+
+# Dropout Layer
+model.add(tf.keras.layers.Dropout(rate=0.01))
+
+# 將 2D 影像轉為 1D 向量
+model.add(tf.keras.layers.Flatten())
+# 連接 Fully Connected Layer，接著一層 ReLU 的 Activation 函數
+model.add(tf.keras.layers.Dense(100, activation="relu"))
+# 連接 Fully Connected Layer，接著一層 Softmax 的 Activation 函數
+model.add(tf.keras.layers.Dense(100, activation="relu"))
+model.add(tf.keras.layers.Dense(100, activation="relu"))
+# 連接 Fully Connected Layer，接著一層 Softmax 的 Activation 函數
+model.add(tf.keras.layers.Dense(units=category, activation=tf.nn.softmax))
+
+model.summary()
+
+# 設定模型的 Loss 函數、Optimizer 以及用來判斷模型好壞的依據（metrics）
+model.compile(
+    loss=tf.keras.losses.categorical_crossentropy,
+    optimizer=tf.keras.optimizers.Adadelta(),
+    metrics=["accuracy"],
+)
+
+tensorboard = TensorBoard(log_dir="logs")
+
+history = model.fit(x_train, y_train2, batch_size=100, epochs=400, verbose=1)
+# 測試
+score = model.evaluate(x_test, y_test2, batch_size=128)
+# 輸出結果
+print("score:", score)
+
+predict = model.predict(x_test)
+print(
+    "Ans:",
+    np.argmax(predict[0]),
+    np.argmax(predict[1]),
+    np.argmax(predict[2]),
+    np.argmax(predict[3]),
+)
+
+# y_pred = model.predict_classes(x_test) # TensorFlow2.6已刪除predict_classes()
+predict_x = model.predict(x_test)
+classes_x = np.argmax(predict_x, axis=1)
+y_pred = classes_x
+
+print("predict_classes:", y_pred[:20])
+print("y_test", y_test[:20])
+
+import matplotlib.pyplot as plt
+
+plt.plot(history.history["acc"])
+plt.plot(history.history["loss"])
+plt.title("model accuracy")
+plt.ylabel("acc & loss")
+plt.xlabel("epoch")
+plt.legend(["acc", "loss"], loc="upper left")
+# plt.show()
+
+# 保存模型架構
+with open("model.json", "w") as json_file:
+    json_file.write(tmp_model.to_json())
+# 保存模型權重
+model.save_weights("tmp_model.h5")
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+from sklearn.datasets import load_digits
+from tensorflow.keras.callbacks import TensorBoard
+
+# 影像的類別數目
+category = 10
+
+
+# 載入資料（將資料打散，放入 train 與 test 資料集）
+(x_train, y_train), (x_test, y_test) = tf.keras.datasets.mnist.load_data()
+
+# 將原始資料轉為正確的影像排列方式
+x_train = x_train.reshape(x_train.shape[0], 28, 28, 1)
+x_test = x_test.reshape(x_test.shape[0], 28, 28, 1)
+
+
+# 標準化輸入資料
+x_train = x_train.astype("float32")
+x_test = x_test.astype("float32")
+x_train /= 255
+x_test /= 255
+
+print("x_train shape:", x_train.shape)
+print(x_train.shape[0], "train samples")
+print(x_test.shape[0], "test samples")
+
+# 將數字轉為 One-hot 向量
+y_train2 = tf.keras.utils.to_categorical(y_train, category)
+y_test2 = tf.keras.utils.to_categorical(y_test, category)
+
+
+# 建立模型
+model = tf.keras.models.Sequential()
+
+# 加入 2D 的 Convolution Layer，接著一層 ReLU 的 Activation 函數
+model.add(
+    tf.keras.layers.Conv2D(
+        filters=32,
+        kernel_size=(3, 3),
+        padding="same",
+        activation="relu",
+        input_shape=(28, 28, 1),
+    )
+)
+
+model.add(
+    tf.keras.layers.Conv2D(
+        filters=40, kernel_size=(2, 2), padding="same", activation="relu"
+    )
+)
+
+# 2D 的 Max-Pooling Layer
+model.add(tf.keras.layers.MaxPool2D(pool_size=(2, 2)))
+
+# 2D 的 Convolution Layer
+model.add(
+    tf.keras.layers.Conv2D(
+        filters=40, kernel_size=(2, 2), padding="same", activation="relu"
+    )
+)
+
+# Dropout Layer
+model.add(tf.keras.layers.Dropout(rate=0.01))
+
+# 將 2D 影像轉為 1D 向量
+model.add(tf.keras.layers.Flatten())
+# 連接 Fully Connected Layer，接著一層 ReLU 的 Activation 函數
+model.add(tf.keras.layers.Dense(100, activation="relu"))
+# 連接 Fully Connected Layer，接著一層 Softmax 的 Activation 函數
+model.add(tf.keras.layers.Dense(100, activation="relu"))
+model.add(tf.keras.layers.Dense(100, activation="relu"))
+# 連接 Fully Connected Layer，接著一層 Softmax 的 Activation 函數
+model.add(tf.keras.layers.Dense(units=category, activation=tf.nn.softmax))
+
+model.summary()
+
+# 設定模型的 Loss 函數、Optimizer 以及用來判斷模型好壞的依據（metrics）
+model.compile(
+    loss=tf.keras.losses.categorical_crossentropy,
+    optimizer=tf.keras.optimizers.Adadelta(),
+    metrics=["accuracy"],
+)
+
+tensorboard = TensorBoard(log_dir="logs")
+# 訓練模型
+
+
+gen = tf.keras.preprocessing.image.ImageDataGenerator(
+    rotation_range=8,
+    width_shift_range=0.08,
+    shear_range=0.3,
+    height_shift_range=0.08,
+    zoom_range=0.08,
+)
+
+
+train_generator = gen.flow(x_train, y_train2, batch_size=64)
+train_generator = gen.flow(x_train, y_train2, batch_size=128)
+# 讀取模型架構
+try:
+    with open("model_ImageDataGenerator.h5", "r") as load_weights:
+        # 讀取模型權重
+        model.load_weights("model_ImageDataGenerator.h5")
+
+except IOError:
+    print("File not accessible")
+
+checkpoint = tf.keras.callbacks.ModelCheckpoint(
+    "tmp_model_ImageDataGenerator.h5",
+    monitor="accuracy",
+    verbose=1,
+    save_best_only=True,
+    mode="auto",
+    save_freq=1,
+)
+
+# 保存模型架構
+with open("tmp_model_ImageDataGenerator.json", "w") as json_file:
+    json_file.write(model.to_json())
+
+history = model.fit(train_generator, callbacks=[checkpoint], epochs=400)
+""" 
+history=model.fit(x_train, y_train2,
+          batch_size=10000,
+          epochs=400,
+          verbose=1)
+"""
+# history = model.fit_generator(train_generator, y_train2, epochs=400)
+history = model.fit(train_generator, epochs=400)
+
+
+# 測試
+score = model.evaluate(x_test, y_test2, batch_size=128)
+# 輸出結果
+print("score:", score)
+
+predict = model.predict(x_test)
+print(
+    "Ans:",
+    np.argmax(predict[0]),
+    np.argmax(predict[1]),
+    np.argmax(predict[2]),
+    np.argmax(predict[3]),
+)
+
+# y_pred = model.predict_classes(x_test) # TensorFlow2.6已刪除predict_classes()
+predict_x = model.predict(x_test)
+classes_x = np.argmax(predict_x, axis=1)
+y_pred = classes_x
+
+print("predict_classes:", y_pred[:20])
+print("y_test", y_test[:20])
+
+import matplotlib.pyplot as plt
+
+plt.plot(history.history["acc"])
+plt.plot(history.history["loss"])
+plt.title("model accuracy")
+plt.ylabel("acc & loss")
+plt.xlabel("epoch")
+plt.legend(["acc", "loss"], loc="upper left")
+plt.show()
+
+
+# 保存模型架構
+with open("tmp_model_img.json", "w") as json_file:
+    json_file.write(model.to_json())
+# 保存模型權重
+model.save_weights("tmp_model_img.h5")
+
+# 保存模型架構
+with open("tmp_model.json", "w") as json_file:
+    json_file.write(model.to_json())
+# 保存模型權重
+model.save_weights("tmp_model.h5")
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 提示：generate code with tensorflow mnist
+import tensorflow as tf
+from tensorflow import keras
+
+# Load the dataset
+mnist = keras.datasets.mnist
+(x_train, y_train), (x_test, y_test) = mnist.load_data()
+
+# Preprocess the data
+x_train = x_train / 255.0
+x_test = x_test / 255.0
+
+# Define the model architecture
+model = keras.models.Sequential(
+    [
+        keras.layers.Flatten(input_shape=(28, 28)),
+        keras.layers.Dense(128, activation="relu"),
+        keras.layers.Dense(10, activation="softmax"),
+    ]
+)
+
+# Compile the model
+model.compile(
+    optimizer="adam", loss="sparse_categorical_crossentropy", metrics=["accuracy"]
+)
+
+# Train the model
+model.fit(x_train, y_train, epochs=5, validation_data=(x_test, y_test))
+
+# Evaluate the model on the test data
+test_loss, test_acc = model.evaluate(x_test, y_test)
+print("Test accuracy:", test_acc)
+
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -2940,7 +3676,6 @@ classes_x = np.argmax(predict_x, axis=1)
 y_pred = classes_x
 
 
-
 # 我們 "predict" 放的是我們神經網路的學習結果。
 # 這裡用 predict_classes 會讓我們 Keras 選 10 個輸出機率最大的那類。
 
@@ -2949,9 +3684,15 @@ y_pred = classes_x
 # 資料集檔案位置: C:/Users/070601/.keras/datasets/mnist.npz
 (x_train, y_train), (x_test, y_test) = mnist.load_data()
 
-"""
-#方法二 將minst資料集放在 特定 位置
+# 方法二 將minst資料集放在 特定 位置
 mnist = np.load(mnist_npz_filename)
 
+"""
+Dense        全連接層
+Conv2D       二維卷積層
+MaxPooling2D 最大池化層
+Dropout      隨機失活層
+
+"""
 
 

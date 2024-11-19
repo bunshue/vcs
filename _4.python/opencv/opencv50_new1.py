@@ -38,7 +38,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 print("練習組合成一張大圖 picasa效果")
 
 filename1 = "C:/_git/vcs/_4.python/_data/elephant.jpg"
@@ -4692,7 +4692,7 @@ for method in methods:
     cv2.imshow("Match", img2)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
@@ -4755,7 +4755,6 @@ plt.imshow(cv2.cvtColor(image2, cv2.COLOR_BGR2RGB))
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
-
 
 filename = "data/lena.jpg"
 img = cv2.imread(filename)  # ❶

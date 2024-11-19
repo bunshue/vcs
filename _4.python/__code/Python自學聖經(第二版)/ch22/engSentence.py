@@ -5,4 +5,4 @@ data = cv.fit_transform(['code is is easy, i like python', 'code is too hard, i 
 print('one-hot編碼：')
 print(data.toarray())
 print('特徵名稱：')
-print(cv.get_feature_names())
+print(cv.get_feature_names_out())

@@ -63,7 +63,7 @@ print(cc)
 cc = enc.inverse_transform([[0, 1, 1, 0, 0], [0, 0, 0, 1, 0]])
 print(cc)
 
-cc = enc.get_feature_names(['gender', 'group'])
+cc = enc.get_feature_names_out(['gender', 'group'])
 print(cc)
 
 print("------------------------------------------------------------")  # 60個

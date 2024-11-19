@@ -76,6 +76,96 @@ def evaluate_result(y_test, y_pred):
 
 print("------------------------------------------------------------")  # 60個
 
+print('資料前處理方式(4)')
+"""
+1. StandardScaler (平均值和標準差)
+
+Standardization 平均&變異數標準化
+將所有特徵標準化，也就是高斯分佈。使得數據的平均值為0，方差為1。
+適合的使用時機於當有些特徵的方差過大時，使用標準化能夠有效地讓模型快速收斂。
+
+2. MinMaxScaler(最小最大值標準化)
+
+MinMaxScaler 最小最大值標準化
+在MinMaxScaler中是給定了一個明確的最大值與最小值。
+每個特徵中的最小值變成了0，最大值變成了1。數據會縮放到到[0,1]之間。
+
+3. MaxAbsScaler（絕對值最大標準化）
+
+MaxAbsScaler 絕對值最大標準化
+MaxAbsScaler 與 MinMaxScaler 類似，所有數據都會除以該列絕對值後的最大值。
+數據會縮放到到[-1,1]之間。
+
+4. RobustScaler
+
+RobustScaler 中位數和四分位數標準化
+可以有效的縮放帶有outlier的數據，透過Robust如果數據中含有異常值在縮放中會捨去。
+"""
+
+dataset = pd.read_csv("data/studentscores.csv")
+X = dataset.iloc[:, :1].values
+y = dataset.iloc[:, 1].values
+
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+# 訓練組8成, 測試組2成
+
+# 特徵縮放
+from sklearn import preprocessing
+
+scaler = preprocessing.StandardScaler()
+
+print('特徵縮放前, 資料的平均值與標準差 :', x_train.mean(), x_train.std())
+
+x_train_std = scaler.fit_transform(x_train)  # 特徵縮放
+
+print('特徵縮放後, 資料的平均值與標準差 :', x_train_std.mean(), x_train_std.std())
+
+
+from sklearn.preprocessing import MinMaxScaler
+
+scaler = MinMaxScaler()
+X = scaler.fit_transform(X)
+
+
+from sklearn.preprocessing import MaxAbsScaler
+# MaxAbsScaler
+# 簡單測試
+
+# 測試資料
+
+data = np.array([[1.0, -1.0, 2.0], [2.0, 0.0, 0.0], [0.0, 1.0, -1.0]])
+print(data)
+
+from sklearn.preprocessing import MaxAbsScaler
+
+scaler = MaxAbsScaler()
+cc = scaler.fit_transform(data)
+print(cc)
+
+# 驗證
+
+# 計算最大值
+max1 = np.max(data, axis=0)
+
+# MaxAbsScaler計算
+cc = data / max1
+print(cc)
+
+
+
+data = np.array([[1.0, -2.0, 2.0], [-2.0, 1.0, 3.0], [4.0, 1.0, -2.0]])
+print(data)
+
+from sklearn.preprocessing import RobustScaler
+
+scaler = RobustScaler()
+cc = scaler.fit_transform(data)
+print(cc)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 # 簡單資料 y = x
 xx = np.array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
 yy0 = xx  # 理想資料, y = x
@@ -421,83 +511,23 @@ print("------------------------------------------------------------")  # 60個
 
 print("資料來源 : 內建資料 1 計程車小費資料集EDA")
 
-"""
-# 計程車小費資料集EDA
-共244筆資料, 7個欄位
-"""
+# 計程車小費資料集EDA  共244筆資料, 7個欄位
 
 from sklearn import preprocessing
 
 df = sns.load_dataset("tips")
 cc = df.head(30)
-print(cc)
+#print(cc)
+cc = df.info()
+#print(cc)
 
 # 資料清理、資料探索與分析
-
-# 對小費繪製直方圖
-sns.histplot(x="tip", data=df)
-plt.title("小費統計")
-plt.show()
-
-df["log_tip"] = np.log(df["tip"])
-sns.kdeplot(x="log_tip", data=df)
-plt.show()
-
-# 散佈圖
-sns.scatterplot(x="total_bill", y="tip", data=df)
-plt.xlabel("全車資")
-plt.ylabel("小費")
-plt.show()
-
-# 三維散佈圖
-sns.scatterplot(x="total_bill", y="tip", hue="sex", data=df)
-plt.xlabel("全車資")
-plt.ylabel("小費")
-plt.show()
-
-# joint plot
-sns.jointplot(data=df, x="total_bill", y="tip", hue="day")
-plt.xlabel("全車資")
-plt.ylabel("小費")
-plt.show()
-
-cc = df.day.unique()
-print(cc)
-
-# ['Sun', 'Sat', 'Thur', 'Fri']
-# Categories (4, object): ['Thur', 'Fri', 'Sat', 'Sun']
-
-# 觀察週間對小費的影響
-
-sns.barplot(x="day", y="tip", data=df)
-plt.xlabel("星期幾")
-plt.ylabel("小費")
-plt.show()
-
-# 箱型圖
-sns.boxplot(x="day", y="tip", data=df)
-plt.xlabel("星期幾")
-plt.ylabel("小費")
-plt.show()
 
 # 類別變數轉換為數值
 df.sex = df.sex.map({"Female": 0, "Male": 1}).astype(int)
 df.smoker = df.smoker.map({"No": 0, "Yes": 1}).astype(int)
 df.day = df.day.map({"Thur": 1, "Fri": 2, "Sat": 3, "Sun": 4}).astype(int)
 df.time = df.time.map({"Lunch": 0, "Dinner": 1}).astype(int)
-
-cc = df.info()
-print(cc)
-
-print("繪製pair plot")
-sns.pairplot(data=df, height=1)
-plt.title("繪製pair plot")
-plt.show()
-
-print("熱力圖")
-sns.heatmap(data=df.corr(), annot=True, fmt=".2f", linewidths=0.5)
-plt.title("熱力圖")
-plt.show()
 
 cc = df.isna().sum()
 print(cc)
@@ -520,12 +550,14 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 # 查看陣列維度
 print(X_train.shape, X_test.shape, y_train.shape, y_test.shape)
 
-# ((195, 7), (49, 7), (195,), (49,))
-
 # 特徵縮放
 scaler = preprocessing.StandardScaler()
-X_train_std = scaler.fit_transform(X_train)
-X_test_std = scaler.transform(X_test)
+print('特徵縮放')
+print(X_train)
+X_train_std = scaler.fit_transform(X_train)#特徵縮放
+print(X_train_std)
+
+X_test_std = scaler.transform(X_test)#特徵縮放
 
 linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
 
@@ -535,6 +567,8 @@ y_pred = linear_regression.predict(X_test_std)  # 預測.predict
 
 print("評估 測試資料 與 預測結果 的差異")
 evaluate_result(y_test, y_pred)
+
+sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
