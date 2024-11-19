@@ -1,14 +1,8 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Thu Feb  4 16:09:56 2016
-
-@author: edouard.duchesnay@cea.fr
-"""
 import numpy as np
 import scipy
 import matplotlib.pyplot as plt
 import seaborn as sns
-#%matplotlib inline
+
 
 '''
 Mahalanobis distance

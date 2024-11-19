@@ -1,8 +1,6 @@
 """
 機器學習 SVM
 
-機器學習概要
-
 機器學習其實基本上和我們一直以來說的一樣, 就是我們要學一個未知的函數
 f(x)=y
 
@@ -22,7 +20,6 @@ f(x)=y
 最基本的方式, 一個是 SVM, 一個是 K-Means。
 
 # Supervised Learning SVM
-
 
 """
 
@@ -50,9 +47,9 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 print("------------------------------------------------------------")  # 60個
 
 from sklearn.svm import SVC
-
+'''
 print("------------------------------------------------------------")  # 60個
-"""
+
 plt.figure(
     num="SVM 支援向量機",
     figsize=(12, 8),
@@ -70,7 +67,9 @@ plt.figure(
 # 在高維度的時候自然就是曲面 (超曲面) 分隔資料的方法。
 # 打開一個 SVM 的函數學習機 (SVC 是 SVM 裏面負責做分類的)
 
+# 原始資料x
 x = np.array([[5, 0], [5, -5], [0, -5], [0, 5], [-5, 5], [-5, 0]])
+# 目標y
 y = np.array([1, 1, 1, 2, 2, 2])
 
 print("x全部")
@@ -185,7 +184,7 @@ plt.scatter(X, Y, s=50, c=Z)
 plt.title("預測的結果5")
 
 plt.show()
-"""
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -233,12 +232,16 @@ clf.fit(x, y)  # 學習訓練.fit
 
 y_pred = clf.predict(x)  # 預測.predict
 
-# 來看預測的結果
-print("真實目標 :", y)
+print("真實答案 :", y)
 print("預測結果 :", y_pred)
 print("預測差值 :", y_pred - y)
 
-# 這裡看看我們可愛的 SVM, 把我們訓練資料學得怎麼樣。
+cc = np.sum(y_pred.reshape(-1, 1) == y.reshape(-1, 1))
+print(cc)
+cc = cc * 1.0 / len(y)
+print("正確率 :", cc)
+
+# 看看SVM, 把訓練資料學得怎麼樣
 plt.subplot(232)
 plt.scatter(x[:, 0], x[:, 1], s=50, c=y_pred)
 plt.grid()
@@ -272,6 +275,119 @@ plt.title("等高線圖")
 plt.grid()
 
 plt.show()
+'''
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+from sklearn import datasets
+from sklearn.model_selection import train_test_split
+from sklearn.svm import SVC
+from sklearn.metrics import accuracy_score
+
+# Load dataset
+iris = datasets.load_iris()
+
+# Prepare data
+X = iris.data[:, :2]  # We only take the first two features
+y = iris.target
+
+# Split data into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+
+# Create SVM classifier object
+svm = SVC(kernel='linear')
+
+# Train SVM classifier
+svm.fit(X_train, y_train)
+
+# Predict target values for test data
+y_pred = svm.predict(X_test)
+
+# Evaluate accuracy of SVM classifier
+accuracy = accuracy_score(y_test, y_pred)
+
+print('Accuracy of SVM classifier: {:.2f}'.format(accuracy))
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+from sklearn.svm import SVC
+from sklearn.datasets import make_gaussian_quantiles
+from sklearn.metrics import accuracy_score
+
+X, y = make_gaussian_quantiles(n_features=2, n_classes=2, n_samples=300)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
+
+model = SVC()
+
+model.fit(X_train, y_train)  # 學習訓練.fit
+
+y_pred = model.predict(X_test)  # 預測.predict
+
+print(accuracy_score(y_pred, y_test))
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 線性支援向量機 (Linear SVM)
+
+from sklearn.preprocessing import StandardScaler
+from sklearn.svm import LinearSVC
+
+N = 500
+print("產生", N, "筆資料 2維 2群")
+dx, dy = make_blobs(n_samples=N, n_features=2, centers=2, random_state=0)
+
+dx_std = StandardScaler().fit_transform(dx)
+
+dx_train, dx_test, dy_train, dy_test = train_test_split(
+    dx_std, dy, test_size=0.2, random_state=0
+)
+
+linear_svm = LinearSVC()
+
+linear_svm.fit(dx_train, dy_train)  # 學習訓練.fit
+
+predictions = linear_svm.predict(dx_test)  # 預測.predict
+
+print(linear_svm.score(dx_train, dy_train))
+print(linear_svm.score(dx_test, dy_test))
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 非線性 SVM
+
+from sklearn.datasets import make_moons
+from sklearn.preprocessing import StandardScaler
+from sklearn.svm import LinearSVC, SVC
+
+dx, dy = make_moons(n_samples=500, noise=0.15, random_state=0)
+
+dx_train, dx_test, dy_train, dy_test = train_test_split(
+    StandardScaler().fit_transform(dx), dy, test_size=0.2, random_state=0
+)
+
+linear_svm = LinearSVC()
+
+linear_svm.fit(dx_train, dy_train)  # 學習訓練.fit
+
+predictions = linear_svm.predict(dx_test)  # 預測.predict
+
+svm = SVC()
+
+svm.fit(dx_train, dy_train)  # 學習訓練.fit
+
+predictions = svm.predict(dx_test)  # 預測.predict
+
+print(linear_svm.score(dx_train, dy_train))
+
+print(linear_svm.score(dx_test, dy_test))
+
+print(svm.score(dx_train, dy_train))
+
+print(svm.score(dx_test, dy_test))
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -281,6 +397,9 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
+
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 

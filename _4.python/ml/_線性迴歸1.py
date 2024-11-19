@@ -5,13 +5,11 @@
     Finding the curve that best fits your data is called regression, and when that curve is a straight line, it's called linear regression.
     找出符合資料規律的直線，就叫線性迴歸。
 
-
 # 做線性迴歸, 用 sklearn 裡的 LinearRegression 來做線性迴歸
 linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
 
 建立迴歸資料 make_regression
 """
-
 print("------------------------------------------------------------")  # 60個
 
 # 共同
@@ -91,7 +89,7 @@ yy0 = np.sin(3.2 * x) + 0.8 * x
 yy1 = np.sin(3.2 * x) + 0.8 * x + 0.3 * np.random.randn(N)
 """
 print("------------------------------------------------------------")  # 60個
-'''
+"""
 print("資料來源 : 建立迴歸資料 make_regression 1 無 / 有 資料分割")
 
 N = 100
@@ -121,10 +119,10 @@ plt.scatter(X, y, s=30, c="b", label="真實資料")  # 真實資料, 藍點
 plt.plot(x_test, y_pred, c="r", label="線性迴歸")
 plt.legend()
 plt.show()
-
+"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
+"""
 print("資料來源 : 自建資料 2 做成df")
 
 xxx = xx
@@ -215,7 +213,7 @@ linear_regression.fit(X, y)  # 學習訓練.fit
 # 全預測
 y_pred = linear_regression.predict(X)  # 預測.predict
 print(y_pred)
-
+"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -349,7 +347,9 @@ y_pred_poly = svr_poly.predict(X)  # 預測.predict, SVR(poly)
 plt.plot(x, y0, "lime", lw=5, label="理想資料")  # 理想資料, y = x 綠線
 plt.plot(x, y1, "bo-", label="真實資料")  # 真實資料, 藍點藍線
 plt.plot(x, y_pred_rbf, color="m", marker="o", markersize=8, label="rbf")  # SVR(rbf)
-plt.plot(x, y_pred_lin, color="r", marker="o", markersize=8, label="linear")  # SVR(linear)
+plt.plot(
+    x, y_pred_lin, color="r", marker="o", markersize=8, label="linear"
+)  # SVR(linear)
 plt.plot(x, y_pred_poly, color="y", marker="o", markersize=8, label="poly")  # SVR(poly)
 plt.title("SVR(rbf/linear/poly) 迴歸")
 plt.axis([0, 10, 0, 10])  # 設定各軸顯示範圍
@@ -423,10 +423,7 @@ print("資料來源 : 內建資料 1 計程車小費資料集EDA")
 
 """
 # 計程車小費資料集EDA
-
 共244筆資料, 7個欄位
-
-
 """
 
 from sklearn import preprocessing
@@ -439,7 +436,7 @@ print(cc)
 
 # 對小費繪製直方圖
 sns.histplot(x="tip", data=df)
-plt.title('小費統計')
+plt.title("小費統計")
 plt.show()
 
 df["log_tip"] = np.log(df["tip"])
@@ -448,20 +445,20 @@ plt.show()
 
 # 散佈圖
 sns.scatterplot(x="total_bill", y="tip", data=df)
-plt.xlabel('全車資')
-plt.ylabel('小費')
+plt.xlabel("全車資")
+plt.ylabel("小費")
 plt.show()
 
 # 三維散佈圖
 sns.scatterplot(x="total_bill", y="tip", hue="sex", data=df)
-plt.xlabel('全車資')
-plt.ylabel('小費')
+plt.xlabel("全車資")
+plt.ylabel("小費")
 plt.show()
 
 # joint plot
 sns.jointplot(data=df, x="total_bill", y="tip", hue="day")
-plt.xlabel('全車資')
-plt.ylabel('小費')
+plt.xlabel("全車資")
+plt.ylabel("小費")
 plt.show()
 
 cc = df.day.unique()
@@ -473,14 +470,14 @@ print(cc)
 # 觀察週間對小費的影響
 
 sns.barplot(x="day", y="tip", data=df)
-plt.xlabel('星期幾')
-plt.ylabel('小費')
+plt.xlabel("星期幾")
+plt.ylabel("小費")
 plt.show()
 
 # 箱型圖
 sns.boxplot(x="day", y="tip", data=df)
-plt.xlabel('星期幾')
-plt.ylabel('小費')
+plt.xlabel("星期幾")
+plt.ylabel("小費")
 plt.show()
 
 # 類別變數轉換為數值
@@ -538,10 +535,10 @@ y_pred = linear_regression.predict(X_test_std)  # 預測.predict
 
 print("評估 測試資料 與 預測結果 的差異")
 evaluate_result(y_test, y_pred)
-'''
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
+
 print("資料來源 : 檔案資料")
 
 # 共 15188 筆資料, 16欄位
@@ -556,7 +553,7 @@ print(df)
 cc = df.head(10)
 print(cc)
 
-#資料長度
+# 資料長度
 print(len(df))
 print(len(df["PM25"]))
 
@@ -567,7 +564,7 @@ cc = df.describe()
 print(cc)
 
 print(df.columns)
-cc = df.set_index("Date") # 將Date欄位設定為索引欄位
+cc = df.set_index("Date")  # 將Date欄位設定為索引欄位
 print("df 222")
 print(df.columns)
 print(df.shape)
@@ -611,10 +608,10 @@ linear_regression.fit(x_train, y_train)  # 學習訓練.fit
 """
 sns.heatmap(df.corr())
 plt.show()
-
 cc = df.corr()
 print(cc)
 """
+
 y_pred = linear_regression.predict(x_test)  # 預測.predict
 
 df = pd.DataFrame({"測試資料": y_test, "預測結果": y_pred})
@@ -631,7 +628,7 @@ evaluate_result(y_test, y_pred)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
+
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -645,7 +642,6 @@ diabetes dataset 資料集是一個糖尿病的資料集
 Age(年齡)、Sex(性別)、Body mass index(體質指數)、
 Average Blood Pressure(平均血壓)、S1-S6一年後疾病級數指標,
 Target為一年後患疾病的定量指標。
-
 題目1
 建立線性多元回歸的預測模型,繪製散佈圖來比較一年後患疾病的定量指標和實際一年後患疾病的定量指標結果。
 題目2
@@ -675,7 +671,8 @@ linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
 
 linear_regression.fit(X, y)  # 學習訓練.fit
 
-y_pred_diabetes = linear_regression.predict(X)
+y_pred_diabetes = linear_regression.predict(X)  # 預測.predict
+
 plt.scatter(y, y_pred_diabetes)
 plt.xlabel("Quantitative Measure")
 plt.ylabel("Predicted Quantitative Measure")
@@ -699,7 +696,8 @@ linear_regression_4items.fit(X1,y1)  # 學習訓練.fit
 
 print("迴歸係數:", linear_regression_4items.coef_)
 print("截距:", linear_regression_4items.intercept_)
-y_pred_4items_diabetes = linear_regression_4items.predict(X1)
+y_pred_4items_diabetes = linear_regression_4items.predict(X1)# 預測.predict
+
 plt.scatter(y1 ,y_pred_4items_diabetes)
 plt.xlabel("Quantitative Measure")
 plt.ylabel("Predicted Quantitative Measure")
@@ -721,9 +719,7 @@ Age(年龄)、性别(Sex)、Body mass index(体质指数)、Average Blood Pressu
 S1~S6一年后疾病级数指标。
 
 Target为一年后患疾病的定量指标，因此适合与回归任务
-
 """
-
 
 def do_linear_regression():
     diabetes = datasets.load_diabetes()
@@ -763,19 +759,249 @@ linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
 linear_regression.fit(X, y)
 
 print("預測的寫法")
-y_pred = linear_regression.predict([[0], [1]])
+y_pred = linear_regression.predict([[0], [1]])  # 預測.predict
 print(y_pred)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+print("簡單線性回歸")
+
+dataset = pd.read_csv("data/studentscores.csv")
+X = dataset.iloc[:, :1].values
+Y = dataset.iloc[:, 1].values
+
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size=0.4)
+# 訓練組8成, 測試組2成
+
+linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
+
+linear_regression.fit(x_train, y_train)  # 學習訓練.fit
+
+plt.scatter(X, Y, color="b", label="真實資料")
+
+y_pred = linear_regression.predict(x_test)  # 預測.predict
+plt.plot(x_test, y_pred, "mo-", label="線性迴歸2")
+
+plt.legend()
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("多元线性回归（Multiple Linear Regression）")
+
+# 讀取資料
+dataset = pd.read_csv("data/50_Startups.csv")
+X = dataset.iloc[:, :-1].values  # 全部資料
+Y = dataset.iloc[:, 4].values  # 第4欄的全部資料(收益)
+Z = dataset.iloc[:, 0].values  # 第0欄的全部資料(R&D花費)
+print("X:")
+print(X)
+print("Y:")
+print(Y)
+print("Z:")
+print(Z)
+print()
+
+# 缺失資料之處理
+from sklearn.impute import SimpleImputer
+
+imputer = SimpleImputer(missing_values=0.0, strategy="mean")
+imputer = imputer.fit(X[:, 0:3])
+X[:, 0:3] = imputer.transform(X[:, 0:3])
+print(X)
+
+# 将类别数据数字化
+
+# Encoding Categorical data
+from sklearn.preprocessing import LabelEncoder, OneHotEncoder
+from sklearn.compose import ColumnTransformer
+
+labelencoder = LabelEncoder()
+print("original:")
+print(X[:10])
+# print(X[: , 3])
+X[:, 3] = labelencoder.fit_transform(X[:, 3])
+# print(X[: , 3])
+print("labelencoder:")
+print(X[:10])
+ct = ColumnTransformer([("encoder", OneHotEncoder(), [3])], remainder="passthrough")
+X = ct.fit_transform(X)
+# onehotencoder = OneHotEncoder(categorical_features = [3])
+# X = onehotencoder.fit_transform(X).toarray()
+print("onehot:")
+print(X[:10])
+
+"""
+躲避虚拟变量陷阱
+在回归预测中我们需要所有的数据都是numeric的，但是会有一些非numeric的数据，
+比如国家，省，部门，性别。这时候我们需要设置虚拟变量（Dummy variable）。
+做法是将此变量中的每一个值，衍生成为新的变量，是设为1，否设为0.
+举个例子，“性别”这个变量,我们可以虚拟出“男”和”女”两虚拟变量，
+男性的话“男”值为1，”女”值为0；女性的话“男”值为0，”女”值为1。
+但是要注意，这时候虚拟变量陷阱就出现了。
+就拿性别来说，其实一个虚拟变量就够了，比如 1 的时候是“男”， 0 的时候是”非男”，即为女。
+如果设置两个虚拟变量“男”和“女”，语义上来说没有问题，可以理解，
+但是在回归预测中会多出一个变量，多出的这个变量将会对回归预测结果产生影响。
+一般来说，如果虚拟变量要比实际变量的种类少一个。
+在多重线性回归中，变量不是越多越好，而是选择适合的变量。这样才会对结果准确预测。
+如果category类的特征都放进去，拟合的时候，所有权重的计算，都可以有两种方法实现，
+一种是提高某个category的w，一种是降低其他category的w，这两种效果是等效的，
+也就是发生了共线性,虚拟变量系数相加和为1，出现完全共线陷阱。
+但是下面测试尽然和想法不一致。。。
+"""
+
+# Avoiding Dummy Variable Trap
+X1 = X[:, 1:]
+
+print(X1)
+print(X)
+
+# 拆分数据集为训练集和测试集
+# Splitting the dataset into the Training set and Test set
+
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size=0.2)
+# 訓練組8成, 測試組2成
+
+x1_train, x1_test, y1_train, y1_test = train_test_split(X1, Y, test_size=0.2)
+
+# 第2步：在训练集上训练多元线性回归模型
+# Fitting Multiple Linear Regression to the Training set
+
+linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
+
+linear_regression.fit(x_train, y_train)  # 學習訓練.fit
+
+linear_regression2 = sklearn.linear_model.LinearRegression()  # 函數學習機
+
+linear_regression2.fit(x1_train, y1_train)  # 學習訓練.fit
+
+y_pred = linear_regression.predict(x_test)  # 預測.predict
+y1_pred = linear_regression2.predict(x1_test)  # 預測.predict
+print(y_pred)
+print(y1_pred)
+
+# regression evaluation
+from sklearn.metrics import r2_score
+
+print(r2_score(y_test, y_pred))
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+""" NG OneHotEncoder
+dataset = pd.read_csv("data/50_Startups.csv")
+X = dataset.iloc[:, :-1].values
+Y = dataset.iloc[:, 4].values
+
+# 将类别数据数字化
+
+from sklearn.preprocessing import LabelEncoder, OneHotEncoder
+
+labelencoder = LabelEncoder()
+X[:, 3] = labelencoder.fit_transform(X[:, 3])
+onehotencoder = OneHotEncoder(categorical_features=[3])
+X = onehotencoder.fit_transform(X).toarray()
+
+# 躲避虚拟变量陷阱
+
+X = X[:, 1:]
+
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size=0.2)
+# 訓練組8成, 測試組2成
+
+linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
+
+linear_regression.fit(x_train, y_train)  # 學習訓練.fit
+
+y_pred = linear_regression.predict(x_test)  # 預測.predict
+print(y_pred)
+"""
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+import numpy as np
+from sklearn.linear_model import LinearRegression
+
+# Generate some sample data
+x = np.array([1, 2, 3, 4, 5]).reshape((-1, 1))
+y = np.array([2, 3, 4, 5, 6])
+
+# Create the model
+model = LinearRegression()
+
+# Fit the model to the data
+model.fit(x, y)
+
+# Predict the outcome for a new data point
+new_x = np.array([6]).reshape((-1, 1))
+y_pred = model.predict(new_x)
+
+# Print the coefficients and predicted outcome
+print('Coefficients: ', model.coef_)
+print('Intercept: ', model.intercept_)
+print('Predicted outcome: ', y_pred[0])
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+import numpy as np
+
+# Generate some sample data
+x = np.array([1, 2, 3, 4, 5])
+y = np.array([2, 3, 4, 5, 6])
+
+# Calculate the slope and y-intercept of the regression line
+slope, intercept = np.polyfit(x, y, 1)
+
+# Use the slope and y-intercept to make predictions
+new_x = 6
+y_pred = slope * new_x + intercept
+
+# Print the slope, y-intercept, and predicted outcome
+print('Slope: ', slope)
+print('Y-intercept: ', intercept)
+print('Predicted outcome: ', y_pred)
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+import numpy as np
+
+# Generate some sample data
+x = np.array([1, 2, 3, 4, 5])
+y = np.array([2, 3, 4, 5, 6])
+
+# Calculate the coefficients of the regression line
+X = np.vstack([x, np.ones(len(x))]).T
+coeffs = np.linalg.inv(X.T @ X) @ X.T @ y
+
+# Use the coefficients to make predictions
+new_x = 6
+y_pred = coeffs[0] * new_x + coeffs[1]
+
+# Print the coefficients and predicted outcome
+print('Coefficients: ', coeffs)
+print('Predicted outcome: ', y_pred)
+
+
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
+
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
 
 
 print("------------------------------------------------------------")  # 60個

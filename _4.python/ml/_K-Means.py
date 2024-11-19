@@ -15,7 +15,6 @@ k-平均演算法（英文：k-means clustering，以下簡稱為 k-means ）
 是一種非監督式的學習方法，其主要的目標是對未標記的資料進行分群。
 
 """
-
 print("------------------------------------------------------------")  # 60個
 
 # 共同
@@ -47,9 +46,10 @@ print("無 sklearn之kmeans 1")
 
 
 def kmeans(x, y, cx, cy):
-    """目前功能只是繪群集元素點"""
+    # 目前功能只是繪群集元素點
     plt.scatter(x, y, color="b")  # 繪製元素點
     plt.scatter(cx, cy, color="r")  # 用紅色繪群集中心
+    plt.title("無 sklearn之kmeans 1")
     plt.show()
 
 
@@ -72,12 +72,12 @@ print("無 sklearn之kmeans 2")
 
 
 def length(x1, y1, x2, y2):
-    """計算2點之間的距離"""
+    # 計算2點之間的距離
     return int(((x1 - x2) ** 2 + (y1 - y2) ** 2) ** 0.5)
 
 
 def clustering(x, y, cx, cy):
-    """對元素執行分群"""
+    # 對元素執行分群
     clusters = []
     for i in range(cluster_number):  # 建立群集
         clusters.append([])
@@ -93,7 +93,7 @@ def clustering(x, y, cx, cy):
 
 
 def kmeans(x, y, cx, cy):
-    """建立群集和繪製各群集點和線條"""
+    # 建立群集和繪製各群集點和線條
     clusters = clustering(x, y, cx, cy)
     plt.scatter(x, y, color="b")  # 繪製元素點
     plt.scatter(cx, cy, color="r")  # 用紅色繪群集中心
@@ -108,6 +108,7 @@ def kmeans(x, y, cx, cy):
         color_c = c[index]  # 選擇顏色
         for i in range(len(linex)):
             plt.plot(linex[i], liney[i], color=color_c)  # 為第i群集繪線條
+    plt.title("無 sklearn之kmeans 2")
     plt.show()
 
 
@@ -131,12 +132,12 @@ print("無 sklearn之kmeans 3")
 
 
 def length(x1, y1, x2, y2):
-    """計算2點之間的距離"""
+    # 計算2點之間的距離
     return int(((x1 - x2) ** 2 + (y1 - y2) ** 2) ** 0.5)
 
 
 def clustering(x, y, cx, cy):
-    """對元素執行分群"""
+    # 對元素執行分群
     clusters = []
     for i in range(cluster_number):  # 建立群集
         clusters.append([])
@@ -152,7 +153,7 @@ def clustering(x, y, cx, cy):
 
 
 def kmeans(x, y, cx, cy):
-    """建立群集和繪製各群集點和線條"""
+    # 建立群集和繪製各群集點和線條
     clusters = clustering(x, y, cx, cy)
     plt.scatter(x, y, color="b")  # 繪製元素點
     plt.scatter(cx, cy, color="r")  # 用紅色繪群集中心
@@ -167,12 +168,13 @@ def kmeans(x, y, cx, cy):
         color_c = c[index]  # 選擇顏色
         for i in range(len(linex)):
             plt.plot(linex[i], liney[i], color=color_c)  # 為第i群集繪線條
+    plt.title("無 sklearn之kmeans 3")
     plt.show()
     return clusters
 
 
 def get_new_cluster(clusters):
-    """計算各群集中心的點"""
+    # 計算各群集中心的點
     new_x = []  # 新群集中心 x 座標
     new_y = []  # 新群集中心 y 座標
     for index, node in enumerate(clusters):  # 逐步計算各群集
@@ -210,7 +212,12 @@ while True:  # 收斂迴圈
     new_x, new_y = get_new_cluster(clusters)
     x_list = list(cluster_x)  # 將np.array轉成串列
     y_list = list(cluster_y)  # 將np.array轉成串列
+    print("目前x :", new_x)
+    print("目前y :", new_y)
+    print("目標x :", x_list)
+    print("目標y :", y_list)
     if new_x == x_list and new_y == y_list:  # 如果相同代表收斂完成
+        print("收斂完成")
         break
     else:
         cluster_x = new_x  # 否則重新收斂
@@ -219,38 +226,146 @@ while True:  # 收斂迴圈
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+print("無 sklearn之kmeans 4")
+
+cl_num = 3
+data_num = 20
+thr = [0.00001, 0.00001, 0.00001]
+
+
+def dist(x, y, mu_x, mu_y):
+    return (mu_x - x) ** 2 + (mu_y - y) ** 2
+
+
+def cluster(x, y, mu_x, mu_y):
+    cls_ = dict()
+    for i in range(data_num):
+        dists = []
+        for j in range(cl_num):
+            distant = dist(x[i], y[i], mu_x[j], mu_y[j])
+            dists.append(distant)
+        cl = dists.index(min(dists))
+        if cl not in cls_:
+            cls_[cl] = [(x[i], y[i])]
+        elif cl in cls_:
+            cls_[cl].append((x[i], y[i]))
+
+    return cls_
+
+
+def re_mu(cls_, mu_x, mu_y):
+    new_muX = []
+    new_muY = []
+
+    for key, values in cls_.items():
+        if len(values) == 0:
+            values.append([mu_x[key], mu_y[key]])
+
+        sum_x = 0
+        sum_y = 0
+        for v in values:
+            sum_x += v[0]
+            sum_y += v[1]
+
+        new_mu_x = sum_x / len(values)
+        new_mu_y = sum_y / len(values)
+
+        new_muX.append(round(new_mu_x, 2))
+        new_muY.append(round(new_mu_y, 2))
+    return new_muX, new_muY
+
+
+def do_k_means():
+    x = np.random.randint(0, 500, data_num)
+    y = np.random.randint(0, 500, data_num)
+
+    mu_x = np.random.randint(0, 500, cl_num)
+    mu_y = np.random.randint(0, 500, cl_num)
+
+    cls_ = cluster(x, y, mu_x, mu_y)
+
+    new_muX, new_muY = re_mu(cls_, mu_x, mu_y)
+
+    while (
+        any((abs(np.array(new_muX) - np.array(mu_x)) > thr)) != False
+        or any((abs(np.array(new_muY) - np.array(mu_y)) > thr)) != False
+    ):
+        mu_x = new_muX
+        mu_y = new_muY
+        cls_ = cluster(x, y, mu_x, mu_y)
+        new_muX, new_muY = re_mu(cls_, mu_x, mu_y)
+
+    print("Done")
+
+    plt.subplot(121)
+
+    plt.scatter(x, y)
+    plt.scatter(new_muX, new_muY)
+    # plt.show()
+
+    plt.subplot(122)
+    colors = ["r", "b", "g"]
+    for key, values in cls_.items():
+        cx = []
+        cy = []
+        for v in values:
+            cx.append(v[0])
+            cy.append(v[1])
+        plt.scatter(cx, cy, color=colors[key])
+
+    plt.show()
+
+
+do_k_means()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 print("聚類算法 KMeans")
 
 from sklearn.datasets import make_blobs
 
-N = 10
+N = 100
 GROUPS = 3
 
 print("make_blobs,", N, "個樣本, 分成", GROUPS, "群")
 X, y, centers = make_blobs(
-    n_samples=N, centers=GROUPS, random_state=9487, return_centers=True
+    n_samples=N,
+    centers=GROUPS,
+    cluster_std=1,
+    n_features=2,
+    random_state=9487,
+    return_centers=True,
 )
+# cluster_std 為 資料標準差
+# n_features 為 資料的維度
 
 print(GROUPS, "群 的中心點 :")
 print(centers)
-print(X.shape)
-
-color = "b"
-plt.scatter(X[:, 0], X[:, 1], c=color)
-plt.show()
-
-"""
-X, y, centers = make_blobs(
-    n_samples=N, centers=GROUPS, cluster_std=1, n_features=2, return_centers=True
-)
-"""
+print("資料的維度", X.shape, y.shape)
+# print(y.shape)
 
 clf = KMeans(n_clusters=3, random_state=9487)  # K-平均演算法, 分成3群
 
 y_pred = clf.fit_predict(X)  # 訓練
 
+print("真實答案 :", y)
+print("預測結果 :", y_pred)
+print("預測差值 :", y_pred - y)
+
+cc = np.sum(y_pred.reshape(-1, 1) == y.reshape(-1, 1))
+print(cc)
+cc = cc * 1.0 / len(y)
+print("正確率 :", cc)
+
+plt.figure(figsize=(12, 6))
+plt.subplot(121)
+plt.scatter(X[:, 0], X[:, 1], c="b")
+plt.title("原始資料 3 群")
+
+plt.subplot(122)
 plt.scatter(X[:, 0], X[:, 1], c=y_pred)
+plt.title("KMeans分群結果")
 
 plt.show()
 
@@ -268,6 +383,12 @@ clf.fit(x)  # 學習訓練.fit
 cc = clf.labels_
 print("訓練好的結果 :\n", cc)
 
+plt.figure(figsize=(12, 6))
+plt.subplot(121)
+plt.scatter(x[:, 0], x[:, 1], c="b")
+plt.title("原始資料")
+
+plt.subplot(122)
 # 將點逐一染色
 for i in range(0, N):
     if cc[i] == 0:
@@ -280,22 +401,16 @@ for i in range(0, N):
         plt.scatter(x[i][0], x[i][1], color="pink")
     elif cc[i] == 4:
         plt.scatter(x[i][0], x[i][1], color="orange")
-
-plt.grid()
+plt.title("KMeans分群結果")
 
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-plt.figure(num="K-平均演算法", figsize=(12, 6))
-
 # 隨機生成 N 個點，然後用 k-means 將他們分成 5 群
 N = 100
 x = np.random.rand(N, 2)  # N X 2 亂數陣列
 
-plt.subplot(131)
-plt.scatter(x[:, 0], x[:, 1], s=50)
-plt.title("原始資料")
 
 clf = KMeans(n_clusters=3)  # K-平均演算法, 分成3群
 
@@ -311,29 +426,34 @@ print(y_pred)
 
 # clf.labels_ 與 clf.predict(x) 必相同
 
-plt.subplot(132)
-plt.scatter(x[:, 0], x[:, 1], s=50, c=cc)
-plt.title("訓練好的結果")
-
 x0 = y0 = np.arange(-0.2, 1.2, 0.02)
 xm, ym = np.meshgrid(x0, y0)
 
 P = np.c_[xm.ravel(), ym.ravel()]
 z = clf.predict(P)  # 預測.predict
 Z = z.reshape(xm.shape)
+
+plt.figure(figsize=(12, 6))
+plt.subplot(131)
+plt.scatter(x[:, 0], x[:, 1], s=50)
+plt.title("原始資料")
+plt.subplot(132)
+plt.scatter(x[:, 0], x[:, 1], s=50, c=cc)  # 自動配色
+plt.title("KMeans分群結果")
 plt.subplot(133)
 plt.contourf(xm, ym, Z, alpha=0.3)
 plt.scatter(x[:, 0], x[:, 1], s=50, c=cc, cmap="Paired")
-plt.title("訓練好的結果")
-
+plt.title("KMeans分群結果")
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
+"""
+Mean Shift 自動分類
+有時我們甚至不想告訴電腦, 你自動分類應該分成幾類。
+這時 Mean Shift 可以幫我們
+"""
 
-plt.figure(num="Means Shift", figsize=(12, 8))
-
-# Mean Shift 自動分類
-# 有時我們甚至不想告訴電腦, 你自動分類應該分成幾類。這時 Mean Shift 可以幫我們。
+plt.figure(num="Means Shift 自動分類", figsize=(12, 8))
 
 # 隨機生成 N 個點，然後用 Mean Shift 將他們分成 ? 群
 N = 100
@@ -430,96 +550,6 @@ f.close()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-cl_num = 3
-data_num = 20
-thr = [0.00001, 0.00001, 0.00001]
-
-
-def dist(x, y, mu_x, mu_y):
-    return (mu_x - x) ** 2 + (mu_y - y) ** 2
-
-
-def cluster(x, y, mu_x, mu_y):
-    cls_ = dict()
-    for i in range(data_num):
-        dists = []
-        for j in range(cl_num):
-            distant = dist(x[i], y[i], mu_x[j], mu_y[j])
-            dists.append(distant)
-        cl = dists.index(min(dists))
-        if cl not in cls_:
-            cls_[cl] = [(x[i], y[i])]
-        elif cl in cls_:
-            cls_[cl].append((x[i], y[i]))
-
-    return cls_
-
-
-def re_mu(cls_, mu_x, mu_y):
-    new_muX = []
-    new_muY = []
-
-    for key, values in cls_.items():
-        if len(values) == 0:
-            values.append([mu_x[key], mu_y[key]])
-
-        sum_x = 0
-        sum_y = 0
-        for v in values:
-            sum_x += v[0]
-            sum_y += v[1]
-
-        new_mu_x = sum_x / len(values)
-        new_mu_y = sum_y / len(values)
-
-        new_muX.append(round(new_mu_x, 2))
-        new_muY.append(round(new_mu_y, 2))
-    return new_muX, new_muY
-
-
-def do_k_means():
-    x = np.random.randint(0, 500, data_num)
-    y = np.random.randint(0, 500, data_num)
-
-    mu_x = np.random.randint(0, 500, cl_num)
-    mu_y = np.random.randint(0, 500, cl_num)
-
-    cls_ = cluster(x, y, mu_x, mu_y)
-
-    new_muX, new_muY = re_mu(cls_, mu_x, mu_y)
-
-    while (
-        any((abs(np.array(new_muX) - np.array(mu_x)) > thr)) != False
-        or any((abs(np.array(new_muY) - np.array(mu_y)) > thr)) != False
-    ):
-        mu_x = new_muX
-        mu_y = new_muY
-        cls_ = cluster(x, y, mu_x, mu_y)
-        new_muX, new_muY = re_mu(cls_, mu_x, mu_y)
-
-    print("Done")
-
-    plt.subplot(121)
-
-    plt.scatter(x, y)
-    plt.scatter(new_muX, new_muY)
-    # plt.show()
-
-    plt.subplot(122)
-    colors = ["r", "b", "g"]
-    for key, values in cls_.items():
-        cx = []
-        cy = []
-        for v in values:
-            cx.append(v[0])
-            cy.append(v[1])
-        plt.scatter(cx, cy, color=colors[key])
-
-    plt.show()
-
-
-print("自己做 K-Means")
-do_k_means()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -544,7 +574,6 @@ print("------------------------------------------------------------")  # 60個
 
 # 我們可以檢查一下, 確認答案是不是真的一樣!
 print(np.array_equal(clf.labels_, clf.predict(x)))  # 預測.predict
-
 
 
 """

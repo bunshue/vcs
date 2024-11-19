@@ -1,23 +1,10 @@
-"""
 
-**Source** Kevin Markham https://github.com/justmarkham/python-reference
-
-"""
-
-###############################################################################
-# Import libraries
-# ----------------
-#
-
-# 'generic import' of math module
 import math
 math.sqrt(25)
 
-# import a function
 from math import sqrt
 sqrt(25)    # no longer have to reference the module
 
-# import multiple functions at once
 from math import cos, floor
 
 # import all functions in a module (generally discouraged)

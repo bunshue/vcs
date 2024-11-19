@@ -30,9 +30,43 @@ import sklearn.linear_model
 from sklearn import datasets
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
 
+# 載入迴歸常見的評估指標
+from sklearn.metrics import mean_squared_error  # 均方誤差 Mean Squared Error (MSE)
+from sklearn.metrics import mean_absolute_error  # 平均絕對誤差 Mean Absolute Error (MAE)
+from sklearn.metrics import r2_score  # R-Squared擬合度
+from sklearn.metrics import accuracy_score  # 沒用到
+
+print("------------------------------------------------------------")  # 60個
+
+
+# 迴歸效果評估
+def evaluate_result(y_test, y_pred):
+    print("真實資料(y_test) :", y_test)
+    print("預測資料(y_pred) :", y_pred)
+
+    print("計算 真實測試資料(y_test) 和 預測資料(y_pred)的 MSE")
+    mse = np.sum((y_test - y_pred) ** 2) / len(y_test)
+    print("MSE =", mse)
+
+    # 平均絕對誤差 Mean Absolute Error (MAE)代表平均誤差，公式為所有實際值及預測值相減的絕對值平均。
+    cc = mean_absolute_error(y_test, y_pred)
+    print("MAE : Mean Absolute Error :", cc)
+
+    # 均方誤差 Mean Squared Error (MSE)比起MSE可以拉開誤差差距，算是蠻常用的指標，公式所有實際值及預測值相減的平方的平均
+    mse = mean_squared_error(y_test, y_pred)
+    print("MSE : Mean Squared Error :", mse)
+
+    # Root Mean Squared Error (RMSE)代表MSE的平方根。比起MSE更為常用，因為更容易解釋y。
+    cc = np.sqrt(mean_squared_error(y_test, y_pred))
+    print("RMS : Root Mean Squared Error :", cc)
+
+    print("計算 真實測試資料(y_test) 和 預測資料(y_pred) 的 決定係數r2 r2_score")
+    r2 = r2_score(y_test, y_pred)
+    print(f"決定係數R2 = {r2:.4f}")
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
+
 # 類別變數編碼
 # 測試資料
 
@@ -291,7 +325,6 @@ print("------------------------------------------------------------")  # 60個
 # SelectFromModel
 
 from sklearn.preprocessing import StandardScaler
-from sklearn.metrics import accuracy_score
 from sklearn.feature_selection import SelectFromModel
 from sklearn.svm import SVC
 
@@ -398,7 +431,6 @@ print("------------------------------------------------------------")  # 60個
 # 順序特徵選取(Sequential Feature Selection)
 
 from sklearn.preprocessing import StandardScaler
-from sklearn.metrics import accuracy_score
 from sklearn.feature_selection import SequentialFeatureSelector
 from sklearn.svm import SVC
 
@@ -689,9 +721,6 @@ print(cc)
 # 資料集說明
 # print(ds.DESCR)
 
-# 3. 資料分割
-from sklearn.metrics import accuracy_score
-
 # 指定X、Y
 X = df.values
 y = ds.target
@@ -841,9 +870,6 @@ print(cc)
 
 # 資料集說明
 # print(ds.DESCR)
-
-# 3. 資料分割
-from sklearn.metrics import accuracy_score
 
 # 指定X、Y
 X = df.values
@@ -1002,9 +1028,6 @@ print(cc)
 
 # 資料集說明
 # print(ds.DESCR)
-
-# 3. 資料分割
-from sklearn.metrics import accuracy_score
 
 # 指定X、Y
 X = df.values
@@ -1184,9 +1207,6 @@ print(cc)
 
 # 資料集說明
 # print(ds.DESCR)
-
-# 3. 資料分割
-from sklearn.metrics import accuracy_score
 
 # 指定X、Y
 X = df.values
@@ -1908,17 +1928,14 @@ clf = LogisticRegression()
 
 clf.fit(X_train, y_train)  # 學習訓練.fit
 
-# 模型評分
-
-from sklearn.metrics import accuracy_score
-
 y_pred = clf.predict(X_test)  # 預測.predict
 cc = accuracy_score(y_pred, y_test)
 print(cc)
 
 # 0.9668161434977578
 
-from sklearn.metrics import classification_report, confusion_matrix
+from sklearn.metrics import classification_report
+from sklearn.metrics import confusion_matrix
 
 print(classification_report(y_test, y_pred))
 
@@ -1942,7 +1959,7 @@ print(cc)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
+
 # 線性迴歸
 
 # OLS 公式
@@ -2053,7 +2070,6 @@ print("------------------------------------------------------------")  # 60個
 # 房價預測
 
 from sklearn.preprocessing import StandardScaler
-from sklearn.metrics import r2_score, mean_squared_error, mean_absolute_error
 
 # 載入 Boston 房價資料集
 
@@ -2265,10 +2281,6 @@ print(cc)
 cc = poly.get_feature_names_out(["x1", "x2"])
 print(cc)
 
-print("資料分割")
-
-from sklearn.model_selection import train_test_split
-
 X_train, X_test, y_train, y_test = train_test_split(X_new, y, test_size=0.2)
 
 # 查看陣列維度
@@ -2289,10 +2301,6 @@ linear_regression.fit(X_train_std, y_train)  # 學習訓練.fit
 
 cc = linear_regression.coef_, linear_regression.intercept_
 print(cc)
-
-# 模型評分
-
-from sklearn.metrics import r2_score, mean_squared_error, mean_absolute_error
 
 # R2、MSE、MAE
 y_pred = linear_regression.predict(X_test_std)  # 預測.predict
@@ -2374,7 +2382,7 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
+
 # 05_07_regression_vs_time_series
 
 # 迴歸(Regression)與時間序列(Time Series) 比較
@@ -2405,9 +2413,6 @@ plt.title("airline passengers")
 plt.show()
 
 # 迴歸(Regression)
-
-from sklearn.metrics import r2_score, mean_squared_error
-
 linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
 
 # X = df.index.astype(str).map(lambda x:x[:4]+x[5:7]).values.reshape(df.shape[0], -1)
@@ -2534,11 +2539,7 @@ residuals = pd.DataFrame(model.resid)
 residuals.plot()
 plt.show()
 
-# 資料分割
-
-test_size = 12
-
-from sklearn.model_selection import train_test_split
+test_size = 12 # ???
 
 # 資料分割
 X_train, X_test = train_test_split(series, test_size=test_size, shuffle=False)
@@ -2736,7 +2737,7 @@ print("MSE=", MSE)
 結論：時間序列預測準確率比迴歸高
 時間序列 MSE： 340， 迴歸 MSE： 2091
 """
-'''
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -2766,13 +2767,8 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 05_09_regularization_housing
-
 # 過度擬合與regularization
-
 # 載入房價資料集
-
-# 載入訓練資料
-from sklearn.model_selection import train_test_split
 
 train_df = pd.read_csv("./data/train.csv", index_col="ID")
 

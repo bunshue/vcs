@@ -1,23 +1,14 @@
-# -*- coding: utf-8 -*-
 """
-Created on Thu Mar 31 09:54:25 2016
-
-@author: edouard.duchesnay@cea.fr
-"""
-
-'''
 SVM & Kernel methods
 ====================
-'''
+"""
+
 import numpy as np
 from numpy.linalg import norm
 
 from mpl_toolkits.mplot3d import Axes3D
 import matplotlib.pyplot as plt
 import sklearn.metrics as metrics
-#%matplotlib inline
-#%matplotlib qt
-
 
 
 class KernDensity:

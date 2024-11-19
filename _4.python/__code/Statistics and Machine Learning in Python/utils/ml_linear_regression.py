@@ -1,22 +1,9 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Fri Feb  5 12:28:00 2016
-
-@author: edouard.duchesnay@cea.fr
-"""
-
-'''
-sklearn
-=======
-'''
 from mpl_toolkits.mplot3d import Axes3D
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import sklearn.linear_model as lm
 import sklearn.metrics as metrics
-#%matplotlib inline
-
 
 '''
 Multicollinearity

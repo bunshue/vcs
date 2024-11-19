@@ -746,25 +746,7 @@ print(accuracy_score(y_pred, y_test))  # 評価
 """
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-"""
-from sklearn.svm import SVC
-from sklearn.datasets import make_gaussian_quantiles
-from sklearn.metrics import accuracy_score
 
-# データ生成
-X, y = make_gaussian_quantiles(n_features=2, n_classes=2, n_samples=300)
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
-
-model = SVC()
-
-model.fit(X_train, y_train)  # 學習訓練.fit
-
-y_pred = model.predict(X_test)  # 預測.predict
-
-print(accuracy_score(y_pred, y_test))
-"""
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
 """
 from sklearn.naive_bayes import MultinomialNB
 
@@ -1118,68 +1100,6 @@ predictions = clf.predict(dx_test)  # 預測.predict
 
 print(clf.score(dx_train, dy_train))
 print(clf.score(dx_test, dy_test))
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# 線性支援向量機 (Linear SVM)
-
-from sklearn.preprocessing import StandardScaler
-from sklearn.svm import LinearSVC
-
-N = 500
-print("產生", N, "筆資料 2維 2群")
-dx, dy = make_blobs(n_samples=N, n_features=2, centers=2, random_state=0)
-
-dx_std = StandardScaler().fit_transform(dx)
-
-dx_train, dx_test, dy_train, dy_test = train_test_split(
-    dx_std, dy, test_size=0.2, random_state=0
-)
-
-linear_svm = LinearSVC()
-
-linear_svm.fit(dx_train, dy_train)  # 學習訓練.fit
-
-predictions = linear_svm.predict(dx_test)  # 預測.predict
-
-print(linear_svm.score(dx_train, dy_train))
-print(linear_svm.score(dx_test, dy_test))
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# 非線性 SVM
-
-from sklearn.datasets import make_moons
-from sklearn.preprocessing import StandardScaler
-from sklearn.svm import LinearSVC, SVC
-
-dx, dy = make_moons(n_samples=500, noise=0.15, random_state=0)
-
-dx_train, dx_test, dy_train, dy_test = train_test_split(
-    StandardScaler().fit_transform(dx), dy, test_size=0.2, random_state=0
-)
-
-linear_svm = LinearSVC()
-
-linear_svm.fit(dx_train, dy_train)  # 學習訓練.fit
-
-predictions = linear_svm.predict(dx_test)  # 預測.predict
-
-svm = SVC()
-
-svm.fit(dx_train, dy_train)  # 學習訓練.fit
-
-predictions = svm.predict(dx_test)  # 預測.predict
-
-print(linear_svm.score(dx_train, dy_train))
-
-print(linear_svm.score(dx_test, dy_test))
-
-print(svm.score(dx_train, dy_train))
-
-print(svm.score(dx_test, dy_test))
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
