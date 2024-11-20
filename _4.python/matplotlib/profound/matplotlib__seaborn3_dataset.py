@@ -33,38 +33,12 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
-df = sns.load_dataset("tips")  # 示例中的基本數據
-print(df.head())
+print("取得 sns 資料集")
+
+cc = sns.get_dataset_names()
+print(cc)
 
 print("------------------------------------------------------------")  # 60個
-
-print(sns.get_dataset_names())
-
-print("------------------------------------------------------------")  # 60個
-
-df = sns.load_dataset("tips")  # 示例中的基本數據
-
-sns.set()
-sns.relplot(x="total_bill", y="tip", data=df)
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-df = sns.load_dataset("tips")  # 示例中的基本數據
-
-sns.set()
-sns.relplot(x="total_bill", y="tip", hue="smoker", data=df)
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-df = sns.load_dataset("tips")  # 示例中的基本數據
-
-sns.set()
-sns.relplot(x="total_bill", y="tip", hue="smoker", style="smoker", data=df)
-plt.show()
-
 print("------------------------------------------------------------")  # 60個
 
 df = sns.load_dataset("fmri")  # 示例中的基本數據
@@ -80,226 +54,70 @@ sns.relplot(x="timepoint", y="signal", estimator=None, data=df, kind="line")
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
-
-df = sns.load_dataset("tips")  # 示例中的基本數據
-
-sns.set()
-sns.histplot(df["total_bill"], kde=False)
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-df = sns.load_dataset("tips")  # 示例中的基本數據
-
-sns.set()
-sns.histplot(df["total_bill"], kde=False)
-sns.histplot(df["total_bill"], kde=False, bins=20, color="red")
-sns.histplot(df["total_bill"], kde=False, bins=30, color="green")
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-df = sns.load_dataset("tips")  # 示例中的基本數據
-
-sns.set()
-sns.kdeplot(df["total_bill"], label="default")
-sns.kdeplot(df["total_bill"], bw_adjust=2, label="bw_adjust: 2")
-sns.kdeplot(df["total_bill"], bw_adjust=5, label="bw_adjust: 5")
-plt.legend()
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-df = sns.load_dataset("tips")  # 示例中的基本數據
-
-sns.set()
-sns.histplot(df["total_bill"], kde=True)
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-df = sns.load_dataset("tips")  # 示例中的基本數據
-
-sns.set()
-sns.displot(df["total_bill"], kde=True, rug=True)
-plt.show()
-
 print("------------------------------------------------------------")  # 60個
 
 df = sns.load_dataset("iris")  # 示例中的基本數據
-
 print(df.head())
-
-print("------------------------------------------------------------")  # 60個
-
-df = sns.load_dataset("iris")  # 示例中的基本數據
 
 sns.set()
 sns.jointplot(x="petal_length", y="petal_width", data=df)
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
-
-df = sns.load_dataset("iris")  # 示例中的基本數據
+print("------------------------------")  # 30個
 
 sns.set()
 sns.jointplot(x="petal_length", y="petal_width", kind="hex", data=df)
-
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
-
-df = sns.load_dataset("iris")  # 示例中的基本數據
+print("------------------------------")  # 30個
 
 sns.set()
 sns.jointplot(x="petal_length", y="petal_width", kind="kde", data=df)
-
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
-
-df = sns.load_dataset("iris")  # 示例中的基本數據
+print("------------------------------")  # 30個
 
 sns.set()
 sns.pairplot(df)
-
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
-
-df = sns.load_dataset("iris")  # 示例中的基本數據
+print("------------------------------")  # 30個
 
 sns.set()
 sns.pairplot(df, kind="scatter", diag_kind="kde", hue="species", palette="husl")
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
-
-df = sns.load_dataset("iris")  # 示例中的基本數據
+print("------------------------------")  # 30個
 
 sns.set()
 sns.stripplot(x="species", y="sepal_length", data=df)
-
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
-
-df = sns.load_dataset("iris")  # 示例中的基本數據
+print("------------------------------")  # 30個
 
 sns.set()
 sns.stripplot(x="species", y="sepal_length", jitter=False, data=df)
-
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
-
-df = sns.load_dataset("iris")  # 示例中的基本數據
+print("------------------------------")  # 30個
 
 sns.set()
 sns.swarmplot(x="species", y="sepal_length", data=df)
-
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
-
-df = sns.load_dataset("iris")  # 示例中的基本數據
+print("------------------------------")  # 30個
 
 sns.set()
 sns.boxplot(x="species", y="petal_length", data=df)
-
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
-
-df = sns.load_dataset("tips")  # 示例中的基本數據
-
-sns.set()
-sns.violinplot(x="day", y="total_bill", data=df)
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-df = sns.load_dataset("tips")  # 示例中的基本數據
-
-sns.set()
-sns.violinplot(x="day", y="total_bill", hue="sex", data=df)
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-df = sns.load_dataset("tips")  # 示例中的基本數據
-
-sns.set()
-sns.violinplot(x="day", y="total_bill", hue="sex", split=True, data=df)
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-df = sns.load_dataset("tips")  # 示例中的基本數據
-
-sns.set()
-sns.barplot(x="sex", y="total_bill", hue="day", data=df)
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-df = sns.load_dataset("tips")  # 示例中的基本數據
-
-sns.set()
-sns.countplot(x="sex", data=df)
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-df = sns.load_dataset("tips")  # 示例中的基本數據
-
-sns.set()
-sns.pointplot(x="sex", y="total_bill", hue="day", data=df)
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-df = sns.load_dataset("tips")  # 示例中的基本數據
-
-sns.set()
-sns.catplot(x="day", y="total_bill", data=df, kind="bar", hue="sex")
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-df = sns.load_dataset("tips")  # 示例中的基本數據
-
-sns.set()
-sns.catplot(x="day", y="total_bill", data=df, kind="bar", col="sex")
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-df = sns.load_dataset("tips")  # 示例中的基本數據
-
-sns.set()
-sns.catplot(x="sex", y="total_bill", data=df, kind="bar", col="day", col_wrap=2)
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-df = sns.load_dataset("iris")  # 示例中的基本數據
+print("------------------------------")  # 30個
 
 sns.set()
 sns.boxplot(x="petal_length", y="species", data=df)
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
-
-df = sns.load_dataset("iris")  # 示例中的基本數據
+print("------------------------------")  # 30個
 
 sns.set()
 sns.boxplot(data=df, orient="h")
@@ -308,23 +126,123 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-df = sns.load_dataset("tips")  # 示例中的基本數據
-
-sns.set()
-sns.regplot(x="total_bill", y="tip", data=df)
-sns.lmplot(x="total_bill", y="tip", data=df)
+# pairplot
+iris = sns.load_dataset("iris")
+iris.head()
+sns.pairplot(data=iris, hue="species")
 
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-df = sns.load_dataset("tips")  # 示例中的基本數據
+# violinplot
 
-sns.set()
-sns.regplot(x=df["total_bill"], y=df["tip"])
+fig, axs = plt.subplots(1, 2, figsize=(20, 10))
+iris = sns.load_dataset("iris")
+sns.violinplot(x="species", y="sepal_length", data=iris, ax=axs[0])
+sns.violinplot(x=iris.species, y=iris.sepal_length, ax=axs[1])
 
 plt.show()
 
+print("------------------------------------------------------------")  # 60個
+
+iris = sns.load_dataset("iris")
+iris.head()
+
+sns.set()
+sns.pairplot(iris, hue="species", height=3)
+print(iris)
+
+plt.show()
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+
+"""
+sns.pairplot()
+
+pairplot:pair是成对的意思，即是说这个用来展现变量两两之间的关系，线性、非线性、相关等等
+"""
+
+
+#使用鸢尾花数据画图
+
+
+#两种导入方式，这次是直接从sklearn.datasets导入
+import pandas as pd 
+from sklearn import datasets
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+#sns.set_style('white',{'font.sans-serif':['simhei','Arial']})  #解决中文不能显示问题
+
+iris=datasets.load_iris()
+iris_data= pd.DataFrame(iris.data,columns=iris.feature_names)
+iris_data['species']=iris.target_names[iris.target]
+# NG iris_data.head(3).append(iris_data.tail(3))   #前面三条+后面三条
+iris_data.rename(columns={"sepal length (cm)":"萼片长",
+                     "sepal width (cm)":"萼片宽",
+                     "petal length (cm)":"花瓣长",
+                     "petal width (cm)":"花瓣宽",
+                     "species":"种类"},inplace=True)
+kind_dict = {
+    "setosa":"山鸢尾",
+    "versicolor":"杂色鸢尾",
+    "virginica":"维吉尼亚鸢尾"
+}
+iris_data["种类"] = iris_data["种类"].map(kind_dict)
+
+#画变量之间关系的图
+
+#全部变量都放进去
+sns.pairplot(iris_data)
+plt.show()
+
+"""
+可以看到对角线上是各个属性的直方图（分布图），而非对角线上是两个不同属性之间的相关图，
+从图中我们发现，花瓣的长度和宽度之间以及萼片的长短和花瓣的长、宽之间具有比较明显的相关关系
+"""
+ 
+
+#kind:用于控制非对角线上图的类型，可选'scatter'与'reg'
+#diag_kind:用于控制对角线上的图分类型，可选'hist'与'kde'
+
+sns.pairplot(iris_data,kind='reg',diag_kind='ked')
+
+plt.show()
+
+
+sns.pairplot(iris_data,kind='reg',diag_kind='hist')
+
+plt.show()
+
+
+#hue：针对某一字段进行分类
+sns.pairplot(iris_data,hue='种类')
+plt.show()
+
+"""
+经过hue分类后的pairplot中发现，不论是从对角线上的分布图还是从分类后的散点图，
+都可以看出对于不同种类的花，其萼片长、花瓣长、花瓣宽的分布差异较大，换句话说，
+这些属性是可以帮助我们去识别不同种类的花的。
+比如，对于萼片、花瓣长度较短，花瓣宽度较窄的花，那么它大概率是山鸢尾
+"""
+
+#vars：研究某2个或者多个变量之间的关系vars,
+#x_vars,y_vars：选择数据中的特定字段，以list形式传入需要注意的是，x_vars和y_vars要同时指定
+
+sns.pairplot(iris_data,vars=["萼片长","花瓣长"])
+plt.show()
+
+sns.pairplot(iris_data,x_vars=["萼片长","花瓣宽"],y_vars=["萼片宽","花瓣长"]) 
+plt.show()
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 df = sns.load_dataset("anscombe")  # 示例中的基本數據
@@ -335,7 +253,7 @@ sns.lmplot(
 )
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 df = sns.load_dataset("anscombe")  # 示例中的基本數據
 
@@ -344,7 +262,7 @@ sns.lmplot(x="x", y="y", data=df.query("dataset=='II'"), order=2)
 
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 df = sns.load_dataset("anscombe")  # 示例中的基本數據
 
@@ -354,12 +272,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-tips = sns.load_dataset("tips")  # 示例中的基本數據
-
-# violinplot小提琴圖
-sns.violinplot(x="day", y="total_bill", hue="sex", split=True, data=tips)
-
-plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -369,360 +281,16 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-print("取得 sns 資料集")
-
-cc = sns.get_dataset_names()
-print(cc)
 
 print("------------------------------------------------------------")  # 60個
 
-print("sns dataset tips 01")
 
-sns.set(style="darkgrid", color_codes=True)  # 帶灰色網格的背景風格
-
-tips = sns.load_dataset("tips")  # 示例中的基本數據
-
-# 4.2.2 連續變量相關圖
-# Relplot關係類型圖表
-sns.relplot(x="total_bill", y="tip", hue="day", col="time", row="sex", data=tips)
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-print("sns dataset tips 02")
-
-tips = sns.load_dataset("tips")  # 示例中的基本數據
-
-# 點圖
-sns.scatterplot(x="total_bill", y="tip", hue="size", size="size", data=tips)
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-print("sns dataset tips 03")
-
-tips = sns.load_dataset("tips")  # 示例中的基本數據
-
-# 線圖
-sns.lineplot(x="tip", y="total_bill", hue="sex", style="sex", data=tips)
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-print("sns dataset tips 04")
-
-tips = sns.load_dataset("tips")  # 示例中的基本數據
-
-# 4.2.3 分類變量圖
-# stripplot散點圖
-sns.stripplot(x="day", y="total_bill", data=tips, jitter=True)
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-print("sns dataset tips 05")
-
-tips = sns.load_dataset("tips")  # 示例中的基本數據
-
-# swarmplot散點圖
-sns.swarmplot(x="day", y="total_bill", data=tips)
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-print("sns dataset tips 06")
-
-tips = sns.load_dataset("tips")  # 示例中的基本數據
-
-# boxplot箱式圖
-sns.boxplot(x="day", y="total_bill", hue="sex", data=tips)
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-print("sns dataset tips 07")
-
-tips = sns.load_dataset("tips")  # 示例中的基本數據
-
-# boxenplot變種箱式圖
-sns.boxenplot(x="day", y="total_bill", hue="sex", data=tips)
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-print("sns dataset tips 08")
-
-tips = sns.load_dataset("tips")  # 示例中的基本數據
-
-# pointplot分類統計圖
-sns.pointplot(
-    x="sex",
-    y="total_bill",
-    hue="smoker",
-    data=tips,
-    palette={"Yes": "g", "No": "m"},
-    markers=["^", "o"],
-    linestyles=["-", "--"],
-)
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-print("sns dataset tips 09")
-
-tips = sns.load_dataset("tips")  # 示例中的基本數據
-
-# barplot柱對比圖
-sns.barplot(x="smoker", y="total_bill", hue="sex", data=tips)
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-print("sns dataset tips 10")
-
-tips = sns.load_dataset("tips")  # 示例中的基本數據
-
-# 4.2.4 迴歸圖
-# 連續變量回歸圖
-sns.lmplot(x="total_bill", y="tip", data=tips)
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-print("sns dataset tips 11")
-
-tips = sns.load_dataset("tips")  # 示例中的基本數據
-
-# 分類變量回歸圖
-sns.lmplot(x="size", y="total_bill", data=tips, x_estimator=np.mean)
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-print("sns dataset tips 12")
-
-tips = sns.load_dataset("tips")  # 示例中的基本數據
-
-# FacetGrid結構化繪圖網格
-g = sns.FacetGrid(tips, col="time", row="smoker")  # 按行和列的分類做N個圖
-g.map(plt.hist, "total_bill", bins=10)  # 指定做圖方式
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-# 印刷品作圖
-print("sns dataset tips 13")
-
-sns.set_style("whitegrid")
-
-tips = sns.load_dataset("tips")  # 示例中的基本數據
-
-with sns.cubehelix_palette(
-    start=2.7, rot=0, dark=0.5, light=0.8, reverse=True, n_colors=5
-):
-    # 此處放置具體繪圖函數
-    sns.stripplot(x="day", y="total_bill", data=tips, jitter=True)
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-sns.set()
-tips = sns.load_dataset("tips")
-print(tips.shape)
-print(tips.head())
-
-plt.scatter(tips.total_bill, tips.tip)
-plt.xlabel("Total Bill")
-plt.ylabel("Tip")
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-
-sns.set(style="whitegrid")
-
-tips = sns.load_dataset("tips")
-male_tips = tips[tips.sex == "Male"]
-female_tips = tips[tips.sex == "Female"]
-
-plt.scatter(male_tips.total_bill, male_tips.tip, label="Male tips")
-plt.scatter(female_tips.total_bill, female_tips.tip, label="Female tips")
-
-plt.xlabel("Total Bill")
-plt.ylabel("Tip")
-plt.legend()
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-tips = sns.load_dataset("tips")
-sns.catplot(x="day", y="tip", data=tips)
-
-print("------------------------------------------------------------")  # 60個
-
-# scatterplot
-
-tips = sns.load_dataset("tips")
-fig, axs = plt.subplots(2, 1, figsize=(10, 20))
-sns.scatterplot(data=tips, x="total_bill", y="tip", hue="day", style="time", ax=axs[0])
-sns.scatterplot(
-    data=tips,
-    x="total_bill",
-    y="tip",
-    hue="size",
-    size="size",
-    sizes=(20, 80),
-    legend="full",
-)
-axs[0].legend(loc=1)
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-# boxplot
-
-fig, axs = plt.subplots(2, 1, figsize=(10, 15))
-tips = sns.load_dataset("tips")
-sns.boxplot(
-    x="day",
-    y="total_bill",
-    hue="smoker",
-    data=tips,
-    linewidth=1.5,
-    hue_order=["No", "Yes"],
-    ax=axs[0],
-)
-sns.boxplot(x="day", y="total_bill", data=tips, ax=axs[1])
-sns.swarmplot(x="day", y="total_bill", data=tips, color=".25", ax=axs[1])
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-# catplot
-
-# 分類散點圖
-# stript plot
-
-tips = sns.load_dataset("tips")
-sns.catplot(x="day", y="total_bill", data=tips)
-plt.show()
-
-# stript plot + jitter
-sns.catplot(x="day", y="total_bill", jitter=False, data=tips)
-plt.show()
-
-# swarm plot
-sns.catplot(x="day", y="total_bill", hue="sex", kind="swarm", data=tips)
-plt.show()
-
-
-# 分類分布圖
-##boxplot
-sns.catplot(x="day", y="total_bill", kind="box", data=tips)
-plt.show()
-
-sns.catplot(x="day", y="total_bill", hue="smoker", kind="box", data=tips)
-plt.show()
-
-# 小提琴圖(violin plot)
-sns.catplot(x="total_bill", y="day", hue="time", kind="violin", data=tips)
-plt.show()
-
-sns.catplot(x="day", y="total_bill", hue="sex", kind="violin", split=True, data=tips)
-plt.show()
-
-g = sns.catplot(x="day", y="total_bill", kind="violin", data=tips)
-sns.swarmplot(x="day", y="total_bill", color="k", size=3, data=tips, ax=g.ax)
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-# 使用子圖展示多重關係
-tips = sns.load_dataset("tips")
-sns.catplot(
-    x="day",
-    y="total_bill",
-    hue="smoker",
-    col="time",
-    aspect=0.7,
-    kind="swarm",
-    data=tips,
-    sharey=False,
-)
-plt.subplots_adjust(wspace=0.2)
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-## g.map內的plotting function可以是任何matplotlib, sns繪圖方法
-tips = sns.load_dataset("tips")
-
-g1 = sns.FacetGrid(tips, col="sex", hue="smoker")
-g1.map(plt.scatter, "total_bill", "tip", alpha=0.7)
-g1.add_legend()
-plt.show()
-
-g2 = sns.FacetGrid(tips, col="sex", hue="smoker")
-g2.map(sns.scatterplot, "total_bill", "tip", alpha=0.7)
-g2.add_legend()
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-# barplot
-
-fig, axs = plt.subplots(1, 2, figsize=(20, 8))
-data = sns.load_dataset("tips")
-print(data)
-##默認分組取平均值，capsize是設置誤差帽條(可和ci混用，用ci設置信心水準，用capsize設定帽蓋長度)
-sns.barplot(x="day", y="total_bill", hue="sex", data=data, ax=axs[0], capsize=0.1)
-sns.barplot(
-    x="tip", y="day", data=data, ci=95, ax=axs[1]
-)  # ci表示信心水準(可設置float,sd,None)axs[0].set_title('Plot1')
-axs[1].set_title("Plot2")
-axs[0].set_ylim(0, 30)
-# axs[1].set_xlim(0,4)axs[0].legend(loc=2)
-plt.subplots_adjust(wspace=0.2)
-plt.show()
-
-##若分組想要取其他種類的統計量，要透過estimator
-fig.ax = plt.subplots()
-# palette是著色表，可以參考以下網址
-# https://seaborn.pydata.org/generated/seaborn.color_palette.html#seaborn.color_palette
-sns.barplot(
-    x="day",
-    y="total_bill",
-    hue="sex",
-    ci=None,
-    data=data,
-    estimator=np.max,
-    palette="Set2",
-)
-
-plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -734,7 +302,7 @@ sns.heatmap(corr, cmap="YlGnBu")
 plt.show()
 
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 
 plt.subplots(figsize=(10, 5))
@@ -773,8 +341,7 @@ plt.show()
 sns.countplot(x="sex", hue="survived", data=titanic)
 plt.show()
 
-
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 # 分類統計估計圖 #barplot
 titanic = sns.load_dataset("titanic")
@@ -808,34 +375,10 @@ plt.show()
 
 
 print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# pairplot
-
-iris = sns.load_dataset("iris")
-iris.head()
-sns.pairplot(data=iris, hue="species")
-
-plt.show()
-
-
-print("------------------------------------------------------------")  # 60個
-
-# violinplot
-
-fig, axs = plt.subplots(1, 2, figsize=(20, 10))
-iris = sns.load_dataset("iris")
-sns.violinplot(x="species", y="sepal_length", data=iris, ax=axs[0])
-sns.violinplot(x=iris.species, y=iris.sepal_length, ax=axs[1])
-
-plt.show()
-
 print("------------------------------------------------------------")  # 60個
 
 # 匯入data
@@ -859,6 +402,8 @@ sns.lineplot(x="timepoint", y="signal", data=fmri, err_style="bars", ax=axs[1])
 # 設定hue="event"會畫出，不同的event對應的signal數值vs.timepoint
 plt.show()
 
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 flights = sns.load_dataset("flights")
 flights.head()
@@ -979,6 +524,10 @@ sns.histplot(
 plt.show()
 
 
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
 # jointplot
 
 penguins = sns.load_dataset("penguins")
@@ -1002,6 +551,11 @@ plt.show()
 # FacetGrid
 
 # 以上兩種搭配一起用
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 
 # heatmap
@@ -1039,9 +593,167 @@ ax = sns.heatmap(
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 折線圖 sns.lineplot
+# 用於顯示數值變量隨著某一維度（通常是時間）變化的趨勢。
+
+# 加載內建的 flights 數據集
+flights = sns.load_dataset("flights")
+
+# 繪製折線圖
+sns.lineplot(x="year", y="passengers", data=flights)
+plt.show()
+
+"""
+適合情境
+時間序列分析：當你想要觀察變數隨著時間的變化趨勢時，折線圖非常適合。例如，觀察某產品在一段時間內的銷售趨勢。
+多組比較：當你有多組數據需要在同一張圖中比較時，使用 hue 和 style 來區分不同的組別。
+"""
+
+# 熱力圖 sns.heatmap
+# 用於顯示矩陣數據的顏色編碼表示，通常用於顯示相關矩陣或數據透視表。
+
+"""NG
+# 繪製熱力圖
+flights_pivot = flights.pivot("month", "year", "passengers")
+sns.heatmap(flights_pivot, annot=True, fmt="d")
+plt.show()
+"""
+
+"""
+適合情境
+相關矩陣的可視化：當你想要檢視多個變數之間的相關性時，熱力圖是一個很好的工具。例如，觀察各變數之間的相關係數。
+矩陣數據的可視化：可以用來表示其他類型的矩陣數據，例如混淆矩陣。
+"""
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+
+# iris
+
+
+"""
+【資料分析】Seaborn 常用視覺化基礎操作語法彙整
+
+該使用 Seaborn 還是使用 Matplotlib ?
+
+Matplotlib 適合需要高度自定義和控制的情況，尤其是在進行更複雜的、非標準的視覺化時。
+
+Seaborn 適合進行快速的探索性數據分析，或是在需要美觀的統計圖表時使用。
+        它特別適合與 Pandas 數據框整合，用於視覺化數據的分佈和關係。
+
+Seaborn 提供了一個簡單且美觀的方式來進行資料視覺化，尤其是在進行統計分析時。
+Matplotlib 則提供了更靈活和強大的自定義功能，但可能需要更多的代碼和設置。
+兩者常常被結合使用，根據需要選擇適合的工具來進行視覺化。
+
+該選擇什麼圖來表現數據?
+散佈圖 sns.scatterplot: 當你想探索兩個連續變數之間的關係時，使用散佈圖。
+折線圖 sns.lineplot: 當你需要展示數據隨時間或其他連續變數變化的趨勢時，使用折線圖。
+柱狀圖 sns.barplot: 當你想比較分類變數的平均值或總值時，使用柱狀圖。
+直方圖 sns.histplot: 當你需要了解數據的分佈狀況時，使用直方圖。
+箱線圖 sns.boxplot: 當你想展示數據的集中趨勢及離群點時，使用箱線圖。
+熱力圖 sns.heatmap: 當你想可視化變數之間的相關性或矩陣數據時，使用熱力圖。
+成對圖 sns.pairplot: 當你需要同時查看多個變數之間的兩兩關係時，使用成對關係圖。
+
+"""
+
+# 散佈圖 sns.scatterplot
+# 用於顯示兩個數值變量之間的關係，並可以通過顏色和大小來表示其他維度。
+
+# 加載內建的 iris 數據集
+iris = sns.load_dataset("iris")
+
+# 繪製散佈圖
+sns.scatterplot(x="sepal_length", y="sepal_width", hue="species", data=iris)
+plt.show()
+
+"""
+適合情境
+變數間的關係：當你想要觀察兩個連續變數之間的關係時，散佈圖是理想的選擇。例如，觀察總賬單金額 (total_bill) 與小費 (tip) 之間的關係。
+分類變數的影響：你可以使用 hue、style 或 size 參數來檢視分類變數如何影響變數之間的關係。
+"""
+print("------------------------------------------------------------")  # 60個
+
+# 柱狀圖 sns.barplot
+# 用於顯示類別變量與數值變量之間的關係，通常用於比較不同組別的平均值。
+
+# 繪製柱狀圖
+sns.barplot(x="species", y="sepal_width", data=iris)
+plt.show()
+
+"""
+適合情境
+分類變數的比較：當你想要比較分類變數的平均值或總值時，柱狀圖是理想的選擇。例如，觀察不同日期的總賬單金額的平均值。
+組間比較：使用 hue 可以觀察不同組別間的差異，例如性別對總賬單金額的影響。
+"""
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 直方圖 sns.histplot
+# 用於顯示數值變量的分佈情況，可以用於單一變量或多變量的直方圖繪製。
+
+# 繪製直方圖
+sns.histplot(iris["sepal_length"], kde=True)
+plt.show()
+
+"""
+適合情境
+數據分佈：當你想要了解某個變數的數據分佈時，直方圖是最佳選擇。例如，觀察顧客的小費分佈情況。
+多組分佈比較：使用 hue 可以觀察不同組別的數據分佈情況，例如性別對小費分佈的影響。
+"""
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 成對圖 sns.pairplot
+# 用於顯示數據集中所有變量之間的成對關係，特別適合初步探索數據的關聯性。
+
+# 繪製成對圖
+sns.pairplot(iris, hue="species")
+plt.show()
+
+"""
+適合情境
+變數之間的成對關係：當你想要觀察多個變數之間的成對關係時，
+成對關係圖可以幫助你一次性查看所有變數的兩兩關係。
+例如，觀察小費數據集中的所有變數之間的關係。
+數據探索：在初步探索數據集時，可以快速了解數據集中各變數之間的關聯和分佈情況。
+"""
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 箱線圖 sns.boxplot
+# 用於顯示數值變量的分佈情況及其異常值，通常用於比較多個組別的數值變量。
+
+# 繪製箱線圖
+sns.boxplot(x="species", y="sepal_length", data=iris)
+plt.show()
+
+"""
+適合情境
+數據的集中趨勢與離群點：當你需要觀察數據的集中趨勢（如中位數）和數據的離群點時，
+箱線圖是非常有用的。例如，觀察不同日期的總賬單金額分佈及離群點。
+組間分佈比較：使用 hue 可以比較不同組別之間的數據分佈差異，例如性別對總賬單金額分佈的影響。
+"""
 
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 
 
 print("------------------------------------------------------------")  # 60個
@@ -1050,3 +762,4 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
+sys.exit()

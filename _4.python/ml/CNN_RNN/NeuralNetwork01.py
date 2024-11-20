@@ -146,11 +146,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 # CNN
@@ -346,9 +341,13 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# Final 用 tf.Keras 建構 CNN 模型
+# 用 tf.Keras 建構 CNN 模型
 
-from tensorflow.keras.layers import Activation, Dense, Conv2D, MaxPooling2D, Flatten
+from tensorflow.keras.layers import Activation
+from tensorflow.keras.layers import Dense
+from tensorflow.keras.layers import Conv2D
+from tensorflow.keras.layers import MaxPooling2D
+from tensorflow.keras.layers import Flatten
 from tensorflow.keras.models import load_model
 from tensorflow.keras.utils import to_categorical
 
@@ -388,8 +387,11 @@ print("------------------------------------------------------------")  # 60個
 # Final 使用 CNN 辨識 cifar10 圖片資料集
 
 from tensorflow.keras.datasets import cifar10
-from tensorflow.keras.layers import Dropout, Flatten, Activation
-from tensorflow.keras.layers import Conv2D, MaxPooling2D
+from tensorflow.keras.layers import Dropout
+from tensorflow.keras.layers import Flatten
+from tensorflow.keras.layers import Activation
+from tensorflow.keras.layers import Conv2D
+from tensorflow.keras.layers import MaxPooling2D
 from tensorflow.keras.models import load_model
 from tensorflow.keras.utils import to_categorical
 from tensorflow.keras.utils import plot_model
@@ -588,8 +590,11 @@ print("------------------------------------------------------------")  # 60個
 from tensorflow.keras import optimizers
 from tensorflow.keras.applications.vgg16 import VGG16
 from tensorflow.keras.datasets import cifar10
-from tensorflow.keras.layers import Dropout, Flatten, Input
-from tensorflow.keras.models import Model, Sequential
+from tensorflow.keras.layers import Dropout
+from tensorflow.keras.layers Flatten
+from tensorflow.keras.layers Input
+from tensorflow.keras.models import Model
+from tensorflow.keras.models import Sequential
 from tensorflow.keras.utils import to_categorical
 
 (X_train, y_train), (X_test, y_test) = cifar10.load_data()
@@ -660,14 +665,14 @@ print(pred)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-import numpy
-
 from keras.datasets import cifar10
 from keras.models import Sequential
 
-# from keras.layers.core import Dense, Activation 改為以下
-from tensorflow.python.keras.layers.core import Dense, Activation
-from keras.layers import Convolution2D, MaxPooling2D, Flatten
+from tensorflow.python.keras.layers.core import Dense
+from tensorflow.python.keras.layers.core import Activation
+from keras.layers import Convolution2D
+from keras.layers import MaxPooling2D
+from keras.layers import Flatten
 from keras.layers import Dropout
 from tensorflow.python.keras.utils import np_utils
 
@@ -727,7 +732,7 @@ model.fit(
 score = model.evaluate(X_test, Y_test, verbose=1)
 print("Test accuracy:", score[1])
 
-numpy.set_printoptions(threshold="nan")
+np.set_printoptions(threshold="nan")
 index = 0
 for layer in model.layers:
     filename = "conv_layer_" + str(index)

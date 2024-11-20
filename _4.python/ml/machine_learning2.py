@@ -853,22 +853,6 @@ print(model.transform(data)) # 変換したデータ
 """
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-"""
-from sklearn.manifold import TSNE
-from sklearn.datasets import load_digits
-
-data = load_digits()
-print(type(data))
-print(len(data))
-
-print("TSNE")
-n_components = 2  # 削減後の次元を2に設定
-model = TSNE(n_components=n_components)
-print(model.fit_transform(data.data))
-"""
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------")  # 30個
 ''' NG
@@ -1054,26 +1038,6 @@ model.fit(X_train_tfidf, twenty_train.target)  # 學習訓練.fit
 predicted = model.predict(X_test_tfidf)  # 預測.predict
 np.mean(predicted == twenty_test.target)
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# 変換後のベクトルデータを入力として機械学習モデルを適用する
-
-from sklearn.ensemble import RandomForestClassifier
-
-digits = datasets.load_digits()
-
-n_samples = len(digits.images)
-data = digits.images.reshape((n_samples, -1))
-
-model = RandomForestClassifier(n_estimators=10)
-
-model.fit(data[: n_samples // 2], digits.target[: n_samples // 2])  # 學習訓練.fit
-
-expected = digits.target[n_samples // 2 :]
-predicted = model.predict(data[n_samples // 2 :])  # 預測.predict
-
-print(metrics.classification_report(expected, predicted))
 '''
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
