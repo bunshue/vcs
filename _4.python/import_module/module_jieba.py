@@ -227,73 +227,6 @@ for w, c in Counter(cut_text).most_common():
 
 print("------------------------------------------------------------")  # 60個
 
-""" no module in kilo
-from sklearn.feature_extraction.text import TfidfVectorizer
-
-t1 = list(jieba.cut('今天台北天氣晴朗，風景區擠滿了人潮。'))
-t2 = list(jieba.cut('台北的天氣常常下雨。'))
-c1 = ' '.join(t1)
-c2 = ' '.join(t2)
-
-tf = TfidfVectorizer()
-data = tf.fit_transform([c1, c2])
-print('one-hot編碼：')
-print(data.toarray())
-print('特徵名稱：')
-print(tf.get_feature_names_out())
-
-print('------------------------------------------------------------')	#60個
-
-from sklearn.feature_extraction.text import CountVectorizer
-
-t1 = list(jieba.cut('今天台北天氣晴朗，風景區擠滿了人潮。'))
-t2 = list(jieba.cut('台北的天氣常常下雨。'))
-c1 = ' '.join(t1)
-print('第一句分詞： {}'.format(c1))
-c2 = ' '.join(t2)
-print('第二句分詞： {}'.format(c2))
-
-cv = CountVectorizer()
-data = cv.fit_transform([c1, c2])
-print('one-hot編碼：')
-print(data.toarray())
-print('特徵名稱：')
-print(cv.get_feature_names_out())
-
-print('------------------------------------------------------------')	#60個
-
-import numpy as np
-import pandas as pd
-
-print('TF-IDF逆文本頻率指數')
-
-from sklearn.feature_extraction.text import CountVectorizer 
-from sklearn.feature_extraction.text import TfidfTransformer  
-
-arr = ['第一天我參觀了美術館',
-       '第二天我參觀了博物館',
-       '第三天我參觀了動物園',]
-
-arr = [' '.join(jieba.cut(i)) for i in arr] # 分詞
-print(arr)
-
-vectorizer = CountVectorizer() 
-X = vectorizer.fit_transform(arr) 
-word = vectorizer.get_feature_names_out() 
-df = pd.DataFrame(X.toarray(), columns=word)
-print(df)
-
-transformer = TfidfTransformer()
-tfidf = transformer.fit_transform(X)
-weight = tfidf.toarray()
-for i in range(len(weight)): # 訪問每一句
-    print("第{}句：".format(i))
-    for j in range(len(word)):  # 訪問每個詞
-        if weight[i][j] > 0.05:  # 只顯示重要關鍵字
-            print(word[j],round(weight[i][j],2))  # 保留兩位小數
-
-print('------------------------------')	#30個
-
 # 寫程序實現TF-IDF方法
 
 from collections import Counter
@@ -352,7 +285,7 @@ print("4 ====================")
 keywords = jieba.analyse.textrank(original_text, topK = 20, withWeight = True, allowPOS = ('ns', 'n', 'vn', 'v'))
 for item in keywords:
     print(" %s =  %f " % (item[0].encode('utf_8'), item[1])) 
-"""
+
 print("------------------------------------------------------------")  # 60個
 
 # 04-jieba-suggest_freq.py
@@ -364,7 +297,6 @@ original_text = "名偵探柯南是根據日本漫畫家青山剛昌著名原作
 print("預設切分, cut_all不寫")
 print(" | ".join(jieba.cut(original_text)))
 
-""" NG
 jieba.suggest_freq('台中', True)
 print("預設切分, cut_all不寫")
 print(" | ".join(jieba.cut(original_text)))
@@ -384,7 +316,6 @@ print(" | ".join(jieba.cut(original_text)))
 jieba.suggest_freq(('中', '將'), True)
 print("預設切分, cut_all不寫")
 print(" | ".join(jieba.cut(original_text)))
-"""
 
 print("------------------------------------------------------------")  # 60個
 

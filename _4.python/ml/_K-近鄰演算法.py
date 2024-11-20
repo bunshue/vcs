@@ -57,13 +57,14 @@ iris_data = iris.data
 iris_label = iris.target
 
 # 可以印出前三筆資料：
-
 cc = iris_data[0:3]
 print(cc)
 
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
 train_data, test_data, train_label, test_label = train_test_split(
     iris_data, iris_label, test_size=0.2
 )
+# 訓練組8成, 測試組2成
 
 knn = KNeighborsClassifier()  # K近鄰演算法（K Nearest Neighbor, KNN）
 
@@ -87,7 +88,7 @@ from sklearn.preprocessing import StandardScaler
 
 N = 500
 print("產生", N, "筆資料 2維 2群")
-dx, dy = make_blobs(n_samples=N, n_features=2, centers=2, random_state=0)
+dx, dy = make_blobs(n_samples=N, n_features=2, centers=2, random_state=9487)
 
 print(dx.shape)
 print(dy.shape)
@@ -99,10 +100,10 @@ plt.scatter(dx.T[0], dx.T[1], c=dy, cmap="Dark2")
 plt.title("dx的分佈狀況, dy是用顏色表示")
 plt.grid(True)
 
-# StandardScaler
-# 將資料常態分布化，平均值會變為0, 標準差變為1，使離群值影響降低
-# MinMaxScaler與StandardScaler類似
-dx_std = StandardScaler().fit_transform(dx)
+from sklearn.preprocessing import StandardScaler
+
+scaler = StandardScaler()
+dx_std = scaler.fit_transform(dx)  # STD特徵縮放
 
 plt.subplot(122)
 plt.scatter(dx_std.T[0], dx_std.T[1], c=dy, cmap="Dark2")
@@ -111,10 +112,10 @@ plt.grid(True)
 
 plt.show()
 
-# 分割訓練資料集和測試資料集
-dx_train, dx_test, dy_train, dy_test = train_test_split(
-    dx_std, dy, test_size=0.2, random_state=0
-)
+
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+dx_train, dx_test, dy_train, dy_test = train_test_split(dx_std, dy, test_size=0.2)
+# 訓練組8成, 測試組2成
 
 print(dx.shape)
 print(dx_train.shape)
@@ -141,9 +142,11 @@ print("------------------------------------------------------------")  # 60個
 from sklearn.datasets import make_moons
 from sklearn.metrics import accuracy_score
 
-# データ生成
 X, y = make_moons(noise=0.3)
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
+
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+# 訓練組8成, 測試組2成
 
 knn = KNeighborsClassifier()  # K近鄰演算法（K Nearest Neighbor, KNN）
 
@@ -277,7 +280,9 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 # 訓練組8成, 測試組2成
 
 knn = KNeighborsClassifier(n_neighbors=5)
+
 knn.fit(X_train, y_train)
+
 y_pred = knn.predict(X_test)
 print(knn.score(X_test, y_test))
 

@@ -909,12 +909,12 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-""" # 缺檔案 face.yml 人臉模型檔
+""" NG 無檔案 face.yml 人臉模型檔
 print("OpenCV_ai_71")
 
 recognizer = cv2.face.LBPHFaceRecognizer_create()  # 啟用訓練人臉模型方法
 
-# 缺檔案
+# NG 無檔案
 # recognizer.read('face.yml')                               # 讀取人臉模型檔
 
 xml_filename = (

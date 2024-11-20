@@ -187,10 +187,10 @@ print(Y_test)
 # 導入sklearn.preprocessing庫的StandardScalar類。
 
 from sklearn.preprocessing import StandardScaler
+scaler = StandardScaler()
+X_train = scaler.fit_transform(X_train)  # STD特徵縮放
+X_test = scaler.transform(X_test)  # STD特徵縮放
 
-sc_X = StandardScaler()
-X_train = sc_X.fit_transform(X_train)
-X_test = sc_X.transform(X_test)
 print("---------------------")
 print("Step 6: Feature Scaling")
 print("X_train")
@@ -213,14 +213,12 @@ Y = dataset.iloc[:, 4].values
 X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.2)
 # 訓練組8成, 測試組2成
 
-# 特征缩放
-
-# Feature Scaling
+# 特征缩放 Feature Scaling
 from sklearn.preprocessing import StandardScaler
 
-sc = StandardScaler()
-X_train = sc.fit_transform(X_train)
-X_test = sc.transform(X_test)
+scaler = StandardScaler()
+X_train = scaler.fit_transform(X_train)  # STD特徵縮放
+X_test = scaler.transform(X_test)  # STD特徵縮放
 
 # 第二步：逻辑回归模型
 
@@ -335,13 +333,11 @@ y = dataset.iloc[:, 4].values
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 # 訓練組8成, 測試組2成
 
-# 第四步：特征缩放
-# Feature Scaling
+# 第四步：特征缩放 Feature Scaling
 from sklearn.preprocessing import StandardScaler
-
-sc = StandardScaler()
-X_train = sc.fit_transform(X_train)
-X_test = sc.transform(X_test)
+scaler = StandardScaler()
+X_train = scaler.fit_transform(X_train)  # STD特徵縮放
+X_test = scaler.transform(X_test)  # STD特徵縮放
 
 # 第五步：使用K-NN对训练集数据进行训练
 # Fitting K-NN to the Training set
@@ -412,14 +408,12 @@ y = dataset.iloc[:, 4].values
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 # 訓練組8成, 測試組2成
 
-# 第四步：特征量化
-# Feature Scaling
+# 第四步：特征量化  # Feature Scaling
 from sklearn.preprocessing import StandardScaler
+scaler = StandardScaler()
+X_train = scaler.fit_transform(X_train)  # STD特徵縮放
+X_test = scaler.fit_transform(X_test)  # STD特徵縮放
 
-sc = StandardScaler()
-X_train = sc.fit_transform(X_train)
-X_test = sc.fit_transform(X_test)
-# X_test = sc.transform(X_test) maybe
 # 第五步：适配SVM到训练集合
 # Fitting SVM to the Training set
 from sklearn.svm import SVC
@@ -536,10 +530,9 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 # Feature Scaling
 from sklearn.preprocessing import StandardScaler
-
-sc = StandardScaler()
-X_train = sc.fit_transform(X_train)
-X_test = sc.transform(X_test)
+scaler = StandardScaler()
+X_train = scaler.fit_transform(X_train)  # STD特徵縮放
+X_test = scaler.transform(X_test)  # STD特徵縮放
 
 # Fitting Decision Tree Classification to the Training set
 from sklearn.tree import DecisionTreeClassifier
@@ -630,10 +623,9 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 # Feature Scaling 特征缩放
 from sklearn.preprocessing import StandardScaler
-
-sc = StandardScaler()
-X_train = sc.fit_transform(X_train)
-X_test = sc.transform(X_test)
+scaler = StandardScaler()
+X_train = scaler.fit_transform(X_train)  # STD特徵縮放
+X_test = scaler.transform(X_test)  # STD特徵縮放
 
 # Fitting Random Forest to the Training set
 from sklearn.ensemble import RandomForestClassifier

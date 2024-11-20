@@ -522,7 +522,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("OpenCV_ai_94")
 
-""" 缺檔案
+""" NG 無檔案
 mp_drawing = mp.solutions.drawing_utils  # 建立繪圖方法
 mp_selfie_segmentation = mp.solutions.selfie_segmentation  # mediapipe 自拍分割方法
 
@@ -1244,8 +1244,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-""" 缺檔案
-
+""" NG 無檔案
 cap = cv2.VideoCapture(0)
 if not cap.isOpened():
     print("開啟攝影機失敗")

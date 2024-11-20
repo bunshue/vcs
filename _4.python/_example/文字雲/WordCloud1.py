@@ -312,7 +312,7 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-""" 無檔案 stopWords.txt
+""" NG 無檔案 stopWords.txt
 
 print("文字雲10: 製作文字雲 jieba 加 mask")
 

@@ -239,11 +239,6 @@ for y in range(0, H, h):
         # canvas.create_image(x, y, image = tile, anchor = NW)
         # print(x, y)
         # print(box)
-
-
-
-
-
 """
 """
 import tkinter.font
@@ -251,12 +246,9 @@ default_font = tkinter.font.nametofont('TkDefaultFont')
 default_font.configure(size=15)
 #然後沒用到
 """
-
-
 print("------------------------------------------------------------")  # 60個
 
-
-""" 缺檔案
+""" NG 無檔案
 def more():
     if variable_int.get()==0:
         str1="牛是對少部份牛科動物的統稱 \n\

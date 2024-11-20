@@ -299,10 +299,9 @@ r.encoding = "big5"
 df = pd.read_csv(StringIO(r.text), index_col=False, skiprows=1)
 print(df)
 """
-
 print('------------------------------------------------------------')	#60個
 
-"""無檔案
+""" NG 無檔案
 print('讀取證券商總公司基本資料')
 
 r = requests.get("http://www.twse.com.tw/brokerService/brokerList.csv?lang=zh")
@@ -368,8 +367,7 @@ https://www.ndc.gov.tw/News_Content.aspx?n=9D32B61B1E56E558&sms=9D3CAFD318C60877
 可以利用景氣對策信號判斷 ETF 的進入點。
 """
 
-"""無檔案
-
+""" NG 無檔案
 from io import BytesIO
 
 # 讀取 .xlsx 檔
@@ -386,34 +384,22 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-"""無檔案
+""" NG 無檔案
 print('讀取集保股權分散表')
 
 from bs4 import BeautifulSoup
-
 url = "http://www.tdcc.com.tw/smWeb/QryStock.jsp"
-
 r = requests.get(url)
-
 soup = BeautifulSoup(r.text, 'lxml')
-
 sca_date = soup.select("option")
-
 url = "http://www.tdcc.com.tw/smWeb/QryStock.jsp?SCA_DATE={}&SqlMethod=StockNo&StockNo={}&StockName=&sub=%ACd%B8%DF"
-
 full_url = url.format(sca_date[0].text, '2330')
-
 r = requests.get(full_url)
-
 soup = BeautifulSoup(r.text, 'lxml')
-
 html_table = soup.select('.mt')
-
 dfs = pd.read_html(str(html_table[1]), header=0)
-
 print(dfs[0])
 """
-
 print('------------------------------------------------------------')	#60個
 
 print('------------------------------------------------------------')	#60個

@@ -2290,7 +2290,7 @@ import numpy as np
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-""" 缺檔案
+""" NG 無檔案
 model = tf.keras.models.load_model('keras_model.h5', compile=False)   # 載入 model
 data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)           # 設定資料陣列
 
@@ -2327,7 +2327,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-""" 缺檔案
+""" NG 無檔案
 model = tf.keras.models.load_model('keras_model.h5', compile=False)  # 載入模型
 data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)          # 設定資料陣列
 
@@ -2378,7 +2378,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-""" 缺檔案
+""" NG 無檔案
 from PIL import ImageFont, ImageDraw, Image  # 載入 PIL 相關函式庫
 
 fontpath = 'NotoSansTC-Regular.otf'          # 設定字型路徑
@@ -2429,7 +2429,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-""" 缺檔案
+""" NG 無檔案
 model = tf.keras.models.load_model('keras_model.h5', compile=False)  # 載入模型
 data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)          # 設定資料陣列
 
@@ -2477,7 +2477,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-""" 缺檔案
+""" NG 無檔案
 from PIL import ImageFont, ImageDraw, Image  # 載入 PIL 相關函式庫
 
 fontpath = 'NotoSansTC-Regular.otf'          # 設定字型路徑

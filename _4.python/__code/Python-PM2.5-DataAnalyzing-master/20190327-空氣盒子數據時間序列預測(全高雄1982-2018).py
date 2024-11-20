@@ -28,9 +28,7 @@ from matplotlib.pylab import rcParams
 
 rcParams["figure.figsize"] = 20, 10
 
-# for normalizing data
-from sklearn.preprocessing import MinMaxScaler
-
+from sklearn.preprocessing import MinMaxScaler# MMS特徵縮放
 scaler = MinMaxScaler(feature_range=(0, 1))
 
 df = pd.read_excel("data/TimeSeries_198211-201811.xlsx")
@@ -97,7 +95,7 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-from sklearn.preprocessing import MinMaxScaler
+from sklearn.preprocessing import MinMaxScaler # MMS特徵縮放
 from keras.models import Sequential
 from keras.layers import Dense, Dropout, LSTM
 
@@ -120,7 +118,7 @@ valid = dataset[2825:, :]
 
 # converting dataset into x_train and y_train
 scaler = MinMaxScaler(feature_range=(0, 1))
-scaled_data = scaler.fit_transform(dataset)
+scaled_data = scaler.fit_transform(dataset)# MMS特徵縮放
 
 x_train, y_train = [], []
 for i in range(60, len(train)):

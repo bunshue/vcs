@@ -1078,32 +1078,6 @@ print(metrics.classification_report(expected, predicted))
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 邏輯迴歸 (logistic regression)
-from sklearn.preprocessing import StandardScaler
-
-N = 500
-print("產生", N, "筆資料 2維 2群")
-dx, dy = make_blobs(n_samples=N, n_features=2, centers=2, random_state=0)
-
-dx_std = StandardScaler().fit_transform(dx)
-
-dx_train, dx_test, dy_train, dy_test = train_test_split(
-    dx_std, dy, test_size=0.2, random_state=0
-)
-
-# 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
-clf = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
-
-clf.fit(dx_train, dy_train)  # 學習訓練.fit
-
-predictions = clf.predict(dx_test)  # 預測.predict
-
-print(clf.score(dx_train, dy_train))
-print(clf.score(dx_test, dy_test))
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 # 6-1 探索性資料分析──以Titanic(鐵達尼號)之生還預測為例
 # 資料科學 0. 問個感興趣的問題
 
@@ -5408,7 +5382,7 @@ print("------------------------------------------------------------")  # 60個
 from time import time
 from sklearn.datasets import load_files
 
-""" 無檔案
+""" NG 無檔案
 print("loading documents ...")
 t = time()
 docs = load_files('datasets/clustering/data')

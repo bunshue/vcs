@@ -3122,8 +3122,7 @@ print("------------------------------------------------------------")  # 60個
 # taiwanlottery SP
 print("------------------------------------------------------------")  # 60個
 
-
-""" 無檔案 Example.html
+""" NG 無檔案 Example.html
 from bs4 import BeautifulSoup
 
 with open("Example.html", "r", encoding="utf8") as fp:

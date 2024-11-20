@@ -75,93 +75,7 @@ def evaluate_result(y_test, y_pred):
 
 
 print("------------------------------------------------------------")  # 60個
-
-print('資料前處理方式(4)')
-"""
-1. StandardScaler (平均值和標準差)
-
-Standardization 平均&變異數標準化
-將所有特徵標準化，也就是高斯分佈。使得數據的平均值為0，方差為1。
-適合的使用時機於當有些特徵的方差過大時，使用標準化能夠有效地讓模型快速收斂。
-
-2. MinMaxScaler(最小最大值標準化)
-
-MinMaxScaler 最小最大值標準化
-在MinMaxScaler中是給定了一個明確的最大值與最小值。
-每個特徵中的最小值變成了0，最大值變成了1。數據會縮放到到[0,1]之間。
-
-3. MaxAbsScaler（絕對值最大標準化）
-
-MaxAbsScaler 絕對值最大標準化
-MaxAbsScaler 與 MinMaxScaler 類似，所有數據都會除以該列絕對值後的最大值。
-數據會縮放到到[-1,1]之間。
-
-4. RobustScaler
-
-RobustScaler 中位數和四分位數標準化
-可以有效的縮放帶有outlier的數據，透過Robust如果數據中含有異常值在縮放中會捨去。
-"""
-
-dataset = pd.read_csv("data/studentscores.csv")
-X = dataset.iloc[:, :1].values
-y = dataset.iloc[:, 1].values
-
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
-x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
-# 訓練組8成, 測試組2成
-
-# 特徵縮放
-from sklearn import preprocessing
-
-scaler = preprocessing.StandardScaler()
-
-print('特徵縮放前, 資料的平均值與標準差 :', x_train.mean(), x_train.std())
-
-x_train_std = scaler.fit_transform(x_train)  # 特徵縮放
-
-print('特徵縮放後, 資料的平均值與標準差 :', x_train_std.mean(), x_train_std.std())
-
-
-from sklearn.preprocessing import MinMaxScaler
-
-scaler = MinMaxScaler()
-X = scaler.fit_transform(X)
-
-
-from sklearn.preprocessing import MaxAbsScaler
-# MaxAbsScaler
-# 簡單測試
-
-# 測試資料
-
-data = np.array([[1.0, -1.0, 2.0], [2.0, 0.0, 0.0], [0.0, 1.0, -1.0]])
-print(data)
-
-from sklearn.preprocessing import MaxAbsScaler
-
-scaler = MaxAbsScaler()
-cc = scaler.fit_transform(data)
-print(cc)
-
-# 驗證
-
-# 計算最大值
-max1 = np.max(data, axis=0)
-
-# MaxAbsScaler計算
-cc = data / max1
-print(cc)
-
-
-
-data = np.array([[1.0, -2.0, 2.0], [-2.0, 1.0, 3.0], [4.0, 1.0, -2.0]])
-print(data)
-
-from sklearn.preprocessing import RobustScaler
-
-scaler = RobustScaler()
-cc = scaler.fit_transform(data)
-print(cc)
+print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -517,9 +431,9 @@ from sklearn import preprocessing
 
 df = sns.load_dataset("tips")
 cc = df.head(30)
-#print(cc)
+# print(cc)
 cc = df.info()
-#print(cc)
+# print(cc)
 
 # 資料清理、資料探索與分析
 
@@ -531,10 +445,6 @@ df.time = df.time.map({"Lunch": 0, "Dinner": 1}).astype(int)
 
 cc = df.isna().sum()
 print(cc)
-
-# 不須進行特徵工程
-
-# 資料分割
 
 # 指定X，並轉為 Numpy 陣列
 X = df.drop("tip", axis=1).values
@@ -552,12 +462,12 @@ print(X_train.shape, X_test.shape, y_train.shape, y_test.shape)
 
 # 特徵縮放
 scaler = preprocessing.StandardScaler()
-print('特徵縮放')
+print("特徵縮放")
 print(X_train)
-X_train_std = scaler.fit_transform(X_train)#特徵縮放
+X_train_std = scaler.fit_transform(X_train)  # 特徵縮放
 print(X_train_std)
 
-X_test_std = scaler.transform(X_test)#特徵縮放
+X_test_std = scaler.transform(X_test)  # 特徵縮放
 
 linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
 
@@ -754,6 +664,7 @@ S1~S6一年后疾病级数指标。
 
 Target为一年后患疾病的定量指标，因此适合与回归任务
 """
+
 
 def do_linear_regression():
     diabetes = datasets.load_diabetes()
@@ -977,9 +888,9 @@ new_x = np.array([6]).reshape((-1, 1))
 y_pred = model.predict(new_x)
 
 # Print the coefficients and predicted outcome
-print('Coefficients: ', model.coef_)
-print('Intercept: ', model.intercept_)
-print('Predicted outcome: ', y_pred[0])
+print("Coefficients: ", model.coef_)
+print("Intercept: ", model.intercept_)
+print("Predicted outcome: ", y_pred[0])
 
 
 print("------------------------------------------------------------")  # 60個
@@ -999,9 +910,9 @@ new_x = 6
 y_pred = slope * new_x + intercept
 
 # Print the slope, y-intercept, and predicted outcome
-print('Slope: ', slope)
-print('Y-intercept: ', intercept)
-print('Predicted outcome: ', y_pred)
+print("Slope: ", slope)
+print("Y-intercept: ", intercept)
+print("Predicted outcome: ", y_pred)
 
 
 print("------------------------------------------------------------")  # 60個
@@ -1022,20 +933,16 @@ new_x = 6
 y_pred = coeffs[0] * new_x + coeffs[1]
 
 # Print the coefficients and predicted outcome
-print('Coefficients: ', coeffs)
-print('Predicted outcome: ', y_pred)
-
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
+print("Coefficients: ", coeffs)
+print("Predicted outcome: ", y_pred)
 
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個

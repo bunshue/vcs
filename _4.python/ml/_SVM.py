@@ -46,8 +46,13 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
+from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
+
+print("------------------------------------------------------------")  # 60個
+
 from sklearn.svm import SVC
-'''
+from sklearn.svm import LinearSVC  # 線性支援向量機 (Linear SVM)
+
 print("------------------------------------------------------------")  # 60個
 
 plt.figure(
@@ -108,18 +113,18 @@ P = np.c_[X.ravel(), Y.ravel()]
 z = clf.predict(P)  # 預測.predict
 Z = z.reshape(X.shape)
 
-print("------------------------------")	#30個
+print("------------------------------")  # 30個
 
-print('顯示結果 1')
+print("顯示結果 1")
 
 plt.subplot(232)
 plt.contourf(X, Y, Z, alpha=0.3, cmap="Paired")
 plt.scatter(x[:, 0], x[:, 1], c=y, cmap="Paired")
 plt.title("預測的結果1")
 
-print("------------------------------")	#30個
+print("------------------------------")  # 30個
 
-print('顯示結果 2')
+print("顯示結果 2")
 x1, x2 = np.meshgrid(np.arange(-7, 7, 0.2), np.arange(-7, 7, 0.2))
 X = np.c_[x1.ravel(), x2.ravel()]
 Z = clf.predict(X)  # 預測.predict
@@ -131,9 +136,9 @@ plt.contourf(x1, x2, z, alpha=0.3)
 plt.scatter(x[:, 0], x[:, 1], s=100, c=y)
 plt.title("預測的結果2")
 
-print("------------------------------")	#30個
+print("------------------------------")  # 30個
 
-print('顯示結果 3')
+print("顯示結果 3")
 
 gd = np.array([[i, j] for i in np.arange(-7, 7, 0.2) for j in np.arange(-7, 7, 0.2)])
 
@@ -146,9 +151,9 @@ plt.scatter(x[:, 0], x[:, 1], s=100, c=y)  # 依據y給定顏色
 plt.scatter(xx, yy, c="r", s=100)
 plt.title("預測的結果3")
 
-print("------------------------------")	#30個
+print("------------------------------")  # 30個
 
-print('顯示結果 4')
+print("顯示結果 4")
 
 x1, x2 = np.meshgrid(np.arange(-7, 7, 0.2), np.arange(-7, 7, 0.2))
 X = np.c_[x1.ravel(), x2.ravel()]
@@ -158,9 +163,9 @@ plt.subplot(235)
 plt.scatter(X[:, 0], X[:, 1], s=10, c=c)
 plt.title("預測的結果4")
 
-print("------------------------------")	#30個
+print("------------------------------")  # 30個
 
-print('顯示結果 5')
+print("顯示結果 5")
 
 x = np.linspace(-7, 7, 30)
 y = np.linspace(-7, 7, 30)
@@ -275,13 +280,11 @@ plt.title("等高線圖")
 plt.grid()
 
 plt.show()
-'''
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 from sklearn import datasets
-from sklearn.model_selection import train_test_split
-from sklearn.svm import SVC
 from sklearn.metrics import accuracy_score
 
 # Load dataset
@@ -291,35 +294,37 @@ iris = datasets.load_iris()
 X = iris.data[:, :2]  # We only take the first two features
 y = iris.target
 
-# Split data into training and testing sets
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+# 訓練組8成, 測試組2成
 
 # Create SVM classifier object
-svm = SVC(kernel='linear')
+svm = SVC(kernel="linear")  # SVM 函數學習機
 
 # Train SVM classifier
-svm.fit(X_train, y_train)
+svm.fit(X_train, y_train)  # 學習訓練.fit
 
 # Predict target values for test data
-y_pred = svm.predict(X_test)
+y_pred = svm.predict(X_test)  # 預測.predict
 
 # Evaluate accuracy of SVM classifier
 accuracy = accuracy_score(y_test, y_pred)
 
-print('Accuracy of SVM classifier: {:.2f}'.format(accuracy))
+print("Accuracy of SVM classifier: {:.2f}".format(accuracy))
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
-from sklearn.svm import SVC
 from sklearn.datasets import make_gaussian_quantiles
 from sklearn.metrics import accuracy_score
 
 X, y = make_gaussian_quantiles(n_features=2, n_classes=2, n_samples=300)
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
 
-model = SVC()
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+# 訓練組8成, 測試組2成
+
+model = SVC()  # SVM 函數學習機
 
 model.fit(X_train, y_train)  # 學習訓練.fit
 
@@ -332,20 +337,20 @@ print("------------------------------------------------------------")  # 60個
 
 # 線性支援向量機 (Linear SVM)
 
-from sklearn.preprocessing import StandardScaler
-from sklearn.svm import LinearSVC
-
 N = 500
 print("產生", N, "筆資料 2維 2群")
-dx, dy = make_blobs(n_samples=N, n_features=2, centers=2, random_state=0)
+dx, dy = make_blobs(n_samples=N, n_features=2, centers=2)
 
-dx_std = StandardScaler().fit_transform(dx)
+from sklearn.preprocessing import StandardScaler
 
-dx_train, dx_test, dy_train, dy_test = train_test_split(
-    dx_std, dy, test_size=0.2, random_state=0
-)
+scaler = StandardScaler()
+dx_std = scaler.fit_transform(dx)  # STD特徵縮放
 
-linear_svm = LinearSVC()
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+dx_train, dx_test, dy_train, dy_test = train_test_split(dx_std, dy, test_size=0.2)
+# 訓練組8成, 測試組2成
+
+linear_svm = LinearSVC()  # SVM 函數學習機
 
 linear_svm.fit(dx_train, dy_train)  # 學習訓練.fit
 
@@ -360,22 +365,25 @@ print("------------------------------------------------------------")  # 60個
 # 非線性 SVM
 
 from sklearn.datasets import make_moons
+
+dx, dy = make_moons(n_samples=500, noise=0.15)
+
 from sklearn.preprocessing import StandardScaler
-from sklearn.svm import LinearSVC, SVC
 
-dx, dy = make_moons(n_samples=500, noise=0.15, random_state=0)
+scaler = StandardScaler()
+xx = scaler.fit_transform(dx)  # STD特徵縮放
 
-dx_train, dx_test, dy_train, dy_test = train_test_split(
-    StandardScaler().fit_transform(dx), dy, test_size=0.2, random_state=0
-)
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+dx_train, dx_test, dy_train, dy_test = train_test_split(xx, dy, test_size=0.2)
+# 訓練組8成, 測試組2成
 
-linear_svm = LinearSVC()
+linear_svm = LinearSVC()  # SVM 函數學習機
 
 linear_svm.fit(dx_train, dy_train)  # 學習訓練.fit
 
 predictions = linear_svm.predict(dx_test)  # 預測.predict
 
-svm = SVC()
+svm = SVC()  # SVM 函數學習機
 
 svm.fit(dx_train, dy_train)  # 學習訓練.fit
 
@@ -395,8 +403,6 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-
 
 
 print("------------------------------------------------------------")  # 60個

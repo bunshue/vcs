@@ -1,7 +1,6 @@
 """
 邏輯迴歸 (logistic regression)
 
-
 """
 
 print("------------------------------------------------------------")  # 60個
@@ -28,9 +27,13 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 print("------------------------------------------------------------")  # 60個
 
 import sklearn.linear_model
+from sklearn import datasets
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import confusion_matrix
+
+# 特徵縮放
+from sklearn.preprocessing import StandardScaler
 
 print("------------------------------------------------------------")  # 60個
 
@@ -81,7 +84,7 @@ print("------------------------------------------------------------")  # 60個
 
 # 尋找銀行行銷活動目標客戶
 
-from sklearn import datasets, preprocessing
+from sklearn import preprocessing
 
 df = pd.read_csv("./data/banking.csv")
 cc = df.head()
@@ -153,10 +156,9 @@ print(cc)
 # ((32950, 63), (8238, 63), (32950,), (8238,))
 
 # 特徵縮放
-
-scaler = preprocessing.StandardScaler()
-X_train_std = scaler.fit_transform(X_train)
-X_test_std = scaler.transform(X_test)
+scaler = StandardScaler()
+X_train_std = scaler.fit_transform(X_train)  # STD特徵縮放
+X_test_std = scaler.transform(X_test)  # STD特徵縮放
 
 # 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
 logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
@@ -404,8 +406,6 @@ print("------------------------------------------------------------")  # 60個
 # SelectKBest 單變數特徵選取(Univariate feature selection)
 # SelectKBest 挑選出K個分數最高的特徵
 
-from sklearn import datasets
-from sklearn.preprocessing import StandardScaler
 from sklearn.feature_selection import SelectKBest
 from sklearn.feature_selection import chi2
 
@@ -456,10 +456,9 @@ cc = X_train.shape, X_test.shape, y_train.shape, y_test.shape
 print(cc)
 
 # 特徵縮放
-
 scaler = StandardScaler()
-X_train_std = scaler.fit_transform(X_train)
-X_test_std = scaler.transform(X_test)
+X_train_std = scaler.fit_transform(X_train)  # STD特徵縮放
+X_test_std = scaler.transform(X_test)  # STD特徵縮放
 
 # 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
 logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
@@ -497,8 +496,8 @@ print(X_train.shape, X_test.shape, y_train.shape, y_test.shape)
 
 # 特徵縮放
 scaler = StandardScaler()
-X_train_std = scaler.fit_transform(X_train)
-X_test_std = scaler.transform(X_test)
+X_train_std = scaler.fit_transform(X_train)  # STD特徵縮放
+X_test_std = scaler.transform(X_test)  # STD特徵縮放
 
 # 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
 logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
@@ -516,8 +515,6 @@ print("------------------------------------------------------------")  # 60個
 
 # SelectPercentile 單變數特徵選取(Univariate feature selection)
 
-from sklearn import datasets
-from sklearn.preprocessing import StandardScaler
 from sklearn.feature_selection import SelectPercentile
 from sklearn.feature_selection import chi2
 
@@ -555,10 +552,9 @@ cc = X_train.shape, X_test.shape, y_train.shape, y_test.shape
 print(cc)
 
 # 特徵縮放
-
 scaler = StandardScaler()
-X_train_std = scaler.fit_transform(X_train)
-X_test_std = scaler.transform(X_test)
+X_train_std = scaler.fit_transform(X_train)  # STD特徵縮放
+X_test_std = scaler.transform(X_test)  # STD特徵縮放
 
 # 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
 logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
@@ -594,8 +590,8 @@ print(X_train.shape, X_test.shape, y_train.shape, y_test.shape)
 
 # 特徵縮放
 scaler = StandardScaler()
-X_train_std = scaler.fit_transform(X_train)
-X_test_std = scaler.transform(X_test)
+X_train_std = scaler.fit_transform(X_train)  # STD特徵縮放
+X_test_std = scaler.transform(X_test)  # STD特徵縮放
 
 # 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
 logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
@@ -613,8 +609,6 @@ print("------------------------------------------------------------")  # 60個
 
 # GenericUnivariateSelect 單變數特徵選取(Univariate feature selection)
 
-from sklearn import datasets
-from sklearn.preprocessing import StandardScaler
 from sklearn.feature_selection import GenericUnivariateSelect, chi2
 
 print("數字資料集")
@@ -652,10 +646,9 @@ cc = X_train.shape, X_test.shape, y_train.shape, y_test.shape
 print(cc)
 
 # 特徵縮放
-
 scaler = StandardScaler()
-X_train_std = scaler.fit_transform(X_train)
-X_test_std = scaler.transform(X_test)
+X_train_std = scaler.fit_transform(X_train)  # STD特徵縮放
+X_test_std = scaler.transform(X_test)  # STD特徵縮放
 
 # 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
 clf = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
@@ -691,8 +684,8 @@ print(X_train.shape, X_test.shape, y_train.shape, y_test.shape)
 
 # 特徵縮放
 scaler = StandardScaler()
-X_train_std = scaler.fit_transform(X_train)
-X_test_std = scaler.transform(X_test)
+X_train_std = scaler.fit_transform(X_train)  # STD特徵縮放
+X_test_std = scaler.transform(X_test)  # STD特徵縮放
 
 # 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
 clf = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
@@ -710,8 +703,6 @@ print("------------------------------------------------------------")  # 60個
 
 # 遞迴特徵消去法(Recursive feature elimination)
 
-from sklearn import datasets
-from sklearn.preprocessing import StandardScaler
 from sklearn.feature_selection import RFE
 from sklearn.svm import SVC
 
@@ -745,10 +736,9 @@ cc = X_train.shape, X_test.shape, y_train.shape, y_test.shape
 print(cc)
 
 # 特徵縮放
-
 scaler = StandardScaler()
-X_train_std = scaler.fit_transform(X_train)
-X_test_std = scaler.transform(X_test)
+X_train_std = scaler.fit_transform(X_train)  # STD特徵縮放
+X_test_std = scaler.transform(X_test)  # STD特徵縮放
 
 # 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
 clf = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
@@ -784,8 +774,8 @@ print(X_train.shape, X_test.shape, y_train.shape, y_test.shape)
 
 # 特徵縮放
 scaler = StandardScaler()
-X_train_std = scaler.fit_transform(X_train)
-X_test_std = scaler.transform(X_test)
+X_train_std = scaler.fit_transform(X_train)  # STD特徵縮放
+X_test_std = scaler.transform(X_test)  # STD特徵縮放
 
 # 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
 clf = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
@@ -801,7 +791,62 @@ print(cc)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+N = 500
+print("產生", N, "筆資料 2維 2群")
+dx, dy = make_blobs(n_samples=N, n_features=2, centers=2, random_state=0)
 
+scaler = StandardScaler()
+dx_std = scaler.fit_transform(dx)  # STD特徵縮放
+
+dx_train, dx_test, dy_train, dy_test = train_test_split(
+    dx_std, dy, test_size=0.2, random_state=0
+)
+
+# 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
+clf = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
+
+clf.fit(dx_train, dy_train)  # 學習訓練.fit
+
+predictions = clf.predict(dx_test)  # 預測.predict
+
+print(clf.score(dx_train, dy_train))
+print(clf.score(dx_test, dy_test))
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+""" NG 無檔案
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import train_test_split
+from sklearn import metrics
+
+import joblib
+
+train_df = pd.read_csv('Fake_news_data/train.csv')
+
+train_df.dropna()
+
+train_text = train_df['text'].astype(str)
+train_label = train_df['label']
+
+count_vectorizer = CountVectorizer(ngram_range=(1, 2), stop_words='english')
+count_train = count_vectorizer.fit_transform(train_text)
+
+joblib.dump(count_vectorizer, 'count_vectorizer.pkl')
+
+X_train, X_test, Y_train, Y_test = train_test_split(
+    count_train, train_label, test_size=0.2, random_state=7)
+
+classifier = LogisticRegression()
+classifier.fit(X_train, Y_train)
+pred = classifier.predict(X_test)
+
+score = metrics.accuracy_score(Y_test, pred)
+print("accuracy:%0.3f" % score)
+
+joblib.dump(classifier, 'classifier.pkl')
+"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 

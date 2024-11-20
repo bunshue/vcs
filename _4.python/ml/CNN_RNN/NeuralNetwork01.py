@@ -97,7 +97,6 @@ print("------------------------------------------------------------")  # 60個
 from keras.models import Sequential
 from keras.layers import Dense
 from keras.utils import to_categorical
-from sklearn.preprocessing import StandardScaler
 from sklearn import preprocessing
 
 df = pd.read_csv("data/iris.csv")
@@ -110,7 +109,9 @@ np.random.shuffle(dataset)
 X = dataset[:, 0:4].astype(float)
 Y = to_categorical(dataset[:, 4])
 
-X = StandardScaler().fit_transform(X)  # 標準化
+from sklearn.preprocessing import StandardScaler
+scaler = StandardScaler()
+X = scaler.fit_transform(X)  # STD特徵縮放
 
 X_train, Y_train = X[:120], Y[:120]
 X_test, Y_test = X[120:], Y[120:]

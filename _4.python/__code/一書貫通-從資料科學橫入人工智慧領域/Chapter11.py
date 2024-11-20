@@ -43,13 +43,13 @@ X = orgData.ix[:, :4]
 Y = orgData[['Dated']]
 X.head()
 
-#极值标准化
-
+#极值标准化, MMS特徵縮放
 from sklearn import preprocessing
-
 min_max_scaler = preprocessing.MinMaxScaler()
 X_scaled = min_max_scaler.fit_transform(X)
-X_scaled[1:5]
+
+cc = X_scaled[1:5]
+print(cc)
 
 #划分训练集和测试集
 
