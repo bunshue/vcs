@@ -224,8 +224,8 @@ N = 100
 sinc2d = np.zeros((N, N))
 for x, x1 in enumerate(np.linspace(-2 * np.pi, 2 * np.pi, N)):
     for y, x2 in enumerate(np.linspace(-2 * np.pi, 2 * np.pi, N)):
-        #sinc2d[x, y] = np.sin(x1) * np.sin(x2) / (x1 * x2)  # 二維 sinc 函數
-        sinc2d[x, y] = np.sqrt(x1 ** 2 + x2 ** 2)
+        # sinc2d[x, y] = np.sin(x1) * np.sin(x2) / (x1 * x2)  # 二維 sinc 函數
+        sinc2d[x, y] = np.sqrt(x1**2 + x2**2)
 # print(sinc2d)
 
 """ same
@@ -243,8 +243,8 @@ N = 100
 x = np.linspace(-2 * np.pi, 2 * np.pi, N)
 y = np.linspace(-2 * np.pi, 2 * np.pi, N)
 X, Y = np.meshgrid(x, y)
-zz = np.sinc(np.sqrt(X ** 2 + Y ** 2))
-zz = np.sqrt(X ** 2 + Y ** 2)
+zz = np.sinc(np.sqrt(X**2 + Y**2))
+zz = np.sqrt(X**2 + Y**2)
 
 plt.imshow(zz)
 plt.title("default margins")
@@ -262,7 +262,7 @@ x = np.arange(-2 * np.pi, 2 * np.pi, 0.1)
 y = np.arange(-2 * np.pi, 2 * np.pi, 0.1)
 X, Y = np.meshgrid(x, y)
 
-#Z = np.exp(-(X**2) - Y**2)
+# Z = np.exp(-(X**2) - Y**2)
 Z = np.sqrt((X**2) + Y**2)
 
 im = plt.imshow(
@@ -290,7 +290,7 @@ np_array_2d = np.array(
     ]
 )
 
-#same
+# same
 np_array_2d = np.arange(36).reshape((6, 6))
 
 plt.imshow(np_array_2d, cmap="Blues")
@@ -355,6 +355,7 @@ print("------------------------------------------------------------")  # 60個
 plt.subplot(233)
 
 import cv2
+
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg"
 image = cv2.imread(filename)  # 讀取本機圖片
 image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 灰階
@@ -364,7 +365,6 @@ plt.imshow(image, cmap="binary")  # 顯示黑白圖片
 
 print("------------------------------------------------------------")  # 60個
 plt.subplot(234)
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -406,7 +406,7 @@ image = (
     .reshape(H, W)
     .astype(np.uint8)
 )
-print(str(W)+ 'X'+str(H)+ ' 6數任選')
+print(str(W) + "X" + str(H) + " 6數任選")
 
 N = 10
 image = np.random.randn(N, N)
@@ -498,7 +498,7 @@ extent = np.min(x), np.max(x), np.min(y), np.max(y)
 
 Z = np.add.outer(range(8), range(8)) % 2  # chessboard
 im1 = plt.imshow(Z, cmap=plt.cm.gray, interpolation="nearest", extent=extent)
-#im1 = plt.imshow(Z, cmap=plt.cm.viridis, alpha=0.9, interpolation="bilinear", extent=extent)
+# im1 = plt.imshow(Z, cmap=plt.cm.viridis, alpha=0.9, interpolation="bilinear", extent=extent)
 
 print("------------------------------------------------------------")  # 60個
 plt.subplot(232)
@@ -527,10 +527,8 @@ print("------------------------------------------------------------")  # 60個
 plt.subplot(234)
 
 
-
 print("------------------------------------------------------------")  # 60個
 plt.subplot(235)
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -593,8 +591,8 @@ X, Y = np.meshgrid(x, y)
 # 當建立重疊影像時, 需要有相同的 extent
 extent = np.min(x), np.max(x), np.min(y), np.max(y)
 
-#Z = np.sin(X) + np.cos(Y)
-Z = np.sqrt(X**2+Y**2)
+# Z = np.sin(X) + np.cos(Y)
+Z = np.sqrt(X**2 + Y**2)
 plt.imshow(Z, cmap="jet", alpha=0.8, interpolation="bilinear", extent=extent)
 
 print("------------------------------------------------------------")  # 60個

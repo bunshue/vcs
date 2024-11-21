@@ -71,8 +71,8 @@ ssl._create_default_https_context = ssl._create_unverified_context
 print("------------------------------------------------------------")  # 60個
 
 
-#df = pd.read_csv(filename, encoding="UTF-8")
-#df = pd.read_csv(filename, encoding="big5")  # 以pandas讀取檔案
+# df = pd.read_csv(filename, encoding="UTF-8")
+# df = pd.read_csv(filename, encoding="big5")  # 以pandas讀取檔案
 
 
 print("------------------------------------------------------------")  # 60個
@@ -562,11 +562,6 @@ df.to_csv(filename, index=False, encoding="utf8")
 print("------------------------------------------------------------")  # 60個
 
 
-
-
-
-
-
 pd.options.mode.chained_assignment = None  # 取消顯示pandas資料重設警告
 
 df.to_csv("New_Data.csv", encoding="utf8")  # 存檔至New_Data.csv中
@@ -585,8 +580,3 @@ new_df.to_csv("2014-2018.csv", encoding="utf8")
 
 # 存檔至新的CSV
 new_df.to_csv("2014-2018.csv", encoding="utf8")
-
-
-
-
-

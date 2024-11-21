@@ -83,6 +83,7 @@ print("------------------------------------------------------------")  # 60個
 
 # 可以使用SSL module把證書驗證改成不需要驗證即可，方法如下:
 import ssl
+
 ssl._create_default_https_context = ssl._create_unverified_context
 
 print("------------------------------------------------------------")  # 60個
@@ -8030,7 +8031,6 @@ print(df1)
 print("------------------------------------------------------------")  # 60個
 
 
-
 """
 print('資料結構訊息', df.info())
 print('資料shape :', df.shape)
@@ -8054,8 +8054,6 @@ print(fullname)
 """
 
 
-
-
 datas = [
     [92, 81, 81, 92],  # 國文
     [89, 79, 82, 72],  # 英文
@@ -8065,7 +8063,7 @@ datas = [
 ]
 
 columns = ["國文", "英文", "數學", "社會", "自然"]
-#df = pd.DataFrame(datas.T, columns=columns)
+# df = pd.DataFrame(datas.T, columns=columns)
 df = pd.DataFrame(np.array(datas).T, columns=columns)
 print(df)
 print(df["國文"])
@@ -8089,9 +8087,7 @@ print("------------------------------------------------------------")  # 60個
 print("Create a datetime column from a DataFrame")
 
 # create an example DataFrame
-df = pd.DataFrame(
-    [[2017, 12, 25], [2018, 1, 15]], columns=["year", "month", "day"]
-)
+df = pd.DataFrame([[2017, 12, 25], [2018, 1, 15]], columns=["year", "month", "day"])
 print(df)
 
 # new: create a datetime column from the entire DataFrame
@@ -8216,8 +8212,6 @@ dates = pd.date_range("20130101", periods=6)
 """
 
 
-
-
 """
 df = pd.read_csv("data/200811-201811.csv")
 
@@ -8258,10 +8252,6 @@ df = pd.DataFrame()
 df["date"] = pd.to_datetime(arr)
 df["amount"] = amount
 print(df)
-
-
-
-
 
 
 """ 準備要看的df函數

@@ -32,29 +32,36 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
-from sklearn.datasets import make_regression  # 迴歸資料集
-from sklearn.datasets import make_blobs  # 集群資料集
-from sklearn.datasets import make_classification  # 分類資料集
-from sklearn.datasets import make_moons  # 非線性的資料集
-from sklearn.datasets import make_circles  # 圓形分佈的資料集
-
-print("------------------------------------------------------------")  # 60個
-
 import ssl
 
 ssl._create_default_https_context = ssl._create_stdlib_context
 
 print("------------------------------------------------------------")  # 60個
 
-import sklearn
-from sklearn import datasets, svm, metrics
-
-print(sklearn.__version__)
-print(dir(datasets))
-print(sklearn)
+from sklearn.datasets import make_regression  # 迴歸資料集
+from sklearn.datasets import make_blobs  # 集群資料集
+from sklearn.datasets import make_classification  # 分類資料集
+from sklearn.datasets import make_moons  # 非線性的資料集
+from sklearn.datasets import make_circles  # 圓形分佈的資料集
+from sklearn.datasets import make_gaussian_quantiles
+from sklearn.datasets import make_hastie_10_2
+from sklearn.datasets import make_multilabel_classification as make_ml_clf
+from sklearn.datasets import make_biclusters
+from sklearn.datasets import make_checkerboard
 
 print("------------------------------------------------------------")  # 60個
 
+import sklearn
+from sklearn import datasets
+from sklearn import svm
+from sklearn import metrics
+
+print(sklearn.__version__)
+#print(dir(datasets))
+print(sklearn)
+
+print("------------------------------------------------------------")  # 60個
+'''
 plt.figure(
     num="sklearn內建資料集集合",
     figsize=(16, 9),
@@ -69,11 +76,13 @@ print("------------------------------")  # 30個
 plt.subplot(231)
 plt.title("make_regression 迴歸資料集")
 
-X, y, coef = make_regression(
-    n_samples=100, n_features=1, noise=20, coef=True, random_state=9487
-)
-print(X.shape)
+N = 50  # 樣本數
 
+X, y, coef = make_regression(
+    n_samples=N, n_features=1, noise=20, coef=True, random_state=9487
+    #n_samples=N, n_features=1, n_targets=1, noise=1.5, random_state=9487
+)
+print(X.shape, y.shape)
 print(coef)
 
 plt.scatter(X[:, 0], y)
@@ -84,7 +93,7 @@ plt.subplot(232)
 plt.title("make_blobs 集群資料集")
 
 X, y, centers = make_blobs(
-    n_samples=100, centers=3, cluster_std=1, n_features=2, return_centers=True
+    n_samples=N, centers=3, cluster_std=1, n_features=2, return_centers=True
 )
 print(X.shape)
 print(centers)
@@ -117,7 +126,7 @@ plt.title("make_classification 分類資料集")
 print("分類資料集")
 
 X, y = make_classification(
-    n_samples=100,
+    n_samples=N,
     n_classes=3,
     n_features=20,
     n_informative=15,
@@ -144,7 +153,7 @@ print("------------------------------")  # 30個
 plt.subplot(234)
 plt.title("make_moons 非線性的資料集")
 
-X, y = make_moons(n_samples=100, noise=0.05)
+X, y = make_moons(n_samples=N, noise=0.05)
 print(X.shape)
 
 # 針對類別各畫一個散佈圖
@@ -163,7 +172,7 @@ print("------------------------------")  # 30個
 plt.subplot(235)
 plt.title("make_circles 圓形分佈的資料集")
 
-X, y = make_circles(n_samples=100, noise=0.05)
+X, y = make_circles(n_samples=N, noise=0.05)
 print(X.shape)
 
 # 針對類別各畫一個散佈圖
@@ -181,172 +190,7 @@ print("------------------------------")  # 30個
 plt.subplot(236)
 plt.title("xxx")
 
-
 plt.show()
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
-"""
-sklearn 使用make_regression生成回归样本数据及NumPy拟合
-
-1. 介绍
-sklearn的make_regression函数能生成回归样本数据。
-
-2. 函数语法
-make_regression(n_samples=100, n_features=100, n_informative=10, n_targets=1, bias=0.0, 
-                effective_rank=None, tail_strength=0.5, noise=0.0, shuffle=True, coef=False, random_state=None)
-
-3. 参数说明：
-n_samples：样本数
-n_features：特征数(自变量个数)
-n_informative：参与建模特征数
-n_targets：因变量个数
-noise：噪音
-bias：偏差(截距)
-coef：是否输出coef标识
-random_state：随机状态若为固定值则每次产生的数据都一样
-
-"""
-
-X, Y = make_regression(
-    n_samples=10, n_features=1, n_targets=1, noise=1.5, random_state=9487
-)
-cc = X.shape, Y.shape
-print(cc)
-
-
-plt.scatter(
-    X,  # x坐标
-    Y,  # y坐标
-)
-plt.show()
-
-
-# 5. 用NumPy实现拟合
-# Numpy拟合基于最小二乘法
-
-plt.scatter(
-    X,  # x坐标
-    Y,  # y坐标
-)
-
-# 用一次多项式拟合，相当于线性拟合
-z1 = np.polyfit(X.reshape(10), Y, 1)
-p1 = np.poly1d(z1)
-print(z1)
-print(p1)
-
-y = z1[0] * X + z1[1]
-plt.plot(X, y, c="red")
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-"""
-N = 50
-X, y = make_regression(n_samples=N, n_features=3)
-print(X.shape, y.shape)
-print(X)
-print(y)
-
-y = y.reshape((-1, 1))
-#print(y)
-
-from sklearn.linear_model import LinearRegression
-
-linear_regression = LinearRegression()
-linear_regression.fit(X, y)
-
-y_pred_sk = linear_regression.predict(X)
-#print(y_pred_sk)
-
-plt.figure(figsize=(9, 4))
-
-plt.plot(y, color="r", linewidth=10)
-plt.plot(y_pred_sk, color="g", linewidth=4)
-
-#plt.legend()
-
-plt.show()
-
-print('------------------------------')	#30個
-
-
-def gd(X, y, theta, l_rate, iterations):
-    cost_history = [0] * iterations
-
-    m = X.shape[0]
-
-    for epoch in range(iterations):
-        y_hat = X.dot(theta)
-
-        loss = y_hat - y
-
-        gradient = X.T.dot(loss) / m
-
-        theta = theta - l_rate * gradient
-
-        cost = np.dot(loss.T, loss)
-
-        cost_history[epoch] = cost[0, 0]
-
-    return theta, cost_history
-
-
-def sgd(X, y, theta, l_rate, iterations):
-    cost_history = [0] * iterations
-
-    for epoch in range(iterations):
-        for i, row in enumerate(X):
-            yhat = np.dot(row, theta)
-
-            loss = yhat[0] - y[i]
-
-            theta = theta - l_rate * loss * row.reshape((-1, 1))
-
-            cost_history[epoch] += loss**2
-
-    return theta, cost_history
-
-
-def predict(X, theta):
-    return np.dot(X, theta)
-
-
-theta = np.random.rand(X.shape[1], 1)
-
-iterations = 100
-
-l_rate = 0.1
-
-theta, cost_history = gd(X, y, theta, l_rate, iterations)
-
-print(theta.T)
-
-# array([[ 1.12259549, 64.22439151, 84.34968956]])
-
-y_predict = predict(X, theta)
-
-y_predict = predict(X, theta)
-
-plt.figure(figsize=(9, 4))
-
-plt.plot(y, color="r")
-plt.plot(y, alpha=0.3, linewidth=5)
-plt.plot(y_predict, color="g")
-plt.plot(y_predict, linewidth=2)
-
-plt.show()
-
-print(linear_regression.coef_)
-# array([[48.54597102, 82.31351886,  8.52184984]])
-
-"""
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -422,52 +266,8 @@ plt.plot(recall, precision)
 
 # plt.show()
 
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-print("多指標評分")
-
-from sklearn.metrics import classification_report
-
-y_real = [0, 1, 1, 1, 1, 1, 0, 0, 0, 0]
-y_score = [0.9, 0.75, 0.86, 0.47, 0.55, 0.56, 0.74, 0.22, 0.5, 0.26]
-y_pred = [round(i) for i in y_score]
-print(classification_report(y_real, y_pred))
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-from sklearn import preprocessing
-from sklearn.model_selection import train_test_split
-from sklearn.datasets import make_classification
-from sklearn.svm import SVC
-
-a = np.array([[10, 2.7, 3.6], [-100, 5, -2], [120, 20, 40]], dtype=np.float64)
-print(a)
-print(preprocessing.scale(a))
-
-X, y = make_classification(
-    n_samples=300,
-    n_features=2,
-    n_redundant=0,
-    n_informative=2,
-    random_state=22,
-    n_clusters_per_class=1,
-    scale=100,
-)
-plt.scatter(X[:, 0], X[:, 1], c=y)
-plt.show()
-
-X = preprocessing.scale(X)  # normalization step
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
-clf = SVC()
-clf.fit(X_train, y_train)
-print(clf.score(X_test, y_test))
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -478,9 +278,7 @@ print("------------------------------------------------------------")  # 60個
 
 """
 机器学习笔记：常用数据集之scikit-learn生成分类和聚类数据集
-
 本文介绍分类和聚类数据集的生成，包括以下9个接口函数，其中，
-
 有六个是用于单标签类数据生成：
 
 (1) make_blobs()
@@ -510,9 +308,9 @@ make_blobs对于各簇的中心和标准偏差提供了更方便的控制选项�
 """
 
 # make_classification()生成二分类数据集
-
+N = 500  # 樣本數
 X, y = make_classification(
-    n_samples=1000,
+    n_samples=N,
     n_features=5,
     n_redundant=0,
     n_clusters_per_class=1,
@@ -530,6 +328,7 @@ for key, group in grouped:
     group.plot(ax=ax, kind="scatter", x="x", y="y", label=key, color=colors[key])
 
 print(X.shape, y.shape)
+plt.title('make_classification')
 plt.show()
 
 """
@@ -540,8 +339,8 @@ plt.show()
 """
 
 # make_blobs: Generate isotropic Gaussian blobs for clustering. Of course, can also be used for classfication problem.
-
-X, y = make_blobs(n_samples=1000, centers=3, n_features=2, random_state=10)
+N = 500  # 樣本數
+X, y = make_blobs(n_samples=N, centers=3, n_features=2, random_state=10)
 
 # scatter plot, dots colored by class value
 df = pd.DataFrame(dict(x=X[:, 0], y=X[:, 1], label=y))
@@ -551,14 +350,21 @@ grouped = df.groupby("label")
 for key, group in grouped:
     group.plot(ax=ax, kind="scatter", x="x", y="y", label=key, color=colors[key])
 
-
+plt.title('make_blobs')
 plt.show()
 
+print('每群不同大小不同中心位置')
+
+N0, N1, N2, N3 = 100, 300, 250, 400  # 樣本數
+cx0, cy0 = 100, 120  # 第0群的中心位置
+cx1, cy1 = 250, 300  # 第1群的中心位置
+cx2, cy2 = 700, 150  # 第2群的中心位置
+cx3, cy3 = 300, 500  # 第3群的中心位置
 
 X, y = make_blobs(
-    n_samples=[100, 300, 250, 400],
+    n_samples=[N0, N1, N2, N3],
     n_features=2,
-    centers=[[100, 120], [250, 300], [700, 150], [300, 500]],
+    centers=[[cx0, cy0], [cx1, cy1], [cx2, cy2], [cx3, cy3]],
     cluster_std=50,
     random_state=111,
 )
@@ -571,8 +377,8 @@ grouped = df.groupby("label")
 for key, group in grouped:
     group.plot(ax=ax, kind="scatter", x="x", y="y", label=key, color=colors[key])
 
+plt.title('make_blobs')
 plt.show()
-
 
 """ 
 4. make_moons
@@ -584,8 +390,9 @@ plt.show()
 # make_moons: Generate isotropic Gaussian blobs for clustering.
 # 经常用于非线性分类示例。
 
-# generate 2d classification dataset
-X, y = make_moons(n_samples=1000, shuffle=True, noise=0.1, random_state=10)
+N = 500  # 樣本數
+X, y = make_moons(n_samples=N, shuffle=True, noise=0.1, random_state=10)
+
 # scatter plot, dots colored by class value
 df = pd.DataFrame(dict(x=X[:, 0], y=X[:, 1], label=y))
 colors = {0: "red", 1: "blue"}
@@ -594,6 +401,7 @@ grouped = df.groupby("label")
 for key, group in grouped:
     group.plot(ax=ax, kind="scatter", x="x", y="y", label=key, color=colors[key])
 
+plt.title('make_moons')
 plt.show()
 
 """
@@ -604,11 +412,10 @@ plt.show()
 # Make a large circle containing a smaller circle in 2d.
 # A simple toy dataset to visualize clustering and classification algorithms, suitable for algorithms that can learn complex non-linear manifolds.
 
+N = 500  # 樣本數
+X, y = make_circles(n_samples=N, noise=0.05)
+# 'noise' is used to control the amount of noise in the shapes.
 
-# generate 2d classification dataset
-X, y = make_circles(
-    n_samples=1000, noise=0.05
-)  # 'noise' is used to control the amount of noise in the shapes.
 # scatter plot, dots colored by class value
 df = pd.DataFrame(dict(x=X[:, 0], y=X[:, 1], label=y))
 colors = {0: "red", 1: "blue"}
@@ -617,17 +424,25 @@ grouped = df.groupby("label")
 for key, group in grouped:
     group.plot(ax=ax, kind="scatter", x="x", y="y", label=key, color=colors[key])
 
+plt.title('make_circles')
 plt.show()
+'''
 
 """
 6. make_gaussian_quantiles
-make_gaussian_quantiles()首先生成一个多维正态分布样本集，然后，将这样本集基于分位点(quantiles)分割成多个(n_classes=3 by default)嵌套的多维同心超球，每个超球属于一类，并使得大致各类的样本基本相等。
+make_gaussian_quantiles()首先生成一个多维正态分布样本集，
+然后，将这样本集基于分位点(quantiles)分割成多个(n_classes=3 by default)嵌套的多维同心超球，
+每个超球属于一类，并使得大致各类的样本基本相等。
 基于分位点进行分割是什么意思呢？
-以一维正态分布为例，大致来说就是这样分割的。假设n_classes = 3，因此对应的两个分割用的分位点就是33%和66%。取样本中位于[0, 33%]分位区间的作为第一类，位于[33%, 66%]分位区间的作为第二类，位于[66%, 100%]分位区间的作为第三类。对于多维数据，是基于对应的𝜒2分布的分位数来进行分类。
+以一维正态分布为例，大致来说就是这样分割的。
+假设n_classes = 3，因此对应的两个分割用的分位点就是33%和66%。
+取样本中位于[0, 33%]分位区间的作为第一类，位于[33%, 66%]分位区间的作为第二类，
+位于[66%, 100%]分位区间的作为第三类。
+对于多维数据，是基于对应的𝜒2分布的分位数来进行分类。
 """
-from sklearn.datasets import make_gaussian_quantiles
 
-data, target = make_gaussian_quantiles(n_samples=1500, cov=1.0, n_classes=3)
+N = 1000  # 樣本數
+data, target = make_gaussian_quantiles(n_samples=N, cov=1.0, n_classes=3)
 
 # scatter plot, dots colored by class value
 df = pd.DataFrame(dict(x=data[:, 0], y=data[:, 1], label=target))
@@ -637,6 +452,7 @@ grouped = df.groupby("label")
 for key, group in grouped:
     group.plot(ax=ax, kind="scatter", x="x", y="y", label=key, color=colors[key])
 
+plt.title('make_gaussian_quantiles')
 plt.show()
 
 """
@@ -646,9 +462,9 @@ T. Hastie, R. Tibshirani and J. Friedman, “Elements of Statistical Learning Ed
 该数据集有10个特征，是i.i.d（独立同分布）的标准正态分布，target y定义如下：
 y[i] = 1 if np.sum(X[i] ** 2) > 9.34 else -1
 """
-from sklearn.datasets import make_hastie_10_2
 
-data, target = make_hastie_10_2(n_samples=1000, random_state=42)
+N = 1000  # 樣本數
+data, target = make_hastie_10_2(n_samples=N, random_state=42)
 
 # target[target==-1] = 0  # 原数据集生成的target为[1,-1],这里变换为[1,0]
 # target = target.astype('int32') # 变换成整数
@@ -670,33 +486,33 @@ for k in range(10):
 x = np.linspace(-8, 8, 1000)
 plt.plot(x, norm.pdf(x), "r-", lw=2, alpha=0.6, label="theoretic std norm pdf")
 
+plt.title('make_hastie_10_2')
 plt.legend()
 plt.show()
 
 # 如上图可知，10个特征分量确实基本上都是与标准正态分布吻合的。
 
-
 """
 8. 多标签数据集生成
 多标签数据集用于当存在多各类别，而待分类的数据可能属于其中的一类或者同时属于多个类别，或者甚至不属于任何类别。比如说，当需要识别在一张图像中所包含的交通信号等的类型。一张图片可能不包含信号灯，也可能只包含一个红灯或绿灯或黄灯，也可能同时包含一个红灯和绿灯（如果这张图片覆盖了一个十字路口的两个方向的信号灯的话）。
 """
-
-from sklearn.datasets import make_multilabel_classification as make_ml_clf
-
 x, y = make_ml_clf(n_samples=1000, n_features=10, n_classes=3, random_state=0)
 print(x.shape, y.shape)
 print(y[:10, :])
 
 """
-可以看出，由于是多分类（本例是3分类）多标签的，所以target(label)采用了one-hot编码的形式，每个数据样本的label中可能有一个或多个1，表示属于1个类别或者多个类别。当然，虽然以上没有显示出来，也存在不属于任何类别的样本，即其label为全零向量。
+可以看出，由于是多分类（本例是3分类）多标签的，
+所以target(label)采用了one-hot编码的形式，
+每个数据样本的label中可能有一个或多个1，表示属于1个类别或者多个类别。
+当然，虽然以上没有显示出来，也存在不属于任何类别的样本，即其label为全零向量。
 """
 
 """
 9. make_biclusters
-make_biclusters用于生成具有恒定块对角线结构(constant block diagonal structure)的数组以进行双向聚类。所谓“双向聚类”，是指对变量和实例同时聚类。本数据集可以用于谱协聚类(SpectralCoclustering)算法的示例。
+make_biclusters用于生成具有恒定块对角线结构(constant block diagonal structure)
+的数组以进行双向聚类。所谓“双向聚类”，是指对变量和实例同时聚类。
+本数据集可以用于谱协聚类(SpectralCoclustering)算法的示例。
 """
-
-from sklearn.datasets import make_biclusters
 
 data, rows, columns = make_biclusters(
     shape=(300, 300), n_clusters=5, noise=5, shuffle=False, random_state=0
@@ -710,7 +526,6 @@ plt.show()
 10. make_checkerboard
 make_checkerboard()用于生成一个具有棋盘格结构的数组，以进行双向聚类。
 """
-from sklearn.datasets import make_checkerboard
 
 data, rows, columns = make_checkerboard(
     shape=(300, 300), n_clusters=5, noise=5, shuffle=False, random_state=0
@@ -731,6 +546,24 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+print("多指標評分")
+
+from sklearn.metrics import classification_report
+
+y_real = [0, 1, 1, 1, 1, 1, 0, 0, 0, 0]
+y_score = [0.9, 0.75, 0.86, 0.47, 0.55, 0.56, 0.74, 0.22, 0.5, 0.26]
+y_pred = [round(i) for i in y_score]
+print(classification_report(y_real, y_pred))
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -748,6 +581,33 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-X, y = make_regression(n_samples=100, n_features=1, n_targets=1, noise=10)
-plt.scatter(X, y)
-plt.show()
+
+
+
+"""
+sklearn 使用make_regression生成回归样本数据及NumPy拟合
+
+1. 介绍
+sklearn的make_regression函数能生成回归样本数据。
+
+2. 函数语法
+make_regression(n_samples=100, n_features=100, n_informative=10, n_targets=1, bias=0.0, 
+                effective_rank=None, tail_strength=0.5, noise=0.0, shuffle=True, coef=False, random_state=None)
+
+3. 参数说明：
+n_samples：样本数
+n_features：特征数(自变量个数)
+n_informative：参与建模特征数
+n_targets：因变量个数
+noise：噪音
+bias：偏差(截距)
+coef：是否输出coef标识
+random_state：随机状态若为固定值则每次产生的数据都一样
+
+"""
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+
+

@@ -62,12 +62,11 @@ plt.grid()
 
 plt.show()
 
-print("將 模型存檔 存成 pickle")
-
+print("方法一 : 將 模型存檔 存成 pickle")
 with open("tmp_my_model.pickle", "wb") as f:
     pickle.dump(linear_regression, f)
 
-print("將 模型存檔 存成 joblib")
+print("方法二 : 將 模型存檔 存成 joblib")
 joblib.dump(linear_regression, "tmp_my_model.joblib")
 
 print("------------------------------------------------------------")  # 60個
@@ -81,24 +80,24 @@ y1 = np.array([0, 1, 4, 3, 4, 5, 6, 3, 8, 9, 10])  # 真實資料
 
 X = x.reshape(len(x), 1)  # x訓練資料要轉為 NX1 陣列
 
-
-# 讀取模型 pickle
-y_pred2 = []
+print("方法一 : 讀取模型 pickle")
+y_pred1 = []
 with open("tmp_my_model.pickle", "rb") as f:
     linear_regression2 = pickle.load(f)
-    y_pred2 = linear_regression2.predict(X)  # 預測.predict
+    y_pred1 = linear_regression2.predict(X)  # 預測.predict
+print(y_pred1)
+
+print("方法二 : 讀取模型 joblib")
+y_pred2 = []
+linear_regression3 = joblib.load("tmp_my_model.joblib")
+y_pred2 = linear_regression3.predict(X)  # 預測.predict
 print(y_pred2)
 
-# 讀取模型 joblib
-y_pred3 = []
-linear_regression3 = joblib.load("tmp_my_model.joblib")
-y_pred3 = linear_regression3.predict(X)  # 預測.predict
-print(y_pred3)
+y_pred = y_pred2
 
 plt.plot(x, y0, "lime", lw=5, label="理想資料")  # 理想資料, y = x 綠線
 plt.plot(x, y1, "bo-", label="真實資料")  # 真實資料, 藍點藍線
-plt.plot(x, y_pred2, color="r", marker="o", markersize=8, label="線性迴歸")  # 線性迴歸曲線
-# plt.plot(x, y_pred3, color="r", marker="o", markersize=8, label="線性迴歸")  # 線性迴歸曲線
+plt.plot(x, y_pred, color="r", marker="o", markersize=8, label="線性迴歸")  # 線性迴歸曲線
 
 plt.title("線性迴歸 無 資料分割")
 plt.axis([0, 10, 0, 10])  # 設定各軸顯示範圍

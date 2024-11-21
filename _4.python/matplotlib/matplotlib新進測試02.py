@@ -27,26 +27,36 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 print("------------------------------------------------------------")  # 60個
 
 import ssl
+
 ssl._create_default_https_context = ssl._create_stdlib_context
 
 print("------------------------------------------------------------")  # 60個
 
-#柱狀圖參數調整
+# 柱狀圖參數調整
 
 # 數據
-categories = ['A', 'B', 'C', 'D']
+categories = ["A", "B", "C", "D"]
 values = [10, 20, 15, 25]
 
 # 設定圖形大小和分辨率
 plt.figure(figsize=(10, 5), dpi=100)
 
 # 繪製柱狀圖並自定義參數
-plt.bar(categories, values, color='skyblue', edgecolor='black', linewidth=1.5, hatch='/', width=0.5, label='數據1')
+plt.bar(
+    categories,
+    values,
+    color="skyblue",
+    edgecolor="black",
+    linewidth=1.5,
+    hatch="/",
+    width=0.5,
+    label="數據1",
+)
 
 # 設定標題和標籤
-plt.title('22柱狀圖示例')
-plt.xlabel('類別')
-plt.ylabel('值')
+plt.title("22柱狀圖示例")
+plt.xlabel("類別")
+plt.ylabel("值")
 
 # 設定刻度標籤
 plt.xticks(categories)
@@ -81,7 +91,7 @@ plt.figure(figsize=(width, height), dpi=dpi)：設定圖形大小和分辨率。
 
 print("------------------------------------------------------------")  # 60個
 
-#散點圖參數調整
+# 散點圖參數調整
 
 # 數據
 x = [1, 2, 3, 4, 5]
@@ -93,12 +103,14 @@ colors = [1, 2, 3, 4, 5]
 plt.figure(figsize=(10, 5), dpi=100)
 
 # 繪製散點圖並自定義參數
-plt.scatter(x, y, s=sizes, c=colors, alpha=0.6, edgecolor='black', linewidth=1.5, label='數據1')
+plt.scatter(
+    x, y, s=sizes, c=colors, alpha=0.6, edgecolor="black", linewidth=1.5, label="數據1"
+)
 
 # 設定標題和標籤
-plt.title('44散點圖示例')
-plt.xlabel('X軸')
-plt.ylabel('Y軸')
+plt.title("44散點圖示例")
+plt.xlabel("X軸")
+plt.ylabel("Y軸")
 
 # 設定刻度標籤
 plt.xticks([1, 2, 3, 4, 5])
@@ -139,7 +151,7 @@ plt.figure(figsize=(width, height), dpi=dpi)：設定圖形大小和分辨率。
 print("------------------------------------------------------------")  # 60個
 
 # 繪製餅圖
-#plt.pie(sizes, labels=labels, autopct='%1.1f%%')
+# plt.pie(sizes, labels=labels, autopct='%1.1f%%')
 
 print("------------------------------------------------------------")  # 60個
 
@@ -158,20 +170,30 @@ f：這表示以浮點數格式顯示數值。
 """
 print("------------------------------------------------------------")  # 60個
 
-#圓餅圖參數調整
+# 圓餅圖參數調整
 
 # 數據
-labels = ['A', 'B', 'C', 'D']
+labels = ["A", "B", "C", "D"]
 sizes = [15, 30, 45, 10]
-colors = ['gold', 'yellowgreen', 'lightcoral', 'lightskyblue']
+colors = ["gold", "yellowgreen", "lightcoral", "lightskyblue"]
 explode = (0, 0.1, 0, 0)  # 將第二塊分離出來
 
 # 繪製圓餅圖並自定義參數
 plt.figure(figsize=(8, 8))
-plt.pie(sizes, labels=labels, colors=colors, explode=explode, autopct='%1.1f%%', shadow=True, startangle=90, pctdistance=0.85, wedgeprops={'edgecolor': 'black'})
+plt.pie(
+    sizes,
+    labels=labels,
+    colors=colors,
+    explode=explode,
+    autopct="%1.1f%%",
+    shadow=True,
+    startangle=90,
+    pctdistance=0.85,
+    wedgeprops={"edgecolor": "black"},
+)
 
 # 設置標題
-plt.title('66圓餅圖示例')
+plt.title("66圓餅圖示例")
 
 # 顯示圖形
 plt.show()
@@ -200,7 +222,7 @@ wedgeprops：設置圓餅塊的屬性，例如邊框顏色、寬度等。
 
 print("------------------------------------------------------------")  # 60個
 
-x = np.linspace(0, 2*np.pi, 100)
+x = np.linspace(0, 2 * np.pi, 100)
 y = np.sin(x)
 z = np.cos(x)
 
@@ -216,9 +238,9 @@ axes[1, 1].plot(x, y)
 axes[1, 2].plot(x, y)
 
 
-axes[0, 0].set_xlabel('x')
-axes[0, 0].set_ylabel('y')
-axes[0, 0].set_title('第一張圖')
+axes[0, 0].set_xlabel("x")
+axes[0, 0].set_ylabel("y")
+axes[0, 0].set_title("第一張圖")
 axes[0, 0].grid(True)
 
 plt.show()
@@ -285,7 +307,7 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#Figure, axes & spines
+# Figure, axes & spines
 
 # Create a 3x3 grid of subplots
 fig, axs = plt.subplots(3, 3)
@@ -313,7 +335,7 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#Ticks & labels
+# Ticks & labels
 
 from matplotlib.ticker import MultipleLocator as ML
 from matplotlib.ticker import ScalarFormatter as SF
@@ -326,13 +348,13 @@ ax.xaxis.set_minor_locator(ML(0.2))
 ax.xaxis.set_minor_formatter(SF())
 
 # Rotate minor tick labels on the x-axis
-ax.tick_params(axis='x', which='minor', rotation=90)
+ax.tick_params(axis="x", which="minor", rotation=90)
 
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#Lines & markers
+# Lines & markers
 
 # Generate data and create a plot
 X = np.linspace(0.1, 10 * np.pi, 1000)
@@ -343,7 +365,7 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#Scales & projections
+# Scales & projections
 
 # Create a figure with a single subplot
 fig, ax = plt.subplots()
@@ -358,13 +380,13 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#Text & ornaments
+# Text & ornaments
 
 # Create a figure with a single subplot
 fig, ax = plt.subplots()
 
 # Fill the area between horizontal lines with a curve
-ax.fill_betweenx([-1, 1], [0], [2*np.pi])
+ax.fill_betweenx([-1, 1], [0], [2 * np.pi])
 
 # Add a text annotation to the plot
 ax.text(0, -1, r" Period $\Phi$")
@@ -373,7 +395,7 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#Legend
+# Legend
 
 # Create a figure with a single subplot
 fig, ax = plt.subplots()
@@ -389,7 +411,7 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#Annotation
+# Annotation
 
 # Create a figure with a single subplot
 fig, ax = plt.subplots()
@@ -397,22 +419,26 @@ fig, ax = plt.subplots()
 ax.plot(X, Y, "C1o:", markevery=25, mec="1.0")
 
 # Add an annotation "A" with an arrow
-ax.annotate("A", (X[250], Y[250]), (X[250], -1),
-            ha="center", va="center",
-            arrowprops={"arrowstyle": "->", "color": "C1"})
+ax.annotate(
+    "A",
+    (X[250], Y[250]),
+    (X[250], -1),
+    ha="center",
+    va="center",
+    arrowprops={"arrowstyle": "->", "color": "C1"},
+)
 
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#Colors
+# Colors
 
 from matplotlib.patches import Rectangle
 import matplotlib.colors as mcolors
 
 
 def plot_colortable(colors, *, ncols=4, sort_colors=True):
-
     cell_width = 212
     cell_height = 22
     swatch_width = 48
@@ -421,7 +447,8 @@ def plot_colortable(colors, *, ncols=4, sort_colors=True):
     # Sort colors by hue, saturation, value and name.
     if sort_colors is True:
         names = sorted(
-            colors, key=lambda c: tuple(mcolors.rgb_to_hsv(mcolors.to_rgb(c))))
+            colors, key=lambda c: tuple(mcolors.rgb_to_hsv(mcolors.to_rgb(c)))
+        )
     else:
         names = list(colors)
 
@@ -433,10 +460,14 @@ def plot_colortable(colors, *, ncols=4, sort_colors=True):
     dpi = 72
 
     fig, ax = plt.subplots(figsize=(width / dpi, height / dpi), dpi=dpi)
-    fig.subplots_adjust(margin/width, margin/height,
-                        (width-margin)/width, (height-margin)/height)
+    fig.subplots_adjust(
+        margin / width,
+        margin / height,
+        (width - margin) / width,
+        (height - margin) / height,
+    )
     ax.set_xlim(0, cell_width * 4)
-    ax.set_ylim(cell_height * (nrows-0.5), -cell_height/2.)
+    ax.set_ylim(cell_height * (nrows - 0.5), -cell_height / 2.0)
     ax.yaxis.set_visible(False)
     ax.xaxis.set_visible(False)
     ax.set_axis_off()
@@ -449,16 +480,27 @@ def plot_colortable(colors, *, ncols=4, sort_colors=True):
         swatch_start_x = cell_width * col
         text_pos_x = cell_width * col + swatch_width + 7
 
-        ax.text(text_pos_x, y, name, fontsize=14,
-                horizontalalignment='left',
-                verticalalignment='center')
+        ax.text(
+            text_pos_x,
+            y,
+            name,
+            fontsize=14,
+            horizontalalignment="left",
+            verticalalignment="center",
+        )
 
         ax.add_patch(
-            Rectangle(xy=(swatch_start_x, y-9), width=swatch_width,
-                      height=18, facecolor=colors[name], edgecolor='0.7')
+            Rectangle(
+                xy=(swatch_start_x, y - 9),
+                width=swatch_width,
+                height=18,
+                facecolor=colors[name],
+                edgecolor="0.7",
+            )
         )
 
     return fig
+
 
 # CSS Colors
 plot_colortable(mcolors.CSS4_COLORS)
@@ -468,14 +510,14 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 
 # Get a list of named colors
-named_colors = plt.colormaps()  
-print("Colors:",named_colors)
+named_colors = plt.colormaps()
+print("Colors:", named_colors)
 
 print("------------------------------------------------------------")  # 60個
 
 # 存檔
 
-plt.savefig('tmp_aaa.png')
+plt.savefig("tmp_aaa.png")
 
 # Save the figure as a PNG file with higher resolution (300 dpi)
 fig.savefig("tmp_bbb.png", dpi=300)
@@ -484,8 +526,6 @@ fig.savefig("tmp_bbb.png", dpi=300)
 fig.savefig("tmp_ccc.pdf")
 
 print("------------------------------------------------------------")  # 60個
-
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -503,5 +543,3 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
-

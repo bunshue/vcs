@@ -52,9 +52,9 @@ print("------------------------------------------------------------")  # 60個
 # sns.set(color_codes=True)
 sns.set(rc={"figure.figsize": (6, 4)})
 
-#sns.set_style("whitegrid")
-#sns.set_style("darkgrid", {"axes.axisbelow": False})
-#sns.set_style("darkgrid", {"axes.axisbelow": False, "font.sans-serif": ["Microsoft JhengHei"]})
+# sns.set_style("whitegrid")
+# sns.set_style("darkgrid", {"axes.axisbelow": False})
+# sns.set_style("darkgrid", {"axes.axisbelow": False, "font.sans-serif": ["Microsoft JhengHei"]})
 
 # 海生的中文設定 5 行
 font_filename = (
@@ -232,7 +232,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -538,16 +537,12 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -580,10 +575,6 @@ sns.displot(x)
 sns.histplot(x)
 
 
-
-
-
-
 # plt.xkcd()  #加此行變成搞笑風格
 
 # 多此二行 變成海生風格
@@ -591,7 +582,6 @@ sns.histplot(x)
 plt.rcParams[
     "font.sans-serif"
 ] = "Microsoft JhengHei"  # 海生設定中文字型 將字體換成 Microsoft JhengHei
-
 
 
 sns.histplot(np.random.binomial(n=5, p=0.75, size=1000), kde=False)
@@ -602,4 +592,3 @@ plt.title("二項式分布 Binomial")
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
-

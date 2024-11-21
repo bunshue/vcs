@@ -2294,3 +2294,31 @@ yy = np.linspace(6, 8, 3)
 X, Y = np.meshgrid(xx, yy)
 print("X = \n", X)
 print("Y = \n", Y)
+
+print("------------------------------------------------------------")  # 60個
+
+# 用NumPy实现拟合
+# Numpy拟合基于最小二乘法
+
+X = np.array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+Y = np.array([0, 1, 2, 6, 4, 5, 6, 6, 8, 9, 10])
+
+plt.scatter(X, Y, label="真實資料")
+
+# 用一次多项式拟合，相当于线性拟合
+z1 = np.polyfit(X.reshape(len(X)), Y, 1)
+p1 = np.poly1d(z1)
+print(z1)
+print(p1)
+
+y = z1[0] * X + z1[1]
+plt.plot(X, y, c="red", label="線性擬合")
+plt.legend()
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+

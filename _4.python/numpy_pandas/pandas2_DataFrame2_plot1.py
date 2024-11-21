@@ -96,7 +96,7 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 # 設定負號
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
-'''
+"""
 print("------------------------------------------------------------")  # 60個
 print("DataFrame 畫圖")
 print("------------------------------------------------------------")  # 60個
@@ -309,7 +309,7 @@ plt.title("年度 barh圖")
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
-'''
+"""
 # 折線圖
 
 df = pd.read_csv("data/觀光人數統計.csv")
@@ -683,6 +683,7 @@ ax = df.plot.bar(rot=-45)  # rot表示xstick旋轉的角度
 ax.legend(loc=2)  # legend的位置可以用loc調整
 
 from matplotlib import style
+
 style.use("fivethirtyeight")
 
 print("------------------------------------------------------------")  # 60個
@@ -720,8 +721,8 @@ fig, ax = plt.subplots(2, 1, figsize=(10, 8))
 df = pd.DataFrame(np.random.randint(1, 7, 6000), columns=["one"])
 df["two"] = df["one"] + np.random.randint(1, 7, 6000)
 df.plot.hist(ax=ax[0], bins=12, alpha=0.5)
-#ax.set_title("Hist. plot")
-#ax.set_xlabel("Xlabel")
+# ax.set_title("Hist. plot")
+# ax.set_xlabel("Xlabel")
 
 plt.show()
 
@@ -818,5 +819,3 @@ df = pd.DataFrame(dists, columns=["體重"], index=dists["姓名"])
 
 df.plot(xticks=range(len(df.index)), use_index=True)
 df.plot(xticks=range(len(df.index)), use_index=True, rot=90)
-
-

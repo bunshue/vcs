@@ -940,6 +940,35 @@ print("Predicted outcome: ", y_pred)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+# 多維線性回歸
+
+N = 10
+X, y = make_regression(n_samples=N, n_features=3)
+# X : N X 3 陣列
+print(X.shape, y.shape)
+print(X)
+#print(y)
+
+y = y.reshape((-1, 1))
+print(y)
+
+from sklearn.linear_model import LinearRegression
+
+linear_regression = LinearRegression()
+
+linear_regression.fit(X, y)
+
+y_pred_sk = linear_regression.predict(X)
+print(y_pred_sk)
+
+plt.figure(figsize=(9, 4))
+
+plt.plot(y, color="r", linewidth=10, label="真實資料")
+plt.plot(y_pred_sk, color="g", linewidth=4, label="預測結果")
+
+plt.legend()
+
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

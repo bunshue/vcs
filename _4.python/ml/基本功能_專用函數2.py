@@ -8,7 +8,6 @@
 # MinMaxScaler與StandardScaler類似
 
 """
-
 print("------------------------------------------------------------")  # 60個
 
 # 共同
@@ -35,7 +34,6 @@ print("------------------------------------------------------------")  # 60個
 from sklearn import datasets
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
 
-'''
 print("------------------------------------------------------------")  # 60個
 
 print("資料前處理方式(4) 測試特徵縮放")
@@ -186,12 +184,12 @@ print(data)
 scaler = RobustScaler()
 cc = scaler.fit_transform(data)
 print(cc)
-'''
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-"""
+
 from sklearn.preprocessing import StandardScaler
 
 scaler = StandardScaler()
@@ -229,7 +227,7 @@ vari = VarianceThreshold(threshold=0.0)
 data2 = vari.fit_transform(data)
 print('特徵選擇後：')
 print(data2)
-"""
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -363,9 +361,6 @@ print("特徵名稱：")
 print(cv.get_feature_names_out())
 
 print("------------------------------------------------------------")  # 60個
-
-import numpy as np
-import pandas as pd
 
 print("TF-IDF逆文本頻率指數")
 

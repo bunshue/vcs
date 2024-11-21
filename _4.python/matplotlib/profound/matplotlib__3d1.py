@@ -45,6 +45,7 @@ from matplotlib import cm
 from matplotlib.collections import PolyCollection
 from mpl_toolkits.mplot3d import axes3d
 from matplotlib.cm import viridis as colormap
+
 '''
 print("------------------------------------------------------------")  # 60個
 
@@ -985,20 +986,20 @@ plt.show()
 '''
 print("------------------------------------------------------------")  # 60個
 
-#3D繪圖
+# 3D繪圖
 
-#使用mplot3D繪制的3D曲面圖
+# 使用mplot3D繪制的3D曲面圖
 import mpl_toolkits.mplot3d
 
 x, y = np.mgrid[-2:2:20j, -2:2:20j]
-z = x * np.exp( - x**2 - y**2)
+z = x * np.exp(-(x**2) - y**2)
 
 fig = plt.figure(figsize=(8, 6))
-ax = plt.subplot(111, projection='3d')
-ax.plot_surface(x, y, z, rstride=2, cstride=1, cmap = plt.cm.Blues_r)
+ax = plt.subplot(111, projection="3d")
+ax.plot_surface(x, y, z, rstride=2, cstride=1, cmap=plt.cm.Blues_r)
 ax.set_xlabel("X")
 ax.set_ylabel("Y")
-ax.set_zlabel("Z");
+ax.set_zlabel("Z")
 
 plt.show()
 
