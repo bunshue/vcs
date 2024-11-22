@@ -3,13 +3,10 @@
 
 使用海生數據集 load_dataset
 
+Seaborn是基於Matplotlib的Python繪圖庫，並有繪圖指令簡單、圖樣風格精美等優點。
+Seaborn is a Python visualization library based on matplotlib.
+It is easy to use and provides a high-level interface for drawing attractive statistical graphics.
 """
-
-print("------------------------------------------------------------")  # 60個
-
-import ssl
-
-ssl._create_default_https_context = ssl._create_stdlib_context
 
 print("------------------------------------------------------------")  # 60個
 
@@ -31,6 +28,14 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 # 設定負號
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
+
+print("------------------------------------------------------------")  # 60個
+
+import ssl
+ssl._create_default_https_context = ssl._create_stdlib_context
+
+import warnings
+warnings.filterwarnings("ignore")
 
 print("------------------------------------------------------------")  # 60個
 
@@ -73,6 +78,48 @@ fig, axs = plt.subplots(1, 2, sharey=True)
 sns.lineplot(x="timepoint", y="signal", hue="event", data=fmri, ax=axs[0])
 sns.lineplot(x="timepoint", y="signal", data=fmri, err_style="bars", ax=axs[1])
 # 設定hue="event"會畫出，不同的event對應的signal數值vs.timepoint
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+fmri = sns.load_dataset("fmri")
+
+# 畫出不同region和event組合下不同的subject的signal vs. timepoint
+sns.relplot(
+    x="timepoint",
+    y="signal",
+    hue="subject",
+    col="region",
+    row="event",
+    height=3,
+    kind="line",
+    estimator=None,
+    data=fmri,
+)
+plt.show()
+
+print(fmri.query("region == 'frontal'"))
+# 大量水平變量狀況下，若展開多個圖，可以用col_wrap來指定圖片數目達到多少時換行，此利用以5為例
+g = sns.relplot(
+    x="timepoint",
+    y="signal",
+    hue="event",
+    style="event",
+    col="subject",
+    col_wrap=5,
+    height=2,
+    aspect=1,
+    linewidth=1.5,
+    kind="line",
+    data=fmri.query("region == 'frontal'"),
+)
+# height:圖片高
+# aspect:圖片寬
+# linewidth:線寬
+# kind:指定繪圖方式
+g.fig.suptitle("suptitle", x=0.5, y=1.1)
+plt.subplots_adjust(wspace=0.1, hspace=0.5)
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
@@ -203,7 +250,6 @@ Matplotlib 則提供了更靈活和強大的自定義功能，但可能需要更
 箱線圖 sns.boxplot: 當你想展示數據的集中趨勢及離群點時，使用箱線圖。
 熱力圖 sns.heatmap: 當你想可視化變數之間的相關性或矩陣數據時，使用熱力圖。
 成對圖 sns.pairplot: 當你需要同時查看多個變數之間的兩兩關係時，使用成對關係圖。
-
 """
 
 # 散佈圖 sns.scatterplot
@@ -430,10 +476,6 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 titanic = sns.load_dataset("titanic")
 print(titanic.head())
 
@@ -474,7 +516,6 @@ sns.catplot(
     data=titanic,
 )
 plt.show()
-
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -575,18 +616,19 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # heatmap
-""" NG
+
 flights = sns.load_dataset("flights")
-flights = flights.pivot("month", "year", "passengers")
+flights = flights.pivot(index="month", columns="year", values="passengers")
 print(flights)
 
 ax = sns.heatmap(flights)
-
 plt.show()
 
 ax = sns.heatmap(flights, annot=True, fmt="d")
-
 plt.show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 # 用mask來只畫出部分熱力圖
 random_data = np.random.randn(10, 200)
@@ -607,7 +649,7 @@ ax = sns.heatmap(
 )
 
 plt.show()
-"""
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -630,16 +672,15 @@ plt.show()
 # 熱力圖 sns.heatmap
 # 用於顯示矩陣數據的顏色編碼表示，通常用於顯示相關矩陣或數據透視表。
 
-"""NG
-# 繪製熱力圖
-flights_pivot = flights.pivot("month", "year", "passengers")
+flights_pivot = flights.pivot(index="month", columns="year", values="passengers")
+
 sns.heatmap(flights_pivot, annot=True, fmt="d")
 plt.show()
-"""
 
 """
 適合情境
-相關矩陣的可視化：當你想要檢視多個變數之間的相關性時，熱力圖是一個很好的工具。例如，觀察各變數之間的相關係數。
+相關矩陣的可視化：當你想要檢視多個變數之間的相關性時，熱力圖是一個很好的工具。
+例如，觀察各變數之間的相關係數。
 矩陣數據的可視化：可以用來表示其他類型的矩陣數據，例如混淆矩陣。
 """
 
@@ -648,8 +689,9 @@ print("------------------------------------------------------------")  # 60個
 
 flights = sns.load_dataset("flights")
 flights.head()
-""" NG
-flights_wide = flights.pivot("year", "month", "passengers")
+
+flights_wide = flights.pivot(index="year", columns="month", values="passengers")
+
 flights_wide.head()  # 畫出不同月份乘客人數和年份的關係
 
 sns.lineplot(data=flights_wide)
@@ -667,51 +709,143 @@ plt.show()
 sns.lineplot(data=flights, x="year", y="passengers", size="month")
 plt.show()
 
-# relplot
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-# 畫出不同region和event組合下不同的subject的signal vs. timepoint
-sns.relplot(
-    x="timepoint",
-    y="signal",
-    hue="subject",
-    col="region",
-    row="event",
-    height=3,
-    kind="line",
-    estimator=None,
-    data=fmri,
-)
-plt.show()
-
-print(fmri.query("region == 'frontal'"))
-# 大量水平變量狀況下，若展開多個圖，可以用col_wrap來指定圖片數目達到多少時換行，此利用以5為例
-g = sns.relplot(
-    x="timepoint",
-    y="signal",
-    hue="event",
-    style="event",
-    col="subject",
-    col_wrap=5,
-    height=2,
-    aspect=1,
-    linewidth=1.5,
-    kind="line",
-    data=fmri.query("region == 'frontal'"),
-)
-# height:圖片高
-# aspect:圖片寬
-# linewidth:線寬
-# kind:指定繪圖方式
-g.fig.suptitle("suptitle", x=0.5, y=1.1)
-plt.subplots_adjust(wspace=0.1, hspace=0.5)
-plt.show()
 """
+小提琴圖 Violinplot
+小提琴圖特點類似盒鬚圖，但更能夠展示資料分佈密度。 
+Violinplots are really close from a boxplots, but are better at showing the density of data.
+"""
+
+sns.set(style="whitegrid")
+
+# 使用seaborn官方提供的資料 Load the example dataset of brain network correlations
+df = sns.load_dataset("brain_networks", header=[0, 1, 2], index_col=0)
+
+# 取用指定資料 Pull out a specific subset of networks
+used_networks = [1, 3, 4, 5, 6, 7, 8, 11, 12, 13, 16, 17]
+used_columns = (df.columns.get_level_values("network")
+                          .astype(int)
+                          .isin(used_networks))
+df = df.loc[:, used_columns]
+
+# 運算相關矩陣以及平均 Compute the correlation matrix and average over networks
+corr_df = df.corr().groupby(level="network").mean()
+corr_df.index = corr_df.index.astype(int)
+corr_df = corr_df.sort_index().T
+
+# 設定窗口 Set up the matplotlib figure
+f, ax = plt.subplots(figsize=(11, 6))
+
+# 繪製小提琴圖(以較窄的寬度) Draw a violinplot with a narrower bandwidth than the default
+sns.violinplot(data=corr_df, palette="Set3", bw=.2, cut=1, linewidth=1)
+
+# 最終化圖形 Finalize the figure
+ax.set(ylim=(-.7, 1.05))
+sns.despine(left=True, bottom=True)
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+"""
+熱圖 Heatmap
+熱圖以顏色變化來顯示資料，以色彩深淺直觀的來顯示數值大小。
+Heatmap show individual values in a matrix with different colors, allowing us to feel the data intuitively by just looking at the matrix.
+"""
+
+sns.set()
+
+# 載入資料 Load data
+flights_long = sns.load_dataset("flights")
+
+flights = flights_long.pivot(index ='month', columns ='year', values='passengers')
+
+# 繪製顯示數值的熱圖 Draw a heatmap with the numeric values in each cell
+f, ax = plt.subplots(figsize=(9, 6))
+sns.heatmap(flights, annot=True, fmt="d", linewidths=.5, ax=ax)
+
+plt.show()
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
+"""
+核密度估計 KDE plot
+多個雙變量的核密度估計圖。
+Multiple bivariate KDE plots.
+"""
+
+sns.set(style="darkgrid")
+iris = sns.load_dataset("iris")
+
+# 指定鳶尾花子集 Subset the iris dataset by species
+setosa = iris.query("species == 'setosa'")
+virginica = iris.query("species == 'virginica'")
+
+# 設定視窗 Set up the figure
+f, ax = plt.subplots(figsize=(8, 8))
+ax.set_aspect("equal")
+
+# 繪製核密度估計圖 Draw the two density plots
+ax = sns.kdeplot(x=setosa.sepal_width, y=setosa.sepal_length,
+                 cmap="Reds", shade=True, shade_lowest=False)
+ax = sns.kdeplot(x=virginica.sepal_width, y=virginica.sepal_length,
+                 cmap="Blues", shade=True, shade_lowest=False)
+
+# 加上標籤 Add labels to the plot
+red = sns.color_palette("Reds")[-2]
+blue = sns.color_palette("Blues")[-2]
+ax.text(2.5, 8.2, "virginica", size=16, color=blue)
+ax.text(3.8, 4.5, "setosa", size=16, color=red)
+
+plt.show()
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
+"""
+群集熱圖 Clustermap
+群集熱圖有兩個部分 - 數值色塊熱圖與分類樹狀圖。從數值色塊可以直觀觀測數據，而樹狀圖則可提供分組歸類結果。
+Clustermap contains two parts - heatmap and tree plot. The heatmap gives us intuition of the value, yet the tree plot show the clustering result.
+"""
+
+sns.set()
+df = sns.load_dataset("brain_networks", header=[0, 1, 2], index_col=0)
+
+used_networks = [1, 5, 6, 7, 8, 12, 13, 17]
+used_columns = (df.columns.get_level_values("network")
+                          .astype(int)
+                          .isin(used_networks))
+df = df.loc[:, used_columns]
+
+used_networks = [1, 5, 6, 7, 8, 12, 13, 17]
+used_columns = (df.columns.get_level_values("network")
+                          .astype(int)
+                          .isin(used_networks))
+df = df.loc[:, used_columns]
+
+# 為不同類別創建色盤 Create a categorical palette to identify the networks
+network_pal = sns.husl_palette(8, s=.45)
+network_lut = dict(zip(map(str, used_networks), network_pal))
+
+# 將色盤轉為向量，繪製在矩陣旁 Convert the palette to vectors that will be drawn on the side of the matrix
+networks = df.columns.get_level_values("network")
+network_colors = pd.Series(networks, index=df.columns).map(network_lut)
+
+# 繪圖 Draw the full plot
+sns.clustermap(df.corr(), center=0, cmap="vlag",
+               row_colors=network_colors, col_colors=network_colors,
+               linewidths=.75, figsize=(13, 13))
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 
 
 print("------------------------------------------------------------")  # 60個

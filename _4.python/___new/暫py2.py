@@ -1,4 +1,29 @@
 
+滑鼠 event 與 flag 列表
+
+當滑鼠在指定視窗中滑動進行某些行為，都會觸發一些事件，相關事件列表如下：
+代號 	事件 	說明
+0 	cv2.EVENT_MOUSEMOVE 	滑動
+1 	cv2.EVENT_LBUTTONDOWN 	左鍵點擊
+2 	cv2.EVENT_RBUTTONDOWN 	右鍵點擊
+3 	cv2.EVENT_MBUTTONDOWN 	中鍵點擊
+4 	cv2.EVENT_LBUTTONUP 	左鍵放開
+5 	cv2.EVENT_RBUTTONUP 	右鍵放開
+6 	cv2.EVENT_MBUTTONUP 	中鍵放開
+7 	cv2.EVENT_LBUTTONDBLCLK 	左鍵雙擊
+8 	cv2.EVENT_RBUTTONDBLCLK 	右鍵雙擊
+9 	cv2.EVENT_MBUTTONDBLCLK 	中鍵雙擊
+
+除了事件，滑鼠的行為也會觸發一些 flag，相關 flag 列表如下：
+代號 	flag 	說明
+1 	cv2.EVENT_FLAG_LBUTTON 	左鍵拖曳
+2 	cv2.EVENT_FLAG_RBUTTON 	右鍵拖曳
+4 	cv2.EVENT_FLAG_MBUTTON 	中鍵拖曳
+8～15 	cv2.EVENT_FLAG_CTRLKEY 	按 Ctrl 不放事件
+16～31 	cv2.EVENT_FLAG_SHIFTKEY 	按 Shift 不放事件
+32～39 	cv2.EVENT_FLAG_ALTKEY 	按 Alt 不放事件
+
+
 """
 **Source** Kevin Markham https://github.com/justmarkham/python-reference
 
@@ -833,14 +858,6 @@ print ('姓名','國文','數學','平均',sep='\t')
 print("BMI is", format(bmi, ".2f"))
 
 
-cv2.CAP_PROP_POS_MSEC	影像物件目前播放的位置 單位為msec
-cv2.CAP_PROP_POS_FRAMES目前播放影像的索引值(從0開始)
-cv2.CAP_PROP_POS_AVI_RATIO
-cv2.CAP_PROP_FRAME_WIDTH	影像的寬度
-cv2.CAP_PROP_FRAME_HEIGHT	影像的高度
-cv2.CAP_PROP_FPS		FPS
-cv2.CAP_PROP_FOURCC		編碼解碼器的編碼格式
-cv2.CAP_PROP_FRAME_COUNT	影像物件的影像總張數
 
 
 ims_qc_database

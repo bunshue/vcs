@@ -87,7 +87,7 @@ import ssl
 ssl._create_default_https_context = ssl._create_unverified_context
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 
 def make_data_frame():
     # print("建立df, 二維串列4X5 轉 df, 加上欄名與index")
@@ -248,6 +248,7 @@ for row in range(df.shape[0]):
 
 print("顯示df之describe(統計資料)")
 print(df.describe())
+print(df.describe(include="all"))
 
 print(df.count())
 print(df.mean())
@@ -964,6 +965,8 @@ print(titanic.head())
 
 # 顯示統計摘要資訊
 print(titanic.describe())
+print(titanic.describe(include='all'))
+print(titanic.describe(include=['object']))  # limit to one (or more) types
 
 # 顯示資料集資訊
 print(titanic.info())
@@ -7569,7 +7572,7 @@ print()
 df3 = df.drop_duplicates("B", keep=False)
 print(df3)
 print()
-'''
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 

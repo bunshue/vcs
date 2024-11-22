@@ -39,6 +39,48 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
+print("高斯模糊, 邊緣模糊化")
+
+image0 = np.zeros((300, 300, 3), dtype="uint8")  # 建立 300x300 的黑色畫布
+image0 = cv2.circle(
+    image0, (150, 150), 100, (255, 255, 255), -1
+)  # 在畫布上中心點加入一個半徑 100 的白色圓形
+
+image1 = cv2.GaussianBlur(image0, (35, 35), 0)  # 進行高斯模糊
+
+cv2.imshow("Original", image0)
+cv2.imshow("Gaussian", image1)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+num_bins = 256  # 直方圖顯示時的束數
+
+plt.figure(figsize=(10, 8))
+
+plt.subplot(221)
+plt.imshow(cv2.cvtColor(image0, cv2.COLOR_BGR2RGB))
+plt.title("原圖轉灰階")
+
+plt.subplot(222)
+plt.hist(image0.ravel(), num_bins, [0, 256], color="r")  # 拉成一維
+plt.xlim(0 - 10, 256 + 10)  # 設定 x 軸座標範圍
+plt.ylim(0 - 10, 5000 + 10)  # 設定 y 軸座標範圍
+plt.title("原圖的影像直方圖")
+
+plt.subplot(223)
+plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
+plt.title("原圖轉灰階")
+
+plt.subplot(224)
+plt.hist(image1.ravel(), num_bins, [0, 256], color="r")  # 拉成一維
+plt.xlim(0 - 10, 256 + 10)  # 設定 x 軸座標範圍
+plt.ylim(0 - 10, 5000 + 10)  # 設定 y 軸座標範圍
+plt.title("原圖的影像直方圖")
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
 print("練習組合成一張大圖 picasa效果")
 
 filename1 = "C:/_git/vcs/_4.python/_data/elephant.jpg"
@@ -1425,10 +1467,8 @@ cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
-print("OpenCV_20")
 
-# 檔案 => cv2影像
-image = cv2.imread(filename)
+print("測試 cv2.floodFill()")
 
 
 def floodFill(
@@ -1447,51 +1487,37 @@ def floodFill(
     return result
 
 
+# 檔案 => cv2影像
+image = cv2.imread(filename)
 h, w = image.shape[:2]  # 取得原始影像的長寬
-mask = np.zeros((h + 2, w + 2, 1), np.uint8)  # 製作 mask，長寬都要加上 2
-output = floodFill(image, mask, (100, 10), red, (100, 100, 60), (100, 100, 100))
 
-cv2.imshow("image", output)
+mask = np.zeros((h + 2, w + 2, 1), np.uint8)  # 製作 mask，長寬都要加上 2
+image1 = floodFill(image, mask, (100, 10), red, (100, 100, 60), (100, 100, 100))
+
+cv2.imshow("image1", image1)
 cv2.waitKey()
 cv2.destroyAllWindows()
 
-print("------------------------------------------------------------")  # 60個
-print("OpenCV_21")
+print("------------------------------")  # 30個
 
 # 檔案 => cv2影像
 image = cv2.imread(filename)
+h, w = image.shape[:2]  # 取得原始影像的長寬
 
-
-def floodFill(
-    source, mask, seedPoint, newVal, loDiff, upDiff, flags=cv2.FLOODFILL_FIXED_RANGE
-):
-    result = source.copy()
-    cv2.floodFill(
-        result,
-        mask=mask,
-        seedPoint=seedPoint,
-        newVal=newVal,
-        loDiff=loDiff,
-        upDiff=upDiff,
-        flags=flags,
-    )
-    return result
-
-
-h, w = image.shape[:2]
 mask = np.zeros((h + 2, w + 2, 1), np.uint8)  # 全黑遮罩
 mask = 255 - mask  # 變成全白遮罩
 mask[0:100, 0:200] = 0  # 將左上角長方形變成黑色
 
 # 只處理mask區域
-output = floodFill(image, mask, (100, 10), red, (100, 100, 60), (200, 200, 200))
+image2 = floodFill(image, mask, (100, 10), red, (100, 100, 60), (200, 200, 200))
 
-cv2.imshow("image", output)
+cv2.imshow("image2", image2)
 cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
-print("OpenCV_23")
+
+print("測試 凸透鏡 效果")
 
 
 def convex(src_image, raw, effect):
@@ -1519,7 +1545,8 @@ cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
-print("OpenCV_24")
+
+print("測試 淡入淡出 效果")
 print("按 ESC 離開")
 
 # 檔案 => cv2影像

@@ -42,6 +42,7 @@ test_feature_vector = test_feature.reshape(len(test_feature), 28, 28, 1).astype(
     "float32"
 )
 test_feature_normalize = test_feature_vector / 255
+
 model = load_model("Mnist_cnn_model.h5")
 
 # y_pred = model.predict_classes(test_feature_normalize) # TensorFlow2.6已刪除predict_classes()

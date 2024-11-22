@@ -47,7 +47,6 @@ MNIST 可以說是 Deep Learning 最有名的範例, 它被 Deep Learning 大師
 Keras 很貼心的幫我們準備好 MNIST 數據庫, 我們可以這樣讀進來 (第一次要花點時間)。
 http://yann.lecun.com/exdb/mnist/
 
-
 Dense        全連接層
 Conv2D       二維卷積層
 MaxPooling2D 最大池化層
@@ -144,12 +143,85 @@ def load_mnist_data():
     # print("測試資料y長度 :", len(y_test))
     return (x_train, y_train), (x_test, y_test)
 
+def check_model_fit_history1(history):
+    # 檢查訓練 資料
+    print('history')
+    print('訓練準確度')
+    acc = history.history["accuracy"]
+    print(acc)
+    plt.plot(acc, label="accuracy")
+    plt.xlabel("epoch")
+    plt.ylabel("accuracy")
+    plt.legend()
+    #plt.show()
+
+def check_model_fit_history2(history):
+    # 檢查訓練和驗證  資料
+    # 評估訓練/驗證 的 損失和準確度, 有 validation_split 才可做
+    print('history')
+    print(history)
+    print('訓練損失')
+    loss = history.history["loss"]
+    print(loss)
+    print('驗證損失')
+    val_loss = history.history["val_loss"]
+    print(val_loss)
+    print('訓練準確度')
+    acc = history.history["accuracy"]
+    print(acc)
+
+    print('驗證準確度')
+    val_acc = history.history["val_accuracy"]
+    print(val_acc)
+
+    epochs = range(1, len(loss) + 1)
+    print('epochs1 = ', epochs)
+
+    plt.plot(epochs, loss, "bo-", label="Training Loss")
+    plt.plot(epochs, val_loss, "ro--", label="Validation Loss")
+    plt.title("Training and Validation Loss")
+    plt.xlabel("Epochs")
+    plt.ylabel("Loss")
+    plt.legend()
+    #plt.show()
+
+    epochs = range(1, len(acc) + 1)
+    
+    print('epochs2 = ', epochs)
+
+    plt.plot(epochs, acc, "bo-", label="Training Acc")
+    plt.plot(epochs, val_acc, "ro--", label="Validation Acc")
+    plt.title("Training and Validation Accuracy")
+    plt.xlabel("Epochs")
+    plt.ylabel("Accuracy")
+    plt.legend()
+    #plt.show()
+
+# 學習訓練.fit, 無驗證
+def do_model_fit1(x_train, y_train):
+    # 共有N個樣品, 一次做 BATCH_SIZE 個, 一輪需要做 N / BATCH_SIZE 次
+    history = model.fit(x_train, y_train, batch_size=BATCH_SIZE, epochs=EPOCHS, verbose=0)
+    #check_model_fit_history1(history)
+
+# 學習訓練.fit, 有驗證 + validation_split split
+# 模型訓練，epochs：執行週期，validation_split：驗證資料佔比
+def do_model_fit2(x_train, y_train, validation_split):
+    # 共有N個樣品, 一次做 BATCH_SIZE 個, 一輪需要做 N / BATCH_SIZE 次
+    history = model.fit(x_train, y_train, validation_split=validation_split, batch_size=BATCH_SIZE, epochs=EPOCHS, verbose=2)
+    #check_model_fit_history2(history)
+
+def do_prediction(x_test):
+    # y_pred = model.predict_classes(x_test) # TensorFlow2.6已刪除predict_classes()
+    predict_x = model.predict(x_test)
+    classes_x = np.argmax(predict_x, axis=1)
+    y_pred = classes_x
+    return y_pred
 
 def show_predict_result(x_test, y_pred, n):
     return
     print("第", n, "筆資料, 神經網路判斷為:", y_pred[n])
     plt.imshow(x_test[n], cmap="Greys")
-    plt.show()
+    #plt.show()
 
 
 def show_predict_result_1d(x_test, y_pred, n):
@@ -159,9 +231,9 @@ def show_predict_result_1d(x_test, y_pred, n):
     plt.show()
 
 
-# 還沒有測 batch_size loss, accuracy = model.evaluate(x_test, y_test2, batch_size=128, verbose=1)
 def evaluate_model(x_test, y_test):
-    # 模型評估.evaluate, 評估準確率, 久
+    # 模型評估.evaluate, 評估準確率
+    #loss, accuracy = model.evaluate(x_test, y_test, batch_size=128, verbose=0) 看起來一樣
     loss, accuracy = model.evaluate(x_test, y_test, verbose=0)
     print("損失率 : {:.2f}".format(loss))
     print("正確率 : {:.2f}".format(accuracy))
@@ -212,23 +284,6 @@ for i in range(num):
     plt.ylabel("")
     start_id += 1
 plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-from urllib.request import urlretrieve
-import gradio as gr
-from PIL import Image
-
-# Loading the MNIST model and data
-# 可下載最新之 .h5 檔案
-# urlretrieve("https://gr-models.s3-us-west-2.amazonaws.com/mnist-model.h5", "mnist-model.h5")
-# mnist-model.h5 路徑不能含中文
-mnist_model_filename = "C:/_git/vcs/_big_files/mnist-model.h5"
-model = tf.keras.models.load_model(mnist_model_filename)
-
-(x_train, y_train), (x_test, y_test) = tf.keras.datasets.mnist.load_data(
-    path="mnist.npz"
-)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -290,7 +345,7 @@ def plot_images_labels(images, labels, idx, num=10):
         ax = plt.subplot(16, 16, 1 + i)  # 建立subgraph子圖形為5行5列
         ax.imshow(images[idx], cmap="binary")  # 劃出subgraph子圖形
         title = str(labels[idx])  # 設定子圖形的title，顯示標籤欄
-        ax.set_title(title, fontsize=10)  # 子圖形的標題tilte與大小
+        ax.set_title(title)
         ax.set_xticks([])
         ax.set_yticks([])  # 設定不顯示刻度
         idx += 1  # 讀取下一筆
@@ -511,20 +566,16 @@ model.add(Dense(10, activation="softmax"))  # 輸出層的神經元 10 個
 model.compile(loss="mse", optimizer=SGD(learning_rate=0.087), metrics=["accuracy"])
 
 # 學習訓練.fit
-# 共有N個樣品, 一次做 BATCH_SIZE 個, 一輪需要做 N / BATCH_SIZE 次
-# model.fit(x_train, y_train, batch_size=100, epochs=EPOCHS)  # 學習訓練.fit
-model.fit(x_train, y_train, batch_size=2000, epochs=EPOCHS)  # 學習訓練.fit
+do_model_fit1(x_train, y_train)
 
-print("預測")
-# y_pred = model.predict_classes(x_test) # TensorFlow2.6已刪除predict_classes()
-predict_x = model.predict(x_test)
-classes_x = np.argmax(predict_x, axis=1)
-y_pred = classes_x
+# 預測
+y_pred = do_prediction(x_test)
 
 n = 123
 show_predict_result(x_test, y_pred, n)
 
-evaluate_model(x_test, y_test)  # 模型評估
+# 模型評估
+evaluate_model(x_test, y_test)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -568,41 +619,13 @@ model.add(Dense(10, activation="softmax"))  # 輸出層的神經元 10 個
 model.compile(loss="categorical_crossentropy", optimizer="adam", metrics=["accuracy"])
 
 # 學習訓練.fit
-# 共有N個樣品, 一次做 BATCH_SIZE 個, 一輪需要做 N / BATCH_SIZE 次
-history = model.fit(
-    X_train, Y_train, validation_split=0.2, epochs=EPOCHS, batch_size=2000, verbose=2
-)  # 學習訓練.fit
+do_model_fit2(X_train, Y_train, validation_split=0.2)
 
-evaluate_model(X_train, Y_train)  # 模型評估
+# 模型評估
+evaluate_model(X_train, Y_train)
 
-evaluate_model(X_test, Y_test)  # 模型評估
-
-""" no plot
-# 顯示訓練和驗證損失
-loss = history.history["loss"]
-epochs = range(1, len(loss) + 1)
-val_loss = history.history["val_loss"]
-
-plt.plot(epochs, loss, "bo-", label="Training Loss")
-plt.plot(epochs, val_loss, "ro--", label="Validation Loss")
-plt.title("Training and Validation Loss")
-plt.xlabel("Epochs")
-plt.ylabel("Loss")
-plt.legend()
-plt.show()
-
-# 顯示訓練和驗證準確度
-acc = history.history["accuracy"]
-epochs = range(1, len(acc) + 1)
-val_acc = history.history["val_accuracy"]
-
-plt.plot(epochs, acc, "bo-", label="Training Acc")
-plt.plot(epochs, val_acc, "ro--", label="Validation Acc")
-plt.title("Training and Validation Accuracy")
-plt.xlabel("Epochs")
-plt.ylabel("Accuracy")
-plt.legend()
-plt.show()
+# 模型評估
+evaluate_model(X_test, Y_test)
 
 (X_train, Y_train), (X_test, Y_test) = load_mnist_data()
 
@@ -618,7 +641,7 @@ X_test_digit = X_test_digit / 255
 plt.title("Example of Digit:" + str(Y_test[i]))
 plt.imshow(digit, cmap="gray")
 plt.axis("off")
-plt.show()
+# plt.show()
 
 # (-0.5, 27.5, 27.5, -0.5)
 
@@ -629,8 +652,8 @@ plt.title("Probabilities for Each Digit Class")
 plt.bar(np.arange(10), probs.reshape(10), align="center")
 plt.xticks(np.arange(10), np.arange(10).astype(str))
 
-plt.show()
-"""
+# plt.show()
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -658,15 +681,10 @@ model.add(Dense(10, activation="softmax"))  # 輸出層的神經元 10 個
 model.compile(loss="mse", optimizer=SGD(learning_rate=0.087), metrics=["accuracy"])
 
 # 學習訓練.fit
-# 共有N個樣品, 一次做 BATCH_SIZE 個, 一輪需要做 N / BATCH_SIZE 次
-# model.fit(x_train, y_train, batch_size=100, epochs=EPOCHS)# 學習訓練.fit
-# model.fit(x_train, y_train, batch_size=1000, epochs=EPOCHS)# 學習訓練.fit
-model.fit(x_train, y_train, batch_size=2000, epochs=EPOCHS)  # 學習訓練.fit
+do_model_fit1(x_train, y_train)
 
-# y_pred = model.predict_classes(x_test) # TensorFlow2.6已刪除predict_classes()
-predict_x = model.predict(x_test)
-classes_x = np.argmax(predict_x, axis=1)
-y_pred = classes_x
+# 預測
+y_pred = do_prediction(x_test)
 
 n = 123
 show_predict_result_1d(x_test, y_pred, n)
@@ -707,16 +725,10 @@ model.add(
 model.compile(loss="categorical_crossentropy", optimizer="adam", metrics=["accuracy"])
 
 # 學習訓練.fit
-model.fit(
-    x=train_feature_normalize,
-    y=train_label_onehot,
-    validation_split=0.2,
-    epochs=EPOCHS,
-    batch_size=2000,
-    verbose=2,
-)
+do_model_fit2(train_feature_normalize, train_label_onehot, validation_split=0.2)
 
-evaluate_model(test_feature_normalize, test_label_onehot)  # 模型評估
+# 模型評估
+evaluate_model(test_feature_normalize, test_label_onehot)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -756,40 +768,10 @@ model.add(
 model.compile(loss="categorical_crossentropy", optimizer="adam", metrics=["accuracy"])
 
 # 學習訓練.fit
-model.fit(
-    x=train_feature_normalize,
-    y=train_label_onehot,
-    validation_split=0.2,
-    epochs=EPOCHS,
-    batch_size=2000,
-    verbose=2,
-)
+do_model_fit2(train_feature_normalize, train_label_onehot, validation_split=0.2)
 
-evaluate_model(test_feature_normalize, test_label_onehot)  # 模型評估
-
-print("將 模型存檔 存成 h5")
-model.save("tmp_Mnist_mlp_model.h5")
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("讀取模型, 並使用之 MLP")
-
-# 別人訓練出來的模型
-model = load_model("Mnist_mlp_model.h5")
-
-(x_train, y_train), (x_test, y_test) = load_mnist_data()
-
-# 將數字影像image的數值正規化(normalization), 從 0~255 => 0~1
-x_test = x_test.reshape(len(x_test), 784) / 255
-
-# y_pred = model.predict_classes(x_test) # TensorFlow2.6已刪除predict_classes()
-predict_x = model.predict(x_test)
-classes_x = np.argmax(predict_x, axis=1)
-y_pred = classes_x
-
-n = 123
-show_predict_result_1d(x_test, y_pred, n)
+# 模型評估
+evaluate_model(test_feature_normalize, test_label_onehot)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -806,35 +788,6 @@ train_feature_normalize = train_feature_vector / 255
 
 print(train_feature_normalize[0])
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-""" 一些 fail
-print('Auto-Keras')
-
-from autokeras import ImageClassifier
-from autokeras.constant import Constant
-import autokeras
-from keras.utils import plot_model
-    
-(x_train, y_train), (x_test, y_test) = load_mnist_data()
-
-x_train = x_train.reshape(x_train.shape + (1,))
-x_test = x_test.reshape(x_test.shape + (1,))
-
-clf = ImageClassifier(verbose=True, augment=False)
-
-clf.fit(x_train, y_train, time_limit=500 * 60)  # 學習訓練.fit
-
-clf.final_fit(x_train, y_train, x_test, y_test, retrain=True)
-
-# 模型評估.evaluate, 評估準確率, 久
-y = clf.evaluate(x_test, y_test)
-print(y * 100)
-
-clf.export_keras_model('tmp_model.h5')
-plot_model(clf, to_file='model.png')
-"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 """
@@ -871,21 +824,18 @@ X_test_2D = X_test.reshape(len(X_test), 28 * 28).astype("float32")
 x_Train_norm = X_train_2D / 255
 x_Test_norm = X_test_2D / 255
 
-""" fit 很久
-
 # 學習訓練.fit
-# 共有N個樣品, 一次做 BATCH_SIZE 個, 一輪需要做 N / BATCH_SIZE 次
-model.fit(x=x_Train_norm, y=y_TrainOneHot, validation_split=0.2, epochs=EPOCHS, batch_size=8000, verbose=2)
-# 學習訓練.fit
+do_model_fit2(x_Train_norm, y_TrainOneHot, validation_split=0.2)
 
-evaluate_model(x_Test_norm, y_TestOneHot)  # 模型評估
+# 模型評估
+evaluate_model(x_Test_norm, y_TestOneHot)
 
 # 預測(prediction)
 X = x_Test_norm[0:10,:]
 predictions = np.argmax(model.predict(X), axis=-1)
 # get prediction result
 print(predictions)
-"""
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -966,21 +916,17 @@ model.add(Dense(10, activation="softmax"))
 # 組裝神經網路, 編譯模型 : 選擇損失函數、優化方法及成效衡量方式
 model.compile(loss="mse", optimizer=SGD(learning_rate=0.087), metrics=["accuracy"])
 
-model.fit(x_train, y_train, batch_size=128, epochs=EPOCHS)  # 學習訓練.fit
+# 學習訓練.fit
+do_model_fit1(x_train, y_train)
 
 # 預測
-# y_pred = model.predict_classes(x_test) # TensorFlow2.6已刪除predict_classes()
-predict_x = model.predict(x_test)
-classes_x = np.argmax(predict_x, axis=1)
-y_pred = classes_x
+y_pred = do_prediction(x_test)
 
 n = 123
 show_predict_result_1d(x_test, y_pred, n)
 
-evaluate_model(x_test, y_test)  # 模型評估
-
-# 把我們的 model 存起來
-model.save("tmp_myCNNmodel.h5")
+# 模型評估
+evaluate_model(x_test, y_test)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1062,7 +1008,6 @@ CNN 一個小技巧是每層的 filters 數目是越來越多, 上課同學建�
     layer 1: 5
     layer 2: 8
     layer 3: 20
-
 """
 
 print("建立神經網路08")
@@ -1115,21 +1060,20 @@ model.add(Dense(10, activation="softmax"))  # 輸出層的神經元 10 個
 # 組裝神經網路, 編譯模型 : 選擇損失函數、優化方法及成效衡量方式
 model.compile(loss="mse", optimizer=SGD(learning_rate=0.07), metrics=["accuracy"])
 
-"""
-print('久 .fit()... 1')
-model.fit(x_train, y_train, batch_size=BATCH_SIZE, epochs=EPOCHS)  # 學習訓練.fit
+# 學習訓練.fit
+do_model_fit1(x_train, y_train)
 
 # 這裡因為第一次訓練有點遜 (CNN 標準), 所以我再執行 fit 一次, 因此實際上是訓練了 20 次。??
 
 #2-5 結果測試 分數
 #我們來看測試資料 (我們的 CNN 沒看過的)
 
-evaluate_model(x_test, y_test)  # 模型評估
+# 模型評估
+evaluate_model(x_test, y_test)
 
 # 儲存結果
 # 結果看來還不差, 所以我們把結果存起來。上次我們介紹分別存架構和權重的方法, 這次我們看看怎麼樣一次就存入權重 + 結構!
-
-model.save("tmp_myCNNmodel.h5")
+model.save("tmp_myCNNmodel2.h5")
 
 # 欣賞一下成果
 # 我們示範一下怎麼讀回我們的神經網路。你會發現讀回來之後就可以直接使用了!!
@@ -1137,109 +1081,33 @@ model.save("tmp_myCNNmodel.h5")
 del model
 # 先把我們原來的 model 刪掉, 保證接下來的是讀進來的。我們要用一個 load_model 的函式。
 
-model = load_model("myCNNmodel.h5")
+model = load_model("tmp_myCNNmodel2.h5")
 
 # 我們用另一個方式: 每次選 5 個顯示, 看是不是有正確辨識。
 
-# y_pred = model.predict_classes(x_test) # TensorFlow2.6已刪除predict_classes()
-predict_x = model.predict(x_test)
-classes_x = np.argmax(predict_x, axis=1)
-y_pred = classes_x
+# 預測
+y_pred = do_prediction(x_test)
 
-# 看來真的可以直接用!!
-pick = np.random.randint(1, 9999, 5)
+"""
+print('任意挑幾個畫出來')
+pick = np.random.randint(0, len(y_pred), 5)
+print(pick)
 
 for i in range(5):
     plt.subplot(1, 5, i + 1)
     plt.imshow(x_test[pick[i]].reshape(28, 28), cmap="Greys")
-    plt.title(y_pred[pick[i]])
-    plt.axis("off")
+    plt.title("預測 :" + str(y_pred[pick[i]]))
+    plt.xlabel("")
+    plt.ylabel("")
+    #plt.axis("off")
+
+plt.show()
+"""
 
 #小結論 我們到此, 基本上是「亂做」的神經網路。
 #有些同學在不斷試驗的過程中, 可能會發現有時會出現很糟糕的結果。
 #因此, 接下來我們要介紹怎麼樣用些簡單的手法, 能讓學習效果比較穩定, 而且有可能可以增加學習效率。
-"""
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
 
-print("讀取模型, 並使用之 CNN")
-
-# 別人訓練出來的模型
-model = load_model("Mnist_cnn_model.h5")
-
-(x_train, y_train), (x_test, y_test) = load_mnist_data()
-
-# 將數字影像image的數值正規化(normalization), 從 0~255 => 0~1
-x_test = x_test.reshape(len(x_test), 28, 28, 1) / 255
-
-# y_pred = model.predict_classes(x_test) # TensorFlow2.6已刪除predict_classes()
-predict_x = model.predict(x_test)
-classes_x = np.argmax(predict_x, axis=1)
-y_pred = classes_x
-
-n = 123
-show_predict_result_1d(x_test, y_pred, n)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("讀取模型, 並使用之 MLP")
-
-import glob, cv2
-
-files = glob.glob("imagedata\*.jpg")  # 建立測試資料
-test_feature = []
-test_label = []
-for file in files:
-    img = cv2.imread(file)
-    img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # 灰階
-    _, img = cv2.threshold(img, 120, 255, cv2.THRESH_BINARY_INV)  # 轉為反相黑白
-    test_feature.append(img)
-    label = file[10:11]  # "imagedata\1.jpg"第10個字元1為label
-    test_label.append(int(label))
-
-test_feature = np.array(test_feature)  # 串列轉為矩陣
-test_label = np.array(test_label)  # 串列轉為矩陣
-test_feature_vector = test_feature.reshape(len(test_feature), 784).astype("float32")
-
-# 將數字影像image的數值正規化(normalization), 從 0~255 => 0~1
-test_feature_normalize = test_feature_vector / 255
-
-# 別人訓練出來的模型
-model = load_model("Mnist_mlp_model.h5")
-
-# y_pred = model.predict_classes(test_feature_normalize) # TensorFlow2.6已刪除predict_classes()
-predict_x = model.predict(test_feature_normalize)
-classes_x = np.argmax(predict_x, axis=1)
-y_pred = classes_x
-
-# 畫出來
-images, labels, predictions, start_id, num = (
-    test_feature,
-    test_label,
-    y_pred,
-    0,
-    len(test_feature),
-)
-""" no plot
-if num > 25:
-    num = 25
-for i in range(0, num):
-    plt.subplot(16, 16, i + 1)
-    plt.imshow(images[start_id], cmap="binary")  # 顯示黑白圖片
-    if len(predictions) > 0:  # 有傳入預測資料
-        title = "ai = " + str(predictions[start_id])
-        # 預測正確顯示(o), 錯誤顯示(x)
-        title += " (o)" if predictions[start_id] == labels[start_id] else " (x)"
-        title += "\n" + str(labels[start_id])
-    else:  # 沒有傳入預測資料
-        title = str(labels[start_id])
-    plt.title(title)
-    plt.xlabel("")
-    plt.ylabel("")
-    start_id += 1
-plt.show()
-"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -1366,28 +1234,12 @@ model.compile(loss="mse", optimizer=SGD(learning_rate=0.087), metrics=["accuracy
 於是最精彩的就來了。你要有等待的心理準備...
 """
 
-print(
-    "資料共有 :",
-    len(x_train),
-    "筆, 每",
-    BATCH_SIZE,
-    "筆調一次參數, 共需調",
-    len(x_train) / BATCH_SIZE,
-    "次",
-)
-print("訓練次數 :", EPOCHS)
+# 學習訓練.fit
+do_model_fit1(x_train, y_train)
 
-print("x_train len")
-print(len(x_train))
-print("y_train len")
-print(len(y_train))
+# 預測
+y_pred = do_prediction(x_test)
 
-model.fit(x_train, y_train, batch_size=BATCH_SIZE, epochs=EPOCHS)  # 學習訓練.fit
-
-# y_pred = model.predict_classes(x_test) # TensorFlow2.6已刪除predict_classes()
-predict_x = model.predict(x_test)
-classes_x = np.argmax(predict_x, axis=1)
-y_pred = classes_x
 print("預測結果1")
 # print(y_pred)
 
@@ -1405,16 +1257,8 @@ print(len(x_test))
 print("y_test len")
 print(len(y_test))
 
-evaluate_model(x_test, y_test)  # 模型評估
-
-# 把訓練好的神經網路存起來
-# 如果對訓練成果滿意, 我們當然不想每次都再訓練一次!
-# 我們可以把神經網路的架構和訓練好的參數都存起來, 以供日後使用!
-# pip install h5py
-
-model_json = model.to_json()
-open("tmp_stupid_model.json", "w").write(model_json)
-model.save_weights("tmp_stupid_model_weights.h5")
+# 模型評估
+evaluate_model(x_test, y_test)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1482,60 +1326,17 @@ model.add(Dense(10, activation="softmax"))  # 輸出層的神經元 10 個
 # 組裝神經網路, 編譯模型 : 選擇損失函數、優化方法及成效衡量方式
 model.compile(loss="mse", optimizer=SGD(learning_rate=0.087), metrics=["accuracy"])
 
-""" NG here
-# model.fit(x_train, y_train, batch_size = 100, epochs=EPOCHS)# 學習訓練.fit
-# model.fit(x_train, y_train, batch_size = 1200, epochs=EPOCHS)# 學習訓練.fit
-model.fit(x_train, y_train, batch_size=2400, epochs=EPOCHS)  # 學習訓練.fit
+""" 不能訓練  因為組裝錯誤
+# 學習訓練.fit
+do_model_fit1(x_train, y_train)
 
-# y_pred = model.predict_classes(x_test) # TensorFlow2.6已刪除predict_classes()
-predict_x = model.predict(x_test)
-classes_x = np.argmax(predict_x, axis=1)
-y_pred = classes_x
+# 預測
+y_pred = do_prediction(x_test)
 
 n = 123
 show_predict_result_1d(x_test, y_pred, n)
-
 """
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
 
-(train_feature, train_label), (test_feature, test_label) = load_mnist_data()
-
-test_feature_vector = test_feature.reshape(len(test_feature), 784).astype("float32")
-
-# 將數字影像image的數值正規化(normalization), 從 0~255 => 0~1
-test_feature_normalize = test_feature_vector / 255
-
-# 別人訓練出來的模型
-model = load_model("Mnist_mlp_model.h5")
-
-# y_pred = model.predict_classes(test_feature_normalize) # TensorFlow2.6已刪除predict_classes()
-predict_x = model.predict(test_feature_normalize)
-classes_x = np.argmax(predict_x, axis=1)
-y_pred = classes_x
-
-"""
-# 畫出來
-images, labels, predictions, start_id, num = test_feature, test_label, y_pred, 0, 25
-
-if num > 25:
-    num = 25
-for i in range(0, num):
-    plt.subplot(5, 5, i + 1)
-    plt.imshow(images[start_id], cmap="binary")  # 顯示黑白圖片
-    if len(predictions) > 0:  # 有傳入預測資料
-        title = "ai = " + str(predictions[start_id])
-        # 預測正確顯示(o), 錯誤顯示(x)
-        title += " (o)" if predictions[start_id] == labels[start_id] else " (x)"
-        title += "\n" + str(labels[start_id])
-    else:  # 沒有傳入預測資料
-        title = str(labels[start_id])
-    plt.title(title)
-    plt.xlabel("")
-    plt.ylabel("")
-    start_id += 1
-plt.show()
-"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -1586,21 +1387,9 @@ model.add(Dense(10, activation="softmax"))  # 輸出層的神經元 10 個
 # 組裝神經網路, 編譯模型 : 選擇損失函數、優化方法及成效衡量方式
 model.compile(optimizer="rmsprop", loss="binary_crossentropy", metrics=["accuracy"])
 
-# 跑很久
-"""
-#history = model.fit(X_train, y_train, verbose=1, batch_size=32,epochs=EPOCHS)
-history = model.fit(X_train, y_train, verbose=1, batch_size=960,epochs=EPOCHS)
+# 學習訓練.fit
+do_model_fit1(X_train, y_train)
 
-plt.plot(history.history["accuracy"], label="accuracy")
-
-plt.ylabel("accuracy")
-
-plt.xlabel("epoch")
-
-plt.legend(loc="best")
-
-#plt.show()
-"""
 print("------------------------------------------------------------")  # 60個
 
 (X_train, y_train), (X_test, y_test) = load_mnist_data()
@@ -1623,9 +1412,11 @@ model.add(Dense(10, activation="softmax"))  # 輸出層的神經元 10 個
 # 組裝神經網路, 編譯模型 : 選擇損失函數、優化方法及成效衡量方式
 model.compile(optimizer="rmsprop", loss="binary_crossentropy", metrics=["accuracy"])
 
-model.fit(X_train, y_train, verbose=0)
+# 學習訓練.fit
+do_model_fit1(X_train, y_train)
 
-evaluate_model(X_test, y_test)  # 模型評估
+# 模型評估
+evaluate_model(X_test, y_test)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1649,14 +1440,15 @@ model.add(Dense(10, activation="softmax"))  # 輸出層的神經元 10 個
 # 組裝神經網路, 編譯模型 : 選擇損失函數、優化方法及成效衡量方式
 model.compile(optimizer="rmsprop", loss="binary_crossentropy", metrics=["accuracy"])
 
-model.fit(X_train, y_train, verbose=0)
+# 學習訓練.fit
+do_model_fit1(X_train, y_train)
 
 """ 畫出來
 for i in range(10):
     plt.subplot(1, 10, i + 1)
     plt.imshow(X_test[i].reshape((28, 28)), "gray")
 
-plt.show()
+# plt.show()
 """
 
 pred = np.argmax(model.predict(X_test[0:10]), axis=1)
@@ -1690,10 +1482,11 @@ sgd = optimizers.SGD(learning_rate=0.01)
 # 組裝神經網路, 編譯模型 : 選擇損失函數、優化方法及成效衡量方式
 model.compile(optimizer=sgd,loss='categorical_crossentropy',metrics=['accuracy'])
 
-# 共有N個樣品, 一次做 BATCH_SIZE 個, 一輪需要做 N / BATCH_SIZE 次
-model.fit(X_train, y_train, verbose=0, batch_size=BATCH_SIZE, epochs=EPOCHS)
+# 學習訓練.fit
+do_model_fit1(X_train, y_train)
 
-evaluate_model(X_test, y_test)  # 模型評估
+# 模型評估
+evaluate_model(X_test, y_test)
 
 #超參數設定(一)：隱藏層的數量、隱藏層設計多少神經元
 
@@ -1744,9 +1537,11 @@ sgd = optimizers.SGD(learning_rate=0.01)
 # 組裝神經網路, 編譯模型 : 選擇損失函數、優化方法及成效衡量方式
 model.compile(optimizer=sgd,loss='categorical_crossentropy',metrics=['accuracy'])
 
-model.fit(X_train, y_train, verbose=0, batch_size=BATCH_SIZE, epochs=EPOCHS)
+# 學習訓練.fit
+do_model_fit1(X_train, y_train)
 
-evaluate_model(X_test, y_test)  # 模型評估
+# 模型評估
+evaluate_model(X_test, y_test)
 
 #15-3 超參數設定(二)：加入Dropout層
 
@@ -1776,9 +1571,11 @@ sgd = optimizers.SGD(learning_rate=0.01)
 # 組裝神經網路, 編譯模型 : 選擇損失函數、優化方法及成效衡量方式
 model.compile(optimizer=sgd,loss='categorical_crossentropy',metrics=['accuracy'])
 
-model.fit(X_train, y_train, verbose=0, batch_size=BATCH_SIZE, epochs=EPOCHS)
+# 學習訓練.fit
+do_model_fit1(X_train, y_train)
 
-evaluate_model(X_test, y_test)  # 模型評估
+# 模型評估
+evaluate_model(X_test, y_test)
 
 #15-4 超參數設定(三)：損失函數與優化器
 
@@ -1810,9 +1607,11 @@ sgd = optimizers.SGD(learning_rate=lr)
 # 組裝神經網路, 編譯模型 : 選擇損失函數、優化方法及成效衡量方式
 model.compile(optimizer=sgd,loss='categorical_crossentropy',metrics=['accuracy'])
 
-model.fit(X_train, y_train, verbose=0, batch_size=BATCH_SIZE, epochs=EPOCHS)
+# 學習訓練.fit
+do_model_fit1(X_train, y_train)
 
-evaluate_model(X_test, y_test)  # 模型評估
+# 模型評估
+evaluate_model(X_test, y_test)
 
 print('------------------------------------------------------------')	#60個
 print('------------------------------------------------------------')	#60個
@@ -1843,9 +1642,11 @@ model.compile(optimizer=sgd, loss="categorical_crossentropy", metrics=["accuracy
 # 比較參數
 # BATCH_SIZE = 16 / 32 / 64
 
-model.fit(X_train, y_train, verbose=0, batch_size=BATCH_SIZE, epochs=EPOCHS)
+# 學習訓練.fit
+do_model_fit1(X_train, y_train)
 
-evaluate_model(X_test, y_test)  # 模型評估
+# 模型評估
+evaluate_model(X_test, y_test)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1878,16 +1679,14 @@ model.compile(optimizer=sgd, loss="categorical_crossentropy", metrics=["accuracy
 # 比較參數
 # EOPCHS = 5/10/60
 
-"""
-#做很久
-model.fit(X_train, y_train, verbose=1, batch_size=BATCH_SIZE, epochs=EPOCHS)
+# 學習訓練.fit
+do_model_fit1(X_train, y_train)
 
-evaluate_model(X_test, y_test)  # 模型評估
+# 模型評估
+evaluate_model(X_test, y_test)
 
-"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
 
 # Final 使用 CNN 辨識手寫數字圖片
 
@@ -1923,19 +1722,18 @@ model.add(Dense(10, activation="softmax"))  # 輸出層的神經元 10 個
 # 組裝神經網路, 編譯模型 : 選擇損失函數、優化方法及成效衡量方式
 model.compile(loss="categorical_crossentropy", optimizer="sgd", metrics=["accuracy"])
 
-"""
-#做很久
-#model.fit(X_train, y_train, batch_size = 128, epochs=EPOCHS, verbose = 1)# 學習訓練.fit
-model.fit(X_train, y_train, batch_size = 1280, epochs=EPOCHS, verbose = 1)# 學習訓練.fit
+# 學習訓練.fit
+do_model_fit1(X_train, y_train)
 
-evaluate_model(X_test, y_test)  # 模型評估
+# 模型評估
+evaluate_model(X_test, y_test)
 
 # 將前10張圖片畫出來
 for i in range(10):
     plt.subplot(2, 5, i+1)
     plt.imshow(X_test[i].reshape((28,28)), 'gray')
 
-plt.suptitle("The first ten of the test data",fontsize=20)
+plt.suptitle("The first ten of the test data")
 
 #plt.show()
 
@@ -1945,7 +1743,6 @@ pred = np.argmax(model.predict(X_test[0:10]), axis=1)
 
 print(pred)
 
-"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -1975,50 +1772,30 @@ model.add(
 )
 
 model.add(MaxPooling2D(pool_size=(2, 2)))
-
 model.add(Conv2D(filters=32, kernel_size=(2, 2), strides=(1, 1), padding="same"))
-
 model.add(MaxPooling2D(pool_size=(2, 2)))
-
 model.add(Flatten())
-
 model.add(Dense(256))
 
 # 批次正規化
-
 model.add(BatchNormalization())
-
 model.add(Activation("relu"))
-
 model.add(Dense(128))
 
 # 批次正規化
-
 model.add(BatchNormalization())
-
 model.add(Activation("relu"))
-
 model.add(Dense(10))
-
 model.add(Activation("softmax"))
 
 # 組裝神經網路, 編譯模型 : 選擇損失函數、優化方法及成效衡量方式
 model.compile(optimizer="sgd", loss="categorical_crossentropy", metrics=["accuracy"])
 
-"""
-# 執行訓練
-# 做很久
 # 學習訓練.fit
+# 共有N個樣品, 一次做 BATCH_SIZE 個, 一輪需要做 N / BATCH_SIZE 次
 history = model.fit(X_train, y_train, batch_size=BATCH_SIZE, epochs=EPOCHS, validation_data=(X_test, y_test))
 
-# 做可視化處理
-plt.plot(history.history['accuracy'], label='acc', ls='-', marker='o')
-plt.plot(history.history['val_accuracy'], label='val_acc', ls='-', marker='x')
-plt.ylabel('accuracy')
-plt.xlabel('epoch')
-plt.suptitle("model", fontsize=12)
-#plt.show()
-"""
+check_model_fit_history2(history)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -2027,7 +1804,7 @@ ESC = 27
 
 import cv2
 
-""" NG 無檔案
+""" NG 無檔案 keras_model.h5
 model = tf.keras.models.load_model('keras_model.h5', compile=False)   # 載入 model
 data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)           # 設定資料陣列
 
@@ -2064,7 +1841,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-""" NG 無檔案
+""" NG 無檔案 keras_model.h5
 model = tf.keras.models.load_model('keras_model.h5', compile=False)  # 載入模型
 data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)          # 設定資料陣列
 
@@ -2115,7 +1892,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-""" NG 無檔案
+""" NG 無檔案 keras_model.h5
 from PIL import ImageFont, ImageDraw, Image  # 載入 PIL 相關函式庫
 
 fontpath = 'NotoSansTC-Regular.otf'          # 設定字型路徑
@@ -2166,7 +1943,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-""" NG 無檔案
+""" NG 無檔案 keras_model.h5
 model = tf.keras.models.load_model('keras_model.h5', compile=False)  # 載入模型
 data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)          # 設定資料陣列
 
@@ -2214,7 +1991,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-""" NG 無檔案
+""" NG 無檔案 keras_model_3.h5
 from PIL import ImageFont, ImageDraw, Image  # 載入 PIL 相關函式庫
 
 fontpath = 'NotoSansTC-Regular.otf'          # 設定字型路徑
@@ -2385,11 +2162,13 @@ model.add(Activation("softmax"))
 # 組裝神經網路, 編譯模型 : 選擇損失函數、優化方法及成效衡量方式
 model.compile(loss="categorical_crossentropy", metrics=["accuracy"], optimizer="sgd")
 
-""" long
-# 共有N個樣品, 一次做 BATCH_SIZE 個, 一輪需要做 N / BATCH_SIZE 次
-model.fit(X_train, Y_train, batch_size=BATCH_SIZE, epochs=EPOCHS, verbose=1)
+""" 久
 
-evaluate_model(X_test, Y_test)  # 模型評估
+# 學習訓練.fit
+do_model_fit1(X_train, Y_train)
+
+# 模型評估
+evaluate_model(X_test, Y_test)
 
 weights = model.layers[0].get_weights()
 
@@ -2498,9 +2277,12 @@ model.compile(
     loss="categorical_crossentropy", metrics=["accuracy"], optimizer="adadelta"
 )
 """ NG
-model.fit(X_train, Y_train, batch_size=BATCH_SIZE, epochs=EPOCHS, verbose=1)
 
-evaluate_model(X_test, Y_test)  # 模型評估
+# 學習訓練.fit
+do_model_fit1(X_train, Y_train)
+
+# 模型評估
+evaluate_model(X_test, Y_test)
 """
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -2545,9 +2327,12 @@ model.compile(
     loss="categorical_crossentropy", metrics=["accuracy"], optimizer="adadelta"
 )
 """ 久
-model.fit(X_train, Y_train, batch_size=BATCH_SIZE, epochs=EPOCHS, validation_split = 0.1, verbose=1)
 
-evaluate_model(X_test, Y_test)  # 模型評估
+# 學習訓練.fit
+do_model_fit2(X_train, Y_train, validation_split=0.2)
+
+# 模型評估
+evaluate_model(X_test, Y_test)
 """
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -2619,11 +2404,11 @@ model.compile(optimizer=adam,
               loss='categorical_crossentropy',
               metrics=['accuracy'])
 
-print('Training ------------')
-# Another way to train the model
-model.fit(X_train, y_train, epoch=1, batch_size=BATCH_SIZE,)
+# 學習訓練.fit
+do_model_fit1(X_train, y_train)
 
-evaluate_model(X_test, y_test)  # 模型評估
+# 模型評估
+evaluate_model(X_test, y_test)
 """
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -2678,23 +2463,14 @@ model.compile(
 )
 # 設定模型的 Loss 函數、Optimizer 以及用來判斷模型好壞的依據（metrics）
 
-print("久 .fit()... 2")
+# 學習訓練.fit
+# x_train, y_train2 進行訓練的因和果的資料
+# batch_size=BATCH_SIZE,  # 設定每次訓練的筆數
+# epochs=EPOCHS,  # 設定訓練的次數，也就是機器學習的次數
+do_model_fit1(x_train, y_train2)
 
-# 訓練模型
-history = model.fit(
-    x_train,
-    y_train2,  # 進行訓練的因和果的資料
-    batch_size=1000,  # 設定每次訓練的筆數
-    epochs=EPOCHS,  # 設定訓練的次數，也就是機器學習的次數
-    verbose=1,
-)
-
-# tmp evaluate_model(X_train, Y_train)  # 模型評估
-
-# 模型評估.evaluate, 評估準確率, 久
-loss, accuracy = model.evaluate(x_test, y_test2, batch_size=128, verbose=1)
-print("損失率 : {:.2f}".format(loss))
-print("正確率 : {:.2f}".format(accuracy))
+# 模型評估
+evaluate_model(x_test, y_test2)
 
 predict = model.predict(x_test)  # 取得每一個結果的機率
 print(
@@ -2705,10 +2481,8 @@ print(
     np.argmax(predict[3]),
 )  # 取得預測答案1
 
-# y_pred = model.predict_classes(x_test[:10]) # TensorFlow2.6已刪除predict_classes()
-predict_x = model.predict(x_test[:10])
-classes_x = np.argmax(predict_x, axis=1)
-y_pred = classes_x
+# 預測
+y_pred = do_prediction(x_test[:10])
 
 print("predict_classes:", y_pred[:10])  # 輸出預測答案2
 print("y_test", y_test[:10])  # 實際測試的果
@@ -2786,16 +2560,11 @@ model.compile(
     metrics=["accuracy"],
 )
 
-print("久 .fit()... 3")
-""" skip
-model.fit(x_train, y_train2, batch_size=1024, epochs=EPOCHS, verbose=1)
+# 學習訓練.fit
+do_model_fit1(x_train, y_train2)
 
-# tmp evaluate_model(X_train, Y_train)  # 模型評估
-
-# 模型評估.evaluate, 評估準確率, 久
-loss, accuracy = model.evaluate(x_test, y_test2, batch_size=128, verbose=1)
-print("損失率 : {:.2f}".format(loss))
-print("正確率 : {:.2f}".format(accuracy))
+# 模型評估
+evaluate_model(x_test, y_test2)
 
 predict = model.predict(x_test)
 print(
@@ -2806,20 +2575,12 @@ print(
     np.argmax(predict[3]),
 )
 
-# y_pred = model.predict_classes(x_test) # TensorFlow2.6已刪除predict_classes()
-predict_x = model.predict(x_test)
-classes_x = np.argmax(predict_x, axis=1)
-y_pred = classes_x
+# 預測
+y_pred = do_prediction(x_test)
 
 print("predict_classes:", y_pred)
 print("y_test", y_test[:])
 
-# 保存模型架構
-with open("model.json", "w") as json_file:
-    json_file.write(tmp_model.to_json())
-# 保存模型權重
-model.save_weights("tmp_model.h5")
-"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -2902,17 +2663,11 @@ model.compile(
 
 tensorboard = TensorBoard(log_dir="logs")
 
-print("久 .fit()... 4")
-"""
-history = model.fit(x_train, y_train2, batch_size=100, epochs=EPOCHS, verbose=1)
+# 學習訓練.fit
+do_model_fit1(x_train, y_train2)
 
-# tmp evaluate_model(X_train, Y_train)  # 模型評估
-
-# 模型評估.evaluate, 評估準確率, 久
-loss, accuracy = model.evaluate(x_test, y_test2, batch_size=128, verbose=0)
-print("損失率 : {:.2f}".format(loss))
-print("正確率 : {:.2f}".format(accuracy))
-
+# 模型評估
+evaluate_model(x_test, y_test2)
 
 predict = model.predict(x_test)
 print(
@@ -2923,28 +2678,12 @@ print(
     np.argmax(predict[3]),
 )
 
-# y_pred = model.predict_classes(x_test) # TensorFlow2.6已刪除predict_classes()
-predict_x = model.predict(x_test)
-classes_x = np.argmax(predict_x, axis=1)
-y_pred = classes_x
+# 預測
+y_pred = do_prediction(x_test)
 
 print("predict_classes:", y_pred[:20])
 print("y_test", y_test[:20])
 
-plt.plot(history.history["acc"])
-plt.plot(history.history["loss"])
-plt.title("model accuracy")
-plt.ylabel("acc & loss")
-plt.xlabel("epoch")
-plt.legend(["acc", "loss"], loc="upper left")
-plt.show()
-
-# 保存模型架構
-with open("model.json", "w") as json_file:
-    json_file.write(tmp_model.to_json())
-# 保存模型權重
-model.save_weights("tmp_model.h5")
-"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -2964,10 +2703,6 @@ x_train = x_train.astype("float32")
 x_test = x_test.astype("float32")
 x_train /= 255
 x_test /= 255
-
-print("x_train shape:", x_train.shape)
-print(x_train.shape[0], "train samples")
-print(x_test.shape[0], "test samples")
 
 # One-Hot Encoding, 將數字轉為 One-hot 向量
 y_train2 = to_categorical(y_train, category)
@@ -3059,27 +2794,23 @@ checkpoint = tf.keras.callbacks.ModelCheckpoint(
 with open("tmp_model_ImageDataGenerator.json", "w") as json_file:
     json_file.write(model.to_json())
 
-print("久 .fit()... 5")
+"""
+# 學習訓練.fit 使用 callbacks
+# 共有N個樣品, 一次做 BATCH_SIZE 個, 一輪需要做 N / BATCH_SIZE 次
 history = model.fit(train_generator, callbacks=[checkpoint], epochs=EPOCHS)
-
-""" 
-history=model.fit(x_train, y_train2,
-          batch_size=10000,
-          epochs=EPOCHS,
-          verbose=1)
 """
 
-"""
-print('久 .fit()... 6')
+# 學習訓練.fit 一般
+do_model_fit1(x_train, y_train2)
+
 # history = model.fit_generator(train_generator, y_train2, epochs=EPOCHS)
-history = model.fit(train_generator, epochs=EPOCHS)
 
-# tmp evaluate_model(X_train, Y_train)  # 模型評估
+# 學習訓練.fit
+# 共有N個樣品, 一次做 BATCH_SIZE 個, 一輪需要做 N / BATCH_SIZE 次
+# history = model.fit(train_generator, epochs=EPOCHS)
 
-# 模型評估.evaluate, 評估準確率, 久
-loss, accuracy = model.evaluate(x_test, y_test2, batch_size=128, verbose=0)
-print("損失率 : {:.2f}".format(loss))
-print("正確率 : {:.2f}".format(accuracy))
+# 模型評估
+evaluate_model(x_test, y_test2)
 
 predict = model.predict(x_test)
 print(
@@ -3090,34 +2821,12 @@ print(
     np.argmax(predict[3]),
 )
 
-# y_pred = model.predict_classes(x_test) # TensorFlow2.6已刪除predict_classes()
-predict_x = model.predict(x_test)
-classes_x = np.argmax(predict_x, axis=1)
-y_pred = classes_x
+# 預測
+y_pred = do_prediction(x_test)
 
 print("predict_classes:", y_pred[:20])
 print("y_test", y_test[:20])
 
-plt.plot(history.history["acc"])
-plt.plot(history.history["loss"])
-plt.title("model accuracy")
-plt.ylabel("acc & loss")
-plt.xlabel("epoch")
-plt.legend(["acc", "loss"], loc="upper left")
-plt.show()
-
-# 保存模型架構
-with open("tmp_model_img.json", "w") as json_file:
-    json_file.write(model.to_json())
-# 保存模型權重
-model.save_weights("tmp_model_img.h5")
-
-# 保存模型架構
-with open("tmp_model.json", "w") as json_file:
-    json_file.write(model.to_json())
-# 保存模型權重
-model.save_weights("tmp_model.h5")
-"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -3141,12 +2850,15 @@ model.compile(
     optimizer="adam", loss="sparse_categorical_crossentropy", metrics=["accuracy"]
 )
 
-print("久 .fit()... 7")
-"""
+print("不同寫法的 model.fit")
+
+""" 久
+# 學習訓練.fit
+# 共有N個樣品, 一次做 BATCH_SIZE 個, 一輪需要做 N / BATCH_SIZE 次
 model.fit(x_train, y_train, epochs=EPOCHS, validation_data=(x_test, y_test))
 
-evaluate_model(x_test, y_test)  # 模型評估
-
+# 模型評估
+evaluate_model(x_test, y_test)
 """
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -3175,14 +2887,12 @@ model.compile(
     optimizer="adam", loss="sparse_categorical_crossentropy", metrics=["accuracy"]
 )
 
-print("久 .fit()... 8")
-"""
-# 模型訓練，epochs：執行週期，validation_split：驗證資料佔 20%
-model.fit(x_train, y_train, epochs=EPOCHS, validation_split=0.2)
+# 學習訓練.fit
+do_model_fit2(x_train, y_train, validation_split=0.2)
 
-evaluate_model(x_test, y_test)  # 模型評估
+# 模型評估
+evaluate_model(x_test, y_test)
 
-"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -3207,11 +2917,8 @@ mnist.close()
 # 我們 "predict" 放的是我們神經網路的學習結果。
 # 這裡用 predict_classes 會讓我們 Keras 選 10 個輸出機率最大的那類。
 
-# y_pred = model.predict_classes(x_test) # TensorFlow2.6已刪除predict_classes()
-predict_x = model.predict(x_test)
-classes_x = np.argmax(predict_x, axis=1)
-y_pred = classes_x
-
+# 預測
+y_pred = do_prediction(x_test)
 
 # 我們 "predict" 放的是我們神經網路的學習結果。
 # 這裡用 predict_classes 會讓我們 Keras 選 10 個輸出機率最大的那類。
@@ -3252,3 +2959,269 @@ os.environ["TF_CPP_MIN_LOG_LEVEL"] = "2"
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
+
+
+# 把訓練好的神經網路存起來
+# 我們可以把神經網路的架構和訓練好的參數都存起來, 以供日後使用!
+# pip install h5py
+
+
+# 學習訓練完成後, 將模型存檔
+# After model.fit(...)
+
+
+# 保存模型架構
+with open("tmp_model.json", "w") as json_file:
+    json_file.write(model.to_json())
+# 保存模型權重
+print("將 模型存檔 存成 h5")
+model.save("tmp_Mnist_mlp_model.h5")
+model.save_weights("tmp_model.h5")
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("讀取模型, 並使用之 MLP")
+
+# 別人訓練出來的模型
+model = load_model("Mnist_mlp_model.h5")
+
+(x_train, y_train), (x_test, y_test) = load_mnist_data()
+
+# 將數字影像image的數值正規化(normalization), 從 0~255 => 0~1
+x_test = x_test.reshape(len(x_test), 784) / 255
+
+# 預測
+y_pred = do_prediction(x_test)
+
+n = 123
+show_predict_result_1d(x_test, y_pred, n)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("讀取模型, 並使用之 CNN")
+
+# 別人訓練出來的模型
+model = load_model("Mnist_cnn_model.h5")
+
+(x_train, y_train), (x_test, y_test) = load_mnist_data()
+
+# 將數字影像image的數值正規化(normalization), 從 0~255 => 0~1
+x_test = x_test.reshape(len(x_test), 28, 28, 1) / 255
+
+# 預測
+y_pred = do_prediction(x_test)
+
+n = 123
+show_predict_result_1d(x_test, y_pred, n)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("讀取模型, 並使用之 MLP")
+
+import glob, cv2
+
+files = glob.glob("imagedata\*.jpg")  # 建立測試資料
+test_feature = []
+test_label = []
+for file in files:
+    img = cv2.imread(file)
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # 灰階
+    _, img = cv2.threshold(img, 120, 255, cv2.THRESH_BINARY_INV)  # 轉為反相黑白
+    test_feature.append(img)
+    label = file[10:11]  # "imagedata\1.jpg"第10個字元1為label
+    test_label.append(int(label))
+
+test_feature = np.array(test_feature)  # 串列轉為矩陣
+test_label = np.array(test_label)  # 串列轉為矩陣
+test_feature_vector = test_feature.reshape(len(test_feature), 784).astype("float32")
+
+# 將數字影像image的數值正規化(normalization), 從 0~255 => 0~1
+test_feature_normalize = test_feature_vector / 255
+
+# 別人訓練出來的模型
+model = load_model("Mnist_mlp_model.h5")
+
+# 預測
+y_pred = do_prediction(test_feature_normalize)
+
+# 畫出來
+images, labels, predictions, start_id, num = (
+    test_feature,
+    test_label,
+    y_pred,
+    0,
+    len(test_feature),
+)
+""" no plot
+if num > 25:
+    num = 25
+for i in range(0, num):
+    plt.subplot(16, 16, i + 1)
+    plt.imshow(images[start_id], cmap="binary")  # 顯示黑白圖片
+    if len(predictions) > 0:  # 有傳入預測資料
+        title = "ai = " + str(predictions[start_id])
+        # 預測正確顯示(o), 錯誤顯示(x)
+        title += " (o)" if predictions[start_id] == labels[start_id] else " (x)"
+        title += "\n" + str(labels[start_id])
+    else:  # 沒有傳入預測資料
+        title = str(labels[start_id])
+    plt.title(title)
+    plt.xlabel("")
+    plt.ylabel("")
+    start_id += 1
+plt.show()
+"""
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+(train_feature, train_label), (test_feature, test_label) = load_mnist_data()
+
+test_feature_vector = test_feature.reshape(len(test_feature), 784).astype("float32")
+
+# 將數字影像image的數值正規化(normalization), 從 0~255 => 0~1
+test_feature_normalize = test_feature_vector / 255
+
+# 別人訓練出來的模型
+model = load_model("Mnist_mlp_model.h5")
+
+# 預測
+y_pred = do_prediction(test_feature_normalize)
+
+"""
+# 畫出來
+images, labels, predictions, start_id, num = test_feature, test_label, y_pred, 0, 25
+
+if num > 25:
+    num = 25
+for i in range(0, num):
+    plt.subplot(5, 5, i + 1)
+    plt.imshow(images[start_id], cmap="binary")  # 顯示黑白圖片
+    if len(predictions) > 0:  # 有傳入預測資料
+        title = "ai = " + str(predictions[start_id])
+        # 預測正確顯示(o), 錯誤顯示(x)
+        title += " (o)" if predictions[start_id] == labels[start_id] else " (x)"
+        title += "\n" + str(labels[start_id])
+    else:  # 沒有傳入預測資料
+        title = str(labels[start_id])
+    plt.title(title)
+    plt.xlabel("")
+    plt.ylabel("")
+    start_id += 1
+plt.show()
+"""
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+from urllib.request import urlretrieve
+import gradio as gr
+from PIL import Image
+
+# Loading the MNIST model and data
+# 可下載最新之 .h5 檔案
+# urlretrieve("https://gr-models.s3-us-west-2.amazonaws.com/mnist-model.h5", "mnist-model.h5")
+# mnist-model.h5 路徑不能含中文
+mnist_model_filename = "C:/_git/vcs/_big_files/mnist-model.h5"
+model = tf.keras.models.load_model(mnist_model_filename)
+
+(x_train, y_train), (x_test, y_test) = tf.keras.datasets.mnist.load_data(
+    path="mnist.npz"
+)
+
+
+
+
+
+
+
+
+
+
+
+"""
+# 做可視化處理
+
+print('訓練準確度')
+acc = history.history["accuracy"]
+print(acc)
+
+print('驗證準確度')
+val_acc = history.history["val_accuracy"]
+print(val_acc)
+
+plt.plot(acc, label="acc", ls="-", marker="o")
+plt.plot(val_acc, label="val_acc", ls="-", marker="x")
+plt.ylabel("accuracy")
+plt.xlabel("epoch")
+plt.suptitle("model")
+plt.show()
+"""
+sys.exit()
+
+
+
+plt.plot(history.history["acc"])
+plt.plot(history.history["loss"])
+plt.title("model accuracy")
+plt.ylabel("acc & loss")
+plt.xlabel("epoch")
+plt.legend(["acc", "loss"], loc="upper left")
+plt.show()
+
+
+
+
+""" 一些 fail
+print('Auto-Keras')
+
+from autokeras import ImageClassifier
+from autokeras.constant import Constant
+import autokeras
+from keras.utils import plot_model
+    
+(x_train, y_train), (x_test, y_test) = load_mnist_data()
+
+x_train = x_train.reshape(x_train.shape + (1,))
+x_test = x_test.reshape(x_test.shape + (1,))
+
+clf = ImageClassifier(verbose=True, augment=False)
+
+clf.fit(x_train, y_train, time_limit=500 * 60)  # 學習訓練.fit
+
+clf.final_fit(x_train, y_train, x_test, y_test, retrain=True)
+
+# 模型評估.evaluate, 評估準確率, 久
+y = clf.evaluate(x_test, y_test)
+print(y * 100)
+
+clf.export_keras_model('tmp_model.h5')
+plot_model(clf, to_file='model.png')
+"""
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+plt.plot(history.history["acc"])
+plt.plot(history.history["loss"])
+plt.title("model accuracy")
+plt.ylabel("acc & loss")
+plt.xlabel("epoch")
+plt.legend(["acc", "loss"], loc="upper left")
+plt.show()
+
+
+
+sys.exit()
+
+
+
+

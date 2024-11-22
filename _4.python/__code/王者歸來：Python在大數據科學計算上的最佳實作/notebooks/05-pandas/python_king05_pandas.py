@@ -883,20 +883,18 @@ print(soils_mean.stack().head(10))
 #交換索引的等級
 print(soils_mean.swaplevel(0, 1).sort_index())
 
-""" NG #透視表
 df = soils_mean.reset_index()[["Depth", "Contour", "pH", "N"]]
-df_pivot_pH = df.pivot("Depth", "Contour", "pH")
+df_pivot_pH = df.pivot(index="Depth", columns="Contour", values="pH")
 
 print(df)
 print(df_pivot_pH)
-print(df.pivot("Depth", "Contour"))
 
 df_before_melt = df_pivot_pH.reset_index()
 df_after_melt = pd.melt(df_before_melt, id_vars="Depth", value_name="pH")
 
 print(df_before_melt)
 print(df_after_melt)
-"""
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 

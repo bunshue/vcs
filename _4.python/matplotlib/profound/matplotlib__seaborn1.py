@@ -537,6 +537,65 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+"""
+嶺圖 Overlapping densities Ridge plot (FacetGrid)
+"""
+
+sns.set(style="white", rc={"axes.facecolor": (0, 0, 0, 0)})
+
+# 創建資料 Create the data
+rs = np.random.RandomState(1979)
+x = rs.randn(500)
+g = np.tile(list("ABCDEFGHIJ"), 50)
+df = pd.DataFrame(dict(x=x, g=g))
+m = df.g.map(ord)
+df["x"] += m
+
+# 初始化網格化對象 Initialize the FacetGrid object
+pal = sns.cubehelix_palette(10, rot=-.25, light=.7)
+g = sns.FacetGrid(df, row="g", hue="g", aspect=15, height=.5, palette=pal)
+
+# 繪製密度 Draw the densities in a few steps
+g.map(sns.kdeplot, "x", clip_on=False, shade=True, alpha=1, lw=1.5, bw=.2)
+g.map(sns.kdeplot, "x", clip_on=False, color="w", lw=2, bw=.2)
+g.map(plt.axhline, y=0, lw=2, clip_on=False)
+
+# 定義成函數 Define and use a simple function to label the plot in axes coordinates
+def label(x, color, label):
+    ax = plt.gca()
+    ax.text(0, .2, label, fontweight="bold", color=color,
+            ha="left", va="center", transform=ax.transAxes)
+
+g.map(label, "x")
+
+# 讓子圖重疊 Set the subplots to overlap
+g.fig.subplots_adjust(hspace=-.25)
+
+# 移除一些不必要的座標資訊 Remove axes details that don't play well with overlap
+g.set_titles("")
+g.set(yticks=[])
+g.despine(bottom=True, left=True)
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+x, y = np.random.multivariate_normal([0, 0], [[1,-0.5],[-0.5,1]], size=300).T
+#pal = sns.dark_palette("green", as_cmap=True) 沒什麼差別
+sns.kdeplot(x=x, y=y)
+plt.show()
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 

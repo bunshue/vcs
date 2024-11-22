@@ -1,3 +1,215 @@
+"""
+numpy的使用
+pandas的使用
+
+"""
+
+
+"""
+numpy的使用
+
+numpy: 數值計算的標準套件
+
+1. 基本建立 np.array
+   1.1 自填陣列, 串列轉np陣列
+   1.2 自動產生陣列
+
+arr1 = np.array([1, 2, 3, 4, 5])
+
+
+"""
+
+print("------------------------------")  # 30個
+
+# 共同
+import os
+import sys
+import time
+import math
+import random
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+# 設定中文字型及負號正確顯示
+# 設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
+# 設定負號
+plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+plt.rcParams["font.size"] = 12  # 設定字型大小
+
+print("------------------------------------------------------------")  # 60個
+
+import tempfile, os.path
+
+tmpdir = tempfile.gettempdir()
+print(tmpdir)
+
+csv_filename = os.path.join(tmpdir, "users.csv")
+
+print(csv_filename)
+
+
+# 讀取網頁上的csv檔
+url = 'https://github.com/duchesnay/pystatsml/raw/master/datasets/salary_table.csv'
+salary = pd.read_csv(url)
+
+""" no df users
+xls_filename = os.path.join(tmpdir, "users.xlsx")
+users.to_excel(xls_filename, sheet_name='users', index=False)
+
+pd.read_excel(xls_filename, sheet_name='users')
+
+# Multiple sheets
+with pd.ExcelWriter(xls_filename) as writer:
+    users.to_excel(writer, sheet_name='users', index=False)
+    df.to_excel(writer, sheet_name='salary', index=False)
+
+pd.read_excel(xls_filename, sheet_name='users')
+pd.read_excel(xls_filename, sheet_name='salary')
+"""
+
+##############################################################################
+# SQL (SQLite)
+# ~~~~~~~~~~~~
+
+import sqlite3
+
+db_filename = os.path.join(tmpdir, "users.db")
+
+##############################################################################
+# Connect
+
+conn = sqlite3.connect(db_filename)
+
+##############################################################################
+# Creating tables with pandas
+
+url = 'https://github.com/duchesnay/pystatsml/raw/master/datasets/salary_table.csv'
+salary = pd.read_csv(url)
+
+salary.to_sql("salary", conn, if_exists="replace")
+
+##############################################################################
+# Push modifications
+
+cur = conn.cursor()
+values = (100, 14000, 5,  'Bachelor', 'N')
+cur.execute("insert into salary values (?, ?, ?, ?, ?)", values)
+conn.commit()
+
+
+##############################################################################
+# Reading results into a pandas DataFrame
+
+salary_sql = pd.read_sql_query("select * from salary;", conn)
+print(salary_sql.head())
+
+pd.read_sql_query("select * from salary;", conn).tail()
+pd.read_sql_query('select * from salary where salary>25000;', conn)
+pd.read_sql_query('select * from salary where experience=16;', conn)
+pd.read_sql_query('select * from salary where education="Master";', conn)
+
+
+##############################################################################
+# Exercises
+# ---------
+#
+# Data Frame
+# ~~~~~~~~~~
+#
+# 1. Read the iris dataset at 'https://github.com/neurospin/pystatsml/tree/master/datasets/iris.csv'
+#
+# 2. Print column names
+#
+# 3. Get numerical columns
+#
+# 4. For each species compute the mean of numerical columns and store it in  a ``stats`` table like:
+#
+# ::
+#
+#           species  sepal_length  sepal_width  petal_length  petal_width
+#     0      setosa         5.006        3.428         1.462        0.246
+#     1  versicolor         5.936        2.770         4.260        1.326
+#     2   virginica         6.588        2.974         5.552        2.026
+#
+#
+# Missing data
+# ~~~~~~~~~~~~
+#
+# Add some missing data to the previous table ``users``:
+
+
+print("------------------------------------------------------------")  # 60個
+
+"""
+Exercises: Pandas: data manipulation
+------------------------------------
+
+Data Frame
+~~~~~~~~~~
+
+1. Read the iris dataset at 'https://github.com/neurospin/pystatsml/tree/master/datasets/iris.csv'
+
+2. Print column names
+
+3. Get numerical columns
+
+4. For each species compute the mean of numerical columns and store it in  a ``stats`` table like:
+
+::
+
+          species  sepal_length  sepal_width  petal_length  petal_width
+    0      setosa         5.006        3.428         1.462        0.246
+    1  versicolor         5.936        2.770         4.260        1.326
+    2   virginica         6.588        2.974         5.552        2.026
+
+
+"""
+
+url = 'https://github.com/duchesnay/pystatsml/raw/master/datasets/iris.csv'
+df = pd.read_csv(url)
+
+num_cols = df._get_numeric_data().columns
+
+stats = list()
+
+for grp, d in df.groupby("species"):
+    print(grp)
+    #print()
+    stats.append( [grp] + d.loc[:, num_cols].mean(axis=0).tolist())
+
+stats = pd.DataFrame(stats, columns=["species"] + num_cols.tolist())
+print(stats)
+
+# or
+df.groupby("species").mean()
+
+##
+
+df.loc[[0, 1] ,"petal_width"] = None
+
+df.petal_width
+
+df["petal_width"][df["petal_width"].isnull()] = \
+    df["petal_width"][df["petal_width"].notnull()].median()
+
+
+#
+
+l = [(1, "a", 1), (2, "b", 2)]
+
+for x, y, z in l:
+    print(x, y, z)
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
 '''
 Numpy: arrays and matrices
 ==========================
@@ -9,8 +221,6 @@ NumPy is an extension to the Python programming language, adding support for lar
 - Kevin Markham: https://github.com/justmarkham
 
 Computation time:
-
-    import numpy as np
 
     l = [v for v in range(10 ** 8)]
     s = 0
@@ -26,8 +236,6 @@ Computation time:
 #
 # Create ndarrays from lists.
 # note: every element must be the same type (will be converted if possible)
-
-import numpy as np
 
 data1 = [1, 2, 3, 4, 5]             # list
 arr1 = np.array(data1)              # 1d array
@@ -119,7 +327,7 @@ print(arr)
 #        - iterate over columns (axis 2)
 #
 #
-# .. figure:: ../images/numpy_array3d.png
+
 
 x = np.arange(2 * 3 * 4)
 print(x)
@@ -330,11 +538,6 @@ np.random.randint(0, 2, 10) # 10 randomly picked 0 or 1
 #
 # - When one of the shapes runs out of dimensions (because it has less dimensions than the other shape), Numpy will use 1 in the comparison process until the other shape's dimensions run out as well.
 #
-#
-# .. figure:: ../images/numpy_broadcasting.png
-#
-#   Source: http://www.scipy-lectures.org
-
 
 a = np.array([[ 0,  0,  0],
               [10, 10, 10],
@@ -395,4 +598,181 @@ X = np.random.randn(4, 2) # random normals in 4x2 array
 # - For each column find the row index of the minimum value.
 #
 # - Write a function ``standardize(X)`` that return an array whose columns are centered and scaled (by std-dev).
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+X = np.random.randn(4, 2)
+print(X)
+
+'''
+- For each column find the row indices of the minimiun value.
+'''
+[np.argmin(X[:, j])
+    for j in range(X.shape[1])]
+
+np.argmin(X, axis=0)
+
+'''
+- Write a function ``scale(X)`` that return an array whose columns are centered and scaled (by std-dev).
+'''
+
+def scale(X):
+    return (X - X.mean(axis=0)) / X.std(axis=0)
+
+X = np.random.randn(5, 3)
+Xs = scale(X)
+
+Xs.mean(axis=0)
+Xs.std(axis=0)
+
+print("------------------------------------------------------------")  # 60個
+
+plt.figure(figsize=(9, 3))
+x = np.linspace(0, 10, 50)
+sinus = np.sin(x)
+
+plt.plot(x, sinus)
+plt.show()
+
+plt.figure(figsize=(9, 3))
+
+plt.plot(x, sinus, "o")
+plt.show()
+# use plt.plot to get color / marker abbreviations
+
+# Rapid multiplot
+
+plt.figure(figsize=(9, 3))
+cosinus = np.cos(x)
+plt.plot(x, sinus, "-b", x, sinus, "ob", x, cosinus, "-r", x, cosinus, "or")
+plt.xlabel('this is x!')
+plt.ylabel('this is y!')
+plt.title('My First Plot')
+plt.show()
+
+# Step by step
+
+plt.figure(figsize=(9, 3))
+plt.plot(x, sinus, label='sinus', color='blue', linestyle='--', linewidth=2)
+plt.plot(x, cosinus, label='cosinus', color='red', linestyle='-', linewidth=2)
+plt.legend()
+plt.show()
+
+#Scatter (2D) plots
+
+# 讀取本地檔案 若無 讀取遠端檔案
+
+try:
+    salary = pd.read_csv("salary_table.csv")
+except:
+    url = 'https://github.com/duchesnay/pystatsml/raw/master/datasets/salary_table.csv'
+    salary = pd.read_csv(url)
+
+df = salary
+print(df.head())
+
+#Simple scatter with colors
+
+plt.figure(figsize=(3, 3), dpi=100)
+_ = sns.scatterplot(x="experience", y="salary", hue="education", data=salary)
+
+#Legend outside
+
+ax = sns.relplot(x="experience", y="salary", hue="education", data=salary)
+
+#Linear model
+
+ax = sns.lmplot(x="experience", y="salary", hue="education", data=salary)
+
+#Scatter plot with colors and symbols
+
+ax = sns.relplot(x="experience", y="salary", hue="education", style='management', data=salary)
+
+#Saving Figures
+
+### bitmap format
+plt.plot(x, sinus)
+plt.savefig("tmp_sinus.png")
+plt.close()
+
+# Prefer vectorial format (SVG: Scalable Vector Graphics) can be edited with 
+# Inkscape, Adobe Illustrator, Blender, etc.
+plt.plot(x, sinus)
+plt.savefig("tmp_sinus.svg")
+plt.close()
+
+# Or pdf
+plt.plot(x, sinus)
+plt.savefig("tmp_sinus.pdf")
+plt.close()
+
+#Boxplot and violin plot: one factor
+
+#Box plots are non-parametric: they display variation in samples of a statistical population without making any assumptions of the underlying statistical distribution.
+
+#title{width=7cm}
+
+ax = sns.boxplot(x="management", y="salary", data=salary)
+ax = sns.stripplot(x="management", y="salary", data=salary, jitter=True, color="black")
+
+ax = sns.violinplot(x="management", y="salary", data=salary)
+ax = sns.stripplot(x="management", y="salary", data=salary, jitter=True, color="white")
+
+#Boxplot and violin plot: two factors
+
+ax = sns.boxplot(x="management", y="salary", hue="education", data=salary)
+ax = sns.stripplot(x="management", y="salary", hue="education", data=salary, jitter=True, dodge=True, linewidth=1)
+
+ax = sns.violinplot(x="management", y="salary", hue="education", data=salary)
+ax = sns.stripplot(x="management", y="salary", hue="education", data=salary, jitter=True, dodge=True, linewidth=1)
+
+#Distributions and density plot
+
+ax = sns.displot(x="salary", hue="management", kind="kde", data=salary, fill=True)
+
+#Multiple axis
+
+fig, axes = plt.subplots(3, 1, figsize=(9, 9), sharex=True)
+
+i = 0
+for edu, d in salary.groupby(['education']):
+    sns.kdeplot(x="salary", hue="management", data=d, fill=True, ax=axes[i], palette="muted")
+    axes[i].set_title(edu)
+    i += 1
+
+#Pairwise scatter plots
+
+ax = sns.pairplot(salary, hue="management")
+
+#Time series
+
+sns.set(style="darkgrid")
+
+# Load an example dataset with long-form data
+fmri = sns.load_dataset("fmri")
+
+""" NG
+# Plot the responses for different events and regions
+ax = sns.pointplot(x="timepoint", y="signal",
+             hue="region", style="event",
+             data=fmri)
+
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
 

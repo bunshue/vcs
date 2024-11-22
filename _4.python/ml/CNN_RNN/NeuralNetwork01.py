@@ -348,7 +348,6 @@ from tensorflow.keras.layers import Dense
 from tensorflow.keras.layers import Conv2D
 from tensorflow.keras.layers import MaxPooling2D
 from tensorflow.keras.layers import Flatten
-from tensorflow.keras.models import load_model
 from tensorflow.keras.utils import to_categorical
 
 print("建立神經網路13")
@@ -392,7 +391,6 @@ from tensorflow.keras.layers import Flatten
 from tensorflow.keras.layers import Activation
 from tensorflow.keras.layers import Conv2D
 from tensorflow.keras.layers import MaxPooling2D
-from tensorflow.keras.models import load_model
 from tensorflow.keras.utils import to_categorical
 from tensorflow.keras.utils import plot_model
 

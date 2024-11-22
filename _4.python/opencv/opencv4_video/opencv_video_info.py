@@ -1,3 +1,30 @@
+"""
+
+cv2.CAP_PROP_POS_MSEC 		影片目前播放的位置 單位為msec
+cv2.CAP_PROP_POS_FRAMES 	目前播放影像的索引值(從0開始)
+cv2.CAP_PROP_POS_AVI_RATIO 	影片播放的相對位置, 0:開始 1:結束
+cv2.CAP_PROP_FRAME_WIDTH 	影片宽度。
+cv2.CAP_PROP_FRAME_HEIGHT 	影片高度。
+cv2.CAP_PROP_FPS 		影片幀率 fps。
+cv2.CAP_PROP_FOURCC 		編解碼的的四個字元。
+cv2.CAP_PROP_FRAME_COUNT 	影片總共有幾幀。
+cv2.CAP_PROP_FORMAT 		影片格式。
+cv2.CAP_PROP_MODE 		目前的截取模式。
+cv2.CAP_PROP_BRIGHTNESS 	攝影機亮度。
+cv2.CAP_PROP_CONTRAST 		攝影機對比度。
+cv2.CAP_PROP_SATURATION 	攝影機飽和度。
+cv2.CAP_PROP_HUE 		攝影機 HUE 色調數值。
+cv2.CAP_PROP_GAIN 		攝影機圖像增益數值。
+cv2.CAP_PROP_EXPOSURE 		攝影機曝光度。
+cv2.CAP_PROP_CONVERT_RGB 	影片是否有轉換為 RGB。
+
+fourcc：指定视频编解码器的4字节代码
+【（‘P’，‘I’，‘M’，‘1’）是MPEG-1编解码器】
+【（‘M’，‘J’，‘P’，'G '）是一个运动jpeg编解码器】
+
+
+"""
+
 import cv2
 import urllib
 import urllib.request  # 用來建立請求
@@ -36,12 +63,6 @@ fourcc = int(cap.get(cv2.CAP_PROP_FOURCC))
 codec = (chr(fourcc&0xFF)+chr((fourcc>>8)&0xFF)+
         chr((fourcc>>16)&0xFF)+chr((fourcc>>24)&0xFF))
 print("Codec編碼:", codec)
-
-
-
-
-
-sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 

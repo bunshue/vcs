@@ -79,7 +79,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 filename = "C:/_git/vcs/_4.python/_data/ims01.bmp"
 filename = "C:/_git/vcs/_4.python/_data/eq1.bmp"  # 560X400
 
@@ -529,7 +529,6 @@ plt.title("均衡化之圖")
 
 plt.show()
 
-'''
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print(
