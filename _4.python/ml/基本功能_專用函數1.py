@@ -61,7 +61,7 @@ print(sklearn.__version__)
 print(sklearn)
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 plt.figure(
     num="sklearn內建資料集集合",
     figsize=(16, 9),
@@ -195,83 +195,8 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-print("分類效果評估")
-print("FP/FN/TP/TN")
-
-y_pred = [0, 0, 0, 1, 1, 1, 0, 1, 0, 0]  # 預測值
-y_real = [0, 1, 1, 1, 1, 1, 0, 0, 0, 0]  # 實際值
-
-from sklearn.metrics import confusion_matrix
-
-cm = confusion_matrix(y_real, y_pred)
-tn, fp, fn, tp = cm.ravel()
-print("tn", tn, "fp", fp, "fn", fn, "tp", tp)
-
-print("準確率")
-from sklearn.metrics import accuracy_score
-
-print(accuracy_score(y_real, y_pred))
-
-print("召回率")
-from sklearn.metrics import recall_score
-
-print(recall_score(y_real, y_pred))
-
-print("精度")
-from sklearn.metrics import precision_score
-
-print(precision_score(y_real, y_pred))
-
-print("F值")
-
-from sklearn.metrics import f1_score
-from sklearn.metrics import fbeta_score
-
-print(f1_score(y_real, y_pred))  # 計算f1
-print(fbeta_score(y_real, y_pred, beta=2))  # 計算fn
-
-print("Logloss")
-from sklearn.metrics import log_loss
-
-y_real = [0, 1, 1, 1, 1, 1, 0, 0, 0, 0]
-y_score = [0.9, 0.75, 0.86, 0.47, 0.55, 0.56, 0.74, 0.22, 0.5, 0.26]
-print(log_loss(y_real, y_score))
-
-print("ROC曲線和AUC")
-from sklearn.metrics import roc_auc_score, roc_curve
-
-print(roc_auc_score(y_real, y_score))  # AUC值
-
-fpr, tpr, thresholds = roc_curve(y_real, y_score)
-plt.plot(fpr, tpr)  # 繪圖
-
-# plt.show()
-
-# P-R曲線
-from sklearn.metrics import precision_recall_curve
-
-precision, recall, _ = precision_recall_curve(y_real, y_score)
-plt.plot(recall, precision)
-
-# plt.show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -294,6 +219,22 @@ print("------------------------------------------------------------")  # 60個
 还有两个用于双聚类数据集生成：
 (8) make_biclusters
 (9) make_checkerboard
+"""
+
+""" 畫在一起 TBD
+plt.figure(
+    num="sklearn內建資料集集合",
+    figsize=(16, 9),
+    dpi=100,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
+
+print("------------------------------")  # 30個
+#plt.subplot(231)
+#plt.title("make_classification")
 """
 
 """
@@ -331,6 +272,10 @@ print(X.shape, y.shape)
 plt.title('make_classification')
 plt.show()
 
+print("------------------------------")  # 30個
+#plt.subplot(232)
+#plt.title("make_blobs")
+
 """
 3. make_blobs
 'blob'的意思可能跟cluster差不多，都是簇、团、块的意思。
@@ -352,6 +297,10 @@ for key, group in grouped:
 
 plt.title('make_blobs')
 plt.show()
+
+print("------------------------------")  # 30個
+#plt.subplot(233)
+#plt.title("make_blobs")
 
 print('每群不同大小不同中心位置')
 
@@ -380,6 +329,10 @@ for key, group in grouped:
 plt.title('make_blobs')
 plt.show()
 
+print("------------------------------")  # 30個
+#plt.subplot(234)
+#plt.title("make_moons")
+
 """ 
 4. make_moons
         make_moons()函数生成一个二分类问题数据集，
@@ -404,6 +357,10 @@ for key, group in grouped:
 plt.title('make_moons')
 plt.show()
 
+print("------------------------------")  # 30個
+#plt.subplot(235)
+#plt.title("make_circles")
+
 """
 5. make_circles
 顾名思义，每个类别的样本构成一个圆形。
@@ -426,7 +383,10 @@ for key, group in grouped:
 
 plt.title('make_circles')
 plt.show()
-'''
+
+print("------------------------------")  # 30個
+#plt.subplot(236)
+#plt.title("make_gaussian_quantiles")
 
 """
 6. make_gaussian_quantiles
@@ -454,6 +414,10 @@ for key, group in grouped:
 
 plt.title('make_gaussian_quantiles')
 plt.show()
+
+#以上畫一起 有問題~~~~~
+
+
 
 """
 7. make_hastie_10_2
@@ -546,18 +510,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("多指標評分")
-
-from sklearn.metrics import classification_report
-
-y_real = [0, 1, 1, 1, 1, 1, 0, 0, 0, 0]
-y_score = [0.9, 0.75, 0.86, 0.47, 0.55, 0.56, 0.74, 0.22, 0.5, 0.26]
-y_pred = [round(i) for i in y_score]
-print(classification_report(y_real, y_pred))
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -611,3 +563,6 @@ print("------------------------------------------------------------")  # 60個
 
 
 
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
