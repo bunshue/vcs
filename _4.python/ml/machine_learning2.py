@@ -45,6 +45,25 @@ import matplotlib
 import matplotlib as mpl
 
 print("------------------------------------------------------------")  # 60個
+'''
+#搬到 獨立小程式
+
+
+from sklearn.metrics.pairwise import cosine_similarity
+
+print("測試 cosine_similarity")
+
+X = np.array(
+    [
+        [3, 0],  # r1
+        [0, 3],  # r2
+    ]
+)
+
+sim = cosine_similarity(X)
+print(sim)
+
+
 
 """
 計算相似度
@@ -347,7 +366,7 @@ coef_matrix_ridge.apply(lambda x: sum(x.values==0),axis=1)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-from sklearn.feature_extraction.text import  CountVectorizer
+from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.preprocessing import Normalizer
 from sklearn.decomposition import TruncatedSVD
 
@@ -472,7 +491,8 @@ SalePrice_log = np.log(y)
  
 #transformed histogram and normal probability plot
 sns.distplot(SalePrice_log, fit=st.norm);
-plt.title('SalePrice log')
+plt.title('使用 Normal')
+#plt.title('SalePrice log')
 plt.show()
 
 #另一種查看是否服從正態分布的可視化方法
@@ -724,30 +744,6 @@ print(mean_squared_error(test_pred_y, test_y))
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 """
-from sklearn.svm import LinearSVC
-from sklearn.metrics import accuracy_score
-
-# データ生成
-centers = [(-1, -0.125), (0.5, 0.5)]
-
-N = 50
-print("產生", N, "筆資料 2維 2群")
-X, y = make_blobs(n_samples=N, n_features=2, centers=centers, cluster_std=0.3)
-
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
-
-model = LinearSVC()
-
-model.fit(X_train, y_train)  # 學習訓練.fit
-
-y_pred = model.predict(X_test)  # 預測.predict
-
-print(accuracy_score(y_pred, y_test))  # 評価
-"""
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-"""
 from sklearn.naive_bayes import MultinomialNB
 
 # データ生成
@@ -812,29 +808,7 @@ print(H)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-from sklearn.datasets import fetch_20newsgroups
-from sklearn.feature_extraction.text import CountVectorizer
-from sklearn.decomposition import LatentDirichletAllocation
-
-# removeで本文以外の情報を取り除く
-data = fetch_20newsgroups(remove=("headers", "footers", "quotes"))
-max_features = 1000
-# 文書 データをベクトルに変換
-tf_vectorizer = CountVectorizer(max_features=max_features, stop_words="english")
-tf = tf_vectorizer.fit_transform(data.data)
-n_topics = 20
-
-model = LatentDirichletAllocation(n_components=n_topics)
-
-model.fit(tf)  # 學習訓練.fit
-
-print(model.components_)  # 各トピックが持つ単語分布
-print(model.transform(tf))  # トピックで表現された文書
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
+'''
 """ import fail
 from sklearn.datasets import samples_generator
 from sklearn.manifold import LocallyLinearEmbedding
@@ -855,192 +829,10 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------")  # 30個
-''' NG
-print("混同行列")
-
-from sklearn.metrics import confusion_matrix
-
-cm = confusion_matrix(y, y_pred)
-print(cm)
-
-print("------------------------------")  # 30個
-
-print("正解率")
-from sklearn.metrics import accuracy_score
-
-accuracy_score(y, y_pred)
-
-print("------------------------------")  # 30個
-
-print("適合率")
-from sklearn.metrics import precision_score
-
-precision_score(y, y_pred)
-
-print("------------------------------")  # 30個
-
-print("再現率")
-from sklearn.metrics import recall_score
-
-recall_score(y, y_pred)
-
-print("------------------------------")  # 30個
-
-print("F値")
-from sklearn.metrics import f1_score
-
-f1_score(y, y_pred)
-
-print("------------------------------")  # 30個
-
-print("予測確率")
-logistic_regression.predict_proba(X)
-
-print("------------------------------")  # 30個
-
-y_pred2 = (logistic_regression.predict_proba(X)[:, 1] > 0.1).astype(np.int)
-print(confusion_matrix(y, y_pred2))
-
-print(accuracy_score(y, y_pred2))
-print(recall_score(y, y_pred2))
-
-print("------------------------------")  # 30個
-
-print("ROC曲線・AUC")
-from sklearn.metrics import roc_curve
-
-probas = logistic_regression.predict_proba(X)
-fpr, tpr, thresholds = roc_curve(y, probas[:, 1])
-
-print("------------------------------")  # 30個
-
-plt.style.use("fivethirtyeight")
-
-fig, ax = plt.subplots()
-fig.set_size_inches(4.8, 5)
-
-ax.step(fpr, tpr, "gray")
-ax.fill_between(fpr, tpr, 0, color="skyblue", alpha=0.8)
-ax.set_xlabel("False Positive Rate")
-ax.set_ylabel("True Positive Rate")
-ax.set_facecolor("xkcd:white")
-plt.show()
-
-print("------------------------------")  # 30個
-
-from sklearn.metrics import roc_auc_score
-
-roc_auc_score(y, probas[:, 1])
-
-print("------------------------------")  # 30個
-
-print("平均二乗誤差")
-
-from sklearn.metrics import mean_squared_error
-
-mean_squared_error(y, y_pred)
-
-print("------------------------------")  # 30個
-
-print("決定係数")
-
-from sklearn.metrics import r2_score
-
-print(r2_score(y, y_pred))
-
-print("------------------------------")  # 30個
-
-print("異なるアルゴリズムを利用した場合との比較")
-
-from sklearn.svm import SVR
-
-model_svr_linear = SVR(C=0.01, kernel="linear")
-
-model_svr_linear.fit(X, y)  # 學習訓練.fit
-
-y_svr_pred = model_svr_linear.predict(X)  # 預測.predict
-print(y_svr_pred)
-
-"""
-fig, ax = plt.subplots()
-ax.scatter(X, y, color='pink', marker='s', label='data set')
-ax.plot(X, y_pred, color='blue', label='regression curve')
-ax.plot(X, y_svr_pred, color='red', label='SVR')
-ax.legend()
-plt.show()
-"""
-
-print(mean_squared_error(y, y_svr_pred))  # 平均二乗誤差
-print(r2_score(y, y_svr_pred))  # 決定係数
-print(model_svr_linear.coef_)  # 傾き
-print(model_svr_linear.intercept_)  # 切片
-
-print("------------------------------")  # 30個
-
-print("ハイパーパラメータの設定")
-
-model_svr_rbf = SVR(C=1.0, kernel="rbf")
-
-model_svr_rbf.fit(X, y)  # 學習訓練.fit
-
-y_svr_pred = model_svr_rbf.predict(X)  # 預測.predict
-print(mean_squared_error(y, y_svr_pred))  # 平均二乗誤差
-print(r2_score(y, y_svr_pred))  # 決定係数
-
-train_X, test_X = X[:400], X[400:]
-train_y, test_y = y[:400], y[400:]
-
-model_svr_rbf_1 = SVR(C=1.0, kernel="rbf")
-
-model_svr_rbf_1.fit(train_X, train_y)  # 學習訓練.fit
-
-test_y_pred = model_svr_rbf_1.predict(test_X)  # 預測.predict
-print(mean_squared_error(test_y, test_y_pred))  # 平均二乗誤差
-print(r2_score(test_y, test_y_pred))  # 決定係数
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("機械学習モデルへの適用")
-
-from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
-from sklearn.svm import LinearSVC
-from sklearn.datasets import fetch_20newsgroups
-
-categories = ["alt.atheism", "soc.religion.christian", "comp.graphics", "sci.med"]
-remove = ("headers", "footers", "quotes")
-twenty_train = fetch_20newsgroups(
-    subset="train", remove=remove, categories=categories
-)  # 学習データ
-twenty_test = fetch_20newsgroups(
-    subset="test", remove=remove, categories=categories
-)  # 検証データ
-
-count_vect = CountVectorizer()  # 単語カウント
-X_train_counts = count_vect.fit_transform(twenty_train.data)
-X_test_count = count_vect.transform(twenty_test.data)
-
-model = LinearSVC()
-
-model.fit(X_train_counts, twenty_train.target)  # 學習訓練.fit
-
-predicted = model.predict(X_test_count)  # 預測.predict
-np.mean(predicted == twenty_test.target)
-
-tf_vec = TfidfVectorizer()  # tf-idf
-X_train_tfidf = tf_vec.fit_transform(twenty_train.data)
-X_test_tfidf = tf_vec.transform(twenty_test.data)
-
-model = LinearSVC()
-
-model.fit(X_train_tfidf, twenty_train.target)  # 學習訓練.fit
-
-predicted = model.predict(X_test_tfidf)  # 預測.predict
-np.mean(predicted == twenty_test.target)
-
-'''
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
+sys.exit()
 
 # 6-1 探索性資料分析──以Titanic(鐵達尼號)之生還預測為例
 # 資料科學 0. 問個感興趣的問題
@@ -1606,107 +1398,7 @@ else:
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 10-1 機器學習前準備
-# 1. 資料取得
-
-filename = "data/Iris2.csv"
-df = pd.read_csv(filename)
-
-df = df.drop("Id", axis=1)
-
-print(df.head())
-
-# 2. 資料處理
-
-print(df.info())
-
-df = df.drop_duplicates()  # 刪除重複列
-
-df.reset_index(drop=True)  # 將列索引重新編號
-
-s = {"Iris-setosa": 0, "Iris-versicolor": 1, "Iris-virginica": 2}
-
-df["Species"] = df["Species"].map(s)
-
-print(df.info())
-
-# 3. 探索性資料分析
-print(df.head())
-
-# 4. 機器學習做資料分析
-# 10-2 機器學習實作
-# 挑選模型：匯入 K- 平均法模型
-
-from sklearn.cluster import KMeans
-
-# 學習訓練：建立並訓練 K-平均法模型
-
-df_X = df[["SepalLengthCm", "SepalWidthCm", "PetalLengthCm", "PetalWidthCm"]]
-k = 1
-
-km = KMeans(n_clusters=k)
-
-km.fit(df_X)  # 學習訓練.fit
-
-# 測試評估
-
-print("分群準確性:", km.inertia_)
-
-# 分群準確性: 663.895238095238
-
-s = []
-for k in range(1, 15):
-    km = KMeans(n_clusters=k)
-    km.fit(df_X)  # 學習訓練.fit
-    s.append(km.inertia_)
-
-print(s)
-
-# [663.895238095238, 151.77145833333336, 77.91989035087718, 56.64237065018315, 45.816421929824564, 38.380978808131445, 34.1150969785575, 29.771330051212402, 27.730401211361738, 25.771261585636587, 24.236889472455648, 22.68941452991453, 21.258278047116285, 19.7686452991453]
-
-# 看視覺化圖表決定參數K值
-df_kmeans = pd.DataFrame()
-df_kmeans["inertia_"] = s
-df_kmeans.index = list(range(1, 15))
-df_kmeans.plot(grid=True)
-plt.show()
-
-k = 3
-km = KMeans(n_clusters=k)
-
-km.fit(df_X)  # 學習訓練.fit
-
-print("分群的預測結果：")
-pred = km.fit_predict(df_X)
-print(pred)
-
-# 決定模型
-# 進行分群預測
-
-df1 = df_X.copy()
-df1["pred"] = pred
-
-c = {0: "r", 1: "g", 2: "b"}
-
-df1["colors"] = df1["pred"].map(c)
-df1.plot(kind="scatter", x="SepalLengthCm", y="SepalWidthCm", c=df1["colors"])
-
-plt.show()
-
-# 給一朵鳶尾花的4個特徵值：「花萼長度 6.6公分、花萼寬度 3.1公分、花瓣長度 5.2公分、花寬度 2.4公分」
-
-new = [[6.6, 3.1, 5.2, 2.4]]
-
-v = km.predict(new)  # 預測.predict
-
-print("預測結果為：", v)
-
-# 預測結果為： [0]
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-''' 一個很大的範例
+# 一個很大的範例 ST
 """
 探索性數據分析（EDA）
 
@@ -1733,20 +1425,13 @@ from sklearn.cluster import KMeans
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
 
-# pd.options.display.max_rows = 1000
-# pd.options.display.max_columns = 20
-
+# 共 1460 筆資料, 81 欄位
 train = pd.read_csv("data/houseprice.csv")
-print(train.head(3))
 
 print("訓練數據集基本信息")
-
-# print(train.info())
-
+print(train.info())
 print(train.shape)
-
-# 訓練數據集基本信息
-# (1460, 81)
+print(train.head(3))
 
 # 1.1 首先，區分出數據中的數值型變量和類別型變量
 # 數值型變量
@@ -1756,7 +1441,6 @@ quantitative.remove("SalePrice")
 quantitative.remove("Id")
 
 # 類別型變量
-
 qualitative = [f for f in train.columns if train.dtypes[f] == "object"]
 
 ccs = [
@@ -1796,9 +1480,6 @@ print("缺失率超過50%的有{}個".format(len(missing[missing >= 0.5])))
 
 print(missing[missing >= 0.5])
 
-missing.plot.bar(figsize=(6, 4))
-
-plt.show()
 """
 Id            0.0
 MSSubClass    0.0
@@ -1813,7 +1494,11 @@ PoolQC         0.995205
 dtype: float64
 """
 
-# 可以直接刪除這幾個變量
+missing.plot.bar()
+plt.title("有缺失值的變量")
+plt.show()
+
+print("可以直接刪除這幾個變量")
 
 missing_cols = missing[missing >= 0.5].index.tolist()
 
@@ -1836,27 +1521,25 @@ import scipy.stats as st
 
 y = train["SalePrice"]
 
-plt.figure(1)
 sns.distplot(y, kde=False)
+plt.title("預設方法")
 plt.show()
 
-plt.figure(2)
-plt.title("Johnson SU")
 sns.distplot(y, kde=True, fit=st.johnsonsu)
+plt.title("使用 Johnson SU")
 plt.show()
 
-plt.figure(3)
-plt.title("Normal")
 sns.distplot(y, kde=False, fit=st.norm)
+plt.title("使用 Normal")
 plt.show()
 
-plt.figure(4)
-plt.title("Log Normal")
 sns.distplot(y, kde=False, fit=st.lognorm)
+plt.title("使用 Log Normal")
 plt.show()
 
 # 另一種查看是否服從正態分布的可視化方法
 sns.distplot(train["SalePrice"], fit=st.norm)
+plt.title("使用 Normal")
 plt.show()
 
 res = st.probplot(train["SalePrice"], plot=plt)
@@ -1868,12 +1551,10 @@ SalePrice_log = np.log(train["SalePrice"])
 sns.distplot(SalePrice_log, fit=st.norm)
 plt.show()
 
-
 res = st.probplot(SalePrice_log, plot=plt)
 print(res)
 
 plt.show()
-
 
 """
 ((array([-3.30513952, -3.04793228, -2.90489705, ...,  2.90489705,
@@ -1936,7 +1617,6 @@ print("\nouter range (high) of the distribution:")
 print(high_range)
 """
 
-
 """
 outer range (low) of the distribution:
 [[-1.83870376]
@@ -1985,7 +1665,6 @@ features = quantitative
 spr = spearman(train, features)
 plt.show()
 
-
 # 刪除相關系數小于0.3的變量
 
 print("數值型變量共有：{}".format(len(quantitative)))
@@ -2006,7 +1685,6 @@ print("類別型變量共有：{}".format(len(qualitative)))
 """
 
 # 2.4 用散點圖觀察數值型變量之間的關系
-
 # scatterplot
 
 from copy import copy
@@ -2014,7 +1692,6 @@ from copy import copy
 sns.set(font_scale=2)
 cols1 = copy(quantitative)
 cols1.append("SalePrice")
-# plt.figure('a')
 sns.pairplot(train[cols1].fillna(0.0), height=2.5)
 plt.show()
 
@@ -2026,15 +1703,11 @@ cols1 = copy(quantitative[:6])
 
 cols1.append("SalePrice")
 
-# plt.figure('b')
-
 sns.pairplot(train[cols1].fillna(0.0), height=2.5)
 
 cols2 = copy(quantitative[6:])
 
 cols2.append("SalePrice")
-
-# plt.figure('c')
 
 sns.pairplot(train[cols2].fillna(0.0), height=2.5)
 
@@ -2042,9 +1715,7 @@ plt.show()
 
 """
 3.類別型變量
-
 對于類別型的變量，要觀察目標變量（sale_price）在類別的各個取值上的分布情況；用分組箱線圖
-
 對于類別型變量的缺失值，不再用0填充，而是用一個特殊的值'Missing'填充。
 """
 
@@ -2068,7 +1739,9 @@ g = g.map(boxplot, "value", "SalePrice")
 plt.show()
 
 """
-看起來像LotConfig、LandSlope這樣的變量，對于房價的影響似乎不大。 Neighborhood對房價有影響。 然后每個類別的不同子類之間看起來似乎也有差別。 overallQual的值太多。
+看起來像LotConfig、LandSlope這樣的變量，對于房價的影響似乎不大。
+Neighborhood對房價有影響。然后每個類別的不同子類之間看起來似乎也有差別。
+overallQual的值太多。
 
 具體到一個分類指標和數值型變量之間的相關關系，我們可以用方差分析進行檢查。
 3.2 方差分析
@@ -2099,14 +1772,12 @@ plt.show()
 
 """
 這里我們用了方差分析，來看每一個類別變量和預測變量Sale_price之間是否有相關關系。
-
 因為我們最后得到了個p值，p>0.05說明樣本的分組之間沒有顯著性差異，
-
 p值越小說明差異越顯著。
-
-因為我們想用一個類似于“變異度”的指標——“差異度”，我們希望這個指標越大，說明差異越明顯。也就是想要一個同向變化的指標，所以對p值取了個倒數。僅此而已。
+因為我們想用一個類似于“變異度”的指標——“差異度”，
+我們希望這個指標越大，說明差異越明顯。也就是想要一個同向變化的指標，所以對p值取了個倒數。
+僅此而已。
 3.3 對于這些分類變量的每個值做正確編碼
-
 另一種編碼方式是OneHotEncoding或者dummy
 """
 
@@ -2139,7 +1810,6 @@ print(qual_encoded)
 print(train.head(3))
 
 """
-, , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , ,
 	Id	MSSubClass	MSZoning	LotFrontage	LotArea	Street	Alley	LotShape	LandContour	Utilities	...	PavedDrive_E	SaleType_E	SaleCondition_E	FullBath_E	HalfBath_E	TotRmsAbvGrd_E	Fireplaces_E	GarageYrBlt_E	GarageCars_E	OverallQual_E
 0	1	60	RL	65.0	8450	Pave	NaN	Reg	Lvl	AllPub	...	3.0	5.0	5.0	3.0	3.0	8.0	1.0	86.0	3.0	7.0
 1	2	20	RL	80.0	9600	Pave	NaN	Reg	Lvl	AllPub	...	3.0	5.0	5.0	3.0	2.0	5.0	2.0	57.0	3.0	6.0
@@ -2163,8 +1833,8 @@ print(train["GarageQual_E"].value_counts())
 ,Name: GarageQual_E, dtype: int64
 
 3.4.查看衍生變量和房價的Spearman相關性
-
-對于相關性的檢測我們使用的是Spearman correlation，這種檢驗方法的好處是即使是非線性相關也能檢測出來。
+對于相關性的檢測我們使用的是Spearman correlation，
+這種檢驗方法的好處是即使是非線性相關也能檢測出來。
 """
 
 sns.set(font_scale=1.2)
@@ -2186,13 +1856,11 @@ plt.show()
 """
 顯然，OverallQual和房價的關系最明顯。房子的鄰居和位置看起來也是有影響的。
 3.5 觀察變量之間的相關性
-
-回歸模型對于變量共線的容忍度差，所以，我們需要考慮變量之間的相關性。用相關系數矩陣的熱力圖即可。
+回歸模型對于變量共線的容忍度差，所以，我們需要考慮變量之間的相關性。
+用相關系數矩陣的熱力圖即可。
 """
 
 sns.set(font_scale=1)
-
-plt.figure(1)
 
 corr = train[quantitative + ["SalePrice"]].corr("spearman")
 
@@ -2203,13 +1871,11 @@ plt.show()
 # from functools import partial
 # # my_heatmap=partial(sns.heatmap,cbar=True, annot=True, square=True, fmt='.2f', annot_kws={'size': 10}, yticklabels=cols.values, xticklabels=cols.values)
 
-plt.figure(2)
 corr = train[qual_encoded + ["SalePrice"]].corr()
 sns.heatmap(corr, cbar=True, annot=True, square=True, fmt=".2f", annot_kws={"size": 10})
 
 plt.show()
 
-plt.figure(3)
 corr = pd.DataFrame(
     np.zeros([len(quantitative) + 1, len(qual_encoded) + 1]),
     index=quantitative + ["SalePrice"],
@@ -2225,8 +1891,8 @@ plt.show()
 
 """
 3.6 觀察所有變量（包括衍生變量）和目標變量之間的關系
-
-現在所有類別型變量也做了重新編碼，編碼成數值型。所有所有的特征都可以看作是數值型的了。于是，我們可以再次全景式觀察變量和目標變量之間的關系。
+現在所有類別型變量也做了重新編碼，編碼成數值型。所有所有的特征都可以看作是數值型的了。
+于是，我們可以再次全景式觀察變量和目標變量之間的關系。
 """
 
 
@@ -2252,13 +1918,15 @@ plt.show()
 看起來，YearBuild、1stFlrSF, 2ndFlrSF, Neighborhood_E There are lots of nonlinearities this may be the cause why some variables wont be selected by Lasso/Lars. Some factors like YearBuilt, 1stFlrSF, 2ndFlrSF, Neighborhood_E look like they would benefit from adding quadratic term to regression. But on the other hand this will most probably provoke overfit.
 
 觀察的結果提示我們，有些變量可以嘗試做些變換，比如平方變換。
+
 4.高級內容
 
 考慮數據本身是否分群，如果分群，就可以用分段回歸。
 
 接下來，考慮是否可以分段進行回歸。
 
-我們把房價200000作為分界點，之下的作為普通住宅，之上的作為豪宅，然后看看在這樣分開后，那些數值型變量的均值有多大差異。
+我們把房價200000作為分界點，之下的作為普通住宅，之上的作為豪宅，
+然后看看在這樣分開后，那些數值型變量的均值有多大差異。
 """
 
 features = quantitative
@@ -2281,7 +1949,6 @@ print(diff)
 plt.show()
 
 """
-, , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , ,
 	feature	difference
 0	MSSubClass	-0.150366
 1	LotFrontage	0.238321
@@ -2322,11 +1989,8 @@ plt.show()
 ,
 
 我們用tnse方法，把每個高維樣本映射到二維平面上的點。
-
 然后我們對樣本做標準化處理，處理之后做PCA，提取前30個主成分。也就是把樣本的特征降維到30個特征。
-
 對這30個特征的樣本聚類，聚成5類。
-
 在把這5類用可視化的方法會出來，看看是否有聚集趨勢。
 """
 
@@ -2377,12 +2041,10 @@ def johnson_inverse(y, gamma, eta, epsilon, lbda):
 yt, g, et, ep, l = johnson(y)
 yt2 = johnson_inverse(yt, g, et, ep, l)
 
-plt.figure(1)
 sns.distplot(yt)
+plt.show()
 
-plt.figure(2)
 sns.distplot(yt2)
-
 plt.show()
 
 # 5.最后建模
@@ -2469,8 +2131,8 @@ Ypred = np.exp(lasso.predict(X))  # 預測.predict
 print(error(Y, Ypred))
 
 """
-# 一個很大的範例
-'''
+# 一個很大的範例 SP
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -2571,46 +2233,6 @@ plt.show()
 Z = Z.reshape(xx.shape)
 plt.contourf(xx, yy, Z, cmap=plt.cm.coolwarm, alpha=0.8)
 plt.scatter(x[:, 0], x[:, 1], s=50, c=y, cmap=plt.cm.coolwarm)
-plt.show()
-"""
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-"""
-from sklearn import cluster
-
-df = pd.DataFrame(
-    {
-        "length": [51, 46, 51, 45, 51, 50, 33, 38, 37, 33, 33, 21, 23, 24],
-        "weight": [
-            10.2,
-            8.8,
-            8.1,
-            7.7,
-            9.8,
-            7.2,
-            4.8,
-            4.6,
-            3.5,
-            3.3,
-            4.3,
-            2.0,
-            1.0,
-            2.0,
-        ],
-    }
-)
-k = 3
-
-kmeans = cluster.KMeans(n_clusters=k, random_state=9487)
-
-kmeans.fit(df)  # 學習訓練.fit
-
-print(kmeans.labels_)
-
-colmap = np.array(["r", "g", "y"])
-plt.scatter(df["length"], df["weight"], color=colmap[kmeans.labels_])
-
 plt.show()
 """
 print("------------------------------------------------------------")  # 60個
@@ -3137,40 +2759,6 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-from sklearn import cluster
-
-# 建立 300 個點, n_features = 2
-data, label = datasets.make_blobs(n_samples=300, n_features=2)
-
-e = cluster.KMeans(n_clusters=3)  # k-mean方法建立 3 個群集中心物件
-e.fit(data)  # 將數據帶入物件, 做群集分析  # 學習訓練.fit
-print(e.labels_)  # 列印群集類別標籤
-print(e.cluster_centers_)  # 列印群集中心
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-from sklearn import cluster
-
-# 建立 300 個點, n_features = 2
-data, label = datasets.make_blobs(n_samples=300, n_features=2)
-
-e = cluster.KMeans(n_clusters=3)  # k-mean方法建立 3 個群集中心物件
-e.fit(data)  # 將數據帶入物件, 做群集分析  # 學習訓練.fit
-print(e.labels_)  # 列印群集類別標籤
-print(e.cluster_centers_)  # 列印群集中心
-
-# 繪圓點, 圓點用黑色外框, 使用標籤 labels_ 區別顏色,
-plt.scatter(data[:, 0], data[:, 1], marker="o", c=e.labels_)
-# 用紅色標記群集中心
-plt.scatter(e.cluster_centers_[:, 0], e.cluster_centers_[:, 1], marker="*", color="red")
-plt.title("無監督學習")
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LogisticRegression
 
@@ -3475,42 +3063,6 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-from sklearn import cluster
-
-# 建立 300 個點, n_features = 2, centers = 3
-data, label = datasets.make_blobs(
-    n_samples=300, n_features=2, centers=3, random_state=9487
-)
-
-e = cluster.KMeans(n_clusters=3)  # k-mean方法建立 3 個群集中心物件
-e.fit(data)  # 將數據帶入物件, 做群集分析
-print(e.labels_)  # 列印群集類別標籤
-print(e.cluster_centers_)  # 列印群集中心
-
-print("------------------------------------------------------------")  # 60個
-
-from sklearn import cluster
-
-# 建立 300 個點, n_features = 2, centers = 3
-data, label = datasets.make_blobs(
-    n_samples=300, n_features=2, centers=3, random_state=9487
-)
-
-e = cluster.KMeans(n_clusters=3)  # k-mean方法建立 3 個群集中心物件
-e.fit(data)  # 將數據帶入物件, 做群集分析
-print(e.labels_)  # 列印群集類別標籤
-print(e.cluster_centers_)  # 列印群集中心
-
-# 繪圓點, 圓點用黑色外框, 使用標籤 labels_ 區別顏色,
-plt.scatter(data[:, 0], data[:, 1], marker="o", c=e.labels_)
-# 用紅色標記群集中心
-plt.scatter(e.cluster_centers_[:, 0], e.cluster_centers_[:, 1], marker="*", color="red")
-plt.title("無監督學習", fontsize=16)
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
 """
 from sklearn import preprocessing
 
@@ -3911,7 +3463,7 @@ k_means = KMeans(n_clusters=3, n_init=10)
 # Principal Component Analysis with 2 components
 pca = PCA(n_components=2)
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 # Model Fitting
 
@@ -3929,7 +3481,7 @@ print("svc:", svc)
 print("k_means:", k_means)
 print("pca:", pca)
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 # Prediction
 
@@ -3950,7 +3502,7 @@ print("KNeighborsClassifier probabilities:\n", y_pred_knn_proba[:5], "\n     ...
 print("\nUnsupervised Estimators:")
 print("KMeans predictions:", y_pred_kmeans)
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 # Preprocessing The Data
 # Standardization
@@ -4208,7 +3760,6 @@ def plot_learning_curve(
 ):
     """
     Generate a simple plot of the test and training learning curve.
-
     Parameters
     ----------
     estimator : object type that implements the "fit" and "predict" methods
@@ -4372,11 +3923,11 @@ from common.utils import plot_learning_curve
 
 knn = KNeighborsClassifier(n_neighbors=2)  # K近鄰演算法（K Nearest Neighbor）
 cv = ShuffleSplit(n_splits=10, test_size=0.2, random_state=9487)
+
 plt.figure(figsize=(10, 6))
 plot_learning_curve(
     plt, knn, "Learn Curve for KNN Diabetes", X, Y, ylim=(0.0, 1.01), cv=cv
 )
-
 plt.show()
 
 print("------------------------------")  # 30個
@@ -4397,7 +3948,6 @@ for name, model in models:
 for i in range(len(results)):
     print("name: {}; cross val score: {}".format(results[i][0], results[i][1].mean()))
 
-# 畫出數據
 plt.figure(figsize=(10, 6))
 plt.ylabel("BMI")
 plt.xlabel("Glucose")
@@ -4546,7 +4096,6 @@ plt.ylabel("score")
 plt.plot(depths, cv_scores, ".g-", label="cross-validation score")
 plt.plot(depths, tr_scores, ".r--", label="training score")
 plt.legend()
-
 plt.show()
 
 print("------------------------------")  # 30個
@@ -4580,7 +4129,6 @@ plt.ylabel("score")
 plt.plot(values, cv_scores, ".g-", label="cross-validation score")
 plt.plot(values, tr_scores, ".r--", label="training score")
 plt.legend()
-
 plt.show()
 
 print("------------------------------")  # 30個
@@ -4670,10 +4218,9 @@ with open("tmp_titanic2.dot", "w") as f:
 # 1. 在電腦上安裝 graphviz
 # 2. 運行 `dot -Tpng titanic.dot -o titanic.png`
 # 3. 在當前目錄查看生成的決策樹 titanic.png
-"""
 
 print("titanic SP")
-
+"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 """
@@ -5417,6 +4964,7 @@ cc = a.argsort()[::-1]
 print(cc)
 """
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 label_true = np.random.randint(1, 4, 6)
 label_pred = np.random.randint(1, 4, 6)
@@ -5513,6 +5061,7 @@ print("Adjusted Rand-Index: %.3f"
 print("Silhouette Coefficient: %0.3f"
       % metrics.silhouette_score(X, kmean.labels_, sample_size=1000))
 """
+
 print("------------------------------------------------------------")  # 60個
 
 
@@ -5551,3 +5100,201 @@ print("------------------------------------------------------------")  # 60個
 np.random.seed(3)
 np.random.seed(10)  # Setting seed for reproducability
 np.random.seed(3)
+
+
+# 以下OK 可搬出
+
+
+"""
+from sklearn.svm import LinearSVC
+from sklearn.metrics import accuracy_score
+
+# データ生成
+centers = [(-1, -0.125), (0.5, 0.5)]
+
+N = 50
+print("產生", N, "筆資料 2維 2群")
+X, y = make_blobs(n_samples=N, n_features=2, centers=centers, cluster_std=0.3)
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
+
+model = LinearSVC()
+
+model.fit(X_train, y_train)  # 學習訓練.fit
+
+y_pred = model.predict(X_test)  # 預測.predict
+
+print(accuracy_score(y_pred, y_test))  # 評価
+"""
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+""" NG
+print("混同行列")
+
+from sklearn.metrics import confusion_matrix
+
+cm = confusion_matrix(y, y_pred)
+print(cm)
+
+print("------------------------------")  # 30個
+
+print("正解率")
+from sklearn.metrics import accuracy_score
+
+accuracy_score(y, y_pred)
+
+print("------------------------------")  # 30個
+
+print("適合率")
+from sklearn.metrics import precision_score
+
+precision_score(y, y_pred)
+
+print("------------------------------")  # 30個
+
+print("再現率")
+from sklearn.metrics import recall_score
+
+recall_score(y, y_pred)
+
+print("------------------------------")  # 30個
+
+print("F値")
+from sklearn.metrics import f1_score
+
+f1_score(y, y_pred)
+
+print("------------------------------")  # 30個
+
+print("予測確率")
+logistic_regression.predict_proba(X)
+
+print("------------------------------")  # 30個
+
+y_pred2 = (logistic_regression.predict_proba(X)[:, 1] > 0.1).astype(np.int)
+print(confusion_matrix(y, y_pred2))
+
+print(accuracy_score(y, y_pred2))
+print(recall_score(y, y_pred2))
+
+print("------------------------------")  # 30個
+
+print("ROC曲線・AUC")
+from sklearn.metrics import roc_curve
+
+probas = logistic_regression.predict_proba(X)
+fpr, tpr, thresholds = roc_curve(y, probas[:, 1])
+
+print("------------------------------")  # 30個
+
+plt.style.use("fivethirtyeight")
+
+fig, ax = plt.subplots()
+fig.set_size_inches(4.8, 5)
+
+ax.step(fpr, tpr, "gray")
+ax.fill_between(fpr, tpr, 0, color="skyblue", alpha=0.8)
+ax.set_xlabel("False Positive Rate")
+ax.set_ylabel("True Positive Rate")
+ax.set_facecolor("xkcd:white")
+plt.show()
+
+print("------------------------------")  # 30個
+
+from sklearn.metrics import roc_auc_score
+
+roc_auc_score(y, probas[:, 1])
+
+print("------------------------------")  # 30個
+
+print("平均二乗誤差")
+
+from sklearn.metrics import mean_squared_error
+
+mean_squared_error(y, y_pred)
+
+print("------------------------------")  # 30個
+
+print("決定係数")
+
+from sklearn.metrics import r2_score
+
+print(r2_score(y, y_pred))
+
+print("------------------------------")  # 30個
+
+print("異なるアルゴリズムを利用した場合との比較")
+
+from sklearn.svm import SVR
+
+model_svr_linear = SVR(C=0.01, kernel="linear")
+
+model_svr_linear.fit(X, y)  # 學習訓練.fit
+
+y_svr_pred = model_svr_linear.predict(X)  # 預測.predict
+print(y_svr_pred)
+
+"""
+fig, ax = plt.subplots()
+ax.scatter(X, y, color="pink", marker="s", label="data set")
+ax.plot(X, y_pred, color="blue", label="regression curve")
+ax.plot(X, y_svr_pred, color="red", label="SVR")
+ax.legend()
+plt.show()
+"""
+
+print(mean_squared_error(y, y_svr_pred))  # 平均二乗誤差
+print(r2_score(y, y_svr_pred))  # 決定係数
+print(model_svr_linear.coef_)  # 傾き
+print(model_svr_linear.intercept_)  # 切片
+
+print("------------------------------")  # 30個
+
+print("ハイパーパラメータの設定")
+
+model_svr_rbf = SVR(C=1.0, kernel="rbf")
+
+model_svr_rbf.fit(X, y)  # 學習訓練.fit
+
+y_svr_pred = model_svr_rbf.predict(X)  # 預測.predict
+print(mean_squared_error(y, y_svr_pred))  # 平均二乗誤差
+print(r2_score(y, y_svr_pred))  # 決定係数
+
+train_X, test_X = X[:400], X[400:]
+train_y, test_y = y[:400], y[400:]
+
+model_svr_rbf_1 = SVR(C=1.0, kernel="rbf")
+
+model_svr_rbf_1.fit(train_X, train_y)  # 學習訓練.fit
+
+test_y_pred = model_svr_rbf_1.predict(test_X)  # 預測.predict
+print(mean_squared_error(test_y, test_y_pred))  # 平均二乗誤差
+print(r2_score(test_y, test_y_pred))  # 決定係数
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
+sys.exit()
+
+
+print("------------------------------")  # 30個
+
+
+# pd.options.display.max_rows = 1000
+# pd.options.display.max_columns = 20
+
+
+missing.plot.bar(figsize=(6, 4))
+
+plt.figure(1)

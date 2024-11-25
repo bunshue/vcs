@@ -28,7 +28,10 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
-from sklearn.datasets import fetch_20newsgroups
+from sklearn.datasets import fetch_20newsgroups  # 新聞資料集
+from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
+
+print("------------------------------------------------------------")  # 60個
 
 news = fetch_20newsgroups(subset="all")
 
@@ -46,8 +49,6 @@ print("------------------------------------------------------------")  # 60個
 單純貝氏分類器 naive Bayes classifier
 """
 
-from sklearn.datasets import fetch_20newsgroups
-from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.naive_bayes import MultinomialNB
 
@@ -69,10 +70,6 @@ print(score)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 新聞資料集
-
-from sklearn.datasets import fetch_20newsgroups
-
 # 篩選新聞類別
 categories = [
     "alt.atheism",
@@ -87,12 +84,8 @@ data_train = fetch_20newsgroups(
     shuffle=True,
 )
 
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-
-from sklearn.datasets import fetch_20newsgroups
 
 data = fetch_20newsgroups()
 print(data.target_names)
@@ -176,10 +169,77 @@ predict_category("determining the screen resolution")
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.decomposition import LatentDirichletAllocation
 
+# removeで本文以外の情報を取り除く
+data = fetch_20newsgroups(remove=("headers", "footers", "quotes"))
+max_features = 1000
+# 文書 データをベクトルに変換
+tf_vectorizer = CountVectorizer(max_features=max_features, stop_words="english")
+tf = tf_vectorizer.fit_transform(data.data)
+n_topics = 20
+
+model = LatentDirichletAllocation(n_components=n_topics)
+
+model.fit(tf)  # 學習訓練.fit
+
+print(model.components_)  # 各トピックが持つ単語分布
+print(model.transform(tf))  # トピックで表現された文書
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("機械学習モデルへの適用")
+
+from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
+from sklearn.svm import LinearSVC
+
+categories = ["alt.atheism", "soc.religion.christian", "comp.graphics", "sci.med"]
+remove = ("headers", "footers", "quotes")
+twenty_train = fetch_20newsgroups(
+    subset="train", remove=remove, categories=categories
+)  # 学習データ
+twenty_test = fetch_20newsgroups(
+    subset="test", remove=remove, categories=categories
+)  # 検証データ
+
+count_vect = CountVectorizer()  # 単語カウント
+X_train_counts = count_vect.fit_transform(twenty_train.data)
+X_test_count = count_vect.transform(twenty_test.data)
+
+model = LinearSVC()
+
+model.fit(X_train_counts, twenty_train.target)  # 學習訓練.fit
+
+predicted = model.predict(X_test_count)  # 預測.predict
+np.mean(predicted == twenty_test.target)
+
+tf_vec = TfidfVectorizer()  # tf-idf
+X_train_tfidf = tf_vec.fit_transform(twenty_train.data)
+X_test_tfidf = tf_vec.transform(twenty_test.data)
+
+model = LinearSVC()
+
+model.fit(X_train_tfidf, twenty_train.target)  # 學習訓練.fit
+
+predicted = model.predict(X_test_tfidf)  # 預測.predict
+np.mean(predicted == twenty_test.target)
+
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個

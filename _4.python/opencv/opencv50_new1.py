@@ -40,18 +40,25 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 print("------------------------------------------------------------")  # 60個
 
 print("高斯模糊, 邊緣模糊化")
+"""
+GaussianBlur() 高斯模糊 
+使用 OpenCV 的 GaussianBlur() 方法，可以使用高斯分佈進行模糊化的計算，
+指定模糊區域單位 ( 必須是大於 1 的奇數 ) 後就能產生不同程度的模糊效果
 
-image0 = np.zeros((300, 300, 3), dtype="uint8")  # 建立 300x300 的黑色畫布
-image0 = cv2.circle(
-    image0, (150, 150), 100, (255, 255, 255), -1
-)  # 在畫布上中心點加入一個半徑 100 的白色圓形
+cv2.GaussianBlur(img, ksize, sigmaX, sigmaY)
+# img 來源影像
+# ksize 指定區域單位 ( 必須是大於 1 的奇數 )
+# sigmaX X 方向標準差，預設 0，sigmaY Y 方向標準差，預設 0
+"""
+num_bins = 256  # 直方圖顯示時的束數
 
-image1 = cv2.GaussianBlur(image0, (35, 35), 0)  # 進行高斯模糊
+L = 256
+image0 = np.zeros((L*3, L*3, 1), dtype="uint8")  # 建立 黑色畫布
 
-cv2.imshow("Original", image0)
-cv2.imshow("Gaussian", image1)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+cv2.rectangle(image0,(L,0),(L*2,L*3),(255,255,255),-1)
+
+W, H, sigmaX, sigmaY = 101, 101, 0, 0 # W, H 必須為單數
+image1 = cv2.GaussianBlur(image0, (W, H), sigmaX, sigmaY)  # 進行高斯模糊
 
 num_bins = 256  # 直方圖顯示時的束數
 
@@ -59,23 +66,43 @@ plt.figure(figsize=(10, 8))
 
 plt.subplot(221)
 plt.imshow(cv2.cvtColor(image0, cv2.COLOR_BGR2RGB))
-plt.title("原圖轉灰階")
+plt.title("原圖")
 
 plt.subplot(222)
-plt.hist(image0.ravel(), num_bins, [0, 256], color="r")  # 拉成一維
-plt.xlim(0 - 10, 256 + 10)  # 設定 x 軸座標範圍
-plt.ylim(0 - 10, 5000 + 10)  # 設定 y 軸座標範圍
-plt.title("原圖的影像直方圖")
+plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
+plt.title("原圖Gaussian模糊")
 
 plt.subplot(223)
-plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
-plt.title("原圖轉灰階")
+plt.title("調整 W, H")
+plt.plot(image0[200, :].ravel(), 'k')
+
+W, H, sigmaX, sigmaY = 101, 101, 0, 0 # W, H 必須為單數
+image1 = cv2.GaussianBlur(image0, (W, H), sigmaX, sigmaY)  # 進行高斯模糊
+plt.plot(image1[200, :].ravel(), 'r')
+
+W, H, sigmaX, sigmaY = 201, 201, 0, 0 # W, H 必須為單數
+image1 = cv2.GaussianBlur(image0, (W, H), sigmaX, sigmaY)  # 進行高斯模糊
+plt.plot(image1[200, :].ravel(), 'g')
+
+W, H, sigmaX, sigmaY = 301, 301, 0, 0 # W, H 必須為單數
+image1 = cv2.GaussianBlur(image0, (W, H), sigmaX, sigmaY)  # 進行高斯模糊
+plt.plot(image1[200, :].ravel(), 'b')
 
 plt.subplot(224)
-plt.hist(image1.ravel(), num_bins, [0, 256], color="r")  # 拉成一維
-plt.xlim(0 - 10, 256 + 10)  # 設定 x 軸座標範圍
-plt.ylim(0 - 10, 5000 + 10)  # 設定 y 軸座標範圍
-plt.title("原圖的影像直方圖")
+plt.title("調整 sigmaX, sigmaY")
+plt.plot(image0[200, :].ravel(), 'k')
+
+W, H, sigmaX, sigmaY = 101, 101, 0, 0 # W, H 必須為單數
+image1 = cv2.GaussianBlur(image0, (W, H), sigmaX, sigmaY)  # 進行高斯模糊
+plt.plot(image1[200, :].ravel(), 'r')
+
+W, H, sigmaX, sigmaY = 101, 101, 100, 100 # W, H 必須為單數
+image1 = cv2.GaussianBlur(image0, (W, H), sigmaX, sigmaY)  # 進行高斯模糊
+plt.plot(image1[200, :].ravel(), 'g')
+
+W, H, sigmaX, sigmaY = 101, 101, 200, 200 # W, H 必須為單數
+image1 = cv2.GaussianBlur(image0, (W, H), sigmaX, sigmaY)  # 進行高斯模糊
+plt.plot(image1[200, :].ravel(), 'b')
 
 plt.show()
 
@@ -949,9 +976,6 @@ print("------------------------------------------------------------")  # 60個
 
 print("image_cv2")
 
-from matplotlib import pyplot as plt
-
-
 # 用原始圖像減去拉普拉斯模板直接計算得到的邊緣信息
 def my_laplace_result_add(image, model):
     result = image - model
@@ -973,6 +997,8 @@ computer_result = cv2.Laplacian(original_image_test1, ksize=3, ddepth=cv2.CV_16S
 plt.imshow(my_laplace_result_add(original_image_test1, computer_result))
 
 plt.show()
+
+sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -5004,8 +5030,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-from numpy import fft
-
 # 圖形變換
 # 幾何變換
 
@@ -5311,10 +5335,8 @@ print("------------------------------------------------------------")  # 60個
 
 # 二維離散傅立葉變換
 
-from numpy import fft
-
 x = np.random.rand(8, 8)
-X = fft.fft2(x)
+X = np.fft.fft2(x)
 print(np.allclose(X[1:, 1:], X[7:0:-1, 7:0:-1].conj()))  # 共軛復數
 print(X[::4, ::4])  # 虛數為零
 
@@ -5324,7 +5346,7 @@ True
  [  0.75758598+0.j  -0.53147589+0.j]]
 """
 
-x2 = fft.ifft2(X)  # 將頻域訊號轉換回空域訊號
+x2 = np.fft.ifft2(X)  # 將頻域訊號轉換回空域訊號
 np.allclose(x, x2)  # 和原始訊號進行比較
 
 # True
@@ -5336,9 +5358,9 @@ np.allclose(x, x2)  # 和原始訊號進行比較
 N = 256
 img = cv2.imread("data/lena.jpg", cv2.IMREAD_GRAYSCALE)
 img = cv2.resize(img, (N, N))
-img_freq = fft.fft2(img)
+img_freq = np.fft.fft2(img)
 img_mag = np.log10(np.abs(img_freq))
-img_mag_shift = fft.fftshift(img_mag)
+img_mag_shift = np.fft.fftshift(img_mag)
 
 rects = [
     (80, 125, 85, 130),
@@ -5361,9 +5383,9 @@ for i, (x0, y0, x1, y1) in enumerate(rects):
     mask = np.zeros((N, N), dtype=np.bool)  # ❶
     mask[x0 : x1 + 1, y0 : y1 + 1] = True  # ❷
     mask[N - x1 : N - x0 + 1, N - y1 : N - y0 + 1] = True  # ❸
-    mask = fft.fftshift(mask)  # ❹
+    mask = np.fft.fftshift(mask)  # ❹
     img_freq2 = img_freq * mask  # ❺
-    img_filtered = fft.ifft2(img_freq).real  # ❻
+    img_filtered = np.fft.ifft2(img_freq).real  # ❻
     filtered_results.append(img_filtered)
 
 fig, axes = pl.subplots(2, 3, figsize=(9, 6))
@@ -5460,8 +5482,8 @@ print("------------------------------------------------------------")  # 60個
 x = [-2, 5]
 y = [5, -1]
 
-from sympy import Point, Line
-from sympy import Point, Line
+from sympy import Point
+from sympy import Line
 
 line = Line(Point(x[0], y[0]), Point(x[1], y[1]))
 seg = line.perpendicular_segment(Point(0, 0))
@@ -5525,6 +5547,7 @@ lines = cv2.HoughLinesP(
 
 fig, ax = pl.subplots(figsize=(8, 6))
 pl.imshow(img, cmap="gray")
+
 from matplotlib.collections import LineCollection
 
 lc = LineCollection(lines.reshape(-1, 2, 2))
@@ -5556,6 +5579,7 @@ x, y, r = circles[0].T
 
 fig, ax = pl.subplots(figsize=(8, 6))
 pl.imshow(img, cmap="gray")
+
 from matplotlib.collections import EllipseCollection
 
 ec = EllipseCollection(
@@ -5709,6 +5733,7 @@ matrix, mask = cv2.findHomography(matched_positions1, matched_positions2, cv2.RA
 
 """ no module
 #%figonly=顯示特征比對的關鍵點
+
 from matplotlib.collections import LineCollection
 from scpy2.utils.image import concat_images
 
@@ -5731,8 +5756,6 @@ plt.show()
 """
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-from numpy import fft
 
 # 形狀與結構分析
 # 輪廓檢驗

@@ -84,6 +84,7 @@ print(x_train.shape)
 
 # 特徵縮放
 from sklearn.preprocessing import StandardScaler
+
 scaler = StandardScaler()
 x_train_std = scaler.fit_transform(x_train)  # STD特徵縮放
 
@@ -193,10 +194,14 @@ print("------------------------------------------------------------")  # 60個
 from sklearn.preprocessing import StandardScaler
 
 scaler = StandardScaler()
-data = scaler.fit_transform([[156,56,34,800000], 
-                          [180,73,21,620000], 
-                          [175,76,18,1000000], 
-                          [148,46,26,430000]])
+data = scaler.fit_transform(
+    [
+        [156, 56, 34, 800000],
+        [180, 73, 21, 620000],
+        [175, 76, 18, 1000000],
+        [148, 46, 26, 430000],
+    ]
+)
 print(data)
 
 print("------------------------------------------------------------")  # 60個
@@ -205,10 +210,14 @@ print("------------------------------------------------------------")  # 60個
 from sklearn.preprocessing import MinMaxScaler
 
 scaler = MinMaxScaler()
-data = scaler.fit_transform([[156,56,34,800000], 
-                         [180,73,21,620000], 
-                         [175,76,18,1000000], 
-                         [148,46,26,430000]])
+data = scaler.fit_transform(
+    [
+        [156, 56, 34, 800000],
+        [180, 73, 21, 620000],
+        [175, 76, 18, 1000000],
+        [148, 46, 26, 430000],
+    ]
+)
 print(data)
 
 
@@ -216,16 +225,15 @@ from sklearn.preprocessing import MinMaxScaler
 from sklearn.feature_selection import VarianceThreshold
 
 scaler = MinMaxScaler()
-data = scaler.fit_transform([[3,2,61,10000], 
-                         [3,8,54,12000], 
-                         [3,4,60,10500], 
-                         [3,1,58,11000]])
-print('原始特徵：')
+data = scaler.fit_transform(
+    [[3, 2, 61, 10000], [3, 8, 54, 12000], [3, 4, 60, 10500], [3, 1, 58, 11000]]
+)
+print("原始特徵：")
 print(data)
 vari = VarianceThreshold(threshold=0.0)
-#vari = VarianceThreshold(threshold=0.14)
+# vari = VarianceThreshold(threshold=0.14)
 data2 = vari.fit_transform(data)
-print('特徵選擇後：')
+print("特徵選擇後：")
 print(data2)
 
 print("------------------------------------------------------------")  # 60個

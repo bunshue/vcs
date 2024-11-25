@@ -38,8 +38,10 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
+from sklearn import datasets
 from sklearn.cluster import KMeans  # 聚類方法
 
+'''
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("無 sklearn之kmeans 1")
@@ -550,10 +552,204 @@ f.close()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+print('KMeans')
+
+filename = "data/Iris2.csv"
+df = pd.read_csv(filename)
+
+df = df.drop("Id", axis=1)
+print(df.head())
+print(df.info())
+
+df = df.drop_duplicates()  # 刪除重複列
+
+df.reset_index(drop=True)  # 將列索引重新編號
+
+s = {"Iris-setosa": 0, "Iris-versicolor": 1, "Iris-virginica": 2}
+
+df["Species"] = df["Species"].map(s)
+
+print(df.head())
+print(df.info())
+
+# 挑選模型：匯入 K- 平均法模型
+
+from sklearn.cluster import KMeans
+
+# 學習訓練：建立並訓練 K-平均法模型
+
+df_X = df[["SepalLengthCm", "SepalWidthCm", "PetalLengthCm", "PetalWidthCm"]]
+k = 1
+
+km = KMeans(n_clusters=k)
+
+km.fit(df_X)  # 學習訓練.fit
+
+# 測試評估
+
+print("分群準確性:", km.inertia_)
+
+# 分群準確性: 663.895238095238
+
+s = []
+for k in range(1, 15):
+    km = KMeans(n_clusters=k)
+    km.fit(df_X)  # 學習訓練.fit
+    s.append(km.inertia_)
+
+print(s)
+
+# [663.895238095238, 151.77145833333336, 77.91989035087718, 56.64237065018315, 45.816421929824564, 38.380978808131445, 34.1150969785575, 29.771330051212402, 27.730401211361738, 25.771261585636587, 24.236889472455648, 22.68941452991453, 21.258278047116285, 19.7686452991453]
+
+# 看視覺化圖表決定參數K值
+df_kmeans = pd.DataFrame()
+df_kmeans["inertia_"] = s
+df_kmeans.index = list(range(1, 15))
+df_kmeans.plot(grid=True)
+plt.show()
+
+k = 3
+km = KMeans(n_clusters=k)
+
+km.fit(df_X)  # 學習訓練.fit
+
+print("分群的預測結果：")
+pred = km.fit_predict(df_X)
+print(pred)
+
+# 決定模型
+# 進行分群預測
+
+df1 = df_X.copy()
+df1["pred"] = pred
+
+c = {0: "r", 1: "g", 2: "b"}
+
+df1["colors"] = df1["pred"].map(c)
+df1.plot(kind="scatter", x="SepalLengthCm", y="SepalWidthCm", c=df1["colors"])
+
+plt.show()
+
+# 給一朵鳶尾花的4個特徵值：「花萼長度 6.6公分、花萼寬度 3.1公分、花瓣長度 5.2公分、花寬度 2.4公分」
+
+new = [[6.6, 3.1, 5.2, 2.4]]
+
+v = km.predict(new)  # 預測.predict
+
+print("預測結果為：", v)
+
+# 預測結果為： [0]
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+from sklearn import cluster
+
+df = pd.DataFrame(
+    {
+        "length": [51, 46, 51, 45, 51, 50, 33, 38, 37, 33, 33, 21, 23, 24],
+        "weight": [
+            10.2,
+            8.8,
+            8.1,
+            7.7,
+            9.8,
+            7.2,
+            4.8,
+            4.6,
+            3.5,
+            3.3,
+            4.3,
+            2.0,
+            1.0,
+            2.0,
+        ],
+    }
+)
+k = 3
+
+kmeans = cluster.KMeans(n_clusters=k, random_state=9487)
+
+kmeans.fit(df)  # 學習訓練.fit
+
+print(kmeans.labels_)
+
+colmap = np.array(["r", "g", "y"])
+plt.scatter(df["length"], df["weight"], color=colmap[kmeans.labels_])
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+from sklearn import cluster
+
+# 建立 300 個點, n_features = 2
+data, label = datasets.make_blobs(n_samples=300, n_features=2)
+
+e = cluster.KMeans(n_clusters=3)  # k-mean方法建立 3 個群集中心物件
+e.fit(data)  # 將數據帶入物件, 做群集分析  # 學習訓練.fit
+print(e.labels_)  # 列印群集類別標籤
+print(e.cluster_centers_)  # 列印群集中心
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+from sklearn import cluster
+
+# 建立 300 個點, n_features = 2
+data, label = datasets.make_blobs(n_samples=300, n_features=2)
+
+e = cluster.KMeans(n_clusters=3)  # k-mean方法建立 3 個群集中心物件
+e.fit(data)  # 將數據帶入物件, 做群集分析  # 學習訓練.fit
+print(e.labels_)  # 列印群集類別標籤
+print(e.cluster_centers_)  # 列印群集中心
+
+# 繪圓點, 圓點用黑色外框, 使用標籤 labels_ 區別顏色,
+plt.scatter(data[:, 0], data[:, 1], marker="o", c=e.labels_)
+# 用紅色標記群集中心
+plt.scatter(e.cluster_centers_[:, 0], e.cluster_centers_[:, 1], marker="*", color="red")
+plt.title("無監督學習")
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+from sklearn import cluster
+
+# 建立 300 個點, n_features = 2, centers = 3
+data, label = datasets.make_blobs(
+    n_samples=300, n_features=2, centers=3, random_state=9487
+)
+
+e = cluster.KMeans(n_clusters=3)  # k-mean方法建立 3 個群集中心物件
+e.fit(data)  # 將數據帶入物件, 做群集分析
+print(e.labels_)  # 列印群集類別標籤
+print(e.cluster_centers_)  # 列印群集中心
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+'''
+from sklearn import cluster
+
+# 建立 300 個點, n_features = 2, centers = 3
+data, label = datasets.make_blobs(
+    n_samples=300, n_features=2, centers=3, random_state=9487
+)
+
+e = cluster.KMeans(n_clusters=3)  # k-mean方法建立 3 個群集中心物件
+e.fit(data)  # 將數據帶入物件, 做群集分析
+print(e.labels_)  # 列印群集類別標籤
+print(e.cluster_centers_)  # 列印群集中心
+
+# 繪圓點, 圓點用黑色外框, 使用標籤 labels_ 區別顏色,
+plt.scatter(data[:, 0], data[:, 1], marker="o", c=e.labels_)
+# 用紅色標記群集中心
+plt.scatter(e.cluster_centers_[:, 0], e.cluster_centers_[:, 1], marker="*", color="red")
+plt.title("無監督學習", fontsize=16)
+
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -568,12 +764,9 @@ print("作業完成")
 print("------------------------------------------------------------")  # 60個
 sys.exit()
 
-print("------------------------------------------------------------")  # 60個
+
 """
 #plt.autoscale()
-
 # 我們可以檢查一下, 確認答案是不是真的一樣!
 print(np.array_equal(clf.labels_, clf.predict(x)))  # 預測.predict
-
-
 """

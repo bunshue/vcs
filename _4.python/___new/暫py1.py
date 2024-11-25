@@ -1140,12 +1140,6 @@ animals = {'鼠' : 3, '牛' : 48, '虎' : 33, '兔' : 8, '龍' : 38}
 狗	dog	17	貴賓狗
 豬	pig	42	佩佩豬
 
-針對無法連線到官方直接使用MNIST資料集的用戶，可以根據下面步驟執行MNIST Demo
-
-可以使用先從PC上下載MNIST資料集
-https://s3.amazonaws.com/img-datasets/mnist.npz
-
-
 
 ''' & '''  可執行的 但不執行的
 
@@ -4969,25 +4963,7 @@ plt.title(r"$\sin(x)$ and $\cos(x)$")
 plt.xlim(xmin, xmax)
 plt.ylim(-1.3, 1.3)
 
-print("------------------------------------------------------------")  # 60個
-
-下載
-https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz
-將檔案改名成
-cifar-10-batches-py.tar.gz
-放在C:/Users/070601/.keras\datasets/之下
-
-
-https://storage.googleapis.com/tensorflow/tf-keras-datasets/mnist.npz
-https://storage.googleapis.com/tensorflow/tf-keras-datasets/mnist.npz
-https://storage.googleapis.com/tensorflow/tf-keras-datasets/mnist.npz
-
-    plt.imshow(image, 'gray')
-    #plt.imshow(X_test[i].reshape((28,28)), "gray")
-
-
 print("------------------------------------------------------------")	#60個
-
 
 ## 取得發票號碼
 ### 安裝

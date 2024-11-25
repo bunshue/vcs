@@ -57,7 +57,7 @@ from sklearn import svm
 from sklearn import metrics
 
 print(sklearn.__version__)
-#print(dir(datasets))
+# print(dir(datasets))
 print(sklearn)
 
 print("------------------------------------------------------------")  # 60個
@@ -79,8 +79,12 @@ plt.title("make_regression 迴歸資料集")
 N = 50  # 樣本數
 
 X, y, coef = make_regression(
-    n_samples=N, n_features=1, noise=20, coef=True, random_state=9487
-    #n_samples=N, n_features=1, n_targets=1, noise=1.5, random_state=9487
+    n_samples=N,
+    n_features=1,
+    noise=20,
+    coef=True,
+    random_state=9487
+    # n_samples=N, n_features=1, n_targets=1, noise=1.5, random_state=9487
 )
 print(X.shape, y.shape)
 print(coef)
@@ -269,12 +273,12 @@ for key, group in grouped:
     group.plot(ax=ax, kind="scatter", x="x", y="y", label=key, color=colors[key])
 
 print(X.shape, y.shape)
-plt.title('make_classification')
+plt.title("make_classification")
 plt.show()
 
 print("------------------------------")  # 30個
-#plt.subplot(232)
-#plt.title("make_blobs")
+# plt.subplot(232)
+# plt.title("make_blobs")
 
 """
 3. make_blobs
@@ -295,14 +299,14 @@ grouped = df.groupby("label")
 for key, group in grouped:
     group.plot(ax=ax, kind="scatter", x="x", y="y", label=key, color=colors[key])
 
-plt.title('make_blobs')
+plt.title("make_blobs")
 plt.show()
 
 print("------------------------------")  # 30個
-#plt.subplot(233)
-#plt.title("make_blobs")
+# plt.subplot(233)
+# plt.title("make_blobs")
 
-print('每群不同大小不同中心位置')
+print("每群不同大小不同中心位置")
 
 N0, N1, N2, N3 = 100, 300, 250, 400  # 樣本數
 cx0, cy0 = 100, 120  # 第0群的中心位置
@@ -326,12 +330,12 @@ grouped = df.groupby("label")
 for key, group in grouped:
     group.plot(ax=ax, kind="scatter", x="x", y="y", label=key, color=colors[key])
 
-plt.title('make_blobs')
+plt.title("make_blobs")
 plt.show()
 
 print("------------------------------")  # 30個
-#plt.subplot(234)
-#plt.title("make_moons")
+# plt.subplot(234)
+# plt.title("make_moons")
 
 """ 
 4. make_moons
@@ -354,12 +358,12 @@ grouped = df.groupby("label")
 for key, group in grouped:
     group.plot(ax=ax, kind="scatter", x="x", y="y", label=key, color=colors[key])
 
-plt.title('make_moons')
+plt.title("make_moons")
 plt.show()
 
 print("------------------------------")  # 30個
-#plt.subplot(235)
-#plt.title("make_circles")
+# plt.subplot(235)
+# plt.title("make_circles")
 
 """
 5. make_circles
@@ -381,12 +385,12 @@ grouped = df.groupby("label")
 for key, group in grouped:
     group.plot(ax=ax, kind="scatter", x="x", y="y", label=key, color=colors[key])
 
-plt.title('make_circles')
+plt.title("make_circles")
 plt.show()
 
 print("------------------------------")  # 30個
-#plt.subplot(236)
-#plt.title("make_gaussian_quantiles")
+# plt.subplot(236)
+# plt.title("make_gaussian_quantiles")
 
 """
 6. make_gaussian_quantiles
@@ -412,11 +416,10 @@ grouped = df.groupby("label")
 for key, group in grouped:
     group.plot(ax=ax, kind="scatter", x="x", y="y", label=key, color=colors[key])
 
-plt.title('make_gaussian_quantiles')
+plt.title("make_gaussian_quantiles")
 plt.show()
 
-#以上畫一起 有問題~~~~~
-
+# 以上畫一起 有問題~~~~~
 
 
 """
@@ -450,7 +453,7 @@ for k in range(10):
 x = np.linspace(-8, 8, 1000)
 plt.plot(x, norm.pdf(x), "r-", lw=2, alpha=0.6, label="theoretic std norm pdf")
 
-plt.title('make_hastie_10_2')
+plt.title("make_hastie_10_2")
 plt.legend()
 plt.show()
 
@@ -515,8 +518,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -532,8 +533,6 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
-
 
 
 """
@@ -559,9 +558,6 @@ random_state：随机状态若为固定值则每次产生的数据都一样
 """
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-
-
 
 
 print("------------------------------------------------------------")  # 60個

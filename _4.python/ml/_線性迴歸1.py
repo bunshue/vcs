@@ -947,7 +947,7 @@ X, y = make_regression(n_samples=N, n_features=3)
 # X : N X 3 陣列
 print(X.shape, y.shape)
 print(X)
-#print(y)
+# print(y)
 
 y = y.reshape((-1, 1))
 print(y)

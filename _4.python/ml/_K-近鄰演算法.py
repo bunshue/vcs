@@ -87,7 +87,7 @@ from sklearn.datasets import make_blobs
 from sklearn.preprocessing import StandardScaler
 
 N = 500
-print("產生", N, "筆資料 2維 2群")
+print("make_blobs 產生", N, "筆資料 2維 2群")
 dx, dy = make_blobs(n_samples=N, n_features=2, centers=2, random_state=9487)
 
 print(dx.shape)
@@ -179,9 +179,11 @@ print(y_pred)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 生成數據
+N = 60
+print("make_blobs 產生", N, "筆資料, 指定3個中心點, 預設2維")
+# 生成數據, 3群, 指定中心點
 centers = [[-2, 2], [2, 2], [0, 4]]
-X, y = make_blobs(n_samples=60, centers=centers, random_state=9487, cluster_std=0.60)
+X, y = make_blobs(n_samples=N, centers=centers, random_state=9487, cluster_std=0.60)
 
 # 畫出數據
 c = np.array(centers)

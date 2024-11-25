@@ -1,6 +1,16 @@
 """
 其他
 
+
+下載
+https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz
+將檔案改名成
+cifar-10-batches-py.tar.gz
+放在C:/Users/070601/.keras\datasets/之下
+
+
+
+
 """
 
 print("------------------------------------------------------------")  # 60個
