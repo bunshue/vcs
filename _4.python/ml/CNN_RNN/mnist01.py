@@ -144,6 +144,7 @@ BATCH_SIZE = 300  # 每 BATCH_SIZE 筆調一次參數
 EPOCHS = 1  # 遞迴次數, 訓練次數
 
 INPUT_DIM = 784  # 輸入層: 28*28 = 784
+VALIDATION_SPLIT = 0.2  # 驗證資料佔比
 
 mnist_npz_filename = "C:/_git/vcs/_big_files/mnist.npz"
 
@@ -334,7 +335,6 @@ def do_the_same_with_validation(x_train, y_train, x_test, y_test, validation_spl
     evaluate_model(x_test, y_test)
 
 
-'''
 print("準備工作 ST")
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -409,8 +409,7 @@ print("------------------------------------------------------------")  # 60個
 
 # https://waternotetw.blogspot.com/2018/03/keras-mnist.html
 
-# (x_train, y_train), (x_test, y_test) = load_mnist_data()
-(x_train_image, y_train_label), (x_test_image, y_test_label) = load_mnist_data()
+(x_train, y_train), (x_test, y_test) = load_mnist_data()
 
 
 # 建立plot_image函數，顯示images數字影像
@@ -422,10 +421,10 @@ def plot_image(image):  # 定義plot_image函數，傳入image作為參數
 
 
 print("顯示第1筆訓練資料 圖形")
-plot_image(x_train_image[1])
+plot_image(x_train[1])
 
 print("顯示第1筆訓練資料 結果")
-print(y_train_label[1])
+print(y_train[1])
 
 print("顯示多筆mnist資料內容")
 
@@ -448,17 +447,17 @@ def plot_images_labels(images, labels, idx, num=10):
 
 
 print("顯示 第0到第9筆 訓練資料")
-plot_images_labels(x_train_image, y_train_label, idx=0)
+plot_images_labels(x_train, y_train, idx=0)
 
 print("顯示 第0到第9筆 測試資料")
-plot_images_labels(x_test_image, y_test_label, idx=0)
+plot_images_labels(x_test, y_test, idx=0)
 
 # 將image以reshape()轉換
 # 先將原本28*28的2維數字影像，以reshape()轉換成1維向量，再以astype()轉換為float，共784個float數字
 # 二維影像 (28, 28) 轉成 一維向量 (784,) 再轉成 784個 float32 數字
 # x訓練/測試資料 N個 二維影像 (28, 28) 轉成 N個 一維向量 (28*28,)
-x_Train = x_train_image.reshape(len(x_train_image), 28 * 28).astype("float32")
-x_Test = x_test_image.reshape(len(x_test_image), 28 * 28).astype("float32")
+x_Train = x_train.reshape(len(x_train), 28 * 28).astype("float32")
+x_Test = x_test.reshape(len(x_test), 28 * 28).astype("float32")
 
 print("將二維 28X28 的影像 轉為 一維 784 資料 reshape")
 print("轉換後的 訓練資料 大小 x_train:", x_Train.shape)
@@ -466,7 +465,7 @@ print("轉換後的 測試資料 大小 x_test:", x_Test.shape)
 
 # 每個數字由0至255組成，代表圖形每一個點的灰階深淺
 print("看第0筆一維影像內容")
-print(x_train_image[0])
+print(x_train[0])
 
 # 將數字影像image的數值正規化(normalization), 從 0~255 => 0~1
 x_Train_normalization = x_Train / 255
@@ -477,7 +476,7 @@ print(x_Train_normalization[0])
 
 # 查看訓練資料label標籤欄位的前五筆訓練資料
 print("看前5筆 訓練資料")
-print(y_train_label[:5])
+print(y_train[:5])
 
 print("------------------------------------------------------------")  # 60個
 
@@ -503,22 +502,22 @@ print(data3)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-(X_train, Y_train), (X_test, Y_test) = load_mnist_data()
+(x_train, y_train), (x_test, y_test) = load_mnist_data()
 
 # 顯示 np 二維陣列內容
-print(X_train[0])
-print(Y_train[0])  # 標籤資料
+print(x_train[0])
+print(y_train[0])  # 標籤資料
 
-plt.imshow(X_train[0], cmap="gray")
-plt.title("顯示數字圖片 Label: " + str(Y_train[0]))
+plt.imshow(x_train[0], cmap="gray")
+plt.title("顯示數字圖片 Label: " + str(y_train[0]))
 plt.axis("off")
 show()
 
 sub_plot = 330
 for i in range(0, 9):
     ax = plt.subplot(sub_plot + i + 1)
-    ax.imshow(X_train[i], cmap="gray")
-    ax.set_title("Label: " + str(Y_train[i]))
+    ax.imshow(x_train[i], cmap="gray")
+    ax.set_title("Label: " + str(y_train[i]))
     ax.axis("off")
 
 plt.subplots_adjust(hspace=0.5)
@@ -601,9 +600,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 (x_train, y_train), (x_test, y_test) = load_mnist_data()
-# 數據庫的內容
-# 每筆輸入 (x) 就是一個手寫的 0-9 中一個數字的圖檔, 大小為 28x28
-# 而輸出 (y) 當然就是「正確答案」
 
 fig = plt.figure(figsize=(10, 10))
 for i in range(100):
@@ -621,17 +617,50 @@ print("編號87的訓練資料 的 shape :", x_train[87].shape)
 print("編號87的訓練資料 的 目標  :", y_train[87])
 
 print("準備工作 SP")
-'''
 
-'''
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
+# david : 簡單又正確率高, 以此為準
+"""
+參考 https://ithelp.ithome.com.tw/m/articles/10191404
+有說明
+"""
+
+print("建立神經網路09 正確率高")
+model = Sequential()  # 建立空白的神經網路模型(CNN), 函數學習機, 簡單的線性執行的模型
+
+# Add Input layer, 隱藏層(hidden layer) 有 256個輸出變數
+model.add(
+    Dense(
+        units=256, input_dim=INPUT_DIM, kernel_initializer="normal", activation="relu"
+    )
+)  # units 隱藏層: 256
+
+# 設定輸出層 softmax
+model.add(
+    Dense(units=10, kernel_initializer="normal", activation="softmax")
+)  # 輸出層的神經元 10 個
+
+# 組裝神經網路, 編譯模型 : 選擇損失函數、優化方法及成效衡量方式
+model.compile(loss="categorical_crossentropy", optimizer="adam", metrics=["accuracy"])
 
 (x_train, y_train), (x_test, y_test) = load_mnist_data()
-
 x_train, y_train, x_test, y_test = transform_data(x_train, y_train, x_test, y_test)
 
-print("建立神經網路01")
+# 方法一 全部拿來測試
+do_the_same1(x_train, y_train, x_test, y_test)  # 做一樣的事
+
+(x_train, y_train), (x_test, y_test) = load_mnist_data()
+x_train, y_train, x_test, y_test = transform_data(x_train, y_train, x_test, y_test)
+
+# 方法二 分割測試資料以驗證
+do_the_same_with_validation(x_train, y_train, x_test, y_test, VALIDATION_SPLIT)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("建立神經網路01 正確率高")
 model = Sequential()  # 建立空白的神經網路模型(CNN), 函數學習機, 簡單的線性執行的模型
 
 # 超參數設定(一)：隱藏層的數量、隱藏層設計多少神經元
@@ -644,14 +673,13 @@ model.add(Dense(10, activation="softmax"))  # 輸出層的神經元 10 個
 # 組裝神經網路, 編譯模型 : 選擇損失函數、優化方法及成效衡量方式
 model.compile(optimizer="rmsprop", loss="binary_crossentropy", metrics=["accuracy"])
 
+(x_train, y_train), (x_test, y_test) = load_mnist_data()
+x_train, y_train, x_test, y_test = transform_data(x_train, y_train, x_test, y_test)
+
 do_the_same1(x_train, y_train, x_test, y_test)  # 做一樣的事
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-(x_train, y_train), (x_test, y_test) = load_mnist_data()
-
-x_train, y_train, x_test, y_test = transform_data(x_train, y_train, x_test, y_test)
 
 print("建立神經網路02")
 model = Sequential()  # 建立空白的神經網路模型(CNN), 函數學習機, 簡單的線性執行的模型
@@ -672,14 +700,13 @@ sgd = optimizers.SGD(learning_rate=0.01)
 # 組裝神經網路, 編譯模型 : 選擇損失函數、優化方法及成效衡量方式
 model.compile(optimizer=sgd, loss="categorical_crossentropy", metrics=["accuracy"])
 
+(x_train, y_train), (x_test, y_test) = load_mnist_data()
+x_train, y_train, x_test, y_test = transform_data(x_train, y_train, x_test, y_test)
+
 do_the_same1(x_train, y_train, x_test, y_test)  # 做一樣的事
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-(x_train, y_train), (x_test, y_test) = load_mnist_data()
-
-x_train, y_train, x_test, y_test = transform_data(x_train, y_train, x_test, y_test)
 
 print("建立神經網路03")
 print("建立 3 層神經網路 100 100 100")
@@ -695,49 +722,13 @@ model.add(Dense(10, activation="softmax"))  # 輸出層的神經元 10 個
 # 組裝神經網路, 編譯模型 : 選擇損失函數、優化方法及成效衡量方式
 model.compile(loss="mse", optimizer=SGD(learning_rate=0.087), metrics=["accuracy"])
 
+(x_train, y_train), (x_test, y_test) = load_mnist_data()
+x_train, y_train, x_test, y_test = transform_data(x_train, y_train, x_test, y_test)
+
 do_the_same2(x_train, y_train, x_test, y_test)  # 做一樣的事
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-(x_train, y_train), (x_test, y_test) = load_mnist_data()
-
-# 將數字影像image的數值正規化(normalization), 從 0~255 => 0~1
-x_train = x_train / 255
-x_test = x_test / 255
-
-# One-Hot Encoding, 將數字轉為 One-hot 向量
-y_train = to_categorical(y_train)
-y_test = to_categorical(y_test)
-
-print("建立神經網路04")
-model = Sequential()  # 建立空白的神經網路模型(CNN), 函數學習機, 簡單的線性執行的模型
-
-model.add(Flatten(input_shape=(28, 28)))
-
-# 第1層 用 20 個神經元
-model.add(Dense(20, activation="relu"))
-# 第1層 用 80 個神經元
-model.add(Dense(80, activation="relu"))
-# 第1層 用 100 個神經元
-model.add(Dense(100, activation="relu"))
-# 第1層 用 160 個神經元
-model.add(Dense(160, activation="relu"))
-
-# 設定輸出層 softmax
-model.add(Dense(10, activation="softmax"))  # 輸出層的神經元 10 個
-
-# 組裝神經網路, 編譯模型 : 選擇損失函數、優化方法及成效衡量方式
-model.compile(loss="mse", optimizer=SGD(learning_rate=0.087), metrics=["accuracy"])
-
-do_the_same1(x_train, y_train, x_test, y_test)  # 做一樣的事
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-(x_train, y_train), (x_test, y_test) = load_mnist_data()
-
-x_train, y_train, x_test, y_test = transform_data(x_train, y_train, x_test, y_test)
 
 print("建立神經網路05")
 model = Sequential()  # 建立空白的神經網路模型(CNN), 函數學習機, 簡單的線性執行的模型
@@ -754,6 +745,8 @@ sgd = optimizers.SGD(learning_rate=0.01)
 # 組裝神經網路, 編譯模型 : 選擇損失函數、優化方法及成效衡量方式
 model.compile(optimizer=sgd, loss="categorical_crossentropy", metrics=["accuracy"])
 
+(x_train, y_train), (x_test, y_test) = load_mnist_data()
+x_train, y_train, x_test, y_test = transform_data(x_train, y_train, x_test, y_test)
 do_the_same1(x_train, y_train, x_test, y_test)  # 做一樣的事
 
 print("------------------------------------------------------------")  # 60個
@@ -773,7 +766,7 @@ x_test = x_test / 255
 y_train = to_categorical(y_train)
 y_test = to_categorical(y_test)
 
-print("建立神經網路06")
+print("建立神經網路06 Conv2D 正確率高")
 model = Sequential()  # 建立空白的神經網路模型(CNN), 函數學習機, 簡單的線性執行的模型
 
 model.add(
@@ -799,8 +792,8 @@ model.add(Dense(10, activation="softmax"))  # 輸出層的神經元 10 個
 # 組裝神經網路, 編譯模型 : 選擇損失函數、優化方法及成效衡量方式
 model.compile(loss="categorical_crossentropy", optimizer="adam", metrics=["accuracy"])
 
-validation_split = 0.2
-do_the_same_with_validation(x_train, y_train, x_test, y_test, validation_split)
+# 分割測試資料以驗證
+do_the_same_with_validation(x_train, y_train, x_test, y_test, VALIDATION_SPLIT)
 
 # ---------------------
 
@@ -834,25 +827,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-(x_train, y_train), (x_test, y_test) = load_mnist_data()
-
-# TBD
-# x_train, y_train, x_test, y_test = transform_data(x_train, y_train, x_test, y_test)
-
-# x訓練/測試資料 N個 二維影像 (28, 28) 轉成 N個 一維向量 (28*28,)
-# x訓練/測試資料 N個 二維影像 (28, 28) 轉成 N個 一維向量 (28*28,) 再轉成 28*28個 float32 數字
-x_train_vector = x_train.reshape(len(x_train), 784).astype("float32")
-x_test_vector = x_test.reshape(len(x_test), 784).astype("float32")
-
-# 將數字影像image的數值正規化(normalization), 從 0~255 => 0~1
-x_train_normalize = x_train_vector / 255
-x_test_normalize = x_test_vector / 255
-
-# One-Hot Encoding, 將數字轉為 One-hot 向量
-y_train_onehot = to_categorical(y_train)
-y_test_onehot = to_categorical(y_test)
-
-print("建立神經網路07")
+print("建立神經網路07 正確率高")
 model = Sequential()  # 建立空白的神經網路模型(CNN), 函數學習機, 簡單的線性執行的模型
 
 model.add(
@@ -872,31 +847,35 @@ model.add(
 # 組裝神經網路, 編譯模型 : 選擇損失函數、優化方法及成效衡量方式
 model.compile(loss="categorical_crossentropy", optimizer="adam", metrics=["accuracy"])
 
-validation_split = 0.2
-do_the_same_with_validation(
-    x_train_normalize, y_train_onehot, x_test_normalize, y_test_onehot, validation_split
-)
+(x_train, y_train), (x_test, y_test) = load_mnist_data()
+
+x_train, y_train, x_test, y_test = transform_data(x_train, y_train, x_test, y_test)
+
+# 分割測試資料以驗證
+do_the_same_with_validation(x_train, y_train, x_test, y_test, VALIDATION_SPLIT)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("寫入 模型")
 
-(train_feature, train_label), (test_feature, test_label) = load_mnist_data()
+(x_train, y_train), (x_test, y_test) = load_mnist_data()
+
+# x_train, y_train, x_test, y_test = transform_data(x_train, y_train, x_test, y_test)
 
 # x訓練/測試資料 N個 二維影像 (28, 28) 轉成 N個 一維向量 (28*28,) 再轉成 28*28個 float32 數字
-train_feature_vector = train_feature.reshape(len(train_feature), 784).astype("float32")
-test_feature_vector = test_feature.reshape(len(test_feature), 784).astype("float32")
+x_train = x_train.reshape(len(x_train), 784).astype("float32")
+x_test = x_test.reshape(len(x_test), 784).astype("float32")
 
 # 將數字影像image的數值正規化(normalization), 從 0~255 => 0~1
-train_feature_normalize = train_feature_vector / 255
-test_feature_normalize = test_feature_vector / 255
+x_train = x_train / 255
+x_test = x_test / 255
 
 # One-Hot Encoding, 將數字轉為 One-hot 向量
-train_label_onehot = to_categorical(train_label)
-test_label_onehot = to_categorical(test_label)
+y_train = to_categorical(y_train)
+y_test = to_categorical(y_test)
 
-print("建立神經網路08")
+print("建立神經網路08 正確率高")
 model = Sequential()  # 建立空白的神經網路模型(CNN), 函數學習機, 簡單的線性執行的模型
 
 model.add(
@@ -916,47 +895,14 @@ model.add(
 # 組裝神經網路, 編譯模型 : 選擇損失函數、優化方法及成效衡量方式
 model.compile(loss="categorical_crossentropy", optimizer="adam", metrics=["accuracy"])
 
-validation_split = 0.2
+# 分割測試資料以驗證
 do_the_same_with_validation(
-    train_feature_normalize,
-    train_label_onehot,
-    test_feature_normalize,
-    test_label_onehot,
-    validation_split,
+    x_train,
+    y_train,
+    x_test,
+    y_test,
+    VALIDATION_SPLIT,
 )
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-"""
-參考 https://ithelp.ithome.com.tw/m/articles/10191404
-有說明
-"""
-
-(x_train, y_train), (x_test, y_test) = load_mnist_data()
-
-x_train, y_train, x_test, y_test = transform_data(x_train, y_train, x_test, y_test)
-
-print("建立神經網路09")
-model = Sequential()  # 建立空白的神經網路模型(CNN), 函數學習機, 簡單的線性執行的模型
-
-# Add Input layer, 隱藏層(hidden layer) 有 256個輸出變數
-model.add(
-    Dense(
-        units=256, input_dim=INPUT_DIM, kernel_initializer="normal", activation="relu"
-    )
-)  # units 隱藏層: 256
-
-# 設定輸出層 softmax
-model.add(
-    Dense(units=10, kernel_initializer="normal", activation="softmax")
-)  # 輸出層的神經元 10 個
-
-# 組裝神經網路, 編譯模型 : 選擇損失函數、優化方法及成效衡量方式
-model.compile(loss="categorical_crossentropy", optimizer="adam", metrics=["accuracy"])
-
-validation_split = 0.2
-do_the_same_with_validation(x_train, y_train, x_test, y_test, validation_split)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1089,7 +1035,7 @@ CNN 一個小技巧是每層的 filters 數目是越來越多, 上課同學建�
     layer 3: 20
 """
 
-print("建立神經網路11")
+print("建立神經網路11 正確率XXXX")
 model = Sequential()  # 建立空白的神經網路模型(CNN), 函數學習機, 簡單的線性執行的模型
 
 # 第一個隱藏層一樣要告訴 Keras 我們輸入長什麼樣子。padding 設成 same 是每個 filter 會輸出原來 28x28 一樣大小的矩陣。
@@ -1218,7 +1164,7 @@ y_test = to_categorical(y_test)
 標準一層一層傳遞的神經網路叫 Sequential, 於是我們打開一個空的神經網路。
 """
 
-print("建立神經網路12")
+print("建立神經網路12 正確率XXXX")
 model = Sequential()  # 建立空白的神經網路模型(CNN), 函數學習機, 簡單的線性執行的模型
 
 """
@@ -1477,7 +1423,7 @@ x_test = x_test.reshape(-1, 28, 28, 1)
 y_train = to_categorical(y_train)
 y_test = to_categorical(y_test)
 
-print("建立神經網路18")
+print("建立神經網路18 正確率高")
 model = Sequential()  # 建立空白的神經網路模型(CNN), 函數學習機, 簡單的線性執行的模型
 
 # 計算準確率
@@ -1899,15 +1845,15 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-(X_train, Y_train), (X_test, Y_test) = load_mnist_data()
+(x_train, y_train), (x_test, y_test) = load_mnist_data()
 
 # x訓練/測試資料 N個 二維影像 (28, 28) 轉成 N個 一維向量 (28*28,)
-X_train = X_train.reshape(len(X_train), 784)
-X_test = X_test.reshape(len(X_test), 784)
+x_train = x_train.reshape(len(x_train), 784)
+x_test = x_test.reshape(len(x_test), 784)
 
 # One-Hot Encoding, 將數字轉為 One-hot 向量
-Y_train = to_categorical(Y_train)
-Y_test = to_categorical(Y_test)
+y_train = to_categorical(y_train)
+y_test = to_categorical(y_test)
 
 batch_size = BATCH_SIZE
 hidden_neurons = 100
@@ -1930,10 +1876,10 @@ model.compile(loss="categorical_crossentropy", metrics=["accuracy"], optimizer="
 """ 久
 
 # 學習訓練.fit
-do_model_fit1(X_train, Y_train)
+do_model_fit1(x_train, y_train)
 
 # 模型評估
-evaluate_model(X_test, Y_test)
+evaluate_model(x_test, y_test)
 
 weights = model.layers[0].get_weights()
 
@@ -1950,63 +1896,6 @@ for neuron in range(hidden_neurons):
 plt.savefig("neuron_images.png", dpi=300)    
 show()  
 """
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# restricted_boltzmann_machine
-
-# import tensorflow as tf
-import tensorflow.compat.v1 as tf  # 強制使用tensorflow 1.0
-
-tf.disable_v2_behavior()
-
-VISIBLE_NODES = 784
-HIDDEN_NODES = 400
-LEARNING_RATE = 0.01
-
-# mnist = input_data.read_data_sets("MNIST_data/")
-
-(train_images, train_labels), (test_images, test_labels) = load_mnist_data()
-
-input_placeholder = tf.placeholder("float", shape=(None, VISIBLE_NODES))
-
-weights = tf.Variable(
-    tf.random_normal(
-        (VISIBLE_NODES, HIDDEN_NODES), mean=0.0, stddev=1.0 / VISIBLE_NODES
-    )
-)
-hidden_bias = tf.Variable(tf.zeros([HIDDEN_NODES]))
-visible_bias = tf.Variable(tf.zeros([VISIBLE_NODES]))
-
-hidden_activation = tf.nn.sigmoid(tf.matmul(input_placeholder, weights) + hidden_bias)
-visible_reconstruction = tf.nn.sigmoid(
-    tf.matmul(hidden_activation, tf.transpose(weights)) + visible_bias
-)
-
-final_hidden_activation = tf.nn.sigmoid(
-    tf.matmul(visible_reconstruction, weights) + hidden_bias
-)
-
-positive_phase = tf.matmul(tf.transpose(input_placeholder), hidden_activation)
-negative_phase = tf.matmul(
-    tf.transpose(visible_reconstruction), final_hidden_activation
-)
-
-weight_update = weights.assign_add(LEARNING_RATE * (positive_phase - negative_phase))
-visible_bias_update = visible_bias.assign_add(
-    LEARNING_RATE * tf.reduce_mean(input_placeholder - visible_reconstruction, 0)
-)
-hidden_bias_update = hidden_bias.assign_add(
-    LEARNING_RATE * tf.reduce_mean(hidden_activation - final_hidden_activation, 0)
-)
-
-train_op = tf.group(weight_update, visible_bias_update, hidden_bias_update)
-
-loss_op = tf.reduce_sum(tf.square(input_placeholder - visible_reconstruction))
-
-session = tf.Session()  # tensorflow 1.0才有的指令
-
-session.run(tf.initialize_all_variables())
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -2080,8 +1969,8 @@ model.compile(
     loss="categorical_crossentropy", metrics=["accuracy"], optimizer="adadelta"
 )
 """ 久
-validation_split = 0.2
-do_the_same_with_validation(x_train, y_train, x_test, y_test, validation_split)
+# 分割測試資料以驗證
+do_the_same_with_validation(x_train, y_train, x_test, y_test, VALIDATION_SPLIT)
 
 """
 print("------------------------------------------------------------")  # 60個
@@ -2257,7 +2146,7 @@ x_test /= 255
 y_train = to_categorical(y_train, 10)
 y_test = to_categorical(y_test, 10)
 
-print("建立神經網路25")
+print("建立神經網路25 正確率XXXX")
 model = Sequential()  # 建立空白的神經網路模型(CNN), 函數學習機, 簡單的線性執行的模型
 
 # 加入 2D 的 Convolution Layer，接著一層 ReLU 的 Activation 函數
@@ -2350,7 +2239,7 @@ x_test /= 255
 y_train2 = to_categorical(y_train, category)
 y_test2 = to_categorical(y_test, category)
 
-print("建立神經網路26")
+print("建立神經網路26 正確率XXXX")
 model = Sequential()  # 建立空白的神經網路模型(CNN), 函數學習機, 簡單的線性執行的模型
 
 # 加入 2D 的 Convolution Layer，接著一層 ReLU 的 Activation 函數
@@ -2450,7 +2339,7 @@ x_test /= 255
 y_train2 = to_categorical(y_train, category)
 y_test2 = to_categorical(y_test, category)
 
-print("建立神經網路27")
+print("建立神經網路27 Conv2D 正確率高")
 model = Sequential()  # 建立空白的神經網路模型(CNN), 函數學習機, 簡單的線性執行的模型
 
 # 加入 2D 的 Convolution Layer，接著一層 ReLU 的 Activation 函數
@@ -2604,15 +2493,13 @@ evaluate_model(x_test, y_test)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 08_01_tensorflow_mnist
-
 (x_train, y_train), (x_test, y_test) = load_mnist_data()
 
 # 特徵縮放
 # 將數字影像image的數值正規化(normalization), 從 0~255 => 0~1
 x_train, x_test = x_train / 255.0, x_test / 255.0
 
-print("建立神經網路29")
+print("建立神經網路29 正確率高")
 model = Sequential(
     [
         Flatten(input_shape=(28, 28)),
@@ -2628,24 +2515,73 @@ model.compile(
     optimizer="adam", loss="sparse_categorical_crossentropy", metrics=["accuracy"]
 )
 
-validation_split = 0.2
-do_the_same_with_validation(x_train, y_train, x_test, y_test, validation_split)
+# 分割測試資料以驗證
+do_the_same_with_validation(x_train, y_train, x_test, y_test, VALIDATION_SPLIT)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+print("先到此")
+
+sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 print("新")
 print("------------------------------------------------------------")  # 60個
 
-# pip install tf-nightly
+print('不知道這段是什麼東西')
 
-# import tensorflow.keras as keras
+# restricted_boltzmann_machine
+import tensorflow.compat.v1 as tf  # 強制使用tensorflow 1.0
 
-import tensorflow as tf
-print(tf.__version__)
+tf.disable_v2_behavior()
 
+VISIBLE_NODES = 784
+HIDDEN_NODES = 400
+LEARNING_RATE = 0.01
+
+input_placeholder = tf.placeholder("float", shape=(None, VISIBLE_NODES))
+
+weights = tf.Variable(
+    tf.random_normal(
+        (VISIBLE_NODES, HIDDEN_NODES), mean=0.0, stddev=1.0 / VISIBLE_NODES
+    )
+)
+hidden_bias = tf.Variable(tf.zeros([HIDDEN_NODES]))
+visible_bias = tf.Variable(tf.zeros([VISIBLE_NODES]))
+
+hidden_activation = tf.nn.sigmoid(tf.matmul(input_placeholder, weights) + hidden_bias)
+visible_reconstruction = tf.nn.sigmoid(
+    tf.matmul(hidden_activation, tf.transpose(weights)) + visible_bias
+)
+
+final_hidden_activation = tf.nn.sigmoid(
+    tf.matmul(visible_reconstruction, weights) + hidden_bias
+)
+
+positive_phase = tf.matmul(tf.transpose(input_placeholder), hidden_activation)
+negative_phase = tf.matmul(
+    tf.transpose(visible_reconstruction), final_hidden_activation
+)
+
+weight_update = weights.assign_add(LEARNING_RATE * (positive_phase - negative_phase))
+visible_bias_update = visible_bias.assign_add(
+    LEARNING_RATE * tf.reduce_mean(input_placeholder - visible_reconstruction, 0)
+)
+hidden_bias_update = hidden_bias.assign_add(
+    LEARNING_RATE * tf.reduce_mean(hidden_activation - final_hidden_activation, 0)
+)
+
+train_op = tf.group(weight_update, visible_bias_update, hidden_bias_update)
+
+loss_op = tf.reduce_sum(tf.square(input_placeholder - visible_reconstruction))
+
+session = tf.Session()  # tensorflow 1.0才有的指令
+
+session.run(tf.initialize_all_variables())
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 """
 下载mnist数据
@@ -2695,11 +2631,7 @@ print(val_acc)
 predictions = model.predict(x_test)
 print(predictions)
 
-
-import numpy as np
-
 print(np.argmax(predictions[0]))
-
 
 plt.imshow(x_test[0], cmap=plt.cm.binary)
 plt.show()
@@ -2715,7 +2647,7 @@ new_model = tf.keras.models.load_model("tmp_epic_num_reader.model")
 predictions = new_model.predict(x_test)
 print(np.argmax(predictions[0]))
 
-'''
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -2730,7 +2662,7 @@ print("------------------------------------------------------------")  # 60個
 import tensorflow as tf
 
 print(tf.__version__)
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 model = keras.Sequential([keras.layers.Dense(units=1, input_shape=[1])])
@@ -2785,11 +2717,11 @@ assert x_test.shape == (10000, 28, 28)
 assert y_train.shape == (60000,)
 assert y_test.shape == (10000,)
 """
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 """
-import tensorflow as tf 
+
 import tensorflow.examples.tutorials.mnist.input_data as input_data
  
 mnist = input_data.read_data_sets('./database2/', one_hot=True)#相对路径
@@ -2853,13 +2785,6 @@ print("------------------------------------------------------------")  # 60個
 
 # 4 - Regressor example
 
-import numpy as np
-
-np.random.seed(1337)  # for reproducibility
-from keras.models import Sequential
-from keras.layers import Dense
-import matplotlib.pyplot as plt
-
 # create some data
 X = np.linspace(-1, 1, 200)
 np.random.shuffle(X)  # randomize the data
@@ -2898,19 +2823,11 @@ plt.scatter(X_test, Y_test)
 plt.plot(X_test, Y_pred)
 plt.show()
 
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 5 - Classifier example
 
-import numpy as np
-
-np.random.seed(1337)  # for reproducibility
-from keras.datasets import mnist
-from tensorflow.python.keras.utils import np_utils
-from keras.models import Sequential
-from keras.layers import Dense, Activation
 from keras.optimizers import RMSprop
 
 # download the mnist to the path '~/.keras/datasets/' if it is the first time to be called
@@ -2920,8 +2837,8 @@ from keras.optimizers import RMSprop
 # data pre-processing
 X_train = X_train.reshape(X_train.shape[0], -1) / 255.0  # normalize
 X_test = X_test.reshape(X_test.shape[0], -1) / 255.0  # normalize
-y_train = np_utils.to_categorical(y_train, num_classes=10)
-y_test = np_utils.to_categorical(y_test, num_classes=10)
+y_train = to_categorical(y_train, num_classes=10)
+y_test = to_categorical(y_test, num_classes=10)
 
 # Another way to build your neural net
 model = Sequential(
@@ -2956,19 +2873,7 @@ print("------------------------------------------------------------")  # 60個
 
 # 8 - RNN Classifier example
 
-# to try tensorflow, un-comment following two lines
-# import os
-# os.environ['KERAS_BACKEND']='tensorflow'
-
-import numpy as np
-
-np.random.seed(1337)  # for reproducibility
-
-from keras.datasets import mnist
-from tensorflow.python.keras.utils import np_utils
-from keras.models import Sequential
-from keras.layers import SimpleRNN, Activation, Dense
-from keras.optimizers import Adam
+from keras.layers import SimpleRNN
 
 TIME_STEPS = 28  # same as the height of the image
 INPUT_SIZE = 28  # same as the width of the image
@@ -2986,8 +2891,8 @@ LR = 0.001
 # data pre-processing
 X_train = X_train.reshape(-1, 28, 28) / 255.0  # normalize
 X_test = X_test.reshape(-1, 28, 28) / 255.0  # normalize
-y_train = np_utils.to_categorical(y_train, num_classes=10)
-y_test = np_utils.to_categorical(y_test, num_classes=10)
+y_train = to_categorical(y_train, num_classes=10)
+y_test = to_categorical(y_test, num_classes=10)
 
 # build RNN model
 model = Sequential()
@@ -3035,16 +2940,8 @@ print("------------------------------------------------------------")  # 60個
 
 # 8 - RNN LSTM Regressor example
 
-# to try tensorflow, un-comment following two lines
-# import os
-# os.environ['KERAS_BACKEND']='tensorflow'
-import numpy as np
-
-np.random.seed(1337)  # for reproducibility
-import matplotlib.pyplot as plt
-from keras.models import Sequential
-from keras.layers import LSTM, TimeDistributed, Dense
-from keras.optimizers import Adam
+from keras.layers import LSTM
+from keras.layers import TimeDistributed
 
 BATCH_START = 0
 TIME_STEPS = 20
@@ -3116,17 +3013,8 @@ print("------------------------------------------------------------")  # 60個
 
 # 9 - Autoencoder example
 
-# to try tensorflow, un-comment following two lines
-# import os
-# os.environ['KERAS_BACKEND']='tensorflow'
-import numpy as np
-
-np.random.seed(1337)  # for reproducibility
-
-from keras.datasets import mnist
 from keras.models import Model
-from keras.layers import Dense, Input
-import matplotlib.pyplot as plt
+from keras.layers import Input
 
 # download the mnist to the path '~/.keras/datasets/' if it is the first time to be called
 # X shape (60,000 28x28), y shape (10,000, )
@@ -3181,14 +3069,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 10 - save
-
-import numpy as np
-
-np.random.seed(1337)  # for reproducibility
-
-from keras.models import Sequential
-from keras.layers import Dense
-from keras.models import load_model
 
 # create some data
 X = np.linspace(-1, 1, 200)
@@ -3266,16 +3146,6 @@ y_pred = do_prediction(x_test)
 
 # 方法二 將minst資料集放在 特定 位置
 mnist = np.load(mnist_npz_filename)
-
-
-print("看 label")
-
-(train_feature, train_label), (test_feature, test_label) = load_mnist_data()
-
-print(train_label[0:5])
-# One-Hot Encoding, 將數字轉為 One-hot 向量
-train_label_onehot = to_categorical(train_label)
-print(train_label_onehot[0:5])
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -3361,38 +3231,38 @@ print("讀取模型, 並使用之 MLP")
 import glob, cv2
 
 files = glob.glob("imagedata\*.jpg")  # 建立測試資料
-test_feature = []
-test_label = []
+x_test = []
+y_test = []
 for file in files:
     img = cv2.imread(file)
     img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # 灰階
     _, img = cv2.threshold(img, 120, 255, cv2.THRESH_BINARY_INV)  # 轉為反相黑白
-    test_feature.append(img)
+    x_test.append(img)
     label = file[10:11]  # "imagedata\1.jpg"第10個字元1為label
-    test_label.append(int(label))
+    y_test.append(int(label))
 
-test_feature = np.array(test_feature)  # 串列轉為矩陣
-test_label = np.array(test_label)  # 串列轉為矩陣
+x_test = np.array(x_test)  # 串列轉為矩陣
+y_test = np.array(y_test)  # 串列轉為矩陣
 
 # x訓練/測試資料 N個 二維影像 (28, 28) 轉成 N個 一維向量 (28*28,) 再轉成 28*28個 float32 數字
-test_feature_vector = test_feature.reshape(len(test_feature), 784).astype("float32")
+x_test = x_test.reshape(len(x_test), 784).astype("float32")
 
 # 將數字影像image的數值正規化(normalization), 從 0~255 => 0~1
-test_feature_normalize = test_feature_vector / 255
+x_test = x_test / 255
 
 # 別人訓練出來的模型
 model = load_model("Mnist_mlp_model.h5")
 
 # 預測
-y_pred = do_prediction(test_feature_normalize)
+y_pred = do_prediction(x_test)
 
 # 畫出來
 images, labels, predictions, start_id, num = (
-    test_feature,
-    test_label,
+    x_test,
+    y_test,
     y_pred,
     0,
-    len(test_feature),
+    len(x_test),
 )
 """ no plot
 if num > 25:
@@ -3416,23 +3286,25 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-(train_feature, train_label), (test_feature, test_label) = load_mnist_data()
+(x_train, y_train), (x_test, y_test) = load_mnist_data()
+
+(x_train, y_train), (x_test, y_test) = load_mnist_data()
 
 # x訓練/測試資料 N個 二維影像 (28, 28) 轉成 N個 一維向量 (28*28,) 再轉成 28*28個 float32 數字
-test_feature_vector = test_feature.reshape(len(test_feature), 784).astype("float32")
+x_test = x_test.reshape(len(x_test), 784).astype("float32")
 
 # 將數字影像image的數值正規化(normalization), 從 0~255 => 0~1
-test_feature_normalize = test_feature_vector / 255
+x_test = x_test / 255
 
 # 別人訓練出來的模型
 model = load_model("Mnist_mlp_model.h5")
 
 # 預測
-y_pred = do_prediction(test_feature_normalize)
+y_pred = do_prediction(x_test)
 
 """
 # 畫出來
-images, labels, predictions, start_id, num = test_feature, test_label, y_pred, 0, 25
+images, labels, predictions, start_id, num = x_test, y_test, y_pred, 0, 25
 
 if num > 25:
     num = 25
@@ -3615,16 +3487,15 @@ print(x_train[0])
 print(x_train[0].shape)
 
 # x訓練/測試資料 N個 二維影像 (28, 28) 轉成 N個 一維向量 (28*28,) 再轉成 28*28個 float32 數字
-x_train_vector = x_train.reshape(len(x_train), 784).astype("float32")
-print(x_train_vector[0])
-print(x_train_vector[0].shape)
+x_train = x_train.reshape(len(x_train), 784).astype("float32")
+print(x_train[0])
+print(x_train[0].shape)
 
 # 將數字影像image的數值正規化(normalization), 從 0~255 => 0~1
-x_train_normalize = x_train_vector / 255
+x_train = x_train / 255
 
-print(x_train_normalize[0])
-print(x_train_normalize[0].shape)
-
+print(x_train[0])
+print(x_train[0].shape)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -3634,3 +3505,49 @@ print("------------------------------------------------------------")  # 60個
 # x_test=x_test[:1000]
 # y_train=y_train[:1000]
 # y_test=y_test[:1000]
+
+
+# pip install tf-nightly
+
+# import tensorflow.keras as keras
+
+import tensorflow as tf
+
+print(tf.__version__)
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+# x訓練/測試資料 N個 二維影像 (28, 28) 轉成 N個 一維向量 (28*28,)
+# x訓練/測試資料 N個 二維影像 (28, 28) 轉成 N個 一維向量 (28*28,) 再轉成 28*28個 float32 數字
+x_train = x_train.reshape(len(x_train), 784).astype("float32")
+x_test = x_test.reshape(len(x_test), 784).astype("float32")
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 第1層 用 20 個神經元
+model.add(Dense(20, activation="relu"))
+# 第1層 用 80 個神經元
+model.add(Dense(80, activation="relu"))
+# 第1層 用 100 個神經元
+model.add(Dense(100, activation="relu"))
+# 第1層 用 160 個神經元
+model.add(Dense(160, activation="relu"))
+
+# 設定輸出層 softmax
+model.add(Dense(10, activation="softmax"))  # 輸出層的神經元 10 個
+
+# 組裝神經網路, 編譯模型 : 選擇損失函數、優化方法及成效衡量方式
+model.compile(loss="mse", optimizer=SGD(learning_rate=0.087), metrics=["accuracy"])
+
+
+# 數據庫的內容
+# 每筆輸入 (x) 就是一個手寫的 0-9 中一個數字的圖檔, 大小為 28x28
+# 而輸出 (y) 當然就是「正確答案」
+
+
+# mnist = input_data.read_data_sets("MNIST_data/")
+

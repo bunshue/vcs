@@ -49,7 +49,7 @@ from sklearn.model_selection import train_test_split  # 資料分割 => 訓練�
 由於 sklearn.cross_validation 方法要被棄用了，所以必須改成 sklearn.model_selection。
 """
 print("------------------------------------------------------------")  # 60個
-
+'''
 iris = datasets.load_iris()
 
 # 定義特徵資料：
@@ -313,12 +313,284 @@ plt.xlabel("Value of K for KNN")
 plt.ylabel("Cross-Validated Accuracy")
 plt.show()
 """
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
+"""
+機器學習_K-近鄰演算法_空氣盒子
+"""
+
+df = pd.read_excel("data/20160101-20190101(Daily)K相鄰.xlsx")
+"""
+cc = df.head(10)
+print(cc)
+
+#資料長度
+print(len(df))
+print(len(df["PM25"]))
+
+cc = df.info()
+print(cc)
+
+cc = df.describe()
+print(cc)
+"""
+print(df.keys())
+print(df.shape)
+
+# Danger分類點說明
+# 對敏感族群不健康為PM2.5數值在35.5以上
+
+cc = df.isnull().any()
+print(cc)
+
+from sklearn.preprocessing import StandardScaler
+
+# 將Danger中特徵中移除，作為要預測的對象
+scaler = StandardScaler()
+scaler.fit(df.drop("Danger", axis=1))
+scaled_features = scaler.transform(df.drop("Danger", axis=1))
+
+df_feat = pd.DataFrame(scaled_features, columns=df.columns[:-1])
+cc = df_feat.head()
+print(cc)
+
+from sklearn.model_selection import train_test_split
+
+X = df_feat
+y = df["Danger"]
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.30, random_state=101
+)
+
+from sklearn.neighbors import KNeighborsClassifier
+
+# 從k值=1開始測試
+knn = KNeighborsClassifier(n_neighbors=1)
+knn.fit(X_train, y_train)
+pred = knn.predict(X_test)
+
+from sklearn.metrics import classification_report, confusion_matrix
+
+print(confusion_matrix(y_test, pred))
+print(classification_report(y_test, pred))
+
+error_rate = []
+
+for i in range(1, 60):
+    knn = KNeighborsClassifier(n_neighbors=i)
+    knn.fit(X_train, y_train)
+    pred_i = knn.predict(X_test)
+    error_rate.append(np.mean(pred_i != y_test))
+
+
+# 將k=1~60的錯誤率製圖畫出。k=7之後，錯誤率就往上跑，
+plt.figure(figsize=(10, 6))
+plt.plot(
+    range(1, 60),
+    error_rate,
+    color="blue",
+    linestyle="dashed",
+    marker="o",
+    markerfacecolor="red",
+    markersize=10,
+)
+plt.title("Error Rate vs. K Value")
+plt.xlabel("K")
+plt.ylabel("Error Rate")
+
+plt.show()
+
+print("------------------------------")  # 30個
+
+knn = KNeighborsClassifier(n_neighbors=1)
+
+knn.fit(X_train, y_train)
+pred = knn.predict(X_test)
+
+print("WITH K=1")
+print("\n")
+print(confusion_matrix(y_test, pred))
+print("\n")
+print(classification_report(y_test, pred))
+
+
+knn = KNeighborsClassifier(n_neighbors=10)
+
+knn.fit(X_train, y_train)
+pred = knn.predict(X_test)
+
+print("WITH K=10")
+print("\n")
+print(confusion_matrix(y_test, pred))
+print("\n")
+print(classification_report(y_test, pred))
+
+cc = df.head(1)
+print(cc)
+
+# 0:Safe   對一般人無害
+# 1:Danger 對敏感族群有害
+classes = {0: "Safe", 1: "Danger"}
+
+# 建立一筆新資料並進行預測
+x_new = [[4, 0.3, 25, 10, 15, 22, 2.2, 20, 2.3, 0.3, 2.3, 2, 20, 60]]
+y_predict = knn.predict(x_new)
+print(classes[y_predict[0]])
+
+# Danger
+
+classes = {0: "Safe", 1: "Danger"}
+
+x_new = [[1, 0.3, 1, 1, 1, 2, 1, 1, 1, 0.1, 1, 0.5, 30, 50]]
+y_predict = knn.predict(x_new)
+print(classes[y_predict[0]])
+
+# Safe
+
+cc = knn.score(X_test, y_test)
+print(cc)
+
+"""
+0.9675010979358806
+與前次相比，KNN的準確率 從0.9287356321839081變成0.9675010979358806
+前次資料1448筆 本次資料15179筆
+"""
+'''
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+"""
+20190314-空氣盒子數據Scikit-Learn K相鄰演算法實作
+"""
+df = pd.read_csv("data/200811-201811c.csv")  # 共有 1447 筆資料
+cc = df.head(10)
+print(cc)
+
+# Danger分類點說明
+# 對敏感族群不健康為PM2.5數值在35.5以上
+# 載入標準化比例尺（StandardScaler）套件
+
+from sklearn.preprocessing import StandardScaler
+
+# 將Danger中特徵中移除，作為要預測的對象
+scaler = StandardScaler()
+scaler.fit(df.drop("Danger", axis=1))  # 刪除 "Danger" 這一欄的資料
+scaled_features = scaler.transform(df.drop("Danger", axis=1))
+
+df_feat = pd.DataFrame(scaled_features, columns=df.columns[:-1])
+cc = df_feat.head()
+print(cc)
+
+# 將資料分成訓練組及測試組
+from sklearn.model_selection import train_test_split
+
+X = df_feat
+y = df["Danger"]
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.30, random_state=9487
+)
+
+# 使用KNN演算法
+from sklearn.neighbors import KNeighborsClassifier
+
+# 從k值=1開始測試
+knn = KNeighborsClassifier(n_neighbors=1)
+knn.fit(X_train, y_train)
+pred = knn.predict(X_test)
+
+# 使用混淆矩陣
+from sklearn.metrics import classification_report, confusion_matrix
+
+print("混淆矩陣")
+print(confusion_matrix(y_test, pred))
+print("classification_report")
+print(classification_report(y_test, pred))
+
+# 利用 For迴圈，選擇K值
+
+error_rate = []
+
+for i in range(1, 60):
+    print("選擇K值 :", i)
+    knn = KNeighborsClassifier(n_neighbors=i)
+    knn.fit(X_train, y_train)
+    pred_i = knn.predict(X_test)
+    error_rate.append(np.mean(pred_i != y_test))
+
+print('錯誤率 :', error_rate)
+
+# 將k=1~60的錯誤率製圖畫出。k=23之後，錯誤率就在5%-6%之間震盪，
+plt.figure(figsize=(12, 6))
+plt.plot(
+    range(1, 60),
+    error_rate,
+    color="blue",
+    linestyle="dashed",
+    marker="o",
+    markerfacecolor="red",
+    markersize=10,
+)
+plt.xlabel("K")
+plt.ylabel("Error Rate")
+plt.title("Error Rate vs. K Value")
+
+plt.show()
+
+print("選擇 K值 = 7")
+
+knn = KNeighborsClassifier(n_neighbors=7)
+knn.fit(X_train, y_train)
+pred = knn.predict(X_test)
+
+print("混淆矩陣")
+print(confusion_matrix(y_test, pred))
+print("classification_report")
+print(classification_report(y_test, pred))
+
+# 顯示所有特徵
+
+cc = df.head(1)
+print(cc)
+
+# 所有特徵
+
+# 給與一筆數值，進行預測(Danger)
+
+classes = {0: "Safe", 1: "Danger"}
+
+x_new = [[4, 0.3, 25, 15, 22, 2.2, 20, 2.3, 0.3, 2.3, 2, 20, 60]]
+y_predict = knn.predict(x_new)
+print(classes[y_predict[0]])
+
+# Danger
+
+# 給與一筆數值，進行預測(Safe)
+
+classes = {0: "Safe", 1: "Danger"}
+
+x_new = [[1, 0.3, 1, 1, 2, 1, 1, 1, 0.1, 1, 0.5, 30, 50]]
+y_predict = knn.predict(x_new)
+print('Safe 或 Danger ?')
+print(classes[y_predict[0]])
+# Safe
+
+print("評估KNN的準確率")
+cc = knn.score(X_test, y_test)
+print(cc)
+# 0.9287356321839081
 
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 
 
 print("------------------------------------------------------------")  # 60個

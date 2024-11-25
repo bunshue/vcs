@@ -21,12 +21,12 @@ print(
     "permutations 排列 ST------------------------------------------------------------"
 )  # 60個
 
-print('全排列')
+print("全排列")
 cc = itertools.permutations("鼠牛虎兔")
 dd = list(cc)
 print(dd)
 
-print('全排列')
+print("全排列")
 animals = ["鼠", "牛", "虎", "兔"]
 cc = itertools.permutations(animals)
 for p in cc:
@@ -34,11 +34,11 @@ for p in cc:
 
 print("------------------------------------------------------------")  # 60個
 
-print('部分排列')
+print("部分排列")
 print("P(4, 2)")
 
 cc = itertools.permutations("鼠牛虎兔", 2)
-#轉成list
+# 轉成list
 dd = list(cc)
 
 print(dd)
@@ -48,12 +48,12 @@ for d in dd:
 
 print("------------------------------------------------------------")  # 60個
 
-print('部分排列')
+print("部分排列")
 print("P(4, 2)")
 
 animals = {"鼠", "牛", "虎", "兔"}
 cc = itertools.permutations(animals, 2)
-#轉成set
+# 轉成set
 dd = set(cc)
 
 print(dd)
@@ -61,13 +61,13 @@ print("組合數量 = {}".format(len(dd)))
 for d in dd:
     print(d)
 
-print('部分排列')
+print("部分排列")
 animals = ["鼠", "牛", "虎", "兔"]
 cc = itertools.permutations(animals, 2)
 for p in cc:
     print(p)
 
-print('部分排列')
+print("部分排列")
 animals = ["鼠", "牛", "虎", "兔"]
 cc = itertools.permutations(animals, 2)
 dd = list(cc)
@@ -75,7 +75,7 @@ print(dd)
 
 print("------------------------------------------------------------")  # 60個
 
-print('全排列')
+print("全排列")
 animals = ["鼠", "牛", "虎", "兔"]
 cc = itertools.permutations(animals)
 n = 0
@@ -374,7 +374,7 @@ print("------------------------------------------------------------")  # 60個
 
 import itertools
 
-print('test itertools')
+print("test itertools")
 local_y_range = range(10)
 local_x_range = range(10)
 coords = list(itertools.product(local_x_range, local_y_range))

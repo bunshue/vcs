@@ -32,9 +32,11 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 print("------------------------------------------------------------")  # 60個
 
 import ssl
+
 ssl._create_default_https_context = ssl._create_stdlib_context
 
 import warnings
+
 warnings.filterwarnings("ignore")
 
 print("------------------------------------------------------------")  # 60個
@@ -725,9 +727,7 @@ df = sns.load_dataset("brain_networks", header=[0, 1, 2], index_col=0)
 
 # 取用指定資料 Pull out a specific subset of networks
 used_networks = [1, 3, 4, 5, 6, 7, 8, 11, 12, 13, 16, 17]
-used_columns = (df.columns.get_level_values("network")
-                          .astype(int)
-                          .isin(used_networks))
+used_columns = df.columns.get_level_values("network").astype(int).isin(used_networks)
 df = df.loc[:, used_columns]
 
 # 運算相關矩陣以及平均 Compute the correlation matrix and average over networks
@@ -739,10 +739,10 @@ corr_df = corr_df.sort_index().T
 f, ax = plt.subplots(figsize=(11, 6))
 
 # 繪製小提琴圖(以較窄的寬度) Draw a violinplot with a narrower bandwidth than the default
-sns.violinplot(data=corr_df, palette="Set3", bw=.2, cut=1, linewidth=1)
+sns.violinplot(data=corr_df, palette="Set3", bw=0.2, cut=1, linewidth=1)
 
 # 最終化圖形 Finalize the figure
-ax.set(ylim=(-.7, 1.05))
+ax.set(ylim=(-0.7, 1.05))
 sns.despine(left=True, bottom=True)
 
 plt.show()
@@ -761,11 +761,11 @@ sns.set()
 # 載入資料 Load data
 flights_long = sns.load_dataset("flights")
 
-flights = flights_long.pivot(index ='month', columns ='year', values='passengers')
+flights = flights_long.pivot(index="month", columns="year", values="passengers")
 
 # 繪製顯示數值的熱圖 Draw a heatmap with the numeric values in each cell
 f, ax = plt.subplots(figsize=(9, 6))
-sns.heatmap(flights, annot=True, fmt="d", linewidths=.5, ax=ax)
+sns.heatmap(flights, annot=True, fmt="d", linewidths=0.5, ax=ax)
 
 plt.show()
 
@@ -791,10 +791,20 @@ f, ax = plt.subplots(figsize=(8, 8))
 ax.set_aspect("equal")
 
 # 繪製核密度估計圖 Draw the two density plots
-ax = sns.kdeplot(x=setosa.sepal_width, y=setosa.sepal_length,
-                 cmap="Reds", shade=True, shade_lowest=False)
-ax = sns.kdeplot(x=virginica.sepal_width, y=virginica.sepal_length,
-                 cmap="Blues", shade=True, shade_lowest=False)
+ax = sns.kdeplot(
+    x=setosa.sepal_width,
+    y=setosa.sepal_length,
+    cmap="Reds",
+    shade=True,
+    shade_lowest=False,
+)
+ax = sns.kdeplot(
+    x=virginica.sepal_width,
+    y=virginica.sepal_length,
+    cmap="Blues",
+    shade=True,
+    shade_lowest=False,
+)
 
 # 加上標籤 Add labels to the plot
 red = sns.color_palette("Reds")[-2]
@@ -817,19 +827,15 @@ sns.set()
 df = sns.load_dataset("brain_networks", header=[0, 1, 2], index_col=0)
 
 used_networks = [1, 5, 6, 7, 8, 12, 13, 17]
-used_columns = (df.columns.get_level_values("network")
-                          .astype(int)
-                          .isin(used_networks))
+used_columns = df.columns.get_level_values("network").astype(int).isin(used_networks)
 df = df.loc[:, used_columns]
 
 used_networks = [1, 5, 6, 7, 8, 12, 13, 17]
-used_columns = (df.columns.get_level_values("network")
-                          .astype(int)
-                          .isin(used_networks))
+used_columns = df.columns.get_level_values("network").astype(int).isin(used_networks)
 df = df.loc[:, used_columns]
 
 # 為不同類別創建色盤 Create a categorical palette to identify the networks
-network_pal = sns.husl_palette(8, s=.45)
+network_pal = sns.husl_palette(8, s=0.45)
 network_lut = dict(zip(map(str, used_networks), network_pal))
 
 # 將色盤轉為向量，繪製在矩陣旁 Convert the palette to vectors that will be drawn on the side of the matrix
@@ -837,15 +843,20 @@ networks = df.columns.get_level_values("network")
 network_colors = pd.Series(networks, index=df.columns).map(network_lut)
 
 # 繪圖 Draw the full plot
-sns.clustermap(df.corr(), center=0, cmap="vlag",
-               row_colors=network_colors, col_colors=network_colors,
-               linewidths=.75, figsize=(13, 13))
+sns.clustermap(
+    df.corr(),
+    center=0,
+    cmap="vlag",
+    row_colors=network_colors,
+    col_colors=network_colors,
+    linewidths=0.75,
+    figsize=(13, 13),
+)
 
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------------------------------------")  # 60個

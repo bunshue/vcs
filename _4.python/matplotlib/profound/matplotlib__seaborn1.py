@@ -537,7 +537,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -556,24 +555,34 @@ m = df.g.map(ord)
 df["x"] += m
 
 # 初始化網格化對象 Initialize the FacetGrid object
-pal = sns.cubehelix_palette(10, rot=-.25, light=.7)
-g = sns.FacetGrid(df, row="g", hue="g", aspect=15, height=.5, palette=pal)
+pal = sns.cubehelix_palette(10, rot=-0.25, light=0.7)
+g = sns.FacetGrid(df, row="g", hue="g", aspect=15, height=0.5, palette=pal)
 
 # 繪製密度 Draw the densities in a few steps
-g.map(sns.kdeplot, "x", clip_on=False, shade=True, alpha=1, lw=1.5, bw=.2)
-g.map(sns.kdeplot, "x", clip_on=False, color="w", lw=2, bw=.2)
+g.map(sns.kdeplot, "x", clip_on=False, shade=True, alpha=1, lw=1.5, bw=0.2)
+g.map(sns.kdeplot, "x", clip_on=False, color="w", lw=2, bw=0.2)
 g.map(plt.axhline, y=0, lw=2, clip_on=False)
+
 
 # 定義成函數 Define and use a simple function to label the plot in axes coordinates
 def label(x, color, label):
     ax = plt.gca()
-    ax.text(0, .2, label, fontweight="bold", color=color,
-            ha="left", va="center", transform=ax.transAxes)
+    ax.text(
+        0,
+        0.2,
+        label,
+        fontweight="bold",
+        color=color,
+        ha="left",
+        va="center",
+        transform=ax.transAxes,
+    )
+
 
 g.map(label, "x")
 
 # 讓子圖重疊 Set the subplots to overlap
-g.fig.subplots_adjust(hspace=-.25)
+g.fig.subplots_adjust(hspace=-0.25)
 
 # 移除一些不必要的座標資訊 Remove axes details that don't play well with overlap
 g.set_titles("")
@@ -585,15 +594,14 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-x, y = np.random.multivariate_normal([0, 0], [[1,-0.5],[-0.5,1]], size=300).T
-#pal = sns.dark_palette("green", as_cmap=True) 沒什麼差別
+x, y = np.random.multivariate_normal([0, 0], [[1, -0.5], [-0.5, 1]], size=300).T
+# pal = sns.dark_palette("green", as_cmap=True) 沒什麼差別
 sns.kdeplot(x=x, y=y)
 plt.show()
 
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------------------------------------")  # 60個

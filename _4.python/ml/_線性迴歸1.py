@@ -74,9 +74,7 @@ def evaluate_result(y_test, y_pred):
     print(f"決定係數R2 = {r2:.4f}")
 
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
+'''
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -969,9 +967,289 @@ plt.plot(y_pred_sk, color="g", linewidth=4, label="預測結果")
 plt.legend()
 
 plt.show()
+'''
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+"""
+20190305-空氣盒子數據Scikit-Learn線性迴歸實作
+
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+df = pd.read_csv("data/200811-201811a.csv")  # 共有 1447 筆資料
+
+plt.scatter(df["PM25"], df["CO"], c='yellow')
+plt.scatter(df["PM25"][:100], df["CO"][:100], c='r')
+plt.scatter(df["PM25"][100:200], df["CO"][100:200], c='g')
+plt.scatter(df["PM25"][200:300], df["CO"][200:300], c='b')
+
+plt.xlabel("PM25")
+plt.ylabel("CO")
+plt.title("PM25 對比 CO")
+
+plt.show()
+
+print("------------------------------")  # 30個
+
+# 用 histplot() 看PM2.5主要集中的區間
+sns.histplot(df["PM25"])
+plt.title("PM25濃度統計")
+plt.show()
+
+print("------------------------------")  # 30個
+
+# 使用 df.corr() 先做出各變數間的關係係數，再用heatmap作圖
+sns.heatmap(df.corr())
+plt.title("關係係數")
+plt.show()
+
+print("------------------------------")  # 30個
+
+X = df["PM25"].values.reshape(-1, 1) # 轉成 1447 X 1
+y = df["CO"].values.reshape(-1, 1)  # 轉成 1447 X 1
+
+# 將資料分成訓練組及測試組
+# test_size代表測試組比例。random_state代表設定隨機種子，讓測試結果可被重複
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=9487
+)  # 訓練組8成, 測試組2成
+
+# 做線性迴歸, 用 sklearn 裡的 LinearRegression 來做線性迴歸
+linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
+
+linear_regression.fit(X_train, y_train)  # 學習訓練.fit
+print(f"斜率  = {linear_regression.coef_[0].round(2)}")
+print(f"截距  = {linear_regression.intercept_.round(2)}")
+
+# 取得截距。如果公式是y=ax+b，b即是截距
+print("截距b :", linear_regression.intercept_)
+
+# 取得迴歸係數，並用Data Frame顯示
+print("迴歸係數 :", linear_regression.coef_)
+
+# 預測, 使用測試組資料來預測結果
+y_pred = linear_regression.predict(X_test)
+
+df = pd.DataFrame({"測試資料": y_test.flatten(), "預測結果": y_pred.flatten()})
+#print(df)
+
+print("畫出前 N 筆, 比較實際PM2.5及預測PM2.5的關係")
+N = 20
+df1 = df.head(N)
+
+plt.figure(figsize=(10, 5))
+
+#df1.plot(kind="bar", figsize=(10, 5)) # 直接把整個df畫出來
+
+x1 = np.arange(len(df1["測試資料"])) - 0.2
+x2 = np.arange(len(df1["預測結果"])) + 0.2
+plt.bar(x1, df1["測試資料"], width=0.4, ec="none", fc="#e63946")
+plt.bar(x2, df1["預測結果"], width=0.4, ec="none", fc="#7fb069")
+
+plt.plot(df1["測試資料"], 'r', label="測試資料")
+plt.plot(df1["預測結果"], 'g', label="預測結果")
+plt.legend()
+plt.grid()
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+#測試組資料來預測結果
+
+plt.scatter(X_test, y_test, color="gray", label="測試資料")
+plt.plot(X_test, y_pred, color="red", linewidth=5, label="預測結果")
+plt.title("測試資料(灰) 對比 預測結果(紅)")
+plt.show()
+
+# 載入迴歸常見的評估指標
+from sklearn import metrics
+print("評估 測試資料 與 預測結果 的差異")
+
+# Mean Absolute Error (MAE)代表平均誤差，公式為所有實際值及預測值相減的絕對值平均。
+cc = metrics.mean_absolute_error(y_test, y_pred)
+print("MAE : Mean Absolute Error :", cc)
+
+# Mean Squared Error (MSE)比起MSE可以拉開誤差差距，算是蠻常用的指標，公式所有實際值及預測值相減的平方的平均
+cc = metrics.mean_squared_error(y_test, y_pred)
+print("MSE : Mean Squared Error :", cc)
+
+# Root Mean Squared Error (RMSE)代表MSE的平方根。比起MSE更為常用，因為更容易解釋y。
+cc = np.sqrt(metrics.mean_squared_error(y_test, y_pred))
+print("RMS : Root Mean Squared Error :", cc)
+
+print("------------------------------------------------------------")  # 60個
+
+df = pd.read_csv("data/200811-201811a.csv")
+"""
+print(df)
+
+cc = df.describe()
+print(cc)
+
+cc = df.isnull().any()
+print(cc)
+"""
+df = df.fillna(method="ffill") # 將空值填入, ffill()拿前一個值往下填, 承上
+print(df)
+
+y = df["PM25"].values
+
+# 用 histplot() 看PM2.5主要集中的區間
+sns.histplot(df["PM25"])
+plt.title("PM25濃度統計")
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+# 訓練線性模型
+
+# X是想探索的自變數，Y是依變數。
+
+X = df[
+    [
+        "SO2",
+        "CO",
+        "O3",
+        "Nox",
+        "NO",
+        "NO2",
+        "THC",
+        "NMHC",
+        "CH4",
+        "WindSpeed",
+        "TEMP",
+        "Humidity",
+    ]
+]
+
+y = df["PM25"]
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=9487)
+# 訓練組8成, 測試組2成
+
+print(X.shape)
+print(y.shape)
+print(X_train.shape)
+print(X_test.shape)
+print(y_train.shape)
+print(y_test.shape)
+
+# 做線性迴歸, 用 sklearn 裡的 LinearRegression 來做線性迴歸
+linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
+
+linear_regression.fit(X_train, y_train)  # 學習訓練.fit
+print(f"斜率  = {linear_regression.coef_[0].round(2)}")
+print(f"截距  = {linear_regression.intercept_.round(2)}")
+
+""" NG
+coeff_df = pd.DataFrame(linear_regression.coef_,X.columns,columns=['Coefficient'])  
+print(coeff_df)
+"""
+
+# 取得截距。如果公式是y=ax+b，b即是截距
+print("截距b:", linear_regression.intercept_)
+# 截距b: 4.194703731759336
+
+# 取得迴歸係數，並用Data Frame顯示
+print("迴歸係數 :", linear_regression.coef_)
+
+# 列出訓練的變數
+print(X_train.columns)
+
+# 預測, 使用測試組資料來預測結果
+y_pred = linear_regression.predict(X_test)  # 預測.predict
+
+df = pd.DataFrame({"測試資料": y_test, "預測結果": y_pred})
+#print(df)
+
+print("畫出前 N 筆, 比較實際PM2.5及預測PM2.5的關係")
+N = 20
+df1 = df.head(N)
+
+plt.figure(figsize=(10, 5))
+
+plt.scatter(y_test, y_pred)
+
+plt.show()
+
+df1.plot(kind="bar", figsize=(10, 8))
+plt.show()
+
+# 看實際值及預測值之間的殘差分佈圖
+sns.distplot((y_test - y_pred))
+
+plt.show()
+
+# 載入迴歸常見的評估指標
+from sklearn import metrics
+print("評估 測試資料 與 預測結果 的差異")
+
+# Mean Absolute Error (MAE)代表平均誤差，公式為所有實際值及預測值相減的絕對值平均。
+cc = metrics.mean_absolute_error(y_test, y_pred)
+print("MAE : Mean Absolute Error :", cc)
+
+# Mean Squared Error (MSE)比起MSE可以拉開誤差差距，算是蠻常用的指標，公式所有實際值及預測值相減的平方的平均
+cc = metrics.mean_squared_error(y_test, y_pred)
+print("MSE : Mean Squared Error :", cc)
+
+# Root Mean Squared Error (RMSE)代表MSE的平方根。比起MSE更為常用，因為更容易解釋y。
+cc = np.sqrt(metrics.mean_squared_error(y_test, y_pred))
+print("RMS : Root Mean Squared Error :", cc)
+
+print("------------------------------------------------------------")  # 60個
+
+# 2008年11月至2018年11月資料清洗
+
+df = pd.read_csv("data/200811-201811a.csv")
+
+# df.dtypes
+
+df["SO2"] = pd.to_numeric(df.SO2, errors="coerce")
+df["CO"] = pd.to_numeric(df.CO, errors="coerce")
+# df["CO2"] = pd.to_numeric(df.CO2, errors='coerce')
+df["O3"] = pd.to_numeric(df.O3, errors="coerce")
+df["PM25"] = pd.to_numeric(df.PM25, errors="coerce")
+df["Nox"] = pd.to_numeric(df.Nox, errors="coerce")
+df["NO"] = pd.to_numeric(df.NO, errors="coerce")
+df["NO2"] = pd.to_numeric(df.NO2, errors="coerce")
+df["THC"] = pd.to_numeric(df.THC, errors="coerce")
+df["NMHC"] = pd.to_numeric(df.NMHC, errors="coerce")
+df["CH4"] = pd.to_numeric(df.CH4, errors="coerce")
+df["WindSpeed"] = pd.to_numeric(df.WindSpeed, errors="coerce")
+df["TEMP"] = pd.to_numeric(df.TEMP, errors="coerce")
+df["Humidity"] = pd.to_numeric(df.Humidity, errors="coerce")
+
+# 處理缺失值
+df = df.fillna(0)
+
+# 檢查屬性是否已經改變
+# df.dtypes
+
+# 存檔至新的CSV
+# df.to_csv("tmp_200811-201811a.csv", encoding="utf8")
+
+print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 
 
 print("------------------------------------------------------------")  # 60個

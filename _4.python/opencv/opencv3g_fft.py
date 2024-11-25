@@ -7,6 +7,7 @@ FFT
 """
 
 import cv2
+import pylab as pl
 
 ESC = 27
 
@@ -29,7 +30,7 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 # 設定負號
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
-
+'''
 print("------------------------------------------------------------")  # 60個
 """
 #numpy 傅立葉
@@ -969,13 +970,107 @@ plt.subplot(133)
 plt.imshow(log_F,'gray')
 plt.title('log_F')
 """
+'''
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 二維離散傅立葉變換
+
+x = np.random.rand(8, 8)
+X = np.fft.fft2(x)
+print(np.allclose(X[1:, 1:], X[7:0:-1, 7:0:-1].conj()))  # 共軛復數
+print(X[::4, ::4])  # 虛數為零
+
+"""
+True
+[[ 31.48765415+0.j  -2.80563949+0.j]
+ [  0.75758598+0.j  -0.53147589+0.j]]
+"""
+
+x2 = np.fft.ifft2(X)  # 將頻域訊號轉換回空域訊號
+np.allclose(x, x2)  # 和原始訊號進行比較
+
+# True
+
+# %fig=（左上）用fft2()計算的頻域訊號，
+# （中上）使用fftshift()移位之後的頻域訊號，
+# （其它）各個領域所對應的空域訊號
+
+N = 256
+img = cv2.imread("data/lena.jpg", cv2.IMREAD_GRAYSCALE)
+img = cv2.resize(img, (N, N))
+img_freq = np.fft.fft2(img)
+img_mag = np.log10(np.abs(img_freq))
+img_mag_shift = np.fft.fftshift(img_mag)
+
+rects = [
+    (80, 125, 85, 130),
+    (90, 90, 95, 95),
+    (150, 10, 250, 250),
+    (110, 110, 146, 146),
+]
+
+"""
+    SOURCE
+
+    scpy2.opencv.fft2d_demo：示範二維離散傅立葉變換，
+    使用者在左側的頻域模值圖形上用滑鼠繪制隱藏區域，
+    右側的圖形為頻域訊號經由隱藏處理之後所轉換成的空域訊號。
+"""
+
+# %fig=(左上)用fft2()計算的頻域訊號，(中上)使用fftshift()移位之後的頻域訊號，(其它)各個領域所對應的空域訊號
+filtered_results = []
+for i, (x0, y0, x1, y1) in enumerate(rects):
+    mask = np.zeros((N, N), dtype=np.bool)
+    mask[x0 : x1 + 1, y0 : y1 + 1] = True
+    mask[N - x1 : N - x0 + 1, N - y1 : N - y0 + 1] = True
+    mask = np.fft.fftshift(mask)
+    img_freq2 = img_freq * mask
+    img_filtered = np.fft.ifft2(img_freq).real
+    filtered_results.append(img_filtered)
+
+fig, axes = pl.subplots(2, 3, figsize=(9, 6))
+axes = axes.ravel()
+axes[0].imshow(img_mag, cmap=pl.cm.gray)
+axes[1].imshow(img_mag_shift, cmap=pl.cm.gray)
+
+ax = axes[1]
+for i, (x0, y0, x1, y1) in enumerate(rects):
+    r = pl.Rectangle((x0, y0), x1 - x0, y1 - y0, alpha=0.2)
+    ax.add_artist(r)
+    pl.text(
+        (x0 + x1) / 2,
+        (y0 + y1) / 2,
+        str(i + 1),
+        color="white",
+        transform=ax.transData,
+        ha="center",
+        va="center",
+        alpha=0.8,
+    )
+
+for ax, result in zip(axes[2:], filtered_results):
+    ax.imshow(result, cmap=pl.cm.gray)
+
+for ax in axes:
+    ax.set_axis_off()
+
+fig.subplots_adjust(0.01, 0.01, 0.99, 0.99, 0.02, 0.02)
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
 
-print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
