@@ -32,7 +32,7 @@ from sklearn.model_selection import train_test_split  # 資料分割 => 訓練�
 from sklearn.ensemble import RandomForestRegressor
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 """
 機器學習_隨機森林_空氣盒子
 """
@@ -80,12 +80,14 @@ feature_list = list(df.columns)
 print(feature_list)
 
 # Convert to numpy array
-print('df 轉 np.array')
+print("df 轉 np.array")
 df = np.array(df)
 
 # 將資料分成訓練組及測試組
-#X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)# 訓練組8成, 測試組2成
-X_train, X_test, y_train, y_test = train_test_split(df, labels, test_size=0.25, random_state=42)# 訓練組7.5成, 測試組2.5成
+# X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)# 訓練組8成, 測試組2成
+X_train, X_test, y_train, y_test = train_test_split(
+    df, labels, test_size=0.25, random_state=42
+)  # 訓練組7.5成, 測試組2.5成
 
 """
 print(X.shape)
@@ -188,27 +190,25 @@ rf_small.fit(X_train, y_train)
 tree_small = rf_small.estimators_[5]
 
 # Save the tree as a png image
-export_graphviz(tree_small, out_file = 'data/small_tree222.dot', feature_names = feature_list, rounded = True, precision = 1)
+export_graphviz(
+    tree_small,
+    out_file="tmp_small_tree111.dot",
+    feature_names=feature_list,
+    rounded=True,
+    precision=1,
+)
 
-(graph, ) = pydot.graph_from_dot_file('data/small_tree222.dot')
+(graph,) = pydot.graph_from_dot_file("tmp_small_tree111.dot")
 
-# NG
-# graph.write_png('tmp_small_tree222.png');
-
-from IPython.display import Image
-from IPython.core.display import HTML
-
-PATH = "small_tree222.png"
-Image(filename=PATH, width=850, height=600)
-plt.show()
+# NG 無法寫入檔案
+# graph.write_png('tmp_small_tree111.png');
 
 # Use datetime for creating date objects for plotting
 import datetime
 
 print(feature_list)
 
-sys.exit()
-
+""" NG
 print('這個df資料裡面根本沒有年月日資料可取出')
 # Dates of training values
 months = df[:, feature_list.index("month")]
@@ -258,7 +258,8 @@ plt.ylabel("Maximum Temperature (F)")
 plt.title("Actual and Predicted Values")
 
 plt.show()
-'''
+"""
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -313,13 +314,14 @@ feature_list = list(df.columns)
 print(feature_list)
 
 # Convert to numpy array
-print('df 轉 np.array')
+print("df 轉 np.array")
 df = np.array(df)
 
 # 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
 # x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2)
 train_features, test_features, train_labels, test_labels = train_test_split(
-    df, labels, test_size=0.2)
+    df, labels, test_size=0.2
+)
 # 訓練組8成, 測試組2成
 
 """
@@ -367,22 +369,16 @@ tree = random_forest_regressor.estimators_[5]
 
 # Export the image to a dot file
 export_graphviz(
-    tree, out_file="tree.dot", feature_names=feature_list, rounded=True, precision=1
+    tree, out_file="tmp_tree.dot", feature_names=feature_list, rounded=True, precision=1
 )
 
 # Use dot file to create a graph
-(graph,) = pydot.graph_from_dot_file("tree.dot")
+(graph,) = pydot.graph_from_dot_file("tmp_tree.dot")
 
-# Write graph to a png file
-# NG
+# NG 無法寫入檔案
 # graph.write_png('tree.png')
 
-from IPython.display import Image
-from IPython.core.display import HTML
-
-PATH = "tree.png"
-Image(filename=PATH, width=1000, height=1000)
-plt.show()
+# 是否產出 dot file ?
 
 # 變數特徵的重要程度
 
@@ -463,24 +459,18 @@ tree_small = rf_small.estimators_[5]
 # Save the tree as a png image
 export_graphviz(
     tree_small,
-    out_file="small_tree.dot",
+    out_file="tmp_small_tree222.dot",
     feature_names=feature_list,
     rounded=True,
     precision=1,
 )
 
-(graph,) = pydot.graph_from_dot_file("small_tree.dot")
-# NG
-# graph.write_png('small_tree.png');
+(graph,) = pydot.graph_from_dot_file("tmp_small_tree222.dot")
+
+# NG 無法寫入檔案
+# graph.write_png('tmp_small_tree222.png');
 
 # value為預測之PM2.5的數值
-
-from IPython.display import Image
-from IPython.core.display import HTML
-
-PATH = "small_tree.png"
-Image(filename=PATH, width=850, height=600)
-plt.show()
 
 print("------------------------------------------------------------")  # 60個
 

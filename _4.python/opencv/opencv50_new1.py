@@ -54,7 +54,7 @@ def cvshow(title, image):
 
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 print("練習組合成一張大圖 picasa效果")
 
 filename1 = "C:/_git/vcs/_4.python/_data/elephant.jpg"
@@ -4663,7 +4663,7 @@ img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 print(img_gray.shape)
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 # 圖形型態
 
 from matplotlib import cm
@@ -4691,7 +4691,6 @@ for dtype, img in product(["uint8", "uint16"], [z1, z3, z4]):
     cv2.imwrite(fn, img)
 
 from glob import glob
-from IPython import display
 
 files = glob("uint*.png")
 flags = ["ANYCOLOR", "ANYDEPTH", "COLOR", "GRAYSCALE", "UNCHANGED"]
@@ -4713,7 +4712,6 @@ for quality in [90, 60, 30]:
     )
 
 from matplotlib.cm import ScalarMappable
-from IPython.display import Image
 
 
 def func(x, y, a):
@@ -4747,6 +4745,8 @@ jpg_str = jpg_data.tobytes()
 
 # %fig=使用`Image`將`imencode()`解碼的結果直接內嵌到Notebook中
 res, jpg_data = cv2.imencode(".jpg", img_8bit)
+
+from IPython.display import Image
 Image(data=jpg_data.tobytes())
 
 # 視訊輸出

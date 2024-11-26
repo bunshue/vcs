@@ -871,10 +871,6 @@ plt.yticks(())  # ignore yticks
 plt.title("標題在特定位置", size=30, x=0.0, y=0.0)
 
 
-# 清除
-# from IPython.display import display
-
-
 #!wget -O taipei_sans_tc_beta.ttf https://drive.google.com/uc?id=1eGAsTN1HBpJAkeVM57_C7ccp7hbgSz3_&export=download
 #!mv taipei_sans_tc_beta.ttf /usr/local/lib/python3.7/dist-packages/matplotlib/mpl-data/fonts/ttf
 

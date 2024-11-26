@@ -48,6 +48,11 @@ from sklearn.metrics import accuracy_score  # 沒用到
 print("------------------------------------------------------------")  # 60個
 
 
+def show():
+    # plt.show()
+    pass
+
+
 # 迴歸效果評估
 def evaluate_result(y_test, y_pred):
     print("真實資料(y_test) :", y_test)
@@ -74,7 +79,6 @@ def evaluate_result(y_test, y_pred):
     print(f"決定係數R2 = {r2:.4f}")
 
 
-'''
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -107,7 +111,7 @@ y_pred = linear_regression.predict(X)  # 預測.predict
 plt.scatter(X, y, s=30, c="b", label="真實資料")  # 真實資料, 藍點
 plt.plot(X, y_pred, c="r", label="線性迴歸")
 plt.legend()
-plt.show()
+show()
 
 print("資料分割")
 # 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
@@ -120,7 +124,7 @@ y_pred = linear_regression.predict(x_test)  # 預測.predict
 plt.scatter(X, y, s=30, c="b", label="真實資料")  # 真實資料, 藍點
 plt.plot(x_test, y_pred, c="r", label="線性迴歸")
 plt.legend()
-plt.show()
+show()
 """
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -147,7 +151,7 @@ y_pred = linear_regression.predict(x_test)  # 預測.predict, 傳入df
 plt.scatter(xxx, yyy, s=30, c="b", label="真實資料")  # 真實資料, 藍點
 plt.plot(x_test, y_pred, color="r", marker="o", markersize=8, label="線性迴歸")  # 線性迴歸曲線
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -176,7 +180,7 @@ plt.scatter(datas, targets, s=30, c="b", label="真實資料")  # 真實資料, 
 plt.plot(X["第一欄"], y_pred, color="r", marker="o", markersize=8, label="線性迴歸")
 
 plt.legend()
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -243,7 +247,7 @@ plt.axis([0, 10, 0, 10])  # 設定各軸顯示範圍
 plt.legend()
 plt.grid()
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -279,7 +283,7 @@ plt.axis([0, 10, 0, 10])  # 設定各軸顯示範圍
 plt.legend()
 plt.grid()
 
-plt.show()
+show()
 
 print("------------------------------")  # 30個
 
@@ -317,7 +321,7 @@ plt.title("SVR(linear) 迴歸")
 plt.axis([0, 10, 0, 10])  # 設定各軸顯示範圍
 plt.legend()
 plt.grid()
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -357,7 +361,7 @@ plt.title("SVR(rbf/linear/poly) 迴歸")
 plt.axis([0, 10, 0, 10])  # 設定各軸顯示範圍
 plt.legend()
 plt.grid()
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -376,14 +380,17 @@ x = xx
 y0 = yy0  # 理想資料
 y1 = yy1  # 真實資料
 
-# 使用 線性學習機 學習
 linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
+
 X = x.reshape(len(x), 1)
+
 linear_regression.fit(X, y1)  # 學習訓練.fit
 
 # 使用 6 次多項式 學習
 X_poly = np.array([[k, k**2, k**3, k**4, k**5, k**6] for k in x])
+
 regression_poly = sklearn.linear_model.LinearRegression()  # 函數學習機
+
 regression_poly.fit(X_poly, y1)  # 學習訓練.fit
 
 # 使用 RBF
@@ -400,7 +407,9 @@ X_rbf = np.array(
         for k in x
     ]
 )
+
 regression_rbf = sklearn.linear_model.LinearRegression()  # 函數學習機
+
 regression_rbf.fit(X_rbf, y1)  # 學習訓練.fit
 
 y_pred_lin = linear_regression.predict(X)  # 預測.predict
@@ -416,7 +425,7 @@ plt.plot(x, y_pred_rbf, "b", label="RBF 預測結果")
 plt.title("各種方法比較")
 plt.legend()
 plt.grid()
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -476,17 +485,14 @@ y_pred = linear_regression.predict(X_test_std)  # 預測.predict
 print("評估 測試資料 與 預測結果 的差異")
 evaluate_result(y_test, y_pred)
 
-sys.exit()
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("資料來源 : 檔案資料")
 
 # 共 15188 筆資料, 16欄位
-df = pd.read_excel(
-    "C:/_git/vcs/_4.python/__code/Python-PM2.5-DataAnalyzing-master/各種演算法比較/20160101-20190101(Daily)迴歸分析.xlsx"
-)
+
+df = pd.read_excel("data/20160101-20190101(Daily)迴歸分析.xlsx")
 
 print("df 111")
 print(df.columns)
@@ -549,7 +555,7 @@ linear_regression.fit(x_train, y_train)  # 學習訓練.fit
 
 """
 sns.heatmap(df.corr())
-plt.show()
+show()
 cc = df.corr()
 print(cc)
 """
@@ -563,7 +569,7 @@ df1 = df.head(25)
 df1.plot(kind="bar", figsize=(10, 8))
 plt.grid(which="major", linestyle="-", linewidth="0.5", color="green")
 plt.grid(which="minor", linestyle=":", linewidth="0.5", color="black")
-plt.show()
+show()
 
 print("評估 測試資料 與 預測結果 的差異")
 evaluate_result(y_test, y_pred)
@@ -620,7 +626,7 @@ plt.xlabel("Quantitative Measure")
 plt.ylabel("Predicted Quantitative Measure")
 plt.title("Quantitative Measure vs Predicted Quantitative Measure")
 
-plt.show()
+show()
 
 """
 #題目2
@@ -644,7 +650,7 @@ plt.scatter(y1 ,y_pred_4items_diabetes)
 plt.xlabel("Quantitative Measure")
 plt.ylabel("Predicted Quantitative Measure")
 plt.title("Quantitative Measure vs Predicted Quantitative Measure")
-plt.show()
+show()
 
 """
 
@@ -682,7 +688,7 @@ def do_linear_regression():
 
     plt.scatter(x_test, y_test, color="black")
     plt.plot(x_test, y_pred, color="blue", linewidth=3)
-    plt.show()
+    show()
 
 
 print("線性迴歸")
@@ -728,7 +734,7 @@ y_pred = linear_regression.predict(x_test)  # 預測.predict
 plt.plot(x_test, y_pred, "mo-", label="線性迴歸2")
 
 plt.legend()
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -827,10 +833,8 @@ y1_pred = linear_regression2.predict(x1_test)  # 預測.predict
 print(y_pred)
 print(y1_pred)
 
-# regression evaluation
-from sklearn.metrics import r2_score
-
-print(r2_score(y_test, y_pred))
+print("評估 測試資料 與 預測結果 的差異")
+evaluate_result(y_test, y_pred)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -868,33 +872,25 @@ print(y_pred)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-import numpy as np
-from sklearn.linear_model import LinearRegression
-
 # Generate some sample data
 x = np.array([1, 2, 3, 4, 5]).reshape((-1, 1))
 y = np.array([2, 3, 4, 5, 6])
 
-# Create the model
-model = LinearRegression()
+linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
 
-# Fit the model to the data
-model.fit(x, y)
+linear_regression.fit(x, y)
 
 # Predict the outcome for a new data point
 new_x = np.array([6]).reshape((-1, 1))
-y_pred = model.predict(new_x)
+y_pred = linear_regression.predict(new_x)
 
 # Print the coefficients and predicted outcome
-print("Coefficients: ", model.coef_)
-print("Intercept: ", model.intercept_)
+print("Coefficients: ", linear_regression.coef_)
+print("Intercept: ", linear_regression.intercept_)
 print("Predicted outcome: ", y_pred[0])
 
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-import numpy as np
 
 # Generate some sample data
 x = np.array([1, 2, 3, 4, 5])
@@ -912,11 +908,8 @@ print("Slope: ", slope)
 print("Y-intercept: ", intercept)
 print("Predicted outcome: ", y_pred)
 
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-import numpy as np
 
 # Generate some sample data
 x = np.array([1, 2, 3, 4, 5])
@@ -941,7 +934,7 @@ print("------------------------------------------------------------")  # 60個
 # 多維線性回歸
 
 N = 10
-X, y = make_regression(n_samples=N, n_features=3)
+X, y = datasets.make_regression(n_samples=N, n_features=3)
 # X : N X 3 陣列
 print(X.shape, y.shape)
 print(X)
@@ -950,9 +943,7 @@ print(X)
 y = y.reshape((-1, 1))
 print(y)
 
-from sklearn.linear_model import LinearRegression
-
-linear_regression = LinearRegression()
+linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
 
 linear_regression.fit(X, y)
 
@@ -966,8 +957,8 @@ plt.plot(y_pred_sk, color="g", linewidth=4, label="預測結果")
 
 plt.legend()
 
-plt.show()
-'''
+show()
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -980,34 +971,34 @@ print("------------------------------------------------------------")  # 60個
 
 df = pd.read_csv("data/200811-201811a.csv")  # 共有 1447 筆資料
 
-plt.scatter(df["PM25"], df["CO"], c='yellow')
-plt.scatter(df["PM25"][:100], df["CO"][:100], c='r')
-plt.scatter(df["PM25"][100:200], df["CO"][100:200], c='g')
-plt.scatter(df["PM25"][200:300], df["CO"][200:300], c='b')
+plt.scatter(df["PM25"], df["CO"], c="yellow")
+plt.scatter(df["PM25"][:100], df["CO"][:100], c="r")
+plt.scatter(df["PM25"][100:200], df["CO"][100:200], c="g")
+plt.scatter(df["PM25"][200:300], df["CO"][200:300], c="b")
 
 plt.xlabel("PM25")
 plt.ylabel("CO")
 plt.title("PM25 對比 CO")
 
-plt.show()
+show()
 
 print("------------------------------")  # 30個
 
 # 用 histplot() 看PM2.5主要集中的區間
 sns.histplot(df["PM25"])
 plt.title("PM25濃度統計")
-plt.show()
+show()
 
 print("------------------------------")  # 30個
 
 # 使用 df.corr() 先做出各變數間的關係係數，再用heatmap作圖
 sns.heatmap(df.corr())
 plt.title("關係係數")
-plt.show()
+show()
 
 print("------------------------------")  # 30個
 
-X = df["PM25"].values.reshape(-1, 1) # 轉成 1447 X 1
+X = df["PM25"].values.reshape(-1, 1)  # 轉成 1447 X 1
 y = df["CO"].values.reshape(-1, 1)  # 轉成 1447 X 1
 
 # 將資料分成訓練組及測試組
@@ -1016,7 +1007,6 @@ X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.2, random_state=9487
 )  # 訓練組8成, 測試組2成
 
-# 做線性迴歸, 用 sklearn 裡的 LinearRegression 來做線性迴歸
 linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
 
 linear_regression.fit(X_train, y_train)  # 學習訓練.fit
@@ -1033,7 +1023,7 @@ print("迴歸係數 :", linear_regression.coef_)
 y_pred = linear_regression.predict(X_test)
 
 df = pd.DataFrame({"測試資料": y_test.flatten(), "預測結果": y_pred.flatten()})
-#print(df)
+# print(df)
 
 print("畫出前 N 筆, 比較實際PM2.5及預測PM2.5的關係")
 N = 20
@@ -1041,43 +1031,30 @@ df1 = df.head(N)
 
 plt.figure(figsize=(10, 5))
 
-#df1.plot(kind="bar", figsize=(10, 5)) # 直接把整個df畫出來
+# df1.plot(kind="bar", figsize=(10, 5)) # 直接把整個df畫出來
 
 x1 = np.arange(len(df1["測試資料"])) - 0.2
 x2 = np.arange(len(df1["預測結果"])) + 0.2
 plt.bar(x1, df1["測試資料"], width=0.4, ec="none", fc="#e63946")
 plt.bar(x2, df1["預測結果"], width=0.4, ec="none", fc="#7fb069")
 
-plt.plot(df1["測試資料"], 'r', label="測試資料")
-plt.plot(df1["預測結果"], 'g', label="預測結果")
+plt.plot(df1["測試資料"], "r", label="測試資料")
+plt.plot(df1["預測結果"], "g", label="預測結果")
 plt.legend()
 plt.grid()
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
-#測試組資料來預測結果
+# 測試組資料來預測結果
 
 plt.scatter(X_test, y_test, color="gray", label="測試資料")
 plt.plot(X_test, y_pred, color="red", linewidth=5, label="預測結果")
 plt.title("測試資料(灰) 對比 預測結果(紅)")
-plt.show()
+show()
 
-# 載入迴歸常見的評估指標
-from sklearn import metrics
 print("評估 測試資料 與 預測結果 的差異")
-
-# Mean Absolute Error (MAE)代表平均誤差，公式為所有實際值及預測值相減的絕對值平均。
-cc = metrics.mean_absolute_error(y_test, y_pred)
-print("MAE : Mean Absolute Error :", cc)
-
-# Mean Squared Error (MSE)比起MSE可以拉開誤差差距，算是蠻常用的指標，公式所有實際值及預測值相減的平方的平均
-cc = metrics.mean_squared_error(y_test, y_pred)
-print("MSE : Mean Squared Error :", cc)
-
-# Root Mean Squared Error (RMSE)代表MSE的平方根。比起MSE更為常用，因為更容易解釋y。
-cc = np.sqrt(metrics.mean_squared_error(y_test, y_pred))
-print("RMS : Root Mean Squared Error :", cc)
+evaluate_result(y_test, y_pred)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1091,7 +1068,7 @@ print(cc)
 cc = df.isnull().any()
 print(cc)
 """
-df = df.fillna(method="ffill") # 將空值填入, ffill()拿前一個值往下填, 承上
+df = df.fillna(method="ffill")  # 將空值填入, ffill()拿前一個值往下填, 承上
 print(df)
 
 y = df["PM25"].values
@@ -1099,7 +1076,7 @@ y = df["PM25"].values
 # 用 histplot() 看PM2.5主要集中的區間
 sns.histplot(df["PM25"])
 plt.title("PM25濃度統計")
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1126,7 +1103,9 @@ X = df[
 
 y = df["PM25"]
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=9487)
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=9487
+)
 # 訓練組8成, 測試組2成
 
 print(X.shape)
@@ -1136,7 +1115,6 @@ print(X_test.shape)
 print(y_train.shape)
 print(y_test.shape)
 
-# 做線性迴歸, 用 sklearn 裡的 LinearRegression 來做線性迴歸
 linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
 
 linear_regression.fit(X_train, y_train)  # 學習訓練.fit
@@ -1162,7 +1140,7 @@ print(X_train.columns)
 y_pred = linear_regression.predict(X_test)  # 預測.predict
 
 df = pd.DataFrame({"測試資料": y_test, "預測結果": y_pred})
-#print(df)
+# print(df)
 
 print("畫出前 N 筆, 比較實際PM2.5及預測PM2.5的關係")
 N = 20
@@ -1172,31 +1150,18 @@ plt.figure(figsize=(10, 5))
 
 plt.scatter(y_test, y_pred)
 
-plt.show()
+show()
 
 df1.plot(kind="bar", figsize=(10, 8))
-plt.show()
+show()
 
 # 看實際值及預測值之間的殘差分佈圖
 sns.distplot((y_test - y_pred))
 
-plt.show()
+show()
 
-# 載入迴歸常見的評估指標
-from sklearn import metrics
 print("評估 測試資料 與 預測結果 的差異")
-
-# Mean Absolute Error (MAE)代表平均誤差，公式為所有實際值及預測值相減的絕對值平均。
-cc = metrics.mean_absolute_error(y_test, y_pred)
-print("MAE : Mean Absolute Error :", cc)
-
-# Mean Squared Error (MSE)比起MSE可以拉開誤差差距，算是蠻常用的指標，公式所有實際值及預測值相減的平方的平均
-cc = metrics.mean_squared_error(y_test, y_pred)
-print("MSE : Mean Squared Error :", cc)
-
-# Root Mean Squared Error (RMSE)代表MSE的平方根。比起MSE更為常用，因為更容易解釋y。
-cc = np.sqrt(metrics.mean_squared_error(y_test, y_pred))
-print("RMS : Root Mean Squared Error :", cc)
+evaluate_result(y_test, y_pred)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1237,19 +1202,12 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-
-
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-
-
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -1375,10 +1333,6 @@ y1 真實資料
    其他迴歸
 
 """
-
-
-print("評估 測試資料 與 預測結果 的差異")
-evaluate_result(y_test, y_pred)
 
 
 plt.scatter(X, y, c="blue", marker="o", lw=0.1, label="真實資料")

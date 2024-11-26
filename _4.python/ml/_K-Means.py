@@ -39,9 +39,14 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 print("------------------------------------------------------------")  # 60個
 
 from sklearn import datasets
-from sklearn.cluster import KMeans  # 聚類方法
+from sklearn.cluster import KMeans  # 聚類方法, K-平均演算法
 
-'''
+
+def show():
+    # plt.show()
+    pass
+
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("無 sklearn之kmeans 1")
@@ -52,7 +57,7 @@ def kmeans(x, y, cx, cy):
     plt.scatter(x, y, color="b")  # 繪製元素點
     plt.scatter(cx, cy, color="r")  # 用紅色繪群集中心
     plt.title("無 sklearn之kmeans 1")
-    plt.show()
+    show()
 
 
 # 群集中心, 元素的數量, 數據最大範圍
@@ -111,7 +116,7 @@ def kmeans(x, y, cx, cy):
         for i in range(len(linex)):
             plt.plot(linex[i], liney[i], color=color_c)  # 為第i群集繪線條
     plt.title("無 sklearn之kmeans 2")
-    plt.show()
+    show()
 
 
 # 群集中心, 元素的數量, 數據最大範圍
@@ -171,7 +176,7 @@ def kmeans(x, y, cx, cy):
         for i in range(len(linex)):
             plt.plot(linex[i], liney[i], color=color_c)  # 為第i群集繪線條
     plt.title("無 sklearn之kmeans 3")
-    plt.show()
+    show()
     return clusters
 
 
@@ -303,7 +308,7 @@ def do_k_means():
 
     plt.scatter(x, y)
     plt.scatter(new_muX, new_muY)
-    # plt.show()
+    show()
 
     plt.subplot(122)
     colors = ["r", "b", "g"]
@@ -315,7 +320,7 @@ def do_k_means():
             cy.append(v[1])
         plt.scatter(cx, cy, color=colors[key])
 
-    plt.show()
+    show()
 
 
 do_k_means()
@@ -369,7 +374,7 @@ plt.subplot(122)
 plt.scatter(X[:, 0], X[:, 1], c=y_pred)
 plt.title("KMeans分群結果")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -405,7 +410,7 @@ for i in range(0, N):
         plt.scatter(x[i][0], x[i][1], color="orange")
 plt.title("KMeans分群結果")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -446,7 +451,7 @@ plt.subplot(133)
 plt.contourf(xm, ym, Z, alpha=0.3)
 plt.scatter(x[:, 0], x[:, 1], s=50, c=cc, cmap="Paired")
 plt.title("KMeans分群結果")
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 """
@@ -528,7 +533,7 @@ my_mean_shift(0.4)
 plt.subplot(236)
 my_mean_shift(0.05)
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -552,7 +557,7 @@ f.close()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print('KMeans')
+print("KMeans")
 
 filename = "data/Iris2.csv"
 df = pd.read_csv(filename)
@@ -572,30 +577,22 @@ df["Species"] = df["Species"].map(s)
 print(df.head())
 print(df.info())
 
-# 挑選模型：匯入 K- 平均法模型
-
-from sklearn.cluster import KMeans
-
-# 學習訓練：建立並訓練 K-平均法模型
-
 df_X = df[["SepalLengthCm", "SepalWidthCm", "PetalLengthCm", "PetalWidthCm"]]
 k = 1
 
-km = KMeans(n_clusters=k)
+clf = KMeans(n_clusters=k)  # K-平均演算法, 分成k群
 
-km.fit(df_X)  # 學習訓練.fit
+clf.fit(df_X)  # 學習訓練.fit
 
-# 測試評估
-
-print("分群準確性:", km.inertia_)
+print("分群準確性:", clf.inertia_)
 
 # 分群準確性: 663.895238095238
 
 s = []
 for k in range(1, 15):
-    km = KMeans(n_clusters=k)
-    km.fit(df_X)  # 學習訓練.fit
-    s.append(km.inertia_)
+    clf = KMeans(n_clusters=k)  # K-平均演算法, 分成k群
+    clf.fit(df_X)  # 學習訓練.fit
+    s.append(clf.inertia_)
 
 print(s)
 
@@ -606,15 +603,15 @@ df_kmeans = pd.DataFrame()
 df_kmeans["inertia_"] = s
 df_kmeans.index = list(range(1, 15))
 df_kmeans.plot(grid=True)
-plt.show()
+show()
 
 k = 3
-km = KMeans(n_clusters=k)
+clf = KMeans(n_clusters=k)  # K-平均演算法, 分成k群
 
-km.fit(df_X)  # 學習訓練.fit
+clf.fit(df_X)  # 學習訓練.fit
 
 print("分群的預測結果：")
-pred = km.fit_predict(df_X)
+pred = clf.fit_predict(df_X)
 print(pred)
 
 # 決定模型
@@ -628,13 +625,13 @@ c = {0: "r", 1: "g", 2: "b"}
 df1["colors"] = df1["pred"].map(c)
 df1.plot(kind="scatter", x="SepalLengthCm", y="SepalWidthCm", c=df1["colors"])
 
-plt.show()
+show()
 
 # 給一朵鳶尾花的4個特徵值：「花萼長度 6.6公分、花萼寬度 3.1公分、花瓣長度 5.2公分、花寬度 2.4公分」
 
 new = [[6.6, 3.1, 5.2, 2.4]]
 
-v = km.predict(new)  # 預測.predict
+v = clf.predict(new)  # 預測.predict
 
 print("預測結果為：", v)
 
@@ -642,8 +639,6 @@ print("預測結果為：", v)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-from sklearn import cluster
 
 df = pd.DataFrame(
     {
@@ -668,88 +663,85 @@ df = pd.DataFrame(
 )
 k = 3
 
-kmeans = cluster.KMeans(n_clusters=k, random_state=9487)
+clf = KMeans(n_clusters=k, random_state=9487)  # K-平均演算法, 分成k群
 
-kmeans.fit(df)  # 學習訓練.fit
+clf.fit(df)  # 學習訓練.fit
 
-print(kmeans.labels_)
+print(clf.labels_)
 
 colmap = np.array(["r", "g", "y"])
-plt.scatter(df["length"], df["weight"], color=colmap[kmeans.labels_])
+plt.scatter(df["length"], df["weight"], color=colmap[clf.labels_])
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-from sklearn import cluster
 
 # 建立 300 個點, n_features = 2
 data, label = datasets.make_blobs(n_samples=300, n_features=2)
 
-e = cluster.KMeans(n_clusters=3)  # k-mean方法建立 3 個群集中心物件
-e.fit(data)  # 將數據帶入物件, 做群集分析  # 學習訓練.fit
-print(e.labels_)  # 列印群集類別標籤
-print(e.cluster_centers_)  # 列印群集中心
+clf = KMeans(n_clusters=3)  # K-平均演算法, 分成3群
+
+clf.fit(data)  # 將數據帶入物件, 做群集分析  # 學習訓練.fit
+print(clf.labels_)  # 列印群集類別標籤
+print(clf.cluster_centers_)  # 列印群集中心
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-from sklearn import cluster
 
 # 建立 300 個點, n_features = 2
 data, label = datasets.make_blobs(n_samples=300, n_features=2)
 
-e = cluster.KMeans(n_clusters=3)  # k-mean方法建立 3 個群集中心物件
-e.fit(data)  # 將數據帶入物件, 做群集分析  # 學習訓練.fit
-print(e.labels_)  # 列印群集類別標籤
-print(e.cluster_centers_)  # 列印群集中心
+clf = KMeans(n_clusters=3)  # K-平均演算法, 分成3群
+clf.fit(data)  # 將數據帶入物件, 做群集分析  # 學習訓練.fit
+print(clf.labels_)  # 列印群集類別標籤
+print(clf.cluster_centers_)  # 列印群集中心
 
 # 繪圓點, 圓點用黑色外框, 使用標籤 labels_ 區別顏色,
-plt.scatter(data[:, 0], data[:, 1], marker="o", c=e.labels_)
+plt.scatter(data[:, 0], data[:, 1], marker="o", c=clf.labels_)
 # 用紅色標記群集中心
-plt.scatter(e.cluster_centers_[:, 0], e.cluster_centers_[:, 1], marker="*", color="red")
+plt.scatter(
+    clf.cluster_centers_[:, 0], clf.cluster_centers_[:, 1], marker="*", color="red"
+)
 plt.title("無監督學習")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-from sklearn import cluster
 
 # 建立 300 個點, n_features = 2, centers = 3
 data, label = datasets.make_blobs(
     n_samples=300, n_features=2, centers=3, random_state=9487
 )
 
-e = cluster.KMeans(n_clusters=3)  # k-mean方法建立 3 個群集中心物件
-e.fit(data)  # 將數據帶入物件, 做群集分析
-print(e.labels_)  # 列印群集類別標籤
-print(e.cluster_centers_)  # 列印群集中心
+clf = KMeans(n_clusters=3)  # K-平均演算法, 分成3群
+clf.fit(data)  # 將數據帶入物件, 做群集分析
+print(clf.labels_)  # 列印群集類別標籤
+print(clf.cluster_centers_)  # 列印群集中心
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
-from sklearn import cluster
 
 # 建立 300 個點, n_features = 2, centers = 3
 data, label = datasets.make_blobs(
     n_samples=300, n_features=2, centers=3, random_state=9487
 )
 
-e = cluster.KMeans(n_clusters=3)  # k-mean方法建立 3 個群集中心物件
-e.fit(data)  # 將數據帶入物件, 做群集分析
-print(e.labels_)  # 列印群集類別標籤
-print(e.cluster_centers_)  # 列印群集中心
+clf = KMeans(n_clusters=3)  # K-平均演算法, 分成3群
+clf.fit(data)  # 將數據帶入物件, 做群集分析
+print(clf.labels_)  # 列印群集類別標籤
+print(clf.cluster_centers_)  # 列印群集中心
 
 # 繪圓點, 圓點用黑色外框, 使用標籤 labels_ 區別顏色,
-plt.scatter(data[:, 0], data[:, 1], marker="o", c=e.labels_)
+plt.scatter(data[:, 0], data[:, 1], marker="o", c=clf.labels_)
 # 用紅色標記群集中心
-plt.scatter(e.cluster_centers_[:, 0], e.cluster_centers_[:, 1], marker="*", color="red")
+plt.scatter(
+    clf.cluster_centers_[:, 0], clf.cluster_centers_[:, 1], marker="*", color="red"
+)
 plt.title("無監督學習", fontsize=16)
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

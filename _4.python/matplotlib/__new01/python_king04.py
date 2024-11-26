@@ -1158,62 +1158,6 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-#matplotlib技巧集
-#使用agg背景在圖形上繪圖
-
-from matplotlib.backends.backend_agg import RendererAgg
-
-w, h = 250, 250
-renderer = RendererAgg(w, h, 90)
-buf = renderer.buffer_rgba()
-arr = np.frombuffer(buf, np.uint8).reshape(h, w, -1)
-print(arr.shape)
-
-from matplotlib.path import Path
-from matplotlib import transforms
-
-path_data = [
-    (Path.MOVETO, (179, 1)),
-    (Path.CURVE4, (117, 75)),
-    (Path.CURVE4, (12, 230)),
-    (Path.CURVE4, (118, 230)),
-    (Path.LINETO, (142, 187)),
-    (Path.CURVE4, (210, 290)),
-    (Path.CURVE4, (250, 132)),
-    (Path.CURVE4, (200, 105)),
-    (Path.CLOSEPOLY, (179, 1)),
-]
-
-code, points = zip(*path_data)
-path = Path(points, code)
-
-gc = renderer.new_gc()
-gc.set_linewidth(2)
-gc.set_foreground((1, 0, 0))
-gc.set_antialiased(True)
-renderer.draw_path(gc, path, transforms.IdentityTransform(), (0, 1, 0))
-
-from matplotlib.patches import Circle
-from matplotlib.text import Text
-
-c = Circle((w/2, h/2), 50, edgecolor="blue", facecolor="yellow", linewidth=2, alpha=0.5)
-c.draw(renderer)
-
-text = Text(w/2, h/2, "Circle", va="center", ha="center")
-text.figure = renderer
-text.draw(renderer)
-
-# 直接使用RendererAgg繪圖
-from io import BytesIO
-from IPython.display import display_png
-png_buf = BytesIO()
-plt.imsave(png_buf, arr, format="png")
-display_png(png_buf.getvalue(), raw=True)
-
-#使用RendererAgg直接在圖形上繪圖，方便使用者在圖形上標注訊息。
-
-print("------------------------------------------------------------")  # 60個
-
 print('plt響應滑鼠與鍵碟事件')
 
 #鍵碟事件

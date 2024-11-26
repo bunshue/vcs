@@ -1422,7 +1422,6 @@ import sklearn.linear_model as linear_model
 
 # import xgboost as xgb
 # from sklearn.cross_validation import KFold
-# from IPython.display import HTML, display
 from sklearn.manifold import TSNE
 from sklearn.cluster import KMeans
 from sklearn.decomposition import PCA

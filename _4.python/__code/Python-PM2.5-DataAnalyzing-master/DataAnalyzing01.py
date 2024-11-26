@@ -119,18 +119,6 @@ plt.scatter(x, y)
 由於政府公開資料的格式問題，導致風向與PM2.5的視覺化呈現有困難(僅每小時資料提供風向)
 因此風向與PM2.5關聯性，將改以文獻閱讀為主
 """
-
-from IPython.display import Image
-from IPython.core.display import HTML
-
-PATH = "tree.png"  # 圖片路徑
-
-Image(filename=PATH, width=600, height=600)
-
-PATH2 = "wind-direction.png"  # 圖片路徑
-
-Image(filename=PATH2, width=600, height=600)
-
 print("------------------------------------------------------------")  # 60個
 
 print("各國PM2.5與溫度比較")

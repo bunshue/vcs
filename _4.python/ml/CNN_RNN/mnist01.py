@@ -31,10 +31,6 @@ MNIST資料集裡的每一筆資料皆由images(數字的影像)與labels
 
 標準 神經網路 做手寫辨識
 
-Keras 可以用各種不同的深度學習套件當底層, 指定用 Tensorflow 以確保執行的一致性。
-
-%env KERAS_BACKEND=tensorflow
-
 讀入 MNIST 數據庫
 
 MNIST 是有一堆 0-9 的手寫數字圖庫。有 6 萬筆訓練資料, 1 萬筆測試資料。
@@ -175,12 +171,27 @@ def transform_data(x_train, y_train, x_test, y_test):
     x_test = x_test.reshape(len(x_test), 784)
 
     # x訓練/測試資料 N個 轉成 28*28個 float32 數字
-    x_train = x_train.astype("float32")
-    x_test = x_test.astype("float32")
+    # x_train = x_train.astype("float32")
+    # x_test = x_test.astype("float32")
 
     # 將數字影像image的數值正規化(normalization), 從 0~255 => 0~1
-    x_train /= 255
-    x_test /= 255
+    # x_train = x_train / 255
+    # x_test = x_test / 255
+
+    # One-Hot Encoding, 將數字轉為 One-hot 向量
+    y_train = to_categorical(y_train)
+    y_test = to_categorical(y_test)
+    return x_train, y_train, x_test, y_test
+
+
+def transform_data4d(x_train, y_train, x_test, y_test):
+    # 將圖片轉換成 4D 張量
+    x_train = x_train.reshape(len(x_train), 28, 28, 1).astype("float32")
+    x_test = x_test.reshape(len(x_test), 28, 28, 1).astype("float32")
+
+    # 將數字影像image的數值正規化(normalization), 從 0~255 => 0~1
+    x_train = x_train / 255
+    x_test = x_test / 255
 
     # One-Hot Encoding, 將數字轉為 One-hot 向量
     y_train = to_categorical(y_train)
@@ -298,6 +309,7 @@ def evaluate_model(x_test, y_test):
     print("正確率 : {:.2f}".format(accuracy))
 
 
+# 全部拿來測試
 def do_the_same1(x_train, y_train, x_test, y_test):
     # 做一樣的事
     # 學習訓練.fit
@@ -321,6 +333,7 @@ def do_the_same2(x_train, y_train, x_test, y_test):
     show_predict_result_1d(x_test, y_pred, n)
 
 
+# 分割測試資料以驗證
 def do_the_same_with_validation(x_train, y_train, x_test, y_test, validation_split):
     # 做一樣的事
     # 學習訓練.fit
@@ -335,6 +348,7 @@ def do_the_same_with_validation(x_train, y_train, x_test, y_test, validation_spl
     evaluate_model(x_test, y_test)
 
 
+'''
 print("準備工作 ST")
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -617,7 +631,7 @@ print("編號87的訓練資料 的 shape :", x_train[87].shape)
 print("編號87的訓練資料 的 目標  :", y_train[87])
 
 print("準備工作 SP")
-
+'''
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -675,7 +689,7 @@ model.compile(optimizer="rmsprop", loss="binary_crossentropy", metrics=["accurac
 
 (x_train, y_train), (x_test, y_test) = load_mnist_data()
 x_train, y_train, x_test, y_test = transform_data(x_train, y_train, x_test, y_test)
-
+# 全部拿來測試
 do_the_same1(x_train, y_train, x_test, y_test)  # 做一樣的事
 
 print("------------------------------------------------------------")  # 60個
@@ -702,7 +716,7 @@ model.compile(optimizer=sgd, loss="categorical_crossentropy", metrics=["accuracy
 
 (x_train, y_train), (x_test, y_test) = load_mnist_data()
 x_train, y_train, x_test, y_test = transform_data(x_train, y_train, x_test, y_test)
-
+# 全部拿來測試
 do_the_same1(x_train, y_train, x_test, y_test)  # 做一樣的事
 
 print("------------------------------------------------------------")  # 60個
@@ -724,7 +738,6 @@ model.compile(loss="mse", optimizer=SGD(learning_rate=0.087), metrics=["accuracy
 
 (x_train, y_train), (x_test, y_test) = load_mnist_data()
 x_train, y_train, x_test, y_test = transform_data(x_train, y_train, x_test, y_test)
-
 do_the_same2(x_train, y_train, x_test, y_test)  # 做一樣的事
 
 print("------------------------------------------------------------")  # 60個
@@ -747,26 +760,50 @@ model.compile(optimizer=sgd, loss="categorical_crossentropy", metrics=["accuracy
 
 (x_train, y_train), (x_test, y_test) = load_mnist_data()
 x_train, y_train, x_test, y_test = transform_data(x_train, y_train, x_test, y_test)
+# 全部拿來測試
 do_the_same1(x_train, y_train, x_test, y_test)  # 做一樣的事
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+print("建立神經網路29 正確率高 僅正規化 沒有one-hot")
+model = Sequential(
+    [
+        Flatten(input_shape=(28, 28)),
+        Dense(128, activation="relu"),
+        Dropout(0.2),
+        Dense(10, activation="softmax"),
+    ]
+)
+
+# 設定優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
+# 組裝神經網路, 編譯模型 : 選擇損失函數、優化方法及成效衡量方式
+model.compile(
+    optimizer="adam", loss="sparse_categorical_crossentropy", metrics=["accuracy"]
+)
+
+# NG 不知道為什麼
+# (x_train, y_train), (x_test, y_test) = load_mnist_data()
+# x_train, y_train, x_test, y_test = transform_data(x_train, y_train, x_test, y_test)
+
 (x_train, y_train), (x_test, y_test) = load_mnist_data()
 
-# 將圖片轉換成 4D 張量
-x_train = x_train.reshape(len(x_train), 28, 28, 1).astype("float32")
-x_test = x_test.reshape(len(x_test), 28, 28, 1).astype("float32")
-
+# 特徵縮放
 # 將數字影像image的數值正規化(normalization), 從 0~255 => 0~1
-x_train = x_train / 255
-x_test = x_test / 255
+x_train, x_test = x_train / 255, x_test / 255
 
-# One-Hot Encoding, 將數字轉為 One-hot 向量
-y_train = to_categorical(y_train)
-y_test = to_categorical(y_test)
+# 方法一 全部拿來測試
+do_the_same1(x_train, y_train, x_test, y_test)  # 做一樣的事
 
-print("建立神經網路06 Conv2D 正確率高")
+"""
+# 方法二 分割測試資料以驗證
+do_the_same_with_validation(x_train, y_train, x_test, y_test, VALIDATION_SPLIT)
+"""
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("建立神經網路06 Conv2D 正確率高 4D 張量")
 model = Sequential()  # 建立空白的神經網路模型(CNN), 函數學習機, 簡單的線性執行的模型
 
 model.add(
@@ -792,8 +829,22 @@ model.add(Dense(10, activation="softmax"))  # 輸出層的神經元 10 個
 # 組裝神經網路, 編譯模型 : 選擇損失函數、優化方法及成效衡量方式
 model.compile(loss="categorical_crossentropy", optimizer="adam", metrics=["accuracy"])
 
-# 分割測試資料以驗證
-do_the_same_with_validation(x_train, y_train, x_test, y_test, VALIDATION_SPLIT)
+(x_train, y_train), (x_test, y_test) = load_mnist_data()
+
+# 將圖片轉換成 4D 張量
+x_train = x_train.reshape(len(x_train), 28, 28, 1).astype("float32")
+x_test = x_test.reshape(len(x_test), 28, 28, 1).astype("float32")
+
+# 將數字影像image的數值正規化(normalization), 從 0~255 => 0~1
+x_train = x_train / 255
+x_test = x_test / 255
+
+# One-Hot Encoding, 將數字轉為 One-hot 向量
+y_train = to_categorical(y_train)
+y_test = to_categorical(y_test)
+
+# 全部拿來測試
+do_the_same1(x_train, y_train, x_test, y_test)  # 做一樣的事
 
 # ---------------------
 
@@ -801,24 +852,25 @@ do_the_same_with_validation(x_train, y_train, x_test, y_test, VALIDATION_SPLIT)
 
 # 選一個測試的數字圖片
 i = 7
-digit = x_test[i].reshape(28, 28)
+n = 7  # 123
+digit = x_test[n].reshape(28, 28)
+# print(digit)
+
 # 將圖片轉換成 4D 張量
-x_test_digit = x_test[i].reshape(1, 28, 28, 1).astype("float32")
+x_test_digit = x_test[n].reshape(1, 28, 28, 1).astype("float32")
 
 # 將數字影像image的數值正規化(normalization), 從 0~255 => 0~1
 x_test_digit = x_test_digit / 255
 
-plt.title("Example of Digit:" + str(y_test[i]))
+plt.subplot(121)
+plt.title("真實目標 :" + str(y_test[n]))
 plt.imshow(digit, cmap="gray")
 plt.axis("off")
-show()
 
-# (-0.5, 27.5, 27.5, -0.5)
-
-# 預測結果的機率
+plt.subplot(122)
 probs = model.predict(x_test_digit, batch_size=1)[0]
-print(probs)
-plt.title("Probabilities for Each Digit Class")
+print("預測結果的機率 :", probs)
+plt.title("預測結果的機率\nProbabilities for Each Digit Class")
 plt.bar(np.arange(10), probs.reshape(10), align="center")
 plt.xticks(np.arange(10), np.arange(10).astype(str))
 
@@ -847,33 +899,10 @@ model.add(
 # 組裝神經網路, 編譯模型 : 選擇損失函數、優化方法及成效衡量方式
 model.compile(loss="categorical_crossentropy", optimizer="adam", metrics=["accuracy"])
 
-(x_train, y_train), (x_test, y_test) = load_mnist_data()
-
-x_train, y_train, x_test, y_test = transform_data(x_train, y_train, x_test, y_test)
-
-# 分割測試資料以驗證
-do_the_same_with_validation(x_train, y_train, x_test, y_test, VALIDATION_SPLIT)
+# 後續一樣
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-print("寫入 模型")
-
-(x_train, y_train), (x_test, y_test) = load_mnist_data()
-
-# x_train, y_train, x_test, y_test = transform_data(x_train, y_train, x_test, y_test)
-
-# x訓練/測試資料 N個 二維影像 (28, 28) 轉成 N個 一維向量 (28*28,) 再轉成 28*28個 float32 數字
-x_train = x_train.reshape(len(x_train), 784).astype("float32")
-x_test = x_test.reshape(len(x_test), 784).astype("float32")
-
-# 將數字影像image的數值正規化(normalization), 從 0~255 => 0~1
-x_train = x_train / 255
-x_test = x_test / 255
-
-# One-Hot Encoding, 將數字轉為 One-hot 向量
-y_train = to_categorical(y_train)
-y_test = to_categorical(y_test)
 
 print("建立神經網路08 正確率高")
 model = Sequential()  # 建立空白的神經網路模型(CNN), 函數學習機, 簡單的線性執行的模型
@@ -895,14 +924,10 @@ model.add(
 # 組裝神經網路, 編譯模型 : 選擇損失函數、優化方法及成效衡量方式
 model.compile(loss="categorical_crossentropy", optimizer="adam", metrics=["accuracy"])
 
-# 分割測試資料以驗證
-do_the_same_with_validation(
-    x_train,
-    y_train,
-    x_test,
-    y_test,
-    VALIDATION_SPLIT,
-)
+(x_train, y_train), (x_test, y_test) = load_mnist_data()
+x_train, y_train, x_test, y_test = transform_data(x_train, y_train, x_test, y_test)
+# 全部拿來測試
+do_the_same1(x_train, y_train, x_test, y_test)  # 做一樣的事
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1078,6 +1103,7 @@ model.add(Dense(10, activation="softmax"))  # 輸出層的神經元 10 個
 # 組裝神經網路, 編譯模型 : 選擇損失函數、優化方法及成效衡量方式
 model.compile(loss="mse", optimizer=SGD(learning_rate=0.07), metrics=["accuracy"])
 
+# 全部拿來測試
 do_the_same1(x_train, y_train, x_test, y_test)  # 做一樣的事
 
 # 儲存結果
@@ -1098,53 +1124,6 @@ model = load_model("tmp_myCNNmodel2.h5")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-(x_train, y_train), (x_test, y_test) = load_mnist_data()
-
-# 2.2.3 輸入格式整理
-# 我們現在要用標準神經網路學學手寫辨識。
-# 原來的每筆數據是個 28x28 的矩陣 (array),
-# 但標準神經網路只吃「平平的」, 也就是每次要 28x28=784 長的向量。
-# 因此我們要用 reshape 調校一下。
-
-print("訓練資料 x_train.shape =", x_train.shape)
-print("測試資料 x_test.shape =", x_test.shape)
-
-# 將數字影像image的數值正規化(normalization), 從 0~255 => 0~1
-x_train = x_train / 255
-x_test = x_test / 255
-
-"""
-x_train = x_train/255
-x_test = x_test/255
-x_train.shape
-#(60000, 28, 28)
-#28*28 = 784
-
-# x訓練/測試資料 N個 二維影像 (28, 28) 轉成 N個 一維向量 (28*28,)
-x_train = x_train.reshape(len(x_train), 784)
-x_test = x_test.reshape(len(x_test), 784)
-
-y_train = to_categorical(y_train)
-y_test = to_categorical(y_test)
-
-n = 1234
-y_train[n]
-"""
-
-"""
-輸出格式整理
-我們可能會想, 我們想學的函數是這樣的型式:
-其實這樣不太好! 為什麼呢? 比如說我們的輸入 x 是一張 0 的圖,
-因為我們訓練的神經網路總會有點誤差, 所以可能會得到:
-那這意思是有可能是 0, 也有可能是 1 嗎!!??
-可是 0 和 1 根本不像啊。換句話說分類的問題這樣做其實不合理!
-於是我們會做 "1-hot enconding"
-"""
-
-# One-Hot Encoding, 將數字轉為 One-hot 向量
-y_train = to_categorical(y_train)
-y_test = to_categorical(y_test)
 
 """
 打造第一個神經網路
@@ -1224,6 +1203,54 @@ model.compile(loss="mse", optimizer=SGD(learning_rate=0.087), metrics=["accuracy
 於是最精彩的就來了。你要有等待的心理準備...
 """
 
+(x_train, y_train), (x_test, y_test) = load_mnist_data()
+
+# 2.2.3 輸入格式整理
+# 我們現在要用標準神經網路學學手寫辨識。
+# 原來的每筆數據是個 28x28 的矩陣 (array),
+# 但標準神經網路只吃「平平的」, 也就是每次要 28x28=784 長的向量。
+# 因此我們要用 reshape 調校一下。
+
+print("訓練資料 x_train.shape =", x_train.shape)
+print("測試資料 x_test.shape =", x_test.shape)
+
+# 將數字影像image的數值正規化(normalization), 從 0~255 => 0~1
+x_train = x_train / 255
+x_test = x_test / 255
+
+"""
+x_train = x_train/255
+x_test = x_test/255
+x_train.shape
+#(60000, 28, 28)
+#28*28 = 784
+
+# x訓練/測試資料 N個 二維影像 (28, 28) 轉成 N個 一維向量 (28*28,)
+x_train = x_train.reshape(len(x_train), 784)
+x_test = x_test.reshape(len(x_test), 784)
+
+y_train = to_categorical(y_train)
+y_test = to_categorical(y_test)
+
+n = 1234
+y_train[n]
+"""
+
+"""
+輸出格式整理
+我們可能會想, 我們想學的函數是這樣的型式:
+其實這樣不太好! 為什麼呢? 比如說我們的輸入 x 是一張 0 的圖,
+因為我們訓練的神經網路總會有點誤差, 所以可能會得到:
+那這意思是有可能是 0, 也有可能是 1 嗎!!??
+可是 0 和 1 根本不像啊。換句話說分類的問題這樣做其實不合理!
+於是我們會做 "1-hot enconding"
+"""
+
+# One-Hot Encoding, 將數字轉為 One-hot 向量
+y_train = to_categorical(y_train)
+y_test = to_categorical(y_test)
+
+# 全部拿來測試
 do_the_same1(x_train, y_train, x_test, y_test)  # 做一樣的事
 
 print("------------------------------------------------------------")  # 60個
@@ -1243,19 +1270,15 @@ x_test = x_test / 255
 y_train = to_categorical(y_train)
 y_test = to_categorical(y_test)
 
-print("建立神經網路13")
+"""
+print("建立神經網路13 4D")
 model = Sequential()  # 建立空白的神經網路模型(CNN), 函數學習機, 簡單的線性執行的模型
 model.add(Flatten(input_shape=(28, 28)))
 model.add(Dense(20, activation="relu"))
-
 """
-標準 神經網路 做手寫辨識
-Keras 可以用各種不同的深度學習套件當底層, 指定用 Tensorflow 以確保執行的一致性。
-%env KERAS_BACKEND=tensorflow
-"""
-# -----------------------------------------------
+# ----------------------
 
-print("建立神經網路14")
+print("建立神經網路14 XXXX")
 model = Sequential()  # 建立空白的神經網路模型(CNN), 函數學習機, 簡單的線性執行的模型
 
 # 第1層 用 87 個神經元, 使用參數 28 * 28 * 87 + 87 = 68295 個
@@ -1268,26 +1291,13 @@ model.add(Dense(10, activation="softmax"))  # 輸出層的神經元 10 個
 # 組裝神經網路, 編譯模型 : 選擇損失函數、優化方法及成效衡量方式
 model.compile(loss="mse", optimizer=SGD(learning_rate=0.087), metrics=["accuracy"])
 
-""" 不能訓練  因為組裝錯誤
+# 全部拿來測試
 do_the_same1(x_train, y_train, x_test, y_test)  # 做一樣的事
-"""
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 超參數設定(一)：隱藏層的數量、隱藏層設計多少神經元
-
-(x_train, y_train), (x_test, y_test) = load_mnist_data()
-
-# x訓練/測試資料 N個 二維影像 (28, 28) 轉成 N個 一維向量 (28*28,)
-x_train = x_train.reshape(len(x_train), 784)
-x_test = x_test.reshape(len(x_test), 784)
-
-# One-Hot Encoding, 將數字轉為 One-hot 向量
-y_train = to_categorical(y_train)
-y_test = to_categorical(y_test)
-
-print("建立神經網路15")
+print("建立神經網路15 XXXX")
 model = Sequential()  # 建立空白的神經網路模型(CNN), 函數學習機, 簡單的線性執行的模型
 
 # 超參數設定(一)：隱藏層的數量、隱藏層設計多少神經元
@@ -1328,22 +1338,15 @@ sgd = optimizers.SGD(learning_rate=0.01)
 # 組裝神經網路, 編譯模型 : 選擇損失函數、優化方法及成效衡量方式
 model.compile(optimizer=sgd, loss="categorical_crossentropy", metrics=["accuracy"])
 
+(x_train, y_train), (x_test, y_test) = load_mnist_data()
+x_train, y_train, x_test, y_test = transform_data(x_train, y_train, x_test, y_test)
+# 全部拿來測試
 do_the_same1(x_train, y_train, x_test, y_test)  # 做一樣的事
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 15-3 超參數設定(二)：加入Dropout層
-
-(x_train, y_train), (x_test, y_test) = load_mnist_data()
-
-# x訓練/測試資料 N個 二維影像 (28, 28) 轉成 N個 一維向量 (28*28,)
-x_train = x_train.reshape(len(x_train), 784)
-x_test = x_test.reshape(len(x_test), 784)
-
-# One-Hot Encoding, 將數字轉為 One-hot 向量
-y_train = to_categorical(y_train)
-y_test = to_categorical(y_test)
 
 print("建立神經網路16")
 model = Sequential()  # 建立空白的神經網路模型(CNN), 函數學習機, 簡單的線性執行的模型
@@ -1364,22 +1367,15 @@ sgd = optimizers.SGD(learning_rate=0.01)
 # 組裝神經網路, 編譯模型 : 選擇損失函數、優化方法及成效衡量方式
 model.compile(optimizer=sgd, loss="categorical_crossentropy", metrics=["accuracy"])
 
+(x_train, y_train), (x_test, y_test) = load_mnist_data()
+x_train, y_train, x_test, y_test = transform_data(x_train, y_train, x_test, y_test)
+# 全部拿來測試
 do_the_same1(x_train, y_train, x_test, y_test)  # 做一樣的事
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 15-4 超參數設定(三)：損失函數與優化器
-
-(x_train, y_train), (x_test, y_test) = load_mnist_data()
-
-# x訓練/測試資料 N個 二維影像 (28, 28) 轉成 N個 一維向量 (28*28,)
-x_train = x_train.reshape(len(x_train), 784)
-x_test = x_test.reshape(len(x_test), 784)
-
-# One-Hot Encoding, 將數字轉為 One-hot 向量
-y_train = to_categorical(y_train)
-y_test = to_categorical(y_test)
 
 print("建立神經網路17")
 model = Sequential()  # 建立空白的神經網路模型(CNN), 函數學習機, 簡單的線性執行的模型
@@ -1402,6 +1398,9 @@ sgd = optimizers.SGD(learning_rate=lr)
 # 組裝神經網路, 編譯模型 : 選擇損失函數、優化方法及成效衡量方式
 model.compile(optimizer=sgd, loss="categorical_crossentropy", metrics=["accuracy"])
 
+(x_train, y_train), (x_test, y_test) = load_mnist_data()
+x_train, y_train, x_test, y_test = transform_data(x_train, y_train, x_test, y_test)
+# 全部拿來測試
 do_the_same1(x_train, y_train, x_test, y_test)  # 做一樣的事
 
 print("------------------------------------------------------------")  # 60個
@@ -1441,6 +1440,7 @@ model.add(Dense(10, activation="softmax"))  # 輸出層的神經元 10 個
 # 組裝神經網路, 編譯模型 : 選擇損失函數、優化方法及成效衡量方式
 model.compile(loss="categorical_crossentropy", optimizer="sgd", metrics=["accuracy"])
 
+# 全部拿來測試
 do_the_same1(x_train, y_train, x_test, y_test)  # 做一樣的事
 
 print("------------------------------------------------------------")  # 60個
@@ -1896,13 +1896,8 @@ for neuron in range(hidden_neurons):
 plt.savefig("neuron_images.png", dpi=300)    
 show()  
 """
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-(x_train, y_train), (x_test, y_test) = load_mnist_data()
-
-x_train, y_train, x_test, y_test = transform_data(x_train, y_train, x_test, y_test)
 
 hidden_neurons = 400
 
@@ -1924,26 +1919,17 @@ model.compile(
     loss="categorical_crossentropy", metrics=["accuracy"], optimizer="adadelta"
 )
 
-""" NG
+(x_train, y_train), (x_test, y_test) = load_mnist_data()
+x_train, y_train, x_test, y_test = transform_data(x_train, y_train, x_test, y_test)
+# 全部拿來測試
 do_the_same1(x_train, y_train, x_test, y_test)  # 做一樣的事
-
-# 學習訓練.fit
-do_model_fit1(x_train, y_train)
-
-# 模型評估
-evaluate_model(x_test, y_test)
-"""
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 hidden_neurons = 200
 
-(x_train, y_train), (x_test, y_test) = load_mnist_data()
-
-x_train, y_train, x_test, y_test = transform_data(x_train, y_train, x_test, y_test)
-
-print("建立神經網路22")
+print("建立神經網路22 4D")
 model = Sequential()  # 建立空白的神經網路模型(CNN), 函數學習機, 簡單的線性執行的模型
 
 model.add(Convolution2D(32, (3, 3), input_shape=(28, 28, 1)))
@@ -1968,31 +1954,16 @@ model.add(Activation("softmax"))
 model.compile(
     loss="categorical_crossentropy", metrics=["accuracy"], optimizer="adadelta"
 )
-""" 久
-# 分割測試資料以驗證
-do_the_same_with_validation(x_train, y_train, x_test, y_test, VALIDATION_SPLIT)
 
-"""
+(x_train, y_train), (x_test, y_test) = load_mnist_data()
+x_train, y_train, x_test, y_test = transform_data4d(x_train, y_train, x_test, y_test)
+# 全部拿來測試
+do_the_same1(x_train, y_train, x_test, y_test)  # 做一樣的事
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # CNN example
-
-# to try tensorflow, un-comment following two lines
-# os.environ['KERAS_BACKEND']='tensorflow'
-
-# download the mnist to the path '~/.keras/datasets/' if it is the first time to be called
-# X shape (60,000 28x28), y shape (10,000, )
-
-(x_train, y_train), (x_test, y_test) = load_mnist_data()
-
-# 將數字影像image的數值正規化(normalization), 從 0~255 => 0~1
-x_train = x_train.reshape(-1, 1, 28, 28) / 255.0
-x_test = x_test.reshape(-1, 1, 28, 28) / 255.0
-
-# One-Hot Encoding, 將數字轉為 One-hot 向量
-y_train = to_categorical(y_train)
-y_test = to_categorical(y_test)
 
 print("建立神經網路23")
 model = Sequential()  # 建立空白的神經網路模型(CNN), 函數學習機, 簡單的線性執行的模型
@@ -2041,30 +2012,39 @@ model.add(Activation("softmax"))
 # Another way to define your optimizer(優化器)
 adam = Adam(learning_rate=1e-4)
 
-""" NG
 # 組裝神經網路, 編譯模型 : 選擇損失函數、優化方法及成效衡量方式
-model.compile(optimizer=adam,
-              loss='categorical_crossentropy',
-              metrics=['accuracy'])
+model.compile(optimizer=adam, loss="categorical_crossentropy", metrics=["accuracy"])
 
+(x_train, y_train), (x_test, y_test) = load_mnist_data()
+x_train, y_train, x_test, y_test = transform_data4d(x_train, y_train, x_test, y_test)
+# 全部拿來測試
 do_the_same1(x_train, y_train, x_test, y_test)  # 做一樣的事
 
-# 學習訓練.fit
-do_model_fit1(x_train, y_train)
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-# 模型評估
-evaluate_model(x_test, y_test)
-"""
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
+print("建立神經網路24")
+model = Sequential()  # 建立空白的神經網路模型(CNN), 函數學習機, 簡單的線性執行的模型
+
+model.add(
+    tf.keras.layers.Dense(units=10, activation=tf.nn.relu, input_dim=INPUT_DIM)
+)  # 784=28*28
+model.add(tf.keras.layers.Dense(units=10, activation=tf.nn.relu))
+model.add(tf.keras.layers.Dense(units=10, activation=tf.nn.softmax))
+
+# 設定模型的 Loss 函數、Optimizer 以及用來判斷模型好壞的依據（metrics）
+# 組裝神經網路, 編譯模型 : 選擇損失函數、優化方法及成效衡量方式
+model.compile(
+    optimizer=tf.keras.optimizers.Adam(learning_rate=0.001),
+    loss=tf.keras.losses.categorical_crossentropy,
+    metrics=["accuracy"],
+)
+# 設定模型的 Loss 函數、Optimizer 以及用來判斷模型好壞的依據（metrics）
 
 (x_train, y_train), (x_test, y_test) = load_mnist_data()
 
-print("2222 x_train before reshape:", x_train.shape)
-
 x_train = x_train.reshape(len(x_train), 784)
 x_test = x_test.reshape(len(x_test), 784)
-print("x_train after reshape:", x_train.shape)
 
 # 標準化輸入資料
 print("x_train before div 255:", x_train[0][180:195])
@@ -2077,23 +2057,7 @@ x_test /= 255
 y_train2 = to_categorical(y_train)
 y_test2 = to_categorical(y_test)
 
-print("建立神經網路24")
-model = Sequential()
-
-model.add(
-    tf.keras.layers.Dense(units=10, activation=tf.nn.relu, input_dim=INPUT_DIM)
-)  # 784=28*28
-model.add(tf.keras.layers.Dense(units=10, activation=tf.nn.relu))
-model.add(tf.keras.layers.Dense(units=10, activation=tf.nn.softmax))
-
-# 組裝神經網路, 編譯模型 : 選擇損失函數、優化方法及成效衡量方式
-model.compile(
-    optimizer=tf.keras.optimizers.Adam(lr=0.001),
-    loss=tf.keras.losses.categorical_crossentropy,
-    metrics=["accuracy"],
-)
-# 設定模型的 Loss 函數、Optimizer 以及用來判斷模型好壞的依據（metrics）
-
+# 全部拿來測試
 # TBD do_the_same1(x_train, y_train, x_test, y_test)  # 做一樣的事
 
 # 學習訓練.fit
@@ -2105,46 +2069,23 @@ do_model_fit1(x_train, y_train2)
 # 模型評估
 evaluate_model(x_test, y_test2)
 
-predict = model.predict(x_test)  # 取得每一個結果的機率
+y_pred = model.predict(x_test)  # 取得每一個結果的機率
 print(
-    "Ans:",
-    np.argmax(predict[0]),
-    np.argmax(predict[1]),
-    np.argmax(predict[2]),
-    np.argmax(predict[3]),
-)  # 取得預測答案1
+    "預測結果 :",
+    np.argmax(y_pred[0]),
+    np.argmax(y_pred[1]),
+    np.argmax(y_pred[2]),
+    np.argmax(y_pred[3]),
+)
 
 # 預測
-y_pred = do_prediction(x_test[:10])
+y_pred = do_prediction(x_test[:20])
 
-print("predict_classes:", y_pred[:10])  # 輸出預測答案2
-print("y_test", y_test[:10])  # 實際測試的果
+print("真實目標 :", y_test[:20])
+print("預測結果 :", y_pred[:20])
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-(x_train, y_train), (x_test, y_test) = load_mnist_data()
-
-# TBD x_train, y_train, x_test, y_test = transform_data(x_train, y_train, x_test, y_test)
-
-# x_train=x_train[:1000]
-# x_test=x_test[:1000]
-# y_train=y_train[:1000]
-# y_test=y_test[:1000]
-
-# 將原始資料轉為正確的影像排列方式
-x_train = x_train.reshape(x_train.shape[0], 28, 28, 1)
-x_test = x_test.reshape(x_test.shape[0], 28, 28, 1)
-
-# 標準化輸入資料
-x_train = x_train.astype("float32")
-x_test = x_test.astype("float32")
-x_train /= 255
-x_test /= 255
-
-# One-Hot Encoding, 將數字轉為 One-hot 向量
-y_train = to_categorical(y_train, 10)
-y_test = to_categorical(y_test, 10)
 
 print("建立神經網路25 正確率XXXX")
 model = Sequential()  # 建立空白的神經網路模型(CNN), 函數學習機, 簡單的線性執行的模型
@@ -2186,44 +2127,14 @@ model.add(tf.keras.layers.Dense(units=10, activation=tf.nn.softmax))
 # 設定模型的 Loss 函數、Optimizer 以及用來判斷模型好壞的依據（metrics）
 # 組裝神經網路, 編譯模型 : 選擇損失函數、優化方法及成效衡量方式
 model.compile(
-    loss=tf.keras.losses.categorical_crossentropy,
     optimizer=tf.keras.optimizers.Adadelta(),
+    loss=tf.keras.losses.categorical_crossentropy,
     metrics=["accuracy"],
 )
 
-# TBD do_the_same1(x_train, y_train, x_test, y_test)  # 做一樣的事
-# 學習訓練.fit
-do_model_fit1(x_train, y_train)
-
-# 模型評估
-evaluate_model(x_test, y_test)
-
-predict = model.predict(x_test)
-print(
-    "Ans:",
-    np.argmax(predict[0]),
-    np.argmax(predict[1]),
-    np.argmax(predict[2]),
-    np.argmax(predict[3]),
-)
-
-# 預測
-y_pred = do_prediction(x_test)
-
-print("predict_classes:", y_pred)
-print("y_test", y_test[:])
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-from tensorflow.keras.callbacks import TensorBoard
-
-# 影像的類別數目
-category = 10
-
 (x_train, y_train), (x_test, y_test) = load_mnist_data()
 
-# NG x_train, y_train, x_test, y_test = transform_data(x_train, y_train, x_test, y_test)
+# TBD x_train, y_train, x_test, y_test = transform_data(x_train, y_train, x_test, y_test)
 
 # 將原始資料轉為正確的影像排列方式
 x_train = x_train.reshape(x_train.shape[0], 28, 28, 1)
@@ -2236,8 +2147,36 @@ x_train /= 255
 x_test /= 255
 
 # One-Hot Encoding, 將數字轉為 One-hot 向量
-y_train2 = to_categorical(y_train, category)
-y_test2 = to_categorical(y_test, category)
+y_train = to_categorical(y_train, 10)
+y_test = to_categorical(y_test, 10)
+
+# 全部拿來測試
+# TBD do_the_same1(x_train, y_train, x_test, y_test)  # 做一樣的事
+# 學習訓練.fit
+do_model_fit1(x_train, y_train)
+
+# 模型評估
+evaluate_model(x_test, y_test)
+
+y_pred = model.predict(x_test)  # 取得每一個結果的機率
+print(
+    "預測結果 :",
+    np.argmax(y_pred[0]),
+    np.argmax(y_pred[1]),
+    np.argmax(y_pred[2]),
+    np.argmax(y_pred[3]),
+)
+
+# 預測
+y_pred = do_prediction(x_test)
+
+print("真實目標 :", y_test[:])
+print("預測結果 :", y_pred)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+from tensorflow.keras.callbacks import TensorBoard
 
 print("建立神經網路26 正確率XXXX")
 model = Sequential()  # 建立空白的神經網路模型(CNN), 函數學習機, 簡單的線性執行的模型
@@ -2280,7 +2219,7 @@ model.add(tf.keras.layers.Dense(100, activation="relu"))
 model.add(tf.keras.layers.Dense(100, activation="relu"))
 model.add(tf.keras.layers.Dense(100, activation="relu"))
 # 連接 Fully Connected Layer，接著一層 Softmax 的 Activation 函數
-model.add(tf.keras.layers.Dense(units=category, activation=tf.nn.softmax))
+model.add(tf.keras.layers.Dense(units=10, activation=tf.nn.softmax))
 
 # 設定模型的 Loss 函數、Optimizer 以及用來判斷模型好壞的依據（metrics）
 # 組裝神經網路, 編譯模型 : 選擇損失函數、優化方法及成效衡量方式
@@ -2292,6 +2231,27 @@ model.compile(
 
 tensorboard = TensorBoard(log_dir="logs")
 
+
+(x_train, y_train), (x_test, y_test) = load_mnist_data()
+
+# NG x_train, y_train, x_test, y_test = transform_data(x_train, y_train, x_test, y_test)
+
+# 將原始資料轉為正確的影像排列方式
+x_train = x_train.reshape(x_train.shape[0], 28, 28, 1)
+x_test = x_test.reshape(x_test.shape[0], 28, 28, 1)
+
+# 標準化輸入資料
+x_train = x_train.astype("float32")
+x_test = x_test.astype("float32")
+x_train /= 255
+x_test /= 255
+
+# One-Hot Encoding, 將數字轉為 One-hot 向量
+y_train2 = to_categorical(y_train)
+y_test2 = to_categorical(y_test)
+
+
+# 全部拿來測試
 # TBD do_the_same1(x_train, y_train, x_test, y_test)  # 做一樣的事
 
 # 學習訓練.fit
@@ -2300,28 +2260,25 @@ do_model_fit1(x_train, y_train2)
 # 模型評估
 evaluate_model(x_test, y_test2)
 
-predict = model.predict(x_test)
+y_pred = model.predict(x_test)  # 取得每一個結果的機率
 print(
-    "Ans:",
-    np.argmax(predict[0]),
-    np.argmax(predict[1]),
-    np.argmax(predict[2]),
-    np.argmax(predict[3]),
+    "預測結果 :",
+    np.argmax(y_pred[0]),
+    np.argmax(y_pred[1]),
+    np.argmax(y_pred[2]),
+    np.argmax(y_pred[3]),
 )
 
 # 預測
-y_pred = do_prediction(x_test)
+y_pred = do_prediction(x_test[:20])
 
-print("predict_classes:", y_pred[:20])
-print("y_test", y_test[:20])
+print("真實目標 :", y_test[:20])
+print("預測結果 :", y_pred[:20])
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 from tensorflow.keras.callbacks import TensorBoard
-
-# 影像的類別數目
-category = 10
 
 (x_train, y_train), (x_test, y_test) = load_mnist_data()
 
@@ -2336,8 +2293,8 @@ x_train /= 255
 x_test /= 255
 
 # One-Hot Encoding, 將數字轉為 One-hot 向量
-y_train2 = to_categorical(y_train, category)
-y_test2 = to_categorical(y_test, category)
+y_train2 = to_categorical(y_train)
+y_test2 = to_categorical(y_test)
 
 print("建立神經網路27 Conv2D 正確率高")
 model = Sequential()  # 建立空白的神經網路模型(CNN), 函數學習機, 簡單的線性執行的模型
@@ -2380,7 +2337,7 @@ model.add(tf.keras.layers.Dense(100, activation="relu"))
 model.add(tf.keras.layers.Dense(100, activation="relu"))
 model.add(tf.keras.layers.Dense(100, activation="relu"))
 # 連接 Fully Connected Layer，接著一層 Softmax 的 Activation 函數
-model.add(tf.keras.layers.Dense(units=category, activation=tf.nn.softmax))
+model.add(tf.keras.layers.Dense(units=10, activation=tf.nn.softmax))
 
 # 設定模型的 Loss 函數、Optimizer 以及用來判斷模型好壞的依據（metrics）
 # 組裝神經網路, 編譯模型 : 選擇損失函數、優化方法及成效衡量方式
@@ -2431,6 +2388,7 @@ with open("tmp_model_ImageDataGenerator.json", "w") as json_file:
 history = model.fit(train_generator, callbacks=[checkpoint], epochs=EPOCHS)
 """
 
+# 全部拿來測試
 # TBD do_the_same1(x_train, y_train, x_test, y_test)  # 做一樣的事
 # 學習訓練.fit 一般
 do_model_fit1(x_train, y_train2)
@@ -2444,20 +2402,20 @@ do_model_fit1(x_train, y_train2)
 # 模型評估
 evaluate_model(x_test, y_test2)
 
-predict = model.predict(x_test)
+y_pred = model.predict(x_test)  # 取得每一個結果的機率
 print(
-    "Ans:",
-    np.argmax(predict[0]),
-    np.argmax(predict[1]),
-    np.argmax(predict[2]),
-    np.argmax(predict[3]),
+    "預測結果 :",
+    np.argmax(y_pred[0]),
+    np.argmax(y_pred[1]),
+    np.argmax(y_pred[2]),
+    np.argmax(y_pred[3]),
 )
 
 # 預測
-y_pred = do_prediction(x_test)
+y_pred = do_prediction(x_test[:20])
 
-print("predict_classes:", y_pred[:20])
-print("y_test", y_test[:20])
+print("真實目標 :", y_test[:20])
+print("預測結果 :", y_pred[:20])
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -2493,34 +2451,6 @@ evaluate_model(x_test, y_test)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-(x_train, y_train), (x_test, y_test) = load_mnist_data()
-
-# 特徵縮放
-# 將數字影像image的數值正規化(normalization), 從 0~255 => 0~1
-x_train, x_test = x_train / 255.0, x_test / 255.0
-
-print("建立神經網路29 正確率高")
-model = Sequential(
-    [
-        Flatten(input_shape=(28, 28)),
-        Dense(128, activation="relu"),
-        Dropout(0.2),
-        Dense(10, activation="softmax"),
-    ]
-)
-
-# 設定優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
-# 組裝神經網路, 編譯模型 : 選擇損失函數、優化方法及成效衡量方式
-model.compile(
-    optimizer="adam", loss="sparse_categorical_crossentropy", metrics=["accuracy"]
-)
-
-# 分割測試資料以驗證
-do_the_same_with_validation(x_train, y_train, x_test, y_test, VALIDATION_SPLIT)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 print("先到此")
 
 sys.exit()
@@ -2529,7 +2459,7 @@ print("------------------------------------------------------------")  # 60個
 print("新")
 print("------------------------------------------------------------")  # 60個
 
-print('不知道這段是什麼東西')
+print("不知道這段是什麼東西")
 
 # restricted_boltzmann_machine
 import tensorflow.compat.v1 as tf  # 強制使用tensorflow 1.0
@@ -2628,10 +2558,10 @@ print(val_loss)
 print(val_acc)
 
 
-predictions = model.predict(x_test)
-print(predictions)
+y_pred = model.predict(x_test)  # 取得每一個結果的機率
+print(y_pred)
 
-print(np.argmax(predictions[0]))
+print(np.argmax(y_pred[0]))
 
 plt.imshow(x_test[0], cmap=plt.cm.binary)
 plt.show()
@@ -2644,8 +2574,8 @@ model.save("tmp_epic_num_reader.model")
 new_model = tf.keras.models.load_model("tmp_epic_num_reader.model")
 
 # 测试保存的模型
-predictions = new_model.predict(x_test)
-print(np.argmax(predictions[0]))
+y_pred = new_model.predict(x_test)
+print(np.argmax(y_pred[0]))
 
 
 print("------------------------------------------------------------")  # 60個
@@ -2818,7 +2748,7 @@ W, b = model.layers[0].get_weights()
 print("Weights=", W, "\nbiases=", b)
 
 # plotting the prediction
-Y_pred = model.predict(X_test)
+Y_pred = model.predict(X_test)  # 取得每一個結果的機率
 plt.scatter(X_test, Y_test)
 plt.plot(X_test, Y_pred)
 plt.show()
@@ -2826,12 +2756,10 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 5 - Classifier example
+# Classifier example
 
 from keras.optimizers import RMSprop
 
-# download the mnist to the path '~/.keras/datasets/' if it is the first time to be called
-# X shape (60,000 28x28), y shape (10,000, )
 (X_train, y_train), (X_test, y_test) = mnist.load_data()
 
 # data pre-processing
@@ -2851,7 +2779,7 @@ model = Sequential(
 )
 
 # Another way to define your optimizer
-rmsprop = RMSprop(lr=0.001, rho=0.9, epsilon=1e-08, decay=0.0)
+rmsprop = RMSprop(learning_rate=0.001, rho=0.9, epsilon=1e-08, decay=0.0)
 
 # We add metrics to get more results you want to see
 model.compile(optimizer=rmsprop, loss="categorical_crossentropy", metrics=["accuracy"])
@@ -2871,7 +2799,7 @@ print("test accuracy: ", accuracy)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 8 - RNN Classifier example
+# RNN Classifier example
 
 from keras.layers import SimpleRNN
 
@@ -2883,9 +2811,6 @@ OUTPUT_SIZE = 10
 CELL_SIZE = 50
 LR = 0.001
 
-
-# download the mnist to the path '~/.keras/datasets/' if it is the first time to be called
-# X shape (60,000 28x28), y shape (10,000, )
 (X_train, y_train), (X_test, y_test) = mnist.load_data()
 
 # data pre-processing
@@ -3011,13 +2936,11 @@ for step in range(501):
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 9 - Autoencoder example
+# Autoencoder example
 
 from keras.models import Model
 from keras.layers import Input
 
-# download the mnist to the path '~/.keras/datasets/' if it is the first time to be called
-# X shape (60,000 28x28), y shape (10,000, )
 (x_train, _), (x_test, y_test) = mnist.load_data()
 
 # data pre-processing
@@ -3551,3 +3474,8 @@ model.compile(loss="mse", optimizer=SGD(learning_rate=0.087), metrics=["accuracy
 
 # mnist = input_data.read_data_sets("MNIST_data/")
 
+
+# x_train=x_train[:1000]
+# x_test=x_test[:1000]
+# y_train=y_train[:1000]
+# y_test=y_test[:1000]
