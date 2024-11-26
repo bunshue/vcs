@@ -26,21 +26,21 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
-#標準
+# 標準
 L0 = 71.36
 A0 = -32.718
 B0 = 1.636
 
-#量測結果
+# 量測結果
 L1 = 77.705
 A1 = -19.471
 B1 = 3.858
 
-diff1 = (L0-L1) * (L0-L1)
-diff2 = (A0-A1) * (A0-A1)
-diff3 = (B0-B1) * (B0-B1)
+diff1 = (L0 - L1) * (L0 - L1)
+diff2 = (A0 - A1) * (A0 - A1)
+diff3 = (B0 - B1) * (B0 - B1)
 
-diff = math.sqrt(diff1+diff2+diff3)
+diff = math.sqrt(diff1 + diff2 + diff3)
 
 print(diff)
 

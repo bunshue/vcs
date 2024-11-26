@@ -101,9 +101,9 @@ print("------------------------------------------------------------")  # 60個
 
 
 from pathlib import Path
+
 data_path = Path(__file__).resolve().parent.parent / "data"
 print(data_path)
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -116,15 +116,16 @@ fname = "693_UNCI.dcm"
 fpath = get_testdata_file(fname)
 print(fpath)
 
-print('done')
+print("done")
 
 print("------------------------------------------------------------")  # 60個
 
-#UTC时间
+# UTC时间
 
 import datetime
+
 # 创建一个时间戳（以秒为单位）
-timestamp = 22  
+timestamp = 22
 # 带UTC时区时间
 dt_with_timezone = datetime.datetime.fromtimestamp(timestamp, tz=datetime.timezone.utc)
 print("带UTC时区时间:", dt_with_timezone)
@@ -133,42 +134,46 @@ dt_without_timezone = datetime.datetime.fromtimestamp(timestamp)
 print("不带UTC时区时间", dt_without_timezone)
 
 # 时间戳
-import time 
+import time
+
 print(time.time())
 print(time.localtime())  # 获取到当前时间的元组
-print(time.mktime(time.localtime()))  
+print(time.mktime(time.localtime()))
 # 一周的第几天(周一是0,0-6)、一年的第几天(从1开始，1-366)、夏时令(是夏时令1，不是0，未知-1)。
 
-#字符串和时间转换
+# 字符串和时间转换
 
 # 字符串和时间转换
-#利用time模块的strftime()函数可以将时间戳转换成系统时间。
+# 利用time模块的strftime()函数可以将时间戳转换成系统时间。
 import time
-time_str = time.strftime(("%Y-%m-%d %H:%M:%S"),time.localtime())
+
+time_str = time.strftime(("%Y-%m-%d %H:%M:%S"), time.localtime())
 print(time_str)
 
 # 可以用strptime函数将日期字符串转换为datetime数据类型，
-import datetime 
-print(datetime.datetime.strptime('2022-01-15','%Y-%m-%d'))
+import datetime
+
+print(datetime.datetime.strptime("2022-01-15", "%Y-%m-%d"))
 
 # 可以用Pandas的to_datetime()函数将日期字符串转换为datetime数据类型。
 # to_datetime()函数转化后的时间是精准到时分秒精度的
 import pandas as pd
-print(pd.to_datetime('2022/01/15'))
 
-#时间差
+print(pd.to_datetime("2022/01/15"))
+
+# 时间差
 
 # 3. 时间运算--时间差
 # 利用datetime将时间类型数据进行转换，然后利用减法运算计算时间的不同之处
 # 默认输出结果转换为用（“天”，“秒”）表达
 import datetime
-delta = datetime.datetime(2022,1,16)-datetime.datetime(2021,1,1,9,15)
+
+delta = datetime.datetime(2022, 1, 16) - datetime.datetime(2021, 1, 1, 9, 15)
 print(delta)
 print(delta.days)
 print(delta.seconds)
 
 print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -190,7 +195,8 @@ sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 
-#Classes and Objects
+# Classes and Objects
+
 
 class Dog:
     def __init__(self, name, age):
@@ -199,6 +205,7 @@ class Dog:
 
     def bark(self):
         return "Woof!"
+
 
 # Create an instance of the Dog class
 my_dog = Dog("Buddy", 3)
@@ -210,4 +217,3 @@ print("my_dog age:", my_dog.age)
 # Call the bark method of the instance
 bark_result = my_dog.bark()
 print("bark_result:", bark_result)
-
