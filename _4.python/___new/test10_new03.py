@@ -81,7 +81,6 @@ with open(BASE_DIR / "pydicom" / "_version.py") as f:
 with open(BASE_DIR / 'README.md') as f:
     long_description = f.read()
 
-
 def data_files_inventory():
     root = BASE_DIR / "pydicom" / "data"
     files = [
@@ -90,24 +89,16 @@ def data_files_inventory():
         if f.is_file() and f.suffix != ".pyc"
     ]
     return [os.fspath(f) for f in files]
-
-
-
-
-
 """
 
 print("------------------------------------------------------------")  # 60個
-
 
 from pathlib import Path
 
 data_path = Path(__file__).resolve().parent.parent / "data"
 print(data_path)
 
-
 print("------------------------------------------------------------")  # 60個
-
 
 import pydicom.data
 from pydicom.data import get_testdata_file

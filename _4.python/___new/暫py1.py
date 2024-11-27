@@ -2097,21 +2097,6 @@ http://the.earth.li/~sgtatham/putty/latest/x86/putty.exe
 
 
 
-x=[4 3 9 -7 1 2 0 0]';
-y=fft(x);
-
-
-clear
-t=0:1/50:6.28;
-x=sin(2*pi*15*t);
-y=fft(x);
-m=abs(y);
-%p=unwrap(angle(y));
-f=(0:length(y)-1)'*50/length(y);
-figure(1);plot(t,x),ylabel('Sin(x)'),grid on
-figure(2);plot(f,m),ylabel('Abs.'),grid on
-%figure(3);plot(f,p*180/pi),ylabel('Phase'),grid on
-
 
                         
 '''

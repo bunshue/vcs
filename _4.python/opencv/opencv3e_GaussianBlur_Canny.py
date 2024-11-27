@@ -32,27 +32,19 @@ print("------------------------------------------------------------")  # 60個
 
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/barbara.bmp"
 
-# 原圖
 image = cv2.imread(filename, 0)
 
-# 高斯模糊，Canny边缘检测需要的
+# 高斯模糊
 image_blur = cv2.GaussianBlur(image, (5, 5), 0)  # 執行高斯模糊化
 
-# 进行边缘检测，减少图像空间中需要检测的点数量
-image_canny = cv2.Canny(image_blur, 50, 150)
-
-plt.figure("影像處理", figsize=(16, 12))
-plt.subplot(131)
-plt.title("原圖")
+plt.figure("影像處理", figsize=(8, 6))
+plt.subplot(121)
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
 
-plt.subplot(132)
-plt.title("GaussianBlur")
+plt.subplot(122)
 plt.imshow(cv2.cvtColor(image_blur, cv2.COLOR_BGR2RGB))
-
-plt.subplot(133)
-plt.title("Canny")
-plt.imshow(cv2.cvtColor(image_canny, cv2.COLOR_BGR2RGB))
+plt.title("高斯模糊 GaussianBlur")
 
 plt.tight_layout()
 plt.show()
@@ -64,39 +56,37 @@ print("------------------------------------------------------------")  # 60個
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_noise.png"
 image = cv2.imread(filename)
 
-print("GaussianBlur 1")
 kernel_size = (5, 5)  # 卷積的矩陣大小 ksize 指定區域單位 ( 必須是大於 1 的奇數 )
 sigma = 0  # sigma值     sigmaX X 方向標準差，預設 0，sigmaY Y 方向標準差，預設 0
 image_blur = cv2.GaussianBlur(image, kernel_size, 0)  # 執行高斯模糊化
 
-plt.figure("GaussianBlur", figsize=(16, 12))
+plt.figure("GaussianBlur", figsize=(8, 6))
 plt.subplot(121)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("原圖, 有Noise")
 
 plt.subplot(122)
-plt.title("GaussianBlur")
 plt.imshow(cv2.cvtColor(image_blur, cv2.COLOR_BGR2RGB))
+plt.title("高斯模糊 GaussianBlur")
 
 plt.tight_layout()
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-from matplotlib import pyplot as plt
-
+filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_noise.png"
 image = cv2.imread(filename)
 
 image_blur = cv2.GaussianBlur(image, (5, 5), 0)  # 執行高斯模糊化
 
-plt.figure("GaussianBlur", figsize=(16, 12))
+plt.figure("GaussianBlur", figsize=(8, 6))
 plt.subplot(121)
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-plt.title("原圖")
+plt.title("原圖, 有Noise")
 
 plt.subplot(122)
 plt.imshow(cv2.cvtColor(image_blur, cv2.COLOR_BGR2RGB))
-plt.title("GaussianBlur")
+plt.title("高斯模糊 GaussianBlur")
 
 plt.tight_layout()
 plt.show()
@@ -106,10 +96,9 @@ print("------------------------------------------------------------")  # 60個
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/bilTest.bmp"
 image = cv2.imread(filename)
 
-print("GaussianBlur 2")
 image_blur = cv2.GaussianBlur(image, (55, 55), 0)  # 執行高斯模糊化
 
-plt.figure("GaussianBlur", figsize=(16, 12))
+plt.figure("GaussianBlur", figsize=(8, 6))
 plt.subplot(121)
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
@@ -123,27 +112,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
-image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
-
-image_canny1 = cv2.Canny(image, 128, 200)
-image_canny2 = cv2.Canny(image, 32, 128)
-
-plt.figure("影像處理", figsize=(16, 12))
-plt.subplot(131)
-plt.title("原圖")
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-
-plt.subplot(132)
-plt.title("Canny 1")
-plt.imshow(cv2.cvtColor(image_canny1, cv2.COLOR_BGR2RGB))
-
-plt.subplot(133)
-plt.title("Canny 2")
-plt.imshow(cv2.cvtColor(image_canny2, cv2.COLOR_BGR2RGB))
-
-plt.tight_layout()
-plt.show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -486,3 +454,61 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("Canny")
+print("------------------------------------------------------------")  # 60個
+
+filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/barbara.bmp"
+
+image = cv2.imread(filename, 0)
+
+plt.figure("影像處理", figsize=(8, 6))
+plt.subplot(121)
+plt.title("原圖")
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+
+# 高斯模糊，Canny边缘检测需要的
+image_blur = cv2.GaussianBlur(image, (5, 5), 0)  # 執行高斯模糊化
+
+# 进行边缘检测，减少图像空间中需要检测的点数量
+image_canny = cv2.Canny(image_blur, 50, 150)
+
+plt.subplot(122)
+plt.title("Canny")
+plt.imshow(cv2.cvtColor(image_canny, cv2.COLOR_BGR2RGB))
+
+plt.tight_layout()
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
+image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
+
+image_canny1 = cv2.Canny(image, 128, 200)
+image_canny2 = cv2.Canny(image, 32, 128)
+
+plt.figure("影像處理", figsize=(8, 6))
+plt.subplot(131)
+plt.title("原圖")
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+
+plt.subplot(132)
+plt.title("Canny 1")
+plt.imshow(cv2.cvtColor(image_canny1, cv2.COLOR_BGR2RGB))
+
+plt.subplot(133)
+plt.title("Canny 2")
+plt.imshow(cv2.cvtColor(image_canny2, cv2.COLOR_BGR2RGB))
+
+plt.tight_layout()
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+

@@ -164,15 +164,16 @@ sns.violinplot(x="day", y="total_bill", data=tips)
 sns.swarmplot(x="day", y="total_bill", data=tips, color="black")
 
 plt.show()
-""" NG
-sns.factorplot(x='day',y='total_bill',data=tips,kind='bar')
+
+# catplot兩變量關係圖
+sns.catplot(x='day',y='total_bill',data=tips,kind='bar')
 
 tc = tips.corr()
 
 sns.heatmap(tc,annot=True,cmap='coolwarm')
 
 plt.show()
-"""
+
 
 """ NG
 fp=flights.pivot_table(index='month',columns='year',values='passengers')

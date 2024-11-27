@@ -17,6 +17,7 @@ import random
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns  # 海生, 自動把圖畫得比較好看
 
 font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
@@ -29,11 +30,6 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 print("------------------------------------------------------------")  # 60個
 
 #Pandas time series data structure
-
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
 
 # Create a Series from a list
 ser = pd.Series([1, 3])
@@ -74,24 +70,27 @@ print(df.head())
 
 
 df.plot()
-plt.xlabel('Year');
+plt.xlabel('Year')
+plt.show()
 
 # change figure parameters
 # df.plot(figsize=(20,10), linewidth=5, fontsize=20)
 
 # Plot single column
 # df[['diet']].plot(figsize=(20,10), linewidth=5, fontsize=20)
-# plt.xlabel('Year', fontsize=20);
+# plt.xlabel('Year', fontsize=20)
+# plt.show()
 
 diet = df['diet']
 
-diet_resamp_yr = diet.resample('A').mean()
+diet_resamp_yr = diet.resample('YE').mean()
 diet_roll_yr = diet.rolling(12).mean()
 
 ax = diet.plot(alpha=0.5, style='-') # store axis (ax) for latter plots
 diet_resamp_yr.plot(style=':', label='Resample at year frequency', ax=ax)
 diet_roll_yr.plot(style='--', label='Rolling average (smooth), window size=12', ax=ax)
 ax.legend()
+plt.show()
 
 #Rolling average (smoothing) with Numpy
 
@@ -102,19 +101,21 @@ win_half = int(win / 2)
 
 diet_smooth = np.array([x[(idx-win_half):(idx+win_half)].mean() for idx in np.arange(win_half, len(x))])
 plt.plot(diet_smooth)
-
+plt.show()
 
 gym = df['gym']
 
 df_avg = pd.concat([diet.rolling(12).mean(), gym.rolling(12).mean()], axis=1)
 df_avg.plot()
 plt.xlabel('Year')
+plt.show()
 
 #Detrending
 
 df_dtrend = df[["diet", "gym"]] - df_avg
 df_dtrend.plot()
 plt.xlabel('Year')
+plt.show()
 
 #First-order differencing: seasonal patterns
 
@@ -124,13 +125,15 @@ assert np.all((diet.diff() == diet - diet.shift())[1:])
 
 df.diff().plot()
 plt.xlabel('Year')
-
+plt.show()
 
 
 #Periodicity and correlation
 
 df.plot()
-plt.xlabel('Year');
+plt.xlabel('Year')
+plt.show()
+
 print(df.corr())
 
 #Plot correlation matrix
@@ -138,7 +141,8 @@ print(df.corr())
 print(df.corr())
 
 df.diff().plot()
-plt.xlabel('Year');
+plt.xlabel('Year')
+plt.show()
 
 print(df.diff().corr())
 
@@ -146,10 +150,7 @@ print(df.diff().corr())
 
 print(df.diff().corr())
 
-
-print("------------------------------------------------------------")  # 60個
-
-
+print("------------------------------")  # 30個
 
 from statsmodels.tsa.seasonal import seasonal_decompose
 
@@ -174,18 +175,16 @@ plt.subplot(414)
 plt.plot(residual, label='Residuals')
 plt.legend(loc='best')
 plt.tight_layout()
+plt.show()
 
+print("------------------------------")  # 30個
 
-
-print("------------------------------------------------------------")  # 60個
-
-# from pandas.plotting import autocorrelation_plot
 from pandas.plotting import autocorrelation_plot
 
 x = df["diet"].astype(float)
 autocorrelation_plot(x)
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 from statsmodels.tsa.stattools import acf
 
@@ -195,9 +194,10 @@ plt.plot(lag_acf)
 plt.title('Autocorrelation Function')
 
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
-from statsmodels.tsa.stattools import acf, pacf
+from statsmodels.tsa.stattools import acf
+from statsmodels.tsa.stattools import pacf
 
 x = df["gym"].astype(float)
 
@@ -223,21 +223,30 @@ plt.axhline(y=-1.96/np.sqrt(len(x_diff)),linestyle='--',color='gray')
 plt.axhline(y=1.96/np.sqrt(len(x_diff)),linestyle='--',color='gray')
 plt.title('Partial Autocorrelation Function (p=1)')
 plt.tight_layout()
+plt.show()
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
-""" NG
-from statsmodels.tsa.arima_model import ARMA
-# from statsmodels.tsa.arima.model import ARIMA
+import statsmodels.api as smapi
 
-model = ARMA(x, order=(1, 1)).fit() # fit model
+model = smapi.tsa.arima.ARIMA(x, order=(2,1,2))
 
-print(model.summary())
-plt.plot(x)
-plt.plot(model.predict(), color='red')
-plt.title('RSS: %.4f'% sum((model.fittedvalues-x)**2))
-"""
+results_ARIMA = model.fit()
+
+plt.plot(x, 'r')
+plt.plot(results_ARIMA.fittedvalues, color='g')
+
+plt.title('ARIMA')
+plt.show()
+
+cc = sum((results_ARIMA.fittedvalues - x)**2)
+print('RSS: %.4f'% cc)
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
+sys.exit()
+
+
+print("------------------------------")  # 30個
+

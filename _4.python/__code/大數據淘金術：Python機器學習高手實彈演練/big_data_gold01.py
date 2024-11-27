@@ -27,7 +27,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 # Python日期時間處理
 # 時間點
 
@@ -73,7 +73,6 @@ print(d.strftime("%Y/%m/%d %H:%M:%S"))
 
 print('------------------------------------------------------------')	#60個
 
-""" fail
 # 4.2.5 多圖組合
 # jointplot兩變量圖
 
@@ -81,13 +80,11 @@ import statsmodels.api as sm
 
 sns.set(style="darkgrid")
 data = sm.datasets.ccard.load_pandas().data
-g = sns.jointplot('AVGEXP', 'AGE', data=data, kind="reg",
+sns.jointplot(x='AVGEXP', y='AGE', data=data, kind="reg",
                  xlim=(0, 1000), ylim=(0, 50), color="m")
 plt.show()
 
 print('------------------------------------------------------------')	#60個
-
-"""
 
 import statsmodels.api as sm
 
@@ -97,38 +94,13 @@ sns.pairplot(data, vars=['AGE','INCOME', 'INCOMESQ','OWNRENT'])
 
 plt.show()
 
-
 print('------------------------------------------------------------')	#60個
 
-""" fail
-# factorplot兩變量關係圖
+# catplot兩變量關係圖
 data = sm.datasets.fair.load_pandas().data
-sns.factorplot(x='occupation', y='affairs', hue='religious', data=data)
+sns.catplot(x='occupation', y='affairs', hue='religious', data=data)
 
 plt.show()
-"""
-
-print('------------------------------------------------------------')	#60個
-
-""" fail
-
-# 準備工作
-
-import pyecharts
-
-attr = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-v1 = [2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3]
-v2 = [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3]
-
-# 4.3.3 繪製交互圖
-# 柱圖
-bar = pyecharts.Bar("Title1", "Title2")
-bar.add("v1", attr, v1, mark_line=["average"], mark_point=["max", "min"])
-bar.add("v2", attr, v2, mark_line=["average"], mark_point=["max", "min"])
-bar.render('test.html')
-bar
-
-"""
 
 print('------------------------------------------------------------')	#60個
 
@@ -154,8 +126,7 @@ print(dom.toprettyxml())
 with open('tmp_test_dom.xml','w') as fh:
     dom.writexml(fh, indent='',addindent='\t', newl='\n', encoding='UTF-8')
 
-print('------------------------------------------------------------')	#60個
-
+print('------------------------------')	#30個
 
 from xml.dom import minidom
 
@@ -176,7 +147,7 @@ with open('tmp_test_dom.xml','r') as fh:
 print('------------------------------------------------------------')	#60個
 
 print('抓取網站數據')
-
+""" NG
 import urllib.request
 from bs4 import BeautifulSoup
 
@@ -189,7 +160,7 @@ for link in soup.find_all('a'):
     # 顯示包含關鍵字的所有地址
     if addr != None and addr.find('xieyan0811/article') != -1: 
         print(addr)
-
+"""
 print('------------------------------------------------------------')	#60個
 
 print('簡單隨機抽樣')
@@ -445,39 +416,6 @@ print(test,'分類',predict(test_X, p0_vec, p1_vec, percent))
 
 print('------------------------------------------------------------')	#60個
 
-""" some fail
-from hmmlearn import hmm
-
-states = ["A", "B", "C"] # 定義隱藏狀態
-n_states = len(states)
-
-observations = ["down","up"] # 定義觀測狀態
-n_observations = len(observations)
-
-p = np.array([0.7, 0.2, 0.1]) # 設置初始值概率pi
-a = np.array([  # 設置狀態轉移矩陣A
-   [0.5, 0.2, 0.3],
-   [0.3, 0.5, 0.2],
-   [0.2, 0.3, 0.5]
-])
-b = np.array([  # 設置狀態對觀測的生成矩陣B
-  [0.6, 0.2],
-  [0.3, 0.3],
-  [0.1, 0.5]
-])
-o = np.array([[1, 0, 1, 1, 1]]).T # 設置觀測狀態
-
-model = hmm.MultinomialHMM(n_components=n_states)
-model.startprob_= p
-model.transmat_= a
-model.emissionprob_= b
-
-logprob, h = model.decode(o, algorithm="viterbi")
-print("The hidden h", ", ".join(map(lambda x: states[x], h))) # 顯示隱藏狀態
-
-"""
-print('------------------------------------------------------------')	#60個
-
 print('Hyperopt')
 
 # pip install hyperopt
@@ -495,7 +433,7 @@ for t in trials.trials:
     print(t['result'])
 
 print('------------------------------------------------------------')	#60個
-'''
+
 # 做時序圖觀察基本的趨勢和週期
 data = pd.read_csv('AirPassengers.csv')
 ts = data['#Passengers']
@@ -503,7 +441,7 @@ plt.plot(ts)
 
 plt.show()
 
-print('------------------------------------------------------------')	#60個
+print('------------------------------')	#30個
 
 # 分析平穩性，正態性，週期性；並對數據進行轉換
 ts_log = np.log(ts)
@@ -513,8 +451,7 @@ plt.plot(ts_diff)
 
 plt.show()
 
-print('------------------------------------------------------------')	#60個
-
+print('------------------------------')	#30個
 
 # 做自相關和偏自相關圖，確定模型階次
 from statsmodels.graphics.tsaplots import plot_acf
@@ -526,69 +463,38 @@ plt.show()
 f = plot_pacf(ts_diff, method='ols')
 plt.show()
 
-print('------------------------------------------------------------')	#60個
+print('------------------------------')	#30個
 
-""" fail
 # 訓練模型
-from statsmodels.tsa.arima_model import ARIMA
+import statsmodels.api as smapi
 
-model = ARIMA(ts_log, order=(2, 1, 2))  
-results_ARIMA = model.fit(disp=-1)  
-plt.plot(ts_diff, color='#ffff00')
-plt.plot(results_ARIMA.fittedvalues, color='#0000ff')
+model = smapi.tsa.arima.ARIMA(ts_log, order=(2,1,2))
 
+results_ARIMA = model.fit()
+
+plt.plot(ts_diff, color='r')
+plt.plot(results_ARIMA.fittedvalues, color='g')
+
+plt.title('ARIMA')
 plt.show()
-"""
 
-print('------------------------------------------------------------')	#60個
+cc = sum((results_ARIMA.fittedvalues - ts_log)**2)
+print('RSS: %.4f'% cc)
 
-""" fail
+print('------------------------------')	#30個
+
 # 轉換回原始波形
 pred_diff = pd.Series(results_ARIMA.fittedvalues, copy=True)
 pred_diff_cumsum = pred_diff.cumsum()
-pred_log = pd.Series(ts_log.ix[0], index=ts_log.index)
+pred_log = pd.Series(ts_log, index=ts_log.index)
 pred_log = pred_log.add(pred_diff_cumsum,fill_value=0)
 pred = np.exp(pred_log)
 plt.plot(ts)
 plt.plot(pred)
 
 plt.show()
-"""
-
 '''
 print('------------------------------------------------------------')	#60個
-
-print('傅里葉變換')
-
-# 將頻域數據轉換成時序數據
-# bins爲頻域數據，n設置使用前多少個頻域數據，loop設置生成數據的長度
-def fft_combine(bins, n, loops=1):
-    length = int(len(bins) * loops)
-    data = np.zeros(length)
-    index = loops * np.arange(0, length, 1.0) / length * (2 * np.pi)
-    for k, p in enumerate(bins[:n]):
-        if k != 0 : p *= 2 # 除去直流成分之外, 其餘的係數都乘2
-        data += np.real(p) * np.cos(k*index) # 餘弦成分的係數爲實數部分
-        data -= np.imag(p) * np.sin(k*index) # 正弦成分的係數爲負的虛數部分
-    return index, data
-
-if __name__ == '__main__':
-    data = pd.read_csv('AirPassengers.csv')
-    ts = data['#Passengers']
-
-    # 平穩化
-    ts_log = np.log(ts)
-    ts_diff = ts_log.diff(1) # 差分
-    ts_diff = ts_diff.dropna() # 去除空數據
-    fy = np.fft.fft(ts_diff)
-    print(fy[:10]) # 顯示前10個頻域數據
-    conv1 = np.real(np.fft.ifft(fy)) # 逆變換
-    index, conv2 = fft_combine(fy / len(ts_diff), int(len(fy)/2-1), 1.3) # 只關心一半數據
-    plt.plot(ts_diff)
-    plt.plot(conv1 - 0.5) # 爲看清楚，將顯示區域下拉0.5
-    plt.plot(conv2 - 1)
-    plt.show()
-
 print('------------------------------------------------------------')	#60個
 
 print('小波變換')
@@ -608,7 +514,6 @@ new_data = pywt.idwt(cA, cD, 'db2')
 plt.plot(ts_diff)
 plt.plot(new_data - 0.5) 
 plt.show()
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -763,7 +668,7 @@ def calc(grp1, grp2, features, key, params, feval):
     watchlist  = [(dtrain,'train'),(dval,'val')]
     model = xgb.train(params,dtrain, evals=watchlist, feval=feval, 
                       num_boost_round=200, early_stopping_rounds=10)
-    model.save_model('model_'+key)
+    model.save_model('tmp_model_'+key)
     dic = model.get_fscore()
     dic2= sorted(dic.items(), key=lambda d:d[1], reverse = True)
     print("feature importance", dic2)
@@ -848,8 +753,7 @@ model_f = calc_dic(train, val, 'f', dic_key_f)
 model_c = calc_dic(train, val, 'c', dic_key_c)
 model_l = calc_dic(train, val, 'l', dic_key_l)
 
-
-print('------------------------------------------------------------')	#60個
+print('------------------------------')	#30個
 
 # 保存模型
 dic = {}
@@ -866,7 +770,7 @@ from sklearn.externals import joblib
 joblib.dump(dic, 'model.pkl')
 """
 
-print('------------------------------------------------------------')	#60個
+print('------------------------------')	#30個
 
 def do_pred(model, val, dic):
     val_new = val.copy()
@@ -904,7 +808,7 @@ out['ss'] = out['f'].astype(str) + "," + out['c'].astype(str) + ',' + out['l'].a
 out = out[['uid','mid','ss']]
 print(out.shape)
 print(out.head())
-out.to_csv("result_190624.txt", index=False, header=None, sep='\t')
+out.to_csv("tmp_result_190624.txt", index=False, header=None, sep='\t')
 
 print('------------------------------------------------------------')	#60個
 
@@ -1042,9 +946,7 @@ get_features(ResNet50, 224, 224)
 get_features(InceptionV3, 299, 299, inception_v3.preprocess_input)
 get_features(Xception, 299, 299, xception.preprocess_input)
 
-
 print('------------------------------------------------------------')	#60個
-
 
 # 訓練模型並預測，此處使用了深度學習模型，也可以換成機器學習模型
 
@@ -1106,7 +1008,6 @@ def plot_training(history):
 
 plot_training(history)
 """
-
 print('------------------------------------------------------------')	#60個
 
 # should be the same
@@ -1148,11 +1049,10 @@ get_features(ResNet50, 224, 224)
 get_features(InceptionV3, 299, 299, inception_v3.preprocess_input)
 get_features(Xception, 299, 299, xception.preprocess_input)
 
-
 print('------------------------------------------------------------')	#60個
 
-#訓練模型和預測
-
+print('訓練模型和預測')
+""" NG
 import h5py
 from sklearn.utils import shuffle
 from keras.models import *
@@ -1185,7 +1085,7 @@ history = model.fit(X_train, y_train, batch_size=128, nb_epoch=8, validation_spl
 y_pred = model.predict(X_test, verbose=1)
 y_pred = y_pred.clip(min=0.005, max=0.995)
 
-print('------------------------------------------------------------')	#60個
+print('------------------------------')	#30個
 
 #訓練結果分析
 
@@ -1210,8 +1110,7 @@ plt.title('Training and validation loss')
 plt.show()
 
 plot_training(history)
-
-
+"""
 print('------------------------------------------------------------')	#60個
 print('------------------------------------------------------------')	#60個
 
@@ -1226,6 +1125,7 @@ print('------------------------------------------------------------')	#60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
+sys.exit()
 
 
 print("------------------------------------------------------------")  # 60個
