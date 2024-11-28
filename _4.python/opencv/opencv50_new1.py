@@ -5,7 +5,7 @@ opencv 集合 新進
 """
 
 import cv2
-import pylab as pl
+#import pylab as pl
 
 ESC = 27
 SPACE = 32
@@ -41,7 +41,7 @@ print("------------------------------------------------------------")  # 60個
 
 
 def show():
-    # plt.show()
+    #plt.show()
     pass
 
 
@@ -54,7 +54,7 @@ def cvshow(title, image):
 
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 print("練習組合成一張大圖 picasa效果")
 
 filename1 = "C:/_git/vcs/_4.python/_data/elephant.jpg"
@@ -4175,8 +4175,7 @@ from scipy import signal
 
 # 非歸一化的高斯卷積
 def gaussConv(I, size, sigma):
-    # 卷積核的高和寬
-    H, W = size
+    H, W = size  # 卷積核的高和寬
     # 構造水平方向上非歸一化的高斯卷積核
     xr, xc = np.mgrid[0:1, 0:W]
     xc -= (W - 1) // 2
@@ -4191,8 +4190,6 @@ def gaussConv(I, size, sigma):
     I_xk_yk = signal.convolve2d(I_xk, yk, "same", "symm")
     I_xk_yk *= 1.0 / (2 * np.pi * pow(sigma, 2.0))
     return I_xk_yk
-    #
-
 
 # 高斯差分
 def DoG(I, size, sigma, k=1.1):
@@ -4663,7 +4660,7 @@ img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 print(img_gray.shape)
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 # 圖形型態
 
 from matplotlib import cm
@@ -4808,7 +4805,7 @@ kernels = [
 ]
 
 index = 0
-fig, axes = pl.subplots(1, 3, figsize=(12, 4.3))
+fig, axes = plt.subplots(1, 3, figsize=(12, 4.3))
 for ax, (name, kernel) in zip(axes, kernels):
     dst = cv2.filter2D(src, -1, kernel)
     # 由於matplotlib的彩色順序和OpenCV的順序相反
@@ -4849,7 +4846,7 @@ mask = np.zeros((h + 2, w + 2), np.uint8)
 cv2.floodFill(img, mask, seed1, (0, 0, 0), diff, diff, cv2.FLOODFILL_MASK_ONLY)
 cv2.floodFill(img, None, seed2, (0, 0, 255), diff, diff)
 
-fig, axes = pl.subplots(1, 2, figsize=(9, 4))
+fig, axes = plt.subplots(1, 2, figsize=(9, 4))
 axes[0].imshow(~mask, cmap="gray")
 axes[1].imshow(img)
 
@@ -4875,7 +4872,7 @@ dst = np.array([[300, 300], [873, 78], [161, 923]], dtype=np.float32)
 m = cv2.getAffineTransform(src, dst)
 result = cv2.warpAffine(img, m, (2 * w, 2 * h), borderValue=(255, 255, 255, 255))
 
-fig, ax = pl.subplots(figsize=(8, 8))
+fig, ax = plt.subplots(figsize=(8, 8))
 fig.subplots_adjust(0, 0, 1, 1)
 ax.set_xlim(-5, w * 2 + 5)
 ax.set_ylim(h * 2 + 5, -5)
@@ -4903,7 +4900,7 @@ dst = np.array([[300, 350], [800, 300], [900, 923], [161, 923]], dtype=np.float3
 m = cv2.getPerspectiveTransform(src, dst)
 result = cv2.warpPerspective(img, m, (2 * w, 2 * h), borderValue=(255, 255, 255, 255))
 
-fig, ax = pl.subplots(figsize=(8, 8))
+fig, ax = plt.subplots(figsize=(8, 8))
 fig.subplots_adjust(0, 0, 1, 1)
 ax.set_xlim(-5, w * 2 + 5)
 ax.set_ylim(h * 2 + 5, -5)
@@ -4966,7 +4963,7 @@ settings = [
     ("sin(6*sqrt(x**2+y**2))", 10, 10),
     ("sin(sqrt(x**2+y**2))/sqrt(x**2+y**2)", 20, 0.5)
 ]
-fig, axes = pl.subplots(1, len(settings), figsize=(12, 12.0 / len(settings)))
+fig, axes = plt.subplots(1, len(settings), figsize=(12, 12.0 / len(settings)))
 
 for ax, (expr, r, height) in zip(axes, settings):
     mapx, mapy = make_surf_map(make_func(expr), r, w, h, height)
@@ -5011,12 +5008,12 @@ img2 = cv2.remap(
     cv2.INTER_LINEAR,
 )
 
-fig, ax = pl.subplots(1, 1, figsize=(8, 8))
+fig, ax = plt.subplots(1, 1, figsize=(8, 8))
 fig.subplots_adjust(0, 0, 1, 1, 0, 0)
 ax.imshow(img2[:, :, ::-1])
-circle = pl.Circle((tx, ty), r, fill=None, alpha=0.5, lw=2, ls="dashed")
+circle = plt.Circle((tx, ty), r, fill=None, alpha=0.5, lw=2, ls="dashed")
 ax.add_artist(circle)
-circle = pl.Circle((sx, sy), r, fill=None, alpha=0.5, lw=2, color="black")
+circle = plt.Circle((sx, sy), r, fill=None, alpha=0.5, lw=2, color="black")
 ax.add_artist(circle)
 ax.axis("off")
 
@@ -5028,7 +5025,7 @@ print("------------------------------------------------------------")  # 60個
 
 # %fig=`data/lena.jpg`的三個通道的直方圖統計、通道0和通道2的二維直方圖統計
 img = cv2.imread("data/lena.jpg")
-fig, ax = pl.subplots(1, 2, figsize=(12, 5))
+fig, ax = plt.subplots(1, 2, figsize=(12, 5))
 colors = ["blue", "green", "red"]
 
 for i in range(3):
@@ -5086,7 +5083,7 @@ _, img_th = cv2.threshold(img_bp, 180, 255, cv2.THRESH_BINARY)
 struct = np.ones((3, 3), np.uint8)
 img_mp = cv2.morphologyEx(img_th, cv2.MORPH_CLOSE, struct, iterations=5)
 
-fig, axes = pl.subplots(2, 3, figsize=(9, 6))
+fig, axes = plt.subplots(2, 3, figsize=(9, 6))
 fig.subplots_adjust(0, 0, 1, 1, 0.01, 0.01)
 axes[0, 0].imshow(img[:, :, ::-1])
 axes[0, 1].imshow(img2[:, :, ::-1])
@@ -5133,17 +5130,17 @@ dst = cv2.imread("data/summer.jpg")
 res, cdfs = histogram_match(src, dst)
 
 # %figonly=直方圖比對結果
-fig = pl.figure(figsize=(10, 6))
+fig = plt.figure(figsize=(10, 6))
 fig.subplots_adjust(0, 0, 1, 1, 0, 0)
-ax1 = pl.subplot2grid((5, 6), (0, 0), 3, 3)
-ax2 = pl.subplot2grid((5, 6), (0, 3), 3, 3)
+ax1 = plt.subplot2grid((5, 6), (0, 0), 3, 3)
+ax2 = plt.subplot2grid((5, 6), (0, 3), 3, 3)
 ax1.imshow(dst[:, :, ::-1])
 ax2.imshow(res[:, :, ::-1])
 ax1.axis("off")
 ax2.axis("off")
-axb = pl.subplot2grid((5, 6), (3, 0), 2, 2)
-axg = pl.subplot2grid((5, 6), (3, 2), 2, 2)
-axr = pl.subplot2grid((5, 6), (3, 4), 2, 2)
+axb = plt.subplot2grid((5, 6), (3, 0), 2, 2)
+axg = plt.subplot2grid((5, 6), (3, 2), 2, 2)
+axr = plt.subplot2grid((5, 6), (3, 4), 2, 2)
 
 axg.set_yticklabels([])
 axr.set_yticklabels([])
@@ -5192,7 +5189,7 @@ ygrid = ygrid.astype(np.float32)
 xgrid = xgrid.astype(np.float32)
 # NG res = cv2.remap(img_right, xgrid - disparity, ygrid, cv2.INTER_LINEAR)
 
-fig, axes = pl.subplots(1, 3, figsize=(9, 3))
+fig, axes = plt.subplots(1, 3, figsize=(9, 3))
 axes[0].imshow(img_left)
 axes[0].imshow(img_right, alpha=0.5)
 # axes[1].imshow(disparity, cmap="gray")
@@ -5246,7 +5243,7 @@ b = 3
 
 xn, yn = 4, 3
 
-fig, (ax1, ax2) = pl.subplots(1, 2, figsize=(8, 3))
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(8, 3))
 xs = np.linspace(0, 5, 4)
 ys = xs * k + b
 
@@ -5270,6 +5267,9 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+
+# add_collection 只能用 ax
+
 # %fig=使用HoughLinesP()檢驗圖形中的直線
 img = cv2.imread("data/building.jpg", cv2.IMREAD_GRAYSCALE)
 img_binary = cv2.Canny(img, 100, 255)
@@ -5282,8 +5282,8 @@ lines = cv2.HoughLinesP(
     maxLineGap=4,
 )
 
-fig, ax = pl.subplots(figsize=(8, 6))
-pl.imshow(img, cmap="gray")
+fig, ax = plt.subplots(figsize=(8, 6))
+plt.imshow(img, cmap="gray")
 
 from matplotlib.collections import LineCollection
 
@@ -5314,8 +5314,8 @@ circles = cv2.HoughCircles(
 
 x, y, r = circles[0].T
 
-fig, ax = pl.subplots(figsize=(8, 6))
-pl.imshow(img, cmap="gray")
+fig, ax = plt.subplots(figsize=(8, 6))
+plt.imshow(img, cmap="gray")
 
 from matplotlib.collections import EllipseCollection
 
@@ -5341,7 +5341,7 @@ print("------------------------------------------------------------")  # 60個
 # Mean-Shift法
 
 # %fig=使用pyrMeanShiftFiltering()進行圖形分割，從左到右參數sr分別為20, 40, 80
-fig, axes = pl.subplots(1, 3, figsize=(9, 3))
+fig, axes = plt.subplots(1, 3, figsize=(9, 3))
 
 img = cv2.imread("data/fruits.jpg")
 
@@ -5383,7 +5383,7 @@ scpy2.opencv.watershed_demo：分水嶺算法的示範程式。
 print("------------------------------")  # 30個
 
 # %figonly=使用watershed分割藥丸
-fig, axes = pl.subplots(1, 2, figsize=(10, 3))
+fig, axes = plt.subplots(1, 2, figsize=(10, 3))
 axes[0].imshow(img[:, :, ::-1])
 peaks_img = np.zeros(img.shape[:2] + (4,), np.uint8)
 peaks_img[peaks, 2] = 255
@@ -5478,9 +5478,9 @@ COLORS = np.array([[0, 0.0, 0.5], [1, 0, 0]])
 img_color1 = cv2.cvtColor(img_gray1, cv2.COLOR_GRAY2RGB)
 merged_img = concat_images([img_color1, img_color2], margin=0)
 
-fig, ax = pl.subplots(figsize=(12, 6))
+fig, ax = plt.subplots(figsize=(12, 6))
 ax.axis("off")
-pl.imshow(merged_img)
+plt.imshow(merged_img)
 lines = np.concatenate([matched_positions1, matched_positions2], axis=1)
 lines[:, 2] += img_color2.shape[1]
 line_collection = LineCollection(lines.reshape(-1, 2, 2), 
@@ -5585,7 +5585,7 @@ lines = [line[:, 0, :] for line in lines]
 
 from matplotlib.collections import LineCollection, PolyCollection
 
-fig, ax = pl.subplots(figsize=(8, 8))
+fig, ax = plt.subplots(figsize=(8, 8))
 ax.set_aspect("equal")
 polys = PolyCollection(lines, array=np.array(levels), facecolors="none")
 ax.add_collection(polys)
@@ -5628,7 +5628,7 @@ CV_CONTOURS_MATCH_I3   0.9164,   0.4778,   0.0225,   0.4552,   0.0016
 
 
 # %figonly=使用`matchShapes()`比較由`approxPolyDP()`近似之後的輪廓
-fig, ax = pl.subplots(figsize=(8, 8))
+fig, ax = plt.subplots(figsize=(8, 8))
 ax.set_aspect("equal")
 
 width = 180
@@ -5646,19 +5646,19 @@ for tidx, (target, target_simple) in enumerate(zip(targets, targets_simple)):
         y0 = tidx * width + width
 
         if tidx == 0:
-            pattern_poly = pl.Polygon(pattern2 + [x0, 0], color="black", alpha=0.6)
+            pattern_poly = plt.Polygon(pattern2 + [x0, 0], color="black", alpha=0.6)
             ax.add_patch(pattern_poly)
             text = ax.text(x0 + width * 0.3, -50, str(pidx), fontsize=14, ha="center")
         if pidx == 0:
-            target_poly = pl.Polygon(target2 + [0, y0], color="green", alpha=0.6)
+            target_poly = plt.Polygon(target2 + [0, y0], color="green", alpha=0.6)
             ax.add_patch(target_poly)
             text = ax.text(-50, y0 + width * 0.3, str(tidx), fontsize=14, ha="center")
 
-        pattern_simple_poly = pl.Polygon(
+        pattern_simple_poly = plt.Polygon(
             pattern_simple2 + [x0, 0], facecolor="none", alpha=0.6
         )
         ax.add_patch(pattern_simple_poly)
-        target_simple_poly = pl.Polygon(
+        target_simple_poly = plt.Polygon(
             target_simple2 + [0, y0], facecolor="none", alpha=0.6
         )
         ax.add_patch(target_simple_poly)

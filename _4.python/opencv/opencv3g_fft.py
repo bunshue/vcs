@@ -37,13 +37,56 @@ filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bm
 
 print("------------------------------------------------------------")  # 60個
 
-# np 傅立葉變換
 
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+'''
+N = 100
+sinc2d = np.zeros((N, N))
+for x, x1 in enumerate(np.linspace(-2 * np.pi, 2 * np.pi, N)):
+    for y, x2 in enumerate(np.linspace(-2 * np.pi, 2 * np.pi, N)):
+        # sinc2d[x, y] = np.sin(x1) * np.sin(x2) / (x1 * x2)  # 二維 sinc 函數
+        sinc2d[x, y] = np.sqrt(x1**2 + x2**2)
+# print(sinc2d)
+
+""" same
+x1 = np.linspace(-10, 10, N)
+x2 = np.linspace(-10, 10, N)
+sinc2d = np.outer(np.sin(x1), np.sin(x2)) / np.outer(x1, x2)  # 二維 sinc 函數
+# print(sinc2d)
+"""
+plt.imshow(sinc2d)
+#plt.show()
+'''
+
+N = 5
+X = np.zeros((N, N))
+
+cx, cy = N//2, N//2
+print(cx, cy)
+
+#X[cx-1:cx+2, cy-1:cy+2] = 1
+X[cx, cy] = 1
+print(X)
+
+"""
 X = cv2.imread(filename, 0)
+X = sinc2d
+"""
 
+# np 傅立葉變換
 X_FFT = np.fft.fft2(X)
 FFT_SHIFT = np.fft.fftshift(X_FFT)
+print(FFT_SHIFT)
+
 MAGNITUDE_SPECTRUM = 20 * np.log(np.abs(FFT_SHIFT))
+
+print(MAGNITUDE_SPECTRUM)
 
 plt.figure('傅立葉', figsize = (8, 6))
 plt.subplot(121)
@@ -64,6 +107,8 @@ print("------------------------------------------------------------")  # 60個
 X = cv2.imread(filename, 0)
 
 X_DFT = cv2.dft(np.float32(X), flags=cv2.DFT_COMPLEX_OUTPUT)
+# print(X_DFT)
+
 FFT_SHIFT = np.fft.fftshift(X_DFT)
 result = 20 * np.log(cv2.magnitude(FFT_SHIFT[:, :, 0], FFT_SHIFT[:, :, 1]))
 
@@ -71,16 +116,15 @@ plt.figure("傅立葉變換", figsize=(8, 6))
 
 plt.subplot(121)
 plt.imshow(X, cmap="gray")
-plt.title("original")
+plt.title("原圖")
 
 plt.subplot(122)
 plt.imshow(result, cmap="gray")
-plt.title("result")
+plt.title("fftshift")
 
 plt.suptitle("傅立葉變換")
 
 plt.show()
-# print(X_DFT)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -100,7 +144,7 @@ plt.figure("逆傅立葉", figsize=(8, 6))
 
 plt.subplot(121)
 plt.imshow(X, cmap="gray")
-plt.title("X")
+plt.title("原圖")
 
 plt.subplot(122)
 plt.imshow(FFT_SHIFT_IFFTSHIFT_IFFT2, cmap="gray")
@@ -125,11 +169,11 @@ plt.figure("逆傅立葉變換", figsize=(8, 6))
 
 plt.subplot(121)
 plt.imshow(X, cmap="gray")
-plt.title("original")
+plt.title("原圖")
 
 plt.subplot(122)
 plt.imshow(FFT_SHIFT_IFFTSHIFT_IDFT, cmap="gray")
-plt.title("inverse")
+plt.title("FFT_SHIFT_IFFTSHIFT_IDFT")
 
 plt.suptitle("逆傅立葉變換")
 plt.show()
@@ -155,7 +199,7 @@ plt.figure("高通濾波", figsize=(8, 6))
 
 plt.subplot(121)
 plt.imshow(X, cmap="gray")
-plt.title("X")
+plt.title("原圖")
 
 plt.subplot(122)
 plt.imshow(FFT_SHIFT_IFFTSHIFT_IFFT2, cmap="gray")
@@ -186,11 +230,11 @@ plt.figure("低通濾波", figsize=(8, 6))
 
 plt.subplot(121)
 plt.imshow(X, cmap="gray")
-plt.title("X")
+plt.title("原圖")
 
 plt.subplot(122)
 plt.imshow(FFT_SHIFT_MASK_IFFTSHIFT_IDFT, cmap="gray")
-plt.title("result")
+plt.title("FFT_SHIFT_MASK_IFFTSHIFT_IDFT")
 
 plt.suptitle("低通濾波")
 plt.show()
@@ -209,7 +253,7 @@ MAGNITUDE_SPECTRUM = 20 * np.log(cv2.magnitude(FFT_SHIFT[:, :, 0], FFT_SHIFT[:, 
 plt.figure("MAGNITUDE_SPECTRUM", figsize=(8, 6))
 
 plt.subplot(121), plt.imshow(X, cmap="gray")
-plt.title("原始圖像")
+plt.title("原圖")
 
 plt.subplot(122)
 plt.imshow(MAGNITUDE_SPECTRUM, cmap="gray")
@@ -296,7 +340,7 @@ def phaseSpectrum(fft2):
     rows, cols = fft2.shape[:2]
     # 計算相位角
     phase = np.arctan2(fft2[:, :, 1], fft2[:, :, 0])
-    # 相位角轉換為 [ -180 , 180]
+    # 顯示該相位譜時，首先需要將相位角轉換為 [ -180 , 180]
     spectrum = phase / math.pi * 180
     return spectrum
 
@@ -360,7 +404,7 @@ print("傅里葉變換 saliencyMap")
 def fft2Image(src):
     # 得到行、列
     r, c = src.shape[:2]
-    # 得到快速傅里葉變換最優
+    # 得到快速傅里葉變換最優擴充
     rPadded = cv2.getOptimalDFTSize(r)
     cPadded = cv2.getOptimalDFTSize(c)
     # 邊緣擴充，下邊緣和右邊緣擴充值為零
@@ -605,7 +649,7 @@ MAX_LPTYPE = 2
 def fft2Image(src):
     # 得到行、列
     r, c = src.shape[:2]
-    # 得到快速傅里葉變換最優
+    # 得到快速傅里葉變換最優擴充
     rPadded = cv2.getOptimalDFTSize(r)
     cPadded = cv2.getOptimalDFTSize(c)
     # 邊緣擴充，下邊緣和右邊緣擴充值為零
@@ -749,7 +793,7 @@ print("頻率域濾波 HomomorphicFilter")
 def fft2Image(src):
     # 得到行、列
     r, c = src.shape[:2]
-    # 得到快速傅里葉變換最優
+    # 得到快速傅里葉變換最優擴充
     rPadded = cv2.getOptimalDFTSize(r)
     cPadded = cv2.getOptimalDFTSize(c)
     # 邊緣擴充，下邊緣和右邊緣擴充值為零
@@ -825,10 +869,8 @@ print("------------------------------------------------------------")  # 60個
 
 print("image_fft")
 
-Fs = 1200
-# 采樣頻率
-Ts = 1 / Fs
-# 采樣區間
+Fs = 1200  # 采樣頻率
+Ts = 1 / Fs  # 采樣區間
 x = np.arange(0, 1, Ts)  # 時間向量，1200個
 y = 5 * np.sin(2 * np.pi * 600 * x)
 N = 1200
@@ -855,18 +897,22 @@ fig = plt.figure(
 plt.subplot(231)
 plt.plot(frq[0:50], y[0:50])
 plt.title("原始波形")
+
 # 畫出雙邊未求絕對值的振幅譜
 plt.subplot(232)
 plt.plot(frq, fft_y, "black")
 plt.title("雙邊振幅譜(未求振幅絕對值)")
+
 # 畫出雙邊求絕對值的振幅譜
 plt.subplot(233)
 plt.plot(frq, abs_y, "r")
 plt.title("雙邊振幅譜(未歸一化)")
+
 # 畫出雙邊相位譜
 plt.subplot(234)
 plt.plot(frq[0:50], angle_y[0:50], "violet")
 plt.title("雙邊相位譜(未歸一化)")
+
 # 畫出雙邊振幅譜(歸一化)
 plt.subplot(235)
 plt.plot(frq, gui_y, "g")
@@ -876,6 +922,7 @@ plt.title("雙邊振幅譜(歸一化)")
 plt.subplot(236)
 plt.plot(half_x, gui_half_y, "blue")
 plt.title("單邊振幅譜(歸一化)")
+
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
@@ -902,25 +949,29 @@ fig = plt.figure(
 # 顯示原圖
 plt.subplot(231)
 plt.imshow(image, "gray")
-plt.title("原始圖像")
+plt.title("原圖")
+
 # 進行傅立葉變換，并顯示結果
 fft2 = np.fft.fft2(image)
 
 plt.subplot(232)
 plt.imshow(np.abs(fft2), "gray")
 plt.title("二維傅里葉變換")
+
 # 將圖像變換的原點移動到頻域矩形的中心，并顯示效果
 FFT_SHIFT = np.fft.fftshift(fft2)
 
 plt.subplot(233)
 plt.imshow(np.abs(FFT_SHIFT), "gray")
 plt.title("頻域矩形的中心")
+
 # 對傅立葉變換的結果進行對數變換，并顯示效果
 log_fft2 = np.log(1 + np.abs(fft2))
 
 plt.subplot(235)
 plt.imshow(log_fft2, "gray")
 plt.title("傅立葉變換對數變換")
+
 # 對中心化后的結果進行對數變換，并顯示結果
 log_FFT_SHIFT = np.log(1 + np.abs(FFT_SHIFT))
 
@@ -944,12 +995,17 @@ image = plt.imread('data/castle3.jpg')
 image = 0.2126 * image[:,:,0] + 0.7152 * image[:,:,1] + 0.0722 * image[:,:,2]
 
 #顯示原圖
-plt.subplot(131),plt.imshow(image,'gray'),plt.title('original')
+plt.subplot(131)
+plt.imshow(image,'gray')
+plt.title('原圖')
 
 #進行傅立葉變換，并顯示結果
 fft2 = np.fft.fft2(image)
 log_fft2 = np.log(1 + np.abs(fft2))
-plt.subplot(132),plt.imshow(log_fft2,'gray'),plt.title('log_fft2')
+
+plt.subplot(132)
+plt.imshow(log_fft2,'gray')
+plt.title('log_fft2')
 
 h , w = image.shape
 #生成一個同樣大小的復數矩陣
@@ -966,8 +1022,9 @@ log_F = np.log(1 + np.abs(F))
 plt.subplot(133)
 plt.imshow(log_F,'gray')
 plt.title('log_F')
-"""
 
+plt.show()
+"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
