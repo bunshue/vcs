@@ -1,5 +1,3 @@
-from __future__ import print_function, division
-
 from six.moves import range
 import codecs
 import numpy as np
@@ -61,13 +59,10 @@ class DataReader(object):
             yield input_batch, target_batch
 
 
-def main():
-    filepath = './wap.txt'
-    batch_length = 10
-    batch_size = 2
-    reader = DataReader(filepath, batch_length, batch_size)
-    s = 'As in the question of astronomy then, so in the question of history now,'
-    print([reader.char_dict[c] for c in s])
+filepath = './wap.txt'
+batch_length = 10
+batch_size = 2
+reader = DataReader(filepath, batch_length, batch_size)
+s = 'As in the question of astronomy then, so in the question of history now,'
+print([reader.char_dict[c] for c in s])
 
-if __name__ == "__main__":
-    main()

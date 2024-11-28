@@ -337,7 +337,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # some NG
-# from __future__ import print_function
 from sklearn.model_selection import learning_curve
 from sklearn.svm import SVC
 
@@ -367,7 +366,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # some NG
-# from __future__ import print_function
 from sklearn.learning_curve import validation_curve
 from sklearn.svm import SVC
 
@@ -576,7 +574,6 @@ print("------------------------------------------------------------")  # 60個
 """
 Please note, this code is only for python 3+. If you are using python 2+, please modify the code accordingly.
 """
-from __future__ import print_function
 import tensorflow as tf
 from sklearn.datasets import load_digits
 from sklearn.cross_validation import train_test_split

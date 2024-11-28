@@ -1,12 +1,17 @@
 import sys
+from pytube import YouTube
+import youtube_dl
+import os
+import tkinter as tk
+
+print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 print("Youtube pytube ST")
 print("------------------------------------------------------------")  # 60個
-
-from pytube import YouTube
 
 url = "https://www.youtube.com/watch?v=R93ce4FZGbc"  # baby shark 的音樂
 yt = YouTube(url)
@@ -22,7 +27,6 @@ print('取得所有語系 :', yt.captions)
 print("------------------------------------------------------------")  # 60個
 
 """ NG
-from pytube import YouTube
 
 url = "https://www.youtube.com/watch?v=R93ce4FZGbc"
 yt = YouTube(url)
@@ -34,8 +38,6 @@ print("ok!")
 print("------------------------------------------------------------")  # 60個
 
 """ NG
-from pytube import YouTube
-
 url = "https://www.youtube.com/watch?v=R93ce4FZGbc"
 yt = YouTube(url)
 print("download...2")
@@ -46,8 +48,6 @@ print("ok!")
 print("------------------------------------------------------------")  # 60個
 
 """ NG
-from pytube import YouTube
-
 url = "https://www.youtube.com/watch?v=R93ce4FZGbc"
 yt = YouTube(url)
 print(yt.streams.all())
@@ -56,8 +56,6 @@ print(yt.streams.all())
 print("------------------------------------------------------------")  # 60個
 
 """ NG
-from pytube import YouTube
-
 
 def onProgress(stream, chunk, remains):
     total = stream.filesize  # 取得完整尺寸
@@ -76,8 +74,6 @@ print("ok!")
 print("------------------------------------------------------------")  # 60個
 
 """ fail
-from pytube import YouTube
-
 url = "https://www.youtube.com/watch?v=R93ce4FZGbc"
 yt = YouTube(url)
 print("download...4")
@@ -87,7 +83,6 @@ print("ok!")
 """
 print("------------------------------------------------------------")  # 60個
 
-from pytube import YouTube
 from bs4 import BeautifulSoup
 
 url = "https://www.youtube.com/watch?v=R93ce4FZGbc"
@@ -147,7 +142,7 @@ print("下載字幕 ok!")
 
 print("------------------------------------------------------------")  # 60個
 
-from pytube import Playlist, YouTube
+from pytube import Playlist
 
 url = "https://www.youtube.com/watch?v=mOPRaLPh-YU&list=PL9ACDjBMkp9wViVmgpYweGkNqh62pHspF"
 
@@ -175,7 +170,6 @@ print("ok!")
 print("------------------------------------------------------------")  # 60個
 
 """ fail
-from pytube import YouTube
 yt = YouTube("https://www.youtube.com/watch?v=52B8s2zrdeE")
 stream = yt.streams.filter(file_extension='mp4', res='360p').first()
 stream.download("c:\\dddddddddd")
@@ -188,18 +182,6 @@ print("------------------------------------------------------------")  # 60個
 print("Youtube pytube SP")
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-
-from __future__ import unicode_literals
-from pytube import YouTube
-import youtube_dl
-import os
-
-
-import sys
-
-import tkinter as tk
 
 print("------------------------------------------------------------")  # 60個
 

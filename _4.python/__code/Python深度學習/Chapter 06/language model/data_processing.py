@@ -1,12 +1,9 @@
-"""Process text file for language model training."""
-from __future__ import print_function, division
-
 import re
 import codecs
 
 
 filepath = 'war_and_peace.txt'  # in
-out_file = 'wap.txt'  # out
+out_file = 'tmp_wap.txt'  # out
 
 # Regexes used to clean up the text
 NEW_LINE_IN_PARAGRAPH_REGEX = re.compile(r'(\S)\n(\S)')

@@ -1,0 +1,195 @@
+[
+    {
+        "id": "5e9029cc7f2732a9",
+        "type": "tab",
+        "label": "EX 10-5 (ESP8266)",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "53aff6a76e8e7703",
+        "type": "ui_button",
+        "z": "5e9029cc7f2732a9",
+        "name": "Close",
+        "group": "e1c55a47.0f4158",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Close",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 250,
+        "y": 100,
+        "wires": [
+            [
+                "0389a435a789e401"
+            ]
+        ]
+    },
+    {
+        "id": "c9928502fbf735f7",
+        "type": "ui_button",
+        "z": "5e9029cc7f2732a9",
+        "name": "Half Open",
+        "group": "e1c55a47.0f4158",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Half Open",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 260,
+        "y": 160,
+        "wires": [
+            [
+                "39a949e740bd89b5"
+            ]
+        ]
+    },
+    {
+        "id": "c50114849ce78cae",
+        "type": "ui_button",
+        "z": "5e9029cc7f2732a9",
+        "name": "Full Open",
+        "group": "e1c55a47.0f4158",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Full Open",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 260,
+        "y": 220,
+        "wires": [
+            [
+                "d760aa71244abc7c"
+            ]
+        ]
+    },
+    {
+        "id": "86f3f51a9823f35f",
+        "type": "ui_text",
+        "z": "5e9029cc7f2732a9",
+        "group": "e1c55a47.0f4158",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "name": "Curtain Opening",
+        "label": "Curtain Opening",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 520,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "0389a435a789e401",
+        "type": "property out",
+        "z": "5e9029cc7f2732a9",
+        "connection": "3ab1f2381ede1a6b",
+        "thing": "f6cfadb7-be59-4fd5-82ff-5dabfbbf2bb1",
+        "property": "4aa3977b-52c3-4819-a98b-83cfc1649520",
+        "name": "close",
+        "propname": "close",
+        "defaultname": true,
+        "x": 490,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "39a949e740bd89b5",
+        "type": "property out",
+        "z": "5e9029cc7f2732a9",
+        "connection": "3ab1f2381ede1a6b",
+        "thing": "f6cfadb7-be59-4fd5-82ff-5dabfbbf2bb1",
+        "property": "d51c9b39-d1e5-491c-a2ac-e824b6433e44",
+        "name": "half",
+        "propname": "half",
+        "defaultname": true,
+        "x": 490,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "d760aa71244abc7c",
+        "type": "property out",
+        "z": "5e9029cc7f2732a9",
+        "connection": "3ab1f2381ede1a6b",
+        "thing": "f6cfadb7-be59-4fd5-82ff-5dabfbbf2bb1",
+        "property": "55bd7155-9332-496d-a46e-12eeb7b8c18e",
+        "name": "full",
+        "propname": "full",
+        "defaultname": true,
+        "x": 490,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "6f55926d63f43fdd",
+        "type": "property in",
+        "z": "5e9029cc7f2732a9",
+        "connection": "3ab1f2381ede1a6b",
+        "thing": "f6cfadb7-be59-4fd5-82ff-5dabfbbf2bb1",
+        "property": "6d0562ee-bfd7-487f-b3ca-177b618178a5",
+        "name": "opening_status",
+        "propname": "opening_status",
+        "defaultname": true,
+        "variableName": "opening_status",
+        "x": 280,
+        "y": 280,
+        "wires": [
+            [
+                "86f3f51a9823f35f"
+            ]
+        ]
+    },
+    {
+        "id": "e1c55a47.0f4158",
+        "type": "ui_group",
+        "name": "Curtain",
+        "tab": "e2a21c3d.b81b6",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "3ab1f2381ede1a6b",
+        "type": "arduino-connection",
+        "applicationname": "tc"
+    },
+    {
+        "id": "e2a21c3d.b81b6",
+        "type": "ui_tab",
+        "name": "Appliance",
+        "icon": "dashboard",
+        "order": 3,
+        "disabled": false,
+        "hidden": false
+    }
+]

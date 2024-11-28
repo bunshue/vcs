@@ -1,6 +1,3 @@
-# -*- coding: utf-8 -*-
-from __future__ import print_function, division
-
 import time
 import codecs
 import locale
@@ -220,17 +217,13 @@ def train_and_sample(minibatch_iterations, restore):
         print(u'sample: \n{}'.format(sample))
 
 
-def main():
-    total_iterations = 500
-    print('\n\n\nTrain for {}'.format(500))
+total_iterations = 500
+print('\n\n\nTrain for {}'.format(500))
+print('Total iters: {}'.format(total_iterations))
+train_and_sample(500, restore=False)
+for i in [500, 1000, 3000, 5000, 10000, 30000, 50000, 100000, 300000]:
+    total_iterations += i
+    print('\n\n\nTrain for {}'.format(i))
     print('Total iters: {}'.format(total_iterations))
-    train_and_sample(500, restore=False)
-    for i in [500, 1000, 3000, 5000, 10000, 30000, 50000, 100000, 300000]:
-        total_iterations += i
-        print('\n\n\nTrain for {}'.format(i))
-        print('Total iters: {}'.format(total_iterations))
-        train_and_sample(i, restore=True)
+    train_and_sample(i, restore=True)
 
-
-if __name__ == "__main__":
-    main()

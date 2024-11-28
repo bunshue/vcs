@@ -39,40 +39,6 @@ import sklearn.linear_model
 from sklearn import datasets
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
 
-# 載入迴歸常見的評估指標
-from sklearn.metrics import mean_squared_error  # 均方誤差 Mean Squared Error (MSE)
-from sklearn.metrics import mean_absolute_error  # 平均絕對誤差 Mean Absolute Error (MAE)
-from sklearn.metrics import r2_score  # R-Squared擬合度
-from sklearn.metrics import accuracy_score  # 沒用到
-
-print("------------------------------------------------------------")  # 60個
-
-# 迴歸效果評估
-def evaluate_result(y_test, y_pred):
-    print("真實資料(y_test) :", y_test)
-    print("預測資料(y_pred) :", y_pred)
-
-    print("計算 真實測試資料(y_test) 和 預測資料(y_pred)的 MSE")
-    mse = np.sum((y_test - y_pred) ** 2) / len(y_test)
-    print("MSE =", mse)
-
-    # 平均絕對誤差 Mean Absolute Error (MAE)代表平均誤差，公式為所有實際值及預測值相減的絕對值平均。
-    cc = mean_absolute_error(y_test, y_pred)
-    print("MAE : Mean Absolute Error :", cc)
-
-    # 均方誤差 Mean Squared Error (MSE)比起MSE可以拉開誤差差距，算是蠻常用的指標，公式所有實際值及預測值相減的平方的平均
-    mse = mean_squared_error(y_test, y_pred)
-    print("MSE : Mean Squared Error :", mse)
-
-    # Root Mean Squared Error (RMSE)代表MSE的平方根。比起MSE更為常用，因為更容易解釋y。
-    cc = np.sqrt(mean_squared_error(y_test, y_pred))
-    print("RMS : Root Mean Squared Error :", cc)
-
-    print("計算 真實測試資料(y_test) 和 預測資料(y_pred) 的 決定係數r2 r2_score")
-    r2 = r2_score(y_test, y_pred)
-    print(f"決定係數R2 = {r2:.4f}")
-
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 

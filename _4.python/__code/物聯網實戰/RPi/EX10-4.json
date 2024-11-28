@@ -1,0 +1,380 @@
+[
+    {
+        "id": "b79ca7fe821b32b7",
+        "type": "tab",
+        "label": "EX 10-4 (ESP8266)",
+        "disabled": true,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "4683e2e727daec99",
+        "type": "function",
+        "z": "b79ca7fe821b32b7",
+        "name": "Weekday Coffee",
+        "func": "const weekday = new Date().getDay();\nconst coffee = msg.payload;\nflow.set(\"coffee1\", \"0\");\nif (weekday >= 1 && weekday <= 5) {\n    if (coffee == \"on\") flow.set(\"coffee1\", \"1\");\n    else flow.set(\"coffee1\", \"0\");\n}\nmsg.payload = flow.get(\"coffee1\");\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 351,
+        "y": 145,
+        "wires": [
+            [
+                "8fdf87fc0a3158f7"
+            ]
+        ]
+    },
+    {
+        "id": "fb5e279842334e19",
+        "type": "function",
+        "z": "b79ca7fe821b32b7",
+        "name": "Weekend Coffee",
+        "func": "const weekday = new Date().getDay();\nconst coffee = msg.payload;\nflow.set(\"coffee2\", \"0\");\nif (weekday === 0 || weekday === 6) {\n    if (coffee == \"on\") flow.set(\"coffee2\", \"1\");\n    else flow.set(\"coffee2\", \"0\");\n}\nmsg.payload = flow.get(\"coffee2\");\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 351,
+        "y": 197,
+        "wires": [
+            [
+                "8fdf87fc0a3158f7"
+            ]
+        ]
+    },
+    {
+        "id": "8fdf87fc0a3158f7",
+        "type": "function",
+        "z": "b79ca7fe821b32b7",
+        "name": "Coffee Command for Arduino",
+        "func": "const c1 = flow.get(\"coffee1\");\nconst c2 = flow.get(\"coffee2\");\nconst c3 = flow.get(\"manual\");\nif (c3 == true) {\n    msg.payload = true;\n} else {\n    if (c1 == \"1\" || c2 == \"1\") {\n        msg.payload = \"1\";\n    } else msg.payload = false;\n}\nif (msg.payload == true) {\n    flow.set(\"message\", \"Coffee is ON\");\n} else flow.set(\"message\", \"Coffee is OFF\");\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 600,
+        "y": 180,
+        "wires": [
+            [
+                "b27c1187f4e8b670",
+                "194f678a2553dde9"
+            ]
+        ]
+    },
+    {
+        "id": "0d591a05b89bb669",
+        "type": "ui_switch",
+        "z": "b79ca7fe821b32b7",
+        "name": "Manually Start",
+        "label": "TURN ON",
+        "tooltip": "",
+        "group": "392fa24a.cd26fe",
+        "order": 1,
+        "width": "0",
+        "height": "0",
+        "passthru": true,
+        "decouple": "false",
+        "topic": "appliance/coffeemaker",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "x": 107,
+        "y": 57,
+        "wires": [
+            [
+                "3540342001f9613d"
+            ]
+        ]
+    },
+    {
+        "id": "3540342001f9613d",
+        "type": "function",
+        "z": "b79ca7fe821b32b7",
+        "name": "Manual Operation",
+        "func": "const manual = msg.payload;\nif ( manual === true) {\n    flow.set('manual', true);\n} else flow.set('manual', false);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 337,
+        "y": 57,
+        "wires": [
+            [
+                "8fdf87fc0a3158f7"
+            ]
+        ]
+    },
+    {
+        "id": "79d223801f82ee18",
+        "type": "ui_text",
+        "z": "b79ca7fe821b32b7",
+        "group": "392fa24a.cd26fe",
+        "order": 6,
+        "width": 0,
+        "height": 0,
+        "name": "Coffee Maker Status",
+        "label": "STATUS>>",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 600,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "07ca504f46361026",
+        "type": "comment",
+        "z": "b79ca7fe821b32b7",
+        "name": "Manually Start",
+        "info": "",
+        "x": 87,
+        "y": 26,
+        "wires": []
+    },
+    {
+        "id": "ab1fb73f8818c033",
+        "type": "comment",
+        "z": "b79ca7fe821b32b7",
+        "name": "Auto Start",
+        "info": "",
+        "x": 67,
+        "y": 104,
+        "wires": []
+    },
+    {
+        "id": "5daa176f59d1727d",
+        "type": "comment",
+        "z": "b79ca7fe821b32b7",
+        "name": "Response",
+        "info": "",
+        "x": 67,
+        "y": 254,
+        "wires": []
+    },
+    {
+        "id": "b27c1187f4e8b670",
+        "type": "function",
+        "z": "b79ca7fe821b32b7",
+        "name": "Coffee Status",
+        "func": "msg.payload = flow.get(\"message\");\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 360,
+        "y": 260,
+        "wires": [
+            [
+                "79d223801f82ee18"
+            ]
+        ]
+    },
+    {
+        "id": "0a107ea263372766",
+        "type": "function",
+        "z": "b79ca7fe821b32b7",
+        "name": "Today",
+        "func": "const time = new Date().toLocaleDateString();\nmsg.payload = time;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 298,
+        "y": 356,
+        "wires": [
+            [
+                "c69d0237069de544"
+            ]
+        ]
+    },
+    {
+        "id": "c69d0237069de544",
+        "type": "ui_text",
+        "z": "b79ca7fe821b32b7",
+        "group": "392fa24a.cd26fe",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "name": "Date",
+        "label": "Date:",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 491,
+        "y": 355,
+        "wires": []
+    },
+    {
+        "id": "8461e976665a69b0",
+        "type": "function",
+        "z": "b79ca7fe821b32b7",
+        "name": "Clock",
+        "func": "const time = new Date().toLocaleTimeString();\nmsg.payload = time;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 308,
+        "y": 403,
+        "wires": [
+            [
+                "f9293f1686dcc17c"
+            ]
+        ]
+    },
+    {
+        "id": "f9293f1686dcc17c",
+        "type": "ui_text",
+        "z": "b79ca7fe821b32b7",
+        "group": "392fa24a.cd26fe",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "name": "Time",
+        "label": "Time:",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 491,
+        "y": 402,
+        "wires": []
+    },
+    {
+        "id": "972b96c117438945",
+        "type": "inject",
+        "z": "b79ca7fe821b32b7",
+        "name": "",
+        "repeat": "1",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 108,
+        "y": 378,
+        "wires": [
+            [
+                "0a107ea263372766",
+                "8461e976665a69b0"
+            ]
+        ]
+    },
+    {
+        "id": "7c47e03e6475bf38",
+        "type": "comment",
+        "z": "b79ca7fe821b32b7",
+        "name": "Date and Time",
+        "info": "",
+        "x": 87,
+        "y": 345,
+        "wires": []
+    },
+    {
+        "id": "f7f1547a6a8baea2",
+        "type": "timerswitch",
+        "z": "b79ca7fe821b32b7",
+        "name": "Coffee Time 1",
+        "ontopic": "appliance/coffeemaker",
+        "offtopic": "appliance/coffeemaker",
+        "onpayload": "on",
+        "offpayload": "off",
+        "disabled": false,
+        "schedules": [
+            {
+                "on_h": "06",
+                "on_m": "30",
+                "on_s": "00",
+                "off_h": "07",
+                "off_m": "00",
+                "off_s": "00",
+                "valid": true
+            }
+        ],
+        "x": 96,
+        "y": 145,
+        "wires": [
+            [
+                "4683e2e727daec99"
+            ]
+        ]
+    },
+    {
+        "id": "5867c34cb107ff62",
+        "type": "timerswitch",
+        "z": "b79ca7fe821b32b7",
+        "name": "Coffee Time 2",
+        "ontopic": "appliance/coffeemaker",
+        "offtopic": "appliance/coffeemaker",
+        "onpayload": "on",
+        "offpayload": "off",
+        "disabled": false,
+        "schedules": [
+            {
+                "on_h": "08",
+                "on_m": "30",
+                "on_s": "00",
+                "off_h": "09",
+                "off_m": "00",
+                "off_s": "00",
+                "valid": true
+            }
+        ],
+        "x": 96,
+        "y": 197,
+        "wires": [
+            [
+                "fb5e279842334e19"
+            ]
+        ]
+    },
+    {
+        "id": "194f678a2553dde9",
+        "type": "property out",
+        "z": "b79ca7fe821b32b7",
+        "connection": "b491c3f76a465911",
+        "thing": "db81ed08-dba5-485d-8f3d-5ffe178c767b",
+        "property": "5c10119f-8561-4db5-a181-5785dd841b5e",
+        "name": "sw_coffee",
+        "propname": "sw_coffee",
+        "defaultname": true,
+        "x": 640,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "392fa24a.cd26fe",
+        "type": "ui_group",
+        "name": "Coffee Maker",
+        "tab": "e2a21c3d.b81b6",
+        "order": 3,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "b491c3f76a465911",
+        "type": "arduino-connection",
+        "applicationname": "Temp_Humi"
+    },
+    {
+        "id": "e2a21c3d.b81b6",
+        "type": "ui_tab",
+        "name": "Appliance",
+        "icon": "dashboard",
+        "order": 3,
+        "disabled": false,
+        "hidden": false
+    }
+]

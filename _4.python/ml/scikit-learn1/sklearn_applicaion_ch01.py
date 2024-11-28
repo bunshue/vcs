@@ -26,6 +26,9 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
+from sklearn import preprocessing
+
+print("------------------------------------------------------------")  # 60個
 
 """
 #【資料分析】python資料處理-類別欄位轉換基礎操作語法彙整
@@ -35,7 +38,6 @@ print("------------------------------------------------------------")  # 60個
 例如，某個欄位的取值為「男」和「女」，可以將其轉換為數值欄位，例如「0」表示男性，「1」表示女性。
 這樣可以讓機器學習模型更容易理解和處理資料。
 
-
 方法選擇重點
 Label Encoding 適用於有順序的類別數據且類別數量較少的數據
 One-Hot Encoding 適用於無順序且類別數量較少的數據
@@ -43,9 +45,6 @@ Binary Encoding 適用於無順序且類別數量較多的數據
 Target Encoding 適用於回歸問題，類別變量與目標變量有較強的相關性
 Frequency Encoding 適用於類別數量較多且類別出現的頻率與目標變量相關性較弱的數據
 
-"""
-
-"""
 Labelencoding (標籤編碼)
 基本概念
 Label Encoding 是一種將類別變量轉換為數值變量的技術。
@@ -53,13 +52,11 @@ Label Encoding 是一種將類別變量轉換為數值變量的技術。
 例如，如果有三個類別值 "red"、"green" 和 "blue"，標籤編碼可能會將它們分別映射為 0、1 和 2。
 """
 
-from sklearn.preprocessing import LabelEncoder
-
 data = {'size': ['small', 'medium', 'large', 'medium', 'small']}
 df = pd.DataFrame(data)
 
 # 初始化標籤編碼器
-le = LabelEncoder()
+le = preprocessing.LabelEncoder()
 
 # 將 'size' 欄位進行標籤編碼
 df['size_encoded'] = le.fit_transform(df['size'])
@@ -81,8 +78,6 @@ print(df)
 因此，在處理有序類別數據時，需要確保在編碼之前已經按照正確的順序來指定標籤。
 
 """
-
-from sklearn.preprocessing import LabelEncoder
 
 # 創建一個範例數據集
 data = {'size': ['small', 'medium', 'large', 'medium', 'small']}
@@ -202,6 +197,7 @@ Binary Encoding 是將類別數據轉換為二進位數據的一種方法。
 
 """
 
+# pip install --upgrade category_encoders
 import category_encoders as ce
 
 # 創建範例數據集
@@ -483,8 +479,6 @@ k 值（即鄰居數量）的選擇對填補結果有較大影響。如果 k 值
 以確保不同特徵之間的距離具有可比性。這增加了數據預處理的複雜性。
 """
 
-
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -492,12 +486,9 @@ filename = "data/labelencoder_data.csv"
 df = pd.read_csv(filename)
 print(df)
 
-from sklearn import preprocessing
-
 label_encoder = preprocessing.LabelEncoder()
 df["Gender"] = label_encoder.fit_transform(df["Gender"])
 print(df)
-
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -533,8 +524,6 @@ titanic["SexCode"] = np.where(titanic["Sex"] == "female", 1, 0)
 print(titanic.head())
 
 print("------------------------------")  # 30個
-
-from sklearn import preprocessing
 
 label_encoder = preprocessing.LabelEncoder()
 titanic["PClass"] = label_encoder.fit_transform(titanic["PClass"])

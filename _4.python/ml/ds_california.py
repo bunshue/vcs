@@ -4,6 +4,10 @@
 用線性迴歸預測加州房價
 
 
+#加州房價
+from sklearn.datasets import fetch_california_housing
+housing = fetch_california_housing()
+
 """
 
 print("------------------------------------------------------------")  # 60個

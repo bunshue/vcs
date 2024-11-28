@@ -4944,8 +4944,6 @@ print(cc)
 
 print('------------------------------')	#30個
 
-#from __future__ import print_function
-
 print("Top terms per cluster:")
 
 order_centroids = kmean.cluster_centers_.argsort()[:, ::-1]

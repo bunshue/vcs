@@ -1,5 +1,3 @@
-from __future__ import division
-
 """
 matplotlib 範例 大全
 

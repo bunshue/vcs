@@ -1,10 +1,3 @@
-#!/usr/bin/env python
-#
-# The Python Imaging Library
-#
-
-from __future__ import print_function
-
 try:
     from tkinter import *
 except ImportError:
@@ -13,9 +6,6 @@ except ImportError:
 from PIL import Image, ImageTk
 import sys
 
-
-# --------------------------------------------------------------------
-# an image animation player
 
 class UI(Label):
 

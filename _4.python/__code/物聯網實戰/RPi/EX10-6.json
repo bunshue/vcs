@@ -1,0 +1,254 @@
+[
+    {
+        "id": "1cf8c7db9a1f26de",
+        "type": "tab",
+        "label": "EX 10-6",
+        "disabled": true,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "fbb692ef186d08c7",
+        "type": "ui_gauge",
+        "z": "1cf8c7db9a1f26de",
+        "name": "",
+        "group": "92671481e9e2884a",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Illuminance Meter",
+        "label": "%",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 370,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "96f952d305ca4fcd",
+        "type": "function",
+        "z": "1cf8c7db9a1f26de",
+        "name": "Shutter Status",
+        "func": "const opening = msg.payload;\nmsg.payload = \"Shutter \" + opening + \" percent open\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 260,
+        "y": 360,
+        "wires": [
+            [
+                "5349b1173ce65cc2"
+            ]
+        ]
+    },
+    {
+        "id": "5349b1173ce65cc2",
+        "type": "ui_text",
+        "z": "1cf8c7db9a1f26de",
+        "group": "92671481e9e2884a",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "name": "Shutter Opening",
+        "label": "STATUS>>",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 440,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "66b88cd0edc9a8a5",
+        "type": "ui_switch",
+        "z": "1cf8c7db9a1f26de",
+        "name": "",
+        "label": "Manual Operation",
+        "tooltip": "",
+        "group": "92671481e9e2884a",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 150,
+        "y": 100,
+        "wires": [
+            [
+                "d40eacc71e71cfe1"
+            ]
+        ]
+    },
+    {
+        "id": "69f0cf65b364e746",
+        "type": "ui_slider",
+        "z": "1cf8c7db9a1f26de",
+        "name": "",
+        "label": "Set Opening",
+        "tooltip": "",
+        "group": "92671481e9e2884a",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "outs": "all",
+        "topic": "topic",
+        "topicType": "msg",
+        "min": 0,
+        "max": "100",
+        "step": 1,
+        "className": "",
+        "x": 130,
+        "y": 160,
+        "wires": [
+            [
+                "1f4a5683e76fe12b"
+            ]
+        ]
+    },
+    {
+        "id": "eba03fb24b5edaca",
+        "type": "comment",
+        "z": "1cf8c7db9a1f26de",
+        "name": "Shutter Open Command",
+        "info": "",
+        "x": 170,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "59a921094f0842f3",
+        "type": "comment",
+        "z": "1cf8c7db9a1f26de",
+        "name": "Illuminancd Data",
+        "info": "",
+        "x": 140,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "8f389c7eafcbc112",
+        "type": "comment",
+        "z": "1cf8c7db9a1f26de",
+        "name": "Opening Data",
+        "info": "",
+        "x": 130,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "f88fdc5d1cb9182f",
+        "type": "property in",
+        "z": "1cf8c7db9a1f26de",
+        "connection": "b491c3f76a465911",
+        "thing": "7f764f78-264f-45bc-9f69-e857825b47b1",
+        "property": "b21f47a3-bd3d-4bf6-8f97-28b180858070",
+        "name": "illuminance",
+        "propname": "illuminance",
+        "defaultname": true,
+        "variableName": "illuminance",
+        "x": 120,
+        "y": 260,
+        "wires": [
+            [
+                "fbb692ef186d08c7"
+            ]
+        ]
+    },
+    {
+        "id": "800b4fd71eb534a2",
+        "type": "property in",
+        "z": "1cf8c7db9a1f26de",
+        "connection": "b491c3f76a465911",
+        "thing": "7f764f78-264f-45bc-9f69-e857825b47b1",
+        "property": "fac60774-b11e-4dc4-9c2f-c2f2e1287576",
+        "name": "opening",
+        "propname": "opening",
+        "defaultname": true,
+        "variableName": "opening",
+        "x": 110,
+        "y": 360,
+        "wires": [
+            [
+                "96f952d305ca4fcd"
+            ]
+        ]
+    },
+    {
+        "id": "d40eacc71e71cfe1",
+        "type": "property out",
+        "z": "1cf8c7db9a1f26de",
+        "connection": "b491c3f76a465911",
+        "thing": "7f764f78-264f-45bc-9f69-e857825b47b1",
+        "property": "873b2e42-5af2-4485-8812-c5bc5391685d",
+        "name": "manually",
+        "propname": "manually",
+        "defaultname": true,
+        "x": 380,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "1f4a5683e76fe12b",
+        "type": "property out",
+        "z": "1cf8c7db9a1f26de",
+        "connection": "b491c3f76a465911",
+        "thing": "7f764f78-264f-45bc-9f69-e857825b47b1",
+        "property": "dd62703a-d457-448c-a7b3-111704ec9f58",
+        "name": "opening_demand",
+        "propname": "opening_demand",
+        "defaultname": true,
+        "x": 350,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "92671481e9e2884a",
+        "type": "ui_group",
+        "name": "Customized UI",
+        "tab": "315e1cd265db862c",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "b491c3f76a465911",
+        "type": "arduino-connection",
+        "applicationname": "Temp_Humi"
+    },
+    {
+        "id": "315e1cd265db862c",
+        "type": "ui_tab",
+        "name": "Customized UI",
+        "icon": "assignment",
+        "disabled": false,
+        "hidden": false
+    }
+]

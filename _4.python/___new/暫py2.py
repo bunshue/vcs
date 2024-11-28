@@ -34,33 +34,13 @@
 
 
 
+在 python2.x 中，使用 python3.x 的寫法:
 
-
-python如何像C/vcs一樣
-可以知道目前程式跑到第幾行?
-
-
-
-是何用意?
-#from __future__ import print_function
-
-
-
-
-""" 加州房價
-from sklearn.datasets import fetch_california_housing
-housing = fetch_california_housing()
-
-
-Ames房價 愛俄華州的一個城市
-from sklearn.datasets import fetch_openml
-housing = fetch_openml(name="house_prices", as_frame=True)
-
-"""
-
-
-
-
+from __future__ import print_function
+from __future__ import division
+from __future__ import with_statement
+from __future__ import absolute_import
+from __future__ import unicode_literals
 
     有监督学习
         数据预处理
@@ -74,8 +54,6 @@ housing = fetch_openml(name="house_prices", as_frame=True)
     无监督学习
         K-均值聚类
         层次聚类
-
-
 
 
 特徵資料（花萼長、寬等等）
