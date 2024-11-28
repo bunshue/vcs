@@ -33,8 +33,8 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
+from common1 import *
 from sklearn import linear_model
-
 import sklearn.linear_model
 from sklearn import datasets
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
@@ -46,12 +46,6 @@ from sklearn.metrics import r2_score  # R-Squared擬合度
 from sklearn.metrics import accuracy_score  # 沒用到
 
 print("------------------------------------------------------------")  # 60個
-
-
-def show():
-    # plt.show()
-    pass
-
 
 # 迴歸效果評估
 def evaluate_result(y_test, y_pred):

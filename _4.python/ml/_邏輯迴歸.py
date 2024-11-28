@@ -26,6 +26,7 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
+from common1 import *
 import sklearn.linear_model
 from sklearn import datasets
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
@@ -36,7 +37,7 @@ from sklearn.metrics import confusion_matrix
 from sklearn.preprocessing import StandardScaler
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 N = 30
 group0 = np.random.normal(-1, 1, size=N)
 group1 = np.random.normal(3, 1, size=N)
@@ -316,13 +317,11 @@ print(theta)
 
 print("結果")
 print(accu_history)
-
+'''
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-df = pd.read_csv(
-    "C:/_git/vcs/_4.python/__code/Python-PM2.5-DataAnalyzing-master/data/200811-201811d.csv"
-)
+df = pd.read_csv("data/200811-201811d.csv")
 cc = df.head()
 print(cc)
 
@@ -790,6 +789,8 @@ print(cc)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
+from sklearn.datasets import make_blobs  # 集群資料集
 
 N = 500
 print("產生", N, "筆資料 2維 2群")

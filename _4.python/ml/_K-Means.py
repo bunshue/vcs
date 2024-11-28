@@ -38,14 +38,9 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
+from common1 import *
 from sklearn import datasets
 from sklearn.cluster import KMeans  # 聚類方法, K-平均演算法
-
-
-def show():
-    # plt.show()
-    pass
-
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -742,6 +737,123 @@ plt.scatter(
 plt.title("無監督學習", fontsize=16)
 
 show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+# 01-kmeans-Mat.py
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+X= np.array([[1,1],[1.1,1.1],[1.2,1.2],
+   [2,2], [2.1,2.1], [2.2,2.2]])
+y=[1,1,1,
+   0,0,0]
+
+plt.axis([0, 3, 0, 3])
+plt.plot(X[:3,0], X[:3,1], 'yx' )
+plt.plot(X[3:,0], X[3:,1], 'g.' )
+plt.ylabel('H cm')
+plt.xlabel('W cm')
+plt.legend(('A','B'), loc='upper right')
+plt.show()
+
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+# 02-kmeans-Lemon.py
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+from sklearn.model_selection import train_test_split
+from sklearn.cluster import KMeans
+from sklearn import metrics
+
+X = np.array([[1,1],[1.1,1.1],[1.2,1.2],
+              [2,2], [2.1,2.1], [2.2,2.2]])
+y = [1, 1, 1, 0, 0, 0]
+kmeans = KMeans(n_clusters=2, random_state=0).fit(X)
+print("集群中心的坐標:",kmeans.cluster_centers_)
+print("預測:",kmeans.predict(X))
+print("實際:",y)
+print("預測[1, 1],[2.3,2.1]:",kmeans.predict([[1, 1],[2.3,2.1]]))
+
+plt.axis([0, 3, 0, 3])
+plt.plot(X[:3,0], X[:3,1], 'yx' )
+plt.plot(X[3:,0], X[3:,1], 'g.' )
+plt.plot(kmeans.cluster_centers_[:,0], kmeans.cluster_centers_[:,1], 'ro')
+plt.xticks(())
+plt.yticks(())
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+# 03-Iris-kmeans.py
+
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn import datasets
+from sklearn.model_selection import train_test_split
+from sklearn.cluster import KMeans
+from sklearn import metrics
+
+# Load the diabetes dataset
+iris = datasets.load_iris()
+
+iris_X_train , iris_X_test , iris_y_train , iris_y_test = train_test_split(iris.data,iris.target,test_size=0.2)
+
+# KMeans 演算法
+kmeans  = KMeans(n_clusters = 3)
+kmeans_fit =kmeans.fit(iris_X_train)
+
+print("實際",iris_y_train)
+print("預測",kmeans_fit.labels_)
+#調整標籤的數字
+iris_y_train[iris_y_train==1]=11
+iris_y_train[iris_y_train==0]=1
+iris_y_train[iris_y_train==11]=0
+print("調整",iris_y_train)
+
+score = metrics.accuracy_score(iris_y_train,kmeans.predict(iris_X_train))
+print('準確率:{0:f}'.format(score))
+
+print("------------------------------------------------------------")  # 60個
+
+# 04-Iris-kmeans-Slipt.py
+
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn import datasets
+from sklearn.model_selection import train_test_split
+from sklearn.cluster import KMeans
+from sklearn import metrics
+
+# Load the diabetes dataset
+iris = datasets.load_iris()
+
+iris_X_train , iris_X_test , iris_y_train , iris_y_test = train_test_split(iris.data,iris.target,test_size=0.2)
+
+# KMeans 演算法
+kmeans  = KMeans(n_clusters = 3)
+kmeans.fit(iris_X_train)
+y_predict=kmeans.predict(iris_X_train)
+
+
+x1=iris_X_train[:, 0]
+y1=iris_X_train[:, 1]
+plt.scatter(x1,y1, c=y_predict, cmap='viridis')
+
+centers = kmeans.cluster_centers_
+plt.scatter(centers[:, 0], centers[:, 1], c='black', s=200, alpha=0.5);
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

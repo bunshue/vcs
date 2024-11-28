@@ -1,5 +1,6 @@
 """
 
+
 """
 
 print("------------------------------------------------------------")  # 60個
@@ -24,67 +25,71 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
+import scipy
 import pylab as pl
 
 print("------------------------------------------------------------")  # 60個
 
 print("np.fft 01")
 
-from scipy import signal
-
 np.set_printoptions(precision=3, linewidth=120, suppress=False)
 
 #頻域訊號處理
 #FFT
 
-x = np.random.rand(8)
-x = np.arange(10)
-#x = np.ones(8)
-xf = np.fft.fft(x)
-ixf = np.fft.ifft(xf)
+X = np.random.rand(8)
+X = np.arange(10)
+#X = np.ones(8)
 
-print("x :", x)
-print("xf = fft(x) :", xf)
-print("DC =", xf[0].real)
-print("ixf = ifft(xf) :", ixf)
+X_FFT = np.fft.fft(X)
 
-plt.scatter(x, x, c='g', s = 200)
-plt.scatter(xf.real, xf.imag, c='r', s = 200)
+X_FFT_IFFT = np.fft.ifft(X_FFT)
+
+print("X :", X)
+print("X_FFT = fft(X) :", X_FFT)
+print("DC =", X_FFT[0].real)
+
+print("X_FFT_IFFT = ifft(X_FFT) :", X_FFT_IFFT)
+
+plt.scatter(X, X, c='g', s = 200, label="原資料")
+plt.scatter(X_FFT.real, X_FFT.imag, c='r', s = 200, label="FFT")
+plt.legend()
+plt.grid()
 plt.show()
 
-x = np.ones(8)
-np.fft.fft(x)/len(x) # 為了計算各個成分的能量，需要將FFT的結果除以FFT的長度
+X = np.ones(8)
+np.fft.fft(X)/len(X) # 為了計算各個成分的能量，需要將FFT的結果除以FFT的長度
 
 #array([ 1.+0.j,  0.+0.j,  0.+0.j,  0.+0.j,  0.+0.j,  0.+0.j,  0.+0.j,  0.+0.j])
 
-x = np.arange(0, 2*np.pi, 2*np.pi/8)
-y = np.sin(x)
-tmp = np.fft.fft(y)/len(y)
+X = np.arange(0, 2*np.pi, 2*np.pi/8)
+Y = np.sin(X)
+tmp = np.fft.fft(Y)/len(Y)
 print(np.array_str(tmp, suppress_small=True))
 
 #[ 0.+0.j  -0.-0.5j  0.-0.j   0.-0.j   0.+0.j   0.-0.j   0.+0.j   0.+0.5j]
 
-tmp = np.fft.fft(np.cos(x))/len(x)
+tmp = np.fft.fft(np.cos(X))/len(X)
 print(np.array_str(tmp, suppress_small=True))
 
 #[-0.0+0.j  0.5-0.j  0.0+0.j  0.0+0.j  0.0+0.j -0.0+0.j  0.0+0.j  0.5-0.j]
 
-tmp = np.fft.fft(2*np.sin(2*x))/len(x)
+tmp = np.fft.fft(2*np.sin(2*X))/len(X)
 print(np.array_str(tmp, suppress_small=True))
-tmp = np.fft.fft(0.8*np.cos(2*x))/len(x)
+tmp = np.fft.fft(0.8*np.cos(2*X))/len(X)
 print(np.array_str(tmp, suppress_small=True))
 
 """
 [ 0.+0.j  0.+0.j -0.-1.j  0.-0.j  0.+0.j  0.+0.j -0.+1.j  0.-0.j]
 [-0.0+0.j -0.0+0.j  0.4-0.j  0.0-0.j  0.0+0.j  0.0-0.j  0.4+0.j -0.0+0.j]
 """
-x = np.arange(0, 2*np.pi, 2*np.pi/128)
-y = 0.3*np.cos(x) + 0.5*np.cos(2*x+np.pi/4) + 0.8*np.cos(3*x-np.pi/3)
-yf = np.fft.fft(y)/len(y)
-print(np.array_str(yf[:4], suppress_small=True))
-print(np.abs(yf[1]), np.rad2deg(np.angle(yf[1]))) # 周期為128取樣點的余弦波的振幅和相位
-print(np.abs(yf[2]), np.rad2deg(np.angle(yf[2]))) # 周期為64取樣點的余弦波的振幅和相位
-print(np.abs(yf[3]), np.rad2deg(np.angle(yf[3]))) # 周期為42.667取樣點的余弦波的振幅和相位
+X = np.arange(0, 2*np.pi, 2*np.pi/128)
+Y = 0.3*np.cos(X) + 0.5*np.cos(2*X+np.pi/4) + 0.8*np.cos(3*X-np.pi/3)
+Y_FFT = np.fft.fft(Y)/len(Y)
+print(np.array_str(Y_FFT[:4], suppress_small=True))
+print(np.abs(Y_FFT[1]), np.rad2deg(np.angle(Y_FFT[1]))) # 周期為128取樣點的余弦波的振幅和相位
+print(np.abs(Y_FFT[2]), np.rad2deg(np.angle(Y_FFT[2]))) # 周期為64取樣點的余弦波的振幅和相位
+print(np.abs(Y_FFT[3]), np.rad2deg(np.angle(Y_FFT[3]))) # 周期為42.667取樣點的余弦波的振幅和相位
 
 """
 [ 0.000+0.j     0.150+0.j     0.177+0.177j  0.200-0.346j]
@@ -92,11 +97,11 @@ print(np.abs(yf[3]), np.rad2deg(np.angle(yf[3]))) # 周期為42.667取樣點的�
 0.25 45.0
 0.4 -60.0
 """
-x1 = np.random.random(4096)
-x2 = np.random.random(4093)
+X1 = np.random.random(4096)
+X2 = np.random.random(4093)
 
-#%timeit np.fft.fft(x1)
-#%timeit np.fft.fft(x2)
+#%timeit np.fft.fft(X1)
+#%timeit np.fft.fft(X2)
 
 #10000 loops, best of 3: 183 μs per loop
 #10 loops, best of 3: 69.6 ms per loop
@@ -177,19 +182,14 @@ print("------------------------------------------------------------")  # 60個
 
 print("np.fft 04 觀察訊號的頻譜")
 
-# 156.25Hz和234.375Hz的波形（上）和頻譜（下）
-sampling_rate, fft_size = 8000, 512      #❶
-t = np.arange(0, 1.0, 1.0/sampling_rate) #❷
-x = np.sin(2*np.pi*156.25*t)  + 2*np.sin(2*np.pi*234.375*t) #❸
-
 def show_fft(x):
-    xs = x[:fft_size]
-    xf = np.fft.rfft(xs)/fft_size #❹
+    XS = x[:fft_size]
+    xf = np.fft.rfft(XS)/fft_size #❹
     freqs = np.linspace(0, sampling_rate/2, fft_size//2+1) #❺
     xfp = 20*np.log10(np.clip(np.abs(xf), 1e-20, 1e100)) #❻
     pl.figure(figsize=(8,4))
     pl.subplot(211)
-    pl.plot(t[:fft_size], xs)
+    pl.plot(T[:fft_size], XS)
     pl.xlabel(u"時間(秒)")
     pl.subplot(212)
     pl.plot(freqs, xfp)
@@ -197,8 +197,13 @@ def show_fft(x):
     pl.subplots_adjust(hspace=0.4)
     print(xfp[[10, 15]])
     
-show_fft(x)
 
+# 156.25Hz和234.375Hz的波形（上）和頻譜（下）
+sampling_rate, fft_size = 8000, 512      #❶
+T = np.arange(0, 1.0, 1.0/sampling_rate) #❷
+X = np.sin(2*np.pi*156.25*T)  + 2*np.sin(2*np.pi*234.375*T) #❸
+
+show_fft(X)
 plt.show()
 
 #[ -6.021e+00  -9.643e-16]
@@ -209,9 +214,9 @@ for i in [0, 1, fft_size//2-1, fft_size//2, fft_size//2+1, fft_size-2, fft_size-
 
 
 # 非完整周期（200Hz和300Hz）的正弦波經由FFT變換之後出現頻譜洩漏
-x = np.sin(2*np.pi*200*t)  + 2*np.sin(2*np.pi*300*t)
-show_fft(x)
+X = np.sin(2*np.pi*200*T)  + 2*np.sin(2*np.pi*300*T)
 
+show_fft(X)
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
@@ -220,9 +225,9 @@ print("np.fft 05")
 
 # 50Hz正弦波的512點FFT所計算的頻譜的實際波形
 pl.figure(figsize=(6, 2))
-t = np.arange(0, 1.0, 1.0/8000)
-x = np.sin(2*np.pi*50*t)[:512]
-pl.plot(np.hstack([x, x, x]));
+T = np.arange(0, 1.0, 1.0/8000)
+X = np.sin(2*np.pi*50*T)[:512]
+pl.plot(np.hstack([X, X, X]));
 
 plt.show()
 
@@ -239,20 +244,19 @@ pip install librosa(==0.10.1)
 """
 
 #Hann窗函數
-from scipy import signal
 
 pl.figure(figsize=(6, 2))
-pl.plot(signal.windows.hann(512))
+pl.plot(scipy.signal.windows.hann(512))
 plt.show()
 
-print(signal.windows.hann(8))
-print(signal.windows.hann(8, sym=0))
+print(scipy.signal.windows.hann(8))
+print(scipy.signal.windows.hann(8, sym=0))
 
 # 加Hann窗的50Hz正弦波的512點FFT所計算的實際波形
 pl.figure(figsize=(6, 2))
-t = np.arange(0, 1.0, 1.0/8000)
-x = np.sin(2*np.pi*50*t)[:512] * signal.windows.hann(512, sym=0)
-pl.plot(np.hstack([x, x, x]));
+T = np.arange(0, 1.0, 1.0/8000)
+X = np.sin(2*np.pi*50*T)[:512] * scipy.signal.windows.hann(512, sym=0)
+pl.plot(np.hstack([X, X, X]));
 
 plt.show()
 
@@ -261,14 +265,14 @@ print("------------------------------")	#30個
 # 加Hann窗前後的頻譜，Hann窗能降低頻譜洩漏
 
 sampling_rate, fft_size = 8000, 512      #❶
-t = np.arange(0, 1.0, 1.0/sampling_rate)
-x = np.sin(2*np.pi*200*t)  + 2*np.sin(2*np.pi*300*t)
+T = np.arange(0, 1.0, 1.0/sampling_rate)
+X = np.sin(2*np.pi*200*T)  + 2*np.sin(2*np.pi*300*T)
 
-xs = x[:fft_size] 
-ys = xs * signal.windows.hann(fft_size, sym=0)
+XS = X[:fft_size] 
+YS = XS * scipy.signal.windows.hann(fft_size, sym=0)
 
-xf = np.fft.rfft(xs)/fft_size
-yf = np.fft.rfft(ys)/fft_size
+xf = np.fft.rfft(XS)/fft_size
+yf = np.fft.rfft(YS)/fft_size
 
 freqs = np.linspace(0, sampling_rate//2, fft_size//2+1)
 
@@ -288,7 +292,7 @@ a.set_ylim(-40, 0);
 
 plt.show()
 
-cc = np.mean(signal.windows.hann(512, sym=0))
+cc = np.mean(scipy.signal.windows.hann(512, sym=0))
 print(cc)
 
 print("------------------------------------------------------------")  # 60個
@@ -298,7 +302,7 @@ print("np.fft 07 頻譜平均")
 def average_fft(x, fft_size):
     n = len(x) // fft_size * fft_size
     tmp = x[:n].reshape(-1, fft_size)      #❶
-    tmp *= signal.windows.hann(fft_size, sym=0)    #❷
+    tmp *= scipy.signal.windows.hann(fft_size, sym=0)    #❷
     xf = np.abs(np.fft.rfft(tmp)/fft_size) #❸
     avgf = np.mean(xf, axis=0)
     return 20*np.log10(avgf)
@@ -319,12 +323,12 @@ print("------------------------------------------------------------")  # 60個
 
 print("np.fft 08 經由低通濾波器的白噪聲的頻譜")
 
-b, a = signal.iirdesign(1000/4000.0, 1100/4000.0, 1, 40, 0, "cheby1")
-x = np.random.randn(100000)
-y = signal.filtfilt(b, a, x)
-yf = average_fft(y, 512)
+B, A = scipy.signal.iirdesign(1000/4000.0, 1100/4000.0, 1, 40, 0, "cheby1")
+X = np.random.randn(100000)
+Y = scipy.signal.filtfilt(B, A, X)
+Y_FFT = average_fft(Y, 512)
 pl.figure(figsize=(7, 3.5))
-pl.plot(yf)
+pl.plot(Y_FFT)
 pl.xlabel(u"頻率視窗(Frequency Bin)")
 pl.ylabel(u"幅值(dB)")
 pl.xlim(0, 257)
@@ -342,7 +346,7 @@ step = fft_size/16
 time = 2
 
 t = np.arange(0, time, 1/sampling_rate)
-sweep = signal.chirp(t, f0=100, t1 = time, f1=0.8*sampling_rate/2, method="logarithmic")
+sweep = scipy.signal.chirp(t, f0=100, t1 = time, f1=0.8*sampling_rate/2, method="logarithmic")
 
 # NGpl.specgram(sweep, fft_size, sampling_rate, noverlap = 1024-step)
 pl.xlabel(u"時間(秒)")
@@ -380,7 +384,7 @@ freqs = np.fft.fftfreq(FFT_SIZE, 1.0/RATE)
 bin_width = freqs[1] - freqs[0]
 
 amp_spect1 = np.abs(spect1)
-loc, = signal.argrelmax(amp_spect1, order=3) #❶
+loc, = scipy.signal.argrelmax(amp_spect1, order=3) #❶
 mask = amp_spect1[loc] > amp_spect1.mean() * 3   #❷
 loc = loc[mask]
 peak_freqs = freqs[loc]

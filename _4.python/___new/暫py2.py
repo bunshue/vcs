@@ -1,4 +1,7 @@
 
+
+
+
 滑鼠 event 與 flag 列表
 
 當滑鼠在指定視窗中滑動進行某些行為，都會觸發一些事件，相關事件列表如下：
@@ -1063,6 +1066,82 @@ b=pygame.mixer.get_init()  #測試混音器是否初始化
  
 
 print("------------------------------------------------------------")	#60個
+
+sql
+
+CREATE TABLE 範例
+
+CREATE TABLE "Orders" 
+(
+  "Id" INTEGER PRIMARY KEY, 
+  "CustomerId" VARCHAR(8000) NULL, 
+  "EmployeesId" INTEGER NOT NULL, 
+  "orderdate" VARCHAR(8000) NULL, 
+  "RequiredDate" VARCHAR(8000) NULL, 
+  "ShippedDate" VARCHAR(8000) NULL, 
+  "ShipVia" INTEGER NULL, 
+  "Freight" DECIMAL NOT NULL, 
+  "ShipName" VARCHAR(8000) NULL, 
+  "ShipAddress" VARCHAR(8000) NULL, 
+  "ShipCity" VARCHAR(8000) NULL, 
+  "ShipRegion" VARCHAR(8000) NULL, 
+  "ShipPostalCode" VARCHAR(8000) NULL, 
+  "ShipCountry" VARCHAR(8000) NULL 
+);
+
+CREATE TABLE "Orders" 
+(
+  "Id" INTEGER PRIMARY KEY, 
+  "CustomerId" VARCHAR(8000) NULL, 
+  "EmployeesId" INTEGER NOT NULL, 
+  "orderdate" VARCHAR(8000) NULL, 
+  "RequiredDate" VARCHAR(8000) NULL, 
+  "ShippedDate" VARCHAR(8000) NULL, 
+  "ShipVia" INTEGER NULL, 
+  "Freight" DECIMAL NOT NULL, 
+  "ShipName" VARCHAR(8000) NULL, 
+  "ShipAddress" VARCHAR(8000) NULL, 
+  "ShipCity" VARCHAR(8000) NULL, 
+  "ShipRegion" VARCHAR(8000) NULL, 
+  "ShipPostalCode" VARCHAR(8000) NULL, 
+  "ShipCountry" VARCHAR(8000) NULL 
+);
+CREATE TABLE "OrderDetails" 
+(
+  "Id" VARCHAR(8000) PRIMARY KEY, 
+  "OrderId" INTEGER NOT NULL, 
+  "ProductId" INTEGER NOT NULL, 
+  "UnitPrice" DECIMAL NOT NULL, 
+  "Quantity" INTEGER NOT NULL, 
+  "Discount" DOUBLE NOT NULL 
+);
+CREATE TABLE "Customers" 
+(
+  "Id" VARCHAR(8000) PRIMARY KEY, 
+  "CompanyName" VARCHAR(8000) NULL, 
+  "ContactName" VARCHAR(8000) NULL, 
+  "ContactTitle" VARCHAR(8000) NULL, 
+  "Address" VARCHAR(8000) NULL, 
+  "City" VARCHAR(8000) NULL, 
+  "Region" VARCHAR(8000) NULL, 
+  "PostalCode" VARCHAR(8000) NULL, 
+  "Country" VARCHAR(8000) NULL, 
+  "Phone" VARCHAR(8000) NULL, 
+  "Fax" VARCHAR(8000) NULL 
+);
+
+
+print("------------------------------------------------------------")	#60個
+
+
+
+
+print("------------------------------------------------------------")	#60個
+
+
+
+print("------------------------------------------------------------")	#60個
+
 
 
 

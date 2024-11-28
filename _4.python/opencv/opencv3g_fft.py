@@ -32,24 +32,27 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-'''
-# np 傅立葉變換
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
-img = cv2.imread(filename, 0)
 
-f = np.fft.fft2(img)
-fshift = np.fft.fftshift(f)
-magnitude_spectrum = 20 * np.log(np.abs(fshift))
+print("------------------------------------------------------------")  # 60個
+
+# np 傅立葉變換
+
+X = cv2.imread(filename, 0)
+
+X_FFT = np.fft.fft2(X)
+FFT_SHIFT = np.fft.fftshift(X_FFT)
+MAGNITUDE_SPECTRUM = 20 * np.log(np.abs(FFT_SHIFT))
 
 plt.figure('傅立葉', figsize = (8, 6))
 plt.subplot(121)
 plt.title('原圖')
-plt.imshow(img, cmap = 'gray')
+plt.imshow(X, cmap = 'gray')
 
 plt.subplot(122)
 plt.title('fftshift')
-plt.imshow(magnitude_spectrum, cmap = 'gray')
+plt.imshow(MAGNITUDE_SPECTRUM, cmap = 'gray')
 
 plt.suptitle('numpy 傅立葉')
 plt.show()
@@ -58,17 +61,16 @@ print("------------------------------------------------------------")  # 60個
 
 # cv2 傅立葉變換
 
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
-img = cv2.imread(filename, 0)
+X = cv2.imread(filename, 0)
 
-dft = cv2.dft(np.float32(img), flags=cv2.DFT_COMPLEX_OUTPUT)
-dftShift = np.fft.fftshift(dft)
-result = 20 * np.log(cv2.magnitude(dftShift[:, :, 0], dftShift[:, :, 1]))
+X_DFT = cv2.dft(np.float32(X), flags=cv2.DFT_COMPLEX_OUTPUT)
+FFT_SHIFT = np.fft.fftshift(X_DFT)
+result = 20 * np.log(cv2.magnitude(FFT_SHIFT[:, :, 0], FFT_SHIFT[:, :, 1]))
 
 plt.figure("傅立葉變換", figsize=(8, 6))
 
 plt.subplot(121)
-plt.imshow(img, cmap="gray")
+plt.imshow(X, cmap="gray")
 plt.title("original")
 
 plt.subplot(122)
@@ -78,32 +80,31 @@ plt.title("result")
 plt.suptitle("傅立葉變換")
 
 plt.show()
-# print(dft)
+# print(X_DFT)
 
 print("------------------------------------------------------------")  # 60個
 
 # np 逆傅立葉
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
-img = cv2.imread(filename, 0)
+X = cv2.imread(filename, 0)
 
-f = np.fft.fft2(img)
-fshift = np.fft.fftshift(f)
-ishift = np.fft.ifftshift(fshift)
+X_FFT = np.fft.fft2(X)
+FFT_SHIFT = np.fft.fftshift(X_FFT)
+FFT_SHIFT_IFFTSHIFT = np.fft.ifftshift(FFT_SHIFT)
 
-iimg = np.fft.ifft2(ishift)
+FFT_SHIFT_IFFTSHIFT_IFFT2 = np.fft.ifft2(FFT_SHIFT_IFFTSHIFT)
 
-iimg = np.abs(iimg)
+FFT_SHIFT_IFFTSHIFT_IFFT2 = np.abs(FFT_SHIFT_IFFTSHIFT_IFFT2)
 
 plt.figure("逆傅立葉", figsize=(8, 6))
 
 plt.subplot(121)
-plt.imshow(img, cmap="gray")
-plt.title("original")
+plt.imshow(X, cmap="gray")
+plt.title("X")
 
 plt.subplot(122)
-plt.imshow(iimg, cmap="gray")
-plt.title("iimg")
+plt.imshow(FFT_SHIFT_IFFTSHIFT_IFFT2, cmap="gray")
+plt.title("FFT_SHIFT_IFFTSHIFT_IFFT2")
 
 plt.suptitle("逆傅立葉")
 plt.show()
@@ -112,23 +113,22 @@ print("------------------------------------------------------------")  # 60個
 
 # cv2 逆傅立葉變換
 
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
-img = cv2.imread(filename, 0)
+X = cv2.imread(filename, 0)
 
-dft = cv2.dft(np.float32(img), flags=cv2.DFT_COMPLEX_OUTPUT)
-dftShift = np.fft.fftshift(dft)
-ishift = np.fft.ifftshift(dftShift)
-iImg = cv2.idft(ishift)
-iImg = cv2.magnitude(iImg[:, :, 0], iImg[:, :, 1])
+X_DFT = cv2.dft(np.float32(X), flags=cv2.DFT_COMPLEX_OUTPUT)
+FFT_SHIFT = np.fft.fftshift(X_DFT)
+FFT_SHIFT_IFFTSHIFT = np.fft.ifftshift(FFT_SHIFT)
+FFT_SHIFT_IFFTSHIFT_IDFT = cv2.idft(FFT_SHIFT_IFFTSHIFT)
+FFT_SHIFT_IFFTSHIFT_IDFT = cv2.magnitude(FFT_SHIFT_IFFTSHIFT_IDFT[:, :, 0], FFT_SHIFT_IFFTSHIFT_IDFT[:, :, 1])
 
 plt.figure("逆傅立葉變換", figsize=(8, 6))
 
 plt.subplot(121)
-plt.imshow(img, cmap="gray")
+plt.imshow(X, cmap="gray")
 plt.title("original")
 
 plt.subplot(122)
-plt.imshow(iImg, cmap="gray")
+plt.imshow(FFT_SHIFT_IFFTSHIFT_IDFT, cmap="gray")
 plt.title("inverse")
 
 plt.suptitle("逆傅立葉變換")
@@ -138,29 +138,28 @@ print("------------------------------------------------------------")  # 60個
 
 # 高通濾波
 
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
-img = cv2.imread(filename, 0)
+X = cv2.imread(filename, 0)
 
-f = np.fft.fft2(img)
+X_FFT = np.fft.fft2(X)
 
-fshift = np.fft.fftshift(f)
-rows, cols = img.shape
+FFT_SHIFT = np.fft.fftshift(X_FFT)
+rows, cols = X.shape
 crow, ccol = int(rows / 2), int(cols / 2)
-fshift[crow - 30 : crow + 30, ccol - 30 : ccol + 30] = 0
-ishift = np.fft.ifftshift(fshift)
+FFT_SHIFT[crow - 30 : crow + 30, ccol - 30 : ccol + 30] = 0
+FFT_SHIFT_IFFTSHIFT = np.fft.ifftshift(FFT_SHIFT)
 
-iimg = np.fft.ifft2(ishift)
-iimg = np.abs(iimg)
+FFT_SHIFT_IFFTSHIFT_IFFT2 = np.fft.ifft2(FFT_SHIFT_IFFTSHIFT)
+FFT_SHIFT_IFFTSHIFT_IFFT2 = np.abs(FFT_SHIFT_IFFTSHIFT_IFFT2)
 
 plt.figure("高通濾波", figsize=(8, 6))
 
 plt.subplot(121)
-plt.imshow(img, cmap="gray")
-plt.title("original")
+plt.imshow(X, cmap="gray")
+plt.title("X")
 
 plt.subplot(122)
-plt.imshow(iimg, cmap="gray")
-plt.title("iimg")
+plt.imshow(FFT_SHIFT_IFFTSHIFT_IFFT2, cmap="gray")
+plt.title("FFT_SHIFT_IFFTSHIFT_IFFT2")
 
 plt.suptitle("高通濾波")
 plt.show()
@@ -169,29 +168,28 @@ print("------------------------------------------------------------")  # 60個
 
 # 低通濾波
 
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
-img = cv2.imread(filename, 0)
+X = cv2.imread(filename, 0)
 
-dft = cv2.dft(np.float32(img), flags=cv2.DFT_COMPLEX_OUTPUT)
-dftShift = np.fft.fftshift(dft)
-rows, cols = img.shape
+X_DFT = cv2.dft(np.float32(X), flags=cv2.DFT_COMPLEX_OUTPUT)
+FFT_SHIFT = np.fft.fftshift(X_DFT)
+rows, cols = X.shape
 crow, ccol = int(rows / 2), int(cols / 2)
-mask = np.zeros((rows, cols, 2), np.uint8)
+MASK = np.zeros((rows, cols, 2), np.uint8)
 # 两个通道，与频谱图像匹配
-mask[crow - 30 : crow + 30, ccol - 30 : ccol + 30] = 1
-fShift = dftShift * mask
-ishift = np.fft.ifftshift(fShift)
-iImg = cv2.idft(ishift)
-iImg = cv2.magnitude(iImg[:, :, 0], iImg[:, :, 1])
+MASK[crow - 30 : crow + 30, ccol - 30 : ccol + 30] = 1
+FFT_SHIFT_MASK = FFT_SHIFT * MASK
+FFT_SHIFT_MASK_IFFTSHIFT = np.fft.ifftshift(FFT_SHIFT_MASK)
+FFT_SHIFT_MASK_IFFTSHIFT_IDFT = cv2.idft(FFT_SHIFT_MASK_IFFTSHIFT)
+FFT_SHIFT_MASK_IFFTSHIFT_IDFT = cv2.magnitude(FFT_SHIFT_MASK_IFFTSHIFT_IDFT[:, :, 0], FFT_SHIFT_MASK_IFFTSHIFT_IDFT[:, :, 1])
 
 plt.figure("低通濾波", figsize=(8, 6))
 
 plt.subplot(121)
-plt.imshow(img, cmap="gray")
-plt.title("original")
+plt.imshow(X, cmap="gray")
+plt.title("X")
 
 plt.subplot(122)
-plt.imshow(iImg, cmap="gray")
+plt.imshow(FFT_SHIFT_MASK_IFFTSHIFT_IDFT, cmap="gray")
 plt.title("result")
 
 plt.suptitle("低通濾波")
@@ -199,22 +197,22 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-print("magnitude_spectrum")
+print("MAGNITUDE_SPECTRUM")
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
-img = cv2.imread(filename, 0)
+X = cv2.imread(filename, 0)
 
-dft = cv2.dft(np.float32(img), flags=cv2.DFT_COMPLEX_OUTPUT)
-dft_shift = np.fft.fftshift(dft)
-magnitude_spectrum = 20 * np.log(cv2.magnitude(dft_shift[:, :, 0], dft_shift[:, :, 1]))
+X_DFT = cv2.dft(np.float32(X), flags=cv2.DFT_COMPLEX_OUTPUT)
 
-plt.figure("magnitude_spectrum", figsize=(8, 6))
+FFT_SHIFT = np.fft.fftshift(X_DFT)
+MAGNITUDE_SPECTRUM = 20 * np.log(cv2.magnitude(FFT_SHIFT[:, :, 0], FFT_SHIFT[:, :, 1]))
 
-plt.subplot(121), plt.imshow(img, cmap="gray")
+plt.figure("MAGNITUDE_SPECTRUM", figsize=(8, 6))
+
+plt.subplot(121), plt.imshow(X, cmap="gray")
 plt.title("原始圖像")
 
 plt.subplot(122)
-plt.imshow(magnitude_spectrum, cmap="gray")
+plt.imshow(MAGNITUDE_SPECTRUM, cmap="gray")
 plt.title("級頻譜")
 
 plt.show()
@@ -239,7 +237,6 @@ def fft2Image(src):
     return fft2
 
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
 
 # 檔案 => cv2影像
 image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
@@ -303,8 +300,6 @@ def phaseSpectrum(fft2):
     spectrum = phase / math.pi * 180
     return spectrum
 
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
 
 # 第一步：讀入圖像
 # 檔案 => cv2影像
@@ -406,8 +401,6 @@ def phaseSpectrum(fft2):
     # spectrum = phase/math.pi*180
     return phase
 
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
 
 # 檔案 => cv2影像
 image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
@@ -917,10 +910,10 @@ plt.subplot(232)
 plt.imshow(np.abs(fft2), "gray")
 plt.title("二維傅里葉變換")
 # 將圖像變換的原點移動到頻域矩形的中心，并顯示效果
-shift2center = np.fft.fftshift(fft2)
+FFT_SHIFT = np.fft.fftshift(fft2)
 
 plt.subplot(233)
-plt.imshow(np.abs(shift2center), "gray")
+plt.imshow(np.abs(FFT_SHIFT), "gray")
 plt.title("頻域矩形的中心")
 # 對傅立葉變換的結果進行對數變換，并顯示效果
 log_fft2 = np.log(1 + np.abs(fft2))
@@ -929,10 +922,10 @@ plt.subplot(235)
 plt.imshow(log_fft2, "gray")
 plt.title("傅立葉變換對數變換")
 # 對中心化后的結果進行對數變換，并顯示結果
-log_shift2center = np.log(1 + np.abs(shift2center))
+log_FFT_SHIFT = np.log(1 + np.abs(FFT_SHIFT))
 
 plt.subplot(236)
-plt.imshow(log_shift2center, "gray")
+plt.imshow(log_FFT_SHIFT, "gray")
 plt.title("中心化的對數變化")
 
 plt.show()
@@ -1009,11 +1002,11 @@ print(cc)
 # （其它）各個領域所對應的空域訊號
 
 N = 256
-img = cv2.imread("data/lena.jpg", cv2.IMREAD_GRAYSCALE)
-img = cv2.resize(img, (N, N))
-img_freq = np.fft.fft2(img)
-img_mag = np.log10(np.abs(img_freq))
-img_mag_shift = np.fft.fftshift(img_mag)
+X = cv2.imread("data/lena.jpg", cv2.IMREAD_GRAYSCALE)
+X = cv2.resize(X, (N, N))
+X_freq = np.fft.fft2(X)
+X_mag = np.log10(np.abs(X_freq))
+FFT_SHIFT = np.fft.fftshift(X_mag)
 
 rects = [
     (80, 125, 85, 130),
@@ -1031,18 +1024,18 @@ rects = [
 # %fig=(左上)用fft2()計算的頻域訊號，(中上)使用fftshift()移位之後的頻域訊號，(其它)各個領域所對應的空域訊號
 filtered_results = []
 for i, (x0, y0, x1, y1) in enumerate(rects):
-    mask = np.zeros((N, N), dtype=np.bool)
-    mask[x0 : x1 + 1, y0 : y1 + 1] = True
-    mask[N - x1 : N - x0 + 1, N - y1 : N - y0 + 1] = True
-    mask = np.fft.fftshift(mask)
-    img_freq2 = img_freq * mask
-    img_filtered = np.fft.ifft2(img_freq).real
-    filtered_results.append(img_filtered)
+    MASK = np.zeros((N, N), dtype=np.bool)
+    MASK[x0 : x1 + 1, y0 : y1 + 1] = True
+    MASK[N - x1 : N - x0 + 1, N - y1 : N - y0 + 1] = True
+    MASK = np.fft.fftshift(MASK)
+    X_freq2 = X_freq * MASK
+    X_filtered = np.fft.ifft2(X_freq).real
+    filtered_results.append(X_filtered)
 
 fig, axes = pl.subplots(2, 3, figsize=(9, 6))
 axes = axes.ravel()
-axes[0].imshow(img_mag, cmap=pl.cm.gray)
-axes[1].imshow(img_mag_shift, cmap=pl.cm.gray)
+axes[0].imshow(X_mag, cmap=pl.cm.gray)
+axes[1].imshow(FFT_SHIFT, cmap=pl.cm.gray)
 
 ax = axes[1]
 for i, (x0, y0, x1, y1) in enumerate(rects):
@@ -1068,7 +1061,7 @@ for ax in axes:
 fig.subplots_adjust(0.01, 0.01, 0.99, 0.99, 0.02, 0.02)
 
 plt.show()
-'''
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 

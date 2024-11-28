@@ -1,3 +1,5 @@
+print('建立 midi 檔案')
+
 from midiutil.MidiFile import MIDIFile
 
 # Create the MIDIFile Object
@@ -27,5 +29,5 @@ for i, pitch in enumerate(scale):
     MyMIDI.addNote(track, channel, pitch, time + i, duration, volume)
 
 # Write the MIDI file to disk
-with open("sample.mid", "wb") as output_file:
+with open("tmp_create_midi.mid", "wb") as output_file:
     MyMIDI.writeFile(output_file)

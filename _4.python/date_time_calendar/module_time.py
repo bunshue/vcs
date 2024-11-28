@@ -18,30 +18,32 @@ import time
 
 """
 print("---- 單獨使用 --------------------------------------------------------")  # 60個
-print('---- time.time() --------------------------------------------------------')	#60個
+print(
+    "---- time.time() --------------------------------------------------------"
+)  # 60個
 
-print('time.time()\t', time.time())
+print("time.time()\t", time.time())
 
-#time.time()#通常是用來作為時間戳記，可以傳回從 1970/1/1 00:00:00 算起至今的總秒數
+# time.time()#通常是用來作為時間戳記，可以傳回從 1970/1/1 00:00:00 算起至今的總秒數
 
 total_seconds = time.time()
-print('UNIX epoch 至今的時間 :', total_seconds, '秒 (百奈秒)')
+print("UNIX epoch 至今的時間 :", total_seconds, "秒 (百奈秒)")
 
 total_seconds = int(time.time())
-print('UNIX epoch 至今的時間 :', total_seconds, '秒 (整數秒)')
+print("UNIX epoch 至今的時間 :", total_seconds, "秒 (整數秒)")
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-total_seconds = time.time() # Get current time
+total_seconds = time.time()  # Get current time
 
 # Obtain the total seconds since midnight, Jan 1, 1970
 totalSeconds = int(total_seconds)
 
-# Get the current second 
-currentSecond = totalSeconds % 60 
+# Get the current second
+currentSecond = totalSeconds % 60
 
 # Obtain the total minutes
-totalMinutes = totalSeconds // 60 
+totalMinutes = totalSeconds // 60
 
 # Compute the current minute in the hour
 currentMinute = totalMinutes % 60
@@ -53,15 +55,22 @@ totalHours = totalMinutes // 60
 currentHour = totalHours % 24
 
 # Display results
-print("Current time is " + str(currentHour) + ":"
-    + str(currentMinute) + ":" + str(currentSecond) + " GMT")
+print(
+    "Current time is "
+    + str(currentHour)
+    + ":"
+    + str(currentMinute)
+    + ":"
+    + str(currentSecond)
+    + " GMT"
+)
 
-print('---- 經歷時間 ST --------------------------------------------------------')	#60個
+print("---- 經歷時間 ST --------------------------------------------------------")  # 60個
 
 print("測試兩事件所經歷的時間 ST")
 time_st = time.time()
 
-time.sleep(0.3456)  #過了一段時間
+time.sleep(0.3456)  # 過了一段時間
 
 time_sp = time.time()
 
@@ -73,121 +82,125 @@ print("經歷時間", int(time_elapsed), " 秒")
 print("經歷時間 %.2f", time_elapsed)
 print("經歷時間 %.2f 秒" % (time_elapsed))
 
-print('取整數秒')
+print("取整數秒")
 time_elapsed = int(time_sp - time_st)
 print("Test time is", time_elapsed, "seconds")
 
-print('---- time.localtime() --------------------------------------------------------')	#60個
+print(
+    "---- time.localtime() --------------------------------------------------------"
+)  # 60個
 
-#而如果要輸出此時準確的時間的話則
+# 而如果要輸出此時準確的時間的話則
 print(time.localtime())
 
-print('time.localtime()\t', time.localtime())
+print("time.localtime()\t", time.localtime())
 
 year, month, day, hour, minute, second, _, _, _ = time.localtime()
 print("{}-{}-{} {}:{}:{}".format(year, month, day, hour, minute, second))
 
-print('從 total_seconds 取得localtime時間')
-print('現在時間 轉 localtime')
+print("從 total_seconds 取得localtime時間")
+print("現在時間 轉 localtime")
 localtime = time.localtime(time.time())
-print('localtime時間 :', localtime)
+print("localtime時間 :", localtime)
 
 
-print("獲取當前時間");
+print("獲取當前時間")
 localtime = time.localtime(time.time())
 print("Local current time :", localtime)
 
-    
-print('123456秒後')
-localtime = time.localtime(time.time() + 123456)
-print('localtime時間 :', localtime)
 
-print('現在時間 轉 localtime')
-localtime = time.localtime(time.time())   #傳回時間元組
+print("123456秒後")
+localtime = time.localtime(time.time() + 123456)
+print("localtime時間 :", localtime)
+
+print("現在時間 轉 localtime")
+localtime = time.localtime(time.time())  # 傳回時間元組
 print(type(localtime))
 print(localtime)
-print('年 :', localtime[0], end = " ")
-print('月 :', localtime[1], end = " ")
-print('日 :', localtime[2], end = " ")
-print('時 :', localtime[3], end = " ")
-print('分 :', localtime[4], end = " ")
-print('秒 :', localtime[5])
+print("年 :", localtime[0], end=" ")
+print("月 :", localtime[1], end=" ")
+print("日 :", localtime[2], end=" ")
+print("時 :", localtime[3], end=" ")
+print("分 :", localtime[4], end=" ")
+print("秒 :", localtime[5])
 
 # time.localtime() #可以輸出 struct_time 的時間格式
-localtime = time.localtime() # 取得當前時間
-print('當前時間 :', localtime)  # 列出目前系統時間
-print('年 :', localtime.tm_year, end = " ")
-print('月 :', localtime.tm_mon, end = " ")
-print('日 :', localtime.tm_mday, end = " ")
-print('星 :' , localtime.tm_wday, end = " ")
-print('時 :', localtime.tm_hour, end = " ")
-print('分 :', localtime.tm_min, end = " ")
-print('秒 :', localtime.tm_sec)
-print('星期(0為星期一) :', localtime.tm_wday)
-print('今天為今年第幾天 :', localtime.tm_yday)
-print('夏令時間(0為不是，1為是) :', localtime.tm_isdst)
-
-print('------------------------------------------------------------')	#60個
-
-localtime = time.localtime()
-print(localtime)                        # 列出目前系統時間
-print("年 ", localtime.tm_year)         # 物件設定方式顯示
-print("年 ", localtime[0], end = " ")
-print("月 ", localtime[1], end = " ")
-print("日 ", localtime[2], end = " ")
-print("時 ", localtime[3], end = " ")
-print("分 ", localtime[4], end = " ")
-print("秒 ", localtime[5])
-print("星期幾   ", localtime[6], end = " ")
-print("第幾天   ", localtime[7], end = " ")
-print("夏令時間 ", localtime[8])
-
-print('------------------------------------------------------------')	#60個
-
-localtime = time.localtime()
-print("西元%d年%d月%d日%d點%d分"%(localtime[0],localtime[1],localtime[2],localtime[3],localtime[4]))
+localtime = time.localtime()  # 取得當前時間
+print("當前時間 :", localtime)  # 列出目前系統時間
+print("年 :", localtime.tm_year, end=" ")
+print("月 :", localtime.tm_mon, end=" ")
+print("日 :", localtime.tm_mday, end=" ")
+print("星 :", localtime.tm_wday, end=" ")
+print("時 :", localtime.tm_hour, end=" ")
+print("分 :", localtime.tm_min, end=" ")
+print("秒 :", localtime.tm_sec)
+print("星期(0為星期一) :", localtime.tm_wday)
+print("今天為今年第幾天 :", localtime.tm_yday)
+print("夏令時間(0為不是，1為是) :", localtime.tm_isdst)
 
 print("------------------------------------------------------------")  # 60個
 
-week = ["一","二","三","四","五","六","日"]
-dst = ["無日光節約時間","有日光節約時間"]
 localtime = time.localtime()
-show = "現在時刻:"+"\n"
-show += "民國"+str(int(localtime.tm_year)-1911)+"年"
-show += str(localtime.tm_mon)+"月"+str(localtime.tm_mday)+"日"
-show += str(localtime.tm_hour)+"時"+str(localtime.tm_min)+"分"
-show += str(localtime.tm_sec)+"秒 星期"+week[localtime.tm_wday]+"\n"
-show += "今天是今年的第"+str(localtime.tm_yday)+"天，此地"+dst[localtime.tm_isdst]
+print(localtime)  # 列出目前系統時間
+print("年 ", localtime.tm_year)  # 物件設定方式顯示
+print("年 ", localtime[0], end=" ")
+print("月 ", localtime[1], end=" ")
+print("日 ", localtime[2], end=" ")
+print("時 ", localtime[3], end=" ")
+print("分 ", localtime[4], end=" ")
+print("秒 ", localtime[5])
+print("星期幾   ", localtime[6], end=" ")
+print("第幾天   ", localtime[7], end=" ")
+print("夏令時間 ", localtime[8])
+
+print("------------------------------------------------------------")  # 60個
+
+localtime = time.localtime()
+print(
+    "西元%d年%d月%d日%d點%d分"
+    % (localtime[0], localtime[1], localtime[2], localtime[3], localtime[4])
+)
+
+print("------------------------------------------------------------")  # 60個
+
+week = ["一", "二", "三", "四", "五", "六", "日"]
+dst = ["無日光節約時間", "有日光節約時間"]
+localtime = time.localtime()
+show = "現在時刻:" + "\n"
+show += "民國" + str(int(localtime.tm_year) - 1911) + "年"
+show += str(localtime.tm_mon) + "月" + str(localtime.tm_mday) + "日"
+show += str(localtime.tm_hour) + "時" + str(localtime.tm_min) + "分"
+show += str(localtime.tm_sec) + "秒 星期" + week[localtime.tm_wday] + "\n"
+show += "今天是今年的第" + str(localtime.tm_yday) + "天，此地" + dst[localtime.tm_isdst]
 print(show)
 
 print("------------------------------------------------------------")  # 60個
 
 print("---- 其他 --------------------------------------------------------")  # 60個
 
-print('time.ctime()\t', time.ctime())
-print('time.gmtime()\t', time.gmtime())
-print('time.asctime()\t', time.asctime())
+print("time.ctime()\t", time.ctime())
+print("time.gmtime()\t", time.gmtime())
+print("time.asctime()\t", time.asctime())
 
 print(time.ctime(time.time()))
 
-print('從 total_seconds 取得GMT時間')
+print("從 total_seconds 取得GMT時間")
 gmtime = time.gmtime(total_seconds)
-print('GMT時間 :', gmtime)
+print("GMT時間 :", gmtime)
 
-#asctime() #傳回時間元組的日期時間字串
+# asctime() #傳回時間元組的日期時間字串
 formattime = time.asctime(time.localtime(total_seconds))
 print(formattime)
 
 print("---- 轉換使用 --------------------------------------------------------")  # 60個
 
-print("獲取格式化的時間");
+print("獲取格式化的時間")
 localtime = time.asctime(time.localtime(time.time()))
 print("Local current time :", localtime)
 
-#cccc轉換
+# cccc轉換
 time7 = time.ctime(time.time())
-print('time7 :', time7)
-
+print("time7 :", time7)
 
 
 print("---- 格式化使用 --------------------------------------------------------")  # 60個
@@ -200,10 +213,11 @@ def _format_time(hh, mm, ss, us):
         result += ".%06d" % us
     return result
 
+
 year = 2023
 month = 8
 day = 11
-sep = 'W'
+sep = "W"
 hour = 12
 minute = 34
 second = 56
@@ -211,8 +225,9 @@ microsecond = 123456
 s = _format_time(hour, minute, second, microsecond)
 print(s)
 
-s = ("%04d-%02d-%02d%c" % (year, month, day, sep) +
-     _format_time(hour, minute, second,microsecond))
+s = "%04d-%02d-%02d%c" % (year, month, day, sep) + _format_time(
+    hour, minute, second, microsecond
+)
 print(s)
 
 hh = 12
@@ -221,48 +236,49 @@ ss = 56
 s = "%d:%02d:%02d" % (hh, mm, ss)
 print(s)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 """
 print(time.strptime(date, '%Y-%m-%d'))
 print(time.strptime(time_, '%H:%M:%S'))
 """
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 dt = time.strftime("%a, %d %b %Y %H:%M:%S +0000", time.gmtime())
 
-print('現在時間 :', dt)
+print("現在時間 :", dt)
 
-#Sat, 07 Oct 2023 19:15:16 +0000
+# Sat, 07 Oct 2023 19:15:16 +0000
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 dt = time.strptime("30 Sep 23", "%d %b %y")
-print('time.struct_time 結構')
+print("time.struct_time 結構")
 print(dt)
-print('年 :', dt.tm_year)
-print('月 :', dt.tm_mon)
-print('日 :', dt.tm_mday)
-print('時 :', dt.tm_hour)
-print('分 :', dt.tm_min)
-print('秒 :', dt.tm_sec)
-print('星 :', dt.tm_wday)
-print('第 :', dt.tm_yday, '天')
+print("年 :", dt.tm_year)
+print("月 :", dt.tm_mon)
+print("日 :", dt.tm_mday)
+print("時 :", dt.tm_hour)
+print("分 :", dt.tm_min)
+print("秒 :", dt.tm_sec)
+print("星 :", dt.tm_wday)
+print("第 :", dt.tm_yday, "天")
 
 print("------------------------------------------------------------")  # 60個
 
 x = 1000000
 pi = 0
 time.process_time()
-for i in range(1,x+1):
-    pi += 4*((-1)**(i+1) / (2*i-1))
-    if i != 1 and i % 100000 == 0:      # 隔100000執行一次
+for i in range(1, x + 1):
+    pi += 4 * ((-1) ** (i + 1) / (2 * i - 1))
+    if i != 1 and i % 100000 == 0:  # 隔100000執行一次
         e_time = time.process_time()
         print(f"當 {i=:7d} 時 PI={pi:8.7f}, 所花時間={e_time}")
 
 print("------------------------------------------------------------")  # 60個
 
 # 數位時鐘
+
 
 class Clock(object):
     def __init__(self, hour=0, minute=0, second=0):
@@ -302,7 +318,7 @@ while True:
 
 print("------------------------------------------------------------")  # 60個
 
-print('現在時間 轉 localtime')
+print("現在時間 轉 localtime")
 localtime = time.localtime(time.time())
 print(localtime)
 print(localtime.tm_year)
@@ -339,9 +355,9 @@ expires = freshness_lifetime
 
 print("expires", time.strftime(TIME_FMT, time.gmtime(expires)))
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-#顯示系統當前時間
+# 顯示系統當前時間
 now = time.strftime("%Y-%m-%d %I:%M:%S %p", time.localtime())
 print(now)
 
@@ -398,29 +414,33 @@ if __name__ == '__main__':
 
 """
 
-print('---- time.sleep(秒) --------------------------------------------------------')	#60個
+print(
+    "---- time.sleep(秒) --------------------------------------------------------"
+)  # 60個
 
 print("每0.3456秒打印一字")
-a = 0;
+a = 0
 while a < 3:
-    a += 1;
-    print("hello " + str(a), end = '\t')
-    time.sleep(0.3456)  #過了一段時間
+    a += 1
+    print("hello " + str(a), end="\t")
+    time.sleep(0.3456)  # 過了一段時間
 print()
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
+
 
 def countdown(n):
     while n > 0:
-        print('數字 : ', n, end = '\t')
+        print("數字 : ", n, end="\t")
         n -= 1
-        time.sleep(0.3456)  #過了一段時間
+        time.sleep(0.3456)  # 過了一段時間
+
 
 print("倒數計時")
 countdown(5)
 print()
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 print("程式暫停0.2秒鐘")
 time.sleep(0.2)
@@ -428,19 +448,19 @@ print("程式繼續執行")
 
 print("------------------------------------------------------------")  # 60個
 
-print('格式化使用------------------------------------------------------------')	#60個
+print("格式化使用------------------------------------------------------------")  # 60個
 
-localtime = time.localtime()    # 取得目前的日期和時間
+localtime = time.localtime()  # 取得目前的日期和時間
 
-print(time.strftime('%Y-%m-%d %H:%M:%S', localtime))
-print(time.strftime('%Y-%m-%d 第%W週', localtime))   # 週數
-print(time.strftime('%Y-%m-%d 第%j天', localtime))   # 天數
+print(time.strftime("%Y-%m-%d %H:%M:%S", localtime))
+print(time.strftime("%Y-%m-%d 第%W週", localtime))  # 週數
+print(time.strftime("%Y-%m-%d 第%j天", localtime))  # 天數
 
-print(time.strftime('%c', localtime))      # 字串回傳
-print(time.strftime('%c %p', localtime))   # 加入AM或PM
+print(time.strftime("%c", localtime))  # 字串回傳
+print(time.strftime("%c %p", localtime))  # 加入AM或PM
 
-print(time.strftime('%x', localtime))      # 只有日期
-print(time.strftime('%X', localtime))      # 只有時間值
+print(time.strftime("%x", localtime))  # 只有日期
+print(time.strftime("%X", localtime))  # 只有時間值
 
 print("------------------------------------------------------------")  # 60個
 
@@ -460,11 +480,11 @@ log_event("User login")
 
 print("------------------------------------------------------------")  # 60個
 
-#格式化日期成2016-03-20 11:45:39形式
-print (time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
+# 格式化日期成2016-03-20 11:45:39形式
+print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
 
 # 格式化成Sat Mar 28 22:24:24 2016形式
-print (time.strftime("%a %b %d %H:%M:%S %Y", time.localtime()))
+print(time.strftime("%a %b %d %H:%M:%S %Y", time.localtime()))
 
 # 格式化為 2020-09-26 21:14:30
 print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
@@ -473,77 +493,79 @@ print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
 print(time.strftime("%a %b %d %H:%M:%S %Y", time.localtime()))
 
 localtime = time.strftime("%Y/%m/%d %A %H:%M:%S", time.localtime(time.time()))
-print('現在時間 :' + localtime)
+print("現在時間 :" + localtime)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 print(time.strftime("%Y-%m-%d %H:%M:%S %a"))
 
-timestamp = time.strftime('%Y-%m-%d %H:%M%z')
+timestamp = time.strftime("%Y-%m-%d %H:%M%z")
 print(timestamp)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-#獲取當前時間
-localtime = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
-print('當前時間 :', localtime)
+# 獲取當前時間
+localtime = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(time.time()))
+print("當前時間 :", localtime)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 print(time.strftime("%Y-%m-%d", time.localtime()))
 print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
 
 version = time.strftime("-%Y%m%d")
-print('version : ', version)
+print("version : ", version)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-filename = '-%04d-%02d-%02d' % (time.localtime()[:3]) + '.jpg'
+filename = "-%04d-%02d-%02d" % (time.localtime()[:3]) + ".jpg"
 print(filename)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-name = '%04i-%02i-%02i %02i:%02i:%02i' % (time.localtime(time.time())[:6])
+name = "%04i-%02i-%02i %02i:%02i:%02i" % (time.localtime(time.time())[:6])
 print(name)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-print('轉換使用------------------------------------------------------------')	#60個
+print("轉換使用------------------------------------------------------------")  # 60個
 
 localtime = time.asctime(time.localtime())
-print (localtime)
+print(localtime)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 print(time.localtime())
 
-field=time.localtime(time.time())#以元組資料的名稱去取得資料
-print('tm_year= ',field.tm_year)
-print('tm_mon= ',field.tm_mon)
-print('tm_mday= ',field.tm_mday)
-print('tm_hour= ',field.tm_hour)
-print('tm_min= ',field.tm_min)
-print('tm_mec= ',field.tm_sec)
-print('tm_wday= ',field.tm_wday)
-print('tm_yday= ',field.tm_yday)
-print('tm_isdst= ',field.tm_isdst)
+field = time.localtime(time.time())  # 以元組資料的名稱去取得資料
+print("tm_year= ", field.tm_year)
+print("tm_mon= ", field.tm_mon)
+print("tm_mday= ", field.tm_mday)
+print("tm_hour= ", field.tm_hour)
+print("tm_min= ", field.tm_min)
+print("tm_mec= ", field.tm_sec)
+print("tm_wday= ", field.tm_wday)
+print("tm_yday= ", field.tm_yday)
+print("tm_isdst= ", field.tm_isdst)
 
-for i in range(9):#以元組的索引值取得的資料內容
-    print(field[i], end = " ")
+for i in range(9):  # 以元組的索引值取得的資料內容
+    print(field[i], end=" ")
 
 print()
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 # 取得本地的當前的日期和時間，採struct_time型式以Tuple物件回傳
 current = time.localtime(time.time())
-print(f'當地時間：{current[0]}年 {current[1]}月',
-      f'{current[2]}日 {current[3]}時',
-      f'{current[4]}分 {current[5]}秒')
+print(
+    f"當地時間：{current[0]}年 {current[1]}月",
+    f"{current[2]}日 {current[3]}時",
+    f"{current[4]}分 {current[5]}秒",
+)
 
 # 取得目當前的日期和時間，以字串回傳
 current2 = time.ctime(time.time())
-print('目前時間：', current2)
+print("目前時間：", current2)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -571,13 +593,16 @@ while True:
 def DateFromTicks(ticks):
     return Date(*time.localtime(ticks)[:3])
 
+
 def TimeFromTicks(ticks):
     return Time(*time.localtime(ticks)[3:6])
+
 
 def TimestampFromTicks(ticks):
     return Timestamp(*time.localtime(ticks)[:6])
 
-print('------------------------------------------------------------')	#60個
+
+print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
@@ -596,10 +621,10 @@ localtime()返回元組的日期與時間資料結構 用索引方式獲得個�
 8	tm_isdst 夏令時間 0:不是, 1:是
 """
 
-xtime = time.localtime()            #使用localtime()方法列出目前時間的結構
-print(xtime)                        # 列出目前系統時間
+xtime = time.localtime()  # 使用localtime()方法列出目前時間的結構
+print(xtime)  # 列出目前系統時間
 print("年 ", xtime[0])
-print("年 ", xtime.tm_year)         # 物件設定方式顯示
+print("年 ", xtime.tm_year)  # 物件設定方式顯示
 print("月 ", xtime[1])
 print("日 ", xtime[2])
 print("時 ", xtime[3])
@@ -611,8 +636,8 @@ print("夏令時間 ", xtime[8])
 
 print("------------------------------------------------------------")  # 60個
 
-print('range(5)', range(5))
-print('list(range(5))', list(range(5)))
+print("range(5)", range(5))
+print("list(range(5))", list(range(5)))
 
 # range
 tStart = time.time()
@@ -621,14 +646,14 @@ for i in range(10000000):
     pass
 tEnd = time.time()
 
-print('range time:', tEnd - tStart)
+print("range time:", tEnd - tStart)
 
 print("------------------------------------------------------------")  # 60個
 
 # 量測時間
 start = time.time()
 
-#do something
+# do something
 
 end = time.time()
 
@@ -636,19 +661,18 @@ print("經過時間 :", str((end - start) / 60)[0:6] + "分")
 
 print("------------------------------------------------------------")  # 60個
 
-#量測時間
+# 量測時間
 start = time.time()
 
 # do something
 
-print('elaspe: {0:.6f}'.format(time.time()-start))
+print("elaspe: {0:.6f}".format(time.time() - start))
 
 
 print("------------------------------------------------------------")  # 60個
 
 
-
-#print("time: %fs\n" % (time.time()-start))
+# print("time: %fs\n" % (time.time()-start))
 
 start_calc = time.time()
 x = factorial(C.Decimal(n), 0)
@@ -659,21 +683,20 @@ start_conv = time.time()
 sx = str(x)
 end_conv = time.time()
 print("cdecimal:")
-print("calculation time: %fs" % (end_calc-start_calc))
-print("conversion time: %fs\n" % (end_conv-start_conv))
+print("calculation time: %fs" % (end_calc - start_calc))
+print("conversion time: %fs\n" % (end_conv - start_conv))
 
-    # Python integers
-    start_calc = time.time()
-    y = factorial(n, 0)
-    end_calc = time.time()
-    start_conv = time.time()
-    sy = str(y)
-    end_conv =  time.time()
+# Python integers
+start_calc = time.time()
+y = factorial(n, 0)
+end_calc = time.time()
+start_conv = time.time()
+sy = str(y)
+end_conv = time.time()
 
-    print("int:")
-    print("calculation time: %fs" % (end_calc-start_calc))
-    print("conversion time: %fs\n\n" % (end_conv-start_conv))
-
+print("int:")
+print("calculation time: %fs" % (end_calc - start_calc))
+print("conversion time: %fs\n\n" % (end_conv - start_conv))
 
 print("------------------------------------------------------------")  # 60個
 
@@ -691,53 +714,80 @@ print("------------------------------------------------------------")  # 60個
 
 import time
 
-startTime = time.time() # Get start time
+startTime = time.time()  # Get start time
 
-endTime = time.time() # Get end time
-runTime = int((endTime - startTime) * 1000) # Get test time
-print("To test if", NUMBER_OF_ELEMENTS, 
+endTime = time.time()  # Get end time
+runTime = int((endTime - startTime) * 1000)  # Get test time
+print(
+    "To test if",
+    NUMBER_OF_ELEMENTS,
     "elements are in the set\n",
-    "The runtime is", runTime, "milliseconds")
+    "The runtime is",
+    runTime,
+    "milliseconds",
+)
 
-startTime = time.time() # Get start time
+startTime = time.time()  # Get start time
 
-endTime = time.time() # Get end time
-runTime = int((endTime - startTime) * 1000) # Get test time
-print("\nTo test if", NUMBER_OF_ELEMENTS, 
+endTime = time.time()  # Get end time
+runTime = int((endTime - startTime) * 1000)  # Get test time
+print(
+    "\nTo test if",
+    NUMBER_OF_ELEMENTS,
     "elements are in the list\n",
-    "The runtime is", runTime, "milliseconds")
+    "The runtime is",
+    runTime,
+    "milliseconds",
+)
 
-startTime = time.time() # Get start time
-endTime = time.time() # Get end time
-runTime = int((endTime - startTime) * 1000) # Get test time
-print("\nTo remove", NUMBER_OF_ELEMENTS, 
+startTime = time.time()  # Get start time
+endTime = time.time()  # Get end time
+runTime = int((endTime - startTime) * 1000)  # Get test time
+print(
+    "\nTo remove",
+    NUMBER_OF_ELEMENTS,
     "elements from the set\n",
-    "The runtime is", runTime, "milliseconds")
+    "The runtime is",
+    runTime,
+    "milliseconds",
+)
 
-startTime = time.time() # Get start time
+startTime = time.time()  # Get start time
 
-endTime = time.time() # Get end time
-runTime = int((endTime - startTime) * 1000) # Get test time
-print("\nTo remove", NUMBER_OF_ELEMENTS, 
+endTime = time.time()  # Get end time
+runTime = int((endTime - startTime) * 1000)  # Get test time
+print(
+    "\nTo remove",
+    NUMBER_OF_ELEMENTS,
     "elements from the list\n",
-    "The runtime is", runTime, "milliseconds")
+    "The runtime is",
+    runTime,
+    "milliseconds",
+)
 
 print("------------------------------------------------------------")  # 60個
 
-startTime = time.time() # Get start time
+startTime = time.time()  # Get start time
 
 
-endTime = time.time() # Get end time
-testTime = int(endTime - startTime) # Get test time
-print("Correct count is", correctCount, "out of", 
-    NUMBER_OF_QUESTIONS, "\nTest time is", testTime, "seconds")
+endTime = time.time()  # Get end time
+testTime = int(endTime - startTime)  # Get test time
+print(
+    "Correct count is",
+    correctCount,
+    "out of",
+    NUMBER_OF_QUESTIONS,
+    "\nTest time is",
+    testTime,
+    "seconds",
+)
 
 
 print("------------------------------------------------------------")  # 60個
-
 
 
 import time
+
 
 def bark(duration):
     _time = time.time
@@ -762,40 +812,42 @@ import sys
 import time
 
 # Timer types
-TIMER_TIME_TIME = 'time.time'
-TIMER_TIME_PROCESS_TIME = 'time.process_time'
-TIMER_TIME_PERF_COUNTER = 'time.perf_counter'
-TIMER_TIME_CLOCK = 'time.clock'
-TIMER_SYSTIMES_PROCESSTIME = 'systimes.processtime'
+TIMER_TIME_TIME = "time.time"
+TIMER_TIME_PROCESS_TIME = "time.process_time"
+TIMER_TIME_PERF_COUNTER = "time.perf_counter"
+TIMER_TIME_CLOCK = "time.clock"
+TIMER_SYSTIMES_PROCESSTIME = "systimes.processtime"
 
 # Choose platform default timer
-if hasattr(time, 'perf_counter'):
-    print('1')
+if hasattr(time, "perf_counter"):
+    print("1")
     TIMER_PLATFORM_DEFAULT = TIMER_TIME_PERF_COUNTER
-elif sys.platform[:3] == 'win':
-    print('2')
+elif sys.platform[:3] == "win":
+    print("2")
     # On WinXP this has 2.5ms resolution
     TIMER_PLATFORM_DEFAULT = TIMER_TIME_CLOCK
 else:
-    print('3')
+    print("3")
     # On Linux this has 1ms resolution
     TIMER_PLATFORM_DEFAULT = TIMER_TIME_TIME
 
 
-
 import systimes
-print('a')
+
+print("a")
 print(systimes.SYSTIMES_IMPLEMENTATION)
 
 timer = TIMER_PLATFORM_DEFAULT
 
-print('b')
-print('* using timer: %s' % timer)
-if hasattr(time, 'get_clock_info'):
+print("b")
+print("* using timer: %s" % timer)
+if hasattr(time, "get_clock_info"):
     info = time.get_clock_info(timer[5:])
-    print('c')
-    print('* timer: resolution=%s, implementation=%s'
-          % (info.resolution, info.implementation))
+    print("c")
+    print(
+        "* timer: resolution=%s, implementation=%s"
+        % (info.resolution, info.implementation)
+    )
 
 
 print("------------------------------------------------------------")  # 60個
@@ -807,8 +859,10 @@ from time import perf_counter
 
 import time
 
+
 def do_something():
     time.sleep(1.2345)
+
 
 @contextmanager
 def timer():
@@ -817,15 +871,13 @@ def timer():
         yield
     finally:
         end = perf_counter()
-        print(f'{end - start}秒')
+        print(f"{end - start}秒")
+
 
 for _ in range(10):
     with timer():
-        print('執行工作')
+        print("執行工作")
         do_something()
-
-
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -833,7 +885,6 @@ print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
-
 
 
 """
@@ -847,4 +898,3 @@ print("------------------------------------------------------------")  # 60個
 
 
 """
-

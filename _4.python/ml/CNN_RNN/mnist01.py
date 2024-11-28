@@ -76,6 +76,8 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
+from common2 import *
+
 import tensorflow as tf
 
 # from keras.datasets import mnist  # same
@@ -132,11 +134,6 @@ INPUT_DIM = 784  # 輸入層: 28*28 = 784
 VALIDATION_SPLIT = 0.2  # 驗證資料佔比
 
 mnist_npz_filename = "C:/_git/vcs/_big_files/mnist.npz"
-
-
-def show():
-    # plt.show()
-    pass
 
 
 def load_mnist_data():
@@ -556,7 +553,6 @@ print("印出 第0筆 目標")
 print(y_train[0])
 
 print("------------------------------------------------------------")  # 60個
-
 
 print("準備工作 SP")
 
@@ -2347,10 +2343,6 @@ ITERATIONS = 50
 
 print("------------------------------------------------------------")  # 60個
 
-import tensorflow as tf
-
-print(tf.__version__)
-
 print("------------------------------------------------------------")  # 60個
 
 model = keras.Sequential([keras.layers.Dense(units=1, input_shape=[1])])
@@ -3155,12 +3147,8 @@ print("------------------------------------------------------------")  # 60個
 
 # pip install tf-nightly
 
-# import tensorflow.keras as keras
-
 import tensorflow as tf
-
 print(tf.__version__)
-
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

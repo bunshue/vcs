@@ -1,19 +1,21 @@
-# Print the calendar for a month in a year 
-def printMonth(year, month): 
+# Print the calendar for a month in a year
+def printMonth(year, month):
     # Print the headings of the calendar
     printMonthTitle(year, month)
 
     # Print the body of the calendar
     printMonthBody(year, month)
-  
+
+
 # Print the month title, e.g., May, 1999
-def printMonthTitle(year, month): 
+def printMonthTitle(year, month):
     print("         ", getMonthName(month), " ", year)
     print("-----------------------------")
     print(" Sun Mon Tue Wed Thu Fri Sat")
 
-# Print month body 
-def printMonthBody(year, month): 
+
+# Print month body
+def printMonthBody(year, month):
     # Get start day of the week for the first date in the month
     startDay = getStartDay(year, month)
 
@@ -23,16 +25,17 @@ def printMonthBody(year, month):
     # Pad space before the first day of the month
     i = 0
     for i in range(startDay):
-       print("    ", end = "")
+        print("    ", end="")
 
     for i in range(1, numberOfDaysInMonth + 1):
-        print(format(i, '4d'), end = "")
+        print(format(i, "4d"), end="")
 
         if (i + startDay) % 7 == 0:
-            print() # Jump to the new line
+            print()  # Jump to the new line
+
 
 # Get the English name for the month
-def getMonthName(month): 
+def getMonthName(month):
     if month == 1:
         monthName = "January"
     elif month == 2:
@@ -47,7 +50,7 @@ def getMonthName(month):
         monthName = "June"
     elif month == 7:
         monthName = "July"
-    elif month == 8: 
+    elif month == 8:
         monthName = "August"
     elif month == 9:
         monthName = "September"
@@ -60,8 +63,9 @@ def getMonthName(month):
 
     return monthName
 
-# Get the start day of month/1/year 
-def getStartDay(year, month): 
+
+# Get the start day of month/1/year
+def getStartDay(year, month):
     START_DAY_FOR_JAN_1_1800 = 3
 
     # Get total number of days from 1/1/1800 to month/1/year
@@ -70,8 +74,9 @@ def getStartDay(year, month):
     # Return the start day for month/1/year
     return (totalNumberOfDays + START_DAY_FOR_JAN_1_1800) % 7
 
+
 # Get the total number of days since January 1, 1800
-def getTotalNumberOfDays(year, month): 
+def getTotalNumberOfDays(year, month):
     total = 0
 
     # Get the total days from 1800 to 1/1/year
@@ -87,10 +92,18 @@ def getTotalNumberOfDays(year, month):
 
     return total
 
+
 # Get the number of days in a month
-def getNumberOfDaysInMonth(year, month): 
-    if (month == 1 or month == 3 or month == 5 or month == 7 or
-        month == 8 or month == 10 or month == 12):
+def getNumberOfDaysInMonth(year, month):
+    if (
+        month == 1
+        or month == 3
+        or month == 5
+        or month == 7
+        or month == 8
+        or month == 10
+        or month == 12
+    ):
         return 31
 
     if month == 4 or month == 6 or month == 9 or month == 11:
@@ -99,12 +112,12 @@ def getNumberOfDaysInMonth(year, month):
     if month == 2:
         return 29 if isLeapYear(year) else 28
 
-    return 0 # If month is incorrect
+    return 0  # If month is incorrect
+
 
 # Determine if it is a leap year
-def isLeapYear(year): 
+def isLeapYear(year):
     return year % 400 == 0 or (year % 4 == 0 and year % 100 != 0)
 
 
 printMonth(2024, 7)
- 

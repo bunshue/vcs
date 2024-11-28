@@ -27,51 +27,6 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-'''
-# Python日期時間處理
-# 時間點
-
-from datetime import datetime
-
-d1 = datetime.now() # 獲取當前時間
-print(d1)
-print(d1.year, d1.month, d1.day, d1.hour, d1.minute, d1.second)
-d2 = datetime(2019, 3, 27) # 通過指定日期構造datetime
-print(d2)
-
-# 時間段
-from datetime import timedelta
-
-delta = d2-d1 # 通過時間日期相減獲取
-print(type(delta))
-print(delta)
-delta = timedelta(days=3) # 通過指定時定差獲取
-print(d1+delta)# 利用時間段計算新日期時間
-
-# 時間戳
-print(time.time())
-
-d = datetime.now()
-t = time.mktime(d.timetuple()) # 從datetime格式轉換
-print(t)
-print(time.mktime(time.strptime("2019-03-27", "%Y-%m-%d"))) # 從字符串轉換
-print(datetime.fromtimestamp(t)) 
-print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(t)))
-
-
-# 時間類型轉換
-d = datetime.strptime('2019-03-27', '%Y-%m-%d')
-print(d)
-
-from dateutil.parser import parse
-
-d = parse('2019/03/27')
-print(d)
-print(str(d))
-
-print(d.strftime("%Y/%m/%d %H:%M:%S"))
-
-print('------------------------------------------------------------')	#60個
 
 # 4.2.5 多圖組合
 # jointplot兩變量圖
@@ -493,7 +448,7 @@ plt.plot(ts)
 plt.plot(pred)
 
 plt.show()
-'''
+
 print('------------------------------------------------------------')	#60個
 print('------------------------------------------------------------')	#60個
 
