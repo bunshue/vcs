@@ -546,8 +546,8 @@ columns = ["A", "B", "C", "D"]
 df = pd.DataFrame(np.array(datas), columns=columns)
 """
 print(df)
-cc = df.info()
-print(cc)
+
+df.info()  # 這樣就已經把資料集彙總資訊印出來
 
 # 將df的 相關係數 轉 html
 # df.corr().to_html("test_csv_corr2html.html")

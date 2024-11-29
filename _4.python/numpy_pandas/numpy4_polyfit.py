@@ -3,21 +3,13 @@
 
 numpy.polyfit(x, y, deg, rcond=None, full=False, w=None, cov=False)
 
-
 多項式poly1d()的方法
-
 　　　a.　　p(0.5)表示當x = 0.5時，多項式的值為多少
-
 　　　b.　　p.r表示當多項式為 0 時，此等式的根
-
 　　　c.　　p.c表示生成多項式的系數數組
-
 　　　d.　　p.order表示返回最高項的次方數
-
 　　　e.　　p[1]表示返回第一項的系數
-
 　　　f.　　多項式支持實數的四則運算
-
 """
 
 print("------------------------------------------------------------")  # 60個
@@ -661,15 +653,54 @@ plt.ylabel("營業額", fontsize=14)
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
+x = np.array([1, 2, 3, 4, 5])
+y = np.array([2, 3, 4, 5, 6])
 
+# Calculate the slope and y-intercept of the regression line
+slope, intercept = np.polyfit(x, y, 1)
+
+# Use the slope and y-intercept to make predictions
+new_x = 6
+y_pred = slope * new_x + intercept
+
+# Print the slope, y-intercept, and predicted outcome
+print("Slope: ", slope)
+print("Y-intercept: ", intercept)
+print("Predicted outcome: ", y_pred)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+x = np.array([1, 2, 3, 4, 5])
+y = np.array([2, 3, 4, 5, 6])
+
+# Calculate the coefficients of the regression line
+X = np.vstack([x, np.ones(len(x))]).T
+coeffs = np.linalg.inv(X.T @ X) @ X.T @ y
+
+# Use the coefficients to make predictions
+new_x = 6
+y_pred = coeffs[0] * new_x + coeffs[1]
+
+# Print the coefficients and predicted outcome
+print("Coefficients: ", coeffs)
+print("Predicted outcome: ", y_pred)
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
 
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
 
 
 print("------------------------------------------------------------")  # 60個

@@ -534,12 +534,14 @@ import pyttsx3
 
 # 設定語音引擎
 engine = pyttsx3.init()
-engine.setProperty('rate', 145)  # 設定語速
-engine.setProperty('volume', 1.0)  # 設定音量 (1.0 為最大值)
+engine.setProperty("rate", 145)  # 設定語速
+engine.setProperty("volume", 1.0)  # 設定音量 (1.0 為最大值)
 
 # 向使用者解釋程序
-engine.say("當螢幕提示時，請輸入你的訊息。\
-           直到聽到提示喊停為止。")
+engine.say(
+    "當螢幕提示時，請輸入你的訊息。\
+           直到聽到提示喊停為止。"
+)
 engine.runAndWait()
 
 

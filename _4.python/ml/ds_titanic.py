@@ -36,8 +36,7 @@ print(cc)
 
 # 2. 資料清理、資料探索與分析
 
-cc = df.info()
-print(cc)
+df.info()  # 這樣就已經把資料集彙總資訊印出來
 
 cc = df.describe()
 print(cc)
@@ -92,8 +91,8 @@ print(cc)
 # 甲板(deck)遺失值過多，刪除該欄位
 
 df.drop("deck", axis=1, inplace=True)
-cc = df.info()
-print(cc)
+
+df.info()  # 這樣就已經把資料集彙總資訊印出來
 
 # 離群值(Outlier) 處理
 

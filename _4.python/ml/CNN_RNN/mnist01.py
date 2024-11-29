@@ -364,7 +364,9 @@ def print_y_data(y):
     length = len(y)
     if length > N:
         length = N
-    for i in range(N):
+    if length <= 30:
+        R = 31
+    for i in range(length):
         print(y[i], end="")
         if i % R == (R - 1):
             print()
@@ -3148,6 +3150,7 @@ print("------------------------------------------------------------")  # 60個
 # pip install tf-nightly
 
 import tensorflow as tf
+
 print(tf.__version__)
 
 print("------------------------------------------------------------")  # 60個

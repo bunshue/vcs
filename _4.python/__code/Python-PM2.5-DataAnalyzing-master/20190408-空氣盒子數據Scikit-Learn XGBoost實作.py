@@ -33,8 +33,7 @@ print(cc)
 print(len(df))
 print(len(df["PM25"]))
 
-cc = df.info()
-print(cc)
+df.info()  # 這樣就已經把結果印出來
 
 cc = df.describe()
 print(cc)

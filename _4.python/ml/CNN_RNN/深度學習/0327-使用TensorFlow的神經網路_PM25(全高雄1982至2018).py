@@ -105,8 +105,7 @@ df=pd.read_excel(filename)
 cc = df.describe().T
 print(cc)
 
-cc = df.info()
-print(cc)
+df.info() # 這樣就已經把資料集彙總資訊印出來
 
 X = df[['SO2', 'CO', 'O3', 'Nox', 'NO', 'NO2', 'THC', 'NMHC', 'CH4', 'WindSpeed','TEMP','Humidity']]
 

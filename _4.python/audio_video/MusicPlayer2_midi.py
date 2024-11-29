@@ -1,4 +1,4 @@
-print('建立 midi 檔案')
+print("建立 midi 檔案")
 
 from midiutil.MidiFile import MIDIFile
 

@@ -418,8 +418,8 @@ y = iris.target
 # print(iris.target_names)
 
 print("觀察資料集彙總資訊")
-cc = df.info()
-print(cc)
+
+df.info()  # 這樣就已經把資料集彙總資訊印出來
 
 print("描述統計量")
 cc = df.describe()
@@ -562,8 +562,8 @@ y = iris.target
 # print(iris.target_names)
 
 print("觀察資料集彙總資訊")
-cc = df.info()
-print(cc)
+
+df.info()  # 這樣就已經把資料集彙總資訊印出來
 
 print("描述統計量")
 cc = df.describe()

@@ -26,9 +26,11 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
+
 def show():
-    #plt.show()
+    plt.show()
     pass
+
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -41,10 +43,11 @@ from sklearn.metrics import accuracy_score  # 沒用到
 
 print("------------------------------------------------------------")  # 60個
 
+
 # 迴歸效果評估
 def evaluate_result(y_test, y_pred):
-    print("真實資料(y_test) :", y_test)
-    print("預測資料(y_pred) :", y_pred)
+    # print("真實資料(y_test) :", y_test)
+    # print("預測資料(y_pred) :", y_pred)
 
     print("計算 真實測試資料(y_test) 和 預測資料(y_pred)的 MSE")
     mse = np.sum((y_test - y_pred) ** 2) / len(y_test)
@@ -65,6 +68,22 @@ def evaluate_result(y_test, y_pred):
     print("計算 真實測試資料(y_test) 和 預測資料(y_pred) 的 決定係數r2 r2_score")
     r2 = r2_score(y_test, y_pred)
     print(f"決定係數R2 = {r2:.4f}")
+
+
+def print_y_data(y):
+    N = 30  # 最多的個數
+    R = 10  # 每R個換行
+    length = len(y)
+    if length > N:
+        length = N
+    if length <= 30:
+        R = 31
+    for i in range(length):
+        print(y[i], end="")
+        if i % R == (R - 1):
+            print()
+        else:
+            print(end=" ")
 
 
 print("------------------------------------------------------------")  # 60個

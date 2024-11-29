@@ -248,12 +248,14 @@ cc = df.isna().sum()
 print(cc)
 
 # 觀察資料集彙總資訊
-cc = df.info()
-# print(cc)
+
+df.info() # 這樣就已經把資料集彙總資訊印出來
 
 # 描述統計量
 cc = df.describe()
 print(cc)
+
+sys.exit()
 
 # 繪圖
 
@@ -1905,8 +1907,8 @@ print(cc)
 # 2. 資料清理、資料探索與分析
 
 # 觀察資料集彙總資訊
-cc = df.info()
-print(cc)
+
+df.info() # 這樣就已經把資料集彙總資訊印出來
 
 # 描述統計量
 cc = df.describe()

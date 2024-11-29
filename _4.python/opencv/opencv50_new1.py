@@ -5,7 +5,8 @@ opencv 集合 新進
 """
 
 import cv2
-#import pylab as pl
+
+# import pylab as pl
 
 ESC = 27
 SPACE = 32
@@ -41,7 +42,7 @@ print("------------------------------------------------------------")  # 60個
 
 
 def show():
-    #plt.show()
+    # plt.show()
     pass
 
 
@@ -4191,6 +4192,7 @@ def gaussConv(I, size, sigma):
     I_xk_yk *= 1.0 / (2 * np.pi * pow(sigma, 2.0))
     return I_xk_yk
 
+
 # 高斯差分
 def DoG(I, size, sigma, k=1.1):
     # 標準差為 sigma 的非歸一化的高斯卷積
@@ -4744,6 +4746,7 @@ jpg_str = jpg_data.tobytes()
 res, jpg_data = cv2.imencode(".jpg", img_8bit)
 
 from IPython.display import Image
+
 Image(data=jpg_data.tobytes())
 
 # 視訊輸出

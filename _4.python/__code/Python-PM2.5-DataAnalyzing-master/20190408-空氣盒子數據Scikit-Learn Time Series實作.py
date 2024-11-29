@@ -32,8 +32,7 @@ df = pd.read_excel("data/TimeSeries_198211-201811.xlsx")
 cc = df.head()
 print(cc)
 
-cc = df.info()
-print(cc)
+df.info()  # 這樣就已經把結果印出來
 
 df.Date = pd.to_datetime(df.Date)
 df.set_index("Date", inplace=True)
