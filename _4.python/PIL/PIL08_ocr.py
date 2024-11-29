@@ -43,13 +43,14 @@ https://github.com/tesseract-ocr/tessdata_best/blob/main/eng.traineddata
 
 # pytesseract共同設定
 
-#ocr_program = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+# ocr_program = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 ocr_program = r"C:/Users/070601/AppData/Local/Programs/Tesseract-OCR/tesseract.exe"
 
 import pytesseract
-pytesseract.pytesseract.tesseract_cmd = ocr_program #設定OCR程式位置
 
-print('------------------------------------------------------------')	#60個
+pytesseract.pytesseract.tesseract_cmd = ocr_program  # 設定OCR程式位置
+
+print("------------------------------------------------------------")  # 60個
 
 from PIL import Image
 
@@ -75,15 +76,15 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 print("------------------------------------------------------------")  # 60個
 
 print("英文OCR")
-filename = 'data/ocr/english02.jpg'
+filename = "data/ocr/english02.jpg"
 image = Image.open(filename)
 text = pytesseract.image_to_string(image, lang="eng")
 print(text)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 print("中文OCR轉正中")
-filename = 'data/ocr/red06.jpg'
+filename = "data/ocr/red06.jpg"
 image = Image.open(filename)
 text = pytesseract.image_to_string(image, lang="chi_tra")
 print(text)
@@ -91,23 +92,23 @@ print(text)
 print("------------------------------------------------------------")  # 60個
 
 print("中文OCR轉簡中")
-filename = 'data/ocr/red06.jpg'
+filename = "data/ocr/red06.jpg"
 image = Image.open(filename)
-text = pytesseract.image_to_string(image, lang='chi_sim')
+text = pytesseract.image_to_string(image, lang="chi_sim")
 print(text)
 
 print("------------------------------------------------------------")  # 60個
 
 print("中文OCR轉正中 + 英文")
-filename = 'data/ocr/red06.jpg'
+filename = "data/ocr/red06.jpg"
 image = Image.open(filename)
 text = pytesseract.image_to_string(image, lang="chi_tra+eng")
 print(text)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 print("日文OCR")
-filename = 'data/ocr/japanese02.jpg'
+filename = "data/ocr/japanese02.jpg"
 image = Image.open(filename)
 text = pytesseract.image_to_string(image, lang="jpn")
 print(text)
@@ -116,68 +117,70 @@ print("------------------------------------------------------------")  # 60個
 
 print("車牌")
 print("無指定OCR => 英文")
-filename = 'data/ocr/carPlate01.jpg'
+filename = "data/ocr/carPlate01.jpg"
 image = Image.open(filename)
 text = pytesseract.image_to_string(image)
 print(text)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 import PIL.Image
 import PIL.ImageDraw
 from PIL import *
 from PIL import ImageEnhance
 
-filename = 'C:/_git/vcs/_4.python/opencv/data/captcha/captcha01.jpg'
+filename = "C:/_git/vcs/_4.python/opencv/data/captcha/captcha01.jpg"
 
-#Code from https://stackoverflow.max-everyday.com/2019/06/python-opencv-denoising/
+# Code from https://stackoverflow.max-everyday.com/2019/06/python-opencv-denoising/
 
-def getPixel(image,x,y,G,N):
-    L = image.getpixel((x,y))  # 取得該點之像素值
+
+def getPixel(image, x, y, G, N):
+    L = image.getpixel((x, y))  # 取得該點之像素值
     if L > G:
         L = True
     else:
         L = False
- 
+
     nearDots = 0
-    if L == (image.getpixel((x - 1,y - 1)) > G):
+    if L == (image.getpixel((x - 1, y - 1)) > G):
         nearDots += 1
-    if L == (image.getpixel((x - 1,y)) > G):
+    if L == (image.getpixel((x - 1, y)) > G):
         nearDots += 1
-    if L == (image.getpixel((x - 1,y + 1)) > G):
+    if L == (image.getpixel((x - 1, y + 1)) > G):
         nearDots += 1
-    if L == (image.getpixel((x,y - 1)) > G):
+    if L == (image.getpixel((x, y - 1)) > G):
         nearDots += 1
-    if L == (image.getpixel((x,y + 1)) > G):
+    if L == (image.getpixel((x, y + 1)) > G):
         nearDots += 1
-    if L == (image.getpixel((x + 1,y - 1)) > G):
+    if L == (image.getpixel((x + 1, y - 1)) > G):
         nearDots += 1
-    if L == (image.getpixel((x + 1,y)) > G):
+    if L == (image.getpixel((x + 1, y)) > G):
         nearDots += 1
-    if L == (image.getpixel((x + 1,y + 1)) > G):
+    if L == (image.getpixel((x + 1, y + 1)) > G):
         nearDots += 1
- 
+
     if nearDots < N:
-        return image.getpixel((x,y-1))
+        return image.getpixel((x, y - 1))
     else:
         return None
 
+
 # 降噪 Function
-def clearNoise(image,G,N,Z):
+def clearNoise(image, G, N, Z):
     draw = ImageDraw.Draw(image)
- 
-    for i in range(0,Z):
-        for x in range(1,image.size[0] - 1):
-            for y in range(1,image.size[1] - 1):
-                color = getPixel(image,x,y,G,N)
+
+    for i in range(0, Z):
+        for x in range(1, image.size[0] - 1):
+            for y in range(1, image.size[1] - 1):
+                color = getPixel(image, x, y, G, N)
                 if color != None:
-                    draw.point((x,y),color)
+                    draw.point((x, y), color)
 
     return image
 
-class CaptchaBroker():
 
-    def decode(self,image_path):
+class CaptchaBroker:
+    def decode(self, image_path):
         # open image
 
         print(image_path)
@@ -188,8 +191,8 @@ class CaptchaBroker():
         enhancer = ImageEnhance.Brightness(image)
         image = enhancer.enhance(10.0)
 
-        im2 = image.convert('1')	#轉換成二值化圖像
-        im2 = clearNoise(im2,50,4,6)
+        im2 = image.convert("1")  # 轉換成二值化圖像
+        im2 = clearNoise(im2, 50, 4, 6)
 
         w, h = image.size
 
@@ -200,21 +203,19 @@ class CaptchaBroker():
         """
 
         image = Image.open(image_path)
-        
-        code = pytesseract.image_to_string(image, lang = "eng")
-        print('解出來的資料 : ', code)
+
+        code = pytesseract.image_to_string(image, lang="eng")
+        print("解出來的資料 : ", code)
 
         return code
 
+
 ccc = CaptchaBroker()
 result = ccc.decode(filename)
-print('結果')
+print("結果")
 print(result)
 
-print('------------------------------------------------------------')	#60個
-
-
-
+print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
@@ -226,15 +227,15 @@ print("------------------------------------------------------------")  # 60個
 
 
 def getOCR_Data(filename, ocr_type):
-
     if ocr_type == "eng":
         print("英文OCR")
     elif ocr_type == "jpn":
         print("日文OCR")
-    
+
     image = Image.open(filename)
     text = pytesseract.image_to_string(image, lang=ocr_type)
     return text
+
 
 #          編號               圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
 plt.figure(
@@ -249,30 +250,28 @@ plt.figure(
 
 plt.subplot(231)
 
-filename = 'data/ocr/english02.jpg'
+filename = "data/ocr/english02.jpg"
 ocr_type = "eng"
 
-text = getOCR_Data(filename, ocr_type)  
+text = getOCR_Data(filename, ocr_type)
 print(text)
 
-image1 = Image.open(filename)    #建立Pillow物件 PIL讀取本機圖片, RGB模式
+image1 = Image.open(filename)  # 建立Pillow物件 PIL讀取本機圖片, RGB模式
 plt.imshow(image1)
 plt.title(text)
 
 
 plt.subplot(232)
 
-filename = 'data/ocr/japanese01.jpg'
+filename = "data/ocr/japanese01.jpg"
 ocr_type = "jpn"
 
-text = getOCR_Data(filename, ocr_type)  
+text = getOCR_Data(filename, ocr_type)
 print(text)
 
-image1 = Image.open(filename)    #建立Pillow物件 PIL讀取本機圖片, RGB模式
+image1 = Image.open(filename)  # 建立Pillow物件 PIL讀取本機圖片, RGB模式
 plt.imshow(image1)
 plt.title(text)
 
 
 plt.show()
-
-

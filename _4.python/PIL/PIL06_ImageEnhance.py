@@ -17,9 +17,9 @@ ImageEnhance
 """
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/elephant.jpg'
+filename = "C:/_git/vcs/_1.data/______test_files1/elephant.jpg"
 
 print("------------------------------------------------------------")  # 60個
 
@@ -47,28 +47,28 @@ from PIL import Image, ImageEnhance
 img = Image.open(filename)  # 開啟影像
 brightness = ImageEnhance.Brightness(img)  # 設定 img 要加強亮度
 
-factor = 1.5# 調整亮度，factor 為一個浮點數值, 提高亮度
+factor = 1.5  # 調整亮度，factor 為一個浮點數值, 提高亮度
 output = brightness.enhance(factor)
 output.save("tmp_elephant1.5.jpg")  # 存檔
 
-factor = 0.5# 調整亮度，factor 為一個浮點數值, 降低亮度
+factor = 0.5  # 調整亮度，factor 為一個浮點數值, 降低亮度
 output = brightness.enhance(factor)
 output.save("tmp_elephant0.5.jpg")  # 存檔
 
 # 調整後的數值 = 原始數值 x factor
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-#sharpness
-from PIL import Image,ImageEnhance
+# sharpness
+from PIL import Image, ImageEnhance
 
 with Image.open(filename) as image:
     image2 = ImageEnhance.Contrast(image).enhance(0.3)
-    image2.save("tmp_pic32_contrast.jpg") 
+    image2.save("tmp_pic32_contrast.jpg")
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-from PIL import Image,ImageEnhance
+from PIL import Image, ImageEnhance
 
 with Image.open(filename) as image:
     image_new = ImageEnhance.Brightness(image).enhance(2.5)
@@ -79,25 +79,24 @@ print("------------------------------------------------------------")  # 60個
 from PIL import Image, ImageEnhance
 
 with Image.open(filename) as image:
-   image_new = ImageEnhance.Brightness(image).enhance(2.5)
-   image_new.save('tmp_pic_brightness.jpg')
+    image_new = ImageEnhance.Brightness(image).enhance(2.5)
+    image_new.save("tmp_pic_brightness.jpg")
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-from PIL import Image,ImageEnhance
+from PIL import Image, ImageEnhance
 
 with Image.open(filename) as image:
     image_new = ImageEnhance.Contrast(image).enhance(0.3)
-    image_new.save("tmp_pic_contrast.jpg") 
+    image_new.save("tmp_pic_contrast.jpg")
 
 print("------------------------------------------------------------")  # 60個
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
-
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
@@ -151,7 +150,6 @@ plt.subplot(235)
 
 # 第六張圖
 plt.subplot(236)
-
 
 
 plt.show()
@@ -210,14 +208,10 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
 
 
-
-
 print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -225,7 +219,3 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
-
-
-
-

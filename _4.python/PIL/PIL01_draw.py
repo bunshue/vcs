@@ -406,12 +406,12 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-fill = (255, 0, 0)    #字的顏色RGB
-im0 = Image.new('RGBA', (1,1))
-#image = Image.open(filename)  # PIL讀取本機圖片, RGB模式
+fill = (255, 0, 0)  # 字的顏色RGB
+im0 = Image.new("RGBA", (1, 1))
+# image = Image.open(filename)  # PIL讀取本機圖片, RGB模式
 dw = ImageDraw.Draw(im0)
 
-#print('製作一個 W = ' + str(text_width) + ', H = ' + str(text_height) + ' 的圖片')
+# print('製作一個 W = ' + str(text_width) + ', H = ' + str(text_height) + ' 的圖片')
 
 mesg = "傷心橋下春波綠，曾是驚鴻照影來。"
 font_size = 30
@@ -423,9 +423,9 @@ print("量測結果 :", xx, yy, text_width, text_height)
 print("字寬 :", text_width)
 print("字高 :", text_height)
 
-im = Image.new('RGBA', (text_width, text_height), (255,255,255,0))
+im = Image.new("RGBA", (text_width, text_height), (255, 255, 255, 0))
 dw = ImageDraw.Draw(im)
-dw.text((0,0), mesg, font=font, fill=fill)
+dw.text((0, 0), mesg, font=font, fill=fill)
 
 plt.imshow(im)
 plt.show()
@@ -443,4 +443,3 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-

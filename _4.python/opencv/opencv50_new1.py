@@ -1,7 +1,6 @@
 """
 opencv 集合 新進
 
-
 """
 
 import cv2
@@ -2258,12 +2257,14 @@ I=np.array([[1,2,3,10,12],
 I = np.ones((10, 10), np.float32)
 I[1:3, 3:5] = 5
 I[3:5, 4:7] = 3
+
 # 卷積核
 """
     kernel = np.array([[1,0,-1],
                    [1,0,-1],
                    [1,0,-1]])
 """
+
 kernel1 = np.array([[1, 3, 4], [9, 10, 2], [-1, 10, 2]], np.float32)
 kernel2 = np.array([[-1, 2, 3], [4, 5, 6], [10, 9, 10]], np.float32)
 # kernel1 = np.array([[-1,2,3]],np.float32)
@@ -2353,6 +2354,7 @@ gaussKernel_x = getGaussKernel(2, 1, 3)
 print(gaussKernel_x)
 gaussKernel_y = getGaussKernel(2, 3, 1)
 print(gaussKernel_y)
+
 """
 水平方向和垂直方向的卷積核進行卷積運算,注意：mode='full',boundary = 'fill',fillvalue=0
 這樣的參數設置，得到的結果才和gaussKernel完全相等，否則，邊界不相等
@@ -2903,7 +2905,6 @@ def fGFEnchance(I, r, eps, s):
 
 
 """ NG
-
 # 檔案 => cv2影像
 image = cv2.imread(filename, cv2.IMREAD_COLOR)
 
@@ -2918,7 +2919,6 @@ cvshow("fastGuidedFilter",result)
 #細節增強
 enchanced = fGFEnchance(image_0_1,5,pow(0.2,2.0),1.0/3)
 cvshow("fGFEnchance",enchanced)
-
 """
 print("------------------------------------------------------------")  # 60個
 
@@ -4312,7 +4312,9 @@ if __name__ == "__main__":
 print("------------------------------------------------------------")  # 60個
 
 print("幾何形狀的檢測和擬合 HTCircle")
-""" 跑不完cv2.imshow("image", image)
+
+""" 跑不完
+cv2.imshow("image", image)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
@@ -4486,6 +4488,7 @@ print("n =", n)
 print(image.shape)
 
 contoursImg = np.zeros(image.shape, np.uint8)
+
 """ NG
 for i in range(n):
     # 畫出輪廓
@@ -4727,6 +4730,7 @@ def make_image(x, y, a, dtype="uint8"):
 y, x = np.ogrid[-10:10:250j, -10:10:500j]
 img_8bit = make_image(x, y, 0.5, dtype="uint8")
 img_16bit = make_image(x, y, 0.5, dtype="uint16")
+
 cv2.imwrite("tmp_img_8bit.jpg", img_8bit)
 cv2.imwrite("tmp_img_16bit.jpg", img_16bit)
 cv2.imwrite("tmp_img_8bit.png", img_8bit)
@@ -4856,9 +4860,7 @@ axes[1].imshow(img)
 show()
 
 #    scpy2.opencv.floodfill_demo：示範填充函數floodFill()的各個參數的用法。
-
 # 去瑕疵-inpaint
-
 #    scpy2.opencv.inpaint_demo：示範inpaint()的用法，使用者用滑鼠繪制需要去瑕疵的區域，程式實時顯示運算結果。
 
 print("------------------------------------------------------------")  # 60個
@@ -4981,7 +4983,6 @@ fig.subplots_adjust(0, 0, 1, 1, 0.02, 0)
 show()
 """
 print("------------------------------------------------------------")  # 60個
-
 """
     scpy2.opencv.remap_demo：示範remap()的拖曳效果。
     在圖形上按住滑鼠左鍵進行拖曳，每次拖曳完成之後，都將修改原始圖形，
@@ -5382,7 +5383,6 @@ scpy2.opencv.watershed_demo：分水嶺算法的示範程式。
 用滑鼠在圖形上繪制起始區域，起始區域將使用“目前標簽”填充，
 按滑鼠右鍵切換到下一個標簽。每次繪制起始區域之後，將顯示分割的結果。
 """
-
 print("------------------------------")  # 30個
 
 # %figonly=使用watershed分割藥丸
@@ -5405,7 +5405,6 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
 """
 # 無 SURF() 函數
 #SURF特征比對
@@ -5491,7 +5490,6 @@ line_collection = LineCollection(lines.reshape(-1, 2, 2),
 ax.add_collection(line_collection);
 
 show()
-
 """
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -5629,7 +5627,6 @@ CV_CONTOURS_MATCH_I2   4.8051,   2.2220,   0.0179,   0.3624,   0.0013
 CV_CONTOURS_MATCH_I3   0.9164,   0.4778,   0.0225,   0.4552,   0.0016
 """
 
-
 # %figonly=使用`matchShapes()`比較由`approxPolyDP()`近似之後的輪廓
 fig, ax = plt.subplots(figsize=(8, 8))
 ax.set_aspect("equal")
@@ -5716,18 +5713,13 @@ sys.exit()
 # 新進 與 測試
 
 """
-
     image = cv2.flip(image, 1)                        # 翻轉影像，使其如同鏡子
     image = image[:, int((w-h)/2):int((h+(w-h)/2))]   # 將影像變成正方形
-
 """
-
 
 print("------------------------------------------------------------")  # 60個
 
-
 cvshow("src", src)
-
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()

@@ -30,13 +30,13 @@ gif_filename = "C:/_git/vcs/_1.data/______test_files1/__pic/_gif/cat.gif"
 print("gif轉jpg")
 from PIL import ImageSequence
 
-gif = Image.open(gif_filename)                # 讀取動畫圖檔
+gif = Image.open(gif_filename)  # 讀取動畫圖檔
 
-i = 0                                      # 設定編號變數
+i = 0  # 設定編號變數
 for frame in ImageSequence.Iterator(gif):
-    frame = frame.convert('RGB')           # 取出每一格轉換成 RGB
-    #frame.save(f'tmp_frame{i}.jpg', quality=65, subsampling=0)  # 儲存為 jpg
-    i = i + 1                              # 編號增加 1
+    frame = frame.convert("RGB")  # 取出每一格轉換成 RGB
+    # frame.save(f'tmp_frame{i}.jpg', quality=65, subsampling=0)  # 儲存為 jpg
+    i = i + 1  # 編號增加 1
 
 print("------------------------------------------------------------")  # 60個
 print("用cv視窗播放gif檔案")
@@ -48,19 +48,19 @@ from PIL import ImageSequence
 
 gif = Image.open(gif_filename)
 
-img_list = []                                      # 建立儲存影格的空串列
+img_list = []  # 建立儲存影格的空串列
 for frame in ImageSequence.Iterator(gif):
-    frame = frame.convert('RGBA')                  # 轉換成 RGBA
-    opencv_img = np.array(frame, dtype=np.uint8)   # 轉換成 numpy 陣列
+    frame = frame.convert("RGBA")  # 轉換成 RGBA
+    opencv_img = np.array(frame, dtype=np.uint8)  # 轉換成 numpy 陣列
     opencv_img = cv2.cvtColor(opencv_img, cv2.COLOR_RGBA2BGRA)  # 顏色從 RGBA 轉換為 BGRA
-    img_list.append(opencv_img)                    # 利用串列儲存該圖片資訊
+    img_list.append(opencv_img)  # 利用串列儲存該圖片資訊
 
-loop = True                                        # 設定 loop 為 True
+loop = True  # 設定 loop 為 True
 while loop:
     for i in img_list:
-        cv2.imshow('image', i)                # 不斷讀取並顯示串列中的圖片內容
-        if cv2.waitKey(200) == ord('q'):
-            loop = False                           # 停止時同時也將 while 迴圈停止
+        cv2.imshow("image", i)  # 不斷讀取並顯示串列中的圖片內容
+        if cv2.waitKey(200) == ord("q"):
+            loop = False  # 停止時同時也將 while 迴圈停止
             break
 
 cv2.destroyAllWindows()
@@ -75,20 +75,20 @@ gif = Image.open(gif_filename)
 
 img_list = []
 for frame in ImageSequence.Iterator(gif):
-    frame = frame.convert('RGBA')
+    frame = frame.convert("RGBA")
     opencv_img = np.array(frame, dtype=np.uint8)
     opencv_img = cv2.cvtColor(opencv_img, cv2.COLOR_RGBA2BGRA)
 
     # 在圖形中間繪製黑色方塊
     x_st, y_st, w, h = 10, 10, 120, 40
-    cv2.rectangle(opencv_img,(x_st, y_st),(x_st+w, y_st+h),(0,0,0),-1)
+    cv2.rectangle(opencv_img, (x_st, y_st), (x_st + w, y_st + h), (0, 0, 0), -1)
 
     # 在黑色方塊上方加入文字, 文字基準是左下角
-    text = 'My Cat'
-    org = (x_st, y_st+30)
+    text = "My Cat"
+    org = (x_st, y_st + 30)
     fontFace = cv2.FONT_HERSHEY_SIMPLEX
     fontScale = 1
-    color = (255,255,255)
+    color = (255, 255, 255)
     thickness = 2
     lineType = cv2.LINE_AA
     cv2.putText(opencv_img, text, org, fontFace, fontScale, color, thickness, lineType)
@@ -98,8 +98,8 @@ for frame in ImageSequence.Iterator(gif):
 loop = True
 while loop:
     for i in img_list:
-        cv2.imshow('image', i)
-        if cv2.waitKey(200) == ord('q'):
+        cv2.imshow("image", i)
+        if cv2.waitKey(200) == ord("q"):
             loop = False
             break
 # 建立要輸出的影格串列
@@ -107,11 +107,18 @@ output = []
 for i in img_list:
     img = i
     img = cv2.cvtColor(img, cv2.COLOR_BGRA2RGBA)  # 因為 OpenCV 為 BGRA，要轉換成 RGBA
-    img = Image.fromarray(img)    # 轉換成 PIL 格式
-    img = img.convert('RGB')      # 轉換成 RGB ( 如果是 RGBA 會自動將黑色白色變成透明色 )
-    output.append(img)            # 加入 output
+    img = Image.fromarray(img)  # 轉換成 PIL 格式
+    img = img.convert("RGB")  # 轉換成 RGB ( 如果是 RGBA 會自動將黑色白色變成透明色 )
+    output.append(img)  # 加入 output
 # 儲存為 gif 動畫圖檔
-output[0].save("tmp_image.gif", save_all=True, append_images=output[1:], duration=200, loop=0, disposal=0)
+output[0].save(
+    "tmp_image.gif",
+    save_all=True,
+    append_images=output[1:],
+    duration=200,
+    loop=0,
+    disposal=0,
+)
 
 cv2.destroyAllWindows()
 
@@ -122,10 +129,19 @@ from PIL import ImageSequence
 
 gif = []
 for i in range(1, 6):
-    img = Image.open(f'C:/_git/vcs/_1.data/______test_files1/__pic/_scenery/ggb{i}.jpg')  # 開啟圖片
-    gif.append(img)                    # 加入串列
+    img = Image.open(
+        f"C:/_git/vcs/_1.data/______test_files1/__pic/_scenery/ggb{i}.jpg"
+    )  # 開啟圖片
+    gif.append(img)  # 加入串列
 # 儲存為 gif
-gif[0].save("tmp_image.gif", save_all=True, append_images=gif[1:], duration=2000, loop=0, disposal=0)
+gif[0].save(
+    "tmp_image.gif",
+    save_all=True,
+    append_images=gif[1:],
+    duration=2000,
+    loop=0,
+    disposal=0,
+)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -148,7 +164,6 @@ output[0].save("tmp_image.gif", save_all=True, append_images=output[1:], duratio
 """
 
 
-
 print("------------------------------------------------------------")  # 60個
 
 
@@ -160,5 +175,4 @@ print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
 
-print('------------------------------------------------------------')	#60個
-
+print("------------------------------------------------------------")  # 60個

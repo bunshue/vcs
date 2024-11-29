@@ -4,12 +4,12 @@
 
 """
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 from PIL import Image
 from PIL import ImageFilter
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/elephant.jpg'
+filename = "C:/_git/vcs/_1.data/______test_files1/elephant.jpg"
 
 print("------------------------------------------------------------")  # 60個
 
@@ -41,40 +41,40 @@ image[i,j,k]
 """
 
 # 檔案 => PIL影像 => numpy陣列
-image=np.array(Image.open(filename))
+image = np.array(Image.open(filename))
 
-#隨機生成5000個椒鹽
-rows,cols,dims=image.shape
+# 隨機生成5000個椒鹽
+rows, cols, dims = image.shape
 for i in range(5000):
-    x=np.random.randint(0,rows)
-    y=np.random.randint(0,cols)
-    image[x,y,:]=255
-    
+    x = np.random.randint(0, rows)
+    y = np.random.randint(0, cols)
+    image[x, y, :] = 255
+
 plt.imshow(image)
-plt.title('椒鹽效果')
+plt.title("椒鹽效果")
 plt.show()
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-print('將圖像二值化，像素值大于 threshold 的變為1，否則變為0')
+print("將圖像二值化，像素值大于 threshold 的變為1，否則變為0")
 
 # 檔案 => PIL影像 => 灰階 => numpy陣列
-image=np.array(Image.open(filename).convert('L'))
+image = np.array(Image.open(filename).convert("L"))
 
-print('圖像二值化, 要灰階圖像')
-      
-threshold=128
+print("圖像二值化, 要灰階圖像")
 
-rows,cols=image.shape
+threshold = 128
+
+rows, cols = image.shape
 for i in range(rows):
     for j in range(cols):
-        if (image[i,j]<=threshold):
-            image[i,j]=0
+        if image[i, j] <= threshold:
+            image[i, j] = 0
         else:
-            image[i,j]=1
-            
-plt.imshow(image,cmap='gray')
-plt.title('二值化, threshold ='+ str(threshold))
+            image[i, j] = 1
+
+plt.imshow(image, cmap="gray")
+plt.title("二值化, threshold =" + str(threshold))
 plt.show()
 
 """
@@ -88,29 +88,29 @@ image[i].mean() # 第 i 行所有數值的平均值
 image[:,-1] # 最後一列
 image[-2,:] (or im[-2]) # 倒數第二行
 """
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 print("偽色彩圖像處理")
 
-#filename = 'C:/_git/vcs/_1.data/______test_files1/pic_256X100.png'
-#filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
+# filename = 'C:/_git/vcs/_1.data/______test_files1/pic_256X100.png'
+# filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
 
 # 檔案 => PIL影像
 image = Image.open(filename)
 
-#彩色轉黑白
+# 彩色轉黑白
 # 轉換為灰度圖像
 # PIL影像 => 灰階
-gray_image = image.convert('L')
+gray_image = image.convert("L")
 
-#3. 偽色彩處理
+# 3. 偽色彩處理
 
-#偽色彩處理可以通過將灰度值映射到彩色值來實現。通常，我們使用一個顏色映射表（Color Map）來定義灰度和彩色之間的映射關系。
-#在Python中，可以使用matplotlib庫來生成顏色映射表並將灰度圖像轉換為彩色圖像。
+# 偽色彩處理可以通過將灰度值映射到彩色值來實現。通常，我們使用一個顏色映射表（Color Map）來定義灰度和彩色之間的映射關系。
+# 在Python中，可以使用matplotlib庫來生成顏色映射表並將灰度圖像轉換為彩色圖像。
 
 # 定義顏色映射表
-cmap = plt.get_cmap('jet')
+cmap = plt.get_cmap("jet")
 
 # 將灰度圖像轉換為彩色圖像
 # 灰階 => numpy陣列 => cmap
@@ -118,35 +118,35 @@ color_image = cmap(np.array(gray_image))
 
 # 顯示彩色圖像
 plt.imshow(color_image)
-plt.title('偽色彩')
+plt.title("偽色彩")
 
 plt.show()
 
-#上述代碼中，我們使用get_cmap方法獲取了一個名為’jet’的顏色映射表。然後，將灰度圖像轉換為NumPy數組，再將數組應用于顏色映射表，得到彩色圖像。
+# 上述代碼中，我們使用get_cmap方法獲取了一個名為’jet’的顏色映射表。然後，將灰度圖像轉換為NumPy數組，再將數組應用于顏色映射表，得到彩色圖像。
 
 print("------------------------------------------------------------")  # 60個
 
-filename = 'C:/_git/vcs/_4.python/_data/elephant.jpg'
+filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
 
 # 檔案 => PIL影像
 image0 = Image.open(filename)
 
 # PIL影像 => 灰階
-image0 = image0.convert('L')
+image0 = image0.convert("L")
 
 # 灰階 => numpy陣列
 image1 = np.array(image0)
 
-print('原圖 灰階最小值 :', int(image1.min()),', 灰階最大值 :', int(image1.max()))
+print("原圖 灰階最小值 :", int(image1.min()), ", 灰階最大值 :", int(image1.max()))
 
-image2=255-image1               #對圖像進行反向處理
-print('反相 灰階最小值 :', int(image2.min()),', 灰階最大值 :', int(image2.max()))
+image2 = 255 - image1  # 對圖像進行反向處理
+print("反相 灰階最小值 :", int(image2.min()), ", 灰階最大值 :", int(image2.max()))
 
-image3=(100.0/255)*image1+100   #將圖像像素值變換到100...200區間
-print('壓縮到100~200 灰階最小值 :', int(image3.min()),', 灰階最大值 :', int(image3.max()))
+image3 = (100.0 / 255) * image1 + 100  # 將圖像像素值變換到100...200區間
+print("壓縮到100~200 灰階最小值 :", int(image3.min()), ", 灰階最大值 :", int(image3.max()))
 
-image4=255.0*(image1/255.0)**2  #對像素值求平方後得到的圖像
-print('相素值平方 灰階最小值 :', int(image4.min()),', 灰階最大值 :', int(image4.max()))
+image4 = 255.0 * (image1 / 255.0) ** 2  # 對像素值求平方後得到的圖像
+print("相素值平方 灰階最小值 :", int(image4.min()), ", 灰階最大值 :", int(image4.max()))
 
 plt.figure(
     num="影像處理2",
@@ -158,23 +158,23 @@ plt.figure(
     frameon=True,
 )
 
-plt.gray()  #不使用顏色信息, 將圖像以灰階方式顯示
+plt.gray()  # 不使用顏色信息, 將圖像以灰階方式顯示
 
 plt.subplot(221)
 plt.imshow(image0)
-plt.title('原圖轉灰階')
+plt.title("原圖轉灰階")
 
 plt.subplot(222)
 plt.imshow(image2)
-plt.title(r'反相 $f(x)=255-x$')
+plt.title(r"反相 $f(x)=255-x$")
 
 plt.subplot(223)
 plt.imshow(image3)
-plt.title(r'壓縮到100~200 $f(x)=\frac{100}{255}x+100$')
+plt.title(r"壓縮到100~200 $f(x)=\frac{100}{255}x+100$")
 
 plt.subplot(224)
 plt.imshow(image4)
-plt.title(r'相素值平方 $f(x)=255(\frac{x}{255})^2$')
+plt.title(r"相素值平方 $f(x)=255(\frac{x}{255})^2$")
 
 plt.show()
 
@@ -182,36 +182,38 @@ print("------------------------------------------------------------")  # 60個
 
 print("PIL_mean")
 
-#PIL影像.getpixel 取得該點之像素值
-#PIL影像.putpixel 設定該點之像素值
+# PIL影像.getpixel 取得該點之像素值
+# PIL影像.putpixel 設定該點之像素值
 
 from PIL import ImageStat
 
-def darkchannel(input_image,h,w):
-    dark_image = Image.new("L",(h,w),0)
-    for x in range(0,h-1):
-        for y in range(0,w-1):
-            dark_image.putpixel((x,y),min(input_image.getpixel((x,y))))
+
+def darkchannel(input_image, h, w):
+    dark_image = Image.new("L", (h, w), 0)
+    for x in range(0, h - 1):
+        for y in range(0, w - 1):
+            dark_image.putpixel((x, y), min(input_image.getpixel((x, y))))
     return dark_image
-  
-def airlight(input_image,h,w):
-    nMinDistance=65536    
-    w=int(round(w/2))
-    h=int(round(h/2))
-    if h*w>200:
-        lu_box = (0, 0, w, h) 
-        ru_box = (w, 0, 2*w, h) 
-        lb_box = (0, h, w, 2*h) 
-        rb_box = (w, h, 2*h,2*w)  
-               
-        lu = input_image.crop(lu_box);
-        ru = input_image.crop(ru_box);
-        lb = input_image.crop(lb_box);
-        rb = input_image.crop(rb_box);
-        lu_m=ImageStat.Stat(lu)
-        ru_m=ImageStat.Stat(ru)
-        lb_m=ImageStat.Stat(lb)
-        rb_m=ImageStat.Stat(rb)
+
+
+def airlight(input_image, h, w):
+    nMinDistance = 65536
+    w = int(round(w / 2))
+    h = int(round(h / 2))
+    if h * w > 200:
+        lu_box = (0, 0, w, h)
+        ru_box = (w, 0, 2 * w, h)
+        lb_box = (0, h, w, 2 * h)
+        rb_box = (w, h, 2 * h, 2 * w)
+
+        lu = input_image.crop(lu_box)
+        ru = input_image.crop(ru_box)
+        lb = input_image.crop(lb_box)
+        rb = input_image.crop(rb_box)
+        lu_m = ImageStat.Stat(lu)
+        ru_m = ImageStat.Stat(ru)
+        lb_m = ImageStat.Stat(lb)
+        rb_m = ImageStat.Stat(rb)
         lu_mean = lu_m.mean
         ru_mean = ru_m.mean
         lb_mean = lb_m.mean
@@ -219,69 +221,112 @@ def airlight(input_image,h,w):
         lu_stddev = lu_m.stddev
         ru_stddev = ru_m.stddev
         lb_stddev = lb_m.stddev
-        rb_stddev = rb_m.stddev 
-        score0 = lu_mean[0]+lu_mean[1]+lu_mean[2] - lu_stddev[0]-lu_stddev[1]-lu_stddev[2]
-        score1 = ru_mean[0]+ru_mean[1]+lu_mean[2] - ru_stddev[0]-ru_stddev[1]-ru_stddev[2]  
-        score2 = lb_mean[0]+lb_mean[1]+lb_mean[2] - lb_stddev[0]-lb_stddev[1]-lb_stddev[2]
-        score3 = rb_mean[0]+rb_mean[1]+rb_mean[2] - rb_stddev[0]-rb_stddev[1]-rb_stddev[2]
-        x =max(score0,score1,score2,score3)       
+        rb_stddev = rb_m.stddev
+        score0 = (
+            lu_mean[0]
+            + lu_mean[1]
+            + lu_mean[2]
+            - lu_stddev[0]
+            - lu_stddev[1]
+            - lu_stddev[2]
+        )
+        score1 = (
+            ru_mean[0]
+            + ru_mean[1]
+            + lu_mean[2]
+            - ru_stddev[0]
+            - ru_stddev[1]
+            - ru_stddev[2]
+        )
+        score2 = (
+            lb_mean[0]
+            + lb_mean[1]
+            + lb_mean[2]
+            - lb_stddev[0]
+            - lb_stddev[1]
+            - lb_stddev[2]
+        )
+        score3 = (
+            rb_mean[0]
+            + rb_mean[1]
+            + rb_mean[2]
+            - rb_stddev[0]
+            - rb_stddev[1]
+            - rb_stddev[2]
+        )
+        x = max(score0, score1, score2, score3)
         if x == score0:
-             air =airlight(lu,h,w)
+            air = airlight(lu, h, w)
         if x == score1:
-             air =airlight(ru,h,w)
+            air = airlight(ru, h, w)
         if x == score2:
-             air =airlight(lb,h,w)
+            air = airlight(lb, h, w)
         if x == score3:
-             air =airlight(rb,h,w)
+            air = airlight(rb, h, w)
     else:
-        for i in range(0,h-1):
-            for j in range(0,w-1):
-                temp=input_image.getpixel((i,j))            
-                distance = ((255 - temp[0])**2 +  (255 - temp[1])**2 + (255 - temp[2])**2)**0.5
+        for i in range(0, h - 1):
+            for j in range(0, w - 1):
+                temp = input_image.getpixel((i, j))
+                distance = (
+                    (255 - temp[0]) ** 2 + (255 - temp[1]) ** 2 + (255 - temp[2]) ** 2
+                ) ** 0.5
                 if nMinDistance > distance:
-                    nMinDistance = distance;
+                    nMinDistance = distance
                     air = temp
     return air
 
-def transmssion(air,dark_image,h,w,OMIGA):
-    trans_map=np.zeros((h,w))
-    A=max(air)
-    for i in range(0,h-1):
-        for j in range(0,w-1):
-            temp=1-OMIGA*dark_image.getpixel((i,j))/A
-            trans_map[i,j]=max(0.1,temp)  
-    for i in range(1,h-1):
-        for j in range(1,w-1):
-                tempup=(trans_map[i-1][j-1]+2*trans_map[i][j-1]+trans_map[i+1][j-1])
-                tempmid=2*(trans_map[i-1][j]+2*trans_map[i][j]+trans_map[i+1][j])
-                tempdown=(trans_map[i-1][j+1]+2*trans_map[i][j+1]+trans_map[i+1][j+1])
-                trans_map[i,j]=(tempup+tempmid+tempdown)/16
+
+def transmssion(air, dark_image, h, w, OMIGA):
+    trans_map = np.zeros((h, w))
+    A = max(air)
+    for i in range(0, h - 1):
+        for j in range(0, w - 1):
+            temp = 1 - OMIGA * dark_image.getpixel((i, j)) / A
+            trans_map[i, j] = max(0.1, temp)
+    for i in range(1, h - 1):
+        for j in range(1, w - 1):
+            tempup = (
+                trans_map[i - 1][j - 1]
+                + 2 * trans_map[i][j - 1]
+                + trans_map[i + 1][j - 1]
+            )
+            tempmid = 2 * (
+                trans_map[i - 1][j] + 2 * trans_map[i][j] + trans_map[i + 1][j]
+            )
+            tempdown = (
+                trans_map[i - 1][j + 1]
+                + 2 * trans_map[i][j + 1]
+                + trans_map[i + 1][j + 1]
+            )
+            trans_map[i, j] = (tempup + tempmid + tempdown) / 16
     return trans_map
-                   
-def defog(image,t_map,air,h,w):
-    dehaze_image = Image.new("RGB",(h,w),0)
-    for i in range(0,h-1):
-        for j in range(0,w-1):
-            R,G,B=image.getpixel((i,j))
-            R=int((R-air[0])/t_map[i,j]+air[0])
-            G=int((G-air[1])/t_map[i,j]+air[1])
-            B=int((B-air[2])/t_map[i,j]+air[2])
-            dehaze_image.putpixel((i,j),(R,G,B)) 
-    return dehaze_image                       
-                    
-filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+
+
+def defog(image, t_map, air, h, w):
+    dehaze_image = Image.new("RGB", (h, w), 0)
+    for i in range(0, h - 1):
+        for j in range(0, w - 1):
+            R, G, B = image.getpixel((i, j))
+            R = int((R - air[0]) / t_map[i, j] + air[0])
+            G = int((G - air[1]) / t_map[i, j] + air[1])
+            B = int((B - air[2]) / t_map[i, j] + air[2])
+            dehaze_image.putpixel((i, j), (R, G, B))
+    return dehaze_image
+
+
+filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
 
 # 檔案 => PIL影像
-image=Image.open(filename)
+image = Image.open(filename)
 
-[h,w]=image.size
-OMIGA =0.8  
-dark_image=darkchannel(image,h,w)
-air=airlight(image,h,w)
-T_map=transmssion(air,dark_image,h,w,OMIGA)
-fogfree_image=defog(image,T_map,air,h,w)
+[h, w] = image.size
+OMIGA = 0.8
+dark_image = darkchannel(image, h, w)
+air = airlight(image, h, w)
+T_map = transmssion(air, dark_image, h, w, OMIGA)
+fogfree_image = defog(image, T_map, air, h, w)
 
-#把結果顯示出來
+# 把結果顯示出來
 plt.imshow(fogfree_image)
 
 plt.show()
@@ -289,6 +334,7 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 
 print("PIL_save")
+
 
 def IsValidImage(image_path):
     """
@@ -316,7 +362,7 @@ def transimage(image_path):
             output_image_path = "tmp_" + str[0] + ".jpg"
             print(output_image_path)
             im = Image.open(image_path)
-            #im.save(output_image_path)
+            # im.save(output_image_path)
             return True
         except:
             return False
@@ -324,15 +370,15 @@ def transimage(image_path):
         return False
 
 
-image_path = 'lena.png'
+image_path = "lena.png"
 print(transimage(image_path))
 
 print("------------------------------------------------------------")  # 60個
 
-filename = 'C:/_git/vcs/_4.python/_data/elephant.jpg'
+filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
 
-print('二值化')
-image1 = Image.open(open(filename, 'rb'))
+print("二值化")
+image1 = Image.open(open(filename, "rb"))
 image2 = image1.point(lambda x: 0 if x < 128 else 255)
 
 print("------------------------------------------------------------")  # 60個
@@ -341,12 +387,7 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-
-
 print("------------------------------------------------------------")  # 60個
-
-
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -354,7 +395,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
-
 
 
 """

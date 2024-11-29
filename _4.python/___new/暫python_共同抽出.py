@@ -260,7 +260,7 @@ font = FontProperties(fname = font_filename, size = 20)
 
 plt.xlabel('Time(s)', fontproperties = font)
 plt.ylabel('Amplitude', fontproperties = font)
-plt.title(u'三角函數', fontproperties = font, fontsize = 24)
+plt.title('三角函數', fontproperties = font, fontsize = 24)
 
 #ax.get_xaxis().set_visible(False)
 #ax.get_yaxis().set_visible(False)

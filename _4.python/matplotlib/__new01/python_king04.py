@@ -104,7 +104,7 @@ matplotlib.rcParams.update( matplotlib.rc_params() )
 
 """
 print("------------------------------------------------------------")  # 60個
-'''
+"""
 from matplotlib import style
 
 print(style.available)
@@ -166,9 +166,9 @@ x = np.linspace(0, 10, 1000)
 y = np.sin(x)
 
 plt.plot(x, y)
-plt.xlabel(u"時間", fontproperties=font)
-plt.ylabel(u"振幅", fontproperties=font)
-plt.title(u"正弦波", fontproperties=font)
+plt.xlabel("時間", fontproperties=font)
+plt.ylabel("振幅", fontproperties=font)
+plt.title("正弦波", fontproperties=font)
 
 plt.show()
 
@@ -176,7 +176,7 @@ print("------------------------------------------------------------")  # 60個
 
 plt.rcParams["font.family"] = "SimHei"
 plt.plot([1,2,3])
-plt.xlabel(u"中文字型")
+plt.xlabel("中文字型")
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
@@ -205,9 +205,9 @@ cc = ax.get_yaxis().get_label().get_text()
 print('y軸 :', cc)
 
 plt.show()
-'''
+"""
 print("------------------------------------------------------------")  # 60個
-'''
+"""
 #Artist的屬性
 
 fig = plt.figure()
@@ -226,10 +226,10 @@ cc = plt.getp(fig.patch)
 print(cc)
 
 plt.show()
-'''
+"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
+"""
 fig = plt.figure()
 
 ax1 = fig.add_subplot(211)
@@ -252,9 +252,9 @@ line2 = Line2D(
 fig.lines.extend([line1, line2])
 
 plt.show()
-'''
+"""
 print("------------------------------------------------------------")  # 60個
-'''
+"""
 #Axes容器
 
 fig = plt.figure()
@@ -837,7 +837,7 @@ for ax, fname in zip(axes.ravel(), functions):
     ax.set_ylim(0, 1.5)
 
 plt.show()
-'''
+"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -851,8 +851,8 @@ c1, c2 = plt.rcParams['axes.color_cycle'][:2]
 plt.bar(data[:,0]-width, data[:,1]/1e7, width, color=c1, label=u"男")
 plt.bar(data[:,0], data[:,2]/1e7, width, color=c2, label=u"女") #❸
 plt.xlim(-width, 100)
-plt.xlabel(u"年齡")
-plt.ylabel(u"人口（千萬）")
+plt.xlabel("年齡")
+plt.ylabel("人口（千萬）")
 plt.legend();
 
 plt.show()
@@ -1097,7 +1097,7 @@ plt.show()
 '''
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
+"""
 # 使用箭頭表示參數曲線的切線方向
 n = 40
 arrow_size = 16
@@ -1127,10 +1127,10 @@ plt.xlim([-1.5, 1.5])
 plt.ylim([-1.5, 1.5])
 
 plt.show()
-'''
+"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
+"""
 #使用quiver()繪制神經網路結構示意圖
 levels = [4, 5, 3, 2]
 x = np.linspace(0, 1, len(levels))
@@ -1153,24 +1153,26 @@ plt.gca().axis("off")
 plt.margins(0.1, 0.1)
 
 plt.show()
-'''
+"""
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print('plt響應滑鼠與鍵碟事件')
+print("plt響應滑鼠與鍵碟事件")
 
-#鍵碟事件
+# 鍵碟事件
 
-#scpy2.matplotlib.key_event_show_key：顯示觸發鍵碟按鍵事件的按鍵名稱。
+# scpy2.matplotlib.key_event_show_key：顯示觸發鍵碟按鍵事件的按鍵名稱。
 
 fig, ax = plt.subplots()
+
 
 def on_key_press(event):
     print(event.key)
     sys.stdout.flush()
-    
-fig.canvas.mpl_connect('key_press_event', on_key_press);
+
+
+fig.canvas.mpl_connect("key_press_event", on_key_press)
 
 """ NG
 for key, funcs in fig.canvas.callbacks.callbacks.iteritems():
@@ -1183,48 +1185,53 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#scpy2.matplotlib.key_event_change_color：透過按鍵修改曲線的彩色。
+# scpy2.matplotlib.key_event_change_color：透過按鍵修改曲線的彩色。
 
 fig, ax = plt.subplots()
 x = np.linspace(0, 10, 1000)
-line, = ax.plot(x, np.sin(x))
+(line,) = ax.plot(x, np.sin(x))
+
 
 def on_key_press(event):
-    if event.key in 'rgbcmyk':
+    if event.key in "rgbcmyk":
         line.set_color(event.key)
-    fig.canvas.draw_idle()        
+    fig.canvas.draw_idle()
+
 
 fig.canvas.mpl_disconnect(fig.canvas.manager.key_press_handler_id)
-fig.canvas.mpl_connect('key_press_event', on_key_press);
+fig.canvas.mpl_connect("key_press_event", on_key_press)
 
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#滑鼠事件
+# 滑鼠事件
 
-#scpy2.matplotlib.mouse_event_show_info：顯示子圖中的滑鼠事件的各種訊息。
+# scpy2.matplotlib.mouse_event_show_info：顯示子圖中的滑鼠事件的各種訊息。
 
 fig, ax = plt.subplots()
-text = ax.text(0.5, 0.5, "event", ha="center", va="center", fontdict={"size":20})
+text = ax.text(0.5, 0.5, "event", ha="center", va="center", fontdict={"size": 20})
+
 
 def on_mouse(event):
     global e
     e = event
     info = "{}\nButton:{}\nFig x,y:{}, {}\nData x,y:{:3.2f}, {:3.2f}".format(
-    event.name, event.button, event.x, event.y, event.xdata, event.ydata)
+        event.name, event.button, event.x, event.y, event.xdata, event.ydata
+    )
     text.set_text(info)
     fig.canvas.draw()
 
-fig.canvas.mpl_connect('button_press_event', on_mouse)
-fig.canvas.mpl_connect('button_release_event', on_mouse)
-fig.canvas.mpl_connect('motion_notify_event', on_mouse);
+
+fig.canvas.mpl_connect("button_press_event", on_mouse)
+fig.canvas.mpl_connect("button_release_event", on_mouse)
+fig.canvas.mpl_connect("motion_notify_event", on_mouse)
 
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#scpy2.matplotlib.mouse_event_move_polygon：示範透過滑鼠搬移Patch物件。
+# scpy2.matplotlib.mouse_event_move_polygon：示範透過滑鼠搬移Patch物件。
 
 from numpy.random import rand, randint
 from matplotlib.patches import RegularPolygon
@@ -1238,35 +1245,40 @@ class PatchMover(object):
         self.start_patch_pos = None
 
         fig = ax.figure
-        fig.canvas.mpl_connect('button_press_event', self.on_press)
-        fig.canvas.mpl_connect('button_release_event', self.on_release)
-        fig.canvas.mpl_connect('motion_notify_event', self.on_motion)
+        fig.canvas.mpl_connect("button_press_event", self.on_press)
+        fig.canvas.mpl_connect("button_release_event", self.on_release)
+        fig.canvas.mpl_connect("motion_notify_event", self.on_motion)
 
     def on_press(self, event):
         patches = self.ax.patches[:]
-        patches.sort(key=lambda patch:patch.get_zorder())
+        patches.sort(key=lambda patch: patch.get_zorder())
         for patch in reversed(patches):
-            if patch.contains_point((event.x, event.y)): 
+            if patch.contains_point((event.x, event.y)):
                 self.selected_patch = patch
                 self.start_mouse_pos = np.array([event.xdata, event.ydata])
                 self.start_patch_pos = patch.xy
                 break
 
-    def on_motion(self, event):   #❸
+    def on_motion(self, event):  # ❸
         if self.selected_patch is not None:
             pos = np.array([event.xdata, event.ydata])
             self.selected_patch.xy = self.start_patch_pos + pos - self.start_mouse_pos
-            self.ax.figure.canvas.draw_idle()   #❹
+            self.ax.figure.canvas.draw_idle()  # ❹
 
-    def on_release(self, event):   #❺
+    def on_release(self, event):  # ❺
         self.selected_patch = None
 
-        
+
 fig, ax = plt.subplots()
 ax.set_aspect("equal")
 for i in range(10):
-    poly = RegularPolygon(rand(2), randint(3, 10), rand() * 0.1 + 0.1, facecolor=rand(3),
-                          zorder=randint(10, 100))
+    poly = RegularPolygon(
+        rand(2),
+        randint(3, 10),
+        rand() * 0.1 + 0.1,
+        facecolor=rand(3),
+        zorder=randint(10, 100),
+    )
     ax.add_patch(poly)
 ax.relim()
 ax.autoscale()
@@ -1276,17 +1288,18 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#點選事件
+# 點選事件
 
-#scpy2.matplotlib.pick_event_demo：示範繪圖物件的點選事件。
+# scpy2.matplotlib.pick_event_demo：示範繪圖物件的點選事件。
 
 
 fig, ax = plt.subplots()
 rect = plt.Rectangle((np.pi, -0.5), 1, 1, fc=np.random.random(3), picker=True)
 ax.add_patch(rect)
-x = np.linspace(0, np.pi*2, 100)
+x = np.linspace(0, np.pi * 2, 100)
 y = np.sin(x)
-line, = plt.plot(x, y, picker=8.0)
+(line,) = plt.plot(x, y, picker=8.0)
+
 
 def on_pick(event):
     artist = event.artist
@@ -1296,27 +1309,27 @@ def on_pick(event):
     else:
         artist.set_fc(np.random.random(3))
     fig.canvas.draw_idle()
-    
-fig.canvas.mpl_connect('pick_event', on_pick);
+
+
+fig.canvas.mpl_connect("pick_event", on_pick)
 
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#實時反白顯示曲線
+# 實時反白顯示曲線
 
-#scpy2.matplotlib.mouse_event_highlight_curve：滑鼠搬移到曲線之上時反白顯示該曲線。
+# scpy2.matplotlib.mouse_event_highlight_curve：滑鼠搬移到曲線之上時反白顯示該曲線。
 
 
 class CurveHighLighter(object):
-    
     def __init__(self, ax, alpha=0.3, linewidth=3):
         self.ax = ax
         self.alpha = alpha
         self.linewidth = 3
-        
-        ax.figure.canvas.mpl_connect('motion_notify_event', self.on_move)
-        
+
+        ax.figure.canvas.mpl_connect("motion_notify_event", self.on_move)
+
     def highlight(self, target):
         need_redraw = False
         if target is None:
@@ -1336,15 +1349,16 @@ class CurveHighLighter(object):
 
         if need_redraw:
             self.ax.figure.canvas.draw_idle()
-        
+
     def on_move(self, evt):
         ax = self.ax
         for line in ax.lines:
-            if line.contains(evt)[0]: #❸
+            if line.contains(evt)[0]:  # ❸
                 self.highlight(line)
                 break
         else:
             self.highlight(None)
+
 
 fig, ax = plt.subplots()
 x = np.linspace(0, 50, 300)
@@ -1359,16 +1373,18 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#動畫
+# 動畫
 
 fig, ax = plt.subplots()
 x = np.linspace(0, 10, 1000)
-line, = ax.plot(x, np.sin(x), lw=2)
+(line,) = ax.plot(x, np.sin(x), lw=2)
+
 
 def update_data(line):
     x[:] += 0.1
     line.set_ydata(np.sin(x))
-    fig.canvas.draw()         #❸
+    fig.canvas.draw()  # ❸
+
 
 timer = fig.canvas.new_timer(interval=50)
 timer.add_callback(update_data, line)
@@ -1376,82 +1392,95 @@ timer.start()
 
 print("------------------------------------------------------------")  # 60個
 
-#使用快取快速重繪圖表
+# 使用快取快速重繪圖表
 
 fig, ax = plt.subplots()
 x = np.linspace(0, 10, 1000)
-line, = ax.plot(x, np.sin(x), lw=2, animated=True)
+(line,) = ax.plot(x, np.sin(x), lw=2, animated=True)
 
 fig.canvas.draw()
-background = fig.canvas.copy_from_bbox(ax.bbox) #❸
+background = fig.canvas.copy_from_bbox(ax.bbox)  # ❸
+
 
 def update_data(line):
     x[:] += 0.1
-    line.set_ydata(np.sin(x)) 
-    fig.canvas.restore_region(background)  #❹
-    ax.draw_artist(line)     #❺
-    fig.canvas.blit(ax.bbox) #❻
+    line.set_ydata(np.sin(x))
+    fig.canvas.restore_region(background)  # ❹
+    ax.draw_artist(line)  # ❺
+    fig.canvas.blit(ax.bbox)  # ❻
 
-timer = fig.canvas.new_timer(interval=50) 
+
+timer = fig.canvas.new_timer(interval=50)
 timer.add_callback(update_data, line)
 timer.start()
 
-#animation模組
+# animation模組
 
 from matplotlib import pyplot as plt
 from matplotlib.animation import FuncAnimation
 
 fig, ax = plt.subplots()
 
-x = np.linspace(0, 4*np.pi, 200)
+x = np.linspace(0, 4 * np.pi, 200)
 y = np.sin(x)
-line, = ax.plot(x, y, lw=2, animated=True)
+(line,) = ax.plot(x, y, lw=2, animated=True)
+
 
 def update_line(i):
-    y = np.sin(x + i*2*np.pi/100)
+    y = np.sin(x + i * 2 * np.pi / 100)
     line.set_ydata(y)
     return [line]
 
-ani = FuncAnimation(fig, update_line, blit=True, interval=25, frames=100) #❸
 
-#matplotlib會使用系統中安裝的視訊壓縮軟體（如ffmpeg.exe）產生視訊檔案。請讀者確認視訊壓縮軟體的可執行檔案的路徑是否在PATH環境變數中。
+ani = FuncAnimation(fig, update_line, blit=True, interval=25, frames=100)  # ❸
 
-ani.save('tmp_sin_wave.mp4', fps=25)
+# matplotlib會使用系統中安裝的視訊壓縮軟體（如ffmpeg.exe）產生視訊檔案。請讀者確認視訊壓縮軟體的可執行檔案的路徑是否在PATH環境變數中。
 
-#加入GUI面板
+ani.save("tmp_sin_wave.mp4", fps=25)
 
-#scpy2.matplotlib.gui_panel：提供了TK與QT界面庫的滑標控制項面板類別TkSliderPanel和QtSliderPanel。tk_panel_demo.py和qt_panel_demo.py為其示範程式。
+# 加入GUI面板
+
+# scpy2.matplotlib.gui_panel：提供了TK與QT界面庫的滑標控制項面板類別TkSliderPanel和QtSliderPanel。tk_panel_demo.py和qt_panel_demo.py為其示範程式。
 
 import matplotlib
-matplotlib.use("TkAgg") 
+
+matplotlib.use("TkAgg")
 
 import pylab as pl
 
+
 def exp_sin(x, A, f, z, p):
-    return A * np.sin(2 * np.pi * f * x + p)  * np.exp(z * x)
+    return A * np.sin(2 * np.pi * f * x + p) * np.exp(z * x)
+
 
 fig, ax = pl.subplots()
 
 x = np.linspace(1e-6, 1, 500)
-pars = {"A":1.0, "f":2, "z":-0.2, "p":0}
+pars = {"A": 1.0, "f": 2, "z": -0.2, "p": 0}
 y = exp_sin(x, **pars)
 
-line, = pl.plot(x, y)
+(line,) = pl.plot(x, y)
 
-def update(**kw): #❸
+
+def update(**kw):  # ❸
     y = exp_sin(x, **kw)
-    line.set_data(x, y) #❹
+    line.set_data(x, y)  # ❹
     ax.relim()
     ax.autoscale_view()
-    fig.canvas.draw_idle() #❺ 
+    fig.canvas.draw_idle()  # ❺
+
 
 from scpy2.matplotlib.gui_panel import TkSliderPanel
 
-panel = TkSliderPanel(fig,  #❻
-                      [("A", 0, 10), ("f", 0, 10), ("z", -3, 0), ("p", 0, 2*np.pi)],
-                      update, cols=2, min_value_width=80)
-panel.set_parameters(**pars) #❼
-fig.show() #❽
+panel = TkSliderPanel(
+    fig,  # ❻
+    [("A", 0, 10), ("f", 0, 10), ("z", -3, 0), ("p", 0, 2 * np.pi)],
+    update,
+    cols=2,
+    min_value_width=80,
+)
+panel.set_parameters(**pars)  # ❼
+fig.show()  # ❽
 
 
 print("------------------------------------------------------------")  # 60個
@@ -1465,11 +1494,7 @@ sys.exit()
 print("------------------------------------------------------------")  # 60個
 
 
-
-
-
 print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -1506,5 +1531,3 @@ plt.close("all")
 
 
 plt.close("all")
-
-

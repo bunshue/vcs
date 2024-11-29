@@ -103,7 +103,7 @@ print("------------------------------------------------------------")  # 60個
 import PIL
 from PIL import Image
 
-filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
 
 print("------------------------------------------------------------")  # 60個
 
@@ -125,13 +125,13 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-filename1 = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/red_300X300.bmp'
-filename2 = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/green_300X300.bmp'
+filename1 = "C:/_git/vcs/_1.data/______test_files1/_image_processing/red_300X300.bmp"
+filename2 = "C:/_git/vcs/_1.data/______test_files1/_image_processing/green_300X300.bmp"
 
-filename1 = 'C:/_git/vcs/_1.data/______test_files1/picture2.jpg'
-filename2 = 'C:/_git/vcs/_1.data/______test_files1/picture1.bmp'
+filename1 = "C:/_git/vcs/_1.data/______test_files1/picture2.jpg"
+filename2 = "C:/_git/vcs/_1.data/______test_files1/picture1.bmp"
 
 """
 平均雜湊（aHash）
@@ -164,20 +164,20 @@ image2 = Image.open(filename2)
 hash1 = imagehash.average_hash(image1)
 hash2 = imagehash.average_hash(image2)
 
-print('圖一的hash :', hash1)
-print('圖二的hash :', hash2)
+print("圖一的hash :", hash1)
+print("圖二的hash :", hash2)
 
 if hash1 == hash2:
-    print('兩圖相同')
+    print("兩圖相同")
 else:
-    print('兩圖不同')
+    print("兩圖不同")
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
-font_filename = 'C:/_git/vcs/_1.data/______test_files5/taipei_sans_tc_beta.ttf'
+filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
+font_filename = "C:/_git/vcs/_1.data/______test_files5/taipei_sans_tc_beta.ttf"
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 pre_html = """
 <!DOCTYPE html>
@@ -297,26 +297,26 @@ def blue_to_red2(image_path):
 
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'    
 blue_to_red2(filename)
-"""    
+"""
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-#添加小圖片水印
+# 添加小圖片水印
 
-filename = 'C:/_git/vcs/_4.python/_data/elephant.jpg'
-logo_filename = 'C:/_git/vcs/_4.python/_data/logo1.png'
+filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
+logo_filename = "C:/_git/vcs/_4.python/_data/logo1.png"
 
 # 檔案 => PIL影像
 im = Image.open(filename)
 
 # 檔案 => PIL影像
 mark = Image.open(logo_filename)
-mark = mark.resize((128, 128), Image.LANCZOS) # 使用 LANCZOS 調整影像大小
+mark = mark.resize((128, 128), Image.LANCZOS)  # 使用 LANCZOS 調整影像大小
 
-layer=Image.new('RGBA', im.size, (0,0,0,0))
-layer.paste(mark, (im.size[0]-128-10,im.size[1]-128-10))
+layer = Image.new("RGBA", im.size, (0, 0, 0, 0))
+layer.paste(mark, (im.size[0] - 128 - 10, im.size[1] - 128 - 10))
 
-out=Image.composite(layer,im,layer)
+out = Image.composite(layer, im, layer)
 
 plt.imshow(out)
 plt.show()
@@ -335,8 +335,7 @@ print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
 
-print('------------------------------------------------------------')	#60個
-
+print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
@@ -356,7 +355,7 @@ print('你已點擊:', x)
 plt.show()
 """
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 """
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
@@ -404,12 +403,14 @@ frame.show()
 """
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
 from PIL import Image
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_image_processing/pic6_childrenb.png'
+filename = (
+    "C:/_git/vcs/_1.data/______test_files1/__pic/_image_processing/pic6_childrenb.png"
+)
 
 image_width = 800
 
@@ -417,13 +418,13 @@ img = Image.open(filename)
 w, h = img.size
 print(img.size)
 
-img = img.resize((image_width,int(image_width / float(w) * h)))
+img = img.resize((image_width, int(image_width / float(w) * h)))
 
-img.save('aaaaa.png')
+img.save("aaaaa.png")
 print("<{}> resize 完成!".format(filename))
 img.close()
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 """
 import glob
@@ -460,17 +461,15 @@ if __name__ == '__main__':
 
 """
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
-#filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_gif/SpongeBob.gif'
+filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
+# filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_gif/SpongeBob.gif'
 
 from PIL import Image
+
 img = Image.open(filename)
 print(img.mode)
 
-#01   Img_8 = img.convert("P")
-#02   Img_8.save('xxx.png')
-
-
-
+# 01   Img_8 = img.convert("P")
+# 02   Img_8.save('xxx.png')

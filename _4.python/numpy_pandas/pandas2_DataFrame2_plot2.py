@@ -166,11 +166,11 @@ sns.swarmplot(x="day", y="total_bill", data=tips, color="black")
 plt.show()
 
 # catplot兩變量關係圖
-sns.catplot(x='day',y='total_bill',data=tips,kind='bar')
+sns.catplot(x="day", y="total_bill", data=tips, kind="bar")
 
 tc = tips.corr()
 
-sns.heatmap(tc,annot=True,cmap='coolwarm')
+sns.heatmap(tc, annot=True, cmap="coolwarm")
 
 plt.show()
 

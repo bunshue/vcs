@@ -53,7 +53,7 @@ print(csv_filename)
 
 
 # 讀取網頁上的csv檔
-url = 'https://github.com/duchesnay/pystatsml/raw/master/datasets/salary_table.csv'
+url = "https://github.com/duchesnay/pystatsml/raw/master/datasets/salary_table.csv"
 salary = pd.read_csv(url)
 
 """ no df users
@@ -87,7 +87,7 @@ conn = sqlite3.connect(db_filename)
 ##############################################################################
 # Creating tables with pandas
 
-url = 'https://github.com/duchesnay/pystatsml/raw/master/datasets/salary_table.csv'
+url = "https://github.com/duchesnay/pystatsml/raw/master/datasets/salary_table.csv"
 salary = pd.read_csv(url)
 
 salary.to_sql("salary", conn, if_exists="replace")
@@ -96,7 +96,7 @@ salary.to_sql("salary", conn, if_exists="replace")
 # Push modifications
 
 cur = conn.cursor()
-values = (100, 14000, 5,  'Bachelor', 'N')
+values = (100, 14000, 5, "Bachelor", "N")
 cur.execute("insert into salary values (?, ?, ?, ?, ?)", values)
 conn.commit()
 
@@ -108,8 +108,8 @@ salary_sql = pd.read_sql_query("select * from salary;", conn)
 print(salary_sql.head())
 
 pd.read_sql_query("select * from salary;", conn).tail()
-pd.read_sql_query('select * from salary where salary>25000;', conn)
-pd.read_sql_query('select * from salary where experience=16;', conn)
+pd.read_sql_query("select * from salary where salary>25000;", conn)
+pd.read_sql_query("select * from salary where experience=16;", conn)
 pd.read_sql_query('select * from salary where education="Master";', conn)
 
 
@@ -169,7 +169,7 @@ Data Frame
 
 """
 
-url = 'https://github.com/duchesnay/pystatsml/raw/master/datasets/iris.csv'
+url = "https://github.com/duchesnay/pystatsml/raw/master/datasets/iris.csv"
 df = pd.read_csv(url)
 
 num_cols = df._get_numeric_data().columns
@@ -178,8 +178,8 @@ stats = list()
 
 for grp, d in df.groupby("species"):
     print(grp)
-    #print()
-    stats.append( [grp] + d.loc[:, num_cols].mean(axis=0).tolist())
+    # print()
+    stats.append([grp] + d.loc[:, num_cols].mean(axis=0).tolist())
 
 stats = pd.DataFrame(stats, columns=["species"] + num_cols.tolist())
 print(stats)
@@ -189,12 +189,13 @@ df.groupby("species").mean()
 
 ##
 
-df.loc[[0, 1] ,"petal_width"] = None
+df.loc[[0, 1], "petal_width"] = None
 
 df.petal_width
 
-df["petal_width"][df["petal_width"].isnull()] = \
-    df["petal_width"][df["petal_width"].notnull()].median()
+df["petal_width"][df["petal_width"].isnull()] = df["petal_width"][
+    df["petal_width"].notnull()
+].median()
 
 
 #
@@ -210,7 +211,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-'''
+"""
 Numpy: arrays and matrices
 ==========================
 
@@ -228,7 +229,7 @@ Computation time:
 
     arr = np.arange(10 ** 8)
     %time arr.sum()
-'''
+"""
 
 ##############################################################################
 # Create arrays
@@ -237,11 +238,11 @@ Computation time:
 # Create ndarrays from lists.
 # note: every element must be the same type (will be converted if possible)
 
-data1 = [1, 2, 3, 4, 5]             # list
-arr1 = np.array(data1)              # 1d array
+data1 = [1, 2, 3, 4, 5]  # list
+arr1 = np.array(data1)  # 1d array
 data2 = [range(1, 5), range(5, 9)]  # list of lists
-arr2 = np.array(data2)              # 2d array
-arr2.tolist()                       # convert array back to list
+arr2 = np.array(data2)  # 2d array
+arr2.tolist()  # convert array back to list
 
 
 ##############################################################################
@@ -250,8 +251,8 @@ arr2.tolist()                       # convert array back to list
 np.zeros(10)
 np.zeros((3, 6))
 np.ones(10)
-np.linspace(0, 1, 5)            # 0 to 1 (inclusive) with 5 points
-np.logspace(0, 3, 4)            # 10^0 to 10^3 (inclusive) with 4 points
+np.linspace(0, 1, 5)  # 0 to 1 (inclusive) with 5 points
+np.logspace(0, 3, 4)  # 10^0 to 10^3 (inclusive) with 4 points
 
 ##############################################################################
 # arange is like range, except it returns an array (not a list)
@@ -263,11 +264,11 @@ float_array = int_array.astype(float)
 # Examining arrays
 # ----------------
 
-arr1.dtype      # float64
-arr2.ndim       # 2
-arr2.shape      # (2, 4) - axis 0 is rows, axis 1 is columns
-arr2.size       # 8 - total number of elements
-len(arr2)       # 2 - size of first dimension (aka axis)
+arr1.dtype  # float64
+arr2.ndim  # 2
+arr2.shape  # (2, 4) - axis 0 is rows, axis 1 is columns
+arr2.size  # 8 - total number of elements
+len(arr2)  # 2 - size of first dimension (aka axis)
 
 ##############################################################################
 # Reshaping
@@ -283,7 +284,7 @@ print(arr.reshape(5, 2))
 a = np.array([0, 1])
 a_col = a[:, np.newaxis]
 print(a_col)
-#or
+# or
 a_col = a[:, None]
 
 ##############################################################################
@@ -404,9 +405,9 @@ np.stack([a, b])
 
 arr = np.arange(10, dtype=float).reshape((2, 5))
 
-arr[0]         # 0th element (slices like a list)
-arr[0, 3]      # row 0, column 3: returns 4
-arr[0][3]      # alternative syntax
+arr[0]  # 0th element (slices like a list)
+arr[0, 3]  # row 0, column 3: returns 4
+arr[0][3]  # alternative syntax
 
 ##############################################################################
 # Slicing
@@ -415,10 +416,10 @@ arr[0][3]      # alternative syntax
 # Syntax: ``start:stop:step`` with ``start`` *(default 0)* ``stop`` *(default last)* ``step`` *(default 1)*
 #
 
-arr[0, :]      # row 0: returns 1d array ([1, 2, 3, 4])
-arr[:, 0]      # column 0: returns 1d array ([1, 5])
-arr[:, :2]     # columns strictly before index 2 (2 first columns)
-arr[:, 2:]     # columns after index 2 included
+arr[0, :]  # row 0: returns 1d array ([1, 2, 3, 4])
+arr[:, 0]  # column 0: returns 1d array ([1, 5])
+arr[:, :2]  # columns strictly before index 2 (2 first columns)
+arr[:, 2:]  # columns after index 2 included
 arr2 = arr[:, 1:4]  # columns between index 1 (included) and 4 (excluded)
 print(arr2)
 
@@ -473,23 +474,23 @@ print(arr)
 ##############################################################################
 # Boolean arrays indexing continues
 
-names = np.array(['Bob', 'Joe', 'Will', 'Bob'])
-names == 'Bob'                          # returns a boolean array
-names[names != 'Bob']                   # logical selection
-(names == 'Bob') | (names == 'Will')    # keywords "and/or" don't work with boolean arrays
-names[names != 'Bob'] = 'Joe'           # assign based on a logical selection
-np.unique(names)                        # set function
+names = np.array(["Bob", "Joe", "Will", "Bob"])
+names == "Bob"  # returns a boolean array
+names[names != "Bob"]  # logical selection
+(names == "Bob") | (names == "Will")  # keywords "and/or" don't work with boolean arrays
+names[names != "Bob"] = "Joe"  # assign based on a logical selection
+np.unique(names)  # set function
 
 ##############################################################################
 # Vectorized operations
 # ---------------------
 
 nums = np.arange(5)
-nums * 10                           # multiply each element by 10
-nums = np.sqrt(nums)                # square root of each element
-np.ceil(nums)                       # also floor, rint (round to nearest int)
-np.isnan(nums)                      # checks for NaN
-nums + np.arange(5)                 # add element-wise
+nums * 10  # multiply each element by 10
+nums = np.sqrt(nums)  # square root of each element
+np.ceil(nums)  # also floor, rint (round to nearest int)
+np.isnan(nums)  # checks for NaN
+nums + np.arange(5)  # add element-wise
 np.maximum(nums, np.array([1, -2, 3, -4, 5]))  # compare element-wise
 
 # Compute Euclidean distance between 2 vectors
@@ -498,24 +499,24 @@ vec2 = np.random.randn(10)
 dist = np.sqrt(np.sum((vec1 - vec2) ** 2))
 
 # math and stats
-rnd = np.random.randn(4, 2) # random normals in 4x2 array
+rnd = np.random.randn(4, 2)  # random normals in 4x2 array
 rnd.mean()
 rnd.std()
-rnd.argmin()                # index of minimum element
+rnd.argmin()  # index of minimum element
 rnd.sum()
-rnd.sum(axis=0)             # sum of columns
-rnd.sum(axis=1)             # sum of rows
+rnd.sum(axis=0)  # sum of columns
+rnd.sum(axis=1)  # sum of rows
 
 # methods for boolean arrays
-(rnd > 0).sum()             # counts number of positive values
-(rnd > 0).any()             # checks if any value is True
-(rnd > 0).all()             # checks if all values are True
+(rnd > 0).sum()  # counts number of positive values
+(rnd > 0).any()  # checks if any value is True
+(rnd > 0).all()  # checks if all values are True
 
 # random numbers
-np.random.seed(12234)       # Set the seed
-np.random.rand(2, 3)        # 2 x 3 matrix in [0, 1]
-np.random.randn(10)         # random normals (mean 0, sd 1)
-np.random.randint(0, 2, 10) # 10 randomly picked 0 or 1
+np.random.seed(12234)  # Set the seed
+np.random.rand(2, 3)  # 2 x 3 matrix in [0, 1]
+np.random.randn(10)  # random normals (mean 0, sd 1)
+np.random.randint(0, 2, 10)  # 10 randomly picked 0 or 1
 
 ##############################################################################
 # Broadcasting
@@ -539,10 +540,7 @@ np.random.randint(0, 2, 10) # 10 randomly picked 0 or 1
 # - When one of the shapes runs out of dimensions (because it has less dimensions than the other shape), Numpy will use 1 in the comparison process until the other shape's dimensions run out as well.
 #
 
-a = np.array([[ 0,  0,  0],
-              [10, 10, 10],
-              [20, 20, 20],
-              [30, 30, 30]])
+a = np.array([[0, 0, 0], [10, 10, 10], [20, 20, 20], [30, 30, 30]])
 
 b = np.array([0, 1, 2])
 
@@ -557,7 +555,6 @@ a - a.mean(axis=0)
 # Scale (center, normalise) data column-wise
 
 (a - a.mean(axis=0)) / a.std(axis=0)
-
 
 
 ##############################################################################
@@ -586,13 +583,12 @@ a - a.mean(axis=0)
 #   Result (3d array):  15 x 3 x 5
 
 
-
 ##############################################################################
 # Exercises
 # ---------
 # Given the array:
 
-X = np.random.randn(4, 2) # random normals in 4x2 array
+X = np.random.randn(4, 2)  # random normals in 4x2 array
 
 ##############################################################################
 # - For each column find the row index of the minimum value.
@@ -600,27 +596,26 @@ X = np.random.randn(4, 2) # random normals in 4x2 array
 # - Write a function ``standardize(X)`` that return an array whose columns are centered and scaled (by std-dev).
 
 
-
-
 print("------------------------------------------------------------")  # 60個
 
 X = np.random.randn(4, 2)
 print(X)
 
-'''
+"""
 - For each column find the row indices of the minimiun value.
-'''
-[np.argmin(X[:, j])
-    for j in range(X.shape[1])]
+"""
+[np.argmin(X[:, j]) for j in range(X.shape[1])]
 
 np.argmin(X, axis=0)
 
-'''
+"""
 - Write a function ``scale(X)`` that return an array whose columns are centered and scaled (by std-dev).
-'''
+"""
+
 
 def scale(X):
     return (X - X.mean(axis=0)) / X.std(axis=0)
+
 
 X = np.random.randn(5, 3)
 Xs = scale(X)
@@ -648,57 +643,59 @@ plt.show()
 plt.figure(figsize=(9, 3))
 cosinus = np.cos(x)
 plt.plot(x, sinus, "-b", x, sinus, "ob", x, cosinus, "-r", x, cosinus, "or")
-plt.xlabel('this is x!')
-plt.ylabel('this is y!')
-plt.title('My First Plot')
+plt.xlabel("this is x!")
+plt.ylabel("this is y!")
+plt.title("My First Plot")
 plt.show()
 
 # Step by step
 
 plt.figure(figsize=(9, 3))
-plt.plot(x, sinus, label='sinus', color='blue', linestyle='--', linewidth=2)
-plt.plot(x, cosinus, label='cosinus', color='red', linestyle='-', linewidth=2)
+plt.plot(x, sinus, label="sinus", color="blue", linestyle="--", linewidth=2)
+plt.plot(x, cosinus, label="cosinus", color="red", linestyle="-", linewidth=2)
 plt.legend()
 plt.show()
 
-#Scatter (2D) plots
+# Scatter (2D) plots
 
 # 讀取本地檔案 若無 讀取遠端檔案
 
 try:
     salary = pd.read_csv("salary_table.csv")
 except:
-    url = 'https://github.com/duchesnay/pystatsml/raw/master/datasets/salary_table.csv'
+    url = "https://github.com/duchesnay/pystatsml/raw/master/datasets/salary_table.csv"
     salary = pd.read_csv(url)
 
 df = salary
 print(df.head())
 
-#Simple scatter with colors
+# Simple scatter with colors
 
 plt.figure(figsize=(3, 3), dpi=100)
 _ = sns.scatterplot(x="experience", y="salary", hue="education", data=salary)
 
-#Legend outside
+# Legend outside
 
 ax = sns.relplot(x="experience", y="salary", hue="education", data=salary)
 
-#Linear model
+# Linear model
 
 ax = sns.lmplot(x="experience", y="salary", hue="education", data=salary)
 
-#Scatter plot with colors and symbols
+# Scatter plot with colors and symbols
 
-ax = sns.relplot(x="experience", y="salary", hue="education", style='management', data=salary)
+ax = sns.relplot(
+    x="experience", y="salary", hue="education", style="management", data=salary
+)
 
-#Saving Figures
+# Saving Figures
 
 ### bitmap format
 plt.plot(x, sinus)
 plt.savefig("tmp_sinus.png")
 plt.close()
 
-# Prefer vectorial format (SVG: Scalable Vector Graphics) can be edited with 
+# Prefer vectorial format (SVG: Scalable Vector Graphics) can be edited with
 # Inkscape, Adobe Illustrator, Blender, etc.
 plt.plot(x, sinus)
 plt.savefig("tmp_sinus.svg")
@@ -709,11 +706,11 @@ plt.plot(x, sinus)
 plt.savefig("tmp_sinus.pdf")
 plt.close()
 
-#Boxplot and violin plot: one factor
+# Boxplot and violin plot: one factor
 
-#Box plots are non-parametric: they display variation in samples of a statistical population without making any assumptions of the underlying statistical distribution.
+# Box plots are non-parametric: they display variation in samples of a statistical population without making any assumptions of the underlying statistical distribution.
 
-#title{width=7cm}
+# title{width=7cm}
 
 ax = sns.boxplot(x="management", y="salary", data=salary)
 ax = sns.stripplot(x="management", y="salary", data=salary, jitter=True, color="black")
@@ -721,33 +718,51 @@ ax = sns.stripplot(x="management", y="salary", data=salary, jitter=True, color="
 ax = sns.violinplot(x="management", y="salary", data=salary)
 ax = sns.stripplot(x="management", y="salary", data=salary, jitter=True, color="white")
 
-#Boxplot and violin plot: two factors
+# Boxplot and violin plot: two factors
 
 ax = sns.boxplot(x="management", y="salary", hue="education", data=salary)
-ax = sns.stripplot(x="management", y="salary", hue="education", data=salary, jitter=True, dodge=True, linewidth=1)
+ax = sns.stripplot(
+    x="management",
+    y="salary",
+    hue="education",
+    data=salary,
+    jitter=True,
+    dodge=True,
+    linewidth=1,
+)
 
 ax = sns.violinplot(x="management", y="salary", hue="education", data=salary)
-ax = sns.stripplot(x="management", y="salary", hue="education", data=salary, jitter=True, dodge=True, linewidth=1)
+ax = sns.stripplot(
+    x="management",
+    y="salary",
+    hue="education",
+    data=salary,
+    jitter=True,
+    dodge=True,
+    linewidth=1,
+)
 
-#Distributions and density plot
+# Distributions and density plot
 
 ax = sns.displot(x="salary", hue="management", kind="kde", data=salary, fill=True)
 
-#Multiple axis
+# Multiple axis
 
 fig, axes = plt.subplots(3, 1, figsize=(9, 9), sharex=True)
 
 i = 0
-for edu, d in salary.groupby(['education']):
-    sns.kdeplot(x="salary", hue="management", data=d, fill=True, ax=axes[i], palette="muted")
+for edu, d in salary.groupby(["education"]):
+    sns.kdeplot(
+        x="salary", hue="management", data=d, fill=True, ax=axes[i], palette="muted"
+    )
     axes[i].set_title(edu)
     i += 1
 
-#Pairwise scatter plots
+# Pairwise scatter plots
 
 ax = sns.pairplot(salary, hue="management")
 
-#Time series
+# Time series
 
 sns.set(style="darkgrid")
 
@@ -765,14 +780,9 @@ ax = sns.pointplot(x="timepoint", y="signal",
 print("------------------------------------------------------------")  # 60個
 
 
-
-
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
-
-

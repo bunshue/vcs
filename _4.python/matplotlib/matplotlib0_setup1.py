@@ -571,9 +571,9 @@ plt.plot(xpt, ypt5, '-o', label="O(n*n)")
 plt.title('振幅越來越小的 $\sin$')
 
 myfont = matplotlib.font_manager.FontProperties(fname = font_filename)
-plt.xlabel(u'橫座標', fontproperties = myfont)
-plt.ylabel(u'縱座標', fontproperties = myfont)
-plt.title(u'三角函數', fontproperties = myfont)
+plt.xlabel('橫座標', fontproperties = myfont)
+plt.ylabel('縱座標', fontproperties = myfont)
+plt.title('三角函數', fontproperties = myfont)
 
 plt.title('Euler Number',fontsize=24,loc='left',color='b', fontweight='bold',fontstyle='italic')
 

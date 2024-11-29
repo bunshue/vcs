@@ -5,7 +5,7 @@ PIL histogram
 
 """
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 from PIL import Image
 from PIL import ImageDraw
@@ -32,17 +32,17 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-#把一張圖的RGB通道分開顯示出來
+# 把一張圖的RGB通道分開顯示出來
 
-filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
-filename = 'C:/_git/vcs/_1.data/______test_files1/ims01.bmp'
-#filename = 'C:/_git/vcs/_4.python/opencv/data/RGB_R.bmp' #400X400
-#filename = '../opencv/data/pic_calcHist.jpg'
+filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
+filename = "C:/_git/vcs/_1.data/______test_files1/ims01.bmp"
+# filename = 'C:/_git/vcs/_4.python/opencv/data/RGB_R.bmp' #400X400
+# filename = '../opencv/data/pic_calcHist.jpg'
 filename = "C:/_git/vcs/_4.python/_data/eq1.bmp"  # 560X400
-#filename = "C:/_git/vcs/_4.python/_data/eq3.bmp"  # 480X360
-#filename = "C:/_git/vcs/_4.python/_data/eq4.bmp"  # 480X360
+# filename = "C:/_git/vcs/_4.python/_data/eq3.bmp"  # 480X360
+# filename = "C:/_git/vcs/_4.python/_data/eq4.bmp"  # 480X360
 
 plt.figure(
     num="配合圖形遮罩計算直方圖",
@@ -62,41 +62,41 @@ plt.imshow(image1)
 
 # PIL影像 => 灰階
 # 灰階才能做histogram處理
-image2 = image1.convert('L')	#轉換成灰階圖像
+image2 = image1.convert("L")  # 轉換成灰階圖像
 
 plt.subplot(212)
 
 image2_hist = image2.histogram()
-print('len = ', len(image2_hist))
+print("len = ", len(image2_hist))
 index = np.arange(0, len(image2_hist))
-plt.plot(index, image2_hist, color = 'yellow', label = '原圖灰階', linewidth = 2)
+plt.plot(index, image2_hist, color="yellow", label="原圖灰階", linewidth=2)
 
-print('RGB影像不可以做histogram, 分離成獨立通道後才可以做histogram')
-r, g, b = image1.split()   #r, g, b為三個通道的list
+print("RGB影像不可以做histogram, 分離成獨立通道後才可以做histogram")
+r, g, b = image1.split()  # r, g, b為三個通道的list
 r_hist = r.histogram()
 g_hist = g.histogram()
 b_hist = b.histogram()
 
-print('len = ', len(r_hist))
+print("len = ", len(r_hist))
 index = np.arange(0, len(r_hist))
 
 plt.subplot(212)
 
-plt.plot(index, r_hist, color = 'red', label = 'R 通道')
-plt.plot(index, g_hist, color = 'green', label = 'G 通道')
-plt.plot(index, b_hist, color = 'blue', label = 'B 通道')
+plt.plot(index, r_hist, color="red", label="R 通道")
+plt.plot(index, g_hist, color="green", label="G 通道")
+plt.plot(index, b_hist, color="blue", label="B 通道")
 
-plt.xlim(0-10, 256+10)
-plt.ylim(0, 4500+2000+2000)
+plt.xlim(0 - 10, 256 + 10)
+plt.ylim(0, 4500 + 2000 + 2000)
 plt.legend()
 
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-print('用plot畫出三色分布')
+print("用plot畫出三色分布")
 
-filename = 'C:/_git/vcs/_4.python/_data/elephant.jpg'
+filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
 filename = "C:/_git/vcs/_4.python/_data/eq1.bmp"  # 560X400
 
 plt.figure(
@@ -112,10 +112,10 @@ plt.figure(
 plt.subplot(211)
 
 # 檔案 => PIL影像
-image1 = Image.open(filename)    #PIL讀取本機圖片, 讀取的是RGB格式的圖片
+image1 = Image.open(filename)  # PIL讀取本機圖片, 讀取的是RGB格式的圖片
 plt.imshow(image1)
 
-r, g, b = image1.split()   #r, g, b為三個通道的list
+r, g, b = image1.split()  # r, g, b為三個通道的list
 r_hist = r.histogram()
 g_hist = g.histogram()
 b_hist = b.histogram()
@@ -124,26 +124,27 @@ ind0 = np.arange(0, len(r_hist))
 
 plt.subplot(212)
 
-plt.plot(ind0, r_hist, color = 'red', label = 'R 通道')
-plt.plot(ind0, g_hist, color = 'green', label = 'G 通道')
-plt.plot(ind0, b_hist, color = 'blue', label = 'B 通道')
+plt.plot(ind0, r_hist, color="red", label="R 通道")
+plt.plot(ind0, g_hist, color="green", label="G 通道")
+plt.plot(ind0, b_hist, color="blue", label="B 通道")
 
-plt.xlim(0-10, 256+10)
-plt.ylim(0, 4500+2000+2000)
+plt.xlim(0 - 10, 256 + 10)
+plt.ylim(0, 4500 + 2000 + 2000)
 plt.legend()
 
 plt.show()
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 from PIL import ImageChops
 
+
 def compare_images(filename1, filename2, threshold=0.8):
-    #比較兩張圖像的相似度，返回相似度值（0~1之間的浮點數）
+    # 比較兩張圖像的相似度，返回相似度值（0~1之間的浮點數）
     # 檔案 => PIL影像 => RGBA
-    image1 = Image.open(filename1).convert('RGBA')
+    image1 = Image.open(filename1).convert("RGBA")
     # 檔案 => PIL影像 => RGBA
-    image2 = Image.open(filename2).convert('RGBA')
+    image2 = Image.open(filename2).convert("RGBA")
     diff = ImageChops.difference(image1, image2)
     histogram = diff.histogram()
     pixels = sum(histogram)
@@ -151,14 +152,15 @@ def compare_images(filename1, filename2, threshold=0.8):
     print(similarity)
     return similarity >= threshold
 
-# 測試比較相似度
-filename1 = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-filename2 = 'C:/_git/vcs/_1.data/______test_files1/picture1.bmp'
-is_similar = compare_images(filename1, filename2)
-print('相似度:', is_similar)
 
-print('------------------------------------------------------------')	#60個
-'''
+# 測試比較相似度
+filename1 = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
+filename2 = "C:/_git/vcs/_1.data/______test_files1/picture1.bmp"
+is_similar = compare_images(filename1, filename2)
+print("相似度:", is_similar)
+
+print("------------------------------------------------------------")  # 60個
+
 """
 圖像直方圖
 
@@ -226,21 +228,23 @@ bins: 返回各個bin的區間范圍
 patches: 返回每個bin里面包含的數據，是一個list
 """
 
-filename = 'C:/_git/vcs/_4.python/_data/elephant.jpg'
+filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
 
 # 檔案 => PIL影像 => 灰階 => np陣列
-image = np.array(Image.open(filename).convert('L'))
+image = np.array(Image.open(filename).convert("L"))
 
 # 利用hist來繪制直方圖
 # 第一個參數為一個一維數組
 # 因為hist只接受一維數組作為輸入，所以要用flatten()方法將任意數組按照行優先準則轉化成一個一維數組
 # 第二個參數指定bin的個數
-n, bins, patches = plt.hist(image.flatten(), bins=256, density = True, facecolor='green', alpha=0.5)
+n, bins, patches = plt.hist(
+    image.flatten(), bins=256, density=True, facecolor="green", alpha=0.5
+)
 
-plt.title('影像直方圖 密度')
+plt.title("影像直方圖 密度")
 
-#設定軸範圍
-plt.xlim([0-10, 255+10])
+# 設定軸範圍
+plt.xlim([0 - 10, 255 + 10])
 plt.ylim([0, 0.01])
 
 plt.show()
@@ -248,23 +252,23 @@ plt.show()
 print("------------------------------")  # 30個
 
 plt.hist(image.flatten(), 256, cumulative=True)
-plt.title('影像直方圖 累計')
+plt.title("影像直方圖 累計")
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-filename = 'C:/_git/vcs/_4.python/_data/elephant.jpg'
+filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
 
 # 檔案 => PIL影像 => 灰階 => np陣列
-image = np.array(Image.open(filename).convert('L'))
+image = np.array(Image.open(filename).convert("L"))
 
 plt.subplot(1, 2, 1)
-plt.gray()  #不使用顏色信息, 將圖像以灰階方式顯示
-plt.title(u'原始圖像')
+plt.gray()  # 不使用顏色信息, 將圖像以灰階方式顯示
+plt.title("原始圖像")
 plt.imshow(image)
 
 plt.subplot(1, 2, 2)
-plt.title(u'原始直方圖')
+plt.title("原始直方圖")
 plt.hist(image.flatten(), bins=128, density=True)
 
 plt.show()
@@ -277,67 +281,75 @@ print("------------------------------------------------------------")  # 60個
 """
 
 # 檔案 => PIL影像
-image=Image.open(filename)
-r, g, b=image.split()
+image = Image.open(filename)
+r, g, b = image.split()
 
 array_r = np.array(r).flatten()
-plt.hist(array_r, bins=256, alpha=0.3, density = True, facecolor='r', edgecolor='r', stacked=1)
+plt.hist(
+    array_r, bins=256, alpha=0.3, density=True, facecolor="r", edgecolor="r", stacked=1
+)
 
 array_g = np.array(g).flatten()
-plt.hist(array_g, bins=256, alpha=0.3, density = True, facecolor='g', edgecolor='g', stacked=1)
+plt.hist(
+    array_g, bins=256, alpha=0.3, density=True, facecolor="g", edgecolor="g", stacked=1
+)
 
 array_b = np.array(b).flatten()
-plt.hist(array_b, bins=256, alpha=0.3, density = True, facecolor='b', edgecolor='b')
+plt.hist(array_b, bins=256, alpha=0.3, density=True, facecolor="b", edgecolor="b")
 
-plt.title('影像直方圖 密度 三色分離')
+plt.title("影像直方圖 密度 三色分離")
 plt.show()
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 import pylab
 
+
 def imresize(im, sz):
-    """ 使用PIL对象重新定义图像数组的大小 """
+    """使用PIL对象重新定义图像数组的大小"""
     pil_im = Image.fromarray(uint8(im))
     return array(pil_im.resize(sz))
 
+
 def histeq(im, nbr_bins=256):
-    """ 对一幅灰度图像进行直方图均衡化 """
+    """对一幅灰度图像进行直方图均衡化"""
     # 计算图像的直方图
     imhist, bins = pylab.histogram(im.flatten(), nbr_bins, normed=True)
-    cdf = imhist.cumsum()   # 累积分布函数
-    cdf = 255 * cdf / cdf[-1]   # 归一化
+    cdf = imhist.cumsum()  # 累积分布函数
+    cdf = 255 * cdf / cdf[-1]  # 归一化
     # 使用累积分布函数的线性插值，计算新的像素值
     im2 = pylab.interp(im.flatten(), bins[:-1], cdf)
     return im2.reshape(im.shape), cdf
 
+
 def compute_average(imlist):
-    """ 计算图像列表的平均图像 """
+    """计算图像列表的平均图像"""
     # 打开第一幅图像，将其存储在浮点型数组中
-    average = array(Image.open(imlist[0]), 'f')
+    average = array(Image.open(imlist[0]), "f")
     for imnae in imlist[1:]:
         try:
             average += array(Image.open(imname))
         except:
-            print(imname + '...skipped')
+            print(imname + "...skipped")
         averageim /= len(imlist)
 
     # 返回uint8类型的平均图像
-    return array(averageim, 'uint8')
+    return array(averageim, "uint8")
+
 
 # 直方图均衡化
-filename = 'C:/_git/vcs/_4.python/_data/elephant.jpg'
+filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
 
-im = np.array(Image.open(filename).convert('L'))
+im = np.array(Image.open(filename).convert("L"))
 im2, cdf = histeq(im)
 
 plt.gray()
 plt.subplot(221)
-plt.title(r'before')
+plt.title(r"before")
 plt.imshow(im)
 
 plt.subplot(222)
-plt.title(r'after')
+plt.title(r"after")
 plt.imshow(im2)
 
 plt.subplot(223)
@@ -348,11 +360,10 @@ plt.hist(im2.flatten(), 128)
 
 plt.show()
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -363,7 +374,3 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
-
-
-
-
