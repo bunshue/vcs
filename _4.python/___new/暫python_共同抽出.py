@@ -135,10 +135,7 @@ plt.subplot(221)
 plt.xticks(x, ("2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"))
 plt.yticks(np.arange(0, 150, 15))
 
-plt.show()
-
 print("------------------------------------------------------------")  # 60個
-
 
 #image.save("xxxx.jpg")
 #image.save("xxxx.png")
@@ -169,17 +166,6 @@ fig.autofmt_xdate(rotation=60)  # 日期旋轉60度
 """
 
 #plt.figure(figsize=(7,2),facecolor='yellow')
-
-print("------------------------------------------------------------")	#60個
-
-import matplotlib.pyplot as plt
-
-plt.fill('time','signal','g',
-        data={'time':[0,1,2,3],'signal':[0,1,1,0]})
-plt.xlabel('Time')
-plt.ylabel('Signal')
-plt.show()
-
 
 print("------------------------------------------------------------")	#60個
 
@@ -394,62 +380,16 @@ plt.pie(lexus, radius=1.2, labels=labels, shadow=True)
 plt.pie(mazda, radius=1.2, labels=labels, shadow=True)
 plt.pie(subaru, radius=1.2, labels=labels, shadow=True)
 
-
-
 plt.plot(listx1, listy1, color="black", linewidth=1.0, linestyle="-", label="Boys")
 plt.plot(listx2, listy2, color="black", linewidth=1.0, linestyle="-.", label="Girls")
 
-
-plt畫圖
-from matplotlib import patches
-
-#在圖上作畫
-
-filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
-
-# 檔案 => PIL影像
-im=Image.open(filename)
-im_w, im_h = im.size
-W = im_w
-H = im_h
-
-pic = plt.imshow(im, alpha = 0.8)    #alpha顯示
-
-x_st = 20
-y_st = 20
-w = W - 40
-h = H - 40
-
-#畫出矩形
-patch  = patches.Rectangle((x_st, y_st), w, h, fill=False, linewidth=2, color='r')
-pic.axes.add_patch(patch)
-
-#畫多邊形
-vertices = []
-vertices.append((0, 0))
-vertices.append((100, 0))
-vertices.append((100, 100))
-vertices.append((50, 150))
-vertices.append((0, 100))
-vertices.append((0, 0))
-patch = patches.Polygon(vertices, closed=True, fill=False, linewidth=2, color='g')
-pic.axes.add_patch(patch)
-
-plt.show()
-
-
-
 ----------------------------------------------------------------
-
 
 #scatter 顏色
 #plt.scatter(xpt, ypt1, color=(0, 1, 0)) # 綠色
 #plt.scatter(xpt, ypt2)                  # 預設顏色
 
 plt.tick_params(axis='both', labelsize=12, color='red')
-
-
-
 
 
 #中文字型設定

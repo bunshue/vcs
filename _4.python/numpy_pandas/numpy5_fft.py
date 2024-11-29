@@ -26,10 +26,13 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 print("------------------------------------------------------------")  # 60個
 
 import scipy
-import pylab as pl
+
+def show():
+    plt.show()
+    pass
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 print("np.fft 01")
 
 np.set_printoptions(precision=3, linewidth=120, suppress=False)
@@ -55,7 +58,7 @@ plt.scatter(X, X, c="g", s=200, label="原資料")
 plt.scatter(X_FFT.real, X_FFT.imag, c="r", s=200, label="FFT")
 plt.legend()
 plt.grid()
-plt.show()
+show()
 
 X = np.ones(8)
 np.fft.fft(X) / len(X)  # 為了計算各個成分的能量，需要將FFT的結果除以FFT的長度
@@ -107,7 +110,8 @@ X2 = np.random.random(4093)
 # 10 loops, best of 3: 69.6 ms per loop
 
 print("------------------------------------------------------------")  # 60個
-
+print("------------------------------------------------------------")  # 60個
+'''
 print("np.fft 02 合成時域訊號")
 
 
@@ -140,7 +144,7 @@ fy = np.fft.fft(y) / fft_size
 
 # 繪制三角波的FFT的前20項的振幅，由於不含索引為偶數的值均為0， 因此取
 # log之後無窮小，無法繪圖，用np.clip函數設定陣列值的上下限，確保繪圖正確
-fig, axes = pl.subplots(2, 1, figsize=(8, 6))
+fig, axes = plt.subplots(2, 1, figsize=(8, 6))
 axes[0].plot(np.clip(20 * np.log10(np.abs(fy[:20])), -120, 120), "o")
 axes[0].set_xlabel("頻率視窗(frequency bin)")
 axes[0].set_ylabel("幅值(dB)")
@@ -152,7 +156,7 @@ for i in [0, 1, 3, 5, 7, 9]:
     axes[1].plot(data, label="N=%s" % i, alpha=0.6)
 axes[1].legend(loc="best")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -169,7 +173,7 @@ def square_wave(size):
 x, y = square_wave(fft_size)
 fy = np.fft.fft(y) / fft_size
 
-fig, axes = pl.subplots(2, 1, figsize=(8, 6))
+fig, axes = plt.subplots(2, 1, figsize=(8, 6))
 axes[0].plot(np.clip(20 * np.log10(np.abs(fy[:20])), -120, 120), "o")
 axes[0].set_xlabel("頻率視窗(frequency bin)")
 axes[0].set_ylabel("幅值(dB)")
@@ -179,7 +183,7 @@ for i in [0, 1, 3, 5, 7, 9]:
     axes[1].plot(data, label="N=%s" % i)
 axes[1].legend(loc="best")
 
-plt.show()
+show()
 
 """
 scpy2.examples.fft_demo：使用該程式可以交談式地觀察各種三角波和方波的頻譜以及其正弦合成的近似波形
@@ -194,14 +198,15 @@ def show_fft(x):
     xf = np.fft.rfft(XS) / fft_size  # ❹
     freqs = np.linspace(0, sampling_rate / 2, fft_size // 2 + 1)  # ❺
     xfp = 20 * np.log10(np.clip(np.abs(xf), 1e-20, 1e100))  # ❻
-    pl.figure(figsize=(8, 4))
-    pl.subplot(211)
-    pl.plot(T[:fft_size], XS)
-    pl.xlabel("時間(秒)")
-    pl.subplot(212)
-    pl.plot(freqs, xfp)
-    pl.xlabel("頻率(Hz)")
-    pl.subplots_adjust(hspace=0.4)
+    
+    plt.figure(figsize=(8, 4))
+    plt.subplot(211)
+    plt.plot(T[:fft_size], XS)
+    plt.xlabel("時間(秒)")
+    plt.subplot(212)
+    plt.plot(freqs, xfp)
+    plt.xlabel("頻率(Hz)")
+    plt.subplots_adjust(hspace=0.4)
     print(xfp[[10, 15]])
 
 
@@ -211,7 +216,7 @@ T = np.arange(0, 1.0, 1.0 / sampling_rate)  # ❷
 X = np.sin(2 * np.pi * 156.25 * T) + 2 * np.sin(2 * np.pi * 234.375 * T)  # ❸
 
 show_fft(X)
-plt.show()
+show()
 
 # [ -6.021e+00  -9.643e-16]
 
@@ -232,19 +237,19 @@ for i in [
 X = np.sin(2 * np.pi * 200 * T) + 2 * np.sin(2 * np.pi * 300 * T)
 
 show_fft(X)
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
 print("np.fft 05")
 
 # 50Hz正弦波的512點FFT所計算的頻譜的實際波形
-pl.figure(figsize=(6, 2))
+plt.figure(figsize=(6, 2))
 T = np.arange(0, 1.0, 1.0 / 8000)
 X = np.sin(2 * np.pi * 50 * T)[:512]
-pl.plot(np.hstack([X, X, X]))
+plt.plot(np.hstack([X, X, X]))
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -260,20 +265,20 @@ pip install librosa(==0.10.1)
 
 # Hann窗函數
 
-pl.figure(figsize=(6, 2))
-pl.plot(scipy.signal.windows.hann(512))
-plt.show()
+plt.figure(figsize=(6, 2))
+plt.plot(scipy.signal.windows.hann(512))
+show()
 
 print(scipy.signal.windows.hann(8))
 print(scipy.signal.windows.hann(8, sym=0))
 
 # 加Hann窗的50Hz正弦波的512點FFT所計算的實際波形
-pl.figure(figsize=(6, 2))
+plt.figure(figsize=(6, 2))
 T = np.arange(0, 1.0, 1.0 / 8000)
 X = np.sin(2 * np.pi * 50 * T)[:512] * scipy.signal.windows.hann(512, sym=0)
-pl.plot(np.hstack([X, X, X]))
+plt.plot(np.hstack([X, X, X]))
 
-plt.show()
+show()
 
 print("------------------------------")  # 30個
 
@@ -293,19 +298,19 @@ freqs = np.linspace(0, sampling_rate // 2, fft_size // 2 + 1)
 
 xfp = 20 * np.log10(np.clip(np.abs(xf), 1e-20, 1e100))
 yfp = 20 * np.log10(np.clip(np.abs(yf), 1e-20, 1e100))
-pl.figure(figsize=(8, 4))
-pl.plot(freqs, xfp, label="矩形窗")
-pl.plot(freqs, yfp, label="hann窗")
-pl.legend()
-pl.xlabel("頻率(Hz)")
+plt.figure(figsize=(8, 4))
+plt.plot(freqs, xfp, label="矩形窗")
+plt.plot(freqs, yfp, label="hann窗")
+plt.legend()
+plt.xlabel("頻率(Hz)")
 
-a = pl.axes([0.4, 0.2, 0.4, 0.4])
+a = plt.axes([0.4, 0.2, 0.4, 0.4])
 a.plot(freqs, xfp, label="矩形窗")
 a.plot(freqs, yfp, label="hann窗")
 a.set_xlim(100, 400)
 a.set_ylim(-40, 0)
 
-plt.show()
+show()
 
 cc = np.mean(scipy.signal.windows.hann(512, sym=0))
 print(cc)
@@ -327,14 +332,15 @@ def average_fft(x, fft_size):
 # 白色噪聲的頻譜接近水平直線（注意Y軸的範圍）
 x = np.random.randn(100000)
 xf = average_fft(x, 512)
-pl.figure(figsize=(7, 3.5))
-pl.plot(xf)
-pl.xlabel("頻率視窗(Frequency Bin)")
-pl.ylabel("幅值(dB)")
-pl.xlim([0, 257])
-pl.subplots_adjust(bottom=0.15)
 
-plt.show()
+plt.figure(figsize=(7, 3.5))
+plt.plot(xf)
+plt.xlabel("頻率視窗(Frequency Bin)")
+plt.ylabel("幅值(dB)")
+plt.xlim([0, 257])
+plt.subplots_adjust(bottom=0.15)
+
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -344,14 +350,15 @@ B, A = scipy.signal.iirdesign(1000 / 4000.0, 1100 / 4000.0, 1, 40, 0, "cheby1")
 X = np.random.randn(100000)
 Y = scipy.signal.filtfilt(B, A, X)
 Y_FFT = average_fft(Y, 512)
-pl.figure(figsize=(7, 3.5))
-pl.plot(Y_FFT)
-pl.xlabel("頻率視窗(Frequency Bin)")
-pl.ylabel("幅值(dB)")
-pl.xlim(0, 257)
-pl.subplots_adjust(bottom=0.15)
 
-plt.show()
+plt.figure(figsize=(7, 3.5))
+plt.plot(Y_FFT)
+plt.xlabel("頻率視窗(Frequency Bin)")
+plt.ylabel("幅值(dB)")
+plt.xlim(0, 257)
+plt.subplots_adjust(bottom=0.15)
+
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -367,11 +374,11 @@ sweep = scipy.signal.chirp(
     t, f0=100, t1=time, f1=0.8 * sampling_rate / 2, method="logarithmic"
 )
 
-# NGpl.specgram(sweep, fft_size, sampling_rate, noverlap = 1024-step)
-pl.xlabel("時間(秒)")
-pl.ylabel("頻率(Hz)")
+# NG plt.specgram(sweep, fft_size, sampling_rate, noverlap = 1024-step)
+plt.xlabel("時間(秒)")
+plt.ylabel("頻率(Hz)")
 
-plt.show()
+show()
 
 """
 scpy2.examples.spectrogram_realtime：實時觀察音效訊號譜圖的示範程式，

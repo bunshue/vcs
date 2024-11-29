@@ -19,22 +19,14 @@ print("__name__ : 目前所在模組名")
 print(__name__)
 # print(__name__._version)
 
-print("sympy模組的版本")
-import sympy
-
-VERSION = sympy.__version__
-print(VERSION)
-
 print("selenium模組的版本")
 import selenium
-
 print(selenium.__version__)
 
 # import somemodule as sm	#幫模組取個別名
 
 print(sys.argv)
 # print (s.argv)
-
 
 # 打印使用說明
 print(__doc__)

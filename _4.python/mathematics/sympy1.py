@@ -1,4 +1,3 @@
-import sympy
 
 print("------------------------------------------------------------")  # 60個
 
@@ -20,6 +19,23 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
+print("------------------------------------------------------------")  # 60個
+
+import sympy
+
+def show():
+    #plt.show()
+    pass
+
+print("------------------------------------------------------------")  # 60個
+
+print("sympy模組的版本")
+
+VERSION = sympy.__version__
+print(VERSION)
+
+print("------------------------------------------------------------")  # 60個
+print("解方程式 ST")
 print("------------------------------------------------------------")  # 60個
 
 print("解二元一次方程式")
@@ -72,7 +88,7 @@ plt.xlabel("Customers")
 plt.ylabel("Profit")
 plt.grid()
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -103,7 +119,7 @@ plt.xlabel("x")
 plt.ylabel("y")
 plt.grid()
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -134,7 +150,7 @@ plt.xlabel("x")
 plt.ylabel("y")
 plt.grid()
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -167,7 +183,7 @@ plt.ylabel("y")
 plt.grid()
 plt.axis("equal")  # 讓x, y軸距長度一致
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -201,7 +217,7 @@ plt.ylabel("y")
 plt.grid()
 plt.axis("equal")  # 讓x, y軸距長度一致
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -249,20 +265,20 @@ r1 = (-b + (b**2 - 4 * a * c) ** 0.5) / (2 * a)  # r1
 r1_y = f1(r1)  # f1(r1)
 plt.text(r1 - 0.2, r1_y + 0.3, "(" + str(round(r1, 2)) + "," + str(0) + ")")
 plt.plot(r1, r1_y, "-o")  # 標記
-print("root1 = ", r1)  # print(r1)
+print("root1 = ", r1)
 
 r2 = (-b - (b**2 - 4 * a * c) ** 0.5) / (2 * a)  # r2
 r2_y = f1(r2)  # f1(r2)
 plt.text(r2 - 0.2, r2_y + 0.3, "(" + str(round(r2, 2)) + "," + str(0) + ")")
 plt.plot(r2, r2_y, "-o")  # 標記
-print("root2 = ", r2)  # print(r2)
+print("root2 = ", r2)
 
 # 繪製此函數圖形
 xx = np.linspace(0, 4, 50)
 yy = 3 * xx**2 - 12 * xx + 10
 plt.plot(xx, yy)
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -300,7 +316,7 @@ plt.xlabel("Times(unit=100)")
 plt.ylabel("Revenue")
 plt.grid()
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -337,7 +353,148 @@ plt.xlabel("Times")
 plt.ylabel("Performance")
 plt.grid()
 
-plt.show()
+show()
+
+print("------------------------------------------------------------")  # 60個
+
+a, b, c = sympy.symbols("a,b,c")
+print(sympy.solve(a * x**2 + b * x + c, x))
+
+print(sympy.solve((x**2 + x * y + 1, y**2 + x * y + 2), x, y))
+
+print(sympy.roots(x**3 - 3 * x**2 + x + 1))
+
+print("------------------------------------------------------------")  # 60個
+print("解方程式 SP")
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+print("微分積分 ST")
+print("------------------------------------------------------------")  # 60個
+
+# 數值微分
+
+x = sympy.symbols("x", real=True)
+h = sympy.symbols("h", positive=True)
+f = sympy.symbols("f", cls=sympy.Function)
+
+f_diff = f(x).diff(x, 1)
+print(f_diff)
+
+expr_diff = sympy.calculus.finite_diff._as_finite_diff(
+    f_diff, [x, x - h, x - 2 * h, x - 3 * h]
+)
+print(expr_diff)
+
+sym_dexpr = f_diff.subs(f(x), x * sympy.exp(-(x**2))).doit()
+print(sym_dexpr)
+
+sym_dfunc = sympy.lambdify([x], sym_dexpr, modules="numpy")
+cc = sym_dfunc(np.array([-1, 0, 1]))
+print(cc)
+# array([-0.36787944,  1.        , -0.36787944])
+
+print(expr_diff.args)
+# (-3*f(-h + x)/h, -f(-3*h + x)/(3*h), 3*f(-2*h + x)/(2*h), 11*f(x)/(6*h))
+
+w = sympy.Wild("w")
+c = sympy.Wild("c")
+patterns = [arg.match(c * f(w)) for arg in expr_diff.args]
+print(patterns[0])
+# {w_: -h + x, c_: -3/h}
+
+coefficients = [t[c] for t in sorted(patterns, key=lambda t: t[w])]
+print(coefficients)
+
+coeff_arr = np.array([float(coeff.subs(h, 1e-3)) for coeff in coefficients])
+print(coeff_arr)
+
+
+def moving_window(x, size):
+    from numpy.lib.stride_tricks import as_strided
+
+    x = np.ascontiguousarray(x)
+    return as_strided(
+        x, shape=(x.shape[0] - size + 1, size), strides=(x.itemsize, x.itemsize)
+    )
+
+x_arr = np.arange(-2, 2, 1e-3)
+y_arr = x_arr * np.exp(-x_arr * x_arr)
+
+num_res = (moving_window(y_arr, 4) * coeff_arr).sum(axis=1)
+sym_res = sym_dfunc(x_arr[3:])
+
+print(np.max(abs(num_res - sym_res)))
+
+
+def finite_diff_coefficients(f_diff, order, h):
+    v = f_diff.variables[0]
+    points = [x - i * h for i in range(order)]
+    expr_diff = sympy.calculus.finite_diff._as_finite_diff(f_diff, points)
+    w = sympy.Wild("w")
+    c = sympy.Wild("c")
+    patterns = [arg.match(c * f(w)) for arg in expr_diff.args]
+    coefficients = np.array([float(t[c]) for t in sorted(patterns, key=lambda t: t[w])])
+    return coefficients
+
+
+# %figonly=比較不同點數的數值微分的誤差
+fig, ax = plt.subplots(figsize=(8, 4))
+
+for order in range(2, 5):
+    c = finite_diff_coefficients(f_diff, order, 1e-3)
+    num_diff = (moving_window(y_arr, order) * c).sum(axis=1)
+    sym_diff = sym_dfunc(x_arr[order - 1 :])
+    error = np.abs(num_diff - sym_diff)
+    ax.semilogy(x_arr[order - 1 :], error, label=str(order))
+
+ax.legend(loc="best")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+
+# 定義公式中使用的變數
+x, y, z = sympy.symbols("x y z")
+sympy.init_printing()
+sympy.Integral(sympy.sqrt(1 / x), x)
+
+print("------------------------------------------------------------")  # 60個
+
+x = sympy.symbols("x")
+
+# 球體體積
+
+cc = sympy.integrate(x * sympy.sin(x), x)
+print(cc)
+
+cc = sympy.integrate(x * sympy.sin(x), (x, 0, 2 * sympy.pi))
+print(cc)
+
+x, y = sympy.symbols("x, y")
+r = sympy.symbols("r", positive=True)
+circle_area = 2 * sympy.integrate(sympy.sqrt(r**2 - x**2), (x, -r, r))
+cc = circle_area
+print(cc)
+
+circle_area = circle_area.subs(r, sympy.sqrt(r**2 - x**2))
+cc = circle_area
+print(cc)
+
+cc = sympy.integrate(circle_area, (x, -r, r))
+print(cc)
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("微分積分 SP")
+print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個
 
@@ -349,13 +506,6 @@ print("從 {} 到 {} 之間的質數 :".format(a, b))
 for prime_number in prime_numbers:
     print(prime_number, end=",")
 print()
-
-print("------------------------------------------------------------")  # 60個
-
-# 定義公式中使用的變數
-x, y, z = sympy.symbols("x y z")
-sympy.init_printing()
-sympy.Integral(sympy.sqrt(1 / x), x)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -429,12 +579,13 @@ x = sympy.Symbol("x")
 # 多函數圖形
 # plot(2*x-5, '3*x+2')
 
-
 # 設定線的顏色 + 圖例
 line = plot(2 * x - 5, "3*x+2", legend=True, show=False)
 line[0].line_color = "r"  # 第0條線
 line[1].line_color = "g"  # 第1條線
-line.show()
+
+#不顯示
+#line.show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -468,108 +619,6 @@ print(cc)
 
 cc = sympy.series(sympy.sin(x), x, 0, 10)
 print(cc)
-
-# 球體體積
-
-cc = sympy.integrate(x * sympy.sin(x), x)
-print(cc)
-
-cc = sympy.integrate(x * sympy.sin(x), (x, 0, 2 * sympy.pi))
-print(cc)
-
-x, y = sympy.symbols("x, y")
-r = sympy.symbols("r", positive=True)
-circle_area = 2 * sympy.integrate(sympy.sqrt(r**2 - x**2), (x, -r, r))
-cc = circle_area
-print(cc)
-
-circle_area = circle_area.subs(r, sympy.sqrt(r**2 - x**2))
-cc = circle_area
-print(cc)
-
-cc = sympy.integrate(circle_area, (x, -r, r))
-print(cc)
-
-# 數值微分
-
-x = sympy.symbols("x", real=True)
-h = sympy.symbols("h", positive=True)
-f = sympy.symbols("f", cls=sympy.Function)
-
-f_diff = f(x).diff(x, 1)
-print(f_diff)
-
-expr_diff = sympy.calculus.finite_diff._as_finite_diff(
-    f_diff, [x, x - h, x - 2 * h, x - 3 * h]
-)
-print(expr_diff)
-
-sym_dexpr = f_diff.subs(f(x), x * sympy.exp(-(x**2))).doit()
-print(sym_dexpr)
-
-sym_dfunc = sympy.lambdify([x], sym_dexpr, modules="numpy")
-cc = sym_dfunc(np.array([-1, 0, 1]))
-print(cc)
-# array([-0.36787944,  1.        , -0.36787944])
-
-print(expr_diff.args)
-# (-3*f(-h + x)/h, -f(-3*h + x)/(3*h), 3*f(-2*h + x)/(2*h), 11*f(x)/(6*h))
-
-w = sympy.Wild("w")
-c = sympy.Wild("c")
-patterns = [arg.match(c * f(w)) for arg in expr_diff.args]
-print(patterns[0])
-# {w_: -h + x, c_: -3/h}
-
-coefficients = [t[c] for t in sorted(patterns, key=lambda t: t[w])]
-print(coefficients)
-
-coeff_arr = np.array([float(coeff.subs(h, 1e-3)) for coeff in coefficients])
-print(coeff_arr)
-
-
-def moving_window(x, size):
-    from numpy.lib.stride_tricks import as_strided
-
-    x = np.ascontiguousarray(x)
-    return as_strided(
-        x, shape=(x.shape[0] - size + 1, size), strides=(x.itemsize, x.itemsize)
-    )
-
-
-x_arr = np.arange(-2, 2, 1e-3)
-y_arr = x_arr * np.exp(-x_arr * x_arr)
-
-num_res = (moving_window(y_arr, 4) * coeff_arr).sum(axis=1)
-sym_res = sym_dfunc(x_arr[3:])
-
-print(np.max(abs(num_res - sym_res)))
-
-
-def finite_diff_coefficients(f_diff, order, h):
-    v = f_diff.variables[0]
-    points = [x - i * h for i in range(order)]
-    expr_diff = sympy.calculus.finite_diff._as_finite_diff(f_diff, points)
-    w = sympy.Wild("w")
-    c = sympy.Wild("c")
-    patterns = [arg.match(c * f(w)) for arg in expr_diff.args]
-    coefficients = np.array([float(t[c]) for t in sorted(patterns, key=lambda t: t[w])])
-    return coefficients
-
-
-# %figonly=比較不同點數的數值微分的誤差
-fig, ax = plt.subplots(figsize=(8, 4))
-
-for order in range(2, 5):
-    c = finite_diff_coefficients(f_diff, order, 1e-3)
-    num_diff = (moving_window(y_arr, order) * c).sum(axis=1)
-    sym_diff = sym_dfunc(x_arr[order - 1 :])
-    error = np.abs(num_diff - sym_diff)
-    ax.semilogy(x_arr[order - 1 :], error, label=str(order))
-
-ax.legend(loc="best")
-
-plt.show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -747,7 +796,9 @@ trans_func = 1 / (s**3 + s**2 + s + 1)
 cc = sympy.apart(trans_func)
 print(cc)
 
-cc = sympy.trigsimp(sympy.sin(x) ** 2 + 2 * sympy.sin(x) * sympy.cos(x) + sympy.cos(x) ** 2)
+cc = sympy.trigsimp(
+    sympy.sin(x) ** 2 + 2 * sympy.sin(x) * sympy.cos(x) + sympy.cos(x) ** 2
+)
 print(cc)
 
 cc = sympy.expand_trig(sympy.sin(2 * x + y))
@@ -757,7 +808,13 @@ from tabulate import tabulate
 from IPython.display import Markdown, display_markdown
 
 flags = ["mul", "log", "multinomial", "power_base", "power_exp"]
-expressions = [x * (y + z), sympy.log(x * y**2), (x + y) ** 3, (x * y) ** z, x ** (y + z)]
+expressions = [
+    x * (y + z),
+    sympy.log(x * y**2),
+    (x + y) ** 3,
+    (x * y) ** z,
+    x ** (y + z),
+]
 infos = ["展開乘法", "展開對數函數的參數中的乘積和冪運算", "展開加減法表達式的整數次冪", "展開冪函數的底數乘積", "展開對冪函數的指數和"]
 table = []
 for flag, expression, info in zip(flags, expressions, infos):
@@ -823,15 +880,6 @@ print(eq2.coeff(x, 2))
 
 cc = sympy.collect(a * sympy.sin(2 * x) + b * sympy.sin(2 * x), sympy.sin(2 * x))
 print(cc)
-
-# 方程式
-
-a, b, c = sympy.symbols("a,b,c")
-print(sympy.solve(a * x**2 + b * x + c, x))
-
-print(sympy.solve((x**2 + x * y + 1, y**2 + x * y + 2), x, y))
-
-print(sympy.roots(x**3 - 3 * x**2 + x + 1))
 
 # 微分
 

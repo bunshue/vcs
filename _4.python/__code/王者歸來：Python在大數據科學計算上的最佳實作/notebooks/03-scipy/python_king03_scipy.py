@@ -37,8 +37,13 @@ from scipy.integrate import ode
 
 import scipy.special
 
+
+def show():
+    #plt.show()
+    pass
+
 print("------------------------------------------------------------")  # 60個
-'''
+
 scipy.__version__
 
 print("常量和特殊函數")
@@ -81,7 +86,7 @@ for ax, y, label in zip(axes.ravel(), results, labels):
     
 axes[1, 1].legend(["$m={:g}$".format(m_) for m_ in m], loc="best", ncol=2)
 
-#plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -176,7 +181,7 @@ ax2.set_xlabel("$k$")
 ax2.set_ylabel("$b$")
 ax2.set_zlabel("$error$");
 
-#plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -218,7 +223,7 @@ plt.plot(x, y0, label=u"真實資料")
 plt.plot(x, func(x, plsq[0]), label=u"擬合資料")
 plt.legend(loc="best");
 
-#plt.show()
+show()
 
 
 def func2(x, A, k, theta):
@@ -303,7 +308,7 @@ for ax, method in zip(axes.ravel(), methods):
     ax.set_aspect("equal")
     ax.set_title(method)
 
-#plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -334,7 +339,7 @@ plt.plot(x, y1, "o", label=u"帶噪聲的實驗資料")
 plt.plot(x, y0, label=u"真實資料")
 plt.plot(x, func(x, result.x), label=u"擬合資料")
 plt.legend(loc="best")
-#plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -370,7 +375,7 @@ cc = linalg.lu_factor(A)
 print(cc)
 cc = linalg.lu_solve(luf, B)
 print(cc)
-'''
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 """
@@ -413,7 +418,7 @@ ax2.plot(H2, linewidth=2, label=u"最小二乘解H2", alpha=0.7)
 ax2.legend(loc="best", ncol=2)
 ax2.set_xlim(0, len(H2));
 
-#plt.show()
+show()
 """
 print("------------------------------------------------------------")  # 60個
 
@@ -447,7 +452,7 @@ ax.set_aspect("equal")
 ax.set_xlim(-0.5, 1.1)
 ax.set_ylim(-0.5, 1.1);
 
-#plt.show()
+show()
 """
 print("------------------------------------------------------------")  # 60個
 
@@ -483,7 +488,7 @@ Z = ellipse(p, X, Y)
 pl.plot(x, y, "ro", alpha=0.5)
 pl.contour(X, Y, Z, levels=[0])
 
-# plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -502,7 +507,7 @@ print(Vh.shape)
 # 按從大到小排序的奇異值
 pl.semilogy(s, lw=3)
 
-# plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -563,7 +568,7 @@ ax1.legend(loc="best")
 ax2.plot(t, cdf)
 ax2.plot(t, X.cdf(t), alpha=0.6)
 
-# plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -609,7 +614,7 @@ mean, std = stats.norm.fit(samples_mean)
 pl.plot(x, stats.norm(mean, std).pdf(x), alpha=0.8, label="正態分佈擬合")
 pl.legend()
 
-# plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -622,7 +627,7 @@ for bw in [0.2, 0.3, 0.6, 1.0]:
 
 pl.legend(loc="best")
 
-# plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -656,7 +661,7 @@ for n, ax in zip((n1, n2), (ax1, ax2)):
     ax.legend()
 fig.subplots_adjust(0.1, 0.15, 0.95, 0.90, 0.2, 0.1)
 
-# plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -696,7 +701,7 @@ for ax, time in zip((ax1, ax2), times):
 
 fig.subplots_adjust(0.1, 0.15, 0.95, 0.90, 0.2, 0.1)
 
-# plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -733,7 +738,7 @@ for ax, k in zip((ax1, ax2), ks):
 
 fig.subplots_adjust(0.1, 0.15, 0.95, 0.90, 0.2, 0.1)
 
-# plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -776,7 +781,7 @@ ax2.plot(np.diff(bins), count, ".", alpha=0.3, rasterized=True)
 ax2.set_xlabel("公共汽車車的時間間隔")
 ax2.set_ylabel("等待人數")
 
-# plt.show()
+show()
 
 t = 10.0 / 3  # 兩輛公共汽車車之間的平均時間間隔
 bus_interval = stats.gamma(1, scale=t)
@@ -808,7 +813,7 @@ pl.legend(loc="best")
 
 # max error: 0.00658734287935
 
-# plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -825,7 +830,7 @@ ax2.plot(x, stats.t(40 - 1).sf(x), label="df=39", lw=2, alpha=0.6)
 ax2.plot(x, stats.norm.sf(x), "k--", label="norm")
 ax2.legend()
 
-# plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -855,7 +860,7 @@ plt.fill_between(x[mask], y[mask], color="red", alpha=0.5)
 plt.axhline(color="k", lw=0.5)
 plt.xlim(-5, 5)
 
-# plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 """ NG
@@ -901,7 +906,7 @@ pl.legend(loc="best")
 
 # max error: 0.00340194486328
 
-# plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -919,7 +924,7 @@ pl.plot(x, k(x), lw=2, color="red", alpha=0.6, label="樣本分佈")
 pl.legend(loc="best")
 pl.xlim(0, 10)
 
-# plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -959,7 +964,7 @@ pl.text(chi2, 0.015, r"$\chi^2_2$", fontsize=14)
 pl.ylim(0, 0.2)
 pl.xlim(0, 20)
 
-# plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1035,7 +1040,7 @@ ax = Axes3D(fig)
 ax.plot(track1[:, 0], track1[:, 1], track1[:, 2], lw=1)
 ax.plot(track2[:, 0], track2[:, 1], track2[:, 2], lw=1)
 
-# plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1062,7 +1067,7 @@ ax1.legend()
 ax2.plot(t, result[:, 1], label="速度")
 ax2.legend()
 
-# plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1160,7 +1165,7 @@ ax3.legend(loc="best")
 
 # 控制力的終值: 19.9434046839
 
-# plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1197,7 +1202,7 @@ ax2.legend(loc="best")
 ax3.plot(t, F_arr, label="控制力")
 ax3.legend(loc="best")
 
-# plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1216,7 +1221,7 @@ pl.legend(loc="best")
 
 # True
 
-# plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1260,7 +1265,7 @@ pl.ylim(-100, 20)
 pl.ylabel("增益(dB)")
 pl.xlabel("頻率(Hz)")
 
-# plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1284,7 +1289,7 @@ pl.legend(loc="best")
 pl.xlabel("時間（秒）")
 pl.ylabel("位移（米）")
 
-# plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1347,7 +1352,7 @@ ax.legend(loc="best", ncol=2)
 ax.set_xlabel(u"時間（秒）")
 ax.set_ylabel(u"位移（米）");
 
-#plt.show()
+show()
 
 _, f, _ = signal.lsim(pi_ctrl, U=1-x, T=t)
 
@@ -1375,7 +1380,7 @@ ax2.legend(loc="best")
 ax1.set_title(u"目的系統的位移")
 ax2.set_title(u"控制力");
 
-#plt.show()
+show()
 """
 print("------------------------------------------------------------")  # 60個
 
@@ -1397,7 +1402,7 @@ for kind in ["nearest", "zero", "slinear", "quadratic"]:
 
 pl.legend(loc="lower right")
 
-# plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1427,7 +1432,7 @@ pl.plot(sx2, sy2, linewidth=2, label="spline曲線")
 pl.plot(x2, np.sin(x2), label="無噪聲曲線")
 pl.legend()
 
-# plt.show()
+show()
 
 print(np.array_str(spline2.roots(), precision=3))
 # [  3.288   6.329   9.296  12.578  15.75   18.805]
@@ -1456,7 +1461,7 @@ for level in [0.5, 0.75, -0.5, -0.75]:
     xr = spline2.roots_at(level)  # ❸
     pl.plot(xr, spline2(xr), "ro")
 
-# plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1506,7 +1511,7 @@ for s in (0, 1e-4):
 
 pl.legend()
 
-# plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 """ NG
@@ -1526,7 +1531,7 @@ pl.legend(loc="best")
 pl.grid()
 pl.margins(0.1, 0.1)
 
-#plt.show()
+show()
 """
 print("------------------------------------------------------------")  # 60個
 
@@ -1557,7 +1562,7 @@ pl.imshow(fnew, extent=[-1,1,-1,1], cmap=pl.cm.jet, interpolation='nearest', ori
 pl.title("fnew")
 pl.show()
 
-#plt.show()
+show()
 """
 print("------------------------------------------------------------")  # 60個
 
@@ -1602,7 +1607,7 @@ for ax, method, zg in zip(axes, methods, zgs):
     ax.set_xlabel(method)
     ax.scatter(x, y, c=z)
 
-# plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1626,7 +1631,7 @@ for fname, ny in zip(funcs, rbf_ys):
 pl.ylim(-1.0, 1.5)
 pl.legend()
 
-# plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1655,7 +1660,7 @@ for ax, fname, zg in zip(axes, funcs, rbf_zg):
     ax.set_xlabel(fname)
     ax.scatter(x, y, c=z)
 
-# plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1676,7 +1681,7 @@ for ax, eps, zg in zip(axes, epsilons, zgs):
     ax.set_xlabel("eps=%g" % eps)
     ax.scatter(x, y, c=z)
 
-# plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1770,7 +1775,7 @@ for ax in axes:
     ax.axis("off")
 fig.subplots_adjust(0, 0, 1, 1, 0, 0)
 
-#plt.show()
+show()
 """
 print("------------------------------------------------------------")  # 60個
 
@@ -1817,7 +1822,7 @@ img2 = dilation_demo(a)
 img3 = dilation_demo(a, [[1, 1, 1], [1, 1, 1], [1, 1, 1]])
 show_image(img1, img2, img3)
 
-# plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1827,7 +1832,7 @@ img5 = dilation_demo(a, [[0, 1, 0], [0, 1, 0], [0, 1, 0]])
 img6 = dilation_demo(a, [[0, 1, 0], [0, 1, 0], [0, 0, 0]])
 show_image(img4, img5, img6)
 
-# plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1844,7 +1849,7 @@ img2 = erosion_demo(a)
 img3 = erosion_demo(a, [[1, 1, 1], [1, 1, 1], [1, 1, 1]])
 show_image(img1, img2, img3)
 
-# plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1869,7 +1874,7 @@ img3 = hitmiss_demo(
 
 show_image(img1, img2, img3)
 
-# plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1910,7 +1915,7 @@ ax1.set_axis_off()
 ax2.set_axis_off()
 pl.subplots_adjust(0.02, 0, 0.98, 1, 0.02, 0)
 
-# plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1974,7 +1979,7 @@ for ax in axes.ravel():
 
 fig.subplots_adjust(wspace=0.01, hspace=0.01)
 
-# plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -2054,7 +2059,7 @@ ax1.set_xlabel("搜尋最近的3個近旁點")
 ax2.set_xlabel("搜尋距離在0.2之內的所有近旁點")
 ax3.set_xlabel("搜尋所有距離在0.08到0.1之間的點對")
 
-# plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -2115,7 +2120,7 @@ def _():
 
 _()
 
-# plt.show()
+show()
 
 
 class KdSearch(object):
@@ -2133,13 +2138,13 @@ cc = naive_count_at(start, end, 40) == KdSearch(start, end).count_at(40)
 print(cc)
 
 # 請讀者研究點數N和leafsize參數與建立K-d樹和搜尋時間之間的關系。
-
+""" fail naive_search
 ks = KdSearch(start, end, leafsize=100)
 cc = naive_search(start, end, 40)
 print(cc)
 cc = ks.count_at(40)
 print(cc)
-
+"""
 print("------------------------------------------------------------")  # 60個
 
 # 凸包
@@ -2157,7 +2162,7 @@ for i, pos in enumerate(points2d):
     pl.text(pos[0], pos[1], str(i), color="blue")
 ax.add_artist(poly)
 
-# plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -2213,7 +2218,7 @@ for ax in ax1, ax2:
     ax.set_xlim(0, 1)
     ax.set_ylim(0, 1)
 
-# plt.show()
+show()
 
 print(vo.point_region)
 print(vo.regions[6])
@@ -2259,7 +2264,7 @@ ax.add_artist(c)
 
 #r =  0.174278456762 , center =  [ 0.46973363  0.59356531]
 
-#plt.show()
+show()
 """
 print("------------------------------------------------------------")  # 60個
 
@@ -2314,7 +2319,7 @@ for i, (cx, cy) in enumerate(vo.vertices):
 ax.set_xlim(0, 300)
 ax.set_ylim(0, 300)
 
-# plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 

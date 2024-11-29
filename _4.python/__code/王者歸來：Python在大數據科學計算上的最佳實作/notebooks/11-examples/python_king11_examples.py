@@ -3,7 +3,6 @@
 python_king11_examples
 
 
-
 """
 
 print("------------------------------------------------------------")  # 60個
@@ -33,20 +32,32 @@ from scipy import integrate
 from scipy import optimize
 from scipy import signal
 
-print("------------------------------------------------------------")  # 60個
+def show():
+    #plt.show()
+    pass
 
+# 各種長度的懸鏈線
+def catenary(x, a):
+    return a * np.cosh((x - 0.5) / a) - a * np.cosh((-0.5) / a)
+
+print("------------------------------------------------------------")  # 60個
+'''
 # 使用泊松混合合成圖形
 # 泊松混合算法
 
 import cv2
 
 offset_x, offset_y = -36, 42
+
 src = cv2.imread("vinci_src.png", 1)
 dst = cv2.imread("vinci_target.png", 1)
+
 mask = cv2.imread("vinci_mask.png", 0)
+
 src_mask = (mask > 128).astype(np.uint8)
 
 src_y, src_x = np.where(src_mask)  # ❶
+
 src_laplacian = cv2.Laplacian(src, cv2.CV_16S, ksize=1)[src_y, src_x, :]  # ❷
 
 dst_mask = np.zeros(dst.shape[:2], np.uint8)
@@ -109,29 +120,20 @@ for ax in axes.ravel():
 
 fig.subplots_adjust(wspace=0.05)
 
-plt.show()
+show()
 
 """
-    scpy2.examples.possion：使用TraitsUI撰寫的泊松混合示範程式。
-    該程式使用scpy2.matplotlib.freedraw_widget中提供的ImageMaskDrawer在圖形上繪制半透明的白色區域。
-
-#%hide
-%exec_python -m scpy2.examples.possion
+scpy2.examples.possion：使用TraitsUI撰寫的泊松混合示範程式。
+該程式使用scpy2.matplotlib.freedraw_widget中提供的ImageMaskDrawer在圖形上繪制半透明的白色區域。
 """
-
 print("------------------------------------------------------------")  # 60個
 
 from scipy import integrate
 from scipy import optimize
-import sympy
 
 # 經典力學類比
 # 懸鏈線
 
-
-# 各種長度的懸鏈線
-def catenary(x, a):
-    return a * np.cosh((x - 0.5) / a) - a * np.cosh((-0.5) / a)
 
 
 x = np.linspace(0, 1, 100)
@@ -142,16 +144,20 @@ ax.set_aspect("equal")
 ax.legend(loc="best")
 pl.margins(0.1)
 
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
+show()
 
 y = catenary(x, 0.35)
 cc = np.sqrt(np.diff(x) ** 2 + np.diff(y) ** 2).sum()
 print(cc)
 
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+'''
+
+
+'''
 from sympy import symbols, cosh, S, sqrt, lambdify
-import sympy
 
 x, a = symbols("x, a")
 y = a * cosh((x - S(1) / 2) / a)
@@ -218,15 +224,13 @@ pl.margins(0.1)
 
 # a = 0.336992602016 length = 1.40946777721
 
-plt.show()
+show()
 
 """
-    scpy2.examples.catenary：使用TraitsUI製作的懸鏈線的動畫示範程式，
-    可透過界面修改各個參數
-#%hide
-%exec_python -m scpy2.examples.catenary
+scpy2.examples.catenary：使用TraitsUI製作的懸鏈線的動畫示範程式，
+可透過界面修改各個參數
 """
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 # 透過能量最小值計算懸鏈線
 
@@ -243,9 +247,9 @@ for i, (x1, x2, y1, y2) in enumerate(zip(x[:-1], x[1:], y[:-1], y[1:])):
     pl.text(x2, y2, "%d" % i, color="r", fontsize=10)
 pl.margins(0.1)
 
-plt.show()
+show()
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 N = 30
 
@@ -286,10 +290,11 @@ pl.plot(x, y, "o")
 pl.plot(x_init, y_init, "x")
 pl.margins(0.1)
 
-plt.show()
-
+show()
+'''
 print("------------------------------------------------------------")  # 60個
-
+print("------------------------------------------------------------")  # 60個
+'''
 # 最速降線
 
 x, _ = integrate.quad(lambda y: np.sqrt(y / (1.0 - y)), 0, 1)
@@ -315,7 +320,7 @@ def brachistochrone_curve(D, N=1000):
 x, y = brachistochrone_curve(2.0)
 pl.plot(x, -y)
 
-plt.show()
+show()
 
 print("------------------------------")  # 30個
 
@@ -351,10 +356,11 @@ x2, y2 = brachistochrone_curve(target / np.pi)
 pl.plot(x2, -y2, label="最速降線")
 pl.legend(loc="best")
 
-plt.show()
-
+show()
+'''
 print("------------------------------------------------------------")  # 60個
-
+print("------------------------------------------------------------")  # 60個
+'''
 # 單擺類比
 
 # 起始角度為1弧度的單擺擺動角度和時間的關系
@@ -376,9 +382,9 @@ pl.plot(t, track[:, 0])
 pl.xlabel("時間(秒)")
 pl.ylabel("震動角度(弧度)")
 
-plt.show()
+show()
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 # 小角度時的擺動周期
 
@@ -435,11 +441,11 @@ pl.legend(loc="upper left")
 pl.xlabel("起始擺角(弧度)")
 pl.ylabel("擺動周期(秒)")
 
-plt.show()
-
+show()
+'''
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
+'''
 import cython
 
 # 推薦算法
@@ -448,7 +454,7 @@ import cython
 columns = ["user_id", "movie_id", "rating"]
 dtypes = [np.int32, np.int32, np.float]
 ratings = pd.read_table(
-    "data/movielens.data",
+    "movielens.data",
     names=columns,
     usecols=[0, 1, 2],
     dtype=dict(zip(columns, dtypes)),
@@ -595,16 +601,16 @@ pl.legend(loc="best")
 pl.xlabel("迭代次數")
 pl.ylabel("RMSE")
 
-plt.show()
+show()
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 # 以實際評分對預測評分分群組，繪制每群組的分佈情況
 r_pred3 = U1.dot(V1.T)[u_test, v_test] + r_pred
 s = pd.DataFrame({"r": r_test, "$\hat{r}$": r_pred3})
 s.boxplot(column="$\hat{r}$", by="r", figsize=(12, 6))
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -679,8 +685,9 @@ pl.figtext(
     0.5, 0.965, "分段卷冊積示範", ha="center", color="black", weight="bold", size="large"
 )
 
-plt.show()
+show()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 x = np.random.rand(1000)
@@ -801,9 +808,6 @@ print(conditions2)
 
 # 采用matplotlib製作的數獨游戲求解器
 
-# %hide
-# %exec_python -m scpy2.examples.sudoku_solver
-
 # 掃雷游戲
 # 識別雷區中的數字
 
@@ -815,8 +819,11 @@ SHAPE = ROWS, SIZE, COLS, SIZE, -1
 mine_area = np.s_[Y0 : Y0 + SIZE * ROWS, X0 : X0 + SIZE * COLS, :]  # ❶
 
 img_init = cv2.imread("mine_init.png")[mine_area]
+
 img_mine = cv2.imread("mine01.png")[mine_area]
+
 img_numbers = cv2.imread("mine_numbers.png")  # ❷
+
 img_numbers.shape
 
 # 可以透過pl.hist()繪制mask_mean陣列的直方圖，找到最佳的設定值。
@@ -833,10 +840,9 @@ axes[0].set_axis_off()
 axes[1].set_axis_off()
 fig.subplots_adjust(wspace=0.01)
 
-plt.show()
+show()
 
-print("------------------------------------------------------------")  # 60個
-
+print("------------------------------")  # 30個
 
 from scipy.spatial import distance
 
@@ -856,9 +862,9 @@ table = np.full((ROWS, COLS), " ", dtype="unicode")
 # NG table[rows, cols] = numbers.astype(unicode)
 # NG draw_grid(table, fontsize=12)
 
-plt.show()
+show()
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 # 用SAT掃雷
 
@@ -908,19 +914,18 @@ table[3, 3] = "●"
 # NG 還是沒辦法畫出來
 # draw_grid(table, fontsize=12)
 
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
+show()
 
 # 自動掃雷
-
 
 # Windows 7系統下自動掃雷，需將掃雷游戲的難度設定為進階（99個雷），
 # 並且關閉“顯示動畫”、“播放音效”以及“顯示提示”等選項。
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+'''
 
+'''
 # 分形
 # Mandelbrot集合
 # 純Python實現
@@ -963,7 +968,7 @@ for i in range(2, 7):
     draw_mandelbrot(x, y, 0.2 ** (i - 1))
 pl.subplots_adjust(0, 0, 1, 1, 0.0, 0)
 
-plt.show()
+show()
 
 print("------------------------------")  # 30個
 
@@ -971,7 +976,7 @@ print("------------------------------")  # 30個
 pl.figure(figsize=(8, 8))
 draw_mandelbrot(-0.5, 0, 1.5, n=600)
 
-plt.show()
+show()
 
 """
 Mandelbrot示範程式
@@ -979,10 +984,10 @@ Mandelbrot示範程式
     使用TraitsUI和matplotlib實時繪制Mandelbrot圖形，
     按住滑鼠左鍵進行平移，使用滑鼠滾軸進行縮放。
 """
-
+'''
 print("------------------------------------------------------------")  # 60個
-
-
+print("------------------------------------------------------------")  # 60個
+'''
 def ifs(p, eq, init, n):
     """
     進行函數迭代
@@ -1027,10 +1032,11 @@ for ax in axes:
     ax.set_ylim(0, 10.5)
     ax.axis("off")
 pl.subplots_adjust(left=0, right=1, bottom=0, top=1, wspace=0, hspace=0)
-pl.show()
-
+show()
+'''
 print("------------------------------------------------------------")  # 60個
-
+print("------------------------------------------------------------")  # 60個
+'''
 # 2D仿射變換
 # 迭代函數系統設計器
 """
@@ -1038,9 +1044,6 @@ print("------------------------------------------------------------")  # 60個
     迭代函數分形系統的示範程式，透過修改左側三角形的頂點實時地計算座標變換矩陣，
     並在右側顯示迭代結果。
 """
-# %hide
-# %exec_python -m scpy2.examples.fractal.ifs_demo
-
 
 # %%include python examples/fractal/ifs_demo.py 1
 def solve_eq(triangle1, triangle2):
@@ -1119,10 +1122,11 @@ ax.axis("off")
 
 # shape of counts: (600, 477)
 
-plt.show()
-
+show()
+'''
 print("------------------------------------------------------------")  # 60個
-
+print("------------------------------------------------------------")  # 60個
+'''
 # L-System分形
 
 rules = [
@@ -1241,10 +1245,11 @@ for i in range(6):
 
 fig.subplots_adjust(left=0, right=1, bottom=0, top=1, wspace=0, hspace=0)
 
-plt.show()
-
+show()
+'''
 print("------------------------------------------------------------")  # 60個
-
+print("------------------------------------------------------------")  # 60個
+'''
 # 分形山脈
 # 一維中點移位法
 
@@ -1273,13 +1278,13 @@ for i, d in enumerate([0.4, 0.5, 0.6]):
     pl.plot(a, label="d=%s" % d, linewidth=3 - i)
 pl.xlim(0, len(a))
 pl.legend()
-plt.show()
-
+show()
+'''
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+'''
 # 二維中點移位法
-
-
 # 二維中點移位法計算山脈曲面
 def hill2d(n, d):
     """
@@ -1322,9 +1327,12 @@ scene.scene.background = 1, 1, 1
 mlab.surf(a)
 # img = vtk_scene_to_array(scene.scene)
 # %array_image img
-
+'''
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+from mayavi import mlab
+from scipy.ndimage.filters import convolve
 # 菱形方形算法
 
 
@@ -1404,8 +1412,6 @@ print xxxx
 print(
 
 b'\n\n\n
-
-plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
