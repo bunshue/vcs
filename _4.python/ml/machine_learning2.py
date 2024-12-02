@@ -1421,7 +1421,7 @@ import scipy.stats as stats
 import sklearn.linear_model as linear_model
 
 # import xgboost as xgb
-# from sklearn.cross_validation import KFold
+from sklearn.model_selection import KFold
 from sklearn.manifold import TSNE
 from sklearn.cluster import KMeans
 from sklearn.decomposition import PCA
@@ -2499,7 +2499,7 @@ print('------------------------------------------------------------')	#60個
 # 訓練模型
 
 import xgboost as xgb
-from sklearn.cross_validation import KFold
+from sklearn.model_selection import KFold
 
 def my_eval(preds, train): # 自定義評價函數
     score = mean_squared_error(train.get_label(), preds)
@@ -4178,6 +4178,7 @@ clf = GridSearchCV(DecisionTreeClassifier(), param_grid, cv=5, return_train_scor
 clf.fit(X, y)
 print("best param: {0}\nbest score: {1}".format(clf.best_params_, clf.best_score_))
 
+# cv_results_ : 具體用法模型不同參數下交叉驗證的結果
 plot_curve(thresholds, clf.cv_results_, xlabel="gini thresholds")
 
 show()

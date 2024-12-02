@@ -257,6 +257,7 @@ print("best param: {0}\nbest score: {1}".format(clf.best_params_, clf.best_score
 
 # 有錯誤
 # plt.figure(figsize=(10, 4), dpi=144)
+# cv_results_ : 具體用法模型不同參數下交叉驗證的結果
 # plot_param_curve(plt, gammas, clf.cv_results_, xlabel='gamma')
 # plt.show()
 

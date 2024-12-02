@@ -28,7 +28,7 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 print("------------------------------------------------------------")  # 60個
 
 from sklearn import linear_model, metrics
-from sklearn.cross_validation import train_test_split
+from sklearn.model_selection import train_test_split
 
 model_data = pd.read_csv("date_data.csv")
 model_data.head()

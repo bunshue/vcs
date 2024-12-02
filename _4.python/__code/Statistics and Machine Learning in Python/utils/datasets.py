@@ -17,7 +17,7 @@ sklearn
 from sklearn import datasets
 import sklearn.linear_model as lm
 import sklearn.metrics as metrics
-from sklearn.cross_validation import KFold
+from sklearn.model_selection import KFold
 
 X, y = datasets.make_regression(n_samples=100, n_features=100, 
                          n_informative=10, random_state=42)
@@ -90,7 +90,7 @@ sklearn
 from sklearn import datasets
 import sklearn.linear_model as lm
 import sklearn.metrics as metrics
-from sklearn.cross_validation import StratifiedKFold
+from sklearn.model_selection import StratifiedKFold
 
 X, y = datasets.make_classification(n_samples=100, n_features=100, 
                          n_informative=10, random_state=42)

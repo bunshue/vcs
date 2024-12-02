@@ -31,7 +31,7 @@ print("------------------------------------------------------------")  # 60個
 #KNN
 
 from scipy import stats
-import sklearn.cross_validation as cross_validation
+import sklearn.model_selection as cross_validation
 
 orgData = pd.read_csv('date_data2.csv')
 cc = orgData.describe()
@@ -83,9 +83,10 @@ for k in range(1, 15):
 
 #交叉验证选择k值
 
+#應該也是改成 sklearn.model_selection
 from sklearn.grid_search import ParameterGrid
 from sklearn.grid_search import GridSearchCV 
-from sklearn.cross_validation import KFold
+from sklearn.model_selection import KFold
 
 n_samples = len(train_data)
 kf = KFold(n=n_samples, n_folds=3)
@@ -93,7 +94,7 @@ grid = ParameterGrid({'n_neighbors':[range(1,15)]})
 estimator = KNeighborsClassifier()
 gridSearchCV = GridSearchCV(estimator, grid, cv=kf)
 gridSearchCV.fit(train_data, train_target.values.flatten())
-gridSearchCV.grid_scores_
+gridSearchCV.cv_results_  # cv_results_ : 具體用法模型不同參數下交叉驗證的結果
 
 gridSearchCV.best_params_
 

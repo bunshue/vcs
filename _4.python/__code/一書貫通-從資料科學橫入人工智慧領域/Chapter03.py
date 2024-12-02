@@ -22,7 +22,6 @@ print("------------------------------------------------------------")  # 60個
 
 #日期时间
 
-import time
 now = time.strptime('2016-07-20', '%Y-%m-%d')
 print (now)
 
@@ -152,10 +151,6 @@ for key, value in heights.items():
 f = lambda x: x * x
 f(4)
 
-
-
-import pandas as pd
-
 df = pd.DataFrame({'key': ['b', 'b', 'a', 'c', 'a', 'a', 'b'], 'data1': range(7)})
 df.head(2)
 
@@ -200,9 +195,6 @@ print(keyword.kwlist)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-
-# coding: utf-8
 
 # # 逻辑回归
 #信用风险建模案例
@@ -252,7 +244,6 @@ accepts = pd.read_csv('data/accepts.csv').dropna()
 
 ##衍生变量:
 def divMy(x,y):
-    import numpy as np
     if x==np.nan or y==np.nan:
         return np.nan
     elif y==0:
@@ -274,7 +265,6 @@ accepts["nth"]=accepts[["loan_amt","tot_rev_debt"]].apply(lambda x:divMy(x[0],x[
 accepts["nta"]=accepts[["loan_amt","tot_rev_line"]].apply(lambda x:divMy(x[0],x[1]),axis = 1)
 
 accepts.head()
-
 
 # ##  分类变量的相关关系
 

@@ -30,7 +30,7 @@ print("------------------------------------------------------------")  # 60個
 #第12讲 高级分类器：支持向量机( SVM)与凸优化
 
 from scipy import stats
-import sklearn.cross_validation as cross_validation
+import sklearn.model_selection as cross_validation
 
 orgData = pd.read_csv('date_data2.csv')
 cc = orgData.describe()

@@ -41,9 +41,12 @@ print("------------------------------------------------------------")  # 60個
 from common1 import *
 from sklearn import datasets
 from sklearn.cluster import KMeans  # 聚類方法, K-平均演算法
+from sklearn.model_selection import train_test_split
+from sklearn import metrics
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+"""
 print("無 sklearn之kmeans 1")
 
 
@@ -319,7 +322,7 @@ def do_k_means():
 
 
 do_k_means()
-
+"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -329,7 +332,6 @@ from sklearn.datasets import make_blobs
 
 N = 100
 GROUPS = 3
-
 print("make_blobs,", N, "個樣本, 分成", GROUPS, "群")
 X, y, centers = make_blobs(
     n_samples=N,
@@ -345,9 +347,9 @@ X, y, centers = make_blobs(
 print(GROUPS, "群 的中心點 :")
 print(centers)
 print("資料的維度", X.shape, y.shape)
-# print(y.shape)
 
-clf = KMeans(n_clusters=3, random_state=9487)  # K-平均演算法, 分成3群
+CLUSTERS = 3  # 要分成的群數
+clf = KMeans(n_clusters=CLUSTERS, random_state=9487)  # K-平均演算法
 
 y_pred = clf.fit_predict(X)  # 訓練
 
@@ -360,7 +362,7 @@ print(cc)
 cc = cc * 1.0 / len(y)
 print("正確率 :", cc)
 
-plt.figure(figsize=(12, 6))
+plt.figure(figsize=(8, 5))
 plt.subplot(121)
 plt.scatter(X[:, 0], X[:, 1], c="b")
 plt.title("原始資料 3 群")
@@ -372,51 +374,66 @@ plt.title("KMeans分群結果")
 show()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-# 隨機生成 N 個點，然後用 k-means 將他們分成 5 群
-N = 50
-x = np.random.rand(N, 2)  # N X 2 亂數陣列
+# 製作資料1
+# 建立 N 個點, n_features = 2
+N = 100
+# GROUPS = 3
+# print("make_blobs,", N, "個樣本, 分成", GROUPS, "群")
+data, label = datasets.make_blobs(n_samples=N, n_features=2)
 
-clf = KMeans(n_clusters=5)  # K-平均演算法, 分成5群
+print("------------------------------")  # 30個
 
-clf.fit(x)  # 學習訓練.fit
+# 製作資料2
+# 建立 N 個點, n_features = 2, centers = 3
+N = 100
+GROUPS = 3
+print("make_blobs,", N, "個樣本, 分成", GROUPS, "群")
+data, label = datasets.make_blobs(
+    n_samples=N, n_features=2, centers=GROUPS, random_state=9487
+)
+print("------------------------------")  # 30個
 
-# 訓練好的結果, 放在神秘的 labels_ 之下
-cc = clf.labels_
-print("訓練好的結果 :\n", cc)
+CLUSTERS = 3  # 要分成的群數
+clf = KMeans(n_clusters=CLUSTERS)  # K-平均演算法
 
-plt.figure(figsize=(12, 6))
+clf.fit(data)  # 學習訓練.fit
+print(clf.labels_)  # 列印群集類別標籤
+print(clf.cluster_centers_)  # 列印群集中心
+print("集群中心的坐標:", clf.cluster_centers_)
+
+plt.figure(figsize=(8, 5))
 plt.subplot(121)
-plt.scatter(x[:, 0], x[:, 1], c="b")
+plt.scatter(data[:, 0], data[:, 1], c="b")
 plt.title("原始資料")
 
 plt.subplot(122)
-# 將點逐一染色
-for i in range(0, N):
-    if cc[i] == 0:
-        plt.scatter(x[i][0], x[i][1], color="red")
-    elif cc[i] == 1:
-        plt.scatter(x[i][0], x[i][1], color="blue")
-    elif cc[i] == 2:
-        plt.scatter(x[i][0], x[i][1], color="green")
-    elif cc[i] == 3:
-        plt.scatter(x[i][0], x[i][1], color="pink")
-    elif cc[i] == 4:
-        plt.scatter(x[i][0], x[i][1], color="orange")
-plt.title("KMeans分群結果")
+# 繪圓點, 圓點用黑色外框, 使用標籤 labels_ 區別顏色,
+plt.scatter(data[:, 0], data[:, 1], marker="o", c=clf.labels_)
+# 用紅色標記群集中心
+plt.scatter(
+    clf.cluster_centers_[:, 0], clf.cluster_centers_[:, 1], marker="*", color="red"
+)
+plt.title("無監督學習")
 
 show()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 隨機生成 N 個點，然後用 k-means 將他們分成 5 群
 N = 100
 x = np.random.rand(N, 2)  # N X 2 亂數陣列
 
-
-clf = KMeans(n_clusters=3)  # K-平均演算法, 分成3群
+CLUSTERS = 5  # 要分成的群數
+clf = KMeans(n_clusters=CLUSTERS)  # K-平均演算法
 
 clf.fit(x)  # 學習訓練.fit
+print(clf.labels_)  # 列印群集類別標籤
+print(clf.cluster_centers_)  # 列印群集中心
+print("集群中心的坐標:", clf.cluster_centers_)
+print("分群準確性:", clf.inertia_)
 
 # 訓練好的結果, 放在神秘的 labels_ 之下
 cc = clf.labels_
@@ -428,32 +445,40 @@ print(y_pred)
 
 # clf.labels_ 與 clf.predict(x) 必相同
 
+plt.figure(figsize=(12, 6))
+plt.subplot(131)
+# plt.scatter(x[:, 0], x[:, 1], c="b")
+plt.scatter(x[:, 0], x[:, 1], s=50)
+plt.title("原始資料")
+
+plt.subplot(132)
+# 繪圓點, 圓點用黑色外框, 使用標籤 labels_ 區別顏色,
+plt.scatter(x[:, 0], x[:, 1], marker="o", c=clf.labels_)  # 自動配色
+# 用紅色標記群集中心
+plt.scatter(
+    clf.cluster_centers_[:, 0], clf.cluster_centers_[:, 1], marker="*", color="red"
+)
+plt.title("KMeans分群結果")
+
+plt.subplot(133)
+
+# 畫分區域ST
 x0 = y0 = np.arange(-0.2, 1.2, 0.02)
 xm, ym = np.meshgrid(x0, y0)
-
 P = np.c_[xm.ravel(), ym.ravel()]
 z = clf.predict(P)  # 預測.predict
 Z = z.reshape(xm.shape)
+plt.contourf(xm, ym, Z, alpha=0.3)  # 畫分區域
+# 畫分區域SP
+plt.scatter(x[:, 0], x[:, 1], s=50, c=cc, cmap="Paired")  # 畫點
+plt.title("KMeans分群結果")
 
-plt.figure(figsize=(12, 6))
-plt.subplot(131)
-plt.scatter(x[:, 0], x[:, 1], s=50)
-plt.title("原始資料")
-plt.subplot(132)
-plt.scatter(x[:, 0], x[:, 1], s=50, c=cc)  # 自動配色
-plt.title("KMeans分群結果")
-plt.subplot(133)
-plt.contourf(xm, ym, Z, alpha=0.3)
-plt.scatter(x[:, 0], x[:, 1], s=50, c=cc, cmap="Paired")
-plt.title("KMeans分群結果")
 show()
 
 print("------------------------------------------------------------")  # 60個
-"""
-Mean Shift 自動分類
-有時我們甚至不想告訴電腦, 你自動分類應該分成幾類。
-這時 Mean Shift 可以幫我們
-"""
+print("------------------------------------------------------------")  # 60個
+
+# Mean Shift 自動分類, 電腦自己決定要分成幾類
 
 plt.figure(num="Means Shift 自動分類", figsize=(12, 8))
 
@@ -468,31 +493,41 @@ from sklearn.cluster import MeanShift
 clf = MeanShift(bandwidth=0.2)
 
 clf.fit(x)  # 學習訓練.fit
+print(clf.labels_)  # 列印群集類別標籤
+print(clf.cluster_centers_)  # 列印群集中心
+print("集群中心的坐標:", clf.cluster_centers_)
 cc = clf.labels_  # 訓練好的結果
 
+plt.subplot(231)
+plt.scatter(x[:, 0], x[:, 1], s=50)  # 畫點
+plt.axis([-0.1, 1.1, -0.1, 1.1])
+plt.title("原始資料")
+
+plt.subplot(232)
+# 畫分區域ST
 x0 = y0 = np.arange(-0.2, 1.2, 0.02)
 xm, ym = np.meshgrid(x0, y0)
-
 P = np.c_[xm.ravel(), ym.ravel()]
 z = clf.predict(P)  # 預測.predict
 Z = z.reshape(xm.shape)
-
-plt.subplot(231)
-plt.scatter(x[:, 0], x[:, 1], s=50, c=cc, cmap="Paired")
 plt.contourf(xm, ym, Z, alpha=0.3, cmap="Paired")
-plt.title("標準 Mean Shift分類")
+# 畫分區域SP
+plt.scatter(x[:, 0], x[:, 1], s=50, c=cc, cmap="Paired")  # 畫點
+plt.axis([-0.1, 1.1, -0.1, 1.1])
+plt.title("標準 Mean Shift分類, bw=0.2")
 
 print("------------------------------")  # 30個
 
 # 畫完整分類
+plt.subplot(233)
 
 gd = np.array([[i, j] for i in np.arange(-4, 4, 0.4) for j in np.arange(-3, 3, 0.4)])
 gdc = clf.predict(gd)  # 預測.predict
 
-plt.subplot(232)
 plt.scatter(gd[:, 0], gd[:, 1], s=50, cmap=plt.cm.coolwarm, c=gdc)
 # plt.scatter(gd[:, 0], gd[:, 1], s=50, cmap=plt.cm.prism, c=gdc)  # cmap
 # plt.scatter(gd[:, 0], gd[:, 1], s=50, cmap=plt.cm.Set1, c=gdc)  # cmap
+plt.axis([-4.5, 4.2, -3.4, 3.2])
 plt.title("訓練好的結果")
 
 print("------------------------------")  # 30個
@@ -503,21 +538,18 @@ def my_mean_shift(bw=0.2):
     clf = MeanShift(bandwidth=bw)
     clf.fit(x)  # 學習訓練.fit
     cc = clf.labels_  # 訓練好的結果
-
+    # 畫分區域ST
     x0 = y0 = np.arange(-0.2, 1.2, 0.02)
     xm, ym = np.meshgrid(x0, y0)
-
     P = np.c_[xm.ravel(), ym.ravel()]
     z = clf.predict(P)  # 預測.predict
     Z = z.reshape(xm.shape)
-
-    plt.scatter(x[:, 0], x[:, 1], c=cc, cmap="Paired")
     plt.contourf(xm, ym, Z, alpha=0.3, cmap="Paired")
-    plt.title("Mean Shift, bw =" + str(bw))
+    # 畫分區域SP
+    plt.scatter(x[:, 0], x[:, 1], c=cc, cmap="Paired")
+    plt.axis([-0.1, 1.1, -0.1, 1.1])
+    plt.title("Mean Shift, bw=" + str(bw))
 
-
-plt.subplot(233)
-my_mean_shift(0.1)
 
 plt.subplot(234)
 my_mean_shift(0.3)
@@ -552,46 +584,52 @@ f.close()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("KMeans")
-
 filename = "data/Iris2.csv"
 df = pd.read_csv(filename)
-
-df = df.drop("Id", axis=1)
+"""
+print(df)
 print(df.head())
 print(df.info())
+"""
+df = df.drop("Id", axis=1)  # 刪除 Id 欄位
 
 df = df.drop_duplicates()  # 刪除重複列
-
 df.reset_index(drop=True)  # 將列索引重新編號
 
 s = {"Iris-setosa": 0, "Iris-versicolor": 1, "Iris-virginica": 2}
-
-df["Species"] = df["Species"].map(s)
+df["Species"] = df["Species"].map(s)  # 將 Species 欄位的 字串 對應 數值
 
 print(df.head())
-print(df.info())
 
+# 取前四欄位當作訓練資料
 df_X = df[["SepalLengthCm", "SepalWidthCm", "PetalLengthCm", "PetalWidthCm"]]
-k = 1
+print(df_X.head())
 
-clf = KMeans(n_clusters=k)  # K-平均演算法, 分成k群
+CLUSTERS = 3  # 要分成的群數
+clf = KMeans(n_clusters=CLUSTERS)  # K-平均演算法
 
 clf.fit(df_X)  # 學習訓練.fit
+print(clf.labels_)  # 列印群集類別標籤
+print(clf.cluster_centers_)  # 列印群集中心
+print("集群中心的坐標:", clf.cluster_centers_)
 
 print("分群準確性:", clf.inertia_)
-
 # 分群準確性: 663.895238095238
 
 s = []
 for k in range(1, 15):
-    clf = KMeans(n_clusters=k)  # K-平均演算法, 分成k群
+    CLUSTERS = k  # 要分成的群數
+    clf = KMeans(n_clusters=CLUSTERS)  # K-平均演算法
     clf.fit(df_X)  # 學習訓練.fit
     s.append(clf.inertia_)
 
-print(s)
 
-# [663.895238095238, 151.77145833333336, 77.91989035087718, 56.64237065018315, 45.816421929824564, 38.380978808131445, 34.1150969785575, 29.771330051212402, 27.730401211361738, 25.771261585636587, 24.236889472455648, 22.68941452991453, 21.258278047116285, 19.7686452991453]
+print("分1~14群的 準確性 clf.inertia_ :")
+print(s)
+# [663.895238095238, 151.77145833333336, 77.91989035087718, 56.64237065018315,
+# 45.816421929824564, 38.380978808131445, 34.1150969785575, 29.771330051212402,
+# 27.730401211361738, 25.771261585636587, 24.236889472455648, 22.68941452991453,
+# 21.258278047116285, 19.7686452991453]
 
 # 看視覺化圖表決定參數K值
 df_kmeans = pd.DataFrame()
@@ -600,8 +638,8 @@ df_kmeans.index = list(range(1, 15))
 df_kmeans.plot(grid=True)
 show()
 
-k = 3
-clf = KMeans(n_clusters=k)  # K-平均演算法, 分成k群
+CLUSTERS = 3  # 要分成的群數
+clf = KMeans(n_clusters=CLUSTERS)  # K-平均演算法
 
 clf.fit(df_X)  # 學習訓練.fit
 
@@ -622,14 +660,11 @@ df1.plot(kind="scatter", x="SepalLengthCm", y="SepalWidthCm", c=df1["colors"])
 
 show()
 
+print("預測")
 # 給一朵鳶尾花的4個特徵值：「花萼長度 6.6公分、花萼寬度 3.1公分、花瓣長度 5.2公分、花寬度 2.4公分」
-
 new = [[6.6, 3.1, 5.2, 2.4]]
-
 v = clf.predict(new)  # 預測.predict
-
 print("預測結果為：", v)
-
 # 預測結果為： [0]
 
 print("------------------------------------------------------------")  # 60個
@@ -656,202 +691,108 @@ df = pd.DataFrame(
         ],
     }
 )
-k = 3
 
-clf = KMeans(n_clusters=k, random_state=9487)  # K-平均演算法, 分成k群
+CLUSTERS = 3  # 要分成的群數
+clf = KMeans(n_clusters=CLUSTERS, random_state=9487)  # K-平均演算法
 
 clf.fit(df)  # 學習訓練.fit
+print(clf.labels_)  # 列印群集類別標籤
+print(clf.cluster_centers_)  # 列印群集中心
+print("集群中心的坐標:", clf.cluster_centers_)
 
-print(clf.labels_)
+plt.subplot(121)
+plt.scatter(df["length"], df["weight"], c="b")
+plt.title("原始資料")
 
+plt.subplot(122)
 colmap = np.array(["r", "g", "y"])
 plt.scatter(df["length"], df["weight"], color=colmap[clf.labels_])
+plt.title("df 分成3群, 分群結果")
 
 show()
 
 print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# 建立 300 個點, n_features = 2
-data, label = datasets.make_blobs(n_samples=300, n_features=2)
-
-clf = KMeans(n_clusters=3)  # K-平均演算法, 分成3群
-
-clf.fit(data)  # 將數據帶入物件, 做群集分析  # 學習訓練.fit
-print(clf.labels_)  # 列印群集類別標籤
-print(clf.cluster_centers_)  # 列印群集中心
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# 建立 300 個點, n_features = 2
-data, label = datasets.make_blobs(n_samples=300, n_features=2)
-
-clf = KMeans(n_clusters=3)  # K-平均演算法, 分成3群
-clf.fit(data)  # 將數據帶入物件, 做群集分析  # 學習訓練.fit
-print(clf.labels_)  # 列印群集類別標籤
-print(clf.cluster_centers_)  # 列印群集中心
-
-# 繪圓點, 圓點用黑色外框, 使用標籤 labels_ 區別顏色,
-plt.scatter(data[:, 0], data[:, 1], marker="o", c=clf.labels_)
-# 用紅色標記群集中心
-plt.scatter(
-    clf.cluster_centers_[:, 0], clf.cluster_centers_[:, 1], marker="*", color="red"
-)
-plt.title("無監督學習")
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# 建立 300 個點, n_features = 2, centers = 3
-data, label = datasets.make_blobs(
-    n_samples=300, n_features=2, centers=3, random_state=9487
-)
-
-clf = KMeans(n_clusters=3)  # K-平均演算法, 分成3群
-clf.fit(data)  # 將數據帶入物件, 做群集分析
-print(clf.labels_)  # 列印群集類別標籤
-print(clf.cluster_centers_)  # 列印群集中心
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# 建立 300 個點, n_features = 2, centers = 3
-data, label = datasets.make_blobs(
-    n_samples=300, n_features=2, centers=3, random_state=9487
-)
-
-clf = KMeans(n_clusters=3)  # K-平均演算法, 分成3群
-clf.fit(data)  # 將數據帶入物件, 做群集分析
-print(clf.labels_)  # 列印群集類別標籤
-print(clf.cluster_centers_)  # 列印群集中心
-
-# 繪圓點, 圓點用黑色外框, 使用標籤 labels_ 區別顏色,
-plt.scatter(data[:, 0], data[:, 1], marker="o", c=clf.labels_)
-# 用紅色標記群集中心
-plt.scatter(
-    clf.cluster_centers_[:, 0], clf.cluster_centers_[:, 1], marker="*", color="red"
-)
-plt.title("無監督學習", fontsize=16)
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
 
 # 01-kmeans-Mat.py
 
-import numpy as np
-import matplotlib.pyplot as plt
-
 X = np.array([[1, 1], [1.1, 1.1], [1.2, 1.2], [2, 2], [2.1, 2.1], [2.2, 2.2]])
 y = [1, 1, 1, 0, 0, 0]
 
-plt.axis([0, 3, 0, 3])
+plt.subplot(121)
 plt.plot(X[:3, 0], X[:3, 1], "yx")
 plt.plot(X[3:, 0], X[3:, 1], "g.")
+
 plt.ylabel("H cm")
 plt.xlabel("W cm")
 plt.legend(("A", "B"), loc="upper right")
-plt.show()
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 02-kmeans-Lemon.py
-
-import numpy as np
-import matplotlib.pyplot as plt
-
-from sklearn.model_selection import train_test_split
-from sklearn.cluster import KMeans
-from sklearn import metrics
-
-X = np.array([[1, 1], [1.1, 1.1], [1.2, 1.2], [2, 2], [2.1, 2.1], [2.2, 2.2]])
-y = [1, 1, 1, 0, 0, 0]
-kmeans = KMeans(n_clusters=2, random_state=0).fit(X)
-print("集群中心的坐標:", kmeans.cluster_centers_)
-print("預測:", kmeans.predict(X))
-print("實際:", y)
-print("預測[1, 1],[2.3,2.1]:", kmeans.predict([[1, 1], [2.3, 2.1]]))
-
 plt.axis([0, 3, 0, 3])
+
+print("------------------------------")  # 30個
+
+CLUSTERS = 2  # 要分成的群數
+clf = KMeans(n_clusters=CLUSTERS, random_state=0)  # K-平均演算法
+
+clf.fit(X)  # 學習訓練.fit
+print(clf.labels_)  # 列印群集類別標籤
+print(clf.cluster_centers_)  # 列印群集中心
+print("集群中心的坐標:", clf.cluster_centers_)
+print("預測:", clf.predict(X))
+print("實際:", y)
+print("預測[1, 1],[2.3,2.1]:", clf.predict([[1, 1], [2.3, 2.1]]))
+
+plt.subplot(122)
 plt.plot(X[:3, 0], X[:3, 1], "yx")
 plt.plot(X[3:, 0], X[3:, 1], "g.")
-plt.plot(kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1], "ro")
+plt.plot(clf.cluster_centers_[:, 0], clf.cluster_centers_[:, 1], "ro")
 plt.xticks(())
 plt.yticks(())
-plt.show()
+plt.axis([0, 3, 0, 3])
 
+show()
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 03-Iris-kmeans.py
 
-import numpy as np
-import matplotlib.pyplot as plt
-from sklearn import datasets
-from sklearn.model_selection import train_test_split
-from sklearn.cluster import KMeans
-from sklearn import metrics
-
-# Load the diabetes dataset
 iris = datasets.load_iris()
 
 iris_X_train, iris_X_test, iris_y_train, iris_y_test = train_test_split(
     iris.data, iris.target, test_size=0.2
 )
 
-# KMeans 演算法
-kmeans = KMeans(n_clusters=3)
-kmeans_fit = kmeans.fit(iris_X_train)
+CLUSTERS = 3  # 要分成的群數
+clf = KMeans(n_clusters=CLUSTERS)  # K-平均演算法
+
+clf.fit(iris_X_train)  # 學習訓練.fit
+print(clf.labels_)  # 列印群集類別標籤
+print(clf.cluster_centers_)  # 列印群集中心
+print("集群中心的坐標:", clf.cluster_centers_)
 
 print("實際", iris_y_train)
-print("預測", kmeans_fit.labels_)
+print("預測", clf.labels_)
 # 調整標籤的數字
 iris_y_train[iris_y_train == 1] = 11
 iris_y_train[iris_y_train == 0] = 1
 iris_y_train[iris_y_train == 11] = 0
 print("調整", iris_y_train)
 
-score = metrics.accuracy_score(iris_y_train, kmeans.predict(iris_X_train))
+y_pred = clf.predict(iris_X_train)
+
+score = metrics.accuracy_score(iris_y_train, y_pred)
 print("準確率:{0:f}".format(score))
 
-print("------------------------------------------------------------")  # 60個
-
-# 04-Iris-kmeans-Slipt.py
-
-import numpy as np
-import matplotlib.pyplot as plt
-from sklearn import datasets
-from sklearn.model_selection import train_test_split
-from sklearn.cluster import KMeans
-from sklearn import metrics
-
-# Load the diabetes dataset
-iris = datasets.load_iris()
-
-iris_X_train, iris_X_test, iris_y_train, iris_y_test = train_test_split(
-    iris.data, iris.target, test_size=0.2
-)
-
-# KMeans 演算法
-kmeans = KMeans(n_clusters=3)
-kmeans.fit(iris_X_train)
-y_predict = kmeans.predict(iris_X_train)
-
+print("------------------------------")  # 30個
 
 x1 = iris_X_train[:, 0]
 y1 = iris_X_train[:, 1]
-plt.scatter(x1, y1, c=y_predict, cmap="viridis")
+plt.scatter(x1, y1, c=y_pred, cmap="viridis")
 
-centers = kmeans.cluster_centers_
+centers = clf.cluster_centers_
 plt.scatter(centers[:, 0], centers[:, 1], c="black", s=200, alpha=0.5)
-plt.show()
+
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

@@ -4,7 +4,7 @@
 # In[1]:
 
 
-from sklearn.cross_validation import train_test_split
+from sklearn.model_selection import train_test_split
 import sklearn.tree as tree
 import sklearn.ensemble as ensemble
 import pandas as pd

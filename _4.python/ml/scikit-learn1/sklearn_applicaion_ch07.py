@@ -98,6 +98,7 @@ tuned_parameters = [{"alpha": alphas, "positive": positive}]
 clf = GridSearchCV(lasso, tuned_parameters, cv=5, refit=False)
 clf.fit(X, y)
 
+# cv_results_ : 具體用法模型不同參數下交叉驗證的結果
 scores_mean = clf.cv_results_["mean_test_score"]
 scores_std = clf.cv_results_["std_test_score"]
 print("平均分數:\n", scores_mean, "\n標準差:\n", scores_std)
@@ -190,6 +191,7 @@ tuned_parameters = [{"lasso__alpha": alphas, "lasso__positive": positive}]
 clf = GridSearchCV(pipe_lr, tuned_parameters, cv=5, refit=False)
 clf.fit(X, y)
 
+# cv_results_ : 具體用法模型不同參數下交叉驗證的結果
 scores_mean = clf.cv_results_["mean_test_score"]
 scores_std = clf.cv_results_["std_test_score"]
 print("平均分數:\n", scores_mean, "\n標準差:\n", scores_std)

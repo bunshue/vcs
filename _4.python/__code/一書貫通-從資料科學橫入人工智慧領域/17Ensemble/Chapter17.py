@@ -28,9 +28,9 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 print("------------------------------------------------------------")  # 60個
 
 from sklearn import linear_model,metrics
-from sklearn.cross_validation import train_test_split
+from sklearn.model_selection import train_test_split
 from sklearn.neural_network import BernoulliRBM#⼆值型的RBM网络
-import sklearn.cross_validation as cross_validation
+import sklearn.model_selection as cross_validation
 import sklearn.tree as tree
 import sklearn.ensemble as ensemble
 import sklearn.metrics as metrics
@@ -41,7 +41,8 @@ model_data.head()
 target = model_data["BROADBAND"]
 orgData1 = model_data.ix[ :,1:-2]
 
-import sklearn.cross_validation as cross_validation
+import sklearn.model_selection as cross_validation
+
 train_data, test_data, train_target, test_target = cross_validation.train_test_split(
     orgData1, target, test_size=0.4, train_size=0.6, random_state=12345)  #划分训练集和测试集
 

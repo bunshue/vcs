@@ -7,7 +7,7 @@ Created on Sat Jun 30 22:18:35 2018
 
 import os
 import pandas as pd
-import sklearn.cross_validation as cross_validation
+import sklearn.model_selection as cross_validation
 
 os.chdir(r'D:\Python_book\11KNNNB')
 pd.set_option('display.max_columns', None)

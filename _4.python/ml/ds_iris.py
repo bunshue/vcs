@@ -1985,7 +1985,7 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 """ some fail
-from sklearn.cross_validation import KFold
+from sklearn.model_selection import KFold
 from sklearn.metrics import accuracy_score
 from sklearn.svm import SVC
 
@@ -2008,7 +2008,6 @@ print(accuracy_score(y_train, train_preds)) # 返回結果: 0.971428571429
 print(test_preds.mean(axis=1))
 
 from sklearn.model_selection import cross_val_score # python 3使用
-# from sklearn.cross_validation import cross_val_score # python 2 使用
 print(cross_val_score(clf, iris.data, iris.target).mean())
 """
 print("------------------------------------------------------------")  # 60個
@@ -2039,7 +2038,7 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 """ some fail
-from sklearn.cross_validation import cross_val_score
+from sklearn.model_selection import cross_val_score
 from hyperopt import hp,STATUS_OK,Trials,fmin,tpe
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.svm import SVC

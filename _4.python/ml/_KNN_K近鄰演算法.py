@@ -1,5 +1,4 @@
 """
-
 K相鄰
 
 K-近鄰演算法（K Nearest Neighbor）
@@ -12,9 +11,7 @@ k是一個用戶定義的常數。
 
 knn演算法，是機器學習中較好理解的一個演算法，是透過找出附近鄰居的分類定義來自己的類別，
 並用sklearn輕易的完成這個機器學習的演算法。
-
 """
-
 print("------------------------------------------------------------")  # 60個
 
 # 共同
@@ -50,7 +47,7 @@ from sklearn.model_selection import train_test_split  # 資料分割 => 訓練�
 由於 sklearn.cross_validation 方法要被棄用了，所以必須改成 sklearn.model_selection。
 """
 print("------------------------------------------------------------")  # 60個
-'''
+
 iris = datasets.load_iris()
 
 # 定義特徵資料：
@@ -69,12 +66,10 @@ train_data, test_data, train_label, test_label = train_test_split(
 
 knn = KNeighborsClassifier()  # K近鄰演算法（K Nearest Neighbor, KNN）
 
-knn.fit(train_data, train_label)
+knn.fit(train_data, train_label)  # 學習訓練.fit
 
 y_pred = knn.predict(test_data)  # 預測.predict
-
-print("預測結果")
-print(y_pred)
+print("預測結果 :\n", y_pred)
 
 print("正確答案")
 print(test_label)
@@ -111,8 +106,7 @@ plt.scatter(dx_std.T[0], dx_std.T[1], c=dy, cmap="Dark2")
 plt.title("經過 StandardScaler")
 plt.grid(True)
 
-plt.show()
-
+show()
 
 # 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
 dx_train, dx_test, dy_train, dy_test = train_test_split(dx_std, dy, test_size=0.2)
@@ -131,7 +125,7 @@ knn = KNeighborsClassifier(n_neighbors=5)  # K近鄰演算法（K Nearest Neighb
 knn.fit(dx_train, dy_train)  # 學習訓練.fit
 
 y_pred = knn.predict(dx_test)  # 預測.predict
-print(y_pred)
+print("預測結果 :\n", y_pred)
 
 print(dy_test)
 print(knn.score(dx_train, dy_train))
@@ -154,8 +148,10 @@ knn = KNeighborsClassifier()  # K近鄰演算法（K Nearest Neighbor, KNN）
 knn.fit(X_train, y_train)  # 學習訓練.fit
 
 y_pred = knn.predict(X_test)  # 預測.predict
+print("預測結果 :\n", y_pred)
 
-print(accuracy_score(y_pred, y_test))  # 評価
+# 評估
+print(accuracy_score(y_pred, y_test))
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -175,7 +171,7 @@ knn.fit(X, y)  # 學習訓練.fit
 new_tissue = pd.DataFrame(np.array([[3, 7]]), columns=["耐酸性", "強度"])
 
 y_pred = knn.predict(new_tissue)  # 預測.predict
-print(y_pred)
+print("預測結果 :\n", y_pred)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -191,18 +187,19 @@ c = np.array(centers)
 plt.scatter(X[:, 0], X[:, 1], c=y, s=100, cmap="cool")  # 畫出樣本
 plt.scatter(c[:, 0], c[:, 1], s=100, marker="^", c="orange")  # 畫出中心點
 
-plt.show()
+show()
 
 k = 5
 knn = KNeighborsClassifier(n_neighbors=k)  # K近鄰演算法（K Nearest Neighbor, KNN）
 
-knn.fit(X, y)
+knn.fit(X, y)  # 學習訓練.fit
 
 # 進行預測
 X_sample = [0, 2]
 X_sample = np.array(X_sample).reshape(1, -1)
 
 y_pred = knn.predict(X_sample)  # 預測.predict
+print("預測結果 :\n", y_pred)
 
 neighbors = knn.kneighbors(X_sample, return_distance=False)
 
@@ -215,7 +212,7 @@ for i in neighbors[0]:
     # 預測點與距離最近的 5 個樣本的連線
     plt.plot([X[i][0], X_sample[0][0]], [X[i][1], X_sample[0][1]], "k--", linewidth=0.6)
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -230,12 +227,15 @@ y += 0.2 * np.random.rand(N) - 0.1
 
 k = 5
 knn = KNeighborsRegressor(k)
-knn.fit(X, y)
+knn.fit(X, y)  # 學習訓練.fit
 
 # 生成足夠密集的點并進行預測
 T = np.linspace(0, 5, 500)[:, np.newaxis]
 
 y_pred = knn.predict(T)  # 預測.predict
+print("預測結果 :\n", y_pred)
+
+# 評估
 print(knn.score(X, y))
 
 # 畫出擬合曲線
@@ -243,7 +243,7 @@ plt.scatter(X, y, c="g", label="data", s=100)  # 畫出訓練樣本
 plt.plot(T, y_pred, c="k", label="prediction", lw=4)  # 畫出擬合曲線
 plt.title("KNeighborsRegressor (k = %i)" % k)
 plt.axis("tight")
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -261,9 +261,11 @@ X_train, X_test, y_train, y_test = train_test_split(iris_X, iris_y, test_size=0.
 # 訓練組8成, 測試組2成
 
 knn = KNeighborsClassifier()
-knn.fit(X_train, y_train)
-print(knn.predict(X_test))
-print(y_test)
+
+knn.fit(X_train, y_train)  # 學習訓練.fit
+
+y_pred = knn.predict(X_test)  # 預測.predict
+print("預測結果 :\n", y_pred)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -279,21 +281,23 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 knn = KNeighborsClassifier(n_neighbors=5)
 
-knn.fit(X_train, y_train)
+knn.fit(X_train, y_train)  # 學習訓練.fit
 
-y_pred = knn.predict(X_test)
+y_pred = knn.predict(X_test)  # 預測.predict
+print("預測結果 :\n", y_pred)
+
+# 評估
 print(knn.score(X_test, y_test))
 
 """ some NG
-# this is cross_val_score #
-from sklearn.cross_validation import cross_val_score
+from sklearn.model_selection import cross_val_score
 
 knn = KNeighborsClassifier(n_neighbors=5)
 scores = cross_val_score(knn, X, y, cv=5, scoring="accuracy")
 print(scores)
 
 # this is how to use cross_val_score to choose model and configs #
-from sklearn.cross_validation import cross_val_score
+from sklearn.model_selection import cross_val_score
 
 k_range = range(1, 31)
 k_scores = []
@@ -306,7 +310,7 @@ for k in k_range:
 plt.plot(k_range, k_scores)
 plt.xlabel("Value of K for KNN")
 plt.ylabel("Cross-Validated Accuracy")
-plt.show()
+show()
 """
 
 print("------------------------------------------------------------")  # 60個
@@ -358,20 +362,23 @@ X_train, X_test, y_train, y_test = train_test_split(
 
 # 從k值=1開始測試
 knn = KNeighborsClassifier(n_neighbors=1)
-knn.fit(X_train, y_train)
-pred = knn.predict(X_test)
+
+knn.fit(X_train, y_train)  # 學習訓練.fit
+
+y_pred = knn.predict(X_test)  # 預測.predict
+print("預測結果 :\n", y_pred)
 
 from sklearn.metrics import classification_report, confusion_matrix
 
-print(confusion_matrix(y_test, pred))
-print(classification_report(y_test, pred))
+print(confusion_matrix(y_test, y_pred))
+print(classification_report(y_test, y_pred))
 
 error_rate = []
 
 for i in range(1, 60):
     knn = KNeighborsClassifier(n_neighbors=i)
-    knn.fit(X_train, y_train)
-    pred_i = knn.predict(X_test)
+    knn.fit(X_train, y_train)  # 學習訓練.fit
+    pred_i = knn.predict(X_test)  # 預測.predict
     error_rate.append(np.mean(pred_i != y_test))
 
 
@@ -390,32 +397,35 @@ plt.title("Error Rate vs. K Value")
 plt.xlabel("K")
 plt.ylabel("Error Rate")
 
-plt.show()
+show()
 
 print("------------------------------")  # 30個
 
 knn = KNeighborsClassifier(n_neighbors=1)
 
-knn.fit(X_train, y_train)
-pred = knn.predict(X_test)
+knn.fit(X_train, y_train)  # 學習訓練.fit
+
+y_pred = knn.predict(X_test)  # 預測.predict
+print("預測結果 :\n", y_pred)
 
 print("WITH K=1")
 print("\n")
-print(confusion_matrix(y_test, pred))
+print(confusion_matrix(y_test, y_pred))
 print("\n")
-print(classification_report(y_test, pred))
+print(classification_report(y_test, y_pred))
 
+####待回復 ST
 
 knn = KNeighborsClassifier(n_neighbors=10)
 
-knn.fit(X_train, y_train)
-pred = knn.predict(X_test)
+knn.fit(X_train, y_train)  # 學習訓練.fit
+
+y_pred = knn.predict(X_test)  # 預測.predict
+print("預測結果 :\n", y_pred)
 
 print("WITH K=10")
-print("\n")
-print(confusion_matrix(y_test, pred))
-print("\n")
-print(classification_report(y_test, pred))
+print(confusion_matrix(y_test, y_pred))
+print(classification_report(y_test, y_pred))
 
 cc = df.head(1)
 print(cc)
@@ -426,20 +436,22 @@ classes = {0: "Safe", 1: "Danger"}
 
 # 建立一筆新資料並進行預測
 x_new = [[4, 0.3, 25, 10, 15, 22, 2.2, 20, 2.3, 0.3, 2.3, 2, 20, 60]]
-y_predict = knn.predict(x_new)
-print(classes[y_predict[0]])
+y_pred = knn.predict(x_new)  # 預測.predict
+print("預測結果 :\n", y_pred)
+print(classes[y_pred[0]])
 
 # Danger
 
 classes = {0: "Safe", 1: "Danger"}
 
 x_new = [[1, 0.3, 1, 1, 1, 2, 1, 1, 1, 0.1, 1, 0.5, 30, 50]]
-y_predict = knn.predict(x_new)
-print(classes[y_predict[0]])
+y_pred = knn.predict(x_new)  # 預測.predict
+print("預測結果 :\n", y_pred)
+print(classes[y_pred[0]])
 
 # Safe
-
-cc = knn.score(X_test, y_test)
+print("評估KNN的準確率")
+cc = knn.score(X_test, y_test)  # 是不是應該要用 y_pred??
 print(cc)
 
 """
@@ -481,16 +493,19 @@ X_train, X_test, y_train, y_test = train_test_split(
 
 # 從k值=1開始測試
 knn = KNeighborsClassifier(n_neighbors=1)
-knn.fit(X_train, y_train)
-pred = knn.predict(X_test)
+
+knn.fit(X_train, y_train)  # 學習訓練.fit
+
+y_pred = knn.predict(X_test)  # 預測.predict
+print("預測結果 :\n", y_pred)
 
 # 使用混淆矩陣
 from sklearn.metrics import classification_report, confusion_matrix
 
 print("混淆矩陣")
-print(confusion_matrix(y_test, pred))
+print(confusion_matrix(y_test, y_pred))
 print("classification_report")
-print(classification_report(y_test, pred))
+print(classification_report(y_test, y_pred))
 
 # 利用 For迴圈，選擇K值
 
@@ -499,8 +514,8 @@ error_rate = []
 for i in range(1, 60):
     print("選擇K值 :", i)
     knn = KNeighborsClassifier(n_neighbors=i)
-    knn.fit(X_train, y_train)
-    pred_i = knn.predict(X_test)
+    knn.fit(X_train, y_train)  # 學習訓練.fit
+    pred_i = knn.predict(X_test)  # 預測.predict
     error_rate.append(np.mean(pred_i != y_test))
 
 print("錯誤率 :", error_rate)
@@ -520,18 +535,21 @@ plt.xlabel("K")
 plt.ylabel("Error Rate")
 plt.title("Error Rate vs. K Value")
 
-plt.show()
+show()
 
 print("選擇 K值 = 7")
 
 knn = KNeighborsClassifier(n_neighbors=7)
-knn.fit(X_train, y_train)
-pred = knn.predict(X_test)
+
+knn.fit(X_train, y_train)  # 學習訓練.fit
+
+y_pred = knn.predict(X_test)  # 預測.predict
+print("預測結果 :\n", y_pred)
 
 print("混淆矩陣")
-print(confusion_matrix(y_test, pred))
+print(confusion_matrix(y_test, y_pred))
 print("classification_report")
-print(classification_report(y_test, pred))
+print(classification_report(y_test, y_pred))
 
 # 顯示所有特徵
 
@@ -545,8 +563,9 @@ print(cc)
 classes = {0: "Safe", 1: "Danger"}
 
 x_new = [[4, 0.3, 25, 15, 22, 2.2, 20, 2.3, 0.3, 2.3, 2, 20, 60]]
-y_predict = knn.predict(x_new)
-print(classes[y_predict[0]])
+y_pred = knn.predict(x_new)  # 預測.predict
+print("預測結果 :\n", y_pred)
+print(classes[y_pred[0]])
 
 # Danger
 
@@ -555,16 +574,19 @@ print(classes[y_predict[0]])
 classes = {0: "Safe", 1: "Danger"}
 
 x_new = [[1, 0.3, 1, 1, 2, 1, 1, 1, 0.1, 1, 0.5, 30, 50]]
-y_predict = knn.predict(x_new)
+y_pred = knn.predict(x_new)  # 預測.predict
+print("預測結果 :\n", y_pred)
 print("Safe 或 Danger ?")
-print(classes[y_predict[0]])
-# Safe
+print(classes[y_pred[0]])
 
+# Safe
 print("評估KNN的準確率")
-cc = knn.score(X_test, y_test)
+cc = knn.score(X_test, y_test)  # 是不是應該要用 y_pred??
 print(cc)
 # 0.9287356321839081
-'''
+
+####待回復
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -582,7 +604,7 @@ plt.axis([6, 11, 6, 11])
 plt.ylabel("H cm")
 plt.xlabel("W cm")
 plt.legend(("Orange", "Lemons"), loc="upper right")
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -606,10 +628,12 @@ X = [
 ]
 y = [1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2]
 
-neigh = KNeighborsClassifier(n_neighbors=3)
-neigh.fit(X, y)
-print("預測答案＝", neigh.predict([[7, 9]]))
-print("預測樣本距離＝", neigh.predict_proba([[7, 9]]))  #      測試數據X的返回概率估計。
+knn = KNeighborsClassifier(n_neighbors=3)
+
+knn.fit(X, y)  # 學習訓練.fit
+
+print("預測答案＝", knn.predict([[7, 9]]))  # 預測.predict
+print("預測樣本距離＝", knn.predict_proba([[7, 9]]))  #      測試數據X的返回概率估計。
 
 print("------------------------------------------------------------")  # 60個
 
@@ -663,9 +687,9 @@ iris_X_train, iris_X_test, iris_y_train, iris_y_test = train_test_split(
 
 knn = KNeighborsClassifier()
 
-knn.fit(iris_X_train, iris_y_train)
+knn.fit(iris_X_train, iris_y_train)  # 學習訓練.fit
 
-print("預測", knn.predict(iris_X_test))
+print("預測", knn.predict(iris_X_test))  # 預測.predict
 print("實際", iris_y_test)
 
 print("準確率: %.2f" % knn.score(iris_X_test, iris_y_test))
@@ -673,6 +697,98 @@ print("準確率: %.2f" % knn.score(iris_X_test, iris_y_test))
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+from scipy import stats
+import sklearn.model_selection as cross_validation
+
+orgData = pd.read_csv('data/date_data.csv')
+orgData.describe()
+
+# * 选取自变量
+
+print(orgData.shape)
+print(orgData.head())
+
+
+#取出後4欄位當訓練資料
+#X = orgData.ix[:, :4]
+print("取出3欄資料")
+X = orgData[["income_rank", "attractive_rank", "assets_rank"]]
+
+#取出 Dated 欄位 當訓練目標
+Y = orgData[['Dated']]
+X.head()
+
+# * 极值标准化
+
+from sklearn import preprocessing
+
+min_max_scaler = preprocessing.MinMaxScaler()
+X_scaled = min_max_scaler.fit_transform(X)
+X_scaled[1:5]
+
+# * 划分训练集和测试集
+
+train_data, test_data, train_target, test_target = cross_validation.train_test_split(
+    X_scaled, Y, test_size=0.2, train_size=0.8, random_state=123)   #划分训练集和测试集
+
+
+# 上述过程有没有问题？
+
+# * 建模
+from sklearn.neighbors import KNeighborsClassifier
+
+model = KNeighborsClassifier(n_neighbors=3)  # 默认欧氏距离
+model.fit(train_data, train_target.values.flatten())
+test_est = model.predict(test_data)
+
+import sklearn.metrics as metrics
+
+print(metrics.confusion_matrix(test_target, test_est, labels=[0, 1]))  # 混淆矩阵
+print(metrics.classification_report(test_target, test_est))
+
+model.score(test_data, test_target)
+
+# * 选择k值
+
+for k in range(1, 30):
+    k_model = KNeighborsClassifier(n_neighbors=k)
+    k_model.fit(train_data, train_target.values.flatten())
+    score = k_model.score(test_data, test_target)
+    print(k, '\t', score)
+
+
+# * 交叉验证选择k值
+
+from sklearn.model_selection import ParameterGrid
+from sklearn.model_selection import GridSearchCV
+from sklearn.model_selection import KFold
+
+import sklearn
+print(help(sklearn.model_selection.KFold()))
+
+n_samples = len(train_data)
+kf = KFold(n_samples)
+grid = {'n_neighbors':[1,2,3,4,5,6,7,8,9]}
+estimator = KNeighborsClassifier()
+gridSearchCV = GridSearchCV(estimator, grid, cv=kf)
+gridSearchCV.fit(train_data, train_target.values.flatten())
+cc = gridSearchCV.cv_results_ # cv_results_ : 具體用法模型不同參數下交叉驗證的結果
+print(cc)
+
+mean_test_score = gridSearchCV.cv_results_["mean_test_score"]
+std_test_score = gridSearchCV.cv_results_["std_test_score"]
+rank_test_score = gridSearchCV.cv_results_["rank_test_score"]
+
+print('mean_test_score : ', mean_test_score)
+print('std_test_score : ', std_test_score)
+print('rank_test_score : ', rank_test_score)
+
+gridSearchCV.best_params_
+
+best = gridSearchCV.best_estimator_ 
+best.score(test_data, test_target)
+
+# 练习：试一试哪些参数会影响结果
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -684,3 +800,9 @@ print("------------------------------------------------------------")  # 60個
 sys.exit()
 
 print("------------------------------------------------------------")  # 60個
+
+
+#os.chdir(r'D:\Python_book\11KNNNB')
+#pd.set_option('display.max_columns', None)
+
+

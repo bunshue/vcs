@@ -30,7 +30,7 @@ print("------------------------------------------------------------")  # 60個
 #第9讲 使用决策树做流失预警模型
 
 from scipy import stats
-import sklearn.cross_validation as cross_validation
+import sklearn.model_selection as cross_validation
 import statsmodels.api as sm
 import statsmodels.formula.api as smf
 
@@ -44,7 +44,7 @@ data = churn.ix[:, 'gender':'call_10000']
 cc = data.head()
 print(cc)
 
-import sklearn.cross_validation as cross_validation
+import sklearn.model_selection as cross_validation
 
 train_data, test_data, train_target, test_target = cross_validation.train_test_split(
     data, target, test_size=0.4, train_size=0.6, random_state=12345)   #划分训练集和测试集

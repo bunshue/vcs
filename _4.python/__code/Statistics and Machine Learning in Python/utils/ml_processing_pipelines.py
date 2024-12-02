@@ -16,7 +16,7 @@ import numpy as np
 from sklearn import datasets
 import sklearn.linear_model as lm
 from sklearn import preprocessing
-from sklearn.cross_validation import cross_val_score
+from sklearn.model_selection import cross_val_score
 from sklearn.feature_selection import SelectKBest
 from sklearn.feature_selection import f_regression
 from sklearn.pipeline import Pipeline
@@ -111,7 +111,7 @@ import numpy as np
 from sklearn import datasets
 import sklearn.linear_model as lm
 from sklearn import preprocessing
-from sklearn.cross_validation import cross_val_score
+from sklearn.model_selection import cross_val_score
 from sklearn.feature_selection import SelectKBest
 from sklearn.feature_selection import f_classif
 from sklearn.pipeline import Pipeline

@@ -528,7 +528,6 @@ y_test = to_categorical(y_test)
 print("y_train to_categorical shape=", y_train.shape)
 print(y_train[:10])
 
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 

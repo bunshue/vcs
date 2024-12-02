@@ -30,7 +30,7 @@ print("------------------------------------------------------------")  # 60個
 #第十讲 使用神经网络进行客户流失预警
 
 from scipy import stats
-import sklearn.cross_validation as cross_validation
+import sklearn.model_selection as cross_validation
 import statsmodels.api as sm
 import statsmodels.formula.api as smf
 

@@ -31,7 +31,7 @@ print("------------------------------------------------------------")  # 60個
 
 from sklearn.neural_network import MLPClassifier
 from scipy import stats
-import sklearn.cross_validation as cross_validation
+import sklearn.model_selection as cross_validation
 import statsmodels.api as sm
 import statsmodels.formula.api as smf
 

@@ -150,33 +150,6 @@ do_svm_kernel()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-from sklearn import datasets, metrics
-from sklearn.tree import DecisionTreeClassifier, DecisionTreeRegressor
-from sklearn.model_selection import train_test_split
-from matplotlib.colors import ListedColormap
-
-
-def do_decision_tree():
-    iris = datasets.load_iris()
-    x_train, x_test, y_train, y_test = train_test_split(
-        iris.data[:, [2, 3]], iris.target, test_size=0.25, random_state=4
-    )
-    clf = DecisionTreeClassifier(criterion="entropy", max_depth=3, random_state=0)
-    clf.fit(x_train, y_train)
-    y_pred = clf.predict(x_test)
-
-    X_combined = np.vstack((x_train, x_test))
-    y_combined = np.hstack((y_train, y_test))
-
-    plot_decision_regions(X_combined, y_combined, classifier=clf)
-    plt.xlabel("petal length [cm]")
-    plt.ylabel("petal width [cm]")
-    plt.legend(loc="upper left")
-    plt.show()
-
-
-print("決策樹")
-do_decision_tree()
 
 print("------------------------------------------------------------")  # 60個
 

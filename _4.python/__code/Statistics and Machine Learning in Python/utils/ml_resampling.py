@@ -16,7 +16,7 @@ from sklearn import datasets
 import sklearn.linear_model as lm
 from sklearn.grid_search import GridSearchCV
 import sklearn.metrics as metrics
-from sklearn.cross_validation import KFold
+from sklearn.model_selection import KFold
 
 # Dataset
 noise_sd = 10
@@ -56,7 +56,8 @@ print("Test  r2:%.2f" % metrics.r2_score(y, y_test_pred))
 print("Selected alphas:", alphas)
 
 # 3.) user-friendly sklearn for outer CV
-from sklearn.cross_validation import cross_val_score
+from sklearn.model_selection import cross_val_score
+
 scores = cross_val_score(estimator=model, X=X, y=y, cv=cv)
 print("Test  r2:%.2f" % scores.mean())
 
