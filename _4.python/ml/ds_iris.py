@@ -58,9 +58,14 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 print("------------------------------------------------------------")  # 60個
 
 import joblib
+from common1 import *
 from sklearn import datasets
 from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
+
+def show():
+    #plt.show()
+    pass
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -235,7 +240,7 @@ plt.xlabel("花瓣的长度", fontsize=15)
 plt.ylabel("花瓣的宽度", fontsize=15)
 plt.legend(loc="best")  # 添加图例
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -260,17 +265,17 @@ plt.xticks(rotation = 45)
 plt.ylabel('人数')
 # 添加图形标题
 plt.title('每天微信文章阅读人数与人次趋势')
-# 添加图例
+# 添加图例Virginica
 plt.legend()
 # 显示图形
-plt.show()
+show()
 """
 
 
 """
 # 读入数据
 iris = pd.read_csv(r'F:\\python_Data_analysis_and_mining\\06\\iris.csv')
-print(iris.shape)
+print(iris.shape)Virginica
 # 绘制散点图
 plt.scatter(x = iris.Petal_Width, # 指定散点图的x轴数据
 y = iris.Petal_Length, # 指定散点图的y轴数据
@@ -282,16 +287,16 @@ plt.ylabel('花瓣长度')
 # 添加标题
 plt.title('鸢尾花的花瓣宽度与长度关系')
 # 显示图形
-plt.show()
+show()
 
 # Pandas模块绘制散点图
-# 绘制散点图
+# 绘制散点图Virginica
 iris.plot(x = 'Petal_Width', y = 'Petal_Length', kind = 'scatter', title = '鸢尾花的花瓣宽度与长度关系')
 # 修改x轴和y轴标签
 plt.xlabel('花瓣宽度')
 plt.ylabel('花瓣长度')
 # 显示图形
-plt.show()
+show()
 
 # seaborn模块绘制分组散点图
 sns.lmplot(x = 'Petal_Width', # 指定x轴变量
@@ -307,7 +312,7 @@ plt.ylabel('花瓣长度')
 # 添加标题
 plt.title('鸢尾花的花瓣宽度与长度关系')
 # 显示图形
-plt.show()
+show()
 """
 
 print("------------------------------------------------------------")  # 60個
@@ -446,7 +451,7 @@ print(df["petal width (cm)"].head())
 # 箱型圖
 sns.boxplot(data=df)
 plt.title("鳶尾花資料分布箱型圖")
-# plt.show()
+show()
 
 print("是否有含遺失值(Missing value)")
 cc = df.isnull().sum()
@@ -456,7 +461,7 @@ print("y 各類別資料筆數統計")
 """
 sns.countplot(x=y)
 plt.title("y 各類別資料筆數統計")
-#plt.show()
+show()
 """
 print("以Pandas函數統計各類別資料筆數")
 cc = pd.Series(y).value_counts()
@@ -518,7 +523,7 @@ disp = ConfusionMatrixDisplay(
 )
 disp.plot()
 plt.title("混淆矩陣圖")
-# plt.show()
+show()
 
 print("將 模型存檔 使用 joblib")
 joblib.dump(clf, "tmp_my_model_clf1.joblib")
@@ -619,11 +624,11 @@ print(kurtosis(df["sepal length (cm)"], axis=0, bias=True))
 
 # 直方圖
 sns.histplot(x="sepal length (cm)", data=df)
-# plt.show()
+show()
 
 # 直方圖平滑化
 sns.kdeplot(x="sepal length (cm)", data=df)
-# plt.show()
+show()
 
 # 右偏
 
@@ -632,7 +637,7 @@ data2 = np.random.normal(5, 1, 100)
 data = np.concatenate((data1, data2))
 sns.kdeplot(data=data)
 pd.DataFrame(data).skew()
-# plt.show()
+show()
 
 # 右偏
 
@@ -641,7 +646,7 @@ data2 = np.random.normal(5, 1, 500)
 data = np.concatenate((data1, data2))
 sns.kdeplot(data=data)
 pd.DataFrame(data).skew()
-# plt.show()
+show()
 
 # 關聯度
 
@@ -652,7 +657,7 @@ print(cc)
 # 箱型圖
 sns.boxplot(data=df)
 plt.title("鳶尾花資料分布箱型圖")
-# plt.show()
+show()
 
 print("是否有含遺失值(Missing value)")
 cc = df.isnull().sum()
@@ -662,7 +667,7 @@ print("y 各類別資料筆數統計")
 """
 sns.countplot(x=y)
 plt.title("y 各類別資料筆數統計")
-plt.show()
+show()
 """
 print("以Pandas函數統計各類別資料筆數")
 cc = pd.Series(y).value_counts()
@@ -724,7 +729,7 @@ disp = ConfusionMatrixDisplay(
 )
 disp.plot()
 plt.title("混淆矩陣圖")
-# plt.show()
+show()
 
 print("將 模型存檔 使用 joblib")
 joblib.dump(clf, "tmp_my_model_clf2.joblib")
@@ -790,7 +795,7 @@ plt.scatter(X["petal_length"], X["petal_width"], color=colmap[y])
 plt.xlabel("花瓣長度(Petal Length)")
 plt.ylabel("花瓣寬度(Petal Width)")
 
-# plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -843,7 +848,7 @@ for k in Ks:
 
 plt.plot(Ks, accuracies)
 
-# plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -866,99 +871,9 @@ for k in Ks:
 
 plt.plot(Ks, accuracies)
 
-# plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
-
-from sklearn import cluster
-
-iris = datasets.load_iris()
-
-X = pd.DataFrame(iris.data, columns=iris.feature_names)
-X.columns = ["sepal_length", "sepal_width", "petal_length", "petal_width"]
-y = iris.target
-k = 3
-
-kmeans = cluster.KMeans(n_clusters=k, random_state=12)
-kmeans.fit(X)
-print(kmeans.labels_)
-print(y)
-
-colmap = np.array(["r", "g", "y"])
-plt.figure(figsize=(10, 5))
-plt.subplot(1, 2, 1)
-plt.subplots_adjust(hspace=0.5)
-plt.scatter(X["petal_length"], X["petal_width"], color=colmap[y])
-plt.xlabel("花瓣長度(Petal Length)")
-plt.ylabel("花瓣寬度(Petal Width)")
-plt.title("真實分類(Real Classification)")
-plt.subplot(1, 2, 2)
-plt.scatter(X["petal_length"], X["petal_width"], color=colmap[kmeans.labels_])
-plt.xlabel("花瓣長度(Petal Length)")
-plt.ylabel("花瓣寬度(Petal Width)")
-plt.title("K-means分類(K-means Classification)")
-
-# plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-from sklearn import cluster
-
-iris = datasets.load_iris()
-
-X = pd.DataFrame(iris.data, columns=iris.feature_names)
-X.columns = ["sepal_length", "sepal_width", "petal_length", "petal_width"]
-y = iris.target
-k = 3
-
-kmeans = cluster.KMeans(n_clusters=k, random_state=12)
-kmeans.fit(X)
-print("K-means分類(K-means Classification):")
-print(kmeans.labels_)
-# 修正標籤錯誤
-pred_y = np.choose(kmeans.labels_, [2, 0, 1]).astype(np.int64)
-print("K-means修正分類(K-means Fix Classification):")
-print(pred_y)
-print("真實分類(Real Classification):")
-print(y)
-
-colmap = np.array(["r", "g", "y"])
-plt.figure(figsize=(10, 5))
-plt.subplot(1, 2, 1)
-plt.subplots_adjust(hspace=0.5)
-plt.scatter(X["petal_length"], X["petal_width"], color=colmap[y])
-plt.xlabel("花瓣長度(Petal Length)")
-plt.ylabel("花瓣寬度(Petal Width)")
-plt.title("真實分類(Real Classification)")
-plt.subplot(1, 2, 2)
-plt.scatter(X["petal_length"], X["petal_width"], color=colmap[pred_y])
-plt.xlabel("花瓣長度(Petal Length)")
-plt.ylabel("花瓣寬度(Petal Width)")
-plt.title("K-means分類(K-means Classification)")
-
-# plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-from sklearn import cluster
-import sklearn.metrics as sm
-
-iris = datasets.load_iris()
-
-X = pd.DataFrame(iris.data, columns=iris.feature_names)
-X.columns = ["sepal_length", "sepal_width", "petal_length", "petal_width"]
-y = iris.target
-k = 3
-
-kmeans = cluster.KMeans(n_clusters=k, random_state=12)
-kmeans.fit(X)
-# 修正標籤錯誤
-pred_y = np.choose(kmeans.labels_, [2, 0, 1]).astype(np.int64)
-# 績效矩陣
-print(sm.accuracy_score(y, pred_y))
-print("---------------------------")
-# 混淆矩陣
-print(sm.confusion_matrix(y, pred_y))
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1027,7 +942,7 @@ plt.scatter(df["petal_length"], df["petal_width"], color=colmap[Y])
 plt.xlabel("Petal Length 花瓣長")
 plt.ylabel("Petal Width 花瓣寬")
 
-# plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1049,18 +964,6 @@ n_components = 2  # 削減後の次元を2に設定
 model = PCA(n_components=n_components)
 model = model.fit(iris.data)
 print(model.transform(iris.data))  # 変換したデータ
-
-print("------------------------------------------------------------")  # 60個
-
-from sklearn.cluster import KMeans
-
-iris = datasets.load_iris()
-
-n_clusters = 3  # クラスタ数を3に設定
-model = KMeans(n_clusters=n_clusters)
-model.fit(iris.data)
-print(model.labels_)  # 各データ点が所属するクラスタ
-print(model.cluster_centers_)  # fit()によって計算された重心
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1150,7 +1053,7 @@ Y = y
 plt.scatter(X[:, 0], X[:, 1], c="pink", s=150)
 plt.scatter(X[:, 0], X[:, 1], s=50, c=Y, alpha=0.6)
 plt.title("花瓣 原始資料")
-# plt.show()
+show()
 
 # 試著用我們學過的方式, 看能不能做出一個分類器函數, 來把鳶尾花正確分類!
 
@@ -1170,12 +1073,12 @@ x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size=0.2)
 # 看一下整筆數據的分佈。
 plt.scatter(X[:, 0], X[:, 1], c=Y, cmap="Paired")
 plt.title("花瓣 原始資料")
-# plt.show()
+show()
 
 # 看訓練結果
 plt.scatter(x_train[:, 0], x_train[:, 1], c=y_train)
 plt.title("花瓣 訓練資料")
-# plt.show()
+show()
 
 # 鳶尾花 (Iris) 的數據, 有三類的鳶尾花我們想用 SVM 做分類。
 # 開個分類機、訓練
@@ -1201,12 +1104,11 @@ y_predict = clf.predict(x_test)
 # 這時因為如果答對了, 我們和正確答案相減就是 0。學得不錯就會大部份是 0, 錯的不是 0 畫出來就會不同色。我們來試試看。
 plt.scatter(x_test[:, 0], x_test[:, 1], c=y_predict - y_test)
 plt.title("看差值")
-# plt.show()
+show()
 
 plt.scatter(x_test[:, 0], x_test[:, 1], c=y_predict)
 plt.title("看最後預測結果")
-# plt.show()
-
+show()
 
 # 現在我們做的是讓平面上密密麻麻的點都去看它會是哪種鳶尾花的數據。
 
@@ -1230,15 +1132,14 @@ Z = Z.reshape(x1.shape)
 
 plt.scatter(x_test[:, 0], x_test[:, 1], c=y_test)
 plt.contourf(x1, y1, Z, alpha=0.3)
-# plt.show()
-
+show()
 
 # 這是測試資料, 之前我們已經知道我們全對!
 # 不如就來看看所有鳶尾花資料我們 SVC 的表現。
 
 plt.scatter(X[:, 0], X[:, 1], c=Y)
 plt.contourf(x1, y1, Z, alpha=0.3)
-# plt.show()
+show()
 
 # 在測試資料中是全對!! 我們畫圖來看看整體表現如何?
 # 畫出結果
@@ -1253,7 +1154,7 @@ plt.contourf(xm, ym, Z, alpha=0.3)
 
 plt.scatter(X[:, 0], X[:, 1], c=Y)
 
-# plt.show()
+show()
 
 x0 = np.linspace(3, 8, 500)
 y0 = np.linspace(1.5, 4.5, 500)
@@ -1265,7 +1166,7 @@ Z = z.reshape(xm.shape)
 plt.contourf(xm, ym, Z, alpha=0.3)
 
 plt.scatter(X[:, 0], X[:, 1], c=Y)
-# plt.show()
+show()
 
 # 畫出結果
 x1, x2 = np.meshgrid(np.arange(0, 7, 0.02), np.arange(0, 3, 0.02))
@@ -1273,7 +1174,7 @@ Z = clf.predict(np.c_[x1.ravel(), x2.ravel()])
 Z = Z.reshape(x1.shape)
 plt.contourf(x1, x2, Z, alpha=0.3)
 plt.scatter(X[:, 0], X[:, 1], c=Y)
-# plt.show()
+show()
 
 x1, x2 = np.meshgrid(np.arange(0, 7, 0.02), np.arange(0, 3, 0.02))
 xx = [1, 2, 3, 4]
@@ -1284,7 +1185,7 @@ Z = Z.reshape(x1.shape)
 plt.contourf(x1, x2, Z, cmap=plt.cm.coolwarm, alpha=0.8)
 plt.scatter(X[:, 0], X[:, 1], c=Y)
 plt.title("更炫的畫圖法")
-# plt.show()
+show()
 
 
 """
@@ -1299,7 +1200,7 @@ Z = data_pred.reshape(X.shape)
 plt.contourf(X, Y, Z, alpha = 0.3)
 plt.scatter(x[:, 0], x[:, 1], c = y)
 
-plt.show()
+show()
 """
 
 # 畫出結果
@@ -1310,7 +1211,7 @@ Z = Z.reshape(x1.shape)
 plt.contourf(x1, x2, Z, alpha=0.3)
 plt.scatter(X[:, 0], X[:, 1], c=Y)
 
-# plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1327,7 +1228,7 @@ y = iris.target
 
 plt.scatter(x[:, 0], x[:, 1], s=50, c=y)
 plt.title("原圖")
-# plt.show()
+show()
 
 from sklearn.svm import SVC
 
@@ -1339,7 +1240,7 @@ gd = np.array([[i, j] for i in np.arange(4, 8, 0.2) for j in np.arange(1.8, 4.5,
 gdc = clf.predict(gd)
 plt.scatter(gd[:, 0], gd[:, 1], s=50, c=gdc)
 plt.title("SVM結果")
-# plt.show()
+show()
 
 # 呈現學習成果
 # 學出來的用比較透明的顏色, 真實資料用 100% 不透明。
@@ -1350,7 +1251,7 @@ plt.scatter(gd[:, 0], gd[:, 1], s=50, c=gdc, alpha=0.4)
 plt.scatter(x[:, 0], x[:, 1], s=50, c=y)
 
 plt.title("SVM結果2")
-# plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1377,7 +1278,7 @@ print(X[7])
 # 看看 PCA 後, 來看看整個分布的狀況。
 
 plt.scatter(X[:, 0], X[:, 1], c=y, cmap="Paired")
-# plt.show()
+show()
 
 # 看來好像真的會比較容易切開, 我們來試試是否真的這樣。先來分訓練和測試資料。
 
@@ -1410,7 +1311,7 @@ Z = z.reshape(xm.shape)
 plt.contourf(xm, ym, Z, alpha=0.3, cmap="Paired")
 plt.scatter(X[:, 0], X[:, 1], c=y, cmap="Paired")
 
-# plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1433,7 +1334,7 @@ x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size=0.2)
 # 訓練組8成, 測試組2成
 
 plt.scatter(x_train[:, 0], x_train[:, 1], c=y_train)
-plt.show()
+show()
 
 # 設定一個 SVM 的函數學習機，把訓練資料放進去 train
 
@@ -1464,13 +1365,13 @@ array([ 0,  0,  0,  0,  0,  1,  0,  0,  0,  1,  0,  0,  0,  0,  0,  0,  0,
 
 # 當然要畫個圖看一下，這樣還可以確認哪些特殊的情況下模型會分不好
 plt.scatter(x_test[:, 0], x_test[:, 1], c=y_predict - y_test)
-# plt.show()
+show()
 
 # 也可以畫這種的
 
 y_predict = clf.predict(x_test)
 plt.scatter(x_test[:, 0], x_test[:, 1], c=y_predict)
-# plt.show()
+show()
 
 # 照著題目的說明，換另一種 SVM 來試試看
 
@@ -1496,93 +1397,7 @@ NuSVC(break_ties=False, cache_size=200, class_weight=None, coef0=0.0,
 y_predict = clf1.predict(x_test)
 plt.scatter(x_test[:, 0], x_test[:, 1], c=y_predict - y_test)
 
-# plt.show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# 下面幾個操作都跟之前一樣，只是我們把所有的特徵都拿來用了
-
-iris = load_iris()
-
-X = iris.data
-Y = iris.target
-
-# 只是這次的函數學習機是 k-Means！
-# 叫它自己想辦法分三類
-
-from sklearn.cluster import KMeans
-
-clf = KMeans(n_clusters=3)
-clf.fit(X)
-
-"""
-KMeans(algorithm='auto', copy_x=True, init='k-means++', max_iter=300,
-,       n_clusters=3, n_init=10, n_jobs=None, precompute_distances='auto',
-,       random_state=None, tol=0.0001, verbose=0)
-"""
-# 花瓣長和花瓣寬對結果的影響分布
-plt.scatter(X[:, 2], X[:, 3], c=clf.labels_)
-# plt.show()
-
-# 花萼長和花萼寬對結果的影響分布
-plt.scatter(X[:, 0], X[:, 1], c=clf.labels_)
-# plt.show()
-
-# 跟前面 SVM 的結果好像還真的有點像
-from sklearn.svm import SVC
-
-X_SVM = X[:, :2]
-
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
-x_train, x_test, y_train, y_test = train_test_split(X_SVM, Y, test_size=0.2)
-# 訓練組8成, 測試組2成
-
-clf = SVC()
-
-clf.fit(x_train, y_train)
-
-y_predict = clf.predict(x_test)
-
-plt.scatter(x_test[:, 0], x_test[:, 1], c=y_predict)
-
-# plt.show()
-
-# 來做一份模擬的資料
-
-X = np.random.rand(50, 2)
-
-# 當然要畫出來看一下
-
-plt.scatter(X[:, 0], X[:, 1], s=50)
-# plt.show()
-
-# 雖然還是叫 K-Means 當函數學習機，
-# 讓它分四類，但這次真的沒有答案了
-from sklearn.cluster import KMeans
-
-clf = KMeans(n_clusters=4)
-clf.fit(X)
-"""
-KMeans(algorithm='auto', copy_x=True, init='k-means++', max_iter=300,
-,       n_clusters=4, n_init=10, n_jobs=None, precompute_distances='auto',
-,       random_state=None, tol=0.0001, verbose=0)
-"""
-# 畫出來看一下結果，好像還真得有模有樣的
-plt.scatter(X[:, 0], X[:, 1], c=clf.labels_)
-# plt.show()
-
-# 放一些新的資料進去看看，點變多了！
-a = np.random.rand(20, 2)
-X_add = np.row_stack((X, a))
-plt.scatter(X_add[:, 0], X_add[:, 1])
-# plt.show()
-
-# 看一看我們的 k-Means 分的怎麼樣
-predict_label = clf.predict(X_add)
-plt.scatter(X_add[:, 0], X_add[:, 1], c=predict_label)
-
-# plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1601,7 +1416,7 @@ x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size=0.2)
 
 plt.scatter(X[:, 0], X[:, 1], c=Y, cmap="Paired")
 plt.title("原始資料")
-# plt.show()
+show()
 
 from sklearn.svm import SVC
 
@@ -1622,7 +1437,7 @@ z = clf.predict(P)
 Z = z.reshape(xm.shape)
 plt.contourf(xm, ym, Z, alpha=0.3)
 plt.scatter(X[:, 0], X[:, 1], c=Y)
-# plt.show()
+show()
 
 
 # PCA 可以救鳶尾花嗎？
@@ -1640,7 +1455,7 @@ X = pca.transform(x)
 # 真的變成平面上一個點！來看看整個分布的狀況。
 
 plt.scatter(X[:, 0], X[:, 1], c=y, cmap="Paired")
-# plt.show()
+show()
 
 # 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
 x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
@@ -1659,7 +1474,7 @@ z = clf.predict(P)
 Z = z.reshape(xm.shape)
 plt.contourf(xm, ym, Z, alpha=0.3)
 plt.scatter(X[:, 0], X[:, 1], c=y)
-# plt.show()
+show()
 
 
 print(x[87])
@@ -1683,7 +1498,7 @@ gd = np.array([[i, j] for i in np.arange(-4, 4, 0.4) for j in np.arange(-3, 3, 0
 gdc = clf.predict(gd)
 
 plt.scatter(gd[:, 0], gd[:, 1], s=50, c=gdc)
-# plt.show()
+show()
 
 x1, x2 = np.meshgrid(np.arange(-0.2, 1.2, 0.02), np.arange(-0.2, 1.2, 0.02))
 Z = clf.predict(np.c_[x1.ravel(), x2.ravel()])
@@ -1691,8 +1506,8 @@ Z = clf.predict(np.c_[x1.ravel(), x2.ravel()])
 z = Z.reshape(x1.shape)
 
 plt.contourf(x1, x2, z, alpha=0.3)
-plt.scatter(x[:, 0], x[:, 1], s=100, c=clf.labels_)
-# plt.show()
+# NG plt.scatter(x[:, 0], x[:, 1], s=100, c=clf.labels_)
+show()
 
 # 呈現出來
 x0 = y0 = np.arange(-0.2, 1.2, 0.02)
@@ -1702,8 +1517,8 @@ P = np.c_[xm.ravel(), ym.ravel()]
 z = clf.predict(P)
 Z = z.reshape(xm.shape)
 plt.contourf(xm, ym, Z, alpha=0.3)
-plt.scatter(x[:, 0], x[:, 1], c=clf.labels_)
-# plt.show()
+# NG plt.scatter(x[:, 0], x[:, 1], c=clf.labels_)
+show()
 
 
 print("------------------------------------------------------------")  # 60個
@@ -1734,7 +1549,7 @@ plt.scatter(df["petal_length"], df["petal_width"], color=colmap[Y])
 plt.xlabel("Petal Length")
 plt.ylabel("Petal Width")
 
-# plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1887,7 +1702,7 @@ sns.heatmap(
     cmap="gray",
 )
 
-# plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1897,7 +1712,7 @@ print(data1.shape)
 print(pca.explained_variance_ratio_, pca.explained_variance_ratio_.sum())
 plt.scatter(data1[:, 0], data1[:, 1], c=np.array(iris.target), cmap=plt.cm.copper)
 
-# plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1925,7 +1740,7 @@ print(clf.n_support_)  # 每類別持向量個數
 plt.plot(X_train[:, 0], X_train[:, 1], "o", color="#bbbbbb")
 plt.plot(clf.support_vectors_[:, 0], clf.support_vectors_[:, 1], "o")
 
-# plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

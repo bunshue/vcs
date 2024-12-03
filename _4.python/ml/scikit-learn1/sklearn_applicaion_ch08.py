@@ -76,16 +76,6 @@ plt.grid(alpha=0.5)
 
 plt.show()
 
-""" no df
-#模型訓練
-model = Kmeans()
-model.fit(df)  # 學習訓練.fit
-
-#預測
-cc = model.predict(10)
-print(cc)
-"""
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -1119,7 +1109,8 @@ explainer = shap.KernelExplainer(clf.predict_proba, X_train.values)
 shap_values = explainer.shap_values(x)
 print(f"Shaply value calulated from shap: {shap_values[1][j]:.5}")
 
-# Using 455 background data samples could cause slower run times. Consider using shap.sample(data, K) or shap.kmeans(data, K) to summarize the background as K samples.
+# Using 455 background data samples could cause slower run times.
+# Consider using shap.sample(data, K) or shap.kmeans(data, K) to summarize the background as K samples.
 
 # Shaply value calulated from shap: 0.01366
 

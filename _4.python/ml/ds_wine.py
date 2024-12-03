@@ -133,33 +133,6 @@ print(cc)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-data = load_wine()
-
-X = data.data[:, [0, 9]]
-
-from sklearn.cluster import KMeans
-
-n_clusters = 3
-model = KMeans(n_clusters=n_clusters)
-
-pred = model.fit_predict(X)
-
-fig, ax = plt.subplots()
-ax.scatter(X[pred == 0, 0], X[pred == 0, 1], color="red", marker="s", label="Label1")
-ax.scatter(X[pred == 1, 0], X[pred == 1, 1], color="blue", marker="s", label="Label2")
-ax.scatter(X[pred == 2, 0], X[pred == 2, 1], color="green", marker="s", label="Label3")
-ax.scatter(
-    model.cluster_centers_[:, 0],
-    model.cluster_centers_[:, 1],
-    s=200,
-    color="yellow",
-    marker="*",
-    label="center",
-)
-ax.legend()
-plt.title("wine")
-
-plt.show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

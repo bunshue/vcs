@@ -27,6 +27,24 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
+
+
+def show():
+    # return
+    plt.show()
+    pass
+
+
+def cvshow(title, image):
+    # return
+    cv2.imshow(title, image)
+    cv2.waitKey()
+    cv2.destroyAllWindows()
+    pass
+
+
+print("------------------------------------------------------------")  # 60個
+
 print("各種建立畫布的方法")
 
 print("建立畫布(黑色)")
@@ -133,6 +151,33 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
+print("漸層色")
+
+w = 400
+h = 400
+image = np.zeros([h, w, 3])
+for i in range(h):
+    for j in range(w):
+        image[i, j, 0] = int(256 * (j + i) / (w + h))
+        image[i, j, 2] = int(256 * (j + i) / (w + h))
+
+image = image.astype("float32") / 255
+
+cvshow("image", image)
+
+print("------------------------------------------------------------")  # 60個
+
+w = 400
+h = 400
+image = np.zeros([h, w, 4])  # 第三個值為 4
+for i in range(h):
+    image[i, :, 3] = int(256 * i / 400)  # 設定第四個值 ( 透明度 )
+
+image = image.astype("float32") / 255
+
+cvshow("image", image)
+
+print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 

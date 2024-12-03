@@ -62,6 +62,108 @@ print(sklearn)
 
 print("------------------------------------------------------------")  # 60個
 
+#用文字看內建資料的方法
+
+N = 10 # n_samples, 樣本數
+M = 4 # n_features, 特徵數(資料的維度)
+GROUPS = 3 # centers, 分群數
+STD = 1 # cluster_std, 資料標準差
+print("make_blobs,", N, "個樣本, ", M, "個特徵, 分成", GROUPS, "群")
+
+X, y, centers = make_blobs(
+    n_samples=N, centers=GROUPS, cluster_std=STD, n_features=M, return_centers=True
+)
+
+print(GROUPS, "群 的中心點 : ", centers)
+print(GROUPS, "個目標")
+print("資料的維度")
+print("X :\t", X.shape)
+print("y :\t", y.shape)
+print("資料的內容")
+print("X :\n", X)
+print("y :\n", y)
+
+plt.figure(figsize=(16, 9))
+
+plt.subplot(231)
+N, M, GROUPS, STD = 100, 2, 3, 1
+X, y, centers = make_blobs(
+    n_samples=N, centers=GROUPS, cluster_std=STD, n_features=M, return_centers=True
+)
+plt.scatter(X[:, 0], X[:, 1], c=y)
+# 標記群集中心
+plt.scatter(centers[:, 0], centers[:, 1], marker="*", s=200, color="r")
+plt.title('sd=1, 3群')
+
+plt.subplot(232)
+N, M, GROUPS, STD = 100, 2, 5, 1
+X, y, centers = make_blobs(
+    n_samples=N, centers=GROUPS, cluster_std=STD, n_features=M, return_centers=True
+)
+plt.scatter(X[:, 0], X[:, 1], c=y)
+# 標記群集中心
+plt.scatter(centers[:, 0], centers[:, 1], marker="*", s=200, color="r")
+plt.title('sd=1, 5群')
+
+plt.subplot(233)
+print("每群不同大小, 指定中心位置")
+
+N0, N1, N2, N3 = 50, 150, 250, 400  # 樣本數
+cx0, cy0 = 100, 120  # 第0群的中心位置
+cx1, cy1 = 250, 300  # 第1群的中心位置
+cx2, cy2 = 700, 150  # 第2群的中心位置
+cx3, cy3 = 300, 500  # 第3群的中心位置
+
+X, y, centers = make_blobs(
+    n_samples=[N0, N1, N2, N3],
+    n_features=2,
+    centers=[[cx0, cy0], [cx1, cy1], [cx2, cy2], [cx3, cy3]],
+    cluster_std=50,
+    return_centers=True
+    )
+
+plt.scatter(X[:, 0], X[:, 1], c=y)
+# 標記群集中心
+plt.scatter(centers[:, 0], centers[:, 1], marker="*", s=200, color="r")
+plt.title('每群不同大小, 指定中心位置')
+
+plt.subplot(234)
+N, M, GROUPS= 100, 2, 3
+X, y, centers = make_blobs(
+    n_samples=N, centers=GROUPS, n_features=M, return_centers=True
+)
+plt.scatter(X[:, 0], X[:, 1], c=y)
+# 標記群集中心
+plt.scatter(centers[:, 0], centers[:, 1], marker="*", s=200, color="r")
+plt.axis([-15, 15, -15, 15])
+plt.title('無 sd')
+
+plt.subplot(235)
+N, M, GROUPS, STD = 100, 2, 3, 3
+X, y, centers = make_blobs(
+    n_samples=N, centers=GROUPS, cluster_std=STD, n_features=M, return_centers=True
+)
+plt.scatter(X[:, 0], X[:, 1], c=y)
+# 標記群集中心
+plt.scatter(centers[:, 0], centers[:, 1], marker="*", s=200, color="r")
+plt.axis([-15, 15, -15, 15])
+plt.title('sd=3')
+
+plt.subplot(236)
+N, M, GROUPS, STD = 100, 2, 3, 6
+X, y, centers = make_blobs(
+    n_samples=N, centers=GROUPS, cluster_std=STD, n_features=M, return_centers=True
+)
+plt.scatter(X[:, 0], X[:, 1], c=y)
+# 標記群集中心
+plt.scatter(centers[:, 0], centers[:, 1], marker="*", s=200, color="r")
+plt.axis([-15, 15, -15, 15])
+plt.title('sd=6')
+
+plt.show()
+print("------------------------------------------------------------")  # 60個
+
+
 plt.figure(
     num="sklearn內建資料集集合",
     figsize=(16, 9),
@@ -84,7 +186,7 @@ X, y, coef = make_regression(
     noise=20,
     coef=True,
     random_state=9487
-    # n_samples=N, n_features=1, n_targets=1, noise=1.5, random_state=9487
+    # n_targets=1, noise=1.5,
 )
 print(X.shape, y.shape)
 print(coef)
@@ -94,37 +196,6 @@ plt.plot([min(X), max(X)], [min(X) * coef, max(X) * coef], "r")
 
 print("------------------------------")  # 30個
 plt.subplot(232)
-plt.title("make_blobs 集群資料集")
-
-X, y, centers = make_blobs(
-    n_samples=N, centers=3, cluster_std=1, n_features=2, return_centers=True
-)
-print(X.shape)
-print(centers)
-
-# 樣本點的形狀
-markers = ["x", "o", "^"]
-
-# 針對類別各畫一個散佈圖
-for k in range(3):
-    X_0 = []
-    X_1 = []
-    for i in range(len(y)):
-        if y[i] == k:
-            X_0.append(X[i, 0])
-            X_1.append(X[i, 1])
-            plt.scatter(X_0, X_1, marker=markers[k], s=50)
-
-# 繪製集群中心點
-X_0 = []
-X_1 = []
-for i in range(len(centers)):
-    X_0.append(centers[i, 0])
-    X_1.append(centers[i, 1])
-plt.scatter(X_0, X_1, marker="s", s=200, alpha=0.5)
-
-print("------------------------------")  # 30個
-plt.subplot(233)
 plt.title("make_classification 分類資料集")
 
 print("分類資料集")
@@ -206,9 +277,9 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 """
-机器学习笔记：常用数据集之scikit-learn生成分类和聚类数据集
-本文介绍分类和聚类数据集的生成，包括以下9个接口函数，其中，
-有六个是用于单标签类数据生成：
+機器學習筆記：常用數據集之scikit-learn生成分類和聚類數據集
+本文介紹分類和聚類數據集的生成，包括以下9個接口函數，其中，
+有六個是用于單標簽類數據生成：
 
 (1) make_blobs()
 (2) make_classification()
@@ -217,10 +288,10 @@ print("------------------------------------------------------------")  # 60個
 (5) make_circles()
 (6) make_moons()
 
-一个用于多标签类数据生成:
+一個用于多標簽類數據生成:
 (7) make_multilabel_classification()
 
-还有两个用于双聚类数据集生成：
+還有兩個用于雙聚類數據集生成：
 (8) make_biclusters
 (9) make_checkerboard
 """
@@ -242,17 +313,17 @@ print("------------------------------")  # 30個
 """
 
 """
-2. make_classification¶
+2. make_classification
 
-make_blobs()和make_classification()都用于生成多类别的数据集，
-每个类别都是由一个或者多个正态分布簇(normally-distributed cluster)构成。
+make_blobs()和make_classification()都用于生成多類別的數據集，
+每個類別都是由一個或者多個正態分布簇(normally-distributed cluster)構成。
 
-make_blobs对于各簇的中心和标准偏差提供了更方便的控制选项，
-通常用于聚类算法的演示。而make_classification则更加侧重于通过各种手段导入各种“噪声”的影响，
-比如说，相关的、冗余的、没有信息量的特征；每个类分成多个正态分布簇；特征空间的线性变换等等。
+make_blobs對于各簇的中心和標準偏差提供了更方便的控制選項，
+通常用于聚類算法的演示。而make_classification則更加側重于通過各種手段導入各種“噪聲”的影響，
+比如說，相關的、冗余的、沒有信息量的特征；每個類分成多個正態分布簇；特征空間的線性變換等等。
 """
 
-# make_classification()生成二分类数据集
+# make_classification()生成二分類數據集
 N = 500  # 樣本數
 X, y = make_classification(
     n_samples=N,
@@ -261,7 +332,7 @@ X, y = make_classification(
     n_clusters_per_class=1,
     n_informative=1,
     n_classes=2,
-    random_state=20,
+    random_state=9487,
 )
 
 # scatter plot, dots colored by class value
@@ -277,78 +348,21 @@ plt.title("make_classification")
 plt.show()
 
 print("------------------------------")  # 30個
-# plt.subplot(232)
-# plt.title("make_blobs")
-
-"""
-3. make_blobs
-'blob'的意思可能跟cluster差不多，都是簇、团、块的意思。
-以下第一个例子生成了3个blobs，第二个例子生成了4个blobs。
-注意，在第3个例子中，显式地制指定了4个blobs的中心各簇的样本数，以及各簇的standard deviation.
-"""
-
-# make_blobs: Generate isotropic Gaussian blobs for clustering. Of course, can also be used for classfication problem.
-N = 500  # 樣本數
-X, y = make_blobs(n_samples=N, centers=3, n_features=2, random_state=10)
-
-# scatter plot, dots colored by class value
-df = pd.DataFrame(dict(x=X[:, 0], y=X[:, 1], label=y))
-colors = {0: "red", 1: "blue", 2: "y"}
-fig, ax = plt.subplots()
-grouped = df.groupby("label")
-for key, group in grouped:
-    group.plot(ax=ax, kind="scatter", x="x", y="y", label=key, color=colors[key])
-
-plt.title("make_blobs")
-plt.show()
-
-print("------------------------------")  # 30個
-# plt.subplot(233)
-# plt.title("make_blobs")
-
-print("每群不同大小不同中心位置")
-
-N0, N1, N2, N3 = 100, 300, 250, 400  # 樣本數
-cx0, cy0 = 100, 120  # 第0群的中心位置
-cx1, cy1 = 250, 300  # 第1群的中心位置
-cx2, cy2 = 700, 150  # 第2群的中心位置
-cx3, cy3 = 300, 500  # 第3群的中心位置
-
-X, y = make_blobs(
-    n_samples=[N0, N1, N2, N3],
-    n_features=2,
-    centers=[[cx0, cy0], [cx1, cy1], [cx2, cy2], [cx3, cy3]],
-    cluster_std=50,
-    random_state=111,
-)
-
-# scatter plot, dots colored by class value
-df = pd.DataFrame(dict(x=X[:, 0], y=X[:, 1], label=y))
-colors = {0: "red", 1: "blue", 2: "y", 3: "green"}
-fig, ax = plt.subplots()
-grouped = df.groupby("label")
-for key, group in grouped:
-    group.plot(ax=ax, kind="scatter", x="x", y="y", label=key, color=colors[key])
-
-plt.title("make_blobs")
-plt.show()
-
-print("------------------------------")  # 30個
 # plt.subplot(234)
 # plt.title("make_moons")
 
 """ 
 4. make_moons
-        make_moons()函数生成一个二分类问题数据集，
-        它生成两个半月形对应两个分类。可以通过noise参数来控制噪声量。
-        适合于非线性分类算法的演示。
+        make_moons()函數生成一個二分類問題數據集，
+        它生成兩個半月形對應兩個分類。可以通過noise參數來控制噪聲量。
+        適合于非線性分類算法的演示。
 """
 
 # make_moons: Generate isotropic Gaussian blobs for clustering.
-# 经常用于非线性分类示例。
+# 經常用于非線性分類示例。
 
 N = 500  # 樣本數
-X, y = make_moons(n_samples=N, shuffle=True, noise=0.1, random_state=10)
+X, y = make_moons(n_samples=N, shuffle=True, noise=0.1, random_state=9487)
 
 # scatter plot, dots colored by class value
 df = pd.DataFrame(dict(x=X[:, 0], y=X[:, 1], label=y))
@@ -367,7 +381,7 @@ print("------------------------------")  # 30個
 
 """
 5. make_circles
-顾名思义，每个类别的样本构成一个圆形。
+顧名思義，每個類別的樣本構成一個圓形。
 """
 # make_circles: generates a binary classification problem with datasets that fall into concentric circles.
 # Make a large circle containing a smaller circle in 2d.
@@ -394,15 +408,15 @@ print("------------------------------")  # 30個
 
 """
 6. make_gaussian_quantiles
-make_gaussian_quantiles()首先生成一个多维正态分布样本集，
-然后，将这样本集基于分位点(quantiles)分割成多个(n_classes=3 by default)嵌套的多维同心超球，
-每个超球属于一类，并使得大致各类的样本基本相等。
-基于分位点进行分割是什么意思呢？
-以一维正态分布为例，大致来说就是这样分割的。
-假设n_classes = 3，因此对应的两个分割用的分位点就是33%和66%。
-取样本中位于[0, 33%]分位区间的作为第一类，位于[33%, 66%]分位区间的作为第二类，
-位于[66%, 100%]分位区间的作为第三类。
-对于多维数据，是基于对应的𝜒2分布的分位数来进行分类。
+make_gaussian_quantiles()首先生成一個多維正態分布樣本集，
+然后，將這樣本集基于分位點(quantiles)分割成多個(n_classes=3 by default)嵌套的多維同心超球，
+每個超球屬于一類，并使得大致各類的樣本基本相等。
+基于分位點進行分割是什么意思呢？
+以一維正態分布為例，大致來說就是這樣分割的。
+假設n_classes = 3，因此對應的兩個分割用的分位點就是33%和66%。
+取樣本中位于[0, 33%]分位區間的作為第一類，位于[33%, 66%]分位區間的作為第二類，
+位于[66%, 100%]分位區間的作為第三類。
+對于多維數據，是基于對應的𝜒2分布的分位數來進行分類。
 """
 
 N = 1000  # 樣本數
@@ -424,17 +438,17 @@ plt.show()
 
 """
 7. make_hastie_10_2
-这个函数是专门用于以下Hastie的机器学习经典教材中例10.2所提及的数据集的生成，用于二分类问题。为一本书中的一个例子专门列了一个函数，确实是很拼。可以看作是make_gaussian_quantiles的一种特例，或者反过来说make_gaussian_quantiles是make_hastie_10_2的推广。
+這個函數是專門用于以下Hastie的機器學習經典教材中例10.2所提及的數據集的生成，用于二分類問題。為一本書中的一個例子專門列了一個函數，確實是很拼。可以看作是make_gaussian_quantiles的一種特例，或者反過來說make_gaussian_quantiles是make_hastie_10_2的推廣。
 T. Hastie, R. Tibshirani and J. Friedman, “Elements of Statistical Learning Ed. 2”, Springer, 2009.》
-该数据集有10个特征，是i.i.d（独立同分布）的标准正态分布，target y定义如下：
+該數據集有10個特征，是i.i.d（獨立同分布）的標準正態分布，target y定義如下：
 y[i] = 1 if np.sum(X[i] ** 2) > 9.34 else -1
 """
 
 N = 1000  # 樣本數
-data, target = make_hastie_10_2(n_samples=N, random_state=42)
+data, target = make_hastie_10_2(n_samples=N, random_state=9487)
 
-# target[target==-1] = 0  # 原数据集生成的target为[1,-1],这里变换为[1,0]
-# target = target.astype('int32') # 变换成整数
+# target[target==-1] = 0  # 原數據集生成的target為[1,-1],這里變換為[1,0]
+# target = target.astype('int32') # 變換成整數
 
 df = pd.DataFrame(data)
 df["target"] = target
@@ -442,7 +456,7 @@ df["target"] = target
 print(df)
 
 """
-这是一个10维的数据，所以不容易以散点图的形式进行图示化。以下通过图示的方式看看各个维度是不是独立同分布（i.i.d）的标准高斯分布。
+這是一個10維的數據，所以不容易以散點圖的形式進行圖示化。以下通過圖示的方式看看各個維度是不是獨立同分布（i.i.d）的標準高斯分布。
 """
 from scipy.stats import norm
 
@@ -457,32 +471,32 @@ plt.title("make_hastie_10_2")
 plt.legend()
 plt.show()
 
-# 如上图可知，10个特征分量确实基本上都是与标准正态分布吻合的。
+# 如上圖可知，10個特征分量確實基本上都是與標準正態分布吻合的。
 
 """
-8. 多标签数据集生成
-多标签数据集用于当存在多各类别，而待分类的数据可能属于其中的一类或者同时属于多个类别，或者甚至不属于任何类别。比如说，当需要识别在一张图像中所包含的交通信号等的类型。一张图片可能不包含信号灯，也可能只包含一个红灯或绿灯或黄灯，也可能同时包含一个红灯和绿灯（如果这张图片覆盖了一个十字路口的两个方向的信号灯的话）。
+8. 多標簽數據集生成
+多標簽數據集用于當存在多各類別，而待分類的數據可能屬于其中的一類或者同時屬于多個類別，或者甚至不屬于任何類別。比如說，當需要識別在一張圖像中所包含的交通信號等的類型。一張圖片可能不包含信號燈，也可能只包含一個紅燈或綠燈或黃燈，也可能同時包含一個紅燈和綠燈（如果這張圖片覆蓋了一個十字路口的兩個方向的信號燈的話）。
 """
-x, y = make_ml_clf(n_samples=1000, n_features=10, n_classes=3, random_state=0)
+x, y = make_ml_clf(n_samples=1000, n_features=10, n_classes=3, random_state=9487)
 print(x.shape, y.shape)
 print(y[:10, :])
 
 """
-可以看出，由于是多分类（本例是3分类）多标签的，
-所以target(label)采用了one-hot编码的形式，
-每个数据样本的label中可能有一个或多个1，表示属于1个类别或者多个类别。
-当然，虽然以上没有显示出来，也存在不属于任何类别的样本，即其label为全零向量。
+可以看出，由于是多分類（本例是3分類）多標簽的，
+所以target(label)采用了one-hot編碼的形式，
+每個數據樣本的label中可能有一個或多個1，表示屬于1個類別或者多個類別。
+當然，雖然以上沒有顯示出來，也存在不屬于任何類別的樣本，即其label為全零向量。
 """
 
 """
 9. make_biclusters
-make_biclusters用于生成具有恒定块对角线结构(constant block diagonal structure)
-的数组以进行双向聚类。所谓“双向聚类”，是指对变量和实例同时聚类。
-本数据集可以用于谱协聚类(SpectralCoclustering)算法的示例。
+make_biclusters用于生成具有恒定塊對角線結構(constant block diagonal structure)
+的數組以進行雙向聚類。所謂“雙向聚類”，是指對變量和實例同時聚類。
+本數據集可以用于譜協聚類(SpectralCoclustering)算法的示例。
 """
 
 data, rows, columns = make_biclusters(
-    shape=(300, 300), n_clusters=5, noise=5, shuffle=False, random_state=0
+    shape=(300, 300), n_clusters=5, noise=5, shuffle=False, random_state=9487
 )
 
 plt.matshow(data, cmap=plt.cm.Blues)
@@ -491,11 +505,11 @@ plt.show()
 
 """
 10. make_checkerboard
-make_checkerboard()用于生成一个具有棋盘格结构的数组，以进行双向聚类。
+make_checkerboard()用于生成一個具有棋盤格結構的數組，以進行雙向聚類。
 """
 
 data, rows, columns = make_checkerboard(
-    shape=(300, 300), n_clusters=5, noise=5, shuffle=False, random_state=0
+    shape=(300, 300), n_clusters=5, noise=5, shuffle=False, random_state=9487
 )
 
 plt.matshow(data, cmap=plt.cm.Blues)
@@ -536,25 +550,24 @@ print("------------------------------------------------------------")  # 60個
 
 
 """
-sklearn 使用make_regression生成回归样本数据及NumPy拟合
+sklearn 使用make_regression生成回歸樣本數據及NumPy擬合
 
-1. 介绍
-sklearn的make_regression函数能生成回归样本数据。
+1. 介紹
+sklearn的make_regression函數能生成回歸樣本數據。
 
-2. 函数语法
+2. 函數語法
 make_regression(n_samples=100, n_features=100, n_informative=10, n_targets=1, bias=0.0, 
                 effective_rank=None, tail_strength=0.5, noise=0.0, shuffle=True, coef=False, random_state=None)
 
-3. 参数说明：
-n_samples：样本数
-n_features：特征数(自变量个数)
-n_informative：参与建模特征数
-n_targets：因变量个数
+3. 參數說明：
+n_samples：樣本數
+n_features：特征數(自變量個數)
+n_informative：參與建模特征數
+n_targets：因變量個數
 noise：噪音
 bias：偏差(截距)
-coef：是否输出coef标识
-random_state：随机状态若为固定值则每次产生的数据都一样
-
+coef：是否輸出coef標識
+random_state：隨機狀態若為固定值則每次產生的數據都一樣
 """
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

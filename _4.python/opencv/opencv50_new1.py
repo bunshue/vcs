@@ -5,8 +5,6 @@ opencv 集合 新進
 
 import cv2
 
-# import pylab as pl
-
 ESC = 27
 SPACE = 32
 
@@ -41,12 +39,13 @@ print("------------------------------------------------------------")  # 60個
 
 
 def show():
-    # plt.show()
+    # return
+    plt.show()
     pass
 
 
 def cvshow(title, image):
-    return
+    # return
     cv2.imshow(title, image)
     cv2.waitKey()
     cv2.destroyAllWindows()
@@ -103,102 +102,6 @@ output[y_st : y_st + h, x_st : x_st + w] = image3[
 ]  # 設定 output 的某個區域為即時影像 image 的某區域
 
 plt.imshow(cv2.cvtColor(output, cv2.COLOR_BGR2RGB))
-show()
-
-print("------------------------------------------------------------")  # 60個
-
-filename1 = "C:/_git/vcs/_4.python/_data/picture_add1.bmp"
-filename2 = "C:/_git/vcs/_4.python/_data/picture_add2.bmp"
-
-# 檔案 => cv2影像
-image1 = cv2.imread(filename1)
-
-# 檔案 => cv2影像
-image2 = cv2.imread(filename2)
-
-print("兩圖直接相加")
-result1 = image1 + image2
-
-print("兩圖用cv相加")
-result2 = cv2.add(image1, image2)
-
-print("兩圖做比例疊加 左1.0 右1.0")
-result3 = cv2.addWeighted(image1, 1.0, image2, 1.0, 0)  # 0 為墊高值
-
-plt.figure(
-    num="相加",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
-
-plt.subplot(231)
-plt.title("原圖1")
-plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
-
-plt.subplot(232)
-plt.title("原圖2")
-plt.imshow(cv2.cvtColor(image2, cv2.COLOR_BGR2RGB))
-
-plt.subplot(234)
-plt.title("兩圖直接相加")
-plt.imshow(cv2.cvtColor(result1, cv2.COLOR_BGR2RGB))
-
-plt.subplot(235)
-plt.title("兩圖用cv相加")
-plt.imshow(cv2.cvtColor(result2, cv2.COLOR_BGR2RGB))
-
-plt.subplot(236)
-plt.title("兩圖做比例疊加 左1.0 右1.0")
-plt.imshow(cv2.cvtColor(result3, cv2.COLOR_BGR2RGB))
-
-plt.tight_layout()  # 緊密排列，並填滿原圖大小
-show()
-
-print("------------------------------------------------------------")  # 60個
-
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/dollar.bmp"
-
-# 檔案 => cv2影像
-lena = cv2.imread(filename, cv2.IMREAD_UNCHANGED)
-
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/boat.bmp"
-
-# 檔案 => cv2影像
-dollar = cv2.imread(filename, cv2.IMREAD_UNCHANGED)
-
-plt.figure(
-    num="疊加",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
-
-plt.subplot(131)
-plt.title("原圖1")
-plt.imshow(cv2.cvtColor(lena, cv2.COLOR_BGR2RGB))
-
-plt.subplot(132)
-plt.title("原圖2")
-plt.imshow(cv2.cvtColor(dollar, cv2.COLOR_BGR2RGB))
-
-print("兩圖擷取某塊做alpha疊加, 再貼回原圖, 並顯示之")
-face1 = lena[220:400, 250:350]
-face2 = dollar[160:340, 200:300]
-add = cv2.addWeighted(face1, 0.6, face2, 0.4, 0)
-dollar[160:340, 200:300] = add
-
-plt.subplot(133)
-plt.title("兩圖擷取某塊做alpha疊加, 再貼回原圖")
-plt.imshow(cv2.cvtColor(dollar, cv2.COLOR_BGR2RGB))
-
-plt.tight_layout()  # 緊密排列，並填滿原圖大小
 show()
 
 print("------------------------------------------------------------")  # 60個
@@ -502,8 +405,7 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/demo.bmp"
-
+filename = "data/PerspectiveTransform.jpg"
 # 檔案 => cv2影像
 image = cv2.imread(filename)
 
@@ -511,25 +413,26 @@ H, W, D = image.shape
 
 pts1 = np.float32([[150, 50], [400, 50], [60, 450], [310, 450]])
 pts2 = np.float32([[50, 50], [H - 50, 50], [50, W - 50], [H - 50, W - 50]])
+
+pts1 = np.float32([[200, 0], [300, 0], [100, 600], [200, 600]])
+pts2 = np.float32([[100, 0], [200, 0], [100, 600], [200, 600]])
+
+
+pts1 = np.float32([[100, 0], [600, 0], [0, 600], [500, 600]])
+pts2 = np.float32([[0, 0], [500, 0], [0, 600], [500, 600]])
+
+
 M = cv2.getPerspectiveTransform(pts1, pts2)
 dst = cv2.warpPerspective(image, M, (W, H))
 
-plt.figure(
-    num="new11",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
+plt.figure(figsize=(12, 8))
 
 plt.subplot(121)
 plt.title("原圖")
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 
 plt.subplot(122)
-plt.title("result")
+plt.title("把歪圖拉正")
 plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
 
 show()
@@ -620,19 +523,21 @@ plt.title("原圖")
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 
 plt.subplot(122)
-plt.title("art")
+plt.title("HSV轉換")
 plt.imshow(cv2.cvtColor(art, cv2.COLOR_BGR2RGB))
 
 show()
 
 print("------------------------------------------------------------")  # 60個
 
-print("去除圖片的雜訊")
+print("去除圖片的雜訊 fastNlMeansDenoisingColored")
 
 filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
 
 # 檔案 => cv2影像
 image2 = cv2.imread(filename)
+
+plt.figure(figsize=(12, 8))
 
 plt.subplot(121)
 plt.imshow(cv2.cvtColor(image2, cv2.COLOR_BGR2RGB))
@@ -642,7 +547,7 @@ image2_denoised = cv2.fastNlMeansDenoisingColored(image2, h=5)
 
 plt.subplot(122)
 plt.imshow(cv2.cvtColor(image2_denoised, cv2.COLOR_BGR2RGB))
-plt.title("去除圖片的雜訊")
+plt.title("去除圖片的雜訊 fastNlMeansDenoisingColored")
 
 show()
 
@@ -824,7 +729,8 @@ fig = plt.figure(
 
 plt.subplot(131)
 plt.title("原始圖像")
-plt.imshow(original_image_lena)
+# plt.imshow(original_image_lena)
+plt.imshow(cv2.cvtColor(original_image_lena, cv2.COLOR_BGR2RGB))
 
 plt.subplot(132)
 plt.title("邊緣檢測")
@@ -907,7 +813,7 @@ fig = plt.figure(
 
 fig.add_subplot(131)
 plt.title("原始圖像")
-plt.imshow(original_image_test1)
+plt.imshow(cv2.cvtColor(original_image_test1, cv2.COLOR_BGR2RGB))
 
 fig.add_subplot(132)
 plt.title("邊緣檢測")
@@ -1011,54 +917,6 @@ cv2.imshow("Optimize", newimage / 255)
 #plt.imshow(cv2.cvtColor(newimage / 255, cv2.COLOR_BGR2RGB))
 #show()
 """
-print("------------------------------------------------------------")  # 60個
-
-print("兩圖相減")
-
-filename1 = "data/_compare/compare1.jpg"
-filename2 = "data/_compare/compare2.jpg"
-# filename1 = "C:/_git/vcs/_4.python/opencv/data/RGB_R.png"
-# filename2 = "C:/_git/vcs/_4.python/opencv/data/RGB_G.png"
-
-# 檔案 => cv2影像
-image1 = cv2.imread(filename1)
-
-# 檔案 => cv2影像
-image2 = cv2.imread(filename2)
-
-# image3 = math.fabs(image1-image2)
-image3 = image1 - image2
-
-image4 = cv2.subtract(image1, image2)  # 相減
-
-fig = plt.figure(
-    num="兩圖相減1",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
-
-plt.subplot(221)
-plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
-plt.title("原圖1")
-
-plt.subplot(222)
-plt.imshow(cv2.cvtColor(image2, cv2.COLOR_BGR2RGB))
-plt.title("原圖2")
-
-plt.subplot(223)
-plt.imshow(cv2.cvtColor(image3, cv2.COLOR_BGR2RGB))
-plt.title("兩圖相減1")
-
-plt.subplot(224)
-plt.imshow(cv2.cvtColor(image4, cv2.COLOR_BGR2RGB))
-plt.title("兩圖相減2")
-
-show()
-
 print("------------------------------------------------------------")  # 60個
 
 print("Y對稱一張圖片")
@@ -1281,22 +1139,6 @@ image = cv2.add(image, image_b)  # 疊加藍色
 cvshow("image", output)
 
 print("------------------------------------------------------------")  # 60個
-print("OpenCV_12 addWeighted 要一樣大的圖")
-
-filename1 = "C:/_git/vcs/_4.python/opencv/data/RGB_R.png"
-filename2 = "C:/_git/vcs/_4.python/opencv/data/RGB_G.png"
-
-# 檔案 => cv2影像
-image1 = cv2.imread(filename1)
-
-# 檔案 => cv2影像
-image2 = cv2.imread(filename2)
-
-output = cv2.addWeighted(image1, 1.0, image2, 1.0, 100)  # 整體墊高100
-
-cvshow("image", output)
-
-print("------------------------------------------------------------")  # 60個
 print("OpenCV_14 漸層色")
 
 # 檔案 => cv2影像
@@ -1312,34 +1154,7 @@ image = image.astype("float32") / 255  # 轉換內容類型
 cvshow("image", image)
 
 print("------------------------------------------------------------")  # 60個
-print("OpenCV_15 漸層色")
 
-w = 400
-h = 400
-image = np.zeros([h, w, 3])
-for i in range(h):
-    for j in range(w):
-        image[i, j, 0] = int(256 * (j + i) / (w + h))
-        image[i, j, 2] = int(256 * (j + i) / (w + h))
-
-image = image.astype("float32") / 255
-
-cvshow("image", image)
-
-print("------------------------------------------------------------")  # 60個
-print("OpenCV_16")
-
-w = 400
-h = 400
-image = np.zeros([h, w, 4])  # 第三個值為 4
-for i in range(h):
-    image[i, :, 3] = int(256 * i / 400)  # 設定第四個值 ( 透明度 )
-
-image = image.astype("float32") / 255
-
-cvshow("image", image)
-
-print("------------------------------------------------------------")  # 60個
 print("OpenCV_17 logo處理")
 
 logo_filename = "C:/_git/vcs/_4.python/opencv/data/opencv_logo.png"
@@ -1489,28 +1304,6 @@ cvshow("image", image)
 
 print("------------------------------------------------------------")  # 60個
 
-print("測試 淡入淡出 效果")
-print("按 ESC 離開")
-
-# 檔案 => cv2影像
-image = cv2.imread(filename)  # 開啟圖片
-image = cv2.cvtColor(image, cv2.COLOR_BGR2BGRA)  # 轉換成 BGRA ( 因為需要 alpha 色版 )
-w = image.shape[1]  # 取得寬度
-h = image.shape[0]  # 取得高度
-white = 255 - np.zeros((h, w, 4), dtype="uint8")  # 建立白色圖
-a = 1  # 一開始 a 為 1
-
-while True:
-    a = a - 0.001  # a 不斷減少 0.01
-    if a < 0:
-        a = 0  # 如果 a 小於 0 就讓 a 等於 0
-    output = cv2.addWeighted(white, a, image, 1 - a, 0)  # 根據 a 套用權重
-    cv2.imshow("image", output)  # 顯示圖片
-    k = cv2.waitKey(1)
-    if k == ESC:
-        break
-
-cvshow("image", image)
 
 print("------------------------------------------------------------")  # 60個
 print("OpenCV_32")

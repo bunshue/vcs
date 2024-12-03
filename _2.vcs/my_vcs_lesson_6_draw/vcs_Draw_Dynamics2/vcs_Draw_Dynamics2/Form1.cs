@@ -13,7 +13,7 @@ namespace vcs_Draw_Dynamics2
 {
     public partial class Form1 : Form
     {
-        Image img = Image.FromFile(@"C:\_git\vcs\_1.data\______test_files1\__pic\_angry_bird\angry_bird.jpg");
+        Image img = Image.FromFile(@"C:\_git\vcs\_1.data\______test_files1\__pic\_angry_bird\Angry-Birds08.jpg");
         int W = 0;
         int H = 0;
         int x_st = 0;
