@@ -62,12 +62,12 @@ print(sklearn)
 
 print("------------------------------------------------------------")  # 60個
 
-#用文字看內建資料的方法
+# 用文字看內建資料的方法
 
-N = 10 # n_samples, 樣本數
-M = 4 # n_features, 特徵數(資料的維度)
-GROUPS = 3 # centers, 分群數
-STD = 1 # cluster_std, 資料標準差
+N = 10  # n_samples, 樣本數
+M = 4  # n_features, 特徵數(資料的維度)
+GROUPS = 3  # centers, 分群數
+STD = 1  # cluster_std, 資料標準差
 print("make_blobs,", N, "個樣本, ", M, "個特徵, 分成", GROUPS, "群")
 
 X, y, centers = make_blobs(
@@ -93,7 +93,7 @@ X, y, centers = make_blobs(
 plt.scatter(X[:, 0], X[:, 1], c=y)
 # 標記群集中心
 plt.scatter(centers[:, 0], centers[:, 1], marker="*", s=200, color="r")
-plt.title('sd=1, 3群')
+plt.title("sd=1, 3群")
 
 plt.subplot(232)
 N, M, GROUPS, STD = 100, 2, 5, 1
@@ -103,7 +103,7 @@ X, y, centers = make_blobs(
 plt.scatter(X[:, 0], X[:, 1], c=y)
 # 標記群集中心
 plt.scatter(centers[:, 0], centers[:, 1], marker="*", s=200, color="r")
-plt.title('sd=1, 5群')
+plt.title("sd=1, 5群")
 
 plt.subplot(233)
 print("每群不同大小, 指定中心位置")
@@ -119,16 +119,16 @@ X, y, centers = make_blobs(
     n_features=2,
     centers=[[cx0, cy0], [cx1, cy1], [cx2, cy2], [cx3, cy3]],
     cluster_std=50,
-    return_centers=True
-    )
+    return_centers=True,
+)
 
 plt.scatter(X[:, 0], X[:, 1], c=y)
 # 標記群集中心
 plt.scatter(centers[:, 0], centers[:, 1], marker="*", s=200, color="r")
-plt.title('每群不同大小, 指定中心位置')
+plt.title("每群不同大小, 指定中心位置")
 
 plt.subplot(234)
-N, M, GROUPS= 100, 2, 3
+N, M, GROUPS = 100, 2, 3
 X, y, centers = make_blobs(
     n_samples=N, centers=GROUPS, n_features=M, return_centers=True
 )
@@ -136,7 +136,7 @@ plt.scatter(X[:, 0], X[:, 1], c=y)
 # 標記群集中心
 plt.scatter(centers[:, 0], centers[:, 1], marker="*", s=200, color="r")
 plt.axis([-15, 15, -15, 15])
-plt.title('無 sd')
+plt.title("無 sd")
 
 plt.subplot(235)
 N, M, GROUPS, STD = 100, 2, 3, 3
@@ -147,7 +147,7 @@ plt.scatter(X[:, 0], X[:, 1], c=y)
 # 標記群集中心
 plt.scatter(centers[:, 0], centers[:, 1], marker="*", s=200, color="r")
 plt.axis([-15, 15, -15, 15])
-plt.title('sd=3')
+plt.title("sd=3")
 
 plt.subplot(236)
 N, M, GROUPS, STD = 100, 2, 3, 6
@@ -158,7 +158,7 @@ plt.scatter(X[:, 0], X[:, 1], c=y)
 # 標記群集中心
 plt.scatter(centers[:, 0], centers[:, 1], marker="*", s=200, color="r")
 plt.axis([-15, 15, -15, 15])
-plt.title('sd=6')
+plt.title("sd=6")
 
 plt.show()
 print("------------------------------------------------------------")  # 60個

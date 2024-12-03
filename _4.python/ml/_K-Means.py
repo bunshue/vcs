@@ -49,6 +49,7 @@ def show():
     plt.show()
     pass
 
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 """
@@ -330,7 +331,7 @@ do_k_means()
 """
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
+
 print("聚類算法 KMeans")
 
 from sklearn.datasets import make_blobs
@@ -342,8 +343,8 @@ X = np.random.rand(N, 2)  # N X 2 亂數陣列
 
 # 建立資料二, 使用 make_blobs
 N = 100
-M = 2 # n_features, 特徵數(資料的維度)
-GROUPS = 3 # centers, 分群數
+M = 2  # n_features, 特徵數(資料的維度)
+GROUPS = 3  # centers, 分群數
 
 print("make_blobs,", N, "個樣本, ", M, "個特徵, 分成", GROUPS, "群")
 X, y, centers = make_blobs(
@@ -372,7 +373,7 @@ print("分群準確性:", clf.inertia_)
 
 y_pred = clf.predict(X)  # 預測.predict
 # 預測.predict 會與 clf.labels_ 相同
-print('檢查是否相同')
+print("檢查是否相同")
 print(np.array_equal(clf.labels_, clf.predict(X)))
 
 # 一次做完訓練+預測 same
@@ -397,7 +398,14 @@ plt.subplot(132)
 # 繪圓點, 圓點用黑色外框, 使用標籤 labels_ 區別顏色,
 plt.scatter(X[:, 0], X[:, 1], marker="o", c=clf.labels_)
 # 標記群集中心
-plt.scatter(clf.cluster_centers_[:, 0], clf.cluster_centers_[:, 1], marker="*", s=200, c="r", alpha=0.8)
+plt.scatter(
+    clf.cluster_centers_[:, 0],
+    clf.cluster_centers_[:, 1],
+    marker="*",
+    s=200,
+    c="r",
+    alpha=0.8,
+)
 plt.title("KMeans分群結果")
 
 plt.subplot(133)
@@ -541,25 +549,27 @@ df.reset_index(drop=True)  # 將列索引重新編號
 
 s = {"Iris-setosa": 0, "Iris-versicolor": 1, "Iris-virginica": 2}
 df["Species"] = df["Species"].map(s)  # 將 Species 欄位的 字串 對應 數值
-#print(df.head())
+# print(df.head())
 
 # 取前四欄位當作訓練資料
 df_X = df[["SepalLengthCm", "SepalWidthCm", "PetalLengthCm", "PetalWidthCm"]]
-#print(df_X.head())
+# print(df_X.head())
 
 inertia = []
 for k in range(1, 15):
     CLUSTERS = k  # 要分成的群數
     clf = KMeans(n_clusters=CLUSTERS)  # K-平均演算法
     clf.fit(df_X)  # 學習訓練.fit
-    print("k =",k,", 分群準確性:", clf.inertia_)
+    print("k =", k, ", 分群準確性:", clf.inertia_)
     inertia.append(clf.inertia_)
 
 
 print("分1~14群的 分群準確性 clf.inertia_ :\n", inertia)
 
 # 看視覺化圖表決定參數K值
-plt.plot(list(range(1, 15)), inertia, color="r", marker="o", markersize=8, label="分群準確性")
+plt.plot(
+    list(range(1, 15)), inertia, color="r", marker="o", markersize=8, label="分群準確性"
+)
 plt.grid()
 plt.legend()
 
@@ -589,8 +599,8 @@ plt.scatter(df_X["SepalLengthCm"], df_X["SepalWidthCm"], color=colmap[clf.labels
 plt.xlabel("花萼長度(公分)")
 plt.ylabel("寬度長度(公分)")
 
-#畫預測點
-plt.scatter(6.6, 3.1, s=300, c='m')
+# 畫預測點
+plt.scatter(6.6, 3.1, s=300, c="m")
 
 show()
 
@@ -629,14 +639,19 @@ print("準確率:{0:f}".format(score))
 
 plt.scatter(iris_X_test[:, 0], iris_X_test[:, 1], c=y_pred, cmap="viridis")
 # 標記群集中心
-plt.scatter(clf.cluster_centers_[:, 0], clf.cluster_centers_[:, 1], marker="*", s=200, c="r", alpha=0.8)
+plt.scatter(
+    clf.cluster_centers_[:, 0],
+    clf.cluster_centers_[:, 1],
+    marker="*",
+    s=200,
+    c="r",
+    alpha=0.8,
+)
 
 show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-from sklearn import cluster
 
 iris = datasets.load_iris()
 
@@ -645,21 +660,23 @@ X.columns = ["sepal_length", "sepal_width", "petal_length", "petal_width"]
 y = iris.target
 k = 3
 
-kmeans = cluster.KMeans(n_clusters=k, random_state=12)
-kmeans.fit(X)
-print(kmeans.labels_)
-print(y)
+clf = KMeans(n_clusters=k, random_state=9487)  # K-平均演算法
+
+clf.fit(X)  # 學習訓練.fit
 
 colmap = np.array(["r", "g", "y"])
+
 plt.figure(figsize=(10, 5))
-plt.subplot(1, 2, 1)
+
+plt.subplot(121)
 plt.subplots_adjust(hspace=0.5)
 plt.scatter(X["petal_length"], X["petal_width"], color=colmap[y])
 plt.xlabel("花瓣長度(Petal Length)")
 plt.ylabel("花瓣寬度(Petal Width)")
 plt.title("真實分類(Real Classification)")
-plt.subplot(1, 2, 2)
-plt.scatter(X["petal_length"], X["petal_width"], color=colmap[kmeans.labels_])
+
+plt.subplot(122)
+plt.scatter(X["petal_length"], X["petal_width"], color=colmap[clf.labels_])
 plt.xlabel("花瓣長度(Petal Length)")
 plt.ylabel("花瓣寬度(Petal Width)")
 plt.title("K-means分類(K-means Classification)")
@@ -668,8 +685,6 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
-from sklearn import cluster
-
 iris = datasets.load_iris()
 
 X = pd.DataFrame(iris.data, columns=iris.feature_names)
@@ -677,26 +692,31 @@ X.columns = ["sepal_length", "sepal_width", "petal_length", "petal_width"]
 y = iris.target
 k = 3
 
-kmeans = cluster.KMeans(n_clusters=k, random_state=12)
-kmeans.fit(X)
+clf = KMeans(n_clusters=k, random_state=9487)  # K-平均演算法
+
+clf.fit(X)  # 學習訓練.fit
+
 print("K-means分類(K-means Classification):")
-print(kmeans.labels_)
+print(clf.labels_)
 # 修正標籤錯誤
-pred_y = np.choose(kmeans.labels_, [2, 0, 1]).astype(np.int64)
+pred_y = np.choose(clf.labels_, [2, 0, 1]).astype(np.int64)
 print("K-means修正分類(K-means Fix Classification):")
 print(pred_y)
 print("真實分類(Real Classification):")
 print(y)
 
 colmap = np.array(["r", "g", "y"])
+
 plt.figure(figsize=(10, 5))
-plt.subplot(1, 2, 1)
+
+plt.subplot(121)
 plt.subplots_adjust(hspace=0.5)
 plt.scatter(X["petal_length"], X["petal_width"], color=colmap[y])
 plt.xlabel("花瓣長度(Petal Length)")
 plt.ylabel("花瓣寬度(Petal Width)")
 plt.title("真實分類(Real Classification)")
-plt.subplot(1, 2, 2)
+
+plt.subplot(122)
 plt.scatter(X["petal_length"], X["petal_width"], color=colmap[pred_y])
 plt.xlabel("花瓣長度(Petal Length)")
 plt.ylabel("花瓣寬度(Petal Width)")
@@ -706,7 +726,6 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
-from sklearn import cluster
 import sklearn.metrics as sm
 
 iris = datasets.load_iris()
@@ -716,40 +735,34 @@ X.columns = ["sepal_length", "sepal_width", "petal_length", "petal_width"]
 y = iris.target
 k = 3
 
-kmeans = cluster.KMeans(n_clusters=k, random_state=12)
-kmeans.fit(X)
+clf = KMeans(n_clusters=k, random_state=9487)  # K-平均演算法
+
+clf.fit(X)  # 學習訓練.fit
+
 # 修正標籤錯誤
-pred_y = np.choose(kmeans.labels_, [2, 0, 1]).astype(np.int64)
+pred_y = np.choose(clf.labels_, [2, 0, 1]).astype(np.int64)
 # 績效矩陣
 print(sm.accuracy_score(y, pred_y))
 print("---------------------------")
 # 混淆矩陣
 print(sm.confusion_matrix(y, pred_y))
 
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-from sklearn.cluster import KMeans
 
 iris = datasets.load_iris()
 
 n_clusters = 3  # クラスタ数を3に設定
-model = KMeans(n_clusters=n_clusters)
-model.fit(iris.data)
-print(model.labels_)  # 各データ点が所属するクラスタ
-print(model.cluster_centers_)  # fit()によって計算された重心
+clf = KMeans(n_clusters=n_clusters)  # K-平均演算法
+
+clf.fit(iris.data)  # 學習訓練.fit
 
 print("------------------------------------------------------------")  # 60個
-
-
-
-from sklearn.datasets import load_iris
-
+print("------------------------------------------------------------")  # 60個
 
 # 下面幾個操作都跟之前一樣，只是我們把所有的特徵都拿來用了
 
-iris = load_iris()
+iris = datasets.load_iris()
 
 X = iris.data
 Y = iris.target
@@ -757,10 +770,9 @@ Y = iris.target
 # 只是這次的函數學習機是 k-Means！
 # 叫它自己想辦法分三類
 
-from sklearn.cluster import KMeans
+clf = KMeans(n_clusters=3)  # K-平均演算法
 
-clf = KMeans(n_clusters=3)
-clf.fit(X)
+clf.fit(X)  # 學習訓練.fit
 
 """
 KMeans(algorithm='auto', copy_x=True, init='k-means++', max_iter=300,
@@ -786,7 +798,7 @@ x_train, x_test, y_train, y_test = train_test_split(X_SVM, Y, test_size=0.2)
 
 clf = SVC()
 
-clf.fit(x_train, y_train)
+clf.fit(x_train, y_train)  # 學習訓練.fit
 
 y_predict = clf.predict(x_test)
 
@@ -803,12 +815,9 @@ X = np.random.rand(50, 2)
 plt.scatter(X[:, 0], X[:, 1], s=50)
 show()
 
-# 雖然還是叫 K-Means 當函數學習機，
-# 讓它分四類，但這次真的沒有答案了
-from sklearn.cluster import KMeans
+clf = KMeans(n_clusters=4)  # K-平均演算法
 
-clf = KMeans(n_clusters=4)
-clf.fit(X)
+clf.fit(X)  # 學習訓練.fit
 """
 KMeans(algorithm='auto', copy_x=True, init='k-means++', max_iter=300,
 ,       n_clusters=4, n_init=10, n_jobs=None, precompute_distances='auto',
@@ -829,7 +838,7 @@ predict_label = clf.predict(X_add)
 plt.scatter(X_add[:, 0], X_add[:, 1], c=predict_label)
 
 show()
-'''
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -839,20 +848,18 @@ data = load_wine()
 
 X = data.data[:, [0, 9]]
 
-from sklearn.cluster import KMeans
-
 n_clusters = 3
-model = KMeans(n_clusters=n_clusters)
+clf = KMeans(n_clusters=n_clusters)  # K-平均演算法
 
-pred = model.fit_predict(X)
+pred = clf.fit_predict(X)  # 學習訓練 + 預測 .fit_predict
 
 fig, ax = plt.subplots()
 ax.scatter(X[pred == 0, 0], X[pred == 0, 1], color="red", marker="s", label="Label1")
 ax.scatter(X[pred == 1, 0], X[pred == 1, 1], color="blue", marker="s", label="Label2")
 ax.scatter(X[pred == 2, 0], X[pred == 2, 1], color="green", marker="s", label="Label3")
 ax.scatter(
-    model.cluster_centers_[:, 0],
-    model.cluster_centers_[:, 1],
+    clf.cluster_centers_[:, 0],
+    clf.cluster_centers_[:, 1],
     s=200,
     color="yellow",
     marker="*",
@@ -865,10 +872,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-
-
-# 09_03_Scikit-learn_kmeans
 
 # 鳶尾花資料集
 
@@ -886,22 +889,14 @@ scaler = StandardScaler()
 X_train_std = scaler.fit_transform(X_train)
 X_test_std = scaler.transform(X_test)
 
-# 選擇演算法
+clf = KMeans(n_clusters=3, init="k-means++", n_init="auto")  # K-平均演算法
 
-from sklearn.cluster import KMeans
-
-model = KMeans(n_clusters=3, init="k-means++", n_init="auto")
-
-# 模型訓練
-
-model.fit(X_train_std, y_train)
-
-# KMeans(n_clusters=3, n_init='auto')
+clf.fit(X_train_std, y_train)  # 學習訓練.fit
 
 # 模型評估
 
 # 計算準確率
-y_pred = model.predict(X_test_std)
+y_pred = clf.predict(X_test_std)
 print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
 
 # 6.67%
@@ -917,7 +912,7 @@ print(cc)
 
 # 模型評估：資料點與所屬質心距離的平方和
 
-cc = model.inertia_
+cc = clf.inertia_
 print(cc)
 
 # 111.5372270434027
@@ -925,7 +920,7 @@ print(cc)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 09_04_kmeans_optimization_elbow
+# kmeans_optimization_elbow
 
 # 轉折判斷法(Elbow)
 
@@ -939,22 +934,19 @@ X, y = make_blobs(
     centers=3,
     cluster_std=0.5,
     shuffle=True,
-    random_state=0,
+    random_state=9487,
 )
 
-# 訓練模型
-
-from sklearn.cluster import KMeans
-
-km = KMeans(
-    n_clusters=3, init="random", n_init=10, max_iter=300, tol=1e-04, random_state=0
-)
+clf = KMeans(
+    n_clusters=3, init="random", n_init=10, max_iter=300, tol=1e-04, random_state=9487
+)  # K-平均演算法
 
 # 模型評估
 
 # 顯示失真(Distortion)的程度
-y_km = km.fit_predict(X)
-print("Distortion: %.2f" % km.inertia_)
+y_km = clf.fit_predict(X)  # 學習訓練 + 預測 .fit_predict
+
+print("Distortion: %.2f" % clf.inertia_)
 
 # Distortion: 72.48
 
@@ -963,9 +955,11 @@ print("Distortion: %.2f" % km.inertia_)
 distortions = []
 # 測試 1~10 群的失真
 for i in range(1, 11):
-    km = KMeans(n_clusters=i, init="k-means++", n_init=10, max_iter=300, random_state=0)
-    km.fit(X)
-    distortions.append(km.inertia_)
+    clf = KMeans(
+        n_clusters=i, init="k-means++", n_init=10, max_iter=300, random_state=9487
+    )  # K-平均演算法
+    clf.fit(X)  # 學習訓練.fit
+    distortions.append(clf.inertia_)
 
 plt.plot(range(1, 11), distortions, marker="o")
 plt.xlabel("集群數量", fontsize=14)
@@ -975,11 +969,10 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 09_05_kmeans_optimization_silhouette
+# kmeans_optimization_silhouette
 
 # 輪廓圖分析(Silhouette Analysis)
 
-from sklearn.cluster import KMeans
 from matplotlib import cm
 from sklearn.metrics import silhouette_samples
 from sklearn.datasets import make_blobs
@@ -992,15 +985,21 @@ X, y = make_blobs(
     centers=3,
     cluster_std=0.5,
     shuffle=True,
-    random_state=0,
+    random_state=9487,
 )
 
 # 訓練模型
 
-km = KMeans(
-    n_clusters=2, init="k-means++", n_init=10, max_iter=300, tol=1e-04, random_state=0
-)
-y_km = km.fit_predict(X)
+clf = KMeans(
+    n_clusters=2,
+    init="k-means++",
+    n_init=10,
+    max_iter=300,
+    tol=1e-04,
+    random_state=9487,
+)  # K-平均演算法
+
+y_km = clf.fit_predict(X)  # 學習訓練 + 預測 .fit_predict
 
 # 輪廓係數
 
@@ -1041,10 +1040,16 @@ plt.show()
 
 # 使用3個集群訓練模型
 
-km = KMeans(
-    n_clusters=3, init="k-means++", n_init=10, max_iter=300, tol=1e-04, random_state=0
-)
-y_km = km.fit_predict(X)
+clf = KMeans(
+    n_clusters=3,
+    init="k-means++",
+    n_init=10,
+    max_iter=300,
+    tol=1e-04,
+    random_state=9487,
+)  # K-平均演算法
+
+y_km = clf.fit_predict(X)  # 學習訓練 + 預測 .fit_predict
 
 # 繪製輪廓圖
 
@@ -1095,22 +1100,18 @@ print(cc)
 silhouette_score_list = []
 print("輪廓分數:")
 for i in range(2, 11):
-    km = KMeans(n_clusters=i, init="k-means++", n_init=10, max_iter=300, random_state=0)
-    km.fit(X)
-    y_km = km.fit_predict(X)
+    clf = KMeans(
+        n_clusters=i, init="k-means++", n_init=10, max_iter=300, random_state=9487
+    )  # K-平均演算法
+    clf.fit(X)  # 學習訓練.fit
+    y_km = clf.fit_predict(X)  # 學習訓練 + 預測 .fit_predict
     silhouette_score_list.append(silhouette_score(X, y_km))
     print(f"{i}:{silhouette_score_list[-1]:.2f}")
 
 print(f"最大值 {np.argmax(silhouette_score_list)+2}: {np.max(silhouette_score_list):.2f}")
 
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-
 
 
 print("------------------------------------------------------------")  # 60個

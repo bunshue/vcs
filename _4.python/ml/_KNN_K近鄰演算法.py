@@ -700,7 +700,7 @@ print("------------------------------------------------------------")  # 60個
 from scipy import stats
 import sklearn.model_selection as cross_validation
 
-orgData = pd.read_csv('data/date_data.csv')
+orgData = pd.read_csv("data/date_data.csv")
 orgData.describe()
 
 # * 选取自变量
@@ -709,13 +709,13 @@ print(orgData.shape)
 print(orgData.head())
 
 
-#取出後4欄位當訓練資料
-#X = orgData.ix[:, :4]
+# 取出後4欄位當訓練資料
+# X = orgData.ix[:, :4]
 print("取出3欄資料")
 X = orgData[["income_rank", "attractive_rank", "assets_rank"]]
 
-#取出 Dated 欄位 當訓練目標
-Y = orgData[['Dated']]
+# 取出 Dated 欄位 當訓練目標
+Y = orgData[["Dated"]]
 X.head()
 
 # * 极值标准化
@@ -729,7 +729,8 @@ X_scaled[1:5]
 # * 划分训练集和测试集
 
 train_data, test_data, train_target, test_target = cross_validation.train_test_split(
-    X_scaled, Y, test_size=0.2, train_size=0.8, random_state=123)   #划分训练集和测试集
+    X_scaled, Y, test_size=0.2, train_size=0.8, random_state=123
+)  # 划分训练集和测试集
 
 
 # 上述过程有没有问题？
@@ -754,7 +755,7 @@ for k in range(1, 30):
     k_model = KNeighborsClassifier(n_neighbors=k)
     k_model.fit(train_data, train_target.values.flatten())
     score = k_model.score(test_data, test_target)
-    print(k, '\t', score)
+    print(k, "\t", score)
 
 
 # * 交叉验证选择k值
@@ -764,28 +765,29 @@ from sklearn.model_selection import GridSearchCV
 from sklearn.model_selection import KFold
 
 import sklearn
+
 print(help(sklearn.model_selection.KFold()))
 
 n_samples = len(train_data)
 kf = KFold(n_samples)
-grid = {'n_neighbors':[1,2,3,4,5,6,7,8,9]}
+grid = {"n_neighbors": [1, 2, 3, 4, 5, 6, 7, 8, 9]}
 estimator = KNeighborsClassifier()
 gridSearchCV = GridSearchCV(estimator, grid, cv=kf)
 gridSearchCV.fit(train_data, train_target.values.flatten())
-cc = gridSearchCV.cv_results_ # cv_results_ : 具體用法模型不同參數下交叉驗證的結果
+cc = gridSearchCV.cv_results_  # cv_results_ : 具體用法模型不同參數下交叉驗證的結果
 print(cc)
 
 mean_test_score = gridSearchCV.cv_results_["mean_test_score"]
 std_test_score = gridSearchCV.cv_results_["std_test_score"]
 rank_test_score = gridSearchCV.cv_results_["rank_test_score"]
 
-print('mean_test_score : ', mean_test_score)
-print('std_test_score : ', std_test_score)
-print('rank_test_score : ', rank_test_score)
+print("mean_test_score : ", mean_test_score)
+print("std_test_score : ", std_test_score)
+print("rank_test_score : ", rank_test_score)
 
 gridSearchCV.best_params_
 
-best = gridSearchCV.best_estimator_ 
+best = gridSearchCV.best_estimator_
 best.score(test_data, test_target)
 
 # 练习：试一试哪些参数会影响结果
@@ -802,7 +804,5 @@ sys.exit()
 print("------------------------------------------------------------")  # 60個
 
 
-#os.chdir(r'D:\Python_book\11KNNNB')
-#pd.set_option('display.max_columns', None)
-
-
+# os.chdir(r'D:\Python_book\11KNNNB')
+# pd.set_option('display.max_columns', None)

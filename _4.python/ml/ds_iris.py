@@ -63,9 +63,11 @@ from sklearn import datasets
 from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
 
+
 def show():
-    #plt.show()
+    # plt.show()
     pass
+
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

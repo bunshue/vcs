@@ -30,6 +30,10 @@ from common1 import *
 import sklearn.linear_model
 from sklearn import datasets
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
+from sklearn import metrics
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.tree import DecisionTreeRegressor
+from matplotlib.colors import ListedColormap
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -39,19 +43,19 @@ from sklearn import tree
 X = np.array([[180, 85], [174, 80], [170, 75], [167, 45], [158, 52], [155, 44]])
 Y = np.array(["man", "man", "man", "woman", "woman", "woman"])
 
-clf = tree.DecisionTreeClassifier()
-clf = clf.fit(X, Y)
+clf = DecisionTreeClassifier()  # 決策樹函數學習機
 
-prediction = clf.predict([[173, 76]])
+clf = clf.fit(X, Y)  # 學習訓練.fit
+
+prediction = clf.predict([[173, 76]])  # 預測.predict
 print(prediction)
 
-# 繪圖
-plt.plot(X[:3, 0], X[:3, 1], "rx")
-plt.plot(X[3:, 0], X[3:, 1], "g.")
-plt.plot([173], [76], "r^")  # 綠色點
+plt.plot(X[:3, 0], X[:3, 1], "rx", label="男生")
+plt.plot(X[3:, 0], X[3:, 1], "g.", label="女生")
+plt.plot([173], [76], "r^", label="預測點")  # 預測點
 plt.ylabel("體重")
 plt.xlabel("身高")
-plt.legend(("男", "女"), loc="upper left")
+plt.legend()
 
 plt.show()
 
@@ -67,13 +71,15 @@ from os import system
 X = np.array([[180, 85], [174, 80], [170, 75], [167, 45], [158, 52], [155, 44]])
 Y = np.array(["man", "man", "man", "woman", "woman", "woman"])
 
-clf = tree.DecisionTreeClassifier()
-clf = clf.fit(X, Y)
+clf = DecisionTreeClassifier()  # 決策樹函數學習機
+
+clf = clf.fit(X, Y)  # 學習訓練.fit
 
 tree.export_graphviz(clf, out_file="tmp_tree222.dot")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
 
 def plot_decision_regions(X, y, classifier, test_idx=None, resolution=0.02):
     # setup markers generator and color map
@@ -88,7 +94,7 @@ def plot_decision_regions(X, y, classifier, test_idx=None, resolution=0.02):
         np.arange(x1_min, x1_max, resolution), np.arange(x2_min, x2_max, resolution)
     )
 
-    z = classifier.predict(np.array([xx1.ravel(), xx2.ravel()]).T)
+    z = classifier.predict(np.array([xx1.ravel(), xx2.ravel()]).T)  # 預測.predict
     z = z.reshape(xx1.shape)
     plt.contourf(xx1, xx2, z, alpha=0.4, cmap=cmap)
     plt.xlim(xx1.min(), xx1.max())
@@ -123,22 +129,17 @@ def plot_decision_regions(X, y, classifier, test_idx=None, resolution=0.02):
 
 print("------------------------------------------------------------")  # 60個
 
-from sklearn import datasets
-from sklearn import metrics
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.tree import DecisionTreeRegressor
-from sklearn.model_selection import train_test_split
-from matplotlib.colors import ListedColormap
-
 
 def do_decision_tree():
     iris = datasets.load_iris()
     x_train, x_test, y_train, y_test = train_test_split(
         iris.data[:, [2, 3]], iris.target, test_size=0.25, random_state=4
     )
-    clf = DecisionTreeClassifier(criterion="entropy", max_depth=3, random_state=0)
-    clf.fit(x_train, y_train)
-    y_pred = clf.predict(x_test)
+    clf = DecisionTreeClassifier(
+        criterion="entropy", max_depth=3, random_state=0
+    )  # 決策樹函數學習機
+    clf.fit(x_train, y_train)  # 學習訓練.fit
+    y_pred = clf.predict(x_test)  # 預測.predict
 
     X_combined = np.vstack((x_train, x_test))
     y_combined = np.hstack((y_train, y_test))
