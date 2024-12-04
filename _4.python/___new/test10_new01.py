@@ -27,7 +27,7 @@ import requests
 import numpy as np
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 def printlocal():
     lang = "Java"
     print(f"語言 : {lang}")
@@ -9307,8 +9307,6 @@ print("Pandas version:", pd.__version__)
 #print("Scikit-learn version:", sklearn.__version__)
 print("Matplotlib version:", matplotlib.__version__)
 #print("Keras version:", keras.__version__)
-
-'''
 
 print("2 進位整數運算")
 x = 0b1101  # 這是2進位整數

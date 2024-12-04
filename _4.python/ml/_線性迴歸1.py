@@ -2,7 +2,8 @@
 機器學習：建立線性迴歸資料與預測
 
 線性迴歸（linear regression)
-    Finding the curve that best fits your data is called regression, and when that curve is a straight line, it's called linear regression.
+    Finding the curve that best fits your data is called regression,
+    and when that curve is a straight line, it's called linear regression.
     找出符合資料規律的直線，就叫線性迴歸。
 
 # 做線性迴歸, 用 sklearn 裡的 LinearRegression 來做線性迴歸
@@ -1133,14 +1134,130 @@ df = df.fillna(0)
 # df.to_csv("tmp_200811-201811a.csv", encoding="utf8")
 
 print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+# 05_09_regularization_housing
+# 過度擬合與regularization
+# 載入房價資料集
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
+train_df = pd.read_csv("./data/house_train.csv", index_col="ID")
+
+# 指定 X、Y
+X = train_df.drop("medv", axis=1)
+y = train_df["medv"]
+
+# 資料分割
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.3, random_state=42
+)
+
+# 模型訓練與評分
+
+from sklearn.linear_model import LinearRegression
+from sklearn.linear_model import Ridge
+from sklearn.linear_model import Lasso
+
+# 模型訓練
+linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
+
+linear_regression.fit(X_train, y_train)  # 學習訓練.fit
+
+print(f"訓練判定係數: {linear_regression.score(X_train, y_train)}")
+print(f"測試判定係數: {linear_regression.score(X_test, y_test)}")
+
+# 模型評分
+y_pred = linear_regression.predict(X_test)  # 預測.predict
+
+# 訓練判定係數: 0.7268827869293253
+# 測試判定係數: 0.7254687959254533
+
+# 生成新特徵，為舊特徵的平方
+
+# 指定 X、Y
+X = train_df.drop("medv", axis=1)
+y = train_df["medv"]
+
+# 生成新特徵，為舊特徵的平方
+X["crim_2"] = X["crim"] ** 2
+X["zn_2"] = X["zn"] ** 2
+X["indus_2"] = X["indus"] ** 2
+X["chas_2"] = X["chas"] ** 2
+X["nox_2"] = X["nox"] ** 2
+X["rm_2"] = X["rm"] ** 2
+X["age_2"] = X["age"] ** 2
+X["dis_2"] = X["dis"] ** 2
+X["rad_2"] = X["rad"] ** 2
+X["tax_2"] = X["tax"] ** 2
+X["ptratio_2"] = X["ptratio"] ** 2
+X["black_2"] = X["black"] ** 2
+X["lstat_2"] = X["lstat"] ** 2
+
+# 資料分割
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.3, random_state=42
+)
+
+# 模型訓練與評分
+
+from sklearn.preprocessing import StandardScaler, PolynomialFeatures
+from sklearn.pipeline import Pipeline
+
+# 建立管線
+steps = [
+    ("scalar", StandardScaler()),
+    ("poly", PolynomialFeatures(degree=2)),
+    ("model", LinearRegression()),
+]
+pipeline = Pipeline(steps)
+
+pipeline.fit(X_train, y_train)  # 學習訓練.fit
+
+# 模型評分
+print(f"訓練判定係數: {pipeline.score(X_train, y_train)}")
+print(f"測試判定係數: {pipeline.score(X_test, y_test)}")
+
+# 訓練判定係數: 1.0
+# 測試判定係數: -60.45752231085903
+
+# l2 Regularization or Ridge Regression
+
+steps = [
+    ("scalar", StandardScaler()),
+    ("poly", PolynomialFeatures(degree=2)),
+    ("model", Ridge(alpha=10, fit_intercept=True)),
+]
+
+ridge_pipe = Pipeline(steps)
+
+ridge_pipe.fit(X_train, y_train)  # 學習訓練.fit
+
+# 模型評分
+print(f"訓練判定係數: {ridge_pipe.score(X_train, y_train)}")
+print(f"測試判定係數: {ridge_pipe.score(X_test, y_test)}")
+
+# 訓練判定係數: 0.9411030494647765
+# 測試判定係數: 0.8158674422432347
+
+# l1 Regularization or Lasso Regression
+
+steps = [
+    ("scalar", StandardScaler()),
+    ("poly", PolynomialFeatures(degree=2)),
+    ("model", Lasso(alpha=0.3, fit_intercept=True)),
+]
+
+lasso_pipe = Pipeline(steps)
+
+lasso_pipe.fit(X_train, y_train)  # 學習訓練.fit
+
+# 模型評分
+print(f"訓練判定係數: {lasso_pipe.score(X_train, y_train)}")
+print(f"測試判定係數: {lasso_pipe.score(X_test, y_test)}")
+
+# 訓練判定係數: 0.8525646297860277
+# 測試判定係數: 0.8367938135279831
+
+print("結論：L1 test score 最高")
 
 
 print("------------------------------------------------------------")  # 60個

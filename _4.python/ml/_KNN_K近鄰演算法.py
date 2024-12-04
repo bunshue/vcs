@@ -49,6 +49,84 @@ def show():
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+
+
+""" TBD
+print('最簡易 K近鄰演算法（K Nearest Neighbor, KNN）')
+
+print('任意隨機資料')
+X = np.random.rand(50, 2)
+
+# 畫出來
+plt.scatter(X[:, 0], X[:, 1], s=50)
+show()
+
+
+
+
+sys.exit()
+"""
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+X = np.array(
+    [
+        [9, 9],
+        [9.2, 9.2],
+        [9.6, 9.2],
+        [8.7, 8.0],
+        [6.7, 7.1],
+        [7, 7.4],
+        [7.6, 7.5],
+        [7.2, 10.3],
+        [7.3, 10.5],
+        [7.2, 9.2],
+        [7.3, 10.2],
+        [7.2, 9.7],
+        [7.3, 10.1],
+        [7.3, 10.1],
+    ]
+)
+y = [1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2]
+
+NEIGHBOARS = 5
+print("用 K近鄰演算法 找出最近的", NEIGHBOARS, "個點")
+knn = KNeighborsClassifier(n_neighbors=NEIGHBOARS)  # K近鄰演算法（K Nearest Neighbor, KNN）
+
+knn.fit(X, y)  # 學習訓練.fit
+
+# 進行預測
+X_sample = [8.1, 9.2]
+X_sample = np.array(X_sample).reshape(1, -1)
+
+y_pred = knn.predict(X_sample)  # 預測.predict
+print("預測結果 :\n", y_pred)
+
+print("預測答案＝", knn.predict([[8.1, 9.2]]))  # 預測.predict
+print("預測樣本距離＝", knn.predict_proba([[8.1, 9.2]]))  #      測試數據X的返回概率估計。
+
+neighbors = knn.kneighbors(X_sample, return_distance=False)
+print(len(neighbors))
+print(neighbors)
+
+# plt.scatter(X[:, 0], X[:, 1], c=y, s=100, cmap="cool")  # 樣本
+plt.scatter(X[:, 0], X[:, 1], c=y, s=100, cmap="cool")  # 樣本
+# plt.scatter(c[:, 0], c[:, 1], marker="*", s=200, c="r", alpha=0.8)  # 畫出中心點
+
+plt.scatter(X_sample[0][0], X_sample[0][1], marker="x", s=100, cmap="cool")  # 待預測的點
+
+print("劃出預測點與距離最近的", NEIGHBOARS, "個樣本的連線")
+for i in neighbors[0]:
+    print("(", X[i][0], ",", X[i][1], ")")
+    plt.plot([X[i][0], X_sample[0][0]], [X[i][1], X_sample[0][1]], "r--", linewidth=0.6)
+plt.title("KNN預測")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 print("make_blobs 產生測試資料")
 
 from sklearn.datasets import make_blobs
@@ -134,83 +212,6 @@ print("預測結果 :\n", y_pred)
 
 print("評估")
 print(accuracy_score(y_pred, y))
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
-""" TBD
-print('最簡易 K近鄰演算法（K Nearest Neighbor, KNN）')
-
-print('任意隨機資料')
-X = np.random.rand(50, 2)
-
-# 畫出來
-plt.scatter(X[:, 0], X[:, 1], s=50)
-show()
-
-
-
-
-sys.exit()
-"""
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-X = np.array(
-    [
-        [9, 9],
-        [9.2, 9.2],
-        [9.6, 9.2],
-        [8.7, 8.0],
-        [6.7, 7.1],
-        [7, 7.4],
-        [7.6, 7.5],
-        [7.2, 10.3],
-        [7.3, 10.5],
-        [7.2, 9.2],
-        [7.3, 10.2],
-        [7.2, 9.7],
-        [7.3, 10.1],
-        [7.3, 10.1],
-    ]
-)
-y = [1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2]
-
-NEIGHBOARS = 5
-print("用 K近鄰演算法 找出最近的", NEIGHBOARS, "個點")
-knn = KNeighborsClassifier(n_neighbors=NEIGHBOARS)  # K近鄰演算法（K Nearest Neighbor, KNN）
-
-knn.fit(X, y)  # 學習訓練.fit
-
-# 進行預測
-X_sample = [8.1, 9.2]
-X_sample = np.array(X_sample).reshape(1, -1)
-
-y_pred = knn.predict(X_sample)  # 預測.predict
-print("預測結果 :\n", y_pred)
-
-print("預測答案＝", knn.predict([[8.1, 9.2]]))  # 預測.predict
-print("預測樣本距離＝", knn.predict_proba([[8.1, 9.2]]))  #      測試數據X的返回概率估計。
-
-neighbors = knn.kneighbors(X_sample, return_distance=False)
-print(len(neighbors))
-print(neighbors)
-
-# plt.scatter(X[:, 0], X[:, 1], c=y, s=100, cmap="cool")  # 樣本
-plt.scatter(X[:, 0], X[:, 1], c=y, s=100, cmap="cool")  # 樣本
-# plt.scatter(c[:, 0], c[:, 1], marker="*", s=200, c="r", alpha=0.8)  # 畫出中心點
-
-plt.scatter(X_sample[0][0], X_sample[0][1], marker="x", s=100, cmap="cool")  # 待預測的點
-
-print("劃出預測點與距離最近的", NEIGHBOARS, "個樣本的連線")
-for i in neighbors[0]:
-    print("(", X[i][0], ",", X[i][1], ")")
-    plt.plot([X[i][0], X_sample[0][0]], [X[i][1], X_sample[0][1]], "r--", linewidth=0.6)
-plt.title("KNN預測")
-
-show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
