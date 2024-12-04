@@ -9,10 +9,7 @@ Iris 鳶尾花數據庫 150筆資料 4個欄位 3種品種 每種50筆資料
 ['sepal length (cm)', 'sepal width (cm)', 'petal length (cm)', 'petal width (cm)']
 ['setosa' 'versicolor' 'virginica']
 
-
 #鳶尾花(Iris)品種的辨識
-
-鳶尾花 (Iris) 數據庫是很有名的資料, 就是試著以一朵鳶尾花花萼、花瓣的大小來分出是哪個的大小來分出是哪個亞種的鳶尾花。
 
 標準的分類問題: 這是哪種鳶尾花
 
@@ -68,6 +65,20 @@ def show():
     # plt.show()
     pass
 
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+iris = datasets.load_iris()
+
+print("所有資料 :", iris)
+print("data :", iris.data)
+print("target :", iris.target)
+print("target_names :", iris.target_names)
+print("DESCR :", iris.DESCR)
+print("feature_names :", iris.feature_names)
+print("filename :", iris.filename)
+print("data_module :", iris.data_module)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1949,6 +1960,52 @@ print(cc)
 cc = df.equals(df3)
 print(cc)
 """
+
+
+print("------------------------------------------------------------")  # 60個
+# new
+
+iris = datasets.load_iris()
+# print(iris.feature_names)
+
+X = iris.data
+y = iris.target
+
+print("iris.data.shape=", iris.data.shape)
+print("dir(iris)", dir(iris))
+print("iris.target.shape=", iris.target.shape)
+try:
+    print("iris.feature_names=", iris.feature_names)
+except:
+    print("No iris.feature_names=")
+
+import xlsxwriter
+
+try:
+    df = pd.DataFrame(iris.data, columns=iris.feature_names)
+except:
+    df = pd.DataFrame(
+        iris.data,
+        columns=[
+            "sepal length (cm)",
+            "sepal width (cm)",
+            "petal length (cm)",
+            "petal width (cm)",
+        ],
+    )
+
+df["target"] = iris.target
+
+print(df.head())
+df.to_csv("tmp_iris.csv", sep="\t")
+
+""" no save
+writer = pd.ExcelWriter("tmp_iris.xlsx", engine="xlsxwriter")
+df.to_excel(writer, sheet_name="Sheet1")
+writer.save()
+"""
+
+print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個

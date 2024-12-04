@@ -553,6 +553,42 @@ print(X)
 print(y)
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+from sklearn.datasets import load_wine
+
+data = load_wine()
+
+X = data.data[:, [0, 9]]
+
+CLUSTERS = 3  # 要分成的群數
+clf = KMeans(n_clusters=CLUSTERS)  # K-平均演算法
+
+pred = clf.fit_predict(X)  # 學習訓練 + 預測 .fit_predict
+
+fig, ax = plt.subplots()
+ax.scatter(X[pred == 0, 0], X[pred == 0, 1], color="red", marker="s", label="Label1")
+ax.scatter(X[pred == 1, 0], X[pred == 1, 1], color="blue", marker="s", label="Label2")
+ax.scatter(X[pred == 2, 0], X[pred == 2, 1], color="green", marker="s", label="Label3")
+ax.scatter(
+    clf.cluster_centers_[:, 0],
+    clf.cluster_centers_[:, 1],
+    s=200,
+    color="yellow",
+    marker="*",
+    label="center",
+)
+ax.legend()
+plt.title("wine")
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")

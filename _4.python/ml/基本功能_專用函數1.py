@@ -228,6 +228,9 @@ print("------------------------------")  # 30個
 plt.subplot(234)
 plt.title("make_moons 非線性的資料集")
 
+# X, y = make_moons(noise=0.3)
+# print('make_moons 未指定個數, 就是100個')
+
 X, y = make_moons(n_samples=N, noise=0.05)
 print(X.shape)
 

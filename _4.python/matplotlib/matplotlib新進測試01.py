@@ -28,8 +28,14 @@ import ssl
 
 ssl._create_default_https_context = ssl._create_stdlib_context
 
-print("------------------------------------------------------------")  # 60個
 
+def show():
+    plt.show()
+    pass
+
+
+print("------------------------------------------------------------")  # 60個
+'''
 plt.figure(
     num="新進測試 01",
     figsize=(12, 8),
@@ -164,7 +170,7 @@ plt.ylim(-1.5, 1.5)
 
 plt.tight_layout()
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -229,23 +235,27 @@ plt.subplot(236)
 
 plt.tight_layout()
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
 """
 python用mpl_finance中的candlestick_ohlc畫分時圖
 
-matplotlib.finance獨立出來成爲mpl_finance，而mpl_finance中的candlestick_ochl和candlestick_ohlc一般用來畫股票的K線圖。我需要分析分時圖，也就是一分鐘的行情，這個時候就不能直接用candlestick_ochl函數，因爲candlestick_ochl中x軸最小的單位是日期，不是分鐘。
+matplotlib.finance獨立出來成爲mpl_finance，而mpl_finance中的candlestick_ochl和candlestick_ohlc一般用來畫股票的K線圖。
+我需要分析分時圖，也就是一分鐘的行情，這個時候就不能直接用candlestick_ochl函數，因爲candlestick_ochl中x軸最小的單位是日期，不是分鐘。
 
-經過對mpl_finance的源代碼進行分析，問題在於matplotlib的date2num將日期轉換爲浮點數，浮點數的整數部分表示日期，小數部分代表小時和分鐘。比如下面4個時間段是連續的分鐘。
+經過對mpl_finance的源代碼進行分析，問題在於matplotlib的date2num將日期轉換爲浮點數，
+浮點數的整數部分表示日期，小數部分代表小時和分鐘。比如下面4個時間段是連續的分鐘。
 時間 	date2num之後 	乘以1440
 2018/09/17-21:34 	736954.8986 	1061215054
 2018/09/17-21:35 	736954.8993 	1061215055
 2018/09/17-21:36 	736954.9000 	1061215056
 2018/09/17-21:37 	736954.9007 	1061215057
 
-可以看出date2num函數計算之後，4個時間的整數部分都是736954，導致在X軸上這4個時間段都重疊在一起，無法區分了。要達到的效果是每一個分鐘也能成爲一個整數，這樣就可以顯示出來了。那麼一天是24小時，每小時60分鐘，那麼一天就是1440分鐘，將date2num計算的浮點數乘以1440就可以將每一分鐘轉爲整數，那麼就可以在x軸上。
+可以看出date2num函數計算之後，4個時間的整數部分都是736954，導致在X軸上這4個時間段都重疊在一起，無法區分了。
+要達到的效果是每一個分鐘也能成爲一個整數，這樣就可以顯示出來了。
+那麼一天是24小時，每小時60分鐘，那麼一天就是1440分鐘，將date2num計算的浮點數乘以1440就可以將每一分鐘轉爲整數，那麼就可以在x軸上。
 
 最後還需要對x軸格式化，因爲自己對x軸進行了處理（乘以1440），採用默認的格式化是亂碼。需要自定義x軸的格式化函數。
 
@@ -312,7 +322,7 @@ for label in ax.get_xticklabels():
     label.set_rotation(90)
     label.set_horizontalalignment("right")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -372,7 +382,7 @@ xticks_str = list(map(lambda x: date_list[int(x)], xticks_num))  # 生成正在�
 ax2.set_xticks(xticks_num)  # 設置橫軸標注位置
 ax2.set_xticklabels(xticks_str)  # 設置橫軸標注日期
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -408,7 +418,7 @@ for i in range(num):
     ax.set_title(title,fontsize=12)  # X,Y軸不顯示刻度
     ax.set_xticks([]);ax.set_yticks([])        
 
-plt.show()
+show()
 
 """
 
@@ -470,7 +480,7 @@ for i, locator in enumerate(locators):
 
 plt.subplots_adjust(bottom=0.01, top=0.99, left=0.01, right=0.99)
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -490,7 +500,7 @@ ax.grid(which="minor", axis="y", linewidth=0.25, linestyle="-", color="0.75")
 ax.set_xticklabels([])
 ax.set_yticklabels([])
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -505,7 +515,7 @@ print(image.size)
 
 plt.imshow(image)
 
-plt.show()
+show()
 
 
 # resize 寬度一半 高度三成 => 變胖
@@ -513,7 +523,7 @@ resize_image = image.resize((int(image.size[0] * 0.5), int(image.size[1] * 0.3))
 
 plt.imshow(resize_image)
 
-plt.show()
+show()
 
 print(resize_image.size)
 
@@ -534,7 +544,7 @@ for i in range(N):
 
 plt.imshow(canvas)
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -567,7 +577,7 @@ for i in range(N):
 
 plt.imshow(canvas)
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -577,7 +587,7 @@ image = Image.open("_data2/woman.png")
 
 plt.imshow(image)
 
-plt.show()
+show()
 
 print("------------------------------")  # 30個
 
@@ -594,7 +604,7 @@ fill(image, 90)
 
 plt.imshow(image)
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -636,7 +646,7 @@ for i in range(N):
 
 plt.imshow(canvas)
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -844,7 +854,7 @@ sns.palplot(sns.color_palette("RdBu", 7))
 
 sns.palplot(sns.color_palette("coolwarm", 7))
 
-plt.show()
+show()
 """
 
 print("------------------------------------------------------------")  # 60個
@@ -882,15 +892,10 @@ plt.ylabel("值")
 # 設定刻度標籤
 plt.xticks(categories)
 plt.yticks([0, 5, 10, 15, 20, 25])
-
-# 顯示網格線
 plt.grid(True)
-
-# 顯示圖例
 plt.legend()
 
-# 顯示圖形
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -937,15 +942,11 @@ plt.ylabel("Y軸")
 plt.xticks([1, 2, 3, 4, 5])
 plt.yticks([2, 3, 5, 7, 11])
 
-# 顯示網格線
 plt.grid(True)
-
-# 顯示圖例
 plt.legend()
-
-# 顯示圖形
 plt.colorbar()  # 顯示顏色條
-plt.show()
+
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1012,12 +1013,9 @@ plt.pie(
     pctdistance=0.85,
     wedgeprops={"edgecolor": "black"},
 )
-
-# 設置標題
 plt.title("66圓餅圖示例")
 
-# 顯示圖形
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1064,28 +1062,28 @@ axes[0, 0].set_ylabel("y")
 axes[0, 0].set_title("第一張圖")
 axes[0, 0].grid(True)
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
 Z = np.random.uniform(0, 1, (8, 8))
 plt.imshow(Z)
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
 Z = np.random.uniform(0, 1, (8, 8))
 plt.contourf(Z)
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
 Z = np.random.normal(0, 1, 100)
 plt.hist(Z)
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1094,7 +1092,7 @@ X = np.arange(5)
 Y = np.random.uniform(0, 1, 5)
 plt.errorbar(X, Y, Y / 4)
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1102,7 +1100,7 @@ print("------------------------------------------------------------")  # 60個
 Z = np.random.normal(0, 1, (100, 3))
 plt.boxplot(Z)
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1113,7 +1111,7 @@ fig, (ax1, ax2) = plt.subplots(2, 1)
 ax1.plot(X, Y1, color="C1")
 ax2.plot(X, Y2, color="C0")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1124,7 +1122,7 @@ fig, (ax1, ax2) = plt.subplots(1, 2)
 ax1.plot(Y1, X, color="C1")
 ax2.plot(Y2, X, color="C0")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1152,7 +1150,7 @@ fig, ax = plt.subplots()
 ax.spines["top"].set_color("None")
 ax.spines["right"].set_color("None")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1171,7 +1169,7 @@ ax.xaxis.set_minor_formatter(SF())
 # Rotate minor tick labels on the x-axis
 ax.tick_params(axis="x", which="minor", rotation=90)
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1182,7 +1180,7 @@ X = np.linspace(0.1, 10 * np.pi, 1000)
 Y = np.sin(X)
 plt.plot(X, Y, "C1o:", markevery=25, mec="1.0")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1197,7 +1195,7 @@ ax.set_xscale("log")
 # Plot data with specified formatting
 ax.plot(X, Y, "C1o-", markevery=25, mec="1.0")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1212,7 +1210,7 @@ ax.fill_betweenx([-1, 1], [0], [2 * np.pi])
 # Add a text annotation to the plot
 ax.text(0, -1, r" Period $\Phi$")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1228,7 +1226,7 @@ ax.plot(X, np.cos(X), "C1", label="Cosine")
 # Add a legend with customized positioning and formatting
 ax.legend(bbox_to_anchor=(0, 1, 1, 0.1), ncol=2, mode="expand", loc="lower left")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1249,7 +1247,7 @@ ax.annotate(
     arrowprops={"arrowstyle": "->", "color": "C1"},
 )
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1326,7 +1324,7 @@ def plot_colortable(colors, *, ncols=4, sort_colors=True):
 # CSS Colors
 plot_colortable(mcolors.CSS4_COLORS)
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1380,7 +1378,7 @@ ax.add_collection(
 
 ax.set_xlim([0, 50])
 ax.set_ylim([0, 50])
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1420,7 +1418,7 @@ ax = plt.gca()
 ax.add_collection(PolyCollection(tri(x, y)))
 ax.set_xlim([0, n])
 ax.set_ylim([0, n])
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1479,7 +1477,7 @@ def box(width, depth, height):
     ax.set_ylim([0, lim])
     ax.set_zlim([0, lim])
 
-    plt.show()
+    show()
 
 
 box(width, depth, height)
@@ -1518,7 +1516,7 @@ def tetrahedron(width):
     ax.set_ylim([-n, n])
     ax.set_zlim([-n, n])
 
-    plt.show()
+    show()
 
 
 width = 30
@@ -1529,7 +1527,7 @@ print("------------------------------------------------------------")  # 60個
 plt.fill("time", "signal", "g", data={"time": [0, 1, 2, 3], "signal": [0, 1, 1, 0]})
 plt.xlabel("Time")
 plt.ylabel("Signal")
-plt.show()
+show()
 
 
 print("------------------------------------------------------------")  # 60個
@@ -1548,7 +1546,7 @@ im_w, im_h = im.size
 W = im_w
 H = im_h
 
-pic = plt.imshow(im, alpha=0.8)  # alpha顯示
+pic = plt.imshow(im, alpha=0.8)  # 使用 alpha
 
 x_st = 20
 y_st = 20
@@ -1570,10 +1568,26 @@ vertices.append((0, 0))
 patch = patches.Polygon(vertices, closed=True, fill=False, linewidth=2, color="g")
 pic.axes.add_patch(patch)
 
-plt.show()
-
+show()
+'''
 print("------------------------------------------------------------")  # 60個
 
+
+plt.plot([9, 9.2, 9.6, 9.2, 6.7, 7, 7.6], [9.0, 9.2, 9.2, 9.2, 7.1, 7.4, 7.5], "yx")
+plt.plot(
+    [7.2, 7.3, 7.2, 7.3, 7.2, 7.3, 7.3], [10.3, 10.5, 9.2, 10.2, 9.7, 10.1, 10.1], "g."
+)
+plt.plot([7], [9], "r^")
+
+circle1 = plt.Circle((7, 9), 1.2, color="#aaaaaa")
+plt.gcf().gca().add_artist(circle1)
+plt.axis([6, 11, 6, 11])
+
+plt.xlabel("W cm")
+plt.ylabel("H cm")
+plt.legend(("Orange", "Lemons"), loc="upper right")
+
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1600,7 +1614,7 @@ plt.yticks(())  # ignore yticks
 # plt.axis("off")
 # plt.axis("off")  # 隱藏坐標軸
 
-# plt.title("標題在特定位置", size="x-large", y=-0.1)  # 顯示圖片描述
+# plt.title("標題在特定位置", size="x-large", y=-0.1)
 
 plt.title("標題在特定位置", size=30, x=0.0, y=0.0)
 
