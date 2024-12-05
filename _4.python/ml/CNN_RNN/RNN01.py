@@ -5,7 +5,6 @@ RNN 是一種「有記憶」的神經網路, 非常適合時間序列啦, 或是
 
 我們來看看怎麼樣用 RNN 做電影評論的「情意分析」,
 也就是知道一則評論究竟是「正評」還是「負評」。
-
 """
 
 print("------------------------------------------------------------")  # 60個
@@ -39,14 +38,36 @@ from tensorflow.keras.layers import Dense, Embedding
 from tensorflow.keras.layers import LSTM
 
 # from tensorflow.keras.datasets import imdb
-from keras.datasets import imdb
 
+""" imdb 資料在
+https://storage.googleapis.com/tensorflow/tf-keras-datasets/imdb.npz
+"""
+
+
+""" TBD
+# 讀取 本地檔案
+imdb_npz_filename = "C:/_git/vcs/_big_files/imdb.npz"
+
+imdb = np.load(imdb_npz_filename)
+
+x_train, y_train = imdb["x_train"], imdb["y_train"]
+x_test, y_test = imdb["x_test"], imdb["y_test"]
+
+imdb.close()
+"""
+
+#(x_train, y_train), (x_test, y_test) = imdb.load_data(num_words=10000)
+
+
+
+#from keras.datasets import imdb
+#(x_train, y_train), (x_test, y_test) = imdb.load_data(num_words=10000)
 # 2. 讀入數據
 # 讀入 IMDB 電影數據庫影評的部份。
 
 # 要注意這裡我們限制只選「最常用」1 萬字, 也就是超過這範圍的就當不存在。
 # 這是文字分析常會做的事。
-(x_train, y_train), (x_test, y_test) = imdb.load_data(num_words=10000)
+
 
 print("訓練總筆數:", len(x_train))
 print("測試總筆數:", len(x_test))

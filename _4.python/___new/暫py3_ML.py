@@ -1,0 +1,245 @@
+
+
+
+"""
+AI 三步驟
+    打造函數學習機
+    fit
+    predict
+"""
+
+# 接著進入 AI 建模三部曲。
+
+# step 1. 開一台「線性迴歸機」
+# step 2. fit 學習、訓練
+# step 3. predict 預測
+
+
+常見的人工智慧的技術(4)
+1.機器學習 Machine Learning
+2.自然語言處理 Natural Language Processing, NLP
+3.影像處理 Image Processing 圖像分類、圖像分割、物體識別、圖像生成、圖像風格轉換
+4.語言處理 Speech Processing 語音辨識Speech Recognition 語音合成 Speech Synthesis
+
+
+機器學習 Machine Learning
+1. 監督式學習 supervised learning
+	分類學習 classification learning / 回歸學習 regression learning
+	傳統監督式學習模型(6)
+	1. 線性迴歸 linear regression
+	2. 邏輯迴歸 logistic regression
+	3. 決策樹 decision tree
+	4. 隨機森林 random forest
+	5. 支持向量機 support vector machines, SVM
+	6. 單純貝氏分類器 naive Bayes classifier
+2. 非監督式學習 unsupervised learning
+	1. 分群 clustering
+	2. 分布密度估計 density estimation
+	3. 維度約簡 dimensionality reduction
+3. 半監督式學習 semi-supervised learning
+4. 強化學習 reinforcement learning
+
+
+深度學習的基本神經網路類型
+1. 前饋神經網路 Feedforward Neural Network, FNN
+2. 卷積神經網路 Convolutional Neural Network, CNN
+3. 循環神經網路 Recurrent Neural Network, RNN
+
+基於編碼器的神經網路 BERT
+BERT :從 Transformer生成的雙向編碼器表示技術
+
+
+基於解碼器的神經網路 GPT
+Generative Pre-training Transformer
+
+YOLO(You Only Look Once) 是一個即時物件偵測網路
+
+生成網路
+生成對抗網路 Generative Adversarial Networks, GANs
+穩定擴散網路 Stable Diffusion
+
+圖神經網路 Graph Neural Networks, GNN
+
+
+Scikit-learn的基本功能主要被分為六大部分：
+1. 分類（Classification），
+2. 回歸（Regression），
+3. 集群(聚類)（Clustering）
+4. 數據降維（Dimensionality reduction）
+5. 模型選擇（Model selection）
+6. 數據前置處理（Preprocessing）。
+
+
+PCA:主成分分析（Principal Component Analysis）
+1. 載入資料
+2. 資料清理/探索/分析
+3. 進行特徵工程
+4. 資料分割
+5. 選擇演算法
+6. 模型訓練
+7. 模型評估
+
+# 計算準確率
+
+# 混淆矩陣
+
+# 混淆矩陣圖
+不進行特徵縮放
+
+# 計算準確率
+
+
+# 8. 模型評估，暫不進行
+
+# 9. 模型佈署
+
+# 模型存檔
+
+# 10.模型預測
+
+
+
+
+
+
+
+隨機森林(Random Forest)
+
+隨機森林(Random Forest)是用隨機選取部分資料的方式 建立多棵決策數，
+每一棵樹都會有自己的預測結果，之後再進行多數決，決定最後的預測結果。
+
+
+集群的應用
+影像壓縮(Image Compression)
+
+利用集群將相近的顏色以質心取代，就可以達到減色的效果，減色後可以較少的位元來儲存或傳輸影像，達到影像壓縮的效益。
+
+
+各種演算法
+
+迴歸類：
+LinearRegression
+SimpleLinearRegression
+SMOreg
+
+決策樹＋迴歸：
+M5P
+
+決策樹：
+RandomTree
+REPTree
+
+
+
+
+
+線性迴歸（英語：linear regression）
+是利用稱為線性迴歸方程式的最小平方函數對一個或多個自變數和應變數之間關係進行建模的一種迴歸分析。
+這種函數是一個或多個稱為迴歸係數的模型參數的線性組合。
+只有一個自變數的情況稱為簡單迴歸，
+大於一個自變數情況的叫做多元迴歸（multivariable linear regression）。
+
+
+
+
+
+    有监督学习
+        数据预处理
+        简单线性回归
+        多元线性回归
+        逻辑回归
+        k近邻法(k-NN)
+        支持向量机(SVM)
+        决策树
+        随机森林
+    无监督学习
+        K-均值聚类
+        层次聚类
+
+
+特徵資料（花萼長、寬等等）
+標籤	屬種。
+
+
+
+
+
+
+
+1. 數據
+2. 分類
+3. 函數學習機
+4. 學習訓練.fit 學習訓練 模型訓練
+5. 預測.predit預測 模型計分
+計算準確率
+6. 儲存預測模型/讀取預測模型並預測
+7. 畫圖
+
+# 8. 模型評估，暫不進行
+# 9. 模型佈署，暫不進行
+
+
+建立資料
+整理資料
+特徵工程
+資料分割
+特徵縮放
+選擇演算法
+
+做法 :
+1. 製做一個 K-Means 分類器
+2. 學習訓練.fit
+3: 預測.predict
+
+
+
+
+print("------------------------------------------------------------")	#60個
+
+
+
+print("------------------------------------------------------------")	#60個
+
+
+
+
+print("------------------------------------------------------------")	#60個
+
+
+lost
+1. UCI波士頓的房價資料集 (https://archive.ics.uci.edu/ml/machine-learning-databases/housing/)
+Home - UCI Machine Learning Repository
+https://archive.ics.uci.edu/
+
+
+
+print("------------------------------------------------------------")	#60個
+
+
+
+
+
+Kaggle Cats and Dogs Dataset
+
+https://www.microsoft.com/en-us/download/details.aspx?id=54765
+https://www.microsoft.com/en-us/download/details.aspx?id=54765
+
+
+
+print("------------------------------------------------------------")	#60個
+
+
+
+print("------------------------------------------------------------")	#60個
+
+
+
+
+print("------------------------------------------------------------")	#60個
+
+
+
+print("------------------------------------------------------------")	#60個
+
+
+

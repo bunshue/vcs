@@ -1,7 +1,4 @@
 
-
-
-
 滑鼠 event 與 flag 列表
 
 當滑鼠在指定視窗中滑動進行某些行為，都會觸發一些事件，相關事件列表如下：
@@ -32,8 +29,6 @@
 
 """
 
-
-
 在 python2.x 中，使用 python3.x 的寫法:
 
 from __future__ import print_function
@@ -42,70 +37,11 @@ from __future__ import with_statement
 from __future__ import absolute_import
 from __future__ import unicode_literals
 
-    有监督学习
-        数据预处理
-        简单线性回归
-        多元线性回归
-        逻辑回归
-        k近邻法(k-NN)
-        支持向量机(SVM)
-        决策树
-        随机森林
-    无监督学习
-        K-均值聚类
-        层次聚类
-
-
-特徵資料（花萼長、寬等等）
-標籤	屬種。
-
-
-
-
-
-
-
-1. 數據
-2. 分類
-3. 函數學習機
-4. 學習訓練.fit 學習訓練 模型訓練
-5. 預測.predit預測 模型計分
-計算準確率
-6. 儲存預測模型/讀取預測模型並預測
-7. 畫圖
-
-# 8. 模型評估，暫不進行
-# 9. 模型佈署，暫不進行
-
-
-建立資料
-整理資料
-特徵工程
-資料分割
-特徵縮放
-選擇演算法
-
-做法 :
-1. 製做一個 K-Means 分類器
-2. 學習訓練.fit
-3: 預測.predict
-
-
-
-
-
-程式內不允許有 \ 反切
-
 print("------------------------------------------------------------")  # 60個
-
-
-
 
 #useless
 mpl.rcParams["font.sans-serif"] = ["Microsoft YaHei"]
 mpl.rcParams["axes.unicode_minus"] = False
-
-
 
 
 from google.colab import drive
@@ -122,9 +58,6 @@ df.head()
 
 df.to_excel('closeprice.xls')
 
-
-
-
 pandas.plot是matplotlib.pyplot.plot的简单包装
 
 .ix is deprecated. Please use
@@ -132,14 +65,10 @@ pandas.plot是matplotlib.pyplot.plot的简单包装
 .iloc for positional indexing
 
 
-
-
 #np算4分位數
 print("25th percentile =", np.percentile(height, 25))
 print("Median =", np.median(height))
 print("75th percentile =", np.percentile(height, 75))
-
-
 
 import matplotlib.pyplot as plt
 也就是說，我們繪圖實際上用的是matplotlib包的pyplot模塊。
@@ -213,8 +142,6 @@ tu.home()
 tu.ht()
 
 
-
-
 print("------------------------------------------------------------")	#60個
 
 print(dir(random))
@@ -252,36 +179,7 @@ print("------------------------------------------------------------")	#60個
 
 用 hist 與 boxplot畫 常態分佈
 
-
-
-
-
 print("------------------------------------------------------------")	#60個
-
-
-Kaggle Cats and Dogs Dataset
-
-https://www.microsoft.com/en-us/download/details.aspx?id=54765
-https://www.microsoft.com/en-us/download/details.aspx?id=54765
-
-
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Graphics g = this.CreateGraphics();
-            Size s = this.Size;
-            Bitmap bitmap1 = new Bitmap(s.Width, s.Height, g);
-            Graphics memoryGraphics = Graphics.FromImage(bitmap1);
-            memoryGraphics.CopyFromScreen(this.Location.X, this.Location.Y, 0, 0, s);
-
-            pictureBox1.Image = bitmap1;
-
-
-
-            //e.Graphics.DrawImage(memoryImage, 0, 0);
-
-
-        }
 
 print("------------------------------------------------------------")	#60個
 
@@ -882,12 +780,6 @@ os.chdir('/content/drive/MyDrive/Colab Notebooks')  # Colab 換路徑使用
 
     elif k == ord('r'):
         draw = np.zeros((h,w,4), dtype='uint8')
-
-lost
-1. UCI波士頓的房價資料集 (https://archive.ics.uci.edu/ml/machine-learning-databases/housing/)
-Home - UCI Machine Learning Repository
-https://archive.ics.uci.edu/
-
 
 GET  爬蟲，取得網站的靜態資料
 POST 爬蟲，提出要求向對方索取資料
