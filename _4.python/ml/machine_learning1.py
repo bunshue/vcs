@@ -1,8 +1,3 @@
-"""
-Scikit-learn new
-
-"""
-
 print("------------------------------------------------------------")  # 60個
 
 # 共同
@@ -27,6 +22,13 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 print("------------------------------------------------------------")  # 60個
 
 from sklearn import preprocessing
+
+
+def show():
+    return
+    plt.show()
+    pass
+
 
 print("------------------------------------------------------------")  # 60個
 
@@ -561,7 +563,7 @@ df["Age"].plot(kind="hist", bins=15)
 df = titanic[titanic.Survived == 1]
 df["Age"].plot(kind="hist", bins=15)
 
-plt.show()
+show()
 
 print("------------------------------")  # 30個
 
@@ -572,30 +574,29 @@ df.plot(kind="bar", ax=axes[0])
 df = titanic[["Survived", "Died"]].groupby(titanic["Sex"]).mean()
 df.plot(kind="bar", ax=axes[1])
 
-plt.show()
+show()
 
 print("------------------------------")  # 30個
 
 df = titanic[["Survived", "Died"]].groupby(titanic["PClass"]).sum()
 df.plot(kind="bar")
 
-plt.show()
+show()
 
 print("------------------------------")  # 30個
 
 df = titanic[["Survived", "Died"]].groupby(titanic["PClass"]).mean()
 df.plot(kind="bar")
 
-plt.show()
+show()
 
 print("------------------------------")  # 30個
-
+"""
 df = titanic.drop("Died", axis=1)
 print("係數矩陣 :", df.corr())
 
-plt.show()
-
-
+show()
+"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 

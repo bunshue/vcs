@@ -1,11 +1,9 @@
 """
-機器學習 K-Means
+機器學習 K-Means 自動分類
 
 K-平均演算法（英文：k-means clustering）
 
-K-Means 自動分類
-
-# K-Means 會自動分類!
+# 無監督學習
 # 我們介紹一個很好用的 unsupervised learning, 叫 K-Means。
 # 我們可以指定把我們資料分成幾類, 然後它就會快速分好!
 
@@ -13,7 +11,6 @@ K-means Clustering 集群分析
 
 k-平均演算法（英文：k-means clustering，以下簡稱為 k-means ）
 是一種非監督式的學習方法，其主要的目標是對未標記的資料進行分群。
-
 """
 print("------------------------------------------------------------")  # 60個
 
@@ -50,6 +47,7 @@ def show():
     pass
 
 
+"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -331,34 +329,49 @@ do_k_means()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
+"""
 print("最簡易 K-平均演算法(KMeans) 任意資料分四群並畫圖")
 
+N = 100
 print("任意隨機資料")
-X = np.random.rand(50, 2)
+X = np.random.rand(N, 2)
 
-# 畫出來
-plt.scatter(X[:, 0], X[:, 1], s=50)
-show()
-
-CLUSTERS = 4  # 要分成的群數
+CLUSTERS = 3  # 要分成的群數
 clf = KMeans(n_clusters=CLUSTERS)  # K-平均演算法
-
 clf.fit(X)  # 學習訓練.fit
 
-# 畫出來看一下結果，好像還真得有模有樣的
+print("群集類別標籤(訓練好的結果) :\n", clf.labels_)
+print("集群中心的坐標:", clf.cluster_centers_)
+print("分群準確性:", clf.inertia_)
+
+# 預測600點
+N = 600
+X_test = np.random.rand(N, 2)
+y_pred = clf.predict(X_test)
+
+plt.figure(figsize=(12, 6))
+
+plt.subplot(131)
+plt.scatter(X[:, 0], X[:, 1], s=50)
+plt.title("原始資料")
+
+plt.subplot(132)
 plt.scatter(X[:, 0], X[:, 1], c=clf.labels_)
-show()
+plt.title("KMeans分成3群")
 
-# 放一些新的資料進去看看，點變多了！
-a = np.random.rand(20, 2)
-X_add = np.row_stack((X, a))
-plt.scatter(X_add[:, 0], X_add[:, 1])
-show()
+plt.subplot(133)
+plt.scatter(X_test[:, 0], X_test[:, 1], c=y_pred)
 
-# 看一看我們的 k-Means 分的怎麼樣
-predict_label = clf.predict(X_add)
-plt.scatter(X_add[:, 0], X_add[:, 1], c=predict_label)
+# 畫分區域ST
+x0 = y0 = np.arange(0, 1.02, 0.02)
+xm, ym = np.meshgrid(x0, y0)
+P = np.c_[xm.ravel(), ym.ravel()]
+z = clf.predict(P)  # 預測.predict
+Z = z.reshape(xm.shape)
+plt.contourf(xm, ym, Z, alpha=0.3, cmap="Paired")
+# 畫分區域SP
+
+plt.title("再預測")
 
 show()
 
@@ -377,7 +390,7 @@ X = np.random.rand(N, 2)  # N X 2 亂數陣列
 # 建立資料二, 使用 make_blobs
 N = 100
 M = 2  # n_features, 特徵數(資料的維度)
-GROUPS = 3  # centers, 分群數
+GROUPS = 4  # centers, 分群數
 
 print("make_blobs,", N, "個樣本, ", M, "個特徵, 分成", GROUPS, "群")
 X, y, centers = make_blobs(
@@ -395,9 +408,8 @@ print(GROUPS, "群 的中心點 :")
 print(centers)
 print("資料的維度", X.shape, y.shape)
 
-CLUSTERS = 3  # 要分成的群數
+CLUSTERS = 4  # 要分成的群數
 clf = KMeans(n_clusters=CLUSTERS, random_state=9487)  # K-平均演算法
-
 clf.fit(X)  # 學習訓練.fit
 
 print("群集類別標籤(訓練好的結果) :\n", clf.labels_)
@@ -425,6 +437,17 @@ plt.figure(figsize=(12, 6))
 
 plt.subplot(131)
 plt.scatter(X[:, 0], X[:, 1], c="b")
+
+# 標記 make_blobs 中心
+plt.scatter(
+    centers[:, 0],
+    centers[:, 1],
+    marker=".",
+    s=200,
+    c="r",
+    alpha=0.8,
+)
+
 plt.axis([-15, 15, -15, 15])
 plt.title("原始資料 3 群")
 

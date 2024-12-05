@@ -34,6 +34,7 @@ ssl._create_default_https_context = ssl._create_stdlib_context
 
 print("------------------------------------------------------------")  # 60個
 
+from common1 import *
 import sklearn
 import sklearn.linear_model
 from sklearn import datasets
@@ -43,8 +44,6 @@ from sklearn.datasets import make_blobs
 
 import matplotlib
 import matplotlib as mpl
-
-print("------------------------------------------------------------")  # 60個
 
 
 def show():
@@ -5317,7 +5316,7 @@ plt.title(" LOGISTIC(Training set)")
 plt.xlabel(" Age")
 plt.ylabel(" Estimated Salary")
 plt.legend()
-plt.show()
+show()
 
 X_set, y_set = X_test, y_test
 X1, X2 = np.meshgrid(
@@ -5346,7 +5345,7 @@ plt.title(" LOGISTIC(Test set)")
 plt.xlabel(" Age")
 plt.ylabel(" Estimated Salary")
 plt.legend()
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -5520,7 +5519,7 @@ plt.title("SVM (Training set)")
 plt.xlabel("Age")
 plt.ylabel("Estimated Salary")
 plt.legend()
-plt.show()
+show()
 
 
 # 第九步：测试集合结果可视化
@@ -5553,7 +5552,7 @@ plt.xlabel("Age")
 plt.ylabel("Estimated Salary")
 plt.legend()
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -5616,7 +5615,7 @@ plt.title("Decision Tree Classification (Training set)")
 plt.xlabel("Age")
 plt.ylabel("Estimated Salary")
 plt.legend()
-plt.show()
+show()
 
 # Visualising the Test set results
 from matplotlib.colors import ListedColormap
@@ -5647,7 +5646,7 @@ plt.xlabel("Age")
 plt.ylabel("Estimated Salary")
 plt.legend()
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -5712,7 +5711,7 @@ plt.title("Random Forest Classification (Training set)")
 plt.xlabel("Age")
 plt.ylabel("Estimated Salary")
 plt.legend()
-plt.show()
+show()
 
 from matplotlib.colors import ListedColormap
 
@@ -5741,7 +5740,7 @@ plt.title("Random Forest Classification (Test set)")
 plt.xlabel("Age")
 plt.ylabel("Estimated Salary")
 plt.legend()
-plt.show()
+show()
 
 
 print("------------------------------------------------------------")  # 60個
@@ -5766,7 +5765,7 @@ for category in CATEGORIES:
             os.path.join(path, img), cv2.IMREAD_GRAYSCALE
         )  # 转化成array
         plt.imshow(img_array, cmap="gray")  # 转换成图像展示
-        plt.show()  # display!
+        show()
 
         break  # 我们作为演示只展示一张，所以直接break了
     break  # 同上
@@ -5786,7 +5785,7 @@ IMG_SIZE = 100
 
 new_array = cv2.resize(img_array, (IMG_SIZE, IMG_SIZE))
 plt.imshow(new_array, cmap="gray")
-plt.show()
+show()
 
 # 接下来，我们将要创建所有这些培训数据，但是，首先，我们应该留出一些图像进行最终测试。
 # 我将手动创建一个名为Testing的目录，然后在其中创建2个目录，一个用于Dog，一个用于Cat。
@@ -5814,6 +5813,8 @@ def create_training_data():
             #    print("general exception", e, os.path.join(path,img))
 
 
+'''
+#以下 久
 create_training_data()
 
 print(len(training_data))
@@ -5919,6 +5920,7 @@ model.add(Dense(1))
 model.add(Activation("sigmoid"))
 
 model.compile(loss="binary_crossentropy", optimizer="adam", metrics=["accuracy"])
+'''
 
 ''' 久
 model.fit(X, y, batch_size=32, epochs=3, validation_split=0.3)  # 學習訓練.fit

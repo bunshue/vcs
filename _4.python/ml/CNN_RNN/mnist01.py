@@ -78,6 +78,12 @@ print("------------------------------------------------------------")  # 60個
 
 from common2 import *
 
+
+def show():
+    plt.show()
+    pass
+
+
 import tensorflow as tf
 
 # from keras.datasets import mnist  # same
@@ -2281,7 +2287,7 @@ mnist = tf.keras.datasets.mnist
 print(x_train[0])
 
 plt.imshow(x_train[0], cmap=plt.cm.binary)
-plt.show()
+show()
 
 print("答案")
 print(y_train[0])
@@ -2293,7 +2299,7 @@ x_test = tf.keras.utils.normalize(x_test, axis=1)
 print(x_train[0])
 
 plt.imshow(x_train[0], cmap=plt.cm.binary)
-plt.show()
+show()
 
 
 model = tf.keras.models.Sequential()
@@ -2319,8 +2325,7 @@ print(y_pred)
 print(np.argmax(y_pred[0]))
 
 plt.imshow(x_test[0], cmap=plt.cm.binary)
-plt.show()
-
+show()
 
 # 保存模型
 model.save("tmp_epic_num_reader.model")
@@ -2336,16 +2341,6 @@ print(np.argmax(y_pred[0]))
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-
-# 迭代次數
-ITERATIONS = 50
-
-print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-
 model = keras.Sequential([keras.layers.Dense(units=1, input_shape=[1])])
 model.compile(optimizer="sgd", loss="mean_squared_error")
 
@@ -2357,6 +2352,7 @@ print(xs)
 print(type(ys))
 print(ys)
 
+ITERATIONS = 50  # 迭代次數
 model.fit(xs, ys, epochs=ITERATIONS)
 
 print("keras 預測")
@@ -2381,14 +2377,13 @@ xmin, xmax, ymin, ymax = -1, 11, -1, 11
 plt.axis([xmin, xmax, ymin, ymax])  # 設定各軸顯示範圍
 plt.legend()
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
 """
-
 import tensorflow.examples.tutorials.mnist.input_data as input_data
  
 mnist = input_data.read_data_sets('./database2/', one_hot=True)#相对路径
@@ -2450,9 +2445,9 @@ print("------------------------------------------------------------")  # 60個
 X = np.linspace(-1, 1, 200)
 np.random.shuffle(X)  # randomize the data
 Y = 0.5 * X + 2 + np.random.normal(0, 0.05, (200,))
-# plot data
+
 plt.scatter(X, Y)
-plt.show()
+show()
 
 X_train, Y_train = X[:160], Y[:160]  # first 160 data points
 X_test, Y_test = X[160:], Y[160:]  # last 40 data points
@@ -2480,11 +2475,10 @@ print("test cost:", cost)
 W, b = model.layers[0].get_weights()
 print("Weights=", W, "\nbiases=", b)
 
-# plotting the prediction
 Y_pred = model.predict(X_test)  # 取得每一個結果的機率
 plt.scatter(X_test, Y_test)
 plt.plot(X_test, Y_pred)
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -2619,7 +2613,7 @@ def get_batch():
     res = np.cos(xs)
     BATCH_START += TIME_STEPS
     # plt.plot(xs[0, :], res[0, :], 'r', xs[0, :], seq[0, :], 'b--')
-    # plt.show()
+    show()
     return [seq[:, :, np.newaxis], res[:, :, np.newaxis], xs]
 
 
@@ -2715,11 +2709,10 @@ autoencoder.compile(optimizer="adam", loss="mse")
 # training
 autoencoder.fit(x_train, x_train, nb_epoch=20, batch_size=256, shuffle=True)
 
-# plotting
 encoded_imgs = encoder.predict(x_test)
 plt.scatter(encoded_imgs[:, 0], encoded_imgs[:, 1], c=y_test)
 plt.colorbar()
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

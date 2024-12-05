@@ -23,14 +23,13 @@ Iris 鳶尾花數據庫 150筆資料 4個欄位 3種品種 每種50筆資料
 以Iris dataset為例，鳶尾花資料集是非常著名的生物資訊資料集之一，
 取自美國加州大學歐文分校的機器學習資料庫http://archive.ics.uci.edu/ml/datasets/Iris
 資料的筆數為150筆，共有五個欄位：
+#sepal_length, sepal_width, petal_length, petal_width, species
 1. 花萼長度(Sepal Length)：計算單位是公分。
 2. 花萼寬度(Sepal Width)：計算單位是公分。
 3. 花瓣長度(Petal Length) ：計算單位是公分。
 4. 花瓣寬度(Petal Width)：計算單位是公分。
 5. 類別(Class)：可分為Setosa，Versicolor和Virginica三個品種。
-
 """
-
 print("------------------------------------------------------------")  # 60個
 
 # 共同
@@ -86,15 +85,6 @@ print("------------------------------------------------------------")  # 60個
 filename = "data/iris_sample.csv"
 
 iris = pd.read_csv(filename)
-
-"""
-共有五個欄位：
-1. 花萼長度(Sepal Length)：計算單位是公分。
-2. 花萼寬度(Sepal Width)：計算單位是公分。
-3. 花瓣長度(Petal Length) ：計算單位是公分。
-4. 花瓣寬度(Petal Width)：計算單位是公分。
-5. 類別(Class)：可分為Setosa，Versicolor和Virginica三個品種。
-"""
 
 print("資料")
 print(iris)
@@ -155,16 +145,6 @@ print("------------------------------------------------------------")  # 60個
 filename = "data/iris_sample.csv"
 
 iris = pd.read_csv(filename)
-"""
-#sepal_length, sepal_width, petal_length, petal_width, species
-共有五個欄位：
-1. 花萼長度(Sepal Length)：計算單位是公分。
-2. 花萼寬度(Sepal Width)：計算單位是公分。
-3. 花瓣長度(Petal Length) ：計算單位是公分。
-4. 花瓣寬度(Petal Width)：計算單位是公分。
-5. 類別(Class)：可分為Setosa，Versicolor和Virginica三個品種。
-"""
-
 # print('全部資料')
 # print(iris)
 
@@ -811,83 +791,6 @@ plt.ylabel("花瓣寬度(Petal Width)")
 show()
 
 print("------------------------------------------------------------")  # 60個
-
-from sklearn import neighbors
-
-iris = datasets.load_iris()
-
-X = pd.DataFrame(iris.data, columns=iris.feature_names)
-X.columns = ["sepal_length", "sepal_width", "petal_length", "petal_width"]
-target = pd.DataFrame(iris.target, columns=["target"])
-y = target["target"]
-
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
-XTrain, XTest, yTrain, yTest = train_test_split(X, y, test_size=0.2)
-# 訓練組8成, 測試組2成
-
-k = 3
-
-knn = neighbors.KNeighborsClassifier(n_neighbors=k)
-knn.fit(X, y)
-
-print("準確率:", knn.score(XTest, yTest))
-print("---------------------------")
-print(knn.predict(XTest))
-print("---------------------------")
-print(yTest.values)
-
-print("------------------------------------------------------------")  # 60個
-
-from sklearn import neighbors
-
-iris = datasets.load_iris()
-
-X = pd.DataFrame(iris.data, columns=iris.feature_names)
-X.columns = ["sepal_length", "sepal_width", "petal_length", "petal_width"]
-target = pd.DataFrame(iris.target, columns=["target"])
-y = target["target"]
-
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
-XTrain, XTest, yTrain, yTest = train_test_split(X, y, test_size=0.2)
-# 訓練組8成, 測試組2成
-
-Ks = np.arange(1, round(0.2 * len(XTrain) + 1))
-accuracies = []
-for k in Ks:
-    knn = neighbors.KNeighborsClassifier(n_neighbors=k)
-    knn.fit(X, y)
-    accuracy = knn.score(XTest, yTest)
-    accuracies.append(accuracy)
-
-plt.plot(Ks, accuracies)
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-
-from sklearn import neighbors
-from sklearn.model_selection import cross_val_score
-
-iris = datasets.load_iris()
-
-X = pd.DataFrame(iris.data, columns=iris.feature_names)
-X.columns = ["sepal_length", "sepal_width", "petal_length", "petal_width"]
-target = pd.DataFrame(iris.target, columns=["target"])
-y = target["target"]
-
-Ks = np.arange(1, round(0.2 * len(X) + 1))
-accuracies = []
-for k in Ks:
-    knn = neighbors.KNeighborsClassifier(n_neighbors=k)
-    scores = cross_val_score(knn, X, y, scoring="accuracy", cv=10)
-    accuracies.append(scores.mean())
-
-plt.plot(Ks, accuracies)
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-
 print("------------------------------------------------------------")  # 60個
 
 from sklearn import tree
@@ -1045,7 +948,7 @@ iris = load_iris()
 
 """
 print("另存新檔");
-filename = 'aaaa.csv'
+filename = 'tmp_aaaa.csv'
 np.savetxt(filename, iris.data, delimiter=',')
 print("寫入完成")
 """
@@ -1611,80 +1514,6 @@ print(Y_target)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.preprocessing import StandardScaler
-
-iris = load_iris()
-
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
-x_train, x_test, y_train, y_test = train_test_split(
-    iris.data, iris.target, test_size=0.2
-)
-# 訓練組8成, 測試組2成
-
-std = StandardScaler()
-
-x_train = std.fit_transform(x_train)
-
-x_test = std.transform(x_test)
-
-knn = KNeighborsClassifier(n_neighbors=5)
-
-knn.fit(x_train, y_train)
-
-print("將 模型存檔 使用 joblib")
-joblib.dump(knn, "tmp_my_model_iris.joblib")
-
-print("------------------------------")  # 60個
-
-from sklearn.preprocessing import StandardScaler
-
-iris = load_iris()
-
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
-x_train, x_test, y_train, y_test = train_test_split(
-    iris.data, iris.target, test_size=0.2
-)
-# 訓練組8成, 測試組2成
-
-std = StandardScaler()
-
-x_train = std.fit_transform(x_train)
-
-x_test = std.transform(x_test)
-
-print("讀取模型")
-knnmodel = joblib.load("tmp_my_model_iris.joblib")
-
-score = knnmodel.score(x_test, y_test)
-print(score)
-
-print("------------------------------------------------------------")  # 60個
-
-iris = load_iris()
-
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
-x_train, x_test, y_train, y_test = train_test_split(
-    iris.data, iris.target, test_size=0.2
-)
-# 訓練組8成, 測試組2成
-
-std = StandardScaler()
-
-x_train = std.fit_transform(x_train)
-
-x_test = std.transform(x_test)
-
-knn = KNeighborsClassifier(n_neighbors=5)
-
-knn.fit(x_train, y_train)
-
-y_predict = knn.predict(x_test)
-print("預測結果：{}".format(y_predict))
-print("準確率：{}".format(knn.score(x_test, y_test)))
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
 
 print("模型篩選特徵")
 

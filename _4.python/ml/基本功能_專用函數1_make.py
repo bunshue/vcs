@@ -160,6 +160,8 @@ plt.scatter(centers[:, 0], centers[:, 1], marker="*", s=200, color="r")
 plt.axis([-15, 15, -15, 15])
 plt.title("sd=6")
 
+plt.suptitle("各種 make_blobs")
+
 plt.show()
 print("------------------------------------------------------------")  # 60個
 
@@ -268,6 +270,7 @@ print("------------------------------")  # 30個
 plt.subplot(236)
 plt.title("xxx")
 
+plt.suptitle("各種 make_xxxx")
 plt.show()
 
 print("------------------------------------------------------------")  # 60個

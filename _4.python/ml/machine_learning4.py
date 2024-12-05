@@ -1,7 +1,3 @@
-"""
-Scikit-learn 詳解與企業應用_機器學習最佳入門與實戰
-
-"""
 print("------------------------------------------------------------")  # 60個
 
 # 共同
@@ -29,9 +25,16 @@ import sklearn.linear_model
 from sklearn import datasets
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
 
+def show():
+    return
+    plt.show()
+    pass
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+'''
 # 08_02_k_fold_cross_validation
 # Scikit-learn K折交叉驗證法
 
@@ -288,13 +291,13 @@ ConfusionMatrixDisplay.from_predictions(
     y_true, y_pred, labels=[1, 0], display_labels=["真", "偽"]
 )
 
-plt.show()
+show()
 
 # 方法 2
 cm = confusion_matrix(y_true, y_pred, labels=[1, 0])
 disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=["真", "偽"])
 disp.plot()
-plt.show()
+show()
 
 # 方法 3
 fig, ax = plt.subplots(figsize=(5, 5))
@@ -314,7 +317,7 @@ ax.set_yticks(range(cm.shape[1]), labels=["真", "偽"], fontsize=14)
 # 設定標籤
 plt.xlabel("Predicted label", fontsize=16)
 plt.ylabel("True label", fontsize=16)
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -336,13 +339,13 @@ print(cc)
 from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
 
 ConfusionMatrixDisplay.from_predictions(y_true, y_pred)
-plt.show()
+show()
 
 # 方法 2
 cm = confusion_matrix(y_true, y_pred)
 disp = ConfusionMatrixDisplay(confusion_matrix=cm)
 disp.plot()
-plt.show()
+show()
 
 # 方法 3
 fig, ax = plt.subplots(figsize=(5, 5))
@@ -362,7 +365,7 @@ for i in range(cm.shape[0]):
 # 設定標籤
 plt.xlabel("Predicted label", fontsize=16)
 plt.ylabel("True label", fontsize=16)
-plt.show()
+show()
 
 # 繪製混淆矩陣
 
@@ -399,7 +402,7 @@ for i, (title, normalize) in enumerate(titles_options):
     #     cm.plot(ax=axes[i])
     cm.ax_.set_title(title, fontsize=16)
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -419,7 +422,7 @@ cc = df.Class.value_counts()
 print(cc)
 
 sns.countplot(x="Class", data=df)
-plt.show()
+show()
 
 # 模型訓練與預測
 
@@ -561,7 +564,7 @@ plt.xlim([0, 1])
 plt.ylim([0, 1])
 plt.ylabel("真陽率")
 plt.xlabel("偽陽率")
-plt.show()
+show()
 
 # Scikit-Learn 作法
 
@@ -593,7 +596,7 @@ plt.xlim([0, 1])
 plt.ylim([0, 1])
 plt.ylabel("真陽率")
 plt.xlabel("偽陽率")
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -654,7 +657,7 @@ plt.xlim([0, 1])
 plt.ylim([0, 1])
 plt.ylabel("真陽率")
 plt.xlabel("偽陽率")
-plt.show()
+show()
 
 cc = roc_auc_score(df2.actual, df2.predict)
 print(cc)
@@ -678,7 +681,7 @@ cc = df.Class.value_counts()
 print(cc)
 
 sns.countplot(x="Class", data=df)
-plt.show()
+show()
 
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score
@@ -733,7 +736,7 @@ plt.xlim([0, 1])
 plt.ylim([0, 1])
 plt.ylabel("真陽率")
 plt.xlabel("偽陽率")
-plt.show()
+show()
 
 # 從寬認定詐欺行為
 
@@ -936,7 +939,7 @@ from sklearn.datasets import make_blobs
 
 X_train, true_labels = make_blobs(n_samples=100, centers=5, random_state=42)
 plt.scatter(X_train[:, 0], X_train[:, 1])
-plt.show()
+show()
 
 # 模型訓練
 
@@ -946,7 +949,8 @@ from sklearn.preprocessing import StandardScaler
 X_train = StandardScaler().fit_transform(X_train)
 
 # 訓練
-kmeans = KMeans(n_clusters=5)
+CLUSTERS = 5  # 要分成的群數
+kmeans = KMeans(n_clusters=CLUSTERS)
 kmeans.fit(X_train)
 
 # 模型評估
@@ -968,7 +972,7 @@ plt.plot(
     color="r",
 )
 plt.title("k-means")
-plt.show()
+show()
 
 # 鳶尾花資料集測試
 
@@ -978,7 +982,8 @@ X, y = datasets.load_iris(return_X_y=True)
 X_train = StandardScaler().fit_transform(X)
 
 # 訓練
-kmeans = KMeans(n_clusters=3)
+CLUSTERS = 3  # 要分成的群數
+kmeans = KMeans(n_clusters=CLUSTERS)
 kmeans.fit(X_train)
 
 # 7
@@ -1050,7 +1055,7 @@ from scipy.cluster.hierarchy import dendrogram
 
 row_dendr = dendrogram(row_clusters, labels=labels)
 plt.ylabel("歐幾里德距離", fontsize=14)
-plt.show()
+show()
 
 # 繪製熱力圖
 
@@ -1077,7 +1082,7 @@ cax = axm.matshow(df_rowclust, interpolation="nearest", cmap="hot_r")
 fig.colorbar(cax)
 axm.set_xticklabels([""] + list(df_rowclust.columns))
 axm.set_yticklabels([""] + list(df_rowclust.index))
-plt.show()
+show()
 
 # Scikit-learn AgglomerativeClustering
 
@@ -1135,7 +1140,7 @@ plt.title("Hierarchical Clustering Dendrogram")
 plot_dendrogram(model, truncate_mode="level", p=3)  # 限制 3 層
 plt.ylabel("歐幾里德距離", fontsize=14)
 plt.xlabel("每個集群的筆數", fontsize=14)
-plt.show()
+show()
 
 # 各種距離衡量方式的比較
 
@@ -1188,7 +1193,7 @@ for connectivity in (None, knn_graph):
             )
             plt.tight_layout()
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1214,7 +1219,7 @@ from sklearn.datasets import make_moons
 
 X, y = make_moons(n_samples=200, noise=0.05, random_state=0)
 plt.scatter(X[:, 0], X[:, 1])
-plt.show()
+show()
 
 # 模型訓練，繪製結果
 
@@ -1239,7 +1244,7 @@ plt.scatter(
     label="cluster 2",
 )
 plt.legend()
-plt.show()
+show()
 
 # 另一個範例，參閱Demo of DBSCAN clustering algorithm
 
@@ -1257,7 +1262,7 @@ X = StandardScaler().fit_transform(X)
 
 plt.figure(figsize=(10, 8))
 plt.scatter(X[:, 0], X[:, 1])
-plt.show()
+show()
 
 # 模型訓練
 
@@ -1332,7 +1337,7 @@ for k, col in zip(unique_labels, colors):
     )
 
 plt.title(f"Estimated number of clusters: {n_clusters_}")
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1353,10 +1358,14 @@ print(X[:10])
 
 from sklearn.cluster import KMeans
 
-kmeans = KMeans(4, init="k-means++", n_init=10, random_state=0)
+CLUSTERS = 4  # 要分成的群數
+kmeans = KMeans(CLUSTERS, init="k-means++", n_init=10, random_state=0)
+
 labels = kmeans.fit(X).predict(X)
+
 plt.scatter(X[:, 0], X[:, 1], c=labels, s=40, cmap="viridis")
-plt.show()
+
+show()
 
 # 繪製集群範圍
 
@@ -1381,18 +1390,20 @@ def plot_kmeans(kmeans, X, n_clusters=4, rseed=0, ax=None):
         )
 
 
-kmeans = KMeans(n_clusters=4, init="k-means++", n_init=10, random_state=0)
+CLUSTERS = 4  # 要分成的群數
+kmeans = KMeans(n_clusters=CLUSTERS, init="k-means++", n_init=10, random_state=0)
 plot_kmeans(kmeans, X)
-plt.show()
+show()
 
 # 生成長條型資料
 
 rng = np.random.RandomState(13)
 X_stretched = np.dot(X, rng.randn(2, 2))
 
-kmeans = KMeans(n_clusters=4, init="k-means++", n_init=10, random_state=0)
+CLUSTERS = 4  # 要分成的群數
+kmeans = KMeans(n_clusters=CLUSTERS, init="k-means++", n_init=10, random_state=0)
 plot_kmeans(kmeans, X_stretched)
-plt.show()
+show()
 
 # 改用GMM
 
@@ -1401,7 +1412,7 @@ from sklearn.mixture import GaussianMixture
 gmm = GaussianMixture(n_components=4).fit(X)
 labels = gmm.predict(X)
 plt.scatter(X[:, 0], X[:, 1], c=labels, s=40, cmap="viridis")
-plt.show()
+show()
 
 # 屬於各集群的機率
 
@@ -1450,13 +1461,13 @@ def plot_gmm(gmm, X, label=True, ax=None):
 
 gmm = GaussianMixture(n_components=4, random_state=42)
 plot_gmm(gmm, X)
-plt.show()
+show()
 
 # 使用 GMM對長條型資料進行集群
 
 gmm = GaussianMixture(n_components=4, covariance_type="full", random_state=42)
 plot_gmm(gmm, X_stretched)
-plt.show()
+show()
 
 # 測試非線性資料
 
@@ -1464,25 +1475,25 @@ from sklearn.datasets import make_moons
 
 Xmoon, ymoon = make_moons(200, noise=0.05, random_state=0)
 plt.scatter(Xmoon[:, 0], Xmoon[:, 1])
-plt.show()
+show()
 
 # GMM 集群：設定2個集群
 
 gmm2 = GaussianMixture(n_components=2, covariance_type="full", random_state=0)
 plot_gmm(gmm2, Xmoon)
-plt.show()
+show()
 
 # GMM 集群：設定16個集群
 
 gmm16 = GaussianMixture(n_components=16, covariance_type="full", random_state=0)
 plot_gmm(gmm16, Xmoon, label=False)
-plt.show()
+show()
 
 # 以模型生成資料
 
 Xnew, _ = gmm16.sample(400)
 plt.scatter(Xnew[:, 0], Xnew[:, 1])
-plt.show()
+show()
 
 # 以AIC/BIC決定最佳集群數量
 
@@ -1496,7 +1507,7 @@ plt.plot(n_components, [m.bic(Xmoon) for m in models], label="BIC")
 plt.plot(n_components, [m.aic(Xmoon) for m in models], label="AIC")
 plt.legend(loc="best")
 plt.xlabel("n_components")
-plt.show()
+show()
 
 # 生成手寫阿拉伯數字
 
@@ -1522,7 +1533,7 @@ def plot_digits(data):
 
 
 plot_digits(digits.data)
-plt.show()
+show()
 
 # 降維
 
@@ -1540,7 +1551,7 @@ n_components = np.arange(50, 210, 10)
 models = [GaussianMixture(n, covariance_type="full") for n in n_components]
 aics = [model.fit(data).aic(data) for model in models]
 plt.plot(n_components, aics)
-plt.show()
+show()
 
 # 以AIC決定最佳集群數量=110
 # 設定集群數量=110
@@ -1558,8 +1569,8 @@ print(gmm.converged_)
 data_new, _ = gmm.sample(100)
 digits_new = pca.inverse_transform(data_new)
 plot_digits(digits_new)
-plt.show()
-
+show()
+'''
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -1576,7 +1587,8 @@ from sklearn.cluster import KMeans
 flower = load_sample_image("flower.jpg")
 plt.axis("off")
 plt.imshow(flower)
-plt.show()
+
+show()
 
 # 存檔
 plt.imsave("tmp_flower.jpg", flower)
@@ -1601,7 +1613,8 @@ print(w, h, d)
 image_sample = shuffle(image_array, random_state=42)[:1000]
 
 # K-Means模型訓練， 設定64個集群
-kmeans = KMeans(n_clusters=64, random_state=42).fit(image_sample)
+CLUSTERS = 64  # 要分成的群數
+kmeans = KMeans(n_clusters=CLUSTERS, random_state=42).fit(image_sample)
 
 # 對所有像素進行集群
 labels = kmeans.predict(image_array)
@@ -1635,12 +1648,13 @@ plt.subplot(1, 2, 2)
 plt.axis("off")
 plt.title("重建的影像")
 plt.imshow(reconstruct_image(kmeans.cluster_centers_, labels, w, h))
-plt.show()
+show()
 
 # 再使用K-Means，設定4個集群
 
 # K-Means模型訓練， 設定4個集群
-kmeans = KMeans(n_clusters=4, random_state=42).fit(image_sample)
+CLUSTERS = 4  # 要分成的群數
+kmeans = KMeans(n_clusters=CLUSTERS, random_state=42).fit(image_sample)
 
 # 對所有像素進行集群
 labels = kmeans.predict(image_array)
@@ -1656,7 +1670,7 @@ plt.subplot(1, 2, 2)
 plt.axis("off")
 plt.title("重建的影像")
 plt.imshow(reconstruct_image(kmeans.cluster_centers_, labels, w, h))
-plt.show()
+show()
 
 # 存檔
 plt.imsave(
@@ -1787,14 +1801,14 @@ plt.xticks(range(0, 20, 2))
 plt.xlabel("Number of Clusters")
 plt.ylabel("Score")
 plt.title("Elbow Curve")
-plt.show()
+show()
 
 plt.plot(Nc, wcss)
 plt.xticks(range(0, 20, 2))
 plt.xlabel("Number of Clusters")
 plt.ylabel("wcss")
 plt.title("Elbow Curve")
-plt.show()
+show()
 
 # 分成3群
 
@@ -1857,7 +1871,7 @@ plt.yticks(yticks, cluster_labels + 1)
 plt.ylabel("集群", fontsize=14)
 plt.xlabel("輪廓係數", fontsize=14)
 plt.tight_layout()
-plt.show()
+show()
 
 # 依據輪廓分數找最佳集群數量
 
@@ -1865,7 +1879,7 @@ plt.show()
 from sklearn.metrics import silhouette_score
 
 silhouette_score_list = []
-print("輪廓分數:")
+print("1輪廓分數:")
 for i in range(2, 21):
     km = KMeans(n_clusters=i, init="k-means++", n_init=10, max_iter=300, random_state=0)
     km.fit(X)
@@ -1876,8 +1890,10 @@ for i in range(2, 21):
 print(f"最大值 {np.argmax(silhouette_score_list)+2}: {np.max(silhouette_score_list):.2f}")
 
 for i in range(2, 21):
+    print(i)
+    CLUSTERS = i  # 要分成的群數
     km = KMeans(
-        n_clusters=i, init="k-means++", n_init=10, max_iter=300, random_state=0
+        n_clusters=CLUSTERS, init="k-means++", n_init=10, max_iter=300, random_state=0
     ).fit(X)
 
     # 新增欄位，加入集群代碼
@@ -1913,7 +1929,7 @@ for i in range(2, 21):
     plt.ylabel("集群", fontsize=14)
     plt.xlabel("輪廓係數", fontsize=14)
     plt.tight_layout()
-    plt.show()
+    show()
 
 # RFM 分組
 
@@ -2017,19 +2033,19 @@ cc = rfm_segmentation.groupby("Total_score")["Monetary"].mean()
 rfm_segmentation.groupby("Total_score")["Monetary"].mean().plot(
     kind="bar", colormap="Blues_r"
 )
-plt.show()
+show()
 
 # 依RFM總分作圖，總分 3,4,5 有最高消費次數
 rfm_segmentation.groupby("Total_score")["Frequency"].mean().plot(
     kind="bar", colormap="Blues_r"
 )
-plt.show()
+show()
 
 # 依RFM總分作圖，總分 10,11,12 Recency最高
 rfm_segmentation.groupby("Total_score")["Recency"].mean().plot(
     kind="bar", colormap="Blues_r"
 )
-plt.show()
+show()
 
 # 依據輪廓分數找最佳集群數量
 
@@ -2038,9 +2054,13 @@ from sklearn.metrics import silhouette_score
 
 X = rfm_segmentation[["R_Quartile", "F_Quartile", "M_Quartile"]]
 silhouette_score_list = []
-print("輪廓分數:")
+print("2輪廓分數:")
 for i in range(2, 21):
-    km = KMeans(n_clusters=i, init="k-means++", n_init=10, max_iter=300, random_state=0)
+    print(i)
+    CLUSTERS = i  # 要分成的群數
+    km = KMeans(
+        n_clusters=CLUSTERS, init="k-means++", n_init=10, max_iter=300, random_state=0
+    )
     km.fit(X)
     y_km = km.fit_predict(X)
     silhouette_score_list.append(silhouette_score(X, y_km))
@@ -2049,8 +2069,10 @@ for i in range(2, 21):
 print(f"最大值 {np.argmax(silhouette_score_list)+2}: {np.max(silhouette_score_list):.2f}")
 
 for i in range(2, 21):
+    print(i)
+    CLUSTERS = i  # 要分成的群數
     km = KMeans(
-        n_clusters=i, init="k-means++", n_init=10, max_iter=300, random_state=0
+        n_clusters=CLUSTERS, init="k-means++", n_init=10, max_iter=300, random_state=0
     ).fit(X)
 
     # 新增欄位，加入集群代碼
@@ -2086,11 +2108,12 @@ for i in range(2, 21):
     plt.ylabel("集群", fontsize=14)
     plt.xlabel("輪廓係數", fontsize=14)
     plt.tight_layout()
-    plt.show()
+    show()
 
 # 分成4個集群
 
-kmeans = KMeans(n_clusters=4, random_state=0).fit(X)
+CLUSTERS = 4  # 要分成的群數
+kmeans = KMeans(n_clusters=CLUSTERS, random_state=0).fit(X)
 
 # 新增欄位，加入集群代碼
 rfm_segmentation["cluster"] = kmeans.labels_
@@ -2122,7 +2145,7 @@ dx.set_ylabel("Frequency", fontsize=14)
 dx.set_zlabel("Monetary", fontsize=14)
 dx.legend(fontsize=12)
 plt.tight_layout()
-plt.show()
+show()
 
 cc = rfm_segmentation.cluster.value_counts()
 print(cc)
@@ -2134,10 +2157,6 @@ print(cc)
 
 # 結論
 # 集群 1為VIP，其他依序為3、2、0。
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -2184,7 +2203,7 @@ plt.ylabel("整體學習錯誤率", fontsize=14)
 plt.legend(loc="upper left", fontsize=14)
 plt.grid(alpha=0.5)
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -2260,12 +2279,12 @@ from sklearn.model_selection import cross_val_score
 scores = cross_val_score(estimator=clf, X=X_test_std, y=y_test, cv=10, n_jobs=-1)
 print(f"K折分數: %s" % scores)
 print(f"平均值: {np.mean(scores):.2f}, 標準差: {np.std(scores):.2f}")
-
 """
 K折分數: [0.91666667 1.         0.91666667 0.91666667 0.90909091 1.
  0.90909091 0.90909091 1.         1.        ]
 平均值: 0.95, 標準差: 0.04
 """
+
 scores = cross_val_score(estimator=svc, X=X_test_std, y=y_test, cv=10, n_jobs=-1)
 print(f"K折分數: %s" % scores)
 print(f"平均值: {np.mean(scores):.2f}, 標準差: {np.std(scores):.2f}")
@@ -2274,6 +2293,7 @@ K折分數: [0.91666667 1.         0.91666667 1.         0.90909091 1.
  0.90909091 0.90909091 1.         1.        ]
 平均值: 0.96, 標準差: 0.04
 """
+
 scores = cross_val_score(estimator=rf, X=X_test_std, y=y_test, cv=10, n_jobs=-1)
 print(f"K折分數: %s" % scores)
 print(f"平均值: {np.mean(scores):.2f}, 標準差: {np.std(scores):.2f}")
@@ -2282,10 +2302,10 @@ K折分數: [0.83333333 0.91666667 0.91666667 0.91666667 1.         1.
  1.         1.         1.         1.        ]
 平均值: 0.96, 標準差: 0.06
 """
+
 scores = cross_val_score(estimator=nb, X=X_test_std, y=y_test, cv=10, n_jobs=-1)
 print(f"K折分數: %s" % scores)
 print(f"平均值: {np.mean(scores):.2f}, 標準差: {np.std(scores):.2f}")
-
 """
 K折分數: [1.         1.         0.91666667 0.91666667 0.90909091 1.
  0.81818182 0.90909091 1.         1.        ]
@@ -2457,7 +2477,7 @@ for name, model in models.items():
     print(">%s %.3f (%.3f)" % (name, mean(scores), std(scores)))
 # plot model performance for comparison
 plt.boxplot(results, labels=names, showmeans=True)
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -2639,7 +2659,7 @@ models, losses, pred = G.train(X_train, y_train)
 sns.set_style("darkgrid")
 ax = sns.lineplot(x=range(1000), y=losses)
 ax.set(xlabel="Epoch", ylabel="Loss", title="Loss vs Epoch")
-plt.show()
+show()
 
 # 模型評估
 
@@ -2937,7 +2957,7 @@ plt.axis("off")
 colors = [color_map[y] for y in y_30]
 plt.scatter(X_train[:, 0], X_train[:, 1], c=colors, edgecolors="black")
 
-plt.show()
+show()
 
 # SVM 模型評估
 base_classifier.fit(X_train, y_30)  # 學習訓練.fit
@@ -3219,14 +3239,18 @@ import shap
 
 explainer = shap.KernelExplainer(clf.predict_proba, X_train.values)
 shap_values = explainer.shap_values(x)
+
+""" NG
 print(f"Shaply value calulated from shap: {shap_values[1][j]:.5}")
+"""
 
 # Using 455 background data samples could cause slower run times.
 # Consider using shap.sample(data, K) or shap.kmeans(data, K) to summarize the background as K samples.
 
 # Shaply value calulated from shap: 0.01366
 
-# -----------------------------------------------------------------
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 # 範例2. 自行計算 Shapley value
 # 載入套件
@@ -3262,7 +3286,7 @@ clf.fit(df, y)  # 學習訓練.fit
 fig = plt.figure(figsize=(20, 5))
 ax = fig.add_subplot(111)
 _ = plot_tree(clf, ax=ax, feature_names=df.columns)
-plt.show()
+show()
 
 # 以 SHAP 套件計算 Shapley value
 
@@ -3401,6 +3425,8 @@ linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
 linear_regression.fit(X, y)  # 學習訓練.fit
 
 print("Model coefficients:")
+print(X.shape)
+print(X.shape[1])
 for i in range(X.shape[1]):
     print(X.columns[i], "=", linear_regression.coef_[i].round(5))
 
@@ -3437,7 +3463,7 @@ shap.partial_dependence_plot(
 # 以單一特徵所有資料的Shapley value繪製散佈圖
 
 shap.plots.scatter(shap_values[:, feature_name])
-plt.show()
+show()
 
 # 單一資料的特徵影響力(Local Feature Importance)
 
@@ -3445,7 +3471,7 @@ cc = X.iloc[sample_ind]
 print(cc)
 
 shap.plots.waterfall(shap_values[sample_ind], max_display=14)
-plt.show()
+show()
 
 # 加法模型(Generalized additive models, GAM)
 
@@ -3473,27 +3499,31 @@ fig, ax = shap.partial_dependence_plot(
     ice=False,
     shap_values=shap_values_ebm[sample_ind : sample_ind + 1, :],  # 第 21 筆資料
 )
-plt.show()
+show()
 
 shap.plots.scatter(shap_values_ebm[:, feature_name])
-plt.show()
+show()
 
 shap.plots.waterfall(shap_values_ebm[sample_ind])
-plt.show()
+show()
 
 shap.plots.beeswarm(shap_values_ebm)
-plt.show()
+show()
 
 shap.plots.bar(shap_values_ebm)
-plt.show()
+show()
 
 shap.initjs()
 shap.plots.force(shap_values_ebm[sample_ind])
+
+print("ddddddd")
+sys.exit()
 
 """
 Visualization omitted, Javascript library not loaded!
 Have you run `initjs()` in this notebook? If this notebook was from another user you must also trust this notebook (File -> Trust notebook). If you are viewing this notebook on github the Javascript has been stripped for security. If you are using JupyterLab this error is because a JupyterLab extension has not yet been written.
 """
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
