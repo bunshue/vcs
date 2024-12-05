@@ -44,8 +44,6 @@ def show():
 
 print("------------------------------------------------------------")  # 60個
 
-scipy.__version__
-
 print("常量和特殊函數")
 print(constants.c) # 真空中的光速
 print(constants.h) # 普朗克常量

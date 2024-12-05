@@ -705,14 +705,87 @@ cap.release()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 
+print("用滑鼠在cv2上寫字")
+
+W, H = 640, 480
+
+
+def draw_circle(event, x, y, flags, param):
+    global img, drawing
+    if event == cv2.EVENT_LBUTTONDOWN:
+        drawing = True
+        cv2.circle(img, (x, y), 1, (255), -1)
+
+    elif event == cv2.EVENT_MOUSEMOVE:
+        if drawing == True:
+            cv2.circle(img, (x, y), 1, (255), -1)
+
+    elif event == cv2.EVENT_LBUTTONUP:
+        drawing = False
+        cv2.circle(img, (x, y), 1, (255), -1)
+
+
+img = np.full(shape=(H, W, 1), fill_value=0, dtype=np.uint8)
+cv2.namedWindow("image")
+
+drawing = False
+
+cv2.setMouseCallback("image", draw_circle)
+
+while 1:
+    cv2.imshow("image", img)
+    k = cv2.waitKey(1) & 0xFF
+    if k == ord("s"):
+        print("Save")
+        # cv2.imwrite("tmp_1.jpg", img)
+        # CNN()
+    elif k == ord("c"):
+        print("Clear")
+        img = np.full(shape=(H, W, 1), fill_value=0, dtype=np.uint8)
+    elif k == 27:
+        print("ESC")
+        break
+
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("按ESC離開")
+
+cv2.namedWindow("ImageShow")  # 建立一個名為 ImageShow 的視窗
+
+while True:
+    keycode = cv2.waitKey(0)  # 持續等待，直到按下鍵盤按鍵才會繼續
+    c = chr(keycode)  # 將 ASCII 代碼轉換成真實字元
+    print(c, keycode)  # 印出結果
+    if keycode == 27:
+        break  # 如果代碼等於 27，結束迴圈 ( 27 表示按鍵 ESC )
+
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
+sys.exit()
 
 
 print("------------------------------------------------------------")  # 60個

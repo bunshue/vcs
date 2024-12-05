@@ -732,7 +732,6 @@ pip : the package installer for Python
 
 各種python簡易說明
 
-
 Firebase 即時資料庫
 即時資料庫並進行 CRUD (Create, Retrieve, Update, Delete) 操作
 
@@ -809,27 +808,6 @@ C:\Users\david>pip install BeautifulSoup	有問題 kilo/sugar不可用
 C:\Users\david>pip install beautifulsoup4	 kilo/sugar 可用
 
 C:\Users\david>pip install opencv-python
-
-查看版本 kilo
-C:\Users\david>python
-Python 3.7.7 (tags/v3.7.7:d7c567b08f, Mar 10 2020, 09:44:33) [MSC v.1900 32 bit
-(Intel)] on win32
-Type "help", "copyright", "credits" or "license" for more information.
->>> import cv2
->>> cv2.__version__
-'4.7.0'
->>>
-
-查看版本 sugar
-C:\>cd C:\Users\070601\AppData\Local\Programs\Python\Python311
-
-C:\Users\070601\AppData\Local\Programs\Python\Python311>python
-Python 3.11.2 (tags/v3.11.2:878ead1, Feb  7 2023, 16:38:35) [MSC v.1934 64 bit (AMD64)] on win32
-Type "help", "copyright", "credits" or "license" for more information.
->>> import cv2
->>> cv2.__version__
-'4.7.0'
-
 
 sugar 的 python 的位置
 

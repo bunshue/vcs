@@ -33,7 +33,6 @@ print("CPU : ", platform.processor())
 print("機器 : ", platform.machine())
 print("機器名稱 : ", platform.node())
 
-
 print(platform.win32_ver())
 print(platform.platform())
 
@@ -174,9 +173,7 @@ for path in sys.builtin_module_names:
 print("------------------------------------------------------------")  # 60個
 
 print("顯示模組的所有名稱")
-
 import random
-
 print(dir(random))
 
 print("------------------------------------------------------------")  # 60個
@@ -213,6 +210,32 @@ from bs4 import BeautifulSoup
 import bs4
 
 print(bs4.__version__)
+
+import cv2
+print(cv2.__version__)
+
+import numpy as np
+print(np.__version__)
+
+import pandas as pd
+print("查詢已安裝的 Pandas 版本")
+print(pd.__version__)
+
+
+import matplotlib
+print(matplotlib.__version__)
+
+#import sklearn
+import matplotlib
+#import keras
+print("Python version:", sys.version)
+print("Numpy version:", numpy.version.version)
+print("Pandas version:", pd.__version__)
+#print("Scikit-learn version:", sklearn.__version__)
+print("Matplotlib version:", matplotlib.__version__)
+#print("Keras version:", keras.__version__)
+
+sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -292,11 +315,9 @@ if os.system(cmd) != 0:
 os.system('cmd')
 """
 
-
 #用預設程式開啟檔案
 #os.system('filename.png')  #開啟圖片
 #os.system('filename.html')    # 開啟網頁
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -310,7 +331,6 @@ print("------------------------------------------------------------")  # 60個
 
 print(os.environ.get("CI_COMMIT_TAG", "0.0.0"))
 _version = os.environ.get("CI_COMMIT_TAG", "0.0.1.dev2")
-
 
 """here = os.path.abspath(os.path.dirname(__file__))
 with open(os.path.join(here, "README.md"), encoding="utf-8") as f:
@@ -345,7 +365,6 @@ else:
     print("非 Windows NT 系統")
 
 print("------------------------------------------------------------")  # 60個
-
 
 """
 print('Press Ctrl-C to quit.')
@@ -414,10 +433,7 @@ print("------------------------------------------------------------")  # 60個
 import numpy as np
 import pandas as pd
 
-print(np.__version__)
-
 import numpy
-
 print(numpy.version.version)
 
 # 使用 importlib.metadata 模块查找 NumPy 模块的版本
@@ -428,14 +444,6 @@ print(version("numpy"))
 import pkg_resources
 
 print(pkg_resources.get_distribution("numpy").version)
-
-
-print("查詢已安裝的 Pandas 版本")
-print(pd.__version__)
-
-import pandas as pd
-
-print(pd.__version__)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -850,6 +858,85 @@ sys.path.append(ROOT_DIR)
 
 print("------------------------------------------------------------")  # 60個
 
+PYTHONLIB = 'libpython'+sys.version[:3]+'.a'
+PC_PYTHONLIB = 'Python'+sys.version[0]+sys.version[2]+'.dll'
+NM = 'nm -p -g %s'                      # For Linux, use "nm -g %s"
+
+print(PYTHONLIB)
+print(PC_PYTHONLIB)
+print(NM)
+
+print("sys.getwindowsversion()")
+print(sys.getwindowsversion())
+print("sys.getwindowsversion()[:2]")
+print(sys.getwindowsversion()[:2])
+if sys.getwindowsversion()[:2] >= (6, 0):
+    print('bbbbb')
+
+if sys.getwindowsversion()[3] >= 2:
+    print('ccccc')
+
+print("sys.builtin_module_names")
+print(sys.builtin_module_names)
+
+if 'ce' in sys.builtin_module_names:
+    defpath = '\\Windows'
+
+
+print(type(sys.path))
+print(sys.path)
+
+print("------------------------------------------------------------")  # 60個
+
+import sys
+#查看搜尋模組套件的路徑優先順序
+for path in sys.path:
+  print(path)
+
+print("------------------------------------------------------------")  # 60個
+
+import sys
+
+print('目前python程式所在位置 sys.executable :')
+print(sys.executable)
+
+print("sys.version :")
+print(sys.version)
+print("sys.version_info :")
+print(sys.version_info)
+print("sys.platform :")
+print(sys.platform)
+print('sys.hexversion')
+print(sys.hexversion)
+
+py3 = sys.version_info >= (3, 0)
+print(py3)
+
+if sys.hexversion >= 0x02020000:
+    print('aaaaa')
+
+version_suffix = "%r%r" % sys.version_info[:2]
+print(version_suffix)
+print("Python%s.dll" % version_suffix)
+
+from _msi import *
+import os, string, re, sys
+
+AMD64 = "AMD64" in sys.version
+Itanium = "Itanium" in sys.version
+Win64 = AMD64 or Itanium
+
+print(AMD64)
+print(Itanium)
+print(Win64)
+
+print("取得系統的預設編碼")
+cc = sys.getdefaultencoding()
+print(cc)
+
+print("------------------------------------------------------------")  # 60個
+
+
 
 
 """
@@ -863,16 +950,66 @@ print("------------------------------------------------------------")  # 60個
 2. Python
 
 3. 各套件
-cc = sns.__version__
-print(cc)
-
-
-print("目前 Pandas 版本 :")
-cc = pd.__version__
-print(cc)
 
 # many
 # pd.show_versions()
 
 """
+
+
+import random
+print(dir(random))
+
+
+
+import math
+help(math.sqrt)
+help(math.pow)
+
+print('help 的用法')
+import random
+print(dir(random))
+help(random.randint)
+help(random.choice)
+
+print("------------------------------------------------------------")  # 60個
+
+
+#用預設程式開啟檔案
+#os.system('cccc.mp3')
+
+#用預設程式wav檔案
+#os.startfile('harumi99.wav')
+
+#用系統預設程式開啟檔案
+#os.system('cv03.png')
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+import os
+
+print("HOME環境變數:", os.environ["HOME"])
+
+
+
+
+df = pd.DataFrame({'key': ['b', 'b', 'a', 'c', 'a', 'a', 'b'], 'data1': range(7)})
+print(df)
+
+print (__name__)
+
+
+if __name__=="__main__":
+     print ("It's main")
+else:
+     print ("It's not main")
+
+
+import pandas
+
+cc = dir(pandas)
+print(cc)
+
 

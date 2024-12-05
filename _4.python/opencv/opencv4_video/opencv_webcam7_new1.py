@@ -20,7 +20,7 @@ ESC = 27
 SPACE = 32
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 print("OpenCV VideoCapture 04 兩個camera")
 print("按 ESC 離開")
 
@@ -752,227 +752,8 @@ cap.release()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
-cap = cv2.VideoCapture(0)
-face_cascade = cv2.CascadeClassifier(
-    cv2.data.haarcascades + "haarcascade_frontalface_default.xml"
-)
-eye_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_eye.xml")
-
-while True:
-    ret, frame = cap.read()
-
-    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-    faces = face_cascade.detectMultiScale(gray, 1.3, 5)
-    for x, y, w, h in faces:
-        cv2.rectangle(frame, (x, y), (x + w, y + h), (255, 0, 0), 5)
-        roi_gray = gray[y : y + w, x : x + w]
-        roi_color = frame[y : y + h, x : x + w]
-        eyes = eye_cascade.detectMultiScale(roi_gray, 1.3, 5)
-        for ex, ey, ew, eh in eyes:
-            cv2.rectangle(roi_color, (ex, ey), (ex + ew, ey + eh), (0, 255, 0), 5)
-
-    cv2.imshow("frame", frame)
-
-    if cv2.waitKey(1) == ord("q"):
-        break
-
-cap.release()
-cv2.destroyAllWindows()
-
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-
-print("OpenCV_ai_63 偵測人臉")
-
-cap = cv2.VideoCapture(0)
-if not cap.isOpened():
-    print("開啟攝影機失敗")
-    sys.exit()
-else:
-    print("Video device opened")
-
-xml_filename = (
-    "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascade_frontalface_default.xml"
-)
-
-face_cascade_classifier = cv2.CascadeClassifier(xml_filename)
-# faces = face_cascade_classifier.detectMultiScale(gray)
-
-while True:
-    ret, frame = cap.read()
-
-    #frame = cv2.resize(frame, (640//2, 480//2))  # 縮小尺寸，避免尺寸過大導致效能不好
-    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)  # 將鏡頭影像轉換成灰階
-    faces = face_cascade_classifier.detectMultiScale(gray)  # 偵測人臉
-    for x, y, w, h in faces:
-        cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)  # 標記人臉
-
-    cv2.imshow("WebCam", frame)
-
-    k = cv2.waitKey(1)
-    if k == ESC:
-        break
-
-cap.release()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-print("OpenCV_ai_65 偵測人臉 將其馬賽克")
-
-cap = cv2.VideoCapture(0)
-if not cap.isOpened():
-    print("開啟攝影機失敗")
-    sys.exit()
-else:
-    print("Video device opened")
-
-xml_filename = (
-    "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascade_frontalface_default.xml"
-)
-
-face_cascade_classifier = cv2.CascadeClassifier(xml_filename)
-
-while True:
-    ret, frame = cap.read()
-    #frame = cv2.resize(frame, (640//2, 480//2))  # 縮小尺寸，避免尺寸過大導致效能不好
-    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)  # 影像轉轉灰階
-    faces = face_cascade_classifier.detectMultiScale(gray)  # 偵測人臉
-    for x, y, w, h in faces:
-        mosaic = frame[y : y + h, x : x + w]
-        level = 15
-        mh = int(h / level)
-        mw = int(w / level)
-        mosaic = cv2.resize(mosaic, (mw, mh), interpolation=cv2.INTER_LINEAR)
-        mosaic = cv2.resize(mosaic, (w, h), interpolation=cv2.INTER_NEAREST)
-        frame[y : y + h, x : x + w] = mosaic
-
-    cv2.imshow("WebCam", frame)
-
-    k = cv2.waitKey(1)
-    if k == ESC:
-        break
-
-cap.release()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-eye_xml_filename = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascade_eye.xml"
-nose_xml_filename = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascade_mcs_nose.xml"
-mouth_xml_filename = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascade_mcs_mouth.xml"
-
-print("OpenCV_ai_67 偵測眼睛R鼻子G嘴巴B")
-
-cap = cv2.VideoCapture(0)
-if not cap.isOpened():
-    print("開啟攝影機失敗")
-    sys.exit()
-else:
-    print("Video device opened")
-
-eye_cascade = cv2.CascadeClassifier(eye_xml_filename)  # 使用眼睛模型
-nose_cascade = cv2.CascadeClassifier(nose_xml_filename)  # 使用鼻子模型
-mouth_cascade = cv2.CascadeClassifier(mouth_xml_filename)  # 使用嘴巴模型
-
-while True:
-    ret, frame = cap.read()
-
-    #img = cv2.resize(frame, (640//2, 480//2))
-    img = frame
-    
-    gray = cv2.medianBlur(img, 1)
-    gray = cv2.cvtColor(gray, cv2.COLOR_BGR2GRAY)
-    gray = cv2.medianBlur(gray, 5)
-
-    eyes = eye_cascade.detectMultiScale(gray)  # 偵測眼睛R
-    for x, y, w, h in eyes:
-        cv2.rectangle(img, (x, y), (x + w, y + h), (0, 0, 255), 2)
-
-    noses = nose_cascade.detectMultiScale(gray)  # 偵測鼻子G
-    for x, y, w, h in noses:
-        cv2.rectangle(img, (x, y), (x + w, y + h), (0, 255, 0), 2)
-
-    mouths = mouth_cascade.detectMultiScale(gray)  # 偵測嘴巴B
-    for x, y, w, h in mouths:
-        cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)
-
-    cv2.imshow("WebCam", img)
-    k = cv2.waitKey(1)
-    if k == ESC:
-        break
-
-cap.release()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-""" NG 無檔案 face.yml 人臉模型檔
-print("OpenCV_ai_71")
-
-recognizer = cv2.face.LBPHFaceRecognizer_create()  # 啟用訓練人臉模型方法
-
-# NG 無檔案
-# recognizer.read('face.yml')                               # 讀取人臉模型檔
-
-xml_filename = (
-    "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascade_frontalface_default.xml"
-)
-
-face_cascade_classifier = cv2.CascadeClassifier(xml_filename)  # 啟用人臉追蹤
-
-cap = cv2.VideoCapture(0)
-if not cap.isOpened():
-    print("開啟攝影機失敗")
-    sys.exit()
-else:
-    print("Video device opened")
-
-while True:
-    ret, img = cap.read()
-
-    #img = cv2.resize(img, (640//2, 480//2))  # 縮小尺寸，加快辨識效率
-    
-    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # 轉換成黑白
-    faces = face_cascade_classifier.detectMultiScale(gray)  # 追蹤人臉 ( 目的在於標記出外框 )
-
-    # 建立姓名和 id 的對照表
-    name = {"1": "David", "2": "John", "3": "Chris"}
-
-    # 依序判斷每張臉屬於哪個 id
-    for x, y, w, h in faces:
-        cv2.rectangle(img, (x, y), (x + w, y + h), (0, 255, 0), 2)  # 標記人臉外框
-        idnum, confidence = recognizer.predict(
-            gray[y : y + h, x : x + w]
-        )  # 取出 id 號碼以及信心指數 confidence
-        if confidence < 60:
-            text = name[str(idnum)]  # 如果信心指數小於 60，取得對應的名字
-        else:
-            text = "???"  # 不然名字就是 ???
-        # 在人臉外框旁加上名字
-        cv2.putText(
-            img,
-            text,
-            (x, y - 5),
-            cv2.FONT_HERSHEY_SIMPLEX,
-            1,
-            (0, 255, 0),
-            2,
-            cv2.LINE_AA,
-        )
-
-    cv2.imshow("WebCam", img)
-    k = cv2.waitKey(1)
-    if k == ESC:
-        break
-
-cap.release()
-cv2.destroyAllWindows()
-"""
-
-print("------------------------------------------------------------")  # 60個
 print("OpenCV_ai_72 追蹤功能 按a開始 選取ROI, 按Enter確定")
 
 tracker = cv2.TrackerCSRT_create()  # 創建追蹤器
@@ -1200,7 +981,7 @@ while True:
 # 釋放所有資源
 cap.release()  # 釋放攝影機
 cv2.destroyAllWindows()  # 關閉所有 OpenCV 視窗
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 print("按 ESC 離開")

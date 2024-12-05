@@ -7803,7 +7803,7 @@ except KeyboardInterrupt:
 
 print("------------------------------------------------------------")  # 60個
 
-import random, shutil
+import shutil
 
 PAUSE = 0.1  # (!) Try changing this to 0.0 or 2.0.
 STREAM_CHARS = ['0', '1']  # (!) Try changing this to other characters.
@@ -7880,13 +7880,6 @@ print(pathlib.Path.cwd())
 
 print("------------------------------------------------------------")  # 60個
 
-import random
-
-print(dir(random))
-
-print("------------------------------------------------------------")  # 60個
-
-import time
 import pyautogui
 
 for i in range(10):
@@ -7925,7 +7918,6 @@ sorted
 
 print("------------------------------------------------------------")  # 60個
 
-import time
 print(time.time(), " 秒")
 print(time.time_ns(), " 微秒")
 
@@ -7945,7 +7937,6 @@ time.strptime() 將特定格式的字串轉換為struct_time格式的時間
 print("------------------------------------------------------------")  # 60個
 
 """
-import time
 n = 20                   # 設定進度條總長
 for i in range(n+1):
     print(f'\r[{"█"*i}{" "*(n-i)}] {i*100/n}%', end='')   # 輸出不換行的內容
@@ -7953,8 +7944,6 @@ for i in range(n+1):
 
 print("------------------------------------------------------------")  # 60個
 
-
-import time
 n = 100
 icon = '⋮⋰⋯⋱'          # 建立旋轉的符號清單
 for i in range(n+1):
@@ -7974,7 +7963,6 @@ print(now)    # 14:30:23
 print("------------------------------------------------------------")  # 60個
 
 import datetime
-import time
 
 while True:
     now = datetime.datetime.now().strftime('%H:%M:%S')
@@ -8174,8 +8162,6 @@ print(id(a), id(b))     # 顯示a和b變數所在的記憶體位址
 
 print("------------------------------------------------------------")  # 60個
 
-import math
-
 print("求出100以下的所有質數")
 n = 300
 NUMBER_PER_LINE = 10  # Display 10 per line
@@ -8251,8 +8237,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("os sys 搬出")
 print("------------------------------------------------------------")  # 60個
-
-import sys
 
 # 匯入 指定目錄下的模組
 sys.path.append(r'C:\_git\vcs\_4.python\import_module')
@@ -8665,9 +8649,6 @@ print(x)
 x = np.linspace(0, 2 * np.pi)
 print(x.shape)
 
-
-import numpy as np
-
 # 含頭尾共N個元素的陣列
 N = 11
 x = np.linspace(0, 10, 11)  # 建立含11個元素的陣列
@@ -8734,22 +8715,6 @@ print(f"{year}年{month}月{day}日是{year}年的第{total}天")
 
 print("------------------------------------------------------------")  # 60個
 
-import os
-
-#用預設程式開啟檔案
-#os.system('cccc.mp3')
-
-#用預設程式wav檔案
-#os.startfile('harumi99.wav')
-
-#用系統預設程式開啟檔案
-#os.system('cv03.png')
-
-print("------------------------------------------------------------")  # 60個
-
-import random
-import time
-
 N = 10
 lst = list(range(N))
 print(lst)
@@ -8761,8 +8726,6 @@ print(lst)
 
 print("------------------------------------------------------------")  # 60個
 
-import random
-
 animals1 = ['鼠', '牛', '虎']
 animals2 = ['兔', '龍', '蛇']
 animals3 = ['馬', '羊', '猴']
@@ -8772,8 +8735,6 @@ print('本次選出人員')
 print(random.choice(animals1) + " " + random.choice(animals2) + " " + random.choice(animals3) + " "+ random.choice(animals4))
 
 print("------------------------------------------------------------")  # 60個
-
-import random
 
 passlen = 3
 s = "ABCDEFG"
@@ -8788,8 +8749,6 @@ print("Number :", format(number, ".2f"))
 print("------------------------------------------------------------")  # 60個
 
 """
-import sys, time
-
 PAUSE = 0.02
 
 print('無限迴圈進行中..... 按 Ctrl+C離開 ')
@@ -8808,7 +8767,6 @@ except KeyboardInterrupt:
 
 print("------------------------------------------------------------")  # 60個
 """
-import time
 for i in range(5, 0, -1):
     print("\r", "倒计时{}秒！".format(i), end="", flush=True)
     time.sleep(1)
@@ -8911,19 +8869,6 @@ print(string1.zfill(20))
 
 print("------------------------------------------------------------")  # 60個
 
-import math
-help(math.sqrt)
-help(math.pow)
-
-print('help 的用法')
-import random
-print(dir(random))
-help(random.randint)
-help(random.choice)
-
-print("------------------------------------------------------------")  # 60個
-
-import requests
 from bs4 import BeautifulSoup
 
 url ='http://jigsaw.w3.org/HTTP/connection.html'
@@ -9019,7 +8964,6 @@ file1.close() #關閉檔案
 print("------------------------------------------------------------")  # 60個
 
 import subprocess
-import os
 from os import path
 import re
 
@@ -9062,14 +9006,6 @@ from fractions import Fraction
 
 print(Fraction(3, 4) ** 4 / 3)
 
-
-import os
-
-print("HOME環境變數:", os.environ["HOME"])
-
-
-
-import os
 from os import path
 import json
 
@@ -9172,17 +9108,8 @@ ret3 = unquote(url, encoding='utf-8')
 print(ret3)
 # https://www.baidu.com/s?wd=中国
 
-
 print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-import numpy as np
 
 # 數據處理
 # 正常顯示
@@ -9202,8 +9129,6 @@ y4[y4 > 0.8] = np.nan
 
 print("------------------------------------------------------------")  # 60個
 
-
-import numpy as np
 n = 100000
 cc = np.sum(4.0 / np.r_[1:n:4, -3:-n:-4])
 print(cc)
@@ -9217,96 +9142,6 @@ cc = integrate(sqrt(1-x**2), (x, -1, 1)) * 2
 print(cc)
 
 print("------------------------------------------------------------")  # 60個
-
-import sys
-
-print('目前python程式所在位置 sys.executable :')
-print(sys.executable)
-
-print("sys.version :")
-print(sys.version)
-print("sys.version_info :")
-print(sys.version_info)
-print("sys.platform :")
-print(sys.platform)
-print('sys.hexversion')
-print(sys.hexversion)
-
-py3 = sys.version_info >= (3, 0)
-print(py3)
-
-if sys.hexversion >= 0x02020000:
-    print('aaaaa')
-
-version_suffix = "%r%r" % sys.version_info[:2]
-print(version_suffix)
-print("Python%s.dll" % version_suffix)
-
-from _msi import *
-import os, string, re, sys
-
-AMD64 = "AMD64" in sys.version
-Itanium = "Itanium" in sys.version
-Win64 = AMD64 or Itanium
-
-print(AMD64)
-print(Itanium)
-print(Win64)
-
-print("取得系統的預設編碼")
-cc = sys.getdefaultencoding()
-print(cc)
-
-print("------------------------------------------------------------")  # 60個
-
-import sys
-#查看搜尋模組套件的路徑優先順序
-for path in sys.path:
-  print(path)
-
-print("------------------------------------------------------------")  # 60個
-
-PYTHONLIB = 'libpython'+sys.version[:3]+'.a'
-PC_PYTHONLIB = 'Python'+sys.version[0]+sys.version[2]+'.dll'
-NM = 'nm -p -g %s'                      # For Linux, use "nm -g %s"
-
-print(PYTHONLIB)
-print(PC_PYTHONLIB)
-print(NM)
-
-print("sys.getwindowsversion()")
-print(sys.getwindowsversion())
-print("sys.getwindowsversion()[:2]")
-print(sys.getwindowsversion()[:2])
-if sys.getwindowsversion()[:2] >= (6, 0):
-    print('bbbbb')
-
-if sys.getwindowsversion()[3] >= 2:
-    print('ccccc')
-
-print("sys.builtin_module_names")
-print(sys.builtin_module_names)
-
-if 'ce' in sys.builtin_module_names:
-    defpath = '\\Windows'
-
-
-print(type(sys.path))
-print(sys.path)
-
-
-import sys
-import numpy
-import pandas as pd
-#import sklearn
-import matplotlib
-#import keras
-print("Python version:", sys.version)
-print("Numpy version:", numpy.version.version)
-print("Pandas version:", pd.__version__)
-#print("Scikit-learn version:", sklearn.__version__)
-print("Matplotlib version:", matplotlib.__version__)
-#print("Keras version:", keras.__version__)
 
 print("2 進位整數運算")
 x = 0b1101  # 這是2進位整數

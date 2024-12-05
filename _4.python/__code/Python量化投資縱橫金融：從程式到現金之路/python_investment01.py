@@ -26,41 +26,22 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
-from pandas import DataFrame
-df = DataFrame({'key': ['b', 'b', 'a', 'c', 'a', 'a', 'b'], 'data1': range(7)})
-print(df)
-
-
-print (__name__)
-
-
-if __name__=="__main__":
-     print ("It's main")
-else:
-     print ("It's not main")
-
-
-import pandas
-
-cc = dir(pandas)
-print(cc)
+from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
 
 print("------------------------------------------------------------")  # 60個
 
-import numpy.random as npr
-
-npr.rand(3, 2)
+np.random.rand(3, 2)
 
 a = 2
 b = 4
-npr.rand(3, 2) * (b - a) + a
+np.random.rand(3, 2) * (b - a) + a
 
 size = 1000
-rn1 = npr.rand(size, 2)
-rn2 = npr.randn(size)
-rn3 = npr.randint(0, 10, size)
+rn1 = np.random.rand(size, 2)
+rn2 = np.random.randn(size)
+rn3 = np.random.randint(0, 10, size)
 rang = [0, 10, 20, 30, 40]
-rn4 = npr.choice(rang, size = size)
+rn4 = np.random.choice(rang, size = size)
 
 fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(nrows = 2, ncols = 2, figsize = (8, 8))
 ax1.hist(rn1, bins = 25, stacked = True)
@@ -82,10 +63,10 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-rn5 = npr.binomial(100, 0.3, size)
-rn6 = npr.normal(10, 20, size)
-rn7 = npr.chisquare(0.5, size)
-rn8 = npr.poisson(2.0, size)
+rn5 = np.random.binomial(100, 0.3, size)
+rn6 = np.random.normal(10, 20, size)
+rn7 = np.random.chisquare(0.5, size)
+rn8 = np.random.poisson(2.0, size)
 
 fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(nrows = 2, ncols = 2, figsize = (10, 10))
 ax1.hist(rn5, bins = 25)
@@ -125,9 +106,7 @@ print(a)
 b={1:'银行',2:'房地产',4:'医药生物',5:'房地产',6:'采掘',7:'休闲服务',8:'机械设备'}
 
 a['ind']=a.ticker.map(b)
-
 print(a)
-
 
 data = pd.DataFrame({'group': ['a', 'a', 'a', 'b','b', 'b', 'c', 'c','c'], 'ounces': [4, 3, 12, 6, 7.5, 8, 3, 5, 6]})
 data.sort_values(by=['group','ounces'], ascending=[False, True], inplace=True)
@@ -258,15 +237,14 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 
 import datetime as dt
-import numpy.random as npr
 import statsmodels.api as sm
 
-factor = npr.rand(1000, 3)
+factor = np.random.rand(1000, 3)
 Factor = sm.add_constant(factor)  #添加常数项
 fac1 = factor[:, 0]  #因子1
 fac2 = factor[:, 1]  #因子2
 fac3 = factor[:, 2]  #因子3
-e = npr.random(1000)  #噪声
+e = np.random.random(1000)  #噪声
 port = fac1 * 0.3 + fac2 * 0.7 + fac3 * 0.4 + e  #虚构投资组合及因子权重
 model1 = sm.OLS(port, Factor)
 results1 = model1.fit()
@@ -343,7 +321,7 @@ print(cc)
 
 number = 10000  #随机数维度
 stock_num = len(log_returns.columns)
-weights = npr.rand(number, stock_num)
+weights = np.random.rand(number, stock_num)
 weights /= np.sum(weights, axis=1).reshape(number, 1)
 prets = np.dot(weights, log_returns.mean()) * 252  #计算年化收益率
 pvols = np.diag(np.sqrt(np.dot(weights, np.dot(log_returns.cov() * 252, weights.T))))  #计算年化风险
@@ -489,10 +467,8 @@ plt.title('混合（红-蓝）')
 
 plt.show()
 
-import numpy.random as npr
-
 size = 1000
-rn1 = npr.standard_normal(size)
+rn1 = np.random.standard_normal(size)
 
 sns.set_palette("muted")
 fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2, figsize=(10, 10))
@@ -540,20 +516,20 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 #Scikit-learn的初步使用
 print("------------------------------------------------------------")  # 60個
-""" import error
-import sklearn
-cc = sklearn.__version__
-print(cc)
 
 import sklearn 
 import re
-from sklearn import cross_validation
 import sklearn.tree as tree
 
 data=pd.read_excel('data/loan.xlsx')
 target=data['Type']
 data.drop('Type',axis='columns',inplace=True)
-train_data,test_data,train_target,test_target=cross_validation. train_test_split(data,target,test_size=0.4,train_size=0.6,random_state=12345)
+
+print("資料分割")
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+train_data,test_data,train_target,test_target = train_test_split(data,target, test_size=0.2)
+# 訓練組8成, 測試組2成
+
 clf_1=tree.DecisionTreeClassifier(criterion='entropy')
 clf_1.fit(train_data,train_target)
 train_est=clf_1.predict(train_data)
@@ -635,6 +611,7 @@ plt.plot(fpr,tpr)
 plt.show()
 
 from sklearn.metrics import recall_score
+
 y_true = [0, 1, 2, 0, 1, 2]
 y_pred = [0, 2, 1, 0, 0, 1]
 cc = recall_score(y_true, y_pred, average='macro')  # doctest: +ELLIPSIS
@@ -648,9 +625,8 @@ print(cc)
 
 cc = recall_score(y_true, y_pred, average=None)
 print(cc)
-"""
 
-"""
+""" 以下 NG
 print("------------------------------------------------------------")  # 60個
 # 3.7 SQLAlchemy与常用数据库的连接
 print("------------------------------------------------------------")  # 60個
@@ -694,7 +670,12 @@ f_data = Base.metadata.tables['f_data']
 engine.execute(f_data.insert(), r)  
 pd.read_sql('f_data', engine).tail()
 """
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
+
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 

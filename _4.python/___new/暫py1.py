@@ -1,4 +1,5 @@
 
+
 python 之 ''' 與  ''' 內, 不可以存在 \
 
 
@@ -4891,11 +4892,6 @@ plt.plot( t, [4,8,12,16], 'k:')
 
 # pip install open-python
 # pip install opencv-contrib-python
-
-import cv2
-print(cv2.__version__)
-
-
 
 
 Python 資料科學實戰教本：爬蟲、清理、資料庫、視覺化、探索式分析、機器學習建模，數據工程一次搞定！
