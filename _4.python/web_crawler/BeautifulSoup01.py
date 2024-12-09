@@ -14,6 +14,26 @@
 # print("取得網頁內容 : ", soup.text)
 
 print("------------------------------------------------------------")  # 60個
+
+# 共同
+import os
+import sys
+import time
+import math
+import random
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+# 設定中文字型及負號正確顯示
+# 設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
+# 設定負號
+plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+plt.rcParams["font.size"] = 12  # 設定字型大小
+
+print("------------------------------------------------------------")  # 60個
 print("準備工作")
 
 import re
@@ -1657,44 +1677,6 @@ if html_data:
 
 else:
     print("無法取得網頁資料")
-
-print("------------------------------------------------------------")  # 60個
-
-print("BeautifulSoup 測試 7")
-
-
-def get_html_data1(url):
-    print("取得網頁資料: ", url)
-    resp = requests.get(url)
-    # 檢查 HTTP 回應碼是否為 requests.codes.ok(200)
-    if resp.status_code != requests.codes.ok:
-        print("讀取網頁資料錯誤, url: ", resp.url)
-        return None
-    else:
-        return resp
-
-
-print("#抓中央氣象局的衛星雲圖")
-
-url = "https://www.cwa.gov.tw/V8/C/W/OBS_Sat.html"
-
-# TBD
-
-"""
-html_data = get_html_data1(url)
-if html_data:
-        soup = BeautifulSoup(html_data.text, 'html.parser')
-        print("取得網頁標題", soup.title)
-        print('搜尋網頁中的 jpg圖片連結')
-        
-        regex = re.compile('.*\.jpg')
-        imglist = soup.find_all("img", {"src":regex})
-        for img in imglist:
-            print(img["src"])
-        
-else:
-        print('無法取得網頁資料')
-"""
 
 print("------------------------------------------------------------")  # 60個
 
@@ -3428,6 +3410,1616 @@ with open("tmp_Example.txt", "r", encoding="utf8") as fp:
 
 print("------------------------------------------------------------")  # 60個
 
+
+""" webdriver skip
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+
+driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+driver.implicitly_wait(10)
+driver.get("https://fchart.github.io/test.html")
+print("-----------------------------")
+print(driver.title)
+html = driver.page_source
+print(html)
+driver.quit()
+
+print("------------------------------------------------------------")  # 60個
+
+from selenium import webdriver
+from selenium.webdriver.edge.service import Service
+from webdriver_manager.microsoft import EdgeChromiumDriverManager
+
+driver = webdriver.Edge(service=Service(EdgeChromiumDriverManager().install()))
+driver.implicitly_wait(10)
+driver.get("https://fchart.github.io/test.html")
+print("-----------------------------")
+print(driver.title)
+html = driver.page_source
+print(html)
+driver.quit()
+
+print("------------------------------------------------------------")  # 60個
+
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+
+driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+driver.implicitly_wait(10)
+cookie = {"name": "over18", "value": "1"}
+driver.get("https://www.ptt.cc/bbs/Gossiping/index.html")
+driver.add_cookie(cookie)
+print("-----------------------------")
+print(driver.title)
+driver.quit()
+
+print("------------------------------------------------------------")  # 60個
+
+from selenium import webdriver
+from selenium.webdriver.edge.service import Service
+from webdriver_manager.microsoft import EdgeChromiumDriverManager
+
+driver = webdriver.Edge(service=Service(EdgeChromiumDriverManager().install()))
+driver.implicitly_wait(10)
+cookie = {"name": "over18", "value": "1"}
+driver.get("https://www.ptt.cc/bbs/Gossiping/index.html")
+driver.add_cookie(cookie)
+print("-----------------------------")
+print(driver.title)
+driver.quit()
+"""
+print("------------------------------------------------------------")  # 60個
+
+""" webdriver skip
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+
+options = Options()
+options.add_argument("--headless")
+driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()),
+                          options=options)
+driver.implicitly_wait(10)
+driver.get("https://fchart.github.io/test.html")
+print("-----------------------------")
+print(driver.title)
+html = driver.page_source
+print(html)
+driver.quit()
+"""
+print("------------------------------------------------------------")  # 60個
+
+#
+# Extracted from: https://github.com/micropython/micropython-lib/blob/master/collections.defaultdict/collections/defaultdict.py
+# Extracted from: https://github.com/micropython/micropython-lib/blob/master/urllib.parse/urllib/parse.py
+#
+
+_safe_quoters = {}
+_ALWAYS_SAFE = frozenset(b'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+                         b'abcdefghijklmnopqrstuvwxyz'
+                         b'0123456789'
+                         b'_.-')
+_ALWAYS_SAFE_BYTES = bytes(_ALWAYS_SAFE)
+
+class defaultdict:
+
+    @staticmethod
+    def __new__(cls, default_factory=None, **kwargs):
+        # Some code (e.g. urllib.urlparse) expects that basic defaultdict
+        # functionality will be available to subclasses without them
+        # calling __init__().
+        self = super(defaultdict, cls).__new__(cls)
+        self.d = {}
+        return self
+
+    def __init__(self, default_factory=None, **kwargs):
+        self.d = kwargs
+        self.default_factory = default_factory
+
+    def __getitem__(self, key):
+        try:
+            return self.d[key]
+        except KeyError:
+            v = self.__missing__(key)
+            self.d[key] = v
+            return v
+
+    def __setitem__(self, key, v):
+        self.d[key] = v
+
+    def __delitem__(self, key):
+        del self.d[key]
+
+    def __contains__(self, key):
+        return key in self.d
+
+    def __missing__(self, key):
+        if self.default_factory is None:
+            raise KeyError(key)
+        return self.default_factory()
+        
+class Quoter(defaultdict):
+    """A mapping from bytes (in range(0,256)) to strings.
+
+    String values are percent-encoded byte values, unless the key < 128, and
+    in the "safe" set (either the specified safe set, or default set).
+    """
+    # Keeps a cache internally, using defaultdict, for efficiency (lookups
+    # of cached keys don't call Python code at all).
+    def __init__(self, safe):
+        """safe: bytes object."""
+        self.safe = _ALWAYS_SAFE.union(safe)
+
+    def __repr__(self):
+        # Without this, will just display as a defaultdict
+        return "<Quoter %r>" % dict(self)
+
+    def __missing__(self, b):
+        # Handle a cache miss. Store quoted string in cache and return.
+        res = chr(b) if b in self.safe else '%{:02X}'.format(b)
+        self[b] = res
+        return res
+
+
+def clear_cache():
+    """Clear the quoters cache."""
+    _safe_quoters.clear()
+
+
+def quote(string, safe='/', encoding=None, errors=None):
+    """quote('abc def') -> 'abc%20def'
+
+    Each part of a URL, e.g. the path info, the query, etc., has a
+    different set of reserved characters that must be quoted.
+
+    RFC 2396 Uniform Resource Identifiers (URI): Generic Syntax lists
+    the following reserved characters.
+
+    reserved    = ";" | "/" | "?" | ":" | "@" | "&" | "=" | "+" |
+                  "$" | ","
+
+    Each of these characters is reserved in some component of a URL,
+    but not necessarily in all of them.
+
+    By default, the quote function is intended for quoting the path
+    section of a URL.  Thus, it will not encode '/'.  This character
+    is reserved, but in typical usage the quote function is being
+    called on a path where the existing slash characters are used as
+    reserved characters.
+
+    string and safe may be either str or bytes objects. encoding must
+    not be specified if string is a str.
+
+    The optional encoding and errors parameters specify how to deal with
+    non-ASCII characters, as accepted by the str.encode method.
+    By default, encoding='utf-8' (characters are encoded with UTF-8), and
+    errors='strict' (unsupported characters raise a UnicodeEncodeError).
+    """
+    if isinstance(string, str):
+        if not string:
+            return string
+        if encoding is None:
+            encoding = 'utf-8'
+        if errors is None:
+            errors = 'strict'
+        string = string.encode(encoding, errors)
+    else:
+        if encoding is not None:
+            raise TypeError("quote() doesn't support 'encoding' for bytes")
+        if errors is not None:
+            raise TypeError("quote() doesn't support 'errors' for bytes")
+
+    return quote_from_bytes(string, safe)
+
+
+def quote_plus(string, safe='', encoding=None, errors=None):
+    """Like quote(), but also replace ' ' with '+', as required for quoting
+    HTML form values. Plus signs in the original string are escaped unless
+    they are included in safe. It also does not have safe default to '/'.
+    """
+    # Check if ' ' in string, where string may either be a str or bytes.  If
+    # there are no spaces, the regular quote will produce the right answer.
+    if ((isinstance(string, str) and ' ' not in string) or
+            (isinstance(string, bytes) and b' ' not in string)):
+        return quote(string, safe, encoding, errors)
+
+    if isinstance(safe, str):
+        space = ' '
+    else:
+        space = b' '
+
+    string = quote(string, safe + space, encoding, errors)
+    return string.replace(' ', '+')
+
+
+def quote_from_bytes(bs, safe='/'):
+    """Like quote(), but accepts a bytes object rather than a str, and does
+    not perform string-to-bytes encoding.  It always returns an ASCII string.
+    quote_from_bytes(b'abc def\x3f') -> 'abc%20def%3f'
+    """
+    if not isinstance(bs, (bytes, bytearray)):
+        raise TypeError("quote_from_bytes() expected bytes")
+
+    if not bs:
+        return ''
+
+    if isinstance(safe, str):
+        # Normalize 'safe' by converting to bytes and removing non-ASCII chars
+        safe = safe.encode('ascii', 'ignore')
+    else:
+        safe = bytes([c for c in safe if c < 128])
+
+    if not bs.rstrip(_ALWAYS_SAFE_BYTES + safe):
+        return bs.decode()
+
+    try:
+        quoter = _safe_quoters[safe]
+    except KeyError:
+        _safe_quoters[safe] = quoter = Quoter(safe).__getitem__
+
+    return ''.join([quoter(char) for char in bs])
+
+
+def urlencode(query, doseq=False, safe='', encoding=None, errors=None):
+    """Encode a dict or sequence of two-element tuples into a URL query string.
+
+    If any values in the query arg are sequences and doseq is true, each
+    sequence element is converted to a separate parameter.
+
+    If the query arg is a sequence of two-element tuples, the order of the
+    parameters in the output will match the order of parameters in the
+    input.
+
+    The components of a query arg may each be either a string or a bytes type.
+    When a component is a string, the safe, encoding and error parameters are
+    sent to the quote_plus function for encoding.
+    """
+
+    if hasattr(query, "items"):
+        query = query.items()
+    else:
+        # It's a bother at times that strings and string-like objects are
+        # sequences.
+        try:
+            # non-sequence items should not work with len()
+            # non-empty strings will fail this
+            if len(query) and not isinstance(query[0], tuple):
+                raise TypeError
+            # Zero-length sequences of all types will get here and succeed,
+            # but that's a minor nit.  Since the original implementation
+            # allowed empty dicts that type of behavior probably should be
+            # preserved for consistency
+        except TypeError:
+            # ty, va, tb = sys.exc_info()
+            raise TypeError("not a valid non-string sequence "
+                            "or mapping object")  # .with_traceback(tb)
+
+    l = []
+    if not doseq:
+        for k, v in query:
+            if isinstance(k, bytes):
+                k = quote_plus(k, safe)
+            else:
+                k = quote_plus(str(k), safe, encoding, errors)
+
+            if isinstance(v, bytes):
+                v = quote_plus(v, safe)
+            else:
+                v = quote_plus(str(v), safe, encoding, errors)
+
+            l.append(k + '=' + v)
+    else:
+        for k, v in query:
+            if isinstance(k, bytes):
+                k = quote_plus(k, safe)
+            else:
+                k = quote_plus(str(k), safe, encoding, errors)
+
+            if isinstance(v, bytes):
+                v = quote_plus(v, safe)
+                l.append(k + '=' + v)
+            elif isinstance(v, str):
+                v = quote_plus(v, safe, encoding, errors)
+                l.append(k + '=' + v)
+            else:
+                try:
+                    # Is this a sufficient test for sequence-ness?
+                    _ = len(v)  # noqa
+                except TypeError:
+                    # not a sequence
+                    v = quote_plus(str(v), safe, encoding, errors)
+                    l.append(k + '=' + v)
+                else:
+                    # loop over the sequence
+                    for elt in v:
+                        if isinstance(elt, bytes):
+                            elt = quote_plus(elt, safe)
+                        else:
+                            elt = quote_plus(str(elt), safe, encoding, errors)
+
+                        l.append(k + '=' + elt)
+
+    return '&'.join(l)
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+from bs4 import BeautifulSoup
+
+html_str = "<p>Hello World!</p>"
+soup = BeautifulSoup(html_str, "lxml")
+print(soup)
+
+print("------------------------------------------------------------")  # 60個
+
+import requests
+from bs4 import BeautifulSoup
+
+r = requests.get("https://fchart.github.io/ML/Surveys.html")
+r.encoding = "utf8"
+soup = BeautifulSoup(r.text, "lxml")
+print(soup)
+
+print("------------------------------------------------------------")  # 60個
+
+from bs4 import BeautifulSoup
+
+with open("data/Surveys.html", "r", encoding="utf8") as fp:
+    soup = BeautifulSoup(fp, "lxml")
+    print(soup)
+
+tags = soup("a")
+tag = tags[1]
+print("標籤名稱: ", tag.name)
+print("標籤內容: ", tag.text)
+print("標籤內容: ", tag.string)
+print("標籤內容: ", tag.b.string)
+print("URL網址: ", tag.get("href", None))
+print("target屬性: ", tag["target"])
+
+print("------------------------------------------------------------")  # 60個
+
+from bs4 import BeautifulSoup
+
+with open("data/Surveys.html", "r", encoding="utf8") as fp:
+    soup = BeautifulSoup(fp, "lxml")
+
+tags = soup("img")
+tag = tags[0]
+print("圖片網址: ", tag.get("src", None))
+print("alt屬性: ", tag["alt"])
+print("屬性: ", tag.attrs)
+
+print("------------------------------------------------------------")  # 60個
+
+from bs4 import BeautifulSoup
+
+with open("data/Surveys.html", "r", encoding="utf8") as fp:
+    soup = BeautifulSoup(fp, "lxml")
+#import requests
+#r = requests.get("https://fchart.github.io/ML/Surveys.html")
+#r.encoding = "utf8"
+#soup = BeautifulSoup(r.text, "lxml")  
+
+# 走訪下一層HTML標籤
+print(soup.html.body.div.div.p.a.text)
+print("----------------------")
+# 走訪上一層HTML標籤
+tag_div = soup.select_one("#q1") # 找到第1題的<div>標籤
+tag_li = tag_div.ul.li    # 走訪到之下的<ul>
+print(tag_li.text)
+# 使用parent屬性取得父標籤
+print(tag_li.parent.parent.p.a.text)
+print("----------------------")
+tag_div = soup.select_one("#q2") # 找到第2題的<div>標籤
+print(tag_div.find_previous_sibling().p.a.text)
+print(tag_div.find_next_sibling().p.a.text)
+
+print("------------------------------------------------------------")  # 60個
+
+from bs4 import BeautifulSoup
+
+with open("data/Surveys.html", "r", encoding="utf8") as fp:
+    soup = BeautifulSoup(fp, "lxml")
+
+#import requests
+#r = requests.get("https://fchart.github.io/ML/Surveys.html")
+#r.encoding = "utf8"
+#soup = BeautifulSoup(r.text, "lxml")  
+
+# 搜尋<a>標籤
+tag_a = soup.find("a") 
+print(tag_a.text)
+# 呼叫多次find()方法
+tag_p = soup.find(name="p")
+tag_a = tag_p.find(name="a")
+print(tag_p.a.text)
+print(tag_a.text)
+
+print("------------------------------------------------------------")  # 60個
+
+from bs4 import BeautifulSoup
+
+with open("data/Surveys.html", "r", encoding="utf8") as fp:
+    soup = BeautifulSoup(fp, "lxml")
+#import requests
+#r = requests.get("https://fchart.github.io/ML/Surveys.html")
+#r.encoding = "utf8"
+#soup = BeautifulSoup(r.text, "lxml")  
+
+# 使用id屬性搜尋<div>標籤
+tag_div = soup.find(id="q2")
+tag_a = tag_div.find("a") 
+print(tag_a.text)
+
+print("------------------------------------------------------------")  # 60個
+
+from bs4 import BeautifulSoup
+
+with open("data/Surveys.html", "r", encoding="utf8") as fp:
+    soup = BeautifulSoup(fp, "lxml")
+#import requests
+#r = requests.get("https://fchart.github.io/ML/Surveys.html")
+#r.encoding = "utf8"
+#soup = BeautifulSoup(r.text, "lxml")  
+    
+# 使用class屬性搜尋<span>標籤
+tag_span = soup.find(attrs={"class": "score"})
+print(tag_span.text)
+# 搜尋第2題的第1個<span>標籤
+tag_div = soup.find(id="q2")
+tag_span = tag_div.find(class_="score")
+print(tag_span.text)
+
+print("------------------------------------------------------------")  # 60個
+
+from bs4 import BeautifulSoup
+
+with open("data/Surveys.html", "r", encoding="utf8") as fp:
+    soup = BeautifulSoup(fp, "lxml")
+#import requests
+#r = requests.get("https://fchart.github.io/ML/Surveys.html")
+#r.encoding = "utf8"
+#soup = BeautifulSoup(r.text, "lxml")  
+
+# 使用HTML5的data-屬性搜尋<div>標籤
+tag_div = soup.find(attrs={"data-custom": "important"})
+print(tag_div.text)
+
+print("------------------------------------------------------------")  # 60個
+
+from bs4 import BeautifulSoup
+
+with open("data/Surveys.html", "r", encoding="utf8") as fp:
+    soup = BeautifulSoup(fp, "lxml")
+#import requests
+#r = requests.get("https://fchart.github.io/ML/Surveys.html")
+#r.encoding = "utf8"
+#soup = BeautifulSoup(r.text, "lxml")
+
+# 使用文字內容來搜尋標籤
+tag_str = soup.find(text="請問你的")
+print(tag_str)
+tag_str = soup.find(text="10")
+print(tag_str)
+print(type(tag_str))        # NavigableString型態
+print(tag_str.parent.name)  # 父標籤名稱
+tag_str = soup.find(text="男 - ")
+print(tag_str)
+
+print("------------------------------------------------------------")  # 60個
+
+from bs4 import BeautifulSoup
+
+with open("data/Surveys.html", "r", encoding="utf8") as fp:
+    soup = BeautifulSoup(fp, "lxml")
+#import requests
+#r = requests.get("https://fchart.github.io/ML/Surveys.html")
+#r.encoding = "utf8"
+#soup = BeautifulSoup(r.text, "lxml")   
+    
+# 測試取出<li>標籤的內容
+tag_str = soup.find(text="女 - ")
+print(tag_str)
+tag_li = soup.find(class_="response")
+print(tag_li.text)
+print(tag_li.string)
+print(tag_li.span.string)
+
+print("------------------------------------------------------------")  # 60個
+
+from bs4 import BeautifulSoup
+
+with open("data/Surveys.html", "r", encoding="utf8") as fp:
+    soup = BeautifulSoup(fp, "lxml")
+#import requests
+#r = requests.get("https://fchart.github.io/ML/Surveys.html")
+#r.encoding = "utf8"
+#soup = BeautifulSoup(r.text, "lxml")      
+    
+# 使用多條件來搜尋HTML標籤
+tag_div = soup.find("div", class_="question")
+print(tag_div.prettify())
+tag_p = soup.find("p", class_="question")
+print(tag_p.prettify())
+
+print("------------------------------------------------------------")  # 60個
+
+from bs4 import BeautifulSoup
+
+with open("data/Surveys.html", "r", encoding="utf8") as fp:
+    soup = BeautifulSoup(fp, "lxml")
+#import requests
+#r = requests.get("https://fchart.github.io/ML/Surveys.html")
+#r.encoding = "utf8"
+#soup = BeautifulSoup(r.text, "lxml")  
+    
+# 使用函數建立搜尋條件
+def is_secondary_question(tag):
+    return tag.has_attr("href") and \
+           tag.get("href") == "http://example.com/q2"
+
+tag_a = soup.find(is_secondary_question)
+print(tag_a.prettify())
+
+print("------------------------------------------------------------")  # 60個
+
+from bs4 import BeautifulSoup
+
+with open("data/Surveys.html", "r", encoding="utf8") as fp:
+    soup = BeautifulSoup(fp, "lxml")
+#import requests
+#r = requests.get("https://fchart.github.io/ML/Surveys.html")
+#r.encoding = "utf8"
+#soup = BeautifulSoup(r.text, "lxml")      
+    
+# 找出所有問卷的題目串列
+tag_list = soup.find_all("p", class_="question")
+print(tag_list[0].prettify())
+
+for question in tag_list:
+    print(question.a.text)
+
+print("------------------------------------------------------------")  # 60個
+
+from bs4 import BeautifulSoup
+
+with open("data/Surveys.html", "r", encoding="utf8") as fp:
+    soup = BeautifulSoup(fp, "lxml")
+#import requests
+#r = requests.get("https://fchart.github.io/ML/Surveys.html")
+#r.encoding = "utf8"
+#soup = BeautifulSoup(r.text, "lxml")     
+    
+# 找出前2個問卷的題目串列
+tag_list = soup.find_all("p", class_="question", limit=2)
+print(len(tag_list))
+
+for question in tag_list:
+    print(question.a.text)
+
+print("------------------------------------------------------------")  # 60個
+
+from bs4 import BeautifulSoup
+
+with open("data/Surveys.html", "r", encoding="utf8") as fp:
+    soup = BeautifulSoup(fp, "lxml")
+#import requests
+#r = requests.get("https://fchart.github.io/ML/Surveys.html")
+#r.encoding = "utf8"
+#soup = BeautifulSoup(r.text, "lxml")  
+
+tag_div = soup.find("div", id="q2")
+# 找出所有標籤串列
+tag_all = tag_div.find_all(True)
+for tag in tag_all:
+    print(tag.name)
+
+print("------------------------------------------------------------")  # 60個
+
+from bs4 import BeautifulSoup
+
+with open("data/Surveys.html", "r", encoding="utf8") as fp:
+    soup = BeautifulSoup(fp, "lxml")
+#import requests
+#r = requests.get("https://fchart.github.io/ML/Surveys.html")
+#r.encoding = "utf8"
+#soup = BeautifulSoup(r.text, "lxml")  
+
+tag_div = soup.find("div", id="q2")
+# 找出所有文字內容串列
+tag_str_list = tag_div.find_all(text=True)
+print(tag_str_list)
+# 找出指定的文字內容串列
+tag_str_list = tag_div.find_all(text=["20", "40"])
+print(tag_str_list)
+
+print("------------------------------------------------------------")  # 60個
+
+from bs4 import BeautifulSoup
+
+with open("data/Surveys.html", "r", encoding="utf8") as fp:
+    soup = BeautifulSoup(fp, "lxml")
+#import requests
+#r = requests.get("https://fchart.github.io/ML/Surveys.html")
+#r.encoding = "utf8"
+#soup = BeautifulSoup(r.text, "lxml")  
+
+tag_div = soup.find("div", id="q2")
+# 找出所有<p>和<span>標籤
+tag_list = tag_div.find_all(["p", "span"])
+for tag in tag_list:
+    print(tag.name, tag.text.replace("\n", ""))
+print("-------------")
+# 找出class屬性值question或selected的所有標籤
+tag_list = tag_div.find_all(class_=["question", "selected"])
+for tag in tag_list:
+    print(tag.name, tag.text.replace("\n", ""))
+
+print("------------------------------------------------------------")  # 60個
+
+from bs4 import BeautifulSoup
+
+with open("data/Surveys.html", "r", encoding="utf8") as fp:
+    soup = BeautifulSoup(fp, "lxml")
+#import requests
+#r = requests.get("https://fchart.github.io/ML/Surveys.html")
+#r.encoding = "utf8"
+#soup = BeautifulSoup(r.text, "lxml")  
+
+tag_div = soup.find("div", id="q2")
+# 找出所有<li>子孫標籤
+tag_list = tag_div.find_all("li")
+for tag in tag_list:
+    print(tag.text.replace("\n", ""))
+# 沒有使用遞迴來找出所有<li>標籤
+tag_list = tag_div.find_all("li", recursive=False)
+print(tag_list)
+
+print("------------------------------------------------------------")  # 60個
+
+from bs4 import BeautifulSoup
+
+with open("data/Surveys.html", "r", encoding="utf8") as fp:
+    soup = BeautifulSoup(fp, "lxml")
+#import requests
+#r = requests.get("https://fchart.github.io/ML/Surveys.html")
+#r.encoding = "utf8"
+#soup = BeautifulSoup(r.text, "lxml")  
+
+# 搜尋<title>標籤和第3個<div>標籤
+tag_title = soup.select("title")
+print(tag_title[0].text)
+tag_first_div = soup.find("div")
+tag_div = tag_first_div.select("div:nth-of-type(3)")
+print(tag_div[0].prettify())
+
+print("------------------------------------------------------------")  # 60個
+
+from bs4 import BeautifulSoup
+
+with open("data/Surveys.html", "r", encoding="utf8") as fp:
+    soup = BeautifulSoup(fp, "lxml")
+#import requests
+#r = requests.get("https://fchart.github.io/ML/Surveys.html")
+#r.encoding = "utf8"
+#soup = BeautifulSoup(r.text, "lxml")  
+
+# 搜尋class和id屬性值的標籤
+tag_div = soup.select("#q1")
+print(tag_div[0].p.a.text)
+tag_span = soup.select("span#email")
+print(tag_span[0].text)
+tag_div = soup.select("#q1, #q2")  # 多個id屬性
+for item in tag_div:
+    print(item.p.a.text)
+print("-----------")
+tag_div = soup.find("div")  # 第1個<div>標籤
+tag_p = tag_div.select(".question")   
+for item in tag_p:
+    print(item.a["href"])
+tag_span = soup.select("[class~=selected]")
+for item in tag_span:
+    print(item.text)
+
+print("------------------------------------------------------------")  # 60個
+
+from bs4 import BeautifulSoup
+
+with open("data/Surveys.html", "r", encoding="utf8") as fp:
+    soup = BeautifulSoup(fp, "lxml")
+#import requests
+#r = requests.get("https://fchart.github.io/ML/Surveys.html")
+#r.encoding = "utf8"
+#soup = BeautifulSoup(r.text, "lxml")  
+
+# 搜尋特定屬性值的標籤
+def print_a(tag_a):
+    for tag in tag_a:
+        print(tag["href"])
+    print("-----------")    
+tag_a = soup.select("a[href]")
+print_a(tag_a)
+tag_a = soup.select("a[href='http://example.com/q2']")
+print_a(tag_a)
+tag_a = soup.select("a[href^='http://example.com']")
+print_a(tag_a)
+tag_a = soup.select("a[href$='q3']")
+print_a(tag_a)
+tag_a = soup.select("a[href*='q']")
+print_a(tag_a)
+
+print("------------------------------------------------------------")  # 60個
+
+from bs4 import BeautifulSoup
+
+with open("data/Surveys.html", "r", encoding="utf8") as fp:
+    soup = BeautifulSoup(fp, "lxml")
+#import requests
+#r = requests.get("https://fchart.github.io/ML/Surveys.html")
+#r.encoding = "utf8"
+#soup = BeautifulSoup(r.text, "lxml")  
+
+# 搜尋<title>標籤, 和<div>標籤下的所有<a>標籤
+tag_title = soup.select("html head title")
+print(tag_title[0].text)    
+tag_a = soup.select("body div a")
+for tag in tag_a:
+    print(tag["href"])
+
+print("------------------------------------------------------------")  # 60個
+
+from bs4 import BeautifulSoup
+
+with open("data/Surveys.html", "r", encoding="utf8") as fp:
+    soup = BeautifulSoup(fp, "lxml")
+#import requests
+#r = requests.get("https://fchart.github.io/ML/Surveys.html")
+#r.encoding = "utf8"
+#soup = BeautifulSoup(r.text, "lxml")  
+
+# 搜尋指定標籤下的直接子標籤
+tag_a = soup.select("p > a")
+for tag in tag_a:
+    print(tag["href"])
+tag_li = soup.select("ul > li:nth-of-type(2)")
+for tag in tag_li:
+    print(tag.text.replace("\n", ""))
+tag_span = soup.select("div > #email")
+for tag in tag_span:
+    print(tag.prettify())  
+
+print("------------------------------------------------------------")  # 60個
+
+from bs4 import BeautifulSoup
+
+with open("data/Surveys.html", "r", encoding="utf8") as fp:
+    soup = BeautifulSoup(fp, "lxml")
+#import requests
+#r = requests.get("https://fchart.github.io/ML/Surveys.html")
+#r.encoding = "utf8"
+#soup = BeautifulSoup(r.text, "lxml")  
+
+# 搜尋兄弟標籤
+tag_div = soup.find(id="q1")
+print(tag_div.p.a.text)
+print("-----------")
+tag_div = soup.select("#q1 ~ .survey")
+for item in tag_div:            
+    print(item.p.a.text)  
+print("-----------")
+tag_div = soup.select("#q1 + .survey")
+for item in tag_div:            
+    print(item.p.a.text)   
+
+print("------------------------------------------------------------")  # 60個
+
+from bs4 import BeautifulSoup
+
+with open("data/Surveys.html", "r", encoding="utf8") as fp:
+    soup = BeautifulSoup(fp, "lxml")
+#import requests
+#r = requests.get("https://fchart.github.io/ML/Surveys.html")
+#r.encoding = "utf8"
+#soup = BeautifulSoup(r.text, "lxml")  
+
+# 使用select_one()方法搜尋標籤
+tag_a = soup.select_one("a[href]")
+print(tag_a.prettify())
+
+print("------------------------------------------------------------")  # 60個
+
+import re
+from bs4 import BeautifulSoup
+
+with open("data/Surveys.html", "r", encoding="utf8") as fp:
+    soup = BeautifulSoup(fp, "lxml")
+#import requests
+#r = requests.get("https://fchart.github.io/ML/Surveys.html")
+#r.encoding = "utf8"
+#soup = BeautifulSoup(r.text, "lxml")  
+
+# 使用正規表達式搜尋文字內容
+tag_str = soup.find(text="男 -")
+print(tag_str)
+regexp = re.compile("男 -")
+tag_str = soup.find(text=regexp)
+print(tag_str)
+print("---------------------")
+regexp = re.compile("\w+ -")
+tag_list = soup.find_all(text=regexp)
+print(tag_list)
+
+print("------------------------------------------------------------")  # 60個
+
+import re
+from bs4 import BeautifulSoup
+
+with open("data/Surveys.html", "r", encoding="utf8") as fp:
+    soup = BeautifulSoup(fp, "lxml")
+#import requests
+#r = requests.get("https://fchart.github.io/ML/Surveys.html")
+#r.encoding = "utf8"
+#soup = BeautifulSoup(r.text, "lxml")  
+
+# 使用正規表達式搜尋電子郵件地址
+email_regexp = re.compile("\w+@\w+\.\w+")
+tag_str = soup.find(text=email_regexp)
+print(tag_str)
+print("---------------------")
+tag_list = soup.find_all(text=email_regexp)
+print(tag_list)
+
+print("------------------------------------------------------------")  # 60個
+
+import re
+from bs4 import BeautifulSoup
+
+with open("data/Surveys.html", "r", encoding="utf8") as fp:
+    soup = BeautifulSoup(fp, "lxml")
+#import requests
+#r = requests.get("https://fchart.github.io/ML/Surveys.html")
+#r.encoding = "utf8"
+#soup = BeautifulSoup(r.text, "lxml")  
+
+# 使用正規表達式搜尋URL網址
+url_regexp = re.compile("^http:")
+tag = soup.find(href=url_regexp)
+print(tag["href"], tag.text)
+print("---------------------")
+tag_list = soup.find_all(href=url_regexp)
+for tag in tag_list:
+    print(tag["href"], tag.text)
+
+print("------------------------------------------------------------")  # 60個
+
+
+"""webdriver skip
+
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+from bs4 import BeautifulSoup
+
+driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+driver.implicitly_wait(10)
+driver.get("https://fchart.github.io/ML/Example.html")
+print(driver.title)
+soup = BeautifulSoup(driver.page_source, "lxml")
+tag_ol = soup.find("ol", {"id":"list"})
+tags_li = tag_ol.find_all("li", class_="line")
+for tag in tags_li:
+    print(tag.text)
+driver.quit()
+
+print("------------------------------------------------------------")  # 60個
+
+from selenium import webdriver
+from selenium.webdriver.edge.service import Service
+from webdriver_manager.microsoft import EdgeChromiumDriverManager
+from bs4 import BeautifulSoup
+
+driver = webdriver.Edge(service=Service(EdgeChromiumDriverManager().install()))
+driver.implicitly_wait(10)
+driver.get("https://fchart.github.io/ML/Example.html")
+print(driver.title)
+soup = BeautifulSoup(driver.page_source, "lxml")
+tag_ol = soup.find("ol", {"id":"list"})
+tags_li = tag_ol.find_all("li", class_="line")
+for tag in tags_li:
+    print(tag.text)
+driver.quit()
+
+print("------------------------------------------------------------")  # 60個
+
+from selenium import webdriver
+
+driver = webdriver.Chrome("./chromedriver")
+driver.implicitly_wait(10)
+driver.get("https://fchart.github.io/Example.html")
+tag_ol = driver.find_element_by_xpath('//*[@id="list"]')
+print(tag_ol.tag_name)
+tags_li = tag_ol.find_elements_by_xpath('//li')
+for tag in tags_li:
+    print(tag.text, tag.get_attribute("class"))
+driver.quit()
+
+print("------------------------------------------------------------")  # 60個
+
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.edge.service import Service
+from webdriver_manager.microsoft import EdgeChromiumDriverManager
+
+driver = webdriver.Edge(service=Service(EdgeChromiumDriverManager().install()))
+driver.implicitly_wait(10)
+driver.get("https://fchart.github.io/ML/Example.html")
+tag_ol = driver.find_element(By.XPATH, '/html/body/ol')
+print(tag_ol.tag_name)
+tags_li = tag_ol.find_elements(By.XPATH, '//li')
+for tag in tags_li:
+    print(tag.text, tag.get_attribute("class"))
+driver.quit()
+
+print("------------------------------------------------------------")  # 60個
+
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+
+driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+driver.implicitly_wait(10)
+driver.get("https://fchart.github.io/ML/Example.html")
+tag_ol = driver.find_element(By.XPATH, '/html/body/ol')
+print(tag_ol.tag_name)
+tags_li = tag_ol.find_elements(By.XPATH, '//li')
+for tag in tags_li:
+    print(tag.text, tag.get_attribute("class"))
+driver.quit()
+
+print("------------------------------------------------------------")  # 60個
+
+from selenium import webdriver
+
+driver = webdriver.Edge("./msedgedriver")
+driver.implicitly_wait(10)
+driver.get("https://fchart.github.io/Example.html")
+tag_ol = driver.find_element_by_xpath('/html/body/ol')
+print(tag_ol.tag_name)
+tags_li = tag_ol.find_elements_by_xpath('//li')
+for tag in tags_li:
+    print(tag.text, tag.get_attribute("class"))
+driver.quit()
+
+print("------------------------------------------------------------")  # 60個
+
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+from bs4 import BeautifulSoup
+
+driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+driver.implicitly_wait(10)
+driver.get("https://fchart.github.io/ML/Example.html")
+tag_ol = driver.find_element(By.XPATH, '//*[@id="list"]')
+print(tag_ol.tag_name)
+print(tag_ol.get_attribute('innerHTML'))
+soup = BeautifulSoup(tag_ol.get_attribute('innerHTML'), "lxml")
+tags_li = soup.find_all("li", class_="line")
+for tag in tags_li:
+    print(tag.text)
+driver.quit()
+
+print("------------------------------------------------------------")  # 60個
+
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.edge.service import Service
+from webdriver_manager.microsoft import EdgeChromiumDriverManager
+from bs4 import BeautifulSoup
+
+driver = webdriver.Edge(service=Service(EdgeChromiumDriverManager().install()))
+driver.implicitly_wait(10)
+driver.get("https://fchart.github.io/ML/Example.html")
+tag_ol = driver.find_element(By.XPATH, '//*[@id="list"]')
+print(tag_ol.tag_name)
+print(tag_ol.get_attribute('innerHTML'))
+soup = BeautifulSoup(tag_ol.get_attribute('innerHTML'), "lxml")
+tags_li = soup.find_all("li", class_="line")
+for tag in tags_li:
+    print(tag.text)
+driver.quit()
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+import sys
+import json 
+import requests
+
+print("------------------------------------------------------------")  # 60個
+
+url = "https://www.googleapis.com/books/v1/volumes?maxResults=5&q=Python&projection=lite"
+jsonfilename = "tmp_GoogleBooks.json"
+r = requests.get(url)
+r.encoding = "utf8"
+json_data = json.loads(r.text)
+with open(jsonfilename, 'w') as fp:
+    json.dump(json_data, fp)
+    print('json 存檔完成, 檔案 :', jsonfilename)
+
+print("------------------------------------------------------------")  # 60個
+
+import requests
+
+""" momo 網站 無 headers, 不可抓取
+URL = "https://www.momoshop.com.tw/search/"
+
+r = requests.get(URL+"searchShop.jsp?keyword=NBA")
+if r.status_code == requests.codes.ok:
+    r.encoding = "big5"
+    print(r.text)        
+else:
+    print("HTTP請求錯誤..." + URL)
+
+"""
+print("------------------------------------------------------------")  # 60個
+
+import requests
+
+print('使用 headers 抓取 momo 網站')
+
+URL="https://www.momoshop.com.tw/search/"
+
+headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'
+           'AppleWebKit/537.36 (KHTML, like Gecko)'
+           'Chrome/63.0.3239.132 Safari/537.36'}
+r = requests.get(URL+"searchShop.jsp?keyword=NBA", headers=headers)
+if r.status_code == requests.codes.ok:
+    r.encoding = "big5"    
+    print(r.text)        
+else:
+    print("HTTP請求錯誤..." + URL)
+
+print("------------------------------------------------------------")  # 60個
+
+""" webdriver
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+
+URL="https://www.momoshop.com.tw/search/"
+
+driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+driver.implicitly_wait(10)
+driver.get(URL+"searchShop.jsp?keyword=NBA")
+print("-----------------------------")
+print(driver.title)
+html = driver.page_source
+fp = open("tmp_NBA.html", "w", encoding="utf8")
+fp.write(html)
+print("寫入檔案tmp_NBA.html...")
+fp.close()
+driver.quit()
+"""
+print("------------------------------------------------------------")  # 60個
+
+""" wait long
+import time
+import requests
+
+URL = "http://www.majortests.com/word-lists/word-list-0{0}.html"
+
+for i in range(1, 10):
+    url = URL.format(i) 
+    r = requests.get(url)
+    print(r.status_code)
+    print("等待5秒鐘... i = ", i)
+    time.sleep(5) 
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+import requests
+from bs4 import BeautifulSoup
+
+URL = "https://www.ptt.cc/bbs/NBA/index6503.html"
+DELETED = BeautifulSoup("<a href='Deleted'>本文已刪除</a>", "lxml").a
+
+r = requests.get(URL)
+if r.status_code == requests.codes.ok:
+    r.encoding = "utf8"
+    soup = BeautifulSoup(r.text, "lxml")
+    tag_divs = soup.find_all("div", class_="r-ent")
+    for tag in tag_divs:
+        tag_a = tag.find("a") or DELETED
+        print(tag_a["href"])
+        print(tag_a.text)
+        print(tag.find("div", class_="author").string)
+else:
+    print("HTTP請求錯誤..." + URL)
+
+print("------------------------------------------------------------")  # 60個
+
+import requests
+from bs4 import BeautifulSoup
+
+URL = "https://www.ptt.cc/bbs/Gossiping/index.html"
+
+r = requests.get(URL, cookies={"over18": "1"})
+if r.status_code == requests.codes.ok:
+    r.encoding = "utf8"
+    soup = BeautifulSoup(r.text, "lxml")
+    tag_divs = soup.find_all("div", class_="r-ent")
+    for tag in tag_divs:
+        if tag.find('a'): # 是否有<a>標籤
+            tag_a = tag.find("a")
+            print(tag_a["href"])
+            print(tag_a.text)
+            print(tag.find("div", class_="author").string)
+else:
+    print("HTTP請求錯誤..." + URL)
+
+print("------------------------------------------------------------")  # 60個
+
+from urllib.parse import urljoin
+
+URL = "http://www.majortests.com/word-lists/word-list-01.html"
+PTT = "https://wwww.ptt.cc/bbs/movie/index.html"
+
+catalog = ["movie", "NBA", "Gossiping"]
+
+for i in range(1, 5):
+    url = urljoin(URL, "world-list-0{0}.html".format(i)) 
+    print(url)
+print("-----------------")
+for item in catalog:
+    url = urljoin(PTT, "../{0}/index.html".format(item))
+    print(url)
+
+print("------------------------------------------------------------")  # 60個
+
+import requests
+from bs4 import BeautifulSoup
+import csv, re
+
+URL = "https://movies.yahoo.com.tw/movie_intheaters.html"
+headers = {"user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+           "AppleWebKit/537.36 (KHTML, like Gecko)"
+           "Chrome/63.0.3239.132 Safari/537.36"}
+
+def format_date(date):  # 取出上映日期
+    if not date: return "N/A"
+    pattern = '\d+-\d+-\d+'
+    match = re.search(pattern, date.text)
+    if match is None:
+        return date.text
+    else:
+        return match.group(0)    
+
+def get_text(tag):
+    if tag:
+        return tag.text.strip()
+    else:
+        return "N/A"
+ 
+def get_attrib(tag, attrib):
+    if tag:
+        return tag[attrib].strip()
+    else:
+        return "N/A"
+
+""" fail    
+movies = [["中文片名","英文片名","期待度","海報圖片","上映日"]]
+r = requests.get(URL, headers=headers)
+if r.status_code == requests.codes.ok:
+    soup = BeautifulSoup(r.text, 'lxml')
+    tag_ul = soup.find("ul", class_="release_list")
+    rows = tag_ul.find_all("li")
+    for row in rows:
+        name_div = row.find("div",class_="release_movie_name")
+        cht_n = get_text(name_div.find("a"))
+        eng_n = get_text(name_div.find("div",class_="en").find("a"))
+        expect = get_text(row.find("div",class_="leveltext").find("span"))
+        photo_div = row.find("div",class_="release_foto")
+        poster_url = get_attrib(photo_div.find("img"),"data-src")
+        date = row.find('div',class_='release_movie_time')
+        release_date = format_date(date)
+        movie= [cht_n,eng_n,expect,poster_url,release_date]
+        movies.append(movie)
+else:
+   print("HTTP請求錯誤...")
+
+with open("tmp_movies.csv", "w+",newline="",encoding="utf-8") as fp:
+    writer = csv.writer(fp)
+    for item in movies:
+        writer.writerow(item)
+"""
+print("------------------------------------------------------------")  # 60個
+
+""" webdriver
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+from bs4 import BeautifulSoup
+import json
+
+URL = "https://fchart.github.io/Ashion/"
+driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+driver.implicitly_wait(10)
+driver.get(URL)
+
+soup = BeautifulSoup(driver.page_source, "lxml")
+sec = soup.find("section", class_="product spad")
+items = sec.find_all("div", class_="product__item")
+print(len(items))
+products=[]
+for item in items:
+    tag = item.find("h6").find("a")
+    title = tag.text.strip() if tag else "N/A"
+    tag = item.find("div", class_="product__item__pic")
+    img = tag["data-setbg"].strip() if tag else "N/A"
+    tag = item.find("div", class_="product__price")
+    price = tag.text.strip() if tag else "N/A"
+    print(title)
+    products.append({
+        "title": title,
+        "image": URL+img,
+        "price": price
+    })
+driver.quit()
+with open("tmp_products.json", "w", encoding="utf-8") as fp: # 寫入JSON檔案
+    json.dump(products,fp,indent=2,
+              sort_keys=True,
+              ensure_ascii=False)
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+import requests 
+from bs4 import BeautifulSoup
+import csv
+
+url = "https://rate.bot.com.tw/xrt?Lang=zh-TW"
+csvfile = "tmp_xrt.csv"
+r = requests.get(url)
+r.encoding = "utf8"
+soup = BeautifulSoup(r.text, "lxml")
+tag_table = soup.select_one("#ie11andabove > div > table")
+rows = tag_table.find_all("tr")
+with open(csvfile,'w+',newline='',encoding="big5") as fp:
+    writer = csv.writer(fp)
+    for row in rows:
+        lst = []
+        for cell in row.find_all(["td", "th"]):
+            lst.append(cell.text.replace("\n","").
+                       replace("\r","").
+                       strip())
+        writer.writerow(lst)
+
+print("------------------------------------------------------------")  # 60個
+
+import requests
+from bs4 import BeautifulSoup
+import csv, re, time
+
+URL = "https://movies.yahoo.com.tw/movie_intheaters.html/?page={0}"
+headers = {"user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+           "AppleWebKit/537.36 (KHTML, like Gecko)"
+           "Chrome/63.0.3239.132 Safari/537.36"}
+ 
+def format_date(date):  # 取出上映日期
+    if not date: return "N/A"
+    pattern = '\d+-\d+-\d+'
+    match = re.search(pattern, date.text)
+    if match is None:
+        return date.text
+    else:
+        return match.group(0)    
+
+def get_text(tag):
+    if tag:
+        return tag.text.strip()
+    else:
+        return "N/A"
+ 
+def get_attrib(tag, attrib):
+    if tag:
+        return tag[attrib].strip()
+    else:
+        return "N/A"   
+""" fail
+all_movies = [["中文片名","英文片名","期待度","海報圖片","上映日"]]
+for page in range(1, 11):
+    url = URL.format(page)
+    print("抓取: 第" + str(page) + "頁 網路資料中...")
+    r = requests.get(url, headers=headers)
+    if r.status_code == requests.codes.ok:
+        soup = BeautifulSoup(r.text, 'lxml')
+        movies = []
+        tag_ul = soup.find("ul", class_="release_list")
+        rows = tag_ul.find_all("li")
+        for row in rows:
+            name_div = row.find("div",class_="release_movie_name")
+            cht_n = get_text(name_div.find("a"))
+            eng_n = get_text(name_div.find("div",class_="en").find("a"))
+            expect = get_text(row.find("div",class_="leveltext").find("span"))
+            photo_div = row.find("div",class_="release_foto")
+            poster_url = get_attrib(photo_div.find("img"),"data-src")
+            date = row.find('div',class_='release_movie_time')
+            release_date = format_date(date)
+            movie= [cht_n,eng_n,expect,poster_url,release_date]
+            movies.append(movie)
+        all_movies = all_movies + movies
+        if soup.find("li", class_="nexttxt disabled"):
+            break   # 已經沒有下一頁
+        print("等待5秒鐘...")   
+        time.sleep(5) 
+    else:
+        print("HTTP請求錯誤...")
+
+with open("all_movies.csv", "w+",newline="",encoding="utf-8") as fp:
+    writer = csv.writer(fp)
+    for item in all_movies:
+        writer.writerow(item)
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+import requests
+from bs4 import BeautifulSoup
+import csv, re, time
+
+URL = "https://movies.yahoo.com.tw/movie_intheaters.html/?page=1"
+headers = {"user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+           "AppleWebKit/537.36 (KHTML, like Gecko)"
+           "Chrome/63.0.3239.132 Safari/537.36"}
+ 
+def format_date(date):  # 取出上映日期
+    if not date: return "N/A"
+    pattern = '\d+-\d+-\d+'
+    match = re.search(pattern, date.text)
+    if match is None:
+        return date.text
+    else:
+        return match.group(0)    
+
+def get_text(tag):
+    if tag:
+        return tag.text.strip()
+    else:
+        return "N/A"
+ 
+def get_attrib(tag, attrib):
+    if tag:
+        return tag[attrib].strip()
+    else:
+        return "N/A"  
+
+""" fail
+all_movies = [["中文片名","英文片名","期待度","海報圖片","上映日"]]
+page = 1
+while True:
+    print("抓取: 第" + str(page) + "頁 網路資料中...")
+    page = page + 1
+    r = requests.get(URL, headers=headers)
+    if r.status_code == requests.codes.ok:
+        soup = BeautifulSoup(r.text, 'lxml')
+        movies = []
+        tag_ul = soup.find("ul", class_="release_list")
+        rows = tag_ul.find_all("li")
+        for row in rows:
+            name_div = row.find("div",class_="release_movie_name")
+            cht_n = get_text(name_div.find("a"))
+            eng_n = get_text(name_div.find("div",class_="en").find("a"))
+            expect = get_text(row.find("div",class_="leveltext").find("span"))
+            photo_div = row.find("div",class_="release_foto")
+            poster_url = get_attrib(photo_div.find("img"),"data-src")
+            date = row.find('div',class_='release_movie_time')
+            release_date = format_date(date)
+            movie= [cht_n,eng_n,expect,poster_url,release_date]
+            movies.append(movie)
+        all_movies = all_movies + movies
+        if soup.find("li", class_="nexttxt disabled"):
+            break   # 已經沒有下一頁
+        nextPage = soup.find("li", class_="nexttxt")   
+        if nextPage:
+            URL = nextPage.find("a")["href"] 
+            print("等待5秒鐘...")          
+            time.sleep(5)
+        else:
+            break
+    else:
+        print("HTTP請求錯誤...")
+
+with open("tmp_all_movies2.csv", "w+",newline="",encoding="utf-8") as fp:
+    writer = csv.writer(fp)
+    for item in all_movies:
+        writer.writerow(item)
+"""
+print("------------------------------------------------------------")  # 60個
+
+""" webdriver
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+from bs4 import BeautifulSoup
+import time, csv
+
+URL="https://fchart.github.io/ML/nba_items.html"
+
+driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+driver.implicitly_wait(10)
+driver.get(URL)
+pages_remaining = True
+page_num = 1
+while pages_remaining:
+    soup = BeautifulSoup(driver.page_source, "lxml")
+    tag_table = soup.select_one("#our-table")
+    rows = tag_table.find_all("tr")
+    csvfile = "tmp_NBA_Products" + str(page_num) + ".csv"
+    with open(csvfile, 'w+', newline='', encoding="utf8") as fp:
+        writer = csv.writer(fp)
+        for row in rows:
+            lst = []
+            for cell in row.find_all(["td", "th"]):
+                lst.append(cell.text.replace("\n","").
+                           replace("\r","").
+                           strip())
+            writer.writerow(lst)
+    print("儲存頁面:", page_num)
+    try:   
+        next_link = driver.find_element(By.CLASS_NAME, "nextbtn")
+        if next_link:
+            next_link.click()
+            time.sleep(5)
+            page_num = page_num + 1
+        else:
+            pages_remaining = False
+    except Exception:
+        pages_remaining = False        
+driver.close()
+"""
+print("------------------------------------------------------------")  # 60個
+
+import time
+import requests
+import json
+from bs4 import BeautifulSoup
+
+# 目標URL網址
+URL = "https://www.ptt.cc"
+MAX_PUSH = 50
+# TOPIC = "Gossiping"
+TOPIC = "NBA" 
+
+def get_resource(url):
+    headers = {"user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+               "AppleWebKit/537.36 (KHTML, like Gecko)"
+               "Chrome/63.0.3239.132 Safari/537.36"}
+    return requests.get(url, headers=headers, cookies={"over18":"1"})
+
+def parse_html(r):
+    if r.status_code == requests.codes.ok:
+        r.encoding = "utf8"
+        soup = BeautifulSoup(r.text, "lxml")        
+    else:
+        print("HTTP請求錯誤..." + url)
+        soup = None
+    
+    return soup    
+
+def get_articles(soup, date):
+    articles = []  
+    # 取得上一頁的超連結
+    paging_div = soup.find("div", class_="btn-group btn-group-paging")
+    paging_a = paging_div.find_all("a", class_="btn")
+    prev_url = paging_a[1]["href"]
+
+    tag_divs = soup.find_all("div", class_="r-ent")
+    for tag in tag_divs:
+        # 判斷文章的日期
+        if tag.find("div",class_="date").text.strip() == date:
+            push_count = 0    # 取得推文數
+            push_str = tag.find("div", class_="nrec").text
+            if push_str:
+                try:
+                    push_count = int(push_str)  # 轉換成數字
+                except ValueError:  # 轉換失敗，可能是'爆'或 'X1','X2'
+                    if push_str == '爆':
+                        push_count = 99
+                    elif push_str.startswith('X'):
+                        push_count = -10
+            # 取得貼章的超連結和標題文字
+            if tag.find("a"):  # 有超連結，表示文章存在
+                href = tag.find("a")["href"]
+                title = tag.find("a").text
+                author = tag.find("div", class_="author").string 
+                articles.append({
+                    "title": title,
+                    "href": href,
+                    "push_count": push_count,
+                    "author": author
+                })
+    
+    return articles, prev_url
+
+def save_to_json(articles, file):
+    print("今天總共有: " + str(len(articles)) + " 篇文章")
+    threshold = MAX_PUSH
+    print("熱門文章(> %d 推): " % (threshold))
+    for item in articles:   # 顯示熱門文章清單
+        if int(item["push_count"]) > threshold:
+            print(item["title"], item["href"], item["author"])    
+    with open(file, "w", encoding="utf-8") as fp: # 寫入JSON檔案
+        json.dump(articles,fp,indent=2,sort_keys=True,ensure_ascii=False)
+
+def web_scraping_bot(url):
+    articles = []
+    print("抓取網路資料中...")
+    soup = parse_html(get_resource(url))
+    if soup:
+        # 取得今天日期, 去掉開頭'0'符合PTT的日期格式
+        today = time.strftime("%m/%d").lstrip('0') 
+        # 取得目前頁面的今日文章清單
+        current_articles, prev_url = get_articles(soup, today) 
+        while current_articles: 
+            articles += current_articles
+            print("等待2秒鐘...")
+            time.sleep(2) 
+             # 剖析上一頁繼續尋找是否有今日的文章
+            soup = parse_html(get_resource(URL + prev_url))
+            current_articles, prev_url = get_articles(soup, today)
+
+    return articles
+
+if __name__ == '__main__':
+    url = URL + "/bbs/" + TOPIC + "/index.html"
+    print(url)
+    articles = web_scraping_bot(url)
+    for item in articles:
+        print(item)
+    save_to_json(articles, "tmp_articles.json")
+ 
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
 
 
 

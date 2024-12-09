@@ -41,19 +41,19 @@ from sklearn import datasets
 from sklearn import metrics
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
 from sklearn.datasets import make_blobs
+from sklearn.neighbors import KNeighborsClassifier  # K近鄰演算法（K Nearest Neighbor）
+from sklearn.preprocessing import StandardScaler
 
 import matplotlib
 import matplotlib as mpl
 
 
 def show():
-    return
     plt.show()
     pass
 
 
 print("------------------------------------------------------------")  # 60個
-
 
 # 搬到 獨立小程式
 
@@ -1111,295 +1111,6 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 機器學習前準備─以Iris為例
-
-# 1. 資料取得
-
-filename = "data/Iris2.csv"
-
-df = pd.read_csv(filename)
-
-df = df.drop("Id", axis=1)
-
-print(df.head())
-
-# 2. 資料處理
-
-df.info()
-
-df = df.drop_duplicates()  # 刪除重複列
-df.reset_index(drop=True)  # 將列索引重新編號
-s = {"Iris-setosa": 0, "Iris-versicolor": 1, "Iris-virginica": 2}
-df["Species"] = df["Species"].map(s)
-df.info()
-
-# 3. 探索性資料分析
-print(df.head())
-"""
-#4. 機器學習做資料分析
-9-2 機器學習實作──以Iris為例
-9-2-1 提出具體的假設
-9-2-2 找出機器學習模型
-挑選模型：匯入 KNN 模型
-"""
-
-from sklearn.neighbors import KNeighborsClassifier
-
-# 學習訓練：建立並訓練 KNN 模型
-
-df_X = df[["SepalLengthCm", "SepalWidthCm", "PetalLengthCm", "PetalWidthCm"]]
-df_y = df["Species"]
-
-X_train, X_test, y_train, y_test = train_test_split(df_X, df_y, test_size=0.2)
-
-k = 1
-knn = KNeighborsClassifier(n_neighbors=k)  # 建立新模型 knn
-
-knn.fit(X_train, y_train)  # 學習訓練.fit
-
-# 測試評估
-
-print("----KNN模式訓練後，取test data 進行分類的正確率計算-------")
-
-print("準確率:", knn.score(X_test, y_test))
-
-s = []
-for i in range(3, 11):
-    k = i
-    knn = KNeighborsClassifier(n_neighbors=k)
-    knn.fit(X_train, y_train)  # 學習訓練.fit
-    print("k =", k, " 準確率:", knn.score(X_test, y_test))  # 用 test data 檢測模型的準確率
-    s.append(knn.score(X_test, y_test))
-
-k = 8
-knn = KNeighborsClassifier(n_neighbors=k)
-
-knn.fit(X_train, y_train)  # 學習訓練.fit
-
-# 加廣知識：視覺化圖表來顯示準確率
-
-df_knn = pd.DataFrame()
-df_knn["s"] = s
-df_knn.index = [3, 4, 5, 6, 7, 8, 9, 10]
-df_knn.plot(grid=True)
-
-show()
-
-print("分類的預測結果：")
-pred = knn.predict(X_test)  # 預測.predict
-print(pred)
-
-print(y_test.values)  # 觀察Test data真實數據
-
-# 加廣知識：利用values屬性做橫式顯示
-
-print(y_test)
-
-print(y_test.values)
-
-from sklearn.metrics import accuracy_score
-
-accuracy_score(y_test, pred)
-
-# 1.0
-
-from sklearn.metrics import confusion_matrix
-
-confusion_matrix(y_test, pred)
-
-# 加深知識：交叉驗證概念
-
-from sklearn.model_selection import cross_val_score
-
-s = cross_val_score(knn, df_X, df_y, scoring="accuracy", cv=10)
-print("交叉驗證每次的準確率：", s)
-print("交叉驗證得到的平均準確率：", s.mean())
-
-# 決定模型
-# 進行分類預測
-
-new = [[6.6, 3.1, 5.2, 2.4]]
-v = knn.predict(new)  # 預測.predict
-if v == 0:
-    s = "Iris-Setosa"
-elif v == 1:
-    s = "Iris-Versicolour"
-elif v == 2:
-    s = "Iris-Virginica"
-else:
-    s = "錯誤"
-print("預測結果為：", s)
-
-# 預測結果為： 錯誤
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# 機器學習前準備─以Titanic為例
-
-# 1. 資料取得
-
-filename = "data/titanic.csv"
-df = pd.read_csv(filename)
-print(df.head())
-
-# 2. 資料處理
-df.info()
-
-df["Age"] = df["Age"].fillna(df["Age"].mean())
-df["Embarked"] = df["Embarked"].fillna("S")
-df = df.drop("Cabin", axis=1)
-print("重複值：", df[df.duplicated()])  # 檢查有無重複值
-
-df["Sex"] = df["Sex"].map({"female": 0, "male": 1})
-df["Embarked"] = df["Embarked"].map({"S": 0, "C": 1, "Q": 2})
-print(df.head())
-
-# 重複值： Empty DataFrame
-
-# 3. 探索性資料分析
-
-print(df.head())
-
-"""
-4. 機器學習做資料分析
-9-4 機器學習實作─以Titanic為例
-9-4-1 提出具體的假設
-9-4-2 找出機器學習模型
-挑選模型：匯入 KNN 模型
-"""
-
-from sklearn.neighbors import KNeighborsClassifier
-
-# 學習訓練：建立並訓練 KNN 模型
-
-df_X = df[["Sex", "Pclass"]]
-df_y = df["Survived"]
-
-X_train, X_test, y_train, y_test = train_test_split(df_X, df_y, test_size=0.2)
-
-k = 1
-knn = KNeighborsClassifier(n_neighbors=k)
-
-knn.fit(X_train, y_train)  # 學習訓練.fit
-
-# 測試評估
-
-print("----KNN模式訓練後，取test data 進行分類的準確率計算-------")
-print("準確率:", knn.score(X_test, y_test))
-
-s = []
-for i in range(3, 11):
-    k = i
-    knn = KNeighborsClassifier(n_neighbors=k)
-    knn.fit(X_train, y_train)  # 學習訓練.fit
-    print("k =", k, " 準確率:", knn.score(X_test, y_test))  # 用 test data 檢測模型的準確率
-    s.append(knn.score(X_test, y_test))
-
-k = 4
-knn = KNeighborsClassifier(n_neighbors=k)
-
-knn.fit(X_train, y_train)  # 學習訓練.fit
-
-print("分類的預測結果：")
-pred = knn.predict(X_test)  # 預測.predict
-print(pred)  # 觀察預測結果
-
-print("真實數據：")
-print(y_test.values)  # 觀察真實數據(Test data)
-
-from sklearn.metrics import accuracy_score
-
-accuracy_score(y_test, pred)
-
-# 0.7541899441340782
-
-from sklearn.metrics import confusion_matrix
-
-confusion_matrix(y_test, pred)
-
-from sklearn.model_selection import cross_val_score
-
-s = cross_val_score(knn, df_X, df_y, scoring="accuracy", cv=10)
-print("準確率：", s)
-print("平均準確率：", s.mean())
-print("最高：", s.max())
-print("最差：", s.min())
-
-# 決定模型
-# 進行分類預測
-
-print("-----------(1)電影中兩位主角的生還推測-------------")
-
-Rose = [[0, 1]]  # 女性 頭等艙 蘿絲（Rose DeWitt Bukater）
-Jack = [[1, 3]]  # 男性 三等艙 傑克（Jack Dawson）
-v = knn.predict(Rose)  # 預測.predict
-if v == 1:
-    s = "生還"
-else:
-    s = "死亡"
-print("Rose能生還嗎 ? ", s)  # Rose為女性,及坐頭等艙
-
-v = knn.predict(Jack)  # 預測.predict
-if v == 1:
-    s = "生還"
-else:
-    s = "死亡"
-
-print("Jack能生還嗎 ? ", s)  # Jack為男性,及坐三等艙
-
-# 真實的伊西多和伊達·斯特勞斯（Isidor and Ida Straus）夫婦 (You stay, I stay)
-# http://www.epochtimes.com/b5/17/12/6/n9931745.htm
-# Isidor 美國梅西百貨創辦人之一
-
-print("-----(2)真實的伊西多和伊達·斯特勞斯夫婦的生還推測-------")
-Mrs = [[0, 1]]  # 女性 頭等艙 Straus, Mrs. Isidor (Rosalie Ida Blun)
-Mr = [[1, 1]]  # 男性 頭等艙 Straus, Mr. Isidor
-v = knn.predict(Mrs)  # 預測.predict
-if v == 1:
-    s = "生還"
-else:
-    s = "死亡"
-print("Mrs. Straus能生還嗎 ? ", s)  # Ida為女性,及坐頭等艙，可優先搭乘救生艇存活
-
-v = knn.predict(Mr)  # Isidor的生存率有多高呢？  # 預測.predict
-if v == 1:
-    s = "生還"
-else:
-    s = "死亡"
-print("Mr. Straus能生還嗎 ? ", s)
-
-# 真實的 Mrs. Brown
-# https://hokkfabrica.com/her-story-margaret-brown-from-titanic/
-#
-
-print("-----------(3)真實的Mrs. Brown的生還推測-------------")
-
-# 女性 頭等艙 Brown, Mrs. James Joseph (Margaret Tobin) 故事中的暴發戶 對Jack很友善
-Brown = [[0, 1]]
-v = knn.predict(Brown)  # Mrs. Brown呢？  # 預測.predict
-if v == 1:
-    s = "生還"
-else:
-    s = "死亡"
-print("Mrs. Brown能生還嗎 ? ", s)
-
-print("-------------- (5)若你也搭上了鐵達尼號呢？ ----------------")
-
-# s=input('您的性別（0：女，1：男），請輸入代碼？ ')
-s = 1
-# c=input('搭乘的船艙艙等（1：S艙，2：C艙，3：Q艙），請輸入代碼？ ')
-c = 3
-you = [[int(s), int(c)]]
-v = knn.predict(you)  # 預測.predict
-if v == 1:
-    print("預測為:幸運生還")
-else:
-    print("預測為:無法生還")
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 # 一個很大的範例 ST
 """
 探索性數據分析（EDA）
@@ -1424,7 +1135,6 @@ from sklearn.model_selection import KFold
 from sklearn.manifold import TSNE
 from sklearn.cluster import KMeans
 from sklearn.decomposition import PCA
-from sklearn.preprocessing import StandardScaler
 
 # 共 1460 筆資料, 81 欄位
 train = pd.read_csv("data/houseprice.csv")
@@ -2300,7 +2010,6 @@ from sklearn.linear_model import LogisticRegression  # 邏輯迴歸
 from sklearn.svm import SVC, LinearSVC  # 支持向量機
 from sklearn.ensemble import RandomForestClassifier  # 隨機森林
 
-# from sklearn.neighbors import KneighborsClassifier # K近鄰演算法（K Nearest Neighbor）
 from sklearn.naive_bayes import GaussianNB  # 數據集和數據處理
 
 print("------------------------------")	#30個
@@ -2582,9 +2291,7 @@ print("------------------------------------------------------------")  # 60個
 
 # 2. Standardize Data
 # 將資料常態分布化，平均值會變為0, 標準差變為1，使離群值影響降低
-# MinMaxScaler與StandardScaler類似from sklearn.preprocessing import StandardScaler
-
-from sklearn.preprocessing import StandardScaler
+# MinMaxScaler與StandardScaler類似
 
 url = "https://raw.githubusercontent.com/jbrownlee/Datasets/master/pima-indians-diabetes.data.csv"
 names = ["preg", "plas", "pres", "skin", "test", "mass", "pedi", "age", "class"]
@@ -2760,7 +2467,6 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LogisticRegression
 
 data, label = make_blobs(n_samples=1000, n_features=2, centers=2, random_state=9487)
@@ -2794,98 +2500,6 @@ print(f"測試資料的準確性 = {lo_model.score(dx_test, label_test)}")
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-data, label = make_blobs(n_samples=10, n_features=2, centers=2, random_state=9487)
-print(data)
-print(label)
-print(f"分類 : {label}")
-
-plt.scatter(data[:, 0], data[:, 1], c=label, cmap="bwr")
-plt.grid(True)
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-from sklearn.preprocessing import StandardScaler
-
-data, label = make_blobs(n_samples=10, n_features=2, centers=2, random_state=9487)
-
-print(data)
-print(label)
-print(f"分類 : {label}")
-
-plt.subplot(121)
-plt.scatter(data[:, 0], data[:, 1], c=label, cmap="bwr")
-
-d_sta = StandardScaler().fit_transform(data)  # 標準化
-print(d_sta)
-
-plt.subplot(122)
-plt.scatter(d_sta[:, 0], d_sta[:, 1], c=label, cmap="bwr")
-plt.grid(True)
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-from sklearn.preprocessing import StandardScaler
-
-data, label = make_blobs(n_samples=200, n_features=2, centers=2, random_state=9487)
-d_sta = StandardScaler().fit_transform(data)  # 標準化
-
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
-dx_train, dx_test, label_train, label_test = train_test_split(
-    d_sta, label, test_size=0.2, random_state=9487
-)
-# 訓練組8成, 測試組2成
-
-print(f"特徵數據外形 : {d_sta.shape}")
-print(f"訓練數據外形 : {dx_train.shape}")
-print(f"測試數據外形 : {dx_test.shape}")
-print(f"標籤數據外形 : {label.shape}")
-print(f"訓練數據外形 : {label_train.shape}")
-print(f"測試數據外形 : {label_test.shape}")
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-from sklearn.preprocessing import StandardScaler
-from sklearn.neighbors import KNeighborsClassifier  # K近鄰演算法（K Nearest Neighbor）
-
-data, label = make_blobs(n_samples=200, n_features=2, centers=2, random_state=9487)
-d_sta = StandardScaler().fit_transform(data)  # 標準化
-
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
-dx_train, dx_test, label_train, label_test = train_test_split(
-    d_sta, label, test_size=0.2, random_state=9487
-)
-# 訓練組8成, 測試組2成
-
-# 建立分類模型
-k_model = KNeighborsClassifier(n_neighbors=5)  # k = 5  # K近鄰演算法（K Nearest Neighbor）
-
-# 建立訓練數據模型
-k_model.fit(dx_train, label_train)  # 學習訓練.fit
-
-# 對測試數據做預測
-pred = k_model.predict(dx_test)
-
-# 輸出測試數據的 label
-print(label_test)
-
-# 輸出預測數據的 label
-print(pred)
-
-# 輸出準確性
-print(f"訓練資料的準確性 = {k_model.score(dx_train, label_train)}")
-print(f"測試資料的準確性 = {k_model.score(dx_test, label_test)}")
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LogisticRegression
 
 data, label = make_blobs(n_samples=200, n_features=2, centers=2, random_state=9487)
@@ -2919,7 +2533,6 @@ print(f"測試資料的準確性 = {lo_model.score(dx_test, label_test)}")
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-from sklearn.preprocessing import StandardScaler
 from sklearn.svm import LinearSVC
 
 data, label = make_blobs(n_samples=200, n_features=2, centers=2, random_state=9487)
@@ -2954,8 +2567,8 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 from sklearn.datasets import make_moons
-from sklearn.preprocessing import StandardScaler
-from sklearn.svm import LinearSVC, SVC
+from sklearn.svm import LinearSVC
+from sklearn.svm import SVC
 
 data, label = make_moons(n_samples=200, noise=0.2, random_state=9487)
 
@@ -3208,7 +2821,7 @@ df_std.plot(kind="scatter", x="標準化FB追蹤數", y="標準化快樂程度")
 show()
 """
 print("------------------------------------------------------------")  # 60個
-"""
+
 from sklearn import preprocessing
 
 f_tracking = [
@@ -3387,7 +3000,9 @@ iris = datasets.load_iris()
 X, y = iris.data[:, :2], iris.target
 
 # 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=9487)
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=9487
+)
 # 訓練組8成, 測試組2成
 
 # Standardize the features using StandardScaler
@@ -3427,7 +3042,9 @@ print("Size of y:", y.shape)  #  (150, )
 X, y = iris.data, iris.target
 
 # 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=9487)
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=9487
+)
 # 訓練組8成, 測試組2成
 
 # Print the sizes of the arrays
@@ -3442,7 +3059,6 @@ print("------------------------------------------------------------")  # 60個
 
 # Import necessary classes from sklearn libraries
 from sklearn.linear_model import LogisticRegression
-from sklearn.neighbors import KNeighborsClassifier  # K近鄰演算法（K Nearest Neighbor）
 from sklearn.svm import SVC
 from sklearn.cluster import KMeans
 from sklearn.decomposition import PCA
@@ -3507,8 +3123,6 @@ print("------------------------------")  # 30個
 
 # Preprocessing The Data
 # Standardization
-
-from sklearn.preprocessing import StandardScaler
 
 # Create an instance of the StandardScaler and fit it to training data
 scaler = StandardScaler().fit(X_train)
@@ -3714,7 +3328,7 @@ print("Best cross-validation score:", grid.best_score_)
 best_knn = grid.best_estimator_
 test_accuracy = best_knn.score(X_test, y_test)
 print("Test set accuracy:", test_accuracy)
-"""
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -3873,7 +3487,6 @@ print("shape of X {}; shape of Y {}".format(X.shape, Y.shape))
 X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2)
 # 訓練組8成, 測試組2成
 
-from sklearn.neighbors import KNeighborsClassifier
 from sklearn.neighbors import RadiusNeighborsClassifier
 
 models = []
@@ -5217,8 +4830,6 @@ print(Y_test)
 # 可用特征標準化或Z值歸一化解決。
 # 導入sklearn.preprocessing庫的StandardScalar類。
 
-from sklearn.preprocessing import StandardScaler
-
 scaler = StandardScaler()
 X_train = scaler.fit_transform(X_train)  # STD特徵縮放
 X_test = scaler.transform(X_test)  # STD特徵縮放
@@ -5245,8 +4856,6 @@ X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.2)
 # 訓練組8成, 測試組2成
 
 # 特征缩放 Feature Scaling
-from sklearn.preprocessing import StandardScaler
-
 scaler = StandardScaler()
 X_train = scaler.fit_transform(X_train)  # STD特徵縮放
 X_test = scaler.transform(X_test)  # STD特徵縮放
@@ -5367,8 +4976,6 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 # 訓練組8成, 測試組2成
 
 # 第四步：特征缩放 Feature Scaling
-from sklearn.preprocessing import StandardScaler
-
 scaler = StandardScaler()
 X_train = scaler.fit_transform(X_train)  # STD特徵縮放
 X_test = scaler.transform(X_test)  # STD特徵縮放
@@ -5376,8 +4983,6 @@ X_test = scaler.transform(X_test)  # STD特徵縮放
 # 第五步：使用K-NN对训练集数据进行训练
 # Fitting K-NN to the Training set
 # 从sklearn的neighbors类中导入KNeighborsClassifier学习器
-
-from sklearn.neighbors import KNeighborsClassifier
 
 # 设置好相关的参数 n_neighbors = 5(K值的选择，默认选择5)、
 # metric = 'minkowski'(距离度量的选择，这里选择的是闵氏距离(默认参数))、
@@ -5445,8 +5050,6 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 # 訓練組8成, 測試組2成
 
 # 第四步：特征量化  # Feature Scaling
-from sklearn.preprocessing import StandardScaler
-
 scaler = StandardScaler()
 X_train = scaler.fit_transform(X_train)  # STD特徵縮放
 X_test = scaler.fit_transform(X_test)  # STD特徵縮放
@@ -5566,8 +5169,6 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 # 訓練組8成, 測試組2成
 
 # Feature Scaling
-from sklearn.preprocessing import StandardScaler
-
 scaler = StandardScaler()
 X_train = scaler.fit_transform(X_train)  # STD特徵縮放
 X_test = scaler.transform(X_test)  # STD特徵縮放
@@ -5660,8 +5261,6 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 # 訓練組8成, 測試組2成
 
 # Feature Scaling 特征缩放
-from sklearn.preprocessing import StandardScaler
-
 scaler = StandardScaler()
 X_train = scaler.fit_transform(X_train)  # STD特徵縮放
 X_test = scaler.transform(X_test)  # STD特徵縮放

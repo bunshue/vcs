@@ -33,12 +33,17 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
+import joblib
 from common1 import *
+from sklearn import datasets
+from sklearn.datasets import make_blobs
+from sklearn.datasets import make_moons  # 非線性的資料集
+from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
+from sklearn.preprocessing import StandardScaler
+from sklearn.model_selection import cross_val_score
+from sklearn.metrics import accuracy_score  # 計算準確率
 from sklearn.neighbors import KNeighborsClassifier  # K近鄰演算法（K Nearest Neighbor, KNN）
 from sklearn.neighbors import KNeighborsRegressor
-
-from sklearn import datasets
-from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
 
 
 def show():
@@ -48,8 +53,6 @@ def show():
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-'''
 
 """ TBD
 print('最簡易 K近鄰演算法（K Nearest Neighbor, KNN）')
@@ -71,8 +74,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 """
-from sklearn.datasets import make_moons  # 非線性的資料集
-
 X, y = make_moons(noise=0.3)
 print("make_moons 未指定個數, 就是100個")
 """
@@ -110,7 +111,7 @@ y = [0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3]
 
 NEIGHBOARS = 5
 print("用 K近鄰演算法 找出最近的", NEIGHBOARS, "個點")
-#knn = KNeighborsClassifier(n_neighbors=NEIGHBOARS)  # K近鄰演算法（K Nearest Neighbor, KNN）
+# knn = KNeighborsClassifier(n_neighbors=NEIGHBOARS)  # K近鄰演算法（K Nearest Neighbor, KNN）
 knn = KNeighborsClassifier()  # K近鄰演算法（K Nearest Neighbor, KNN）
 # 無參數就是n_neighbors=5
 
@@ -119,7 +120,7 @@ knn.fit(X, y)  # 學習訓練.fit
 y_pred = knn.predict(X)  # 預測.predict
 print("預測結果 :\n", y_pred)
 
-print("評估")
+print("計算準確率")
 print(accuracy_score(y_pred, y))
 
 print("正確答案")
@@ -137,11 +138,11 @@ print("預測答案 :", knn.predict([x]))  # 預測.predict
 print("預測樣本距離 :", knn.predict_proba([x]))  #      測試數據X的返回概率估計。
 
 neighbors = knn.kneighbors(xx, return_distance=False)
-print('找到的', NEIGHBOARS, '個點 :', neighbors)
+print("找到的", NEIGHBOARS, "個點 :", neighbors)
 
 # 原始資料
 plt.scatter(X[:, 0], X[:, 1], c=y, s=100, cmap="cool")
-#plt.scatter(X[:, 0], X[:, 1], c=y, s=100)
+# plt.scatter(X[:, 0], X[:, 1], c=y, s=100)
 
 # 畫出預測點
 plt.scatter(x[0], x[1], marker="*", s=200, c="r", alpha=0.8, cmap="cool")  # 待預測的點
@@ -157,92 +158,68 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("make_blobs 產生測試資料")
-
-from sklearn.datasets import make_blobs
-from sklearn.preprocessing import StandardScaler
-
-N = 500
-print("make_blobs 產生", N, "筆資料 2維 2群")
-X, y = make_blobs(n_samples=N, n_features=2, centers=2, random_state=9487)
-
-print(X.shape)
-print(y.shape)
-# print(X)
-# print(y)
+N = 200  # n_samples, 樣本數
+M = 2  # n_features, 特徵數(資料的維度)
+GROUPS = 2  # centers, 分群數
+STD = 1  # cluster_std, 資料標準差
+print("make_blobs,", N, "個樣本, ", M, "個特徵, 分成", GROUPS, "群")
+X, y = make_blobs(n_samples=N, n_features=M, centers=GROUPS)
 
 plt.subplot(121)
-plt.scatter(X.T[0], X.T[1], c=y, cmap="Dark2")
-plt.title("dx的分佈狀況, dy是用顏色表示")
+plt.scatter(X[:, 0], X[:, 1], c=y, cmap="bwr")
+# plt.scatter(X.T[0], X.T[1], c=y, cmap="Dark2")
 plt.grid(True)
-
-from sklearn.preprocessing import StandardScaler
+plt.title("原始資料, dx的分佈狀況, dy是用顏色表示")
 
 scaler = StandardScaler()
-dx_std = scaler.fit_transform(X)  # STD特徵縮放
+X_std = scaler.fit_transform(X)  # STD特徵縮放, 標準化
 
 plt.subplot(122)
-plt.scatter(dx_std.T[0], dx_std.T[1], c=y, cmap="Dark2")
-plt.title("經過 StandardScaler")
+plt.scatter(X_std[:, 0], X_std[:, 1], c=y, cmap="bwr")
+# plt.scatter(X_std.T[0], X_std.T[1], c=y, cmap="Dark2")
 plt.grid(True)
+plt.title("特徵縮放, 經過 StandardScaler")
 
 show()
-
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
-X_train, X_test, y_train, y_test = train_test_split(dx_std, y, test_size=0.2)
-# 訓練組8成, 測試組2成
-
-print(X.shape)
-print(X_train.shape)
-print(X_test.shape)
-
-print(y.shape)
-print(y_train.shape)
-print(y_test.shape)
 
 NEIGHBOARS = 5
 print("用 K近鄰演算法 找出最近的", NEIGHBOARS, "個點")
 knn = KNeighborsClassifier(n_neighbors=NEIGHBOARS)  # K近鄰演算法（K Nearest Neighbor, KNN）
 
-knn.fit(X_train, y_train)  # 學習訓練.fit
+knn.fit(X, y)  # 學習訓練.fit
 
-y_pred = knn.predict(X_test)  # 預測.predict
+y_pred = knn.predict(X)  # 預測.predict
 print("預測結果 :\n", y_pred)
 
-print(y_test)
+print("正確答案")
+print(y)
 
-print("KNN準確率: %.2f" % knn.score(X_train, y_train))
-print("KNN準確率: %.2f" % knn.score(X_test, y_test))
+# 輸出準確性
+print("KNN準確率: %.2f" % knn.score(X, y))
+print(f"訓練資料的準確性 = {knn.score(X, y)}")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 iris = datasets.load_iris()
-# print(iris.feature_names)
-
 X = iris.data
 y = iris.target
 
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
-# 訓練組8成, 測試組2成
-
 NEIGHBOARS = 5
 print("用 K近鄰演算法 找出最近的", NEIGHBOARS, "個點")
 knn = KNeighborsClassifier(n_neighbors=NEIGHBOARS)
 
-knn.fit(X_train, y_train)  # 學習訓練.fit
+knn.fit(X, y)  # 學習訓練.fit
 
-y_pred = knn.predict(X_test)  # 預測.predict
+y_pred = knn.predict(X)  # 預測.predict
 print("預測結果 :\n", y_pred)
 
-print("KNN準確率: %.2f" % knn.score(X_test, y_test))
-
-from sklearn.model_selection import cross_val_score
+print("KNN準確率: %.2f" % knn.score(X, y))
 
 NEIGHBOARS = 5
 print("用 K近鄰演算法 找出最近的", NEIGHBOARS, "個點")
 knn = KNeighborsClassifier(n_neighbors=NEIGHBOARS)
+
 scores = cross_val_score(knn, X, y, cv=5, scoring="accuracy")
 print(scores)
 
@@ -268,8 +245,6 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-from sklearn import neighbors
-
 iris = datasets.load_iris()
 
 X = pd.DataFrame(iris.data, columns=iris.feature_names)
@@ -277,16 +252,14 @@ X.columns = ["sepal_length", "sepal_width", "petal_length", "petal_width"]
 target = pd.DataFrame(iris.target, columns=["target"])
 y = target["target"]
 
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
-XTrain, XTest, yTrain, yTest = train_test_split(X, y, test_size=0.2)
-# 訓練組8成, 測試組2成
-
-Ks = np.arange(1, round(0.2 * len(XTrain) + 1))
+Ks = np.arange(1, round(0.2 * len(X) + 1))
 accuracies = []
 for k in Ks:
-    knn = neighbors.KNeighborsClassifier(n_neighbors=k)
-    knn.fit(X, y)
-    accuracy = knn.score(XTest, yTest)
+    NEIGHBOARS = k
+    print("用 K近鄰演算法 找出最近的", NEIGHBOARS, "個點")
+    knn = KNeighborsClassifier(n_neighbors=NEIGHBOARS)
+    knn.fit(X, y)  # 學習訓練.fit
+    accuracy = knn.score(X, y)
     accuracies.append(accuracy)
 
 plt.plot(Ks, accuracies)
@@ -296,8 +269,6 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-from sklearn import neighbors
-
 iris = datasets.load_iris()
 
 X = pd.DataFrame(iris.data, columns=iris.feature_names)
@@ -305,25 +276,21 @@ X.columns = ["sepal_length", "sepal_width", "petal_length", "petal_width"]
 target = pd.DataFrame(iris.target, columns=["target"])
 y = target["target"]
 
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
-XTrain, XTest, yTrain, yTest = train_test_split(X, y, test_size=0.2)
-# 訓練組8成, 測試組2成
+NEIGHBOARS = 3
+print("用 K近鄰演算法 找出最近的", NEIGHBOARS, "個點")
+knn = KNeighborsClassifier(n_neighbors=NEIGHBOARS)
 
-k = 3
+knn.fit(X, y)  # 學習訓練.fit
 
-knn = neighbors.KNeighborsClassifier(n_neighbors=k)
-knn.fit(X, y)
-
-print("準確率:", knn.score(XTest, yTest))
+print("準確率:", knn.score(X, y))
 print("---------------------------")
-print(knn.predict(XTest))
+print(knn.predict(X))
 print("---------------------------")
-print(yTest.values)
+print(y.values)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-from sklearn import neighbors
 from sklearn.model_selection import cross_val_score
 
 iris = datasets.load_iris()
@@ -336,7 +303,9 @@ y = target["target"]
 Ks = np.arange(1, round(0.2 * len(X) + 1))
 accuracies = []
 for k in Ks:
-    knn = neighbors.KNeighborsClassifier(n_neighbors=k)
+    NEIGHBOARS = k
+    print("用 K近鄰演算法 找出最近的", NEIGHBOARS, "個點")
+    knn = KNeighborsClassifier(n_neighbors=NEIGHBOARS)
     scores = cross_val_score(knn, X, y, scoring="accuracy", cv=10)
     accuracies.append(scores.mean())
 
@@ -347,86 +316,50 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.preprocessing import StandardScaler
+print("建立模型, 儲存模型, 使用模型")
 
-iris = load_iris()
+iris = datasets.load_iris()
+X = iris.data
+y = iris.target
 
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
-x_train, x_test, y_train, y_test = train_test_split(
-    iris.data, iris.target, test_size=0.2
-)
-# 訓練組8成, 測試組2成
+NEIGHBOARS = 5
+print("用 K近鄰演算法 找出最近的", NEIGHBOARS, "個點")
+knn = KNeighborsClassifier(n_neighbors=NEIGHBOARS)
 
-std = StandardScaler()
-
-x_train = std.fit_transform(x_train)
-
-x_test = std.transform(x_test)
-
-knn = KNeighborsClassifier(n_neighbors=5)
-
-knn.fit(x_train, y_train)
+knn.fit(X, y)  # 學習訓練.fit
 
 print("將 模型存檔 使用 joblib")
 joblib.dump(knn, "tmp_my_model_iris.joblib")
 
 print("------------------------------")  # 60個
 
-from sklearn.preprocessing import StandardScaler
-
-iris = load_iris()
-
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
-x_train, x_test, y_train, y_test = train_test_split(
-    iris.data, iris.target, test_size=0.2
-)
-# 訓練組8成, 測試組2成
-
-std = StandardScaler()
-
-x_train = std.fit_transform(x_train)
-
-x_test = std.transform(x_test)
+print("讀取模型, 預測")
+iris = datasets.load_iris()
+X = iris.data
+y = iris.target
 
 print("讀取模型")
 knnmodel = joblib.load("tmp_my_model_iris.joblib")
 
-score = knnmodel.score(x_test, y_test)
+score = knnmodel.score(X, y)
 print(score)
 
 print("------------------------------------------------------------")  # 60個
-
-iris = load_iris()
-
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
-x_train, x_test, y_train, y_test = train_test_split(
-    iris.data, iris.target, test_size=0.2
-)
-# 訓練組8成, 測試組2成
-
-std = StandardScaler()
-
-x_train = std.fit_transform(x_train)
-
-x_test = std.transform(x_test)
-
-knn = KNeighborsClassifier(n_neighbors=5)
-
-knn.fit(x_train, y_train)
-
-y_predict = knn.predict(x_test)
-print("預測結果：{}".format(y_predict))
-print("準確率：{}".format(knn.score(x_test, y_test)))
-
-print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+iris = datasets.load_iris()
+X = iris.data
+y = iris.target
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
+NEIGHBOARS = 5
+print("用 K近鄰演算法 找出最近的", NEIGHBOARS, "個點")
+knn = KNeighborsClassifier(n_neighbors=NEIGHBOARS)
 
+knn.fit(X, y)  # 學習訓練.fit
 
+y_pred = knn.predict(X)
+print("預測結果：{}".format(y_pred))
+print("準確率：{}".format(knn.score(X, y)))
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -462,8 +395,6 @@ print(df.shape)
 cc = df.isnull().any()
 print(cc)
 
-from sklearn.preprocessing import StandardScaler
-
 # 將Danger中特徵中移除，作為要預測的對象
 scaler = StandardScaler()
 scaler.fit(df.drop("Danger", axis=1))
@@ -491,7 +422,8 @@ knn.fit(X_train, y_train)  # 學習訓練.fit
 y_pred = knn.predict(X_test)  # 預測.predict
 print("預測結果 :\n", y_pred)
 
-from sklearn.metrics import classification_report, confusion_matrix
+from sklearn.metrics import classification_report
+from sklearn.metrics import confusion_matrix
 
 print(confusion_matrix(y_test, y_pred))
 print(classification_report(y_test, y_pred))
@@ -592,8 +524,6 @@ print(cc)
 # 對敏感族群不健康為PM2.5數值在35.5以上
 # 載入標準化比例尺（StandardScaler）套件
 
-from sklearn.preprocessing import StandardScaler
-
 # 將Danger中特徵中移除，作為要預測的對象
 scaler = StandardScaler()
 scaler.fit(df.drop("Danger", axis=1))  # 刪除 "Danger" 這一欄的資料
@@ -622,7 +552,8 @@ y_pred = knn.predict(X_test)  # 預測.predict
 print("預測結果 :\n", y_pred)
 
 # 使用混淆矩陣
-from sklearn.metrics import classification_report, confusion_matrix
+from sklearn.metrics import classification_report
+from sklearn.metrics import confusion_matrix
 
 print("混淆矩陣")
 print(confusion_matrix(y_test, y_pred))
@@ -731,7 +662,6 @@ Y = orgData[["Dated"]]
 X.head()
 
 # * 极值标准化
-
 from sklearn import preprocessing
 
 min_max_scaler = preprocessing.MinMaxScaler()
@@ -745,14 +675,11 @@ X_train, X_test, y_train, y_test = cross_validation.train_test_split(
 
 # 上述过程有没有问题？
 
-# * 建模
-from sklearn.neighbors import KNeighborsClassifier
-
 NEIGHBOARS = 3
 print("用 K近鄰演算法 找出最近的", NEIGHBOARS, "個點")
 knn = KNeighborsClassifier(n_neighbors=NEIGHBOARS)  # 默認歐氏距離
 
-knn.fit(X_train, y_train.values.flatten())
+knn.fit(X_train, y_train.values.flatten())  # 學習訓練.fit
 
 test_est = knn.predict(X_test)
 
@@ -764,18 +691,15 @@ print(metrics.classification_report(y_test, test_est))
 print("KNN準確率: %.2f" % knn.score(X_test, y_test))
 
 # * 选择k值
-
-for k in range(1, 30):
+for k in range(1, 30, 5):
     NEIGHBOARS = k
     print("用 K近鄰演算法 找出最近的", NEIGHBOARS, "個點")
     knn = KNeighborsClassifier(n_neighbors=NEIGHBOARS)
-    knn.fit(X_train, y_train.values.flatten())
+    knn.fit(X_train, y_train.values.flatten())  # 學習訓練.fit
     score = knn.score(X_test, y_test)
     print("KNN準確率: %.2f" % knn.score(X_test, y_test))
 
-
 # * 交叉验证选择k值
-
 from sklearn.model_selection import ParameterGrid
 from sklearn.model_selection import GridSearchCV
 from sklearn.model_selection import KFold
@@ -787,9 +711,13 @@ print(help(sklearn.model_selection.KFold()))
 n_samples = len(X_train)
 kf = KFold(n_samples)
 grid = {"n_neighbors": [1, 2, 3, 4, 5, 6, 7, 8, 9]}
+
 estimator = KNeighborsClassifier()
 gridSearchCV = GridSearchCV(estimator, grid, cv=kf)
-gridSearchCV.fit(X_train, y_train.values.flatten())
+
+print("以下 久")
+gridSearchCV.fit(X_train, y_train.values.flatten())  # 學習訓練.fit
+
 cc = gridSearchCV.cv_results_  # cv_results_ : 具體用法模型不同參數下交叉驗證的結果
 print(cc)
 
@@ -805,8 +733,6 @@ gridSearchCV.best_params_
 
 best = gridSearchCV.best_estimator_
 best.score(X_test, y_test)
-
-# 练习：试一试哪些参数会影响结果
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -841,7 +767,7 @@ plt.plot(T, y_pred, c="k", label="prediction", lw=4)  # 畫出擬合曲線
 plt.title("KNeighborsRegressor (NEIGHBOARS = %i)" % NEIGHBOARS)
 plt.axis("tight")
 show()
-'''
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -854,12 +780,8 @@ from sklearn import preprocessing
 ds = datasets.load_iris()
 
 # 2. 資料清理、資料探索與分析
-
 df = pd.DataFrame(ds.data, columns=ds.feature_names)
-print(df)
-
 y = ds.target
-print(y)
 
 print(ds.target_names)
 
@@ -896,45 +818,35 @@ print(cc)
 print(y_train)
 
 # 特徵縮放
-
 scaler = preprocessing.StandardScaler()
 X_train_std = scaler.fit_transform(X_train)
 X_test_std = scaler.transform(X_test)
 
-# 5. 選擇演算法
+NEIGHBOARS = 5
+print("用 K近鄰演算法 找出最近的", NEIGHBOARS, "個點")
+knn = KNeighborsClassifier(n_neighbors=NEIGHBOARS)
 
-from sklearn.neighbors import KNeighborsClassifier
+knn.fit(X_train_std, y_train)  # 學習訓練.fit
 
-clf = KNeighborsClassifier(n_neighbors=5)
-
-# 6. 模型訓練
-
-clf.fit(X_train_std, y_train)
-
-# 7. 模型評分
-
-# 計算準確率
-y_pred = clf.predict(X_test_std)
+print("計算準確率")
+y_pred = knn.predict(X_test_std)
 print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
-
 # 90.00%
 
-# 最近鄰的距離與索引值
-
-cc = clf.kneighbors(X_test[0:1])
+print("最近鄰的距離與索引值")
+cc = knn.kneighbors(X_test[0:1])
 print(cc)
 
-# 設定距離為加權值
+print("設定距離為加權值")
+NEIGHBOARS = 5
+print("用 K近鄰演算法 找出最近的", NEIGHBOARS, "個點")
+knn = KNeighborsClassifier(n_neighbors=NEIGHBOARS, weights="distance")
 
-from sklearn.neighbors import KNeighborsClassifier
+knn.fit(X_train_std, y_train)  # 學習訓練.fit
 
-clf = KNeighborsClassifier(n_neighbors=5, weights="distance")
-clf.fit(X_train_std, y_train)
-
-# 計算準確率
-y_pred = clf.predict(X_test_std)
+print("計算準確率")
+y_pred = knn.predict(X_test_std)
 print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
-
 # 96.67%
 
 # 混淆矩陣
@@ -951,13 +863,292 @@ disp = ConfusionMatrixDisplay(
 disp.plot()
 show()
 
-"""
-8. 模型評估
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-9. 模型佈署
+# 機器學習前準備─以Iris為例
 
-10.模型預測
+# 1. 資料取得
+
+filename = "data/Iris2.csv"
+
+df = pd.read_csv(filename)
+
+df = df.drop("Id", axis=1)
+
+print(df.head())
+
+# 2. 資料處理
+
+# df.info() # 這樣就印出訊息了
+
+df = df.drop_duplicates()  # 刪除重複列
+df.reset_index(drop=True)  # 將列索引重新編號
+s = {"Iris-setosa": 0, "Iris-versicolor": 1, "Iris-virginica": 2}
+df["Species"] = df["Species"].map(s)
+df.info()
+
+# 3. 探索性資料分析
+print(df.head())
 """
+#4. 機器學習做資料分析
+9-2 機器學習實作──以Iris為例
+9-2-1 提出具體的假設
+9-2-2 找出機器學習模型
+挑選模型：匯入 KNN 模型
+"""
+
+# 學習訓練：建立並訓練 KNN 模型
+
+df_X = df[["SepalLengthCm", "SepalWidthCm", "PetalLengthCm", "PetalWidthCm"]]
+df_y = df["Species"]
+
+X_train, X_test, y_train, y_test = train_test_split(df_X, df_y, test_size=0.2)
+
+k = 1
+knn = KNeighborsClassifier(n_neighbors=k)  # 建立新模型 knn
+
+knn.fit(X_train, y_train)  # 學習訓練.fit
+
+# 測試評估
+
+print("----KNN模式訓練後，取test data 進行分類的正確率計算-------")
+
+print("準確率:", knn.score(X_test, y_test))
+
+s = []
+for i in range(3, 11):
+    k = i
+    knn = KNeighborsClassifier(n_neighbors=k)
+    knn.fit(X_train, y_train)  # 學習訓練.fit
+    print("k =", k, " 準確率:", knn.score(X_test, y_test))  # 用 test data 檢測模型的準確率
+    s.append(knn.score(X_test, y_test))
+
+k = 8
+knn = KNeighborsClassifier(n_neighbors=k)
+
+knn.fit(X_train, y_train)  # 學習訓練.fit
+
+# 加廣知識：視覺化圖表來顯示準確率
+
+df_knn = pd.DataFrame()
+df_knn["s"] = s
+df_knn.index = [3, 4, 5, 6, 7, 8, 9, 10]
+df_knn.plot(grid=True)
+
+show()
+
+print("分類的預測結果：")
+y_pred = knn.predict(X_test)  # 預測.predict
+print(y_pred)
+
+print(y_test.values)  # 觀察Test data真實數據
+
+# 加廣知識：利用values屬性做橫式顯示
+
+print(y_test)
+
+print(y_test.values)
+
+print("計算準確率")
+accuracy_score(y_test, y_pred)
+# 1.0
+
+from sklearn.metrics import confusion_matrix
+
+confusion_matrix(y_test, y_pred)
+
+# 加深知識：交叉驗證概念
+
+from sklearn.model_selection import cross_val_score
+
+s = cross_val_score(knn, df_X, df_y, scoring="accuracy", cv=10)
+print("交叉驗證每次的準確率：", s)
+print("交叉驗證得到的平均準確率：", s.mean())
+
+# 決定模型
+# 進行分類預測
+
+new = [[6.6, 3.1, 5.2, 2.4]]
+v = knn.predict(new)  # 預測.predict
+if v == 0:
+    s = "Iris-Setosa"
+elif v == 1:
+    s = "Iris-Versicolour"
+elif v == 2:
+    s = "Iris-Virginica"
+else:
+    s = "錯誤"
+print("預測結果為：", s)
+
+# 預測結果為： 錯誤
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+# 機器學習前準備─以Titanic為例
+
+# 1. 資料取得
+
+filename = "data/titanic.csv"
+df = pd.read_csv(filename)
+print(df.head())
+
+# 2. 資料處理
+df.info()
+
+df["Age"] = df["Age"].fillna(df["Age"].mean())
+df["Embarked"] = df["Embarked"].fillna("S")
+df = df.drop("Cabin", axis=1)
+print("重複值：", df[df.duplicated()])  # 檢查有無重複值
+
+df["Sex"] = df["Sex"].map({"female": 0, "male": 1})
+df["Embarked"] = df["Embarked"].map({"S": 0, "C": 1, "Q": 2})
+print(df.head())
+
+# 重複值： Empty DataFrame
+
+# 3. 探索性資料分析
+
+print(df.head())
+
+"""
+4. 機器學習做資料分析
+9-4 機器學習實作─以Titanic為例
+9-4-1 提出具體的假設
+9-4-2 找出機器學習模型
+挑選模型：匯入 KNN 模型
+"""
+
+# 學習訓練：建立並訓練 KNN 模型
+
+df_X = df[["Sex", "Pclass"]]
+df_y = df["Survived"]
+
+X_train, X_test, y_train, y_test = train_test_split(df_X, df_y, test_size=0.2)
+
+k = 1
+knn = KNeighborsClassifier(n_neighbors=k)
+
+knn.fit(X_train, y_train)  # 學習訓練.fit
+
+# 測試評估
+
+print("----KNN模式訓練後，取test data 進行分類的準確率計算-------")
+print("準確率:", knn.score(X_test, y_test))
+
+s = []
+for i in range(3, 11):
+    k = i
+    knn = KNeighborsClassifier(n_neighbors=k)
+    knn.fit(X_train, y_train)  # 學習訓練.fit
+    print("k =", k, " 準確率:", knn.score(X_test, y_test))  # 用 test data 檢測模型的準確率
+    s.append(knn.score(X_test, y_test))
+
+k = 4
+knn = KNeighborsClassifier(n_neighbors=k)
+
+knn.fit(X_train, y_train)  # 學習訓練.fit
+
+print("分類的預測結果：")
+y_pred = knn.predict(X_test)  # 預測.predict
+print(y_pred)  # 觀察預測結果
+
+print("真實數據：")
+print(y_test.values)  # 觀察真實數據(Test data)
+
+print("計算準確率")
+accuracy_score(y_test, y_pred)
+# 0.7541899441340782
+
+from sklearn.metrics import confusion_matrix
+
+confusion_matrix(y_test, y_pred)
+
+from sklearn.model_selection import cross_val_score
+
+s = cross_val_score(knn, df_X, df_y, scoring="accuracy", cv=10)
+print("準確率：", s)
+print("平均準確率：", s.mean())
+print("最高：", s.max())
+print("最差：", s.min())
+
+# 決定模型
+# 進行分類預測
+
+print("-----------(1)電影中兩位主角的生還推測-------------")
+
+Rose = [[0, 1]]  # 女性 頭等艙 蘿絲（Rose DeWitt Bukater）
+Jack = [[1, 3]]  # 男性 三等艙 傑克（Jack Dawson）
+v = knn.predict(Rose)  # 預測.predict
+if v == 1:
+    s = "生還"
+else:
+    s = "死亡"
+print("Rose能生還嗎 ? ", s)  # Rose為女性,及坐頭等艙
+
+v = knn.predict(Jack)  # 預測.predict
+if v == 1:
+    s = "生還"
+else:
+    s = "死亡"
+
+print("Jack能生還嗎 ? ", s)  # Jack為男性,及坐三等艙
+
+# 真實的伊西多和伊達·斯特勞斯（Isidor and Ida Straus）夫婦 (You stay, I stay)
+# http://www.epochtimes.com/b5/17/12/6/n9931745.htm
+# Isidor 美國梅西百貨創辦人之一
+
+print("-----(2)真實的伊西多和伊達·斯特勞斯夫婦的生還推測-------")
+Mrs = [[0, 1]]  # 女性 頭等艙 Straus, Mrs. Isidor (Rosalie Ida Blun)
+Mr = [[1, 1]]  # 男性 頭等艙 Straus, Mr. Isidor
+v = knn.predict(Mrs)  # 預測.predict
+if v == 1:
+    s = "生還"
+else:
+    s = "死亡"
+print("Mrs. Straus能生還嗎 ? ", s)  # Ida為女性,及坐頭等艙，可優先搭乘救生艇存活
+
+v = knn.predict(Mr)  # Isidor的生存率有多高呢？  # 預測.predict
+if v == 1:
+    s = "生還"
+else:
+    s = "死亡"
+print("Mr. Straus能生還嗎 ? ", s)
+
+# 真實的 Mrs. Brown
+# https://hokkfabrica.com/her-story-margaret-brown-from-titanic/
+#
+
+print("-----------(3)真實的Mrs. Brown的生還推測-------------")
+
+# 女性 頭等艙 Brown, Mrs. James Joseph (Margaret Tobin) 故事中的暴發戶 對Jack很友善
+Brown = [[0, 1]]
+v = knn.predict(Brown)  # Mrs. Brown呢？  # 預測.predict
+if v == 1:
+    s = "生還"
+else:
+    s = "死亡"
+print("Mrs. Brown能生還嗎 ? ", s)
+
+print("-------------- (5)若你也搭上了鐵達尼號呢？ ----------------")
+
+# s=input('您的性別（0：女，1：男），請輸入代碼？ ')
+s = 1
+# c=input('搭乘的船艙艙等（1：S艙，2：C艙，3：Q艙），請輸入代碼？ ')
+c = 3
+you = [[int(s), int(c)]]
+v = knn.predict(you)  # 預測.predict
+if v == 1:
+    print("預測為:幸運生還")
+else:
+    print("預測為:無法生還")
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 

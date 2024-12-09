@@ -47,10 +47,9 @@ def show():
     pass
 
 
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 """
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 print("無 sklearn之kmeans 1")
 
 
@@ -258,7 +257,6 @@ def cluster(x, y, mu_x, mu_y):
             cls_[cl] = [(x[i], y[i])]
         elif cl in cls_:
             cls_[cl].append((x[i], y[i]))
-
     return cls_
 
 
@@ -326,26 +324,37 @@ def do_k_means():
 
 
 do_k_means()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
 """
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 print("最簡易 K-平均演算法(KMeans) 任意資料分四群並畫圖")
 
-N = 100
+N = 50
 print("任意隨機資料")
 X = np.random.rand(N, 2)
 
 CLUSTERS = 3  # 要分成的群數
 clf = KMeans(n_clusters=CLUSTERS)  # K-平均演算法
+
 clf.fit(X)  # 學習訓練.fit
 
 print("群集類別標籤(訓練好的結果) :\n", clf.labels_)
 print("集群中心的坐標:", clf.cluster_centers_)
 print("分群準確性:", clf.inertia_)
 
-# 預測600點
-N = 600
+print("計算分群準確性")  # 資料點與所屬質心距離的平方和
+C = clf.cluster_centers_  # 集群中心的座標
+y = clf.labels_  # 群集類別標籤
+ss = 0
+for i in range(len(X)):
+    d = (X[i, 0] - C[y[i], 0]) ** 2 + (X[i, 1] - C[y[i], 1]) ** 2
+    ss += d
+
+print("計算分群準確性 :", ss)
+
+# 預測500點
+N = 500
 X_test = np.random.rand(N, 2)
 y_pred = clf.predict(X_test)
 
@@ -353,11 +362,11 @@ plt.figure(figsize=(12, 6))
 
 plt.subplot(131)
 plt.scatter(X[:, 0], X[:, 1], s=50)
-plt.title("原始資料")
+plt.title("原始資料50點")
 
 plt.subplot(132)
 plt.scatter(X[:, 0], X[:, 1], c=clf.labels_)
-plt.title("KMeans分成3群")
+plt.title("50點 KMeans分成3群")
 
 plt.subplot(133)
 plt.scatter(X_test[:, 0], X_test[:, 1], c=y_pred)
@@ -371,7 +380,7 @@ Z = z.reshape(xm.shape)
 plt.contourf(xm, ym, Z, alpha=0.3, cmap="Paired")
 # 畫分區域SP
 
-plt.title("再預測")
+plt.title("再預測500點")
 
 show()
 
@@ -449,7 +458,7 @@ plt.scatter(
 )
 
 plt.axis([-15, 15, -15, 15])
-plt.title("原始資料 3 群")
+plt.title("原始資料 4 群")
 
 plt.subplot(132)
 # 繪圓點, 圓點用黑色外框, 使用標籤 labels_ 區別顏色,
@@ -596,7 +605,8 @@ f = open("tmp_clf.pkl", "rb")
 clf2 = pickle.load(f)
 
 # 預測
-print(clf2.predict([[3, 4]]))  # 預測.predict
+y_pred = clf2.predict([[3, 4]])  # 預測.predict
+print(y_pred)
 
 f.close()
 
@@ -605,23 +615,39 @@ print("------------------------------------------------------------")  # 60個
 
 filename = "data/Iris2.csv"
 df = pd.read_csv(filename)
-"""
-print(df)
 print(df.head())
-print(df.info())
+
 """
+Iris2.csv
+Id,SepalLengthCm,SepalWidthCm,PetalLengthCm,PetalWidthCm,Species
+1,5.1,3.5,1.4,0.2,Iris-setosa
+2,4.9,3.0,1.4,0.2,Iris-setosa
+3,4.7,3.2,1.3,0.2,Iris-setosa
+"""
+
+# 刪除不要的欄位
 df = df.drop("Id", axis=1)  # 刪除 Id 欄位
+print(df.head())
 
+# 刪除重複列
 df = df.drop_duplicates()  # 刪除重複列
-df.reset_index(drop=True)  # 將列索引重新編號
+print(df.head())
 
+# 列索引重新編號
+df.reset_index(drop=True)  # 將列索引重新編號
+print(df.head())
+
+# 將 字串 對應為 數值
 s = {"Iris-setosa": 0, "Iris-versicolor": 1, "Iris-virginica": 2}
 df["Species"] = df["Species"].map(s)  # 將 Species 欄位的 字串 對應 數值
-# print(df.head())
+print(df.head())
 
 # 取前四欄位當作訓練資料
 df_X = df[["SepalLengthCm", "SepalWidthCm", "PetalLengthCm", "PetalWidthCm"]]
-# print(df_X.head())
+print(df_X.head())
+
+df_y = df[["Species"]]
+print(df_y.head())
 
 # 轉折判斷法(Elbow)
 
@@ -631,7 +657,7 @@ for k in range(1, 15):
     CLUSTERS = k  # 要分成的群數
     clf = KMeans(n_clusters=CLUSTERS)  # K-平均演算法
     clf.fit(df_X)  # 學習訓練.fit
-    print("k =", k, ", 分群準確性:", clf.inertia_)
+    print("分", k, "群, 分群準確性:", clf.inertia_)
     distortions.append(clf.inertia_)
 
 print("分1~14群的 分群準確性 clf.inertia_ :\n", distortions)
@@ -660,17 +686,43 @@ y_pred = clf.predict(df_X)  # 預測.predict
 
 print("預測")
 # 給一朵鳶尾花的4個特徵值
-# 「花萼長度 6.6 公分、花萼寬度 3.1 公分、花瓣長度 5.2 公分、花寬度 2.4 公分」
+# 花萼長度 6.6 公分、花萼寬度 3.1 公分、花瓣長度 5.2 公分、花寬度 2.4 公分
 xx = [[6.6, 3.1, 5.2, 2.4]]
 y_pred = clf.predict(xx)  # 預測.predict
 print("預測結果為：", y_pred)
 
+plt.figure(figsize=(12, 6))
+
+plt.subplot(131)
+plt.scatter(df_X["SepalLengthCm"], df_X["SepalWidthCm"], color="b")
+plt.xlabel("花萼長度")
+plt.ylabel("花萼寬度")
+plt.title("原始資料")
+
+plt.subplot(132)
+plt.scatter(df_X["SepalLengthCm"], df_X["SepalWidthCm"], c=df_y["Species"])
+plt.xlabel("花萼長度")
+plt.ylabel("花萼寬度")
+plt.title("原始資料之正確分類")
+
+plt.subplot(133)
+# 畫所有資料
 colmap = np.array(["r", "g", "b"])
 plt.scatter(df_X["SepalLengthCm"], df_X["SepalWidthCm"], color=colmap[clf.labels_])
+# 標記群集中心
+plt.scatter(
+    clf.cluster_centers_[:, 0],
+    clf.cluster_centers_[:, 1],
+    marker="*",
+    s=200,
+    c="r",
+    alpha=0.8,
+)
 # 畫預測點
 plt.scatter(6.6, 3.1, s=300, c="m")
-plt.xlabel("花萼長度(公分)")
-plt.ylabel("花萼寬度(公分)")
+plt.xlabel("花萼長度")
+plt.ylabel("花萼寬度")
+plt.title("使用 KMeans 分3群")
 
 show()
 
@@ -716,16 +768,17 @@ print(sm.confusion_matrix(y, y_pred))
 
 colmap = np.array(["r", "g", "b"])
 
-plt.figure(figsize=(10, 5))
+plt.figure(figsize=(10, 8))
 
-plt.subplot(121)
+plt.subplot(131)
 plt.scatter(X[:, 0], X[:, 1], color=colmap[y])
-plt.xlabel("花萼長度(公分)")
-plt.ylabel("花萼寬度(公分)")
+plt.xlabel("花萼長度")
+plt.ylabel("花萼寬度")
 plt.title("真實分類")
 
-plt.subplot(122)
+plt.subplot(132)
 plt.scatter(X[:, 0], X[:, 1], color=colmap[y_pred])
+# plt.scatter(X[:, 0], X[:, 1], c=clf.labels_) # same
 # plt.scatter(X[:, 0], X[:, 1], c=y_pred, cmap="viridis")
 # 標記群集中心
 plt.scatter(
@@ -736,18 +789,15 @@ plt.scatter(
     c="r",
     alpha=0.8,
 )
-plt.xlabel("花萼長度(公分)")
-plt.ylabel("花萼寬度(公分)")
-plt.title("K-means分類")
+plt.xlabel("花萼長度")
+plt.ylabel("花萼寬度")
+plt.title("使用 KMeans 分3群")
 
-show()
-
-# 花瓣長和花瓣寬對結果的影響分布
+plt.subplot(133)
 plt.scatter(X[:, 2], X[:, 3], c=clf.labels_)
-show()
+plt.xlabel("花瓣長度")
+plt.ylabel("花瓣寬度")
 
-# 花萼長和花萼寬對結果的影響分布
-plt.scatter(X[:, 0], X[:, 1], c=clf.labels_)
 show()
 
 print("------------------------------------------------------------")  # 60個
@@ -756,39 +806,24 @@ print("------------------------------------------------------------")  # 60個
 # 鳶尾花資料集
 
 from sklearn.metrics import accuracy_score
-from sklearn.preprocessing import StandardScaler
 
 X, y = datasets.load_iris(return_X_y=True)
 
-print("資料分割")
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
-# 訓練組8成, 測試組2成
-
-# 特徵縮放
-scaler = StandardScaler()
-X_train_std = scaler.fit_transform(X_train)
-X_test_std = scaler.transform(X_test)
-
 CLUSTERS = 3  # 要分成的群數
-clf = KMeans(n_clusters=CLUSTERS, init="k-means++", n_init="auto")  # K-平均演算法
+clf = KMeans(n_clusters=CLUSTERS)  # K-平均演算法
 
-# 有目標的訓練
-clf.fit(X_train_std, y_train)  # 學習訓練.fit
-
-# 模型評估
+print("有目標的訓練")
+clf.fit(X, y)  # 學習訓練.fit
 
 # 計算準確率
-y_pred = clf.predict(X_test_std)
-print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
+y_pred = clf.predict(X)
+print(f"{accuracy_score(y, y_pred)*100:.2f}%")
 
-score = metrics.accuracy_score(y_test, y_pred)
+score = metrics.accuracy_score(y, y_pred)
 print("準確率:{0:f}".format(score))
 
-print("y_test :\n", y_test)
+print("y :\n", y)
 print("y_pred :\n", y_pred)
-
-print("分群準確性:", clf.inertia_)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -819,7 +854,7 @@ clf = KMeans(
 )  # K-平均演算法
 
 # 顯示失真(Distortion)的程度
-y_km = clf.fit_predict(X)  # 學習訓練 + 預測 .fit_predict
+y_pred = clf.fit_predict(X)  # 學習訓練 + 預測 .fit_predict
 
 print("分群準確性:", clf.inertia_)
 print("Distortion: %.2f" % clf.inertia_)
@@ -838,7 +873,7 @@ for k in range(1, 15):
         random_state=9487,
     )  # K-平均演算法
     clf.fit(X)  # 學習訓練.fit
-    print("k =", k, ", 分群準確性:", clf.inertia_)
+    print("分", k, "群, 分群準確性:", clf.inertia_)
     distortions.append(clf.inertia_)
 
 print("分1~14群的 分群準確性 clf.inertia_ :\n", distortions)
@@ -886,14 +921,13 @@ clf = KMeans(
     random_state=9487,
 )  # K-平均演算法
 
-y_km = clf.fit_predict(X)  # 學習訓練 + 預測 .fit_predict
+y_pred = clf.fit_predict(X)  # 學習訓練 + 預測 .fit_predict
 
 # 輪廓係數
-
-cluster_labels = np.unique(y_km)
+cluster_labels = np.unique(y_pred)
 n_clusters = cluster_labels.shape[0]
 print("n_clusters =", n_clusters)
-silhouette_vals = silhouette_samples(X, y_km, metric="euclidean")
+silhouette_vals = silhouette_samples(X, y_pred, metric="euclidean")
 print("silhouette_vals =", silhouette_vals)
 
 # 繪製輪廓圖
@@ -902,7 +936,7 @@ print("silhouette_vals =", silhouette_vals)
 y_ax_lower, y_ax_upper = 0, 0
 yticks = []
 for i, c in enumerate(cluster_labels):
-    c_silhouette_vals = silhouette_vals[y_km == c]
+    c_silhouette_vals = silhouette_vals[y_pred == c]
     c_silhouette_vals.sort()
     y_ax_upper += len(c_silhouette_vals)
     color = cm.jet(float(i) / n_clusters)
@@ -913,7 +947,6 @@ for i, c in enumerate(cluster_labels):
         edgecolor="none",
         color=color,
     )
-
     yticks.append((y_ax_lower + y_ax_upper) / 2.0)
     y_ax_lower += len(c_silhouette_vals)
 
@@ -940,21 +973,20 @@ clf = KMeans(
     random_state=9487,
 )  # K-平均演算法
 
-y_km = clf.fit_predict(X)  # 學習訓練 + 預測 .fit_predict
+y_pred = clf.fit_predict(X)  # 學習訓練 + 預測 .fit_predict
 
 # 繪製輪廓圖
-
-cluster_labels = np.unique(y_km)
+cluster_labels = np.unique(y_pred)
 n_clusters = cluster_labels.shape[0]
 print("n_clusters =", n_clusters)
-silhouette_vals = silhouette_samples(X, y_km, metric="euclidean")
+silhouette_vals = silhouette_samples(X, y_pred, metric="euclidean")
 print("silhouette_vals =", silhouette_vals)
 
 # 輪廓圖
 y_ax_lower, y_ax_upper = 0, 0
 yticks = []
 for i, c in enumerate(cluster_labels):
-    c_silhouette_vals = silhouette_vals[y_km == c]
+    c_silhouette_vals = silhouette_vals[y_pred == c]
     c_silhouette_vals.sort()
     y_ax_upper += len(c_silhouette_vals)
     color = cm.jet(float(i) / n_clusters)
@@ -965,7 +997,6 @@ for i, c in enumerate(cluster_labels):
         edgecolor="none",
         color=color,
     )
-
     yticks.append((y_ax_lower + y_ax_upper) / 2.0)
     y_ax_lower += len(c_silhouette_vals)
 
@@ -984,18 +1015,15 @@ show()
 
 from sklearn.metrics import silhouette_score
 
-cc = silhouette_score(X, y)
-print(cc)
-
-# 0.7143417887288687
+print("分", CLUSTERS, "群, 計算輪廓分數:", silhouette_score(X, y))
 
 # 依據輪廓分數找最佳集群數量
 
 # 測試 2~10 群的分數
 silhouette_score_list = []
 print("輪廓分數:")
-for i in range(2, 11):
-    CLUSTERS = i  # 要分成的群數
+for k in range(2, 11):
+    CLUSTERS = k  # 要分成的群數
     clf = KMeans(
         n_clusters=CLUSTERS,
         init="k-means++",
@@ -1004,11 +1032,115 @@ for i in range(2, 11):
         random_state=9487,
     )  # K-平均演算法
     clf.fit(X)  # 學習訓練.fit
-    y_km = clf.fit_predict(X)  # 學習訓練 + 預測 .fit_predict
-    silhouette_score_list.append(silhouette_score(X, y_km))
-    print(f"{i}:{silhouette_score_list[-1]:.2f}")
+    y_pred = clf.fit_predict(X)  # 學習訓練 + 預測 .fit_predict
+    silhouette_score_list.append(silhouette_score(X, y_pred))
+    # print(f"{k}:{silhouette_score_list[-1]:.2f}")
+    print("分", k, "群, 計算輪廓分數:", silhouette_score(X, y_pred))
 
 print(f"最大值 {np.argmax(silhouette_score_list)+2}: {np.max(silhouette_score_list):.2f}")
+
+print("分2~10群的 silhouette_score :\n", silhouette_score_list)
+
+plt.plot(
+    range(2, 11),
+    silhouette_score_list,
+    color="r",
+    marker="o",
+    markersize=8,
+    label="silhouette_score",
+)
+plt.xlabel("集群數量")
+plt.ylabel("silhouette_score")
+plt.grid()
+plt.legend()
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+import sklearn
+
+print("對圖片做 KMeans()")
+
+# 重建影像的函數
+
+
+def reconstruct_image(cluster_centers, y_pred, w, h):
+    d = cluster_centers.shape[1]
+    image = np.zeros((w, h, d))
+    label_index = 0
+    for i in range(w):
+        for j in range(h):
+            # 以質心取代原圖像顏色
+            image[i][j] = cluster_centers[y_pred[label_index]]
+            label_index += 1
+    return image
+
+
+from sklearn.datasets import load_sample_image
+
+image = load_sample_image("flower.jpg")
+
+"""
+# 存檔
+plt.imsave("tmp_flower.jpg", image)
+
+# 目前還不能使用本地檔案
+#filename = 'C:/_git/vcs/_1.data/______test_files1/ims01.bmp'
+filename = "tmp_flower.jpg"
+import cv2
+# 檔案 => cv2影像
+image = cv2.imread(filename, 1)
+
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+#plt.imshow(image)
+plt.axis("off")
+
+show()
+"""
+print(image.shape)
+w, h, d = image.shape  # 取得圖片寬高及顏色維度
+print(w, h, d)
+
+# 正規化、取得圖片寬高及顏色維度、將寬高轉為一維
+# 正規化
+image = np.array(image, dtype=np.float64) / 255
+# 將寬高轉為一維
+image_array = np.reshape(image, (w * h, d))
+
+# 模型訓練及預測
+
+# 隨機抽樣1000個像素, 把image_array打亂, 取出前1000個
+image_sample = sklearn.utils.shuffle(image_array, random_state=9487)[:1000]
+
+# K-Means模型訓練， 設定64個集群
+CLUSTERS = 64  # 要分成的群數
+clf = KMeans(n_clusters=CLUSTERS)  # K-平均演算法
+
+clf.fit(image_sample)  # 學習訓練.fit
+
+# 對所有像素進行集群
+y_pred = clf.predict(image_array)
+
+image2 = reconstruct_image(clf.cluster_centers_, y_pred, w, h)
+
+plt.figure(figsize=(10, 12))  # 比較原圖與減色後的圖片
+
+plt.subplot(211)
+plt.imshow(image)
+plt.axis("off")
+plt.title("原圖")
+
+plt.subplot(212)
+plt.imshow(image2)
+plt.axis("off")
+plt.title("重建的影像")
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1023,15 +1155,6 @@ sys.exit()
 """
 #plt.autoscale()
 
-
 plt.subplots_adjust(hspace=0.5)
-plt.subplots_adjust(hspace=0.5)
-
-
-
-# 模型評估：資料點與所屬質心距離的平方和
-print("分群準確性:", clf.inertia_)
-
-
 
 """

@@ -47,13 +47,19 @@ print("------------------------------------------------------------")  # 60個
 
 from common1 import *
 from sklearn.datasets import make_blobs
-from sklearn.datasets import make_moons
+from sklearn.datasets import make_moons  # 非線性的資料集
 from sklearn.datasets import make_classification
 from sklearn.datasets import make_gaussian_quantiles
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
-from sklearn.metrics import accuracy_score
+from sklearn.metrics import accuracy_score  # 計算準確率
 from sklearn.svm import SVC  # 非線性SVM函數學習機
 from sklearn.svm import LinearSVC  # 線性支援向量機 (Linear SVM)
+
+
+def show():
+    plt.show()
+    pass
+
 
 print("------------------------------------------------------------")  # 60個
 
@@ -359,10 +365,12 @@ print("SVM classifier 之 正確率 : {:.2f}".format(accuracy))
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-N = 500
-
-# print("使用 make_blobs 產生", N, "筆資料 2維 2群")
-# X, y = make_blobs(n_samples=N, n_features=2, centers=2)
+N = 500  # n_samples, 樣本數
+M = 2  # n_features, 特徵數(資料的維度)
+GROUPS = 2  # centers, 分群數
+STD = 1  # cluster_std, 資料標準差
+# print("make_blobs,", N, "個樣本, ", M, "個特徵, 分成", GROUPS, "群")
+# X, y = make_blobs(n_samples=N, n_features=M, centers=GROUPS)
 
 print("使用 make_moons 產生", N, "筆資料")
 X, y = make_moons(n_samples=N, noise=0.15)
@@ -414,10 +422,6 @@ print("------------------------------------------------------------")  # 60個
 
 from scipy import stats
 import sklearn.model_selection as cross_validation
-
-# os.chdir(r'D:\Python_book\12SVM')
-# pd.set_option('display.max_columns', None)
-
 
 # In[2]:
 orgData = pd.read_csv("data/date_data.csv")
@@ -480,25 +484,13 @@ grid = {"gamma": gamma, "C": C}
 clf_search = GridSearchCV(estimator=svcModel1, param_grid=grid, cv=4)
 clf_search.fit(train_scaled, train_target)
 
-
-# In[11]:
-
-
 best_model = clf_search.best_estimator_
 test_est2 = best_model.predict(test_scaled)
 print(metrics.classification_report(test_target, test_est2))  # 计算评估指标
 
-
-# In[12]:
-
-
 best_model
 
-
 # 画出在svm模型中，两个变量的关系图，可以用于提升感性认识，但一般不能推广到大于两维的情况
-
-# In[13]:
-
 
 train_x = train_scaled[:, 1:3]
 train_y = train_target.values
@@ -545,8 +537,6 @@ for i, clf in enumerate((svc, lin_svc, rbf_svc, poly_svc)):
     plt.title(titles[i])
 
 plt.show()
-
-# %%
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -597,3 +587,5 @@ print("------------------------------------------------------------")  # 60個
 xmin, xmax, ymin, ymax = -8, 8, -8, 8
 #plt.axis([xmin, xmax, ymin, ymax])  # 設定各軸顯示範圍
 """
+# os.chdir(r'D:\Python_book\12SVM')
+# pd.set_option('display.max_columns', None)

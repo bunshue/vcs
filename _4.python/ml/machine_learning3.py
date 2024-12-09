@@ -21,6 +21,7 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
+import joblib
 import sklearn.linear_model
 from sklearn import datasets
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
@@ -183,9 +184,6 @@ df.drop(["color"], axis=1, inplace=True)
 # 合併表格
 df2 = pd.concat([df, df_new], axis=1)
 print(df2)
-
-# 存檔
-import joblib
 
 joblib.dump(encoder, "tmp_color.joblib")
 
@@ -369,10 +367,10 @@ scaler = StandardScaler()
 X_train_std = scaler.fit_transform(X_train)
 X_test_std = scaler.transform(X_test)
 
-# 5. 選擇演算法
-from sklearn.linear_model import LogisticRegression
+# 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
+logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
 
-clf = LogisticRegression()
+clf = LogisticRegression()  # 邏輯迴歸函數學習機
 
 clf.fit(X_train_std, y_train)  # 學習訓練.fit
 
@@ -412,8 +410,8 @@ scaler = StandardScaler()
 X_train_std = scaler.fit_transform(X_train)
 X_test_std = scaler.transform(X_test)
 
-# 模型訓練
-from sklearn.linear_model import LogisticRegression
+# 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
+logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
 
 clf = LogisticRegression()
 
@@ -468,9 +466,8 @@ scaler = StandardScaler()
 X_train_std = scaler.fit_transform(X_train)
 X_test_std = scaler.transform(X_test)
 
-# 5. 選擇演算法
-
-from sklearn.linear_model import LogisticRegression
+# 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
+logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
 
 clf = LogisticRegression()
 
@@ -511,8 +508,8 @@ scaler = StandardScaler()
 X_train_std = scaler.fit_transform(X_train)
 X_test_std = scaler.transform(X_test)
 
-# 模型訓練
-from sklearn.linear_model import LogisticRegression
+# 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
+logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
 
 clf = LogisticRegression()
 
@@ -765,9 +762,8 @@ X_train_pca, X_test_pca = PCA_numpy(X_train_std, X_test_std, 2)  # 取 2 個特�
 cc = X_train_pca.shape, X_test_pca.shape
 print(cc)
 
-# 5. 選擇演算法
-
-from sklearn.linear_model import LogisticRegression
+# 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
+logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
 
 clf = LogisticRegression()
 
@@ -781,7 +777,6 @@ print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
 # 100.00%
 
 # 繪製決策邊界(Decision regions)
-
 from matplotlib.colors import ListedColormap
 
 
@@ -840,7 +835,8 @@ scaler = StandardScaler()
 X_train_std = scaler.fit_transform(X_train)
 X_test_std = scaler.transform(X_test)
 
-from sklearn.linear_model import LogisticRegression
+# 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
+logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
 
 clf = LogisticRegression()
 
@@ -881,7 +877,6 @@ cc = X_train.shape, X_test.shape, y_train.shape, y_test.shape
 print(cc)
 
 # 4. 特徵縮放
-
 from sklearn.preprocessing import StandardScaler
 
 scaler = StandardScaler()
@@ -889,7 +884,6 @@ X_train_std = scaler.fit_transform(X_train)
 X_test_std = scaler.transform(X_test)
 
 # 特徵萃取(PCA)
-
 from sklearn.decomposition import PCA
 
 pca1 = PCA(n_components=2)
@@ -898,9 +892,8 @@ X_test_pca = pca1.transform(X_test_std)
 cc = X_train_pca.shape, X_test_pca.shape, pca1.explained_variance_ratio_
 print(cc)
 
-# 5. 選擇演算法
-
-from sklearn.linear_model import LogisticRegression
+# 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
+logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
 
 clf = LogisticRegression()
 
@@ -914,7 +907,6 @@ print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
 # 97.22%
 
 # 繪製決策邊界(Decision regions)
-
 from matplotlib.colors import ListedColormap
 
 
@@ -973,8 +965,8 @@ scaler = StandardScaler()
 X_train_std = scaler.fit_transform(X_train)
 X_test_std = scaler.transform(X_test)
 
-# 模型訓練
-from sklearn.linear_model import LogisticRegression
+# 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
+logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
 
 clf = LogisticRegression()
 
@@ -1040,7 +1032,6 @@ cc = X_train.shape, X_test.shape, y_train.shape, y_test.shape
 print(cc)
 
 # 4. 特徵縮放
-
 from sklearn.preprocessing import StandardScaler
 
 scaler = StandardScaler()
@@ -1105,8 +1096,8 @@ X_train_pca, X_test_pca = LDA_numpy(
 cc = X_train_pca.shape, X_test_pca.shape
 print(cc)
 
-# 5. 選擇演算法
-from sklearn.linear_model import LogisticRegression
+# 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
+logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
 
 clf = LogisticRegression()
 
@@ -1178,8 +1169,8 @@ scaler = StandardScaler()
 X_train_std = scaler.fit_transform(X_train)
 X_test_std = scaler.transform(X_test)
 
-# 模型訓練
-from sklearn.linear_model import LogisticRegression
+# 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
+logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
 
 clf = LogisticRegression()
 
@@ -1220,7 +1211,6 @@ cc = X_train.shape, X_test.shape, y_train.shape, y_test.shape
 print(cc)
 
 # 4. 特徵縮放
-
 from sklearn.preprocessing import StandardScaler
 
 scaler = StandardScaler()
@@ -1237,8 +1227,8 @@ X_test_lda = lda.transform(X_test_std)
 cc = X_train_lda.shape, X_test_lda.shape, lda.explained_variance_ratio_
 print(cc)
 
-# 5. 選擇演算法
-from sklearn.linear_model import LogisticRegression
+# 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
+logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
 
 clf = LogisticRegression()
 
@@ -1254,7 +1244,6 @@ print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
 # 100.00%
 
 # 繪製決策邊界(Decision regions)
-
 from matplotlib.colors import ListedColormap
 
 
@@ -1313,8 +1302,8 @@ scaler = StandardScaler()
 X_train_std = scaler.fit_transform(X_train)
 X_test_std = scaler.transform(X_test)
 
-# 模型訓練
-from sklearn.linear_model import LogisticRegression
+# 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
+logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
 
 clf = LogisticRegression()
 
@@ -1834,7 +1823,8 @@ X_train, X_test, y_train, y_test = train_test_split(
     tfidf_matrix.toarray(), labels, test_size=0.2
 )
 
-from sklearn.linear_model import LogisticRegression
+# 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
+logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
 
 clf = LogisticRegression()
 
@@ -2057,15 +2047,10 @@ print(linear_regression.intercept_)
 # 9. 模型佈署
 
 # 模型存檔
-import joblib
-
 joblib.dump(linear_regression, "tmp_linear_regression_model.joblib")
 joblib.dump(scaler, "tmp_linear_regression_scaler.joblib")
 
 # 10.模型預測
-
-import joblib
-
 # 載入模型與標準化轉換模型
 linear_regression2 = joblib.load("tmp_linear_regression_model.joblib")
 scaler = joblib.load("tmp_linear_regression_scaler.joblib")
@@ -2821,7 +2806,8 @@ show()
 
 # 以 Scikit-learn 驗證
 
-from sklearn.linear_model import LogisticRegression
+# 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
+logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
 
 model = LogisticRegression(C=1e20)
 model.fit(X, y)
@@ -3002,14 +2988,14 @@ cc = X_train.shape, X_test.shape, y_train.shape, y_test.shape
 print(cc)
 
 # 特徵縮放
-
 scaler = preprocessing.StandardScaler()
 X_train_std = scaler.fit_transform(X_train)
 X_test_std = scaler.transform(X_test)
 
 # 5. 選擇演算法、6. 模型訓練
 
-from sklearn.linear_model import LogisticRegression
+# 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
+logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
 
 clf = LogisticRegression()
 clf.fit(X_train_std, y_train)
@@ -3068,51 +3054,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 model=sm.Logit(y_train,X_train)
 result=model.fit()
 print(result.summary())
-
 """
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# 06_04_logistic_regression_with_nonlinear_data
-
-# 以二次迴歸預測世界人口數
-
-from sklearn.datasets import make_circles
-
-X, y = make_circles(n_samples=1_000, factor=0.3, noise=0.05, random_state=0)
-
-# 資料切割
-X_train, X_test, y_train, y_test = train_test_split(X, y, stratify=y, random_state=0)
-
-# 繪製訓練及測試資料
-_, (train_ax, test_ax) = plt.subplots(ncols=2, sharex=True, sharey=True, figsize=(8, 4))
-train_ax.scatter(X_train[:, 0], X_train[:, 1], c=y_train)
-train_ax.set_ylabel("Feature #1")
-train_ax.set_xlabel("Feature #0")
-train_ax.set_title("Training data")
-
-test_ax.scatter(X_test[:, 0], X_test[:, 1], c=y_test)
-test_ax.set_xlabel("Feature #0")
-_ = test_ax.set_title("Testing data")
-show()
-
-print("使用sklearn的 邏輯迴歸 LogisticRegression()")
-
-from sklearn.linear_model import LogisticRegression
-
-clf = LogisticRegression()
-clf.fit(X_train, y_train)
-# cc = clf.coef_, lr.intercept_
-# print(cc)
-
-# 計算準確率
-
-y_pred = clf.predict(X_test)
-print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
-
-# 48.80%
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
