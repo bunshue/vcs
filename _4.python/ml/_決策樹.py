@@ -33,13 +33,12 @@ from sklearn.datasets import make_blobs
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
 from sklearn import metrics
 from sklearn.tree import DecisionTreeClassifier
-from sklearn.tree import DecisionTreeRegressor
 from matplotlib.colors import ListedColormap
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 from sklearn import tree
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 X = np.array([[180, 85], [174, 80], [170, 75], [167, 45], [158, 52], [155, 44]])
 Y = np.array(["man", "man", "man", "woman", "woman", "woman"])
@@ -62,12 +61,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-from sklearn import tree
-
-# from sklearn.externals.six import StringIO
-import pydot
-from os import system
 
 X = np.array([[180, 85], [174, 80], [170, 75], [167, 45], [158, 52], [155, 44]])
 Y = np.array(["man", "man", "man", "woman", "woman", "woman"])
@@ -139,7 +132,9 @@ def do_decision_tree():
     clf = DecisionTreeClassifier(
         criterion="entropy", max_depth=3, random_state=0
     )  # 決策樹函數學習機
+
     clf.fit(x_train, y_train)  # 學習訓練.fit
+
     y_pred = clf.predict(x_test)  # 預測.predict
 
     X_combined = np.vstack((x_train, x_test))
@@ -155,7 +150,6 @@ def do_decision_tree():
 print("決策樹")
 do_decision_tree()
 
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -163,11 +157,9 @@ N = 500
 GROUPS = 3
 X, y = make_blobs(n_samples=N, centers=GROUPS, n_features=2)
 
-print("使用 Decision Tree")
-from sklearn.tree import DecisionTreeClassifier
 from sklearn.model_selection import cross_val_score  # Cross Validation
 
-clf = DecisionTreeClassifier()
+clf = DecisionTreeClassifier()  # 決策樹函數學習機
 
 scores = cross_val_score(clf, X, y, cv=5)
 print("看一下五次的成績 :", scores)
@@ -175,8 +167,6 @@ print("平均 :", scores.mean())
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-from sklearn.tree import DecisionTreeClassifier
 
 data, label = datasets.load_iris(return_X_y=True)
 
@@ -186,18 +176,28 @@ dx_train, dx_test, label_train, label_test = train_test_split(
 )
 # 訓練組8成, 測試組2成
 
-# 建立分類模型
-tree_model = DecisionTreeClassifier()
+clf = DecisionTreeClassifier()  # 決策樹函數學習機
 
-# 建立訓練數據模型
-tree_model.fit(dx_train, label_train)
+clf.fit(dx_train, label_train)  # 學習訓練.fit
 
 # 對測試數據做預測
-pred = tree_model.predict(dx_test)
+pred = clf.predict(dx_test)
 
 # 輸出準確性
-print(f"訓練資料的準確性 = {tree_model.score(dx_train, label_train)}")
-print(f"測試資料的準確性 = {tree_model.score(dx_test, label_test)}")
+print(f"訓練資料的準確性 = {clf.score(dx_train, label_train)}")
+print(f"測試資料的準確性 = {clf.score(dx_test, label_test)}")
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個

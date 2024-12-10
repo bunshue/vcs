@@ -43,6 +43,8 @@ from sklearn.cluster import KMeans  # 聚類方法, K-平均演算法
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
 from sklearn import metrics
 
+# from sklearn.metrics import accuracy_score
+
 
 def show():
     plt.show()
@@ -330,7 +332,7 @@ do_k_means()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("K-平均演算法(KMeans) 任意資料分3群並畫圖")
+print("K-平均演算法(KMeans) random資料分3群並畫圖")
 
 N = 50
 print("任意隨機資料")
@@ -341,10 +343,6 @@ clf = KMeans(n_clusters=CLUSTERS)  # K-平均演算法
 
 clf.fit(X)  # 學習訓練.fit
 
-print("群集類別標籤(訓練好的結果) :\n", clf.labels_)
-print("集群中心的坐標:", clf.cluster_centers_)
-print("分群準確性:", clf.inertia_)
-
 print("計算分群準確性")  # 資料點與所屬質心距離的平方和
 C = clf.cluster_centers_  # 集群中心的座標
 y = clf.labels_  # 群集類別標籤
@@ -354,12 +352,12 @@ for i in range(len(X)):
     ss += d
 print("計算分群準確性 :", ss)
 
-# 預測500點
+# 再預測500點
 N = 500
 X_test = np.random.rand(N, 2)
 y_pred = clf.predict(X_test)
 
-plt.figure(figsize=(12, 6))
+plt.figure(num="KMeans分群", figsize=(12, 6))
 
 plt.subplot(131)
 plt.scatter(X[:, 0], X[:, 1], s=50)
@@ -418,11 +416,8 @@ print("資料的維度", X.shape, y.shape)
 
 CLUSTERS = 4  # 要分成的群數
 clf = KMeans(n_clusters=CLUSTERS, random_state=9487)  # K-平均演算法
-clf.fit(X)  # 學習訓練.fit
 
-print("群集類別標籤(訓練好的結果) :\n", clf.labels_)
-print("集群中心的坐標:", clf.cluster_centers_)
-print("分群準確性:", clf.inertia_)
+clf.fit(X)  # 學習訓練.fit
 
 y_pred = clf.predict(X)  # 預測.predict
 # 預測.predict 會與 clf.labels_ 相同
@@ -441,7 +436,7 @@ print(cc)
 cc = cc * 1.0 / len(y)
 print("正確率 :", cc)
 
-plt.figure(figsize=(12, 6))
+plt.figure(num="KMeans分群", figsize=(12, 6))
 
 plt.subplot(131)
 plt.scatter(X[:, 0], X[:, 1], c="b")
@@ -515,9 +510,6 @@ from sklearn.cluster import MeanShift
 clf = MeanShift(bandwidth=0.2)
 
 clf.fit(X)  # 學習訓練.fit
-
-print("群集類別標籤(訓練好的結果) :\n", clf.labels_)
-print("集群中心的坐標:", clf.cluster_centers_)
 
 y_pred = clf.predict(X)  # 預測.predict
 # 預測.predict 會與 clf.labels_ 相同
@@ -647,18 +639,16 @@ print(df_y.head())
 # 轉折判斷法(Elbow)
 
 distortions = []
-# 測試 分群 1~15 群的失真
-for k in range(1, 15):
+# 測試 分群 1~11 群的失真
+for k in range(1, 11):
     CLUSTERS = k  # 要分成的群數
     clf = KMeans(n_clusters=CLUSTERS)  # K-平均演算法
     clf.fit(df_X)  # 學習訓練.fit
     print("分", k, "群, 分群準確性:", clf.inertia_)
     distortions.append(clf.inertia_)
 
-print("分1~14群的 分群準確性 clf.inertia_ :\n", distortions)
-
 # 看視覺化圖表決定參數K值
-plt.plot(range(1, 15), distortions, color="r", marker="o", markersize=8, label="分群準確性")
+plt.plot(range(1, 11), distortions, color="r", marker="o", markersize=8, label="分群準確性")
 plt.xlabel("集群數量")
 plt.ylabel("失真")
 plt.grid()
@@ -666,14 +656,12 @@ plt.legend()
 
 show()
 
+print("看圖, 決定分 3 群")
+
 CLUSTERS = 3  # 要分成的群數
 clf = KMeans(n_clusters=CLUSTERS)  # K-平均演算法
 
 clf.fit(df_X)  # 學習訓練.fit
-
-print("群集類別標籤(訓練好的結果) :\n", clf.labels_)
-print("集群中心的坐標:", clf.cluster_centers_)
-print("分群準確性:", clf.inertia_)
 
 y_pred = clf.predict(df_X)  # 預測.predict
 # 預測.predict 會與 clf.labels_ 相同
@@ -686,7 +674,7 @@ xx = [[6.6, 3.1, 5.2, 2.4]]
 y_pred = clf.predict(xx)  # 預測.predict
 print("預測結果為：", y_pred)
 
-plt.figure(figsize=(12, 6))
+plt.figure(num="KMeans分群", figsize=(12, 6))
 
 plt.subplot(131)
 plt.scatter(df_X["SepalLengthCm"], df_X["SepalWidthCm"], color="b")
@@ -735,10 +723,6 @@ clf = KMeans(n_clusters=CLUSTERS)  # K-平均演算法
 
 clf.fit(X)  # 學習訓練.fit
 
-print("群集類別標籤(訓練好的結果) :\n", clf.labels_)
-print("集群中心的坐標:", clf.cluster_centers_)
-print("分群準確性:", clf.inertia_)
-
 # y_pred = clf.predict(X)  # 預測.predict
 # 其實就是 clf.labels_
 # y_pred = clf.labels_
@@ -746,9 +730,11 @@ print("分群準確性:", clf.inertia_)
 # 修正標籤錯誤
 y_pred = np.choose(clf.labels_, [2, 1, 0]).astype(np.int64)
 
+"""
 print("真實答案 :", y)
 print("預測結果 :", y_pred)
 print("預測差值 :", y_pred - y)
+"""
 
 score = metrics.accuracy_score(y, y_pred)
 print("準確率:{0:f}".format(score))
@@ -763,7 +749,7 @@ print(sm.confusion_matrix(y, y_pred))
 
 colmap = np.array(["r", "g", "b"])
 
-plt.figure(figsize=(10, 8))
+plt.figure(num="KMeans分群", figsize=(10, 8))
 
 plt.subplot(131)
 plt.scatter(X[:, 0], X[:, 1], color=colmap[y])
@@ -800,8 +786,6 @@ print("------------------------------------------------------------")  # 60個
 
 # 鳶尾花資料集
 
-from sklearn.metrics import accuracy_score
-
 X, y = datasets.load_iris(return_X_y=True)
 
 CLUSTERS = 3  # 要分成的群數
@@ -812,13 +796,10 @@ clf.fit(X, y)  # 學習訓練.fit
 
 # 計算準確率
 y_pred = clf.predict(X)
-print(f"{accuracy_score(y, y_pred)*100:.2f}%")
 
+print(f"{accuracy_score(y, y_pred)*100:.2f}%")
 score = metrics.accuracy_score(y, y_pred)
 print("準確率:{0:f}".format(score))
-
-print("y :\n", y)
-print("y_pred :\n", y_pred)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -851,14 +832,11 @@ clf = KMeans(
 # 顯示失真(Distortion)的程度
 y_pred = clf.fit_predict(X)  # 學習訓練 + 預測 .fit_predict
 
-print("分群準確性:", clf.inertia_)
-print("Distortion: %.2f" % clf.inertia_)
-
 # 轉折判斷法(Elbow)
 
 distortions = []
-# 測試 分群 1~15 群的失真
-for k in range(1, 15):
+# 測試 分群 1~10 群的失真
+for k in range(1, 11):
     CLUSTERS = k  # 要分成的群數
     clf = KMeans(
         n_clusters=CLUSTERS,
@@ -871,10 +849,8 @@ for k in range(1, 15):
     print("分", k, "群, 分群準確性:", clf.inertia_)
     distortions.append(clf.inertia_)
 
-print("分1~14群的 分群準確性 clf.inertia_ :\n", distortions)
-
 # 看視覺化圖表決定參數K值
-plt.plot(range(1, 15), distortions, color="r", marker="o", markersize=8, label="分群準確性")
+plt.plot(range(1, 11), distortions, color="r", marker="o", markersize=8, label="分群準確性")
 plt.xlabel("集群數量")
 plt.ylabel("失真")
 plt.grid()
@@ -1120,7 +1096,7 @@ y_pred = clf.predict(image_array)
 
 image2 = reconstruct_image(clf.cluster_centers_, y_pred, w, h)
 
-plt.figure(figsize=(10, 12))  # 比較原圖與減色後的圖片
+plt.figure(num="比較原圖與減色後的圖片", figsize=(10, 12))
 
 plt.subplot(211)
 plt.imshow(image)
@@ -1153,3 +1129,10 @@ sys.exit()
 plt.subplots_adjust(hspace=0.5)
 
 """
+
+# 共同抽出
+# 在 clf.fit(X)  # 學習訓練.fit 之後
+print("群集類別標籤(訓練好的結果) :\n", clf.labels_)
+print("集群中心的坐標:", clf.cluster_centers_)
+print("分群準確性:", clf.inertia_)
+print("Distortion: %.2f" % clf.inertia_)

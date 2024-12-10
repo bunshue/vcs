@@ -74,7 +74,6 @@ edgecolors：設置散點邊界線的顏色
 N = 500
 
 
-
 # 共同
 import os
 import sys
@@ -824,8 +823,6 @@ plt.scatter(x, y, s=size, alpha=0.5, c=color, cmap="Greens", norm=norm)
 plt.scatter(x, y, s=size, alpha=0.5, c=color, cmap="jet", norm=norm)
 
 
-
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------")  # 30個
-

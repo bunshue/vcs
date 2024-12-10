@@ -1,4 +1,7 @@
 """
+
+#乳癌診斷預測
+
 breast_cancer
 
 
@@ -30,20 +33,36 @@ print("------------------------------------------------------------")  # 60個
 from sklearn import datasets
 from sklearn.datasets import load_breast_cancer
 
+from sklearn.svm import SVC
+from sklearn.preprocessing import StandardScaler  # 特徵縮放
+from sklearn import metrics
+from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
+from sklearn.model_selection import cross_val_score
+from sklearn.metrics import accuracy_score
+from sklearn.metrics import confusion_matrix  # 混淆矩陣
+from sklearn.metrics import ConfusionMatrixDisplay  # 混淆矩陣圖
+from sklearn.datasets import make_classification
+
+
+def show():
+    return
+    plt.show()
+    pass
+
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-"""
-#乳癌診斷預測
-ds = datasets.load_breast_cancer()
-"""
+print("基本數據")
 
-# 學習分類
+breast_cancer = load_breast_cancer()
 
-data = load_breast_cancer()
+print("feature_names")
+print(breast_cancer.feature_names)
 
-X = data.data
-y = data.target
+
+X = breast_cancer.data
+y = breast_cancer.target
 
 X = X[:, :10]
 
@@ -54,18 +73,15 @@ logistic_regression.fit(X, y)
 
 y_pred = logistic_regression.predict(X)
 
-from sklearn.metrics import accuracy_score
-
-accuracy_score(y, y_pred)
-
+print(f"計算準確率 : {accuracy_score(y, y_pred)*100:.2f}%")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 學習分類
-data = load_breast_cancer()
-X = data.data
-y = 1 - data.target
+breast_cancer = load_breast_cancer()
+
+X = breast_cancer.data
+y = 1 - breast_cancer.target
 # ラベルの0と1を反転
 
 X = X[:, :10]
@@ -75,24 +91,20 @@ logistic_regression = LogisticRegression()
 logistic_regression.fit(X, y)
 y_pred = logistic_regression.predict(X)
 
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-cancer = load_breast_cancer()
+breast_cancer = load_breast_cancer()
 
-X = cancer.data
-y = cancer.target
+X = breast_cancer.data
+y = breast_cancer.target
 print(
     "data shape: {0}; no. positive: {1}; no. negative: {2}".format(
         X.shape, y[y == 1].shape[0], y[y == 0].shape[0]
     )
 )
-print(cancer.data[0])
-
-print(cancer.feature_names)
-
-from sklearn.model_selection import train_test_split
+print(breast_cancer.data[0])
+print(breast_cancer.feature_names)
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
@@ -186,7 +198,7 @@ for i in range(len(degrees)):
 
 print("耗時 : {0:.6f}".format(time.time() - start))
 
-plt.show()
+show()
 
 print("------------------------------")  # 30個
 
@@ -212,29 +224,25 @@ for i in range(len(degrees)):
 
 print("耗時 : {0:.6f}".format(time.time() - start))
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-cancer = load_breast_cancer()
-X = cancer.data
-y = cancer.target
+breast_cancer = load_breast_cancer()
+
+X = breast_cancer.data
+y = breast_cancer.target
+
 print(
     "data shape: {0}; no. positive: {1}; no. negative: {2}".format(
         X.shape, y[y == 1].shape[0], y[y == 0].shape[0]
     )
 )
 
-from sklearn.model_selection import train_test_split
-
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
-
-print("高斯核函數")
-
-from sklearn.svm import SVC
-
+print("RBF / 高斯核函數 / 徑向基函數核 (Radial basis function kernel)")
 clf = SVC(C=1.0, kernel="rbf", gamma=0.1)
 
 clf.fit(X_train, y_train)
@@ -258,7 +266,7 @@ print("best param: {0}\nbest score: {1}".format(clf.best_params_, clf.best_score
 # plt.figure(figsize=(10, 4), dpi=144)
 # cv_results_ : 具體用法模型不同參數下交叉驗證的結果
 # plot_param_curve(plt, gammas, clf.cv_results_, xlabel='gamma')
-# plt.show()
+# show()
 
 print("------------------------------")  # 30個
 
@@ -276,14 +284,11 @@ plot_learning_curve(
 
 print("耗時 : {0:.6f}".format(time.time() - start))
 
-plt.show()
+show()
 
 print("------------------------------")  # 30個
 
 print("多項式核函數")
-
-from sklearn.svm import SVC
-
 clf = SVC(C=1.0, kernel="poly", degree=2)
 
 clf.fit(X_train, y_train)
@@ -316,7 +321,7 @@ for i in range(len(degrees)):
 
 print("耗時 : {0:.6f}".format(time.time() - start))
 
-plt.show()
+show()
 
 print("------------------------------")  # 30個
 
@@ -371,7 +376,7 @@ for i in range(len(degrees)):
 
 print("耗時 : {0:.6f}".format(time.time() - start))
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -384,18 +389,12 @@ Here we focuse on non-linear models for classification. Nevertheless, each
 classification model has its regression counterpart.
 """
 
-from sklearn.svm import SVC
-from sklearn.preprocessing import StandardScaler
-
-from sklearn import metrics
-from sklearn.model_selection import train_test_split
-
 np.set_printoptions(precision=2)
 # pd.set_option('precision', 2)
 
 # Support Vector Machines (SVM)
 
-X, y = datasets.load_breast_cancer(return_X_y=True)
+X, y = load_breast_cancer(return_X_y=True)
 X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.5, stratify=y, random_state=42
 )
@@ -448,6 +447,7 @@ np.all(X_train[svm.support_, :] == svm.support_vectors_)
 from sklearn.ensemble import RandomForestClassifier
 
 forest = RandomForestClassifier(n_estimators=100)
+
 forest.fit(X_train, y_train)
 
 y_pred = forest.predict(X_test)
@@ -497,23 +497,22 @@ print("------------------------------------------------------------")  # 60個
 
 print("学習データと検証データに分割")
 
-data = load_breast_cancer()
-X = data.data
-y = data.target
-from sklearn.model_selection import train_test_split
+breast_cancer = load_breast_cancer()
+
+X = breast_cancer.data
+y = breast_cancer.target
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
 
-from sklearn.svm import SVC
-
 model_svc = SVC()
+
 model_svc.fit(X_train, y_train)
+
 y_train_pred = model_svc.predict(X_train)
 y_test_pred = model_svc.predict(X_test)
-from sklearn.metrics import accuracy_score
 
-print(accuracy_score(y_train, y_train_pred))
-print(accuracy_score(y_test, y_test_pred))
+print(f"計算準確率 : {accuracy_score(y_train, y_train_pred)*100:.2f}%")
+print(f"計算準確率 : {accuracy_score(y_test, y_test_pred)*100:.2f}%")
 
 from sklearn.ensemble import RandomForestClassifier
 
@@ -521,16 +520,14 @@ model_rfc = RandomForestClassifier()
 model_rfc.fit(X_train, y_train)
 y_train_pred = model_rfc.predict(X_train)
 y_test_pred = model_rfc.predict(X_test)
-from sklearn.metrics import accuracy_score
 
-print(accuracy_score(y_train, y_train_pred))
-print(accuracy_score(y_test, y_test_pred))
+print(f"計算準確率 : {accuracy_score(y_train, y_train_pred)*100:.2f}%")
+print(f"計算準確率 : {accuracy_score(y_test, y_test_pred)*100:.2f}%")
 
 print("------------------------------")  # 30個
 
 print("交差検証（クロスバリデーション）")
 
-from sklearn.model_selection import cross_val_score
 from sklearn.model_selection import KFold
 
 cv = KFold(5, shuffle=True)
@@ -547,9 +544,10 @@ print("------------------------------------------------------------")  # 60個
 
 print("Hyperparameter 超參數 ハイパーパラメータの探索")
 
-data = load_breast_cancer()
-X = data.data
-y = 1 - data.target  # ラベルの0と1を反転
+breast_cancer = load_breast_cancer()
+
+X = breast_cancer.data
+y = 1 - breast_cancer.target  # ラベルの0と1を反転
 X = X[:, :10]
 
 from sklearn.ensemble import RandomForestClassifier
@@ -572,7 +570,6 @@ print("------------------------------------------------------------")  # 60個
 
 # 13-1-1 最近 k 鄰數量：n_neighbors
 
-from sklearn.model_selection import train_test_split, cross_val_score
 from sklearn.neighbors import KNeighborsClassifier
 
 # 取得特徵與標籤資料
@@ -601,14 +598,13 @@ plt.xlabel("k neighbors")
 plt.ylabel("accuracy (%)")
 plt.legend()
 plt.grid(True)
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 13-1-2 用 GridSearchCV 自動搜尋最佳 k 值
 
-from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.model_selection import GridSearchCV
 
@@ -630,8 +626,6 @@ print("------------------------------------------------------------")  # 60個
 
 # 13-2-1 邏輯斯迴歸的 C：常規化強度
 
-from sklearn.preprocessing import StandardScaler
-from sklearn.model_selection import train_test_split, cross_val_score
 from sklearn.linear_model import LogisticRegression
 
 dx, dy = load_breast_cancer(return_X_y=True)
@@ -662,15 +656,13 @@ plt.ylabel("accuracy (%)")
 plt.legend()
 plt.grid(True)
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 13-2-2 線性 SVC 的 C：常規化強度
 
-from sklearn.preprocessing import StandardScaler
-from sklearn.model_selection import train_test_split, cross_val_score
 from sklearn.svm import LinearSVC
 
 dx, dy = load_breast_cancer(return_X_y=True)
@@ -697,17 +689,15 @@ plt.xlabel("C")
 plt.ylabel("accuracy (%)")
 plt.legend()
 plt.grid(True)
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 13-3-1 C, gamma 與 kernel 參數
 
-from sklearn.preprocessing import StandardScaler
-from sklearn.model_selection import train_test_split, cross_val_score
-from sklearn.svm import SVC
-from sklearn.model_selection import GridSearchCV, RandomizedSearchCV
+from sklearn.model_selection import GridSearchCV
+from sklearn.model_selection import RandomizedSearchCV
 
 dx, dy = load_breast_cancer(return_X_y=True)
 dx_std = StandardScaler().fit_transform(dx)
@@ -724,16 +714,13 @@ model.fit(dx_train, dy_train)
 
 print("Best params: ", model.best_params_)
 print("CV score:", model.best_score_.round(3))
-print("Test score:", model.score(dx_test, dy_test).round(3))
+# NG print("Test score:", model.score(dx_test, dy_test).round(3))
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 13-3-2 使用 RandomizedSearchCV 更快速尋找較適當的參數
 
-from sklearn.preprocessing import StandardScaler
-from sklearn.model_selection import train_test_split, cross_val_score
-from sklearn.svm import SVC
 from sklearn.model_selection import RandomizedSearchCV
 
 dx, dy = load_breast_cancer(return_X_y=True)
@@ -755,15 +742,13 @@ model.fit(dx_train, dy_train)
 
 print("Best params:", model.best_params_)
 print("CV score:", model.best_score_.round(3))
-print("Test score:", model.score(dx_test, dy_test).round(3))
+# NG print("Test score:", model.score(dx_test, dy_test).round(3))
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 13-4-1 決策樹的最大深度：max_depth
 
-from sklearn.preprocessing import StandardScaler
-from sklearn.model_selection import train_test_split, cross_val_score
 from sklearn.tree import DecisionTreeClassifier
 
 dx, dy = load_breast_cancer(return_X_y=True)
@@ -794,19 +779,20 @@ plt.xlabel("Max depth")
 plt.ylabel("accuracy (%)")
 plt.legend()
 plt.grid(True)
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-from sklearn.preprocessing import StandardScaler
-from sklearn.model_selection import train_test_split
-from sklearn.tree import DecisionTreeClassifier, export_text
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.tree import export_text
 
 dx, dy = load_breast_cancer(return_X_y=True)
+
 feature_names = list(load_breast_cancer().feature_names)
 
 dx_std = StandardScaler().fit_transform(dx)
+
 dx_train, dx_test, dy_train, dy_test = train_test_split(
     dx_std, dy, test_size=0.2, random_state=0
 )
@@ -818,10 +804,8 @@ print(export_text(model, feature_names=feature_names))
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 13-4-2 隨機森林的規模 n_estimators 與亂數種子 random_state
+# 13-4-2 隨機森林的規模 n_estimators
 
-from sklearn.preprocessing import StandardScaler
-from sklearn.model_selection import train_test_split, cross_val_score
 from sklearn.ensemble import RandomForestClassifier
 
 dx, dy = load_breast_cancer(return_X_y=True)
@@ -851,7 +835,7 @@ plt.xlabel("Number of trees")
 plt.ylabel("accuracy (%)")
 plt.legend()
 plt.grid(True)
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -877,12 +861,13 @@ def draw_curve(params, train_score, test_score):
     plt.grid()  # 顯示網格
     plt.legend()  # 顯示圖例文字
     plt.ylim(0.5, 1.05)  # 設定y軸顯示範圍
-    plt.show()
+    show()
 
 
 from sklearn.model_selection import learning_curve
 
-breast_cancer = datasets.load_breast_cancer()
+breast_cancer = load_breast_cancer()
+
 X = breast_cancer.data
 y = breast_cancer.target
 
@@ -914,21 +899,24 @@ print("------------------------------------------------------------")  # 60個
 
 print("K近鄰算法")
 
-from sklearn import neighbors, datasets
-from sklearn.model_selection import train_test_split
+from sklearn import neighbors
 
-data = datasets.load_breast_cancer()
-X = data.data  # 自變量
-y = data.target  # 因變量
+breast_cancer = load_breast_cancer()
+
+X = breast_cancer.data  # 自變量
+y = breast_cancer.target  # 因變量
+
 x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.1, random_state=0)
+
 clf = neighbors.KNeighborsClassifier(5)  # 設鄰居數爲5個
+
 clf.fit(x_train, y_train)  # 訓練模型
+
 print(clf.score(x_test, y_test))  # 給模型打分
 print(clf.predict([x_test[0]]), y_test[0], clf.predict_proba([x_test[0]]))
 
 print("------------------------------")  # 30個
 
-from sklearn.metrics import accuracy_score
 from scipy.spatial import distance
 import operator
 
@@ -950,15 +938,13 @@ def classify(inX, dataSet, labels, k):
 
 
 ret = [classify(x_test[i], x_train, y_train, 5) for i in range(len(x_test))]
-print(accuracy_score(y_test, ret))
+
+print(f"計算準確率 : {accuracy_score(y_test, ret)*100:.2f}%")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # Min-max scaling
-
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score
 
 # 測試資料
 data = np.array([[-1, 2], [-0.5, 6], [0, 10], [1, 18]])
@@ -983,8 +969,8 @@ print(cc)
 
 # 載入資料集
 
-# X, y = datasets.load_iris(return_X_y=True)
-X, y = datasets.load_breast_cancer(return_X_y=True)
+# X, y = load_iris(return_X_y=True)
+X, y = load_breast_cancer(return_X_y=True)
 
 # 3. 不須進行特徵工程
 
@@ -1012,44 +998,34 @@ from sklearn.linear_model import LogisticRegression
 clf = LogisticRegression()
 
 # 6. 模型訓練
-
 clf.fit(X_train_std, y_train)
 """
 LogisticRegression()
-
 In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook.
 On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.
 """
 
 # 7. 模型計分
-
 y_pred = clf.predict(X_test_std)
 print(y_pred)
 
-# 計算準確率
-print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
-
+print(f"計算準確率 : {accuracy_score(y_test, y_pred)*100:.2f}%")
 # 98.25%
 
-# 混淆矩陣
-from sklearn.metrics import confusion_matrix
+print("混淆矩陣 :\n", confusion_matrix(y_test, y_pred))
 
-print(confusion_matrix(y_test, y_pred))
-
-# 混淆矩陣圖
-from sklearn.metrics import ConfusionMatrixDisplay
-
+print("混淆矩陣圖")
 disp = ConfusionMatrixDisplay(confusion_matrix=confusion_matrix(y_test, y_pred))
 disp.plot()
-plt.show()
+show()
 
 # 不進行特徵縮放
 
 clf.fit(X_train, y_train)
-y_pred = clf.predict(X_test)
-# 計算準確率
-print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
 
+y_pred = clf.predict(X_test)
+
+print(f"計算準確率 : {accuracy_score(y_test, y_pred)*100:.2f}%")
 # 96.49%
 
 print("------------------------------------------------------------")  # 60個
@@ -1057,14 +1033,9 @@ print("------------------------------------------------------------")  # 60個
 
 # 標準化(Standardization)
 
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score
-
 # 測試資料
 data = np.array([[0, 0], [0, 0], [1, 1], [1, 1]])
 print(data)
-
-from sklearn.preprocessing import StandardScaler
 
 scaler = StandardScaler()
 cc = scaler.fit_transform(data)
@@ -1086,8 +1057,8 @@ print(cc)
 
 # 載入資料集
 
-# X, y = datasets.load_iris(return_X_y=True)
-X, y = datasets.load_breast_cancer(return_X_y=True)
+# X, y = load_iris(return_X_y=True)
+X, y = load_breast_cancer(return_X_y=True)
 
 # 3. 不須進行特徵工程
 
@@ -1127,28 +1098,22 @@ On GitHub, the HTML representation is unable to render, please try loading this 
 y_pred = clf.predict(X_test_std)
 print(y_pred)
 
-# 計算準確率
-print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
+print(f"計算準確率 : {accuracy_score(y_test, y_pred)*100:.2f}%")
 
-# 混淆矩陣
-from sklearn.metrics import confusion_matrix
+print("混淆矩陣 :\n", confusion_matrix(y_test, y_pred))
 
-print(confusion_matrix(y_test, y_pred))
-
-# 混淆矩陣圖
-from sklearn.metrics import ConfusionMatrixDisplay
-
+print("混淆矩陣圖")
 disp = ConfusionMatrixDisplay(confusion_matrix=confusion_matrix(y_test, y_pred))
 disp.plot()
-plt.show()
+show()
 
 # 不進行特徵縮放
 
 clf.fit(X_train, y_train)
-y_pred = clf.predict(X_test)
-# 計算準確率
-print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
 
+y_pred = clf.predict(X_test)
+
+print(f"計算準確率 : {accuracy_score(y_test, y_pred)*100:.2f}%")
 # 92.98%
 
 print("------------------------------------------------------------")  # 60個
@@ -1180,11 +1145,8 @@ print(cc)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score
-
-# X, y = datasets.load_iris(return_X_y=True)
-X, y = datasets.load_breast_cancer(return_X_y=True)
+# X, y = load_iris(return_X_y=True)
+X, y = load_breast_cancer(return_X_y=True)
 
 # 3. 不須進行特徵工程
 
@@ -1226,38 +1188,29 @@ On GitHub, the HTML representation is unable to render, please try loading this 
 y_pred = clf.predict(X_test_std)
 print(y_pred)
 
-# 計算準確率
-print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
-
+print(f"計算準確率 : {accuracy_score(y_test, y_pred)*100:.2f}%")
 # 96.49%
 
-# 混淆矩陣
-from sklearn.metrics import confusion_matrix
+print("混淆矩陣 :\n", confusion_matrix(y_test, y_pred))
 
-print(confusion_matrix(y_test, y_pred))
-
-# 混淆矩陣圖
-from sklearn.metrics import ConfusionMatrixDisplay
-
+print("混淆矩陣圖")
 disp = ConfusionMatrixDisplay(confusion_matrix=confusion_matrix(y_test, y_pred))
 disp.plot()
-plt.show()
+show()
 
 # 不進行特徵縮放
 
 clf.fit(X_train, y_train)
+
 y_pred = clf.predict(X_test)
-# 計算準確率
-print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
+
+print(f"計算準確率 : {accuracy_score(y_test, y_pred)*100:.2f}%")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score
-
-# X, y = datasets.load_iris(return_X_y=True)
-X, y = datasets.load_breast_cancer(return_X_y=True)
+# X, y = load_iris(return_X_y=True)
+X, y = load_breast_cancer(return_X_y=True)
 
 # 3. 不須進行特徵工程
 
@@ -1289,61 +1242,48 @@ clf = LogisticRegression()
 clf.fit(X_train_std, y_train)
 """
 LogisticRegression()
-
 In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook.
 On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.
 """
 
 # 7. 模型計分
-
 y_pred = clf.predict(X_test_std)
 print(y_pred)
 
-# 計算準確率
-print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
-
+print(f"計算準確率 : {accuracy_score(y_test, y_pred)*100:.2f}%")
 # 95.61%
 
-# 混淆矩陣
-from sklearn.metrics import confusion_matrix
+print("混淆矩陣 :\n", confusion_matrix(y_test, y_pred))
 
-print(confusion_matrix(y_test, y_pred))
-
-# 混淆矩陣圖
-from sklearn.metrics import ConfusionMatrixDisplay
-
+print("混淆矩陣圖")
 disp = ConfusionMatrixDisplay(confusion_matrix=confusion_matrix(y_test, y_pred))
 disp.plot()
-plt.show()
+show()
 
 # 不進行特徵縮放
 
 clf.fit(X_train, y_train)
+
 y_pred = clf.predict(X_test)
 
-# 計算準確率
-print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
+print(f"計算準確率 : {accuracy_score(y_test, y_pred)*100:.2f}%")
 # 94.74%
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
-# 08_08_roc_breast_cancer
+# roc_breast_cancer
 
 # 實作乳癌診斷，並繪製ROC曲線
 
-data = datasets.load_breast_cancer()
+breast_cancer = load_breast_cancer()
 
 # 資料分割
 X_train, X_test, y_train, y_test = train_test_split(
-    data.data[:, :6], data.target, test_size=0.20
+    breast_cancer.data[:, :6], breast_cancer.target, test_size=0.20
 )
 
 # 模型訓練
-
-from sklearn.preprocessing import StandardScaler
-from sklearn.svm import SVC
 from sklearn.pipeline import make_pipeline
 
 pipe = make_pipeline(StandardScaler(), SVC(probability=True))
@@ -1356,7 +1296,6 @@ Pipeline(steps=[('standardscaler', StandardScaler()),
 """
 
 # 模型預測
-
 y_pred_proba = pipe.predict_proba(X_test)
 cc = np.around(y_pred_proba, 2)
 print(cc)
@@ -1393,29 +1332,24 @@ print(cc)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
-# 10_02_majority_voting
+# majority_voting
 # 多數決演算法(VotingClassifier)測試
 
-# 載入資料集
-X, y = datasets.load_breast_cancer(return_X_y=True)
+X, y = load_breast_cancer(return_X_y=True)
 
 # 資料分割
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 # 特徵縮放
-
-from sklearn.preprocessing import StandardScaler
-
 scaler = StandardScaler()
 X_train_std = scaler.fit_transform(X_train)
 X_test_std = scaler.transform(X_test)
 
 # 模型訓練
 
-from sklearn.svm import SVC
-from sklearn.ensemble import RandomForestClassifier, VotingClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import VotingClassifier
 from sklearn.naive_bayes import GaussianNB
 
 estimators = [("svc", SVC()), ("rf", RandomForestClassifier()), ("nb", GaussianNB())]
@@ -1459,9 +1393,6 @@ cc = clf.predict(X_test_std)
 print(cc)
 
 # 交叉驗證
-
-from sklearn.model_selection import cross_val_score
-
 scores = cross_val_score(estimator=clf, X=X_test_std, y=y_test, cv=10, n_jobs=-1)
 print(f"K折分數: %s" % scores)
 print(f"平均值: {np.mean(scores):.2f}, 標準差: {np.std(scores):.2f}")
@@ -1506,14 +1437,12 @@ print("------------------------------------------------------------")  # 60個
 # Bagging演算法測試
 
 # 載入資料集
-X, y = datasets.load_breast_cancer(return_X_y=True)
+X, y = load_breast_cancer(return_X_y=True)
 
 # 資料分割
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 # 特徵縮放
-from sklearn.preprocessing import StandardScaler
-
 scaler = StandardScaler()
 X_train_std = scaler.fit_transform(X_train)
 X_test_std = scaler.transform(X_test)
@@ -1552,9 +1481,6 @@ cc = clf.predict(X_test_std)
 print(cc)
 
 # 交叉驗證
-
-from sklearn.model_selection import cross_val_score
-
 clf2 = BaggingClassifier(estimator=base_estimator, n_estimators=50)
 scores = cross_val_score(estimator=clf2, X=X_test_std, y=y_test, cv=10, n_jobs=-1)
 
@@ -1671,8 +1597,8 @@ print("------------------------------------------------------------")  # 60個
 
 # 自行開發Adaboost
 
-# 載入資料集
-X, y = datasets.load_breast_cancer(return_X_y=True)
+X, y = load_breast_cancer(return_X_y=True)
+
 y[y == 0] = -1
 # X, y = datasets.make_hastie_10_2()
 print(y)
@@ -1751,7 +1677,8 @@ print("------------------------------------------------------------")  # 60個
 
 from xgboost import XGBClassifier
 
-X, y = datasets.load_breast_cancer(return_X_y=True)
+X, y = load_breast_cancer(return_X_y=True)
+
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 model = XGBClassifier()
@@ -1766,18 +1693,15 @@ print(f"平均分數: {np.mean(scores)}, 標準差: {np.std(scores)}")
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 10_08_stacking
 # 堆疊(Stacking)測試
 
-# 載入資料集
-X, y = datasets.load_breast_cancer(return_X_y=True)
+X, y = load_breast_cancer(return_X_y=True)
 
 # 資料分割
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.tree import DecisionTreeClassifier
-from sklearn.svm import SVC
 from sklearn.naive_bayes import GaussianNB
 from sklearn.ensemble import StackingClassifier
 
@@ -1804,9 +1728,6 @@ StackingClassifier(estimators=[('knn', KNeighborsClassifier()),
 """
 
 # 模型評估
-
-from sklearn.model_selection import cross_val_score
-
 scores = cross_val_score(model, X_test, y_test, cv=10)
 print(f"平均分數: {np.mean(scores)}, 標準差: {np.std(scores)}")
 # 平均分數: 0.9303030303030303, 標準差: 0.08393720596645175
@@ -1819,12 +1740,9 @@ print("------------------------------------------------------------")  # 60個
 # 自行計算 Shapley value
 # How to calculate shapley values from scratch
 
-from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import make_pipeline
 
-# 載入資料
-
-X, y = datasets.load_breast_cancer(return_X_y=True, as_frame=True)
+X, y = load_breast_cancer(return_X_y=True, as_frame=True)
 
 # 資料分割
 

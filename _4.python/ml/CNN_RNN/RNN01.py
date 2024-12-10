@@ -53,7 +53,7 @@ imdb_npz_filename = "C:/_git/vcs/_big_files/imdb.npz"
     maxlen=None,
     seed=9487,
     start_char=0,
-    #oov_char="OOV",
+    # oov_char="OOV",
     index_from=0,
 )
 
@@ -62,10 +62,10 @@ print(y_train.shape)
 print(x_test.shape)
 print(y_test.shape)
 
-#(x_train, y_train), (x_test, y_test) = imdb.load_data(num_words=10000)
+# (x_train, y_train), (x_test, y_test) = imdb.load_data(num_words=10000)
 
-#from keras.datasets import imdb
-#(x_train, y_train), (x_test, y_test) = imdb.load_data(num_words=10000)
+# from keras.datasets import imdb
+# (x_train, y_train), (x_test, y_test) = imdb.load_data(num_words=10000)
 # 2. 讀入數據
 # 讀入 IMDB 電影數據庫影評的部份。
 

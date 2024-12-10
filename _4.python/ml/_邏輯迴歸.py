@@ -28,14 +28,24 @@ print("------------------------------------------------------------")  # 60個
 
 from common1 import *
 import sklearn.linear_model
+from sklearn.linear_model import LogisticRegression
 from sklearn import datasets
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
 from sklearn.metrics import accuracy_score
-from sklearn.metrics import confusion_matrix
+from sklearn.preprocessing import StandardScaler  # 特徵縮放
+from sklearn.metrics import confusion_matrix  # 混淆矩陣
+from sklearn.metrics import ConfusionMatrixDisplay  # 混淆矩陣圖
 
-# 特徵縮放
-from sklearn.preprocessing import StandardScaler
 
+from sklearn import metrics
+
+
+def show():
+    plt.show()
+    pass
+
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 N = 30
@@ -75,7 +85,7 @@ plt.plot(
 plt.plot(range(len(y_pred_prob)), y_pred_prob[:, 0], "ro-", label="對應到第0群的機率")
 plt.plot(range(len(y_pred_prob)), y_pred_prob[:, 1], "go-", label="對應到第1群的機率")
 plt.legend()
-plt.show()
+show()
 
 print(logistic_regression.predict_proba([[0]])[:, 1])
 print(logistic_regression.predict_proba([[0], [1], [2]])[:, 1])
@@ -96,7 +106,7 @@ print(cc)
 # y 各類別資料筆數統計
 
 sns.countplot(x="y", data=df)
-plt.show()
+show()
 
 # y 各類別資料筆數統計
 cc = df.y.value_counts()
@@ -105,7 +115,7 @@ print(cc)
 series1 = df.y.value_counts()
 series1.plot.pie(figsize=(6, 6), autopct="%1.1f%%")
 plt.legend()
-plt.show()
+show()
 
 cat_vars = [
     "job",
@@ -168,19 +178,14 @@ logistic_regression.fit(X_train_std, y_train)  # 學習訓練.fit
 
 y_pred = logistic_regression.predict(X_test_std)  # 預測.predict
 
-print("計算準確率 :")
-cc = f"{accuracy_score(y_test, y_pred)*100:.2f}%"
-print(cc)
+print(f"計算準確率 : {accuracy_score(y_test, y_pred)*100:.2f}%")
 
-cc = confusion_matrix(y_test, y_pred)
-print("混淆矩陣 :\n", cc)
+print("混淆矩陣 :\n", confusion_matrix(y_test, y_pred))
 
-# 混淆矩陣圖
-from sklearn.metrics import ConfusionMatrixDisplay
-
+print("混淆矩陣圖")
 disp = ConfusionMatrixDisplay(confusion_matrix=confusion_matrix(y_test, y_pred))
 disp.plot()
-plt.show()
+show()
 
 from sklearn.metrics import classification_report
 
@@ -216,7 +221,7 @@ print()
 plt.scatter(X[:N, 0], X[:N, 1], c="r", label="第0群, 對應到0")
 plt.scatter(X[N : N * 2 - 1, 0], X[N : N * 2 - 1, 1], c="g", label="第1群, 對應到1")
 plt.legend()
-plt.show()
+show()
 
 print("------------------------------")  # 30個
 
@@ -243,12 +248,11 @@ print(cc)
 cc = cc * 1.0 / len(y)
 print("正確率 :", cc)
 
-cc = confusion_matrix(y, y_pred)
-print("混淆矩陣 :\n", cc)
+print("混淆矩陣 :\n", confusion_matrix(y, y_pred))
 
 print("繪製熱圖")
 sns.heatmap(confusion_matrix(y, y_pred))
-plt.show()
+show()
 
 print("繪制分類邊界")
 plt.style.use("bmh")
@@ -269,7 +273,7 @@ plt.scatter(X[:, 0], X[:, 1], c=y, s=40, alpha=0.8)
 # plt.scatter(X[:, 0], X[:, 1], c=y, s=40, alpha=0.8, cmap=plt.cmap)
 plt.title("logistic regression prediction")
 
-plt.show()
+show()
 
 print("------------------------------")  # 30個
 
@@ -342,7 +346,7 @@ print(len(cc))
 """
 # 用heatmap(.isnull())來找出缺失的資料在哪些欄位
 sns.heatmap(df.isnull(), yticklabels=False, cbar=False, cmap="viridis")
-plt.show()
+show()
 """
 print("------------------------------")  # 30個
 
@@ -350,7 +354,7 @@ plt.title("用countplot來看Nox是否影響健康")
 
 sns.countplot(x="Danger", hue="Nox", data=df, palette="RdBu_r")
 
-plt.show()
+show()
 
 print("------------------------------")  # 30個
 
@@ -358,7 +362,7 @@ plt.title("用直方圖看PM25分佈")
 
 sns.distplot(df["PM25"].dropna(), kde=False, bins=30)
 
-plt.show()
+show()
 
 print("------------------------------")  # 30個
 
@@ -366,7 +370,7 @@ plt.title("用直方圖看Nox的分佈")
 
 df["Nox"].hist(bins=30)
 
-plt.show()
+show()
 
 print("------------------------------")  # 30個
 
@@ -391,8 +395,7 @@ logistic_regression.fit(X_train, y_train)
 
 y_pred = logistic_regression.predict(X_test)  # 預測.predict
 
-cc = confusion_matrix(y_test, y_pred)
-print("混淆矩陣 :\n", cc)
+print("混淆矩陣 :\n", confusion_matrix(y_test, y_pred))
 
 from sklearn.metrics import classification_report
 
@@ -466,21 +469,16 @@ logistic_regression.fit(X_train_std, y_train)  # 學習訓練.fit
 
 y_pred = logistic_regression.predict(X_test_std)  # 預測.predict
 
-print("計算準確率 :")
-cc = f"{accuracy_score(y_test, y_pred)*100:.2f}%"
-print(cc)
+print(f"計算準確率 : {accuracy_score(y_test, y_pred)*100:.2f}%")
 
-cc = confusion_matrix(y_test, y_pred)
-print("混淆矩陣 :\n", cc)
+print("混淆矩陣 :\n", confusion_matrix(y_test, y_pred))
 
-# 混淆矩陣圖
-from sklearn.metrics import ConfusionMatrixDisplay
-
+print("混淆矩陣圖")
 disp = ConfusionMatrixDisplay(
     confusion_matrix=confusion_matrix(y_test, y_pred), display_labels=ds.target_names
 )
 disp.plot()
-plt.show()
+show()
 
 # 使用全部特徵
 print("鳶尾花資料集")
@@ -505,9 +503,7 @@ logistic_regression.fit(X_train_std, y_train)  # 學習訓練.fit
 
 y_pred = logistic_regression.predict(X_test_std)  # 預測.predict
 
-print("計算準確率 :")
-cc = f"{accuracy_score(y_test, y_pred)*100:.2f}%"
-print(cc)
+print(f"計算準確率 : {accuracy_score(y_test, y_pred)*100:.2f}%")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -562,19 +558,14 @@ logistic_regression.fit(X_train_std, y_train)  # 學習訓練.fit
 
 y_pred = logistic_regression.predict(X_test_std)  # 預測.predict
 
-print("計算準確率 :")
-cc = f"{accuracy_score(y_test, y_pred)*100:.2f}%"
-print(cc)
+print(f"計算準確率 : {accuracy_score(y_test, y_pred)*100:.2f}%")
 
-cc = confusion_matrix(y_test, y_pred)
-print("混淆矩陣 :\n", cc)
+print("混淆矩陣 :\n", confusion_matrix(y_test, y_pred))
 
-# 混淆矩陣圖
-from sklearn.metrics import ConfusionMatrixDisplay
-
+print("混淆矩陣圖")
 disp = ConfusionMatrixDisplay(confusion_matrix=confusion_matrix(y_test, y_pred))
 disp.plot()
-plt.show()
+show()
 
 # 使用全部特徵
 print("數字資料集")
@@ -599,9 +590,7 @@ logistic_regression.fit(X_train_std, y_train)  # 學習訓練.fit
 
 y_pred = logistic_regression.predict(X_test_std)  # 預測.predict
 
-print("計算準確率 :")
-cc = f"{accuracy_score(y_test, y_pred)*100:.2f}%"
-print(cc)
+print(f"計算準確率 : {accuracy_score(y_test, y_pred)*100:.2f}%")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -656,19 +645,14 @@ clf.fit(X_train_std, y_train)  # 學習訓練.fit
 
 y_pred = clf.predict(X_test_std)  # 預測.predict
 
-print("計算準確率 :")
-cc = f"{accuracy_score(y_test, y_pred)*100:.2f}%"
-print(cc)
+print(f"計算準確率 : {accuracy_score(y_test, y_pred)*100:.2f}%")
 
-cc = confusion_matrix(y_test, y_pred)
-print("混淆矩陣 :\n", cc)
+print("混淆矩陣 :\n", confusion_matrix(y_test, y_pred))
 
-# 混淆矩陣圖
-from sklearn.metrics import ConfusionMatrixDisplay
-
+print("混淆矩陣圖")
 disp = ConfusionMatrixDisplay(confusion_matrix=confusion_matrix(y_test, y_pred))
 disp.plot()
-plt.show()
+show()
 
 # 使用全部特徵
 print("數字資料集")
@@ -693,9 +677,7 @@ clf.fit(X_train_std, y_train)  # 學習訓練.fit
 
 y_pred = clf.predict(X_test_std)  # 預測.predict
 
-print("計算準確率 :")
-cc = f"{accuracy_score(y_test, y_pred)*100:.2f}%"
-print(cc)
+print(f"計算準確率 : {accuracy_score(y_test, y_pred)*100:.2f}%")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -746,19 +728,14 @@ clf.fit(X_train_std, y_train)  # 學習訓練.fit
 
 y_pred = clf.predict(X_test_std)  # 預測.predict
 
-print("計算準確率 :")
-cc = f"{accuracy_score(y_test, y_pred)*100:.2f}%"
-print(cc)
+print(f"計算準確率 : {accuracy_score(y_test, y_pred)*100:.2f}%")
 
-cc = confusion_matrix(y_test, y_pred)
-print("混淆矩陣 :\n", cc)
+print("混淆矩陣 :\n", confusion_matrix(y_test, y_pred))
 
-# 混淆矩陣圖
-from sklearn.metrics import ConfusionMatrixDisplay
-
+print("混淆矩陣圖")
 disp = ConfusionMatrixDisplay(confusion_matrix=confusion_matrix(y_test, y_pred))
 disp.plot()
-plt.show()
+show()
 
 # 使用全部特徵
 print("鳶尾花資料集")
@@ -783,9 +760,7 @@ clf.fit(X_train_std, y_train)  # 學習訓練.fit
 
 y_pred = clf.predict(X_test_std)  # 預測.predict
 
-print("計算準確率 :")
-cc = f"{accuracy_score(y_test, y_pred)*100:.2f}%"
-print(cc)
+print(f"計算準確率 : {accuracy_score(y_test, y_pred)*100:.2f}%")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -818,10 +793,6 @@ print("------------------------------------------------------------")  # 60個
 
 """ NG 無檔案
 from sklearn.feature_extraction.text import CountVectorizer
-from sklearn.linear_model import LogisticRegression
-from sklearn.model_selection import train_test_split
-from sklearn import metrics
-
 import joblib
 
 train_df = pd.read_csv('Fake_news_data/train.csv')
@@ -843,8 +814,7 @@ classifier = LogisticRegression()
 classifier.fit(X_train, Y_train)
 pred = classifier.predict(X_test)
 
-score = metrics.accuracy_score(Y_test, pred)
-print("accuracy:%0.3f" % score)
+print(f"計算準確率 : {accuracy_score(Y_test, pred)*100:.2f}%")
 
 joblib.dump(classifier, 'classifier.pkl')
 """
@@ -884,17 +854,12 @@ logistic_regression.fit(X_train, y_train)
 # cc = logistic_regression.coef_, lr.intercept_
 # print(cc)
 
-# 計算準確率
-
 y_pred = logistic_regression.predict(X_test)
-print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
-
+print(f"計算準確率 : {accuracy_score(y_test, y_pred)*100:.2f}%")
 # 48.80%
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-from sklearn.linear_model import LogisticRegression
 
 data, label = make_blobs(n_samples=1000, n_features=2, centers=2, random_state=9487)
 
@@ -927,8 +892,6 @@ print(f"測試資料的準確性 = {lo_model.score(dx_test, label_test)}")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-from sklearn.linear_model import LogisticRegression
 
 data, label = make_blobs(n_samples=200, n_features=2, centers=2, random_state=9487)
 

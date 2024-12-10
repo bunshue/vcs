@@ -1144,26 +1144,26 @@ cvshow("image", image)
 
 print("------------------------------------------------------------")  # 60個
 
-#改用 製造數據 自己畫出來
+# 改用 製造數據 自己畫出來
 
 w, h = 400, 400
-image_r = np.zeros([h, w, 3])#黑色
-image_g = np.zeros([h, w, 3])#黑色
-image_b = np.zeros([h, w, 3])#黑色
+image_r = np.zeros([h, w, 3])  # 黑色
+image_g = np.zeros([h, w, 3])  # 黑色
+image_b = np.zeros([h, w, 3])  # 黑色
 
 radius = 100
 
 cx, cy = 200, 150
-color = (0, 0, 255)# 紅
-cv2.circle(image_r, (cx, cy), radius, color, -1)# 繪製實心圓形
+color = (0, 0, 255)  # 紅
+cv2.circle(image_r, (cx, cy), radius, color, -1)  # 繪製實心圓形
 
 cx, cy = 150, 250
-color = (0, 255, 0)# 綠
-cv2.circle(image_g, (cx, cy), radius, color, -1)# 繪製實心圓形
+color = (0, 255, 0)  # 綠
+cv2.circle(image_g, (cx, cy), radius, color, -1)  # 繪製實心圓形
 
 cx, cy = 250, 250
-color = (255, 0, 0)# 藍
-cv2.circle(image_b, (cx, cy), radius, color, -1)# 繪製實心圓形
+color = (255, 0, 0)  # 藍
+cv2.circle(image_b, (cx, cy), radius, color, -1)  # 繪製實心圓形
 
 
 image = cv2.add(image_r, image_g)  # 疊加紅色和綠色
@@ -5669,38 +5669,35 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 import warnings
-warnings.filterwarnings('ignore')
 
-filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+warnings.filterwarnings("ignore")
+
+filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
 cv_img = cv2.imread(filename)
-width=cv_img.shape[1]
-height=cv_img.shape[0]
+width = cv_img.shape[1]
+height = cv_img.shape[0]
 print(width)
 print(height)
 
-filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
 
 img = Image.open(filename)
 
 mask = np.zeros([10, 5, 3], dtype=np.uint8)
-#print(mask)
+# print(mask)
 occlusion = np.logical_not(mask[:, :, -1]).astype(np.uint8)
 
-#print(mask)
+# print(mask)
 
-#mask[:, :, i] = mask[:, :, i] * occlusion
-#occlusion = np.logical_and(occlusion, np.logical_not(mask[:, :, i]))
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
-
+# mask[:, :, i] = mask[:, :, i] * occlusion
+# occlusion = np.logical_and(occlusion, np.logical_not(mask[:, :, i]))
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個

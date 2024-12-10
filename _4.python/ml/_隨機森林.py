@@ -30,8 +30,11 @@ from common1 import *
 import sklearn.linear_model
 from sklearn import datasets
 from sklearn.datasets import make_blobs
+from sklearn.datasets import make_classification
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.ensemble import RandomForestRegressor
+from sklearn.model_selection import cross_val_score  # Cross Validation
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -42,9 +45,6 @@ X, y = make_blobs(n_samples=N, centers=GROUPS, n_features=2)
 
 print("使用 Random Forest")
 
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.model_selection import cross_val_score  # Cross Validation
-
 clf = RandomForestClassifier(n_estimators=100)
 
 scores = cross_val_score(clf, X, y, cv=5)
@@ -53,7 +53,6 @@ print("平均 :", scores.mean())
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
 
 """
 機器學習_隨機森林_空氣盒子
@@ -280,10 +279,8 @@ plt.title("Actual and Predicted Values")
 
 plt.show()
 """
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
 """
 20190314-空氣盒子數據Scikit-Learn隨機森林實作
 """
@@ -320,7 +317,6 @@ print(cc)
 # Labels are the values we want to predict
 labels = np.array(df["PM25"])
 # labels 要預測的項目
-
 
 print(df.shape)
 
@@ -495,17 +491,12 @@ export_graphviz(
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-from sklearn.ensemble import RandomForestClassifier
-
 X = np.array([[180, 85], [174, 80], [170, 75], [167, 45], [158, 52], [155, 44]])
 Y = np.array(["man", "man", "man", "woman", "woman", "woman"])
 
 RForest = RandomForestClassifier(n_estimators=100, max_depth=10, random_state=2)
 RForest.fit(X, Y)
 print(RForest.predict([[180, 85]]))
-
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.datasets import make_classification
 
 X, Y = make_classification(
     n_samples=10,
@@ -537,8 +528,6 @@ export_graphviz(
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-from sklearn.ensemble import RandomForestClassifier
 
 data, label = datasets.load_iris(return_X_y=True)
 

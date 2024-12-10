@@ -46,14 +46,20 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 print("------------------------------------------------------------")  # 60個
 
 from common1 import *
+from sklearn import datasets
 from sklearn.datasets import make_blobs
 from sklearn.datasets import make_moons  # 非線性的資料集
 from sklearn.datasets import make_classification
 from sklearn.datasets import make_gaussian_quantiles
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
 from sklearn.metrics import accuracy_score  # 計算準確率
+from sklearn.metrics import confusion_matrix
+from sklearn.metrics import classification_report
+from sklearn.metrics import ConfusionMatrixDisplay
 from sklearn.svm import SVC  # 非線性SVM函數學習機
 from sklearn.svm import LinearSVC  # 線性支援向量機 (Linear SVM)
+
+import sklearn.metrics as metrics
 
 
 def show():
@@ -62,7 +68,7 @@ def show():
 
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 plt.figure(
     num="SVM 支援向量機",
     figsize=(12, 8),
@@ -340,8 +346,6 @@ print("正確率 :", cc)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-from sklearn import datasets
-
 iris = datasets.load_iris()
 
 # Prepare data
@@ -453,8 +457,6 @@ svcModel = svm.SVC(kernel="rbf", gamma=0.5, C=0.5, probability=True).fit(
 )
 
 # 初步评估
-import sklearn.metrics as metrics
-
 test_est = svcModel.predict(test_data)
 print(metrics.classification_report(test_target, test_est))  # 计算评估指标
 
@@ -548,8 +550,6 @@ iris = datasets.load_iris()
 X = iris.data
 Y = iris.target
 
-from sklearn.svm import SVC
-
 X_SVM = X[:, :2]  # 取出前兩欄
 
 clf = SVC()
@@ -563,7 +563,7 @@ plt.scatter(X_SVM[:, 0], X_SVM[:, 1], c=y_predict)
 show()
 
 # 再去做預測
-'''
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -571,7 +571,6 @@ N = 500
 GROUPS = 3
 X, y = make_blobs(n_samples=N, centers=GROUPS, n_features=2)
 
-from sklearn.svm import SVC
 from sklearn.model_selection import cross_val_score  # Cross Validation
 
 print("使用 SVC")
@@ -585,8 +584,6 @@ print("平均 :", scores.mean())
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-from sklearn.svm import LinearSVC
 
 data, label = make_blobs(n_samples=200, n_features=2, centers=2, random_state=9487)
 
@@ -619,10 +616,6 @@ print(f"測試資料的準確性 = {svm_model.score(dx_test, label_test)}")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-from sklearn.datasets import make_moons
-from sklearn.svm import LinearSVC
-from sklearn.svm import SVC
 
 data, label = make_moons(n_samples=200, noise=0.2, random_state=9487)
 
@@ -727,9 +720,6 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-from sklearn.svm import LinearSVC
-from sklearn.metrics import accuracy_score
-
 # データ生成
 centers = [(-1, -0.125), (0.5, 0.5)]
 
@@ -769,7 +759,6 @@ X_test = scaler.fit_transform(X_test)  # STD特徵縮放
 
 # 第五步：适配SVM到训练集合
 # Fitting SVM to the Training set
-from sklearn.svm import SVC
 
 classifier = SVC(kernel="linear", random_state=0)
 
@@ -798,9 +787,6 @@ y_pred = classifier.predict(X_test)
 
 # 第七步：创建混淆矩阵
 # Making the Confusion Matrix
-
-from sklearn.metrics import confusion_matrix
-from sklearn.metrics import classification_report
 
 cm = confusion_matrix(y_test, y_pred)
 print(cm)
@@ -873,12 +859,10 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
 # 11_01_self_training
 
 # 自我訓練(Self-training)測試
 
-from sklearn.svm import SVC
 from sklearn.semi_supervised import SelfTrainingClassifier
 
 # 載入資料集
@@ -980,7 +964,6 @@ print("------------------------------------------------------------")  # 60個
 # 繪製混淆矩陣
 
 from sklearn import svm
-from sklearn.metrics import ConfusionMatrixDisplay
 
 # 載入資料
 ds = datasets.load_iris()
