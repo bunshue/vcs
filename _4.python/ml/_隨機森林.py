@@ -29,10 +29,31 @@ print("------------------------------------------------------------")  # 60個
 from common1 import *
 import sklearn.linear_model
 from sklearn import datasets
+from sklearn.datasets import make_blobs
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
 from sklearn.ensemble import RandomForestRegressor
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+N = 500
+GROUPS = 3
+X, y = make_blobs(n_samples=N, centers=GROUPS, n_features=2)
+
+print("使用 Random Forest")
+
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import cross_val_score  # Cross Validation
+
+clf = RandomForestClassifier(n_estimators=100)
+
+scores = cross_val_score(clf, X, y, cv=5)
+print("看一下五次的成績 :", scores)
+print("平均 :", scores.mean())
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 
 """
 機器學習_隨機森林_空氣盒子
@@ -517,6 +538,28 @@ export_graphviz(
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+from sklearn.ensemble import RandomForestClassifier
+
+data, label = datasets.load_iris(return_X_y=True)
+
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+dx_train, dx_test, label_train, label_test = train_test_split(
+    data, label, test_size=0.2, random_state=9487
+)
+# 訓練組8成, 測試組2成
+
+# 建立分類模型
+forest_model = RandomForestClassifier()
+
+# 建立訓練數據模型
+forest_model.fit(dx_train, label_train)
+
+# 對測試數據做預測
+pred = forest_model.predict(dx_test)
+
+# 輸出準確性
+print(f"訓練資料的準確性 = {forest_model.score(dx_train, label_train)}")
+print(f"測試資料的準確性 = {forest_model.score(dx_test, label_test)}")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

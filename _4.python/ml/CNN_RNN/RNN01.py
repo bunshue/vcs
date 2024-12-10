@@ -37,28 +37,32 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Embedding
 from tensorflow.keras.layers import LSTM
 
-# from tensorflow.keras.datasets import imdb
+from tensorflow.keras.datasets import imdb
 
 """ imdb 資料在
 https://storage.googleapis.com/tensorflow/tf-keras-datasets/imdb.npz
 """
 
-
-""" TBD
 # 讀取 本地檔案
 imdb_npz_filename = "C:/_git/vcs/_big_files/imdb.npz"
 
-imdb = np.load(imdb_npz_filename)
+(x_train, y_train), (x_test, y_test) = imdb.load_data(
+    path=imdb_npz_filename,
+    num_words=10,
+    skip_top=0,
+    maxlen=None,
+    seed=9487,
+    start_char=0,
+    #oov_char="OOV",
+    index_from=0,
+)
 
-x_train, y_train = imdb["x_train"], imdb["y_train"]
-x_test, y_test = imdb["x_test"], imdb["y_test"]
-
-imdb.close()
-"""
+print(x_train.shape)
+print(y_train.shape)
+print(x_test.shape)
+print(y_test.shape)
 
 #(x_train, y_train), (x_test, y_test) = imdb.load_data(num_words=10000)
-
-
 
 #from keras.datasets import imdb
 #(x_train, y_train), (x_test, y_test) = imdb.load_data(num_words=10000)

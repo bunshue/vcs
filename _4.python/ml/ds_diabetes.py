@@ -22,12 +22,9 @@ datasets.load_diabetes是一个Python库中的函数，用于加载糖尿病数�
     s5: Possibly log of serum triglycerides level (ltg)
     s6: Blood sugar level (glu)
 
-
 讀取資料
 sklearn.datasets.load_diabetes(*, return_X_y=False, as_frame=False, scaled=True)
-
 """
-
 print("------------------------------------------------------------")  # 60個
 
 # 共同
@@ -51,6 +48,8 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 print("------------------------------------------------------------")  # 60個
 
 from sklearn import datasets
+
+print("------------------------------------------------------------")  # 60個
 
 # 載入資料集
 
@@ -107,9 +106,6 @@ print(diabetes_sklearn.data)
 print("target")
 print(diabetes_sklearn.target)
 
-
-from sklearn import datasets
-from matplotlib import pyplot as plt
 
 # Load the dataset
 diabetes = datasets.load_diabetes(as_frame=True)
@@ -465,12 +461,7 @@ print("------------------------------------------------------------")  # 60個
 #MLflow 測試
 #載入相關套件
 
-from sklearn import datasets
-import os
 import warnings
-import sys
-import pandas as pd
-import numpy as np
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import ElasticNet
@@ -524,17 +515,793 @@ mlflow.sklearn.log_model(model, "model")
 print("------------------------------------------------------------")  # 60個
 
 
+# 加載數據
+data = pd.read_csv("datasets/pima-indians-diabetes/diabetes.csv")
+print("dataset shape {}".format(data.shape))
+
+print(data.head())
+
+print(data.groupby("Outcome").size())
+
+X = data.iloc[:, 0:8]
+Y = data.iloc[:, 8]
+print("shape of X {}; shape of Y {}".format(X.shape, Y.shape))
+
+
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2)
+# 訓練組8成, 測試組2成
+
+from sklearn.neighbors import RadiusNeighborsClassifier
+
+models = []
+models.append(("KNN", KNeighborsClassifier(n_neighbors=2)))
+models.append(
+    ("KNN with weights", KNeighborsClassifier(n_neighbors=2, weights="distance"))
+)
+models.append(
+    (
+        "Radius Neighbors",
+        RadiusNeighborsClassifier(
+            #    n_neighbors=2, radius=500.0)))
+            radius=500.0
+        ),
+    )
+)
+
+results = []
+for name, model in models:
+    model.fit(X_train, Y_train)
+    results.append((name, model.score(X_test, Y_test)))
+for i in range(len(results)):
+    print("name: {}; score: {}".format(results[i][0], results[i][1]))
+
+from sklearn.model_selection import KFold
+from sklearn.model_selection import cross_val_score
+
+results = []
+for name, model in models:
+    kfold = KFold(n_splits=10)
+    cv_result = cross_val_score(model, X, Y, cv=kfold)
+    results.append((name, cv_result))
+for i in range(len(results)):
+    print("name: {}; cross val score: {}".format(results[i][0], results[i][1].mean()))
+
+print("------------------------------")  # 30個
+
+# 模型訓練
+
+knn = KNeighborsClassifier(n_neighbors=2)  # K近鄰演算法（K Nearest Neighbor）
+
+knn.fit(X_train, Y_train)
+
+train_score = knn.score(X_train, Y_train)
+test_score = knn.score(X_test, Y_test)
+print("train score: {}".format(train_score))
+print("test score: {}".format(test_score))
+
+from sklearn.model_selection import ShuffleSplit
+from common.utils import plot_learning_curve
+
+knn = KNeighborsClassifier(n_neighbors=2)  # K近鄰演算法（K Nearest Neighbor）
+
+cv = ShuffleSplit(n_splits=10, test_size=0.2, random_state=9487)
+
+plt.figure(figsize=(10, 6))
+plot_learning_curve(
+    plt, knn, "Learn Curve for KNN Diabetes", X, Y, ylim=(0.0, 1.01), cv=cv
+)
+show()
+
+print("------------------------------")  # 30個
+
+# 數據可視化
+
+from sklearn.feature_selection import SelectKBest
+
+selector = SelectKBest(k=2)
+X_new = selector.fit_transform(X, Y)
+print(X_new[0:5])
+
+results = []
+for name, model in models:
+    kfold = KFold(n_splits=10)
+    cv_result = cross_val_score(model, X_new, Y, cv=kfold)
+    results.append((name, cv_result))
+for i in range(len(results)):
+    print("name: {}; cross val score: {}".format(results[i][0], results[i][1].mean()))
+
+plt.figure(figsize=(10, 6))
+plt.ylabel("BMI")
+plt.xlabel("Glucose")
+plt.scatter(X_new[Y == 0][:, 0], X_new[Y == 0][:, 1], c="r", s=20, marker="o")  # 畫出樣本
+plt.scatter(X_new[Y == 1][:, 0], X_new[Y == 1][:, 1], c="g", s=20, marker="^")  # 畫出樣本
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 1. Rescale Data
+# 將資料比例縮放到0與1之間# Rescale data (between 0 and 1)
+
+import scipy
+from sklearn.preprocessing import MinMaxScaler
+
+url = "https://raw.githubusercontent.com/jbrownlee/Datasets/master/pima-indians-diabetes.data.csv"
+names = ["preg", "plas", "pres", "skin", "test", "mass", "pedi", "age", "class"]
+dataframe = pd.read_csv(url, names=names)
+array = dataframe.values
+# separate array into input and output components
+X = array[:, 0:8]
+Y = array[:, 8]
+scaler = MinMaxScaler(feature_range=(0, 1))
+rescaledX = scaler.fit_transform(X)
+# summarize transformed data
+np.set_printoptions(precision=3)
+print(rescaledX[0:5, :])
+
+print("------------------------------------------------------------")  # 60個
+
+# 2. Standardize Data
+# 將資料常態分布化，平均值會變為0, 標準差變為1，使離群值影響降低
+# MinMaxScaler與StandardScaler類似
+
+url = "https://raw.githubusercontent.com/jbrownlee/Datasets/master/pima-indians-diabetes.data.csv"
+names = ["preg", "plas", "pres", "skin", "test", "mass", "pedi", "age", "class"]
+dataframe = pd.read_csv(url, names=names)
+array = dataframe.values
+# separate array into input and output components
+X = array[:, 0:8]
+Y = array[:, 8]
+scaler = StandardScaler().fit(X)  # 學習訓練.fit
+rescaledX = scaler.transform(X)
+# summarize transformed data
+np.set_printoptions(precision=3)
+print(rescaledX[0:5, :])
+
+print("------------------------------------------------------------")  # 60個
+
+# 3. Normalize Data
+# 最大值變為1，最小值變為0
+
+from sklearn.preprocessing import Normalizer
+
+url = "https://raw.githubusercontent.com/jbrownlee/Datasets/master/pima-indians-diabetes.data.csv"
+names = ["preg", "plas", "pres", "skin", "test", "mass", "pedi", "age", "class"]
+dataframe = pd.read_csv(url, names=names)
+array = dataframe.values
+# separate array into input and output components
+X = array[:, 0:8]
+Y = array[:, 8]
+scaler = Normalizer().fit(X)  # 學習訓練.fit
+normalizedX = scaler.transform(X)
+# summarize transformed data
+np.set_printoptions(precision=3)
+print(normalizedX[0:5, :])
+
+print("------------------------------------------------------------")  # 60個
+
+# 4. Binarize Data (Make Binary)
+# 資料二元化(0或者1)
+
+from sklearn.preprocessing import Binarizer
+
+url = "https://raw.githubusercontent.com/jbrownlee/Datasets/master/pima-indians-diabetes.data.csv"
+names = ["preg", "plas", "pres", "skin", "test", "mass", "pedi", "age", "class"]
+dataframe = pd.read_csv(url, names=names)
+array = dataframe.values
+# separate array into input and output components
+X = array[:, 0:8]
+Y = array[:, 8]
+binarizer = Binarizer(threshold=0.0).fit(X)  # 學習訓練.fit
+binaryX = binarizer.transform(X)
+# summarize transformed data
+np.set_printoptions(precision=3)
+print(binaryX[0:5, :])
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 08_02_k_fold_cross_validation
+# Scikit-learn K折交叉驗證法
+
+from sklearn.preprocessing import StandardScaler
+
+# 載入資料集
+X, y = datasets.load_diabetes(return_X_y=True)
+
+# 資料分割
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+# 特徵縮放
+scaler = StandardScaler()
+X_train_std = scaler.fit_transform(X_train)
+X_test_std = scaler.transform(X_test)
+
+# 模型訓練
+clf = sklearn.linear_model.LinearRegression()  # 函數學習機
+
+clf.fit(X_train_std, y_train)  # 學習訓練.fit
+
+# 模型評分
+print(f"R2={clf.score(X_test_std, y_test)}")
+# R2=0.41738354865811345
+
+# K折測試
+from sklearn.model_selection import KFold
+
+kf = KFold(n_splits=5)
+for i, (train_index, test_index) in enumerate(kf.split(X_train_std)):
+    print(f"Fold {i}:")
+    print(f"  Train: index={train_index}")
+    print(f"  Test:  index={test_index}")
+
+# K折驗證
+score = []
+for i, (train_index, test_index) in enumerate(kf.split(X_train_std)):
+    X_new = X_train_std[train_index]
+    y_new = y_train[train_index]
+    clf.fit(X_new, y_new)  # 學習訓練.fit
+    score_fold = clf.score(X_train_std[test_index], y_train[test_index])
+    score.append(score_fold)
+    print(f"Fold {i} 分數: {np.mean(score)}")
+print(f"平均值: {np.mean(score)}")
+print(f"標準差: {np.std(score)}")
+
+# 效能調校
+
+from sklearn.model_selection import GridSearchCV
+
+lasso = Lasso(random_state=9487, max_iter=10000)
+
+# 正則化強度：3種選擇
+alphas = np.logspace(-4, -0.5, 30)
+# 強迫係數(權重)須為正數
+positive = (True, False)
+tuned_parameters = [{"alpha": alphas, "positive": positive}]
+
+# 效能調校
+clf = GridSearchCV(lasso, tuned_parameters, cv=5, refit=False)
+
+clf.fit(X, y)  # 學習訓練.fit
+
+# cv_results_ : 具體用法模型不同參數下交叉驗證的結果
+scores_mean = clf.cv_results_["mean_test_score"]
+scores_std = clf.cv_results_["std_test_score"]
+print("平均分數:\n", scores_mean, "\n標準差:\n", scores_std)
+
+# 取得最高分數
+cc = np.max(clf.cv_results_["mean_test_score"])
+print(cc)
+
+# 參數組合
+cc = clf.param_grid
+print(cc)
+
+# 取得最佳參數組合
+cc = clf.best_params_
+print(cc)
+
+# 驗證
+from math import floor
+
+index = np.argmax(clf.cv_results_["mean_test_score"])
+cc = index, clf.cv_results_["mean_test_score"][index], alphas[floor((index - 1) / 2)]
+print(cc)
+
+cc = clf.best_score_
+print(cc)
+
+# 以最佳參數組合重新訓練
+
+clf = Lasso(
+    random_state=9487, max_iter=10000, alpha=0.07880462815669913, positive=False
+)
+
+clf.fit(X_train_std, y_train)  # 學習訓練.fit
+
+cc = clf.score(X_test_std, y_test)
+print(cc)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 08_03_pipeline_cross_validation
+
+# Scikit-learn 管線測試
+
+from sklearn.preprocessing import StandardScaler
+from sklearn.pipeline import make_pipeline
+from sklearn.decomposition import PCA
+
+# 載入資料集
+X, y = datasets.load_diabetes(return_X_y=True)
+
+# 資料分割
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+# 建立管線：特徵縮放、特徵萃取、模型訓練
+
+pipe_lr = make_pipeline(
+    StandardScaler(), PCA(n_components=5), Lasso(random_state=9487, max_iter=10000)
+)
+
+pipe_lr.fit(X_train, y_train)  # 學習訓練.fit
+
+"""
+Pipeline(steps=[('standardscaler', StandardScaler()),
+                ('pca', PCA(n_components=5)),
+                ('lasso', Lasso(max_iter=10000, random_state=9487))])
+"""
+
+# 模型評估
+
+# y_pred = pipe_lr.predict(X_test)
+print(f"R2={pipe_lr.score(X_test, y_test)}")
+
+# 管線結合K折交叉驗證
+
+from sklearn.model_selection import cross_val_score
+
+scores = cross_val_score(estimator=pipe_lr, X=X_test, y=y_test, cv=10, n_jobs=-1)
+print(f"K折分數: %s" % scores)
+print(f"平均值: {np.mean(scores):.3f}, 標準差: {np.std(scores):.3f}")
+
+# 管線結合K折交叉驗證、效能調校
+
+from sklearn.model_selection import GridSearchCV
+
+# 正則化強度：3種選擇
+alphas = np.logspace(-4, -0.5, 30)
+# 強迫係數(權重)須為正數
+positive = (True, False)
+tuned_parameters = [{"lasso__alpha": alphas, "lasso__positive": positive}]
+
+# 效能調校
+clf = GridSearchCV(pipe_lr, tuned_parameters, cv=5, refit=False)
+
+clf.fit(X, y)  # 學習訓練.fit
+
+# cv_results_ : 具體用法模型不同參數下交叉驗證的結果
+scores_mean = clf.cv_results_["mean_test_score"]
+scores_std = clf.cv_results_["std_test_score"]
+print("平均分數:\n", scores_mean, "\n標準差:\n", scores_std)
+
+# 取得最佳參數組合
+cc = clf.best_params_
+print(cc)
+
+# 驗證
+from math import floor
+
+index = np.argmax(clf.cv_results_["mean_test_score"])
+cc = index, clf.cv_results_["mean_test_score"][index], clf.best_score_
+print(cc)
+
+# 以最佳參數組合重新訓練
+
+pipe_lr = make_pipeline(
+    StandardScaler(),
+    PCA(n_components=5),
+    Lasso(
+        random_state=9487,
+        max_iter=10000,
+        alpha=clf.best_params_["lasso__alpha"],
+        positive=clf.best_params_["lasso__positive"],
+    ),
+)
+
+pipe_lr.fit(X_train, y_train)  # 學習訓練.fit
+
+cc = pipe_lr.score(X_test, y_test)
+print(cc)
+
+from sklearn.pipeline import Pipeline
+
+pipe_lr = Pipeline(
+    [
+        ("scaler", StandardScaler()),
+        ("pca", PCA(n_components=5)),
+        (
+            "lasso",
+            Lasso(
+                random_state=9487,
+                max_iter=10000,
+                alpha=clf.best_params_["lasso__alpha"],
+                positive=clf.best_params_["lasso__positive"],
+            ),
+        ),
+    ]
+)
+
+pipe_lr.fit(X_train, y_train)  # 學習訓練.fit
+
+cc = pipe_lr.score(X_test, y_test)
+print(cc)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+# 10_06_gradient_boost
+
+# 自行開發『梯度提升決策樹』(Gradient Boosting Decision Tree)
+
+# 載入資料集
+X, y = datasets.load_diabetes(return_X_y=True)
+
+# 資料分割
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+# 建立Gradient Boost模型
+from sklearn.tree import DecisionTreeRegressor
+
+
+class GradientBooster:
+    # 初始化
+    def __init__(
+        self,
+        max_depth=8,
+        min_samples_split=5,
+        min_samples_leaf=5,
+        max_features=3,
+        lr=0.1,
+        num_iter=1000,
+    ):
+        self.max_depth = max_depth
+        self.min_samples_split = min_samples_split
+        self.min_samples_leaf = min_samples_leaf
+        self.max_features = max_features
+        self.lr = lr
+        self.num_iter = num_iter
+        self.y_mean = 0
+
+    # 計算 MSE
+    def __calculate_loss(self, y, y_pred):
+        loss = (1 / len(y)) * 0.5 * np.sum(np.square(y - y_pred))
+        return loss
+
+    # 計算梯度
+    def __take_gradient(self, y, y_pred):
+        grad = -(y - y_pred)
+        return grad
+
+    # 單一模型訓練
+    def __create_base_model(self, X, y):
+        base = DecisionTreeRegressor(
+            criterion="squared_error",
+            max_depth=self.max_depth,
+            min_samples_split=self.min_samples_split,
+            min_samples_leaf=self.min_samples_leaf,
+            max_features=self.max_features,
+        )
+        base.fit(X, y)  # 學習訓練.fit
+        return base
+
+    # 預測
+    def predict(self, models, X):
+        pred_0 = np.array([self.y_mean] * X.shape[0])
+        pred = pred_0  # .reshape(len(pred_0),1)
+
+        # 加法模型預測
+        for i in range(len(models)):
+            temp = models[i].predict(X)
+            pred -= self.lr * temp
+
+        return pred
+
+    # 模型訓練
+    def train(self, X, y):
+        models = []
+        losses = []
+        self.y_mean = np.mean(y)
+        pred = np.array([np.mean(y)] * len(y))
+
+        # 加法模型訓練
+        for epoch in range(self.num_iter):
+            loss = self.__calculate_loss(y, pred)
+            losses.append(loss)
+            grads = self.__take_gradient(y, pred)
+            base = self.__create_base_model(X, grads)
+            r = base.predict(X)
+            pred -= self.lr * r
+            models.append(base)
+
+        return models, losses, pred
+
+
+# 模型訓練
+
+G = GradientBooster()
+models, losses, pred = G.train(X_train, y_train)
+
+# 繪製損失函數
+
+sns.set_style("darkgrid")
+ax = sns.lineplot(x=range(1000), y=losses)
+ax.set(xlabel="Epoch", ylabel="Loss", title="Loss vs Epoch")
+show()
+
+# 模型評估
+
+from sklearn.metrics import mean_squared_error
+
+y_pred = G.predict(models, X_test)
+print("RMSE:", np.sqrt(mean_squared_error(y_test, y_pred)))
+
+# RMSE: 62.47630199377564
+
+# 個別模型評估
+
+model = DecisionTreeRegressor(
+    max_depth=8, min_samples_split=5, min_samples_leaf=5, max_features=3
+)
+
+model.fit(X_train, y_train)  # 學習訓練.fit
+
+y_pred = model.predict(X_test)
+print("RMSE:", np.sqrt(mean_squared_error(y_test, y_pred)))
+
+# RMSE: 75.54768636162939
+
+# Scikit-learn GradientBoostingRegressor 模型評估
+
+from sklearn.ensemble import GradientBoostingRegressor
+
+model = GradientBoostingRegressor(
+    n_estimators=1000,
+    criterion="squared_error",
+    max_depth=8,
+    min_samples_split=5,
+    min_samples_leaf=5,
+    max_features=3,
+)
+
+model.fit(X_train, y_train)  # 學習訓練.fit
+
+y_pred = model.predict(X_test)
+print("RMSE:", np.sqrt(mean_squared_error(y_test, y_pred)))
+
+# RMSE: 60.69114783838949
+
+# Scikit-learn GradientBoostingClassifier 模型評估
+
+from sklearn.ensemble import GradientBoostingClassifier
+
+X, y = make_hastie_10_2(random_state=9487)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+clf = GradientBoostingClassifier(
+    n_estimators=100, learning_rate=1.0, max_depth=1, random_state=9487
+).fit(
+    X_train, y_train
+)  # 學習訓練.fit
+
+cc = clf.score(X_test, y_test)
+print(cc)
+
+# 0.9229166666666667
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 10_07_xgboost
+
+# XGBoost測試
+
+#!pip install xgboost -U
+
+"""
+Requirement already satisfied: xgboost in c:\anaconda3\lib\site-packages (1.6.1)
+Collecting xgboost
+  Downloading xgboost-1.7.3-py3-none-win_amd64.whl (89.1 MB)
+     ---------------------------------------- 89.1/89.1 MB 8.7 MB/s eta 0:00:00
+Requirement already satisfied: numpy in c:\anaconda3\lib\site-packages (from xgboost) (1.23.5)
+Requirement already satisfied: scipy in c:\anaconda3\lib\site-packages (from xgboost) (1.9.3)
+Installing collected packages: xgboost
+  Attempting uninstall: xgboost
+    Found existing installation: xgboost 1.6.1
+    Uninstalling xgboost-1.6.1:
+      Successfully uninstalled xgboost-1.6.1
+Successfully installed xgboost-1.7.3
+
+"""
+
+# 載入資料集
+X, y = datasets.load_diabetes(return_X_y=True)
+
+# 資料分割
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+# 模型訓練
+from xgboost import XGBRegressor
+
+model = XGBRegressor()
+
+model.fit(X_train, y_train)  # 學習訓練.fit
+
+"""
+XGBRegressor(base_score=None, booster=None, callbacks=None,
+             colsample_bylevel=None, colsample_bynode=None,
+             colsample_bytree=None, early_stopping_rounds=None,
+             enable_categorical=False, eval_metric=None, feature_types=None,
+             gamma=None, gpu_id=None, grow_policy=None, importance_type=None,
+             interaction_constraints=None, learning_rate=None, max_bin=None,
+             max_cat_threshold=None, max_cat_to_onehot=None,
+             max_delta_step=None, max_depth=None, max_leaves=None,
+             min_child_weight=None, missing=nan, monotone_constraints=None,
+             n_estimators=100, n_jobs=None, num_parallel_tree=None,
+             predictor=None, random_state=None, ...)
+"""
+
+# 模型評估
+
+from sklearn.model_selection import cross_val_score
+
+scores = cross_val_score(model, X_test, y_test, cv=10, scoring="neg_mean_squared_error")
+print(scores)
+
+# 平均分數與標準差
+
+print(f"平均分數: {np.mean(scores)}, 標準差: {np.std(scores)}")
+
+# 平均分數: -5473.1857409034155, 標準差: 3004.388074594913
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 使用迴歸模型
+
+from sklearn.linear_model import RidgeCV
+from sklearn.svm import LinearSVR
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.ensemble import StackingRegressor
+from sklearn.preprocessing import StandardScaler
+
+X, y = datasets.load_diabetes(return_X_y=True)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+scaler = StandardScaler()
+X_train_std = scaler.fit_transform(X_train)
+X_test_std = scaler.transform(X_test)
+
+estimators = [("lr", RidgeCV()), ("svr", LinearSVR(random_state=9487))]
+
+model = StackingRegressor(
+    estimators=estimators,
+    final_estimator=RandomForestRegressor(n_estimators=10, random_state=9487),
+)
+
+model.fit(X_train_std, y_train)  # 學習訓練.fit
+
+scores = cross_val_score(model, X_test_std, y_test, cv=10)
+print(f"平均分數: {np.mean(scores)}, 標準差: {np.std(scores)}")
+# 平均分數: 0.12143159519945441, 標準差: 0.4732757387323812
+
+svc = LinearSVR()
+
+svc.fit(X_train_std, y_train)  # 學習訓練.fit
+
+scores = cross_val_score(svc, X_test_std, y_test, cv=10)
+print(f"平均分數: {np.mean(scores)}, 標準差: {np.std(scores)}")
+# 平均分數: -1.0399780386178537, 標準差: 0.36412901584183494
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+# 11_07_mlflow_test
+
+# MLflow 測試
+
+import warnings
+from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
+from sklearn.linear_model import ElasticNet
+import mlflow
+import mlflow.sklearn
+
+# 載入資料集
+
+X, y = datasets.load_diabetes(return_X_y=True)
+
+# 資料分割
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+# 模型訓練與評估
+
+# 定義模型參數
+alpha = 1
+l1_ratio = 1
+
+with mlflow.start_run():
+    # 模型訓練
+    model = ElasticNet(alpha=alpha, l1_ratio=l1_ratio)
+
+    model.fit(X_train, y_train)  # 學習訓練.fit
+
+    # 模型評估
+    pred = model.predict(X_test)
+    rmse = mean_squared_error(pred, y_test)
+    abs_error = mean_absolute_error(pred, y_test)
+    r2 = r2_score(pred, y_test)
+
+    # MLflow 記錄
+    mlflow.log_param("alpha", alpha)
+    mlflow.log_param("l1_ratio", l1_ratio)
+    mlflow.log_metric("rmse", rmse)
+    mlflow.log_metric("abs_error", abs_error)
+    mlflow.log_metric("r2", r2)
+
+    # MLflow 記錄模型
+    mlflow.sklearn.log_model(model, "model")
+
+# 2023/01/28 10:05:26 WARNING mlflow.utils.environment: Encountered an unexpected error while inferring pip requirements (model URI: C:\WINDOWS\TEMP\tmpxl4956z4\model\model.pkl, flavor: sklearn), fall back to return ['scikit-learn==1.2.0', 'cloudpickle==1.6.0']. Set logging level to DEBUG to see the full traceback.
+
+# 模型評估
+""" NG
+cc = mlflow.sklearn.log_model(lr, "model")
+print(cc)
+
+#平均分數: 0.9303030303030303, 標準差: 0.08393720596645175
+"""
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 使用迴歸模型
+
+from sklearn.linear_model import RidgeCV
+from sklearn.svm import LinearSVR
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.ensemble import StackingRegressor
+from sklearn.preprocessing import StandardScaler
+
+X, y = datasets.load_diabetes(return_X_y=True)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+scaler = StandardScaler()
+X_train_std = scaler.fit_transform(X_train)
+X_test_std = scaler.transform(X_test)
+
+estimators = [("lr", RidgeCV()), ("svr", LinearSVR(random_state=9487))]
+
+model = StackingRegressor(
+    estimators=estimators,
+    final_estimator=RandomForestRegressor(n_estimators=10, random_state=9487),
+)
+model.fit(X_train_std, y_train)  # 學習訓練.fit
+
+from sklearn.model_selection import cross_val_score
+
+scores = cross_val_score(model, X_test_std, y_test, cv=10)
+print(f"平均分數: {np.mean(scores)}, 標準差: {np.std(scores)}")
+
+# 平均分數: 0.12143159519945441, 標準差: 0.4732757387323812
+
+svc = LinearSVR()
+
+svc.fit(X_train_std, y_train)  # 學習訓練.fit
+from sklearn.model_selection import cross_val_score
+
+scores = cross_val_score(svc, X_test_std, y_test, cv=10)
+print(f"平均分數: {np.mean(scores)}, 標準差: {np.std(scores)}")
+
+# 平均分數: -1.0399780386178537, 標準差: 0.36412901584183494
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個

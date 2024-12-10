@@ -1,6 +1,8 @@
 """
 機器學習 K-Means 自動分類
 
+聚類算法 KMeans
+
 K-平均演算法（英文：k-means clustering）
 
 # 無監督學習
@@ -328,7 +330,7 @@ do_k_means()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("最簡易 K-平均演算法(KMeans) 任意資料分四群並畫圖")
+print("K-平均演算法(KMeans) 任意資料分3群並畫圖")
 
 N = 50
 print("任意隨機資料")
@@ -350,7 +352,6 @@ ss = 0
 for i in range(len(X)):
     d = (X[i, 0] - C[y[i], 0]) ** 2 + (X[i, 1] - C[y[i], 1]) ** 2
     ss += d
-
 print("計算分群準確性 :", ss)
 
 # 預測500點
@@ -366,11 +367,10 @@ plt.title("原始資料50點")
 
 plt.subplot(132)
 plt.scatter(X[:, 0], X[:, 1], c=clf.labels_)
-plt.title("50點 KMeans分成3群")
+plt.title("用KMeans分成3群")
 
 plt.subplot(133)
 plt.scatter(X_test[:, 0], X_test[:, 1], c=y_pred)
-
 # 畫分區域ST
 x0 = y0 = np.arange(0, 1.02, 0.02)
 xm, ym = np.meshgrid(x0, y0)
@@ -379,7 +379,6 @@ z = clf.predict(P)  # 預測.predict
 Z = z.reshape(xm.shape)
 plt.contourf(xm, ym, Z, alpha=0.3, cmap="Paired")
 # 畫分區域SP
-
 plt.title("再預測500點")
 
 show()
@@ -387,7 +386,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("聚類算法 KMeans")
+print("K-平均演算法(KMeans) 任意資料分4群並畫圖")
 
 from sklearn.datasets import make_blobs
 
@@ -446,7 +445,6 @@ plt.figure(figsize=(12, 6))
 
 plt.subplot(131)
 plt.scatter(X[:, 0], X[:, 1], c="b")
-
 # 標記 make_blobs 中心
 plt.scatter(
     centers[:, 0],
@@ -456,7 +454,6 @@ plt.scatter(
     c="r",
     alpha=0.8,
 )
-
 plt.axis([-15, 15, -15, 15])
 plt.title("原始資料 4 群")
 
@@ -476,7 +473,6 @@ plt.axis([-15, 15, -15, 15])
 plt.title("KMeans分群結果")
 
 plt.subplot(133)
-
 # 畫分區域ST
 x0 = y0 = np.arange(-15, 15, 0.1)
 xm, ym = np.meshgrid(x0, y0)
@@ -485,7 +481,6 @@ z = clf.predict(P)  # 預測.predict
 Z = z.reshape(xm.shape)
 plt.contourf(xm, ym, Z, alpha=0.3)  # 畫分區域
 # 畫分區域SP
-
 # 繪圓點, 圓點用黑色外框, 使用標籤 labels_ 區別顏色,
 plt.scatter(X[:, 0], X[:, 1], marker="o", c=clf.labels_)
 # 標記群集中心

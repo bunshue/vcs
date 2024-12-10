@@ -34,7 +34,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 """
-
 #乳癌診斷預測
 ds = datasets.load_breast_cancer()
 """
@@ -1324,8 +1323,598 @@ y_pred = clf.predict(X_test)
 
 # 計算準確率
 print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
-
 # 94.74%
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+# 08_08_roc_breast_cancer
+
+# 實作乳癌診斷，並繪製ROC曲線
+
+data = datasets.load_breast_cancer()
+
+# 資料分割
+X_train, X_test, y_train, y_test = train_test_split(
+    data.data[:, :6], data.target, test_size=0.20
+)
+
+# 模型訓練
+
+from sklearn.preprocessing import StandardScaler
+from sklearn.svm import SVC
+from sklearn.pipeline import make_pipeline
+
+pipe = make_pipeline(StandardScaler(), SVC(probability=True))
+
+pipe.fit(X_train, y_train)  # 學習訓練.fit
+
+"""
+Pipeline(steps=[('standardscaler', StandardScaler()),
+                ('svc', SVC(probability=True))])
+"""
+
+# 模型預測
+
+y_pred_proba = pipe.predict_proba(X_test)
+cc = np.around(y_pred_proba, 2)
+print(cc)
+
+# 預測值(第2欄)與實際值合併
+
+df = pd.DataFrame({"predict": np.around(y_pred_proba[:, 1], 2), "actual": y_test})
+print(df)
+
+# 依預測值降冪排序
+
+df2 = df.sort_values(by="predict", ascending=False)
+print(df2)
+
+# 繪製ROC曲線
+
+from sklearn.metrics import roc_curve, roc_auc_score, auc
+
+fpr, tpr, threshold = roc_curve(df["actual"], df["predict"])
+auc1 = auc(fpr, tpr)
+plt.title("ROC 曲線")
+plt.plot(fpr, tpr, color="orange", label="AUC = %0.2f" % auc1)
+plt.legend(loc="lower right")
+plt.plot([0, 1], [0, 1], "r--")
+plt.xlim([0, 1])
+plt.ylim([0, 1])
+plt.ylabel("真陽率")
+plt.xlabel("偽陽率")
+show()
+
+cc = roc_auc_score(df2.actual, df2.predict)
+print(cc)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+# 10_02_majority_voting
+# 多數決演算法(VotingClassifier)測試
+
+# 載入資料集
+X, y = datasets.load_breast_cancer(return_X_y=True)
+
+# 資料分割
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+# 特徵縮放
+
+from sklearn.preprocessing import StandardScaler
+
+scaler = StandardScaler()
+X_train_std = scaler.fit_transform(X_train)
+X_test_std = scaler.transform(X_test)
+
+# 模型訓練
+
+from sklearn.svm import SVC
+from sklearn.ensemble import RandomForestClassifier, VotingClassifier
+from sklearn.naive_bayes import GaussianNB
+
+estimators = [("svc", SVC()), ("rf", RandomForestClassifier()), ("nb", GaussianNB())]
+clf = VotingClassifier(estimators)
+clf.fit(X_train_std, y_train)  # 學習訓練.fit
+
+"""
+VotingClassifier(estimators=[('svc', SVC()), ('rf', RandomForestClassifier()),
+                             ('nb', GaussianNB())])
+"""
+
+# 模型評估
+
+# 計算準確率
+print(f"{clf.score(X_test_std, y_test)*100:.2f}%")
+# 97.37%
+
+# 個別模型評估
+
+svc = SVC()
+
+svc.fit(X_train_std, y_train)  # 學習訓練.fit
+print(f"{svc.score(X_test_std, y_test)*100:.2f}%")
+
+# 98.25%
+
+rf = RandomForestClassifier()
+
+rf.fit(X_train_std, y_train)  # 學習訓練.fit
+print(f"{rf.score(X_test_std, y_test)*100:.2f}%")
+# 98.25%
+
+nb = GaussianNB()
+
+nb.fit(X_train_std, y_train)  # 學習訓練.fit
+print(f"{nb.score(X_test_std, y_test)*100:.2f}%")
+# 93.86%
+
+# 模型預測
+cc = clf.predict(X_test_std)
+print(cc)
+
+# 交叉驗證
+
+from sklearn.model_selection import cross_val_score
+
+scores = cross_val_score(estimator=clf, X=X_test_std, y=y_test, cv=10, n_jobs=-1)
+print(f"K折分數: %s" % scores)
+print(f"平均值: {np.mean(scores):.2f}, 標準差: {np.std(scores):.2f}")
+"""
+K折分數: [0.91666667 1.         0.91666667 0.91666667 0.90909091 1.
+ 0.90909091 0.90909091 1.         1.        ]
+平均值: 0.95, 標準差: 0.04
+"""
+
+scores = cross_val_score(estimator=svc, X=X_test_std, y=y_test, cv=10, n_jobs=-1)
+print(f"K折分數: %s" % scores)
+print(f"平均值: {np.mean(scores):.2f}, 標準差: {np.std(scores):.2f}")
+"""
+K折分數: [0.91666667 1.         0.91666667 1.         0.90909091 1.
+ 0.90909091 0.90909091 1.         1.        ]
+平均值: 0.96, 標準差: 0.04
+"""
+
+scores = cross_val_score(estimator=rf, X=X_test_std, y=y_test, cv=10, n_jobs=-1)
+print(f"K折分數: %s" % scores)
+print(f"平均值: {np.mean(scores):.2f}, 標準差: {np.std(scores):.2f}")
+"""
+K折分數: [0.83333333 0.91666667 0.91666667 0.91666667 1.         1.
+ 1.         1.         1.         1.        ]
+平均值: 0.96, 標準差: 0.06
+"""
+
+scores = cross_val_score(estimator=nb, X=X_test_std, y=y_test, cv=10, n_jobs=-1)
+print(f"K折分數: %s" % scores)
+print(f"平均值: {np.mean(scores):.2f}, 標準差: {np.std(scores):.2f}")
+"""
+K折分數: [1.         1.         0.91666667 0.91666667 0.90909091 1.
+ 0.81818182 0.90909091 1.         1.        ]
+平均值: 0.95, 標準差: 0.06
+"""
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 10_03_bagging_classifier
+
+# Bagging演算法測試
+
+# 載入資料集
+X, y = datasets.load_breast_cancer(return_X_y=True)
+
+# 資料分割
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+# 特徵縮放
+from sklearn.preprocessing import StandardScaler
+
+scaler = StandardScaler()
+X_train_std = scaler.fit_transform(X_train)
+X_test_std = scaler.transform(X_test)
+
+# 模型訓練
+
+from sklearn.ensemble import BaggingClassifier
+from sklearn.naive_bayes import GaussianNB
+
+base_estimator = GaussianNB()
+
+clf = BaggingClassifier(estimator=base_estimator, n_estimators=50)
+
+clf.fit(X_train_std, y_train)  # 學習訓練.fit
+
+"""
+BaggingClassifier(estimator=GaussianNB(), n_estimators=50)
+"""
+
+# 模型評估
+
+# 計算準確率
+print(f"{clf.score(X_test_std, y_test)*100:.2f}%")
+# 90.35%
+
+# 個別模型評估
+nb = GaussianNB()
+
+nb.fit(X_train_std, y_train)  # 學習訓練.fit
+print(f"{nb.score(X_test_std, y_test)*100:.2f}%")
+# 90.35%
+
+# 模型預測
+
+cc = clf.predict(X_test_std)
+print(cc)
+
+# 交叉驗證
+
+from sklearn.model_selection import cross_val_score
+
+clf2 = BaggingClassifier(estimator=base_estimator, n_estimators=50)
+scores = cross_val_score(estimator=clf2, X=X_test_std, y=y_test, cv=10, n_jobs=-1)
+
+print(f"K折分數: %s" % scores)
+print(f"平均值: {np.mean(scores):.2f}, 標準差: {np.std(scores):.2f}")
+"""
+K折分數: [0.83333333 0.75       0.91666667 0.83333333 0.90909091 0.90909091
+ 1.         1.         0.90909091 1.        ]
+平均值: 0.91, 標準差: 0.08
+"""
+scores = cross_val_score(
+    estimator=GaussianNB(), X=X_test_std, y=y_test, cv=10, n_jobs=-1
+)
+print(f"K折分數: %s" % scores)
+print(f"平均值: {np.mean(scores):.2f}, 標準差: {np.std(scores):.2f}")
+"""
+K折分數: [0.83333333 0.66666667 0.91666667 0.83333333 0.81818182 0.90909091
+ 1.         1.         0.90909091 1.        ]
+平均值: 0.89, 標準差: 0.10
+"""
+# 生成隨機分類資料
+X, y = make_classification(
+    n_samples=1000,
+    n_features=20,
+    n_informative=15,
+    n_redundant=5,
+    flip_y=0.3,
+    random_state=9487,
+    shuffle=False,
+)
+
+# BaggingClassifier 交叉驗證
+base_estimator = GaussianNB()
+clf3 = BaggingClassifier(estimator=base_estimator)
+scores = cross_val_score(estimator=clf3, X=X, y=y, cv=10, n_jobs=-1)
+print(f"K折分數: %s" % scores)
+print(f"平均值: {np.mean(scores):.2f}, 標準差: {np.std(scores):.2f}")
+"""
+K折分數: [0.63 0.89 0.91 0.92 0.53 0.57 0.82 0.73 0.79 0.56]
+平均值: 0.73, 標準差: 0.14
+"""
+scores = cross_val_score(estimator=base_estimator, X=X, y=y, cv=10, n_jobs=-1)
+print(f"K折分數: %s" % scores)
+print(f"平均值: {np.mean(scores):.2f}, 標準差: {np.std(scores):.2f}")
+"""
+K折分數: [0.63 0.89 0.9  0.93 0.54 0.58 0.82 0.72 0.79 0.56]
+平均值: 0.74, 標準差: 0.14
+"""
+
+# 參數調校
+
+# explore bagging ensemble k for knn effect on performance
+from numpy import mean
+from numpy import std
+from sklearn.model_selection import RepeatedStratifiedKFold
+from sklearn.neighbors import KNeighborsClassifier
+
+
+# get the dataset
+def get_dataset():
+    X, y = make_classification(
+        n_samples=1000,
+        n_features=20,
+        n_informative=15,
+        n_redundant=5,
+        random_state=9487,
+    )
+    return X, y
+
+
+# get a list of models to evaluate
+def get_models():
+    models = dict()
+    # evaluate k values from 1 to 20
+    for i in range(1, 21):
+        # define the base model
+        base = KNeighborsClassifier(n_neighbors=i)
+        # define the ensemble model
+        models[str(i)] = BaggingClassifier(base)
+    return models
+
+
+# evaluate a given model using cross-validation
+def evaluate_model(model, X, y):
+    # define the evaluation procedure
+    cv = RepeatedStratifiedKFold(n_splits=10, n_repeats=3, random_state=9487)
+    # evaluate the model and collect the results
+    scores = cross_val_score(model, X, y, scoring="accuracy", cv=cv, n_jobs=-1)
+    return scores
+
+
+# define dataset
+X, y = get_dataset()
+# get the models to evaluate
+models = get_models()
+# evaluate the models and store results
+results, names = list(), list()
+for name, model in models.items():
+    # evaluate the model
+    scores = evaluate_model(model, X, y)
+    # store the results
+    results.append(scores)
+    names.append(name)
+    # summarize the performance along the way
+    print(">%s %.3f (%.3f)" % (name, mean(scores), std(scores)))
+# plot model performance for comparison
+plt.boxplot(results, labels=names, showmeans=True)
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 10_04_adaboost_from_scratch
+
+# 自行開發Adaboost
+
+# 載入資料集
+X, y = datasets.load_breast_cancer(return_X_y=True)
+y[y == 0] = -1
+# X, y = datasets.make_hastie_10_2()
+print(y)
+
+# 資料分割
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+# 建立Adaboost模型
+
+
+# 計算錯誤率
+def get_error_rate(pred, Y):
+    return sum(pred != Y) / float(len(Y))
+
+
+# Adaboost模型
+def Adaboost(Y_train, X_train, Y_test, X_test, M, clf):
+    n_train, n_test = len(X_train), len(X_test)
+    # 初始化權重(weights)，每一筆資料權重都一樣
+    w = np.ones(n_train) / n_train
+    # 預測初始值為 0
+    pred_train, pred_test = [np.zeros(n_train), np.zeros(n_test)]
+
+    # 訓練 M 次
+    for i in range(M):
+        # 訓練
+        clf.fit(X_train, Y_train, sample_weight=w)  # 學習訓練.fit
+        pred_train_i = clf.predict(X_train)
+        pred_test_i = clf.predict(X_test)
+
+        # 更新權重，預測正確為 1，預測錯誤為 -1
+        miss = [int(x) for x in (pred_train_i != Y_train)]
+        miss2 = [x if x == 1 else -1 for x in miss]
+        # 計算分類錯誤率
+        err_m = np.dot(w, miss) / sum(w)
+        # 計算 θ
+        theta_m = 0.5 * np.log((1 - err_m) / float(err_m))
+        # 權重更新
+        w = np.multiply(w, np.exp([float(x) * theta_m for x in miss2]))
+        # 累加至預測值
+        pred_train = [
+            sum(x) for x in zip(pred_train, [x * theta_m for x in pred_train_i])
+        ]
+        pred_test = [sum(x) for x in zip(pred_test, [x * theta_m for x in pred_test_i])]
+
+    # np.sign：returns -1 if x < 0, 0 if x==0, 1 if x > 0
+    pred_train, pred_test = np.sign(pred_train), np.sign(pred_test)
+    # 回傳訓練及測試資料的錯誤率
+    return get_error_rate(pred_train, Y_train), get_error_rate(pred_test, Y_test)
+
+
+# 模型訓練
+
+from sklearn.tree import DecisionTreeClassifier
+
+# max_depth 一定要設定
+weak_learner = DecisionTreeClassifier(max_depth=3)
+pred = Adaboost(y_train, X_train, y_test, X_test, 50, weak_learner)
+
+# 模型評估
+
+# 計算準確率
+print(f"{(1-pred[1])*100:.2f}%")
+# 97.37%
+
+# 個別模型評估
+weak_learner.fit(X_train, y_train)  # 學習訓練.fit
+print(f"{weak_learner.score(X_test, y_test)*100:.2f}%")
+# 93.86%
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 使用分類模型
+
+from xgboost import XGBClassifier
+
+X, y = datasets.load_breast_cancer(return_X_y=True)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+model = XGBClassifier()
+
+model.fit(X_train, y_train)  # 學習訓練.fit
+
+scores = cross_val_score(model, X_test, y_test, cv=10)
+print(f"平均分數: {np.mean(scores)}, 標準差: {np.std(scores)}")
+
+# 平均分數: 0.9484848484848485, 標準差: 0.05626498372008225
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 10_08_stacking
+# 堆疊(Stacking)測試
+
+# 載入資料集
+X, y = datasets.load_breast_cancer(return_X_y=True)
+
+# 資料分割
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.svm import SVC
+from sklearn.naive_bayes import GaussianNB
+from sklearn.ensemble import StackingClassifier
+
+
+def get_models():
+    models = []
+    models.append(("knn", KNeighborsClassifier()))
+    models.append(("cart", DecisionTreeClassifier()))
+    models.append(("svm", SVC()))
+    models.append(("bayes", GaussianNB()))
+    return models
+
+
+estimators = get_models()
+model = StackingClassifier(estimators=estimators, final_estimator=LogisticRegression())
+
+model.fit(X_train, y_train)  # 學習訓練.fit
+
+"""
+StackingClassifier(estimators=[('knn', KNeighborsClassifier()),
+                               ('cart', DecisionTreeClassifier()),
+                               ('svm', SVC()), ('bayes', GaussianNB())],
+                   final_estimator=LogisticRegression())
+"""
+
+# 模型評估
+
+from sklearn.model_selection import cross_val_score
+
+scores = cross_val_score(model, X_test, y_test, cv=10)
+print(f"平均分數: {np.mean(scores)}, 標準差: {np.std(scores)}")
+# 平均分數: 0.9303030303030303, 標準差: 0.08393720596645175
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+#  11_05_shapley_value_from_scratch
+
+# 自行計算 Shapley value
+# How to calculate shapley values from scratch
+
+from sklearn.preprocessing import StandardScaler
+from sklearn.pipeline import make_pipeline
+
+# 載入資料
+
+X, y = datasets.load_breast_cancer(return_X_y=True, as_frame=True)
+
+# 資料分割
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+# 模型訓練
+
+clf = make_pipeline(StandardScaler(), LogisticRegression())
+
+clf.fit(X_train.values, y_train)  # 學習訓練.fit
+
+"""
+Pipeline(steps=[('standardscaler', StandardScaler()),
+                ('logisticregression', LogisticRegression())])
+"""
+
+# 自行計算第16個特徵的Shapley value
+
+x = X_test.iloc[0]  # 第一筆測試資料
+j = 15  # 第16個特徵
+M = 1000  # 測試 1000 次
+n_features = len(x)
+marginal_contributions = []
+feature_idxs = list(range(n_features))
+feature_idxs.remove(j)
+for _ in range(M):
+    # 抽樣訓練資料一筆資料
+    z = X_train.sample(1).values[0]
+    # 所有組合
+    x_idx = random.sample(
+        feature_idxs,
+        min(
+            max(int(0.2 * n_features), random.choice(feature_idxs)),
+            int(0.8 * n_features),
+        ),
+    )
+    z_idx = [idx for idx in feature_idxs if idx not in x_idx]
+
+    # 含第16個特徵的X，在組合內以測試資料填入，不在組合內以訓練資料填入
+    x_plus_j = np.array([x[i] if i in x_idx + [j] else z[i] for i in range(n_features)])
+    # 不含第16個特徵的X
+    x_minus_j = np.array(
+        [z[i] if i in z_idx + [j] else x[i] for i in range(n_features)]
+    )
+
+    # 計算邊際貢獻(marginal contribution)
+    marginal_contribution = (
+        clf.predict_proba(x_plus_j.reshape(1, -1))[0][1]
+        - clf.predict_proba(x_minus_j.reshape(1, -1))[0][1]
+    )
+    marginal_contributions.append(marginal_contribution)
+
+# 計算邊際貢獻平均值
+phi_j_x = sum(marginal_contributions) / len(marginal_contributions)
+print(f"Shaply value for feature {j}: {phi_j_x:.5}")
+
+# Shaply value for feature 15: 0.010254
+
+cc = X.columns[j]
+print(cc)
+
+#'compactness error'
+
+# 以 SHAP 套件驗證
+
+import shap
+
+explainer = shap.KernelExplainer(clf.predict_proba, X_train.values)
+shap_values = explainer.shap_values(x)
+
+""" NG
+print(f"Shaply value calulated from shap: {shap_values[1][j]:.5}")
+"""
+
+# Using 455 background data samples could cause slower run times.
+# Consider using shap.sample(data, K)
+# or shap.kmeans(data, K) to summarize the background as K samples.
+
+# Shaply value calulated from shap: 0.01366
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個

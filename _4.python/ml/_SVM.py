@@ -62,7 +62,7 @@ def show():
 
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 plt.figure(
     num="SVM 支援向量機",
     figsize=(12, 8),
@@ -563,10 +563,459 @@ plt.scatter(X_SVM[:, 0], X_SVM[:, 1], c=y_predict)
 show()
 
 # 再去做預測
+'''
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+N = 500
+GROUPS = 3
+X, y = make_blobs(n_samples=N, centers=GROUPS, n_features=2)
+
+from sklearn.svm import SVC
+from sklearn.model_selection import cross_val_score  # Cross Validation
+
+print("使用 SVC")
+# 非線性SVM 建立分類模型, 建立訓練數據模型, 對測試數據做預測
+clf = SVC()
+# clf = SVC(gamma = 'scale')
+
+scores = cross_val_score(clf, X, y, cv=5)
+print("看一下五次的成績 :", scores)
+print("平均 :", scores.mean())
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+from sklearn.svm import LinearSVC
+
+data, label = make_blobs(n_samples=200, n_features=2, centers=2, random_state=9487)
+
+d_sta = StandardScaler().fit_transform(data)  # 標準化
+
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+dx_train, dx_test, label_train, label_test = train_test_split(
+    d_sta, label, test_size=0.2, random_state=9487
+)
+# 訓練組8成, 測試組2成
+
+# 建立分類模型
+svm_model = LinearSVC()
+
+# 建立訓練數據模型
+svm_model.fit(dx_train, label_train)  # 學習訓練.fit
+
+# 對測試數據做預測
+pred = svm_model.predict(dx_test)
+
+# 輸出測試數據的 label
+print(label_test)
+
+# 輸出預測數據的 label
+print(pred)
+
+# 輸出準確性
+print(f"訓練資料的準確性 = {svm_model.score(dx_train, label_train)}")
+print(f"測試資料的準確性 = {svm_model.score(dx_test, label_test)}")
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+from sklearn.datasets import make_moons
+from sklearn.svm import LinearSVC
+from sklearn.svm import SVC
+
+data, label = make_moons(n_samples=200, noise=0.2, random_state=9487)
+
+d_sta = StandardScaler().fit_transform(data)  # 標準化
+
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+dx_train, dx_test, label_train, label_test = train_test_split(
+    d_sta, label, test_size=0.2, random_state=9487
+)
+# 訓練組8成, 測試組2成
+
+# 線性SVM 建立分類模型, 建立訓練數據模型, 對測試數據做預測
+svm_model = LinearSVC()
+
+svm_model.fit(dx_train, label_train)  # 學習訓練.fit
+
+pred = svm_model.predict(dx_test)
+
+# 輸出線性SVM準確性
+print(f"線性訓練資料的準確性 = {svm_model.score(dx_train, label_train)}")
+print(f"線性測試資料的準確性 = {svm_model.score(dx_test, label_test)}")
+print("=" * 50)
+
+# 非線性SVM 建立分類模型, 建立訓練數據模型, 對測試數據做預測
+svm = SVC()
+svm.fit(dx_train, label_train)
+pred = svm.predict(dx_test)
+
+# 輸出非線性SVM準確性
+print(f"非線性訓練資料的準確性 = {svm.score(dx_train, label_train)}")
+print(f"非線性測試資料的準確性 = {svm.score(dx_test, label_test)}")
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+def plot_hyperplane(clf, X, y, h=0.02, draw_sv=True, title="hyperplan"):
+    # create a mesh to plot in
+    x_min, x_max = X[:, 0].min() - 1, X[:, 0].max() + 1
+    y_min, y_max = X[:, 1].min() - 1, X[:, 1].max() + 1
+    xx, yy = np.meshgrid(np.arange(x_min, x_max, h), np.arange(y_min, y_max, h))
+
+    plt.title(title)
+    plt.xlim(xx.min(), xx.max())
+    plt.ylim(yy.min(), yy.max())
+    plt.xticks(())
+    plt.yticks(())
+
+    Z = clf.predict(np.c_[xx.ravel(), yy.ravel()])
+    # Put the result into a color plot
+    Z = Z.reshape(xx.shape)
+    plt.contourf(xx, yy, Z, cmap="hot", alpha=0.5)
+
+    markers = ["o", "s", "^"]
+    colors = ["b", "r", "c"]
+    labels = np.unique(y)
+    for label in labels:
+        plt.scatter(
+            X[y == label][:, 0],
+            X[y == label][:, 1],
+            c=colors[label],
+            marker=markers[label],
+        )
+    if draw_sv:
+        sv = clf.support_vectors_
+        plt.scatter(sv[:, 0], sv[:, 1], c="y", marker="x")
+
+
+X, y = make_blobs(n_samples=100, centers=2, random_state=9487, cluster_std=0.3)
+clf = sklearn.svm.SVC(C=1.0, kernel="linear")
+clf.fit(X, y)
+
+plt.figure(figsize=(12, 4))
+plot_hyperplane(clf, X, y, h=0.01, title="Maximum Margin Hyperplan")
+
+show()
+
+print("------------------------------")  # 30個
+
+X, y = make_blobs(n_samples=100, centers=3, random_state=9487, cluster_std=0.8)
+clf_linear = sklearn.svm.SVC(C=1.0, kernel="linear")
+clf_poly = sklearn.svm.SVC(C=1.0, kernel="poly", degree=3)
+clf_rbf = sklearn.svm.SVC(C=1.0, kernel="rbf", gamma=0.5)
+clf_rbf2 = sklearn.svm.SVC(C=1.0, kernel="rbf", gamma=0.1)
+
+plt.figure(figsize=(10, 10))
+
+clfs = [clf_linear, clf_poly, clf_rbf, clf_rbf2]
+titles = [
+    "Linear Kernel",
+    "Polynomial Kernel with Degree=3",
+    "Gaussian Kernel with $\gamma=0.5$",
+    "Gaussian Kernel with $\gamma=0.1$",
+]
+for clf, i in zip(clfs, range(len(clfs))):
+    clf.fit(X, y)
+    plt.subplot(2, 2, i + 1)
+    plot_hyperplane(clf, X, y, title=titles[i])
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+from sklearn.svm import LinearSVC
+from sklearn.metrics import accuracy_score
+
+# データ生成
+centers = [(-1, -0.125), (0.5, 0.5)]
+
+N = 50
+print("產生", N, "筆資料 2維 2群")
+X, y = make_blobs(n_samples=N, n_features=2, centers=centers, cluster_std=0.3)
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
+
+model = LinearSVC()
+
+model.fit(X_train, y_train)  # 學習訓練.fit
+
+y_pred = model.predict(X_test)  # 預測.predict
+
+print(accuracy_score(y_pred, y_test))  # 評価
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("SVM")
+
+# 支持向量机 (SVM)
+
+dataset = pd.read_csv("data/Social_Network_Ads.csv")
+X = dataset.iloc[:, [2, 3]].values
+y = dataset.iloc[:, 4].values
+
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+# 訓練組8成, 測試組2成
+
+# 第四步：特征量化  # Feature Scaling
+scaler = StandardScaler()
+X_train = scaler.fit_transform(X_train)  # STD特徵縮放
+X_test = scaler.fit_transform(X_test)  # STD特徵縮放
+
+# 第五步：适配SVM到训练集合
+# Fitting SVM to the Training set
+from sklearn.svm import SVC
+
+classifier = SVC(kernel="linear", random_state=0)
+
+classifier.fit(X_train, y_train)  # 學習訓練.fit
+
+SVC(
+    C=1.0,
+    cache_size=200,
+    class_weight=None,
+    coef0=0.0,
+    decision_function_shape="ovr",
+    degree=3,
+    gamma="auto",
+    kernel="linear",
+    max_iter=-1,
+    probability=False,
+    random_state=0,
+    shrinking=True,
+    tol=0.001,
+    verbose=False,
+)
+
+# 第六步：预测测试集合结果
+# Predicting the Test set results
+y_pred = classifier.predict(X_test)
+
+# 第七步：创建混淆矩阵
+# Making the Confusion Matrix
+
+from sklearn.metrics import confusion_matrix
+from sklearn.metrics import classification_report
+
+cm = confusion_matrix(y_test, y_pred)
+print(cm)
+print(classification_report(y_test, y_pred))
+
+# 第八步：训练集合结果可视化
+# Visualising the Training set results
+from matplotlib.colors import ListedColormap
+
+X_set, y_set = X_train, y_train
+X1, X2 = np.meshgrid(
+    np.arange(start=X_set[:, 0].min() - 1, stop=X_set[:, 0].max() + 1, step=0.01),
+    np.arange(start=X_set[:, 1].min() - 1, stop=X_set[:, 1].max() + 1, step=0.01),
+)
+plt.contourf(
+    X1,
+    X2,
+    classifier.predict(np.array([X1.ravel(), X2.ravel()]).T).reshape(X1.shape),
+    alpha=0.75,
+    cmap=ListedColormap(("red", "green")),
+)
+plt.xlim(X1.min(), X1.max())
+plt.ylim(X2.min(), X2.max())
+for i, j in enumerate(np.unique(y_set)):
+    plt.scatter(
+        X_set[y_set == j, 0],
+        X_set[y_set == j, 1],
+        c=ListedColormap(("red", "green"))(i),
+        label=j,
+    )
+plt.title("SVM (Training set)")
+plt.xlabel("Age")
+plt.ylabel("Estimated Salary")
+plt.legend()
+show()
+
+
+# 第九步：测试集合结果可视化
+
+from matplotlib.colors import ListedColormap
+
+X_set, y_set = X_test, y_test
+X1, X2 = np.meshgrid(
+    np.arange(start=X_set[:, 0].min() - 1, stop=X_set[:, 0].max() + 1, step=0.01),
+    np.arange(start=X_set[:, 1].min() - 1, stop=X_set[:, 1].max() + 1, step=0.01),
+)
+plt.contourf(
+    X1,
+    X2,
+    classifier.predict(np.array([X1.ravel(), X2.ravel()]).T).reshape(X1.shape),
+    alpha=0.75,
+    cmap=ListedColormap(("red", "green")),
+)
+plt.xlim(X1.min(), X1.max())
+plt.ylim(X2.min(), X2.max())
+for i, j in enumerate(np.unique(y_set)):
+    plt.scatter(
+        X_set[y_set == j, 0],
+        X_set[y_set == j, 1],
+        c=ListedColormap(("red", "green"))(i),
+        label=j,
+    )
+plt.title("SVM (Test set)")
+plt.xlabel("Age")
+plt.ylabel("Estimated Salary")
+plt.legend()
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+# 11_01_self_training
+
+# 自我訓練(Self-training)測試
+
+from sklearn.svm import SVC
+from sklearn.semi_supervised import SelfTrainingClassifier
+
+# 載入資料集
+
+X, y = datasets.load_iris(return_X_y=True)
+X = X[:, :2]
+
+# 資料分割
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+# 設定 30% 資料為沒有標註(-1)
+
+rng = np.random.RandomState(0)
+y_rand = rng.rand(y_train.shape[0])
+y_30 = np.copy(y_train)
+y_30[y_rand < 0.3] = -1
+cc = np.count_nonzero(y_30 == -1)
+print(cc)
+
+y_30_index = np.where(y_30 == -1)[0]
+print(y_30_index)
+
+print(type(y_30_index))
+
+# 模型訓練
+
+base_classifier = SVC(kernel="rbf", gamma=0.5, probability=True)
+clf = SelfTrainingClassifier(base_classifier).fit(X_train, y_30)  # 學習訓練.fit
+
+# 繪製決策邊界
+
+# 建立 mesh grid
+x_min, x_max = X_train[:, 0].min() - 1, X_train[:, 0].max() + 1
+y_min, y_max = X_train[:, 1].min() - 1, X_train[:, 1].max() + 1
+xx, yy = np.meshgrid(np.arange(x_min, x_max, 0.02), np.arange(y_min, y_max, 0.02))
+
+# 每個標籤不同顏色(RGB)
+color_map = {-1: (1, 1, 1), 0: (0, 0, 0.9), 1: (1, 0, 0), 2: (0.8, 0.6, 0)}
+Z = clf.predict(np.c_[xx.ravel(), yy.ravel()])
+
+# 繪製等高線
+Z = Z.reshape(xx.shape)
+plt.contourf(xx, yy, Z, cmap=plt.cm.Paired)
+plt.axis("off")
+
+# 繪製實際點
+colors = [color_map[y] for y in y_30]
+plt.scatter(X_train[:, 0], X_train[:, 1], c=colors, edgecolors="black")
+
+show()
+
+# SVM 模型評估
+base_classifier.fit(X_train, y_30)  # 學習訓練.fit
+cc = base_classifier.score(X_test, y_test)
+print(cc)
+# 0.6666666666666666
+
+# Self-training 模型評估
+cc = clf.score(X_test, y_test)
+print(cc)
+# 0.7666666666666667
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 完整資料進行模型評估
+
+rng = np.random.RandomState(42)
+X, y = datasets.load_iris(return_X_y=True)
+random_unlabeled_points = rng.rand(y.shape[0]) < 0.3
+y[random_unlabeled_points] = -1
+
+svc = SVC(probability=True, gamma="auto")
+
+self_training_model = SelfTrainingClassifier(svc)
+
+self_training_model.fit(X, y)  # 學習訓練.fit
+
+"""
+SelfTrainingClassifier(base_estimator=SVC(gamma='auto', probability=True))
+"""
+
+svc.fit(X[y >= 0], y[y >= 0])  # 學習訓練.fit
+cc = svc.score(X, y)
+print(cc)
+
+# 0.66
+
+X, y = datasets.load_iris(return_X_y=True)
+cc = self_training_model.score(X, y)
+print(cc)
+
+# 0.9733333333333334
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 繪製混淆矩陣
+
+from sklearn import svm
+from sklearn.metrics import ConfusionMatrixDisplay
+
+# 載入資料
+ds = datasets.load_iris()
+X, y = ds.data, ds.target
+
+# 分割資料
+X_train, X_test, y_train, y_test = train_test_split(X, y)
+
+# 模型訓練
+clf = svm.SVC(kernel="linear", C=0.01)
+
+clf.fit(X_train, y_train)  # 學習訓練.fit
+
+y_pred = clf.predict(X_test)
+
+# 設定顯示小數點位數
+np.set_printoptions(precision=2)
+
+# Plot non-normalized confusion matrix
+titles_options = [("正常的混淆矩陣", None), ("正規化混淆矩陣", "true")]
+
+f, axes = plt.subplots(1, 2, figsize=(14, 5), sharey="row")
+for i, (title, normalize) in enumerate(titles_options):
+    cm = ConfusionMatrixDisplay.from_predictions(
+        y_test,
+        y_pred,
+        ax=axes[i],
+        cmap=plt.cm.Blues,
+        display_labels=ds.target_names,
+        normalize=normalize,
+    )
+    #     cm.plot(ax=axes[i])
+    cm.ax_.set_title(title, fontsize=16)
+
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

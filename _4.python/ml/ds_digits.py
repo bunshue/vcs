@@ -26,34 +26,52 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
-from sklearn import datasets
+import sklearn
 from sklearn.datasets import load_digits
+from sklearn.metrics import classification_report
+from sklearn.metrics import confusion_matrix
+from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
+from sklearn.model_selection import cross_val_score
+from sklearn.model_selection import cross_val_predict
+from sklearn.model_selection import learning_curve
+
+print("------------------------------------------------------------")  # 60個
+
+
+def show():
+    plt.show()
+    pass
+
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 digits = load_digits()
-print(digits.data.shape)
-plt.gray()
-plt.matshow(digits.images[0])
-plt.show()
+
+print("shape of raw image data: {0}".format(digits.images.shape))
+print("shape of data: {0}".format(digits.data.shape))
+
+# print(digits.DESCR) # 查看数据集的说明信息
+
+plt.matshow(digits.images[0], cmap=plt.cm.gray)
+
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 """
 from sklearn.manifold import TSNE
-from sklearn.datasets import load_digits
 
-data = load_digits()
-print(type(data))
-print(len(data))
+digits = load_digits()
+print(type(digits))
+print(len(digits))
 
 print("TSNE")
 n_components = 2  # 削減後の次元を2に設定
 model = TSNE(n_components=n_components)
-print(model.fit_transform(data.data))
+print(model.fit_transform(digits.data))
 """
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -62,23 +80,19 @@ print("------------------------------------------------------------")  # 60個
 
 from sklearn.ensemble import RandomForestClassifier
 
-digits = datasets.load_digits()
+digits = load_digits()
 
-n_samples = len(digits.images)
-data = digits.images.reshape((n_samples, -1))
+N = len(digits.images)
+data = digits.images.reshape((N, -1))
 
 model = RandomForestClassifier(n_estimators=10)
 
-model.fit(data[: n_samples // 2], digits.target[: n_samples // 2])  # 學習訓練.fit
+model.fit(data[: N // 2], digits.target[: N // 2])  # 學習訓練.fit
 
-expected = digits.target[n_samples // 2 :]
-predicted = model.predict(data[n_samples // 2 :])  # 預測.predict
+expected = digits.target[N // 2 :]
+predicted = model.predict(data[N // 2 :])  # 預測.predict
 
-print(metrics.classification_report(expected, predicted))
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
+print(classification_report(expected, predicted))
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -105,7 +119,7 @@ plt.cmap = mpl.colors.ListedColormap(colors)
 # plt.rcParams['savefig.dpi'] = 300
 # plt.rcParams['figure.dpi'] = 300
 
-digits = datasets.load_digits(n_class=10)
+digits = load_digits(n_class=10)
 
 X = digits.data
 y = digits.target
@@ -120,12 +134,12 @@ for i in range(100):
     plt.imshow(digits.data[i].reshape(8, 8), cmap=plt.cm.gray)
     plt.axis("off")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-digits = datasets.load_digits()
+digits = load_digits()
 
 # 把数据所代表的图片显示出来
 images_and_labels = list(zip(digits.images, digits.target))
@@ -136,10 +150,7 @@ for index, (image, label) in enumerate(images_and_labels[:8]):
     plt.imshow(image, cmap=plt.cm.gray_r, interpolation="nearest")
     plt.title("Digit: %i" % label, fontsize=20)
 
-plt.show()
-
-print("shape of raw image data: {0}".format(digits.images.shape))
-print("shape of data: {0}".format(digits.data.shape))
+show()
 
 # 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
 Xtrain, Xtest, Ytrain, Ytest = train_test_split(
@@ -153,9 +164,6 @@ from sklearn import svm
 clf = svm.SVC(gamma=0.001, C=100.0, probability=True)
 
 clf.fit(Xtrain, Ytrain)  # 學習訓練.fit
-
-# 评估模型的准确度
-from sklearn.metrics import accuracy_score
 
 Ypred = clf.predict(Xtest)
 print(accuracy_score(Ytest, Ypred))
@@ -182,7 +190,7 @@ for i, ax in enumerate(axes.flat):
     ax.set_xticks([])
     ax.set_yticks([])
 
-plt.show()
+show()
 
 print("------------------------------")  # 30個
 
@@ -203,14 +211,12 @@ print(clf.score(Xtest, Ytest))
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
 from sklearn.neural_network import MLPClassifier
-from sklearn.metrics import accuracy_score
 
-data = load_digits()
+digits = load_digits()
 
-X = data.images.reshape(len(data.images), -1)
-y = data.target
+X = digits.images.reshape(len(digits.images), -1)
+y = digits.target
 
 # 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
@@ -231,12 +237,11 @@ from sklearn import svm
 # 识别手写体数字
 svc = svm.SVC(gamma=0.001, C=100.0)
 
-digits = datasets.load_digits()
-# print(digits.DESCR) # 查看数据集的说明信息
+digits = load_digits()
 
 
 def plts():
-    """显示要识别的数字图片"""
+    # 显示要识别的数字图片
     plt.subplot(321)
     plt.imshow(digits.images[1791], cmap=plt.cm.gray_r, interpolation="nearest")
     plt.subplot(322)
@@ -249,7 +254,7 @@ def plts():
     plt.imshow(digits.images[1795], cmap=plt.cm.gray_r, interpolation="nearest")
     plt.subplot(326)
     plt.imshow(digits.images[1796], cmap=plt.cm.gray_r, interpolation="nearest")
-    plt.show()
+    show()
 
 
 def svms():
@@ -298,7 +303,7 @@ fig, ax = plt.subplots()
 plot_embedding(ax, X_pca)
 format_plot(ax, "", "", "PCA")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -331,24 +336,24 @@ format_plot(ax[1, 0], "", "", "Spectral")
 plot_embedding(ax[1, 1], X_tsne)
 format_plot(ax[1, 1], "", "", "tSNE")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# some NG
-from sklearn.model_selection import learning_curve
 from sklearn.svm import SVC
 
 digits = load_digits()
+
 X = digits.data
 y = digits.target
+
 train_sizes, train_loss, test_loss = learning_curve(
     SVC(gamma=0.01),
     X,
     y,
     cv=10,
-    scoring="mean_squared_error",
+    scoring="neg_mean_squared_error",
     train_sizes=[0.1, 0.25, 0.5, 0.75, 1],
 )
 train_loss_mean = -np.mean(train_loss, axis=1)
@@ -360,28 +365,35 @@ plt.plot(train_sizes, test_loss_mean, "o-", color="g", label="Cross-validation")
 plt.xlabel("Training examples")
 plt.ylabel("Loss")
 plt.legend(loc="best")
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# some NG
-from sklearn.learning_curve import validation_curve
+from sklearn.model_selection import learning_curve
 from sklearn.svm import SVC
 
 digits = load_digits()
+
 X = digits.data
 y = digits.target
 param_range = np.logspace(-6, -2.3, 5)
-train_loss, test_loss = validation_curve(
+print(param_range)
+
+# train_size_abs, train_scores, test_scores = learning_curve(
+
+train_size_abs, train_loss, test_loss = learning_curve(
     SVC(),
     X,
     y,
-    param_name="gamma",
-    param_range=param_range,
+    # train_sizes=np.array([0.1, 0.33, 0.55, 0.78, 1. ]),
+    # param_range=param_range,
+    # train_sizes=param_range,
     cv=10,
-    scoring="mean_squared_error",
+    # cv='warn',
+    scoring="neg_mean_squared_error",
 )
+
 train_loss_mean = -np.mean(train_loss, axis=1)
 test_loss_mean = -np.mean(test_loss, axis=1)
 
@@ -391,7 +403,8 @@ plt.plot(param_range, test_loss_mean, "o-", color="g", label="Cross-validation")
 plt.xlabel("gamma")
 plt.ylabel("Loss")
 plt.legend(loc="best")
-plt.show()
+
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -403,21 +416,13 @@ print("------------------------------------------------------------")  # 60個
 from sklearn.ensemble import AdaBoostClassifier
 from sklearn.tree import DecisionTreeClassifier
 
-from sklearn.metrics import accuracy_score
-from sklearn.model_selection import cross_val_score
-from sklearn.model_selection import cross_val_predict
-from sklearn.model_selection import learning_curve
+digits = load_digits()
 
-from sklearn.datasets import load_digits
-
-# 載入資料集
-
-dataset = load_digits()
-X = dataset["data"]
-y = dataset["target"]
+X = digits["data"]
+y = digits["target"]
 
 plt.imshow(X[4].reshape(8, 8))
-plt.show()
+show()
 
 # 個別模型評估
 
@@ -460,11 +465,9 @@ print("------------------------------------------------------------")  # 60個
 
 from scipy import stats
 from sklearn.semi_supervised import LabelSpreading
-from sklearn.metrics import classification_report, confusion_matrix
 
-# 載入資料集
+digits = load_digits()
 
-digits = datasets.load_digits()
 rng = np.random.RandomState(0)
 indices = np.arange(len(digits.data))
 rng.shuffle(indices)
@@ -548,23 +551,10 @@ for i in range(max_iterations):
 
 print("\n最不確定的五筆資料：")
 plt.subplots_adjust(left=0.2, bottom=0.03, right=0.9, top=0.9, wspace=0.2, hspace=0.85)
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 
 # View more python learning tutorial on my Youtube and Youku channel!!!
 
@@ -575,15 +565,15 @@ print("------------------------------------------------------------")  # 60個
 Please note, this code is only for python 3+. If you are using python 2+, please modify the code accordingly.
 """
 import tensorflow as tf
-from sklearn.datasets import load_digits
-from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelBinarizer
 
-# load data
 digits = load_digits()
+
 X = digits.data
 y = digits.target
+
 y = LabelBinarizer().fit_transform(y)
+
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
 
 
@@ -611,6 +601,10 @@ def add_layer(
     tf.summary.histogram(layer_name + "/outputs", outputs)
     return outputs
 
+
+import tensorflow.compat.v1 as tf
+
+tf.disable_v2_behavior()
 
 # define placeholder for inputs to network
 keep_prob = tf.placeholder(tf.float32)
@@ -658,6 +652,66 @@ for i in range(500):
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+# 生成手寫阿拉伯數字
+
+digits = load_digits()
+
+# 顯示前 100 筆手寫阿拉伯數字
+
+
+def plot_digits(data):
+    fig, ax = plt.subplots(
+        10, 10, figsize=(8, 8), subplot_kw=dict(xticks=[], yticks=[])
+    )
+    fig.subplots_adjust(hspace=0.05, wspace=0.05)
+    for i, axi in enumerate(ax.flat):
+        im = axi.imshow(data[i].reshape(8, 8), cmap="binary")
+        im.set_clim(0, 16)
+
+
+plot_digits(digits.data)
+show()
+
+# 降維
+
+from sklearn.decomposition import PCA
+
+pca = PCA(0.99, whiten=True)
+data = pca.fit_transform(digits.data)
+print(data.shape)
+
+# (1797, 41)
+
+# 以AIC決定最佳集群數量
+
+# GMM
+
+from sklearn.mixture import GaussianMixture
+
+n_components = np.arange(50, 210, 10)
+models = [GaussianMixture(n, covariance_type="full") for n in n_components]
+aics = [model.fit(data).aic(data) for model in models]
+plt.plot(n_components, aics)
+show()
+
+# 以AIC決定最佳集群數量=110
+# 設定集群數量=110
+
+gmm = GaussianMixture(110, covariance_type="full", random_state=9487)
+
+gmm.fit(data)  # 學習訓練.fit
+print(gmm.converged_)
+
+# True
+
+# Now we can draw samples of 100 new points within this 41-dimensional projected space, using the GMM as a generative model:
+
+# 生成100個樣本
+
+data_new, _ = gmm.sample(100)
+digits_new = pca.inverse_transform(data_new)
+plot_digits(digits_new)
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

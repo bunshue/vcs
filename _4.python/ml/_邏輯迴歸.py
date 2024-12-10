@@ -894,6 +894,73 @@ print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+from sklearn.linear_model import LogisticRegression
+
+data, label = make_blobs(n_samples=1000, n_features=2, centers=2, random_state=9487)
+
+d_sta = StandardScaler().fit_transform(data)  # 標準化
+
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+dx_train, dx_test, label_train, label_test = train_test_split(
+    d_sta, label, test_size=0.2, random_state=9487
+)
+# 訓練組8成, 測試組2成
+
+# 建立分類模型
+lo_model = LogisticRegression()
+
+# 建立訓練數據模型
+lo_model.fit(dx_train, label_train)  # 學習訓練.fit
+
+# 對測試數據做預測
+pred = lo_model.predict(dx_test)
+
+# 輸出測試數據的 label
+print(label_test)
+
+# 輸出預測數據的 label
+print(pred)
+
+# 輸出準確性
+print(f"訓練資料的準確性 = {lo_model.score(dx_train, label_train)}")
+print(f"測試資料的準確性 = {lo_model.score(dx_test, label_test)}")
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+from sklearn.linear_model import LogisticRegression
+
+data, label = make_blobs(n_samples=200, n_features=2, centers=2, random_state=9487)
+
+d_sta = StandardScaler().fit_transform(data)  # 標準化
+
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+dx_train, dx_test, label_train, label_test = train_test_split(
+    d_sta, label, test_size=0.2, random_state=9487
+)
+# 訓練組8成, 測試組2成
+
+# 建立分類模型
+lo_model = LogisticRegression()
+
+# 建立訓練數據模型
+lo_model.fit(dx_train, label_train)  # 學習訓練.fit
+
+# 對測試數據做預測
+pred = lo_model.predict(dx_test)
+
+# 輸出測試數據的 label
+print(label_test)
+
+# 輸出預測數據的 label
+print(pred)
+
+# 輸出準確性
+print(f"訓練資料的準確性 = {lo_model.score(dx_train, label_train)}")
+print(f"測試資料的準確性 = {lo_model.score(dx_test, label_test)}")
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

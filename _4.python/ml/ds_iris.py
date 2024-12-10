@@ -82,6 +82,16 @@ print("data_module :", iris.data_module)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+
+data, label = datasets.load_iris(return_X_y=True)
+
+print("鳶尾花花萼和花瓣數據")
+print(data[0:5])
+print(f"分類 : {label[0:5]}")
+
+print("------------------------------------------------------------")  # 60個
+
+
 filename = "data/iris_sample.csv"
 
 iris = pd.read_csv(filename)

@@ -1,4 +1,6 @@
 
+
+
 滑鼠 event 與 flag 列表
 
 當滑鼠在指定視窗中滑動進行某些行為，都會觸發一些事件，相關事件列表如下：
@@ -561,21 +563,7 @@ window.minsize(600, 480)	# 可拉大 不可縮小
 
 tk.Label(window, text = "標準版顯示訊息").pack()
 
-
-標準版
-
-標準共用的程式碼
-
-webcam最簡易播放
-TBGBMBKB
-量測作業時間標準版
-
-
 print("------------------------------------------------------------")  # 60­э
-
-MNIST
-C:\_git\vcs\_4.python\ml\Python-Data-Analysis-Basics\NN
-
 
 img_url = "https://upload.wikimedia.org/wikipedia/commons/8/8b/%E8%A5%BF%E8%9E%BA%E5%A4%A7%E6%A9%8B_%28cropped%29.jpg"
 

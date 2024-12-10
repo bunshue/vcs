@@ -32,6 +32,14 @@ import ssl
 
 ssl._create_default_https_context = ssl._create_stdlib_context
 
+
+def show():
+    # return
+    plt.show()
+    pass
+
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("多指標評分")
@@ -99,7 +107,7 @@ print(roc_auc_score(y_real, y_score))  # AUC值
 fpr, tpr, thresholds = roc_curve(y_real, y_score)
 plt.plot(fpr, tpr)  # 繪圖
 
-plt.show()
+show()
 
 # P-R曲線
 from sklearn.metrics import precision_recall_curve
@@ -107,15 +115,199 @@ from sklearn.metrics import precision_recall_curve
 precision, recall, _ = precision_recall_curve(y_real, y_score)
 plt.plot(recall, precision)
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+# Binarization
+from sklearn.preprocessing import Binarizer
+
+# Create a sample data array
+data = np.array([[1.5, 2.7, 0.8], [0.2, 3.9, 1.2], [4.1, 1.0, 2.5]])
+
+# Create a Binarizer instance with a threshold of 2.0
+binarizer = Binarizer(threshold=2.0)
+
+# Apply binarization to the data
+binarized_data = binarizer.transform(data)
+
+print("Original data:")
+print(data)
+print("\nBinarized data:")
+print(binarized_data)
+
+# Encoding Categorical Features
+
+from sklearn.preprocessing import LabelEncoder
+
+# Sample data: categorical labels
+labels = ["cat", "dog", "dog", "fish", "cat", "dog", "fish"]
+
+# Create a LabelEncoder instance
+label_encoder = LabelEncoder()
+
+# Fit and transform the labels
+encoded_labels = label_encoder.fit_transform(labels)
+
+# Print the original labels and their encoded versions
+print("Original labels:", labels)
+print("Encoded labels:", encoded_labels)
+
+# Decode the encoded labels back to the original labels
+decoded_labels = label_encoder.inverse_transform(encoded_labels)
+print("Decoded labels:", decoded_labels)
+
+print("------------------------------------------------------------")  # 60個
+
+# Imputing Missing Values
+from sklearn.impute import SimpleImputer
+
+# Sample data with missing values
+data = np.array([[1.0, 2.0, np.nan], [4.0, np.nan, 6.0], [7.0, 8.0, 9.0]])
+
+# Create a SimpleImputer instance with strategy='mean'
+imputer = SimpleImputer(strategy="mean")
+
+# Fit and transform the imputer on the data
+imputed_data = imputer.fit_transform(data)
+
+print("Original data:")
+print(data)
+print("\nImputed data:")
+print(imputed_data)
+
+print("------------------------------------------------------------")  # 60個
+
+# Generating Polynomial Features
+from sklearn.preprocessing import PolynomialFeatures
+
+# Sample data
+data = np.array([[1, 2], [3, 4], [5, 6]])
+
+# Create a PolynomialFeatures instance of degree 2
+poly = PolynomialFeatures(degree=2)
+
+# Transform the data to include polynomial features
+poly_data = poly.fit_transform(data)
+
+print("Original data:")
+print(data)
+print("\nPolynomial features:")
+print(poly_data)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+# 08_04_confusion_matrix
+
+# 計算及繪製混淆矩陣
+
+# 載入資料
+y_true = [0, 0, 0, 1, 1, 1, 1, 1]
+y_pred = [0, 1, 0, 1, 0, 1, 0, 1]
+
+y_true = [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1]
+y_pred = [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0]
+
+# 真實的資料
+y_true = np.random.randint(2, size=100)
+
+# 預測的資料
+y_pred = np.random.randint(2, size=100)
+
+# 計算混淆矩陣
+cc = confusion_matrix(y_true, y_pred)
+print(cc)
+
+cc = confusion_matrix(y_true, y_pred, labels=[1, 0])
+print(cc)
+
+# 取得混淆矩陣的4個格子
+tn, fp, fn, tp = confusion_matrix(y_true, y_pred).ravel()
+cc = tn, fp, fn, tp
+print(cc)
+
+# 繪製混淆矩陣
+from sklearn.metrics import ConfusionMatrixDisplay
+
+ConfusionMatrixDisplay.from_predictions(
+    y_true, y_pred, labels=[1, 0], display_labels=["真", "偽"]
+)
+
+show()
+
+# 方法 2
+cm = confusion_matrix(y_true, y_pred, labels=[1, 0])
+disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=["真", "偽"])
+disp.plot()
+show()
+
+# 方法 3
+fig, ax = plt.subplots(figsize=(5, 5))
+
+# 顯示矩陣
+ax.matshow(cm, cmap=plt.cm.Blues, alpha=0.3)
+
+# 按 [1, 0] 順序
+for i in range(cm.shape[0] - 1, -1, -1):
+    for j in range(cm.shape[1] - 1, -1, -1):
+        ax.text(x=j, y=i, s=cm[i, j], va="center", ha="center")
+
+# 置換刻度
+ax.set_xticks(range(cm.shape[0]), labels=["真", "偽"], fontsize=14)
+ax.set_yticks(range(cm.shape[1]), labels=["真", "偽"], fontsize=14)
+
+# 設定標籤
+plt.xlabel("Predicted label", fontsize=16)
+plt.ylabel("True label", fontsize=16)
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 08_05_confusion_matrix_multiple-categories
+
+# 計算及繪製多分類混淆矩陣
+
+y_true = [2, 0, 2, 2, 0, 1]
+y_pred = [0, 0, 2, 2, 0, 2]
+
+# 計算混淆矩陣
+cc = confusion_matrix(y_true, y_pred)
+print(cc)
+
+# 繪製混淆矩陣
+from sklearn.metrics import ConfusionMatrixDisplay
+
+ConfusionMatrixDisplay.from_predictions(y_true, y_pred)
+show()
+
+# 方法 2
+cm = confusion_matrix(y_true, y_pred)
+disp = ConfusionMatrixDisplay(confusion_matrix=cm)
+disp.plot()
+show()
+
+# 方法 3
+fig, ax = plt.subplots(figsize=(5, 5))
+
+# 顯示矩陣
+ax.matshow(cm, cmap=plt.cm.Blues, alpha=0.3)
+
+# 按 [1, 0] 順序
+for i in range(cm.shape[0]):
+    for j in range(cm.shape[1]):
+        ax.text(x=j, y=i, s=cm[i, j], va="center", ha="center")
+
+# 置換刻度 NG
+# ax.set_xticks(range(cm.shape[0]), fontsize=14)
+# ax.set_yticks(range(cm.shape[1]), fontsize=14)
+
+# 設定標籤
+plt.xlabel("Predicted label", fontsize=16)
+plt.ylabel("True label", fontsize=16)
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
