@@ -28,22 +28,122 @@ print("------------------------------------------------------------")  # 60個
 
 from common1 import *
 import sklearn.linear_model
-from sklearn.linear_model import LogisticRegression
 from sklearn import datasets
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
 from sklearn.metrics import accuracy_score
 from sklearn.preprocessing import StandardScaler  # 特徵縮放
 from sklearn.metrics import confusion_matrix  # 混淆矩陣
 from sklearn.metrics import ConfusionMatrixDisplay  # 混淆矩陣圖
+from sklearn.datasets import make_blobs  # 集群資料集
 
 
 from sklearn import metrics
 
 
 def show():
-    plt.show()
+    # plt.show()
     pass
 
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+data, label = make_blobs(n_samples=1000, n_features=2, centers=2, random_state=9487)
+
+d_sta = StandardScaler().fit_transform(data)  # 標準化
+
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+dx_train, dx_test, label_train, label_test = train_test_split(
+    d_sta, label, test_size=0.2, random_state=9487
+)
+# 訓練組8成, 測試組2成
+
+# 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
+logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
+
+logistic_regression.fit(dx_train, label_train)  # 學習訓練.fit
+
+# 對測試數據做預測
+pred = logistic_regression.predict(dx_test)
+
+# 輸出測試數據的 label
+print(label_test)
+
+# 輸出預測數據的 label
+print(pred)
+
+# 輸出準確性
+print(f"訓練資料的準確性 = {logistic_regression.score(dx_train, label_train)}")
+print(f"測試資料的準確性 = {logistic_regression.score(dx_test, label_test)}")
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+data, label = make_blobs(n_samples=200, n_features=2, centers=2, random_state=9487)
+
+d_sta = StandardScaler().fit_transform(data)  # 標準化
+
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+dx_train, dx_test, label_train, label_test = train_test_split(
+    d_sta, label, test_size=0.2, random_state=9487
+)
+# 訓練組8成, 測試組2成
+
+# 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
+logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
+
+logistic_regression.fit(dx_train, label_train)  # 學習訓練.fit
+
+# 對測試數據做預測
+pred = logistic_regression.predict(dx_test)
+
+# 輸出測試數據的 label
+print(label_test)
+
+# 輸出預測數據的 label
+print(pred)
+
+# 輸出準確性
+print(f"訓練資料的準確性 = {logistic_regression.score(dx_train, label_train)}")
+print(f"測試資料的準確性 = {logistic_regression.score(dx_test, label_test)}")
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 06_04_logistic_regression_with_nonlinear_data
+
+# 以二次迴歸預測世界人口數
+
+from sklearn.datasets import make_circles
+
+X, y = make_circles(n_samples=1_000, factor=0.3, noise=0.05, random_state=0)
+
+# 資料切割
+X_train, X_test, y_train, y_test = train_test_split(X, y, stratify=y, random_state=0)
+
+# 繪製訓練及測試資料
+_, (train_ax, test_ax) = plt.subplots(ncols=2, sharex=True, sharey=True, figsize=(8, 4))
+train_ax.scatter(X_train[:, 0], X_train[:, 1], c=y_train)
+train_ax.set_ylabel("Feature #1")
+train_ax.set_xlabel("Feature #0")
+train_ax.set_title("Training data")
+
+test_ax.scatter(X_test[:, 0], X_test[:, 1], c=y_test)
+test_ax.set_xlabel("Feature #0")
+_ = test_ax.set_title("Testing data")
+show()
+
+# 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
+logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
+
+logistic_regression.fit(X_train, y_train)
+
+# cc = logistic_regression.coef_, lr.intercept_
+# print(cc)
+
+y_pred = logistic_regression.predict(X_test)
+print(f"計算準確率 : {accuracy_score(y_test, y_pred)*100:.2f}%")
+# 48.80%
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -391,6 +491,7 @@ print(y_test.shape)
 logistic_regression = sklearn.linear_model.LogisticRegression(
     solver="liblinear"
 )  # 邏輯迴歸函數學習機
+
 logistic_regression.fit(X_train, y_train)
 
 y_pred = logistic_regression.predict(X_test)  # 預測.predict
@@ -607,6 +708,7 @@ print(X.shape)
 
 # 使用 SelectKBest, 20 個特徵
 clf = GenericUnivariateSelect(chi2, mode="k_best", param=20)
+
 X_new = clf.fit_transform(X, y)
 print(X_new.shape)
 
@@ -639,11 +741,11 @@ X_train_std = scaler.fit_transform(X_train)  # STD特徵縮放
 X_test_std = scaler.transform(X_test)  # STD特徵縮放
 
 # 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
-clf = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
+logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
 
-clf.fit(X_train_std, y_train)  # 學習訓練.fit
+logistic_regression.fit(X_train_std, y_train)  # 學習訓練.fit
 
-y_pred = clf.predict(X_test_std)  # 預測.predict
+y_pred = logistic_regression.predict(X_test_std)  # 預測.predict
 
 print(f"計算準確率 : {accuracy_score(y_test, y_pred)*100:.2f}%")
 
@@ -671,11 +773,11 @@ X_train_std = scaler.fit_transform(X_train)  # STD特徵縮放
 X_test_std = scaler.transform(X_test)  # STD特徵縮放
 
 # 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
-clf = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
+logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
 
-clf.fit(X_train_std, y_train)  # 學習訓練.fit
+logistic_regression.fit(X_train_std, y_train)  # 學習訓練.fit
 
-y_pred = clf.predict(X_test_std)  # 預測.predict
+y_pred = logistic_regression.predict(X_test_std)  # 預測.predict
 
 print(f"計算準確率 : {accuracy_score(y_test, y_pred)*100:.2f}%")
 
@@ -694,7 +796,9 @@ print(X.shape)
 # RFE 特徵選取
 
 svc = SVC(kernel="linear", C=1)
+
 clf = RFE(estimator=svc, n_features_to_select=2, step=1)
+
 X_new = clf.fit_transform(X, y)
 print(X_new.shape)
 
@@ -722,11 +826,11 @@ X_train_std = scaler.fit_transform(X_train)  # STD特徵縮放
 X_test_std = scaler.transform(X_test)  # STD特徵縮放
 
 # 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
-clf = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
+logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
 
-clf.fit(X_train_std, y_train)  # 學習訓練.fit
+logistic_regression.fit(X_train_std, y_train)  # 學習訓練.fit
 
-y_pred = clf.predict(X_test_std)  # 預測.predict
+y_pred = logistic_regression.predict(X_test_std)  # 預測.predict
 
 print(f"計算準確率 : {accuracy_score(y_test, y_pred)*100:.2f}%")
 
@@ -754,18 +858,16 @@ X_train_std = scaler.fit_transform(X_train)  # STD特徵縮放
 X_test_std = scaler.transform(X_test)  # STD特徵縮放
 
 # 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
-clf = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
+logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
 
-clf.fit(X_train_std, y_train)  # 學習訓練.fit
+logistic_regression.fit(X_train_std, y_train)  # 學習訓練.fit
 
-y_pred = clf.predict(X_test_std)  # 預測.predict
+y_pred = logistic_regression.predict(X_test_std)  # 預測.predict
 
 print(f"計算準確率 : {accuracy_score(y_test, y_pred)*100:.2f}%")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-from sklearn.datasets import make_blobs  # 集群資料集
 
 N = 500
 print("產生", N, "筆資料 2維 2群")
@@ -810,120 +912,20 @@ joblib.dump(count_vectorizer, 'count_vectorizer.pkl')
 X_train, X_test, Y_train, Y_test = train_test_split(
     count_train, train_label, test_size=0.2, random_state=7)
 
-classifier = LogisticRegression()
-classifier.fit(X_train, Y_train)
-pred = classifier.predict(X_test)
+# 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
+logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
+
+logistic_regression.fit(X_train, Y_train)
+
+pred = logistic_regression.predict(X_test)
 
 print(f"計算準確率 : {accuracy_score(Y_test, pred)*100:.2f}%")
 
-joblib.dump(classifier, 'classifier.pkl')
+joblib.dump(logistic_regression, 'logistic_regression.pkl')
 """
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 06_04_logistic_regression_with_nonlinear_data
-
-# 以二次迴歸預測世界人口數
-
-from sklearn.datasets import make_circles
-
-X, y = make_circles(n_samples=1_000, factor=0.3, noise=0.05, random_state=0)
-
-# 資料切割
-X_train, X_test, y_train, y_test = train_test_split(X, y, stratify=y, random_state=0)
-
-# 繪製訓練及測試資料
-_, (train_ax, test_ax) = plt.subplots(ncols=2, sharex=True, sharey=True, figsize=(8, 4))
-train_ax.scatter(X_train[:, 0], X_train[:, 1], c=y_train)
-train_ax.set_ylabel("Feature #1")
-train_ax.set_xlabel("Feature #0")
-train_ax.set_title("Training data")
-
-test_ax.scatter(X_test[:, 0], X_test[:, 1], c=y_test)
-test_ax.set_xlabel("Feature #0")
-_ = test_ax.set_title("Testing data")
-show()
-
-# 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
-logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
-
-logistic_regression = LogisticRegression()
-
-logistic_regression.fit(X_train, y_train)
-
-# cc = logistic_regression.coef_, lr.intercept_
-# print(cc)
-
-y_pred = logistic_regression.predict(X_test)
-print(f"計算準確率 : {accuracy_score(y_test, y_pred)*100:.2f}%")
-# 48.80%
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-data, label = make_blobs(n_samples=1000, n_features=2, centers=2, random_state=9487)
-
-d_sta = StandardScaler().fit_transform(data)  # 標準化
-
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
-dx_train, dx_test, label_train, label_test = train_test_split(
-    d_sta, label, test_size=0.2, random_state=9487
-)
-# 訓練組8成, 測試組2成
-
-# 建立分類模型
-lo_model = LogisticRegression()
-
-# 建立訓練數據模型
-lo_model.fit(dx_train, label_train)  # 學習訓練.fit
-
-# 對測試數據做預測
-pred = lo_model.predict(dx_test)
-
-# 輸出測試數據的 label
-print(label_test)
-
-# 輸出預測數據的 label
-print(pred)
-
-# 輸出準確性
-print(f"訓練資料的準確性 = {lo_model.score(dx_train, label_train)}")
-print(f"測試資料的準確性 = {lo_model.score(dx_test, label_test)}")
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-data, label = make_blobs(n_samples=200, n_features=2, centers=2, random_state=9487)
-
-d_sta = StandardScaler().fit_transform(data)  # 標準化
-
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
-dx_train, dx_test, label_train, label_test = train_test_split(
-    d_sta, label, test_size=0.2, random_state=9487
-)
-# 訓練組8成, 測試組2成
-
-# 建立分類模型
-lo_model = LogisticRegression()
-
-# 建立訓練數據模型
-lo_model.fit(dx_train, label_train)  # 學習訓練.fit
-
-# 對測試數據做預測
-pred = lo_model.predict(dx_test)
-
-# 輸出測試數據的 label
-print(label_test)
-
-# 輸出預測數據的 label
-print(pred)
-
-# 輸出準確性
-print(f"訓練資料的準確性 = {lo_model.score(dx_train, label_train)}")
-print(f"測試資料的準確性 = {lo_model.score(dx_test, label_test)}")
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -944,7 +946,3 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
-
-# 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
-logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機

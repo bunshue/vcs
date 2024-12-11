@@ -11,15 +11,13 @@ f(x)=y
 
 這種學函數的方法, 又可以分為:
 
-1. supervised learning
-2. unsupervised learning
-
 1. supervised learning 就是我們有一組知道答案的訓練資料, 然後找到我們要的函數。
 2. unsupervised learning 我們不知道答案, 卻要電腦自己去學!
 
 最基本的方式, 一個是 SVM, 一個是 K-Means。
-
 # Supervised Learning SVM
+
+SVM 支持向量机
 """
 
 print("------------------------------------------------------------")  # 60個
@@ -63,7 +61,7 @@ import sklearn.metrics as metrics
 
 
 def show():
-    plt.show()
+    # plt.show()
     pass
 
 
@@ -348,7 +346,6 @@ print("------------------------------------------------------------")  # 60個
 
 iris = datasets.load_iris()
 
-# Prepare data
 X = iris.data[:, :2]  # We only take the first two features
 y = iris.target
 
@@ -449,10 +446,7 @@ train_data, test_data, train_target, test_target = cross_validation.train_test_s
 
 
 # 使用svm，建立支持向量机模型
-
-from sklearn import svm
-
-svcModel = svm.SVC(kernel="rbf", gamma=0.5, C=0.5, probability=True).fit(
+svcModel = SVC(kernel="rbf", gamma=0.5, C=0.5, probability=True).fit(
     train_data, train_target
 )
 
@@ -467,7 +461,7 @@ scaler = preprocessing.StandardScaler().fit(train_data)
 train_scaled = scaler.transform(train_data)
 test_scaled = scaler.transform(test_data)
 
-svcModel1 = svm.SVC(kernel="rbf", gamma=0.5, C=0.5, probability=True).fit(
+svcModel1 = SVC(kernel="rbf", gamma=0.5, C=0.5, probability=True).fit(
     train_scaled, train_target
 )
 test_est1 = svcModel1.predict(test_scaled)
@@ -498,10 +492,10 @@ train_x = train_scaled[:, 1:3]
 train_y = train_target.values
 h = 1.0  # step size in the mesh
 C = 1.0  # SVM regularization parameter
-svc = svm.SVC(kernel="linear", C=C).fit(train_x, train_y)
-rbf_svc = svm.SVC(kernel="rbf", gamma=0.5, C=1).fit(train_x, train_y)
-poly_svc = svm.SVC(kernel="poly", degree=3, C=C).fit(train_x, train_y)
-lin_svc = svm.LinearSVC(C=C).fit(train_x, train_y)
+svc = SVC(kernel="linear", C=C).fit(train_x, train_y)
+rbf_svc = SVC(kernel="rbf", gamma=0.5, C=1).fit(train_x, train_y)
+poly_svc = SVC(kernel="poly", degree=3, C=C).fit(train_x, train_y)
+lin_svc = LinearSVC(C=C).fit(train_x, train_y)
 
 # create a mesh to plot in
 x_min, x_max = train_x[:, 0].min() - 1, train_x[:, 0].max() + 1
@@ -538,7 +532,7 @@ for i, clf in enumerate((svc, lin_svc, rbf_svc, poly_svc)):
     plt.yticks(())
     plt.title(titles[i])
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -561,8 +555,6 @@ y_predict = clf.predict(X_SVM)
 plt.scatter(X_SVM[:, 0], X_SVM[:, 1], c=y_predict)
 
 show()
-
-# 再去做預測
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -640,13 +632,208 @@ print(f"線性測試資料的準確性 = {svm_model.score(dx_test, label_test)}"
 print("=" * 50)
 
 # 非線性SVM 建立分類模型, 建立訓練數據模型, 對測試數據做預測
-svm = SVC()
-svm.fit(dx_train, label_train)
-pred = svm.predict(dx_test)
+clf = SVC()
+clf.fit(dx_train, label_train)
+pred = clf.predict(dx_test)
 
 # 輸出非線性SVM準確性
-print(f"非線性訓練資料的準確性 = {svm.score(dx_train, label_train)}")
-print(f"非線性測試資料的準確性 = {svm.score(dx_test, label_test)}")
+print(f"非線性訓練資料的準確性 = {clf.score(dx_train, label_train)}")
+print(f"非線性測試資料的準確性 = {clf.score(dx_test, label_test)}")
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+# SelectFromModel
+
+from sklearn.feature_selection import SelectFromModel
+
+X, y = datasets.load_iris(return_X_y=True)
+cc = X.shape
+print("X.shape")
+print(cc)
+
+# SelectFromModel特徵選取
+
+svc = SVC(kernel="linear", C=1)
+clf = SelectFromModel(estimator=svc, threshold="mean")
+X_new = clf.fit_transform(X, y)
+cc = X_new.shape
+print("X_new.shape")
+print(cc)
+
+print("特徵是否被選取")
+cc = clf.get_support()
+print(cc)
+
+# 3. 不須進行特徵工程
+
+# 4. 資料分割
+
+print("選擇2個特徵")
+X = X_new
+
+print("資料分割")
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+print("查看陣列維度")
+cc = X_train.shape, X_test.shape, y_train.shape, y_test.shape
+print(cc)
+# ((120, 2), (30, 2), (120,), (30,))
+
+print("特徵縮放")
+scaler = StandardScaler()
+X_train_std = scaler.fit_transform(X_train)
+X_test_std = scaler.transform(X_test)
+
+# 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
+logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
+
+clf = LogisticRegression()  # 邏輯迴歸函數學習機
+
+clf.fit(X_train_std, y_train)  # 學習訓練.fit
+
+# 7. 模型計分
+y_pred = clf.predict(X_test_std)  # 預測.predict
+print(y_pred)
+
+print("計算準確率")
+print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
+# 96.67%
+
+print("混淆矩陣")
+print(confusion_matrix(y_test, y_pred))
+
+from sklearn.metrics import ConfusionMatrixDisplay
+
+print("混淆矩陣圖")
+disp = ConfusionMatrixDisplay(confusion_matrix=confusion_matrix(y_test, y_pred))
+disp.plot()
+show()
+
+print("使用全部特徵")
+
+X, y = datasets.load_iris(return_X_y=True)
+
+# 資料分割
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+print("查看陣列維度")
+print(X_train.shape, X_test.shape, y_train.shape, y_test.shape)
+# (120, 4) (30, 4) (120,) (30,)
+
+# 特徵縮放
+scaler = StandardScaler()
+X_train_std = scaler.fit_transform(X_train)
+X_test_std = scaler.transform(X_test)
+
+# 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
+logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
+
+clf = LogisticRegression()
+
+clf.fit(X_train_std, y_train)  # 學習訓練.fit
+
+print("模型計分")
+y_pred = clf.predict(X_test_std)  # 預測.predict
+print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
+
+# 93.33%
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 順序特徵選取(Sequential Feature Selection)
+
+from sklearn.feature_selection import SequentialFeatureSelector
+
+X, y = datasets.load_iris(return_X_y=True)
+cc = X.shape
+print(cc)
+
+# SFS 特徵選取
+svc = SVC(kernel="linear", C=1)
+clf = SequentialFeatureSelector(estimator=svc, n_features_to_select=2)
+X_new = clf.fit_transform(X, y)
+cc = X_new.shape
+print(cc)
+
+# 特徵是否被選取
+cc = clf.get_support()
+print(cc)
+
+# 3. 不須進行特徵工程
+
+# 4. 資料分割
+
+# 選擇2個特徵
+X = X_new
+
+# 資料分割
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+# 查看陣列維度
+X_train.shape, X_test.shape, y_train.shape, y_test.shape
+
+# 特徵縮放
+
+scaler = StandardScaler()
+X_train_std = scaler.fit_transform(X_train)
+X_test_std = scaler.transform(X_test)
+
+# 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
+logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
+
+clf = LogisticRegression()
+
+clf.fit(X_train_std, y_train)  # 學習訓練.fit
+
+# 7. 模型計分
+y_pred = clf.predict(X_test_std)  # 預測.predict
+print(y_pred)
+
+# 計算準確率
+print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
+# 86.67%
+
+print("混淆矩陣")
+print(confusion_matrix(y_test, y_pred))
+
+from sklearn.metrics import ConfusionMatrixDisplay
+
+print("混淆矩陣圖")
+disp = ConfusionMatrixDisplay(confusion_matrix=confusion_matrix(y_test, y_pred))
+disp.plot()
+show()
+
+print("使用全部特徵")
+
+X, y = datasets.load_iris(return_X_y=True)
+
+# 資料分割
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+# 查看陣列維度
+print(X_train.shape, X_test.shape, y_train.shape, y_test.shape)
+
+# 特徵縮放
+scaler = StandardScaler()
+X_train_std = scaler.fit_transform(X_train)
+X_test_std = scaler.transform(X_test)
+
+# 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
+logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
+
+clf = LogisticRegression()
+
+clf.fit(X_train_std, y_train)  # 學習訓練.fit
+
+# 模型計分
+y_pred = clf.predict(X_test_std)  # 預測.predict
+print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
+
+# (120, 4) (30, 4) (120,) (30,)
+# 96.67%
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -685,7 +872,7 @@ def plot_hyperplane(clf, X, y, h=0.02, draw_sv=True, title="hyperplan"):
 
 
 X, y = make_blobs(n_samples=100, centers=2, random_state=9487, cluster_std=0.3)
-clf = sklearn.svm.SVC(C=1.0, kernel="linear")
+clf = SVC(C=1.0, kernel="linear")
 clf.fit(X, y)
 
 plt.figure(figsize=(12, 4))
@@ -696,10 +883,10 @@ show()
 print("------------------------------")  # 30個
 
 X, y = make_blobs(n_samples=100, centers=3, random_state=9487, cluster_std=0.8)
-clf_linear = sklearn.svm.SVC(C=1.0, kernel="linear")
-clf_poly = sklearn.svm.SVC(C=1.0, kernel="poly", degree=3)
-clf_rbf = sklearn.svm.SVC(C=1.0, kernel="rbf", gamma=0.5)
-clf_rbf2 = sklearn.svm.SVC(C=1.0, kernel="rbf", gamma=0.1)
+clf_linear = SVC(C=1.0, kernel="linear")
+clf_poly = SVC(C=1.0, kernel="poly", degree=3)
+clf_rbf = SVC(C=1.0, kernel="rbf", gamma=0.5)
+clf_rbf2 = SVC(C=1.0, kernel="rbf", gamma=0.1)
 
 plt.figure(figsize=(10, 10))
 
@@ -739,10 +926,6 @@ print(accuracy_score(y_pred, y_test))  # 評価
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-print("SVM")
-
-# 支持向量机 (SVM)
 
 dataset = pd.read_csv("data/Social_Network_Ads.csv")
 X = dataset.iloc[:, [2, 3]].values
@@ -859,15 +1042,12 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 11_01_self_training
-
 # 自我訓練(Self-training)測試
 
 from sklearn.semi_supervised import SelfTrainingClassifier
 
-# 載入資料集
-
 X, y = datasets.load_iris(return_X_y=True)
+
 X = X[:, :2]
 
 # 資料分割
@@ -949,31 +1129,27 @@ SelfTrainingClassifier(base_estimator=SVC(gamma='auto', probability=True))
 svc.fit(X[y >= 0], y[y >= 0])  # 學習訓練.fit
 cc = svc.score(X, y)
 print(cc)
-
 # 0.66
 
 X, y = datasets.load_iris(return_X_y=True)
 cc = self_training_model.score(X, y)
 print(cc)
-
 # 0.9733333333333334
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 繪製混淆矩陣
+iris = datasets.load_iris()
 
-from sklearn import svm
-
-# 載入資料
-ds = datasets.load_iris()
-X, y = ds.data, ds.target
+X = iris.data
+y = iris.target
 
 # 分割資料
 X_train, X_test, y_train, y_test = train_test_split(X, y)
 
 # 模型訓練
-clf = svm.SVC(kernel="linear", C=0.01)
+clf = SVC(kernel="linear", C=0.01)
 
 clf.fit(X_train, y_train)  # 學習訓練.fit
 
@@ -992,11 +1168,684 @@ for i, (title, normalize) in enumerate(titles_options):
         y_pred,
         ax=axes[i],
         cmap=plt.cm.Blues,
-        display_labels=ds.target_names,
+        display_labels=iris.target_names,
         normalize=normalize,
     )
     #     cm.plot(ax=axes[i])
     cm.ax_.set_title(title, fontsize=16)
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+# 07_01_svm_from_scratch
+# 自行開發支援向量機分類器，並進行鳶尾花(Iris)品種的辨識
+
+# SVM 演算法
+
+
+class SVM:
+    def __init__(self, learning_rate=1e-3, lambda_param=1e-2, n_iters=1000):
+        self.lr = learning_rate
+        self.lambda_param = lambda_param
+        self.n_iters = n_iters
+        self.w = None
+        self.b = None
+
+    # 初始化權重、偏差
+    def _init_weights_bias(self, X):
+        n_features = X.shape[1]
+        self.w = np.zeros(n_features)
+        self.b = 0
+
+    # 類別代碼：-1, 1
+    def _get_cls_map(self, y):
+        return np.where(y <= 0, -1, 1)
+
+    # 限制條件：y(wx + b) >= 1
+    def _satisfy_constraint(self, x, idx):
+        linear_model = np.dot(x, self.w) + self.b
+        return self.cls_map[idx] * linear_model >= 1
+
+    # 反向傳導
+    def _get_gradients(self, constrain, x, idx):
+        if constrain:
+            dw = self.lambda_param * self.w
+            db = 0
+            return dw, db
+
+        dw = self.lambda_param * self.w - np.dot(self.cls_map[idx], x)
+        db = -self.cls_map[idx]
+        return dw, db
+
+    # 更新權重、偏差
+    def _update_weights_bias(self, dw, db):
+        self.w -= self.lr * dw
+        self.b -= self.lr * db
+
+    # 訓練
+    def fit(self, X, y):
+        self._init_weights_bias(X)
+        self.cls_map = self._get_cls_map(y)
+
+        for _ in range(self.n_iters):
+            for idx, x in enumerate(X):
+                constrain = self._satisfy_constraint(x, idx)
+                dw, db = self._get_gradients(constrain, x, idx)
+                self._update_weights_bias(dw, db)
+
+    # 預測
+    def predict(self, X):
+        estimate = np.dot(X, self.w) + self.b
+        prediction = np.sign(estimate)
+        return np.where(prediction == -1, 0, 1)
+
+
+X, y = datasets.load_iris(return_X_y=True)
+
+# 資料分割
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+# 特徵縮放
+scaler = StandardScaler()
+X_train_std = scaler.fit_transform(X_train)
+X_test_std = scaler.transform(X_test)
+
+# 選擇演算法
+
+clf = SVM(learning_rate=1e-2, lambda_param=1e-3, n_iters=5000)
+
+# 模型訓練
+SVC
+clf.fit(X_train_std, y_train)
+
+# 模型評分
+
+# 計算準確率
+y_pred = clf.predict(X_test_std)
+print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
+# 73.33%
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 以Scikit-learn SVM進行鳶尾花(Iris)品種的辨識
+
+X, y = datasets.load_iris(return_X_y=True)
+
+# 資料分割
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+# 特徵縮放
+scaler = StandardScaler()
+X_train_std = scaler.fit_transform(X_train)
+X_test_std = scaler.transform(X_test)
+
+clf = SVC(probability=True)
+
+clf.fit(X_train_std, y_train)
+
+# 模型評分
+
+# 計算準確率
+y_pred = clf.predict(X_test_std)
+print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
+
+# 100.00%
+
+cc = clf.support_vectors_
+print(cc)
+
+cc = clf.support_
+print(cc)
+
+cc = clf.predict_proba(X_test)
+print(cc)
+
+cc = clf.predict_log_proba(X_test)
+print(cc)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+"""
+SVM優點：
+    切出來的線很漂亮，擁有最大margin的特性
+    可以很容易透過更換Kernel，做出非線性的線（非線性的決策邊界）
+SVM缺點：
+    效能較不佳，由於時間複雜度為O(n²)當有超過一萬筆資料時，運算速度會慢上許多
+"""
+
+iris = datasets.load_iris()
+
+x = pd.DataFrame(iris["data"], columns=iris["feature_names"])
+print("target_names: " + str(iris["target_names"]))
+y = pd.DataFrame(iris["target"], columns=["target"])
+iris_data = pd.concat([x, y], axis=1)
+iris_data = iris_data[["sepal length (cm)", "petal length (cm)", "target"]]
+iris_data = iris_data[iris_data["target"].isin([0, 1])]
+cc = iris_data.head(3)
+print(cc)
+
+# 將資料分為Train以及Test並將特徵標準化
+
+X_train, X_test, y_train, y_test = train_test_split(
+    iris_data[["sepal length (cm)", "petal length (cm)"]],
+    iris_data[["target"]],
+    test_size=0.2,
+    random_state=0,
+)
+
+sc = StandardScaler()
+sc.fit(X_train)
+X_train_std = sc.transform(X_train)
+X_test_std = sc.transform(X_test)
+
+# 載入SVM中的SVC，並將kernel設為線性（SVM的Kernel可以換成非線性），並將Probability設為True
+
+svm = SVC(kernel="linear", probability=True)
+
+svm.fit(X_train_std, y_train["target"].values)
+
+""" Out
+SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=True, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+
+SVC是SVM用C++語言實作的版本，背後是libsvm
+
+"""
+
+cc = svm.predict(X_test_std)
+print(cc)
+
+cc = y_test["target"].values
+print(cc)
+
+error = 0
+for i, v in enumerate(svm.predict(X_test_std)):
+    if v != y_test["target"].values[i]:
+        error += 1
+print(error)
+
+cc = svm.predict_proba(X_test_std)
+print(cc)
+
+from matplotlib.colors import ListedColormap
+
+
+def plot_decision_regions(X, y, classifier, test_idx=None, resolution=0.02):
+    # setup marker generator and color map
+    markers = ("s", "x", "o", "^", "v")
+    colors = ("red", "blue", "lightgreen", "gray", "cyan")
+    cmap = ListedColormap(colors[: len(np.unique(y))])
+
+    # plot the decision surface
+    x1_min, x1_max = X[:, 0].min() - 1, X[:, 0].max() + 1
+    x2_min, x2_max = X[:, 1].min() - 1, X[:, 1].max() + 1
+    xx1, xx2 = np.meshgrid(
+        np.arange(x1_min, x1_max, resolution), np.arange(x2_min, x2_max, resolution)
+    )
+    Z = classifier.predict(np.array([xx1.ravel(), xx2.ravel()]).T)
+    Z = Z.reshape(xx1.shape)
+    plt.contourf(xx1, xx2, Z, alpha=0.4, cmap=cmap)
+    plt.xlim(xx1.min(), xx1.max())
+    plt.ylim(xx2.min(), xx2.max())
+
+    for idx, cl in enumerate(np.unique(y)):
+        plt.scatter(
+            x=X[y == cl, 0],
+            y=X[y == cl, 1],
+            alpha=0.6,
+            c=cmap(idx),
+            edgecolor="black",
+            marker=markers[idx],
+            label=cl,
+        )
+
+    # highlight test samples
+    if test_idx:
+        # plot all samples
+        if not versiontuple(np.__version__) >= versiontuple("1.9.0"):
+            X_test, y_test = X[list(test_idx), :], y[list(test_idx)]
+            warnings.warn("Please update to NumPy 1.9.0 or newer")
+        else:
+            X_test, y_test = X[test_idx, :], y[test_idx]
+
+        plt.scatter(
+            X_test[:, 0],
+            X_test[:, 1],
+            c="",
+            alpha=1.0,
+            edgecolor="black",
+            linewidths=1,
+            marker="o",
+            s=55,
+            label="test set",
+        )
+
+
+plot_decision_regions(X_train_std, y_train["target"].values, classifier=svm)
+plt.xlabel("sepal length [standardized]")
+plt.ylabel("petal width [standardized]")
+plt.legend(loc="upper left")
+plt.tight_layout()
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 07_03_svm _sample_weight
+
+# 不平衡的資料集利用sample_weight矯正
+
+from sklearn import svm
+
+# 生成隨機資料
+
+np.random.seed(0)
+# 20筆資料，前10筆+1
+X = np.r_[np.random.randn(10, 2) + [1, 1], np.random.randn(10, 2)]
+# y 前10筆為1，後10筆為-1
+y = [1] * 10 + [-1] * 10
+print(X)
+print(y)
+
+# 指定不同權重
+
+# 初始權重為隨機亂數
+modified_weight = abs(np.random.randn(len(X)))
+
+# 後5筆權重乘以 5
+modified_weight[15:] *= 5
+# 第10筆權重乘以 15
+modified_weight[9] *= 15
+print(modified_weight)
+
+# 無加權的模型訓練
+
+clf_no_weights = svm.SVC(gamma=1)
+clf_no_weights.fit(X, y)
+
+"""
+SVC(gamma=1)
+"""
+
+# 加權的模型訓練
+
+clf_weights = svm.SVC(gamma=1)
+clf_weights.fit(X, y, sample_weight=modified_weight)
+
+"""
+SVC(gamma=1)
+"""
+
+# 決策邊界函數
+
+
+def plot_decision_function(classifier, sample_weight, axis, title):
+    # plot the decision function
+    xx, yy = np.meshgrid(np.linspace(-4, 5, 500), np.linspace(-4, 5, 500))
+
+    Z = classifier.decision_function(np.c_[xx.ravel(), yy.ravel()])
+    Z = Z.reshape(xx.shape)
+
+    # plot the line, the points, and the nearest vectors to the plane
+    axis.contourf(xx, yy, Z, alpha=0.75, cmap=plt.cm.bone)
+    axis.scatter(
+        X[:, 0],
+        X[:, 1],
+        c=y,
+        s=100 * sample_weight,
+        alpha=0.9,
+        cmap=plt.cm.bone,
+        edgecolors="black",
+    )
+
+    axis.axis("off")
+    axis.set_title(title)
+
+
+# 繪圖比較兩個模型
+
+# plt.rcParams['font.sans-serif'] = ['Arial Unicode MS']
+# plt.rcParams['axes.unicode_minus'] = False
+
+fig, axes = plt.subplots(1, 2, figsize=(14, 6))
+
+# 權重全部為 1
+constant_weight = np.ones(len(X))
+plot_decision_function(clf_no_weights, constant_weight, axes[0], "無加權的模型")
+
+# 權重全部為 1
+plot_decision_function(clf_weights, modified_weight, axes[1], "加權的模型")
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 07_04_svm_kernels
+
+# 非線性分割SVM測試
+
+from sklearn import svm
+
+# 生成隨機資料
+# 16筆資料，分兩類
+X = np.c_[
+    (0.4, -0.7),
+    (-1.5, -1),
+    (-1.4, -0.9),
+    (-1.3, -1.2),
+    (-1.1, -0.2),
+    (-1.2, -0.4),
+    (-0.5, 1.2),
+    (-1.5, 2.1),
+    (1, 1),
+    (1.3, 0.8),
+    (1.2, 0.5),
+    (0.2, -2),
+    (0.5, -2.4),
+    (0.2, -2.3),
+    (0, -2.7),
+    (1.3, 2.1),
+].T
+Y = [0] * 8 + [1] * 8
+
+print(X)
+print(Y)
+
+# 繪圖比較三種 kernels 模型
+
+plt.figure(figsize=(12, 4))
+plt.subplot(1, 3, 1)
+for fignum, kernel in enumerate(["linear", "poly", "rbf"]):
+    clf = svm.SVC(kernel=kernel, gamma=2)
+    clf.fit(X, Y)
+
+    plt.subplot(1, 3, fignum + 1)
+    plt.scatter(
+        clf.support_vectors_[:, 0],
+        clf.support_vectors_[:, 1],
+        s=80,
+        facecolors="none",
+        zorder=10,
+        edgecolors="r",
+    )
+    colors = np.array(["yellow", "lightgreen"])
+    plt.scatter(X[:, 0], X[:, 1], c=colors[Y], zorder=10, cmap=plt.cm.Paired)
+
+    x_min, x_max, y_min, y_max = -3, 3, -3, 3
+    XX, YY = np.mgrid[x_min:x_max:200j, y_min:y_max:200j]
+    Z = clf.decision_function(np.c_[XX.ravel(), YY.ravel()])
+    Z = Z.reshape(XX.shape)
+    plt.pcolormesh(XX, YY, Z > 0, cmap=plt.cm.Paired)
+    plt.contour(
+        XX,
+        YY,
+        Z,
+        colors=["k", "k", "k"],
+        linestyles=["--", "-", "--"],
+        levels=[-0.5, 0, 0.5],
+    )
+
+    plt.xlim(x_min, x_max)
+    plt.ylim(y_min, y_max)
+    plt.xticks(())
+    plt.yticks(())
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 07_06_svm_faces recognition
+
+# SVM人臉辨識
+
+from time import time
+from sklearn.datasets import fetch_lfw_people
+from sklearn.metrics import classification_report
+from sklearn.metrics import ConfusionMatrixDisplay
+from sklearn.decomposition import PCA
+
+lfw_people = fetch_lfw_people(min_faces_per_person=70, resize=0.4)
+n_samples, h, w = lfw_people.images.shape
+
+X = lfw_people.data
+n_features = X.shape[1]
+y = lfw_people.target
+target_names = lfw_people.target_names
+n_classes = target_names.shape[0]
+
+print("Total dataset size:")
+print(f"n_samples: {n_samples}")
+print(f"n_features: {n_features}")
+print(f"n_classes: {n_classes}")
+
+"""
+Total dataset size:
+n_samples: 1288
+n_features: 1850
+n_classes: 7
+"""
+
+# 資料分割
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+# 特徵縮放
+scaler = StandardScaler()
+X_train_std = scaler.fit_transform(X_train)
+X_test_std = scaler.transform(X_test)
+
+# 使用 PCA 萃取 150 個特徵
+n_components = 150
+
+t0 = time()
+pca = PCA(n_components=n_components, svd_solver="randomized", whiten=True).fit(X_train)
+
+X_train_pca = pca.transform(X_train)
+X_test_pca = pca.transform(X_test)
+print(f"轉換耗時: {(time() - t0):.3f}s")
+
+# 轉換耗時: 0.183s
+
+# 模型訓練
+
+from sklearn.svm import SVC
+
+clf = SVC(kernel="rbf", class_weight="balanced")
+clf.fit(X_train_pca, y_train)
+
+"""
+SVC(class_weight='balanced')
+"""
+
+# 模型評分
+
+# 計算準確率
+y_pred = clf.predict(X_test_pca)
+print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
+
+# 分類報告
+
+y_pred = clf.predict(X_test_pca)
+print(classification_report(y_test, y_pred, target_names=target_names))
+
+# 混淆矩陣圖
+
+ConfusionMatrixDisplay.from_estimator(
+    clf, X_test_pca, y_test, display_labels=target_names, xticks_rotation=30
+)
+show()
+
+# 結合圖像與預測結果驗證
+
+
+def plot_gallery(images, titles, h, w, n_row=3, n_col=4):
+    """Helper function to plot a gallery of portraits"""
+    plt.figure(figsize=(1.8 * n_col, 2.4 * n_row))
+    plt.subplots_adjust(bottom=0, left=0.01, right=0.99, top=0.90, hspace=0.35)
+    for i in range(n_row * n_col):
+        plt.subplot(n_row, n_col, i + 1)
+        plt.imshow(images[i].reshape((h, w)), cmap=plt.cm.gray)
+        plt.title(titles[i], size=12)
+        plt.xticks(())
+        plt.yticks(())
+
+
+def title(y_pred, y_test, target_names, i):
+    pred_name = target_names[y_pred[i]].rsplit(" ", 1)[-1]
+    true_name = target_names[y_test[i]].rsplit(" ", 1)[-1]
+    return f"predicted: {pred_name}\ntrue:         {true_name}"
+
+
+prediction_titles = [
+    title(y_pred, y_test, target_names, i) for i in range(y_pred.shape[0])
+]
+
+plot_gallery(X_test, prediction_titles, h, w, n_row=6, n_col=4)
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 07_06_svm_faces recognition_org
+
+# Faces recognition example using eigenfaces and SVMs
+
+# The dataset used in this example is a preprocessed excerpt of the "Labeled Faces in the Wild", aka LFW_:
+
+# http://vis-www.cs.umass.edu/lfw/lfw-funneled.tgz (233MB)
+
+from time import time
+from sklearn.model_selection import RandomizedSearchCV
+from sklearn.datasets import fetch_lfw_people
+from sklearn.metrics import classification_report
+from sklearn.metrics import ConfusionMatrixDisplay
+from sklearn.preprocessing import StandardScaler
+from sklearn.decomposition import PCA
+from sklearn.svm import SVC
+from scipy.stats import loguniform
+
+# Download the data, if not already on disk and load it as numpy arrays
+
+lfw_people = fetch_lfw_people(min_faces_per_person=70, resize=0.4)
+
+# introspect the images arrays to find the shapes (for plotting)
+n_samples, h, w = lfw_people.images.shape
+
+# for machine learning we use the 2 data directly (as relative pixel
+# positions info is ignored by this model)
+X = lfw_people.data
+n_features = X.shape[1]
+
+# the label to predict is the id of the person
+y = lfw_people.target
+target_names = lfw_people.target_names
+n_classes = target_names.shape[0]
+
+print("Total dataset size:")
+print("n_samples: %d" % n_samples)
+print("n_features: %d" % n_features)
+print("n_classes: %d" % n_classes)
+
+# Split into a training set and a test and keep 25% of the data for testing.
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
+
+scaler = StandardScaler()
+X_train = scaler.fit_transform(X_train)
+X_test = scaler.transform(X_test)
+
+# Compute a PCA (eigenfaces) on the face dataset (treated as unlabeled dataset): unsupervised feature extraction / dimensionality reduction
+n_components = 150
+
+print(
+    "Extracting the top %d eigenfaces from %d faces" % (n_components, X_train.shape[0])
+)
+t0 = time()
+pca = PCA(n_components=n_components, svd_solver="randomized", whiten=True).fit(X_train)
+print("done in %0.3fs" % (time() - t0))
+
+eigenfaces = pca.components_.reshape((n_components, h, w))
+
+print("Projecting the input data on the eigenfaces orthonormal basis")
+t0 = time()
+X_train_pca = pca.transform(X_train)
+X_test_pca = pca.transform(X_test)
+print("done in %0.3fs" % (time() - t0))
+
+# Train a SVM classification model
+
+print("Fitting the classifier to the training set")
+t0 = time()
+param_grid = {
+    "C": loguniform(1e3, 1e5),
+    "gamma": loguniform(1e-4, 1e-1),
+}
+clf = RandomizedSearchCV(
+    SVC(kernel="rbf", class_weight="balanced"), param_grid, n_iter=10
+)
+clf = clf.fit(X_train_pca, y_train)
+print("done in %0.3fs" % (time() - t0))
+print("Best estimator found by grid search:")
+print(clf.best_estimator_)
+
+# Quantitative evaluation of the model quality on the test set
+
+print("Predicting people's names on the test set")
+t0 = time()
+y_pred = clf.predict(X_test_pca)
+print("done in %0.3fs" % (time() - t0))
+
+print(classification_report(y_test, y_pred, target_names=target_names))
+ConfusionMatrixDisplay.from_estimator(
+    clf, X_test_pca, y_test, display_labels=target_names, xticks_rotation="vertical"
+)
+plt.tight_layout()
+show()
+
+# Predicting people's names on the test set
+
+# Qualitative evaluation of the predictions using matplotlib
+
+
+def plot_gallery(images, titles, h, w, n_row=3, n_col=4):
+    """Helper function to plot a gallery of portraits"""
+    plt.figure(figsize=(1.8 * n_col, 2.4 * n_row))
+    plt.subplots_adjust(bottom=0, left=0.01, right=0.99, top=0.90, hspace=0.35)
+    for i in range(n_row * n_col):
+        plt.subplot(n_row, n_col, i + 1)
+        plt.imshow(images[i].reshape((h, w)), cmap=plt.cm.gray)
+        plt.title(titles[i], size=12)
+        plt.xticks(())
+        plt.yticks(())
+
+
+# plot the result of the prediction on a portion of the test set
+
+
+def title(y_pred, y_test, target_names, i):
+    pred_name = target_names[y_pred[i]].rsplit(" ", 1)[-1]
+    true_name = target_names[y_test[i]].rsplit(" ", 1)[-1]
+    return "predicted: %s\ntrue:      %s" % (pred_name, true_name)
+
+
+prediction_titles = [
+    title(y_pred, y_test, target_names, i) for i in range(y_pred.shape[0])
+]
+
+plot_gallery(X_test, prediction_titles, h, w)
+
+# plot the gallery of the most significative eigenfaces
+
+eigenface_titles = ["eigenface %d" % i for i in range(eigenfaces.shape[0])]
+plot_gallery(eigenfaces, eigenface_titles, h, w)
 
 show()
 

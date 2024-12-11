@@ -3,7 +3,7 @@ WebCam 使用
 
 一般使用
 
-目前 webcam 僅 x64 電腦可用
+目前 webcam 僅 win10/x64 電腦可用
 """
 
 ESC = 27
@@ -12,16 +12,15 @@ import cv2
 import sys
 import time
 
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 print("最簡易, 按 ESC 離開")
 
 cap = cv2.VideoCapture(0)
-
 if not cap.isOpened():
     print("開啟攝影機失敗")
     sys.exit()
-else:
-    print("Video device opened")
 
 while True:
     ret, frame = cap.read()  # 從攝影機擷取一張影像
@@ -45,12 +44,9 @@ print("------------------------------------------------------------")  # 60個
 print("最簡易, 按 ESC 離開 + 裁出一塊, 另外顯示之")
 
 cap = cv2.VideoCapture(0)
-
 if not cap.isOpened():
     print("開啟攝影機失敗")
     sys.exit()
-else:
-    print("Video device opened")
 
 while True:
     ret, frame = cap.read()  # 從攝影機擷取一張影像
@@ -61,18 +57,18 @@ while True:
 
     cv2.imshow("WebCam", frame)
 
-    #裁出一塊, 另外顯示之
-    x_st=0
-    y_st=0
+    # 裁出一塊, 另外顯示之
+    x_st = 0
+    y_st = 0
     W = 320
     H = 240
     x1 = x_st
     x2 = x_st + W
     y1 = y_st
     y2 = y_st + H
-    #print(x1, x2, y1, y2)
+    # print(x1, x2, y1, y2)
     frame2 = frame[y1:y2, x1:x2]  # 取出一塊
-    cv2.imshow('WebCam_Cut', frame2)
+    cv2.imshow("WebCam_Cut", frame2)
 
     k = cv2.waitKey(1)
     if k == ESC:
@@ -87,40 +83,14 @@ print("------------------------------------------------------------")  # 60個
 print("按 ESC 離開")
 print("按 S 存圖")
 
-cv2.namedWindow("WebCam", cv2.WINDOW_NORMAL)
-
 cap = cv2.VideoCapture(0)  # 建立攝影機物件
-
-# 取得影像的尺寸大小
-w = cap.get(cv2.CAP_PROP_FRAME_WIDTH)
-h = cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
-print("Image Size: %d x %d" % (w, h))
-
 if not cap.isOpened():
     print("開啟攝影機失敗")
     sys.exit()
 else:
-    print("Video device opened")
     ret, frame = cap.read()  # 從攝影機擷取一張影像
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     frame_blur_pre = cv2.GaussianBlur(gray, (13, 13), 15)  # 高斯模糊
-
-"""
-# 解析 Fourcc 格式資料的函數
-def decode_fourcc(v):
-  v = int(v)
-  return "".join([chr((v >> 8 * i) & 0xFF) for i in range(4)])
-
-# 取得 Codec 名稱
-fourcc = cap.get(cv2.CAP_PROP_FOURCC)
-codec = decode_fourcc(fourcc)
-print("Codec: " + codec)
-"""
-
-# 無效
-# 設定影像的尺寸大小
-# cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
-# cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 360)
 
 """
 #調整影像大小
@@ -188,14 +158,18 @@ print("------------------------------------------------------------")  # 60個
 print("更改視訊的解析度")
 
 cap = cv2.VideoCapture(0)
+if not cap.isOpened():
+    print("開啟攝影機失敗")
+    sys.exit()
 
 # Webcam有支援的模式 以下的設定才會有用
+# 設定影像的尺寸大小
 cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
 cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
 cap.set(cv2.CAP_PROP_FPS, 30)
 
-while cap.isOpened():
-    ret, frame = cap.read()
+while True:
+    ret, frame = cap.read()  # 從攝影機擷取一張影像
     cv2.imshow("WebCam", frame)
     k = cv2.waitKey(1)
     if k == ESC:
@@ -206,44 +180,6 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-print("移動偵測")
-
-cap = cv2.VideoCapture(0)
-
-img_pre = None  # 前影像, 預設是空的
-while cap.isOpened():
-    success, img = cap.read()
-    if success:
-        gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # 灰階處理
-        img_now = cv2.GaussianBlur(gray, (13, 13), 5)  # 高斯模糊
-        if img_pre is not None:  # ←如果前影像不是空的, 就和前影像比對
-            diff = cv2.absdiff(img_now, img_pre)  # 此影格與前影格的差異值
-            ret, thresh = cv2.threshold(diff, 25, 255, cv2.THRESH_BINARY)  # 門檻值
-            contours, _ = cv2.findContours(
-                thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE  # 找到輪廓
-            )
-            if contours:  # 如果有偵測到輪廓
-                # print(type(contours))
-                print(contours)
-                cv2.drawContours(img, contours, -1, (0, 0, 255), 2)
-                print("偵測到移動")
-            else:
-                print("靜止畫面", end=" ")
-                pass
-
-        cv2.imshow("WebCam", img)
-        img_pre = img_now.copy()
-    k = cv2.waitKey(1)
-    if k == ESC:
-        break
-
-cap.release()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -257,6 +193,22 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
+sys.exit()
 
 
 print("------------------------------------------------------------")  # 60個
+
+
+# 取得影像的尺寸大小
+w = cap.get(cv2.CAP_PROP_FRAME_WIDTH)
+h = cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
+print("Image Size: %d x %d" % (w, h))
+
+
+"""
+WINDOW_NORMAL – Allows to manually change window size
+WINDOW_AUTOSIZE(Default) – Automatically sets the window size
+WINDOW_FULLSCREEN – Changes the window size to fullscreen
+"""
+cv2.namedWindow("WebCam", cv2.WINDOW_AUTOSIZE)
+cv2.namedWindow("WebCam", cv2.WINDOW_NORMAL)

@@ -51,20 +51,39 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
-video_filename = 'C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4'
+video_filename = "C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4"
 
 cap = cv2.VideoCapture(video_filename)
 
-width = cap.get(cv2.CAP_PROP_FRAME_WIDTH)
-height = cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
-print("影格尺寸:", width, "x", height)
+W = cap.get(cv2.CAP_PROP_FRAME_WIDTH)
+H = cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
+print("影格尺寸:", W, "x", H)
 
+# 取得Codec編碼
 fourcc = int(cap.get(cv2.CAP_PROP_FOURCC))
-codec = (chr(fourcc&0xFF)+chr((fourcc>>8)&0xFF)+
-        chr((fourcc>>16)&0xFF)+chr((fourcc>>24)&0xFF))
+codec = (
+    chr(fourcc & 0xFF)
+    + chr((fourcc >> 8) & 0xFF)
+    + chr((fourcc >> 16) & 0xFF)
+    + chr((fourcc >> 24) & 0xFF)
+)
 print("Codec編碼:", codec)
 
+
+# 解析 Fourcc 格式資料的函數
+def decode_fourcc(v):
+    v = int(v)
+    return "".join([chr((v >> 8 * i) & 0xFF) for i in range(4)])
+
+
+# 取得 Codec 名稱
+fourcc = cap.get(cv2.CAP_PROP_FOURCC)
+codec = decode_fourcc(fourcc)
+print("Codec: " + codec)
+
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 
 def show_video_info(video_filename):
     video = cv2.VideoCapture(video_filename)
@@ -293,7 +312,7 @@ print('顯示影片中的某一幀圖片')
 image = get_image_by_pos(vid, 20, False, False)
 cv2.imshow('Picture Viewer', image) #顯示圖片
 """
-
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
@@ -318,25 +337,12 @@ video_info = get_video_info(vid)
 print(video_info)
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 print("影片資訊")
 video_filename = "C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4"
 
 cap = cv2.VideoCapture(video_filename)
-
-width = cap.get(cv2.CAP_PROP_FRAME_WIDTH)
-height = cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
-print("影格尺寸:", width, "x", height)
-
-# 取得Codec編碼
-fourcc = int(cap.get(cv2.CAP_PROP_FOURCC))
-codec = (
-    chr(fourcc & 0xFF)
-    + chr((fourcc >> 8) & 0xFF)
-    + chr((fourcc >> 16) & 0xFF)
-    + chr((fourcc >> 24) & 0xFF)
-)
-print("Codec編碼:", codec)
 
 fps = cap.get(cv2.CAP_PROP_FPS)
 print("FPS =", fps)
@@ -351,6 +357,7 @@ while True:
 print("總影格數 = ", frame_count)
 cap.release()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("取得影片參數")
@@ -384,17 +391,16 @@ vid = cv2.VideoCapture(video_filename)
 for i in range(19):
     print(vid.get(i), "\t", VideoCapture_parameters[i])
 
-
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
 
-
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")

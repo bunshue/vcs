@@ -37,6 +37,63 @@ from matplotlib.colors import ListedColormap
 
 from sklearn import tree
 
+
+def show():
+    return
+    plt.show()
+    pass
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+N = 500
+GROUPS = 3
+X, y = make_blobs(n_samples=N, centers=GROUPS, n_features=2)
+
+from sklearn.model_selection import cross_val_score  # Cross Validation
+
+clf = DecisionTreeClassifier()  # 決策樹函數學習機
+
+scores = cross_val_score(clf, X, y, cv=5)
+print("看一下五次的成績 :", scores)
+print("平均 :", scores.mean())
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+data, label = datasets.load_iris(return_X_y=True)
+
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+dx_train, dx_test, label_train, label_test = train_test_split(
+    data, label, test_size=0.2, random_state=9487
+)
+# 訓練組8成, 測試組2成
+
+clf = DecisionTreeClassifier()  # 決策樹函數學習機
+
+clf.fit(dx_train, label_train)  # 學習訓練.fit
+
+# 對測試數據做預測
+pred = clf.predict(dx_test)
+
+# 輸出準確性
+print(f"訓練資料的準確性 = {clf.score(dx_train, label_train)}")
+print(f"測試資料的準確性 = {clf.score(dx_test, label_test)}")
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+X = np.array([[180, 85], [174, 80], [170, 75], [167, 45], [158, 52], [155, 44]])
+Y = np.array(["man", "man", "man", "woman", "woman", "woman"])
+
+clf = DecisionTreeClassifier()  # 決策樹函數學習機
+
+clf = clf.fit(X, Y)  # 學習訓練.fit
+
+tree.export_graphviz(clf, out_file="tmp_tree222.dot")
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -57,19 +114,7 @@ plt.ylabel("體重")
 plt.xlabel("身高")
 plt.legend()
 
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-X = np.array([[180, 85], [174, 80], [170, 75], [167, 45], [158, 52], [155, 44]])
-Y = np.array(["man", "man", "man", "woman", "woman", "woman"])
-
-clf = DecisionTreeClassifier()  # 決策樹函數學習機
-
-clf = clf.fit(X, Y)  # 學習訓練.fit
-
-tree.export_graphviz(clf, out_file="tmp_tree222.dot")
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -121,9 +166,6 @@ def plot_decision_regions(X, y, classifier, test_idx=None, resolution=0.02):
         )
 
 
-print("------------------------------------------------------------")  # 60個
-
-
 def do_decision_tree():
     iris = datasets.load_iris()
     x_train, x_test, y_train, y_test = train_test_split(
@@ -144,7 +186,7 @@ def do_decision_tree():
     plt.xlabel("petal length [cm]")
     plt.ylabel("petal width [cm]")
     plt.legend(loc="upper left")
-    plt.show()
+    show()
 
 
 print("決策樹")
@@ -152,45 +194,6 @@ do_decision_tree()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-N = 500
-GROUPS = 3
-X, y = make_blobs(n_samples=N, centers=GROUPS, n_features=2)
-
-from sklearn.model_selection import cross_val_score  # Cross Validation
-
-clf = DecisionTreeClassifier()  # 決策樹函數學習機
-
-scores = cross_val_score(clf, X, y, cv=5)
-print("看一下五次的成績 :", scores)
-print("平均 :", scores.mean())
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-data, label = datasets.load_iris(return_X_y=True)
-
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
-dx_train, dx_test, label_train, label_test = train_test_split(
-    data, label, test_size=0.2, random_state=9487
-)
-# 訓練組8成, 測試組2成
-
-clf = DecisionTreeClassifier()  # 決策樹函數學習機
-
-clf.fit(dx_train, label_train)  # 學習訓練.fit
-
-# 對測試數據做預測
-pred = clf.predict(dx_test)
-
-# 輸出準確性
-print(f"訓練資料的準確性 = {clf.score(dx_train, label_train)}")
-print(f"測試資料的準確性 = {clf.score(dx_test, label_test)}")
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

@@ -1,4 +1,4 @@
-import cPickle as pkl
+import pickle
 import time
 
 import numpy
@@ -160,7 +160,7 @@ class LstmLayer:
 def train_model(batch_size=100, n_h=50, n_epochs=40):
 
     # Load the datasets with Fuel
-    dictionary = pkl.load(open(DICT_FILE, 'r'))
+    dictionary = pickle.load(open(DICT_FILE, 'r'))
     dictionary['~'] = len(dictionary)
     reverse_mapping = dict((j, i) for i, j in dictionary.items())
 

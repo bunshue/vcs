@@ -6,6 +6,7 @@ import math
 
 print("------------------------------------------------------------")  # 60個
 
+
 def image_process(roi):
     """
     print(type(roi))
@@ -27,7 +28,8 @@ def image_process(roi):
             roi[j][i][2] = 255  # R
     return roi
 
-print('擷取畫面的某一塊 做灰階處理 再貼回主畫面')
+
+print("擷取畫面的某一塊 做灰階處理 再貼回主畫面")
 
 x_st, y_st = 0, 0
 w, h = 100, 100
@@ -35,6 +37,9 @@ RECT = ((x_st, y_st), (x_st + w, y_st + h))
 (left, top), (right, bottom) = RECT
 
 cap = cv2.VideoCapture(0)
+if not cap.isOpened():
+    print("開啟攝影機失敗")
+    sys.exit()
 
 while True:
     ret, frame = cap.read()
@@ -43,15 +48,13 @@ while True:
     # 取出子畫面
     roi1 = frame[top:bottom, left:right]
 
-    
     # roi2 = cv2.cvtColor(roi1, cv2.COLOR_BGR2HSV) #做影像處理1
     roi2 = image_process(roi1)  # 做影像處理2
 
-    
     # 貼回原畫面
     frame[top:bottom, left:right] = roi2
 
-    #標示出來    
+    # 標示出來
     cv2.rectangle(frame, RECT[0], RECT[1], (0, 255, 0), 2)
 
     cv2.imshow("frame", frame)

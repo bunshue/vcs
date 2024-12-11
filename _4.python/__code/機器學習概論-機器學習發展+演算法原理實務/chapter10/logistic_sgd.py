@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """
 本教程介绍了使用Theano和随机梯度下降logistic回归。Logistic回归是一个概率的，线性分类器。
 它是一个参数化的权重矩阵:"W"和一个偏移向量'b'。
@@ -10,7 +8,7 @@
 """
 __docformat__ = 'restructedtext en'
 
-import cPickle
+import pickle
 import gzip
 import os
 import sys
@@ -75,10 +73,10 @@ class LogisticRegression(object):
         else:
             raise NotImplementedError()
     def save_net(self, path):  
-        import cPickle  
+        import pickle  
         write_file = open(path, 'wb')   
-        cPickle.dump(self.W.get_value(borrow=True), write_file, -1)  
-        cPickle.dump(self.b.get_value(borrow=True), write_file, -1)  
+        pickle.dump(self.W.get_value(borrow=True), write_file, -1)  
+        pickle.dump(self.b.get_value(borrow=True), write_file, -1)  
         write_file.close()
 
 ##############
@@ -105,7 +103,7 @@ def load_data(dataset):
 
     # 加载数据集主方法
     f = gzip.open(dataset, 'rb')
-    train_set, valid_set, test_set = cPickle.load(f)
+    train_set, valid_set, test_set = pickle.load(f)
     f.close()
     
     # 函数闭包：训练集, 验证集, 测试集格式: tuple(input, target)

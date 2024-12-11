@@ -54,6 +54,70 @@ print("平均 :", scores.mean())
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+
+X = np.array([[180, 85], [174, 80], [170, 75], [167, 45], [158, 52], [155, 44]])
+Y = np.array(["man", "man", "man", "woman", "woman", "woman"])
+
+RForest = RandomForestClassifier(n_estimators=100, max_depth=10, random_state=2)
+RForest.fit(X, Y)
+print(RForest.predict([[180, 85]]))
+
+X, Y = make_classification(
+    n_samples=10,
+    n_features=3,
+    n_informative=2,
+    n_redundant=0,
+    random_state=0,
+    shuffle=True,
+)
+
+model = RandomForestClassifier(n_estimators=100, max_depth=10, random_state=2)
+model.fit(X, Y)
+print(model.feature_importances_)
+print(model.predict([[0, 0, 0]]))
+estimator = model.estimators_[5]
+
+from sklearn.tree import export_graphviz
+
+export_graphviz(
+    estimator,
+    out_file="tmp_tree.dot",
+    feature_names=["A", "B", "C"],
+    class_names=["0", "1"],
+    rounded=True,
+    proportion=False,
+    precision=2,
+    filled=True,
+)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+data, label = datasets.load_iris(return_X_y=True)
+
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+dx_train, dx_test, label_train, label_test = train_test_split(
+    data, label, test_size=0.2, random_state=9487
+)
+# 訓練組8成, 測試組2成
+
+# 建立分類模型
+forest_model = RandomForestClassifier()
+
+# 建立訓練數據模型
+forest_model.fit(dx_train, label_train)
+
+# 對測試數據做預測
+pred = forest_model.predict(dx_test)
+
+# 輸出準確性
+print(f"訓練資料的準確性 = {forest_model.score(dx_train, label_train)}")
+print(f"測試資料的準確性 = {forest_model.score(dx_test, label_test)}")
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
 """
 機器學習_隨機森林_空氣盒子
 """
@@ -490,69 +554,6 @@ export_graphviz(
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-X = np.array([[180, 85], [174, 80], [170, 75], [167, 45], [158, 52], [155, 44]])
-Y = np.array(["man", "man", "man", "woman", "woman", "woman"])
-
-RForest = RandomForestClassifier(n_estimators=100, max_depth=10, random_state=2)
-RForest.fit(X, Y)
-print(RForest.predict([[180, 85]]))
-
-X, Y = make_classification(
-    n_samples=10,
-    n_features=3,
-    n_informative=2,
-    n_redundant=0,
-    random_state=0,
-    shuffle=True,
-)
-
-model = RandomForestClassifier(n_estimators=100, max_depth=10, random_state=2)
-model.fit(X, Y)
-print(model.feature_importances_)
-print(model.predict([[0, 0, 0]]))
-estimator = model.estimators_[5]
-
-from sklearn.tree import export_graphviz
-
-export_graphviz(
-    estimator,
-    out_file="tmp_tree.dot",
-    feature_names=["A", "B", "C"],
-    class_names=["0", "1"],
-    rounded=True,
-    proportion=False,
-    precision=2,
-    filled=True,
-)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-data, label = datasets.load_iris(return_X_y=True)
-
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
-dx_train, dx_test, label_train, label_test = train_test_split(
-    data, label, test_size=0.2, random_state=9487
-)
-# 訓練組8成, 測試組2成
-
-# 建立分類模型
-forest_model = RandomForestClassifier()
-
-# 建立訓練數據模型
-forest_model.fit(dx_train, label_train)
-
-# 對測試數據做預測
-pred = forest_model.predict(dx_test)
-
-# 輸出準確性
-print(f"訓練資料的準確性 = {forest_model.score(dx_train, label_train)}")
-print(f"測試資料的準確性 = {forest_model.score(dx_test, label_test)}")
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")

@@ -45,10 +45,14 @@ B_MIN = B_CENTER - DD
 B_MAX = B_CENTER + DD
 
 #                B下限 G下限 R下限
-lower = np.array([B_MIN, G_MIN, R_MIN])  # 轉換成 NumPy 陣列，範圍稍微變小 ( 55->30, 70->40, 252->200 )
+lower = np.array(
+    [B_MIN, G_MIN, R_MIN]
+)  # 轉換成 NumPy 陣列，範圍稍微變小 ( 55->30, 70->40, 252->200 )
 
 #                B上限 G上限 R上限
-upper = np.array([B_MAX, G_MAX, R_MAX])  # 轉換成 NumPy 陣列，範圍稍微加大 ( 70->90, 80->100, 252->255 )
+upper = np.array(
+    [B_MAX, G_MAX, R_MAX]
+)  # 轉換成 NumPy 陣列，範圍稍微加大 ( 70->90, 80->100, 252->255 )
 
 print("------------------------------------------------------------")  # 60個
 
@@ -114,7 +118,7 @@ else:
 while True:
     ret, img = cap.read()
 
-    mask = cv2.inRange(img, lower, upper)# 使用 inRange 設定影像顏色範圍
+    mask = cv2.inRange(img, lower, upper)  # 使用 inRange 設定影像顏色範圍
     kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (11, 11))  # 設定膨脹與侵蝕的參數
     output = cv2.dilate(mask, kernel)  # 膨脹影像，消除雜訊
     output = cv2.erode(output, kernel)  # 縮小影像，還原大小
@@ -155,8 +159,8 @@ else:
 
 while True:
     ret, img = cap.read()
-    
-    mask = cv2.inRange(img, lower, upper)# 使用 inRange 設定影像顏色範圍
+
+    mask = cv2.inRange(img, lower, upper)  # 使用 inRange 設定影像顏色範圍
     kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (11, 11))  # 設定膨脹與侵蝕的參數
     output = cv2.dilate(mask, kernel)  # 膨脹影像，消除雜訊
     output = cv2.erode(output, kernel)  # 縮小影像，還原大小
@@ -212,8 +216,8 @@ else:
 
 while True:
     ret, img = cap.read()
-    
-    output = cv2.inRange(img, lower, upper)# 使用 inRange 設定影像顏色範圍
+
+    output = cv2.inRange(img, lower, upper)  # 使用 inRange 設定影像顏色範圍
     kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (11, 11))
     output = cv2.dilate(output, kernel)
     output = cv2.erode(output, kernel)
@@ -257,9 +261,9 @@ else:
 
 while True:
     ret, img = cap.read()
-    #img = cv2.resize(img, (640//2, 480//2))
-    
-    output = cv2.inRange(img, lower, upper)# 使用 inRange 設定影像顏色範圍
+    # img = cv2.resize(img, (640//2, 480//2))
+
+    output = cv2.inRange(img, lower, upper)  # 使用 inRange 設定影像顏色範圍
     kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (11, 11))
     output = cv2.dilate(output, kernel)
     output = cv2.erode(output, kernel)
@@ -278,7 +282,7 @@ while True:
             img = cv2.rectangle(img, (x, y), (x + w, y + h), red, 3)
 
     # 設定選取藍色的程式
-    blue_output = cv2.inRange(img, blue_lower, blue_upper)# 使用 inRange 設定影像顏色範圍
+    blue_output = cv2.inRange(img, blue_lower, blue_upper)  # 使用 inRange 設定影像顏色範圍
     kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (11, 11))
     blue_output = cv2.dilate(blue_output, kernel)
     blue_output = cv2.erode(blue_output, kernel)
@@ -306,6 +310,6 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-#img = cv2.resize(img, (640//2, 480//2))  # 縮小尺寸，加快處理速度
-#img = cv2.resize(img, (640//2, 480//2))
-#img = cv2.resize(img, (640//2, 480//2))
+# img = cv2.resize(img, (640//2, 480//2))  # 縮小尺寸，加快處理速度
+# img = cv2.resize(img, (640//2, 480//2))
+# img = cv2.resize(img, (640//2, 480//2))

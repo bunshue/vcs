@@ -1,15 +1,26 @@
 import cv2
 import numpy as np 
- 
-cap = cv2.VideoCapture("video.avi")
-# 检查相机是否打开成功
-if (cap.isOpened()== False): 
-  print("打开视频流或文件时出错")
+
+ESC = 27
+SPACE = 32
+
+video_filename = "C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4"
+
+print("------------------------------------------------------------")  # 60個
+
+#cap = cv2.VideoCapture(video_filename)  # 開啟影片
+cap = cv2.VideoCapture("video.avi")  # 開啟影片
+
+if not cap.isOpened():
+  print("開啟影片失敗")
+  sys.exit()
+
 frameNum = 0 
+
 #阅读直到视频完成
-while(cap.isOpened()):
+while True:
   # 获取一帧
-  ret, frame = cap.read()
+  ret, frame = cap.read()  # 從影片擷取一張影像
   frameNum += 1
   if ret == True:   
     tempframe = frame    
@@ -25,7 +36,7 @@ while(cap.isOpened()):
  
         print(222) 
         # 显示结果帧
-        cv2.imshow('原图',frame) 
+        cv2.imshow('Original',frame) 
         cv2.imshow('Frame',currentframe) 
         cv2.imshow('median',median) 
  
@@ -36,7 +47,14 @@ while(cap.isOpened()):
   # 跳出循环
   else: 
     break 
-# 完成所有操作后，释放video capture对象
+
 cap.release() 
-# 关闭所有帧
 cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+

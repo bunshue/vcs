@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """This tutorial introduces the LeNet5 neural network architecture
 using Theano.  LeNet5 is a convolutional neural network, good for
 classifying images. This tutorial shows how to build the architecture,
@@ -88,9 +86,9 @@ class LeNetConvPoolLayer(object):
         
     # 存储执行参数
     def save_net(self, path):  
-        import cPickle  
+        import pickle
         write_file = open(path, 'wb')   
-        cPickle.dump(self.params, write_file, -1)
+        pickle.dump(self.params, write_file, -1)
         write_file.close()    
 
 # 实现LeNet5 ：LeNet5有两个卷积层，第一个卷积层有20个卷积核，第二个卷积层有50个卷积核

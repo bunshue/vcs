@@ -475,6 +475,336 @@ print(linear_regression.score(X, y))  # R^2 coefficient of determination
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+# decision_tree_regression_boston
+
+# 房價預測
+
+# 載入 Boston 房價資料集
+
+with open("./data/housing.data", encoding="utf8") as f:
+    data = f.readlines()
+all_fields = []
+for line in data:
+    line2 = line[1:].replace("   ", " ").replace("  ", " ")
+    fields = []
+    for item in line2.split(" "):
+        fields.append(float(item.strip()))
+        if len(fields) == 14:
+            all_fields.append(fields)
+df = pd.DataFrame(all_fields)
+df.columns = "CRIM,ZN,INDUS,CHAS,NOX,RM,AGE,DIS,RAD,TAX,PTRATIO,B,LSTAT,MEDV".split(",")
+cc = df.head()
+print(cc)
+
+# 2. 資料清理、資料探索與分析
+
+# 是否有含遺失值(Missing value)
+cc = df.isnull().sum()
+print(cc)
+
+# 繪圖
+
+# 直方圖
+X, y = df.drop("MEDV", axis=1).values, df.MEDV.values
+sns.histplot(x=y)
+show()
+
+# 3. 不須進行特徵工程
+
+# 4. 資料分割
+
+# 資料分割
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+# 查看陣列維度
+cc = X_train.shape, X_test.shape, y_train.shape, y_test.shape
+print(cc)
+
+# 特徵縮放
+
+scaler = StandardScaler()
+X_train_std = scaler.fit_transform(X_train)
+X_test_std = scaler.transform(X_test)
+
+# 5. 選擇演算法
+
+from sklearn.tree import DecisionTreeRegressor
+
+model = DecisionTreeRegressor()
+
+# 6. 模型訓練
+
+model.fit(X_train_std, y_train)
+
+# DecisionTreeRegressor()
+
+# 7. 模型評分
+
+# R2、MSE、MAE
+y_pred = model.predict(X_test_std)
+print(f"R2 = {r2_score(y_test, y_pred)*100:.2f}")
+print(f"MSE = {mean_squared_error(y_test, y_pred)}")
+print(f"MAE = {mean_absolute_error(y_test, y_pred)}")
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 05_02_ linear_regression_boston
+
+# 房價預測
+
+# 載入 Boston 房價資料集
+with open("./data/housing.data", encoding="utf8") as f:
+    data = f.readlines()
+all_fields = []
+for line in data:
+    line2 = line[1:].replace("   ", " ").replace("  ", " ")
+    fields = []
+    for item in line2.split(" "):
+        fields.append(float(item.strip()))
+        if len(fields) == 14:
+            all_fields.append(fields)
+df = pd.DataFrame(all_fields)
+df.columns = "CRIM,ZN,INDUS,CHAS,NOX,RM,AGE,DIS,RAD,TAX,PTRATIO,B,LSTAT,MEDV".split(",")
+cc = df.head()
+print(cc)
+
+# 2. 資料清理、資料探索與分析
+
+# 觀察資料集彙總資訊
+
+df.info()  # 這樣就已經把資料集彙總資訊印出來
+
+# 描述統計量
+cc = df.describe()
+print(cc)
+
+# 是否有含遺失值(Missing value)
+cc = df.isnull().sum()
+print(cc)
+
+# 直方圖
+X, y = df.drop("MEDV", axis=1).values, df.MEDV.values
+sns.histplot(x=y)
+show()
+
+# 3. 不須進行特徵工程
+
+# 4. 資料分割
+
+# 資料分割
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+# 查看陣列維度
+cc = X_train.shape, X_test.shape, y_train.shape, y_test.shape
+print(cc)
+
+# 特徵縮放
+
+scaler = StandardScaler()
+X_train_std = scaler.fit_transform(X_train)
+X_test_std = scaler.transform(X_test)
+
+linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
+
+linear_regression.fit(X_train_std, y_train)  # 學習訓練.fit
+
+# 7. 模型評分
+
+# R2、MSE、MAE
+y_pred = linear_regression.predict(X_test_std)  # 預測.predict
+print(f"R2 = {r2_score(y_test, y_pred)*100:.2f}")
+print(f"MSE = {mean_squared_error(y_test, y_pred)}")
+print(f"MAE = {mean_absolute_error(y_test, y_pred)}")
+
+print("權重")
+print(linear_regression.coef_)
+
+print("偏差(Bias)")
+print(linear_regression.intercept_)
+
+# 8. 模型評估，暫不進行
+
+# 9. 模型佈署
+
+# 模型存檔
+joblib.dump(linear_regression, "tmp_linear_regression_model.joblib")
+joblib.dump(scaler, "tmp_linear_regression_scaler.joblib")
+
+# 10.模型預測
+# 載入模型與標準化轉換模型
+linear_regression2 = joblib.load("tmp_linear_regression_model.joblib")
+scaler = joblib.load("tmp_linear_regression_scaler.joblib")
+
+list1 = [0 for _ in range(13)]
+
+list1[0] = 1.7  # 犯罪率
+list1[1] = 11.0  # 大坪數房屋比例
+list1[2] = 11.0  # 非零售業的營業面積比例
+list1[3] = 0  # 是否靠近河岸, 0: "否", 1: "是"
+list1[4] = 0.5  # 一氧化氮濃度
+list1[5] = 6.0  # 平均房間數
+list1[6] = 0.0  # 屋齡(1940年前建造比例)
+list1[7] = 3.8  # 與商業區距離
+list1[8] = 10.0  # 與高速公路距離
+list1[9] = 408.0  # 地價稅
+list1[10] = 18.0  # 師生比例
+list1[11] = 356.0  # 黑人比例(Bk — 0.63)²
+list1[12] = 12.0  # 低下階級的比例
+
+X_new = [list1]
+X_new = scaler.transform(X_new)
+
+print(f"### 預測房價：{linear_regression2.predict(X_new)[0]:.2f}")  # 預測.predict
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# svr_kernels
+
+# 房價預測
+
+# 載入 Boston 房價資料集
+
+with open("./data/housing.data", encoding="utf8") as f:
+    data = f.readlines()
+all_fields = []
+for line in data:
+    line2 = line[1:].replace("   ", " ").replace("  ", " ")
+    fields = []
+    for item in line2.split(" "):
+        fields.append(float(item.strip()))
+        if len(fields) == 14:
+            all_fields.append(fields)
+df = pd.DataFrame(all_fields)
+df.columns = "CRIM,ZN,INDUS,CHAS,NOX,RM,AGE,DIS,RAD,TAX,PTRATIO,B,LSTAT,MEDV".split(",")
+cc = df.head()
+print(cc)
+
+# 2. 資料清理、資料探索與分析
+
+# 觀察資料集彙總資訊
+
+df.info()  # 這樣就已經把資料集彙總資訊印出來
+
+# 描述統計量
+cc = df.describe()
+print(cc)
+
+# 是否有含遺失值(Missing value)
+cc = df.isnull().sum()
+print(cc)
+
+# 繪圖
+
+# 直方圖
+X, y = df.drop("MEDV", axis=1).values, df.MEDV.values
+sns.histplot(x=y)
+show()
+
+# 3. 不須進行特徵工程
+
+# 4. 資料分割
+
+# 資料分割
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+# 查看陣列維度
+cc = X_train.shape, X_test.shape, y_train.shape, y_test.shape
+print(cc)
+
+# 特徵縮放
+
+scaler = StandardScaler()
+X_train_std = scaler.fit_transform(X_train)
+X_test_std = scaler.transform(X_test)
+
+# 5. 選擇演算法
+
+from sklearn.svm import SVR
+
+model = SVR(kernel="linear")
+
+# 6. 模型訓練
+
+model.fit(X_train_std, y_train)
+
+"""
+SVR(kernel='linear')
+"""
+
+# 7. 模型評分
+
+# R2、MSE、MAE
+y_pred = model.predict(X_test_std)
+print(f"R2 = {r2_score(y_test, y_pred)*100:.2f}")
+print(f"MSE = {mean_squared_error(y_test, y_pred)}")
+print(f"MAE = {mean_absolute_error(y_test, y_pred)}")
+
+"""
+R2 = 69.56
+MSE = 19.12608965301932
+MAE = 3.198509245210469
+"""
+
+# 取得偏差項及權重
+cc = model.intercept_, model.coef_
+print(cc)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("以Scikit-Learn的房價資料集為例，求解線性迴歸")
+
+# 載入 Boston 房價資料集
+with open("./data/housing.data", encoding="utf8") as f:
+    data = f.readlines()
+all_fields = []
+for line in data:
+    line2 = line[1:].replace("   ", " ").replace("  ", " ")
+    fields = []
+    for item in line2.split(" "):
+        fields.append(float(item.strip()))
+        if len(fields) == 14:
+            all_fields.append(fields)
+df = pd.DataFrame(all_fields)
+df.columns = "CRIM,ZN,INDUS,CHAS,NOX,RM,AGE,DIS,RAD,TAX,PTRATIO,B,LSTAT,MEDV".split(",")
+cc = df.head()
+print(cc)
+
+print("使用矩陣計算")
+
+X, y = df.drop("MEDV", axis=1).values, df.MEDV.values
+
+# b = b * 1
+one = np.ones((X.shape[0], 1))
+
+# 將 x 與 one 合併
+X2 = np.concatenate((X, one), axis=1)
+
+# 求解
+w = np.linalg.inv(X2.T @ X2) @ X2.T @ y
+print(w)
+
+print("使用sklearn的 線性迴歸 LinearRegression()")
+
+linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
+
+linear_regression.fit(X, y)  # 學習訓練.fit
+
+print(linear_regression.coef_, linear_regression.intercept_)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")

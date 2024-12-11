@@ -1,9 +1,5 @@
-#!/usr/bin/env python
 import sys
-if sys.version_info[0] >= 3:
-    import PySimpleGUIQt as sg
-else:
-    import PySimpleGUI27 as sg
+import PySimpleGUIQt as sg
 import cv2
 import numpy as np
 from sys import exit as exit

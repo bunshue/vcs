@@ -27,7 +27,7 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 print("------------------------------------------------------------")  # 60個
 
 import sklearn
-from sklearn.datasets import load_digits
+from sklearn import datasets
 from sklearn.metrics import classification_report
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import accuracy_score
@@ -40,14 +40,14 @@ print("------------------------------------------------------------")  # 60個
 
 
 def show():
-    plt.show()
+    # plt.show()
     pass
 
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-digits = load_digits()
+digits = datasets.load_digits()
 
 print("shape of raw image data: {0}".format(digits.images.shape))
 print("shape of data: {0}".format(digits.data.shape))
@@ -64,7 +64,7 @@ print("------------------------------------------------------------")  # 60個
 """
 from sklearn.manifold import TSNE
 
-digits = load_digits()
+digits = datasets.load_digits()
 print(type(digits))
 print(len(digits))
 
@@ -80,7 +80,7 @@ print("------------------------------------------------------------")  # 60個
 
 from sklearn.ensemble import RandomForestClassifier
 
-digits = load_digits()
+digits = datasets.load_digits()
 
 N = len(digits.images)
 data = digits.images.reshape((N, -1))
@@ -119,7 +119,7 @@ plt.cmap = mpl.colors.ListedColormap(colors)
 # plt.rcParams['savefig.dpi'] = 300
 # plt.rcParams['figure.dpi'] = 300
 
-digits = load_digits(n_class=10)
+digits = datasets.load_digits(n_class=10)
 
 X = digits.data
 y = digits.target
@@ -139,7 +139,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-digits = load_digits()
+digits = datasets.load_digits()
 
 # 把数据所代表的图片显示出来
 images_and_labels = list(zip(digits.images, digits.target))
@@ -213,7 +213,7 @@ print("------------------------------------------------------------")  # 60個
 
 from sklearn.neural_network import MLPClassifier
 
-digits = load_digits()
+digits = datasets.load_digits()
 
 X = digits.images.reshape(len(digits.images), -1)
 y = digits.target
@@ -237,7 +237,7 @@ from sklearn import svm
 # 识别手写体数字
 svc = svm.SVC(gamma=0.001, C=100.0)
 
-digits = load_digits()
+digits = datasets.load_digits()
 
 
 def plts():
@@ -343,7 +343,7 @@ print("------------------------------------------------------------")  # 60個
 
 from sklearn.svm import SVC
 
-digits = load_digits()
+digits = datasets.load_digits()
 
 X = digits.data
 y = digits.target
@@ -373,7 +373,7 @@ print("------------------------------------------------------------")  # 60個
 from sklearn.model_selection import learning_curve
 from sklearn.svm import SVC
 
-digits = load_digits()
+digits = datasets.load_digits()
 
 X = digits.data
 y = digits.target
@@ -416,7 +416,7 @@ print("------------------------------------------------------------")  # 60個
 from sklearn.ensemble import AdaBoostClassifier
 from sklearn.tree import DecisionTreeClassifier
 
-digits = load_digits()
+digits = datasets.load_digits()
 
 X = digits["data"]
 y = digits["target"]
@@ -466,7 +466,7 @@ print("------------------------------------------------------------")  # 60個
 from scipy import stats
 from sklearn.semi_supervised import LabelSpreading
 
-digits = load_digits()
+digits = datasets.load_digits()
 
 rng = np.random.RandomState(0)
 indices = np.arange(len(digits.data))
@@ -567,7 +567,7 @@ Please note, this code is only for python 3+. If you are using python 2+, please
 import tensorflow as tf
 from sklearn.preprocessing import LabelBinarizer
 
-digits = load_digits()
+digits = datasets.load_digits()
 
 X = digits.data
 y = digits.target
@@ -654,7 +654,7 @@ print("------------------------------------------------------------")  # 60個
 
 # 生成手寫阿拉伯數字
 
-digits = load_digits()
+digits = datasets.load_digits()
 
 # 顯示前 100 筆手寫阿拉伯數字
 

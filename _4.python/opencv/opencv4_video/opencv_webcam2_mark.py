@@ -7,16 +7,15 @@ WebCam 使用
 """
 
 import cv2
-
 import sys
-import numpy as np
+import time
 import math
+import numpy as np
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("按 ESC 離開")
-
-import time
 
 cap = cv2.VideoCapture(0)
 
@@ -34,8 +33,9 @@ else:
 
 # 解析 Fourcc 格式資料的函數
 def decode_fourcc(v):
-  v = int(v)
-  return "".join([chr((v >> 8 * i) & 0xFF) for i in range(4)])
+    v = int(v)
+    return "".join([chr((v >> 8 * i) & 0xFF) for i in range(4)])
+
 
 # 取得 Codec 名稱
 fourcc = cap.get(cv2.CAP_PROP_FOURCC)

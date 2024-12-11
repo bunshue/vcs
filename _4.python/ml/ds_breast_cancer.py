@@ -1,5 +1,4 @@
 """
-
 #乳癌診斷預測
 
 breast_cancer
@@ -31,8 +30,6 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 print("------------------------------------------------------------")  # 60個
 
 from sklearn import datasets
-from sklearn.datasets import load_breast_cancer
-
 from sklearn.svm import SVC
 from sklearn.preprocessing import StandardScaler  # 特徵縮放
 from sklearn import metrics
@@ -55,7 +52,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("基本數據")
 
-breast_cancer = load_breast_cancer()
+breast_cancer = datasets.load_breast_cancer()
 
 print("feature_names")
 print(breast_cancer.feature_names)
@@ -78,7 +75,7 @@ print(f"計算準確率 : {accuracy_score(y, y_pred)*100:.2f}%")
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-breast_cancer = load_breast_cancer()
+breast_cancer = datasets.load_breast_cancer()
 
 X = breast_cancer.data
 y = 1 - breast_cancer.target
@@ -94,7 +91,7 @@ y_pred = logistic_regression.predict(X)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-breast_cancer = load_breast_cancer()
+breast_cancer = datasets.load_breast_cancer()
 
 X = breast_cancer.data
 y = breast_cancer.target
@@ -229,7 +226,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-breast_cancer = load_breast_cancer()
+breast_cancer = datasets.load_breast_cancer()
 
 X = breast_cancer.data
 y = breast_cancer.target
@@ -394,7 +391,8 @@ np.set_printoptions(precision=2)
 
 # Support Vector Machines (SVM)
 
-X, y = load_breast_cancer(return_X_y=True)
+X, y = datasets.load_breast_cancer(return_X_y=True)
+
 X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.5, stratify=y, random_state=42
 )
@@ -497,7 +495,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("学習データと検証データに分割")
 
-breast_cancer = load_breast_cancer()
+breast_cancer = datasets.load_breast_cancer()
 
 X = breast_cancer.data
 y = breast_cancer.target
@@ -544,7 +542,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("Hyperparameter 超參數 ハイパーパラメータの探索")
 
-breast_cancer = load_breast_cancer()
+breast_cancer = datasets.load_breast_cancer()
 
 X = breast_cancer.data
 y = 1 - breast_cancer.target  # ラベルの0と1を反転
@@ -574,7 +572,7 @@ from sklearn.neighbors import KNeighborsClassifier
 
 # 取得特徵與標籤資料
 
-dx, dy = load_breast_cancer(return_X_y=True)
+dx, dy = datasets.load_breast_cancer(return_X_y=True)
 
 dx_train, dx_test, dy_train, dy_test = train_test_split(
     dx, dy, test_size=0.2, random_state=0
@@ -608,7 +606,8 @@ print("------------------------------------------------------------")  # 60個
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.model_selection import GridSearchCV
 
-dx, dy = load_breast_cancer(return_X_y=True)
+dx, dy = datasets.load_breast_cancer(return_X_y=True)
+
 dx_train, dx_test, dy_train, dy_test = train_test_split(
     dx, dy, test_size=0.2, random_state=0
 )
@@ -628,7 +627,8 @@ print("------------------------------------------------------------")  # 60個
 
 from sklearn.linear_model import LogisticRegression
 
-dx, dy = load_breast_cancer(return_X_y=True)
+dx, dy = datasets.load_breast_cancer(return_X_y=True)
+
 dx_std = StandardScaler().fit_transform(dx)  # 資料標準化
 dx_train, dx_test, dy_train, dy_test = train_test_split(
     dx_std, dy, test_size=0.2, random_state=0
@@ -665,8 +665,10 @@ print("------------------------------------------------------------")  # 60個
 
 from sklearn.svm import LinearSVC
 
-dx, dy = load_breast_cancer(return_X_y=True)
+dx, dy = datasets.load_breast_cancer(return_X_y=True)
+
 dx_std = StandardScaler().fit_transform(dx)
+
 dx_train, dx_test, dy_train, dy_test = train_test_split(
     dx_std, dy, test_size=0.2, random_state=0
 )
@@ -699,8 +701,10 @@ print("------------------------------------------------------------")  # 60個
 from sklearn.model_selection import GridSearchCV
 from sklearn.model_selection import RandomizedSearchCV
 
-dx, dy = load_breast_cancer(return_X_y=True)
+dx, dy = datasets.load_breast_cancer(return_X_y=True)
+
 dx_std = StandardScaler().fit_transform(dx)
+
 dx_train, dx_test, dy_train, dy_test = train_test_split(
     dx_std, dy, test_size=0.2, random_state=0
 )
@@ -723,7 +727,7 @@ print("------------------------------------------------------------")  # 60個
 
 from sklearn.model_selection import RandomizedSearchCV
 
-dx, dy = load_breast_cancer(return_X_y=True)
+dx, dy = datasets.load_breast_cancer(return_X_y=True)
 
 dx_std = StandardScaler().fit_transform(dx)
 
@@ -751,7 +755,7 @@ print("------------------------------------------------------------")  # 60個
 
 from sklearn.tree import DecisionTreeClassifier
 
-dx, dy = load_breast_cancer(return_X_y=True)
+dx, dy = datasets.load_breast_cancer(return_X_y=True)
 
 dx_std = StandardScaler().fit_transform(dx)
 
@@ -787,9 +791,9 @@ print("------------------------------------------------------------")  # 60個
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.tree import export_text
 
-dx, dy = load_breast_cancer(return_X_y=True)
+dx, dy = datasets.load_breast_cancer(return_X_y=True)
 
-feature_names = list(load_breast_cancer().feature_names)
+feature_names = list(datasets.load_breast_cancer().feature_names)
 
 dx_std = StandardScaler().fit_transform(dx)
 
@@ -808,7 +812,7 @@ print("------------------------------------------------------------")  # 60個
 
 from sklearn.ensemble import RandomForestClassifier
 
-dx, dy = load_breast_cancer(return_X_y=True)
+dx, dy = datasets.load_breast_cancer(return_X_y=True)
 
 dx_std = StandardScaler().fit_transform(dx)
 
@@ -866,7 +870,7 @@ def draw_curve(params, train_score, test_score):
 
 from sklearn.model_selection import learning_curve
 
-breast_cancer = load_breast_cancer()
+breast_cancer = datasets.load_breast_cancer()
 
 X = breast_cancer.data
 y = breast_cancer.target
@@ -899,16 +903,14 @@ print("------------------------------------------------------------")  # 60個
 
 print("K近鄰算法")
 
-from sklearn import neighbors
-
-breast_cancer = load_breast_cancer()
+breast_cancer = datasets.load_breast_cancer()
 
 X = breast_cancer.data  # 自變量
 y = breast_cancer.target  # 因變量
 
 x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.1, random_state=0)
 
-clf = neighbors.KNeighborsClassifier(5)  # 設鄰居數爲5個
+clf = KNeighborsClassifier(5)  # 設鄰居數爲5個
 
 clf.fit(x_train, y_train)  # 訓練模型
 
@@ -956,8 +958,6 @@ scaler = MinMaxScaler()
 cc = scaler.fit_transform(data)
 print(cc)
 
-# 驗證
-
 # 計算最大值、最小值
 max1 = np.max(data, axis=0)
 min1 = np.min(data, axis=0)
@@ -969,8 +969,8 @@ print(cc)
 
 # 載入資料集
 
-# X, y = load_iris(return_X_y=True)
-X, y = load_breast_cancer(return_X_y=True)
+# X, y = datasets.load_iris(return_X_y=True)
+X, y = datasets.load_breast_cancer(return_X_y=True)
 
 # 3. 不須進行特徵工程
 
@@ -991,13 +991,10 @@ scaler = MinMaxScaler()
 X_train_std = scaler.fit_transform(X_train)
 X_test_std = scaler.transform(X_test)
 
-# 5. 選擇演算法
-
 from sklearn.linear_model import LogisticRegression
 
 clf = LogisticRegression()
 
-# 6. 模型訓練
 clf.fit(X_train_std, y_train)
 """
 LogisticRegression()
@@ -1005,7 +1002,6 @@ In a Jupyter environment, please rerun this cell to show the HTML representation
 On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.
 """
 
-# 7. 模型計分
 y_pred = clf.predict(X_test_std)
 print(y_pred)
 
@@ -1057,8 +1053,8 @@ print(cc)
 
 # 載入資料集
 
-# X, y = load_iris(return_X_y=True)
-X, y = load_breast_cancer(return_X_y=True)
+# X, y = datasets.load_iris(return_X_y=True)
+X, y = datasets.load_breast_cancer(return_X_y=True)
 
 # 3. 不須進行特徵工程
 
@@ -1145,8 +1141,8 @@ print(cc)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# X, y = load_iris(return_X_y=True)
-X, y = load_breast_cancer(return_X_y=True)
+# X, y = datasets.load_iris(return_X_y=True)
+X, y = datasets.load_breast_cancer(return_X_y=True)
 
 # 3. 不須進行特徵工程
 
@@ -1209,8 +1205,8 @@ print(f"計算準確率 : {accuracy_score(y_test, y_pred)*100:.2f}%")
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# X, y = load_iris(return_X_y=True)
-X, y = load_breast_cancer(return_X_y=True)
+# X, y = datasets.load_iris(return_X_y=True)
+X, y = datasets.load_breast_cancer(return_X_y=True)
 
 # 3. 不須進行特徵工程
 
@@ -1276,7 +1272,7 @@ print("------------------------------------------------------------")  # 60個
 
 # 實作乳癌診斷，並繪製ROC曲線
 
-breast_cancer = load_breast_cancer()
+breast_cancer = datasets.load_breast_cancer()
 
 # 資料分割
 X_train, X_test, y_train, y_test = train_test_split(
@@ -1335,7 +1331,7 @@ print("------------------------------------------------------------")  # 60個
 # majority_voting
 # 多數決演算法(VotingClassifier)測試
 
-X, y = load_breast_cancer(return_X_y=True)
+X, y = datasets.load_breast_cancer(return_X_y=True)
 
 # 資料分割
 
@@ -1436,10 +1432,8 @@ print("------------------------------------------------------------")  # 60個
 
 # Bagging演算法測試
 
-# 載入資料集
-X, y = load_breast_cancer(return_X_y=True)
+X, y = datasets.load_breast_cancer(return_X_y=True)
 
-# 資料分割
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 # 特徵縮放
@@ -1597,7 +1591,7 @@ print("------------------------------------------------------------")  # 60個
 
 # 自行開發Adaboost
 
-X, y = load_breast_cancer(return_X_y=True)
+X, y = datasets.load_breast_cancer(return_X_y=True)
 
 y[y == 0] = -1
 # X, y = datasets.make_hastie_10_2()
@@ -1677,7 +1671,7 @@ print("------------------------------------------------------------")  # 60個
 
 from xgboost import XGBClassifier
 
-X, y = load_breast_cancer(return_X_y=True)
+X, y = datasets.load_breast_cancer(return_X_y=True)
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
@@ -1695,7 +1689,7 @@ print("------------------------------------------------------------")  # 60個
 
 # 堆疊(Stacking)測試
 
-X, y = load_breast_cancer(return_X_y=True)
+X, y = datasets.load_breast_cancer(return_X_y=True)
 
 # 資料分割
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
@@ -1742,7 +1736,7 @@ print("------------------------------------------------------------")  # 60個
 
 from sklearn.pipeline import make_pipeline
 
-X, y = load_breast_cancer(return_X_y=True, as_frame=True)
+X, y = datasets.load_breast_cancer(return_X_y=True, as_frame=True)
 
 # 資料分割
 

@@ -20,7 +20,7 @@ ESC = 27
 SPACE = 32
 
 print("------------------------------------------------------------")  # 60個
-
+"""
 print("OpenCV VideoCapture 04 兩個camera")
 print("按 ESC 離開")
 
@@ -38,15 +38,15 @@ cap1 = cv2.VideoCapture(0)
 cap2 = cv2.VideoCapture(1)
 
 if not cap1.isOpened():
-    print("Cannot open camera1")
+    print("開啟攝影機1失敗")
     exit()
 if not cap2.isOpened():
-    print("Cannot open camera2")
+    print("開啟攝影機2失敗")
     exit()
 
 while True:
-    ret1, img1 = cap1.read()
-    ret2, img2 = cap2.read()
+    ret1, img1 = cap1.read()  # 從攝影機擷取一張影像
+    ret2, img2 = cap2.read()  # 從攝影機擷取一張影像
     img1 = cv2.resize(img1, (w, h))  # 縮小尺寸 小圖
     # img2 = cv2.resize(img2,(W, H))  # 縮小尺寸 大圖
 
@@ -65,7 +65,7 @@ while True:
 cap1.release()
 cap2.release()
 cv2.destroyAllWindows()
-
+"""
 print("------------------------------------------------------------")  # 60個
 
 print("OpenCV VideoCapture 05 N X N")
@@ -74,18 +74,18 @@ print("按 ESC 離開")
 N = 2  # 設定要分成幾格, N X N
 W = 640 * 2
 H = 480 * 2
-cap = cv2.VideoCapture(0)  # 讀取攝影鏡頭
+cap = cv2.VideoCapture(0)
 output = np.zeros((H, W, 3), dtype="uint8")  # 產生 WxH 的黑色背景
 
 if not cap.isOpened():
-    print("Cannot open camera")
+    print("開啟攝影機失敗")
     exit()
 
 w = W // N  # 計算分格之後的影像寬度
 h = H // N  # 計算分格之後的影像高度
 img_list = []  # 設定空串列，記錄每一格的影像
 while True:
-    ret, img = cap.read()  # 讀取影像
+    ret, img = cap.read()  # 從攝影機擷取一張影像
     img = cv2.resize(img, (w, h))  # 縮小尺寸
     """ 2X2的寫法
     output[0:h, 0:w] = img             # 將 output 的特定區域置換為 img, 左上
@@ -95,7 +95,6 @@ while True:
 
     #左右相反
     img = cv2.flip(img, 1)
-
     """
     img_list.append(img)  # 每次擷取影像時，將影像存入串列
     if len(img_list) > N * N:
@@ -139,10 +138,11 @@ def convex(src_img, raw, effect):
 cap = cv2.VideoCapture(0)
 
 if not cap.isOpened():
-    print("Cannot open camera")
+    print("開啟攝影機失敗")
     exit()
+
 while True:
-    ret, img = cap.read()  # 讀取影片的每一幀
+    ret, img = cap.read()  # 從攝影機擷取一張影像
     if not ret:
         print("Cannot receive frame")  # 如果讀取錯誤，印出訊息
         break
@@ -203,10 +203,11 @@ cap = cv2.VideoCapture(0)
 a = 0  # 白色圖片透明度
 
 if not cap.isOpened():
-    print("Cannot open camera")
+    print("開啟攝影機失敗")
     exit()
+
 while True:
-    ret, img = cap.read()  # 讀取影片的每一幀
+    ret, img = cap.read()  # 從攝影機擷取一張影像
     if not ret:
         print("Cannot receive frame")  # 如果讀取錯誤，印出訊息
         break
@@ -265,10 +266,11 @@ def putText(source, x, y, text, scale=2.5, color=(255, 255, 255)):
 a = 0
 
 if not cap.isOpened():
-    print("Cannot open camera")
+    print("開啟攝影機失敗")
     exit()
+
 while True:
-    ret, img = cap.read()
+    ret, img = cap.read()  # 從攝影機擷取一張影像
     if not ret:
         print("Cannot receive frame")
         break
@@ -332,11 +334,13 @@ logo = cv2.bitwise_and(img, img, mask=mask1)
 ret, mask2 = cv2.threshold(img_gray, 200, 255, cv2.THRESH_BINARY)
 
 cap = cv2.VideoCapture(0)
+
 if not cap.isOpened():
-    print("Cannot open camera")
+    print("開啟攝影機失敗")
     exit()
+
 while True:
-    ret, frame = cap.read()
+    ret, frame = cap.read()  # 從攝影機擷取一張影像
     if not ret:
         print("Cannot receive frame")
         break
@@ -370,11 +374,11 @@ ret, mask1 = cv2.threshold(img_gray, 200, 255, cv2.THRESH_BINARY_INV)
 cap = cv2.VideoCapture(0)
 
 if not cap.isOpened():
-    print("Cannot open camera")
+    print("開啟攝影機失敗")
     exit()
 
 while True:
-    ret, frame = cap.read()
+    ret, frame = cap.read()  # 從攝影機擷取一張影像
     if not ret:
         print("Cannot receive frame")
         break
@@ -400,12 +404,14 @@ from PIL import Image, ImageSequence
 
 output = []  # 建立輸出的空串列
 
-cap = cv2.VideoCapture(0)  # 從攝影鏡頭取得影像
+cap = cv2.VideoCapture(0)
+
 if not cap.isOpened():
-    print("Cannot open camera")
+    print("開啟攝影機失敗")
     exit()
+
 while True:
-    ret, img = cap.read()
+    ret, img = cap.read()  # 從攝影機擷取一張影像
     if not ret:
         print("Cannot receive frame")
         break
@@ -460,12 +466,12 @@ cap = cv2.VideoCapture(video_filename)  # 開啟影片
 source = []  # 建立 source 空串列，記錄影格內容
 frame = 0  # frame 從 0 開始
 
-print("loading...")
 if not cap.isOpened():
-    print("Cannot open camera")
+    print("開啟影片失敗")
     exit()
+
 while True:
-    ret, img = cap.read()
+    ret, img = cap.read()  # 從影片擷取一張影像
     if not ret:
         print("Cannot receive frame")
         break
@@ -551,7 +557,7 @@ def boxSize(arr):
 qrcode = cv2.QRCodeDetector()  # QRCode 偵測器
 
 while True:
-    ret, frame = cap.read()
+    ret, frame = cap.read()  # 從攝影機擷取一張影像
     if not ret:
         print("Cannot receive frame")
         break
@@ -582,7 +588,7 @@ print("按 ESC 離開")
 
 from PIL import ImageFont, ImageDraw, Image
 
-cap = cv2.VideoCapture(0)  # 讀取攝影鏡頭
+cap = cv2.VideoCapture(0)
 
 
 # 定義加入文字函式
@@ -612,7 +618,7 @@ def mosaic(image, level):
 qrcode = cv2.QRCodeDetector()  # QRCode 偵測器
 
 while True:
-    ret, frame = cap.read()  # 讀取攝影鏡頭影像
+    ret, frame = cap.read()  # 從攝影機擷取一張影像
     if not ret:
         print("Cannot receive frame")
         break
@@ -706,7 +712,7 @@ print("------------------------------------------------------------")  # 60個
 cap = cv2.VideoCapture(0)
 
 while True:
-    ret, frame = cap.read()
+    ret, frame = cap.read()  # 從攝影機擷取一張影像
     width = int(cap.get(3))
     height = int(cap.get(4))
 
@@ -730,7 +736,7 @@ print("------------------------------------------------------------")  # 60個
 cap = cv2.VideoCapture(0)
 
 while True:
-    ret, frame = cap.read()
+    ret, frame = cap.read()  # 從攝影機擷取一張影像
     width = int(cap.get(3))
     height = int(cap.get(4))
 
@@ -763,12 +769,10 @@ cap = cv2.VideoCapture(0)
 if not cap.isOpened():
     print("開啟攝影機失敗")
     sys.exit()
-else:
-    print("Video device opened")
 
 while True:
-    ret, frame = cap.read()
-    #frame = cv2.resize(frame, (640//2, 480//2))  # 縮小尺寸，加快速度
+    ret, frame = cap.read()  # 從攝影機擷取一張影像
+    # frame = cv2.resize(frame, (640//2, 480//2))  # 縮小尺寸，加快速度
 
     k = cv2.waitKey(1)
     if k == ESC:
@@ -778,7 +782,7 @@ while True:
     if k == ord("a"):
         # 選取區域
         area = cv2.selectROI("ImageShow", frame, showCrosshair=False, fromCenter=False)
-        print('選取區域 :', area)
+        print("選取區域 :", area)
         tracker.init(frame, area)  # 初始化追蹤器
         tracking = True  # 設定可以開始追蹤
     if tracking:
@@ -806,17 +810,16 @@ for i in range(3):
 colors = [(0, 0, 255), (0, 255, 255), (255, 255, 0)]  # 設定三個外框顏色
 tracking = False  # 設定 False 表示尚未開始追蹤
 
-cap = cv2.VideoCapture(video_filename)  # 讀取某個影片
+cap = cv2.VideoCapture(video_filename)  # 開啟影片
+
 if not cap.isOpened():
     print("開啟影片失敗")
     sys.exit()
-else:
-    print("Video file opened")
 
 a = 0  # 刪減影片影格使用
 
 while True:
-    ret, frame = cap.read()
+    ret, frame = cap.read()  # 從攝影機擷取一張影像
     #frame = cv2.resize(frame, (640//2, 480//2))  # 縮小尺寸，加快速度
 
     k = cv2.waitKey(1)
@@ -861,12 +864,10 @@ cap = cv2.VideoCapture(0)
 if not cap.isOpened():
     print("開啟攝影機失敗")
     sys.exit()
-else:
-    print("Video device opened")
 
 while True:
-    ret, frame = cap.read()
-    #frame = cv2.resize(frame, (640//2, 480//2))  # 縮小尺寸加快速度
+    ret, frame = cap.read()  # 從攝影機擷取一張影像
+    # frame = cv2.resize(frame, (640//2, 480//2))  # 縮小尺寸加快速度
 
     k = cv2.waitKey(1)
     if k == ESC:
@@ -927,17 +928,15 @@ h = cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
 print("Image Size: %d x %d" % (w, h))
 
 if not cap.isOpened():
-    print("Could not open video device")
+    print("開啟攝影機失敗")
     sys.exit()
-else:
-    print("Video device opened")
 
 ratio = w / h
 WIDTH = 320
 HEIGHT = int(WIDTH / ratio)
 
 while True:
-    ret, frame = cap.read()
+    ret, frame = cap.read()  # 從攝影機擷取一張影像
     frame = cv2.resize(frame, (WIDTH, HEIGHT))
     frame = cv2.flip(frame, 1)
 
@@ -993,19 +992,19 @@ logo = cv2.imread(logo_filename)
 logo = cv2.resize(logo, (640, 480))  # 改變影像尺寸，符合疊加的圖片
 
 if not cap.isOpened():
-    print("Cannot open camera")
+    print("開啟攝影機失敗")
     exit()
+
 while True:
-    ret, img = cap.read()  # 讀取影片的每一幀
+    ret, img = cap.read()  # 從攝影機擷取一張影像
     if not ret:
         print("Cannot receive frame")  # 如果讀取錯誤，印出訊息
         break
-    #cv2.imshow("OpenCV 10", img) 原圖顯示
+    # cv2.imshow("OpenCV 10", img) 原圖顯示
 
-    #addWeighted
+    # addWeighted
     output = cv2.addWeighted(img, 0.6, logo, 0.4, 50)  # 疊加圖片
-    cv2.imshow('image', output)
-
+    cv2.imshow("image", output)
 
     k = cv2.waitKey(1)
     if k == ESC:  # ESC
@@ -1019,12 +1018,9 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
-

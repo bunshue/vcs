@@ -184,7 +184,6 @@ with mp_face_mesh.FaceMesh(
         results = face_mesh.process(img2)  # 取得人臉網格資訊
         if results.multi_face_landmarks:
             for face_landmarks in results.multi_face_landmarks:
-
                 # 將人臉網格化
 
                 # 繪製網格
@@ -212,7 +211,7 @@ with mp_face_mesh.FaceMesh(
                     connection_drawing_spec=mp_drawing_styles.get_default_face_mesh_iris_connections_style(),
                 )
 
-                #僅顯示人臉網格
+                # 僅顯示人臉網格
 
                 # 繪製網格
                 mp_drawing.draw_landmarks(
@@ -309,7 +308,6 @@ else:
 with mp_hands.Hands(
     model_complexity=0, min_detection_confidence=0.5, min_tracking_confidence=0.5
 ) as hands:
-
     run = True  # 設定是否更動觸碰區位置
     while True:
         ret, img = cap.read()
@@ -388,7 +386,7 @@ print("------------------------------------------------------------")  # 60個
 print("OpenCV_ai_91")
 
 mp_drawing = mp.solutions.drawing_utils  # 建立繪圖方法
-mp_drawing_styles = mp.solutions.drawing_styles# mediapipe 繪圖樣式
+mp_drawing_styles = mp.solutions.drawing_styles  # mediapipe 繪圖樣式
 mp_pose = mp.solutions.pose  # mediapipe 姿勢偵測
 
 cap = cv2.VideoCapture(0)
@@ -563,6 +561,7 @@ mp_drawing = mp.solutions.drawing_utils  # 建立繪圖方法
 mp_drawing_styles = mp.solutions.drawing_styles  # mediapipe 繪圖樣式
 mp_hands = mp.solutions.hands  # mediapipe 偵測手掌方法
 
+
 # 根據兩點的座標，計算角度
 def vector_2d_angle(v1, v2):
     v1_x = v1[0]
@@ -694,7 +693,7 @@ lineType = cv2.LINE_AA  # 印出文字的邊框
 with mp_hands.Hands(
     model_complexity=0, min_detection_confidence=0.5, min_tracking_confidence=0.5
 ) as hands:
-    w, h = 640//2, 480//2  # 影像尺寸
+    w, h = 640 // 2, 480 // 2  # 影像尺寸
     while True:
         ret, img = cap.read()
         img2 = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)  # BGR 轉 RGB
@@ -862,7 +861,7 @@ lineType = cv2.LINE_AA  # 印出文字的邊框
 with mp_hands.Hands(
     model_complexity=0, min_detection_confidence=0.5, min_tracking_confidence=0.5
 ) as hands:
-    w, h = 640//2, 480//2  # 影像尺寸
+    w, h = 640 // 2, 480 // 2  # 影像尺寸
     while True:
         ret, img = cap.read()
         img2 = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)  # BGR 轉 RGB
@@ -934,6 +933,7 @@ print("OpenCV_ai_97")
 mp_drawing = mp.solutions.drawing_utils  # 建立繪圖方法
 mp_drawing_styles = mp.solutions.drawing_styles  # mediapipe 繪圖樣式
 mp_hands = mp.solutions.hands  # mediapipe 偵測手掌方法
+
 
 # 根據兩點的座標，計算角度
 def vector_2d_angle(v1, v2):
@@ -1036,7 +1036,7 @@ lineType = cv2.LINE_AA  # 印出文字的邊框
 with mp_hands.Hands(
     model_complexity=0, min_detection_confidence=0.5, min_tracking_confidence=0.5
 ) as hands:
-    w, h = 640//2, 480//2  # 影像尺寸
+    w, h = 640 // 2, 480 // 2  # 影像尺寸
     draw = np.zeros((h, w, 4), dtype="uint8")  # 繪製全黑背景，尺寸和影像相同
     dots = []  # 使用 dots 空串列記錄繪圖座標點
     cv2.rectangle(draw, (20, 20), (60, 60), (0, 0, 255, 255), -1)  # 在畫面上方放入紅色正方形
@@ -1177,9 +1177,8 @@ else:
 with mp_hands.Hands(
     model_complexity=0, min_detection_confidence=0.5, min_tracking_confidence=0.5
 ) as hands:
-
-    w = 640//2  # 定義影片寬度
-    h = 480//2  # 定義影像高度
+    w = 640 // 2  # 定義影片寬度
+    h = 480 // 2  # 定義影像高度
     dots = []  # 記錄座標
     mask_b = np.zeros((h, w, 3), dtype="uint8")  # 產生黑色遮罩 -> 套用清楚影像
     mask_w = np.zeros((h, w, 3), dtype="uint8")  # 產生白色遮罩 -> 套用模糊影像
@@ -1317,7 +1316,7 @@ cv2.destroyAllWindows()
 
 """
 
-#img = cv2.resize(img, (640//2, 480//2))  # 調整畫面尺寸
-#img = cv2.resize(img, (640//2, 480//2))  # 縮小尺寸，加快演算速度
-#img = cv2.resize(img,(640//2, 480//2))       # 縮小尺寸，加快演算速度
-#img = cv2.resize(img, (w, h))  # 縮小尺寸，加快處理效率
+# img = cv2.resize(img, (640//2, 480//2))  # 調整畫面尺寸
+# img = cv2.resize(img, (640//2, 480//2))  # 縮小尺寸，加快演算速度
+# img = cv2.resize(img,(640//2, 480//2))       # 縮小尺寸，加快演算速度
+# img = cv2.resize(img, (w, h))  # 縮小尺寸，加快處理效率

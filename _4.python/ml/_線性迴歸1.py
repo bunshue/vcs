@@ -1263,6 +1263,841 @@ print("結論：L1 test score 最高")
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+# 線性迴歸
+
+# OLS 公式
+# y = wx + b
+
+# 使用 OLS 公式計算 w、b
+
+df = pd.read_csv("./data/population.csv")
+print(df)
+
+w = ((df["pop"] - df["pop"].mean()) * df["year"]).sum() / (
+    (df["year"] - df["year"].mean()) ** 2
+).sum()
+b = df["pop"].mean() - w * df["year"].mean()
+
+print(f"w={w}, b={b}")
+
+# 使用NumPy函數polyfit驗算
+
+coef = np.polyfit(df["year"], df["pop"], deg=1)
+print(f"w={coef[0]}, b={coef[1]}")
+
+# w=0.061159358661554586, b=-116.35631056117121
+
+print("使用sklearn的 線性迴歸 LinearRegression()")
+
+X, y = df[["year"]].values, df["pop"].values
+
+linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
+
+linear_regression.fit(X, y)  # 學習訓練.fit
+
+cc = linear_regression.coef_, linear_regression.intercept_
+print(cc)
+
+# (array([0.06115936]), -116.3563105611711)
+
+print("使用公式預測2050年人口數")
+
+print(2050 * coef[0] + coef[1])
+
+# 9.02037469501569
+
+print("使用矩陣計算")
+
+X = df[["year"]].values
+
+# b = b * 1
+one = np.ones((len(df), 1))
+
+# 將 x 與 one 合併
+X = np.concatenate((X, one), axis=1)
+
+y = df[["pop"]].values
+
+# 求解
+w = np.linalg.inv(X.T @ X) @ X.T @ y
+print(f"w={w[0, 0]}, b={w[1, 0]}")
+
+# w=0.06115935866154644, b=-116.35631056115507
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+# 05_04_nonlinear_regression.ipynb
+
+# 以二次迴歸預測世界人口數
+
+df = pd.read_csv("./data/population.csv")
+X, y = df[["year"]].values, df["pop"].values
+
+# 使用 NumPy polyfit 計算
+
+coef = np.polyfit(X.reshape(-1), y, deg=2)
+print(f"y={coef[0]} X^2 + {coef[1]} X + {coef[2]}")
+# y=-0.0002668845596210234 X^2 + 1.1420418251266993 X + -1210.2427271938489
+
+plt.figure(figsize=(8, 6))
+plt.rcParams["font.sans-serif"] = ["Arial Unicode MS"]
+plt.rcParams["axes.unicode_minus"] = False
+
+plt.scatter(df["year"], y, c="blue", marker="o", s=2, label="實際")
+
+plt.plot(
+    df["year"].values,
+    (df["year"] ** 2) * coef[0] + df["year"] * coef[1] + coef[2],
+    c="red",
+    label="預測",
+)
+plt.legend()
+show()
+
+
+# 使用公式預測2050年人口數
+
+print((2050**2) * coef[0] + 2050 * coef[1] + coef[2])
+
+# 9.360652508533576
+
+# 產生 X 平方項，並與X合併
+
+X_2 = X**2
+X_new = np.concatenate((X_2, X), axis=1)
+cc = X_new.shape
+print(cc)
+
+# (151, 2)
+
+print("使用sklearn的 線性迴歸 LinearRegression()")
+
+linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
+
+linear_regression.fit(X_new, y)  # 學習訓練.fit
+
+cc = linear_regression.coef_, linear_regression.intercept_
+print(cc)
+
+# (array([-2.66884560e-04,  1.14204183e+00]), -1210.242727194026)
+
+print("使用公式預測2050年人口數")
+
+print(
+    (2050**2) * linear_regression.coef_[0]
+    + 2050 * linear_regression.coef_[1]
+    + linear_regression.intercept_
+)
+
+# 9.36065250853244
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 05_05_multi_variables_nonlinear_regression
+
+# 多元非線性迴歸
+
+from sklearn.datasets import make_regression
+
+X, y = make_regression(n_samples=300, n_features=2, noise=50)
+
+from matplotlib import pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+from mpl_toolkits.mplot3d import proj3d
+
+fig = plt.figure(figsize=(8, 8))
+ax = fig.add_subplot(111, projection="3d")
+plt.rcParams["legend.fontsize"] = 10
+ax.plot(X[:, 0], X[:, 1], y, "o", markersize=8, color="blue", alpha=0.5)
+plt.title("測試資料")
+show()
+
+# 使用 PolynomialFeatures 產生多項式
+
+from sklearn.preprocessing import PolynomialFeatures
+
+poly = PolynomialFeatures(degree=2)  # 2 次方
+X_new = poly.fit_transform(X)  # 轉換
+cc = X_new.shape
+print(cc)
+
+cc = poly.get_feature_names_out(["x1", "x2"])
+print(cc)
+
+X_train, X_test, y_train, y_test = train_test_split(X_new, y, test_size=0.2)
+
+# 查看陣列維度
+cc = X_train.shape, X_test.shape, y_train.shape, y_test.shape
+print(cc)
+
+# 特徵縮放
+scaler = StandardScaler()
+X_train_std = scaler.fit_transform(X_train)
+X_test_std = scaler.transform(X_test)
+
+linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
+
+linear_regression.fit(X_train_std, y_train)  # 學習訓練.fit
+
+cc = linear_regression.coef_, linear_regression.intercept_
+print(cc)
+
+# R2、MSE、MAE
+y_pred = linear_regression.predict(X_test_std)  # 預測.predict
+print(f"R2 = {r2_score(y_test, y_pred)*100:.2f}")
+print(f"MSE = {mean_squared_error(y_test, y_pred)}")
+print(f"MAE = {mean_absolute_error(y_test, y_pred)}")
+
+# R2 = 52.87
+# MSE = 3155.4231199414303
+# MAE = 45.322099168462366
+
+# 使用原始特徵的模型評分
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+scaler = StandardScaler()
+X_train_std = scaler.fit_transform(X_train)
+X_test_std = scaler.transform(X_test)
+
+linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
+
+linear_regression.fit(X_train_std, y_train)  # 學習訓練.fit
+
+y_pred = linear_regression.predict(X_test_std)  # 預測.predict
+print(f"R2 = {r2_score(y_test, y_pred)*100:.2f}")
+print(f"MSE = {mean_squared_error(y_test, y_pred)}")
+print(f"MAE = {mean_absolute_error(y_test, y_pred)}")
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 05_06_regression_outlier_effect
+
+# 迴歸缺點
+
+from sklearn.datasets import make_regression
+
+X, y = make_regression(n_samples=20, n_features=1, noise=50)
+
+# 繪圖
+
+from matplotlib import pyplot as plt
+
+fig = plt.figure(figsize=(8, 8))
+plt.scatter(X, y, color="blue", alpha=0.5)
+plt.title("測試資料")
+show()
+
+linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
+
+linear_regression.fit(X, y)  # 學習訓練.fit
+
+cc = linear_regression.coef_, linear_regression.intercept_
+print(cc)
+
+print("製造離群值")
+
+print(y[0])
+
+# 製造離群值
+y[0] += 2000
+
+linear_regression2 = sklearn.linear_model.LinearRegression()  # 函數學習機
+
+linear_regression2.fit(X, y)  # 學習訓練.fit
+
+cc = linear_regression2.coef_, linear_regression2.intercept_
+print(cc)
+
+fig = plt.figure(figsize=(8, 8))
+plt.scatter(X, y, color="blue", alpha=0.5)
+
+line_X = np.array([-3, 3])
+plt.plot(
+    line_X,
+    line_X * linear_regression.coef_ + linear_regression.intercept_,
+    c="green",
+    label="原迴歸線",
+)
+plt.plot(
+    line_X,
+    line_X * linear_regression2.coef_ + linear_regression2.intercept_,
+    c="red",
+    label="新迴歸線",
+)
+plt.title("測試資料")
+plt.legend()
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 05_07_regression_vs_time_series
+
+# 迴歸(Regression)與時間序列(Time Series) 比較
+
+df = pd.read_csv("./data/monthly-airline-passengers.csv")
+print(df)
+
+# 資料轉換
+
+# 設定為日期的資料型態
+df["Date"] = pd.to_datetime(df["Month"])
+
+# 設定日期為 DataFrame 的索引值
+df = df.set_index("Date")
+
+# 依照資料內容設定日期的頻率
+df.index = pd.DatetimeIndex(df.index.values, freq=df.index.inferred_freq)
+# 將原有欄位刪除
+df.drop("Month", axis=1, inplace=True)
+
+# 繪圖
+
+plt.figure(figsize=(10, 5))
+sns.lineplot(x=df.index, y="Passengers", data=df)
+plt.title("airline passengers")
+show()
+
+# 迴歸(Regression)
+linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
+
+# X = df.index.astype(str).map(lambda x:x[:4]+x[5:7]).values.reshape(df.shape[0], -1)
+X = np.arange(df.shape[0]).reshape(-1, 1)
+y = df["Passengers"]
+
+linear_regression.fit(X, y)  # 學習訓練.fit
+
+pred = linear_regression.predict(X)  # 預測.predict
+print("MSE =", mean_squared_error(y, pred))
+
+# MSE = 2091.7994339346533
+
+# 實際樣本點
+plt.figure(figsize=(10, 5))
+sns.lineplot(x=df.index, y="Passengers", data=df)
+plt.title("airline passengers")
+# show()
+
+# 預測迴歸線
+plt.plot(df.index, pred)
+show()
+
+# 殘差線圖
+plt.plot(df.index, np.abs(df["Passengers"] - pred))
+show()
+
+# 定態測試(Augmented Dickey–Fuller Test for Stationarity)
+
+from statsmodels.tsa.stattools import adfuller
+
+result = adfuller(df["Passengers"])
+print(
+    f"ADF統計量: {result[0]}\np value: {result[1]}"
+    + f"\n滯後期數(Lags): {result[2]}\n資料筆數: {result[3]}"
+)
+
+"""
+ADF統計量: 0.8153688792060482
+p value: 0.991880243437641
+滯後期數(Lags): 13
+資料筆數: 130
+"""
+
+# 結論：p > 0.05 ==> 非定態
+
+from statsmodels.graphics.tsaplots import plot_acf, plot_pacf
+
+fig = plot_acf(df["Passengers"], lags=20)
+fig.set_size_inches(10, 5)
+show()
+
+fig = plot_pacf(df["Passengers"], lags=20, method="ywm")
+fig.set_size_inches(10, 5)
+show()
+
+# 時間序列(Time Series)
+
+from statsmodels.tsa.arima.model import ARIMA
+
+# 建立時間序列資料
+series = df.copy()
+
+# AR(1) 模型訓練
+ar = ARIMA(df, order=(1, 0, 0))
+
+model = ar.fit()  # 學習訓練.fit
+
+print("檢視神經網路")
+model.summary()  # 檢視神經網路
+
+cc = model.params
+print(cc)
+
+cc = df["Passengers"].mean()
+print(cc)
+
+# 繪圖比較實際值與預測值
+
+cc = model.fittedvalues
+print(cc)
+
+series["Passengers"].plot(figsize=(12, 6), color="black", linestyle="-", label="實際值")
+model.fittedvalues.plot(
+    figsize=(12, 6), color="green", linestyle=":", lw=2, label="預測值"
+)
+plt.legend()
+show()
+
+print(f"AR MSE = {(np.sum(model.resid**2) / len(model.resid)):.2f}")
+
+# AR MSE = 1301.63
+
+# 使用迴歸驗證
+linear_regression2 = sklearn.linear_model.LinearRegression()  # 函數學習機
+
+# 複製資料
+series2 = series.copy()
+
+# 將前一期 y 當作 x
+series2["Passengers_1"] = series2["Passengers"].shift(-1)
+series2.dropna(inplace=True)
+X = series2["Passengers"].values.reshape(series2.shape[0], -1)
+
+linear_regression2.fit(X, series2["Passengers_1"])  # 學習訓練.fit
+
+cc = linear_regression2.coef_, linear_regression2.intercept_
+print(cc)
+
+# (array([0.95893198]), 13.705504997522155)
+
+series2["TS"] = model.fittedvalues
+series2["LR"] = (
+    linear_regression2.coef_ * series["Passengers"] + linear_regression2.intercept_
+)
+series2["LR"].plot(color="green", linestyle="-.", lw=2, legend="LR")
+series2["TS"].plot(figsize=(12, 6), color="red", linestyle=":", lw=2, legend="TS")
+show()
+
+cc = series2[["TS", "LR"]]
+print(cc)
+
+# AR(1) 殘差(residual)繪圖
+
+residuals = pd.DataFrame(model.resid)
+residuals.plot()
+show()
+
+# 資料分割
+X_train, X_test = train_test_split(series, test_size=0.2, shuffle=False)
+
+# 查看陣列維度
+cc = X_train.shape, X_test.shape
+print(cc)
+
+# 模型訓練、預測與繪圖
+
+# AR(1) 模型訓練
+ar_1 = ARIMA(X_train[["Passengers"]], order=(1, 0, 0))
+
+model_1 = ar_1.fit()  # 學習訓練.fit
+
+# 預測 12 個月
+pred = model_1.predict(X_train.shape[0], X_train.shape[0] + 12 - 1)  # 預測.predict
+
+# 繪圖
+plt.rcParams["font.sans-serif"] = ["Arial Unicode MS"]
+plt.rcParams["axes.unicode_minus"] = False
+
+series["Passengers"].plot(color="black", linestyle="-", label="實際值")
+model_1.fittedvalues.plot(color="green", linestyle=":", lw=2, label="訓練資料預測值")
+pred.plot(figsize=(12, 5), color="red", lw=2, label="測試資料預測值")
+plt.legend()
+show()
+
+# 改用 SARIMAX (Seasonal ARIMA) 演算法
+# 一次差分(First-order Differencing)
+
+df_diff = df.copy()
+df_diff["Passengers_diff"] = df_diff["Passengers"] - df_diff["Passengers"].shift(1)
+df_diff.dropna(inplace=True)
+df_diff["Passengers_diff"].plot()
+show()
+
+# 使用ADF檢定
+
+result = adfuller(df_diff["Passengers_diff"])
+print(
+    f"ADF統計量: {result[0]}\np value: {result[1]}"
+    + f"\n滯後期數(Lags): {result[2]}\n資料筆數: {result[3]}"
+)
+
+"""
+ADF統計量: -2.8292668241699994
+p value: 0.0542132902838255
+滯後期數(Lags): 12
+資料筆數: 130
+"""
+
+from statsmodels.graphics.tsaplots import plot_acf, plot_pacf
+
+fig = plot_acf(df_diff["Passengers_diff"], lags=20)
+fig.set_size_inches(10, 5)
+show()
+
+fig = plot_pacf(df_diff["Passengers_diff"], lags=20, method="ywm")
+fig.set_size_inches(10, 5)
+show()
+
+# 二次差分(Second-order Differencing)
+
+df_diff["Passengers_diff_2"] = df_diff["Passengers_diff"] - df_diff[
+    "Passengers_diff"
+].shift(1)
+df_diff.dropna(inplace=True)
+df_diff["Passengers_diff_2"].plot()
+show()
+
+# 使用ADF檢定
+
+result = adfuller(df_diff["Passengers_diff_2"])
+print(
+    f"ADF統計量: {result[0]}\np value: {result[1]}"
+    + f"\n滯後期數(Lags): {result[2]}\n資料筆數: {result[3]}"
+)
+"""
+Test Stat: -16.384231542468505
+p value: 2.7328918500142407e-29
+Lags: 11
+Num observations: 130
+"""
+from statsmodels.graphics.tsaplots import plot_acf, plot_pacf
+
+fig = plot_acf(df_diff["Passengers_diff_2"], lags=20)
+fig.set_size_inches(10, 5)
+show()
+
+fig = plot_pacf(df_diff["Passengers_diff_2"], lags=20, method="ywm")
+fig.set_size_inches(10, 5)
+show()
+
+# SARIMAX
+
+# 資料分割
+X_train, X_test = train_test_split(df_diff, test_size=0.2, shuffle=False)
+
+# SARIMAX
+import statsmodels.api as sm
+
+ar_diff = sm.tsa.statespace.SARIMAX(
+    X_train[["Passengers"]], order=(1, 2, 1), seasonal_order=(1, 2, 1, 12)
+)
+
+print("到這邊會脫離程式......................")
+
+"""
+# 這個 .fit 有問題 會脫離程式
+model_diff = ar_diff.fit()  # 學習訓練.fit
+
+# 預測 12 個月
+pred = model_diff.predict(X_train.shape[0], X_train.shape[0] + 12 - 1, dynamic=True)  # 預測.predict
+print(pred)
+
+df_diff["pred"] = np.concatenate((model_diff.fittedvalues.values, pred.values))
+cc = df_diff["pred"]
+print(cc)
+
+# 繪圖
+
+df_diff["Passengers"].plot(color="black", linestyle="-", label="實際值")
+model_diff.fittedvalues.plot(color="green", linestyle=":", lw=2, label="訓練資料預測值")
+pred.plot(figsize=(12, 5), color="red", lw=2, label="測試資料預測值")
+plt.legend()
+show()
+
+print(f"SARIMAX MSE = {(np.sum(model_diff.resid**2) / len(model_diff.resid)):.2f}")
+
+# SARIMAX MSE = 427.67
+
+# 結論：SARIMAX 準確率比迴歸高
+# 時間序列 MSE： 427， 迴歸 MSE： 2091
+
+from statsmodels.tsa.seasonal import seasonal_decompose
+
+decomp = pd.read_csv("./data/monthly-airline-passengers.csv")
+decomp["Date"] = pd.to_datetime(decomp["Month"])
+decomp = decomp.set_index("Date")
+decomp.index = pd.DatetimeIndex(df.index.values, freq=decomp.index.inferred_freq)
+decomp.drop("Month", axis=1, inplace=True)
+
+s_dc = seasonal_decompose(decomp["Passengers"], model="additive")
+decomp["SDC_Seasonal"] = s_dc.seasonal
+decomp["SDC_Trend"] = s_dc.trend
+decomp["SDC_Error"] = s_dc.resid
+decomp["SDC_TS"] = s_dc.trend + s_dc.seasonal
+
+print("ddddd")
+
+plt.title("Trend components")
+decomp["Passengers"].plot(
+    figsize=(12, 6), color="black", linestyle="-", legend="Passengers"
+)
+decomp["SDC_Trend"].plot(
+    figsize=(12, 6), color="blue", linestyle="-.", lw=2, legend="SDC_Trend"
+)
+decomp["SDC_TS"].plot(figsize=(12, 6), color="green", linestyle=":", lw=2, legend="TS")
+
+show()
+
+# 效應分解(Decomposition)
+
+# Plot the original time series, trend, seasonal and random components
+fig, axarr = plt.subplots(4, sharex=True)
+fig.set_size_inches(5.5, 5.5)
+
+decomp["Passengers"].plot(ax=axarr[0], color="b", linestyle="-")
+axarr[0].set_title("Monthly Passengers")
+
+pd.Series(data=decomp["SDC_Trend"], index=decomp.index).plot(
+    color="r", linestyle="-", ax=axarr[1]
+)
+axarr[1].set_title("Trend component in monthly employment")
+
+pd.Series(data=decomp["SDC_Seasonal"], index=decomp.index).plot(
+    color="g", linestyle="-", ax=axarr[2]
+)
+axarr[2].set_title("Seasonal component in monthly employment")
+
+pd.Series(data=decomp["SDC_Error"], index=decomp.index).plot(
+    color="k", linestyle="-", ax=axarr[3]
+)
+axarr[3].set_title("Irregular variations in monthly employment")
+
+plt.tight_layout(pad=0.4, w_pad=0.5, h_pad=2.0)
+fig = plt.xticks(rotation=10)
+
+show()
+
+MSE = (decomp["SDC_Error"] ** 2).sum() / decomp["SDC_Error"].shape[0]
+print("MSE=", MSE)
+
+"""
+# ('MSE=', 340.80467800107556)
+
+"""
+結論：時間序列預測準確率比迴歸高
+時間序列 MSE： 340， 迴歸 MSE： 2091
+"""
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+# 11_06_shap_test
+
+# SHAP套件測試
+# An introduction to explainable AI with Shapley values
+
+import shap
+from sklearn.preprocessing import StandardScaler
+
+# 載入資料集
+
+df = pd.read_csv("./data/ca_housing.csv")
+cc = df.head()
+print(cc)
+
+# 資料清理
+
+# 刪除 missing value
+df.dropna(inplace=True)
+
+X = df.drop(["median_house_value", "ocean_proximity"], axis=1)
+y = df["median_house_value"]
+
+# 模型訓練與評估
+
+# scaler = StandardScaler()
+# X2 = scaler.fit_transform(X)
+# X = pd.DataFrame(X2, columns=X.columns)
+
+linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
+
+linear_regression.fit(X, y)  # 學習訓練.fit
+
+print("Model coefficients:")
+print(X.shape)
+print(X.shape[1])
+for i in range(X.shape[1]):
+    print(X.columns[i], "=", linear_regression.coef_[i].round(5))
+
+# 單一特徵影響力
+
+feature_name = "median_income"
+X100 = shap.utils.sample(X, 100)
+shap.partial_dependence_plot(
+    feature_name,
+    linear_regression.predict,
+    X100,
+    ice=False,
+    model_expected_value=True,
+    feature_expected_value=True,
+)
+
+# 衡量特徵Shapley value
+
+sample_ind = 20  # 第 21 筆資料
+explainer = shap.Explainer(linear_regression.predict, X100)
+shap_values = explainer(X)
+shap.partial_dependence_plot(
+    feature_name,
+    linear_regression.predict,
+    X100,
+    model_expected_value=True,
+    feature_expected_value=True,
+    ice=False,
+    shap_values=shap_values[sample_ind : sample_ind + 1, :],
+)
+
+# Exact explainer: 20434it [01:32, 205.74it/s]
+
+# 以單一特徵所有資料的Shapley value繪製散佈圖
+
+shap.plots.scatter(shap_values[:, feature_name])
+show()
+
+# 單一資料的特徵影響力(Local Feature Importance)
+
+cc = X.iloc[sample_ind]
+print(cc)
+
+shap.plots.waterfall(shap_values[sample_ind], max_display=14)
+show()
+
+# 加法模型(Generalized additive models, GAM)
+
+# !pip install interpret
+
+import interpret.glassbox
+
+# 使用 Boosting 演算法
+model_ebm = interpret.glassbox.ExplainableBoostingRegressor(interactions=0)
+
+model_ebm.fit(X, y)  # 學習訓練.fit
+
+# 加法模型 Shapley value
+explainer_ebm = shap.Explainer(model_ebm.predict, X100)
+shap_values_ebm = explainer_ebm(X)
+
+# 特徵影響力
+fig, ax = shap.partial_dependence_plot(
+    feature_name,
+    model_ebm.predict,
+    X100,
+    model_expected_value=True,
+    feature_expected_value=True,
+    show=False,
+    ice=False,
+    shap_values=shap_values_ebm[sample_ind : sample_ind + 1, :],  # 第 21 筆資料
+)
+show()
+
+shap.plots.scatter(shap_values_ebm[:, feature_name])
+show()
+
+shap.plots.waterfall(shap_values_ebm[sample_ind])
+show()
+
+shap.plots.beeswarm(shap_values_ebm)
+show()
+
+shap.plots.bar(shap_values_ebm)
+show()
+
+shap.initjs()
+shap.plots.force(shap_values_ebm[sample_ind])
+
+"""
+Visualization omitted, Javascript library not loaded!
+Have you run `initjs()` in this notebook?
+If this notebook was from another user you must also trust this notebook (File -> Trust notebook).
+If you are viewing this notebook on github the Javascript has been stripped for security.
+If you are using JupyterLab this error is because a JupyterLab extension has not yet been written.
+"""
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+N = 200
+
+X = np.linspace(-2 * np.pi, 2 * np.pi, N)
+Y = np.sin(X) + 0.2 * np.random.rand(N) - 0.1
+X = X.reshape(-1, 1)
+Y = Y.reshape(-1, 1)
+
+from sklearn.linear_model import LinearRegression
+from sklearn.preprocessing import PolynomialFeatures
+from sklearn.pipeline import Pipeline
+
+
+def polynomial_model(degree=1):
+    polynomial_features = PolynomialFeatures(degree=degree, include_bias=False)
+    linear_regression = LinearRegression()
+    pipeline = Pipeline(
+        [
+            ("polynomial_features", polynomial_features),
+            ("linear_regression", linear_regression),
+        ]
+    )
+    return pipeline
+
+
+from sklearn.metrics import mean_squared_error
+
+degrees = [2, 3, 5, 10]
+results = []
+for d in degrees:
+    model = polynomial_model(degree=d)
+    model.fit(X, Y)
+    train_score = model.score(X, Y)
+    mse = mean_squared_error(Y, model.predict(X))
+    results.append({"model": model, "degree": d, "score": train_score, "mse": mse})
+for r in results:
+    print(
+        "degree: {}; train score: {}; mean squared error: {}".format(
+            r["degree"], r["score"], r["mse"]
+        )
+    )
+
+print("------------------------------")  # 30個
+
+from matplotlib.figure import SubplotParams
+
+plt.figure(figsize=(12, 8), subplotpars=SubplotParams(hspace=0.3))
+for i, r in enumerate(results):
+    fig = plt.subplot(2, 2, i + 1)
+    plt.xlim(-8, 8)
+    plt.title("LinearRegression degree={}".format(r["degree"]))
+    plt.scatter(X, Y, s=5, c="b", alpha=0.5)
+    plt.plot(X, r["model"].predict(X), "r-")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")

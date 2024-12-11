@@ -60,6 +60,8 @@ ENCODING_TYPE = 'MJPG'  # 編碼器
 """
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 print("最簡錄影, 一直錄, 按 ESC 離開")
 
 if MODE == MODE_3:  # 縮時錄影
@@ -127,6 +129,7 @@ print("存檔檔名 :", record_filename)
 
 sys.exit()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("錄影, 按 SPACE 存圖, 按 ESC 離開")
@@ -203,40 +206,41 @@ print("錄影時間 :", int(record_time_elapsed), "秒")
 print("存檔檔名 :", record_filename)
 
 print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
+sys.exit()
 
 
 print("------------------------------------------------------------")  # 60個
 
 
-'''
 # 解析 Fourcc 格式資料的函數
 def decode_fourcc(v):
-  v = int(v)
-  return "".join([chr((v >> 8 * i) & 0xFF) for i in range(4)])
+    v = int(v)
+    return "".join([chr((v >> 8 * i) & 0xFF) for i in range(4)])
+
 
 # 取得 Codec 名稱
 fourcc = cap.get(cv2.CAP_PROP_FOURCC)
 codec = decode_fourcc(fourcc)
 print("Codec: " + codec)
 
-#無效
+# 無效
 # 設定影像的尺寸大小
-#cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
-#cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 360)
+# cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
+# cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 360)
 
 # 取得影像的尺寸大小
 w = cap.get(cv2.CAP_PROP_FRAME_WIDTH)
@@ -244,36 +248,30 @@ h = cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
 print("Image Size: %d x %d" % (w, h))
 
 
-    """ 調整影片大小
-    frame = cv2.resize(frame, (WIDTH, HEIGHT))
-    frame = cv2.flip(frame, 1)
-    """
+""" 調整影片大小
+frame = cv2.resize(frame, (WIDTH, HEIGHT))
+frame = cv2.flip(frame, 1)
+"""
 
-    #改變圖片大小
-    #frame = cv2.resize(frame, None, fx = 1.5, fy = 1.5, interpolation = cv2.INTER_AREA)
+# 改變圖片大小
+# frame = cv2.resize(frame, None, fx = 1.5, fy = 1.5, interpolation = cv2.INTER_AREA)
 
-    #彩色轉灰階
-    #frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-
-
-    elif k == ord('s'): # 若按下 s 鍵則存圖
-        image_filename = 'Image_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.jpg';
-        cv2.imwrite(image_filename, frame)
-        print('已存圖, 檔案 :', image_filename)
-
-    img_1 = frame
-    img_2 = cv2.flip(img_1, 0)             # 上下翻轉
-    
-
-
-
-'''
-
+# 彩色轉灰階
+# frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
 """
-#若要錄成黑白影片 要 加上 isColor=False 參數設定
-out = cv2.VideoWriter(record_filename, fourcc, fps, (width,height), isColor=False)
-#且
+elif k == ord('s'): # 若按下 s 鍵則存圖
+    image_filename = 'Image_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.jpg';
+    cv2.imwrite(image_filename, frame)
+    print('已存圖, 檔案 :', image_filename)
+
+img_1 = frame
+img_2 = cv2.flip(img_1, 0)             # 上下翻轉
+"""
+
+
+# 若要錄成黑白影片 要 加上 isColor=False 參數設定
+out = cv2.VideoWriter(record_filename, fourcc, fps, (width, height), isColor=False)
+# 且
 gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)  # 轉換成灰階
 out.write(gray)  # 將圖像寫入影片
-"""

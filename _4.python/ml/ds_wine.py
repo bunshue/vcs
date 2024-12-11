@@ -587,6 +587,1033 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
+
+# PCA 個案實作
+
+# 1. 載入資料
+ds = datasets.load_wine()
+df = pd.DataFrame(ds.data, columns=ds.feature_names)
+cc = df.head()
+print(cc)
+
+# 2. 資料清理、資料探索與分析
+# 資料集說明
+# print(ds.DESCR)
+
+# 指定X、Y
+X = df.values
+y = ds.target
+
+# 資料分割
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+# 查看陣列維度
+cc = X_train.shape, X_test.shape, y_train.shape, y_test.shape
+print(cc)
+
+# 4. 特徵縮放
+scaler = StandardScaler()
+X_train_std = scaler.fit_transform(X_train)
+X_test_std = scaler.transform(X_test)
+
+# 進行特徵萃取(PCA)
+
+
+# PCA 函數實作
+def PCA_numpy(X, X_test, no):
+    cov_mat = np.cov(X.T)
+    # 計算特徵值(eigenvalue)及對應的特徵向量(eigenvector)
+    eigen_val, eigen_vecs = np.linalg.eig(cov_mat)
+    # 合併特徵向量及特徵值
+    eigen_pairs = [
+        (np.abs(eigen_val[i]), eigen_vecs[:, i]) for i in range(len(eigen_vecs))
+    ]
+
+    # 針對特徵值降冪排序
+    eigen_pairs.sort(key=lambda x: x[0], reverse=True)
+
+    w = eigen_pairs[0][1][:, np.newaxis]
+    for i in range(1, no):
+        w = np.hstack((w, eigen_pairs[i][1][:, np.newaxis]))
+
+    # 轉換：矩陣相乘 (n, m) x (m, 2) = (n, 2)
+    return X.dot(w), X_test.dot(w)
+
+
+X_train_pca, X_test_pca = PCA_numpy(X_train_std, X_test_std, 2)  # 取 2 個特徵
+cc = X_train_pca.shape, X_test_pca.shape
+print(cc)
+
+# 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
+logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
+
+clf = LogisticRegression()
+
+clf.fit(X_train_pca, y_train)  # 學習訓練.fit
+
+# 7. 模型計分
+# 計算準確率
+y_pred = clf.predict(X_test_pca)  # 預測.predict
+print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
+
+# 100.00%
+
+# 繪製決策邊界(Decision regions)
+from matplotlib.colors import ListedColormap
+
+
+def plot_decision_regions(X, y, classifier, resolution=0.02):
+    # setup marker generator and color map
+    markers = ("s", "x", "o", "^", "v")
+    colors = ("red", "blue", "lightgreen", "gray", "cyan")
+    cmap = ListedColormap(colors[: len(np.unique(y))])
+
+    # plot the decision surface
+    x1_min, x1_max = X[:, 0].min() - 1, X[:, 0].max() + 1
+    x2_min, x2_max = X[:, 1].min() - 1, X[:, 1].max() + 1
+    xx1, xx2 = np.meshgrid(
+        np.arange(x1_min, x1_max, resolution), np.arange(x2_min, x2_max, resolution)
+    )
+    Z = classifier.predict(np.array([xx1.ravel(), xx2.ravel()]).T)  # 預測.predict
+    Z = Z.reshape(xx1.shape)
+    plt.contourf(xx1, xx2, Z, alpha=0.4, cmap=cmap)
+    plt.xlim(xx1.min(), xx1.max())
+    plt.ylim(xx2.min(), xx2.max())
+
+    # plot class samples
+    """ NG
+    for idx, cl in enumerate(np.unique(y)):
+        plt.scatter(
+            x=X[y == cl, 0],
+            y=X[y == cl, 1],
+            alpha=0.6,
+            color=cmap(idx),
+            marker=markers[idx],
+            label=cl,
+        )
+    """
+
+
+plot_decision_regions(X_test_pca, y_test, classifier=clf)
+plt.xlabel("PC 1")
+plt.ylabel("PC 2")
+plt.legend(loc="lower left")
+plt.tight_layout()
+# plt.savefig('decision_regions.png', dpi=300)
+show()
+
+# 使用全部特徵
+
+X, y = datasets.load_wine(return_X_y=True)
+
+# 資料分割
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+# 查看陣列維度
+print(X_train.shape, X_test.shape, y_train.shape, y_test.shape)
+
+# 特徵縮放
+scaler = StandardScaler()
+X_train_std = scaler.fit_transform(X_train)
+X_test_std = scaler.transform(X_test)
+
+# 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
+logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
+
+clf = LogisticRegression()
+
+clf.fit(X_train_std, y_train)  # 學習訓練.fit
+
+# 模型計分
+y_pred = clf.predict(X_test_std)  # 預測.predict
+print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
+
+# (142, 13) (36, 13) (142,) (36,)
+# 100.00%
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# Scikit-learn PCA 實作
+
+# 1. 載入資料
+ds = datasets.load_wine()
+df = pd.DataFrame(ds.data, columns=ds.feature_names)
+cc = df.head()
+print(cc)
+
+# 2. 資料清理、資料探索與分析
+
+# 資料集說明
+# print(ds.DESCR)
+
+# 指定X、Y
+X = df.values
+y = ds.target
+
+# 資料分割
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+# 查看陣列維度
+cc = X_train.shape, X_test.shape, y_train.shape, y_test.shape
+print(cc)
+
+# 4. 特徵縮放
+scaler = StandardScaler()
+X_train_std = scaler.fit_transform(X_train)
+X_test_std = scaler.transform(X_test)
+
+# 特徵萃取(PCA)
+from sklearn.decomposition import PCA
+
+pca1 = PCA(n_components=2)
+X_train_pca = pca1.fit_transform(X_train_std)
+X_test_pca = pca1.transform(X_test_std)
+cc = X_train_pca.shape, X_test_pca.shape, pca1.explained_variance_ratio_
+print(cc)
+
+# 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
+logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
+
+clf = LogisticRegression()
+
+clf.fit(X_train_pca, y_train)  # 學習訓練.fit
+
+# 7. 模型計分
+# 計算準確率
+y_pred = clf.predict(X_test_pca)  # 預測.predict
+print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
+
+# 97.22%
+
+# 繪製決策邊界(Decision regions)
+from matplotlib.colors import ListedColormap
+
+
+def plot_decision_regions(X, y, classifier, resolution=0.02):
+    # setup marker generator and color map
+    markers = ("s", "x", "o", "^", "v")
+    colors = ("red", "blue", "lightgreen", "gray", "cyan")
+    cmap = ListedColormap(colors[: len(np.unique(y))])
+
+    # plot the decision surface
+    x1_min, x1_max = X[:, 0].min() - 1, X[:, 0].max() + 1
+    x2_min, x2_max = X[:, 1].min() - 1, X[:, 1].max() + 1
+    xx1, xx2 = np.meshgrid(
+        np.arange(x1_min, x1_max, resolution), np.arange(x2_min, x2_max, resolution)
+    )
+    Z = classifier.predict(np.array([xx1.ravel(), xx2.ravel()]).T)  # 預測.predict
+    Z = Z.reshape(xx1.shape)
+    plt.contourf(xx1, xx2, Z, alpha=0.4, cmap=cmap)
+    plt.xlim(xx1.min(), xx1.max())
+    plt.ylim(xx2.min(), xx2.max())
+
+    # plot class samples
+    """ NG
+    for idx, cl in enumerate(np.unique(y)):
+        plt.scatter(
+            x=X[y == cl, 0],
+            y=X[y == cl, 1],
+            alpha=0.6,
+            color=cmap(idx),
+            marker=markers[idx],
+            label=cl,
+        )
+    """
+
+
+plot_decision_regions(X_test_pca, y_test, classifier=clf)
+plt.xlabel("PC 1")
+plt.ylabel("PC 2")
+plt.legend(loc="lower left")
+plt.tight_layout()
+# plt.savefig('decision_regions.png', dpi=300)
+show()
+
+# 使用全部特徵
+
+X, y = datasets.load_wine(return_X_y=True)
+
+# 資料分割
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+# 查看陣列維度
+print(X_train.shape, X_test.shape, y_train.shape, y_test.shape)
+
+# 特徵縮放
+scaler = StandardScaler()
+X_train_std = scaler.fit_transform(X_train)
+X_test_std = scaler.transform(X_test)
+
+# 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
+logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
+
+clf = LogisticRegression()
+
+clf.fit(X_train_std, y_train)  # 學習訓練.fit
+
+# 模型計分
+y_pred = clf.predict(X_test_std)  # 預測.predict
+print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
+
+# (142, 13) (36, 13) (142,) (36,)
+# 94.44%
+
+# 測試Scikit-learn 的PCA函數其他用法
+
+# 不設定參數
+pca1 = PCA()
+X_train_pca = pca1.fit_transform(X_train_std)
+pca1.explained_variance_ratio_
+
+# 加總可解釋變異
+np.sum(pca1.explained_variance_ratio_)
+
+# 1.0
+
+# 對可解釋變異繪製柏拉圖(Pareto)
+plt.bar(range(1, 14), pca1.explained_variance_ratio_, alpha=0.5, align="center")
+plt.step(range(1, 14), np.cumsum(pca1.explained_variance_ratio_), where="mid")
+plt.ylabel("Explained variance ratio")
+plt.xlabel("Principal components")
+plt.axhline(0.8, color="r", linestyle="--")
+show()
+
+# 設定可解釋變異下限
+pca2 = PCA(0.8)
+X_train_pca = pca2.fit_transform(X_train_std)
+cc = X_train_pca.shape
+print(cc)
+
+print("------------------------------------------------------------")  # 60個
+
+# LDA 個案實作
+
+# 1. 載入資料
+ds = datasets.load_wine()
+df = pd.DataFrame(ds.data, columns=ds.feature_names)
+cc = df.head()
+print(cc)
+
+# 2. 資料清理、資料探索與分析
+
+# 資料集說明
+# print(ds.DESCR)
+
+# 指定X、Y
+X = df.values
+y = ds.target
+
+# 資料分割
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+# 查看陣列維度
+cc = X_train.shape, X_test.shape, y_train.shape, y_test.shape
+print(cc)
+
+# 4. 特徵縮放
+scaler = StandardScaler()
+X_train_std = scaler.fit_transform(X_train)
+X_test_std = scaler.transform(X_test)
+
+# 進行特徵萃取
+
+
+# 計算 S_W, S_B 散佈矩陣
+def calculate_SW_SB(X, y, label_count):
+    mean_vecs = []
+    for label in range(label_count):
+        mean_vecs.append(np.mean(X[y == label], axis=0))
+        print(f"Class {label} Mean = {mean_vecs[label]}")
+
+    d = X.shape[1]  # number of features
+    S_W = np.zeros((d, d))
+    for label, mv in zip(range(label_count), mean_vecs):
+        class_scatter = np.cov(X[y == label].T)
+        S_W += class_scatter
+    print(f"Sw shape:{S_W.shape}")
+
+    mean_overall = np.mean(X, axis=0)
+    S_B = np.zeros((d, d))
+    for i, mean_vec in enumerate(mean_vecs):
+        n = X[y == i + 1, :].shape[0]
+        mean_vec = mean_vec.reshape(d, 1)  # make column vector
+        mean_overall = mean_overall.reshape(d, 1)  # make column vector
+        S_B += n * (mean_vec - mean_overall).dot((mean_vec - mean_overall).T)
+    print(f"Sb shape:{S_B.shape}")
+    return S_W, S_B
+
+
+# LDA 函數實作
+def LDA_numpy(X, X_test, y, label_count, no):
+    S_W, S_B = calculate_SW_SB(X, y, label_count)
+    # 計算特徵值(eigenvalue)及對應的特徵向量(eigenvector)
+    eigen_val, eigen_vecs = np.linalg.eig(np.linalg.inv(S_W).dot(S_B))
+    # 合併特徵向量及特徵值
+    eigen_pairs = [
+        (np.abs(eigen_val[i]), eigen_vecs[:, i]) for i in range(len(eigen_vecs))
+    ]
+    print("Eigenvalues in descending order:\n")
+    for eigen_val in eigen_pairs:
+        print(eigen_val[0])
+
+    # 針對特徵值降冪排序
+    eigen_pairs.sort(key=lambda x: x[0], reverse=True)
+
+    w = eigen_pairs[0][1][:, np.newaxis].real
+    for i in range(1, no):
+        w = np.hstack((w, eigen_pairs[i][1][:, np.newaxis].real))
+
+    # 轉換：矩陣相乘 (n, m) x (m, 2) = (n, 2)
+    return X.dot(w), X_test.dot(w)
+
+
+X_train_pca, X_test_pca = LDA_numpy(
+    X_train_std, X_test_std, y_train, len(ds.target_names), 2
+)  # 取 2 個特徵
+cc = X_train_pca.shape, X_test_pca.shape
+print(cc)
+
+# 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
+logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
+
+clf = LogisticRegression()
+
+# 6. 模型訓練
+clf.fit(X_train_pca, y_train)  # 學習訓練.fit
+
+# 7. 模型計分
+# 計算準確率
+y_pred = clf.predict(X_test_pca)  # 預測.predict
+print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
+
+# 繪製決策邊界(Decision regions)
+
+from matplotlib.colors import ListedColormap
+
+
+def plot_decision_regions(X, y, classifier, resolution=0.02):
+    # setup marker generator and color map
+    markers = ("s", "x", "o", "^", "v")
+    colors = ("red", "blue", "lightgreen", "gray", "cyan")
+    cmap = ListedColormap(colors[: len(np.unique(y))])
+
+    # plot the decision surface
+    x1_min, x1_max = X[:, 0].min() - 1, X[:, 0].max() + 1
+    x2_min, x2_max = X[:, 1].min() - 1, X[:, 1].max() + 1
+    xx1, xx2 = np.meshgrid(
+        np.arange(x1_min, x1_max, resolution), np.arange(x2_min, x2_max, resolution)
+    )
+    Z = classifier.predict(np.array([xx1.ravel(), xx2.ravel()]).T)  # 預測.predict
+    Z = Z.reshape(xx1.shape)
+    plt.contourf(xx1, xx2, Z, alpha=0.4, cmap=cmap)
+    plt.xlim(xx1.min(), xx1.max())
+    plt.ylim(xx2.min(), xx2.max())
+
+    # plot class samples
+    """ NG
+    for idx, cl in enumerate(np.unique(y)):
+        plt.scatter(
+            x=X[y == cl, 0],
+            y=X[y == cl, 1],
+            alpha=0.6,
+            color=cmap(idx),
+            marker=markers[idx],
+            label=cl,
+        )
+    """
+
+
+plot_decision_regions(X_test_pca, y_test, classifier=clf)
+plt.xlabel("PC 1")
+plt.ylabel("PC 2")
+plt.legend(loc="lower left")
+plt.tight_layout()
+# plt.savefig('decision_regions.png', dpi=300)
+show()
+
+# 使用全部特徵
+
+X, y = datasets.load_wine(return_X_y=True)
+
+# 資料分割
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+# 查看陣列維度
+print(X_train.shape, X_test.shape, y_train.shape, y_test.shape)
+
+# 特徵縮放
+scaler = StandardScaler()
+X_train_std = scaler.fit_transform(X_train)
+X_test_std = scaler.transform(X_test)
+
+# 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
+logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
+
+clf = LogisticRegression()
+
+clf.fit(X_train_std, y_train)  # 學習訓練.fit
+
+# 模型計分
+y_pred = clf.predict(X_test_std)  # 預測.predict
+print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
+
+# (142, 13) (36, 13) (142,) (36,)
+# 97.22%
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# Scikit-learn LDA實作
+
+# 1. 載入資料
+ds = datasets.load_wine()
+df = pd.DataFrame(ds.data, columns=ds.feature_names)
+cc = df.head()
+print(cc)
+
+# 2. 資料清理、資料探索與分析
+
+# 資料集說明
+# print(ds.DESCR)
+
+# 指定X、Y
+X = df.values
+y = ds.target
+
+# 資料分割
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+# 查看陣列維度
+cc = X_train.shape, X_test.shape, y_train.shape, y_test.shape
+print(cc)
+
+# 4. 特徵縮放
+scaler = StandardScaler()
+X_train_std = scaler.fit_transform(X_train)
+X_test_std = scaler.transform(X_test)
+
+# 特徵萃取(LDA)
+
+from sklearn.discriminant_analysis import LinearDiscriminantAnalysis as LDA
+
+lda = LDA(n_components=2)
+X_train_lda = lda.fit_transform(X_train_std, y_train)
+X_test_lda = lda.transform(X_test_std)
+cc = X_train_lda.shape, X_test_lda.shape, lda.explained_variance_ratio_
+print(cc)
+
+# 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
+logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
+
+clf = LogisticRegression()
+
+# 6. 模型訓練
+clf.fit(X_train_lda, y_train)  # 學習訓練.fit
+
+# 7. 模型計分
+
+# 計算準確率
+y_pred = clf.predict(X_test_lda)  # 預測.predict
+print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
+
+# 100.00%
+
+# 繪製決策邊界(Decision regions)
+from matplotlib.colors import ListedColormap
+
+
+def plot_decision_regions(X, y, classifier, resolution=0.02):
+    # setup marker generator and color map
+    markers = ("s", "x", "o", "^", "v")
+    colors = ("red", "blue", "lightgreen", "gray", "cyan")
+    cmap = ListedColormap(colors[: len(np.unique(y))])
+
+    # plot the decision surface
+    x1_min, x1_max = X[:, 0].min() - 1, X[:, 0].max() + 1
+    x2_min, x2_max = X[:, 1].min() - 1, X[:, 1].max() + 1
+    xx1, xx2 = np.meshgrid(
+        np.arange(x1_min, x1_max, resolution), np.arange(x2_min, x2_max, resolution)
+    )
+    Z = classifier.predict(np.array([xx1.ravel(), xx2.ravel()]).T)  # 預測.predict
+    Z = Z.reshape(xx1.shape)
+    plt.contourf(xx1, xx2, Z, alpha=0.4, cmap=cmap)
+    plt.xlim(xx1.min(), xx1.max())
+    plt.ylim(xx2.min(), xx2.max())
+
+    # plot class samples
+    """
+    for idx, cl in enumerate(np.unique(y)):
+        plt.scatter(
+            x=X[y == cl, 0],
+            y=X[y == cl, 1],
+            alpha=0.6,
+            color=cmap(idx),
+            marker=markers[idx],
+            label=cl,
+        )
+    """
+
+
+plot_decision_regions(X_test_lda, y_test, classifier=clf)
+plt.xlabel("PC 1")
+plt.ylabel("PC 2")
+plt.legend(loc="lower left")
+plt.tight_layout()
+# plt.savefig('decision_regions.png', dpi=300)
+show()
+
+# 使用全部特徵
+
+X, y = datasets.load_wine(return_X_y=True)
+
+# 資料分割
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+# 查看陣列維度
+print(X_train.shape, X_test.shape, y_train.shape, y_test.shape)
+
+# 特徵縮放
+scaler = StandardScaler()
+X_train_std = scaler.fit_transform(X_train)
+X_test_std = scaler.transform(X_test)
+
+# 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
+logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
+
+clf = LogisticRegression()
+
+clf.fit(X_train_std, y_train)  # 學習訓練.fit
+
+# 模型計分
+y_pred = clf.predict(X_test_std)  # 預測.predict
+print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
+
+# (142, 13) (36, 13) (142,) (36,)
+# 100.00%
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+# 07_07_decision_tree_from_scratch
+
+# 自行開發決策樹
+
+# 計算熵(entropy)
+
+
+# 熵公式
+def entropy_func(c, n):
+    return -(c * 1.0 / n) * math.log(c * 1.0 / n, 2)
+    # gini
+    # return 1-(c*1.0/n)**2
+
+
+"""
+# 熵公式
+def entropy_func(c, n):
+    # return -(c*1.0/n)*math.log(c*1.0/n, 2)
+    # gini
+    return 1 - (c * 1.0 / n) ** 2
+"""
+
+
+# 依特徵值切割成兩類，分別計算熵，再加總
+# 計算同一節點內的熵，只有兩個類別
+def entropy_cal(c1, c2):
+    if c1 == 0 or c2 == 0:
+        return 0
+    return entropy_func(c1, c1 + c2) + entropy_func(c2, c1 + c2)
+
+
+# 視每個特徵都是類別變數，依每個類別切割，分別計算熵
+# 計算同一節點內的熵，多個類別
+def entropy_of_one_division(division):
+    s = 0
+    n = len(division)
+    classes = set(division)
+    # 計算每一類別的熵，再加總
+    for c in classes:
+        n_c = sum(division == c)
+        e = n_c * 1.0 / n * entropy_cal(sum(division == c), sum(division != c))
+        s += e
+    return s, n
+
+
+# 依分割條件計算熵
+def get_entropy(y_predict, y_real):
+    if len(y_predict) != len(y_real):
+        print("They have to be the same length")
+        return None
+    n = len(y_real)
+    # 左節點
+    s_true, n_true = entropy_of_one_division(y_real[y_predict])
+    # 右節點
+    s_false, n_false = entropy_of_one_division(y_real[~y_predict])
+    # 左、右節點加權總和
+    s = n_true * 1.0 / n * s_true + n_false * 1.0 / n * s_false
+    return s
+
+
+# 決策樹演算法類別
+
+
+class DecisionTreeClassifier(object):
+    def __init__(self, max_depth=3):
+        self.depth = 0
+        self.max_depth = max_depth
+
+    # 訓練
+    def fit(self, x, y, par_node={}, depth=0):
+        if par_node is None:
+            return None
+        elif len(y) == 0:
+            return None
+        elif self.all_same(y):
+            return {"val": float(y[0])}
+        elif depth >= self.max_depth:
+            return None
+        else:
+            # 計算資訊增益
+            col, cutoff, entropy = self.find_best_split_of_all(x, y)
+            if cutoff is not None:
+                y_left = y[x[:, col] < cutoff]
+                y_right = y[x[:, col] >= cutoff]
+                par_node = {
+                    "col": feature_names[col],
+                    "index_col": int(col),
+                    "cutoff": float(cutoff),
+                    "val": float(np.round(np.mean(y))),
+                }
+                par_node["left"] = self.fit(
+                    x[x[:, col] < cutoff], y_left, {}, depth + 1
+                )
+                par_node["right"] = self.fit(
+                    x[x[:, col] >= cutoff], y_right, {}, depth + 1
+                )
+                self.depth += 1
+            self.trees = par_node
+            return par_node
+
+    # 比較所有特徵找到最佳切割條件
+    def find_best_split_of_all(self, x, y):
+        col = None
+        min_entropy = 1
+        cutoff = None
+        for i, c in enumerate(x.T):
+            entropy, cur_cutoff = self.find_best_split(c, y)
+            if entropy == 0:  # 找到最佳切割條件
+                return i, cur_cutoff, entropy
+            elif entropy <= min_entropy:
+                min_entropy = entropy
+                col = i
+                cutoff = cur_cutoff
+        return col, cutoff, min_entropy
+
+    # 根據一個特徵找到最佳切割條件
+    def find_best_split(self, col, y):
+        min_entropy = 10
+        n = len(y)
+        for value in set(col):
+            y_predict = col < value
+            my_entropy = get_entropy(y_predict, y)
+            if my_entropy <= min_entropy:
+                min_entropy = my_entropy
+                cutoff = value
+        return min_entropy, cutoff
+
+    # 檢查是否節點中所有樣本均屬同一類
+    def all_same(self, items):
+        return all(x == items[0] for x in items)
+
+    # 預測
+    def predict(self, x):
+        tree = self.trees
+        results = np.array([0] * len(x))
+        for i, c in enumerate(x):
+            try:
+                results[i] = self._get_prediction(c)
+            except:
+                pass
+        return results
+
+    # 預測一筆
+    def _get_prediction(self, row):
+        cur_layer = self.trees
+        while cur_layer is not None and cur_layer.get("cutoff"):
+            if row[cur_layer["index_col"]] < cur_layer["cutoff"]:
+                cur_layer = cur_layer["left"]
+            else:
+                cur_layer = cur_layer["right"]
+        else:
+            return cur_layer.get("val") if cur_layer is not None else None
+
+
+# ds = datasets.load_iris()
+ds = datasets.load_wine()
+
+feature_names = ds.feature_names
+X, y = ds.data, ds.target
+
+# 資料分割
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+# 選擇演算法
+
+# 模型訓練
+
+import json
+
+clf = DecisionTreeClassifier()
+output = clf.fit(X_train, y_train)
+# output
+print(json.dumps(output, indent=4))
+
+# 模型評分
+
+# 計算準確率
+y_pred = clf.predict(X_test)
+print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
+
+# 30.56%
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 07_08_scikit-learn_decision_tree
+
+# Scikit-learn決策樹演算法
+
+ds = datasets.load_wine()
+
+feature_names = ds.feature_names
+X, y = ds.data, ds.target
+
+# 資料分割
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+# 模型訓練
+from sklearn.tree import DecisionTreeClassifier
+
+clf = DecisionTreeClassifier()  # criterion='entropy')
+clf.fit(X_train, y_train)
+
+# DecisionTreeClassifier()
+
+# 模型評分
+
+# 計算準確率
+y_pred = clf.predict(X_test)
+print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
+
+# 繪製樹狀圖
+from sklearn.tree import plot_tree
+
+plt.figure(figsize=(14, 10))
+plot_tree(clf, feature_names=feature_names)
+show()
+
+# 使用 graphviz 繪製圖形
+"""
+安裝
+    安裝 graphviz (https://graphviz.org/download/)
+    將安裝路徑的bin加入環境變數Path中(C:\Program Files (x86)\Graphviz2.XX\bin)
+    pip install graphviz pydotplus
+"""
+from pydotplus import graph_from_dot_data
+from sklearn.tree import export_graphviz
+
+dot_data = export_graphviz(
+    clf,
+    filled=True,
+    rounded=True,
+    class_names=ds.target_names,
+    feature_names=ds.feature_names,
+    out_file=None,
+)
+graph = graph_from_dot_data(dot_data)
+# graph.write_png('tmp_wine_tree.png')  NG
+
+# dot 格式存檔
+
+dot_data = export_graphviz(
+    clf,
+    filled=True,
+    rounded=True,
+    class_names=ds.target_names,
+    feature_names=ds.feature_names,
+    out_file="tmp_wine_tree.dot",
+)
+
+# 取得樹狀圖的相關資訊
+
+n_nodes = clf.tree_.node_count
+children_left = clf.tree_.children_left
+children_right = clf.tree_.children_right
+feature = clf.tree_.feature
+threshold = clf.tree_.threshold
+
+node_depth = np.zeros(shape=n_nodes, dtype=np.int64)
+is_leaves = np.zeros(shape=n_nodes, dtype=bool)
+stack = [(0, -1)]  # seed is the root node id and its parent depth
+while len(stack) > 0:
+    node_id, parent_depth = stack.pop()
+    node_depth[node_id] = parent_depth + 1
+
+    # If we have a test node
+    if children_left[node_id] != children_right[node_id]:
+        stack.append((children_left[node_id], parent_depth + 1))
+        stack.append((children_right[node_id], parent_depth + 1))
+    else:
+        is_leaves[node_id] = True
+
+print(f"樹狀圖共有{n_nodes}個節點:")
+for i in range(n_nodes):
+    depth = node_depth[i] * "\t"
+    if is_leaves[i]:
+        print(f"{depth}node={i} leaf node.")
+    else:
+        print(
+            f"{depth}node={i} child node: go to node {children_left[i]} if X[:, "
+            + f"{feature[i]}] <= {threshold[i]} else to node {children_right[i]}."
+        )
+print()
+
+node_indicator = clf.decision_path(X)
+leave_id = clf.apply(X)
+sample_id = 0
+node_index = node_indicator.indices[
+    node_indicator.indptr[sample_id] : node_indicator.indptr[sample_id + 1]
+]
+
+print(f"Rules used to predict sample {sample_id}: ")
+for node_id in node_index:
+    if leave_id[sample_id] == node_id:
+        continue
+
+    if X[sample_id, feature[node_id]] <= threshold[node_id]:
+        threshold_sign = "<="
+    else:
+        threshold_sign = ">"
+
+    print(
+        "decision id node {} : (X[{}, {}] (= {}) {} {})".format(
+            node_id,
+            sample_id,
+            feature[node_id],
+            X[sample_id, feature[node_id]],
+            threshold_sign,
+            threshold[node_id],
+        )
+    )
+
+# For a group of samples, we have the following common node.
+sample_ids = [0, 1]
+common_nodes = node_indicator.toarray()[sample_ids].sum(axis=0) == len(sample_ids)
+
+common_node_id = np.arange(n_nodes)[common_nodes]
+
+print(
+    "\nThe following samples %s share the node %s in the tree"
+    % (sample_ids, common_node_id)
+)
+print("It is %s %% of all nodes." % (100 * len(common_node_id) / n_nodes,))
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 07_12_scikit-learn_random_forest
+# Scikit-learn決策樹演算法
+
+ds = datasets.load_wine()
+
+feature_names = ds.feature_names
+X, y = ds.data, ds.target
+
+# 資料分割
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+# 模型訓練
+from sklearn.ensemble import RandomForestClassifier
+
+clf = RandomForestClassifier(n_estimators=50)
+clf.fit(X_train, y_train)
+
+# RandomForestClassifier(n_estimators=50)
+
+# 模型評分
+
+# 計算準確率
+y_pred = clf.predict(X_test)
+print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
+
+# 97.22%
+
+# 特徵重要性
+
+cc = clf.feature_importances_
+print(cc)
+
+print(feature_names)
+
+plt.figure(figsize=(10, 6))
+df = pd.DataFrame(
+    {"feature_names": feature_names, "feature_importance": clf.feature_importances_}
+)
+df.sort_values(by=["feature_importance"], ascending=False, inplace=True)
+sns.barplot(x=df["feature_importance"], y=df["feature_names"])
+show()
+
+# 使用Permutation importance評估特徵重要性
+
+from sklearn.inspection import permutation_importance
+
+result = permutation_importance(
+    clf, X_test, y_test, n_repeats=10, random_state=42, n_jobs=2
+)
+
+sorted_importances_idx = result.importances_mean.argsort()
+importances = pd.DataFrame(
+    result.importances[sorted_importances_idx].T,
+    columns=np.array(feature_names)[sorted_importances_idx],
+)
+
+ax = importances.plot.box(vert=False, whis=10, figsize=(10, 6))
+ax.set_title("Permutation Importances (test set)")
+ax.axvline(x=0, color="k", linestyle="--")
+ax.set_xlabel("Decrease in accuracy score")
+ax.figure.tight_layout()
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 

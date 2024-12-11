@@ -102,27 +102,21 @@ print('Accuracy: %.2f' % accuracy_score(labels_test, pred))
 
 print("------------------------------------------------------------")  # 60個
 
-"""
-sepal:【植】萼片
-"""
-
 from sklearn.neural_network import MLPClassifier
-
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
- 
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import accuracy_score
-
 from matplotlib.colors import ListedColormap
 
 #Apply standardization
 standardised = True
 
+# 0萼長 1萼寬 2瓣長 3瓣寬
 M = {0:"sepal length", 1:"sepal width", 2:"petal length", 3:"petal width"}
 
 #Choose two features
-x=1 #1 corresponds to the sepal width
-y=3 #3 corresponds to the petal width
+x=1 #1 corresponds to the sepal width 萼寬
+y=3 #3 corresponds to the petal width 瓣寬
 
 iris = datasets.load_iris()
 data = iris.data[:,[x,y]]
@@ -351,16 +345,12 @@ print("------------------------------------------------------------")  # 60個
 
 """
 language model
-
-
 """
-
 
 #data_processing
 
 import re
 import codecs
-
 
 filepath = 'war_and_peace.txt'  # in
 out_file = 'tmp_wap.txt'  # out
@@ -380,8 +370,6 @@ book_str = MULTIPLE_NEWLINES_REGEX.sub('\n\n', book_str)
 # Write proccessed text to file
 with codecs.open(out_file, encoding='utf-8', mode='w')as f_output:
     f_output.write(book_str)
-
-
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -452,7 +440,6 @@ batch_size = 2
 reader = DataReader(filepath, batch_length, batch_size)
 s = 'As in the question of astronomy then, so in the question of history now,'
 print([reader.char_dict[c] for c in s])
-
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -695,6 +682,24 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
@@ -708,9 +713,4 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 

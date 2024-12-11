@@ -35,199 +35,77 @@ ssl._create_default_https_context = ssl._create_stdlib_context
 print("------------------------------------------------------------")  # 60個
 
 from common1 import *
-import sklearn
-import sklearn.linear_model
-from sklearn import datasets
-from sklearn import metrics
-from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
-from sklearn.datasets import make_blobs
-from sklearn.neighbors import KNeighborsClassifier  # K近鄰演算法（K Nearest Neighbor）
-from sklearn.preprocessing import StandardScaler
-
+import joblib
 import matplotlib
 import matplotlib as mpl
 
+import sklearn
+from sklearn import metrics
+import sklearn.linear_model
+from sklearn import datasets
+from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
+
+# 載入迴歸常見的評估指標
+from sklearn.metrics import mean_squared_error  # 均方誤差 Mean Squared Error (MSE)
+from sklearn.metrics import mean_absolute_error  # 平均絕對誤差 Mean Absolute Error (MAE)
+from sklearn.metrics import r2_score  # R-Squared擬合度
+from sklearn.metrics import accuracy_score
+from sklearn.metrics import confusion_matrix
+
+from sklearn.datasets import make_blobs  # 生成分類資料
+from sklearn.datasets import make_moons  # 生成非線性資料
+from sklearn.datasets import make_classification
+from sklearn.datasets import make_hastie_10_2
+
+from sklearn.linear_model import LinearRegression
+from sklearn.linear_model import LogisticRegression
+from sklearn.linear_model import Lasso
+
+from sklearn.cluster import KMeans
+from sklearn.neighbors import KNeighborsClassifier  # K近鄰演算法（K Nearest Neighbor）
+
+from sklearn.preprocessing import StandardScaler
+
 
 def show():
+    return
     plt.show()
     pass
 
 
 print("------------------------------------------------------------")  # 60個
 
+
+# 迴歸效果評估
+def evaluate_result(y_test, y_pred):
+    print("真實資料(y_test) :", y_test)
+    print("預測資料(y_pred) :", y_pred)
+
+    print("計算 真實測試資料(y_test) 和 預測資料(y_pred)的 MSE")
+    mse = np.sum((y_test - y_pred) ** 2) / len(y_test)
+    print("MSE =", mse)
+
+    # 平均絕對誤差 Mean Absolute Error (MAE)代表平均誤差，公式為所有實際值及預測值相減的絕對值平均。
+    cc = mean_absolute_error(y_test, y_pred)
+    print("MAE : Mean Absolute Error :", cc)
+
+    # 均方誤差 Mean Squared Error (MSE)比起MSE可以拉開誤差差距，算是蠻常用的指標，公式所有實際值及預測值相減的平方的平均
+    mse = mean_squared_error(y_test, y_pred)
+    print("MSE : Mean Squared Error :", mse)
+
+    # Root Mean Squared Error (RMSE)代表MSE的平方根。比起MSE更為常用，因為更容易解釋y。
+    cc = np.sqrt(mean_squared_error(y_test, y_pred))
+    print("RMS : Root Mean Squared Error :", cc)
+
+    print("計算 真實測試資料(y_test) 和 預測資料(y_pred) 的 決定係數r2 r2_score")
+    r2 = r2_score(y_test, y_pred)
+    print(f"決定係數R2 = {r2:.4f}")
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 # 搬到 獨立小程式
-
-
-from sklearn.metrics.pairwise import cosine_similarity
-
-print("測試 cosine_similarity")
-
-X = np.array(
-    [
-        [3, 0],  # r1
-        [0, 3],  # r2
-    ]
-)
-
-sim = cosine_similarity(X)
-print(sim)
-
-
-"""
-計算相似度
-#sklearn sklearn向量距離計算
-
-通過 euclidean_distances 計算多個向量間的歐氏距離。
-
-歐幾里得距離 (Euclidean distance)
-    0, r1*r2, r1*r3, r1*r4
------,     0, r2*r3, r2*r4
------, -----,     0, r3*r4
------, -----, -----,     0
-"""
-
-from sklearn.metrics.pairwise import euclidean_distances
-from sklearn.metrics.pairwise import cosine_similarity
-
-print("測試 euclidean_distances 歐幾里得距離 (Euclidean distance)")
-
-X = np.array(
-    [
-        [4, 3, 0, 0, 5, 0],  # r1
-        [5, 0, 4, 0, 4, 0],  # r2
-        [4, 0, 5, 3, 4, 0],  # r3
-        [0, 3, 0, 0, 0, 5],  # r4
-    ]
-)
-
-"""
-X = np.array(
-    [
-        [4, 3, 0, 0, 5, 0, 4, 3, 0, 0, 5, 0],  # r1
-        [5, 0, 4, 0, 4, 0, 5, 0, 4, 0, 4, 0],  # r2
-    ]
-)
-"""
-
-dist = euclidean_distances(X)
-print(dist)
-
-print("測試 cosine_similarity")
-sim = cosine_similarity(X)
-print(sim)
-
-print("兩列之間的距離")
-X = [[0, 1], [1, 1]]
-cc = euclidean_distances(X, X)
-print(cc)
-
-print("與原點之間的距離")
-cc = euclidean_distances(X, [[0, 0]])
-print(cc)
-
-print("比較字串的距離")
-
-from sklearn.feature_extraction.text import CountVectorizer
-
-corpus = ["I am a good student", "I am a good teacher", "This is a pencil"]  # 文集
-
-vectorizer = CountVectorizer()
-counts = vectorizer.fit_transform(corpus).todense()  # 得到文集corpus的特征向量，並將其轉為密集矩陣
-print(counts)
-
-""" kilo OK, 但是 sugar不OK
-for x,y in [[0,1],[0,2],[1,2]]:
-    dist = euclidean_distances(counts[x],counts[y])
-    print('文檔{}與文檔{}的距離{}'.format(x,y,dist))
-"""
-
-print("比較幾個向量的距離")
-
-# 每個人的特徵向量
-vector1 = [1.0, 1.0, 1.0]  # 嫌犯 1 的特徵
-vector2 = [0.2, 0.7, 0.2]  # 嫌犯 2 的特徵
-vector3 = [0.4, 0.8, 0.9]  # 嫌犯 3 的特徵
-vector4 = [0.8, 0.8, 0.3]  # 嫌犯 4 的特徵
-
-# 把特徵向量集合成一個串列，好讓 sklearn 方便直接計算任兩個向量間的相似度
-feature_vectors = [vector1, vector2, vector3, vector4]
-print("Feature vectors:")
-print(feature_vectors)
-print()
-
-# 計算任兩個向量間的歐幾里德距離
-print("Euclidean distances:")
-distances_similarity_metrix = euclidean_distances(feature_vectors)
-print(distances_similarity_metrix)
-print()
-
-# 計算任兩個向量間的餘弦相似度
-print("Cosine similarity:")
-cosine_similarity_metrix = cosine_similarity(feature_vectors)
-print(cosine_similarity_metrix)
-print()
-
-print("------------------------------------------------------------")  # 60個
-"""
-from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
-
-text = ["小貝來到北京清華大學",
-        "小花來到了網易杭研大廈",
-        "小明碩士畢業于中國科學院",
-        "小明愛北京小明愛北京天安門"
-        ]
-               
-corpus = ["小貝 來到 北京 清華大學",
-          "小花 來到 了 網易 杭研 大廈",
-          "小明 碩士 畢業 于 中國 科學院",
-          "小明 愛 北京 小明 愛 北京 天安門"
-          ]
-
-print('二值化、詞頻')
-vectorizer = CountVectorizer(min_df = 1, binary = True) #Transformer
-data = vectorizer.fit_transform(corpus)
-features = vectorizer.get_feature_names_out()
-for word in features:
-    print(word)
-print(len(features))
-
-print(data.todense())
-
-doc_df = pd.DataFrame(data.toarray(), index = text, columns = vectorizer.get_feature_names_out()).head(10)
-
-print(doc_df)
-print(doc_df.columns)
-
-print('------------------------------')	#30個
-
-from sklearn.metrics.pairwise import cosine_similarity
-
-cos_sims = cosine_similarity(doc_df)
-print(cos_sims)
-
-sims_df = pd.DataFrame(cos_sims, index = text, columns = text)
-print(sims_df)
-
-print('------------------------------')	#30個
-
-#tf-idf
-
-vectorizer = TfidfVectorizer(min_df = 1)
-data = vectorizer.fit_transform(corpus)
-features = vectorizer.get_feature_names_out()
-for word in features:
-    print(word)
-
-print('------------------------------')	#30個
-
-pd.set_option('display.precision', 2)
-doc_df = pd.DataFrame(data.toarray(), index = text, columns = vectorizer.get_feature_names_out()).head(10)
-print(doc_df)
-
-"""
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
 
 """
 X = np.array([i * np.pi / 180 for i in range(0, 370, 10)])
@@ -610,7 +488,6 @@ predictions = classifier.predict(example_counts)  # 預測.predict
 
 print('預測結果 :', predictions)
 
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -833,281 +710,6 @@ model.fit(data)  # 學習訓練.fit
 
 print(model.transform(data)) # 変換したデータ
 """
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# 6-1 探索性資料分析──以Titanic(鐵達尼號)之生還預測為例
-# 資料科學 0. 問個感興趣的問題
-
-# 資料科學 1. 資料取得
-# 資料科學1.1 自建資料或下載資料後上傳到雲端硬碟
-
-# train.csv行資料說明.jpg
-# 資料科學1.2 讀取Google雲端硬碟中的csv檔
-# 資料科學1.3 將行列結構的資料建立為Pandas的資料框
-
-filename = "data/titanic.csv"
-df = pd.read_csv(filename)
-"""
-print(df)
-print(df.info())
-print(df.describe())
-"""
-
-# 資料科學2.3 資料清理
-# 缺失值的補值或刪除
-
-print(df.isnull())
-
-print(df.isnull().sum())
-
-print(df.isnull().count())
-
-print(df.isnull().sum() / df.isnull().count() * 100)
-
-df[df["Age"].isnull() == True]
-
-df["Age"] = df["Age"].fillna(df["Age"].mean())
-
-print(df)
-
-df[df["Embarked"].isnull()]
-
-df["Embarked"].value_counts()
-
-df["Embarked"] = df["Embarked"].fillna("S")
-
-df.loc[[61, 829], :]  # 顯示列索引61,829的資料
-
-print(df.info())
-
-df = df.drop("Cabin", axis=1)
-
-print(df.info())
-
-# 刪除重複值或異常值
-df[df.duplicated()]
-
-# 資料轉換
-print(df.head())
-
-s = {"female": 0, "male": 1}
-df["Sex"] = df["Sex"].map(s)
-e = {"S": 0, "C": 1, "Q": 2}
-df["Embarked"] = df["Embarked"].map(e)
-print(df.head())
-
-# 資料科學3. 探索性資料分析
-# 資料科學3.1 觀察資料的分佈(統計)
-
-print(df.head())
-
-# 資料科學3.2 資料視覺化
-# 1.全體乘客生還、死亡的比例
-
-print(df["Survived"].value_counts())
-
-df["Survived"].value_counts().plot(kind="pie", autopct="%1.2f%%")
-show()
-
-print("------------------------------")  # 30個
-
-# 2.男性、女性乘客的比例
-
-print(df["Sex"].value_counts())
-
-df["Sex"].value_counts().plot(kind="pie", autopct="%1.2f%%")
-show()
-
-print("------------------------------")  # 30個
-
-# 3.搭1等艙、2等艙、3等艙的乘客比例
-
-print(df["Pclass"].value_counts())
-
-df["Pclass"].value_counts().plot(kind="pie", autopct="%1.2f%%")
-show()
-
-print("------------------------------")  # 30個
-
-# 4.進一步探討性別與生還的關係
-
-# 女、男乘客的人數
-
-print(df.groupby(["Sex"])["PassengerId"].count())
-
-# 不同性別的生還和死亡人數
-
-print(df.groupby(["Sex", "Survived"])["PassengerId"].count())
-
-df.groupby(["Sex", "Survived"])["PassengerId"].count().plot(kind="bar", rot=1)
-show()
-
-print("------------------------------")  # 30個
-
-# 不同性別生還人數/不同性別人數
-
-ss = (
-    df.groupby(["Sex", "Survived"])["PassengerId"].count()
-    / df.groupby(["Sex"])["PassengerId"].count()
-    * 100
-)
-print(ss)
-
-ss.plot(kind="bar", color=["r", "g"], rot=0)
-show()
-
-print("------------------------------")  # 30個
-
-# 5.進一步探討艙等與生還的關係
-
-# 三種艙等的生還和死亡人數
-
-print(df.groupby(["Pclass", "Survived"])["PassengerId"].count())
-
-df.groupby(["Pclass", "Survived"])["PassengerId"].count().plot(kind="bar", rot=0)
-show()
-
-print("------------------------------")  # 30個
-
-# 不同艙等生還人數/不同艙等人數
-
-ps = (
-    df.groupby(["Pclass", "Survived"])["PassengerId"].count()
-    / df.groupby(["Pclass"])["PassengerId"].count()
-    * 100
-)
-print(ps)
-
-ps.plot(kind="bar", rot=0)
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# 6-2 探索性資料分析──以 Iris 的花種分類為例
-# 資料科學0. 感興趣的問題
-
-# 資料科學1. 資料取得
-# 資料科學1.1 自建資料或從網路下載資料後上傳到雲端硬碟
-
-# Iris.jpg
-# 資料科學1.2 讀取Google雲端硬碟中的csv檔
-# 資料科學1.3 將行列結構的資料建立為Pandas的資料框
-
-filename = "data/Iris2.csv"
-df = pd.read_csv(filename)
-print(df)
-
-df = df.drop("Id", axis=1)
-print(df.head())
-
-# 資料科學2. 資料處理
-# 資料科學2.1 由列資料了解資料集
-
-print(df.head())
-
-# 資料科學2.2 了解行資料的標題與資料型別(整數、浮點數、字串等)
-
-print(df.info())
-
-# 資料科學2.3 資料清理
-
-# 缺失值的補值或刪除
-
-print(df.info())
-
-# 刪除重複值或異常值
-
-print(df[df.duplicated()])
-
-df = df.drop_duplicates()
-
-print(df[df.duplicated()])
-
-df.reset_index(drop=True)  # 將列索引重新編號
-
-# 資料轉換
-
-s = {"Iris-setosa": 0, "Iris-versicolor": 1, "Iris-virginica": 2}
-df["Species"] = df["Species"].map(s)
-print(df.head())
-
-# 資料科學3. 探索性資料分析
-# 資料科學3.1 觀察資料的分佈(統計)
-print(df.head())
-
-# 資料科學3.2 資料視覺化
-
-c = {0: "r", 1: "g", 2: "b"}
-df["colors"] = df["Species"].map(c)
-print(df)
-
-df.plot(kind="scatter", x="SepalLengthCm", y="Species", c=df["colors"])
-show()
-
-print("------------------------------")  # 30個
-
-# (圖)-不同欄位和「類別(Species)」所繪製的散佈圖
-# (a)花萼長度
-df.plot(kind="scatter", x="SepalLengthCm", y="Species", c=df["colors"])
-show()
-
-print("------------------------------")  # 30個
-
-# (b)花萼寬度
-df.plot(kind="scatter", x="SepalWidthCm", y="Species", c=df["colors"])
-show()
-
-print("------------------------------")  # 30個
-
-# (c)花瓣長度
-df.plot(kind="scatter", x="PetalLengthCm", y="Species", c=df["colors"])
-show()
-
-print("------------------------------")  # 30個
-
-# (d)花瓣寬度
-df.plot(kind="scatter", x="PetalWidthCm", y="Species", c=df["colors"])
-show()
-
-print("------------------------------")  # 30個
-
-# (圖)-2個欄位組合所繪製的散佈圖
-# (a)花萼長度 vs. 花萼寬度
-df.plot(kind="scatter", x="SepalLengthCm", y="SepalWidthCm", c=df["colors"])
-show()
-
-print("------------------------------")  # 30個
-
-# (b)花瓣長度 vs. 花瓣寬度
-df.plot(kind="scatter", x="PetalLengthCm", y="PetalWidthCm", c=df["colors"])
-show()
-
-print("------------------------------")  # 30個
-
-# (c)花萼長度 vs. 花瓣寬度
-df.plot(kind="scatter", x="SepalLengthCm", y="PetalWidthCm", c=df["colors"])
-show()
-
-print("------------------------------")  # 30個
-
-# (d)花瓣長度 vs. 花萼寬度
-df.plot(kind="scatter", x="PetalLengthCm", y="SepalWidthCm", c=df["colors"])
-show()
-
-print("------------------------------")  # 30個
-
-# (e)花萼長度 vs. 花瓣長度
-df.plot(kind="scatter", x="SepalLengthCm", y="PetalLengthCm", c=df["colors"])
-show()
-
-print("------------------------------")  # 30個
-
-# (f)花萼寬度 vs. 花瓣寬度
-df.plot(kind="scatter", x="SepalWidthCm", y="PetalWidthCm", c=df["colors"])
-show()
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -1847,108 +1449,6 @@ print(error(Y, Ypred))
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-""" no clf
-# 02 [練習] 圖形化我們的成果
-
-# 1. 上次的成果拿回來使用
-
-# 記得上次我們做了個鳶尾花分類器。
-# 1.1 找回我們的分類器
-
-from sklearn.externals import joblib
-
-clf = joblib.load("iris_clf_01.pkl")
-
-# 真的可以用了嗎?
-
-print(clf.predict([[2, 3]]))
-
-# 可以! 太棒了!
-# 1.2 看看我們分類的全貌
-
-# 我們用一下之前的方式, 畫出我們想要看到我們可愛的 SVM 是怎麼以花萼長度、花萼寬度來分類的。
-# 上次我們用了 Python 所謂 "list comprehension" 的作法 (本質上是 for 迴圈), 現在我們換個方式看來比較「高級」的方式。
-
-xt, yt = np.meshgrid(np.arange(-2, 2, 0.5), np.arange(-1, 1, 0.5))
-
-print(xt)
-print(yt)
-
-# 看得出來 meshgrid 做了什麼呢? 基本上它就是說我們在 x, y 兩個指定範圍的長方型當中, 依我們指定的間隔找出格點。
-# 這些格點的座標分成 x 座標一個 array, y 座標一個。x 或 y 座標的 array, 的座標是一列一列標記的。
-# 要是你覺得這樣的表示法很討厭, 我們也可以讓它變一長串的向量。
-
-print(xt.ravel())
-
-# 注意這其實原來的 xt 並沒有變哦。
-
-print(xt)
-
-# 我們可以把 (x,y) 一點一點的座標收集起來嗎?
-
-print(np.c_[xt.ravel(), yt.ravel()])
-
-
-# 把資料的型式這樣變來變去會是數據分析非常非常常做的事情。
-# 我們經這麼多廢話後終於可以來做正事。
-
-xx, yy = np.meshgrid(np.arange(3, 8.5, 0.2), np.arange(1.5, 5.0, 0.2))
-
-Z = clf.predict(np.c_[xx.ravel(), yy.ravel()])
-
-plt.scatter(xx.ravel(), yy.ravel(), s=50, c=Z)
-show()
-
-# 雖然看來我們用了比較多白痴的方法做出一樣的事, 不過一些技巧之後也可以常常使用。
-# 1.3 快速換個配色
-
-plt.scatter(xx.ravel(), yy.ravel(), s=50, c=Z, cmap=plt.cm.coolwarm, alpha=0.8)
-show()
-
-
-plt.scatter(xx.ravel(), yy.ravel(), s=50, c=Z, cmap=plt.cm.prism, alpha=0.8)
-show()
-
-# 1.4 取回鳶尾花訓練資料
-
-from sklearn.datasets import load_iris
-
-iris = load_iris()
-
-x = iris.data[:, :2]
-
-y = iris.target
-
-# 我們來畫畫比較。
-
-plt.subplot(121)
-
-plt.scatter(x[:, 0], x[:, 1], s=50, c=y)
-
-plt.subplot(122)
-
-plt.scatter(x[:, 0], x[:, 1], s=50, c=clf.predict(x))
-
-show()
-
-# 左邊的是訓練資料, 右邊是用我們 SVM 分類器分出來的。你有看出差異嗎? 是不是很難看出? 我們來用用另一個方式。
-
-# 1.5 畫圖的另一個方式
-
-xx, yy = np.meshgrid(np.arange(3, 8.5, 0.02), np.arange(1.5, 5.0, 0.02))
-Z = clf.predict(np.c_[xx.ravel(), yy.ravel()])
-Z = Z.reshape(xx.shape)
-plt.contourf(xx, yy, Z, cmap=plt.cm.coolwarm, alpha=0.8)
-show()
-
-Z = Z.reshape(xx.shape)
-plt.contourf(xx, yy, Z, cmap=plt.cm.coolwarm, alpha=0.8)
-plt.scatter(x[:, 0], x[:, 1], s=50, c=y, cmap=plt.cm.coolwarm)
-show()
-"""
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 """ 安裝 auto-sklearn fail
 print('Auto-Sklearn')
 
@@ -1995,90 +1495,6 @@ model.score(data, data.vote)
 """
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-"""
-# titanic ST
-
-# 數據集和數據處理
-
-from pandas import Series, DataFrame
-
-# 繪圖分析
-sns.set_style("whitegrid")
-
-# 機器學習
-from sklearn.linear_model import LogisticRegression  # 邏輯迴歸
-#from sklearn.svm import SVC, LinearSVC  # 支持向量機
-from sklearn.ensemble import RandomForestClassifier  # 隨機森林
-
-from sklearn.naive_bayes import GaussianNB  # 數據集和數據處理
-
-print("------------------------------")	#30個
-
-titanic_df = pd.read_csv("data/train.csv")
-test_df = pd.read_csv("data/test.csv")
-print(titanic_df.head())
-print(titanic_df.info())
-print(titanic_df.describe())
-
-facet = sns.FacetGrid(titanic_df, hue="Survived", aspect=4)
-facet.map(sns.kdeplot, "Age", shade=True)
-facet.set(xlim=(0, titanic_df["Age"].max()))
-facet.add_legend()
-show()
-
-fig, axis1 = plt.subplots(1, 1, figsize=(18, 4))
-average_age = titanic_df[["Age", "Survived"]].groupby(["Age"], as_index=False).mean()
-sns.barplot(x="Age", y="Survived", data=average_age)
-show()
-
-print("------------------------------")	#30個
-
-
-def get_person(passenger):  # 小於16歲的分類爲兒童
-    age, sex = passenger
-    return "child" if age < 16 else sex
-
-
-def conv(df):
-    df["Person"] = df[["Age", "Sex"]].apply(get_person, axis=1)  # 組合特徵
-    df["Fare"] = df["Fare"].fillna(df["Fare"].mean())  # 缺失值填充爲均值
-    df["Embarked"] = df["Embarked"].fillna("S")  # 缺失值填充爲S
-    df["Fare"] = df["Fare"].astype(int)  # 類型轉換
-
-    person_dummies = pd.get_dummies(df["Person"])  # onehot編碼
-    person_dummies.columns = ["Child", "Female", "Male"]
-    df = df.join(person_dummies)  # 連接原數據與onehot數據
-    df = df.drop(
-        ["PassengerId", "Name", "Ticket", "Person", "Sex", "Embarked", "Cabin", "Age"],
-        axis=1,
-    )  # 刪除非數據型特徵
-    return df
-
-
-titanic_df = conv(titanic_df)
-test_df = conv(test_df)
-
-print("------------------------------")	#30個
-
-# 生成模型所需的訓練集和測試集
-X_train = titanic_df.drop("Survived", axis=1)
-Y_train = titanic_df["Survived"]
-X_test = test_df.copy()
-
-from sklearn.linear_model import LogisticRegression
-
-logreg = LogisticRegression()  # 初始化模型
-
-logreg.fit(X_train, Y_train)  # 學習訓練.fit
-
-print(logreg.score(X_train, Y_train))  # 模型評分
-
-Y_pred = logreg.predict(X_test)  # 預測
-"""
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
 """
 實際數據請從天池競賽平臺下載
 https://tianchi.aliyun.com/competition/gameList/activeList
@@ -2535,85 +1951,6 @@ print(df)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# titanic
-
-# How do I use pandas with scikit-learn to create Kaggle submissions? (video)
-
-# 讀取[Kaggle's Titanic competition]資料集至df
-# train = pd.read_csv('http://bit.ly/kaggletrain')
-filename = "data/titanic_train.csv"
-train = pd.read_csv(filename)
-
-print("檢視前幾行")
-cc = train.head()
-print(cc)
-
-# create a feature matrix 'X' by selecting two DataFrame columns
-feature_cols = ["Pclass", "Parch"]
-X = train.loc[:, feature_cols]
-
-print("X之大小")
-cc = X.shape
-print(cc)
-
-# create a response vector 'y' by selecting a Series
-y = train.Survived
-print("y之大小")
-cc = y.shape
-print(cc)
-
-# fit a classification model to the training data
-from sklearn.linear_model import LogisticRegression
-
-logreg = LogisticRegression()
-logreg.fit(X, y)
-
-# read the testing dataset from Kaggle's Titanic competition into a DataFrame
-test = pd.read_csv("http://bit.ly/kaggletest")
-print("檢視前幾行")
-cc = test.head()
-print(cc)
-
-# create a feature matrix from the testing data that matches the training data
-X_new = test.loc[:, feature_cols]
-print("X_new之大小")
-cc = X_new.shape
-print(cc)
-
-# use the fitted model to make predictions for the testing set observations
-new_pred_class = logreg.predict(X_new)
-
-# create a DataFrame of passenger IDs and testing set predictions
-print("檢視前幾行")
-cc = pd.DataFrame({"PassengerId": test.PassengerId, "Survived": new_pred_class}).head()
-print(cc)
-
-# ensure that PassengerID is the first column by setting it as the index
-print("檢視前幾行")
-cc = (
-    pd.DataFrame({"PassengerId": test.PassengerId, "Survived": new_pred_class})
-    .set_index("PassengerId")
-    .head()
-)
-print(cc)
-
-print("df轉csv")
-pd.DataFrame({"PassengerId": test.PassengerId, "Survived": new_pred_class}).set_index(
-    "PassengerId"
-).to_csv("tmp_sub.csv")
-
-print("df轉pickle")
-train.to_pickle("tmp_train.pkl")
-
-print("pickle轉df")
-print("檢視前幾行")
-cc = pd.read_pickle("tmp_train.pkl").head()
-print(cc)
-
-# titanic SP
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 N = 200
 
 X = np.linspace(0, 1, N)
@@ -2749,564 +2086,6 @@ for i in range(len(degrees)):
 
 show()
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-"""
-N = 200
-
-X = np.linspace(-2 * np.pi, 2 * np.pi, N)
-Y = np.sin(X) + 0.2 * np.random.rand(N) - 0.1
-X = X.reshape(-1, 1)
-Y = Y.reshape(-1, 1)
-
-from sklearn.linear_model import LinearRegression
-from sklearn.preprocessing import PolynomialFeatures
-from sklearn.pipeline import Pipeline
-
-
-def polynomial_model(degree=1):
-    polynomial_features = PolynomialFeatures(degree=degree, include_bias=False)
-    linear_regression = LinearRegression()
-    pipeline = Pipeline(
-        [
-            ("polynomial_features", polynomial_features),
-            ("linear_regression", linear_regression),
-        ]
-    )
-    return pipeline
-
-
-from sklearn.metrics import mean_squared_error
-
-degrees = [2, 3, 5, 10]
-results = []
-for d in degrees:
-    model = polynomial_model(degree=d)
-    model.fit(X, Y)
-    train_score = model.score(X, Y)
-    mse = mean_squared_error(Y, model.predict(X))
-    results.append({"model": model, "degree": d, "score": train_score, "mse": mse})
-for r in results:
-    print(
-        "degree: {}; train score: {}; mean squared error: {}".format(
-            r["degree"], r["score"], r["mse"]
-        )
-    )
-
-print("------------------------------")  # 30個
-
-from matplotlib.figure import SubplotParams
-
-plt.figure(figsize=(12, 8), subplotpars=SubplotParams(hspace=0.3))
-for i, r in enumerate(results):
-    fig = plt.subplot(2, 2, i + 1)
-    plt.xlim(-8, 8)
-    plt.title("LinearRegression degree={}".format(r["degree"]))
-    plt.scatter(X, Y, s=5, c="b", alpha=0.5)
-    plt.plot(X, r["model"].predict(X), "r-")
-
-show()
-"""
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-"""
-print("titanic ST")
-
-
-def read_dataset(fname):
-    # 指定第一列作為行索引
-    data = pd.read_csv(fname, index_col=0)
-    # 丟棄無用的數據
-    data.drop(["Name", "Ticket", "Cabin"], axis=1, inplace=True)
-    # 處理性別數據
-    data["Sex"] = (data["Sex"] == "male").astype("int")
-    # 處理登船港口數據
-    labels = data["Embarked"].unique().tolist()
-    data["Embarked"] = data["Embarked"].apply(lambda n: labels.index(n))
-    # 處理缺失數據
-    data = data.fillna(0)
-    return data
-
-
-train = read_dataset("datasets/titanic/train.csv") # 共891筆資料, 8欄位
-print(train.head())
-
-# 把 "Survived"欄位拿出來當訓練目標 => y
-y = train["Survived"].values
-
-# 把 "Survived"欄位從原訓練資料移除 => X
-X = train.drop(["Survived"], axis=1).values
-
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
-# 訓練組8成, 測試組2成
-
-from sklearn.tree import DecisionTreeClassifier
-
-clf = DecisionTreeClassifier()
-clf.fit(X_train, y_train)
-train_score = clf.score(X_train, y_train)
-test_score = clf.score(X_test, y_test)
-
-print("train_score :", train_score)
-print("test_score :", test_score)
-
-print("------------------------------")  # 30個
-
-from sklearn.tree import export_graphviz
-
-with open("tmp_titanic1.dot", "w") as f:
-    f = export_graphviz(clf, out_file=f)
-
-# 1. 在電腦上安裝 graphviz
-# 2. 運行 `dot -Tpng titanic.dot -o titanic.png`
-# 3. 在當前目錄查看生成的決策樹 titanic.png
-
-
-# 參數選擇 max_depth
-def cv_score(d):
-    clf = DecisionTreeClassifier(max_depth=d)
-    clf.fit(X_train, y_train)
-    tr_score = clf.score(X_train, y_train)
-    cv_score = clf.score(X_test, y_test)
-    return (tr_score, cv_score)
-
-
-depths = range(2, 15)
-scores = [cv_score(d) for d in depths]
-tr_scores = [s[0] for s in scores]
-cv_scores = [s[1] for s in scores]
-
-best_score_index = np.argmax(cv_scores)
-best_score = cv_scores[best_score_index]
-best_param = depths[best_score_index]
-print("best param: {0}; best score: {1}".format(best_param, best_score))
-
-plt.figure(figsize=(10, 6))
-plt.grid()
-plt.xlabel("max depth of decision tree")
-plt.ylabel("score")
-plt.plot(depths, cv_scores, ".g-", label="cross-validation score")
-plt.plot(depths, tr_scores, ".r--", label="training score")
-plt.legend()
-show()
-
-print("------------------------------")  # 30個
-
-# 訓練模型，并計算評分
-def cv_score(val):
-    clf = DecisionTreeClassifier(criterion="gini", min_impurity_decrease=val)
-    clf.fit(X_train, y_train)
-    tr_score = clf.score(X_train, y_train)
-    cv_score = clf.score(X_test, y_test)
-    return (tr_score, cv_score)
-
-
-# 指定參數范圍，分別訓練模型，并計算評分
-values = np.linspace(0, 0.005, 50)
-scores = [cv_score(v) for v in values]
-tr_scores = [s[0] for s in scores]
-cv_scores = [s[1] for s in scores]
-
-# 找出評分最高的模型參數
-best_score_index = np.argmax(cv_scores)
-best_score = cv_scores[best_score_index]
-best_param = values[best_score_index]
-print("best param: {0}; best score: {1}".format(best_param, best_score))
-
-# 畫出模型參數與模型評分的關系
-plt.figure(figsize=(10, 6))
-plt.grid()
-plt.xlabel("threshold of entropy")
-plt.ylabel("score")
-plt.plot(values, cv_scores, ".g-", label="cross-validation score")
-plt.plot(values, tr_scores, ".r--", label="training score")
-plt.legend()
-show()
-
-print("------------------------------")  # 30個
-
-
-def plot_curve(train_sizes, cv_results, xlabel):
-    train_scores_mean = cv_results["mean_train_score"]
-    train_scores_std = cv_results["std_train_score"]
-    test_scores_mean = cv_results["mean_test_score"]
-    test_scores_std = cv_results["std_test_score"]
-    plt.figure(figsize=(10, 6))
-    plt.title("parameters turning")
-    plt.grid()
-    plt.xlabel(xlabel)
-    plt.ylabel("score")
-    plt.fill_between(
-        train_sizes,
-        train_scores_mean - train_scores_std,
-        train_scores_mean + train_scores_std,
-        alpha=0.1,
-        color="r",
-    )
-    plt.fill_between(
-        train_sizes,
-        test_scores_mean - test_scores_std,
-        test_scores_mean + test_scores_std,
-        alpha=0.1,
-        color="g",
-    )
-    plt.plot(train_sizes, train_scores_mean, ".--", color="r", label="Training score")
-    plt.plot(
-        train_sizes, test_scores_mean, ".-", color="g", label="Cross-validation score"
-    )
-
-    plt.legend(loc="best")
-
-
-from sklearn.model_selection import GridSearchCV
-
-thresholds = np.linspace(0, 0.005, 50)
-# Set the parameters by cross-validation
-param_grid = {"min_impurity_decrease": thresholds}
-
-clf = GridSearchCV(DecisionTreeClassifier(), param_grid, cv=5, return_train_score=True)
-clf.fit(X, y)
-print("best param: {0}\nbest score: {1}".format(clf.best_params_, clf.best_score_))
-
-# cv_results_ : 具體用法模型不同參數下交叉驗證的結果
-plot_curve(thresholds, clf.cv_results_, xlabel="gini thresholds")
-
-show()
-
-print("------------------------------")  # 30個
-
-from sklearn.model_selection import GridSearchCV
-
-entropy_thresholds = np.linspace(0, 0.01, 50)
-gini_thresholds = np.linspace(0, 0.005, 50)
-
-# Set the parameters by cross-validation
-param_grid = [
-    {"criterion": ["entropy"], "min_impurity_decrease": entropy_thresholds},
-    {"criterion": ["gini"], "min_impurity_decrease": gini_thresholds},
-    {"max_depth": range(2, 10)},
-    {"min_samples_split": range(2, 30, 2)},
-]
-
-clf = GridSearchCV(DecisionTreeClassifier(), param_grid, cv=5, return_train_score=True)
-clf.fit(X, y)
-print("best param: {0}\nbest score: {1}".format(clf.best_params_, clf.best_score_))
-
-print("------------------------------")  # 30個
-
-print("生成決策樹圖形")
-
-clf = DecisionTreeClassifier(
-    criterion="entropy", min_impurity_decrease=0.002857142857142857
-)
-clf.fit(X_train, y_train)
-train_score = clf.score(X_train, y_train)
-test_score = clf.score(X_test, y_test)
-print("train score: {0}; test score: {1}".format(train_score, test_score))
-
-# 導出 titanic.dot 文件
-with open("tmp_titanic2.dot", "w") as f:
-    f = export_graphviz(clf, out_file=f)
-
-# 1. 在電腦上安裝 graphviz
-# 2. 運行 `dot -Tpng titanic.dot -o titanic.png`
-# 3. 在當前目錄查看生成的決策樹 titanic.png
-
-print("titanic SP")
-"""
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-"""
-class1 = np.array([[1, 1], [1, 3], [2, 1], [1, 2], [2, 2]])
-class2 = np.array([[4, 4], [5, 5], [5, 4], [5, 3], [4, 5], [6, 4]])
-
-plt.figure(figsize=(8, 6))
-
-plt.title("Decision Boundary")
-
-plt.xlim(0, 8)
-plt.ylim(0, 6)
-
-ax = plt.gca()  # gca 代表當前坐標軸，即 'get current axis'
-ax.spines["right"].set_color("none")  # 隱藏坐標軸
-ax.spines["top"].set_color("none")
-
-plt.scatter(class1[:, 0], class1[:, 1], marker="o")
-plt.scatter(class2[:, 0], class2[:, 1], marker="s")
-
-plt.plot([1, 5], [5, 1], "r-")
-plt.arrow(4, 4, -1, -1, shape="full", color="r")
-
-plt.plot([3, 3], [0.5, 6], "b--")
-plt.arrow(4, 4, -1, 0, shape="full", color="b", linestyle="--")
-
-plt.annotate(
-    r"margin 1",
-    xy=(3.5, 4),
-    xycoords="data",
-    xytext=(3.1, 4.5),
-    fontsize=10,
-    arrowprops=dict(arrowstyle="->", connectionstyle="arc3,rad=.2"),
-)
-
-plt.annotate(
-    r"margin 2",
-    xy=(3.5, 3.5),
-    xycoords="data",
-    xytext=(4, 3.5),
-    fontsize=10,
-    arrowprops=dict(arrowstyle="->", connectionstyle="arc3,rad=.2"),
-)
-
-plt.annotate(
-    r"support vector",
-    xy=(4, 4),
-    xycoords="data",
-    xytext=(5, 4.5),
-    fontsize=10,
-    arrowprops=dict(arrowstyle="->", connectionstyle="arc3,rad=.2"),
-)
-
-plt.annotate(
-    r"support vector",
-    xy=(2, 2),
-    xycoords="data",
-    xytext=(0.5, 1.5),
-    fontsize=10,
-    arrowprops=dict(arrowstyle="->", connectionstyle="arc3,rad=.2"),
-)
-
-show()
-
-print("------------------------------")  # 30個
-
-plt.figure(figsize=(8, 6))
-
-plt.title("Support Vector Machine")
-
-plt.xlim(0, 8)
-plt.ylim(0, 6)
-
-ax = plt.gca()  # gca 代表當前坐標軸，即 'get current axis'
-ax.spines["right"].set_color("none")  # 隱藏坐標軸
-ax.spines["top"].set_color("none")
-
-plt.scatter(class1[:, 0], class1[:, 1], marker="o")
-plt.scatter(class2[:, 0], class2[:, 1], marker="s")
-
-plt.plot([1, 5], [5, 1], "-r")
-plt.plot([0, 4], [4, 0], "--b", [2, 6], [6, 2], "--b")
-
-plt.arrow(4, 4, -1, -1, shape="full", color="b")
-
-plt.annotate(
-    r"$w^T x + b = 0$",
-    xy=(5, 1),
-    xycoords="data",
-    xytext=(6, 1),
-    fontsize=10,
-    arrowprops=dict(arrowstyle="->", connectionstyle="arc3,rad=.2"),
-)
-
-plt.annotate(
-    r"$w^T x + b = 1$",
-    xy=(6, 2),
-    xycoords="data",
-    xytext=(7, 2),
-    fontsize=10,
-    arrowprops=dict(arrowstyle="->", connectionstyle="arc3,rad=.2"),
-)
-
-plt.annotate(
-    r"$w^T x + b = -1$",
-    xy=(3.5, 0.5),
-    xycoords="data",
-    xytext=(4.5, 0.2),
-    fontsize=10,
-    arrowprops=dict(arrowstyle="->", connectionstyle="arc3,rad=.2"),
-)
-
-plt.annotate(
-    r"d",
-    xy=(3.5, 3.5),
-    xycoords="data",
-    xytext=(2, 4.5),
-    fontsize=10,
-    arrowprops=dict(arrowstyle="->", connectionstyle="arc3,rad=.2"),
-)
-
-plt.annotate(
-    r"A",
-    xy=(4, 4),
-    xycoords="data",
-    xytext=(5, 4.5),
-    fontsize=10,
-    arrowprops=dict(arrowstyle="->", connectionstyle="arc3,rad=.2"),
-)
-
-show()
-"""
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-"""
-plt.figure(figsize=(13, 6))
-
-# sub plot 1
-plt.subplot(1, 2, 1)
-
-X, y = make_blobs(
-    n_samples=100,
-    n_features=2,
-    centers=[(1, 1), (2, 2)],
-    random_state=9487,
-    shuffle=False,
-    cluster_std=0.4,
-)
-
-plt.title("Non-linear Separatable")
-
-plt.xlim(0, 3)
-plt.ylim(0, 3)
-ax = plt.gca()  # gca 代表當前坐標軸，即 'get current axis'
-ax.spines["right"].set_color("none")  # 隱藏坐標軸
-ax.spines["top"].set_color("none")
-
-plt.scatter(X[y == 0][:, 0], X[y == 0][:, 1], marker="o")
-plt.scatter(X[y == 1][:, 0], X[y == 1][:, 1], marker="s")
-plt.plot([0.5, 2.5], [2.5, 0.5], "-r")
-
-# sub plot 2
-plt.subplot(1, 2, 2)
-
-class1 = np.array([[1, 1], [1, 3], [2, 1], [1, 2], [2, 2], [1.5, 1.5], [1.2, 1.7]])
-class2 = np.array(
-    [[4, 4], [5, 5], [5, 4], [5, 3], [4, 5], [6, 4], [5.5, 3.5], [4.5, 4.5], [2, 1.5]]
-)
-
-plt.title("Slack Variable")
-
-plt.xlim(0, 7)
-plt.ylim(0, 7)
-ax = plt.gca()  # gca 代表當前坐標軸，即 'get current axis'
-ax.spines["right"].set_color("none")  # 隱藏坐標軸
-ax.spines["top"].set_color("none")
-
-plt.scatter(class1[:, 0], class1[:, 1], marker="o")
-plt.scatter(class2[:, 0], class2[:, 1], marker="s")
-plt.plot([1, 5], [5, 1], "-r")
-plt.plot([0, 4], [4, 0], "--b", [2, 6], [6, 2], "--b")
-plt.arrow(2, 1.5, 2.25, 2.25, shape="full", color="b")
-plt.annotate(
-    r"violate margin rule.",
-    xy=(2, 1.5),
-    xycoords="data",
-    xytext=(0.2, 0.5),
-    fontsize=10,
-    arrowprops=dict(arrowstyle="->", connectionstyle="arc3,rad=.2"),
-)
-plt.annotate(
-    r"normal sample. $\epsilon = 0$",
-    xy=(4, 5),
-    xycoords="data",
-    xytext=(4.5, 5.5),
-    fontsize=10,
-    arrowprops=dict(arrowstyle="->", connectionstyle="arc3,rad=.2"),
-)
-plt.annotate(
-    r"$\epsilon > 0$",
-    xy=(3, 2.5),
-    xycoords="data",
-    xytext=(3, 1.5),
-    fontsize=10,
-    arrowprops=dict(arrowstyle="->", connectionstyle="arc3,rad=.2"),
-)
-
-show()
-"""
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-"""
-plt.figure(figsize=(8, 4))
-
-plt.title("Cost")
-
-plt.xlim(0, 4)
-plt.ylim(0, 2)
-plt.xlabel("$y^{(i)} (w^T x^{(i)} + b)$")
-plt.ylabel("Cost")
-ax = plt.gca()  # gca 代表當前坐標軸，即 'get current axis'
-ax.spines["right"].set_color("none")  # 隱藏坐標軸
-ax.spines["top"].set_color("none")
-
-plt.plot([0, 1], [1.5, 0], "-r")
-plt.plot([1, 3], [0.015, 0.015], "-r")
-plt.annotate(
-    r"$J_i = R \epsilon_i$ for $y^{(i)} (w^T x^{(i)} + b) \geq 1 - \epsilon_i$",
-    xy=(0.7, 0.5),
-    xycoords="data",
-    xytext=(1, 1),
-    fontsize=10,
-    arrowprops=dict(arrowstyle="->", connectionstyle="arc3,rad=.2"),
-)
-plt.annotate(
-    r"$J_i = 0$ for $y^{(i)} (w^T x^{(i)} + b) \geq 1$",
-    xy=(1.5, 0),
-    xycoords="data",
-    xytext=(1.8, 0.2),
-    fontsize=10,
-    arrowprops=dict(arrowstyle="->", connectionstyle="arc3,rad=.2"),
-)
-
-show()
-"""
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-"""
-plt.figure(figsize=(13, 6))
-
-class1 = np.array([[1, 1], [1, 2], [1, 3], [2, 1], [2, 2], [3, 2], [4, 1], [5, 1]])
-class2 = np.array(
-    [[2.2, 4], [1.5, 5], [1.8, 4.6], [2.4, 5], [3.2, 5], [3.7, 4], [4.5, 4.5], [5.4, 3]]
-)
-
-# sub plot 1
-plt.subplot(1, 2, 1)
-
-plt.title("Non-linear Separatable in Low Dimension")
-
-plt.xlim(0, 6)
-plt.ylim(0, 6)
-plt.yticks(())
-plt.xlabel("X1")
-ax = plt.gca()  # gca 代表當前坐標軸，即 'get current axis'
-ax.spines["right"].set_color("none")  # 隱藏坐標軸
-ax.spines["top"].set_color("none")
-ax.spines["left"].set_color("none")
-
-plt.scatter(class1[:, 0], np.zeros(class1[:, 0].shape[0]) + 0.05, marker="o")
-plt.scatter(class2[:, 0], np.zeros(class2[:, 0].shape[0]) + 0.05, marker="s")
-
-# sub plot 2
-plt.subplot(1, 2, 2)
-
-plt.title("Linear Separatable in High Dimension")
-
-plt.xlim(0, 6)
-plt.ylim(0, 6)
-plt.xlabel("X1")
-plt.ylabel("X2")
-ax = plt.gca()  # gca 代表當前坐標軸，即 'get current axis'
-ax.spines["right"].set_color("none")  # 隱藏坐標軸
-ax.spines["top"].set_color("none")
-
-plt.scatter(class1[:, 0], class1[:, 1], marker="o")
-plt.scatter(class2[:, 0], class2[:, 1], marker="s")
-plt.plot([1, 5], [3.8, 2], "-r")
-
-show()
-"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -4661,6 +3440,3238 @@ model.fit(X, y, batch_size=32, epochs=10, validation_split=0.3, callbacks=[tenso
 如果你继续这样做，是的，样本中的“准确性”会上升，但你的样本，以及你试图为模型提供的任何新数据可能会表现得很差。
 """
 '''
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+# 類別變數編碼
+# 測試資料
+
+df = pd.DataFrame(
+    [
+        ["green", "M", 10.1, "class1"],
+        ["red", "L", 13.5, "class2"],
+        ["blue", "XL", 15.3, "class1"],
+    ]
+)
+
+df.columns = ["color", "size", "price", "classlabel"]
+print(df)
+
+# LabelEncoder
+
+from sklearn.preprocessing import LabelEncoder
+
+encoder = LabelEncoder()
+cc = encoder.fit_transform(df["size"])
+print(cc)
+
+cc = encoder.inverse_transform([1, 0, 2])
+print(cc)
+
+# Pandas Map
+
+size_mapping = {"XL": 3, "L": 2, "M": 1}
+
+df["size"] = df["size"].map(size_mapping)
+print(df)
+
+# OrdinalEncoder
+
+from sklearn.preprocessing import OrdinalEncoder
+
+data = [["Male", 1], ["Female", 3], ["Female", 2]]
+encoder = OrdinalEncoder()
+cc = encoder.fit_transform(data)
+print(cc)
+
+# One Hot Encoding with Pandas
+
+df = pd.DataFrame(
+    [
+        ["green", "M", 10.1, "class1"],
+        ["red", "L", 13.5, "class2"],
+        ["blue", "XL", 15.3, "class1"],
+    ]
+)
+df.columns = ["color", "size", "price", "classlabel"]
+
+cc = pd.get_dummies(df, columns=["color"], prefix="is", prefix_sep="_")
+print(cc)
+
+# pandas v1.5 above
+df2 = pd.get_dummies(df, columns=["color"], prefix="is", prefix_sep="_")
+cc = pd.from_dummies(df2[["is_blue", "is_green", "is_red"]], sep="_")
+print(cc)
+
+# One-hot Encoding with Scikit-learn
+
+from sklearn.preprocessing import OneHotEncoder
+
+# 測試資料
+X = [["Male", 1], ["Female", 3], ["Female", 2]]
+
+# 轉換
+encoder = OneHotEncoder(handle_unknown="ignore")
+X_new = encoder.fit_transform(X)
+cc = X_new.toarray()
+print(cc)
+
+# 類別
+cc = encoder.categories_
+print(cc)
+
+# 還原
+cc = encoder.inverse_transform(X_new)
+print(cc)
+
+# 指定欄位名稱
+cc = encoder.get_feature_names_out(["gender", "group"])
+print(cc)
+
+# 完整的表格處理程序
+
+df = pd.DataFrame(
+    [
+        ["green", "M", 10.1, "class1"],
+        ["red", "L", 13.5, "class2"],
+        ["blue", "XL", 15.3, "class1"],
+    ]
+)
+df.columns = ["color", "size", "price", "classlabel"]
+
+# One-hot Encoding
+encoder = OneHotEncoder(handle_unknown="ignore")
+color_new = encoder.fit_transform(df[["color"]])
+
+# 指定欄位名稱
+column_names = encoder.get_feature_names_out(encoder.feature_names_in_)
+
+# 轉換
+df_new = pd.DataFrame(color_new.toarray(), columns=column_names)
+print(df_new)
+
+# 刪除原欄位 'color'
+df.drop(["color"], axis=1, inplace=True)
+
+# 合併表格
+df2 = pd.concat([df, df_new], axis=1)
+print(df2)
+
+joblib.dump(encoder, "tmp_color.joblib")
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 頻率轉換、合併多個表格
+
+import yfinance as yf
+
+# 下載每日股價
+
+df_quote = yf.download("1101.TW", start="2020-01-01", end="2022-11-30")
+df_quote.tail()
+
+print("轉換為月頻率")
+
+df_quote_new = df_quote.resample("ME").mean()
+print(df_quote_new)
+
+print("讀取月營收資料")
+
+df_monthly_sales = pd.read_csv("./data/stock_monthly_sales.csv")
+cc = df_monthly_sales.head()
+print(cc)
+
+print("轉換日期格式")
+
+df_quote_new = df_quote.reset_index()
+df_quote_new.Date = df_quote_new.Date
+df_quote_new.Date = df_quote_new.Date.map(lambda x: str(x)[:4] + str(x)[5:7])
+print(df_quote_new)
+
+print("合併2個表格")
+
+# 轉換日期資料型態，讓2個表格的日期資料型態一致
+df_monthly_sales["年月"] = df_monthly_sales["年月"].astype("str")
+
+# 合併2個表格
+df = pd.merge(
+    left=df_monthly_sales,
+    right=df_quote_new,
+    left_on="年月",
+    right_on="Date",
+    how="inner",
+)
+df = df[["Date", "單月營收", "Adj Close"]]
+
+# 欄位改名
+df.rename({"單月營收": "sales"}, axis=1, inplace=True)
+print(df)
+
+print("計算股價與月營收關聯度")
+
+cc = df[["sales", "Adj Close"]].corr()
+print(cc)
+
+print("營收公布日期晚一個月")
+
+df_monthly_sales["單月營收"] = df_monthly_sales["單月營收"].shift(-1)
+df = pd.merge(
+    left=df_monthly_sales,
+    right=df_quote_new,
+    left_on="年月",
+    right_on="Date",
+    how="inner",
+)
+df = df[["Date", "單月營收", "Adj Close"]]
+df.rename({"單月營收": "sales"}, axis=1, inplace=True)
+df.dropna(inplace=True)
+
+cc = df[["sales", "Adj Close"]].corr()
+print(cc)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# RobustScaler
+
+# 測試資料
+
+data = np.array([[1.0, -2.0, 2.0], [-2.0, 1.0, 3.0], [4.0, 1.0, -2.0]])
+print(data)
+
+from sklearn.preprocessing import RobustScaler
+
+scaler = RobustScaler()
+cc = scaler.fit_transform(data)
+print(cc)
+
+# 驗證
+
+
+def get_box_plot_data(data, bp):
+    rows_list = []
+
+    for i in range(data.shape[1]):
+        dict1 = {}
+        dict1["label"] = i
+        dict1["最小值"] = bp["whiskers"][i * 2].get_ydata()[1]
+        dict1["箱子下緣"] = bp["boxes"][i].get_ydata()[1]
+        dict1["中位數"] = bp["medians"][i].get_ydata()[1]
+        dict1["箱子上緣"] = bp["boxes"][i].get_ydata()[2]
+        dict1["最大值"] = bp["whiskers"][(i * 2) + 1].get_ydata()[1]
+        print(dict1)
+        rows_list.append(dict1)
+
+    return pd.DataFrame(rows_list)
+
+
+bp = plt.boxplot(data)
+get_box_plot_data(data, bp)
+print(data)
+show()
+
+"""
+	label 	最小值 	箱子下緣 	中位數 	箱子上緣 	最大值
+0 	0 	-2.0 	-0.5 	1.0 	2.5 	4.0
+1 	1 	-2.0 	-0.5 	1.0 	1.0 	1.0
+2 	2 	-2.0 	0.0 	2.0 	2.5 	3.0
+"""
+
+# 計算中位數、IQR
+median1 = np.median(data, axis=0)
+scale1 = np.quantile(data, 0.75, axis=0) - np.quantile(data, 0.25, axis=0)
+print(median1, scale1)
+# 計算 RobustScaler
+cc = (data - median1) / scale1
+print(cc)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+"""
+import nltk
+nltk.download('wordnet')
+"""
+print("------------------------------------------------------------")  # 60個
+
+# 實現PCA演算法
+
+# 建立測試資料
+
+# 固定隨機種子
+np.random.seed(2342347)
+
+# 第一個類別
+mu_vec1 = np.array([0, 0, 0])  # 平均數
+cov_mat1 = np.array([[1, 0, 0], [0, 1, 0], [0, 0, 1]])  # 共變異矩陣
+class1_sample = np.random.multivariate_normal(mu_vec1, cov_mat1, 20).T
+
+# 第二個類別
+mu_vec2 = np.array([1, 1, 1])  # 平均數
+cov_mat2 = np.array([[1, 0, 0], [0, 1, 0], [0, 0, 1]])  # 共變異矩陣
+class2_sample = np.random.multivariate_normal(mu_vec2, cov_mat2, 20).T
+
+cc = class1_sample.shape, class2_sample.shape
+print(cc)
+
+# 繪圖
+
+from matplotlib import pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+from mpl_toolkits.mplot3d import proj3d
+
+fig = plt.figure(figsize=(8, 8))
+ax = fig.add_subplot(111, projection="3d")
+ax.plot(
+    class1_sample[0, :],
+    class1_sample[1, :],
+    class1_sample[2, :],
+    "o",
+    markersize=8,
+    color="blue",
+    alpha=0.5,
+    label="類別1",
+)
+ax.plot(
+    class2_sample[0, :],
+    class2_sample[1, :],
+    class2_sample[2, :],
+    "^",
+    markersize=8,
+    alpha=0.5,
+    color="red",
+    label="類別2",
+)
+
+plt.title("測試資料")
+ax.legend(loc="upper right")
+
+show()
+
+# 合併資料
+
+all_samples = np.concatenate((class1_sample, class2_sample), axis=1)
+cc = all_samples.shape
+print(cc)
+
+# 計算共變異數矩陣(covariance matrix)
+
+cov_mat = np.cov([all_samples[0, :], all_samples[1, :], all_samples[2, :]])
+print("共變異數矩陣:\n", cov_mat)
+
+# 計算特徵向量(eigenvector)及對應的特徵值(eigenvalue, λ)
+
+# 計算特徵值(eigenvalue)及對應的特徵向量(eigenvector)
+eig_val_sc, eig_vec_sc = np.linalg.eig(cov_mat)
+print("特徵向量:\n", eig_vec_sc)
+print("特徵值:\n", eig_val_sc)
+
+# 繪製特徵向量
+
+from mpl_toolkits.mplot3d import Axes3D, proj3d
+from matplotlib.patches import FancyArrowPatch
+
+
+# 繪製箭頭
+class Arrow3D(FancyArrowPatch):
+    def __init__(self, xs, ys, zs, *args, **kwargs):
+        FancyArrowPatch.__init__(self, (0, 0), (0, 0), *args, **kwargs)
+        self._verts3d = xs, ys, zs
+
+    def do_3d_projection(self, renderer=None):
+        xs3d, ys3d, zs3d = self._verts3d
+        xs, ys, zs = proj3d.proj_transform(xs3d, ys3d, zs3d, self.axes.M)
+        self.set_positions((xs[0], ys[0]), (xs[1], ys[1]))
+        return np.min(zs)
+
+
+# 設定 3D 繪圖
+fig = plt.figure(figsize=(7, 7))
+ax = fig.add_subplot(111, projection="3d")
+
+# 繪製特徵向量
+ax.plot(
+    all_samples[0, :],
+    all_samples[1, :],
+    all_samples[2, :],
+    "o",
+    markersize=8,
+    color="green",
+    alpha=0.2,
+)
+[mean_x, mean_y, mean_z] = np.mean(all_samples, axis=1)
+ax.plot([mean_x], [mean_y], [mean_z], "o", markersize=10, color="red", alpha=0.5)
+for v in eig_vec_sc.T:
+    a = Arrow3D(
+        [mean_x, v[0]],
+        [mean_y, v[1]],
+        [mean_z, v[2]],
+        mutation_scale=20,
+        lw=3,
+        arrowstyle="-|>",
+        color="r",
+    )
+    ax.add_artist(a)
+ax.set_xlabel("x_values")
+ax.set_ylabel("y_values")
+ax.set_zlabel("z_values")
+
+show()
+
+# 合併特徵向量及特徵值，針對特徵值降冪排序，挑出前2名。
+
+# 合併特徵向量及特徵值
+eig_pairs = [(np.abs(eig_val_sc[i]), eig_vec_sc[:, i]) for i in range(len(eig_val_sc))]
+
+# 針對特徵值降冪排序
+eig_pairs.sort(key=lambda x: x[0], reverse=True)
+
+# 挑出前2名
+for i in eig_pairs[:2]:
+    print(i[1])
+
+# 座標轉換矩陣
+
+matrix_w = np.hstack((eig_pairs[0][1].reshape(3, 1), eig_pairs[1][1].reshape(3, 1)))
+print("Matrix W:\n", matrix_w)
+
+# 原始資料乘以轉換矩陣，得到主成分
+
+transformed = matrix_w.T.dot(all_samples)
+cc = transformed.shape
+print(cc)
+
+# 繪製轉換後的資料
+
+plt.plot(
+    transformed[0, 0:20],
+    transformed[1, 0:20],
+    "o",
+    markersize=7,
+    color="blue",
+    alpha=0.5,
+    label="class1",
+)
+plt.plot(
+    transformed[0, 20:40],
+    transformed[1, 20:40],
+    "^",
+    markersize=7,
+    color="red",
+    alpha=0.5,
+    label="class2",
+)
+plt.xlim([-4, 4])
+plt.ylim([-4, 4])
+plt.xlabel("x_values")
+plt.ylabel("y_values")
+plt.legend()
+plt.title("Transformed samples with class labels")
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# Scikit-learn LDA實作
+
+# 載入資料
+from sklearn.datasets import make_circles
+
+X, y = make_circles(n_samples=1_000, factor=0.3, noise=0.05, random_state=0)
+
+# 資料切割
+X_train, X_test, y_train, y_test = train_test_split(X, y, stratify=y, random_state=0)
+
+# 繪製訓練及測試資料
+_, (train_ax, test_ax) = plt.subplots(ncols=2, sharex=True, sharey=True, figsize=(8, 4))
+train_ax.scatter(X_train[:, 0], X_train[:, 1], c=y_train)
+train_ax.set_ylabel("Feature #1")
+train_ax.set_xlabel("Feature #0")
+train_ax.set_title("Training data")
+
+test_ax.scatter(X_test[:, 0], X_test[:, 1], c=y_test)
+test_ax.set_xlabel("Feature #0")
+_ = test_ax.set_title("Testing data")
+show()
+
+# PCA 萃取特徵
+
+from sklearn.decomposition import PCA, KernelPCA
+
+pca = PCA(n_components=2)
+kernel_pca = KernelPCA(
+    n_components=None, kernel="rbf", gamma=10, fit_inverse_transform=True, alpha=0.1
+)
+
+X_test_pca = pca.fit(X_train).transform(X_test)  # 學習訓練.fit
+
+# 繪製原始測試資料及經PCA轉換後的新資料
+
+fig, (orig_data_ax, pca_proj_ax) = plt.subplots(ncols=2, figsize=(10, 4))
+
+orig_data_ax.scatter(X_test[:, 0], X_test[:, 1], c=y_test)
+orig_data_ax.set_ylabel("Feature #1")
+orig_data_ax.set_xlabel("Feature #0")
+orig_data_ax.set_title("Testing data")
+
+pca_proj_ax.scatter(X_test_pca[:, 0], X_test_pca[:, 1], c=y_test)
+pca_proj_ax.set_ylabel("Principal component #1")
+pca_proj_ax.set_xlabel("Principal component #0")
+pca_proj_ax.set_title("Projection of testing data\n using PCA")
+
+# Text(0.5, 1.0, 'Projection of testing data\n using PCA')
+show()
+
+# KernelPCA 萃取特徵
+
+from sklearn.decomposition import KernelPCA
+
+kernel_pca = KernelPCA(
+    n_components=None, kernel="rbf", gamma=10, fit_inverse_transform=True, alpha=0.1
+)
+
+X_test_kernel_pca = kernel_pca.fit(X_train).transform(X_test)  # 學習訓練.fit
+
+fig, (orig_data_ax, kernel_pca_proj_ax) = plt.subplots(ncols=2, figsize=(10, 4))
+
+orig_data_ax.scatter(X_test[:, 0], X_test[:, 1], c=y_test)
+orig_data_ax.set_ylabel("Feature #1")
+orig_data_ax.set_xlabel("Feature #0")
+orig_data_ax.set_title("Testing data")
+
+kernel_pca_proj_ax.scatter(X_test_kernel_pca[:, 0], X_test_kernel_pca[:, 1], c=y_test)
+kernel_pca_proj_ax.set_ylabel("Principal component #1")
+kernel_pca_proj_ax.set_xlabel("Principal component #0")
+_ = kernel_pca_proj_ax.set_title("Projection of testing data\n using KernelPCA")
+show()
+
+# 載入上/下弦月資料
+
+from sklearn.datasets import make_moons
+
+# X, y = make_moons(n_samples=1_000, noise=0.05, random_state=0)
+X, y = make_moons(n_samples=1000, random_state=123)
+X_train, X_test, y_train, y_test = train_test_split(X, y, stratify=y, random_state=0)
+
+_, (train_ax, test_ax) = plt.subplots(ncols=2, sharex=True, sharey=True, figsize=(8, 4))
+
+train_ax.scatter(X_train[:, 0], X_train[:, 1], c=y_train)
+train_ax.set_ylabel("Feature #1")
+train_ax.set_xlabel("Feature #0")
+train_ax.set_title("Training data")
+
+test_ax.scatter(X_test[:, 0], X_test[:, 1], c=y_test)
+test_ax.set_xlabel("Feature #0")
+_ = test_ax.set_title("Testing data")
+show()
+
+# PCA 萃取特徵
+
+from sklearn.decomposition import PCA, KernelPCA
+
+pca = PCA(n_components=2)
+kernel_pca = KernelPCA(
+    n_components=None, kernel="rbf", gamma=10, fit_inverse_transform=True, alpha=0.1
+)
+
+X_test_pca = pca.fit(X_train).transform(X_test)  # 學習訓練.fit
+
+fig, (orig_data_ax, pca_proj_ax) = plt.subplots(ncols=2, figsize=(10, 4))
+
+orig_data_ax.scatter(X_test[:, 0], X_test[:, 1], c=y_test)
+orig_data_ax.set_ylabel("Feature #1")
+orig_data_ax.set_xlabel("Feature #0")
+orig_data_ax.set_title("Testing data")
+
+pca_proj_ax.scatter(X_test_pca[:, 0], X_test_pca[:, 1], c=y_test)
+pca_proj_ax.set_ylabel("Principal component #1")
+pca_proj_ax.set_xlabel("Principal component #0")
+pca_proj_ax.set_title("Projection of testing data\n using PCA")
+
+# Text(0.5, 1.0, 'Projection of testing data\n using PCA')
+show()
+
+# KernelPCA 萃取特徵
+
+from sklearn.decomposition import KernelPCA
+
+kernel_pca = KernelPCA(n_components=None, kernel="rbf", gamma=15)
+
+X_test_kernel_pca = kernel_pca.fit(X_train).transform(X_test)  # 學習訓練.fit
+
+fig, (orig_data_ax, kernel_pca_proj_ax) = plt.subplots(ncols=2, figsize=(10, 4))
+
+orig_data_ax.scatter(X_test[:, 0], X_test[:, 1], c=y_test)
+orig_data_ax.set_ylabel("Feature #1")
+orig_data_ax.set_xlabel("Feature #0")
+orig_data_ax.set_title("Testing data")
+
+kernel_pca_proj_ax.scatter(X_test_kernel_pca[:, 0], X_test_kernel_pca[:, 1], c=y_test)
+kernel_pca_proj_ax.set_ylabel("Principal component #1")
+kernel_pca_proj_ax.set_xlabel("Principal component #0")
+_ = kernel_pca_proj_ax.set_title("Projection of testing data\n using KernelPCA")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# t-SNE測試
+
+from sklearn.manifold import TSNE
+from sklearn.decomposition import PCA
+
+# 生成3個集群資料
+
+np.random.seed(10)
+num_points_per_class = 50
+
+# Class 1
+mean1 = [0, 0]
+cov = [[0.1, 0], [0, 0.1]]
+X1 = np.random.multivariate_normal(mean1, cov, num_points_per_class)
+
+# Class 2
+mean2 = [10, 0]
+X2 = np.random.multivariate_normal(mean2, cov, num_points_per_class)
+
+# Class 3
+mean3 = [5, 6]
+X3 = np.random.multivariate_normal(mean3, cov, num_points_per_class)
+
+X = np.concatenate([X1, X2, X3], axis=0)
+cc = X.shape
+print(cc)
+
+# 特徵縮放
+
+from sklearn.preprocessing import MinMaxScaler
+
+scaler = MinMaxScaler()
+X = scaler.fit_transform(X)
+
+# 繪圖
+
+colors = ["red", "green", "blue"]
+for i in range(3):
+    plt.scatter(X[i * 50 : (i + 1) * 50, 0], X[i * 50 : (i + 1) * 50, 1], c=colors[i])
+
+show()
+
+# t-SNE
+
+perplexity = 25
+X_embedded = TSNE(
+    n_components=1, perplexity=perplexity, learning_rate="auto", init="random"
+).fit_transform(X)
+for i in range(3):
+    plt.scatter(X_embedded[i * 50 : (i + 1) * 50], np.zeros(50), c=colors[i])
+show()
+
+# PCA
+
+X_pca = PCA(n_components=1).fit_transform(X)
+for i in range(3):
+    plt.scatter(X_pca[i * 50 : (i + 1) * 50], np.zeros(50), c=colors[i])
+show()
+
+
+# 困惑度(perplexity)測試
+
+perplexity = 2
+X_embedded = TSNE(
+    n_components=1, perplexity=perplexity, learning_rate="auto", init="random"
+).fit_transform(X)
+for i in range(3):
+    plt.scatter(X_embedded[i * 50 : (i + 1) * 50], np.zeros(50), c=colors[i])
+show()
+
+
+perplexity = 130
+X_embedded = TSNE(
+    n_components=1, perplexity=perplexity, learning_rate="auto", init="random"
+).fit_transform(X)
+for i in range(3):
+    plt.scatter(X_embedded[i * 50 : (i + 1) * 50], np.zeros(50), c=colors[i])
+show()
+
+
+# 非線性分離
+# 生成S曲線資料
+
+from matplotlib import ticker
+from sklearn import manifold, datasets
+
+n_samples = 1500
+S_points, S_color = datasets.make_s_curve(n_samples, random_state=0)
+cc = S_points.shape, S_color.shape
+print(cc)
+
+# ((1500, 3), (1500,))
+
+# 定義繪圖函數
+
+
+def plot_2d(points, points_color, title):
+    fig, ax = plt.subplots(figsize=(3, 3), facecolor="white", constrained_layout=True)
+    fig.suptitle(title, size=16)
+    add_2d_scatter(ax, points, points_color)
+    show()
+
+
+def add_2d_scatter(ax, points, points_color, title=None):
+    x, y = points.T
+    ax.scatter(x, y, c=points_color, s=50, alpha=0.8)
+    ax.set_title(title)
+    ax.xaxis.set_major_formatter(ticker.NullFormatter())
+    ax.yaxis.set_major_formatter(ticker.NullFormatter())
+
+
+def plot_3d(points, points_color, title):
+    x, y, z = points.T
+
+    fig, ax = plt.subplots(
+        figsize=(6, 6),
+        facecolor="white",
+        tight_layout=True,
+        subplot_kw={"projection": "3d"},
+    )
+    fig.suptitle(title, size=16)
+    col = ax.scatter(x, y, z, c=points_color, s=50, alpha=0.8)
+    ax.view_init(azim=-60, elev=9)
+    ax.xaxis.set_major_locator(ticker.MultipleLocator(1))
+    ax.yaxis.set_major_locator(ticker.MultipleLocator(1))
+    ax.zaxis.set_major_locator(ticker.MultipleLocator(1))
+
+    fig.colorbar(col, ax=ax, orientation="horizontal", shrink=0.6, aspect=60, pad=0.01)
+    show()
+
+
+# 繪製原始資料
+
+plot_3d(S_points, S_color, "Original S-curve samples")
+
+# 繪製降維後資料
+
+t_sne = manifold.TSNE(
+    n_components=2,
+    perplexity=30,
+    init="random",
+    n_iter=250,
+    random_state=0,
+)
+S_t_sne = t_sne.fit_transform(S_points)
+
+plot_2d(S_t_sne, S_color, "T-distributed Stochastic  \n Neighbor Embedding")
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# spam_classification_with_tfidf
+# 垃圾信分類
+
+from nltk.tokenize import word_tokenize
+from nltk.corpus import stopwords
+from nltk.stem import PorterStemmer
+from nltk import WordNetLemmatizer
+from wordcloud import WordCloud
+import re
+
+mails = pd.read_csv("./data/spam.csv", encoding="latin-1")
+cc = mails.head()
+print(cc)
+
+# 資料整理
+mails.drop(["Unnamed: 2", "Unnamed: 3", "Unnamed: 4"], axis=1, inplace=True)
+cc = mails.head()
+print(cc)
+
+mails.rename(columns={"v1": "label", "v2": "message"}, inplace=True)
+cc = mails.head()
+print(cc)
+
+cc = mails["label"].value_counts()
+print(cc)
+
+mails["label"] = mails["label"].map({"ham": 0, "spam": 1})
+cc = mails.head()
+print(cc)
+
+# 設定停用詞
+import string
+
+stopword_list = set(stopwords.words("english") + list(string.punctuation))
+# 詞形還原(Lemmatization)
+lem = WordNetLemmatizer()
+
+
+# 前置處理(Preprocessing)
+def preprocess(text, is_lower_case=True):
+    if is_lower_case:
+        text = text.lower()
+    tokens = word_tokenize(text)
+    tokens = [token.strip() for token in tokens if len(token) > 1 and token != "..."]
+    filtered_tokens = [token for token in tokens if token not in stopword_list]
+    filtered_tokens = [lem.lemmatize(token) for token in filtered_tokens]
+    filtered_text = " ".join(filtered_tokens)
+    return filtered_text
+
+
+mails["message"] = mails["message"].map(preprocess)
+cc = mails.head()
+print(cc)
+
+# 文字雲
+
+# 凸顯垃圾信的常用單字
+spam_words = " ".join(list(mails[mails["label"] == 1]["message"]))
+spam_wc = WordCloud(width=512, height=512).generate(spam_words)
+plt.figure(figsize=(10, 8), facecolor="k")
+plt.imshow(spam_wc)
+plt.axis("off")
+plt.tight_layout(pad=0)
+show()
+
+# 找出正常信件的常用單字
+ham_words = " ".join(list(mails[mails["label"] == 0]["message"]))
+ham_wc = WordCloud(width=512, height=512).generate(ham_words)
+plt.figure(figsize=(10, 8), facecolor="k")
+plt.imshow(ham_wc)
+plt.axis("off")
+plt.tight_layout(pad=0)
+show()
+
+# 使用 SciKit-learn TF-IDF
+
+mails_message, labels = mails["message"].values, mails["label"].values
+mails_message = mails_message.astype(str)
+
+from sklearn.feature_extraction.text import TfidfVectorizer
+
+tfidf_vectorizer = TfidfVectorizer()
+tfidf_matrix = tfidf_vectorizer.fit_transform(mails_message)
+print(tfidf_matrix.shape)
+
+# (5572, 8111)
+
+cc = tfidf_vectorizer.get_feature_names_out()
+print(cc)
+
+no = 0
+for i in tfidf_matrix.toarray()[0]:
+    if i > 0.0:
+        no += 1
+print(no)
+
+# 資料分割
+X_train, X_test, y_train, y_test = train_test_split(
+    tfidf_matrix.toarray(), labels, test_size=0.2
+)
+
+# 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
+logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
+
+clf = LogisticRegression()
+
+clf.fit(X_train, y_train)  # 學習訓練.fit
+
+y_pred = clf.predict(X_test)  # 預測.predict
+cc = accuracy_score(y_pred, y_test)
+print(cc)
+# 0.9668161434977578
+
+from sklearn.metrics import classification_report
+
+print(classification_report(y_test, y_pred))
+
+print("混淆矩陣")
+cc = confusion_matrix(y_test, y_pred)
+print(cc)
+
+# 測試
+
+message_processed_list = (
+    "I cant pick the phone right now. Pls send a message",
+    "Congratulations ur awarded $500",
+    "Thanks for your subscription to Ringtone UK your mobile will be charged",
+    "Oops, I'll let you know when my roommate's done",
+    "FreeMsg Hey there darling it's been 3 week's now and no word back! I'd like some fun you up for it still? Tb ok! XxX std chgs to send, 憯1.50 to rcv",
+    "Free entry in 2 a wkly comp to win FA Cup final tkts 21st May 2005. Text FA to 87121 to receive entry question(std txt rate)T&C's apply 08452810075over18's",
+)
+X_new = tfidf_vectorizer.transform(message_processed_list)
+cc = clf.predict(X_new.toarray())  # 預測.predict
+print(cc)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 06_01_logistic_regression_validation
+
+# 證明 Exp(log(x)) = x
+
+for i in range(1, 101):
+    assert round(math.e ** math.log(i), 6) == i
+
+# 證明 log(1/x) = - log(x)
+
+for i in range(1, 101):
+    assert round(math.log(i), 6) == -round(math.log(1 / i), 6)
+
+cc = math.log(100), -math.log(1 / 100)
+print(cc)
+
+# 計算羅吉斯函數的上限與下限
+
+from sympy import *
+
+x = symbols("x")
+expr = 1 / (1 + np.e ** (-x))
+limit(expr, x, -1000), limit(expr, x, np.inf)
+
+# 不使用 limit
+
+cc = 1 / (np.e**np.inf)
+print(cc)
+
+# 繪製羅吉斯函數
+x = np.linspace(-6, 6, 101)
+y = 1 / (1 + np.e ** (-x))
+plt.plot(x, y)
+plt.axhline(0, linestyle="-.", c="r")
+plt.axhline(1, linestyle="-.", c="r")
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 06_03_logistic_regression_attrition
+
+# 員工流失預測
+
+from sklearn import preprocessing
+
+df = pd.read_csv("./data/WA_Fn-UseC_-HR-Employee-Attrition.csv")
+cc = df.head()
+print(cc)
+
+# 2. 資料清理、資料探索與分析
+
+cc = df.isna().sum()
+print(cc)
+
+# 觀察資料集彙總資訊
+
+df.info()  # 這樣就已經把資料集彙總資訊印出來
+
+# 描述統計量
+cc = df.describe()
+print(cc)
+
+# y 各類別資料筆數統計
+sns.countplot(x=df["Attrition"])
+show()
+
+# 以Pandas函數統計各類別資料筆數
+cc = df["Attrition"].value_counts()
+print(cc)
+
+print("檢查與時間有關的特徵相關性")
+
+# 設定關聯度上限為 0.4
+max_corr = 0.4
+time_params = [
+    "Age",
+    "TotalWorkingYears",
+    "YearsAtCompany",
+    "YearsInCurrentRole",
+    "YearsSinceLastPromotion",
+    "YearsWithCurrManager",
+]
+# 計算關聯度
+corr_df = df[time_params].corr().round(2)
+
+# 繪製熱力圖
+plt.figure(figsize=(8, 5))
+mask = np.zeros_like(corr_df)
+mask[np.triu_indices_from(mask)] = True
+with sns.axes_style("white"):
+    f, ax = plt.subplots(figsize=(7, 5))
+    ax = sns.heatmap(
+        corr_df, mask=mask, vmax=max_corr, square=True, annot=True, cmap="YlGnBu"
+    )
+show()
+
+# 刪除欄位
+df.drop(
+    {
+        "TotalWorkingYears",
+        "YearsInCurrentRole",
+        "YearsSinceLastPromotion",
+        "YearsWithCurrManager",
+    },
+    axis=1,
+    inplace=True,
+)
+
+print("檢查與薪資(Salary)有關的特徵相關性")
+
+salary_params = [
+    "DailyRate",
+    "HourlyRate",
+    "MonthlyIncome",
+    "MonthlyRate",
+    "PercentSalaryHike",
+    "StockOptionLevel",
+]
+# 計算關聯度
+corr_df = df[salary_params].corr().round(2)
+
+# 繪製熱力圖
+plt.figure(figsize=(8, 5))
+mask = np.zeros_like(corr_df)
+mask[np.triu_indices_from(mask)] = True
+with sns.axes_style("white"):
+    f, ax = plt.subplots(figsize=(7, 5))
+    ax = sns.heatmap(
+        corr_df, mask=mask, vmax=max_corr, square=True, annot=True, cmap="YlGnBu"
+    )
+show()
+
+
+print("找出所有類別變數，並顯示其類別")
+
+df.select_dtypes("object").head()
+print("Levels of categories: ")
+for key in df.select_dtypes("object").keys():
+    print(key, ":", df[key].unique())
+
+print("進行One-hot encoding")
+
+df2 = pd.get_dummies(
+    df,
+    columns=df.select_dtypes("object").keys(),
+    prefix=df.select_dtypes("object").keys(),
+)
+cc = df2.keys()
+print(cc)
+
+print("刪除One-hot encoding的第一個類別欄位(base category)")
+
+df2.drop(
+    {
+        "Attrition_No",
+        "BusinessTravel_Non-Travel",
+        "Department_Human Resources",
+        "EducationField_Human Resources",
+        "Gender_Female",
+        "MaritalStatus_Single",
+        "OverTime_No",
+    },
+    axis=1,
+    inplace=True,
+)
+cont_vars = df2.select_dtypes("int").keys()
+""" NG
+dummies= df2.select_dtypes('uint8').keys().drop('Attrition_Yes') # 刪除目標變數(Y) 
+print(dummies)
+"""
+print("指定特徵(X)及目標變數(Y)")
+
+X = df2.drop("Attrition_Yes", axis=1)
+y = df2["Attrition_Yes"]
+
+# 3. 不須進行特徵工程
+
+# 4. 資料分割
+
+# 資料分割
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+# 查看陣列維度
+cc = X_train.shape, X_test.shape, y_train.shape, y_test.shape
+print(cc)
+
+# 特徵縮放
+scaler = preprocessing.StandardScaler()
+X_train_std = scaler.fit_transform(X_train)
+X_test_std = scaler.transform(X_test)
+
+# 5. 選擇演算法、6. 模型訓練
+
+# 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
+logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
+
+clf = LogisticRegression()
+clf.fit(X_train_std, y_train)
+
+# 7. 模型評分
+
+# 計算準確率
+y_pred = clf.predict(X_test_std)
+print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
+# 90.14%
+
+# 混淆矩陣
+print(confusion_matrix(y_test, y_pred))
+
+# 混淆矩陣圖
+from sklearn.metrics import ConfusionMatrixDisplay
+
+disp = ConfusionMatrixDisplay(confusion_matrix=confusion_matrix(y_test, y_pred))
+disp.plot()
+show()
+
+""" NG
+#statsmodels 作法
+
+import statsmodels.api as sm
+
+model=sm.Logit(y_train, X_train)
+result=model.fit()
+print(result.summary())
+
+#顯示權重資訊
+
+stat_df=pd.DataFrame({'coefficients':result.params, 'p-value': result.pvalues,
+                      'odds_ratio': np.exp(result.params)})
+print(stat_df)
+
+print("篩選重要的特徵變數")
+
+significant_params=stat_df[stat_df['p-value']<=0.05].index
+print(significant_params)
+
+print("勝負比(Odds)")
+
+cc = stat_df.loc[significant_params].sort_values('odds_ratio', ascending=False)['odds_ratio']
+print(cc)
+      
+print("最後底定的模型：只保留重要的特徵變數")
+
+y=df2['Attrition_Yes']
+X=df2[significant_params]
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+model=sm.Logit(y_train,X_train)
+result=model.fit()
+print(result.summary())
+"""
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 06_06_knn_book_recommender
+
+# 以KNN演算法實作書籍推薦
+
+# 書籍資料
+books = pd.read_csv(
+    "C:/_git/vcs/_big_files/Scikit-learn_data/BX-Books.csv",
+    sep=";",
+    on_bad_lines="skip",
+    low_memory=False,
+    encoding="latin-1",
+)
+books.columns = [
+    "ISBN",
+    "bookTitle",
+    "bookAuthor",
+    "yearOfPublication",
+    "publisher",
+    "imageUrlS",
+    "imageUrlM",
+    "imageUrlL",
+]
+
+# 讀者資料
+users = pd.read_csv(
+    "C:/_git/vcs/_big_files/Scikit-learn_data/BX-Users.csv",
+    sep=";",
+    on_bad_lines="skip",
+    encoding="latin-1",
+)
+users.columns = ["userID", "Location", "Age"]
+
+
+# 評價資料
+ratings = pd.read_csv(
+    "C:/_git/vcs/_big_files/Scikit-learn_data/BX-Book-Ratings.csv",
+    sep=";",
+    on_bad_lines="skip",
+    encoding="latin-1",
+)
+ratings.columns = ["userID", "ISBN", "bookRating"]
+
+# 資料探索與分析
+
+# 評價資料筆數
+print(ratings.shape)
+
+cc = ratings.head(10)
+print(cc)
+
+# 評價筆數繪圖
+plt.rc("font", size=15)
+sns.countplot(x="bookRating", data=ratings)
+plt.title("Rating Distribution")
+plt.xlabel("Rating")
+plt.ylabel("Count")
+
+show()
+
+print("大部份書籍都未被評價")
+
+print("書籍資料筆數")
+print(books.shape)
+
+print("讀者資料筆數")
+print(users.shape)
+
+print("讀者年齡分析")
+
+users.Age.hist(bins=[0, 10, 20, 30, 40, 50, 100])
+plt.title("Age Distribution")
+plt.xlabel("Age")
+plt.ylabel("Count")
+plt.savefig("tmp_system2.png", bbox_inches="tight")
+show()
+
+print("最多人評分的書籍")
+
+rating_count = pd.DataFrame(ratings.groupby("ISBN")["bookRating"].count())
+top_rating = rating_count.sort_values("bookRating", ascending=False).head()
+print(top_rating)
+
+print("最多人評分的書籍明細")
+
+most_rated_books = pd.DataFrame(top_rating.index, index=np.arange(5), columns=["ISBN"])
+most_rated_books_summary = pd.merge(most_rated_books, books, on="ISBN")
+print(most_rated_books_summary)
+
+print("書籍評價的平均得分")
+
+average_rating = pd.DataFrame(ratings.groupby("ISBN")["bookRating"].mean())
+average_rating["ratingCount"] = pd.DataFrame(
+    ratings.groupby("ISBN")["bookRating"].count()
+)
+cc = average_rating.sort_values("ratingCount", ascending=False).head()
+print(cc)
+
+
+# 觀察: 最多人評分書籍的平均得分並沒有相對比較高
+# 為確保統計顯著性，只保留讀者評分超過200次者，書籍評分超過100次者
+
+counts1 = ratings["userID"].value_counts()
+ratings = ratings[ratings["userID"].isin(counts1[counts1 >= 200].index)]
+counts = ratings["bookRating"].value_counts()
+ratings = ratings[ratings["bookRating"].isin(counts[counts >= 100].index)]
+
+# User-Item matrix
+
+ratings_pivot = ratings.pivot(index="userID", columns="ISBN").bookRating
+userID = ratings_pivot.index
+ISBN = ratings_pivot.columns
+print(ratings_pivot.shape)
+cc = ratings_pivot.head()
+print(cc)
+
+# 任選一本書 0316666343，計算與其他書籍的相關係數
+
+test_book = "0316666343"
+bones_ratings = ratings_pivot[test_book]
+# 計算與其他書籍的相關係數
+similar_to_bones = ratings_pivot.corrwith(bones_ratings)
+corr_bones = pd.DataFrame(similar_to_bones, columns=["pearsonR"])
+corr_bones.dropna(inplace=True)
+
+# 結合書籍評價的平均得分
+corr_summary = corr_bones.join(average_rating["ratingCount"])
+
+# 只保留評價的平均得分>=300
+high_corr_book = (
+    corr_summary[corr_summary["ratingCount"] >= 300]
+    .sort_values("pearsonR", ascending=False)
+    .head(10)
+)
+print(high_corr_book)
+
+# 取得書名
+
+# 取得書名，扣除自己，取前9名
+books_corr_to_bones = pd.DataFrame(
+    high_corr_book.index[1:], index=np.arange(9), columns=["ISBN"]
+)
+corr_books = pd.merge(books_corr_to_bones, books, on="ISBN")
+print(corr_books)
+
+# KNN
+
+# 合併評價表及書籍基本資料
+combine_book_rating = pd.merge(ratings, books, on="ISBN")
+columns = [
+    "yearOfPublication",
+    "publisher",
+    "bookAuthor",
+    "imageUrlS",
+    "imageUrlM",
+    "imageUrlL",
+]
+combine_book_rating = combine_book_rating.drop(columns, axis=1)
+cc = combine_book_rating.head()
+print(cc)
+
+# 去除未評價書籍
+combine_book_rating = combine_book_rating.dropna(axis=0, subset=["bookTitle"])
+# 統計書籍的評價次數
+book_ratingCount = (
+    combine_book_rating.groupby(by=["bookTitle"])["bookRating"]
+    .count()
+    .reset_index()
+    .rename(columns={"bookRating": "totalRatingCount"})[
+        ["bookTitle", "totalRatingCount"]
+    ]
+)
+cc = book_ratingCount.head()
+print(cc)
+
+# 合併評價次數及書籍基本資料
+rating_with_totalRatingCount = combine_book_rating.merge(
+    book_ratingCount, left_on="bookTitle", right_on="bookTitle", how="left"
+)
+cc = rating_with_totalRatingCount.head()
+print(cc)
+
+# 顯示評價次數的統計量
+pd.set_option("display.float_format", lambda x: "%.3f" % x)
+print(book_ratingCount["totalRatingCount"].describe())
+
+# 顯示百分位數
+print(book_ratingCount["totalRatingCount"].quantile(np.arange(0.9, 1, 0.01)))
+
+# 熱門書籍：只有1%的書籍有超過50次的評分
+
+# 篩選有超過50次評分的書籍
+popularity_threshold = 50
+rating_popular_book = rating_with_totalRatingCount.query(
+    "totalRatingCount >= @popularity_threshold"
+)
+cc = rating_popular_book.head()
+print(cc)
+
+# 合併熱門書籍及讀者基本資料，使用美國及加拿大資料
+
+# 合併熱門書籍及讀者基本資料
+combined = rating_popular_book.merge(
+    users, left_on="userID", right_on="userID", how="left"
+)
+
+# 只考慮美國及加拿大讀者
+us_canada_user_rating = combined[combined["Location"].str.contains("usa|canada")]
+us_canada_user_rating = us_canada_user_rating.drop("Age", axis=1)
+cc = us_canada_user_rating.head()
+print(cc)
+
+print(us_canada_user_rating.shape)
+
+# KNN模型訓練
+
+from scipy.sparse import csr_matrix
+from sklearn.neighbors import NearestNeighbors
+
+# 去除重複值
+us_canada_user_rating = us_canada_user_rating.drop_duplicates(["userID", "bookTitle"])
+# 產生商品與讀者的樞紐分析表，會有很多 null value，均以0替代
+us_canada_user_rating_pivot = us_canada_user_rating.pivot(
+    index="bookTitle", columns="userID", values="bookRating"
+).fillna(0)
+# csr_matrix：壓縮稀疏矩陣，加速矩陣計算
+us_canada_user_rating_matrix = csr_matrix(us_canada_user_rating_pivot.values)
+
+# 找出相似商品，X為每一個讀者的評分
+model_knn = NearestNeighbors(metric="cosine", algorithm="brute")
+model_knn.fit(us_canada_user_rating_matrix)
+
+# 測試
+
+# 隨機抽取一件商品作預測
+query_index = np.random.choice(us_canada_user_rating_pivot.shape[0])
+distances, indices = model_knn.kneighbors(
+    np.array(us_canada_user_rating_pivot.iloc[query_index, :]).reshape(1, -1),
+    n_neighbors=6,
+)
+
+# 顯示最相似的前5名商品，並顯示距離(相似性)
+for i in range(0, len(distances.flatten())):
+    if i == 0:  # 第一筆是自己
+        print(f"{us_canada_user_rating_pivot.index[query_index]} 的推薦:")
+    else:
+        print(
+            f"{i}: {us_canada_user_rating_pivot.index[indices.flatten()[i]]}"
+            + f", 距離: {distances.flatten()[i]:.2f}:"
+        )
+
+# SVD 矩陣分解(Matrix Factorization)
+
+# User-Item Matrix
+us_canada_user_rating_pivot2 = us_canada_user_rating.pivot(
+    index="userID", columns="bookTitle", values="bookRating"
+).fillna(0)
+cc = us_canada_user_rating_pivot2.head()
+print(cc)
+
+cc = us_canada_user_rating_pivot2.shape
+print(cc)
+
+X = us_canada_user_rating_pivot2.values.T
+print(X.shape)
+
+# TruncatedSVD 降維至 12 個
+
+# 萃取 12 個特徵
+import sklearn
+from sklearn.decomposition import TruncatedSVD
+
+SVD = TruncatedSVD(n_components=12, random_state=17)
+matrix = SVD.fit_transform(X)
+print(matrix.shape)
+
+# 依據 12 個特徵計算相關係數
+corr = np.corrcoef(matrix)
+print(corr.shape)
+
+# 測試
+
+# 取得 "The Green Mile" 書籍索引值
+us_canada_book_list = list(us_canada_user_rating_pivot2.columns)
+coffey_hands = us_canada_book_list.index("The Green Mile")
+print("The Green Mile 書籍索引值:", coffey_hands)
+
+# 依照索引值找出與其他書的相關係數
+corr_coffey_hands = corr[coffey_hands]
+print(corr_coffey_hands)
+
+# 列出相關係數 > 80% 的書籍
+us_canada_book_title = us_canada_user_rating_pivot2.columns
+cc = list(us_canada_book_title[(corr_coffey_hands >= 0.8)])
+print(cc)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 06_07_surprise_test
+
+# Surprise 測試
+
+from surprise import SVD, KNNBasic
+from surprise import Dataset
+from surprise import accuracy
+from surprise.model_selection import train_test_split
+
+# 載入內建 movielens-100k 資料集
+data = Dataset.load_builtin("ml-100k")
+print("user id\titem id\trating\ttimestamp")
+cc = data.raw_ratings[:10]
+print(cc)
+
+# 資料分割
+
+# 切分為訓練及測試資料，測試資料佔 20%
+trainset, testset = train_test_split(data, test_size=0.2)
+
+# 模型訓練
+
+# 使用 KNN 演算法
+model = KNNBasic()
+
+# 訓練
+model.fit(trainset)
+
+# 模型評分
+
+# 測試
+predictions = model.test(testset)
+
+# 計算 RMSE
+accuracy.rmse(predictions)
+
+# RMSE: 0.9874
+
+# SVD
+
+model = SVD()
+model.fit(trainset)
+predictions = model.test(testset)
+accuracy.rmse(predictions)
+
+# RMSE: 0.9405
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 06_11_naive_bayes_spam
+
+# 垃圾信分類
+
+from nltk.tokenize import word_tokenize
+from nltk.corpus import stopwords
+from nltk.stem import PorterStemmer
+from nltk import WordNetLemmatizer
+from wordcloud import WordCloud
+import re
+
+mails = pd.read_csv("./data/spam.csv", encoding="latin-1")
+cc = mails.head()
+print(cc)
+
+# 資料整理
+mails.drop(["Unnamed: 2", "Unnamed: 3", "Unnamed: 4"], axis=1, inplace=True)
+cc = mails.head()
+print(cc)
+
+mails.rename(columns={"v1": "label", "v2": "message"}, inplace=True)
+cc = mails.head()
+print(cc)
+
+cc = mails["label"].value_counts()
+print(cc)
+
+mails["label"] = mails["label"].map({"ham": 0, "spam": 1})
+cc = mails.head()
+print(cc)
+
+# 設定停用詞
+import string
+
+stopword_list = set(stopwords.words("english") + list(string.punctuation))
+# 詞形還原(Lemmatization)
+lem = WordNetLemmatizer()
+
+
+# 前置處理(Preprocessing)
+def preprocess(text, is_lower_case=True):
+    if is_lower_case:
+        text = text.lower()
+    tokens = word_tokenize(text)
+    tokens = [token.strip() for token in tokens if len(token) > 1 and token != "..."]
+    filtered_tokens = [token for token in tokens if token not in stopword_list]
+    filtered_tokens = [lem.lemmatize(token) for token in filtered_tokens]
+    filtered_text = " ".join(filtered_tokens)
+    return filtered_text
+
+
+mails["message"] = mails["message"].map(preprocess)
+cc = mails.head()
+print(cc)
+
+# 文字雲
+
+# 凸顯垃圾信的常用單字
+spam_words = " ".join(list(mails[mails["label"] == 1]["message"]))
+spam_wc = WordCloud(width=512, height=512).generate(spam_words)
+plt.figure(figsize=(10, 8), facecolor="k")
+plt.imshow(spam_wc)
+plt.axis("off")
+plt.tight_layout(pad=0)
+show()
+
+# 找出正常信件的常用單字
+ham_words = " ".join(list(mails[mails["label"] == 0]["message"]))
+ham_wc = WordCloud(width=512, height=512).generate(ham_words)
+plt.figure(figsize=(10, 8), facecolor="k")
+plt.imshow(ham_wc)
+plt.axis("off")
+plt.tight_layout(pad=0)
+show()
+
+# 使用 SciKit-learn TF-IDF
+
+mails_message, labels = mails["message"].values, mails["label"].values
+mails_message = mails_message.astype(str)
+
+from sklearn.feature_extraction.text import TfidfVectorizer
+
+tfidf_vectorizer = TfidfVectorizer()
+tfidf_matrix = tfidf_vectorizer.fit_transform(mails_message)
+print(tfidf_matrix.shape)
+
+# (5572, 8114)
+
+cc = tfidf_vectorizer.get_feature_names_out()
+print(cc)
+
+no = 0
+for i in tfidf_matrix.toarray()[0]:
+    if i > 0.0:
+        no += 1
+print(no)
+
+# 資料分割
+X_train, X_test, y_train, y_test = train_test_split(
+    tfidf_matrix.toarray(), labels, test_size=0.2
+)
+# 模型訓練
+
+from sklearn.naive_bayes import GaussianNB
+
+clf = GaussianNB()
+clf.fit(X_train, y_train)
+
+# 模型評分
+
+y_pred = clf.predict(X_test)
+cc = accuracy_score(y_pred, y_test)
+print(cc)
+# 0.895067264573991
+
+from sklearn.metrics import classification_report, confusion_matrix
+
+print(classification_report(y_test, y_pred))
+
+cc = confusion_matrix(y_test, y_pred)
+print(cc)
+
+# 測試
+
+message_processed_list = (
+    "I cant pick the phone right now. Pls send a message",
+    "Congratulations ur awarded $500",
+    "Thanks for your subscription to Ringtone UK your mobile will be charged",
+    "Oops, I'll let you know when my roommate's done",
+    "FreeMsg Hey there darling it's been 3 week's now and no word back! I'd like some fun you up for it still? Tb ok! XxX std chgs to send, 憯1.50 to rcv",
+    "Free entry in 2 a wkly comp to win FA Cup final tkts 21st May 2005. Text FA to 87121 to receive entry question(std txt rate)T&C's apply 08452810075over18's",
+)
+X_new = tfidf_vectorizer.transform(message_processed_list)
+cc = clf.predict(X_new.toarray())
+print(cc)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 07_09_scikit-learn_decision_tree_regression
+
+# Scikit-learn迴歸樹測試
+
+from sklearn.tree import DecisionTreeRegressor
+
+# 生成隨機資料
+
+rng = np.random.RandomState(1)
+X = np.sort(5 * rng.rand(80, 1), axis=0)
+y = np.sin(X).ravel()
+y[::5] += 3 * (0.5 - rng.rand(16))
+
+# 訓練兩個模型
+
+regr_1 = DecisionTreeRegressor(max_depth=2)
+regr_1.fit(X, y)
+regr_2 = DecisionTreeRegressor(max_depth=5)
+regr_2.fit(X, y)
+
+# DecisionTreeRegressor(max_depth=5)
+
+# 預測
+
+X_test = np.arange(0.0, 5.0, 0.01)[:, np.newaxis]
+y_1 = regr_1.predict(X_test)
+y_2 = regr_2.predict(X_test)
+
+# 模型繪圖
+
+plt.scatter(X, y, s=20, edgecolor="black", c="darkorange", label="data")
+plt.plot(X_test, y_1, color="cornflowerblue", label="max_depth=2", linewidth=2)
+plt.plot(X_test, y_2, color="yellowgreen", label="max_depth=5", linewidth=2)
+plt.xlabel("data")
+plt.ylabel("target")
+plt.title("Decision Tree Regression")
+plt.legend()
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 07_11_decision_tree_multioutput_face_completion
+
+# 使用Scikit-learn各種迴歸演算法預測人臉下半部
+
+from sklearn.datasets import fetch_olivetti_faces
+from sklearn.utils.validation import check_random_state
+from sklearn.tree import DecisionTreeRegressor
+from sklearn.neighbors import KNeighborsRegressor
+from sklearn.linear_model import LinearRegression
+from sklearn.linear_model import RidgeCV
+
+data, targets = fetch_olivetti_faces(return_X_y=True)
+
+# 資料分割
+train = data[targets < 30]
+test = data[targets >= 30]
+
+# 模型訓練
+n_pixels = data.shape[1]
+# 人臉上半部為 X，人臉下半部為 Y
+X_train = train[:, : (n_pixels + 1) // 2]
+y_train = train[:, n_pixels // 2 :]
+
+# 使用各種迴歸演算法
+ESTIMATORS = {
+    "迴歸樹": DecisionTreeRegressor(),
+    "KNN": KNeighborsRegressor(),
+    "Linear regression": LinearRegression(),
+    "Ridge": RidgeCV(),
+}
+
+# 訓練
+for name, estimator in ESTIMATORS.items():
+    estimator.fit(X_train, y_train)
+
+# 測試 5 筆資料
+
+n_faces = 5
+rng = check_random_state(4)
+face_ids = rng.randint(test.shape[0], size=(n_faces,))
+test = test[face_ids, :]
+
+X_test = test[:, : (n_pixels + 1) // 2]
+y_test = test[:, n_pixels // 2 :]
+
+# 預測
+y_test_predict = dict()
+for name, estimator in ESTIMATORS.items():
+    y_test_predict[name] = estimator.predict(X_test)
+
+# 依照各種迴歸演算法測試結果繪製人臉
+
+# 設定圖片寬/高
+image_shape = (64, 64)
+
+n_cols = 1 + len(ESTIMATORS)
+plt.figure(figsize=(2.0 * n_cols, 2.26 * n_faces))
+plt.suptitle("預測人臉下半部", size=16)
+
+# 繪圖
+for i in range(n_faces):
+    true_face = np.hstack((X_test[i], y_test[i]))
+
+    if i > 0:
+        sub = plt.subplot(n_faces, n_cols, i * n_cols + 1)
+    else:
+        sub = plt.subplot(n_faces, n_cols, i * n_cols + 1, title="true faces")
+
+    sub.axis("off")
+    sub.imshow(
+        true_face.reshape(image_shape), cmap=plt.cm.gray, interpolation="nearest"
+    )
+
+    # 依照各種迴歸演算法繪製人臉
+    for j, est in enumerate(sorted(ESTIMATORS)):
+        completed_face = np.hstack((X_test[i], y_test_predict[est][i]))
+
+        if i:
+            sub = plt.subplot(n_faces, n_cols, i * n_cols + 2 + j)
+
+        else:
+            sub = plt.subplot(n_faces, n_cols, i * n_cols + 2 + j, title=est)
+
+        sub.axis("off")
+        sub.imshow(
+            completed_face.reshape(image_shape),
+            cmap=plt.cm.gray,
+            interpolation="nearest",
+        )
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 08_06_performance_metrics
+
+# 計算及繪製混淆矩陣
+
+df = pd.read_csv("C:/_git/vcs/_big_files/Scikit-learn_data/creditcard.csv")
+cc = df.head()
+print(cc)
+
+# 觀察目標變數的各類別筆數
+
+cc = df.Class.value_counts()
+print(cc)
+
+sns.countplot(x="Class", data=df)
+show()
+
+# 模型訓練與預測
+
+X, y = df.drop(["Time", "Amount", "Class"], axis=1), df["Class"]
+
+# 分割資料
+X_train, X_test, y_train, y_test = train_test_split(X, y)
+
+# 模型訓練
+clf = LogisticRegression()
+
+clf.fit(X_train, y_train)  # 學習訓練.fit
+
+# 預測
+y_pred = clf.predict(X_test)
+
+# 準確率
+cc = accuracy_score(y_test, y_pred)
+print(cc)
+
+# 計算混淆矩陣
+
+# 取得混淆矩陣的4個格子
+
+tn, fp, fn, tp = confusion_matrix(y_test, y_pred).ravel()
+print(tn, fp, fn, tp)
+
+# (71072, 10, 40, 80)
+
+# 常用的效能衡量指標計算
+
+print(f"準確率(Accuracy)={(tn+tp) / (tn+fp+fn+tp)}")
+print(f"精確率(Precision)={(tp) / (fp+tp)}")
+print(f"召回率(Recall)={(tp) / (fn+tp)}")
+print(f"F1 score={(2*tp) / (2*tp+fp+fn)}")
+
+"""
+準確率(Accuracy)=0.9992977725344794
+精確率(Precision)=0.8888888888888888
+召回率(Recall)=0.6666666666666666
+F1 score=0.7619047619047619
+"""
+
+# Scikit-learn 分類報表
+
+from sklearn.metrics import classification_report
+
+print(classification_report(y_test, y_pred))
+
+# weighted average 驗算
+cc = (1.00 * 71082 + 0.89 * 120) / (71082 + 120)
+print(cc)
+
+# 多類別的分類報表
+
+# 3 類別
+y_true = [0, 1, 2, 2, 2]
+y_pred = [0, 0, 2, 2, 1]
+print(classification_report(y_true, y_pred))
+
+# 多類別的分類報表
+
+# 3 類別
+y_pred = [1, 2, 0]
+y_true = [1, 1, 1]
+print(classification_report(y_true, y_pred, labels=[1, 2, 3]))
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+"""
+ROC曲線
+Receiver operating characteristic curve
+接收者操作特徵曲線
+"""
+# 08_07_ draw_roc
+
+# 繪製ROC曲線
+
+# 載入資料
+
+df = pd.read_csv("./data/roc_test_data.csv")
+print(df)
+
+"""
+繪製ROC曲線
+    計算第二欄的真(1)與假(0)的個數，假設分別為P及N，Y軸切成P格，X軸切成N格，如下圖。
+    以第一欄降冪排序，從大排到小。
+    依序掃描第二欄，若是1，就往『上』畫一格，反之，若是0，就往『右』畫一格，直到最後一列，如下圖。
+"""
+
+# 計算P及N個數
+
+# 計算第二欄的真(1)與假(0)的個數，假設分別為P及N
+P = df[df["actual"] == 1].shape[0]
+N = df[df["actual"] == 0].shape[0]
+print(f"P={P}, N={N}")
+
+# X、Y軸每一格的大小
+cc = y_unit = 1 / P
+print(cc)
+cc = X_unit = 1 / N
+print(cc)
+
+# P=11, N=7
+
+# 根據第1欄降冪排序
+
+df2 = df.sort_values(by="predict", ascending=False)
+print(df2)
+
+# 掃描表格每一列，第二欄若是1，就往『上』畫一格，反之，若是0，就往『右』畫一格
+
+X, y = [], []
+current_X, current_y = 0, 0
+for row in df2.itertuples():
+    # 若是1，Y加1
+    if row[2] == 1:
+        current_y += y_unit
+    else:  # 若是0，X加1
+        current_X += X_unit
+    # 儲存每一點X/Y座標
+    X.append(current_X)
+    y.append(current_y)
+
+X = np.array(X)
+y = np.array(y)
+print(X, y)
+
+# 繪製ROC曲線
+
+plt.title("ROC 曲線")
+plt.plot(X, y, color="orange")
+plt.plot([0, 1], [0, 1], "r--")
+plt.xlim([0, 1])
+plt.ylim([0, 1])
+plt.ylabel("真陽率")
+plt.xlabel("偽陽率")
+show()
+
+# Scikit-Learn 作法
+
+from sklearn.metrics import roc_curve, roc_auc_score, auc
+
+fpr, tpr, threshold = roc_curve(df["actual"], df["predict"])
+print(f"偽陽率:\n{fpr}\n\n真陽率:\n{tpr}\n\n決策門檻:{threshold}")
+
+"""
+偽陽率:
+[0.         0.         0.         0.14285714 0.14285714 0.28571429
+ 0.28571429 0.57142857 0.57142857 0.71428571 0.71428571 1.        ]
+
+真陽率:
+[0.         0.09090909 0.27272727 0.27272727 0.63636364 0.63636364
+ 0.81818182 0.81818182 0.90909091 0.90909091 1.         1.        ]
+
+決策門檻:[1.99 0.99 0.8  0.73 0.56 0.48 0.42 0.32 0.22 0.11 0.1  0.03]
+"""
+
+# 繪製ROC曲線
+
+auc1 = auc(fpr, tpr)
+plt.title("ROC 曲線")
+plt.plot(fpr, tpr, color="orange", label="AUC = %0.2f" % auc1)
+plt.legend(loc="lower right")
+plt.plot([0, 1], [0, 1], "r--")
+plt.xlim([0, 1])
+plt.ylim([0, 1])
+plt.ylabel("真陽率")
+plt.xlabel("偽陽率")
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+# 08_09_ credit_card_fraud_detection
+
+# 信用卡詐欺偵測
+
+# 載入資料
+
+df = pd.read_csv("C:/_git/vcs/_big_files/Scikit-learn_data/creditcard.csv")
+cc = df.head()
+print(cc)
+
+# 觀察目標變數的各類別筆數
+
+cc = df.Class.value_counts()
+print(cc)
+
+sns.countplot(x="Class", data=df)
+show()
+
+X, y = df.drop(["Time", "Amount", "Class"], axis=1), df["Class"]
+
+# 分割資料
+X_train, X_test, y_train, y_test = train_test_split(X, y)
+
+# 模型訓練
+clf = LogisticRegression()
+
+clf.fit(X_train, y_train)  # 學習訓練.fit
+
+# 預測
+y_pred = clf.predict(X_test)
+
+# 準確率
+cc = accuracy_score(y_test, y_pred)
+print(cc)
+
+# K折交叉驗證
+
+from sklearn.model_selection import cross_val_score
+
+scores = cross_val_score(estimator=clf, X=X_test, y=y_test, cv=10, n_jobs=-1)
+print(f"K折分數: %s" % scores)
+print(f"平均值: {np.mean(scores):.3f}, 標準差: {np.std(scores):.3f}")
+
+"""
+K折分數: [0.99915742 0.99929785 0.9988764  0.9997191  0.99901685 0.99901685
+ 0.9991573  0.99957865 0.9988764  0.9994382 ]
+平均值: 0.999, 標準差: 0.000
+"""
+
+# 分類報告
+
+from sklearn.metrics import classification_report
+
+print(classification_report(y_test, y_pred))
+
+# 繪製ROC曲線
+
+from sklearn.metrics import roc_curve, roc_auc_score, auc
+
+y_pred_proba = clf.predict_proba(X_test)[:, 1]
+fpr, tpr, threshold = roc_curve(y_test, y_pred_proba)
+auc1 = auc(fpr, tpr)
+plt.title("ROC 曲線")
+plt.plot(fpr, tpr, color="orange", label="AUC = %0.2f" % auc1)
+plt.legend(loc="lower right")
+plt.plot([0, 1], [0, 1], "r--")
+plt.xlim([0, 1])
+plt.ylim([0, 1])
+plt.ylabel("真陽率")
+plt.xlabel("偽陽率")
+show()
+
+# 從寬認定詐欺行為
+
+y_pred_proba = clf.predict_proba(X_test)[:, 1]
+y_pred = y_pred_proba >= 0.3
+print(classification_report(y_test, y_pred))
+
+# Over-sampling -- SMOTE
+
+# !pip install -U imbalanced-learn
+
+from imblearn.over_sampling import SMOTE
+from imblearn.metrics import classification_report_imbalanced
+
+print(df.Class.value_counts())
+smote = SMOTE()
+X_new, y_new = smote.fit_resample(X, y)
+cc = len(y_new[y_new == 0]), len(y_new[y_new == 1])
+print(cc)
+
+# 模型訓練與評估
+
+# 分割資料
+X_train, X_test, y_train, y_test = train_test_split(X_new, y_new)
+
+# 模型訓練
+clf = LogisticRegression()
+
+clf.fit(X_train, y_train)  # 學習訓練.fit
+
+# 預測
+y_pred = clf.predict(X_test)
+
+# 準確率
+cc = accuracy_score(y_test, y_pred)
+print(cc)
+
+# K折交叉驗證
+
+from sklearn.model_selection import cross_val_score
+
+scores = cross_val_score(estimator=clf, X=X_test, y=y_test, cv=10, n_jobs=-1)
+print(f"K折分數: %s" % scores)
+print(f"平均值: {np.mean(scores):.3f}, 標準差: {np.std(scores):.3f}")
+
+"""
+K折分數: [0.94499156 0.94379572 0.94569499 0.94541362 0.94442881 0.94288126
+ 0.94231851 0.95040799 0.94336968 0.94379177]
+平均值: 0.945, 標準差: 0.002
+"""
+
+# 分類報告
+
+from sklearn.metrics import classification_report
+
+print(classification_report(y_test, y_pred))
+
+# imbalanced-learn 分類報告
+
+from imblearn.metrics import classification_report_imbalanced
+
+print(classification_report_imbalanced(y_test, y_pred))
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 09_01_simple_kmeans_from_scratch
+# 自行開發K-Means
+
+# K-Means演算法類別
+
+
+class Kmeans(object):
+    # 訓練
+    def fit(self, df, k=3):
+        # 任意分成K組
+        df["group"] = k - 1
+        n = len(df) // 3
+        # 前 k-1 組
+        for i in range(k - 1):
+            for j in range(n):
+                df.loc[i * k + j, "group"] = i
+        # print(df)
+
+        # 重覆第EM步驟，直到資料所屬組別不再變動為止
+        prev_df = pd.DataFrame()
+        while not df.equals(prev_df):
+            group_mean = df.groupby("group")["goals"].mean()
+            print(group_mean)
+            prev_df = df.copy()
+            for i, row in prev_df.iterrows():
+                df.loc[i, "group"] = np.argmin(np.abs(group_mean - row["goals"]))
+
+        self.group_mean = group_mean
+        return df
+
+    # 預測
+    def predict(self, x):
+        return np.argmin(np.abs(self.group_mean - x))
+
+
+# 載入資料集
+
+df = pd.read_csv("./data/kmeans_data.csv")
+print(df)
+
+# 模型訓練
+
+model = Kmeans()  # K-平均演算法
+
+clusters = model.fit(df)  # 學習訓練.fit
+print(clusters)
+
+# 分組結果
+grouped_df = clusters.groupby("group")
+for key, item in grouped_df:
+    print(f"group {key}:")
+    print(item["player"].values, "\n")
+
+# 預測
+
+# 預測10個進球數
+cc = model.predict(10)  # 第一組
+print(cc)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 09_07_dbscan_simple_test
+
+# 以密度為基礎的集群(Density-based spatial clustering of applications with noise, DBSCAN)
+
+from sklearn.cluster import DBSCAN
+
+# 生成資料
+X = np.array([[1, 2], [2, 2], [2, 3], [8, 7], [8, 8], [25, 80]])
+print(X)
+
+# 模型訓練
+
+model = DBSCAN(eps=3, min_samples=2)
+
+model.fit(X)  # 學習訓練.fit
+print(model.labels_)
+
+X, y = make_moons(n_samples=200, noise=0.05, random_state=9487)
+plt.scatter(X[:, 0], X[:, 1])
+show()
+
+# 模型訓練，繪製結果
+
+db = DBSCAN(eps=0.2, min_samples=5, metric="euclidean")
+
+y_pred = db.fit_predict(X)
+
+plt.scatter(
+    X[y_pred == 0, 0],
+    X[y_pred == 0, 1],
+    c="lightblue",
+    marker="o",
+    s=40,
+    edgecolor="black",
+    label="cluster 1",
+)
+plt.scatter(
+    X[y_pred == 1, 0],
+    X[y_pred == 1, 1],
+    c="red",
+    marker="s",
+    s=40,
+    edgecolor="black",
+    label="cluster 2",
+)
+plt.legend()
+show()
+
+# 另一個範例，參閱Demo of DBSCAN clustering algorithm
+
+centers = [[1, 1], [-1, -1], [1, -1]]
+X, labels_true = make_blobs(
+    n_samples=750, centers=centers, cluster_std=0.4, random_state=9487
+)
+
+X = StandardScaler().fit_transform(X)
+
+# 繪製資料
+plt.figure(figsize=(10, 8))
+plt.scatter(X[:, 0], X[:, 1])
+show()
+
+# 模型訓練
+labels = DBSCAN(eps=0.3, min_samples=10).fit_predict(X)
+
+# 計算集群內樣本數、雜訊點個數
+n_clusters_ = len(set(labels)) - (1 if -1 in labels else 0)
+n_noise_ = list(labels).count(-1)
+
+print(f"集群數={n_clusters_}")
+print(f"雜訊點個數={n_noise_}")
+
+# 集群數=3
+# 雜訊點個數=18
+
+# 模型評估
+print(f"Homogeneity: {metrics.homogeneity_score(labels_true, labels):.3f}")
+print(f"Completeness: {metrics.completeness_score(labels_true, labels):.3f}")
+print(f"V-measure: {metrics.v_measure_score(labels_true, labels):.3f}")
+print(f"Adjusted Rand Index: {metrics.adjusted_rand_score(labels_true, labels):.3f}")
+print(
+    "Adjusted Mutual Information:"
+    f" {metrics.adjusted_mutual_info_score(labels_true, labels):.3f}"
+)
+print(f"Silhouette Coefficient: {metrics.silhouette_score(X, labels):.3f}")
+
+"""
+Homogeneity: 0.953
+Completeness: 0.883
+V-measure: 0.917
+Adjusted Rand Index: 0.952
+Adjusted Mutual Information: 0.916
+Silhouette Coefficient: 0.626
+"""
+
+# 繪製結果
+
+plt.figure(figsize=(10, 8))
+unique_labels = set(labels)
+core_samples_mask = np.zeros_like(labels, dtype=bool)
+core_samples_mask[db.core_sample_indices_] = True
+
+colors = [plt.cm.Spectral(each) for each in np.linspace(0, 1, len(unique_labels))]
+for k, col in zip(unique_labels, colors):
+    if k == -1:
+        # Black used for noise.
+        col = [0, 0, 0, 1]
+
+    class_member_mask = labels == k
+
+    xy = X[class_member_mask & core_samples_mask]
+    plt.plot(
+        xy[:, 0],
+        xy[:, 1],
+        "o",
+        markerfacecolor=tuple(col),
+        markeredgecolor="k",
+        markersize=14,
+    )
+
+    xy = X[class_member_mask & ~core_samples_mask]
+    plt.plot(
+        xy[:, 0],
+        xy[:, 1],
+        "o",
+        markerfacecolor=tuple(col),
+        markeredgecolor="k",
+        markersize=6,
+    )
+
+plt.title(f"Estimated number of clusters: {n_clusters_}")
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 09_08_gmm_test
+# GMM測試，程式修改自Python Data Science Handbook 範例05.12-Gaussian-Mixtures.ipynb
+
+sns.set()
+
+X, y_true = make_blobs(n_samples=400, centers=4, cluster_std=0.60, random_state=9487)
+X = X[:, ::-1]  # 特徵互調順序，繪圖效果較佳
+print(X[:10])
+
+# 進行 K-Means 集群，並繪圖
+
+CLUSTERS = 4  # 要分成的群數
+clf = KMeans(CLUSTERS, init="k-means++", n_init=10)  # K-平均演算法
+
+labels = clf.fit(X).predict(X)
+
+plt.scatter(X[:, 0], X[:, 1], c=labels, s=40, cmap="viridis")
+
+show()
+
+# 繪製集群範圍
+
+from scipy.spatial.distance import cdist
+
+
+def plot_kmeans(clf, X, n_clusters=4, rseed=0, ax=None):
+    labels = clf.fit_predict(X)
+
+    # 繪製樣本點
+    ax = ax or plt.gca()
+    ax.axis("equal")
+    ax.scatter(X[:, 0], X[:, 1], c=labels, s=40, cmap="viridis", zorder=2)
+
+    # 以最大半徑繪製集群範圍
+    centers = clf.cluster_centers_
+    radii = [cdist(X[labels == i], [center]).max() for i, center in enumerate(centers)]
+    for c, r in zip(centers, radii):
+        ax.add_patch(
+            plt.Circle(c, r, fc="#CCCCCC", lw=3, color="k", alpha=0.5, zorder=1)
+        )
+
+
+CLUSTERS = 4  # 要分成的群數
+clf = KMeans(n_clusters=CLUSTERS, init="k-means++", n_init=10)  # K-平均演算法
+plot_kmeans(clf, X)
+show()
+
+# 生成長條型資料
+
+rng = np.random.RandomState(13)
+X_stretched = np.dot(X, rng.randn(2, 2))
+
+CLUSTERS = 4  # 要分成的群數
+clf = KMeans(n_clusters=CLUSTERS, init="k-means++", n_init=10)  # K-平均演算法
+plot_kmeans(clf, X_stretched)
+show()
+
+# 改用GMM
+
+from sklearn.mixture import GaussianMixture
+
+gmm = GaussianMixture(n_components=4)
+
+gmm.fit(X)  # 學習訓練.fit
+
+labels = gmm.predict(X)
+plt.scatter(X[:, 0], X[:, 1], c=labels, s=40, cmap="viridis")
+show()
+
+# 屬於各集群的機率
+
+probs = gmm.predict_proba(X)
+print(probs[:5].round(3))
+
+# 繪製集群範圍
+
+from matplotlib.patches import Ellipse
+
+
+# 繪製橢圓
+def draw_ellipse(position, covariance, ax=None, **kwargs):
+    """Draw an ellipse with a given position and covariance"""
+    ax = ax or plt.gca()
+
+    # Convert covariance to principal axes
+    if covariance.shape == (2, 2):
+        U, s, Vt = np.linalg.svd(covariance)
+        angle = np.degrees(np.arctan2(U[1, 0], U[0, 0]))
+        width, height = 2 * np.sqrt(s)
+    else:
+        angle = 0
+        width, height = 2 * np.sqrt(covariance)
+
+    # Draw the Ellipse
+    for nsig in range(1, 4):
+        ax.add_patch(Ellipse(position, nsig * width, nsig * height, angle, **kwargs))
+
+
+# 繪製GMM範圍
+def plot_gmm(gmm, X, label=True, ax=None):
+    ax = ax or plt.gca()
+    labels = gmm.fit(X).predict(X)
+    if label:
+        ax.scatter(X[:, 0], X[:, 1], c=labels, s=40, cmap="viridis", zorder=2)
+    else:
+        ax.scatter(X[:, 0], X[:, 1], s=40, zorder=2)
+    ax.axis("equal")
+
+    # soft-edged sphere
+    w_factor = 0.2 / gmm.weights_.max()
+    for pos, covar, w in zip(gmm.means_, gmm.covariances_, gmm.weights_):
+        draw_ellipse(pos, covar, alpha=w * w_factor)
+
+
+gmm = GaussianMixture(n_components=4, random_state=42)
+plot_gmm(gmm, X)
+show()
+
+# 使用 GMM對長條型資料進行集群
+
+gmm = GaussianMixture(n_components=4, covariance_type="full", random_state=42)
+plot_gmm(gmm, X_stretched)
+show()
+
+Xmoon, ymoon = make_moons(200, noise=0.05, random_state=9487)
+plt.scatter(Xmoon[:, 0], Xmoon[:, 1])
+show()
+
+# GMM 集群：設定2個集群
+
+gmm2 = GaussianMixture(n_components=2, covariance_type="full", random_state=9487)
+plot_gmm(gmm2, Xmoon)
+show()
+
+# GMM 集群：設定16個集群
+
+gmm16 = GaussianMixture(n_components=16, covariance_type="full", random_state=9487)
+plot_gmm(gmm16, Xmoon, label=False)
+show()
+
+# 以模型生成資料
+
+Xnew, _ = gmm16.sample(400)
+plt.scatter(Xnew[:, 0], Xnew[:, 1])
+show()
+
+# 以AIC/BIC決定最佳集群數量
+
+n_components = np.arange(1, 21)
+models = [
+    GaussianMixture(n, covariance_type="full", random_state=9487).fit(Xmoon)
+    for n in n_components
+]
+
+plt.plot(n_components, [m.bic(Xmoon) for m in models], label="BIC")
+plt.plot(n_components, [m.aic(Xmoon) for m in models], label="AIC")
+plt.legend(loc="best")
+plt.xlabel("n_components")
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 09_10_customer_segmentation
+# 客戶區隔(Customer segmentation)
+
+# 載入資料集
+df = pd.read_csv(
+    "C:/_git/vcs/_big_files/Scikit-learn_data/invoice.csv", encoding="ISO-8859-1"
+)
+
+# 只分析英國的顧客
+df = df[df.Country == "United Kingdom"]
+cc = df.head()
+print(cc)
+
+# 描述統計量
+# df.describe().T
+
+# 資料清理
+
+# 移除非購買記錄
+
+# 移除數量<=0的交易記錄
+df = df[df["Quantity"] > 0]
+
+# 移除單價<=0的交易記錄
+df = df[df["UnitPrice"] > 0]
+print(df.Quantity.describe())
+cc = df.UnitPrice.describe()
+print(cc)
+
+# 刪除 Missing Value
+df.dropna(subset=["CustomerID"], inplace=True)
+
+# 檢查 Missing Value
+cc = df.isnull().sum()
+print(cc)
+
+# 找出資料集的最近購買日期
+
+# 找出資料集的最近購買日期
+print(df["InvoiceDate"].max())
+
+# 日期轉 YYYY-MM-DD
+cc = df["date"] = pd.DatetimeIndex(df.InvoiceDate).date
+print(cc)
+
+# 計算 Recency
+
+# 計算每個顧客的最近購買日期
+recency_df = df.groupby(["CustomerID"], as_index=False)["date"].max()
+recency_df.columns = ["CustomerID", "LastPurchaseDate"]
+
+# 計算每個顧客的上次消費的日期距今天數
+now = df["date"].max()
+recency_df["Recency"] = recency_df.LastPurchaseDate.apply(lambda x: (now - x).days)
+cc = recency_df.head()
+print(cc)
+
+recency_df.drop(columns=["LastPurchaseDate"], inplace=True)
+
+# 計算 Frequency
+
+# 計算每個顧客的消費次數
+frequency_df = df.copy()
+frequency_df.drop_duplicates(
+    subset=["CustomerID", "InvoiceNo"], keep="first", inplace=True
+)
+frequency_df = frequency_df.groupby("CustomerID", as_index=False)["InvoiceNo"].count()
+frequency_df.columns = ["CustomerID", "Frequency"]
+cc = frequency_df.head()
+print(cc)
+
+# 計算 Monetary
+
+# 計算每個顧客的累計消費金額
+df["Total_cost"] = df["UnitPrice"] * df["Quantity"]
+monetary_df = df.groupby("CustomerID", as_index=False)["Total_cost"].sum()
+monetary_df.columns = ["CustomerID", "Monetary"]
+cc = monetary_df.head()
+print(cc)
+
+# 合併 RFM
+
+rf = recency_df.merge(frequency_df, left_on="CustomerID", right_on="CustomerID")
+rfm = rf.merge(monetary_df, left_on="CustomerID", right_on="CustomerID")
+rfm.set_index("CustomerID", inplace=True)
+cc = rfm.head()
+print(cc)
+
+# 驗算
+
+cc = df[df.CustomerID == 12346.0]
+print(cc)
+
+import datetime as dt
+
+now = dt.date(2011, 12, 9)
+cc = (now - dt.date(2011, 1, 18)).days == 325
+print(cc)
+
+# True
+
+# 複製資料
+rfm_segmentation = rfm.copy()
+
+# 轉折判斷法
+Nc = range(1, 20)
+clf = [KMeans(n_clusters=i, init="k-means++", n_init="auto") for i in Nc]
+for i in range(len(clf)):
+    clf[i].fit(rfm_segmentation)  # 學習訓練.fit
+score = [clf[i].score(rfm_segmentation) for i in range(len(clf))]
+wcss = [clf[i].inertia_ for i in range(len(clf))]
+
+plt.plot(Nc, score)
+plt.xticks(range(0, 20, 2))
+plt.xlabel("Number of Clusters")
+plt.ylabel("Score")
+plt.title("Elbow Curve")
+show()
+
+plt.plot(Nc, wcss)
+plt.xticks(range(0, 20, 2))
+plt.xlabel("Number of Clusters")
+plt.ylabel("wcss")
+plt.title("Elbow Curve")
+show()
+
+# 分成3群
+
+X = rfm_segmentation.copy()
+clf = KMeans(n_clusters=3, init="k-means++", n_init=10, max_iter=300)  # K-平均演算法
+
+clf.fit(X)  # 學習訓練.fit
+
+# 新增欄位，加入集群代碼
+rfm_segmentation["cluster"] = clf.labels_
+
+# 觀看集群 0 的前 10 筆資料
+cc = rfm_segmentation[rfm_segmentation.cluster == 0].head(10)
+print(cc)
+
+# 計算每群筆數
+
+cc = rfm_segmentation["cluster"].value_counts()
+print(cc)
+
+# 輪廓係數
+
+from sklearn.metrics import silhouette_samples
+
+y_km = rfm_segmentation["cluster"]
+cluster_labels = np.unique(y_km)
+n_clusters = cluster_labels.shape[0]
+silhouette_vals = silhouette_samples(X, y_km, metric="euclidean")
+cc = silhouette_vals
+print(cc)
+
+# 繪製輪廓圖
+
+from matplotlib import cm
+
+# 輪廓圖
+y_ax_lower, y_ax_upper = 0, 0
+yticks = []
+for i, c in enumerate(cluster_labels):
+    c_silhouette_vals = silhouette_vals[y_km == c]
+    c_silhouette_vals.sort()
+    y_ax_upper += len(c_silhouette_vals)
+    color = cm.jet(float(i) / n_clusters)
+    plt.barh(
+        range(y_ax_lower, y_ax_upper),
+        c_silhouette_vals,
+        height=1.0,
+        edgecolor="none",
+        color=color,
+    )
+
+    yticks.append((y_ax_lower + y_ax_upper) / 2.0)
+    y_ax_lower += len(c_silhouette_vals)
+
+# 輪廓係數平均數的垂直線
+silhouette_avg = np.mean(silhouette_vals)
+plt.axvline(silhouette_avg, color="red", linestyle="--")
+
+plt.yticks(yticks, cluster_labels + 1)
+plt.ylabel("集群", fontsize=14)
+plt.xlabel("輪廓係數", fontsize=14)
+plt.tight_layout()
+show()
+
+# 依據輪廓分數找最佳集群數量
+
+# 測試 2~20 群的分數
+from sklearn.metrics import silhouette_score
+
+silhouette_score_list = []
+print("1輪廓分數:")
+for i in range(2, 21):
+    clf = KMeans(n_clusters=i, init="k-means++", n_init=10, max_iter=300)  # K-平均演算法
+    clf.fit(X)  # 學習訓練.fit
+    y_pred = clf.fit_predict(X)
+    silhouette_score_list.append(silhouette_score(X, y_km))
+    print(f"{i}:{silhouette_score_list[-1]:.2f}")
+
+print(f"最大值 {np.argmax(silhouette_score_list)+2}: {np.max(silhouette_score_list):.2f}")
+
+for i in range(2, 21):
+    print(i)
+    CLUSTERS = i  # 要分成的群數
+    clf = KMeans(
+        n_clusters=CLUSTERS, init="k-means++", n_init=10, max_iter=300
+    )  # K-平均演算法
+    clf.fit(X)  # 學習訓練.fit
+
+    # 新增欄位，加入集群代碼
+    y_pred = clf.labels_
+    cluster_labels = np.unique(y_pred)
+    n_clusters = cluster_labels.shape[0]
+    silhouette_vals = silhouette_samples(X, y_pred, metric="euclidean")
+
+    # 輪廓圖
+    y_ax_lower, y_ax_upper = 0, 0
+    yticks = []
+    for i, c in enumerate(cluster_labels):
+        c_silhouette_vals = silhouette_vals[y_pred == c]
+        c_silhouette_vals.sort()
+        y_ax_upper += len(c_silhouette_vals)
+        color = cm.jet(float(i) / n_clusters)
+        plt.barh(
+            range(y_ax_lower, y_ax_upper),
+            c_silhouette_vals,
+            height=1.0,
+            edgecolor="none",
+            color=color,
+        )
+
+        yticks.append((y_ax_lower + y_ax_upper) / 2.0)
+        y_ax_lower += len(c_silhouette_vals)
+
+    # 輪廓係數平均數的垂直線
+    silhouette_avg = np.mean(silhouette_vals)
+    plt.axvline(silhouette_avg, color="red", linestyle="--")
+
+    plt.yticks(yticks, cluster_labels + 1)
+    plt.ylabel("集群", fontsize=14)
+    plt.xlabel("輪廓係數", fontsize=14)
+    plt.tight_layout()
+    show()
+
+# RFM 分組
+
+
+# 四分位數分組
+def RScore(x, p, d):
+    if x <= d[p][0.25]:
+        return 1
+    elif x <= d[p][0.50]:
+        return 2
+    elif x <= d[p][0.75]:
+        return 3
+    else:
+        return 4
+
+
+def FMScore(x, p, d):
+    if x <= d[p][0.25]:
+        return 4
+    elif x <= d[p][0.50]:
+        return 3
+    elif x <= d[p][0.75]:
+        return 2
+    else:
+        return 1
+
+
+# 四分位數(quantile)
+quantile = rfm.quantile(q=[0.25, 0.5, 0.75])
+print(quantile)
+
+cc = quantile.to_dict()
+print(cc)
+
+# RFM依四分位數給分
+
+rfm_segmentation["R_Quartile"] = rfm_segmentation["Recency"].apply(
+    RScore, args=("Recency", quantile)
+)
+rfm_segmentation["F_Quartile"] = rfm_segmentation["Frequency"].apply(
+    FMScore, args=("Frequency", quantile)
+)
+rfm_segmentation["M_Quartile"] = rfm_segmentation["Monetary"].apply(
+    FMScore, args=("Monetary", quantile)
+)
+cc = rfm_segmentation.head()
+print(cc)
+
+# 合併 RFM 分數
+rfm_segmentation["RFMScore"] = (
+    rfm_segmentation.R_Quartile.map(str)
+    + rfm_segmentation.F_Quartile.map(str)
+    + rfm_segmentation.M_Quartile.map(str)
+)
+cc = rfm_segmentation.head()
+print(cc)
+
+# 計算 RFM 總分
+rfm_segmentation["Total_score"] = (
+    rfm_segmentation["R_Quartile"]
+    + rfm_segmentation["F_Quartile"]
+    + rfm_segmentation["M_Quartile"]
+)
+
+cc = rfm_segmentation.head()
+print(cc)
+
+print("客戶篩選：")
+print("Best Customers: ", len(rfm_segmentation[rfm_segmentation["RFMScore"] == "111"]))
+print("Loyal Customers: ", len(rfm_segmentation[rfm_segmentation["F_Quartile"] == 1]))
+print("Big Spenders: ", len(rfm_segmentation[rfm_segmentation["M_Quartile"] == 1]))
+print("Almost Lost: ", len(rfm_segmentation[rfm_segmentation["RFMScore"] == "134"]))
+print("Lost Customers: ", len(rfm_segmentation[rfm_segmentation["RFMScore"] == "344"]))
+print(
+    "Lost Cheap Customers: ",
+    len(rfm_segmentation[rfm_segmentation["RFMScore"] == "444"]),
+)
+"""
+客戶篩選：
+Best Customers:  423
+Loyal Customers:  791
+Big Spenders:  980
+Almost Lost:  31
+Lost Customers:  187
+Lost Cheap Customers:  396
+"""
+# 依分數顯示客戶名單
+cc = rfm_segmentation.sort_values(
+    by=["RFMScore", "Monetary"], ascending=[True, False]
+).head(10)
+print(cc)
+
+# 依RFM級數顯示每一組的平均消費金額
+cc = rfm_segmentation.groupby("RFMScore")["Monetary"].mean().head(10)
+print(cc)
+
+# 依RFM總分顯示每一組的平均消費金額
+cc = rfm_segmentation.groupby("Total_score")["Monetary"].mean()
+
+# 依RFM總分作圖，總分 3,4,5 有最高消費金額
+rfm_segmentation.groupby("Total_score")["Monetary"].mean().plot(
+    kind="bar", colormap="Blues_r"
+)
+show()
+
+# 依RFM總分作圖，總分 3,4,5 有最高消費次數
+rfm_segmentation.groupby("Total_score")["Frequency"].mean().plot(
+    kind="bar", colormap="Blues_r"
+)
+show()
+
+# 依RFM總分作圖，總分 10,11,12 Recency最高
+rfm_segmentation.groupby("Total_score")["Recency"].mean().plot(
+    kind="bar", colormap="Blues_r"
+)
+show()
+
+# 依據輪廓分數找最佳集群數量
+
+# 測試 2~20 群的分數
+from sklearn.metrics import silhouette_score
+
+X = rfm_segmentation[["R_Quartile", "F_Quartile", "M_Quartile"]]
+silhouette_score_list = []
+print("2輪廓分數:")
+for i in range(2, 21):
+    print(i)
+    CLUSTERS = i  # 要分成的群數
+    clf = KMeans(
+        n_clusters=CLUSTERS, init="k-means++", n_init=10, max_iter=300
+    )  # K-平均演算法
+    clf.fit(X)  # 學習訓練.fit
+    y_pred = clf.fit_predict(X)
+    silhouette_score_list.append(silhouette_score(X, y_pred))
+    print(f"{i}:{silhouette_score_list[-1]:.2f}")
+
+print(f"最大值 {np.argmax(silhouette_score_list)+2}: {np.max(silhouette_score_list):.2f}")
+
+for i in range(2, 21):
+    print(i)
+    CLUSTERS = i  # 要分成的群數
+    clf = KMeans(
+        n_clusters=CLUSTERS, init="k-means++", n_init=10, max_iter=300
+    )  # K-平均演算法
+    clf.fit(X)  # 學習訓練.fit
+
+    # 新增欄位，加入集群代碼
+    y_pred = clf.labels_
+    cluster_labels = np.unique(y_pred)
+    n_clusters = cluster_labels.shape[0]
+    silhouette_vals = silhouette_samples(X, y_pred, metric="euclidean")
+
+    # 輪廓圖
+    y_ax_lower, y_ax_upper = 0, 0
+    yticks = []
+    for i, c in enumerate(cluster_labels):
+        c_silhouette_vals = silhouette_vals[y_pred == c]
+        c_silhouette_vals.sort()
+        y_ax_upper += len(c_silhouette_vals)
+        color = cm.jet(float(i) / n_clusters)
+        plt.barh(
+            range(y_ax_lower, y_ax_upper),
+            c_silhouette_vals,
+            height=1.0,
+            edgecolor="none",
+            color=color,
+        )
+
+        yticks.append((y_ax_lower + y_ax_upper) / 2.0)
+        y_ax_lower += len(c_silhouette_vals)
+
+    # 輪廓係數平均數的垂直線
+    silhouette_avg = np.mean(silhouette_vals)
+    plt.axvline(silhouette_avg, color="red", linestyle="--")
+
+    plt.yticks(yticks, cluster_labels + 1)
+    plt.ylabel("集群", fontsize=14)
+    plt.xlabel("輪廓係數", fontsize=14)
+    plt.tight_layout()
+    show()
+
+# 分成4個集群
+
+CLUSTERS = 4  # 要分成的群數
+clf = KMeans(n_clusters=CLUSTERS)  # K-平均演算法
+
+clf.fit(X)  # 學習訓練.fit
+
+# 新增欄位，加入集群代碼
+rfm_segmentation["cluster"] = clf.labels_
+
+# 觀看集群 0 的前 10 筆資料
+cc = rfm_segmentation[rfm_segmentation.cluster == 0].head(10)
+print(cc)
+
+from mpl_toolkits.mplot3d import Axes3D
+import matplotlib.colors as mcolors
+
+fig = plt.figure(figsize=(12, 8))
+dx = fig.add_subplot(111, projection="3d")
+colors = ["green", "blue", "red", "yellow"]
+
+for i in range(rfm_segmentation.cluster.nunique()):
+    dx.scatter(
+        rfm_segmentation[rfm_segmentation.cluster == i].R_Quartile,
+        rfm_segmentation[rfm_segmentation.cluster == i].F_Quartile,
+        rfm_segmentation[rfm_segmentation.cluster == i].M_Quartile,
+        c=colors[i],
+        label="Cluster " + str(i),
+        s=10,
+        alpha=1.0,
+    )
+
+dx.set_xlabel("Recency", fontsize=14)
+dx.set_ylabel("Frequency", fontsize=14)
+dx.set_zlabel("Monetary", fontsize=14)
+dx.legend(fontsize=12)
+plt.tight_layout()
+show()
+
+cc = rfm_segmentation.cluster.value_counts()
+print(cc)
+
+cc = rfm_segmentation.groupby("cluster")[
+    ["R_Quartile", "F_Quartile", "M_Quartile", "Total_score"]
+].mean()
+print(cc)
+
+# 結論
+# 集群 1為VIP，其他依序為3、2、0。
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 10_01_error_rate
+
+# 整體學習的錯誤率計算
+
+from scipy.special import comb
+
+# 計算整體學習的錯誤率
+
+
+def ensemble_error(n_classifier, error):
+    k_start = int(math.ceil(n_classifier / 2.0))
+    probs = [
+        comb(n_classifier, k) * error**k * (1 - error) ** (n_classifier - k)
+        for k in range(k_start, n_classifier + 1)
+    ]
+    return sum(probs)
+
+
+cc = ensemble_error(n_classifier=11, error=0.25)
+print(cc)
+
+# 0.03432750701904297
+
+# 測試各種錯誤率，並繪圖
+
+error_range = np.arange(0.0, 1.01, 0.01)
+ens_errors = [ensemble_error(n_classifier=11, error=error) for error in error_range]
+
+# 修正中文亂碼
+plt.rcParams["font.sans-serif"] = ["Arial Unicode MS"]
+plt.rcParams["axes.unicode_minus"] = False
+
+plt.plot(error_range, ens_errors, label="整體學習", linewidth=2)
+
+plt.plot(error_range, error_range, linestyle="--", label="個別模型", linewidth=2)
+
+plt.title("錯誤率比較", fontsize=18)
+plt.xlabel("個別模型錯誤率", fontsize=14)
+plt.ylabel("整體學習錯誤率", fontsize=14)
+plt.legend(loc="upper left", fontsize=14)
+plt.grid(alpha=0.5)
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 11_02_label_propagation
+
+# 標註傳播(Label propagation)測試
+
+from sklearn.semi_supervised import LabelPropagation
+
+X, y = make_classification(
+    n_samples=1000, n_features=2, n_informative=2, n_redundant=0, random_state=9487
+)
+
+# 資料分割
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.5, stratify=y)
+
+# 設定 50% 資料為沒有標註(-1)
+X_train_lab, X_test_unlab, y_train_lab, y_test_unlab = train_test_split(
+    X_train, y_train, test_size=0.5, stratify=y_train
+)
+X_train_mixed = np.concatenate((X_train_lab, X_test_unlab))
+nolabel = [-1 for _ in range(len(y_test_unlab))]
+y_train_mixed = np.concatenate((y_train_lab, nolabel))
+cc = y_train_mixed.shape
+print(cc)
+
+# (500,)
+
+# Label propagation 模型訓練與評估
+
+clf = LabelPropagation()
+
+clf.fit(X_train_mixed, y_train_mixed)  # 學習訓練.fit
+
+cc = clf.score(X_test, y_test)
+print(cc)
+
+# 0.856
+
+clf2 = LogisticRegression()
+
+clf2.fit(X_train_lab, y_train_lab)  # 學習訓練.fit
+
+cc = clf2.score(X_test, y_test)
+print(cc)
+
+# 0.848
+
+# 取得訓練資料標註
+
+tran_labels = clf.transduction_
+cc = tran_labels.shape
+print(cc)
+# (500,)
+
+# 再依Label propagation傳播結果進行模型訓練與評估
+
+clf3 = LogisticRegression()
+
+clf3.fit(X_train_mixed, tran_labels)  # 學習訓練.fit
+
+cc = clf3.score(X_test, y_test)
+print(cc)
+# 0.862
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 11_03_label_spreading
+
+# LabelSpreading 測試
+
+from sklearn.semi_supervised import LabelSpreading
+
+# 載入資料集
+X, y = make_classification(
+    n_samples=1000, n_features=2, n_informative=2, n_redundant=0, random_state=9487
+)
+
+# 資料分割
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.5, stratify=y)
+
+# 設定 50% 資料為沒有標註(-1)
+
+X_train_lab, X_test_unlab, y_train_lab, y_test_unlab = train_test_split(
+    X_train, y_train, test_size=0.5, random_state=1, stratify=y_train
+)
+X_train_mixed = np.concatenate((X_train_lab, X_test_unlab))
+nolabel = [-1 for _ in range(len(y_test_unlab))]
+y_train_mixed = np.concatenate((y_train_lab, nolabel))
+cc = y_train_mixed.shape
+print(cc)
+# (500,)
+
+# LabelSpreading 模型訓練與評估
+
+clf = LabelSpreading()
+
+clf.fit(X_train_mixed, y_train_mixed)  # 學習訓練.fit
+
+cc = clf.score(X_test, y_test)
+print(cc)
+# 0.854
+
+clf2 = LogisticRegression()
+
+clf2.fit(X_train_lab, y_train_lab)  # 學習訓練.fit
+
+cc = clf2.score(X_test, y_test)
+print(cc)
+
+# 0.848
+
+# 取得訓練資料標註
+
+tran_labels = clf.transduction_
+cc = tran_labels.shape
+print(cc)
+# (500,)
+
+# 再依LabelSpreading傳播結果進行模型訓練與評估
+
+clf3 = LogisticRegression()
+
+clf3.fit(X_train_mixed, tran_labels)  # 學習訓練.fit
+
+cc = clf3.score(X_test, y_test)
+print(cc)
+# 0.858
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 範例2. 自行計算 Shapley value
+# 載入套件
+
+from sklearn.tree import DecisionTreeRegressor, plot_tree
+
+# 載入資料
+
+with open("./data/housing.data", encoding="utf8") as f:
+    data = f.readlines()
+all_fields = []
+for line in data:
+    line2 = line[1:].replace("   ", " ").replace("  ", " ")
+    fields = []
+    for item in line2.split(" "):
+        fields.append(float(item.strip()))
+        if len(fields) == 14:
+            all_fields.append(fields)
+df = pd.DataFrame(all_fields)
+df.columns = "CRIM,ZN,INDUS,CHAS,NOX,RM,AGE,DIS,RAD,TAX,PTRATIO,B,LSTAT,MEDV".split(",")
+cc = df.head()
+print(cc)
+
+# 模型訓練
+
+y = df["MEDV"]
+df = df[["RM", "LSTAT", "DIS", "NOX"]]
+
+clf = DecisionTreeRegressor(max_depth=3)
+
+clf.fit(df, y)  # 學習訓練.fit
+
+fig = plt.figure(figsize=(20, 5))
+ax = fig.add_subplot(111)
+_ = plot_tree(clf, ax=ax, feature_names=df.columns)
+show()
+
+# 以 SHAP 套件計算 Shapley value
+
+import shap
+import tabulate
+
+explainer = shap.TreeExplainer(clf)
+shap_values = explainer.shap_values(df[:1])  # 第一筆資料
+print(
+    tabulate.tabulate(
+        pd.DataFrame(
+            {
+                "shap_value": shap_values.squeeze(),
+                "feature_value": df[:1].values.squeeze(),
+            },
+            index=df.columns,
+        ),
+        tablefmt="github",
+        headers="keys",
+    )
+)
+
+# Shapley value + Y平均數 = 預測值
+
+cc = shap_values.sum() + y.mean(), clf.predict(df[:1])[0]
+print(cc)
+
+# (22.905200000000004, 22.9052)
+
+# 自行計算 Shapley value
+
+from itertools import combinations
+import scipy
+
+
+# 計算特定組合的邊際貢獻
+def pred_tree(clf, coalition, row, node=0):
+    left_node = clf.tree_.children_left[node]
+    right_node = clf.tree_.children_right[node]
+    is_leaf = left_node == right_node
+
+    if is_leaf:
+        return clf.tree_.value[node].squeeze()
+
+    feature = row.index[clf.tree_.feature[node]]
+    if feature in coalition:
+        if row.loc[feature] <= clf.tree_.threshold[node]:
+            # go left
+            return pred_tree(clf, coalition, row, node=left_node)
+        else:  # go right
+            return pred_tree(clf, coalition, row, node=right_node)
+
+    # take weighted average of left and right
+    wl = clf.tree_.n_node_samples[left_node] / clf.tree_.n_node_samples[node]
+    wr = clf.tree_.n_node_samples[right_node] / clf.tree_.n_node_samples[node]
+    value = wl * pred_tree(clf, coalition, row, node=left_node)
+    value += wr * pred_tree(clf, coalition, row, node=right_node)
+    return value
+
+
+# 計算特定組合的平均邊際貢獻
+def make_value_function(clf, row, col):
+    def value(c):
+        marginal_gain = pred_tree(clf, c + [col], row) - pred_tree(clf, c, row)
+        num_coalitions = scipy.special.comb(len(row) - 1, len(c))
+        return marginal_gain / num_coalitions
+
+    return value
+
+
+# 各種組合
+def make_coalitions(row, col):
+    rest = [x for x in row.index if x != col]
+    for i in range(len(rest) + 1):
+        for x in combinations(rest, i):
+            yield list(x)
+
+
+# 計算 Shapley value
+def compute_shap(clf, row, col):
+    v = make_value_function(clf, row, col)
+    return sum([v(coal) / len(row) for coal in make_coalitions(row, col)])
+
+
+# 顯示 Shapley value
+print(
+    tabulate.tabulate(
+        pd.DataFrame(
+            {
+                "shap_value": shap_values.squeeze(),
+                "my_shap": [
+                    compute_shap(clf, df[:1].T.squeeze(), x) for x in df.columns
+                ],
+                "feature_value": df[:1].values.squeeze(),
+            },
+            index=df.columns,
+        ),
+        tablefmt="github",
+        headers="keys",
+    )
+)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
