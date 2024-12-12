@@ -56,7 +56,7 @@ while True:
         img2, (x_st, y_st), (x_st + w, y_st + h), (255, 255, 255), 5
     )  # 繪製子影片的外框
 
-    cv2.imshow("OpenCV 04", img2)
+    cv2.imshow("OpenCV 01", img2)
 
     k = cv2.waitKey(1)
     if k == ESC:  # ESC
@@ -85,18 +85,18 @@ w = W // N  # 計算分格之後的影像寬度
 h = H // N  # 計算分格之後的影像高度
 img_list = []  # 設定空串列，記錄每一格的影像
 while True:
-    ret, img = cap.read()  # 從攝影機擷取一張影像
-    img = cv2.resize(img, (w, h))  # 縮小尺寸
+    ret, frame = cap.read()  # 從攝影機擷取一張影像
+    frame = cv2.resize(frame, (w, h))  # 縮小尺寸
     """ 2X2的寫法
-    output[0:h, 0:w] = img             # 將 output 的特定區域置換為 img, 左上
-    output[0:h, w:w*2] = img             # 將 output 的特定區域置換為 img, 右上
-    output[h:h*2, 0:w] = img             # 將 output 的特定區域置換為 img, 左下
-    output[h:h*2, w:w*2] = img             # 將 output 的特定區域置換為 img, 右下
+    output[0:h, 0:w] = frame             # 將 output 的特定區域置換為 frame, 左上
+    output[0:h, w:w*2] = frame             # 將 output 的特定區域置換為 frame, 右上
+    output[h:h*2, 0:w] = frame             # 將 output 的特定區域置換為 frame, 左下
+    output[h:h*2, w:w*2] = frame             # 將 output 的特定區域置換為 frame, 右下
 
     #左右相反
-    img = cv2.flip(img, 1)
+    frame = cv2.flip(frame, 1)
     """
-    img_list.append(img)  # 每次擷取影像時，將影像存入串列
+    img_list.append(frame)  # 每次擷取影像時，將影像存入串列
     if len(img_list) > N * N:
         del img_list[0]  # 如果串列長度超過可容納的影像數量，移除第一個項目
     for i in range(len(img_list)):
@@ -104,7 +104,7 @@ while True:
         y = i // N  # 根據串列計算影像的 y 座標
         output[h * y : h * y + h, w * x : w * x + w] = img_list[i]  # 更新畫面
 
-    cv2.imshow("OpenCV 05", output)
+    cv2.imshow("OpenCV 02", output)
 
     k = cv2.waitKey(1)
     if k == ESC:  # ESC
@@ -142,15 +142,15 @@ if not cap.isOpened():
     exit()
 
 while True:
-    ret, img = cap.read()  # 從攝影機擷取一張影像
+    ret, frame = cap.read()  # 從攝影機擷取一張影像
     if not ret:
         print("Cannot receive frame")  # 如果讀取錯誤，印出訊息
         break
     w, h = 640, 480
     cw, ch = int(w / 2), int(h / 2)  # 取得中心點
-    img = convex(img, (w, h, 3), (cw, ch, 100))
+    frame = convex(frame, (w, h, 3), (cw, ch, 100))
 
-    cv2.imshow("OpenCV 10", img)
+    cv2.imshow("OpenCV 03", frame)
 
     k = cv2.waitKey(1)
     if k == ESC:  # ESC
@@ -189,13 +189,13 @@ while True:
         if a < 0:
             a = 0  # 如果 a 小於 0 就讓 a 等於 0
 
-    cv2.imshow("OpenCV 11", output)  # 顯示圖片
+    cv2.imshow("OpenCV 04", output)  # 顯示圖片
 
 cv2.destroyAllWindows()  # 結束所有視窗
 
 print("------------------------------------------------------------")  # 60個
 
-print("OpenCV VideoCapture 12 存圖 製作一個閃光燈拍照的效果")
+print("OpenCV VideoCapture 12 存圖 按 SPACE 製作一個閃光燈拍照的效果")
 print("按 ESC 離開")
 
 cap = cv2.VideoCapture(0)
@@ -207,14 +207,14 @@ if not cap.isOpened():
     exit()
 
 while True:
-    ret, img = cap.read()  # 從攝影機擷取一張影像
+    ret, frame = cap.read()  # 從攝影機擷取一張影像
     if not ret:
         print("Cannot receive frame")  # 如果讀取錯誤，印出訊息
         break
-    img = cv2.cvtColor(img, cv2.COLOR_BGR2BGRA)  # 轉換顏色為 BGRA
-    w = img.shape[1]
-    h = img.shape[0]
-    img = cv2.resize(img, (w, h))  # 縮放尺寸
+    frame = cv2.cvtColor(frame, cv2.COLOR_BGR2BGRA)  # 轉換顏色為 BGRA
+    w = frame.shape[1]
+    h = frame.shape[0]
+    frame = cv2.resize(frame, (w, h))  # 縮放尺寸
     white = 255 - np.zeros((h, w, 4), dtype="uint8")  # 產生全白圖片
 
     k = cv2.waitKey(1)
@@ -224,9 +224,9 @@ while True:
         a = 1
 
     if a == 0:
-        output = img.copy()  # 如果 a 為 0，設定 output 變數為來源圖片的拷貝
+        output = frame.copy()  # 如果 a 為 0，設定 output 變數為來源圖片的拷貝
     else:
-        photo = img.copy()  # 如果 a 不為 0，設定 photo 變數為來源圖片的拷貝
+        photo = frame.copy()  # 如果 a 不為 0，設定 photo 變數為來源圖片的拷貝
         # 222
         output = cv2.addWeighted(white, a, photo, 1 - a, 0)  # 計算權重，產生白色慢慢消失效果
         a = a - 0.1
@@ -240,14 +240,14 @@ while True:
             cv2.imwrite(image_filename, photo)
             print("已存圖, 檔案 :", image_filename)
 
-    cv2.imshow("OpenCV 12", output)  # 顯示圖片
+    cv2.imshow("OpenCV 05", output)  # 顯示圖片
 
 cap.release()  # 所有作業都完成後，釋放資源
 cv2.destroyAllWindows()  # 結束所有視窗
 
 print("------------------------------------------------------------")  # 60個
 
-print("OpenCV VideoCapture 13 存圖 製作一個閃光燈拍照的效果 + 倒數三秒")
+print("OpenCV VideoCapture 13 存圖 按 SPACE 製作一個閃光燈拍照的效果 + 倒數三秒")
 print("按 ESC 離開")
 
 cap = cv2.VideoCapture(0)
@@ -270,14 +270,14 @@ if not cap.isOpened():
     exit()
 
 while True:
-    ret, img = cap.read()  # 從攝影機擷取一張影像
+    ret, frame = cap.read()  # 從攝影機擷取一張影像
     if not ret:
         print("Cannot receive frame")
         break
-    img = cv2.cvtColor(img, cv2.COLOR_BGR2BGRA)
-    w = img.shape[1]
-    h = img.shape[0]
-    img = cv2.resize(img, (w, h))
+    frame = cv2.cvtColor(frame, cv2.COLOR_BGR2BGRA)
+    w = frame.shape[1]
+    h = frame.shape[0]
+    frame = cv2.resize(frame, (w, h))
     white = 255 - np.zeros((h, w, 4), dtype="uint8")
 
     k = cv2.waitKey(1)
@@ -288,10 +288,10 @@ while True:
         sec = 4  # 加入倒數秒數
 
     if a == 0:
-        output = img.copy()
+        output = frame.copy()
     else:
-        output = img.copy()  # 設定 output 和 photo 變數
-        photo = img.copy()
+        output = frame.copy()  # 設定 output 和 photo 變數
+        photo = frame.copy()
         sec = sec - 0.05  # sec 不斷減少 0.05 ( 根據個人電腦效能設定，使其搭配 while 迴圈看起來像倒數一秒 )
         putText(output, 10, 70, str(int(sec)))  # 加入文字
         # 如果秒數小於 1
@@ -308,7 +308,7 @@ while True:
                 cv2.imwrite(image_filename, photo)
                 print("已存圖, 檔案 :", image_filename)
 
-    cv2.imshow("OpenCV 13", output)
+    cv2.imshow("OpenCV 06", output)
 
 cap.release()
 cv2.destroyAllWindows()
@@ -318,21 +318,24 @@ print("------------------------------------------------------------")  # 60個
 print("OpenCV VideoCapture 14 加 logo")
 print("按 ESC 離開")
 
+logo_filename = "C:/_git/vcs/_4.python/opencv/data/opencv_logo.png"
+
 logo_filename = "C:/_git/vcs/_4.python/_data/logo1.png"
 
 logo = cv2.imread(logo_filename)
-logo = cv2.resize(logo, (128, 128))
+logo = cv2.resize(logo, (100, 100))
 
 size = logo.shape
 img = np.zeros((480, 640, 3), dtype="uint8")
 img[0:480, 0:640] = "255"
-img[0 : size[0], 0 : size[1]] = logo
+
+x_st, y_st = 10, 50  # logo貼上位置
+img[y_st : y_st+size[0], x_st : x_st+size[1]] = logo
 
 img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 ret, mask1 = cv2.threshold(img_gray, 200, 255, cv2.THRESH_BINARY_INV)
 logo = cv2.bitwise_and(img, img, mask=mask1)
 ret, mask2 = cv2.threshold(img_gray, 200, 255, cv2.THRESH_BINARY)
-
 cap = cv2.VideoCapture(0)
 
 if not cap.isOpened():
@@ -348,7 +351,10 @@ while True:
     bg = cv2.bitwise_and(frame, frame, mask=mask2)
     output = cv2.add(bg, logo)
 
-    cv2.imshow("OpenCV 14", output)
+    #output = cv2.bitwise_not(frame, mask=mask1)  # 套用 not 和遮罩
+    #output = cv2.bitwise_not(output, mask=mask1)  # 再次套用 not 和遮罩，將色彩轉成原來的顏色
+
+    cv2.imshow("OpenCV 07", output)
 
     k = cv2.waitKey(1)
     if k == ESC:  # ESC
@@ -359,44 +365,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-print("OpenCV VideoCapture 15")
-print("按 ESC 離開")
-
-logo_filename = "C:/_git/vcs/_4.python/opencv/data/opencv_logo.png"
-logo = cv2.imread(logo_filename)
-size = logo.shape
-img = np.zeros((480, 640, 3), dtype="uint8")
-img[0:480, 0:640] = "255"
-img[30 : 30 + size[0], 155 : 155 + size[1]] = logo  # 將 logo 置中
-img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-ret, mask1 = cv2.threshold(img_gray, 200, 255, cv2.THRESH_BINARY_INV)
-
-cap = cv2.VideoCapture(0)
-
-if not cap.isOpened():
-    print("開啟攝影機失敗")
-    exit()
-
-while True:
-    ret, frame = cap.read()  # 從攝影機擷取一張影像
-    if not ret:
-        print("Cannot receive frame")
-        break
-    frame = cv2.resize(frame, (640, 480))
-    output = cv2.bitwise_not(frame, mask=mask1)  # 套用 not 和遮罩
-    output = cv2.bitwise_not(output, mask=mask1)  # 再次套用 not 和遮罩，將色彩轉成原來的顏色
-
-    cv2.imshow("OpenCV 15", output)
-
-    k = cv2.waitKey(1)
-    if k == ESC:  # ESC
-        break
-
-cap.release()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
+""" many
 print("OpenCV VideoCapture 16 Webcam影像轉成gif")
 print("按 ESC 離開")
 
@@ -411,37 +380,25 @@ if not cap.isOpened():
     exit()
 
 while True:
-    ret, img = cap.read()  # 從攝影機擷取一張影像
+    ret, frame = cap.read()  # 從攝影機擷取一張影像
     if not ret:
         print("Cannot receive frame")
         break
-    img = cv2.resize(img, (640, 480))  # 調整影片大小
+    frame = cv2.resize(frame, (640, 480))  # 調整影片大小
 
-    # 加上黑色區塊
-    cv2.rectangle(img, (10, 10), (200, 42), (0, 0, 0), -1)
-
-    # 加上文字
-    text = "English Only"
-    org = (15, 35)
-    fontFace = cv2.FONT_HERSHEY_SIMPLEX
-    fontScale = 1
-    color = (255, 255, 255)
-    thickness = 2
-    lineType = cv2.LINE_AA
-    cv2.putText(img, text, org, fontFace, fontScale, color, thickness, lineType)
-
-    gif = cv2.cvtColor(img, cv2.COLOR_BGRA2RGBA)  # 轉換顏色
+    gif = cv2.cvtColor(frame, cv2.COLOR_BGRA2RGBA)  # 轉換顏色
     gif = Image.fromarray(gif)  # 轉換成 PIL 格式
     gif = gif.convert("RGB")  # 轉換顏色
     output.append(gif)  # 添加到 output
 
-    cv2.imshow("OpenCV 16", img)
+    cv2.imshow("OpenCV 08", frame)
 
     k = cv2.waitKey(1)
     if k == ESC:  # ESC
         break
 
 cap.release()
+
 # 儲存為 gif 動畫
 output[0].save(
     "tmp_webcam_image.gif",
@@ -452,7 +409,7 @@ output[0].save(
     disposal=2,
 )
 cv2.destroyAllWindows()
-
+"""
 print("------------------------------------------------------------")  # 60個
 
 print("OpenCV VideoCapture 17 處理影片")
@@ -463,31 +420,32 @@ video_filename = "C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4"
 from PIL import Image, ImageSequence
 
 cap = cv2.VideoCapture(video_filename)  # 開啟影片
+
 source = []  # 建立 source 空串列，記錄影格內容
-frame = 0  # frame 從 0 開始
+cnt = 0
 
-if not cap.isOpened():
-    print("開啟影片失敗")
-    exit()
-
-while True:
-    ret, img = cap.read()  # 從影片擷取一張影像
-    if not ret:
-        print("Cannot receive frame")
+# 以迴圈從影片檔案讀取影格，並顯示出來
+while cap.isOpened():
+    ret, frame = cap.read()  # 從影片擷取一張影像
+    if ret == True:
+        cv2.imshow("Video Player", frame)
+        if cnt % 30 == 0:  # 每 30 格取一格
+            frame = cv2.resize(frame, (400, 300))  # 改變尺寸，加快處理效率
+            frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGBA)  # 修改顏色為 RGBA
+            source.append(frame)  # 記錄該圖片
+        cnt = cnt + 1
+    else:
         break
-    if frame % 30 == 0:  # 每 30 格取一格
-        img = cv2.resize(img, (400, 300))  # 改變尺寸，加快處理效率
-        img = cv2.cvtColor(img, cv2.COLOR_BGR2RGBA)  # 修改顏色為 RGBA
-        source.append(img)  # 記錄該圖片
-    frame = frame + 1
 
     k = cv2.waitKey(1)
     if k == ESC:  # ESC
         break
 
 cap.release()
+cv2.destroyAllWindows()
 
-print("start...")
+print("轉換成 gif")
+
 for i in range(len(source)):
     for x in range(400):
         for y in range(300):
@@ -497,19 +455,23 @@ for i in range(len(source)):
             if r > 35 and r < 100 and g > 110 and g < 200 and b > 60 and b < 130:
                 source[i][y, x, 3] = 0  # 如果在顏色範圍內，將透明度設為 0
 
-print("export single frame to gif...")
+print("frame 轉 gif")
+
 n = 0
 for i in source:
-    img = Image.fromarray(i)
-    img.save(f"tmp_gif{n}.gif")
+    frame = Image.fromarray(i)
+    frame.save(f"tmp_gif{n}.gif")
     n = n + 1
 
-print("loading gifs...")
+print("讀取 gif")
+
 output = []
 for i in range(n):
-    img = Image.open(f"tmp_gif{i}.gif")
-    img = img.convert("RGBA")
-    output.append(img)
+    frame = Image.open(f"tmp_gif{i}.gif")
+    frame = frame.convert("RGBA")
+    output.append(frame)
+
+print("儲存 gif")
 
 output[0].save(
     "tmp_test2.gif",
@@ -519,9 +481,7 @@ output[0].save(
     loop=0,
     disposal=2,
 )
-print("ok...")
-
-cv2.destroyAllWindows()
+print("OK")
 
 print("------------------------------------------------------------")  # 60個
 
@@ -572,7 +532,7 @@ while True:
             )  # 繪製外框
             putText(box[0], box[3], text, color=(0, 0, 255))  # 顯示文字
 
-    cv2.imshow("OpenCV 18", img)
+    cv2.imshow("OpenCV 09", img)
 
     k = cv2.waitKey(1)
     if k == ESC:  # ESC
@@ -641,7 +601,7 @@ while True:
                 img = 255 - img
                 putText(0, 0, "負片效果", 100, (0, 0, 0))
 
-    cv2.imshow("OpenCV 19", img)  # 預覽影像
+    cv2.imshow("OpenCV 10", img)  # 預覽影像
 
     k = cv2.waitKey(1)
     if k == ESC:  # ESC
@@ -704,7 +664,7 @@ if status == True:
         # putText(10,10,"aaa",color=(0,0,255))                     # 顯示文字
         putText(box[0], box[3], text, color=(0, 0, 255))  # 顯示文字
 
-cv2.imshow("OpenCV 20", image)
+cv2.imshow("OpenCV 11", image)
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -723,9 +683,10 @@ while True:
     image[: height // 2, width // 2 :] = cv2.rotate(smaller_frame, cv2.ROTATE_180)
     image[height // 2 :, width // 2 :] = smaller_frame
 
-    cv2.imshow("frame", image)
+    cv2.imshow("OpenCV 12", image)
 
-    if cv2.waitKey(1) == ord("q"):
+    k = cv2.waitKey(1)
+    if k == ESC:  # ESC
         break
 
 cap.release()
@@ -748,10 +709,11 @@ while True:
 
     result = cv2.bitwise_and(frame, frame, mask=mask)
 
-    cv2.imshow("frame", result)
-    cv2.imshow("mask", mask)
+    cv2.imshow("OpenCV 13a", result)
+    cv2.imshow("OpenCV 13b_mask", mask)
 
-    if cv2.waitKey(1) == ord("q"):
+    k = cv2.waitKey(1)
+    if k == ESC:  # ESC
         break
 
 cap.release()
@@ -792,7 +754,7 @@ while True:
             p2 = [int(point[0] + point[2]), int(point[1] + point[3])]
             cv2.rectangle(frame, p1, p2, (0, 0, 255), 3)  # 根據座標，繪製四邊形，框住要追蹤的物件
 
-    cv2.imshow("WebCam", frame)
+    cv2.imshow("OpenCV 14", frame)
 
 cap.release()
 cv2.destroyAllWindows()
@@ -844,7 +806,7 @@ while True:
                     p2 = [int(point[0] + point[2]), int(point[1] + point[3])]
                     cv2.rectangle(frame, p1, p2, colors[i], 3)  # 根據座標，繪製四邊形，框住要追蹤的物件
 
-        cv2.imshow("WebCam", frame)
+        cv2.imshow("OpenCV 15", frame)
     a = a + 1
 
 cap.release()
@@ -896,7 +858,7 @@ while True:
                 # 標記物件外框
                 cv2.rectangle(frame, p1, p2, colors[a], 3)
                 a = a + 1
-    cv2.imshow("WebCam", frame)
+    cv2.imshow("OpenCV 16", frame)
 
 cap.release()
 cv2.destroyAllWindows()
@@ -971,7 +933,7 @@ while True:
         frame = cv2.hconcat([frame, hsv, out])
 
     #### 在while中
-    cv2.imshow("frame", frame)
+    cv2.imshow("OpenCV 17", frame)
 
     k = cv2.waitKey(1)
     if k == ESC:  # ESC
@@ -1000,11 +962,11 @@ while True:
     if not ret:
         print("Cannot receive frame")  # 如果讀取錯誤，印出訊息
         break
-    # cv2.imshow("OpenCV 10", img) 原圖顯示
+    # cv2.imshow("OpenCV 18", img) 原圖顯示
 
     # addWeighted
     output = cv2.addWeighted(img, 0.6, logo, 0.4, 50)  # 疊加圖片
-    cv2.imshow("image", output)
+    cv2.imshow("OpenCV 19", output)
 
     k = cv2.waitKey(1)
     if k == ESC:  # ESC

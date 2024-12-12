@@ -25,10 +25,6 @@ from sklearn.cluster import KMeans  # 导入kmeans
 from sklearn.utils import shuffle
 from skimage import io
 
-import warnings
-
-warnings.filterwarnings("ignore")
-
 print("------------------------------------------------------------")  # 60個
 
 # original = mpl.image.imread('frog.jpg')

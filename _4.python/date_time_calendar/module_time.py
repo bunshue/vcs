@@ -65,27 +65,6 @@ print(
     + " GMT"
 )
 
-print("---- 經歷時間 ST --------------------------------------------------------")  # 60個
-
-print("測試兩事件所經歷的時間 ST")
-time_st = time.time()
-
-time.sleep(0.3456)  # 過了一段時間
-
-time_sp = time.time()
-
-time_elapsed = time_sp - time_st
-
-print("測試兩事件所經歷的時間 SP, 經歷時間 : " + str(time_elapsed) + " 秒")
-print("經歷時間 " + str(time_elapsed) + " 秒")
-print("經歷時間", int(time_elapsed), " 秒")
-print("經歷時間 %.2f", time_elapsed)
-print("經歷時間 %.2f 秒" % (time_elapsed))
-
-print("取整數秒")
-time_elapsed = int(time_sp - time_st)
-print("Test time is", time_elapsed, "seconds")
-
 print(
     "---- time.localtime() --------------------------------------------------------"
 )  # 60個
@@ -103,11 +82,9 @@ print("現在時間 轉 localtime")
 localtime = time.localtime(time.time())
 print("localtime時間 :", localtime)
 
-
 print("獲取當前時間")
 localtime = time.localtime(time.time())
 print("Local current time :", localtime)
-
 
 print("123456秒後")
 localtime = time.localtime(time.time() + 123456)
@@ -333,16 +310,6 @@ print(strtime)
 
 mydate = time.strptime("2018-1-1", "%Y-%m-%d")
 print(mydate)
-
-print("------------------------------------------------------------")  # 60個
-
-print("開始計時")
-starttime = int(time.time())  # 起始秒數
-
-# 做一件事, 量測時間
-
-endtime = int(time.time())  # 結束秒數
-print("所花時間: ", endtime - starttime, " 秒")
 
 print("------------------------------------------------------------")  # 60個
 
@@ -636,181 +603,6 @@ print("夏令時間 ", xtime[8])
 
 print("------------------------------------------------------------")  # 60個
 
-print("range(5)", range(5))
-print("list(range(5))", list(range(5)))
-
-# range
-tStart = time.time()
-
-for i in range(10000000):
-    pass
-tEnd = time.time()
-
-print("range time:", tEnd - tStart)
-
-print("------------------------------------------------------------")  # 60個
-
-# 量測時間
-start = time.time()
-
-# do something
-
-end = time.time()
-
-print("經過時間 :", str((end - start) / 60)[0:6] + "分")
-
-print("------------------------------------------------------------")  # 60個
-
-# 量測時間
-start = time.time()
-
-# do something
-
-print("elaspe: {0:.6f}".format(time.time() - start))
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-# print("time: %fs\n" % (time.time()-start))
-
-start_calc = time.time()
-x = factorial(C.Decimal(n), 0)
-end_calc = time.time()
-
-
-start_conv = time.time()
-sx = str(x)
-end_conv = time.time()
-print("cdecimal:")
-print("calculation time: %fs" % (end_calc - start_calc))
-print("conversion time: %fs\n" % (end_conv - start_conv))
-
-# Python integers
-start_calc = time.time()
-y = factorial(n, 0)
-end_calc = time.time()
-start_conv = time.time()
-sy = str(y)
-end_conv = time.time()
-
-print("int:")
-print("calculation time: %fs" % (end_calc - start_calc))
-print("conversion time: %fs\n\n" % (end_conv - start_conv))
-
-print("------------------------------------------------------------")  # 60個
-
-startTime = time.time()
-
-elapsedTime = time.time() - startTime
-print("Time for LinkedList is", elapsedTime, "seconds")
-
-startTime = time.time()
-
-elapsedTime = time.time() - startTime
-print("Time for list is", elapsedTime, "seconds")
-
-print("------------------------------------------------------------")  # 60個
-
-import time
-
-startTime = time.time()  # Get start time
-
-endTime = time.time()  # Get end time
-runTime = int((endTime - startTime) * 1000)  # Get test time
-print(
-    "To test if",
-    NUMBER_OF_ELEMENTS,
-    "elements are in the set\n",
-    "The runtime is",
-    runTime,
-    "milliseconds",
-)
-
-startTime = time.time()  # Get start time
-
-endTime = time.time()  # Get end time
-runTime = int((endTime - startTime) * 1000)  # Get test time
-print(
-    "\nTo test if",
-    NUMBER_OF_ELEMENTS,
-    "elements are in the list\n",
-    "The runtime is",
-    runTime,
-    "milliseconds",
-)
-
-startTime = time.time()  # Get start time
-endTime = time.time()  # Get end time
-runTime = int((endTime - startTime) * 1000)  # Get test time
-print(
-    "\nTo remove",
-    NUMBER_OF_ELEMENTS,
-    "elements from the set\n",
-    "The runtime is",
-    runTime,
-    "milliseconds",
-)
-
-startTime = time.time()  # Get start time
-
-endTime = time.time()  # Get end time
-runTime = int((endTime - startTime) * 1000)  # Get test time
-print(
-    "\nTo remove",
-    NUMBER_OF_ELEMENTS,
-    "elements from the list\n",
-    "The runtime is",
-    runTime,
-    "milliseconds",
-)
-
-print("------------------------------------------------------------")  # 60個
-
-startTime = time.time()  # Get start time
-
-
-endTime = time.time()  # Get end time
-testTime = int(endTime - startTime)  # Get test time
-print(
-    "Correct count is",
-    correctCount,
-    "out of",
-    NUMBER_OF_QUESTIONS,
-    "\nTest time is",
-    testTime,
-    "seconds",
-)
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-import time
-
-
-def bark(duration):
-    _time = time.time
-    _sleep = time.sleep
-
-    # We give the parent some time to be ready.
-    _sleep(1.0)
-
-    start_time = _time()
-    end_time = start_time + duration * 2.0
-    i = 0
-    while _time() < end_time:
-        print("b", end=" ")
-        i += 1
-
-
-bark(0.2)
-
-print("------------------------------------------------------------")  # 60個
-
-import sys
-import time
-
 # Timer types
 TIMER_TIME_TIME = "time.time"
 TIMER_TIME_PROCESS_TIME = "time.process_time"
@@ -849,16 +641,11 @@ if hasattr(time, "get_clock_info"):
         % (info.resolution, info.implementation)
     )
 
-
 print("------------------------------------------------------------")  # 60個
-
 
 from contextlib import contextmanager
 
 from time import perf_counter
-
-import time
-
 
 def do_something():
     time.sleep(1.2345)
@@ -883,6 +670,7 @@ for _ in range(10):
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
+sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 

@@ -29,6 +29,18 @@ while True:
         print("無影像, 離開")
         break
 
+    # 加上文字 ST
+    cv2.rectangle(img, (10, 10), (200, 42), (0, 0, 0), -1)# 加上黑色區塊
+    text = "English Only"
+    org = (15, 35)
+    fontFace = cv2.FONT_HERSHEY_SIMPLEX
+    fontScale = 1
+    color = (255, 255, 255)
+    thickness = 2
+    lineType = cv2.LINE_AA
+    cv2.putText(frame, text, org, fontFace, fontScale, color, thickness, lineType)
+    # 加上文字 SP
+
     cv2.imshow("WebCam", frame)
 
     k = cv2.waitKey(1)
@@ -89,8 +101,12 @@ if not cap.isOpened():
     sys.exit()
 else:
     ret, frame = cap.read()  # 從攝影機擷取一張影像
-    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-    frame_blur_pre = cv2.GaussianBlur(gray, (13, 13), 15)  # 高斯模糊
+
+    if ret == False:
+        print("無影像, 離開")
+    else:
+        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        frame_blur_pre = cv2.GaussianBlur(gray, (13, 13), 15)  # 高斯模糊
 
 """
 #調整影像大小
@@ -170,6 +186,9 @@ cap.set(cv2.CAP_PROP_FPS, 30)
 
 while True:
     ret, frame = cap.read()  # 從攝影機擷取一張影像
+    if ret == False:
+        print("無影像, 離開")
+        break
     cv2.imshow("WebCam", frame)
     k = cv2.waitKey(1)
     if k == ESC:

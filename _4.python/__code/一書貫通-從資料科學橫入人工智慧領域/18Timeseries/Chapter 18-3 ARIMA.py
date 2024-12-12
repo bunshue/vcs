@@ -21,6 +21,10 @@ import matplotlib.pyplot as plt
 import statsmodels.api as sm
 from statsmodels.graphics.api import qqplot
 
+#不要顯示一些警告
+import warnings
+warnings.filterwarnings("ignore")
+
 import os
 os.chdir(r"D:\Python_book\18Timeseries")
 # In[2]:
@@ -213,18 +217,12 @@ fig = sm.graphics.tsa.plot_acf(dta,lags=20)#lags 表示滞后的阶数
 fig = sm.graphics.tsa.plot_pacf(dta,lags=20)
 plt.show()
 
-
-# In[6]:
-
-
-import warnings
 import itertools
 # 设置自相关(AR)、差分(I)、移动平均(MA)的三个参数的取值范围
 p = d = q = range(0, 2)
 pdq = list(itertools.product(p, d, q))
 # 忽略ARIMA模型无法估计出结果时的报警信息
 import sys
-warnings.filterwarnings("ignore")
 
 best_aic = np.inf
 best_pdq = None
@@ -415,18 +413,12 @@ ts_simu200.set_index(dates, inplace=True)
 dta=ts_simu200['ARIMA_110']
 dta.head()
 
-
-# In[42]:
-
-
-import warnings
 import itertools
 # 设置自相关(AR)、差分(I)、移动平均(MA)的三个参数的取值范围
 p = d = q = range(0, 2)
 pdq = list(itertools.product(p, d, q))
 # 忽略ARIMA模型无法估计出结果时的报警信息
 import sys
-warnings.filterwarnings("ignore")
 
 best_aic = np.inf
 best_pdq = None

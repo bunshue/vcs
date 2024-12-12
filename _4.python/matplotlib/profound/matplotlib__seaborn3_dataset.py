@@ -35,10 +35,6 @@ import ssl
 
 ssl._create_default_https_context = ssl._create_stdlib_context
 
-import warnings
-
-warnings.filterwarnings("ignore")
-
 print("------------------------------------------------------------")  # 60個
 
 print("取得 sns 資料集")

@@ -1455,8 +1455,6 @@ print('Auto-Sklearn')
 #pip install auto-sklearn
 import autosklearn.classification
 import statsmodels.api as sm
-import warnings
-warnings.filterwarnings('ignore')
   
 data = sm.datasets.anes96.load_pandas().data
 label = 'vote'

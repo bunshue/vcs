@@ -2,20 +2,40 @@
 
 # ## 1 数据整理
 
-import warnings
-import itertools
+print("------------------------------------------------------------")  # 60個
 
-import pandas as pd
+# 共同
+import os
+import sys
+import time
+import math
+import random
 import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns  # 海生, 自動把圖畫得比較好看
+
+font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+# 設定中文字型及負號正確顯示
+# 設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
+# 設定負號
+plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+plt.rcParams["font.size"] = 12  # 設定字型大小
+
+print("------------------------------------------------------------")  # 60個
+
+import itertools
 
 import statsmodels.api as sm
 import statsmodels.tsa.api as smt
 import statsmodels.formula.api as smf
 
-import matplotlib.pyplot as plt
+#不要顯示一些警告
+import warnings
+warnings.filterwarnings("ignore")
 
-import os
-os.chdir(r"D:\Python_book\18Timeseries")
+#os.chdir(r"D:\Python_book\18Timeseries")
 
 sales_data = pd.read_csv('tractor_sales.csv')
 sales_data.head(2)
@@ -130,12 +150,8 @@ pdq = list(itertools.product(p, d, q))
 # 设置季节效应的自相关(AR)、差分(I)、移动平均(MA)的三个参数的取值范围
 seasonal_pdq = [(x[0], x[1], x[2], 12) for x in list(itertools.product(p, d, q))]
 
-
-# In[ ]:
-
-
 import sys
-warnings.filterwarnings("ignore") # 忽略ARIMA模型无法估计出结果时的报警信息
+
 best_aic = np.inf
 best_pdq = None
 best_seasonal_pdq = None

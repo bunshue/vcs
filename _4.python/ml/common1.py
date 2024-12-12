@@ -26,6 +26,11 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
+from sklearn import datasets
+from sklearn.cluster import KMeans  # 聚類方法, K-平均演算法
+from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
+from sklearn import metrics
+
 
 def show():
     # plt.show()

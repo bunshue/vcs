@@ -27,7 +27,7 @@ namespace vcs_SendTo_All
         private const int MODE3 = 0x03;   //計算檔案之MD5值
         private const int MODE4 = 0x04;   //grep 一層
         private const int MODE5 = 0x05;   //grep 多層
-        private const int MODE6 = 0x06;   //轉出檔案目錄資料 目錄下檔名轉出純文字
+        private const int MODE6 = 0x06;   //轉出檔案目錄資料 目錄下檔名轉出純文字 右鍵匯出資料夾內的檔案資料
 
         ListView listView1 = new ListView();
 
@@ -156,6 +156,7 @@ namespace vcs_SendTo_All
                 this.Text = "計算檔案之MD5值";
             else if (flag_operation_mode == MODE6)
             {
+                //this.Text = "右鍵匯出資料夾內的檔案資料";
                 flag_show_big_files_only = Properties.Settings.Default.show_big_files_only;
                 if (flag_show_big_files_only == false)
                 {
@@ -176,10 +177,11 @@ namespace vcs_SendTo_All
 
             show_item_location();
 
+            /* debug
             string sendto_folder = Environment.GetFolderPath(Environment.SpecialFolder.SendTo);
-            //richTextBox1.Text += "[傳送到]資料夾位置:\n" + sendto_folder + "\n";
-
-            //label1.Text = "檔案總管 右鍵 傳送到 XXX, 可用XXX開啟檔案\n\n拉一個捷徑到\n%APPDATA%\\Microsoft\\Windows\\SendTo\n或\n" + sendto_folder;
+            richTextBox1.Text += "[傳送到]資料夾位置:\n" + sendto_folder + "\n";
+            richTextBox1.Text += "檔案總管 右鍵 傳送到 XXX, 可用XXX開啟檔案\n\n拉一個捷徑到\n%APPDATA%\\Microsoft\\Windows\\SendTo\n或\n" + sendto_folder;
+            */
 
             int len = System.Environment.GetCommandLineArgs().Length;
             int i;
@@ -250,7 +252,10 @@ namespace vcs_SendTo_All
                 else if (flag_operation_mode == MODE6)
                 {
                     //轉出檔案目錄資料 目錄下檔名轉出純文字 全部
-                    export_filename(filename);
+                    export_filename(filename);//轉出檔案目錄資料 目錄下檔名轉出純文字
+
+                    richTextBox1.Text += "右鍵匯出資料夾內的檔案資料\n";
+                    richTextBox1.Text += filename + "\n";
                 }
             }
 
@@ -265,17 +270,20 @@ namespace vcs_SendTo_All
                 //以下為 MODE6 的 debug
                 if (flag_operation_mode == MODE6)
                 {
+                    richTextBox1.Text += "右鍵匯出資料夾內的檔案資料\n";
                     fileinfos.Clear();
                     total_size = 0;
                     total_files = 0;
 
-                    string foldername = @"D:\vcs\astro\_DATA2\_VIDEO_全為備份\百家讲坛_清十二帝疑案\小赠品";
-                    export_filename(foldername);
+                    //string foldername = @"D:\vcs\astro\_DATA2\_VIDEO_全為備份\百家讲坛_清十二帝疑案\小赠品";
+                    string foldername = @"D:\內視鏡影片\錄影效果比較";
+                    export_filename(foldername);//轉出檔案目錄資料 目錄下檔名轉出純文字
 
                     //顯示檔案目錄資料
                     show_filename_data();
 
                     show_listView();
+
                 }
             }
         }
@@ -358,7 +366,7 @@ namespace vcs_SendTo_All
         {
             int i;
             if (fileinfos.Count == 0)
-                richTextBox1.Text += "找不到資料\n";
+                richTextBox1.Text += "show_filename_data 找不到資料\n";
             else
                 richTextBox1.Text += "找到 " + fileinfos.Count.ToString() + " 筆資料a\n";
 

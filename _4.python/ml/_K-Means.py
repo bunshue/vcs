@@ -11,30 +11,10 @@ K-平均演算法（英文：k-means clustering）
 
 K-means Clustering 集群分析
 
-k-平均演算法（英文：k-means clustering，以下簡稱為 k-means ）
+k-平均演算法（英文：k-means clustering，以下簡稱為 k-means）
 是一種非監督式的學習方法，其主要的目標是對未標記的資料進行分群。
 """
 print("------------------------------------------------------------")  # 60個
-
-# 共同
-import os
-import sys
-import time
-import math
-import random
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns  # 海生, 自動把圖畫得比較好看
-
-font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
-# 設定中文字型及負號正確顯示
-# 設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
-# 設定負號
-plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
-plt.rcParams["font.size"] = 12  # 設定字型大小
-
 print("------------------------------------------------------------")  # 60個
 
 from common1 import *
@@ -43,10 +23,9 @@ from sklearn.cluster import KMeans  # 聚類方法, K-平均演算法
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
 from sklearn import metrics
 
-# from sklearn.metrics import accuracy_score
-
 
 def show():
+    return
     plt.show()
     pass
 

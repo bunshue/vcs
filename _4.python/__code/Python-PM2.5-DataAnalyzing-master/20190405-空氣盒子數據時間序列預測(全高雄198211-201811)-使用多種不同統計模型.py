@@ -13,6 +13,7 @@ import random
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns  # 海生, 自動把圖畫得比較好看
 
 font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
@@ -26,9 +27,6 @@ print("------------------------------------------------------------")  # 60個
 
 #自回归模型AR（Autoregressive model/AR）
 
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
 import statsmodels.api as sm  # 导入模型
 
 df = pd.read_excel('./data/TimeSeries_198211-201811b.xlsx')
@@ -43,17 +41,11 @@ plt.plot(temp,'b',label='PM25')
 plt.plot (results_AR.fittedvalues,'r',label='AR model')  # results_AR.fittedvalues是模型拟合后的结果
 plt.legend()
 
-
 #滑动平均模型（moving average model/MA）
 
 #滑动平均（moving average model/MA）模型也称移动平均模型，
 #是用过去各个时期的随机干扰或预测误差的线性组合来表达当前预测值。
 
-import warnings
-warnings.filterwarnings("ignore")
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
 import statsmodels.api as sm
 
 df = pd.read_excel('./data/TimeSeries_198211-201811b.xlsx')
@@ -70,14 +62,10 @@ plt.plot(results_MA.fittedvalues,color = 'red',label ='MA')
 plt.legend(fontsize = 15)
 plt.show()
 
-
 #自回归滑动平均（Autoregressive moving average model/ARMA）模型
 
 #ARMA模型就是AR模型和MA模型混合
 
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
 import statsmodels.api as sm
 
 df = pd.read_excel('./data/TimeSeries_198211-201811b.xlsx')
@@ -95,16 +83,12 @@ plt.plot(results_ARMA.fittedvalues,'r',label='ARMA model')
 plt.legend()
 plt.show()
 
-
 #自回归差分滑动平均（Autoregressive Integrated Moving Average model/ARIMA）模型
 
 #ARIMA模型在ARMA模型基础上考虑了时间序列的差分，ARIMA模型有三个参数ARIMA(p,d,q)，
 #p为自回归AR项数，q为滑动平均MA项数，d为使序列平稳所做的差分次数（阶数）。
 
 # 输出ARIMA模型的拟合效果图
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
 import statsmodels.api as sm
 
 df = pd.read_excel('./data/TimeSeries_198211-201811b.xlsx')
@@ -126,11 +110,8 @@ plt.legend()
 
 plt.show()
 
-sys.exit()
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
 
 # 以每月平均資料進行分析
 # +12代表未來12個月的數值

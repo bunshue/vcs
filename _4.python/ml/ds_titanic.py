@@ -577,7 +577,7 @@ def read_dataset(fname):
     return data
 
 
-train = read_dataset("datasets/titanic/train.csv") # 共891筆資料, 8欄位
+train = read_dataset("datasets/titanic/train.csv")  # 共891筆資料, 8欄位
 print(train.head())
 
 # 把 "Survived"欄位拿出來當訓練目標 => y
@@ -641,6 +641,7 @@ plt.legend()
 show()
 
 print("------------------------------")  # 30個
+
 
 # 訓練模型，并計算評分
 def cv_score(val):
@@ -774,12 +775,13 @@ sns.set_style("whitegrid")
 
 # 機器學習
 from sklearn.linear_model import LogisticRegression  # 邏輯迴歸
-#from sklearn.svm import SVC, LinearSVC  # 支持向量機
+
+# from sklearn.svm import SVC, LinearSVC  # 支持向量機
 from sklearn.ensemble import RandomForestClassifier  # 隨機森林
 
 from sklearn.naive_bayes import GaussianNB  # 數據集和數據處理
 
-print("------------------------------")	#30個
+print("------------------------------")  # 30個
 
 titanic_df = pd.read_csv("data/train.csv")
 test_df = pd.read_csv("data/test.csv")
@@ -798,7 +800,7 @@ average_age = titanic_df[["Age", "Survived"]].groupby(["Age"], as_index=False).m
 sns.barplot(x="Age", y="Survived", data=average_age)
 show()
 
-print("------------------------------")	#30個
+print("------------------------------")  # 30個
 
 
 def get_person(passenger):  # 小於16歲的分類爲兒童
@@ -825,7 +827,7 @@ def conv(df):
 titanic_df = conv(titanic_df)
 test_df = conv(test_df)
 
-print("------------------------------")	#30個
+print("------------------------------")  # 30個
 
 # 生成模型所需的訓練集和測試集
 X_train = titanic_df.drop("Survived", axis=1)
@@ -971,20 +973,12 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-
-
-
 
 
 print("------------------------------------------------------------")  # 60個

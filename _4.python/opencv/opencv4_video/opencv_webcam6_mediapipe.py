@@ -27,7 +27,6 @@ import mediapipe as mp
 print("------------------------------------------------------------")  # 60個
 print("OpenCV_ai_83 人臉偵測")
 
-'''
 cap = cv2.VideoCapture(0)
 if not cap.isOpened():
     print("開啟攝影機失敗")
@@ -153,7 +152,7 @@ with mp_face_detection.FaceDetection(  # 開始偵測人臉
 
 cap.release()
 cv2.destroyAllWindows()
-'''
+
 print("------------------------------------------------------------")  # 60個
 print("OpenCV_ai_87 人臉網格")
 

@@ -91,11 +91,11 @@ print("播放影片")
 
 video_filename = "C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4"
 
-cap = cv2.VideoCapture(video_filename)
+cap = cv2.VideoCapture(video_filename)  # 開啟影片
 
 # 以迴圈從影片檔案讀取影格，並顯示出來
 while cap.isOpened():
-    ret, frame = cap.read()
+    ret, frame = cap.read()  # 從影片擷取一張影像
     if ret == True:
         # frame = cv2.resize(frame,(int(frame.shape[1]/2),int(frame.shape[0]/2)))    #調整畫面大小
         # frame = cv2.Canny(frame,100,200)  #加上Canny處理
@@ -131,7 +131,8 @@ while success:
     # cv2.imshow("video",frame)
     # cv2.waitKey(int(1000/fps))#若要正常顯示，則需要delay
     i = i + 1
-    cv2.imwrite("./tmp_video_clip_%04d.jpg" % i, frame)
+    # many
+    #cv2.imwrite("./tmp_video_clip_%04d.jpg" % i, frame)
     success, frame = cap.read()
     # if i > 10:
     # break

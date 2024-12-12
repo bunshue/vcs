@@ -5664,13 +5664,8 @@ cv2.imshow("Inverted Image", inverted_image)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-import warnings
-
-warnings.filterwarnings("ignore")
 
 filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
 cv_img = cv2.imread(filename)

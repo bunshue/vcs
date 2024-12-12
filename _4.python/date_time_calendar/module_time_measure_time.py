@@ -186,11 +186,224 @@ timefunc(10, p.findall, s)
 
 print("------------------------------------------------------------")  # 60個
 
+print("range(5)", range(5))
+print("list(range(5))", list(range(5)))
+
+# range
+tStart = time.time()
+
+for i in range(10000000):
+    pass
+tEnd = time.time()
+
+print("range time:", tEnd - tStart)
+
+print("------------------------------------------------------------")  # 60個
+
+# 量測時間
+start = time.time()
+
+# do something
+
+end = time.time()
+
+print("經過時間 :", str((end - start) / 60)[0:6] + "分")
+
+print("------------------------------------------------------------")  # 60個
+
+# 量測時間
+start = time.time()
+
+# do something
+
+print("elaspe: {0:.6f}".format(time.time() - start))
+
+print("------------------------------------------------------------")  # 60個
+
+# print("time: %fs\n" % (time.time()-start))
+
+start_calc = time.time()
+x = factorial(C.Decimal(n), 0)
+end_calc = time.time()
+
+
+start_conv = time.time()
+sx = str(x)
+end_conv = time.time()
+print("cdecimal:")
+print("calculation time: %fs" % (end_calc - start_calc))
+print("conversion time: %fs\n" % (end_conv - start_conv))
+
+# Python integers
+start_calc = time.time()
+y = factorial(n, 0)
+end_calc = time.time()
+start_conv = time.time()
+sy = str(y)
+end_conv = time.time()
+
+print("int:")
+print("calculation time: %fs" % (end_calc - start_calc))
+print("conversion time: %fs\n\n" % (end_conv - start_conv))
+
+print("------------------------------------------------------------")  # 60個
+
+startTime = time.time()
+
+elapsedTime = time.time() - startTime
+print("Time for LinkedList is", elapsedTime, "seconds")
+
+startTime = time.time()
+
+elapsedTime = time.time() - startTime
+print("Time for list is", elapsedTime, "seconds")
+
+print("------------------------------------------------------------")  # 60個
+
+import time
+
+startTime = time.time()  # Get start time
+
+endTime = time.time()  # Get end time
+runTime = int((endTime - startTime) * 1000)  # Get test time
+print(
+    "To test if",
+    NUMBER_OF_ELEMENTS,
+    "elements are in the set\n",
+    "The runtime is",
+    runTime,
+    "milliseconds",
+)
+
+startTime = time.time()  # Get start time
+
+endTime = time.time()  # Get end time
+runTime = int((endTime - startTime) * 1000)  # Get test time
+print(
+    "\nTo test if",
+    NUMBER_OF_ELEMENTS,
+    "elements are in the list\n",
+    "The runtime is",
+    runTime,
+    "milliseconds",
+)
+
+startTime = time.time()  # Get start time
+endTime = time.time()  # Get end time
+runTime = int((endTime - startTime) * 1000)  # Get test time
+print(
+    "\nTo remove",
+    NUMBER_OF_ELEMENTS,
+    "elements from the set\n",
+    "The runtime is",
+    runTime,
+    "milliseconds",
+)
+
+startTime = time.time()  # Get start time
+
+endTime = time.time()  # Get end time
+runTime = int((endTime - startTime) * 1000)  # Get test time
+print(
+    "\nTo remove",
+    NUMBER_OF_ELEMENTS,
+    "elements from the list\n",
+    "The runtime is",
+    runTime,
+    "milliseconds",
+)
+
+print("------------------------------------------------------------")  # 60個
+
+startTime = time.time()  # Get start time
+
+
+endTime = time.time()  # Get end time
+testTime = int(endTime - startTime)  # Get test time
+print(
+    "Correct count is",
+    correctCount,
+    "out of",
+    NUMBER_OF_QUESTIONS,
+    "\nTest time is",
+    testTime,
+    "seconds",
+)
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+import time
+
+
+def bark(duration):
+    _time = time.time
+    _sleep = time.sleep
+
+    # We give the parent some time to be ready.
+    _sleep(1.0)
+
+    start_time = _time()
+    end_time = start_time + duration * 2.0
+    i = 0
+    while _time() < end_time:
+        print("b", end=" ")
+        i += 1
+
+
+bark(0.2)
+
+print("------------------------------------------------------------")  # 60個
+
+print("測試兩事件所經歷的時間 ST")
+time_st = time.time()
+
+time.sleep(0.3456)  # 過了一段時間
+
+time_sp = time.time()
+
+time_elapsed = time_sp - time_st
+
+print("耗時 : {0:.6f}".format(time_sp - time_st))
+
+print("測試兩事件所經歷的時間 SP, 經歷時間 : " + str(time_elapsed) + " 秒")
+print("經歷時間 " + str(time_elapsed) + " 秒")
+print("經歷時間", int(time_elapsed), " 秒")
+print("經歷時間 %.2f", time_elapsed)
+print("經歷時間 %.2f 秒" % (time_elapsed))
+
+print("取整數秒")
+time_elapsed = int(time_sp - time_st)
+print("Test time is", time_elapsed, "seconds")
+
+print("------------------------------------------------------------")  # 60個
+
+print("開始計時")
+starttime = int(time.time())  # 起始秒數
+
+# 做一件事, 量測時間
+
+endtime = int(time.time())  # 結束秒數
+print("所花時間: ", endtime - starttime, " 秒")
+
+print("------------------------------------------------------------")  # 60個
+
+
 
 print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
 
 
 print("------------------------------------------------------------")  # 60個
@@ -217,3 +430,50 @@ t1 = time.perf_counter()
 print("%6.2f" % (t1-t0), end=' ')
 flush()
 """
+
+
+
+
+"""
+
+        start_time = time.time()
+        func()
+        times = time.time() - start_time
+        print('execution time: {}'.format(datetime.timedelta(seconds=times)))
+
+
+
+    global_start_time = time.time()
+    train_cnn()
+    print('训练耗时 (s) : ', time.time() - global_start_time)
+    global_start_time = time.time()
+    train_cnn()
+    print('训练耗时 (s) : ', time.time() - global_start_time)
+
+print("經過時間 : e ", time.time() - startime)
+
+    time_elapsed = time.time() - since
+    print('Training complete in {:.0f}m {:.0f}s'.format(
+        time_elapsed // 60, time_elapsed % 60))
+
+print(time.time(), " 秒")
+
+
+
+start = time.time()
+
+print("耗時 : {0:.6f}".format(time.time() - start))
+
+
+    begin_time = time.time()
+    ret, frame = cap.read()
+    
+    classes, confs, boxes = nnProcess(frame, model)
+    frame = drawBox(frame, classes, confs, boxes, names, colors)
+
+    fps = 'fps: {:.2f}'.format(1 / (time.time() - begin_time))
+
+
+"""
+
+

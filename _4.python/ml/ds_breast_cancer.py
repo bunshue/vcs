@@ -17,7 +17,7 @@ import random
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-import seaborn as sns
+import seaborn as sns  # 海生, 自動把圖畫得比較好看
 
 font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
@@ -40,23 +40,25 @@ from sklearn.metrics import confusion_matrix  # 混淆矩陣
 from sklearn.metrics import ConfusionMatrixDisplay  # 混淆矩陣圖
 from sklearn.datasets import make_classification
 
+# 不要顯示一些警告
+import warnings
+
+warnings.filterwarnings("ignore")
+
 
 def show():
-    return
-    plt.show()
+    # plt.show()
     pass
 
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("基本數據")
+print("乳癌診斷預測 基本數據")
 
 breast_cancer = datasets.load_breast_cancer()
 
-print("feature_names")
-print(breast_cancer.feature_names)
-
+print("feature_names :", breast_cancer.feature_names)
 
 X = breast_cancer.data
 y = breast_cancer.target
@@ -101,7 +103,6 @@ print(
     )
 )
 print(breast_cancer.data[0])
-print(breast_cancer.feature_names)
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
@@ -156,11 +157,10 @@ model.fit(X_train, y_train)
 
 train_score = model.score(X_train, y_train)
 cv_score = model.score(X_test, y_test)
-print(
-    "耗時 : {0:.6f}; train_score: {1:0.6f}; cv_score: {2:.6f}".format(
-        time.time() - start, train_score, cv_score
-    )
-)
+
+print("耗時 : {0:.6f}".format(time.time() - start))
+print("train_score: ", train_score)
+print("cv_score: ", cv_score)
 
 logistic_regression = model.named_steps["logistic_regression"]
 print(
@@ -198,10 +198,6 @@ print("耗時 : {0:.6f}".format(time.time() - start))
 show()
 
 print("------------------------------")  # 30個
-
-import warnings
-
-warnings.filterwarnings("ignore")
 
 penalty = "l2"
 
@@ -1835,6 +1831,11 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
+print("------------------------------------------------------------")  # 60個
+sys.exit()
+
+print("------------------------------------------------------------")  # 60個
+
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個

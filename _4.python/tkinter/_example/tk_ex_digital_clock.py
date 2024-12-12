@@ -7,7 +7,7 @@ foreground= "#363529"
 border_width = 25
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 def digital_clock(): 
    show_time = time.strftime("%H:%M:%S")
    label1.config(text=show_time) 
@@ -81,11 +81,45 @@ button1.pack(pady=5, side='left',fill='x', expand=True)
 button2.pack(pady=5, side='left',fill='x', expand=True)
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+
+window.mainloop()
+'''
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+def digital_clock(): 
+   show_mesg = ""
+   if time.time() > endTime:
+      show_mesg = '時間到'
+   else:
+      minutesLeft = int(endTime - time.time()) // 60
+      secondsLeft = int(endTime - time.time()) % 60
+      show_mesg = '剩餘時間: {} 分 {} 秒'.format(minutesLeft, secondsLeft)
+   label1.config(text=show_mesg)
+   label1.after(200, digital_clock)
+
+window = tk.Tk()
+window.title("Digital Clock")
+window.geometry("900x150")
+window.resizable(1,1)
+
+label1 = tk.Label(window, font=text_font, bg=background, fg=foreground, bd=border_width)
+label1.grid(row=0, column=1)
+
+TIME_TO_SOLVE = 300  #秒
+startTime = time.time()
+endTime = startTime + TIME_TO_SOLVE
+
+digital_clock()
 
 window.mainloop()
 
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
 
 
 
