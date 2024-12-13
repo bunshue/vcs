@@ -1,8 +1,5 @@
 """
-
-fetch_20newsgroups
-
-
+fetch_20newsgroups 新聞資料集
 
 """
 
@@ -17,6 +14,7 @@ import random
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns  # 海生, 自動把圖畫得比較好看
 
 font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
@@ -28,12 +26,20 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
-from sklearn.datasets import fetch_20newsgroups  # 新聞資料集
+from sklearn import datasets
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
+
+
+def show():
+    # plt.show()
+    pass
+
 
 print("------------------------------------------------------------")  # 60個
 
-news = fetch_20newsgroups(subset="all")
+news = datasets.fetch_20newsgroups(subset="all")
+
+print("新聞資料集 基本數據")
 
 print("目標值：")
 print(news.target)
@@ -41,6 +47,8 @@ print("目標名稱：")
 print(news.target_names)
 print("第一篇新聞內容：")
 print(news.data[0])
+
+sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -52,7 +60,7 @@ print("------------------------------------------------------------")  # 60個
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.naive_bayes import MultinomialNB
 
-news = fetch_20newsgroups(subset="all")
+news = datasets.fetch_20newsgroups(subset="all")
 
 x_train, x_test, y_train, y_test = train_test_split(
     news.data, news.target, test_size=0.20
@@ -78,7 +86,7 @@ categories = [
     "sci.space",
 ]
 
-data_train = fetch_20newsgroups(
+data_train = datasets.fetch_20newsgroups(
     subset="train",
     categories=categories,
     shuffle=True,
@@ -87,7 +95,7 @@ data_train = fetch_20newsgroups(
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-data = fetch_20newsgroups()
+data = datasets.fetch_20newsgroups()
 print(data.target_names)
 
 """
@@ -104,8 +112,8 @@ categories = [
     "sci.space",
     "comp.graphics",
 ]
-train = fetch_20newsgroups(subset="train", categories=categories)
-test = fetch_20newsgroups(subset="test", categories=categories)
+train = datasets.fetch_20newsgroups(subset="train", categories=categories)
+test = datasets.fetch_20newsgroups(subset="test", categories=categories)
 
 print(train.data[5])
 
@@ -135,7 +143,7 @@ sns.heatmap(
 )
 plt.xlabel("True Label")
 plt.ylabel("Predicted Label")
-plt.show()
+show()
 
 """
 /usr/local/lib/python3.6/dist-packages/statsmodels/tools/_testing.py:19: FutureWarning: pandas.util.testing is deprecated. Use the functions in the public API at pandas.testing instead.
@@ -173,7 +181,8 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.decomposition import LatentDirichletAllocation
 
 # removeで本文以外の情報を取り除く
-data = fetch_20newsgroups(remove=("headers", "footers", "quotes"))
+data = datasets.fetch_20newsgroups(remove=("headers", "footers", "quotes"))
+
 max_features = 1000
 # 文書 データをベクトルに変換
 tf_vectorizer = CountVectorizer(max_features=max_features, stop_words="english")
@@ -197,10 +206,10 @@ from sklearn.svm import LinearSVC
 
 categories = ["alt.atheism", "soc.religion.christian", "comp.graphics", "sci.med"]
 remove = ("headers", "footers", "quotes")
-twenty_train = fetch_20newsgroups(
+twenty_train = datasets.fetch_20newsgroups(
     subset="train", remove=remove, categories=categories
 )  # 学習データ
-twenty_test = fetch_20newsgroups(
+twenty_test = datasets.fetch_20newsgroups(
     subset="test", remove=remove, categories=categories
 )  # 検証データ
 
@@ -245,6 +254,7 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
+sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 

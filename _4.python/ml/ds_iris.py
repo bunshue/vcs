@@ -2,11 +2,25 @@
 Iris 鳶尾花
 Iris 鳶尾花數據庫 150筆資料 4個欄位 3種品種 每種50筆資料
 
-花萼長度(Sepal.Length)
-花萼寬度(Sepal.Width)
-花瓣長度(Petal.Length)
-花瓣寬度(Petal.Width)。
-['sepal length (cm)', 'sepal width (cm)', 'petal length (cm)', 'petal width (cm)']
+以Iris dataset為例，鳶尾花資料集是非常著名的生物資訊資料集之一，
+取自美國加州大學歐文分校的機器學習資料庫http://archive.ics.uci.edu/ml/datasets/Iris
+資料的筆數為150筆，共有五個欄位：
+
+# sepal_length,sepal_width,petal_length,petal_width,species
+
+4個欄位 #sepal_length, sepal_width, petal_length, petal_width, species
+萼長 花萼長度(Sepal.Length)(cm)
+萼寬 花萼寬度(Sepal.Width)(cm)
+瓣長 花瓣長度(Petal.Length)(cm)
+瓣寬 花瓣寬度(Petal.Width)(cm)
+
+# ['sepal length (cm)', 'sepal width (cm)', 'petal length (cm)', 'petal width (cm)']
+# 有四個 features: 花萼長度、花萼寬度 和 花瓣長度、花瓣寬度
+# sepal 花萼
+# petal  花瓣
+
+
+3種品種 類別(Class)
 ['setosa' 'versicolor' 'virginica']
 
 #鳶尾花(Iris)品種的辨識
@@ -15,20 +29,6 @@ Iris 鳶尾花數據庫 150筆資料 4個欄位 3種品種 每種50筆資料
 
 鳶尾花 (Iris)  數據庫是很有名的資料,
 就是試著以一朵鳶尾花花萼、花瓣的大小來分出是哪個的大小來分出是哪個亞種的鳶尾花。
-
-我們現在來看看, 可不可以讓電腦辨識, 這是哪個亞種的鳶尾花?
-
-在 sklearn.datasets 有幾個數據庫可以提供給大家玩玩。
-
-以Iris dataset為例，鳶尾花資料集是非常著名的生物資訊資料集之一，
-取自美國加州大學歐文分校的機器學習資料庫http://archive.ics.uci.edu/ml/datasets/Iris
-資料的筆數為150筆，共有五個欄位：
-#sepal_length, sepal_width, petal_length, petal_width, species
-1. 花萼長度(Sepal Length)：計算單位是公分。
-2. 花萼寬度(Sepal Width)：計算單位是公分。
-3. 花瓣長度(Petal Length) ：計算單位是公分。
-4. 花瓣寬度(Petal Width)：計算單位是公分。
-5. 類別(Class)：可分為Setosa，Versicolor和Virginica三個品種。
 """
 print("------------------------------------------------------------")  # 60個
 
@@ -69,11 +69,6 @@ import warnings
 
 # warnings.filterwarnings("ignore")
 
-# 去掉警告信息
-import warnings
-
-warnings.filterwarnings("ignore")
-
 print("------------------------------------------------------------")  # 60個
 
 
@@ -92,7 +87,10 @@ iris = datasets.load_iris()
 print("所有資料 :", iris)
 print("data :", iris.data)
 print("target :", iris.target)
+
+# 資料集目標名稱
 print("target_names :", iris.target_names)
+
 print("DESCR :", iris.DESCR)
 print("feature_names :", iris.feature_names)
 print("filename :", iris.filename)
@@ -124,10 +122,7 @@ print(iris.target)
 print("看鳶尾花數據庫的features")
 print(iris.feature_names)
 
-# ['sepal length (cm)', 'sepal width (cm)', 'petal length (cm)', 'petal width (cm)']
-# 有四個 features: 花萼長度、花萼寬度 和 花瓣長度、花瓣寬度
-# sepal 花萼
-# petal  花瓣
+print("觀察資料集彙總資訊")
 
 print(iris.data)
 print(type(iris.data))
@@ -195,6 +190,39 @@ print("測試_特徵：{}, 測試_目標：{}".format(x_test.shape, y_test.shape
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+print("iris 轉 df, 再看iris資料")
+
+df = pd.DataFrame(iris.data, columns=iris.feature_names)
+
+print("觀察資料集彙總資訊")
+# 了解行資料的標題與資料型別(整數、浮點數、字串等)
+df.info()  # 這樣就已經把資料集彙總資訊印出來
+
+print("描述統計量")
+cc = df.describe()
+print(cc)
+
+print("df之大小")
+M, N = df.shape
+print(df.shape)
+print("df之大小", M, "X", N)
+
+print("iris 資料集欄名columns")
+cc = df.columns
+print(cc)
+
+print("花萼長度")
+print(df["sepal length (cm)"].head())
+print("花萼寬度")
+print(df["sepal width (cm)"].head())
+print("花瓣長度")
+print(df["petal length (cm)"].head())
+print("花瓣寬度")
+print(df["petal width (cm)"].head())
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 data, label = datasets.load_iris(return_X_y=True)
 
 print("鳶尾花花萼和花瓣數據")
@@ -234,7 +262,6 @@ print(type(iris))
 print(len(iris))
 print(iris.shape)
 
-# sepal_length,sepal_width,petal_length,petal_width,species
 print(iris["花萼長度"])
 
 print(len(iris["花萼長度"]))
@@ -372,62 +399,65 @@ ax.xaxis.set_major_formatter(date_format)
 # 设置x轴每个刻度的间隔天数
 xlocator = mpl.ticker.MultipleLocator(7)
 ax.xaxis.set_major_locator(xlocator)
+
 # 为了避免x轴刻度标签的紧凑，将刻度标签旋转45度
 plt.xticks(rotation = 45)
-
 # 添加y轴标签
 plt.ylabel('人数')
 # 添加图形标题
 plt.title('每天微信文章阅读人数与人次趋势')
 # 添加图例Virginica
-plt.legend()
+#plt.legend()
 # 显示图形
+
+plt.show()
 show()
 """
 
+iris = pd.read_csv("data/iris.csv")
+print(iris.shape)
+print(iris)
 
-"""
-# 读入数据
-iris = pd.read_csv(r'F:\\python_Data_analysis_and_mining\\06\\iris.csv')
-print(iris.shape)Virginica
 # 绘制散点图
-plt.scatter(x = iris.Petal_Width, # 指定散点图的x轴数据
-y = iris.Petal_Length, # 指定散点图的y轴数据
-color = 'steelblue' # 指定散点图中点的颜色
+plt.scatter(
+    x=iris.petal_width,  # 指定散点图的x轴数据
+    y=iris.petal_length,  # 指定散点图的y轴数据
+    color="steelblue",  # 指定散点图中点的颜色
 )
 # 添加x轴和y轴标签
-plt.xlabel('花瓣宽度')
-plt.ylabel('花瓣长度')
+plt.xlabel("花瓣宽度")
+plt.ylabel("花瓣长度")
 # 添加标题
-plt.title('鸢尾花的花瓣宽度与长度关系')
+plt.title("鸢尾花的花瓣宽度与长度关系")
 # 显示图形
 show()
 
 # Pandas模块绘制散点图
 # 绘制散点图Virginica
-iris.plot(x = 'Petal_Width', y = 'Petal_Length', kind = 'scatter', title = '鸢尾花的花瓣宽度与长度关系')
+iris.plot(x="petal_width", y="petal_length", kind="scatter", title="鸢尾花的花瓣宽度与长度关系")
 # 修改x轴和y轴标签
-plt.xlabel('花瓣宽度')
-plt.ylabel('花瓣长度')
+plt.xlabel("花瓣宽度")
+plt.ylabel("花瓣长度")
 # 显示图形
 show()
 
 # seaborn模块绘制分组散点图
-sns.lmplot(x = 'Petal_Width', # 指定x轴变量
-y = 'Petal_Length', # 指定y轴变量
-hue = 'Species', # 指定分组变量
-data = iris, # 指定绘图数据集
-legend_out = False, # 将图例呈现在图框内
-truncate = True # 根据实际的数据范围，对拟合线作截断操作
+sns.lmplot(
+    x="petal_width",  # 指定x轴变量
+    y="petal_length",  # 指定y轴变量
+    hue="target",  # 指定分组变量
+    data=iris,  # 指定绘图数据集
+    legend_out=False,  # 将图例呈现在图框内
+    truncate=True,  # 根据实际的数据范围，对拟合线作截断操作
 )
 # 修改x轴和y轴标签
-plt.xlabel('花瓣宽度')
-plt.ylabel('花瓣长度')
+plt.xlabel("花瓣宽度")
+plt.ylabel("花瓣长度")
 # 添加标题
-plt.title('鸢尾花的花瓣宽度与长度关系')
+plt.title("鸢尾花的花瓣宽度与长度关系")
 # 显示图形
+
 show()
-"""
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -442,34 +472,6 @@ df = pd.DataFrame(iris.data, columns=iris.feature_names)
 # 資料集目標
 y = iris.target
 # print(y)
-# 資料集目標名稱
-# print(iris.target_names)
-
-print("觀察資料集彙總資訊")
-
-df.info()  # 這樣就已經把資料集彙總資訊印出來
-
-print("描述統計量")
-cc = df.describe()
-print(cc)
-
-print("df之大小")
-M, N = df.shape
-print(df.shape)
-print("df之大小", M, "X", N)
-
-print("iris 資料集欄名columns")
-cc = df.columns
-print(cc)
-
-print("花萼長度")
-print(df["sepal length (cm)"].head())
-print("花萼寬度")
-print(df["sepal width (cm)"].head())
-print("花瓣長度")
-print(df["petal length (cm)"].head())
-print("花瓣寬度")
-print(df["petal width (cm)"].head())
 
 # 箱型圖
 sns.boxplot(data=df)
@@ -576,16 +578,6 @@ df = pd.DataFrame(iris.data, columns=iris.feature_names)
 # 資料集目標
 y = iris.target
 # print(y)
-# 資料集目標名稱
-# print(iris.target_names)
-
-print("觀察資料集彙總資訊")
-
-df.info()  # 這樣就已經把資料集彙總資訊印出來
-
-print("描述統計量")
-cc = df.describe()
-print(cc)
 
 # 集中
 cc = (
@@ -789,13 +781,16 @@ target = pd.DataFrame(iris.target, columns=["target"])
 y = target["target"]
 
 colmap = np.array(["r", "g", "y"])
+
 plt.figure(figsize=(10, 5))
-plt.subplot(1, 2, 1)
+
+plt.subplot(121)
 plt.subplots_adjust(hspace=0.5)
 plt.scatter(X["sepal_length"], X["sepal_width"], color=colmap[y])
 plt.xlabel("花萼長度(Sepal Length)")
 plt.ylabel("花萼寬度(Sepal Width)")
-plt.subplot(1, 2, 2)
+
+plt.subplot(122)
 plt.scatter(X["petal_length"], X["petal_width"], color=colmap[y])
 plt.xlabel("花瓣長度(Petal Length)")
 plt.ylabel("花瓣寬度(Petal Width)")
@@ -854,11 +849,11 @@ df = pd.read_csv("data/iris.csv")
 
 print(df.shape)
 print(df.head(5))
-print(df.describe())
 
 target_mapping = {"setosa": 0, "versicolor": 1, "virginica": 2}
 Y = df["target"].map(target_mapping)
 colmap = np.array(["r", "g", "y"])
+
 plt.figure(figsize=(10, 5))
 
 plt.subplot(121)
@@ -1013,16 +1008,11 @@ plt.title("花瓣 訓練資料")
 show()
 
 # 鳶尾花 (Iris) 的數據, 有三類的鳶尾花我們想用 SVM 做分類。
-# 開個分類機、訓練
-# 再一次, 三部曲打造函數學習機。
-# 第一部曲：打開一台函數學習機
 
 clf = SVC()
 
-# 第二部曲：訓練
 clf.fit(x_train, y_train)
 
-# 第三部曲：預測
 y_predict = clf.predict(x_test)
 
 print("看看我們模型預測和真實狀況差多少?")
@@ -1081,7 +1071,6 @@ P = np.c_[xm.ravel(), ym.ravel()]
 z = clf.predict(P)
 Z = z.reshape(xm.shape)
 plt.contourf(xm, ym, Z, alpha=0.3)
-
 plt.scatter(X[:, 0], X[:, 1], c=Y)
 
 show()
@@ -1161,6 +1150,7 @@ clf.predict(x)
 clf.predict(x) - y
 gd = np.array([[i, j] for i in np.arange(4, 8, 0.2) for j in np.arange(1.8, 4.5, 0.2)])
 gdc = clf.predict(gd)
+
 plt.scatter(gd[:, 0], gd[:, 1], s=50, c=gdc)
 plt.title("SVM結果")
 
@@ -1171,6 +1161,7 @@ show()
 
 gd = np.array([[i, j] for i in np.arange(4, 8, 0.1) for j in np.arange(1.8, 4.5, 0.1)])
 gdc = clf.predict(gd)
+
 plt.scatter(gd[:, 0], gd[:, 1], s=50, c=gdc, alpha=0.4)
 plt.scatter(x[:, 0], x[:, 1], s=50, c=y)
 
@@ -1285,6 +1276,7 @@ show()
 # 也可以畫這種的
 
 y_predict = clf.predict(x_test)
+
 plt.scatter(x_test[:, 0], x_test[:, 1], c=y_predict)
 show()
 
@@ -1332,6 +1324,7 @@ x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size=0.2)
 
 plt.scatter(X[:, 0], X[:, 1], c=Y, cmap="Paired")
 plt.title("原始資料")
+
 show()
 
 clf = SVC(gamma="scale")
@@ -1351,8 +1344,8 @@ z = clf.predict(P)
 Z = z.reshape(xm.shape)
 plt.contourf(xm, ym, Z, alpha=0.3)
 plt.scatter(X[:, 0], X[:, 1], c=Y)
-show()
 
+show()
 
 # PCA 可以救鳶尾花嗎？
 
@@ -1414,9 +1407,7 @@ show()
 
 x1, x2 = np.meshgrid(np.arange(-0.2, 1.2, 0.02), np.arange(-0.2, 1.2, 0.02))
 Z = clf.predict(np.c_[x1.ravel(), x2.ravel()])
-
 z = Z.reshape(x1.shape)
-
 plt.contourf(x1, x2, z, alpha=0.3)
 # NG plt.scatter(x[:, 0], x[:, 1], s=100, c=clf.labels_)
 show()
@@ -1436,11 +1427,10 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 df = pd.read_csv("data/iris.csv")
+
 df.shape
 
 df.head()
-
-df.describe()
 
 target_mapping = {"setosa": 0, "versicolor": 1, "virginica": 2}
 Y = df["target"].map(target_mapping)
@@ -1583,6 +1573,7 @@ import pydotplus  # 做圖工具
 import io
 
 iris = datasets.load_iris()
+
 X = iris.data  # 獲取自變量
 y = iris.target  # 獲取因變量
 
@@ -1746,15 +1737,9 @@ print(df.head())
 
 print(df.head())
 
-# 資料科學2.2 了解行資料的標題與資料型別(整數、浮點數、字串等)
-
-print(df.info())
-
 # 資料科學2.3 資料清理
 
 # 缺失值的補值或刪除
-
-print(df.info())
 
 # 刪除重複值或異常值
 
@@ -2457,9 +2442,6 @@ print(p[p == 0].index)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-
-# 09_06_agglomerative_hierarchical_clustering
 
 # 凝聚階層集群(Agglomerative Hierarchical Clustering, AHC)
 

@@ -40,6 +40,12 @@ import sklearn.linear_model
 from sklearn import datasets
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
 
+
+def show():
+    # plt.show()
+    pass
+
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -999,6 +1005,7 @@ print("評估 測試資料 與 預測結果 的差異")
 evaluate_result(y_test, y_pred)
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 df = pd.read_csv("data/200811-201811a.csv")
 """
@@ -1258,7 +1265,6 @@ print(f"測試判定係數: {lasso_pipe.score(X_test, y_test)}")
 # 測試判定係數: 0.8367938135279831
 
 print("結論：L1 test score 最高")
-
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1897,7 +1903,6 @@ print("MSE=", MSE)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
 # 11_06_shap_test
 
 # SHAP套件測試
@@ -1940,6 +1945,10 @@ for i in range(X.shape[1]):
 
 feature_name = "median_income"
 X100 = shap.utils.sample(X, 100)
+
+
+''' 會畫圖
+#會畫圖
 shap.partial_dependence_plot(
     feature_name,
     linear_regression.predict,
@@ -1954,6 +1963,8 @@ shap.partial_dependence_plot(
 sample_ind = 20  # 第 21 筆資料
 explainer = shap.Explainer(linear_regression.predict, X100)
 shap_values = explainer(X)
+
+#會畫圖
 shap.partial_dependence_plot(
     feature_name,
     linear_regression.predict,
@@ -1995,6 +2006,7 @@ explainer_ebm = shap.Explainer(model_ebm.predict, X100)
 shap_values_ebm = explainer_ebm(X)
 
 # 特徵影響力
+#會畫圖
 fig, ax = shap.partial_dependence_plot(
     feature_name,
     model_ebm.predict,
@@ -2029,6 +2041,8 @@ If this notebook was from another user you must also trust this notebook (File -
 If you are viewing this notebook on github the Javascript has been stripped for security.
 If you are using JupyterLab this error is because a JupyterLab extension has not yet been written.
 """
+
+'''
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 

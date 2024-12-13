@@ -30,13 +30,22 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
-# 1. 讀入深度學習套件
+from common2 import *
 
 from tensorflow.keras.preprocessing import sequence
 from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense, Embedding
+from tensorflow.keras.layers import Dense
+from tensorflow.keras.layers import Embedding
 from tensorflow.keras.layers import LSTM
 
+
+def show():
+    # plt.show()
+    pass
+
+
+print("------------------------------------------------------------")  # 60個
+'''
 from tensorflow.keras.datasets import imdb
 
 """ imdb 資料在
@@ -123,22 +132,27 @@ x_test = sequence.pad_sequences(x_test, maxlen=100)
 # 4. step 01: 打造一個函數學習機
 
 model = Sequential()
+
 model.add(Embedding(10000, 128))
 model.add(LSTM(128, dropout=0.2, recurrent_dropout=0.2))
 model.add(Dense(1, activation="sigmoid"))
-model.compile(loss="binary_crossentropy", optimizer="adam", metrics=["accuracy"])
 
-print("檢視神經網路")
+# 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
+model.compile(optimizer="adam", loss="binary_crossentropy", metrics=["accuracy"])
+
+print("檢視神經網路1")
 model.summary()  # 檢視神經網路
 
 # (128+128+1)*4*128 = 131584
 
+""" 久
 # 學習訓練.fit
 model.fit(x_train, y_train, batch_size=32, epochs=10, validation_data=(x_test, y_test))
 
 model_json = model.to_json()
 open("imdb_model_architecture.json", "w").write(model_json)
 model.save_weights("imdb_model_weights.h5")
+"""
 
 print("------------------------------------------------------------")  # 60個
 
@@ -193,7 +207,8 @@ N = 3  # 文字要壓到 N 維
 K = 12  # LSTM 有 K 個神經元
 
 from keras.models import Sequential
-from keras.layers import Dense, Embedding
+from keras.layers import Dense
+from keras.layers import Embedding
 from keras.layers import LSTM
 
 model = Sequential()
@@ -208,13 +223,12 @@ model.add(LSTM(K))
 
 model.add(Dense(1, activation="sigmoid"))
 
-# 組裝
+# 優化器(optimizer) : Adam
+# 損失函數(loss) : binary_crossentropy
+# 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
+model.compile(optimizer="adam", loss="binary_crossentropy", metrics=["accuracy"])
 
-# 這次我們用 binary_crossentropy 做我們的 loss function, 另外用一個很潮的 Adam 學習法。
-
-model.compile(loss="binary_crossentropy", optimizer="adam", metrics=["accuracy"])
-
-print("檢視神經網路")
+print("檢視神經網路2")
 model.summary()  # 檢視神經網路
 
 # (4*7 + 4)*K = 128
@@ -229,6 +243,7 @@ model.summary()  # 檢視神經網路
 也就是 (32,100) 輸出是 (32,100,128), 其中 128 是我們決定要壓成幾維的向量。
 """
 
+""" 久
 # 學習訓練.fit
 model.fit(x_train, y_train, batch_size=32, epochs=5)
 
@@ -251,14 +266,14 @@ model_json = model.to_json()
 open("imdb_model_arch.json", "w").write(model_json)
 
 model.save_weights("imdb_model_weights.h5")
-
-
+"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
+'''
 from sklearn.preprocessing import MinMaxScaler
 from keras.models import Sequential
-from keras.layers import LSTM, Dense
+from keras.layers import LSTM
+from keras.layers import Dense
 
 sequence_length = 10  # 特徵資料個數
 split = 0.95  # 訓練資料比率
@@ -267,6 +282,10 @@ pd.options.mode.chained_assignment = None  # 取消顯示pandas資料重設警�
 filename = "twstock_all.csv"
 df = pd.read_csv(filename, encoding="big5")  # 以pandas讀取檔案
 ddprice = pd.DataFrame(df["收盤價"])
+
+print(df.head())
+
+df = df.drop(["日期"], axis=1)
 
 data_all = np.array(df).astype(float)  # 轉為浮點型別矩陣
 scaler = MinMaxScaler()
@@ -284,10 +303,15 @@ train_y = y[:split_boundary]  # 訓練label資料
 test_y = y[split_boundary:]  # test的label資料
 
 model = Sequential()
+
 model.add(LSTM(input_shape=(10, 1), units=256, unroll=False))  # LSTM層
 model.add(Dense(units=1))  # 輸出層：1 個神經元
-model.compile(loss="mse", optimizer="adam", metrics=["accuracy"])
+
+# 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
+model.compile(optimizer="adam", loss="mse", metrics=["accuracy"])
+
 model.fit(train_x, train_y, batch_size=100, epochs=300, validation_split=0.1, verbose=2)
+
 predict = model.predict(test_x)
 predict = np.reshape(predict, (predict.size,))  # 轉換為1維矩陣
 predict = scaler.inverse_transform([[i] for i in predict_y])  # 還原
@@ -296,14 +320,16 @@ test_y = scaler.inverse_transform(test_y)  # 還原
 plt.plot(predict, "b:")  # 預測
 plt.plot(test_y, "r-")  # 收盤價
 plt.legend(["predict", "realdata"])
-plt.show()
+
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 from sklearn.preprocessing import MinMaxScaler
 from keras.models import Sequential
-from keras.layers import LSTM, Dense
+from keras.layers import LSTM
+from keras.layers import Dense
 
 sequence_length = 10  # 特徵資料個數
 split = 0.95  # 訓練資料比率
@@ -329,9 +355,13 @@ train_y = y[:split_boundary]  # 訓練label資料
 test_y = y[split_boundary:]  # test的label資料
 
 model = Sequential()
+
 model.add(LSTM(input_shape=(sequence_length, 1), units=256, unroll=False))  # LSTM層
 model.add(Dense(units=1))  # 輸出層：1個神經元
-model.compile(loss="mse", optimizer="adam", metrics=["accuracy"])
+
+# 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
+model.compile(optimizer="adam", loss="mse", metrics=["accuracy"])
+
 model.fit(train_x, train_y, batch_size=100, epochs=300, validation_split=0.1, verbose=2)
 
 print("將 模型存檔 存成 h5")
@@ -376,7 +406,8 @@ test_y = scaler.inverse_transform(test_y)  # 還原
 plt.plot(predict, "b:")  # 預測
 plt.plot(test_y, "r-")  # 收盤價
 plt.legend(["predict", "realdata"])
-plt.show()
+
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

@@ -43,17 +43,32 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
+import joblib
+import sklearn
+import sklearn.linear_model
+from common1 import *
+from sklearn import datasets
+from sklearn import preprocessing
+from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
+from sklearn.svm import SVC
+from sklearn.metrics import accuracy_score
+from sklearn.metrics import confusion_matrix
+from sklearn.metrics import ConfusionMatrixDisplay
+
+
+def show():
+    # plt.show()
+    pass
+
+
+print("------------------------------------------------------------")  # 60個
+
+
 # 波士頓房價資料
 # data_url = "http://lib.stat.cmu.edu/datasets/boston"
 boston_filename = "data/datasets_boston.csv"  # 上述網址存成的檔案
 
 # from sklearn.datasets import load_boston # 廢棄
-
-print("------------------------------------------------------------")  # 60個
-
-import sklearn
-import sklearn.linear_model
-from sklearn.model_selection import train_test_split
 
 print("------------------------------------------------------------")  # 60個
 
@@ -125,7 +140,7 @@ plt.xlabel("每個住宅的平均房間數(RM)")
 plt.ylabel("中位數房價(MEDV)")
 plt.title("每個住宅的平均房間數和中位數房價的關聯性")
 
-plt.show()
+show()
 
 print("------------------------------")  # 30個
 
@@ -141,7 +156,7 @@ plt.xlabel("中位數房價")
 plt.ylabel("預測的中位數房價")
 plt.title("中位數房價 vs 預測的中位數房價")
 
-plt.show()
+show()
 
 print("------------------------------")  # 30個
 
@@ -162,7 +177,7 @@ plt.xlabel("中位數房價")
 plt.ylabel("預測的中位數房價")
 plt.title("中位數房價 vs 預測的中位數房價")
 
-plt.show()
+show()
 
 MSE_train = np.mean((yTrain - pred_train) ** 2)  # 自己算MSE
 MSE_test = np.mean((yTest - pred_test) ** 2)  # 自己算MSE
@@ -179,7 +194,7 @@ plt.title("殘差圖(Residual Plot)")
 plt.ylabel("殘差值(Residual Value)")
 plt.legend()
 
-plt.show()
+show()
 
 print("------------------------------")  # 30個
 
@@ -195,7 +210,7 @@ plt.title("殘差圖(Residual Plot)")
 plt.ylabel("殘差值(Residual Value)")
 # plt.legend()
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -206,11 +221,11 @@ boston["MEDV"] = y
 
 """
 sns.distplot(boston.MEDV, bins=30)
-plt.show()
+show()
 
 correlation_matrix = boston.corr().round(2)
 sns.heatmap(correlation_matrix, annot=True)
-plt.show()
+show()
 """
 
 X = boston.loc[:, "CRIM":"LSTAT"].values
@@ -230,7 +245,7 @@ print("截距:", linear_regression.intercept_)
 y_pred = linear_regression.predict(x_test)
 
 plt.scatter(y_test, y_pred, s=50)
-plt.show()
+show()
 
 X = boston[["NOX", "AGE", "DIS"]].values
 
@@ -452,7 +467,7 @@ for i in range(len(degrees)):
 
 print("耗時 : {0:.6f}".format(time.perf_counter() - start))
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

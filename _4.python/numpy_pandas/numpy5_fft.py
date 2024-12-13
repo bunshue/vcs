@@ -27,9 +27,11 @@ print("------------------------------------------------------------")  # 60個
 
 import scipy
 
+
 def show():
     plt.show()
     pass
+
 
 print("------------------------------------------------------------")  # 60個
 '''
@@ -198,7 +200,7 @@ def show_fft(x):
     xf = np.fft.rfft(XS) / fft_size  # ❹
     freqs = np.linspace(0, sampling_rate / 2, fft_size // 2 + 1)  # ❺
     xfp = 20 * np.log10(np.clip(np.abs(xf), 1e-20, 1e100))  # ❻
-    
+
     plt.figure(figsize=(8, 4))
     plt.subplot(211)
     plt.plot(T[:fft_size], XS)

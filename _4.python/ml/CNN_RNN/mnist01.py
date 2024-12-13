@@ -80,7 +80,7 @@ from common2 import *
 
 
 def show():
-    plt.show()
+    # plt.show()
     pass
 
 
@@ -380,6 +380,7 @@ def print_y_data(y):
             print(end=" ")
 
 
+'''
 print("準備工作 ST")
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -565,7 +566,7 @@ print("準備工作 SP")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
+'''
 # david : 簡單又正確率高, 以此為準
 """
 #有完整解說的
@@ -589,8 +590,8 @@ model.add(
     Dense(units=10, kernel_initializer="normal", activation="softmax")
 )  # 輸出層的神經元 10 個
 
-# 組裝神經網路, 編譯模型 : 選擇損失函數、優化方法及成效衡量方式
-model.compile(loss="categorical_crossentropy", optimizer="adam", metrics=["accuracy"])
+# 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
+model.compile(optimizer="adam", loss="categorical_crossentropy", metrics=["accuracy"])
 
 do_cnn_test()
 
@@ -608,7 +609,7 @@ model.add(Dense(128, activation="relu"))
 # 設定輸出層 softmax
 model.add(Dense(10, activation="softmax"))  # 輸出層的神經元 10 個
 
-# 組裝神經網路, 編譯模型 : 選擇損失函數、優化方法及成效衡量方式
+# 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
 model.compile(optimizer="rmsprop", loss="binary_crossentropy", metrics=["accuracy"])
 
 do_cnn_test()
@@ -633,7 +634,7 @@ model.add(Dense(10, activation="softmax"))  # 輸出層的神經元 10 個
 # 超參數設定(三)：損失函數與優化器
 sgd = optimizers.SGD(learning_rate=0.01)
 
-# 組裝神經網路, 編譯模型 : 選擇損失函數、優化方法及成效衡量方式
+# 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
 model.compile(optimizer=sgd, loss="categorical_crossentropy", metrics=["accuracy"])
 
 do_cnn_test()
@@ -652,8 +653,8 @@ model.add(Dense(100, activation="relu"))
 # 設定輸出層 softmax
 model.add(Dense(10, activation="softmax"))  # 輸出層的神經元 10 個
 
-# 組裝神經網路, 編譯模型 : 選擇損失函數、優化方法及成效衡量方式
-model.compile(loss="mse", optimizer=SGD(learning_rate=0.087), metrics=["accuracy"])
+# 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
+model.compile(optimizer=SGD(learning_rate=0.087), loss="mse", metrics=["accuracy"])
 
 (x_train, y_train), (x_test, y_test) = load_mnist_data()
 x_train, y_train, x_test, y_test = transform_data(x_train, y_train, x_test, y_test)
@@ -672,8 +673,7 @@ model = Sequential(
     ]
 )
 
-# 設定優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
-# 組裝神經網路, 編譯模型 : 選擇損失函數、優化方法及成效衡量方式
+# 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
 model.compile(
     optimizer="adam", loss="sparse_categorical_crossentropy", metrics=["accuracy"]
 )
@@ -722,8 +722,8 @@ model.add(Dropout(0.5))
 # 設定輸出層 softmax
 model.add(Dense(10, activation="softmax"))  # 輸出層的神經元 10 個
 
-# 組裝神經網路, 編譯模型 : 選擇損失函數、優化方法及成效衡量方式
-model.compile(loss="categorical_crossentropy", optimizer="adam", metrics=["accuracy"])
+# 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
+model.compile(optimizer="adam", loss="categorical_crossentropy", metrics=["accuracy"])
 
 (x_train, y_train), (x_test, y_test) = load_mnist_data()
 
@@ -793,8 +793,8 @@ model.add(
     Dense(units=10, kernel_initializer="normal", activation="softmax")
 )  # 輸出層的神經元 10 個
 
-# 組裝神經網路, 編譯模型 : 選擇損失函數、優化方法及成效衡量方式
-model.compile(loss="categorical_crossentropy", optimizer="adam", metrics=["accuracy"])
+# 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
+model.compile(optimizer="adam", loss="categorical_crossentropy", metrics=["accuracy"])
 
 # 後續一樣
 
@@ -819,8 +819,8 @@ model.add(
     Dense(units=10, kernel_initializer="normal", activation="softmax")
 )  # 輸出層的神經元 10 個
 
-# 組裝神經網路, 編譯模型 : 選擇損失函數、優化方法及成效衡量方式
-model.compile(loss="categorical_crossentropy", optimizer="adam", metrics=["accuracy"])
+# 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
+model.compile(optimizer="adam", loss="categorical_crossentropy", metrics=["accuracy"])
 
 do_cnn_test()
 
@@ -878,8 +878,8 @@ model.add(Dense(54, activation="relu"))
 # 設定輸出層 softmax
 model.add(Dense(10, activation="softmax"))  # 輸出層的神經元 10 個
 
-# 組裝神經網路, 編譯模型 : 選擇損失函數、優化方法及成效衡量方式
-model.compile(loss="mse", optimizer=SGD(learning_rate=0.087), metrics=["accuracy"])
+# 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
+model.compile(optimizer=SGD(learning_rate=0.087), loss="mse", metrics=["accuracy"])
 
 do_the_same2(x_train, y_train, x_test, y_test)  # 做一樣的事
 
@@ -988,13 +988,11 @@ model.add(Dense(10, activation="softmax"))  # 輸出層的神經元 10 個
 # 組裝
 # 和之前比較不一樣的是我們還要做 compile 才正式把我們的神經網路建好。
 
-# 組裝神經網路, 編譯模型 : 選擇損失函數、優化方法及成效衡量方式
-# model.compile(loss="categorical_crossentropy",
-#              optimizer=Adadelta(),
-#              metrics=['accuracy'])
+# 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
+# model.compile(optimizer=Adadelta(), loss="categorical_crossentropy", metrics=['accuracy'])
 
-# 組裝神經網路, 編譯模型 : 選擇損失函數、優化方法及成效衡量方式
-model.compile(loss="mse", optimizer=SGD(learning_rate=0.07), metrics=["accuracy"])
+# 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
+model.compile(optimizer=SGD(learning_rate=0.07), loss="mse", metrics=["accuracy"])
 
 # 全部拿來測試
 do_the_same1(x_train, y_train, x_test, y_test)  # 做一樣的事
@@ -1076,17 +1074,15 @@ metrics=['accuracy']
 本行基本上和我們的神經網路功能沒有什麼關係。
 """
 
-# 組裝神經網路, 編譯模型 : 選擇損失函數、優化方法及成效衡量方式
-model.compile(loss="mse", optimizer=SGD(learning_rate=0.087), metrics=["accuracy"])
+# 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
+model.compile(optimizer=SGD(learning_rate=0.087), loss="mse", metrics=["accuracy"])
 
 """
 訓練神經網路
-
 現在要訓練的時候, 你會發現不是像以前沒頭沒腦把訓練資料送進去就好。
 這裡我們還有兩件事要決定:
     1. 一次要訓練幾筆資料 (batch_size), 我們就 N = 100 筆調一次參數好了
     2. 這 6 萬筆資料一共要訓練幾次 (epochs), 我們訓練個 EPOCHS = 20 次試試
-
 於是最精彩的就來了。你要有等待的心理準備...
 """
 
@@ -1113,8 +1109,8 @@ model.add(Dense(87, activation="relu"))
 # 設定輸出層 softmax
 model.add(Dense(10, activation="softmax"))  # 輸出層的神經元 10 個
 
-# 組裝神經網路, 編譯模型 : 選擇損失函數、優化方法及成效衡量方式
-model.compile(loss="mse", optimizer=SGD(learning_rate=0.087), metrics=["accuracy"])
+# 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
+model.compile(optimizer=SGD(learning_rate=0.087), loss="mse", metrics=["accuracy"])
 
 do_cnn_test()
 
@@ -1159,7 +1155,7 @@ model.add(Dense(10, activation="softmax"))  # 輸出層的神經元 10 個
 
 sgd = optimizers.SGD(learning_rate=0.01)
 
-# 組裝神經網路, 編譯模型 : 選擇損失函數、優化方法及成效衡量方式
+# 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
 model.compile(optimizer=sgd, loss="categorical_crossentropy", metrics=["accuracy"])
 
 do_cnn_test()
@@ -1187,7 +1183,7 @@ lr = 0.01
 
 sgd = optimizers.SGD(learning_rate=lr)
 
-# 組裝神經網路, 編譯模型 : 選擇損失函數、優化方法及成效衡量方式
+# 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
 model.compile(optimizer=sgd, loss="categorical_crossentropy", metrics=["accuracy"])
 
 do_cnn_test()
@@ -1210,8 +1206,8 @@ model.add(Dropout(0.5))
 # 設定輸出層 softmax
 model.add(Dense(10, activation="softmax"))  # 輸出層的神經元 10 個
 
-# 組裝神經網路, 編譯模型 : 選擇損失函數、優化方法及成效衡量方式
-model.compile(loss="categorical_crossentropy", optimizer="sgd", metrics=["accuracy"])
+# 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
+model.compile(optimizer="sgd", loss="categorical_crossentropy", metrics=["accuracy"])
 
 (x_train, y_train), (x_test, y_test) = load_mnist_data()
 
@@ -1280,7 +1276,7 @@ model.add(Dense(classes))
 # 設定輸出層 softmax
 model.add(Activation("softmax"))
 
-# 組裝神經網路, 編譯模型 : 選擇損失函數、優化方法及成效衡量方式
+# 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
 model.compile(optimizer="sgd", loss="categorical_crossentropy", metrics=["accuracy"])
 
 # 學習訓練.fit
@@ -1649,8 +1645,8 @@ model.add(Dense(classes, input_dim=hidden_neurons))
 # 設定輸出層 softmax
 model.add(Activation("softmax"))
 
-# 組裝神經網路, 編譯模型 : 選擇損失函數、優化方法及成效衡量方式
-model.compile(loss="categorical_crossentropy", metrics=["accuracy"], optimizer="sgd")
+# 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
+model.compile(optimizer="sgd", loss="categorical_crossentropy", metrics=["accuracy"])
 
 (x_train, y_train), (x_test, y_test) = load_mnist_data()
 
@@ -1704,9 +1700,9 @@ model.add(Dense(classes, input_dim=hidden_neurons))
 # 設定輸出層 softmax
 model.add(Activation("softmax"))
 
-# 組裝神經網路, 編譯模型 : 選擇損失函數、優化方法及成效衡量方式
+# 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
 model.compile(
-    loss="categorical_crossentropy", metrics=["accuracy"], optimizer="adadelta"
+    optimizer="adadelta", loss="categorical_crossentropy", metrics=["accuracy"]
 )
 
 do_cnn_test()
@@ -1737,9 +1733,9 @@ model.add(Dense(classes))
 # 設定輸出層 softmax
 model.add(Activation("softmax"))
 
-# 組裝神經網路, 編譯模型 : 選擇損失函數、優化方法及成效衡量方式
+# 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
 model.compile(
-    loss="categorical_crossentropy", metrics=["accuracy"], optimizer="adadelta"
+    optimizer="adadelta", loss="categorical_crossentropy", metrics=["accuracy"]
 )
 
 do_cnn_test4d()
@@ -1793,7 +1789,7 @@ model.add(Activation("softmax"))
 # Another way to define your optimizer(優化器)
 adam = Adam(learning_rate=1e-4)
 
-# 組裝神經網路, 編譯模型 : 選擇損失函數、優化方法及成效衡量方式
+# 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
 model.compile(optimizer=adam, loss="categorical_crossentropy", metrics=["accuracy"])
 
 do_cnn_test4d()
@@ -1808,8 +1804,7 @@ model.add(tf.keras.layers.Dense(units=10, activation=tf.nn.relu, input_dim=INPUT
 model.add(tf.keras.layers.Dense(units=10, activation=tf.nn.relu))
 model.add(tf.keras.layers.Dense(units=10, activation=tf.nn.softmax))
 
-# 設定模型的 Loss 函數、Optimizer 以及用來判斷模型好壞的依據（metrics）
-# 組裝神經網路, 編譯模型 : 選擇損失函數、優化方法及成效衡量方式
+# 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
 model.compile(
     optimizer=tf.keras.optimizers.Adam(learning_rate=0.001),
     loss=tf.keras.losses.categorical_crossentropy,
@@ -1900,8 +1895,7 @@ model.add(tf.keras.layers.Dense(10, activation="relu"))
 # 連接 Fully Connected Layer，接著一層 Softmax 的 Activation 函數
 model.add(tf.keras.layers.Dense(units=10, activation=tf.nn.softmax))
 
-# 設定模型的 Loss 函數、Optimizer 以及用來判斷模型好壞的依據（metrics）
-# 組裝神經網路, 編譯模型 : 選擇損失函數、優化方法及成效衡量方式
+# 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
 model.compile(
     optimizer=tf.keras.optimizers.Adadelta(),
     loss=tf.keras.losses.categorical_crossentropy,
@@ -1997,11 +1991,10 @@ model.add(tf.keras.layers.Dense(100, activation="relu"))
 # 連接 Fully Connected Layer，接著一層 Softmax 的 Activation 函數
 model.add(tf.keras.layers.Dense(units=10, activation=tf.nn.softmax))
 
-# 設定模型的 Loss 函數、Optimizer 以及用來判斷模型好壞的依據（metrics）
-# 組裝神經網路, 編譯模型 : 選擇損失函數、優化方法及成效衡量方式
+# 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
 model.compile(
-    loss=tf.keras.losses.categorical_crossentropy,
     optimizer=tf.keras.optimizers.Adadelta(),
+    loss=tf.keras.losses.categorical_crossentropy,
     metrics=["accuracy"],
 )
 
@@ -2098,11 +2091,10 @@ model.add(tf.keras.layers.Dense(100, activation="relu"))
 # 連接 Fully Connected Layer，接著一層 Softmax 的 Activation 函數
 model.add(tf.keras.layers.Dense(units=10, activation=tf.nn.softmax))
 
-# 設定模型的 Loss 函數、Optimizer 以及用來判斷模型好壞的依據（metrics）
-# 組裝神經網路, 編譯模型 : 選擇損失函數、優化方法及成效衡量方式
+# 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
 model.compile(
-    loss=tf.keras.losses.categorical_crossentropy,
     optimizer=tf.keras.optimizers.Adadelta(),
+    loss=tf.keras.losses.categorical_crossentropy,
     metrics=["accuracy"],
 )
 
@@ -2204,7 +2196,7 @@ model = Sequential(
     ]
 )
 
-# 組裝神經網路, 編譯模型 : 選擇損失函數、優化方法及成效衡量方式
+# 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
 model.compile(
     optimizer="adam", loss="sparse_categorical_crossentropy", metrics=["accuracy"]
 )
@@ -2307,6 +2299,8 @@ model.add(tf.keras.layers.Flatten(input_shape=(28, 28)))
 model.add(tf.keras.layers.Dense(128, activation=tf.nn.relu))
 model.add(tf.keras.layers.Dense(128, activation=tf.nn.relu))
 model.add(tf.keras.layers.Dense(10, activation=tf.nn.softmax))
+
+# 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
 model.compile(
     optimizer="adam", loss="sparse_categorical_crossentropy", metrics=["accuracy"]
 )
@@ -2342,6 +2336,8 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 model = keras.Sequential([keras.layers.Dense(units=1, input_shape=[1])])
+
+# 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
 model.compile(optimizer="sgd", loss="mean_squared_error")
 
 # y = x
@@ -2458,8 +2454,8 @@ model = Sequential()
 # model.add(Dense(input_dim=1, output_dim=1))
 model.add(Dense(256, activation="sigmoid", input_dim=INPUT_DIM))
 
-# choose loss function and optimizing method
-model.compile(loss="mse", optimizer="sgd")
+# 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
+model.compile(optimizer="sgd", loss="mse")
 
 # training
 print("Training -----------")
@@ -2508,7 +2504,7 @@ model = Sequential(
 # Another way to define your optimizer
 rmsprop = RMSprop(learning_rate=0.001, rho=0.9, epsilon=1e-08, decay=0.0)
 
-# We add metrics to get more results you want to see
+# 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
 model.compile(optimizer=rmsprop, loss="categorical_crossentropy", metrics=["accuracy"])
 
 print("Training ------------")
@@ -2568,8 +2564,10 @@ model.add(Dense(classes))
 
 model.add(Activation("softmax"))
 
-# optimizer
+# 優化器 optimizer
 adam = Adam(LR)
+
+# 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
 model.compile(optimizer=adam, loss="categorical_crossentropy", metrics=["accuracy"])
 
 # training
@@ -2636,6 +2634,8 @@ model.add(
 OUTPUT_SIZE = 1
 model.add(TimeDistributed(Dense(OUTPUT_SIZE)))
 adam = Adam(LR)
+
+# 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
 model.compile(
     optimizer=adam,
     loss="mse",
@@ -2704,6 +2704,7 @@ autoencoder = Model(input=input_img, output=decoded)
 encoder = Model(input=input_img, output=encoder_output)
 
 # compile autoencoder
+# 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
 autoencoder.compile(optimizer="adam", loss="mse")
 
 # training
@@ -2731,7 +2732,8 @@ model = Sequential()
 # model.add(Dense(output_dim=1, input_dim=1))  # fails here
 model.add(Dense(256, activation="sigmoid", input_dim=INPUT_DIM))
 
-model.compile(loss="mse", optimizer="sgd")
+# 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
+model.compile(optimizer="sgd", loss="mse")
 
 for step in range(301):
     cost = model.train_on_batch(X_train, Y_train)
@@ -3168,8 +3170,8 @@ model.add(Dense(160, activation="relu"))
 # 設定輸出層 softmax
 model.add(Dense(10, activation="softmax"))  # 輸出層的神經元 10 個
 
-# 組裝神經網路, 編譯模型 : 選擇損失函數、優化方法及成效衡量方式
-model.compile(loss="mse", optimizer=SGD(learning_rate=0.087), metrics=["accuracy"])
+# 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
+model.compile(optimizer=SGD(learning_rate=0.087), loss="mse", metrics=["accuracy"])
 
 # 數據庫的內容
 # 每筆輸入 (x) 就是一個手寫的 0-9 中一個數字的圖檔, 大小為 28x28

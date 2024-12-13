@@ -179,7 +179,7 @@ X = np.load(local_filename)
 
 plt.imshow(X)
 
-plt.title("The original image", fontsize=12)
+plt.title("The original image")
 
 plt.show()
 
@@ -190,15 +190,15 @@ W2 = np.array([[0, 0, 0], [1, 1, 1], [0, 0, 0]])
 W3 = np.array([[1, 0, 0], [0, 1, 0], [0, 0, 1]])
 W4 = np.array([[0, 0, 1], [0, 1, 0], [1, 0, 0]])
 
-plt.subplot(1, 4, 1)
+plt.subplot(141)
 plt.imshow(W1)
-plt.subplot(1, 4, 2)
+plt.subplot(142)
 plt.imshow(W2)
-plt.subplot(1, 4, 3)
+plt.subplot(143)
 plt.imshow(W3)
-plt.subplot(1, 4, 4)
+plt.subplot(144)
 plt.imshow(W4)
-plt.suptitle("kernel", fontsize=12)
+plt.suptitle("kernel")
 plt.show()
 
 # 卷積運算
@@ -211,16 +211,16 @@ C3 = conv3.f_prop(X)
 conv4 = Conv(W4)
 C4 = conv4.f_prop(X)
 
-plt.subplot(1, 4, 1)
+plt.subplot(141)
 plt.imshow(C1)
-plt.subplot(1, 4, 2)
+plt.subplot(142)
 plt.imshow(C2)
-plt.subplot(1, 4, 3)
+plt.subplot(143)
 plt.imshow(C3)
-plt.subplot(1, 4, 4)
+plt.subplot(144)
 plt.imshow(C4)
 
-plt.suptitle("Convolution result", fontsize=12)
+plt.suptitle("Convolution result")
 
 plt.show()
 
@@ -276,7 +276,7 @@ X = np.load(local_filename)
 
 plt.imshow(X)
 
-plt.title("The original image", fontsize=12)
+plt.title("The original image")
 
 plt.show()
 
@@ -296,16 +296,16 @@ C3 = conv3.f_prop(X)
 conv4 = Conv(W4)
 C4 = conv4.f_prop(X)
 
-plt.subplot(1, 4, 1)
+plt.subplot(141)
 plt.imshow(C1)
-plt.subplot(1, 4, 2)
+plt.subplot(142)
 plt.imshow(C2)
-plt.subplot(1, 4, 3)
+plt.subplot(143)
 plt.imshow(C3)
-plt.subplot(1, 4, 4)
+plt.subplot(144)
 plt.imshow(C4)
 
-plt.suptitle("Convolution result", fontsize=12)
+plt.suptitle("Convolution result")
 
 plt.show()
 
@@ -314,26 +314,23 @@ plt.show()
 pool = Pool(2)
 
 P1 = pool.f_prop(C1)
-
 P2 = pool.f_prop(C2)
-
 P3 = pool.f_prop(C3)
-
 P4 = pool.f_prop(C4)
 
-plt.subplot(1, 4, 1)
+plt.subplot(141)
 plt.imshow(P1)
 
-plt.subplot(1, 4, 2)
+plt.subplot(142)
 plt.imshow(P2)
 
-plt.subplot(1, 4, 3)
+plt.subplot(143)
 plt.imshow(P3)
 
-plt.subplot(1, 4, 4)
+plt.subplot(144)
 plt.imshow(P4)
 
-plt.suptitle("Pooling result", fontsize=12)
+plt.suptitle("Pooling result")
 
 plt.show()
 
@@ -448,7 +445,7 @@ for i in range(10):
     plt.subplot(2, 5, i+1)
     plt.imshow(X_test[i])
 
-plt.suptitle("The first ten of the test data",fontsize=20)
+plt.suptitle("The first ten of the test data")
 plt.show()
 
 # 顯示測試集前10張圖片的答案
@@ -488,7 +485,7 @@ for i in range(10):
     plt.subplot(2, 5, i + 1)
     plt.imshow(X_train[i])
 
-plt.suptitle("The original image", fontsize=12)
+plt.suptitle("The original image")
 plt.show()
 
 # 建立 ImageDataGenerator 的操作物件
@@ -513,7 +510,7 @@ for i in range(10):
     plt.subplot(2, 5, i + 1)
     plt.imshow(X_batch[i])
 
-plt.suptitle("Standardization result", fontsize=12)
+plt.suptitle("Standardization result")
 
 plt.show()
 
@@ -545,7 +542,7 @@ for i in range(10):
     plt.subplot(2, 5, i + 1)
     plt.imshow(X_train[i])
 
-plt.suptitle("The original image", fontsize=12)
+plt.suptitle("The original image")
 
 plt.show()
 
@@ -573,7 +570,7 @@ for i in range(10):
     plt.subplot(2, 5, i + 1)
     plt.imshow(X_batch[i])
 
-plt.suptitle("Whitening result", fontsize=12)
+plt.suptitle("Whitening result")
 
 plt.show()
 
@@ -651,7 +648,7 @@ for i in range(10):
     plt.subplot(2, 5, i+1)
     plt.imshow(X_test[i])
 
-plt.suptitle("The first ten of the test data",fontsize=16)
+plt.suptitle("The first ten of the test data")
 
 plt.show()
 

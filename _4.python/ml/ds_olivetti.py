@@ -19,6 +19,7 @@ import random
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns  # 海生, 自動把圖畫得比較好看
 
 font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
@@ -30,12 +31,26 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
-print("Olivetti 資料集 ST")
+from common1 import *
+from sklearn import datasets
+from sklearn import preprocessing
+from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
+from sklearn.svm import SVC
+from sklearn.metrics import accuracy_score
+from sklearn.metrics import confusion_matrix
+from sklearn.metrics import ConfusionMatrixDisplay
 
 from numpy.random import RandomState
 import matplotlib.image as mpimg
-from sklearn.datasets import fetch_olivetti_faces
 from sklearn import decomposition
+
+
+def show():
+    # plt.show()
+    pass
+
+
+print("------------------------------------------------------------")  # 60個
 
 n_row, n_col = 2, 5
 n_components = n_row * n_col
@@ -44,7 +59,7 @@ rng = RandomState(0)
 
 print("------------------------------------------------------------")  # 60個
 
-olivetti_faces = fetch_olivetti_faces()
+olivetti_faces = datasets.fetch_olivetti_faces()
 
 print("olivetti_faces 資料型態")
 print(olivetti_faces.data.shape)
@@ -68,7 +83,7 @@ for i in range(20):
     plt.axis("off")
 
 plt.suptitle("原圖")
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -88,7 +103,7 @@ for i in range(20):
     plt.axis("off")
 
 plt.suptitle("PCA")
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -102,7 +117,7 @@ print("face.shape = ", face.shape)
 fig = plt.figure(figsize=(12, 8))
 # plt.imshow(face.reshape(64, 64))
 plt.imshow(face.reshape(64, 64), cmap=plt.cm.gray)
-plt.show()
+show()
 
 trans = pca.transform(face.reshape(1, -1))
 print(trans.shape)
@@ -116,19 +131,10 @@ for k in range(400):
         # imsave('cccc.jpg', rank_k_approx.reshape(64, 64))
     """
 
-print()
-
-print("Olivetti 資料集 SP")
-
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("Olivetti 資料集 ST")
-
-from sklearn.datasets import fetch_olivetti_faces
-
-olivetti_faces = fetch_olivetti_faces()
+olivetti_faces = datasets.fetch_olivetti_faces()
 
 X = olivetti_faces.data
 y = olivetti_faces.target
@@ -181,15 +187,11 @@ for i in range(n_targets):
 
 print("plot_gallery 1")
 plot_gallery(sample_images, sample_titles, h, w, n_row, n_col)
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
-from sklearn.model_selection import train_test_split
-
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=4)
-
-from sklearn.svm import SVC
 
 start = time.time()
 print("Fitting train datasets ...")
@@ -202,8 +204,6 @@ print("Predicting test dataset ...")
 y_pred = clf.predict(X_test)
 print("Done in {0:.2f}s".format(time.time() - start))
 
-from sklearn.metrics import confusion_matrix
-
 cm = confusion_matrix(y_test, y_pred, labels=range(n_targets))
 print("confusion matrix:\n")
 
@@ -215,6 +215,7 @@ from sklearn.metrics import classification_report
 
 print(classification_report(y_test, y_pred, target_names=target_names))
 """
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 from sklearn.decomposition import PCA
@@ -241,7 +242,7 @@ plt.title("Explained variance ratio for PCA")
 plt.yticks(np.arange(0.5, 1.05, 0.05))
 plt.xticks(np.arange(0, 300, 20))
 
-plt.show()
+show()
 
 print("------------------------------")  # 30個
 
@@ -282,8 +283,9 @@ plot_gallery(
     n_col,
 )
 
-plt.show()
+show()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 n_components = 140
@@ -324,8 +326,7 @@ from sklearn.metrics import classification_report
 
 print(classification_report(y_test, y_pred))
 
-print("Olivetti 資料集 SP")
-
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
@@ -337,4 +338,10 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
+print("------------------------------------------------------------")  # 60個
+sys.exit()
+
+
+print("------------------------------------------------------------")  # 60個
+
 print("------------------------------------------------------------")  # 60個

@@ -50,11 +50,10 @@ from sklearn.neighbors import KNeighborsRegressor
 
 
 def show():
-    plt.show()
+    # plt.show()
     pass
 
 
-'''
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -844,7 +843,7 @@ y_pred = knn.predict(X_test_std)  # 預測.predict
 print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
 # 96.67%
 
-print('混淆矩陣')
+print("混淆矩陣")
 print(confusion_matrix(y_test, y_pred))
 
 # 混淆矩陣圖
@@ -914,7 +913,9 @@ s = []
 for i in range(3, 11):
     NEIGHBOARS = i
     print("用 K近鄰演算法 找出最近的", NEIGHBOARS, "個點")
-    knn = KNeighborsClassifier(n_neighbors=NEIGHBOARS)  # K近鄰演算法（K Nearest Neighbor, KNN）
+    knn = KNeighborsClassifier(
+        n_neighbors=NEIGHBOARS
+    )  # K近鄰演算法（K Nearest Neighbor, KNN）
     knn.fit(X_train, y_train)  # 學習訓練.fit
     print("k =", k, " 準確率:", knn.score(X_test, y_test))  # 用 test data 檢測模型的準確率
     s.append(knn.score(X_test, y_test))
@@ -950,7 +951,7 @@ print("計算準確率")
 accuracy_score(y_test, y_pred)
 # 1.0
 
-print('混淆矩陣')
+print("混淆矩陣")
 cc = confusion_matrix(y_test, y_pred)
 print(cc)
 
@@ -1039,7 +1040,9 @@ s = []
 for i in range(3, 11):
     NEIGHBOARS = i
     print("用 K近鄰演算法 找出最近的", NEIGHBOARS, "個點")
-    knn = KNeighborsClassifier(n_neighbors=NEIGHBOARS)  # K近鄰演算法（K Nearest Neighbor, KNN）
+    knn = KNeighborsClassifier(
+        n_neighbors=NEIGHBOARS
+    )  # K近鄰演算法（K Nearest Neighbor, KNN）
     knn.fit(X_train, y_train)  # 學習訓練.fit
     print("k =", k, " 準確率:", knn.score(X_test, y_test))  # 用 test data 檢測模型的準確率
     s.append(knn.score(X_test, y_test))
@@ -1062,7 +1065,7 @@ print("計算準確率")
 accuracy_score(y_test, y_pred)
 # 0.7541899441340782
 
-print('混淆矩陣')
+print("混淆矩陣")
 cc = confusion_matrix(y_test, y_pred)
 print(cc)
 
@@ -1144,7 +1147,7 @@ if v == 1:
     print("預測為:幸運生還")
 else:
     print("預測為:無法生還")
-'''
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 

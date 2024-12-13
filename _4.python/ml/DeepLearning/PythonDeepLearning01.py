@@ -1,7 +1,4 @@
 """
-from sklearn.neural_network.multilayer_perceptron import MLPClassifier
-一律改成
-from sklearn.neural_network import MLPClassifier
 
 
 """

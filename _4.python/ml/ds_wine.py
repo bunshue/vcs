@@ -1,4 +1,6 @@
 """
+葡萄酒品種分類資料集
+
 紅酒資料集
 
 #範例16-1:邏輯斯模型(logistic regression model，羅吉斯):分類，二分法類器
@@ -29,15 +31,12 @@ wine = ds.load_wine()
 import sklearn.model_selection as ms
 train_x, test_x, train_y, test_y = ms.train_test_split(wine.data, wine.target, test_size=0.2)
 
-
 葡萄酒數據集/紅酒資料庫
 Classes          3
 Sample per class 59/71/48(共178筆資料)
 Samples total    178
 Dimensionality    13
 Features         real, positive
-
-
 """
 
 print("------------------------------------------------------------")  # 60個
@@ -51,6 +50,7 @@ import random
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns  # 海生, 自動把圖畫得比較好看
 
 font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
@@ -62,59 +62,65 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
+import sklearn.linear_model
 from sklearn import datasets
-from sklearn.datasets import load_wine
+from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
+from sklearn.cluster import KMeans  # 聚類方法, K-平均演算法
+from sklearn.svm import SVC
+from sklearn.metrics import accuracy_score
+
+
+def show():
+    # plt.show()
+    pass
+
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("葡萄酒數據集")
+wine = datasets.load_wine()
 
-data = load_wine()
-cc = data.target[[10, 80, 140]]
+cc = wine.target[[10, 80, 140]]
 print(cc)
 # array([0, 1, 2])
 
-print("data.data.shape, 數據集資料 形狀")
-print(data.data.shape)
+print("wine.data.shape, 數據集資料 形狀")
+print(wine.data.shape)
 
-print("data.feature_names, 數據集 欄位 的名稱 ")
-print(data.feature_names)
-print("data.target, target 類的名稱, 分類結果, 就是等級 0 1 2")
-print(data.target)
-print("data.target_names, target 類的名稱")
-print(data.target_names)
-print("data.frame")
-print(data.frame)
+print("wine.feature_names, 數據集 欄位 的名稱 ")
+print(wine.feature_names)
+print("wine.target, target 類的名稱, 分類結果, 就是等級 0 1 2")
+print(wine.target)
+print("wine.target_names, target 類的名稱")
+print(wine.target_names)
+print("wine.frame")
+print(wine.frame)
 """ many
-print("data.DESCR, 數據集的完整描述")
-print(data.DESCR)
-print("data")
-print(data)
+print("wine.DESCR, 數據集的完整描述")
+print(wine.DESCR)
+print("wine")
+print(wine)
 """
 
-# data.feature_names, 數據集 列 的名稱
-cc = data.data[:, [0]]  # alcohol
-cc = data.data[:, [1]]  # malic_acid
-cc = data.data[:, [2]]  # ash
-cc = data.data[:, [3]]  # alcalinity_of_ash
-cc = data.data[:, [4]]  # magnesium
-cc = data.data[:, [5]]  # total_phenols
-cc = data.data[:, [6]]  # flavanoids
-cc = data.data[:, [7]]  # nonflavanoid_phenols
-cc = data.data[:, [8]]  # proanthocyanins
-cc = data.data[:, [9]]  # color_intensity
-cc = data.data[:, [10]]  # hue
-cc = data.data[:, [11]]  # od280/od315_of_diluted_wines
-cc = data.data[:, [12]]  # proline
+# wine.feature_names, 數據集 列 的名稱
+cc = wine.data[:, [0]]  # alcohol
+cc = wine.data[:, [1]]  # malic_acid
+cc = wine.data[:, [2]]  # ash
+cc = wine.data[:, [3]]  # alcalinity_of_ash
+cc = wine.data[:, [4]]  # magnesium
+cc = wine.data[:, [5]]  # total_phenols
+cc = wine.data[:, [6]]  # flavanoids
+cc = wine.data[:, [7]]  # nonflavanoid_phenols
+cc = wine.data[:, [8]]  # proanthocyanins
+cc = wine.data[:, [9]]  # color_intensity
+cc = wine.data[:, [10]]  # hue
+cc = wine.data[:, [11]]  # od280/od315_of_diluted_wines
+cc = wine.data[:, [12]]  # proline
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 支持向量機
-
-from sklearn import svm
-from sklearn.model_selection import train_test_split
 
 wine = datasets.load_wine()
 
@@ -123,7 +129,7 @@ y = wine.target
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
 
-clf = svm.SVC(gamma=0.001, decision_function_shape="ovo")
+clf = SVC(gamma=0.001, decision_function_shape="ovo")
 clf.fit(X_train, y_train)
 
 dec = clf.decision_function(X_test)
@@ -133,14 +139,10 @@ print(cc)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+wine = datasets.load_wine()
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-data = load_wine()
-
-x3 = data.data[:, [0]]  # alcohol
-y3 = data.data[:, [9]]  # color_intensity
+x3 = wine.data[:, [0]]  # alcohol
+y3 = wine.data[:, [9]]  # color_intensity
 
 plt.subplot(121)
 plt.scatter(x3, y3)
@@ -150,16 +152,17 @@ plt.hist(y3, bins=50)
 
 plt.suptitle("wine")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-data = load_wine()
-df_X = pd.DataFrame(data.data, columns=data.feature_names)
+wine = datasets.load_wine()
+
+df_X = pd.DataFrame(wine.data, columns=wine.feature_names)
 print(df_X.head())
 
-df_y = pd.DataFrame(data.target, columns=["kind(target)"])
+df_y = pd.DataFrame(wine.target, columns=["kind(target)"])
 print(df_y.head())
 
 df = pd.concat([df_X, df_y], axis=1)
@@ -171,7 +174,7 @@ plt.hist(df.loc[:, "alcohol"])
 plt.subplot(122)
 plt.boxplot(df.loc[:, "alcohol"])
 
-plt.show()
+show()
 
 print(df.corr())
 print(df.describe())
@@ -182,22 +185,20 @@ print("使用 scatter_matrix")
 from pandas.plotting import scatter_matrix
 
 _ = scatter_matrix(df, figsize=(15, 15))
-plt.show()
+show()
 
 _ = scatter_matrix(df.iloc[:, [0, 9, -1]])
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score
 
-# データ読み込み
-data = load_wine()
+wine = datasets.load_wine()
+
 X_train, X_test, y_train, y_test = train_test_split(
-    data.data, data.target, test_size=0.3
+    wine.data, wine.target, test_size=0.3
 )
 model = RandomForestClassifier()
 model.fit(X_train, y_train)  # 學習
@@ -209,11 +210,12 @@ print("------------------------------------------------------------")  # 60個
 
 # k-fold 交叉驗證法
 
-from sklearn.model_selection import train_test_split, cross_val_score
+from sklearn.model_selection import cross_val_score
 from sklearn.preprocessing import StandardScaler
 from sklearn.ensemble import RandomForestClassifier
 
-dx, dy = load_wine(return_X_y=True)
+dx, dy = datasets.load_wine(return_X_y=True)
+
 dx_std = StandardScaler().fit_transform(dx)
 dx_train, dx_test, dy_train, dy_test = train_test_split(
     dx_std, dy, test_size=0.2, random_state=0
@@ -227,23 +229,22 @@ val_score = cross_val_score(forest, dx_train, dy_train, cv=5)
 
 predictions = forest.predict(dx_test)
 
-print(forest.score(dx_train, dy_train).round(3))
+print("準確率:", forest.score(dx_train, dy_train))
 
 print(val_score.mean().round(3))
 
-print(forest.score(dx_test, dy_test).round(3))
+print("準確率:", forest.score(dx_test, dy_test))
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 產生預測結果報告
 
-from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import classification_report
 
-dx, dy = load_wine(return_X_y=True)
+dx, dy = datasets.load_wine(return_X_y=True)
 
 dx_std = StandardScaler().fit_transform(dx)
 
@@ -257,23 +258,15 @@ forest.fit(dx_train, dy_train)
 
 predictions = forest.predict(dx_test)
 
-print(forest.score(dx_train, dy_train).round(3))
-
-print(forest.score(dx_test, dy_test).round(3))
+print("準確率:", forest.score(dx_train, dy_train))
+print("準確率:", forest.score(dx_test, dy_test))
 
 print(classification_report(dy_test, predictions))
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-"""
-讀入葡萄酒品種分類資料集
-資料集 = dataset
-"""
-
-import sklearn.datasets as ds
-
-wine = ds.load_wine()
+wine = datasets.load_wine()
 
 # 先看資料集的keys:
 
@@ -293,7 +286,6 @@ print(wine.target.shape)
 
 # data(特徵資料)的內容
 print(wine.data)
-
 
 # data(特徵資料（各種變數x1,x2,x3....）)總共幾筆
 print(wine.data.shape)
@@ -471,7 +463,7 @@ plt.legend()
 plt.xlabel("黃酮類化合物")
 plt.ylabel("酒種")
 plt.title("畫圖，黃酮類化合物 vs 酒種")
-plt.show()
+show()
 
 """
 9.結論(1)：黃酮類化合物，不是影響酒種的關鍵因素
@@ -515,28 +507,28 @@ plt.legend()
 plt.xlabel("脯氨酸")
 plt.ylabel("酒種")
 plt.title("畫圖，脯氨酸 vs 酒種")
-plt.show()
+show()
 
 # 11.結論(2)：脯氨酸，是影響酒種的關鍵因素
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-ds = datasets.load_wine()
+wine = datasets.load_wine()
 
 print("資料集說明")
-print(ds.DESCR)
+print(wine.DESCR)
 
 print("資料集的特徵(X)")
 
-df = pd.DataFrame(ds.data, columns=ds.feature_names)
+df = pd.DataFrame(wine.data, columns=wine.feature_names)
 print(df)
 
 print("資料集的目標(Y)")
-print(ds.target)
+print(wine.target)
 
 print("目標(Y)的名稱，即標註(Label)")
-print(ds.target_names)
+print(wine.target_names)
 
 print("觀察資料集彙總資訊")
 
@@ -555,11 +547,9 @@ print(y)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-from sklearn.datasets import load_wine
+wine = datasets.load_wine()
 
-data = load_wine()
-
-X = data.data[:, [0, 9]]
+X = wine.data[:, [0, 9]]
 
 CLUSTERS = 3  # 要分成的群數
 clf = KMeans(n_clusters=CLUSTERS)  # K-平均演算法
@@ -581,27 +571,26 @@ ax.scatter(
 ax.legend()
 plt.title("wine")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
 
 # PCA 個案實作
 
-# 1. 載入資料
-ds = datasets.load_wine()
-df = pd.DataFrame(ds.data, columns=ds.feature_names)
+wine = datasets.load_wine()
+
+df = pd.DataFrame(wine.data, columns=wine.feature_names)
 cc = df.head()
 print(cc)
 
 # 2. 資料清理、資料探索與分析
 # 資料集說明
-# print(ds.DESCR)
+# print(wine.DESCR)
 
 # 指定X、Y
 X = df.values
-y = ds.target
+y = wine.target
 
 # 資料分割
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
@@ -646,13 +635,11 @@ print(cc)
 # 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
 logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
 
-clf = LogisticRegression()
-
-clf.fit(X_train_pca, y_train)  # 學習訓練.fit
+logistic_regression.fit(X_train_pca, y_train)  # 學習訓練.fit
 
 # 7. 模型計分
 # 計算準確率
-y_pred = clf.predict(X_test_pca)  # 預測.predict
+y_pred = logistic_regression.predict(X_test_pca)  # 預測.predict
 print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
 
 # 100.00%
@@ -693,7 +680,7 @@ def plot_decision_regions(X, y, classifier, resolution=0.02):
     """
 
 
-plot_decision_regions(X_test_pca, y_test, classifier=clf)
+plot_decision_regions(X_test_pca, y_test, classifier=logistic_regression)
 plt.xlabel("PC 1")
 plt.ylabel("PC 2")
 plt.legend(loc="lower left")
@@ -719,12 +706,10 @@ X_test_std = scaler.transform(X_test)
 # 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
 logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
 
-clf = LogisticRegression()
-
-clf.fit(X_train_std, y_train)  # 學習訓練.fit
+logistic_regression.fit(X_train_std, y_train)  # 學習訓練.fit
 
 # 模型計分
-y_pred = clf.predict(X_test_std)  # 預測.predict
+y_pred = logistic_regression.predict(X_test_std)  # 預測.predict
 print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
 
 # (142, 13) (36, 13) (142,) (36,)
@@ -735,20 +720,20 @@ print("------------------------------------------------------------")  # 60個
 
 # Scikit-learn PCA 實作
 
-# 1. 載入資料
-ds = datasets.load_wine()
-df = pd.DataFrame(ds.data, columns=ds.feature_names)
+wine = datasets.load_wine()
+
+df = pd.DataFrame(wine.data, columns=wine.feature_names)
 cc = df.head()
 print(cc)
 
 # 2. 資料清理、資料探索與分析
 
 # 資料集說明
-# print(ds.DESCR)
+# print(wine.DESCR)
 
 # 指定X、Y
 X = df.values
-y = ds.target
+y = wine.target
 
 # 資料分割
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
@@ -774,13 +759,11 @@ print(cc)
 # 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
 logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
 
-clf = LogisticRegression()
-
-clf.fit(X_train_pca, y_train)  # 學習訓練.fit
+logistic_regression.fit(X_train_pca, y_train)  # 學習訓練.fit
 
 # 7. 模型計分
 # 計算準確率
-y_pred = clf.predict(X_test_pca)  # 預測.predict
+y_pred = logistic_regression.predict(X_test_pca)  # 預測.predict
 print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
 
 # 97.22%
@@ -821,7 +804,7 @@ def plot_decision_regions(X, y, classifier, resolution=0.02):
     """
 
 
-plot_decision_regions(X_test_pca, y_test, classifier=clf)
+plot_decision_regions(X_test_pca, y_test, classifier=logistic_regression)
 plt.xlabel("PC 1")
 plt.ylabel("PC 2")
 plt.legend(loc="lower left")
@@ -830,7 +813,6 @@ plt.tight_layout()
 show()
 
 # 使用全部特徵
-
 X, y = datasets.load_wine(return_X_y=True)
 
 # 資料分割
@@ -847,12 +829,10 @@ X_test_std = scaler.transform(X_test)
 # 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
 logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
 
-clf = LogisticRegression()
-
-clf.fit(X_train_std, y_train)  # 學習訓練.fit
+logistic_regression.fit(X_train_std, y_train)  # 學習訓練.fit
 
 # 模型計分
-y_pred = clf.predict(X_test_std)  # 預測.predict
+y_pred = logistic_regression.predict(X_test_std)  # 預測.predict
 print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
 
 # (142, 13) (36, 13) (142,) (36,)
@@ -888,20 +868,20 @@ print("------------------------------------------------------------")  # 60個
 
 # LDA 個案實作
 
-# 1. 載入資料
-ds = datasets.load_wine()
-df = pd.DataFrame(ds.data, columns=ds.feature_names)
+wine = datasets.load_wine()
+
+df = pd.DataFrame(wine.data, columns=wine.feature_names)
 cc = df.head()
 print(cc)
 
 # 2. 資料清理、資料探索與分析
 
 # 資料集說明
-# print(ds.DESCR)
+# print(wine.DESCR)
 
 # 指定X、Y
 X = df.values
-y = ds.target
+y = wine.target
 
 # 資料分割
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
@@ -968,7 +948,7 @@ def LDA_numpy(X, X_test, y, label_count, no):
 
 
 X_train_pca, X_test_pca = LDA_numpy(
-    X_train_std, X_test_std, y_train, len(ds.target_names), 2
+    X_train_std, X_test_std, y_train, len(wine.target_names), 2
 )  # 取 2 個特徵
 cc = X_train_pca.shape, X_test_pca.shape
 print(cc)
@@ -976,14 +956,12 @@ print(cc)
 # 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
 logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
 
-clf = LogisticRegression()
-
 # 6. 模型訓練
-clf.fit(X_train_pca, y_train)  # 學習訓練.fit
+logistic_regression.fit(X_train_pca, y_train)  # 學習訓練.fit
 
 # 7. 模型計分
 # 計算準確率
-y_pred = clf.predict(X_test_pca)  # 預測.predict
+y_pred = logistic_regression.predict(X_test_pca)  # 預測.predict
 print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
 
 # 繪製決策邊界(Decision regions)
@@ -1023,7 +1001,7 @@ def plot_decision_regions(X, y, classifier, resolution=0.02):
     """
 
 
-plot_decision_regions(X_test_pca, y_test, classifier=clf)
+plot_decision_regions(X_test_pca, y_test, classifier=logistic_regression)
 plt.xlabel("PC 1")
 plt.ylabel("PC 2")
 plt.legend(loc="lower left")
@@ -1049,12 +1027,10 @@ X_test_std = scaler.transform(X_test)
 # 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
 logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
 
-clf = LogisticRegression()
-
-clf.fit(X_train_std, y_train)  # 學習訓練.fit
+logistic_regression.fit(X_train_std, y_train)  # 學習訓練.fit
 
 # 模型計分
-y_pred = clf.predict(X_test_std)  # 預測.predict
+y_pred = logistic_regression.predict(X_test_std)  # 預測.predict
 print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
 
 # (142, 13) (36, 13) (142,) (36,)
@@ -1065,20 +1041,20 @@ print("------------------------------------------------------------")  # 60個
 
 # Scikit-learn LDA實作
 
-# 1. 載入資料
-ds = datasets.load_wine()
-df = pd.DataFrame(ds.data, columns=ds.feature_names)
+wine = datasets.load_wine()
+
+df = pd.DataFrame(wine.data, columns=wine.feature_names)
 cc = df.head()
 print(cc)
 
 # 2. 資料清理、資料探索與分析
 
 # 資料集說明
-# print(ds.DESCR)
+# print(wine.DESCR)
 
 # 指定X、Y
 X = df.values
-y = ds.target
+y = wine.target
 
 # 資料分割
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
@@ -1105,15 +1081,13 @@ print(cc)
 # 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
 logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
 
-clf = LogisticRegression()
-
 # 6. 模型訓練
-clf.fit(X_train_lda, y_train)  # 學習訓練.fit
+logistic_regression.fit(X_train_lda, y_train)  # 學習訓練.fit
 
 # 7. 模型計分
 
 # 計算準確率
-y_pred = clf.predict(X_test_lda)  # 預測.predict
+y_pred = logistic_regression.predict(X_test_lda)  # 預測.predict
 print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
 
 # 100.00%
@@ -1154,7 +1128,7 @@ def plot_decision_regions(X, y, classifier, resolution=0.02):
     """
 
 
-plot_decision_regions(X_test_lda, y_test, classifier=clf)
+plot_decision_regions(X_test_lda, y_test, classifier=logistic_regression)
 plt.xlabel("PC 1")
 plt.ylabel("PC 2")
 plt.legend(loc="lower left")
@@ -1163,7 +1137,6 @@ plt.tight_layout()
 show()
 
 # 使用全部特徵
-
 X, y = datasets.load_wine(return_X_y=True)
 
 # 資料分割
@@ -1180,12 +1153,10 @@ X_test_std = scaler.transform(X_test)
 # 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
 logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
 
-clf = LogisticRegression()
-
-clf.fit(X_train_std, y_train)  # 學習訓練.fit
+logistic_regression.fit(X_train_std, y_train)  # 學習訓練.fit
 
 # 模型計分
-y_pred = clf.predict(X_test_std)  # 預測.predict
+y_pred = logistic_regression.predict(X_test_std)  # 預測.predict
 print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
 
 # (142, 13) (36, 13) (142,) (36,)
@@ -1349,11 +1320,10 @@ class DecisionTreeClassifier(object):
             return cur_layer.get("val") if cur_layer is not None else None
 
 
-# ds = datasets.load_iris()
-ds = datasets.load_wine()
+wine = datasets.load_wine()
 
-feature_names = ds.feature_names
-X, y = ds.data, ds.target
+feature_names = wine.feature_names
+X, y = wine.data, wine.target
 
 # 資料分割
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
@@ -1380,14 +1350,12 @@ print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 07_08_scikit-learn_decision_tree
-
 # Scikit-learn決策樹演算法
 
-ds = datasets.load_wine()
+wine = datasets.load_wine()
 
-feature_names = ds.feature_names
-X, y = ds.data, ds.target
+feature_names = wine.feature_names
+X, y = wine.data, wine.target
 
 # 資料分割
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
@@ -1427,8 +1395,8 @@ dot_data = export_graphviz(
     clf,
     filled=True,
     rounded=True,
-    class_names=ds.target_names,
-    feature_names=ds.feature_names,
+    class_names=wine.target_names,
+    feature_names=wine.feature_names,
     out_file=None,
 )
 graph = graph_from_dot_data(dot_data)
@@ -1440,8 +1408,8 @@ dot_data = export_graphviz(
     clf,
     filled=True,
     rounded=True,
-    class_names=ds.target_names,
-    feature_names=ds.feature_names,
+    class_names=wine.target_names,
+    feature_names=wine.feature_names,
     out_file="tmp_wine_tree.dot",
 )
 
@@ -1522,13 +1490,12 @@ print("It is %s %% of all nodes." % (100 * len(common_node_id) / n_nodes,))
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 07_12_scikit-learn_random_forest
-# Scikit-learn決策樹演算法
+# Scikit-learn隨機森林演算法
 
-ds = datasets.load_wine()
+wine = datasets.load_wine()
 
-feature_names = ds.feature_names
-X, y = ds.data, ds.target
+feature_names = wine.feature_names
+X, y = wine.data, wine.target
 
 # 資料分割
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
@@ -1600,16 +1567,15 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
+print("------------------------------------------------------------")  # 60個
+sys.exit()
+
+
+print("------------------------------------------------------------")  # 60個
+
+
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個

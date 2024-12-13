@@ -26,6 +26,19 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
+import sklearn.linear_model
+from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
+from sklearn.preprocessing import StandardScaler
+
+
+def show():
+    # plt.show()
+    pass
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 # 鐵達尼號資料清理
 
 # 載入鐵達尼號資料集
@@ -97,7 +110,7 @@ df.info()  # 這樣就已經把資料集彙總資訊印出來
 # 離群值(Outlier) 處理
 
 plt.boxplot(df.age)
-plt.show()
+show()
 
 
 def get_box_plot_data(labels, bp):
@@ -118,7 +131,7 @@ def get_box_plot_data(labels, bp):
 
 bp = plt.boxplot(df.age)
 get_box_plot_data(["age"], bp)
-plt.show()
+show()
 
 """
 	label 	最小值 	箱子下緣 	中位數 	箱子上緣 	最大值
@@ -127,7 +140,7 @@ plt.show()
 
 df = df[(3.0 <= df.age) & (df.age <= 54.0)]
 plt.hist(df.age)
-plt.show()
+show()
 
 
 # 類別變數轉換為數值
@@ -170,45 +183,26 @@ print(cc)
 # 3. 不須進行特徵工程
 
 # 4. 資料分割
-
-from sklearn.model_selection import train_test_split
-
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 cc = X_train.shape, X_test.shape, y_train.shape, y_test.shape
 print(cc)
 
 # 特徵縮放
-
-from sklearn.preprocessing import StandardScaler
-
 scaler = StandardScaler()
 X_train_std = scaler.fit_transform(X_train)
 X_test_std = scaler.transform(X_test)
 
-# 5. 選擇演算法
+# 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
+logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
 
-from sklearn.linear_model import LogisticRegression
-
-clf = LogisticRegression()
-
-# 6. 模型訓練
-
-clf.fit(X_train_std, y_train)
-"""
-LogisticRegression()
-
-In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook.
-On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.
-"""
+logistic_regression.fit(X_train_std, y_train)
 
 # 7. 模型計分
-
 from sklearn.metrics import accuracy_score
 
-y_pred = clf.predict(X_test_std)
+y_pred = logistic_regression.predict(X_test_std)
 # 計算準確率
 print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
-
 # 82.42%
 
 # 8. 模型評估，暫不進行
@@ -218,7 +212,7 @@ print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
 # 模型存檔
 import joblib
 
-joblib.dump(clf, "tmp_titanic_model.joblib")
+joblib.dump(logistic_regression, "tmp_titanic_model.joblib")
 joblib.dump(scaler, "tmp_titanic_scaler.joblib")
 
 print("------------------------------------------------------------")  # 60個
@@ -295,14 +289,17 @@ encoded_class = label_encoder.fit_transform(titanic["PClass"])
 X = pd.DataFrame([encoded_class, titanic["SexCode"], titanic["Age"]]).T
 y = titanic["Survived"]
 
-logistic = linear_model.LogisticRegression()
-logistic.fit(X, y)
-print("迴歸係數:", logistic.coef_)
-print("截距:", logistic.intercept_)
+# 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
+logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
+
+logistic_regression.fit(X, y)
+print("迴歸係數:", logistic_regression.coef_)
+print("截距:", logistic_regression.intercept_)
 
 print("------------------------------------------------------------")  # 60個
 
-from sklearn import preprocessing, linear_model
+from sklearn import preprocessing
+from sklearn import linear_model
 
 titanic = pd.read_csv("data/titanic_ds.csv")
 print(titanic.info())
@@ -318,19 +315,22 @@ encoded_class = label_encoder.fit_transform(titanic["PClass"])
 X = pd.DataFrame([encoded_class, titanic["SexCode"], titanic["Age"]]).T
 y = titanic["Survived"]
 
-logistic = linear_model.LogisticRegression()
-logistic.fit(X, y)
+# 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
+logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
 
-preds = logistic.predict(X)
+logistic_regression.fit(X, y)
+
+preds = logistic_regression.predict(X)
 print(pd.crosstab(preds, titanic["Survived"]))
 
 print("---------------------------")
 print((805 + 265) / (805 + 185 + 58 + 265))
-print(logistic.score(X, y))
+print(logistic_regression.score(X, y))
 
 print("------------------------------------------------------------")  # 60個
 
-from sklearn import preprocessing, linear_model
+from sklearn import preprocessing
+from sklearn import linear_model
 
 titanic = pd.read_csv("data/titanic_ds.csv")
 print(titanic.info())
@@ -342,26 +342,26 @@ encoded_class = label_encoder.fit_transform(titanic["PClass"])
 X = pd.DataFrame([encoded_class, titanic["SexCode"]]).T
 y = titanic["Survived"]
 
-logistic = linear_model.LogisticRegression()
-logistic.fit(X, y)
-print("迴歸係數:", logistic.coef_)
-print("截距:", logistic.intercept_)
+# 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
+logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
+
+logistic_regression.fit(X, y)
+print("迴歸係數:", logistic_regression.coef_)
+print("截距:", logistic_regression.intercept_)
 print("---------------------------")
-preds = logistic.predict(X)
+preds = logistic_regression.predict(X)
 print(pd.crosstab(preds, titanic["Survived"]))
 
 print("---------------------------")
 print((840 + 222) / (840 + 222 + 23 + 228))
-print(logistic.score(X, y))
+print(logistic_regression.score(X, y))
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 from sklearn import datasets
-
-import pandas as pd
-from sklearn import preprocessing, tree
-from sklearn.model_selection import train_test_split
+from sklearn import preprocessing
+from sklearn import tree
 
 titanic = pd.read_csv("data/titanic_ds.csv")
 # 轉換欄位值成為數值
@@ -382,16 +382,16 @@ print("---------------------------")
 preds = dtree.predict_proba(X=XTest)
 print(pd.crosstab(preds[:, 0], columns=[XTest["PClass"], XTest["SexCode"]]))
 pd.crosstab(preds[:, 0], columns=[XTest["PClass"], XTest["SexCode"]]).to_html(
-    "tmp_ch16-1-2.html"
+    "tmp_titanic.html"
 )
 
 print("------------------------------------------------------------")  # 60個
 
-import pandas as pd
-from sklearn import preprocessing, tree
-from sklearn.model_selection import train_test_split
+from sklearn import preprocessing
+from sklearn import tree
 
 titanic = pd.read_csv("data/titanic_ds.csv")
+
 # 轉換欄位值成為數值
 label_encoder = preprocessing.LabelEncoder()
 encoded_class = label_encoder.fit_transform(titanic["PClass"])
@@ -593,8 +593,11 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 from sklearn.tree import DecisionTreeClassifier
 
 clf = DecisionTreeClassifier()
+
 clf.fit(X_train, y_train)
+
 train_score = clf.score(X_train, y_train)
+
 test_score = clf.score(X_test, y_test)
 
 print("train_score :", train_score)
@@ -740,7 +743,9 @@ param_grid = [
 ]
 
 clf = GridSearchCV(DecisionTreeClassifier(), param_grid, cv=5, return_train_score=True)
+
 clf.fit(X, y)
+
 print("best param: {0}\nbest score: {1}".format(clf.best_params_, clf.best_score_))
 
 print("------------------------------")  # 30個
@@ -772,9 +777,6 @@ from pandas import Series, DataFrame
 
 # 繪圖分析
 sns.set_style("whitegrid")
-
-# 機器學習
-from sklearn.linear_model import LogisticRegression  # 邏輯迴歸
 
 # from sklearn.svm import SVC, LinearSVC  # 支持向量機
 from sklearn.ensemble import RandomForestClassifier  # 隨機森林
@@ -834,15 +836,14 @@ X_train = titanic_df.drop("Survived", axis=1)
 Y_train = titanic_df["Survived"]
 X_test = test_df.copy()
 
-from sklearn.linear_model import LogisticRegression
+# 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
+logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
 
-logreg = LogisticRegression()  # 初始化模型
+logistic_regression.fit(X_train, Y_train)  # 學習訓練.fit
 
-logreg.fit(X_train, Y_train)  # 學習訓練.fit
+print(logistic_regression.score(X_train, Y_train))  # 模型評分
 
-print(logreg.score(X_train, Y_train))  # 模型評分
-
-Y_pred = logreg.predict(X_test)  # 預測
+Y_pred = logistic_regression.predict(X_test)  # 預測
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -872,11 +873,10 @@ print("y之大小")
 cc = y.shape
 print(cc)
 
-# fit a classification model to the training data
-from sklearn.linear_model import LogisticRegression
+# 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
+logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
 
-logreg = LogisticRegression()
-logreg.fit(X, y)
+logistic_regression.fit(X, y)
 
 # read the testing dataset from Kaggle's Titanic competition into a DataFrame
 test = pd.read_csv("http://bit.ly/kaggletest")
@@ -891,7 +891,7 @@ cc = X_new.shape
 print(cc)
 
 # use the fitted model to make predictions for the testing set observations
-new_pred_class = logreg.predict(X_new)
+new_pred_class = logistic_regression.predict(X_new)
 
 # create a DataFrame of passenger IDs and testing set predictions
 print("檢視前幾行")

@@ -86,6 +86,12 @@ import ssl
 
 ssl._create_default_https_context = ssl._create_unverified_context
 
+
+def show():
+    # plt.show()
+    pass
+
+
 print("------------------------------------------------------------")  # 60個
 
 
@@ -291,10 +297,6 @@ print("新增欄位 體育")
 df["體育"] = [88, 98, 80, 94]
 print(df)
 
-print("移除欄位 自然")
-df4 = df.drop(["自然"], axis=1)
-print(df4)
-
 print("顯示 數學 欄的資料")
 cc = df["數學"]
 print(cc)
@@ -312,16 +314,16 @@ print("刪除 df 的 欄位 或 索引 – drop()")
 df = make_data_frame_from_dict()  # 字典 轉 df
 print(df)
 
-print("刪除欄位 數學")
+print("刪除欄位 數學, axis=1")
 # df1 = df.drop("數學", axis=1) # same
 df1 = df.drop(["數學"], axis=1)
 print(df1)
 
-print("刪除欄位 數學 自然")
+print("刪除欄位 數學 自然, axis=1")
 df3 = df.drop(["數學", "自然"], axis=1)
 print(df3)
 
-print("刪除欄位 1 2, 即刪除 國文 英文")
+print("刪除欄位 1 2, 即刪除 國文 英文, axis=1")
 df5 = df.drop(df.columns[1:3], axis=1)
 print(df5)
 
@@ -352,11 +354,11 @@ df = make_data_frame_from_dict()  # 字典 轉 df
 df.set_index("姓名", inplace=True)
 print(df)
 
-print("移除索引 index 孫悟空 豬八戒")
+print("刪除索引 index 孫悟空 豬八戒")
 df2 = df.drop(["孫悟空", "豬八戒"])
 print(df2)
 
-print("移除索引 0 2, 即 唐三藏 豬八戒")
+print("刪除索引 0 2, 即 唐三藏 豬八戒")
 df3 = df.drop(df.index[[0, 2]])
 print(df3)
 
@@ -364,19 +366,19 @@ print(df3)
 # print('重建df')
 # df = make_data_frame_from_dict()  # 字典 轉 df
 
-print("移除孫悟空成績 ->")
+print("刪除孫悟空成績 ->")
 df1 = df.drop("孫悟空")
 print(df1)
-print("移除數學科成績 ->")
+print("刪除欄位 數學, axis=1")
 df2 = df.drop("數學", axis=1)
 print(df2)
-print("移除數學科及自然科成績 ->")
+print("刪除欄位 數學 自然, axis=1")
 df3 = df.drop(["數學", "自然"], axis=1)
 print(df3)
-print("移除孫悟空到豬八戒成績 ->")
+print("刪除孫悟空到豬八戒成績 ->")
 df4 = df.drop(df.index[1:4])
 print(df4)
-print("移除數學科到自然科成績 ->")
+print("刪除欄位 1~3, axis=1")
 df5 = df.drop(df.columns[1:4], axis=1)
 print(df5)
 
@@ -1071,12 +1073,18 @@ df.plot(kind="bar")
 df = titanic[["Survived", "Died"]].groupby(titanic["PClass"]).mean()
 df.plot(kind="bar")
 
+print("刪除欄位 PassengerId, axis=1")
 df = titanic.drop("PassengerId", axis=1)
+
+print("刪除欄位 Died, axis=1")
 df = df.drop("Died", axis=1)
+
+print("刪除欄位 Title, axis=1")
 df = df.drop("Title", axis=1)
+
 df.to_csv("tmp_titanic_train.csv", encoding="utf8")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1781,11 +1789,13 @@ ufo = pd.read_csv(filename)
 # print("檢視前幾行\n", ufo.head())
 
 # remove a single column (axis=1 refers to columns)
+print("刪除欄位 Colors Reported, axis=1")
 ufo.drop("Colors Reported", axis=1, inplace=True)
 
 # print("檢視前幾行\n", ufo.head())
 
 # remove multiple columns at once
+print("刪除欄位 City 和 State, axis=1")
 ufo.drop(["City", "State"], axis=1, inplace=True)
 
 # print("檢視前幾行\n", ufo.head())
@@ -2007,18 +2017,6 @@ print("使用 axis")
 filename = "data/drinks.csv"
 drinks = pd.read_csv(filename)
 
-# print("檢視前幾行\n", drinks.head())
-
-# drop a column (temporarily)
-print("檢視前幾行")
-cc = drinks.drop("continent", axis=1).head()
-print(cc)
-
-# drop a row (temporarily)
-print("檢視前幾行")
-cc = drinks.drop(2, axis=0).head()
-print(cc)
-
 """
 # calculate the mean of each numeric column
 #cc = drinks.mean()  NG
@@ -2160,7 +2158,7 @@ drinks.groupby('continent').mean()
 
 # side-by-side bar plot of the DataFrame directly above
 drinks.groupby('continent').mean().plot(kind='bar')
-plt.show()
+show()
 """
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -2227,12 +2225,12 @@ print(cc)
 # histogram of the 'duration' Series (shows the distribution of a numerical variable)
 movies.duration.plot(kind="hist")
 
-plt.show()
+show()
 
 # bar plot of the 'value_counts' for the 'genre' Series
 movies.genre.value_counts().plot(kind="bar")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -2501,11 +2499,6 @@ print(cc)
 # rows 0 through 2 (inclusive), columns 'City' through 'State' (inclusive)
 ufo.loc[0:2, "City":"State"]
 
-# accomplish the same thing using 'head' and 'drop'
-print("檢視前3行")
-cc = ufo.head(3).drop("Time", axis=1)
-print(cc)
-
 # rows in which the 'City' is 'Oakland', column 'State'
 cc = ufo.loc[ufo.City == "Oakland", "State"]
 print(cc)
@@ -2551,25 +2544,6 @@ print(cc)
 
 print("ufo之大小")
 cc = ufo.shape
-print(cc)
-
-# remove the 'City' column (doesn't affect the DataFrame since inplace=False)
-print("檢視前幾行")
-cc = ufo.drop("City", axis=1).head()
-print(cc)
-
-# confirm that the 'City' column was not actually removed
-print("檢視前幾行")
-cc = ufo.head()
-print(cc)
-
-# remove the 'City' column (does affect the DataFrame since inplace=True)
-cc = ufo.drop("City", axis=1, inplace=True)
-print(cc)
-
-# confirm that the 'City' column was actually removed
-print("檢視前幾行")
-cc = ufo.head()
 print(cc)
 
 # drop a row if any value is missing from that row (doesn't affect the DataFrame since inplace=False)
@@ -2743,7 +2717,7 @@ print(cc)
 # plot the number of UFO reports per year (line plot is the default)
 ufo.Year.value_counts().sort_index().plot()
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -3118,7 +3092,7 @@ cc = pd.to_numeric(df.col_three, errors="coerce").fillna(value=VALUE)  # 將指�
 print(cc)
 
 VALUE = 0
-df = df.apply(pd.to_numeric, errors="coerce").fillna(vlaue=VALUE)  # 將指定欄位內空資料填入指定數值
+df = df.apply(pd.to_numeric, errors="coerce").fillna(value=VALUE)  # 將指定欄位內空資料填入指定數值
 print(df)
 
 # 8. Reduce DataFrame size
@@ -3942,29 +3916,6 @@ print(cc)
 
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-print("作業完成")
-print("------------------------------------------------------------")  # 60個
-sys.exit()
-
-print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-
-"""
-cc = pd.merge(df1, df2, how="left", indicator=True).query("_merge == 'left_only'")
-print(cc)
-"""
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 """
 # Writing to a SQLite database
 
@@ -4068,25 +4019,6 @@ print(df)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 取出 DataFrame 當中的元素 –df.loc[]
-
-df[column] = np.random.choice(range(1, 101), 4)
-df[column] = np.random.choice(range(1, 11), 10)
-df[column] = np.random.choice(range(1, 11), 10)
-
-datas = ["唐三藏", "孫悟空", "豬八戒", "沙悟淨", "白龍馬", "牛魔王", "紅孩兒", "蜘蛛精", "白骨精"]
-
-print("增加一列  TBD")
-s = pd.Series({"姓名": "白龍馬", "國文": 84, "英文": 91, "數學": 82, "社會": 95, "自然": 92})
-
-datas = np.random.randint(6, 16, (4, 5))  # 整數數字6~12 10X5
-
-print("------------------------------------------------------------")  # 60個
-
-print("交集合併")
-order_df = pd.merge(order_df, customer_df, left_on="數學", right_on="國文", how="inner")
-
-order_df = pd.merge(order_df, customer_df, left_on="數學", right_index=True, how="inner")
 
 print("------------------------------------------------------------")  # 60個
 
@@ -4614,18 +4546,6 @@ color="LightGreen"
 
 """
 
-
-"""
-df = pd.read_csv('Iris.csv')
-print(df.head())
-print('將Id整欄刪除')
-df = df.drop('Id', axis = 1)
-
-print(df.head())
-
-"""
-
-
 """
 
 pandas主要之資料型態:
@@ -4929,7 +4849,7 @@ df.plot(color="b")
 plt.title("大數法則(Law of Large Numbers)")
 plt.xlabel("投擲次數")
 plt.ylabel("平均機率")
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -4946,7 +4866,7 @@ df.plot(color="r")
 plt.title("大數法則(Law of Large Numbers)")
 plt.xlabel("投擲次數")
 plt.ylabel("平均機率")
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -4959,7 +4879,7 @@ for x in range(100):
 
 df = pd.DataFrame(sample_means)
 df.plot(kind="density")
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -4971,7 +4891,7 @@ for x in range(100):
 
 df = pd.DataFrame(sample_means)
 df.plot(kind="density")
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -4983,7 +4903,7 @@ for x in range(100):
 
 df = pd.DataFrame(sample_means)
 df.plot(kind="density")
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -5121,14 +5041,6 @@ data[0:3]
 data.set_index('name', inplace=True)
 data['Jerry':'Bob']
 
-# 刪除特定欄位
-data = data.drop('欄位名稱', axis=1)
-
-# 刪除多個欄位
-data = data.drop(['欄位名稱1', '欄位名稱2'], axis=1)
-
-# 使用 inplace=True 直接修改原始 DataFrame
-data.drop('欄位名稱', axis=1, inplace=True)
 """
 print("------------------------------------------------------------")  # 60個
 
@@ -5685,7 +5597,7 @@ print("------------------------------------------------------------")  # 60個
 
 過濾資料
 
-移除欄位/row drop
+刪除欄位/row drop
 合併 concat
 缺資料處理  fillna
 
@@ -6017,15 +5929,6 @@ data = pd.DataFrame(
     columns=["one", "two", "three", "four"],
 )
 data
-
-# 對於 DataFrame，可以刪除任意軸上的索引值
-data.drop(["Colorado", "Ohio"])
-
-# axis = 0 或省略，可以刪除rows
-data.drop(["Colorado", "Ohio"])
-
-# axis = 1，可以刪除columns
-data.drop(["two", "four"], axis=1)
 
 # 索引、選取、過濾###
 
@@ -6562,7 +6465,7 @@ df
 df2 = df.set_index(["c", "d"])
 df2
 
-# 預設情況下，這些columns會被移除，但也可以設定 drop參數將之保留下來
+# 預設情況下，這些columns會被刪除，但也可以設定 drop參數將之保留下來
 df2 = df.set_index(["c", "d"], drop=False)
 df2
 
@@ -6971,7 +6874,7 @@ df.set_index(["date", "item"]).unstack("item")
 print("------------------------------------------------------------")  # 60個
 
 # 數據轉換
-# 移除重複數據
+# 刪除重複數據
 
 data = pd.DataFrame(
     {
@@ -6993,7 +6896,7 @@ data
 data.duplicated()
 
 
-# drop_duplicates()方法 傳回移除重複項目之後的結果
+# drop_duplicates()方法 傳回刪除重複項目之後的結果
 data.drop_duplicates()
 
 data["k3"] = range(7)
@@ -7343,7 +7246,7 @@ print("------------------------------------------------------------")  # 60個
 
 # 面向列的多函數應用
 
-tips = pd.read_csv("../data/tips.csv")
+tips = pd.read_csv("data/tips.csv")
 tips["tip_total_ratio"] = tips["tip"] / tips["total_bill"]
 tips[:5]
 
@@ -7484,7 +7387,7 @@ tips.groupby("smoker", group_keys=False).apply(top)
 tips.groupby("smoker", group_keys=True).apply(top)
 
 print("------------------------------------------------------------")  # 60個
-
+""" no file
 # 範例: 分組加權平均數和相關係數
 
 df = pd.DataFrame(
@@ -7503,7 +7406,7 @@ get_wavg = lambda g: np.average(g.data * g.weights)
 df.groupby("category").apply(get_wavg)
 
 # Yahoo Finance
-close_px = pd.read_csv("../data/stock_px.csv", parse_dates=True, index_col=0)
+close_px = pd.read_csv("data/stock_px.csv", parse_dates=True, index_col=0)
 close_px[:6]
 
 # 計算 日收益率 與 SPX之間的年度相關係數組成的DataFrame
@@ -7522,12 +7425,12 @@ by_year.apply(spx_corr)
 
 # 也可以計算 列與列之間的相關係數
 by_year.apply(lambda g: g.AAPL.corr(g.MSFT))
-
+"""
 print("------------------------------------------------------------")  # 60個
 
 # 透視表(pivot table)和交叉表(cross-tabulation, 或稱 crosstab)
 
-tips = pd.read_csv("../data/tips.csv")
+tips = pd.read_csv("data/tips.csv")
 tips["tip_pct"] = tips["tip"] / tips["total_bill"]
 tips[:5]
 
@@ -7687,7 +7590,7 @@ print(df_state)
 
 df_state[:10].Time.plot(kind="bar")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -7808,9 +7711,9 @@ print("資料數= ", len(df))
 print("形狀= ", df.shape)
 
 for index, row in df.iterrows():
-    print(index, row["city"], row["name"], row["population"])
+    print(index, row["直轄市"], row["區"], row["人口"])
 
-df2 = df.set_index("city")
+df2 = df.set_index("直轄市")
 print(df2)
 
 df3 = df2.reset_index()
@@ -8002,23 +7905,6 @@ print("------------------------------")  # 30個
 df.loc[:, "population"] = np.random.randint(34000, 700000, size=len(df))
 print(df.head())
 
-df = pd.DataFrame(np.random.randint(5, 1500, size=(2, 3)))
-print(df)
-
-print("------------------------------")  # 30個
-
-# 取得與更新整個DataFrame
-print(df[df > 800])
-cc = df[df > 800]
-print(cc)
-
-print("------------------------------")  # 30個
-
-df[df > 800] = df - 100
-print(df)
-
-print("------------------------------")  # 30個
-
 # 刪除純量值
 print(df.loc[ordinals[0], "population"])
 df.loc[ordinals[0], "population"] = None
@@ -8028,29 +7914,25 @@ print(df.head(3))
 
 print("------------------------------")  # 30個
 
-# 刪除記錄
+# 刪除記錄 索引資料
 df2 = df.drop(["second", "fourth"])  # 2,4 筆
 print(df2.head())
 
 print("------------------------------")  # 30個
 
+# 刪除記錄 索引資料
 df.drop(df.index[[2, 3]], inplace=True)  # 3,4 筆
 print(df.head())
 
-print("------------------------------")  # 30個
-
-# 刪除欄位
-df2 = df.drop(["population"], axis=1)
-print(df2.head(3))
-
 print("------------------------------------------------------------")  # 60個
 
+""" 新版棄用append
 # kilo 不可用 append, 但 sugar 可用
 data = pd.DataFrame()
 a = {"x": 1, "y": 2}
 data = data.append(a, ignore_index=True)
 print(data)
-
+"""
 print("------------------------------")  # 30個
 
 # 新增記錄
@@ -8059,11 +7941,12 @@ print(df.tail(3))
 
 print("------------------------------")  # 30個
 
+""" 新版棄用append
 # kilo 不可用 append, 但 sugar 可用
 s = pd.Series({"city": "新北市", "name": "中和區", "population": 413291})
 df2 = df.append(s, ignore_index=True)
 print(df2.tail(3))
-
+"""
 print("------------------------------------------------------------")  # 60個
 
 df = pd.DataFrame(columns=("qty1", "qty2", "qty3"))
@@ -8073,6 +7956,7 @@ print(df)
 
 print("------------------------------")  # 30個
 
+""" 新版棄用append
 # kilo 不可用 append, 但 sugar 可用
 df2 = pd.DataFrame(columns=("qty1", "qty2", "qty3"))
 for i in range(5):
@@ -8085,7 +7969,7 @@ for i in range(5):
     )
     df2 = df2.append(s, ignore_index=True)
 print(df2)
-
+"""
 print("------------------------------------------------------------")  # 60個
 
 df["area"] = pd.Series([np.random.randint(6000, 9000) for n in range(len(df))]).values
@@ -8110,6 +7994,24 @@ df_copy = df.copy()
 print(df_copy)
 
 print("------------------------------------------------------------")  # 60個
+
+df = pd.DataFrame(np.random.randint(5, 1500, size=(2, 3)))
+print(df)
+
+print("------------------------------")  # 30個
+
+# 取得與更新整個DataFrame
+print(df[df > 800])
+cc = df[df > 800]
+print(cc)
+
+print("------------------------------")  # 30個
+
+df[df > 800] = df - 100
+print(df)
+
+print("------------------------------------------------------------")  # 60個
+
 
 df1 = pd.DataFrame(np.random.randint(5, 10, size=(3, 4)), columns=["a", "b", "c", "d"])
 df2 = pd.DataFrame(np.random.randint(5, 10, size=(2, 3)), columns=["b", "d", "a"])
@@ -8429,12 +8331,6 @@ print(df)
 df1 = df.set_index(["sitename"])  # 將測站設定為索引(即擺到第一行第一列)
 df1 = df1.reset_index(["sitename"])  # 恢復原本設置
 
-# 刪除資料
-df.drop(labels=["SO2", "CO"], axis="columns")  # 刪除SO2和CO這兩個欄位
-df = df.drop_duplicates()  # 刪除重複的資料
-# axis=0和asxis='row'一樣
-# axis=1和axis='columns'一樣
-
 # 處理NaN資料
 df.dropna()  # 刪除NaN的資料
 df = df.dropna()  # 將刪除後的資料存到變數
@@ -8480,3 +8376,86 @@ aqi_filter_2 = (df["aqi"] > 60) & (df["PM2.5"] > 40)
 Bad_aqi_PM = df[aqi_filter_2]  # 將過濾後的數值存入至Bad_aqi_PM
 Bad_aqi_PM.head()  # 只顯示aqi>60且PM2.5>40的資料
 """
+
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
+sys.exit()
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+
+"""
+cc = pd.merge(df1, df2, how="left", indicator=True).query("_merge == 'left_only'")
+print(cc)
+"""
+
+# 刪除特定欄位
+data = data.drop("欄位名稱", axis=1)
+
+# 刪除多個欄位
+data = data.drop(["欄位名稱1", "欄位名稱2"], axis=1)
+
+# 使用 inplace=True 直接修改原始 DataFrame
+data.drop("欄位名稱", axis=1, inplace=True)
+
+
+# remove the 'City' column (doesn't affect the DataFrame since inplace=False)
+print("檢視前幾行")
+cc = ufo.drop("City", axis=1).head()
+print(cc)
+
+# confirm that the 'City' column was not actually removed
+print("檢視前幾行")
+cc = ufo.head()
+print(cc)
+
+# remove the 'City' column (does affect the DataFrame since inplace=True)
+cc = ufo.drop("City", axis=1, inplace=True)
+print(cc)
+
+# confirm that the 'City' column was actually removed
+print("檢視前幾行")
+cc = ufo.head()
+print(cc)
+
+
+# 對於 DataFrame，可以刪除任意軸上的索引值
+data.drop(["Colorado", "Ohio"])
+
+# axis = 0 或省略，可以刪除rows
+data.drop(["Colorado", "Ohio"])
+
+# axis = 1，可以刪除columns
+data.drop(["two", "four"], axis=1)
+
+
+# 刪除資料
+df.drop(labels=["SO2", "CO"], axis="columns")  # 刪除SO2和CO這兩個欄位
+# axis=0和asxis='row'一樣
+# axis=1和axis='columns'一樣
+
+df = df.drop_duplicates()  # 刪除重複的資料
+
+
+# 取出 DataFrame 當中的元素 –df.loc[]
+
+df[column] = np.random.choice(range(1, 101), 4)
+df[column] = np.random.choice(range(1, 11), 10)
+df[column] = np.random.choice(range(1, 11), 10)
+
+datas = ["唐三藏", "孫悟空", "豬八戒", "沙悟淨", "白龍馬", "牛魔王", "紅孩兒", "蜘蛛精", "白骨精"]
+
+print("增加一列  TBD")
+s = pd.Series({"姓名": "白龍馬", "國文": 84, "英文": 91, "數學": 82, "社會": 95, "自然": 92})
+
+datas = np.random.randint(6, 16, (4, 5))  # 整數數字6~12 10X5
+
+print("------------------------------------------------------------")  # 60個
+
+print("交集合併")
+order_df = pd.merge(order_df, customer_df, left_on="數學", right_on="國文", how="inner")
+
+order_df = pd.merge(order_df, customer_df, left_on="數學", right_index=True, how="inner")
