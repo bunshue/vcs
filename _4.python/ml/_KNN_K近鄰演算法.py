@@ -50,7 +50,7 @@ from sklearn.neighbors import KNeighborsRegressor
 
 
 def show():
-    # plt.show()
+    plt.show()
     pass
 
 
@@ -67,20 +67,16 @@ X = np.random.rand(50, 2)
 plt.scatter(X[:, 0], X[:, 1], s=50)
 show()
 
-
-
-
 sys.exit()
 """
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-"""
-X, y = make_moons(noise=0.3)
 print("make_moons 未指定個數, 就是100個")
-"""
+X, y = make_moons(noise=0.3)
 
+print("自己建立資料")
 X = np.array(
     [
         [0, 0],
@@ -118,18 +114,33 @@ print("用 K近鄰演算法 找出最近的", NEIGHBOARS, "個點")
 knn = KNeighborsClassifier()  # K近鄰演算法（K Nearest Neighbor, KNN）
 # 無參數就是n_neighbors=5
 
+N = 5
+scores = cross_val_score(knn, X, y, cv=N, scoring="accuracy")
+print('分成', N, '組, 做 cross_val_score 是驗證用來評分資料準確度的')
+print("全部分數 :", scores)
+print("平均分數 :", scores.mean())
+
 knn.fit(X, y)  # 學習訓練.fit
 
 y_pred = knn.predict(X)  # 預測.predict
 print("預測結果 :\n", y_pred)
 
-print("計算準確率")
-print(accuracy_score(y_pred, y))
+print("計算準確率 :", accuracy_score(y_pred, y))
 
-print("正確答案")
-print(y)
+print("正確答案 :\n", y)
 
 print("KNN準確率: %.2f" % knn.score(X, y))
+
+"""
+#測試y與y_pred
+plt.subplot(121)
+plt.scatter(X[:, 0], X[:, 1], c=y, s=100)
+plt.title('原始資料')
+plt.subplot(122)
+plt.scatter(X[:, 0], X[:, 1], c=y_pred, s=100)
+plt.title('預測結果')
+show()
+"""
 
 # 預測
 x = [2.5, 2.5]
@@ -137,6 +148,7 @@ xx = np.array(x).reshape(1, -1)
 
 y_pred = knn.predict(xx)  # 預測.predict
 print("預測結果 :", y_pred)
+
 y_pred = knn.predict([x])  # 預測.predict
 print("預測答案 :", y_pred)
 print("預測樣本距離 :", knn.predict_proba([x]))  # 測試數據X的返回概率估計
@@ -148,7 +160,7 @@ print("找到的", NEIGHBOARS, "個點 :", neighbors)
 plt.scatter(X[:, 0], X[:, 1], c=y, s=100, cmap="cool")
 # plt.scatter(X[:, 0], X[:, 1], c=y, s=100)
 
-# 畫出預測點
+# 畫出預測點 紅星
 plt.scatter(x[0], x[1], marker="*", s=200, c="r", alpha=0.8, cmap="cool")  # 待預測的點
 
 print("劃出預測點與距離最近的", NEIGHBOARS, "個樣本的連線")
@@ -169,21 +181,20 @@ STD = 1  # cluster_std, 資料標準差
 print("make_blobs,", N, "個樣本, ", M, "個特徵, 分成", GROUPS, "群")
 X, y = make_blobs(n_samples=N, n_features=M, centers=GROUPS)
 
+scaler = StandardScaler()
+X_std = scaler.fit_transform(X)  # STD特徵縮放, 標準化
+
 plt.subplot(121)
 plt.scatter(X[:, 0], X[:, 1], c=y, cmap="bwr")
 # plt.scatter(X.T[0], X.T[1], c=y, cmap="Dark2")
 plt.grid(True)
-plt.title("原始資料, dx的分佈狀況, dy是用顏色表示")
-
-scaler = StandardScaler()
-X_std = scaler.fit_transform(X)  # STD特徵縮放, 標準化
+plt.title("原始資料")
 
 plt.subplot(122)
 plt.scatter(X_std[:, 0], X_std[:, 1], c=y, cmap="bwr")
 # plt.scatter(X_std.T[0], X_std.T[1], c=y, cmap="Dark2")
 plt.grid(True)
-plt.title("特徵縮放, 經過 StandardScaler")
-
+plt.title("特徵縮放 StandardScaler\n平均值0 標準差1")
 show()
 
 NEIGHBOARS = 5
@@ -195,12 +206,9 @@ knn.fit(X, y)  # 學習訓練.fit
 y_pred = knn.predict(X)  # 預測.predict
 print("預測結果 :\n", y_pred)
 
-print("正確答案")
-print(y)
+print("正確答案 :\n", y)
 
-# 輸出準確性
 print("KNN準確率: %.2f" % knn.score(X, y))
-print(f"訓練資料的準確性 = {knn.score(X, y)}")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -224,8 +232,11 @@ NEIGHBOARS = 5
 print("用 K近鄰演算法 找出最近的", NEIGHBOARS, "個點")
 knn = KNeighborsClassifier(n_neighbors=NEIGHBOARS)
 
+N = 5
 scores = cross_val_score(knn, X, y, cv=5, scoring="accuracy")
-print(scores)
+print('分成', N, '組, 做 cross_val_score 是驗證用來評分資料準確度的')
+print("全部分數 :", scores)
+print("平均分數 :", scores.mean())
 
 # this is how to use cross_val_score to choose model and configs #
 from sklearn.model_selection import cross_val_score
@@ -236,7 +247,9 @@ for k in range(1, 31):
     print("用 K近鄰演算法 找出最近的", NEIGHBOARS, "個點")
     knn = KNeighborsClassifier(n_neighbors=NEIGHBOARS)
     ##    loss = -cross_val_score(knn, X, y, cv=10, scoring='mean_squared_error') # for regression
-    scores = cross_val_score(knn, X, y, cv=10, scoring="accuracy")  # for classification
+    N = 10
+    scores = cross_val_score(knn, X, y, cv=N, scoring="accuracy")  # for classification
+    print('分成', N, '組, 做 cross_val_score 是驗證用來評分資料準確度的')
     k_scores.append(scores.mean())
     print("取得 :", scores.mean())
 
@@ -263,7 +276,7 @@ for k in Ks:
     print("用 K近鄰演算法 找出最近的", NEIGHBOARS, "個點")
     knn = KNeighborsClassifier(n_neighbors=NEIGHBOARS)
     knn.fit(X, y)  # 學習訓練.fit
-    accuracy = knn.score(X, y)
+    accuracy = knn.score(X, y)  # KNN準確率
     accuracies.append(accuracy)
 
 plt.plot(Ks, accuracies)
@@ -286,7 +299,7 @@ knn = KNeighborsClassifier(n_neighbors=NEIGHBOARS)
 
 knn.fit(X, y)  # 學習訓練.fit
 
-print("準確率:", knn.score(X, y))
+print("KNN準確率: %.2f" % knn.score(X, y))
 print("---------------------------")
 y_pred = knn.predict(X)  # 預測.predict
 print(y_pred)
@@ -310,7 +323,9 @@ for k in Ks:
     NEIGHBOARS = k
     print("用 K近鄰演算法 找出最近的", NEIGHBOARS, "個點")
     knn = KNeighborsClassifier(n_neighbors=NEIGHBOARS)
-    scores = cross_val_score(knn, X, y, scoring="accuracy", cv=10)
+    N = 10
+    scores = cross_val_score(knn, X, y, cv=N, scoring="accuracy")
+    print('分成', N, '組, 做 cross_val_score 是驗證用來評分資料準確度的')
     accuracies.append(scores.mean())
 
 plt.plot(Ks, accuracies)
@@ -345,8 +360,7 @@ y = iris.target
 print("讀取模型")
 knnmodel = joblib.load("tmp_my_model_iris.joblib")
 
-score = knnmodel.score(X, y)
-print(score)
+print("KNN準確率: %.2f" % knnmodel.score(X, y))
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -363,7 +377,7 @@ knn.fit(X, y)  # 學習訓練.fit
 
 y_pred = knn.predict(X)  # 預測.predict
 print("預測結果：{}".format(y_pred))
-print("準確率：{}".format(knn.score(X, y)))
+print("KNN準確率: %.2f" % knn.score(X, y))
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -692,7 +706,7 @@ for k in range(1, 30, 5):
     print("用 K近鄰演算法 找出最近的", NEIGHBOARS, "個點")
     knn = KNeighborsClassifier(n_neighbors=NEIGHBOARS)
     knn.fit(X_train, y_train.values.flatten())  # 學習訓練.fit
-    score = knn.score(X_test, y_test)
+    score = knn.score(X_test, y_test)  # KNN準確率
     print("KNN準確率: %.2f" % knn.score(X_test, y_test))
 
 # * 交叉验证选择k值
@@ -728,7 +742,7 @@ print("rank_test_score : ", rank_test_score)
 gridSearchCV.best_params_
 
 best = gridSearchCV.best_estimator_
-best.score(X_test, y_test)
+best.score(X_test, y_test)  # GridSearchCV準確率
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -907,7 +921,7 @@ knn.fit(X_train, y_train)  # 學習訓練.fit
 
 print("----KNN模式訓練後，取test data 進行分類的正確率計算-------")
 
-print("準確率:", knn.score(X_test, y_test))
+print("KNN準確率: %.2f" % knn.score(X_test, y_test))
 
 s = []
 for i in range(3, 11):
@@ -918,7 +932,7 @@ for i in range(3, 11):
     )  # K近鄰演算法（K Nearest Neighbor, KNN）
     knn.fit(X_train, y_train)  # 學習訓練.fit
     print("k =", k, " 準確率:", knn.score(X_test, y_test))  # 用 test data 檢測模型的準確率
-    s.append(knn.score(X_test, y_test))
+    s.append(knn.score(X_test, y_test))  # KNN準確率
 
 NEIGHBOARS = 8
 print("用 K近鄰演算法 找出最近的", NEIGHBOARS, "個點")
@@ -947,18 +961,17 @@ print(y_test)
 
 print(y_test.values)
 
-print("計算準確率")
-accuracy_score(y_test, y_pred)
+print("計算準確率 :", accuracy_score(y_test, y_pred))
 # 1.0
 
-print("混淆矩陣")
-cc = confusion_matrix(y_test, y_pred)
-print(cc)
+print("混淆矩陣 :", confusion_matrix(y_test, y_pred))
 
 # 加深知識：交叉驗證概念
 from sklearn.model_selection import cross_val_score
 
-s = cross_val_score(knn, df_X, df_y, scoring="accuracy", cv=10)
+N = 10
+s = cross_val_score(knn, df_X, df_y, cv=N, scoring="accuracy")
+print('分成', N, '組, 做 cross_val_score 是驗證用來評分資料準確度的')
 print("交叉驗證每次的準確率：", s)
 print("交叉驗證得到的平均準確率：", s.mean())
 
@@ -1034,7 +1047,7 @@ knn.fit(X_train, y_train)  # 學習訓練.fit
 # 測試評估
 
 print("----KNN模式訓練後，取test data 進行分類的準確率計算-------")
-print("準確率:", knn.score(X_test, y_test))
+print("KNN準確率: %.2f" % knn.score(X_test, y_test))
 
 s = []
 for i in range(3, 11):
@@ -1045,7 +1058,7 @@ for i in range(3, 11):
     )  # K近鄰演算法（K Nearest Neighbor, KNN）
     knn.fit(X_train, y_train)  # 學習訓練.fit
     print("k =", k, " 準確率:", knn.score(X_test, y_test))  # 用 test data 檢測模型的準確率
-    s.append(knn.score(X_test, y_test))
+    s.append(knn.score(X_test, y_test))  # KNN準確率
 
 
 NEIGHBOARS = 4
@@ -1061,17 +1074,16 @@ print(y_pred)  # 觀察預測結果
 print("真實數據：")
 print(y_test.values)  # 觀察真實數據(Test data)
 
-print("計算準確率")
-accuracy_score(y_test, y_pred)
+print("計算準確率 :", accuracy_score(y_test, y_pred))
 # 0.7541899441340782
 
-print("混淆矩陣")
-cc = confusion_matrix(y_test, y_pred)
-print(cc)
+print("混淆矩陣 :", confusion_matrix(y_test, y_pred))
 
 from sklearn.model_selection import cross_val_score
 
-s = cross_val_score(knn, df_X, df_y, scoring="accuracy", cv=10)
+N = 10
+s = cross_val_score(knn, df_X, df_y, cv=N, scoring="accuracy")
+print('分成', N, '組, 做 cross_val_score 是驗證用來評分資料準確度的')
 print("準確率：", s)
 print("平均準確率：", s.mean())
 print("最高：", s.max())
@@ -1307,7 +1319,7 @@ print("------------------------------------------------------------")  # 60個
 # Classification Metrics
 
 # Accuracy Score
-accuracy_knn = knn.score(X_test, y_test)
+accuracy_knn = knn.score(X_test, y_test)  # KNN準確率
 print("Accuracy Score (knn):", knn.score(X_test, y_test))
 
 accuracy_y_pred = accuracy_score(y_test, y_pred_lr)
@@ -1378,11 +1390,15 @@ print("------------------------------------------------------------")  # 60個
 from sklearn.model_selection import cross_val_score
 
 # Cross-validation with KNN estimator
-knn_scores = cross_val_score(knn, X_train, y_train, cv=4)
+N = 4
+knn_scores = cross_val_score(knn, X_train, y_train, cv=N)
+print('分成', N, '組, 做 cross_val_score 是驗證用來評分資料準確度的')
 print(knn_scores)
 
 # Cross-validation with Linear Regression estimator
-lr_scores = cross_val_score(lr, X, y, cv=2)
+N = 2
+lr_scores = cross_val_score(lr, X, y, cv=N)
+print('分成', N, '組, 做 cross_val_score 是驗證用來評分資料準確度的')
 print(lr_scores)
 
 # Grid Search
@@ -1407,7 +1423,7 @@ print("Best cross-validation score:", grid.best_score_)
 
 # Print the accuracy on the test set using the best parameters
 best_knn = grid.best_estimator_
-test_accuracy = best_knn.score(X_test, y_test)
+test_accuracy = best_knn.score(X_test, y_test)  # GridSearchCV準確率
 print("Test set accuracy:", test_accuracy)
 
 print("------------------------------------------------------------")  # 60個

@@ -7,7 +7,28 @@
 # 將資料常態分布化，平均值會變為0, 標準差變為1，使離群值影響降低
 # MinMaxScaler與StandardScaler類似
 
+print("資料前處理方式(4) 測試特徵縮放")
+
+1. StandardScaler (平均值和標準差)
+Standardization 平均&變異數標準化
+將所有特徵標準化，也就是高斯分佈。使得數據的平均值為0，方差為1。
+適合的使用時機於當有些特徵的方差過大時，使用標準化能夠有效地讓模型快速收斂。
+
+2. MinMaxScaler(最小最大值標準化)
+MinMaxScaler 最小最大值標準化
+在MinMaxScaler中是給定了一個明確的最大值與最小值。
+每個特徵中的最小值變成了0，最大值變成了1。數據會縮放到到[0,1]之間。
+
+3. MaxAbsScaler（絕對值最大標準化）
+MaxAbsScaler 絕對值最大標準化
+MaxAbsScaler 與 MinMaxScaler 類似，所有數據都會除以該列絕對值後的最大值。
+數據會縮放到到[-1,1]之間。
+
+4. RobustScaler
+RobustScaler 中位數和四分位數標準化
+可以有效的縮放帶有outlier的數據，透過Robust如果數據中含有異常值在縮放中會捨去。
 """
+
 print("------------------------------------------------------------")  # 60個
 
 # 共同
@@ -31,126 +52,106 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
+from sklearn.preprocessing import StandardScaler  # STD特徵縮放
+from sklearn.preprocessing import MinMaxScaler  # MMS特徵縮放
+from sklearn.preprocessing import MaxAbsScaler  # MAS特徵縮放
+from sklearn.preprocessing import RobustScaler  # RS特徵縮放
+
 from sklearn import datasets
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
 
+def show():
+    plt.show()
+    pass
+
 print("------------------------------------------------------------")  # 60個
 
-print("資料前處理方式(4) 測試特徵縮放")
-"""
-1. StandardScaler (平均值和標準差)
+print('常態分布資料1000點')
 
-Standardization 平均&變異數標準化
-將所有特徵標準化，也就是高斯分佈。使得數據的平均值為0，方差為1。
-適合的使用時機於當有些特徵的方差過大時，使用標準化能夠有效地讓模型快速收斂。
+N = 1000  # 資料個數
+num_bins = 50  # 直方圖顯示時的束數
 
-2. MinMaxScaler(最小最大值標準化)
-
-MinMaxScaler 最小最大值標準化
-在MinMaxScaler中是給定了一個明確的最大值與最小值。
-每個特徵中的最小值變成了0，最大值變成了1。數據會縮放到到[0,1]之間。
-
-3. MaxAbsScaler（絕對值最大標準化）
-
-MaxAbsScaler 絕對值最大標準化
-MaxAbsScaler 與 MinMaxScaler 類似，所有數據都會除以該列絕對值後的最大值。
-數據會縮放到到[-1,1]之間。
-
-4. RobustScaler
-
-RobustScaler 中位數和四分位數標準化
-可以有效的縮放帶有outlier的數據，透過Robust如果數據中含有異常值在縮放中會捨去。
-"""
-
-"""
-dataset = pd.read_csv("data/studentscores.csv")
-X = dataset.iloc[:, :1].values
-y = dataset.iloc[:, 1].values
-"""
-
-iris = datasets.load_iris()
-
-df = pd.DataFrame(iris.data, columns=iris.feature_names)
-
-# 指定X，並轉為 Numpy 陣列
-X = df.values
-y = iris.target
-
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
-x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
-# 訓練組8成, 測試組2成
-
-print(x_train.shape)
-
-# 特徵縮放
-from sklearn.preprocessing import StandardScaler
-
-scaler = StandardScaler()
-x_train_std = scaler.fit_transform(x_train)  # STD特徵縮放
-
-print("全部欄")
-print(f"特徵縮放 前, 資料的平均值與標準差 : {x_train.mean():.2f}, {x_train.std():.2f}")
-print(f"特徵縮放 後, 資料的平均值與標準差 : {x_train_std.mean():.2f}, {x_train_std.std():.2f}")
-print("第0欄")
-print(f"特徵縮放 前, 資料的平均值與標準差 : {x_train[0].mean():.2f}, {x_train[0].std():.2f}")
-print(f"特徵縮放 後, 資料的平均值與標準差 : {x_train_std[0].mean():.2f}, {x_train_std[0].std():.2f}")
-print("第1欄")
-print(f"特徵縮放 前, 資料的平均值與標準差 : {x_train[1].mean():.2f}, {x_train[1].std():.2f}")
-print(f"特徵縮放 後, 資料的平均值與標準差 : {x_train_std[1].mean():.2f}, {x_train_std[1].std():.2f}")
-print("第2欄")
-print(f"特徵縮放 前, 資料的平均值與標準差 : {x_train[2].mean():.2f}, {x_train[2].std():.2f}")
-print(f"特徵縮放 後, 資料的平均值與標準差 : {x_train_std[2].mean():.2f}, {x_train_std[2].std():.2f}")
-print("第3欄")
-print(f"特徵縮放 前, 資料的平均值與標準差 : {x_train[3].mean():.2f}, {x_train[3].std():.2f}")
-print(f"特徵縮放 後, 資料的平均值與標準差 : {x_train_std[3].mean():.2f}, {x_train_std[3].std():.2f}")
-
-plt.subplot(121)
-plt.scatter(x_train[:, 0], x_train[:, 1], s=30, c="r", label="真實資料")  # 真實資料, 藍點
-plt.scatter(x_train[:, 2], x_train[:, 3], s=30, c="g", label="真實資料")  # 真實資料, 藍點
-plt.subplot(122)
-plt.scatter(x_train_std[:, 0], x_train_std[:, 1], s=30, c="r", label="真實資料")  # 真實資料, 藍點
-plt.scatter(x_train_std[:, 2], x_train_std[:, 3], s=30, c="g", label="真實資料")  # 真實資料, 藍點
-plt.suptitle("STD特徵縮放 => 平均值0 標準差1")
-plt.show()
+mu, sigma = 100, 15  # 平均值, 標準差
+X = mu + sigma * np.random.randn(N, 2)  # 隨機數
+print("原始資料")
+print("平均數:", round(np.mean(X), 3))
+print("標準差:", round(np.std(X), 3))
 
 print("------------------------------")  # 30個
 
-from sklearn.preprocessing import MinMaxScaler
+scaler = StandardScaler()  # STD特徵縮放
+X_std = scaler.fit_transform(X)
+print("STD特徵縮放")
+print("平均數:", round(np.mean(X_std), 3))
+print("標準差:", round(np.std(X_std), 3))
 
-scaler = MinMaxScaler()
-x_train_mms = scaler.fit_transform(x_train)  # MMS特徵縮放
+print(f"STD特徵縮放 前, 資料的平均值與標準差 : {X.mean():.2f}, {X.std():.2f}")
+print(f"STD特徵縮放 後, 資料的平均值與標準差 : {X_std.mean():.2f}, {X_std.std():.2f}")
+
+plt.subplot(221)
+plt.scatter(X[:, 0], X[:, 1], c='r', cmap="bwr")
+# plt.scatter(X.T[0], X.T[1], c='r', cmap="Dark2")
+plt.grid(True)
+plt.title("原始資料\n平均值100 標準差15")
+
+plt.subplot(222)
+plt.scatter(X_std[:, 0], X_std[:, 1], c='r', cmap="bwr")
+# plt.scatter(X_std.T[0], X_std.T[1], c='r', cmap="Dark2")
+plt.grid(True)
+plt.title("特徵縮放 StandardScaler\n平均值0 標準差1")
+
+plt.subplot(223)
+n, bins, patches = plt.hist(
+    X[:, 0], bins=num_bins, density=True, color="red", rwidth=0.5, alpha=0.5
+)
+n, bins, patches = plt.hist(
+    X[:, 1], bins=num_bins, density=True, color="green", rwidth=0.5, alpha=0.5
+)
+plt.grid(True)
+plt.title("原始資料\n平均值100 標準差15")
+
+plt.subplot(224)
+n, bins, patches = plt.hist(
+    X_std[:, 0], bins=num_bins, density=True, color="red", rwidth=0.5, alpha=0.5
+)
+n, bins, patches = plt.hist(
+    X_std[:, 1], bins=num_bins, density=True, color="green", rwidth=0.5, alpha=0.5
+)
+plt.grid(True)
+plt.title("特徵縮放 StandardScaler\n平均值0 標準差1")
+
+show()
+
+print("------------------------------")  # 30個
+
+scaler = MinMaxScaler()  # MMS特徵縮放
+X_mms = scaler.fit_transform(X)
 
 plt.subplot(121)
-plt.scatter(x_train[:, 0], x_train[:, 1], s=30, c="r", label="真實資料")  # 真實資料, 藍點
-plt.scatter(x_train[:, 2], x_train[:, 3], s=30, c="g", label="真實資料")  # 真實資料, 藍點
+plt.scatter(X[:, 0], X[:, 1], c='r', cmap="bwr")
 plt.subplot(122)
-plt.scatter(x_train_mms[:, 0], x_train_mms[:, 1], s=30, c="r", label="真實資料")  # 真實資料, 藍點
-plt.scatter(x_train_mms[:, 2], x_train_mms[:, 3], s=30, c="g", label="真實資料")  # 真實資料, 藍點
+plt.scatter(X_mms[:, 0], X_mms[:, 1], c='r', cmap="bwr")
 plt.suptitle("MMS特徵縮放 => [0, 1]")
-plt.show()
+show()
 
 print("------------------------------")  # 30個
 
-from sklearn.preprocessing import MaxAbsScaler
-
-scaler = MaxAbsScaler()
-x_train_mas = scaler.fit_transform(x_train)  # MAS特徵縮放
+scaler = MaxAbsScaler()  # MAS特徵縮放
+X_mas = scaler.fit_transform(X)
 
 plt.subplot(121)
-plt.scatter(x_train[:, 0], x_train[:, 1], s=30, c="r", label="真實資料")  # 真實資料, 藍點
-plt.scatter(x_train[:, 2], x_train[:, 3], s=30, c="g", label="真實資料")  # 真實資料, 藍點
+plt.scatter(X[:, 0], X[:, 1], s=30, c="r")
 plt.subplot(122)
-plt.scatter(x_train_mas[:, 0], x_train_mas[:, 1], s=30, c="r", label="真實資料")  # 真實資料, 藍點
-plt.scatter(x_train_mas[:, 2], x_train_mas[:, 3], s=30, c="g", label="真實資料")  # 真實資料, 藍點
+plt.scatter(X_mas[:, 0], X_mas[:, 1], s=30, c="r")
 plt.suptitle("MAS特徵縮放 => [-1, 1]")
-plt.show()
+show()
 
 print("MAS特徵縮放")
 
 data = np.array([[1.0, -1.0, 2.0], [2.0, 0.0, 0.0], [0.0, 1.0, -1.0]])
 print(data)
 
-scaler = MaxAbsScaler()
+scaler = MaxAbsScaler()  # MAS特徵縮放
 cc = scaler.fit_transform(data)
 print(cc)
 
@@ -163,26 +164,22 @@ print(cc)
 
 print("------------------------------")  # 30個
 
-from sklearn.preprocessing import RobustScaler
-
-scaler = RobustScaler()
-x_train_rs = scaler.fit_transform(x_train)  # RS特徵縮放
+scaler = RobustScaler()  # RS特徵縮放
+X_rs = scaler.fit_transform(X)
 
 plt.subplot(121)
-plt.scatter(x_train[:, 0], x_train[:, 1], s=30, c="r", label="真實資料")  # 真實資料, 藍點
-plt.scatter(x_train[:, 2], x_train[:, 3], s=30, c="g", label="真實資料")  # 真實資料, 藍點
+plt.scatter(X[:, 0], X[:, 1], s=30, c="r")
 plt.subplot(122)
-plt.scatter(x_train_rs[:, 0], x_train_rs[:, 1], s=30, c="r", label="真實資料")  # 真實資料, 藍點
-plt.scatter(x_train_rs[:, 2], x_train_rs[:, 3], s=30, c="g", label="真實資料")  # 真實資料, 藍點
+plt.scatter(X_rs[:, 0], X_rs[:, 1], s=30, c="r")
 plt.suptitle("RS特徵縮放 中位數和四分位數標準化")
-plt.show()
+show()
 
 print("RS特徵縮放")
 
 data = np.array([[1.0, -2.0, 2.0], [-2.0, 1.0, 3.0], [4.0, 1.0, -2.0]])
 print(data)
 
-scaler = RobustScaler()
+scaler = RobustScaler()  # RS特徵縮放
 cc = scaler.fit_transform(data)
 print(cc)
 
@@ -191,40 +188,9 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-from sklearn.preprocessing import StandardScaler
-
-scaler = StandardScaler()
-data = scaler.fit_transform(
-    [
-        [156, 56, 34, 800000],
-        [180, 73, 21, 620000],
-        [175, 76, 18, 1000000],
-        [148, 46, 26, 430000],
-    ]
-)
-print(data)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-from sklearn.preprocessing import MinMaxScaler
-
-scaler = MinMaxScaler()
-data = scaler.fit_transform(
-    [
-        [156, 56, 34, 800000],
-        [180, 73, 21, 620000],
-        [175, 76, 18, 1000000],
-        [148, 46, 26, 430000],
-    ]
-)
-print(data)
-
-
-from sklearn.preprocessing import MinMaxScaler
 from sklearn.feature_selection import VarianceThreshold
 
-scaler = MinMaxScaler()
+scaler = MinMaxScaler()  # MMS特徵縮放
 data = scaler.fit_transform(
     [[3, 2, 61, 10000], [3, 8, 54, 12000], [3, 4, 60, 10500], [3, 1, 58, 11000]]
 )
@@ -267,10 +233,6 @@ print(dict.get_feature_names_out())
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 from sklearn.feature_extraction.text import CountVectorizer
 
 cv = CountVectorizer()
@@ -285,7 +247,6 @@ print(cv.get_feature_names_out())
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
 from sklearn.feature_extraction.text import CountVectorizer
 
 texts = ["dog and fish, dog and dog", "dog and dog", "dog and cat"]
@@ -298,7 +259,6 @@ print(count_train)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
 from sklearn.feature_extraction.text import CountVectorizer
 
 texts = [
@@ -310,7 +270,6 @@ count_train = count_vectorizer.fit_transform(texts)
 print(count_vectorizer.get_feature_names_out())
 print(count_vectorizer.vocabulary_)
 print(count_train)
-
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -331,7 +290,6 @@ def classify(document):
 
 document = input("Please enter your news description:")
 print("This news review is " + classify(document) + ".")
-
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

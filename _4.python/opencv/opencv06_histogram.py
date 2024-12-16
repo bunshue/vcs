@@ -79,7 +79,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 filename = "C:/_git/vcs/_4.python/_data/ims01.bmp"
 filename = "C:/_git/vcs/_4.python/_data/eq1.bmp"  # 560X400
 
@@ -739,57 +739,17 @@ plt.title("直方圖均衡化處理")
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 ESC = 27
 
 print("------------------------------------------------------------")  # 60個
 
 print("把 直方圖均衡化處理 套用在webcam上 黑白")
-
-cap = cv2.VideoCapture(0)
-
-if not cap.isOpened():
-    print("開啟攝影機失敗")
-    sys.exit()
-else:
-    print("Video device opened")
-
-while True:
-    ret, frame = cap.read()  # 從攝影機擷取一張影像
-
-    if ret == False:
-        print("無影像, 離開")
-        break
-
-    # 原圖
-    cv2.imshow("WebCam1", frame)
-
-    gray1 = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-    cv2.imshow("WebCam2", gray1)
-
-    # 裁切圖片
-    # 裁切區域的 x 與 y 座標（左上角）
-    x_st, y_st = 50, 50
-    # 裁切區域的長度與寬度
-    w, h = 640 - x_st * 2, 480 - y_st * 2
-
-    gray2 = gray1[y_st : y_st + h, x_st : x_st + w]
-    cv2.imshow("WebCam3", gray2)
-
-    gray3 = cv2.equalizeHist(gray2)
-    cv2.imshow("WebCam4", gray3)
-
-    k = cv2.waitKey(1)  # 等待按鍵輸入
-    if k == ESC:
-        break
-
-cap.release()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
 print("把 直方圖均衡化處理 套用在webcam上 彩色")
 
+video_filename = "D:/內視鏡影片/NBI錄影_V20241009_081309.mp4"
+#cap = cv2.VideoCapture(video_filename)
+
 cap = cv2.VideoCapture(0)
 
 if not cap.isOpened():
@@ -805,17 +765,35 @@ while True:
         print("無影像, 離開")
         break
 
+    cut = 80
+
+    #畫一些標記
+    dd = 5
+    topLeft = (cut-dd, cut-dd)
+    bottomRight = (640-cut+dd, 480-cut+dd)
+
+    cv2.rectangle(frame, topLeft, bottomRight, 255, 2)
+
     # 原圖
-    cv2.imshow("WebCam1", frame)
-    # 裁切圖片
+    cv2.imshow("Original", frame)
+
+    # 裁切圖片 ST
     # 裁切區域的 x 與 y 座標（左上角）
-    x_st, y_st = 100, 100
+    x_st, y_st = cut, cut
     # 裁切區域的長度與寬度
     w, h = 640 - x_st * 2, 480 - y_st * 2
-
     frame2 = frame[y_st : y_st + h, x_st : x_st + w]
+    frame3 = frame2
+    # 裁切圖片 SP
 
-    b, g, r = cv2.split(frame2)
+    gray1 = cv2.cvtColor(frame2, cv2.COLOR_BGR2GRAY)
+    #cv2.imshow("Gray", gray1)
+
+    gray2 = cv2.equalizeHist(gray1)
+    cv2.imshow("Histogram1", gray2)
+    # 裁切圖片 SP
+
+    b, g, r = cv2.split(frame3)
 
     bb = cv2.equalizeHist(b)
     gg = cv2.equalizeHist(g)
@@ -823,7 +801,7 @@ while True:
 
     frame3 = cv2.merge([bb, gg, rr])
 
-    cv2.imshow("WebCam4", frame3)
+    cv2.imshow("Histogram2", frame3)
 
     k = cv2.waitKey(1)  # 等待按鍵輸入
     if k == ESC:
@@ -833,14 +811,21 @@ cap.release()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
+sys.exit()
 
 
 print("------------------------------------------------------------")  # 60個

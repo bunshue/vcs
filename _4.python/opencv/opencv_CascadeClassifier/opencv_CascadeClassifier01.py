@@ -25,7 +25,7 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
-print("------------------------------------------------------------")  # 60個
+print("-----------------------------LANCZOS-------------------------------")  # 60個
 
 # OpenCV 人臉識別分類器 Haar Cascase
 xml_filename = "C:/_git/vcs/_1.data/______test_files1/_material/_face-detection/haarcascades/haarcascade_frontalface_default.xml"
@@ -90,13 +90,9 @@ for (x, y, w, h) in faces:
     image = cv2.rectangle(image, (x, y), (x + w, y + h), (0, 255, 0), 3)
 """
 
-# cv2.namedWindow('video', cv2.WINDOW_NORMAL)
-
 # 顯示結果
 # cv2.imshow(image)
 cv2.imshow("New Picture", image)  # 顯示圖片
-
-print("wait here")
 cv2.waitKey(0)
 print("收到按鍵")
 
@@ -255,7 +251,6 @@ for ex, ey, ew, eh in eyes:
 # cv2.imshow(image)
 cv2.imshow("New Picture", img)  # 顯示圖片
 
-print("wait here")
 cv2.waitKey(0)
 print("收到按鍵")
 
@@ -463,8 +458,6 @@ cv2.imshow("img", img)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
-sys.exit()
-
 print("------------------------------------------------------------")  # 60個
 
 xml_filename = r"C:\_git\vcs\_4.python\_data\haarcascade_frontalface_default.xml"
@@ -544,8 +537,6 @@ cv2.imshow("Face", img)  # 顯示影像
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
-sys.exit()
-
 print("------------------------------------------------------------")  # 60個
 
 xml_filename = r"C:\_git\vcs\_4.python\_data\haarcascade_frontalface_default.xml"
@@ -594,6 +585,10 @@ for x, y, w, h in faces:
 
 cv2.namedWindow("FaceRecognition", cv2.WINDOW_NORMAL)
 cv2.imshow("FaceRecognition", img)
+
+
+
+sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1510,3 +1505,10 @@ face_shot("who")  # 呼叫自訂函式
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
+
+#若有多個視窗 要指名視窗名稱
+cv2.namedWindow('video', cv2.WINDOW_NORMAL)
+
+
+

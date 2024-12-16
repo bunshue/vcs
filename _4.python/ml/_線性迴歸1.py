@@ -42,13 +42,13 @@ from sklearn.model_selection import train_test_split  # 資料分割 => 訓練�
 
 
 def show():
-    # plt.show()
+    plt.show()
     pass
 
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
+'''
 # 簡單資料 y = x
 xx = np.array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
 yy0 = xx  # 理想資料, y = x
@@ -701,32 +701,7 @@ print(y_pred)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-print("簡單線性回歸")
-
-dataset = pd.read_csv("data/studentscores.csv")
-X = dataset.iloc[:, :1].values
-Y = dataset.iloc[:, 1].values
-
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
-x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size=0.4)
-# 訓練組8成, 測試組2成
-
-linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
-
-linear_regression.fit(x_train, y_train)  # 學習訓練.fit
-
-plt.scatter(X, Y, color="b", label="真實資料")
-
-y_pred = linear_regression.predict(x_test)  # 預測.predict
-plt.plot(x_test, y_pred, "mo-", label="線性迴歸2")
-
-plt.legend()
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
+'''
 print("多元线性回归（Multiple Linear Regression）")
 
 # 讀取資料
@@ -2272,3 +2247,18 @@ plt.grid(which="minor", linestyle=":", linewidth="0.5", color="black")
 x_train, x_test, y_train, y_test = train_test_split(
     X, y, test_size=0.2, random_state=9487
 )  # 訓練組8成, 測試組2成
+
+
+
+
+#應該沒有用
+linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
+linear_regression.fit(x_train, y_train)  # 學習訓練.fit
+plt.scatter(X, Y, color="b", label="真實資料")
+y_pred = linear_regression.predict(x_test)  # 預測.predict
+plt.plot(x_test, y_pred, "mo-", label="線性迴歸2")
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+

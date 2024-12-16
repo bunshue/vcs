@@ -103,6 +103,14 @@ print(df.index)
 print("df 之 某欄")
 print(df["體重"])
 
+column1 = df.iloc[:, :2].values#取出前2欄
+column2 = df.iloc[:, 2].values#取出第2欄
+
+print("取出前2欄")
+print(column1)
+print("取出第2欄")
+print(column2)
+
 print("------------------------------------------------------------")  # 60個
 
 filename = "data/animals.csv"

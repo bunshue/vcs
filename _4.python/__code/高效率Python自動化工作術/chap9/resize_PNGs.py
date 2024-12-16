@@ -25,17 +25,23 @@ def savepng(readfile, savefolder):
         return msg
     except:
         return readfile + "：程式執行失敗。"
+
+
 #【函數: 處理資料夾之內的圖片檔】
 def savefiles(infolder, savefolder):
     msg = ""
     for ext in extlist:                     #以多個副檔名調查
         filelist = []
         for p in Path(infolder).glob(ext):  #將這個資料夾的檔案
+            print("aaaaa", str(p))
             filelist.append(str(p))         #新增至列表
         for filename in sorted(filelist):   #再替每個檔案排序
+            print("bbbbb", filename)
             msg += savepng(filename, savefolder)
     return msg
+
 
 #【執行函數】
 msg = savefiles(infolder, value1)
 print(msg)
+
