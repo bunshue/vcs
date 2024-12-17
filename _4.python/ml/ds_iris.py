@@ -6,9 +6,8 @@ Iris 鳶尾花數據庫 150筆資料 4個欄位 3種品種 每種50筆資料
 取自美國加州大學歐文分校的機器學習資料庫http://archive.ics.uci.edu/ml/datasets/Iris
 資料的筆數為150筆，共有五個欄位：
 
-# sepal_length,sepal_width,petal_length,petal_width,species
-
-4個欄位 #sepal_length, sepal_width, petal_length, petal_width, species
+        萼長SL        萼寬SW       瓣長PL        瓣寬PW       品種
+4個欄位 sepal_length, sepal_width, petal_length, petal_width, species
 萼長 花萼長度(Sepal.Length)(cm)
 萼寬 花萼寬度(Sepal.Width)(cm)
 瓣長 花瓣長度(Petal.Length)(cm)
@@ -16,15 +15,12 @@ Iris 鳶尾花數據庫 150筆資料 4個欄位 3種品種 每種50筆資料
 
 # ['sepal length (cm)', 'sepal width (cm)', 'petal length (cm)', 'petal width (cm)']
 # 有四個 features: 花萼長度、花萼寬度 和 花瓣長度、花瓣寬度
-# sepal 花萼
-# petal  花瓣
 
-
-3種品種 類別(Class)
+3種品種 類別(Class/Species)
 ['setosa' 'versicolor' 'virginica']
+# 山鳶尾   變色鳶尾    維吉尼亞鳶尾
 
 #鳶尾花(Iris)品種的辨識
-
 標準的分類問題: 這是哪種鳶尾花
 
 鳶尾花 (Iris)  數據庫是很有名的資料,
@@ -59,7 +55,6 @@ from common1 import *
 from sklearn import datasets
 from sklearn import preprocessing
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
-from sklearn.svm import SVC
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import ConfusionMatrixDisplay
@@ -73,65 +68,49 @@ print("------------------------------------------------------------")  # 60個
 
 
 def show():
-    # plt.show()
+    plt.show()
     pass
 
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("鳶尾花數據庫 基本數據")
+print("鳶尾花數據庫 基本數據 load_iris()")
 
-iris = datasets.load_iris()
+X, y = datasets.load_iris(return_X_y=True)  # 分別回傳兩種資料
+iris = datasets.load_iris()  # 回傳iris包含data和target兩欄位資料
 
 print("所有資料 :", iris)
-print("data :", iris.data)
-print("target :", iris.target)
+# print("資料集資料 :", iris.data)  many # X
+print("target :", iris.target)  # y
 
-# 資料集目標名稱
-print("target_names :", iris.target_names)
+print("共有 :", len(iris.data), "筆資料")
 
-print("DESCR :", iris.DESCR)
-print("feature_names :", iris.feature_names)
+print("資料集目標/答案")
+print(iris.target)
+
+print("資料集目標名稱：")
+print(iris.target_names)
+
+print("鳶尾花資料集描述")
+print(iris.DESCR)
+
+print("特徵名稱(資料集欄位)：")
+print(iris.feature_names)
+
 print("filename :", iris.filename)
 print("data_module :", iris.data_module)
 
-print("原始_特徵：{}, 原始_目標：{}".format(iris.data.shape, iris.target.shape))
-
+print("keys")
 print(iris.keys())
-print("---------------------------")
-print(iris.data.shape)
-print("---------------------------")
 
-print("特徵值：")
+print("iris.data.shape :", iris.data.shape)
+print("iris.target.shape :", iris.target.shape)
+
+print("前幾筆資料內容：")
 print(iris.data[0:3])
-print("目標值：")
-print(iris.target)
-print("特徵名稱(資料集欄位)：")
-print(iris.feature_names)
-print("目標名稱：")
-print(iris.target_names)
-print("鳶尾花資料集描述")
-print(iris.DESCR)
-print("資料集資料")
-print(iris.data)
-print("資料集目標名稱")
-print(iris.target_names)
-print("資料集目標")
-print(iris.target)
-print("看鳶尾花數據庫的features")
-print(iris.feature_names)
-
-print("觀察資料集彙總資訊")
-
-print(iris.data)
-print(type(iris.data))
-print(len(iris.data))
-print(iris.data.shape)
 print(iris.data[5])  # 第5筆資料
 print(iris.data[:5])  # 前5筆資料
-print("答案")
-print(iris.target)
 
 """
 #debug 10筆資料
@@ -155,47 +134,14 @@ iristarget = [0, 0, 0, 1, 1, 1, 2, 2, 2, 2]
 iris.target = np.array(iristarget)
 """
 
-"""
-print('data')
-print(iris.data)
-print('target')
-print(iris.target)
-"""
-
-print("共有 :", len(iris.data), "筆資料")
-
-# 資料內容
-# 這些數據中, data 就是我們的 x (輸入), target 是 y (輸出)。
-# 輸入的數據四個 features 是: 花萼長度、花萼寬度、花瓣長度、花瓣寬度。
-# print(iris.data)   many
-
-# 輸出就是某筆數據是哪種 (事實上是哪個亞屬) 的鳶尾花, 共分為 0, 1, 2 三種。
-# print(iris.target)
-
-# 只用部份 features
-# 我們只選用花萼長度、花萼寬度 (當然只是例子, 事實上四個參數很少, 全部一起來也可以) 當輸入資料。
-# 準備輸入及輸出數據, 注意 4 個特徵我們只用了兩個。
-
-
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
-x_train, x_test, y_train, y_test = train_test_split(
-    iris.data, iris.target, test_size=0.2
-)
-# 訓練組8成, 測試組2成
-
-print("訓練_特徵：{}, 訓練_目標：{}".format(x_train.shape, y_train.shape))
-print("測試_特徵：{}, 測試_目標：{}".format(x_test.shape, y_test.shape))
-
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("iris 轉 df, 再看iris資料")
+print("鳶尾花數據庫 基本數據 load_iris()轉df, 再看iris資料")
 
 df = pd.DataFrame(iris.data, columns=iris.feature_names)
 
-print("觀察資料集彙總資訊")
-# 了解行資料的標題與資料型別(整數、浮點數、字串等)
+print("觀察資料集彙總資訊")  # 了解行資料的標題與資料型別(整數、浮點數、字串等)
 df.info()  # 這樣就已經把資料集彙總資訊印出來
 
 print("描述統計量")
@@ -223,13 +169,7 @@ print(df["petal width (cm)"].head())
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-data, label = datasets.load_iris(return_X_y=True)
-
-print("鳶尾花花萼和花瓣數據")
-print(data[0:5])
-print(f"分類 : {label[0:5]}")
-
-print("------------------------------------------------------------")  # 60個
+print("讀取csv檔案成df")
 
 filename = "data/iris_sample.csv"
 
@@ -289,6 +229,8 @@ print("Virginica :", Virginica)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
+print("讀取csv檔案成df")
 
 filename = "data/iris_sample.csv"
 
@@ -376,9 +318,9 @@ plt.scatter(
 )
 
 # 添加轴标签和标题
-plt.title("花瓣长度与宽度的关系", fontsize=20)
-plt.xlabel("花瓣的长度", fontsize=15)
-plt.ylabel("花瓣的宽度", fontsize=15)
+plt.title("花瓣长度 vs 花瓣宽度")
+plt.xlabel("花瓣长度")
+plt.ylabel("花瓣宽度")
 plt.legend(loc="best")  # 添加图例
 
 show()
@@ -386,33 +328,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-"""
-import matplotlib as mpl
-
-# 获取图的坐标信息
-ax = plt.gca()
-# 设置日期的显示格式
-date_format = mpl.dates.DateFormatter("%m-%d")
-ax.xaxis.set_major_formatter(date_format)
-# 设置x轴显示多少个日期刻度
-# xlocator = mpl.ticker.LinearLocator(10)
-# 设置x轴每个刻度的间隔天数
-xlocator = mpl.ticker.MultipleLocator(7)
-ax.xaxis.set_major_locator(xlocator)
-
-# 为了避免x轴刻度标签的紧凑，将刻度标签旋转45度
-plt.xticks(rotation = 45)
-# 添加y轴标签
-plt.ylabel('人数')
-# 添加图形标题
-plt.title('每天微信文章阅读人数与人次趋势')
-# 添加图例Virginica
-#plt.legend()
-# 显示图形
-
-plt.show()
-show()
-"""
+print("讀取csv檔案成df")
 
 iris = pd.read_csv("data/iris.csv")
 print(iris.shape)
@@ -464,317 +380,6 @@ print("------------------------------------------------------------")  # 60個
 
 iris = datasets.load_iris()
 
-# 2. 資料清理、資料探索與分析
-
-df = pd.DataFrame(iris.data, columns=iris.feature_names)
-# print(df)
-
-# 資料集目標
-y = iris.target
-# print(y)
-
-# 箱型圖
-sns.boxplot(data=df)
-plt.title("鳶尾花資料分布箱型圖")
-show()
-
-print("是否有含遺失值(Missing value)")
-cc = df.isnull().sum()
-print(cc)
-
-print("y 各類別資料筆數統計")
-"""
-sns.countplot(x=y)
-plt.title("y 各類別資料筆數統計")
-show()
-"""
-print("以Pandas函數統計各類別資料筆數")
-cc = pd.Series(y).value_counts()
-print(cc)
-
-# 3. 不須進行特徵工程
-
-# 4. 資料分割
-
-# 指定X，並轉為 Numpy 陣列
-X = df.values
-
-# 訓練資料, 測試資料, 訓練目標, 測試目標
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
-# 訓練組8成, 測試組2成
-
-# 查看陣列維度
-cc = X_train.shape, X_test.shape, y_train.shape, y_test.shape
-print(cc)
-
-print("訓練目標")
-# print(y_train)
-
-print("測試目標")
-print(y_test)
-
-print("特徵縮放")
-scaler = preprocessing.StandardScaler()
-X_train_std = scaler.fit_transform(X_train)
-X_test_std = scaler.transform(X_test)
-
-# 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
-logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
-
-logistic_regression.fit(X_train_std, y_train)
-
-# 模型評估
-y_pred = logistic_regression.predict(X_test_std)
-print("預測目標")
-print(y_pred)
-
-print("計算準確率 測試目標 與 預測目標 接近程度")
-print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
-
-print("混淆矩陣")
-print(confusion_matrix(y_test, y_pred))
-
-print("混淆矩陣圖")
-disp = ConfusionMatrixDisplay(
-    confusion_matrix=confusion_matrix(y_test, y_pred), display_labels=iris.target_names
-)
-disp.plot()
-plt.title("混淆矩陣圖")
-show()
-
-print("將 模型存檔 使用 joblib")
-joblib.dump(logistic_regression, "tmp_my_model_clf1.joblib")
-joblib.dump(scaler, "tmp_my_model_scaler1.joblib")
-
-print("------------------------------")  # 30個
-
-print("讀取模型")
-# 載入模型與標準化轉換模型
-logistic_regression2 = joblib.load("tmp_my_model_clf1.joblib")
-scaler = joblib.load("tmp_my_model_scaler1.joblib")
-
-# 測試資料
-sepal_length, sepal_width, petal_length, petal_width = 5.8, 3.5, 4.4, 1.3
-
-X_new = [[sepal_length, sepal_width, petal_length, petal_width]]
-X_new = scaler.transform(X_new)
-
-labels = ["setosa", "versicolor", "virginica"]
-# 山鳶尾 變色鳶尾 維吉尼亞鳶尾
-
-print("### 預測品種是：", labels[logistic_regression2.predict(X_new)[0]])
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-iris = datasets.load_iris()
-
-# 2. 資料清理、資料探索與分析
-
-df = pd.DataFrame(iris.data, columns=iris.feature_names)
-# print(df)
-
-# 資料集目標
-y = iris.target
-# print(y)
-
-# 集中
-cc = (
-    df["sepal length (cm)"].mean(),
-    df["sepal length (cm)"].median(),
-    df["sepal length (cm)"].mode(),
-)
-print(cc)
-
-# 計算變異數(variance)、標準差(standard deviation)、IQR
-cc = (
-    df["sepal length (cm)"].var(),
-    df["sepal length (cm)"].std(),
-    df["sepal length (cm)"].quantile(0.75) - df["sepal length (cm)"].quantile(0.25),
-)
-
-print(cc)
-
-# (0.6856935123042505, 0.8280661279778629, 1.3000000000000007)
-
-# 計算偏態(skewness)及峰度(kurtosis)
-cc = df["sepal length (cm)"].skew(), df["sepal length (cm)"].kurt()
-print(cc)
-
-# 自行計算偏態
-mean1 = df["sepal length (cm)"].mean()
-std1 = df["sepal length (cm)"].std()
-n = len(df["sepal length (cm)"])
-skew1 = (
-    (((df["sepal length (cm)"] - mean1) / std1) ** 3).sum() * n / ((n - 1) * (n - 2))
-)
-print(skew1)
-
-# 0.31491095663697277
-
-# 自行計算峰度
-M2 = (((df["sepal length (cm)"] - mean1) / std1) ** 2).mean()
-M4 = (((df["sepal length (cm)"] - mean1) / std1) ** 4).mean()
-K = M4 / (M2**2)
-print(K - 3)
-
-# -0.5735679489249756
-
-from scipy.stats import kurtosis
-
-print(kurtosis(df["sepal length (cm)"], axis=0, bias=True))
-
-# -0.5735679489249765
-
-# 直方圖
-sns.histplot(x="sepal length (cm)", data=df)
-show()
-
-# 直方圖平滑化
-sns.kdeplot(x="sepal length (cm)", data=df)
-show()
-
-# 右偏
-
-data1 = np.random.normal(0, 1, 500)
-data2 = np.random.normal(5, 1, 100)
-data = np.concatenate((data1, data2))
-sns.kdeplot(data=data)
-pd.DataFrame(data).skew()
-show()
-
-# 右偏
-
-data1 = np.random.normal(0, 1, 100)
-data2 = np.random.normal(5, 1, 500)
-data = np.concatenate((data1, data2))
-sns.kdeplot(data=data)
-pd.DataFrame(data).skew()
-show()
-
-# 關聯度
-
-df["y"] = y
-cc = df.corr()
-print(cc)
-
-# 箱型圖
-sns.boxplot(data=df)
-plt.title("鳶尾花資料分布箱型圖")
-show()
-
-print("是否有含遺失值(Missing value)")
-cc = df.isnull().sum()
-print(cc)
-
-print("y 各類別資料筆數統計")
-"""
-sns.countplot(x=y)
-plt.title("y 各類別資料筆數統計")
-show()
-"""
-print("以Pandas函數統計各類別資料筆數")
-cc = pd.Series(y).value_counts()
-print(cc)
-
-# 3. 不須進行特徵工程
-
-# 4. 資料分割
-
-# 指定X，並轉為 Numpy 陣列
-X = df.values
-
-# 訓練資料, 測試資料, 訓練目標, 測試目標
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
-# 訓練組8成, 測試組2成
-
-# 查看陣列維度
-cc = X_train.shape, X_test.shape, y_train.shape, y_test.shape
-print(cc)
-
-print("訓練目標")
-# print(y_train)
-
-print("測試目標")
-print(y_test)
-
-print("特徵縮放")
-scaler = preprocessing.StandardScaler()
-X_train_std = scaler.fit_transform(X_train)
-X_test_std = scaler.transform(X_test)
-
-# 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
-logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
-
-logistic_regression.fit(X_train_std, y_train)
-
-y_pred = logistic_regression.predict(X_test_std)
-print("預測目標")
-print(y_pred)
-
-print("計算準確率 測試目標 與 預測目標 接近程度")
-print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
-
-print("混淆矩陣")
-print(confusion_matrix(y_test, y_pred))
-
-print("混淆矩陣圖")
-disp = ConfusionMatrixDisplay(
-    confusion_matrix=confusion_matrix(y_test, y_pred), display_labels=iris.target_names
-)
-disp.plot()
-plt.title("混淆矩陣圖")
-show()
-
-print("將 模型存檔 使用 joblib")
-joblib.dump(logistic_regression, "tmp_my_model_clf2.joblib")
-joblib.dump(scaler, "tmp_my_model_scaler2.joblib")
-
-print("------------------------------")  # 60個
-
-print("讀取模型")
-# 載入模型與標準化轉換模型
-logistic_regression2 = joblib.load("tmp_my_model_clf2.joblib")
-scaler = joblib.load("tmp_my_model_scaler2.joblib")
-
-# 測試資料
-sepal_length, sepal_width, petal_length, petal_width = 5.8, 3.5, 4.4, 1.3
-
-X_new = [[sepal_length, sepal_width, petal_length, petal_width]]
-""" NG
-X_new = scaler.transform(X_new)
-
-labels = ["setosa", "versicolor", "virginica"]
-# 山鳶尾 變色鳶尾 維吉尼亞鳶尾
-
-print("### 預測品種是：", labels[logistic_regression2.predict(X_new)[0]])
-"""
-
-""" 使用 streamlit 與人互動
-
-import streamlit as st
-
-# 設定 st 標題
-st.title('鳶尾花（Iris）預測')
-
-# 製作4個 st slider
-sepal_length = st.slider('花萼長度:', min_value=3.0, max_value=8.0, value=5.8)
-sepal_width = st.slider('花萼寬度:', min_value=2.0, max_value=5.0, value=3.5)
-petal_length = st.slider('花瓣長度:', min_value=1.0, max_value=7.0, value=4.4)
-petal_width = st.slider('花瓣寬度:', min_value=0.1, max_value=2.5, value=1.3)
-
-if st.button('預測'):  # 當按下 預測 按鈕
-    X_new = [[sepal_length,sepal_width,petal_length,petal_width]]
-    X_new = scaler.transform(X_new)
-    st.write('### 預測品種是：', labels[logistic_regression2.predict(X_new)[0]])
-"""
-
-print("------------------------------------------------------------")  # 60個
-
-iris = datasets.load_iris()
-
 X = pd.DataFrame(iris.data, columns=iris.feature_names)
 X.columns = ["sepal_length", "sepal_width", "petal_length", "petal_width"]
 target = pd.DataFrame(iris.target, columns=["target"])
@@ -816,9 +421,7 @@ dtree = tree.DecisionTreeClassifier(max_depth=8)
 dtree.fit(XTrain, yTrain)
 
 print("準確率:", dtree.score(XTest, yTest))
-print("---------------------------")
 print(dtree.predict(XTest))
-print("---------------------------")
 print(yTest.values)
 
 print("------------------------------------------------------------")  # 60個
@@ -844,6 +447,8 @@ with open("tmp_tree2.dot", "w") as f:
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
+print("讀取csv檔案成df")
 
 df = pd.read_csv("data/iris.csv")
 
@@ -893,6 +498,7 @@ clf = clf.fit(iris.data)
 print(clf.transform(iris.data))  # 変換したデータ
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 from sklearn.mixture import GaussianMixture
 
@@ -906,18 +512,23 @@ print(clf.means_)  # 各ガウス分布の平均
 print(clf.covariances_)  # 各ガウス分布の分散
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-# 決策樹 (decision tree)
+print("決策樹 (decision tree)")
 
 from sklearn.tree import DecisionTreeClassifier
 
-dx, dy = datasets.load_iris(return_X_y=True)
+X, y = datasets.load_iris(return_X_y=True)
 
-print(dx[0])
-print(dy[0])
+print("鳶尾花花萼和花瓣數據")
+print(X[0:5])
+print(f"分類 : {y[0:5]}")
+
+print(X[0])
+print(y[0])
 
 # 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
-dx_train, dx_test, dy_train, dy_test = train_test_split(dx, dy, test_size=0.2)
+dx_train, dx_test, dy_train, dy_test = train_test_split(X, y, test_size=0.2)
 # 訓練組8成, 測試組2成
 
 tree = DecisionTreeClassifier()
@@ -931,15 +542,16 @@ print(tree.score(dx_train, dy_train))
 print(tree.score(dx_test, dy_test))
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-# 隨機森林 (random forest)
+print("隨機森林 (random forest)")
 
 from sklearn.ensemble import RandomForestClassifier
 
-dx, dy = datasets.load_iris(return_X_y=True)
+X, y = datasets.load_iris(return_X_y=True)
 
 # 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
-dx_train, dx_test, dy_train, dy_test = train_test_split(dx, dy, test_size=0.2)
+dx_train, dx_test, dy_train, dy_test = train_test_split(X, y, test_size=0.2)
 # 訓練組8成, 測試組2成
 
 forest = RandomForestClassifier()
@@ -955,476 +567,7 @@ print(forest.score(dx_test, dy_test))
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-iris = datasets.load_iris()
-
-"""
-print("另存新檔");
-filename = 'tmp_aaaa.csv'
-np.savetxt(filename, iris.data, delimiter=',')
-print("寫入完成")
-"""
-
-# :2 是 前兩個 => 花萼
-# 2: 是 第2個(含)以後 => 花瓣
-
-# 準備 inputs 和 outputs
-x = iris.data
-y = iris.target
-
-# X = x[:, :2]   #初~2 花萼
-X = x[:, 2:]  # 2~末 花瓣
-Y = y
-
-# 只選兩個 features 原因之一是好畫 :)
-
-plt.scatter(X[:, 0], X[:, 1], c="pink", s=150)
-plt.scatter(X[:, 0], X[:, 1], s=50, c=Y, alpha=0.6)
-plt.title("花瓣 原始資料")
-show()
-
-# 試著用我們學過的方式, 看能不能做出一個分類器函數, 來把鳶尾花正確分類!
-
-# 準備 inputs 和 outputs
-x = iris.data
-y = iris.target
-
-# 為了表示我們很神 (事實上只是好畫圖), 我們只用兩個 features (花瓣長度、寬度)。
-# X = x[:, :2]   #初~2 花萼
-X = x[:, 2:]  # 2~末 花瓣
-Y = y
-
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
-x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size=0.2)
-# 訓練組8成, 測試組2成
-
-# 看一下整筆數據的分佈。
-plt.scatter(X[:, 0], X[:, 1], c=Y, cmap="Paired")
-plt.title("花瓣 原始資料")
-show()
-
-# 看訓練結果
-plt.scatter(x_train[:, 0], x_train[:, 1], c=y_train)
-plt.title("花瓣 訓練資料")
-show()
-
-# 鳶尾花 (Iris) 的數據, 有三類的鳶尾花我們想用 SVM 做分類。
-
-clf = SVC()
-
-clf.fit(x_train, y_train)
-
-y_predict = clf.predict(x_test)
-
-print("看看我們模型預測和真實狀況差多少?")
-print(y_predict - y_test)
-
-# 看看有沒有不準的?
-y_predict = clf.predict(x_test)
-
-# 這時因為如果答對了, 我們和正確答案相減就是 0。學得不錯就會大部份是 0, 錯的不是 0 畫出來就會不同色。我們來試試看。
-plt.scatter(x_test[:, 0], x_test[:, 1], c=y_predict - y_test)
-plt.title("看差值")
-show()
-
-plt.scatter(x_test[:, 0], x_test[:, 1], c=y_predict)
-plt.title("看最後預測結果")
-show()
-
-# 現在我們做的是讓平面上密密麻麻的點都去看它會是哪種鳶尾花的數據。
-
-x1, y1 = np.meshgrid(np.arange(0, 7, 0.02), np.arange(0, 3, 0.02))
-
-# 記得 x1, y1 是什麼樣子的, 我們要拉平之後 (x1_ravel(), y1_ravel()), 再用 np.c_ 合成一點一點的, 才可以送進去預測。
-
-Z = clf.predict(np.c_[x1.ravel(), y1.ravel()])
-
-# 好奇的話可以看看我們到底送了多少點進去?
-
-print(len(x1.ravel()))
-
-# 52500
-
-# 等一下我們要用 contourf 做填充型的等高線, 每一點的「高度」就是我們的 SVC 學習機判斷鳶尾花的亞種。但用 contourf 輸入的格點是前面 meshgrid 後的 x1, y1, 而高度 Z 也是要用同樣的型式。
-
-Z = Z.reshape(x1.shape)
-
-# 於是我們終於可以畫圖了...
-
-plt.scatter(x_test[:, 0], x_test[:, 1], c=y_test)
-plt.contourf(x1, y1, Z, alpha=0.3)
-show()
-
-# 這是測試資料, 之前我們已經知道我們全對!
-# 不如就來看看所有鳶尾花資料我們 SVC 的表現。
-
-plt.scatter(X[:, 0], X[:, 1], c=Y)
-plt.contourf(x1, y1, Z, alpha=0.3)
-show()
-
-# 在測試資料中是全對!! 我們畫圖來看看整體表現如何?
-# 畫出結果
-x0 = np.linspace(0, 7.5, 500)
-y0 = np.linspace(0, 2.7, 500)
-
-xm, ym = np.meshgrid(x0, y0)
-P = np.c_[xm.ravel(), ym.ravel()]
-z = clf.predict(P)
-Z = z.reshape(xm.shape)
-plt.contourf(xm, ym, Z, alpha=0.3)
-plt.scatter(X[:, 0], X[:, 1], c=Y)
-
-show()
-
-x0 = np.linspace(3, 8, 500)
-y0 = np.linspace(1.5, 4.5, 500)
-
-xm, ym = np.meshgrid(x0, y0)
-P = np.c_[xm.ravel(), ym.ravel()]
-z = clf.predict(P)
-Z = z.reshape(xm.shape)
-plt.contourf(xm, ym, Z, alpha=0.3)
-
-plt.scatter(X[:, 0], X[:, 1], c=Y)
-show()
-
-# 畫出結果
-x1, x2 = np.meshgrid(np.arange(0, 7, 0.02), np.arange(0, 3, 0.02))
-Z = clf.predict(np.c_[x1.ravel(), x2.ravel()])
-Z = Z.reshape(x1.shape)
-plt.contourf(x1, x2, Z, alpha=0.3)
-plt.scatter(X[:, 0], X[:, 1], c=Y)
-show()
-
-x1, x2 = np.meshgrid(np.arange(0, 7, 0.02), np.arange(0, 3, 0.02))
-xx = [1, 2, 3, 4]
-yy = [5, 6, 7, 8]
-np.c_[xx, yy]
-Z = clf.predict(np.c_[x1.ravel(), x2.ravel()])
-Z = Z.reshape(x1.shape)
-plt.contourf(x1, x2, Z, cmap=plt.cm.coolwarm, alpha=0.8)
-plt.scatter(X[:, 0], X[:, 1], c=Y)
-plt.title("更炫的畫圖法")
-show()
-
-"""
-X, Y = np.meshgrid(np.arange(4, 8, 0.02), np.arange(2, 4.5, 0.02))
-x_data = np.c_[X.ravel(), Y.ravel()]
-data_pred = clf.predict(x_data)
-Z = data_pred.reshape(X.shape)
-plt.contourf(X, Y, Z, alpha = 0.3)
-plt.scatter(x[:, 0], x[:, 1], c = y)
-show()
-"""
-
-# 畫出結果
-x1, x2 = np.meshgrid(np.arange(0, 7, 0.02), np.arange(0, 3, 0.02))
-Z = clf.predict(np.c_[x1.ravel(), x2.ravel()])
-Z = Z.reshape(x1.shape)
-plt.contourf(x1, x2, Z, alpha=0.3)
-plt.scatter(X[:, 0], X[:, 1], c=Y)
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# 全部訓練 SVM
-
-iris = datasets.load_iris()
-
-# 資料內容 iris.data
-# 鳶尾花 (Iris) 的數據, 有三類的鳶尾花我們想用 SVM 做分類。
-# 答案 iris.target
-
-x = iris.data[:, :2]
-y = iris.target
-
-plt.scatter(x[:, 0], x[:, 1], s=50, c=y)
-plt.title("原圖")
-show()
-
-clf = SVC()
-
-clf.fit(x, y)
-clf.predict(x)
-clf.predict(x) - y
-gd = np.array([[i, j] for i in np.arange(4, 8, 0.2) for j in np.arange(1.8, 4.5, 0.2)])
-gdc = clf.predict(gd)
-
-plt.scatter(gd[:, 0], gd[:, 1], s=50, c=gdc)
-plt.title("SVM結果")
-
-show()
-
-# 呈現學習成果
-# 學出來的用比較透明的顏色, 真實資料用 100% 不透明。
-
-gd = np.array([[i, j] for i in np.arange(4, 8, 0.1) for j in np.arange(1.8, 4.5, 0.1)])
-gdc = clf.predict(gd)
-
-plt.scatter(gd[:, 0], gd[:, 1], s=50, c=gdc, alpha=0.4)
-plt.scatter(x[:, 0], x[:, 1], s=50, c=y)
-
-plt.title("SVM結果2")
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-
-# PCA 可以救鳶尾花嗎？
-from sklearn.decomposition import PCA
-
-pca = PCA(n_components=2)
-
-pca.fit(x)
-
-X = pca.transform(x)
-# 我們來看原來的樣子, 是一個 4 維的向量。
-print(x.shape)
-print(len(x))
-print(x)
-print(x[7])
-
-# 經 PCA 之後, 濃縮成 2 維向量。
-print(X.shape)
-print(len(X))
-print(X)
-print(X[7])
-
-# 看看 PCA 後, 來看看整個分布的狀況。
-
-plt.scatter(X[:, 0], X[:, 1], c=y, cmap="Paired")
-show()
-
-# 看來好像真的會比較容易切開, 我們來試試是否真的這樣。先來分訓練和測試資料。
-
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
-x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
-# 訓練組8成, 測試組2成
-
-clf = SVC()
-
-clf.fit(x_train, y_train)
-
-SVC()
-
-x0 = np.arange(-4, 4.2, 0.02)
-y0 = np.arange(-1.5, 1.7, 0.02)
-
-xm, ym = np.meshgrid(x0, y0)
-P = np.c_[xm.ravel(), ym.ravel()]
-z = clf.predict(P)
-Z = z.reshape(xm.shape)
-plt.contourf(xm, ym, Z, alpha=0.3, cmap="Paired")
-plt.scatter(X[:, 0], X[:, 1], c=y, cmap="Paired")
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# 把鳶尾花的資料集讀進來
-
-iris = datasets.load_iris()
-
-# 分好 features 跟 target
-X = iris.data
-Y = iris.target
-
-# 照著題目的說明，只拿花萼的 features 來用
-# 分好訓練跟測試資料，再把「正確答案」的分佈畫一下做個確認
-
-X = X[:, :2]
-
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
-x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size=0.2)
-# 訓練組8成, 測試組2成
-
-plt.scatter(x_train[:, 0], x_train[:, 1], c=y_train)
-show()
-
-# 設定一個 SVM 的函數學習機，把訓練資料放進去 train
-
-clf = SVC()
-
-clf.fit(x_train, y_train)
-
-"""
-SVC(C=1.0, break_ties=False, cache_size=200, class_weight=None, coef0=0.0,
-,    decision_function_shape='ovr', degree=3, gamma='scale', kernel='rbf',
-,    max_iter=-1, probability=False, random_state=None, shrinking=True,
-,    tol=0.001, verbose=False)
-"""
-
-# 稍微瞄一下預測結果跟正確答案的差距，發現大致上做得還不錯！
-# 而且好像比原本用花瓣的 features 還要好！
-# 選擇 features 真的很重要！
-
-y_predict = clf.predict(x_test)
-print(y_predict - y_test)
-y_predict - y_test
-
-"""
-array([ 0,  0,  0,  0,  0,  1,  0,  0,  0,  1,  0,  0,  0,  0,  0,  0,  0,
-,        0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, -1])
-"""
-
-# 當然要畫個圖看一下，這樣還可以確認哪些特殊的情況下模型會分不好
-plt.scatter(x_test[:, 0], x_test[:, 1], c=y_predict - y_test)
-show()
-
-# 也可以畫這種的
-
-y_predict = clf.predict(x_test)
-
-plt.scatter(x_test[:, 0], x_test[:, 1], c=y_predict)
-show()
-
-# 照著題目的說明，換另一種 SVM 來試試看
-
-from sklearn.svm import NuSVC
-
-clf1 = NuSVC()
-
-clf1.fit(x_train, y_train)
-
-"""
-NuSVC(break_ties=False, cache_size=200, class_weight=None, coef0=0.0,
-,      decision_function_shape='ovr', degree=3, gamma='scale', kernel='rbf',
-,      max_iter=-1, nu=0.5, probability=False, random_state=None, shrinking=True,
-,      tol=0.001, verbose=False)
-"""
-
-"""
-嗚，好像變差了
-但這件事告訴我們，不同的模型在不同的參數情況下，
-也會學出不同的結果跟好壞，
-因此適時的做實驗調整模型跟參數也是很重要的！
-"""
-
-y_predict = clf1.predict(x_test)
-plt.scatter(x_test[:, 0], x_test[:, 1], c=y_predict - y_test)
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-iris = datasets.load_iris()
-
-x = iris.data
-y = iris.target
-
-X = x[:, :2]
-Y = y
-
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
-x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size=0.2)
-# 訓練組8成, 測試組2成
-
-plt.scatter(X[:, 0], X[:, 1], c=Y, cmap="Paired")
-plt.title("原始資料")
-
-show()
-
-clf = SVC(gamma="scale")
-
-clf.fit(x_train, y_train)
-
-y_pred = clf.predict(x_test)
-
-print(y_pred - y_test)
-
-x0 = np.linspace(3.8, 8.2, 500)
-y0 = np.linspace(1.8, 4.7, 500)
-
-xm, ym = np.meshgrid(x0, y0)
-P = np.c_[xm.ravel(), ym.ravel()]
-z = clf.predict(P)
-Z = z.reshape(xm.shape)
-plt.contourf(xm, ym, Z, alpha=0.3)
-plt.scatter(X[:, 0], X[:, 1], c=Y)
-
-show()
-
-# PCA 可以救鳶尾花嗎？
-
-from sklearn.decomposition import PCA
-
-pca = PCA(n_components=2)
-
-pca.fit(x)
-
-X = pca.transform(x)
-
-# 我們稍稍的「欣賞一下」 PCA 對我們的資料集做了什麼，來看看某朵鳶尾花的資料。
-# pca.transform([[6.3, 2.3, 4.4, 1.3]])
-# 真的變成平面上一個點！來看看整個分布的狀況。
-
-plt.scatter(X[:, 0], X[:, 1], c=y, cmap="Paired")
-show()
-
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
-x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
-# 訓練組8成, 測試組2成
-
-clf = SVC(gamma="scale")
-
-clf.fit(x_train, y_train)
-
-x0 = np.arange(-4, 4.2, 0.02)
-y0 = np.arange(-1.5, 1.7, 0.02)
-
-xm, ym = np.meshgrid(x0, y0)
-P = np.c_[xm.ravel(), ym.ravel()]
-z = clf.predict(P)
-Z = z.reshape(xm.shape)
-plt.contourf(xm, ym, Z, alpha=0.3)
-plt.scatter(X[:, 0], X[:, 1], c=y)
-show()
-
-print(x[87])
-
-print(y[87])
-
-print(pca.transform([[6.3, 2.3, 4.4, 1.3]]))
-
-print(clf.predict([[0.81509524, -0.37203706]]))
-
-print(X.shape)
-
-# print(Z.reshape(X.shape))
-
-# 畫完整分類
-# 和以前一樣, 未來新的資料進來, 我們訓練好的也可以再做分類。
-
-gd = np.array([[i, j] for i in np.arange(-4, 4, 0.4) for j in np.arange(-3, 3, 0.4)])
-
-gdc = clf.predict(gd)
-
-plt.scatter(gd[:, 0], gd[:, 1], s=50, c=gdc)
-show()
-
-x1, x2 = np.meshgrid(np.arange(-0.2, 1.2, 0.02), np.arange(-0.2, 1.2, 0.02))
-Z = clf.predict(np.c_[x1.ravel(), x2.ravel()])
-z = Z.reshape(x1.shape)
-plt.contourf(x1, x2, z, alpha=0.3)
-# NG plt.scatter(x[:, 0], x[:, 1], s=100, c=clf.labels_)
-show()
-
-# 呈現出來
-x0 = y0 = np.arange(-0.2, 1.2, 0.02)
-xm, ym = np.meshgrid(x0, y0)
-
-P = np.c_[xm.ravel(), ym.ravel()]
-z = clf.predict(P)
-Z = z.reshape(xm.shape)
-plt.contourf(xm, ym, Z, alpha=0.3)
-# NG plt.scatter(x[:, 0], x[:, 1], c=clf.labels_)
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
+print("讀取csv檔案成df")
 
 df = pd.read_csv("data/iris.csv")
 
@@ -1453,6 +596,8 @@ print("------------------------------------------------------------")  # 60個
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
 from tensorflow.keras.utils import to_categorical
+
+print("讀取csv檔案成df")
 
 df = pd.read_csv("data/iris.csv")
 
@@ -1538,32 +683,6 @@ plt.scatter(data1[:, 0], data1[:, 1], c=np.array(iris.target), cmap=plt.cm.coppe
 show()
 
 print("------------------------------------------------------------")  # 60個
-
-iris = datasets.load_iris()
-
-X = iris.data  # 獲取自變量
-y = iris.target  # 獲取因變量
-
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
-# 訓練組8成, 測試組2成
-
-clf = SVC(C=0.8, kernel="rbf", gamma=1)  # 高斯核，鬆弛度0.8
-# clf = SVC(C=0.5, kernel='linear') # 線性核，鬆弛度0.5
-
-clf.fit(X_train, y_train.ravel())
-
-print("trian pred:%.3f" % (clf.score(X_train, y_train)))  # 對訓練集打分
-print("test pred:%.3f" % (clf.score(X_test, y_test)))  # 對測試集打分
-print(clf.support_vectors_)  # 支持向量列表，從中看到切分邊界
-print(clf.n_support_)  # 每類別持向量個數
-
-plt.plot(X_train[:, 0], X_train[:, 1], "o", color="#bbbbbb")
-plt.plot(clf.support_vectors_[:, 0], clf.support_vectors_[:, 1], "o")
-
-show()
-
-print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("決策樹")
@@ -1575,7 +694,7 @@ import io
 iris = datasets.load_iris()
 
 X = iris.data  # 獲取自變量
-y = iris.target  # 獲取因變量
+y = iris.target  # 獲取因變量  # 資料集目標
 
 # 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
@@ -1610,7 +729,7 @@ print("切分數據集與交叉驗證")
 iris = datasets.load_iris()
 
 X = iris.data
-y = iris.target
+y = iris.target  # 資料集目標
 
 # 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
@@ -1622,108 +741,7 @@ X_train, X_test = train_test_split(X, test_size=0.3, random_state=10)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-""" some fail
-from sklearn.model_selection import KFold
-
-iris = datasets.load_iris()
-
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
-X_train, X_test, y_train, y_test = train_test_split(iris.data, iris.target, test_size=0.3)
-# 訓練組8成, 測試組2成
-
-num = 5 # 5折交叉驗證
-train_preds = np.zeros(X_train.shape[0]) # 用於保存預測結果
-test_preds = np.zeros((X_test.shape[0], num))
-kf = KFold(len(X_train), n_folds = num, shuffle=True, random_state=0)
-for i, (train_index, eval_index) in enumerate(kf):
-    clf = SVC(C=1, gamma=0.125, kernel='rbf')
-    clf.fit(X_train[train_index], y_train[train_index])
-    train_preds[eval_index] += clf.predict(X_train[eval_index])
-    test_preds[:,i] = clf.predict(X_test)
-print(accuracy_score(y_train, train_preds)) # 返回結果: 0.971428571429
-print(test_preds.mean(axis=1))
-
-from sklearn.model_selection import cross_val_score # python 3使用
-print(cross_val_score(clf, iris.data, iris.target).mean())
-"""
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("模型調參")
-
-# 網格搜索
-from sklearn.model_selection import GridSearchCV
-
-iris = datasets.load_iris()
-
-clf = SVC(random_state=1)
-
-param_grid = {
-    "kernel": ("linear", "rbf"),
-    "C": [1, 2, 4],  # 制定參數範圍
-    "gamma": [0.125, 0.25, 0.5, 1, 2, 4],
-}
-gs = GridSearchCV(
-    estimator=clf, param_grid=param_grid, scoring="accuracy", cv=10, n_jobs=-1
-)
-gs = gs.fit(iris.data, iris.target)
-y_pred = gs.predict(iris.data)  # 預測
-print(gs.best_score_)
-print(gs.best_params_)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-""" some fail
-from sklearn.model_selection import cross_val_score
-from hyperopt import hp,STATUS_OK,Trials,fmin,tpe
-from sklearn.ensemble import RandomForestClassifier
-
-def f(params): # 定義評價函數
-    t = params['type']
-    del params['type']
-    if t == 'svm':
-        clf = SVC(**params)
-    elif t == 'randomforest':
-        clf = RandomForestClassifier(**params)
-    else:
-        return 0
-    acc = cross_val_score(clf, iris.data, iris.target).mean() 
-    return {'loss': -acc, 'status': STATUS_OK} # 求最小值:準確率加負號
-
-iris = datasets.load_iris()
-
-space = hp.choice('classifier_type', [ # 定義可選參數
-    {
-        'type': 'svm',
-        'C': hp.uniform('C', 0, 10.0),
-        'kernel': hp.choice('kernel', ['linear', 'rbf']),
-        'gamma': hp.uniform('gamma', 0, 20.0)
-    },
-    {
-        'type': 'randomforest',
-        'max_depth': hp.choice('max_depth', range(1,20)),
-        'max_features': hp.choice('max_features', range(1,5)),
-        'n_estimators': hp.choice('n_estimators', range(1,20)),
-        'criterion': hp.choice('criterion', ["gini", "entropy"])
-    }
-])
-best = fmin(f, space, algo=tpe.suggest, max_evals=100)
-print('best:',best) 
-"""
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
-# 6-2 探索性資料分析──以 Iris 的花種分類為例
-# 資料科學0. 感興趣的問題
-
-# 資料科學1. 資料取得
-# 資料科學1.1 自建資料或從網路下載資料後上傳到雲端硬碟
-
-# Iris.jpg
-# 資料科學1.2 讀取Google雲端硬碟中的csv檔
-# 資料科學1.3 將行列結構的資料建立為Pandas的資料框
+print("讀取csv檔案成df")
 
 filename = "data/Iris2.csv"
 df = pd.read_csv(filename)
@@ -1732,15 +750,8 @@ print(df)
 df = df.drop("Id", axis=1)
 print(df.head())
 
-# 資料科學2. 資料處理
-# 資料科學2.1 由列資料了解資料集
-
-print(df.head())
-
-# 資料科學2.3 資料清理
-
+# 資料清理
 # 缺失值的補值或刪除
-
 # 刪除重複值或異常值
 
 print(df[df.duplicated()])
@@ -1757,11 +768,9 @@ s = {"Iris-setosa": 0, "Iris-versicolor": 1, "Iris-virginica": 2}
 df["Species"] = df["Species"].map(s)
 print(df.head())
 
-# 資料科學3. 探索性資料分析
-# 資料科學3.1 觀察資料的分佈(統計)
+# 探索性資料分析
+# 觀察資料的分佈(統計)
 print(df.head())
-
-# 資料科學3.2 資料視覺化
 
 c = {0: "r", 1: "g", 2: "b"}
 df["colors"] = df["Species"].map(c)
@@ -1837,12 +846,12 @@ print("------------------------------------------------------------")  # 60個
 
 
 """ no clf
-# 02 [練習] 圖形化我們的成果
+# 圖形化我們的成果
 
-# 1. 上次的成果拿回來使用
+# 上次的成果拿回來使用
 
 # 記得上次我們做了個鳶尾花分類器。
-# 1.1 找回我們的分類器
+# 找回我們的分類器
 
 from sklearn.externals import joblib
 
@@ -1852,8 +861,7 @@ clf = joblib.load("iris_clf_01.pkl")
 
 print(clf.predict([[2, 3]]))
 
-# 可以! 太棒了!
-# 1.2 看看我們分類的全貌
+# 看看我們分類的全貌
 
 # 我們用一下之前的方式, 畫出我們想要看到我們可愛的 SVM 是怎麼以花萼長度、花萼寬度來分類的。
 # 上次我們用了 Python 所謂 "list comprehension" 的作法 (本質上是 for 迴圈), 現在我們換個方式看來比較「高級」的方式。
@@ -1888,8 +896,7 @@ Z = clf.predict(np.c_[xx.ravel(), yy.ravel()])
 plt.scatter(xx.ravel(), yy.ravel(), s=50, c=Z)
 show()
 
-# 雖然看來我們用了比較多白痴的方法做出一樣的事, 不過一些技巧之後也可以常常使用。
-# 1.3 快速換個配色
+# 快速換個配色
 
 plt.scatter(xx.ravel(), yy.ravel(), s=50, c=Z, cmap=plt.cm.coolwarm, alpha=0.8)
 show()
@@ -1898,15 +905,11 @@ show()
 plt.scatter(xx.ravel(), yy.ravel(), s=50, c=Z, cmap=plt.cm.prism, alpha=0.8)
 show()
 
-# 1.4 取回鳶尾花訓練資料
-
+# 取回鳶尾花訓練資料
 iris = datasets.load_iris()
 
 x = iris.data[:, :2]
-
-y = iris.target
-
-# 我們來畫畫比較。
+y = iris.target  # 資料集目標
 
 plt.subplot(121)
 
@@ -1918,9 +921,10 @@ plt.scatter(x[:, 0], x[:, 1], s=50, c=clf.predict(x))
 
 show()
 
-# 左邊的是訓練資料, 右邊是用我們 SVM 分類器分出來的。你有看出差異嗎? 是不是很難看出? 我們來用用另一個方式。
+# 左邊的是訓練資料, 右邊是用我們 SVM 分類器分出來的。你有看出差異嗎?
+# 是不是很難看出? 我們來用用另一個方式。
 
-# 1.5 畫圖的另一個方式
+# 畫圖的另一個方式
 
 xx, yy = np.meshgrid(np.arange(3, 8.5, 0.02), np.arange(1.5, 5.0, 0.02))
 Z = clf.predict(np.c_[xx.ravel(), yy.ravel()])
@@ -1936,154 +940,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 06_02_logistic_regression_SGD
-# 以梯度下降法求解羅吉斯迴歸
-
-iris = datasets.load_iris()
-
-# 只取前兩個特徵，方便繪圖
-X = iris.data[:, :2]
-# 只取前兩個類別
-y = (iris.target != 0) * 1
-
-plt.figure(figsize=(10, 6))
-plt.scatter(X[y == 0][:, 0], X[y == 0][:, 1], color="b", label="0")
-plt.scatter(X[y == 1][:, 0], X[y == 1][:, 1], color="r", label="1")
-plt.legend()
-show()
-
-# 建立羅吉斯迴歸類別
-
-
-class MyLogisticRegression:
-    def __init__(self, lr=0.01, num_iter=100000, fit_intercept=True, verbose=False):
-        self.lr = lr
-        self.num_iter = num_iter
-        self.fit_intercept = fit_intercept
-        self.verbose = verbose
-
-    # 加入偏差項(1)至X
-    def __add_intercept(self, X):
-        intercept = np.ones((X.shape[0], 1))
-        return np.concatenate((intercept, X), axis=1)
-
-    # 羅吉斯函數
-    def __sigmoid(self, z):
-        return 1 / (1 + np.exp(-z))
-
-    # 損失函數
-    def __loss(self, h, y):
-        return (-y * np.log(h) - (1 - y) * np.log(1 - h)).mean()
-
-    # 以梯度下降法訓練模型
-    def fit(self, X, y):
-        if self.fit_intercept:
-            X = self.__add_intercept(X)
-
-        # 權重初始值給 0
-        self.theta = np.zeros(X.shape[1])
-
-        # 正向傳導與反向傳導
-        for i in range(self.num_iter):
-            # WX
-            z = np.dot(X, self.theta)
-            h = self.__sigmoid(z)
-            # 梯度
-            gradient = np.dot(X.T, (h - y)) / y.size
-            # 更新權重
-            self.theta -= self.lr * gradient
-
-            # 依據更新的權重計算損失
-            z = np.dot(X, self.theta)
-            h = self.__sigmoid(z)
-            loss = self.__loss(h, y)
-
-            # 列印損失
-            if self.verbose == True and i % 10000 == 0:
-                print(f"loss: {loss} \t")
-
-    # 預測機率
-    def predict_prob(self, X):
-        if self.fit_intercept:
-            X = self.__add_intercept(X)
-
-        return self.__sigmoid(np.dot(X, self.theta))
-
-    # 預測
-    def predict(self, X):
-        return self.predict_prob(X).round()
-
-
-# 做邏輯迴歸, 自建模型
-logistic_regression = MyLogisticRegression(lr=0.1, num_iter=300000)  # 邏輯迴歸函數學習機
-
-logistic_regression.fit(X, y)
-
-# 預測
-preds = logistic_regression.predict(X)
-cc = (preds == y).mean()
-print(cc)
-
-print("羅吉斯迴歸係數")
-print(logistic_regression.theta)
-# array([-25.89066442,  12.523156  , -13.40150447])
-
-# 分類結果繪圖
-plt.figure(figsize=(10, 6))
-
-plt.scatter(X[y == 0][:, 0], X[y == 0][:, 1], color="b", label="0")
-plt.scatter(X[y == 1][:, 0], X[y == 1][:, 1], color="r", label="1")
-plt.legend()
-x1_min, x1_max = (
-    X[:, 0].min(),
-    X[:, 0].max(),
-)
-x2_min, x2_max = (
-    X[:, 1].min(),
-    X[:, 1].max(),
-)
-xx1, xx2 = np.meshgrid(np.linspace(x1_min, x1_max), np.linspace(x2_min, x2_max))
-grid = np.c_[xx1.ravel(), xx2.ravel()]
-probs = logistic_regression.predict_prob(grid).reshape(xx1.shape)
-plt.contour(xx1, xx2, probs, [0.5], linewidths=1, colors="black")
-show()
-
-# 以 Scikit-learn 驗證
-
-# 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
-logistic_regression = sklearn.linear_model.LogisticRegression(C=1e20)  # 邏輯迴歸函數學習機
-
-logistic_regression.fit(X, y)
-
-preds = logistic_regression.predict(X)
-cc = (preds == y).mean()
-print(cc)
-
-cc = logistic_regression.intercept_, logistic_regression.coef_
-print(cc)
-
-plt.figure(figsize=(10, 6))
-plt.scatter(X[y == 0][:, 0], X[y == 0][:, 1], color="b", label="0")
-plt.scatter(X[y == 1][:, 0], X[y == 1][:, 1], color="r", label="1")
-plt.legend()
-x1_min, x1_max = (
-    X[:, 0].min(),
-    X[:, 0].max(),
-)
-x2_min, x2_max = (
-    X[:, 1].min(),
-    X[:, 1].max(),
-)
-xx1, xx2 = np.meshgrid(np.linspace(x1_min, x1_max), np.linspace(x2_min, x2_max))
-grid = np.c_[xx1.ravel(), xx2.ravel()]
-probs = logistic_regression.predict_proba(grid)[:, 1].reshape(xx1.shape)
-plt.contour(xx1, xx2, probs, [0.5], linewidths=1, colors="black")
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# 06_08_knn_from_scratch_iris
+# knn_from_scratch_iris
 
 # 自行開發KNN
 
@@ -2143,13 +1000,9 @@ scaler = preprocessing.StandardScaler()
 X_train_std = scaler.fit_transform(X_train)
 X_test_std = scaler.transform(X_test)
 
-# 選擇演算法
 clf = KNN()
 
-# 模型訓練
 clf.fit(X_train_std, y_train)
-
-# 模型評估
 
 # 計算準確率
 y_pred = clf.predict(X_test_std)
@@ -2158,7 +1011,7 @@ print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 06_09_naive_bayes_from_scratch
+# naive_bayes_from_scratch
 
 # 自行開發高斯單純貝氏分類器
 
@@ -2223,36 +1076,28 @@ class NaiveBayesClassifier:
 
 X, y = datasets.load_iris(return_X_y=True)
 
-# 資料分割
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
-# 選擇演算法
 clf = NaiveBayesClassifier()
 
-# 模型訓練
 clf.fit(X_train, y_train)
-
-# 模型評估
 
 # 計算準確率
 y_pred = clf.predict(X_test)
 print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
-
 # 96.67%
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 06_10_Scikit-learn_naive_bayes
+# Scikit-learn_naive_bayes
 
 # 以單純貝氏分類器進行鳶尾花(Iris)品種的辨識
 
 X, y = datasets.load_iris(return_X_y=True)
 
-# 資料分割
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
-# 模型訓練
 from sklearn.naive_bayes import GaussianNB
 
 clf = GaussianNB()
@@ -2263,7 +1108,6 @@ clf.fit(X_train, y_train)
 # 計算準確率
 y_pred = clf.predict(X_test)
 print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
-
 # 93.33%
 
 # 使用伯努利單純貝氏分類器
@@ -2276,7 +1120,6 @@ clf.fit(X_train, y_train)
 # 計算準確率
 y_pred = clf.predict(X_test)
 print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
-
 # 20.00%
 
 # 使用多項單純貝氏分類器
@@ -2289,13 +1132,12 @@ clf.fit(X_train, y_train)
 # 計算準確率
 y_pred = clf.predict(X_test)
 print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
-
 # 80.00%
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 09_02_kmeans_from_scratch
+# kmeans_from_scratch
 
 # 自行開發K-Means
 
@@ -2353,7 +1195,6 @@ class KMeans:
             iteration += 1
         # print(iteration)
 
-    # 模型評估
     def evaluate(self, X):
         centroids = []
         centroid_idxs = []
@@ -2375,13 +1216,10 @@ show()
 # 標準化
 X_train = preprocessing.StandardScaler().fit_transform(X_train)
 
-# 訓練
 CLUSTERS = 5  # 要分成的群數
 clf = KMeans(n_clusters=CLUSTERS)  # K-平均演算法
 
 clf.fit(X_train)  # 學習訓練.fit
-
-# 模型評估
 
 class_centers, classification = clf.evaluate(X_train)
 
@@ -2403,8 +1241,6 @@ plt.plot(
 plt.title("k-means")
 show()
 
-# 鳶尾花資料集測試
-
 X, y = datasets.load_iris(return_X_y=True)
 
 # 標準化
@@ -2415,10 +1251,8 @@ CLUSTERS = 3  # 要分成的群數
 clf = KMeans(n_clusters=CLUSTERS)  # K-平均演算法
 
 clf.fit(X_train)  # 學習訓練.fit
-
 # 7
 
-# 模型評估
 _, y_pred = clf.evaluate(X_train)
 
 print(accuracy_score(y, y_pred))
@@ -2478,7 +1312,7 @@ pd.DataFrame(
 from scipy.cluster.hierarchy import dendrogram
 
 row_dendr = dendrogram(row_clusters, labels=labels)
-plt.ylabel("歐幾里德距離", fontsize=14)
+plt.ylabel("歐幾里德距離")
 show()
 
 # 繪製熱力圖
@@ -2549,8 +1383,7 @@ def plot_dendrogram(model, **kwargs):
     dendrogram(linkage_matrix, **kwargs)
 
 
-# 載入資料集
-X, _ = datasets.load_iris(return_X_y=True)
+X, y = datasets.load_iris(return_X_y=True)
 
 # distance_threshold=0 表示會建立完整的樹狀圖(dendrogram)
 clf = AgglomerativeClustering(distance_threshold=0, n_clusters=None)
@@ -2559,8 +1392,8 @@ clf = clf.fit(X)  # 學習訓練.fit
 
 plt.title("Hierarchical Clustering Dendrogram")
 plot_dendrogram(clf, truncate_mode="level", p=3)  # 限制 3 層
-plt.ylabel("歐幾里德距離", fontsize=14)
-plt.xlabel("每個集群的筆數", fontsize=14)
+plt.ylabel("歐幾里德距離")
+plt.xlabel("每個集群的筆數")
 show()
 
 # 各種距離衡量方式的比較
@@ -2573,7 +1406,6 @@ n_samples = 1500
 t = 1.5 * np.pi * (1 + 3 * np.random.rand(1, n_samples))
 x = t * np.cos(t)
 y = t * np.sin(t)
-
 
 X = np.concatenate((x, y))
 X += 0.7 * np.random.randn(2, n_samples)
@@ -2637,6 +1469,7 @@ df.to_csv("tmp_iris1.csv")
 df.to_csv("tmp_iris2.csv", encoding="utf8")
 df.to_csv("tmp_iris3.csv", encoding="utf-8-sig")
 
+print("讀取csv檔案成df")
 
 df1 = pd.read_csv("tmp_iris1.csv")
 print(df1)
@@ -2662,11 +1495,9 @@ print("------------------------------------------------------------")  # 60個
 iris = datasets.load_iris()
 
 X = iris.data
-y = iris.target
+y = iris.target  # 資料集目標
 
-print("iris.data.shape=", iris.data.shape)
 print("dir(iris)", dir(iris))
-print("iris.target.shape=", iris.target.shape)
 try:
     print("iris.feature_names=", iris.feature_names)
 except:

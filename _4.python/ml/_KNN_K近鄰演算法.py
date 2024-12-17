@@ -116,7 +116,7 @@ knn = KNeighborsClassifier()  # K近鄰演算法（K Nearest Neighbor, KNN）
 
 N = 5
 scores = cross_val_score(knn, X, y, cv=N, scoring="accuracy")
-print('分成', N, '組, 做 cross_val_score 是驗證用來評分資料準確度的')
+print("分成", N, "組, 做 cross_val_score 是驗證用來評分資料準確度的")
 print("全部分數 :", scores)
 print("平均分數 :", scores.mean())
 
@@ -234,7 +234,7 @@ knn = KNeighborsClassifier(n_neighbors=NEIGHBOARS)
 
 N = 5
 scores = cross_val_score(knn, X, y, cv=5, scoring="accuracy")
-print('分成', N, '組, 做 cross_val_score 是驗證用來評分資料準確度的')
+print("分成", N, "組, 做 cross_val_score 是驗證用來評分資料準確度的")
 print("全部分數 :", scores)
 print("平均分數 :", scores.mean())
 
@@ -249,7 +249,7 @@ for k in range(1, 31):
     ##    loss = -cross_val_score(knn, X, y, cv=10, scoring='mean_squared_error') # for regression
     N = 10
     scores = cross_val_score(knn, X, y, cv=N, scoring="accuracy")  # for classification
-    print('分成', N, '組, 做 cross_val_score 是驗證用來評分資料準確度的')
+    print("分成", N, "組, 做 cross_val_score 是驗證用來評分資料準確度的")
     k_scores.append(scores.mean())
     print("取得 :", scores.mean())
 
@@ -325,7 +325,7 @@ for k in Ks:
     knn = KNeighborsClassifier(n_neighbors=NEIGHBOARS)
     N = 10
     scores = cross_val_score(knn, X, y, cv=N, scoring="accuracy")
-    print('分成', N, '組, 做 cross_val_score 是驗證用來評分資料準確度的')
+    print("分成", N, "組, 做 cross_val_score 是驗證用來評分資料準確度的")
     accuracies.append(scores.mean())
 
 plt.plot(Ks, accuracies)
@@ -382,13 +382,7 @@ print("KNN準確率: %.2f" % knn.score(X, y))
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-"""
-機器學習_K-近鄰演算法_空氣盒子
-"""
+# 機器學習_K-近鄰演算法_空氣盒子
 
 df = pd.read_excel("data/20160101-20190101(Daily)K相鄰.xlsx")
 """
@@ -971,7 +965,7 @@ from sklearn.model_selection import cross_val_score
 
 N = 10
 s = cross_val_score(knn, df_X, df_y, cv=N, scoring="accuracy")
-print('分成', N, '組, 做 cross_val_score 是驗證用來評分資料準確度的')
+print("分成", N, "組, 做 cross_val_score 是驗證用來評分資料準確度的")
 print("交叉驗證每次的準確率：", s)
 print("交叉驗證得到的平均準確率：", s.mean())
 
@@ -1083,7 +1077,7 @@ from sklearn.model_selection import cross_val_score
 
 N = 10
 s = cross_val_score(knn, df_X, df_y, cv=N, scoring="accuracy")
-print('分成', N, '組, 做 cross_val_score 是驗證用來評分資料準確度的')
+print("分成", N, "組, 做 cross_val_score 是驗證用來評分資料準確度的")
 print("準確率：", s)
 print("平均準確率：", s.mean())
 print("最高：", s.max())
@@ -1392,13 +1386,13 @@ from sklearn.model_selection import cross_val_score
 # Cross-validation with KNN estimator
 N = 4
 knn_scores = cross_val_score(knn, X_train, y_train, cv=N)
-print('分成', N, '組, 做 cross_val_score 是驗證用來評分資料準確度的')
+print("分成", N, "組, 做 cross_val_score 是驗證用來評分資料準確度的")
 print(knn_scores)
 
 # Cross-validation with Linear Regression estimator
 N = 2
 lr_scores = cross_val_score(lr, X, y, cv=N)
-print('分成', N, '組, 做 cross_val_score 是驗證用來評分資料準確度的')
+print("分成", N, "組, 做 cross_val_score 是驗證用來評分資料準確度的")
 print(lr_scores)
 
 # Grid Search
@@ -1449,9 +1443,7 @@ sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 
-
 # os.chdir(r'D:\Python_book\11KNNNB')
 # pd.set_option('display.max_columns', None)
-
 
 print("------------------------------------------------------------")  # 60個

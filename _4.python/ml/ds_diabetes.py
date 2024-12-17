@@ -73,11 +73,11 @@ print("------------------------------------------------------------")  # 60個
 
 print("糖尿病資料集 基本數據")
 
-data = datasets.load_diabetes()
+diabetes = datasets.load_diabetes()
 
 # 觀察資料
 
-df = pd.DataFrame(data.data, columns=data.feature_names)
+df = pd.DataFrame(diabetes.data, columns=diabetes.feature_names)
 # 透過data.data來呼叫數據　回傳numpy.ndarray型態
 # 透過data.feature_names來呼叫特徵名稱
 # 將原先的data由numpy.ndarray變更為pandas.DataFrame型態
@@ -102,44 +102,43 @@ True : 返回資料為df
 """
 
 # 預設 as_frame = False
-diabetes_sklearn = datasets.load_diabetes()  # 將數據匯入
-print(type(diabetes_sklearn.data))
+diabetes = datasets.load_diabetes()
+print(type(diabetes.data))
 
-diabetes_sklearn = datasets.load_diabetes(as_frame=False)  # 將數據匯入
-print(type(diabetes_sklearn.data))
+diabetes = datasets.load_diabetes(as_frame=False)
+print(type(diabetes.data))
 
 # 讀取資料為df格式
-diabetes_sklearn = datasets.load_diabetes(as_frame=True)  # 將數據匯入
-print(type(diabetes_sklearn.data))
+diabetes = datasets.load_diabetes(as_frame=True)
+print(type(diabetes.data))
 
 """
-print(diabetes_sklearn.data)
-print(diabetes_sklearn.data.shape)
-print(diabetes_sklearn.target)
+print(diabetes.data)
+print(diabetes.data.shape)
+print(diabetes.target)
 print('数据集列的名称')
-print(diabetes_sklearn.feature_names)
-print(diabetes_sklearn.frame)
+print(diabetes.feature_names)
+print(diabetes.frame)
 print('数据集的完整描述')
-#print(diabetes_sklearn.DESCR)
+#print(diabetes.DESCR)
 print('数据位置的路径。')
-print(diabetes_sklearn.data_filename)
+print(diabetes.data_filename)
 print('target位置的路径')
-print(diabetes_sklearn.target_filename)
+print(diabetes.target_filename)
 """
 
 print("数据集的完整描述")
-# print(diabetes_sklearn.DESCR)
+# print(diabetes.DESCR)
 
 print("feature_names")
-print(diabetes_sklearn.feature_names)
+print(diabetes.feature_names)
 
 print("data")
-print(diabetes_sklearn.data)
+print(diabetes.data)
 
 print("target")
-print(diabetes_sklearn.target)
+print(diabetes.target)
 
-# Load the dataset
 diabetes = datasets.load_diabetes(as_frame=True)
 
 # Don't plot the sex data
@@ -173,15 +172,13 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-diabetes_sklearn = datasets.load_diabetes()
+diabetes = datasets.load_diabetes()
 
 # Convert the dataset to a DataFrame
-diabetes_df = pd.DataFrame(
-    data=diabetes_sklearn.data, columns=diabetes_sklearn.feature_names
-)
+diabetes_df = pd.DataFrame(data=diabetes.data, columns=diabetes.feature_names)
 
 # Add target variable to the DataFrame
-diabetes_df["target"] = diabetes_sklearn.target
+diabetes_df["target"] = diabetes.target
 
 print(diabetes_df.head())
 
@@ -195,30 +192,28 @@ import matplotlib.ticker as ticker
 from sklearn import preprocessing
 from sklearn.model_selection import GridSearchCV
 
-diabetes_sklearn = datasets.load_diabetes()
+diabetes = datasets.load_diabetes()
 
-df = pd.DataFrame(diabetes_sklearn.data, columns=diabetes_sklearn.feature_names)
-df["TEMP"] = diabetes_sklearn.target
+df = pd.DataFrame(diabetes.data, columns=diabetes.feature_names)
+df["TEMP"] = diabetes.target
 cc = df.head(10)
 print(cc)
 
 # standardize and train/test split
-diabetes_sklearn.data = preprocessing.scale(diabetes_sklearn.data)
+diabetes.data = preprocessing.scale(diabetes.data)
 X_train, X_test, y_train, y_test = train_test_split(
-    diabetes_sklearn.data, diabetes_sklearn.target, test_size=0.3, random_state=10
+    diabetes.data, diabetes.target, test_size=0.3, random_state=10
 )
 
 ols_reg = LinearRegression()
 ols_reg.fit(X_train, y_train)
 ols_pred = ols_reg.predict(X_test)
 
-cc = pd.DataFrame(
-    {"variable": diabetes_sklearn.feature_names, "estimate": ols_reg.coef_}
-)
+cc = pd.DataFrame({"variable": diabetes.feature_names, "estimate": ols_reg.coef_})
 
 print(cc)
 
-cc = diabetes_sklearn.feature_names
+cc = diabetes.feature_names
 print(cc)
 
 # ['age', 'sex', 'bmi', 'bp', 's1', 's2', 's3', 's4', 's5', 's6']
@@ -227,7 +222,7 @@ print(cc)
 ridge_reg = Ridge(alpha=0)
 ridge_reg.fit(X_train, y_train)
 ridge_df = pd.DataFrame(
-    {"variable": diabetes_sklearn.feature_names, "estimate": ridge_reg.coef_}
+    {"variable": diabetes.feature_names, "estimate": ridge_reg.coef_}
 )
 ridge_train_pred = []
 ridge_test_pred = []
@@ -273,7 +268,7 @@ show()
 lasso_reg = Lasso(alpha=1)
 lasso_reg.fit(X_train, y_train)
 lasso_df = pd.DataFrame(
-    {"variable": diabetes_sklearn.feature_names, "estimate": lasso_reg.coef_}
+    {"variable": diabetes.feature_names, "estimate": lasso_reg.coef_}
 )
 lasso_train_pred = []
 lasso_test_pred = []
@@ -1141,6 +1136,7 @@ from sklearn.ensemble import StackingRegressor
 from sklearn.preprocessing import StandardScaler
 
 X, y = datasets.load_diabetes(return_X_y=True)
+
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 scaler = StandardScaler()

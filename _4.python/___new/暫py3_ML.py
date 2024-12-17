@@ -70,7 +70,7 @@ Scikit-learn的基本功能主要被分為六大部分：
 6. 數據前置處理（Preprocessing）。
 
 
-PCA:主成分分析（Principal Component Analysis）
+PCA:主成分分析（Principal Component Analysis）, 降低數據維度
 1. 載入資料
 2. 資料清理/探索/分析
 3. 進行特徵工程

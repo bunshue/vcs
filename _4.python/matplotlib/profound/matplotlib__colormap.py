@@ -24,6 +24,8 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
+import matplotlib as mpl
+
 def show():
     plt.show()
     pass
@@ -31,11 +33,10 @@ def show():
 print("------------------------------------------------------------")  # 60個
 
 N = 1000  # 數據數量
-np.random.seed(10)  # 設定隨機數種子值
 x = np.random.normal(0, 1, N)  # 均值是 0, 標準差是 1
 y = np.random.normal(0, 1, N)  # 均值是 0, 標準差是 1
 color = x + y  # 設定顏色串列是 x + y 數列結果
-norm = plt.Normalize(vmin=-3, vmax=3)
+norm = plt.Normalize(vmin=-3, vmax=3)  # 定義色彩條的數值區間
 plt.scatter(x, y, s=60, alpha=0.5, c=color, cmap="jet", norm=norm)
 plt.xlim(-3, 3)
 plt.xticks(())  # 不顯示 x 刻度
@@ -45,75 +46,25 @@ plt.colorbar()  # 建立色彩條
 
 show()
 
-
 print("------------------------------------------------------------")  # 60個
 
-N = 5000
+N = 1000
 x = np.random.rand(N)
 y = np.random.rand(N)
-plt.scatter(x, y, c=x)
-plt.colorbar()  # 建立色彩條
+#plt.scatter(x, y, c=x)
+#plt.scatter(x, y, c=y)
+
+plt.scatter(x, y, c=y, cmap="brg")
+#plt.scatter(x, y, c=y, cmap="hsv")
+#plt.scatter(x, y, c=x, cmap="GnBu")
+
+
+plt.colorbar()  # 建立色彩條, 預設為直向
+#plt.colorbar(orientation="horizontal")  # 建立橫向色彩條
 
 show()
 
 print("------------------------------------------------------------")  # 60個
-
-N = 5000
-x = np.random.rand(N)
-y = np.random.rand(N)
-plt.scatter(x, y, c=y)
-plt.colorbar()  # 建立色彩條
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-
-N = 5000
-x = np.random.rand(N)
-y = np.random.rand(N)
-plt.scatter(x, y, c=x)
-plt.colorbar(orientation="horizontal")  # 建立橫向色彩條
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-
-N = 5000
-x = np.random.rand(N)
-y = np.random.rand(N)
-
-fig, ax = plt.subplots(2, 1)
-# 建立子圖 0 的散點圖和色彩條
-ax0 = ax[0].scatter(x, y, c=y, cmap="brg")
-fig.colorbar(ax0, ax=ax[0])
-# 建立子圖 1 的散點圖和色彩條
-ax1 = ax[1].scatter(x, y, c=y, cmap="hsv")
-fig.colorbar(ax1, ax=ax[1])
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-
-N = 5000
-x = np.random.rand(N)
-y = np.random.rand(N)
-
-fig, ax = plt.subplots(3, 1)
-# 建立子圖 0 和 1 的散點圖和色彩條
-ax0 = ax[0].scatter(x, y, c=x, cmap="GnBu")
-
-ax1 = ax[1].scatter(x, y, c=x, cmap="GnBu")
-fig.colorbar(ax0, ax=(ax[0], ax[1]))  # 共用色彩條
-
-# 建立子圖 2 的散點圖和色彩條
-ax2 = ax[2].scatter(x, y, c=y, cmap="hsv")
-fig.colorbar(ax2, ax=ax[2])
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-
-import matplotlib as mpl
 
 fig, ax = plt.subplots(figsize=(6, 1))
 fig.subplots_adjust(bottom=0.5)  # 設定色彩條bottom的位置
@@ -127,8 +78,6 @@ fig.colorbar(
 show()
 
 print("------------------------------------------------------------")  # 60個
-
-import matplotlib as mpl
 
 fig, ax = plt.subplots(figsize=(6, 1))
 fig.subplots_adjust(bottom=0.5)  # 設定色彩條bottom的位置
@@ -145,8 +94,6 @@ fig.colorbar(
 show()
 
 print("------------------------------------------------------------")  # 60個
-
-import matplotlib as mpl
 
 fig, ax = plt.subplots(figsize=(6, 1))
 fig.subplots_adjust(bottom=0.5)  # 設定色彩條bottom的位置
@@ -165,8 +112,6 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
-import matplotlib as mpl
-
 fig, ax = plt.subplots(figsize=(6, 1))
 fig.subplots_adjust(bottom=0.5)  # 設定色彩條bottom的位置
 top = mpl.cm.get_cmap("Oranges_r", 128)  # Oranges_r色彩
@@ -184,8 +129,6 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
-import matplotlib as mpl
-
 fig, ax = plt.subplots(figsize=(6, 1))
 fig.subplots_adjust(bottom=0.5)  # 設定色彩條bottom的位置
 cmap = mpl.cm.plasma  # 使用 plasma
@@ -201,8 +144,6 @@ fig.colorbar(
 show()
 
 print("------------------------------------------------------------")  # 60個
-
-import matplotlib as mpl
 
 fig, ax = plt.subplots(figsize=(6, 1))
 fig.subplots_adjust(bottom=0.5)  # 設定色彩條bottom的位置
@@ -220,8 +161,6 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
-import matplotlib as mpl
-
 fig, ax = plt.subplots(figsize=(6, 1))
 fig.subplots_adjust(bottom=0.5)  # 設定色彩條bottom的位置
 cmap = mpl.cm.plasma  # 使用 plasma
@@ -237,8 +176,6 @@ fig.colorbar(
 show()
 
 print("------------------------------------------------------------")  # 60個
-
-import matplotlib as mpl
 
 colName = ["sepal_len", "sepal_wd", "petal_len", "petal_wd", "species"]
 iris = pd.read_csv("_data/iris.csv", names=colName)

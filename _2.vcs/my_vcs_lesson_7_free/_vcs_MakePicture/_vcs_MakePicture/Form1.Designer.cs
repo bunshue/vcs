@@ -1080,6 +1080,7 @@
             this.button73.Name = "button73";
             this.button73.Size = new System.Drawing.Size(60, 60);
             this.button73.TabIndex = 77;
+            this.button73.Text = "公文用語1";
             this.button73.UseVisualStyleBackColor = true;
             this.button73.Click += new System.EventHandler(this.button73_Click);
             // 
@@ -1090,6 +1091,7 @@
             this.button74.Name = "button74";
             this.button74.Size = new System.Drawing.Size(60, 60);
             this.button74.TabIndex = 78;
+            this.button74.Text = "公文用語2";
             this.button74.UseVisualStyleBackColor = true;
             this.button74.Click += new System.EventHandler(this.button74_Click);
             // 

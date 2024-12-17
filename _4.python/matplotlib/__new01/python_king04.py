@@ -25,7 +25,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 x = np.linspace(0, 10, 1000)
 y = np.sin(x)
 z = np.cos(x)
@@ -45,47 +45,20 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
+print('設定線圖的透明度')
 x = np.arange(0, 5, 0.1)
-line = plt.plot(x, 0.05*x*x)[0] # plot傳回一個清單
-line.set_alpha(0.5) # 呼叫Line2D物件的set_*()方法設定屬性值
-plt.show()
 
+line = plt.plot(x, 0.05*x*x, 'r')[0] # plot傳回一個清單
+line.set_alpha(0.3) # 呼叫Line2D物件的set_*()方法設定屬性值
 
-print("------------------------------------------------------------")  # 60個
-"""
-#繪制多子圖
+line = plt.plot(x, 0.08*x*x, 'r')[0] # plot傳回一個清單
+line.set_alpha(0.6) # 呼叫Line2D物件的set_*()方法設定屬性值
 
-#%fig[1x2]=在Figure物件中建立多個子圖
-for idx, color in enumerate("rgbyck"):
-    print(idx, color)
-    #plt.subplot(321+idx, axisbg=color)  # NG
-
-plt.show()
-"""
-print("------------------------------------------------------------")  # 60個
-
-plt.subplot(221) # 第一行的左圖
-plt.subplot(222) # 第一行的右圖
-plt.subplot(212) # 第二整行
+line = plt.plot(x, 0.10*x*x, 'r')[0] # plot傳回一個清單
+line.set_alpha(0.9) # 呼叫Line2D物件的set_*()方法設定屬性值
 
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
-
-# 使用subplot2grid()建立表格佈局
-
-fig = plt.figure(figsize=(6, 6))
-ax1 = plt.subplot2grid((3, 3), (0, 0), colspan=2)
-ax2 = plt.subplot2grid((3, 3), (0, 2), rowspan=2)
-ax3 = plt.subplot2grid((3, 3), (1, 0), rowspan=2)
-ax4 = plt.subplot2grid((3, 3), (2, 1), colspan=2)
-ax5 = plt.subplot2grid((3, 3), (1, 1));
-
-for idx, ax in enumerate(fig.axes, 1):
-    ax.text(0.5, 0.5, "ax{}".format(idx), ha="center", va="center", fontsize=16)
-
-plt.show()
-'''
 print("------------------------------------------------------------")  # 60個
 
 """
@@ -193,8 +166,8 @@ ax = fig.add_axes([0.15, 0.1, 0.7, 0.3])
 line = ax.plot([1, 2, 3], [1, 2, 1])[0]  # 傳回的是只有一個元素的清單
 print(line is ax.lines[0])
 
-ax.set_xlabel("水平軸");
-ax.set_ylabel("垂直軸");
+ax.set_xlabel("水平軸")
+ax.set_ylabel("垂直軸")
 print("ax.xaxis:", ax.xaxis)
 print('ax.xaxis.label:', ax.xaxis.label)
 print('ax.xaxis.label._text :', ax.xaxis.label._text)
@@ -520,11 +493,11 @@ for i in range(N, 0, -1):
     offset = transforms.ScaledTranslation(i, -i, transforms.IdentityTransform())
     shadow_trans = plt.gca().transData + offset
     ax.plot(x,y,linewidth=4,color="black", 
-        transform=shadow_trans,  #❸
+        transform=shadow_trans,
         alpha=(N-i)/2.0/N)
     
 ax.plot(x,y,linewidth=4,color='black')    
-ax.set_ylim((-1.5, 1.5));
+ax.set_ylim((-1.5, 1.5))
 
 plt.show()
 
@@ -551,7 +524,7 @@ for i, (_x, _y) in enumerate(zip(x, y)):
 ax.text(0.5, 0.8, u"子圖座標系中的文字", color="blue", ha="center", 
     transform=ax.transAxes)
     
-plt.figtext(0.1, 0.92, u"圖表座標系中的文字", color="green") #❸;
+plt.figtext(0.1, 0.92, u"圖表座標系中的文字", color="green")
 
 plt.show()
 
@@ -576,7 +549,7 @@ ax = plt.gca()
 
 ax.set_aspect("equal")
 ax.invert_yaxis()
-ax.autoscale();
+ax.autoscale()
 
 plt.show()
 
@@ -812,7 +785,7 @@ cc = DataCircleCollection(sizes, facecolors=colors, edgecolors="w", linewidths=0
 
 axe.add_collection(cc)
 axe.axis((0, 512, 512, 0))
-axe.axis("off");
+axe.axis("off")
 
 plt.show()
 
@@ -849,128 +822,16 @@ data = np.loadtxt("china_population.txt", encoding='UTF-8-sig')
 width = (data[1,0] - data[0,0])*0.4
 c1, c2 = plt.rcParams['axes.color_cycle'][:2]
 plt.bar(data[:,0]-width, data[:,1]/1e7, width, color=c1, label=u"男")
-plt.bar(data[:,0], data[:,2]/1e7, width, color=c2, label=u"女") #❸
+plt.bar(data[:,0], data[:,2]/1e7, width, color=c2, label=u"女")
 plt.xlim(-width, 100)
 plt.xlabel("年齡")
 plt.ylabel("人口（千萬）")
-plt.legend();
+plt.legend()
 
 plt.show()
 """
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
-#圖形
-
-img = plt.imread("lena.jpg")
-print(img.shape, img.dtype)
-
-# 用imread()和imshow()顯示圖形
-img = plt.imread("lena.jpg")
-fig, axes = plt.subplots(2, 4, figsize=(11, 4))
-fig.subplots_adjust(0, 0, 1, 1, 0.05, 0.05)
-
-axes = axes.ravel()
-
-axes[0].imshow(img)
-axes[1].imshow(img, origin="lower")
-axes[2].imshow(img * 1.0)
-axes[3].imshow(img / 255.0)
-axes[4].imshow(np.clip(img / 200.0, 0, 1))
-
-axe_img = axes[5].imshow(img[:, :, 0])
-plt.colorbar(axe_img, ax=axes[5])
-
-axe_img = axes[6].imshow(img[:, :, 0], cmap="copper")
-plt.colorbar(axe_img, ax=axes[6])
-
-for ax in axes:
-    ax.set_axis_off()
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-import matplotlib.cm as cm
-
-""" NG
-
-cc = cm._cmapnames[:5]
-print(cc)
-#['Spectral', 'copper', 'RdYlGn', 'Set2', 'summer']
-"""
-
-# 使用imshow()可視化二元函數
-y, x = np.ogrid[-2:2:200j, -2:2:200j]
-z = x * np.exp( - x**2 - y**2)
-
-extent = [np.min(x), np.max(x), np.min(y), np.max(y)]
-
-plt.subplot(121)
-plt.imshow(z, extent=extent, origin="lower")
-plt.colorbar()
-plt.subplot(122)
-plt.imshow(z, extent=extent, cmap=cm.gray, origin="lower")
-plt.colorbar();
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-#相等線圖
-
-# 用contour(左)和contourf(右)描繪相等線圖
-y, x = np.ogrid[-2:2:200j, -3:3:300j]
-z = x * np.exp( - x**2 - y**2) 
-
-extent = [np.min(x), np.max(x), np.min(y), np.max(y)]
-
-plt.subplot(121)
-cs = plt.contour(z, 10, extent=extent)
-plt.clabel(cs) #❸
-plt.subplot(122)
-plt.contourf(x.reshape(-1), y.reshape(-1), z, 20) #❹;
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-#若果需要對雜湊點資料繪制相等線圖，
-#可以先使用scipy.interpolate模組中提供的插值函數將雜湊點資料插值為網格資料。
-
-# 使用相等線繪制隱函數曲線（左），取得相等線資料並繪圖（右）
-y, x = np.ogrid[-1.5:1.5:200j, -1.5:1.5:200j]
-f = (x**2 + y**2)**4 - (x**2 - y**2)**2
-
-plt.subplot(121)
-extent = [np.min(x), np.max(x), np.min(y), np.max(y)]
-cs = plt.contour(f, extent=extent, levels=[0, 0.1],
-     colors=["b", "r"], linestyles=["solid", "dashed"], linewidths=[2, 2])
-
-plt.subplot(122)
-""" NG
-for c in cs.collections:
-    data = c.get_paths()[0].vertices
-    plt.plot(data[:,0], data[:,1], 
-        color=c.get_color()[0],  linewidth=c.get_linewidth()[0])
-"""
-plt.show()
-
-print(cs)
-#cs.collections    
-
-# NG print(cs.collections[0].get_color()[0])
-print(cs.collections[0].get_linewidth()[0])
-
-cc = len(cs.collections[0].get_paths())
-print(cc)
-
-path = cs.collections[0].get_paths()[0]
-#cc = os.path.vertices
-#print(cc)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -986,7 +847,7 @@ Z = np.array([[0.5, 0.8]])
 # 示範pcolormesh()繪制的四邊形以及其填充彩色
 plt.plot(X.ravel(), Y.ravel(), "ko")
 plt.pcolormesh(X, Y, Z)
-plt.margins(0.1);
+plt.margins(0.1)
 
 plt.show()
 
@@ -1011,7 +872,7 @@ s2, z2 = make_mesh(200)
 axes[0].pcolormesh(s1.real, s1.imag, np.abs(s1))
 axes[1].pcolormesh(z1.real, z1.imag, np.abs(s1))
 axes[2].pcolormesh(s2.real, s2.imag, np.abs(s2), rasterized=True)
-axes[3].pcolormesh(z2.real, z2.imag, np.abs(s2), rasterized=True);
+axes[3].pcolormesh(z2.real, z2.imag, np.abs(s2), rasterized=True)
 
 plt.show()
 
@@ -1027,45 +888,7 @@ T, R = np.mgrid[0:2*np.pi:360j, 0:10:100j]
 Z = func(T, R)
 
 ax=plt.subplot(111, projection="polar", aspect=1.)
-ax.pcolormesh(T, R, Z, rasterized=True);
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-#三角網格
-
-with open("diffusion.txt", encoding='UTF-8-sig') as f:
-    data = {"points":[], "triangles":[], "values":[]}
-    values = None
-    for line in f:
-        line = line.strip()
-        if not line:
-            continue
-        if line.startswith("#"):
-            values = data[line[1:]]
-            continue
-        values.append([float(s) for s in line.split()])
-        
-data = {key:np.array(data[key]) for key in data}
-
-# 使用tripcolor()和tricontour()繪制三角網格和相等線
-X, Y = data["points"].T
-triangles = data["triangles"].astype(int)
-values = data["values"].squeeze()
-
-fig, ax = plt.subplots(figsize=(12, 4.5))
-ax.set_aspect("equal")
-
-mapper = ax.tripcolor(X, Y, triangles, values, cmap="gray")
-plt.colorbar(mapper, label=u"溫度")
-
-plt.triplot(X, Y, triangles, lw=0.5, alpha=0.3, color="k")
-
-Xc = X[triangles].mean(axis=1)
-Yc = Y[triangles].mean(axis=1)
-plt.tricontour(Xc, Yc, values, 10) #❸;
+ax.pcolormesh(T, R, Z, rasterized=True)
 
 plt.show()
 
@@ -1090,11 +913,11 @@ X, Y = np.mgrid[-2:2:20j, -2:2:20j]
 C = f(X, Y)
 U, V = vec_field(f, X, Y)
 plt.quiver(X, Y, U, V, C)
-plt.colorbar();
+plt.colorbar()
 plt.gca().set_aspect("equal")
 
 plt.show()
-'''
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 """

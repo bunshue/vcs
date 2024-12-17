@@ -820,9 +820,60 @@ print("修改后像素點img[1, 0, 2] = ", img.item(1, 0, 2))
 
 print("------------------------------------------------------------")  # 60個
 
+filename = "C:/_git/vcs/_4.python/_data/lena_color.jpg"
+
+img = plt.imread(filename)
+print(img.shape, img.dtype)
+
+# 用imread()和imshow()顯示圖形
+img = plt.imread(filename)
+fig, axes = plt.subplots(2, 4, figsize=(11, 4))
+fig.subplots_adjust(0, 0, 1, 1, 0.05, 0.05)
+
+axes = axes.ravel()
+
+axes[0].imshow(img)
+axes[1].imshow(img, origin="lower")
+axes[2].imshow(img * 1.0)
+axes[3].imshow(img / 255.0)
+axes[4].imshow(np.clip(img / 200.0, 0, 1))
+
+axe_img = axes[5].imshow(img[:, :, 0])
+plt.colorbar(axe_img, ax=axes[5])
+
+axe_img = axes[6].imshow(img[:, :, 0], cmap="copper")
+plt.colorbar(axe_img, ax=axes[6])
+
+for ax in axes:
+    ax.set_axis_off()
+
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
+import matplotlib.cm as cm
+
+""" NG
+
+cc = cm._cmapnames[:5]
+print(cc)
+#['Spectral', 'copper', 'RdYlGn', 'Set2', 'summer']
+"""
+
+# 使用imshow()可視化二元函數
+y, x = np.ogrid[-2:2:200j, -2:2:200j]
+z = x * np.exp( - x**2 - y**2)
+
+extent = [np.min(x), np.max(x), np.min(y), np.max(y)]
+
+plt.subplot(121)
+plt.imshow(z, extent=extent, origin="lower")
+plt.colorbar()
+plt.subplot(122)
+plt.imshow(z, extent=extent, cmap=cm.gray, origin="lower")
+plt.colorbar();
+
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -836,8 +887,8 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
-
 sys.exit()
+
 
 plt.rcParams["savefig.facecolor"] = "0.8"
 

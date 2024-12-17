@@ -2249,9 +2249,7 @@ x_train, x_test, y_train, y_test = train_test_split(
 )  # 訓練組8成, 測試組2成
 
 
-
-
-#應該沒有用
+# 應該沒有用
 linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
 linear_regression.fit(x_train, y_train)  # 學習訓練.fit
 plt.scatter(X, Y, color="b", label="真實資料")
@@ -2260,5 +2258,3 @@ plt.plot(x_test, y_pred, "mo-", label="線性迴歸2")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-

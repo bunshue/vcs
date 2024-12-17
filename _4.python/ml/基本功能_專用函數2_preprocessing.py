@@ -60,13 +60,15 @@ from sklearn.preprocessing import RobustScaler  # RS特徵縮放
 from sklearn import datasets
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
 
+
 def show():
     plt.show()
     pass
 
+
 print("------------------------------------------------------------")  # 60個
 
-print('常態分布資料1000點')
+print("常態分布資料1000點")
 
 N = 1000  # 資料個數
 num_bins = 50  # 直方圖顯示時的束數
@@ -89,13 +91,13 @@ print(f"STD特徵縮放 前, 資料的平均值與標準差 : {X.mean():.2f}, {X
 print(f"STD特徵縮放 後, 資料的平均值與標準差 : {X_std.mean():.2f}, {X_std.std():.2f}")
 
 plt.subplot(221)
-plt.scatter(X[:, 0], X[:, 1], c='r', cmap="bwr")
+plt.scatter(X[:, 0], X[:, 1], c="r", cmap="bwr")
 # plt.scatter(X.T[0], X.T[1], c='r', cmap="Dark2")
 plt.grid(True)
 plt.title("原始資料\n平均值100 標準差15")
 
 plt.subplot(222)
-plt.scatter(X_std[:, 0], X_std[:, 1], c='r', cmap="bwr")
+plt.scatter(X_std[:, 0], X_std[:, 1], c="r", cmap="bwr")
 # plt.scatter(X_std.T[0], X_std.T[1], c='r', cmap="Dark2")
 plt.grid(True)
 plt.title("特徵縮放 StandardScaler\n平均值0 標準差1")
@@ -128,9 +130,9 @@ scaler = MinMaxScaler()  # MMS特徵縮放
 X_mms = scaler.fit_transform(X)
 
 plt.subplot(121)
-plt.scatter(X[:, 0], X[:, 1], c='r', cmap="bwr")
+plt.scatter(X[:, 0], X[:, 1], c="r", cmap="bwr")
 plt.subplot(122)
-plt.scatter(X_mms[:, 0], X_mms[:, 1], c='r', cmap="bwr")
+plt.scatter(X_mms[:, 0], X_mms[:, 1], c="r", cmap="bwr")
 plt.suptitle("MMS特徵縮放 => [0, 1]")
 show()
 

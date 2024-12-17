@@ -6,6 +6,18 @@ Olivetti Faces 人臉圖片數據集
 
 40人 每人10張
 
+
+from sklearn.datasets import fetch_olivetti_faces
+
+#指定下載位置
+download_directory='download_directory/'
+
+olivetti_faces = fetch_olivetti_faces(data_home=download_directory,shuffle=True, random_state=rng)
+olivetti_faces = fetch_olivetti_faces(data_home=download_directory)
+
+# 未指定下載位置, 下載至 C:/Users/070601/scikit_learn_data/olivetti_py3.pkz
+olivetti_faces = fetch_olivetti_faces()
+
 """
 
 print("------------------------------------------------------------")  # 60個
@@ -59,6 +71,8 @@ rng = RandomState(0)
 
 print("------------------------------------------------------------")  # 60個
 
+print("Olivetti 資料集 基本數據 fetch_olivetti_faces()")
+
 olivetti_faces = datasets.fetch_olivetti_faces()
 
 print("olivetti_faces 資料型態")
@@ -73,7 +87,7 @@ print(olivetti_faces.target.shape)
 print(olivetti_faces.images.shape)
 # (400, 64, 64)
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 plt.figure(figsize=(12, 8))
 
@@ -85,7 +99,7 @@ for i in range(20):
 plt.suptitle("原圖")
 show()
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 # 主成分分析 (Principal Component Analysis, PCA), 降低數據維度
 pca = decomposition.PCA()
@@ -93,7 +107,7 @@ pca.fit(olivetti_faces.data)
 
 print(pca.components_.shape)
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 plt.figure(figsize=(12, 8))
 
@@ -105,7 +119,7 @@ for i in range(20):
 plt.suptitle("PCA")
 show()
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 # pip install scikit-image
 from skimage.io import imsave
@@ -189,7 +203,7 @@ print("plot_gallery 1")
 plot_gallery(sample_images, sample_titles, h, w, n_row, n_col)
 show()
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=4)
 
@@ -329,10 +343,97 @@ print(classification_report(y_test, y_pred))
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+# decision_tree_multioutput_face_completion
+
+# 使用Scikit-learn各種迴歸演算法預測人臉下半部
+
+from sklearn.utils.validation import check_random_state
+from sklearn.tree import DecisionTreeRegressor
+from sklearn.neighbors import KNeighborsRegressor
+from sklearn.linear_model import LinearRegression
+from sklearn.linear_model import RidgeCV
+
+data, targets = datasets.fetch_olivetti_faces(return_X_y=True)
+
+# 資料分割
+train = data[targets < 30]
+test = data[targets >= 30]
+
+# 模型訓練
+n_pixels = data.shape[1]
+# 人臉上半部為 X，人臉下半部為 Y
+X_train = train[:, : (n_pixels + 1) // 2]
+y_train = train[:, n_pixels // 2 :]
+
+# 使用各種迴歸演算法
+ESTIMATORS = {
+    "迴歸樹": DecisionTreeRegressor(),
+    "KNN": KNeighborsRegressor(),
+    "Linear regression": LinearRegression(),
+    "Ridge": RidgeCV(),
+}
+
+# 訓練
+for name, estimator in ESTIMATORS.items():
+    estimator.fit(X_train, y_train)
+
+# 測試 5 筆資料
+
+n_faces = 5
+rng = check_random_state(4)
+face_ids = rng.randint(test.shape[0], size=(n_faces,))
+test = test[face_ids, :]
+
+X_test = test[:, : (n_pixels + 1) // 2]
+y_test = test[:, n_pixels // 2 :]
+
+# 預測
+y_test_predict = dict()
+for name, estimator in ESTIMATORS.items():
+    y_test_predict[name] = estimator.predict(X_test)
+
+# 依照各種迴歸演算法測試結果繪製人臉
+
+# 設定圖片寬/高
+image_shape = (64, 64)
+
+n_cols = 1 + len(ESTIMATORS)
+plt.figure(figsize=(2.0 * n_cols, 2.26 * n_faces))
+plt.suptitle("預測人臉下半部", size=16)
+
+# 繪圖
+for i in range(n_faces):
+    true_face = np.hstack((X_test[i], y_test[i]))
+
+    if i > 0:
+        sub = plt.subplot(n_faces, n_cols, i * n_cols + 1)
+    else:
+        sub = plt.subplot(n_faces, n_cols, i * n_cols + 1, title="true faces")
+
+    sub.axis("off")
+    sub.imshow(
+        true_face.reshape(image_shape), cmap=plt.cm.gray, interpolation="nearest"
+    )
+
+    # 依照各種迴歸演算法繪製人臉
+    for j, est in enumerate(sorted(ESTIMATORS)):
+        completed_face = np.hstack((X_test[i], y_test_predict[est][i]))
+
+        if i:
+            sub = plt.subplot(n_faces, n_cols, i * n_cols + 2 + j)
+
+        else:
+            sub = plt.subplot(n_faces, n_cols, i * n_cols + 2 + j, title=est)
+
+        sub.axis("off")
+        sub.imshow(
+            completed_face.reshape(image_shape),
+            cmap=plt.cm.gray,
+            interpolation="nearest",
+        )
+show()
 
 print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
 
 

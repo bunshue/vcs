@@ -27,6 +27,11 @@ namespace _vcs_MakePicture
         string FileName = "";
         string word = "唐";
 
+        //指明使用特定字型檔
+        string path = @"./font/康楷體w5.TTC";
+        //讀取字型文件
+        PrivateFontCollection pfc = new PrivateFontCollection();
+
         public Form1()
         {
             InitializeComponent();
@@ -2803,7 +2808,6 @@ namespace _vcs_MakePicture
 
         private void button69_Click(object sender, EventArgs e)
         {
-
         }
 
         private void button70_Click(object sender, EventArgs e)
@@ -2912,12 +2916,88 @@ namespace _vcs_MakePicture
 
         private void button73_Click(object sender, EventArgs e)
         {
+            //指明使用特定字型檔
+            string path = @"./font/康楷體w5.TTC";
+            //讀取字型文件
+            PrivateFontCollection pfc = new PrivateFontCollection();
+            pfc.AddFontFile(path);
 
+            //逐點製作圖檔
+            int width;
+            int height;
+            int xx;
+            int yy;
+
+            width = 200;
+            height = 200;
+            bitmap1 = new Bitmap(width, height);
+
+            //background
+            for (yy = 0; yy < height; yy++)
+            {
+                for (xx = 0; xx < width; xx++)
+                {
+                    //bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x11, 0x33, 0x55));
+                    bitmap1.SetPixel(xx, yy, background_color);
+                }
+            }
+
+            g = Graphics.FromImage(bitmap1);
+            sb = new SolidBrush(Color.Red);
+
+            Font f = new Font(pfc.Families[0], 56);
+
+            g.DrawString("問題", f, sb, new PointF(15, 30));
+            g.DrawString("很多", f, sb, new PointF(15, 100));
+
+            p = new Pen(Color.Red, 8);
+            g.DrawRectangle(p, new Rectangle(width / 16, height / 16, width * 14 / 16, height * 14 / 16));
+
+            pictureBox1.Image = bitmap1;
         }
 
         private void button74_Click(object sender, EventArgs e)
         {
+            //準備畫圓形的
+            //指明使用特定字型檔
+            string path = @"./font/康楷體w5.TTC";
+            //讀取字型文件
+            PrivateFontCollection pfc = new PrivateFontCollection();
+            pfc.AddFontFile(path);
 
+            //逐點製作圖檔
+            int width;
+            int height;
+            int xx;
+            int yy;
+
+            width = 200;
+            height = 200;
+            bitmap1 = new Bitmap(width, height);
+
+            //background
+            for (yy = 0; yy < height; yy++)
+            {
+                for (xx = 0; xx < width; xx++)
+                {
+                    //bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x11, 0x33, 0x55));
+                    bitmap1.SetPixel(xx, yy, background_color);
+                }
+            }
+
+            g = Graphics.FromImage(bitmap1);
+            sb = new SolidBrush(Color.Red);
+
+            Font f = new Font(pfc.Families[0], 120);
+
+            g.DrawString("可", f, sb, new PointF(-10, 20));
+
+            p = new Pen(Color.Red, 8);
+            g.DrawEllipse(p, new Rectangle(width / 16, height / 16, width * 14 / 16, height * 14 / 16));
+
+            //g.DrawRectangle(p, new Rectangle(width / 16, height / 16, width * 14 / 16, height * 14 / 16));
+
+            pictureBox1.Image = bitmap1;
         }
 
         private void button75_Click(object sender, EventArgs e)

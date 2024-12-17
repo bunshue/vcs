@@ -39,9 +39,9 @@ def show():
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 鐵達尼號資料清理
+print("鐵達尼號資料集")
 
-# 載入鐵達尼號資料集
+print("邏輯迴歸")
 
 df = sns.load_dataset("titanic")
 cc = df.head()
@@ -269,6 +269,8 @@ print(cc)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+print("邏輯迴歸")
+
 from sklearn import preprocessing, linear_model
 
 titanic = pd.read_csv("data/titanic_ds.csv")
@@ -297,6 +299,9 @@ print("迴歸係數:", logistic_regression.coef_)
 print("截距:", logistic_regression.intercept_)
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("邏輯迴歸")
 
 from sklearn import preprocessing
 from sklearn import linear_model
@@ -328,6 +333,9 @@ print((805 + 265) / (805 + 185 + 58 + 265))
 print(logistic_regression.score(X, y))
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("邏輯迴歸")
 
 from sklearn import preprocessing
 from sklearn import linear_model
@@ -386,6 +394,8 @@ pd.crosstab(preds[:, 0], columns=[XTest["PClass"], XTest["SexCode"]]).to_html(
 )
 
 print("------------------------------------------------------------")  # 60個
+
+print("決策樹")
 
 from sklearn import preprocessing
 from sklearn import tree
@@ -560,6 +570,8 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
+print("決策樹")
 
 
 def read_dataset(fname):
@@ -772,6 +784,7 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 數據集和數據處理
+print("邏輯迴歸")
 
 from pandas import Series, DataFrame
 
@@ -848,6 +861,8 @@ Y_pred = logistic_regression.predict(X_test)  # 預測
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+print("邏輯迴歸")
+
 # How do I use pandas with scikit-learn to create Kaggle submissions? (video)
 
 # 讀取[Kaggle's Titanic competition]資料集至df
@@ -923,7 +938,7 @@ print(cc)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 07_13_chaid_three_cat
+# chaid_three_cat
 
 from seaborn import load_dataset
 
