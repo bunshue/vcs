@@ -635,7 +635,7 @@ model.add(Dense(10, activation="softmax"))  # 輸出層的神經元 10 個
 sgd = optimizers.SGD(learning_rate=0.01)
 
 # 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
-model.compile(optimizer=sgd, loss="categorical_crossentropy", metrics=["accuracy"])
+model.compile(optimizer="sgd", loss="categorical_crossentropy", metrics=["accuracy"])
 
 do_cnn_test()
 
@@ -1156,7 +1156,7 @@ model.add(Dense(10, activation="softmax"))  # 輸出層的神經元 10 個
 sgd = optimizers.SGD(learning_rate=0.01)
 
 # 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
-model.compile(optimizer=sgd, loss="categorical_crossentropy", metrics=["accuracy"])
+model.compile(optimizer="sgd", loss="categorical_crossentropy", metrics=["accuracy"])
 
 do_cnn_test()
 
@@ -1184,7 +1184,7 @@ lr = 0.01
 sgd = optimizers.SGD(learning_rate=lr)
 
 # 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
-model.compile(optimizer=sgd, loss="categorical_crossentropy", metrics=["accuracy"])
+model.compile(optimizer="sgd", loss="categorical_crossentropy", metrics=["accuracy"])
 
 do_cnn_test()
 
@@ -1790,7 +1790,7 @@ model.add(Activation("softmax"))
 adam = Adam(learning_rate=1e-4)
 
 # 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
-model.compile(optimizer=adam, loss="categorical_crossentropy", metrics=["accuracy"])
+model.compile(optimizer="adam", loss="categorical_crossentropy", metrics=["accuracy"])
 
 do_cnn_test4d()
 
@@ -1806,7 +1806,7 @@ model.add(tf.keras.layers.Dense(units=10, activation=tf.nn.softmax))
 
 # 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
 model.compile(
-    optimizer=tf.keras.optimizers.Adam(learning_rate=0.001),
+    optimizer=Adam(learning_rate=0.001),
     loss=tf.keras.losses.categorical_crossentropy,
     metrics=["accuracy"],
 )
@@ -2505,16 +2505,12 @@ model = Sequential(
 rmsprop = RMSprop(learning_rate=0.001, rho=0.9, epsilon=1e-08, decay=0.0)
 
 # 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
-model.compile(optimizer=rmsprop, loss="categorical_crossentropy", metrics=["accuracy"])
+model.compile(optimizer="rmsprop", loss="categorical_crossentropy", metrics=["accuracy"])
 
-print("Training ------------")
-# Another way to train the model
 model.fit(X_train, y_train, epoch=2, batch_size=32)
 
-print("\nTesting ------------")
-# Evaluate the model with the metrics we defined earlier
+print("預測")
 loss, accuracy = model.evaluate(X_test, y_test)
-
 print("test loss: ", loss)
 print("test accuracy: ", accuracy)
 
@@ -2568,7 +2564,7 @@ model.add(Activation("softmax"))
 adam = Adam(LR)
 
 # 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
-model.compile(optimizer=adam, loss="categorical_crossentropy", metrics=["accuracy"])
+model.compile(optimizer="adam", loss="categorical_crossentropy", metrics=["accuracy"])
 
 # training
 for step in range(4001):
@@ -2637,7 +2633,7 @@ adam = Adam(LR)
 
 # 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
 model.compile(
-    optimizer=adam,
+    optimizer="adam",
     loss="mse",
 )
 

@@ -35,7 +35,7 @@ def show():
 
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 plt.figure(
     num="新進測試 01",
     figsize=(12, 8),
@@ -234,153 +234,6 @@ plt.subplot(236)
 
 
 plt.tight_layout()
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-
-"""
-python用mpl_finance中的candlestick_ohlc畫分時圖
-
-matplotlib.finance獨立出來成爲mpl_finance，而mpl_finance中的candlestick_ochl和candlestick_ohlc一般用來畫股票的K線圖。
-我需要分析分時圖，也就是一分鐘的行情，這個時候就不能直接用candlestick_ochl函數，因爲candlestick_ochl中x軸最小的單位是日期，不是分鐘。
-
-經過對mpl_finance的源代碼進行分析，問題在於matplotlib的date2num將日期轉換爲浮點數，
-浮點數的整數部分表示日期，小數部分代表小時和分鐘。比如下面4個時間段是連續的分鐘。
-時間 	date2num之後 	乘以1440
-2018/09/17-21:34 	736954.8986 	1061215054
-2018/09/17-21:35 	736954.8993 	1061215055
-2018/09/17-21:36 	736954.9000 	1061215056
-2018/09/17-21:37 	736954.9007 	1061215057
-
-可以看出date2num函數計算之後，4個時間的整數部分都是736954，導致在X軸上這4個時間段都重疊在一起，無法區分了。
-要達到的效果是每一個分鐘也能成爲一個整數，這樣就可以顯示出來了。
-那麼一天是24小時，每小時60分鐘，那麼一天就是1440分鐘，將date2num計算的浮點數乘以1440就可以將每一分鐘轉爲整數，那麼就可以在x軸上。
-
-最後還需要對x軸格式化，因爲自己對x軸進行了處理（乘以1440），採用默認的格式化是亂碼。需要自定義x軸的格式化函數。
-
-pip install mpl_finance
-pip install --upgrade mplfinance
-
-"""
-
-from pandas import DataFrame
-import matplotlib.dates as dates
-import mplfinance as mpf
-from matplotlib.ticker import Formatter
-from mplfinance.original_flavor import candlestick_ohlc
-
-dfcvs = DataFrame(
-    [
-        #    時間            開盤, 最高 ,最低, 收盤
-        ["2018/09/17-21:34", 3646, 3650, 3644, 3650],
-        ["2018/09/17-21:35", 3650, 3650, 3648, 3648],
-        ["2018/09/17-21:36", 3650, 3650, 3648, 3650],
-        ["2018/09/17-21:37", 3652, 3654, 3648, 3652],
-    ]
-)
-
-dfcvs.columns = ["時間", "開盤", "最高", "最低", "收盤"]
-dfcvs["時間"] = pd.to_datetime(dfcvs["時間"], format="%Y/%m/%d-%H:%M")
-
-# matplotlib的date2num將日期轉換爲浮點數，整數部分區分日期，小數區分小時和分鐘
-# 因爲小數太小了，需要將小時和分鐘變成整數，需要乘以24（小時）×60（分鐘）= 1440，這樣小時和分鐘也能成爲整數
-# 這樣就可以一分鐘就佔一個位置
-
-dfcvs["時間"] = dfcvs["時間"].apply(lambda x: dates.date2num(x) * 1440)
-data_mat = dfcvs.values
-
-fig, ax = plt.subplots(figsize=(10, 6))
-
-fig.subplots_adjust(bottom=0.1)
-candlestick_ohlc(
-    ax, data_mat, colordown="#53c156", colorup="#ff1717", width=0.2, alpha=1
-)
-
-
-# 將x軸的浮點數格式化成日期小時分鐘
-# 默認的x軸格式化是日期被dates.date2num之後的浮點數，因爲在上面乘以了1440，所以默認是錯誤的
-# 只能自己將浮點數格式化爲日期時間分鐘
-# 參考https://matplotlib.org/examples/pylab_examples/date_index_formatter.html
-class MyFormatter(Formatter):
-    def __init__(self, dates, fmt="%Y%m%d %H:%M"):
-        self.dates = dates
-        self.fmt = fmt
-
-    def __call__(self, x, pos=0):
-        "Return the label for time x at position pos"
-        ind = int(np.round(x))
-        # ind就是x軸的刻度數值，不是日期的下標
-
-        return dates.num2date(ind / 1440).strftime(self.fmt)
-
-
-formatter = MyFormatter(data_mat[:, 0])
-ax.xaxis.set_major_formatter(formatter)
-
-for label in ax.get_xticklabels():
-    label.set_rotation(90)
-    label.set_horizontalalignment("right")
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-
-# 加載取數與繪圖所需的函數包
-import datetime
-from hs_udata import set_token, stock_quote_daily
-import matplotlib as mpl
-import matplotlib.dates as mdates
-
-# from mplfinance import candlestick_ohlc
-from mplfinance.original_flavor import candlestick_ohlc
-
-data_price = [1, 2, 3, 4, 5]
-
-# 繪製圖片
-fig = plt.figure(
-    num="matplotlib 02",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
-
-grid = plt.GridSpec(12, 10, wspace=0.5, hspace=0.5)
-
-ax1 = fig.add_subplot(grid[0:8, 0:12])  # 設置K線圖的尺寸
-
-# candlestick_ohlc(ax1, ohlc.values.tolist(), width = 0.7, colorup = 'red', colordown = 'green')
-
-# （2）繪制均線
-# ax1.plot(range(len(data_price)), data_price, color = 'red', lw = 2, label = 'MA (5)')
-
-# 設置標注
-plt.title("test", fontsize=14)  # 設置圖片標題
-plt.ylabel("價 格（元）", fontsize=14)  # 設置縱軸標題
-# plt.legend(loc = 'best')                    # 繪制圖例
-ax1.set_xticks([])  # 日期標注在成交量中，故清空此處x軸刻度
-ax1.set_xticklabels([])  # 日期標注在成交量中，故清空此處x軸
-
-# （3）繪制成交量
-# 成交量數據
-
-data_volume = [3, 2, 1, 4, 6]
-# 繪制成交量
-ax2 = fig.add_subplot(grid[8:10, 0:12])  # 設置成交量圖形尺寸
-# ax2.bar(data_volume, color = 'r')                    # 繪制紅色柱狀圖
-# ax2.bar(data_volume, color = 'g')                    # 繪制綠色柱狀圖
-plt.xticks(rotation=30)
-plt.xlabel("日 期", fontsize=14)  # 設置橫軸標題
-# 修改橫軸日期標注
-date_list = [1, 2, 3, 4, 5]  # ohlc.index.tolist()           # 獲取日期列表
-xticks_len = round(len(date_list) / (len(ax2.get_xticks()) - 1))  # 獲取默認橫軸標注的間隔
-xticks_num = range(0, len(date_list), xticks_len)  # 生成橫軸標注位置列表
-xticks_str = list(map(lambda x: date_list[int(x)], xticks_num))  # 生成正在標注日期列表
-ax2.set_xticks(xticks_num)  # 設置橫軸標注位置
-ax2.set_xticklabels(xticks_str)  # 設置橫軸標注日期
 
 show()
 
@@ -1587,7 +1440,7 @@ plt.ylabel("H cm")
 plt.legend(("Orange", "Lemons"), loc="upper right")
 
 show()
-'''
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -1848,6 +1701,12 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 
 
 print("------------------------------------------------------------")  # 60個

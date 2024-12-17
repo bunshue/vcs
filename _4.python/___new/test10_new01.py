@@ -27,7 +27,7 @@ import requests
 import numpy as np
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 def printlocal():
     lang = "Java"
     print(f"語言 : {lang}")
@@ -323,12 +323,98 @@ x = [
 print(x)
 
 print("------------------------------------------------------------")  # 60個
+'''
+
+
+print("------------------------------------------------------------")  # 60個
+print("chr-ord-ascii ST")
+print("------------------------------------------------------------")  # 60個
 
 for x in range(0x2160, 0x216A):
     print(chr(x), end=" ")
 
 print()
 
+print("字元轉數值")
+cc = ord("豬")
+print(cc)
+
+print("數值轉字元")
+nn = 35948 + 5
+cc = chr(nn)
+print(cc)
+
+
+
+
+#ord()回傳參數字元對應的的編碼位置
+print("==Test1==")
+print(ord("H"))
+print(ord("你"))
+print(ord("好"))
+#chr()回傳參數編碼位置對應的字元
+print("==Test2==")
+print(chr(72))
+print(chr(20320))
+print(chr(22909))
+
+
+##輸出'A'之後的10個英文字母
+print("==Test3==")
+for i in range(65,75):
+    print(chr(i),end='')
+print()
+##輸出'你'之後的10個中文字
+for i in range(20320,20330):
+    print(chr(i),end='')
+print()
+#str()回傳參數為字串
+print("==Test4==")
+print(str(123)+"456")
+#ascii()回傳參數的字串表達形式
+##如果字串含有非ASCII字元，所有非ASCII字元會以Unicode跳脫字元的方式呈現
+print(ascii("Ab123"))
+print(ascii("hello你好".encode('utf-8')))
+
+
+# ord()是將字元轉成ASCII碼
+# chr()是將ASCII碼轉成字元
+# ord()和chr()互為反函數
+print(chr(ord("A")))
+print(ord(chr(65)))
+
+
+# i的初始值為A字元的ASCII碼(65)，終止值小於Z字元的ASCII碼(90)+1，遞增值為1
+for i in range(ord("A"), ord("Z") + 1, 1):
+    print(chr(i), end="")
+
+
+
+
+
+x1 = 97
+x2 = chr(x1)
+print(x2)  # 輸出數值97的字元
+x3 = ord(x2)
+print(x3)  # 輸出字元x3的Unicode(10進位)碼值
+x4 = "魁"
+print(hex(ord(x4)))  # 輸出字元'魁'的Unicode(16進位)碼值
+
+print("------------------------------------------------------------")  # 60個
+
+
+x1 = 97
+x2 = chr(x1)
+print(x2)  # 輸出數值97的字元
+x3 = ord(x2)
+print(x3)  # 輸出字元x3的Unicode碼值
+x4 = "魁"
+print(ord(x4))  # 輸出字元'魁'的Unicode碼值
+
+sys.exit()
+
+print("------------------------------------------------------------")  # 60個
+print("chr-ord-ascii SP")
 print("------------------------------------------------------------")  # 60個
 
 import string
@@ -7940,22 +8026,6 @@ for i in range(n+1):
 
 print("------------------------------------------------------------")  # 60個
 
-"""
-import datetime
-
-now = datetime.datetime.now().strftime('%H:%M:%S')
-print(now)    # 14:30:23
-
-print("------------------------------------------------------------")  # 60個
-
-import datetime
-
-while True:
-    now = datetime.datetime.now().strftime('%H:%M:%S')
-    print(f'\r{now}', end = '')     # 前方加上 \r
-    time.sleep(1)
-"""
-
 print("------------------------------------------------------------")  # 60個
 
 print('末N碼')
@@ -8781,12 +8851,6 @@ else:
 """
 print("------------------------------------------------------------")  # 60個
 
-import datetime
-now = datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S")
-print("現在時間 :", now)
-
-print("------------------------------------------------------------")  # 60個
-
 ##預設是取到整數位，根據小數第一位(如果是5要看個位數，奇進偶捨)判別
 print("==Test2==")
 print(round(3.5))
@@ -8799,36 +8863,6 @@ print(round(1.35,1))
 print(round(1.36,1))
 print(round(1.45,1))
 print(round(1.46,1))
-
-
-
-#ord()回傳參數字元對應的的編碼位置
-print("==Test1==")
-print(ord("H"))
-print(ord("你"))
-print(ord("好"))
-#chr()回傳參數編碼位置對應的字元
-print("==Test2==")
-print(chr(72))
-print(chr(20320))
-print(chr(22909))
-##輸出'A'之後的10個英文字母
-print("==Test3==")
-for i in range(65,75):
-    print(chr(i),end='')
-print()
-##輸出'你'之後的10個中文字
-for i in range(20320,20330):
-    print(chr(i),end='')
-print()
-#str()回傳參數為字串
-print("==Test4==")
-print(str(123)+"456")
-#ascii()回傳參數的字串表達形式
-##如果字串含有非ASCII字元，所有非ASCII字元會以Unicode跳脫字元的方式呈現
-print(ascii("Ab123"))
-print(ascii("hello你好".encode('utf-8')))
-
 
 print('字串的對齊 justify')
 
@@ -9182,17 +9216,6 @@ print(int("1001", 2))
 # 字串轉數值,浮點數
 print(float("3.14"))
 
-# ord()是將字元轉成ASCII碼
-# chr()是將ASCII碼轉成字元
-# ord()和chr()互為反函數
-print(chr(ord("A")))
-print(ord(chr(65)))
-
-
-# i的初始值為A字元的ASCII碼(65)，終止值小於Z字元的ASCII碼(90)+1，遞增值為1
-for i in range(ord("A"), ord("Z") + 1, 1):
-    print(chr(i), end="")
-
 # bin()回傳參數的二進位值
 ##輸出結果數字前面0b代表二進位(binary)
 print(bin(10))
@@ -9219,29 +9242,8 @@ print("16進位 '5A'   = ", int("5A", 16))
 
 print("------------------------------------------------------------")  # 60個
 
-
-x1 = 97
-x2 = chr(x1)
-print(x2)  # 輸出數值97的字元
-x3 = ord(x2)
-print(x3)  # 輸出字元x3的Unicode(10進位)碼值
-x4 = "魁"
-print(hex(ord(x4)))  # 輸出字元'魁'的Unicode(16進位)碼值
-
-print("------------------------------------------------------------")  # 60個
-
 x = 100
 print("100的16進位 = %x\n100的 8進位 = %o" % (x, x))
-
-print("------------------------------------------------------------")  # 60個
-
-x1 = 97
-x2 = chr(x1)
-print(x2)  # 輸出數值97的字元
-x3 = ord(x2)
-print(x3)  # 輸出字元x3的Unicode碼值
-x4 = "魁"
-print(ord(x4))  # 輸出字元'魁'的Unicode碼值
 
 print("------------------------------------------------------------")  # 60個
 

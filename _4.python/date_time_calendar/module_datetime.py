@@ -985,6 +985,27 @@ print(dt.strftime("%Y/%m/%d %H:%M:%S"))
 
 print("------------------------------------------------------------")  # 60個
 
+"""
+import datetime
+
+now = datetime.datetime.now().strftime('%H:%M:%S')
+print(now)    # 14:30:23
+
+print("------------------------------------------------------------")  # 60個
+
+import datetime
+
+while True:
+    now = datetime.datetime.now().strftime('%H:%M:%S')
+    print(f'\r{now}', end = '')     # 前方加上 \r
+    time.sleep(1)
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+import datetime
+now = datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S")
+print("現在時間 :", now)
 
 print("------------------------------------------------------------")  # 60個
 
