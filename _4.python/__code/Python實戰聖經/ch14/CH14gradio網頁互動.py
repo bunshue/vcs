@@ -1,5 +1,7 @@
 """
-pip install gradio==3.1.0
+XXX pip install gradio==3.1.0
+
+pip install gradio==3.50.2
 
 """
 

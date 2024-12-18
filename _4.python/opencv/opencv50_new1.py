@@ -3893,7 +3893,6 @@ if __name__ == "__main__":
 print("------------------------------------------------------------")  # 60個
 
 print("邊緣檢測 LoG_edge")
-
 from scipy import signal
 
 
@@ -3947,7 +3946,6 @@ cvshow("edge_binary", edge_binary)
 print("------------------------------------------------------------")  # 60個
 
 print("邊緣檢測 LoG")
-
 from scipy import signal
 
 
@@ -3993,7 +3991,6 @@ cvshow("edge_binary", edge_binary)
 print("------------------------------------------------------------")  # 60個
 
 print("邊緣檢測 DoG")
-
 from scipy import signal
 
 
@@ -4578,7 +4575,6 @@ Image(data=jpg_data.tobytes())
 
 # 視訊輸出
 
-
 def test_avi_output(fn, fourcc):
     # fourcc = cv2.FOURCC(*fourcc)
     fourcc = cv2.VideoWriter_fourcc(*"XVID")
@@ -4590,10 +4586,7 @@ def test_avi_output(fn, fourcc):
         vw.write(img)
     vw.release()
 
-
 test_avi_output("tmp_fmp4.avi", "fmp4")
-
-print("------------------------------------------------------------")  # 60個
 
 from os import path
 
@@ -4602,22 +4595,6 @@ for quantizer in [1, 10, 20, 30, 40]:
     test_avi_output(fn, "x264")
     fsize = path.getsize(fn)
     print("quantizer = {:02d}, size = {:07d} bytes".format(quantizer, fsize))
-
-# 視訊輸入
-
-video = cv2.VideoCapture("x264_q10.avi")
-print("FPS:", video.get(cv2.CAP_PROP_FPS))
-print("FRAMES:", video.get(cv2.CAP_PROP_FRAME_COUNT))
-print("WIDTH:", video.get(cv2.CAP_PROP_FRAME_WIDTH))
-print("HEIGHT:", video.get(cv2.CAP_PROP_FRAME_HEIGHT))
-print("CURRENT FRAME:", video.get(cv2.CAP_PROP_POS_FRAMES))
-res, frame0 = video.read()
-print("CURRENT FRAME:", video.get(cv2.CAP_PROP_POS_FRAMES))
-video.set(cv2.CAP_PROP_POS_FRAMES, 50)
-print("CURRENT FRAME:", video.get(cv2.CAP_PROP_POS_FRAMES))
-res, frame50 = video.read()
-print("CURRENT FRAME:", video.get(cv2.CAP_PROP_POS_FRAMES))
-video.release()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -4709,6 +4686,7 @@ ax.imshow(result[:, :, ::-1])
 ax.imshow(img[:, :, ::-1], alpha=0.4)
 p = np.vstack((src, src[:1]))
 ax.plot(p[:, 0], p[:, 1], "-o", alpha=0.5)
+
 from matplotlib.patches import FancyArrowPatch
 
 for p1, p2 in zip(src, dst):
@@ -4737,6 +4715,7 @@ ax.imshow(result[:, :, ::-1])
 ax.imshow(img[:, :, ::-1], alpha=0.4)
 p = np.vstack((src, src[:1]))
 ax.plot(p[:, 0], p[:, 1], "-o", alpha=0.5)
+
 from matplotlib.patches import FancyArrowPatch
 
 for p1, p2 in zip(src, dst):
@@ -5407,7 +5386,8 @@ for index in root_index:
 
 lines = [line[:, 0, :] for line in lines]
 
-from matplotlib.collections import LineCollection, PolyCollection
+from matplotlib.collections import LineCollection
+from matplotlib.collections import PolyCollection
 
 fig, ax = plt.subplots(figsize=(8, 8))
 ax.set_aspect("equal")
@@ -5612,39 +5592,6 @@ merged_components.append(tuple(current_component[:4]))
 return merged_components
 返回合併後的元件資訊，這些資訊包括每個連通域的 x, y, w, h（左上角座標和寬高）。
 """
-print("------------------------------------------------------------")  # 60個
-
-# OpenCV如何讀取特定時間區段？
-
-video_filename = "C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4"
-
-# 影片捕捉物件
-cap = cv2.VideoCapture(video_filename)
-fps = cap.get(cv2.CAP_PROP_FPS)
-
-# 設定開始時間(秒)
-start_time_sec = 3
-start_frame = int(start_time_sec * fps)
-cap.set(cv2.CAP_PROP_POS_FRAMES, start_frame)
-
-# 設定結束時間(秒)
-end_time_sec = 15
-end_frame = int(end_time_sec * fps)
-
-# 如果還沒處理到結束的frame位置則...
-while cap.get(cv2.CAP_PROP_POS_FRAMES) < end_frame:
-    ret, frame = cap.read()
-
-    if not ret:
-        break  # 當所有幀都被讀取完畢時退出循環
-
-    # 在這裡處理每一幀的操作，例如顯示視頻，保存幀等
-    # print('a', end = ' ')
-
-# 釋放資源
-cap.release()
-cv2.destroyAllWindows()
-
 print("------------------------------------------------------------")  # 60個
 
 # [Python]使用NumPy 進行影像黑白反轉

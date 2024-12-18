@@ -1,14 +1,11 @@
 """
-
 cv2之工具
 
 cv2.setMouseCallback
 
-
 """
-
-import cv2
 import sys
+import cv2
 import numpy as np
 
 W = 640
@@ -16,108 +13,9 @@ H = 480
 
 ESC = 27
 SPACE = 32
-
+'''
 print("------------------------------------------------------------")  # 60個
 print("cv2.setMouseCallback 01")
-
-print("滑鼠動作 + 鍵盤按鍵s c, 按ESC離開")
-
-# 建立底圖影像方法一
-image = np.full(shape=(H, W, 1), fill_value=0, dtype=np.uint8)
-
-# 建立底圖影像方法二
-# image = np.zeros((H,W,3),np.uint8)
-
-# 建立底圖影像方法三
-# np.ones(shape, dtype, order)
-# shape(高，宽，色彩通道数)
-# dtype 常用的是np.unit8
-# image = np.ones((H, W, 3), np.uint8)
-# image = image * 255 #白色圖像
-
-cv2.namedWindow("image")
-
-drawing = False
-
-
-def keyboard_function():
-    print("你按了鍵盤")
-
-
-def draw_circle1(event, x, y, flags, param):
-    global image, drawing
-    if event == cv2.EVENT_LBUTTONDOWN:  #  滑鼠左鍵
-        drawing = True
-        cv2.circle(image, (x, y), 2, (255), -1)
-    elif event == cv2.EVENT_MOUSEMOVE:  # 滑鼠移動
-        if drawing == True:
-            cv2.circle(image, (x, y), 2, (255), -1)
-    elif event == cv2.EVENT_LBUTTONUP:  # 左鍵放開
-        drawing = False
-        cv2.circle(image, (x, y), 2, (255), -1)
-
-
-cv2.setMouseCallback("image", draw_circle1)
-
-while True:
-    cv2.imshow("image", image)
-    # k = cv2.waitKey(1) & 0xFF # 每 1 毫秒偵測一次鍵盤事件
-    k = cv2.waitKey(1)  # 等待按鍵輸入
-    if k == ESC:
-        break
-    elif k == ord("s"):
-        keyboard_function()
-    elif k == ord("c"):
-        image = np.full(shape=(H, W, 1), fill_value=0, dtype=np.uint8)
-        print("clear")
-
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-print("cv2.setMouseCallback 02")
-
-image = np.full(shape=(H, W, 1), fill_value=0, dtype=np.uint8)
-cv2.namedWindow("image")
-
-
-drawing = False
-
-
-def draw_circle3(event, x, y, flags, param):
-    global image, drawing
-    if event == cv2.EVENT_LBUTTONDOWN:  #  滑鼠左鍵
-        drawing = True
-        cv2.circle(image, (x, y), 2, (255), -1)
-    elif event == cv2.EVENT_MOUSEMOVE:  # 滑鼠移動
-        if drawing == True:
-            cv2.circle(image, (x, y), 2, (255), -1)
-    elif event == cv2.EVENT_LBUTTONUP:  # 左鍵放開
-        drawing = False
-        cv2.circle(image, (x, y), 2, (255), -1)
-
-
-cv2.setMouseCallback("image", draw_circle3)
-
-
-def CNN():
-    print("CNN")
-
-
-while 1:
-    cv2.imshow("image", image)
-    # k = cv2.waitKey(1) & 0xFF # 每 1 毫秒偵測一次鍵盤事件
-    k = cv2.waitKey(1)  # 等待按鍵輸入
-    if k == ESC:
-        break
-    elif k == ord("s"):
-        CNN()
-    elif k == ord("c"):
-        image = np.full(shape=(H, W, 1), fill_value=0, dtype=np.uint8)
-
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-print("cv2.setMouseCallback 03")
 
 dots = []  # 建立空串列記錄座標
 draw = np.zeros((H, W, 4), dtype="uint8")  # 建立 WxH 的 RGBA 黑色畫布
@@ -137,11 +35,11 @@ def show_xy(event, x, y, flags, param):
             x2 = dots[len(dots) - 1][0]  # 取得倒數第一個點的 x 座標
             y2 = dots[len(dots) - 1][1]  # 取得倒數第一個點的 y 座標
             cv2.line(draw, (x1, y1), (x2, y2), (0, 0, 255, 255), 2)  # 畫直線
-        cv2.imshow("ImageShow", draw)
+        cv2.imshow("OpenCV", draw)
 
 
-cv2.imshow("ImageShow", draw)
-cv2.setMouseCallback("ImageShow", show_xy)
+cv2.imshow("OpenCV", draw)
+cv2.setMouseCallback("OpenCV", show_xy)
 
 while True:
     # k = cv2.waitKey(1) & 0xFF # 每 1 毫秒偵測一次鍵盤事件
@@ -150,13 +48,12 @@ while True:
         break
     elif k == ord("r"):
         draw = np.zeros((H, W, 4), dtype="uint8")  # 如果按下 r 就變成原本全黑的畫布
-        cv2.imshow("ImageShow", draw)
+        cv2.imshow("OpenCV", draw)
 
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
-
-print("cv2.setMouseCallback 04 測試所有按鍵")
+print("cv2.setMouseCallback 02 測試所有按鍵")
 
 filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
 image = cv2.imread(filename)
@@ -212,8 +109,8 @@ def OnMouseAction(event, x, y, flags, param):
             print("向右滾動")
 
 
-cv2.imshow("TestMouseEvent", image)
-cv2.setMouseCallback("TestMouseEvent", OnMouseAction)
+cv2.imshow("OpenCV", image)
+cv2.setMouseCallback("OpenCV", OnMouseAction)
 
 while True:
     # k = cv2.waitKey(1) & 0xFF  # 每 1 毫秒偵測一次鍵盤事件
@@ -226,7 +123,7 @@ while True:
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
-print("cv2.setMouseCallback 05 測試滑鼠移動")
+print("cv2.setMouseCallback 03 測試滑鼠移動")
 
 filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
 image = cv2.imread(filename)
@@ -237,17 +134,17 @@ def show_xy(event, x, y, flags, param):
     if event == cv2.EVENT_MOUSEMOVE:  # 滑鼠移動
         image2 = image.copy()  # 當滑鼠移動時，複製原本的圖片
         cv2.circle(image2, (x, y), 10, (0, 0, 0), 1)  # 繪製黑色空心圓
-        cv2.imshow("ImageShow", image2)  # 顯示繪製後的影像
+        cv2.imshow("OpenCV", image2)  # 顯示繪製後的影像
 
 
-cv2.imshow("ImageShow", image)
-cv2.setMouseCallback("ImageShow", show_xy)
+cv2.imshow("OpenCV", image)
+cv2.setMouseCallback("OpenCV", show_xy)
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
-print("cv2.setMouseCallback 06")
+print("cv2.setMouseCallback 04")
 
 filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
 image = cv2.imread(filename)
@@ -266,17 +163,17 @@ def show_xy(event, x, y, flags, param):
             x2 = dots[num - 1][0]
             y2 = dots[num - 1][1]
             cv2.line(image, (x1, y1), (x2, y2), (0, 0, 255), 2)  # 取得最後的兩個座標，繪製直線
-        cv2.imshow("ImageShow", image)
+        cv2.imshow("OpenCV", image)
 
 
-cv2.imshow("ImageShow", image)
-cv2.setMouseCallback("ImageShow", show_xy)
+cv2.imshow("OpenCV", image)
+cv2.setMouseCallback("OpenCV", show_xy)
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
-print("cv2.setMouseCallback 07 滑鼠圈選圖片")
+print("cv2.setMouseCallback 05 滑鼠圈選圖片")
 
 filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
 image = cv2.imread(filename)
@@ -300,17 +197,17 @@ def show_xy(event, x, y, flags, param):
                 image2, (dot1[0], dot1[1]), (dot2[0], dot2[1]), (0, 0, 255), 2
             )
             # 不斷顯示新圖片 ( 如果不這麼做，會出現一堆四邊形殘影 )
-            cv2.imshow("ImageShow", image2)
+            cv2.imshow("OpenCV", image2)
 
 
-cv2.imshow("ImageShow", image)
-cv2.setMouseCallback("ImageShow", show_xy)
+cv2.imshow("OpenCV", image)
+cv2.setMouseCallback("OpenCV", show_xy)
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
-print("cv2.setMouseCallback 08 滑鼠圈選圖片")
+print("cv2.setMouseCallback 06 滑鼠圈選圖片")
 
 filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
 image = cv2.imread(filename)
@@ -330,19 +227,19 @@ def show_xy(event, x, y, flags, param):
             cv2.rectangle(
                 image2, (dot1[0], dot1[1]), (dot2[0], dot2[1]), (0, 0, 255), 2
             )
-            cv2.imshow("ImageShow", image2)
+            cv2.imshow("OpenCV", image2)
         if event == cv2.EVENT_LBUTTONUP:  # 左鍵放開
             image = image2  # 滑鼠放開時 ( event == cv2.EVENT_LBUTTONUP )，將 image 更新為 image2
 
 
-cv2.imshow("ImageShow", image)
-cv2.setMouseCallback("ImageShow", show_xy)
+cv2.imshow("OpenCV", image)
+cv2.setMouseCallback("OpenCV", show_xy)
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
-print("cv2.setMouseCallback 09 滑鼠圈選圖片")
+print("cv2.setMouseCallback 07 滑鼠圈選圖片")
 
 filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
 image = cv2.imread(filename)
@@ -362,7 +259,7 @@ def show_xy(event, x, y, flags, param):
             cv2.rectangle(
                 image2, (dot1[0], dot1[1]), (dot2[0], dot2[1]), (0, 0, 255), 2
             )
-            cv2.imshow("ImageShow", image2)
+            cv2.imshow("OpenCV", image2)
         if event == cv2.EVENT_LBUTTONUP:  # 左鍵放開
             level = 8  # 縮小比例 ( 可當作馬賽克的等級 )
             h = int((dot2[0] - dot1[0]) / level)  # 按照比例縮小後的高度 ( 使用 int 去除小數點 )
@@ -377,11 +274,11 @@ def show_xy(event, x, y, flags, param):
                 interpolation=cv2.INTER_NEAREST,
             )  # 放大到原本的大小
             image[dot1[1] : dot2[1], dot1[0] : dot2[0]] = mosaic  # 置換成馬賽克的影像
-            cv2.imshow("ImageShow", image)
+            cv2.imshow("OpenCV", image)
 
 
-cv2.imshow("ImageShow", image)
-cv2.setMouseCallback("ImageShow", show_xy)
+cv2.imshow("OpenCV", image)
+cv2.setMouseCallback("OpenCV", show_xy)
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()
@@ -389,7 +286,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 
 """ TBD
-print("cv2.setMouseCallback 10")
+print("cv2.setMouseCallback 08")
 
 d = 400
 def draw(event, x, y, flags, param):
@@ -403,10 +300,10 @@ def draw(event, x, y, flags, param):
         color = np.random.randint(0, high = 256, size = (3,)).tolist()  #np.random之randint不含尾
         cv2.rectangle(image,(p1x, p1y),(p2x, p2y), color, 2)
 image = np.ones((d, d, 3), dtype = "uint8") * 255
-cv2.namedWindow('Demo19.10')
-cv2.setMouseCallback('Demo19.10', draw)
+cv2.namedWindow('OpenCV')
+cv2.setMouseCallback('OpenCV', draw)
 while(1):
-    cv2.imshow('Image', image)
+    cv2.imshow('OpenCV', image)
     #k = cv2.waitKey(1) & 0xFF # 每 1 毫秒偵測一次鍵盤事件
     k = cv2.waitKey(1)  # 等待按鍵輸入
     if k == ESC:
@@ -415,7 +312,7 @@ while(1):
 cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
-print("cv2.setMouseCallback 11")
+print("cv2.setMouseCallback 09")
 
 #fail
 d = 400
@@ -435,16 +332,16 @@ def draw(event,x,y,flags,param):
         cv2.rectangle(image,(p1x,p1y),(p2x,p2y),color,thickness)
 
 image = np.ones((d, d, 3), np.uint8) * 255
-cv2.namedWindow('image')
-cv2.setMouseCallback('image', draw)
-cv2.createTrackbar('R', 'image', 0, 1, fill)
+cv2.namedWindow('OpenCV')
+cv2.setMouseCallback('OpenCV', draw)
+cv2.createTrackbar('R', 'OpenCV', 0, 1, fill)
 while(1):
-    cv2.imshow('Image', image)
+    cv2.imshow('OpenCV', image)
     #k = cv2.waitKey(1) & 0xFF # 每 1 毫秒偵測一次鍵盤事件
     k = cv2.waitKey(1)  # 等待按鍵輸入
     if k == ESC:
         break
-    g = cv2.getTrackbarPos('R', 'image')
+    g = cv2.getTrackbarPos('R', 'OpenCV')
     if g == 0:
         thickness = -1
     else:
@@ -455,7 +352,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 
 """ TBD
-print("cv2.setMouseCallback 12")
+print("cv2.setMouseCallback 10")
 
 thickness=-1
 mode=1
@@ -478,10 +375,10 @@ def draw_circle2(event,x,y,flags,param):
             cv2.putText(image,'OpenCV',(0,round(d/2)), 
                         cv2.FONT_HERSHEY_SIMPLEX, 2,color,5)    
 image=np.ones((d,d,3),np.uint8)*255
-cv2.namedWindow('image')
-cv2.setMouseCallback('image',draw_circle2)
+cv2.namedWindow('OpenCV')
+cv2.setMouseCallback('OpenCV',draw_circle2)
 while(1):
-    cv2.imshow('image',image)
+    cv2.imshow('OpenCV',image)
     #k = cv2.waitKey(1) & 0xFF # 每 1 毫秒偵測一次鍵盤事件
     k = cv2.waitKey(1)  # 等待按鍵輸入
     if k == ESC:
@@ -503,48 +400,56 @@ while(1):
 
 cv2.destroyAllWindows()
 """
-print("------------------------------------------------------------")  # 60個
-print("cv2.setMouseCallback 13")
 
+'''
+print("------------------------------------------------------------")  # 60個
+print("cv2.setMouseCallback 11")
+
+
+"""
+0 : 畫點
+1 : 拖曳
+
+
+"""
 mode = 0
 
+if mode == 0:
+    print("左鍵畫點")
+elif mode == 1:
+    print("左鍵拖曳")
 
-# 创建回调函数
 def OnMouseAction(event, x, y, flags, param):
     global x1, y1
 
     if mode == 0 and event == cv2.EVENT_LBUTTONDOWN:
-        print("左键点击")
-        cv2.line(img, (0, 0), (x, y), (255, 255, 0), 2)
+        print("左鍵畫點")
+        #cv2.line(image, (0, 0), (x, y), (255, 255, 0), 2)#畫直線連線
+        cv2.circle(image, (x, y), 10, (255), -1) # 畫點
 
     if mode == 1 and event == cv2.EVENT_LBUTTONDOWN:
-        print("左键点击1")
+        #print("左鍵點擊")
         x1, y1 = x, y
     elif mode == 1 and event == cv2.EVENT_MOUSEMOVE and flags == cv2.EVENT_FLAG_LBUTTON:
-        print("左鍵拖曳1")
-        cv2.rectangle(img, (x1, y1), (x, y), (0, 255, 0), -1)
+        #print("左鍵拖曳")
+        cv2.rectangle(image, (x1, y1), (x, y), (0, 255, 0), -1)
 
 
-# 下面把回调函数与OpenCV窗口绑定在一起
+image = np.zeros((500, 500, 3), np.uint8)
+cv2.namedWindow("OpenCV")
+cv2.setMouseCallback("OpenCV", OnMouseAction)
 
-img = np.zeros((500, 500, 3), np.uint8)
-cv2.namedWindow("image")
-cv2.setMouseCallback("image", OnMouseAction)
-while 1:
-    cv2.imshow("image", img)
+while True:
+    cv2.imshow("OpenCV", image)
     k = cv2.waitKey(1)  # 等待按鍵輸入
     if k == ESC:
         break
-    elif k == ord("l"):
-        mode = 0
-    elif k == ord("t"):
-        mode = 1
 
 cv2.destroyAllWindows()
 
-print("------------------------------------------------------------")  # 60個
 
-# opencv 之 setMouseCallback
+print("------------------------------------------------------------")  # 60個
+print("cv2.setMouseCallback 12")
 
 
 def Demo(event, x, y, flags, param):
@@ -564,17 +469,16 @@ def Demo(event, x, y, flags, param):
 W, H = 640, 480
 image = np.ones((H, W, 3), np.uint8) * 255
 
-cv2.namedWindow("setMouseCallback")
-cv2.setMouseCallback("setMouseCallback", Demo)
+cv2.namedWindow("OpenCV")
+cv2.setMouseCallback("OpenCV", Demo)
 
-cv2.imshow("setMouseCallback", image)
+cv2.imshow("OpenCV", image)
 
 cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
-
-print("在影像上畫圖")
+print("cv2.setMouseCallback 13 在影像上畫圖")
 
 cap = cv2.VideoCapture(0)  # 讀取攝影鏡頭
 width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))  # 取得影像寬度
@@ -605,26 +509,26 @@ def show_xy(event, x, y, flags, param):
             cv2.line(draw, (x1, y1), (x2, y2), (0, 0, 255, 255), 2)
 
 
-cv2.imshow("WebCam6", draw)
-cv2.setMouseCallback("WebCam6", show_xy)
+cv2.imshow("OpenCV", draw)
+cv2.setMouseCallback("OpenCV", show_xy)
 
 dots = []
 
 while True:
-    ret, img = cap.read()  # 讀取影片的每一個影格
+    ret, frame = cap.read()  # 讀取影片的每一個影格
     if not ret:
         print("Cannot receive frame")
         break
 
     # 透過 for 迴圈合成影像
     for i in range(w):
-        img[:, i, 0] = img[:, i, 0] * (1 - draw[:, i, 3] / 255) + draw[:, i, 0] * (
+        frame[:, i, 0] = frame[:, i, 0] * (1 - draw[:, i, 3] / 255) + draw[:, i, 0] * (
             draw[:, i, 3] / 255
         )
-        img[:, i, 1] = img[:, i, 1] * (1 - draw[:, i, 3] / 255) + draw[:, i, 1] * (
+        frame[:, i, 1] = frame[:, i, 1] * (1 - draw[:, i, 3] / 255) + draw[:, i, 1] * (
             draw[:, i, 3] / 255
         )
-        img[:, i, 2] = img[:, i, 2] * (1 - draw[:, i, 3] / 255) + draw[:, i, 2] * (
+        frame[:, i, 2] = frame[:, i, 2] * (1 - draw[:, i, 3] / 255) + draw[:, i, 2] * (
             draw[:, i, 3] / 255
         )
 
@@ -634,14 +538,13 @@ while True:
     elif k == ord("r"):
         draw = np.zeros((h, w, 4), dtype="uint8")
 
-    cv2.imshow("WebCam6", img)
+    cv2.imshow("OpenCV", frame)
 
 cap.release()  # 釋放資源
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
-
-print("擦亮影片")
+print("cv2.setMouseCallback 14 擦亮影片")
 
 w = 640  # 定義影片寬度
 h = 360  # 定義影像高度
@@ -669,8 +572,8 @@ def show_xy(event, x, y, flags, param):
             cv2.line(mask_b, (x1, y1), (x2, y2), (255, 255, 255), 50)  # 在黑色遮罩上畫出白色線條
 
 
-cv2.imshow("ImageShow", mask_b)  # 啟用視窗
-cv2.setMouseCallback("ImageShow", show_xy)  # 偵測滑鼠行為
+cv2.imshow("OpenCV", mask_b)  # 啟用視窗
+cv2.setMouseCallback("OpenCV", show_xy)  # 偵測滑鼠行為
 
 cap = cv2.VideoCapture(0)
 
@@ -678,25 +581,25 @@ if not cap.isOpened():
     print("Cannot open camera")
     exit()
 while True:
-    ret, img = cap.read()
+    ret, frame = cap.read()
     if not ret:
         print("Cannot receive frame")
         break
 
-    img = cv2.resize(img, (w, h))  # 縮小尺寸，加快速度
-    img = cv2.flip(img, 1)  # 翻轉影像
-    img = cv2.cvtColor(img, cv2.COLOR_BGR2BGRA)  # 轉換顏色為 BGRA ( 計算時需要用到 Alpha 色版 )
-    img2 = img.copy()  # 複製影像
-    img2 = cv2.blur(img, (55, 55))  # 套用模糊
+    frame = cv2.resize(frame, (w, h))  # 縮小尺寸，加快速度
+    frame = cv2.flip(frame, 1)  # 翻轉影像
+    frame = cv2.cvtColor(frame, cv2.COLOR_BGR2BGRA)  # 轉換顏色為 BGRA ( 計算時需要用到 Alpha 色版 )
+    frame2 = frame.copy()  # 複製影像
+    frame2 = cv2.blur(frame, (55, 55))  # 套用模糊
 
     mask1 = cv2.cvtColor(mask_b, cv2.COLOR_BGR2GRAY)  # 轉換遮罩為灰階
-    img = cv2.bitwise_and(img, img, mask=mask1)  # 清楚影像套用黑遮罩
+    frame = cv2.bitwise_and(frame, frame, mask=mask1)  # 清楚影像套用黑遮罩
     mask2 = cv2.cvtColor(mask_w, cv2.COLOR_BGR2GRAY)  # 轉換遮罩為灰階
-    img2 = cv2.bitwise_and(img2, img2, mask=mask2)  # 模糊影像套用白遮罩
+    frame2 = cv2.bitwise_and(frame2, frame2, mask=mask2)  # 模糊影像套用白遮罩
 
-    output = cv2.add(img, img2)  # 合併影像
+    output = cv2.add(frame, frame2)  # 合併影像
 
-    cv2.imshow("ImageShow", output)
+    cv2.imshow("OpenCV", output)
     k = cv2.waitKey(1)  # 等待按鍵輸入
     if k == ESC:
         break
@@ -706,57 +609,69 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+print("cv2.setMouseCallback 15")
 
-
-print("用滑鼠在cv2上寫字")
+print("滑鼠動作, 用滑鼠在cv2上寫字")
+print("按S, 存檔")
+print("按C, 清除")
+print("按ESC, 離開")
 
 W, H = 640, 480
+drawing = False
+cv2.namedWindow("OpenCV")
+
+# 建立底圖影像方法一
+image = np.full(shape=(H, W, 1), fill_value=0, dtype=np.uint8)
+
+# 建立底圖影像方法二
+# image = np.zeros((H,W,3),np.uint8)
+
+# 建立底圖影像方法三
+# np.ones(shape, dtype, order)
+# shape(高，宽，色彩通道数)
+# dtype 常用的是np.unit8
+# image = np.ones((H, W, 3), np.uint8)
+# image = image * 255 #白色圖像
 
 
 def draw_circle(event, x, y, flags, param):
-    global img, drawing
-    if event == cv2.EVENT_LBUTTONDOWN:
+    global image, drawing
+    if event == cv2.EVENT_LBUTTONDOWN:  #  滑鼠左鍵
         drawing = True
-        cv2.circle(img, (x, y), 1, (255), -1)
+        cv2.circle(image, (x, y), 2, (255), -1)
 
-    elif event == cv2.EVENT_MOUSEMOVE:
+    elif event == cv2.EVENT_MOUSEMOVE:  #  滑鼠移動
         if drawing == True:
-            cv2.circle(img, (x, y), 1, (255), -1)
+            cv2.circle(image, (x, y), 2, (255), -1)
 
-    elif event == cv2.EVENT_LBUTTONUP:
+    elif event == cv2.EVENT_LBUTTONUP:  #  滑鼠左鍵放開
         drawing = False
-        cv2.circle(img, (x, y), 1, (255), -1)
+        cv2.circle(image, (x, y), 2, (255), -1)
 
 
-img = np.full(shape=(H, W, 1), fill_value=0, dtype=np.uint8)
-cv2.namedWindow("image")
+cv2.setMouseCallback("OpenCV", draw_circle)
 
-drawing = False
-
-cv2.setMouseCallback("image", draw_circle)
-
-while 1:
-    cv2.imshow("image", img)
-    k = cv2.waitKey(1) & 0xFF
+while True:
+    cv2.imshow("OpenCV", image)
+    k = cv2.waitKey(1) & 0xFF # 每 1 毫秒偵測一次鍵盤事件
     if k == ord("s"):
-        print("Save")
-        # cv2.imwrite("tmp_1.jpg", img)
+        print("存圖")
+        # cv2.imwrite("tmp_1.jpg", image)
         # CNN()
     elif k == ord("c"):
-        print("Clear")
-        img = np.full(shape=(H, W, 1), fill_value=0, dtype=np.uint8)
-    elif k == 27:
-        print("ESC")
+        print("清除")
+        image = np.full(shape=(H, W, 1), fill_value=0, dtype=np.uint8)
+    elif k == ESC:
+        print("離開")
         break
 
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+print("cv2.setMouseCallback 16 按ESC離開")
 
-print("按ESC離開")
-
-cv2.namedWindow("ImageShow")  # 建立一個名為 ImageShow 的視窗
+cv2.namedWindow("OpenCV")  # 建立一個名為 OpenCV 的視窗
 
 while True:
     keycode = cv2.waitKey(0)  # 持續等待，直到按下鍵盤按鍵才會繼續
@@ -795,7 +710,7 @@ print("------------------------------------------------------------")  # 60個
 
 """
 name
-cv2.setMouseCallback('ImageShow', show_xy)  # 設定偵測事件的函式與視窗
+cv2.setMouseCallback('OpenCV', show_xy)  # 設定偵測事件的函式與視窗
 
 
 

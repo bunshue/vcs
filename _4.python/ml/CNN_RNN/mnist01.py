@@ -76,8 +76,6 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
-from common2 import *
-
 
 def show():
     # plt.show()

@@ -1,13 +1,6 @@
 """
 其他
 
-
-下載
-https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz
-將檔案改名成
-cifar-10-batches-py.tar.gz
-放在C:/Users/070601/.keras\datasets/之下
-
 # 下載資料集, 讀取數據集
 from sklearn.datasets import fetch_20newsgroups
 #news = fetch_20newsgroups(data_home=download_directory, subset="all")

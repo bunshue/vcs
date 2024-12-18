@@ -152,12 +152,12 @@ filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
 
 # 檔案 => cv2影像
 img = cv2.imread(filename)
-print(img.shape)
+print("原圖大小 :", img.shape)
 
 H = img.shape[0]
 W = img.shape[1]
-img_resize = cv2.resize(img, (W * 2, H // 2))
-print(img_resize.shape)
+img_resize = cv2.resize(img, (W * 2, H // 2))  # .resize 改變圖片大小W,H
+print("縮放後大小 :", img_resize.shape)
 
 plt.title("縮放 W兩倍 H一半")
 plt.imshow(cv2.cvtColor(img_resize, cv2.COLOR_BGR2RGB))
@@ -179,8 +179,6 @@ def resizeimg(image):
     return img
 
 
-print("------------------------------------------------------------")  # 60個
-
 filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 
 image1 = cv2.imread(filename)
@@ -188,20 +186,20 @@ print("原圖大小 : ", image1.shape)
 
 image2 = resizeimg(cv2.imread(filename))
 print("將影像改變到寬高最大為480等比例縮放")
-print("原圖大小 : ", image2.shape)
+print("縮放後大小 : ", image2.shape)
 
-plt.figure("用np建立一個影像陣列", figsize=(16, 12))
+plt.figure(figsize=(10, 6))
 plt.subplot(121)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
 plt.xlim(0, 500)  # x軸顯示邊界
 plt.ylim(500, 0)  # y軸顯示邊界
+plt.title("原圖")
 
 plt.subplot(122)
-plt.title("resize")
 plt.imshow(cv2.cvtColor(image2, cv2.COLOR_BGR2RGB))
 plt.xlim(0, 500)  # x軸顯示邊界
 plt.ylim(500, 0)  # y軸顯示邊界
+plt.title("等比例縮放 至 480")
 
 plt.show()
 
@@ -224,14 +222,23 @@ image_original = cv2.imread(filename)  # 讀取本機圖片
 # 縮放的倍率 fx fy
 image_resized = cv2.resize(
     image_original, None, fx=1.50, fy=1.00, interpolation=cv2.INTER_LINEAR
-)
+)  # .resize 改變圖片大小W,H
 
+plt.figure(figsize=(10, 6))
+plt.subplot(121)
 image_original = cv2.cvtColor(image_original, cv2.COLOR_BGR2RGB)
 plt.imshow(image_original)
-plt.show()
+plt.xlim(0, 500)  # x軸顯示邊界
+plt.ylim(500, 0)  # y軸顯示邊界
+plt.title('原圖')
 
+plt.subplot(122)
 image_resized = cv2.cvtColor(image_resized, cv2.COLOR_BGR2RGB)
 plt.imshow(image_resized)
+plt.xlim(0, 500)  # x軸顯示邊界
+plt.ylim(500, 0)  # y軸顯示邊界
+plt.title('倍率縮放')
+
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
@@ -256,22 +263,23 @@ image[:, :, 2] = 255
 # 做resize
 size = H, W
 print(size)
-rst = cv2.resize(image, size)
+rst = cv2.resize(image, size)  # .resize 改變圖片大小W,H
 
-print("image.shape = ", image.shape)
-# print("image = \n", image)
+print("原圖大小 :", image.shape)
+print("縮放後大小 :", rst.shape)
 
-print("rst.shape = ", rst.shape)
-# print("rst = \n", rst)
-
-plt.figure("用np建立一個影像陣列", figsize=(16, 12))
+plt.figure(figsize=(10, 6))
 plt.subplot(121)
-plt.title("原圖 640X480")
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.xlim(0, 700)  # x軸顯示邊界
+plt.ylim(700, 0)  # y軸顯示邊界
+plt.title("原圖 640X480")
 
 plt.subplot(122)
-plt.title("resize 480X640")
 plt.imshow(cv2.cvtColor(rst, cv2.COLOR_BGR2RGB))
+plt.xlim(0, 700)  # x軸顯示邊界
+plt.ylim(700, 0)  # y軸顯示邊界
+plt.title("resize 480X640")
 
 plt.show()
 
@@ -283,44 +291,37 @@ filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 image = cv2.imread(filename)
 
 H, W, D = image.shape
-print(image.shape)
+
+print("原圖大小 :", image.shape)
 print("W = ", W)
 print("H = ", H)
 print("D = ", D)
 
 size = (int(W * 0.9), int(H * 1.1))  # 變瘦變高
-rst = cv2.resize(image, size)
+image2 = cv2.resize(image, size)  # .resize 改變圖片大小W,H
+print("縮放後大小 :", image2.shape)
 
-print("image.shape = ", image.shape)
-print("rst.shape = ", rst.shape)
-
-plt.figure("resize", figsize=(16, 12))
-plt.subplot(221)
-plt.title("原圖")
+plt.figure("resize", figsize=(12, 6))
+plt.subplot(131)
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.xlim(0, 500)  # x軸顯示邊界
+plt.ylim(500, 0)  # y軸顯示邊界
+plt.title("原圖")
 
-plt.subplot(222)
+plt.subplot(132)
+plt.imshow(cv2.cvtColor(image2, cv2.COLOR_BGR2RGB))
+plt.xlim(0, 500)  # x軸顯示邊界
+plt.ylim(500, 0)  # y軸顯示邊界
 plt.title("resize 變瘦1成變高1成")
-plt.imshow(cv2.cvtColor(rst, cv2.COLOR_BGR2RGB))
 
-print("------------------------------------------------------------")  # 60個
+image3 = cv2.resize(image, None, fx=1.5, fy=0.5)  # .resize 改變圖片大小W,H
+print("縮放後大小 :", image3.shape)
 
-filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
-
-# 檔案 => cv2影像
-image = cv2.imread(filename)
-
-rst = cv2.resize(image, None, fx=2, fy=0.5)
-print("image.shape =", image.shape)
-print("rst.shape =", rst.shape)
-
-plt.subplot(223)
-plt.title("原圖")
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-
-plt.subplot(224)
-plt.title("resize x變2倍, y變一半")
-plt.imshow(cv2.cvtColor(rst, cv2.COLOR_BGR2RGB))
+plt.subplot(133)
+plt.imshow(cv2.cvtColor(image3, cv2.COLOR_BGR2RGB))
+plt.xlim(0, 500)  # x軸顯示邊界
+plt.ylim(500, 0)  # y軸顯示邊界
+plt.title("resize x變1.5倍, y變一半")
 
 plt.show()
 
@@ -329,27 +330,63 @@ print("------------------------------------------------------------")  # 60個
 filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
 
 # 檔案 => cv2影像
-image0 = cv2.imread(filename, 1)
-print("原圖大小 :", image0.shape)
-w = image0.shape[1]
-h = image0.shape[0]
+img = cv2.imread(filename)
+x = 100
+y = 100
+w = 200
+h = 200
+crop_img = img[y : y + h, x : x + w]
 
-print("cv2.resize 之方法 1")
+output = np.zeros((360, 480, 3), dtype="uint8")  # 產生黑色畫布
+output[x : x + w, y : y + h] = crop_img
 
-print("改變圖片大小 指定大小 改成 640 X 480")
+# 檔案 => cv2影像
+img = cv2.imread(filename)
+output_1 = cv2.resize(img, (200, 200))  # 產生 200x200 的圖
+output_2 = cv2.resize(img, (100, 300))  # 產生 100x300 的圖
 
-image1 = cv2.resize(image0, (640, 480))  # 改變圖片尺寸
+print("------------------------------------------------------------")  # 60個
 
-cv2.imshow("Image", image1)
-cv2.waitKey(0)
+# 檔案 => cv2影像
+img = cv2.imread(filename)
+size = img.shape  # 取得原始圖片的資訊
+level = 15  # 縮小比例 ( 可當作馬賽克的等級 )
+h = int(size[0] / level)  # 按照比例縮小後的高度 ( 使用 int 去除小數點 )
+w = int(size[1] / level)  # 按照比例縮小後的寬度 ( 使用 int 去除小數點 )
+mosaic = cv2.resize(img, (w, h), interpolation=cv2.INTER_LINEAR)  # 根據縮小尺寸縮小
+mosaic = cv2.resize(
+    mosaic, (size[1], size[0]), interpolation=cv2.INTER_NEAREST
+)  # 放大到原本的大小
+
+cv2.imshow("image", mosaic)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
-print("改變圖片大小 依比例 寬變兩倍 高變一半")
-image2 = cv2.resize(image0, (0, 0), fx=2.0, fy=0.5)
+print("------------------------------------------------------------")  # 60個
 
-cv2.imshow("Image", image2)
-cv2.waitKey(0)
+print("馬賽克")
+# 檔案 => cv2影像
+img = cv2.imread(filename)
+
+x = 135  # 剪裁區域左上 x 座標
+y = 90  # 剪裁區域左上 y 座標
+cw = 100  # 剪裁區域寬度
+ch = 120  # 剪裁區域高度
+mosaic = img[y : y + ch, x : x + cw]  # 取得剪裁區域
+level = 15  # 馬賽克程度
+h = int(ch / level)  # 縮小的高度 ( 使用 int 去除小數點 )
+w = int(cw / level)  # 縮小的寬度 ( 使用 int 去除小數點 )
+mosaic = cv2.resize(mosaic, (w, h), interpolation=cv2.INTER_LINEAR)
+mosaic = cv2.resize(mosaic, (cw, ch), interpolation=cv2.INTER_NEAREST)
+img[y : y + ch, x : x + cw] = mosaic  # 將圖片的剪裁區域，換成馬賽克的圖
+
+cv2.imshow("image", img)
+cv2.waitKey()
 cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+
 
 print("------------------------------------------------------------")  # 60個
 
@@ -379,7 +416,7 @@ filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bm
 image = cv2.imread(filename)
 
 H, W, D = image.shape
-print(image.shape)
+print("原圖大小 :", image.shape)
 print("W = ", W)
 print("H = ", H)
 print("D = ", D)
@@ -410,6 +447,7 @@ img = cv2.imread(filename)
 
 H = img.shape[0]
 W = img.shape[1]
+
 aff_matrix = cv2.getRotationMatrix2D((W / 2, H / 2), 30, 0.8)
 img_rotate = cv2.warpAffine(img, aff_matrix, (W, H))
 
@@ -500,62 +538,6 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 => cv2影像
-img = cv2.imread(filename)
-x = 100
-y = 100
-w = 200
-h = 200
-crop_img = img[y : y + h, x : x + w]
-
-output = np.zeros((360, 480, 3), dtype="uint8")  # 產生黑色畫布
-output[x : x + w, y : y + h] = crop_img
-
-# 檔案 => cv2影像
-img = cv2.imread(filename)
-output_1 = cv2.resize(img, (200, 200))  # 產生 200x200 的圖
-output_2 = cv2.resize(img, (100, 300))  # 產生 100x300 的圖
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 => cv2影像
-img = cv2.imread(filename)
-size = img.shape  # 取得原始圖片的資訊
-level = 15  # 縮小比例 ( 可當作馬賽克的等級 )
-h = int(size[0] / level)  # 按照比例縮小後的高度 ( 使用 int 去除小數點 )
-w = int(size[1] / level)  # 按照比例縮小後的寬度 ( 使用 int 去除小數點 )
-mosaic = cv2.resize(img, (w, h), interpolation=cv2.INTER_LINEAR)  # 根據縮小尺寸縮小
-mosaic = cv2.resize(
-    mosaic, (size[1], size[0]), interpolation=cv2.INTER_NEAREST
-)  # 放大到原本的大小
-
-cv2.imshow("image", mosaic)
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-print("馬賽克")
-# 檔案 => cv2影像
-img = cv2.imread(filename)
-
-x = 135  # 剪裁區域左上 x 座標
-y = 90  # 剪裁區域左上 y 座標
-cw = 100  # 剪裁區域寬度
-ch = 120  # 剪裁區域高度
-mosaic = img[y : y + ch, x : x + cw]  # 取得剪裁區域
-level = 15  # 馬賽克程度
-h = int(ch / level)  # 縮小的高度 ( 使用 int 去除小數點 )
-w = int(cw / level)  # 縮小的寬度 ( 使用 int 去除小數點 )
-mosaic = cv2.resize(mosaic, (w, h), interpolation=cv2.INTER_LINEAR)
-mosaic = cv2.resize(mosaic, (cw, ch), interpolation=cv2.INTER_NEAREST)
-img[y : y + ch, x : x + cw] = mosaic  # 將圖片的剪裁區域，換成馬賽克的圖
-
-cv2.imshow("image", img)
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
 
 # flip
 

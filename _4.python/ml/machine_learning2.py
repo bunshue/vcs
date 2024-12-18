@@ -36,12 +36,13 @@ print("------------------------------------------------------------")  # 60個
 
 from common1 import *
 import joblib
+import pickle
 import matplotlib
 import matplotlib as mpl
 
 import sklearn
-from sklearn import metrics
 import sklearn.linear_model
+from sklearn import metrics
 from sklearn import datasets
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
 
@@ -53,13 +54,15 @@ from sklearn.metrics import accuracy_score
 from sklearn.metrics import confusion_matrix
 
 from sklearn.datasets import make_blobs  # 生成分類資料
-from sklearn.datasets import make_moons  # 生成非線性資料
+from sklearn.datasets import make_moons  # 生成非線性資料 上/下弦月資料
 from sklearn.datasets import make_classification
 from sklearn.datasets import make_hastie_10_2
+from sklearn.datasets import make_circles
 
 from sklearn.linear_model import LinearRegression
 from sklearn.linear_model import LogisticRegression
 from sklearn.linear_model import Lasso
+from sklearn.linear_model import Ridge
 
 from sklearn.cluster import KMeans
 from sklearn.neighbors import KNeighborsClassifier  # K近鄰演算法（K Nearest Neighbor）
@@ -192,8 +195,6 @@ print('------------------------------')	#30個
 # Ridge Regression 嶺迴歸
 
 #L2 Normalization Ridge Regression
-
-from sklearn.linear_model import Ridge
 
 def ridge_regression(data, predictors, alpha, models_to_plot={}):
     #ridgereg = Ridge(alpha=alpha,normalize=True)
@@ -602,7 +603,6 @@ print("------------------------------------------------------------")  # 60個
 
 """
 from sklearn.preprocessing import PolynomialFeatures
-from sklearn.linear_model import Ridge
 from sklearn.metrics import mean_squared_error
 
 train_size = 20
@@ -735,7 +735,6 @@ import sklearn.linear_model as linear_model
 # import xgboost as xgb
 from sklearn.model_selection import KFold
 from sklearn.manifold import TSNE
-from sklearn.cluster import KMeans
 from sklearn.decomposition import PCA
 
 # 共 1460 筆資料, 81 欄位
@@ -1501,9 +1500,11 @@ https://tianchi.aliyun.com/competition/activeList
 
 import datetime
 from pandas.api.types import is_numeric_dtype  # 用於判斷特徵類型
-from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier  # 分類模型
-from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor  # 迴歸模型
-from sklearn.model_selection import cross_val_score, train_test_split  # 切分數據集
+from sklearn.ensemble import RandomForestClassifier  # 分類模型
+from sklearn.ensemble import GradientBoostingClassifier  # 分類模型
+from sklearn.ensemble import RandomForestRegressor  # 迴歸模型
+from sklearn.ensemble import GradientBoostingRegressor  # 迴歸模型
+from sklearn.model_selection import cross_val_score
 from sklearn.metrics import mean_squared_error  # 評價函數
 
 """
@@ -1564,7 +1565,7 @@ print('------------------------------------------------------------')	#60個
 
 import datetime
 from pandas.api.types import is_numeric_dtype # 用於判斷特徵類型
-from sklearn.model_selection import cross_val_score, train_test_split # 切分數據集
+from sklearn.model_selection import cross_val_score
 from sklearn.metrics import mean_squared_error # 評價函數
 
 data = pd.read_csv('data/happiness_train_min.csv', encoding='gb2312')
@@ -1715,229 +1716,6 @@ else:
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-"""
-from sklearn import preprocessing
-
-f_tracking = [
-    110,
-    1018,
-    1130,
-    417,
-    626,
-    957,
-    90,
-    951,
-    946,
-    797,
-    981,
-    125,
-    456,
-    731,
-    1640,
-    486,
-    1309,
-    472,
-    1133,
-    1773,
-    906,
-    532,
-    742,
-    621,
-    855,
-]
-happiness = [
-    0.3,
-    0.8,
-    0.5,
-    0.4,
-    0.6,
-    0.4,
-    0.7,
-    0.5,
-    0.4,
-    0.3,
-    0.3,
-    0.6,
-    0.2,
-    0.8,
-    1,
-    0.6,
-    0.2,
-    0.7,
-    0.5,
-    0.7,
-    0.1,
-    0.4,
-    0.3,
-    0.6,
-    0.3,
-]
-
-df = pd.DataFrame({"FB追蹤數": f_tracking, "快樂程度": happiness})
-print(df.head())
-
-print("------------------------------")  # 30個
-
-df_scaled = pd.DataFrame(preprocessing.scale(df), columns=["標準化FB追蹤數", "標準化快樂程度"])
-print(df_scaled.head())
-
-df_scaled.plot(kind="scatter", x="標準化FB追蹤數", y="標準化快樂程度")
-
-show()
-
-print("------------------------------")  # 30個
-
-from sklearn import preprocessing
-
-f_tracking = [
-    110,
-    1018,
-    1130,
-    417,
-    626,
-    957,
-    90,
-    951,
-    946,
-    797,
-    981,
-    125,
-    456,
-    731,
-    1640,
-    486,
-    1309,
-    472,
-    1133,
-    1773,
-    906,
-    532,
-    742,
-    621,
-    855,
-]
-happiness = [
-    0.3,
-    0.8,
-    0.5,
-    0.4,
-    0.6,
-    0.4,
-    0.7,
-    0.5,
-    0.4,
-    0.3,
-    0.3,
-    0.6,
-    0.2,
-    0.8,
-    1,
-    0.6,
-    0.2,
-    0.7,
-    0.5,
-    0.7,
-    0.1,
-    0.4,
-    0.3,
-    0.6,
-    0.3,
-]
-
-df = pd.DataFrame({"FB追蹤數": f_tracking, "快樂程度": happiness})
-print(df.head())
-
-print("------------------------------")  # 30個
-
-scaler = preprocessing.StandardScaler()
-np_std = scaler.fit_transform(df)
-df_std = pd.DataFrame(np_std, columns=["標準化FB追蹤數", "標準化快樂程度"])
-print(df_std.head())
-
-df_std.plot(kind="scatter", x="標準化FB追蹤數", y="標準化快樂程度")
-
-show()
-"""
-print("------------------------------------------------------------")  # 60個
-
-from sklearn import preprocessing
-
-f_tracking = [
-    110,
-    1018,
-    1130,
-    417,
-    626,
-    957,
-    90,
-    951,
-    946,
-    797,
-    981,
-    125,
-    456,
-    731,
-    1640,
-    486,
-    1309,
-    472,
-    1133,
-    1773,
-    906,
-    532,
-    742,
-    621,
-    855,
-]
-happiness = [
-    0.3,
-    0.8,
-    0.5,
-    0.4,
-    0.6,
-    0.4,
-    0.7,
-    0.5,
-    0.4,
-    0.3,
-    0.3,
-    0.6,
-    0.2,
-    0.8,
-    1,
-    0.6,
-    0.2,
-    0.7,
-    0.5,
-    0.7,
-    0.1,
-    0.4,
-    0.3,
-    0.6,
-    0.3,
-]
-
-df = pd.DataFrame({"FB追蹤數": f_tracking, "快樂程度": happiness})
-print(df.head())
-print("------------------------------")  # 30個
-
-df_scaled = pd.DataFrame(preprocessing.scale(df), columns=["標準化FB追蹤數", "標準化快樂程度"])
-print(df_scaled.head())
-df_scaled.plot(kind="scatter", x="標準化FB追蹤數", y="標準化快樂程度")
-
-print("------------------------------")  # 30個
-
-scaler = preprocessing.MinMaxScaler(feature_range=(0, 1))
-np_minmax = scaler.fit_transform(df)
-df_minmax = pd.DataFrame(np_minmax, columns=["最小最大值縮放FB追蹤數", "最小最大值縮放快樂程度"])
-print(df_minmax.head())
-
-df_minmax.plot(kind="scatter", x="最小最大值縮放FB追蹤數", y="最小最大值縮放快樂程度")
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-
 from sklearn import preprocessing
 
 df = pd.read_csv("data/test3.csv")
@@ -1959,7 +1737,6 @@ y = y.reshape(-1, 1)
 
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import PolynomialFeatures
-from sklearn.linear_model import LinearRegression
 
 
 def polynomial_model(degree=1):
@@ -2322,8 +2099,6 @@ show()
 
 print("------------------------------")  # 30個
 
-from sklearn.cluster import KMeans
-
 n_clusters = 3
 kmean = KMeans(n_clusters=n_clusters)
 kmean.fit(X)
@@ -2379,8 +2154,6 @@ def fit_plot_kmean_model(n_clusters, X):
         plt.scatter(c[0], c[1], marker="$%d$" % i, s=50, c=colors[i])
 
 
-from sklearn.cluster import KMeans
-
 n_clusters = [2, 3, 4]
 
 plt.figure(figsize=(10, 3))
@@ -2420,8 +2193,6 @@ print("number of non-zero features in sample [{0}]: {1}".format(
 print("done in {0} seconds".format(time() - t))
 
 print("------------------------------------------------------------")  # 60個
-
-from sklearn.cluster import KMeans
 
 print("clustering documents ...")
 t = time()
@@ -2567,8 +2338,6 @@ print("------------------------------------------------------------")  # 60個
 
 # 數據預處理（Data Preprocessing）
 
-import sklearn
-
 print("Sklearn verion is {}".format(sklearn.__version__))
 
 from sklearn.impute import SimpleImputer
@@ -2656,11 +2425,13 @@ X[ : , 1:3] = imputer.transform(X[ : , 1:3])
 # 例如"Yes"和"No"不能用于模型的數學計算，所以需要解析成數字。
 # 為實現這一功能，我們從sklearn.preprocessing庫導入LabelEncoder類。
 
-from sklearn.preprocessing import LabelEncoder, OneHotEncoder
+from sklearn.preprocessing import LabelEncoder
+from sklearn.preprocessing import OneHotEncoder
 from sklearn.compose import ColumnTransformer
 
 """ another
-from sklearn.preprocessing import LabelEncoder, OneHotEncoder
+from sklearn.preprocessing import LabelEncoder
+from sklearn.preprocessing import OneHotEncoder
 labelencoder_X = LabelEncoder()
 X[ : , 0] = labelencoder_X.fit_transform(X[ : , 0])
 """
@@ -2729,7 +2500,7 @@ print(X_train)
 print("X_test")
 print(X_test)
 
-
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("邏輯迴歸")
@@ -2756,7 +2527,6 @@ X_test = scaler.transform(X_test)  # STD特徵縮放
 
 # 将逻辑回归应用于训练集
 # Fitting Logistic Regression to the Training set
-from sklearn.linear_model import LogisticRegression
 
 classifier = LogisticRegression()
 
@@ -2848,8 +2618,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("KNN")
-
-# K近邻法（K-NN）
 
 dataset = pd.read_csv("data/Social_Network_Ads.csv")
 print(dataset)
@@ -3030,7 +2798,6 @@ scaler = StandardScaler()
 X_train = scaler.fit_transform(X_train)  # STD特徵縮放
 X_test = scaler.transform(X_test)  # STD特徵縮放
 
-# Fitting Random Forest to the Training set
 from sklearn.ensemble import RandomForestClassifier
 
 classifier = RandomForestClassifier(
@@ -3189,8 +2956,6 @@ print(len(training_data))
 # 如果不平衡，您要么将类权重传递给模型，以便它可以适当地测量误差，或者通过将较大的集修剪为与较小集相同的大小来平衡样本。
 # 现在数据集中要么全是dog要么全是cat，因此接下来要引入随机：
 
-import random
-
 random.shuffle(training_data)
 
 # 我们的training_data是一个列表，这意味着它是可变的，所以它现在很好地改组了。
@@ -3213,8 +2978,6 @@ print(X[0].reshape(-1, IMG_SIZE, IMG_SIZE, 1))
 X = np.array(X).reshape(-1, IMG_SIZE, IMG_SIZE, 1)
 
 # 让我们保存这些数据，这样我们就不需要每次想要使用神经网络模型时继续计算它：
-
-import pickle
 
 pickle_out = open("tmp_X.pickle", "wb")
 pickle.dump(X, pickle_out)
@@ -3250,13 +3013,14 @@ Fully Connected Layers(全连接层)是典型的神经网络，其中所有节�
 """
 
 import tensorflow as tf
-from tensorflow.keras.datasets import cifar10
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense, Dropout, Activation, Flatten
-from tensorflow.keras.layers import Conv2D, MaxPooling2D
-
-import pickle
+from tensorflow.keras.layers import Dense
+from tensorflow.keras.layers import Dropout
+from tensorflow.keras.layers import Activation
+from tensorflow.keras.layers import Flatten
+from tensorflow.keras.layers import Conv2D
+from tensorflow.keras.layers import MaxPooling2D
 
 pickle_in = open("tmp_X.pickle", "rb")
 X = pickle.load(pickle_in)
@@ -3322,16 +3086,17 @@ model.fit(X, y,
 我们的模型还没有定义，所以现在让我们把它们放在一起：
 """
 import tensorflow as tf
-from tensorflow.keras.datasets import cifar10
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense, Dropout, Activation, Flatten
-from tensorflow.keras.layers import Conv2D, MaxPooling2D
+from tensorflow.keras.layers import Dense
+from tensorflow.keras.layers import Dropout
+from tensorflow.keras.layers import Activation
+from tensorflow.keras.layers import Flatten
+from tensorflow.keras.layers import Conv2D
+from tensorflow.keras.layers import MaxPooling2D
 from tensorflow.keras.callbacks import TensorBoard
 
 # more info on callbakcs: https://keras.io/callbacks/ model saver is cool too.
-import pickle
-import time
 
 NAME = "Cats-vs-dogs-CNN"
 
@@ -3380,13 +3145,15 @@ model.fit(X, y, batch_size=32, epochs=3, validation_split=0.3, callbacks=[tensor
 # 首先，我们从未在密集层中添加激活。另外，让我们尝试整体较小的模型：
 
 from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense, Dropout, Activation, Flatten
-from tensorflow.keras.layers import Conv2D, MaxPooling2D
+from tensorflow.keras.layers import Dense
+from tensorflow.keras.layers import Dropout
+from tensorflow.keras.layers import Activation
+from tensorflow.keras.layers import Flatten
+from tensorflow.keras.layers import Conv2D
+from tensorflow.keras.layers import MaxPooling2D
 from tensorflow.keras.callbacks import TensorBoard
 
 # more info on callbakcs: https://keras.io/callbacks/ model saver is cool too.
-import pickle
-import time
 
 NAME = "Cats-vs-dogs-64x2-CNN"
 
@@ -3458,7 +3225,6 @@ df.columns = ["color", "size", "price", "classlabel"]
 print(df)
 
 # LabelEncoder
-
 from sklearn.preprocessing import LabelEncoder
 
 encoder = LabelEncoder()
@@ -3476,7 +3242,6 @@ df["size"] = df["size"].map(size_mapping)
 print(df)
 
 # OrdinalEncoder
-
 from sklearn.preprocessing import OrdinalEncoder
 
 data = [["Male", 1], ["Female", 3], ["Female", 2]]
@@ -3504,7 +3269,6 @@ cc = pd.from_dummies(df2[["is_blue", "is_green", "is_red"]], sep="_")
 print(cc)
 
 # One-hot Encoding with Scikit-learn
-
 from sklearn.preprocessing import OneHotEncoder
 
 # 測試資料
@@ -3633,62 +3397,6 @@ print(cc)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# RobustScaler
-
-# 測試資料
-
-data = np.array([[1.0, -2.0, 2.0], [-2.0, 1.0, 3.0], [4.0, 1.0, -2.0]])
-print(data)
-
-from sklearn.preprocessing import RobustScaler
-
-scaler = RobustScaler()
-cc = scaler.fit_transform(data)
-print(cc)
-
-# 驗證
-
-
-def get_box_plot_data(data, bp):
-    rows_list = []
-
-    for i in range(data.shape[1]):
-        dict1 = {}
-        dict1["label"] = i
-        dict1["最小值"] = bp["whiskers"][i * 2].get_ydata()[1]
-        dict1["箱子下緣"] = bp["boxes"][i].get_ydata()[1]
-        dict1["中位數"] = bp["medians"][i].get_ydata()[1]
-        dict1["箱子上緣"] = bp["boxes"][i].get_ydata()[2]
-        dict1["最大值"] = bp["whiskers"][(i * 2) + 1].get_ydata()[1]
-        print(dict1)
-        rows_list.append(dict1)
-
-    return pd.DataFrame(rows_list)
-
-
-bp = plt.boxplot(data)
-get_box_plot_data(data, bp)
-print(data)
-show()
-
-"""
-	label 	最小值 	箱子下緣 	中位數 	箱子上緣 	最大值
-0 	0 	-2.0 	-0.5 	1.0 	2.5 	4.0
-1 	1 	-2.0 	-0.5 	1.0 	1.0 	1.0
-2 	2 	-2.0 	0.0 	2.0 	2.5 	3.0
-"""
-
-# 計算中位數、IQR
-median1 = np.median(data, axis=0)
-scale1 = np.quantile(data, 0.75, axis=0) - np.quantile(data, 0.25, axis=0)
-print(median1, scale1)
-# 計算 RobustScaler
-cc = (data - median1) / scale1
-print(cc)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 """
 import nltk
 nltk.download('wordnet')
@@ -3769,7 +3477,8 @@ print("特徵值:\n", eig_val_sc)
 
 # 繪製特徵向量
 
-from mpl_toolkits.mplot3d import Axes3D, proj3d
+from mpl_toolkits.mplot3d import Axes3D
+from mpl_toolkits.mplot3d import proj3d
 from matplotlib.patches import FancyArrowPatch
 
 
@@ -3875,9 +3584,6 @@ print("------------------------------------------------------------")  # 60個
 
 # Scikit-learn LDA實作
 
-# 載入資料
-from sklearn.datasets import make_circles
-
 X, y = make_circles(n_samples=1_000, factor=0.3, noise=0.05, random_state=0)
 
 # 資料切割
@@ -3897,7 +3603,8 @@ show()
 
 # PCA 萃取特徵
 
-from sklearn.decomposition import PCA, KernelPCA
+from sklearn.decomposition import PCA
+from sklearn.decomposition import KernelPCA
 
 pca = PCA(n_components=2)
 kernel_pca = KernelPCA(
@@ -3924,7 +3631,6 @@ pca_proj_ax.set_title("Projection of testing data\n using PCA")
 show()
 
 # KernelPCA 萃取特徵
-
 from sklearn.decomposition import KernelPCA
 
 kernel_pca = KernelPCA(
@@ -3948,8 +3654,6 @@ show()
 
 # 載入上/下弦月資料
 
-from sklearn.datasets import make_moons
-
 # X, y = make_moons(n_samples=1_000, noise=0.05, random_state=0)
 X, y = make_moons(n_samples=1000, random_state=123)
 X_train, X_test, y_train, y_test = train_test_split(X, y, stratify=y, random_state=0)
@@ -3967,8 +3671,8 @@ _ = test_ax.set_title("Testing data")
 show()
 
 # PCA 萃取特徵
-
-from sklearn.decomposition import PCA, KernelPCA
+from sklearn.decomposition import PCA
+from sklearn.decomposition import KernelPCA
 
 pca = PCA(n_components=2)
 kernel_pca = KernelPCA(
@@ -3993,7 +3697,6 @@ pca_proj_ax.set_title("Projection of testing data\n using PCA")
 show()
 
 # KernelPCA 萃取特徵
-
 from sklearn.decomposition import KernelPCA
 
 kernel_pca = KernelPCA(n_components=None, kernel="rbf", gamma=15)
@@ -4018,7 +3721,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # t-SNE測試
-
 from sklearn.manifold import TSNE
 from sklearn.decomposition import PCA
 
@@ -4045,7 +3747,6 @@ cc = X.shape
 print(cc)
 
 # 特徵縮放
-
 from sklearn.preprocessing import MinMaxScaler
 
 scaler = MinMaxScaler()
@@ -4099,7 +3800,6 @@ show()
 
 # 非線性分離
 # 生成S曲線資料
-
 from matplotlib import ticker
 from sklearn import manifold, datasets
 
@@ -4828,7 +4528,6 @@ print(X.shape)
 # TruncatedSVD 降維至 12 個
 
 # 萃取 12 個特徵
-import sklearn
 from sklearn.decomposition import TruncatedSVD
 
 SVD = TruncatedSVD(n_components=12, random_state=17)
@@ -4862,7 +4561,8 @@ print("------------------------------------------------------------")  # 60個
 
 # Surprise 測試
 
-from surprise import SVD, KNNBasic
+from surprise import SVD
+from surprise import KNNBasic
 from surprise import Dataset
 from surprise import accuracy
 from surprise.model_selection import train_test_split
@@ -5023,7 +4723,8 @@ cc = accuracy_score(y_pred, y_test)
 print(cc)
 # 0.895067264573991
 
-from sklearn.metrics import classification_report, confusion_matrix
+from sklearn.metrics import classification_report
+from sklearn.metrics import confusion_matrix
 
 print(classification_report(y_test, y_pred))
 
@@ -5246,7 +4947,9 @@ show()
 
 # Scikit-Learn 作法
 
-from sklearn.metrics import roc_curve, roc_auc_score, auc
+from sklearn.metrics import roc_curve
+from sklearn.metrics import roc_auc_score
+from sklearn.metrics import auc
 
 fpr, tpr, threshold = roc_curve(df["actual"], df["predict"])
 print(f"偽陽率:\n{fpr}\n\n真陽率:\n{tpr}\n\n決策門檻:{threshold}")
@@ -5316,7 +5019,6 @@ cc = accuracy_score(y_test, y_pred)
 print(cc)
 
 # K折交叉驗證
-
 from sklearn.model_selection import cross_val_score
 
 scores = cross_val_score(estimator=clf, X=X_test, y=y_test, cv=10, n_jobs=-1)
@@ -5330,14 +5032,13 @@ K折分數: [0.99915742 0.99929785 0.9988764  0.9997191  0.99901685 0.99901685
 """
 
 # 分類報告
-
 from sklearn.metrics import classification_report
-
 print(classification_report(y_test, y_pred))
 
 # 繪製ROC曲線
-
-from sklearn.metrics import roc_curve, roc_auc_score, auc
+from sklearn.metrics import roc_curve
+from sklearn.metrics import roc_auc_score
+from sklearn.metrics import auc
 
 y_pred_proba = clf.predict_proba(X_test)[:, 1]
 fpr, tpr, threshold = roc_curve(y_test, y_pred_proba)
@@ -5403,15 +5104,11 @@ K折分數: [0.94499156 0.94379572 0.94569499 0.94541362 0.94442881 0.94288126
 """
 
 # 分類報告
-
 from sklearn.metrics import classification_report
-
 print(classification_report(y_test, y_pred))
 
 # imbalanced-learn 分類報告
-
 from imblearn.metrics import classification_report_imbalanced
-
 print(classification_report_imbalanced(y_test, y_pred))
 
 print("------------------------------------------------------------")  # 60個
@@ -6374,7 +6071,6 @@ print("------------------------------------------------------------")  # 60個
 # 11_03_label_spreading
 
 # LabelSpreading 測試
-
 from sklearn.semi_supervised import LabelSpreading
 
 # 載入資料集

@@ -367,9 +367,304 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+from sklearn.preprocessing import StandardScaler
+
+
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
+from sklearn import preprocessing
+
+f_tracking = [
+    110,
+    1018,
+    1130,
+    417,
+    626,
+    957,
+    90,
+    951,
+    946,
+    797,
+    981,
+    125,
+    456,
+    731,
+    1640,
+    486,
+    1309,
+    472,
+    1133,
+    1773,
+    906,
+    532,
+    742,
+    621,
+    855,
+]
+happiness = [
+    0.3,
+    0.8,
+    0.5,
+    0.4,
+    0.6,
+    0.4,
+    0.7,
+    0.5,
+    0.4,
+    0.3,
+    0.3,
+    0.6,
+    0.2,
+    0.8,
+    1,
+    0.6,
+    0.2,
+    0.7,
+    0.5,
+    0.7,
+    0.1,
+    0.4,
+    0.3,
+    0.6,
+    0.3,
+]
+
+df = pd.DataFrame({"FB追蹤數": f_tracking, "快樂程度": happiness})
+print(df.head())
+
+print("------------------------------")  # 30個
+
+df_scaled = pd.DataFrame(preprocessing.scale(df), columns=["標準化FB追蹤數", "標準化快樂程度"])
+print(df_scaled.head())
+
+df_scaled.plot(kind="scatter", x="標準化FB追蹤數", y="標準化快樂程度")
+
+show()
+
+print("------------------------------")  # 30個
+
+from sklearn import preprocessing
+
+f_tracking = [
+    110,
+    1018,
+    1130,
+    417,
+    626,
+    957,
+    90,
+    951,
+    946,
+    797,
+    981,
+    125,
+    456,
+    731,
+    1640,
+    486,
+    1309,
+    472,
+    1133,
+    1773,
+    906,
+    532,
+    742,
+    621,
+    855,
+]
+happiness = [
+    0.3,
+    0.8,
+    0.5,
+    0.4,
+    0.6,
+    0.4,
+    0.7,
+    0.5,
+    0.4,
+    0.3,
+    0.3,
+    0.6,
+    0.2,
+    0.8,
+    1,
+    0.6,
+    0.2,
+    0.7,
+    0.5,
+    0.7,
+    0.1,
+    0.4,
+    0.3,
+    0.6,
+    0.3,
+]
+
+df = pd.DataFrame({"FB追蹤數": f_tracking, "快樂程度": happiness})
+print(df.head())
+
+print("------------------------------")  # 30個
+
+scaler = preprocessing.StandardScaler()
+np_std = scaler.fit_transform(df)
+df_std = pd.DataFrame(np_std, columns=["標準化FB追蹤數", "標準化快樂程度"])
+print(df_std.head())
+
+df_std.plot(kind="scatter", x="標準化FB追蹤數", y="標準化快樂程度")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+
+from sklearn import preprocessing
+
+f_tracking = [
+    110,
+    1018,
+    1130,
+    417,
+    626,
+    957,
+    90,
+    951,
+    946,
+    797,
+    981,
+    125,
+    456,
+    731,
+    1640,
+    486,
+    1309,
+    472,
+    1133,
+    1773,
+    906,
+    532,
+    742,
+    621,
+    855,
+]
+happiness = [
+    0.3,
+    0.8,
+    0.5,
+    0.4,
+    0.6,
+    0.4,
+    0.7,
+    0.5,
+    0.4,
+    0.3,
+    0.3,
+    0.6,
+    0.2,
+    0.8,
+    1,
+    0.6,
+    0.2,
+    0.7,
+    0.5,
+    0.7,
+    0.1,
+    0.4,
+    0.3,
+    0.6,
+    0.3,
+]
+
+df = pd.DataFrame({"FB追蹤數": f_tracking, "快樂程度": happiness})
+print(df.head())
+print("------------------------------")  # 30個
+
+df_scaled = pd.DataFrame(preprocessing.scale(df), columns=["標準化FB追蹤數", "標準化快樂程度"])
+print(df_scaled.head())
+df_scaled.plot(kind="scatter", x="標準化FB追蹤數", y="標準化快樂程度")
+
+print("------------------------------")  # 30個
+
+scaler = preprocessing.MinMaxScaler(feature_range=(0, 1))
+np_minmax = scaler.fit_transform(df)
+df_minmax = pd.DataFrame(np_minmax, columns=["最小最大值縮放FB追蹤數", "最小最大值縮放快樂程度"])
+print(df_minmax.head())
+
+df_minmax.plot(kind="scatter", x="最小最大值縮放FB追蹤數", y="最小最大值縮放快樂程度")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+# RobustScaler
+
+# 測試資料
+
+data = np.array([[1.0, -2.0, 2.0], [-2.0, 1.0, 3.0], [4.0, 1.0, -2.0]])
+print(data)
+
+from sklearn.preprocessing import RobustScaler
+
+scaler = RobustScaler()
+cc = scaler.fit_transform(data)
+print(cc)
+
+# 驗證
+
+
+def get_box_plot_data(data, bp):
+    rows_list = []
+
+    for i in range(data.shape[1]):
+        dict1 = {}
+        dict1["label"] = i
+        dict1["最小值"] = bp["whiskers"][i * 2].get_ydata()[1]
+        dict1["箱子下緣"] = bp["boxes"][i].get_ydata()[1]
+        dict1["中位數"] = bp["medians"][i].get_ydata()[1]
+        dict1["箱子上緣"] = bp["boxes"][i].get_ydata()[2]
+        dict1["最大值"] = bp["whiskers"][(i * 2) + 1].get_ydata()[1]
+        print(dict1)
+        rows_list.append(dict1)
+
+    return pd.DataFrame(rows_list)
+
+
+bp = plt.boxplot(data)
+get_box_plot_data(data, bp)
+print(data)
+show()
+
+"""
+	label 	最小值 	箱子下緣 	中位數 	箱子上緣 	最大值
+0 	0 	-2.0 	-0.5 	1.0 	2.5 	4.0
+1 	1 	-2.0 	-0.5 	1.0 	1.0 	1.0
+2 	2 	-2.0 	0.0 	2.0 	2.5 	3.0
+"""
+
+# 計算中位數、IQR
+median1 = np.median(data, axis=0)
+scale1 = np.quantile(data, 0.75, axis=0) - np.quantile(data, 0.25, axis=0)
+print(median1, scale1)
+# 計算 RobustScaler
+cc = (data - median1) / scale1
+print(cc)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 
 
 print("------------------------------------------------------------")  # 60個
@@ -387,3 +682,5 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+
+

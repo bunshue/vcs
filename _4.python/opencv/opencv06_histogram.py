@@ -744,6 +744,9 @@ ESC = 27
 
 print("------------------------------------------------------------")  # 60個
 
+W, H = 640, 480
+cx, cy = W//2, H//2
+
 print("把 直方圖均衡化處理 套用在webcam上 黑白")
 print("把 直方圖均衡化處理 套用在webcam上 彩色")
 
@@ -758,6 +761,8 @@ if not cap.isOpened():
 else:
     print("Video device opened")
 
+cv2.namedWindow("Original")
+
 while True:
     ret, frame = cap.read()  # 從攝影機擷取一張影像
 
@@ -770,9 +775,12 @@ while True:
     # 畫一些標記
     dd = 5
     topLeft = (cut - dd, cut - dd)
-    bottomRight = (640 - cut + dd, 480 - cut + dd)
+    topLeft = (cx - W//2 + cut - dd, cy - H//2 + cut - dd)
+    
+    bottomRight = (W - cut + dd, H - cut + dd)
+    bottomRight = (cx + W//2 - cut + dd, cy+ H//2 - cut + dd)
 
-    cv2.rectangle(frame, topLeft, bottomRight, 255, 2)
+    cv2.rectangle(frame, topLeft, bottomRight, 255, 2)  #藍色框
 
     # 原圖
     cv2.imshow("Original", frame)
@@ -781,7 +789,7 @@ while True:
     # 裁切區域的 x 與 y 座標（左上角）
     x_st, y_st = cut, cut
     # 裁切區域的長度與寬度
-    w, h = 640 - x_st * 2, 480 - y_st * 2
+    w, h = W - x_st * 2, H - y_st * 2
     frame2 = frame[y_st : y_st + h, x_st : x_st + w]
     frame3 = frame2
     # 裁切圖片 SP
@@ -800,7 +808,6 @@ while True:
     rr = cv2.equalizeHist(r)
 
     frame3 = cv2.merge([bb, gg, rr])
-
     cv2.imshow("Histogram2", frame3)
 
     k = cv2.waitKey(1)  # 等待按鍵輸入

@@ -84,6 +84,25 @@ print("Codec: " + codec)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+video_filename = "C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4"
+
+video = cv2.VideoCapture(video_filename)
+print("FPS:", video.get(cv2.CAP_PROP_FPS))
+print("FRAMES:", video.get(cv2.CAP_PROP_FRAME_COUNT))
+print("WIDTH:", video.get(cv2.CAP_PROP_FRAME_WIDTH))
+print("HEIGHT:", video.get(cv2.CAP_PROP_FRAME_HEIGHT))
+print("CURRENT FRAME:", video.get(cv2.CAP_PROP_POS_FRAMES))
+res, frame0 = video.read()
+print("CURRENT FRAME:", video.get(cv2.CAP_PROP_POS_FRAMES))
+video.set(cv2.CAP_PROP_POS_FRAMES, 50)
+print("CURRENT FRAME:", video.get(cv2.CAP_PROP_POS_FRAMES))
+res, frame50 = video.read()
+print("CURRENT FRAME:", video.get(cv2.CAP_PROP_POS_FRAMES))
+video.release()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 
 def show_video_info(video_filename):
     video = cv2.VideoCapture(video_filename)
