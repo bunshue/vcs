@@ -498,7 +498,7 @@ print("------------------------------------------------------------")  # 60個
 
 # 用contour(左)和contourf(右)描繪相等線圖
 y, x = np.ogrid[-2:2:200j, -3:3:300j]
-z = x * np.exp( - x**2 - y**2) 
+z = x * np.exp(-(x**2) - y**2)
 
 extent = [np.min(x), np.max(x), np.min(y), np.max(y)]
 
@@ -513,17 +513,23 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-#若果需要對雜湊點資料繪制相等線圖，
-#可以先使用scipy.interpolate模組中提供的插值函數將雜湊點資料插值為網格資料。
+# 若果需要對雜湊點資料繪制相等線圖，
+# 可以先使用scipy.interpolate模組中提供的插值函數將雜湊點資料插值為網格資料。
 
 # 使用相等線繪制隱函數曲線（左），取得相等線資料並繪圖（右）
 y, x = np.ogrid[-1.5:1.5:200j, -1.5:1.5:200j]
-f = (x**2 + y**2)**4 - (x**2 - y**2)**2
+f = (x**2 + y**2) ** 4 - (x**2 - y**2) ** 2
 
 plt.subplot(121)
 extent = [np.min(x), np.max(x), np.min(y), np.max(y)]
-cs = plt.contour(f, extent=extent, levels=[0, 0.1],
-     colors=["b", "r"], linestyles=["solid", "dashed"], linewidths=[2, 2])
+cs = plt.contour(
+    f,
+    extent=extent,
+    levels=[0, 0.1],
+    colors=["b", "r"],
+    linestyles=["solid", "dashed"],
+    linewidths=[2, 2],
+)
 
 plt.subplot(122)
 """ NG
@@ -535,7 +541,7 @@ for c in cs.collections:
 plt.show()
 
 print(cs)
-#cs.collections    
+# cs.collections
 
 # NG print(cs.collections[0].get_color()[0])
 print(cs.collections[0].get_linewidth()[0])
@@ -544,15 +550,15 @@ cc = len(cs.collections[0].get_paths())
 print(cc)
 
 path = cs.collections[0].get_paths()[0]
-#cc = os.path.vertices
-#print(cc)
+# cc = os.path.vertices
+# print(cc)
 
 print("------------------------------------------------------------")  # 60個
 
-#三角網格
+# 三角網格
 
-with open("data/diffusion.txt", encoding='UTF-8-sig') as f:
-    data = {"points":[], "triangles":[], "values":[]}
+with open("data/diffusion.txt", encoding="UTF-8-sig") as f:
+    data = {"points": [], "triangles": [], "values": []}
     values = None
     for line in f:
         line = line.strip()
@@ -562,8 +568,8 @@ with open("data/diffusion.txt", encoding='UTF-8-sig') as f:
             values = data[line[1:]]
             continue
         values.append([float(s) for s in line.split()])
-        
-data = {key:np.array(data[key]) for key in data}
+
+data = {key: np.array(data[key]) for key in data}
 
 # 使用tripcolor()和tricontour()繪制三角網格和相等線
 X, Y = data["points"].T
@@ -574,7 +580,7 @@ fig, ax = plt.subplots(figsize=(12, 4.5))
 ax.set_aspect("equal")
 
 mapper = ax.tripcolor(X, Y, triangles, values, cmap="gray")
-plt.colorbar(mapper, label=u"溫度")
+plt.colorbar(mapper, label="溫度")
 
 plt.triplot(X, Y, triangles, lw=0.5, alpha=0.3, color="k")
 
@@ -590,18 +596,13 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
+print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個
 
 
-
-
 print("------------------------------------------------------------")  # 60個
-
-
-
-print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------------------------------------")  # 60個

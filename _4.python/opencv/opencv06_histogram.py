@@ -748,7 +748,7 @@ print("把 直方圖均衡化處理 套用在webcam上 黑白")
 print("把 直方圖均衡化處理 套用在webcam上 彩色")
 
 video_filename = "D:/內視鏡影片/NBI錄影_V20241009_081309.mp4"
-#cap = cv2.VideoCapture(video_filename)
+# cap = cv2.VideoCapture(video_filename)
 
 cap = cv2.VideoCapture(0)
 
@@ -767,10 +767,10 @@ while True:
 
     cut = 80
 
-    #畫一些標記
+    # 畫一些標記
     dd = 5
-    topLeft = (cut-dd, cut-dd)
-    bottomRight = (640-cut+dd, 480-cut+dd)
+    topLeft = (cut - dd, cut - dd)
+    bottomRight = (640 - cut + dd, 480 - cut + dd)
 
     cv2.rectangle(frame, topLeft, bottomRight, 255, 2)
 
@@ -787,7 +787,7 @@ while True:
     # 裁切圖片 SP
 
     gray1 = cv2.cvtColor(frame2, cv2.COLOR_BGR2GRAY)
-    #cv2.imshow("Gray", gray1)
+    # cv2.imshow("Gray", gray1)
 
     gray2 = cv2.equalizeHist(gray1)
     cv2.imshow("Histogram1", gray2)

@@ -551,19 +551,19 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-print('設定背景色')
+print("設定背景色")
 
 for idx, color in enumerate("rgbyck"):
     print(idx, color)
-    plt.subplot(321+idx, facecolor=color)
+    plt.subplot(321 + idx, facecolor=color)
 
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-plt.subplot(221) # 第一行的左圖
-plt.subplot(222) # 第一行的右圖
-plt.subplot(212) # 第二整行
+plt.subplot(221)  # 第一行的左圖
+plt.subplot(222)  # 第一行的右圖
+plt.subplot(212)  # 第二整行
 
 plt.show()
 
@@ -576,7 +576,7 @@ ax1 = plt.subplot2grid((3, 3), (0, 0), colspan=2)
 ax2 = plt.subplot2grid((3, 3), (0, 2), rowspan=2)
 ax3 = plt.subplot2grid((3, 3), (1, 0), rowspan=2)
 ax4 = plt.subplot2grid((3, 3), (2, 1), colspan=2)
-ax5 = plt.subplot2grid((3, 3), (1, 1));
+ax5 = plt.subplot2grid((3, 3), (1, 1))
 
 for idx, ax in enumerate(fig.axes, 1):
     ax.text(0.5, 0.5, "ax{}".format(idx), ha="center", va="center", fontsize=16)

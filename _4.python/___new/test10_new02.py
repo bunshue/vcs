@@ -2709,24 +2709,26 @@ print(delta.seconds)
 print("------------------------------------------------------------")  # 60個
 
 import numpy as np
-x=np.array([1,2,3,4,1,2,3,4,5]).reshape(3,3)
-y= np.arange(9).reshape(3,3)
+
+x = np.array([1, 2, 3, 4, 1, 2, 3, 4, 5]).reshape(3, 3)
+y = np.arange(9).reshape(3, 3)
 print(x)
 print(y)
 print(x @ y)  # 不知道這是什麼運算
 
-#使用NumPy進行點積運算 ??
+# 使用NumPy進行點積運算 ??
 
 print("------------------------------------------------------------")  # 60個
 
 import numpy as np
-a = np.array([[1 , 1], [10, 25]])
+
+a = np.array([[1, 1], [10, 25]])
 b = np.array([16, 250])
 print(np.linalg.solve(a, b))
 
 print("------------------------------------------------------------")  # 60個
 
-print('數字對應 0~9 對應到 9~0')
+print("數字對應 0~9 對應到 9~0")
 old = np.array([3, 8, 3, 4, 2, 1, 4, 1, 2, 2])
 print(old)
 
@@ -2780,30 +2782,32 @@ ys = np.arange(1, 10).reshape(9, 1)
 m = xs * ys
 df = pd.DataFrame(m)
 
+
 # テンプレートの読み込み
 def load_template(file_path):
-    with open(file_path, 'r', encoding="utf-8") as file:
+    with open(file_path, "r", encoding="utf-8") as file:
         return file.read()
 
+
 # テンプレートを読み込む
-header_template = load_template('templates/header_template.txt')
-section_template = load_template('templates/section_template.txt')
+header_template = load_template("templates/header_template.txt")
+section_template = load_template("templates/section_template.txt")
 
 # README.mdを作成
-with open('README.md', 'w', encoding="utf-8") as readme:
+with open("README.md", "w", encoding="utf-8") as readme:
     readme.write(header_template)
-    
+
     for cmap in cmaps:
         # ヒートマップを生成し、画像として保存
         plt.figure(figsize=(5, 3))
         ax = sns.heatmap(df, cmap=cmap)
-        ax.tick_params(axis='both', which='both', length=0)
+        ax.tick_params(axis="both", which="both", length=0)
         ax.set_xticklabels([])
         ax.set_yticklabels([])
-        ax.set_xlabel('')
-        ax.set_ylabel('')
+        ax.set_xlabel("")
+        ax.set_ylabel("")
         plt.tight_layout(pad=0.1)
-        plt.savefig(f'images/{cmap}.png',transparent=True)
+        plt.savefig(f"images/{cmap}.png", transparent=True)
         plt.close()
 
         # READMEにセクションを追加
@@ -2827,13 +2831,10 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
-
 
 
 # Classes and Objects
@@ -2858,5 +2859,3 @@ print("my_dog age:", my_dog.age)
 # Call the bark method of the instance
 bark_result = my_dog.bark()
 print("bark_result:", bark_result)
-
-

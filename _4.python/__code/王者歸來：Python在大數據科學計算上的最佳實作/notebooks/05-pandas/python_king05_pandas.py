@@ -213,7 +213,6 @@ pd.set_option("display.float_format", "{:4.2g}".format)
 
 #索引存取
 
-np.random.seed(42)
 df = pd.DataFrame(np.random.randint(0, 10, (5, 3)), 
                   index=["r1", "r2", "r3", "r4", "r5"], 
                   columns=["c1", "c2", "c3"])
@@ -558,7 +557,7 @@ print("------------------------------------------------------------")  # 60個
 #請讀者思考如何使用NumPy提供的ufunc函數計算ref:fig-next中的三條曲線。
 
 #%fig=用`expanding_*`計算歷史最大值、平均值、最小值
-np.random.seed(42)
+
 x = np.cumsum(np.random.randn(400))
 """ NG
 x_max = pd.expanding_max(x)
@@ -731,7 +730,6 @@ def random_timestamps(start, end, freq, count):
     locations.sort()
     return index[locations]
 
-np.random.seed(42)
 ts_index = random_timestamps("2015-01-01", "2015-10-01", freq="Min", count=5)
 pd_index = ts_index.to_period("M")
 td_index = pd.TimedeltaIndex(np.diff(ts_index))
@@ -785,7 +783,6 @@ print("------------------------------------------------------------")  # 60個
 
 #與NaN關聯的函數
 
-np.random.seed(41)
 df_int = pd.DataFrame(np.random.randint(0, 10, (10, 3)), columns=list("ABC"))
 df_int["A"] += 10
 df_nan = df_int.where(df_int > 2)

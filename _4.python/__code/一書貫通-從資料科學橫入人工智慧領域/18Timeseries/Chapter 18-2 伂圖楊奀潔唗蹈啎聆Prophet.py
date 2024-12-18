@@ -1,10 +1,6 @@
-
 import pandas as pd
 from fbprophet import Prophet
 import matplotlib.pyplot as plt
-
-import os
-os.chdir(r"D:\Python_book\18Timeseries")
 
 df = pd.read_csv('AirPassengers.csv')
 df['DATE'] = pd.to_datetime(df['DATE'])

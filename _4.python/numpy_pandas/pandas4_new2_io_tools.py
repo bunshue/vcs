@@ -250,15 +250,6 @@ two,5,6,,8,world
 three,9,10,11.0,12,foo 
 """
 
-print("Series 也有to_csv方法")
-dates = pd.date_range("1/1/2000", periods=7)
-print(dates)
-
-"""
-DatetimeIndex(['2000-01-01', '2000-01-02', '2000-01-03', '2000-01-04',
-               '2000-01-05', '2000-01-06', '2000-01-07'],
-              dtype='datetime64[ns]', freq='D')
-"""
 ts = pd.Series(np.arange(7), index=dates)
 print(ts)
 

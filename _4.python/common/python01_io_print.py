@@ -11,6 +11,19 @@
 
 """
 
+import os
+import sys
+
+print("------------------------------------------------------------")  # 60個
+
+print('有r 保留字串內的反斜線')
+cc = r"This\nis\na\ndog\n"
+print(cc)
+
+print('不用r 要多一個反斜線')
+cc = "This\\nis\\na\\ndog\\n"
+print(cc)
+
 print("-" * 60)  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -281,8 +294,6 @@ print("var2[1:5]: ", var2[1:5])
 
 print("------------------------------------------------------------")  # 60個
 
-import sys
-
 print("有顏色的打印訊息", file=sys.stderr)
 
 print("%s: %s, line %d, column %d" % ("aaaa", "bbbb", 123, 456), file=sys.stderr)
@@ -348,9 +359,6 @@ err("-i option or file-or-directory missing\n")
 
 print("------------------------------------------------------------")  # 60個
 
-
-import sys
-
 err = sys.stderr.write
 
 
@@ -395,8 +403,6 @@ usage3(msg)
 
 print("恢復正常顯示")
 
-import sys
-
 filename = "aaaaa"
 msg = "bbbbb"
 sys.stderr.write("紅字打印 : %s: can't open: %s\n" % (filename, str(msg)))
@@ -429,9 +435,7 @@ message = "{:<10}({}年式)，{:>10,}KM，售價：{:>10,}元"
 
 print(message.format(model, year, mileage, money))
 
-
 print("------------------------------------------------------------")  # 60個
-
 
 testno = 20
 s = "abc"
@@ -441,9 +445,6 @@ err = "mnp"
 sys.stdout.write("xfmt%d  format  %s  '%s'  ->  \"%s\"\n" % (testno, s, fmt, result))
 sys.stdout.write("xfmt%d  format  %s  '%s'  ->  '%s'\n" % (testno, s, fmt, result))
 sys.stderr.write("%s  %s  %s\n" % (err, s, fmt))
-
-
-import sys
 
 
 def usage(msg=""):
@@ -466,11 +467,7 @@ string = "this is a lion-mouse"
 
 print("%s" % string, file=sys.stderr)
 
-
 print(string)
-
-
-import sys
 
 
 def test():
@@ -498,10 +495,6 @@ def chop(line):
 
 
 test()
-
-
-import os
-import sys
 
 err = sys.stderr.write
 dbg = err
@@ -626,11 +619,7 @@ err("-i option or file-or-directory missing\n")
 err(usage)
 err("%s: cannot open: %r\n" % (filename, msg))
 
-
 print("------------------------------------------------------------")  # 60個
-
-
-import sys
 
 
 def errprint(*args):
@@ -674,17 +663,12 @@ def fail(msg):
 filename = "ccccc"
 fail("couldn't open " + filename)
 
-
 print("------------------------------------------------------------")  # 60個
-
 
 arg = "abcdefg"
 sys.stderr.write("Can't find %s\n" % arg)
 
-
 print("------------------------------------------------------------")  # 60個
-
-import sys
 
 usage = (
     """Usage: %s [-cd] paths...
@@ -696,14 +680,12 @@ usage = (
 print("msgsssssss", file=sys.stderr)
 print(usage, file=sys.stderr)
 
-
 print("------------------------------------------------------------")  # 60個
 
 filename1 = "C:/_git/vcs/_1.data/______test_files1/aaaaa.jpg"
 filename2 = "C:/_git/vcs/_1.data/______test_files1/bbbbb.jpg"
 
 print("Copied %s to %s" % (filename1, filename2))
-
 
 filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 
@@ -712,11 +694,7 @@ print(filename)
 print("file: %s" % filename)
 print("file: %r" % filename)
 
-
 print("------------------------------------------------------------")  # 60個
-
-
-import sys
 
 
 def test():
@@ -774,9 +752,6 @@ log_info("unhandled read event", "warning")
 
 print("------------------------------------------------------------")  # 60個
 
-
-import os
-
 sys.stdout = sys.stderr
 print("Usage:", os.path.basename(sys.argv[0]), end=" ")
 print("[-cdu] [file] ...")
@@ -794,10 +769,6 @@ SRCDIR = sysconfig.get_config_var("srcdir")
 print(SRCDIR)
 
 print("不能 恢復正常顯示")
-
-
-print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------------------------------------")  # 60個
 

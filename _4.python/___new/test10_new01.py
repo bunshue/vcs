@@ -345,14 +345,12 @@ cc = chr(nn)
 print(cc)
 
 
-
-
-#ord()回傳參數字元對應的的編碼位置
+# ord()回傳參數字元對應的的編碼位置
 print("==Test1==")
 print(ord("H"))
 print(ord("你"))
 print(ord("好"))
-#chr()回傳參數編碼位置對應的字元
+# chr()回傳參數編碼位置對應的字元
 print("==Test2==")
 print(chr(72))
 print(chr(20320))
@@ -361,20 +359,20 @@ print(chr(22909))
 
 ##輸出'A'之後的10個英文字母
 print("==Test3==")
-for i in range(65,75):
-    print(chr(i),end='')
+for i in range(65, 75):
+    print(chr(i), end="")
 print()
 ##輸出'你'之後的10個中文字
-for i in range(20320,20330):
-    print(chr(i),end='')
+for i in range(20320, 20330):
+    print(chr(i), end="")
 print()
-#str()回傳參數為字串
+# str()回傳參數為字串
 print("==Test4==")
-print(str(123)+"456")
-#ascii()回傳參數的字串表達形式
+print(str(123) + "456")
+# ascii()回傳參數的字串表達形式
 ##如果字串含有非ASCII字元，所有非ASCII字元會以Unicode跳脫字元的方式呈現
 print(ascii("Ab123"))
-print(ascii("hello你好".encode('utf-8')))
+print(ascii("hello你好".encode("utf-8")))
 
 
 # ord()是將字元轉成ASCII碼
@@ -387,9 +385,6 @@ print(ord(chr(65)))
 # i的初始值為A字元的ASCII碼(65)，終止值小於Z字元的ASCII碼(90)+1，遞增值為1
 for i in range(ord("A"), ord("Z") + 1, 1):
     print(chr(i), end="")
-
-
-
 
 
 x1 = 97
@@ -749,7 +744,7 @@ print(str2)
 
 print("------------------------------------------------------------")  # 60個
 
-print('抽象方法(abstract method)')
+print("抽象方法(abstract method)")
 
 from abc import ABCMeta, abstractmethod
 from math import pi
@@ -1320,6 +1315,7 @@ print(animals.islower())
 print("2023".isdigit())
 
 print("------------------------------------------------------------")  # 60個
+
 
 def clean_string(s):
     """
@@ -2034,6 +2030,7 @@ print(not_duplicatd)
 
 print("------------------------------------------------------------")  # 60個
 
+
 def fun1(obj, price):
     obj = "Microwave"
     print("函數內部修改字串及串列資料")
@@ -2086,6 +2083,7 @@ print("是否皆為大寫字元", phrase.isupper())
 print("是否皆為小寫字元", phrase.islower())
 
 print("------------------------------------------------------------")  # 60個
+
 
 # 不定長度參數之函數
 def myfruit(**arg):
@@ -2777,6 +2775,7 @@ min(300, 30, 3000)
 
 print("------------------------------------------------------------")  # 60個
 
+
 def getSevSegStr(number, minWidth=0):
     """Return a seven-segment display string of number. The returned
     string will be padded with zeros if it is smaller than minWidth."""
@@ -2784,68 +2783,69 @@ def getSevSegStr(number, minWidth=0):
     # Convert number to string in case it's an int or float:
     number = str(number).zfill(minWidth)
 
-    rows = ['', '', '']
+    rows = ["", "", ""]
     for i, numeral in enumerate(number):
-        if numeral == '.':  # Render the decimal point.
-            rows[0] += ' '
-            rows[1] += ' '
-            rows[2] += '.'
+        if numeral == ".":  # Render the decimal point.
+            rows[0] += " "
+            rows[1] += " "
+            rows[2] += "."
             continue  # Skip the space in between digits.
-        elif numeral == '-':  # Render the negative sign:
-            rows[0] += '    '
-            rows[1] += ' __ '
-            rows[2] += '    '
-        elif numeral == '0':  # Render the 0.
-            rows[0] += ' __ '
-            rows[1] += '|  |'
-            rows[2] += '|__|'
-        elif numeral == '1':  # Render the 1.
-            rows[0] += '    '
-            rows[1] += '   |'
-            rows[2] += '   |'
-        elif numeral == '2':  # Render the 2.
-            rows[0] += ' __ '
-            rows[1] += ' __|'
-            rows[2] += '|__ '
-        elif numeral == '3':  # Render the 3.
-            rows[0] += ' __ '
-            rows[1] += ' __|'
-            rows[2] += ' __|'
-        elif numeral == '4':  # Render the 4.
-            rows[0] += '    '
-            rows[1] += '|__|'
-            rows[2] += '   |'
-        elif numeral == '5':  # Render the 5.
-            rows[0] += ' __ '
-            rows[1] += '|__ '
-            rows[2] += ' __|'
-        elif numeral == '6':  # Render the 6.
-            rows[0] += ' __ '
-            rows[1] += '|__ '
-            rows[2] += '|__|'
-        elif numeral == '7':  # Render the 7.
-            rows[0] += ' __ '
-            rows[1] += '   |'
-            rows[2] += '   |'
-        elif numeral == '8':  # Render the 8.
-            rows[0] += ' __ '
-            rows[1] += '|__|'
-            rows[2] += '|__|'
-        elif numeral == '9':  # Render the 9.
-            rows[0] += ' __ '
-            rows[1] += '|__|'
-            rows[2] += ' __|'
+        elif numeral == "-":  # Render the negative sign:
+            rows[0] += "    "
+            rows[1] += " __ "
+            rows[2] += "    "
+        elif numeral == "0":  # Render the 0.
+            rows[0] += " __ "
+            rows[1] += "|  |"
+            rows[2] += "|__|"
+        elif numeral == "1":  # Render the 1.
+            rows[0] += "    "
+            rows[1] += "   |"
+            rows[2] += "   |"
+        elif numeral == "2":  # Render the 2.
+            rows[0] += " __ "
+            rows[1] += " __|"
+            rows[2] += "|__ "
+        elif numeral == "3":  # Render the 3.
+            rows[0] += " __ "
+            rows[1] += " __|"
+            rows[2] += " __|"
+        elif numeral == "4":  # Render the 4.
+            rows[0] += "    "
+            rows[1] += "|__|"
+            rows[2] += "   |"
+        elif numeral == "5":  # Render the 5.
+            rows[0] += " __ "
+            rows[1] += "|__ "
+            rows[2] += " __|"
+        elif numeral == "6":  # Render the 6.
+            rows[0] += " __ "
+            rows[1] += "|__ "
+            rows[2] += "|__|"
+        elif numeral == "7":  # Render the 7.
+            rows[0] += " __ "
+            rows[1] += "   |"
+            rows[2] += "   |"
+        elif numeral == "8":  # Render the 8.
+            rows[0] += " __ "
+            rows[1] += "|__|"
+            rows[2] += "|__|"
+        elif numeral == "9":  # Render the 9.
+            rows[0] += " __ "
+            rows[1] += "|__|"
+            rows[2] += " __|"
 
         # Add a space (for the space in between numerals) if this
         # isn't the last numeral and the decimal point isn't next:
-        if i != len(number) - 1 and number[i + 1] != '.':
-            rows[0] += ' '
-            rows[1] += ' '
-            rows[2] += ' '
+        if i != len(number) - 1 and number[i + 1] != ".":
+            rows[0] += " "
+            rows[1] += " "
+            rows[2] += " "
 
-    return '\n'.join(rows)
+    return "\n".join(rows)
 
-print('七段顯示器')
+
+print("七段顯示器")
 
 for i in range(0, 1000, 167):
     ccc = getSevSegStr(i, 5)
@@ -2853,14 +2853,17 @@ for i in range(0, 1000, 167):
 
 print("------------------------------------------------------------")  # 60個
 
+
 # 函數文件字串 docstring 註明此函數的功能與用法
 def greeting(name):
     """Python函數需傳遞名字name"""
     print("Hi,", name, "Good Morning!")
-greeting('Nelson')
 
 
-#用help(函數名稱)列出此函數的文件字串
+greeting("Nelson")
+
+
+# 用help(函數名稱)列出此函數的文件字串
 
 help(greeting)
 
@@ -2915,7 +2918,7 @@ print("是否有書號A001的書籍：", "A001" in dictBook)
 
 print("------------------------------------------------------------")  # 60個
 
-#一次改變一個數列
+# 一次改變一個數列
 celsius = [21, 25, 29]
 fahrenheit = [(x * 9 / 5 + 32) for x in celsius]
 print(fahrenheit)
@@ -3102,6 +3105,7 @@ print("\n".join(["%10s:%2d" % (item, len(item)) for item in fruit]))
 
 print("------------------------------------------------------------")  # 60個
 
+
 # 定義函式
 def funcTest(name, score):
     print("定義函式的。。。")
@@ -3266,17 +3270,17 @@ print("/%10.3s/" % string)
 
 print("------------------------------------------------------------")  # 60個
 
-print('置換網址資料')
+print("置換網址資料")
 url = "https://maps.apis.com/json?city="
 city = "taipei"
 r = 1000
 type_ = "school"
-print(url + city + '&radius=' + str(r) + '&type=' + type_)
+print(url + city + "&radius=" + str(r) + "&type=" + type_)
 print(url + "{}&radius={}&type={}".format(city, r, type_))
 
 print("------------------------------------------------------------")  # 60個
 
-print('置換網址資料')
+print("置換網址資料")
 url = "https://maps.apis.com/json?city="
 city = "taipei"
 r = 1000
@@ -3618,7 +3622,7 @@ for i in range(n + 1):
 print("------------------------------------------------------------")  # 60個
 
 drinks = ["coffee", "tea", "wine"]
-enumerate_drinks = enumerate(drinks)                # 數值初始是0
+enumerate_drinks = enumerate(drinks)  # 數值初始是0
 lst = list(enumerate_drinks)
 print("轉成串列輸出, 初始索引值是 0 = ", lst)
 print(type(lst[0]))
@@ -4089,6 +4093,7 @@ print(pig_latin("python"))
 print("------------------------------------------------------------")  # 60個
 
 # 豬拉丁文 --- 句子翻譯機
+
 
 def pl_sentence(sentence):
     output = []
@@ -4654,19 +4659,21 @@ print(roman_num_to_int("MMCDXIX"))
 
 print("------------------------------------------------------------")  # 60個
 
-names = ["A太","B介","C子","D郎"]
+names = ["A太", "B介", "C子", "D郎"]
 for i, name in enumerate(names):
     if name == "C子":
         print(i, "號的", name, "找到了。")
 
 print("------------------------------------------------------------")  # 60個
 
+
 def search(findname):
-    names = ["A太","B介","C子","D郎"]
+    names = ["A太", "B介", "C子", "D郎"]
     for i, name in enumerate(names):
         if name == findname:
             return i, name
     return -1, "找不到該名稱。"
+
 
 n, name = search("C子")
 print(name, n, "號")
@@ -4675,13 +4682,15 @@ print(name, n, "號")
 
 print("------------------------------------------------------------")  # 60個
 
+
 def human_size(size):
-    units = ["位元組","KB","MB","GB","TB","PB","EB"]
+    units = ["位元組", "KB", "MB", "GB", "TB", "PB", "EB"]
     n = 0
     while size > 1024:
         size = size / 1024.0
         n += 1
     return str(int(size)) + " " + units[n]
+
 
 print(human_size(123))
 print(human_size(123456))
@@ -4712,20 +4721,21 @@ maze = [
     [0, 0, 1, 0, 1],
     [1, 1, 1, 0, 1],
     [1, 0, 0, 0, 1],
-    [1, 1, 1, 1, 1]
+    [1, 1, 1, 1, 1],
 ]
 
 # 定義方向
 directions = [(0, 1), (0, -1), (1, 0), (-1, 0)]
 
+
 def dfs(x, y, path):
     # 到達終點
-    if x == len(maze)-1 and y == len(maze[0])-1:
+    if x == len(maze) - 1 and y == len(maze[0]) - 1:
         return path + [(x, y)]
-    
+
     # 標記已經走過的路徑
     maze[x][y] = -1
-    
+
     # 遍歷四個方向
     for dx, dy in directions:
         nx, ny = x + dx, y + dy
@@ -4734,20 +4744,19 @@ def dfs(x, y, path):
             res = dfs(nx, ny, path + [(x, y)])
             if res:
                 return res
-    
+
     return None
+
 
 # 從起點開始搜索
 path = dfs(0, 0, [])
 if path:
-    print("找到出口，路徑為：", path + [(len(maze)-1, len(maze[0])-1)])
+    print("找到出口，路徑為：", path + [(len(maze) - 1, len(maze[0]) - 1)])
 else:
     print("沒有找到出口")
 
 
-
 print("------------------------------------------------------------")  # 60­э
-
 
 
 # 宣告迷宮陣列
@@ -4837,7 +4846,7 @@ assert len(PLACE_FIRST_LETTERS.keys()) == len(PLACES)
 
 print("------------------------------------------------------------")  # 60個
 
-print('in, not in 的用法')
+print("in, not in 的用法")
 print("1" in "123")  # 字串搜尋：判斷 "1" 是否在 "123" 內，成立顯示True
 print("13" in "123")  # 字串搜尋：判斷 "13" 是否在 "123" 內，不成立顯示False
 print("M" in "ASP.NET MVC")  # 字串搜尋：判斷 "M" 是否在 "ASP.NET MVC" 內，成立顯示True
@@ -4846,7 +4855,7 @@ print(1 not in [1, 2, 3])  # 串列搜尋：判斷 1 是否不在串列內，不
 
 print("------------------------------------------------------------")  # 60個
 
-print('不同進制表示數字')
+print("不同進制表示數字")
 
 num = 15  # 以十進制表示15
 num0b = 0b1111  # 以二進制表示15
@@ -4981,6 +4990,7 @@ print("最貴產品：%s, 單價：%d" % (listName[n], listPrice[n]))
 
 print("------------------------------------------------------------")  # 60個
 
+
 def func():
     n = 10
     print("區域變數n 位址=%d, 值=%d" % (id(n), n))
@@ -4991,6 +5001,7 @@ func()
 print("全域變數n 位址=%d, 值=%d" % (id(n), n))
 
 print("------------------------------------------------------------")  # 60個
+
 
 def func():
     global n
@@ -5005,7 +5016,7 @@ print("函式外 全域變數n 位址=%d, 值=%d" % (id(n), n))
 
 print("------------------------------------------------------------")  # 60個
 
-#改成動物資料
+# 改成動物資料
 soldier0 = {"tag": "red", "score": 3, "speed": "slow"}  # 建立小兵
 soldier1 = {"tag": "blue", "score": 5, "speed": "medium"}
 soldier2 = {"tag": "green", "score": 10, "speed": "fast"}
@@ -5025,7 +5036,7 @@ print("加總成績： %d" % sum(listScore))
 print("平均成績： %d" % avg)
 
 
-cname = '米老鼠'
+cname = "米老鼠"
 message = f"中文名{cname}"
 print(message)
 
@@ -5043,7 +5054,7 @@ print("遞增排序：", listScore)
 listScore.reverse()
 print("遞減排序：", listScore)
 
-print('二維list')
+print("二維list")
 product = [
     ["E01", "碁峰可樂", 100],
     ["E02", "阿才肉乾", 690],
@@ -5057,7 +5068,6 @@ print("品名：%s" % product[index][1])
 print("單價：%d" % product[index][2])
 
 print("------------------------------------------------------------")  # 60個
-
 
 
 # Python 舊式字串格式化
@@ -5196,9 +5206,7 @@ print(bytes(arr))
 # arr[1] = 300
 
 
-
 print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -5661,6 +5669,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
+
 def fun(arg):
     pass
 
@@ -6010,6 +6019,7 @@ hover_handler(on_hover)
 
 print("------------------------------------------------------------")  # 60個
 
+
 def interest(interest_type, subject):
     """顯示興趣和主題"""
     print("我的興趣是 " + interest_type)
@@ -6081,6 +6091,7 @@ print(getMax(2, 3))  # 列印較大值
 print(getMax.__doc__)  # 列印文件字串docstring
 
 print("------------------------------------------------------------")  # 60個
+
 
 def division(x, y):
     try:  # try - except指令
@@ -6161,6 +6172,7 @@ for pwd in ("aaabbbccc", "aaa", "aaabbb"):  # 測試系列密碼值
         print("密碼長度檢查異常發生: ", str(err))
 
 print("------------------------------------------------------------")  # 60個
+
 
 def division(x, y):
     try:  # try - except指令
@@ -6256,7 +6268,7 @@ print("%3s  %4d    %4d    %4d     %3.1f" % ("洪星宇", 93, 97, 190, 190 / 2))
 
 print("------------------------------------------------------------")  # 60個
 
-#改成動物資料
+# 改成動物資料
 print(" 姓名    國文    英文    總分")
 print("%3s  %4d    %4d    %4d" % ("洪冰儒", 98, 90, 188))
 print("%3s  %4d    %4d    %4d" % ("洪雨星", 96, 95, 191))
@@ -6630,6 +6642,7 @@ def greeting(string):  # 問候函數
 print(greeting("Hello! iPhone"))
 
 print("------------------------------------------------------------")  # 60個
+
 
 class Myschool:
     def __init__(self, name, score):
@@ -7282,108 +7295,115 @@ print(v8)
 print("------------------------------------------------------------")  # 60個
 
 
-
-
 print("------------------------------------------------------------")  # 60個
 
-print('請輸入一串列的整數，數目之間利用空白分隔：')
+print("請輸入一串列的整數，數目之間利用空白分隔：")
 ps = "86 75 92 77 84 76 95"
 
 pitems = ps.split()
-pscores = [ eval(x) for x in pitems ]
+pscores = [eval(x) for x in pitems]
 pabove = 0
-paverage = sum(pscores)/len(pscores)
+paverage = sum(pscores) / len(pscores)
 for score in pscores:
     if score >= paverage:
         pabove += 1
-print("平均數："+str(paverage))
-print("大於或等於平均數的數目："+str(pabove))
-print("小於平均數的數目："+str(len(pscores)-pabove))
+print("平均數：" + str(paverage))
+print("大於或等於平均數的數目：" + str(pabove))
+print("小於平均數的數目：" + str(len(pscores) - pabove))
 
 print("------------------------------------------------------------")  # 60個
 
 print("姓  名  提取   推論  詮釋")
-print("%3s %4.2f %4.2f %4.2f"%("陳大同",89.00, 99.00, 88.00))
-print("%3s %4.2f %4.2f %4.2f"%("楊小明",77.50, 89.00, 77.50))
-print("%3s %4.2f %4.2f %4.2f"%("陳時雨",66.75, 99.25, 88.50))
-print("%3s %4.2f %4.2f %4.2f"%("李婉玲",76.75, 84.50, 88.00))
-print("%3s %4.2f %4.2f %4.2f"%("林研時",89.25, 99.50, 89.25))
+print("%3s %4.2f %4.2f %4.2f" % ("陳大同", 89.00, 99.00, 88.00))
+print("%3s %4.2f %4.2f %4.2f" % ("楊小明", 77.50, 89.00, 77.50))
+print("%3s %4.2f %4.2f %4.2f" % ("陳時雨", 66.75, 99.25, 88.50))
+print("%3s %4.2f %4.2f %4.2f" % ("李婉玲", 76.75, 84.50, 88.00))
+print("%3s %4.2f %4.2f %4.2f" % ("林研時", 89.25, 99.50, 89.25))
 
 print("姓  名  提取   推論  詮釋")
-print("%3s %4.2f %4.2f %4.2f"%("陳大同",89.00, 99.00, 88.00))
-print("%3s %4.2f %4.2f %4.2f"%("楊小明",77.50, 89.00, 77.50))
-print("%3s %4.2f %4.2f %4.2f"%("陳時雨",66.75, 99.25, 88.50))
-print("%3s %4.2f %4.2f %4.2f"%("李婉玲",76.75, 84.50, 88.00))
-print("%3s %4.2f %4.2f %4.2f"%("林研時",89.25, 99.50, 89.25))
+print("%3s %4.2f %4.2f %4.2f" % ("陳大同", 89.00, 99.00, 88.00))
+print("%3s %4.2f %4.2f %4.2f" % ("楊小明", 77.50, 89.00, 77.50))
+print("%3s %4.2f %4.2f %4.2f" % ("陳時雨", 66.75, 99.25, 88.50))
+print("%3s %4.2f %4.2f %4.2f" % ("李婉玲", 76.75, 84.50, 88.00))
+print("%3s %4.2f %4.2f %4.2f" % ("林研時", 89.25, 99.50, 89.25))
 
 print("------------------------------------------------------------")  # 60個
 
-list1 = [50,40,20,40,20,60,20,80,90]
-print(" 原始串列:",list1)
+list1 = [50, 40, 20, 40, 20, 60, 20, 80, 90]
+print(" 原始串列:", list1)
 list1.sort()
 list1.reverse()
-print(" 由大到小:",list1)
+print(" 由大到小:", list1)
 
 print("------------------------------------------------------------")  # 60個
 
-print("%4s %4s %8s"%("x","y","x**y"))
-print("%4d %4d %8d"%(1,1,1))
-print("%4d %4d %8d"%(2,2,4))
-print("%4d %4d %8d"%(4,3,64))
-print("%4d %4d %8d"%(8,4,4096))
+print("%4s %4s %8s" % ("x", "y", "x**y"))
+print("%4d %4d %8d" % (1, 1, 1))
+print("%4d %4d %8d" % (2, 2, 4))
+print("%4d %4d %8d" % (4, 3, 64))
+print("%4d %4d %8d" % (8, 4, 4096))
 
 print("------------------------------------------------------------")  # 60個
 
-i=1
-while (i<=9):
-    j=2
-    while (j<=9):        
-        print("%d*%d=%2d"%(j,i,i*j), end=" ")
-        j=j+1
+i = 1
+while i <= 9:
+    j = 2
+    while j <= 9:
+        print("%d*%d=%2d" % (j, i, i * j), end=" ")
+        j = j + 1
     print()
-    i=i+1
+    i = i + 1
 
 print("------------------------------------------------------------")  # 60個
+
 
 def calarea(height, width=6):
-    result = height*width
+    result = height * width
     return result
+
+
 getarea = calarea(10)
 print(getarea)
 
 print("------------------------------------------------------------")  # 60個
 
+
 def calarea(height, width=6):
-    result = height*width
+    result = height * width
     return result
+
+
 getarea = calarea(10, 7)
 print(getarea)
 
 print("------------------------------------------------------------")  # 60個
 
+
 def scope():
     var1 = 1
     print(var1, var2)
+
+
 var1 = 3
 var2 = 4
 print(var1, var2)
 scope()
-print(var1, var2) 
+print(var1, var2)
 
 print("------------------------------------------------------------")  # 60個
 
-print('要轉換的十進位數字 = 255')
+print("要轉換的十進位數字 = 255")
 pnum = 255
-presult=""
-while(pnum!=0):
-    pdata=str(pnum%2)
-    presult="".join([pdata,presult])
-    pnum=pnum//2
-print("轉換為二進位數字為:%s"%presult)
+presult = ""
+while pnum != 0:
+    pdata = str(pnum % 2)
+    presult = "".join([pdata, presult])
+    pnum = pnum // 2
+print("轉換為二進位數字為:%s" % presult)
 
 print("------------------------------------------------------------")  # 60個
 
-try:   
+try:
     print(varn)
 except NameError:
     print("變數不存在!")
@@ -7397,21 +7417,22 @@ def phi(n):
     presult = 0
     ptemp = 1
     for i in range(1, n + 1, 1):
-        presult = presult+ptemp/(2 * i - 1) 
-        ptemp = -1*ptemp
-    presult = 4*presult
+        presult = presult + ptemp / (2 * i - 1)
+        ptemp = -1 * ptemp
+    presult = 4 * presult
     return presult
+
 
 print(phi(900))
 
 print("------------------------------------------------------------")  # 60個
 
 try:
-    #pnumber = int(input("請輸入一個整數："))
-    pnumber = 'aaaa'
-    print("所輸入的整數%d"%pnumber)
+    # pnumber = int(input("請輸入一個整數："))
+    pnumber = "aaaa"
+    print("所輸入的整數%d" % pnumber)
 except Exception as ex:
-    print("異常例外：", ex) 
+    print("異常例外：", ex)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -7758,17 +7779,17 @@ else:
 
 print("------------------------------------------------------------")  # 60個
 
-cc = 'ABC' * 5
+cc = "ABC" * 5
 print(cc)
 
-cc = ['A', 'B', 'C'] * 5
+cc = ["A", "B", "C"] * 5
 print(cc)
 
-cc = [1,2,3] * 5
+cc = [1, 2, 3] * 5
 print(cc)
 
 
-cc = 'A' * 5
+cc = "A" * 5
 print(cc)
 
 print("------------------------------------------------------------")  # 60個
@@ -7783,48 +7804,48 @@ print("------------------------------------------------------------")  # 60個
 
 import re
 
-s = ' hello world \n'
-print("|"+s.strip()+"|")
-print("|"+s.lstrip()+"|")
-print("|"+s.rstrip()+"|")
+s = " hello world \n"
+print("|" + s.strip() + "|")
+print("|" + s.lstrip() + "|")
+print("|" + s.rstrip() + "|")
 
 # Character stripping
-t = '-----hello====='
-print(t.lstrip('-'))
-print(t.strip('-='))
+t = "-----hello====="
+print(t.lstrip("-"))
+print(t.strip("-="))
 
 # 对中间不会影响
-s = ' hello     world \n'
+s = " hello     world \n"
 print(s.strip())
 
-print(s.replace(' ', ''))
-print(re.sub('\s+', ' ', s))
+print(s.replace(" ", ""))
+print(re.sub("\s+", " ", s))
 
 print("------------------------------------------------------------")  # 60個
 
-text = 'Hello World'
+text = "Hello World"
 print(text.ljust(20))
 print(text.rjust(20))
 print(text.center(20))
 
 # 填充字符
-print(text.rjust(20,'='))
-print(text.center(20,'*'))
+print(text.rjust(20, "="))
+print(text.center(20, "*"))
 
 # format函数
-print(format(text, '>20'))
-print(format(text, '<20'))
-print(format(text, '^20'))
+print(format(text, ">20"))
+print(format(text, "<20"))
+print(format(text, "^20"))
 # 同时增加填充字符
-print(format(text, '=>20s'))
-print(format(text, '*^20s'))
+print(format(text, "=>20s"))
+print(format(text, "*^20s"))
 
 # 格式化多个值
-print('{:=>10s} {:*^10s}'.format('Hello', 'World'))
+print("{:=>10s} {:*^10s}".format("Hello", "World"))
 
 # 格式化数字
 x = 1.2345
-print(format(x, '=^10.2f'))
+print(format(x, "=^10.2f"))
 
 print("------------------------------------------------------------")  # 60個
 
@@ -7835,10 +7856,10 @@ y=[16800,20000,21600,25400,12800,20000,25000,14600,32800,25400,18000,10600]
 plt.plot(x, y, marker='d',ms=10, mfc='r', mec='b')
 """
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-data = b'wxy\x7a'
-print(data)               # b'wxyz'，以ASCII字元輸出
+data = b"wxy\x7a"
+print(data)  # b'wxyz'，以ASCII字元輸出
 
 print(type(data), type(data[0]))
 # <class 'bytes'>, <class 'int'>
@@ -7846,20 +7867,20 @@ print(type(data), type(data[0]))
 print(data[0], hex(data[0]))
 # 'w' ASCII碼119，十六進位'0x77'
 
-print(b'\x7a' in data)    # 可以用 in 來判斷
-print(data[2:])           # 可以切片
+print(b"\x7a" in data)  # 可以用 in 來判斷
+print(data[2:])  # 可以切片
 
 print("------------------------------------------------------------")  # 60個
 
-data = b'wxy\x7a'
-print(data)               # b'wxyz'，以ASCII字元輸出
+data = b"wxy\x7a"
+print(data)  # b'wxyz'，以ASCII字元輸出
 
 ba = bytearray(data)
 print(type(ba), type(ba[0]))
 # <class 'bytearray'>, <class 'int'>
 
-ba[3] = 0x70              # 修改資料
-print(ba)                 # 變成 bytearray(b'wxyp')
+ba[3] = 0x70  # 修改資料
+print(ba)  # 變成 bytearray(b'wxyp')
 
 print("------------------------------------------------------------")  # 60個
 
@@ -7933,9 +7954,9 @@ except KeyboardInterrupt:
     print('Digital Clock, by Al Sweigart al@inventwithpython.com')
     sys.exit()  # When Ctrl-C is pressed, end the program.
 """
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-print('string.printable 的用法 ')
+print("string.printable 的用法 ")
 
 import string
 
@@ -7944,7 +7965,7 @@ print(len(string.printable))
 abc = string.printable[:-5]  # 取消不可列印字元
 print(abc)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 """
 #print
 #print("當半徑為%d時，圓面積為%6.2f，圓周長為%6.2f"%(pvalue, result1, result2))
@@ -7954,6 +7975,7 @@ print("圓柱的半徑%6.2f長度%6.2f體積為%6.2f"%(pradius,plength,pvolume))
 print("------------------------------------------------------------")  # 60個
 
 import pathlib
+
 print(pathlib.Path.cwd())
 
 print("------------------------------------------------------------")  # 60個
@@ -7961,25 +7983,25 @@ print("------------------------------------------------------------")  # 60個
 import pyautogui
 
 for i in range(10):
-    #全屏截圖
-    #myScreenshot = pyautogui.screenshot()
-    #myScreenshot.save(f'./pic_all{i}.png')
+    # 全屏截圖
+    # myScreenshot = pyautogui.screenshot()
+    # myScreenshot.save(f'./pic_all{i}.png')
 
-    #部分截圖
-    x_st, y_st, w, h = 1920//2, 1080//2, 1920//2-50, 1080//2-50
+    # 部分截圖
+    x_st, y_st, w, h = 1920 // 2, 1080 // 2, 1920 // 2 - 50, 1080 // 2 - 50
     myScreenshot = pyautogui.screenshot(region=(x_st, y_st, w, h))
-    #偽存檔
-    #myScreenshot.save(f'./pic_part{i}.png')
+    # 偽存檔
+    # myScreenshot.save(f'./pic_part{i}.png')
 
     time.sleep(5)
 
 print("------------------------------------------------------------")  # 60個
 
-print('filter 的用法')
+print("filter 的用法")
 
-a = [1,2,3,4,5,6,7,8,9]
+a = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
-b = filter(lambda x:x>5, a)
+b = filter(lambda x: x > 5, a)
 c = list(b)
 print(c)
 
@@ -8028,54 +8050,61 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-print('末N碼')
+print("末N碼")
 
 string = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
-print('末10碼', string[-10:])
-print('末20碼', string[-20:])
-print('末26碼', string[-26:])
+print("末10碼", string[-10:])
+print("末20碼", string[-20:])
+print("末26碼", string[-26:])
 
 
 print("------------------------------------------------------------")  # 60個
 
 # 函式選單模組
 
+
 def menu(**options):
     def menu_selector():
-        option_string = '/'.join(options)
+        option_string = "/".join(options)
         while True:
-            choice = input(f'選擇項目 ({option_string}): ')
+            choice = input(f"選擇項目 ({option_string}): ")
             if choice in options:
                 return options[choice]
                 break
-            print('選項不存在!')
+            print("選項不存在!")
+
     return menu_selector
 
+
 # 主程式
-#from menu import menu
+# from menu import menu
+
 
 def func_a():
-    return '執行函式 A'
+    return "執行函式 A"
+
 
 def func_b():
-    return '執行函式 B'
+    return "執行函式 B"
+
 
 def func_x():
-    return '執行函式 X'
+    return "執行函式 X"
+
 
 my_menu = menu(a=func_a, b=func_b, x=func_x)
 
 func = my_menu()
 print(func())
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-name = '鼠'
+name = "鼠"
 weight = 3
-print('動物{0}的體重是{1}公斤'.format(name, weight))
+print("動物{0}的體重是{1}公斤".format(name, weight))
 
-print('動物%s的體重是%d公斤' %(name, weight))
+print("動物%s的體重是%d公斤" % (name, weight))
 
 
 """
@@ -8103,118 +8132,119 @@ print(f"球半徑 = {radius}公分  球體積 = {volume}立方公分")
 
 
 from random import randint
+
 rand = set()
 
-while (len(rand) < 7):
-    rand.add(randint(1,49))
-print ("本期樂透彩號碼：")
-for idx,num in enumerate(rand, 1):
-    print (f"({idx})={num}", end='  ')
+while len(rand) < 7:
+    rand.add(randint(1, 49))
+print("本期樂透彩號碼：")
+for idx, num in enumerate(rand, 1):
+    print(f"({idx})={num}", end="  ")
 
 
 print("------------------------------------------------------------")  # 60個
 
-print(543.21)     #顯示浮點數常值 543.21
-print(5.4321e2)   #顯示浮點數常值 543.21
-print(5.4321e6)   #顯示浮點數常值 5432100.0
-print(5.4321e-3)  #顯示浮點數常值 0.0054321
+print(543.21)  # 顯示浮點數常值 543.21
+print(5.4321e2)  # 顯示浮點數常值 543.21
+print(5.4321e6)  # 顯示浮點數常值 5432100.0
+print(5.4321e-3)  # 顯示浮點數常值 0.0054321
 
 print("------------------------------------------------------------")  # 60個
 
-name = '李金星'          # 宣告字串變數name，初值設為'李金星'
-score = 73               # 宣告整數變數score，初值設為73
-msg = '{}的成績是{}分'.format(name, score)
+name = "李金星"  # 宣告字串變數name，初值設為'李金星'
+score = 73  # 宣告整數變數score，初值設為73
+msg = "{}的成績是{}分".format(name, score)
 print(msg)
 
-name = '李金星'          # 宣告字串變數name，初值設為'李金星'
-score = 73               # 宣告整數變數score，初值設為73
-msg = '{0}的成績是{1}分'.format(name, score)
+name = "李金星"  # 宣告字串變數name，初值設為'李金星'
+score = 73  # 宣告整數變數score，初值設為73
+msg = "{0}的成績是{1}分".format(name, score)
 print(msg)
 
-name = '李金星'          # 宣告字串變數name，初值設為'李金星'
-score = 73               # 宣告整數變數score，初值設為73
-print('{0}的成績是{1}'.format(name, score))
-                                   	
+name = "李金星"  # 宣告字串變數name，初值設為'李金星'
+score = 73  # 宣告整數變數score，初值設為73
+print("{0}的成績是{1}".format(name, score))
+
 print("------------------------------------------------------------")  # 60個
 
 price = 100
 qty = 30
-print('單價：{0}     數量：{1}'.format(price, qty))
-print('打八折後,總金額：{0}'.format(price * qty * 0.8))
+print("單價：{0}     數量：{1}".format(price, qty))
+print("打八折後,總金額：{0}".format(price * qty * 0.8))
 
 print("------------------------------------------------------------")  # 60個
 
-print('%s風景區在%s境內' %('日月潭','南投縣'));
-wt=3
-price=25
-print('%s%d斤，共%d元' %('香蕉', wt, wt*price));
+print("%s風景區在%s境內" % ("日月潭", "南投縣"))
+wt = 3
+price = 25
+print("%s%d斤，共%d元" % ("香蕉", wt, wt * price))
 
 print("------------------------------------------------------------")  # 60個
 
-print('%d' %1234)  		# 顯示整數,未設寬度
-print('%8d' %1234) 	# 顯示整數,寬度有剩補空格,靠右對齊
-print('%8d' %-1234)     # 顯示整數,寬度有剩補空格,靠右對齊
-print('%3d' %-1234)     # 顯示整數,寬度不足設定無效
+print("%d" % 1234)  # 顯示整數,未設寬度
+print("%8d" % 1234)  # 顯示整數,寬度有剩補空格,靠右對齊
+print("%8d" % -1234)  # 顯示整數,寬度有剩補空格,靠右對齊
+print("%3d" % -1234)  # 顯示整數,寬度不足設定無效
 
 print("------------------------------------------------------------")  # 60個
 
-print('%f' %123.456)	# 顯示數值「123.456000」,小數預設6位
-print('%f' %-123.456)	# 顯示數值「-123.456000」,小數預設6位
-print('%.2f' %123.456)	# 顯示數值「123.46」,小數2位,第3位四捨五入
-print('%8.2f' %-12.3456)# 顯示「ΔΔ-12.35」,總寬度8位,小數2位
-print('%3.1f' %123.456)	# 顯示「123.5」,寬度不足設定無效,小數位數1位
-print('%8.0f' %-123.456)# 顯示數值「ΔΔΔ-1235」,小數第1位四捨五入
-print('%8.0f' %123.456)	# 顯示數值「ΔΔΔ1235」,小數第1位四捨五入
-print('%g' %12345.6789)	# 顯示數值「12345.7」,總寬度預設7位
-print('%g' %1.23456789)	# 顯示數值「1.23457」,總寬度預設7位
-print('%g' %12.3)		# 顯示數值「12.3」, 寬度低於預設,直接顯示
-print('%g' %123456.789)	# 顯示數值「123457」,最後1位為小數點不顯示
-print('%g' %1234567.89)	# 顯示數值「1.23457e+06」,整數7位以上,
-                             	# 改用科學記號顯示,指數位數佔2位(不含+-號)
-print('%10.3G' %1234.5)	# 顯示「ΔΔ1.23E+03」,寬度10位,E及小數3位
+print("%f" % 123.456)  # 顯示數值「123.456000」,小數預設6位
+print("%f" % -123.456)  # 顯示數值「-123.456000」,小數預設6位
+print("%.2f" % 123.456)  # 顯示數值「123.46」,小數2位,第3位四捨五入
+print("%8.2f" % -12.3456)  # 顯示「ΔΔ-12.35」,總寬度8位,小數2位
+print("%3.1f" % 123.456)  # 顯示「123.5」,寬度不足設定無效,小數位數1位
+print("%8.0f" % -123.456)  # 顯示數值「ΔΔΔ-1235」,小數第1位四捨五入
+print("%8.0f" % 123.456)  # 顯示數值「ΔΔΔ1235」,小數第1位四捨五入
+print("%g" % 12345.6789)  # 顯示數值「12345.7」,總寬度預設7位
+print("%g" % 1.23456789)  # 顯示數值「1.23457」,總寬度預設7位
+print("%g" % 12.3)  # 顯示數值「12.3」, 寬度低於預設,直接顯示
+print("%g" % 123456.789)  # 顯示數值「123457」,最後1位為小數點不顯示
+print("%g" % 1234567.89)  # 顯示數值「1.23457e+06」,整數7位以上,
+# 改用科學記號顯示,指數位數佔2位(不含+-號)
+print("%10.3G" % 1234.5)  # 顯示「ΔΔ1.23E+03」,寬度10位,E及小數3位
 
 print("------------------------------------------------------------")  # 60個
 
-print('%c' %'M')            # 顯示字元「M」
-print('%4c' %'M')           # 顯示字元「ΔΔΔM」,靠右對齊,寬度有剩補空格
-print('%c' %65)             # 顯示字元「A」,65的ASCII碼為「A」
-print('%s' %'ABCDE')        # 顯示字串「ABCDE」
-print('%8s' %'ABCDE')       # 顯示字串「ΔΔΔABCDE」
-print('%3s' %'ABCDE')       # 顯示字串「ABCDE」,總寬度不足設定無效
-print('%6.2s' %'ABCDE')     # 顯示字串「ΔΔΔΔAB」,寬度設為6,顯示2字元
+print("%c" % "M")  # 顯示字元「M」
+print("%4c" % "M")  # 顯示字元「ΔΔΔM」,靠右對齊,寬度有剩補空格
+print("%c" % 65)  # 顯示字元「A」,65的ASCII碼為「A」
+print("%s" % "ABCDE")  # 顯示字串「ABCDE」
+print("%8s" % "ABCDE")  # 顯示字串「ΔΔΔABCDE」
+print("%3s" % "ABCDE")  # 顯示字串「ABCDE」,總寬度不足設定無效
+print("%6.2s" % "ABCDE")  # 顯示字串「ΔΔΔΔAB」,寬度設為6,顯示2字元
 
 print("------------------------------------------------------------")  # 60個
 
-print('%+8d' %12345)        # 顯示「ΔΔ+12345」,靠右對齊,正數值前加「+」號
-print('%+8d' %-12345)       # 顯示「ΔΔ-12345」,靠右對齊,負數值前加「-」號
-print('%-8d' %12345)        # 顯示「12345ΔΔΔ」,靠左對齊,正數值前不加號
-print('%-8d' %-12345)       # 顯示「-12345ΔΔ」,靠左對齊,負數值前加「-」號
-print('%+8.2f' %12.345)     # 顯示「ΔΔ+12.35」,靠右對齊,正數值加「+」號
-print('%-8.2f' %12.345)     # 顯示「12.35ΔΔΔ」,靠左對齊,正數值不加號
-print('%-8.2f' %-12.345)    # 顯示「-12.35ΔΔ」,靠左對齊,負數值加「-」號
-print('%-8s' %'ABCDE')      # 顯示字串「ABCDEΔΔΔ」,靠左對齊,寬度有剩補空格
-print('%-6.2s' %'ABCDE')    # 顯示字串「ABΔΔΔΔ」,寬度設為6,顯示2個字元
+print("%+8d" % 12345)  # 顯示「ΔΔ+12345」,靠右對齊,正數值前加「+」號
+print("%+8d" % -12345)  # 顯示「ΔΔ-12345」,靠右對齊,負數值前加「-」號
+print("%-8d" % 12345)  # 顯示「12345ΔΔΔ」,靠左對齊,正數值前不加號
+print("%-8d" % -12345)  # 顯示「-12345ΔΔ」,靠左對齊,負數值前加「-」號
+print("%+8.2f" % 12.345)  # 顯示「ΔΔ+12.35」,靠右對齊,正數值加「+」號
+print("%-8.2f" % 12.345)  # 顯示「12.35ΔΔΔ」,靠左對齊,正數值不加號
+print("%-8.2f" % -12.345)  # 顯示「-12.35ΔΔ」,靠左對齊,負數值加「-」號
+print("%-8s" % "ABCDE")  # 顯示字串「ABCDEΔΔΔ」,靠左對齊,寬度有剩補空格
+print("%-6.2s" % "ABCDE")  # 顯示字串「ABΔΔΔΔ」,寬度設為6,顯示2個字元
 
 print("------------------------------------------------------------")  # 60個
 
-print('1234567890!\a')       # 出現音效聲,游標位置在'!'字元後面
-print('12345\b67890!')       # 顯示字串「123467890!」,刪除字元'5'
-print('1234567890!\n')       # 顯示字串「123467890!」,游標跳到下一行行首
-print('123\r4567890!')       # 游標跳到行首,刪除'123',顯示字串「4567890!」
-print('123\t45\\67')         # 顯示字串「123ΔΔΔΔΔ45\67」
-print('123\"45\"67')         # 顯示字串「123"45"67」
-print('123\'4\'567')         # 顯示字串「123'4'567」
-print('ASCII碼41(Hex):\x41') # 顯示字串「ASCII碼41(Hex):A」
+print("1234567890!\a")  # 出現音效聲,游標位置在'!'字元後面
+print("12345\b67890!")  # 顯示字串「123467890!」,刪除字元'5'
+print("1234567890!\n")  # 顯示字串「123467890!」,游標跳到下一行行首
+print("123\r4567890!")  # 游標跳到行首,刪除'123',顯示字串「4567890!」
+print("123\t45\\67")  # 顯示字串「123ΔΔΔΔΔ45\67」
+print('123"45"67')  # 顯示字串「123"45"67」
+print("123'4'567")  # 顯示字串「123'4'567」
+print("ASCII碼41(Hex):\x41")  # 顯示字串「ASCII碼41(Hex):A」
 
 print("------------------------------------------------------------")  # 60個
 
-a = 100	     	
-b = 20			   
-print(a, b)  	        # 輸出a和b的變數值,分別為100,20
-print(id(a), id(b))     # 顯示a和b變數所在的記憶體位址
-a, b = b, a             # a,b兩變數的記憶體位址交換
-print(a, b)  	        # 輸出a和b的變數值,分別為20,100
-print(id(a), id(b))     # 顯示a和b變數所在的記憶體位址
+a = 100
+b = 20
+print(a, b)  # 輸出a和b的變數值,分別為100,20
+print(id(a), id(b))  # 顯示a和b變數所在的記憶體位址
+a, b = b, a  # a,b兩變數的記憶體位址交換
+print(a, b)  # 輸出a和b的變數值,分別為20,100
+print(id(a), id(b))  # 顯示a和b變數所在的記憶體位址
 
 print("------------------------------------------------------------")  # 60個
 
@@ -8232,10 +8262,10 @@ while number <= n:
     isPrime = True  # Is the current number prime?
 
     # Test if number is prime
-    for divisor in range(2, int(math.sqrt(number)) + 1): 
+    for divisor in range(2, int(math.sqrt(number)) + 1):
         # If true, number is not prime
         if number % divisor == 0:
-            isPrime = False  # Set isPrime to false          
+            isPrime = False  # Set isPrime to false
             break  # Exit the for loop
 
     # Print the prime number and increase the count
@@ -8246,44 +8276,30 @@ while number <= n:
             # Print the number and advance to the new line
             print(" " + str(number))
         else:
-            print(" " + str(number), end = "")
+            print(" " + str(number), end="")
 
     # Check if the next number is prime
     number += 1
-    
+
 print("\n" + str(count) + " prime(s) less than or equal to " + str(n))
 
 
 print("------------------------------------------------------------")  # 60個
 
-print('印出一個三維陣列')
+print("印出一個三維陣列")
 
 dates = [
-  [[ 1,  3,  5,  7],
-   [ 9, 11, 13, 15],
-   [17, 19, 21, 23],
-   [25, 27, 29, 31]],
-  [[ 2,  3,  6,  7],
-   [10, 11, 14, 15],
-   [18, 19, 22, 23],
-   [26, 27, 30, 31]],
-  [[ 4,  5,  6,  7],
-   [12, 13, 14, 15],
-   [20, 21, 22, 23],
-   [28, 29, 30, 31]],
-  [[ 8,  9, 10, 11],
-   [12, 13, 14, 15],
-   [24, 25, 26, 27],
-   [28, 29, 30, 31]],
-  [[16, 17, 18, 19],
-   [20, 21, 22, 23],
-   [24, 25, 26, 27],
-   [28, 29, 30, 31]]]
+    [[1, 3, 5, 7], [9, 11, 13, 15], [17, 19, 21, 23], [25, 27, 29, 31]],
+    [[2, 3, 6, 7], [10, 11, 14, 15], [18, 19, 22, 23], [26, 27, 30, 31]],
+    [[4, 5, 6, 7], [12, 13, 14, 15], [20, 21, 22, 23], [28, 29, 30, 31]],
+    [[8, 9, 10, 11], [12, 13, 14, 15], [24, 25, 26, 27], [28, 29, 30, 31]],
+    [[16, 17, 18, 19], [20, 21, 22, 23], [24, 25, 26, 27], [28, 29, 30, 31]],
+]
 
 for i in range(5):
     for j in range(4):
         for k in range(4):
-            print(format(dates[i][j][k], '4d'), end = " ")
+            print(format(dates[i][j][k], "4d"), end=" ")
         print()
     print()
 
@@ -8295,7 +8311,7 @@ print("os sys 搬出")
 print("------------------------------------------------------------")  # 60個
 
 # 匯入 指定目錄下的模組
-sys.path.append(r'C:\_git\vcs\_4.python\import_module')
+sys.path.append(r"C:\_git\vcs\_4.python\import_module")
 
 from module_my import say_hello
 
@@ -8303,20 +8319,14 @@ say_hello()
 
 # 以下為模組 \data\income_tax.py 的內容：
 
-#字典
-TAX_RATE = {
-    0: 0.1,
-    10000: 0.2,
-    50000: 0.3,
-    100000: 0.4,
-    500000: 0.5
-    }
+# 字典
+TAX_RATE = {0: 0.1, 10000: 0.2, 50000: 0.3, 100000: 0.4, 500000: 0.5}
 
 print(type(TAX_RATE))
 for income, rate in TAX_RATE.items():
     print(income, rate)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
@@ -8339,11 +8349,11 @@ print("------------------------------------------------------------")  # 60個
 print("print 字串處理 搬出")
 print("------------------------------------------------------------")  # 60個
 
-data = (("張三", 86, 60),("李四", 93, 55),("王五", 72, 66), ("劉六", 89, 84))
+data = (("張三", 86, 60), ("李四", 93, 55), ("王五", 72, 66), ("劉六", 89, 84))
 
-print ("編號    姓名      學科    術科    總分")
+print("編號    姓名      學科    術科    總分")
 for idx, dt in enumerate(data):
-    print (f"{idx + 1}\t{dt[0]}\t{dt[1]}\t{dt[2]}\t{dt[1] + dt[2]}")
+    print(f"{idx + 1}\t{dt[0]}\t{dt[1]}\t{dt[2]}\t{dt[1] + dt[2]}")
 
 print("------------------------------------------------------------")  # 60個
 
@@ -8479,7 +8489,7 @@ print("s=/%-6s/" % s)
 
 print("------------------------------------------------------------")  # 60個
 
-#體重
+# 體重
 company = "藍海科技股份有限公司"
 year = 27
 print("{}已成立公司 {} 年".format(company, year))
@@ -8493,7 +8503,6 @@ print("¨數值 = {0:10d},  數值 = {0:10d}".format(num, num))
 num = 123.456789
 
 print("¨數值 = {1:6.3f},  數值 = {1:6.3f}".format(num, num))
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -8519,7 +8528,6 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
 
 
 """
@@ -8579,7 +8587,6 @@ pinfile.close()
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
 
 print("字串replace")
@@ -8622,7 +8629,7 @@ print(text)
 
 print("------------------------------------------------------------")  # 60個
 
-#各種建立資料的寫法
+# 各種建立資料的寫法
 print("range")
 
 N1 = 3
@@ -8782,20 +8789,28 @@ print(lst)
 
 print("------------------------------------------------------------")  # 60個
 
-animals1 = ['鼠', '牛', '虎']
-animals2 = ['兔', '龍', '蛇']
-animals3 = ['馬', '羊', '猴']
-animals4 = ['雞', '狗', '豬']
+animals1 = ["鼠", "牛", "虎"]
+animals2 = ["兔", "龍", "蛇"]
+animals3 = ["馬", "羊", "猴"]
+animals4 = ["雞", "狗", "豬"]
 
-print('本次選出人員')
-print(random.choice(animals1) + " " + random.choice(animals2) + " " + random.choice(animals3) + " "+ random.choice(animals4))
+print("本次選出人員")
+print(
+    random.choice(animals1)
+    + " "
+    + random.choice(animals2)
+    + " "
+    + random.choice(animals3)
+    + " "
+    + random.choice(animals4)
+)
 
 print("------------------------------------------------------------")  # 60個
 
 passlen = 3
 s = "ABCDEFG"
-p =  "".join(random.sample(s,passlen ))
-print (p)
+p = "".join(random.sample(s, passlen))
+print(p)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -8859,58 +8874,64 @@ print(round(4.5))
 print(round(4.6))
 ##指定取到小數第一位，根據小數第二位(如果是5要看小數第一位，奇進偶捨)判別
 print("==Test3==")
-print(round(1.35,1))
-print(round(1.36,1))
-print(round(1.45,1))
-print(round(1.46,1))
+print(round(1.35, 1))
+print(round(1.36, 1))
+print(round(1.45, 1))
+print(round(1.46, 1))
 
-print('字串的對齊 justify')
+print("字串的對齊 justify")
 
 print("01234567890123456789")
 print("==Test1==")
-string1=str(153)
+string1 = str(153)
 print(string1)
-#center()指定寬度置中對齊
+# center()指定寬度置中對齊
 print(string1.center(20))
-#ljust()指定寬度靠左對齊
+# ljust()指定寬度靠左對齊
 print(string1.ljust(20))
-#rjust()指定寬度靠右對齊
+# rjust()指定寬度靠右對齊
 print(string1.rjust(20))
 print("==Test2==")
-#center()指定寬度置中對齊，指定補齊填補字元
-print(string1.center(20,"-"))
-#ljust()指定寬度靠左對齊，指定補齊填補字元
-print(string1.ljust(20,"-"))
-#rjust()指定寬度靠右對齊，指定補齊填補字元
-print(string1.rjust(20,"-"))
+# center()指定寬度置中對齊，指定補齊填補字元
+print(string1.center(20, "-"))
+# ljust()指定寬度靠左對齊，指定補齊填補字元
+print(string1.ljust(20, "-"))
+# rjust()指定寬度靠右對齊，指定補齊填補字元
+print(string1.rjust(20, "-"))
 print("==Test3==")
-#zfill()指定寬度靠右對齊，以'0'補齊
+# zfill()指定寬度靠右對齊，以'0'補齊
 print(string1.zfill(20))
 
 print("------------------------------------------------------------")  # 60個
 
 from bs4 import BeautifulSoup
 
-url ='http://jigsaw.w3.org/HTTP/connection.html'
+url = "http://jigsaw.w3.org/HTTP/connection.html"
 response = requests.get(url)
-#指定html.parser作為解析器
-soup = BeautifulSoup(response.text, 'html.parser') 
-#把排版後的html印出來，因為未排版前有很多網頁語法缺乏換行符號，不易閱讀
-#必須借助於Beautiful Shop套件
-print(soup.prettify()) 
-#find_all()回傳的格式是串列list
-#而且contens的內容也是串列list
-a_tags = soup.find_all('title')
+# 指定html.parser作為解析器
+soup = BeautifulSoup(response.text, "html.parser")
+# 把排版後的html印出來，因為未排版前有很多網頁語法缺乏換行符號，不易閱讀
+# 必須借助於Beautiful Shop套件
+print(soup.prettify())
+# find_all()回傳的格式是串列list
+# 而且contens的內容也是串列list
+a_tags = soup.find_all("title")
 for a_tag in a_tags:
-  for b in a_tag.contents:
-    print(str(b).strip())
-a_tags = soup.find_all('h1')
+    for b in a_tag.contents:
+        print(str(b).strip())
+a_tags = soup.find_all("h1")
 for a_tag in a_tags:
-  cc=""
-  for b in a_tag.contents:        
-    b=str(b).replace('<i>','').replace('</i>','').replace('\n','').replace('\r','')
-    cc=cc+b
-  print(cc.strip())
+    cc = ""
+    for b in a_tag.contents:
+        b = (
+            str(b)
+            .replace("<i>", "")
+            .replace("</i>", "")
+            .replace("\n", "")
+            .replace("\r", "")
+        )
+        cc = cc + b
+    print(cc.strip())
 
 print("------------------------------------------------------------")  # 60個
 
@@ -8922,64 +8943,66 @@ labels = ["中興大學", "成功大學", "東海大學", "逢甲大學"]
 print(student_all)
 
 for i in range(4):
-  print(student_university[i] + student_graduate[i])
+    print(student_university[i] + student_graduate[i])
 
 print("------------------------------------------------------------")  # 60個
 
-file1=open("handgame.py","w", encoding = 'UTF-8') #打開檔案，建立handgame.py
-file1.write("import random\n") 
-file1.write("handgesture=['剪刀','石頭','布']\n") 
-file1.write("def hand():\n") 
-file1.write("\treturn random.choice(handgesture)") 
-file1.close() #關閉檔案
-#建立games資料夾
-#!mkdir games 
-file1=open("games/dice.py","w", encoding = 'UTF-8') #打開檔案，建立games/dice.py
-file1.write("from random import choice\n") 
-file1.write("def dice():\n") 
-file1.write("\treturn choice(range(1,7))") 
-file1.close() #關閉檔案
-file1=open("games/hand.py","w", encoding = 'UTF-8') #打開檔案，建立games/hand.py
-file1.write("from random import choice\n") 
-file1.write("handgesture=['剪刀','石頭','布']\n") 
-file1.write("def hand():\n") 
-file1.write("\treturn choice(handgesture)") 
-file1.close() #關閉檔案
-file1=open("games/poker.py","w", encoding = 'UTF-8') #打開檔案，建立games/poker.py
-file1.write("from random import choice\n") 
+file1 = open("handgame.py", "w", encoding="UTF-8")  # 打開檔案，建立handgame.py
+file1.write("import random\n")
+file1.write("handgesture=['剪刀','石頭','布']\n")
+file1.write("def hand():\n")
+file1.write("\treturn random.choice(handgesture)")
+file1.close()  # 關閉檔案
+# 建立games資料夾
+#!mkdir games
+file1 = open("games/dice.py", "w", encoding="UTF-8")  # 打開檔案，建立games/dice.py
+file1.write("from random import choice\n")
+file1.write("def dice():\n")
+file1.write("\treturn choice(range(1,7))")
+file1.close()  # 關閉檔案
+file1 = open("games/hand.py", "w", encoding="UTF-8")  # 打開檔案，建立games/hand.py
+file1.write("from random import choice\n")
+file1.write("handgesture=['剪刀','石頭','布']\n")
+file1.write("def hand():\n")
+file1.write("\treturn choice(handgesture)")
+file1.close()  # 關閉檔案
+file1 = open("games/poker.py", "w", encoding="UTF-8")  # 打開檔案，建立games/poker.py
+file1.write("from random import choice\n")
 file1.write("pokerkind=['♠','♥','♦','♣']\n")
 file1.write("pokerpoint=['A','2','3','4','5','6','7','8','9','10','J','Q','K']\n")
-file1.write("def poker():\n") 
-file1.write("\treturn choice(pokerkind)+choice(pokerpoint)") 
-file1.close() #關閉檔案
-file1=open("games/coin.py","w", encoding = 'UTF-8') #打開檔案，建立games/coin.py
-file1.write("from random import choice\n") 
+file1.write("def poker():\n")
+file1.write("\treturn choice(pokerkind)+choice(pokerpoint)")
+file1.close()  # 關閉檔案
+file1 = open("games/coin.py", "w", encoding="UTF-8")  # 打開檔案，建立games/coin.py
+file1.write("from random import choice\n")
 file1.write("coinkind=['正面','反面']\n")
-file1.write("def coin():\n") 
-file1.write("\treturn choice(coinkind)") 
-file1.close() #關閉檔案
-file1=open("handgames.py","w", encoding = 'UTF-8') #打開檔案，建立handgames.py
-file1.write("import handgame as hg\n") 
-file1.write("def handgame():\n") 
-file1.write("\tcomputer=hg.hand()\n") 
-file1.write("\thgs=''\n") 
-file1.write("\tfor i in range(0,len(hg.handgesture)):\n") 
-file1.write("\t\thgs=hgs+str(i)+hg.handgesture[i]\n") 
-file1.write("\tyourchoice=int(input('請輸入你的選擇'+hgs+': '))\n") 
-file1.write("\tyou=hg.handgesture[yourchoice]\n") 
-file1.write("\tprint('You:',you,'Computer:',computer)\n") 
-file1.write("\tif (computer=='剪刀' and you=='布') or (computer=='布' and you=='石頭') or (computer=='石頭' and you=='剪刀'): \n") 
-file1.write("\t\tprint('電腦獲勝')\n") 
-file1.write("\telif computer==you:\n") 
-file1.write("\t\tprint('平手')\n") 
-file1.write("\telse:\n") 
-file1.write("\t\tprint('你獲勝')\n") 
-file1.write("if __name__=='__main__':\n") 
-file1.write("\tfor i in range(3):\n") 
-file1.write("\t\thandgame()\n") 
-file1.write("else:\n") 
-file1.write("\tprint('被import使用中')") 
-file1.close() #關閉檔案
+file1.write("def coin():\n")
+file1.write("\treturn choice(coinkind)")
+file1.close()  # 關閉檔案
+file1 = open("handgames.py", "w", encoding="UTF-8")  # 打開檔案，建立handgames.py
+file1.write("import handgame as hg\n")
+file1.write("def handgame():\n")
+file1.write("\tcomputer=hg.hand()\n")
+file1.write("\thgs=''\n")
+file1.write("\tfor i in range(0,len(hg.handgesture)):\n")
+file1.write("\t\thgs=hgs+str(i)+hg.handgesture[i]\n")
+file1.write("\tyourchoice=int(input('請輸入你的選擇'+hgs+': '))\n")
+file1.write("\tyou=hg.handgesture[yourchoice]\n")
+file1.write("\tprint('You:',you,'Computer:',computer)\n")
+file1.write(
+    "\tif (computer=='剪刀' and you=='布') or (computer=='布' and you=='石頭') or (computer=='石頭' and you=='剪刀'): \n"
+)
+file1.write("\t\tprint('電腦獲勝')\n")
+file1.write("\telif computer==you:\n")
+file1.write("\t\tprint('平手')\n")
+file1.write("\telse:\n")
+file1.write("\t\tprint('你獲勝')\n")
+file1.write("if __name__=='__main__':\n")
+file1.write("\tfor i in range(3):\n")
+file1.write("\t\thandgame()\n")
+file1.write("else:\n")
+file1.write("\tprint('被import使用中')")
+file1.close()  # 關閉檔案
 
 print("------------------------------------------------------------")  # 60個
 
@@ -8997,7 +9020,7 @@ for folder, subfolders, filenames in os.walk("."):
 """
 print("------------------------------------------------------------")  # 60個
 
-#from IPython.nbformat import read
+# from IPython.nbformat import read
 
 links = []
 for folder, _, filenames in os.walk("."):
@@ -9019,7 +9042,8 @@ for folder, _, filenames in os.walk("."):
             """
 
 from IPython.display import display_markdown, Markdown
-display_markdown(Markdown(u"\n\n".join(links)))
+
+display_markdown(Markdown("\n\n".join(links)))
 
 
 from fractions import Fraction
@@ -9035,14 +9059,13 @@ python3_path = "C:\\WinPython-64bit-3.4.3.3\\scripts\\python.bat"
 
 if not path.exists(kernel_folder):
     os.mkdir(kernel_folder)
-    
+
 kernel_fn = path.join(kernel_folder, "kernel.json")
 
 kernel_settings = {
- "argv": [python3_path, 
-          "-m", "IPython.kernel", "-f", "{connection_file}"],
- "display_name": "Python3-64bit",
- "language": "python"
+    "argv": [python3_path, "-m", "IPython.kernel", "-f", "{connection_file}"],
+    "display_name": "Python3-64bit",
+    "language": "python",
 }
 
 with open(kernel_fn, "w") as f:
@@ -9072,11 +9095,11 @@ drive.mount('/content/drive', force_remount=True)
 """
 print("------------------------------------------------------------")  # 60個
 
-print('網址編碼解碼')
+print("網址編碼解碼")
 
 from urllib.request import quote, unquote
 
-print('網址編碼 utf-8')
+print("網址編碼 utf-8")
 
 url = "https://www.baidu.com/s?wd=中国"
 
@@ -9084,47 +9107,47 @@ url = "https://www.baidu.com/s?wd=中国"
 ret1 = quote(url, safe=";/?:@&=+$,", encoding="utf-8")
 print(ret1)
 
-print('網址編碼 gbk')
+print("網址編碼 gbk")
 # https://www.baidu.com/s?wd=%E4%B8%AD%E5%9B%BD
 ret2 = quote(url, encoding="gbk")
 print(ret2)
 # https%3A//www.baidu.com/s%3Fwd%3D%D6%D0%B9%FA
 
-print('網址解碼 utf-8')
+print("網址解碼 utf-8")
 url = "https://www.baidu.com/s?wd=%E4%B8%AD%E5%9B%BD"
-ret3 = unquote(url, encoding='utf-8')
+ret3 = unquote(url, encoding="utf-8")
 print(ret3)
 # https://www.baidu.com/s?wd=中国
 
-print('網址編碼 預設')
-cc = quote('中文測試')
+print("網址編碼 預設")
+cc = quote("中文測試")
 #'%E4%B8%AD%E6%96%87%E6%B8%AC%E8%A9%A6'
 print(cc)
 
-print('網址編碼 utf-8')
-cc = quote(u'中文測試'.encode('utf-8'))
+print("網址編碼 utf-8")
+cc = quote("中文測試".encode("utf-8"))
 #'%E4%B8%AD%E6%96%87%E6%B8%AC%E8%A9%A6'
 print(cc)
 
-print('網址編碼 big5')
-cc = quote(u'中文測試'.encode('big5'))
+print("網址編碼 big5")
+cc = quote("中文測試".encode("big5"))
 #'%E4%B8%AD%E6%96%87%E6%B8%AC%E8%A9%A6'
 print(cc)
 
-print('網址編碼 gbk')
-cc = quote(u'中文測試'.encode('gbk'))
+print("網址編碼 gbk")
+cc = quote("中文測試".encode("gbk"))
 #'%E4%B8%AD%E6%96%87%E6%B8%AC%E8%A9%A6'
 print(cc)
 
-print('網址解碼 utf-8')
+print("網址解碼 utf-8")
 url = "https://upload.wikimedia.org/wikipedia/commons/8/8b/%E8%A5%BF%E8%9E%BA%E5%A4%A7%E6%A9%8B_%28cropped%29.jpg"
-ret3 = unquote(url, encoding='utf-8')
+ret3 = unquote(url, encoding="utf-8")
 print(ret3)
 # https://www.baidu.com/s?wd=中国
 
-print('網址再解碼 utf-8')
+print("網址再解碼 utf-8")
 url = "https://upload.wikimedia.org/wikipedia/commons/8/8b/西螺大橋_(cropped).jpg"
-ret3 = unquote(url, encoding='utf-8')
+ret3 = unquote(url, encoding="utf-8")
 print(ret3)
 # https://www.baidu.com/s?wd=中国
 
@@ -9155,10 +9178,11 @@ print(cc)
 
 print("------------------------------------------------------------")  # 60個
 
-print('積分')
+print("積分")
 from sympy import symbols, integrate, sqrt
+
 x = symbols("x")
-cc = integrate(sqrt(1-x**2), (x, -1, 1)) * 2
+cc = integrate(sqrt(1 - x**2), (x, -1, 1)) * 2
 print(cc)
 
 print("------------------------------------------------------------")  # 60個
@@ -9382,12 +9406,7 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-
-
 print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
-
-

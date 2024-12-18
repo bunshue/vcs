@@ -41,7 +41,7 @@ from sklearn.datasets import make_blobs
 from sklearn.datasets import make_moons  # 非線性的資料集
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
 from sklearn.preprocessing import StandardScaler
-from sklearn.model_selection import cross_val_score
+from sklearn.model_selection import cross_val_score  # 交叉驗證 Cross-validation
 from sklearn.metrics import accuracy_score  # 計算準確率
 from sklearn.metrics import classification_report
 from sklearn.metrics import confusion_matrix
@@ -115,7 +115,7 @@ knn = KNeighborsClassifier()  # K近鄰演算法（K Nearest Neighbor, KNN）
 # 無參數就是n_neighbors=5
 
 N = 5
-scores = cross_val_score(knn, X, y, cv=N, scoring="accuracy")
+scores = cross_val_score(knn, X, y, cv=N, scoring="accuracy")  # 交叉驗證
 print("分成", N, "組, 做 cross_val_score 是驗證用來評分資料準確度的")
 print("全部分數 :", scores)
 print("平均分數 :", scores.mean())
@@ -233,20 +233,17 @@ print("用 K近鄰演算法 找出最近的", NEIGHBOARS, "個點")
 knn = KNeighborsClassifier(n_neighbors=NEIGHBOARS)
 
 N = 5
-scores = cross_val_score(knn, X, y, cv=5, scoring="accuracy")
+scores = cross_val_score(knn, X, y, cv=5, scoring="accuracy")  # 交叉驗證
 print("分成", N, "組, 做 cross_val_score 是驗證用來評分資料準確度的")
 print("全部分數 :", scores)
 print("平均分數 :", scores.mean())
-
-# this is how to use cross_val_score to choose model and configs #
-from sklearn.model_selection import cross_val_score
 
 k_scores = []
 for k in range(1, 31):
     NEIGHBOARS = k
     print("用 K近鄰演算法 找出最近的", NEIGHBOARS, "個點")
     knn = KNeighborsClassifier(n_neighbors=NEIGHBOARS)
-    ##    loss = -cross_val_score(knn, X, y, cv=10, scoring='mean_squared_error') # for regression
+    # loss = -cross_val_score(knn, X, y, cv=10, scoring='mean_squared_error') # for regression
     N = 10
     scores = cross_val_score(knn, X, y, cv=N, scoring="accuracy")  # for classification
     print("分成", N, "組, 做 cross_val_score 是驗證用來評分資料準確度的")
@@ -308,8 +305,6 @@ print(y.values)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-from sklearn.model_selection import cross_val_score
-
 iris = datasets.load_iris()
 
 X = pd.DataFrame(iris.data, columns=iris.feature_names)
@@ -324,7 +319,7 @@ for k in Ks:
     print("用 K近鄰演算法 找出最近的", NEIGHBOARS, "個點")
     knn = KNeighborsClassifier(n_neighbors=NEIGHBOARS)
     N = 10
-    scores = cross_val_score(knn, X, y, cv=N, scoring="accuracy")
+    scores = cross_val_score(knn, X, y, cv=N, scoring="accuracy")  # 交叉驗證
     print("分成", N, "組, 做 cross_val_score 是驗證用來評分資料準確度的")
     accuracies.append(scores.mean())
 
@@ -960,11 +955,8 @@ print("計算準確率 :", accuracy_score(y_test, y_pred))
 
 print("混淆矩陣 :", confusion_matrix(y_test, y_pred))
 
-# 加深知識：交叉驗證概念
-from sklearn.model_selection import cross_val_score
-
 N = 10
-s = cross_val_score(knn, df_X, df_y, cv=N, scoring="accuracy")
+s = cross_val_score(knn, df_X, df_y, cv=N, scoring="accuracy")  # 交叉驗證
 print("分成", N, "組, 做 cross_val_score 是驗證用來評分資料準確度的")
 print("交叉驗證每次的準確率：", s)
 print("交叉驗證得到的平均準確率：", s.mean())
@@ -1073,10 +1065,8 @@ print("計算準確率 :", accuracy_score(y_test, y_pred))
 
 print("混淆矩陣 :", confusion_matrix(y_test, y_pred))
 
-from sklearn.model_selection import cross_val_score
-
 N = 10
-s = cross_val_score(knn, df_X, df_y, cv=N, scoring="accuracy")
+s = cross_val_score(knn, df_X, df_y, cv=N, scoring="accuracy")  # 交叉驗證
 print("分成", N, "組, 做 cross_val_score 是驗證用來評分資料準確度的")
 print("準確率：", s)
 print("平均準確率：", s.mean())
@@ -1378,20 +1368,15 @@ print("V-Measure Score:", v_measure)
 
 print("------------------------------------------------------------")  # 60個
 
-# Cross-Validation
+# 交叉驗證
 
-# Import necessary library
-from sklearn.model_selection import cross_val_score
-
-# Cross-validation with KNN estimator
 N = 4
-knn_scores = cross_val_score(knn, X_train, y_train, cv=N)
+knn_scores = cross_val_score(knn, X_train, y_train, cv=N)  # 交叉驗證 KNN
 print("分成", N, "組, 做 cross_val_score 是驗證用來評分資料準確度的")
 print(knn_scores)
 
-# Cross-validation with Linear Regression estimator
 N = 2
-lr_scores = cross_val_score(lr, X, y, cv=N)
+lr_scores = cross_val_score(lr, X, y, cv=N)  # 交叉驗證 線性迴歸
 print("分成", N, "組, 做 cross_val_score 是驗證用來評分資料準確度的")
 print(lr_scores)
 

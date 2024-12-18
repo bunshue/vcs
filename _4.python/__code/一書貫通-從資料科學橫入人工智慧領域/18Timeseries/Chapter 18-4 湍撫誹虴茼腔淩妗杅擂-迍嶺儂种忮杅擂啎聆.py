@@ -40,7 +40,6 @@ warnings.filterwarnings("ignore")
 sales_data = pd.read_csv('tractor_sales.csv')
 sales_data.head(2)
 
-
 # since the complete date was not mentioned, we assume that it was the first of every month
 dates = pd.date_range(start='2003-01-01', freq='MS', periods=len(sales_data))
 
@@ -204,23 +203,18 @@ plt.show()
 
 # - 3.5 进行预测
 
-
-# In[29]:
-
-
 import math
 n_steps = 36
 pred_uc_95 = best_results.get_forecast(steps=n_steps, alpha=0.05) 
 pred_pr_95=pred_uc_95.predicted_mean
 pred_ci_95 = pred_uc_95.conf_int()
+
 idx = pd.date_range(sales_ts.index[-1], periods=n_steps, freq='MS')
+
 fc_95 = pd.DataFrame(np.column_stack([np.power(math.e, pred_pr_95), 
                                       np.power(math.e, pred_ci_95)]), index=idx,
                                columns=['forecast', 'lower_ci_95', 'upper_ci_95'])
 fc_95.head(2)
-
-
-# In[28]:
 
 
 axis = sales_ts.plot(label='Observed', figsize=(15, 6))

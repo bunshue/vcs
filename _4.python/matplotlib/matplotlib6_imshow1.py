@@ -862,7 +862,7 @@ print(cc)
 
 # 使用imshow()可視化二元函數
 y, x = np.ogrid[-2:2:200j, -2:2:200j]
-z = x * np.exp( - x**2 - y**2)
+z = x * np.exp(-(x**2) - y**2)
 
 extent = [np.min(x), np.max(x), np.min(y), np.max(y)]
 
@@ -871,7 +871,7 @@ plt.imshow(z, extent=extent, origin="lower")
 plt.colorbar()
 plt.subplot(122)
 plt.imshow(z, extent=extent, cmap=cm.gray, origin="lower")
-plt.colorbar();
+plt.colorbar()
 
 plt.show()
 

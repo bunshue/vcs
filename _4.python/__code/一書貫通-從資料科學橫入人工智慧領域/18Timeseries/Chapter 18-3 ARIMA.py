@@ -1,18 +1,10 @@
 
 # coding: utf-8
-
 # # Chapter 15-2 ARIMA
-
 # http://www.statsmodels.org/stable/tsa.html
-
 # http://ucanalytics.com/blogs/wp-content/uploads/2017/08/ARIMA-TimeSeries-Analysis-of-Tractor-Sales.html
-
 # # 1.平稳时间序列分析-ARMA模型
-
 # ## 1.1 AR
-
-# In[1]:
-
 
 import pandas as pd
 import numpy as np
@@ -119,19 +111,11 @@ import matplotlib.pyplot as plt
 import statsmodels.api as sm
 from statsmodels.graphics.api import qqplot
 
-
-# In[10]:
-
-
 #dta=MA
 ts_simu200= pd.read_csv('ts_simu200.csv',index_col='t')
 dates=pd.date_range(start='2017/01/01', periods=200)
 ts_simu200.set_index(dates, inplace=True)
 dta=ts_simu200['MA1_a']
-
-
-# In[11]:
-
 
 #自相关和偏自相关
 fig = plt.figure(figsize=(12,8))
@@ -304,28 +288,16 @@ from statsmodels.graphics.api import qqplot
 from statsmodels.tsa.stattools import adfuller
 from statsmodels.graphics.tsaplots import plot_acf, plot_pacf
 
-
-# In[23]:
-
-
 #dta=ARIMA_11_b
 ts_simu200= pd.read_csv('ts_simu200.csv',index_col='t')
 dates=pd.date_range(start='2017/01/01', periods=200)
 ts_simu200.set_index(dates, inplace=True)
 dta=ts_simu200['ARIMA_110']
 
-
-# In[24]:
-
-
 #平稳性检验
 result = adfuller(dta)
 print('ADF Statistic: %f' % result[0])
 print('p-value: %f' % result[1])
-
-
-# In[25]:
-
 
 #原序列的自相关和偏自相关
 fig = plt.figure(figsize=(12,8))

@@ -156,20 +156,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-yyyymmdd = "20240101"
-DAYS = 366
-datas = np.random.randn(DAYS, 4)
-index = pd.date_range(yyyymmdd, periods=DAYS)
-print("從", yyyymmdd, "開始的", DAYS, "天\n", index)
-df = pd.DataFrame(datas, index=index, columns=list("ABCD"))
-df = df.cumsum()
-
-df.plot(title="線圖")  # 無參數, 預設就是 line
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
 print("直方圖")
 
 datas = np.random.randn(1000, 3)
