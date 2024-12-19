@@ -5033,6 +5033,7 @@ K折分數: [0.99915742 0.99929785 0.9988764  0.9997191  0.99901685 0.99901685
 
 # 分類報告
 from sklearn.metrics import classification_report
+
 print(classification_report(y_test, y_pred))
 
 # 繪製ROC曲線
@@ -5105,10 +5106,12 @@ K折分數: [0.94499156 0.94379572 0.94569499 0.94541362 0.94442881 0.94288126
 
 # 分類報告
 from sklearn.metrics import classification_report
+
 print(classification_report(y_test, y_pred))
 
 # imbalanced-learn 分類報告
 from imblearn.metrics import classification_report_imbalanced
+
 print(classification_report_imbalanced(y_test, y_pred))
 
 print("------------------------------------------------------------")  # 60個

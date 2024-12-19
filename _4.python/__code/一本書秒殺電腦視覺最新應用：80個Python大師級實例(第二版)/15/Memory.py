@@ -1,8 +1,8 @@
 from sum_tree import sum_tree
-import random 
+import random
+
 
 class Memory:
-   
     # stored as tuple (state,action,reward,next_state) in SumTree
     e = 0.01
     a = 0.6
@@ -15,7 +15,7 @@ class Memory:
 
     def add(self, error, sample):
         p = self.get_priority(error)
-        self.tree._add_(p, sample) 
+        self.tree._add_(p, sample)
 
     def sample(self, n):
         batch = []
@@ -27,7 +27,7 @@ class Memory:
 
             s = random.uniform(a, b)
             (idx, p, data) = self.tree._get_(s)
-            batch.append( (idx, data) )
+            batch.append((idx, data))
 
         return batch
 

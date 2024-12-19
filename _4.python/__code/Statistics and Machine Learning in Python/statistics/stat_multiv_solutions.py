@@ -1,16 +1,10 @@
-'''
-Munivariate statistics exercises
-================================
-'''
+# Munivariate statistics exercises
+
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-#%matplotlib inline
-np.random.seed(seed=42)  # make the example reproducible
 
-'''
-### Dot product and Euclidean norm
-'''
+# Dot product and Euclidean norm
 
 a = np.array([2,1])
 b = np.array([1,1])
@@ -27,9 +21,7 @@ np.dot(b, a / euclidian(a))
 X = np.random.randn(100, 2)
 np.dot(X, a / euclidian(a))
 
-'''
-### Covariance matrix and Mahalanobis norm
-'''
+# Covariance matrix and Mahalanobis norm
 
 N = 100
 mu = np.array([1, 1])

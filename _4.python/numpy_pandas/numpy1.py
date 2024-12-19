@@ -422,24 +422,36 @@ print("------------------------------------------------------------")  # 60個
 
 # 使用布林陣列篩選值
 
-arr = np.arange(10)
+A = np.arange(10)
 
-new_arr = arr < 5
+A2 = A < 5
 
-print(arr)
-
-print(new_arr)
-
-print(arr[new_arr])
+print(A)
+print(A2)
+print(A[A2])
 
 print("------------------------------------------------------------")  # 60個
 
-# 陣列轉置 (transpose)
+print("陣列轉置 (transpose)")
 
-arr = np.arange(10).reshape(2, 5)
-print(arr.T)
+A = np.arange(10).reshape(2, 5)
+print(A)
+print(A.T)
 
-# print(arr.transpose(1,0))
+print(A.transpose(1,0))#不知道是什麼意思
+
+print("二維串列 轉 numpy陣列")
+A = np.array([[1, 2], [3, 4], [5, 6]])
+print(A)
+print(A.T)
+print(A.transpose())
+
+A = np.array([1, 2, 3, 4, 5, 6])
+B = np.reshape(A, (3, 2))
+print(B)
+print(B.T)
+print(B.transpose())
+print(np.transpose(B))
 
 print("------------------------------------------------------------")  # 60個
 
@@ -582,13 +594,13 @@ print("unique 返回一個所有唯一元素排序的數組。")
 # return_counts:如果為True，返回數組中每個唯一元素出現的次數。
 # axis:要操作的軸。默認情況下，數組被認為是扁平的。
 
-arr = np.array([1, 1, 2, 3, 3, 4, 5, 6, 6, 2])
-cc = np.unique(arr, return_counts=True)
+A = np.array([1, 1, 2, 3, 3, 4, 5, 6, 6, 2])
+cc = np.unique(A, return_counts=True)
 print(cc)
 
 print("mean 返回數組的平均數")
 # np.mean(a, axis = None, dtype = None, out = None)
-cc = np.mean(arr, dtype="int")
+cc = np.mean(A, dtype="int")
 print(cc)
 
 print("medain 返回數組的中位數。")
@@ -635,8 +647,8 @@ print("squeeze 通過移除一個單一維度來降低數組的維度。")
 # np.squeeze(a, axis = None)
 
 print("串列 轉 numpy陣列")
-arr = np.array([[8], [14], [1], [8], [11], [4], [9], [4], [1], [13], [13], [11]])
-cc = np.squeeze(arr)
+A = np.array([[8], [14], [1], [8], [11], [4], [9], [4], [1], [13], [13], [11]])
+cc = np.squeeze(A)
 print(cc)
 
 print("count_nonzero 計算所有非零元素并返回它們的計數。")
@@ -658,8 +670,8 @@ print(cc)
 print("argmax & argmin argmax返回數組中Max元素的索引。它可以用於多類圖像分類問題中獲得高概率預測標簽的指標。")
 # np.argmax(a, axis = None, out = None)
 print("串列 轉 numpy陣列")
-arr = np.array([[0.12, 0.64, 0.19, 0.05]])
-cc = np.argmax(arr)
+A = np.array([[0.12, 0.64, 0.19, 0.05]])
+cc = np.argmax(A)
 print(cc)
 
 print("argmin將返回數組中min元素的索引。")
@@ -834,7 +846,9 @@ na = np.percentile(a, 50)
 print(na)
 na = np.percentile(a, 10)
 print(na)
-arr = np.array([2, 3, 4, 1, 6, 7])
+
+A = np.array([2, 3, 4, 1, 6, 7])
+
 na = np.percentile(a, 5)
 print(na)
 
@@ -1564,6 +1578,7 @@ print(e.shape, f.shape)
 
 print("------------------------------------------------------------")  # 60個
 
+print('矩陣運算')
 N = 5
 
 print("建立NXN之隨機矩陣A")
@@ -1582,31 +1597,17 @@ print(matC.shape)
 print(matC)
 
 print("使用 Python 計算")
-start = time.time()
 
 for i in range(N):
     for j in range(N):
         for k in range(N):
             matC[i][j] = matA[i][k] * matB[k][j]
 
-time1 = time.time() - start
-print("Python 的計算結果：%f[sec]" % float(time1))
-
-
 print("使用 NumPy 計算")
-start = time.time()
 
 matC = np.dot(matA, matB)
 
-time2 = time.time() - start
-print("NumPy 的計算結果：%f[sec]" % float(time2))
-
-if time2 < 0.000001:
-    time2 = 0.000001
-print("使用numpy快了 ", time1 / time2, " 倍")
-
 print("------------------------------------------------------------")  # 60個
-
 
 print("---------------↓不使用 copy()↓---------------")
 
@@ -1640,24 +1641,24 @@ print("------------------------------------------------------------")  # 60個
 # 使用 NumPy 陣列
 storages = np.array([1, 2, 3, 4])
 
-arr_1 = np.array([2, 4, 6, 8, 10])
-arr_2 = np.array([1, 3, 5, 7, 9])
+A1 = np.array([2, 4, 6, 8, 10])
+A2 = np.array([1, 3, 5, 7, 9])
 
-# arr + arr (相加)
-print("arr_1 + arr_2:")
-print(arr_1 + arr_2)
+# 相加
+print("A1 + A2:")
+print(A1 + A2)
 
-# arr - arr (相減)
-print("arr_1 - arr_2:")
-print(arr_1 - arr_2)
+# 相減
+print("A1 - A2:")
+print(A1 - A2)
 
-# arr ** 3 (三次方)
-print("arr_1 ** 3:")
-print(arr_1**3)
+# A ** 3 (三次方)
+print("A1 ** 3:")
+print(A1**3)
 
-# arr_1 / arr_2(相除)
-print("arr_1 / arr_2:")
-print(arr_1 / arr_2)
+# A1 / A2(相除)
+print("A1 / A2:")
+print(A1 / A2)
 
 print()
 
@@ -1665,29 +1666,29 @@ print("------------------------------------------------------------")  # 60個
 
 # 體驗好用的 NumPy 函式
 
-arr = np.array([4, -9, 16, -4, 20])
-print(arr)
+A = np.array([4, -9, 16, -4, 20])
+print(A)
 
-arr_abs = np.abs(arr)
-print("絕對值:", arr_abs)
+A_abs = np.abs(A)
+print("絕對值:", A_abs)
 
-print("e為底數:", np.exp(arr_abs))
+print("e為底數:", np.exp(A_abs))
 
-print("平方根:", np.sqrt(arr_abs))
+print("平方根:", np.sqrt(A_abs))
 
-arr1 = np.array([2, 5, 7, 9, 5, 2])
+A1 = np.array([2, 5, 7, 9, 5, 2])
 
-arr2 = np.array([2, 5, 8, 3, 1])
+A2 = np.array([2, 5, 8, 3, 1])
 
-new_arr1 = np.unique(arr1)
+new_A1 = np.unique(A1)
 
-print("剔除arr1重複元素:", new_arr1)
+print("剔除A1重複元素:", new_A1)
 
-print("聯集:", np.union1d(new_arr1, arr2))
+print("聯集:", np.union1d(new_A1, A2))
 
-print("交集:", np.intersect1d(new_arr1, arr2))
+print("交集:", np.intersect1d(new_A1, A2))
 
-print("差集:", np.setdiff1d(new_arr1, arr2))
+print("差集:", np.setdiff1d(new_A1, A2))
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1795,21 +1796,6 @@ print(np.dot(cc, cc))
 
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-
-print("二維串列 轉 numpy陣列")
-b = np.array([[1, 2], [3, 4], [5, 6]])
-print(b)
-
-c = b.T
-print(c)
-
-c = b.transpose()
-print(c)
-
-print("------------------------------------------------------------")  # 60個
-
 # 數組操作
 print("min 返回數組中的最小值。")
 # np.min(a, axis = None, out = None, ...)
@@ -1817,28 +1803,25 @@ print("min 返回數組中的最小值。")
 # out:用於存儲輸出的數組。
 
 print("串列 轉 numpy陣列")
-arr = np.array([1, 1, 2, 3, 3, 4, 5, 6, 6, 2])
-cc = np.min(arr)
+A = np.array([1, 1, 2, 3, 3, 4, 5, 6, 6, 2])
+cc = np.min(A)
 print(cc)
 
 print("max 返回數組中的最大值。")
 # np.max(a, axis = None, out = None, ...)
-cc = np.max(arr)
+cc = np.max(A)
 print(cc)
-
 
 print("串列 轉 numpy陣列")
-arr = np.array([2, 3, 1, 7, 4, 5])
-cc = np.sort(arr)
+A = np.array([2, 3, 1, 7, 4, 5])
+cc = np.sort(A)
 print(cc)
-
 
 print("abs 返回數組中元素的絕對值。當數組中包含負數時，它很有用。")
 print("串列 轉 numpy陣列")
 cc = np.array([[1, -3, 4], [-2, -4, 3]])
 cc = np.abs(cc)
 print(cc)
-
 
 print("------------------------------------------------------------")  # 60­э
 
@@ -1883,8 +1866,8 @@ print("保存")
 
 # savetxt 在文本文件中保存數組的內容。
 
-arr = np.linspace(10, 100, 500).reshape(25, 20)
-np.savetxt("tmp_array.txt", arr)
+A = np.linspace(10, 100, 500).reshape(25, 20)
+np.savetxt("tmp_array.txt", A)
 
 print("加載")  # 從文本文件加載數組，它以文件名作為參數。
 
@@ -1918,7 +1901,7 @@ print("put 用給定的值替換數組中指定的元素。")
 # Ind:需要替換的索引。
 # V:替換值。
 
-cc = np.put(arr, [1, 2], [6, 7])
+cc = np.put(A, [1, 2], [6, 7])
 print(cc)
 
 print("copyto 將一個數組的內容復制到另一個數組中。")
@@ -1974,26 +1957,6 @@ print("------------------------------------------------------------")  # 60個
 
 """
 # numpy統計
-"""
-1. 隨機變數
-np.random.randn(size)：由一個平均為0，變異數為1的高斯分布中隨機取點，並以list儲存。
-np.random.randint(low, high, size, dtype='l')：由low到high中產生一個size大小的list。 dtype，一般來說我們不會動到
-
-random.random()：在0 <= output < 1之間產生一個浮點數
-random.uniform(low,hight)：在low<= output <=hight之間產生一個浮點數
-random.randint(low,hight)：在low<= output <=hight之間產生一個整數
-"""
-
-print(np.random.randn(6))
-# output:[ 1.3265288  -0.15050998 -0.59429709  0.6356734  -0.89041176  0.2790698]
-
-
-print(np.random.randn(2, 3))
-# output:[[-0.51469048 -0.82356942  0.80310762]
-#        [ 0.21914897 -0.04437828 -0.41106366]]
-
-print(np.random.randint(1, 10, 6))
-# output: [[4 6 7],[4 2 9]]
 
 """
 2. 統計平均
@@ -2406,24 +2369,6 @@ print(adata)
 bdata = adata.reshape(4, 4)
 print(bdata)
 
-# nprandom.py
-
-print("1.產生2x3 0~1之間的隨機浮點數\n", np.random.rand(2, 3))
-print("2.產生2x3常態分佈的隨機浮點數\n", np.random.randn(2, 3))
-print("3.產生0~4(不含5)隨機整數\n", np.random.randint(5))
-print("4.產生2~4(不含5)5個隨機整數\n", np.random.randint(2, 5, [5]))
-print(
-    "5.產生3個 0~1之間的隨機浮點數\n",
-    np.random.random(3),
-    "\n",
-    np.random.random_sample(3),
-    "\n",
-    np.random.sample(3),
-)
-print("6.產生0~4(不含5)2x3的隨機整數\n", np.random.choice(5, [2, 3]))
-print("7.產生0~42(不含43)6個不重複的隨機整數\n", np.random.choice(43, 6, replace=False))
-
-print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # npfile.py
@@ -2928,24 +2873,6 @@ print("np.ravel(a)=" + str(d))
 
 print("------------------------------------------------------------")  # 60個
 
-a = np.array([1, 2, 3, 4, 5, 6])
-print("a=" + str(a))
-
-b = np.reshape(a, (3, 2))
-print("b=np.reshape(a,(3,2))->")
-print(b)
-c = b.T
-print("c=b.T->")
-print(c)
-c = b.transpose()
-print("c=b.transpose()->")
-print(c)
-c = np.transpose(b)
-print("c=np.transpose(b)->")
-print(c)
-
-print("------------------------------------------------------------")  # 60個
-
 a = np.array([1, 2, 3])
 print("a=" + str(a))
 
@@ -3012,30 +2939,6 @@ min_idx = np.argmin(a)
 max_idx = np.argmax(a)
 print("最小值索引: " + str(min_idx))
 print("最大值索引: " + str(max_idx))
-
-print("------------------------------------------------------------")  # 60個
-
-v1 = np.random.random()
-v2 = np.random.random()
-print(v1, v2)
-v3 = np.random.randint(5, 10)
-v4 = np.random.randint(1, 101)
-print(v3, v4)
-
-print("------------------------------------------------------------")  # 60個
-
-a = np.random.rand(5)
-print("np.random.rand(5)=")
-print(a)
-b = np.random.rand(3, 2)
-print("np.random.rand(3,2)=")
-print(b)
-c = np.random.randint(5, 10, size=5)
-print("np.random.randint(5,10,size=5)")
-print(c)
-d = np.random.randint(5, 10, size=(2, 3))
-print("np.random.randint(5,10,size=(2,3))")
-print(d)
 
 print("------------------------------------------------------------")  # 60個
 

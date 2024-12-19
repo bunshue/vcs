@@ -2503,7 +2503,9 @@ model = Sequential(
 rmsprop = RMSprop(learning_rate=0.001, rho=0.9, epsilon=1e-08, decay=0.0)
 
 # 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
-model.compile(optimizer="rmsprop", loss="categorical_crossentropy", metrics=["accuracy"])
+model.compile(
+    optimizer="rmsprop", loss="categorical_crossentropy", metrics=["accuracy"]
+)
 
 model.fit(X_train, y_train, epoch=2, batch_size=32)
 

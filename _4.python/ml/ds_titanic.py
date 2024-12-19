@@ -1,6 +1,10 @@
 """
 titanic
 
+鐵達尼號資料集  891 筆資料 15 個欄位
+
+
+
 """
 
 print("------------------------------------------------------------")  # 60個
@@ -26,91 +30,87 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
+import joblib
 import sklearn.linear_model
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
 from sklearn.preprocessing import StandardScaler
 
+from sklearn.metrics import accuracy_score
+from sklearn.ensemble import RandomForestClassifier  # 隨機森林
+from sklearn.naive_bayes import GaussianNB  # 數據集和數據處理
+
 
 def show():
-    # plt.show()
+    plt.show()
     pass
 
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("鐵達尼號資料集")
-
 print("邏輯迴歸")
 
 df = sns.load_dataset("titanic")
-cc = df.head()
-print(cc)
+#df = df[: 100]  # 只看前幾筆資料
 
-# 2. 資料清理、資料探索與分析
+print(df)
+print(df.shape)
 
+"""
 df.info()  # 這樣就已經把資料集彙總資訊印出來
 
+print('查看資料描述1')
 cc = df.describe()
 print(cc)
 
+print('查看資料描述2')
 cc = df.describe(include="O")
 print(cc)
 
+print('查看資料描述3')
 cc = df.describe(include="all")
 print(cc)
+"""
 
-# 遺失值(Missing value)處理
+print("遺失值(Missing value)處理")
 
 cc = df.isnull().sum()
+print("依欄位統計有幾筆空資料")
 print(cc)
 
-# 年齡(age)遺失值(Missing value)以中位數取代
+print("有 幾個 欄位 有 空資料, 要處理掉")
 
+print("1. 處理 age 空資料")
+print("年齡(age)遺失值(Missing value)以中位數取代")
 df.age.fillna(df.age.median(), inplace=True)
-cc = df.isnull().sum()
-print(cc)
 
-# 上船港口(embark_town)遺失值(Missing value)以前一筆取代
-
+print("2. 處理 embark_town 空資料")
+print("上船港口(embark_town)遺失值(Missing value)以前一筆取代")
 # 取得遺失值的列數
 cc = df[pd.isna(df.embark_town)]
-print(cc)
-
-# 以前一筆取代
+print("取得遺失值的列數 :", cc)
+print("embark_town 以前一筆取代")
 df.embark_town.fillna(method="ffill", inplace=True)
-cc = df.loc[[61, 829]]
-print(cc)
 
-# 驗證
-cc = df.loc[[61 - 1, 829 - 1]]
-print(cc)
-
-# 上船港口(embarked)遺失值(Missing value)以後一筆取代
-
+print("3. 處理 embarked 空資料")
+print("上船港口(embarked)遺失值(Missing value)以後一筆取代")
 # 取得遺失值的列數
 cc = df[pd.isna(df.embarked)]
 print(cc)
-
-# 以後一筆取代
+print("embarked 以後一筆取代")
 df.embarked.fillna(method="bfill", inplace=True)
-cc = df.loc[[61, 829]]
-print(cc)
 
-# 驗證
-cc = df.loc[[61 + 1, 829 + 1]]
-print(cc)
-
-# 甲板(deck)遺失值過多，刪除該欄位
-
+print("4. 處理 deck 空資料")
+print("甲板(deck)遺失值過多，刪除該欄位")
 df.drop("deck", axis=1, inplace=True)
 
-df.info()  # 這樣就已經把資料集彙總資訊印出來
+cc = df.isnull().sum()
+print("依欄位統計有幾筆空資料")
+print(cc)
 
 # 離群值(Outlier) 處理
-
-plt.boxplot(df.age)
-show()
+print('所有 age 資料')
+print(df.age)
 
 
 def get_box_plot_data(labels, bp):
@@ -130,43 +130,33 @@ def get_box_plot_data(labels, bp):
 
 
 bp = plt.boxplot(df.age)
-get_box_plot_data(["age"], bp)
+cc = get_box_plot_data(["age"], bp)
 show()
+print(cc)
 
 """
 	label 	最小值 	箱子下緣 	中位數 	箱子上緣 	最大值
-0 	age 	3.0 	22.0 	28.0 	35.0 	54.0
+0 	age 	3.0 	22.0 	        28.0 	35.0 	        54.0
 """
 
 df = df[(3.0 <= df.age) & (df.age <= 54.0)]
 plt.hist(df.age)
 show()
 
-
-# 類別變數轉換為數值
-
+# 資料轉換, 字串對應到數值 .map
 df.sex = df.sex.map({"male": 1, "female": 0})
-cc = df.head()
-print(cc)
-
 df.embark_town = df.embark_town.map({"Southampton": 0, "Cherbourg": 1, "Queenstown": 2})
-cc = df.head()
-print(cc)
 
 # 欄位分組(bin)
-
 bins = [0, 12, 18, 25, 35, 60, 100]
 cats = pd.cut(df.age, bins)
 print(cats)
-
 print(cats.cat.categories)
 
 cc = cats.cat.categories.to_list()[1].left, cats.cat.categories.to_list()[1].right
 print(cc)
 
 df.age = pd.cut(df.age, bins, labels=range(len(bins) - 1))
-cc = df.head()
-print(cc)
 
 # 移除重複資料
 
@@ -180,12 +170,8 @@ X = df.drop(["survived", "alive", "embarked", "who", "alone", "class"], axis=1)
 cc = X.head()
 print(cc)
 
-# 3. 不須進行特徵工程
-
-# 4. 資料分割
+# 資料分割
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
-cc = X_train.shape, X_test.shape, y_train.shape, y_test.shape
-print(cc)
 
 # 特徵縮放
 scaler = StandardScaler()
@@ -197,23 +183,144 @@ logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸�
 
 logistic_regression.fit(X_train_std, y_train)
 
-# 7. 模型計分
-from sklearn.metrics import accuracy_score
-
 y_pred = logistic_regression.predict(X_test_std)
+
 # 計算準確率
 print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
 # 82.42%
 
-# 8. 模型評估，暫不進行
-
-# 9. 模型佈署
-
-# 模型存檔
-import joblib
-
 joblib.dump(logistic_regression, "tmp_titanic_model.joblib")
 joblib.dump(scaler, "tmp_titanic_scaler.joblib")
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 探索性資料分析──以Titanic(鐵達尼號)之生還預測為例
+# 問個感興趣的問題
+
+# 資料取得
+# 自建資料或下載資料後上傳到雲端硬碟
+
+# train.csv行資料說明.jpg
+# 讀取Google雲端硬碟中的csv檔
+# 將行列結構的資料建立為Pandas的資料框
+
+filename = "data/titanic.csv"
+df = pd.read_csv(filename)
+
+# 資料清理
+# 缺失值的補值或刪除
+
+print(df.isnull())
+print(df.isnull().sum())
+print(df.isnull().count())
+print(df.isnull().sum() / df.isnull().count() * 100)
+
+df[df["Age"].isnull() == True]
+
+df["Age"] = df["Age"].fillna(df["Age"].mean())
+
+print(df)
+
+df[df["Embarked"].isnull()]
+
+df["Embarked"].value_counts()
+
+df["Embarked"] = df["Embarked"].fillna("S")
+
+df = df.drop("Cabin", axis=1)
+
+# 刪除重複值或異常值
+df[df.duplicated()]
+
+# 資料轉換, 字串對應到數值 .map
+s = {"female": 0, "male": 1}
+df["Sex"] = df["Sex"].map(s)
+e = {"S": 0, "C": 1, "Q": 2}
+df["Embarked"] = df["Embarked"].map(e)
+
+# 探索性資料分析
+# 觀察資料的分佈(統計)
+
+# 資料視覺化
+# 1.全體乘客生還、死亡的比例
+
+print(df["Survived"].value_counts())
+
+df["Survived"].value_counts().plot(kind="pie", autopct="%1.2f%%")
+show()
+
+print("------------------------------")  # 30個
+
+# 2.男性、女性乘客的比例
+
+print(df["Sex"].value_counts())
+
+df["Sex"].value_counts().plot(kind="pie", autopct="%1.2f%%")
+show()
+
+print("------------------------------")  # 30個
+
+# 3.搭1等艙、2等艙、3等艙的乘客比例
+
+print(df["Pclass"].value_counts())
+
+df["Pclass"].value_counts().plot(kind="pie", autopct="%1.2f%%")
+show()
+
+print("------------------------------")  # 30個
+
+# 4.進一步探討性別與生還的關係
+
+# 女、男乘客的人數
+
+print(df.groupby(["Sex"])["PassengerId"].count())
+
+# 不同性別的生還和死亡人數
+
+print(df.groupby(["Sex", "Survived"])["PassengerId"].count())
+
+df.groupby(["Sex", "Survived"])["PassengerId"].count().plot(kind="bar", rot=1)
+show()
+
+print("------------------------------")  # 30個
+
+# 不同性別生還人數/不同性別人數
+
+ss = (
+    df.groupby(["Sex", "Survived"])["PassengerId"].count()
+    / df.groupby(["Sex"])["PassengerId"].count()
+    * 100
+)
+print(ss)
+
+ss.plot(kind="bar", color=["r", "g"], rot=0)
+show()
+
+print("------------------------------")  # 30個
+
+# 5.進一步探討艙等與生還的關係
+
+# 三種艙等的生還和死亡人數
+
+print(df.groupby(["Pclass", "Survived"])["PassengerId"].count())
+
+df.groupby(["Pclass", "Survived"])["PassengerId"].count().plot(kind="bar", rot=0)
+show()
+
+print("------------------------------")  # 30個
+
+# 不同艙等生還人數/不同艙等人數
+
+ps = (
+    df.groupby(["Pclass", "Survived"])["PassengerId"].count()
+    / df.groupby(["Pclass"])["PassengerId"].count()
+    * 100
+)
+print(ps)
+
+ps.plot(kind="bar", rot=0)
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -253,7 +360,10 @@ print(np.round(imp.transform(X_test)))
 
 # 必須為數值欄位
 df = sns.load_dataset("titanic")
+
+# 資料轉換, 字串對應到數值 .map
 df.sex = df.sex.map({"male": 1, "female": 0})
+
 df2 = df[["pclass", "sex", "age", "sibsp", "parch", "fare"]]
 
 imp = IterativeImputer(max_iter=10, random_state=0)
@@ -271,7 +381,8 @@ print("------------------------------------------------------------")  # 60個
 
 print("邏輯迴歸")
 
-from sklearn import preprocessing, linear_model
+from sklearn import preprocessing
+from sklearn import linear_model
 
 titanic = pd.read_csv("data/titanic_ds.csv")
 print(titanic.info())
@@ -367,7 +478,6 @@ print(logistic_regression.score(X, y))
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-from sklearn import datasets
 from sklearn import preprocessing
 from sklearn import tree
 
@@ -417,156 +527,6 @@ dtree.fit(XTrain, yTrain)
 
 with open("tmp_tree.dot", "w") as f:
     f = tree.export_graphviz(dtree, feature_names=["Sex", "Class"], out_file=f)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
-# 6-1 探索性資料分析──以Titanic(鐵達尼號)之生還預測為例
-# 資料科學 0. 問個感興趣的問題
-
-# 資料科學 1. 資料取得
-# 資料科學1.1 自建資料或下載資料後上傳到雲端硬碟
-
-# train.csv行資料說明.jpg
-# 資料科學1.2 讀取Google雲端硬碟中的csv檔
-# 資料科學1.3 將行列結構的資料建立為Pandas的資料框
-
-filename = "data/titanic.csv"
-df = pd.read_csv(filename)
-"""
-print(df)
-print(df.info())
-print(df.describe())
-"""
-
-# 資料科學2.3 資料清理
-# 缺失值的補值或刪除
-
-print(df.isnull())
-
-print(df.isnull().sum())
-
-print(df.isnull().count())
-
-print(df.isnull().sum() / df.isnull().count() * 100)
-
-df[df["Age"].isnull() == True]
-
-df["Age"] = df["Age"].fillna(df["Age"].mean())
-
-print(df)
-
-df[df["Embarked"].isnull()]
-
-df["Embarked"].value_counts()
-
-df["Embarked"] = df["Embarked"].fillna("S")
-
-df.loc[[61, 829], :]  # 顯示列索引61,829的資料
-
-print(df.info())
-
-df = df.drop("Cabin", axis=1)
-
-print(df.info())
-
-# 刪除重複值或異常值
-df[df.duplicated()]
-
-# 資料轉換
-print(df.head())
-
-s = {"female": 0, "male": 1}
-df["Sex"] = df["Sex"].map(s)
-e = {"S": 0, "C": 1, "Q": 2}
-df["Embarked"] = df["Embarked"].map(e)
-print(df.head())
-
-# 資料科學3. 探索性資料分析
-# 資料科學3.1 觀察資料的分佈(統計)
-
-print(df.head())
-
-# 資料科學3.2 資料視覺化
-# 1.全體乘客生還、死亡的比例
-
-print(df["Survived"].value_counts())
-
-df["Survived"].value_counts().plot(kind="pie", autopct="%1.2f%%")
-show()
-
-print("------------------------------")  # 30個
-
-# 2.男性、女性乘客的比例
-
-print(df["Sex"].value_counts())
-
-df["Sex"].value_counts().plot(kind="pie", autopct="%1.2f%%")
-show()
-
-print("------------------------------")  # 30個
-
-# 3.搭1等艙、2等艙、3等艙的乘客比例
-
-print(df["Pclass"].value_counts())
-
-df["Pclass"].value_counts().plot(kind="pie", autopct="%1.2f%%")
-show()
-
-print("------------------------------")  # 30個
-
-# 4.進一步探討性別與生還的關係
-
-# 女、男乘客的人數
-
-print(df.groupby(["Sex"])["PassengerId"].count())
-
-# 不同性別的生還和死亡人數
-
-print(df.groupby(["Sex", "Survived"])["PassengerId"].count())
-
-df.groupby(["Sex", "Survived"])["PassengerId"].count().plot(kind="bar", rot=1)
-show()
-
-print("------------------------------")  # 30個
-
-# 不同性別生還人數/不同性別人數
-
-ss = (
-    df.groupby(["Sex", "Survived"])["PassengerId"].count()
-    / df.groupby(["Sex"])["PassengerId"].count()
-    * 100
-)
-print(ss)
-
-ss.plot(kind="bar", color=["r", "g"], rot=0)
-show()
-
-print("------------------------------")  # 30個
-
-# 5.進一步探討艙等與生還的關係
-
-# 三種艙等的生還和死亡人數
-
-print(df.groupby(["Pclass", "Survived"])["PassengerId"].count())
-
-df.groupby(["Pclass", "Survived"])["PassengerId"].count().plot(kind="bar", rot=0)
-show()
-
-print("------------------------------")  # 30個
-
-# 不同艙等生還人數/不同艙等人數
-
-ps = (
-    df.groupby(["Pclass", "Survived"])["PassengerId"].count()
-    / df.groupby(["Pclass"])["PassengerId"].count()
-    * 100
-)
-print(ps)
-
-ps.plot(kind="bar", rot=0)
-show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -786,26 +746,24 @@ print("------------------------------------------------------------")  # 60個
 # 數據集和數據處理
 print("邏輯迴歸")
 
-from pandas import Series, DataFrame
-
 # 繪圖分析
 sns.set_style("whitegrid")
-
-# from sklearn.svm import SVC, LinearSVC  # 支持向量機
-from sklearn.ensemble import RandomForestClassifier  # 隨機森林
-
-from sklearn.naive_bayes import GaussianNB  # 數據集和數據處理
 
 print("------------------------------")  # 30個
 
 titanic_df = pd.read_csv("data/train.csv")
 test_df = pd.read_csv("data/test.csv")
+
 print(titanic_df.head())
 print(titanic_df.info())
+# 查看資料描述
 print(titanic_df.describe())
 
 facet = sns.FacetGrid(titanic_df, hue="Survived", aspect=4)
+
+# 資料轉換, 字串對應到數值 .map
 facet.map(sns.kdeplot, "Age", shade=True)
+
 facet.set(xlim=(0, titanic_df["Age"].max()))
 facet.add_legend()
 show()
@@ -940,15 +898,9 @@ print("------------------------------------------------------------")  # 60個
 
 # chaid_three_cat
 
-from seaborn import load_dataset
-
-df = load_dataset("titanic")
-cc = df.head()
-print(cc)
+df = sns.load_dataset("titanic")
 
 df.embarked = df.embarked.fillna(method="ffill")
-cc = df.head()
-print(cc)
 
 from CHAID import Tree
 

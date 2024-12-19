@@ -814,5 +814,79 @@ for lang in set(sample):
 
 print("------------------------------------------------------------")  # 60個
 
+"""
+1. 隨機變數
+np.random.randn(size)：由一個平均為0，變異數為1的高斯分布中隨機取點，並以list儲存。
+np.random.randint(low, high, size, dtype='l')：由low到high中產生一個size大小的list。 dtype，一般來說我們不會動到
+
+random.random()：在0 <= output < 1之間產生一個浮點數
+random.uniform(low,hight)：在low<= output <=hight之間產生一個浮點數
+random.randint(low,hight)：在low<= output <=hight之間產生一個整數
+"""
+
+print(np.random.randn(6))
+# output:[ 1.3265288  -0.15050998 -0.59429709  0.6356734  -0.89041176  0.2790698]
+
+print(np.random.randn(2, 3))
+# output:[[-0.51469048 -0.82356942  0.80310762]
+#        [ 0.21914897 -0.04437828 -0.41106366]]
+
+print(np.random.randint(1, 10, 6))
+# output: [[4 6 7],[4 2 9]]
 
 print("------------------------------------------------------------")  # 60個
+
+print("1.產生2x3 0~1之間的隨機浮點數\n", np.random.rand(2, 3))
+print("2.產生2x3常態分佈的隨機浮點數\n", np.random.randn(2, 3))
+print("3.產生0~4(不含5)隨機整數\n", np.random.randint(5))
+print("4.產生2~4(不含5)5個隨機整數\n", np.random.randint(2, 5, [5]))
+print(
+    "5.產生3個 0~1之間的隨機浮點數\n",
+    np.random.random(3),
+    "\n",
+    np.random.random_sample(3),
+    "\n",
+    np.random.sample(3),
+)
+print("6.產生0~4(不含5)2x3的隨機整數\n", np.random.choice(5, [2, 3]))
+print("7.產生0~42(不含43)6個不重複的隨機整數\n", np.random.choice(43, 6, replace=False))
+
+
+print("------------------------------------------------------------")  # 60個
+
+v1 = np.random.random()
+v2 = np.random.random()
+print(v1, v2)
+v3 = np.random.randint(5, 10)
+v4 = np.random.randint(1, 101)
+print(v3, v4)
+
+print("------------------------------------------------------------")  # 60個
+
+a = np.random.rand(5)
+print("np.random.rand(5)=")
+print(a)
+b = np.random.rand(3, 2)
+print("np.random.rand(3,2)=")
+print(b)
+c = np.random.randint(5, 10, size=5)
+print("np.random.randint(5,10,size=5)")
+print(c)
+d = np.random.randint(5, 10, size=(2, 3))
+print("np.random.randint(5,10,size=(2,3))")
+print(d)
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+

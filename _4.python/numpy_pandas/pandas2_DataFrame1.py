@@ -122,7 +122,7 @@ def make_data_frame_from_dict():
     df = pd.DataFrame(datas)
     return df
 
-
+'''
 print("------------------------------------------------------------")  # 60個
 print("1. 建立 df 的方法")
 print("------------------------------------------------------------")  # 60個
@@ -308,7 +308,7 @@ print("總重 :", df["數學"].sum())
 print("平均 :", df["數學"].mean())
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 print("刪除 df 的 欄位 或 索引 – drop()")
 
 df = make_data_frame_from_dict()  # 字典 轉 df
@@ -381,6 +381,77 @@ print(df4)
 print("刪除欄位 1~3, axis=1")
 df5 = df.drop(df.columns[1:4], axis=1)
 print(df5)
+
+
+
+"""
+#增加、刪除資料欄位
+# 創建?一個新欄位，資料為 col1 欄位的數值*2 
+data["新增欄位名"] = data["col1"] * 2
+
+# 創建?一個新欄位，計算 col1 與 col2 的比率
+data["投資報酬率"] =  (data["投資淨損益"] /  data["投入資金"])
+
+# 使用 loc 新增一行 
+dfta.loc[2] = ['第一欄位內容', '第二欄位內容']
+
+# 新增一列並且想保持原有 DataFrame 不變，使用 assign 新增一列 
+data = pd.DataFrame({ 'Name': ['Alice', 'Bob'], 'Age': [25, 30] })
+data_new = data.assign(City=['New York', 'Los Angeles'])
+
+# 刪除特定欄位 'Column_Name' 
+data = data.drop(columns=['Column_Name'])
+
+# 刪除特定行（根據索引） 
+data = data.drop(index=[0]) # 刪除第0行
+
+# 如果要一次刪除多行 
+data = data.drop(index=[0, 1]) # 刪除第0和第1行
+
+# 刪除特定欄位 'Column_Name'，直接在原 DataFrame 上修改
+data.drop(columns=['Column_Name'], inplace=True)
+"""
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+# 刪除 df 欄位
+
+# 讀取[UFO報告]資料集至df
+# ufo = pd.read_csv('http://bit.ly/uforeports')
+filename = "data/ufo.csv"
+ufo = pd.read_csv(filename)
+
+# print("檢視前幾行\n", ufo.head())
+
+# remove a single column (axis=1 refers to columns)
+print("刪除欄位 Colors Reported, axis=1")
+ufo.drop("Colors Reported", axis=1, inplace=True)
+
+# print("檢視前幾行\n", ufo.head())
+
+# remove multiple columns at once
+print("刪除欄位 City 和 State, axis=1")
+ufo.drop(["City", "State"], axis=1, inplace=True)
+
+# print("檢視前幾行\n", ufo.head())
+
+# remove multiple rows at once (axis=0 refers to rows)
+ufo.drop([0, 1], axis=0, inplace=True)
+
+# print("檢視前幾行\n", ufo.head())
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+
+sys.exit()
 
 print("------------------------------")  # 30個
 
@@ -822,6 +893,7 @@ df = pd.concat([df1, df2], axis=1)  # axis=0 : 垂直連接, axis=1 : 水平連�
 print(df)
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 # 用 merge() 做 DataFrame 的交集合併
 
@@ -849,6 +921,250 @@ print("pd.merge(), 使用 outer, 取聯集")
 df = pd.merge(df1, df2, on="姓名", how="outer")
 print(df3)
 
+print("------------------------------------------------------------")  # 60個
+
+print("pd.concat() 默認情況下是縱向連接兩個DataFrame")
+
+columns = list("ABCD")
+datas1 = np.ones((3, 4)) * 1
+datas2 = np.ones((3, 4)) * 2
+datas3 = np.ones((3, 4)) * 3
+df1 = pd.DataFrame(datas1, columns=columns)
+df2 = pd.DataFrame(datas2, columns=columns)
+df3 = pd.DataFrame(datas3, columns=columns)
+print("3個 df")
+print(df1)
+print(df2)
+print(df3)
+
+print("使用 concat(), 直向連接, 索引錯誤")
+res = pd.concat([df1, df2, df3])
+print(res)
+
+print("使用 concat(), 直向連接, 重排索引index")
+print("ignore_index = True可以忽略合併時舊的index，改採用自動生成的index")
+res = pd.concat([df1, df2, df3], ignore_index=True)
+print(res)
+
+print("------------------------------------------------------------")  # 60個
+
+print("pd.concat() 合併資料可以使用 join，outer 是聯集(預設)、inner 是交集(如果資料不存在時，NaN)")
+
+datas1 = np.ones((3, 4)) * 1
+datas2 = np.ones((3, 4)) * 2
+df1 = pd.DataFrame(datas1, columns=["A", "B", "C", "D"], index=[1, 2, 3])
+df2 = pd.DataFrame(datas2, columns=["B", "C", "D", "E"], index=[2, 3, 4])
+print("2個 df")
+print(df1)
+print(df2)
+
+print("使用 concat 時，預設的 join 模式是 'outer'，會直接把沒有的資料用 NaN 取代")
+res = pd.concat([df1, df2])  # 執行結果相等
+print(res)
+res = pd.concat([df1, df2], join="outer")  # 執行結果相等
+print(res)
+
+print("使用 concat 的 join ='inner'，會直接把沒有的資料刪除")
+res = pd.concat([df1, df2], join="inner", ignore_index=True)
+print(res)
+
+print("------------------------------------------------------------")  # 60個
+
+print("Merge() : merge()的默認操作是水平連接兩個DataFrame")
+
+datas1 = {"key": ["K0", "K1", "K2"], "A": ["A0", "A1", "A2"], "B": ["B0", "B1", "B2"]}
+datas2 = {
+    "key": ["K0", "K1", "K2", "K3"],
+    "C": ["C0", "C1", "C2", "C3"],
+    "D": ["D0", "D1", "D2", "D3"],
+}
+df1 = pd.DataFrame(datas1)
+df2 = pd.DataFrame(datas2)
+print("df1")
+print(df1)
+print("df2")
+print(df2)
+
+print("基於 key 把 df1 與 df2 合併")
+result = pd.merge(df1, df2, on="key")
+print(result)
+
+print("------------------------------")  # 30個
+
+print("merge 多個 key")
+
+datas1 = {
+    "k1": ["K0", "K0", "K1", "K2"],
+    "k2": ["K0", "K1", "K0", "K1"],
+    "A": ["A0", "A1", "A2", "A3"],
+    "B": ["B0", "B1", "B2", "B3"],
+}
+
+datas2 = {
+    "k1": ["K0", "K1", "K1", "K2"],
+    "k2": ["K0", "K0", "K0", "K0"],
+    "C": ["C0", "C1", "C2", "C3"],
+    "D": ["D0", "D1", "D2", "D3"],
+}
+
+df1 = pd.DataFrame(datas1)
+df2 = pd.DataFrame(datas2)
+
+print("df1")
+print(df1)
+print("df2")
+print(df2)
+print("pd.merge 1")
+res = pd.merge(df1, df2, on=["k1", "k2"])  # 執行結果一樣
+print(res)
+
+print("pd.merge 2")
+res = pd.merge(df1, df2, on=["k1", "k2"], how="inner")  # 執行結果一樣
+print(res)
+
+print("------------------------------")  # 30個
+
+print("outer right left 模式")
+
+print("outer 模式")
+res = pd.merge(df1, df2, on=["k1", "k2"], how="outer")
+print(res)
+
+print("right 模式，保留右半部")
+res = pd.merge(df1, df2, on=["k1", "k2"], how="right")
+print(res)
+
+print("left 模式，保留左半部")
+res = pd.merge(df1, df2, on=["k1", "k2"], how="left")
+print(res)
+
+print("------------------------------")  # 30個
+
+print("merge合併時，處理相同欄位的衝突，以suffixes區分")
+
+datas1 = {"name": ["小黑", "小白", "小藍", "小綠"], "number": [23, 32, 31, 8]}
+datas2 = {"name": ["小黑", "小白", "小藍", "小綠"], "number": ["台灣", "日本", "荷蘭", "菲律賓"]}
+
+df1 = pd.DataFrame(datas1)
+df2 = pd.DataFrame(datas2)
+
+print("2個 df")
+print(df1)
+print(df2)
+
+print("pd.merge")
+df = pd.merge(df1, df2, on="name", suffixes=["_代號", "_國家"])
+print(df)
+
+print("------------------------------------------------------------")  # 60個
+
+print("建立df, 使用 合併")
+
+# concatenating
+# ignore index
+df1 = pd.DataFrame(np.ones((3, 4)) * 0, columns=["a", "b", "c", "d"])
+df2 = pd.DataFrame(np.ones((3, 4)) * 1, columns=["a", "b", "c", "d"])
+df3 = pd.DataFrame(np.ones((3, 4)) * 2, columns=["a", "b", "c", "d"])
+res = pd.concat(
+    [df1, df2, df3], axis=0, ignore_index=True
+)  # axis=0 : 垂直連接, axis=1 : 水平連接
+
+# join, ('inner', 'outer')
+df1 = pd.DataFrame(np.ones((3, 4)) * 0, columns=["a", "b", "c", "d"], index=[1, 2, 3])
+df2 = pd.DataFrame(np.ones((3, 4)) * 1, columns=["b", "c", "d", "e"], index=[2, 3, 4])
+res = pd.concat([df1, df2], axis=1, join="outer")  # axis=0 : 垂直連接, axis=1 : 水平連接
+res = pd.concat([df1, df2], axis=1, join="inner")  # axis=0 : 垂直連接, axis=1 : 水平連接
+
+""" NG
+# join_axes
+res = pd.concat([df1, df2], axis=1, join_axes=[df1.index])  # axis=0 : 垂直連接, axis=1 : 水平連接
+"""
+
+df1 = pd.DataFrame(np.ones((3, 4)) * 0, columns=["a", "b", "c", "d"])
+df2 = pd.DataFrame(np.ones((3, 4)) * 1, columns=["a", "b", "c", "d"])
+df2 = pd.DataFrame(np.ones((3, 4)) * 1, columns=["b", "c", "d", "e"], index=[2, 3, 4])
+
+print("------------------------------------------------------------")  # 60個
+
+print("使用 pd.merge(), by key/keys")
+
+datas1 = {
+    "key": ["K0", "K1", "K2", "K3"],
+    "A": ["A0", "A1", "A2", "A3"],
+    "B": ["B0", "B1", "B2", "B3"],
+}
+
+datas2 = {
+    "key": ["K0", "K1", "K2", "K3"],
+    "C": ["C0", "C1", "C2", "C3"],
+    "D": ["D0", "D1", "D2", "D3"],
+}
+
+df1 = pd.DataFrame(datas1)
+df2 = pd.DataFrame(datas2)
+print(df1)
+print(df2)
+res = pd.merge(df1, df2, on="key")
+print(res)
+
+# consider two keys
+datas1 = {
+    "key1": ["K0", "K0", "K1", "K2"],
+    "key2": ["K0", "K1", "K0", "K1"],
+    "A": ["A0", "A1", "A2", "A3"],
+    "B": ["B0", "B1", "B2", "B3"],
+}
+
+datas2 = {
+    "key1": ["K0", "K1", "K1", "K2"],
+    "key2": ["K0", "K0", "K0", "K0"],
+    "C": ["C0", "C1", "C2", "C3"],
+    "D": ["D0", "D1", "D2", "D3"],
+}
+
+df1 = pd.DataFrame(datas1)
+df2 = pd.DataFrame(datas2)
+print(df1)
+print(df2)
+res = pd.merge(df1, df2, on=["key1", "key2"], how="inner")  # default for how='inner'
+# how = ['left', 'right', 'outer', 'inner']
+res = pd.merge(df1, df2, on=["key1", "key2"], how="left")
+print(res)
+
+# indicator
+df1 = pd.DataFrame({"col1": [0, 1], "col_left": ["a", "b"]})
+df2 = pd.DataFrame({"col1": [1, 2, 2], "col_right": [2, 2, 2]})
+print(df1)
+print(df2)
+res = pd.merge(df1, df2, on="col1", how="outer", indicator=True)
+# give the indicator a custom name
+res = pd.merge(df1, df2, on="col1", how="outer", indicator="indicator_column")
+
+# merged by index
+datas1 = {"A": ["A0", "A1", "A2"], "B": ["B0", "B1", "B2"]}
+datas2 = {"C": ["C0", "C2", "C3"], "D": ["D0", "D2", "D3"]}
+
+df1 = pd.DataFrame(datas1, index=["K0", "K1", "K2"])
+df2 = pd.DataFrame(datas2, index=["K0", "K2", "K3"])
+print(df1)
+print(df2)
+# left_index and right_index
+res = pd.merge(df1, df2, left_index=True, right_index=True, how="outer")
+res = pd.merge(df1, df2, left_index=True, right_index=True, how="inner")
+
+# handle overlapping
+datas1 = {"k": ["K0", "K1", "K2"], "age": [1, 2, 3]}
+
+datas2 = {"k": ["K0", "K0", "K3"], "age": [4, 5, 6]}
+
+boys = pd.DataFrame(datas1)
+girls = pd.DataFrame(datas2)
+res = pd.merge(boys, girls, on="k", suffixes=["_boy", "_girl"], how="inner")
+print(res)
+
+# join function in pandas is similar with merge. If know merge, you will understand join
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 datas = {
@@ -1229,7 +1545,7 @@ df_sample["age"] = df_sample["age"].fillna(value=VALUE)  # 將指定欄位內空
 df_sample["gender"] = df_sample["gender"].ffill()  # ffill()拿前一個值往下填, 承上
 df_sample["area"] = df_sample["area"].ffill()  # ffill()拿前一個值往下填, 承上
 
-print("去除重覆記錄")
+print(".drop_duplicates 去除重複資料")
 df_sample.drop_duplicates(subset="id", keep="first", inplace=True)
 print(df_sample.head())
 
@@ -1250,6 +1566,7 @@ VALUE = value = df_sample["age"].mean()
 df_sample["age"] = df_sample["age"].fillna(VALUE)  # 將指定欄位內空資料填入指定數值
 df_sample["gender"] = df_sample["gender"].ffill()  # ffill()拿前一個值往下填, 承上
 df_sample["area"] = df_sample["area"].ffill()  # ffill()拿前一個值往下填, 承上
+print(".drop_duplicates 去除重複資料")
 df_sample.drop_duplicates(subset="id", keep="first", inplace=True)
 df_sample["job"] = df_sample["job"].str.strip()
 df_sample["job"] = df_sample["job"].str.replace(" ", "")
@@ -1275,6 +1592,7 @@ VALUE = value = df_sample["age"].mean()
 df_sample["age"] = df_sample["age"].fillna(VALUE)  # 將指定欄位內空資料填入指定數值
 df_sample["gender"] = df_sample["gender"].ffill()  # ffill()拿前一個值往下填, 承上
 df_sample["area"] = df_sample["area"].ffill()  # ffill()拿前一個值往下填, 承上
+print(".drop_duplicates 去除重複資料")
 df_sample.drop_duplicates(subset="id", keep="first", inplace=True)
 df_sample["job"] = df_sample["job"].str.strip()
 df_sample["job"] = df_sample["job"].str.replace(" ", "")
@@ -1426,249 +1744,6 @@ print(df["Age"].isnull().sum())
 
 print("------------------------------------------------------------")  # 60個
 
-print("pd.concat() 默認情況下是縱向連接兩個DataFrame")
-
-columns = list("ABCD")
-datas1 = np.ones((3, 4)) * 1
-datas2 = np.ones((3, 4)) * 2
-datas3 = np.ones((3, 4)) * 3
-df1 = pd.DataFrame(datas1, columns=columns)
-df2 = pd.DataFrame(datas2, columns=columns)
-df3 = pd.DataFrame(datas3, columns=columns)
-print("3個 df")
-print(df1)
-print(df2)
-print(df3)
-
-print("使用 concat(), 直向連接, 索引錯誤")
-res = pd.concat([df1, df2, df3])
-print(res)
-
-print("使用 concat(), 直向連接, 重排索引index")
-print("ignore_index = True可以忽略合併時舊的index，改採用自動生成的index")
-res = pd.concat([df1, df2, df3], ignore_index=True)
-print(res)
-
-print("------------------------------------------------------------")  # 60個
-
-print("pd.concat() 合併資料可以使用 join，outer 是聯集(預設)、inner 是交集(如果資料不存在時，NaN)")
-
-datas1 = np.ones((3, 4)) * 1
-datas2 = np.ones((3, 4)) * 2
-df1 = pd.DataFrame(datas1, columns=["A", "B", "C", "D"], index=[1, 2, 3])
-df2 = pd.DataFrame(datas2, columns=["B", "C", "D", "E"], index=[2, 3, 4])
-print("2個 df")
-print(df1)
-print(df2)
-
-print("使用 concat 時，預設的 join 模式是 'outer'，會直接把沒有的資料用 NaN 取代")
-res = pd.concat([df1, df2])  # 執行結果相等
-print(res)
-res = pd.concat([df1, df2], join="outer")  # 執行結果相等
-print(res)
-
-print("使用 concat 的 join ='inner'，會直接把沒有的資料刪除")
-res = pd.concat([df1, df2], join="inner", ignore_index=True)
-print(res)
-
-print("------------------------------------------------------------")  # 60個
-
-print("Merge() : merge()的默認操作是水平連接兩個DataFrame")
-
-datas1 = {"key": ["K0", "K1", "K2"], "A": ["A0", "A1", "A2"], "B": ["B0", "B1", "B2"]}
-datas2 = {
-    "key": ["K0", "K1", "K2", "K3"],
-    "C": ["C0", "C1", "C2", "C3"],
-    "D": ["D0", "D1", "D2", "D3"],
-}
-df1 = pd.DataFrame(datas1)
-df2 = pd.DataFrame(datas2)
-print("df1")
-print(df1)
-print("df2")
-print(df2)
-
-print("基於 key 把 df1 與 df2 合併")
-result = pd.merge(df1, df2, on="key")
-print(result)
-
-print("------------------------------")  # 30個
-
-print("merge 多個 key")
-
-datas1 = {
-    "k1": ["K0", "K0", "K1", "K2"],
-    "k2": ["K0", "K1", "K0", "K1"],
-    "A": ["A0", "A1", "A2", "A3"],
-    "B": ["B0", "B1", "B2", "B3"],
-}
-
-datas2 = {
-    "k1": ["K0", "K1", "K1", "K2"],
-    "k2": ["K0", "K0", "K0", "K0"],
-    "C": ["C0", "C1", "C2", "C3"],
-    "D": ["D0", "D1", "D2", "D3"],
-}
-
-df1 = pd.DataFrame(datas1)
-df2 = pd.DataFrame(datas2)
-
-print("df1")
-print(df1)
-print("df2")
-print(df2)
-print("pd.merge 1")
-res = pd.merge(df1, df2, on=["k1", "k2"])  # 執行結果一樣
-print(res)
-
-print("pd.merge 2")
-res = pd.merge(df1, df2, on=["k1", "k2"], how="inner")  # 執行結果一樣
-print(res)
-
-print("------------------------------")  # 30個
-
-print("outer right left 模式")
-
-print("outer 模式")
-res = pd.merge(df1, df2, on=["k1", "k2"], how="outer")
-print(res)
-
-print("right 模式，保留右半部")
-res = pd.merge(df1, df2, on=["k1", "k2"], how="right")
-print(res)
-
-print("left 模式，保留左半部")
-res = pd.merge(df1, df2, on=["k1", "k2"], how="left")
-print(res)
-
-print("------------------------------")  # 30個
-
-print("merge合併時，處理相同欄位的衝突，以suffixes區分")
-
-datas1 = {"name": ["小黑", "小白", "小藍", "小綠"], "number": [23, 32, 31, 8]}
-datas2 = {"name": ["小黑", "小白", "小藍", "小綠"], "number": ["台灣", "日本", "荷蘭", "菲律賓"]}
-
-df1 = pd.DataFrame(datas1)
-df2 = pd.DataFrame(datas2)
-
-print("2個 df")
-print(df1)
-print(df2)
-
-print("pd.merge")
-df = pd.merge(df1, df2, on="name", suffixes=["_代號", "_國家"])
-print(df)
-
-print("------------------------------------------------------------")  # 60個
-
-print("建立df, 使用 合併")
-
-# concatenating
-# ignore index
-df1 = pd.DataFrame(np.ones((3, 4)) * 0, columns=["a", "b", "c", "d"])
-df2 = pd.DataFrame(np.ones((3, 4)) * 1, columns=["a", "b", "c", "d"])
-df3 = pd.DataFrame(np.ones((3, 4)) * 2, columns=["a", "b", "c", "d"])
-res = pd.concat(
-    [df1, df2, df3], axis=0, ignore_index=True
-)  # axis=0 : 垂直連接, axis=1 : 水平連接
-
-# join, ('inner', 'outer')
-df1 = pd.DataFrame(np.ones((3, 4)) * 0, columns=["a", "b", "c", "d"], index=[1, 2, 3])
-df2 = pd.DataFrame(np.ones((3, 4)) * 1, columns=["b", "c", "d", "e"], index=[2, 3, 4])
-res = pd.concat([df1, df2], axis=1, join="outer")  # axis=0 : 垂直連接, axis=1 : 水平連接
-res = pd.concat([df1, df2], axis=1, join="inner")  # axis=0 : 垂直連接, axis=1 : 水平連接
-
-""" NG
-# join_axes
-res = pd.concat([df1, df2], axis=1, join_axes=[df1.index])  # axis=0 : 垂直連接, axis=1 : 水平連接
-"""
-
-df1 = pd.DataFrame(np.ones((3, 4)) * 0, columns=["a", "b", "c", "d"])
-df2 = pd.DataFrame(np.ones((3, 4)) * 1, columns=["a", "b", "c", "d"])
-df2 = pd.DataFrame(np.ones((3, 4)) * 1, columns=["b", "c", "d", "e"], index=[2, 3, 4])
-
-print("------------------------------------------------------------")  # 60個
-
-print("使用 pd.merge(), by key/keys")
-
-datas1 = {
-    "key": ["K0", "K1", "K2", "K3"],
-    "A": ["A0", "A1", "A2", "A3"],
-    "B": ["B0", "B1", "B2", "B3"],
-}
-
-datas2 = {
-    "key": ["K0", "K1", "K2", "K3"],
-    "C": ["C0", "C1", "C2", "C3"],
-    "D": ["D0", "D1", "D2", "D3"],
-}
-
-df1 = pd.DataFrame(datas1)
-df2 = pd.DataFrame(datas2)
-print(df1)
-print(df2)
-res = pd.merge(df1, df2, on="key")
-print(res)
-
-# consider two keys
-datas1 = {
-    "key1": ["K0", "K0", "K1", "K2"],
-    "key2": ["K0", "K1", "K0", "K1"],
-    "A": ["A0", "A1", "A2", "A3"],
-    "B": ["B0", "B1", "B2", "B3"],
-}
-
-datas2 = {
-    "key1": ["K0", "K1", "K1", "K2"],
-    "key2": ["K0", "K0", "K0", "K0"],
-    "C": ["C0", "C1", "C2", "C3"],
-    "D": ["D0", "D1", "D2", "D3"],
-}
-
-df1 = pd.DataFrame(datas1)
-df2 = pd.DataFrame(datas2)
-print(df1)
-print(df2)
-res = pd.merge(df1, df2, on=["key1", "key2"], how="inner")  # default for how='inner'
-# how = ['left', 'right', 'outer', 'inner']
-res = pd.merge(df1, df2, on=["key1", "key2"], how="left")
-print(res)
-
-# indicator
-df1 = pd.DataFrame({"col1": [0, 1], "col_left": ["a", "b"]})
-df2 = pd.DataFrame({"col1": [1, 2, 2], "col_right": [2, 2, 2]})
-print(df1)
-print(df2)
-res = pd.merge(df1, df2, on="col1", how="outer", indicator=True)
-# give the indicator a custom name
-res = pd.merge(df1, df2, on="col1", how="outer", indicator="indicator_column")
-
-# merged by index
-datas1 = {"A": ["A0", "A1", "A2"], "B": ["B0", "B1", "B2"]}
-datas2 = {"C": ["C0", "C2", "C3"], "D": ["D0", "D2", "D3"]}
-
-df1 = pd.DataFrame(datas1, index=["K0", "K1", "K2"])
-df2 = pd.DataFrame(datas2, index=["K0", "K2", "K3"])
-print(df1)
-print(df2)
-# left_index and right_index
-res = pd.merge(df1, df2, left_index=True, right_index=True, how="outer")
-res = pd.merge(df1, df2, left_index=True, right_index=True, how="inner")
-
-# handle overlapping
-datas1 = {"k": ["K0", "K1", "K2"], "age": [1, 2, 3]}
-
-datas2 = {"k": ["K0", "K0", "K3"], "age": [4, 5, 6]}
-
-boys = pd.DataFrame(datas1)
-girls = pd.DataFrame(datas2)
-res = pd.merge(boys, girls, on="k", suffixes=["_boy", "_girl"], how="inner")
-print(res)
-
-# join function in pandas is similar with merge. If know merge, you will understand join
-
-print("------------------------------------------------------------")  # 60個
-
 # 讀取[Chipotle快餐數據]資料集至df
 orders = pd.read_table("http://bit.ly/chiporders")
 # filename = "data/chipotle.tsv"
@@ -1776,34 +1851,6 @@ print(cc)
 ufo.columns = ufo.columns.str.replace(" ", "_")
 cc = ufo.columns
 print(cc)
-
-print("------------------------------------------------------------")  # 60個
-
-# 刪除 df 欄位
-
-# 讀取[UFO報告]資料集至df
-# ufo = pd.read_csv('http://bit.ly/uforeports')
-filename = "data/ufo.csv"
-ufo = pd.read_csv(filename)
-
-# print("檢視前幾行\n", ufo.head())
-
-# remove a single column (axis=1 refers to columns)
-print("刪除欄位 Colors Reported, axis=1")
-ufo.drop("Colors Reported", axis=1, inplace=True)
-
-# print("檢視前幾行\n", ufo.head())
-
-# remove multiple columns at once
-print("刪除欄位 City 和 State, axis=1")
-ufo.drop(["City", "State"], axis=1, inplace=True)
-
-# print("檢視前幾行\n", ufo.head())
-
-# remove multiple rows at once (axis=0 refers to rows)
-ufo.drop([0, 1], axis=0, inplace=True)
-
-# print("檢視前幾行\n", ufo.head())
 
 print("------------------------------------------------------------")  # 60個
 
@@ -4073,17 +4120,20 @@ print(df)
 
 print("去重函數 drop_duplicates, 依據欄位 Country")
 print("欄位 Country 有一樣的, 即刪除")
+print(".drop_duplicates 去除重複資料")
 df1 = df.drop_duplicates("Country")
 print("df1")
 print(df1)
 
 print("去重函數 drop_duplicates, 依據欄位 Country, keep=last")
 print("欄位 Country 有一樣的, 保留後者")
+print(".drop_duplicates 去除重複資料")
 df2 = df.drop_duplicates("Country", keep="last")
 print(df2)
 
 print("去重函數 drop_duplicates, 依據欄位 Country, keep=False")
 print("欄位 Country 有一樣的, 皆刪除")
+print(".drop_duplicates 去除重複資料")
 df3 = df.drop_duplicates("Country", keep=False)
 print(df3)
 
@@ -4102,9 +4152,10 @@ df = pd.DataFrame(datas, columns=columns)
 print(df)
 
 print("檢查df內是否有重複資料, 整列都重複的")
-print(df.duplicated())
+print(df.duplicated())  # 檢查df內是否有重複資料, 整列都重複的
 
 print("去重函數 drop_duplicates, 整列都重複的, 刪除之")
+print(".drop_duplicates 去除重複資料")
 df1 = df.drop_duplicates()
 print(df1)
 
@@ -4113,16 +4164,19 @@ print(df.duplicated("B"))
 
 print("去重函數 drop_duplicates, 依據欄位 B")
 print("欄位 B 有一樣的, 即刪除")
+print(".drop_duplicates 去除重複資料")
 df1 = df.drop_duplicates("B")
 print(df1)
 
 print("去重函數 drop_duplicates, 依據欄位 B, keep=last")
 print("欄位 B 有一樣的, 保留後者")
+print(".drop_duplicates 去除重複資料")
 df2 = df.drop_duplicates("B", keep="last")
 print(df2)
 
 print("去重函數 drop_duplicates, 依據欄位 B, keep=False")
 print("欄位 B 有一樣的, 皆刪除")
+print(".drop_duplicates 去除重複資料")
 df3 = df.drop_duplicates("B", keep=False)
 print(df3)
 
@@ -4142,8 +4196,7 @@ index = ["唐三藏", "孫悟空", "唐三藏", "豬八戒", "沙悟淨", "豬�
 df = pd.DataFrame(np.array(datas).T, columns=columns, index=index)
 print(df)
 
-print("檢查df內是否有重複資料")
-print(df.duplicated())
+print(df.duplicated())  # 檢查df內是否有重複資料, 整列都重複的
 
 print("去重後的df")
 print(df)
@@ -4783,8 +4836,9 @@ print(data[data["year"] < 2050])
 data["val1"] = data["val1"].apply(lambda x: 1 if x == "+" else x)
 
 print("去重處理")
-
+print(".drop_duplicates 去除重複資料")
 print(data.drop_duplicates(keep="last"))
+print(".drop_duplicates 去除重複資料")
 print(data.drop_duplicates(keep="last", subset="year"))
 
 print("------------------------------------------------------------")  # 60個
@@ -4944,9 +4998,6 @@ Pandas 將 Python 打造成一個強大的資料處理工具，讓資料科學�
 
 print("------------------------------------------------------------")  # 60個
 
-# Pandas 資料基礎操作語法
-
-### 創健一個範例資料集 ###
 data = pd.DataFrame(
     {
         "col1": [1, 2, 3, 4],
@@ -4956,32 +5007,14 @@ data = pd.DataFrame(
     }
 )
 
-# 資料查看
-# 查看該資料集的前五筆資料
 data.head()
-
-# 查看該資料集的前八筆資料
 data.head(8)
-
-# 查看該資料集的後五筆資料
 data.tail()
-
-# 查看該資料集的後八筆資料
 data.tail(8)
-
-# 查看該資料的形狀
 data.shape
-
-# 查看該資料集的描述性統計信息和數據摘要
 data.describe()
-
-# 查看該資料集的結構性摘要信息
 data.info()
-
-# 查看該資料集的dtype屬性
 data.dtypes
-
-# 查看所有欄位中最大的值
 data.max()
 
 """
@@ -4997,7 +5030,7 @@ titanic.groupby("Pclass")["Pclass"].count()
 # 在 data 中，object 類型的欄位，計算每欄出現的唯一值的數量
 data.select_dtypes(["object"]).nunique()
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 # 資料選擇
 # 選擇第一列資料
@@ -5037,7 +5070,7 @@ data.set_index('name', inplace=True)
 data['Jerry':'Bob']
 
 """
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 # 資料過濾
 # 選擇 col1 大於 10 的資料
@@ -5056,8 +5089,7 @@ data[mask]
 # 以鐵達尼號資料為例，選擇 age 欄位中沒有缺失值的所有資料
 # age_no_na = titanic[titanic["Age"].notna()]
 
-
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 # 資料排序
 # 按照 col1 排序，預設為升序排序（從小到大）
@@ -5078,12 +5110,12 @@ data.sort_index()
 # 先按照 Pclass 來排序，在按照 Age 來排序，並指定以降序排序（從大到小）
 # titanic.sort_values(by=['Pclass', 'Age'], ascending=False)
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
-# 資料去重
-# 去除重複資料
+print(".drop_duplicates 去除重複資料")
 data.drop_duplicates()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 資料計算
@@ -5153,35 +5185,6 @@ titanic.groupby("Sex")["Age"].mean()
 
 # 對鐵達尼號資料，以 Sex 和 Pclass 為分組，做 Fare 的平均，回傳 series
 titanic.groupby(["Sex", "Pclass"])["Fare"].mean()
-"""
-print("------------------------------------------------------------")  # 60個
-
-"""
-#增加、刪除資料欄位
-# 創建?一個新欄位，資料為 col1 欄位的數值*2 
-data["新增欄位名"] = data["col1"] * 2
-
-# 創建?一個新欄位，計算 col1 與 col2 的比率
-data["投資報酬率"] =  (data["投資淨損益"] /  data["投入資金"])
-
-# 使用 loc 新增一行 
-dfta.loc[2] = ['第一欄位內容', '第二欄位內容']
-
-# 新增一列並且想保持原有 DataFrame 不變，使用 assign 新增一列 
-data = pd.DataFrame({ 'Name': ['Alice', 'Bob'], 'Age': [25, 30] })
-data_new = data.assign(City=['New York', 'Los Angeles'])
-
-# 刪除特定欄位 'Column_Name' 
-data = data.drop(columns=['Column_Name'])
-
-# 刪除特定行（根據索引） 
-data = data.drop(index=[0]) # 刪除第0行
-
-# 如果要一次刪除多行 
-data = data.drop(index=[0, 1]) # 刪除第0和第1行
-
-# 刪除特定欄位 'Column_Name'，直接在原 DataFrame 上修改
-data.drop(columns=['Column_Name'], inplace=True)
 """
 print("------------------------------------------------------------")  # 60個
 
@@ -6483,7 +6486,6 @@ extract, transform and load,
 
 import re
 
-
 # 合併數據集
 # 數據庫風格的DataFrame合併
 
@@ -6887,18 +6889,15 @@ data = pd.DataFrame(
 )
 data
 
-# DataFrame 的 duplicated()方法傳回一個 boolean型態的 Series，表示各row是否重複
-data.duplicated()
+print(data.duplicated())  # 檢查df內是否有重複資料, 整列都重複的
 
-
-# drop_duplicates()方法 傳回刪除重複項目之後的結果
+print(".drop_duplicates 去除重複資料")
 data.drop_duplicates()
 
 data["k3"] = range(7)
 data
 
-# drop_duplicates()預設會對所有的columns來判斷是否有重複的 rows
-data.duplicated()
+print(data.duplicated())  # 檢查df內是否有重複資料, 整列都重複的
 
 # 也可以針對指定的columns來判斷是否有重複的 rows
 data.duplicated(["k1"])
@@ -7621,20 +7620,22 @@ filename = "data/duplicated_data.csv"
 df = pd.read_csv(filename)
 print(df)
 
-print(df.duplicated())
-print()
+print(df.duplicated())  # 檢查df內是否有重複資料, 整列都重複的
 
 print(df.duplicated("B"))
 print()
 
+print(".drop_duplicates 去除重複資料")
 df1 = df.drop_duplicates()
 print(df1)
 print()
 
+print(".drop_duplicates 去除重複資料")
 df2 = df.drop_duplicates("B")
 print(df2)
 print()
 
+print(".drop_duplicates 去除重複資料")
 df3 = df.drop_duplicates("B", keep=False)
 print(df3)
 print()
@@ -8389,7 +8390,6 @@ data = data.drop(["欄位名稱1", "欄位名稱2"], axis=1)
 # 使用 inplace=True 直接修改原始 DataFrame
 data.drop("欄位名稱", axis=1, inplace=True)
 
-
 # remove the 'City' column (doesn't affect the DataFrame since inplace=False)
 print("檢視前幾行")
 cc = ufo.drop("City", axis=1).head()
@@ -8409,7 +8409,6 @@ print("檢視前幾行")
 cc = ufo.head()
 print(cc)
 
-
 # 對於 DataFrame，可以刪除任意軸上的索引值
 data.drop(["Colorado", "Ohio"])
 
@@ -8425,8 +8424,8 @@ df.drop(labels=["SO2", "CO"], axis="columns")  # 刪除SO2和CO這兩個欄位
 # axis=0和asxis='row'一樣
 # axis=1和axis='columns'一樣
 
+print(".drop_duplicates 去除重複資料")
 df = df.drop_duplicates()  # 刪除重複的資料
-
 
 # 取出 DataFrame 當中的元素 –df.loc[]
 
@@ -8447,3 +8446,6 @@ print("交集合併")
 order_df = pd.merge(order_df, customer_df, left_on="數學", right_on="國文", how="inner")
 
 order_df = pd.merge(order_df, customer_df, left_on="數學", right_index=True, how="inner")
+
+
+

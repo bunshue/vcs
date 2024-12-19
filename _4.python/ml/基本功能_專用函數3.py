@@ -920,9 +920,18 @@ plt.title("Bivariate Normal/Gaussian distribution")
 fig.colorbar(surf, shrink=0.5, aspect=7, cmap=plt.cm.coolwarm)
 show()
 
-
 print("------------------------------------------------------------")  # 60個
 
+# 歐幾里得距離(Euclidean distance)
+
+print("自己計算歐氏距離")
+
+print("計算兩個向量間的歐氏距離")
+# Compute Euclidean distance between 2 vectors
+vec1 = np.random.randn(10)
+vec2 = np.random.randn(10)
+dist = np.sqrt(np.sum((vec1 - vec2) ** 2))
+print(dist)
 
 print("------------------------------------------------------------")  # 60個
 

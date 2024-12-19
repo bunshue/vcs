@@ -42,7 +42,8 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
-import tempfile, os.path
+import tempfile
+import os.path
 
 tmpdir = tempfile.gettempdir()
 print(tmpdir)
@@ -493,11 +494,6 @@ np.isnan(nums)  # checks for NaN
 nums + np.arange(5)  # add element-wise
 np.maximum(nums, np.array([1, -2, 3, -4, 5]))  # compare element-wise
 
-# Compute Euclidean distance between 2 vectors
-vec1 = np.random.randn(10)
-vec2 = np.random.randn(10)
-dist = np.sqrt(np.sum((vec1 - vec2) ** 2))
-
 # math and stats
 rnd = np.random.randn(4, 2)  # random normals in 4x2 array
 rnd.mean()
@@ -513,7 +509,6 @@ rnd.sum(axis=1)  # sum of rows
 (rnd > 0).all()  # checks if all values are True
 
 # random numbers
-np.random.seed(12234)  # Set the seed
 np.random.rand(2, 3)  # 2 x 3 matrix in [0, 1]
 np.random.randn(10)  # random normals (mean 0, sd 1)
 np.random.randint(0, 2, 10)  # 10 randomly picked 0 or 1

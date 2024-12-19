@@ -34,6 +34,7 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
+# getrgb 返回色彩元組
 print(ImageColor.getrgb("#0000ff"))  # (0, 0, 255)
 print(ImageColor.getrgb("rgb(0,0,255)"))  # (0, 0, 255)
 print(ImageColor.getrgb("rgb(0%,0%,100%)"))  # (0, 0, 255)

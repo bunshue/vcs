@@ -1141,9 +1141,8 @@ print("------------------------------------------------------------")  # 60個
 
 # 自行開發K-Means
 
+
 # 歐幾里得距離函數
-
-
 def euclidean(point, data):
     return np.sqrt(np.sum((point - data) ** 2, axis=1))
 

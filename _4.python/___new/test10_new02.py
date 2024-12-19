@@ -11,7 +11,7 @@ import numpy as np
 import pandas as pd
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 #chap8-01
 #Cars基礎類別
 class Cars():
@@ -2539,7 +2539,7 @@ os.chdir('trainer')
 root_dir = os.path.abspath('.')
 filename = os.path.join(root_dir, 'tone.wav')
 print(filename)
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 print("建立20組資料")
@@ -2816,6 +2816,17 @@ with open("README.md", "w", encoding="utf-8") as readme:
 
 print("------------------------------------------------------------")  # 60個
 
+print('列出所有區域變數的名稱與內容')
+cc = locals()
+print(cc)
+
+print('列出所有全域變數的名稱與內容')
+cc = globals()
+print(cc)
+
+import sys
+#目前 python程式 路徑
+print(sys.executable)
 
 print("------------------------------------------------------------")  # 60個
 
