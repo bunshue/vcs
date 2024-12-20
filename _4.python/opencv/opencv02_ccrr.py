@@ -466,44 +466,12 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-# 圖片切分範例
-filename = "data/OlivettiFaces.jpg"
-# filename = "C:/_git/vcs/_1.data/______test_files1/__pic/_anime/doraemon2.jpg"
-image = cv2.imread(filename)
-
-# 轉為灰度圖像
-
-image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 彩色轉灰階
-
-w, h = 47, 57
-# 將人臉圖片提取為 (label:list) 形式
-olivetti_faces = []
-for row in range(20):
-    for column in range(20):
-        # print("("+str(row) + ", " + str(column)+") ", end="")
-        img = image[row * h : (row + 1) * h, column * w : (column + 1) * w]
-        olivetti_faces.append(img)
-    # print()
-
-plt.figure(figsize=(12, 8))
-
-for i in range(20):
-    plt.subplot(4, 5, i + 1)
-    plt.imshow(olivetti_faces[i], cmap=plt.cm.gray)
-    plt.axis("off")
-
-plt.suptitle("原圖")
-plt.show()
-
-print("存圖")
-for row in range(20):
-    for column in range(10):
-        img = image[row * h : (row + 1) * h, column * w : (column + 1) * w]
-        filename = "tmp_" + str(row) + "_" + str(column) + ".jpg"
-        # cv2.imwrite(img=img, filename=filename)
-        # print('存檔檔名 :', filename)
 
 print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
 
 
 print("------------------------------------------------------------")  # 60個

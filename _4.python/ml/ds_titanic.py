@@ -51,7 +51,7 @@ print("------------------------------------------------------------")  # 60個
 print("邏輯迴歸")
 
 df = sns.load_dataset("titanic")
-#df = df[: 100]  # 只看前幾筆資料
+# df = df[: 100]  # 只看前幾筆資料
 
 print(df)
 print(df.shape)
@@ -109,7 +109,7 @@ print("依欄位統計有幾筆空資料")
 print(cc)
 
 # 離群值(Outlier) 處理
-print('所有 age 資料')
+print("所有 age 資料")
 print(df.age)
 
 

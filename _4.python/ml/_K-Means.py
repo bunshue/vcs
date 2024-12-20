@@ -1091,6 +1091,141 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+# kmeans_from_scratch
+
+# 自行開發K-Means
+
+
+# 歐幾里得距離函數
+def euclidean(point, data):
+    return np.sqrt(np.sum((point - data) ** 2, axis=1))
+
+
+# K-Means演算法類別
+
+
+class KMeans:
+    def __init__(self, n_clusters=8, max_iter=300):
+        self.n_clusters = n_clusters  # 組數
+        self.max_iter = max_iter  # EM 最大次數
+
+    # 訓練
+    def fit(self, X_train):
+        # 生成1個質心
+        self.centroids = [random.choice(X_train)]
+        # 生成其他 n-1 個質心
+        for _ in range(self.n_clusters - 1):
+            # Calculate distances from points to the centroids
+            dists = np.sum(
+                [euclidean(centroid, X_train) for centroid in self.centroids], axis=0
+            )
+            # 正規化
+            dists /= np.sum(dists)
+            # 依據距離作為機率，隨機產生質心
+            new_centroid_idx = np.random.choice(range(len(X_train)), size=1, p=dists)[0]
+            self.centroids += [X_train[new_centroid_idx]]
+
+        iteration = 0
+        prev_centroids = [np.zeros(X_train.shape[1])] * self.n_clusters
+        while (
+            np.not_equal(self.centroids, prev_centroids).any()
+            and iteration < self.max_iter
+        ):
+            # 找到最近的質心
+            sorted_points = [[] for _ in range(self.n_clusters)]
+            for x in X_train:
+                dists = euclidean(x, self.centroids)
+                centroid_idx = np.argmin(dists)
+                sorted_points[centroid_idx].append(x)
+
+            # 尋找新質心
+            prev_centroids = self.centroids
+            self.centroids = [np.mean(cluster, axis=0) for cluster in sorted_points]
+            for i, centroid in enumerate(self.centroids):
+                # 如果組內沒有任何樣本點，沿用上次的質心
+                if np.isnan(centroid).any():
+                    self.centroids[i] = prev_centroids[i]
+            iteration += 1
+        # print(iteration)
+
+    def evaluate(self, X):
+        centroids = []
+        centroid_idxs = []
+        for x in X:
+            dists = euclidean(x, self.centroids)
+            centroid_idx = np.argmin(dists)
+            centroids.append(self.centroids[centroid_idx])
+            centroid_idxs.append(centroid_idx)
+
+        return centroids, centroid_idxs
+
+
+from sklearn.datasets import make_blobs  # 集群資料集
+
+X_train, true_labels = make_blobs(n_samples=100, centers=5, random_state=42)
+plt.scatter(X_train[:, 0], X_train[:, 1])
+show()
+
+# 標準化
+X_train = preprocessing.StandardScaler().fit_transform(X_train)
+
+CLUSTERS = 5  # 要分成的群數
+clf = KMeans(n_clusters=CLUSTERS)  # K-平均演算法
+
+clf.fit(X_train)  # 學習訓練.fit
+
+class_centers, classification = clf.evaluate(X_train)
+
+sns.scatterplot(
+    x=[X[0] for X in X_train],
+    y=[X[1] for X in X_train],
+    hue=true_labels,
+    style=classification,
+    palette="deep",
+    legend=None,
+)
+plt.plot(
+    [x for x, _ in clf.centroids],
+    [y for _, y in clf.centroids],
+    "*",
+    markersize=20,
+    color="r",
+)
+plt.title("k-means")
+show()
+
+X, y = datasets.load_iris(return_X_y=True)
+
+# 標準化
+X_train = preprocessing.StandardScaler().fit_transform(X)
+
+# 訓練
+CLUSTERS = 3  # 要分成的群數
+clf = KMeans(n_clusters=CLUSTERS)  # K-平均演算法
+
+clf.fit(X_train)  # 學習訓練.fit
+# 7
+
+_, y_pred = clf.evaluate(X_train)
+
+print(accuracy_score(y, y_pred))
+# 0.22
+
+# 驗證
+
+# 實際值
+cc = ",".join([str(i) for i in y])
+print(cc)
+
+# 預測值
+cc = ",".join([str(i) for i in y_pred])
+print(cc)
+
+p = pd.Series(y_pred)
+print(p[p == 1].index)
+
+p = pd.Series(y)
+print(p[p == 0].index)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

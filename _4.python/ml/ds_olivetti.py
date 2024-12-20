@@ -1,23 +1,19 @@
 """
-
 Olivetti 資料集
 
 Olivetti Faces 人臉圖片數據集
 
 40人 每人10張
-
-
-from sklearn.datasets import fetch_olivetti_faces
+400張圖 每張 64X64
 
 #指定下載位置
 download_directory='download_directory/'
 
-olivetti_faces = fetch_olivetti_faces(data_home=download_directory,shuffle=True, random_state=rng)
-olivetti_faces = fetch_olivetti_faces(data_home=download_directory)
+olivetti_faces = datasets.fetch_olivetti_faces(data_home=download_directory,shuffle=True, random_state=rng)
+olivetti_faces = datasets.fetch_olivetti_faces(data_home=download_directory)
 
 # 未指定下載位置, 下載至 C:/Users/070601/scikit_learn_data/olivetti_py3.pkz
-olivetti_faces = fetch_olivetti_faces()
-
+olivetti_faces = datasets.fetch_olivetti_faces()
 """
 
 print("------------------------------------------------------------")  # 60個
@@ -43,6 +39,7 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
+import matplotlib.image as mpimg
 from common1 import *
 from sklearn import datasets
 from sklearn import preprocessing
@@ -51,14 +48,14 @@ from sklearn.svm import SVC
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import ConfusionMatrixDisplay
+from sklearn.metrics import classification_report
 
 from numpy.random import RandomState
-import matplotlib.image as mpimg
 from sklearn import decomposition
 
 
 def show():
-    # plt.show()
+    plt.show()
     pass
 
 
@@ -70,53 +67,122 @@ image_shape = (64, 64)
 rng = RandomState(0)
 
 print("------------------------------------------------------------")  # 60個
+'''
+import cv2
+
+# 圖片切分範例
+filename = "data/OlivettiFaces.jpg"
+image = cv2.imread(filename)
+
+# 轉為灰度圖像
+image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 彩色轉灰階
+
+w, h = 47, 57
+# 將人臉圖片提取為 (label:list) 形式
+olivetti_faces = []
+
+#左排
+for row in range(20):
+    for column in range(10):
+        #print("("+str(row) + ", " + str(column)+") ", end="")
+        img = image[row * h : (row + 1) * h, column * w : (column + 1) * w]
+        olivetti_faces.append(img)
+        """ many
+        #存圖
+        filename = "tmp_{:>02}".format(str(row+1)) + "_{:>02}".format(str(column+1))+".jpg"
+        cv2.imwrite(img=img, filename=filename)
+        #print('存檔檔名 :', filename)
+        """
+
+
+#右排
+for row in range(20):
+    for column in range(10):
+        column += 10
+        #print("("+str(row) + ", " + str(column)+") ", end="")
+        img = image[row * h : (row + 1) * h, column * w : (column + 1) * w]
+        olivetti_faces.append(img)
+        """ many
+        #存圖
+        filename = "tmp_{:>02}".format(str(row+21)) + "_{:>02}".format(str(column+1-10))+".jpg"
+        cv2.imwrite(img=img, filename=filename)
+        #print('存檔檔名 :', filename)
+        """
+
+print("共有 :", len(olivetti_faces), "張圖")
+
+plt.figure(figsize=(12, 8))
+for i in range(80):
+    plt.subplot(8, 10, i + 1)
+    plt.imshow(olivetti_faces[(i//2)*10+1], cmap=plt.cm.gray)
+    plt.axis("off")
+
+plt.suptitle("原圖 80張, 一人兩張")
+show()
+
+"""
+print("存圖 全部 40人 每人10張, 共400張")
+for row in range(20):  # 40人 每列2人 共20列
+    for column in range(20):  # 每人10張 1列20張
+        img = image[row * h : (row + 1) * h, column * w : (column + 1) * w]
+        filename = "tmp_{:>02}".format(str(row+1)) + "_{:>02}".format(str(column+1))+".jpg"
+        cv2.imwrite(img=img, filename=filename)
+        #print('存檔檔名 :', filename)
+"""
+print("------------------------------------------------------------")  # 60個
 
 print("Olivetti 資料集 基本數據 fetch_olivetti_faces()")
 
 olivetti_faces = datasets.fetch_olivetti_faces()
 
-print("olivetti_faces 資料型態")
-print(olivetti_faces.data.shape)
+X = olivetti_faces.data
+y = olivetti_faces.target
+
+print("X.shape :")
+print(X.shape)
 # (400, 4096)
 
-# 標籤 olivetti_faces.target
-print(olivetti_faces.target.shape)
+# 標籤 y
+print("y.shape :")
+print(y.shape)
 # (400,)
 
 # 圖像 olivetti_faces.images
+print("olivetti_faces.images.shape :")
 print(olivetti_faces.images.shape)
 # (400, 64, 64)
 
 print("------------------------------")  # 30個
 
 plt.figure(figsize=(12, 8))
-
-for i in range(20):
-    plt.subplot(4, 5, i + 1)
-    plt.imshow(olivetti_faces.data[i * 10].reshape(64, 64), cmap=plt.cm.gray)
+for i in range(80):
+    plt.subplot(8, 10, i + 1)
+    plt.imshow(X[(i//2)*10+1].reshape(64, 64), cmap=plt.cm.gray)
     plt.axis("off")
 
-plt.suptitle("原圖")
+plt.suptitle("原圖 80張, 一人兩張")
 show()
 
 print("------------------------------")  # 30個
 
 # 主成分分析 (Principal Component Analysis, PCA), 降低數據維度
 pca = decomposition.PCA()
-pca.fit(olivetti_faces.data)
 
+pca.fit(X)
+
+print("pca.components_.shape :")
 print(pca.components_.shape)
 
 print("------------------------------")  # 30個
 
 plt.figure(figsize=(12, 8))
 
-for i in range(20):
-    plt.subplot(4, 5, i + 1)
+for i in range(60):
+    plt.subplot(6, 10, i + 1)
     plt.imshow(pca.components_[i].reshape(64, 64), cmap=plt.cm.gray)
     plt.axis("off")
 
-plt.suptitle("PCA")
+plt.suptitle("PCA 前60張")
 show()
 
 print("------------------------------")  # 30個
@@ -124,25 +190,32 @@ print("------------------------------")  # 30個
 # pip install scikit-image
 from skimage.io import imsave
 
-face = olivetti_faces.data[0]
+index = 70 # 第幾張圖
+face = X[index]
 
-# 看一下 Olivetti 臉的樣子
-print("face.shape = ", face.shape)
-fig = plt.figure(figsize=(12, 8))
-# plt.imshow(face.reshape(64, 64))
+# 看一下 Olivetti 臉的樣子, 就是  64 X 64
+print("face.shape :")
+print(face.shape)
+
+fig = plt.figure(figsize=(6, 4))
 plt.imshow(face.reshape(64, 64), cmap=plt.cm.gray)
+plt.title("第"+ str(index)+ "張圖")
 show()
 
 trans = pca.transform(face.reshape(1, -1))
+print("trans.shape :")
 print(trans.shape)
+
 for k in range(400):
+    # 每張圖的某種計算
     rank_k_approx = trans[:, :k].dot(pca.components_[:k]) + pca.mean_
+    img = rank_k_approx.reshape(64, 64)
+    img = img.astype(np.uint8)
     """
-    if k % 10 == 0:
-        print("{:>03}".format(str(k)) + ".jpg", end="\t")
-        # 存圖fail
-        # imsave('{:>03}'.format(str(k)) + '.jpg', rank_k_approx.reshape(64, 64))
-        # imsave('cccc.jpg', rank_k_approx.reshape(64, 64))
+    # 存圖
+    filename = "{:>03}".format(str(k)) + ".jpg"
+    imsave(filename, img)
+    #print('存檔檔名 :', filename)
     """
 
 print("------------------------------------------------------------")  # 60個
@@ -150,15 +223,23 @@ print("------------------------------------------------------------")  # 60個
 
 olivetti_faces = datasets.fetch_olivetti_faces()
 
-X = olivetti_faces.data
-y = olivetti_faces.target
+X = olivetti_faces.data # 64X64之影像檔, 共400個
+y = olivetti_faces.target # 第幾人 0~39 號, 共400個
 
-targets = np.unique(olivetti_faces.target)
+#print("原目標 :", y)
+targets = np.unique(y)
+print("單一化目標 :", targets)
+
 target_names = np.array(["c%d" % t for t in targets])
+print("target_names :", target_names)
+
 n_targets = target_names.shape[0]
 n_samples, h, w = olivetti_faces.images.shape
-print("Sample count: {}\nTarget count: {}".format(n_samples, n_targets))
-print("Image size: {}x{}\nDataset shape: {}\n".format(w, h, X.shape))
+
+print("Sample count: {}".format(n_samples))
+print("Target count: {}".format(n_targets))
+print("Image size: {}x{}".format(w, h))
+print("Dataset shape: {}\n".format(X.shape))
 
 print("------------------------------")  # 30個
 
@@ -167,16 +248,6 @@ def plot_gallery(images, titles, h, w, n_row=2, n_col=5):
     print("R = ", n_row, ", C = ", n_col)
     plt.figure(figsize=(12, 8))
     # plt.subplots_adjust(bottom=0, left=0.01, right=0.99, top=0.90, hspace=0.01)
-    for i in range(n_row * n_col):
-        plt.subplot(n_row, n_col, i + 1)
-        plt.imshow(images[i].reshape((h, w)), cmap=plt.cm.gray)
-        plt.title(titles[i])
-        plt.axis("off")
-
-
-def plot_gallery2(images, titles, h, w, n_row=2, n_col=5):
-    plt.figure(figsize=(12, 8))
-    plt.subplots_adjust(bottom=0, left=0.01, right=0.99, top=0.90, hspace=0.01)
     for i in range(n_row * n_col):
         plt.subplot(n_row, n_col, i + 1)
         plt.imshow(images[i].reshape((h, w)), cmap=plt.cm.gray)
@@ -205,18 +276,18 @@ show()
 
 print("------------------------------")  # 30個
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=4)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 start = time.time()
 print("Fitting train datasets ...")
 clf = SVC(class_weight="balanced")
 clf.fit(X_train, y_train)
-print("Done in {0:.2f}s".format(time.time() - start))
+print("量測時間 Done in {0:.2f}s".format(time.time() - start))
 
 start = time.time()
 print("Predicting test dataset ...")
 y_pred = clf.predict(X_test)
-print("Done in {0:.2f}s".format(time.time() - start))
+print("量測時間 Done in {0:.2f}s".format(time.time() - start))
 
 cm = confusion_matrix(y_test, y_pred, labels=range(n_targets))
 print("confusion matrix:\n")
@@ -225,12 +296,10 @@ np.set_printoptions(threshold=sys.maxsize)
 print(cm)
 
 """ not match
-from sklearn.metrics import classification_report
-
 print(classification_report(y_test, y_pred, target_names=target_names))
 """
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
+
+print("------------------------------")  # 30個
 
 from sklearn.decomposition import PCA
 
@@ -242,7 +311,7 @@ for c in candidate_components:
     pca = PCA(n_components=c)
     X_pca = pca.fit_transform(X)
     explained_ratios.append(np.sum(pca.explained_variance_ratio_))
-print("Done in {0:.2f}s".format(time.time() - start))
+print("量測時間 Done in {0:.2f}s".format(time.time() - start))
 
 print("------------------------------")  # 30個
 
@@ -284,7 +353,7 @@ for c in candidate_components:
     plotting_images = np.concatenate((plotting_images, X_sample_inv), axis=0)
     sample_title_pca = [title_prefix("{}".format(c), t) for t in sample_titles]
     plotting_titles = np.concatenate((plotting_titles, sample_title_pca), axis=0)
-    print("Done in {0:.2f}s".format(time.time() - start))
+    print("量測時間 Done in {0:.2f}s".format(time.time() - start))
 
 print("Plotting sample image with different number of PCA conpoments ...")
 print("plot_gallery 2")
@@ -299,22 +368,20 @@ plot_gallery(
 
 show()
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 n_components = 140
 
 print("Fitting PCA by using training data ...")
 start = time.time()
 pca = PCA(n_components=n_components, svd_solver="randomized", whiten=True).fit(X_train)
-print("Done in {0:.2f}s".format(time.time() - start))
+print("量測時間 Done in {0:.2f}s".format(time.time() - start))
 
 print("Projecting input data for PCA ...")
 start = time.time()
 X_train_pca = pca.transform(X_train)
 X_test_pca = pca.transform(X_test)
-print("Done in {0:.2f}s".format(time.time() - start))
-
+print("量測時間 Done in {0:.2f}s".format(time.time() - start))
 
 from sklearn.model_selection import GridSearchCV
 
@@ -331,15 +398,14 @@ start = time.time()
 print("Predict test dataset ...")
 y_pred = clf.best_estimator_.predict(X_test_pca)
 cm = confusion_matrix(y_test, y_pred, labels=range(n_targets))
-print("Done in {0:.2f}.\n".format(time.time() - start))
+print("量測時間 Done in {0:.2f}.\n".format(time.time() - start))
 print("confusion matrix:")
 np.set_printoptions(threshold=sys.maxsize)
 print(cm)
 
-from sklearn.metrics import classification_report
-
 print(classification_report(y_test, y_pred))
 
+'''
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -353,14 +419,22 @@ from sklearn.neighbors import KNeighborsRegressor
 from sklearn.linear_model import LinearRegression
 from sklearn.linear_model import RidgeCV
 
-data, targets = datasets.fetch_olivetti_faces(return_X_y=True)
+X, y = datasets.fetch_olivetti_faces(return_X_y=True)
+
+# X : 400 張圖 每張4096=64X64點
+# y : 編號 0~39 號
 
 # 資料分割
-train = data[targets < 30]
-test = data[targets >= 30]
+train = X[y < 30]  # 前30張臉為訓練資料, 300張
+test = X[y >= 30]  # 後10張臉為測試資料, 100張
+
+print(train.shape)
+print(test.shape)
 
 # 模型訓練
-n_pixels = data.shape[1]
+n_pixels = X.shape[1]
+print(n_pixels)
+
 # 人臉上半部為 X，人臉下半部為 Y
 X_train = train[:, : (n_pixels + 1) // 2]
 y_train = train[:, n_pixels // 2 :]
@@ -375,6 +449,7 @@ ESTIMATORS = {
 
 # 訓練
 for name, estimator in ESTIMATORS.items():
+    print(name, estimator)
     estimator.fit(X_train, y_train)
 
 # 測試 5 筆資料
@@ -408,7 +483,7 @@ for i in range(n_faces):
     if i > 0:
         sub = plt.subplot(n_faces, n_cols, i * n_cols + 1)
     else:
-        sub = plt.subplot(n_faces, n_cols, i * n_cols + 1, title="true faces")
+        sub = plt.subplot(n_faces, n_cols, i * n_cols + 1, title="真實圖片")
 
     sub.axis("off")
     sub.imshow(
@@ -442,7 +517,7 @@ print("作業完成")
 print("------------------------------------------------------------")  # 60個
 sys.exit()
 
-
 print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個

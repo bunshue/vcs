@@ -28,182 +28,12 @@ print("------------------------------------------------------------")  # 60個
 
 from sklearn import datasets
 
-print("------------------------------------------------------------")  # 60個
-
-# MLPClassifier（多層感知器分類器）
-
-from sklearn.neural_network import MLPClassifier
-
-X = [[0.0, 0.0], [1.0, 1.0]]
-y = [0, 1]
-mlp = MLPClassifier(
-    solver="lbfgs", alpha=1e-5, hidden_layer_sizes=(5, 5), random_state=1
-)
-mlp.fit(X, y)
-
-print(mlp.n_layers_)
-print(mlp.n_iter_)
-print(mlp.loss_)
-print(mlp.out_activation_)
-
-print("------------------------------------------------------------")  # 60個
-
-# MLPClassifier（多層感知器分類器）
-
-from sklearn.neural_network import MLPClassifier
-from sklearn.metrics import accuracy_score
-
-iris = datasets.load_iris()
-data = iris.data
-labels = iris.target
-
-# We add max_iter=1000 becaue the default is max_iter=200 and
-# it is not enough for full convergence
-mlp = MLPClassifier(random_state=1, max_iter=1000)
-mlp.fit(data, labels)
-
-pred = mlp.predict(data)
-
-print()
-print("Accuracy: %.2f" % accuracy_score(labels, pred))
-
-print("------------------------------------------------------------")  # 60個
-
-from sklearn.neural_network import MLPClassifier
-from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
-from sklearn.preprocessing import StandardScaler
-
-iris = datasets.load_iris()
-data = iris.data
-labels = iris.target
-
-data_train, data_test, labels_train, labels_test = train_test_split(
-    data, labels, test_size=0.5, random_state=1
-)
-
-scaler = StandardScaler()
-scaler.fit(data)
-data_train_std = scaler.transform(data_train)
-data_test_std = scaler.transform(data_test)
-
-data_train = data_train_std
-data_test = data_test_std
-
-# We add max_iter=1000 becaue the default is max_iter=200 and
-# it is not enough for full convergence
-mlp = MLPClassifier(random_state=1, max_iter=1000)
-mlp.fit(data, labels)
-mlp.fit(data_train, labels_train)
-pred = mlp.predict(data_test)
-
-print()
-print("Misclassified samples: %d" % (labels_test != pred).sum())
-print("Accuracy: %.2f" % accuracy_score(labels_test, pred))
 
 print("------------------------------------------------------------")  # 60個
-
-from sklearn.neural_network import MLPClassifier
-from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
-from sklearn.preprocessing import StandardScaler
-from sklearn.metrics import accuracy_score
-from matplotlib.colors import ListedColormap
-
-# Apply standardization
-standardised = True
-
-# 0萼長 1萼寬 2瓣長 3瓣寬
-M = {0: "sepal length", 1: "sepal width", 2: "petal length", 3: "petal width"}
-
-# Choose two features
-x = 1  # 1 corresponds to the sepal width 萼寬
-y = 3  # 3 corresponds to the petal width 瓣寬
-
-iris = datasets.load_iris()
-data = iris.data[:, [x, y]]
-
-labels = iris.target
-
-X_train, X_test, y_train, y_test = train_test_split(
-    data, labels, test_size=0.5, random_state=1
-)
-
-reg = StandardScaler()
-reg.fit(data)
-X_train_std = reg.transform(X_train)
-X_test_std = reg.transform(X_test)
-
-if standardised == False:
-    X_train_std = X_train
-    X_test_std = X_test
-
-# We add max_iter=1000 becaue the default is max_iter=200 and
-# it is not enough for full convergence
-mlp = MLPClassifier(random_state=1, max_iter=1000)
-mlp.fit(X_train_std, y_train)
-
-y_pred = mlp.predict(X_test_std)
-print("Misclassified samples: %d" % (y_test != y_pred).sum())
-
-print("Accuracy: %.2f" % accuracy_score(y_test, y_pred))
-
-
-def plot_decision_regions(data, labels, classifier, resolution=0.01):
-    markers = ("s", "*", "^")
-    colors = ("blue", "green", "red")
-    cmap = ListedColormap(colors)
-    # plot the decision surface
-    x_min, x_max = data[:, 0].min() - 1, data[:, 0].max() + 1
-    y_min, y_max = data[:, 1].min() - 1, data[:, 1].max() + 1
-
-    x, y = np.meshgrid(
-        np.arange(x_min, x_max, resolution), np.arange(y_min, y_max, resolution)
-    )
-
-    Z = classifier.predict(np.array([x.ravel(), y.ravel()]).T)
-    Z = Z.reshape(x.shape)
-
-    plt.pcolormesh(x, y, Z, cmap=cmap)
-    plt.xlim(x.min(), x.max())
-    plt.ylim(y.min(), y.max())
-
-    colors = ("yellow", "white", "black")
-    # cmap = ListedColormap(colors)
-    # plot the data
-    classes = ["setosa", "versicolor", "verginica"]
-    for index, cl in enumerate(np.unique(labels)):
-        plt.scatter(
-            data[labels == cl, 0],
-            data[labels == cl, 1],
-            c=cmap(index),
-            marker=markers[index],
-            edgecolor="black",
-            alpha=1.0,
-            s=50,
-            label=classes[index],
-        )
-
-
-X_combined_std = np.vstack((X_train_std, X_test_std))
-y_combined = np.hstack((y_train, y_test))
-plot_decision_regions(X_combined_std, y_combined, classifier=mlp)
-
-if standardised == False:
-    xString = M[x] + " [not standardized]"
-    yString = M[y] + " [not standardized]"
-else:
-    xString = M[x] + " [standardized]"
-    yString = M[y] + " [standardized]"
-
-plt.xlabel(xString)
-plt.ylabel(yString)
-plt.legend(loc="upper left")
-plt.show()
-
 print("------------------------------------------------------------")  # 60個
 
 from matplotlib.colors import ListedColormap
-import matplotlib.pyplot as plt
 
 
 def tanh(x):
@@ -720,7 +550,7 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python深度學習\Chapter 07\connect_4.py
+# connect_4.py
 
 """
 Full code for running a game of connect 4 on a board_width, board_height and winning length can be specified in relevant
@@ -732,8 +562,6 @@ The board is represented by a board_width x board_height tuple of ints. A 0 mean
 means player one has played there, -1 means the seconds player has played there. The apply_move method can be used to
 return a copy of a given state with a given move applied. This can be useful for doing min-max or monte carlo sampling.
 """
-
-import random
 
 
 def _new_board(board_width, board_height):
@@ -947,10 +775,9 @@ if __name__ == "__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python深度學習\Chapter 07\min_max.py
+# min_max.py
 
 from tic_tac_toe import available_moves, apply_move, has_winner
-import sys
 
 
 def _score_line(line):
@@ -1092,11 +919,9 @@ def min_max_player(board_state, side):
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python深度學習\Chapter 07\monte_carlo.py
+# monte_carlo.py
 
 import collections
-import random
-import math
 from tic_tac_toe import has_winner, available_moves, apply_move
 
 
@@ -1243,12 +1068,10 @@ if __name__ == "__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python深度學習\Chapter 07\policy_gradient.py
+# policy_gradient.py
 
 import collections
-import numpy as np
 import tensorflow as tf
-
 from tic_tac_toe import play_game, random_player
 
 HIDDEN_NODES = (100, 100, 100)  # number of hidden layer neurons
@@ -1377,7 +1200,7 @@ while True:
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python深度學習\Chapter 07\tic_tac_toe.py
+# tic_tac_toe.py
 
 """
 Full code for running a game of tic-tac-toe on a 3 by 3 board.
@@ -1390,7 +1213,7 @@ The board is represented by a 3 x 3 tuple of ints. A 0 means no player has playe
 played there, -1 means the seconds player has played there. The apply_move method can be used to return a copy of a
 given state with a given move applied. This can be useful for doing min-max or monte carlo sampling.
 """
-import random
+
 import itertools
 
 
@@ -1543,7 +1366,7 @@ if __name__ == "__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python深度學習\Chapter 07\tic_tac_toe_x.py
+# tic_tac_toe_x.py
 
 """
 Full code for running a game of tic-tac-toe on a board of any size with a specified number in a row for the win. This is
@@ -1560,7 +1383,7 @@ The board is represented by a board_size x board_size tuple of ints. A 0 means n
 player one has played there, -1 means the seconds player has played there. The apply_move method can be used to return a
 copy of a given state with a given move applied. This can be useful for doing min-max or monte carlo sampling.
 """
-import random
+
 import itertools
 
 
@@ -1760,16 +1583,13 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python深度學習\Chapter 08\actor_critic_advantage_cart_pole.py
+# actor_critic_advantage_cart_pole.py
 
 # note must import tensorflow before gym
-import pickle
 from collections import deque
-
+import pickle
 import tensorflow as tf
 import gym
-import numpy as np
-import matplotlib.pyplot as plt
 
 env = gym.make("CartPole-v0")
 
@@ -1989,15 +1809,13 @@ while True:
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python深度學習\Chapter 08\actor_critic_baseline_cart_pole.py
+# actor_critic_baseline_cart_pole.py
 
 # note must import tensorflow before gym
-import pickle
 from collections import deque
-
+import pickle
 import tensorflow as tf
 import gym
-import numpy as np
 
 env = gym.make("CartPole-v0")
 
@@ -2189,18 +2007,13 @@ while True:
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python深度學習\Chapter 08\deep_q_breakout.py
+# deep_q_breakout.py
 
 # note must import tensorflow before gym
-import pickle
-import random
 from collections import deque
-
+import pickle
 import tensorflow as tf
 import gym
-import numpy as np
-import os
-
 import zlib
 
 resume = True
@@ -2490,15 +2303,12 @@ while True:
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python深度學習\Chapter 08\deep_q_cart_pole.py
+# deep_q_cart_pole.py
 
 # note must import tensorflow before gym
-import random
 from collections import deque
-
 import tensorflow as tf
 import gym
-import numpy as np
 
 env = gym.make("CartPole-v0")
 
@@ -2660,16 +2470,12 @@ while True:
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python深度學習\Chapter 08\deep_q_pong.py
+# deep_q_pong.py
 
 # note must import tensorflow before gym
-import random
 from collections import deque
-
 import tensorflow as tf
 import gym
-import numpy as np
-import os
 
 resume = True
 CHECKPOINT_PATH = "deep_q_pong"
@@ -2980,10 +2786,9 @@ while True:
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python深度學習\Chapter 08\q_learning_1d.py
+# q_learning_1d.py
 
 import tensorflow as tf
-import numpy as np
 
 states = [0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0]
 NUM_STATES = len(states)
@@ -3049,10 +2854,9 @@ for _ in range(50):
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python深度學習\Chapter 08\q_learning_1d_terminal.py
+# q_learning_1d_terminal.py
 
 import tensorflow as tf
-import numpy as np
 
 states = [0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0]
 terminal = [False, False, False, False, True, False, False, False, False, False]

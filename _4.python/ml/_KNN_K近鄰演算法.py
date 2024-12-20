@@ -1408,6 +1408,35 @@ print("Test set accuracy:", test_accuracy)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+# 分類(Classification)
+import pandas as pd
+import numpy as np
+from sklearn import datasets
+
+ds = datasets.load_iris()
+
+X = pd.DataFrame(ds.data, columns=ds.feature_names)
+y = ds.target
+
+# 資料分割
+from sklearn.model_selection import train_test_split
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+X_train.shape, X_test.shape, y_train.shape, y_test.shape
+
+# Define and train the KNN model
+from sklearn.neighbors import KNeighborsClassifier
+
+clf = KNeighborsClassifier()
+clf.fit(X_train, y_train)
+
+# 預測
+y_pred = clf.predict(X_test)
+
+# 幫模型打分數
+from sklearn.metrics import accuracy_score
+
+print(accuracy_score(y_test, y_pred))
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

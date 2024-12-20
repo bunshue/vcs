@@ -32,6 +32,88 @@ def show():
 
 print("------------------------------------------------------------")  # 60個
 
+# 凝聚階層集群(Agglomerative Hierarchical Clustering, AHC)
+
+# 生成資料
+variables = ["X", "Y", "Z"]
+labels = ["ID_0", "ID_1", "ID_2", "ID_3", "ID_4"]
+
+X = np.random.random_sample([5, 3]) * 10
+df = pd.DataFrame(X, columns=variables, index=labels)
+print(df)
+
+# 計算集群彼此間的距離
+
+from scipy.spatial.distance import pdist, squareform
+
+row_dist = pd.DataFrame(
+    squareform(pdist(df, metric="euclidean")), columns=labels, index=labels
+)
+print(row_dist)
+
+# 計算平均連結距離
+
+from scipy.cluster.hierarchy import linkage
+
+row_clusters = linkage(pdist(df, metric="euclidean"), method="average")
+pd.DataFrame(
+    row_clusters,
+    columns=["row label 1", "row label 2", "distance", "no. of items in clust."],
+    index=["cluster %d" % (i + 1) for i in range(row_clusters.shape[0])],
+)
+
+# 繪製樹狀圖(dendrogram)
+from scipy.cluster.hierarchy import dendrogram
+
+row_dendr = dendrogram(row_clusters, labels=labels)
+plt.ylabel("歐幾里德距離")
+show()
+
+# 繪製熱力圖
+
+fig = plt.figure(figsize=(8, 8), facecolor="white")
+axd = fig.add_axes([0.09, 0.1, 0.2, 0.6])  # x-pos, y-pos, width, height
+
+# 樹狀圖顯示在左邊
+row_dendr = dendrogram(row_clusters, orientation="left")
+
+# 降冪排序
+df_rowclust = df.iloc[row_dendr["leaves"][::-1]]
+
+# 不顯示刻度
+axd.set_xticks([])
+axd.set_yticks([])
+
+# 不顯示座標軸
+for i in axd.spines.values():
+    i.set_visible(False)
+
+# 繪製熱力圖
+axm = fig.add_axes([0.23, 0.1, 0.6, 0.6])  # x-pos, y-pos, width, height
+cax = axm.matshow(df_rowclust, interpolation="nearest", cmap="hot_r")
+fig.colorbar(cax)
+axm.set_xticklabels([""] + list(df_rowclust.columns))
+axm.set_yticklabels([""] + list(df_rowclust.index))
+show()
+
+# Scikit-learn AgglomerativeClustering
+from sklearn.cluster import AgglomerativeClustering
+
+# 分 3 類
+ac = AgglomerativeClustering(n_clusters=3, metric="euclidean", linkage="complete")
+labels = ac.fit_predict(X)
+print("Cluster labels: %s" % labels)
+# Cluster labels: [1 0 0 2 1]
+
+# 分 2 類
+ac = AgglomerativeClustering(n_clusters=2, metric="euclidean", linkage="complete")
+labels = ac.fit_predict(X)
+print("Cluster labels: %s" % labels)
+# Cluster labels: [0 1 1 0 0]
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 """
 #【資料分析】python資料處理-類別欄位轉換基礎操作語法彙整
 

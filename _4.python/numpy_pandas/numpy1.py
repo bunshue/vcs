@@ -587,6 +587,16 @@ print("創建數組 Identity")
 cc = np.identity(4)
 print(cc)
 
+print("unique 單一化")
+
+A = np.random.randint(0, 10, 20)
+print("原資料 :", A)
+print(len(A), "個")
+
+B = np.unique(A)
+print("單一化後 :", B)
+print(len(B), "個")
+
 print("unique 返回一個所有唯一元素排序的數組。")
 # np.unique(ar, return_index = Fasle, return_inverse = Fasle, return_counts = Fasle, axis = None)
 # return_index:如果為True，返回數組的索引。
@@ -2956,7 +2966,6 @@ print("a=" + str(a))
 print(np.around(a))
 print(np.around(a, decimals=3))
 print(np.around(a, decimals=-3))
-sys.exit()
 
 a = np.array([-1.7, 1.5, -0.2, 0.6, 10])
 print("a=" + str(a))
