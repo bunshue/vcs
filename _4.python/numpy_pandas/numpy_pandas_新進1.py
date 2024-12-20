@@ -52,7 +52,6 @@ csv_filename = os.path.join(tmpdir, "users.csv")
 
 print(csv_filename)
 
-
 # 讀取網頁上的csv檔
 url = "https://github.com/duchesnay/pystatsml/raw/master/datasets/salary_table.csv"
 salary = pd.read_csv(url)
@@ -117,31 +116,22 @@ pd.read_sql_query('select * from salary where education="Master";', conn)
 ##############################################################################
 # Exercises
 # ---------
-#
 # Data Frame
 # ~~~~~~~~~~
 #
 # 1. Read the iris dataset at 'https://github.com/neurospin/pystatsml/tree/master/datasets/iris.csv'
-#
 # 2. Print column names
-#
 # 3. Get numerical columns
-#
 # 4. For each species compute the mean of numerical columns and store it in  a ``stats`` table like:
-#
 # ::
 #
 #           species  sepal_length  sepal_width  petal_length  petal_width
 #     0      setosa         5.006        3.428         1.462        0.246
 #     1  versicolor         5.936        2.770         4.260        1.326
 #     2   virginica         6.588        2.974         5.552        2.026
-#
-#
 # Missing data
 # ~~~~~~~~~~~~
-#
 # Add some missing data to the previous table ``users``:
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -151,23 +141,15 @@ Exercises: Pandas: data manipulation
 
 Data Frame
 ~~~~~~~~~~
-
 1. Read the iris dataset at 'https://github.com/neurospin/pystatsml/tree/master/datasets/iris.csv'
-
 2. Print column names
-
 3. Get numerical columns
-
 4. For each species compute the mean of numerical columns and store it in  a ``stats`` table like:
-
 ::
-
           species  sepal_length  sepal_width  petal_length  petal_width
     0      setosa         5.006        3.428         1.462        0.246
     1  versicolor         5.936        2.770         4.260        1.326
     2   virginica         6.588        2.974         5.552        2.026
-
-
 """
 
 url = "https://github.com/duchesnay/pystatsml/raw/master/datasets/iris.csv"
@@ -185,10 +167,7 @@ for grp, d in df.groupby("species"):
 stats = pd.DataFrame(stats, columns=["species"] + num_cols.tolist())
 print(stats)
 
-# or
 df.groupby("species").mean()
-
-##
 
 df.loc[[0, 1], "petal_width"] = None
 
@@ -198,36 +177,25 @@ df["petal_width"][df["petal_width"].isnull()] = df["petal_width"][
     df["petal_width"].notnull()
 ].median()
 
-
-#
-
 l = [(1, "a", 1), (2, "b", 2)]
 
 for x, y, z in l:
     print(x, y, z)
 
-
 print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------------------------------------")  # 60個
 
 """
 Numpy: arrays and matrices
 ==========================
-
 NumPy is an extension to the Python programming language, adding support for large, multi-dimensional (numerical) arrays and matrices, along with a large library of high-level mathematical functions to operate on these arrays.
-
 **Sources**:
-
 - Kevin Markham: https://github.com/justmarkham
-
 Computation time:
-
     l = [v for v in range(10 ** 8)]
     s = 0
     %time for v in l: s += v
-
     arr = np.arange(10 ** 8)
     %time arr.sum()
 """
@@ -235,7 +203,6 @@ Computation time:
 ##############################################################################
 # Create arrays
 # -------------
-#
 # Create ndarrays from lists.
 # note: every element must be the same type (will be converted if possible)
 
@@ -244,7 +211,6 @@ arr1 = np.array(data1)  # 1d array
 data2 = [range(1, 5), range(5, 9)]  # list of lists
 arr2 = np.array(data2)  # 2d array
 arr2.tolist()  # convert array back to list
-
 
 ##############################################################################
 # create special arrays
@@ -263,7 +229,6 @@ float_array = int_array.astype(float)
 
 ##############################################################################
 # Examining arrays
-# ----------------
 
 arr1.dtype  # float64
 arr2.ndim  # 2
@@ -273,7 +238,6 @@ len(arr2)  # 2 - size of first dimension (aka axis)
 
 ##############################################################################
 # Reshaping
-# ---------
 
 arr = np.arange(10, dtype=float).reshape((2, 5))
 print(arr.shape)
@@ -285,7 +249,7 @@ print(arr.reshape(5, 2))
 a = np.array([0, 1])
 a_col = a[:, np.newaxis]
 print(a_col)
-# or
+
 a_col = a[:, None]
 
 ##############################################################################
@@ -313,23 +277,15 @@ print(arr)
 ##############################################################################
 # Summary on axis, reshaping/flattening and selection
 # ---------------------------------------------------
-#
 # Numpy internals: By default Numpy use C convention, ie, Row-major language:
 # The matrix is stored by rows. In C, the last index changes most rapidly as one moves through the array as stored in memory.
-#
 # For 2D arrays, sequential move in the memory will:
-#
 # - iterate over rows (axis 0)
 #    - iterate over columns (axis 1)
-#
 # For 3D arrays, sequential move in the memory will:
-#
 # - iterate over plans (axis 0)
 #    - iterate over rows (axis 1)
 #        - iterate over columns (axis 2)
-#
-#
-
 
 x = np.arange(2 * 3 * 4)
 print(x)
@@ -357,9 +313,7 @@ print(x[:, :, 0])
 
 ##############################################################################
 # Simple example with 2 array
-#
 # Exercise:
-#
 # - Get second line
 # - Get third column
 
@@ -374,11 +328,8 @@ arr[:, 2]
 
 print(x.ravel())
 
-
 ##############################################################################
 # Stack arrays
-# ------------
-#
 
 a = np.array([0, 1])
 b = np.array([2, 3])
@@ -400,8 +351,6 @@ np.stack([a, b])
 
 ##############################################################################
 # Selection
-# ---------
-#
 # Single item
 
 arr = np.arange(10, dtype=float).reshape((2, 5))
@@ -412,10 +361,7 @@ arr[0][3]  # alternative syntax
 
 ##############################################################################
 # Slicing
-# ~~~~~~~
-#
 # Syntax: ``start:stop:step`` with ``start`` *(default 0)* ``stop`` *(default last)* ``step`` *(default 1)*
-#
 
 arr[0, :]  # row 0: returns 1d array ([1, 2, 3, 4])
 arr[:, 0]  # column 0: returns 1d array ([1, 5])
@@ -423,7 +369,6 @@ arr[:, :2]  # columns strictly before index 2 (2 first columns)
 arr[:, 2:]  # columns after index 2 included
 arr2 = arr[:, 1:4]  # columns between index 1 (included) and 4 (excluded)
 print(arr2)
-
 
 ##############################################################################
 # Slicing returns a view (not a copy)
@@ -438,13 +383,9 @@ print(arr)
 print(arr[0, ::-1])
 
 # The rule of thumb here can be: in the context of lvalue indexing (i.e. the indices are placed in the left hand side value of an assignment), no view or copy of the array is created (because there is no need to). However, with regular values, the above rules for creating views does apply.
-
 ##############################################################################
 # Fancy indexing: Integer or boolean array indexing
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#
 # Fancy indexing returns a copy not a view.
-#
 # Integer array indexing
 
 arr2 = arr[:, [1, 2, 3]]  # return a copy
@@ -452,7 +393,6 @@ print(arr2)
 arr2[0, 0] = 44
 print(arr2)
 print(arr)
-
 
 ##############################################################################
 # Boolean arrays indexing
@@ -463,7 +403,6 @@ print(arr2)
 arr2[0] = 44
 print(arr2)
 print(arr)
-
 
 ##############################################################################
 # However, In the context of lvalue indexing (left hand side value of an assignment)
@@ -484,7 +423,6 @@ np.unique(names)  # set function
 
 ##############################################################################
 # Vectorized operations
-# ---------------------
 
 nums = np.arange(5)
 nums * 10  # multiply each element by 10
@@ -515,25 +453,16 @@ np.random.randint(0, 2, 10)  # 10 randomly picked 0 or 1
 
 ##############################################################################
 # Broadcasting
-# ------------
-#
 # Sources: https://docs.scipy.org/doc/numpy-1.13.0/user/basics.broadcasting.html
 # Implicit conversion to allow operations on arrays of different sizes.
 # - The smaller array is stretched or “broadcasted” across the larger array so that they have compatible shapes.
 # - Fast vectorized operation in C instead of Python.
 # - No needless copies.
-#
 # Rules
-# ~~~~~
-#
 # Starting with the trailing axis and working backward, Numpy compares arrays dimensions.
-#
 # - If two dimensions are equal then continues
-#
 # - If one of the operand has dimension 1 stretches it to match the largest one
-#
 # - When one of the shapes runs out of dimensions (because it has less dimensions than the other shape), Numpy will use 1 in the comparison process until the other shape's dimensions run out as well.
-#
 
 a = np.array([[0, 0, 0], [10, 10, 10], [20, 20, 20], [30, 30, 30]])
 
@@ -550,7 +479,6 @@ a - a.mean(axis=0)
 # Scale (center, normalise) data column-wise
 
 (a - a.mean(axis=0)) / a.std(axis=0)
-
 
 ##############################################################################
 # Examples
@@ -587,9 +515,7 @@ X = np.random.randn(4, 2)  # random normals in 4x2 array
 
 ##############################################################################
 # - For each column find the row index of the minimum value.
-#
 # - Write a function ``standardize(X)`` that return an array whose columns are centered and scaled (by std-dev).
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -597,14 +523,14 @@ X = np.random.randn(4, 2)
 print(X)
 
 """
-- For each column find the row indices of the minimiun value.
+For each column find the row indices of the minimiun value.
 """
 [np.argmin(X[:, j]) for j in range(X.shape[1])]
 
 np.argmin(X, axis=0)
 
 """
-- Write a function ``scale(X)`` that return an array whose columns are centered and scaled (by std-dev).
+Write a function ``scale(X)`` that return an array whose columns are centered and scaled (by std-dev).
 """
 
 

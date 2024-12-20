@@ -40,7 +40,7 @@ def show():
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
+'''
 print("多指標評分")
 
 from sklearn.metrics import classification_report
@@ -99,7 +99,8 @@ y_score = [0.9, 0.75, 0.86, 0.47, 0.55, 0.56, 0.74, 0.22, 0.5, 0.26]
 print(log_loss(y_real, y_score))
 
 print("ROC曲線和AUC")
-from sklearn.metrics import roc_auc_score, roc_curve
+from sklearn.metrics import roc_auc_score
+from sklearn.metrics import roc_curve
 
 print(roc_auc_score(y_real, y_score))  # AUC值
 
@@ -436,7 +437,8 @@ print()
 
 print("------------------------------------------------------------")  # 60個
 """
-from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.feature_extraction.text import CountVectorizer
 
 text = ["小貝來到北京清華大學",
         "小花來到了網易杭研大廈",
@@ -615,12 +617,9 @@ b = np.random.randn(10)
 np.dot(a, b)
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 import scipy
-import matplotlib.pyplot as plt
-import seaborn as sns
-import pystatsml.plot_utils
-import seaborn as sns  # nice color
+import plot_utils
 
 np.random.seed(42)
 colors = sns.color_palette()
@@ -659,7 +658,7 @@ for i in range(len(mean)):
         linewidth=2,
     )
     # Ellipses representing the covariance matrices
-    pystatsml.plot_utils.plot_cov_ellipse(
+    plot_utils.plot_cov_ellipse(
         Cov[i], pos=mean[i], facecolor="none", linewidth=2, edgecolor=colors[i]
     )
 
@@ -672,9 +671,7 @@ print("------------------------------------------------------------")  # 60個
 
 # Correlation matrix
 
-import matplotlib.pyplot as plt
-import seaborn as sns
-
+# no file
 url = "https://python-graph-gallery.com/wp-content/uploads/mtcars.csv"
 df = pd.read_csv(url)
 
@@ -781,11 +778,8 @@ print(np.dot(ones, Prec))
 
 print("------------------------------------------------------------")  # 60個
 
-import numpy as np
 import scipy
-import matplotlib.pyplot as plt
-import seaborn as sns
-import pystatsml.plot_utils
+import plot_utils
 
 np.random.seed(40)
 colors = sns.color_palette()
@@ -802,7 +796,7 @@ plt.scatter(x1[0], x1[1], color=colors[1], s=200, label="x1")
 plt.scatter(x2[0], x2[1], color=colors[2], s=200, label="x2")
 
 # plot covariance ellipsis
-pystatsml.plot_utils.plot_cov_ellipse(
+plot_utils.plot_cov_ellipse(
     Cov, pos=mean, facecolor="none", linewidth=2, edgecolor=colors[0]
 )
 # Compute distances
@@ -863,8 +857,6 @@ print("------------------------------------------------------------")  # 60個
 
 # Multivariate normal distribution
 
-import numpy as np
-import matplotlib.pyplot as plt
 import scipy.stats
 from scipy.stats import multivariate_normal
 from mpl_toolkits.mplot3d import Axes3D

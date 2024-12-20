@@ -57,7 +57,8 @@ from sklearn.metrics import ConfusionMatrixDisplay
 
 
 def show():
-    # plt.show()
+    # return
+    plt.show()
     pass
 
 
@@ -103,6 +104,10 @@ def load_boston():
     y = target["MEDV"]
     return boston, y
 
+
+print("------------------------------------------------------------")  # 60個
+
+print("波士頓房價數據庫 基本數據")
 
 X, y = load_boston()
 

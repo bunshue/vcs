@@ -1,7 +1,7 @@
-'''
+"""
 Resampling methods
 ==================
-'''
+"""
 
 import numpy as np
 import pandas as pd
@@ -14,8 +14,10 @@ from sklearn.model_selection import train_test_split, KFold, PredefinedSplit
 from sklearn.model_selection import cross_val_score, GridSearchCV
 
 import sklearn.metrics as metrics
-X, y = datasets.make_regression(n_samples=100, n_features=100,
-                                n_informative=10, random_state=42)
+
+X, y = datasets.make_regression(
+    n_samples=100, n_features=100, n_informative=10, random_state=42
+)
 
 # %%
 # Train, validation and test sets
@@ -67,8 +69,9 @@ X, y = datasets.make_regression(n_samples=100, n_features=100,
 # -----------------------------------------------------
 #
 
-X_train, X_test, y_train, y_test =\
-    train_test_split(X, y, test_size=0.25, shuffle=True, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.25, shuffle=True, random_state=42
+)
 
 mod = lm.Ridge(alpha=10)
 
@@ -99,17 +102,18 @@ print("Test R2: %.2f" % metrics.r2_score(y_test, y_pred_test))
 # **Model evaluation:** on the test set:
 # :math:`L(f_{\alpha_*, \mathbf{\Omega}_*}(\mathbf{X}_{test}), \mathbf{y}_{test})`
 
-train_idx, validation_idx = train_test_split(np.arange(X_train.shape[0]),
-                                             test_size=0.25, shuffle=True,
-                                             random_state=42)
+train_idx, validation_idx = train_test_split(
+    np.arange(X_train.shape[0]), test_size=0.25, shuffle=True, random_state=42
+)
 
 split_inner = PredefinedSplit(test_fold=validation_idx)
 print("Train set size: %i" % X_train[train_idx].shape[0])
 print("Validation set size: %i" % X_train[validation_idx].shape[0])
 print("Test set size: %i" % X_test.shape[0])
 
-lm_cv = GridSearchCV(lm.Ridge(), {'alpha': 10. ** np.arange(-3, 3)},
-                     cv=split_inner, n_jobs=5)
+lm_cv = GridSearchCV(
+    lm.Ridge(), {"alpha": 10.0 ** np.arange(-3, 3)}, cv=split_inner, n_jobs=5
+)
 
 # Fit, indluding model selection with internal Train/validation split
 lm_cv.fit(X_train, y_train)
@@ -221,11 +225,14 @@ print("Test  r2:%.2f" % scores.mean())
 
 from sklearn.model_selection import cross_validate
 
-scores = cross_validate(estimator=mod, X=X, y=y, cv=cv,
-                        scoring=['r2', 'neg_mean_absolute_error'])
+scores = cross_validate(
+    estimator=mod, X=X, y=y, cv=cv, scoring=["r2", "neg_mean_absolute_error"]
+)
 
-print("Test R2:%.2f; MAE:%.2f" % (scores['test_r2'].mean(),
-                                  -scores['test_neg_mean_absolute_error'].mean()))
+print(
+    "Test R2:%.2f; MAE:%.2f"
+    % (scores["test_r2"].mean(), -scores["test_neg_mean_absolute_error"].mean())
+)
 
 
 # %%
@@ -244,10 +251,11 @@ print("Test R2:%.2f; MAE:%.2f" % (scores['test_r2'].mean(),
 
 from sklearn.model_selection import StratifiedKFold
 
-X, y = datasets.make_classification(n_samples=100, n_features=100, shuffle=True,
-                                    n_informative=10, random_state=42)
+X, y = datasets.make_classification(
+    n_samples=100, n_features=100, shuffle=True, n_informative=10, random_state=42
+)
 
-mod = lm.LogisticRegression(C=1, solver='lbfgs')
+mod = lm.LogisticRegression(C=1, solver="lbfgs")
 
 cv = StratifiedKFold(n_splits=5)
 
@@ -276,8 +284,8 @@ def balanced_acc(estimator, X, y, **kwargs):
     """Balanced acuracy scorer."""
     return metrics.recall_score(y, estimator.predict(X), average=None).mean()
 
-scores = cross_val_score(estimator=mod, X=X, y=y, cv=cv,
-                         scoring=balanced_acc)
+
+scores = cross_val_score(estimator=mod, X=X, y=y, cv=cv, scoring=balanced_acc)
 print("Test  bACC:%.2f" % scores.mean())
 
 
@@ -286,12 +294,14 @@ print("Test  bACC:%.2f" % scores.mean())
 
 from sklearn.model_selection import cross_validate
 
-scores = cross_validate(estimator=mod, X=X, y=y, cv=cv,
-                        scoring=['balanced_accuracy', 'roc_auc'])
+scores = cross_validate(
+    estimator=mod, X=X, y=y, cv=cv, scoring=["balanced_accuracy", "roc_auc"]
+)
 
-print("Test AUC:%.2f; bACC:%.2f" % (scores['test_roc_auc'].mean(),
-                                    scores['test_balanced_accuracy'].mean()))
-
+print(
+    "Test AUC:%.2f; bACC:%.2f"
+    % (scores["test_roc_auc"].mean(), scores["test_balanced_accuracy"].mean())
+)
 
 
 # %%
@@ -303,14 +313,16 @@ print("Test AUC:%.2f; bACC:%.2f" % (scores['test_roc_auc'].mean(),
 # build a `GridSearchCV` out of it:
 
 # Outer split:
-X_train, X_test, y_train, y_test =\
-    train_test_split(X, y, test_size=0.25, shuffle=True, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.25, shuffle=True, random_state=42
+)
 
 cv_inner = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)
 
 # Cross-validation for model selection
-lm_cv = GridSearchCV(lm.LogisticRegression(), {'C': 10. ** np.arange(-3, 3)},
-                     cv=cv_inner, n_jobs=5)
+lm_cv = GridSearchCV(
+    lm.LogisticRegression(), {"C": 10.0 ** np.arange(-3, 3)}, cv=cv_inner, n_jobs=5
+)
 
 # Fit, indluding model selection with internal CV
 lm_cv.fit(X_train, y_train)
@@ -328,16 +340,23 @@ cv_outer = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)
 cv_inner = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)
 
 # Cross-validation for model (inner) selection
-lm_cv = GridSearchCV(lm.Ridge(), {'alpha': 10. ** np.arange(-3, 3)},
-                     cv=cv_inner, n_jobs=5)
+lm_cv = GridSearchCV(
+    lm.Ridge(), {"alpha": 10.0 ** np.arange(-3, 3)}, cv=cv_inner, n_jobs=5
+)
 
 # Cross-validation for model (outer) evaluation
-scores = cross_validate(estimator=mod, X=X, y=y, cv=cv_outer,
-                        scoring=['balanced_accuracy', 'roc_auc'])
+scores = cross_validate(
+    estimator=mod, X=X, y=y, cv=cv_outer, scoring=["balanced_accuracy", "roc_auc"]
+)
 
-print("Test AUC:%.2f; bACC:%.2f, Time: %.2fs" % (scores['test_roc_auc'].mean(),
-                                        scores['test_balanced_accuracy'].mean(),
-                                        scores['fit_time'].sum()))
+print(
+    "Test AUC:%.2f; bACC:%.2f, Time: %.2fs"
+    % (
+        scores["test_roc_auc"].mean(),
+        scores["test_balanced_accuracy"].mean(),
+        scores["fit_time"].sum(),
+    )
+)
 
 # %%
 # Models with built-in cross-validation
@@ -348,16 +367,18 @@ print("Test AUC:%.2f; bACC:%.2f, Time: %.2fs" % (scores['test_roc_auc'].mean(),
 # **Classification**
 
 print("== Logistic Ridge (L2 penalty) ==")
-mod_cv = lm.LogisticRegressionCV(class_weight='balanced', scoring='balanced_accuracy',
-                                 n_jobs=-1, cv=5)
+mod_cv = lm.LogisticRegressionCV(
+    class_weight="balanced", scoring="balanced_accuracy", n_jobs=-1, cv=5
+)
 scores = cross_val_score(estimator=mod_cv, X=X, y=y, cv=5)
 print("Test  ACC:%.2f" % scores.mean())
 
 # %%
 # **Regression**
 
-X, y, coef = datasets.make_regression(n_samples=50, n_features=100, noise=10,
-                         n_informative=2, random_state=42, coef=True)
+X, y, coef = datasets.make_regression(
+    n_samples=50, n_features=100, noise=10, n_informative=2, random_state=42, coef=True
+)
 
 print("== Ridge (L2 penalty) ==")
 model = lm.RidgeCV(cv=3)
@@ -370,7 +391,7 @@ scores = cross_val_score(estimator=model, X=X, y=y, cv=5)
 print("Test  r2:%.2f" % scores.mean())
 
 print("== ElasticNet (L1 penalty) ==")
-model = lm.ElasticNetCV(l1_ratio=[.1, .5, .9], n_jobs=-1, cv=3)
+model = lm.ElasticNetCV(l1_ratio=[0.1, 0.5, 0.9], n_jobs=-1, cv=3)
 scores = cross_val_score(estimator=model, X=X, y=y, cv=5)
 print("Test  r2:%.2f" % scores.mean())
 
@@ -440,8 +461,15 @@ print("Coeficients p-values:", np.round(pval_coef_perm, 3))
 # Compute p-values corrected for multiple comparisons using FWER max-T
 # (Westfall and Young, 1993) procedure.
 
-pval_coef_perm_tmax = np.array([np.sum(coefs_perm.max(axis=1) >= coefs_perm[0, j])
-                                for j in range(coefs_perm.shape[1])]) / coefs_perm.shape[0]
+pval_coef_perm_tmax = (
+    np.array(
+        [
+            np.sum(coefs_perm.max(axis=1) >= coefs_perm[0, j])
+            for j in range(coefs_perm.shape[1])
+        ]
+    )
+    / coefs_perm.shape[0]
+)
 print("P-values with FWER (Westfall and Young) correction")
 print(pval_coef_perm_tmax)
 
@@ -449,6 +477,7 @@ print(pval_coef_perm_tmax)
 # Plot distribution of third coefficient under null-hypothesis
 # Coeffitients 0 and 1 are significantly different from 0.
 #
+
 
 def hist_pvalue(perms, ax, name):
     """Plot statistic distribution as histogram.
@@ -461,18 +490,23 @@ def hist_pvalue(perms, ax, name):
     # Re-weight to obtain distribution
     pval = np.sum(perms >= perms[0]) / perms.shape[0]
     weights = np.ones(perms.shape[0]) / perms.shape[0]
-    ax.hist([perms[perms >= perms[0]], perms], histtype='stepfilled',
-             bins=100, label="p-val<%.3f" % pval,
-             weights=[weights[perms >= perms[0]], weights])
-    ax.axvline(x=perms[0], color="k", linewidth=2)#, label="observed statistic")
+    ax.hist(
+        [perms[perms >= perms[0]], perms],
+        histtype="stepfilled",
+        bins=100,
+        label="p-val<%.3f" % pval,
+        weights=[weights[perms >= perms[0]], weights],
+    )
+    ax.axvline(x=perms[0], color="k", linewidth=2)  # , label="observed statistic")
     ax.set_ylabel(name)
     ax.legend()
     return ax
 
+
 n_coef = coefs_perm.shape[1]
 fig, axes = plt.subplots(n_coef, 1, figsize=(12, 9))
 for i in range(n_coef):
-    hist_pvalue( coefs_perm[:, i], axes[i], str(i))
+    hist_pvalue(coefs_perm[:, i], axes[i], str(i))
 
 _ = axes[-1].set_xlabel("Coefficient distribution under null hypothesis")
 
@@ -528,12 +562,15 @@ for boot_i in range(nboot):
 # Coeffitients 0 and 1 are significantly different from 0.
 
 scores_boot = pd.DataFrame(scores_boot, columns=scores_names)
-scores_stat = scores_boot.describe(percentiles=[.975, .5, .025])
+scores_stat = scores_boot.describe(percentiles=[0.975, 0.5, 0.025])
 
-print("r-squared: Mean=%.2f, SE=%.2f, CI=(%.2f %.2f)" %      tuple(scores_stat.loc[["mean", "std", "2.5%", "97.5%"], "r2"]))
+print(
+    "r-squared: Mean=%.2f, SE=%.2f, CI=(%.2f %.2f)"
+    % tuple(scores_stat.loc[["mean", "std", "2.5%", "97.5%"], "r2"])
+)
 
 coefs_boot = pd.DataFrame(coefs_boot)
-coefs_stat = coefs_boot.describe(percentiles=[.975, .5, .025])
+coefs_stat = coefs_boot.describe(percentiles=[0.975, 0.5, 0.025])
 print("Coefficients distribution")
 print(coefs_stat)
 
@@ -544,7 +581,7 @@ df = pd.DataFrame(coefs_boot)
 staked = pd.melt(df, var_name="Variable", value_name="Coef. distribution")
 sns.set_theme(style="whitegrid")
 ax = sns.violinplot(x="Variable", y="Coef. distribution", data=staked)
-_ = ax.axhline(0, ls='--', lw=2, color="black")
+_ = ax.axhline(0, ls="--", lw=2, color="black")
 
 # %%
 # Parallel computation with joblib
@@ -557,7 +594,10 @@ from sklearn import datasets
 import sklearn.linear_model as lm
 import sklearn.metrics as metrics
 from sklearn.model_selection import StratifiedKFold
-X, y = datasets.make_classification(n_samples=20, n_features=5, n_informative=2, random_state=42)
+
+X, y = datasets.make_classification(
+    n_samples=20, n_features=5, n_informative=2, random_state=42
+)
 cv = StratifiedKFold(n_splits=5)
 
 
@@ -566,9 +606,9 @@ cv = StratifiedKFold(n_splits=5)
 
 from sklearn.model_selection import cross_validate
 
-estimator = lm.LogisticRegression(C=1, solver='lbfgs')
+estimator = lm.LogisticRegression(C=1, solver="lbfgs")
 cv_results = cross_validate(estimator, X, y, cv=cv, n_jobs=5)
-print(np.mean(cv_results['test_score']), cv_results['test_score'])
+print(np.mean(cv_results["test_score"]), cv_results["test_score"])
 
 
 # %%
@@ -579,8 +619,8 @@ print(np.mean(cv_results['test_score']), cv_results['test_score'])
 # In[22]:
 
 
-estimator = lm.LogisticRegression(C=1, solver='lbfgs')
-y_test_pred_seq = np.zeros(len(y)) # Store predictions in the original order
+estimator = lm.LogisticRegression(C=1, solver="lbfgs")
+y_test_pred_seq = np.zeros(len(y))  # Store predictions in the original order
 coefs_seq = list()
 for train, test in cv.split(X, y):
     X_train, X_test, y_train, y_test = X[train, :], X[test, :], y[train], y[test]
@@ -588,7 +628,10 @@ for train, test in cv.split(X, y):
     y_test_pred_seq[test] = estimator.predict(X_test)
     coefs_seq.append(estimator.coef_)
 
-test_accs = [metrics.accuracy_score(y[test], y_test_pred_seq[test]) for train, test in cv.split(X, y)]
+test_accs = [
+    metrics.accuracy_score(y[test], y_test_pred_seq[test])
+    for train, test in cv.split(X, y)
+]
 print(np.mean(test_accs), test_accs)
 coefs_cv = np.array(coefs_seq)
 print(coefs_cv)
@@ -606,18 +649,20 @@ print(coefs_cv.std(axis=0) / np.sqrt(coefs_cv.shape[0]))
 from joblib import Parallel, delayed
 from sklearn.base import is_classifier, clone
 
+
 def _split_fit_predict(estimator, X, y, train, test):
     X_train, X_test, y_train, y_test = X[train, :], X[test, :], y[train], y[test]
     estimator.fit(X_train, y_train)
     return [estimator.predict(X_test), estimator.coef_]
 
-estimator = lm.LogisticRegression(C=1, solver='lbfgs')
+
+estimator = lm.LogisticRegression(C=1, solver="lbfgs")
 
 parallel = Parallel(n_jobs=5)
 cv_ret = parallel(
-    delayed(_split_fit_predict)(
-        clone(estimator), X, y, train, test)
-    for train, test in cv.split(X, y))
+    delayed(_split_fit_predict)(clone(estimator), X, y, train, test)
+    for train, test in cv.split(X, y)
+)
 
 y_test_pred_cv, coefs_cv = zip(*cv_ret)
 
@@ -626,7 +671,9 @@ y_test_pred = np.zeros(len(y))
 for i, (train, test) in enumerate(cv.split(X, y)):
     y_test_pred[test] = y_test_pred_cv[i]
 
-test_accs = [metrics.accuracy_score(y[test], y_test_pred[test]) for train, test in cv.split(X, y)]
+test_accs = [
+    metrics.accuracy_score(y[test], y_test_pred[test]) for train, test in cv.split(X, y)
+]
 print(np.mean(test_accs), test_accs)
 
 
@@ -635,4 +682,3 @@ print(np.mean(test_accs), test_accs)
 
 assert np.all(y_test_pred == y_test_pred_seq)
 assert np.allclose(np.array(coefs_cv).squeeze(), np.array(coefs_seq).squeeze())
-

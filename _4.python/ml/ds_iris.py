@@ -106,8 +106,10 @@ iristarget = [0, 0, 0, 1, 1, 1, 2, 2, 2, 2]
 iris.target = np.array(iristarget)
 """
 
-# many print("所有資料 :", iris)
-# many print("資料集資料 :", iris.data)
+print("所有資料 :")
+# many print(iris)
+print("資料集資料 :")
+# many print(iris.data)
 print("資料集目標/答案/target/y")
 print(iris.target)
 

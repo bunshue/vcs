@@ -1409,38 +1409,24 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 分類(Classification)
-import pandas as pd
-import numpy as np
-from sklearn import datasets
 
-ds = datasets.load_iris()
-
-X = pd.DataFrame(ds.data, columns=ds.feature_names)
-y = ds.target
+iris = datasets.load_iris()
 
 # 資料分割
-from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(
+    iris.data, iris.target, test_size=0.2
+)
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
-X_train.shape, X_test.shape, y_train.shape, y_test.shape
+knn = KNeighborsClassifier()
 
-# Define and train the KNN model
-from sklearn.neighbors import KNeighborsClassifier
-
-clf = KNeighborsClassifier()
-clf.fit(X_train, y_train)
+knn.fit(X_train, y_train)
 
 # 預測
-y_pred = clf.predict(X_test)
+y_pred = knn.predict(X_test)
 
 # 幫模型打分數
-from sklearn.metrics import accuracy_score
-
-print(accuracy_score(y_test, y_pred))
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
+accuracy = accuracy_score(y_test, y_pred)
+print(f"Accuracy: {accuracy}")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

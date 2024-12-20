@@ -22,12 +22,13 @@ import sklearn.linear_model as lm
 import sklearn.metrics as metrics
 from sklearn.model_selection import StratifiedKFold
 
-X, y = datasets.make_classification(n_samples=100, n_features=100,
-                         n_informative=10, random_state=42)
+X, y = datasets.make_classification(
+    n_samples=100, n_features=100, n_informative=10, random_state=42
+)
 
 model = lm.LogisticRegression(C=1)
 nperm = 100
-scores_perm= np.zeros((nperm, 3))  # 3 scores acc, recall0, recall1
+scores_perm = np.zeros((nperm, 3))  # 3 scores acc, recall0, recall1
 
 for perm in range(0, nperm):
     # perm = 0; y == yp
@@ -46,8 +47,14 @@ for perm in range(0, nperm):
 # Empirical permutation based p-values
 pval = np.sum(scores_perm >= scores_perm[0, :], axis=0) / nperm
 
-print("ACC:%.2f(P=%.3f); SPC:%.2f(P=%.3f); SEN:%.2f(P=%.3f)" %\
-      (scores_perm[0, 0], pval[0],
-       scores_perm[0, 1], pval[1],
-       scores_perm[0, 2], pval[2]))
-
+print(
+    "ACC:%.2f(P=%.3f); SPC:%.2f(P=%.3f); SEN:%.2f(P=%.3f)"
+    % (
+        scores_perm[0, 0],
+        pval[0],
+        scores_perm[0, 1],
+        pval[1],
+        scores_perm[0, 2],
+        pval[2],
+    )
+)
