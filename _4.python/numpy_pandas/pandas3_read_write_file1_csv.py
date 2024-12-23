@@ -35,8 +35,8 @@ pd.read_excel(filename)
 pd.read_sql(filename)
 
 
-
-
+# 指定分隔符號
+# df.to_csv("xxxx.csv", sep="\t")
 
 
 """

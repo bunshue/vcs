@@ -1,8 +1,31 @@
 """
-#乳癌診斷預測
+#乳癌診斷預測 => 分類問題
 
 breast_cancer
 
+569組資料 30個特徵
+
+特徵：
+feature_names : ['mean radius' 'mean texture' 'mean perimeter' 'mean area'
+ 'mean smoothness' 'mean compactness' 'mean concavity'
+ 'mean concave points' 'mean symmetry' 'mean fractal dimension'
+ 'radius error' 'texture error' 'perimeter error' 'area error'
+ 'smoothness error' 'compactness error' 'concavity error'
+ 'concave points error' 'symmetry error' 'fractal dimension error'
+ 'worst radius' 'worst texture' 'worst perimeter' 'worst area'
+ 'worst smoothness' 'worst compactness' 'worst concavity'
+ 'worst concave points' 'worst symmetry' 'worst fractal dimension']
+
+半徑(radius) 平均值、標準誤、最差值
+紋理(texture) 平均值、標準誤、最差值
+周長(perimeter) 平均值、標準誤、最差值
+面積(area) 平均值、標準誤、最差值
+平滑度(smoothness) 平均值、標準誤、最差值
+緊湊度(compactness) 平均值、標準誤、最差值
+凹度(concavity) 平均值、標準誤、最差值
+凹點(concave points) 平均值、標準誤、最差值
+對稱(symmetry) 平均值、標準誤、最差值
+碎形維度(fractal dimension) 平均值、標準誤、最差值
 """
 
 print("------------------------------------------------------------")  # 60個
@@ -58,6 +81,9 @@ print("乳癌診斷預測 基本數據")
 breast_cancer = datasets.load_breast_cancer()
 
 print("feature_names :", breast_cancer.feature_names)
+
+
+sys.exit()
 
 X = breast_cancer.data
 y = breast_cancer.target

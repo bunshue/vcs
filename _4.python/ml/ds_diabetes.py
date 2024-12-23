@@ -1,5 +1,5 @@
 """
-糖尿病資料集
+糖尿病資料集 => 迴歸問題
 
 Sklearn Diabetes Dataset : Scikit-learn Toy Datasets in Python
 
@@ -8,19 +8,19 @@ datasets.load_diabetes是一个Python库中的函数，用于加载糖尿病数�
 
 資料筆數 : 442
 資料欄位 : 10
-資料目標 : 1年後的疾病進展情況
+資料目標 : 1年後的疾病進展情況量化成數值
 
 資料欄位:
     age: Age in years
     sex: Gender of the patient
-    bmi: Body mass index
-    bp: Average blood pressure
-    s1: Total serum cholesterol (tc)
-    s2: Low-density lipoproteins (ldl)
-    s3: High-density lipoproteins (hdl)
-    s4: Total cholesterol / HDL (tch)
-    s5: Possibly log of serum triglycerides level (ltg)
-    s6: Blood sugar level (glu)
+    bmi: Body mass index, BMI
+    bp: Average blood pressure 平均血壓
+    s1: Total serum cholesterol (tc) 血清(blood serum)量測值1
+    s2: Low-density lipoproteins (ldl) 血清量測值2
+    s3: High-density lipoproteins (hdl) 血清量測值3
+    s4: Total cholesterol / HDL (tch) 血清量測值4
+    s5: Possibly log of serum triglycerides level (ltg) 血清量測值5
+    s6: Blood sugar level (glu) 血清量測值6
 
 讀取資料
 sklearn.datasets.load_diabetes(*, return_X_y=False, as_frame=False, scaled=True)
@@ -70,10 +70,15 @@ def show():
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
+'''
 print("糖尿病資料集 基本數據")
 
 diabetes = datasets.load_diabetes()
+
+print("diabetes.data.shape=", diabetes.data.shape)
+print("dir(diabetes)", dir(diabetes))
+print("diabetes.target.shape=", diabetes.target.shape)
+print("diabetes.feature_names=", diabetes.feature_names)
 
 # 觀察資料
 
@@ -85,6 +90,24 @@ df = pd.DataFrame(diabetes.data, columns=diabetes.feature_names)
 
 cc = df.head()
 print(cc)
+
+# 將 糖尿病 資料 儲存成 csv/excel 檔案
+
+# Load the diabetes dataset
+diabetes = datasets.load_diabetes()
+
+import xlsxwriter
+
+df = pd.DataFrame(diabetes.data, columns=diabetes.feature_names)
+
+df["target"] = diabetes.target
+
+print(df.head())
+df.to_csv("tmp_diabetes.csv", sep="\t")
+
+writer = pd.ExcelWriter("tmp_diabetes.xlsx", engine="xlsxwriter")
+df.to_excel(writer, sheet_name="Sheet1")
+writer._save()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -184,6 +207,241 @@ print(diabetes_df.head())
 
 # Print the shape of the feature matrix and target vector
 print("Shape of Sklearn Diabetes Data:", diabetes_df.shape)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("資料來源 : 內建 糖尿病")
+
+"""
+糖尿病数据（适用于回归任务）
+
+这是一个糖尿病的数据集，主要包括442行数据，10个属性值，分别是：
+Age(年龄)、性别(Sex)、Body mass index(体质指数)、Average Blood Pressure(平均血压)、
+S1~S6一年后疾病级数指标。
+
+Target为一年后患疾病的定量指标，因此适合与回归任务
+"""
+
+print("線性迴歸")
+
+diabetes = datasets.load_diabetes()
+
+X = diabetes.data[:, np.newaxis, 2]
+print("Data shape: ", X.shape)
+
+x_train, x_test, y_train, y_test = train_test_split(X, diabetes.target, test_size=0.2)
+
+linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
+
+linear_regression.fit(x_train, y_train)  # 學習訓練.fit
+
+y_pred = linear_regression.predict(x_test)  # 預測.predict
+
+plt.scatter(x_test, y_test, color="black")
+plt.plot(x_test, y_pred, color="blue", linewidth=3)
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("資料來源 : 內建 糖尿病")
+
+"""
+Multiple Regression多元回歸糖尿病案例
+diabetes dataset 資料集是一個糖尿病的資料集
+主要包括442筆資料,10個屬性值,分別是:
+Age(年齡)、Sex(性別)、Body mass index(體質指數)、
+Average Blood Pressure(平均血壓)、S1-S6一年後疾病級數指標,
+Target為一年後患疾病的定量指標。
+題目1
+建立線性多元回歸的預測模型,繪製散佈圖來比較一年後患疾病的定量指標和實際一年後患疾病的定量指標結果。
+題目2
+建立線性多元回歸的預測模型,只取Age(年齡)、Sex(性別)、Body mass index(體質指數)、Average Blood Pressure(平均血壓)作為解釋變數,產生模型,並匯出散佈圖來比較預測一年後患疾病的定量指標和實際一年後患疾病的定量指標結果。
+"""
+
+# 題目1
+diabetes = datasets.load_diabetes()
+
+# print(diabetes.DESCR) # 資料集說明
+print("資料集 keys")
+print(diabetes.keys())
+print("資料集 feature_names")
+print(diabetes.feature_names)
+
+print("X : 10個屬性值")
+X = pd.DataFrame(diabetes.data, columns=diabetes.feature_names)
+
+target = pd.DataFrame(diabetes.target, columns=["Target"])
+
+print("y : Target為一年後患疾病的定量指標")
+y = target["Target"]  # Series
+
+# print(X)
+print(y)
+
+linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
+
+linear_regression.fit(X, y)  # 學習訓練.fit
+
+y_pred_diabetes = linear_regression.predict(X)  # 預測.predict
+
+plt.scatter(y, y_pred_diabetes)
+plt.xlabel("Quantitative Measure")
+plt.ylabel("Predicted Quantitative Measure")
+plt.title("Quantitative Measure vs Predicted Quantitative Measure")
+
+show()
+
+# 題目2
+###################### 4 items ##############################
+X1 = diabetes.data[:, :4]
+X1 = pd.DataFrame(X1, columns=["age", "sex", "bmi", "bp"])
+# print(X1)
+
+target = pd.DataFrame(diabetes.target, columns=["Target"])
+y1 = target["Target"]
+
+linear_regression_4items = sklearn.linear_model.LinearRegression()  # 函數學習機
+
+linear_regression_4items.fit(X1, y1)  # 學習訓練.fit
+
+print("迴歸係數:", linear_regression_4items.coef_)
+y_pred_4items_diabetes = linear_regression_4items.predict(X1)  # 預測.predict
+
+plt.scatter(y1, y_pred_4items_diabetes)
+plt.xlabel("Quantitative Measure")
+plt.ylabel("Predicted Quantitative Measure")
+plt.title("Quantitative Measure vs Predicted Quantitative Measure")
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# diabets.py
+
+# Load the diabetes dataset
+diabetes = datasets.load_diabetes()
+
+# Use only one feature
+diabetes_X = diabetes.data[:, np.newaxis, 2]
+
+# Split the data into training/testing sets
+diabetes_X_train = diabetes_X[:-20]
+diabetes_X_test = diabetes_X[-20:]
+
+# Split the targets into training/testing sets
+diabetes_y_train = diabetes.target[:-20]
+diabetes_y_test = diabetes.target[-20:]
+
+# Plot outputs
+plt.scatter(diabetes_X_test, diabetes_y_test, color="black")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+'''
+# RegressionDiabetesLoad.py
+
+# Load the diabetes dataset
+diabetes = datasets.load_diabetes()
+
+df = pd.DataFrame(diabetes.data, columns=diabetes.feature_names)
+
+df["target"] = diabetes.target
+
+# Use only one feature
+diabetes_X = diabetes.data[:, np.newaxis, 2]
+
+# Split the data into training/testing sets
+diabetes_X_train = diabetes_X[:-20]
+diabetes_X_test = diabetes_X[-20:]
+
+# Split the targets into training/testing sets
+diabetes_y_train = diabetes.target[:-20]
+diabetes_y_test = diabetes.target[-20:]
+
+# Plot outputs
+plt.scatter(diabetes_X_test, diabetes_y_test, color="black")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+
+# LinearRegression-diabetes.py
+
+# Load the diabetes dataset
+diabetes = datasets.load_diabetes()
+
+# Use only one feature
+diabetes_X = diabetes.data[:, np.newaxis, 2]
+
+# Split the data into training/testing sets
+diabetes_X_train = diabetes_X[:-20]
+diabetes_X_test = diabetes_X[-20:]
+
+# Split the targets into training/testing sets
+diabetes_y_train = diabetes.target[:-20]
+diabetes_y_test = diabetes.target[-20:]
+
+# Create linear regression object
+linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
+
+# Train the model using the training sets
+linear_regression.fit(diabetes_X_train, diabetes_y_train)  # 學習訓練.fit
+
+# The coefficients
+print("Coefficients: \n", linear_regression.coef_)
+# The mean squared error
+print(
+    "Mean squared error: %.2f"
+    % np.mean((linear_regression.predict(diabetes_X_test) - diabetes_y_test) ** 2)
+)
+# Explained variance score: 1 is perfect prediction
+print("Variance score: %.2f" % linear_regression.score(diabetes_X_test, diabetes_y_test))
+
+# Plot outputs
+plt.scatter(diabetes_X_test, diabetes_y_test, color="black")
+plt.plot(diabetes_X_test, linear_regression.predict(diabetes_X_test), color="blue", linewidth=3)
+
+plt.xticks(())
+plt.yticks(())
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+
+# LinearRegression-diabetes-exam.py
+
+# Load the diabetes dataset
+diabetes = datasets.load_diabetes()
+
+# Use only one feature
+diabetes_X = diabetes.data[:, :]
+
+# Split the data into training/testing sets
+diabetes_X_train = diabetes_X[:-20, :]
+diabetes_X_test = diabetes_X[-20:, :]
+
+# Split the targets into training/testing sets
+diabetes_y_train = diabetes.target[:-20]
+diabetes_y_test = diabetes.target[-20:]
+
+# Create linear regression object
+linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
+
+# Train the model using the training sets
+linear_regression.fit(diabetes_X_train, diabetes_y_train)  # 學習訓練.fit
+
+# The coefficients
+print("Coefficients: \n", linear_regression.coef_)
+# The mean squared error
+print(
+    "Mean squared error: %.2f"
+    % np.mean((linear_regression.predict(diabetes_X_test) - diabetes_y_test) ** 2)
+)
+# Explained variance score: 1 is perfect prediction
+print("Variance score: %.2f" % linear_regression.score(diabetes_X_test, diabetes_y_test))
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

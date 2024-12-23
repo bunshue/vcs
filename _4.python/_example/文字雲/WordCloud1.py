@@ -822,5 +822,5 @@ print("------------------------------------------------------------")  # 60個
 # plt.figure(figsize = (10,10))
 
 # 檔案儲存
-# wc.to_file("tmp_WordCloud.png")
+# wc.to_file("tmp_WordCloud.png")  # 詞雲直接存圖
 # plt.savefig('tmp_hound_wordcloud.png')

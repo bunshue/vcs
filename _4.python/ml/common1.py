@@ -54,6 +54,7 @@ def evaluate_result(y_test, y_pred):
     # print("真實資料(y_test) :", y_test)
     # print("預測資料(y_pred) :", y_pred)
 
+    # 自己算
     print("計算 真實測試資料(y_test) 和 預測資料(y_pred)的 MSE")
     mse = np.sum((y_test - y_pred) ** 2) / len(y_test)
     print("MSE =", mse)
@@ -73,6 +74,7 @@ def evaluate_result(y_test, y_pred):
     print("計算 真實測試資料(y_test) 和 預測資料(y_pred) 的 決定係數r2 r2_score")
     r2 = r2_score(y_test, y_pred)
     print(f"決定係數R2 = {r2:.4f}")
+    #print(f"決定係數R2 = {r2_score(y_test, y_pred)*100:.2f}")
 
 
 def print_y_data(y):
@@ -89,10 +91,20 @@ def print_y_data(y):
             print()
         else:
             print(end=" ")
+    print()
 
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+print('測試 evaluate_result')
+
+xx = np.array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+yy = np.array([0, 1, 2, 3, 4, 5, 7, 7, 8, 9, 10])
+
+print_y_data(xx)
+print_y_data(yy)
+
+evaluate_result(xx, yy)
 
 print("------------------------------------------------------------")  # 60個

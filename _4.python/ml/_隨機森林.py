@@ -29,19 +29,198 @@ print("------------------------------------------------------------")  # 60個
 from common1 import *
 import sklearn.linear_model
 from sklearn import datasets
-from sklearn.datasets import make_blobs
+from sklearn.datasets import make_blobs  # 集群資料集
 from sklearn.datasets import make_classification
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.ensemble import RandomForestRegressor
+from sklearn.ensemble import RandomForestRegressor  # 隨機森林函數學習機
 from sklearn.model_selection import cross_val_score  # Cross Validation
 
+def show():
+    #return
+    plt.show()
+    pass
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-N = 500
-GROUPS = 3
-X, y = make_blobs(n_samples=N, centers=GROUPS, n_features=2)
+print('決策樹Decision Trees')
+
+sns.set()
+
+# 使用 make_blobs 資料
+N = 300  # n_samples, 樣本數
+M = 2  # n_features, 特徵數(資料的維度)
+GROUPS = 4  # centers, 分群數
+print("make_blobs,", N, "個樣本, ", M, "個特徵, 分成", GROUPS, "群")
+X, y = make_blobs(n_samples=N, centers=GROUPS, cluster_std=1.0)
+
+plt.scatter(X[:, 0], X[:, 1], c=y, s=50, cmap='rainbow');
+plt.show()
+
+from sklearn.tree import DecisionTreeClassifier
+tree = DecisionTreeClassifier().fit(X, y)
+
+
+def visualize_classifier(model, X, y, ax=None, cmap='rainbow'):
+    ax = ax or plt.gca()
+    
+    # Plot the training points
+    ax.scatter(X[:, 0], X[:, 1], c=y, s=30, cmap=cmap,
+               clim=(y.min(), y.max()), zorder=3)
+    ax.axis('tight')
+    ax.axis('off')
+    xlim = ax.get_xlim()
+    ylim = ax.get_ylim()
+    
+    # fit the estimator
+    model.fit(X, y)
+    xx, yy = np.meshgrid(np.linspace(*xlim, num=200),
+                         np.linspace(*ylim, num=200))
+    Z = model.predict(np.c_[xx.ravel(), yy.ravel()]).reshape(xx.shape)
+
+    # Create a color plot with the results
+    n_classes = len(np.unique(y))
+    contours = ax.contourf(xx, yy, Z, alpha=0.3,
+                           levels=np.arange(n_classes + 1) - 0.5,
+                           cmap=cmap, clim=(y.min(), y.max()),
+                           zorder=1)
+
+    ax.set(xlim=xlim, ylim=ylim)
+
+visualize_classifier(DecisionTreeClassifier(), X, y)
+
+plt.show()
+
+
+#隨機森林Random Forests
+
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import BaggingClassifier
+
+tree = DecisionTreeClassifier()
+#通過每個估計器擬合80％的訓練點  BaggingClassifier利用平行估計器的集合
+bag = BaggingClassifier(tree, n_estimators=100, max_samples=0.8,
+                        random_state=1)
+
+bag.fit(X, y)
+visualize_classifier(bag, X, y)
+
+plt.show()
+
+#隨機森林主要應用模組：RandomForestClassifier
+
+from sklearn.ensemble import RandomForestClassifier
+
+model = RandomForestClassifier(n_estimators=100, random_state=0)
+visualize_classifier(model, X, y)
+plt.show()
+
+
+
+
+#Random Forest Regression
+#將隨機森林結合之前講解的線性回歸，將資料回歸至一條線上，並進行預測。
+#使用sin()正弦函數，可以看到輸出結果的圖形，符合正弦函數的圖型。
+
+rng = np.random.RandomState(42)
+x = 10 * rng.rand(200)
+
+def model(x, sigma=0.3):
+    fast_oscillation = np.sin(5 * x)
+    slow_oscillation = np.sin(0.5 * x)
+    noise = sigma * rng.randn(len(x))
+
+    return slow_oscillation + fast_oscillation + noise
+
+y = model(x)
+plt.errorbar(x, y, 0.3, fmt='o')
+plt.show()
+
+#再來直接利用SKlearn中的RandomForestRegressor，來繪製出回歸線
+from sklearn.ensemble import RandomForestRegressor
+
+forest = RandomForestRegressor(200)
+forest.fit(x[:, None], y)
+
+xfit = np.linspace(0, 10, 1000)
+yfit = forest.predict(xfit[:, None])
+ytrue = model(xfit, sigma=0)
+
+plt.errorbar(x, y, 0.3, fmt='o', alpha=0.5)
+plt.plot(xfit, yfit, '-r');
+plt.plot(xfit, ytrue, '-k', alpha=0.5)
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+#以sklearn中的手寫數字集合來舉例：
+from sklearn.datasets import load_digits
+
+digits = load_digits()
+cc = digits.keys()
+print(cc)
+
+#可以看到上圖，資料keys包含'data', 'target', 'target_names', 'images', 'DESCR'
+
+#將手寫的資料視覺化呈現，可以看到每個數字(images)的左下角會記錄該數字的正確值(target)
+
+# set up the figure
+fig = plt.figure(figsize=(6, 6))  # figure size in inches
+fig.subplots_adjust(left=0, right=1, bottom=0, top=1, hspace=0.05, wspace=0.05)
+
+# plot the digits: each image is 8x8 pixels
+for i in range(64):
+    tx = fig.add_subplot(8, 8, i + 1, xticks=[], yticks=[])
+    tx.imshow(digits.images[i], cmap=plt.cm.binary, interpolation='nearest')
+    
+    # label the image with the target value
+    tx.text(0, 7, str(digits.target[i]))
+
+
+plt.show()
+
+
+#將手寫資料分test、train資料，並利用上面介紹RandomForestClassifier()的方法將手寫數字進行分類。
+
+from sklearn import metrics
+
+Xtrain, Xtest, ytrain, ytest = train_test_split(digits.data, digits.target,
+                                                random_state=0)
+model = RandomForestClassifier(n_estimators=1000)
+model.fit(Xtrain, ytrain)
+ypred = model.predict(Xtest)
+
+print(metrics.classification_report(ypred, ytest))
+
+
+
+#可以看到上圖，最左邊為數字0~9的類別，主要回傳精確值以及support，看這些數字很難懂，先看下圖
+
+from sklearn.metrics import confusion_matrix
+
+mat = confusion_matrix(ytest, ypred)
+sns.heatmap(mat.T, square=True, annot=True, fmt='d', cbar=False)
+plt.xlabel('true label')
+plt.ylabel('predicted label')
+plt.show()
+
+"""
+可以看到上圖，X軸為真實手寫數字的值，Y軸會預測手寫的數字的值，
+其斜對角0對0、1對1、2對2...，代表預測的準確次數(對照前一輸出結果的support)，
+將該類別準確次數/全部筆數=精確值(對照前一輸出結果的precision)
+
+"""
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 使用 make_blobs 資料
+N = 500  # n_samples, 樣本數
+M = 2  # n_features, 特徵數(資料的維度)
+GROUPS = 3  # centers, 分群數
+print("make_blobs,", N, "個樣本, ", M, "個特徵, 分成", GROUPS, "群")
+X, y = make_blobs(n_samples=N, centers=GROUPS, n_features=M)
 
 print("使用 Random Forest")
 
@@ -54,12 +233,13 @@ print("平均 :", scores.mean())
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
 X = np.array([[180, 85], [174, 80], [170, 75], [167, 45], [158, 52], [155, 44]])
 Y = np.array(["man", "man", "man", "woman", "woman", "woman"])
 
 RForest = RandomForestClassifier(n_estimators=100, max_depth=10, random_state=2)
-RForest.fit(X, Y)
+
+RForest.fit(X, Y)  # 學習訓練.fit
+
 print(RForest.predict([[180, 85]]))
 
 X, Y = make_classification(
@@ -72,7 +252,9 @@ X, Y = make_classification(
 )
 
 model = RandomForestClassifier(n_estimators=100, max_depth=10, random_state=2)
-model.fit(X, Y)
+
+model.fit(X, Y)  # 學習訓練.fit
+
 print(model.feature_importances_)
 print(model.predict([[0, 0, 0]]))
 estimator = model.estimators_[5]
@@ -97,15 +279,14 @@ data, label = datasets.load_iris(return_X_y=True)
 
 # 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
 dx_train, dx_test, label_train, label_test = train_test_split(
-    data, label, test_size=0.2, random_state=9487
+    data, label, test_size=0.2
 )
 # 訓練組8成, 測試組2成
 
 # 建立分類模型
 forest_model = RandomForestClassifier()
 
-# 建立訓練數據模型
-forest_model.fit(dx_train, label_train)
+forest_model.fit(dx_train, label_train)  # 學習訓練.fit
 
 # 對測試數據做預測
 pred = forest_model.predict(dx_test)
@@ -168,9 +349,9 @@ print("df 轉 np.array")
 df = np.array(df)
 
 # 將資料分成訓練組及測試組
-# X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)# 訓練組8成, 測試組2成
+# X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)# 訓練組8成, 測試組2成
 X_train, X_test, y_train, y_test = train_test_split(
-    df, labels, test_size=0.25, random_state=42
+    df, labels, test_size=0.25
 )  # 訓練組7.5成, 測試組2.5成
 
 """
@@ -189,7 +370,7 @@ print("Testing Labels Shape:", y_test.shape)
 
 # 隨機森林演算法, 用 sklearn 裡的 RandomForestRegressor 來做隨機森林演算法
 # 使用 1000棵 決策樹
-random_forest_regressor = RandomForestRegressor(n_estimators=60, random_state=42)
+random_forest_regressor = RandomForestRegressor(n_estimators=60, random_state=42)  # 隨機森林函數學習機
 
 random_forest_regressor.fit(X_train, y_train)  # 學習訓練.fit
 # 預測
@@ -234,14 +415,14 @@ plt.ylabel("Importance")
 plt.xlabel("Variable")
 plt.title("Variable Importances")
 
-plt.show()
+show()
 
 # 計算MAE
 
 # New random forest with only the two most important variables
 # 隨機森林演算法, 用 sklearn 裡的 RandomForestRegressor 來做隨機森林演算法
 # 使用 1000棵 決策樹
-rf_most_important = RandomForestRegressor(n_estimators=1000, random_state=42)
+rf_most_important = RandomForestRegressor(n_estimators=1000, random_state=42)  # 隨機森林函數學習機
 
 # Extract the two most important df
 important_indices = [feature_list.index("O3"), feature_list.index("TEMP")]
@@ -249,7 +430,7 @@ train_important = X_train[:, important_indices]
 test_important = X_test[:, important_indices]
 
 # Train the random forest
-rf_most_important.fit(train_important, y_train)
+rf_most_important.fit(train_important, y_train)  # 學習訓練.fit
 
 # 預測
 predictions = rf_most_important.predict(test_important)  # 預測.predict
@@ -267,8 +448,9 @@ import pydot
 # Limit depth of tree to 3 levels
 # 隨機森林演算法, 用 sklearn 裡的 RandomForestRegressor 來做隨機森林演算法
 # 使用 10棵 決策樹, 最多3層
-rf_small = RandomForestRegressor(n_estimators=20, max_depth=3)
-rf_small.fit(X_train, y_train)
+rf_small = RandomForestRegressor(n_estimators=20, max_depth=3)  # 隨機森林函數學習機
+
+rf_small.fit(X_train, y_train)  # 學習訓練.fit
 
 # Extract the small tree
 tree_small = rf_small.estimators_[5]
@@ -341,7 +523,7 @@ plt.xlabel("Date")
 plt.ylabel("Maximum Temperature (F)")
 plt.title("Actual and Predicted Values")
 
-plt.show()
+show()
 """
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -419,7 +601,7 @@ print("Testing Labels Shape:", test_labels.shape)
 
 # 隨機森林演算法, 用 sklearn 裡的 RandomForestRegressor 來做隨機森林演算法
 # 使用 1000棵 決策樹
-random_forest_regressor = RandomForestRegressor(n_estimators=1000, random_state=42)
+random_forest_regressor = RandomForestRegressor(n_estimators=1000, random_state=42)  # 隨機森林函數學習機
 
 random_forest_regressor.fit(train_features, train_labels)  # 學習訓練.fit
 
@@ -496,15 +678,14 @@ plt.ylabel("Importance")
 plt.xlabel("Variable")
 plt.title("Variable Importances")
 
-plt.show()
-
+show()
 
 # 計算MAE
 
 # New random forest with only the two most important variables
 # 隨機森林演算法, 用 sklearn 裡的 RandomForestRegressor 來做隨機森林演算法
 # 使用 1000棵 決策樹
-rf_most_important = RandomForestRegressor(n_estimators=1000, random_state=42)
+rf_most_important = RandomForestRegressor(n_estimators=1000, random_state=42)  # 隨機森林函數學習機
 
 # Extract the two most important features
 important_indices = [feature_list.index("NO2"), feature_list.index("TEMP")]
@@ -529,7 +710,7 @@ import pydot
 # Limit depth of tree to 3 levels
 # 隨機森林演算法, 用 sklearn 裡的 RandomForestRegressor 來做隨機森林演算法
 # 使用 10棵 決策樹, 最多3層
-rf_small = RandomForestRegressor(n_estimators=10, max_depth=3)
+rf_small = RandomForestRegressor(n_estimators=10, max_depth=3)  # 隨機森林函數學習機
 
 rf_small.fit(train_features, train_labels)  # 學習訓練.fit
 

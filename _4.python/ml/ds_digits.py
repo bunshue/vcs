@@ -211,27 +211,6 @@ print(clf.score(Xtest, Ytest))
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-from sklearn.neural_network import MLPClassifier
-
-digits = datasets.load_digits()
-
-X = digits.images.reshape(len(digits.images), -1)
-y = digits.target
-
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
-# 訓練組8成, 測試組2成
-
-model = MLPClassifier(hidden_layer_sizes=(16,))
-
-model.fit(X_train, y_train)  # 學習訓練.fit
-
-y_pred = model.predict(X_test)
-print(accuracy_score(y_pred, y_test))  # 評価
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 from sklearn import svm
 
 # 识别手写体数字
@@ -722,6 +701,14 @@ print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
 sys.exit()
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
 
 
 print("------------------------------------------------------------")  # 60個

@@ -10,6 +10,13 @@ numpy.polyfit(x, y, deg, rcond=None, full=False, w=None, cov=False)
 　　　d.　　p.order表示返回最高項的次方數
 　　　e.　　p[1]表示返回第一項的系數
 　　　f.　　多項式支持實數的四則運算
+
+
+np.polyfit(x, y, 3)  # 建立迴歸模型係數
+np.poly1d(z)  # 建立迴歸直線係數
+
+
+
 """
 
 print("------------------------------------------------------------")  # 60個

@@ -1181,6 +1181,23 @@ print("橫列平均:", cc.mean(axis=1))
 
 print("------------------------------------------------------------")  # 60個
 
+print('相關係數矩陣')
+
+xx = [0, 1, 2, 3, 4, 5]
+yy = [0, 1, 2, 3, 4, 5]
+zz = [5, 4, 3, 2, 1, 0]
+
+print(np.corrcoef(xx, yy))
+print(np.corrcoef(xx, zz))
+
+"""
+abs < 0.3 : 低度相關
+abs > 0.7 : 高度相關
+abs 中間  : 中度相關
+
+"""
+print("------------------------------------------------------------")  # 60個
+
 print("矩陣與二維數組")
 cc = np.mat(np.mat([[1, 2, 3], [4, 5, 6]]))
 print(type(cc))
@@ -1414,6 +1431,7 @@ dv2 = np.std(featuremat[1])
 corref = np.mean(np.multiply(featuremat[0] - mv1, featuremat[1] - mv2)) / (dv1 * dv2)
 print(corref)
 
+print('相關係數矩陣')
 print(np.corrcoef(featuremat))
 
 covinv = np.linalg.inv(np.cov(featuremat))
@@ -2960,15 +2978,12 @@ print(np.tan(a * np.pi / 180))
 
 print("------------------------------------------------------------")  # 60個
 
-a = np.array([1.0, 5.55, 123, 0.567, 25.532])
-print("a=" + str(a))
+print('四捨五入相關')
 
+a = 123.456789
 print(np.around(a))
 print(np.around(a, decimals=3))
 print(np.around(a, decimals=-3))
-
-a = np.array([-1.7, 1.5, -0.2, 0.6, 10])
-print("a=" + str(a))
 
 b = np.floor(a)
 print("floor()=" + str(b))

@@ -28,6 +28,11 @@ print("------------------------------------------------------------")  # 60個
 
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
 
+from sklearn import metrics
+from sklearn.metrics import accuracy_score
+from sklearn.metrics import confusion_matrix
+from sklearn.metrics import recall_score
+
 print("------------------------------------------------------------")  # 60個
 
 np.random.rand(3, 2)
@@ -538,10 +543,9 @@ train_est_p=clf_1.predict_proba(train_data)[:,1]
 test_est=clf_1.predict(test_data)
 print(test_est)
 
-from sklearn import metrics
-
 print(metrics.accuracy_score(test_target, test_est))
 
+print('混淆矩陣')
 print(metrics.confusion_matrix(test_target, test_est))
 
 import sklearn.svm as svm
@@ -551,9 +555,9 @@ clf_2.fit(train_data,train_target)
 train_est=clf_2.predict(train_data)
 test_est=clf_2.predict(test_data)
 
-from sklearn import metrics
-
 print(metrics.accuracy_score(test_target, test_est))
+
+print('混淆矩陣')
 print(metrics.confusion_matrix(test_target, test_est))
 
 from sklearn.naive_bayes import GaussianNB
@@ -563,9 +567,9 @@ clf_3.fit(train_data,train_target)
 train_est=clf_3.predict(train_data)
 test_est=clf_3.predict(test_data)
 
-from sklearn import metrics
-
 print(metrics.accuracy_score(test_target, test_est))
+
+print('混淆矩陣')
 print(metrics.confusion_matrix(test_target, test_est))
 
 from sklearn.neural_network import MLPClassifier
@@ -575,29 +579,25 @@ clf_4.fit(train_data,train_target)
 train_est=clf_4.predict(train_data)
 test_est=clf_4.predict(test_data)
 
-from sklearn import metrics
-
 print(metrics.accuracy_score(test_target, test_est))
-print(metrics.confusion_matrix(test_target, test_est))
 
-from sklearn.metrics import accuracy_score
+print('混淆矩陣')
+print(metrics.confusion_matrix(test_target, test_est))
 
 y_pred = [0, 2, 1, 3]
 y_true = [0, 1, 2, 3]
 print(accuracy_score(y_true, y_pred))
 print(accuracy_score(y_true, y_pred, normalize=False))
 
-from sklearn.metrics import confusion_matrix
-
+print('混淆矩陣')
 y_true = [2, 0, 2, 2, 0, 1]
 y_pred = [0, 0, 2, 2, 0, 2]
 confusion_matrix(y_true, y_pred)
 
+print('混淆矩陣')
 y_true = ["cat", "ant", "cat", "cat", "ant", "bird"]
 y_pred = ["ant", "ant", "cat", "cat", "ant", "cat"]
 confusion_matrix(y_true, y_pred, labels=["ant", "bird", "cat"])
-
-from sklearn import metrics
 
 y = np.array([1, 1, 2, 2])
 scores = np.array([0.1, 0.4, 0.35, 0.8])
@@ -609,8 +609,6 @@ print(thresholds)
 plt.plot(fpr,tpr)
 
 plt.show()
-
-from sklearn.metrics import recall_score
 
 y_true = [0, 1, 2, 0, 1, 2]
 y_pred = [0, 2, 1, 0, 0, 1]

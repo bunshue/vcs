@@ -63,7 +63,7 @@ from sklearn.metrics import ConfusionMatrixDisplay
 import warnings
 
 # warnings.filterwarnings("ignore")
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 
@@ -1208,18 +1208,12 @@ for connectivity in (None, knn_graph):
             plt.tight_layout()
 
 show()
-'''
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
-import numpy as np
 import scipy
-import seaborn as sns
-from sklearn import cluster, datasets
-import matplotlib.pyplot as plt
-import pandas as pd
-import seaborn as sns  # nice color
+from sklearn import cluster
 
 iris = datasets.load_iris()
 X = iris.data[:, :2]  # use only 'sepal length and sepal width'
@@ -1261,14 +1255,6 @@ print("------------------------------------------------------------")  # 60個
 sns.pairplot()
 pairplot:pair是成对的意思，即是说这个用来展现变量两两之间的关系，线性、非线性、相关等等
 """
-
-# 使用鸢尾花数据画图
-
-# 两种导入方式，这次是直接从sklearn.datasets导入
-import pandas as pd
-from sklearn import datasets
-import seaborn as sns
-import matplotlib.pyplot as plt
 
 # sns.set_style('white',{'font.sans-serif':['simhei','Arial']})  #解决中文不能显示问题
 
@@ -1329,6 +1315,323 @@ plt.show()
 
 sns.pairplot(iris_data, x_vars=["萼片长", "花瓣宽"], y_vars=["萼片宽", "花瓣长"])
 plt.show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+iris = datasets.load_iris()
+
+category = 3
+dim = 4
+x_train, x_test, y_train, y_test = train_test_split(
+    iris.data, iris.target, test_size=0.2
+)
+y_train2 = tf.keras.utils.to_categorical(y_train, num_classes=(category))
+y_test2 = tf.keras.utils.to_categorical(y_test, num_classes=(category))
+
+print("x_train[:4]", x_train[:4])
+print("y_train[:4]", y_train[:4])
+print("y_train2[:4]", y_train2[:4])
+
+# 建立模型
+model = tf.keras.models.Sequential()
+model.add(tf.keras.layers.Dense(units=10, activation=tf.nn.relu, input_dim=dim))
+model.add(tf.keras.layers.Dense(units=10, activation=tf.nn.relu))
+model.add(tf.keras.layers.Dense(units=category, activation=tf.nn.softmax))
+model.compile(
+    optimizer="adam",
+    loss=tf.keras.losses.categorical_crossentropy,
+    metrics=["accuracy"],
+)
+
+"""
+# 使用Adam 每次計算移動0.001
+model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=0.001),
+    loss=tf.keras.losses.categorical_crossentropy,
+    metrics=['accuracy'])
+"""
+# SGD 優化器 optimizer
+model.compile(
+    optimizer=tf.keras.optimizers.SGD(learning_rate=0.01, clipnorm=1.0),
+    loss=tf.keras.losses.categorical_crossentropy,
+    metrics=["accuracy"],
+)
+
+history = model.fit(x_train, y_train2, epochs=200, batch_size=128)  # 學習訓練.fit
+
+# 測試
+score = model.evaluate(x_test, y_test2, batch_size=128)
+print("score:", score)
+
+predict = model.predict(x_test)  # 預測.predict
+print(
+    "Ans:",
+    np.argmax(predict[0]),
+    np.argmax(predict[1]),
+    np.argmax(predict[2]),
+    np.argmax(predict[3]),
+)
+
+# y_pred = model.predict_classes(x_test) # TensorFlow2.6已刪除predict_classes()
+predict_x = model.predict(x_test)  # 預測.predict
+classes_x = np.argmax(predict_x, axis=1)
+y_pred = classes_x
+
+print("predict_classes:", y_pred)
+print("y_test", y_test[:])
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# Iris-MLP_show.py
+
+iris = datasets.load_iris()
+
+category = 3
+dim = 4
+x_train, x_test, y_train, y_test = train_test_split(
+    iris.data, iris.target, test_size=0.2
+)
+y_train2 = tf.keras.utils.to_categorical(y_train, num_classes=(category))
+y_test2 = tf.keras.utils.to_categorical(y_test, num_classes=(category))
+
+print("x_train[:4]", x_train[:4])
+print("y_train[:4]", y_train[:4])
+print("y_train2[:4]", y_train2[:4])
+
+# 建立模型
+model = tf.keras.models.Sequential()
+
+model.add(tf.keras.layers.Dense(units=10, activation=tf.nn.relu, input_dim=dim))
+
+model.add(tf.keras.layers.Dense(units=10, activation=tf.nn.relu))
+
+model.add(tf.keras.layers.Dense(units=category, activation=tf.nn.softmax))
+
+# Adam 優化器 optimizer
+model.compile(
+    optimizer="adam",
+    loss=tf.keras.losses.categorical_crossentropy,
+    metrics=["accuracy"],
+)
+
+history = model.fit(x_train, y_train2, epochs=200, batch_size=128)  # 學習訓練.fit
+
+# 測試
+score = model.evaluate(x_test, y_test2, batch_size=128)
+print("score:", score)
+
+predict = model.predict(x_test)  # 預測.predict
+print(
+    "Ans:",
+    np.argmax(predict[0]),
+    np.argmax(predict[1]),
+    np.argmax(predict[2]),
+    np.argmax(predict[3]),
+)
+
+# y_pred = model.predict_classes(x_test) # TensorFlow2.6已刪除predict_classes()
+predict_x = model.predict(x_test)  # 預測.predict
+classes_x = np.argmax(predict_x, axis=1)
+y_pred = classes_x
+
+print("predict_classes:", y_pred)
+print("y_test", y_test[:])
+
+plt.plot(history.history["accuracy"])
+plt.plot(history.history["loss"])
+plt.title("model accuracy")
+plt.ylabel("acc & loss")
+plt.xlabel("epoch")
+plt.legend(["acc", "loss"], loc="upper left")
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# Iris-MLP_Tensorboard.py
+
+iris = datasets.load_iris()
+
+category = 3
+dim = 4
+x_train, x_test, y_train, y_test = train_test_split(
+    iris.data, iris.target, test_size=0.2
+)
+y_train2 = tf.keras.utils.to_categorical(y_train, num_classes=(category))
+y_test2 = tf.keras.utils.to_categorical(y_test, num_classes=(category))
+
+print("x_train[:4]", x_train[:4])
+print("y_train[:4]", y_train[:4])
+print("y_train2[:4]", y_train2[:4])
+
+# 建立模型
+model = tf.keras.models.Sequential()
+
+model.add(tf.keras.layers.Dense(units=10, activation=tf.nn.relu, input_dim=dim))
+
+model.add(tf.keras.layers.Dense(units=10, activation=tf.nn.relu))
+
+model.add(tf.keras.layers.Dense(units=category, activation=tf.nn.softmax))
+
+# Adam 優化器 optimizer
+model.compile(
+    optimizer=tf.keras.optimizers.Adam(learning_rate=0.001),
+    loss=tf.keras.losses.categorical_crossentropy,
+    metrics=["accuracy"],
+)
+
+tensorboard = TensorBoard(log_dir="logs")
+"""
+# NG
+history=model.fit(x_train, y_train2,
+    epochs=200,batch_size=128,
+    callbacks=[tensorboard],
+    verbose=1)  # 學習訓練.fit
+
+#測試
+score = model.evaluate(x_test, y_test2, batch_size=128)
+print("score:",score)
+
+predict = model.predict(x_test)  # 預測.predict
+print("Ans:",np.argmax(predict[0]),np.argmax(predict[1]),np.argmax(predict[2]),np.argmax(predict[3]))
+
+# y_pred = model.predict_classes(x_test) # TensorFlow2.6已刪除predict_classes()
+predict_x = model.predict(x_test)  # 預測.predict
+classes_x = np.argmax(predict_x, axis=1)
+y_pred = classes_x
+
+print("predict_classes:",y_pred)
+print("y_test",y_test[:])
+"""
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# Iris-MLP_Save.py
+
+iris = datasets.load_iris()
+
+category = 3
+dim = 4
+x_train, x_test, y_train, y_test = train_test_split(
+    iris.data, iris.target, test_size=0.2
+)
+y_train2 = tf.keras.utils.to_categorical(y_train, num_classes=(category))
+y_test2 = tf.keras.utils.to_categorical(y_test, num_classes=(category))
+
+print("x_train[:4]", x_train[:4])
+print("y_train[:4]", y_train[:4])
+print("y_train2[:4]", y_train2[:4])
+
+# 建立模型
+model = tf.keras.models.Sequential()
+
+model.add(tf.keras.layers.Dense(units=10, activation=tf.nn.relu, input_dim=dim))
+
+model.add(tf.keras.layers.Dense(units=10, activation=tf.nn.relu))
+
+model.add(tf.keras.layers.Dense(units=category, activation=tf.nn.softmax))
+
+# Adam 優化器 optimizer
+model.compile(
+    optimizer=tf.keras.optimizers.Adam(learning_rate=0.001),
+    loss=tf.keras.losses.categorical_crossentropy,
+    metrics=["accuracy"],
+)
+
+tensorboard = TensorBoard(log_dir="logs")
+
+"""
+# NG
+history=model.fit(x_train, y_train2,
+    epochs=200,batch_size=128,
+    callbacks=[tensorboard],
+    verbose=1)  # 學習訓練.fit
+
+#保存模型架構
+with open("tmp_model_mlp.json", "w") as json_file:
+   json_file.write(model.to_json())
+#保存模型權重
+model.save_weights("tmp_model_mlp.h5")
+
+
+#測試
+score = model.evaluate(x_test, y_test2, batch_size=128)
+print("score:",score)
+
+predict = model.predict(x_test)  # 預測.predict
+print("Ans:",np.argmax(predict[0]),np.argmax(predict[1]),np.argmax(predict[2]),np.argmax(predict[3]))
+
+# y_pred = model.predict_classes(x_test) # TensorFlow2.6已刪除predict_classes()
+predict_x = model.predict(x_test)  # 預測.predict
+classes_x = np.argmax(predict_x, axis=1)
+y_pred = classes_x
+
+print("predict_classes:",y_pred)
+print("y_test",y_test[:])
+"""
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# Iris-MLP_Load.py
+
+iris = datasets.load_iris()
+
+category = 3
+dim = 4
+x_train, x_test, y_train, y_test = train_test_split(
+    iris.data, iris.target, test_size=0.2
+)
+y_train2 = tf.keras.utils.to_categorical(y_train, num_classes=(category))
+y_test2 = tf.keras.utils.to_categorical(y_test, num_classes=(category))
+
+print("x_train[:4]", x_train[:4])
+print("y_train[:4]", y_train[:4])
+print("y_train2[:4]", y_train2[:4])
+
+# 讀取模型架構
+json_file = open("data/model_mlp_old.json", "r")
+loaded_model_json = json_file.read()
+json_file.close()
+
+model = model_from_json(loaded_model_json)
+
+# 讀取模型權重
+model.load_weights("data/model_mlp_old.h5")
+
+# Adam 優化器 optimizer
+model.compile(
+    optimizer=tf.keras.optimizers.Adam(learning_rate=0.001),
+    loss=tf.keras.losses.categorical_crossentropy,
+    metrics=["accuracy"],
+)
+
+# 測試
+score = model.evaluate(x_test, y_test2, batch_size=128)
+print("score:", score)
+
+predict = model.predict(x_test)  # 預測.predict
+print(
+    "Ans:",
+    np.argmax(predict[0]),
+    np.argmax(predict[1]),
+    np.argmax(predict[2]),
+    np.argmax(predict[3]),
+)
+
+# y_pred = model.predict_classes(x_test) # TensorFlow2.6已刪除predict_classes()
+predict_x = model.predict(x_test)  # 預測.predict
+classes_x = np.argmax(predict_x, axis=1)
+y_pred = classes_x
+
+print("predict_classes:", y_pred)
+print("y_test", y_test[:])
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

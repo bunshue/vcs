@@ -29,7 +29,7 @@ print("------------------------------------------------------------")  # 60個
 from common1 import *
 import sklearn.linear_model
 from sklearn import datasets
-from sklearn.datasets import make_blobs
+from sklearn.datasets import make_blobs  # 集群資料集
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
 from sklearn import metrics
 from sklearn.tree import DecisionTreeClassifier
@@ -39,7 +39,7 @@ from sklearn import tree
 
 
 def show():
-    return
+    #return
     plt.show()
     pass
 
@@ -47,40 +47,37 @@ def show():
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-N = 500
-GROUPS = 3
-X, y = make_blobs(n_samples=N, centers=GROUPS, n_features=2)
+# 使用 make_blobs 資料
+N = 30  # n_samples, 樣本數
+M = 2  # n_features, 特徵數(資料的維度)
+GROUPS = 3  # centers, 分群數
+print("make_blobs,", N, "個樣本, ", M, "個特徵, 分成", GROUPS, "群")
+X, y = make_blobs(n_samples=N, centers=GROUPS, n_features=M)
 
-from sklearn.model_selection import cross_val_score  # Cross Validation
-
-clf = DecisionTreeClassifier()  # 決策樹函數學習機
-
-scores = cross_val_score(clf, X, y, cv=5)
-print("看一下五次的成績 :", scores)
-print("平均 :", scores.mean())
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-data, label = datasets.load_iris(return_X_y=True)
+# 使用 iris 資料
+X, y = datasets.load_iris(return_X_y=True)
 
 # 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
-dx_train, dx_test, label_train, label_test = train_test_split(
-    data, label, test_size=0.2, random_state=9487
+x_train, x_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2
 )
 # 訓練組8成, 測試組2成
 
 clf = DecisionTreeClassifier()  # 決策樹函數學習機
 
-clf.fit(dx_train, label_train)  # 學習訓練.fit
+clf.fit(x_train, y_train)  # 學習訓練.fit
 
 # 對測試數據做預測
-pred = clf.predict(dx_test)
+y_pred = clf.predict(x_test)
 
 # 輸出準確性
-print(f"訓練資料的準確性 = {clf.score(dx_train, label_train)}")
-print(f"測試資料的準確性 = {clf.score(dx_test, label_test)}")
+print(f"訓練資料的準確性 = {clf.score(x_train, y_train)}")
+print(f"測試資料的準確性 = {clf.score(x_test, y_test)}")
 
+from sklearn.model_selection import cross_val_score  # Cross Validation
+scores = cross_val_score(clf, X, y, cv=5)
+print("看一下5次的成績 :", scores)
+print("平均 :", scores.mean())
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -93,16 +90,6 @@ clf = DecisionTreeClassifier()  # 決策樹函數學習機
 clf = clf.fit(X, Y)  # 學習訓練.fit
 
 tree.export_graphviz(clf, out_file="tmp_tree222.dot")
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-X = np.array([[180, 85], [174, 80], [170, 75], [167, 45], [158, 52], [155, 44]])
-Y = np.array(["man", "man", "man", "woman", "woman", "woman"])
-
-clf = DecisionTreeClassifier()  # 決策樹函數學習機
-
-clf = clf.fit(X, Y)  # 學習訓練.fit
 
 prediction = clf.predict([[173, 76]])  # 預測.predict
 print(prediction)
@@ -169,11 +156,9 @@ def plot_decision_regions(X, y, classifier, test_idx=None, resolution=0.02):
 def do_decision_tree():
     iris = datasets.load_iris()
     x_train, x_test, y_train, y_test = train_test_split(
-        iris.data[:, [2, 3]], iris.target, test_size=0.25, random_state=4
-    )
+        iris.data[:, [2, 3]], iris.target, test_size=0.25)
     clf = DecisionTreeClassifier(
-        criterion="entropy", max_depth=3, random_state=0
-    )  # 決策樹函數學習機
+        criterion="entropy", max_depth=3)  # 決策樹函數學習機
 
     clf.fit(x_train, y_train)  # 學習訓練.fit
 

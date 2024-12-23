@@ -426,6 +426,22 @@ print(df1.info())
 
 print("------------------------------------------------------------")  # 60個
 
+print('df轉excel')
+
+from sklearn import datasets
+
+diabetes = datasets.load_diabetes()
+
+import xlsxwriter
+
+df = pd.DataFrame(diabetes.data, columns=diabetes.feature_names)
+
+df["target"] = diabetes.target
+
+writer = pd.ExcelWriter("tmp_diabetes.xlsx", engine="xlsxwriter")
+df.to_excel(writer, sheet_name="Sheet1")
+writer._save()
+
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
