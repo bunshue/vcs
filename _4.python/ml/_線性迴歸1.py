@@ -38,24 +38,31 @@ from common1 import *
 from sklearn import linear_model
 import sklearn.linear_model
 from sklearn import datasets
+from sklearn import preprocessing
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
-
 from sklearn.linear_model import LinearRegression
 from sklearn.linear_model import Ridge
 from sklearn.linear_model import Lasso
 
 
 def show():
-    return
+    # return
     plt.show()
     pass
 
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
+'''
 # 簡單資料 y = x
 xx = np.array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+xx2d = np.array(
+    [
+        [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+        [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    ]
+    )
+
 yy0 = xx  # 理想資料, y = x
 yy1 = np.array([0, 1, 4, 3, 4, 5, 6, 3, 8, 9, 10])  # 真實資料
 
@@ -199,6 +206,19 @@ print("------------------------------------------------------------")  # 60個
 
 print("資料來源 : 自建資料 7a")
 
+"""
+自建資料1
+print("線性迴歸, 輸入資料的寫法")
+X = [[10.0], [8.0], [13.0], [9.0], [11.0], [14.0], [6.0], [4.0], [12.0], [7.0], [5.0]]
+y = [8.04, 6.95, 7.58, 8.81, 8.33, 9.96, 7.24, 4.26, 10.84, 4.82, 5.68]
+"""
+"""
+自建資料2
+x = np.array([1, 2, 3, 4, 5])
+y = np.array([2, 3, 4, 5, 6])
+X = x.reshape((-1, 1))
+"""
+
 x = xx
 y0 = yy0  # 理想資料
 y1 = yy1  # 真實資料
@@ -223,6 +243,16 @@ plt.grid()
 
 show()
 
+print("預測的寫法")
+y_pred = linear_regression.predict([[0], [1]])  # 預測.predict
+print(y_pred)
+
+print("預測的寫法")
+# Predict the outcome for a new data point
+new_x = np.array([6]).reshape((-1, 1))
+y_pred = linear_regression.predict(new_x)  # 預測.predict
+print("Predicted outcome: ", y_pred[0])
+
 # 評估
 print("真實資料")
 print_y_data(y1)
@@ -235,6 +265,9 @@ evaluate_result(y1, y_pred)
 print("評估 : 計算 測試資料 與 預測結果 的差異")
 evaluate_result(y_pred, y1)
 
+sys.exit()
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("資料來源 : 自建資料 7b 資料分割")
@@ -271,16 +304,9 @@ plt.grid()
 
 show()
 
-print("------------------------------")  # 30個
-
 # 有x測試資料預測到的結果和真實y測試資料比對
-
 X_test = x_test.reshape(len(x_test), 1)  # x測試資料要轉為 NX1 陣列
-
 y_pred = linear_regression.predict(X_test)  # 預測.predict
-
-print("評估 : 計算 測試資料 與 預測結果 的差異")
-evaluate_result(y_test, y_pred)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -432,8 +458,6 @@ print("資料來源 : 內建資料 1 計程車小費資料集EDA")
 
 # 計程車小費資料集EDA  共244筆資料, 7個欄位
 
-from sklearn import preprocessing
-
 df = sns.load_dataset("tips")
 cc = df.head()
 # print(cc)
@@ -497,7 +521,7 @@ evaluate_result(y_test, y_pred)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("資料來源 : 檔案資料")
+print("資料來源 : 檔案資料 空氣盒子 df格式轉多維ndarray 多元線性回歸")
 
 # 共 15188 筆資料, 16欄位
 
@@ -527,7 +551,7 @@ print(df.isnull().any())  # 有無空白欄位 任何
 """
 
 # 指定X，並轉為 Numpy 陣列
-# 取出一些欄位 => 資料
+# 取出一些欄位 => 資料 (ndarray)
 x = df[
     [
         "SO2",
@@ -546,15 +570,14 @@ x = df[
     ]
 ].values
 
-y = df["PM25"].values  # PM25 欄位 取出來 => 目標
-# print(x)
-# print(y)
+y = df["PM25"].values  # PM25 欄位 取出來 => 目標 (ndarray)
 
 # 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
 x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2)  # 訓練組8成, 測試組2成
 
 linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
 
+# x_train為13維資料, y_train為1維資料 
 linear_regression.fit(x_train, y_train)  # 學習訓練.fit
 
 """
@@ -566,35 +589,8 @@ print(cc)
 
 y_pred = linear_regression.predict(x_test)  # 預測.predict
 
-df = pd.DataFrame({"測試資料": y_test, "預測結果": y_pred})
-
-plt.figure(figsize=(10, 5))
-
-plt.plot(range(len(y_test[:100])), y_test[:100], label="測試資料")
-plt.plot(range(len(y_pred[:100])), y_pred[:100], label="預測結果")
-plt.legend()
-plt.title("前100筆資料")
-show()
-
 print("評估 : 計算 測試資料 與 預測結果 的差異")
 evaluate_result(y_test, y_pred)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("資料來源 : 自建資料 ddddd")
-
-print("線性迴歸, 輸入資料的寫法")
-X = [[10.0], [8.0], [13.0], [9.0], [11.0], [14.0], [6.0], [4.0], [12.0], [7.0], [5.0]]
-y = [8.04, 6.95, 7.58, 8.81, 8.33, 9.96, 7.24, 4.26, 10.84, 4.82, 5.68]
-
-linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
-
-linear_regression.fit(X, y)  # 學習訓練.fit
-
-print("預測的寫法")
-y_pred = linear_regression.predict([[0], [1]])  # 預測.predict
-print(y_pred)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -730,26 +726,6 @@ print(y_pred)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("資料來源 : 自建資料")
-
-x = np.array([1, 2, 3, 4, 5])
-y = np.array([2, 3, 4, 5, 6])
-
-X = x.reshape((-1, 1))
-
-linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
-
-linear_regression.fit(X, y)  # 學習訓練.fit
-
-# Predict the outcome for a new data point
-new_x = np.array([6]).reshape((-1, 1))
-y_pred = linear_regression.predict(new_x)  # 預測.predict
-
-print("Predicted outcome: ", y_pred[0])
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 # 多維線性回歸
 
 N = 10
@@ -785,33 +761,6 @@ print("------------------------------------------------------------")  # 60個
 
 df = pd.read_csv("data/200811-201811a.csv")  # 共有 1447 筆資料
 
-plt.scatter(df["PM25"], df["CO"], c="yellow")
-plt.scatter(df["PM25"][:100], df["CO"][:100], c="r")
-plt.scatter(df["PM25"][100:200], df["CO"][100:200], c="g")
-plt.scatter(df["PM25"][200:300], df["CO"][200:300], c="b")
-
-plt.xlabel("PM25")
-plt.ylabel("CO")
-plt.title("PM25 對比 CO")
-
-show()
-
-print("------------------------------")  # 30個
-
-# 用 histplot() 看PM2.5主要集中的區間
-sns.histplot(df["PM25"])
-plt.title("PM25濃度統計")
-show()
-
-print("------------------------------")  # 30個
-
-# 使用 df.corr() 先做出各變數間的關係係數，再用heatmap作圖
-sns.heatmap(df.corr())
-plt.title("關係係數")
-show()
-
-print("------------------------------")  # 30個
-
 X = df["PM25"].values.reshape(-1, 1)  # 轉成 1447 X 1
 y = df["CO"].values.reshape(-1, 1)  # 轉成 1447 X 1
 
@@ -822,35 +771,6 @@ linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
 linear_regression.fit(x_train, y_train)  # 學習訓練.fit
 
 y_pred = linear_regression.predict(x_test)  # 預測.predict
-
-df = pd.DataFrame({"測試資料": y_test.flatten(), "預測結果": y_pred.flatten()})
-
-print("畫出前 N 筆, 比較實際PM2.5及預測PM2.5的關係")
-N = 20
-df1 = df.head(N)
-
-plt.figure(figsize=(10, 5))
-
-# df1.plot(kind="bar", figsize=(10, 5)) # 直接把整個df畫出來
-
-x1 = np.arange(len(df1["測試資料"])) - 0.2
-x2 = np.arange(len(df1["預測結果"])) + 0.2
-plt.bar(x1, df1["測試資料"], width=0.4, ec="none", fc="#e63946")
-plt.bar(x2, df1["預測結果"], width=0.4, ec="none", fc="#7fb069")
-
-plt.plot(df1["測試資料"], "r", label="測試資料")
-plt.plot(df1["預測結果"], "g", label="預測結果")
-plt.legend()
-plt.grid()
-show()
-
-print("------------------------------")  # 30個
-
-# 測試組資料來預測結果
-plt.scatter(x_test, y_test, color="gray", label="測試資料")
-plt.plot(x_test, y_pred, color="red", linewidth=5, label="預測結果")
-plt.title("測試資料(灰) 對比 預測結果(紅)")
-show()
 
 print("評估 : 計算 測試資料 與 預測結果 的差異")
 evaluate_result(y_test, y_pred)
@@ -872,11 +792,6 @@ df = df.fillna(method="ffill")  # 將空值填入, ffill()拿前一個值往下�
 print(df)
 
 y = df["PM25"].values
-
-# 用 histplot() 看PM2.5主要集中的區間
-sns.histplot(df["PM25"])
-plt.title("PM25濃度統計")
-show()
 
 print("------------------------------")  # 30個
 
@@ -906,13 +821,6 @@ y = df["PM25"]
 x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 # 訓練組8成, 測試組2成
 
-print(X.shape)
-print(y.shape)
-print(x_train.shape)
-print(x_test.shape)
-print(y_train.shape)
-print(y_test.shape)
-
 linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
 
 linear_regression.fit(x_train, y_train)  # 學習訓練.fit
@@ -929,20 +837,8 @@ y_pred = linear_regression.predict(x_test)  # 預測.predict
 
 df = pd.DataFrame({"測試資料": y_test, "預測結果": y_pred})
 
-print("畫出前 N 筆, 比較實際PM2.5及預測PM2.5的關係")
-N = 20
-df1 = df.head(N)
-
-plt.figure(figsize=(10, 5))
-plt.scatter(y_test, y_pred)
-show()
-
-df1.plot(kind="bar", figsize=(10, 8))
-show()
-
 # 看實際值及預測值之間的殘差分佈圖
 sns.distplot((y_test - y_pred))
-
 show()
 
 print("評估 : 計算 測試資料 與 預測結果 的差異")
@@ -950,7 +846,7 @@ evaluate_result(y_test, y_pred)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
+'''
 # 2008年11月至2018年11月資料清洗
 
 df = pd.read_csv("data/200811-201811a.csv")
@@ -978,9 +874,6 @@ df = df.fillna(0)
 # 檢查屬性是否已經改變
 # df.dtypes
 
-# 存檔至新的CSV
-# df.to_csv("tmp_200811-201811a.csv", encoding="utf8")
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -995,9 +888,7 @@ X = train_df.drop("medv", axis=1)
 y = train_df["medv"]
 
 # 資料分割
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2
-)  # 訓練組8成, 測試組2成
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)  # 訓練組8成, 測試組2成
 
 linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
 
@@ -1033,9 +924,7 @@ X["black_2"] = X["black"] ** 2
 X["lstat_2"] = X["lstat"] ** 2
 
 # 資料分割
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2
-)  # 訓練組8成, 測試組2成
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)  # 訓練組8成, 測試組2成
 
 from sklearn.preprocessing import StandardScaler
 from sklearn.preprocessing import PolynomialFeatures
@@ -1170,8 +1059,13 @@ X, y = df[["year"]].values, df["pop"].values
 # 使用 NumPy polyfit 計算
 
 coef = np.polyfit(X.reshape(-1), y, deg=2)
+print("y = a2*x^2 + a1*x^1 + a0")
+print("係數長度 :", len(coef))
+print(coef)
+print(f"a2={coef[0]}")
+print(f"a1={coef[1]}")
+print(f"a0={coef[2]}")
 print(f"y={coef[0]} X^2 + {coef[1]} X + {coef[2]}")
-# y=-0.0002668845596210234 X^2 + 1.1420418251266993 X + -1210.2427271938489
 
 plt.figure(figsize=(8, 6))
 plt.rcParams["font.sans-serif"] = ["Arial Unicode MS"]
@@ -1188,12 +1082,15 @@ plt.plot(
 plt.legend()
 show()
 
+print("y = a2*x^2 + a1*x^1 + a0")
+a2 = coef[0]
+a1 = coef[1]
+a0 = coef[2]
 
-# 使用公式預測2050年人口數
-
-print((2050**2) * coef[0] + 2050 * coef[1] + coef[2])
-
-# 9.360652508533576
+print("使用公式預測2050年人口數 : (使用 polyfit)")
+x = 2050
+population = a2 * (x**2) + a1 * x + a0
+print(population)
 
 # 產生 X 平方項，並與X合併
 
@@ -1210,7 +1107,7 @@ linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
 
 linear_regression.fit(X_new, y)  # 學習訓練.fit
 
-print("使用公式預測2050年人口數")
+print("使用公式預測2050年人口數 : (使用 線性迴歸)")
 
 """
 m = linear_regression.coef_[0][0]  # 取出斜率
@@ -1218,13 +1115,14 @@ k = linear_regression.intercept_[0]  # 取出截距
 print(f"斜率  = {m.round(2)}")
 print(f"截距  = {k.round(2)}")
 """
-print(
-    (2050**2) * linear_regression.coef_[0]
-    + 2050 * linear_regression.coef_[1]
+
+x = 2050
+population = (
+    (x**2) * linear_regression.coef_[0]
+    + x * linear_regression.coef_[1]
     + linear_regression.intercept_
 )
-
-# 9.36065250853244
+print(population)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1267,7 +1165,7 @@ cc = X_train.shape, X_test.shape, y_train.shape, y_test.shape
 print(cc)
 
 # 特徵縮放
-scaler = StandardScaler()
+scaler = preprocessing.StandardScaler()
 X_train_std = scaler.fit_transform(X_train)
 X_test_std = scaler.transform(X_test)
 
@@ -1281,7 +1179,7 @@ y_pred = linear_regression.predict(X_test_std)  # 預測.predict
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
-scaler = StandardScaler()
+scaler = preprocessing.StandardScaler()
 X_train_std = scaler.fit_transform(X_train)
 X_test_std = scaler.transform(X_test)
 
@@ -1699,10 +1597,8 @@ print("------------------------------------------------------------")  # 60個
 # An introduction to explainable AI with Shapley values
 
 import shap
-from sklearn.preprocessing import StandardScaler
 
 # 載入資料集
-
 df = pd.read_csv("./data/ca_housing.csv")
 cc = df.head()
 print(cc)
@@ -1717,7 +1613,7 @@ y = df["median_house_value"]
 
 # 模型訓練與評估
 
-# scaler = StandardScaler()
+# scaler = preprocessing.StandardScaler()
 # X2 = scaler.fit_transform(X)
 # X = pd.DataFrame(X2, columns=X.columns)
 
@@ -1867,7 +1763,7 @@ for d in degrees:
     model = polynomial_model(degree=d)
     model.fit(X, Y)  # 學習訓練.fit
     train_score = model.score(X, Y)
-    mse = mean_squared_error(Y, model.predict(X))# 均方誤差 Mean Squared Error (MSE)
+    mse = mean_squared_error(Y, model.predict(X))  # 均方誤差 Mean Squared Error (MSE)
     results.append({"model": model, "degree": d, "score": train_score, "mse": mse})
 for r in results:
     print(
@@ -2128,9 +2024,7 @@ plt.grid(which="major", linestyle="-", linewidth="0.5", color="green")
 plt.grid(which="minor", linestyle=":", linewidth="0.5", color="black")
 
 # 將資料分成訓練組及測試組
-x_train, x_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2
-)  # 訓練組8成, 測試組2成
+x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.2)  # 訓練組8成, 測試組2成
 
 # 應該沒有用
 linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
@@ -2141,4 +2035,3 @@ plt.plot(x_test, y_pred, "mo-", label="線性迴歸2")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-

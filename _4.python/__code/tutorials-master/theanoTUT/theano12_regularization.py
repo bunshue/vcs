@@ -2,7 +2,9 @@
 
 from __future__ import print_function
 import theano
-from sklearn.datasets import load_boston
+
+from sklearn.datasets import load_boston # 廢棄
+
 import theano.tensor as T
 import numpy as np
 import matplotlib.pyplot as plt

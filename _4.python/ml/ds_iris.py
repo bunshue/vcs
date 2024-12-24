@@ -260,17 +260,11 @@ Virginica = []
 # 不同种类保存为不同的列表
 for i in range(len(df)):
     if df["類別"][i] == "setosa":
-        Setosa.append(
-            (df["花萼長度"][i], df["花萼寬度"][i], df["花瓣長度"][i], df["花瓣寬度"][i])
-        )
+        Setosa.append((df["花萼長度"][i], df["花萼寬度"][i], df["花瓣長度"][i], df["花瓣寬度"][i]))
     elif df["類別"][i] == "versicolor":
-        Versicolour.append(
-            (df["花萼長度"][i], df["花萼寬度"][i], df["花瓣長度"][i], df["花瓣寬度"][i])
-        )
+        Versicolour.append((df["花萼長度"][i], df["花萼寬度"][i], df["花瓣長度"][i], df["花瓣寬度"][i]))
     elif df["類別"][i] == "virginica":
-        Virginica.append(
-            (df["花萼長度"][i], df["花萼寬度"][i], df["花瓣長度"][i], df["花瓣寬度"][i])
-        )
+        Virginica.append((df["花萼長度"][i], df["花萼寬度"][i], df["花瓣長度"][i], df["花瓣寬度"][i]))
 
 print("Setosa :", Setosa)
 print("Versicolour :", Versicolour)
@@ -1122,6 +1116,7 @@ from sklearn.cluster import AgglomerativeClustering
 from scipy.cluster.hierarchy import dendrogram
 
 # 使用鳶尾花資料集測試
+
 
 # 繪製樹狀圖
 def plot_dendrogram(model, **kwargs):

@@ -36,15 +36,17 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.ensemble import RandomForestRegressor  # 隨機森林函數學習機
 from sklearn.model_selection import cross_val_score  # Cross Validation
 
+
 def show():
-    #return
+    # return
     plt.show()
     pass
 
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print('決策樹Decision Trees')
+print("決策樹Decision Trees")
 
 sns.set()
 
@@ -55,60 +57,67 @@ GROUPS = 4  # centers, 分群數
 print("make_blobs,", N, "個樣本, ", M, "個特徵, 分成", GROUPS, "群")
 X, y = make_blobs(n_samples=N, centers=GROUPS, cluster_std=1.0)
 
-plt.scatter(X[:, 0], X[:, 1], c=y, s=50, cmap='rainbow');
+plt.scatter(X[:, 0], X[:, 1], c=y, s=50, cmap="rainbow")
 plt.show()
 
 from sklearn.tree import DecisionTreeClassifier
+
 tree = DecisionTreeClassifier().fit(X, y)
 
 
-def visualize_classifier(model, X, y, ax=None, cmap='rainbow'):
+def visualize_classifier(model, X, y, ax=None, cmap="rainbow"):
     ax = ax or plt.gca()
-    
+
     # Plot the training points
-    ax.scatter(X[:, 0], X[:, 1], c=y, s=30, cmap=cmap,
-               clim=(y.min(), y.max()), zorder=3)
-    ax.axis('tight')
-    ax.axis('off')
+    ax.scatter(
+        X[:, 0], X[:, 1], c=y, s=30, cmap=cmap, clim=(y.min(), y.max()), zorder=3
+    )
+    ax.axis("tight")
+    ax.axis("off")
     xlim = ax.get_xlim()
     ylim = ax.get_ylim()
-    
+
     # fit the estimator
     model.fit(X, y)
-    xx, yy = np.meshgrid(np.linspace(*xlim, num=200),
-                         np.linspace(*ylim, num=200))
+    xx, yy = np.meshgrid(np.linspace(*xlim, num=200), np.linspace(*ylim, num=200))
     Z = model.predict(np.c_[xx.ravel(), yy.ravel()]).reshape(xx.shape)
 
     # Create a color plot with the results
     n_classes = len(np.unique(y))
-    contours = ax.contourf(xx, yy, Z, alpha=0.3,
-                           levels=np.arange(n_classes + 1) - 0.5,
-                           cmap=cmap, clim=(y.min(), y.max()),
-                           zorder=1)
+    contours = ax.contourf(
+        xx,
+        yy,
+        Z,
+        alpha=0.3,
+        levels=np.arange(n_classes + 1) - 0.5,
+        cmap=cmap,
+        clim=(y.min(), y.max()),
+        zorder=1,
+    )
 
     ax.set(xlim=xlim, ylim=ylim)
+
 
 visualize_classifier(DecisionTreeClassifier(), X, y)
 
 plt.show()
 
 
-#隨機森林Random Forests
+# 隨機森林Random Forests
 
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import BaggingClassifier
 
 tree = DecisionTreeClassifier()
-#通過每個估計器擬合80％的訓練點  BaggingClassifier利用平行估計器的集合
-bag = BaggingClassifier(tree, n_estimators=100, max_samples=0.8,
-                        random_state=1)
+# 通過每個估計器擬合80％的訓練點  BaggingClassifier利用平行估計器的集合
+bag = BaggingClassifier(tree, n_estimators=100, max_samples=0.8, random_state=1)
 
 bag.fit(X, y)
 visualize_classifier(bag, X, y)
 
 plt.show()
 
-#隨機森林主要應用模組：RandomForestClassifier
+# 隨機森林主要應用模組：RandomForestClassifier
 
 from sklearn.ensemble import RandomForestClassifier
 
@@ -117,14 +126,13 @@ visualize_classifier(model, X, y)
 plt.show()
 
 
-
-
-#Random Forest Regression
-#將隨機森林結合之前講解的線性回歸，將資料回歸至一條線上，並進行預測。
-#使用sin()正弦函數，可以看到輸出結果的圖形，符合正弦函數的圖型。
+# Random Forest Regression
+# 將隨機森林結合之前講解的線性回歸，將資料回歸至一條線上，並進行預測。
+# 使用sin()正弦函數，可以看到輸出結果的圖形，符合正弦函數的圖型。
 
 rng = np.random.RandomState(42)
 x = 10 * rng.rand(200)
+
 
 def model(x, sigma=0.3):
     fast_oscillation = np.sin(5 * x)
@@ -133,11 +141,12 @@ def model(x, sigma=0.3):
 
     return slow_oscillation + fast_oscillation + noise
 
+
 y = model(x)
-plt.errorbar(x, y, 0.3, fmt='o')
+plt.errorbar(x, y, 0.3, fmt="o")
 plt.show()
 
-#再來直接利用SKlearn中的RandomForestRegressor，來繪製出回歸線
+# 再來直接利用SKlearn中的RandomForestRegressor，來繪製出回歸線
 from sklearn.ensemble import RandomForestRegressor
 
 forest = RandomForestRegressor(200)
@@ -147,23 +156,23 @@ xfit = np.linspace(0, 10, 1000)
 yfit = forest.predict(xfit[:, None])
 ytrue = model(xfit, sigma=0)
 
-plt.errorbar(x, y, 0.3, fmt='o', alpha=0.5)
-plt.plot(xfit, yfit, '-r');
-plt.plot(xfit, ytrue, '-k', alpha=0.5)
+plt.errorbar(x, y, 0.3, fmt="o", alpha=0.5)
+plt.plot(xfit, yfit, "-r")
+plt.plot(xfit, ytrue, "-k", alpha=0.5)
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#以sklearn中的手寫數字集合來舉例：
+# 以sklearn中的手寫數字集合來舉例：
 from sklearn.datasets import load_digits
 
 digits = load_digits()
 cc = digits.keys()
 print(cc)
 
-#可以看到上圖，資料keys包含'data', 'target', 'target_names', 'images', 'DESCR'
+# 可以看到上圖，資料keys包含'data', 'target', 'target_names', 'images', 'DESCR'
 
-#將手寫的資料視覺化呈現，可以看到每個數字(images)的左下角會記錄該數字的正確值(target)
+# 將手寫的資料視覺化呈現，可以看到每個數字(images)的左下角會記錄該數字的正確值(target)
 
 # set up the figure
 fig = plt.figure(figsize=(6, 6))  # figure size in inches
@@ -172,8 +181,8 @@ fig.subplots_adjust(left=0, right=1, bottom=0, top=1, hspace=0.05, wspace=0.05)
 # plot the digits: each image is 8x8 pixels
 for i in range(64):
     tx = fig.add_subplot(8, 8, i + 1, xticks=[], yticks=[])
-    tx.imshow(digits.images[i], cmap=plt.cm.binary, interpolation='nearest')
-    
+    tx.imshow(digits.images[i], cmap=plt.cm.binary, interpolation="nearest")
+
     # label the image with the target value
     tx.text(0, 7, str(digits.target[i]))
 
@@ -181,12 +190,13 @@ for i in range(64):
 plt.show()
 
 
-#將手寫資料分test、train資料，並利用上面介紹RandomForestClassifier()的方法將手寫數字進行分類。
+# 將手寫資料分test、train資料，並利用上面介紹RandomForestClassifier()的方法將手寫數字進行分類。
 
 from sklearn import metrics
 
-Xtrain, Xtest, ytrain, ytest = train_test_split(digits.data, digits.target,
-                                                random_state=0)
+Xtrain, Xtest, ytrain, ytest = train_test_split(
+    digits.data, digits.target, random_state=0
+)
 model = RandomForestClassifier(n_estimators=1000)
 model.fit(Xtrain, ytrain)
 ypred = model.predict(Xtest)
@@ -194,15 +204,14 @@ ypred = model.predict(Xtest)
 print(metrics.classification_report(ypred, ytest))
 
 
-
-#可以看到上圖，最左邊為數字0~9的類別，主要回傳精確值以及support，看這些數字很難懂，先看下圖
+# 可以看到上圖，最左邊為數字0~9的類別，主要回傳精確值以及support，看這些數字很難懂，先看下圖
 
 from sklearn.metrics import confusion_matrix
 
 mat = confusion_matrix(ytest, ypred)
-sns.heatmap(mat.T, square=True, annot=True, fmt='d', cbar=False)
-plt.xlabel('true label')
-plt.ylabel('predicted label')
+sns.heatmap(mat.T, square=True, annot=True, fmt="d", cbar=False)
+plt.xlabel("true label")
+plt.ylabel("predicted label")
 plt.show()
 
 """
@@ -370,7 +379,9 @@ print("Testing Labels Shape:", y_test.shape)
 
 # 隨機森林演算法, 用 sklearn 裡的 RandomForestRegressor 來做隨機森林演算法
 # 使用 1000棵 決策樹
-random_forest_regressor = RandomForestRegressor(n_estimators=60, random_state=42)  # 隨機森林函數學習機
+random_forest_regressor = RandomForestRegressor(
+    n_estimators=60, random_state=42
+)  # 隨機森林函數學習機
 
 random_forest_regressor.fit(X_train, y_train)  # 學習訓練.fit
 # 預測
@@ -422,7 +433,9 @@ show()
 # New random forest with only the two most important variables
 # 隨機森林演算法, 用 sklearn 裡的 RandomForestRegressor 來做隨機森林演算法
 # 使用 1000棵 決策樹
-rf_most_important = RandomForestRegressor(n_estimators=1000, random_state=42)  # 隨機森林函數學習機
+rf_most_important = RandomForestRegressor(
+    n_estimators=1000, random_state=42
+)  # 隨機森林函數學習機
 
 # Extract the two most important df
 important_indices = [feature_list.index("O3"), feature_list.index("TEMP")]
@@ -601,7 +614,9 @@ print("Testing Labels Shape:", test_labels.shape)
 
 # 隨機森林演算法, 用 sklearn 裡的 RandomForestRegressor 來做隨機森林演算法
 # 使用 1000棵 決策樹
-random_forest_regressor = RandomForestRegressor(n_estimators=1000, random_state=42)  # 隨機森林函數學習機
+random_forest_regressor = RandomForestRegressor(
+    n_estimators=1000, random_state=42
+)  # 隨機森林函數學習機
 
 random_forest_regressor.fit(train_features, train_labels)  # 學習訓練.fit
 
@@ -685,7 +700,9 @@ show()
 # New random forest with only the two most important variables
 # 隨機森林演算法, 用 sklearn 裡的 RandomForestRegressor 來做隨機森林演算法
 # 使用 1000棵 決策樹
-rf_most_important = RandomForestRegressor(n_estimators=1000, random_state=42)  # 隨機森林函數學習機
+rf_most_important = RandomForestRegressor(
+    n_estimators=1000, random_state=42
+)  # 隨機森林函數學習機
 
 # Extract the two most important features
 important_indices = [feature_list.index("NO2"), feature_list.index("TEMP")]

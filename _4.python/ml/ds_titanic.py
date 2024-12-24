@@ -41,6 +41,7 @@ from sklearn.naive_bayes import GaussianNB  # 數據集和數據處理
 
 
 def show():
+    return
     plt.show()
     pass
 
@@ -197,9 +198,6 @@ print("------------------------------------------------------------")  # 60個
 
 # 探索性資料分析──以Titanic(鐵達尼號)之生還預測為例
 # 問個感興趣的問題
-
-# 資料取得
-# 自建資料或下載資料後上傳到雲端硬碟
 
 # train.csv行資料說明.jpg
 # 讀取Google雲端硬碟中的csv檔

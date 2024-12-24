@@ -1,5 +1,12 @@
 
 
+
+plt.bar(x1, df1["測試資料"], width=0.4, ec="none", fc="#e63946")
+plt.bar(x2, df1["預測結果"], width=0.4, ec="none", fc="#7fb069")
+
+
+
+
 # plt.plot([1, 9],[1, 9],'r', lw = 10)
 
 

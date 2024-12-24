@@ -57,7 +57,7 @@ from sklearn.metrics import ConfusionMatrixDisplay
 
 
 def show():
-    # return
+    return
     plt.show()
     pass
 
@@ -106,18 +106,39 @@ def load_boston():
 
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-print("波士頓房價數據庫 基本數據")
+print("波士頓房價數據庫 多元線性回歸")
+
+X, y = load_boston()
+print(X.shape)
+print(y.shape)
+
+# 做線性迴歸, 用 sklearn 裡的 LinearRegression 來做線性迴歸
+linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
+
+linear_regression.fit(X, y)  # 學習訓練.fit
+
+# 全預測
+y_pred = linear_regression.predict(X)  # 預測.predict
+print(y_pred)
+
+print("決定係數R2(R-squared) :", linear_regression.score(X, y))
+
+print("評估 : 計算 測試資料 與 預測結果 的差異")
+evaluate_result(y, y_pred)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("波士頓房價數據庫 多元線性回歸")
 
 X, y = load_boston()
 
 # 做線性迴歸, 用 sklearn 裡的 LinearRegression 來做線性迴歸
 linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
 
-linear_regression.fit(X, y)
-print("迴歸係數(斜率):", linear_regression.coef_)
-print("截距:", linear_regression.intercept_)
-
+linear_regression.fit(X, y)  # 學習訓練.fit
 
 feature_names = [
     "CRIM",
@@ -148,14 +169,17 @@ show()
 
 print("------------------------------")  # 30個
 
-predicted_price = linear_regression.predict(X)
-print(predicted_price[0:5])
+# 預測的價格
+# 全預測
+y_pred = linear_regression.predict(X)  # 預測.predict
+print(y_pred[0:5])
 
-MSE = np.mean((y - predicted_price) ** 2)  # 自己算MSE
+MSE = np.mean((y - y_pred) ** 2)  # 自己算MSE
 print("MSE:", MSE)
-print("R-squared:", linear_regression.score(X, y))
 
-plt.scatter(y, predicted_price)
+print("決定係數R2(R-squared) :", linear_regression.score(X, y))
+
+plt.scatter(y, y_pred)
 plt.xlabel("中位數房價")
 plt.ylabel("預測的中位數房價")
 plt.title("中位數房價 vs 預測的中位數房價")
@@ -164,17 +188,15 @@ show()
 
 print("------------------------------")  # 30個
 
-XTrain, XTest, yTrain, yTest = train_test_split(X, y, test_size=0.33, random_state=9487)
+XTrain, XTest, yTrain, yTest = train_test_split(X, y, test_size=0.2)
 
 # 做線性迴歸, 用 sklearn 裡的 LinearRegression 來做線性迴歸
 linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
 
-linear_regression.fit(XTrain, yTrain)
-print("迴歸係數(斜率):", linear_regression.coef_)
-print("截距:", linear_regression.intercept_)
+linear_regression.fit(XTrain, yTrain)  # 學習訓練.fit
 
-pred_train = linear_regression.predict(XTrain)
-pred_test = linear_regression.predict(XTest)
+pred_train = linear_regression.predict(XTrain)  # 預測.predict
+pred_test = linear_regression.predict(XTest)  # 預測.predict
 
 plt.scatter(yTest, pred_test)
 plt.xlabel("中位數房價")
@@ -188,8 +210,8 @@ MSE_test = np.mean((yTest - pred_test) ** 2)  # 自己算MSE
 print("訓練資料的MSE:", MSE_train)
 print("測試資料的MSE:", MSE_test)
 
-print("訓練資料的R-squared:", linear_regression.score(XTrain, yTrain))
-print("測試資料的R-squared:", linear_regression.score(XTest, yTest))
+print("訓練資料的決定係數R2(R-squared) :", linear_regression.score(XTrain, yTrain))
+print("測試資料的決定係數R2(R-squared) :", linear_regression.score(XTest, yTest))
 
 plt.scatter(pred_train, yTrain - pred_train, c="b", s=40, alpha=0.5, label="訓練資料集")
 plt.scatter(pred_test, yTest - pred_test, c="r", s=40, label="測試資料集")
@@ -235,18 +257,14 @@ show()
 X = boston.loc[:, "CRIM":"LSTAT"].values
 Y = boston.MEDV
 
-x_train, x_test, y_train, y_test = train_test_split(
-    X, Y, test_size=0.2, random_state=9487
-)
+x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size=0.2)
 
 # 做線性迴歸, 用 sklearn 裡的 LinearRegression 來做線性迴歸
 linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
 
-linear_regression.fit(x_train, y_train)
-print("迴歸係數(斜率):", linear_regression.coef_)
-print("截距:", linear_regression.intercept_)
+linear_regression.fit(x_train, y_train)  # 學習訓練.fit
 
-y_pred = linear_regression.predict(x_test)
+y_pred = linear_regression.predict(x_test)  # 預測.predict
 
 plt.scatter(y_test, y_pred, s=50)
 show()
@@ -273,16 +291,12 @@ X = boston[
 ].values
 print(X)
 
-x_train, x_test, y_train, y_test = train_test_split(
-    X, Y, test_size=0.2, random_state=9487
-)
+x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size=0.2)
 
 # 做線性迴歸, 用 sklearn 裡的 LinearRegression 來做線性迴歸
 linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
 
-linear_regression.fit(x_train, y_train)
-print("迴歸係數(斜率):", linear_regression.coef_)
-print("截距:", linear_regression.intercept_)
+linear_regression.fit(x_train, y_train)  # 學習訓練.fit
 
 cc = boston[:3]
 print(cc)
@@ -296,14 +310,10 @@ X = boston
 # 做線性迴歸, 用 sklearn 裡的 LinearRegression 來做線性迴歸
 linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
 
-linear_regression.fit(X, y)
-print("迴歸係數(斜率):", linear_regression.coef_)
-print("截距:", linear_regression.intercept_)
+linear_regression.fit(X, y)  # 學習訓練.fit
 
-y_pred = linear_regression.predict(X)
-
-print(linear_regression.coef_)
-print(linear_regression.intercept_)
+# 全預測
+y_pred = linear_regression.predict(X)  # 預測.predict
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -313,29 +323,20 @@ boston, y = load_boston()
 X = boston
 boston["MEDV"] = y
 
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=9487
-)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 from sklearn.preprocessing import StandardScaler
 
 # boston = load_boston()
 
-x_train, x_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=9487
-)
+x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 # 做線性迴歸, 用 sklearn 裡的 LinearRegression 來做線性迴歸
 linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
 
-linear_regression.fit(x_train, y_train)
-print("迴歸係數(斜率):", linear_regression.coef_)
-print("截距:", linear_regression.intercept_)
+linear_regression.fit(x_train, y_train)  # 學習訓練.fit
 
-print("權重值：{}".format(linear_regression.coef_))
-print("偏置值：{}\n".format(linear_regression.intercept_))
-
-y_predict = linear_regression.predict(x_test)
+y_predict = linear_regression.predict(x_test)  # 預測.predict
 y_real = y_test
 
 print(y_predict)
@@ -346,14 +347,12 @@ for i in range(5):
     print("預測值{}：{}，真實值：{}".format(i + 1, y_predict[i], y_real[i]))
 """
 
-# another
+# SGDRegressor
 
 from sklearn.linear_model import SGDRegressor
 from sklearn.preprocessing import StandardScaler
 
-x_train, x_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=9487
-)
+x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 std_x = StandardScaler()
 x_train = std_x.fit_transform(x_train)
@@ -364,11 +363,13 @@ y_train = y_train
 y_test = y_test
 
 sgd = SGDRegressor()
-sgd.fit(x_train, y_train)
+
+sgd.fit(x_train, y_train)  # 學習訓練.fit
 print("權重值：{}".format(sgd.coef_))
 print("偏置值：{}\n".format(sgd.intercept_))
 
-y_predict = sgd.predict(x_test)
+y_predict = sgd.predict(x_test)  # 預測.predict
+
 y_real = y_test
 
 print(y_predict)
@@ -384,33 +385,24 @@ print("------------------------------------------------------------")  # 60個
 
 X, y = load_boston()
 
-X["MEDV"] = y
-
 print(X.shape)
 
-# print(X[0])
-# print(boston.feature_names)
-
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=9487
-)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 # 做線性迴歸, 用 sklearn 裡的 LinearRegression 來做線性迴歸
 linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
 
 start = time.perf_counter()
 
-linear_regression.fit(X_train, y_train)
-print("迴歸係數(斜率):", linear_regression.coef_)
-print("截距:", linear_regression.intercept_)
+linear_regression.fit(X_train, y_train)  # 學習訓練.fit
 
+# 計算 決定係數R2(R-squared)
 train_score = linear_regression.score(X_train, y_train)
 cv_score = linear_regression.score(X_test, y_test)
-print(
-    "耗時 : {0:.6f}; train_score: {1:0.6f}; cv_score: {2:.6f}".format(
-        time.perf_counter() - start, train_score, cv_score
-    )
-)
+
+print("耗時 : {0:.6f}".format(time.perf_counter() - start))
+print("決定係數R2(R-squared) train_score :", train_score)
+print("決定係數R2(R-squared) cv_score :", cv_score)
 
 print("------------------------------")  # 30個
 
@@ -435,15 +427,15 @@ def polynomial_model(degree=1):
 model = polynomial_model(degree=2)
 
 start = time.perf_counter()
-model.fit(X_train, y_train)
+model.fit(X_train, y_train)  # 學習訓練.fit
 
+# 計算 決定係數R2(R-squared)
 train_score = model.score(X_train, y_train)
 cv_score = model.score(X_test, y_test)
-print(
-    "耗時 : {0:.6f}; train_score: {1:0.6f}; cv_score: {2:.6f}".format(
-        time.perf_counter() - start, train_score, cv_score
-    )
-)
+
+print("耗時 : {0:.6f}".format(time.perf_counter() - start))
+print("決定係數R2(R-squared) train_score :", train_score)
+print("決定係數R2(R-squared) cv_score :", cv_score)
 
 print("------------------------------")  # 30個
 
@@ -451,6 +443,7 @@ from common.utils import plot_learning_curve
 from sklearn.model_selection import ShuffleSplit
 
 cv = ShuffleSplit(n_splits=10, test_size=0.2, random_state=9487)
+
 plt.figure(figsize=(10, 6))
 title = "Learning Curves (degree={0})"
 degrees = [1, 2, 3]
@@ -472,24 +465,6 @@ for i in range(len(degrees)):
 print("耗時 : {0:.6f}".format(time.perf_counter() - start))
 
 show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-X, y = load_boston()
-
-# 做線性迴歸, 用 sklearn 裡的 LinearRegression 來做線性迴歸
-linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
-
-linear_regression.fit(X, y)
-print("迴歸係數(斜率):", linear_regression.coef_)
-print("截距:", linear_regression.intercept_)
-
-print(linear_regression.predict(X))
-print(linear_regression.coef_)
-print(linear_regression.intercept_)
-print(linear_regression.get_params())
-print(linear_regression.score(X, y))  # R^2 coefficient of determination
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -545,30 +520,18 @@ scaler = StandardScaler()
 X_train_std = scaler.fit_transform(X_train)
 X_test_std = scaler.transform(X_test)
 
-# 5. 選擇演算法
-
 from sklearn.tree import DecisionTreeRegressor
 
 model = DecisionTreeRegressor()
 
-# 6. 模型訓練
+model.fit(X_train_std, y_train)  # 學習訓練.fit
 
-model.fit(X_train_std, y_train)
+y_pred = model.predict(X_test_std)  # 預測.predict
 
-# DecisionTreeRegressor()
-
-# 7. 模型評分
-
-# R2、MSE、MAE
-y_pred = model.predict(X_test_std)
-print(f"R2 = {r2_score(y_test, y_pred)*100:.2f}")
-print(f"MSE = {mean_squared_error(y_test, y_pred)}")
-print(f"MAE = {mean_absolute_error(y_test, y_pred)}")
+# 評分
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-# 05_02_ linear_regression_boston
 
 # 房價預測
 
@@ -628,23 +591,9 @@ linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
 
 linear_regression.fit(X_train_std, y_train)  # 學習訓練.fit
 
-# 7. 模型評分
-
-# R2、MSE、MAE
 y_pred = linear_regression.predict(X_test_std)  # 預測.predict
-print(f"R2 = {r2_score(y_test, y_pred)*100:.2f}")
-print(f"MSE = {mean_squared_error(y_test, y_pred)}")
-print(f"MAE = {mean_absolute_error(y_test, y_pred)}")
 
-print("權重")
-print(linear_regression.coef_)
-
-print("偏差(Bias)")
-print(linear_regression.intercept_)
-
-# 8. 模型評估，暫不進行
-
-# 9. 模型佈署
+# 評分
 
 # 模型存檔
 joblib.dump(linear_regression, "tmp_linear_regression_model.joblib")
@@ -744,27 +693,15 @@ from sklearn.svm import SVR
 
 model = SVR(kernel="linear")
 
-# 6. 模型訓練
-
-model.fit(X_train_std, y_train)
+model.fit(X_train_std, y_train)  # 學習訓練.fit
 
 """
 SVR(kernel='linear')
 """
 
-# 7. 模型評分
+y_pred = model.predict(X_test_std)  # 預測.predict
 
-# R2、MSE、MAE
-y_pred = model.predict(X_test_std)
-print(f"R2 = {r2_score(y_test, y_pred)*100:.2f}")
-print(f"MSE = {mean_squared_error(y_test, y_pred)}")
-print(f"MAE = {mean_absolute_error(y_test, y_pred)}")
-
-"""
-R2 = 69.56
-MSE = 19.12608965301932
-MAE = 3.198509245210469
-"""
+# 評分
 
 # 取得偏差項及權重
 cc = model.intercept_, model.coef_
@@ -806,12 +743,9 @@ w = np.linalg.inv(X2.T @ X2) @ X2.T @ y
 print(w)
 
 print("使用sklearn的 線性迴歸 LinearRegression()")
-
 linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
 
 linear_regression.fit(X, y)  # 學習訓練.fit
-
-print(linear_regression.coef_, linear_regression.intercept_)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -917,3 +851,11 @@ array([[6.3200e-03, 1.8000e+01, 2.3100e+00, ..., 1.5300e+01, 3.9690e+02,
 
 
 """
+
+print("權重值：{}".format(linear_regression.coef_))
+print("偏置值：{}\n".format(linear_regression.intercept_))
+
+print("迴歸係數(斜率/權重):", linear_regression.coef_)
+print("截距(偏差Bias):", linear_regression.intercept_)
+
+print(linear_regression.get_params())

@@ -25,7 +25,7 @@ from sklearn import metrics
 
 
 def show():
-    return
+    #return
     plt.show()
     pass
 
@@ -348,15 +348,15 @@ plt.title("用KMeans分成3群")
 
 plt.subplot(133)
 plt.scatter(X_test[:, 0], X_test[:, 1], c=y_pred)
-# 畫分區域ST
+# 劃分區域ST
 x0 = y0 = np.arange(0, 1.02, 0.02)
 xm, ym = np.meshgrid(x0, y0)
 P = np.c_[xm.ravel(), ym.ravel()]
 z = clf.predict(P)  # 預測.predict
 Z = z.reshape(xm.shape)
 plt.contourf(xm, ym, Z, alpha=0.3, cmap="Paired")
-# 畫分區域SP
-plt.title("再預測500點")
+# 劃分區域SP
+plt.title("再預測500點+劃分區域")
 
 show()
 
@@ -447,14 +447,14 @@ plt.axis([-15, 15, -15, 15])
 plt.title("KMeans分群結果")
 
 plt.subplot(133)
-# 畫分區域ST
+# 劃分區域ST
 x0 = y0 = np.arange(-15, 15, 0.1)
 xm, ym = np.meshgrid(x0, y0)
 P = np.c_[xm.ravel(), ym.ravel()]
 z = clf.predict(P)  # 預測.predict
 Z = z.reshape(xm.shape)
-plt.contourf(xm, ym, Z, alpha=0.3)  # 畫分區域
-# 畫分區域SP
+plt.contourf(xm, ym, Z, alpha=0.3)  # 劃分區域
+# 劃分區域SP
 # 繪圓點, 圓點用黑色外框, 使用標籤 labels_ 區別顏色,
 plt.scatter(X[:, 0], X[:, 1], marker="o", c=clf.labels_)
 # 標記群集中心
@@ -499,14 +499,14 @@ plt.axis([-0.1, 1.1, -0.1, 1.1])
 plt.title("原始資料")
 
 plt.subplot(232)
-# 畫分區域ST
+# 劃分區域ST
 x0 = y0 = np.arange(-0.2, 1.2, 0.02)
 xm, ym = np.meshgrid(x0, y0)
 P = np.c_[xm.ravel(), ym.ravel()]
 z = clf.predict(P)  # 預測.predict
 Z = z.reshape(xm.shape)
 plt.contourf(xm, ym, Z, alpha=0.3, cmap="Paired")
-# 畫分區域SP
+# 劃分區域SP
 plt.scatter(X[:, 0], X[:, 1], s=50, c=clf.labels_, cmap="Paired")  # 畫點
 plt.axis([-0.1, 1.1, -0.1, 1.1])
 plt.title("標準 Mean Shift分類, bw=0.2")
@@ -532,14 +532,14 @@ print("------------------------------")  # 30個
 def my_mean_shift(bw=0.2):
     clf = MeanShift(bandwidth=bw)
     clf.fit(X)  # 學習訓練.fit
-    # 畫分區域ST
+    # 劃分區域ST
     x0 = y0 = np.arange(-0.2, 1.2, 0.02)
     xm, ym = np.meshgrid(x0, y0)
     P = np.c_[xm.ravel(), ym.ravel()]
     z = clf.predict(P)  # 預測.predict
     Z = z.reshape(xm.shape)
     plt.contourf(xm, ym, Z, alpha=0.3, cmap="Paired")
-    # 畫分區域SP
+    # 劃分區域SP
     plt.scatter(X[:, 0], X[:, 1], c=clf.labels_, cmap="Paired")
     plt.axis([-0.1, 1.1, -0.1, 1.1])
     plt.title("Mean Shift, bw=" + str(bw))
@@ -692,7 +692,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 iris = datasets.load_iris()
-# print(iris.feature_names)
 
 X = iris.data
 y = iris.target

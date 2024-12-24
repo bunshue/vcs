@@ -86,7 +86,7 @@ print(accuracy_score(y_pred, y_test))  # 評価
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print('iris 資料 全部')
+print("iris 資料 全部")
 
 iris = datasets.load_iris()
 data = iris.data
@@ -103,14 +103,15 @@ print("Accuracy: %.2f" % accuracy_score(labels, pred))
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print('iris 資料 分割+標準化')
+print("iris 資料 分割+標準化")
 
 iris = datasets.load_iris()
 data = iris.data
 labels = iris.target
 
 data_train, data_test, labels_train, labels_test = train_test_split(
-    data, labels, test_size=0.5)
+    data, labels, test_size=0.5
+)
 
 scaler = StandardScaler()
 scaler.fit(data)
@@ -137,7 +138,12 @@ print("------------------------------------------------------------")  # 60個
 from matplotlib.colors import ListedColormap
 
 # 0萼長 1萼寬 2瓣長 3瓣寬
-M = {0: "sepal length 萼長", 1: "sepal width 萼寬", 2: "petal length 瓣長", 3: "petal width 瓣寬"}
+M = {
+    0: "sepal length 萼長",
+    1: "sepal width 萼寬",
+    2: "petal length 瓣長",
+    3: "petal width 瓣寬",
+}
 
 # Choose two features
 x = 1  # 1 corresponds to the sepal width 萼寬
@@ -148,8 +154,7 @@ data = iris.data[:, [x, y]]
 
 labels = iris.target
 
-X_train, X_test, y_train, y_test = train_test_split(
-    data, labels, test_size=0.5)
+X_train, X_test, y_train, y_test = train_test_split(data, labels, test_size=0.5)
 
 reg = StandardScaler()
 reg.fit(data)
@@ -232,7 +237,6 @@ sys.exit()
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------------------------------------")  # 60個

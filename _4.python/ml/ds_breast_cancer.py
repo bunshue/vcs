@@ -54,6 +54,7 @@ print("------------------------------------------------------------")  # 60個
 from sklearn import datasets
 from sklearn.svm import SVC
 from sklearn.preprocessing import StandardScaler  # 特徵縮放
+from sklearn.linear_model import LogisticRegression
 from sklearn import metrics
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
 from sklearn.model_selection import cross_val_score
@@ -82,38 +83,18 @@ breast_cancer = datasets.load_breast_cancer()
 
 print("feature_names :", breast_cancer.feature_names)
 
-
-sys.exit()
-
 X = breast_cancer.data
 y = breast_cancer.target
 
-X = X[:, :10]
-
-from sklearn.linear_model import LogisticRegression
+X = X[:, :10]  # 原本有30個特徵, 取出前10個特徵
 
 logistic_regression = LogisticRegression()
+
 logistic_regression.fit(X, y)
 
 y_pred = logistic_regression.predict(X)
 
 print(f"計算準確率 : {accuracy_score(y, y_pred)*100:.2f}%")
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-breast_cancer = datasets.load_breast_cancer()
-
-X = breast_cancer.data
-y = 1 - breast_cancer.target
-# ラベルの0と1を反転
-
-X = X[:, :10]
-from sklearn.linear_model import LogisticRegression
-
-logistic_regression = LogisticRegression()
-logistic_regression.fit(X, y)
-y_pred = logistic_regression.predict(X)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -131,19 +112,15 @@ print(breast_cancer.data[0])
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
-# 模型訓練
-from sklearn.linear_model import LogisticRegression
-
 model = LogisticRegression(solver="liblinear")
+
 model.fit(X_train, y_train)
 
 train_score = model.score(X_train, y_train)
 test_score = model.score(X_test, y_test)
-print(
-    "train score: {train_score:.6f}; test score: {test_score:.6f}".format(
-        train_score=train_score, test_score=test_score
-    )
-)
+
+print("決定係數R2(R-squared) train_score :", train_score)
+print("決定係數R2(R-squared) test_score :", test_score)
 
 # 樣本預測
 y_pred = model.predict(X_test)
@@ -157,7 +134,6 @@ result = y_pred_proba[y_pred_proba_0]
 y_pred_proba_1 = result[:, 1] > 0.1
 print(result[y_pred_proba_1])
 
-from sklearn.linear_model import LogisticRegression
 from sklearn.preprocessing import PolynomialFeatures
 from sklearn.pipeline import Pipeline
 
@@ -184,8 +160,8 @@ train_score = model.score(X_train, y_train)
 cv_score = model.score(X_test, y_test)
 
 print("耗時 : {0:.6f}".format(time.time() - start))
-print("train_score: ", train_score)
-print("cv_score: ", cv_score)
+print("決定係數R2(R-squared) train_score :", train_score)
+print("決定係數R2(R-squared) cv_score :", cv_score)
 
 logistic_regression = model.named_steps["logistic_regression"]
 print(
@@ -267,7 +243,9 @@ clf.fit(X_train, y_train)
 
 train_score = clf.score(X_train, y_train)
 test_score = clf.score(X_test, y_test)
-print("train score: {0}; test score: {1}".format(train_score, test_score))
+print("決定係數R2(R-squared) train_score :", train_score)
+print("決定係數R2(R-squared) test_score :", test_score)
+
 
 from common.utils import plot_param_curve
 from sklearn.model_selection import GridSearchCV
@@ -313,7 +291,8 @@ clf.fit(X_train, y_train)
 
 train_score = clf.score(X_train, y_train)
 test_score = clf.score(X_test, y_test)
-print("train score: {0}; test score: {1}".format(train_score, test_score))
+print("決定係數R2(R-squared) train_score :", train_score)
+print("決定係數R2(R-squared) test_score :", test_score)
 
 from common.utils import plot_learning_curve
 from sklearn.model_selection import ShuffleSplit
@@ -369,7 +348,8 @@ clf = create_model(penalty="l1", dual=False)
 clf.fit(X_train, y_train)
 train_score = clf.score(X_train, y_train)
 test_score = clf.score(X_test, y_test)
-print("train score: {0}; test score: {1}".format(train_score, test_score))
+print("決定係數R2(R-squared) train_score :", train_score)
+print("決定係數R2(R-squared) test_score :", test_score)
 
 from common.utils import plot_learning_curve
 from sklearn.model_selection import ShuffleSplit
@@ -395,6 +375,8 @@ for i in range(len(degrees)):
 print("耗時 : {0:.6f}".format(time.time() - start))
 
 show()
+
+sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -566,8 +548,9 @@ print("Hyperparameter 超參數 ハイパーパラメータの探索")
 breast_cancer = datasets.load_breast_cancer()
 
 X = breast_cancer.data
-y = 1 - breast_cancer.target  # ラベルの0と1を反転
-X = X[:, :10]
+y = breast_cancer.target
+
+X = X[:, :10]  # 原本有30個特徵, 取出前10個特徵
 
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import GridSearchCV
@@ -639,14 +622,14 @@ model.fit(dx_train, dy_train)  # 用最佳模型來做訓練
 
 print("Best params:", model.best_params_)  # 傳回最佳參數
 print("CV score:", model.best_score_.round(3))
-# print("Test score:", model.score(dx_test, dy_test).round(3))
+
+cc = model.score(dx_test, dy_test).round(3)
+print("決定係數R2(R-squared) :", cc)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 13-2-1 邏輯斯迴歸的 C：常規化強度
-
-from sklearn.linear_model import LogisticRegression
 
 dx, dy = datasets.load_breast_cancer(return_X_y=True)
 
@@ -739,7 +722,9 @@ model.fit(dx_train, dy_train)
 
 print("Best params: ", model.best_params_)
 print("CV score:", model.best_score_.round(3))
-# NG print("Test score:", model.score(dx_test, dy_test).round(3))
+
+cc = model.score(dx_test, dy_test).round(3)
+print("決定係數R2(R-squared) :", cc)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -767,7 +752,8 @@ model.fit(dx_train, dy_train)
 
 print("Best params:", model.best_params_)
 print("CV score:", model.best_score_.round(3))
-# NG print("Test score:", model.score(dx_test, dy_test).round(3))
+cc = model.score(dx_test, dy_test).round(3)
+print("決定係數R2(R-squared) :", cc)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -935,7 +921,9 @@ clf = KNeighborsClassifier(5)  # 設鄰居數爲5個
 
 clf.fit(x_train, y_train)  # 訓練模型
 
-print(clf.score(x_test, y_test))  # 給模型打分
+cc = clf.score(x_test, y_test)
+print("決定係數R2(R-squared) :", cc)
+
 print(clf.predict([x_test[0]]), y_test[0], clf.predict_proba([x_test[0]]))
 
 print("------------------------------")  # 30個
@@ -1011,8 +999,6 @@ print(cc)
 scaler = MinMaxScaler()
 X_train_std = scaler.fit_transform(X_train)
 X_test_std = scaler.transform(X_test)
-
-from sklearn.linear_model import LogisticRegression
 
 clf = LogisticRegression()
 
@@ -1093,10 +1079,6 @@ print(cc)
 scaler = StandardScaler()
 X_train_std = scaler.fit_transform(X_train)
 X_test_std = scaler.transform(X_test)
-
-# 5. 選擇演算法
-
-from sklearn.linear_model import LogisticRegression
 
 clf = LogisticRegression()
 
@@ -1184,13 +1166,7 @@ scaler = MaxAbsScaler()
 X_train_std = scaler.fit_transform(X_train)
 X_test_std = scaler.transform(X_test)
 
-# 5. 選擇演算法
-
-from sklearn.linear_model import LogisticRegression
-
 clf = LogisticRegression()
-
-# 6. 模型訓練
 
 clf.fit(X_train_std, y_train)
 
@@ -1248,22 +1224,10 @@ scaler = RobustScaler()
 X_train_std = scaler.fit_transform(X_train)
 X_test_std = scaler.transform(X_test)
 
-# 5. 選擇演算法
-
-from sklearn.linear_model import LogisticRegression
-
 clf = LogisticRegression()
 
-# 6. 模型訓練
-
 clf.fit(X_train_std, y_train)
-"""
-LogisticRegression()
-In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook.
-On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.
-"""
 
-# 7. 模型計分
 y_pred = clf.predict(X_test_std)
 print(y_pred)
 
@@ -1378,10 +1342,11 @@ VotingClassifier(estimators=[('svc', SVC()), ('rf', RandomForestClassifier()),
                              ('nb', GaussianNB())])
 """
 
-# 模型評估
-
-# 計算準確率
+print("計算準確率 :")
 print(f"{clf.score(X_test_std, y_test)*100:.2f}%")
+
+print("決定係數R2(R-squared) :", clf.score(X_test_std, y_test))
+
 # 97.37%
 
 # 個別模型評估
@@ -1389,9 +1354,11 @@ print(f"{clf.score(X_test_std, y_test)*100:.2f}%")
 svc = SVC()
 
 svc.fit(X_train_std, y_train)  # 學習訓練.fit
-print(f"{svc.score(X_test_std, y_test)*100:.2f}%")
 
+print(f"{svc.score(X_test_std, y_test)*100:.2f}%")
 # 98.25%
+
+print("決定係數R2(R-squared) :", svc.score(X_test_std, y_test))
 
 rf = RandomForestClassifier()
 
@@ -1399,11 +1366,15 @@ rf.fit(X_train_std, y_train)  # 學習訓練.fit
 print(f"{rf.score(X_test_std, y_test)*100:.2f}%")
 # 98.25%
 
+print("決定係數R2(R-squared) :", rf.score(X_test_std, y_test))
+
 nb = GaussianNB()
 
 nb.fit(X_train_std, y_train)  # 學習訓練.fit
 print(f"{nb.score(X_test_std, y_test)*100:.2f}%")
 # 93.86%
+
+print("決定係數R2(R-squared) :", nb.score(X_test_std, y_test))
 
 # 模型預測
 cc = clf.predict(X_test_std)
@@ -1477,11 +1448,11 @@ clf.fit(X_train_std, y_train)  # 學習訓練.fit
 BaggingClassifier(estimator=GaussianNB(), n_estimators=50)
 """
 
-# 模型評估
-
-# 計算準確率
+print("計算準確率")
 print(f"{clf.score(X_test_std, y_test)*100:.2f}%")
 # 90.35%
+
+print("決定係數R2(R-squared) :", clf.score(X_test_std, y_test))
 
 # 個別模型評估
 nb = GaussianNB()
@@ -1490,8 +1461,9 @@ nb.fit(X_train_std, y_train)  # 學習訓練.fit
 print(f"{nb.score(X_test_std, y_test)*100:.2f}%")
 # 90.35%
 
-# 模型預測
+print("決定係數R2(R-squared) :", nb.score(X_test_std, y_test))
 
+# 模型預測
 cc = clf.predict(X_test_std)
 print(cc)
 
@@ -1684,6 +1656,8 @@ print(f"{(1-pred[1])*100:.2f}%")
 weak_learner.fit(X_train, y_train)  # 學習訓練.fit
 print(f"{weak_learner.score(X_test, y_test)*100:.2f}%")
 # 93.86%
+
+print("決定係數R2(R-squared) :", weak_learner.score(X_test, y_test))
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

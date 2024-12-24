@@ -67,7 +67,7 @@ image_shape = (64, 64)
 rng = RandomState(0)
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 import cv2
 
 # 圖片切分範例
@@ -81,10 +81,10 @@ w, h = 47, 57
 # 將人臉圖片提取為 (label:list) 形式
 olivetti_faces = []
 
-#左排
+# 左排
 for row in range(20):
     for column in range(10):
-        #print("("+str(row) + ", " + str(column)+") ", end="")
+        # print("("+str(row) + ", " + str(column)+") ", end="")
         img = image[row * h : (row + 1) * h, column * w : (column + 1) * w]
         olivetti_faces.append(img)
         """ many
@@ -95,11 +95,11 @@ for row in range(20):
         """
 
 
-#右排
+# 右排
 for row in range(20):
     for column in range(10):
         column += 10
-        #print("("+str(row) + ", " + str(column)+") ", end="")
+        # print("("+str(row) + ", " + str(column)+") ", end="")
         img = image[row * h : (row + 1) * h, column * w : (column + 1) * w]
         olivetti_faces.append(img)
         """ many
@@ -114,7 +114,7 @@ print("共有 :", len(olivetti_faces), "張圖")
 plt.figure(figsize=(12, 8))
 for i in range(80):
     plt.subplot(8, 10, i + 1)
-    plt.imshow(olivetti_faces[(i//2)*10+1], cmap=plt.cm.gray)
+    plt.imshow(olivetti_faces[(i // 2) * 10 + 1], cmap=plt.cm.gray)
     plt.axis("off")
 
 plt.suptitle("原圖 80張, 一人兩張")
@@ -157,7 +157,7 @@ print("------------------------------")  # 30個
 plt.figure(figsize=(12, 8))
 for i in range(80):
     plt.subplot(8, 10, i + 1)
-    plt.imshow(X[(i//2)*10+1].reshape(64, 64), cmap=plt.cm.gray)
+    plt.imshow(X[(i // 2) * 10 + 1].reshape(64, 64), cmap=plt.cm.gray)
     plt.axis("off")
 
 plt.suptitle("原圖 80張, 一人兩張")
@@ -190,7 +190,7 @@ print("------------------------------")  # 30個
 # pip install scikit-image
 from skimage.io import imsave
 
-index = 70 # 第幾張圖
+index = 70  # 第幾張圖
 face = X[index]
 
 # 看一下 Olivetti 臉的樣子, 就是  64 X 64
@@ -199,7 +199,7 @@ print(face.shape)
 
 fig = plt.figure(figsize=(6, 4))
 plt.imshow(face.reshape(64, 64), cmap=plt.cm.gray)
-plt.title("第"+ str(index)+ "張圖")
+plt.title("第" + str(index) + "張圖")
 show()
 
 trans = pca.transform(face.reshape(1, -1))
@@ -223,10 +223,10 @@ print("------------------------------------------------------------")  # 60個
 
 olivetti_faces = datasets.fetch_olivetti_faces()
 
-X = olivetti_faces.data # 64X64之影像檔, 共400個
-y = olivetti_faces.target # 第幾人 0~39 號, 共400個
+X = olivetti_faces.data  # 64X64之影像檔, 共400個
+y = olivetti_faces.target  # 第幾人 0~39 號, 共400個
 
-#print("原目標 :", y)
+# print("原目標 :", y)
 targets = np.unique(y)
 print("單一化目標 :", targets)
 
@@ -405,7 +405,6 @@ print(cm)
 
 print(classification_report(y_test, y_pred))
 
-'''
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 

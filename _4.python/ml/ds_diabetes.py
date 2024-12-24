@@ -70,7 +70,7 @@ def show():
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
+
 print("糖尿病資料集 基本數據")
 
 diabetes = datasets.load_diabetes()
@@ -340,7 +340,7 @@ plt.scatter(diabetes_X_test, diabetes_y_test, color="black")
 show()
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 # RegressionDiabetesLoad.py
 
 # Load the diabetes dataset
@@ -398,11 +398,18 @@ print(
     % np.mean((linear_regression.predict(diabetes_X_test) - diabetes_y_test) ** 2)
 )
 # Explained variance score: 1 is perfect prediction
-print("Variance score: %.2f" % linear_regression.score(diabetes_X_test, diabetes_y_test))
+print(
+    "Variance score: %.2f" % linear_regression.score(diabetes_X_test, diabetes_y_test)
+)
 
 # Plot outputs
 plt.scatter(diabetes_X_test, diabetes_y_test, color="black")
-plt.plot(diabetes_X_test, linear_regression.predict(diabetes_X_test), color="blue", linewidth=3)
+plt.plot(
+    diabetes_X_test,
+    linear_regression.predict(diabetes_X_test),
+    color="blue",
+    linewidth=3,
+)
 
 plt.xticks(())
 plt.yticks(())
@@ -441,7 +448,9 @@ print(
     % np.mean((linear_regression.predict(diabetes_X_test) - diabetes_y_test) ** 2)
 )
 # Explained variance score: 1 is perfect prediction
-print("Variance score: %.2f" % linear_regression.score(diabetes_X_test, diabetes_y_test))
+print(
+    "Variance score: %.2f" % linear_regression.score(diabetes_X_test, diabetes_y_test)
+)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

@@ -2634,8 +2634,8 @@ namespace _vcs_MakePicture
             int max = 200;
             int min = 100;
 
-            width = 400;
-            height = 400;
+            width = 600;
+            height = 600;
             bitmap1 = new Bitmap(width, height);
             cx = width / 2;
             cy = height / 2;
@@ -2650,14 +2650,28 @@ namespace _vcs_MakePicture
                     //bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x11, 0x33, 0x55));
                     bitmap1.SetPixel(xx, yy, background_color);
                     dd = Math.Sqrt((xx - cx) * (xx - cx) + (yy - cy) * (yy - cy));
-                    double kk = (max - min) * (dd - 0) / 255 + min;
+                    dd = Math.Abs(dd);
+                    //double kk = (max - min) * (dd - 0) / 255 + min;
+                    double kk = dd;
                     if (kk > 255)
                     {
-
+                        kk = kk - 255;
+                        //bitmap1.SetPixel(xx, yy, Color.FromArgb(255, (int)(255 - kk), (int)(255 - kk), (int)(255 - kk)));
+                        bitmap1.SetPixel(xx, yy, Color.FromArgb(255, (int)(kk), (int)(kk), (int)(kk)));
+                    }
+                    else if (kk < 0)
+                    {
                     }
                     else
                     {
-                        bitmap1.SetPixel(xx, yy, Color.FromArgb(255, (int)kk, (int)kk, (int)kk));
+                        bitmap1.SetPixel(xx, yy, Color.FromArgb(255, (int)(255 - kk), (int)(255 - kk), (int)(255 - kk)));
+
+                        if (yy == 300)
+                        {
+                            richTextBox1.Text += kk.ToString() + " ";
+
+                        }
+
                     }
                     /*                    
                     if (dd > 255)
