@@ -66,7 +66,6 @@ from sklearn.linear_model import Ridge
 
 from sklearn.cluster import KMeans
 from sklearn.neighbors import KNeighborsClassifier  # K近鄰演算法（K Nearest Neighbor）
-
 from sklearn.preprocessing import StandardScaler
 
 
@@ -2330,6 +2329,8 @@ print("Completeness: %0.3f" % metrics.completeness_score(labels, kmean.labels_))
 print("V-measure: %0.3f" % metrics.v_measure_score(labels, kmean.labels_))
 print("Adjusted Rand-Index: %.3f"
       % metrics.adjusted_rand_score(labels, kmean.labels_))
+
+#[平均]輪廓係數 silhouette_score
 print("Silhouette Coefficient: %0.3f"
       % metrics.silhouette_score(X, kmean.labels_, sample_size=1000))
 """
@@ -5263,6 +5264,8 @@ print(
     "Adjusted Mutual Information:"
     f" {metrics.adjusted_mutual_info_score(labels_true, labels):.3f}"
 )
+
+# [平均]輪廓係數 silhouette_score
 print(f"Silhouette Coefficient: {metrics.silhouette_score(X, labels):.3f}")
 
 """
@@ -5624,15 +5627,13 @@ cc = rfm_segmentation["cluster"].value_counts()
 print(cc)
 
 # 輪廓係數
-
-from sklearn.metrics import silhouette_samples
-
 y_km = rfm_segmentation["cluster"]
 cluster_labels = np.unique(y_km)
 n_clusters = cluster_labels.shape[0]
-silhouette_vals = silhouette_samples(X, y_km, metric="euclidean")
-cc = silhouette_vals
-print(cc)
+
+silhouette_vals = metrics.silhouette_samples(X, y_km, metric="euclidean")
+print("每個點的輪廓係數 silhouette_samples :")
+# many print(silhouette_vals)
 
 # 繪製輪廓圖
 
@@ -5670,7 +5671,6 @@ show()
 # 依據輪廓分數找最佳集群數量
 
 # 測試 2~20 群的分數
-from sklearn.metrics import silhouette_score
 
 silhouette_score_list = []
 print("1輪廓分數:")
@@ -5678,7 +5678,7 @@ for i in range(2, 21):
     clf = KMeans(n_clusters=i, init="k-means++", n_init=10, max_iter=300)  # K-平均演算法
     clf.fit(X)  # 學習訓練.fit
     y_pred = clf.fit_predict(X)
-    silhouette_score_list.append(silhouette_score(X, y_km))
+    silhouette_score_list.append(metrics.silhouette_score(X, y_km))
     print(f"{i}:{silhouette_score_list[-1]:.2f}")
 
 print(f"最大值 {np.argmax(silhouette_score_list)+2}: {np.max(silhouette_score_list):.2f}")
@@ -5695,7 +5695,9 @@ for i in range(2, 21):
     y_pred = clf.labels_
     cluster_labels = np.unique(y_pred)
     n_clusters = cluster_labels.shape[0]
-    silhouette_vals = silhouette_samples(X, y_pred, metric="euclidean")
+    silhouette_vals = metrics.silhouette_samples(X, y_pred, metric="euclidean")
+    # print('每個點的輪廓係數 silhouette_samples :')
+    # many print(silhouette_vals)
 
     # 輪廓圖
     y_ax_lower, y_ax_upper = 0, 0
@@ -5845,7 +5847,6 @@ show()
 # 依據輪廓分數找最佳集群數量
 
 # 測試 2~20 群的分數
-from sklearn.metrics import silhouette_score
 
 X = rfm_segmentation[["R_Quartile", "F_Quartile", "M_Quartile"]]
 silhouette_score_list = []
@@ -5858,7 +5859,7 @@ for i in range(2, 21):
     )  # K-平均演算法
     clf.fit(X)  # 學習訓練.fit
     y_pred = clf.fit_predict(X)
-    silhouette_score_list.append(silhouette_score(X, y_pred))
+    silhouette_score_list.append(metrics.silhouette_score(X, y_pred))
     print(f"{i}:{silhouette_score_list[-1]:.2f}")
 
 print(f"最大值 {np.argmax(silhouette_score_list)+2}: {np.max(silhouette_score_list):.2f}")
@@ -5875,7 +5876,9 @@ for i in range(2, 21):
     y_pred = clf.labels_
     cluster_labels = np.unique(y_pred)
     n_clusters = cluster_labels.shape[0]
-    silhouette_vals = silhouette_samples(X, y_pred, metric="euclidean")
+    silhouette_vals = metrics.silhouette_samples(X, y_pred, metric="euclidean")
+    # print('每個點的輪廓係數 silhouette_samples :')
+    # many print(silhouette_vals)
 
     # 輪廓圖
     y_ax_lower, y_ax_upper = 0, 0
@@ -5959,8 +5962,6 @@ print(cc)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 10_01_error_rate
-
 # 整體學習的錯誤率計算
 
 from scipy.special import comb
@@ -6005,8 +6006,6 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-# 11_02_label_propagation
 
 # 標註傳播(Label propagation)測試
 
@@ -6070,8 +6069,6 @@ print(cc)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-# 11_03_label_spreading
 
 # LabelSpreading 測試
 from sklearn.semi_supervised import LabelSpreading

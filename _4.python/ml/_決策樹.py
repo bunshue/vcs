@@ -66,7 +66,7 @@ clf = DecisionTreeClassifier()  # 決策樹函數學習機
 clf.fit(x_train, y_train)  # 學習訓練.fit
 
 # 對測試數據做預測
-y_pred = clf.predict(x_test)
+y_pred = clf.predict(x_test)  # 預測.predict
 
 # 輸出準確性
 print(f"訓練資料的準確性 = {clf.score(x_train, y_train)}")

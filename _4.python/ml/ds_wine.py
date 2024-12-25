@@ -4,7 +4,8 @@
 紅酒資料集
 
 #範例16-1:邏輯斯模型(logistic regression model，羅吉斯):分類，二分法類器
-# 題目：預測3種意大利紅酒，將資料集分成train,test，先學習再預測，用3種指標來評估預測績效（決定係數R2，MAE，殘差圖）
+# 題目：預測3種意大利紅酒，將資料集分成train,test，先學習再預測，
+        用3種指標來評估預測績效（決定係數R2，MAE，殘差圖）
 
 #重點1：邏輯斯模型的應用性：
 #羅吉斯迴歸現在已經被大量使用，因為它非常有效率，也不需要大量運算資源，所以受到廣泛利用。
@@ -14,7 +15,8 @@
 #應用3：產品測試：預測測試中系統或產品的成敗。
 #應用4：行銷：可用於預測客戶詢價轉化為銷售的機率、訂閱開始或終止的機率，甚至是客戶對新產品系列的潛在興趣。
 #應用5：金融業：可預測客戶未來遲繳的可能性，可以看出某位客戶是否會「違約」或「不違約」
-#應用6：電子商務：電子商務公司大量投資於跨媒體廣告和促銷活動，很希望了解哪些活動最有效，以及最可能獲得潛在目標受眾響應的選項。
+#應用6：電子商務：電子商務公司大量投資於跨媒體廣告和促銷活動，很希望了解哪些活動最有效，
+        以及最可能獲得潛在目標受眾響應的選項。
 此模型集將客戶分類為「反應者」或「非反應者」，所以此模型稱為「反應傾向模型」。
 
 #重點2：邏輯斯模型的預測數字：
@@ -70,10 +72,16 @@ from sklearn.model_selection import train_test_split  # 資料分割 => 訓練�
 from sklearn.cluster import KMeans  # 聚類方法, K-平均演算法
 from sklearn.svm import SVC
 from sklearn.metrics import accuracy_score
+from sklearn.model_selection import cross_val_score
+
+from sklearn.preprocessing import StandardScaler
+from sklearn.ensemble import RandomForestClassifier  # 隨機森林分類函數學習機
+from sklearn.metrics import classification_report
+from sklearn.tree import DecisionTreeClassifier
 
 
 def show():
-    # plt.show()
+    plt.show()
     pass
 
 
@@ -232,12 +240,15 @@ print(df.describe())
 
 print("------------------------------")  # 30個
 
-print("使用 scatter_matrix")
+print("使用 scatter_matrix 1")
+# pandas 提供了 scatter_matrix()函數，方便由DataFrame繪製散佈圖
 from pandas.plotting import scatter_matrix
 
 _ = scatter_matrix(df, figsize=(15, 15))
+# _ = scatter_matrix(df, color = 'k', alpha = 0.3, figsize=(15, 15))
 show()
 
+print("使用 scatter_matrix 2")
 _ = scatter_matrix(df.iloc[:, [0, 9, -1]])
 show()
 
@@ -251,10 +262,11 @@ wine = datasets.load_wine()
 X = wine.data
 y = wine.target
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 clf = SVC(gamma=0.001, decision_function_shape="ovo")
-clf.fit(X_train, y_train)
+
+clf.fit(X_train, y_train)  # 學習訓練.fit
 
 dec = clf.decision_function(X_test)
 cc = dec.shape[1]  # n_class * (n_class - 1) / 2 =  3*2/2 = 3
@@ -263,16 +275,16 @@ print(cc)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-from sklearn.ensemble import RandomForestClassifier
-
 wine = datasets.load_wine()
 
 X_train, X_test, y_train, y_test = train_test_split(
-    wine.data, wine.target, test_size=0.3
+    wine.data, wine.target, test_size=0.2
 )
-model = RandomForestClassifier()
-model.fit(X_train, y_train)  # 學習
-y_pred = model.predict(X_test)
+model = RandomForestClassifier()  # 隨機森林分類函數學習機
+
+model.fit(X_train, y_train)  # 學習訓練.fit
+
+y_pred = model.predict(X_test)  # 預測.predict
 print(accuracy_score(y_pred, y_test))  # 評価
 
 print("------------------------------------------------------------")  # 60個
@@ -280,24 +292,19 @@ print("------------------------------------------------------------")  # 60個
 
 print("k-fold 交叉驗證法")
 
-from sklearn.model_selection import cross_val_score
-from sklearn.preprocessing import StandardScaler
-from sklearn.ensemble import RandomForestClassifier
-
 X, y = datasets.load_wine(return_X_y=True)
 
 dx_std = StandardScaler().fit_transform(X)
-dx_train, dx_test, dy_train, dy_test = train_test_split(
-    dx_std, y, test_size=0.2, random_state=0
-)
 
-forest = RandomForestClassifier()
+dx_train, dx_test, dy_train, dy_test = train_test_split(dx_std, y, test_size=0.2)
 
-forest.fit(dx_train, dy_train)
+forest = RandomForestClassifier()  # 隨機森林分類函數學習機
+
+forest.fit(dx_train, dy_train)  # 學習訓練.fit
 
 val_score = cross_val_score(forest, dx_train, dy_train, cv=5)
 
-predictions = forest.predict(dx_test)
+predictions = forest.predict(dx_test)  # 預測.predict
 
 print("準確率:", forest.score(dx_train, dy_train))
 
@@ -310,23 +317,17 @@ print("------------------------------------------------------------")  # 60個
 
 # 產生預測結果報告
 
-from sklearn.preprocessing import StandardScaler
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import classification_report
-
 X, y = datasets.load_wine(return_X_y=True)
 
 dx_std = StandardScaler().fit_transform(X)
 
-dx_train, dx_test, dy_train, dy_test = train_test_split(
-    dx_std, y, test_size=0.2, random_state=0
-)
+dx_train, dx_test, dy_train, dy_test = train_test_split(dx_std, y, test_size=0.2)
 
-forest = RandomForestClassifier()
+forest = RandomForestClassifier()  # 隨機森林分類函數學習機
 
-forest.fit(dx_train, dy_train)
+forest.fit(dx_train, dy_train)  # 學習訓練.fit
 
-predictions = forest.predict(dx_test)
+predictions = forest.predict(dx_test)  # 預測.predict
 
 print("準確率:", forest.score(dx_train, dy_train))
 print("準確率:", forest.score(dx_test, dy_test))
@@ -409,7 +410,7 @@ model = lm.LinearRegression())
 
 #2.步驟2：讓模型model學習歷史數據
 
-學習指令：model.fit(dataframeX, dataframeY)
+學習指令：model.fit(dataframeX, dataframeY)  # 學習訓練.fit
 
 3.步驟3：讓模型model進行預測
 
@@ -417,7 +418,7 @@ model = lm.LinearRegression())
 
 然後比較實際數值test_y, 與pred_y的差異
 
-指令：model.predict(test_X)
+指令：model.predict(test_X)  # 預測.predict
 
 注意：t1,t2必須要是dataframe
 
@@ -436,19 +437,19 @@ import sklearn.linear_model as lm
 model = lm.LogisticRegression()
 
 # 2.步驟2：讓模型model學習歷史數據
-model.fit(df_x, df_y)
+model.fit(df_x, df_y)  # 學習訓練.fit
 
-# 3.步驟3：讓模型model進行預測:model.predict(dataframe())
+# 3.步驟3：讓模型model進行預測:model.predict(dataframe())  # 預測.predict
 # 數據差別在[6]==>黃酮類化合物==>3.76
 print("預測這個紅酒A的酒種：")
 t1 = [[13.53, 3.10, 2.74, 24.5, 96.0, 2.05, 3.76, 0.56, 1.35, 9.20, 0.61, 1.60, 560.0]]
-model.predict(t1)
+model.predict(t1)  # 預測.predict
 
 # 數據差別在[6]==>黃酮類化合物==>0.76
 print("預測這個紅酒B的酒種：")
 t2 = [[13.53, 3.10, 2.74, 24.5, 96.0, 2.05, 0.76, 0.56, 1.35, 9.20, 0.61, 1.60, 560.0]]
 # t1 =[[13.53,   3.10,   2.74,   24.5,   96.0,   2.05,   3.76,   0.56,   1.35,   9.20,   0.61,   1.60,   560.0]]
-model.predict(t2)
+model.predict(t2)  # 預測.predict
 
 """
 8.練習8：畫圖，黃酮類化合物 vs 酒種
@@ -459,15 +460,15 @@ model.predict(t2)
 
 t1 =[[13.53, 3.10, 2.74, 24.5, 96.0, 2.05, 3.76, 0.56, 1.35, 9.20, 0.61, 1.60, 560.0]]
 
-預測：t1-->model.predict(t1)
+預測：t1-->model.predict(t1)  # 預測.predict
 
 但是畫圖（黃酮類化合物 vs 酒種)
 
 所以畫點（x = t1[0][6] ==> 黃酮類化合物 ==> 3.76)
 
-但是預測值，還是（y = model.predict(t1))
+但是預測值，還是（y = model.predict(t1))  # 預測.predict
 
-plt.scatter(t1[0][6], model.predict(t1), label="預測紅酒A",color="red")
+plt.scatter(t1[0][6], model.predict(t1), label="預測紅酒A",color="red")  # 預測.predict
 """
 
 plt.scatter(df_x["黃酮類化合物"], df_y, label="實際數據")
@@ -495,22 +496,22 @@ t3 =[[13.53, 3.10, 2.74, 24.5, 96.0, 2.05, 3.76, 0.56, 1.35, 9.20, 0.61, 1.60, 1
 
 t4 =[[13.53, 3.10, 2.74, 24.5, 96.0, 2.05, 3.76, 0.56, 1.35, 9.20, 0.61, 1.60, 560.0]]
 
-model.predict(t1)
+model.predict(t1)  # 預測.predict
 """
 
 from pickle import TUPLE3
 
-# (1).步驟3：讓模型model進行預測:model.predict(dataframe())
+# (1).步驟3：讓模型model進行預測:model.predict(dataframe())  # 預測.predict
 # 數據差別在[12]==>脯氨酸==>1560.0
 print("預測這個紅酒C的酒種：")
 t3 = [[13.53, 3.10, 2.74, 24.5, 96.0, 2.05, 3.76, 0.56, 1.35, 9.20, 0.61, 1.60, 1560.0]]
-model.predict(t3)
+model.predict(t3)  # 預測.predict
 
-# (2).步驟3：讓模型model進行預測:model.predict(dataframe())
+# (2).步驟3：讓模型model進行預測:model.predict(dataframe())  # 預測.predict
 # 數據差別在[12]==>脯氨酸==>560.0
 print("預測這個紅酒D的酒種：")
 t4 = [[13.53, 3.10, 2.74, 24.5, 96.0, 2.05, 3.76, 0.56, 1.35, 9.20, 0.61, 1.60, 560.0]]
-model.predict(t4)
+model.predict(t4)  # 預測.predict
 
 plt.scatter(df_x["脯氨酸"], df_y, label="實際數據")
 plt.scatter(t3[0][12], model.predict(t3), label="預測紅酒C", color="red")
@@ -1277,11 +1278,13 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 import json
 
 clf = DecisionTreeClassifier()
-output = clf.fit(X_train, y_train)
+
+output = clf.fit(X_train, y_train)  # 學習訓練.fit
+
 print(json.dumps(output, indent=4))
 
 # 計算準確率
-y_pred = clf.predict(X_test)
+y_pred = clf.predict(X_test)  # 預測.predict
 print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
 # 30.56%
 
@@ -1298,15 +1301,14 @@ X, y = wine.data, wine.target
 # 資料分割
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
-from sklearn.tree import DecisionTreeClassifier
-
 clf = DecisionTreeClassifier()  # criterion='entropy')
-clf.fit(X_train, y_train)
+
+clf.fit(X_train, y_train)  # 學習訓練.fit
 
 # DecisionTreeClassifier()
 
 # 計算準確率
-y_pred = clf.predict(X_test)
+y_pred = clf.predict(X_test)  # 預測.predict
 print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
 
 # 繪製樹狀圖
@@ -1435,15 +1437,12 @@ X, y = wine.data, wine.target
 # 資料分割
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
-from sklearn.ensemble import RandomForestClassifier
+clf = RandomForestClassifier(n_estimators=50)  # 隨機森林分類函數學習機
 
-clf = RandomForestClassifier(n_estimators=50)
-clf.fit(X_train, y_train)
-
-# RandomForestClassifier(n_estimators=50)
+clf.fit(X_train, y_train)  # 學習訓練.fit
 
 # 計算準確率
-y_pred = clf.predict(X_test)
+y_pred = clf.predict(X_test)  # 預測.predict
 print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
 # 97.22%
 
@@ -1466,7 +1465,7 @@ show()
 from sklearn.inspection import permutation_importance
 
 result = permutation_importance(
-    clf, X_test, y_test, n_repeats=10, random_state=42, n_jobs=2
+    clf, X_test, y_test, n_repeats=10, random_state=9487, n_jobs=2
 )
 
 sorted_importances_idx = result.importances_mean.argsort()

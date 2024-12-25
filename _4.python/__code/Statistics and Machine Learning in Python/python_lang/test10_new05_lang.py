@@ -1,5 +1,18 @@
+"""
 
+
+"""
+
+import os
+import sys
+import time
 import math
+import random
+import numpy as np
+import pandas as pd
+
+print("------------------------------------------------------------")  # 60個
+
 math.sqrt(25)
 
 from math import sqrt
@@ -9,9 +22,6 @@ from math import cos, floor
 
 # import all functions in a module (generally discouraged)
 # from os import *
-
-# define an alias
-import numpy as np
 
 # show all functions in math module
 content = dir(math)
@@ -513,10 +523,6 @@ unique_lengths = {len(fruit) for fruit in fruits}   # {5, 6}
 # dictionary comprehension
 fruit_lengths = {fruit:len(fruit) for fruit in fruits} # {'apple': 5, 'banana': 6, 'cherry': 6}
 
-
-###############################################################################
-# Exercise: upper-case names and add 1 year to all simpsons
-
 simpsons = {'Homer': 45, 'Marge': 45, 'Bart': 10, 'Lisa': 10}
 
 simpsons_older = {k.upper(): v + 1 for k, v in simpsons.items()}
@@ -694,23 +700,6 @@ regex.sub("SUB-", "toto")
 
 re.sub('[^0-9a-zA-Z]+', '', 'h^&ell`.,|o w]{+orld')
 
-###############################################################################
-# System programming
-# ------------------
-#
-
-
-###############################################################################
-# Operating system interfaces (os)
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#
-
-import os
-
-###############################################################################
-# Current working directory
-#
-
 # Get the current working directory
 cwd = os.getcwd()
 print(cwd)
@@ -718,18 +707,11 @@ print(cwd)
 # Set the current working directory
 os.chdir(cwd)
 
-###############################################################################
-# Temporary directory
-#
-
 import tempfile
 
 tmpdir = tempfile.gettempdir()
 
-###############################################################################
 # Join paths
-#
-
 mytmpdir = os.path.join(tmpdir, "foobar")
 
 
@@ -790,15 +772,6 @@ f.close()
 with open(filename, 'r') as f:
     lines = [line for line in f]
 
-###############################################################################
-# Explore, list directories
-# ~~~~~~~~~~~~~~~~~~~~~~~~~
-#
-
-###############################################################################
-# Walk
-#
-import os
 
 WD = os.path.join(tmpdir, "foobar")
 
@@ -873,64 +846,6 @@ out = subprocess.run(["ls", "-a", "/"], stdout=subprocess.PIPE, stderr=subproces
 # out.stdout is a sequence of bytes that should be decoded into a utf-8 string
 print(out.stdout.decode('utf-8').split("\n")[:5])
 
-
-###############################################################################
-# Multiprocessing and multithreading
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#
-#    **Process**
-#
-#    A process is a name given to a program instance that has been loaded into memory
-#    and managed by the operating system.
-#
-#    Process = address space + execution context (thread of control)
-#
-#    Process address space (segments):
-#
-#    - Code.
-#    - Data (static/global).
-#    - Heap (dynamic memory allocation).
-#    - Stack.
-#
-#    Execution context:
-#
-#    - Data registers.
-#    - Stack pointer (SP).
-#    - Program counter (PC).
-#    - Working Registers.
-#
-#    OS Scheduling of processes: context switching (ie. save/load Execution context)
-#
-#    Pros/cons
-#
-#    - Context switching expensive.
-#    - (potentially) complex data sharing (not necessary true).
-#    - Cooperating processes - no need for memory protection (separate address spaces).
-#    - Relevant for parrallel computation with memory allocation.
-#
-#    **Threads**
-#
-#    - Threads share the same address space (Data registers): access to code, heap and (global) data.
-#    - Separate execution stack, PC and Working Registers.
-#
-#    Pros/cons
-#
-#    - Faster context switching only SP, PC and Working Registers.
-#    - Can exploit fine-grain concurrency
-#    - Simple data sharing through the shared address space.
-#    - Precautions have to be taken or two threads will write to the same memory at the same time. This is what the **global interpreter lock (GIL)** is for.
-#    - Relevant for GUI, I/O (Network, disk) concurrent operation
-#
-#    **In Python**
-#
-#    - The ``threading`` module uses threads.
-#    - The ``multiprocessing`` module uses processes.
-
-###############################################################################
-# Multithreading
-#
-
-import time
 import threading
 
 def list_append(count, sign=1, out_list=None):
@@ -979,16 +894,7 @@ print("Multiprocessing ellapsed time ", time.time() - startime)
 
 # print(out_list[:10]) is not availlable
 
-###############################################################################
-# Sharing object between process with Managers
-#
-# Managers provide a way to create data which can be shared between
-# different processes, including sharing over a network between processes
-# running on different machines. A manager object controls a server process
-# which manages shared objects.
-
 import multiprocessing
-import time
 
 size = int(size / 100)   # Number of numbers to add
 
@@ -1009,68 +915,6 @@ print(out_list[:10])
 
 print("Multiprocessing with shared object ellapsed time ", time.time() - startime)
 
-
-###############################################################################
-# Scripts and argument parsing
-# -----------------------------
-#
-# Example, the word count script ::
-#
-#        import os
-#        import os.path
-#        import argparse
-#        import re
-#        import pandas as pd
-#
-#        if __name__ == "__main__":
-#            # parse command line options
-#            output = "word_count.csv"
-#            parser = argparse.ArgumentParser()
-#            parser.add_argument('-i', '--input',
-#                                help='list of input files.',
-#                                nargs='+', type=str)
-#            parser.add_argument('-o', '--output',
-#                                help='output csv file (default %s)' % output,
-#                                type=str, default=output)
-#            options = parser.parse_args()
-#
-#            if options.input is None :
-#                parser.print_help()
-#                raise SystemExit("Error: input files are missing")
-#            else:
-#                filenames = [f for f in options.input if os.path.isfile(f)]
-#
-#            # Match words
-#            regex = re.compile("[a-zA-Z]+")
-#
-#            count = dict()
-#            for filename in filenames:
-#                fd = open(filename, "r")
-#                for line in fd:
-#                    for word in regex.findall(line.lower()):
-#                        if not word in count:
-#                            count[word] = 1
-#                        else:
-#                            count[word] += 1
-#
-#            fd = open(options.output, "w")
-#
-#            # Pandas
-#            df = pd.DataFrame([[k, count[k]] for k in count], columns=["word", "count"])
-#            df.to_csv(options.output, index=False)
-
-###############################################################################
-# Networking
-# ----------
-#
-
-# TODO
-
-###############################################################################
-# FTP
-# ~~~
-#
-
 # Full FTP features with ftplib
 import ftplib
 ftp = ftplib.FTP("ftp.cea.fr")
@@ -1088,100 +932,8 @@ import urllib.request
 ftp_url = 'ftp://ftp.cea.fr/pub/unati/people/educhesnay/pystatml/README.md'
 urllib.request.urlretrieve(ftp_url, os.path.join(tmpdir, "README2.md"))
 
-
-###############################################################################
-# HTTP
-# ~~~~
-#
-
-# TODO
-
-###############################################################################
-# Sockets
-# ~~~~~~~
-#
-
-# TODO
-
-###############################################################################
-# xmlrpc
-# ~~~~~~
-#
-
-# TODO
-
-###############################################################################
-# Modules and packages
-# --------------------
-#
-# A module is a Python file.
-# A package is a directory which MUST contain a special file called ``__init__.py``
-#
-# To import, extend variable `PYTHONPATH`::
-#
-#      export PYTHONPATH=path_to_parent_python_module:${PYTHONPATH}
-#
-# Or
-
 import sys
 sys.path.append("path_to_parent_python_module")
-
-
-###############################################################################
-#
-# The ``__init__.py`` file can be empty. But you can set which modules the
-# package exports as the API, while keeping other modules internal,
-# by overriding the __all__ variable, like so:
-
-###############################################################################
-# ``parentmodule/__init__.py`` file::
-#
-#     from . import submodule1
-#     from . import submodule2
-#
-#     from .submodule3 import function1
-#     from .submodule3 import function2
-#
-#     __all__ = ["submodule1", "submodule2",
-#                "function1", "function2"]
-#
-# User can import::
-#
-#     import parentmodule.submodule1
-#     import parentmodule.function1
-
-###############################################################################
-# Python Unit Testing
-#
-# TODO
-
-
-###############################################################################
-# Object Oriented Programming (OOP)
-# ---------------------------------
-#
-# **Sources**
-#
-# -  http://python-textbok.readthedocs.org/en/latest/Object\_Oriented\_Programming.html
-#
-# **Principles**
-#
-# -  **Encapsulate** data (attributes) and code (methods) into objects.
-#
-# -  **Class** = template or blueprint that can be used to create objects.
-#
-# -  An **object** is a specific instance of a class.
-#
-# -  **Inheritance**: OOP allows classes to inherit commonly used state
-#    and behaviour from other classes. Reduce code duplication
-#
-# -  **Polymorphism**: (usually obtained through polymorphism) calling
-#    code is agnostic as to whether an object belongs to a parent class or
-#    one of its descendants (abstraction, modularity). The same method
-#    called on 2 objects of 2 different classes will behave differently.
-#
-
-import math
 
 
 class Shape2D:
@@ -1274,86 +1026,156 @@ def my_function(a, b=2):
 
 print(help(my_function))
 
-###############################################################################
-# Docstrings for scripts:
-#
-# At the begining of a script add a pream::
-#
-#        """
-#        Created on Thu Nov 14 12:08:41 CET 2019
-#
-#        @author: firstname.lastname@email.com
-#
-#        Some description
-#        """
+print("------------------------------------------------------------")  # 60個
 
-###############################################################################
-# Exercises
-# ---------
-#
+def calc(a, b, op='add'):
+    if op == 'add':
+        return a + b
+    elif op == 'sub':
+        return a - b
+    else:
+        print('valid operations are add and sub')
 
 
-###############################################################################
-# Exercise 1: functions
-# ~~~~~~~~~~~~~~~~~~~~~
-#
-# Create a function that acts as a simple calulator If the operation is
-# not specified, default to addition If the operation is misspecified,
-# return an prompt message Ex: ``calc(4,5,"multiply")`` returns 20 Ex:
-# ``calc(3,5)`` returns 8 Ex: ``calc(1, 2, "something")`` returns error
-# message
-#
+# call the function
+calc(10, 4, op='add')   # returns 14
+calc(10, 4, 'add')      # also returns 14: unnamed arguments are inferred by position
+calc(10, 4)             # also returns 14: default for 'op' is 'add'
+calc(10, 4, 'sub')      # returns 6
+calc(10, 4, 'div')      # prints 'valid operations are add and sub'
+
+a, b, op = 2, 3, "+"
 
 
-###############################################################################
-# Exercise 2: functions + list + loop
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#
-# Given a list of numbers, return a list where all adjacent duplicate
-# elements have been reduced to a single element. Ex: ``[1, 2, 2, 3, 2]``
-# returns ``[1, 2, 3, 2]``. You may create a new list or modify the passed
-# in list.
-#
-# Remove all duplicate values (adjacent or not) Ex: ``[1, 2, 2, 3, 2]``
-# returns ``[1, 2, 3]``
-#
+def calc2(a, b, op='+'):
+    st = "%.f %s %.f" % (a, op, b)
+    return eval(st)
 
 
-###############################################################################
-# Exercise 3: File I/O
-# ~~~~~~~~~~~~~~~~~~~~
-#
-# 1. Copy/paste the BSD 4 clause license (https://en.wikipedia.org/wiki/BSD_licenses)
-# into a text file. Read, the file and count the occurrences of each
-# word within the file. Store the words' occurrence number in a dictionary.
-#
-# 2. Write an executable python command ``count_words.py`` that parse
-# a list of input files provided after ``--input`` parameter.
-# The dictionary of occurrence is save in a csv file provides by ``--output``.
-# with default value word_count.csv.
-# Use:
-# - open
-# - regular expression
-# - argparse (https://docs.python.org/3/howto/argparse.html)
+calc2(3, 3, "+")
 
 
-###############################################################################
-# Exercise 4: OOP
-# ~~~~~~~~~~~~~~~
-#
-# 1. Create a class ``Employee`` with 2 attributes provided in the
-#    constructor: ``name``, ``years_of_service``. With one method
-#    ``salary`` with is obtained by ``1500 + 100 * years_of_service``.
-#
-# 2. Create a subclass ``Manager`` which redefine ``salary`` method
-#    ``2500 + 120 * years_of_service``.
-#
-# 3. Create a small dictionary-nosed database where the key is the
-#    employee's name. Populate the database with: samples =
-#    Employee('lucy', 3), Employee('john', 1), Manager('julie', 10),
-#    Manager('paul', 3)
-#
-# 4. Return a table of made name, salary rows, i.e. a list of list [[name,
-#    salary]]
-#
-# 5. Compute the average salary
+def remove_adjacent_duplicates(original_list):
+    new_list = []
+    new_list.append(original_list[0])
+    for num in original_list[1:]:
+        if num != new_list[-1]:
+            new_list.append(num)
+    return new_list
+
+remove_adjacent_duplicates([1, 2, 2, 3, 2])
+
+def remove_duplicates(original_list):
+    new_list = []
+    for num in original_list:
+        if num not in new_list:
+            new_list.append(num)
+    return new_list
+
+remove_duplicates([3, 2, 2, 1, 2])
+
+# or this solution mights modify the order
+
+def remove_duplicates(original_list):
+    return(list(set(original_list)))
+
+remove_duplicates([3, 2, 2, 1, 2])
+
+
+bsd_4clause = """
+XXXXXXXX
+XXXXXXXX
+"""
+
+import tempfile
+
+tmpfilename = os.path.join(tempfile.gettempdir(),
+                       "bsd.txt")
+
+fd = open(tmpfilename, "w")
+fd.write(bsd_4clause)
+fd.close()
+
+fd = open(tmpfilename, "r")
+
+count = dict()
+for line in fd:
+    line = line.lower()
+    for word in line.split():
+        if not word in count:
+            count[word] = 1
+        else:
+            count[word] += 1
+
+print(count)
+
+"""
+Comment to deal with missing import of urllib2
+
+import urllib2
+url = "https://www.gnu.org/licenses/gpl-3.0.txt"
+f = urllib2.urlopen(url)
+content = f.read()
+f.close()
+content = content.replace("\n", " ")
+content = content.lower()
+c = content.split(' ')
+print(len(c))
+from collections import Counter
+print(Counter(c))
+"""
+
+
+class Employee:
+    def __init__(self, name, years_of_service):
+        self.name = name
+        self.years_of_service = years_of_service
+
+    def salary(self):
+        return 1500 + 100 * self.years_of_service
+
+
+class Manager(Employee):
+    def salary(self):
+        return 2500 + 120 * self.years_of_service
+
+
+samples = [Employee("lucy", 3),
+           Employee("john", 1),
+           Manager('julie', 3),
+           Manager('paul', 1)]
+
+employees = {e.name: e for e in samples}
+
+employees.keys()
+
+df = pd.DataFrame([[name, obj.salary()] for name, obj in employees.items()],
+             columns=['name', 'salary'])
+
+[[name, employees[name].salary()] for name
+      in employees]
+
+sum([e.salary() for e in employees.values()]) / len(employees)
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
+sys.exit()
+
+
+print("------------------------------------------------------------")  # 60個

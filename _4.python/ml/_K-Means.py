@@ -13,6 +13,14 @@ K-means Clustering 集群分析
 
 k-平均演算法（英文：k-means clustering，以下簡稱為 k-means）
 是一種非監督式的學習方法，其主要的目標是對未標記的資料進行分群。
+
+輪廓係數（Silhouette Coefficient），是聚類效果好壞的一種評價方式。
+    最佳值為1，最差值為-1。接近0的值表示重疊的群集。
+    負值通常表示樣本已分配給錯誤的聚類，因為不同的聚類更為相​​似
+
+metrics.silhouette_score   所有樣本的 [平均]輪廓係數
+metrics.silhouette_samples 所有樣本的     輪廓係數
+
 """
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -22,10 +30,11 @@ from sklearn import datasets
 from sklearn.cluster import KMeans  # 聚類方法, K-平均演算法
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
 from sklearn import metrics
+from sklearn.datasets import make_blobs  # 集群資料集
 
 
 def show():
-    #return
+    # return
     plt.show()
     pass
 
@@ -365,8 +374,6 @@ print("------------------------------------------------------------")  # 60個
 
 print("K-平均演算法(KMeans) 任意資料分4群並畫圖")
 
-from sklearn.datasets import make_blobs
-
 # 建立資料一, 使用 random
 # 隨機生成 N 個點
 N = 100
@@ -376,18 +383,18 @@ X = np.random.rand(N, 2)  # N X 2 亂數陣列
 N = 100
 M = 2  # n_features, 特徵數(資料的維度)
 GROUPS = 4  # centers, 分群數
+STD = 1  # cluster_std, 資料標準差
 
 print("make_blobs,", N, "個樣本, ", M, "個特徵, 分成", GROUPS, "群")
+
 X, y, centers = make_blobs(
     n_samples=N,
     centers=GROUPS,
-    cluster_std=1,
     n_features=M,
+    cluster_std=STD,
     random_state=9487,
     return_centers=True,
 )
-# cluster_std 為 資料標準差
-# n_features 為 資料的維度
 
 print(GROUPS, "群 的中心點 :")
 print(centers)
@@ -786,13 +793,18 @@ print("------------------------------------------------------------")  # 60個
 
 # 生成分類資料
 
-from sklearn.datasets import make_blobs
+N = 150  # n_samples, 樣本數
+M = 2  # n_features, 特徵數(資料的維度)
+GROUPS = 6  # centers, 分群數
+STD = 0.5  # cluster_std, 資料標準差
+
+print("make_blobs,", N, "個樣本, ", M, "個特徵, 分成", GROUPS, "群")
 
 X, y = make_blobs(
-    n_samples=150,
-    n_features=2,
-    centers=3,
-    cluster_std=0.5,
+    n_samples=N,
+    n_features=M,
+    centers=GROUPS,
+    cluster_std=STD,
     shuffle=True,
     random_state=9487,
 )
@@ -839,21 +851,81 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+# 使用 Silhouette 輪廓分析 找出最佳分群數目K
+# Kmeans分群演算法 與 Silhouette 輪廓分析
+
+print("使用較漂亮的資料")
+
+N = 1000  # n_samples, 樣本數
+M = 2  # n_features, 特徵數(資料的維度)
+GROUPS = 6  # centers, 分群數
+STD = 0.3  # cluster_std, 資料標準差
+print("make_blobs,", N, "個樣本, ", M, "個特徵, 分成", GROUPS, "群")
+
+X, y = make_blobs(
+    n_samples=N, n_features=M, centers=GROUPS, cluster_std=STD, center_box=(-10.0, 10.0)
+)
+
+plt.subplot(221)
+plt.scatter(*zip(*X))
+
+silhouette_avg = []
+for i in range(2, 11):
+    kmeans_fit = KMeans(n_clusters=i).fit(X)
+    cc = metrics.silhouette_score(X, kmeans_fit.labels_)  # 計算輪廓係數
+    silhouette_avg.append(cc)
+
+plt.subplot(222)
+plt.plot(range(2, 11), silhouette_avg)
+
+# 由圖可以發現 在n_clusters = 6的時候，分的效果最好，所以可以選定6當作K
+
+print("使用較不漂亮的資料")
+
+N = 1000  # n_samples, 樣本數
+M = 2  # n_features, 特徵數(資料的維度)
+GROUPS = 13  # centers, 分群數
+STD = 1  # cluster_std, 資料標準差
+print("make_blobs,", N, "個樣本, ", M, "個特徵, 分成", GROUPS, "群")
+
+X, y = make_blobs(
+    n_samples=N, n_features=M, centers=GROUPS, cluster_std=STD, center_box=(-10.0, 10.0)
+)
+
+plt.subplot(223)
+plt.scatter(*zip(*X), c=y)
+
+silhouette_avg = []
+for i in range(2, 30):
+    kmeans_fit = KMeans(n_clusters=i).fit(X)
+    cc = metrics.silhouette_score(X, kmeans_fit.labels_)  # 計算輪廓係數
+    silhouette_avg.append(cc)
+
+plt.subplot(224)
+plt.plot(range(2, 30), silhouette_avg)
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 # kmeans_optimization_silhouette
 
 # 輪廓圖分析(Silhouette Analysis)
 
 from matplotlib import cm
-from sklearn.metrics import silhouette_samples
-from sklearn.datasets import make_blobs
 
-# 生成分類資料
+N = 150  # n_samples, 樣本數
+M = 2  # n_features, 特徵數(資料的維度)
+GROUPS = 3  # centers, 分群數
+STD = 0.5  # cluster_std, 資料標準差
+print("make_blobs,", N, "個樣本, ", M, "個特徵, 分成", GROUPS, "群")
 
 X, y = make_blobs(
-    n_samples=150,
-    n_features=2,
-    centers=3,
-    cluster_std=0.5,
+    n_samples=N,
+    n_features=M,
+    centers=GROUPS,
+    cluster_std=STD,
     shuffle=True,
     random_state=9487,
 )
@@ -876,8 +948,11 @@ y_pred = clf.fit_predict(X)  # 學習訓練 + 預測 .fit_predict
 cluster_labels = np.unique(y_pred)
 n_clusters = cluster_labels.shape[0]
 print("n_clusters =", n_clusters)
-silhouette_vals = silhouette_samples(X, y_pred, metric="euclidean")
-print("silhouette_vals =", silhouette_vals)
+
+silhouette_vals = metrics.silhouette_samples(X, y_pred, metric="euclidean")
+print("每個點的輪廓係數 silhouette_samples :")
+# many print(silhouette_vals)
+print("共", len(y_pred), "點")
 
 # 繪製輪廓圖
 
@@ -928,8 +1003,11 @@ y_pred = clf.fit_predict(X)  # 學習訓練 + 預測 .fit_predict
 cluster_labels = np.unique(y_pred)
 n_clusters = cluster_labels.shape[0]
 print("n_clusters =", n_clusters)
-silhouette_vals = silhouette_samples(X, y_pred, metric="euclidean")
-print("silhouette_vals =", silhouette_vals)
+
+silhouette_vals = metrics.silhouette_samples(X, y_pred, metric="euclidean")
+print("每個點的輪廓係數 silhouette_samples :")
+# many print(silhouette_vals)
+print("共", len(y_pred), "點")
 
 # 輪廓圖
 y_ax_lower, y_ax_upper = 0, 0
@@ -960,17 +1038,14 @@ plt.title("aaaa2")
 
 show()
 
-# 計算輪廓分數
+cc = metrics.silhouette_score(X, y)  # 計算輪廓係數
+print("分", CLUSTERS, "群, 計算輪廓係數:", cc)
 
-from sklearn.metrics import silhouette_score
-
-print("分", CLUSTERS, "群, 計算輪廓分數:", silhouette_score(X, y))
-
-# 依據輪廓分數找最佳集群數量
+# 依據輪廓係數找最佳集群數量
 
 # 測試 2~10 群的分數
 silhouette_score_list = []
-print("輪廓分數:")
+print("輪廓係數:")
 for k in range(2, 11):
     CLUSTERS = k  # 要分成的群數
     clf = KMeans(
@@ -982,9 +1057,10 @@ for k in range(2, 11):
     )  # K-平均演算法
     clf.fit(X)  # 學習訓練.fit
     y_pred = clf.fit_predict(X)  # 學習訓練 + 預測 .fit_predict
-    silhouette_score_list.append(silhouette_score(X, y_pred))
-    # print(f"{k}:{silhouette_score_list[-1]:.2f}")
-    print("分", k, "群, 計算輪廓分數:", silhouette_score(X, y_pred))
+    cc = metrics.silhouette_score(X, y_pred)  # 計算輪廓係數
+    silhouette_score_list.append(cc)
+    print(f"{k}:{silhouette_score_list[-1]:.2f}")
+    print("分", k, "群, 計算輪廓係數:", cc)
 
 print(f"最大值 {np.argmax(silhouette_score_list)+2}: {np.max(silhouette_score_list):.2f}")
 
@@ -999,7 +1075,7 @@ plt.plot(
     label="silhouette_score",
 )
 plt.xlabel("集群數量")
-plt.ylabel("silhouette_score")
+plt.ylabel("silhouette_score輪廓係數")
 plt.grid()
 plt.legend()
 
@@ -1010,7 +1086,7 @@ print("------------------------------------------------------------")  # 60個
 
 import sklearn
 
-print("對圖片做 KMeans()")
+print("對圖片做 KMeans(), 目前彩色圖片還有問題")
 
 # 重建影像的函數
 
@@ -1029,7 +1105,23 @@ def reconstruct_image(cluster_centers, y_pred, w, h):
 
 from sklearn.datasets import load_sample_image
 
-image = load_sample_image("flower.jpg")
+print("使用 sklearn 內建圖片")
+image = load_sample_image("china.jpg")
+print(type(image))
+print(len(image))
+print(image.shape)
+
+print("使用 本地圖片")
+# filename = 'C:/_git/vcs/_1.data/______test_files1/ims01.bmp'
+filename = "data/circle.bmp"
+import cv2
+
+# 檔案 => cv2影像
+image = cv2.imread(filename, 1)
+
+print(type(image))
+print(len(image))
+print(image.shape)
 
 """
 # 存檔
@@ -1064,7 +1156,7 @@ image_array = np.reshape(image, (w * h, d))
 image_sample = sklearn.utils.shuffle(image_array, random_state=9487)[:1000]
 
 # K-Means模型訓練， 設定64個集群
-CLUSTERS = 64  # 要分成的群數
+CLUSTERS = 16  # 要分成的群數
 clf = KMeans(n_clusters=CLUSTERS)  # K-平均演算法
 
 clf.fit(image_sample)  # 學習訓練.fit
@@ -1091,7 +1183,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # kmeans_from_scratch
-
 # 自行開發K-Means
 
 
@@ -1159,9 +1250,14 @@ class KMeans:
         return centroids, centroid_idxs
 
 
-from sklearn.datasets import make_blobs  # 集群資料集
+N = 100  # n_samples, 樣本數
+M = 2  # n_features, 特徵數(資料的維度)
+GROUPS = 5  # centers, 分群數
+STD = 0.3  # cluster_std, 資料標準差
 
-X_train, true_labels = make_blobs(n_samples=100, centers=5, random_state=42)
+print("make_blobs,", N, "個樣本, ", M, "個特徵, 分成", GROUPS, "群")
+
+X_train, true_labels = make_blobs(n_samples=N, centers=GROUPS, random_state=9487)
 plt.scatter(X_train[:, 0], X_train[:, 1])
 show()
 
@@ -1225,6 +1321,10 @@ print(p[p == 1].index)
 
 p = pd.Series(y)
 print(p[p == 0].index)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

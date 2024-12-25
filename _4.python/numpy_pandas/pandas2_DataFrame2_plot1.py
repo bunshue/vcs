@@ -92,6 +92,8 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 # 設定負號
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
+
+'''
 """
 print("------------------------------------------------------------")  # 60個
 print("DataFrame 畫圖")
@@ -496,7 +498,7 @@ tip_ratios = tips.tip / tips.total_bill
 tip_ratios.hist(bins=50)
 plt.title("tip ratio")
 plt.show()
-
+'''
 print("------------------------------------------------------------")  # 60個
 
 # 散佈圖(scatter plot)
@@ -522,12 +524,23 @@ plt.show()
 trans_data.plot.scatter("m1", "unemp")
 plt.show()
 
-""" NG
 # pandas 提供了 scatter_matrix()函數，方便由DataFrame繪製散佈圖
+from pandas.plotting import scatter_matrix
 # 會自動的產生各個columns之間的 scatter diagram
-pd.scatter_matrix(trans_data, color = 'k', alpha = 0.3)
+_ = scatter_matrix(trans_data, color = 'k', alpha = 0.3, figsize=(8, 8))
+
 plt.show()
-"""
+
+print("------------------------------------------------------------")  # 60個
+
+# pandas 提供了 scatter_matrix()函數，方便由DataFrame繪製散佈圖
+from pandas.plotting import scatter_matrix
+df = pd.DataFrame(np.random.rand(6, 4))
+print(df)
+# 會自動的產生各個columns之間的 scatter diagram
+_ = scatter_matrix(df, color = 'k', alpha = 0.3, figsize=(8, 8))
+
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 

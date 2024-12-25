@@ -33,8 +33,12 @@ print("------------------------------------------------------------")  # 60個
 import scipy
 import scipy.cluster.hierarchy as sch
 from scipy.cluster.vq import vq,kmeans,whiten
+from sklearn import metrics
 from sklearn import preprocessing
 from sklearn.decomposition import PCA
+from sklearn import cluster
+
+print("------------------------------------------------------------")  # 60個
 
 #导入数据
 orgData = pd.read_csv('cities_10.csv', index_col="AREA", encoding='gbk')
@@ -63,10 +67,6 @@ P=sch.dendrogram(Z)
 plt.savefig('tmp_plot_dendrogram1.png')
 
 #2、K-means聚类
-
-from sklearn import cluster
-from sklearn.decomposition import PCA
-from sklearn import preprocessing
 
 iris = pd.read_csv('iris.csv')
 x=iris.ix[:,"Sepal.Length":"Petal.Width"] # NG
@@ -107,14 +107,14 @@ lo = plt.scatter(score[0][result.labels_==2],score[1][result.labels_==2], marker
 #Silhouette Coefficient
 #http://scikit-learn.org/stable/modules/clustering.html#clustering
 
-from sklearn import metrics
+# 計算輪廓分數
 cc = metrics.silhouette_score(x_scaled, result.labels_, metric='euclidean')
-print(cc)
+#print("分", CLUSTERS, "群, 計算輪廓分數:", cc)
+print("計算輪廓分數:", cc)
 
 #Adjusted Rand index
 #http://scikit-learn.org/stable/modules/clustering.html#clustering
 
-from sklearn import metrics
 cc = metrics.adjusted_rand_score(y, result.labels_ )
 print(cc)
 

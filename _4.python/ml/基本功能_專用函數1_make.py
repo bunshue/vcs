@@ -62,6 +62,35 @@ print(sklearn)
 
 print("------------------------------------------------------------")  # 60個
 
+print("使用center_box")
+
+N = 1000  # n_samples, 樣本數
+M = 2  # n_features, 特徵數(資料的維度)
+GROUPS = 6  # centers, 分群數
+STD = 0.3  # cluster_std, 資料標準差
+print("make_blobs,", N, "個樣本, ", M, "個特徵, 分成", GROUPS, "群")
+
+X, y, centers = make_blobs(
+    n_samples=N,
+    n_features=M,
+    centers=GROUPS,
+    cluster_std=STD,
+    center_box=(-10.0, 10.0),
+    return_centers=True,
+)
+
+print(GROUPS, "群 的中心點 :\n", centers)
+
+plt.scatter(*zip(*X))
+
+# 標記群集中心
+plt.scatter(centers[:, 0], centers[:, 1], marker="*", s=200, color="r")
+# 目前還不會把框畫出來 center_box
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
 # 用文字看內建資料的方法
 
 N = 10  # n_samples, 樣本數
@@ -525,6 +554,24 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+print("make_s_curve 生成S曲线数据集")
+from matplotlib.ticker import NullFormatter
+
+N = 1000
+X, color = datasets.make_s_curve(n_samples=N, noise=0, random_state=9487)
+
+fig = plt.figure(figsize=(8, 6))
+
+# Add 3d scatter plot
+ax = fig.add_subplot(111, projection="3d")
+ax.scatter(X[:, 0], X[:, 1], X[:, 2], c=color, cmap=plt.cm.Spectral)
+ax.view_init(4, -72)
+
+# 不要畫刻度
+ax.xaxis.set_major_formatter(NullFormatter())
+ax.yaxis.set_major_formatter(NullFormatter())
+
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

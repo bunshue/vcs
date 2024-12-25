@@ -63,7 +63,7 @@ logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸�
 logistic_regression.fit(dx_train, label_train)  # 學習訓練.fit
 
 # 對測試數據做預測
-pred = logistic_regression.predict(dx_test)
+pred = logistic_regression.predict(dx_test)  # 預測.predict
 
 # 輸出測試數據的 label
 print(label_test)
@@ -94,7 +94,7 @@ logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸�
 logistic_regression.fit(dx_train, label_train)  # 學習訓練.fit
 
 # 對測試數據做預測
-pred = logistic_regression.predict(dx_test)
+pred = logistic_regression.predict(dx_test)  # 預測.predict
 
 # 輸出測試數據的 label
 print(label_test)
@@ -140,7 +140,7 @@ logistic_regression.fit(X_train, y_train)
 # cc = logistic_regression.coef_, lr.intercept_
 # print(cc)
 
-y_pred = logistic_regression.predict(X_test)
+y_pred = logistic_regression.predict(X_test)  # 預測.predict
 print(f"計算準確率 : {accuracy_score(y_test, y_pred)*100:.2f}%")
 # 48.80%
 
@@ -360,12 +360,15 @@ plt.style.use("bmh")
 x_min, x_max = X[:, 0].min() - 0.5, X[:, 0].max() + 0.5
 y_min, y_max = X[:, 1].min() - 0.5, X[:, 1].max() + 0.5
 h = 0.01
+
 # Generate a grid of points with distance h between them
 xx, yy = np.meshgrid(np.arange(x_min, x_max, h), np.arange(y_min, y_max, h))
+
 # Predict the function value for the whole grid (get class for each grid point)
-Z = logistic_regression.predict(np.c_[xx.ravel(), yy.ravel()])
+Z = logistic_regression.predict(np.c_[xx.ravel(), yy.ravel()])  # 預測.predict
 Z = Z.reshape(xx.shape)
 # print(Z)
+
 # Plot the contour and training examples
 plt.contourf(xx, yy, Z, alpha=0.3)
 plt.scatter(X[:, 0], X[:, 1], c=y, s=40, alpha=0.8)

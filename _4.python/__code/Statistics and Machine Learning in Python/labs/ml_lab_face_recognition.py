@@ -1,34 +1,7 @@
 '''
-Lab: Faces recognition using various learning models
-====================================================
+# Faces recognition using various learning models
 
-This lab is inspired by a scikit-learn lab:
-`Faces recognition example using eigenfaces and SVMs <https://scikit-learn.org/stable/auto_examples/applications/plot_face_recognition.html>`_
 
-It uses scikit-learan and pytorch models using `skorch <https://github.com/skorch-dev/skorch>`_
-(`slides <https://fr.slideshare.net/ThomasFan6/pydata-dc-2018-skorch-a-union-of-scikitlearn-and-pytorch>`_).
-  * skorch provides scikit-learn compatible neural network library that wraps PyTorch.
-  * skorch abstracts away the training loop, making a lot of boilerplate code obsolete.
-    A simple `net.fit(X, y)` is enough.
-
-Note that more sofisticated models can be used,
-`see <https://medium.com/@ageitgey/machine-learning-is-fun-part-4-modern-face-recognition-with-deep-learning-c3cffc121d78>`_
-for a overview.
-
-Models:
-
-- Eigenfaces unsupervized exploratory analysis.
-- `LogisticRegression <https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html>`_ with L2 regularization (includes model selection with 5CV`_
-- `SVM-RBF <https://scikit-learn.org/stable/modules/generated/sklearn.svm.SVC.html>`_  (includes model selection with 5CV.
-- `MLP using sklearn <https://scikit-learn.org/stable/modules/generated/sklearn.neural_network.MLPClassifier.html>`_ using sklearn (includes model selection with 5CV)
-- `MLP using skorch classifier <https://skorch.readthedocs.io/en/stable/classifier.html>`_
-- Basic Convnet (ResNet18) using skorch.
-- Pretrained ResNet18 using skorch.
-
-Pipelines:
-
-- Univariate feature filtering (Anova) with Logistic-L2
-- PCA with LogisticRegression with L2 regularization
 '''
 
 import numpy as np
@@ -73,10 +46,7 @@ import skorch
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
-
-# %%
 # Utils
-# -----
 
 
 def plot_gallery(images, titles, h, w, n_row=3, n_col=4):
@@ -103,10 +73,7 @@ def label_proportion(x, decimals=2):
     unique, counts = np.unique(x, return_counts=True)
     return dict(zip(unique, np.round(counts / len(x), decimals)))
 
-
-# %%
 # Download the data
-# -----------------
 
 lfw_people = fetch_lfw_people(min_faces_per_person=70, resize=0.4)
 
@@ -128,8 +95,6 @@ print("n_samples: %d" % n_samples)
 print("n_features: %d" % n_features)
 print("n_classes: %d" % n_classes)
 
-
-# %%
 # Split into a training and testing set in stratified way
 # -------------------------------------------------------
 
@@ -139,8 +104,6 @@ X_train, X_test, y_train, y_test = train_test_split(
 print({target_names[lab]: prop for lab, prop in
        label_proportion(y_train).items()})
 
-
-# %%
 # Plot mean faces and 4 samples of each individual
 
 single_faces = [X_train[y_train == lab][:5] for lab in np.unique(y_train)]
@@ -154,11 +117,7 @@ single_faces[::5, :, :] = mean_faces
 titles = [n for name in target_names for n in [name] * 5]
 plot_gallery(single_faces, titles, h, w, n_row=n_classes, n_col=5)
 
-
-# %%
 # Eigenfaces
-# ----------
-#
 # Compute a PCA (eigenfaces) on the face dataset (treated as unlabeled
 # dataset): unsupervised feature extraction / dimensionality reduction
 
@@ -175,15 +134,10 @@ eigenfaces = pca.components_.reshape((n_components, h, w))
 
 print("Explained variance", pca.explained_variance_ratio_[:2])
 
-# %%
 # T-SNE
 
 tsne = manifold.TSNE(n_components=2, init='pca', random_state=0)
 X_tsne = tsne.fit_transform(X_train)
-
-
-# %%
-#
 
 print("Projecting the input data on the eigenfaces orthonormal basis")
 X_train_pca = pca.transform(X_train)
@@ -198,28 +152,13 @@ sns.relplot(x="PC1", y="PC2", hue="lab", data=df)
 
 sns.relplot(x="TSNE1", y="TSNE2", hue="lab", data=df)
 
-
-# %%
 # Plot eigenfaces:
 
 eigenface_titles = ["eigenface %d" % i for i in range(eigenfaces.shape[0])]
 plot_gallery(eigenfaces, eigenface_titles, h, w)
 
 
-# %%
 # LogisticRegression with L2 penalty (with CV-based model selection)
-# ------------------------------------------------------------------
-#
-# Our goal is to obtain a good balanced accuracy, ie, the macro average
-# (`macro avg`) of classes' reccalls. In this perspective, the good practices
-# are:
-#
-# - Scale input features using either `StandardScaler()` or `MinMaxScaler()`
-#   "It doesn't harm".
-# - Re-balance classes' contributions `class_weight='balanced'`
-# - Do not include an intercept (`fit_intercept=False`) in the model.
-#   This should reduce the global accuracy `weighted avg`. But rememember that
-#   we decided to maximize the balanced accuracy.
 
 lrl2_cv = make_pipeline(
     preprocessing.StandardScaler(),
@@ -239,8 +178,6 @@ y_pred = lrl2_cv.predict(X_test)
 print(classification_report(y_test, y_pred, target_names=target_names))
 print(confusion_matrix(y_test, y_pred, labels=range(n_classes)))
 
-
-# %%
 # Coeficients
 
 coefs = lrl2_cv.steps[-1][1].best_estimator_.coef_
@@ -248,7 +185,6 @@ coefs = coefs.reshape(-1, h, w)
 plot_gallery(coefs, target_names, h, w)
 
 
-# %%
 # SVM (with CV-based model selection)
 # -----------------------------------
 #
@@ -273,21 +209,7 @@ print(svm_cv.steps[-1][1].best_params_)
 y_pred = svm_cv.predict(X_test)
 print(classification_report(y_test, y_pred, target_names=target_names))
 
-
-# %%
 # MLP with sklearn and CV-based model selection
-# ---------------------------------------------
-#
-# Default parameters:
-# - alpha, default=0.0001 L2 penalty (regularization term) parameter.
-# - batch_size=min(200, n_samples)
-# - learning_rate_init = 0.001 (the important one since we uses adam)
-# - solver default='adam'
-#   * sgd: momentum=0.9
-#   * adam: beta_1, beta_2 default=0.9, 0.999 Exponential decay rates for
-#     the first and second moment.
-# - L2 penalty (regularization term) parameter, `alpha` default=0.0001
-# - tol, default=1e-4
 
 mlp_param_grid = {"hidden_layer_sizes":
                   # Configurations with 1 hidden layer:
@@ -314,11 +236,7 @@ print(mlp_cv.steps[-1][1].best_params_)
 y_pred = mlp_cv.predict(X_test)
 print(classification_report(y_test, y_pred, target_names=target_names))
 
-
-# %%
 # MLP with pytorch and no model selection
-# ---------------------------------------
-#
 
 class SimpleMLPClassifierPytorch(nn.Module):
     """Simple (one hidden layer) MLP Classifier with Pytorch."""
@@ -364,10 +282,7 @@ print("done in %0.3fs" % (time() - t0))
 y_pred = mlp.predict(X_test_s)
 print(classification_report(y_test, y_pred, target_names=target_names))
 
-
-# %%
 # Univariate feature filtering (Anova) with Logistic-L2
-# -----------------------------------------------------
 
 anova_l2lr = Pipeline([
     ('standardscaler', preprocessing.StandardScaler()),
@@ -391,10 +306,7 @@ print(anova_l2lr_cv.best_params_)
 y_pred = anova_l2lr_cv.predict(X_test)
 print(classification_report(y_test, y_pred, target_names=target_names))
 
-
-# %%
 # PCA with LogisticRegression with L2 regularization
-# --------------------------------------------------
 
 pca_lrl2_cv = make_pipeline(
     PCA(n_components=150, svd_solver='randomized', whiten=True),
@@ -414,20 +326,7 @@ y_pred = pca_lrl2_cv.predict(X_test)
 print(classification_report(y_test, y_pred, target_names=target_names))
 print(confusion_matrix(y_test, y_pred, labels=range(n_classes)))
 
-
-# %%
 # Basic ConvNet
-# -------------
-#
-# Note that to simplify, do not use pipeline (scaler + CNN) here.
-# But it would have been simple to do so, since pytorch is warpped in skorch
-# object that is compatible with sklearn.
-#
-# Sources:
-#
-# - `ConvNet on MNIST <https://github.com/skorch-dev/skorch/blob/master/notebooks/MNIST.ipynb>`_
-# - `NeuralNetClassifier <https://skorch.readthedocs.io/en/stable/classifier.html>`_
-
 
 class Cnn(nn.Module):
     """Basic ConvNet Conv(1, 32, 64) -> FC(100, 7) -> softmax."""
@@ -479,12 +378,7 @@ print("done in %0.3fs" % (time() - t0))
 y_pred = cnn.predict(X_test_s)
 print(classification_report(y_test, y_pred, target_names=target_names))
 
-
-# %%
 # ConvNet with Resnet18
-# ---------------------
-#
-#
 
 class Resnet18(nn.Module):
     """ResNet 18, pretrained, with one input chanel and 7 outputs."""

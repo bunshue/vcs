@@ -61,8 +61,8 @@ def show():
 
 print("------------------------------------------------------------")  # 60個
 
-n_row, n_col = 2, 5
-n_components = n_row * n_col
+R, C = 2, 5
+n_components = R * C
 image_shape = (64, 64)
 rng = RandomState(0)
 
@@ -255,8 +255,8 @@ def plot_gallery(images, titles, h, w, n_row=2, n_col=5):
         plt.axis("off")
 
 
-n_row = 4
-n_col = 5
+R = 4
+C = 5
 
 sample_images = None
 sample_titles = []
@@ -271,7 +271,7 @@ for i in range(n_targets):
     sample_titles.append(target_names[i])
 
 print("plot_gallery 1")
-plot_gallery(sample_images, sample_titles, h, w, n_row, n_col)
+plot_gallery(sample_images, sample_titles, h, w, R, C)
 show()
 
 print("------------------------------")  # 30個
@@ -334,8 +334,8 @@ def title_prefix(prefix, title):
     return "{}: {}".format(prefix, title)
 
 
-n_row = 1
-n_col = 5
+R = 1
+C = 5
 
 sample_images = sample_images[0:5]
 sample_titles = sample_titles[0:5]
@@ -362,8 +362,8 @@ plot_gallery(
     plotting_titles,
     h,
     w,
-    n_row * (len(candidate_components) + 1),
-    n_col,
+    R * (len(candidate_components) + 1),
+    C,
 )
 
 show()

@@ -32,7 +32,7 @@ from sklearn import datasets
 from sklearn.datasets import make_blobs  # 集群資料集
 from sklearn.datasets import make_classification
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
-from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import RandomForestClassifier  # 隨機森林分類函數學習機
 from sklearn.ensemble import RandomForestRegressor  # 隨機森林函數學習機
 from sklearn.model_selection import cross_val_score  # Cross Validation
 
@@ -110,18 +110,17 @@ from sklearn.ensemble import BaggingClassifier
 
 tree = DecisionTreeClassifier()
 # 通過每個估計器擬合80％的訓練點  BaggingClassifier利用平行估計器的集合
-bag = BaggingClassifier(tree, n_estimators=100, max_samples=0.8, random_state=1)
+bag = BaggingClassifier(tree, n_estimators=100, max_samples=0.8, random_state=9487)
 
 bag.fit(X, y)
 visualize_classifier(bag, X, y)
 
 plt.show()
 
-# 隨機森林主要應用模組：RandomForestClassifier
+from sklearn.ensemble import RandomForestClassifier  # 隨機森林分類函數學習機
 
-from sklearn.ensemble import RandomForestClassifier
+model = RandomForestClassifier(n_estimators=100, random_state=9487)  # 隨機森林分類函數學習機
 
-model = RandomForestClassifier(n_estimators=100, random_state=0)
 visualize_classifier(model, X, y)
 plt.show()
 
@@ -189,16 +188,15 @@ for i in range(64):
 
 plt.show()
 
-
-# 將手寫資料分test、train資料，並利用上面介紹RandomForestClassifier()的方法將手寫數字進行分類。
+# 用 隨機森林分類函數學習機 將手寫資料進行分類
 
 from sklearn import metrics
 
-Xtrain, Xtest, ytrain, ytest = train_test_split(
-    digits.data, digits.target, random_state=0
-)
-model = RandomForestClassifier(n_estimators=1000)
+Xtrain, Xtest, ytrain, ytest = train_test_split(digits.data, digits.target)
+model = RandomForestClassifier(n_estimators=1000)  # 隨機森林分類函數學習機
+
 model.fit(Xtrain, ytrain)
+
 ypred = model.predict(Xtest)
 
 print(metrics.classification_report(ypred, ytest))
@@ -228,12 +226,12 @@ print("------------------------------------------------------------")  # 60個
 N = 500  # n_samples, 樣本數
 M = 2  # n_features, 特徵數(資料的維度)
 GROUPS = 3  # centers, 分群數
+
 print("make_blobs,", N, "個樣本, ", M, "個特徵, 分成", GROUPS, "群")
+
 X, y = make_blobs(n_samples=N, centers=GROUPS, n_features=M)
 
-print("使用 Random Forest")
-
-clf = RandomForestClassifier(n_estimators=100)
+clf = RandomForestClassifier(n_estimators=100)  # 隨機森林分類函數學習機
 
 scores = cross_val_score(clf, X, y, cv=5)
 print("看一下五次的成績 :", scores)
@@ -245,7 +243,9 @@ print("------------------------------------------------------------")  # 60個
 X = np.array([[180, 85], [174, 80], [170, 75], [167, 45], [158, 52], [155, 44]])
 Y = np.array(["man", "man", "man", "woman", "woman", "woman"])
 
-RForest = RandomForestClassifier(n_estimators=100, max_depth=10, random_state=2)
+RForest = RandomForestClassifier(
+    n_estimators=100, max_depth=10, random_state=9487
+)  # 隨機森林分類函數學習機
 
 RForest.fit(X, Y)  # 學習訓練.fit
 
@@ -256,11 +256,13 @@ X, Y = make_classification(
     n_features=3,
     n_informative=2,
     n_redundant=0,
-    random_state=0,
+    random_state=9487,
     shuffle=True,
 )
 
-model = RandomForestClassifier(n_estimators=100, max_depth=10, random_state=2)
+model = RandomForestClassifier(
+    n_estimators=100, max_depth=10, random_state=9487
+)  # 隨機森林分類函數學習機
 
 model.fit(X, Y)  # 學習訓練.fit
 
@@ -292,8 +294,7 @@ dx_train, dx_test, label_train, label_test = train_test_split(
 )
 # 訓練組8成, 測試組2成
 
-# 建立分類模型
-forest_model = RandomForestClassifier()
+forest_model = RandomForestClassifier()  # 隨機森林分類函數學習機
 
 forest_model.fit(dx_train, label_train)  # 學習訓練.fit
 
@@ -380,15 +381,15 @@ print("Testing Labels Shape:", y_test.shape)
 # 隨機森林演算法, 用 sklearn 裡的 RandomForestRegressor 來做隨機森林演算法
 # 使用 1000棵 決策樹
 random_forest_regressor = RandomForestRegressor(
-    n_estimators=60, random_state=42
+    n_estimators=60, random_state=9487
 )  # 隨機森林函數學習機
 
 random_forest_regressor.fit(X_train, y_train)  # 學習訓練.fit
-# 預測
-predictions = random_forest_regressor.predict(X_test)  # 預測.predict
+
+y_pred = random_forest_regressor.predict(X_test)  # 預測.predict
 
 # 計算誤差
-errors = abs(predictions - y_test)
+errors = abs(y_pred - y_test)
 
 print("MAE : Mean Absolute Error:", round(np.mean(errors), 2), "degrees.")
 
@@ -434,7 +435,7 @@ show()
 # 隨機森林演算法, 用 sklearn 裡的 RandomForestRegressor 來做隨機森林演算法
 # 使用 1000棵 決策樹
 rf_most_important = RandomForestRegressor(
-    n_estimators=1000, random_state=42
+    n_estimators=1000, random_state=9487
 )  # 隨機森林函數學習機
 
 # Extract the two most important df
@@ -445,11 +446,10 @@ test_important = X_test[:, important_indices]
 # Train the random forest
 rf_most_important.fit(train_important, y_train)  # 學習訓練.fit
 
-# 預測
-predictions = rf_most_important.predict(test_important)  # 預測.predict
+y_pred = rf_most_important.predict(test_important)  # 預測.predict
 
 # 計算誤差
-errors = abs(predictions - y_test)
+errors = abs(y_pred - y_test)
 
 # Display the performance metrics
 print("MAE : Mean Absolute Error:", round(np.mean(errors), 2), "degrees.")
@@ -615,16 +615,15 @@ print("Testing Labels Shape:", test_labels.shape)
 # 隨機森林演算法, 用 sklearn 裡的 RandomForestRegressor 來做隨機森林演算法
 # 使用 1000棵 決策樹
 random_forest_regressor = RandomForestRegressor(
-    n_estimators=1000, random_state=42
+    n_estimators=1000, random_state=9487
 )  # 隨機森林函數學習機
 
 random_forest_regressor.fit(train_features, train_labels)  # 學習訓練.fit
 
-# 預測
-predictions = random_forest_regressor.predict(test_features)  # 預測.predict
+y_pred = random_forest_regressor.predict(test_features)  # 預測.predict
 
 # 計算誤差
-errors = abs(predictions - test_labels)
+errors = abs(y_pred - test_labels)
 
 print("MAE : Mean Absolute Error:", round(np.mean(errors), 2), "degrees.")
 
@@ -701,7 +700,7 @@ show()
 # 隨機森林演算法, 用 sklearn 裡的 RandomForestRegressor 來做隨機森林演算法
 # 使用 1000棵 決策樹
 rf_most_important = RandomForestRegressor(
-    n_estimators=1000, random_state=42
+    n_estimators=1000, random_state=9487
 )  # 隨機森林函數學習機
 
 # Extract the two most important features
@@ -711,11 +710,10 @@ test_important = test_features[:, important_indices]
 
 rf_most_important.fit(train_important, train_labels)  # 學習訓練.fit
 
-# 預測
-predictions = rf_most_important.predict(test_important)  # 預測.predict
+y_pred = rf_most_important.predict(test_important)  # 預測.predict
 
 # 計算誤差
-errors = abs(predictions - test_labels)
+errors = abs(y_pred - test_labels)
 
 # Display the performance metrics
 print("MAE : Mean Absolute Error:", round(np.mean(errors), 2), "degrees.")

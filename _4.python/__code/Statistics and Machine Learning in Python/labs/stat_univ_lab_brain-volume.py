@@ -1,20 +1,9 @@
 '''
 Lab: Brain volumes study
-=======================
 
 The study provides the brain volumes of grey matter (gm), white matter (wm)
 and cerebrospinal fluid) (csf) of 808 anatomical MRI scans.
 '''
-
-###############################################################################
-# Manipulate data
-# ---------------
-
-###############################################################################
-# Set the working directory within a directory called "brainvol"
-#
-# Create 2 subdirectories: `data` that will contain downloaded data and
-# `reports` for results of the analysis.
 
 import os
 import os.path
@@ -33,13 +22,6 @@ os.makedirs(os.path.join(WD, "data"), exist_ok=True)
 
 ###############################################################################
 # **Fetch data**
-#
-# - Demographic data `demo.csv` (columns: `participant_id`, `site`, `group`,
-#   `age`, `sex`) and tissue volume data: `group` is Control or Patient.
-#   `site` is the recruiting site.
-# - Gray matter volume `gm.csv` (columns: `participant_id`, `session`, `gm_vol`)
-# - White matter volume `wm.csv` (columns: `participant_id`, `session`, `wm_vol`)
-# - Cerebrospinal Fluid `csf.csv` (columns: `participant_id`, `session`, `csf_vol`)
 
 base_url = 'https://github.com/duchesnay/pystatsml/raw/master/datasets/brain_volumes/%s'
 data = dict()

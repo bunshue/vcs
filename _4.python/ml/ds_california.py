@@ -129,20 +129,20 @@ linear_regression = LinearRegression()
 
 linear_regression.fit(x_train, y_train)
 
-y_predict = linear_regression.predict(x_test)
+y_pred = linear_regression.predict(x_test)
 
 # 現在來計算我們預測的成績。
 from sklearn.metrics import mean_squared_error, r2_score
 
-mse = mean_squared_error(y_test, y_predict)
-r2 = r2_score(y_test, y_predict)
+mse = mean_squared_error(y_test, y_pred)
+r2 = r2_score(y_test, y_pred)
 
 print("MSE =", mse)
 print("R2 =", r2)
 
 # 用很有創意的方法, 把圖給畫出來。
 
-plt.scatter(y_test, y_predict)
+plt.scatter(y_test, y_pred)
 plt.xlim(0, 5.5)
 plt.ylim(0, 5.5)
 plt.plot([0, 5.5], [0, 5.5], "r")
@@ -166,13 +166,13 @@ linear_regression = LinearRegression()
 
 linear_regression.fit(x_train, y_train)
 
-y_predict = linear_regression.predict(x_test)
+y_pred = linear_regression.predict(x_test)
 
 # 為了看看模型是不是學的好棒棒，把「真實的結果」當作 x 座標， 「預測的結果」當作 y 座標描點在圖上
 # 為了方便比較，再畫一條對角線當作比較基準！
 # (學得好的話，所有的點應該都會在對角線上，表示結果一樣)
 
-plt.scatter(y_test, y_predict)
+plt.scatter(y_test, y_pred)
 plt.plot([0, 5], [0, 5], "r")
 plt.xlabel("True Price")
 plt.ylabel("Predicted Price")
