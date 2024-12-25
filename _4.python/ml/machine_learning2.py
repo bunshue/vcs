@@ -67,41 +67,17 @@ from sklearn.linear_model import Ridge
 from sklearn.cluster import KMeans
 from sklearn.neighbors import KNeighborsClassifier  # K近鄰演算法（K Nearest Neighbor）
 from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import MinMaxScaler
+from sklearn.preprocessing import Normalizer
+from sklearn.preprocessing import LabelEncoder
+from sklearn.preprocessing import OneHotEncoder
+from sklearn.compose import ColumnTransformer
 
 
 def show():
     return
     plt.show()
     pass
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-# 迴歸效果評估
-def evaluate_result(y_test, y_pred):
-    print("真實資料(y_test) :", y_test)
-    print("預測資料(y_pred) :", y_pred)
-
-    print("計算 真實測試資料(y_test) 和 預測資料(y_pred)的 MSE")
-    mse = np.sum((y_test - y_pred) ** 2) / len(y_test)
-    print("MSE =", mse)
-
-    # 平均絕對誤差 Mean Absolute Error (MAE)代表平均誤差，公式為所有實際值及預測值相減的絕對值平均。
-    cc = mean_absolute_error(y_test, y_pred)
-    print("MAE : Mean Absolute Error :", cc)
-
-    # 均方誤差 Mean Squared Error (MSE)比起MSE可以拉開誤差差距，算是蠻常用的指標，公式所有實際值及預測值相減的平方的平均
-    mse = mean_squared_error(y_test, y_pred)
-    print("MSE : Mean Squared Error :", mse)
-
-    # Root Mean Squared Error (RMSE)代表MSE的平方根。比起MSE更為常用，因為更容易解釋y。
-    cc = np.sqrt(mean_squared_error(y_test, y_pred))
-    print("RMS : Root Mean Squared Error :", cc)
-
-    print("計算 真實測試資料(y_test) 和 預測資料(y_pred) 的 決定係數r2 r2_score")
-    r2 = r2_score(y_test, y_pred)
-    print(f"決定係數R2 = {r2:.4f}")
 
 
 print("------------------------------------------------------------")  # 60個
@@ -253,7 +229,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 from sklearn.feature_extraction.text import CountVectorizer
-from sklearn.preprocessing import Normalizer
 from sklearn.decomposition import TruncatedSVD
 
 corpus = ["Python is popular in machine learning",
@@ -2005,7 +1980,6 @@ print("使用 sklearn 包實現")
 
 from sklearn.decomposition import PCA
 from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import MinMaxScaler
 
 
 def std_PCA(**argv):
@@ -2349,8 +2323,6 @@ imp_mean.fit([[7, 2, 3], [4, np.nan, 6], [10, 5, 9]])
 X = [[np.nan, 2, 3], [4, np.nan, 6], [10, np.nan, 9]]
 print(imp_mean.transform(X))
 
-from sklearn.preprocessing import OneHotEncoder
-
 enc = OneHotEncoder(handle_unknown="ignore")
 X = [["Male", 1], ["Female", 3], ["Female", 2]]
 
@@ -2397,13 +2369,16 @@ print(X[:, 1:3])
 from sklearn.impute import SimpleImputer
 
 imputer = SimpleImputer(missing_values=np.nan, strategy="mean")
+
 # from sklearn.preprocessing import Imputer
 # axis=0表示按列進行
 # imputer = Imputer(missing_values = "NaN", strategy = "mean", axis = 0)
 # print(imputer)
 # print(X[ : , 1:3])
+
 imputer = imputer.fit(X[:, 1:3])  # put the data we want to process in to this imputer
 X[:, 1:3] = imputer.transform(X[:, 1:3])  # replace the np.nan with mean
+
 # print(X[ : , 1:3])
 print("---------------------")
 print("Step 3: Handling the missing data")
@@ -2426,13 +2401,7 @@ X[ : , 1:3] = imputer.transform(X[ : , 1:3])
 # 例如"Yes"和"No"不能用于模型的數學計算，所以需要解析成數字。
 # 為實現這一功能，我們從sklearn.preprocessing庫導入LabelEncoder類。
 
-from sklearn.preprocessing import LabelEncoder
-from sklearn.preprocessing import OneHotEncoder
-from sklearn.compose import ColumnTransformer
-
-""" another
-from sklearn.preprocessing import LabelEncoder
-from sklearn.preprocessing import OneHotEncoder
+"""
 labelencoder_X = LabelEncoder()
 X[ : , 0] = labelencoder_X.fit_transform(X[ : , 0])
 """
@@ -3225,9 +3194,6 @@ df = pd.DataFrame(
 df.columns = ["color", "size", "price", "classlabel"]
 print(df)
 
-# LabelEncoder
-from sklearn.preprocessing import LabelEncoder
-
 encoder = LabelEncoder()
 cc = encoder.fit_transform(df["size"])
 print(cc)
@@ -3268,9 +3234,6 @@ print(cc)
 df2 = pd.get_dummies(df, columns=["color"], prefix="is", prefix_sep="_")
 cc = pd.from_dummies(df2[["is_blue", "is_green", "is_red"]], sep="_")
 print(cc)
-
-# One-hot Encoding with Scikit-learn
-from sklearn.preprocessing import OneHotEncoder
 
 # 測試資料
 X = [["Male", 1], ["Female", 3], ["Female", 2]]
@@ -3748,8 +3711,6 @@ cc = X.shape
 print(cc)
 
 # 特徵縮放
-from sklearn.preprocessing import MinMaxScaler
-
 scaler = MinMaxScaler()
 X = scaler.fit_transform(X)
 

@@ -21,6 +21,11 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
+from sklearn.svm import SVC  # 非線性SVM函數學習機
+from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
+
+print("------------------------------------------------------------")  # 60個
+
 
 def plot_decision_regions(X, y, classifier, test_idx=None, resolution=0.02):
     # setup markers generator and color map
@@ -73,7 +78,6 @@ print("------------------------------------------------------------")  # 60個
 
 from sklearn import datasets
 from sklearn.preprocessing import StandardScaler
-from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 from matplotlib.colors import ListedColormap
 
@@ -95,8 +99,10 @@ def do_svm():
     X_train_std = sc.transform(X_train)
     X_test_std = sc.transform(X_test)
 
-    svm = SVC(kernel="linear", C=1.0, random_state=9487)  # SVM 函數學習機
+    svm = SVC(kernel="linear", C=1.0, random_state=9487)  # 非線性SVM函數學習機
+
     svm.fit(X_train_std, y_train)  # 學習訓練.fit
+
     y_pred = svm.predict(X_test_std)  # 預測.predict
 
     print("Misclassified smaples: %d" % (y_test != y_pred).sum())
@@ -107,8 +113,8 @@ def do_svm():
     plot_decision_regions(
         X=X_combined_std, y=y_combined_std, classifier=svm, test_idx=range(50, 100)
     )
-    plt.xlabel("sepal length [standarlized]")
-    plt.ylabel("petal length [standarlized]")
+    plt.xlabel("萼長 sepal length [標準化]")
+    plt.ylabel("瓣長 petal length [標準化]")
     plt.legend(loc="upper left")
     plt.show()
 
@@ -137,8 +143,10 @@ def do_svm_kernel():
     plt.legend()
     plt.show()
 
-    svm = SVC(kernel="rbf", random_state=9487, gamma=0.6, C=10.0)  # SVM 函數學習機
+    svm = SVC(kernel="rbf", random_state=9487, gamma=0.6, C=10.0)  # 非線性SVM函數學習機
+
     svm.fit(X_xor, y_xor)  # 學習訓練.fit
+
     plot_decision_regions(X_xor, y_xor, classifier=svm)
     plt.legend(loc="upper left")
     plt.show()
@@ -154,9 +162,9 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 from matplotlib.colors import ListedColormap
-from sklearn import datasets, metrics
+from sklearn import datasets
+from sklearn import metrics
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.model_selection import train_test_split
 
 
 def do_random_forest():
@@ -174,8 +182,8 @@ def do_random_forest():
     plot_decision_regions(
         X_combined, y_combined, classifier=clf, test_idx=range(105, 150)
     )
-    plt.xlabel("petal length [cm]")
-    plt.ylabel("petal width [cm]")
+    plt.xlabel("瓣長 petal length")
+    plt.ylabel("瓣寬 petal width")
     plt.legend(loc="upper left")
     plt.show()
 
@@ -225,8 +233,8 @@ def do_perceptrons():
     plt.scatter(
         X[50:100, 0], X[50:100, 1], color="blue", marker="x", label="versicolor"
     )
-    plt.xlabel("petal length")
-    plt.ylabel("sepal length")
+    plt.xlabel("瓣長 petal length")
+    plt.ylabel("萼長 sepal length")
     plt.legend(loc="upper left")
     plt.show()
 

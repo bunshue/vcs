@@ -21,16 +21,18 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
-from sklearn import linear_model
 import sklearn.linear_model
-import sklearn.linear_model as lm
 import sklearn.metrics as metrics
 from sklearn import datasets
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
 from sklearn.model_selection import cross_val_score
+from sklearn.metrics import accuracy_score
+from sklearn.metrics import f1_score
+from sklearn.ensemble import RandomForestClassifier
 
 
 def show():
+    return
     plt.show()
     pass
 
@@ -74,26 +76,27 @@ X, y, coef = datasets.make_regression(
     n_samples=100, n_features=10, n_informative=5, effective_rank=3, coef=True
 )
 
-lr = lm.LinearRegression().fit(X, y)
+lr = sklearn.linear_model.LinearRegression().fit(X, y)
 
-l2 = lm.Ridge(alpha=10).fit(X, y)  # lambda is alpha!
+l2 = sklearn.linear_model.Ridge(alpha=10).fit(X, y)  # lambda is alpha!
 
-l1 = lm.Lasso(alpha=0.1).fit(X, y)  # lambda is alpha !
+l1 = sklearn.linear_model.Lasso(alpha=0.1).fit(X, y)  # lambda is alpha !
 
-l1l2 = lm.ElasticNet(alpha=0.1, l1_ratio=0.9).fit(X, y)
+l1l2 = sklearn.linear_model.ElasticNet(alpha=0.1, l1_ratio=0.9).fit(X, y)
 
 pd.DataFrame(
     np.vstack((coef, lr.coef_, l2.coef_, l1.coef_, l1l2.coef_)),
     index=["True", "lr", "l2", "l1", "l1l2"],
 )
 
-
 print("------------------------------------------------------------")  # 60個
 
 X, y = datasets.make_regression()
+
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
-lr = lm.LinearRegression()
+lr = sklearn.linear_model.LinearRegression()
 lr.fit(X_train, y_train)
 yhat = lr.predict(X_test)
 
@@ -126,9 +129,7 @@ print("------------------------------------------------------------")  # 60個
 np.set_printoptions(precision=2)
 # pd.set_option('precision', 2)
 
-
 # Linear discriminant analysis (LDA)
-
 
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis as LDA
 
@@ -165,8 +166,7 @@ plt.plot(x, logistic(x))
 plt.grid(True)
 plt.title("Logistic (sigmoid)")
 
-
-logreg = lm.LogisticRegression().fit(X, y)
+logreg = sklearn.linear_model.LogisticRegression().fit(X, y)
 
 # This class implements regularized logistic regression.
 # C is the Inverse of regularization strength.
@@ -194,16 +194,18 @@ X, y = datasets.make_classification(
     shuffle=False,
 )
 
-lr = lm.LogisticRegression().fit(X, y)
+lr = sklearn.linear_model.LogisticRegression().fit(X, y)
 
-l2 = lm.LogisticRegression(penalty="l2", C=0.1).fit(X, y)  # lambda = 1 / C!
-
-# use solver 'saga' to handle L1 penalty
-l1 = lm.LogisticRegression(penalty="l1", C=0.1, solver="saga").fit(
+l2 = sklearn.linear_model.LogisticRegression(penalty="l2", C=0.1).fit(
     X, y
 )  # lambda = 1 / C!
 
-l1l2 = lm.LogisticRegression(
+# use solver 'saga' to handle L1 penalty
+l1 = sklearn.linear_model.LogisticRegression(penalty="l1", C=0.1, solver="saga").fit(
+    X, y
+)  # lambda = 1 / C!
+
+l1l2 = sklearn.linear_model.LogisticRegression(
     penalty="elasticnet", C=0.1, l1_ratio=0.5, solver="saga"
 ).fit(
     X, y
@@ -221,7 +223,7 @@ print("------------------------------------------------------------")  # 60個
 # Ridge Fisher's linear classification (L2-regularization)
 # Ridge logistic regression (L2-regularization)
 
-lrl2 = linear_model.LogisticRegression(penalty="l2", C=0.1)
+lrl2 = sklearn.linear_model.LogisticRegression(penalty="l2", C=0.1)
 # This class implements regularized logistic regression. C is the Inverse of regularization strength.
 # Large value => no regularization.
 
@@ -246,7 +248,9 @@ print("------------------------------------------------------------")  # 60個
 
 # Lasso logistic regression (L1-regularization)
 
-lrl1 = lm.LogisticRegression(penalty="l1", C=0.1, solver="saga")  # lambda = 1 / C!
+lrl1 = sklearn.linear_model.LogisticRegression(
+    penalty="l1", C=0.1, solver="saga"
+)  # lambda = 1 / C!
 
 # This class implements regularized logistic regression. C is the Inverse of regularization strength.
 # Large value => no regularization.
@@ -260,9 +264,7 @@ print("Nb errors=%i, error rate=%.2f" % (errors.sum(), errors.sum() / len(y_pred
 print("Coef vector:")
 print(lrl1.coef_)
 
-
 print("------------------------------------------------------------")  # 60個
-
 
 from sklearn import svm
 
@@ -300,16 +302,16 @@ print(svmlinl1.coef_)
 print("------------------------------------------------------------")  # 60個
 
 # Use SGD solver
-enetlog = lm.SGDClassifier(
+enetlog = sklearn.linear_model.SGDClassifier(
     loss="log_loss", penalty="elasticnet", alpha=0.1, l1_ratio=0.5
 )
 enetlog.fit(X, y)
 
 # Or saga solver:
-# enetloglike = lm.LogisticRegression(penalty='elasticnet',
+# enetloglike = sklearn.linear_model.LogisticRegression(penalty='elasticnet',
 #                                    C=.1, l1_ratio=0.5, solver='saga')
 
-enethinge = lm.SGDClassifier(
+enethinge = sklearn.linear_model.SGDClassifier(
     loss="hinge", penalty="elasticnet", alpha=0.1, l1_ratio=0.5
 )
 enethinge.fit(X, y)
@@ -322,7 +324,6 @@ print("Decision_function log x hinge losses:")
 _ = plt.plot(enetlog.decision_function(X), enethinge.decision_function(X), "o")
 
 print("------------------------------------------------------------")  # 60個
-
 
 from sklearn import metrics
 
@@ -345,7 +346,6 @@ b_acc = recalls.mean()
 
 # The overall precision an recall on each individual class
 p, r, f, s = metrics.precision_recall_fscore_support(y_true, y_pred)
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -398,7 +398,7 @@ X, y = datasets.make_classification(
 print(*["#samples of class %i = %i;" % (lev, np.sum(y == lev)) for lev in np.unique(y)])
 
 print("# No Reweighting balanced dataset")
-lr_inter = linear_model.LogisticRegression(C=1)
+lr_inter = sklearn.linear_model.LogisticRegression(C=1)
 lr_inter.fit(X, y)
 p, r, f, s = metrics.precision_recall_fscore_support(y, lr_inter.predict(X))
 print("SPC: %.3f; SEN: %.3f" % tuple(r))
@@ -418,15 +418,21 @@ print(
 )
 
 print("# No Reweighting on imbalanced dataset")
-lr_inter = linear_model.LogisticRegression(C=1)
+lr_inter = sklearn.linear_model.LogisticRegression(C=1)
+
 lr_inter.fit(Ximb, yimb)
+
 p, r, f, s = metrics.precision_recall_fscore_support(yimb, lr_inter.predict(Ximb))
 print("SPC: %.3f; SEN: %.3f" % tuple(r))
 print("# => Sensitivity >> specificity\n")
 
 print("# Reweighting on imbalanced dataset")
-lr_inter_reweight = linear_model.LogisticRegression(C=1, class_weight="balanced")
+lr_inter_reweight = sklearn.linear_model.LogisticRegression(
+    C=1, class_weight="balanced"
+)
+
 lr_inter_reweight.fit(Ximb, yimb)
+
 p, r, f, s = metrics.precision_recall_fscore_support(
     yimb, lr_inter_reweight.predict(Ximb)
 )
@@ -463,7 +469,7 @@ plt.subplot(133)
 plt.scatter(X[:, 0], X[:, 1], c=km4.labels_)  # .astype(np.float))
 plt.title("K=4, J=%.2f" % km4.inertia_)
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -551,7 +557,7 @@ for i in range(gmm4.covariances_.shape[0]):
     )
 _ = plt.title("K=4")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -575,7 +581,7 @@ k_chosen = ks[np.argmin(bic)]
 plt.plot(ks, bic)
 plt.xlabel("k")
 plt.ylabel("BIC")
-plt.show()
+show()
 
 print("Choose k=", k_chosen)
 
@@ -605,7 +611,8 @@ plt.subplot(133)
 plt.scatter(X[:, 0], X[:, 1], c=ward4.labels_)  # .astype(np.float))
 plt.title("K=4")
 
-plt.show()
+show()
+
 print("------------------------------------------------------------")  # 60個
 
 
@@ -685,7 +692,7 @@ plt.xlabel("experience")
 plt.ylabel("salary")
 
 plt.tight_layout()
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -728,7 +735,7 @@ from sklearn import (
     neighbors,
 )
 
-print(__doc__)
+# print(__doc__)
 
 digits = datasets.load_digits(n_class=6)
 X = digits.data
@@ -736,24 +743,25 @@ y = digits.target
 n_samples, n_features = X.shape
 n_neighbors = 30
 
+show()
 
-plt.show()
-
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 from sklearn.datasets import fetch_olivetti_faces
 from sklearn import decomposition
 
-n_row, n_col = 2, 3
-n_components = n_row * n_col
+R, C = 2, 3
+n_components = R * C
 image_shape = (64, 64)
 
 faces, _ = fetch_olivetti_faces(return_X_y=True, shuffle=True, random_state=9487)
+
 n_samples, n_features = faces.shape
 
 
 # Utils function
-def plot_gallery(title, images, n_col=n_col, n_row=n_row, cmap=plt.cm.gray):
+def plot_gallery(title, images, n_col=C, n_row=R, cmap=plt.cm.gray):
     plt.figure(figsize=(2.0 * n_col, 2.26 * n_row))
     plt.suptitle(title, size=16)
     for i, comp in enumerate(images):
@@ -771,7 +779,7 @@ def plot_gallery(title, images, n_col=n_col, n_row=n_row, cmap=plt.cm.gray):
     plt.subplots_adjust(0.01, 0.05, 0.99, 0.93, 0.04, 0.0)
 
 
-plt.show()
+show()
 
 
 print("------------------------------------------------------------")  # 60個
@@ -792,7 +800,7 @@ pca = decomposition.PCA(n_components=n_components)
 pca.fit(faces_centered)
 plot_gallery("PCA first %i loadings" % n_components, pca.components_[:n_components])
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 # decomposition_solutions
@@ -904,7 +912,7 @@ df["PC2"] = PC[:, 1]
 
 ax = sns.pairplot(df, hue="species")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -953,7 +961,7 @@ for i in range(len(city)):
     plt.text(Xr[i, 0], Xr[i, 1], city[i])
 plt.axis("equal")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -976,7 +984,7 @@ plt.plot(k_range, stress)
 plt.xlabel("k")
 plt.ylabel("stress")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -988,7 +996,7 @@ from sklearn import manifold
 X, color = datasets.make_s_curve(1000, random_state=9487)
 
 # 沒有畫出來
-# plt.show()
+# show()
 
 # Isomap
 
@@ -1021,7 +1029,7 @@ plt.xlabel("First component")
 plt.ylabel("Second component")
 plt.axis("tight")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1044,7 +1052,7 @@ stress = [
     MDS(
         dissimilarity="precomputed",
         n_components=k,
-        random_state=42,
+        random_state=9487,
         max_iter=300,
         eps=1e-9,
     )
@@ -1058,7 +1066,11 @@ plt.plot(range(1, 5), stress)
 
 K = 2
 mds = MDS(
-    dissimilarity="precomputed", n_components=K, random_state=42, max_iter=300, eps=1e-9
+    dissimilarity="precomputed",
+    n_components=K,
+    random_state=9487,
+    max_iter=300,
+    eps=1e-9,
 )
 Xmds = mds.fit_transform(D)
 
@@ -1072,9 +1084,6 @@ cor = [
     for j in range(min(Xmds.shape[1], PC.shape[1]))
 ]
 print(cor)
-
-
-sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1105,7 +1114,10 @@ for i, perplexity in enumerate(perplexities):
 
     t0 = time()
     tsne = manifold.TSNE(
-        n_components=n_components, init="random", random_state=0, perplexity=perplexity
+        n_components=n_components,
+        init="random",
+        random_state=9487,
+        perplexity=perplexity,
     )
     Y = tsne.fit_transform(X)
     t1 = time()
@@ -1117,8 +1129,7 @@ for i, perplexity in enumerate(perplexities):
     ax.yaxis.set_major_formatter(NullFormatter())
     ax.axis("tight")
 
-# Another example using s-curve
-X, color = datasets.make_s_curve(n_samples, random_state=0)
+X, color = datasets.make_s_curve(n_samples, random_state=9487)
 
 ax = subplots[1][0]
 ax.scatter(X[:, 0], X[:, 2], c=color)
@@ -1176,7 +1187,7 @@ for i, perplexity in enumerate(perplexities):
     ax.axis("tight")
 
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1185,13 +1196,12 @@ print("------------------------------------------------------------")  # 60個
 
 # Bagged Decision Trees for Classification
 
-import pandas
 from sklearn import model_selection
 from sklearn.ensemble import BaggingClassifier
 from sklearn.tree import DecisionTreeClassifier
 
 names = ["preg", "plas", "pres", "skin", "test", "mass", "pedi", "age", "class"]
-dataframe = pandas.read_csv(
+dataframe = pd.read_csv(
     "https://raw.githubusercontent.com/jbrownlee/Datasets/master/pima-indians-diabetes.data.csv",
     names=names,
 )
@@ -1207,19 +1217,17 @@ rf = DecisionTreeClassifier(max_features=max_features)
 
 num_trees = 100
 
-# model = BaggingClassifier(base_estimator=rf, n_estimators=num_trees, random_state=2020)
-model = BaggingClassifier(rf, n_estimators=num_trees, random_state=2020)
+# model = BaggingClassifier(base_estimator=rf, n_estimators=num_trees, random_state=9487)
+model = BaggingClassifier(rf, n_estimators=num_trees, random_state=9487)
 results = model_selection.cross_val_score(model, x, y, cv=kfold)
 print("Accuracy: %0.2f (+/- %0.2f)" % (results.mean(), results.std()))
 
 # Random Forest Classification
 
-import pandas
 from sklearn import model_selection
-from sklearn.ensemble import RandomForestClassifier
 
 names = ["preg", "plas", "pres", "skin", "test", "mass", "pedi", "age", "class"]
-dataframe = pandas.read_csv(
+dataframe = pd.read_csv(
     "https://raw.githubusercontent.com/jbrownlee/Datasets/master/pima-indians-diabetes.data.csv",
     names=names,
 )
@@ -1250,8 +1258,6 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.datasets import load_breast_cancer
 from sklearn.metrics import confusion_matrix
 from sklearn.preprocessing import LabelEncoder
-from sklearn.metrics import accuracy_score
-from sklearn.metrics import f1_score
 
 breast_cancer = load_breast_cancer()
 x = pd.DataFrame(breast_cancer.data, columns=breast_cancer.feature_names)
@@ -1260,8 +1266,9 @@ y = pd.Categorical.from_codes(breast_cancer.target, breast_cancer.target_names)
 encoder = LabelEncoder()
 binary_encoded_y = pd.Series(encoder.fit_transform(y))
 
-# Train Test Split
-train_x, test_x, train_y, test_y = train_test_split(x, binary_encoded_y, random_state=1)
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+train_x, test_x, train_y, test_y = train_test_split(x, binary_encoded_y)
+
 clf_boosting = AdaBoostClassifier(DecisionTreeClassifier(max_depth=1), n_estimators=200)
 clf_boosting.fit(train_x, train_y)
 predictions = clf_boosting.predict(test_x)
@@ -1279,9 +1286,6 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.datasets import load_breast_cancer
 from sklearn.metrics import confusion_matrix
 from sklearn.preprocessing import LabelEncoder
-from sklearn.metrics import accuracy_score
-from sklearn.metrics import f1_score
-from sklearn.ensemble import RandomForestClassifier
 
 breast_cancer = load_breast_cancer()
 x = pd.DataFrame(breast_cancer.data, columns=breast_cancer.feature_names)
@@ -1290,8 +1294,9 @@ y = pd.Categorical.from_codes(breast_cancer.target, breast_cancer.target_names)
 encoder = LabelEncoder()
 binary_encoded_y = pd.Series(encoder.fit_transform(y))
 
-# Train Test Split
-train_x, test_x, train_y, test_y = train_test_split(x, binary_encoded_y, random_state=1)
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+train_x, test_x, train_y, test_y = train_test_split(x, binary_encoded_y)
+
 clf_bagging = RandomForestClassifier(n_estimators=200, max_depth=1)
 clf_bagging.fit(train_x, train_y)
 predictions = clf_bagging.predict(test_x)
@@ -1311,10 +1316,6 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.datasets import load_breast_cancer
 from sklearn.metrics import confusion_matrix
 from sklearn.preprocessing import LabelEncoder
-from sklearn.metrics import accuracy_score
-from sklearn.metrics import f1_score
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.linear_model import LogisticRegression
 
 breast_cancer = load_breast_cancer()
 x = pd.DataFrame(breast_cancer.data, columns=breast_cancer.feature_names)
@@ -1324,23 +1325,26 @@ y = pd.Categorical.from_codes(breast_cancer.target, breast_cancer.target_names)
 encoder = LabelEncoder()
 binary_encoded_y = pd.Series(encoder.fit_transform(y))
 
-# Train Test Split
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
 train_x, test_x, train_y, test_y = train_test_split(x, binary_encoded_y)
 
 boosting_clf_ada_boost = AdaBoostClassifier(
     DecisionTreeClassifier(max_depth=1), n_estimators=3
 )
+
 bagging_clf_rf = RandomForestClassifier(
-    n_estimators=200, max_depth=1, random_state=2020
+    n_estimators=200, max_depth=1, random_state=9487
 )
 
+clf_rf = RandomForestClassifier(n_estimators=200, max_depth=1, random_state=9487)
 
-clf_rf = RandomForestClassifier(n_estimators=200, max_depth=1, random_state=2020)
 clf_ada_boost = AdaBoostClassifier(
-    DecisionTreeClassifier(max_depth=1, random_state=2020), n_estimators=3
+    DecisionTreeClassifier(max_depth=1, random_state=9487), n_estimators=3
 )
 
-clf_logistic_reg = LogisticRegression(solver="liblinear", random_state=2020)
+clf_logistic_reg = sklearn.linear_model.LogisticRegression(
+    solver="liblinear", random_state=9487
+)
 
 
 # Customizing and Exception message
@@ -1439,7 +1443,6 @@ print(pd.get_dummies(["A", "B", "C", "A", "B", "D"]))
 
 # Standardization of input features
 
-from sklearn import linear_model as lm
 from sklearn import preprocessing
 
 # dataset
@@ -1456,19 +1459,19 @@ X[:, 1] += 1e6  # bias the second feature
 y = 100 * y + 1000  # bias and scale the output
 
 print("== Linear regression: scaling is not required ==")
-model = lm.LinearRegression()
+model = sklearn.linear_model.LinearRegression()
 model.fit(X, y)
 print("Coefficients:", model.coef_, model.intercept_)
 print("Test R2:%.2f" % cross_val_score(estimator=model, X=X, y=y, cv=5).mean())
 
 print("== Lasso without scaling ==")
-model = lm.LassoCV(cv=3)
+model = sklearn.linear_model.LassoCV(cv=3)
 model.fit(X, y)
 print("Coefficients:", model.coef_, model.intercept_)
 print("Test R2:%.2f" % cross_val_score(estimator=model, X=X, y=y, cv=5).mean())
 
 print("== Lasso with scaling ==")
-model = lm.LassoCV(cv=3)
+model = sklearn.linear_model.LassoCV(cv=3)
 scaler = preprocessing.StandardScaler()
 Xc = scaler.fit(X).transform(X)
 model.fit(Xc, y)
@@ -1482,13 +1485,18 @@ print("Test R2:%.2f" % cross_val_score(estimator=model, X=Xc, y=y, cv=5).mean())
 from sklearn import preprocessing
 from sklearn.pipeline import make_pipeline
 
-model = make_pipeline(preprocessing.StandardScaler(), lm.LassoCV(cv=3))
+model = make_pipeline(
+    preprocessing.StandardScaler(), sklearn.linear_model.LassoCV(cv=3)
+)
 
 # or
 from sklearn.pipeline import Pipeline
 
 model = Pipeline(
-    [("standardscaler", preprocessing.StandardScaler()), ("lassocv", lm.LassoCV(cv=3))]
+    [
+        ("standardscaler", preprocessing.StandardScaler()),
+        ("lassocv", sklearn.linear_model.LassoCV(cv=3)),
+    ]
 )
 
 scores = cross_val_score(estimator=model, X=X, y=y, cv=5)
@@ -1514,7 +1522,10 @@ X[:, 1] += 1e6  # bias the second feature
 y = 100 * y + 1000  # bias and scale the output
 
 model = Pipeline(
-    [("anova", SelectKBest(f_regression, k=3)), ("lm", lm.LinearRegression())]
+    [
+        ("anova", SelectKBest(f_regression, k=3)),
+        ("lm", sklearn.linear_model.LinearRegression()),
+    ]
 )
 scores = cross_val_score(estimator=model, X=X, y=y, cv=5)
 print("Anova filter + linear regression, test  r2:%.2f" % scores.mean())
@@ -1522,7 +1533,10 @@ print("Anova filter + linear regression, test  r2:%.2f" % scores.mean())
 from sklearn.pipeline import Pipeline
 
 model = Pipeline(
-    [("standardscaler", preprocessing.StandardScaler()), ("lassocv", lm.LassoCV(cv=3))]
+    [
+        ("standardscaler", preprocessing.StandardScaler()),
+        ("lassocv", sklearn.linear_model.LassoCV(cv=3)),
+    ]
 )
 scores = cross_val_score(estimator=model, X=X, y=y, cv=5)
 print("Standardize + Lasso, test  r2:%.2f" % scores.mean())
@@ -1542,7 +1556,7 @@ X, y, coef = datasets.make_regression(
     n_features=n_features,
     noise=noise_sd,
     n_informative=5,
-    random_state=42,
+    random_state=9487,
     coef=True,
 )
 
@@ -1553,7 +1567,9 @@ print("=============================")
 print("== Basic linear regression ==")
 print("=============================")
 
-scores = cross_val_score(estimator=lm.LinearRegression(), X=X, y=y, cv=5)
+scores = cross_val_score(
+    estimator=sklearn.linear_model.LinearRegression(), X=X, y=y, cv=5
+)
 print("Test  r2:%.2f" % scores.mean())
 
 print("==============================================")
@@ -1564,7 +1580,7 @@ anova_ridge = Pipeline(
     [
         ("standardscaler", preprocessing.StandardScaler()),
         ("selectkbest", SelectKBest(f_regression)),
-        ("ridge", lm.Ridge()),
+        ("ridge", sklearn.linear_model.Ridge()),
     ]
 )
 param_grid = {
@@ -1604,7 +1620,7 @@ print("----------------------------")
 enet = Pipeline(
     [
         ("standardscaler", preprocessing.StandardScaler()),
-        ("enet", lm.ElasticNet(max_iter=10000)),
+        ("enet", sklearn.linear_model.ElasticNet(max_iter=10000)),
     ]
 )
 param_grid = {"enet__alpha": alphas, "enet__l1_ratio": l1_ratio}
@@ -1622,7 +1638,9 @@ enet_cv = Pipeline(
         ("standardscaler", preprocessing.StandardScaler()),
         (
             "enet",
-            lm.ElasticNetCV(max_iter=10000, l1_ratio=l1_ratio, alphas=alphas, cv=3),
+            sklearn.linear_model.ElasticNetCV(
+                max_iter=10000, l1_ratio=l1_ratio, alphas=alphas, cv=3
+            ),
         ),
     ]
 )
@@ -1642,7 +1660,7 @@ from sklearn.model_selection import GridSearchCV
 # Datasets
 n_samples, n_features, noise_sd = 100, 100, 20
 X, y = datasets.make_classification(
-    n_samples=n_samples, n_features=n_features, n_informative=5, random_state=42
+    n_samples=n_samples, n_features=n_features, n_informative=5, random_state=9487
 )
 
 
@@ -1656,7 +1674,9 @@ print("== Basic logistic regression ==")
 print("=============================")
 
 scores = cross_val_score(
-    estimator=lm.LogisticRegression(C=1e8, class_weight="balanced", solver="lbfgs"),
+    estimator=sklearn.linear_model.LogisticRegression(
+        C=1e8, class_weight="balanced", solver="lbfgs"
+    ),
     X=X,
     y=y,
     cv=5,
@@ -1674,7 +1694,7 @@ anova_ridge = Pipeline(
         ("selectkbest", SelectKBest(f_classif)),
         (
             "ridge",
-            lm.LogisticRegression(
+            sklearn.linear_model.LogisticRegression(
                 penalty="l2", class_weight="balanced", solver="lbfgs"
             ),
         ),
@@ -1725,7 +1745,12 @@ print("----------------------------")
 lasso = Pipeline(
     [
         ("standardscaler", preprocessing.StandardScaler()),
-        ("lasso", lm.LogisticRegression(penalty="l1", class_weight="balanced")),
+        (
+            "lasso",
+            sklearn.linear_model.LogisticRegression(
+                penalty="l1", class_weight="balanced"
+            ),
+        ),
     ]
 )
 param_grid = {"lasso__C": Cs}
@@ -1744,7 +1769,10 @@ print("-----------------------------------------------")
 lasso_cv = Pipeline(
     [
         ("standardscaler", preprocessing.StandardScaler()),
-        ("lasso", lm.LogisticRegressionCV(Cs=Cs, scoring=balanced_acc)),
+        (
+            "lasso",
+            sklearn.linear_model.LogisticRegressionCV(Cs=Cs, scoring=balanced_acc),
+        ),
     ]
 )
 
@@ -1765,7 +1793,7 @@ enet = Pipeline(
         ("standardscaler", preprocessing.StandardScaler()),
         (
             "enet",
-            lm.SGDClassifier(
+            sklearn.linear_model.SGDClassifier(
                 loss="log",
                 penalty="elasticnet",
                 alpha=0.0001,
@@ -1796,23 +1824,21 @@ from sklearn.model_selection import KFold
 from sklearn.model_selection import PredefinedSplit
 from sklearn.model_selection import GridSearchCV
 
-X, y = datasets.make_regression(
-    n_samples=100, n_features=100, n_informative=10, random_state=42
-)
+X, y = datasets.make_regression(n_samples=100, n_features=100, n_informative=10)
 
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.25, shuffle=True, random_state=42
-)
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, shuffle=True)
 
-mod = lm.Ridge(alpha=10)
+mod = sklearn.linear_model.Ridge(alpha=10)
 
 mod.fit(X_train, y_train)
 
 y_pred_test = mod.predict(X_test)
 print("Test R2: %.2f" % metrics.r2_score(y_test, y_pred_test))
 
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
 train_idx, validation_idx = train_test_split(
-    np.arange(X_train.shape[0]), test_size=0.25, shuffle=True, random_state=42
+    np.arange(X_train.shape[0]), test_size=0.2, shuffle=True
 )
 
 split_inner = PredefinedSplit(test_fold=validation_idx)
@@ -1821,7 +1847,10 @@ print("Validation set size: %i" % X_train[validation_idx].shape[0])
 print("Test set size: %i" % X_test.shape[0])
 
 lm_cv = GridSearchCV(
-    lm.Ridge(), {"alpha": 10.0 ** np.arange(-3, 3)}, cv=split_inner, n_jobs=5
+    sklearn.linear_model.Ridge(),
+    {"alpha": 10.0 ** np.arange(-3, 3)},
+    cv=split_inner,
+    n_jobs=5,
 )
 
 # Fit, indluding model selection with internal Train/validation split
@@ -1833,9 +1862,9 @@ print("Test R2: %.2f" % metrics.r2_score(y_test, y_pred_test))
 
 from sklearn.model_selection import KFold
 
-estimator = lm.Ridge(alpha=10)
+estimator = sklearn.linear_model.Ridge(alpha=10)
 
-cv = KFold(n_splits=5, shuffle=True, random_state=42)
+cv = KFold(n_splits=5, shuffle=True, random_state=9487)
 r2_train, r2_test = list(), list()
 
 for train, test in cv.split(X):
@@ -1849,7 +1878,7 @@ print("Test  r2:%.2f" % np.mean(r2_test))
 scores = cross_val_score(estimator=estimator, X=X, y=y, cv=5)
 print("Test  r2:%.2f" % scores.mean())
 
-cv = KFold(n_splits=5, shuffle=True, random_state=42)
+cv = KFold(n_splits=5, shuffle=True, random_state=9487)
 scores = cross_val_score(estimator=estimator, X=X, y=y, cv=cv)
 print("Test  r2:%.2f" % scores.mean())
 
@@ -1867,10 +1896,10 @@ print(
 from sklearn.model_selection import StratifiedKFold
 
 X, y = datasets.make_classification(
-    n_samples=100, n_features=100, shuffle=True, n_informative=10, random_state=42
+    n_samples=100, n_features=100, shuffle=True, n_informative=10
 )
 
-mod = lm.LogisticRegression(C=1, solver="lbfgs")
+mod = sklearn.linear_model.LogisticRegression(C=1, solver="lbfgs")
 
 cv = StratifiedKFold(n_splits=5)
 
@@ -1919,16 +1948,17 @@ print(
 )
 
 
-# Outer split:
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.25, shuffle=True, random_state=42
-)
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, shuffle=True)
 
-cv_inner = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)
+cv_inner = StratifiedKFold(n_splits=5, shuffle=True, random_state=9487)
 
 # Cross-validation for model selection
 lm_cv = GridSearchCV(
-    lm.LogisticRegression(), {"C": 10.0 ** np.arange(-3, 3)}, cv=cv_inner, n_jobs=5
+    sklearn.linear_model.LogisticRegression(),
+    {"C": 10.0 ** np.arange(-3, 3)},
+    cv=cv_inner,
+    n_jobs=5,
 )
 
 # Fit, indluding model selection with internal CV
@@ -1943,12 +1973,16 @@ print("Test bACC: %.2f" % metrics.balanced_accuracy_score(y_test, y_pred_test))
 # Cross-validation for both model (outer) evaluation and model (inner) selection
 # ------------------------------------------------------------------------------
 
-cv_outer = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)
-cv_inner = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)
+cv_outer = StratifiedKFold(n_splits=5, shuffle=True, random_state=9487)
+
+cv_inner = StratifiedKFold(n_splits=5, shuffle=True, random_state=9487)
 
 # Cross-validation for model (inner) selection
 lm_cv = GridSearchCV(
-    lm.Ridge(), {"alpha": 10.0 ** np.arange(-3, 3)}, cv=cv_inner, n_jobs=5
+    sklearn.linear_model.Ridge(),
+    {"alpha": 10.0 ** np.arange(-3, 3)},
+    cv=cv_inner,
+    n_jobs=5,
 )
 
 # Cross-validation for model (outer) evaluation
@@ -1974,7 +2008,7 @@ print(
 # **Classification**
 
 print("== Logistic Ridge (L2 penalty) ==")
-mod_cv = lm.LogisticRegressionCV(
+mod_cv = sklearn.linear_model.LogisticRegressionCV(
     class_weight="balanced", scoring="balanced_accuracy", n_jobs=-1, cv=5
 )
 scores = cross_val_score(estimator=mod_cv, X=X, y=y, cv=5)
@@ -1984,21 +2018,26 @@ print("Test  ACC:%.2f" % scores.mean())
 # **Regression**
 
 X, y, coef = datasets.make_regression(
-    n_samples=50, n_features=100, noise=10, n_informative=2, random_state=42, coef=True
+    n_samples=50,
+    n_features=100,
+    noise=10,
+    n_informative=2,
+    random_state=9487,
+    coef=True,
 )
 
 print("== Ridge (L2 penalty) ==")
-model = lm.RidgeCV(cv=3)
+model = sklearn.linear_model.RidgeCV(cv=3)
 scores = cross_val_score(estimator=model, X=X, y=y, cv=5)
 print("Test  r2:%.2f" % scores.mean())
 
 print("== Lasso (L1 penalty) ==")
-model = lm.LassoCV(n_jobs=-1, cv=3)
+model = sklearn.linear_model.LassoCV(n_jobs=-1, cv=3)
 scores = cross_val_score(estimator=model, X=X, y=y, cv=5)
 print("Test  r2:%.2f" % scores.mean())
 
 print("== ElasticNet (L1 penalty) ==")
-model = lm.ElasticNetCV(l1_ratio=[0.1, 0.5, 0.9], n_jobs=-1, cv=3)
+model = sklearn.linear_model.ElasticNetCV(l1_ratio=[0.1, 0.5, 0.9], n_jobs=-1, cv=3)
 scores = cross_val_score(estimator=model, X=X, y=y, cv=5)
 print("Test  r2:%.2f" % scores.mean())
 
@@ -2019,7 +2058,7 @@ y = Xbeta + eps
 # -------------------
 
 # Fit model on all data (!! risk of overfit)
-model = lm.RidgeCV()
+model = sklearn.linear_model.RidgeCV()
 model.fit(X, y)
 print("Coefficients on all data:")
 print(model.coef_)
@@ -2144,37 +2183,26 @@ ax = sns.violinplot(x="Variable", y="Coef. distribution", data=staked)
 _ = ax.axhline(0, ls="--", lw=2, color="black")
 
 # Parallel computation with joblib
-# --------------------------------
-#
 # Dataset
 
 from sklearn.model_selection import StratifiedKFold
 
-X, y = datasets.make_classification(
-    n_samples=20, n_features=5, n_informative=2, random_state=42
-)
+X, y = datasets.make_classification(n_samples=20, n_features=5, n_informative=2)
+
 cv = StratifiedKFold(n_splits=5)
 
-
-# %%
 # Use `cross_validate` function
 
 from sklearn.model_selection import cross_validate
 
-estimator = lm.LogisticRegression(C=1, solver="lbfgs")
+estimator = sklearn.linear_model.LogisticRegression(C=1, solver="lbfgs")
 cv_results = cross_validate(estimator, X, y, cv=cv, n_jobs=5)
 print(np.mean(cv_results["test_score"]), cv_results["test_score"])
 
-
-# %%
 # Sequential computation
-#
 # If we want have full control of the operations performed within each fold (retrieve the models parameters, etc.). We would like to parallelize the folowing sequetial code:
 
-# In[22]:
-
-
-estimator = lm.LogisticRegression(C=1, solver="lbfgs")
+estimator = sklearn.linear_model.LogisticRegression(C=1, solver="lbfgs")
 y_test_pred_seq = np.zeros(len(y))  # Store predictions in the original order
 coefs_seq = list()
 for train, test in cv.split(X, y):
@@ -2211,7 +2239,7 @@ def _split_fit_predict(estimator, X, y, train, test):
     return [estimator.predict(X_test), estimator.coef_]
 
 
-estimator = lm.LogisticRegression(C=1, solver="lbfgs")
+estimator = sklearn.linear_model.LogisticRegression(C=1, solver="lbfgs")
 
 parallel = Parallel(n_jobs=5)
 cv_ret = parallel(
@@ -2243,11 +2271,10 @@ print("------------------------------------------------------------")  # 60個
 
 from sklearn.model_selection import StratifiedKFold
 
-X, y = datasets.make_classification(
-    n_samples=100, n_features=100, n_informative=10, random_state=42
-)
+X, y = datasets.make_classification(n_samples=100, n_features=100, n_informative=10)
 
-model = lm.LogisticRegression(C=1)
+model = sklearn.linear_model.LogisticRegression(C=1)
+
 nperm = 100
 scores_perm = np.zeros((nperm, 3))  # 3 scores acc, recall0, recall1
 
@@ -2279,6 +2306,14 @@ print(
         pval[2],
     )
 )
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個

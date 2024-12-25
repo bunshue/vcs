@@ -32,6 +32,8 @@ print("------------------------------------------------------------")  # 60個
 
 import joblib
 import sklearn.linear_model
+from sklearn import preprocessing
+from sklearn import linear_model
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
 from sklearn.preprocessing import StandardScaler
 
@@ -379,9 +381,6 @@ print("------------------------------------------------------------")  # 60個
 
 print("邏輯迴歸")
 
-from sklearn import preprocessing
-from sklearn import linear_model
-
 titanic = pd.read_csv("data/titanic_ds.csv")
 print(titanic.info())
 print("---------------------------")
@@ -411,9 +410,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("邏輯迴歸")
-
-from sklearn import preprocessing
-from sklearn import linear_model
 
 titanic = pd.read_csv("data/titanic_ds.csv")
 print(titanic.info())
@@ -446,9 +442,6 @@ print("------------------------------------------------------------")  # 60個
 
 print("邏輯迴歸")
 
-from sklearn import preprocessing
-from sklearn import linear_model
-
 titanic = pd.read_csv("data/titanic_ds.csv")
 print(titanic.info())
 print("---------------------------")
@@ -476,7 +469,8 @@ print(logistic_regression.score(X, y))
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-from sklearn import preprocessing
+print("決策樹")
+
 from sklearn import tree
 
 titanic = pd.read_csv("data/titanic_ds.csv")
@@ -505,7 +499,6 @@ print("------------------------------------------------------------")  # 60個
 
 print("決策樹")
 
-from sklearn import preprocessing
 from sklearn import tree
 
 titanic = pd.read_csv("data/titanic_ds.csv")
