@@ -29,7 +29,7 @@ from sklearn.decomposition import PCA
 import sklearn.manifold as manifold
 import sklearn.linear_model as lm
 import sklearn.svm as svm
-from sklearn.neural_network import MLPClassifier
+from sklearn.neural_network import MLPClassifier  # 多層感知器分類器 函數學習機
 # from sklearn.ensemble import RandomForestClassifier
 # from sklearn.ensemble import GradientBoostingClassifier
 

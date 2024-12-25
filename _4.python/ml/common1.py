@@ -36,7 +36,7 @@ from sklearn import metrics
 from sklearn.metrics import mean_squared_error  # 均方誤差 Mean Squared Error (MSE)
 from sklearn.metrics import mean_absolute_error  # 平均絕對誤差 Mean Absolute Error (MAE)
 from sklearn.metrics import r2_score  # R-Squared擬合度
-from sklearn.metrics import accuracy_score  # 沒用到
+from sklearn.metrics import accuracy_score  # 計算分類模型的準確率
 
 
 def show():
@@ -107,4 +107,86 @@ print_y_data(yy)
 evaluate_result(xx, yy)
 
 print("------------------------------------------------------------")  # 60個
+
+#accuracy_score(y_true, y_pred) 用于计算分类模型的准确率，即分类正确的样本数除以总样本数
+#y_true：真实的分类标签，可以是列表、数组、Pandas Series或其他可迭代对象
+#y_pred：模型预测的分类标签，需要与y_true格式相同
+#accuracy_score()函数将返回一个0到1之间的单精度浮点数，表示分类模型的准确率
+
+y_true = [0, 1, 2, 1, 3]
+y_pred = [0, 1, 2, 2, 3]
+cc = accuracy_score(y_true, y_pred)
+print("計算分類模型的準確率 accuracy_score :")
+print(cc)
+
+print("------------------------------------------------------------")  # 60個
 """
+"""
+sklearn.metrics中的评估方法介绍
+（accuracy_score, recall_score, roc_curve, roc_auc_score, confusion_matrix）
+"""
+
+from sklearn.metrics import accuracy_score
+
+y_pred = [0, 2, 1, 3]
+y_true = [0, 1, 2, 3]
+cc = accuracy_score(y_true, y_pred)
+print(cc)
+
+cc = accuracy_score(y_true, y_pred, normalize=False)
+print(cc)
+
+# normalize：默认值为True，返回正确分类的比例；如果为False，返回正确分类的样本数
+
+from sklearn.metrics import recall_score
+
+y_true = [0, 1, 2, 0, 1, 2]
+y_pred = [0, 2, 1, 0, 0, 1]
+cc = recall_score(y_true, y_pred, average="macro")
+print(cc)
+cc = recall_score(y_true, y_pred, average="micro")
+print(cc)
+
+cc = recall_score(y_true, y_pred, average="weighted")
+print(cc)
+
+cc = recall_score(y_true, y_pred, average=None)
+print(cc)
+
+"""
+ROC曲线指受试者工作特征曲线/接收器操作特性(receiver operating characteristic，ROC)曲线,是反映灵敏性和特效性连续变量的综合指标,是用构图法揭示敏感性和特异性的相互关系，它通过将连续变量设定出多个不同的临界值，从而计算出一系列敏感性和特异性。ROC曲线是根据一系列不同的二分类方式（分界值或决定阈），以真正例率（也就是灵敏度）（True Positive Rate,TPR）为纵坐标，假正例率（1-特效性）（False Positive Rate,FPR）为横坐标绘制的曲线。
+ROC观察模型正确地识别正例的比例与模型错误地把负例数据识别成正例的比例之间的权衡。TPR的增加以FPR的增加为代价。ROC曲线下的面积是模型准确率的度量，AUC（Area under roccurve）。
+"""
+
+from sklearn import metrics
+
+y = np.array([1, 1, 2, 2])
+scores = np.array([0.1, 0.4, 0.35, 0.8])
+fpr, tpr, thresholds = metrics.roc_curve(y, scores, pos_label=2)
+print(fpr)
+print(tpr)
+print(thresholds)
+
+from sklearn.metrics import auc
+
+cc = metrics.auc(fpr, tpr)
+print(cc)
+
+from sklearn.metrics import roc_auc_score
+
+y_true = np.array([0, 0, 1, 1])
+y_scores = np.array([0.1, 0.4, 0.35, 0.8])
+cc = roc_auc_score(y_true, y_scores)
+print(cc)
+
+from sklearn.metrics import confusion_matrix
+
+y_true = [2, 0, 2, 2, 0, 1]
+y_pred = [0, 0, 2, 2, 0, 2]
+cc = confusion_matrix(y_true, y_pred)
+print(cc)
+
+y_true = ["cat", "ant", "cat", "cat", "ant", "bird"]
+y_pred = ["ant", "ant", "cat", "cat", "ant", "cat"]
+cc = confusion_matrix(y_true, y_pred, labels=["ant", "bird", "cat"])
+print(cc)

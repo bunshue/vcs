@@ -29,7 +29,7 @@ print("------------------------------------------------------------")  # 60個
 
 #第十讲 使用神经网络进行客户流失预警
 
-from sklearn.neural_network import MLPClassifier
+from sklearn.neural_network import MLPClassifier  # 多層感知器分類器 函數學習機
 from scipy import stats
 import sklearn.model_selection as cross_validation
 import statsmodels.api as sm
@@ -55,7 +55,7 @@ test_Y = test['churn'].get_values()
 #http://scikit-learn.org/stable/modules/generated/sklearn.neural_network.MLPClassifier.html#sklearn.neural_network.MLPClassifier
 
 clf = MLPClassifier(solver='lbfgs', alpha=1e-5,
-                     hidden_layer_sizes=(100), random_state=1)
+                     hidden_layer_sizes=(100), random_state=1)  # 多層感知器分類器 函數學習機
 
 clf.fit(train_X, train_Y) 
 

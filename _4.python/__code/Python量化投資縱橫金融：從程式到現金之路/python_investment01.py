@@ -572,10 +572,12 @@ print(metrics.accuracy_score(test_target, test_est))
 print('混淆矩陣')
 print(metrics.confusion_matrix(test_target, test_est))
 
-from sklearn.neural_network import MLPClassifier
+from sklearn.neural_network import MLPClassifier  # 多層感知器分類器 函數學習機
 
-clf_4=MLPClassifier()
+clf_4=MLPClassifier()  # 多層感知器分類器 函數學習機
+
 clf_4.fit(train_data,train_target)
+
 train_est=clf_4.predict(train_data)
 test_est=clf_4.predict(test_data)
 

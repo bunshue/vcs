@@ -30,7 +30,7 @@ import sklearn
 from sklearn import datasets
 from sklearn.metrics import classification_report
 from sklearn.metrics import confusion_matrix
-from sklearn.metrics import accuracy_score
+from sklearn.metrics import accuracy_score  # 計算分類模型的準確率
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
 from sklearn.model_selection import cross_val_score
 from sklearn.model_selection import cross_val_predict
@@ -166,7 +166,10 @@ clf = svm.SVC(gamma=0.001, C=100.0, probability=True)
 clf.fit(Xtrain, Ytrain)  # 學習訓練.fit
 
 Ypred = clf.predict(Xtest)
-print(accuracy_score(Ytest, Ypred))
+
+cc = accuracy_score(Ytest, Ypred)
+print("計算分類模型的準確率 accuracy_score :")
+print(cc)
 
 print(clf.score(Xtest, Ytest))
 

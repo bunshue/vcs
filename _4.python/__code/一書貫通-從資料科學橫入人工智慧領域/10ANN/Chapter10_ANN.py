@@ -50,10 +50,10 @@ scaler.fit(train_data)
 scaled_train_data = scaler.transform(train_data)
 scaled_test_data = scaler.transform(test_data)
 
-from sklearn.neural_network import MLPClassifier
+from sklearn.neural_network import MLPClassifier  # 多層感知器分類器 函數學習機
 
 mlp = MLPClassifier(hidden_layer_sizes=(10,), 
-                    activation='logistic', alpha=0.1, max_iter=1000)
+                    activation='logistic', alpha=0.1, max_iter=1000)  # 多層感知器分類器 函數學習機
 
 mlp.fit(scaled_train_data, train_target)
 mlp
@@ -99,9 +99,12 @@ param_grid = {
     'activation':['logistic', 'tanh', 'relu'], 
     'alpha':[0.001, 0.01, 0.1, 0.2, 0.4, 1, 10]
 }
-mlp = MLPClassifier(max_iter=1000)
+
+mlp = MLPClassifier(max_iter=1000)  # 多層感知器分類器 函數學習機
+
 gcv = GridSearchCV(estimator=mlp, param_grid=param_grid, 
                    scoring='roc_auc', cv=4, n_jobs=-1)
+
 gcv.fit(scaled_train_data, train_target)
 
 gcv.best_score_

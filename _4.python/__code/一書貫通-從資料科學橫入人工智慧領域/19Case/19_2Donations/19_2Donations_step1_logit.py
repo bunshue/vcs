@@ -394,10 +394,10 @@ scaler.fit(train_data)
 scaled_train_data = scaler.transform(train_data)
 scaled_test_data = scaler.transform(test_data)
 
-from sklearn.neural_network import MLPClassifier
+from sklearn.neural_network import MLPClassifier  # 多層感知器分類器 函數學習機
 
 mlp = MLPClassifier(hidden_layer_sizes=(10,), 
-                    activation='logistic', alpha=0.1, max_iter=1000)
+                    activation='logistic', alpha=0.1, max_iter=1000)  # 多層感知器分類器 函數學習機
 
 from sklearn.model_selection import GridSearchCV
 from sklearn import metrics
@@ -407,7 +407,9 @@ param_grid = {
     'activation':['logistic', 'tanh', 'relu'], 
     'alpha':[0.001, 0.01, 0.1, 0.2, 0.4, 1, 10]
 }
-mlp = MLPClassifier(max_iter=1000)
+
+mlp = MLPClassifier(max_iter=1000)  # 多層感知器分類器 函數學習機
+
 gcv = GridSearchCV(estimator=mlp, param_grid=param_grid, 
                    scoring='roc_auc', cv=4, n_jobs=-1)
 gcv.fit(scaled_train_data, train_target)
@@ -415,7 +417,7 @@ gcv.fit(scaled_train_data, train_target)
 gcv.best_params_
 
 mlp = MLPClassifier(hidden_layer_sizes=gcv.best_params_["hidden_layer_sizes"], 
-                    activation=gcv.best_params_["activation"], alpha=gcv.best_params_["alpha"], max_iter=1000)
+                    activation=gcv.best_params_["activation"], alpha=gcv.best_params_["alpha"], max_iter=1000)  # 多層感知器分類器 函數學習機
 
 mlp.fit(scaled_train_data, train_target)
 
@@ -447,10 +449,10 @@ print('AUC = %6.4f' %metrics.auc(fpr_test, tpr_test))
 import pickle as pickle
 
 # 使用with语句确保文件关闭
-with open(r'logitic.model', 'wb') as f:
+with open(r'tmp_logitic.model', 'wb') as f:
     pickle.dump(logistic_model, f)
 
-with open(r'logitic.model', 'rb') as f:
+with open(r'tmp_logitic.model', 'rb') as f:
     model_load = pickle.load(f)
 
 test_est_load = model_load.predict(test_data)
@@ -459,6 +461,6 @@ pd.crosstab(test_est_load,test_est)
 
 # 把清洗过程中使用的数据也保存到文件当中
 
-with open(r'logitic.dataclean', 'wb') as f:
+with open(r'tmp_logitic.dataclean', 'wb') as f:
     pickle.dump(DATA_CLEAN, f)
 
