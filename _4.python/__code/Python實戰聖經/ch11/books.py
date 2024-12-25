@@ -2,6 +2,7 @@ from selenium import webdriver
 from time import sleep
 
 url = 'https://www.books.com.tw/web/books'
+#url = 'https://www.google.com/
 
 # 建立瀏覽器物件
 #driver = webdriver.Chrome()    #使用Chrome
