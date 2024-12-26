@@ -6,8 +6,8 @@ ESC = 27
 print("------------------------------------------------------------")  # 60個
 
 W, H = 640, 480
-cx, cy = W//2, H//2
-mode = 0 # 0 預設模式 1: 中心放大兩倍
+cx, cy = W // 2, H // 2
+mode = 0  # 0 預設模式 1: 中心放大兩倍
 
 print("把 直方圖均衡化處理 套用在webcam上 黑白")
 print("把 直方圖均衡化處理 套用在webcam上 彩色")
@@ -23,24 +23,26 @@ if not cap.isOpened():
 else:
     print("Video device opened")
 
+
 def OnMouseAction(event, x, y, flags, param):
     global cx, cy
     global mode
     if event == cv2.EVENT_LBUTTONDOWN:
         print("mode =", mode, "左鍵畫點, 取得座標 :", x, y)
-        x = x//2
-        y = y//2
-        if x < W//4:
-            x=W//4
-        if x > W//4*3:
-            x=W//4*3
-        if y < H//4:
-            y=H//4
-        if y > H//4*3:
-            y=H//4*3
+        x = x // 2
+        y = y // 2
+        if x < W // 4:
+            x = W // 4
+        if x > W // 4 * 3:
+            x = W // 4 * 3
+        if y < H // 4:
+            y = H // 4
+        if y > H // 4 * 3:
+            y = H // 4 * 3
         cx, cy = x, y
         if mode == 0:
             mode = 1
+
 
 cv2.namedWindow("Original")
 cv2.setMouseCallback("Original", OnMouseAction)
@@ -54,28 +56,27 @@ while True:
 
     if mode == 1:
         # 裁切圖片
-        x_st = cx - W//4
-        y_st = cy - H//4
-        ww = W//2
-        hh = H//2
+        x_st = cx - W // 4
+        y_st = cy - H // 4
+        ww = W // 2
+        hh = H // 2
         frame = frame[y_st : y_st + hh, x_st : x_st + ww]
         frame = cv2.resize(frame, (W, H))
-        
 
     cut = 80
 
     # 畫一些標記
     dd = 5
     topLeft = (cut - dd, cut - dd)
-    topLeft = (cx - W//2 + cut - dd, cy - H//2 + cut - dd)
-    
-    bottomRight = (W - cut + dd, H - cut + dd)
-    bottomRight = (cx + W//2 - cut + dd, cy+ H//2 - cut + dd)
+    topLeft = (cx - W // 2 + cut - dd, cy - H // 2 + cut - dd)
 
-    #cv2.rectangle(frame, topLeft, bottomRight, 255, 2)  #藍色框
+    bottomRight = (W - cut + dd, H - cut + dd)
+    bottomRight = (cx + W // 2 - cut + dd, cy + H // 2 - cut + dd)
+
+    # cv2.rectangle(frame, topLeft, bottomRight, 255, 2)  #藍色框
 
     # 原圖
-    #cv2.imshow("Original", frame)
+    # cv2.imshow("Original", frame)
 
     # 裁切圖片 ST
     # 裁切區域的 x 與 y 座標（左上角）
@@ -103,12 +104,12 @@ while True:
     cv2.imshow("Histogram2", frame3)
 
     # 原圖放大兩倍
-    frame4 = cv2.resize(frame, (W*2, H*2))
+    frame4 = cv2.resize(frame, (W * 2, H * 2))
     cv2.imshow("Original", frame4)
 
     k = cv2.waitKey(1)  # 等待按鍵輸入
     if k == ESC:
-        cx, cy = W//2, H//2
+        cx, cy = W // 2, H // 2
         mode = 0
     elif k == ord("Q") or k == ord("q"):  # 按下 Q(q), 離開
         break

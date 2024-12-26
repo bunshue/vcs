@@ -34,54 +34,54 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 dates = pd.date_range("12/18/2024", periods=5)  # 沒寫就是start
-print('從某天開始後的5天 :\n', dates)
+print("從某天開始後的5天 :\n", dates)
 
 dates = pd.date_range("20241218", periods=5)
-print('從某天開始後的5天 :\n', dates)
+print("從某天開始後的5天 :\n", dates)
 
 dates = pd.date_range(start="2024/12/18", periods=5)
-print('生成日期範圍 start:\n', dates)
+print("生成日期範圍 start:\n", dates)
 
 dates = pd.date_range(end="2024/12/18", periods=5)
-print('生成日期範圍 end:\n', dates)
+print("生成日期範圍 end:\n", dates)
 
 # 传入开始、结束日期，默认生成的该时间段的时间点是按天计算的
 dates = pd.date_range("2024/12/18", "2024/12/25")
-print('生成日期範圍 start-end:\n', dates)
+print("生成日期範圍 start-end:\n", dates)
 
 dates = pd.date_range("2024-12-18", periods=5, freq="W-SAT")  # 起始日期  # 周期  # 频率
-print('從某天開始後的5個週六 :\n', dates)
+print("從某天開始後的5個週六 :\n", dates)
 
 s = pd.Series(np.random.randn(5), index=dates)
 print(type(s))
 print(s)
 
 dates = pd.date_range(start="2024/12/18 12:13:14", periods=5)
-print('無規範化 生成日期範圍 :\n', dates)
+print("無規範化 生成日期範圍 :\n", dates)
 
 dates = pd.date_range(start="2024/12/18 12:13:14", periods=5, normalize=True)
-print('有規範化 生成日期範圍 :\n', dates)
+print("有規範化 生成日期範圍 :\n", dates)
 
 # 频率与偏移量
 dates = pd.date_range("2024/11/18", "2024/12/18", freq="2D")
-print('生成日期範圍 每隔2天:\n', dates)
+print("生成日期範圍 每隔2天:\n", dates)
 
 # 偏移量通过加法连接
 sum_offset = pd.tseries.offsets.Week(2) + pd.tseries.offsets.Hour(12)
 print("偏移量 :", sum_offset)
 dates = pd.date_range("2024/10/18", "2024/12/18", freq=sum_offset)
-print('生成日期範圍 start-end 每隔一個偏移量:\n', dates)
+print("生成日期範圍 start-end 每隔一個偏移量:\n", dates)
 
 start = "2024/12/18"
 end = "2024/12/25"
-for d in pd.date_range(start=start, end=end, freq='1D'):
+for d in pd.date_range(start=start, end=end, freq="1D"):
     print(d)
 
-dates = pd.date_range(start='2024-01-15', freq='M', periods=5)
-print('生成日期範圍 每隔1月 月底:\n', dates)
+dates = pd.date_range(start="2024-01-15", freq="M", periods=5)
+print("生成日期範圍 每隔1月 月底:\n", dates)
 
-dates = pd.date_range(start='2024-01-15', freq='MS', periods=5)
-print('生成日期範圍 每隔1月 月初:\n', dates)
+dates = pd.date_range(start="2024-01-15", freq="MS", periods=5)
+print("生成日期範圍 每隔1月 月初:\n", dates)
 
 """
 def random_timestamps(start, end, freq, count):
@@ -107,7 +107,7 @@ df = pd.DataFrame(datas, index=index, columns=list("ABCD"))
 df = df.cumsum()
 df.plot(title="線圖")  # 無參數, 預設就是 line
 
-#plt.show()
+# plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -245,7 +245,7 @@ plt.figure(figsize=(15, 5))
 ser_obj.plot(style="r--")
 ser_obj.rolling(window=10).mean().plot(style="b")
 
-#plt.show()
+# plt.show()
 
 print(ser_obj.rolling(window=5, center=True).mean())
 

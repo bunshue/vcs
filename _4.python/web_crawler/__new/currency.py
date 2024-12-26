@@ -1,9 +1,10 @@
 import requests
 
-API_KEY = 'fca_live_QiRD4yaE7K1aJQIAfVLojfu8J2KPxSXPYkDxxTzc'
+API_KEY = "fca_live_QiRD4yaE7K1aJQIAfVLojfu8J2KPxSXPYkDxxTzc"
 BASE_URL = f"https://api.freecurrencyapi.com/v1/latest?apikey={API_KEY}"
 
 CURRENCIES = ["USD", "CAD", "EUR", "AUD", "CNY"]
+
 
 def convert_currency(base):
     currencies = ",".join(CURRENCIES)
@@ -16,7 +17,8 @@ def convert_currency(base):
         print("Invalid currency.")
         return None
 
-print('轉換匯率')
+
+print("轉換匯率")
 
 base = "USD"
 

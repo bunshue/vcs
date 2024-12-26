@@ -438,7 +438,7 @@ A = np.arange(10).reshape(2, 5)
 print(A)
 print(A.T)
 
-print(A.transpose(1,0))#不知道是什麼意思
+print(A.transpose(1, 0))  # 不知道是什麼意思
 
 print("二維串列 轉 numpy陣列")
 A = np.array([[1, 2], [3, 4], [5, 6]])
@@ -1181,7 +1181,7 @@ print("橫列平均:", cc.mean(axis=1))
 
 print("------------------------------------------------------------")  # 60個
 
-print('相關係數矩陣')
+print("相關係數矩陣")
 
 xx = [0, 1, 2, 3, 4, 5]
 yy = [0, 1, 2, 3, 4, 5]
@@ -1431,7 +1431,7 @@ dv2 = np.std(featuremat[1])
 corref = np.mean(np.multiply(featuremat[0] - mv1, featuremat[1] - mv2)) / (dv1 * dv2)
 print(corref)
 
-print('相關係數矩陣')
+print("相關係數矩陣")
 print(np.corrcoef(featuremat))
 
 covinv = np.linalg.inv(np.cov(featuremat))
@@ -1606,7 +1606,7 @@ print(e.shape, f.shape)
 
 print("------------------------------------------------------------")  # 60個
 
-print('矩陣運算')
+print("矩陣運算")
 N = 5
 
 print("建立NXN之隨機矩陣A")
@@ -2978,7 +2978,7 @@ print(np.tan(a * np.pi / 180))
 
 print("------------------------------------------------------------")  # 60個
 
-print('四捨五入相關')
+print("四捨五入相關")
 
 a = 123.456789
 print(np.around(a))

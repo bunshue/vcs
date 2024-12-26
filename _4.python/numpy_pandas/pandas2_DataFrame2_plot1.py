@@ -526,8 +526,9 @@ plt.show()
 
 # pandas 提供了 scatter_matrix()函數，方便由DataFrame繪製散佈圖
 from pandas.plotting import scatter_matrix
+
 # 會自動的產生各個columns之間的 scatter diagram
-_ = scatter_matrix(trans_data, color = 'k', alpha = 0.3, figsize=(8, 8))
+_ = scatter_matrix(trans_data, color="k", alpha=0.3, figsize=(8, 8))
 
 plt.show()
 
@@ -535,10 +536,11 @@ print("------------------------------------------------------------")  # 60個
 
 # pandas 提供了 scatter_matrix()函數，方便由DataFrame繪製散佈圖
 from pandas.plotting import scatter_matrix
+
 df = pd.DataFrame(np.random.rand(6, 4))
 print(df)
 # 會自動的產生各個columns之間的 scatter diagram
-_ = scatter_matrix(df, color = 'k', alpha = 0.3, figsize=(8, 8))
+_ = scatter_matrix(df, color="k", alpha=0.3, figsize=(8, 8))
 
 plt.show()
 
@@ -1291,8 +1293,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-
-
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
@@ -1464,8 +1464,9 @@ df.plot(xticks=range(len(df.index)), use_index=True)
 df.plot(xticks=range(len(df.index)), use_index=True, rot=90)
 
 
-
-df = pd.DataFrame(np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]), columns=["第一欄", "第二欄", "第三欄"])
+df = pd.DataFrame(
+    np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]), columns=["第一欄", "第二欄", "第三欄"]
+)
 
 # 使用 df.corr() 先做出各變數間的關係係數，再用heatmap作圖
 sns.heatmap(df.corr())
@@ -1484,7 +1485,3 @@ print("------------------------------")  # 30個
 sns.heatmap(df.corr())
 plt.title("關係係數")
 show()
-
-
-
-

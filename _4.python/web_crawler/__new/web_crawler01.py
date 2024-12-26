@@ -1,21 +1,21 @@
 import sys
 import requests
-from bs4 import BeautifulSoup 
+from bs4 import BeautifulSoup
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 from urllib.parse import urlparse
 
 o = urlparse("http://www.example.com:80/test/index.php?user=joe")
 
-print('使用urlparse()方法剖析URL網址成為組成的元素')
+print("使用urlparse()方法剖析URL網址成為組成的元素")
 print("通訊協定: ", o.scheme)
 print("網域名稱: ", o.netloc)
 print("通訊埠號: ", o.port)
 print("網頁路徑: ", o.path)
 print("查詢字串: ", o.query)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 url = "https://fchart.github.io/test.html"
 response = requests.get(url)
@@ -26,15 +26,15 @@ if response.status_code == 200:
 else:
     print("錯誤! HTTP請求失敗...")
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 url = "https://www.ptt.cc/bbs/Gossiping/index.html"
 
-cookies = { "over18": "1" }
+cookies = {"over18": "1"}
 r = requests.get(url, cookies=cookies)
 print(r.text)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 """ fail chromedriver
 from selenium import webdriver
@@ -75,20 +75,20 @@ print(html)
 driver.quit()
 """
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 url = "https://www.taifex.com.tw/cht/3/totalTableDate"
 post_data = "queryType=1&goDay=&doQuery=1&dateaddcnt=&queryDate=2020%2F08%2F07"
 r = requests.post(url, data=post_data)
 print(r.text)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 url = "https://api.sgx.com/derivatives/v1.0/contract-code/TW?order=asc&orderby=delivery-month&category=futures&session=-1&t=1596956628001&showTAICTrades=false"
 r = requests.get(url)
 print(r.text)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 """ fail chromedriver
 from selenium import webdriver
@@ -107,50 +107,54 @@ for x in range(5):
     print(x+1, len(driver.page_source))
 driver.quit()
 """
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 URL = "https://maker.ifttt.com/trigger/{0}/with/key/{1}/?"
 event_name = "web_scraping"
 api_key = "<API金鑰>"
+
 
 def email_alert(first, second=None, third=None):
     url = URL.format(event_name, api_key)
     data = {}
     data["value1"] = first
     data["value2"] = second
-    data["value3"] = third    
+    data["value3"] = third
     for key, val in data.items():
         if val:
             url = url + key + "=" + str(val) + "&"
-    r = requests.get(url)    
+    r = requests.get(url)
     if r.status_code == 200:
         print("已經寄送郵件通知...")
     else:
         print("錯誤! 寄送郵件通知失敗...")
 
+
 email_alert("測試值1", 100)
 
-print('------------------------------------------------------------')	#60個
- 
+print("------------------------------------------------------------")  # 60個
+
 URL = "https://maker.ifttt.com/trigger/{0}/with/key/{1}/?"
 event_name = "web_scraping"
 api_key = "<API金鑰>"
+
 
 def email_alert(first, second=None, third=None):
     url = URL.format(event_name, api_key)
     data = {}
     data["value1"] = first
     data["value2"] = second
-    data["value3"] = third    
-    r = requests.post(url, data=data)       
+    data["value3"] = third
+    r = requests.post(url, data=data)
     if r.status_code == 200:
         print("已經寄送郵件通知...")
     else:
         print("錯誤! 寄送郵件通知失敗...")
 
+
 email_alert("測試值2", 150, 200)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 """ fail
 token = "<存取權杖>"
@@ -166,7 +170,7 @@ if r.status_code == 200:
 else:
     print("錯誤! 寄送通知訊息失敗...")
 """
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 """ fail API key
 token = "<API權杖>"
@@ -195,7 +199,7 @@ test = telegram_bot_sendText("測試Telegram模組!")
 print(test)
 """
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 """ fail
 url = "https://www.msn.com/zh-tw/weather/today/台北,台灣/we-city?iso=TW"
@@ -250,7 +254,7 @@ def LINE_alert(msg):
 
 LINE_alert(temp +"/" + summary)
 """
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 """ fail api key
 url = "https://www.msn.com/zh-tw/weather/today/台北,台灣/we-city?iso=TW"
@@ -269,14 +273,14 @@ def telegram_bot_sendText(msg):
 
 telegram_bot_sendText(temp +"/" + summary)
 """
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
-print('抓取一個網頁的所有連結網址')
-#html使用<a>標籤來製作連結
-#抓取網頁所有的 <a href="XXXXXXXXXXXXX">YYYYYYYYYY</a> 之XXXXXXXXXXXXX部分 即網頁連結
+print("抓取一個網頁的所有連結網址")
+# html使用<a>標籤來製作連結
+# 抓取網頁所有的 <a href="XXXXXXXXXXXXX">YYYYYYYYYY</a> 之XXXXXXXXXXXXX部分 即網頁連結
 
-url = 'https://hispark.hccg.gov.tw/'    #新竹市路邊停車收費網
+url = "https://hispark.hccg.gov.tw/"  # 新竹市路邊停車收費網
 
 response = requests.get(url)
 if response.status_code == 200:
@@ -287,9 +291,9 @@ if response.status_code == 200:
 else:
     print("錯誤! HTTP請求失敗...")
 
-print('抓取一個網頁的所有圖片連結網址')
-#html使用<img>來顯示圖片
-#<img src="https://hispark.hccg.gov.tw/uploadfile/images/relatedlink/relatedlink_2.jpg" width="170" height="67" border="0" />
+print("抓取一個網頁的所有圖片連結網址")
+# html使用<img>來顯示圖片
+# <img src="https://hispark.hccg.gov.tw/uploadfile/images/relatedlink/relatedlink_2.jpg" width="170" height="67" border="0" />
 
 response = requests.get(url)
 if response.status_code == 200:
@@ -300,36 +304,36 @@ if response.status_code == 200:
 else:
     print("錯誤! HTTP請求失敗...")
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-url = 'https://hispark.hccg.gov.tw/'    #新竹市路邊停車收費網
+url = "https://hispark.hccg.gov.tw/"  # 新竹市路邊停車收費網
 
 response = requests.get(url)
 soup = BeautifulSoup(response.text, "lxml")
 
-print('找所有連結a')
+print("找所有連結a")
 tags = soup("a")
-print('共找到', len(tags), '個連結')
-#print(tags)
+print("共找到", len(tags), "個連結")
+# print(tags)
 
-print('看第12個連結')
+print("看第12個連結")
 tag = tags[12]
 print("URL網址: ", tag.get("href", None))
 print("標籤內容: ", tag.text)
 print("target屬性: ", tag["target"])
 
-print('找所有圖片img')
+print("找所有圖片img")
 tags = soup("img")
-print('共找到', len(tags), '個圖片')
-#print(tags)
+print("共找到", len(tags), "個圖片")
+# print(tags)
 
-print('看第0個圖片')
+print("看第0個圖片")
 tag = tags[0]
 print("圖片網址: ", tag.get("src", None))
 print("alt屬性: ", tag["alt"])
 print("屬性: ", tag.attrs)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 import re
 
@@ -340,8 +344,8 @@ if match:
     print(match.group())
 else:
     print("沒有找到符合的字串!")
-    
-print('------------------------------------------------------------')	#60個
+
+print("------------------------------------------------------------")  # 60個
 
 import re
 
@@ -356,7 +360,7 @@ if match:
 else:
     print("沒有找到符合的字串!")
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 import re
 
@@ -368,7 +372,7 @@ if match:
 else:
     print("沒有找到符合的字串!")
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 import re
 
@@ -381,7 +385,7 @@ if match:
 else:
     print("沒有找到符合的字串!")
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 import re
 
@@ -391,7 +395,7 @@ links = re.findall(r'href="https://.*?"', response.text)
 for link in links:
     print(link)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 """ warning chromedriver
 from selenium import webdriver
@@ -451,9 +455,9 @@ for tag in tags_li:
     print(tag.text)
 driver.quit()
 """
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-print('使用 fake user agent')
+print("使用 fake user agent")
 from fake_useragent import UserAgent
 
 ua = UserAgent()
@@ -463,19 +467,19 @@ print(ua.firefox)
 print(ua.safari)
 print(ua.random)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 from fake_useragent import UserAgent
 
 ua = UserAgent()
-headers = {'user-agent' : ua.random}
+headers = {"user-agent": ua.random}
 
 url = "https://www.momoshop.com.tw/main/Main.jsp"
 r = requests.get(url, headers=headers)
 print(r.status_code)
 print(r.text)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 """ fail
 url = "https://www.momoshop.com.tw/main/Main.jsp"
@@ -485,7 +489,7 @@ print(r.text)
 
 """
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 """ fail
 from fake_useragent import UserAgent
@@ -512,8 +516,8 @@ for n in range(5):
   print(proxy)
 """
 
-print('------------------------------------------------------------')	#60個
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 """ fail chromedriver
 from selenium import webdriver
@@ -542,10 +546,8 @@ print(tag_title.text)
 driver.quit()
 """
 
-print('------------------------------------------------------------')	#60個
-print('作業完成')
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
 
-#html使用<div>標籤來分割網頁區塊，多用來指定套用CSS的範圍
-
-
+# html使用<div>標籤來分割網頁區塊，多用來指定套用CSS的範圍

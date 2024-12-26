@@ -3315,20 +3315,20 @@ print("------------------------------------------------------------")  # 60個
 
 from bs4 import BeautifulSoup
 
-soup = BeautifulSoup("<b class='score'>Joe</b>", "lxml")    
+soup = BeautifulSoup("<b class='score'>Joe</b>", "lxml")
 tag = soup.b
 tag.name = "p"
 tag["class"] = "question"
 tag["id"] = "name"
 print(tag)
 del tag["class"]
-print(tag)   
+print(tag)
 
 print("------------------------------------------------------------")  # 60個
 
 from bs4 import BeautifulSoup
 
-soup = BeautifulSoup("<b class='score'>Joe</b>", "lxml")    
+soup = BeautifulSoup("<b class='score'>Joe</b>", "lxml")
 tag = soup.b
 tag.string = "Mary"
 print(tag)
@@ -3338,7 +3338,7 @@ print("------------------------------------------------------------")  # 60個
 from bs4 import BeautifulSoup
 from bs4.element import NavigableString
 
-soup = BeautifulSoup("<b></b>", "lxml")    
+soup = BeautifulSoup("<b></b>", "lxml")
 tag = soup.b
 tag.append("Joe")
 print(tag)
@@ -3353,8 +3353,8 @@ print("------------------------------------------------------------")  # 60個
 
 from bs4 import BeautifulSoup
 
-soup = BeautifulSoup("<p><b>One</b></p>", "lxml")  
-tag = soup.b  
+soup = BeautifulSoup("<p><b>One</b></p>", "lxml")
+tag = soup.b
 new_tag = soup.new_tag("i")
 new_tag.string = "Two"
 tag.insert_before(new_tag)
@@ -3369,8 +3369,8 @@ print("------------------------------------------------------------")  # 60個
 
 from bs4 import BeautifulSoup
 
-soup = BeautifulSoup("<p><b>One</b></p>", "lxml")  
-tag = soup.b  
+soup = BeautifulSoup("<p><b>One</b></p>", "lxml")
+tag = soup.b
 new_tag = soup.new_tag("i")
 new_tag.string = "Two"
 tag.replace_with(new_tag)
@@ -3498,14 +3498,13 @@ print("------------------------------------------------------------")  # 60個
 #
 
 _safe_quoters = {}
-_ALWAYS_SAFE = frozenset(b'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-                         b'abcdefghijklmnopqrstuvwxyz'
-                         b'0123456789'
-                         b'_.-')
+_ALWAYS_SAFE = frozenset(
+    b"ABCDEFGHIJKLMNOPQRSTUVWXYZ" b"abcdefghijklmnopqrstuvwxyz" b"0123456789" b"_.-"
+)
 _ALWAYS_SAFE_BYTES = bytes(_ALWAYS_SAFE)
 
-class defaultdict:
 
+class defaultdict:
     @staticmethod
     def __new__(cls, default_factory=None, **kwargs):
         # Some code (e.g. urllib.urlparse) expects that basic defaultdict
@@ -3540,13 +3539,15 @@ class defaultdict:
         if self.default_factory is None:
             raise KeyError(key)
         return self.default_factory()
-        
+
+
 class Quoter(defaultdict):
     """A mapping from bytes (in range(0,256)) to strings.
 
     String values are percent-encoded byte values, unless the key < 128, and
     in the "safe" set (either the specified safe set, or default set).
     """
+
     # Keeps a cache internally, using defaultdict, for efficiency (lookups
     # of cached keys don't call Python code at all).
     def __init__(self, safe):
@@ -3559,7 +3560,7 @@ class Quoter(defaultdict):
 
     def __missing__(self, b):
         # Handle a cache miss. Store quoted string in cache and return.
-        res = chr(b) if b in self.safe else '%{:02X}'.format(b)
+        res = chr(b) if b in self.safe else "%{:02X}".format(b)
         self[b] = res
         return res
 
@@ -3569,7 +3570,7 @@ def clear_cache():
     _safe_quoters.clear()
 
 
-def quote(string, safe='/', encoding=None, errors=None):
+def quote(string, safe="/", encoding=None, errors=None):
     """quote('abc def') -> 'abc%20def'
 
     Each part of a URL, e.g. the path info, the query, etc., has a
@@ -3602,9 +3603,9 @@ def quote(string, safe='/', encoding=None, errors=None):
         if not string:
             return string
         if encoding is None:
-            encoding = 'utf-8'
+            encoding = "utf-8"
         if errors is None:
-            errors = 'strict'
+            errors = "strict"
         string = string.encode(encoding, errors)
     else:
         if encoding is not None:
@@ -3615,27 +3616,28 @@ def quote(string, safe='/', encoding=None, errors=None):
     return quote_from_bytes(string, safe)
 
 
-def quote_plus(string, safe='', encoding=None, errors=None):
+def quote_plus(string, safe="", encoding=None, errors=None):
     """Like quote(), but also replace ' ' with '+', as required for quoting
     HTML form values. Plus signs in the original string are escaped unless
     they are included in safe. It also does not have safe default to '/'.
     """
     # Check if ' ' in string, where string may either be a str or bytes.  If
     # there are no spaces, the regular quote will produce the right answer.
-    if ((isinstance(string, str) and ' ' not in string) or
-            (isinstance(string, bytes) and b' ' not in string)):
+    if (isinstance(string, str) and " " not in string) or (
+        isinstance(string, bytes) and b" " not in string
+    ):
         return quote(string, safe, encoding, errors)
 
     if isinstance(safe, str):
-        space = ' '
+        space = " "
     else:
-        space = b' '
+        space = b" "
 
     string = quote(string, safe + space, encoding, errors)
-    return string.replace(' ', '+')
+    return string.replace(" ", "+")
 
 
-def quote_from_bytes(bs, safe='/'):
+def quote_from_bytes(bs, safe="/"):
     """Like quote(), but accepts a bytes object rather than a str, and does
     not perform string-to-bytes encoding.  It always returns an ASCII string.
     quote_from_bytes(b'abc def\x3f') -> 'abc%20def%3f'
@@ -3644,11 +3646,11 @@ def quote_from_bytes(bs, safe='/'):
         raise TypeError("quote_from_bytes() expected bytes")
 
     if not bs:
-        return ''
+        return ""
 
     if isinstance(safe, str):
         # Normalize 'safe' by converting to bytes and removing non-ASCII chars
-        safe = safe.encode('ascii', 'ignore')
+        safe = safe.encode("ascii", "ignore")
     else:
         safe = bytes([c for c in safe if c < 128])
 
@@ -3660,10 +3662,10 @@ def quote_from_bytes(bs, safe='/'):
     except KeyError:
         _safe_quoters[safe] = quoter = Quoter(safe).__getitem__
 
-    return ''.join([quoter(char) for char in bs])
+    return "".join([quoter(char) for char in bs])
 
 
-def urlencode(query, doseq=False, safe='', encoding=None, errors=None):
+def urlencode(query, doseq=False, safe="", encoding=None, errors=None):
     """Encode a dict or sequence of two-element tuples into a URL query string.
 
     If any values in the query arg are sequences and doseq is true, each
@@ -3694,8 +3696,9 @@ def urlencode(query, doseq=False, safe='', encoding=None, errors=None):
             # preserved for consistency
         except TypeError:
             # ty, va, tb = sys.exc_info()
-            raise TypeError("not a valid non-string sequence "
-                            "or mapping object")  # .with_traceback(tb)
+            raise TypeError(
+                "not a valid non-string sequence " "or mapping object"
+            )  # .with_traceback(tb)
 
     l = []
     if not doseq:
@@ -3710,7 +3713,7 @@ def urlencode(query, doseq=False, safe='', encoding=None, errors=None):
             else:
                 v = quote_plus(str(v), safe, encoding, errors)
 
-            l.append(k + '=' + v)
+            l.append(k + "=" + v)
     else:
         for k, v in query:
             if isinstance(k, bytes):
@@ -3720,10 +3723,10 @@ def urlencode(query, doseq=False, safe='', encoding=None, errors=None):
 
             if isinstance(v, bytes):
                 v = quote_plus(v, safe)
-                l.append(k + '=' + v)
+                l.append(k + "=" + v)
             elif isinstance(v, str):
                 v = quote_plus(v, safe, encoding, errors)
-                l.append(k + '=' + v)
+                l.append(k + "=" + v)
             else:
                 try:
                     # Is this a sufficient test for sequence-ness?
@@ -3731,7 +3734,7 @@ def urlencode(query, doseq=False, safe='', encoding=None, errors=None):
                 except TypeError:
                     # not a sequence
                     v = quote_plus(str(v), safe, encoding, errors)
-                    l.append(k + '=' + v)
+                    l.append(k + "=" + v)
                 else:
                     # loop over the sequence
                     for elt in v:
@@ -3740,9 +3743,10 @@ def urlencode(query, doseq=False, safe='', encoding=None, errors=None):
                         else:
                             elt = quote_plus(str(elt), safe, encoding, errors)
 
-                        l.append(k + '=' + elt)
+                        l.append(k + "=" + elt)
 
-    return '&'.join(l)
+    return "&".join(l)
+
 
 print("------------------------------------------------------------")  # 60個
 
@@ -3802,22 +3806,22 @@ from bs4 import BeautifulSoup
 
 with open("data/Surveys.html", "r", encoding="utf8") as fp:
     soup = BeautifulSoup(fp, "lxml")
-#import requests
-#r = requests.get("https://fchart.github.io/ML/Surveys.html")
-#r.encoding = "utf8"
-#soup = BeautifulSoup(r.text, "lxml")  
+# import requests
+# r = requests.get("https://fchart.github.io/ML/Surveys.html")
+# r.encoding = "utf8"
+# soup = BeautifulSoup(r.text, "lxml")
 
 # 走訪下一層HTML標籤
 print(soup.html.body.div.div.p.a.text)
 print("----------------------")
 # 走訪上一層HTML標籤
-tag_div = soup.select_one("#q1") # 找到第1題的<div>標籤
-tag_li = tag_div.ul.li    # 走訪到之下的<ul>
+tag_div = soup.select_one("#q1")  # 找到第1題的<div>標籤
+tag_li = tag_div.ul.li  # 走訪到之下的<ul>
 print(tag_li.text)
 # 使用parent屬性取得父標籤
 print(tag_li.parent.parent.p.a.text)
 print("----------------------")
-tag_div = soup.select_one("#q2") # 找到第2題的<div>標籤
+tag_div = soup.select_one("#q2")  # 找到第2題的<div>標籤
 print(tag_div.find_previous_sibling().p.a.text)
 print(tag_div.find_next_sibling().p.a.text)
 
@@ -3828,13 +3832,13 @@ from bs4 import BeautifulSoup
 with open("data/Surveys.html", "r", encoding="utf8") as fp:
     soup = BeautifulSoup(fp, "lxml")
 
-#import requests
-#r = requests.get("https://fchart.github.io/ML/Surveys.html")
-#r.encoding = "utf8"
-#soup = BeautifulSoup(r.text, "lxml")  
+# import requests
+# r = requests.get("https://fchart.github.io/ML/Surveys.html")
+# r.encoding = "utf8"
+# soup = BeautifulSoup(r.text, "lxml")
 
 # 搜尋<a>標籤
-tag_a = soup.find("a") 
+tag_a = soup.find("a")
 print(tag_a.text)
 # 呼叫多次find()方法
 tag_p = soup.find(name="p")
@@ -3848,14 +3852,14 @@ from bs4 import BeautifulSoup
 
 with open("data/Surveys.html", "r", encoding="utf8") as fp:
     soup = BeautifulSoup(fp, "lxml")
-#import requests
-#r = requests.get("https://fchart.github.io/ML/Surveys.html")
-#r.encoding = "utf8"
-#soup = BeautifulSoup(r.text, "lxml")  
+# import requests
+# r = requests.get("https://fchart.github.io/ML/Surveys.html")
+# r.encoding = "utf8"
+# soup = BeautifulSoup(r.text, "lxml")
 
 # 使用id屬性搜尋<div>標籤
 tag_div = soup.find(id="q2")
-tag_a = tag_div.find("a") 
+tag_a = tag_div.find("a")
 print(tag_a.text)
 
 print("------------------------------------------------------------")  # 60個
@@ -3864,11 +3868,11 @@ from bs4 import BeautifulSoup
 
 with open("data/Surveys.html", "r", encoding="utf8") as fp:
     soup = BeautifulSoup(fp, "lxml")
-#import requests
-#r = requests.get("https://fchart.github.io/ML/Surveys.html")
-#r.encoding = "utf8"
-#soup = BeautifulSoup(r.text, "lxml")  
-    
+# import requests
+# r = requests.get("https://fchart.github.io/ML/Surveys.html")
+# r.encoding = "utf8"
+# soup = BeautifulSoup(r.text, "lxml")
+
 # 使用class屬性搜尋<span>標籤
 tag_span = soup.find(attrs={"class": "score"})
 print(tag_span.text)
@@ -3883,10 +3887,10 @@ from bs4 import BeautifulSoup
 
 with open("data/Surveys.html", "r", encoding="utf8") as fp:
     soup = BeautifulSoup(fp, "lxml")
-#import requests
-#r = requests.get("https://fchart.github.io/ML/Surveys.html")
-#r.encoding = "utf8"
-#soup = BeautifulSoup(r.text, "lxml")  
+# import requests
+# r = requests.get("https://fchart.github.io/ML/Surveys.html")
+# r.encoding = "utf8"
+# soup = BeautifulSoup(r.text, "lxml")
 
 # 使用HTML5的data-屬性搜尋<div>標籤
 tag_div = soup.find(attrs={"data-custom": "important"})
@@ -3898,17 +3902,17 @@ from bs4 import BeautifulSoup
 
 with open("data/Surveys.html", "r", encoding="utf8") as fp:
     soup = BeautifulSoup(fp, "lxml")
-#import requests
-#r = requests.get("https://fchart.github.io/ML/Surveys.html")
-#r.encoding = "utf8"
-#soup = BeautifulSoup(r.text, "lxml")
+# import requests
+# r = requests.get("https://fchart.github.io/ML/Surveys.html")
+# r.encoding = "utf8"
+# soup = BeautifulSoup(r.text, "lxml")
 
 # 使用文字內容來搜尋標籤
 tag_str = soup.find(text="請問你的")
 print(tag_str)
 tag_str = soup.find(text="10")
 print(tag_str)
-print(type(tag_str))        # NavigableString型態
+print(type(tag_str))  # NavigableString型態
 print(tag_str.parent.name)  # 父標籤名稱
 tag_str = soup.find(text="男 - ")
 print(tag_str)
@@ -3919,11 +3923,11 @@ from bs4 import BeautifulSoup
 
 with open("data/Surveys.html", "r", encoding="utf8") as fp:
     soup = BeautifulSoup(fp, "lxml")
-#import requests
-#r = requests.get("https://fchart.github.io/ML/Surveys.html")
-#r.encoding = "utf8"
-#soup = BeautifulSoup(r.text, "lxml")   
-    
+# import requests
+# r = requests.get("https://fchart.github.io/ML/Surveys.html")
+# r.encoding = "utf8"
+# soup = BeautifulSoup(r.text, "lxml")
+
 # 測試取出<li>標籤的內容
 tag_str = soup.find(text="女 - ")
 print(tag_str)
@@ -3938,11 +3942,11 @@ from bs4 import BeautifulSoup
 
 with open("data/Surveys.html", "r", encoding="utf8") as fp:
     soup = BeautifulSoup(fp, "lxml")
-#import requests
-#r = requests.get("https://fchart.github.io/ML/Surveys.html")
-#r.encoding = "utf8"
-#soup = BeautifulSoup(r.text, "lxml")      
-    
+# import requests
+# r = requests.get("https://fchart.github.io/ML/Surveys.html")
+# r.encoding = "utf8"
+# soup = BeautifulSoup(r.text, "lxml")
+
 # 使用多條件來搜尋HTML標籤
 tag_div = soup.find("div", class_="question")
 print(tag_div.prettify())
@@ -3955,15 +3959,16 @@ from bs4 import BeautifulSoup
 
 with open("data/Surveys.html", "r", encoding="utf8") as fp:
     soup = BeautifulSoup(fp, "lxml")
-#import requests
-#r = requests.get("https://fchart.github.io/ML/Surveys.html")
-#r.encoding = "utf8"
-#soup = BeautifulSoup(r.text, "lxml")  
-    
+# import requests
+# r = requests.get("https://fchart.github.io/ML/Surveys.html")
+# r.encoding = "utf8"
+# soup = BeautifulSoup(r.text, "lxml")
+
+
 # 使用函數建立搜尋條件
 def is_secondary_question(tag):
-    return tag.has_attr("href") and \
-           tag.get("href") == "http://example.com/q2"
+    return tag.has_attr("href") and tag.get("href") == "http://example.com/q2"
+
 
 tag_a = soup.find(is_secondary_question)
 print(tag_a.prettify())
@@ -3974,11 +3979,11 @@ from bs4 import BeautifulSoup
 
 with open("data/Surveys.html", "r", encoding="utf8") as fp:
     soup = BeautifulSoup(fp, "lxml")
-#import requests
-#r = requests.get("https://fchart.github.io/ML/Surveys.html")
-#r.encoding = "utf8"
-#soup = BeautifulSoup(r.text, "lxml")      
-    
+# import requests
+# r = requests.get("https://fchart.github.io/ML/Surveys.html")
+# r.encoding = "utf8"
+# soup = BeautifulSoup(r.text, "lxml")
+
 # 找出所有問卷的題目串列
 tag_list = soup.find_all("p", class_="question")
 print(tag_list[0].prettify())
@@ -3992,11 +3997,11 @@ from bs4 import BeautifulSoup
 
 with open("data/Surveys.html", "r", encoding="utf8") as fp:
     soup = BeautifulSoup(fp, "lxml")
-#import requests
-#r = requests.get("https://fchart.github.io/ML/Surveys.html")
-#r.encoding = "utf8"
-#soup = BeautifulSoup(r.text, "lxml")     
-    
+# import requests
+# r = requests.get("https://fchart.github.io/ML/Surveys.html")
+# r.encoding = "utf8"
+# soup = BeautifulSoup(r.text, "lxml")
+
 # 找出前2個問卷的題目串列
 tag_list = soup.find_all("p", class_="question", limit=2)
 print(len(tag_list))
@@ -4010,10 +4015,10 @@ from bs4 import BeautifulSoup
 
 with open("data/Surveys.html", "r", encoding="utf8") as fp:
     soup = BeautifulSoup(fp, "lxml")
-#import requests
-#r = requests.get("https://fchart.github.io/ML/Surveys.html")
-#r.encoding = "utf8"
-#soup = BeautifulSoup(r.text, "lxml")  
+# import requests
+# r = requests.get("https://fchart.github.io/ML/Surveys.html")
+# r.encoding = "utf8"
+# soup = BeautifulSoup(r.text, "lxml")
 
 tag_div = soup.find("div", id="q2")
 # 找出所有標籤串列
@@ -4027,10 +4032,10 @@ from bs4 import BeautifulSoup
 
 with open("data/Surveys.html", "r", encoding="utf8") as fp:
     soup = BeautifulSoup(fp, "lxml")
-#import requests
-#r = requests.get("https://fchart.github.io/ML/Surveys.html")
-#r.encoding = "utf8"
-#soup = BeautifulSoup(r.text, "lxml")  
+# import requests
+# r = requests.get("https://fchart.github.io/ML/Surveys.html")
+# r.encoding = "utf8"
+# soup = BeautifulSoup(r.text, "lxml")
 
 tag_div = soup.find("div", id="q2")
 # 找出所有文字內容串列
@@ -4046,10 +4051,10 @@ from bs4 import BeautifulSoup
 
 with open("data/Surveys.html", "r", encoding="utf8") as fp:
     soup = BeautifulSoup(fp, "lxml")
-#import requests
-#r = requests.get("https://fchart.github.io/ML/Surveys.html")
-#r.encoding = "utf8"
-#soup = BeautifulSoup(r.text, "lxml")  
+# import requests
+# r = requests.get("https://fchart.github.io/ML/Surveys.html")
+# r.encoding = "utf8"
+# soup = BeautifulSoup(r.text, "lxml")
 
 tag_div = soup.find("div", id="q2")
 # 找出所有<p>和<span>標籤
@@ -4068,10 +4073,10 @@ from bs4 import BeautifulSoup
 
 with open("data/Surveys.html", "r", encoding="utf8") as fp:
     soup = BeautifulSoup(fp, "lxml")
-#import requests
-#r = requests.get("https://fchart.github.io/ML/Surveys.html")
-#r.encoding = "utf8"
-#soup = BeautifulSoup(r.text, "lxml")  
+# import requests
+# r = requests.get("https://fchart.github.io/ML/Surveys.html")
+# r.encoding = "utf8"
+# soup = BeautifulSoup(r.text, "lxml")
 
 tag_div = soup.find("div", id="q2")
 # 找出所有<li>子孫標籤
@@ -4088,10 +4093,10 @@ from bs4 import BeautifulSoup
 
 with open("data/Surveys.html", "r", encoding="utf8") as fp:
     soup = BeautifulSoup(fp, "lxml")
-#import requests
-#r = requests.get("https://fchart.github.io/ML/Surveys.html")
-#r.encoding = "utf8"
-#soup = BeautifulSoup(r.text, "lxml")  
+# import requests
+# r = requests.get("https://fchart.github.io/ML/Surveys.html")
+# r.encoding = "utf8"
+# soup = BeautifulSoup(r.text, "lxml")
 
 # 搜尋<title>標籤和第3個<div>標籤
 tag_title = soup.select("title")
@@ -4106,10 +4111,10 @@ from bs4 import BeautifulSoup
 
 with open("data/Surveys.html", "r", encoding="utf8") as fp:
     soup = BeautifulSoup(fp, "lxml")
-#import requests
-#r = requests.get("https://fchart.github.io/ML/Surveys.html")
-#r.encoding = "utf8"
-#soup = BeautifulSoup(r.text, "lxml")  
+# import requests
+# r = requests.get("https://fchart.github.io/ML/Surveys.html")
+# r.encoding = "utf8"
+# soup = BeautifulSoup(r.text, "lxml")
 
 # 搜尋class和id屬性值的標籤
 tag_div = soup.select("#q1")
@@ -4121,7 +4126,7 @@ for item in tag_div:
     print(item.p.a.text)
 print("-----------")
 tag_div = soup.find("div")  # 第1個<div>標籤
-tag_p = tag_div.select(".question")   
+tag_p = tag_div.select(".question")
 for item in tag_p:
     print(item.a["href"])
 tag_span = soup.select("[class~=selected]")
@@ -4134,16 +4139,19 @@ from bs4 import BeautifulSoup
 
 with open("data/Surveys.html", "r", encoding="utf8") as fp:
     soup = BeautifulSoup(fp, "lxml")
-#import requests
-#r = requests.get("https://fchart.github.io/ML/Surveys.html")
-#r.encoding = "utf8"
-#soup = BeautifulSoup(r.text, "lxml")  
+# import requests
+# r = requests.get("https://fchart.github.io/ML/Surveys.html")
+# r.encoding = "utf8"
+# soup = BeautifulSoup(r.text, "lxml")
+
 
 # 搜尋特定屬性值的標籤
 def print_a(tag_a):
     for tag in tag_a:
         print(tag["href"])
-    print("-----------")    
+    print("-----------")
+
+
 tag_a = soup.select("a[href]")
 print_a(tag_a)
 tag_a = soup.select("a[href='http://example.com/q2']")
@@ -4161,14 +4169,14 @@ from bs4 import BeautifulSoup
 
 with open("data/Surveys.html", "r", encoding="utf8") as fp:
     soup = BeautifulSoup(fp, "lxml")
-#import requests
-#r = requests.get("https://fchart.github.io/ML/Surveys.html")
-#r.encoding = "utf8"
-#soup = BeautifulSoup(r.text, "lxml")  
+# import requests
+# r = requests.get("https://fchart.github.io/ML/Surveys.html")
+# r.encoding = "utf8"
+# soup = BeautifulSoup(r.text, "lxml")
 
 # 搜尋<title>標籤, 和<div>標籤下的所有<a>標籤
 tag_title = soup.select("html head title")
-print(tag_title[0].text)    
+print(tag_title[0].text)
 tag_a = soup.select("body div a")
 for tag in tag_a:
     print(tag["href"])
@@ -4179,10 +4187,10 @@ from bs4 import BeautifulSoup
 
 with open("data/Surveys.html", "r", encoding="utf8") as fp:
     soup = BeautifulSoup(fp, "lxml")
-#import requests
-#r = requests.get("https://fchart.github.io/ML/Surveys.html")
-#r.encoding = "utf8"
-#soup = BeautifulSoup(r.text, "lxml")  
+# import requests
+# r = requests.get("https://fchart.github.io/ML/Surveys.html")
+# r.encoding = "utf8"
+# soup = BeautifulSoup(r.text, "lxml")
 
 # 搜尋指定標籤下的直接子標籤
 tag_a = soup.select("p > a")
@@ -4193,7 +4201,7 @@ for tag in tag_li:
     print(tag.text.replace("\n", ""))
 tag_span = soup.select("div > #email")
 for tag in tag_span:
-    print(tag.prettify())  
+    print(tag.prettify())
 
 print("------------------------------------------------------------")  # 60個
 
@@ -4201,22 +4209,22 @@ from bs4 import BeautifulSoup
 
 with open("data/Surveys.html", "r", encoding="utf8") as fp:
     soup = BeautifulSoup(fp, "lxml")
-#import requests
-#r = requests.get("https://fchart.github.io/ML/Surveys.html")
-#r.encoding = "utf8"
-#soup = BeautifulSoup(r.text, "lxml")  
+# import requests
+# r = requests.get("https://fchart.github.io/ML/Surveys.html")
+# r.encoding = "utf8"
+# soup = BeautifulSoup(r.text, "lxml")
 
 # 搜尋兄弟標籤
 tag_div = soup.find(id="q1")
 print(tag_div.p.a.text)
 print("-----------")
 tag_div = soup.select("#q1 ~ .survey")
-for item in tag_div:            
-    print(item.p.a.text)  
+for item in tag_div:
+    print(item.p.a.text)
 print("-----------")
 tag_div = soup.select("#q1 + .survey")
-for item in tag_div:            
-    print(item.p.a.text)   
+for item in tag_div:
+    print(item.p.a.text)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -4224,10 +4232,10 @@ from bs4 import BeautifulSoup
 
 with open("data/Surveys.html", "r", encoding="utf8") as fp:
     soup = BeautifulSoup(fp, "lxml")
-#import requests
-#r = requests.get("https://fchart.github.io/ML/Surveys.html")
-#r.encoding = "utf8"
-#soup = BeautifulSoup(r.text, "lxml")  
+# import requests
+# r = requests.get("https://fchart.github.io/ML/Surveys.html")
+# r.encoding = "utf8"
+# soup = BeautifulSoup(r.text, "lxml")
 
 # 使用select_one()方法搜尋標籤
 tag_a = soup.select_one("a[href]")
@@ -4240,10 +4248,10 @@ from bs4 import BeautifulSoup
 
 with open("data/Surveys.html", "r", encoding="utf8") as fp:
     soup = BeautifulSoup(fp, "lxml")
-#import requests
-#r = requests.get("https://fchart.github.io/ML/Surveys.html")
-#r.encoding = "utf8"
-#soup = BeautifulSoup(r.text, "lxml")  
+# import requests
+# r = requests.get("https://fchart.github.io/ML/Surveys.html")
+# r.encoding = "utf8"
+# soup = BeautifulSoup(r.text, "lxml")
 
 # 使用正規表達式搜尋文字內容
 tag_str = soup.find(text="男 -")
@@ -4263,10 +4271,10 @@ from bs4 import BeautifulSoup
 
 with open("data/Surveys.html", "r", encoding="utf8") as fp:
     soup = BeautifulSoup(fp, "lxml")
-#import requests
-#r = requests.get("https://fchart.github.io/ML/Surveys.html")
-#r.encoding = "utf8"
-#soup = BeautifulSoup(r.text, "lxml")  
+# import requests
+# r = requests.get("https://fchart.github.io/ML/Surveys.html")
+# r.encoding = "utf8"
+# soup = BeautifulSoup(r.text, "lxml")
 
 # 使用正規表達式搜尋電子郵件地址
 email_regexp = re.compile("\w+@\w+\.\w+")
@@ -4283,10 +4291,10 @@ from bs4 import BeautifulSoup
 
 with open("data/Surveys.html", "r", encoding="utf8") as fp:
     soup = BeautifulSoup(fp, "lxml")
-#import requests
-#r = requests.get("https://fchart.github.io/ML/Surveys.html")
-#r.encoding = "utf8"
-#soup = BeautifulSoup(r.text, "lxml")  
+# import requests
+# r = requests.get("https://fchart.github.io/ML/Surveys.html")
+# r.encoding = "utf8"
+# soup = BeautifulSoup(r.text, "lxml")
 
 # 使用正規表達式搜尋URL網址
 url_regexp = re.compile("^http:")
@@ -4442,19 +4450,21 @@ driver.quit()
 print("------------------------------------------------------------")  # 60個
 
 import sys
-import json 
+import json
 import requests
 
 print("------------------------------------------------------------")  # 60個
 
-url = "https://www.googleapis.com/books/v1/volumes?maxResults=5&q=Python&projection=lite"
+url = (
+    "https://www.googleapis.com/books/v1/volumes?maxResults=5&q=Python&projection=lite"
+)
 jsonfilename = "tmp_GoogleBooks.json"
 r = requests.get(url)
 r.encoding = "utf8"
 json_data = json.loads(r.text)
-with open(jsonfilename, 'w') as fp:
+with open(jsonfilename, "w") as fp:
     json.dump(json_data, fp)
-    print('json 存檔完成, 檔案 :', jsonfilename)
+    print("json 存檔完成, 檔案 :", jsonfilename)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -4475,17 +4485,19 @@ print("------------------------------------------------------------")  # 60個
 
 import requests
 
-print('使用 headers 抓取 momo 網站')
+print("使用 headers 抓取 momo 網站")
 
-URL="https://www.momoshop.com.tw/search/"
+URL = "https://www.momoshop.com.tw/search/"
 
-headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'
-           'AppleWebKit/537.36 (KHTML, like Gecko)'
-           'Chrome/63.0.3239.132 Safari/537.36'}
-r = requests.get(URL+"searchShop.jsp?keyword=NBA", headers=headers)
+headers = {
+    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+    "AppleWebKit/537.36 (KHTML, like Gecko)"
+    "Chrome/63.0.3239.132 Safari/537.36"
+}
+r = requests.get(URL + "searchShop.jsp?keyword=NBA", headers=headers)
 if r.status_code == requests.codes.ok:
-    r.encoding = "big5"    
-    print(r.text)        
+    r.encoding = "big5"
+    print(r.text)
 else:
     print("HTTP請求錯誤..." + URL)
 
@@ -4560,7 +4572,7 @@ if r.status_code == requests.codes.ok:
     soup = BeautifulSoup(r.text, "lxml")
     tag_divs = soup.find_all("div", class_="r-ent")
     for tag in tag_divs:
-        if tag.find('a'): # 是否有<a>標籤
+        if tag.find("a"):  # 是否有<a>標籤
             tag_a = tag.find("a")
             print(tag_a["href"])
             print(tag_a.text)
@@ -4578,7 +4590,7 @@ PTT = "https://wwww.ptt.cc/bbs/movie/index.html"
 catalog = ["movie", "NBA", "Gossiping"]
 
 for i in range(1, 5):
-    url = urljoin(URL, "world-list-0{0}.html".format(i)) 
+    url = urljoin(URL, "world-list-0{0}.html".format(i))
     print(url)
 print("-----------------")
 for item in catalog:
@@ -4592,30 +4604,37 @@ from bs4 import BeautifulSoup
 import csv, re
 
 URL = "https://movies.yahoo.com.tw/movie_intheaters.html"
-headers = {"user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
-           "AppleWebKit/537.36 (KHTML, like Gecko)"
-           "Chrome/63.0.3239.132 Safari/537.36"}
+headers = {
+    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+    "AppleWebKit/537.36 (KHTML, like Gecko)"
+    "Chrome/63.0.3239.132 Safari/537.36"
+}
+
 
 def format_date(date):  # 取出上映日期
-    if not date: return "N/A"
-    pattern = '\d+-\d+-\d+'
+    if not date:
+        return "N/A"
+    pattern = "\d+-\d+-\d+"
     match = re.search(pattern, date.text)
     if match is None:
         return date.text
     else:
-        return match.group(0)    
+        return match.group(0)
+
 
 def get_text(tag):
     if tag:
         return tag.text.strip()
     else:
         return "N/A"
- 
+
+
 def get_attrib(tag, attrib):
     if tag:
         return tag[attrib].strip()
     else:
         return "N/A"
+
 
 """ fail    
 movies = [["中文片名","英文片名","期待度","海報圖片","上映日"]]
@@ -4684,7 +4703,7 @@ with open("tmp_products.json", "w", encoding="utf-8") as fp: # 寫入JSON檔案
 
 print("------------------------------------------------------------")  # 60個
 
-import requests 
+import requests
 from bs4 import BeautifulSoup
 import csv
 
@@ -4695,14 +4714,12 @@ r.encoding = "utf8"
 soup = BeautifulSoup(r.text, "lxml")
 tag_table = soup.select_one("#ie11andabove > div > table")
 rows = tag_table.find_all("tr")
-with open(csvfile,'w+',newline='',encoding="big5") as fp:
+with open(csvfile, "w+", newline="", encoding="big5") as fp:
     writer = csv.writer(fp)
     for row in rows:
         lst = []
         for cell in row.find_all(["td", "th"]):
-            lst.append(cell.text.replace("\n","").
-                       replace("\r","").
-                       strip())
+            lst.append(cell.text.replace("\n", "").replace("\r", "").strip())
         writer.writerow(lst)
 
 print("------------------------------------------------------------")  # 60個
@@ -4712,30 +4729,38 @@ from bs4 import BeautifulSoup
 import csv, re, time
 
 URL = "https://movies.yahoo.com.tw/movie_intheaters.html/?page={0}"
-headers = {"user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
-           "AppleWebKit/537.36 (KHTML, like Gecko)"
-           "Chrome/63.0.3239.132 Safari/537.36"}
- 
+headers = {
+    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+    "AppleWebKit/537.36 (KHTML, like Gecko)"
+    "Chrome/63.0.3239.132 Safari/537.36"
+}
+
+
 def format_date(date):  # 取出上映日期
-    if not date: return "N/A"
-    pattern = '\d+-\d+-\d+'
+    if not date:
+        return "N/A"
+    pattern = "\d+-\d+-\d+"
     match = re.search(pattern, date.text)
     if match is None:
         return date.text
     else:
-        return match.group(0)    
+        return match.group(0)
+
 
 def get_text(tag):
     if tag:
         return tag.text.strip()
     else:
         return "N/A"
- 
+
+
 def get_attrib(tag, attrib):
     if tag:
         return tag[attrib].strip()
     else:
-        return "N/A"   
+        return "N/A"
+
+
 """ fail
 all_movies = [["中文片名","英文片名","期待度","海報圖片","上映日"]]
 for page in range(1, 11):
@@ -4779,30 +4804,37 @@ from bs4 import BeautifulSoup
 import csv, re, time
 
 URL = "https://movies.yahoo.com.tw/movie_intheaters.html/?page=1"
-headers = {"user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
-           "AppleWebKit/537.36 (KHTML, like Gecko)"
-           "Chrome/63.0.3239.132 Safari/537.36"}
- 
+headers = {
+    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+    "AppleWebKit/537.36 (KHTML, like Gecko)"
+    "Chrome/63.0.3239.132 Safari/537.36"
+}
+
+
 def format_date(date):  # 取出上映日期
-    if not date: return "N/A"
-    pattern = '\d+-\d+-\d+'
+    if not date:
+        return "N/A"
+    pattern = "\d+-\d+-\d+"
     match = re.search(pattern, date.text)
     if match is None:
         return date.text
     else:
-        return match.group(0)    
+        return match.group(0)
+
 
 def get_text(tag):
     if tag:
         return tag.text.strip()
     else:
         return "N/A"
- 
+
+
 def get_attrib(tag, attrib):
     if tag:
         return tag[attrib].strip()
     else:
-        return "N/A"  
+        return "N/A"
+
 
 """ fail
 all_movies = [["中文片名","英文片名","期待度","海報圖片","上映日"]]
@@ -4900,26 +4932,31 @@ from bs4 import BeautifulSoup
 URL = "https://www.ptt.cc"
 MAX_PUSH = 50
 # TOPIC = "Gossiping"
-TOPIC = "NBA" 
+TOPIC = "NBA"
+
 
 def get_resource(url):
-    headers = {"user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
-               "AppleWebKit/537.36 (KHTML, like Gecko)"
-               "Chrome/63.0.3239.132 Safari/537.36"}
-    return requests.get(url, headers=headers, cookies={"over18":"1"})
+    headers = {
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+        "AppleWebKit/537.36 (KHTML, like Gecko)"
+        "Chrome/63.0.3239.132 Safari/537.36"
+    }
+    return requests.get(url, headers=headers, cookies={"over18": "1"})
+
 
 def parse_html(r):
     if r.status_code == requests.codes.ok:
         r.encoding = "utf8"
-        soup = BeautifulSoup(r.text, "lxml")        
+        soup = BeautifulSoup(r.text, "lxml")
     else:
         print("HTTP請求錯誤..." + url)
         soup = None
-    
-    return soup    
+
+    return soup
+
 
 def get_articles(soup, date):
-    articles = []  
+    articles = []
     # 取得上一頁的超連結
     paging_div = soup.find("div", class_="btn-group btn-group-paging")
     paging_a = paging_div.find_all("a", class_="btn")
@@ -4928,40 +4965,44 @@ def get_articles(soup, date):
     tag_divs = soup.find_all("div", class_="r-ent")
     for tag in tag_divs:
         # 判斷文章的日期
-        if tag.find("div",class_="date").text.strip() == date:
-            push_count = 0    # 取得推文數
+        if tag.find("div", class_="date").text.strip() == date:
+            push_count = 0  # 取得推文數
             push_str = tag.find("div", class_="nrec").text
             if push_str:
                 try:
                     push_count = int(push_str)  # 轉換成數字
                 except ValueError:  # 轉換失敗，可能是'爆'或 'X1','X2'
-                    if push_str == '爆':
+                    if push_str == "爆":
                         push_count = 99
-                    elif push_str.startswith('X'):
+                    elif push_str.startswith("X"):
                         push_count = -10
             # 取得貼章的超連結和標題文字
             if tag.find("a"):  # 有超連結，表示文章存在
                 href = tag.find("a")["href"]
                 title = tag.find("a").text
-                author = tag.find("div", class_="author").string 
-                articles.append({
-                    "title": title,
-                    "href": href,
-                    "push_count": push_count,
-                    "author": author
-                })
-    
+                author = tag.find("div", class_="author").string
+                articles.append(
+                    {
+                        "title": title,
+                        "href": href,
+                        "push_count": push_count,
+                        "author": author,
+                    }
+                )
+
     return articles, prev_url
+
 
 def save_to_json(articles, file):
     print("今天總共有: " + str(len(articles)) + " 篇文章")
     threshold = MAX_PUSH
     print("熱門文章(> %d 推): " % (threshold))
-    for item in articles:   # 顯示熱門文章清單
+    for item in articles:  # 顯示熱門文章清單
         if int(item["push_count"]) > threshold:
-            print(item["title"], item["href"], item["author"])    
-    with open(file, "w", encoding="utf-8") as fp: # 寫入JSON檔案
-        json.dump(articles,fp,indent=2,sort_keys=True,ensure_ascii=False)
+            print(item["title"], item["href"], item["author"])
+    with open(file, "w", encoding="utf-8") as fp:  # 寫入JSON檔案
+        json.dump(articles, fp, indent=2, sort_keys=True, ensure_ascii=False)
+
 
 def web_scraping_bot(url):
     articles = []
@@ -4969,38 +5010,27 @@ def web_scraping_bot(url):
     soup = parse_html(get_resource(url))
     if soup:
         # 取得今天日期, 去掉開頭'0'符合PTT的日期格式
-        today = time.strftime("%m/%d").lstrip('0') 
+        today = time.strftime("%m/%d").lstrip("0")
         # 取得目前頁面的今日文章清單
-        current_articles, prev_url = get_articles(soup, today) 
-        while current_articles: 
+        current_articles, prev_url = get_articles(soup, today)
+        while current_articles:
             articles += current_articles
             print("等待2秒鐘...")
-            time.sleep(2) 
-             # 剖析上一頁繼續尋找是否有今日的文章
+            time.sleep(2)
+            # 剖析上一頁繼續尋找是否有今日的文章
             soup = parse_html(get_resource(URL + prev_url))
             current_articles, prev_url = get_articles(soup, today)
 
     return articles
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     url = URL + "/bbs/" + TOPIC + "/index.html"
     print(url)
     articles = web_scraping_bot(url)
     for item in articles:
         print(item)
     save_to_json(articles, "tmp_articles.json")
- 
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -5012,6 +5042,13 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
@@ -5020,7 +5057,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -5048,7 +5084,6 @@ print("------------------------------------------------------------")  # 60個
 # select()其實就是使用CSS選擇器語法的find_all()
 
 
-
 print("------------------------------------------------------------")  # 60個
 """
 print("BeautifulSoup 測試 4")
@@ -5063,4 +5098,3 @@ print("尋找標籤「<title>」")
 print(soup.find_all("title"))
 
 """
-

@@ -122,6 +122,7 @@ def make_data_frame_from_dict():
     df = pd.DataFrame(datas)
     return df
 
+
 '''
 print("------------------------------------------------------------")  # 60個
 print("1. 建立 df 的方法")
@@ -383,7 +384,6 @@ df5 = df.drop(df.columns[1:4], axis=1)
 print(df5)
 
 
-
 """
 #增加、刪除資料欄位
 # 創建?一個新欄位，資料為 col1 欄位的數值*2 
@@ -414,9 +414,7 @@ data.drop(columns=['Column_Name'], inplace=True)
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
-
 
 
 # 刪除 df 欄位
@@ -446,9 +444,6 @@ ufo.drop([0, 1], axis=0, inplace=True)
 # print("檢視前幾行\n", ufo.head())
 
 print("------------------------------------------------------------")  # 60個
-
-
-
 
 
 sys.exit()
@@ -8446,6 +8441,3 @@ print("交集合併")
 order_df = pd.merge(order_df, customer_df, left_on="數學", right_on="國文", how="inner")
 
 order_df = pd.merge(order_df, customer_df, left_on="數學", right_index=True, how="inner")
-
-
-

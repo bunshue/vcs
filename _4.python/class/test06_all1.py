@@ -5,12 +5,14 @@ import random
 
 print("------------------------------------------------------------")  # 60個
 
+
 # 此程式單純類別定義,沒有任何輸出到螢幕的執行結果
 class Company:  # 定義公司類別
     name = "賺大錢有限公司"
 
     def slogan(self):
         print("優良品質 創新研發 強力行銷")
+
 
 print("------------------------------------------------------------")  # 60個
 
@@ -30,6 +32,8 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("文件字串 docstring 的用法, 要用3引號包起來")
+
+
 class MyClass1:
     """文件字串用法, MyClass1類別的應用"""
 
@@ -39,6 +43,7 @@ class MyClass1:
     def showInfo(self):
         """文字字串用法, MyClass1類別內showInfo方法的應用"""
         print("資料內容 :", self.x)
+
 
 print("建立物件 myObj")
 myObj = MyClass1(123)
@@ -76,16 +81,17 @@ class MyClass2:
 
 print("建立物件 myObj")
 myObj = MyClass2()
-print('預設屬性')
+print("預設屬性")
 cc = myObj.color
 print(cc)
 
-print('方法')
+print("方法")
 cc = myObj.MyFunction()
 print(cc)
 
 
 print("------------------------------------------------------------")  # 60個
+
 
 class Name:
     def __init__(self, name):
@@ -144,7 +150,8 @@ book1.showInfo()
 
 print("------------------------------------------------------------")  # 60個
 
-#使用內建屬性
+# 使用內建屬性
+
 
 class Tom:  # 父類別
     def __init__(self):
@@ -202,6 +209,7 @@ class Circle(Geometric):
 
     def getColor(self):
         return color
+
 
 print("建立物件 A")
 A = Circle(5)
@@ -431,7 +439,9 @@ print(stu.sc)
 
 print("------------------------------------------------------------")  # 60個
 
-print('函數使用物件')
+print("函數使用物件")
+
+
 class Point:
     def __init__(self, x, y):
         self.x, self.y = x, y
@@ -448,11 +458,11 @@ point1 = Point(4.0, -3.2)
 print("建立物件 point2")
 point2 = Point(8.0, 1.2)
 
-print('函數, 傳入一個物件')
+print("函數, 傳入一個物件")
 cc = function_use_object(point1)
 print(cc)
 
-print('函數, 傳入一個物件')
+print("函數, 傳入一個物件")
 cc = function_use_object(point2)
 print(cc)
 
@@ -471,6 +481,7 @@ class Point:
         x = self.x + other.x
         y = self.y + other.y
         return Point(x, y)
+
 
 print("建立物件 point1")
 point1 = Point(1, 2)
@@ -508,6 +519,7 @@ print("dddd", badline, repr(line))
 
 
 print("------------------------------------------------------------")  # 60個
+
 
 # 父類別
 class Rectangle:
@@ -854,11 +866,13 @@ class Father:
     def walking(self):
         print("父類別之函數 AAAAA")
 
+
 # 子類衍生類別(繼承 父類基底類別)
 class Son(Father):
     # 同名的函數，若有，則使用子類別之函數
     def walking(self):
         print("子類別之函數 BBBBB")
+
 
 print("建立物件 frank")
 frank = Father()
@@ -934,6 +948,7 @@ print("grandfa屬於Father類別: ", isinstance(grandfa, Father))
 print("grandfa屬於Grandfather類別: ", isinstance(grandfa, Grandfather))
 
 print("------------------------------------------------------------")  # 60個
+
 
 # 祖父類基底類別
 class Grandfather:
@@ -1140,6 +1155,7 @@ display_test(p2)
 
 print("------------------------------------------------------------")  # 60個
 
+
 class Wage:
     def __init__(self, fee=200, hour=80):
         self.fee = fee
@@ -1156,6 +1172,7 @@ jane = Wage(250, 100)
 print("透過init()方法傳入參數的總薪資: ", jane.getArea(), "元")
 
 print("------------------------------------------------------------")  # 60個
+
 
 class Wage:
     def __init__(self, h=80):
@@ -1204,6 +1221,7 @@ student2 = Poor()  # 建立子類別物件
 print(student2.subsidy(250000), "元")
 
 print("------------------------------------------------------------")  # 60個
+
 
 # 多型實作
 class Colleague:  # 父類別
@@ -1271,7 +1289,6 @@ Christmas = Holiday()  # 子類別物件
 Christmas.display(18000)
 
 print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -1607,7 +1624,8 @@ c1.displayVehicle()  # 呼叫方法
 print("------------------------------------------------------------")  # 60個
 
 print("多重繼承")
-print('mro() : 決定多重繼承的順序')
+print("mro() : 決定多重繼承的順序")
+
 
 class X:
     pass
@@ -1632,11 +1650,13 @@ class B(Y, Z):
 class M(B, A, Z):
     pass
 
+
 print("多重繼承的順序 :", M.mro())
 
 print("------------------------------------------------------------")  # 60個
 
 print("兩棲動物")
+
 
 class Vehicle:
     def __init__(self):
@@ -2680,6 +2700,7 @@ print("Car4 type:", car4.carType())
 
 print("------------------------------------------------------------")  # 60個
 
+
 class Person:
     def interest(self):
         print("Smiling is my interest")
@@ -2725,7 +2746,6 @@ print(hung.name)
 print(lawer.name)
 
 print("------------------------------------------------------------")  # 60個
-
 
 
 # 動物類基底類別
@@ -2905,6 +2925,7 @@ class Counter:
         print("counter = ", cls.counter)  # 也可使用Counter.counter調用
         print("counter = ", Counter.counter)
 
+
 print("建立物件 one")
 one = Counter()
 
@@ -2933,7 +2954,6 @@ print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
 
-
 """
 
 
@@ -2941,4 +2961,3 @@ __xxx 屬性要前綴雙底線
 
 
 """
-

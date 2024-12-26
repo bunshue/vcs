@@ -4575,6 +4575,7 @@ Image(data=jpg_data.tobytes())
 
 # 視訊輸出
 
+
 def test_avi_output(fn, fourcc):
     # fourcc = cv2.FOURCC(*fourcc)
     fourcc = cv2.VideoWriter_fourcc(*"XVID")
@@ -4585,6 +4586,7 @@ def test_avi_output(fn, fourcc):
         img = make_image(x, y, a)
         vw.write(img)
     vw.release()
+
 
 test_avi_output("tmp_fmp4.avi", "fmp4")
 

@@ -745,7 +745,7 @@ ESC = 27
 print("------------------------------------------------------------")  # 60個
 
 W, H = 640, 480
-cx, cy = W//2, H//2
+cx, cy = W // 2, H // 2
 
 print("把 直方圖均衡化處理 套用在webcam上 黑白")
 print("把 直方圖均衡化處理 套用在webcam上 彩色")
@@ -775,12 +775,12 @@ while True:
     # 畫一些標記
     dd = 5
     topLeft = (cut - dd, cut - dd)
-    topLeft = (cx - W//2 + cut - dd, cy - H//2 + cut - dd)
-    
-    bottomRight = (W - cut + dd, H - cut + dd)
-    bottomRight = (cx + W//2 - cut + dd, cy+ H//2 - cut + dd)
+    topLeft = (cx - W // 2 + cut - dd, cy - H // 2 + cut - dd)
 
-    cv2.rectangle(frame, topLeft, bottomRight, 255, 2)  #藍色框
+    bottomRight = (W - cut + dd, H - cut + dd)
+    bottomRight = (cx + W // 2 - cut + dd, cy + H // 2 - cut + dd)
+
+    cv2.rectangle(frame, topLeft, bottomRight, 255, 2)  # 藍色框
 
     # 原圖
     cv2.imshow("Original", frame)

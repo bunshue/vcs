@@ -230,14 +230,14 @@ image_original = cv2.cvtColor(image_original, cv2.COLOR_BGR2RGB)
 plt.imshow(image_original)
 plt.xlim(0, 500)  # x軸顯示邊界
 plt.ylim(500, 0)  # y軸顯示邊界
-plt.title('原圖')
+plt.title("原圖")
 
 plt.subplot(122)
 image_resized = cv2.cvtColor(image_resized, cv2.COLOR_BGR2RGB)
 plt.imshow(image_resized)
 plt.xlim(0, 500)  # x軸顯示邊界
 plt.ylim(500, 0)  # y軸顯示邊界
-plt.title('倍率縮放')
+plt.title("倍率縮放")
 
 plt.show()
 
@@ -387,7 +387,6 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
 
 """
@@ -471,7 +470,6 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------------------------------------")  # 60個

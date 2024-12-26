@@ -419,19 +419,20 @@ if mode == 0:
 elif mode == 1:
     print("左鍵拖曳")
 
+
 def OnMouseAction(event, x, y, flags, param):
     global x1, y1
 
     if mode == 0 and event == cv2.EVENT_LBUTTONDOWN:
         print("左鍵畫點")
-        #cv2.line(image, (0, 0), (x, y), (255, 255, 0), 2)#畫直線連線
-        cv2.circle(image, (x, y), 10, (255), -1) # 畫點
+        # cv2.line(image, (0, 0), (x, y), (255, 255, 0), 2)#畫直線連線
+        cv2.circle(image, (x, y), 10, (255), -1)  # 畫點
 
     if mode == 1 and event == cv2.EVENT_LBUTTONDOWN:
-        #print("左鍵點擊")
+        # print("左鍵點擊")
         x1, y1 = x, y
     elif mode == 1 and event == cv2.EVENT_MOUSEMOVE and flags == cv2.EVENT_FLAG_LBUTTON:
-        #print("左鍵拖曳")
+        # print("左鍵拖曳")
         cv2.rectangle(image, (x1, y1), (x, y), (0, 255, 0), -1)
 
 
@@ -653,7 +654,7 @@ cv2.setMouseCallback("OpenCV", draw_circle)
 
 while True:
     cv2.imshow("OpenCV", image)
-    k = cv2.waitKey(1) & 0xFF # 每 1 毫秒偵測一次鍵盤事件
+    k = cv2.waitKey(1) & 0xFF  # 每 1 毫秒偵測一次鍵盤事件
     if k == ord("s"):
         print("存圖")
         # cv2.imwrite("tmp_1.jpg", image)

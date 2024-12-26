@@ -11,7 +11,7 @@ from bs4 import BeautifulSoup
 import urllib.request
 import json
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 '''
 #桃園公共自行車即時服務資料.json
 url = 'https://data.tycg.gov.tw/opendata/datalist/datasetMeta/download?id=5ca2bfc7-9ace-4719-88ae-4034b9a5a55c&rid=a1b4714b-3b75-4ff8-a8f2-cc377e4eaa0f'
@@ -311,42 +311,40 @@ url = "https://www.mobile01.com/topiclist.php?f=751"
 res = requests.get(url)
 print(res)
 '''
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 import requests
+
 url = "https://www.lexuscpo.com.tw/Home/CarStock"
 headers = {
     "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36"
 }
 form_data = {
-    "CarType":"", 
+    "CarType": "",
     "Series": "",
-    "Price": "", 
-    "Year": "", 
-    "Mileage":"", 
-    "StoreID":"", 
+    "Price": "",
+    "Year": "",
+    "Mileage": "",
+    "StoreID": "",
     "Page": "",
-    "Limit": "20"
+    "Limit": "20",
 }
 res = requests.post(url, data=form_data, headers=headers)
 data = res.text
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 import json
+
 cars = json.loads(data)
-cars = cars['rows']
+cars = cars["rows"]
 message = "{:<10}({}年式)，{:>10,}KM，售價：{:>10,}元"
 for car in cars:
-    print(message.format(
-        car['Model'], 
-        car['Year'],
-        car['Mileage'],
-        car['SellPrice']))
+    print(message.format(car["Model"], car["Year"], car["Mileage"], car["SellPrice"]))
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 import requests
 
@@ -357,7 +355,7 @@ res = requests.get(url)
 print(res)
 print(res.text)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
 import requests
@@ -369,21 +367,21 @@ headers = {
 }
 
 form_data = {
-    "CarType":"", 
+    "CarType": "",
     "Series": "IS",
-    "Price": "", 
-    "Year": "", 
-    "Mileage":"", 
-    "StoreID":"", 
+    "Price": "",
+    "Year": "",
+    "Mileage": "",
+    "StoreID": "",
     "Page": "",
-    "Limit": "20"
+    "Limit": "20",
 }
 
 data = requests.post(url, data=form_data, headers=headers).text
 print(data)
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
 import requests
@@ -398,11 +396,10 @@ res = requests.get(url, headers=headers)
 print(res)
 print(res.text)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
-
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
 import json
@@ -415,35 +412,28 @@ headers = {
 }
 
 form_data = {
-    "CarType":"", 
+    "CarType": "",
     "Series": "",
-    "Price": "", 
-    "Year": "", 
-    "Mileage":"", 
-    "StoreID":"", 
+    "Price": "",
+    "Year": "",
+    "Mileage": "",
+    "StoreID": "",
     "Page": "",
-    "Limit": "500"
+    "Limit": "500",
 }
 
 data = requests.post(url, data=form_data, headers=headers).text
 cars = json.loads(data)
-cars = cars['rows']
+cars = cars["rows"]
 message = "{:<10}({}年式)，{:>10,}KM，{:>10,}元"
 for car in cars:
-    print(message.format(
-        car['Model'], 
-        car['Year'],
-        car['Mileage'],
-        car['SellPrice']))
+    print(message.format(car["Model"], car["Year"], car["Mileage"], car["SellPrice"]))
 
 
-
-print('------------------------------------------------------------')	#60個
-
+print("------------------------------------------------------------")  # 60個
 
 
-
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 import json, time, os, requests
 import urllib.request
@@ -453,28 +443,29 @@ res = requests.get(api_url).text
 
 data = json.loads(res)
 for post in data:
-    if len(post["media"])>0:
+    if len(post["media"]) > 0:
         for image in post["media"]:
             imgurl = image["url"]
             print(imgurl)
             if ".jpg" in imgurl or ".png" in imgurl:
-                urllib.request.urlretrieve(imgurl, os.path.join("mypics", os.path.basename(imgurl)))
+                urllib.request.urlretrieve(
+                    imgurl, os.path.join("mypics", os.path.basename(imgurl))
+                )
             time.sleep(3)
-
 
 
 import requests
 
 url = "https://www.mobile01.com/topiclist.php?f=751"
 
-print('無參數抓網頁')
+print("無參數抓網頁")
 
 res = requests.get(url)
 
 print(res)
 
 
-print('有參數抓網頁')
+print("有參數抓網頁")
 
 headers = {
     "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36"
@@ -482,7 +473,7 @@ headers = {
 res = requests.get(url, headers=headers)
 print(res)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 import requests
 
@@ -503,33 +494,34 @@ if response.status_code == 200:
     data = response.json()
 
     # 驗證 API 回應狀態
-    if data['status'] == 200:
-        print('印出完整資訊')
+    if data["status"] == 200:
+        print("印出完整資訊")
         print(type(data))
         print(data)
-        
+
         # 取出第一筆地址資訊
-        address_info = data['results'][0]
+        address_info = data["results"][0]
 
         # 印出完整郵遞區域
-        print(f"{address_info['address1']} {address_info['address2']} {address_info['address3']}")
-        
+        print(
+            f"{address_info['address1']} {address_info['address2']} {address_info['address3']}"
+        )
+
     else:
-        print("API 回應錯誤，訊息：", data['message'])
+        print("API 回應錯誤，訊息：", data["message"])
 else:
     print("API 查詢失敗，狀態碼：", response.status_code)
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-print('作業完成')
-
+print("作業完成")

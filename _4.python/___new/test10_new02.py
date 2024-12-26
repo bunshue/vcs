@@ -12,154 +12,209 @@ import pandas as pd
 
 print("------------------------------------------------------------")  # 60個
 
-#chap8-01
-#Cars基礎類別
-class Cars():
-  #建構式
-  def __init__(self, factory, model, color, seat, displacement):
-    self.__factory=factory  #廠牌屬性(保護)
-    self.__model=model  #型號屬性(保護)
-    self.color=color  #顏色屬性(可改)
-    self.seat=seat  #座位屬性(可改)    
-    self.__displacement=displacement #排氣量或電功率屬性(保護)
-  #屬性(Attribute)
-  #函式唯讀
-  #傳回製造商出廠資料
-  def manufacture(self):
-    if self.__model.find("電能")>=0:  
-      return self.__factory+"-"+self.__model+"-"+str(self.__displacement)+"HP"
-    else:
-      return self.__factory+"-"+self.__model+"-"+str(self.__displacement)+"CC" 
-  #傳回排氣量或電功率(保護)
-  def displacement(self):
-    return self.__displacement 
-  #傳回燃料稅(因為汽油、柴油、電能車計算方式不同，交由各子類別自行定義函式)
-  def fueltax(self):
-    pass
-  #傳回牌照稅(因為主要的汽油、柴油都是以排氣量計算，只有電能車不同，另外覆寫即可)  
-  def licensetax(self):
-    if self.__displacement<=500:
-      return 1620
-    elif self.__displacement<=600:
-      return 2160
-    elif self.__displacement<=1200:
-      return 4320     
-    elif self.__displacement<=1800:
-      return 7120
-    elif self.__displacement<=2400:
-      return 11230    
-    elif self.__displacement<=3000:
-      return 15210 
-    elif self.__displacement<=3600:
-      return 28220   
-    elif self.__displacement<=4200:
-      return 28220    
-    elif self.__displacement<=4800:
-      return 46170
-    else:
-      return 46170 
-  #傳回全部稅金    
-  def totaltax(self):
-    return self.fueltax()+self.licensetax()  
-  #方法(Method)   
-  #輸出汽車屬性                                        
-  def info(self):
-    if self.__model.find("電能")>=0:    
-      print(self.__factory+"-"+self.__model+"-"+self.color+"色-"+str(self.seat)+"人座"+str(self.__displacement)+"HP")
-    else:   
-      print(self.__factory+"-"+self.__model+"-"+self.color+"色-"+str(self.seat)+"人座"+str(self.__displacement)+"CC")
-#汽油車衍生類別
+
+# chap8-01
+# Cars基礎類別
+class Cars:
+    # 建構式
+    def __init__(self, factory, model, color, seat, displacement):
+        self.__factory = factory  # 廠牌屬性(保護)
+        self.__model = model  # 型號屬性(保護)
+        self.color = color  # 顏色屬性(可改)
+        self.seat = seat  # 座位屬性(可改)
+        self.__displacement = displacement  # 排氣量或電功率屬性(保護)
+
+    # 屬性(Attribute)
+    # 函式唯讀
+    # 傳回製造商出廠資料
+    def manufacture(self):
+        if self.__model.find("電能") >= 0:
+            return (
+                self.__factory
+                + "-"
+                + self.__model
+                + "-"
+                + str(self.__displacement)
+                + "HP"
+            )
+        else:
+            return (
+                self.__factory
+                + "-"
+                + self.__model
+                + "-"
+                + str(self.__displacement)
+                + "CC"
+            )
+
+    # 傳回排氣量或電功率(保護)
+    def displacement(self):
+        return self.__displacement
+
+    # 傳回燃料稅(因為汽油、柴油、電能車計算方式不同，交由各子類別自行定義函式)
+    def fueltax(self):
+        pass
+
+    # 傳回牌照稅(因為主要的汽油、柴油都是以排氣量計算，只有電能車不同，另外覆寫即可)
+    def licensetax(self):
+        if self.__displacement <= 500:
+            return 1620
+        elif self.__displacement <= 600:
+            return 2160
+        elif self.__displacement <= 1200:
+            return 4320
+        elif self.__displacement <= 1800:
+            return 7120
+        elif self.__displacement <= 2400:
+            return 11230
+        elif self.__displacement <= 3000:
+            return 15210
+        elif self.__displacement <= 3600:
+            return 28220
+        elif self.__displacement <= 4200:
+            return 28220
+        elif self.__displacement <= 4800:
+            return 46170
+        else:
+            return 46170
+
+    # 傳回全部稅金
+    def totaltax(self):
+        return self.fueltax() + self.licensetax()
+
+    # 方法(Method)
+    # 輸出汽車屬性
+    def info(self):
+        if self.__model.find("電能") >= 0:
+            print(
+                self.__factory
+                + "-"
+                + self.__model
+                + "-"
+                + self.color
+                + "色-"
+                + str(self.seat)
+                + "人座"
+                + str(self.__displacement)
+                + "HP"
+            )
+        else:
+            print(
+                self.__factory
+                + "-"
+                + self.__model
+                + "-"
+                + self.color
+                + "色-"
+                + str(self.seat)
+                + "人座"
+                + str(self.__displacement)
+                + "CC"
+            )
+
+
+# 汽油車衍生類別
 class GasolineCars(Cars):
-  #建構式
-  def __init__(self, factory, model, color, seat, displacement):
-    super().__init__(factory, '汽油'+model, color, seat, displacement)
-  #屬性(Attribute)
-  #傳回燃料稅
-  def fueltax(self):
-    if self.displacement()<=500:
-      return 2160
-    elif self.displacement()<=600:
-      return 2880
-    elif self.displacement()<=1200:
-      return 4320     
-    elif self.displacement()<=1800:
-      return 4800
-    elif self.displacement()<=2400:
-      return 6180    
-    elif self.displacement()<=3000:
-      return 7200 
-    elif self.displacement()<=3600:
-      return 8640    
-    elif self.displacement()<=4200:
-      return 9810     
-    elif self.displacement()<=4800:
-      return 11220 
-    else:
-      return 12180  
-#柴油車衍生類別
+    # 建構式
+    def __init__(self, factory, model, color, seat, displacement):
+        super().__init__(factory, "汽油" + model, color, seat, displacement)
+
+    # 屬性(Attribute)
+    # 傳回燃料稅
+    def fueltax(self):
+        if self.displacement() <= 500:
+            return 2160
+        elif self.displacement() <= 600:
+            return 2880
+        elif self.displacement() <= 1200:
+            return 4320
+        elif self.displacement() <= 1800:
+            return 4800
+        elif self.displacement() <= 2400:
+            return 6180
+        elif self.displacement() <= 3000:
+            return 7200
+        elif self.displacement() <= 3600:
+            return 8640
+        elif self.displacement() <= 4200:
+            return 9810
+        elif self.displacement() <= 4800:
+            return 11220
+        else:
+            return 12180
+
+
+# 柴油車衍生類別
 class DieselCars(Cars):
-  #建構式
-  def __init__(self, factory, model, color, seat, displacement):
-    super().__init__(factory, '柴油'+model, color, seat, displacement)
-  #屬性(Attribute)
-  #傳回燃料稅
-  def fueltax(self):
-    if self.displacement()<=1800:
-      return 2880
-    elif self.displacement()<=2400:
-      return 3708   
-    elif self.displacement()<=3000:
-      return 4320
-    elif self.displacement()<=3600:
-      return 5184    
-    elif self.displacement()<=4200:
-      return 5886     
-    elif self.displacement()<=4800:
-      return 6732
-    else:
-      return 7308
-#電能車衍生類別
+    # 建構式
+    def __init__(self, factory, model, color, seat, displacement):
+        super().__init__(factory, "柴油" + model, color, seat, displacement)
+
+    # 屬性(Attribute)
+    # 傳回燃料稅
+    def fueltax(self):
+        if self.displacement() <= 1800:
+            return 2880
+        elif self.displacement() <= 2400:
+            return 3708
+        elif self.displacement() <= 3000:
+            return 4320
+        elif self.displacement() <= 3600:
+            return 5184
+        elif self.displacement() <= 4200:
+            return 5886
+        elif self.displacement() <= 4800:
+            return 6732
+        else:
+            return 7308
+
+
+# 電能車衍生類別
 class ElectricCars(Cars):
-  #建構式
-  def __init__(self, factory, model, color, seat, displacement):
-    super().__init__(factory, '電能'+model, color, seat, displacement)
-  #屬性(Attribute)
-  #傳回牌照稅
-  def licensetax(self):
-    return 0
-  #傳回燃料稅
-  def fueltax(self):
-    return 0
+    # 建構式
+    def __init__(self, factory, model, color, seat, displacement):
+        super().__init__(factory, "電能" + model, color, seat, displacement)
+
+    # 屬性(Attribute)
+    # 傳回牌照稅
+    def licensetax(self):
+        return 0
+
+    # 傳回燃料稅
+    def fueltax(self):
+        return 0
+
 
 def tax(obj):
-  print(obj.manufacture(),":",obj.totaltax())
+    print(obj.manufacture(), ":", obj.totaltax())
 
-#建構第1輛汽油車物件
+
+# 建構第1輛汽油車物件
 print("==Test1==")
-a = GasolineCars('CITROEN','BX16TGS','灰', 5, 1580)
+a = GasolineCars("CITROEN", "BX16TGS", "灰", 5, 1580)
 print(type(a))
 print(a.manufacture())
 a.info()
 print(a.fueltax())
 print(a.licensetax())
 print(a.totaltax())
-#可以修改屬性
-a.color="綠"
-a.seat=2
+# 可以修改屬性
+a.color = "綠"
+a.seat = 2
 print(a.manufacture())
 a.info()
-#建構第2輛柴油車物件
+# 建構第2輛柴油車物件
 print("==Test2==")
-b = DieselCars('福特六和','C346-9W','白', 5, 1997)
+b = DieselCars("福特六和", "C346-9W", "白", 5, 1997)
 print(type(b))
 print(b.manufacture())
 b.info()
 print(b.fueltax())
 print(b.licensetax())
 print(b.totaltax())
-#建構第3輛電能車物件
+# 建構第3輛電能車物件
 print("==Test3==")
-c = ElectricCars('Tesla','Model 3','紅', 5, 346)
+c = ElectricCars("Tesla", "Model 3", "紅", 5, 346)
 print(type(c))
 print(c.manufacture())
 c.info()
@@ -173,687 +228,855 @@ tax(c)
 
 print("------------------------------------------------------------")  # 60個
 
-#chap8-02
-#輪胎類別
-class Wheels():
-  #建構式
-  def __init__(self, width, diameter):
-    self.width=width  #寬度屬性
-    self.diameter=diameter  #直徑屬性
-  #自訂義Wheels物件的比較關係(判斷是否相等) 
-  #判斷兩個輪胎是否為相同類型根據輪胎寬度、直徑 
-  def __eq__(self, other):
-    return self.width==other.width and self.diameter==other.diameter
-  def eq(self, other):
-    return self.width==other.width and self.diameter==other.diameter
-  #屬性(Attribute)  
-  def dimension(self):
-    return ("寬"+str(self.width)+"mm"+" 直徑"+str(self.diameter)+"inch")
-  #方法(Method)   
-  #輸出輪胎屬性     
-  def info(self):
-    print("寬"+str(self.width)+"mm"+" 直徑"+str(self.diameter)+"inch")
 
-#機車基礎類別
-class Motorcycles():
-  #類別方法變數
-  counts=0
-  #建構式
-  def __init__(self, factory, model, color, displacement, wheel):
-    self.__factory=factory  #廠牌屬性
-    self.__model=model  #型號屬性
-    self.color=color  #顏色屬性
-    self.__displacement=displacement #排氣量或電功率屬性
-    self.wheel=wheel #輪胎屬性
-    #改變類別方法變數
-    Motorcycles.counts=Motorcycles.counts+1
-  #解構式   
-  def __del__(self):
-    #改變類別方法變數
-    Motorcycles.counts=Motorcycles.counts-1    
-  #自訂義Motorcycles物件的比較關係(判斷是否相等) 
-  #判斷兩台機車是否為相同類型根據廠商、型號、排氣量   
-  def __eq__(self, other):
-    return self.__factory==other.__factory and self.__model==other.__model and self.__displacement==other.__displacement
-  def eq(self, other):
-    return self.__factory==other.__factory and self.__model==other.__model and self.__displacement==other.__displacement 
-  #類別方法
-  @classmethod
-  #顯示類別方法變數
-  def motocycles_counts(cls):
-    return cls.counts    
-  #屬性(Attribute)
-  #函式唯讀
-  #傳回製造商出廠資料    
-  def manufacture(self):
-    if self.__model.startswith("汽油"):
-      return self.__factory+"-"+self.__model+"-"+str(self.__displacement)+"CC"
-    else:
-      return self.__factory+"-"+self.__model+"-"+str(self.__displacement)+"HP"
-  #傳回排氣量或電功率(保護)      
-  def displacement(self):
-    return self.__displacement  
-  #傳回燃料稅(以汽油機車為主，電能車不同，另外覆寫即可)
-  def fueltax(self):
-    if self.displacement()<=50:
-      return 300
-    elif self.displacement()<=125:
-      return 450
-    elif self.displacement()<=250:
-      return 600     
-    elif self.displacement()<=500:
-      return 900
-    elif self.displacement()<=600:
-      return 1200    
-    elif self.displacement()<=1200:
-      return 1800 
-    else:
-      return 2010  
-  #傳回牌照稅(因為汽油是以排氣量計算，只有電能車不同，另外覆寫即可)       
-  def licensetax(self):
-    if self.displacement()<=150:
-      return 0
-    elif self.displacement()<=250:
-      return 800
-    elif self.displacement()<=500:
-      return 1620     
-    elif self.displacement()<=600:
-      return 2160
-    elif self.displacement()<=1200:
-      return 4320    
-    elif self.displacement()<=1800:
-      return 7120 
-    else:
-      return 11230 
-  #傳回全部稅金         
-  def totaltax(self):
-    return self.fueltax()+self.licensetax()  
-  #方法(Method)   
-  #輸出機車屬性                                       
-  def info(self):
-    if self.__model.startswith("汽油"):
-      print(self.__factory+"-"+self.__model+"-"+self.color+"色-"+str(self.displacement())+"CC 輪胎"+self.wheel.dimension())    
-    else:
-      print(self.__factory+"-"+self.__model+"-"+self.color+"色-"+str(self.displacement())+"HP 輪胎"+self.wheel.dimension()) 
+# chap8-02
+# 輪胎類別
+class Wheels:
+    # 建構式
+    def __init__(self, width, diameter):
+        self.width = width  # 寬度屬性
+        self.diameter = diameter  # 直徑屬性
+
+    # 自訂義Wheels物件的比較關係(判斷是否相等)
+    # 判斷兩個輪胎是否為相同類型根據輪胎寬度、直徑
+    def __eq__(self, other):
+        return self.width == other.width and self.diameter == other.diameter
+
+    def eq(self, other):
+        return self.width == other.width and self.diameter == other.diameter
+
+    # 屬性(Attribute)
+    def dimension(self):
+        return "寬" + str(self.width) + "mm" + " 直徑" + str(self.diameter) + "inch"
+
+    # 方法(Method)
+    # 輸出輪胎屬性
+    def info(self):
+        print("寬" + str(self.width) + "mm" + " 直徑" + str(self.diameter) + "inch")
+
+
+# 機車基礎類別
+class Motorcycles:
+    # 類別方法變數
+    counts = 0
+
+    # 建構式
+    def __init__(self, factory, model, color, displacement, wheel):
+        self.__factory = factory  # 廠牌屬性
+        self.__model = model  # 型號屬性
+        self.color = color  # 顏色屬性
+        self.__displacement = displacement  # 排氣量或電功率屬性
+        self.wheel = wheel  # 輪胎屬性
+        # 改變類別方法變數
+        Motorcycles.counts = Motorcycles.counts + 1
+
+    # 解構式
+    def __del__(self):
+        # 改變類別方法變數
+        Motorcycles.counts = Motorcycles.counts - 1
+
+    # 自訂義Motorcycles物件的比較關係(判斷是否相等)
+    # 判斷兩台機車是否為相同類型根據廠商、型號、排氣量
+    def __eq__(self, other):
+        return (
+            self.__factory == other.__factory
+            and self.__model == other.__model
+            and self.__displacement == other.__displacement
+        )
+
+    def eq(self, other):
+        return (
+            self.__factory == other.__factory
+            and self.__model == other.__model
+            and self.__displacement == other.__displacement
+        )
+
+    # 類別方法
+    @classmethod
+    # 顯示類別方法變數
+    def motocycles_counts(cls):
+        return cls.counts
+
+    # 屬性(Attribute)
+    # 函式唯讀
+    # 傳回製造商出廠資料
+    def manufacture(self):
+        if self.__model.startswith("汽油"):
+            return (
+                self.__factory
+                + "-"
+                + self.__model
+                + "-"
+                + str(self.__displacement)
+                + "CC"
+            )
+        else:
+            return (
+                self.__factory
+                + "-"
+                + self.__model
+                + "-"
+                + str(self.__displacement)
+                + "HP"
+            )
+
+    # 傳回排氣量或電功率(保護)
+    def displacement(self):
+        return self.__displacement
+
+    # 傳回燃料稅(以汽油機車為主，電能車不同，另外覆寫即可)
+    def fueltax(self):
+        if self.displacement() <= 50:
+            return 300
+        elif self.displacement() <= 125:
+            return 450
+        elif self.displacement() <= 250:
+            return 600
+        elif self.displacement() <= 500:
+            return 900
+        elif self.displacement() <= 600:
+            return 1200
+        elif self.displacement() <= 1200:
+            return 1800
+        else:
+            return 2010
+
+    # 傳回牌照稅(因為汽油是以排氣量計算，只有電能車不同，另外覆寫即可)
+    def licensetax(self):
+        if self.displacement() <= 150:
+            return 0
+        elif self.displacement() <= 250:
+            return 800
+        elif self.displacement() <= 500:
+            return 1620
+        elif self.displacement() <= 600:
+            return 2160
+        elif self.displacement() <= 1200:
+            return 4320
+        elif self.displacement() <= 1800:
+            return 7120
+        else:
+            return 11230
+
+    # 傳回全部稅金
+    def totaltax(self):
+        return self.fueltax() + self.licensetax()
+
+    # 方法(Method)
+    # 輸出機車屬性
+    def info(self):
+        if self.__model.startswith("汽油"):
+            print(
+                self.__factory
+                + "-"
+                + self.__model
+                + "-"
+                + self.color
+                + "色-"
+                + str(self.displacement())
+                + "CC 輪胎"
+                + self.wheel.dimension()
+            )
+        else:
+            print(
+                self.__factory
+                + "-"
+                + self.__model
+                + "-"
+                + self.color
+                + "色-"
+                + str(self.displacement())
+                + "HP 輪胎"
+                + self.wheel.dimension()
+            )
+
 
 class GasolineMotorcycles(Motorcycles):
-  #建構式
-  def __init__(self, factory, model, color, displacement, wheel):
-    super().__init__(factory, '汽油'+model, color, displacement, wheel)
+    # 建構式
+    def __init__(self, factory, model, color, displacement, wheel):
+        super().__init__(factory, "汽油" + model, color, displacement, wheel)
+
 
 class ElectricMotorcycles(Motorcycles):
-  #建構式
-  def __init__(self, factory, model, color, displacement, wheel):
-    super().__init__(factory, '電能'+model, color, displacement, wheel)
-  #傳回燃料稅(0元)
-  def fueltax(self):
-    return 0
-  #傳回牌照稅(0元)
-  def licensetax(self):
-    return 0  
+    # 建構式
+    def __init__(self, factory, model, color, displacement, wheel):
+        super().__init__(factory, "電能" + model, color, displacement, wheel)
 
-#建立第1台機車
+    # 傳回燃料稅(0元)
+    def fueltax(self):
+        return 0
+
+    # 傳回牌照稅(0元)
+    def licensetax(self):
+        return 0
+
+
+# 建立第1台機車
 print("==Test1==")
-d = GasolineMotorcycles('光陽','SJ25JF','白黑銀',124,Wheels(100,10))
-#print(type(d))
+d = GasolineMotorcycles("光陽", "SJ25JF", "白黑銀", 124, Wheels(100, 10))
+# print(type(d))
 print(d.manufacture())
 d.info()
 print(d.fueltax())
 print(d.licensetax())
 print(d.totaltax())
-#建立第2台機車
+# 建立第2台機車
 print("==Test2==")
-e = GasolineMotorcycles('功學社','CT-50','白紅',49,Wheels(100,10))
-#print(type(e))
+e = GasolineMotorcycles("功學社", "CT-50", "白紅", 49, Wheels(100, 10))
+# print(type(e))
 print(e.manufacture())
 e.info()
 print(e.fueltax())
 print(e.licensetax())
 print(e.totaltax())
-#建立第3台機車
+# 建立第3台機車
 print("==Test3==")
-f = ElectricMotorcycles('睿能','GHS6B2','白',8.58,Wheels(100,10))
-#print(type(f))
+f = ElectricMotorcycles("睿能", "GHS6B2", "白", 8.58, Wheels(100, 10))
+# print(type(f))
 print(f.manufacture())
 f.info()
 print(f.fueltax())
 print(f.licensetax())
 print(f.totaltax())
-#建立第4台機車
+# 建立第4台機車
 print("==Test4==")
-g = GasolineMotorcycles('光陽','SK60AF','深藍',298,Wheels(100,10))
-#print(type(g))
+g = GasolineMotorcycles("光陽", "SK60AF", "深藍", 298, Wheels(100, 10))
+# print(type(g))
 print(g.manufacture())
 g.info()
 print(g.fueltax())
 print(g.licensetax())
 print(g.totaltax())
-#建立第5台機車
+# 建立第5台機車
 print("==Test5==")
-h = ElectricMotorcycles('睿能','GHS6B2','紅',8.58,Wheels(100,10))
-#print(type(h))
+h = ElectricMotorcycles("睿能", "GHS6B2", "紅", 8.58, Wheels(100, 10))
+# print(type(h))
 print(h.manufacture())
 h.info()
 print(h.fueltax())
 print(h.licensetax())
 print(h.totaltax())
-#判斷f與h這兩台機車是否為相同類型
+# 判斷f與h這兩台機車是否為相同類型
 print("==Test6==")
 f.info()
 h.info()
-print(f==h)
-#判斷d與e這兩台機車的輪台是否為相同類型
+print(f == h)
+# 判斷d與e這兩台機車的輪台是否為相同類型
 d.wheel.info()
 e.wheel.info()
 print(d.wheel.eq(e.wheel))
-print(d.wheel==e.wheel)
+print(d.wheel == e.wheel)
 print("==Test7==")
-#查看總共新增了幾台機車
+# 查看總共新增了幾台機車
 print(Motorcycles.counts)
-#刪除d車
+# 刪除d車
 del d
 print(Motorcycles.counts)
-#刪除e車
+# 刪除e車
 del e
 print(Motorcycles.counts)
-#刪除f車
+# 刪除f車
 del f
 print(Motorcycles.counts)
-#刪除g車
+# 刪除g車
 del g
 print(Motorcycles.counts)
-#刪除h車
+# 刪除h車
 del h
 print(Motorcycles.counts)
 
 print("------------------------------------------------------------")  # 60個
 
-#chap8-03
-#輪胎類別
-class Wheels():
-  #建構式
-  def __init__(self, width, diameter):
-    self.width=width  #寬度屬性
-    self.diameter=diameter  #直徑屬性
-  #自訂義Wheels物件的比較關係(判斷是否相等) 
-  #判斷兩個輪胎是否為相同類型根據輪胎寬度、直徑 
-  def __eq__(self, other):
-    return self.width==other.width and self.diameter==other.diameter
-  def eq(self, other):
-    return self.width==other.width and self.diameter==other.diameter
-  #屬性(Attribute)  
-  def dimension(self):
-    return ("寬"+str(self.width)+"mm"+" 直徑"+str(self.diameter)+"inch")
-  #方法(Method)   
-  #輸出輪胎屬性     
-  def info(self):
-    print("寬"+str(self.width)+"mm"+" 直徑"+str(self.diameter)+"inch")
 
-#車輛基礎類別
-class Vehicles():
-  #建構式
-  def __init__(self, factory, model, color, displacement):
-    self.__factory=factory  #廠牌屬性
-    self.__model=model  #型號屬性
-    self.color=color  #顏色屬性
-    self.__displacement=displacement #排氣量或電功率屬性
-  #自訂義車輛物件的比較關係(判斷是否相等) 
-  #判斷兩車輛是否為相同類型根據廠商、型號、排氣量   
-  def __eq__(self, other):
-    return self.__factory==other.__factory and self.__model==other.__model and self.__displacement==other.__displacement
-  def eq(self, other):
-    return self.__factory==other.__factory and self.__model==other.__model and self.__displacement==other.__displacement  
-  #屬性(Attribute)
-  #函式唯讀
-  #傳回製造商出廠資料    
-  def manufacture(self):
-    if self.__model.startswith("汽油"):
-      return self.__factory+"-"+self.__model+"-"+str(self.__displacement)+"CC"
-    else:
-      return self.__factory+"-"+self.__model+"-"+str(self.__displacement)+"HP"
-  #傳回排氣量或電功率(保護)      
-  def displacement(self):
-    return self.__displacement  
-  #傳回燃料稅(另外覆寫即可)
-  def fueltax(self):
-    pass
-      
-  #傳回牌照稅(因為汽油是以排氣量計算，只有電能車不同，另外覆寫即可)       
-  def licensetax(self):
-    if self.displacement()<=125:
-      return 0
-    elif self.displacement()<=250:
-      return 800
-    elif self.displacement()<=500:
-      return 1620     
-    elif self.__displacement<=600:
-      return 2160
-    elif self.__displacement<=1200:
-      return 4320     
-    elif self.__displacement<=1800:
-      return 7120
-    elif self.__displacement<=2400:
-      return 11230    
-    elif self.__displacement<=3000:
-      return 15210 
-    elif self.__displacement<=3600:
-      return 28220   
-    elif self.__displacement<=4200:
-      return 28220    
-    elif self.__displacement<=4800:
-      return 46170
-    else:
-      return 46170       
-  #傳回全部稅金         
-  def totaltax(self):
-    return self.fueltax()+self.licensetax()  
-  #方法(Method)   
-  #輸出車輛屬性                                       
-  def info(self):
-    if self.__model.startswith("電能"):
-      if self.__model.find("機車")>=0:
-        print(self.__factory+"-"+self.__model+"-"+self.color+"色-"+str(self.displacement())+"HP 輪胎"+self.wheel.dimension())          
-      else:  
-        print(self.__factory+"-"+self.__model+"-"+self.color+"色-"+str(self.seat)+"人座"+str(self.__displacement)+"HP")
-    else:
-      if self.__model.find("機車")>=0:
-        print(self.__factory+"-"+self.__model+"-"+self.color+"色-"+str(self.displacement())+"CC 輪胎"+self.wheel.dimension()) 
-      else:   
-        print(self.__factory+"-"+self.__model+"-"+self.color+"色-"+str(self.seat)+"人座"+str(self.__displacement)+"CC")
+# chap8-03
+# 輪胎類別
+class Wheels:
+    # 建構式
+    def __init__(self, width, diameter):
+        self.width = width  # 寬度屬性
+        self.diameter = diameter  # 直徑屬性
 
-#機車基礎類別
+    # 自訂義Wheels物件的比較關係(判斷是否相等)
+    # 判斷兩個輪胎是否為相同類型根據輪胎寬度、直徑
+    def __eq__(self, other):
+        return self.width == other.width and self.diameter == other.diameter
+
+    def eq(self, other):
+        return self.width == other.width and self.diameter == other.diameter
+
+    # 屬性(Attribute)
+    def dimension(self):
+        return "寬" + str(self.width) + "mm" + " 直徑" + str(self.diameter) + "inch"
+
+    # 方法(Method)
+    # 輸出輪胎屬性
+    def info(self):
+        print("寬" + str(self.width) + "mm" + " 直徑" + str(self.diameter) + "inch")
+
+
+# 車輛基礎類別
+class Vehicles:
+    # 建構式
+    def __init__(self, factory, model, color, displacement):
+        self.__factory = factory  # 廠牌屬性
+        self.__model = model  # 型號屬性
+        self.color = color  # 顏色屬性
+        self.__displacement = displacement  # 排氣量或電功率屬性
+
+    # 自訂義車輛物件的比較關係(判斷是否相等)
+    # 判斷兩車輛是否為相同類型根據廠商、型號、排氣量
+    def __eq__(self, other):
+        return (
+            self.__factory == other.__factory
+            and self.__model == other.__model
+            and self.__displacement == other.__displacement
+        )
+
+    def eq(self, other):
+        return (
+            self.__factory == other.__factory
+            and self.__model == other.__model
+            and self.__displacement == other.__displacement
+        )
+
+    # 屬性(Attribute)
+    # 函式唯讀
+    # 傳回製造商出廠資料
+    def manufacture(self):
+        if self.__model.startswith("汽油"):
+            return (
+                self.__factory
+                + "-"
+                + self.__model
+                + "-"
+                + str(self.__displacement)
+                + "CC"
+            )
+        else:
+            return (
+                self.__factory
+                + "-"
+                + self.__model
+                + "-"
+                + str(self.__displacement)
+                + "HP"
+            )
+
+    # 傳回排氣量或電功率(保護)
+    def displacement(self):
+        return self.__displacement
+
+    # 傳回燃料稅(另外覆寫即可)
+    def fueltax(self):
+        pass
+
+    # 傳回牌照稅(因為汽油是以排氣量計算，只有電能車不同，另外覆寫即可)
+    def licensetax(self):
+        if self.displacement() <= 125:
+            return 0
+        elif self.displacement() <= 250:
+            return 800
+        elif self.displacement() <= 500:
+            return 1620
+        elif self.__displacement <= 600:
+            return 2160
+        elif self.__displacement <= 1200:
+            return 4320
+        elif self.__displacement <= 1800:
+            return 7120
+        elif self.__displacement <= 2400:
+            return 11230
+        elif self.__displacement <= 3000:
+            return 15210
+        elif self.__displacement <= 3600:
+            return 28220
+        elif self.__displacement <= 4200:
+            return 28220
+        elif self.__displacement <= 4800:
+            return 46170
+        else:
+            return 46170
+
+    # 傳回全部稅金
+    def totaltax(self):
+        return self.fueltax() + self.licensetax()
+
+    # 方法(Method)
+    # 輸出車輛屬性
+    def info(self):
+        if self.__model.startswith("電能"):
+            if self.__model.find("機車") >= 0:
+                print(
+                    self.__factory
+                    + "-"
+                    + self.__model
+                    + "-"
+                    + self.color
+                    + "色-"
+                    + str(self.displacement())
+                    + "HP 輪胎"
+                    + self.wheel.dimension()
+                )
+            else:
+                print(
+                    self.__factory
+                    + "-"
+                    + self.__model
+                    + "-"
+                    + self.color
+                    + "色-"
+                    + str(self.seat)
+                    + "人座"
+                    + str(self.__displacement)
+                    + "HP"
+                )
+        else:
+            if self.__model.find("機車") >= 0:
+                print(
+                    self.__factory
+                    + "-"
+                    + self.__model
+                    + "-"
+                    + self.color
+                    + "色-"
+                    + str(self.displacement())
+                    + "CC 輪胎"
+                    + self.wheel.dimension()
+                )
+            else:
+                print(
+                    self.__factory
+                    + "-"
+                    + self.__model
+                    + "-"
+                    + self.color
+                    + "色-"
+                    + str(self.seat)
+                    + "人座"
+                    + str(self.__displacement)
+                    + "CC"
+                )
+
+
+# 機車基礎類別
 class Motorcycles(Vehicles):
-  #類別方法變數
-  counts=0
-  #建構式
-  def __init__(self, factory, model, color, displacement, wheel):
-    super().__init__(factory, model, color, displacement)
-    self.wheel=wheel #輪胎屬性
-    #改變類別方法變數
-    Motorcycles.counts=Motorcycles.counts+1
-  #解構式      
-  def __del__(self):
-    #改變類別方法變數
-    Motorcycles.counts=Motorcycles.counts-1
-  #類別方法
-  @classmethod
-  #顯示類別方法變數
-  def motocycles_counts(cls):
-    return cls.counts    
-  #屬性(Attribute)  
-  #方法(Method)     
-  def fueltax(self):
-    if self.displacement()<=50:
-      return 300
-    elif self.displacement()<=125:
-      return 450
-    elif self.displacement()<=250:
-      return 600     
-    elif self.displacement()<=500:
-      return 900
-    elif self.displacement()<=600:
-      return 1200    
-    elif self.displacement()<=1200:
-      return 1800 
-    else:
-      return 2010   
+    # 類別方法變數
+    counts = 0
+
+    # 建構式
+    def __init__(self, factory, model, color, displacement, wheel):
+        super().__init__(factory, model, color, displacement)
+        self.wheel = wheel  # 輪胎屬性
+        # 改變類別方法變數
+        Motorcycles.counts = Motorcycles.counts + 1
+
+    # 解構式
+    def __del__(self):
+        # 改變類別方法變數
+        Motorcycles.counts = Motorcycles.counts - 1
+
+    # 類別方法
+    @classmethod
+    # 顯示類別方法變數
+    def motocycles_counts(cls):
+        return cls.counts
+
+    # 屬性(Attribute)
+    # 方法(Method)
+    def fueltax(self):
+        if self.displacement() <= 50:
+            return 300
+        elif self.displacement() <= 125:
+            return 450
+        elif self.displacement() <= 250:
+            return 600
+        elif self.displacement() <= 500:
+            return 900
+        elif self.displacement() <= 600:
+            return 1200
+        elif self.displacement() <= 1200:
+            return 1800
+        else:
+            return 2010
+
 
 class GasolineMotorcycles(Motorcycles):
-  #建構式
-  def __init__(self, factory, model, color, displacement, wheel):
-    super().__init__(factory, '汽油機車'+model, color, displacement, wheel)
+    # 建構式
+    def __init__(self, factory, model, color, displacement, wheel):
+        super().__init__(factory, "汽油機車" + model, color, displacement, wheel)
+
 
 class ElectricMotorcycles(Motorcycles):
-  #建構式
-  def __init__(self, factory, model, color, displacement, wheel):
-    super().__init__(factory, '電能機車'+model, color, displacement, wheel)
-  #傳回燃料稅(0元)
-  def fueltax(self):
-    return 0
-  #傳回牌照稅(0元)
-  def licensetax(self):
-    return 0  
+    # 建構式
+    def __init__(self, factory, model, color, displacement, wheel):
+        super().__init__(factory, "電能機車" + model, color, displacement, wheel)
 
-#Cars基礎類別
+    # 傳回燃料稅(0元)
+    def fueltax(self):
+        return 0
+
+    # 傳回牌照稅(0元)
+    def licensetax(self):
+        return 0
+
+
+# Cars基礎類別
 class Cars(Vehicles):
-  #類別方法變數
-  counts=0
-  #建構式
-  def __init__(self, factory, model, color, seat, displacement):
-    super().__init__(factory, model, color, displacement)    
-    self.seat=seat  #座位屬性(可改) 
-    #改變類別方法變數
-    Cars.counts=Cars.counts+1
-  #解構式     
-  def __del__(self):
-    #改變類別方法變數
-    Cars.counts=Cars.counts-1
-  #類別方法
-  @classmethod
-  #顯示類別方法變數
-  def cars_counts(cls):
-    return cls.counts    
-  #屬性(Attribute)  
-  #方法(Method)           
+    # 類別方法變數
+    counts = 0
 
-#汽油車衍生類別
+    # 建構式
+    def __init__(self, factory, model, color, seat, displacement):
+        super().__init__(factory, model, color, displacement)
+        self.seat = seat  # 座位屬性(可改)
+        # 改變類別方法變數
+        Cars.counts = Cars.counts + 1
+
+    # 解構式
+    def __del__(self):
+        # 改變類別方法變數
+        Cars.counts = Cars.counts - 1
+
+    # 類別方法
+    @classmethod
+    # 顯示類別方法變數
+    def cars_counts(cls):
+        return cls.counts
+
+    # 屬性(Attribute)
+    # 方法(Method)
+
+
+# 汽油車衍生類別
 class GasolineCars(Cars):
-  #建構式
-  def __init__(self, factory, model, color, seat, displacement):
-    super().__init__(factory, '汽油汽車'+model, color, seat, displacement)
-  #屬性(Attribute)
-  #傳回燃料稅
-  def fueltax(self):
-    if self.displacement()<=500:
-      return 2160
-    elif self.displacement()<=600:
-      return 2880
-    elif self.displacement()<=1200:
-      return 4320     
-    elif self.displacement()<=1800:
-      return 4800
-    elif self.displacement()<=2400:
-      return 6180    
-    elif self.displacement()<=3000:
-      return 7200 
-    elif self.displacement()<=3600:
-      return 8640    
-    elif self.displacement()<=4200:
-      return 9810     
-    elif self.displacement()<=4800:
-      return 11220 
-    else:
-      return 12180  
-#柴油車衍生類別
+    # 建構式
+    def __init__(self, factory, model, color, seat, displacement):
+        super().__init__(factory, "汽油汽車" + model, color, seat, displacement)
+
+    # 屬性(Attribute)
+    # 傳回燃料稅
+    def fueltax(self):
+        if self.displacement() <= 500:
+            return 2160
+        elif self.displacement() <= 600:
+            return 2880
+        elif self.displacement() <= 1200:
+            return 4320
+        elif self.displacement() <= 1800:
+            return 4800
+        elif self.displacement() <= 2400:
+            return 6180
+        elif self.displacement() <= 3000:
+            return 7200
+        elif self.displacement() <= 3600:
+            return 8640
+        elif self.displacement() <= 4200:
+            return 9810
+        elif self.displacement() <= 4800:
+            return 11220
+        else:
+            return 12180
+
+
+# 柴油車衍生類別
 class DieselCars(Cars):
-  #建構式
-  def __init__(self, factory, model, color, seat, displacement):
-    super().__init__(factory, '柴油汽車'+model, color, seat, displacement)
-  #屬性(Attribute)
-  #傳回燃料稅
-  def fueltax(self):
-    if self.displacement()<=1800:
-      return 2880
-    elif self.displacement()<=2400:
-      return 3708   
-    elif self.displacement()<=3000:
-      return 4320
-    elif self.displacement()<=3600:
-      return 5184    
-    elif self.displacement()<=4200:
-      return 5886     
-    elif self.displacement()<=4800:
-      return 6732
-    else:
-      return 7308
-#電能車衍生類別
+    # 建構式
+    def __init__(self, factory, model, color, seat, displacement):
+        super().__init__(factory, "柴油汽車" + model, color, seat, displacement)
+
+    # 屬性(Attribute)
+    # 傳回燃料稅
+    def fueltax(self):
+        if self.displacement() <= 1800:
+            return 2880
+        elif self.displacement() <= 2400:
+            return 3708
+        elif self.displacement() <= 3000:
+            return 4320
+        elif self.displacement() <= 3600:
+            return 5184
+        elif self.displacement() <= 4200:
+            return 5886
+        elif self.displacement() <= 4800:
+            return 6732
+        else:
+            return 7308
+
+
+# 電能車衍生類別
 class ElectricCars(Cars):
-  #建構式
-  def __init__(self, factory, model, color, seat, displacement):
-    super().__init__(factory, '電能汽車'+model, color, seat, displacement)
-  #屬性(Attribute)
-  #傳回牌照稅(0元)
-  def licensetax(self):
-    return 0
-  #傳回燃料稅(0元)
-  def fueltax(self):
-    return 0
+    # 建構式
+    def __init__(self, factory, model, color, seat, displacement):
+        super().__init__(factory, "電能汽車" + model, color, seat, displacement)
+
+    # 屬性(Attribute)
+    # 傳回牌照稅(0元)
+    def licensetax(self):
+        return 0
+
+    # 傳回燃料稅(0元)
+    def fueltax(self):
+        return 0
+
 
 def tax(obj):
-  print(obj.manufacture(),":",obj.totaltax())
+    print(obj.manufacture(), ":", obj.totaltax())
 
-#建構第1輛汽油車物件
+
+# 建構第1輛汽油車物件
 print("==Test1==")
-a = GasolineCars('CITROEN','BX16TGS','灰', 5, 1580)
-#print(type(a))
+a = GasolineCars("CITROEN", "BX16TGS", "灰", 5, 1580)
+# print(type(a))
 print(a.manufacture())
 a.info()
 print(a.fueltax())
 print(a.licensetax())
 print(a.totaltax())
-#可以修改屬性
-a.color="綠"
-a.seat=2
+# 可以修改屬性
+a.color = "綠"
+a.seat = 2
 print(a.manufacture())
 a.info()
-#建構第2輛柴油車物件
+# 建構第2輛柴油車物件
 print("==Test2==")
-b = DieselCars('福特六和','C346-9W','白', 5, 1997)
-#print(type(b))
+b = DieselCars("福特六和", "C346-9W", "白", 5, 1997)
+# print(type(b))
 print(b.manufacture())
 b.info()
 print(b.fueltax())
 print(b.licensetax())
 print(b.totaltax())
-#建構第3輛電能車物件
+# 建構第3輛電能車物件
 print("==Test3==")
-c = ElectricCars('Tesla','Model 3','紅', 5, 346)
-#print(type(c))
+c = ElectricCars("Tesla", "Model 3", "紅", 5, 346)
+# print(type(c))
 print(c.manufacture())
 c.info()
 print(c.fueltax())
 print(c.licensetax())
 print(c.totaltax())
 print("==Test4==")
-#判斷a與b這兩輛汽車是否為相同類型
+# 判斷a與b這兩輛汽車是否為相同類型
 a.info()
 b.info()
-print(a==b)
+print(a == b)
 
-#建立第1台機車
+# 建立第1台機車
 print("==Test5==")
-d = GasolineMotorcycles('光陽','SJ25JF','白黑銀',124,Wheels(100,10))
-#print(type(d))
+d = GasolineMotorcycles("光陽", "SJ25JF", "白黑銀", 124, Wheels(100, 10))
+# print(type(d))
 print(d.manufacture())
 d.info()
 print(d.fueltax())
 print(d.licensetax())
 print(d.totaltax())
-#建立第2台機車
+# 建立第2台機車
 print("==Test6==")
-e = GasolineMotorcycles('功學社','CT-50','白紅',49,Wheels(100,10))
-#print(type(e))
+e = GasolineMotorcycles("功學社", "CT-50", "白紅", 49, Wheels(100, 10))
+# print(type(e))
 print(e.manufacture())
 e.info()
 print(e.fueltax())
 print(e.licensetax())
 print(e.totaltax())
-#建立第3台機車
+# 建立第3台機車
 print("==Test7==")
-f = ElectricMotorcycles('睿能','GHS6B2','白',8.58,Wheels(100,10))
-#print(type(f))
+f = ElectricMotorcycles("睿能", "GHS6B2", "白", 8.58, Wheels(100, 10))
+# print(type(f))
 print(f.manufacture())
 f.info()
 print(f.fueltax())
 print(f.licensetax())
 print(f.totaltax())
-#建立第4台機車
+# 建立第4台機車
 print("==Test8==")
-g = GasolineMotorcycles('光陽','SK60AF','深藍',298,Wheels(100,10))
-#print(type(g))
+g = GasolineMotorcycles("光陽", "SK60AF", "深藍", 298, Wheels(100, 10))
+# print(type(g))
 print(g.manufacture())
 g.info()
 print(g.fueltax())
 print(g.licensetax())
 print(g.totaltax())
-#建立第5台機車
+# 建立第5台機車
 print("==Test9==")
-h = ElectricMotorcycles('睿能','GHS6B2','紅',8.58,Wheels(100,10))
-#print(type(h))
+h = ElectricMotorcycles("睿能", "GHS6B2", "紅", 8.58, Wheels(100, 10))
+# print(type(h))
 print(h.manufacture())
 h.info()
 print(h.fueltax())
 print(h.licensetax())
 print(h.totaltax())
 print("==Test10==")
-#判斷f與h這兩台機車是否為相同類型
+# 判斷f與h這兩台機車是否為相同類型
 f.info()
 h.info()
-print(f==h)
+print(f == h)
 print("==Test11==")
-#判斷d與e這兩台機車的輪台是否為相同類型
+# 判斷d與e這兩台機車的輪台是否為相同類型
 d.wheel.info()
 e.wheel.info()
 print(d.wheel.eq(e.wheel))
-print(d.wheel==e.wheel)
+print(d.wheel == e.wheel)
 print("==Test12==")
 tax(a)
 tax(b)
-tax(c) 
+tax(c)
 tax(d)
 tax(e)
 tax(f)
 tax(g)
 tax(h)
 print("==Test13==")
-#查看總共新增了幾輛汽車
+# 查看總共新增了幾輛汽車
 print(Cars.counts)
-#刪除a車
+# 刪除a車
 del a
 print(Cars.counts)
-#刪除b車
+# 刪除b車
 del b
 print(Cars.counts)
-#刪除c車
+# 刪除c車
 del c
 print(Cars.counts)
 print("==Test14==")
-#查看總共新增了幾台機車
+# 查看總共新增了幾台機車
 print(Motorcycles.counts)
-#刪除d車
+# 刪除d車
 del d
 print(Motorcycles.counts)
-#刪除e車
+# 刪除e車
 del e
 print(Motorcycles.counts)
-#刪除f車
+# 刪除f車
 del f
 print(Motorcycles.counts)
-#刪除g車
+# 刪除g車
 del g
 print(Motorcycles.counts)
-#刪除h車
+# 刪除h車
 del h
 print(Motorcycles.counts)
 
 print("------------------------------------------------------------")  # 60個
 
-#chap9-01b
+# chap9-01b
 import requests
 import json
 
-url = 'https://od.cdc.gov.tw/eic/Day_Confirmation_Age_County_Gender_19CoV.json'
-res = requests.get(url, verify = False)
+url = "https://od.cdc.gov.tw/eic/Day_Confirmation_Age_County_Gender_19CoV.json"
+res = requests.get(url, verify=False)
 
 print(res)
-#有兩種方法，下面兩行任選一種都可以
-#data = json.loads(res.text) #方法1
-data=res.json() #方法2
+# 有兩種方法，下面兩行任選一種都可以
+# data = json.loads(res.text) #方法1
+data = res.json()  # 方法2
 print(data)
 
 sys.exit()
 
-#因為有欄位名稱
-#只要 df = pd.DataFrame(data) 即可
+# 因為有欄位名稱
+# 只要 df = pd.DataFrame(data) 即可
 df = pd.DataFrame(data)
-#轉換'確定病例數'欄位內容為整數(以利後面加總)
-df['確定病例數'] = df['確定病例數'].astype(int)
+# 轉換'確定病例數'欄位內容為整數(以利後面加總)
+df["確定病例數"] = df["確定病例數"].astype(int)
 
-startdate='2021/07/20'
-#startdate=input("請輸日期(yyyy/mm/dd)")
-#只保留個案研判日、是否為境外移入、確定病例數 三個欄位
-df.drop(['確定病名','縣市','鄉鎮','性別','年齡層'],inplace=True,axis=1)
-#設定過濾條件(累積)
-indexNames=df[df['個案研判日']>startdate].index
-#刪除所有大於指定日期的個案
-df.drop(indexNames,inplace=True)
-#計算累積確診人數
-total=df.sum()['確定病例數']
-print("累積確診人數:",total)
-#設定過濾條件(今日)
-indexNames=df[df['個案研判日']!=startdate].index
-#刪除所有不是指定日期的個案
-df.drop(indexNames,inplace=True)
-#計算境外移入人數
-imported=df[df['是否為境外移入']=='是'].sum()['確定病例數']
-print("今日境外移入人數:",imported)
-#計算本土人數
-domestic=df[df['是否為境外移入']=='否'].sum()['確定病例數']
-print("今日本土人數:",domestic)
-total=imported+domestic
-print("今日總人數:",total)
-#若要查看有哪些欄位
+startdate = "2021/07/20"
+# startdate=input("請輸日期(yyyy/mm/dd)")
+# 只保留個案研判日、是否為境外移入、確定病例數 三個欄位
+df.drop(["確定病名", "縣市", "鄉鎮", "性別", "年齡層"], inplace=True, axis=1)
+# 設定過濾條件(累積)
+indexNames = df[df["個案研判日"] > startdate].index
+# 刪除所有大於指定日期的個案
+df.drop(indexNames, inplace=True)
+# 計算累積確診人數
+total = df.sum()["確定病例數"]
+print("累積確診人數:", total)
+# 設定過濾條件(今日)
+indexNames = df[df["個案研判日"] != startdate].index
+# 刪除所有不是指定日期的個案
+df.drop(indexNames, inplace=True)
+# 計算境外移入人數
+imported = df[df["是否為境外移入"] == "是"].sum()["確定病例數"]
+print("今日境外移入人數:", imported)
+# 計算本土人數
+domestic = df[df["是否為境外移入"] == "否"].sum()["確定病例數"]
+print("今日本土人數:", domestic)
+total = imported + domestic
+print("今日總人數:", total)
+# 若要查看有哪些欄位
 print((df.keys()))
-#也可以透過df.info()查看
+# 也可以透過df.info()查看
 df.info()
-#也可以直接看前幾列
+# 也可以直接看前幾列
 df.head(3)
 
 print("------------------------------------------------------------")  # 60個
 
 import requests
 
-url ='https://www.dcard.tw/f/stock/p/237123381'
+url = "https://www.dcard.tw/f/stock/p/237123381"
 response = requests.get(url)
 print(response.text)
 
 
-print('chap7-02a')
+print("chap7-02a")
 import requests
-url ='https://www.dcard.tw/f/stock/p/237123381'
+
+url = "https://www.dcard.tw/f/stock/p/237123381"
 res = requests.get(url)
 print(res.text)
 
-#chap7-01b
+# chap7-01b
 import requests
-url ='http://jigsaw.w3.org/HTTP/connection.html'
-response = requests.get(url)
-#print(response.text)
 
-#在<HEAD></HEAD>區塊中取得包圍網頁標題的指定字串<TITLE></TITLE>所在的位置
-#stripe()去除字串頭尾的'\n'(換行)、'\t'(跳格)、' '(空白)
-datapos1=response.text.find("<TITLE>")
-datapos2=response.text.find("</TITLE>")
-data=response.text[datapos1+7:datapos2]
-data=data.strip()
+url = "http://jigsaw.w3.org/HTTP/connection.html"
+response = requests.get(url)
+# print(response.text)
+
+# 在<HEAD></HEAD>區塊中取得包圍網頁標題的指定字串<TITLE></TITLE>所在的位置
+# stripe()去除字串頭尾的'\n'(換行)、'\t'(跳格)、' '(空白)
+datapos1 = response.text.find("<TITLE>")
+datapos2 = response.text.find("</TITLE>")
+data = response.text[datapos1 + 7 : datapos2]
+data = data.strip()
 print("網頁的<TITLE> :", data)
-#在<BODY></BODY>區塊中取得包圍內容標題的指定字串<H1></H1>所在的位置
-datapos1=response.text.find("<H1>")
-datapos2=response.text.find("</H1>")
-data=response.text[datapos1+4:datapos2]
-#將設定斜體的HTML語法<I></I>移除
-data=data.replace("<I>","")
-data=data.replace("</I>","")
-data=data.strip()
+# 在<BODY></BODY>區塊中取得包圍內容標題的指定字串<H1></H1>所在的位置
+datapos1 = response.text.find("<H1>")
+datapos2 = response.text.find("</H1>")
+data = response.text[datapos1 + 4 : datapos2]
+# 將設定斜體的HTML語法<I></I>移除
+data = data.replace("<I>", "")
+data = data.replace("</I>", "")
+data = data.strip()
 print("<網頁的H1的資料(去掉<I>)> :", data)
 
-datapos1=response.text.find("<CODE>")
-datapos2=response.text.find("</CODE>")
-data=response.text[datapos1+7:datapos2]
-data=data.strip()
+datapos1 = response.text.find("<CODE>")
+datapos2 = response.text.find("</CODE>")
+data = response.text[datapos1 + 7 : datapos2]
+data = data.strip()
 print("網頁的<CODE> :", data)
 
 print("------------------------------------------------------------")  # 60個
 
-print('chap7-02b')
+print("chap7-02b")
 import requests
 from bs4 import BeautifulSoup
 
-url ='https://www.dcard.tw/f/stock/p/237123381'
+url = "https://www.dcard.tw/f/stock/p/237123381"
 response = requests.get(url)
-#指定html.parser作為解析器
-soup = BeautifulSoup(response.text, 'html.parser') 
-#把排版後的html印出來，因為未排版前有很多網頁語法缺乏換行符號，不易閱讀
-#必須借助於Beautiful Shop套件
+# 指定html.parser作為解析器
+soup = BeautifulSoup(response.text, "html.parser")
+# 把排版後的html印出來，因為未排版前有很多網頁語法缺乏換行符號，不易閱讀
+# 必須借助於Beautiful Shop套件
 print(soup.prettify())
 
 print("------------------------------------------------------------")  # 60個
 
-print('chap7-02c')
+print("chap7-02c")
 import requests
 from bs4 import BeautifulSoup
 
-url = 'https://www.dcard.tw/f/stock/p/237123381'
+url = "https://www.dcard.tw/f/stock/p/237123381"
 
 headers = {
     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
@@ -863,445 +1086,498 @@ headers = {
     "Sec-Fetch-Mode": "navigate",
     "Sec-Fetch-Site": "none",
     "Upgrade-Insecure-Requests": "1",
-    "User-Agent": "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36" #使用者代理
-    }
+    "User-Agent": "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36",  # 使用者代理
+}
 
-#response = requests.get(url="https://example.com", headers=headers)
+# response = requests.get(url="https://example.com", headers=headers)
 response = requests.get(url, headers=headers)
-#指定html.parser作為解析器
-soup = BeautifulSoup(response.text, 'html.parser') 
-#把排版後的html印出來
-#print(soup.prettify())
-a_tags = soup.find_all('h1')
+# 指定html.parser作為解析器
+soup = BeautifulSoup(response.text, "html.parser")
+# 把排版後的html印出來
+# print(soup.prettify())
+a_tags = soup.find_all("h1")
 print(">>>>>文章標題")
 print(a_tags[0].contents[0])
 print("\n")
 
 print("------------------------------------------------------------")  # 60個
 
-print('chap7-02d')
+print("chap7-02d")
 
 import requests
 from bs4 import BeautifulSoup
 
-url = 'https://www.dcard.tw/f/stock/p/237123381'
+url = "https://www.dcard.tw/f/stock/p/237123381"
 res = requests.get(url)
-#指定html.parser作為解析器
-soup = BeautifulSoup(res.text, 'html.parser') 
-#把排版後的html印出來
-#print(soup.prettify()) 
-a_tags = soup.find_all('h1')
+# 指定html.parser作為解析器
+soup = BeautifulSoup(res.text, "html.parser")
+# 把排版後的html印出來
+# print(soup.prettify())
+a_tags = soup.find_all("h1")
 print(">>>>>文章標題")
 print(a_tags[0].contents[0])
 print("\n")
-a_tags = soup.find_all('div',limit=1)
-a_tag=a_tags[0]
-cc=""
+a_tags = soup.find_all("div", limit=1)
+a_tag = a_tags[0]
+cc = ""
 for b in a_tag.contents:
-  if str(b).find("gFINpq")>=0:  
-    b=str(b).replace('\n','').replace('\r','')
-    cc=cc+b
+    if str(b).find("gFINpq") >= 0:
+        b = str(b).replace("\n", "").replace("\r", "")
+        cc = cc + b
 print(cc.strip())
 
 print("------------------------------------------------------------")  # 60個
 
-print('chap7-02e')
+print("chap7-02e")
 
 import requests
 from bs4 import BeautifulSoup
 
-url = 'https://www.dcard.tw/f/stock/p/237123381'
+url = "https://www.dcard.tw/f/stock/p/237123381"
 res = requests.get(url)
-#指定html.parser作為解析器
-soup = BeautifulSoup(res.text, 'html.parser') 
-#把排版後的html印出來
-#print(soup.prettify()) 
-a_tags = soup.find_all('h1')
+# 指定html.parser作為解析器
+soup = BeautifulSoup(res.text, "html.parser")
+# 把排版後的html印出來
+# print(soup.prettify())
+a_tags = soup.find_all("h1")
 print(">>>>>文章標題")
 print(a_tags[0].contents[0])
 print()
-a_tags = soup.find_all('div',limit=1)
-a_tag=a_tags[0]
-cc=""
+a_tags = soup.find_all("div", limit=1)
+a_tag = a_tags[0]
+cc = ""
 for b in a_tag.contents:
-  if str(b).find("gFINpq")>=0:  
-    b=str(b)
-    cc=cc+b
-cc=cc.strip()
-data=">>>>>原Po文章\n"
-#尋找前四筆，第一個是原Po文章，後三個則為熱門留言
+    if str(b).find("gFINpq") >= 0:
+        b = str(b)
+        cc = cc + b
+cc = cc.strip()
+data = ">>>>>原Po文章\n"
+# 尋找前四筆，第一個是原Po文章，後三個則為熱門留言
 for j in range(4):
-  #尋找最附近的<div class>有gFINpq
-  datapos1=cc.find("gFINpq")
-  #只保留這個字串以後的文字
-  cc=cc[datapos1:] 
-  while True:
-    #尋找最附近的<span
-    datapos1=cc.find("<span")
-    #只保留<span以後的文字
-    cc=cc[datapos1:]
-    #尋找最附近的>
-    datapos1=cc.find(">")
-    #尋找最附近的</span> 
-    datapos2=cc.find("</span>")
-    #如果<span></span>中間出現了enUbOQ，表示這個步驟該結束了 
-    if cc[:datapos2].find("enUbOQ")>=0:
-      break   
-    #如果<span></span>有資料，就合併在data字串裡 
-    if datapos1+1<datapos2:
-      #但是<span></span>的資料，如果還有span就不行了
-      if cc[datapos1+1:datapos2].find("span")<0:       
-        data=data+cc[datapos1+1:datapos2]+"\n" 
-    #只保留</span>之後的文字    
-    cc=cc[datapos2+7:]
-  #後三個是熱門留言
-  if j<3:
-    data=data+"\n*******熱門留言"+str(j+1)+":\n"  
+    # 尋找最附近的<div class>有gFINpq
+    datapos1 = cc.find("gFINpq")
+    # 只保留這個字串以後的文字
+    cc = cc[datapos1:]
+    while True:
+        # 尋找最附近的<span
+        datapos1 = cc.find("<span")
+        # 只保留<span以後的文字
+        cc = cc[datapos1:]
+        # 尋找最附近的>
+        datapos1 = cc.find(">")
+        # 尋找最附近的</span>
+        datapos2 = cc.find("</span>")
+        # 如果<span></span>中間出現了enUbOQ，表示這個步驟該結束了
+        if cc[:datapos2].find("enUbOQ") >= 0:
+            break
+        # 如果<span></span>有資料，就合併在data字串裡
+        if datapos1 + 1 < datapos2:
+            # 但是<span></span>的資料，如果還有span就不行了
+            if cc[datapos1 + 1 : datapos2].find("span") < 0:
+                data = data + cc[datapos1 + 1 : datapos2] + "\n"
+        # 只保留</span>之後的文字
+        cc = cc[datapos2 + 7 :]
+    # 後三個是熱門留言
+    if j < 3:
+        data = data + "\n*******熱門留言" + str(j + 1) + ":\n"
 print(data)
 
 print("------------------------------------------------------------")  # 60個
 
-print('chap7-02f')
+print("chap7-02f")
 
 import requests
 import json
 
-postid = '237123381'
-url = 'https://www.dcard.tw/service/api/v2/posts/'+postid
+postid = "237123381"
+url = "https://www.dcard.tw/service/api/v2/posts/" + postid
 res = requests.get(url)
-#有兩種方法，下面兩行任選一種都可以
-#data = json.loads(res.text) #方法1
-data=res.json() #方法2
-#查看有哪些欄位
+# 有兩種方法，下面兩行任選一種都可以
+# data = json.loads(res.text) #方法1
+data = res.json()  # 方法2
+# 查看有哪些欄位
 print(data.keys())
-#因為只有一欄，而且沒有欄位名稱
-#否則只要 df = pd.DataFrame(data) 即可
-df = pd.DataFrame.from_dict(data,orient="index")
-#查看有哪些內容
+# 因為只有一欄，而且沒有欄位名稱
+# 否則只要 df = pd.DataFrame(data) 即可
+df = pd.DataFrame.from_dict(data, orient="index")
+# 查看有哪些內容
 print(df)
 
 print("------------------------------------------------------------")  # 60個
 
-print('chap7-02g')
+print("chap7-02g")
 
 import requests
 import json
 
-postid = '237123381'
-url = 'https://www.dcard.tw/service/api/v2/posts/'+postid
+postid = "237123381"
+url = "https://www.dcard.tw/service/api/v2/posts/" + postid
 res = requests.get(url)
-#有兩種方法，下面兩行任選一種都可以
-#data = json.loads(res.text) #方法1
-data=res.json() #方法2
-#因為只有一欄，而且沒有欄位名稱
-#否則只要 df = pd.DataFrame(data) 即可
-df = pd.DataFrame.from_dict(data,orient="index")
-#取出title、content內容
+# 有兩種方法，下面兩行任選一種都可以
+# data = json.loads(res.text) #方法1
+data = res.json()  # 方法2
+# 因為只有一欄，而且沒有欄位名稱
+# 否則只要 df = pd.DataFrame(data) 即可
+df = pd.DataFrame.from_dict(data, orient="index")
+# 取出title、content內容
 print(">>>>>文章標題")
-print(df.loc["title",0])
+print(df.loc["title", 0])
 print()
 print(">>>>>原Po文章")
-print(str(df.loc["content",0]).strip())
+print(str(df.loc["content", 0]).strip())
 print("------------------------------------------------------------")  # 60個
 
-print('chap7-02h')
+print("chap7-02h")
 
 import requests
 import json
 from datetime import datetime
 
-postid = '237123381'
-url = 'https://www.dcard.tw/service/api/v2/posts/'+postid
+postid = "237123381"
+url = "https://www.dcard.tw/service/api/v2/posts/" + postid
 res = requests.get(url)
-#有兩種方法，下面兩行任選一種都可以
-#data = json.loads(res.text) #方法1
-data = res.json() #方法2
-#因為只有一欄，而且沒有欄位名稱
-#否則只要 df = pd.DataFrame(data) 即可
-df = pd.DataFrame.from_dict(data,orient="index")
-#取出title、content內容
+# 有兩種方法，下面兩行任選一種都可以
+# data = json.loads(res.text) #方法1
+data = res.json()  # 方法2
+# 因為只有一欄，而且沒有欄位名稱
+# 否則只要 df = pd.DataFrame(data) 即可
+df = pd.DataFrame.from_dict(data, orient="index")
+# 取出title、content內容
 print(">>>>>文章標題")
 print(df[0]["title"])
 print()
 print(">>>>>原Po文章\n")
 print(str(df[0]["content"]).strip())
-url = 'https://www.dcard.tw/service/api/v2/posts/'+postid+'/comments?popular=True'
+url = "https://www.dcard.tw/service/api/v2/posts/" + postid + "/comments?popular=True"
 res = requests.get(url)
-#有兩種方法，下面兩行任選一種都可以
-#data = json.loads(res.text) #方法1
-data = res.json() #方法2
-#因為有欄位名稱
-#只要 df = pd.DataFrame(data) 即可
+# 有兩種方法，下面兩行任選一種都可以
+# data = json.loads(res.text) #方法1
+data = res.json()  # 方法2
+# 因為有欄位名稱
+# 只要 df = pd.DataFrame(data) 即可
 df = pd.DataFrame(data)
-#取出前3筆資料
+# 取出前3筆資料
 for i in range(3):
-  print("*******熱門留言"+str(i)+":")
-  print(df.loc[i,"content"])
-  #將最後修改文字日期轉換成日期  
-  updatedate=datetime.fromisoformat(str(df.loc[i,"updatedAt"]).replace("Z",""))
-  #計算現在和最後修改日期的時間差
-  datediff=datetime.today()-updatedate
-  #顯示幾天前有最新留言
-  print(datediff.days,"天前")
-  print()
-#若要查看有哪些欄位
+    print("*******熱門留言" + str(i) + ":")
+    print(df.loc[i, "content"])
+    # 將最後修改文字日期轉換成日期
+    updatedate = datetime.fromisoformat(str(df.loc[i, "updatedAt"]).replace("Z", ""))
+    # 計算現在和最後修改日期的時間差
+    datediff = datetime.today() - updatedate
+    # 顯示幾天前有最新留言
+    print(datediff.days, "天前")
+    print()
+# 若要查看有哪些欄位
 print((df.keys()))
-#也可以透過df.info()查看
+# 也可以透過df.info()查看
 df.info()
-#也可以直接看前幾列
+# 也可以直接看前幾列
 df.head(3)
 
 print("------------------------------------------------------------")  # 60個
 
-print('chap7-02i')
+print("chap7-02i")
 
 import requests
 import json
 from datetime import datetime
 
-postid = '237123381'
-url = 'https://www.dcard.tw/service/api/v2/posts/'+postid
+postid = "237123381"
+url = "https://www.dcard.tw/service/api/v2/posts/" + postid
 res = requests.get(url)
-#有兩種方法，下面兩行任選一種都可以
-#data = json.loads(res.text) #方法1
-data = res.json() #方法2
-#因為只有一欄，而且沒有欄位名稱
-#否則只要 df = pd.DataFrame(data) 即可
-df = pd.DataFrame.from_dict(data,orient="index")
-#取出title、content內容
+# 有兩種方法，下面兩行任選一種都可以
+# data = json.loads(res.text) #方法1
+data = res.json()  # 方法2
+# 因為只有一欄，而且沒有欄位名稱
+# 否則只要 df = pd.DataFrame(data) 即可
+df = pd.DataFrame.from_dict(data, orient="index")
+# 取出title、content內容
 print(">>>>>文章標題")
 print(df[0]["title"])
 print()
 print(">>>>>原Po文章\n")
 print(str(df[0]["content"]).strip())
-url = 'https://www.dcard.tw/service/api/v2/posts/'+postid+'/comments'
+url = "https://www.dcard.tw/service/api/v2/posts/" + postid + "/comments"
 res = requests.get(url)
-#有兩種方法，下面兩行任選一種都可以
-#data = json.loads(res.text) #方法1
-data = res.json() #方法2
-#因為有欄位名稱
-#只要 df = pd.DataFrame(data) 即可
+# 有兩種方法，下面兩行任選一種都可以
+# data = json.loads(res.text) #方法1
+data = res.json()  # 方法2
+# 因為有欄位名稱
+# 只要 df = pd.DataFrame(data) 即可
 df = pd.DataFrame(data)
-#除了updatedAt, content, likeCount三個欄位以外，全部刪除
-#刪除欄依定要指定axis=1 
-#inplace=True真實刪除
-df.drop(['id', 'anonymous', 'postId', 'createdAt', 'floor',
-    'withNickname', 'hiddenByAuthor', 'meta',
-    'gender', 'school', 'host', 'reportReason', 'mediaMeta', 'hidden',
-    'inReview', 'reportReasonText', 'isSuspiciousAccount', 'isModerator',
-    'doorplate', 'edited', 'postAvatar', 'activityAvatar', 'verifiedBadge',
-    'memberType', 'enablePrivateMessage', 'department'],inplace=True,axis=1)
-#依據likeCout內容排序，以降序排列
-df.sort_values(by='likeCount', inplace=True, ascending=False)
-#要記得重設index，這樣df.loc[]的結果才會正確
+# 除了updatedAt, content, likeCount三個欄位以外，全部刪除
+# 刪除欄依定要指定axis=1
+# inplace=True真實刪除
+df.drop(
+    [
+        "id",
+        "anonymous",
+        "postId",
+        "createdAt",
+        "floor",
+        "withNickname",
+        "hiddenByAuthor",
+        "meta",
+        "gender",
+        "school",
+        "host",
+        "reportReason",
+        "mediaMeta",
+        "hidden",
+        "inReview",
+        "reportReasonText",
+        "isSuspiciousAccount",
+        "isModerator",
+        "doorplate",
+        "edited",
+        "postAvatar",
+        "activityAvatar",
+        "verifiedBadge",
+        "memberType",
+        "enablePrivateMessage",
+        "department",
+    ],
+    inplace=True,
+    axis=1,
+)
+# 依據likeCout內容排序，以降序排列
+df.sort_values(by="likeCount", inplace=True, ascending=False)
+# 要記得重設index，這樣df.loc[]的結果才會正確
 df = df.reset_index(drop=True)
-#取出前3筆資料
+# 取出前3筆資料
 for i in range(3):
-  print("*******熱門留言"+str(i)+":")
-  print(df.loc[i,"content"])
-  #將最後修改文字日期轉換成日期  
-  updatedate=datetime.fromisoformat(str(df.loc[i,"updatedAt"]).replace("Z",""))
-  #計算現在和最後修改日期的時間差
-  datediff=datetime.today()-updatedate
-  #顯示幾天前有最新留言
-  print(datediff.days,"天前")
-  print()
-#若要查看有哪些欄位
+    print("*******熱門留言" + str(i) + ":")
+    print(df.loc[i, "content"])
+    # 將最後修改文字日期轉換成日期
+    updatedate = datetime.fromisoformat(str(df.loc[i, "updatedAt"]).replace("Z", ""))
+    # 計算現在和最後修改日期的時間差
+    datediff = datetime.today() - updatedate
+    # 顯示幾天前有最新留言
+    print(datediff.days, "天前")
+    print()
+# 若要查看有哪些欄位
 print((df.keys()))
-#也可以透過df.info()查看
+# 也可以透過df.info()查看
 df.info()
-#也可以直接看前幾列
+# 也可以直接看前幾列
 df.head(3)
 
 print("------------------------------------------------------------")  # 60個
 
-print('chap7-02j')
+print("chap7-02j")
 
 import requests
 import csv
-#from io import StringIO
 
-county="屏東縣"
-url = 'https://data.epa.gov.tw/api/v1/aqx_p_432?limit=1000&api_key=keykeykey&sort=ImportDate%20desc&format=csv'
-#方法1:下載檔案後儲存，再開啟檔案讀出
-#res = requests.get(url)
-#open('data.csv','wb').write(res.content)
-#df=pd.read_csv('data.csv')
-#方法2:直接讀取網站的檔案
-df=pd.read_csv(url)
-#查看有那些欄位
+# from io import StringIO
+
+county = "屏東縣"
+url = "https://data.epa.gov.tw/api/v1/aqx_p_432?limit=1000&api_key=keykeykey&sort=ImportDate%20desc&format=csv"
+# 方法1:下載檔案後儲存，再開啟檔案讀出
+# res = requests.get(url)
+# open('data.csv','wb').write(res.content)
+# df=pd.read_csv('data.csv')
+# 方法2:直接讀取網站的檔案
+df = pd.read_csv(url)
+# 查看有那些欄位
 df.info()
-#只保留SiteName、County、AQI、Status四個欄位
-df.drop(['SiteId','Longitude','Latitude','PublishTime','SO2_AVG', 'Pollutant', 'SO2', 'CO', 'NO', 'CO_8hr', 'O3', 'O3_8hr', 'PM10', 'PM10_AVG', 'PM2.5', 'PM2.5_AVG', 'NO2', 'NOx', 'WindSpeed', 'WindDirec'],inplace=True,axis=1)
-#設定過濾條件
-indexNames=df[df['County']!=county].index
-#刪除所有不是臺北市的偵測站
-df.drop(indexNames,inplace=True)
-#重設索引值
-df=df.reset_index(drop=True)
-#列出該縣市所有偵測站狀態
-print(county,"空氣品質狀態")
+# 只保留SiteName、County、AQI、Status四個欄位
+df.drop(
+    [
+        "SiteId",
+        "Longitude",
+        "Latitude",
+        "PublishTime",
+        "SO2_AVG",
+        "Pollutant",
+        "SO2",
+        "CO",
+        "NO",
+        "CO_8hr",
+        "O3",
+        "O3_8hr",
+        "PM10",
+        "PM10_AVG",
+        "PM2.5",
+        "PM2.5_AVG",
+        "NO2",
+        "NOx",
+        "WindSpeed",
+        "WindDirec",
+    ],
+    inplace=True,
+    axis=1,
+)
+# 設定過濾條件
+indexNames = df[df["County"] != county].index
+# 刪除所有不是臺北市的偵測站
+df.drop(indexNames, inplace=True)
+# 重設索引值
+df = df.reset_index(drop=True)
+# 列出該縣市所有偵測站狀態
+print(county, "空氣品質狀態")
 for i in range(len(df)):
-  print(df.loc[i,'SiteName'],'(',df.loc[i,'Status'],")")
-indexNames=df[df['Status']=='良好'].index
-df.drop(indexNames,inplace=True)
-#重設索引值
-df=df.reset_index(drop=True)
-#列出該縣市所有為達良好之偵測站
+    print(df.loc[i, "SiteName"], "(", df.loc[i, "Status"], ")")
+indexNames = df[df["Status"] == "良好"].index
+df.drop(indexNames, inplace=True)
+# 重設索引值
+df = df.reset_index(drop=True)
+# 列出該縣市所有為達良好之偵測站
 print()
-print(county,"空氣品質未達良好之偵測站")
+print(county, "空氣品質未達良好之偵測站")
 for i in range(len(df)):
-  print(df.loc[i,'SiteName'],'(',df.loc[i,'Status'],")")
+    print(df.loc[i, "SiteName"], "(", df.loc[i, "Status"], ")")
 
 print("------------------------------------------------------------")  # 60個
 
-#chap9-01b
+# chap9-01b
 import requests
 import json
 
-url = 'https://od.cdc.gov.tw/eic/Day_Confirmation_Age_County_Gender_19CoV.json'
+url = "https://od.cdc.gov.tw/eic/Day_Confirmation_Age_County_Gender_19CoV.json"
 res = requests.get(url)
-#有兩種方法，下面兩行任選一種都可以
-#data = json.loads(res.text) #方法1
-data=res.json() #方法2
-#因為有欄位名稱
-#只要 df = pd.DataFrame(data) 即可
+# 有兩種方法，下面兩行任選一種都可以
+# data = json.loads(res.text) #方法1
+data = res.json()  # 方法2
+# 因為有欄位名稱
+# 只要 df = pd.DataFrame(data) 即可
 df = pd.DataFrame(data)
-#轉換'確定病例數'欄位內容為整數(以利後面加總)
-df['確定病例數'] = df['確定病例數'].astype(int)
+# 轉換'確定病例數'欄位內容為整數(以利後面加總)
+df["確定病例數"] = df["確定病例數"].astype(int)
 
-startdate='2021/07/20'
-#startdate=input("請輸日期(yyyy/mm/dd)")
-#只保留個案研判日、是否為境外移入、確定病例數 三個欄位
-df.drop(['確定病名','縣市','鄉鎮','性別','年齡層'],inplace=True,axis=1)
-#設定過濾條件(累積)
-indexNames=df[df['個案研判日']>startdate].index
-#刪除所有大於指定日期的個案
-df.drop(indexNames,inplace=True)
-#計算累積確診人數
-total=df.sum()['確定病例數']
-print("累積確診人數:",total)
-#設定過濾條件(今日)
-indexNames=df[df['個案研判日']!=startdate].index
-#刪除所有不是指定日期的個案
-df.drop(indexNames,inplace=True)
-#計算境外移入人數
-imported=df[df['是否為境外移入']=='是'].sum()['確定病例數']
-print("今日境外移入人數:",imported)
-#計算本土人數
-domestic=df[df['是否為境外移入']=='否'].sum()['確定病例數']
-print("今日本土人數:",domestic)
-total=imported+domestic
-print("今日總人數:",total)
-#若要查看有哪些欄位
+startdate = "2021/07/20"
+# startdate=input("請輸日期(yyyy/mm/dd)")
+# 只保留個案研判日、是否為境外移入、確定病例數 三個欄位
+df.drop(["確定病名", "縣市", "鄉鎮", "性別", "年齡層"], inplace=True, axis=1)
+# 設定過濾條件(累積)
+indexNames = df[df["個案研判日"] > startdate].index
+# 刪除所有大於指定日期的個案
+df.drop(indexNames, inplace=True)
+# 計算累積確診人數
+total = df.sum()["確定病例數"]
+print("累積確診人數:", total)
+# 設定過濾條件(今日)
+indexNames = df[df["個案研判日"] != startdate].index
+# 刪除所有不是指定日期的個案
+df.drop(indexNames, inplace=True)
+# 計算境外移入人數
+imported = df[df["是否為境外移入"] == "是"].sum()["確定病例數"]
+print("今日境外移入人數:", imported)
+# 計算本土人數
+domestic = df[df["是否為境外移入"] == "否"].sum()["確定病例數"]
+print("今日本土人數:", domestic)
+total = imported + domestic
+print("今日總人數:", total)
+# 若要查看有哪些欄位
 print((df.keys()))
-#也可以透過df.info()查看
+# 也可以透過df.info()查看
 df.info()
-#也可以直接看前幾列
+# 也可以直接看前幾列
 df.head(3)
 
 print("------------------------------------------------------------")  # 60個
 
-#chap9-01c
+# chap9-01c
 import requests
 import csv
-#from io import StringIO
 
-url = 'https://od.cdc.gov.tw/eic/covid19/covid19_tw_stats.csv'
-#方法1:下載檔案後儲存，再開啟檔案讀出
-#res = requests.get(url)
-#open('data.csv','wb').write(res.content)
-#df=pd.read_csv('data.csv')
-#方法2:直接讀取網站的檔案
-df=pd.read_csv(url)
-#查看有那些欄位
+# from io import StringIO
+
+url = "https://od.cdc.gov.tw/eic/covid19/covid19_tw_stats.csv"
+# 方法1:下載檔案後儲存，再開啟檔案讀出
+# res = requests.get(url)
+# open('data.csv','wb').write(res.content)
+# df=pd.read_csv('data.csv')
+# 方法2:直接讀取網站的檔案
+df = pd.read_csv(url)
+# 查看有那些欄位
 df.info()
-#只保留確診、死亡、送驗、排除四個欄位
-df.drop(['昨日確診','昨日排除','昨日送驗'],inplace=True,axis=1)
+# 只保留確診、死亡、送驗、排除四個欄位
+df.drop(["昨日確診", "昨日排除", "昨日送驗"], inplace=True, axis=1)
 print(df)
-totaldeath=df.loc[0,'死亡']
-print("累積死亡人數",totaldeath)
+totaldeath = df.loc[0, "死亡"]
+print("累積死亡人數", totaldeath)
 
 print("------------------------------------------------------------")  # 60個
 
-#chap9-01d
+# chap9-01d
 import requests
 import json
 import csv
 from docx import Document
 
-url = 'https://od.cdc.gov.tw/eic/Day_Confirmation_Age_County_Gender_19CoV.json'
+url = "https://od.cdc.gov.tw/eic/Day_Confirmation_Age_County_Gender_19CoV.json"
 res = requests.get(url)
-data=res.json()
-#因為有欄位名稱
-#只要 df = pd.DataFrame(data) 即可
+data = res.json()
+# 因為有欄位名稱
+# 只要 df = pd.DataFrame(data) 即可
 df = pd.DataFrame(data)
-#轉換'確定病例數'欄位內容為整數(以利後面加總)
-df['確定病例數'] = df['確定病例數'].astype(int)
-startdate='2021/07/20'
-startdate=input("請輸日期(yyyy/mm/dd)")
-#只保留個案研判日、是否為境外移入、確定病例數 三個欄位
-df.drop(['確定病名','縣市','鄉鎮','性別','年齡層'],inplace=True,axis=1)
-#設定過濾條件(累積)
-indexNames=df[df['個案研判日']>startdate].index
-#刪除所有大於指定日期的個案
-df.drop(indexNames,inplace=True)
-#計算累積確診人數
-total=df.sum()['確定病例數']
-print("累積確診人數:",total)
-#設定過濾條件(今日)
-indexNames=df[df['個案研判日']!=startdate].index
-#刪除所有不是指定日期的個案
-df.drop(indexNames,inplace=True)
-#計算境外移入人數
-imported=df[df['是否為境外移入']=='是'].sum()['確定病例數']
-print("今日境外移入人數:",imported)
-#計算本土人數
-domestic=df[df['是否為境外移入']=='否'].sum()['確定病例數']
-print("今日本土人數:",domestic)
-print("今日總人數:",domestic+imported)
+# 轉換'確定病例數'欄位內容為整數(以利後面加總)
+df["確定病例數"] = df["確定病例數"].astype(int)
+startdate = "2021/07/20"
+startdate = input("請輸日期(yyyy/mm/dd)")
+# 只保留個案研判日、是否為境外移入、確定病例數 三個欄位
+df.drop(["確定病名", "縣市", "鄉鎮", "性別", "年齡層"], inplace=True, axis=1)
+# 設定過濾條件(累積)
+indexNames = df[df["個案研判日"] > startdate].index
+# 刪除所有大於指定日期的個案
+df.drop(indexNames, inplace=True)
+# 計算累積確診人數
+total = df.sum()["確定病例數"]
+print("累積確診人數:", total)
+# 設定過濾條件(今日)
+indexNames = df[df["個案研判日"] != startdate].index
+# 刪除所有不是指定日期的個案
+df.drop(indexNames, inplace=True)
+# 計算境外移入人數
+imported = df[df["是否為境外移入"] == "是"].sum()["確定病例數"]
+print("今日境外移入人數:", imported)
+# 計算本土人數
+domestic = df[df["是否為境外移入"] == "否"].sum()["確定病例數"]
+print("今日本土人數:", domestic)
+print("今日總人數:", domestic + imported)
 
-url = 'https://od.cdc.gov.tw/eic/covid19/covid19_tw_stats.csv'
-df=pd.read_csv(url)
-#只保留確診、死亡、送驗、排除四個欄位
-df.drop(['昨日確診','昨日排除','昨日送驗'],inplace=True,axis=1)
-totaldeath=df.loc[0,'死亡']
-print("累積死亡人數",totaldeath)
+url = "https://od.cdc.gov.tw/eic/covid19/covid19_tw_stats.csv"
+df = pd.read_csv(url)
+# 只保留確診、死亡、送驗、排除四個欄位
+df.drop(["昨日確診", "昨日排除", "昨日送驗"], inplace=True, axis=1)
+totaldeath = df.loc[0, "死亡"]
+print("累積死亡人數", totaldeath)
 
-#切換至指定的資料夾為工作資料夾
-os.chdir('/content/drive/MyDrive/Book')
-#開啟指定的Word檔案
+# 切換至指定的資料夾為工作資料夾
+os.chdir("/content/drive/MyDrive/Book")
+# 開啟指定的Word檔案
 my_doc = Document("指揮中心快訊.docx")
-#設定要取代的串列list
+# 設定要取代的串列list
 replacements = {
-    '%Date%': startdate,
-    '%N1%': str(domestic+imported),
-    '%N2%': str(domestic),
-    '%N3%': str(imported),
-    '%N4%': str(totaldeath),
-    '%N5%': str(total)
-    }
-#尋找要取代的關鍵字
+    "%Date%": startdate,
+    "%N1%": str(domestic + imported),
+    "%N2%": str(domestic),
+    "%N3%": str(imported),
+    "%N4%": str(totaldeath),
+    "%N5%": str(total),
+}
+# 尋找要取代的關鍵字
 for key in replacements:
-  #尋找所有的表格
-  for table in my_doc.tables:
-    #尋找表格中的列
-    for row in table.rows:
-      #尋找列中的每個儲存格
-      for cell in row.cells:
-        #尋找儲存格中的每一個斷落
-        for paragraph in cell.paragraphs:
-          #如果關鍵字出現在段落中
-          if key in paragraph.text:
-            #為了避免修改掉原有的樣式，必須用這個方法處理
-            inline = paragraph.runs            
-            for i in range(len(inline)):
-              if key in inline[i].text:
-                text = inline[i].text.replace(key, replacements[key])
-                inline[i].text = text
-#指定儲存的檔案名稱         
-fname="指揮中心快訊"+startdate.replace("/","")+".docx"
-#儲存檔案
+    # 尋找所有的表格
+    for table in my_doc.tables:
+        # 尋找表格中的列
+        for row in table.rows:
+            # 尋找列中的每個儲存格
+            for cell in row.cells:
+                # 尋找儲存格中的每一個斷落
+                for paragraph in cell.paragraphs:
+                    # 如果關鍵字出現在段落中
+                    if key in paragraph.text:
+                        # 為了避免修改掉原有的樣式，必須用這個方法處理
+                        inline = paragraph.runs
+                        for i in range(len(inline)):
+                            if key in inline[i].text:
+                                text = inline[i].text.replace(key, replacements[key])
+                                inline[i].text = text
+# 指定儲存的檔案名稱
+fname = "指揮中心快訊" + startdate.replace("/", "") + ".docx"
+# 儲存檔案
 my_doc.save(fname)
 
 """
@@ -1355,21 +1631,21 @@ print(type(set99))
 print(set99)
 
 
-
 print("------------------------------------------------------------")  # 60個
 
 import os
-pName = 'C:/pcYah'
-if os.path.isdir(pName):           # 檢查資料夾路徑是否存在
-    print('%s 資料夾路徑存在' %pName)
+
+pName = "C:/pcYah"
+if os.path.isdir(pName):  # 檢查資料夾路徑是否存在
+    print("%s 資料夾路徑存在" % pName)
 else:
-    print('%s 資料夾路徑不存在' %pName)
-     
-fName = 'C:/Windows/win.ini'
-if os.path.isfile(fName):         # 檢查檔案路徑是否存在
-    print('%s 檔案路徑存在' %fName)
+    print("%s 資料夾路徑不存在" % pName)
+
+fName = "C:/Windows/win.ini"
+if os.path.isfile(fName):  # 檢查檔案路徑是否存在
+    print("%s 檔案路徑存在" % fName)
 else:
-    print('%s 檔案路徑不存在' %fName)
+    print("%s 檔案路徑不存在" % fName)
 
 """
 
@@ -1382,53 +1658,49 @@ if os.path.exists(fName):        # 檢查檔案路徑是否存在
 """
 
 
-
-#try-catch-finally
+# try-catch-finally
 n1 = 8
 n2 = 0
 try:
-    d = n1/n2
-    print('%d / %d = %d' %(n1, n2, d))
+    d = n1 / n2
+    print("%d / %d = %d" % (n1, n2, d))
 except Exception as e:
-    print('錯誤類型 :', end =' ')
+    print("錯誤類型 :", end=" ")
     print(e)
 finally:
-    print('執行 finally: 敘述\n')
+    print("執行 finally: 敘述\n")
 
 
-
-
-
-print('------------------------------------------------------------')	#60個
-
+print("------------------------------------------------------------")  # 60個
 
 
 lst = [0 for x in range(4)]
 try:
     lst[3] = 33
-    print('lst[3] =', lst[3])
+    print("lst[3] =", lst[3])
     lst[8] = 88
-    print('lst[8] =', lst[8])
-except ZeroDivisionError: 
-    print('錯誤類型 : 除數為零')
-except IndexError: 
-    print('錯誤類型 : 串列註標超出範圍')
-except MemoryErroe: 
-    print('錯誤類型 : 超出記憶體空間')  
+    print("lst[8] =", lst[8])
+except ZeroDivisionError:
+    print("錯誤類型 : 除數為零")
+except IndexError:
+    print("錯誤類型 : 串列註標超出範圍")
+except MemoryErroe:
+    print("錯誤類型 : 超出記憶體空間")
 except Exception as e:
-    print('錯誤類型 :', e) 
+    print("錯誤類型 :", e)
 
 import os
-fName = 'score.txt'
+
+fName = "score.txt"
 if os.path.isfile(fName):
-    f = open(fName, 'r')
-    print('讀1行')
+    f = open(fName, "r")
+    print("讀1行")
     str1 = f.readline()
     print(str1)
-    print('讀4行')
+    print("讀4行")
     str2 = f.readline(4)
     print(str2)
-    print('剩下的讀完')
+    print("剩下的讀完")
     print(f.read())
     f.close()
 else:
@@ -1438,9 +1710,9 @@ else:
 print("------------------------------------------------------------")  # 60個
 
 # ord(x) 可以將參數x所代表的Unicode字元，轉換為對應編碼數字
-A = ord('A')
-B = ord('B')
-C = ord('C')
+A = ord("A")
+B = ord("B")
+C = ord("C")
 
 print(A)
 print(B)
@@ -1455,7 +1727,7 @@ print(AA)
 print(BB)
 print(CC)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
@@ -1478,7 +1750,7 @@ import time as t
 week = ["一", "二", "三", "四", "五", "六", "日"]
 dst = ["無日光節約時間", "有日光節約時間"]
 time1 = t.localtime()
-show = "現在時刻：中華民國 " + str(int(time1.tm_year)-1911) +" 年 "
+show = "現在時刻：中華民國 " + str(int(time1.tm_year) - 1911) + " 年 "
 show += str(time1.tm_mon) + " 月 " + str(time1.tm_mday) + " 日 "
 show += str(time1.tm_hour) + " 點 " + str(time1.tm_min) + " 分 "
 show += str(time1.tm_sec) + " 秒 星期" + week[time1.tm_wday] + "\n"
@@ -1489,12 +1761,12 @@ print("------------------------------------------------------------")  # 60個
 
 import time as t
 
-timestart = t.perf_counter() 
-for i in range (0,1000):
-    for j in range (0,1000):
+timestart = t.perf_counter()
+for i in range(0, 1000):
+    for j in range(0, 1000):
         n = i * j
-timeend = t.perf_counter() 
-print("執行一百萬次整數運算的時間：" + str(timeend-timestart) + " 秒")
+timeend = t.perf_counter()
+print("執行一百萬次整數運算的時間：" + str(timeend - timestart) + " 秒")
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1523,8 +1795,10 @@ import time as t
 
 time1 = t.localtime()
 show = "今天是今年的第 " + str(time1.tm_yday) + " 天，屬於"
-if time1.tm_yday < 184 : show += "上半年。"
-else :  show += "下半年。"
+if time1.tm_yday < 184:
+    show += "上半年。"
+else:
+    show += "下半年。"
 print(show)
 
 print("------------------------------------------------------------")  # 60個
@@ -1551,13 +1825,15 @@ print("------------------------------------------------------------")  # 60個
 
 import random
 
-list1 = random.sample(range(1,50), 7)
+list1 = random.sample(range(1, 50), 7)
 special = list1.pop()
 list1.sort()
 print("本期大樂透中獎號碼為：", end="")
-for i in range(0,6):
-    if i == 5:    print(str(list1[i]))
-    else:    print(str(list1[i]), end=", ")
+for i in range(0, 6):
+    if i == 5:
+        print(str(list1[i]))
+    else:
+        print(str(list1[i]), end=", ")
 print("本期大樂透特別號為：" + str(special))
 
 print("------------------------------------------------------------")  # 60個
@@ -1566,7 +1842,7 @@ import time as t
 
 time1 = t.localtime()
 show = "現在時刻："
-if time1.tm_hour < 12: 
+if time1.tm_hour < 12:
     show += "上午 "
     hour = time1.tm_hour
 else:
@@ -1578,12 +1854,12 @@ print(show)
 
 print("------------------------------------------------------------")  # 60個
 
-dict1 = {"A":"內向穩重", "B":"外向樂觀", "O":"堅強自信", "AB":"聰明自然"}
+dict1 = {"A": "內向穩重", "B": "外向樂觀", "O": "堅強自信", "AB": "聰明自然"}
 name = "O"
 blood = dict1.get(name)
-if blood == None:  
+if blood == None:
     print("沒有「" + name + "」血型！")
-else:  
+else:
     print(name + " 血型的個性為：" + str(dict1[name]))
 
 print("------------------------------------------------------------")  # 60個
@@ -1601,85 +1877,95 @@ listchinese = [100, 74, 82]
 listmath = [87, 88, 65]
 listenglish = [79, 100, 8]
 print("姓名     座號  國文  數學  英文")
-for i in range(0,3):
-    print(listname[i].ljust(5), str(i+1).rjust(3), str(listchinese[i]).rjust(5), str(listmath[i]).rjust(5), str(listenglish[i]).rjust(5))
+for i in range(0, 3):
+    print(
+        listname[i].ljust(5),
+        str(i + 1).rjust(3),
+        str(listchinese[i]).rjust(5),
+        str(listmath[i]).rjust(5),
+        str(listenglish[i]).rjust(5),
+    )
 
 print("------------------------------------------------------------")  # 60個
 
-def disp_data(): # 顯示串列的自訂程序
+
+def disp_data():  # 顯示串列的自訂程序
     for item in datas:
-        print(item,end=" ")
-    print()        
+        print(item, end=" ")
+    print()
+
 
 # 主程式
-datas=[3,5,2,1]  
-print("排序前：",end=" ")
-disp_data() # 顯示排序前串列
-n=len(datas)-1 # 串列長度-1
+datas = [3, 5, 2, 1]
+print("排序前：", end=" ")
+disp_data()  # 顯示排序前串列
+n = len(datas) - 1  # 串列長度-1
 
-for i in range(0,n): 
-    for j in range(0,n-i):         
-        if (datas[j]>datas[j+1]): # 由小到大排序
-            datas[j],datas[j+1]=datas[j+1],datas[j] # 兩數互換
+for i in range(0, n):
+    for j in range(0, n - i):
+        if datas[j] > datas[j + 1]:  # 由小到大排序
+            datas[j], datas[j + 1] = datas[j + 1], datas[j]  # 兩數互換
 
-print("排序後：",end=" ")  
-disp_data()  # 顯示排序後串列 
+print("排序後：", end=" ")
+disp_data()  # 顯示排序後串列
 
 print("------------------------------------------------------------")  # 60個
 
-def disp_data(): # 顯示串列的自訂程序
+
+def disp_data():  # 顯示串列的自訂程序
     for item in datas:
-        print(item,end=" ")
-    print()        
+        print(item, end=" ")
+    print()
+
 
 # 主程式
-datas=[3,5,2,1]  
-print("排序前：",end=" ")
-disp_data() # 顯示排序前串列
-n=len(datas)-1 # 串列長度-1
+datas = [3, 5, 2, 1]
+print("排序前：", end=" ")
+disp_data()  # 顯示排序前串列
+n = len(datas) - 1  # 串列長度-1
 
-for i in range(0,n): 
-    for j in range(0,n-i):      
-        print("i=%d j=%d" %(i,j))
-        if (datas[j]>datas[j+1]): # 由大到小排序
-            print("%d,%d 互換後" %(datas[j],datas[j+1]) ,end="：")
-            datas[j],datas[j+1]=datas[j+1],datas[j] # 兩數互換
+for i in range(0, n):
+    for j in range(0, n - i):
+        print("i=%d j=%d" % (i, j))
+        if datas[j] > datas[j + 1]:  # 由大到小排序
+            print("%d,%d 互換後" % (datas[j], datas[j + 1]), end="：")
+            datas[j], datas[j + 1] = datas[j + 1], datas[j]  # 兩數互換
         print(datas)
 
-print("排序後：",end=" ")  
-disp_data()  # 顯示排序後串列 
+print("排序後：", end=" ")
+disp_data()  # 顯示排序後串列
 
 print("------------------------------------------------------------")  # 60個
 
-dict1 = {"春季":"暖和", "夏季":"炎熱", "秋季":"涼爽", "冬季":"寒冷"}
+dict1 = {"春季": "暖和", "夏季": "炎熱", "秋季": "涼爽", "冬季": "寒冷"}
 name = "春季"
 feeling = dict1.get(name)
-if feeling == None:  
+if feeling == None:
     print("沒有「" + name + "」季節！")
-else:  
+else:
     print(name + "的天氣為 " + str(dict1[name]))
 
 print("------------------------------------------------------------")  # 60個
 
-dict1 = {"電視":15000, "冰箱":23000, "冷氣":28000}
+dict1 = {"電視": 15000, "冰箱": 23000, "冷氣": 28000}
 name = "冰箱"
-if name in dict1:  
+if name in dict1:
     print(name + "的價格為 " + str(dict1[name]))
-else:  
+else:
     price = input("輸入電器價格：")
     dict1[name] = price
     print("字典內容：" + str(dict1))
 
 print("------------------------------------------------------------")  # 60個
 
-dict1 = {"水瓶座":"活潑善變", "雙魚座":"迷人保守", "白羊座":"天生勇者", "金牛座":"熱情敏感"}
+dict1 = {"水瓶座": "活潑善變", "雙魚座": "迷人保守", "白羊座": "天生勇者", "金牛座": "熱情敏感"}
 item1 = dict1.items()
 for name, nature in item1:
     print("%s 的性格特癥為 %s" % (name, nature))
 
 print("------------------------------------------------------------")  # 60個
 
-dict1 = {"水瓶座":"活潑善變", "雙魚座":"迷人保守", "白羊座":"天生勇者", "金牛座":"熱情敏感"}
+dict1 = {"水瓶座": "活潑善變", "雙魚座": "迷人保守", "白羊座": "天生勇者", "金牛座": "熱情敏感"}
 listkey = list(dict1.keys())
 listvalue = list(dict1.values())
 for i in range(len(listkey)):
@@ -1699,79 +1985,107 @@ list2 = [9000, 23900, 83400, 132000]
 list3 = [186500, 127800, 100000, 45000]
 list4 = [78900, 125000, 90000, 8000]
 print("姓名       第一季  第二季  第三季   第四季")
-for i in range(0,3):
-    print(listname[i].ljust(5), str(list1[i]).rjust(7), str(list2[i]).rjust(7), str(list3[i]).rjust(7), str(list4[i]).rjust(7))
+for i in range(0, 3):
+    print(
+        listname[i].ljust(5),
+        str(list1[i]).rjust(7),
+        str(list2[i]).rjust(7),
+        str(list3[i]).rjust(7),
+        str(list4[i]).rjust(7),
+    )
 
 print("------------------------------------------------------------")  # 60個
 
 import random
 
-list1 = random.sample(range(0,10), 4)
+list1 = random.sample(range(0, 10), 4)
 list1.sort()
 print("本期四星彩中獎號碼為：", end="")
-for i in range(0,4):
-    if i == 3:    print(str(list1[i]))
-    else:    print(str(list1[i]), end=", ")
+for i in range(0, 4):
+    if i == 3:
+        print(str(list1[i]))
+    else:
+        print(str(list1[i]), end=", ")
 
 print("------------------------------------------------------------")  # 60個
 
-def disp_data(): # 顯示串列的自訂程序
+
+def disp_data():  # 顯示串列的自訂程序
     for item in datas:
-        print(item,end=" ")
-    print()        
+        print(item, end=" ")
+    print()
+
 
 # 主程式
-datas=datas=[2,3,5,7,1]  
-print("排序前：",end=" ")
-disp_data() # 顯示排序前串列
-n=len(datas)-1 # 串列長度-1
+datas = datas = [2, 3, 5, 7, 1]
+print("排序前：", end=" ")
+disp_data()  # 顯示排序前串列
+n = len(datas) - 1  # 串列長度-1
 
-for i in range(0,n): 
-    for j in range(0,n-i):         
-        if (datas[j]<datas[j+1]): # 由大到小排序
-            datas[j],datas[j+1]=datas[j+1],datas[j] # 兩數互換
+for i in range(0, n):
+    for j in range(0, n - i):
+        if datas[j] < datas[j + 1]:  # 由大到小排序
+            datas[j], datas[j + 1] = datas[j + 1], datas[j]  # 兩數互換
 
-print("排序後：",end=" ")  
-disp_data()  # 顯示排序後串列 
+print("排序後：", end=" ")
+disp_data()  # 顯示排序後串列
 
 print("------------------------------------------------------------")  # 60個
 
-monthname = {1:'JAN', 2:'FEB', 3:'MAR', 4:'APR', 5:'MAY', 6:'JUN', 7:'JUL', 8:'AUG', 9:'SEP', 10:'OCT', 11:'NOV', 12:'DEC'}
+monthname = {
+    1: "JAN",
+    2: "FEB",
+    3: "MAR",
+    4: "APR",
+    5: "MAY",
+    6: "JUN",
+    7: "JUL",
+    8: "AUG",
+    9: "SEP",
+    10: "OCT",
+    11: "NOV",
+    12: "DEC",
+}
 m = 3
 print("{}月份的英文簡寫為 {}：".format(m, monthname[m]))
 
 print("------------------------------------------------------------")  # 60個
 
-cnum = {0:"零", 1:"壹", 2:"貮", 3:"參", 4:"肆", 5:"伍", 6:"陸", 7:"柒", 8:"捌", 9:"玖"}
+cnum = {0: "零", 1: "壹", 2: "貮", 3: "參", 4: "肆", 5: "伍", 6: "陸", 7: "柒", 8: "捌", 9: "玖"}
 num = "1234"
 for n in num:
     print(cnum[int(n)], end="")
 
 print("------------------------------------------------------------")  # 60個
 
-dict1 = {"台北市":6, "新北市":2, "桃園市":5, "台中市":8, "台南市":3, "高雄市":9}
+dict1 = {"台北市": 6, "新北市": 2, "桃園市": 5, "台中市": 8, "台南市": 3, "高雄市": 9}
 name = "新北市"
 PM25 = dict1.get(name)
-if PM25 == None:  
+if PM25 == None:
     print("六都中沒有「" + name + "」城市！")
-else:  
+else:
     print(name + " 今天的 PM2.5 值為：" + str(dict1[name]))
 
 print("------------------------------------------------------------")  # 60個
 
-dict1 = {"鼠":"親切和藹", "牛":"保守努力", "虎":"熱情大膽", "兔":"溫柔仁慈"}
+dict1 = {"鼠": "親切和藹", "牛": "保守努力", "虎": "熱情大膽", "兔": "溫柔仁慈"}
 for name, nature in dict1.items():
     print("生肖屬 %s 的性格特癥為 %s" % (name, nature))
 
 print("------------------------------------------------------------")  # 60個
 
-rate = {'USD':28.02, 'JPY':0.2513, 'CNY':4.24}
+rate = {"USD": 28.02, "JPY": 0.2513, "CNY": 4.24}
 TWD = float("123.456")
-print("台幣{:.2f}元等於美金{:.2f}元, 日幣{:.2f}元, 人民幣{:.2f}元".format(TWD, TWD/rate['USD'], TWD/rate['JPY'], TWD/rate['CNY']))
+print(
+    "台幣{:.2f}元等於美金{:.2f}元, 日幣{:.2f}元, 人民幣{:.2f}元".format(
+        TWD, TWD / rate["USD"], TWD / rate["JPY"], TWD / rate["CNY"]
+    )
+)
 
 print("------------------------------------------------------------")  # 60個
 
 import random
+
 print("產生N個 從 MIN 到 MAX 不重複的整數(包含頭尾)")
 N = 7
 MIN = 1
@@ -1800,13 +2114,13 @@ print("人數：%d" % len(scores))
 print("最高分為：%d" % max(scores))
 print("最低分為：%d" % min(scores))
 print("總分為：%d" % sum(scores))
-print("平均為：%6.2f" % (sum(scores)/N))
+print("平均為：%6.2f" % (sum(scores) / N))
 
-scores2=sorted(scores,reverse=True) # 由大到小排序
-print("成績由大到小排序：",scores2)
+scores2 = sorted(scores, reverse=True)  # 由大到小排序
+print("成績由大到小排序：", scores2)
 
-scores2=sorted(scores,reverse=False) # 由小到大排序
-print("成績由小到大排序：",scores2) 
+scores2 = sorted(scores, reverse=False)  # 由小到大排序
+print("成績由小到大排序：", scores2)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1815,23 +2129,25 @@ MIN = 80
 MAX = 100
 scores = random.sample(range(MIN, MAX), N)
 
-def disp_scores(): # 顯示串列的自訂程序
+
+def disp_scores():  # 顯示串列的自訂程序
     for score in scores:
-        print(score,end=" ")
+        print(score, end=" ")
     print()
 
-print("排序前：",end=" ")
-disp_scores()   # 顯示排序前串列
 
-n=len(scores)-1 # 串列長度-1
+print("排序前：", end=" ")
+disp_scores()  # 顯示排序前串列
 
-for i in range(0,n): 
-    for j in range(0,n-i):         
-        if (scores[j]<scores[j+1]): # 由大到小排序
-            scores[j],scores[j+1]=scores[j+1],scores[j] # 兩數互換    
+n = len(scores) - 1  # 串列長度-1
 
-print("成績由大到小排序：",end="") 
-disp_scores() # 顯示排序後串列
+for i in range(0, n):
+    for j in range(0, n - i):
+        if scores[j] < scores[j + 1]:  # 由大到小排序
+            scores[j], scores[j + 1] = scores[j + 1], scores[j]  # 兩數互換
+
+print("成績由大到小排序：", end="")
+disp_scores()  # 顯示排序後串列
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1841,28 +2157,27 @@ sys.exit()
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
 
-animals = ["鼠","牛","虎","兔","龍"]
+animals = ["鼠", "牛", "虎", "兔", "龍"]
 
 print("動物有：", animals)
 
 animal = "豬"
-n = animals.count(animal) 
-if (n>0):  # 串列元素存在
-    p=animals.index(animal)
-    print("%s 在串列中的第 %d 項" %(animal,p+1))
+n = animals.count(animal)
+if n > 0:  # 串列元素存在
+    p = animals.index(animal)
+    print("%s 在串列中的第 %d 項" % (animal, p + 1))
     animals.remove(animal)
 else:
-    print(animal,"不在串列中!, 加入此動物")
+    print(animal, "不在串列中!, 加入此動物")
     animals.append(animal)
 
 print("動物有：", animals)
 
 print("------------------------------------------------------------")  # 60個
 
-dict1={"金牌":26, "銀牌":34, "銅牌":30}
+dict1 = {"金牌": 26, "銀牌": 34, "銅牌": 30}
 listkey = list(dict1.keys())
 listvalue = list(dict1.values())
 for i in range(len(listkey)):
@@ -1871,13 +2186,13 @@ for i in range(len(listkey)):
 
 print("------------------------------------------------------------")  # 60個
 
-names=["David","Lily","Chiou","Bear","Shantel","Cynthia"]
+names = ["David", "Lily", "Chiou", "Bear", "Shantel", "Cynthia"]
 
-n=len(names)-1 # 串列長度-1
-for i in range(0,n): 
-    for j in range(0,n-i):         
-        if (names[j]>names[j+1]): # 由小到大排序
-            names[j],names[j+1]=names[j+1],names[j] # 互換  
+n = len(names) - 1  # 串列長度-1
+for i in range(0, n):
+    for j in range(0, n - i):
+        if names[j] > names[j + 1]:  # 由小到大排序
+            names[j], names[j + 1] = names[j + 1], names[j]  # 互換
 print("------------------------------------------------------------")  # 60個
 
 print("姓名    成績")
@@ -2064,15 +2379,16 @@ for f in fm.fontManager.ttflist:
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
+
 
 # Exception
 def getArea(radius):
     if radius < 0:
         raise RuntimeError("Negative radius")
-    
+
     return radius * radius * 3.1415
+
 
 try:
     print(getArea(5))
@@ -2087,11 +2403,11 @@ deck = [x for x in range(0, 52)]
 
 # Create suits and ranks lists
 suits = ["Spades", "Hearts", "Diamonds", "Clubs"]
-ranks = ["Ace", "2", "3", "4", "5", "6", "7", "8", "9",
-      "10", "Jack", "Queen", "King"]
-        
+ranks = ["Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King"]
+
 # Shuffle the cards
 import random
+
 random.shuffle(deck)
 
 # Display the first four cards
@@ -2102,34 +2418,34 @@ for i in range(4):
 
 print("------------------------------------------------------------")  # 60個
 
-from random import randint 
+from random import randint
 
 # Open file for writing data
 outfile = open("tmp_Numbers.txt", "w")
 for i in range(10):
     outfile.write(str(randint(0, 9)) + " ")
-outfile.close() # Close the file
+outfile.close()  # Close the file
 
 # Open file for reading data
 infile = open("tmp_Numbers.txt", "r")
 s = infile.read()
 numbers = [eval(x) for x in s.split()]
 for number in numbers:
-    print(number, end = " ")
-infile.close() # Close the file
+    print(number, end=" ")
+infile.close()  # Close the file
 
 print()
 
 print("------------------------------------------------------------")  # 60個
 
-import math # import Math module to use the math functions
- 
+import math  # import Math module to use the math functions
+
 # Test algebraic functions
 print("exp(1.0) =", math.exp(1))
 print("log(3.78) =", math.log(math.e))
 print("log10(10, 10) =", math.log(10, 10))
 print("sqrt(4.0) =", math.sqrt(4.0))
- 
+
 # Test trigonometric functions
 print("sin(PI / 2) =", math.sin(math.pi / 2))
 print("cos(PI / 2) =", math.cos(math.pi / 2))
@@ -2162,9 +2478,9 @@ print("Number of elements above the average is", count)
 """
 print("------------------------------------------------------------")  # 60個
 
-filename = 'tmp_Presidents.txt'
+filename = "tmp_Presidents.txt"
 
-#製作一個檔案 
+# 製作一個檔案
 # Open file for output
 outfile = open(filename, "w")
 
@@ -2173,17 +2489,17 @@ outfile.write("Bill Clinton\n")
 outfile.write("George Bush\n")
 outfile.write("Barack Obama")
 
-outfile.close() # Close the output file
+outfile.close()  # Close the output file
 
 print("------------------------------------------------------------")  # 60個
 
-filename = 'tmp_Presidents.txt'
+filename = "tmp_Presidents.txt"
 
 fp = open(filename, "r")
 zops = fp.readlines()
 fp.close()
 
-i=1
+i = 1
 print("檔案內容")
 for zen in zops:
     print("第 {} 行 : {}".format(i, zen), end="")
@@ -2193,14 +2509,15 @@ print()
 
 print("------------------------------------------------------------")  # 60個
 
-filename = 'tmp_Presidents.txt'
+filename = "tmp_Presidents.txt"
+
 
 def main():
     # Open file for input
     infile = open(filename, "r")
     print("(1) Using read(): ")
     print(infile.read())
-    infile.close() # Close the input file
+    infile.close()  # Close the input file
 
     # Open file for input
     infile = open(filename, "r")
@@ -2209,7 +2526,7 @@ def main():
     print(s1)
     s2 = infile.read(10)
     print(repr(s2))
-    infile.close() # Close the input file
+    infile.close()  # Close the input file
 
     # Open file for input
     infile = open(filename, "r")
@@ -2222,27 +2539,28 @@ def main():
     print(repr(line2))
     print(repr(line3))
     print(repr(line4))
-    infile.close() # Close the input file
+    infile.close()  # Close the input file
 
     # Open file for input
     infile = open(filename, "r")
     print("\n(4) Using readlines(): ")
     print(infile.readlines())
-    infile.close() # Close the input file
+    infile.close()  # Close the input file
 
-main() # Call the main function
+
+main()  # Call the main function
 
 print("------------------------------------------------------------")  # 60個
 
-print('各種讀取檔案的方法')
+print("各種讀取檔案的方法")
 
-filename = 'tmp_Presidents.txt'
+filename = "tmp_Presidents.txt"
 
 # Open file for input
 infile = open(filename, "r")
 print("(1) Using read(): ")
 print(infile.read())
-infile.close() # Close the input file
+infile.close()  # Close the input file
 
 # Open file for input
 infile = open(filename, "r")
@@ -2251,7 +2569,7 @@ s1 = infile.read(4)
 print(s1)
 s2 = infile.read(10)
 print(repr(s2))
-infile.close() # Close the input file
+infile.close()  # Close the input file
 
 # Open file for input
 infile = open(filename, "r")
@@ -2264,19 +2582,19 @@ print(repr(line1))
 print(repr(line2))
 print(repr(line3))
 print(repr(line4))
-infile.close() # Close the input file
+infile.close()  # Close the input file
 
 # Open file for input
 infile = open(filename, "r")
 print("\n(4) Using readlines(): ")
 print(infile.readlines())
-infile.close() # Close the input file
+infile.close()  # Close the input file
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 import time
 
-currentTime = time.time() # Get current time
+currentTime = time.time()  # Get current time
 
 # Obtain the total seconds since midnight, Jan 1, 1970
 totalSeconds = int(currentTime)
@@ -2293,12 +2611,12 @@ print(input.read())
 
 print("------------------------------------------------------------")  # 60個
 
-#Social Security Number
+# Social Security Number
 
 import re
 
 regex = "\d{3}-\d{2}-\d{4}"
-#ssn = input("Enter SSN: ")
+# ssn = input("Enter SSN: ")
 ssn = "123-45-6789"
 match1 = re.match(regex, ssn)
 
@@ -2308,83 +2626,85 @@ if match1 != None:
     print("start and end position of the matched text is " + str(match1.span()))
 else:
     print(ssn, " is not a valid SSN")
-    
+
 print("------------------------------------------------------------")  # 60個
 
 import re
 
 regex = "\d{3}-\d{2}-\d{4}"
-#text = input("Enter a text: ")
+# text = input("Enter a text: ")
 text = "123-45-6789"
 
 match1 = re.search(regex, text)
 
 if match1 != None:
     print(text, " contains a SSN")
-    print("start position of the matched text is " + 
-        str(match1.start()))
-    print("start and end position of the matched text is " +
-        str(match1.span()))
+    print("start position of the matched text is " + str(match1.start()))
+    print("start and end position of the matched text is " + str(match1.span()))
 else:
     print(text, " does not contain a SSN")
 
 print("------------------------------------------------------------")  # 60個
 
 s = "1 2 3 4 5"
-items = s.split() # Extract items from the string
-lst = [eval(x) for x in items] # Convert items to numbers
+items = s.split()  # Extract items from the string
+lst = [eval(x) for x in items]  # Convert items to numbers
 
 print(lst)
 
 print("------------------------------------------------------------")  # 60個
 
-students = [("John", "Smith", 96), ("Susan", "King", 76), 
-            ("Kim", "Yao", 99)]
+students = [("John", "Smith", 96), ("Susan", "King", 76), ("Kim", "Yao", 99)]
 students.sort(key=lambda e: (e[1]))
 
 print(students)
-print(sorted(students, key = lambda t: (t[2]), reverse = True))
+print(sorted(students, key=lambda t: (t[2]), reverse=True))
 
 print("------------------------------------------------------------")  # 60個
 
-#河內塔
+# 河內塔
+
 
 # The function for finding the solution to move n disks
-#   from fromTower to toTower with auxTower 
+#   from fromTower to toTower with auxTower
 def moveDisks(n, fromTower, toTower, auxTower):
-    if n == 1: # Stopping condition
+    if n == 1:  # Stopping condition
         print("Move disk", n, "from", fromTower, "to", toTower)
-    else: 
+    else:
         moveDisks(n - 1, fromTower, auxTower, toTower)
         print("Move disk", n, "from", fromTower, "to", toTower)
         moveDisks(n - 1, auxTower, toTower, fromTower)
 
-print('盤子數 5')
+
+print("盤子數 5")
 n = 5
 
 # Find the solution recursively
 print("The moves are:")
-moveDisks(n, 'A', 'B', 'C')
+moveDisks(n, "A", "B", "C")
 
 print("------------------------------------------------------------")  # 60個
 
-# Convert a decimal to a hex as a string 
+
+# Convert a decimal to a hex as a string
 def decimalToHex(decimalValue):
     hex = ""
- 
+
     while decimalValue != 0:
-        hexValue = decimalValue % 16 
+        hexValue = decimalValue % 16
         hex = toHexChar(hexValue) + hex
         decimalValue = decimalValue // 16
-    
+
     return hex
-  
-# Convert an integer to a single hex digit in a character 
+
+
+# Convert an integer to a single hex digit in a character
 def toHexChar(hexValue):
     if 0 <= hexValue <= 9:
-        return chr(hexValue + ord('0'))
+        return chr(hexValue + ord("0"))
     else:  # 10 <= hexValue <= 15
-        return chr(hexValue - 10 + ord('A'))
+        return chr(hexValue - 10 + ord("A"))
+
 
 decimalValue = 170
 
@@ -2393,54 +2713,58 @@ print("The hex number for decimal", decimalValue, "is", decimalToHex(decimalValu
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("          九九乘法表")
 # Display the number title
-print("  |", end = '')
+print("  |", end="")
 for j in range(1, 10):
-    print("  ", j, end = '')
-print() # Jump to the new line
+    print("  ", j, end="")
+print()  # Jump to the new line
 print("-----------------------------------------")
 
 # Display table body
 for i in range(1, 10):
-    print(i, "|", end = '')
-    for j in range(1, 10): 
+    print(i, "|", end="")
+    for j in range(1, 10):
         # Display the product and align properly
-        print(format(i * j, '4d'), end = '')
-    print()# Jump to the new line
+        print(format(i * j, "4d"), end="")
+    print()  # Jump to the new line
 
 
 print("------------------------------------------------------------")  # 60個
+
 
 # Compute the distance between two points (x1, y1) and (x2, y2)
 def distance(x1, y1, x2, y2):
     return ((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1)) ** 0.5
 
+
 def nearestPoints(points):
     # p1 and p2 are the indices in the points list
     p1, p2 = 0, 1  # Initial two points
 
-    shortestDistance = distance(points[p1][0], points[p1][1], 
-        points[p2][0], points[p2][1]) # Initialize shortestDistance
-    
+    shortestDistance = distance(
+        points[p1][0], points[p1][1], points[p2][0], points[p2][1]
+    )  # Initialize shortestDistance
+
     # Compute distance for every two points
     for i in range(len(points)):
         for j in range(i + 1, len(points)):
-            d = distance(points[i][0], points[i][1], 
-                         points[j][0], points[j][1])  # Find distance
+            d = distance(
+                points[i][0], points[i][1], points[j][0], points[j][1]
+            )  # Find distance
 
             if shortestDistance > d:
-                p1, p2 = i, j # Update p1, p2
-                shortestDistance = d # New shortestDistance 
+                p1, p2 = i, j  # Update p1, p2
+                shortestDistance = d  # New shortestDistance
 
     return p1, p2
 
-print('找出多點中最近的兩點')
+
+print("找出多點中最近的兩點")
 
 # Create a list to store points
 points = []
-    
+
 point = 2 * [0]
 point[0], point[1] = 0, 0
 points.append(point)
@@ -2458,22 +2782,30 @@ point[0], point[1] = 3, 1
 points.append(point)
 
 # p1 and p2 are the indices in the points list
-p1, p2 = nearestPoints(points)  
+p1, p2 = nearestPoints(points)
 
 # Display result
-print("The closest two points are (" +
-    str(points[p1][0]) + ", " + str(points[p1][1]) + ") and (" +
-    str(points[p2][0]) + ", " + str(points[p2][1]) + ")")
+print(
+    "The closest two points are ("
+    + str(points[p1][0])
+    + ", "
+    + str(points[p1][1])
+    + ") and ("
+    + str(points[p2][0])
+    + ", "
+    + str(points[p2][1])
+    + ")"
+)
 
 print("------------------------------------------------------------")  # 60個
 
 import logging
 
-logging.basicConfig(level=logging.INFO, format='%(asctime)s %(message)s')
+logging.basicConfig(level=logging.INFO, format="%(asctime)s %(message)s")
 
-logging.info('Start to load dataset')
+logging.info("Start to load dataset")
 
-logging.info('Done with load dataset')
+logging.info("Done with load dataset")
 
 print("------------------------------------------------------------")  # 60個
 
@@ -2495,7 +2827,7 @@ df = pd.DataFrame(
 )
 
 
-x = np.linspace(0,8, 100)
+x = np.linspace(0, 8, 100)
 y = np.sin(x)
 plt.plot(x, y)
 
@@ -2520,9 +2852,9 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-root_dir = os.path.abspath('.')
-gunfire_path = os.path.join(root_dir, 'gunfire.wav')
-filename = os.path.join(root_dir, 'tone.wav')
+root_dir = os.path.abspath(".")
+gunfire_path = os.path.join(root_dir, "gunfire.wav")
+filename = os.path.join(root_dir, "tone.wav")
 
 print(filename)
 
@@ -2536,8 +2868,8 @@ if not os.path.isdir('trainer'):
 os.chdir('trainer')
 """
 
-root_dir = os.path.abspath('.')
-filename = os.path.join(root_dir, 'tone.wav')
+root_dir = os.path.abspath(".")
+filename = os.path.join(root_dir, "tone.wav")
 print(filename)
 
 print("------------------------------------------------------------")  # 60個
@@ -2816,16 +3148,17 @@ with open("README.md", "w", encoding="utf-8") as readme:
 
 print("------------------------------------------------------------")  # 60個
 
-print('列出所有區域變數的名稱與內容')
+print("列出所有區域變數的名稱與內容")
 cc = locals()
 print(cc)
 
-print('列出所有全域變數的名稱與內容')
+print("列出所有全域變數的名稱與內容")
 cc = globals()
 print(cc)
 
 import sys
-#目前 python程式 路徑
+
+# 目前 python程式 路徑
 print(sys.executable)
 
 print("------------------------------------------------------------")  # 60個

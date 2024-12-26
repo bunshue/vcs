@@ -126,6 +126,7 @@ sklearn.metrics中的评估方法介绍
 （accuracy_score, recall_score, roc_curve, roc_auc_score, confusion_matrix）
 """
 
+'''
 from sklearn.metrics import accuracy_score
 
 y_pred = [0, 2, 1, 3]
@@ -190,3 +191,5 @@ y_true = ["cat", "ant", "cat", "cat", "ant", "bird"]
 y_pred = ["ant", "ant", "cat", "cat", "ant", "cat"]
 cc = confusion_matrix(y_true, y_pred, labels=["ant", "bird", "cat"])
 print(cc)
+
+'''
