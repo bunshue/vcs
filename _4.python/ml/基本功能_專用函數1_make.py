@@ -6,7 +6,6 @@
 預設方法建立資料集
 
 一些簡易的運算
-
 """
 
 print("------------------------------------------------------------")  # 60個
@@ -60,6 +59,13 @@ print(sklearn.__version__)
 # print(dir(datasets))
 print(sklearn)
 
+
+def show():
+    # return
+    plt.show()
+    pass
+
+
 print("------------------------------------------------------------")  # 60個
 
 print("使用center_box")
@@ -87,7 +93,7 @@ plt.scatter(*zip(*X))
 plt.scatter(centers[:, 0], centers[:, 1], marker="*", s=200, color="r")
 # 目前還不會把框畫出來 center_box
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -191,9 +197,9 @@ plt.title("sd=6")
 
 plt.suptitle("各種 make_blobs")
 
-plt.show()
-print("------------------------------------------------------------")  # 60個
+show()
 
+print("------------------------------------------------------------")  # 60個
 
 plt.figure(
     num="sklearn內建資料集集合",
@@ -209,11 +215,18 @@ print("------------------------------")  # 30個
 plt.subplot(231)
 plt.title("make_regression 迴歸資料集")
 
-N = 50  # 樣本數
+N = 50  # n_samples, 樣本數
+M = 1  # n_features, 特徵數(資料的維度)
+T = 1  # n_targets, 標籤類別
+NOISE = 10  # noise, 分散程度
+
+# X, y = datasets.make_regression(n_samples=N, n_features=M, n_targets=T, noise=NOISE)
+
+print("make_regression,", N, "個樣本, ", M, "個特徵")
 
 X, y, coef = make_regression(
     n_samples=N,
-    n_features=1,
+    n_features=M,
     noise=20,
     coef=True,
     random_state=9487
@@ -300,7 +313,7 @@ plt.subplot(236)
 plt.title("xxx")
 
 plt.suptitle("各種 make_xxxx")
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -380,7 +393,7 @@ for key, group in grouped:
 
 print(X.shape, y.shape)
 plt.title("make_classification")
-plt.show()
+show()
 
 print("------------------------------")  # 30個
 # plt.subplot(234)
@@ -408,7 +421,7 @@ for key, group in grouped:
     group.plot(ax=ax, kind="scatter", x="x", y="y", label=key, color=colors[key])
 
 plt.title("make_moons")
-plt.show()
+show()
 
 print("------------------------------")  # 30個
 # plt.subplot(235)
@@ -435,7 +448,7 @@ for key, group in grouped:
     group.plot(ax=ax, kind="scatter", x="x", y="y", label=key, color=colors[key])
 
 plt.title("make_circles")
-plt.show()
+show()
 
 print("------------------------------")  # 30個
 # plt.subplot(236)
@@ -466,7 +479,7 @@ for key, group in grouped:
     group.plot(ax=ax, kind="scatter", x="x", y="y", label=key, color=colors[key])
 
 plt.title("make_gaussian_quantiles")
-plt.show()
+show()
 
 # 以上畫一起 有問題~~~~~
 
@@ -504,7 +517,7 @@ plt.plot(x, norm.pdf(x), "r-", lw=2, alpha=0.6, label="theoretic std norm pdf")
 
 plt.title("make_hastie_10_2")
 plt.legend()
-plt.show()
+show()
 
 # 如上圖可知，10個特征分量確實基本上都是與標準正態分布吻合的。
 
@@ -536,7 +549,7 @@ data, rows, columns = make_biclusters(
 
 plt.matshow(data, cmap=plt.cm.Blues)
 plt.title("Original dataset")
-plt.show()
+show()
 
 """
 10. make_checkerboard
@@ -549,7 +562,7 @@ data, rows, columns = make_checkerboard(
 
 plt.matshow(data, cmap=plt.cm.Blues)
 plt.title("Original dataset")
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -571,7 +584,7 @@ ax.view_init(4, -72)
 ax.xaxis.set_major_formatter(NullFormatter())
 ax.yaxis.set_major_formatter(NullFormatter())
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -591,11 +604,13 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
+sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+
 print("------------------------------------------------------------")  # 60個
 
 

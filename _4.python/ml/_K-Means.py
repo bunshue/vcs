@@ -1325,6 +1325,723 @@ print(p[p == 0].index)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+# simple_kmeans_from_scratch
+# 自行開發K-Means
+
+# K-Means演算法類別
+
+
+class Kmeans(object):
+    # 訓練
+    def fit(self, df, k=3):
+        # 任意分成K組
+        df["group"] = k - 1
+        n = len(df) // 3
+        # 前 k-1 組
+        for i in range(k - 1):
+            for j in range(n):
+                df.loc[i * k + j, "group"] = i
+        # print(df)
+
+        # 重覆第EM步驟，直到資料所屬組別不再變動為止
+        prev_df = pd.DataFrame()
+        while not df.equals(prev_df):
+            group_mean = df.groupby("group")["goals"].mean()
+            print(group_mean)
+            prev_df = df.copy()
+            for i, row in prev_df.iterrows():
+                df.loc[i, "group"] = np.argmin(np.abs(group_mean - row["goals"]))
+
+        self.group_mean = group_mean
+        return df
+
+    # 預測
+    def predict(self, x):
+        return np.argmin(np.abs(self.group_mean - x))
+
+
+# 載入資料集
+
+df = pd.read_csv("./data/kmeans_data.csv")
+print(df)
+
+# 模型訓練
+
+model = Kmeans()  # K-平均演算法
+
+clusters = model.fit(df)  # 學習訓練.fit
+print(clusters)
+
+# 分組結果
+grouped_df = clusters.groupby("group")
+for key, item in grouped_df:
+    print(f"group {key}:")
+    print(item["player"].values, "\n")
+
+# 預測
+
+# 預測10個進球數
+cc = model.predict(10)  # 第一組
+print(cc)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# GMM測試
+
+sns.set()
+
+X, y_true = make_blobs(n_samples=400, centers=4, cluster_std=0.60, random_state=9487)
+X = X[:, ::-1]  # 特徵互調順序，繪圖效果較佳
+print(X[:10])
+
+# 進行 K-Means 集群，並繪圖
+
+CLUSTERS = 4  # 要分成的群數
+clf = KMeans(CLUSTERS, init="k-means++", n_init=10)  # K-平均演算法
+
+labels = clf.fit(X).predict(X)
+
+plt.scatter(X[:, 0], X[:, 1], c=labels, s=40, cmap="viridis")
+
+show()
+
+# 繪製集群範圍
+
+from scipy.spatial.distance import cdist
+
+
+def plot_kmeans(clf, X, n_clusters=4, rseed=0, ax=None):
+    labels = clf.fit_predict(X)
+
+    # 繪製樣本點
+    ax = ax or plt.gca()
+    ax.axis("equal")
+    ax.scatter(X[:, 0], X[:, 1], c=labels, s=40, cmap="viridis", zorder=2)
+
+    # 以最大半徑繪製集群範圍
+    centers = clf.cluster_centers_
+    radii = [cdist(X[labels == i], [center]).max() for i, center in enumerate(centers)]
+    for c, r in zip(centers, radii):
+        ax.add_patch(
+            plt.Circle(c, r, fc="#CCCCCC", lw=3, color="k", alpha=0.5, zorder=1)
+        )
+
+
+CLUSTERS = 4  # 要分成的群數
+clf = KMeans(n_clusters=CLUSTERS, init="k-means++", n_init=10)  # K-平均演算法
+plot_kmeans(clf, X)
+show()
+
+# 生成長條型資料
+
+rng = np.random.RandomState(13)
+X_stretched = np.dot(X, rng.randn(2, 2))
+
+CLUSTERS = 4  # 要分成的群數
+clf = KMeans(n_clusters=CLUSTERS, init="k-means++", n_init=10)  # K-平均演算法
+plot_kmeans(clf, X_stretched)
+show()
+
+# 改用GMM
+
+from sklearn.mixture import GaussianMixture
+
+gmm = GaussianMixture(n_components=4)
+
+gmm.fit(X)  # 學習訓練.fit
+
+labels = gmm.predict(X)
+plt.scatter(X[:, 0], X[:, 1], c=labels, s=40, cmap="viridis")
+show()
+
+# 屬於各集群的機率
+
+probs = gmm.predict_proba(X)
+print(probs[:5].round(3))
+
+# 繪製集群範圍
+
+from matplotlib.patches import Ellipse
+
+
+# 繪製橢圓
+def draw_ellipse(position, covariance, ax=None, **kwargs):
+    """Draw an ellipse with a given position and covariance"""
+    ax = ax or plt.gca()
+
+    # Convert covariance to principal axes
+    if covariance.shape == (2, 2):
+        U, s, Vt = np.linalg.svd(covariance)
+        angle = np.degrees(np.arctan2(U[1, 0], U[0, 0]))
+        width, height = 2 * np.sqrt(s)
+    else:
+        angle = 0
+        width, height = 2 * np.sqrt(covariance)
+
+    # Draw the Ellipse
+    for nsig in range(1, 4):
+        ax.add_patch(Ellipse(position, nsig * width, nsig * height, angle, **kwargs))
+
+
+# 繪製GMM範圍
+def plot_gmm(gmm, X, label=True, ax=None):
+    ax = ax or plt.gca()
+    labels = gmm.fit(X).predict(X)
+    if label:
+        ax.scatter(X[:, 0], X[:, 1], c=labels, s=40, cmap="viridis", zorder=2)
+    else:
+        ax.scatter(X[:, 0], X[:, 1], s=40, zorder=2)
+    ax.axis("equal")
+
+    # soft-edged sphere
+    w_factor = 0.2 / gmm.weights_.max()
+    for pos, covar, w in zip(gmm.means_, gmm.covariances_, gmm.weights_):
+        draw_ellipse(pos, covar, alpha=w * w_factor)
+
+
+gmm = GaussianMixture(n_components=4, random_state=42)
+plot_gmm(gmm, X)
+show()
+
+# 使用 GMM對長條型資料進行集群
+
+gmm = GaussianMixture(n_components=4, covariance_type="full", random_state=42)
+plot_gmm(gmm, X_stretched)
+show()
+
+Xmoon, ymoon = make_moons(200, noise=0.05, random_state=9487)
+plt.scatter(Xmoon[:, 0], Xmoon[:, 1])
+show()
+
+# GMM 集群：設定2個集群
+
+gmm2 = GaussianMixture(n_components=2, covariance_type="full", random_state=9487)
+plot_gmm(gmm2, Xmoon)
+show()
+
+# GMM 集群：設定16個集群
+
+gmm16 = GaussianMixture(n_components=16, covariance_type="full", random_state=9487)
+plot_gmm(gmm16, Xmoon, label=False)
+show()
+
+# 以模型生成資料
+
+Xnew, _ = gmm16.sample(400)
+plt.scatter(Xnew[:, 0], Xnew[:, 1])
+show()
+
+# 以AIC/BIC決定最佳集群數量
+
+n_components = np.arange(1, 21)
+models = [
+    GaussianMixture(n, covariance_type="full", random_state=9487).fit(Xmoon)
+    for n in n_components
+]
+
+plt.plot(n_components, [m.bic(Xmoon) for m in models], label="BIC")
+plt.plot(n_components, [m.aic(Xmoon) for m in models], label="AIC")
+plt.legend(loc="best")
+plt.xlabel("n_components")
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 09_10_customer_segmentation
+# 客戶區隔(Customer segmentation)
+
+# 載入資料集
+df = pd.read_csv(
+    "C:/_git/vcs/_big_files/Scikit-learn_data/invoice.csv", encoding="ISO-8859-1"
+)
+
+# 只分析英國的顧客
+df = df[df.Country == "United Kingdom"]
+cc = df.head()
+print(cc)
+
+# 描述統計量
+# df.describe().T
+
+# 資料清理
+
+# 移除非購買記錄
+
+# 移除數量<=0的交易記錄
+df = df[df["Quantity"] > 0]
+
+# 移除單價<=0的交易記錄
+df = df[df["UnitPrice"] > 0]
+print(df.Quantity.describe())
+cc = df.UnitPrice.describe()
+print(cc)
+
+# 刪除 Missing Value
+df.dropna(subset=["CustomerID"], inplace=True)
+
+# 檢查 Missing Value
+cc = df.isnull().sum()
+print(cc)
+
+# 找出資料集的最近購買日期
+
+# 找出資料集的最近購買日期
+print(df["InvoiceDate"].max())
+
+# 日期轉 YYYY-MM-DD
+cc = df["date"] = pd.DatetimeIndex(df.InvoiceDate).date
+print(cc)
+
+# 計算 Recency
+
+# 計算每個顧客的最近購買日期
+recency_df = df.groupby(["CustomerID"], as_index=False)["date"].max()
+recency_df.columns = ["CustomerID", "LastPurchaseDate"]
+
+# 計算每個顧客的上次消費的日期距今天數
+now = df["date"].max()
+recency_df["Recency"] = recency_df.LastPurchaseDate.apply(lambda x: (now - x).days)
+cc = recency_df.head()
+print(cc)
+
+recency_df.drop(columns=["LastPurchaseDate"], inplace=True)
+
+# 計算 Frequency
+
+# 計算每個顧客的消費次數
+frequency_df = df.copy()
+frequency_df.drop_duplicates(
+    subset=["CustomerID", "InvoiceNo"], keep="first", inplace=True
+)
+frequency_df = frequency_df.groupby("CustomerID", as_index=False)["InvoiceNo"].count()
+frequency_df.columns = ["CustomerID", "Frequency"]
+cc = frequency_df.head()
+print(cc)
+
+# 計算 Monetary
+
+# 計算每個顧客的累計消費金額
+df["Total_cost"] = df["UnitPrice"] * df["Quantity"]
+monetary_df = df.groupby("CustomerID", as_index=False)["Total_cost"].sum()
+monetary_df.columns = ["CustomerID", "Monetary"]
+cc = monetary_df.head()
+print(cc)
+
+# 合併 RFM
+
+rf = recency_df.merge(frequency_df, left_on="CustomerID", right_on="CustomerID")
+rfm = rf.merge(monetary_df, left_on="CustomerID", right_on="CustomerID")
+rfm.set_index("CustomerID", inplace=True)
+cc = rfm.head()
+print(cc)
+
+# 驗算
+
+cc = df[df.CustomerID == 12346.0]
+print(cc)
+
+import datetime as dt
+
+now = dt.date(2011, 12, 9)
+cc = (now - dt.date(2011, 1, 18)).days == 325
+print(cc)
+
+# True
+
+# 複製資料
+rfm_segmentation = rfm.copy()
+
+# 轉折判斷法
+Nc = range(1, 20)
+clf = [KMeans(n_clusters=i, init="k-means++", n_init="auto") for i in Nc]
+for i in range(len(clf)):
+    clf[i].fit(rfm_segmentation)  # 學習訓練.fit
+score = [clf[i].score(rfm_segmentation) for i in range(len(clf))]
+wcss = [clf[i].inertia_ for i in range(len(clf))]
+
+plt.plot(Nc, score)
+plt.xticks(range(0, 20, 2))
+plt.xlabel("Number of Clusters")
+plt.ylabel("Score")
+plt.title("Elbow Curve")
+show()
+
+plt.plot(Nc, wcss)
+plt.xticks(range(0, 20, 2))
+plt.xlabel("Number of Clusters")
+plt.ylabel("wcss")
+plt.title("Elbow Curve")
+show()
+
+# 分成3群
+
+X = rfm_segmentation.copy()
+clf = KMeans(n_clusters=3, init="k-means++", n_init=10, max_iter=300)  # K-平均演算法
+
+clf.fit(X)  # 學習訓練.fit
+
+# 新增欄位，加入集群代碼
+rfm_segmentation["cluster"] = clf.labels_
+
+# 觀看集群 0 的前 10 筆資料
+cc = rfm_segmentation[rfm_segmentation.cluster == 0].head(10)
+print(cc)
+
+# 計算每群筆數
+
+cc = rfm_segmentation["cluster"].value_counts()
+print(cc)
+
+# 輪廓係數
+y_km = rfm_segmentation["cluster"]
+cluster_labels = np.unique(y_km)
+n_clusters = cluster_labels.shape[0]
+
+silhouette_vals = metrics.silhouette_samples(X, y_km, metric="euclidean")
+print("每個點的輪廓係數 silhouette_samples :")
+# many print(silhouette_vals)
+
+# 繪製輪廓圖
+
+from matplotlib import cm
+
+# 輪廓圖
+y_ax_lower, y_ax_upper = 0, 0
+yticks = []
+for i, c in enumerate(cluster_labels):
+    c_silhouette_vals = silhouette_vals[y_km == c]
+    c_silhouette_vals.sort()
+    y_ax_upper += len(c_silhouette_vals)
+    color = cm.jet(float(i) / n_clusters)
+    plt.barh(
+        range(y_ax_lower, y_ax_upper),
+        c_silhouette_vals,
+        height=1.0,
+        edgecolor="none",
+        color=color,
+    )
+
+    yticks.append((y_ax_lower + y_ax_upper) / 2.0)
+    y_ax_lower += len(c_silhouette_vals)
+
+# 輪廓係數平均數的垂直線
+silhouette_avg = np.mean(silhouette_vals)
+plt.axvline(silhouette_avg, color="red", linestyle="--")
+
+plt.yticks(yticks, cluster_labels + 1)
+plt.ylabel("集群", fontsize=14)
+plt.xlabel("輪廓係數", fontsize=14)
+plt.tight_layout()
+show()
+
+# 依據輪廓分數找最佳集群數量
+
+# 測試 2~20 群的分數
+
+silhouette_score_list = []
+print("1輪廓分數:")
+for i in range(2, 21):
+    clf = KMeans(n_clusters=i, init="k-means++", n_init=10, max_iter=300)  # K-平均演算法
+    clf.fit(X)  # 學習訓練.fit
+    y_pred = clf.fit_predict(X)
+    silhouette_score_list.append(metrics.silhouette_score(X, y_km))
+    print(f"{i}:{silhouette_score_list[-1]:.2f}")
+
+print(f"最大值 {np.argmax(silhouette_score_list)+2}: {np.max(silhouette_score_list):.2f}")
+
+for i in range(2, 21):
+    print(i)
+    CLUSTERS = i  # 要分成的群數
+    clf = KMeans(
+        n_clusters=CLUSTERS, init="k-means++", n_init=10, max_iter=300
+    )  # K-平均演算法
+    clf.fit(X)  # 學習訓練.fit
+
+    # 新增欄位，加入集群代碼
+    y_pred = clf.labels_
+    cluster_labels = np.unique(y_pred)
+    n_clusters = cluster_labels.shape[0]
+    silhouette_vals = metrics.silhouette_samples(X, y_pred, metric="euclidean")
+    # print('每個點的輪廓係數 silhouette_samples :')
+    # many print(silhouette_vals)
+
+    # 輪廓圖
+    y_ax_lower, y_ax_upper = 0, 0
+    yticks = []
+    for i, c in enumerate(cluster_labels):
+        c_silhouette_vals = silhouette_vals[y_pred == c]
+        c_silhouette_vals.sort()
+        y_ax_upper += len(c_silhouette_vals)
+        color = cm.jet(float(i) / n_clusters)
+        plt.barh(
+            range(y_ax_lower, y_ax_upper),
+            c_silhouette_vals,
+            height=1.0,
+            edgecolor="none",
+            color=color,
+        )
+
+        yticks.append((y_ax_lower + y_ax_upper) / 2.0)
+        y_ax_lower += len(c_silhouette_vals)
+
+    # 輪廓係數平均數的垂直線
+    silhouette_avg = np.mean(silhouette_vals)
+    plt.axvline(silhouette_avg, color="red", linestyle="--")
+
+    plt.yticks(yticks, cluster_labels + 1)
+    plt.ylabel("集群", fontsize=14)
+    plt.xlabel("輪廓係數", fontsize=14)
+    plt.tight_layout()
+    show()
+
+# RFM 分組
+
+
+# 四分位數分組
+def RScore(x, p, d):
+    if x <= d[p][0.25]:
+        return 1
+    elif x <= d[p][0.50]:
+        return 2
+    elif x <= d[p][0.75]:
+        return 3
+    else:
+        return 4
+
+
+def FMScore(x, p, d):
+    if x <= d[p][0.25]:
+        return 4
+    elif x <= d[p][0.50]:
+        return 3
+    elif x <= d[p][0.75]:
+        return 2
+    else:
+        return 1
+
+
+# 四分位數(quantile)
+quantile = rfm.quantile(q=[0.25, 0.5, 0.75])
+print(quantile)
+
+cc = quantile.to_dict()
+print(cc)
+
+# RFM依四分位數給分
+
+rfm_segmentation["R_Quartile"] = rfm_segmentation["Recency"].apply(
+    RScore, args=("Recency", quantile)
+)
+rfm_segmentation["F_Quartile"] = rfm_segmentation["Frequency"].apply(
+    FMScore, args=("Frequency", quantile)
+)
+rfm_segmentation["M_Quartile"] = rfm_segmentation["Monetary"].apply(
+    FMScore, args=("Monetary", quantile)
+)
+cc = rfm_segmentation.head()
+print(cc)
+
+# 合併 RFM 分數
+rfm_segmentation["RFMScore"] = (
+    rfm_segmentation.R_Quartile.map(str)
+    + rfm_segmentation.F_Quartile.map(str)
+    + rfm_segmentation.M_Quartile.map(str)
+)
+cc = rfm_segmentation.head()
+print(cc)
+
+# 計算 RFM 總分
+rfm_segmentation["Total_score"] = (
+    rfm_segmentation["R_Quartile"]
+    + rfm_segmentation["F_Quartile"]
+    + rfm_segmentation["M_Quartile"]
+)
+
+cc = rfm_segmentation.head()
+print(cc)
+
+print("客戶篩選：")
+print("Best Customers: ", len(rfm_segmentation[rfm_segmentation["RFMScore"] == "111"]))
+print("Loyal Customers: ", len(rfm_segmentation[rfm_segmentation["F_Quartile"] == 1]))
+print("Big Spenders: ", len(rfm_segmentation[rfm_segmentation["M_Quartile"] == 1]))
+print("Almost Lost: ", len(rfm_segmentation[rfm_segmentation["RFMScore"] == "134"]))
+print("Lost Customers: ", len(rfm_segmentation[rfm_segmentation["RFMScore"] == "344"]))
+print(
+    "Lost Cheap Customers: ",
+    len(rfm_segmentation[rfm_segmentation["RFMScore"] == "444"]),
+)
+"""
+客戶篩選：
+Best Customers:  423
+Loyal Customers:  791
+Big Spenders:  980
+Almost Lost:  31
+Lost Customers:  187
+Lost Cheap Customers:  396
+"""
+# 依分數顯示客戶名單
+cc = rfm_segmentation.sort_values(
+    by=["RFMScore", "Monetary"], ascending=[True, False]
+).head(10)
+print(cc)
+
+# 依RFM級數顯示每一組的平均消費金額
+cc = rfm_segmentation.groupby("RFMScore")["Monetary"].mean().head(10)
+print(cc)
+
+# 依RFM總分顯示每一組的平均消費金額
+cc = rfm_segmentation.groupby("Total_score")["Monetary"].mean()
+
+# 依RFM總分作圖，總分 3,4,5 有最高消費金額
+rfm_segmentation.groupby("Total_score")["Monetary"].mean().plot(
+    kind="bar", colormap="Blues_r"
+)
+show()
+
+# 依RFM總分作圖，總分 3,4,5 有最高消費次數
+rfm_segmentation.groupby("Total_score")["Frequency"].mean().plot(
+    kind="bar", colormap="Blues_r"
+)
+show()
+
+# 依RFM總分作圖，總分 10,11,12 Recency最高
+rfm_segmentation.groupby("Total_score")["Recency"].mean().plot(
+    kind="bar", colormap="Blues_r"
+)
+show()
+
+# 依據輪廓分數找最佳集群數量
+
+# 測試 2~20 群的分數
+
+X = rfm_segmentation[["R_Quartile", "F_Quartile", "M_Quartile"]]
+silhouette_score_list = []
+print("2輪廓分數:")
+for i in range(2, 21):
+    print(i)
+    CLUSTERS = i  # 要分成的群數
+    clf = KMeans(
+        n_clusters=CLUSTERS, init="k-means++", n_init=10, max_iter=300
+    )  # K-平均演算法
+    clf.fit(X)  # 學習訓練.fit
+    y_pred = clf.fit_predict(X)
+    silhouette_score_list.append(metrics.silhouette_score(X, y_pred))
+    print(f"{i}:{silhouette_score_list[-1]:.2f}")
+
+print(f"最大值 {np.argmax(silhouette_score_list)+2}: {np.max(silhouette_score_list):.2f}")
+
+for i in range(2, 21):
+    print(i)
+    CLUSTERS = i  # 要分成的群數
+    clf = KMeans(
+        n_clusters=CLUSTERS, init="k-means++", n_init=10, max_iter=300
+    )  # K-平均演算法
+    clf.fit(X)  # 學習訓練.fit
+
+    # 新增欄位，加入集群代碼
+    y_pred = clf.labels_
+    cluster_labels = np.unique(y_pred)
+    n_clusters = cluster_labels.shape[0]
+    silhouette_vals = metrics.silhouette_samples(X, y_pred, metric="euclidean")
+    # print('每個點的輪廓係數 silhouette_samples :')
+    # many print(silhouette_vals)
+
+    # 輪廓圖
+    y_ax_lower, y_ax_upper = 0, 0
+    yticks = []
+    for i, c in enumerate(cluster_labels):
+        c_silhouette_vals = silhouette_vals[y_pred == c]
+        c_silhouette_vals.sort()
+        y_ax_upper += len(c_silhouette_vals)
+        color = cm.jet(float(i) / n_clusters)
+        plt.barh(
+            range(y_ax_lower, y_ax_upper),
+            c_silhouette_vals,
+            height=1.0,
+            edgecolor="none",
+            color=color,
+        )
+
+        yticks.append((y_ax_lower + y_ax_upper) / 2.0)
+        y_ax_lower += len(c_silhouette_vals)
+
+    # 輪廓係數平均數的垂直線
+    silhouette_avg = np.mean(silhouette_vals)
+    plt.axvline(silhouette_avg, color="red", linestyle="--")
+
+    plt.yticks(yticks, cluster_labels + 1)
+    plt.ylabel("集群", fontsize=14)
+    plt.xlabel("輪廓係數", fontsize=14)
+    plt.tight_layout()
+    show()
+
+# 分成4個集群
+
+CLUSTERS = 4  # 要分成的群數
+clf = KMeans(n_clusters=CLUSTERS)  # K-平均演算法
+
+clf.fit(X)  # 學習訓練.fit
+
+# 新增欄位，加入集群代碼
+rfm_segmentation["cluster"] = clf.labels_
+
+# 觀看集群 0 的前 10 筆資料
+cc = rfm_segmentation[rfm_segmentation.cluster == 0].head(10)
+print(cc)
+
+from mpl_toolkits.mplot3d import Axes3D
+import matplotlib.colors as mcolors
+
+fig = plt.figure(figsize=(12, 8))
+dx = fig.add_subplot(111, projection="3d")
+colors = ["green", "blue", "red", "yellow"]
+
+for i in range(rfm_segmentation.cluster.nunique()):
+    dx.scatter(
+        rfm_segmentation[rfm_segmentation.cluster == i].R_Quartile,
+        rfm_segmentation[rfm_segmentation.cluster == i].F_Quartile,
+        rfm_segmentation[rfm_segmentation.cluster == i].M_Quartile,
+        c=colors[i],
+        label="Cluster " + str(i),
+        s=10,
+        alpha=1.0,
+    )
+
+dx.set_xlabel("Recency", fontsize=14)
+dx.set_ylabel("Frequency", fontsize=14)
+dx.set_zlabel("Monetary", fontsize=14)
+dx.legend(fontsize=12)
+plt.tight_layout()
+show()
+
+cc = rfm_segmentation.cluster.value_counts()
+print(cc)
+
+cc = rfm_segmentation.groupby("cluster")[
+    ["R_Quartile", "F_Quartile", "M_Quartile", "Total_score"]
+].mean()
+print(cc)
+
+# 結論
+# 集群 1為VIP，其他依序為3、2、0。
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

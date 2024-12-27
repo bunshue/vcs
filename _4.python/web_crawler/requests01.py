@@ -2,15 +2,32 @@
 
 print("------------------------------------------------------------")  # 60個
 
-import re
+# 共同
 import os
 import sys
+import time
+import math
+import random
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+# 設定中文字型及負號正確顯示
+# 設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
+# 設定負號
+plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+plt.rcParams["font.size"] = 12  # 設定字型大小
+
+print("------------------------------------------------------------")  # 60個
+print("準備工作")
+
+import re
 import csv
 import json
-import time
 import codecs
 import pprint
-import random
 import requests
 from datetime import datetime
 
@@ -428,8 +445,6 @@ print("------------------------------------------------------------")  # 60個
 
 print("各國GDP資料 csv/xlsx格式, 用pd處理網頁上的 csv / xlsx 檔案")
 
-import pandas as pd
-
 # 讀取網頁上的 csv 檔
 csv_file = "https://storage.googleapis.com/learn_pd_like_tidyverse/gapminder.csv"
 df = pd.read_csv(csv_file)
@@ -755,7 +770,6 @@ data = requests.post(url, headers=headers, data=data)
 print("------------------------------------------------------------")  # 60個
 
 from io import StringIO
-import pandas as pd
 
 datestr = "20240716"
 
@@ -787,9 +801,7 @@ print(filter_df)
 print("------------------------------------------------------------")  # 60個
 
 """ no module
-import matplotlib.pyplot as plt
 import crawler_module as m
-import pandas as pd
 
 all_list = []
 stock_symbol, dates = m.get_data()
@@ -825,9 +837,7 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-import matplotlib.pyplot as plt
 import crawler_module as m
-import pandas as pd
 
 all_list = []
 stock_symbol, dates = m.get_data()
@@ -1190,10 +1200,7 @@ with open(fn, "wb") as f:  # 以二進位儲存
 
 print("------------------------------------------------------------")  # 60個
 
-
 """ many
-import pprint
-
 url = 'http://tw.yahoo.com'
 response = requests.get(url)
 pprint.pprint(response.text)

@@ -1,4 +1,5 @@
 
+linewidth == lw
 
 
 plt.bar(x1, df1["測試資料"], width=0.4, ec="none", fc="#e63946")

@@ -53,12 +53,11 @@ from sklearn.linear_model import Lasso
 
 
 def show():
-    return
+    # return
     plt.show()
     pass
 
 
-print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 簡單資料 y = x
@@ -81,14 +80,18 @@ yy0 = np.sin(3.2 * x) + 0.8 * x
 yy1 = np.sin(3.2 * x) + 0.8 * x + 0.3 * np.random.randn(N)
 """
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 # 一維Xy 畫X-y
 print("資料來源 : 建立迴歸資料 make_regression 1 無 / 有 資料分割")
 
-N = 100
-X, y = datasets.make_regression(n_samples=N, n_features=1, n_targets=1, noise=10)
-# X, y = datasets.make_regression(n_samples=N, n_features=1, noise=10)
-# N個樣本, 1種特徵(features), 1種標籤類別(target), noise為分散程度
+N = 100  # n_samples, 樣本數
+M = 1  # n_features, 特徵數(資料的維度)
+print("make_regression,", N, "個樣本, ", M, "個特徵")
+
+X, y = datasets.make_regression(n_samples=N, n_features=M, n_targets=1, noise=10)
+# X, y = datasets.make_regression(n_samples=N, n_features=M, noise=10)
+# N個樣本, M種特徵(features), 1種標籤類別(target), noise為分散程度
 
 linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
 
@@ -101,10 +104,21 @@ linear_regression.fit(X, y)  # 學習訓練.fit
 # 全預測
 y_pred = linear_regression.predict(X)  # 預測.predict
 
+plt.subplot(211)
 plt.scatter(X, y, s=30, c="b", label="真實資料")  # 真實資料, 藍點
-plt.plot(X, y_pred, c="r", label="線性迴歸")
+
+plt.plot(X, y_pred, c="r", lw=5, label="線性迴歸1")
+
+XX = np.array([-3, 3])
+plt.plot(
+    XX,
+    XX * linear_regression.coef_ + linear_regression.intercept_,
+    c="g",
+    label="線性迴歸2",
+)
+
+plt.title("線性迴歸 一維Xy 無分割")
 plt.legend()
-show()
 
 print("資料分割")
 # 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
@@ -119,63 +133,12 @@ linear_regression.fit(x_train, y_train)  # 學習訓練.fit
 
 y_pred = linear_regression.predict(x_test)  # 預測.predict
 
-plt.scatter(X, y, s=30, c="b", label="真實資料")  # 真實資料, 藍點
-plt.plot(x_test, y_pred, c="r", label="線性迴歸")
-plt.legend()
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# 一維Xy 畫X-y
-
-# 看 離群值 的影響
-
-N = 20
-X, y = datasets.make_regression(n_samples=N, n_features=1, noise=50)
-# N個樣本, 1種特徵(features), 1種標籤類別(target), noise為分散程度
-
-plt.subplot(211)
-plt.scatter(X, y, s=30, c="b", label="真實資料")  # 真實資料, 藍點
-# show()
-
-linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
-
-print("資料型態 :", type(X), type(y))
-print("資料大小 :", X.shape, y.shape)
-print("迴歸型態 : 一維Xy")
-linear_regression.fit(X, y)  # 學習訓練.fit
-
-print("製造離群值")
-print(y[0])
-# 製造離群值
-y[0] += 500
-
-linear_regression2 = sklearn.linear_model.LinearRegression()  # 函數學習機
-
-print("資料型態 :", type(X), type(y))
-print("資料大小 :", X.shape, y.shape)
-print("迴歸型態 : 一維Xy")
-linear_regression2.fit(X, y)  # 學習訓練.fit
-
 plt.subplot(212)
 plt.scatter(X, y, s=30, c="b", label="真實資料")  # 真實資料, 藍點
-
-line_X = np.array([-3, 3])
-plt.plot(
-    line_X,
-    line_X * linear_regression.coef_ + linear_regression.intercept_,
-    c="green",
-    label="原迴歸線",
-)
-plt.plot(
-    line_X,
-    line_X * linear_regression2.coef_ + linear_regression2.intercept_,
-    c="red",
-    label="新迴歸線",
-)
-plt.title("測試資料")
+plt.plot(x_test, y_pred, c="r", label="線性迴歸")
+plt.title("線性迴歸 一維Xy 有分割")
 plt.legend()
+
 show()
 
 print("------------------------------------------------------------")  # 60個
@@ -184,10 +147,14 @@ print("------------------------------------------------------------")  # 60個
 # 多維線性回歸
 # 多維Xy 畫y-y_pred
 
-N = 10
-X, y = datasets.make_regression(n_samples=N, n_features=3)
+N = 10  # n_samples, 樣本數
+M = 3  # n_features, 特徵數(資料的維度)
+print("make_regression,", N, "個樣本, ", M, "個特徵")
+
+X, y = datasets.make_regression(n_samples=N, n_features=M)
 # N個樣本, 3種特徵(features), 1種標籤類別(target), noise為分散程度
 # X : N X 3 陣列
+# y : N X 1 陣列
 
 linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
 
@@ -199,8 +166,8 @@ linear_regression.fit(X, y)  # 學習訓練.fit
 # 全預測
 y_pred = linear_regression.predict(X)  # 預測.predict
 
-plt.plot(y, color="r", linewidth=10, label="真實資料")
-plt.plot(y_pred, color="g", linewidth=4, label="預測結果")
+plt.plot(y, color="r", lw=10, label="真實資料")
+plt.plot(y_pred, color="g", lw=4, label="預測結果")
 
 plt.legend()
 
@@ -215,9 +182,12 @@ print("------------------------------------------------------------")  # 60個
 # multi_variables_nonlinear_regression
 # 多元非線性迴歸
 
-N = 300
-X, y = datasets.make_regression(n_samples=N, n_features=2, noise=50)
-# N個樣本, 2種特徵(features), 1種標籤類別(target), noise為分散程度
+N = 300  # n_samples, 樣本數
+M = 2  # n_features, 特徵數(資料的維度)
+print("make_regression,", N, "個樣本, ", M, "個特徵")
+
+X, y = datasets.make_regression(n_samples=N, n_features=M, noise=50)
+# N個樣本, M種特徵(features), 1種標籤類別(target), noise為分散程度
 
 from mpl_toolkits.mplot3d import Axes3D
 from mpl_toolkits.mplot3d import proj3d
@@ -275,48 +245,15 @@ y_pred = linear_regression.predict(X_test_std)  # 預測.predict
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("資料來源 : 自建資料 2 做成df")
+print("一維df 資料來源 : 自建資料 2 做成df")
 # 一維df 畫df-y
 xxx = xx
 yyy = yy1
 
-X = pd.DataFrame(xxx, columns=["XXX"])  # DataFrame
+X = pd.DataFrame(xxx, columns=["第一欄"])  # DataFrame
 
-target = pd.DataFrame(yyy, columns=["YYY"])
-y = target["YYY"]  # Series
-
-linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
-
-print("資料型態 :", type(X), type(y))
-print("資料大小 :", X.shape, y.shape)
-print("迴歸型態 : 一維df")
-linear_regression.fit(X, y)  # 學習訓練.fit
-
-# 全預測 或 部分預測
-x_test = pd.DataFrame(np.array([1, 3, 5, 7, 9]), columns=["XXX"])  # DataFrame
-
-y_pred = linear_regression.predict(x_test)  # 預測.predict, 傳入df
-
-plt.scatter(xxx, yyy, s=30, c="b", label="真實資料")  # 真實資料, 藍點
-plt.plot(x_test, y_pred, color="r", marker="o", markersize=8, label="線性迴歸")  # 線性迴歸曲線
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("資料來源 : 自建資料 4 做成df, 一維資料 線性迴歸")
-# 一維df 畫df-y
-
-datas = np.array([147.9, 163.5, 159.8, 155.1, 163.3, 158.7, 172.0, 161.2, 153.9, 161.6])
-targets = np.array([41.7, 60.2, 47.0, 53.2, 48.3, 55.2, 58.5, 49.0, 46.7, 52.5])
-
-X = pd.DataFrame(datas, columns=["第一欄"])
-
-target = pd.DataFrame(targets, columns=["目標"])
-y = target["目標"]
-
-print(X, y)
+target = pd.DataFrame(yyy, columns=["目標"])
+y = target["目標"]  # Series
 
 linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
 
@@ -326,22 +263,22 @@ print("迴歸型態 : 一維df")
 linear_regression.fit(X, y)  # 學習訓練.fit
 
 # 全預測
-y_pred = linear_regression.predict(X)  # 預測.predict
+y_pred = linear_regression.predict(X)  # 預測.predict, 傳入df
 
-plt.scatter(datas, targets, s=30, c="b", label="真實資料")  # 真實資料, 藍點
+plt.scatter(xxx, yyy, s=30, c="b", label="真實資料")  # 真實資料, 藍點
 plt.plot(X["第一欄"], y_pred, color="r", marker="o", markersize=8, label="線性迴歸")
-
 plt.legend()
+
 show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("資料來源 : 自建資料 5 做成df, 二維資料 線性迴歸")
+print("多維df 資料來源 : 自建資料 5 做成df, 二維資料 線性迴歸")
 
 # 多維df 畫y-y_pred
 
-datas = np.array(
+xxx = np.array(
     [
         [67, 160],
         [68, 165],
@@ -355,12 +292,11 @@ datas = np.array(
         [89, 172],
     ]
 )
-targets = np.array([50, 60, 65, 65, 70, 75, 80, 85, 90, 81])
+yyy = np.array([50, 60, 65, 65, 70, 75, 80, 85, 90, 81])
 
-X = pd.DataFrame(datas, columns=["第一欄", "第二欄"])
-target = pd.DataFrame(targets, columns=["目標"])
-y = target["目標"]
-print(X, y)
+X = pd.DataFrame(xxx, columns=["第一欄", "第二欄"])  # DataFrame
+target = pd.DataFrame(yyy, columns=["目標"])
+y = target["目標"]  # Series
 
 linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
 
@@ -374,8 +310,7 @@ linear_regression.fit(X, y)  # 學習訓練.fit
 # y_pred = linear_regression.predict(new_df)  # 預測.predict
 
 # 全預測
-y_pred = linear_regression.predict(X)  # 預測.predict
-print(y_pred)
+y_pred = linear_regression.predict(X)  # 預測.predict, 傳入df
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -414,41 +349,16 @@ linear_regression.fit(X, y1)  # 學習訓練.fit
 # 全預測
 y_pred = linear_regression.predict(X)  # 預測.predict
 
+plt.subplot(211)
 plt.plot(x, y0, "lime", lw=5, label="理想資料")  # 理想資料, y = x 綠線
 plt.plot(x, y1, "bo-", label="真實資料")  # 真實資料, 藍點藍線
 plt.plot(x, y_pred, color="r", marker="o", markersize=8, label="線性迴歸")  # 線性迴歸曲線
-
-plt.title("線性迴歸 無 資料分割")
+plt.title("線性迴歸 一維Xy 無分割")
 plt.axis([0, 10, 0, 10])  # 設定各軸顯示範圍
 plt.legend()
 plt.grid()
 
-show()
-
-# 評估
-print("真實資料")
-print_y_data(y1)
-
-print("線性迴歸")
-print_y_data(y_pred)
-
-print("評估 : 計算 測試資料 與 預測結果 的差異")
-evaluate_result(y1, y_pred)
-print("評估 : 計算 測試資料 與 預測結果 的差異")
-evaluate_result(y_pred, y1)
-
-print("預測的寫法")
-y_pred2 = linear_regression.predict([[0], [1]])  # 預測.predict
-print(y_pred2)
-
-print("預測的寫法")
-# Predict the outcome for a new data point
-new_x = np.array([6]).reshape((-1, 1))
-y_pred3 = linear_regression.predict(new_x)  # 預測.predict
-print("Predicted outcome: ", y_pred3[0])
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 print("資料來源 : 自建資料 7b 資料分割")
 
@@ -477,21 +387,17 @@ linear_regression.fit(X_train, y_train)  # 學習訓練.fit
 
 y_pred = linear_regression.predict(X_test)  # 預測.predict
 
+plt.subplot(212)
 plt.plot(x, y0, "lime", lw=5, label="理想資料")  # 理想資料, y = x 綠線
 plt.scatter(x_train, y_train, s=100, c="b", label="真實資料(訓練組)")  # 真實資料
 plt.scatter(x_test, y_test, s=300, c="m", label="真實資料(測試組)")  # 真實資料
 plt.plot(x_test, y_pred, color="r", marker="o", markersize=8, label="線性迴歸")  # 線性迴歸曲線
-
-plt.title("線性迴歸 + 資料分割")
+plt.title("線性迴歸 一維Xy 有分割")
 plt.axis([0, 10, 0, 10])  # 設定各軸顯示範圍
 plt.legend()
 plt.grid()
 
 show()
-
-# 有x測試資料預測到的結果和真實y測試資料比對
-X_test = x_test.reshape(len(x_test), 1)  # x測試資料要轉為 NX1 陣列
-y_pred = linear_regression.predict(X_test)  # 預測.predict
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -658,44 +564,47 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("資料來源 : 內建資料 1 計程車小費資料集EDA")
+print("多維Xy df格式轉多維ndarray 資料來源 : 內建資料 1 計程車小費資料集EDA")
 
-# 多維df 畫y-y_pred
+# 多維Xy 畫y-y_pred
 
 # 計程車小費資料集EDA  共244筆資料, 7個欄位
 
 df = sns.load_dataset("tips")
-cc = df.head()
-# print(cc)
 
 # df.info()  # 這樣就已經把結果印出來
 
 # 資料清理、資料探索與分析
-
 # 類別變數轉換為數值
 # 性別: "Female" / "Male" => 0 / 1, 字串 => 整數
 # 抽菸: "No" / "Yes" => 0 / 1, 字串 => 整數
 # 週間: "Thur" / "Fri" / "Sat" / "Sun" => 1 / 2 / 3 / 4, 字串 => 整數
 # 午晚: "Lunch" / "Dinner" => 0 / 1, 字串 => 整數
+cc = df.head()
+print("資料整理前 :")
+print(cc)
+
 df.sex = df.sex.map({"Female": 0, "Male": 1}).astype(int)
 df.smoker = df.smoker.map({"No": 0, "Yes": 1}).astype(int)
 df.day = df.day.map({"Thur": 1, "Fri": 2, "Sat": 3, "Sun": 4}).astype(int)
 df.time = df.time.map({"Lunch": 0, "Dinner": 1}).astype(int)
 
 cc = df.head()
-# print(cc)
+print("資料整理後 :")
+print(cc)
+print("就是把4個欄位裡面的字串轉成數值")
+
+print("找出df的內容是否有NA")
 cc = df.isna()  # 找出df的內容是否為NA
-# print(cc)
+print(cc)
 cc = df.isna().sum()  # 加總df的內容是否為NA 可知是否把所有欄位皆無空資料
-# print(cc)
+print(cc)
 
 # 指定X，並轉為 Numpy 陣列
 X = df.drop("tip", axis=1).values  # 砍掉 tip 欄位 => 資料
 y = df.tip.values  # tip 欄位 取出來 => 目標
-# print(X)
-# print(y)
-
-# 真正開始分析資料
+print(X)
+print(y)
 
 # 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
 x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
@@ -714,9 +623,9 @@ print("測試資料 特徵縮放後, mean = ", x_test_std.mean(), ", sd = ", x_t
 
 linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
 
-print("資料型態 :", type(X_train_std), type(y_train))
-print("資料大小 :", X_train_std.shape, y_train.shape)
-print("迴歸型態 : 多維df")
+print("資料型態 :", type(x_train_std), type(y_train))
+print("資料大小 :", x_train_std.shape, y_train.shape)
+print("迴歸型態 : 多維Xy")
 linear_regression.fit(x_train_std, y_train)  # 學習訓練.fit
 
 y_pred = linear_regression.predict(x_test_std)  # 預測.predict
@@ -727,33 +636,26 @@ evaluate_result(y_test, y_pred)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("資料來源 : 檔案資料 空氣盒子 df格式轉多維ndarray 多元線性回歸")
+print("多維Xy df格式轉多維ndarray 空氣盒子 多元線性回歸")
 
-# 多維df 畫y-y_pred
+# 多維Xy 畫y-y_pred
 
+# 空氣盒子
 # 共 15188 筆資料, 16欄位
-
 df = pd.read_excel("data/20160101-20190101(Daily)迴歸分析.xlsx")
-
+"""
 print(df.columns)  # df 的所有欄位名稱
-
-# 資料長度
+print(df.dtypes)  # df 的欄位的資料型態
+print(df.isnull().sum())  # 有無空白欄位 總和
+print(df.isnull().any())  # 有無空白欄位 任何
+"""
+print("資料長度")
 print(len(df))
 print(len(df["PM25"]))
 
 # df.info()  # 這樣就已經把結果印出來
 
-# print(df.columns) # df 的所有欄位名稱
 cc = df.set_index("Date")  # 將Date欄位設定為索引欄位
-"""
-print(df.columns) # df 的所有欄位名稱
-print()
-print(df.dtypes) # df 的欄位的資料型態
-print()
-print(df.isnull().sum())  # 有無空白欄位 總和
-print()
-print(df.isnull().any())  # 有無空白欄位 任何
-"""
 
 # 指定X，並轉為 Numpy 陣列
 # 取出一些欄位 => 資料 (ndarray)
@@ -782,10 +684,10 @@ x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2)  # 訓�
 
 linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
 
-# x_train為13維資料, y_train為1維資料
+# x_train為13維陣列資料, y_train為1維陣列資料
 print("資料型態 :", type(x_train), type(y_train))
 print("資料大小 :", x_train.shape, y_train.shape)
-print("迴歸型態 : 多維df")
+print("迴歸型態 : 多維Xy")
 linear_regression.fit(x_train, y_train)  # 學習訓練.fit
 
 """
@@ -800,148 +702,6 @@ y_pred = linear_regression.predict(x_test)  # 預測.predict
 print("評估 : 計算 測試資料 與 預測結果 的差異")
 evaluate_result(y_test, y_pred)
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("多元线性回归（Multiple Linear Regression）")
-
-# 多維df 畫y-y_pred
-
-# 讀取資料
-dataset = pd.read_csv("data/50_Startups.csv")
-X = dataset.iloc[:, :-1].values  # 全部資料
-Y = dataset.iloc[:, 4].values  # 第4欄的全部資料(收益)
-Z = dataset.iloc[:, 0].values  # 第0欄的全部資料(R&D花費)
-print("X:")
-print(X)
-print("Y:")
-print(Y)
-print("Z:")
-print(Z)
-print()
-
-# 缺失資料之處理
-from sklearn.impute import SimpleImputer
-
-imputer = SimpleImputer(missing_values=0.0, strategy="mean")
-imputer = imputer.fit(X[:, 0:3])
-X[:, 0:3] = imputer.transform(X[:, 0:3])
-print(X)
-
-# 将类别数据数字化
-
-# Encoding Categorical data
-from sklearn.preprocessing import LabelEncoder
-from sklearn.preprocessing import OneHotEncoder
-from sklearn.compose import ColumnTransformer
-
-labelencoder = LabelEncoder()
-print("original:")
-print(X[:10])
-# print(X[: , 3])
-X[:, 3] = labelencoder.fit_transform(X[:, 3])
-# print(X[: , 3])
-print("labelencoder:")
-print(X[:10])
-ct = ColumnTransformer([("encoder", OneHotEncoder(), [3])], remainder="passthrough")
-X = ct.fit_transform(X)
-# onehotencoder = OneHotEncoder(categorical_features = [3])
-# X = onehotencoder.fit_transform(X).toarray()
-print("onehot:")
-print(X[:10])
-
-"""
-躲避虚拟变量陷阱
-在回归预测中我们需要所有的数据都是numeric的，但是会有一些非numeric的数据，
-比如国家，省，部门，性别。这时候我们需要设置虚拟变量（Dummy variable）。
-做法是将此变量中的每一个值，衍生成为新的变量，是设为1，否设为0.
-举个例子，“性别”这个变量,我们可以虚拟出“男”和”女”两虚拟变量，
-男性的话“男”值为1，”女”值为0；女性的话“男”值为0，”女”值为1。
-但是要注意，这时候虚拟变量陷阱就出现了。
-就拿性别来说，其实一个虚拟变量就够了，比如 1 的时候是“男”， 0 的时候是”非男”，即为女。
-如果设置两个虚拟变量“男”和“女”，语义上来说没有问题，可以理解，
-但是在回归预测中会多出一个变量，多出的这个变量将会对回归预测结果产生影响。
-一般来说，如果虚拟变量要比实际变量的种类少一个。
-在多重线性回归中，变量不是越多越好，而是选择适合的变量。这样才会对结果准确预测。
-如果category类的特征都放进去，拟合的时候，所有权重的计算，都可以有两种方法实现，
-一种是提高某个category的w，一种是降低其他category的w，这两种效果是等效的，
-也就是发生了共线性,虚拟变量系数相加和为1，出现完全共线陷阱。
-但是下面测试尽然和想法不一致。。。
-"""
-
-# Avoiding Dummy Variable Trap
-X1 = X[:, 1:]
-
-print(X1)
-print(X)
-
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
-x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size=0.2)
-# 訓練組8成, 測試組2成
-
-x1_train, x1_test, y1_train, y1_test = train_test_split(X1, Y, test_size=0.2)
-
-# 第2步：在训练集上训练多元线性回归模型
-# Fitting Multiple Linear Regression to the Training set
-
-linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
-
-print("資料型態 :", type(x_train), type(y_train))
-print("資料大小 :", x_train.shape, y_train.shape)
-print("迴歸型態 : 多維df")
-linear_regression.fit(x_train, y_train)  # 學習訓練.fit
-
-linear_regression2 = sklearn.linear_model.LinearRegression()  # 函數學習機
-
-print("資料型態 :", type(x1_train), type(y1_train))
-print("資料大小 :", x1_train.shape, y1_train.shape)
-print("迴歸型態 : 多維df")
-linear_regression2.fit(x1_train, y1_train)  # 學習訓練.fit
-
-y_pred = linear_regression.predict(x_test)  # 預測.predict
-y1_pred = linear_regression2.predict(x1_test)  # 預測.predict
-print(y_pred)
-print(y1_pred)
-
-print("評估 : 計算 測試資料 與 預測結果 的差異")
-evaluate_result(y_test, y_pred)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-""" NG OneHotEncoder
-dataset = pd.read_csv("data/50_Startups.csv")
-X = dataset.iloc[:, :-1].values
-Y = dataset.iloc[:, 4].values
-
-# 将类别数据数字化
-
-from sklearn.preprocessing import LabelEncoder
-from sklearn.preprocessing import OneHotEncoder
-
-labelencoder = LabelEncoder()
-X[:, 3] = labelencoder.fit_transform(X[:, 3])
-onehotencoder = OneHotEncoder(categorical_features=[3])
-X = onehotencoder.fit_transform(X).toarray()
-
-# 躲避虚拟变量陷阱
-
-X = X[:, 1:]
-
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
-x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size=0.2)
-# 訓練組8成, 測試組2成
-
-linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
-
-print("資料型態 :", type(x_train), type(y_train))
-print("資料大小 :", x_train.shape, y_train.shape)
-print("迴歸型態 : 多維df")
-linear_regression.fit(x_train, y_train)  # 學習訓練.fit
-
-y_pred = linear_regression.predict(x_test)  # 預測.predict
-print(y_pred)
-"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -1072,6 +832,142 @@ df = df.fillna(0)
 # 檢查屬性是否已經改變
 # df.dtypes
 
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("多元线性回归（Multiple Linear Regression）")
+
+# 多維Xy 畫y-y_pred
+
+# 檔案 => df => np.ndarray
+df = pd.read_csv("data/50_Startups.csv")
+X = df.iloc[:, :-1].values  # 全部資料
+Y = df.iloc[:, 4].values  # 第4欄的全部資料(收益)
+Z = df.iloc[:, 0].values  # 第0欄的全部資料(R&D花費)
+
+# 缺失資料之處理
+from sklearn.impute import SimpleImputer
+
+imputer = SimpleImputer(missing_values=0.0, strategy="mean")
+imputer = imputer.fit(X[:, 0:3])
+X[:, 0:3] = imputer.transform(X[:, 0:3])
+print(X)
+
+# 将类别数据数字化
+
+# Encoding Categorical data
+from sklearn.preprocessing import LabelEncoder
+from sklearn.preprocessing import OneHotEncoder
+from sklearn.compose import ColumnTransformer
+
+labelencoder = LabelEncoder()
+print("original:")
+print(X[:10])
+# print(X[: , 3])
+X[:, 3] = labelencoder.fit_transform(X[:, 3])
+# print(X[: , 3])
+print("labelencoder:")
+print(X[:10])
+ct = ColumnTransformer([("encoder", OneHotEncoder(), [3])], remainder="passthrough")
+X = ct.fit_transform(X)
+# onehotencoder = OneHotEncoder(categorical_features = [3])
+# X = onehotencoder.fit_transform(X).toarray()
+print("onehot:")
+print(X[:10])
+
+"""
+躲避虚拟变量陷阱
+在回归预测中我们需要所有的数据都是numeric的，但是会有一些非numeric的数据，
+比如国家，省，部门，性别。这时候我们需要设置虚拟变量（Dummy variable）。
+做法是将此变量中的每一个值，衍生成为新的变量，是设为1，否设为0.
+举个例子，“性别”这个变量,我们可以虚拟出“男”和”女”两虚拟变量，
+男性的话“男”值为1，”女”值为0；女性的话“男”值为0，”女”值为1。
+但是要注意，这时候虚拟变量陷阱就出现了。
+就拿性别来说，其实一个虚拟变量就够了，比如 1 的时候是“男”， 0 的时候是”非男”，即为女。
+如果设置两个虚拟变量“男”和“女”，语义上来说没有问题，可以理解，
+但是在回归预测中会多出一个变量，多出的这个变量将会对回归预测结果产生影响。
+一般来说，如果虚拟变量要比实际变量的种类少一个。
+在多重线性回归中，变量不是越多越好，而是选择适合的变量。这样才会对结果准确预测。
+如果category类的特征都放进去，拟合的时候，所有权重的计算，都可以有两种方法实现，
+一种是提高某个category的w，一种是降低其他category的w，这两种效果是等效的，
+也就是发生了共线性,虚拟变量系数相加和为1，出现完全共线陷阱。
+但是下面测试尽然和想法不一致。。。
+"""
+
+# Avoiding Dummy Variable Trap
+X1 = X[:, 1:]
+
+print(X1)
+print(X)
+
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size=0.2)
+# 訓練組8成, 測試組2成
+
+x1_train, x1_test, y1_train, y1_test = train_test_split(X1, Y, test_size=0.2)
+
+# 第2步：在训练集上训练多元线性回归模型
+# Fitting Multiple Linear Regression to the Training set
+
+linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
+
+print("資料型態 :", type(x_train), type(y_train))
+print("資料大小 :", x_train.shape, y_train.shape)
+print("迴歸型態 : 多維Xy")
+linear_regression.fit(x_train, y_train)  # 學習訓練.fit
+
+linear_regression2 = sklearn.linear_model.LinearRegression()  # 函數學習機
+
+print("資料型態 :", type(x1_train), type(y1_train))
+print("資料大小 :", x1_train.shape, y1_train.shape)
+print("迴歸型態 : 多維Xy")
+linear_regression2.fit(x1_train, y1_train)  # 學習訓練.fit
+
+y_pred = linear_regression.predict(x_test)  # 預測.predict
+y1_pred = linear_regression2.predict(x1_test)  # 預測.predict
+print(y_pred)
+print(y1_pred)
+
+print("評估 : 計算 測試資料 與 預測結果 的差異")
+evaluate_result(y_test, y_pred)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+""" NG OneHotEncoder
+# 檔案 => df => np.ndarray
+df = pd.read_csv("data/50_Startups.csv")
+X = df.iloc[:, :-1].values  # 全部資料
+Y = df.iloc[:, 4].values  # 第4欄的全部資料(收益)
+
+# 将类别数据数字化
+
+from sklearn.preprocessing import LabelEncoder
+from sklearn.preprocessing import OneHotEncoder
+
+labelencoder = LabelEncoder()
+X[:, 3] = labelencoder.fit_transform(X[:, 3])
+onehotencoder = OneHotEncoder(categorical_features=[3])
+X = onehotencoder.fit_transform(X).toarray()
+
+# 躲避虚拟变量陷阱
+
+X = X[:, 1:]
+
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size=0.2)
+# 訓練組8成, 測試組2成
+
+linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
+
+print("資料型態 :", type(x_train), type(y_train))
+print("資料大小 :", x_train.shape, y_train.shape)
+print("迴歸型態 : 多維df")
+linear_regression.fit(x_train, y_train)  # 學習訓練.fit
+
+y_pred = linear_regression.predict(x_test)  # 預測.predict
+print(y_pred)
+"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -2038,8 +1934,8 @@ print("評估 : 計算 測試資料 與 預測結果 的差異")
 evaluate_result(y_test, y_pred)
 
 # grid的寫法
-plt.grid(which="major", linestyle="-", linewidth="0.5", color="green")
-plt.grid(which="minor", linestyle=":", linewidth="0.5", color="black")
+plt.grid(which="major", linestyle="-", lw="0.5", color="green")
+plt.grid(which="minor", linestyle=":", lw="0.5", color="black")
 
 # 將資料分成訓練組及測試組
 x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.2)  # 訓練組8成, 測試組2成
@@ -2053,3 +1949,23 @@ plt.plot(x_test, y_pred, "mo-", label="線性迴歸2")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
+
+# 評估
+print("真實資料")
+print_y_data(y1)
+
+print("線性迴歸")
+print_y_data(y_pred)
+
+print("評估 : 計算 測試資料 與 預測結果 的差異")
+evaluate_result(y1, y_pred)
+
+print("預測的寫法")
+y_pred2 = linear_regression.predict([[0], [1]])  # 預測.predict
+print(y_pred2)
+
+
+# 有x測試資料預測到的結果和真實y測試資料比對
+X_test = x_test.reshape(len(x_test), 1)  # x測試資料要轉為 NX1 陣列
+y_pred = linear_regression.predict(X_test)  # 預測.predict

@@ -1,5 +1,6 @@
 """
 K-近鄰演算法（K Nearest Neighbor, KNN）
+KNeighborsClassifier
 
 k是一個用戶定義的常數。
 一個沒有類別標籤的向量（查詢或測試點）將被歸類為最接近該點的k個樣本點中最頻繁使用的一類。
@@ -54,6 +55,7 @@ def show():
     pass
 
 
+'''
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -1421,12 +1423,89 @@ knn = KNeighborsClassifier()
 
 knn.fit(X_train, y_train)
 
-# 預測
 y_pred = knn.predict(X_test)
 
 # 幫模型打分數
 accuracy = accuracy_score(y_test, y_pred)
 print(f"Accuracy: {accuracy}")
+'''
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+dataset = pd.read_csv("data/Social_Network_Ads.csv")
+print(dataset)
+
+# 为了方便理解，这里我们只取Age年龄和EstimatedSalary估计工资作为特征
+
+X = dataset.iloc[:, [2, 3]].values
+y = dataset.iloc[:, 4].values
+
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+# 訓練組8成, 測試組2成
+
+# 第四步：特征缩放 Feature Scaling
+scaler = StandardScaler()
+X_train = scaler.fit_transform(X_train)  # STD特徵縮放
+X_test = scaler.transform(X_test)  # STD特徵縮放
+
+# 第五步：使用K-NN对训练集数据进行训练
+# Fitting K-NN to the Training set
+# 从sklearn的neighbors类中导入KNeighborsClassifier学习器
+
+# 设置好相关的参数 n_neighbors = 5(K值的选择，默认选择5)、
+# metric = 'minkowski'(距离度量的选择，这里选择的是闵氏距离(默认参数))、
+# p = 2 (距离度量metric的附属参数，只用于闵氏距离和带权重闵氏距离中p值的选择，
+# p=1为曼哈顿距离， p=2为欧式距离。默认为2)
+
+classifier = KNeighborsClassifier(n_neighbors=5, metric="minkowski", p=2)
+
+classifier.fit(X_train, y_train)  # 學習訓練.fit
+
+KNeighborsClassifier(
+    algorithm="auto",
+    leaf_size=30,
+    metric="minkowski",
+    metric_params=None,
+    n_jobs=1,
+    n_neighbors=5,
+    p=2,
+    weights="uniform",
+)
+
+# 第六步：对测试集进行预测
+# Predicting the Test set results
+
+y_pred = classifier.predict(X_test)
+print(y_pred)
+
+
+# 第七步：生成混淆矩阵
+# Making the Confusion Matrix
+# 混淆矩阵可以对一个分类器性能进行分析，由此可以计算出许多指标，例如：ROC曲线、正确率等
+
+from sklearn.metrics import confusion_matrix
+from sklearn.metrics import classification_report
+
+cm = confusion_matrix(y_test, y_pred)
+print(cm)
+print(classification_report(y_test, y_pred))
+
+"""
+[[64  4]
+ [ 3 29]]
+    预测值
+    0   1
+实0 64  4   
+际1 3   29
+值
+预测集中的0总共有68个，1总共有32个。
+在这个混淆矩阵中，实际有68个0，但K-NN预测出有67(64+3)个0，其中有3个实际上是1。
+同时K-NN预测出有33(4+29)个1，其中4个实际上是0。
+"""
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
