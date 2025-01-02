@@ -21,49 +21,65 @@ import sys
 import time
 import openpyxl
 
+pic_filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-from openpyxl import Workbook
+workbook = openpyxl.Workbook()  # 建立空白的Excel活頁簿物件
 
-# 建立一個空白活頁簿
-wb = Workbook()
 # 選取正在工作中的工作表，空白活頁簿有一個預存工作表，名稱是Sheet
-ws = wb.active
+ws = workbook.active
+
 # 設定工作表名稱為Sheet1
 ws.title = "Sheet1"
+
 # 指定字串給A1儲存格
 ws["A1"] = "1"
+
 # 指定數值給A2儲存格
 ws["A2"] = 1
+
 # 指定數值給B2儲存格
 ws["B2"] = 2
+
 # 指定數值公式給C2儲存格
 ws["C2"] = "=SUM(A2:B2)"
+
 # 指定數值計算結果給A3儲存格
 ws["A3"] = 1 + 2
+
 # 指定字串計算結果給B3儲存格
 ws["B3"] = "1" + "2"
+
 # 指定數值計算公式給A4儲存格
 ws["A4"] = "=1+2"
+
 # 指定字串公式給C2儲存格
 ws["B4"] = '=CONCATENATE("1","2")'
+
 # 新增一個工作表名稱為Sheet2
-wb.create_sheet("Sheet2")
+workbook.create_sheet("Sheet2")
+
 # 選擇Sheet2工作表為正在工作中的工作表
-ws = wb.get_sheet_by_name("Sheet2")
+ws = workbook.get_sheet_by_name("Sheet2")
+
 # 一次填入一列數值
 ws.append([1, 2, 3])
+
 # 一次填入一列文字
 ws.append(["1", "2", "3"])
+
 # 建立圖片物件
-img = openpyxl.drawing.image.Image("data/Google-Colab-Guide-1024x683.jpg")
+img = openpyxl.drawing.image.Image(pic_filename)
 img.height = img.height * 0.1
 img.width = img.width * 0.1
+
 # 加入圖片於C1儲存格
 ws.add_image(img, "C1")
-# 儲存
-wb.save("tmp_excel.xlsx")
+
+filename_w = "tmp_excel_openpyxl_a.xlsx"
+workbook.save(filename_w)  # 儲存檔案
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -121,13 +137,12 @@ sheet = workbook.active  # 取得開啟試算表後立刻顯示的工作表(即�
 
 filename_w = "tmp_excel_openpyxl_a_sheet.xlsx"
 workbook.save(filename_w)  # 儲存檔案
-print("建立 xlsx OK, 檔案 : " + filename_w)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("openpyxl test 02a 建立新檔, 簡易資料")
-print("開啟空白的活頁簿")
+
 workbook = openpyxl.Workbook()  # 建立空白的Excel活頁簿物件
 
 """
@@ -157,7 +172,6 @@ sheet["D3"] = "班尼牛"
 
 filename_w = "tmp_excel_openpyxl_b1_new_simple.xlsx"
 workbook.save(filename_w)  # 儲存檔案
-print("建立 xlsx OK, 檔案 : " + filename_w)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -319,8 +333,7 @@ print("------------------------------")  # 30個
 from openpyxl.drawing.image import Image
 
 sheet = workbook.active  # 取得開啟試算表後立刻顯示的工作表(即最後編輯的工作表)
-filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
-img = Image(filename)
+img = Image(pic_filename)
 sheet.add_image(img, "E13")  # 把圖貼在E13
 
 print("------------------------------")  # 30個
@@ -359,7 +372,6 @@ print("------------------------------")  # 30個
 
 filename_w = "tmp_excel_openpyxl_b2_new_all1.xlsx"
 workbook.save(filename_w)  # 儲存檔案
-print("建立 xlsx OK, 檔案 : " + filename_w)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -426,7 +438,6 @@ print("------------------------------")  # 30個
 
 filename_w = "tmp_excel_openpyxl_b2_new_all2.xlsx"
 workbook.save(filename_w)  # 儲存檔案
-print("建立 xlsx OK, 檔案 : " + filename_w)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -437,7 +448,7 @@ if not os.path.exists(filename_w):
     sheet = workbook.active  # 取得開啟試算表後立刻顯示的工作表(即最後編輯的工作表)
     heading = ["中文名", "英文名", "體重", "全名"]
     sheet.append(heading)
-    workbook.save(filename_w)
+    workbook.save(filename_w)  # 儲存檔案
 
 workbook = openpyxl.load_workbook(filename_w)
 
@@ -448,7 +459,6 @@ sheet.append(animal01)
 
 filename_w = "tmp_excel_openpyxl_c.xlsx"
 workbook.save(filename_w)  # 儲存檔案
-print("建立 xlsx OK, 檔案 : " + filename_w)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -486,8 +496,7 @@ target = workbook.copy_worksheet(sheet)
 target.title = "new_animals2"
 
 filename_w = "tmp_excel_openpyxl_c_sheet.xlsx"
-workbook.save(filename_w)
-print("建立 xlsx OK, 檔案 : " + filename_w)
+workbook.save(filename_w)  # 儲存檔案
 
 print("------------------------------------------------------------")  # 60個
 
@@ -516,7 +525,6 @@ tab.tableStyleInfo = openpyxl.worksheet.table.TableStyleInfo(
 
 filename_w = "tmp_excel_openpyxl_d_add_table.xlsx"
 workbook.save(filename_w)  # 儲存檔案
-print("建立 xlsx OK, 檔案 : " + filename_w)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -560,8 +568,7 @@ for pass_obj in path.iterdir():
                     list_row += 1
 
 filename_w = "tmp_excel_openpyxl_e.xlsx"
-workbook.save(filename_w)
-print("建立 xlsx OK, 檔案 : " + filename_w)
+workbook.save(filename_w)  # 儲存檔案
 
 print("------------------------------------------------------------")  # 60個
 """
@@ -591,7 +598,7 @@ def makecalendar(value1, value2):
             if day > 0:
                 c = sheet.cell((col + 3), row + 1)
                 c.value = day
-    workbook.save(savefile)  # Excel轉存檔案
+    workbook.save(savefile)  # 儲存檔案
     return "轉存" + savefile + "了。"
 
 
@@ -649,7 +656,7 @@ def makecalendar(value1, value2):
                     c.font = fontB
                 if row == 0:
                     c.font = fontR
-    workbook.save(savefile)  # Excel轉存檔案
+    workbook.save(savefile)  # 儲存檔案
     return "轉存" + savefile + "了。"
 
 
@@ -796,7 +803,6 @@ sheet.add_chart(chart, "F2")
 
 filename_w = "tmp_excel_openpyxl_e_add_radar_chart.xlsx"
 workbook.save(filename_w)  # 儲存檔案
-print("建立 xlsx OK, 檔案 : " + filename_w)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -865,8 +871,7 @@ chart4.title = "Percent Stacked Chart"
 sheet.add_chart(chart4, "N15")
 
 filename_w = "tmp_excel_openpyxl_g_bar.xlsx"
-workbook.save(filename_w)
-print("建立 xlsx OK, 檔案 : " + filename_w)
+workbook.save(filename_w)  # 儲存檔案
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -889,7 +894,8 @@ chart.set_categories(labels)
 
 sheet.add_chart(chart, "A9")
 
-workbook.save("tmp_01_line_chart.xlsx")
+filename_w = "tmp_01_line_chart.xlsx"
+workbook.save(filename_w)  # 儲存檔案
 
 print("------------------------------------------------------------")  # 60個
 
@@ -916,7 +922,8 @@ chart.series.append(series)
 
 sheet.add_chart(chart, "F2")
 
-workbook.save("tmp_02_bubble_chart_a.xlsx")
+filename_w = "tmp_02_bubble_chart_a.xlsx"
+workbook.save(filename_w)  # 儲存檔案
 
 print("------------------------------------------------------------")  # 60個
 
@@ -941,7 +948,8 @@ for row in range(2, sheet.max_row + 1):
 
 sheet.add_chart(chart, "F2")
 
-workbook.save("tmp_02_bubble_chart_b.xlsx")
+filename_w = "tmp_02_bubble_chart_b.xlsx"
+workbook.save(filename_w)  # 儲存檔案
 
 print("------------------------------------------------------------")  # 60個
 
@@ -962,7 +970,8 @@ chart.set_categories(labels)
 
 sheet.add_chart(chart, "D3")
 
-workbook.save("tmp_03_pie_charta.xlsx")
+filename_w = "tmp_03_pie_charta.xlsx"
+workbook.save(filename_w)  # 儲存檔案
 
 print("------------------------------------------------------------")  # 60個
 
@@ -988,7 +997,8 @@ chart.series[0].data_points = [slice]
 
 sheet.add_chart(chart, "D3")
 
-workbook.save("tmp_03_pie_chartb.xlsx")
+filename_w = "tmp_03_pie_chartb.xlsx"
+workbook.save(filename_w)  # 儲存檔案
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1016,7 +1026,8 @@ chart.add_data(data, titles_from_data=True)  # 以當月業績作為圖例
 chart.set_categories(labels)
 sheet.add_chart(chart, "E3")
 
-workbook.save("tmp_04_column_chart.xlsx")
+filename_w = "tmp_04_column_chart.xlsx"
+workbook.save(filename_w)  # 儲存檔案
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1042,7 +1053,8 @@ chart.set_categories(labels)
 
 sheet.add_chart(chart, "I2")
 
-workbook.save("tmp_04_column_chart_stacked.xlsx")
+filename_w = "tmp_04_column_chart_stacked.xlsx"
+workbook.save(filename_w)  # 儲存檔案
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1066,7 +1078,8 @@ chart.set_categories(labels)
 
 sheet.add_chart(chart, "I2")
 
-workbook.save("tmp_05_area_chart.xlsx")
+filename_w = "tmp_05_area_chart.xlsx"
+workbook.save(filename_w)  # 儲存檔案
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1086,8 +1099,8 @@ print("------------------------------------------------------------")  # 60個
 # 對齊方式 ST
 from openpyxl.styles import Alignment
 
-wb = openpyxl.Workbook()
-sh = wb.active
+workbook = openpyxl.Workbook()
+sh = workbook.active
 
 
 sh.column_dimensions["A"].width = 20
@@ -1100,5 +1113,5 @@ sh["a3"].alignment = Alignment(horizontal="right", vertical="top")
 sh["a4"] = "distributed,bottom"
 sh["a4"].alignment = Alignment(horizontal="distributed", vertical="bottom")
 
-wb.save(r"tmp_format_test.xlsx")
+workbook.save(r"tmp_format_test.xlsx")  # 儲存檔案
 # 對齊方式 SP
