@@ -9,7 +9,7 @@ sugar要先到
 """
 
 import sys
-import pprint as pp
+
 import xlrd  # 讀 Excel 檔案
 import xlwt  # 寫 Excel 檔案
 
@@ -59,7 +59,7 @@ for sheet in sheets:
             rows.append(row)
     scores[sheet.name] = rows
 
-pp.pprint(scores)
+print(scores)
 
 print("第0頁 內容")
 sh0 = workbook.sheets()[0]
@@ -76,10 +76,8 @@ for i in range(0, ROW):
         sh0.cell(i, 3).value,
     )
 
-
 # 已知工作表的名稱
 # sh0 = workbook.sheets("Sheet5")
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -103,7 +101,6 @@ for n in range(len(workbook.sheet_names())):
 # sheet.nrows 可以顯示我列數有幾列，在這裡我用 row_values(i) 將每一張工作表、每一列 print 出來。
 # 當然，你要一行行地印出來也是可行的。
 
-
 print("------------------------------------------------------------")  # 60個
 
 print("讀取excel檔案 3")
@@ -122,8 +119,6 @@ for n in range(len(workbook.sheet_names())):
 
 print("------------------------------------------------------------")  # 60個
 
-sys.exit()
-
 print("用xlwt寫入xls檔案")
 
 filename_w = "tmp_excel_xlwt1.xls"
@@ -136,40 +131,40 @@ animal03 = ["虎", "tiger", "33"]
 animal04 = ["兔", "rabbit", "8"]
 animals = [animal01, animal02, animal03, animal04]
 
-#建立活頁簿
-workbook = xlwt.Workbook() # 建立活頁簿 Workbook 物件
+# 建立活頁簿
+workbook = xlwt.Workbook()  # 建立活頁簿 Workbook 物件
 
-#(從活頁簿物件)建立工作表物件 sh0
+# (從活頁簿物件)建立工作表物件 sh0
 sh0 = workbook.add_sheet("第一頁", cell_overwrite_ok=True)
 
-#將資料寫入儲存格 工作表物件.write(row, col, data)
+# 將資料寫入儲存格 工作表物件.write(row, col, data)
 
-#寫第1列 標題
+# 寫第1列 標題
 sh0.write(0, 0, datahead[0])
 sh0.write(0, 1, datahead[1])
 sh0.write(0, 2, datahead[2])
 
-#寫第2列 鼠
+# 寫第2列 鼠
 sh0.write(1, 0, animals[0][0])
 sh0.write(1, 1, animals[0][1])
 sh0.write(1, 2, animals[0][2])
 
-#寫第3列 牛
+# 寫第3列 牛
 sh0.write(2, 0, animals[1][0])
 sh0.write(2, 1, animals[1][1])
 sh0.write(2, 2, animals[1][2])
 
-#寫第4列 虎
+# 寫第4列 虎
 sh0.write(3, 0, animals[2][0])
 sh0.write(3, 1, animals[2][1])
 sh0.write(3, 2, animals[2][2])
 
-#寫第5列 兔
+# 寫第5列 兔
 sh0.write(4, 0, animals[3][0])
 sh0.write(4, 1, animals[3][1])
 sh0.write(4, 2, animals[3][2])
 
-#(從活頁簿物件)建立工作表物件 sh1
+# (從活頁簿物件)建立工作表物件 sh1
 sh1 = workbook.add_sheet("第二頁")  # 建立新工作表，設定名稱
 
 for j in range(0, 5):  # 0~4 => A B C D E
@@ -183,7 +178,6 @@ workbook.save(filename_w)
 print("建立 xlsx OK, 檔案 : " + filename_w)
 
 print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------------------------------------")  # 60個

@@ -13,6 +13,8 @@ worksheet（工作表）：一個excel可以有很多個工作表，目前正在
 1. 讀取檔案info
 2. 讀取檔案所有資料
 
+活頁簿 workbook
+工作表 sheet
 """
 
 import os
@@ -22,119 +24,93 @@ import openpyxl
 
 print("------------------------------------------------------------")  # 60個
 
-print("openpyxl test 01 通用訊息")
+print("通用訊息")
 
-filename_r = "data/python_ReadWrite_EXCEL.xlsx"
+filename = "data/python_ReadWrite_EXCEL.xlsx"
+print("讀取 xlsx, 檔案 : " + filename)
+workbook = openpyxl.load_workbook(filename)
 
-print("讀取 xlsx, 檔案 : " + filename_r)
-workbook = openpyxl.load_workbook(filename_r)
+sheetnames = workbook.sheetnames  # 讀取 excel檔案 裏所有工作表名稱
+print("所有工作表名稱 :", sheetnames)
 
-names = workbook.sheetnames  # 讀取 excel檔案 裏所有工作表名稱
-print("所有工作表名稱 :", names)
+length = len(workbook.sheetnames)
+print("共有", length, "個工作表")
 
-# 取得最後編輯的那個工作表
+for i in range(length):
+    print("工作表", i + 1, "名稱 :", workbook.sheetnames[i])
+    print("取得第", i + 1, "個工作表", end="\t")
+    sheet = workbook.worksheets[i]
+    # 取得工作表參數
+    sheet_name = sheet.title
+    ROW_ST = sheet.min_row
+    COL_ST = sheet.min_column
+    ROW_SP = sheet.max_row
+    COL_SP = sheet.max_column
+    print("名稱 :", sheet_name, end="\t")
+    print("欄位 :", COL_ST, "~", COL_SP, end="\t")
+    print("列位 :", ROW_ST, "~", ROW_SP)
+    print(sheet.sheet_properties)  # 印出工作表屬性
+
+
+print("取得最後編輯的那個工作表")
+workbook.active = 0
 sheet = workbook.active  # 取得開啟試算表後立刻顯示的工作表(即最後編輯的工作表)
+
 print(workbook.active)
-print(workbook.active.title)
-
-# 取得第 0 個工作表
-sheet = workbook.worksheets[0]
-
-# 取得工作表參數
-sheet_name = sheet.title
-ROW = sheet.max_row
-COL = sheet.max_column
-print("此工作表名稱、總列數、總行數 :", sheet_name, ROW, COL)
-print("工作表有資料最大欄數", COL)
-print("工作表有資料最小欄數", sheet.min_column)
-print("工作表有資料最大列數", ROW)
-print("工作表有資料最小列數", sheet.min_row)
-
-# 取得第 0 個工作表 same
-sheet = workbook[workbook.sheetnames[0]]
-print("第 0 個工作表名稱 :", sheet.title)
-
-sheet1 = workbook["animals1"]  # 取得工作表名稱為「工作表1」的內容
-sheet2 = workbook.active  # 取得開啟試算表後立刻顯示的工作表(即最後編輯的工作表)
-
-print("印出 title ( 工作表名稱 )、max_row 最大列數、max_column 最大行數")
-print(sheet1.title, sheet1.max_row, sheet1.max_column)
-print(sheet2.title, sheet2.max_row, sheet2.max_column)
-
-print(sheet2.sheet_properties)  # 印出工作表屬性
-
-from openpyxl.utils import get_column_letter, column_index_from_string
-
-print(column_index_from_string("A"))  # 1
-print(column_index_from_string("Z"))  # 26
-print(column_index_from_string("AA"))  # 27
-print(column_index_from_string("ZZ"))  # 702
-
-print("A = ", column_index_from_string('A'))
-print("B = ", column_index_from_string('B'))
-
-print(get_column_letter(5))  # E
-print(get_column_letter(100))  # CV
-
-ROW = sheet.max_row
-COL = sheet.max_column
-
-for i in range(1, COL+1):
-    print(i, ' = ', get_column_letter(i))
-
-workbook.active = 0
-sheet = workbook.active  # 取得開啟試算表後立刻顯示的工作表(即最後編輯的工作表)
 print("目前工作表： ", workbook.active.title)
+print("excel活動工作表： ", sheet)
 
-workbook.active = workbook["animals2"]
-print("目前工作表： ", workbook.active.title)
+print("取得第 1 個工作表")
+sheet1 = workbook.worksheets[0]
 
-print("------------------------------------------------------------")  # 60個
+print("取得第 1 個工作表 same")
+sheet1 = workbook[workbook.sheetnames[0]]
 
-print("顯示最大、最小 欄數、列數")
+print("取得第 1 個工作表")
+sheet1 = workbook["animals1"]  # 取得工作表名稱為「animals1」的內容
 
-workbook.active = 0
-sheet = workbook.active  # 取得開啟試算表後立刻顯示的工作表(即最後編輯的工作表)
+print("取得第 2 個工作表")
+sheet2 = workbook["animals2"]  # 取得工作表名稱為「animals2」的內容
 
-print("儲存格 欄名", sheet["A1"].column)
-print("儲存格 列名", sheet["A1"].row)
-print("儲存格名", sheet["A1"].coordinate)
+print("第 1 個工作表名稱 :", sheet1.title)
+print("第 2 個工作表名稱 :", sheet2.title)
 
 print("------------------------------")  # 30個
 
-print("顯示資料 方法一")
+print("顯示資料 方法一 使用cell方法取得資料")
 
-print("使用cell方法取得資料")
+print("取得第 1 個工作表")
 sheet1 = workbook["animals1"]
+
+print("取得第 2 個工作表")
 sheet2 = workbook["animals2"]
 
-# 取得指定儲存格資料
-print(sheet1["A1"], sheet1["A1"].value)
+print("讀取 sheet1 的所有內容 ST")
+sheet = sheet1
 
-print(sheet1["A1"].value)  # 取出 A1 的內容
-print(sheet1.cell(1, 1).value)  # 等同取出 A1 的內容
-
-print(sheet2["B2"].value)  # 取出 B2 的內容
-print(sheet2.cell(2, 2).value)  # 等同取出 B2 的內容
+ROW_ST = sheet.min_row
+COL_ST = sheet.min_column
+ROW_SP = sheet.max_row
+COL_SP = sheet.max_column
 
 # 顯示 cell資料
-for i in range(1, ROW + 1):
-    for j in range(1, COL + 1):
+for i in range(ROW_ST, ROW_SP + 1):
+    for j in range(COL_ST, COL_SP + 1):
         print(sheet.cell(row=i, column=j).value, end="   ")
     print()
+
+print("讀取 sheet1 的所有內容 SP")
 
 print("------------------------------")  # 30個
 
 print("顯示資料 方法二")
 
 list_values = list(sheet.values)
-print("所有資料")
-print(list_values)
-print()
+print("資料長度 :", len(list_values))
+print("所有資料 :", list_values)
 
-print("標題欄")
-cols = list_values[0]
-print(cols)
+print("列出 第1列 標題")
+print(list_values[0])
 
 cnt = 0
 for value_tuple in list_values[1:]:
@@ -147,7 +123,7 @@ print("------------------------------")  # 30個
 print("顯示資料 方法三 所有工作表")
 
 for sheet in workbook:
-    print("工作表 sheet :", sheet)
+    print("工作表 sheet :", sheet, ", 名稱 :", sheet.title)
     for row in sheet:
         # print('row')
         for cell in row:
@@ -158,15 +134,20 @@ for sheet in workbook:
 print("------------------------------")  # 30個
 
 print("顯示資料 方法四")
+print("讀取 xlsx, 檔案 : " + filename)
+workbook = openpyxl.load_workbook(filename)
 
-workbook = openpyxl.load_workbook(filename_r)
 for sheetname in workbook.sheetnames:  # 所有工作表
+    print(sheetname)
     sheet = workbook[sheetname]
-    ROW = sheet.max_row
-    COL = sheet.max_column
-    print("此工作表名稱、總列數、總行數 :", sheet_name, ROW, COL)
-    for c in range(1, COL + 1):  # 欄1〜最後
-        for r in range(1, ROW + 1):  # 列1〜最後
+    ROW_ST = sheet.min_row
+    COL_ST = sheet.min_column
+    ROW_SP = sheet.max_row
+    COL_SP = sheet.max_column
+
+    print("此工作表名稱、總列數、總行數 :", sheet_name, ROW_SP - ROW_ST + 1, COL_SP - COL_ST + 1)
+    for c in range(ROW_ST, COL_SP + 1):
+        for r in range(ROW_ST, ROW_SP + 1):
             cell = sheet.cell(row=r, column=c)  # 儲存格
             if cell.value != None:
                 print(cell.value, end=" ")
@@ -174,41 +155,19 @@ for sheetname in workbook.sheetnames:  # 所有工作表
 
 print("------------------------------")  # 30個
 
-print("顯示資料 方法五a")
+print("顯示資料 方法五")
+print("讀取 xlsx, 檔案 : " + filename)
+workbook = openpyxl.load_workbook(filename)
 
+print("取得第 1 個工作表")
+sheet1 = workbook.worksheets[0]
 
-def get_values(sheet):
-    arr = []  # 第一層串列
-    for row in sheet:
-        arr2 = []  # 第二層串列
-        for column in row:
-            arr2.append(column.value)  # 寫入內容
-        arr.append(arr2)
-    return arr
-
-
-sheet1 = workbook["animals1"]
-sheet2 = workbook["animals2"]
-
-print("印出工作表1 所有內容")
-print(get_values(sheet1))
-
-print("印出工作表2 所有內容")
-print(get_values(sheet2))
-
-print("------------------------------")  # 30個
-
-print("顯示資料 方法五b")
-workbook = openpyxl.load_workbook(filename_r)
-
-results = []
-
-# 取得第 0 個工作表
-sheet = workbook.worksheets[0]
-
-for row in sheet.iter_rows():
-    results.append([cell.value for cell in row])
-#print(results)
+results = []  # 第一層串列
+for row in sheet1:
+    results2 = []  # 第二層串列
+    for column in row:
+        results2.append(column.value)  # 寫入內容
+    results.append(results2)
 
 for _ in results:
     print(_)
@@ -217,213 +176,260 @@ print("------------------------------")  # 30個
 
 print("顯示資料 方法六")
 
-sheet1 = workbook["animals1"]
+print("取得第 1 個工作表")
+sheet1 = workbook.worksheets[0]
+
 v = sheet1.iter_rows(min_row=1, min_col=1, max_col=5, max_row=4)  # 取出四格內容
-#print(v)
+# print(v)
 for i in v:
     for j in i:
         print(j.value, end=" ")
     print()
 
 print("------------------------------")  # 30個
-print('之前先顯示工作表')
-print("目前工作表： ", workbook.active.title)
 
-print("顯示資料 方法七 讀取工作表所有內容")
+print("顯示資料 方法七")
 
-filename_r = "data/python_ReadWrite_EXCEL.xlsx"
-workbook = openpyxl.load_workbook(filename_r)
+filename = "data/python_ReadWrite_EXCEL.xlsx"
+print("讀取 xlsx, 檔案 : " + filename)
+workbook = openpyxl.load_workbook(filename)
 
-workbook.active = 0
-sheet = workbook.active  # 取得開啟試算表後立刻顯示的工作表(即最後編輯的工作表)
-print("excel活動工作表： ", sheet)
+print("取得第 1 個工作表")
+sheet1 = workbook.worksheets[0]
 
-for row in sheet:
+for row in sheet1:
     for cell in row:
-        print(cell.value, end = " ")
+        print(cell.value, end=" ")
     print()
 print()
-
-print('之後先顯示工作表')
-print("目前工作表： ", workbook.active.title)
 
 print("------------------------------")  # 30個
 
 print("讀取工作表某欄某列的資料")
 
 print("讀取 C 欄的所有資料")
-for cell in sheet["C"]:  # 讀取C欄所有資料，並列印出來
-    print(cell.value, end = " ")
+for cell in sheet1["C"]:  # 讀取C欄所有資料，並列印出來
+    print(cell.value, end=" ")
 print()
 
 print("讀取 第 4 列的所有資料")
-for cell in sheet["4"]:  # 讀取第2列所有資料，並列印出來
-    print(cell.value, end = " ")
+for cell in sheet1["4"]:  # 讀取第2列所有資料，並列印出來
+    print(cell.value, end=" ")
 print()
 
-print("------------------------------")  # 30個
-
-print("顯示資料 方法八")
-
-filename_r = "data/python_ReadWrite_EXCEL.xlsx"
-workbook = openpyxl.load_workbook(filename_r)
-
-workbook.active = 0
-sheet = workbook.active  # 取得開啟試算表後立刻顯示的工作表(即最後編輯的工作表)
-print("excel活動工作表： ", sheet)
-
-select_data = sheet["A2":"D7"]
+select_data = sheet1["A2":"D7"]
 for a, b, c, d in select_data:
     print("{0} {1} {2} {3}".format(a.value, b.value, c.value, d.value))
 print()
 
-print('sheet.dimensions', sheet.dimensions)
+# 取得指定儲存格資料
+print(sheet1["A1"])
+print(sheet1["A1"].value)  # 取出 A1 的內容
+print(sheet1.cell(1, 1).value)  # 等同取出 A1 的內容
 
-for a, b, c, d in sheet[sheet.dimensions]:
+print(sheet2["B2"].value)  # 取出 B2 的內容
+print(sheet2.cell(2, 2).value)  # 等同取出 B2 的內容
+
+print("讀取指定儲存格的內容")
+print(sheet1["A1"].value)
+print(sheet1["A2"].value)
+print(sheet1["B2"].value)
+print(sheet1["C3"].value)
+
+print("讀取指定區域內容")
+
+for row in sheet1["A2":"D5"]:
+    for cell in row:
+        print(cell.value, end=" ")
+    print()
+
+print("------------------------------")  # 30個
+
+print("資料所在位置 sheet1.dimensions :", sheet1.dimensions)
+
+for a, b, c, d in sheet1[sheet1.dimensions]:
     print(a.value, b.value, c.value, d.value)
 
 print("------------------------------")  # 30個
 
 print("顯示資料 方法九")
+print("讀取 xlsx, 檔案 : " + filename)
+workbook = openpyxl.load_workbook(filename)
 
+sheetnames = workbook.sheetnames  # 讀取 excel檔案 裏所有工作表名稱
+print("所有工作表名稱 :", sheetnames)
 
-workbook = openpyxl.load_workbook(filename_r)
+length = len(workbook.sheetnames)
+print("共有", length, "個工作表")
 
-sheets = workbook.sheetnames
-print(sheets)
-
-for i in range(len(sheets)):
-    sheet = workbook[sheets[i]]
-    print('title', sheet.title)
+for i in range(length):
+    sheet = workbook[sheetnames[i]]
+    print("title", sheet.title)
     for col in sheet.iter_cols(min_row=0, min_col=0, max_row=3, max_col=3):
         for cell in col:
-            print(cell.value, end = " ")
+            print(cell.value, end=" ")
     print()
 
 print("------------------------------")  # 30個
 
-for row in range(2, 7):  # 第 2~6 ROW
-    for col in range(65, 70): # 65~69 A~E
-        cell_index = chr(col) + str(row)
-        print(sheet[cell_index].value, end='\t')
-    print()
+ROW_ST = sheet.min_row
+COL_ST = sheet.min_column
+ROW_SP = sheet.max_row
+COL_SP = sheet.max_column
 
-print("------------------------------")  # 30個
-
-for i in range(2, sheet.max_row+1):
+for i in range(ROW_ST, ROW_SP + 1):
     sheet.row_dimensions[i].height = 18
-    for j in range(3, sheet.max_column+1):
-        print(sheet.cell(row=i,column=j).value, end = " ")
+    for j in range(COL_ST, COL_SP + 1):
+        print(sheet.cell(row=i, column=j).value, end=" ")
     print()
-        
-print("------------------------------")  # 30個
-
-
-
-
 
 print("------------------------------")  # 30個
 
-print("openpyxl test 03 循欄列印 ＆ 循列列印")
+print("循欄列印")
 
+print("第1欄")
 for cell in list(sheet.columns)[0]:
-    print(cell.value, end = " ")
+    print(cell.value, end=" ")
 print()
 
+print("第2欄")
 for cell in list(sheet.columns)[1]:
-    print(cell.value, end = " ")
+    print(cell.value, end=" ")
 print()
 
+print("第3欄")
 for cell in list(sheet.columns)[2]:
-    print(cell.value, end = " ")
+    print(cell.value, end=" ")
 print()
 
+print("第4欄")
 for cell in list(sheet.columns)[3]:
-    print(cell.value, end = " ")
+    print(cell.value, end=" ")
 print()
 
 print("------------------------------")  # 30個
 
+print("循列列印")
+
+print("第1列")
 for cell in list(sheet.rows)[0]:
-    print(cell.value, end = " ")
+    print(cell.value, end=" ")
 print()
 
+print("第2列")
 for cell in list(sheet.rows)[1]:
-    print(cell.value, end = " ")
+    print(cell.value, end=" ")
 print()
 
+print("第3列")
 for cell in list(sheet.rows)[2]:
-    print(cell.value, end = " ")
+    print(cell.value, end=" ")
 print()
 
+print("第4列")
 for cell in list(sheet.rows)[3]:
-    print(cell.value, end = " ")
+    print(cell.value, end=" ")
 print()
-
-
-print("------------------------------")  # 30個
-
-print("openpyxl test 04 讀取指定區域內容")
-
-for row in sheet["A2":"D5"]:
-    for cell in row:
-        print(cell.value, end=" ")
-    print()
 
 print("------------------------------------------------------------")  # 60個
 
-workbook = openpyxl.load_workbook(filename_r)
-sheet = workbook.active
+print("讀取 xlsx, 檔案 : " + filename)
+workbook = openpyxl.load_workbook(filename)
 
-print('印出整個工作表1')
+print("取得第 1 個工作表")
+sheet = workbook.worksheets[0]
+
+print("印出整個工作表1")
 i = 0
 for row in sheet:
-    print('第', i, 'row', end = " : ")
+    print("第", i, "row", end=" : ")
     i += 1
     for cell in row:
-        print(cell.value, end = " ")
+        print(cell.value, end=" ")
     print()
 print()
 
-print('印出整個工作表2')
+print("印出整個工作表2")
+ROW_ST = sheet.min_row
+COL_ST = sheet.min_column
+ROW_SP = sheet.max_row
+COL_SP = sheet.max_column
 i = 0
-for row in range(1, sheet.max_row+1):
-    print('第', i, 'row', end = " : ")
+for row in range(ROW_ST, ROW_SP + 1):
+    print("第", i, "row", end=" : ")
     i += 1
-    for col in range(1, sheet.max_column+1):
-        print(sheet.cell(row,col).value, end = " ")
+    for col in range(COL_ST, COL_SP + 1):
+        print(sheet.cell(row, col).value, end=" ")
     print()
 print()
 
-print('印出工作表部分資料1')
+print("印出工作表部分資料1")
 i = 0
 for rows in sheet["B2":"C3"]:
     for cell in rows:
-        print(cell.value, end = " ")
+        print(cell.value, end=" ")
     print()
 print()
 
-print('印出工作表部分資料2')
+print("印出工作表部分資料2")
 
 getted_list = []
 i = 0
 for rows in sheet.iter_rows(min_row=2, min_col=2, max_row=3, max_col=3):
-    print('第', i, 'row', end = " : ")
+    print("第", i, "row", end=" : ")
     for cell in rows:
-        print(cell.value, end = ' ')
+        print(cell.value, end=" ")
     print()
 print()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+filename = "data/list-countries-world.xlsx"
+print("讀取 xlsx, 檔案 : " + filename)
+workbook = openpyxl.load_workbook(filename)
 
+print("取得第 1 個工作表")
+sheet = workbook.worksheets[0]
+
+ROW_ST = sheet.min_row
+COL_ST = sheet.min_column
+ROW_SP = sheet.max_row
+COL_SP = sheet.max_column
+
+list_values = list(sheet.values)
+print("資料長度 :", len(list_values))
+print("所有資料 :", list_values)
+
+print("列出 第1列 標題")
+print(list_values[0])
+
+print("列出 第2列 開始的資料 10 筆")
+row_index = 0
+for value_tuple in list_values[1:]:
+    col_index = 0
+    for value in value_tuple:
+        # print(row_index , col_index, str(value))
+        print(str(value), end=" ")
+        col_index += 1
+    print()
+    row_index += 1
+    if row_index > 10:
+        break
+print()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
+sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -432,13 +438,13 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-filename_r = "data/python_ReadWrite_EXCEL.xlsx"
+filename = "data/python_ReadWrite_EXCEL.xlsx"
 
 '''
 """
 #開啟舊檔 + 參數
-workbook = openpyxl.load_workbook(filename_r, data_only=True)  # 要excel開啟才可以看到值，否則會顯示None
-workbook = openpyxl.load_workbook(filename_r, data_only=False) # 要excel開啟才可以看到值，否則會顯示None
+workbook = openpyxl.load_workbook(filename, data_only=True)  # 要excel開啟才可以看到值，否則會顯示None
+workbook = openpyxl.load_workbook(filename, data_only=False) # 要excel開啟才可以看到值，否則會顯示None
 """
 
 print("------------------------------")  # 30個
@@ -447,7 +453,9 @@ print("------------------------------")  # 30個
 import csv
 data_rows = [fields for fields in csv.reader(open("animals.csv"))]
 
-sheet = workbook.active
+print("取得第 1 個工作表")
+sheet = workbook.worksheets[0]
+
 for row in data_rows:
     sheet.append(row)
 
@@ -523,7 +531,9 @@ from openpyxl.formatting.rule import CellIsRule
 from openpyxl.formatting.rule import ColorScaleRule
 
 workbook = openpyxl.Workbook()
-sheet = workbook.active
+
+print("取得第 1 個工作表")
+sheet = workbook.worksheets[0]
 
 values = [11, 22, 33, 44, 55, 66, 77, 88, 99, 55]
 
@@ -557,3 +567,24 @@ workbook.save("tmp_01_fill_red.xlsx")
 '''
 
 
+from openpyxl.utils import get_column_letter
+
+print("取得欄位名稱 前30個")
+for i in range(30 + 1):
+    print(get_column_letter(i + 1), end=" ")
+print()
+
+from openpyxl.utils import column_index_from_string
+
+print("由欄位名稱 取得索引")
+print(column_index_from_string("A"))  # 1
+print(column_index_from_string("Z"))  # 26
+print(column_index_from_string("AA"))  # 27
+print(column_index_from_string("ZZ"))  # 702
+print(column_index_from_string("A"))
+print(column_index_from_string("B"))
+
+
+print("儲存格 欄名", sheet["C5"].column)
+print("儲存格 列名", sheet["C5"].row)
+print("儲存格名", sheet["C5"].coordinate)

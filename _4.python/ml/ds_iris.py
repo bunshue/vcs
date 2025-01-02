@@ -138,7 +138,6 @@ print(iris.data[3:6])  # 第3~6筆資料
 print(iris.data[5])  # 第5筆資料
 print(iris.data[:5])  # 前5筆資料
 
-
 print("------------------------------------------------------------")  # 60個
 
 print("鳶尾花數據庫 基本數據 load_iris()轉df, 再看iris資料")
@@ -199,14 +198,11 @@ print("花萼長度 不同的數字 size :", np.unique(df["花萼長度"].values
 print("花萼寬度 不同的數字 size :", np.unique(df["花萼寬度"].values).size)
 print("花瓣長度 不同的數字 size :", np.unique(df["花瓣長度"].values).size)
 print("花瓣寬度 不同的數字 size :", np.unique(df["花瓣寬度"].values).size)
-print("花萼長度 :")
-print(df["花萼長度"].values)
-print("花萼寬度 :")
-print(df["花萼寬度"].values)
-print("花瓣長度 :")
-print(df["花瓣長度"].values)
-print("花瓣寬度 :")
-print(df["花瓣寬度"].values)
+
+print("花萼長度 :", df["花萼長度"].values)
+print("花萼寬度 :", df["花萼寬度"].values)
+print("花瓣長度 :", df["花瓣長度"].values)
+print("花瓣寬度 :", df["花瓣寬度"].values)
 
 class1 = np.where(df["類別"] == "setosa", 1, 0)
 print("抓出versicolor :", class1)
@@ -214,12 +210,6 @@ class2 = np.where(df["類別"] == "versicolor", 1, 0)
 print("抓出versicolor :", class2)
 class3 = np.where(df["類別"] == "virginica", 1, 0)
 print("抓出versicolor :", class3)
-
-print("size")
-print(np.unique(df["花萼長度"].values).size)
-
-cccc = np.where(df["類別"] == "versicolor", 1, 0)
-print("抓出versicolor :", cccc)
 
 color = ["r", "y", "b"]
 species = ["Setosa", "Versicolour", "Virginica"]
@@ -393,7 +383,8 @@ y = target["target"]
 XTrain, XTest, yTrain, yTest = train_test_split(df, y, test_size=0.2)
 # 訓練組8成, 測試組2成
 
-dtree = tree.DecisionTreeClassifier(max_depth=8)
+dtree = tree.DecisionTreeClassifier(max_depth=8)  # 決策樹函數學習機
+
 dtree.fit(XTrain, yTrain)
 
 print("準確率:", dtree.score(XTest, yTest))
@@ -415,7 +406,8 @@ y = target["target"]
 XTrain, XTest, yTrain, yTest = train_test_split(df, y, test_size=0.2)
 # 訓練組8成, 測試組2成
 
-dtree = tree.DecisionTreeClassifier(max_depth=8)
+dtree = tree.DecisionTreeClassifier(max_depth=8)  # 決策樹函數學習機
+
 dtree.fit(XTrain, yTrain)
 
 with open("tmp_tree2.dot", "w") as f:
@@ -490,7 +482,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("決策樹 (decision tree)")
 
-from sklearn.tree import DecisionTreeClassifier
+from sklearn.tree import DecisionTreeClassifier  # 決策樹函數學習機
 
 X, y = datasets.load_iris(return_X_y=True)
 
@@ -505,7 +497,7 @@ print(y[0])
 dx_train, dx_test, dy_train, dy_test = train_test_split(X, y, test_size=0.2)
 # 訓練組8成, 測試組2成
 
-tree = DecisionTreeClassifier()
+tree = DecisionTreeClassifier()  # 決策樹函數學習機
 
 tree.fit(dx_train, dy_train)
 
@@ -616,8 +608,10 @@ from sklearn import tree
 
 iris = datasets.load_iris()
 
-clf = tree.DecisionTreeClassifier()
+clf = tree.DecisionTreeClassifier()  # 決策樹函數學習機
+
 clf = clf.fit(iris.data, iris.target)
+
 print(clf.feature_importances_)
 
 print("------------------------------------------------------------")  # 60個
@@ -673,7 +667,7 @@ y = iris.target  # 獲取因變量??  # 資料集目標
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 # 訓練組8成, 測試組2成
 
-clf = tree.DecisionTreeClassifier(max_depth=5)
+clf = tree.DecisionTreeClassifier(max_depth=5)  # 決策樹函數學習機
 
 clf.fit(X_train, y_train)  # 訓練模型
 
