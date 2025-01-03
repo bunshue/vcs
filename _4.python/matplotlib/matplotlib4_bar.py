@@ -22,6 +22,14 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
+
+def show():
+    plt.show()
+    pass
+
+
+print("------------------------------------------------------------")  # 60個
+
 plt.figure(
     num="bar 集合 1",
     figsize=(12, 8),
@@ -129,7 +137,7 @@ print("將字典直接輸出給bar圖")
 data = {"鼠": 3, "牛": 48, "虎": 33, "兔": 8}
 plt.bar(list(data.keys()), list(data.values()))
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 plt.figure(
@@ -205,7 +213,7 @@ colors = ["grey", "grey", "red", "grey", "grey"]
 
 plt.bar(animals, weights, color=colors)
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -287,7 +295,7 @@ plt.legend(["2017年", "2018年", "2019年", "2020年"])
 plt.ylabel("平均分數,取到小數點第一位")
 plt.title("大學四年各學期平均成績比較表")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -360,7 +368,7 @@ plt.title("雙向的長條圖")
 plt.subplot(236)
 
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -465,7 +473,7 @@ plt.subplot(235)
 plt.subplot(236)
 
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -571,7 +579,7 @@ plt.legend()
 plt.subplot(236)
 
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 plt.figure(
@@ -714,7 +722,7 @@ plt.legend(loc="center left", bbox_to_anchor=(1, 0.5))
 
 plt.title("體重累計圖")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -858,9 +866,57 @@ plt.xticks(index[0::2], labels)
 plt.ylabel("使用率")
 plt.title("程式語言的使用率")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
+
+# 柱狀圖參數調整
+
+"""
+參數說明
+顏色和樣式
+color：設定柱子的顏色，可以是一個顏色或一個顏色列表。
+edgecolor：設定柱子邊框的顏色。
+linewidth：設定柱子邊框的寬度。
+hatch：設定柱子的圖案填充，例如 '/'（斜線），'\\'（反斜線），'|'（垂直線），'-'（水平線）。
+柱子的寬度
+width：設定柱子的寬度。
+刻度和網格
+plt.xticks() 和 plt.yticks()：設定刻度標籤。
+plt.grid()：顯示或隱藏網格線。
+圖形大小和分辨率
+plt.figure(figsize=(width, height), dpi=dpi)：設定圖形大小和分辨率。
+"""
+
+# 數據
+categories = ["A", "B", "C", "D"]
+values = [10, 20, 15, 25]
+
+# 設定圖形大小和分辨率
+plt.figure(figsize=(10, 5), dpi=100)
+
+# 繪製柱狀圖並自定義參數
+plt.bar(
+    categories,
+    values,
+    color="skyblue",
+    edgecolor="black",
+    linewidth=1.5,
+    hatch="/",
+    width=0.5,
+    label="數據1",
+)
+
+plt.title("22柱狀圖示例")
+plt.xlabel("類別")
+plt.ylabel("值")
+
+plt.xticks(categories)
+plt.yticks([0, 5, 10, 15, 20, 25])
+plt.grid(True)
+plt.legend()
+
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -930,7 +986,7 @@ ax.set_xlabel("Name")
 ax.set_ylabel("Money")
 ax.legend(loc=2)
 
-plt.show()
+show()
 
 
 width = 0.35  # 長條圖寬度

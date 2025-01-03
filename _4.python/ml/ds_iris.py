@@ -69,8 +69,8 @@ print("------------------------------------------------------------")  # 60個
 
 
 def show():
-    return
     plt.show()
+    pass
 
 
 print("------------------------------------------------------------")  # 60個
@@ -473,9 +473,30 @@ X = iris.data
 y = iris.target  # 資料集目標
 
 n_components = 2  # 削減後の次元を2に設定
+
 clf = PCA(n_components=n_components)
+
 clf = clf.fit(X)
-print(clf.transform(X))  # 変換したデータ
+
+X2 = clf.transform(X)
+print(X2)  # 変換したデータ
+
+print(X.shape)
+print(X2.shape)
+
+plt.subplot(121)
+plt.plot(X[:, 0], c='r')
+plt.plot(X[:, 1], c='g')
+plt.plot(X[:, 2], c='b')
+plt.plot(X[:, 3], c='c')
+
+plt.subplot(122)
+plt.plot(X2[:, 0], c='r')
+plt.plot(X2[:, 1], c='g')
+#plt.plot(X2[:, 2], c='b')
+#plt.plot(X2[:, 3], c='c')
+
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -643,7 +664,7 @@ iris = datasets.load_iris()
 X = iris.data
 y = iris.target  # 資料集目標
 
-df = pd.DataFrame(X, columns=["SpealLen", "SpealWid", "PetalLen", "PetalWid"])
+df = pd.DataFrame(X, columns=["萼長", "萼寬", "瓣長", "瓣寬"])
 
 mat = df.corr()
 print(mat)
@@ -663,13 +684,17 @@ show()
 
 print("------------------------------")  # 30個
 
-pca = PCA(n_components=2)
-data1 = pca.fit_transform(df)
-print(data1.shape)
-print(pca.explained_variance_ratio_, pca.explained_variance_ratio_.sum())
-plt.scatter(data1[:, 0], data1[:, 1], c=np.array(y), cmap=plt.cm.copper)
+clf = PCA(n_components=2)
+
+X2 = clf.fit_transform(df)
+
+print(X2.shape)
+plt.scatter(X2[:, 0], X2[:, 1], c=np.array(y), cmap=plt.cm.copper)
 
 show()
+
+print(clf.explained_variance_ratio_)
+print(clf.explained_variance_ratio_.sum())
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

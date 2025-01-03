@@ -133,6 +133,17 @@ REPTree
 
 
 
+ML包含
+迴歸 regression
+分類 classification
+分群 clustering
+
+梯度提升 Gradient Boosting
+
+XGBoost 梯度提升法函式庫
+
+
+
 線性迴歸（英語：linear regression）
 是利用稱為線性迴歸方程式的最小平方函數對一個或多個自變數和應變數之間關係進行建模的一種迴歸分析。
 這種函數是一個或多個稱為迴歸係數的模型參數的線性組合。
@@ -191,6 +202,47 @@ REPTree
 2. 學習訓練.fit
 3: 預測.predict
 
+
+
+
+機器學習的種類(3)
+1. 監督學習(supervised learning)
+	迴歸 regression
+	分類 classification
+	線性迴歸、邏輯斯迴歸、支援向量機、神經網路、決策樹、K近鄰法
+2. 無監督學習(unsupervised learning)
+	分群 clustering
+	降維
+	
+	
+3. 強化學習(reinforcement learning)
+
+
+支持向量機 Support Vector Machine, SVM
+
+主成分分析 Principal Components Analysis, PCA
+
+線性迴歸
+coef_ : 迴歸係數
+intercept_ : 截距
+
+make_regression 準備迴歸模型數據
+make_blobs 準備群集數據
+
+常見的監督學習分類器
+1. KNN
+2. 邏輯迴歸演算法
+3. 決策樹 Decision Tree
+4. 隨機森林 Random Forest
+
+
+無監督學習 群集分析
+1. K-means演算法
+
+生成式演算法
+1. 自助具合法 Bootstrap Aggregation => bagging
+2. 提升法 Boosting
+3. 隨機森林 Random Forest
 
 
 

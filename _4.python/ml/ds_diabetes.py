@@ -56,7 +56,6 @@ from sklearn.linear_model import Ridge
 from sklearn.linear_model import Lasso
 from sklearn.linear_model import ElasticNet
 from sklearn.neighbors import KNeighborsClassifier  # K近鄰演算法（K Nearest Neighbor, KNN）
-from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import mean_squared_error
 from sklearn.metrics import mean_absolute_error
 from sklearn.metrics import r2_score
@@ -900,7 +899,7 @@ array = dataframe.values
 # separate array into input and output components
 X = array[:, 0:8]
 Y = array[:, 8]
-scaler = StandardScaler().fit(X)  # 學習訓練.fit
+scaler = sklearn.preprocessing.StandardScaler().fit(X)  # 學習訓練.fit
 rescaledX = scaler.transform(X)
 # summarize transformed data
 np.set_printoptions(precision=3)
@@ -953,15 +952,13 @@ print("------------------------------------------------------------")  # 60個
 
 # k_fold_cross_validation  K折交叉驗證法
 
-from sklearn.preprocessing import StandardScaler
-
 X, y = datasets.load_diabetes(return_X_y=True)
 
 # 資料分割
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 # 特徵縮放
-scaler = StandardScaler()
+scaler = sklearn.preprocessing.StandardScaler()
 X_train_std = scaler.fit_transform(X_train)
 X_test_std = scaler.transform(X_test)
 
@@ -1029,10 +1026,8 @@ cc = clf.best_params_
 print(cc)
 
 # 驗證
-from math import floor
-
 index = np.argmax(clf.cv_results_["mean_test_score"])
-cc = index, clf.cv_results_["mean_test_score"][index], alphas[floor((index - 1) / 2)]
+cc = index, clf.cv_results_["mean_test_score"][index], alphas[math.floor((index - 1) / 2)]
 print(cc)
 
 cc = clf.best_score_
@@ -1054,7 +1049,6 @@ print("------------------------------------------------------------")  # 60個
 
 # pipeline_cross_validation 管線測試
 
-from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import make_pipeline
 from sklearn.decomposition import PCA
 
@@ -1066,7 +1060,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 # 建立管線：特徵縮放、特徵萃取、模型訓練
 
 pipe_lr = make_pipeline(
-    StandardScaler(), PCA(n_components=5), Lasso(random_state=9487, max_iter=10000)
+    sklearn.preprocessing.StandardScaler(), PCA(n_components=5), Lasso(random_state=9487, max_iter=10000)
 )
 
 pipe_lr.fit(X_train, y_train)  # 學習訓練.fit
@@ -1115,8 +1109,6 @@ cc = clf.best_params_
 print(cc)
 
 # 驗證
-from math import floor
-
 index = np.argmax(clf.cv_results_["mean_test_score"])
 cc = index, clf.cv_results_["mean_test_score"][index], clf.best_score_
 print(cc)
@@ -1124,7 +1116,7 @@ print(cc)
 # 以最佳參數組合重新訓練
 
 pipe_lr = make_pipeline(
-    StandardScaler(),
+    sklearn.preprocessing.StandardScaler(),
     PCA(n_components=5),
     Lasso(
         random_state=9487,
@@ -1143,7 +1135,7 @@ from sklearn.pipeline import Pipeline
 
 pipe_lr = Pipeline(
     [
-        ("scaler", StandardScaler()),
+        ("scaler", sklearn.preprocessing.StandardScaler()),
         ("pca", PCA(n_components=5)),
         (
             "lasso",
@@ -1382,13 +1374,12 @@ from sklearn.linear_model import RidgeCV
 from sklearn.svm import LinearSVR
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.ensemble import StackingRegressor
-from sklearn.preprocessing import StandardScaler
 
 X, y = datasets.load_diabetes(return_X_y=True)
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
-scaler = StandardScaler()
+scaler = sklearn.preprocessing.StandardScaler()
 X_train_std = scaler.fit_transform(X_train)
 X_test_std = scaler.transform(X_test)
 
@@ -1471,13 +1462,12 @@ from sklearn.linear_model import RidgeCV
 from sklearn.svm import LinearSVR
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.ensemble import StackingRegressor
-from sklearn.preprocessing import StandardScaler
 
 X, y = datasets.load_diabetes(return_X_y=True)
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
-scaler = StandardScaler()
+scaler = sklearn.preprocessing.StandardScaler()
 X_train_std = scaler.fit_transform(X_train)
 X_test_std = scaler.transform(X_test)
 
