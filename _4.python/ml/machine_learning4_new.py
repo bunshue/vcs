@@ -21,14 +21,30 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
+import scipy
 import sklearn.linear_model
-import sklearn.metrics as metrics
+
+from sklearn import svm
+from sklearn import cluster
 from sklearn import datasets
+from sklearn import decomposition
+from sklearn import preprocessing
+from sklearn import model_selection
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
 from sklearn.model_selection import cross_val_score
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import f1_score
+from sklearn.metrics import r2_score
+from sklearn.metrics import roc_auc_score
+from sklearn.metrics import recall_score
+from sklearn.metrics import precision_score
+from sklearn.metrics import precision_recall_fscore_support
+from sklearn.metrics import mean_squared_error
+from sklearn.metrics import mean_absolute_error
+from sklearn.metrics import balanced_accuracy_score
+from sklearn.metrics import confusion_matrix
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.decomposition import PCA
 
 
 def show():
@@ -37,12 +53,15 @@ def show():
     pass
 
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
+import warnings
+
+warnings.filterwarnings("once")
 
 np.set_printoptions(precision=2)
 # pd.set_option('precision', 2)
 
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 bv = np.array([10, 20, 30, 40, 50])  # business volume
 tax = 0.2 * bv  # Tax
@@ -58,22 +77,30 @@ leading to the same prediction.
 
 # 10 times the bv then subtract it 9 times using the tax variable:
 beta_medium = np.array([0.1 * 10, -0.1 * 9 * (1 / 0.2)])
+
 # 100 times the bv then subtract it 99 times using the tax variable:
 beta_large = np.array([0.1 * 100, -0.1 * 99 * (1 / 0.2)])
 
-print(
-    "L2 norm of coefficients: small:%.2f, medium:%.2f, large:%.2f."
-    % (np.sum(beta_star**2), np.sum(beta_medium**2), np.sum(beta_large**2))
-)
+print("L2 norm of coefficients:")
+print("small:%.2f" % (np.sum(beta_star**2)))
+print("medium:%.2f" % (np.sum(beta_medium**2)))
+print("large:%.2f." % (np.sum(beta_large**2)))
 
 print("However all models provide the exact same predictions.")
 assert np.all(np.dot(X, beta_star) == np.dot(X, beta_medium))
 assert np.all(np.dot(X, beta_star) == np.dot(X, beta_large))
 
-
 # Dataset with some correlation
+
+N = 100  # n_samples, 樣本數
+M = 10  # n_features, 特徵數(資料的維度)
+T = 1  # n_targets, 標籤類別
+NOISE = 10  # noise, 分散程度
+
+print("make_regression,", N, "個樣本, ", M, "個特徵")
+
 X, y, coef = datasets.make_regression(
-    n_samples=100, n_features=10, n_informative=5, effective_rank=3, coef=True
+    n_samples=N, n_features=M, n_informative=5, effective_rank=3, coef=True
 )
 
 lr = sklearn.linear_model.LinearRegression().fit(X, y)
@@ -90,24 +117,28 @@ pd.DataFrame(
 )
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("make_regression, 預設參數")
 
 X, y = datasets.make_regression()
 
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+# 資料分割
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 lr = sklearn.linear_model.LinearRegression()
 lr.fit(X_train, y_train)
 yhat = lr.predict(X_test)
 
-r2 = metrics.r2_score(y_test, yhat)
-mse = metrics.mean_squared_error(y_test, yhat)
-mae = metrics.mean_absolute_error(y_test, yhat)
+r2 = r2_score(y_test, yhat)
+mse = mean_squared_error(y_test, yhat)
+mae = mean_absolute_error(y_test, yhat)
 
-print("r2: %.3f, mae: %.3f, mse: %.3f" % (r2, mae, mse))
+print("r2: %.3f" % r2)
+print("mae: %.3f" % mae)
+print("mse: %.3f" % mse)
 
-
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 res = y_test - lr.predict(X_test)
 
@@ -121,13 +152,9 @@ mae = np.mean(np.abs(res))
 
 print("r2: %.3f, mae: %.3f, mse: %.3f" % (r2, mae, mse))
 
-
 print("------------------------------------------------------------")  # 60個
 # linear_classification
 print("------------------------------------------------------------")  # 60個
-
-np.set_printoptions(precision=2)
-# pd.set_option('precision', 2)
 
 # Linear discriminant analysis (LDA)
 
@@ -181,13 +208,15 @@ print(
 )
 print(logreg.coef_)
 
-
 print("------------------------------------------------------------")  # 60個
 
 # Dataset with some correlation
+N = 100  # n_samples, 樣本數
+M = 10  # n_features, 特徵數(資料的維度)
+print("make_classification,", N, "個樣本, ", M, "個特徵")
 X, y = datasets.make_classification(
-    n_samples=100,
-    n_features=10,
+    n_samples=N,
+    n_features=M,
     n_informative=5,
     n_redundant=3,
     n_classes=2,
@@ -266,8 +295,6 @@ print(lrl1.coef_)
 
 print("------------------------------------------------------------")  # 60個
 
-from sklearn import svm
-
 svmlin = svm.LinearSVC(C=0.1)
 # Remark: by default LinearSVC uses squared_hinge as loss
 svmlin.fit(X, y)
@@ -281,8 +308,6 @@ print("Coef vector:")
 print(svmlin.coef_)
 
 print("------------------------------------------------------------")  # 60個
-
-from sklearn import svm
 
 svmlinl1 = svm.LinearSVC(penalty="l1", dual=False)
 # Remark: by default LinearSVC uses squared_hinge as loss
@@ -318,26 +343,24 @@ enethinge.fit(X, y)
 
 print("Hinge loss and logistic loss provide almost the same predictions.")
 print("Confusion matrix")
-metrics.confusion_matrix(enetlog.predict(X), enethinge.predict(X))
+confusion_matrix(enetlog.predict(X), enethinge.predict(X))
 
 print("Decision_function log x hinge losses:")
 _ = plt.plot(enetlog.decision_function(X), enethinge.decision_function(X), "o")
 
 print("------------------------------------------------------------")  # 60個
 
-from sklearn import metrics
-
 y_pred = [0, 1, 0, 0]
 y_true = [0, 1, 0, 1]
 
-metrics.accuracy_score(y_true, y_pred)
+accuracy_score(y_true, y_pred)
 
 # The overall precision an recall
-metrics.precision_score(y_true, y_pred)
-metrics.recall_score(y_true, y_pred)
+precision_score(y_true, y_pred)
+recall_score(y_true, y_pred)
 
 # Recalls on individual classes: SEN & SPC
-recalls = metrics.recall_score(y_true, y_pred, average=None)
+recalls = recall_score(y_true, y_pred, average=None)
 recalls[0]  # is the recall of class 0: specificity
 recalls[1]  # is the recall of class 1: sensitivity
 
@@ -345,7 +368,7 @@ recalls[1]  # is the recall of class 1: sensitivity
 b_acc = recalls.mean()
 
 # The overall precision an recall on each individual class
-p, r, f, s = metrics.precision_recall_fscore_support(y_true, y_pred)
+p, r, f, s = precision_recall_fscore_support(y_true, y_pred)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -367,10 +390,11 @@ y_pred = (score_pred > thres).astype(int)
 
 print("With a threshold of %.2f, the rule always predict 0. Predictions:" % thres)
 print(y_pred)
-metrics.accuracy_score(y_true, y_pred)
+
+accuracy_score(y_true, y_pred)
 
 # The overall precision an recall on each individual class
-r = metrics.recall_score(y_true, y_pred, average=None)
+r = recall_score(y_true, y_pred, average=None)
 print(
     "Recalls on individual classes are:",
     r,
@@ -378,16 +402,18 @@ print(
 )
 
 # However AUC=1 indicating a perfect separation of the two classes
-auc = metrics.roc_auc_score(y_true, score_pred)
+auc = roc_auc_score(y_true, score_pred)
 print("But the AUC of %.2f demonstrate a good classes separation." % auc)
 
-
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# dataset
+N = 500  # n_samples, 樣本數
+M = 5  # n_features, 特徵數(資料的維度)
+print("make_classification,", N, "個樣本, ", M, "個特徵")
 X, y = datasets.make_classification(
-    n_samples=500,
-    n_features=5,
+    n_samples=N,
+    n_features=M,
     n_informative=2,
     n_redundant=0,
     n_repeated=0,
@@ -400,7 +426,7 @@ print(*["#samples of class %i = %i;" % (lev, np.sum(y == lev)) for lev in np.uni
 print("# No Reweighting balanced dataset")
 lr_inter = sklearn.linear_model.LogisticRegression(C=1)
 lr_inter.fit(X, y)
-p, r, f, s = metrics.precision_recall_fscore_support(y, lr_inter.predict(X))
+p, r, f, s = precision_recall_fscore_support(y, lr_inter.predict(X))
 print("SPC: %.3f; SEN: %.3f" % tuple(r))
 print("# => The predictions are balanced in sensitivity and specificity\n")
 
@@ -422,7 +448,7 @@ lr_inter = sklearn.linear_model.LogisticRegression(C=1)
 
 lr_inter.fit(Ximb, yimb)
 
-p, r, f, s = metrics.precision_recall_fscore_support(yimb, lr_inter.predict(Ximb))
+p, r, f, s = precision_recall_fscore_support(yimb, lr_inter.predict(Ximb))
 print("SPC: %.3f; SEN: %.3f" % tuple(r))
 print("# => Sensitivity >> specificity\n")
 
@@ -433,20 +459,14 @@ lr_inter_reweight = sklearn.linear_model.LogisticRegression(
 
 lr_inter_reweight.fit(Ximb, yimb)
 
-p, r, f, s = metrics.precision_recall_fscore_support(
-    yimb, lr_inter_reweight.predict(Ximb)
-)
+p, r, f, s = precision_recall_fscore_support(yimb, lr_inter_reweight.predict(Ximb))
 print("SPC: %.3f; SEN: %.3f" % tuple(r))
 print("# => The predictions are balanced in sensitivity and specificity\n")
 
 print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
+
 # clustering
-print("------------------------------------------------------------")  # 60個
-
-from sklearn import cluster
 
 iris = datasets.load_iris()
 X = iris.data[:, :2]  # use only 'sepal length and sepal width'
@@ -471,6 +491,7 @@ plt.title("K=4, J=%.2f" % km4.inertia_)
 
 show()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 import plot_utils
@@ -585,10 +606,8 @@ show()
 
 print("Choose k=", k_chosen)
 
-
 print("------------------------------------------------------------")  # 60個
-
-from sklearn import cluster
+print("------------------------------------------------------------")  # 60個
 
 iris = datasets.load_iris()
 X = iris.data[:, :2]  # 'sepal length (cm)''sepal width (cm)'
@@ -619,9 +638,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 # decomposition
 print("------------------------------------------------------------")  # 60個
-
-import scipy
-from sklearn.decomposition import PCA
 
 # dataset
 n_samples = 100
@@ -695,8 +711,7 @@ plt.tight_layout()
 show()
 
 print("------------------------------------------------------------")  # 60個
-
-from sklearn.decomposition import PCA
+print("------------------------------------------------------------")  # 60個
 
 # dataset
 n_samples = 100
@@ -723,8 +738,6 @@ plt.ylabel("PC2 (var=%.2f)" % pca.explained_variance_ratio_[1])
 plt.axis("equal")
 plt.tight_layout()
 
-from time import time
-from matplotlib import offsetbox
 from sklearn import (
     manifold,
     datasets,
@@ -749,7 +762,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 from sklearn.datasets import fetch_olivetti_faces
-from sklearn import decomposition
 
 R, C = 2, 3
 n_components = R * C
@@ -808,9 +820,6 @@ print("------------------------------------------------------------")  # 60個
 
 # Principal Component Analysis(PCA)
 
-import scipy
-from sklearn.decomposition import PCA
-
 
 class BasicPCA:
     def fit(self, X):
@@ -854,8 +863,6 @@ print(pca.explained_variance_ratio_)
 # assert np.all(basic_pca.transform(X) == pca.transform(X))
 
 # Apply PCA on iris dataset
-
-from sklearn.decomposition import PCA
 
 # https://tgmstat.wordpress.com/2013/11/28/computing-and-visualizing-pca-in-r/
 
@@ -943,9 +950,7 @@ X = mds.fit_transform(D)
 
 # Recover coordinates of the cities in Euclidean referential whose orientation is arbitrary:
 
-from sklearn import metrics
-
-Deuclidean = metrics.pairwise.pairwise_distances(X, metric="euclidean")
+Deuclidean = sklearn.metrics.pairwise.pairwise_distances(X, metric="euclidean")
 print(np.round(Deuclidean[:5, :5]))
 
 # Plot: apply some rotation and flip
@@ -1035,7 +1040,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # MDS
-from sklearn.decomposition import PCA
 from sklearn.manifold import MDS
 
 df = pd.read_csv("data/machine_learning4_iris.csv")
@@ -1044,9 +1048,7 @@ X = np.asarray(df.iloc[:, :4])
 X -= np.mean(X, axis=0)
 X /= np.std(X, axis=0, ddof=1)
 
-from sklearn import metrics
-
-D = metrics.pairwise.pairwise_distances(X, metric="euclidean")
+D = sklearn.metrics.pairwise.pairwise_distances(X, metric="euclidean")
 
 stress = [
     MDS(
@@ -1090,7 +1092,6 @@ print("------------------------------------------------------------")  # 60個
 
 from matplotlib.ticker import NullFormatter
 from sklearn import manifold
-from time import time
 
 n_samples = 300
 n_components = 2
@@ -1112,7 +1113,7 @@ plt.axis("tight")
 for i, perplexity in enumerate(perplexities):
     ax = subplots[0][i + 1]
 
-    t0 = time()
+    t0 = time.time()
     tsne = manifold.TSNE(
         n_components=n_components,
         init="random",
@@ -1120,7 +1121,7 @@ for i, perplexity in enumerate(perplexities):
         perplexity=perplexity,
     )
     Y = tsne.fit_transform(X)
-    t1 = time()
+    t1 = time.time()
     print("circles, perplexity=%d in %.2g sec" % (perplexity, t1 - t0))
     ax.set_title("Perplexity=%d" % perplexity)
     ax.scatter(Y[red, 0], Y[red, 1], c="r")
@@ -1139,12 +1140,12 @@ ax.yaxis.set_major_formatter(NullFormatter())
 for i, perplexity in enumerate(perplexities):
     ax = subplots[1][i + 1]
 
-    t0 = time()
+    t0 = time.time()
     tsne = manifold.TSNE(
         n_components=n_components, init="random", random_state=0, perplexity=perplexity
     )
     Y = tsne.fit_transform(X)
-    t1 = time()
+    t1 = time.time()
     print("S-curve, perplexity=%d in %.2g sec" % (perplexity, t1 - t0))
 
     ax.set_title("Perplexity=%d" % perplexity)
@@ -1172,12 +1173,12 @@ ax.yaxis.set_major_formatter(NullFormatter())
 for i, perplexity in enumerate(perplexities):
     ax = subplots[2][i + 1]
 
-    t0 = time()
+    t0 = time.time()
     tsne = manifold.TSNE(
         n_components=n_components, init="random", random_state=0, perplexity=perplexity
     )
     Y = tsne.fit_transform(X)
-    t1 = time()
+    t1 = time.time()
     print("uniform grid, perplexity=%d in %.2g sec" % (perplexity, t1 - t0))
 
     ax.set_title("Perplexity=%d" % perplexity)
@@ -1196,7 +1197,6 @@ print("------------------------------------------------------------")  # 60個
 
 # Bagged Decision Trees for Classification
 
-from sklearn import model_selection
 from sklearn.ensemble import BaggingClassifier
 from sklearn.tree import DecisionTreeClassifier
 
@@ -1224,8 +1224,6 @@ print("Accuracy: %0.2f (+/- %0.2f)" % (results.mean(), results.std()))
 
 # Random Forest Classification
 
-from sklearn import model_selection
-
 names = ["preg", "plas", "pres", "skin", "test", "mass", "pedi", "age", "class"]
 dataframe = pd.read_csv(
     "https://raw.githubusercontent.com/jbrownlee/Datasets/master/pima-indians-diabetes.data.csv",
@@ -1250,13 +1248,11 @@ print("Accuracy: %0.2f (+/- %0.2f)" % (results.mean(), results.std()))
 print("------------------------------")  # 30個
 
 # Boosting
-
 # Adaboost Classifier
 
 from sklearn.ensemble import AdaBoostClassifier
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.datasets import load_breast_cancer
-from sklearn.metrics import confusion_matrix
 from sklearn.preprocessing import LabelEncoder
 
 breast_cancer = load_breast_cancer()
@@ -1266,7 +1262,7 @@ y = pd.Categorical.from_codes(breast_cancer.target, breast_cancer.target_names)
 encoder = LabelEncoder()
 binary_encoded_y = pd.Series(encoder.fit_transform(y))
 
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+# 資料分割
 train_x, test_x, train_y, test_y = train_test_split(x, binary_encoded_y)
 
 clf_boosting = AdaBoostClassifier(DecisionTreeClassifier(max_depth=1), n_estimators=200)
@@ -1284,7 +1280,6 @@ print(
 from sklearn.ensemble import AdaBoostClassifier
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.datasets import load_breast_cancer
-from sklearn.metrics import confusion_matrix
 from sklearn.preprocessing import LabelEncoder
 
 breast_cancer = load_breast_cancer()
@@ -1294,7 +1289,7 @@ y = pd.Categorical.from_codes(breast_cancer.target, breast_cancer.target_names)
 encoder = LabelEncoder()
 binary_encoded_y = pd.Series(encoder.fit_transform(y))
 
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+# 資料分割
 train_x, test_x, train_y, test_y = train_test_split(x, binary_encoded_y)
 
 clf_bagging = RandomForestClassifier(n_estimators=200, max_depth=1)
@@ -1310,11 +1305,9 @@ print(
 print("------------------------------")  # 30個
 
 # Stacking
-
 from sklearn.ensemble import AdaBoostClassifier
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.datasets import load_breast_cancer
-from sklearn.metrics import confusion_matrix
 from sklearn.preprocessing import LabelEncoder
 
 breast_cancer = load_breast_cancer()
@@ -1325,7 +1318,7 @@ y = pd.Categorical.from_codes(breast_cancer.target, breast_cancer.target_names)
 encoder = LabelEncoder()
 binary_encoded_y = pd.Series(encoder.fit_transform(y))
 
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+# 資料分割
 train_x, test_x, train_y, test_y = train_test_split(x, binary_encoded_y)
 
 boosting_clf_ada_boost = AdaBoostClassifier(
@@ -1435,15 +1428,9 @@ print("------------------------------------------------------------")  # 60個
 
 # Encoding categorical features
 
-import warnings
-
-warnings.filterwarnings("once")
-
 print(pd.get_dummies(["A", "B", "C", "A", "B", "D"]))
 
 # Standardization of input features
-
-from sklearn import preprocessing
 
 # dataset
 n_samples, n_features, n_features_info = 100, 5, 3
@@ -1482,7 +1469,6 @@ print("Test R2:%.2f" % cross_val_score(estimator=model, X=Xc, y=y, cv=5).mean())
 
 # Standardization of input features
 
-from sklearn import preprocessing
 from sklearn.pipeline import make_pipeline
 
 model = make_pipeline(
@@ -1504,7 +1490,6 @@ print("Test  r2:%.2f" % scores.mean())
 
 # Features selection
 
-from sklearn import preprocessing
 from sklearn.feature_selection import SelectKBest
 from sklearn.feature_selection import f_regression
 from sklearn.pipeline import Pipeline
@@ -1543,25 +1528,30 @@ print("Standardize + Lasso, test  r2:%.2f" % scores.mean())
 
 # Regression pipelines with CV for parameters selection
 
-from sklearn import preprocessing
 from sklearn.feature_selection import SelectKBest
 from sklearn.feature_selection import f_regression
 from sklearn.pipeline import Pipeline
 from sklearn.model_selection import GridSearchCV
 
 # Datasets
-n_samples, n_features, noise_sd = 100, 100, 20
+N = 100  # n_samples, 樣本數
+M = 100  # n_features, 特徵數(資料的維度)
+T = 1  # n_targets, 標籤類別
+NOISE = 20  # noise, 分散程度
+
+print("make_regression,", N, "個樣本, ", M, "個特徵")
+
 X, y, coef = datasets.make_regression(
-    n_samples=n_samples,
-    n_features=n_features,
-    noise=noise_sd,
+    n_samples=N,
+    n_features=M,
+    noise=NOISE,
     n_informative=5,
     random_state=9487,
     coef=True,
 )
 
 # Use this to tune the noise parameter such that snr < 5
-print("SNR:", np.std(np.dot(X, coef)) / noise_sd)
+print("SNR:", np.std(np.dot(X, coef)) / NOISE)
 
 print("=============================")
 print("== Basic linear regression ==")
@@ -1651,22 +1641,23 @@ print("Test r2:%.2f" % scores.mean())
 
 # Classification pipelines with CV for parameters selection
 
-from sklearn import preprocessing
 from sklearn.feature_selection import SelectKBest
 from sklearn.feature_selection import f_classif
 from sklearn.pipeline import Pipeline
 from sklearn.model_selection import GridSearchCV
 
 # Datasets
-n_samples, n_features, noise_sd = 100, 100, 20
+N = 100  # n_samples, 樣本數
+M = 100  # n_features, 特徵數(資料的維度)
+print("make_classification,", N, "個樣本, ", M, "個特徵")
 X, y = datasets.make_classification(
-    n_samples=n_samples, n_features=n_features, n_informative=5, random_state=9487
+    n_samples=N, n_features=M, n_informative=5, random_state=9487
 )
 
 
 def balanced_acc(estimator, X, y, **kwargs):
     # Balanced acuracy scorer
-    return metrics.recall_score(y, estimator.predict(X), average=None).mean()
+    return recall_score(y, estimator.predict(X), average=None).mean()
 
 
 print("=============================")
@@ -1824,9 +1815,16 @@ from sklearn.model_selection import KFold
 from sklearn.model_selection import PredefinedSplit
 from sklearn.model_selection import GridSearchCV
 
-X, y = datasets.make_regression(n_samples=100, n_features=100, n_informative=10)
+N = 100  # n_samples, 樣本數
+M = 100  # n_features, 特徵數(資料的維度)
+T = 1  # n_targets, 標籤類別
+NOISE = 10  # noise, 分散程度
 
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+print("make_regression,", N, "個樣本, ", M, "個特徵")
+
+X, y = datasets.make_regression(n_samples=N, n_features=M, n_informative=10)
+
+# 資料分割
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, shuffle=True)
 
 mod = sklearn.linear_model.Ridge(alpha=10)
@@ -1834,9 +1832,9 @@ mod = sklearn.linear_model.Ridge(alpha=10)
 mod.fit(X_train, y_train)
 
 y_pred_test = mod.predict(X_test)
-print("Test R2: %.2f" % metrics.r2_score(y_test, y_pred_test))
+print("Test R2: %.2f" % r2_score(y_test, y_pred_test))
 
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+# 資料分割
 train_idx, validation_idx = train_test_split(
     np.arange(X_train.shape[0]), test_size=0.2, shuffle=True
 )
@@ -1858,7 +1856,7 @@ lm_cv.fit(X_train, y_train)
 
 # Predict
 y_pred_test = lm_cv.predict(X_test)
-print("Test R2: %.2f" % metrics.r2_score(y_test, y_pred_test))
+print("Test R2: %.2f" % r2_score(y_test, y_pred_test))
 
 from sklearn.model_selection import KFold
 
@@ -1869,8 +1867,8 @@ r2_train, r2_test = list(), list()
 
 for train, test in cv.split(X):
     estimator.fit(X[train, :], y[train])
-    r2_train.append(metrics.r2_score(y[train], estimator.predict(X[train, :])))
-    r2_test.append(metrics.r2_score(y[test], estimator.predict(X[test, :])))
+    r2_train.append(r2_score(y[train], estimator.predict(X[train, :])))
+    r2_test.append(r2_score(y[test], estimator.predict(X[test, :])))
 
 print("Train r2:%.2f" % np.mean(r2_train))
 print("Test  r2:%.2f" % np.mean(r2_test))
@@ -1895,8 +1893,11 @@ print(
 
 from sklearn.model_selection import StratifiedKFold
 
+N = 100  # n_samples, 樣本數
+M = 100  # n_features, 特徵數(資料的維度)
+print("make_classification,", N, "個樣本, ", M, "個特徵")
 X, y = datasets.make_classification(
-    n_samples=100, n_features=100, shuffle=True, n_informative=10
+    n_samples=N, n_features=M, shuffle=True, n_informative=10
 )
 
 mod = sklearn.linear_model.LogisticRegression(C=1, solver="lbfgs")
@@ -1908,13 +1909,11 @@ bacc, auc = [], []
 
 for train, test in cv.split(X, y):
     mod.fit(X[train, :], y[train])
-    bacc.append(metrics.roc_auc_score(y[test], mod.decision_function(X[test, :])))
-    auc.append(metrics.balanced_accuracy_score(y[test], mod.predict(X[test, :])))
+    bacc.append(roc_auc_score(y[test], mod.decision_function(X[test, :])))
+    auc.append(balanced_accuracy_score(y[test], mod.predict(X[test, :])))
 
 print("Test AUC:%.2f; bACC:%.2f" % (np.mean(bacc), np.mean(auc)))
 
-
-# %%
 # `cross_val_score()`: single metric
 
 scores = cross_val_score(estimator=mod, X=X, y=y, cv=5)
@@ -1922,18 +1921,15 @@ scores = cross_val_score(estimator=mod, X=X, y=y, cv=5)
 print("Test  ACC:%.2f" % scores.mean())
 
 
-# %%
 # Provide your own CV and score
 def balanced_acc(estimator, X, y, **kwargs):
     """Balanced acuracy scorer."""
-    return metrics.recall_score(y, estimator.predict(X), average=None).mean()
+    return recall_score(y, estimator.predict(X), average=None).mean()
 
 
 scores = cross_val_score(estimator=mod, X=X, y=y, cv=cv, scoring=balanced_acc)
 print("Test  bACC:%.2f" % scores.mean())
 
-
-# %%
 # `cross_validate()`: multi metric, + time, etc.
 
 from sklearn.model_selection import cross_validate
@@ -1947,8 +1943,7 @@ print(
     % (scores["test_roc_auc"].mean(), scores["test_balanced_accuracy"].mean())
 )
 
-
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+# 資料分割
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, shuffle=True)
 
 cv_inner = StratifiedKFold(n_splits=5, shuffle=True, random_state=9487)
@@ -1966,10 +1961,8 @@ lm_cv.fit(X_train, y_train)
 
 # Predict
 y_pred_test = lm_cv.predict(X_test)
-print("Test bACC: %.2f" % metrics.balanced_accuracy_score(y_test, y_pred_test))
+print("Test bACC: %.2f" % balanced_accuracy_score(y_test, y_pred_test))
 
-
-# %%
 # Cross-validation for both model (outer) evaluation and model (inner) selection
 # ------------------------------------------------------------------------------
 
@@ -1999,12 +1992,9 @@ print(
     )
 )
 
-# %%
 # Models with built-in cross-validation
 # --------------------------------------
-#
 # Let sklearn select the best parameters over a default grid.
-#
 # **Classification**
 
 print("== Logistic Ridge (L2 penalty) ==")
@@ -2014,13 +2004,19 @@ mod_cv = sklearn.linear_model.LogisticRegressionCV(
 scores = cross_val_score(estimator=mod_cv, X=X, y=y, cv=5)
 print("Test  ACC:%.2f" % scores.mean())
 
-# %%
 # **Regression**
 
+N = 50  # n_samples, 樣本數
+M = 100  # n_features, 特徵數(資料的維度)
+T = 1  # n_targets, 標籤類別
+NOISE = 10  # noise, 分散程度
+
+print("make_regression,", N, "個樣本, ", M, "個特徵")
+
 X, y, coef = datasets.make_regression(
-    n_samples=50,
-    n_features=100,
-    noise=10,
+    n_samples=N,
+    n_features=M,
+    noise=NOISE,
     n_informative=2,
     random_state=9487,
     coef=True,
@@ -2053,7 +2049,6 @@ Xbeta = np.dot(X, beta)
 eps = np.random.randn(n_samples)
 y = Xbeta + eps
 
-# %%
 # Random permutations
 # -------------------
 
@@ -2069,14 +2064,14 @@ scores_names = ["r2"]
 scores_perm = np.zeros((nperm + 1, len(scores_names)))
 coefs_perm = np.zeros((nperm + 1, X.shape[1]))
 
-scores_perm[0, :] = metrics.r2_score(y, model.predict(X))
+scores_perm[0, :] = r2_score(y, model.predict(X))
 coefs_perm[0, :] = model.coef_
 
 orig_all = np.arange(X.shape[0])
 for perm_i in range(1, nperm + 1):
     model.fit(X, np.random.permutation(y))
     y_pred = model.predict(X).ravel()
-    scores_perm[perm_i, :] = metrics.r2_score(y, y_pred)
+    scores_perm[perm_i, :] = r2_score(y, y_pred)
     coefs_perm[perm_i, :] = model.coef_
 
 # One-tailed empirical p-value
@@ -2086,7 +2081,6 @@ pval_coef_perm = np.sum(coefs_perm >= coefs_perm[0, :], axis=0) / coefs_perm.sha
 print("R2 p-value: %.3f" % pval_pred_perm)
 print("Coeficients p-values:", np.round(pval_coef_perm, 3))
 
-# %%
 # Compute p-values corrected for multiple comparisons using FWER max-T
 # (Westfall and Young, 1993) procedure.
 
@@ -2102,7 +2096,6 @@ pval_coef_perm_tmax = (
 print("P-values with FWER (Westfall and Young) correction")
 print(pval_coef_perm_tmax)
 
-# %%
 # Plot distribution of third coefficient under null-hypothesis
 # Coeffitients 0 and 1 are significantly different from 0.
 #
@@ -2154,10 +2147,9 @@ for boot_i in range(nboot):
     Xte, yte = X[boot_te, :], y[boot_te]
     model.fit(Xtr, ytr)
     y_pred = model.predict(Xte).ravel()
-    scores_boot[boot_i, :] = metrics.r2_score(yte, y_pred)
+    scores_boot[boot_i, :] = r2_score(yte, y_pred)
     coefs_boot[boot_i, :] = model.coef_
 
-# %%
 # Compute Mean, SE, CI
 # Coeffitients 0 and 1 are significantly different from 0.
 
@@ -2187,7 +2179,10 @@ _ = ax.axhline(0, ls="--", lw=2, color="black")
 
 from sklearn.model_selection import StratifiedKFold
 
-X, y = datasets.make_classification(n_samples=20, n_features=5, n_informative=2)
+N = 20  # n_samples, 樣本數
+M = 5  # n_features, 特徵數(資料的維度)
+print("make_classification,", N, "個樣本, ", M, "個特徵")
+X, y = datasets.make_classification(n_samples=N, n_features=M, n_informative=2)
 
 cv = StratifiedKFold(n_splits=5)
 
@@ -2212,8 +2207,7 @@ for train, test in cv.split(X, y):
     coefs_seq.append(estimator.coef_)
 
 test_accs = [
-    metrics.accuracy_score(y[test], y_test_pred_seq[test])
-    for train, test in cv.split(X, y)
+    accuracy_score(y[test], y_test_pred_seq[test]) for train, test in cv.split(X, y)
 ]
 print(np.mean(test_accs), test_accs)
 coefs_cv = np.array(coefs_seq)
@@ -2223,8 +2217,6 @@ print(coefs_cv.mean(axis=0))
 print("Std Err of the coef")
 print(coefs_cv.std(axis=0) / np.sqrt(coefs_cv.shape[0]))
 
-
-# %%
 # Parallel computation with joblib
 # --------------------------------
 
@@ -2255,12 +2247,10 @@ for i, (train, test) in enumerate(cv.split(X, y)):
     y_test_pred[test] = y_test_pred_cv[i]
 
 test_accs = [
-    metrics.accuracy_score(y[test], y_test_pred[test]) for train, test in cv.split(X, y)
+    accuracy_score(y[test], y_test_pred[test]) for train, test in cv.split(X, y)
 ]
 print(np.mean(test_accs), test_accs)
 
-
-# %%
 # Test same predictions and same coeficients
 
 assert np.all(y_test_pred == y_test_pred_seq)
@@ -2271,7 +2261,10 @@ print("------------------------------------------------------------")  # 60個
 
 from sklearn.model_selection import StratifiedKFold
 
-X, y = datasets.make_classification(n_samples=100, n_features=100, n_informative=10)
+N = 100  # n_samples, 樣本數
+M = 100  # n_features, 特徵數(資料的維度)
+print("make_classification,", N, "個樣本, ", M, "個特徵")
+X, y = datasets.make_classification(n_samples=N, n_features=M, n_informative=10)
 
 model = sklearn.linear_model.LogisticRegression(C=1)
 
@@ -2289,8 +2282,8 @@ for perm in range(0, nperm):
         X_train, X_test, y_train, y_test = X[train, :], X[test, :], yp[train], yp[test]
         model.fit(X_train, y_train)
         y_test_pred[test] = model.predict(X_test)
-    scores_perm[perm, 0] = metrics.accuracy_score(yp, y_test_pred)
-    scores_perm[perm, [1, 2]] = metrics.recall_score(yp, y_test_pred, average=None)
+    scores_perm[perm, 0] = accuracy_score(yp, y_test_pred)
+    scores_perm[perm, [1, 2]] = recall_score(yp, y_test_pred, average=None)
 
 # Empirical permutation based p-values
 pval = np.sum(scores_perm >= scores_perm[0, :], axis=0) / nperm
@@ -2332,3 +2325,6 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------")  # 30個

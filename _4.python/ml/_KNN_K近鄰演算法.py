@@ -35,27 +35,39 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 print("------------------------------------------------------------")  # 60個
 
 import joblib
+import sklearn
 from common1 import *
 from sklearn import datasets
 from sklearn import preprocessing  # 極值標準化
 from sklearn.datasets import make_blobs
 from sklearn.datasets import make_moons  # 非線性的資料集
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
-from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import cross_val_score  # 交叉驗證 Cross-validation
+import sklearn.model_selection as cross_validation
+
+# import sklearn.metrics as metrics
+
 from sklearn.metrics import accuracy_score  # 計算準確率
 from sklearn.metrics import classification_report
 from sklearn.metrics import confusion_matrix
+from sklearn.metrics import adjusted_rand_score
+from sklearn.metrics import homogeneity_score
+from sklearn.metrics import v_measure_score
+from sklearn.metrics import mean_absolute_error
+from sklearn.metrics import mean_squared_error
+from sklearn.metrics import r2_score
+from sklearn.metrics import ConfusionMatrixDisplay
+
+from sklearn.linear_model import LogisticRegression
 from sklearn.neighbors import KNeighborsClassifier  # K近鄰演算法（K Nearest Neighbor, KNN）
 from sklearn.neighbors import KNeighborsRegressor
 
 
 def show():
-    plt.show()
+    # plt.show()
     pass
 
 
-'''
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -69,9 +81,7 @@ X = np.random.rand(50, 2)
 plt.scatter(X[:, 0], X[:, 1], s=50)
 show()
 
-sys.exit()
 """
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -183,7 +193,7 @@ STD = 1  # cluster_std, 資料標準差
 print("make_blobs,", N, "個樣本, ", M, "個特徵, 分成", GROUPS, "群")
 X, y = make_blobs(n_samples=N, n_features=M, centers=GROUPS)
 
-scaler = StandardScaler()
+scaler = sklearn.preprocessing.StandardScaler()
 X_std = scaler.fit_transform(X)  # STD特徵縮放, 標準化
 
 plt.subplot(121)
@@ -405,7 +415,7 @@ cc = df.isnull().any()
 print(cc)
 
 # 將Danger中特徵中移除，作為要預測的對象
-scaler = StandardScaler()
+scaler = sklearn.preprocessing.StandardScaler()
 scaler.fit(df.drop("Danger", axis=1))
 scaled_features = scaler.transform(df.drop("Danger", axis=1))
 
@@ -531,7 +541,7 @@ print(cc)
 # 載入標準化比例尺（StandardScaler）套件
 
 # 將Danger中特徵中移除，作為要預測的對象
-scaler = StandardScaler()
+scaler = sklearn.preprocessing.StandardScaler()
 scaler.fit(df.drop("Danger", axis=1))  # 刪除 "Danger" 這一欄的資料
 scaled_features = scaler.transform(df.drop("Danger", axis=1))
 
@@ -645,7 +655,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 from scipy import stats
-import sklearn.model_selection as cross_validation
 
 orgData = pd.read_csv("data/date_data.csv")
 orgData.describe()
@@ -684,10 +693,8 @@ knn.fit(X_train, y_train.values.flatten())  # 學習訓練.fit
 
 y_pred = knn.predict(X_test)  # 預測.predict
 
-import sklearn.metrics as metrics
-
-print(metrics.confusion_matrix(y_test, y_pred, labels=[0, 1]))  # 混淆矩阵
-print(metrics.classification_report(y_test, y_pred))
+print(confusion_matrix(y_test, y_pred, labels=[0, 1]))  # 混淆矩阵
+print(classification_report(y_test, y_pred))
 
 print("KNN準確率: %.2f" % knn.score(X_test, y_test))
 
@@ -704,8 +711,6 @@ for k in range(1, 30, 5):
 from sklearn.model_selection import ParameterGrid
 from sklearn.model_selection import GridSearchCV
 from sklearn.model_selection import KFold
-
-import sklearn
 
 print(help(sklearn.model_selection.KFold()))
 
@@ -817,7 +822,7 @@ print(cc)
 print(y_train)
 
 # 特徵縮放
-scaler = preprocessing.StandardScaler()
+scaler = sklearn.preprocessing.StandardScaler()
 X_train_std = scaler.fit_transform(X_train)
 X_test_std = scaler.transform(X_test)
 
@@ -852,8 +857,6 @@ print("混淆矩陣")
 print(confusion_matrix(y_test, y_pred))
 
 # 混淆矩陣圖
-from sklearn.metrics import ConfusionMatrixDisplay
-
 disp = ConfusionMatrixDisplay(
     confusion_matrix=confusion_matrix(y_test, y_pred), display_labels=ds.target_names
 )
@@ -1159,7 +1162,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 # 訓練組8成, 測試組2成
 
 # 標準化
-scaler = preprocessing.StandardScaler().fit(X_train)
+scaler = sklearn.preprocessing.StandardScaler().fit(X_train)
 X_train = scaler.transform(X_train)
 X_test = scaler.transform(X_test)
 
@@ -1209,8 +1212,6 @@ print("------------------------------------------------------------")  # 60個
 
 # Create instances of the models
 
-# Import necessary classes from sklearn libraries
-from sklearn.linear_model import LogisticRegression
 from sklearn.svm import SVC
 from sklearn.cluster import KMeans
 from sklearn.decomposition import PCA
@@ -1278,7 +1279,7 @@ print("------------------------------")  # 30個
 # Standardization
 
 # Create an instance of the StandardScaler and fit it to training data
-scaler = StandardScaler().fit(X_train)
+scaler = sklearn.preprocessing.StandardScaler().fit(X_train)
 
 # Transform the training and test data using the scaler
 standardized_X = scaler.transform(X_train)
@@ -1326,10 +1327,6 @@ print("------------------------------------------------------------")  # 60個
 
 # Regression Metrics
 
-from sklearn.metrics import mean_absolute_error
-from sklearn.metrics import mean_squared_error
-from sklearn.metrics import r2_score
-
 # True values (ground truth)
 y_true = [3, -0.5, 2]
 
@@ -1351,10 +1348,6 @@ print("R² Score:", r2)
 print("------------------------------------------------------------")  # 60個
 
 # Clustering Metrics
-
-from sklearn.metrics import adjusted_rand_score
-from sklearn.metrics import homogeneity_score
-from sklearn.metrics import v_measure_score
 
 # Adjusted Rand Index
 adjusted_rand_index = adjusted_rand_score(y_test, y_pred_kmeans)
@@ -1384,7 +1377,6 @@ print(lr_scores)
 
 # Grid Search
 
-# Import necessary library
 from sklearn.model_selection import GridSearchCV
 
 # Define parameter grid
@@ -1428,7 +1420,7 @@ y_pred = knn.predict(X_test)
 # 幫模型打分數
 accuracy = accuracy_score(y_test, y_pred)
 print(f"Accuracy: {accuracy}")
-'''
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -1445,7 +1437,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 # 訓練組8成, 測試組2成
 
 # 第四步：特征缩放 Feature Scaling
-scaler = StandardScaler()
+scaler = sklearn.preprocessing.StandardScaler()
 X_train = scaler.fit_transform(X_train)  # STD特徵縮放
 X_test = scaler.transform(X_test)  # STD特徵縮放
 
@@ -1483,9 +1475,6 @@ print(y_pred)
 # 第七步：生成混淆矩阵
 # Making the Confusion Matrix
 # 混淆矩阵可以对一个分类器性能进行分析，由此可以计算出许多指标，例如：ROC曲线、正确率等
-
-from sklearn.metrics import confusion_matrix
-from sklearn.metrics import classification_report
 
 cm = confusion_matrix(y_test, y_pred)
 print(cm)

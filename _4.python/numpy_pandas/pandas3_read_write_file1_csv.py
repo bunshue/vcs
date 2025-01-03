@@ -1,8 +1,6 @@
 """
 使用pandas讀寫csv檔, 讀成 DataFrame 格式
 
-
-
 #匯出DataFrame
 df.to_csv(filename)
 df.to_json(filename)
@@ -16,7 +14,6 @@ df.read_json(filename)
 df.read_html(filename)
 df.read_excel(filename)
 df.read_sql(query, engine)
-
 
 匯出匯入DataFrame物件(5)
 
@@ -34,10 +31,8 @@ pd.read_html(filename)
 pd.read_excel(filename)
 pd.read_sql(filename)
 
-
 # 指定分隔符號
 # df.to_csv("xxxx.csv", sep="\t")
-
 
 """
 
@@ -52,6 +47,7 @@ import random
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns  # 海生, 自動把圖畫得比較好看
 
 font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
@@ -70,10 +66,8 @@ ssl._create_default_https_context = ssl._create_unverified_context
 
 print("------------------------------------------------------------")  # 60個
 
-
 # df = pd.read_csv(filename, encoding="UTF-8")
 # df = pd.read_csv(filename, encoding="big5")  # 以pandas讀取檔案
-
 
 print("------------------------------------------------------------")  # 60個
 print("簡易讀取csv檔")
@@ -210,28 +204,6 @@ print(total2)
 print("全班最高總分：", total2.max())
 
 print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("作業完成")
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 準備移出
-
 
 """ 看起來以下4種皆不好
 print("pd讀取csv檔案00 :", filename)
@@ -484,9 +456,8 @@ population, area = cities["population_total"], cities["area_total_km2"]
 
 # to scatter the points, using size and color but without label
 
-import seaborn
+sns.set()
 
-seaborn.set()
 plt.scatter(
     longitude,
     latitude,
@@ -540,21 +511,18 @@ df.to_csv("New_Data.csv", encoding="utf8")  # 存檔至New_Data.csv中
 df.to_csv("2014-2018.csv", encoding="utf8")
 df.to_csv("New_Data.csv", encoding="utf8")  # 存檔至New_Data.csv中
 
-
 df.to_json("New_Data.json", encoding="utf8")  # 存檔至New_Data.json
 df.to_json("New_Data.json", encoding="utf8")  # 存檔至New_Data.json
 
 df.to_excel("New_Data.xlsx", encoding="utf8")  # 存檔至New_Data.xlsx
 df.to_excel("New_Data.xlsx", encoding="utf8")  # 存檔至New_Data.xlsx
 df.to_excel("New_Data.xlsx", encoding="utf8")  # 存檔至New_Data.xlsx
-
 
 df.to_csv(filename)
 df.to_csv(filename, index=False, header=True, columns=["Name", "Sex", "Age"])
 df.to_csv(filename, index=False)
 df.to_csv(filename, index=False, encoding="big5")
 df.to_csv(filename, index=False, encoding="utf8")
-
 
 filename = "tmp_動物資料0.csv"
 df.to_csv(filename)  # 預設為 儲存index行
@@ -569,10 +537,8 @@ df.to_csv("tmp_datas11.csv", index=False, encoding="utf8")
 
 df2 = pd.read_csv("tmp_datas11.csv", encoding="utf8")
 
-
 print("df存成csv檔")
 df.to_csv("tmp_olympics.csv")
-
 
 print("csv檔案轉df")
 df = pd.read_csv("data/student.csv")

@@ -32,14 +32,18 @@ from sklearn import datasets
 from sklearn.datasets import make_blobs  # 集群資料集
 from sklearn.datasets import make_classification
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
+from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier  # 隨機森林分類函數學習機
 from sklearn.ensemble import RandomForestRegressor  # 隨機森林函數學習機
+from sklearn.ensemble import BaggingClassifier
+
 from sklearn.model_selection import cross_val_score  # Cross Validation
+from sklearn.metrics import confusion_matrix
+from sklearn.metrics import classification_report
 
 
 def show():
-    # return
-    plt.show()
+    # plt.show()
     pass
 
 
@@ -58,9 +62,7 @@ print("make_blobs,", N, "個樣本, ", M, "個特徵, 分成", GROUPS, "群")
 X, y = make_blobs(n_samples=N, centers=GROUPS, cluster_std=1.0)
 
 plt.scatter(X[:, 0], X[:, 1], c=y, s=50, cmap="rainbow")
-plt.show()
-
-from sklearn.tree import DecisionTreeClassifier
+show()
 
 tree = DecisionTreeClassifier().fit(X, y)
 
@@ -100,29 +102,23 @@ def visualize_classifier(model, X, y, ax=None, cmap="rainbow"):
 
 visualize_classifier(DecisionTreeClassifier(), X, y)
 
-plt.show()
-
+show()
 
 # 隨機森林Random Forests
-
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.ensemble import BaggingClassifier
-
 tree = DecisionTreeClassifier()
+
 # 通過每個估計器擬合80％的訓練點  BaggingClassifier利用平行估計器的集合
 bag = BaggingClassifier(tree, n_estimators=100, max_samples=0.8, random_state=9487)
 
 bag.fit(X, y)
 visualize_classifier(bag, X, y)
 
-plt.show()
-
-from sklearn.ensemble import RandomForestClassifier  # 隨機森林分類函數學習機
+show()
 
 model = RandomForestClassifier(n_estimators=100, random_state=9487)  # 隨機森林分類函數學習機
 
 visualize_classifier(model, X, y)
-plt.show()
+show()
 
 
 # Random Forest Regression
@@ -143,11 +139,9 @@ def model(x, sigma=0.3):
 
 y = model(x)
 plt.errorbar(x, y, 0.3, fmt="o")
-plt.show()
+show()
 
 # 再來直接利用SKlearn中的RandomForestRegressor，來繪製出回歸線
-from sklearn.ensemble import RandomForestRegressor
-
 forest = RandomForestRegressor(200)
 forest.fit(x[:, None], y)
 
@@ -158,7 +152,7 @@ ytrue = model(xfit, sigma=0)
 plt.errorbar(x, y, 0.3, fmt="o", alpha=0.5)
 plt.plot(xfit, yfit, "-r")
 plt.plot(xfit, ytrue, "-k", alpha=0.5)
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -186,11 +180,9 @@ for i in range(64):
     tx.text(0, 7, str(digits.target[i]))
 
 
-plt.show()
+show()
 
 # 用 隨機森林分類函數學習機 將手寫資料進行分類
-
-from sklearn import metrics
 
 Xtrain, Xtest, ytrain, ytest = train_test_split(digits.data, digits.target)
 model = RandomForestClassifier(n_estimators=1000)  # 隨機森林分類函數學習機
@@ -199,18 +191,16 @@ model.fit(Xtrain, ytrain)
 
 ypred = model.predict(Xtest)
 
-print(metrics.classification_report(ypred, ytest))
+print(classification_report(ypred, ytest))
 
 
 # 可以看到上圖，最左邊為數字0~9的類別，主要回傳精確值以及support，看這些數字很難懂，先看下圖
-
-from sklearn.metrics import confusion_matrix
 
 mat = confusion_matrix(ytest, ypred)
 sns.heatmap(mat.T, square=True, annot=True, fmt="d", cbar=False)
 plt.xlabel("true label")
 plt.ylabel("predicted label")
-plt.show()
+show()
 
 """
 可以看到上圖，X軸為真實手寫數字的值，Y軸會預測手寫的數字的值，
@@ -749,6 +739,7 @@ export_graphviz(
 # value為預測之PM2.5的數值
 
 print("------------------------------------------------------------")  # 60個
+
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
@@ -757,6 +748,7 @@ print("------------------------------------------------------------")  # 60個
 sys.exit()
 
 print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個
 

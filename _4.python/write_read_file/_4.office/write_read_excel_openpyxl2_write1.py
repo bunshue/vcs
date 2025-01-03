@@ -19,91 +19,99 @@ python讀取/修改excel
 import os
 import sys
 import time
+import datetime
 import openpyxl
 
-pic_filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
+print("建立新檔, 簡單寫入Excel檔案, 一頁工作表, 儲存格")
 
 workbook = openpyxl.Workbook()  # 建立空白的Excel活頁簿物件
 
+"""
+print("開啟舊檔, 修改資料, 存檔, 或另存新檔")
+filename_r = "data/python_ReadWrite_EXCEL.xlsx"
+print("讀取 xlsx, 檔案 : " + filename_r)
+workbook = openpyxl.load_workbook(filename_r)
+"""
+
 # 選取正在工作中的工作表，空白活頁簿有一個預存工作表，名稱是Sheet
-ws = workbook.active
+sheet = workbook.active
+sheet.title = "第一頁"  # 工作表名稱
 
-# 設定工作表名稱為Sheet1
-ws.title = "Sheet1"
+""" same
+print("取得第 1 個工作表")
+sheet = workbook.worksheets[0]
+"""
 
-# 指定字串給A1儲存格
-ws["A1"] = "1"
+# 以儲存格位置寫入資料, 直接修改/設定工作表內的資料
 
-# 指定數值給A2儲存格
-ws["A2"] = 1
+# 指定字串給儲存格
+sheet["A1"] = "123"
+sheet["B1"] = "456"
+sheet["C1"] = "789"
 
-# 指定數值給B2儲存格
-ws["B2"] = 2
-
-# 指定數值公式給C2儲存格
-ws["C2"] = "=SUM(A2:B2)"
-
-# 指定數值計算結果給A3儲存格
-ws["A3"] = 1 + 2
-
-# 指定字串計算結果給B3儲存格
-ws["B3"] = "1" + "2"
-
-# 指定數值計算公式給A4儲存格
-ws["A4"] = "=1+2"
-
-# 指定字串公式給C2儲存格
-ws["B4"] = '=CONCATENATE("1","2")'
-
-# 新增一個工作表名稱為Sheet2
-workbook.create_sheet("Sheet2")
-
-# 選擇Sheet2工作表為正在工作中的工作表
-ws = workbook.get_sheet_by_name("Sheet2")
+# 指定數值給儲存格
+sheet["A2"] = 123
+sheet["B2"] = 456
+sheet["C2"] = 789
 
 # 一次填入一列數值
-ws.append([1, 2, 3])
+sheet.append([111, 222, 333])
 
 # 一次填入一列文字
-ws.append(["1", "2", "3"])
+sheet.append(["111", "222", "333"])
 
 # 建立圖片物件
+pic_filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
 img = openpyxl.drawing.image.Image(pic_filename)
-img.height = img.height * 0.1
-img.width = img.width * 0.1
+img.height = img.height * 1
+img.width = img.width * 1
+# 加入圖片於指定的儲存格
+sheet.add_image(img, "E4")  # 把圖貼在E4
 
-# 加入圖片於C1儲存格
-ws.add_image(img, "C1")
+data = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]  # 二維陣列資料
+for i in data:
+    sheet.append(i)  # 逐筆添加到最後一列
 
-filename_w = "tmp_excel_openpyxl_a.xlsx"
-workbook.save(filename_w)  # 儲存檔案
+# 儲存檔案
+filename_w = "tmp_excel_openpyxl_a_simple.xlsx"
+workbook.save(filename_w)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("openpyxl test 01 建立多工作表之Excel活頁簿")
+print("簡單寫入Excel檔案, 多頁工作表")
 
 workbook = openpyxl.Workbook()  # 建立空白的Excel活頁簿物件
 
 # 預設為名為Sheet之工作表
 
+# 選取正在工作中的工作表，空白活頁簿有一個預存工作表，名稱是Sheet
+sheet = workbook.active
+
+sheet.title = "第一頁"  # 工作表名稱
+sheet["A1"] = "第一頁"
+
 # 新增工作表
-workbook.create_sheet("工作表3")  # 插入工作表 3 在最後方
+workbook.create_sheet("第二頁")  # 插入第二頁 在最後方
 workbook.create_sheet("工作表1.5", 1)  # 插入工作表 1.5 在第二個位置 ( 工作表 1 和 2 的中間 )
 workbook.create_sheet("工作表0", 0)  # 插入工作表 0 在第一個位置
+
+sheet = workbook["第二頁"]
+sheet["A1"] = "第二頁"
+
+sheet = workbook["工作表1.5"]  # 開啟工作表1.5
+sheet["A1"] = "工作表1.5"
+
+sheet = workbook["工作表0"]  # 開啟工作表0
+sheet["A1"] = "工作表0"
+
+
+# 新增工作表
 workbook.create_sheet("工作表aa")  # 插入工作表aa 在最後方
 workbook.create_sheet("工作表bb")  # 插入工作表bb 在最後方
-workbook.create_sheet("Mysheet1", 1)  # 新增工作表並指定放置位置
-workbook.create_sheet("Mysheet0", 0)
-
-# 建立新工作表
-sheet = workbook.create_sheet("新animal")  # 建立新工作表 名為 新animal
-data = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]  # 二維陣列資料
-for i in data:
-    sheet.append(i)  # 逐筆添加到最後一列
 
 # 將工作表的頁箋著色
 sheet1 = workbook["工作表aa"]  # 開啟工作表aa
@@ -115,72 +123,71 @@ sheet2.sheet_properties.tabColor = "ffff00"  # 修改工作表 2 頁籤顏色為
 workbook.copy_worksheet(sheet1)  # 複製工作表aa 放到最後方
 
 # 修改工作表的名稱
-sheet1.title = "新工作表A"  # 修改工作表aa 的名稱為 新工作表A
-sheet2.title = "新工作表B"  # 修改工作表bb 的名稱為 新工作表B
+sheet1.title = "新工作表A"  # 工作表名稱, 修改工作表aa 的名稱為 新工作表A
+sheet2.title = "新工作表B"  # 工作表名稱, 修改工作表bb 的名稱為 新工作表B
 
 """
 # 新增工作表，若名稱已經存在則原本名稱之後加數字
-workbook.create_sheet(title="amos")
+workbook.create_sheet(title="頁AAAA")  # 工作表名稱
 
 # 修改工作表
-workbook["amos"].title = "carol"
+workbook["頁AAAA"].title = "頁BBBB"  # 工作表名稱
 
 # 刪除工作表
-workbook.remove(workbook["carol"])
+workbook.remove(workbook["頁BBBB"])
 """
 
 """
-print("openpyxl test 06 新增工作表 ＆ 修改工作表名稱")
+print("新增工作表 ＆ 修改工作表名稱")
 workbook.active = 0
 sheet = workbook.active  # 取得開啟試算表後立刻顯示的工作表(即最後編輯的工作表)
 """
 
-filename_w = "tmp_excel_openpyxl_a_sheet.xlsx"
-workbook.save(filename_w)  # 儲存檔案
+# 儲存檔案
+filename_w = "tmp_excel_openpyxl_bcccc_sheets.xlsx"
+workbook.save(filename_w)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("openpyxl test 02a 建立新檔, 簡易資料")
+print("儲存格 加 公式")
 
 workbook = openpyxl.Workbook()  # 建立空白的Excel活頁簿物件
 
-"""
-print("openpyxl test 02b 開啟舊檔, 修改資料, 存檔, 或另存新檔")
-filename_r = "data/python_ReadWrite_EXCEL.xlsx"
-print("讀取 xlsx, 檔案 : " + filename_r)
-workbook = openpyxl.load_workbook(filename_r)
-"""
+# 選取正在工作中的工作表，空白活頁簿有一個預存工作表，名稱是Sheet
+sheet = workbook.active
 
-print("開啟工作表")
-# 取得第 0 個工作表
-sheet = workbook.worksheets[0]
+sheet.title = "第一頁"  # 工作表名稱
 
-# 以儲存格位置寫入資料, 直接修改/設定工作表內的資料
-sheet["A1"] = "中文名"
-sheet["B1"] = "英文名"
-sheet["C1"] = "體重"
-sheet["D1"] = "全名"
-sheet["A2"] = "鼠"
-sheet["B2"] = "mouse"
-sheet["C2"] = "3"
-sheet["D2"] = "米老鼠"
-sheet["A3"] = "牛"
-sheet["B3"] = "ox"
-sheet["C3"] = "48"
-sheet["D3"] = "班尼牛"
+# 指定字串給儲存格
+sheet["A1"] = "1"
+sheet["B1"] = "1"
+sheet["C1"] = "1"
 
-filename_w = "tmp_excel_openpyxl_b1_new_simple.xlsx"
-workbook.save(filename_w)  # 儲存檔案
+# 指定數值給儲存格
+sheet["A2"] = 3
+sheet["B2"] = 8
+sheet["C2"] = "=SUM(A2:B2)"
+
+sheet["A3"] = 3
+sheet["B3"] = "12"
+sheet["A4"] = "=1+2"
+
+# 指定字串公式給C2儲存格
+sheet["B4"] = '=CONCATENATE("1","2")'
+
+# 儲存檔案
+filename_w = "tmp_excel_openpyxl_c_formula.xlsx"
+workbook.save(filename_w)
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-print("openpyxl test 02c 建立新檔 完整資料 + 格式")
-print("開啟空白的活頁簿")
+print("建立新檔 完整資料 + 格式")
+
 workbook = openpyxl.Workbook()  # 建立空白的Excel活頁簿物件
 
-print("開啟工作表")
-# 取得第 0 個工作表
+print("取得第 1 個工作表")
 sheet = workbook.worksheets[0]
 
 # 以儲存格位置寫入資料, 直接修改/設定工作表內的資料
@@ -329,17 +336,9 @@ sheet.cell(1, 1).alignment = openpyxl.styles.Alignment("center")
 
 print("------------------------------")  # 30個
 
-# 貼上一張圖
-from openpyxl.drawing.image import Image
-
 sheet = workbook.active  # 取得開啟試算表後立刻顯示的工作表(即最後編輯的工作表)
-img = Image(pic_filename)
-sheet.add_image(img, "E13")  # 把圖貼在E13
-
-print("------------------------------")  # 30個
 
 sheet["E3"] = "設定日期格式"
-import datetime
 
 # sheet = workbook["animals1"]
 sheet["E4"] = datetime.datetime(1928, 11, 18, 12, 34, 56)
@@ -350,7 +349,8 @@ sheet["E4"].number_format = "yyyy-mm-dd"
 print("------------------------------")  # 30個
 
 print("儲存格格式")
-from openpyxl.styles import Border, Side
+from openpyxl.styles import Border
+from openpyxl.styles import Side
 
 side1 = Side(style="hair", color="FF0000")  # R
 side2 = Side(style="dashDotDot", color="00FF00")  # G
@@ -368,19 +368,19 @@ for rows in sheet["A21":"D23"]:
     for cell in rows:
         cell.border = Border(left=side3, right=side3, top=side3, bottom=side3)
 
-print("------------------------------")  # 30個
 
-filename_w = "tmp_excel_openpyxl_b2_new_all1.xlsx"
-workbook.save(filename_w)  # 儲存檔案
+# 儲存檔案
+filename_w = "tmp_excel_openpyxl_d_new_all1.xlsx"
+workbook.save(filename_w)
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-print("openpyxl test 02 建立新檔 完整資料 + 格式")
-print("開啟空白的活頁簿")
+print("建立新檔 完整資料 + 格式")
+
 workbook = openpyxl.Workbook()  # 建立空白的Excel活頁簿物件
 
-print("開啟工作表")
-# 取得第 0 個工作表
+print("取得第 1 個工作表")
 sheet = workbook.worksheets[0]
 
 # 以儲存格位置寫入資料, 直接修改/設定工作表內的資料
@@ -412,7 +412,11 @@ for col_name in col_widths:
     sheet.column_dimensions[col_name].width = col_widths[col_name]
 
 # 建立字體
-from openpyxl.styles import Alignment, PatternFill, Font, Border, Side
+from openpyxl.styles import Alignment
+from openpyxl.styles import PatternFill
+from openpyxl.styles import Font
+from openpyxl.styles import Border
+from openpyxl.styles import Side
 
 font_header = Font(name="MS PGothic", size=12, bold=True, color="FFFFFF")
 
@@ -434,21 +438,21 @@ for row in sheet:
         cell.border = border
         # sheet[cell.coordinate].border = border
 
-print("------------------------------")  # 30個
-
-filename_w = "tmp_excel_openpyxl_b2_new_all2.xlsx"
-workbook.save(filename_w)  # 儲存檔案
+# 儲存檔案
+filename_w = "tmp_excel_openpyxl_e_new_all2.xlsx"
+workbook.save(filename_w)
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-print("openpyxl test 03 讀 寫 從檔案後面附加資料")
+print("讀 寫 從檔案後面附加資料")
 
 if not os.path.exists(filename_w):
     workbook = openpyxl.Workbook()  # 建立空白的Excel活頁簿物件
     sheet = workbook.active  # 取得開啟試算表後立刻顯示的工作表(即最後編輯的工作表)
     heading = ["中文名", "英文名", "體重", "全名"]
     sheet.append(heading)
-    workbook.save(filename_w)  # 儲存檔案
+    workbook.save(filename_w)
 
 workbook = openpyxl.load_workbook(filename_w)
 
@@ -457,12 +461,14 @@ sheet = workbook.active  # 取得開啟試算表後立刻顯示的工作表(即�
 animal01 = ["鼠", "mouse", "3", "米老鼠"]
 sheet.append(animal01)
 
-filename_w = "tmp_excel_openpyxl_c.xlsx"
-workbook.save(filename_w)  # 儲存檔案
+# 儲存檔案
+filename_w = "tmp_excel_openpyxl_f.xlsx"
+workbook.save(filename_w)
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-print("openpyxl test 03 讀 寫 讀後再寫")
+print("讀 寫 讀後再寫")
 
 filename_r = "data/python_ReadWrite_EXCEL.xlsx"
 
@@ -493,14 +499,16 @@ workbook.remove(sheet)
 print("複製工作表")
 sheet = workbook["animals2"]
 target = workbook.copy_worksheet(sheet)
-target.title = "new_animals2"
+target.title = "新工作表"  # 工作表名稱
 
-filename_w = "tmp_excel_openpyxl_c_sheet.xlsx"
-workbook.save(filename_w)  # 儲存檔案
+# 儲存檔案
+filename_w = "tmp_excel_openpyxl_g_sheet.xlsx"
+workbook.save(filename_w)
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-print("openpyxl test 04 創建Excel文件")
+print("創建Excel文件")
 
 # 這個有問題
 
@@ -523,15 +531,17 @@ tab.tableStyleInfo = openpyxl.worksheet.table.TableStyleInfo(
 )
 # sheet.add_table(tab) 問題在這裡
 
-filename_w = "tmp_excel_openpyxl_d_add_table.xlsx"
-workbook.save(filename_w)  # 儲存檔案
+# 儲存檔案
+filename_w = "tmp_excel_openpyxl_h_add_table.xlsx"
+workbook.save(filename_w)
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-print("openpyxl test 05")
+print("openpyxl 5")
 
-import pathlib  # 標準函式庫
-import csv  # 標準函式庫
+import pathlib
+import csv
 
 workbook = openpyxl.Workbook()  # 建立空白的Excel活頁簿物件
 sheet = workbook.active  # 取得開啟試算表後立刻顯示的工作表(即最後編輯的工作表)
@@ -567,219 +577,44 @@ for pass_obj in path.iterdir():
                     sheet.cell(list_row, 13).value = sh.cell(dt_row, 7).value  # 備註
                     list_row += 1
 
-filename_w = "tmp_excel_openpyxl_e.xlsx"
-workbook.save(filename_w)  # 儲存檔案
-
-print("------------------------------------------------------------")  # 60個
-"""
-import calendar
-
-year = 2024
-month = 5
-dayname = ["日", "一", "二", "三", "四", "五", "六"]
-
-
-# 【在Excel檔新增月曆的函數】
-def makecalendar(value1, value2):
-    year = int(value1)
-    month = int(value2)
-    savefile = "tmp_excel_openpyx_" + str(year) + "_" + str(month) + "a.xlsx"
-
-    cal = calendar.Calendar(calendar.SUNDAY)
-    workbook = openpyxl.Workbook()  # 建立空白的Excel活頁簿物件
-    sheet = workbook.active  # 取得開啟試算表後立刻顯示的工作表(即最後編輯的工作表)
-    c = sheet.cell(1, 4)
-    c.value = str(year) + "年" + str(month) + "月"
-    for col in range(7):  # 一週的每一天
-        c = sheet.cell(2, col + 1)
-        c.value = dayname[col]
-    for col, week in enumerate(cal.monthdayscalendar(year, month)):
-        for row, day in enumerate(week):
-            if day > 0:
-                c = sheet.cell((col + 3), row + 1)
-                c.value = day
-    workbook.save(savefile)  # 儲存檔案
-    return "轉存" + savefile + "了。"
-
-
-msg = makecalendar(year, month)
-print(msg)
-
-print("------------------------------------------------------------")  # 60個
-
-import calendar
-
-value1 = "2024"
-value2 = "5"
-dayname = ["日", "一", "二", "三", "四", "五", "六"]
-
-fontN = openpyxl.styles.Font(size=24)
-fontB = openpyxl.styles.Font(size=24, color="0000FF")
-fontR = openpyxl.styles.Font(size=24, color="FF0000")
-fillB = openpyxl.styles.PatternFill(patternType="solid", fgColor="AAAAFF")
-fillR = openpyxl.styles.PatternFill(patternType="solid", fgColor="FFAAAA")
-
-
-# 【在Excel檔新增月曆的函數】
-def makecalendar(value1, value2):
-    year = int(value1)
-    month = int(value2)
-    savefile = "tmp_excel_openpyx_" + str(year) + "_" + str(month) + "b.xlsx"
-
-    cal = calendar.Calendar(calendar.SUNDAY)
-    workbook = openpyxl.Workbook()  # 建立空白的Excel活頁簿物件
-    sheet = workbook.active  # 取得開啟試算表後立刻顯示的工作表(即最後編輯的工作表)
-    for c in ["A", "B", "C", "D", "E", "F", "G"]:
-        sheet.column_dimensions[c].width = 20
-    c = sheet.cell(1, 4)
-    c.value = str(year) + "年" + str(month) + "月"
-    c.font = fontN
-    for row in range(7):
-        c = sheet.cell(2, row + 1)
-        c.value = dayname[row]
-        c.font = fontN
-        c.alignment = openpyxl.styles.Alignment("center")
-        if row == 6:
-            c.font = fontB
-            c.fill = fillB
-        if row == 0:
-            c.font = fontR
-            c.fill = fillR
-    for col, week in enumerate(cal.monthdayscalendar(year, month)):
-        sheet.row_dimensions[col + 3].height = 50
-        for row, day in enumerate(week):
-            if day > 0:
-                c = sheet.cell((col + 3), row + 1)
-                c.value = day
-                c.font = fontN
-                if row == 6:
-                    c.font = fontB
-                if row == 0:
-                    c.font = fontR
-    workbook.save(savefile)  # 儲存檔案
-    return "轉存" + savefile + "了。"
-
-
-msg = makecalendar(value1, value2)
-print(msg)
-"""
+# 儲存檔案
+filename_w = "tmp_excel_openpyxl_i.xlsx"
+workbook.save(filename_w)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-"""
-print("匯出 pdf 檔案")
 
-import pathlib
-from win32com import client
+# 對齊方式 ST
+from openpyxl.styles import Alignment
 
-path = pathlib.Path("data/sales")    #指定相對路徑
+workbook = openpyxl.Workbook()  # 建立空白的Excel活頁簿物件
 
-xlApp = client.Dispatch("Excel.Application")
-for pass_obj in path.iterdir():
-    print("\n-------------------------------------------------\n原檔案 :", pass_obj)
-    if pass_obj.match("*001.xlsx") and not pass_obj.match("~$"):
-        print("match :", pass_obj)
-        book = xlApp.workbooks.open(str(pass_obj.resolve()))
-        print("aaaa :", str(pass_obj.resolve()))
-        for sheet in book.Worksheets:
-            print('------------------------------')
-            slip_no = str(int(sheet.Range("G2").value))
-            file_name = "tmp_sales_data_" + slip_no + ".pdf"
-            pdf_path = path / "pdf" / file_name
-            sheet.ExportAsFixedFormat(0, str(pdf_path.resolve()))
-            print(pdf_path)
-            print(str(pdf_path.resolve()))
-            print()
-        book.Close()
-    else:
-        print('不是excel檔案')
-xlApp.Quit()
+sheet = workbook.active
 
+sheet.column_dimensions["A"].width = 20
+sheet["a1"] = "left,bottom"
+sheet["a1"].alignment = Alignment(horizontal="left", vertical="bottom")
+sheet["a2"] = "center,center"
+sheet["a2"].alignment = Alignment(horizontal="center", vertical="center")
+sheet["a3"] = "right,top"
+sheet["a3"].alignment = Alignment(horizontal="right", vertical="top")
+sheet["a4"] = "distributed,bottom"
+sheet["a4"].alignment = Alignment(horizontal="distributed", vertical="bottom")
+
+# 儲存檔案
+filename_w = "tmp_excel_openpyxl_j_format_對齊方式.xlsx"
+workbook.save(filename_w)
+
+# 對齊方式 SP
+
+sys.exit()
 print("------------------------------------------------------------")  # 60個
-
-print("匯出 pdf 檔案")
-
-from reportlab.pdfgen import canvas
-from reportlab.lib.pagesizes import A4, portrait
-from reportlab.pdfbase import pdfmetrics
-from reportlab.pdfbase.cidfonts import UnicodeCIDFont
-from reportlab.lib.units import cm
-
-import shutil
-import pathlib  
-import datetime
-
-from PIL import Image
-
-def load_informatiom():
-    workbook = openpyxl.load_workbook("data/特銷說明會導覽.xlsx")
-    sheet = workbook.active
-    sale_dict = {} 
-    for row in range(1, sheet.max_row + 1):
-        if sheet.cell(row,1).value == "導覽內容":
-            info_list = [sheet.cell(row,2).value]
-            for info_row in range(row + 1 , sheet.max_row + 1):
-                info_list.append(sheet.cell(info_row,2).value)
-            sale_dict.setdefault("導覽內容", info_list)
-        elif sheet.cell(row,1).value is not None:     
-            sale_dict.setdefault(sheet.cell(row,1).value, sheet.cell(row,2).value)
-    return sale_dict
-
-
-target_dir = 'tmp_pdf'
-#準備輸出資料夾 若已存在, 則先刪除再建立 若不存在, 則建立
-if os.path.exists(target_dir):
-        #os.remove(target_dir)  #存取被拒 不可用
-        shutil.rmtree(target_dir)
-if not os.path.exists(target_dir):
-        os.mkdir(target_dir)
-
-sale_dict = load_informatiom()
-path = pathlib.Path(target_dir)
-workbook = openpyxl.load_workbook("data/客戶聯絡資料.xlsx")
-sheet = workbook["收件人資料"]
-for row in range(1, sheet.max_row + 1):
-    file_name = (sheet.cell(row,2).value) + "先生／小姐特銷會說明.pdf"
-    out_path =  path / file_name
-    cv = canvas.Canvas(str(out_path), pagesize=portrait(A4))
-    cv.setTitle("特銷說明會導覽")
-    pdfmetrics.registerFont(UnicodeCIDFont("HeiseiKakuGo-W5"))
-    cv.setFont("HeiseiKakuGo-W5", 12)
-    cv.drawCentredString(6*cm, 27*cm, sheet.cell(row,2).value + " " \
-        + sheet.cell(row,3).value + " 先生／小姐")
-    cv.line(1.8*cm, 26.8*cm,10.8*cm,26.8*cm) #在客戶名稱套用底線
-    cv.setFont("HeiseiKakuGo-W5", 14)
-    #cv.drawCentredString(10*cm, 24*cm, sale_dict["主題"])
-    cv.setFont("HeiseiKakuGo-W5", 12)
-    cv.drawString(2*cm, 22*cm, "舉辦時間：" + sale_dict["舉辦時間"])
-    cv.drawString(2*cm, 21*cm, "舉辦地點：" + sale_dict["舉辦地點"])
-
-    textobject = cv.beginText()
-    textobject.setTextOrigin(2*cm, 19*cm,)
-    textobject.setFont("HeiseiKakuGo-W5", 12)
-    for line in sale_dict["導覽內容"]:
-        textobject.textOut(line)
-        textobject.moveCursor(0,14) # POSITIVE Y moves down!!!
-    
-    cv.drawText(textobject)
-    now = datetime.datetime.now()
-    cv.drawString(14.4*cm, 14.8*cm, now.strftime("%Y/%m/%d"))
-    #logo_filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_logo/matlab.png'
-    #image =Image.open(logo_filename)
-    image =Image.open("data/logo.png")
-    cv.drawInlineImage(image,13*cm,13*cm)
-    cv.showPage()
-    cv.save()
-
-print("------------------------------------------------------------")  # 60個
-"""
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 插入圖表
 
-print("openpyxl test 11 加入圖表1 雷達圖")
+print("openpyxl 加入圖表1 雷達圖")
 
 filename_r = "data/radar_chart.xlsx"
 workbook = openpyxl.load_workbook(filename_r)
@@ -801,17 +636,19 @@ chart.set_categories(labels)
 
 sheet.add_chart(chart, "F2")
 
-filename_w = "tmp_excel_openpyxl_e_add_radar_chart.xlsx"
-workbook.save(filename_w)  # 儲存檔案
+# 儲存檔案
+filename_w = "tmp_excel_openpyxl_add1_radar_chart.xlsx"
+workbook.save(filename_w)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("openpyxl test 11 加入圖表2 統計圖")
+print("openpyxl 加入圖表2 統計圖")
 
 # 官方範例
 
-workbook = openpyxl.Workbook(write_only=True)
+workbook = openpyxl.Workbook(write_only=True)  # 建立空白的Excel活頁簿物件
+
 sheet = workbook.create_sheet()
 
 rows = [
@@ -870,15 +707,17 @@ chart4.title = "Percent Stacked Chart"
 
 sheet.add_chart(chart4, "N15")
 
-filename_w = "tmp_excel_openpyxl_g_bar.xlsx"
-workbook.save(filename_w)  # 儲存檔案
+# 儲存檔案
+filename_w = "tmp_excel_openpyxl_add2_bar.xlsx"
+workbook.save(filename_w)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # line_chart.py
 
-from openpyxl.chart import LineChart, Reference
+from openpyxl.chart import LineChart
+from openpyxl.chart import Reference
 
 workbook = openpyxl.load_workbook("data/python_add_chart1_line.xlsx")
 sheet = workbook.active
@@ -894,16 +733,19 @@ chart.set_categories(labels)
 
 sheet.add_chart(chart, "A9")
 
-filename_w = "tmp_01_line_chart.xlsx"
-workbook.save(filename_w)  # 儲存檔案
+# 儲存檔案
+filename_w = "tmp_excel_openpyxl_add3_line_chart.xlsx"
+workbook.save(filename_w)
 
 print("------------------------------------------------------------")  # 60個
 
-print("openpyxl test 01 插入圖表")
+print("openpyxl 插入圖表")
 
 # easy_bubble_chart.py
 
-from openpyxl.chart import Series, Reference, BubbleChart
+from openpyxl.chart import Series
+from openpyxl.chart import Reference
+from openpyxl.chart import BubbleChart
 
 workbook = openpyxl.load_workbook("data/python_add_chart2_bubble.xlsx")
 sheet = workbook.active
@@ -922,14 +764,17 @@ chart.series.append(series)
 
 sheet.add_chart(chart, "F2")
 
-filename_w = "tmp_02_bubble_chart_a.xlsx"
-workbook.save(filename_w)  # 儲存檔案
+# 儲存檔案
+filename_w = "tmp_excel_openpyxl_add4_bubble_chart1.xlsx"
+workbook.save(filename_w)
 
 print("------------------------------------------------------------")  # 60個
 
 # bubble_chart.py
 
-from openpyxl.chart import Series, Reference, BubbleChart
+from openpyxl.chart import Series
+from openpyxl.chart import Reference
+from openpyxl.chart import BubbleChart
 
 workbook = openpyxl.load_workbook("data/python_add_chart2_bubble.xlsx")
 sheet = workbook.active
@@ -948,14 +793,16 @@ for row in range(2, sheet.max_row + 1):
 
 sheet.add_chart(chart, "F2")
 
-filename_w = "tmp_02_bubble_chart_b.xlsx"
-workbook.save(filename_w)  # 儲存檔案
+# 儲存檔案
+filename_w = "tmp_excel_openpyxl_add5_bubble_chart2.xlsx"
+workbook.save(filename_w)
 
 print("------------------------------------------------------------")  # 60個
 
 # easy_pie_chart.py
 
-from openpyxl.chart import PieChart, Reference
+from openpyxl.chart import PieChart
+from openpyxl.chart import Reference
 
 workbook = openpyxl.load_workbook("data/python_add_chart3_pie.xlsx")
 sheet = workbook.active
@@ -970,14 +817,16 @@ chart.set_categories(labels)
 
 sheet.add_chart(chart, "D3")
 
-filename_w = "tmp_03_pie_charta.xlsx"
-workbook.save(filename_w)  # 儲存檔案
+# 儲存檔案
+filename_w = "tmp_excel_openpyxl_add6_pie_chart1.xlsx"
+workbook.save(filename_w)
 
 print("------------------------------------------------------------")  # 60個
 
 # pie_chart.py
 
-from openpyxl.chart import PieChart, Reference
+from openpyxl.chart import PieChart
+from openpyxl.chart import Reference
 from openpyxl.chart.series import DataPoint
 
 workbook = openpyxl.load_workbook("data/python_add_chart3_pie.xlsx")
@@ -997,14 +846,16 @@ chart.series[0].data_points = [slice]
 
 sheet.add_chart(chart, "D3")
 
-filename_w = "tmp_03_pie_chartb.xlsx"
-workbook.save(filename_w)  # 儲存檔案
+# 儲存檔案
+filename_w = "tmp_excel_openpyxl_add7_pie_chart2.xlsx"
+workbook.save(filename_w)
 
 print("------------------------------------------------------------")  # 60個
 
 # column_chart.py
 
-from openpyxl.chart import BarChart, Reference
+from openpyxl.chart import BarChart
+from openpyxl.chart import Reference
 
 workbook = openpyxl.load_workbook("data/python_add_chart4_column.xlsx")
 sheet = workbook.active
@@ -1026,14 +877,16 @@ chart.add_data(data, titles_from_data=True)  # 以當月業績作為圖例
 chart.set_categories(labels)
 sheet.add_chart(chart, "E3")
 
-filename_w = "tmp_04_column_chart.xlsx"
-workbook.save(filename_w)  # 儲存檔案
+# 儲存檔案
+filename_w = "tmp_excel_openpyxl_add8_column_chart.xlsx"
+workbook.save(filename_w)
 
 print("------------------------------------------------------------")  # 60個
 
 # column_chart_stacked.py
 
-from openpyxl.chart import BarChart, Reference
+from openpyxl.chart import BarChart
+from openpyxl.chart import Reference
 
 workbook = openpyxl.load_workbook("data/python_add_chart4_column_stacked.xlsx")
 sheet = workbook.active
@@ -1053,14 +906,16 @@ chart.set_categories(labels)
 
 sheet.add_chart(chart, "I2")
 
-filename_w = "tmp_04_column_chart_stacked.xlsx"
-workbook.save(filename_w)  # 儲存檔案
+# 儲存檔案
+filename_w = "tmp_excel_openpyxl_add9_column_chart_stacked.xlsx"
+workbook.save(filename_w)
 
 print("------------------------------------------------------------")  # 60個
 
 print("各類別業績（尺寸堆疊長條圖）")
 
-from openpyxl.chart import AreaChart, Reference
+from openpyxl.chart import AreaChart
+from openpyxl.chart import Reference
 
 workbook = openpyxl.load_workbook("data/python_add_chart5_area.xlsx")
 sheet = workbook.active
@@ -1078,8 +933,218 @@ chart.set_categories(labels)
 
 sheet.add_chart(chart, "I2")
 
-filename_w = "tmp_05_area_chart.xlsx"
-workbook.save(filename_w)  # 儲存檔案
+# 儲存檔案
+filename_w = "tmp_excel_openpyxl_add10_area_chart.xlsx"
+workbook.save(filename_w)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+import calendar
+
+year = 2024
+month = 5
+dayname = ["日", "一", "二", "三", "四", "五", "六"]
+
+
+# 【在Excel檔新增月曆的函數】
+def makecalendar(value1, value2):
+    year = int(value1)
+    month = int(value2)
+    savefile = "tmp_excel_openpyx_" + str(year) + "_" + str(month) + "a.xlsx"
+
+    cal = calendar.Calendar(calendar.SUNDAY)
+    workbook = openpyxl.Workbook()  # 建立空白的Excel活頁簿物件
+    sheet = workbook.active  # 取得開啟試算表後立刻顯示的工作表(即最後編輯的工作表)
+    c = sheet.cell(1, 4)
+    c.value = str(year) + "年" + str(month) + "月"
+    for col in range(7):  # 一週的每一天
+        c = sheet.cell(2, col + 1)
+        c.value = dayname[col]
+    for col, week in enumerate(cal.monthdayscalendar(year, month)):
+        for row, day in enumerate(week):
+            if day > 0:
+                c = sheet.cell((col + 3), row + 1)
+                c.value = day
+    workbook.save(savefile)
+    return "轉存" + savefile + "了。"
+
+
+msg = makecalendar(year, month)
+print(msg)
+
+print("------------------------------------------------------------")  # 60個
+
+import calendar
+
+value1 = "2024"
+value2 = "5"
+dayname = ["日", "一", "二", "三", "四", "五", "六"]
+
+fontN = openpyxl.styles.Font(size=24)
+fontB = openpyxl.styles.Font(size=24, color="0000FF")
+fontR = openpyxl.styles.Font(size=24, color="FF0000")
+fillB = openpyxl.styles.PatternFill(patternType="solid", fgColor="AAAAFF")
+fillR = openpyxl.styles.PatternFill(patternType="solid", fgColor="FFAAAA")
+
+
+# 【在Excel檔新增月曆的函數】
+def makecalendar(value1, value2):
+    year = int(value1)
+    month = int(value2)
+    savefile = "tmp_excel_openpyx_" + str(year) + "_" + str(month) + "b.xlsx"
+
+    cal = calendar.Calendar(calendar.SUNDAY)
+    workbook = openpyxl.Workbook()  # 建立空白的Excel活頁簿物件
+    sheet = workbook.active  # 取得開啟試算表後立刻顯示的工作表(即最後編輯的工作表)
+    for c in ["A", "B", "C", "D", "E", "F", "G"]:
+        sheet.column_dimensions[c].width = 20
+    c = sheet.cell(1, 4)
+    c.value = str(year) + "年" + str(month) + "月"
+    c.font = fontN
+    for row in range(7):
+        c = sheet.cell(2, row + 1)
+        c.value = dayname[row]
+        c.font = fontN
+        c.alignment = openpyxl.styles.Alignment("center")
+        if row == 6:
+            c.font = fontB
+            c.fill = fillB
+        if row == 0:
+            c.font = fontR
+            c.fill = fillR
+    for col, week in enumerate(cal.monthdayscalendar(year, month)):
+        sheet.row_dimensions[col + 3].height = 50
+        for row, day in enumerate(week):
+            if day > 0:
+                c = sheet.cell((col + 3), row + 1)
+                c.value = day
+                c.font = fontN
+                if row == 6:
+                    c.font = fontB
+                if row == 0:
+                    c.font = fontR
+    workbook.save(savefile)
+    return "轉存" + savefile + "了。"
+
+
+msg = makecalendar(value1, value2)
+print(msg)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("匯出 pdf 檔案")
+
+import pathlib
+from win32com import client
+
+path = pathlib.Path("data/sales")  # 指定相對路徑
+
+xlApp = client.Dispatch("Excel.Application")
+for pass_obj in path.iterdir():
+    print("\n-------------------------------------------------\n原檔案 :", pass_obj)
+    if pass_obj.match("*001.xlsx") and not pass_obj.match("~$"):
+        print("match :", pass_obj)
+        book = xlApp.workbooks.open(str(pass_obj.resolve()))
+        print("aaaa :", str(pass_obj.resolve()))
+        for sheet in book.Worksheets:
+            print("------------------------------")
+            slip_no = str(int(sheet.Range("G2").value))
+            file_name = "tmp_sales_data_" + slip_no + ".pdf"
+            pdf_path = path / "pdf" / file_name
+            sheet.ExportAsFixedFormat(0, str(pdf_path.resolve()))
+            print(pdf_path)
+            print(str(pdf_path.resolve()))
+            print()
+        book.Close()
+    else:
+        print("不是excel檔案")
+xlApp.Quit()
+
+print("------------------------------------------------------------")  # 60個
+
+print("匯出 pdf 檔案")
+
+from reportlab.pdfgen import canvas
+from reportlab.lib.pagesizes import A4, portrait
+from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase.cidfonts import UnicodeCIDFont
+from reportlab.lib.units import cm
+from PIL import Image
+import shutil
+import pathlib
+
+
+def load_informatiom():
+    workbook = openpyxl.load_workbook("data/特銷說明會導覽.xlsx")
+    sheet = workbook.active
+    sale_dict = {}
+    for row in range(1, sheet.max_row + 1):
+        if sheet.cell(row, 1).value == "導覽內容":
+            info_list = [sheet.cell(row, 2).value]
+            for info_row in range(row + 1, sheet.max_row + 1):
+                info_list.append(sheet.cell(info_row, 2).value)
+            sale_dict.setdefault("導覽內容", info_list)
+        elif sheet.cell(row, 1).value is not None:
+            sale_dict.setdefault(sheet.cell(row, 1).value, sheet.cell(row, 2).value)
+    return sale_dict
+
+
+target_dir = "tmp_pdf"
+# 準備輸出資料夾 若已存在, 則先刪除再建立 若不存在, 則建立
+if os.path.exists(target_dir):
+    # os.remove(target_dir)  #存取被拒 不可用
+    shutil.rmtree(target_dir)
+if not os.path.exists(target_dir):
+    os.mkdir(target_dir)
+
+sale_dict = load_informatiom()
+path = pathlib.Path(target_dir)
+workbook = openpyxl.load_workbook("data/客戶聯絡資料.xlsx")
+sheet = workbook["收件人資料"]
+for row in range(1, sheet.max_row + 1):
+    file_name = (sheet.cell(row, 2).value) + "先生／小姐特銷會說明.pdf"
+    out_path = path / file_name
+    cv = canvas.Canvas(str(out_path), pagesize=portrait(A4))
+    cv.setTitle("特銷說明會導覽")
+    pdfmetrics.registerFont(UnicodeCIDFont("HeiseiKakuGo-W5"))
+    cv.setFont("HeiseiKakuGo-W5", 12)
+    cv.drawCentredString(
+        6 * cm,
+        27 * cm,
+        sheet.cell(row, 2).value + " " + sheet.cell(row, 3).value + " 先生／小姐",
+    )
+    cv.line(1.8 * cm, 26.8 * cm, 10.8 * cm, 26.8 * cm)  # 在客戶名稱套用底線
+    cv.setFont("HeiseiKakuGo-W5", 14)
+    # cv.drawCentredString(10*cm, 24*cm, sale_dict["主題"])
+    cv.setFont("HeiseiKakuGo-W5", 12)
+    cv.drawString(2 * cm, 22 * cm, "舉辦時間：" + sale_dict["舉辦時間"])
+    cv.drawString(2 * cm, 21 * cm, "舉辦地點：" + sale_dict["舉辦地點"])
+
+    textobject = cv.beginText()
+    textobject.setTextOrigin(
+        2 * cm,
+        19 * cm,
+    )
+    textobject.setFont("HeiseiKakuGo-W5", 12)
+    for line in sale_dict["導覽內容"]:
+        textobject.textOut(line)
+        textobject.moveCursor(0, 14)  # POSITIVE Y moves down!!!
+
+    cv.drawText(textobject)
+    now = datetime.datetime.now()
+    cv.drawString(14.4 * cm, 14.8 * cm, now.strftime("%Y/%m/%d"))
+    # logo_filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_logo/matlab.png'
+    # image =Image.open(logo_filename)
+    image = Image.open("data/logo.png")
+    cv.drawInlineImage(image, 13 * cm, 13 * cm)
+    cv.showPage()
+    cv.save()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1095,23 +1160,3 @@ print("------------------------------------------------------------")  # 60個
 sys.exit()
 
 print("------------------------------------------------------------")  # 60個
-
-# 對齊方式 ST
-from openpyxl.styles import Alignment
-
-workbook = openpyxl.Workbook()
-sh = workbook.active
-
-
-sh.column_dimensions["A"].width = 20
-sh["a1"] = "left,bottom"
-sh["a1"].alignment = Alignment(horizontal="left", vertical="bottom")
-sh["a2"] = "center,center"
-sh["a2"].alignment = Alignment(horizontal="center", vertical="center")
-sh["a3"] = "right,top"
-sh["a3"].alignment = Alignment(horizontal="right", vertical="top")
-sh["a4"] = "distributed,bottom"
-sh["a4"].alignment = Alignment(horizontal="distributed", vertical="bottom")
-
-workbook.save(r"tmp_format_test.xlsx")  # 儲存檔案
-# 對齊方式 SP

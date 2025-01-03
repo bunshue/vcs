@@ -34,6 +34,7 @@ import random
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns  # 海生, 自動把圖畫得比較好看
 
 font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
@@ -42,6 +43,14 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 # 設定負號
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
+
+print("------------------------------------------------------------")  # 60個
+
+
+def show():
+    return
+    plt.show()
+
 
 print("------------------------------------------------------------")  # 60個
 
@@ -99,7 +108,7 @@ print("------------------------------------------------------------")  # 60個
 
 df = pd.DataFrame({"A": ["foo", "bar", "baz"], "B": [1, 2, 3]})
 
-df.to_excel("檔案路徑.xlsx", index=False)
+df.to_excel("tmp_cc.xlsx", index=False)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -155,6 +164,92 @@ print(df)
 
 print("------------------------------------------------------------")  # 60個
 
+print("df轉excel")
+from sklearn import datasets
+
+print("load_iris()轉df")
+
+iris = datasets.load_iris()
+X = iris.data
+y = iris.target  # 資料集目標
+
+import xlsxwriter
+
+df = pd.DataFrame(X, columns=iris.feature_names)
+
+df["target"] = y
+
+print(df)
+
+writer = pd.ExcelWriter("tmp_iris.xlsx", engine="xlsxwriter")
+df.to_excel(writer, sheet_name="Sheet1")
+writer.close()
+
+print("------------------------------------------------------------")  # 60個
+
+print("df轉excel")
+from sklearn import datasets
+
+diabetes = datasets.load_diabetes()
+
+import xlsxwriter
+
+df = pd.DataFrame(diabetes.data, columns=diabetes.feature_names)
+
+df["target"] = diabetes.target
+
+writer = pd.ExcelWriter("tmp_diabetes.xlsx", engine="xlsxwriter")
+df.to_excel(writer, sheet_name="Sheet1")
+writer._save()
+
+print("------------------------------------------------------------")  # 60個
+
+# 將 糖尿病 資料 儲存成 csv/excel 檔案
+
+# Load the diabetes dataset
+diabetes = datasets.load_diabetes()
+
+import xlsxwriter
+
+df = pd.DataFrame(diabetes.data, columns=diabetes.feature_names)
+
+df["target"] = diabetes.target
+
+print(df.head())
+df.to_csv("tmp_diabetes.csv", sep="\t")
+
+writer = pd.ExcelWriter("tmp_diabetes.xlsx", engine="xlsxwriter")
+df.to_excel(writer, sheet_name="Sheet1")
+writer._save()
+
+print("------------------------------------------------------------")  # 60個
+
+# pip install xlsxwriter
+
+# print("pd讀取csv檔案 :", filename)
+# data = pd.read_csv('data/ExpensesRecord.csv')
+
+filename = "data/ExpensesRecord.xls"
+print("pd讀取excel檔案 :", filename)
+df = pd.read_excel(filename, "sheet")
+
+# url = 'http://www.fdic.gov/bank/individual/failed/banklist.html'
+# print("pd讀取html檔案 :", url)
+# data = pd.read_html(url)
+
+print(df.head(5))
+
+from pandas import ExcelWriter
+
+filename = "tmp_test.xlsx"
+writer = ExcelWriter(filename, engine="xlsxwriter")
+df.to_excel(writer, sheet_name="sheet2")
+writer.save()
+
+print("df寫入excel檔案 :", filename)
+
+print("------------------------------------------------------------")  # 60個
+
 # pip install xlsxwriter
 
 filename = "C:/_git/vcs/_4.python/numpy_pandas/data/ExpensesRecord.xls"
@@ -171,8 +266,19 @@ writer = ExcelWriter(filename, engine="xlsxwriter")
 df.to_excel(writer, sheet_name="sheet2")
 writer.save()
 
-print("------------------------------------------------------------")  # 60個
+"""
+writer=pd.ExcelWriter('tmp_AAPL1.xlsx')  #檔案名稱
+df.to_excel(writer,'AAPL')  #寫入資料
+writer.save()   #儲存
 
+from pandas import ExcelWriter
+
+writer = ExcelWriter('tmp_aapl2.xlsx', engine='xlsxwriter')
+df.to_excel(writer, sheet_name='sheet2')
+
+df.to_csv("tmp_aapl3.csv")
+"""
+print("------------------------------------------------------------")  # 60個
 
 print(
     "---- 4444 html與其他 --------------------------------------------------------"
@@ -254,33 +360,6 @@ df2 = pd.read_json(filename)
 print(df2)
 
 print("------------------------------------------------------------")  # 60個
-""" fail in kilo
-# pip install xlsxwriter
-
-#print("pd讀取csv檔案 :", filename)
-#data = pd.read_csv('data/ExpensesRecord.csv')
-
-filename = 'data/ExpensesRecord.xls'
-print("pd讀取excel檔案 :", filename)
-df = pd.read_excel(filename, 'sheet')
-
-#url = 'http://www.fdic.gov/bank/individual/failed/banklist.html'
-#print("pd讀取html檔案 :", url)
-#data = pd.read_html(url)
-
-print(df.head(5) )
-
-from pandas import ExcelWriter
-
-filename = 'tmp_test.xlsx'
-writer = ExcelWriter(filename, engine='xlsxwriter')
-df.to_excel(writer, sheet_name='sheet2')
-writer.save()
-
-print("df寫入excel檔案 :", filename)
-"""
-print("------------------------------------------------------------")  # 60個
-
 """
 url = 'http://www.fdic.gov/bank/individual/failed/banklist.html'
 
@@ -292,13 +371,11 @@ url ='http://news.baidu.com/tech'
 #df = pd.read_html(url)
 #print(df[0].head(5) )
 """
-
 print("------------------------------------------------------------")  # 60個
 
-""" no file AAPL.xlsx
-filename = 'AAPL.xlsx'
+filename = "data/AAPL.xlsx"
 print("pd讀取excel檔案 :", filename)
-df = pd.read_excel(filename, 'AAPL')
+df = pd.read_excel(filename, "AAPL")
 print(df.head())
 print(type(df))
 
@@ -309,11 +386,11 @@ print(df.index)
 print(df.info())
 print(df.describe())
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-filename = 'AAPL.xlsx'
+filename = "data/AAPL.xlsx"
 print("pd讀取excel檔案 :", filename)
-df = pd.read_excel(filename, 'AAPL')
+df = pd.read_excel(filename, "AAPL")
 print(df.head())
 print(type(df))
 
@@ -327,21 +404,21 @@ print(df.describe())
 # 3 filter'
 
 print("--------------------")
-print(df['Date'] == '2018-01-05')
-print(df[df['Date'] == '2018-01-05'])
-print(df[(df['Date'] >= '2018-07-05') & (df['Date'] <= '2018-07-10' )])
-print(df[df['Open'] > 194.2])
-print(df[['Date','Open']])
-print(df[['Date','Open']][:5])
-print(df.sort_values(by=['Volume'])[:5])
-print(df.sort_values(by=['Volume'], ascending=False)[:5])
-print(df['Open'][:30].rolling(7).mean())
+print(df["Date"] == "2018-01-05")
+print(df[df["Date"] == "2018-01-05"])
+print(df[(df["Date"] >= "2018-07-05") & (df["Date"] <= "2018-07-10")])
+print(df[df["Open"] > 194.2])
+print(df[["Date", "Open"]])
+print(df[["Date", "Open"]][:5])
+print(df.sort_values(by=["Volume"])[:5])
+print(df.sort_values(by=["Volume"], ascending=False)[:5])
+print(df["Open"][:30].rolling(7).mean())
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-filename = 'AAPL.xlsx'
+filename = "data/AAPL.xlsx"
 print("pd讀取excel檔案 :", filename)
-df = pd.read_excel(filename, 'AAPL')
+df = pd.read_excel(filename, "AAPL")
 print(df.head())
 print(type(df))
 
@@ -355,28 +432,28 @@ print(df.describe())
 # 3 filter'
 
 print("--------------------")
-print(df[df['Date'] == '2018-01-05'])
-print(df[(df['Date'] >= '2018-07-05') & (df['Date'] <= '2018-07-10' )])
-print(df[df['Open'] > 194.2])
-print(df[['Date','Open']][:5])
-print(df.sort_values(by=['Volume'])[:5])
-print(df.sort_values(by=['Volume'], ascending=False)[:5])
-print(df['Open'][:30].rolling(7).mean())
+print(df[df["Date"] == "2018-01-05"])
+print(df[(df["Date"] >= "2018-07-05") & (df["Date"] <= "2018-07-10")])
+print(df[df["Open"] > 194.2])
+print(df[["Date", "Open"]][:5])
+print(df.sort_values(by=["Volume"])[:5])
+print(df.sort_values(by=["Volume"], ascending=False)[:5])
+print(df["Open"][:30].rolling(7).mean())
 
 # 4 Calculation
 print("--------------------")
-df['diff'] = df['Close']-df['Open']
-df['year'] = pd.DatetimeIndex(df['Date']).year
-df['month'] = pd.DatetimeIndex(df['Date']).month
+df["diff"] = df["Close"] - df["Open"]
+df["year"] = pd.DatetimeIndex(df["Date"]).year
+df["month"] = pd.DatetimeIndex(df["Date"]).month
 print(df.head())
-print("April Volume sum=%.2f" % df[df['month'] == 4][['Volume']].sum())
-print("April Open mean=%.2d" % df[df['month'] == 4][['Open']].mean())
+print("April Volume sum=%.2f" % df[df["month"] == 4][["Volume"]].sum())
+print("April Open mean=%.2d" % df[df["month"] == 4][["Open"]].mean())
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-filename = 'AAPL.xlsx'
+filename = "data/AAPL.xlsx"
 print("pd讀取excel檔案 :", filename)
-df = pd.read_excel(filename, 'AAPL')
+df = pd.read_excel(filename, "AAPL")
 print(df.head())
 print(type(df))
 
@@ -390,48 +467,48 @@ print(df.describe())
 
 # 3 filter'
 print("--------------------")
-print(df[df['Date'] == '2018-01-05'])
-print(df[(df['Date'] >= '2018-07-05') & (df['Date'] <= '2018-07-10' )])
-print(df[df['Open'] > 194.2])
-print(df[['Date','Open']][:5])
-print(df.sort_values(by=['Volume'])[:5])
-print(df.sort_values(by=['Volume'], ascending=False)[:5])
-print(df['Open'][:30].rolling(7).mean())
+print(df[df["Date"] == "2018-01-05"])
+print(df[(df["Date"] >= "2018-07-05") & (df["Date"] <= "2018-07-10")])
+print(df[df["Open"] > 194.2])
+print(df[["Date", "Open"]][:5])
+print(df.sort_values(by=["Volume"])[:5])
+print(df.sort_values(by=["Volume"], ascending=False)[:5])
+print(df["Open"][:30].rolling(7).mean())
 
 # 4 Calculation
 print("--------------------")
-df['diff'] = df['Close']-df['Open']
-df['year'] = pd.DatetimeIndex(df['Date']).year
-df['month'] = pd.DatetimeIndex(df['Date']).month
-df['day'] = pd.DatetimeIndex(df['Date']).day
+df["diff"] = df["Close"] - df["Open"]
+df["year"] = pd.DatetimeIndex(df["Date"]).year
+df["month"] = pd.DatetimeIndex(df["Date"]).month
+df["day"] = pd.DatetimeIndex(df["Date"]).day
 print(df.head())
-print("April Volume sum=%.2f" % df[df['month'] == 4][['Volume']].sum())
-print("April Open mean=%.2d" % df[df['month'] == 4][['Open']].mean())
+print("April Volume sum=%.2f" % df[df["month"] == 4][["Volume"]].sum())
+print("April Open mean=%.2d" % df[df["month"] == 4][["Open"]].mean())
 
 #  5 matplotlib
-df.plot(x='Date', y='Open',grid=True, color='blue')
-plt.show()
+df.plot(x="Date", y="Open", grid=True, color="blue")
+show()
 
-df.plot( y='diff',grid=True, color='red',kind='hist')
-plt.show()
+df.plot(y="diff", grid=True, color="red", kind="hist")
+show()
 
 fig, ax = plt.subplots()
-for name, group in df.groupby('month'):
-    group.plot(x='day', y='Open', ax=ax, label=name)
-plt.show()
+for name, group in df.groupby("month"):
+    group.plot(x="day", y="Open", ax=ax, label=name)
+show()
 
-fileds=['Open','Close','High']
+fileds = ["Open", "Close", "High"]
 fig, ax = plt.subplots()
 for name in fileds:
-    df.plot(x='Date', y=name, ax=ax, label=name)
-plt.show()
+    df.plot(x="Date", y=name, ax=ax, label=name)
+show()
 
-dfMonths = df.loc[df['month'].isin([1,2,3,4,5,6,7])]
+dfMonths = df.loc[df["month"].isin([1, 2, 3, 4, 5, 6, 7])]
 print(dfMonths)
-dfMonthsPivot = dfMonths.pivot_table(values = 'High', columns = 'month', index = 'day')
-dfMonthsPivot.plot(kind = 'box',title = 'Months High')
-plt.show()
-"""
+dfMonthsPivot = dfMonths.pivot_table(values="High", columns="month", index="day")
+dfMonthsPivot.plot(kind="box", title="Months High")
+show()
+
 print("------------------------------------------------------------")  # 60個
 
 print("df 轉 pickle")
@@ -445,21 +522,6 @@ print(df1.info())
 
 print("------------------------------------------------------------")  # 60個
 
-print("df轉excel")
-
-from sklearn import datasets
-
-diabetes = datasets.load_diabetes()
-
-import xlsxwriter
-
-df = pd.DataFrame(diabetes.data, columns=diabetes.feature_names)
-
-df["target"] = diabetes.target
-
-writer = pd.ExcelWriter("tmp_diabetes.xlsx", engine="xlsxwriter")
-df.to_excel(writer, sheet_name="Sheet1")
-writer._save()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -553,136 +615,4 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-
-""" no file
-df = pd.read_excel('AAPL.xlsx', 'AAPL')
-print(df.head())
-print(type(df))
-
-# 2
-print(df.shape)
-print(df.columns)
-print(df.index)
-print(df.info())
-print(df.describe())
-
-print('------------------------------------------------------------')	#60個
-
-df = pd.read_excel('AAPL.xlsx', 'AAPL')
-print(df.head())
-print(type(df))
-
-# 2 data info
-print(df.shape)
-print(df.columns)
-print(df.index)
-print(df.info())
-print(df.describe())
-
-# 3 filter'
-
-print("--------------------")
-print(df['Date'] == '2018-01-05')
-print(df[df['Date'] == '2018-01-05'])
-print(df[(df['Date'] >= '2018-07-05') & (df['Date'] <= '2018-07-10' )])
-print(df[df['Open'] > 194.2])
-print(df[['Date','Open']])
-print(df[['Date','Open']][:5])
-print(df.sort_values(by=['Volume'])[:5])
-print(df.sort_values(by=['Volume'], ascending=False)[:5])
-print(df['Open'][:30].rolling(7).mean())
-
-print('------------------------------------------------------------')	#60個
-
-df = pd.read_excel('AAPL.xlsx', 'AAPL')
-print(df.head())
-print(type(df))
-
-# 2 data info
-print(df.shape)
-print(df.columns)
-print(df.index)
-print(df.info())
-print(df.describe())
-
-# 3 filter'
-
-print("--------------------")
-print(df[df['Date'] == '2018-01-05'])
-print(df[(df['Date'] >= '2018-07-05') & (df['Date'] <= '2018-07-10' )])
-print(df[df['Open'] > 194.2])
-print(df[['Date','Open']][:5])
-print(df.sort_values(by=['Volume'])[:5])
-print(df.sort_values(by=['Volume'], ascending=False)[:5])
-print(df['Open'][:30].rolling(7).mean())
-
-# 4 Calculation
-print("--------------------")
-df['diff'] = df['Close']-df['Open']
-df['year'] = pd.DatetimeIndex(df['Date']).year
-df['month'] = pd.DatetimeIndex(df['Date']).month
-print(df.head())
-print("April Volume sum=%.2f" % df[df['month'] == 4][['Volume']].sum())
-print("April Open mean=%.2d" % df[df['month'] == 4][['Open']].mean())
-
-print('------------------------------------------------------------')	#60個
-
-df = pd.read_excel('AAPL.xlsx', 'AAPL')
-print(df.head())
-print(type(df))
-
-# 2 data info
-print(df.shape)
-print(df.columns)
-print(df.index)
-print(df.info())
-print(df.describe())
-
-
-# 3 filter'
-print("--------------------")
-print(df[df['Date'] == '2018-01-05'])
-print(df[(df['Date'] >= '2018-07-05') & (df['Date'] <= '2018-07-10' )])
-print(df[df['Open'] > 194.2])
-print(df[['Date','Open']][:5])
-print(df.sort_values(by=['Volume'])[:5])
-print(df.sort_values(by=['Volume'], ascending=False)[:5])
-print(df['Open'][:30].rolling(7).mean())
-
-# 4 Calculation
-print("--------------------")
-df['diff'] = df['Close']-df['Open']
-df['year'] = pd.DatetimeIndex(df['Date']).year
-df['month'] = pd.DatetimeIndex(df['Date']).month
-df['day'] = pd.DatetimeIndex(df['Date']).day
-print(df.head())
-print("April Volume sum=%.2f" % df[df['month'] == 4][['Volume']].sum())
-print("April Open mean=%.2d" % df[df['month'] == 4][['Open']].mean())
-
-#  5 matplotlib
-import matplotlib.pyplot as plt
-df.plot(x='Date', y='Open',grid=True, color='blue')
-#plt.show()
-
-import matplotlib.pyplot as plt
-df.plot( y='diff',grid=True, color='red',kind='hist')
-#plt.show()
-
-fig, ax = plt.subplots()
-for name, group in df.groupby('month'):
-    group.plot(x='day', y='Open', ax=ax, label=name)
-#plt.show()
-
-fileds=['Open','Close','High']
-fig, ax = plt.subplots()
-for name in fileds:
-    df.plot(x='Date', y=name, ax=ax, label=name)
-#plt.show()
-
-dfMonths = df.loc[df['month'].isin([1,2,3,4,5,6,7])]
-print(dfMonths)
-dfMonthsPivot = dfMonths.pivot_table(values = 'High', columns = 'month', index = 'day')
-dfMonthsPivot.plot(kind = 'box',title = 'Months High')
-#plt.show()
-"""
 print("------------------------------------------------------------")  # 60個

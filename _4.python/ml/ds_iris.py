@@ -51,6 +51,7 @@ print("------------------------------------------------------------")  # 60個
 
 import joblib
 import sklearn.linear_model
+import tensorflow as tf
 from common1 import *
 from sklearn import datasets
 from sklearn import preprocessing
@@ -70,7 +71,6 @@ print("------------------------------------------------------------")  # 60個
 def show():
     return
     plt.show()
-    pass
 
 
 print("------------------------------------------------------------")  # 60個
@@ -82,7 +82,10 @@ X, y = datasets.load_iris(return_X_y=True)  # 分別回傳兩種資料
 
 iris = datasets.load_iris()  # 回傳iris包含data和target兩欄位資料
 X = iris.data
-y = iris.target
+y = iris.target  # 資料集目標
+
+print("dir(iris)", dir(iris))
+print("iris.feature_names=", iris.feature_names)
 
 """
 #只取出一些資料來測試
@@ -113,7 +116,7 @@ print("資料集資料 :")
 print("資料集目標/答案/target/y")
 print(iris.target)
 
-print("共有 :", len(iris.data), "筆資料")
+print("共有 :", len(X), "筆資料")
 
 print("資料集目標名稱：")
 print(iris.target_names)
@@ -130,13 +133,13 @@ print("data_module :", iris.data_module)
 print("keys")
 print(iris.keys())
 
-print("iris.data.shape :", iris.data.shape)
-print("iris.target.shape :", iris.target.shape)
+print("iris.data.shape :", X.shape)
+print("iris.target.shape :", y.shape)
 
 print("前幾筆資料內容：")
-print(iris.data[3:6])  # 第3~6筆資料
-print(iris.data[5])  # 第5筆資料
-print(iris.data[:5])  # 前5筆資料
+print(X[3:6])  # 第3~6筆資料
+print(X[5])  # 第5筆資料
+print(X[:5])  # 前5筆資料
 
 print("------------------------------------------------------------")  # 60個
 
@@ -144,7 +147,10 @@ print("鳶尾花數據庫 基本數據 load_iris()轉df, 再看iris資料")
 
 print("load_iris()轉df")
 iris = datasets.load_iris()
-df = pd.DataFrame(iris.data, columns=iris.feature_names)
+X = iris.data
+y = iris.target  # 資料集目標
+
+df = pd.DataFrame(X, columns=iris.feature_names)
 
 print("觀察資料集彙總資訊")  # 了解行資料的標題與資料型別(整數、浮點數、字串等)
 # many df.info()  # 這樣就已經把資料集彙總資訊印出來
@@ -176,7 +182,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("鳶尾花數據庫 基本數據 csv檔轉df, 再看iris資料")
 
-print("讀取csv檔案成df")
+print("讀取csv檔案成df 1")
 filename = "data/iris_sample.csv"
 df = pd.read_csv(filename)
 
@@ -222,7 +228,7 @@ print(len(df["花萼長度"]))
 
 print(df["花萼長度"][0])
 
-# 不同种类保存为不同的列表
+# 不同種類保存為不同的列表
 for i in range(len(df)):
     if df["類別"][i] == "setosa":
         Setosa.append(1)
@@ -247,7 +253,7 @@ Setosa = []
 Versicolour = []
 Virginica = []
 
-# 不同种类保存为不同的列表
+# 不同種類保存為不同的列表
 for i in range(len(df)):
     if df["類別"][i] == "setosa":
         Setosa.append((df["花萼長度"][i], df["花萼寬度"][i], df["花瓣長度"][i], df["花瓣寬度"][i]))
@@ -261,83 +267,72 @@ print("Versicolour :", Versicolour)
 print("Virginica :", Virginica)
 
 plt.scatter(
-    x=np.array(Setosa)[:, 0],  # Setosa种类的花瓣的长度
-    y=np.array(Setosa)[:, 1],  # Setosa种类的花瓣的宽度
+    x=np.array(Setosa)[:, 0],  # Setosa種類的花瓣的長度
+    y=np.array(Setosa)[:, 1],  # Setosa種類的花瓣的寬度
     s=80,
     c="red",
     label="Setosa",
 )
 
 plt.scatter(
-    x=np.array(Versicolour)[:, 0],  # Versicolour种类的花瓣的长度
-    y=np.array(Versicolour)[:, 1],  # Versicolour种类的花瓣的宽度
+    x=np.array(Versicolour)[:, 0],  # Versicolour種類的花瓣的長度
+    y=np.array(Versicolour)[:, 1],  # Versicolour種類的花瓣的寬度
     s=50,
     c="green",
     label="Versicolour",
 )
 
 plt.scatter(
-    x=np.array(Virginica)[:, 0],  # Virginica种类的花瓣的长度
-    y=np.array(Virginica)[:, 1],  # Virginica种类的花瓣的宽度
+    x=np.array(Virginica)[:, 0],  # Virginica種類的花瓣的長度
+    y=np.array(Virginica)[:, 1],  # Virginica種類的花瓣的寬度
     s=20,
     c="blue",
     label="Virginica",
 )
 
-# 添加轴标签和标题
-plt.title("花瓣长度 vs 花瓣宽度")
-plt.xlabel("花瓣长度")
-plt.ylabel("花瓣宽度")
-plt.legend(loc="best")  # 添加图例
+# 添加軸標籤和標題
+plt.title("花瓣長度 vs 花瓣寬度")
+plt.xlabel("花瓣長度")
+plt.ylabel("花瓣寬度")
+plt.legend(loc="best")  # 添加圖例
 
 show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("讀取csv檔案成df")
+print("讀取csv檔案成df 2")
+filename = "data/iris.csv"
+df = pd.read_csv(filename)
 
-df = pd.read_csv("data/iris.csv")
 # many print(df)
 
-# 绘制散点图
-plt.scatter(
-    x=df.petal_width,  # 指定散点图的x轴数据
-    y=df.petal_length,  # 指定散点图的y轴数据
-    color="steelblue",  # 指定散点图中点的颜色
-)
-# 添加x轴和y轴标签
-plt.xlabel("花瓣宽度")
-plt.ylabel("花瓣长度")
-# 添加标题
-plt.title("鸢尾花的花瓣宽度与长度关系")
-# 显示图形
+plt.scatter(x=df.petal_width, y=df.petal_length, color="r")
+plt.xlabel("花瓣寬度")
+plt.ylabel("花瓣長度")
+plt.title("鳶尾花的花瓣寬度與長度關係")
+
 show()
 
-# Pandas模块绘制散点图
-# 绘制散点图Virginica
-df.plot(x="petal_width", y="petal_length", kind="scatter", title="鸢尾花的花瓣宽度与长度关系")
-# 修改x轴和y轴标签
-plt.xlabel("花瓣宽度")
-plt.ylabel("花瓣长度")
-# 显示图形
+# pd畫散點圖Virginica
+df.plot(x="petal_width", y="petal_length", kind="scatter", title="鳶尾花的花瓣寬度與長度關係")
+plt.xlabel("花瓣寬度")
+plt.ylabel("花瓣長度")
+
 show()
 
-# seaborn模块绘制分组散点图
+# seaborn模塊繪制分組散點圖
 sns.lmplot(
-    x="petal_width",  # 指定x轴变量
-    y="petal_length",  # 指定y轴变量
-    hue="target",  # 指定分组变量
-    data=df,  # 指定绘图数据集
-    legend_out=False,  # 将图例呈现在图框内
-    truncate=True,  # 根据实际的数据范围，对拟合线作截断操作
+    x="petal_width",  # 指定x軸變量
+    y="petal_length",  # 指定y軸變量
+    hue="target",  # 指定分組變量
+    data=df,  # 指定繪圖數據集
+    legend_out=False,  # 將圖例呈現在圖框內
+    truncate=True,  # 根據實際的數據範圍，對擬合線作截斷操作
 )
-# 修改x轴和y轴标签
-plt.xlabel("花瓣宽度")
-plt.ylabel("花瓣长度")
-# 添加标题
-plt.title("鸢尾花的花瓣宽度与长度关系")
-# 显示图形
+plt.xlabel("花瓣寬度")
+plt.ylabel("花瓣長度")
+plt.title("鳶尾花的花瓣寬度與長度關係")
 
 show()
 
@@ -346,9 +341,13 @@ print("------------------------------------------------------------")  # 60個
 
 print("load_iris()轉df")
 iris = datasets.load_iris()
-df = pd.DataFrame(iris.data, columns=iris.feature_names)
+X = iris.data
+y = iris.target  # 資料集目標
+
+df = pd.DataFrame(X, columns=iris.feature_names)
 df.columns = ["sepal_length", "sepal_width", "petal_length", "petal_width"]
-target = pd.DataFrame(iris.target, columns=["target"])
+
+target = pd.DataFrame(y, columns=["target"])
 y = target["target"]
 
 colmap = np.array(["r", "g", "y"])
@@ -375,8 +374,12 @@ from sklearn import tree
 
 print("load_iris()轉df")
 iris = datasets.load_iris()
-df = pd.DataFrame(iris.data, columns=iris.feature_names)
-target = pd.DataFrame(iris.target, columns=["target"])
+X = iris.data
+y = iris.target  # 資料集目標
+
+df = pd.DataFrame(X, columns=iris.feature_names)
+
+target = pd.DataFrame(y, columns=["target"])
 y = target["target"]
 
 # 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
@@ -398,8 +401,12 @@ from sklearn import tree
 
 print("load_iris()轉df")
 iris = datasets.load_iris()
-df = pd.DataFrame(iris.data, columns=iris.feature_names)
-target = pd.DataFrame(iris.target, columns=["target"])
+X = iris.data
+y = iris.target  # 資料集目標
+
+df = pd.DataFrame(X, columns=iris.feature_names)
+
+target = pd.DataFrame(y, columns=["target"])
 y = target["target"]
 
 # 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
@@ -416,9 +423,10 @@ with open("tmp_tree2.dot", "w") as f:
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("讀取csv檔案成df")
+print("讀取csv檔案成df 3")
+filename = "data/iris.csv"
+df = pd.read_csv(filename)
 
-df = pd.read_csv("data/iris.csv")
 # many print(df)
 
 target_mapping = {"setosa": 0, "versicolor": 1, "virginica": 2}
@@ -445,8 +453,12 @@ print("------------------------------------------------------------")  # 60個
 
 print("load_iris()轉df")
 iris = datasets.load_iris()
-df = pd.DataFrame(iris.data, columns=iris.feature_names)
-y = pd.DataFrame(iris.target, columns=["Species"])
+X = iris.data
+y = iris.target  # 資料集目標
+
+df = pd.DataFrame(X, columns=iris.feature_names)
+
+y = pd.DataFrame(y, columns=["Species"])
 df = pd.concat([df, y], axis=1)
 
 print(df.head())
@@ -457,11 +469,13 @@ print("------------------------------------------------------------")  # 60個
 from sklearn.decomposition import PCA
 
 iris = datasets.load_iris()
+X = iris.data
+y = iris.target  # 資料集目標
 
 n_components = 2  # 削減後の次元を2に設定
 clf = PCA(n_components=n_components)
-clf = clf.fit(iris.data)
-print(clf.transform(iris.data))  # 変換したデータ
+clf = clf.fit(X)
+print(clf.transform(X))  # 変換したデータ
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -469,11 +483,13 @@ print("------------------------------------------------------------")  # 60個
 from sklearn.mixture import GaussianMixture
 
 iris = datasets.load_iris()
+X = iris.data
+y = iris.target  # 資料集目標
 
-n_components = 3  # ガウス分布の数
+n_components = 3  # ガウス分布の數
 clf = GaussianMixture(n_components=n_components)
-clf.fit(iris.data)
-print(clf.predict(iris.data))  # クラスを予測
+clf.fit(X)
+print(clf.predict(X))  # クラスを予測
 print(clf.means_)  # 各ガウス分布の平均
 print(clf.covariances_)  # 各ガウス分布の分散
 
@@ -533,9 +549,10 @@ print(forest.score(dx_test, dy_test))
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("讀取csv檔案成df")
+print("讀取csv檔案成df 4")
+filename = "data/iris.csv"
+df = pd.read_csv(filename)
 
-df = pd.read_csv("data/iris.csv")
 # many print(df)
 
 target_mapping = {"setosa": 0, "versicolor": 1, "virginica": 2}
@@ -560,9 +577,9 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
 from tensorflow.keras.utils import to_categorical
 
-print("讀取csv檔案成df")
-
-df = pd.read_csv("data/iris.csv")
+print("讀取csv檔案成df 5")
+filename = "data/iris.csv"
+df = pd.read_csv(filename)
 
 label_encoder = preprocessing.LabelEncoder()
 df["target"] = label_encoder.fit_transform(df["target"])
@@ -607,10 +624,12 @@ print("模型篩選特徵")
 from sklearn import tree
 
 iris = datasets.load_iris()
+X = iris.data
+y = iris.target  # 資料集目標
 
 clf = tree.DecisionTreeClassifier()  # 決策樹函數學習機
 
-clf = clf.fit(iris.data, iris.target)
+clf = clf.fit(X, y)
 
 print(clf.feature_importances_)
 
@@ -621,8 +640,10 @@ print("數學方法降維")
 from sklearn.decomposition import PCA
 
 iris = datasets.load_iris()
+X = iris.data
+y = iris.target  # 資料集目標
 
-df = pd.DataFrame(iris.data, columns=["SpealLen", "SpealWid", "PetalLen", "PetalWid"])
+df = pd.DataFrame(X, columns=["SpealLen", "SpealWid", "PetalLen", "PetalWid"])
 
 mat = df.corr()
 print(mat)
@@ -646,7 +667,7 @@ pca = PCA(n_components=2)
 data1 = pca.fit_transform(df)
 print(data1.shape)
 print(pca.explained_variance_ratio_, pca.explained_variance_ratio_.sum())
-plt.scatter(data1[:, 0], data1[:, 1], c=np.array(iris.target), cmap=plt.cm.copper)
+plt.scatter(data1[:, 0], data1[:, 1], c=np.array(y), cmap=plt.cm.copper)
 
 show()
 
@@ -702,16 +723,16 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 # 訓練組8成, 測試組2成
 
 # ????
-X_train, X_test = train_test_split(X, test_size=0.3, random_state=10)
+X_train, X_test = train_test_split(X, test_size=0.2)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("讀取csv檔案成df")
-
+print("讀取csv檔案成df 6")
 filename = "data/Iris2.csv"
 df = pd.read_csv(filename)
-print(df)
+
+# print(df)
 
 df = df.drop("Id", axis=1)
 print(df.head())
@@ -873,8 +894,10 @@ show()
 
 # 取回鳶尾花訓練資料
 iris = datasets.load_iris()
+X = iris.data
+y = iris.target  # 資料集目標
 
-x = iris.data[:, :2]
+x = X[:, :2]
 y = iris.target  # 資料集目標
 
 plt.subplot(121)
@@ -1206,10 +1229,10 @@ from sklearn import cluster
 
 iris = datasets.load_iris()
 X = iris.data[:, :2]  # use only 'sepal length and sepal width'
-y_iris = iris.target
+y = iris.target  # 資料集目標
+
 kmr = cluster.KMeans(n_clusters=3, random_state=42).fit(X)
 labels_r = kmr.predict(X)
-# %matplotlib qt
 
 nboot = 500
 orig_all = np.arange(X.shape[0])
@@ -1229,7 +1252,7 @@ for boot_i in range(nboot):
     scores_boot[boot_i] = np.sum(labels_b == labels_r) / len(labels_b)
 
 sns.distplot(scores_boot)
-plt.show()
+show()
 
 print(np.min(scores_boot), np.argmin(scores_boot))
 
@@ -1242,80 +1265,87 @@ print("------------------------------------------------------------")  # 60個
 
 """
 sns.pairplot()
-pairplot:pair是成对的意思，即是说这个用来展现变量两两之间的关系，线性、非线性、相关等等
+pairplot:pair是成對的意思，即是說這個用來展現變量兩兩之間的關係，線性、非線性、相關等等
 """
 
-# sns.set_style('white',{'font.sans-serif':['simhei','Arial']})  #解决中文不能显示问题
+# sns.set_style('white',{'font.sans-serif':['simhei','Arial']})  #解決中文不能顯示問題
 
 iris = datasets.load_iris()
-iris_data = pd.DataFrame(iris.data, columns=iris.feature_names)
-iris_data["species"] = iris.target_names[iris.target]
-# NG iris_data.head(3).append(iris_data.tail(3))   #前面三条+后面三条
+X = iris.data
+y = iris.target  # 資料集目標
+
+iris_data = pd.DataFrame(X, columns=iris.feature_names)
+iris_data["species"] = iris.target_names[y]
+
+# NG iris_data.head(3).append(iris_data.tail(3))   #前面三條+后面三條
 iris_data.rename(
     columns={
-        "sepal length (cm)": "萼片长",
-        "sepal width (cm)": "萼片宽",
-        "petal length (cm)": "花瓣长",
-        "petal width (cm)": "花瓣宽",
-        "species": "种类",
+        "sepal length (cm)": "萼片長",
+        "sepal width (cm)": "萼片寬",
+        "petal length (cm)": "花瓣長",
+        "petal width (cm)": "花瓣寬",
+        "species": "種類",
     },
     inplace=True,
 )
-kind_dict = {"setosa": "山鸢尾", "versicolor": "杂色鸢尾", "virginica": "维吉尼亚鸢尾"}
-iris_data["种类"] = iris_data["种类"].map(kind_dict)
+kind_dict = {"setosa": "山鳶尾", "versicolor": "雜色鳶尾", "virginica": "維吉尼亞鳶尾"}
+iris_data["種類"] = iris_data["種類"].map(kind_dict)
 
-# 画变量之间关系的图
+# 畫變量之間關係的圖
 
-# 全部变量都放进去
+# 全部變量都放進去
 sns.pairplot(iris_data)
-plt.show()
+show()
 
 
 """
-可以看到对角线上是各个属性的直方图（分布图），而非对角线上是两个不同属性之间的相关图，
-从图中我们发现，花瓣的长度和宽度之间以及萼片的长短和花瓣的长、宽之间具有比较明显的相关关系
+可以看到對角線上是各個屬性的直方圖（分布圖），而非對角線上是兩個不同屬性之間的相關圖，
+從圖中我們發現，花瓣的長度和寬度之間以及萼片的長短和花瓣的長、寬之間具有比較明顯的相關關係
 """
 
-# kind:用于控制非对角线上图的类型，可选'scatter'与'reg'
-# diag_kind:用于控制对角线上的图分类型，可选'hist'与'kde'
+# kind:用于控制非對角線上圖的類型，可選'scatter'與'reg'
+# diag_kind:用于控制對角線上的圖分類型，可選'hist'與'kde'
 
 sns.pairplot(iris_data, kind="reg", diag_kind="ked")
-plt.show()
+show()
 
 sns.pairplot(iris_data, kind="reg", diag_kind="hist")
-plt.show()
+show()
 
-# hue：针对某一字段进行分类
-sns.pairplot(iris_data, hue="种类")
-plt.show()
+# hue：針對某一字段進行分類
+sns.pairplot(iris_data, hue="種類")
+show()
 
 """
-经过hue分类后的pairplot中发现，不论是从对角线上的分布图还是从分类后的散点图，
-都可以看出对于不同种类的花，其萼片长、花瓣长、花瓣宽的分布差异较大，换句话说，
-这些属性是可以帮助我们去识别不同种类的花的。
-比如，对于萼片、花瓣长度较短，花瓣宽度较窄的花，那么它大概率是山鸢尾
+經過hue分類后的pairplot中發現，不論是從對角線上的分布圖還是從分類后的散點圖，
+都可以看出對于不同種類的花，其萼片長、花瓣長、花瓣寬的分布差異較大，換句話說，
+這些屬性是可以幫助我們去識別不同種類的花的。
+比如，對于萼片、花瓣長度較短，花瓣寬度較窄的花，那么它大概率是山鳶尾
 """
 
-# vars：研究某2个或者多个变量之间的关系vars,
-# x_vars,y_vars：选择数据中的特定字段，以list形式传入需要注意的是，x_vars和y_vars要同时指定
+# vars：研究某2個或者多個變量之間的關係vars,
+# x_vars,y_vars：選擇數據中的特定字段，以list形式傳入需要注意的是，x_vars和y_vars要同時指定
 
-sns.pairplot(iris_data, vars=["萼片长", "花瓣长"])
-plt.show()
+sns.pairplot(iris_data, vars=["萼片長", "花瓣長"])
+show()
 
-sns.pairplot(iris_data, x_vars=["萼片长", "花瓣宽"], y_vars=["萼片宽", "花瓣长"])
-plt.show()
+sns.pairplot(iris_data, x_vars=["萼片長", "花瓣寬"], y_vars=["萼片寬", "花瓣長"])
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+# 以下很久
 
 iris = datasets.load_iris()
+X = iris.data
+y = iris.target  # 資料集目標
 
 category = 3
 dim = 4
-x_train, x_test, y_train, y_test = train_test_split(
-    iris.data, iris.target, test_size=0.2
-)
+
+x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
 y_train2 = tf.keras.utils.to_categorical(y_train, num_classes=(category))
 y_test2 = tf.keras.utils.to_categorical(y_test, num_classes=(category))
 
@@ -1376,12 +1406,13 @@ print("------------------------------------------------------------")  # 60個
 # Iris-MLP_show.py
 
 iris = datasets.load_iris()
+X = iris.data
+y = iris.target  # 資料集目標
 
 category = 3
 dim = 4
-x_train, x_test, y_train, y_test = train_test_split(
-    iris.data, iris.target, test_size=0.2
-)
+
+x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 y_train2 = tf.keras.utils.to_categorical(y_train, num_classes=(category))
 y_test2 = tf.keras.utils.to_categorical(y_test, num_classes=(category))
 
@@ -1442,12 +1473,12 @@ print("------------------------------------------------------------")  # 60個
 # Iris-MLP_Tensorboard.py
 
 iris = datasets.load_iris()
+X = iris.data
+y = iris.target  # 資料集目標
 
 category = 3
 dim = 4
-x_train, x_test, y_train, y_test = train_test_split(
-    iris.data, iris.target, test_size=0.2
-)
+x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 y_train2 = tf.keras.utils.to_categorical(y_train, num_classes=(category))
 y_test2 = tf.keras.utils.to_categorical(y_test, num_classes=(category))
 
@@ -1500,12 +1531,12 @@ print("------------------------------------------------------------")  # 60個
 # Iris-MLP_Save.py
 
 iris = datasets.load_iris()
+X = iris.data
+y = iris.target  # 資料集目標
 
 category = 3
 dim = 4
-x_train, x_test, y_train, y_test = train_test_split(
-    iris.data, iris.target, test_size=0.2
-)
+x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 y_train2 = tf.keras.utils.to_categorical(y_train, num_classes=(category))
 y_test2 = tf.keras.utils.to_categorical(y_test, num_classes=(category))
 
@@ -1566,12 +1597,12 @@ print("------------------------------------------------------------")  # 60個
 # Iris-MLP_Load.py
 
 iris = datasets.load_iris()
+X = iris.data
+y = iris.target  # 資料集目標
 
 category = 3
 dim = 4
-x_train, x_test, y_train, y_test = train_test_split(
-    iris.data, iris.target, test_size=0.2
-)
+x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 y_train2 = tf.keras.utils.to_categorical(y_train, num_classes=(category))
 y_test2 = tf.keras.utils.to_categorical(y_test, num_classes=(category))
 
@@ -1617,7 +1648,6 @@ y_pred = classes_x
 print("predict_classes:", y_pred)
 print("y_test", y_test[:])
 
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -1639,8 +1669,9 @@ sys.exit()
 df.to_csv("tmp_iris1.csv")
 df.to_csv("tmp_iris2.csv", encoding="utf8")
 df.to_csv("tmp_iris3.csv", encoding="utf-8-sig")
+df.to_csv("tmp_iris4.csv", sep="\t")
 
-print("讀取csv檔案成df")
+print("讀取csv檔案成df 7")
 
 df1 = pd.read_csv("tmp_iris1.csv")
 print(df1)
@@ -1663,30 +1694,6 @@ print(cc)
 
 print("------------------------------------------------------------")  # 60個
 
-print("load_iris()轉df")
-
-iris = datasets.load_iris()
-
-X = iris.data
-y = iris.target  # 資料集目標
-
-print("dir(iris)", dir(iris))
-print("iris.feature_names=", iris.feature_names)
-
-import xlsxwriter
-
-df = pd.DataFrame(iris.data, columns=iris.feature_names)
-
-df["target"] = iris.target
-
-print(df.head())
-df.to_csv("tmp_iris.csv", sep="\t")
-
-""" no save
-writer = pd.ExcelWriter("tmp_iris.xlsx", engine="xlsxwriter")
-df.to_excel(writer, sheet_name="Sheet1")
-writer.save()
-"""
 
 print("------------------------------------------------------------")  # 60個
 

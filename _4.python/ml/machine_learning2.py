@@ -13,6 +13,7 @@ import sys
 import time
 import math
 import random
+import datetime
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -35,6 +36,7 @@ ssl._create_default_https_context = ssl._create_stdlib_context
 print("------------------------------------------------------------")  # 60個
 
 from common1 import *
+import tensorflow as tf
 import joblib
 import pickle
 import matplotlib
@@ -44,14 +46,26 @@ import sklearn
 import sklearn.linear_model
 from sklearn import metrics
 from sklearn import datasets
+from sklearn import preprocessing
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
+
+from imblearn.metrics import classification_report_imbalanced
+from sklearn.model_selection import cross_val_score
 
 # 載入迴歸常見的評估指標
 from sklearn.metrics import mean_squared_error  # 均方誤差 Mean Squared Error (MSE)
 from sklearn.metrics import mean_absolute_error  # 平均絕對誤差 Mean Absolute Error (MAE)
-from sklearn.metrics import r2_score  # R-Squared擬合度
-from sklearn.metrics import accuracy_score
+from sklearn.metrics import r2_score  # R-Squared擬合度, 決定係数
+from sklearn.metrics import accuracy_score  # 正解率
 from sklearn.metrics import confusion_matrix
+from sklearn.metrics import roc_curve  # ROC曲線, AUC
+from sklearn.metrics import roc_auc_score
+from sklearn.metrics import auc
+from sklearn.metrics import classification_report
+from sklearn.metrics import precision_score  # 適合率
+from sklearn.metrics import recall_score  # 再現率
+from sklearn.metrics import f1_score  # F値
+from sklearn.metrics import ConfusionMatrixDisplay
 
 from sklearn.datasets import make_blobs  # 生成分類資料
 from sklearn.datasets import make_moons  # 生成非線性資料 上/下弦月資料
@@ -576,7 +590,6 @@ print("------------------------------------------------------------")  # 60個
 
 """
 from sklearn.preprocessing import PolynomialFeatures
-from sklearn.metrics import mean_squared_error
 
 train_size = 20
 test_size = 12
@@ -1408,6 +1421,7 @@ print("------------------------------------------------------------")  # 60個
 print('Auto-Sklearn')
 
 #pip install auto-sklearn
+
 import autosklearn.classification
 import statsmodels.api as sm
   
@@ -1454,14 +1468,11 @@ https://tianchi.aliyun.com/competition/gameList/activeList
 https://tianchi.aliyun.com/competition/activeList
 """
 
-import datetime
 from pandas.api.types import is_numeric_dtype  # 用於判斷特徵類型
 from sklearn.ensemble import RandomForestClassifier  # 分類模型
 from sklearn.ensemble import GradientBoostingClassifier  # 分類模型
 from sklearn.ensemble import RandomForestRegressor  # 迴歸模型
 from sklearn.ensemble import GradientBoostingRegressor  # 迴歸模型
-from sklearn.model_selection import cross_val_score
-from sklearn.metrics import mean_squared_error  # 評價函數
 
 """
 無csv資料
@@ -1519,10 +1530,7 @@ else: # 用於遠程提交
 
 print('------------------------------------------------------------')	#60個
 
-import datetime
 from pandas.api.types import is_numeric_dtype # 用於判斷特徵類型
-from sklearn.model_selection import cross_val_score
-from sklearn.metrics import mean_squared_error # 評價函數
 
 data = pd.read_csv('data/happiness_train_min.csv', encoding='gb2312')
 test = pd.read_csv('data/happiness_test_min.csv', encoding='gb2312')
@@ -1671,8 +1679,6 @@ else:
 """
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-from sklearn import preprocessing
 
 df = pd.read_csv("data/test3.csv")
 
@@ -1893,16 +1899,12 @@ print("done in %fs" % (time.time() - t))
 
 print("------------------------------")  # 30個
 
-from sklearn.metrics import classification_report
-
 print("classification report on test set for classifier:")
 print(clf)
 print(classification_report(y_test, pred,
                             target_names=news_test.target_names))
 
 print("------------------------------")  # 30個
-
-from sklearn.metrics import confusion_matrix
 
 cm = confusion_matrix(y_test, pred)
 print("confusion matrix:")
@@ -2123,22 +2125,21 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-from time import time
 from sklearn.datasets import load_files
 
 """ NG 無檔案
 print("loading documents ...")
-t = time()
+t = time.time()
 docs = load_files('datasets/clustering/data')
 print("summary: {0} documents in {1} categories.".format(
     len(docs.data), len(docs.target_names)))
-print("done in {0} seconds".format(time() - t))
+print("done in {0} seconds".format(time.time() - t))
 
 from sklearn.feature_extraction.text import TfidfVectorizer
 
 max_features = 20000
 print("vectorizing documents ...")
-t = time()
+t = time.time()
 vectorizer = TfidfVectorizer(max_df=0.4, 
                              min_df=2, 
                              max_features=max_features, 
@@ -2147,12 +2148,12 @@ X = vectorizer.fit_transform((d for d in docs.data))
 print("n_samples: %d, n_features: %d" % X.shape)
 print("number of non-zero features in sample [{0}]: {1}".format(
     docs.filenames[0], X[0].getnnz()))
-print("done in {0} seconds".format(time() - t))
+print("done in {0} seconds".format(time.time() - t))
 
 print("------------------------------")  # 30個
 
 print("clustering documents ...")
-t = time()
+t = time.time()
 n_clusters = 4
 kmean = KMeans(n_clusters=n_clusters, 
                max_iter=100,
@@ -2161,7 +2162,7 @@ kmean = KMeans(n_clusters=n_clusters,
                n_init=3)
 kmean.fit(X)
 print("kmean: k={}, cost={}".format(n_clusters, int(kmean.inertia_)))
-print("done in {0} seconds".format(time() - t))
+print("done in {0} seconds".format(time.time() - t))
 
 print(len(kmean.labels_))
 
@@ -2497,17 +2498,11 @@ y_pred = classifier.predict(X_test)
 # 我们预测了测试集。 现在我们将评估逻辑回归模型是否正确的学习和理解。
 # 因此这个混淆矩阵将包含我们模型的正确和错误的预测。
 
-# Making the Confusion Matrix
-# 生成混淆矩阵
-from sklearn.metrics import confusion_matrix
-from sklearn.metrics import classification_report
-
+# 生成混淆矩阵(Confusion Matrix)
 cm = confusion_matrix(y_test, y_pred)
 
 print(cm)  # print confusion_matrix
 print(classification_report(y_test, y_pred))  # print classification report
-
-# 可视化
 
 from matplotlib.colors import ListedColormap
 
@@ -2593,9 +2588,6 @@ classifier.fit(X_train, y_train)  # 學習訓練.fit
 
 # Predicting the Test set results
 y_pred = classifier.predict(X_test)
-
-# Making the Confusion Matrix
-from sklearn.metrics import confusion_matrix
 
 cm = confusion_matrix(y_test, y_pred)
 
@@ -2687,9 +2679,7 @@ classifier.fit(X_train, y_train)  # 學習訓練.fit
 # Predicting the Test set results
 y_pred = classifier.predict(X_test)
 
-# Making the Confusion Matrix
-# 生成混淆矩阵，也称作误差矩阵
-from sklearn.metrics import confusion_matrix
+# 生成混淆矩阵(Confusion Matrix)，也称作误差矩阵
 
 cm = confusion_matrix(y_test, y_pred)
 
@@ -2749,12 +2739,11 @@ plt.title("Random Forest Classification (Test set)")
 plt.xlabel("Age")
 plt.ylabel("Estimated Salary")
 plt.legend()
+
 show()
 
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
 
 # 要先对数据集中的图片进行处理，可能需要进行的任务有图像尺寸统一、颜色处理等
 
@@ -2890,7 +2879,6 @@ Fully Connected Layers(全连接层)是典型的神经网络，其中所有节�
 本次代码中所需的X.pickle和y.pickle为上一篇的输出，路径请根据自己的情况更改！
 """
 
-import tensorflow as tf
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
@@ -2943,7 +2931,9 @@ model.fit(X, y, batch_size=32, epochs=3, validation_split=0.3)  # 學習訓練.f
 # 在这一部分，我们将讨论的是TensorBoard。
 # TensorBoard是一个方便的应用程序，允许您在浏览器中查看模型或模型的各个方面。
 # 我们将TensorBoard与Keras一起使用的方式是通过Keras回调。实际上有很多Keras回调，你可以自己制作。
+
 from tensorflow.keras.callbacks import TensorBoard
+
 # Using TensorFlow backend.
 # 创建TensorBoard回调对象
 NAME = "Cats-vs-dogs-CNN"
@@ -2963,7 +2953,7 @@ model.fit(X, y,
 请注意，这callbacks是一个列表。您也可以将其他回调传递到此列表中。
 我们的模型还没有定义，所以现在让我们把它们放在一起：
 """
-import tensorflow as tf
+
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
@@ -3116,7 +3106,6 @@ size_mapping = {"XL": 3, "L": 2, "M": 1}
 df["size"] = df["size"].map(size_mapping)
 print(df)
 
-# OrdinalEncoder
 from sklearn.preprocessing import OrdinalEncoder
 
 data = [["Male", 1], ["Female", 3], ["Female", 2]]
@@ -3295,9 +3284,6 @@ class2_sample = np.random.multivariate_normal(mu_vec2, cov_mat2, 20).T
 cc = class1_sample.shape, class2_sample.shape
 print(cc)
 
-# 繪圖
-
-from matplotlib import pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 from mpl_toolkits.mplot3d import proj3d
 
@@ -3671,7 +3657,8 @@ show()
 # 非線性分離
 # 生成S曲線資料
 from matplotlib import ticker
-from sklearn import manifold, datasets
+from sklearn import manifold
+from sklearn import datasets
 
 n_samples = 1500
 S_points, S_color = datasets.make_s_curve(n_samples, random_state=0)
@@ -3851,8 +3838,6 @@ cc = accuracy_score(y_pred, y_test)
 print(cc)
 # 0.9668161434977578
 
-from sklearn.metrics import classification_report
-
 print(classification_report(y_test, y_pred))
 
 print("混淆矩陣")
@@ -3918,8 +3903,6 @@ print("------------------------------------------------------------")  # 60個
 # 06_03_logistic_regression_attrition
 
 # 員工流失預測
-
-from sklearn import preprocessing
 
 df = pd.read_csv("./data/WA_Fn-UseC_-HR-Employee-Attrition.csv")
 cc = df.head()
@@ -4086,8 +4069,6 @@ print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
 print(confusion_matrix(y_test, y_pred))
 
 # 混淆矩陣圖
-from sklearn.metrics import ConfusionMatrixDisplay
-
 disp = ConfusionMatrixDisplay(confusion_matrix=confusion_matrix(y_test, y_pred))
 disp.plot()
 show()
@@ -4427,57 +4408,6 @@ print(cc)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 06_07_surprise_test
-
-# Surprise 測試
-
-from surprise import SVD
-from surprise import KNNBasic
-from surprise import Dataset
-from surprise import accuracy
-from surprise.model_selection import train_test_split
-
-# 載入內建 movielens-100k 資料集
-data = Dataset.load_builtin("ml-100k")
-print("user id\titem id\trating\ttimestamp")
-cc = data.raw_ratings[:10]
-print(cc)
-
-# 資料分割
-
-# 切分為訓練及測試資料，測試資料佔 20%
-trainset, testset = train_test_split(data, test_size=0.2)
-
-# 模型訓練
-
-# 使用 KNN 演算法
-model = KNNBasic()
-
-# 訓練
-model.fit(trainset)
-
-# 模型評分
-
-# 測試
-predictions = model.test(testset)
-
-# 計算 RMSE
-accuracy.rmse(predictions)
-
-# RMSE: 0.9874
-
-# SVD
-
-model = SVD()
-model.fit(trainset)
-predictions = model.test(testset)
-accuracy.rmse(predictions)
-
-# RMSE: 0.9405
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 # 06_11_naive_bayes_spam
 
 # 垃圾信分類
@@ -4592,9 +4522,6 @@ y_pred = clf.predict(X_test)
 cc = accuracy_score(y_pred, y_test)
 print(cc)
 # 0.895067264573991
-
-from sklearn.metrics import classification_report
-from sklearn.metrics import confusion_matrix
 
 print(classification_report(y_test, y_pred))
 
@@ -4720,8 +4647,6 @@ F1 score=0.7619047619047619
 
 # Scikit-learn 分類報表
 
-from sklearn.metrics import classification_report
-
 print(classification_report(y_test, y_pred))
 
 # weighted average 驗算
@@ -4817,10 +4742,6 @@ show()
 
 # Scikit-Learn 作法
 
-from sklearn.metrics import roc_curve
-from sklearn.metrics import roc_auc_score
-from sklearn.metrics import auc
-
 fpr, tpr, threshold = roc_curve(df["actual"], df["predict"])
 print(f"偽陽率:\n{fpr}\n\n真陽率:\n{tpr}\n\n決策門檻:{threshold}")
 
@@ -4889,8 +4810,6 @@ cc = accuracy_score(y_test, y_pred)
 print(cc)
 
 # K折交叉驗證
-from sklearn.model_selection import cross_val_score
-
 scores = cross_val_score(estimator=clf, X=X_test, y=y_test, cv=10, n_jobs=-1)
 print(f"K折分數: %s" % scores)
 print(f"平均值: {np.mean(scores):.3f}, 標準差: {np.std(scores):.3f}")
@@ -4902,15 +4821,9 @@ K折分數: [0.99915742 0.99929785 0.9988764  0.9997191  0.99901685 0.99901685
 """
 
 # 分類報告
-from sklearn.metrics import classification_report
-
 print(classification_report(y_test, y_pred))
 
 # 繪製ROC曲線
-from sklearn.metrics import roc_curve
-from sklearn.metrics import roc_auc_score
-from sklearn.metrics import auc
-
 y_pred_proba = clf.predict_proba(X_test)[:, 1]
 fpr, tpr, threshold = roc_curve(y_test, y_pred_proba)
 auc1 = auc(fpr, tpr)
@@ -4935,7 +4848,6 @@ print(classification_report(y_test, y_pred))
 # !pip install -U imbalanced-learn
 
 from imblearn.over_sampling import SMOTE
-from imblearn.metrics import classification_report_imbalanced
 
 print(df.Class.value_counts())
 smote = SMOTE()
@@ -4961,9 +4873,6 @@ cc = accuracy_score(y_test, y_pred)
 print(cc)
 
 # K折交叉驗證
-
-from sklearn.model_selection import cross_val_score
-
 scores = cross_val_score(estimator=clf, X=X_test, y=y_test, cv=10, n_jobs=-1)
 print(f"K折分數: %s" % scores)
 print(f"平均值: {np.mean(scores):.3f}, 標準差: {np.std(scores):.3f}")
@@ -4975,18 +4884,13 @@ K折分數: [0.94499156 0.94379572 0.94569499 0.94541362 0.94442881 0.94288126
 """
 
 # 分類報告
-from sklearn.metrics import classification_report
-
 print(classification_report(y_test, y_pred))
 
 # imbalanced-learn 分類報告
-from imblearn.metrics import classification_report_imbalanced
-
 print(classification_report_imbalanced(y_test, y_pred))
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
 
 # 09_07_dbscan_simple_test
 
@@ -5235,6 +5139,7 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # LabelSpreading 測試
+
 from sklearn.semi_supervised import LabelSpreading
 
 # 載入資料集
@@ -5296,10 +5201,10 @@ print(cc)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 範例2. 自行計算 Shapley value
-# 載入套件
+# 自行計算 Shapley value
 
-from sklearn.tree import DecisionTreeRegressor, plot_tree
+from sklearn.tree import DecisionTreeRegressor
+from sklearn.tree import plot_tree
 
 # 載入資料
 
@@ -5436,6 +5341,58 @@ print(
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+# 06_07_surprise_test
+
+# Surprise 測試
+
+from surprise import SVD
+from surprise import KNNBasic
+from surprise import Dataset
+from surprise import accuracy
+
+# 載入內建 movielens-100k 資料集
+data = Dataset.load_builtin("ml-100k")
+print("user id\titem id\trating\ttimestamp")
+cc = data.raw_ratings[:10]
+print(cc)
+
+# 資料分割
+
+from surprise.model_selection import train_test_split
+
+# 切分為訓練及測試資料，測試資料佔 20%
+trainset, testset = train_test_split(data, test_size=0.2)
+
+# 模型訓練
+
+# 使用 KNN 演算法
+model = KNNBasic()
+
+# 訓練
+model.fit(trainset)
+
+# 模型評分
+
+# 測試
+predictions = model.test(testset)
+
+# 計算 RMSE
+accuracy.rmse(predictions)
+
+# RMSE: 0.9874
+
+# SVD
+
+model = SVD()
+model.fit(trainset)
+predictions = model.test(testset)
+accuracy.rmse(predictions)
+
+# RMSE: 0.9405
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -5466,9 +5423,7 @@ print("------------------------------------------------------------")  # 60個
 
 # plt.rcParams['figure.figsize'] = 12, 8
 
-np.random.seed(3)
 np.random.seed(10)  # Setting seed for reproducability
-np.random.seed(3)
 
 
 # 以下OK 可搬出
@@ -5476,37 +5431,27 @@ np.random.seed(3)
 """ NG
 print("混同行列")
 
-from sklearn.metrics import confusion_matrix
-
 cm = confusion_matrix(y, y_pred)
 print(cm)
 
 print("------------------------------")  # 30個
 
 print("正解率")
-from sklearn.metrics import accuracy_score
-
 accuracy_score(y, y_pred)
 
 print("------------------------------")  # 30個
 
 print("適合率")
-from sklearn.metrics import precision_score
-
 precision_score(y, y_pred)
 
 print("------------------------------")  # 30個
 
 print("再現率")
-from sklearn.metrics import recall_score
-
 recall_score(y, y_pred)
 
 print("------------------------------")  # 30個
 
 print("F値")
-from sklearn.metrics import f1_score
-
 f1_score(y, y_pred)
 
 print("------------------------------")  # 30個
@@ -5525,8 +5470,6 @@ print(recall_score(y, y_pred2))
 print("------------------------------")  # 30個
 
 print("ROC曲線・AUC")
-from sklearn.metrics import roc_curve
-
 probas = logistic_regression.predict_proba(X)
 fpr, tpr, thresholds = roc_curve(y, probas[:, 1])
 
@@ -5546,24 +5489,16 @@ show()
 
 print("------------------------------")  # 30個
 
-from sklearn.metrics import roc_auc_score
-
 roc_auc_score(y, probas[:, 1])
 
 print("------------------------------")  # 30個
 
 print("平均二乗誤差")
-
-from sklearn.metrics import mean_squared_error
-
 mean_squared_error(y, y_pred)
 
 print("------------------------------")  # 30個
 
 print("決定係数")
-
-from sklearn.metrics import r2_score
-
 print(r2_score(y, y_pred))
 
 print("------------------------------")  # 30個

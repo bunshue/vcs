@@ -18,6 +18,9 @@ f(x)=y
 # Supervised Learning SVM
 
 SVM 支持向量机
+
+用SVM做分類, 有監督學習
+
 """
 
 print("------------------------------------------------------------")  # 60個
@@ -47,6 +50,7 @@ import joblib
 import sklearn.linear_model
 from common1 import *
 from sklearn import datasets
+from sklearn import preprocessing
 from sklearn.datasets import make_blobs
 from sklearn.datasets import make_moons  # 非線性的資料集
 from sklearn.datasets import make_classification
@@ -58,7 +62,6 @@ from sklearn.metrics import classification_report
 from sklearn.metrics import ConfusionMatrixDisplay
 from sklearn.svm import SVC  # 非線性SVM函數學習機
 from sklearn.svm import LinearSVC  # 線性支援向量機 (Linear SVM)
-
 import sklearn.metrics as metrics
 
 
@@ -300,8 +303,6 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-from sklearn import preprocessing
-
 X, y = make_classification(
     n_samples=300,
     n_features=2,
@@ -381,9 +382,7 @@ X, y = make_moons(n_samples=N, noise=0.15)
 # print("使用 make_gaussian_quantiles 產生", N, "筆資料")
 # X, y = make_gaussian_quantiles(n_features=2, n_classes=2, n_samples=N)
 
-from sklearn.preprocessing import StandardScaler
-
-scaler = StandardScaler()
+scaler = preprocessing.StandardScaler()
 X = scaler.fit_transform(X)  # STD特徵縮放
 
 # 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
@@ -457,8 +456,6 @@ test_est = svcModel.predict(test_data)
 print(metrics.classification_report(test_target, test_est))  # 计算评估指标
 
 # 进行标准化可以提升高斯核svm的表现
-from sklearn import preprocessing
-
 scaler = preprocessing.StandardScaler().fit(train_data)
 train_scaled = scaler.transform(train_data)
 test_scaled = scaler.transform(test_data)
@@ -470,7 +467,6 @@ test_est1 = svcModel1.predict(test_scaled)
 print(metrics.classification_report(test_target, test_est1))  # 计算评估指标
 
 # 选择最优模型
-
 from sklearn.model_selection import ParameterGrid
 from sklearn.model_selection import GridSearchCV
 
@@ -539,8 +535,6 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("用SVM做分類, 有監督學習")
-
 iris = datasets.load_iris()
 
 X = iris.data
@@ -581,7 +575,7 @@ print("------------------------------------------------------------")  # 60個
 
 data, label = make_blobs(n_samples=200, n_features=2, centers=2, random_state=9487)
 
-d_sta = StandardScaler().fit_transform(data)  # 標準化
+d_sta = preprocessing.StandardScaler().fit_transform(data)  # 標準化
 
 # 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
 dx_train, dx_test, label_train, label_test = train_test_split(
@@ -613,7 +607,7 @@ print("------------------------------------------------------------")  # 60個
 
 data, label = make_moons(n_samples=200, noise=0.2, random_state=9487)
 
-d_sta = StandardScaler().fit_transform(data)  # 標準化
+d_sta = preprocessing.StandardScaler().fit_transform(data)  # 標準化
 
 # 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
 dx_train, dx_test, label_train, label_test = train_test_split(
@@ -645,24 +639,21 @@ print(f"非線性測試資料的準確性 = {clf.score(dx_test, label_test)}")
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
 # SelectFromModel
 
 from sklearn.feature_selection import SelectFromModel
 
 X, y = datasets.load_iris(return_X_y=True)
-cc = X.shape
-print("X.shape")
-print(cc)
+
+print("X.shape :", X.shape)
 
 # SelectFromModel特徵選取
 
 svc = SVC(kernel="linear", C=1)
 clf = SelectFromModel(estimator=svc, threshold="mean")
 X_new = clf.fit_transform(X, y)
-cc = X_new.shape
-print("X_new.shape")
-print(cc)
+
+print("X_new.shape :", X_new.shape)
 
 print("特徵是否被選取")
 cc = clf.get_support()
@@ -684,7 +675,7 @@ print(cc)
 # ((120, 2), (30, 2), (120,), (30,))
 
 print("特徵縮放")
-scaler = StandardScaler()
+scaler = preprocessing.StandardScaler()
 X_train_std = scaler.fit_transform(X_train)
 X_test_std = scaler.transform(X_test)
 
@@ -706,8 +697,6 @@ print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
 print("混淆矩陣")
 print(confusion_matrix(y_test, y_pred))
 
-from sklearn.metrics import ConfusionMatrixDisplay
-
 print("混淆矩陣圖")
 disp = ConfusionMatrixDisplay(confusion_matrix=confusion_matrix(y_test, y_pred))
 disp.plot()
@@ -725,7 +714,7 @@ print(X_train.shape, X_test.shape, y_train.shape, y_test.shape)
 # (120, 4) (30, 4) (120,) (30,)
 
 # 特徵縮放
-scaler = StandardScaler()
+scaler = preprocessing.StandardScaler()
 X_train_std = scaler.fit_transform(X_train)
 X_test_std = scaler.transform(X_test)
 
@@ -749,15 +738,15 @@ print("------------------------------------------------------------")  # 60個
 from sklearn.feature_selection import SequentialFeatureSelector
 
 X, y = datasets.load_iris(return_X_y=True)
-cc = X.shape
-print(cc)
+
+print("X.shape :", X.shape)
 
 # SFS 特徵選取
 svc = SVC(kernel="linear", C=1)
 clf = SequentialFeatureSelector(estimator=svc, n_features_to_select=2)
 X_new = clf.fit_transform(X, y)
-cc = X_new.shape
-print(cc)
+
+print("X_new.shape :", X_new.shape)
 
 # 特徵是否被選取
 cc = clf.get_support()
@@ -777,8 +766,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 X_train.shape, X_test.shape, y_train.shape, y_test.shape
 
 # 特徵縮放
-
-scaler = StandardScaler()
+scaler = preprocessing.StandardScaler()
 X_train_std = scaler.fit_transform(X_train)
 X_test_std = scaler.transform(X_test)
 
@@ -800,8 +788,6 @@ print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
 print("混淆矩陣")
 print(confusion_matrix(y_test, y_pred))
 
-from sklearn.metrics import ConfusionMatrixDisplay
-
 print("混淆矩陣圖")
 disp = ConfusionMatrixDisplay(confusion_matrix=confusion_matrix(y_test, y_pred))
 disp.plot()
@@ -818,7 +804,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 print(X_train.shape, X_test.shape, y_train.shape, y_test.shape)
 
 # 特徵縮放
-scaler = StandardScaler()
+scaler = preprocessing.StandardScaler()
 X_train_std = scaler.fit_transform(X_train)
 X_test_std = scaler.transform(X_test)
 
@@ -937,7 +923,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 # 訓練組8成, 測試組2成
 
 # 第四步：特征量化  # Feature Scaling
-scaler = StandardScaler()
+scaler = preprocessing.StandardScaler()
 X_train = scaler.fit_transform(X_train)  # STD特徵縮放
 X_test = scaler.fit_transform(X_test)  # STD特徵縮放
 
@@ -1007,9 +993,7 @@ plt.ylabel("Estimated Salary")
 plt.legend()
 show()
 
-
 # 第九步：测试集合结果可视化
-
 from matplotlib.colors import ListedColormap
 
 X_set, y_set = X_test, y_test
@@ -1052,7 +1036,6 @@ X, y = datasets.load_iris(return_X_y=True)
 X = X[:, :2]
 
 # 資料分割
-
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 # 設定 30% 資料為沒有標註(-1)
@@ -1113,7 +1096,9 @@ print("------------------------------------------------------------")  # 60個
 # 完整資料進行模型評估
 
 rng = np.random.RandomState(42)
+
 X, y = datasets.load_iris(return_X_y=True)
+
 random_unlabeled_points = rng.rand(y.shape[0]) < 0.3
 y[random_unlabeled_points] = -1
 
@@ -1133,6 +1118,7 @@ print(cc)
 # 0.66
 
 X, y = datasets.load_iris(return_X_y=True)
+
 cc = self_training_model.score(X, y)
 print(cc)
 # 0.9733333333333334
@@ -1250,7 +1236,7 @@ X, y = datasets.load_iris(return_X_y=True)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 # 特徵縮放
-scaler = StandardScaler()
+scaler = preprocessing.StandardScaler()
 X_train_std = scaler.fit_transform(X_train)
 X_test_std = scaler.transform(X_test)
 
@@ -1280,7 +1266,7 @@ X, y = datasets.load_iris(return_X_y=True)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 # 特徵縮放
-scaler = StandardScaler()
+scaler = preprocessing.StandardScaler()
 X_train_std = scaler.fit_transform(X_train)
 X_test_std = scaler.transform(X_test)
 
@@ -1339,16 +1325,16 @@ X_train, X_test, y_train, y_test = train_test_split(
     random_state=0,
 )
 
-sc = StandardScaler()
+sc = preprocessing.StandardScaler()
 sc.fit(X_train)
 X_train_std = sc.transform(X_train)
 X_test_std = sc.transform(X_test)
 
 # 載入SVM中的SVC，並將kernel設為線性（SVM的Kernel可以換成非線性），並將Probability設為True
 
-svm = SVC(kernel="linear", probability=True)
+clf = SVC(kernel="linear", probability=True)
 
-svm.fit(X_train_std, y_train["target"].values)
+clf.fit(X_train_std, y_train["target"].values)
 
 """ Out
 SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
@@ -1360,19 +1346,19 @@ SVC是SVM用C++語言實作的版本，背後是libsvm
 
 """
 
-cc = svm.predict(X_test_std)
+cc = clf.predict(X_test_std)
 print(cc)
 
 cc = y_test["target"].values
 print(cc)
 
 error = 0
-for i, v in enumerate(svm.predict(X_test_std)):
+for i, v in enumerate(clf.predict(X_test_std)):
     if v != y_test["target"].values[i]:
         error += 1
 print(error)
 
-cc = svm.predict_proba(X_test_std)
+cc = clf.predict_proba(X_test_std)
 print(cc)
 
 from matplotlib.colors import ListedColormap
@@ -1429,7 +1415,7 @@ def plot_decision_regions(X, y, classifier, test_idx=None, resolution=0.02):
         )
 
 
-plot_decision_regions(X_train_std, y_train["target"].values, classifier=svm)
+plot_decision_regions(X_train_std, y_train["target"].values, classifier=clf)
 plt.xlabel("sepal length [standardized]")
 plt.ylabel("petal width [standardized]")
 plt.legend(loc="upper left")
@@ -1443,11 +1429,8 @@ print("------------------------------------------------------------")  # 60個
 
 # 不平衡的資料集利用sample_weight矯正
 
-from sklearn import svm
-
 # 生成隨機資料
 
-np.random.seed(0)
 # 20筆資料，前10筆+1
 X = np.r_[np.random.randn(10, 2) + [1, 1], np.random.randn(10, 2)]
 # y 前10筆為1，後10筆為-1
@@ -1468,7 +1451,7 @@ print(modified_weight)
 
 # 無加權的模型訓練
 
-clf_no_weights = svm.SVC(gamma=1)
+clf_no_weights = SVC(gamma=1)
 clf_no_weights.fit(X, y)
 
 """
@@ -1477,7 +1460,7 @@ SVC(gamma=1)
 
 # 加權的模型訓練
 
-clf_weights = svm.SVC(gamma=1)
+clf_weights = SVC(gamma=1)
 clf_weights.fit(X, y, sample_weight=modified_weight)
 
 """
@@ -1532,8 +1515,6 @@ print("------------------------------------------------------------")  # 60個
 
 # 非線性分割SVM測試
 
-from sklearn import svm
-
 # 生成隨機資料
 # 16筆資料，分兩類
 X = np.c_[
@@ -1564,7 +1545,7 @@ print(Y)
 plt.figure(figsize=(12, 4))
 plt.subplot(1, 3, 1)
 for fignum, kernel in enumerate(["linear", "poly", "rbf"]):
-    clf = svm.SVC(kernel=kernel, gamma=2)
+    clf = SVC(kernel=kernel, gamma=2)
     clf.fit(X, Y)
 
     plt.subplot(1, 3, fignum + 1)
@@ -1607,10 +1588,7 @@ print("------------------------------------------------------------")  # 60個
 
 # SVM人臉辨識
 
-from time import time
 from sklearn.datasets import fetch_lfw_people
-from sklearn.metrics import classification_report
-from sklearn.metrics import ConfusionMatrixDisplay
 from sklearn.decomposition import PCA
 
 lfw_people = fetch_lfw_people(min_faces_per_person=70, resize=0.4)
@@ -1638,26 +1616,23 @@ n_classes: 7
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 # 特徵縮放
-scaler = StandardScaler()
+scaler = preprocessing.StandardScaler()
 X_train_std = scaler.fit_transform(X_train)
 X_test_std = scaler.transform(X_test)
 
 # 使用 PCA 萃取 150 個特徵
 n_components = 150
 
-t0 = time()
+t0 = time.time()
 pca = PCA(n_components=n_components, svd_solver="randomized", whiten=True).fit(X_train)
 
 X_train_pca = pca.transform(X_train)
 X_test_pca = pca.transform(X_test)
-print(f"轉換耗時: {(time() - t0):.3f}s")
+print(f"轉換耗時: {(time.time() - t0):.3f}s")
 
 # 轉換耗時: 0.183s
 
 # 模型訓練
-
-from sklearn.svm import SVC
-
 clf = SVC(kernel="rbf", class_weight="balanced")
 clf.fit(X_train_pca, y_train)
 
@@ -1722,14 +1697,9 @@ print("------------------------------------------------------------")  # 60個
 
 # http://vis-www.cs.umass.edu/lfw/lfw-funneled.tgz (233MB)
 
-from time import time
 from sklearn.model_selection import RandomizedSearchCV
 from sklearn.datasets import fetch_lfw_people
-from sklearn.metrics import classification_report
-from sklearn.metrics import ConfusionMatrixDisplay
-from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
-from sklearn.svm import SVC
 from scipy.stats import loguniform
 
 # Download the data, if not already on disk and load it as numpy arrays
@@ -1759,7 +1729,7 @@ X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.2, random_state=42
 )
 
-scaler = StandardScaler()
+scaler = preprocessing.StandardScaler()
 X_train = scaler.fit_transform(X_train)
 X_test = scaler.transform(X_test)
 
@@ -1769,22 +1739,22 @@ n_components = 150
 print(
     "Extracting the top %d eigenfaces from %d faces" % (n_components, X_train.shape[0])
 )
-t0 = time()
+t0 = time.time()
 pca = PCA(n_components=n_components, svd_solver="randomized", whiten=True).fit(X_train)
-print("done in %0.3fs" % (time() - t0))
+print("done in %0.3fs" % (time.time() - t0))
 
 eigenfaces = pca.components_.reshape((n_components, h, w))
 
 print("Projecting the input data on the eigenfaces orthonormal basis")
-t0 = time()
+t0 = time.time()
 X_train_pca = pca.transform(X_train)
 X_test_pca = pca.transform(X_test)
-print("done in %0.3fs" % (time() - t0))
+print("done in %0.3fs" % (time.time() - t0))
 
 # Train a SVM classification model
 
 print("Fitting the classifier to the training set")
-t0 = time()
+t0 = time.time()
 param_grid = {
     "C": loguniform(1e3, 1e5),
     "gamma": loguniform(1e-4, 1e-1),
@@ -1793,16 +1763,16 @@ clf = RandomizedSearchCV(
     SVC(kernel="rbf", class_weight="balanced"), param_grid, n_iter=10
 )
 clf = clf.fit(X_train_pca, y_train)
-print("done in %0.3fs" % (time() - t0))
+print("done in %0.3fs" % (time.time() - t0))
 print("Best estimator found by grid search:")
 print(clf.best_estimator_)
 
 # Quantitative evaluation of the model quality on the test set
 
 print("Predicting people's names on the test set")
-t0 = time()
+t0 = time.time()
 y_pred = clf.predict(X_test_pca)
-print("done in %0.3fs" % (time() - t0))
+print("done in %0.3fs" % (time.time() - t0))
 
 print(classification_report(y_test, y_pred, target_names=target_names))
 ConfusionMatrixDisplay.from_estimator(
@@ -1852,8 +1822,6 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-print("SVM")
 
 iris = datasets.load_iris()
 
@@ -2028,8 +1996,6 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 全部訓練 SVM
-
 iris = datasets.load_iris()
 
 # 資料內容 iris.data
@@ -2080,13 +2046,13 @@ pca.fit(x)
 
 X = pca.transform(x)
 # 我們來看原來的樣子, 是一個 4 維的向量。
-print(x.shape)
+print("x.shape :", x.shape)
 print(len(x))
 print(x)
 print(x[7])
 
 # 經 PCA 之後, 濃縮成 2 維向量。
-print(X.shape)
+print("X.shape :", X.shape)
 print(len(X))
 print(X)
 print(X[7])
@@ -2122,8 +2088,6 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-# 把鳶尾花的資料集讀進來
 
 iris = datasets.load_iris()
 
@@ -2290,7 +2254,7 @@ print(pca.transform([[6.3, 2.3, 4.4, 1.3]]))
 
 print(clf.predict([[0.81509524, -0.37203706]]))
 
-print(X.shape)
+print("X.shape :", X.shape)
 
 # print(Z.reshape(X.shape))
 
@@ -2351,7 +2315,6 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
 
 """ some fail
 from sklearn.model_selection import KFold
@@ -2462,9 +2425,14 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
+sys.exit()
 
 
 print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
 
 """
 xmin, xmax, ymin, ymax = -8, 8, -8, 8

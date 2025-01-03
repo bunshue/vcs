@@ -244,6 +244,10 @@ plt.title("make_classification 分類資料集")
 
 print("分類資料集")
 
+N = 50  # n_samples, 樣本數
+# M = 1  # n_features, 特徵數(資料的維度)
+print("make_classification,", N, "個樣本, ", M, "個特徵")
+
 X, y = make_classification(
     n_samples=N,
     n_classes=3,
@@ -372,10 +376,14 @@ make_blobs對于各簇的中心和標準偏差提供了更方便的控制選項�
 """
 
 # make_classification()生成二分類數據集
-N = 500  # 樣本數
+
+N = 500  # n_samples, 樣本數
+M = 5  # n_features, 特徵數(資料的維度)
+print("make_classification,", N, "個樣本, ", M, "個特徵")
+
 X, y = make_classification(
     n_samples=N,
-    n_features=5,
+    n_features=M,
     n_redundant=0,
     n_clusters_per_class=1,
     n_informative=1,

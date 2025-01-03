@@ -18,8 +18,8 @@ k-平均演算法（英文：k-means clustering，以下簡稱為 k-means）
     最佳值為1，最差值為-1。接近0的值表示重疊的群集。
     負值通常表示樣本已分配給錯誤的聚類，因為不同的聚類更為相​​似
 
-metrics.silhouette_score   所有樣本的 [平均]輪廓係數
-metrics.silhouette_samples 所有樣本的     輪廓係數
+silhouette_score   所有樣本的 [平均]輪廓係數
+silhouette_samples 所有樣本的     輪廓係數
 
 """
 print("------------------------------------------------------------")  # 60個
@@ -31,10 +31,12 @@ from sklearn.cluster import KMeans  # 聚類方法, K-平均演算法
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
 from sklearn import metrics
 from sklearn.datasets import make_blobs  # 集群資料集
+from sklearn.metrics import accuracy_score
+from sklearn.metrics import silhouette_score
+from sklearn.metrics import silhouette_samples
 
 
 def show():
-    # return
     plt.show()
     pass
 
@@ -721,7 +723,7 @@ print("預測結果 :", y_pred)
 print("預測差值 :", y_pred - y)
 """
 
-score = metrics.accuracy_score(y, y_pred)
+score = accuracy_score(y, y_pred)
 print("準確率:{0:f}".format(score))
 
 # 績效矩陣
@@ -783,7 +785,7 @@ clf.fit(X, y)  # 學習訓練.fit
 y_pred = clf.predict(X)
 
 print(f"{accuracy_score(y, y_pred)*100:.2f}%")
-score = metrics.accuracy_score(y, y_pred)
+score = accuracy_score(y, y_pred)
 print("準確率:{0:f}".format(score))
 
 print("------------------------------------------------------------")  # 60個
@@ -872,7 +874,7 @@ plt.scatter(*zip(*X))
 silhouette_avg = []
 for i in range(2, 11):
     kmeans_fit = KMeans(n_clusters=i).fit(X)
-    cc = metrics.silhouette_score(X, kmeans_fit.labels_)  # 計算輪廓係數
+    cc = silhouette_score(X, kmeans_fit.labels_)  # 計算輪廓係數
     silhouette_avg.append(cc)
 
 plt.subplot(222)
@@ -898,7 +900,7 @@ plt.scatter(*zip(*X), c=y)
 silhouette_avg = []
 for i in range(2, 30):
     kmeans_fit = KMeans(n_clusters=i).fit(X)
-    cc = metrics.silhouette_score(X, kmeans_fit.labels_)  # 計算輪廓係數
+    cc = silhouette_score(X, kmeans_fit.labels_)  # 計算輪廓係數
     silhouette_avg.append(cc)
 
 plt.subplot(224)
@@ -949,7 +951,7 @@ cluster_labels = np.unique(y_pred)
 n_clusters = cluster_labels.shape[0]
 print("n_clusters =", n_clusters)
 
-silhouette_vals = metrics.silhouette_samples(X, y_pred, metric="euclidean")
+silhouette_vals = silhouette_samples(X, y_pred, metric="euclidean")
 print("每個點的輪廓係數 silhouette_samples :")
 # many print(silhouette_vals)
 print("共", len(y_pred), "點")
@@ -1004,7 +1006,7 @@ cluster_labels = np.unique(y_pred)
 n_clusters = cluster_labels.shape[0]
 print("n_clusters =", n_clusters)
 
-silhouette_vals = metrics.silhouette_samples(X, y_pred, metric="euclidean")
+silhouette_vals = silhouette_samples(X, y_pred, metric="euclidean")
 print("每個點的輪廓係數 silhouette_samples :")
 # many print(silhouette_vals)
 print("共", len(y_pred), "點")
@@ -1038,7 +1040,7 @@ plt.title("aaaa2")
 
 show()
 
-cc = metrics.silhouette_score(X, y)  # 計算輪廓係數
+cc = silhouette_score(X, y)  # 計算輪廓係數
 print("分", CLUSTERS, "群, 計算輪廓係數:", cc)
 
 # 依據輪廓係數找最佳集群數量
@@ -1057,7 +1059,7 @@ for k in range(2, 11):
     )  # K-平均演算法
     clf.fit(X)  # 學習訓練.fit
     y_pred = clf.fit_predict(X)  # 學習訓練 + 預測 .fit_predict
-    cc = metrics.silhouette_score(X, y_pred)  # 計算輪廓係數
+    cc = silhouette_score(X, y_pred)  # 計算輪廓係數
     silhouette_score_list.append(cc)
     print(f"{k}:{silhouette_score_list[-1]:.2f}")
     print("分", k, "群, 計算輪廓係數:", cc)
@@ -1262,7 +1264,7 @@ plt.scatter(X_train[:, 0], X_train[:, 1])
 show()
 
 # 標準化
-X_train = preprocessing.StandardScaler().fit_transform(X_train)
+X_train = sklearn.preprocessing.StandardScaler().fit_transform(X_train)
 
 CLUSTERS = 5  # 要分成的群數
 clf = KMeans(n_clusters=CLUSTERS)  # K-平均演算法
@@ -1292,7 +1294,7 @@ show()
 X, y = datasets.load_iris(return_X_y=True)
 
 # 標準化
-X_train = preprocessing.StandardScaler().fit_transform(X)
+X_train = sklearn.preprocessing.StandardScaler().fit_transform(X)
 
 # 訓練
 CLUSTERS = 3  # 要分成的群數
@@ -1699,7 +1701,7 @@ y_km = rfm_segmentation["cluster"]
 cluster_labels = np.unique(y_km)
 n_clusters = cluster_labels.shape[0]
 
-silhouette_vals = metrics.silhouette_samples(X, y_km, metric="euclidean")
+silhouette_vals = silhouette_samples(X, y_km, metric="euclidean")
 print("每個點的輪廓係數 silhouette_samples :")
 # many print(silhouette_vals)
 
@@ -1746,7 +1748,7 @@ for i in range(2, 21):
     clf = KMeans(n_clusters=i, init="k-means++", n_init=10, max_iter=300)  # K-平均演算法
     clf.fit(X)  # 學習訓練.fit
     y_pred = clf.fit_predict(X)
-    silhouette_score_list.append(metrics.silhouette_score(X, y_km))
+    silhouette_score_list.append(silhouette_score(X, y_km))
     print(f"{i}:{silhouette_score_list[-1]:.2f}")
 
 print(f"最大值 {np.argmax(silhouette_score_list)+2}: {np.max(silhouette_score_list):.2f}")
@@ -1763,7 +1765,7 @@ for i in range(2, 21):
     y_pred = clf.labels_
     cluster_labels = np.unique(y_pred)
     n_clusters = cluster_labels.shape[0]
-    silhouette_vals = metrics.silhouette_samples(X, y_pred, metric="euclidean")
+    silhouette_vals = silhouette_samples(X, y_pred, metric="euclidean")
     # print('每個點的輪廓係數 silhouette_samples :')
     # many print(silhouette_vals)
 
@@ -1927,7 +1929,7 @@ for i in range(2, 21):
     )  # K-平均演算法
     clf.fit(X)  # 學習訓練.fit
     y_pred = clf.fit_predict(X)
-    silhouette_score_list.append(metrics.silhouette_score(X, y_pred))
+    silhouette_score_list.append(silhouette_score(X, y_pred))
     print(f"{i}:{silhouette_score_list[-1]:.2f}")
 
 print(f"最大值 {np.argmax(silhouette_score_list)+2}: {np.max(silhouette_score_list):.2f}")
@@ -1944,7 +1946,7 @@ for i in range(2, 21):
     y_pred = clf.labels_
     cluster_labels = np.unique(y_pred)
     n_clusters = cluster_labels.shape[0]
-    silhouette_vals = metrics.silhouette_samples(X, y_pred, metric="euclidean")
+    silhouette_vals = silhouette_samples(X, y_pred, metric="euclidean")
     # print('每個點的輪廓係數 silhouette_samples :')
     # many print(silhouette_vals)
 

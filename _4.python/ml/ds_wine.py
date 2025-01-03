@@ -66,6 +66,7 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
+import json
 import sklearn.linear_model
 from sklearn import datasets
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
@@ -81,7 +82,7 @@ from sklearn.tree import DecisionTreeClassifier
 
 
 def show():
-    plt.show()
+    # plt.show()
     pass
 
 
@@ -241,6 +242,7 @@ print(df.describe())
 print("------------------------------")  # 30個
 
 print("使用 scatter_matrix 1")
+
 # pandas 提供了 scatter_matrix()函數，方便由DataFrame繪製散佈圖
 from pandas.plotting import scatter_matrix
 
@@ -404,9 +406,7 @@ print(df_y)
 #7.練習7：建立線性迴歸的模型sklearn model方法：（3步驟）
 #1.步驟1：先建立數學模型(邏輯斯模型logistic regression model)
 
-import sklearn.linear_model as lm
-
-model = lm.LinearRegression())
+model = sklearn.linear_model.LinearRegression())
 
 #2.步驟2：讓模型model學習歷史數據
 
@@ -432,9 +432,8 @@ winde.target，有三種酒類
 """
 
 # 1.步驟1：先建立數學模型(邏輯斯模型logistic regression model)
-import sklearn.linear_model as lm
 
-model = lm.LogisticRegression()
+model = sklearn.linear_model.LogisticRegression()
 
 # 2.步驟2：讓模型model學習歷史數據
 model.fit(df_x, df_y)  # 學習訓練.fit
@@ -1275,8 +1274,6 @@ X, y = wine.data, wine.target
 # 資料分割
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
-import json
-
 clf = DecisionTreeClassifier()
 
 output = clf.fit(X_train, y_train)  # 學習訓練.fit
@@ -1319,12 +1316,10 @@ plot_tree(clf, feature_names=feature_names)
 show()
 
 # 使用 graphviz 繪製圖形
-"""
-安裝
-    安裝 graphviz (https://graphviz.org/download/)
-    將安裝路徑的bin加入環境變數Path中(C:\Program Files (x86)\Graphviz2.XX\bin)
-    pip install graphviz pydotplus
-"""
+# 安裝 graphviz (https://graphviz.org/download/)
+# 將安裝路徑的bin加入環境變數Path中(C:\Program Files (x86)\Graphviz2.XX\bin)
+# pip install graphviz pydotplus
+
 from pydotplus import graph_from_dot_data
 from sklearn.tree import export_graphviz
 
