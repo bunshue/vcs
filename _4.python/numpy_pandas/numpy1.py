@@ -2999,6 +2999,72 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
+sys.exit()
+
+print("------------------------------------------------------------")  # 60個
+
 
 
 print("------------------------------------------------------------")  # 60個
+
+
+
+# numpy的allclose方法，比较两个array是不是每一元素都相等，默认在1e-05的误差范围内
+
+a = np.random.randn(9, 6)
+b = np.random.randn(9, 6)
+
+cc = np.allclose(a, b, a, b, a)#可以多個陣列
+print(cc)
+
+cc = np.allclose(a, a)
+print(cc)
+
+
+
+
+
+
+print("column_stack 的使用, 並排合併np陣列")
+N = 10
+experience1 = np.random.normal(size=N)
+experience2 = np.random.normal(size=N)
+print(experience1.shape)
+print(type(experience1))
+
+X = np.column_stack([experience1, experience2])
+print(X.shape)
+
+plt.scatter(X[:,0], X[:,1])
+
+plt.arrow(
+    x=0,
+    y=0,
+    dx=1,
+    dy=1,
+    head_width=0.2,
+    head_length=0.2,
+    linewidth=2,
+    fc="r",
+    ec="r",
+    )
+plt.text(0.5,0.5,"aaaaa",
+        color="r",
+        fontsize=15,
+        horizontalalignment="right",
+        verticalalignment="top",
+    )
+
+plt.show()
+
+
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+

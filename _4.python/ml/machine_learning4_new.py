@@ -48,7 +48,7 @@ from sklearn.decomposition import PCA
 
 
 def show():
-    return
+    # return
     plt.show()
     pass
 
@@ -57,8 +57,124 @@ import warnings
 
 warnings.filterwarnings("once")
 
-np.set_printoptions(precision=2)
+#np.set_printoptions(precision=2) # 設定np計算後的保留位數
 # pd.set_option('precision', 2)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+"""
+Python如何分解SVD(奇異值分解)
+
+在这个示例中，我们首先创建了一个矩阵 ( A )，然后使用numpy.linalg.svd函数对其进行SVD分解。
+函数返回三个矩阵：( U )、( Sigma ) 和 ( V^T )。
+需要注意的是，numpy.linalg.svd返回的 ( Sigma ) 是一个向量，而不是一个对角矩阵。
+
+#一、使用NumPy库的linalg.svd函数
+#二、使用Scipy库的linalg.svd函数
+"""
+
+A = np.array([[1, 0, 0, 0, 2],
+              [0, 0, 3, 0, 0],
+              [0, 0, 0, 0, 0],
+              [0, 4, 0, 0, 0]])
+print("A矩陣 :")
+print(A)
+print(A.shape)
+
+#使用NumPy进行SVD分解
+U, Sigma, VT = np.linalg.svd(A)
+
+#使用Scipy进行SVD分解
+U, Sigma, VT = scipy.linalg.svd(A)
+
+print("U矩阵 :")
+print(U)
+print(U.shape)
+
+print("Sigma对角矩阵 :")
+print(Sigma)
+print(Sigma.shape)
+
+print("VT矩阵 :")
+print(VT)
+print(VT.shape)
+
+"""
+#五、SVD分解的应用
+5.1 数据降维
+SVD在数据降维中有广泛的应用。
+通过SVD分解，我们可以将高维数据映射到低维空间，从而减少计算复杂度和存储空间。
+以下是一个使用SVD进行数据降维的示例：
+"""
+from sklearn.decomposition import TruncatedSVD
+
+X = np.random.rand(100, 50)
+
+#使用TruncatedSVD进行数据降维
+svd = TruncatedSVD(n_components=10)
+
+X_reduced = svd.fit_transform(X)
+
+print("原始数据形状：", X.shape)
+print("降维后数据形状：", X_reduced.shape)
+
+
+"""
+5.2 图像压缩
+SVD在图像压缩中也有重要应用。
+通过SVD分解，我们可以将图像数据表示为低秩矩阵，从而减少存储空间和传输带宽。
+以下是一个使用SVD进行图像压缩的示例：
+"""
+
+from skimage import io
+
+#读取图像
+#filename = 'C:/_git/vcs/_1.data/______test_files1/ims01.bmp'
+filename = "data/circle.bmp"
+image = io.imread(filename, as_gray=True)
+
+#使用NumPy进行SVD分解
+U, Sigma, VT = np.linalg.svd(image)
+
+#选择前k个奇异值进行图像压缩
+k = 50
+
+compressed_image = np.dot(U[:, :k], np.dot(np.diag(Sigma[:k]), VT[:k, :]))
+
+#显示原图和压缩后的图像
+plt.subplot(1, 2, 1)
+plt.title('Original Image')
+plt.imshow(image, cmap='gray')
+
+plt.subplot(1, 2, 2)
+plt.title('Compressed Image')
+plt.imshow(compressed_image, cmap='gray')
+
+plt.show()
+
+#在这个示例中，我们首先读取了一张灰度图像，
+#然后使用NumPy的numpy.linalg.svd函数对其进行SVD分解。
+#通过选择前 ( k ) 个奇异值，我们可以重构出压缩后的图像。
+
+"""
+1. 什么是SVD分解？
+SVD分解是奇异值分解（Singular Value Decomposition）的缩写，
+是一种矩阵分解的方法。它将一个矩阵分解为三个矩阵的乘积，
+分别是左奇异矩阵、奇异值矩阵和右奇异矩阵。
+2. 如何在Python中进行SVD分解？
+在Python中，可以使用NumPy库来进行SVD分解。首先，需要导入NumPy库，
+然后使用numpy.linalg.svd()函数进行分解。
+例如，如果有一个矩阵A，可以使用以下代码进行SVD分解：
+A = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+U, S, V = np.linalg.svd(A)
+
+3. SVD分解有什么应用场景？
+SVD分解在数据分析和机器学习中有广泛的应用。
+它可以用于降维，帮助去除数据中的噪声和冗余信息，从而提取出数据的主要特征。
+此外，SVD分解还可以用于图像压缩、推荐系统、文本挖掘等领域。
+通过SVD分解，我们可以对复杂的数据进行简化和分析，从而得到更有用的信息。
+"""
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -633,91 +749,16 @@ plt.title("K=4")
 show()
 
 print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-# decomposition
 print("------------------------------------------------------------")  # 60個
 
 # dataset
-n_samples = 100
-experience = np.random.normal(size=n_samples)
-salary = 1500 + experience + np.random.normal(size=n_samples, scale=0.5)
+N = 100
+experience = np.random.normal(size=N)
+
+salary = 1500 + experience + np.random.normal(size=N, scale=0.5)
+
 X = np.column_stack([experience, salary])
 print(X.shape)
-
-# PCA using SVD
-X -= X.mean(axis=0)  # Centering is required
-U, s, Vh = scipy.linalg.svd(X, full_matrices=False)
-# U : Unitary matrix having left singular vectors as columns.
-#     Of shape (n_samples,n_samples) or (n_samples,n_comps), depending on
-#     full_matrices.
-#
-# s : The singular values, sorted in non-increasing order. Of shape (n_comps,),
-#     with n_comps = min(n_samples, n_features).
-#
-# Vh: Unitary matrix having right singular vectors as rows.
-#     Of shape (n_features, n_features) or (n_comps, n_features) depending
-# on full_matrices.
-
-plt.figure(figsize=(9, 3))
-
-plt.subplot(131)
-plt.scatter(U[:, 0], U[:, 1], s=50)
-plt.axis("equal")
-plt.title("U: Rotated and scaled data")
-
-plt.subplot(132)
-
-# Project data
-PC = np.dot(X, Vh.T)
-plt.scatter(PC[:, 0], PC[:, 1], s=50)
-plt.axis("equal")
-plt.title("XV: Rotated data")
-plt.xlabel("PC1")
-plt.ylabel("PC2")
-
-plt.subplot(133)
-plt.scatter(X[:, 0], X[:, 1], s=50)
-for i in range(Vh.shape[0]):
-    plt.arrow(
-        x=0,
-        y=0,
-        dx=Vh[i, 0],
-        dy=Vh[i, 1],
-        head_width=0.2,
-        head_length=0.2,
-        linewidth=2,
-        fc="r",
-        ec="r",
-    )
-    plt.text(
-        Vh[i, 0],
-        Vh[i, 1],
-        "v%i" % (i + 1),
-        color="r",
-        fontsize=15,
-        horizontalalignment="right",
-        verticalalignment="top",
-    )
-plt.axis("equal")
-plt.ylim(-4, 4)
-
-plt.title("X: original data (v1, v2:PC dir.)")
-plt.xlabel("experience")
-plt.ylabel("salary")
-
-plt.tight_layout()
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# dataset
-n_samples = 100
-experience = np.random.normal(size=n_samples)
-salary = 1500 + experience + np.random.normal(size=n_samples, scale=0.5)
-X = np.column_stack([experience, salary])
 
 # PCA with scikit-learn
 pca = PCA(n_components=2)
@@ -738,6 +779,12 @@ plt.ylabel("PC2 (var=%.2f)" % pca.explained_variance_ratio_[1])
 plt.axis("equal")
 plt.tight_layout()
 
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+"""
 from sklearn import (
     manifold,
     datasets,
@@ -750,24 +797,14 @@ from sklearn import (
 
 # print(__doc__)
 
-digits = datasets.load_digits(n_class=6)
-X = digits.data
-y = digits.target
-n_samples, n_features = X.shape
-n_neighbors = 30
 
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-from sklearn.datasets import fetch_olivetti_faces
+"""
 
 R, C = 2, 3
 n_components = R * C
 image_shape = (64, 64)
 
-faces, _ = fetch_olivetti_faces(return_X_y=True, shuffle=True, random_state=9487)
+faces, _ = sklearn.datasets.fetch_olivetti_faces(return_X_y=True, shuffle=True, random_state=9487)
 
 n_samples, n_features = faces.shape
 
@@ -786,27 +823,24 @@ def plot_gallery(title, images, n_col=C, n_row=R, cmap=plt.cm.gray):
             vmin=-vmax,
             vmax=vmax,
         )
-        plt.xticks(())
-        plt.yticks(())
-    plt.subplots_adjust(0.01, 0.05, 0.99, 0.93, 0.04, 0.0)
+        #plt.xticks(())
+        #plt.yticks(())
+    #plt.subplots_adjust(0.01, 0.05, 0.99, 0.93, 0.04, 0.0)
 
-
-show()
-
-
-print("------------------------------------------------------------")  # 60個
 
 # Preprocessing
-
 # global centering
 faces_centered = faces - faces.mean(axis=0)
-
 # local centering
 faces_centered -= faces_centered.mean(axis=1).reshape(n_samples, -1)
 
-# First centered Olivetti faces
+plot_gallery("Original Olivetti faces", faces[:n_components])
 
+show()
+
+#First centered Olivetti faces
 plot_gallery("First centered Olivetti faces", faces_centered[:n_components])
+show()
 
 pca = decomposition.PCA(n_components=n_components)
 pca.fit(faces_centered)
@@ -846,6 +880,7 @@ class BasicPCA:
         return np.dot(Xc, self.princ_comp_dir.T)
 
 
+# 1. 自建資料 做 PCA
 # dataset
 n_samples = 100
 experience = np.random.normal(size=n_samples)
@@ -861,6 +896,9 @@ basic_pca.fit(X)
 
 print(pca.explained_variance_ratio_)
 # assert np.all(basic_pca.transform(X) == pca.transform(X))
+
+
+# 2. 使用iris資料 做 PCA
 
 # Apply PCA on iris dataset
 
@@ -968,7 +1006,7 @@ plt.axis("equal")
 
 show()
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 k_range = range(1, min(5, D.shape[0] - 1))
 stress = [
@@ -2328,3 +2366,11 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------")  # 30個
+
+
+
+# X -= X.mean(axis=0)  # Centering is required
+
+
+
+

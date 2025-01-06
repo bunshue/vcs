@@ -1,6 +1,9 @@
 """
 數字 資料集
 
+1797個數字圖
+每張圖 8X8 數值範圍0~15
+
 """
 
 print("------------------------------------------------------------")  # 60個
@@ -40,20 +43,131 @@ print("------------------------------------------------------------")  # 60個
 
 
 def show():
-    # plt.show()
+    plt.show()
     pass
 
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+print("數字 基本數據 load_digits()")
+
 digits = datasets.load_digits()
 
-print("shape of raw image data: {0}".format(digits.images.shape))
-print("shape of data: {0}".format(digits.data.shape))
+print('data形狀 :', digits.data.shape)
+print('data影像形狀 :', digits.images.shape)
 
-# print(digits.DESCR) # 查看数据集的说明信息
+#print(digits.DESCR)  # 查看数据集的说明信息
 
+N = len(digits.images)
+print("影像個數 :", N)
+
+indices = np.arange(len(digits.data))
+print(indices)
+
+X = digits.data
+y = digits.target
+print(X.shape)
+print(digits.target)
+
+digits = datasets.load_digits(n_class=6)
+
+X = digits.data
+y = digits.target
+print(X.shape)
+print(digits.target)
+
+
+x = np.arange(10)
+y = np.arange(10)
+print(x)
+print(y)
+
+z = list(zip(x, y))
+print(z)
+
+index = 3
+image = digits.images[index]
+print(image)
+print(image.shape)
+
+# cmap
+plt.subplot(5,8,1)
+plt.imshow(image)
+plt.subplot(5,8,2)
+plt.imshow(image, cmap="hot")
+plt.subplot(5,8,3)
+plt.imshow(image, cmap="cool")
+plt.subplot(5,8,4)
+plt.imshow(image, cmap="hsv")
+plt.subplot(5,8,5)
+plt.imshow(image, cmap="YlGn")
+plt.subplot(5,8,6)
+plt.imshow(image, cmap="Blues")
+plt.subplot(5,8,7)
+plt.imshow(image, cmap="binary")  # 顯示黑白圖片
+plt.subplot(5,8,8)
+plt.imshow(image, cmap="gray")
+plt.subplot(5,8,9)
+plt.imshow(image, cmap="copper")
+plt.subplot(5,8,10)
+plt.imshow(image, cmap="jet")
+plt.subplot(5,8,11)
+plt.imshow(image, cmap="viridis")
+
+
+
+
+
+# interpolation
+plt.subplot(5,8,17)
+plt.imshow(image, interpolation="none")
+plt.subplot(5,8,18)
+plt.imshow(image, interpolation="bicubic")
+plt.subplot(5,8,19)
+plt.imshow(image, interpolation="bilinear")
+plt.subplot(5,8,20)
+plt.imshow(image, interpolation="hamming")
+
+
+# cmap + interpolation
+
+plt.subplot(5,8,24)
+plt.imshow(image, cmap=plt.cm.gray_r, interpolation="nearest")
+plt.subplot(5,8,26)
+plt.imshow(image, cmap=plt.cm.gray_r, interpolation="none")
+plt.subplot(5,8,26)
+plt.imshow(image, cmap=plt.cm.gray, interpolation="none")
+
+plt.subplot(5,8,33)
+plt.imshow(image)
+plt.subplot(5,8,34)
+plt.imshow(image, origin="lower")
+plt.subplot(5,8,35)
+plt.imshow(image * 1.0)
+plt.subplot(5,8,36)
+plt.imshow(image / 255.0)
+plt.subplot(5,8,37)
+plt.imshow(np.clip(image / 200.0, 0, 1))
+
+"""
+plt.imshow(image, interpolation="bilinear", cmap=cm.gray, origin="lower", extent=[-3, 3, -3, 3])
+plt.imshow(image, cmap=plt.cm.gray, interpolation="nearest", extent=extent)
+plt.imshow(image, cmap=plt.cm.viridis, alpha=0.9, interpolation="bilinear", extent=extent)
+plt.imshow(image, extent=extent, origin="lower")
+plt.imshow(image, extent=extent, cmap=cm.gray, origin="lower")
+plt.imshow(image, clim=(0, 175))
+plt.imshow(np.abs(xx), extent=[-10, 10, -10, 10], cmap="gray")
+plt.imshow(image, extent=extent)
+plt.imshow(image, alpha=0.8, interpolation="bilinear", extent=extent)
+"""
+
+show()
+
+sys.exit()
+
+index=0
+print('看第', index,'張圖')
 plt.matshow(digits.images[0], cmap=plt.cm.gray)
 
 show()
@@ -203,6 +317,7 @@ print(clf.predict_proba(Xtest[4].reshape(1, -1)))
 """ no joblib
 print('保存模型参数')
 from sklearn.externals import joblib
+
 joblib.dump(clf, 'digits_svm.pkl')
 
 print('导入模型参数，直接进行预测')
@@ -277,7 +392,8 @@ def format_plot(ax, x_label, y_label, title):
 
 
 # PCA降維
-from sklearn import decomposition, manifold
+from sklearn import decomposition
+from sklearn import manifold
 
 X_pca = decomposition.TruncatedSVD(n_components=2).fit_transform(X)
 
@@ -286,6 +402,8 @@ plot_embedding(ax, X_pca)
 format_plot(ax, "", "", "PCA")
 
 show()
+
+sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
