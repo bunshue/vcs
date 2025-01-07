@@ -91,6 +91,8 @@ image = digits.images[index]
 print(image)
 print(image.shape)
 
+plt.figure(figsize=(12, 8))
+
 # cmap
 plt.subplot(5,8,1)
 plt.imshow(image)
@@ -132,11 +134,11 @@ plt.imshow(image, interpolation="hamming")
 
 # cmap + interpolation
 
-plt.subplot(5,8,24)
+plt.subplot(5,8,25)
 plt.imshow(image, cmap=plt.cm.gray_r, interpolation="nearest")
 plt.subplot(5,8,26)
 plt.imshow(image, cmap=plt.cm.gray_r, interpolation="none")
-plt.subplot(5,8,26)
+plt.subplot(5,8,27)
 plt.imshow(image, cmap=plt.cm.gray, interpolation="none")
 
 plt.subplot(5,8,33)
@@ -161,6 +163,8 @@ plt.imshow(np.abs(xx), extent=[-10, 10, -10, 10], cmap="gray")
 plt.imshow(image, extent=extent)
 plt.imshow(image, alpha=0.8, interpolation="bilinear", extent=extent)
 """
+
+plt.tight_layout()
 
 show()
 
