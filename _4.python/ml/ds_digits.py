@@ -77,107 +77,71 @@ y = digits.target
 print(X.shape)
 print(digits.target)
 
-
-x = np.arange(10)
-y = np.arange(10)
-print(x)
-print(y)
-
-z = list(zip(x, y))
-print(z)
-
 index = 3
 image = digits.images[index]
 print(image)
 print(image.shape)
 
-plt.figure(figsize=(12, 8))
-
-# cmap
-plt.subplot(5,8,1)
-plt.imshow(image)
-plt.subplot(5,8,2)
-plt.imshow(image, cmap="hot")
-plt.subplot(5,8,3)
-plt.imshow(image, cmap="cool")
-plt.subplot(5,8,4)
-plt.imshow(image, cmap="hsv")
-plt.subplot(5,8,5)
-plt.imshow(image, cmap="YlGn")
-plt.subplot(5,8,6)
-plt.imshow(image, cmap="Blues")
-plt.subplot(5,8,7)
-plt.imshow(image, cmap="binary")  # 顯示黑白圖片
-plt.subplot(5,8,8)
-plt.imshow(image, cmap="gray")
-plt.subplot(5,8,9)
-plt.imshow(image, cmap="copper")
-plt.subplot(5,8,10)
-plt.imshow(image, cmap="jet")
-plt.subplot(5,8,11)
-plt.imshow(image, cmap="viridis")
-
-
-
-
-
-# interpolation
-plt.subplot(5,8,17)
-plt.imshow(image, interpolation="none")
-plt.subplot(5,8,18)
-plt.imshow(image, interpolation="bicubic")
-plt.subplot(5,8,19)
-plt.imshow(image, interpolation="bilinear")
-plt.subplot(5,8,20)
-plt.imshow(image, interpolation="hamming")
-
-
-# cmap + interpolation
-
-plt.subplot(5,8,25)
-plt.imshow(image, cmap=plt.cm.gray_r, interpolation="nearest")
-plt.subplot(5,8,26)
-plt.imshow(image, cmap=plt.cm.gray_r, interpolation="none")
-plt.subplot(5,8,27)
-plt.imshow(image, cmap=plt.cm.gray, interpolation="none")
-
-plt.subplot(5,8,33)
-plt.imshow(image)
-plt.subplot(5,8,34)
-plt.imshow(image, origin="lower")
-plt.subplot(5,8,35)
-plt.imshow(image * 1.0)
-plt.subplot(5,8,36)
-plt.imshow(image / 255.0)
-plt.subplot(5,8,37)
-plt.imshow(np.clip(image / 200.0, 0, 1))
-
-"""
-plt.imshow(image, interpolation="bilinear", cmap=cm.gray, origin="lower", extent=[-3, 3, -3, 3])
-plt.imshow(image, cmap=plt.cm.gray, interpolation="nearest", extent=extent)
-plt.imshow(image, cmap=plt.cm.viridis, alpha=0.9, interpolation="bilinear", extent=extent)
-plt.imshow(image, extent=extent, origin="lower")
-plt.imshow(image, extent=extent, cmap=cm.gray, origin="lower")
-plt.imshow(image, clim=(0, 175))
-plt.imshow(np.abs(xx), extent=[-10, 10, -10, 10], cmap="gray")
-plt.imshow(image, extent=extent)
-plt.imshow(image, alpha=0.8, interpolation="bilinear", extent=extent)
-"""
-
-plt.tight_layout()
-
-show()
-
-sys.exit()
-
-index=0
 print('看第', index,'張圖')
-plt.matshow(digits.images[0], cmap=plt.cm.gray)
+#plt.matshow(image, cmap=plt.cm.gray) same as imshow
+plt.imshow(image, cmap=plt.cm.gray)
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+digits = datasets.load_digits()
+
+# 把数据所代表的图片显示出来
+images_and_labels = list(zip(digits.images, digits.target))
+plt.figure(figsize=(8, 6))
+for index, (image, label) in enumerate(images_and_labels[:8]):
+    plt.subplot(2, 4, index + 1)
+    plt.imshow(image, cmap=plt.cm.gray_r, interpolation="nearest")
+    plt.title("Digit: %i" % label, fontsize=20)
+    plt.axis("off")
 
 show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
+print('畫出前100張圖')
+
+plt.figure(figsize=(8, 6))
+
+digits = datasets.load_digits(n_class=10)
+
+X = digits.data
+y = digits.target
+
+#n_samples, n_features = X.shape
+#n_neighbors = 30
+
+print(X.shape)
+print(y.shape)
+
+for i in range(100):
+    plt.subplot(10, 10, i + 1)
+    plt.imshow(digits.data[i].reshape(8, 8), cmap=plt.cm.gray)
+    plt.axis("off")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 
 """
 from sklearn.manifold import TSNE
@@ -215,60 +179,7 @@ print(classification_report(expected, predicted))
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-import matplotlib as mpl
-from IPython.core.pylabtools import figsize
-
-figsize(8, 6)
-plt.style.use("ggplot")
-colors = [
-    "#348ABD",
-    "#A60628",
-    "#7A68A6",
-    "#467821",
-    "#D55E00",
-    "#CC79A7",
-    "#56B4E9",
-    "#009E73",
-    "#F0E442",
-    "#0072B2",
-]
-
-plt.cmap = mpl.colors.ListedColormap(colors)
-# plt.rcParams['savefig.dpi'] = 300
-# plt.rcParams['figure.dpi'] = 300
-
-digits = datasets.load_digits(n_class=10)
-
-X = digits.data
-y = digits.target
-n_samples, n_features = X.shape
-n_neighbors = 30
-
-print(X.shape)
-print(y.shape)
-
-for i in range(100):
-    plt.subplot(10, 10, i + 1)
-    plt.imshow(digits.data[i].reshape(8, 8), cmap=plt.cm.gray)
-    plt.axis("off")
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 digits = datasets.load_digits()
-
-# 把数据所代表的图片显示出来
-images_and_labels = list(zip(digits.images, digits.target))
-plt.figure(figsize=(8, 6))
-for index, (image, label) in enumerate(images_and_labels[:8]):
-    plt.subplot(2, 4, index + 1)
-    plt.axis("off")
-    plt.imshow(image, cmap=plt.cm.gray_r, interpolation="nearest")
-    plt.title("Digit: %i" % label, fontsize=20)
-
-show()
 
 # 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
 Xtrain, Xtest, Ytrain, Ytest = train_test_split(
@@ -329,7 +240,6 @@ clf = joblib.load('digits_svm.pkl')
 Ypred = clf.predict(Xtest)
 print(clf.score(Xtest, Ytest))
 """
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -339,23 +249,6 @@ from sklearn import svm
 svc = svm.SVC(gamma=0.001, C=100.0)
 
 digits = datasets.load_digits()
-
-
-def plts():
-    # 显示要识别的数字图片
-    plt.subplot(321)
-    plt.imshow(digits.images[1791], cmap=plt.cm.gray_r, interpolation="nearest")
-    plt.subplot(322)
-    plt.imshow(digits.images[1792], cmap=plt.cm.gray_r, interpolation="nearest")
-    plt.subplot(323)
-    plt.imshow(digits.images[1793], cmap=plt.cm.gray_r, interpolation="nearest")
-    plt.subplot(324)
-    plt.imshow(digits.images[1794], cmap=plt.cm.gray_r, interpolation="nearest")
-    plt.subplot(325)
-    plt.imshow(digits.images[1795], cmap=plt.cm.gray_r, interpolation="nearest")
-    plt.subplot(326)
-    plt.imshow(digits.images[1796], cmap=plt.cm.gray_r, interpolation="nearest")
-    show()
 
 
 def svms():
@@ -369,11 +262,38 @@ result = svms()
 
 duibi = digits.target[1791:1797]
 print("识别的数字: {}\n实际的结果: {}".format(result, list(duibi)))
-plts()
+
+# 显示要识别的数字图片
+plt.subplot(321)
+plt.imshow(digits.images[1791], cmap=plt.cm.gray_r, interpolation="nearest")
+plt.subplot(322)
+plt.imshow(digits.images[1792], cmap=plt.cm.gray_r, interpolation="nearest")
+plt.subplot(323)
+plt.imshow(digits.images[1793], cmap=plt.cm.gray_r, interpolation="nearest")
+plt.subplot(324)
+plt.imshow(digits.images[1794], cmap=plt.cm.gray_r, interpolation="nearest")
+plt.subplot(325)
+plt.imshow(digits.images[1795], cmap=plt.cm.gray_r, interpolation="nearest")
+plt.subplot(326)
+plt.imshow(digits.images[1796], cmap=plt.cm.gray_r, interpolation="nearest")
+
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+colors = [
+    "#348ABD",
+    "#A60628",
+    "#7A68A6",
+    "#467821",
+    "#D55E00",
+    "#CC79A7",
+    "#56B4E9",
+    "#009E73",
+    "#F0E442",
+    "#0072B2",
+]
 
 def plot_embedding(ax, X):
     x_min, x_max = np.min(X, 0), np.max(X, 0)
@@ -399,6 +319,11 @@ def format_plot(ax, x_label, y_label, title):
 from sklearn import decomposition
 from sklearn import manifold
 
+digits = datasets.load_digits(n_class=10)
+
+X = digits.data
+y = digits.target
+
 X_pca = decomposition.TruncatedSVD(n_components=2).fit_transform(X)
 
 fig, ax = plt.subplots()
@@ -407,10 +332,7 @@ format_plot(ax, "", "", "PCA")
 
 show()
 
-sys.exit()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 embedder = manifold.SpectralEmbedding(
     n_components=2, random_state=0, eigen_solver="arpack"
@@ -425,7 +347,7 @@ mds = manifold.MDS(n_components=2, n_init=1, max_iter=100)
 X_mds = mds.fit_transform(X)
 
 fig, ax = plt.subplots(2, 2)
-figsize(20, 16)
+
 fig.subplots_adjust(left=0.0625, right=0.95, wspace=0.1)
 
 plot_embedding(ax[0, 0], X_pca)
@@ -513,7 +435,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 10_05_scikit-learn_adaBoost
+# scikit-learn_adaBoost
 
 # Bagging演算法測試
 
@@ -525,7 +447,10 @@ digits = datasets.load_digits()
 X = digits["data"]
 y = digits["target"]
 
-plt.imshow(X[4].reshape(8, 8))
+index = 4
+print('看第', index,'張圖')
+plt.imshow(X[index].reshape(8, 8), cmap=plt.cm.gray)
+
 show()
 
 # 個別模型評估
@@ -752,15 +677,8 @@ for i in range(500):
         train_writer.add_summary(train_result, i)
         test_writer.add_summary(test_result, i)
 
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-# 生成手寫阿拉伯數字
-
-digits = datasets.load_digits()
-
-# 顯示前 100 筆手寫阿拉伯數字
 
 
 def plot_digits(data):
@@ -772,6 +690,12 @@ def plot_digits(data):
         im = axi.imshow(data[i].reshape(8, 8), cmap="binary")
         im.set_clim(0, 16)
 
+
+# 生成手寫阿拉伯數字
+
+digits = datasets.load_digits()
+
+# 顯示前 100 筆手寫阿拉伯數字
 
 plot_digits(digits.data)
 show()
@@ -835,3 +759,21 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+
+x = np.arange(10)
+y = np.arange(10)
+print(x)
+print(y)
+
+z = list(zip(x, y))
+print(z)
+
+
+
+plt.style.use("ggplot")
+
+import matplotlib as mpl
+plt.cmap = mpl.colors.ListedColormap(colors)
+# plt.rcParams['savefig.dpi'] = 300
+# plt.rcParams['figure.dpi'] = 300
+

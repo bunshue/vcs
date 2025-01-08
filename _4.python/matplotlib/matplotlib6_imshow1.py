@@ -31,6 +31,10 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
+def show():
+    plt.show()
+    pass
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -114,7 +118,7 @@ plt.title("Blue元素圖像")
 print("------------------------------")  # 30個
 plt.suptitle("")
 plt.tight_layout()
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -174,7 +178,7 @@ plt.subplot(236)
 print("------------------------------")  # 30個
 plt.suptitle("")
 plt.tight_layout()
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -206,7 +210,7 @@ for i in range(1, 5):
 print("------------------------------")  # 30個
 plt.suptitle("")
 plt.tight_layout()
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -326,7 +330,7 @@ plt.colorbar(im, cax=cax)
 print("------------------------------")  # 30個
 plt.suptitle("")
 plt.tight_layout()
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -383,7 +387,7 @@ plt.subplot(236)
 print("------------------------------")  # 30個
 plt.suptitle("")
 plt.tight_layout()
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -482,7 +486,7 @@ plt.imshow(b)
 print("------------------------------")  # 30個
 plt.suptitle("")
 plt.tight_layout()
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -548,7 +552,7 @@ plt.subplot(236)
 print("------------------------------")  # 30個
 plt.suptitle("")
 plt.tight_layout()
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -637,10 +641,93 @@ plt.title("使用 hamming 插值")
 print("------------------------------")  # 30個
 plt.suptitle("")
 plt.tight_layout()
-plt.show()
-
+show()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+image = np.array([[ 0,0,7, 15, 13,1,0,0],
+ [ 0,8, 13,6, 15,4,0,0],
+ [ 0,2,1, 13, 13,0,0,0],
+ [ 0,0,2, 15, 11,1,0,0],
+ [ 0,0,0,1, 12, 12,1,0],
+ [ 0,0,0,0,1, 10,8,0],
+ [ 0,0,8,4,5, 14,9,0],
+ [ 0,0,7, 13, 13,9,0,0]])
+
+plt.figure(figsize=(12, 8))
+
+# cmap
+plt.subplot(5,8,1)
+plt.imshow(image)
+plt.subplot(5,8,2)
+plt.imshow(image, cmap="hot")
+plt.subplot(5,8,3)
+plt.imshow(image, cmap="cool")
+plt.subplot(5,8,4)
+plt.imshow(image, cmap="hsv")
+plt.subplot(5,8,5)
+plt.imshow(image, cmap="YlGn")
+plt.subplot(5,8,6)
+plt.imshow(image, cmap="Blues")
+plt.subplot(5,8,7)
+plt.imshow(image, cmap="binary")  # 顯示黑白圖片
+plt.subplot(5,8,8)
+plt.imshow(image, cmap="gray")
+plt.subplot(5,8,9)
+plt.imshow(image, cmap="copper")
+plt.subplot(5,8,10)
+plt.imshow(image, cmap="jet")
+plt.subplot(5,8,11)
+plt.imshow(image, cmap="viridis")
+
+# interpolation
+plt.subplot(5,8,17)
+plt.imshow(image, interpolation="none")
+plt.subplot(5,8,18)
+plt.imshow(image, interpolation="bicubic")
+plt.subplot(5,8,19)
+plt.imshow(image, interpolation="bilinear")
+plt.subplot(5,8,20)
+plt.imshow(image, interpolation="hamming")
+
+# cmap + interpolation
+
+plt.subplot(5,8,25)
+plt.imshow(image, cmap=plt.cm.gray_r, interpolation="nearest")
+plt.subplot(5,8,26)
+plt.imshow(image, cmap=plt.cm.gray_r, interpolation="none")
+plt.subplot(5,8,27)
+plt.imshow(image, cmap=plt.cm.gray, interpolation="none")
+
+plt.subplot(5,8,33)
+plt.imshow(image)
+plt.subplot(5,8,34)
+plt.imshow(image, origin="lower")
+plt.subplot(5,8,35)
+plt.imshow(image * 1.0)
+plt.subplot(5,8,36)
+plt.imshow(image / 255.0)
+plt.subplot(5,8,37)
+plt.imshow(np.clip(image / 200.0, 0, 1))
+
+"""
+plt.imshow(image, interpolation="bilinear", cmap=cm.gray, origin="lower", extent=[-3, 3, -3, 3])
+plt.imshow(image, cmap=plt.cm.gray, interpolation="nearest", extent=extent)
+plt.imshow(image, cmap=plt.cm.viridis, alpha=0.9, interpolation="bilinear", extent=extent)
+plt.imshow(image, extent=extent, origin="lower")
+plt.imshow(image, extent=extent, cmap=cm.gray, origin="lower")
+plt.imshow(image, clim=(0, 175))
+plt.imshow(np.abs(xx), extent=[-10, 10, -10, 10], cmap="gray")
+plt.imshow(image, extent=extent)
+plt.imshow(image, alpha=0.8, interpolation="bilinear", extent=extent)
+"""
+
+plt.tight_layout()
+
+show()
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -688,7 +775,7 @@ ax.set_ylabel("水果")
 print("------------------------------------------------------------")  # 60個
 plt.suptitle("")
 fig.tight_layout()
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -707,7 +794,7 @@ image1[:, :, 2] = 0
 print(image1)
 
 plt.imshow(image1)
-plt.show()
+show()
 
 print("建立 0.0 ~ 1.0 的隨機陣列")
 image2 = np.random.random((W, H, D))
@@ -715,7 +802,7 @@ print(image2.shape)
 # print(image2)
 
 plt.imshow(image2)
-plt.show()
+show()
 
 print("建立 0 ~ 255 的 16 X 16 陣列")
 image3 = np.arange(0, 256).reshape(16, 16)
@@ -723,7 +810,7 @@ print(image3.shape)
 # print(image3)
 
 plt.imshow(image3)
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -773,24 +860,24 @@ image[100:200, 400:500] = random_image
 
 plt.imshow(image)
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
 img1 = np.random.randint(0, 256, size=[3, 3], dtype=np.uint8)
 print("img1 = \n", img1)
 plt.imshow(img1)
-plt.show()
+show()
 
 img2 = np.random.randint(0, 256, size=[3, 3], dtype=np.uint8)
 print("img2 = \n", img2)
 plt.imshow(img2)
-plt.show()
+show()
 
 img3 = img1 + img2
 print("img3 = \n", img3)
 plt.imshow(img3)
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -847,7 +934,7 @@ plt.colorbar(axe_img, ax=axes[6])
 for ax in axes:
     ax.set_axis_off()
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -873,7 +960,7 @@ plt.subplot(122)
 plt.imshow(z, extent=extent, cmap=cm.gray, origin="lower")
 plt.colorbar()
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 

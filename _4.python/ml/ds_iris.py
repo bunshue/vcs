@@ -75,7 +75,7 @@ def show():
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
+'''
 print("鳶尾花數據庫 基本數據 load_iris()")
 
 X, y = datasets.load_iris(return_X_y=True)  # 分別回傳兩種資料
@@ -462,6 +462,53 @@ y = pd.DataFrame(y, columns=["Species"])
 df = pd.concat([df, y], axis=1)
 
 print(df.head())
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+'''
+from sklearn.decomposition import PCA
+
+N = 300  # 散點的數量
+
+X = np.random.randint(0, 100, size=(N, 2))  # 產生 3x10 陣列，內容為 100～2000 隨機數字
+print(type(X))
+print(X.shape)
+print(X)
+
+plt.scatter(X[:,0], X[:,1])
+show()
+
+n_components = 2  # 削減後の次元を2に設定
+
+clf = PCA(n_components=n_components)
+
+clf = clf.fit(X)
+
+X2 = clf.transform(X)
+print(X2)  # 変換したデータ
+
+print(X.shape)
+print(X2.shape)
+
+plt.subplot(121)
+plt.scatter(X[:,0], X[:,1])
+#plt.plot(X[:, 0], c='r')
+#plt.plot(X[:, 1], c='g')
+#plt.plot(X[:, 2], c='b')
+#plt.plot(X[:, 3], c='c')
+
+plt.subplot(122)
+plt.scatter(X2[:,0], X2[:,1])
+#plt.plot(X2[:, 0], c='r')
+#plt.plot(X2[:, 1], c='g')
+#plt.plot(X2[:, 2], c='b')
+#plt.plot(X2[:, 3], c='c')
+
+show()
+
+
+sys.exit()
+
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
