@@ -51,7 +51,8 @@ print("------------------------------------------------------------")  # 60個
 
 import joblib
 import sklearn.linear_model
-import tensorflow as tf
+
+# import tensorflow as tf
 from common1 import *
 from sklearn import datasets
 from sklearn import preprocessing
@@ -75,7 +76,7 @@ def show():
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
+
 print("鳶尾花數據庫 基本數據 load_iris()")
 
 X, y = datasets.load_iris(return_X_y=True)  # 分別回傳兩種資料
@@ -352,16 +353,63 @@ y = target["target"]
 
 colmap = np.array(["r", "g", "y"])
 
-plt.figure(figsize=(10, 5))
-
 plt.subplot(121)
-plt.subplots_adjust(hspace=0.5)
 plt.scatter(df["sepal_length"], df["sepal_width"], color=colmap[y])
 plt.xlabel("花萼長度(Sepal Length)")
 plt.ylabel("花萼寬度(Sepal Width)")
 
 plt.subplot(122)
 plt.scatter(df["petal_length"], df["petal_width"], color=colmap[y])
+plt.xlabel("花瓣長度(Petal Length)")
+plt.ylabel("花瓣寬度(Petal Width)")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("讀取csv檔案成df 3")
+filename = "data/iris.csv"
+df = pd.read_csv(filename)
+
+# many print(df)
+
+target_mapping = {"setosa": 0, "versicolor": 1, "virginica": 2}
+Y = df["target"].map(target_mapping)
+colmap = np.array(["r", "g", "y"])
+
+plt.subplot(121)
+plt.scatter(df["sepal_length"], df["sepal_width"], color=colmap[Y])
+plt.xlabel("花萼長度(Sepal Length)")
+plt.ylabel("花萼寬度(Sepal Width)")
+
+plt.subplot(122)
+plt.scatter(df["petal_length"], df["petal_width"], color=colmap[Y])
+plt.xlabel("花瓣長度(Petal Length)")
+plt.ylabel("花瓣寬度(Petal Width)")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("讀取csv檔案成df 4")
+filename = "data/iris.csv"
+df = pd.read_csv(filename)
+
+# many print(df)
+
+target_mapping = {"setosa": 0, "versicolor": 1, "virginica": 2}
+Y = df["target"].map(target_mapping)
+colmap = np.array(["r", "g", "y"])
+
+plt.subplot(121)
+plt.scatter(df["sepal_length"], df["sepal_width"], color=colmap[Y])
+plt.xlabel("花萼長度(Sepal Length)")
+plt.ylabel("花萼寬度(Sepal Width)")
+
+plt.subplot(122)
+plt.scatter(df["petal_length"], df["petal_width"], color=colmap[Y])
 plt.xlabel("花瓣長度(Petal Length)")
 plt.ylabel("花瓣寬度(Petal Width)")
 
@@ -423,34 +471,6 @@ with open("tmp_tree2.dot", "w") as f:
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("讀取csv檔案成df 3")
-filename = "data/iris.csv"
-df = pd.read_csv(filename)
-
-# many print(df)
-
-target_mapping = {"setosa": 0, "versicolor": 1, "virginica": 2}
-Y = df["target"].map(target_mapping)
-colmap = np.array(["r", "g", "y"])
-
-plt.figure(figsize=(10, 5))
-
-plt.subplot(121)
-plt.subplots_adjust(hspace=0.5)
-plt.scatter(df["sepal_length"], df["sepal_width"], color=colmap[Y])
-plt.xlabel("Sepal Length 花萼長")
-plt.ylabel("Sepal Width 花萼寬")
-
-plt.subplot(122)
-plt.scatter(df["petal_length"], df["petal_width"], color=colmap[Y])
-plt.xlabel("Petal Length 花瓣長")
-plt.ylabel("Petal Width 花瓣寬")
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 print("load_iris()轉df")
 iris = datasets.load_iris()
 X = iris.data
@@ -465,19 +485,17 @@ print(df.head())
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
+
+print("PCA 降維度, 4維 => 2維")
 from sklearn.decomposition import PCA
 
-N = 300  # 散點的數量
+N = 500  # 散點的數量
 
-X = np.random.randint(0, 100, size=(N, 2))  # 產生 3x10 陣列，內容為 100～2000 隨機數字
+X = np.random.randint(0, 100, size=(N, 4))  # 產生 N x 4 陣列，內容為 0～100 隨機數字
 print(type(X))
 print(X.shape)
 print(X)
 
-plt.scatter(X[:,0], X[:,1])
-show()
-
 n_components = 2  # 削減後の次元を2に設定
 
 clf = PCA(n_components=n_components)
@@ -490,58 +508,16 @@ print(X2)  # 変換したデータ
 print(X.shape)
 print(X2.shape)
 
-plt.subplot(121)
-plt.scatter(X[:,0], X[:,1])
-#plt.plot(X[:, 0], c='r')
-#plt.plot(X[:, 1], c='g')
-#plt.plot(X[:, 2], c='b')
-#plt.plot(X[:, 3], c='c')
+plt.subplot(221)
+plt.scatter(X[:, 0], X[:, 1])
+plt.subplot(222)
+plt.scatter(X[:, 2], X[:, 3])
 
-plt.subplot(122)
-plt.scatter(X2[:,0], X2[:,1])
-#plt.plot(X2[:, 0], c='r')
-#plt.plot(X2[:, 1], c='g')
-#plt.plot(X2[:, 2], c='b')
-#plt.plot(X2[:, 3], c='c')
+plt.subplot(223)
+plt.scatter(X2[:, 0], X2[:, 1])
 
-show()
-
-
-sys.exit()
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-from sklearn.decomposition import PCA
-
-iris = datasets.load_iris()
-X = iris.data
-y = iris.target  # 資料集目標
-
-n_components = 2  # 削減後の次元を2に設定
-
-clf = PCA(n_components=n_components)
-
-clf = clf.fit(X)
-
-X2 = clf.transform(X)
-print(X2)  # 変換したデータ
-
-print(X.shape)
-print(X2.shape)
-
-plt.subplot(121)
-plt.plot(X[:, 0], c='r')
-plt.plot(X[:, 1], c='g')
-plt.plot(X[:, 2], c='b')
-plt.plot(X[:, 3], c='c')
-
-plt.subplot(122)
-plt.plot(X2[:, 0], c='r')
-plt.plot(X2[:, 1], c='g')
-#plt.plot(X2[:, 2], c='b')
-#plt.plot(X2[:, 3], c='c')
+plt.subplot(224)
+# plt.scatter(X2[:,2], X2[:,3])
 
 show()
 
@@ -554,12 +530,51 @@ iris = datasets.load_iris()
 X = iris.data
 y = iris.target  # 資料集目標
 
+print("設定要分的群數")
 n_components = 3  # ガウス分布の數
+
 clf = GaussianMixture(n_components=n_components)
+
 clf.fit(X)
-print(clf.predict(X))  # クラスを予測
+
+print("預測結果")
+y_pred = clf.predict(X)
+print(y_pred)  # クラスを予測
+
+print("各群的平均")
 print(clf.means_)  # 各ガウス分布の平均
+
+print("各群的分散數")
 print(clf.covariances_)  # 各ガウス分布の分散
+
+# print(X.shape)
+# print(y_pred.shape)
+
+plt.subplot(211)
+plt.scatter(X[:, 0], X[:, 1], c=y)
+
+
+plt.subplot(212)
+plt.scatter(X[:, 0], X[:, 1], c=y_pred)
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("模型篩選特徵")
+
+from sklearn import tree
+
+iris = datasets.load_iris()
+X = iris.data
+y = iris.target  # 資料集目標
+
+clf = tree.DecisionTreeClassifier()  # 決策樹函數學習機
+
+clf = clf.fit(X, y)
+
+print(clf.feature_importances_)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -569,13 +584,6 @@ print("決策樹 (decision tree)")
 from sklearn.tree import DecisionTreeClassifier  # 決策樹函數學習機
 
 X, y = datasets.load_iris(return_X_y=True)
-
-print("鳶尾花花萼和花瓣數據")
-print(X[0:5])
-print(f"分類 : {y[0:5]}")
-
-print(X[0])
-print(y[0])
 
 # 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
 dx_train, dx_test, dy_train, dy_test = train_test_split(X, y, test_size=0.2)
@@ -587,8 +595,16 @@ tree.fit(dx_train, dy_train)
 
 predictions = tree.predict(dx_test)
 
+print(dx_test.shape)
+
+print("predictions")
+print(predictions)
+print(predictions.shape)
+
+print("測試分數 train")
 print(tree.score(dx_train, dy_train))
 
+print("測試分數 test")
 print(tree.score(dx_test, dy_test))
 
 print("------------------------------------------------------------")  # 60個
@@ -610,35 +626,19 @@ forest.fit(dx_train, dy_train)
 
 predictions = forest.predict(dx_test)
 
+print(dx_test.shape)
+
+print("predictions")
+print(predictions)
+print(predictions.shape)
+
+print("測試分數 train")
 print(forest.score(dx_train, dy_train))
 
+print("測試分數 test")
 print(forest.score(dx_test, dy_test))
 
 print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("讀取csv檔案成df 4")
-filename = "data/iris.csv"
-df = pd.read_csv(filename)
-
-# many print(df)
-
-target_mapping = {"setosa": 0, "versicolor": 1, "virginica": 2}
-Y = df["target"].map(target_mapping)
-colmap = np.array(["r", "g", "y"])
-plt.figure(figsize=(10, 5))
-plt.subplot(1, 2, 1)
-plt.subplots_adjust(hspace=0.5)
-plt.scatter(df["sepal_length"], df["sepal_width"], color=colmap[Y])
-plt.xlabel("Sepal Length")
-plt.ylabel("Sepal Width")
-plt.subplot(1, 2, 2)
-plt.scatter(df["petal_length"], df["petal_width"], color=colmap[Y])
-plt.xlabel("Petal Length")
-plt.ylabel("Petal Width")
-
-show()
-
 print("------------------------------------------------------------")  # 60個
 
 from tensorflow.keras.models import Sequential
@@ -687,22 +687,6 @@ print(Y_target)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("模型篩選特徵")
-
-from sklearn import tree
-
-iris = datasets.load_iris()
-X = iris.data
-y = iris.target  # 資料集目標
-
-clf = tree.DecisionTreeClassifier()  # 決策樹函數學習機
-
-clf = clf.fit(X, y)
-
-print(clf.feature_importances_)
-
-print("------------------------------------------------------------")  # 60個
-
 print("數學方法降維")
 
 from sklearn.decomposition import PCA
@@ -735,7 +719,9 @@ clf = PCA(n_components=2)
 
 X2 = clf.fit_transform(df)
 
+print(X.shape)
 print(X2.shape)
+
 plt.scatter(X2[:, 0], X2[:, 1], c=np.array(y), cmap=plt.cm.copper)
 
 show()
@@ -784,22 +770,12 @@ graph = pydotplus.graph_from_dot_data(dot_data.getvalue())
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("切分數據集與交叉驗證")
-
-iris = datasets.load_iris()
-X = iris.data
-y = iris.target  # 資料集目標
-
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
-# 訓練組8成, 測試組2成
-
-# ????
-X_train, X_test = train_test_split(X, test_size=0.2)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
+"""
+萼長 花萼長度(Sepal.Length)(cm)
+萼寬 花萼寬度(Sepal.Width)(cm)
+瓣長 花瓣長度(Petal.Length)(cm)
+瓣寬 花瓣寬度(Petal.Width)(cm)
+"""
 print("讀取csv檔案成df 6")
 filename = "data/Iris2.csv"
 df = pd.read_csv(filename)
@@ -902,7 +878,6 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
 
 """ no clf
 # 圖形化我們的成果
@@ -1065,9 +1040,11 @@ clf = KNN()
 
 clf.fit(X_train_std, y_train)
 
-# 計算準確率
 y_pred = clf.predict(X_test_std)
-print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
+
+print("計算準確率")
+cc = accuracy_score(y_test, y_pred)
+print(f"{cc*100:.2f}%")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1143,9 +1120,11 @@ clf = NaiveBayesClassifier()
 
 clf.fit(X_train, y_train)
 
-# 計算準確率
 y_pred = clf.predict(X_test)
-print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
+
+print("計算準確率")
+cc = accuracy_score(y_test, y_pred)
+print(f"{cc*100:.2f}%")
 # 96.67%
 
 print("------------------------------------------------------------")  # 60個
@@ -1162,13 +1141,16 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 from sklearn.naive_bayes import GaussianNB
 
 clf = GaussianNB()
+
 clf.fit(X_train, y_train)
 
 # 模型評分
 
-# 計算準確率
 y_pred = clf.predict(X_test)
-print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
+
+print("計算準確率")
+cc = accuracy_score(y_test, y_pred)
+print(f"{cc*100:.2f}%")
 # 93.33%
 
 # 使用伯努利單純貝氏分類器
@@ -1178,9 +1160,11 @@ from sklearn.naive_bayes import BernoulliNB
 clf = BernoulliNB()
 clf.fit(X_train, y_train)
 
-# 計算準確率
 y_pred = clf.predict(X_test)
-print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
+
+print("計算準確率")
+cc = accuracy_score(y_test, y_pred)
+print(f"{cc*100:.2f}%")
 # 20.00%
 
 # 使用多項單純貝氏分類器
@@ -1190,9 +1174,11 @@ from sklearn.naive_bayes import MultinomialNB
 clf = MultinomialNB()
 clf.fit(X_train, y_train)
 
-# 計算準確率
 y_pred = clf.predict(X_test)
-print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
+
+print("計算準確率")
+cc = accuracy_score(y_test, y_pred)
+print(f"{cc*100:.2f}%")
 # 80.00%
 
 print("------------------------------------------------------------")  # 60個
@@ -1236,10 +1222,11 @@ clf = AgglomerativeClustering(distance_threshold=0, n_clusters=None)
 
 clf = clf.fit(X)  # 學習訓練.fit
 
-plt.title("Hierarchical Clustering Dendrogram")
 plot_dendrogram(clf, truncate_mode="level", p=3)  # 限制 3 層
 plt.ylabel("歐幾里德距離")
 plt.xlabel("每個集群的筆數")
+plt.title("Hierarchical Clustering Dendrogram")
+
 show()
 
 # 各種距離衡量方式的比較
@@ -1533,10 +1520,11 @@ print("y_test", y_test[:])
 
 plt.plot(history.history["accuracy"])
 plt.plot(history.history["loss"])
-plt.title("model accuracy")
-plt.ylabel("acc & loss")
 plt.xlabel("epoch")
+plt.ylabel("acc & loss")
+plt.title("model accuracy")
 plt.legend(["acc", "loss"], loc="upper left")
+
 show()
 
 print("------------------------------------------------------------")  # 60個
@@ -1646,7 +1634,6 @@ with open("tmp_model_mlp.json", "w") as json_file:
    json_file.write(model.to_json())
 #保存模型權重
 model.save_weights("tmp_model_mlp.h5")
-
 
 #測試
 score = model.evaluate(x_test, y_test2, batch_size=128)
@@ -1763,7 +1750,6 @@ cc = df.equals(df3)
 print(cc)
 """
 
-
 print("------------------------------------------------------------")  # 60個
 
 
@@ -1771,3 +1757,6 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+
+
+plt.subplots_adjust(hspace=0.5)

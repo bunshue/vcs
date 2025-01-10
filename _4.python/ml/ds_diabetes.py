@@ -1027,7 +1027,11 @@ print(cc)
 
 # 驗證
 index = np.argmax(clf.cv_results_["mean_test_score"])
-cc = index, clf.cv_results_["mean_test_score"][index], alphas[math.floor((index - 1) / 2)]
+cc = (
+    index,
+    clf.cv_results_["mean_test_score"][index],
+    alphas[math.floor((index - 1) / 2)],
+)
 print(cc)
 
 cc = clf.best_score_
@@ -1060,7 +1064,9 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 # 建立管線：特徵縮放、特徵萃取、模型訓練
 
 pipe_lr = make_pipeline(
-    sklearn.preprocessing.StandardScaler(), PCA(n_components=5), Lasso(random_state=9487, max_iter=10000)
+    sklearn.preprocessing.StandardScaler(),
+    PCA(n_components=5),
+    Lasso(random_state=9487, max_iter=10000),
 )
 
 pipe_lr.fit(X_train, y_train)  # 學習訓練.fit

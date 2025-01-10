@@ -57,7 +57,7 @@ import warnings
 
 warnings.filterwarnings("once")
 
-#np.set_printoptions(precision=2) # 設定np計算後的保留位數
+# np.set_printoptions(precision=2) # 設定np計算後的保留位數
 # pd.set_option('precision', 2)
 
 print("------------------------------------------------------------")  # 60個
@@ -74,18 +74,15 @@ Python如何分解SVD(奇異值分解)
 #二、使用Scipy库的linalg.svd函数
 """
 
-A = np.array([[1, 0, 0, 0, 2],
-              [0, 0, 3, 0, 0],
-              [0, 0, 0, 0, 0],
-              [0, 4, 0, 0, 0]])
+A = np.array([[1, 0, 0, 0, 2], [0, 0, 3, 0, 0], [0, 0, 0, 0, 0], [0, 4, 0, 0, 0]])
 print("A矩陣 :")
 print(A)
 print(A.shape)
 
-#使用NumPy进行SVD分解
+# 使用NumPy进行SVD分解
 U, Sigma, VT = np.linalg.svd(A)
 
-#使用Scipy进行SVD分解
+# 使用Scipy进行SVD分解
 U, Sigma, VT = scipy.linalg.svd(A)
 
 print("U矩阵 :")
@@ -111,7 +108,7 @@ from sklearn.decomposition import TruncatedSVD
 
 X = np.random.rand(100, 50)
 
-#使用TruncatedSVD进行数据降维
+# 使用TruncatedSVD进行数据降维
 svd = TruncatedSVD(n_components=10)
 
 X_reduced = svd.fit_transform(X)
@@ -129,33 +126,33 @@ SVD在图像压缩中也有重要应用。
 
 from skimage import io
 
-#读取图像
-#filename = 'C:/_git/vcs/_1.data/______test_files1/ims01.bmp'
+# 读取图像
+# filename = 'C:/_git/vcs/_1.data/______test_files1/ims01.bmp'
 filename = "data/circle.bmp"
 image = io.imread(filename, as_gray=True)
 
-#使用NumPy进行SVD分解
+# 使用NumPy进行SVD分解
 U, Sigma, VT = np.linalg.svd(image)
 
-#选择前k个奇异值进行图像压缩
+# 选择前k个奇异值进行图像压缩
 k = 50
 
 compressed_image = np.dot(U[:, :k], np.dot(np.diag(Sigma[:k]), VT[:k, :]))
 
-#显示原图和压缩后的图像
+# 显示原图和压缩后的图像
 plt.subplot(1, 2, 1)
-plt.title('Original Image')
-plt.imshow(image, cmap='gray')
+plt.title("Original Image")
+plt.imshow(image, cmap="gray")
 
 plt.subplot(1, 2, 2)
-plt.title('Compressed Image')
-plt.imshow(compressed_image, cmap='gray')
+plt.title("Compressed Image")
+plt.imshow(compressed_image, cmap="gray")
 
 plt.show()
 
-#在这个示例中，我们首先读取了一张灰度图像，
-#然后使用NumPy的numpy.linalg.svd函数对其进行SVD分解。
-#通过选择前 ( k ) 个奇异值，我们可以重构出压缩后的图像。
+# 在这个示例中，我们首先读取了一张灰度图像，
+# 然后使用NumPy的numpy.linalg.svd函数对其进行SVD分解。
+# 通过选择前 ( k ) 个奇异值，我们可以重构出压缩后的图像。
 
 """
 1. 什么是SVD分解？
@@ -804,7 +801,9 @@ R, C = 2, 3
 n_components = R * C
 image_shape = (64, 64)
 
-faces, _ = sklearn.datasets.fetch_olivetti_faces(return_X_y=True, shuffle=True, random_state=9487)
+faces, _ = sklearn.datasets.fetch_olivetti_faces(
+    return_X_y=True, shuffle=True, random_state=9487
+)
 
 n_samples, n_features = faces.shape
 
@@ -823,9 +822,9 @@ def plot_gallery(title, images, n_col=C, n_row=R, cmap=plt.cm.gray):
             vmin=-vmax,
             vmax=vmax,
         )
-        #plt.xticks(())
-        #plt.yticks(())
-    #plt.subplots_adjust(0.01, 0.05, 0.99, 0.93, 0.04, 0.0)
+        # plt.xticks(())
+        # plt.yticks(())
+    # plt.subplots_adjust(0.01, 0.05, 0.99, 0.93, 0.04, 0.0)
 
 
 # Preprocessing
@@ -838,7 +837,7 @@ plot_gallery("Original Olivetti faces", faces[:n_components])
 
 show()
 
-#First centered Olivetti faces
+# First centered Olivetti faces
 plot_gallery("First centered Olivetti faces", faces_centered[:n_components])
 show()
 
@@ -2368,9 +2367,4 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------")  # 30個
 
 
-
 # X -= X.mean(axis=0)  # Centering is required
-
-
-
-

@@ -54,10 +54,10 @@ print("數字 基本數據 load_digits()")
 
 digits = datasets.load_digits()
 
-print('data形狀 :', digits.data.shape)
-print('data影像形狀 :', digits.images.shape)
+print("data形狀 :", digits.data.shape)
+print("data影像形狀 :", digits.images.shape)
 
-#print(digits.DESCR)  # 查看数据集的说明信息
+# print(digits.DESCR)  # 查看数据集的说明信息
 
 N = len(digits.images)
 print("影像個數 :", N)
@@ -70,7 +70,7 @@ y = digits.target
 print(X.shape)
 print(digits.target)
 
-digits = datasets.load_digits(n_class=6)
+digits = datasets.load_digits(n_class=6)  # 多了 n_class 參數
 
 X = digits.data
 y = digits.target
@@ -82,21 +82,25 @@ image = digits.images[index]
 print(image)
 print(image.shape)
 
-print('看第', index,'張圖')
-#plt.matshow(image, cmap=plt.cm.gray) same as imshow
+print("看第", index, "張圖")
+# plt.matshow(image, cmap=plt.cm.gray) same as imshow
 plt.imshow(image, cmap=plt.cm.gray)
 show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+print("畫出前12張圖")
+
 digits = datasets.load_digits()
 
 # 把数据所代表的图片显示出来
 images_and_labels = list(zip(digits.images, digits.target))
+
 plt.figure(figsize=(8, 6))
-for index, (image, label) in enumerate(images_and_labels[:8]):
-    plt.subplot(2, 4, index + 1)
+
+for index, (image, label) in enumerate(images_and_labels[:12]):
+    plt.subplot(3, 4, index + 1)
     plt.imshow(image, cmap=plt.cm.gray_r, interpolation="nearest")
     plt.title("Digit: %i" % label, fontsize=20)
     plt.axis("off")
@@ -106,20 +110,21 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print('畫出前100張圖')
+print("畫出前100張圖")
 
-plt.figure(figsize=(8, 6))
 
 digits = datasets.load_digits(n_class=10)
 
 X = digits.data
 y = digits.target
 
-#n_samples, n_features = X.shape
-#n_neighbors = 30
+# n_samples, n_features = X.shape
+# n_neighbors = 30
 
 print(X.shape)
 print(y.shape)
+
+plt.figure(figsize=(8, 6))
 
 for i in range(100):
     plt.subplot(10, 10, i + 1)
@@ -132,11 +137,8 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -295,6 +297,7 @@ colors = [
     "#0072B2",
 ]
 
+
 def plot_embedding(ax, X):
     x_min, x_max = np.min(X, 0), np.max(X, 0)
     X = (X - x_min) / (x_max - x_min)
@@ -448,7 +451,7 @@ X = digits["data"]
 y = digits["target"]
 
 index = 4
-print('看第', index,'張圖')
+print("看第", index, "張圖")
 plt.imshow(X[index].reshape(8, 8), cmap=plt.cm.gray)
 
 show()
@@ -769,11 +772,10 @@ z = list(zip(x, y))
 print(z)
 
 
-
 plt.style.use("ggplot")
 
 import matplotlib as mpl
+
 plt.cmap = mpl.colors.ListedColormap(colors)
 # plt.rcParams['savefig.dpi'] = 300
 # plt.rcParams['figure.dpi'] = 300
-
