@@ -3,7 +3,7 @@
 
 聚類算法 KMeans
 
-K-平均演算法（英文：k-means clustering）
+K-平均演算法（k-means clustering）
 
 # 無監督學習
 # 我們介紹一個很好用的 unsupervised learning, 叫 K-Means。
@@ -11,15 +11,17 @@ K-平均演算法（英文：k-means clustering）
 
 K-means Clustering 集群分析
 
-k-平均演算法（英文：k-means clustering，以下簡稱為 k-means）
+k-平均演算法（k-means clustering，以下簡稱為 k-means）
 是一種非監督式的學習方法，其主要的目標是對未標記的資料進行分群。
+
+Silhouette 黑色剪影
 
 輪廓係數（Silhouette Coefficient），是聚類效果好壞的一種評價方式。
     最佳值為1，最差值為-1。接近0的值表示重疊的群集。
     負值通常表示樣本已分配給錯誤的聚類，因為不同的聚類更為相​​似
 
 silhouette_score   所有樣本的 [平均]輪廓係數
-silhouette_samples 所有樣本的     輪廓係數
+silhouette_samples 所有樣本的       輪廓係數
 
 """
 print("------------------------------------------------------------")  # 60個
@@ -321,7 +323,7 @@ do_k_means()
 """
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
+'''
 print("K-平均演算法(KMeans) random資料分3群並畫圖")
 
 N = 50
@@ -333,19 +335,16 @@ clf = KMeans(n_clusters=CLUSTERS)  # K-平均演算法
 
 clf.fit(X)  # 學習訓練.fit
 
-print("計算分群準確性")  # 資料點與所屬質心距離的平方和
-C = clf.cluster_centers_  # 集群中心的座標
+print("演算法 計算分群準確性 :", clf.inertia_)
+print("自己   計算分群準確性")  # 資料點與所屬質心距離的平方和
+
+C = clf.cluster_centers_  # 集群中心的座標, CLUSTERS個座標
 y = clf.labels_  # 群集類別標籤
 ss = 0
 for i in range(len(X)):
     d = (X[i, 0] - C[y[i], 0]) ** 2 + (X[i, 1] - C[y[i], 1]) ** 2
     ss += d
-print("計算分群準確性 :", ss)
-
-# 再預測500點
-N = 500
-X_test = np.random.rand(N, 2)
-y_pred = clf.predict(X_test)
+print("自己   計算分群準確性 :", ss)
 
 plt.figure(num="KMeans分群", figsize=(12, 6))
 
@@ -355,10 +354,34 @@ plt.title("原始資料50點")
 
 plt.subplot(132)
 plt.scatter(X[:, 0], X[:, 1], c=clf.labels_)
+# 標記群集中心
+plt.scatter(
+    clf.cluster_centers_[:, 0],
+    clf.cluster_centers_[:, 1],
+    marker="*",
+    s=200,
+    c="r",
+    alpha=0.8,
+)
 plt.title("用KMeans分成3群")
+
+# 再預測500點
+N = 500
+X_test = np.random.rand(N, 2)
+y_pred = clf.predict(X_test)
 
 plt.subplot(133)
 plt.scatter(X_test[:, 0], X_test[:, 1], c=y_pred)
+# 標記群集中心
+plt.scatter(
+    clf.cluster_centers_[:, 0],
+    clf.cluster_centers_[:, 1],
+    marker="*",
+    s=200,
+    c="r",
+    alpha=0.8,
+)
+
 # 劃分區域ST
 x0 = y0 = np.arange(0, 1.02, 0.02)
 xm, ym = np.meshgrid(x0, y0)
@@ -632,7 +655,7 @@ for k in range(1, 11):
     CLUSTERS = k  # 要分成的群數
     clf = KMeans(n_clusters=CLUSTERS)  # K-平均演算法
     clf.fit(df_X)  # 學習訓練.fit
-    print("分", k, "群, 分群準確性:", clf.inertia_)
+    print("分", k, "群, 分群準確性 :", clf.inertia_)
     distortions.append(clf.inertia_)
 
 # 看視覺化圖表決定參數K值
@@ -838,7 +861,7 @@ for k in range(1, 11):
         random_state=9487,
     )  # K-平均演算法
     clf.fit(X)  # 學習訓練.fit
-    print("分", k, "群, 分群準確性:", clf.inertia_)
+    print("分", k, "群, 分群準確性 :", clf.inertia_)
     distortions.append(clf.inertia_)
 
 # 看視覺化圖表決定參數K值
@@ -853,10 +876,11 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 使用 Silhouette 輪廓分析 找出最佳分群數目K
+print("使用 Silhouette 輪廓分析 找出最佳分群數目K")
+
 # Kmeans分群演算法 與 Silhouette 輪廓分析
 
-print("使用較漂亮的資料")
+print("使用較漂亮的資料 6群")
 
 N = 1000  # n_samples, 樣本數
 M = 2  # n_features, 特徵數(資料的維度)
@@ -865,11 +889,43 @@ STD = 0.3  # cluster_std, 資料標準差
 print("make_blobs,", N, "個樣本, ", M, "個特徵, 分成", GROUPS, "群")
 
 X, y = make_blobs(
-    n_samples=N, n_features=M, centers=GROUPS, cluster_std=STD, center_box=(-10.0, 10.0)
-)
+    n_samples=N, n_features=M, centers=GROUPS, cluster_std=STD, center_box=(-10.0, 10.0), random_state=9487)
 
 plt.subplot(221)
-plt.scatter(*zip(*X))
+plt.scatter(*zip(*X), c=y)  # 頗高檔的寫法
+plt.axis([-10, 10, -10, 10])
+plt.title('使用較漂亮的資料 6群')
+
+silhouette_avg = []
+for i in range(2, 11):
+    clf = KMeans(n_clusters=i)  # K-平均演算法
+    clf.fit(X)  # 學習訓練.fit
+    #y_pred = clf.predict(X) same
+    y_pred = clf.labels_  # 群集類別標籤
+    cc = silhouette_score(X, y_pred)  # 計算輪廓係數
+    silhouette_avg.append(cc)
+
+plt.subplot(222)
+plt.plot(range(2, 11), silhouette_avg)
+plt.axis([1, 12, 0.3, 1.0])
+
+# 由圖可以找到最佳的 n_clusters 值
+
+print("使用較不漂亮的資料 6群")
+
+N = 1000  # n_samples, 樣本數
+M = 2  # n_features, 特徵數(資料的維度)
+GROUPS = 6  # centers, 分群數
+STD = 1.3  # cluster_std, 資料標準差
+print("make_blobs,", N, "個樣本, ", M, "個特徵, 分成", GROUPS, "群")
+
+X, y = make_blobs(
+    n_samples=N, n_features=M, centers=GROUPS, cluster_std=STD, center_box=(-10.0, 10.0), random_state=9487)
+
+plt.subplot(223)
+plt.scatter(*zip(*X), c=y)  # 頗高檔的寫法
+plt.axis([-10, 10, -10, 10])
+plt.title('使用較不漂亮的資料 6群')
 
 silhouette_avg = []
 for i in range(2, 11):
@@ -877,47 +933,24 @@ for i in range(2, 11):
     cc = silhouette_score(X, kmeans_fit.labels_)  # 計算輪廓係數
     silhouette_avg.append(cc)
 
-plt.subplot(222)
-plt.plot(range(2, 11), silhouette_avg)
-
-# 由圖可以發現 在n_clusters = 6的時候，分的效果最好，所以可以選定6當作K
-
-print("使用較不漂亮的資料")
-
-N = 1000  # n_samples, 樣本數
-M = 2  # n_features, 特徵數(資料的維度)
-GROUPS = 13  # centers, 分群數
-STD = 1  # cluster_std, 資料標準差
-print("make_blobs,", N, "個樣本, ", M, "個特徵, 分成", GROUPS, "群")
-
-X, y = make_blobs(
-    n_samples=N, n_features=M, centers=GROUPS, cluster_std=STD, center_box=(-10.0, 10.0)
-)
-
-plt.subplot(223)
-plt.scatter(*zip(*X), c=y)
-
-silhouette_avg = []
-for i in range(2, 30):
-    kmeans_fit = KMeans(n_clusters=i).fit(X)
-    cc = silhouette_score(X, kmeans_fit.labels_)  # 計算輪廓係數
-    silhouette_avg.append(cc)
-
 plt.subplot(224)
-plt.plot(range(2, 30), silhouette_avg)
+plt.plot(range(2, 11), silhouette_avg)
+plt.axis([1, 12, 0.3, 1.0])
+
+plt.suptitle("使用 Silhouette 輪廓分析 找出最佳分群數目K")
 
 show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
+'''
 # kmeans_optimization_silhouette
 
 # 輪廓圖分析(Silhouette Analysis)
 
 from matplotlib import cm
 
-N = 150  # n_samples, 樣本數
+N = 30  # n_samples, 樣本數
 M = 2  # n_features, 特徵數(資料的維度)
 GROUPS = 3  # centers, 分群數
 STD = 0.5  # cluster_std, 資料標準差
@@ -947,25 +980,34 @@ clf = KMeans(
 y_pred = clf.fit_predict(X)  # 學習訓練 + 預測 .fit_predict
 
 # 輪廓係數
-cluster_labels = np.unique(y_pred)
+cluster_labels = np.unique(y_pred)#尋找不同的數值出來
+
+print("y_pred :", y_pred)
+print("cluster_labels :", cluster_labels)
+
 n_clusters = cluster_labels.shape[0]
 print("n_clusters =", n_clusters)
 
 silhouette_vals = silhouette_samples(X, y_pred, metric="euclidean")
 print("每個點的輪廓係數 silhouette_samples :")
-# many print(silhouette_vals)
+print(silhouette_vals)
 print("共", len(y_pred), "點")
+print("平均輪廓係數 :", silhouette_vals.mean())
 
 # 繪製輪廓圖
 
+print("cluster_labels :", cluster_labels)
 # 輪廓圖
 y_ax_lower, y_ax_upper = 0, 0
 yticks = []
 for i, c in enumerate(cluster_labels):
+    print("i =", i)
+    print("c =", c)
     c_silhouette_vals = silhouette_vals[y_pred == c]
     c_silhouette_vals.sort()
     y_ax_upper += len(c_silhouette_vals)
     color = cm.jet(float(i) / n_clusters)
+    print("aaaaaa", y_ax_lower, y_ax_upper)
     plt.barh(
         range(y_ax_lower, y_ax_upper),
         c_silhouette_vals,
@@ -976,7 +1018,7 @@ for i, c in enumerate(cluster_labels):
     yticks.append((y_ax_lower + y_ax_upper) / 2.0)
     y_ax_lower += len(c_silhouette_vals)
 
-# 輪廓係數平均數的垂直線
+# 輪廓係數平均數的垂直線(紅線垂直線)
 silhouette_avg = np.mean(silhouette_vals)
 plt.axvline(silhouette_avg, color="red", linestyle="--")
 
@@ -2065,6 +2107,35 @@ plt.subplots_adjust(hspace=0.5)
 # 共同抽出
 # 在 clf.fit(X)  # 學習訓練.fit 之後
 print("群集類別標籤(訓練好的結果) :\n", clf.labels_)
-print("集群中心的坐標:", clf.cluster_centers_)
-print("分群準確性:", clf.inertia_)
-print("Distortion: %.2f" % clf.inertia_)
+print("集群中心的坐標 :", clf.cluster_centers_)
+print("分群準確性 :", clf.inertia_)
+print("Distortion : %.2f" % clf.inertia_)
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+x0 = y0 = np.arange(-1.02, 1.02, 0.02)
+xm, ym = np.meshgrid(x0, y0)
+
+Z = xm*xm + ym*ym
+
+plt.contourf(xm, ym, Z, alpha=0.3, cmap="Paired")
+
+plt.title("contourf")
+
+show()
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+
