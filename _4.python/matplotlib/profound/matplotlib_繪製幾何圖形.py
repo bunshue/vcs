@@ -25,12 +25,60 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
+def show():
+    # return
+    plt.show()
+    pass
+
+print("------------------------------------------------------------")  # 60個
+
+import matplotlib.image as img
+filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
+image = img.imread(filename)  # 讀取原始圖像
+
+fig, ax = plt.subplots(1, 1)
+
+fig.subplots_adjust(0, 0, 1, 1, 0, 0)
+
+plt.imshow(image)
+
+tx, ty, r = 100,100,50
+circle = plt.Circle((tx, ty), r, fill=None, alpha=0.5, lw=2, ls="dashed")
+ax.add_artist(circle)
+
+sx, sy, r = 200,200,100
+circle = plt.Circle((sx, sy), r, fill=None, alpha=0.5, lw=2, color="black")
+ax.add_artist(circle)
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+
+circle1 = plt.Circle((7, 9), 1.2, color="#aaaaaa")
+plt.gcf().gca().add_artist(circle1)
+plt.axis([6, 11, 6, 11])
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+
+ax = plt.gca()
+ax.axis("equal")
+c = 10, 10
+r = 8
+ax.add_patch(plt.Circle(c, r, fc="#CCCCCC", lw=3, color="k", alpha=0.5, zorder=1))
+plt.axis([0,20,0,20])
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+
 figure, axes = plt.subplots()  # 建立子圖物件
 circle = plt.Circle((0.5, 0.5), 0.4)  # 繪製圓
 axes.set_aspect("equal")  # 設定座標單位長度相同
 axes.add_artist(circle)  # 將物件加入圖表物件
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -39,7 +87,7 @@ circle = plt.Circle((0.5, 0.5), 0.4, fill=False, linewidth=3, edgecolor="m")  # 
 axes.set_aspect("equal")  # 設定座標單位長度相同
 plt.gcf().gca().add_artist(circle)  # 將物件加入圖表物件
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -48,7 +96,7 @@ circle = plt.Circle((0.5, 0.5), 0.4, fill=False, linewidth=3, edgecolor="m")  # 
 axes.set_aspect("equal")  # 設定座標單位長度相同
 plt.gca().add_artist(circle)  # 將物件加入圖表物件
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -86,7 +134,7 @@ ax[1, 1].axis("equal")
 ax[1, 1].set_title("繪製圓 + 矩形框, 軸長度單位相同\n矩形框內部是藍色")
 plt.tight_layout()
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -102,7 +150,7 @@ patch = Circle((510, 380), radius=180, transform=ax.transData)
 im.set_clip_path(patch)  # 建立剪輯結果
 ax.axis("off")  # 關閉軸標記與刻度
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -118,7 +166,7 @@ axes.add_artist(ellip)  # 將物件加入軸物件
 axes.set_xlim(-3, 3)
 axes.set_ylim(-2, 2)
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -137,7 +185,7 @@ for angle in angles:  # 繪製系列橢圓
 axes.set_xlim(-2.2, 2.2)
 axes.set_ylim(-2.2, 2.2)
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -166,7 +214,7 @@ for e in ells:
 axes.set_xlim(0, 10)
 axes.set_ylim(0, 10)
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -184,7 +232,7 @@ ax.add_artist(rect)  # 將物件加入軸物件
 ax.set_xlim(0, 6)
 ax.set_ylim(0, 4)
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -206,7 +254,7 @@ ax.add_patch(
     )
 )  # 矩形線寬
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -224,7 +272,7 @@ ax.add_patch(
 )  # 矩形線寬
 ax.axis("off")  # 關閉軸標記與刻度
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -248,7 +296,7 @@ ax.add_patch(rect3)  # 將 rect3 加入軸物件
 plt.xlim([-400, 400])
 plt.ylim([-300, 300])
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -303,7 +351,7 @@ for arc in (arc0, arc1, arc2, arc3, arc4):
 ax.axis([0, 4, 0, 3])
 ax.set_aspect(1)  # 1與'equal'效果相同
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -339,7 +387,7 @@ ax.add_patch(wedge4)
 ax.axis([0, 4, 0, 4])
 ax.set_aspect("equal")  #
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -373,9 +421,9 @@ ax.add_patch(wedge2)
 ax.add_patch(wedge3)
 ax.add_patch(wedge4)
 ax.axis([0, 4, 0, 4])
-ax.set_aspect("equal")  #
-plt.show()
+ax.set_aspect("equal")
 
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -401,7 +449,7 @@ ax.set_ylim(0, 6)
 ax.set_aspect("equal")
 ax.grid(True)
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -415,7 +463,7 @@ ax.set_xlim(0, 10)
 ax.set_ylim(0, 6)
 ax.set_aspect("equal")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -435,7 +483,17 @@ ax.xaxis.set_visible(False)
 ax.yaxis.set_visible(False)
 ax.set(xlim=(0, 10), ylim=(0, 10))  # 設定顯示區間
 
-plt.show()
+show()
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
+sys.exit()
+
 
 print("------------------------------------------------------------")  # 60個
 

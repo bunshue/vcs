@@ -1583,13 +1583,37 @@ print(d)  # [4. 5. 6.]
 
 print("------------------------------------------------------------")  # 60個
 
-# 合併
+# 合併陣列
 a = np.array([[1, 2], [3, 4]])
 b = np.array([[5, 6], [7, 8]])
-c = np.concatenate((a, b), axis=0)
-print(c)
-d = np.concatenate((a, b), axis=1)
-print(d)
+print(a)
+print(b)
+
+print("陣列合併, 無參數就是直向合併, axis=0")
+cc = np.concatenate((a, b))
+print(cc)
+
+print("陣列直向合併, axis=0")
+cc = np.concatenate((a, b), axis=0)
+print(cc)
+
+print("陣列橫向合併, axis=1")
+cc = np.concatenate((a, b), axis=1)
+print(cc)
+
+print("陣列橫向合併, axis=1, 多個")
+cc = np.concatenate((a, a, a, b, b), axis=1)
+print(cc)
+
+a = np.array([1, 2, 3])
+print("a=" + str(a))
+
+b = a.copy()
+print("b=a.copy()->" + str(b))
+b.fill(4)
+print("b.fill(0)=" + str(b))
+c = np.concatenate((a, b))
+print("c=np.concatenate((a,b))->" + str(c))
 
 print("------------------------------------------------------------")  # 60個
 
@@ -2915,33 +2939,6 @@ print(b.shape)
 
 print("------------------------------------------------------------")  # 60個
 
-a = np.array([1, 2, 3])
-print("a=" + str(a))
-
-b = a.copy()
-print("b=a.copy()->" + str(b))
-b.fill(4)
-print("b.fill(0)=" + str(b))
-c = np.concatenate((a, b))
-print("c=np.concatenate((a,b))->" + str(c))
-
-print("------------------------------------------------------------")  # 60個
-
-a = np.array([[1, 2], [3, 4]])
-b = np.array([[5, 6], [7, 8]])
-
-c = np.concatenate((a, b))
-print("c=np.concatenate((a,b))->")
-print(c)
-c = np.concatenate((a, b), axis=0)
-print("c=np.concatenate((a,b), axis=0)->")
-print(c)
-c = np.concatenate((a, b), axis=1)
-print("c=np.concatenate((a,b), axis=1)->")
-print(c)
-
-print("------------------------------------------------------------")  # 60個
-
 a = np.array([[1, 2, 3, 4, 5, 6, 7, 8]])
 b = a.reshape(2, 4)
 print(b.shape)
@@ -3004,9 +3001,7 @@ sys.exit()
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
-
 
 
 # numpy的allclose方法，比较两个array是不是每一元素都相等，默认在1e-05的误差范围内
@@ -3014,15 +3009,11 @@ print("------------------------------------------------------------")  # 60個
 a = np.random.randn(9, 6)
 b = np.random.randn(9, 6)
 
-cc = np.allclose(a, b, a, b, a)#可以多個陣列
+cc = np.allclose(a, b, a, b, a)  # 可以多個陣列
 print(cc)
 
 cc = np.allclose(a, a)
 print(cc)
-
-
-
-
 
 
 print("column_stack 的使用, 並排合併np陣列")
@@ -3035,7 +3026,7 @@ print(type(experience1))
 X = np.column_stack([experience1, experience2])
 print(X.shape)
 
-plt.scatter(X[:,0], X[:,1])
+plt.scatter(X[:, 0], X[:, 1])
 
 plt.arrow(
     x=0,
@@ -3047,24 +3038,18 @@ plt.arrow(
     linewidth=2,
     fc="r",
     ec="r",
-    )
-plt.text(0.5,0.5,"aaaaa",
-        color="r",
-        fontsize=15,
-        horizontalalignment="right",
-        verticalalignment="top",
-    )
+)
+plt.text(
+    0.5,
+    0.5,
+    "aaaaa",
+    color="r",
+    fontsize=15,
+    horizontalalignment="right",
+    verticalalignment="top",
+)
 
 plt.show()
 
 
-
-
-
-
 print("------------------------------------------------------------")  # 60個
-
-
-
-
-

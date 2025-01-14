@@ -56,7 +56,7 @@ from sklearn.model_selection import cross_val_score
 # 載入迴歸常見的評估指標
 from sklearn.metrics import mean_squared_error  # 均方誤差 Mean Squared Error (MSE)
 from sklearn.metrics import mean_absolute_error  # 平均絕對誤差 Mean Absolute Error (MAE)
-from sklearn.metrics import r2_score  # R-Squared擬合度, 決定係数
+from sklearn.metrics import r2_score  # R-Squared擬合度, 決定係數
 from sklearn.metrics import accuracy_score  # 正解率
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import roc_curve  # ROC曲線, AUC
@@ -655,15 +655,15 @@ data = [
     [0, 0, 1, 1],
     [0, 0, 0, 1],
 ]
-n_components = 2  # 潜在変数の数
+n_components = 2  # 潛在変數の數
 
 model = TruncatedSVD(n_components=n_components)
 
 model.fit(data)  # 學習訓練.fit
 
 print(model.transform(data))  # 変換したデータ
-print(model.explained_variance_ratio_)  # 寄与率
-print(sum(model.explained_variance_ratio_))  # 累積寄与率
+print(model.explained_variance_ratio_)  # 寄與率
+print(sum(model.explained_variance_ratio_))  # 累積寄與率
 """
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -673,8 +673,8 @@ from sklearn.datasets import samples_generator
 from sklearn.manifold import LocallyLinearEmbedding
 
 data, color = samples_generator.make_swiss_roll(n_samples=1500)
-n_neighbors = 12 # 近傍点の数 
-n_components = 2 # 削減後の次元数
+n_neighbors = 12 # 近傍點の數 
+n_components = 2 # 削減後の次元數
 
 model = LocallyLinearEmbedding(n_neighbors=n_neighbors,
 
@@ -1193,111 +1193,6 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 """
-print("PCA 算法模擬")
-
-A = np.array([[3, 2000], [2, 3000], [4, 5000], [5, 8000], [1, 2000]], dtype="float")
-
-# 數據歸一化
-mean = np.mean(A, axis=0)
-norm = A - mean
-# 數據縮放
-scope = np.max(norm, axis=0) - np.min(norm, axis=0)
-norm = norm / scope
-print(norm)
-
-U, S, V = np.linalg.svd(np.dot(norm.T, norm))
-print(U)
-
-U_reduce = U[:, 0].reshape(2, 1)
-print(U_reduce)
-
-R = np.dot(norm, U_reduce)
-print(R)
-
-Z = np.dot(R, U_reduce.T)
-print(Z)
-
-print(np.multiply(Z, scope) + mean)
-
-print("------------------------------")  # 30個
-
-print("使用 sklearn 包實現")
-
-from sklearn.decomposition import PCA
-from sklearn.pipeline import Pipeline
-
-
-def std_PCA(**argv):
-    scaler = MinMaxScaler()
-    pca = PCA(**argv)
-    pipeline = Pipeline([("scaler", scaler), ("pca", pca)])
-    return pipeline
-
-
-pca = std_PCA(n_components=1)
-R2 = pca.fit_transform(A)
-print(R2)
-
-print(pca.inverse_transform(R2))
-
-print("------------------------------")  # 30個
-
-print("降維及恢復示意圖")
-
-plt.figure(figsize=(8, 8))
-
-plt.title("Physcial meanings of PCA")
-
-ymin = xmin = -1
-ymax = xmax = 1
-plt.xlim(xmin, xmax)
-plt.ylim(ymin, ymax)
-ax = plt.gca()  # gca 代表當前坐標軸，即 'get current axis'
-ax.spines["right"].set_color("none")  # 隱藏坐標軸
-ax.spines["top"].set_color("none")
-
-plt.scatter(norm[:, 0], norm[:, 1], marker="s", c="b")
-plt.scatter(Z[:, 0], Z[:, 1], marker="o", c="r")
-plt.arrow(0, 0, U[0][0], U[1][0], color="r", linestyle="-")
-plt.arrow(0, 0, U[0][1], U[1][1], color="r", linestyle="--")
-plt.annotate(
-    r"$U_{reduce} = u^{(1)}$",
-    xy=(U[0][0], U[1][0]),
-    xycoords="data",
-    xytext=(U_reduce[0][0] + 0.2, U_reduce[1][0] - 0.1),
-    fontsize=10,
-    arrowprops=dict(arrowstyle="->", connectionstyle="arc3,rad=.2"),
-)
-plt.annotate(
-    r"$u^{(2)}$",
-    xy=(U[0][1], U[1][1]),
-    xycoords="data",
-    xytext=(U[0][1] + 0.2, U[1][1] - 0.1),
-    fontsize=10,
-    arrowprops=dict(arrowstyle="->", connectionstyle="arc3,rad=.2"),
-)
-plt.annotate(
-    r"raw data",
-    xy=(norm[0][0], norm[0][1]),
-    xycoords="data",
-    xytext=(norm[0][0] + 0.2, norm[0][1] - 0.2),
-    fontsize=10,
-    arrowprops=dict(arrowstyle="->", connectionstyle="arc3,rad=.2"),
-)
-plt.annotate(
-    r"projected data",
-    xy=(Z[0][0], Z[0][1]),
-    xycoords="data",
-    xytext=(Z[0][0] + 0.2, Z[0][1] - 0.1),
-    fontsize=10,
-    arrowprops=dict(arrowstyle="->", connectionstyle="arc3,rad=.2"),
-)
-
-show()
-"""
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-"""
 X, y = make_blobs(
     n_samples=200,
     n_features=2,
@@ -1709,18 +1604,18 @@ Y = dataset.iloc[:, 4].values
 X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.2)
 # 訓練組8成, 測試組2成
 
-# 特征缩放 Feature Scaling
+# 特征縮放 Feature Scaling
 scaler = StandardScaler()
 X_train = scaler.fit_transform(X_train)  # STD特徵縮放
 X_test = scaler.transform(X_test)  # STD特徵縮放
 
-# 第二步：逻辑回归模型
+# 第二步：邏輯回歸模型
 
-# 该项工作的库将会是一个线性模型库，之所以被称为线性是因为逻辑回归是一个线性分类器，
-# 这意味着我们在二维空间中，我们两类用户（购买和不购买）将被一条直线分割。
-# 然后导入逻辑回归类。下一步我们将创建该类的对象，它将作为我们训练集的分类器。
+# 該項工作的庫將會是一個線性模型庫，之所以被稱為線性是因為邏輯回歸是一個線性分類器，
+# 這意味著我們在二維空間中，我們兩類用戶（購買和不購買）將被一條直線分割。
+# 然后導入邏輯回歸類。下一步我們將創建該類的對象，它將作為我們訓練集的分類器。
 
-# 将逻辑回归应用于训练集
+# 將邏輯回歸應用于訓練集
 # Fitting Logistic Regression to the Training set
 
 classifier = LogisticRegression()
@@ -1728,17 +1623,17 @@ classifier = LogisticRegression()
 classifier.fit(X_train, y_train)  # 學習訓練.fit
 
 # Predicting the Test set results
-# 第3步：预测
-# 预测测试集结果
+# 第3步：預測
+# 預測測試集結果
 
 y_pred = classifier.predict(X_test)
 
-# 第4步：评估预测
+# 第4步：評估預測
 
-# 我们预测了测试集。 现在我们将评估逻辑回归模型是否正确的学习和理解。
-# 因此这个混淆矩阵将包含我们模型的正确和错误的预测。
+# 我們預測了測試集。 現在我們將評估邏輯回歸模型是否正確的學習和理解。
+# 因此這個混淆矩陣將包含我們模型的正確和錯誤的預測。
 
-# 生成混淆矩阵(Confusion Matrix)
+# 生成混淆矩陣(Confusion Matrix)
 cm = confusion_matrix(y_test, y_pred)
 
 print(cm)  # print confusion_matrix
@@ -1908,7 +1803,7 @@ y = dataset.iloc[:, 4].values
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 # 訓練組8成, 測試組2成
 
-# Feature Scaling 特征缩放
+# Feature Scaling 特征縮放
 scaler = StandardScaler()
 X_train = scaler.fit_transform(X_train)  # STD特徵縮放
 X_test = scaler.transform(X_test)  # STD特徵縮放
@@ -1924,7 +1819,7 @@ classifier.fit(X_train, y_train)  # 學習訓練.fit
 # Predicting the Test set results
 y_pred = classifier.predict(X_test)
 
-# 生成混淆矩阵(Confusion Matrix)，也称作误差矩阵
+# 生成混淆矩陣(Confusion Matrix)，也稱作誤差矩陣
 
 cm = confusion_matrix(y_test, y_pred)
 
@@ -1991,38 +1886,38 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 要先对数据集中的图片进行处理，可能需要进行的任务有图像尺寸统一、颜色处理等
+# 要先對數據集中的圖片進行處理，可能需要進行的任務有圖像尺寸統一、顏色處理等
 
 import cv2
 from tqdm import tqdm
 
-# 数据集的路径
+# 數據集的路徑
 DATADIR = "C:/_git/vcs/_big_files/kagglecatsanddogs_5340_1000/PetImages/"
 DATADIR = "C:/_git/vcs/_big_files/kagglecatsanddogs_5340_800/PetImages/"
 
 CATEGORIES = ["Dog", "Cat"]
 
 for category in CATEGORIES:
-    path = os.path.join(DATADIR, category)  # 创建路径
-    for img in os.listdir(path):  # 迭代遍历每个图片
+    path = os.path.join(DATADIR, category)  # 創建路徑
+    for img in os.listdir(path):  # 迭代遍歷每個圖片
         img_array = cv2.imread(
             os.path.join(path, img), cv2.IMREAD_GRAYSCALE
-        )  # 转化成array
-        plt.imshow(img_array, cmap="gray")  # 转换成图像展示
+        )  # 轉化成array
+        plt.imshow(img_array, cmap="gray")  # 轉換成圖像展示
         show()
 
-        break  # 我们作为演示只展示一张，所以直接break了
+        break  # 我們作為演示只展示一張，所以直接break了
     break  # 同上
 
 
-# 看下array中存储的图像数据：
+# 看下array中存儲的圖像數據：
 # print(img_array)
 
-print("看下array的形状")
+print("看下array的形狀")
 print(img_array.shape)
 
-# 我们可以看到这是一张很大的图片，并且拥有RGB3个通道，这并不是我们想要的，
-# 所以接下来我们将要进行的操作会使图像变小，并且只剩下灰度：
+# 我們可以看到這是一張很大的圖片，并且擁有RGB3個通道，這并不是我們想要的，
+# 所以接下來我們將要進行的操作會使圖像變小，并且只剩下灰度：
 
 print("resize")
 IMG_SIZE = 100
@@ -2031,9 +1926,9 @@ new_array = cv2.resize(img_array, (IMG_SIZE, IMG_SIZE))
 plt.imshow(new_array, cmap="gray")
 show()
 
-# 接下来，我们将要创建所有这些培训数据，但是，首先，我们应该留出一些图像进行最终测试。
-# 我将手动创建一个名为Testing的目录，然后在其中创建2个目录，一个用于Dog，一个用于Cat。
-# 从这里开始，我将把Dog和Cat的前15张图像移到训练版本中。确保移动它们，而不是复制。我们将使用它进行最终测试。
+# 接下來，我們將要創建所有這些培訓數據，但是，首先，我們應該留出一些圖像進行最終測試。
+# 我將手動創建一個名為Testing的目錄，然后在其中創建2個目錄，一個用于Dog，一個用于Cat。
+# 從這里開始，我將把Dog和Cat的前15張圖像移到訓練版本中。確保移動它們，而不是復制。我們將使用它進行最終測試。
 
 print("訓練資料")
 training_data = []
@@ -2042,14 +1937,14 @@ training_data = []
 def create_training_data():
     for category in CATEGORIES:
         path = os.path.join(DATADIR, category)
-        class_num = CATEGORIES.index(category)  # 得到分类，其中 0=dog 1=cat
+        class_num = CATEGORIES.index(category)  # 得到分類，其中 0=dog 1=cat
 
         for img in tqdm(os.listdir(path)):
             try:
                 img_array = cv2.imread(os.path.join(path, img), cv2.IMREAD_GRAYSCALE)
-                new_array = cv2.resize(img_array, (IMG_SIZE, IMG_SIZE))  # 大小转换
-                training_data.append([new_array, class_num])  # 加入训练数据中
-            except Exception as e:  # 为了保证输出是整洁的
+                new_array = cv2.resize(img_array, (IMG_SIZE, IMG_SIZE))  # 大小轉換
+                training_data.append([new_array, class_num])  # 加入訓練數據中
+            except Exception as e:  # 為了保證輸出是整潔的
                 pass
             # except OSError as e:
             #    print("OSErrroBad img most likely", e, os.path.join(path,img))
@@ -2057,27 +1952,27 @@ def create_training_data():
             #    print("general exception", e, os.path.join(path,img))
 
 
-'''
+"""
 #以下 久
 create_training_data()
 
 print(len(training_data))
 
-# 我们有大约25,000张图片。
-# 我们要做的一件事是确保我们的数据是平衡的。在这个数据集的情况下，
-# 我可以看到数据集开始时是平衡的。平衡，我的意思是每个班级都有相同数量的例子（相同数量的狗和猫）。
-# 如果不平衡，您要么将类权重传递给模型，以便它可以适当地测量误差，或者通过将较大的集修剪为与较小集相同的大小来平衡样本。
-# 现在数据集中要么全是dog要么全是cat，因此接下来要引入随机：
+# 我們有大約25,000張圖片。
+# 我們要做的一件事是確保我們的數據是平衡的。在這個數據集的情況下，
+# 我可以看到數據集開始時是平衡的。平衡，我的意思是每個班級都有相同數量的例子（相同數量的狗和貓）。
+# 如果不平衡，您要么將類權重傳遞給模型，以便它可以適當地測量誤差，或者通過將較大的集修剪為與較小集相同的大小來平衡樣本。
+# 現在數據集中要么全是dog要么全是cat，因此接下來要引入隨機：
 
 random.shuffle(training_data)
 
-# 我们的training_data是一个列表，这意味着它是可变的，所以它现在很好地改组了。
-# 我们可以通过迭代几个初始样本并打印出类来确认这一点：
+# 我們的training_data是一個列表，這意味著它是可變的，所以它現在很好地改組了。
+# 我們可以通過迭代幾個初始樣本并打印出類來確認這一點：
 
 for sample in training_data[:10]:
     print(sample[1])
 
-# 现在可以看到已经是0、1交替了，我们可以开始我们的模型了：
+# 現在可以看到已經是0、1交替了，我們可以開始我們的模型了：
 
 X = []
 y = []
@@ -2090,7 +1985,7 @@ print(X[0].reshape(-1, IMG_SIZE, IMG_SIZE, 1))
 
 X = np.array(X).reshape(-1, IMG_SIZE, IMG_SIZE, 1)
 
-# 让我们保存这些数据，这样我们就不需要每次想要使用神经网络模型时继续计算它：
+# 讓我們保存這些數據，這樣我們就不需要每次想要使用神經網絡模型時繼續計算它：
 
 pickle_out = open("tmp_X.pickle", "wb")
 pickle.dump(X, pickle_out)
@@ -2107,23 +2002,20 @@ X = pickle.load(pickle_in)
 pickle_in = open("tmp_y.pickle", "rb")
 y = pickle.load(pickle_in)
 
-# 现在我们已经拿出了数据集，我们已经准备好覆盖卷积神经网络，并用我们的数据进行分类。
-# 以上就是这次的关于数据集操作的全部任务。
+# 現在我們已經拿出了數據集，我們已經準備好覆蓋卷積神經網絡，并用我們的數據進行分類。
+# 以上就是這次的關于數據集操作的全部任務。
 
-"""
-基础知识
-基本的CNN结构如下： Convolution(卷积) -> Pooling(池化) -> Convolution -> Pooling -> Fully Connected Layer(全连接层) -> Output
-Convolution（卷积）是获取原始数据并从中创建特征映射的行为。
-Pooling(池化)是下采样，通常以“max-pooling”的形式，我们选择一个区域，然后在该区域中取最大值，这将成为整个区域的新值。
-Fully Connected Layers(全连接层)是典型的神经网络，其中所有节点都“完全连接”。卷积层不像传统的神经网络那样完全连接。
-卷积：我们将采用某个窗口，并在该窗口中查找要素,该窗口的功能现在只是新功能图中的一个像素大小的功能，但实际上我们将有多层功能图。
-接下来，我们将该窗口滑过并继续该过程,继续此过程，直到覆盖整个图像。
-池化：最常见的池化形式是“最大池化”，其中我们简单地获取窗口中的最大值，并且该值成为该区域的新值。
-全连接层：每个卷积和池化步骤都是隐藏层。在此之后，我们有一个完全连接的层，然后是输出层。
-完全连接的层是典型的神经网络（多层感知器）类型的层，与输出层相同。
-注意
-本次代码中所需的X.pickle和y.pickle为上一篇的输出，路径请根据自己的情况更改！
-"""
+#基礎知識
+#基本的CNN結構如下： Convolution(卷積) -> Pooling(池化) -> Convolution -> Pooling -> Fully Connected Layer(全連接層) -> Output
+#Convolution（卷積）是獲取原始數據并從中創建特征映射的行為。
+#Pooling(池化)是下采樣，通常以“max-pooling”的形式，我們選擇一個區域，然后在該區域中取最大值，這將成為整個區域的新值。
+#Fully Connected Layers(全連接層)是典型的神經網絡，其中所有節點都“完全連接”。卷積層不像傳統的神經網絡那樣完全連接。
+#卷積：我們將采用某個窗口，并在該窗口中查找要素,該窗口的功能現在只是新功能圖中的一個像素大小的功能，但實際上我們將有多層功能圖。
+#接下來，我們將該窗口滑過并繼續該過程,繼續此過程，直到覆蓋整個圖像。
+#池化：最常見的池化形式是“最大池化”，其中我們簡單地獲取窗口中的最大值，并且該值成為該區域的新值。
+#全連接層：每個卷積和池化步驟都是隱藏層。在此之后，我們有一個完全連接的層，然后是輸出層。
+#完全連接的層是典型的神經網絡（多層感知器）類型的層，與輸出層相同。
+#注意 本次代碼中所需的X.pickle和y.pickle為上一篇的輸出，路徑請根據自己的情況更改！
 
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from tensorflow.keras.models import Sequential
@@ -2160,45 +2052,40 @@ model.add(Dense(1))
 model.add(Activation("sigmoid"))
 
 model.compile(loss="binary_crossentropy", optimizer="adam", metrics=["accuracy"])
-'''
+"""
 
-''' 久
+""" 久
 model.fit(X, y, batch_size=32, epochs=3, validation_split=0.3)  # 學習訓練.fit
 
+#在僅僅三個epoches之后，我們的驗證準確率為71％。
+#如果我們繼續進行更多的epoches，我們可能會做得更好，但我們應該討論我們如何知道我們如何做。
+#為了解決這個問題，我們可以使用TensorFlow附帶的TensorBoard，它可以幫助您在訓練模型時可視化模型。
+#我們將在下一個教程中討論TensorBoard以及對我們模型的各種調整！
 
-"""
-在仅仅三个epoches之后，我们的验证准确率为71％。
-如果我们继续进行更多的epoches，我们可能会做得更好，但我们应该讨论我们如何知道我们如何做。
-为了解决这个问题，我们可以使用TensorFlow附带的TensorBoard，它可以帮助您在训练模型时可视化模型。
-我们将在下一个教程中讨论TensorBoard以及对我们模型的各种调整！
-"""
-
-# 这是Python，TensorFlow和Keras教程系列的深度学习基础知识的第4部分。
-# 在这一部分，我们将讨论的是TensorBoard。
-# TensorBoard是一个方便的应用程序，允许您在浏览器中查看模型或模型的各个方面。
-# 我们将TensorBoard与Keras一起使用的方式是通过Keras回调。实际上有很多Keras回调，你可以自己制作。
+# 這是Python，TensorFlow和Keras教程系列的深度學習基礎知識的第4部分。
+# 在這一部分，我們將討論的是TensorBoard。
+# TensorBoard是一個方便的應用程序，允許您在瀏覽器中查看模型或模型的各個方面。
+# 我們將TensorBoard與Keras一起使用的方式是通過Keras回調。實際上有很多Keras回調，你可以自己制作。
 
 from tensorflow.keras.callbacks import TensorBoard
 
 # Using TensorFlow backend.
-# 创建TensorBoard回调对象
+# 創建TensorBoard回調對象
 NAME = "Cats-vs-dogs-CNN"
 
 tensorboard = TensorBoard(log_dir="logs/{}".format(NAME))
 
-"""
-最终，你会希望获得更多的自定义NAME，但现在这样做。
-因此，这将保存模型的训练数据logs/NAME，然后由TensorBoard读取。
-最后，我们可以通过将它添加到.fit方法中来将此回调添加到我们的模型中，
-例如：
-model.fit(X, y,
-          batch_size=32,
-          epochs=3,
-          validation_split=0.3,
-          callbacks=[tensorboard])  # 學習訓練.fit
-请注意，这callbacks是一个列表。您也可以将其他回调传递到此列表中。
-我们的模型还没有定义，所以现在让我们把它们放在一起：
-"""
+#最終，你會希望獲得更多的自定義NAME，但現在這樣做。
+#因此，這將保存模型的訓練數據logs/NAME，然后由TensorBoard讀取。
+#最后，我們可以通過將它添加到.fit方法中來將此回調添加到我們的模型中，
+#例如：
+#model.fit(X, y,
+#          batch_size=32,
+#          epochs=3,
+#          validation_split=0.3,
+#          callbacks=[tensorboard])  # 學習訓練.fit
+#請注意，這callbacks是一個列表。您也可以將其他回調傳遞到此列表中。
+#我們的模型還沒有定義，所以現在讓我們把它們放在一起：
 
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from tensorflow.keras.models import Sequential
@@ -2248,15 +2135,13 @@ model.compile(
 
 model.fit(X, y, batch_size=32, epochs=3, validation_split=0.3, callbacks=[tensorboard])  # 學習訓練.fit
 
-"""
-运行此之后，您应该有一个名为的新目录logs。我们现在可以使用tensorboard从这个目录中可视化初始结果。
-打开控制台，切换到工作目录，然后键入：tensorboard --logdir=logs/。
-您应该看到一个通知：TensorBoard 1.10.0 at http://H-PC:6006 (Press CTRL+C to quit)“h-pc”是您机器的名称。
-打开浏览器并前往此地址。你应该看到类似的东西：
-"""
+#運行此之后，您應該有一個名為的新目錄logs。我們現在可以使用tensorboard從這個目錄中可視化初始結果。
+#打開控制臺，切換到工作目錄，然后鍵入：tensorboard --logdir=logs/。
+#您應該看到一個通知：TensorBoard 1.10.0 at http://H-PC:6006 (Press CTRL+C to quit)“h-pc”是您機器的名稱。
+#打開瀏覽器并前往此地址。你應該看到類似的東西：
 
-# 现在我们可以看到我们的模型随着时间的推移。让我们改变模型中的一些东西。
-# 首先，我们从未在密集层中添加激活。另外，让我们尝试整体较小的模型：
+# 現在我們可以看到我們的模型隨著時間的推移。讓我們改變模型中的一些東西。
+# 首先，我們從未在密集層中添加激活。另外，讓我們嘗試整體較小的模型：
 
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
@@ -2306,20 +2191,17 @@ model.compile(
 
 model.fit(X, y, batch_size=32, epochs=10, validation_split=0.3, callbacks=[tensorboard])  # 學習訓練.fit
 
-# 除此之外，我还改名为NAME = "Cats-vs-dogs-64x2-CNN"。
-# 不要忘记这样做，否则你会偶然附加到你以前的型号的日志，它看起来不太好。我们现在检查TensorBoard：
+# 除此之外，我還改名為NAME = "Cats-vs-dogs-64x2-CNN"。
+# 不要忘記這樣做，否則你會偶然附加到你以前的型號的日志，它看起來不太好。我們現在檢查TensorBoard：
 
+#看起來更好！但是，您可能會立即注意到驗證丟失的形狀。
+#損失是衡量錯誤的標準，看起來很明顯，在我們的第四個時代之后，事情開始變得糟糕。
+#有趣的是，我們的驗證準確性仍然持續，但我想它最終會開始下降。
+#更可能的是，第一件遭受的事情確實是你的驗證損失。這應該提醒你，你幾乎肯定會開始過度適應。
+#這種情況發生的原因是該模型不斷嘗試減少樣本損失。
+#在某些時候，模型不是學習關于實際數據的一般事物，而是開始只記憶輸入數據。
+#如果你繼續這樣做，是的，樣本中的“準確性”會上升，但你的樣本，以及你試圖為模型提供的任何新數據可能會表現得很差。
 """
-看起来更好！但是，您可能会立即注意到验证丢失的形状。
-损失是衡量错误的标准，看起来很明显，在我们的第四个时代之后，事情开始变得糟糕。
-有趣的是，我们的验证准确性仍然持续，但我想它最终会开始下降。
-更可能的是，第一件遭受的事情确实是你的验证损失。这应该提醒你，你几乎肯定会开始过度适应。
-这种情况发生的原因是该模型不断尝试减少样本损失。
-在某些时候，模型不是学习关于实际数据的一般事物，而是开始只记忆输入数据。
-如果你继续这样做，是的，样本中的“准确性”会上升，但你的样本，以及你试图为模型提供的任何新数据可能会表现得很差。
-"""
-'''
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -2335,21 +2217,28 @@ df = pd.DataFrame(
 )
 
 df.columns = ["color", "size", "price", "classlabel"]
+print("原df")
 print(df)
 
 encoder = LabelEncoder()
 
+print("size 字串 轉換 成 數字")
+print('轉換前 df["size"]')
+print(df["size"])
 cc = encoder.fit_transform(df["size"])
+print('轉換後 df["size"]')
 print(cc)
 
 cc = encoder.inverse_transform([1, 0, 2])
+print("逆轉換")
 print(cc)
 
-# Pandas Map
+print("使用 Pandas Map, 對映")
 
 size_mapping = {"XL": 3, "L": 2, "M": 1}
 
 df["size"] = df["size"].map(size_mapping)
+print("轉換後df")
 print(df)
 
 from sklearn.preprocessing import OrdinalEncoder
@@ -2508,467 +2397,6 @@ print("------------------------------------------------------------")  # 60個
 import nltk
 nltk.download('wordnet')
 """
-print("------------------------------------------------------------")  # 60個
-
-# 實現PCA演算法
-
-# 建立測試資料
-
-# 固定隨機種子
-np.random.seed(2342347)
-
-# 第一個類別
-mu_vec1 = np.array([0, 0, 0])  # 平均數
-cov_mat1 = np.array([[1, 0, 0], [0, 1, 0], [0, 0, 1]])  # 共變異矩陣
-class1_sample = np.random.multivariate_normal(mu_vec1, cov_mat1, 20).T
-
-# 第二個類別
-mu_vec2 = np.array([1, 1, 1])  # 平均數
-cov_mat2 = np.array([[1, 0, 0], [0, 1, 0], [0, 0, 1]])  # 共變異矩陣
-class2_sample = np.random.multivariate_normal(mu_vec2, cov_mat2, 20).T
-
-cc = class1_sample.shape, class2_sample.shape
-print(cc)
-
-from mpl_toolkits.mplot3d import Axes3D
-from mpl_toolkits.mplot3d import proj3d
-
-fig = plt.figure(figsize=(8, 8))
-ax = fig.add_subplot(111, projection="3d")
-ax.plot(
-    class1_sample[0, :],
-    class1_sample[1, :],
-    class1_sample[2, :],
-    "o",
-    markersize=8,
-    color="blue",
-    alpha=0.5,
-    label="類別1",
-)
-ax.plot(
-    class2_sample[0, :],
-    class2_sample[1, :],
-    class2_sample[2, :],
-    "^",
-    markersize=8,
-    alpha=0.5,
-    color="red",
-    label="類別2",
-)
-
-plt.title("測試資料")
-ax.legend(loc="upper right")
-
-show()
-
-# 合併資料
-
-all_samples = np.concatenate((class1_sample, class2_sample), axis=1)
-cc = all_samples.shape
-print(cc)
-
-# 計算共變異數矩陣(covariance matrix)
-
-cov_mat = np.cov([all_samples[0, :], all_samples[1, :], all_samples[2, :]])
-print("共變異數矩陣:\n", cov_mat)
-
-# 計算特徵向量(eigenvector)及對應的特徵值(eigenvalue, λ)
-
-# 計算特徵值(eigenvalue)及對應的特徵向量(eigenvector)
-eig_val_sc, eig_vec_sc = np.linalg.eig(cov_mat)
-print("特徵向量:\n", eig_vec_sc)
-print("特徵值:\n", eig_val_sc)
-
-# 繪製特徵向量
-
-from mpl_toolkits.mplot3d import Axes3D
-from mpl_toolkits.mplot3d import proj3d
-from matplotlib.patches import FancyArrowPatch
-
-
-# 繪製箭頭
-class Arrow3D(FancyArrowPatch):
-    def __init__(self, xs, ys, zs, *args, **kwargs):
-        FancyArrowPatch.__init__(self, (0, 0), (0, 0), *args, **kwargs)
-        self._verts3d = xs, ys, zs
-
-    def do_3d_projection(self, renderer=None):
-        xs3d, ys3d, zs3d = self._verts3d
-        xs, ys, zs = proj3d.proj_transform(xs3d, ys3d, zs3d, self.axes.M)
-        self.set_positions((xs[0], ys[0]), (xs[1], ys[1]))
-        return np.min(zs)
-
-
-# 設定 3D 繪圖
-fig = plt.figure(figsize=(7, 7))
-ax = fig.add_subplot(111, projection="3d")
-
-# 繪製特徵向量
-ax.plot(
-    all_samples[0, :],
-    all_samples[1, :],
-    all_samples[2, :],
-    "o",
-    markersize=8,
-    color="green",
-    alpha=0.2,
-)
-[mean_x, mean_y, mean_z] = np.mean(all_samples, axis=1)
-ax.plot([mean_x], [mean_y], [mean_z], "o", markersize=10, color="red", alpha=0.5)
-for v in eig_vec_sc.T:
-    a = Arrow3D(
-        [mean_x, v[0]],
-        [mean_y, v[1]],
-        [mean_z, v[2]],
-        mutation_scale=20,
-        lw=3,
-        arrowstyle="-|>",
-        color="r",
-    )
-    ax.add_artist(a)
-ax.set_xlabel("x_values")
-ax.set_ylabel("y_values")
-ax.set_zlabel("z_values")
-
-show()
-
-# 合併特徵向量及特徵值，針對特徵值降冪排序，挑出前2名。
-
-# 合併特徵向量及特徵值
-eig_pairs = [(np.abs(eig_val_sc[i]), eig_vec_sc[:, i]) for i in range(len(eig_val_sc))]
-
-# 針對特徵值降冪排序
-eig_pairs.sort(key=lambda x: x[0], reverse=True)
-
-# 挑出前2名
-for i in eig_pairs[:2]:
-    print(i[1])
-
-# 座標轉換矩陣
-
-matrix_w = np.hstack((eig_pairs[0][1].reshape(3, 1), eig_pairs[1][1].reshape(3, 1)))
-print("Matrix W:\n", matrix_w)
-
-# 原始資料乘以轉換矩陣，得到主成分
-
-transformed = matrix_w.T.dot(all_samples)
-cc = transformed.shape
-print(cc)
-
-# 繪製轉換後的資料
-
-plt.plot(
-    transformed[0, 0:20],
-    transformed[1, 0:20],
-    "o",
-    markersize=7,
-    color="blue",
-    alpha=0.5,
-    label="class1",
-)
-plt.plot(
-    transformed[0, 20:40],
-    transformed[1, 20:40],
-    "^",
-    markersize=7,
-    color="red",
-    alpha=0.5,
-    label="class2",
-)
-plt.xlim([-4, 4])
-plt.ylim([-4, 4])
-plt.xlabel("x_values")
-plt.ylabel("y_values")
-plt.legend()
-plt.title("Transformed samples with class labels")
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# Scikit-learn LDA實作
-
-X, y = make_circles(n_samples=1_000, factor=0.3, noise=0.05, random_state=0)
-
-# 資料切割
-X_train, X_test, y_train, y_test = train_test_split(X, y, stratify=y, random_state=0)
-
-# 繪製訓練及測試資料
-_, (train_ax, test_ax) = plt.subplots(ncols=2, sharex=True, sharey=True, figsize=(8, 4))
-train_ax.scatter(X_train[:, 0], X_train[:, 1], c=y_train)
-train_ax.set_ylabel("Feature #1")
-train_ax.set_xlabel("Feature #0")
-train_ax.set_title("Training data")
-
-test_ax.scatter(X_test[:, 0], X_test[:, 1], c=y_test)
-test_ax.set_xlabel("Feature #0")
-_ = test_ax.set_title("Testing data")
-show()
-
-# PCA 萃取特徵
-
-from sklearn.decomposition import PCA
-from sklearn.decomposition import KernelPCA
-
-pca = PCA(n_components=2)
-kernel_pca = KernelPCA(
-    n_components=None, kernel="rbf", gamma=10, fit_inverse_transform=True, alpha=0.1
-)
-
-X_test_pca = pca.fit(X_train).transform(X_test)  # 學習訓練.fit
-
-# 繪製原始測試資料及經PCA轉換後的新資料
-
-fig, (orig_data_ax, pca_proj_ax) = plt.subplots(ncols=2, figsize=(10, 4))
-
-orig_data_ax.scatter(X_test[:, 0], X_test[:, 1], c=y_test)
-orig_data_ax.set_ylabel("Feature #1")
-orig_data_ax.set_xlabel("Feature #0")
-orig_data_ax.set_title("Testing data")
-
-pca_proj_ax.scatter(X_test_pca[:, 0], X_test_pca[:, 1], c=y_test)
-pca_proj_ax.set_ylabel("Principal component #1")
-pca_proj_ax.set_xlabel("Principal component #0")
-pca_proj_ax.set_title("Projection of testing data\n using PCA")
-
-# Text(0.5, 1.0, 'Projection of testing data\n using PCA')
-show()
-
-# KernelPCA 萃取特徵
-from sklearn.decomposition import KernelPCA
-
-kernel_pca = KernelPCA(
-    n_components=None, kernel="rbf", gamma=10, fit_inverse_transform=True, alpha=0.1
-)
-
-X_test_kernel_pca = kernel_pca.fit(X_train).transform(X_test)  # 學習訓練.fit
-
-fig, (orig_data_ax, kernel_pca_proj_ax) = plt.subplots(ncols=2, figsize=(10, 4))
-
-orig_data_ax.scatter(X_test[:, 0], X_test[:, 1], c=y_test)
-orig_data_ax.set_ylabel("Feature #1")
-orig_data_ax.set_xlabel("Feature #0")
-orig_data_ax.set_title("Testing data")
-
-kernel_pca_proj_ax.scatter(X_test_kernel_pca[:, 0], X_test_kernel_pca[:, 1], c=y_test)
-kernel_pca_proj_ax.set_ylabel("Principal component #1")
-kernel_pca_proj_ax.set_xlabel("Principal component #0")
-_ = kernel_pca_proj_ax.set_title("Projection of testing data\n using KernelPCA")
-show()
-
-# 載入上/下弦月資料
-
-# X, y = make_moons(n_samples=1_000, noise=0.05, random_state=0)
-X, y = make_moons(n_samples=1000, random_state=123)
-X_train, X_test, y_train, y_test = train_test_split(X, y, stratify=y, random_state=0)
-
-_, (train_ax, test_ax) = plt.subplots(ncols=2, sharex=True, sharey=True, figsize=(8, 4))
-
-train_ax.scatter(X_train[:, 0], X_train[:, 1], c=y_train)
-train_ax.set_ylabel("Feature #1")
-train_ax.set_xlabel("Feature #0")
-train_ax.set_title("Training data")
-
-test_ax.scatter(X_test[:, 0], X_test[:, 1], c=y_test)
-test_ax.set_xlabel("Feature #0")
-_ = test_ax.set_title("Testing data")
-show()
-
-# PCA 萃取特徵
-from sklearn.decomposition import PCA
-from sklearn.decomposition import KernelPCA
-
-pca = PCA(n_components=2)
-kernel_pca = KernelPCA(
-    n_components=None, kernel="rbf", gamma=10, fit_inverse_transform=True, alpha=0.1
-)
-
-X_test_pca = pca.fit(X_train).transform(X_test)  # 學習訓練.fit
-
-fig, (orig_data_ax, pca_proj_ax) = plt.subplots(ncols=2, figsize=(10, 4))
-
-orig_data_ax.scatter(X_test[:, 0], X_test[:, 1], c=y_test)
-orig_data_ax.set_ylabel("Feature #1")
-orig_data_ax.set_xlabel("Feature #0")
-orig_data_ax.set_title("Testing data")
-
-pca_proj_ax.scatter(X_test_pca[:, 0], X_test_pca[:, 1], c=y_test)
-pca_proj_ax.set_ylabel("Principal component #1")
-pca_proj_ax.set_xlabel("Principal component #0")
-pca_proj_ax.set_title("Projection of testing data\n using PCA")
-
-# Text(0.5, 1.0, 'Projection of testing data\n using PCA')
-show()
-
-# KernelPCA 萃取特徵
-from sklearn.decomposition import KernelPCA
-
-kernel_pca = KernelPCA(n_components=None, kernel="rbf", gamma=15)
-
-X_test_kernel_pca = kernel_pca.fit(X_train).transform(X_test)  # 學習訓練.fit
-
-fig, (orig_data_ax, kernel_pca_proj_ax) = plt.subplots(ncols=2, figsize=(10, 4))
-
-orig_data_ax.scatter(X_test[:, 0], X_test[:, 1], c=y_test)
-orig_data_ax.set_ylabel("Feature #1")
-orig_data_ax.set_xlabel("Feature #0")
-orig_data_ax.set_title("Testing data")
-
-kernel_pca_proj_ax.scatter(X_test_kernel_pca[:, 0], X_test_kernel_pca[:, 1], c=y_test)
-kernel_pca_proj_ax.set_ylabel("Principal component #1")
-kernel_pca_proj_ax.set_xlabel("Principal component #0")
-_ = kernel_pca_proj_ax.set_title("Projection of testing data\n using KernelPCA")
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# t-SNE測試
-from sklearn.manifold import TSNE
-from sklearn.decomposition import PCA
-
-# 生成3個集群資料
-
-np.random.seed(10)
-num_points_per_class = 50
-
-# Class 1
-mean1 = [0, 0]
-cov = [[0.1, 0], [0, 0.1]]
-X1 = np.random.multivariate_normal(mean1, cov, num_points_per_class)
-
-# Class 2
-mean2 = [10, 0]
-X2 = np.random.multivariate_normal(mean2, cov, num_points_per_class)
-
-# Class 3
-mean3 = [5, 6]
-X3 = np.random.multivariate_normal(mean3, cov, num_points_per_class)
-
-X = np.concatenate([X1, X2, X3], axis=0)
-cc = X.shape
-print(cc)
-
-# 特徵縮放
-scaler = MinMaxScaler()
-X = scaler.fit_transform(X)
-
-# 繪圖
-
-colors = ["red", "green", "blue"]
-for i in range(3):
-    plt.scatter(X[i * 50 : (i + 1) * 50, 0], X[i * 50 : (i + 1) * 50, 1], c=colors[i])
-
-show()
-
-# t-SNE
-
-perplexity = 25
-X_embedded = TSNE(
-    n_components=1, perplexity=perplexity, learning_rate="auto", init="random"
-).fit_transform(X)
-for i in range(3):
-    plt.scatter(X_embedded[i * 50 : (i + 1) * 50], np.zeros(50), c=colors[i])
-show()
-
-# PCA
-
-X_pca = PCA(n_components=1).fit_transform(X)
-for i in range(3):
-    plt.scatter(X_pca[i * 50 : (i + 1) * 50], np.zeros(50), c=colors[i])
-show()
-
-
-# 困惑度(perplexity)測試
-
-perplexity = 2
-X_embedded = TSNE(
-    n_components=1, perplexity=perplexity, learning_rate="auto", init="random"
-).fit_transform(X)
-for i in range(3):
-    plt.scatter(X_embedded[i * 50 : (i + 1) * 50], np.zeros(50), c=colors[i])
-show()
-
-
-perplexity = 130
-X_embedded = TSNE(
-    n_components=1, perplexity=perplexity, learning_rate="auto", init="random"
-).fit_transform(X)
-for i in range(3):
-    plt.scatter(X_embedded[i * 50 : (i + 1) * 50], np.zeros(50), c=colors[i])
-show()
-
-
-# 非線性分離
-# 生成S曲線資料
-from matplotlib import ticker
-from sklearn import manifold
-from sklearn import datasets
-
-n_samples = 1500
-S_points, S_color = datasets.make_s_curve(n_samples, random_state=0)
-cc = S_points.shape, S_color.shape
-print(cc)
-
-# ((1500, 3), (1500,))
-
-# 定義繪圖函數
-
-
-def plot_2d(points, points_color, title):
-    fig, ax = plt.subplots(figsize=(3, 3), facecolor="white", constrained_layout=True)
-    fig.suptitle(title, size=16)
-    add_2d_scatter(ax, points, points_color)
-    show()
-
-
-def add_2d_scatter(ax, points, points_color, title=None):
-    x, y = points.T
-    ax.scatter(x, y, c=points_color, s=50, alpha=0.8)
-    ax.set_title(title)
-    ax.xaxis.set_major_formatter(ticker.NullFormatter())
-    ax.yaxis.set_major_formatter(ticker.NullFormatter())
-
-
-def plot_3d(points, points_color, title):
-    x, y, z = points.T
-
-    fig, ax = plt.subplots(
-        figsize=(6, 6),
-        facecolor="white",
-        tight_layout=True,
-        subplot_kw={"projection": "3d"},
-    )
-    fig.suptitle(title, size=16)
-    col = ax.scatter(x, y, z, c=points_color, s=50, alpha=0.8)
-    ax.view_init(azim=-60, elev=9)
-    ax.xaxis.set_major_locator(ticker.MultipleLocator(1))
-    ax.yaxis.set_major_locator(ticker.MultipleLocator(1))
-    ax.zaxis.set_major_locator(ticker.MultipleLocator(1))
-
-    fig.colorbar(col, ax=ax, orientation="horizontal", shrink=0.6, aspect=60, pad=0.01)
-    show()
-
-
-# 繪製原始資料
-
-plot_3d(S_points, S_color, "Original S-curve samples")
-
-# 繪製降維後資料
-
-t_sne = manifold.TSNE(
-    n_components=2,
-    perplexity=30,
-    init="random",
-    n_iter=250,
-    random_state=0,
-)
-S_t_sne = t_sne.fit_transform(S_points)
-
-plot_2d(S_t_sne, S_color, "T-distributed Stochastic  \n Neighbor Embedding")
-
-print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # spam_classification_with_tfidf
@@ -5464,7 +4892,7 @@ mean_squared_error(y, y_pred)
 
 print("------------------------------")  # 30個
 
-print("決定係数")
+print("決定係數")
 print(r2_score(y, y_pred))
 
 print("------------------------------")  # 30個
@@ -5490,7 +4918,7 @@ show()
 """
 
 print(mean_squared_error(y, y_svr_pred))  # 平均二乗誤差
-print(r2_score(y, y_svr_pred))  # 決定係数
+print(r2_score(y, y_svr_pred))  # 決定係數
 print(model_svr_linear.coef_)  # 傾き
 print(model_svr_linear.intercept_)  # 切片
 
@@ -5504,7 +4932,7 @@ model_svr_rbf.fit(X, y)  # 學習訓練.fit
 
 y_svr_pred = model_svr_rbf.predict(X)  # 預測.predict
 print(mean_squared_error(y, y_svr_pred))  # 平均二乗誤差
-print(r2_score(y, y_svr_pred))  # 決定係数
+print(r2_score(y, y_svr_pred))  # 決定係數
 
 train_X, test_X = X[:400], X[400:]
 train_y, test_y = y[:400], y[400:]
@@ -5515,7 +4943,7 @@ model_svr_rbf_1.fit(train_X, train_y)  # 學習訓練.fit
 
 test_y_pred = model_svr_rbf_1.predict(test_X)  # 預測.predict
 print(mean_squared_error(test_y, test_y_pred))  # 平均二乗誤差
-print(r2_score(test_y, test_y_pred))  # 決定係数
+print(r2_score(test_y, test_y_pred))  # 決定係數
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

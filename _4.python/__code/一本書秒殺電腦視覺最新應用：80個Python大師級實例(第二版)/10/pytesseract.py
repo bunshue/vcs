@@ -28,9 +28,6 @@ def split_picture(imagepath):
             flag += 1
 
 
-def main():
-    imagepath = "8a.jpg"
-    split_picture(imagepath)
+imagepath = "8a.jpg"
+split_picture(imagepath)
 
-
-main()

@@ -26,8 +26,14 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
+
+def show():
+    plt.show()
+    pass
+
+
 print("------------------------------------------------------------")  # 60個
-'''
+
 """
 基本形態學濾波
 
@@ -63,7 +69,7 @@ plt.subplot(133)
 plt.title("白色膨脹2")
 plt.imshow(dst2, plt.cm.gray)
 
-plt.show()
+show()
 
 """
 
@@ -121,7 +127,7 @@ plt.subplot(133)
 plt.title("白色腐蝕2")
 plt.imshow(dst2, plt.cm.gray)
 
-plt.show()
+show()
 
 """
 注意，如果處理圖像為二值圖像（只有0和1兩個值），則可以調用：
@@ -155,7 +161,7 @@ plt.title("開運算")
 plt.imshow(dst, plt.cm.gray)
 plt.axis("off")
 
-plt.show()
+show()
 
 """
 注意，如果處理圖像為二值圖像（只有0和1兩個值），則可以調用：
@@ -192,7 +198,7 @@ plt.title("閉運算")
 plt.imshow(dst, plt.cm.gray)
 plt.axis("off")
 
-plt.show()
+show()
 
 """
 注意，如果處理圖像為二值圖像（只有0和1兩個值），則可以調用：
@@ -228,7 +234,7 @@ plt.title("白帽")
 plt.imshow(dst, plt.cm.gray)
 plt.axis("off")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -256,7 +262,7 @@ plt.title("黑帽")
 plt.imshow(dst, plt.cm.gray)
 plt.axis("off")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -266,7 +272,7 @@ print("------------------------------------------------------------")  # 60個
 這些方法需要用戶自己設定濾波器的形狀和大小，因此需要導入morphology模塊來設定。
 """
 print("------------------------------------------------------------")  # 60個
-'''
+
 """
 1、autolevel
 這個詞在photoshop里面翻譯成自動色階，用局部直方圖來對圖片進行濾波分級。
@@ -293,7 +299,7 @@ plt.subplot(122)
 plt.title("濾波")
 plt.imshow(auto, plt.cm.gray)
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -333,7 +339,7 @@ plt.subplot(122)
 plt.title('濾波')
 plt.imshow(auto,plt.cm.gray)
 
-plt.show()
+show()
 """
 
 """
@@ -361,7 +367,7 @@ plt.subplot(122)
 plt.title("濾波")
 plt.imshow(auto, plt.cm.gray)
 
-plt.show()
+show()
 
 """
 4、entropy
@@ -391,7 +397,7 @@ plt.subplot(122)
 plt.title("濾波")
 plt.imshow(dst, plt.cm.gray)
 
-plt.show()
+show()
 
 """
 5、equalize
@@ -418,7 +424,7 @@ plt.subplot(122)
 plt.title("濾波")
 plt.imshow(dst, plt.cm.gray)
 
-plt.show()
+show()
 
 """
 6、gradient
@@ -445,7 +451,7 @@ plt.subplot(122)
 plt.title("濾波")
 plt.imshow(dst, plt.cm.gray)
 
-plt.show()
+show()
 
 """
 7、其它濾波器
@@ -529,7 +535,7 @@ ax1.set_xlabel("Angles (degrees)")
 ax1.set_ylabel("Distance (pixels)")
 ax1.axis("image")
 
-plt.show()
+show()
 
 """
 從右邊那張圖可以看出，有兩個交點，說明原圖像中有兩條直線。
@@ -575,7 +581,7 @@ ax2.axis((0, col1, row1, 0))
 ax2.set_title("Detected lines")
 ax2.set_axis_off()
 
-plt.show()
+show()
 
 """
 注意，繪制線條的時候，要從極坐標轉換為笛卡爾坐標，公式為：
@@ -625,7 +631,7 @@ ax2.axis((0, col2, row2, 0))
 ax2.set_title("Probabilistic Hough")
 ax2.set_axis_off()
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -685,7 +691,7 @@ for idx in np.argsort(accums)[::-1][:2]:
 ax1.imshow(image)
 ax1.set_title("detected image")
 
-plt.show()
+show()
 
 """
 結果圖如下：原圖中的圓用白色繪制，檢測出的圓用紅色繪制。
@@ -728,7 +734,7 @@ for idx in np.argsort(accums)[::-1][:5]:
 ax1.imshow(image)
 ax1.set_title("detected image")
 
-plt.show()
+show()
 
 """
 橢圓變換是類似的，使用函數為：
@@ -776,7 +782,7 @@ ax1.imshow(image_rgb)
 ax2.set_title('Edge (white) and result (red)')
 ax2.imshow(edges)
 
-plt.show()
+show()
 
 #霍夫橢圓變換速度非常慢，應避免圖像太大。
 """
@@ -831,7 +837,7 @@ ax1.axis('image')
 ax1.set_xticks([])
 ax1.set_yticks([])
 
-plt.show()
+show()
 """
 
 """
@@ -859,7 +865,7 @@ for n, contour in enumerate(contours):
     ax1.plot(contour[:, 1], contour[:, 0], linewidth=2)
 ax1.axis('image')
 ax1.set_title('contours')
-plt.show()
+show()
 """
 
 """
@@ -934,7 +940,7 @@ ax3.plot(new_hand[:, 0], new_hand[:, 1], "g")
 ax3.plot(appr_hand[:, 0], appr_hand[:, 1], "b")
 ax3.set_title("all")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -963,7 +969,7 @@ ax0.set_title('original image')
 ax1.imshow(chull,plt.cm.gray)
 ax1.set_title('convex_hull image')
 
-plt.show()
+show()
 """
 
 """
@@ -992,7 +998,7 @@ ax0.set_title('many objects')
 ax1.imshow(chull,plt.cm.gray)
 ax1.set_title('convex_hull image')
 
-plt.show()
+show()
 """
 
 print("------------------------------------------------------------")  # 60個
@@ -1034,7 +1040,7 @@ ax2.imshow(dst, interpolation="nearest")
 ax2.axis("off")
 
 fig.tight_layout()
-plt.show()
+show()
 
 """
 在代碼中，有些地方乘以1，則可以將bool數組快速地轉換為int數組。
@@ -1109,8 +1115,7 @@ ax1.imshow(data, plt.cm.gray, interpolation="nearest")
 ax2.imshow(dst, plt.cm.gray, interpolation="nearest")
 
 fig.tight_layout()
-plt.show()
-
+show()
 
 # 在此例中，我們將面積小于300的小塊區域刪除（由1變為0），結果如下圖：
 
@@ -1149,8 +1154,9 @@ for region in skimage.measure.regionprops(label_image):  # 循環得到每一個
         (minc, minr), maxc - minc, maxr - minr, fill=False, edgecolor="red", linewidth=2
     )
     ax1.add_patch(rect)
+
 fig.tight_layout()
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1208,7 +1214,7 @@ ax2.axis("off")
 ax2.set_title("骨架skeleton")
 
 fig.tight_layout()
-plt.show()
+show()
 
 """
 生成一幅測試圖像，上面有三個目標對象，分別進行骨架提取，結果如下：
@@ -1235,7 +1241,7 @@ ax2.axis('off')
 ax2.set_title('骨架skeleton')
 
 fig.tight_layout()
-plt.show()
+show()
 """
 
 """
@@ -1278,7 +1284,7 @@ ax2.imshow(dist_on_skel, interpolation="nearest")
 ax2.contour(data, [0.5], colors="w")  # 顯示輪廓線
 
 fig.tight_layout()
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1330,7 +1336,7 @@ for ax in axes:
     ax.axis('off')
 
 fig.tight_layout()
-plt.show()
+show()
 """
 
 """
@@ -1371,8 +1377,7 @@ for ax in axes:
     ax.axis('off')
 
 fig.tight_layout()
-plt.show()
-
+show()
 """
 print("------------------------------------------------------------")  # 60個
 
@@ -1501,7 +1506,7 @@ def add_salt_noise(image):
     plt.title("高斯噪聲的均值濾波")
     plt.imshow(Grey_gs_me, cmap="gray")
 
-    plt.show()
+    show()
 
 
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.png"
@@ -1565,7 +1570,7 @@ plt.subplot(144)
 plt.title("(d)梯度幅值")
 plt.imshow(mag)
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1613,7 +1618,7 @@ for bi, blur in enumerate([2, 4, 8]):
 #  plt.subplot(1, 4,  2 + bi)
 #  plt.imshow(image2)
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1670,7 +1675,7 @@ for i in sigma:
     plt.subplot(3, 4, 4 * (sigma.index(i)) + 4)
     plt.imshow(imagemag)
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1727,7 +1732,7 @@ plt.subplot(224)
 plt.imshow(labels_open)
 plt.title("開運算後進行標記後的圖像")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1777,7 +1782,7 @@ plt.subplot(224)
 plt.imshow(labels_open)
 plt.title("開運算後進行標記後的圖像")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1820,7 +1825,7 @@ plt.subplot(1, 3, 3)
 # plt.axis('equal')
 plt.title("ROF降噪後的圖像")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1866,7 +1871,7 @@ plt.subplot(1, 3, 3)
 # plt.axis('equal')
 plt.title("ROF降噪後的圖像")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1890,7 +1895,7 @@ for bi, blur in enumerate([2, 5, 10]):
     plt.title("GaussVar = " + imNum)
     plt.imshow(im2)
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1902,10 +1907,46 @@ ax[0].imshow(image, cmap="gray")
 ax[0].set_title("input image")
 ax[1].imshow(hogVis)
 ax[1].set_title("extarcting features from image")
-plt.show()
-
+show()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+from scipy import ndimage as ndi
+from skimage import morphology
+from skimage import color
+from skimage import filters
+
+plt.imshow(skimage.data.camera(), cmap=plt.cm.gray)
+show()
+
+#image = color.rgb2gray(skimage.data.camera())
+image = skimage.data.camera()
+
+denoised = filters.rank.median(image, morphology.disk(2))  # 过滤噪声
+# 将梯度值低于10的作为开始标记点
+markers = filters.rank.gradient(denoised, morphology.disk(5)) < 10
+markers = ndi.label(markers)[0]
+gradient = filters.rank.gradient(denoised, morphology.disk(2))  # 计算梯度
+#labels = morphology.watershed(gradient, markers, mask=image)  # 基于梯度的分水岭算法
+labels = skimage.segmentation.watershed(gradient, markers, mask=image)  # 基于梯度的分水岭算法
+
+fig, axes = plt.subplots(nrows=2, ncols=2, figsize=(6, 6))
+axes = axes.ravel()
+ax0, ax1, ax2, ax3 = axes
+ax0.imshow(image, cmap=plt.cm.gray, interpolation="nearest")
+ax0.set_title("原始图像")
+ax1.imshow(gradient, cmap=plt.cm.Spectral, interpolation="nearest")
+ax1.set_title("梯度")
+ax2.imshow(markers, cmap=plt.cm.Spectral, interpolation="nearest")
+ax2.set_title("标记")
+ax3.imshow(labels, cmap=plt.cm.Spectral, interpolation="nearest")
+ax3.set_title("分割")
+for ax in axes:
+    ax.axis("off")
+fig.tight_layout()
+
+show()
 
 print("------------------------------------------------------------")  # 60個
 

@@ -97,7 +97,8 @@ plt.show()
 
 # PCA及Kernel PCA 轉換
 
-from sklearn.decomposition import PCA, KernelPCA
+from sklearn.decomposition import PCA
+from sklearn.decomposition import KernelPCA
 
 pca = PCA(n_components=32)
 kernel_pca = KernelPCA(

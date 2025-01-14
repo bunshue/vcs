@@ -70,7 +70,7 @@ print("------------------------------------------------------------")  # 60個
 
 
 def show():
-    plt.show()
+    #plt.show()
     pass
 
 
@@ -486,44 +486,6 @@ print(df.head())
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("PCA 降維度, 4維 => 2維")
-from sklearn.decomposition import PCA
-
-N = 500  # 散點的數量
-
-X = np.random.randint(0, 100, size=(N, 4))  # 產生 N x 4 陣列，內容為 0～100 隨機數字
-print(type(X))
-print(X.shape)
-print(X)
-
-n_components = 2  # 削減後の次元を2に設定
-
-clf = PCA(n_components=n_components)
-
-clf = clf.fit(X)
-
-X2 = clf.transform(X)
-print(X2)  # 変換したデータ
-
-print(X.shape)
-print(X2.shape)
-
-plt.subplot(221)
-plt.scatter(X[:, 0], X[:, 1])
-plt.subplot(222)
-plt.scatter(X[:, 2], X[:, 3])
-
-plt.subplot(223)
-plt.scatter(X2[:, 0], X2[:, 1])
-
-plt.subplot(224)
-# plt.scatter(X2[:,2], X2[:,3])
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 from sklearn.mixture import GaussianMixture
 
 iris = datasets.load_iris()
@@ -683,51 +645,6 @@ print(Y_pred)
 
 Y_target = dataset[:, 4][120:].astype(int)
 print(Y_target)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("數學方法降維")
-
-from sklearn.decomposition import PCA
-
-iris = datasets.load_iris()
-X = iris.data
-y = iris.target  # 資料集目標
-
-df = pd.DataFrame(X, columns=["萼長", "萼寬", "瓣長", "瓣寬"])
-
-mat = df.corr()
-print(mat)
-
-sns.heatmap(
-    mat,
-    annot=True,
-    vmax=1,
-    vmin=-1,
-    xticklabels=True,
-    yticklabels=True,
-    square=True,
-    cmap="gray",
-)
-
-show()
-
-print("------------------------------")  # 30個
-
-clf = PCA(n_components=2)
-
-X2 = clf.fit_transform(df)
-
-print(X.shape)
-print(X2.shape)
-
-plt.scatter(X2[:, 0], X2[:, 1], c=np.array(y), cmap=plt.cm.copper)
-
-show()
-
-print(clf.explained_variance_ratio_)
-print(clf.explained_variance_ratio_.sum())
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
