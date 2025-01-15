@@ -33,18 +33,18 @@ import ssl
 
 ssl._create_default_https_context = ssl._create_stdlib_context
 
-print("------------------------------------------------------------")  # 60個
-
 import warnings
 
 warnings.filterwarnings("once")
+
+print("------------------------------------------------------------")  # 60個
 
 # np.set_printoptions(precision=2) # 設定np計算後的保留位數
 # pd.set_option('precision', 2)
 
 from common1 import *
 
-# import tensorflow as tf
+import tensorflow as tf
 import joblib
 import pickle
 import matplotlib
@@ -56,30 +56,32 @@ from sklearn import metrics
 from sklearn import datasets
 from sklearn import preprocessing
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
+from sklearn.model_selection import cross_val_score
 
 # from imblearn.metrics import classification_report_imbalanced
-from sklearn.model_selection import cross_val_score
 
 # 載入迴歸常見的評估指標
 from sklearn.metrics import mean_squared_error  # 均方誤差 Mean Squared Error (MSE)
 from sklearn.metrics import mean_absolute_error  # 平均絕對誤差 Mean Absolute Error (MAE)
+from sklearn.metrics import f1_score  # F値
 from sklearn.metrics import r2_score  # R-Squared擬合度, 決定係數
 from sklearn.metrics import accuracy_score  # 正解率
 from sklearn.metrics import confusion_matrix
+from sklearn.metrics import ConfusionMatrixDisplay
 from sklearn.metrics import roc_curve  # ROC曲線, AUC
 from sklearn.metrics import roc_auc_score
 from sklearn.metrics import auc
 from sklearn.metrics import classification_report
 from sklearn.metrics import precision_score  # 適合率
+from sklearn.metrics import precision_recall_fscore_support
 from sklearn.metrics import recall_score  # 再現率
-from sklearn.metrics import f1_score  # F値
-from sklearn.metrics import ConfusionMatrixDisplay
+from sklearn.metrics import balanced_accuracy_score
 
 from sklearn.datasets import make_blobs  # 生成分類資料
 from sklearn.datasets import make_moons  # 生成非線性資料 上/下弦月資料
+from sklearn.datasets import make_circles
 from sklearn.datasets import make_classification
 from sklearn.datasets import make_hastie_10_2
-from sklearn.datasets import make_circles
 
 from sklearn.linear_model import LinearRegression
 from sklearn.linear_model import LogisticRegression
@@ -92,42 +94,45 @@ from sklearn.preprocessing import MinMaxScaler
 from sklearn.preprocessing import Normalizer
 from sklearn.preprocessing import LabelEncoder
 from sklearn.preprocessing import OneHotEncoder
+from sklearn.preprocessing import OrdinalEncoder
+from sklearn.preprocessing import PolynomialFeatures
+
+# from sklearn.preprocessing import Imputer
+from sklearn.feature_selection import SelectKBest
+from sklearn.feature_selection import f_regression
+from sklearn.model_selection import GridSearchCV
+from sklearn.model_selection import KFold
+from sklearn.model_selection import PredefinedSplit
+from sklearn.manifold import MDS
+from sklearn.manifold import TSNE
+from sklearn.manifold import LocallyLinearEmbedding
+from sklearn.pipeline import Pipeline
+from sklearn.pipeline import make_pipeline
+from sklearn.feature_selection import f_classif
 from sklearn.compose import ColumnTransformer
 
 import scipy
-import sklearn.linear_model
+import xgboost as xgb
 
 from sklearn import svm
 from sklearn import cluster
-from sklearn import datasets
 from sklearn import decomposition
-from sklearn import preprocessing
 from sklearn import model_selection
-from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
-from sklearn.model_selection import cross_val_score
-from sklearn.metrics import accuracy_score
-from sklearn.metrics import f1_score
-from sklearn.metrics import r2_score
-from sklearn.metrics import roc_auc_score
-from sklearn.metrics import recall_score
-from sklearn.metrics import precision_score
-from sklearn.metrics import precision_recall_fscore_support
-from sklearn.metrics import mean_squared_error
-from sklearn.metrics import mean_absolute_error
-from sklearn.metrics import balanced_accuracy_score
-from sklearn.metrics import confusion_matrix
-from sklearn.ensemble import RandomForestClassifier
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.tree import DecisionTreeRegressor
+from sklearn.tree import plot_tree
+from sklearn.ensemble import AdaBoostClassifier
+from sklearn.ensemble import BaggingClassifier
+from sklearn.ensemble import RandomForestClassifier  # 分類模型
+from sklearn.ensemble import GradientBoostingClassifier  # 分類模型
+from sklearn.ensemble import RandomForestRegressor  # 迴歸模型
+from sklearn.ensemble import GradientBoostingRegressor  # 迴歸模型
+
 from sklearn.decomposition import PCA
 
 
 def show():
     # plt.show()
-    pass
-
-
-def show():
-    return
-    plt.show()
     pass
 
 
@@ -629,8 +634,6 @@ print("------------------------------------------------------------")  # 60個
 """
 
 """
-from sklearn.preprocessing import PolynomialFeatures
-
 train_size = 20
 test_size = 12
 train_X = np.random.uniform(low=0, high=1.2, size=train_size)
@@ -707,7 +710,6 @@ print("------------------------------------------------------------")  # 60個
 
 """ import fail
 from sklearn.datasets import samples_generator
-from sklearn.manifold import LocallyLinearEmbedding
 
 data, color = samples_generator.make_swiss_roll(n_samples=1500)
 n_neighbors = 12 # 近傍點の數 
@@ -776,10 +778,6 @@ https://tianchi.aliyun.com/competition/activeList
 """
 
 from pandas.api.types import is_numeric_dtype  # 用於判斷特徵類型
-from sklearn.ensemble import RandomForestClassifier  # 分類模型
-from sklearn.ensemble import GradientBoostingClassifier  # 分類模型
-from sklearn.ensemble import RandomForestRegressor  # 迴歸模型
-from sklearn.ensemble import GradientBoostingRegressor  # 迴歸模型
 
 """
 無csv資料
@@ -808,7 +806,7 @@ x = data[features] # 自變量
 y = data[label] # 目標變量
 
 # 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
-x_train, x_val, y_train, y_val = train_test_split(x, y, test_size=0.2, random_state=9487)
+x_train, x_val, y_train, y_val = train_test_split(x, y, test_size=0.2)
 # 訓練組8成, 測試組2成
 
 x_train = x_train.fillna(x.mean()) # 空值填充訓練集
@@ -880,7 +878,7 @@ x = data[features] # 自變量
 y = data[label] # 目標變量
 
 # 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
-x_train, x_val, y_train, y_val = train_test_split(x, y, test_size=0.2, random_state=9487)
+x_train, x_val, y_train, y_val = train_test_split(x, y, test_size=0.2)
 # 訓練組8成, 測試組2成
 
 x_train = x_train.fillna(data_all[features].mean()) # 空值填充訓練集
@@ -891,9 +889,6 @@ x = x.fillna(data_all[features].mean()) # 空值填充全集
 print('------------------------------------------------------------')	#60個
 
 # 訓練模型
-
-import xgboost as xgb
-from sklearn.model_selection import KFold
 
 def my_eval(preds, train): # 自定義評價函數
     score = mean_squared_error(train.get_label(), preds)
@@ -935,8 +930,6 @@ plt.savefig('tmp.png',dpi=300)
 print('------------------------------------------------------------')	#60個
 
 # 檢測干擾變量
-
-from sklearn.ensemble import GradientBoostingRegressor
 
 baseline = 0.4887 # 誤差baseline
 for i in features:
@@ -991,9 +984,6 @@ y = np.sqrt(X) + 0.2 * np.random.rand(N) - 0.1
 
 X = X.reshape(-1, 1)
 y = y.reshape(-1, 1)
-
-from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import PolynomialFeatures
 
 
 def polynomial_model(degree=1):
@@ -1533,7 +1523,6 @@ from sklearn.impute import SimpleImputer
 
 imputer = SimpleImputer(missing_values=np.nan, strategy="mean")
 
-# from sklearn.preprocessing import Imputer
 # axis=0表示按列進行
 # imputer = Imputer(missing_values = "NaN", strategy = "mean", axis = 0)
 # print(imputer)
@@ -1552,7 +1541,6 @@ print(X)
 """ another
 第3步：處理丟失數據
 
-from sklearn.preprocessing import Imputer
 imputer = Imputer(missing_values = "NaN", strategy = "mean", axis = 0)
 imputer = imputer.fit(X[ : , 1:3])
 X[ : , 1:3] = imputer.transform(X[ : , 1:3])
@@ -1755,7 +1743,6 @@ X_train = scaler.fit_transform(X_train)  # STD特徵縮放
 X_test = scaler.transform(X_test)  # STD特徵縮放
 
 # Fitting Decision Tree Classification to the Training set
-from sklearn.tree import DecisionTreeClassifier
 
 classifier = DecisionTreeClassifier(criterion="entropy", random_state=0)
 
@@ -1844,8 +1831,6 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 scaler = StandardScaler()
 X_train = scaler.fit_transform(X_train)  # STD特徵縮放
 X_test = scaler.transform(X_test)  # STD特徵縮放
-
-from sklearn.ensemble import RandomForestClassifier
 
 classifier = RandomForestClassifier(
     n_estimators=10, criterion="entropy", random_state=0
@@ -2277,8 +2262,6 @@ size_mapping = {"XL": 3, "L": 2, "M": 1}
 df["size"] = df["size"].map(size_mapping)
 print("轉換後df")
 print(df)
-
-from sklearn.preprocessing import OrdinalEncoder
 
 data = [["Male", 1], ["Female", 3], ["Female", 2]]
 encoder = OrdinalEncoder()
@@ -3260,8 +3243,6 @@ print("------------------------------------------------------------")  # 60個
 
 # Scikit-learn迴歸樹測試
 
-from sklearn.tree import DecisionTreeRegressor
-
 # 生成隨機資料
 
 rng = np.random.RandomState(1)
@@ -3620,7 +3601,7 @@ model = DBSCAN(eps=3, min_samples=2)
 model.fit(X)  # 學習訓練.fit
 print(model.labels_)
 
-X, y = make_moons(n_samples=200, noise=0.05, random_state=9487)
+X, y = make_moons(n_samples=200, noise=0.05)
 plt.scatter(X[:, 0], X[:, 1])
 show()
 
@@ -3654,9 +3635,7 @@ show()
 # 另一個範例，參閱Demo of DBSCAN clustering algorithm
 
 centers = [[1, 1], [-1, -1], [1, -1]]
-X, labels_true = make_blobs(
-    n_samples=750, centers=centers, cluster_std=0.4, random_state=9487
-)
+X, labels_true = make_blobs(n_samples=750, centers=centers, cluster_std=0.4)
 
 X = StandardScaler().fit_transform(X)
 
@@ -3790,9 +3769,7 @@ print("------------------------------------------------------------")  # 60個
 
 from sklearn.semi_supervised import LabelPropagation
 
-X, y = make_classification(
-    n_samples=1000, n_features=2, n_informative=2, n_redundant=0, random_state=9487
-)
+X, y = make_classification(n_samples=1000, n_features=2, n_informative=2, n_redundant=0)
 
 # 資料分割
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.5, stratify=y)
@@ -3854,9 +3831,7 @@ print("------------------------------------------------------------")  # 60個
 from sklearn.semi_supervised import LabelSpreading
 
 # 載入資料集
-X, y = make_classification(
-    n_samples=1000, n_features=2, n_informative=2, n_redundant=0, random_state=9487
-)
+X, y = make_classification(n_samples=1000, n_features=2, n_informative=2, n_redundant=0)
 
 # 資料分割
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.5, stratify=y)
@@ -3913,9 +3888,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 自行計算 Shapley value
-
-from sklearn.tree import DecisionTreeRegressor
-from sklearn.tree import plot_tree
 
 # 載入資料
 
@@ -3979,7 +3951,6 @@ print(cc)
 # 自行計算 Shapley value
 
 from itertools import combinations
-import scipy
 
 
 # 計算特定組合的邊際貢獻
@@ -4624,7 +4595,6 @@ city = df["city"]
 D = np.array(df.iloc[:, 1:])  # Distance matrix
 
 # Arbitrary choice of K=2 components
-from sklearn.manifold import MDS
 
 mds = MDS(
     dissimilarity="precomputed",
@@ -4681,15 +4651,27 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("make_s_curve 生成S曲线数据集")
-from matplotlib.ticker import NullFormatter
-
+print("make_s_curve 三維S曲線數據集")
 N = 1000
-X, color = datasets.make_s_curve(n_samples=N, noise=0, random_state=9487)
+X, y = datasets.make_s_curve(n_samples=N)
 
 print(X[:, 0].max(), X[:, 0].min())  # 1 ~ -1
 print(X[:, 1].max(), X[:, 1].min())  # 2 ~ 0
 print(X[:, 2].max(), X[:, 2].min())  # 2 ~ -2
+
+fig = plt.figure()
+ax = fig.add_subplot(projection="3d")
+ax.scatter(X[:, 0], X[:, 1], X[:, 2], c=y)
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("make_s_curve 三維S曲線數據集")
+from matplotlib.ticker import NullFormatter
+
+N = 1000
+X, color = datasets.make_s_curve(n_samples=N, noise=0)
 
 fig = plt.figure(figsize=(8, 6))
 
@@ -4716,13 +4698,13 @@ show()
 
 print("------------------------------")  # 30個
 
-print("Dataset S curve")
+print("make_s_curve 三維S曲線數據集")
 
 from mpl_toolkits.mplot3d import Axes3D
 from sklearn import manifold
 
 N = 1000
-X, color = datasets.make_s_curve(n_samples=N, noise=0, random_state=9487)
+X, color = datasets.make_s_curve(n_samples=N, noise=0)
 print(X.shape)
 print(color.shape)
 
@@ -4761,8 +4743,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # MDS
-from sklearn.manifold import MDS
-
 df = pd.read_csv("data/machine_learning4_iris.csv")
 
 X = np.asarray(df.iloc[:, :4])
@@ -4851,7 +4831,7 @@ for i, perplexity in enumerate(perplexities):
     ax.yaxis.set_major_formatter(NullFormatter())
     ax.axis("tight")
 
-X, color = datasets.make_s_curve(n_samples, random_state=9487)
+X, color = datasets.make_s_curve(n_samples)
 
 ax = subplots[1][0]
 ax.scatter(X[:, 0], X[:, 2], c=color)
@@ -4918,9 +4898,6 @@ print("------------------------------------------------------------")  # 60個
 
 # Bagged Decision Trees for Classification
 
-from sklearn.ensemble import BaggingClassifier
-from sklearn.tree import DecisionTreeClassifier
-
 names = ["preg", "plas", "pres", "skin", "test", "mass", "pedi", "age", "class"]
 dataframe = pd.read_csv(
     "https://raw.githubusercontent.com/jbrownlee/Datasets/master/pima-indians-diabetes.data.csv",
@@ -4972,12 +4949,7 @@ print("------------------------------------------------------------")  # 60個
 # Boosting
 # Adaboost Classifier
 
-from sklearn.ensemble import AdaBoostClassifier
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.datasets import load_breast_cancer
-from sklearn.preprocessing import LabelEncoder
-
-breast_cancer = load_breast_cancer()
+breast_cancer = sklearn.datasets.load_breast_cancer()
 
 x = pd.DataFrame(breast_cancer.data, columns=breast_cancer.feature_names)
 y = pd.Categorical.from_codes(breast_cancer.target, breast_cancer.target_names)
@@ -5003,12 +4975,7 @@ print("------------------------------------------------------------")  # 60個
 
 # Random Forest as a bagging classifier
 
-from sklearn.ensemble import AdaBoostClassifier
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.datasets import load_breast_cancer
-from sklearn.preprocessing import LabelEncoder
-
-breast_cancer = load_breast_cancer()
+breast_cancer = sklearn.datasets.load_breast_cancer()
 x = pd.DataFrame(breast_cancer.data, columns=breast_cancer.feature_names)
 y = pd.Categorical.from_codes(breast_cancer.target, breast_cancer.target_names)
 # Transforming string Target to an int
@@ -5032,12 +4999,7 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # Stacking
-from sklearn.ensemble import AdaBoostClassifier
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.datasets import load_breast_cancer
-from sklearn.preprocessing import LabelEncoder
-
-breast_cancer = load_breast_cancer()
+breast_cancer = sklearn.datasets.load_breast_cancer()
 
 x = pd.DataFrame(breast_cancer.data, columns=breast_cancer.feature_names)
 y = pd.Categorical.from_codes(breast_cancer.target, breast_cancer.target_names)
@@ -5197,14 +5159,9 @@ print("Test R2:%.2f" % cross_val_score(estimator=model, X=Xc, y=y, cv=5).mean())
 
 # Standardization of input features
 
-from sklearn.pipeline import make_pipeline
-
 model = make_pipeline(
     preprocessing.StandardScaler(), sklearn.linear_model.LassoCV(cv=3)
 )
-
-# or
-from sklearn.pipeline import Pipeline
 
 model = Pipeline(
     [
@@ -5217,10 +5174,6 @@ scores = cross_val_score(estimator=model, X=X, y=y, cv=5)
 print("Test  r2:%.2f" % scores.mean())
 
 # Features selection
-
-from sklearn.feature_selection import SelectKBest
-from sklearn.feature_selection import f_regression
-from sklearn.pipeline import Pipeline
 
 n_samples, n_features, n_features_info = 100, 100, 3
 X = np.random.randn(n_samples, n_features)
@@ -5243,8 +5196,6 @@ model = Pipeline(
 scores = cross_val_score(estimator=model, X=X, y=y, cv=5)
 print("Anova filter + linear regression, test  r2:%.2f" % scores.mean())
 
-from sklearn.pipeline import Pipeline
-
 model = Pipeline(
     [
         ("standardscaler", preprocessing.StandardScaler()),
@@ -5255,11 +5206,6 @@ scores = cross_val_score(estimator=model, X=X, y=y, cv=5)
 print("Standardize + Lasso, test  r2:%.2f" % scores.mean())
 
 # Regression pipelines with CV for parameters selection
-
-from sklearn.feature_selection import SelectKBest
-from sklearn.feature_selection import f_regression
-from sklearn.pipeline import Pipeline
-from sklearn.model_selection import GridSearchCV
 
 # Datasets
 N = 100  # n_samples, 樣本數
@@ -5368,11 +5314,6 @@ print("Test r2:%.2f" % scores.mean())
 
 
 # Classification pipelines with CV for parameters selection
-
-from sklearn.feature_selection import SelectKBest
-from sklearn.feature_selection import f_classif
-from sklearn.pipeline import Pipeline
-from sklearn.model_selection import GridSearchCV
 
 # Datasets
 N = 100  # n_samples, 樣本數
@@ -5527,21 +5468,14 @@ param_grid = {"enet__alpha": alphas, "enet__l1_ratio": l1_ratio}
 
 enet_cv = GridSearchCV(enet, cv=5, param_grid=param_grid, scoring=balanced_acc)
 """ NG
-scores = cross_val_score(estimator=enet_cv, X=X, y=y, cv=5,\
-    scoring=balanced_acc, n_jobs=-1)
+scores = cross_val_score(estimator=enet_cv, X=X, y=y, cv=5, scoring=balanced_acc, n_jobs=-1)
 print("Test bACC:%.2f" % scores.mean())
 """
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-"""
-Resampling methods
-==================
-"""
-from sklearn.model_selection import KFold
-from sklearn.model_selection import PredefinedSplit
-from sklearn.model_selection import GridSearchCV
+# Resampling methods
 
 N = 100  # n_samples, 樣本數
 M = 100  # n_features, 特徵數(資料的維度)
@@ -5585,8 +5519,6 @@ lm_cv.fit(X_train, y_train)
 # Predict
 y_pred_test = lm_cv.predict(X_test)
 print("Test R2: %.2f" % r2_score(y_test, y_pred_test))
-
-from sklearn.model_selection import KFold
 
 estimator = sklearn.linear_model.Ridge(alpha=10)
 
@@ -6050,11 +5982,6 @@ EDA通常涉及以下幾種方法的組合：
 
 import scipy.stats as stats
 import sklearn.linear_model as linear_model
-
-# import xgboost as xgb
-from sklearn.model_selection import KFold
-from sklearn.manifold import TSNE
-from sklearn.decomposition import PCA
 
 # 共 1460 筆資料, 81 欄位
 train = pd.read_csv("data/houseprice.csv")

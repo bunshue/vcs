@@ -27,12 +27,12 @@ namespace vcs_SendTo_All
             if (flag_show_big_files_only == true)
             {
                 richTextBox1.Text += "僅顯示大檔, ";
-                cb_search_big_files.Checked = true;
+                rb_search_big_files.Checked = true;
             }
             else
             {
                 richTextBox1.Text += "顯示所有檔案\n";
-                cb_search_big_files.Checked = false;
+                rb_search_big_files.Checked = false;
             }
 
             long file_size_limit = 0;   //檔案界限
@@ -40,8 +40,8 @@ namespace vcs_SendTo_All
             richTextBox1.Text += "檔案界限 : " + file_size_limit.ToString() + "\n";
             tb_filesize_mb.Text = Properties.Settings.Default.file_size_limit.ToString();
 
-            lb_main_mesg1.Text = "";
-            lb_main_mesg2.Text = "";
+            lb_main_mesg1.Text = "AAAA";
+            lb_main_mesg2.Text = "BBBB";
             tb_filesize_mb.Focus();
         }
 
@@ -56,22 +56,37 @@ namespace vcs_SendTo_All
             int y_st;
             int dx;
             int dy;
+            int W = 300;
+            int H = 50;
 
             x_st = 20;
-            y_st = 50;
+            y_st = 20;
             dx = 110;
-            dy = 55;
+            dy = 40;
 
-            cb_search_big_files.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            groupBox_search.Size = new Size(W, H * 2);
+            groupBox_search_type.Size = new Size(W, H * 2);
+            groupBox_file.Size = new Size(W, H);
+            groupBox_video.Size = new Size(W, H);
+
+            groupBox_search.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            groupBox_search_type.Location = new Point(x_st + dx * 0, y_st + dy * 0 + H * 2);
+            groupBox_file.Location = new Point(x_st + dx * 0, y_st + dy * 0 + H * 4);
+            groupBox_video.Location = new Point(x_st + dx * 0, y_st + dy * 0 + H * 5);
+
+            //groupBox_search
+            rb_search_big_files.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             tb_filesize_mb.Location = new Point(x_st + dx * 1 + 40, y_st + dy * 0);
-            lb_filesize.Location = new Point(x_st + dx * 2 + 40, y_st + dy * 0);
-            cb_search_video_files.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            cb_search_audio_files.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            rb_search_all_files.Location = new Point(x_st + dx * 0, y_st + dy * 1);
 
-            bt_save.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            ///groupBox_search_type
+            cb_search_video_files.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            cb_search_audio_files.Location = new Point(x_st + dx * 0, y_st + dy * 1);
 
-            lb_main_mesg1.Location = new Point(x_st + dx * 0, y_st + dy * 5);
-            lb_main_mesg2.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            bt_save.Location = new Point(x_st + dx * 0 + 200, y_st + dy * 10);
+
+            lb_main_mesg1.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            lb_main_mesg2.Location = new Point(x_st + dx * 0, y_st + dy * 9);
 
             bt_exit_setup();
 
@@ -129,7 +144,7 @@ namespace vcs_SendTo_All
 
         private void bt_save_Click(object sender, EventArgs e)
         {
-            Properties.Settings.Default.show_big_files_only = cb_search_big_files.Checked;
+            Properties.Settings.Default.show_big_files_only = rb_search_big_files.Checked;
 
             int file_size_limit = 0;
             bool conversionSuccessful = int.TryParse(tb_filesize_mb.Text, out file_size_limit);    //out為必須

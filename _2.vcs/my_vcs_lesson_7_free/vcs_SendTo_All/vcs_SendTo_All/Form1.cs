@@ -283,7 +283,6 @@ namespace vcs_SendTo_All
                     show_filename_data();
 
                     show_listView();
-
                 }
             }
         }
@@ -411,6 +410,32 @@ namespace vcs_SendTo_All
         {
             richTextBox1.Text += "\n#檔案 : " + filename + "\n\n";
 
+            /*
+            //二進位檔轉成文字檔
+            byte[] data;
+            long len;
+            int i;
+
+            //全部binary讀取
+            data = System.IO.File.ReadAllBytes(filename);
+            len = data.Length;
+
+            //richTextBox1.Text += "檔案名稱 : " + filename + "\n";
+            //richTextBox1.Text += "檔案長度 : " + len.ToString() + "\n";
+            //print_data(data, len);
+
+            len = data.Length;
+            for (i = 0; i < len; i++)
+            {
+                richTextBox1.Text += data[i].ToString("X2");
+                richTextBox1.Text += " ";
+            }
+            richTextBox1.Text += "\n";
+
+            return;
+            */
+
+            //純文字
             StringBuilder sb = new StringBuilder();
 
             string[] Txt_All_Lines = System.IO.File.ReadAllLines(filename, Encoding.GetEncoding("utf-8"));   //指名編碼格式

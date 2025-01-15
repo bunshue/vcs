@@ -29,12 +29,10 @@
         private void InitializeComponent()
         {
             this.tb_filesize_mb = new System.Windows.Forms.TextBox();
-            this.cb_search_big_files = new System.Windows.Forms.CheckBox();
             this.lb_main_mesg2 = new System.Windows.Forms.Label();
             this.lb_main_mesg1 = new System.Windows.Forms.Label();
             this.bt_save = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.lb_filesize = new System.Windows.Forms.Label();
             this.cb_search_video_files = new System.Windows.Forms.CheckBox();
             this.cb_search_audio_files = new System.Windows.Forms.CheckBox();
             this.groupBox_file = new System.Windows.Forms.GroupBox();
@@ -48,38 +46,33 @@
             this.cb_video_l = new System.Windows.Forms.CheckBox();
             this.cb_video_m = new System.Windows.Forms.CheckBox();
             this.cb_video_s = new System.Windows.Forms.CheckBox();
+            this.groupBox_search = new System.Windows.Forms.GroupBox();
+            this.groupBox_search_type = new System.Windows.Forms.GroupBox();
+            this.rb_search_big_files = new System.Windows.Forms.RadioButton();
+            this.rb_search_all_files = new System.Windows.Forms.RadioButton();
             this.groupBox_file.SuspendLayout();
             this.groupBox_video.SuspendLayout();
+            this.groupBox_search.SuspendLayout();
+            this.groupBox_search_type.SuspendLayout();
             this.SuspendLayout();
             // 
             // tb_filesize_mb
             // 
             this.tb_filesize_mb.Font = new System.Drawing.Font("標楷體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_filesize_mb.Location = new System.Drawing.Point(171, 106);
+            this.tb_filesize_mb.Location = new System.Drawing.Point(162, 21);
             this.tb_filesize_mb.Name = "tb_filesize_mb";
-            this.tb_filesize_mb.Size = new System.Drawing.Size(100, 30);
+            this.tb_filesize_mb.Size = new System.Drawing.Size(73, 30);
             this.tb_filesize_mb.TabIndex = 27;
             this.tb_filesize_mb.Text = "5";
             this.tb_filesize_mb.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tb_filesize_mb.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_filesize_mb_KeyPress);
-            // 
-            // cb_search_big_files
-            // 
-            this.cb_search_big_files.AutoSize = true;
-            this.cb_search_big_files.Font = new System.Drawing.Font("標楷體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.cb_search_big_files.Location = new System.Drawing.Point(16, 108);
-            this.cb_search_big_files.Name = "cb_search_big_files";
-            this.cb_search_big_files.Size = new System.Drawing.Size(149, 28);
-            this.cb_search_big_files.TabIndex = 26;
-            this.cb_search_big_files.Text = "只搜尋大檔";
-            this.cb_search_big_files.UseVisualStyleBackColor = true;
             // 
             // lb_main_mesg2
             // 
             this.lb_main_mesg2.AutoSize = true;
             this.lb_main_mesg2.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.lb_main_mesg2.ForeColor = System.Drawing.Color.Red;
-            this.lb_main_mesg2.Location = new System.Drawing.Point(12, 58);
+            this.lb_main_mesg2.Location = new System.Drawing.Point(14, 366);
             this.lb_main_mesg2.Name = "lb_main_mesg2";
             this.lb_main_mesg2.Size = new System.Drawing.Size(135, 24);
             this.lb_main_mesg2.TabIndex = 25;
@@ -90,7 +83,7 @@
             this.lb_main_mesg1.AutoSize = true;
             this.lb_main_mesg1.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.lb_main_mesg1.ForeColor = System.Drawing.Color.Red;
-            this.lb_main_mesg1.Location = new System.Drawing.Point(12, 24);
+            this.lb_main_mesg1.Location = new System.Drawing.Point(14, 332);
             this.lb_main_mesg1.Name = "lb_main_mesg1";
             this.lb_main_mesg1.Size = new System.Drawing.Size(135, 24);
             this.lb_main_mesg1.TabIndex = 24;
@@ -99,7 +92,7 @@
             // bt_save
             // 
             this.bt_save.Font = new System.Drawing.Font("標楷體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_save.Location = new System.Drawing.Point(177, 33);
+            this.bt_save.Location = new System.Drawing.Point(16, 409);
             this.bt_save.Name = "bt_save";
             this.bt_save.Size = new System.Drawing.Size(94, 32);
             this.bt_save.TabIndex = 23;
@@ -110,27 +103,17 @@
             // richTextBox1
             // 
             this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.richTextBox1.Location = new System.Drawing.Point(349, 0);
+            this.richTextBox1.Location = new System.Drawing.Point(393, 0);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(191, 453);
+            this.richTextBox1.Size = new System.Drawing.Size(191, 461);
             this.richTextBox1.TabIndex = 28;
             this.richTextBox1.Text = "";
-            // 
-            // lb_filesize
-            // 
-            this.lb_filesize.AutoSize = true;
-            this.lb_filesize.Font = new System.Drawing.Font("標楷體", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_filesize.Location = new System.Drawing.Point(286, 109);
-            this.lb_filesize.Name = "lb_filesize";
-            this.lb_filesize.Size = new System.Drawing.Size(40, 27);
-            this.lb_filesize.TabIndex = 29;
-            this.lb_filesize.Text = "MB";
             // 
             // cb_search_video_files
             // 
             this.cb_search_video_files.AutoSize = true;
             this.cb_search_video_files.Font = new System.Drawing.Font("標楷體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.cb_search_video_files.Location = new System.Drawing.Point(16, 152);
+            this.cb_search_video_files.Location = new System.Drawing.Point(42, 18);
             this.cb_search_video_files.Name = "cb_search_video_files";
             this.cb_search_video_files.Size = new System.Drawing.Size(173, 28);
             this.cb_search_video_files.TabIndex = 30;
@@ -141,7 +124,7 @@
             // 
             this.cb_search_audio_files.AutoSize = true;
             this.cb_search_audio_files.Font = new System.Drawing.Font("標楷體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.cb_search_audio_files.Location = new System.Drawing.Point(16, 199);
+            this.cb_search_audio_files.Location = new System.Drawing.Point(42, 52);
             this.cb_search_audio_files.Name = "cb_search_audio_files";
             this.cb_search_audio_files.Size = new System.Drawing.Size(173, 28);
             this.cb_search_audio_files.TabIndex = 31;
@@ -156,7 +139,7 @@
             this.groupBox_file.Controls.Add(this.cb_file_s);
             this.groupBox_file.Controls.Add(this.tb_file_l);
             this.groupBox_file.Controls.Add(this.label2);
-            this.groupBox_file.Location = new System.Drawing.Point(16, 233);
+            this.groupBox_file.Location = new System.Drawing.Point(16, 208);
             this.groupBox_file.Name = "groupBox_file";
             this.groupBox_file.Size = new System.Drawing.Size(292, 50);
             this.groupBox_file.TabIndex = 48;
@@ -236,7 +219,7 @@
             this.groupBox_video.Controls.Add(this.cb_video_l);
             this.groupBox_video.Controls.Add(this.cb_video_m);
             this.groupBox_video.Controls.Add(this.cb_video_s);
-            this.groupBox_video.Location = new System.Drawing.Point(29, 316);
+            this.groupBox_video.Location = new System.Drawing.Point(18, 264);
             this.groupBox_video.Name = "groupBox_video";
             this.groupBox_video.Size = new System.Drawing.Size(160, 50);
             this.groupBox_video.TabIndex = 49;
@@ -282,19 +265,63 @@
             this.cb_video_s.Text = "小";
             this.cb_video_s.UseVisualStyleBackColor = true;
             // 
+            // groupBox_search
+            // 
+            this.groupBox_search.Controls.Add(this.rb_search_all_files);
+            this.groupBox_search.Controls.Add(this.tb_filesize_mb);
+            this.groupBox_search.Controls.Add(this.rb_search_big_files);
+            this.groupBox_search.Location = new System.Drawing.Point(18, 12);
+            this.groupBox_search.Name = "groupBox_search";
+            this.groupBox_search.Size = new System.Drawing.Size(304, 96);
+            this.groupBox_search.TabIndex = 50;
+            this.groupBox_search.TabStop = false;
+            this.groupBox_search.Text = "搜尋檔案";
+            // 
+            // groupBox_search_type
+            // 
+            this.groupBox_search_type.Controls.Add(this.cb_search_video_files);
+            this.groupBox_search_type.Controls.Add(this.cb_search_audio_files);
+            this.groupBox_search_type.Location = new System.Drawing.Point(16, 114);
+            this.groupBox_search_type.Name = "groupBox_search_type";
+            this.groupBox_search_type.Size = new System.Drawing.Size(292, 88);
+            this.groupBox_search_type.TabIndex = 51;
+            this.groupBox_search_type.TabStop = false;
+            this.groupBox_search_type.Text = "搜尋類型";
+            // 
+            // rb_search_big_files
+            // 
+            this.rb_search_big_files.AutoSize = true;
+            this.rb_search_big_files.Font = new System.Drawing.Font("標楷體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rb_search_big_files.Location = new System.Drawing.Point(13, 22);
+            this.rb_search_big_files.Name = "rb_search_big_files";
+            this.rb_search_big_files.Size = new System.Drawing.Size(268, 28);
+            this.rb_search_big_files.TabIndex = 28;
+            this.rb_search_big_files.TabStop = true;
+            this.rb_search_big_files.Text = "只搜尋大檔        MB";
+            this.rb_search_big_files.UseVisualStyleBackColor = true;
+            // 
+            // rb_search_all_files
+            // 
+            this.rb_search_all_files.AutoSize = true;
+            this.rb_search_all_files.Font = new System.Drawing.Font("標楷體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rb_search_all_files.Location = new System.Drawing.Point(13, 56);
+            this.rb_search_all_files.Name = "rb_search_all_files";
+            this.rb_search_all_files.Size = new System.Drawing.Size(172, 28);
+            this.rb_search_all_files.TabIndex = 29;
+            this.rb_search_all_files.TabStop = true;
+            this.rb_search_all_files.Text = "搜尋所有檔案";
+            this.rb_search_all_files.UseVisualStyleBackColor = true;
+            // 
             // Form_Setup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(540, 453);
+            this.ClientSize = new System.Drawing.Size(584, 461);
+            this.Controls.Add(this.groupBox_search_type);
+            this.Controls.Add(this.groupBox_search);
             this.Controls.Add(this.groupBox_video);
             this.Controls.Add(this.groupBox_file);
-            this.Controls.Add(this.cb_search_audio_files);
-            this.Controls.Add(this.cb_search_video_files);
-            this.Controls.Add(this.lb_filesize);
             this.Controls.Add(this.richTextBox1);
-            this.Controls.Add(this.tb_filesize_mb);
-            this.Controls.Add(this.cb_search_big_files);
             this.Controls.Add(this.lb_main_mesg2);
             this.Controls.Add(this.lb_main_mesg1);
             this.Controls.Add(this.bt_save);
@@ -305,6 +332,10 @@
             this.groupBox_file.PerformLayout();
             this.groupBox_video.ResumeLayout(false);
             this.groupBox_video.PerformLayout();
+            this.groupBox_search.ResumeLayout(false);
+            this.groupBox_search.PerformLayout();
+            this.groupBox_search_type.ResumeLayout(false);
+            this.groupBox_search_type.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -313,12 +344,10 @@
         #endregion
 
         private System.Windows.Forms.TextBox tb_filesize_mb;
-        private System.Windows.Forms.CheckBox cb_search_big_files;
         private System.Windows.Forms.Label lb_main_mesg2;
         private System.Windows.Forms.Label lb_main_mesg1;
         private System.Windows.Forms.Button bt_save;
         private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.Label lb_filesize;
         private System.Windows.Forms.CheckBox cb_search_video_files;
         private System.Windows.Forms.CheckBox cb_search_audio_files;
         private System.Windows.Forms.GroupBox groupBox_file;
@@ -332,5 +361,9 @@
         private System.Windows.Forms.CheckBox cb_video_l;
         private System.Windows.Forms.CheckBox cb_video_m;
         private System.Windows.Forms.CheckBox cb_video_s;
+        private System.Windows.Forms.GroupBox groupBox_search;
+        private System.Windows.Forms.GroupBox groupBox_search_type;
+        private System.Windows.Forms.RadioButton rb_search_big_files;
+        private System.Windows.Forms.RadioButton rb_search_all_files;
     }
 }
