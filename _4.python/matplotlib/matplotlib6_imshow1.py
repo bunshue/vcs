@@ -31,9 +31,11 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
+
 def show():
     plt.show()
     pass
+
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -647,69 +649,73 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-image = np.array([[ 0,0,7, 15, 13,1,0,0],
- [ 0,8, 13,6, 15,4,0,0],
- [ 0,2,1, 13, 13,0,0,0],
- [ 0,0,2, 15, 11,1,0,0],
- [ 0,0,0,1, 12, 12,1,0],
- [ 0,0,0,0,1, 10,8,0],
- [ 0,0,8,4,5, 14,9,0],
- [ 0,0,7, 13, 13,9,0,0]])
+image = np.array(
+    [
+        [0, 0, 7, 15, 13, 1, 0, 0],
+        [0, 8, 13, 6, 15, 4, 0, 0],
+        [0, 2, 1, 13, 13, 0, 0, 0],
+        [0, 0, 2, 15, 11, 1, 0, 0],
+        [0, 0, 0, 1, 12, 12, 1, 0],
+        [0, 0, 0, 0, 1, 10, 8, 0],
+        [0, 0, 8, 4, 5, 14, 9, 0],
+        [0, 0, 7, 13, 13, 9, 0, 0],
+    ]
+)
 
 plt.figure(figsize=(12, 8))
 
 # cmap
-plt.subplot(5,8,1)
+plt.subplot(5, 8, 1)
 plt.imshow(image)
-plt.subplot(5,8,2)
+plt.subplot(5, 8, 2)
 plt.imshow(image, cmap="hot")
-plt.subplot(5,8,3)
+plt.subplot(5, 8, 3)
 plt.imshow(image, cmap="cool")
-plt.subplot(5,8,4)
+plt.subplot(5, 8, 4)
 plt.imshow(image, cmap="hsv")
-plt.subplot(5,8,5)
+plt.subplot(5, 8, 5)
 plt.imshow(image, cmap="YlGn")
-plt.subplot(5,8,6)
+plt.subplot(5, 8, 6)
 plt.imshow(image, cmap="Blues")
-plt.subplot(5,8,7)
+plt.subplot(5, 8, 7)
 plt.imshow(image, cmap="binary")  # 顯示黑白圖片
-plt.subplot(5,8,8)
+plt.subplot(5, 8, 8)
 plt.imshow(image, cmap="gray")
-plt.subplot(5,8,9)
+plt.subplot(5, 8, 9)
 plt.imshow(image, cmap="copper")
-plt.subplot(5,8,10)
+plt.subplot(5, 8, 10)
 plt.imshow(image, cmap="jet")
-plt.subplot(5,8,11)
+plt.subplot(5, 8, 11)
 plt.imshow(image, cmap="viridis")
 
 # interpolation
-plt.subplot(5,8,17)
+plt.subplot(5, 8, 17)
 plt.imshow(image, interpolation="none")
-plt.subplot(5,8,18)
+plt.subplot(5, 8, 18)
 plt.imshow(image, interpolation="bicubic")
-plt.subplot(5,8,19)
+plt.subplot(5, 8, 19)
 plt.imshow(image, interpolation="bilinear")
-plt.subplot(5,8,20)
+plt.subplot(5, 8, 20)
 plt.imshow(image, interpolation="hamming")
 
 # cmap + interpolation
 
-plt.subplot(5,8,25)
+plt.subplot(5, 8, 25)
 plt.imshow(image, cmap=plt.cm.gray_r, interpolation="nearest")
-plt.subplot(5,8,26)
+plt.subplot(5, 8, 26)
 plt.imshow(image, cmap=plt.cm.gray_r, interpolation="none")
-plt.subplot(5,8,27)
+plt.subplot(5, 8, 27)
 plt.imshow(image, cmap=plt.cm.gray, interpolation="none")
 
-plt.subplot(5,8,33)
+plt.subplot(5, 8, 33)
 plt.imshow(image)
-plt.subplot(5,8,34)
+plt.subplot(5, 8, 34)
 plt.imshow(image, origin="lower")
-plt.subplot(5,8,35)
+plt.subplot(5, 8, 35)
 plt.imshow(image * 1.0)
-plt.subplot(5,8,36)
+plt.subplot(5, 8, 36)
 plt.imshow(image / 255.0)
-plt.subplot(5,8,37)
+plt.subplot(5, 8, 37)
 plt.imshow(np.clip(image / 200.0, 0, 1))
 
 """

@@ -1,6 +1,5 @@
 """
-主成分分析 Principal components analysis, PCA 
-
+主成分分析 Principal Component Analysis, PCA 
 
 """
 
@@ -28,14 +27,16 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 print("------------------------------------------------------------")  # 60個
 
 from common1 import *
+import scipy
 import sklearn.linear_model
 from sklearn import datasets
 from sklearn.datasets import make_blobs  # 集群資料集
+from sklearn.datasets import make_moons
+from sklearn.datasets import make_circles
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
 from sklearn import metrics
-
 from sklearn.decomposition import PCA
-from sklearn.decomposition import KernelPCA# KernelPCA 萃取特徵
+from sklearn.decomposition import KernelPCA  # KernelPCA 萃取特徵
 
 from matplotlib.colors import ListedColormap
 from sklearn.preprocessing import MinMaxScaler
@@ -43,8 +44,7 @@ from sklearn import tree
 
 
 def show():
-    # return
-    plt.show()
+    # plt.show()
     pass
 
 
@@ -224,7 +224,7 @@ show()
 plot_gallery("First centered Olivetti faces", faces_centered[:n_components])
 show()
 
-pca = decomposition.PCA(n_components=n_components)
+pca = PCA(n_components=n_components)
 pca.fit(faces_centered)
 plot_gallery("PCA first %i loadings" % n_components, pca.components_[:n_components])
 
@@ -233,8 +233,6 @@ show()
 print("------------------------------------------------------------")  # 60個
 # decomposition_solutions
 print("------------------------------------------------------------")  # 60個
-
-# Principal Component Analysis(PCA)
 
 
 class BasicPCA:
@@ -343,21 +341,6 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
-sys.exit()
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 
 print("PCA 算法模擬")
 
@@ -916,10 +899,11 @@ plot_2d(S_t_sne, S_color, "T-distributed Stochastic  \n Neighbor Embedding")
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+from PIL import Image
+from PIL import ImageEnhance
 import matplotlib.cm as cm
 import matplotlib.image as img
 import pylab
-from PIL import Image, ImageEnhance
 import cv2
 
 # 创建 eigValPct(eigVals, percentage)
@@ -987,15 +971,12 @@ print(reconMat)
 reconMat = np.array(reconMat, dtype="uint8")
 
 plt.imshow(cv2.cvtColor(blue, cv2.COLOR_BGR2RGB))
-plt.title('blue')
+plt.title("blue")
 show()
 
 plt.imshow(cv2.cvtColor(np.array(reconMat, dtype="uint8"), cv2.COLOR_BGR2RGB))
-plt.title('reconMat')
+plt.title("reconMat")
 show()
-
-# 使用sklearn的PCA方法
-from sklearn.decomposition import PCA
 
 pca = PCA(n_components=426).fit(blue)
 # 降维
@@ -1007,7 +988,7 @@ print(recdata)
 PrintError(np.array(blue, dtype="double"), np.array(reconMat, dtype="double"))
 
 plt.imshow(cv2.cvtColor(np.array(recdata, dtype="uint8"), cv2.COLOR_BGR2RGB))
-plt.title('sklearn-recdata')
+plt.title("sklearn-recdata")
 show()
 
 print("------------------------------------------------------------")  # 60個
@@ -1018,11 +999,8 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------------------------------------")  # 60個

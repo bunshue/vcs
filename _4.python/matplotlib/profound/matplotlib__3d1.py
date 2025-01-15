@@ -1,4 +1,5 @@
 """
+3D plot 集合
 
 參考 使用Matplotlib繪制3D圖形
 https://paul.pub/matplotlib-3d-plotting/
@@ -40,14 +41,205 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
+from mpl_toolkits.mplot3d import axes3d
 from mpl_toolkits.mplot3d import Axes3D
 from matplotlib import cm
 from matplotlib.collections import PolyCollection
-from mpl_toolkits.mplot3d import axes3d
 from matplotlib.cm import viridis as colormap
 
-'''
+
+def show():
+    plt.show()
+    pass
+
+
 print("------------------------------------------------------------")  # 60個
+
+x = np.array([1, 2, 3, 4, 5])
+y = np.array([6, 7, 8])
+
+# x軸1~5, y軸6~8, 編織出來15個點 X, Y
+X, Y = np.meshgrid(x, y)
+
+print("X = \n", X)
+print()
+print("Y = \n", Y)
+
+plt.scatter(X, Y, marker="o", c="m")
+plt.title("畫出 meshgrid")
+show()
+
+
+# 數字拉平
+XR = X.ravel()
+YR = Y.ravel()
+print(XR)
+print()
+print(YR)
+
+x = np.array([1, 2, 3, 4])
+y = np.array([5, 6, 7, 8])
+z = np.c_[x.ravel(), y.ravel()]
+print(z.shape)
+print(z)
+
+print()
+
+x = np.arange(1, 5, 1)  # 1 2 3 4
+y = np.arange(5, 9, 1)  # 5 6 7 8
+X, Y = np.meshgrid(x, y)
+Z = np.c_[X.ravel(), Y.ravel()]
+
+print(X)
+print(Y)
+print(Z)
+
+print("------------------------------------------------------------")  # 60個
+
+# 建立影像和 3D 軸物件
+fig = plt.figure()
+
+ax = fig.add_subplot(111, projection="3d")
+
+x = np.arange(-5, 5, 0.1)
+y = np.arange(-5, 5, 0.1)
+X, Y = np.meshgrid(x, y)
+Z = np.add(np.power(X, 2), np.power(Y, 2))  # Z = X^2 + Y^2
+
+surf = ax.plot_wireframe(X, Y, Z)
+
+ax.scatter(0, 0, 0, c="r", s=100)
+ax.scatter(5, 5, 5, c="g", s=100)
+
+elevation, azimuth = 45, 45  # 仰角 方位角
+ax.view_init(elev=elevation, azim=azimuth)  # 仰角(elevation), 方位角(azimuth)
+# 仰角(elevation), 看向原點, xy平面之夾角
+# 方位角(azimuth), 看向原點, 與+y軸之夾角
+
+ax.set_xlabel("X", color="r")
+ax.set_ylabel("Y", color="g")
+ax.set_zlabel("Z", color="b")
+ax.set_title("線框圖")
+
+show()
+
+"""
+ax = plt.figure()
+ax.add_subplot(projection='3d')
+
+ax.set_xlabel('X',color='b')
+ax.set_ylabel('Y',color='b')
+ax.set_zlabel('Z',color='b')
+ax.set_title('繪製曲線表面',fontsize=14,color='b')
+ax.set_title('wireframe( )函數的實例',fontsize=16,color='b');
+
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+import cv2
+
+filename = "mola_1024x512_200mp.jpg"
+filename = "C:/_git/vcs/_1.data/______test_files1/_material/ims3.bmp"
+
+IMG_GRAY = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
+
+plt.title("使用 matplotlib 顯示圖片, 需先BGR轉RGB")
+plt.imshow(cv2.cvtColor(IMG_GRAY, cv2.COLOR_BGR2RGB))
+show()
+
+print("image.shape內容 :", IMG_GRAY.shape)
+
+H, W = IMG_GRAY.shape
+
+x = np.linspace(W - 1, 0, W)
+y = np.linspace(0, H - 1, H)
+
+X, Y = np.meshgrid(x, y)
+Z = IMG_GRAY[0:H, 0:W]
+
+fig = plt.figure()
+ax = plt.axes(projection="3d")
+ax.contour3D(X, Y, Z, 50, cmap="gist_earth")  # 150為剖面採樣數
+ax.auto_scale_xyz([W - 1, 0], [0, H - 1], [0, 300])
+show()
+
+print("------------------------------------------------------------")  # 60個
+
+fig = plt.figure(figsize=(12, 8))
+
+ax = fig.add_subplot(111, projection="3d")
+
+# X, Y value
+X = np.arange(-4, 4, 0.25)
+Y = np.arange(-4, 4, 0.25)
+X, Y = np.meshgrid(X, Y)
+R = np.sqrt(X**2 + Y**2)
+# height value
+Z = np.sin(R)
+
+ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap=plt.get_cmap("rainbow"))
+"""
+============= ================================================
+        Argument      Description
+        ============= ================================================
+        *X*, *Y*, *Z* Data values as 2D arrays
+        *rstride*     Array row stride (step size), defaults to 10
+        *cstride*     Array column stride (step size), defaults to 10
+        *color*       Color of the surface patches
+        *cmap*        A colormap for the surface patches.
+        *facecolors*  Face colors for the individual patches
+        *norm*        An instance of Normalize to map values to colors
+        *vmin*        Minimum value to map
+        *vmax*        Maximum value to map
+        *shade*       Whether to shade the facecolors
+        ============= ================================================
+"""
+
+# I think this is different from plt12_contours
+ax.contourf(X, Y, Z, zdir="z", offset=-2, cmap=plt.get_cmap("rainbow"))
+"""
+==========  ================================================
+        Argument    Description
+        ==========  ================================================
+        *X*, *Y*,   Data values as numpy.arrays
+        *Z*
+        *zdir*      The direction to use: x, y or z (default)
+        *offset*    If specified plot a projection of the filled contour
+                    on this position in plane normal to zdir
+        ==========  ================================================
+"""
+
+ax.set_zlim(-2, 2)
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+
+
+def f1(x, y):  # 左邊曲面函數
+    return np.power(x, 2) + np.power(y, 2)
+
+
+def f2(x, y):  # 右邊曲面函數
+    r = np.sqrt(np.power(x, 2) + np.power(y, 2))
+    return np.sin(r)
+
+
+X = np.arange(-3, 3, 0.1)  # 曲面 X 區間
+Y = np.arange(-3, 3, 0.1)  # 曲面 Y 區間
+X, Y = np.meshgrid(X, Y)  # 建立 XY 座標
+# 建立子圖
+fig, ax = plt.subplots(1, 2, figsize=(8, 4), subplot_kw={"projection": "3d"})
+# 左邊子圖乎叫 f1
+ax[0].plot_surface(X, Y, f1(X, Y), cmap="hsv")  # 繪製 3D 圖
+# 左邊子圖乎叫 f2
+ax[1].plot_surface(X, Y, f2(X, Y), cmap="hsv")  # 繪製 3D 圖
+show()
+
+
+print("------------------------------------------------------------")  # 60個
+
 
 # 建立3D測試資料
 
@@ -231,7 +423,7 @@ ax.set_ylim(0, 1)
 ax.set_zlim(0, 1)
 
 plt.tight_layout()
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -291,7 +483,6 @@ print("------------------------------------------------------------")  # 60個
 
 ax = fig.add_subplot(233, projection="3d")
 
-
 # 3D表面（彩色地圖）
 # 演示如何繪制使用CoolWarm顏色映射著色的3D曲面。使用“抗鋸齒=假”使表面不透明。
 # 還演示了使用線性定位器和Z軸刻度標簽的自定義格式。
@@ -321,12 +512,8 @@ print("------------------------------------------------------------")  # 60個
 
 ax = fig.add_subplot(234, projection="3d")
 
-# 1. 首先在進行 3D Plot 時除了導入 matplotlib ，還要額外添加一個模塊，即 Axes 3D 3D 坐標軸顯示：
-
-# import matplotlib
-# matplotlib.use("Agg")
-
-# 2. 接下來給進 X 和 Y 值，並將 X 和 Y 編織成柵格。每一個（X, Y）點對應的高度值我們用下面這個函數來計算。使用ax.plot_surface繪出網格表面圖形，並將一個 colormap rainbow 填充顏色。
+# 2. 接下來給進 X 和 Y 值，並將 X 和 Y 編織成柵格。每一個（X, Y）點對應的高度值我們用下面這個函數來計算。
+# 使用ax.plot_surface繪出網格表面圖形，並將一個 colormap rainbow 填充顏色。
 
 # X, Y value
 X = np.arange(-4, 4, 0.25)
@@ -344,11 +531,8 @@ ax.contourf(X, Y, Z, zdir="z", offset=-2, cmap=plt.get_cmap("rainbow"))
 # 其中，rstride 和 cstride 分別代表 row 和 column 的跨度。 可比較兩個圖分別是跨度為1 和 5 的效果。
 
 # 3D基本操作
-# import matplotlib
-# matplotlib.use("Agg")
 
 # fig = plt.figure()
-
 # X, Y value
 X = np.arange(-4, 4, 0.25)
 Y = np.arange(-4, 4, 0.25)
@@ -371,7 +555,7 @@ ax = fig.add_subplot(236, projection="3d")
 
 
 plt.tight_layout()
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -538,7 +722,7 @@ ax.set_title("測試數據投影到x,y,z平面")
 
 
 plt.tight_layout()
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -702,7 +886,7 @@ ax = fig.add_subplot(236, projection="3d")
 
 
 plt.tight_layout()
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -817,7 +1001,7 @@ width = depth = 1
 ax.bar3d(x, y, bottom, width, depth, top, shade=True)
 
 plt.tight_layout()
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -980,10 +1164,9 @@ ax.set_yticks(np.arange(2016, 2020))
 ax.set_zlabel("Precipitation")
 ax.set_title("柱狀圖")
 
-
 plt.tight_layout()
-plt.show()
-'''
+show()
+
 print("------------------------------------------------------------")  # 60個
 
 # 3D繪圖
@@ -1001,7 +1184,34 @@ ax.set_xlabel("X")
 ax.set_ylabel("Y")
 ax.set_zlabel("Z")
 
-plt.show()
+show()
+
+print("------------------------------------------------------------")  # 60個
+
+from sklearn.datasets import make_circles  # 圓形分佈的資料集
+
+X, y = make_circles(10, noise=0.1)
+print(X.shape)
+print(y.shape)
+print(X)
+print(y)
+
+from mpl_toolkits import mplot3d
+
+r = np.exp(-(X**2).sum(1))  # e^(X[0]^2+X[1])^2) ，sum(1)中的1表示表示 axis=1,沿着行的方向求和
+
+print(r)
+
+elev = 30
+azim = 30
+ax = plt.subplot(projection="3d")
+ax.scatter3D(X[:, 0], X[:, 1], r, c=y, s=50, cmap="autumn")
+ax.view_init(elev=elev, azim=azim)  # 改变绘制图像的视角,即相机的位置,azim沿着z轴旋转，elev沿着y轴
+ax.set_xlabel("X", color="r")
+ax.set_ylabel("Y", color="g")
+ax.set_zlabel("Z", color="b")
+
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1265,3 +1475,27 @@ plt.savefig("mat-3D-mv1.png")
 plt.savefig("matplot-3D-1.png")
 plt.savefig("3-vectors.png")
 plt.savefig("3-surfaces-spherical-intersec-curves.png")
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+fig = plt.figure()
+ax = plt.axes(projection="3d")
+
+# 3D plot
+
+plt.tight_layout()
+show()
+
+print("------------------------------------------------------------")  # 60個
+
+fig = plt.figure()
+ax = fig.add_subplot(projection="3d")
+
+# 3D plot
+
+show()
+
+print("------------------------------------------------------------")  # 60個

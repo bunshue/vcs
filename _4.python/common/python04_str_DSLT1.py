@@ -1,5 +1,8 @@
 import sys
+import time
+import random
 
+print("------------------------------------------------------------")  # 60個
 
 """
 各種python專用的語法 字典 串列 元組 集合 DSLT
@@ -55,8 +58,8 @@ popitem
 update
 clear
 
-
 """
+print("------------------------------------------------------------")  # 60個
 
 print("建立空容器")
 
@@ -1517,9 +1520,6 @@ print("列印元組 :", animal_tuple)
 
 print("------------------------------------------------------------")  # 60個
 
-import random
-import time
-
 print("set 和 list 速度比較")
 NUMBER_OF_ELEMENTS = 15000
 
@@ -1970,11 +1970,38 @@ print(list(zip(*reversed(matrix))))
 
 print("------------------------------------------------------------")  # 60個
 
-# 用 enumerate() 列舉元素
-my_items = ["a", "b", "c"]
+print("用 enumerate() 列舉元素")
 
-for i, item in enumerate(my_items):
+animals = ["鼠", "牛", "虎", "兔", "龍"]  # 串列
+
+for i, item in enumerate(animals):
     print(f"{i}: {item}")
+
+for index, x in enumerate(animals):
+    print("{0}: {1}".format(index, x))
+
+print("------------------------------------------------------------")  # 60個
+
+print("字串轉串列")
+animal_string = "鼠牛虎兔龍蛇馬羊猴雞狗豬"
+animal_list = list(animal_string)
+
+for i, ani in enumerate(animal_list):
+    print(i, ani)
+
+print("------------------------------------------------------------")  # 60個
+
+animals = ["鼠", "牛", "虎", "兔", "龍"]  # 串列
+
+enumerate_animals = enumerate(animals)  # 數值初始是0
+print(enumerate_animals)  # 傳回enumerate物件所在記憶體
+print("下列是輸出enumerate物件類型")
+print(type(enumerate_animals))  # 列出物件類型
+
+print("轉成串列輸出, 初始值是 0 = ", list(enumerate_animals))
+
+enumerate_animals = enumerate(animals, start=10)  # 數值初始是10
+print("轉成串列輸出, 初始值是10 = ", list(enumerate_animals))
 
 print("------------------------------------------------------------")  # 60個
 
@@ -2452,6 +2479,7 @@ print("tup最小值是", min(tup))
 
 print("------------------------------------------------------------")  # 60個
 
+# 用 enumerate() 列舉元素
 drinks = ("coffee", "tea", "wine")
 enumerate_drinks = enumerate(drinks)  # 數值初始是0
 print("轉成元組輸出, 初始值是 0 = ", tuple(enumerate_drinks))
@@ -2461,16 +2489,18 @@ print("轉成元組輸出, 初始值是10 = ", tuple(enumerate_drinks))
 
 print("------------------------------------------------------------")  # 60個
 
+# 用 enumerate() 列舉元素
 drinks = ("coffee", "tea", "wine")
-# 解析enumerate物件
+
 for drink in enumerate(drinks):  # 數值初始是0
     print(drink)
+
 for count, drink in enumerate(drinks):
     print(count, drink)
-print("****************")
-# 解析enumerate物件
+
 for drink in enumerate(drinks, 10):  # 數值初始是10
     print(drink)
+
 for count, drink in enumerate(drinks, 10):
     print(count, drink)
 
@@ -2963,6 +2993,7 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
+sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -3467,12 +3498,6 @@ print(name, salary, weight)
 
 print("------------------------------------------------------------")  # 60個
 
-phrase = ["三陽開泰", "事事如意", "五福臨門"]
-for index, x in enumerate(phrase):
-    print("{0}--{1}".format(index, x))
-
-print("------------------------------------------------------------")  # 60個
-
 strN = " DeepStone "
 strL = strN.lstrip()  # 刪除字串左邊多餘空白
 strR = strN.rstrip()  # 刪除字串右邊多餘空白
@@ -3660,23 +3685,6 @@ print("我喜歡的運動 is not 運動 1 = ", boolean_value)
 
 boolean_value = mysports is not sports2
 print("我喜歡的運動 is not 運動 2 = ", boolean_value)
-
-print("------------------------------------------------------------")  # 60個
-
-drinks = ["coffee", "tea", "wine"]
-enumerate_drinks = enumerate(drinks)  # 數值初始是0
-print(enumerate_drinks)  # 傳回enumerate物件所在記憶體
-print("下列是輸出enumerate物件類型")
-print(type(enumerate_drinks))  # 列出物件類型
-
-print("------------------------------------------------------------")  # 60個
-
-drinks = ["coffee", "tea", "wine"]
-enumerate_drinks = enumerate(drinks)  # 數值初始是0
-print("轉成串列輸出, 初始值是 0 = ", list(enumerate_drinks))
-
-enumerate_drinks = enumerate(drinks, start=10)  # 數值初始是10
-print("轉成串列輸出, 初始值是10 = ", list(enumerate_drinks))
 
 print("------------------------------------------------------------")  # 60個
 
@@ -3870,18 +3878,6 @@ for player in players:
     if player[1] < 200:
         continue
     print(player)
-
-
-print("------------------------------------------------------------")  # 60個
-
-print("enumerate 的用法")
-
-print("字串轉串列")
-animal_string = "鼠牛虎兔龍蛇馬羊猴雞狗豬"
-animal_list = list(animal_string)
-
-for i, ani in enumerate(animal_list):
-    print(i, ani)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -4342,7 +4338,6 @@ for k, v in stat.items():
 
 print("------------------------------------------------------------")  # 60個
 
-
 # DSLT
 print("字典")
 d = {"cat": "white", "dog": "black"}  # 建立字典
@@ -4356,6 +4351,7 @@ del d["pig"]  # 使用Key刪除項目
 print(d.get("pig", "N/A"))  # "pig"不存在: 顯示 "N/A"
 
 print("------------------------------------------------------------")  # 60個
+
 # DSLT
 print("以鍵來走訪字典...")
 d = {"chicken": 2, "dog": 4, "cat": 4, "spider": 8}

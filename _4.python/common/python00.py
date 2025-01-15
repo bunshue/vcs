@@ -21,6 +21,7 @@ print(__name__)
 
 print("selenium模組的版本")
 import selenium
+
 print(selenium.__version__)
 
 # import somemodule as sm	#幫模組取個別名

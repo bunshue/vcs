@@ -24,6 +24,7 @@ silhouette_score   所有樣本的 [平均]輪廓係數
 silhouette_samples 所有樣本的       輪廓係數
 
 """
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -2126,7 +2127,7 @@ print("------------------------------------------------------------")  # 60個
 from sklearn.utils import shuffle
 from skimage import io
 
-filename = 'C:/_git/vcs/_4.python/_data/elephant.jpg'
+filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
 
 original = plt.imread(filename)
 width, height, depth = original.shape

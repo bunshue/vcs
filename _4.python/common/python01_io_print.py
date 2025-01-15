@@ -16,11 +16,11 @@ import sys
 
 print("------------------------------------------------------------")  # 60個
 
-print('有r 保留字串內的反斜線')
+print("有r 保留字串內的反斜線")
 cc = r"This\nis\na\ndog\n"
 print(cc)
 
-print('不用r 要多一個反斜線')
+print("不用r 要多一個反斜線")
 cc = "This\\nis\\na\\ndog\\n"
 print(cc)
 

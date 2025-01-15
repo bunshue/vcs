@@ -30,6 +30,7 @@ import random
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns  # 海生, 自動把圖畫得比較好看
 
 font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
@@ -39,6 +40,13 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
+
+def show():
+    plt.show()
+    pass
+
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 plt.figure(
@@ -51,34 +59,33 @@ plt.figure(
     frameon=True,
 )
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 plt.subplot(231)
 
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 plt.subplot(232)
 
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 plt.subplot(233)
 
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 plt.subplot(234)
 
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 plt.subplot(235)
 
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 plt.subplot(236)
 
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
-
 
 # 下方的程式碼，執行後會先使用 x 和 y 畫出一個二維的直角座標系統，
 # 接著 z 使用二維陣列，標記每個位置的高度，最後就會根據數據資料畫出等高線圖。
@@ -101,28 +108,8 @@ print(y.shape)
 
 plt.contour(x, y, z, levels=10)  # 10階
 # plt.contour(x, y, z)    #預設維6階
-plt.show()
 
-print("------------------------------")  # 30個
-
-print("畫熱圖")
-ndarray2d = np.array(z)
-print(type(ndarray2d))
-print(ndarray2d.shape)
-print(ndarray2d)
-print("維度", ndarray2d.ndim)
-print("形狀", ndarray2d.shape)
-print("數量", ndarray2d.size)
-
-ndarray2d = np.array(z)
-
-import seaborn as sns  # 海生, 自動把圖畫得比較好看
-
-sns.heatmap(ndarray2d, cmap="Reds")
-# sns.heatmap(ndarray2d, cmap="coolwarm")
-# sns.heatmap(ndarray2d, annot = True)
-
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -136,41 +123,38 @@ y = np.linspace(-3, 3, N)  # 產生從 -3～3 共 N個 的數值的 y
 # 根據 x 和 y 計算出 z
 z = [
     [
-        (1 - x[i] / 2 + x[i] * 3 + y[j] * 5) * math.exp(-x[i] ** 2 - y[j] ** 2)
+        # (1 - x[i] / 2 + x[i] * 3 + y[j] * 5) * math.exp(-x[i] ** 2 - y[j] ** 2)
+        (np.sinc(np.sqrt((x[i] - 1) ** 2 + (y[j] - 1) ** 2)))
         for i in range(N)
     ]
     for j in range(N)
 ]
 
+# 指定每階的數值
 lv = np.linspace(np.min(z), np.max(z), 20)  # 根據 z 的最大值和最小值，定義 level 區間
-print(lv)  # 20階
 
-# plt.contour(x, y, z)    #預設階數
+print("max =", np.max(z))
+print("min =", np.min(z))
+print("level =", lv)  # 20階
+
+plt.subplot(131)
+plt.contour(x, y, z)  # 預設階數
+plt.title("預設階數")
+
+plt.subplot(132)
 plt.contour(x, y, z, levels=lv)  # 20階
-plt.show()
+plt.title("指定每階的數值, 20階")
 
-print("------------------------------------------------------------")  # 60個
-
+plt.subplot(133)
 # 使用 contourf() 繪製等高線面積圖
-
 # 如果將 contour() 換成 contourf()，繪製的圖形就會變成「等高線面積圖」，
 # 下方的程式碼執行後，會畫出等高線面積圖和等高線結合的圖表。
-
-N = 200
-x = np.linspace(-3, 3, N)
-y = np.linspace(-3, 3, N)
-z = [
-    [
-        (1 - x[i] / 2 + x[i] * 3 + y[j] * 5) * math.exp(-x[i] ** 2 - y[j] ** 2)
-        for i in range(N)
-    ]
-    for j in range(N)
-]
-
 lv = np.linspace(np.min(z), np.max(z), 10)
 plt.contourf(x, y, z, levels=lv, cmap="Reds")  # 等高線面積圖
 plt.contour(x, y, z, levels=lv, colors=["#000", "#000"])  # 等高線圖
-plt.show()
+plt.title("contourf")
+
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -184,7 +168,8 @@ cs = plt.contourf(
 cs.cmap.set_over("red")
 cs.cmap.set_under("blue")
 cs.changed()
-plt.show()
+
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -195,7 +180,7 @@ y = np.arange(4.5, 11, 1)  # len = 7
 fig, ax = plt.subplots()
 ax.pcolormesh(x, y, Z)
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -208,7 +193,7 @@ Y = Y + 0.3 * X
 fig, ax = plt.subplots()
 ax.pcolormesh(X, Y, Z)
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -220,7 +205,8 @@ xmin, xmax, ymin, ymax = 0, 6, 0, 6
 plt.axis([xmin, xmax, ymin, ymax])  # 設定各軸顯示範圍
 plt.title("二維 sinc 函數")
 plt.grid()
-plt.show()
+
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -238,7 +224,7 @@ plt.contourf(xx, yy, zz, alpha=0.3)
 plt.title("函數 z = x^2 + y^2")
 plt.grid()
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -249,11 +235,11 @@ X, Y = np.meshgrid(x, y)
 Z = np.random.randint(0, 3, (4, 4))
 plt.contour(X, Y, Z)
 
-plt.show()
+show()
 
 plt.contourf(X, Y, Z)
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -262,8 +248,8 @@ for i in range(4):
     Z = np.random.randint(0, 3, (4, 4))
     plt.contour(X, Y, Z, cmap="Paired")
     plt.scatter(X.ravel(), Y.ravel(), c=Z.ravel(), s=20, cmap="Paired")
-plt.show()
 
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -278,7 +264,7 @@ Z = np.random.randint(1, 3, X.shape)  # same
 
 plt.contour(X, Y, Z)
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -291,13 +277,13 @@ z = Z.ravel()
 plt.contour(X, Y, Z)
 plt.scatter(x, y, c=z)
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
 plt.contourf(X, Y, Z)
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -319,7 +305,8 @@ plt.title("使用contour函數", fontsize=16, color="b")
 fig.add_subplot(122)
 plt.contourf(X, Y, Z)
 plt.title("使用contourf函數", fontsize=16, color="b")
-plt.show()
+
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -341,7 +328,8 @@ plt.title("contourf函數, cmap=PuRd", fontsize=16, color="b")
 fig.add_subplot(122)
 plt.contourf(X, Y, Z, cmap="YlOrBr")
 plt.title("contourf函數, cmap=YlOrBr", fontsize=16, color="b")
-plt.show()
+
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -362,7 +350,8 @@ plt.title("contour函數", fontsize=16, color="b")
 fig.add_subplot(122)
 plt.contourf(X, Y, Z, cmap="Oranges")
 plt.title("contourf函數, cmap=Oranges", fontsize=16, color="b")
-plt.show()
+
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -385,7 +374,7 @@ plt.contourf(X, Y, Z, cmap="GnBu")
 plt.title("contourf() 填充橢圓輪廓圓平面", fontsize=16, color="b")
 plt.colorbar()  # 色彩條
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -404,7 +393,7 @@ oval = plt.contour(X, Y, Z)  # 輪廓圖
 plt.clabel(oval, colors="b")  # 增加高度標記
 plt.title("有高度標記的輪廓圖", fontsize=16, color="b")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -422,7 +411,8 @@ plt.colorbar()  # 色彩條
 oval = plt.contour(X, Y, Z, colors="b")  # 輪廓圖
 plt.clabel(oval, colors="b")  # 增加高度標記
 plt.title("指數函數的輪廓圖", fontsize=16, color="b")
-plt.show()
+
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -440,8 +430,8 @@ plt.colorbar()  # 色彩條
 oval = plt.contour(X, Y, Z, 12, colors="b")  # 輪廓圖
 plt.clabel(oval, colors="b")  # 增加高度標記
 plt.title("指數函數的輪廓圖,levels=12", fontsize=16, color="b")
-plt.show()
 
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -468,8 +458,7 @@ oval = ax[1].contour(X, Y, Z, 12, colors="b")  # 輪廓圖
 ax[1].clabel(oval, colors="b")  # 增加高度標記
 ax[1].set_title("指數函數等高圖level=12", fontsize=16, color="b")
 
-plt.show()
-
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -492,7 +481,7 @@ C = plt.contour(X, Y, f(X, Y), 8, colors="black", linewidth=0.5)
 # adding label
 plt.clabel(C, inline=True, fontsize=10)
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -508,7 +497,7 @@ plt.clabel(cs)
 plt.subplot(122)
 plt.contourf(x.reshape(-1), y.reshape(-1), z, 20)
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -538,7 +527,7 @@ for c in cs.collections:
     plt.plot(data[:,0], data[:,1], 
         color=c.get_color()[0],  linewidth=c.get_linewidth()[0])
 """
-plt.show()
+show()
 
 print(cs)
 # cs.collections
@@ -588,7 +577,7 @@ Xc = X[triangles].mean(axis=1)
 Yc = Y[triangles].mean(axis=1)
 plt.tricontour(Xc, Yc, values, 10)
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -608,3 +597,42 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
+sys.exit()
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------")  # 30個
+
+
+# z 5 X 5
+z = [
+    [0, 0, 0, 0, 0, 0, 0],
+    [0, 9, 0, 9, 0, 9, 0],
+    [0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 9, 0, 9, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 9, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0],
+]
+
+
+print("畫熱圖")
+ndarray2d = np.array(z)
+print(type(ndarray2d))
+print(ndarray2d.shape)
+print(ndarray2d)
+print("維度", ndarray2d.ndim)
+print("形狀", ndarray2d.shape)
+print("數量", ndarray2d.size)
+
+ndarray2d = np.array(z)
+
+sns.heatmap(ndarray2d, cmap="Reds")
+# sns.heatmap(ndarray2d, cmap="coolwarm")
+# sns.heatmap(ndarray2d, annot = True)
+
+show()

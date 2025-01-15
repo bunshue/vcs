@@ -1920,7 +1920,7 @@ from skimage import filters
 plt.imshow(skimage.data.camera(), cmap=plt.cm.gray)
 show()
 
-#image = color.rgb2gray(skimage.data.camera())
+# image = color.rgb2gray(skimage.data.camera())
 image = skimage.data.camera()
 
 denoised = filters.rank.median(image, morphology.disk(2))  # 过滤噪声
@@ -1928,7 +1928,7 @@ denoised = filters.rank.median(image, morphology.disk(2))  # 过滤噪声
 markers = filters.rank.gradient(denoised, morphology.disk(5)) < 10
 markers = ndi.label(markers)[0]
 gradient = filters.rank.gradient(denoised, morphology.disk(2))  # 计算梯度
-#labels = morphology.watershed(gradient, markers, mask=image)  # 基于梯度的分水岭算法
+# labels = morphology.watershed(gradient, markers, mask=image)  # 基于梯度的分水岭算法
 labels = skimage.segmentation.watershed(gradient, markers, mask=image)  # 基于梯度的分水岭算法
 
 fig, axes = plt.subplots(nrows=2, ncols=2, figsize=(6, 6))

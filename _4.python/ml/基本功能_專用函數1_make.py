@@ -61,7 +61,6 @@ print(sklearn)
 
 
 def show():
-    # return
     plt.show()
     pass
 
@@ -571,36 +570,6 @@ data, rows, columns = make_checkerboard(
 plt.matshow(data, cmap=plt.cm.Blues)
 plt.title("Original dataset")
 show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("make_s_curve 生成S曲线数据集")
-from matplotlib.ticker import NullFormatter
-
-N = 1000
-X, color = datasets.make_s_curve(n_samples=N, noise=0, random_state=9487)
-
-fig = plt.figure(figsize=(8, 6))
-
-# Add 3d scatter plot
-ax = fig.add_subplot(111, projection="3d")
-ax.scatter(X[:, 0], X[:, 1], X[:, 2], c=color, cmap=plt.cm.Spectral)
-ax.view_init(4, -72)
-
-# 不要畫刻度
-ax.xaxis.set_major_formatter(NullFormatter())
-ax.yaxis.set_major_formatter(NullFormatter())
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

@@ -25,14 +25,22 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
+
 def show():
-    # return
     plt.show()
     pass
+
 
 print("------------------------------------------------------------")  # 60個
 
 import matplotlib.image as img
+import matplotlib.patches as patch
+from matplotlib.patches import Rectangle
+from matplotlib.patches import Ellipse
+from matplotlib.patches import Circle
+
+print("------------------------------------------------------------")  # 60個
+
 filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
 image = img.imread(filename)  # 讀取原始圖像
 
@@ -42,65 +50,47 @@ fig.subplots_adjust(0, 0, 1, 1, 0, 0)
 
 plt.imshow(image)
 
-tx, ty, r = 100,100,50
-circle = plt.Circle((tx, ty), r, fill=None, alpha=0.5, lw=2, ls="dashed")
+cx, cy, r = 100, 100, 50
+circle = plt.Circle((cx, cy), r, fill=None, alpha=0.5, lw=2, ls="dashed")
 ax.add_artist(circle)
 
-sx, sy, r = 200,200,100
-circle = plt.Circle((sx, sy), r, fill=None, alpha=0.5, lw=2, color="black")
+cx, cy, r = 200, 200, 100
+circle = plt.Circle((cx, cy), r, fill=None, alpha=0.5, lw=2, color="black")
 ax.add_artist(circle)
 
-show()
-
-print("------------------------------------------------------------")  # 60個
-
-circle1 = plt.Circle((7, 9), 1.2, color="#aaaaaa")
-plt.gcf().gca().add_artist(circle1)
-plt.axis([6, 11, 6, 11])
-
-show()
-
-print("------------------------------------------------------------")  # 60個
+cx, cy, r = 250, 50, 50
+circle = plt.Circle((cx, cy), r, color="#00FF00")
+plt.gcf().gca().add_artist(circle)
 
 ax = plt.gca()
-ax.axis("equal")
-c = 10, 10
-r = 8
-ax.add_patch(plt.Circle(c, r, fc="#CCCCCC", lw=3, color="k", alpha=0.5, zorder=1))
-plt.axis([0,20,0,20])
+cx, cy, r = 250, 100, 50
+circle = plt.Circle((cx, cy), r, fc="#CCCCCC", lw=3, color="k", alpha=0.5, zorder=1)
+ax.add_patch(circle)
 
 show()
-
+"""
+#ax.axis("equal")
+#plt.axis([6, 11, 6, 11])
+#plt.axis([0,20,0,20])
+"""
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 figure, axes = plt.subplots()  # 建立子圖物件
-circle = plt.Circle((0.5, 0.5), 0.4)  # 繪製圓
-axes.set_aspect("equal")  # 設定座標單位長度相同
+circle = plt.Circle((0.5, 0.5), 0.3)  # 繪製圓
 axes.add_artist(circle)  # 將物件加入圖表物件
 
-show()
-
-print("------------------------------------------------------------")  # 60個
-
-figure, axes = plt.subplots()  # 建立子圖物件
-circle = plt.Circle((0.5, 0.5), 0.4, fill=False, linewidth=3, edgecolor="m")  # 繪製圓
-axes.set_aspect("equal")  # 設定座標單位長度相同
+circle = plt.Circle((0.2, 0.2), 0.3, fill=False, linewidth=3, edgecolor="m")  # 繪製圓
 plt.gcf().gca().add_artist(circle)  # 將物件加入圖表物件
 
-show()
-
-print("------------------------------------------------------------")  # 60個
-
-figure, axes = plt.subplots()  # 建立子圖物件
-circle = plt.Circle((0.5, 0.5), 0.4, fill=False, linewidth=3, edgecolor="m")  # 繪製圓
-axes.set_aspect("equal")  # 設定座標單位長度相同
+circle = plt.Circle((0.8, 0.8), 0.3, fill=False, linewidth=3, edgecolor="m")  # 繪製圓
 plt.gca().add_artist(circle)  # 將物件加入圖表物件
 
+axes.set_aspect("equal")  # 設定座標單位長度相同
+
 show()
 
 print("------------------------------------------------------------")  # 60個
-
-from matplotlib.patches import Circle
 
 fig, ax = plt.subplots(2, 2)
 # 建立 ax[0,0] 內容
@@ -138,9 +128,6 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
-from matplotlib.patches import Circle
-import matplotlib.image as img
-
 filename = "C:/_git/vcs/_1.data/______test_files1/__pic/_angry_bird/Angry-Birds01.jpg"
 image = img.imread(filename)  # 讀取原始圖像
 fig, ax = plt.subplots()  # 建立 axes 軸物件
@@ -148,13 +135,11 @@ im = ax.imshow(image)  # 顯示 image 影像物件
 # 建立剪輯模式
 patch = Circle((510, 380), radius=180, transform=ax.transData)
 im.set_clip_path(patch)  # 建立剪輯結果
-ax.axis("off")  # 關閉軸標記與刻度
+# ax.axis("off")  # 關閉軸標記與刻度
 
 show()
 
 print("------------------------------------------------------------")  # 60個
-
-from matplotlib.patches import Ellipse
 
 # 建立軸單位長度相同的 axes 軸物件
 figure, axes = plt.subplots(subplot_kw={"aspect": "equal"})
@@ -169,8 +154,6 @@ axes.set_ylim(-2, 2)
 show()
 
 print("------------------------------------------------------------")  # 60個
-
-from matplotlib.patches import Ellipse
 
 angle = 30  # 炫轉角度
 angles = np.arange(0, 180, angle)  # 建立角度陣列
@@ -188,8 +171,6 @@ axes.set_ylim(-2.2, 2.2)
 show()
 
 print("------------------------------------------------------------")  # 60個
-
-from matplotlib.patches import Ellipse
 
 np.random.seed(10)  # 隨機數種子
 num = 100  # 建立 100 個橢圓
@@ -218,8 +199,6 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
-from matplotlib.patches import Rectangle
-
 # 建立軸單位長度相同的 ax 軸物件
 figure, ax = plt.subplots(subplot_kw={"aspect": "equal"})
 center = (1, 1)  # 橢圓中心
@@ -236,12 +215,10 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
-from matplotlib.patches import Rectangle
-
 fig = plt.figure()
 ax = fig.add_subplot(111)
-img = np.arange(25).reshape(5, 5)  # 建立影像
-ax.imshow(img, cmap="Blues")
+image = np.arange(25).reshape(5, 5)  # 建立影像
+ax.imshow(image, cmap="Blues")
 ax.add_patch(
     Rectangle(
         (0.5, 0.5),  # 矩形 xy
@@ -258,10 +235,8 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
-from matplotlib.patches import Rectangle
-import matplotlib.image as img
-
 filename = "C:/_git/vcs/_1.data/______test_files1/__pic/_angry_bird/Angry-Birds01.jpg"
+
 image = img.imread(filename)  # 讀取原始圖像
 fig, ax = plt.subplots()  # 建立 axes 軸物件
 im = ax.imshow(image)  # 顯示 image 影像物件
@@ -275,8 +250,6 @@ ax.axis("off")  # 關閉軸標記與刻度
 show()
 
 print("------------------------------------------------------------")  # 60個
-
-import matplotlib.patches as patch
 
 fig = plt.figure()
 ax = fig.add_subplot(111)
@@ -299,8 +272,6 @@ plt.ylim([-300, 300])
 show()
 
 print("------------------------------------------------------------")  # 60個
-
-import matplotlib.patches as patch
 
 fig = plt.figure()
 ax = fig.subplots()
@@ -355,8 +326,6 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
-import matplotlib.patches as patch
-
 fig = plt.figure()
 ax = fig.subplots()
 # 繪製楔形, wedge1 使用預設顏色
@@ -391,8 +360,6 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
-import matplotlib.patches as patch
-
 fig = plt.figure()
 ax = fig.subplots()
 # 繪製楔形, wedge1 使用預設顏色
@@ -427,9 +394,6 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch27\ch27_16.py
-
-# ch27_16.py
 from matplotlib import pyplot as plt
 from matplotlib.patches import Arrow
 
@@ -453,8 +417,6 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
-import matplotlib.patches as patch
-
 ax = plt.subplot()
 xy = np.array([[5, 5], [8, 3], [8, 1], [2, 1], [2, 3]])
 poly = patch.Polygon(xy, closed=True, fc="g")
@@ -466,8 +428,6 @@ ax.set_aspect("equal")
 show()
 
 print("------------------------------------------------------------")  # 60個
-
-import matplotlib.patches as patch
 
 circle = patch.Circle((2, 8), 1.5, fc="r")
 square = patch.Rectangle((7, 6.5), 2.5, 3, fc="b")
@@ -484,7 +444,6 @@ ax.yaxis.set_visible(False)
 ax.set(xlim=(0, 10), ylim=(0, 10))  # 設定顯示區間
 
 show()
-
 
 print("------------------------------------------------------------")  # 60個
 

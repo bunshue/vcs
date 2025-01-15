@@ -174,6 +174,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("顯示模組的所有名稱")
 import random
+
 print(dir(random))
 
 print("------------------------------------------------------------")  # 60個
@@ -212,28 +213,33 @@ import bs4
 print(bs4.__version__)
 
 import cv2
+
 print(cv2.__version__)
 
 import numpy as np
+
 print(np.__version__)
 
 import pandas as pd
+
 print("查詢已安裝的 Pandas 版本")
 print(pd.__version__)
 
 
 import matplotlib
+
 print(matplotlib.__version__)
 
-#import sklearn
+# import sklearn
 import matplotlib
-#import keras
+
+# import keras
 print("Python version:", sys.version)
 print("Numpy version:", numpy.version.version)
 print("Pandas version:", pd.__version__)
-#print("Scikit-learn version:", sklearn.__version__)
+# print("Scikit-learn version:", sklearn.__version__)
 print("Matplotlib version:", matplotlib.__version__)
-#print("Keras version:", keras.__version__)
+# print("Keras version:", keras.__version__)
 
 sys.exit()
 
@@ -304,7 +310,7 @@ os.system("mkdir tmp_dir2")  # 建立 tmp_dir2 目錄
 os.system("copy python00.py tmp_dir2\tmp_python00.py")  # 複製檔案
 
 print("執行python程式")
-#os.system('makecode.py test.c')
+# os.system('makecode.py test.c')
 
 print("製作cmd指令")
 """
@@ -315,9 +321,9 @@ if os.system(cmd) != 0:
 os.system('cmd')
 """
 
-#用預設程式開啟檔案
-#os.system('filename.png')  #開啟圖片
-#os.system('filename.html')    # 開啟網頁
+# 用預設程式開啟檔案
+# os.system('filename.png')  #開啟圖片
+# os.system('filename.html')    # 開啟網頁
 
 print("------------------------------------------------------------")  # 60個
 
@@ -434,6 +440,7 @@ import numpy as np
 import pandas as pd
 
 import numpy
+
 print(numpy.version.version)
 
 # 使用 importlib.metadata 模块查找 NumPy 模块的版本
@@ -840,14 +847,24 @@ print("作業系統：", sys.platform)
 
 print("------------------------------------------------------------")  # 60個
 
-print('記事本 開啟')
+print("記事本 開啟")
 import os
 import win32process
 import win32event
 
-handle = win32process.CreateProcess('c:\\windows\\notepad.exe', '', None , None , 0 ,win32process. CREATE_NO_WINDOW , None , None ,win32process.STARTUPINFO())
+handle = win32process.CreateProcess(
+    "c:\\windows\\notepad.exe",
+    "",
+    None,
+    None,
+    0,
+    win32process.CREATE_NO_WINDOW,
+    None,
+    None,
+    win32process.STARTUPINFO(),
+)
 win32event.WaitForSingleObject(handle[0], -1)
-print('記事本 關閉')
+print("記事本 關閉")
 
 print("------------------------------------------------------------")  # 60個
 
@@ -858,9 +875,9 @@ sys.path.append(ROOT_DIR)
 
 print("------------------------------------------------------------")  # 60個
 
-PYTHONLIB = 'libpython'+sys.version[:3]+'.a'
-PC_PYTHONLIB = 'Python'+sys.version[0]+sys.version[2]+'.dll'
-NM = 'nm -p -g %s'                      # For Linux, use "nm -g %s"
+PYTHONLIB = "libpython" + sys.version[:3] + ".a"
+PC_PYTHONLIB = "Python" + sys.version[0] + sys.version[2] + ".dll"
+NM = "nm -p -g %s"  # For Linux, use "nm -g %s"
 
 print(PYTHONLIB)
 print(PC_PYTHONLIB)
@@ -871,16 +888,16 @@ print(sys.getwindowsversion())
 print("sys.getwindowsversion()[:2]")
 print(sys.getwindowsversion()[:2])
 if sys.getwindowsversion()[:2] >= (6, 0):
-    print('bbbbb')
+    print("bbbbb")
 
 if sys.getwindowsversion()[3] >= 2:
-    print('ccccc')
+    print("ccccc")
 
 print("sys.builtin_module_names")
 print(sys.builtin_module_names)
 
-if 'ce' in sys.builtin_module_names:
-    defpath = '\\Windows'
+if "ce" in sys.builtin_module_names:
+    defpath = "\\Windows"
 
 
 print(type(sys.path))
@@ -889,15 +906,16 @@ print(sys.path)
 print("------------------------------------------------------------")  # 60個
 
 import sys
-#查看搜尋模組套件的路徑優先順序
+
+# 查看搜尋模組套件的路徑優先順序
 for path in sys.path:
-  print(path)
+    print(path)
 
 print("------------------------------------------------------------")  # 60個
 
 import sys
 
-print('目前python程式所在位置 sys.executable :')
+print("目前python程式所在位置 sys.executable :")
 print(sys.executable)
 
 print("sys.version :")
@@ -906,14 +924,14 @@ print("sys.version_info :")
 print(sys.version_info)
 print("sys.platform :")
 print(sys.platform)
-print('sys.hexversion')
+print("sys.hexversion")
 print(sys.hexversion)
 
 py3 = sys.version_info >= (3, 0)
 print(py3)
 
 if sys.hexversion >= 0x02020000:
-    print('aaaaa')
+    print("aaaaa")
 
 version_suffix = "%r%r" % sys.version_info[:2]
 print(version_suffix)
@@ -937,8 +955,6 @@ print(cc)
 print("------------------------------------------------------------")  # 60個
 
 
-
-
 """
 
 
@@ -958,16 +974,18 @@ print("------------------------------------------------------------")  # 60個
 
 
 import random
+
 print(dir(random))
 
 
-
 import math
+
 help(math.sqrt)
 help(math.pow)
 
-print('help 的用法')
+print("help 的用法")
 import random
+
 print(dir(random))
 help(random.randint)
 help(random.choice)
@@ -975,17 +993,16 @@ help(random.choice)
 print("------------------------------------------------------------")  # 60個
 
 
-#用預設程式開啟檔案
-#os.system('cccc.mp3')
+# 用預設程式開啟檔案
+# os.system('cccc.mp3')
 
-#用預設程式wav檔案
-#os.startfile('harumi99.wav')
+# 用預設程式wav檔案
+# os.startfile('harumi99.wav')
 
-#用系統預設程式開啟檔案
-#os.system('cv03.png')
+# 用系統預設程式開啟檔案
+# os.system('cv03.png')
 
 print("------------------------------------------------------------")  # 60個
-
 
 
 import os
@@ -993,23 +1010,19 @@ import os
 print("HOME環境變數:", os.environ["HOME"])
 
 
-
-
-df = pd.DataFrame({'key': ['b', 'b', 'a', 'c', 'a', 'a', 'b'], 'data1': range(7)})
+df = pd.DataFrame({"key": ["b", "b", "a", "c", "a", "a", "b"], "data1": range(7)})
 print(df)
 
-print (__name__)
+print(__name__)
 
 
-if __name__=="__main__":
-     print ("It's main")
+if __name__ == "__main__":
+    print("It's main")
 else:
-     print ("It's not main")
+    print("It's not main")
 
 
 import pandas
 
 cc = dir(pandas)
 print(cc)
-
-
