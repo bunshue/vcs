@@ -132,218 +132,11 @@ from sklearn.decomposition import PCA
 
 
 def show():
-    # plt.show()
+    plt.show()
     pass
 
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# 搬到 獨立小程式
-
-"""
-X = np.array([i * np.pi / 180 for i in range(0, 370, 10)])
-#y = np.sin(X) + np.random.normal(0, 0.15, len(X))
-y = np.sin(X)
-
-data = pd.DataFrame(np.column_stack([X, y]), columns = ['x', 'y'])
-#data.head(10)
-print(data)
-plt.scatter(data['x'], data['y'], s = 30)
-
-show()
-
-for i in range(2, 16):
-    colname = 'x_%d'%i      
-    data[colname] = data['x'] ** i
-
-tt = data.head()
-print(tt)
-
-print('------------------------------')	#30個
-
-
-def linear_regression(data, power, models_to_plot):
-    print('power =', power)
-    #initialize predictors:
-    predictors = ['x']
-    if power >= 2:
-        predictors.extend(['x_%d'%i for i in range(2, power + 1)])
-    
-    # 做線性迴歸, 用 sklearn 裡的 LinearRegression 來做線性迴歸
-    linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
-    
-    linear_regression.fit(data[predictors],data['y'])  # 學習訓練.fit
-    
-    y_pred = linear_regression.predict(data[predictors])  # 預測.predict
-    
-    #Return the result in pre-defined format
-    rss = sum((y_pred-data['y']) ** 2)
-    ret = [rss]
-    ret.extend([linear_regression.intercept_])
-    ret.extend(linear_regression.coef_)
-    
-    #Check if a plot is to be made for the entered power
-    if power in models_to_plot:
-        print(power)
-        print(models_to_plot[power])
-        plt.subplot(models_to_plot[power])
-        plt.tight_layout()
-        plt.plot(data['x'], y_pred, lw = 3)
-        plt.plot(data['x'], data['y'], '.')
-        plt.title('Plot for power: %d , RSS: %.2f' % (power, rss))
-    
-    return ret
-
-#Initialize a dataframe to store the results:
-col = ['rss','intercept'] + ['coef_x_%d' % i for i in range(1, 16)]
-ind = ['model_pow_%d' % i for i in range(1, 16)]
-
-coef_matrix_simple = pd.DataFrame(index = ind, columns = col)
-print('1111')
-print(coef_matrix_simple)
-
-#Define the powers for which a plot is required:
-models_to_plot = {1:231,3:232,6:233,9:234,12:235,15:236}
-
-#Iterate through all powers and assimilate results
-for i in range(1,16):
-    print("i =", i)
-    coef_matrix_simple.iloc[i-1,0:i+2] = linear_regression(data, power=i, models_to_plot=models_to_plot)
-
-show()
-
-print('------------------------------')	#30個
-
-#Set the display format to be scientific for ease of analysis
-pd.options.display.float_format = '{:,.2g}'.format
-
-print('2222')
-print(coef_matrix_simple)
-
-print('------------------------------')	#30個
-
-# Ridge Regression 嶺迴歸
-
-#L2 Normalization Ridge Regression
-
-def ridge_regression(data, predictors, alpha, models_to_plot={}):
-    #ridgereg = Ridge(alpha=alpha,normalize=True)
-    ridgereg = Ridge(alpha=alpha)
-    ridgereg.fit(data[predictors],data['y'])  # 學習訓練.fit
-    y_pred = ridgereg.predict(data[predictors])  # 預測.predict
-    
-    #Return the result in pre-defined format
-    rss = sum((y_pred-data['y'])**2)
-    ret = [rss]
-    ret.extend([ridgereg.intercept_])
-    ret.extend(ridgereg.coef_)
-
-
-    #Check if a plot is to be made for the entered alpha
-    if alpha in models_to_plot:
-        plt.subplot(models_to_plot[alpha])
-        plt.tight_layout()
-        plt.plot(data['x'],y_pred,lw=3)
-        plt.plot(data['x'],data['y'],'.')
-        plt.title('Plot for alpha: %.3g ,RSS : %.2f'%(alpha,rss))
-    return ret
-
-
-#Initialize predictors to be set of 15 powers of x
-predictors=['x']
-predictors.extend(['x_%d'%i for i in range(2,16)])
-
-#Set the different values of alpha to be tested
-alpha_ridge = [1e-15, 1e-10, 1e-8, 1e-4, 1e-3,1e-2, 1, 5, 10, 20]
-
-#Initialize the dataframe for storing coefficients.
-col = ['rss','intercept'] + ['coef_x_%d'%i for i in range(1,16)]
-ind = ['alpha_%.2g'%alpha_ridge[i] for i in range(0,10)]
-coef_matrix_ridge = pd.DataFrame(index=ind, columns=col)
-
-models_to_plot = {1e-15:231, 1e-10:232, 1e-4:233, 1e-3:234, 1e-2:235, 5:236}
-for i in range(10):
-    coef_matrix_ridge.iloc[i,] = ridge_regression(data, predictors, alpha_ridge[i], models_to_plot)
-
-show()        
-
-print('------------------------------')	#30個
-
-pd.options.display.float_format = '{:,.2g}'.format
-tt = coef_matrix_ridge
-
-print(tt)
-
-print('------------------------------')	#30個
-
-#有多少個系數為0
-
-coef_matrix_ridge.apply(lambda x: sum(X.values==0),axis=1)#maybe X
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-from sklearn.feature_extraction.text import CountVectorizer
-from sklearn.decomposition import TruncatedSVD
-
-corpus = ["Python is popular in machine learning",
-         "Distributed system is important in big data analysis",
-        "Machine learning is theoretical foundation of data mining",
-        "Learning Python is fun",
-        "Playing soccer is fun",
-        "Many data scientists like playing soccer",
-        "Chinese men's soccer team failed again",
-        "Thirty two soccer teams enter World Cup finals"]
-
-vectorizer = CountVectorizer(min_df=1, stop_words="english")
-data = vectorizer.fit_transform(corpus)
-vectorizer.get_feature_names_out()
-
-tt = pd.DataFrame(data.toarray(), index=corpus, columns=vectorizer.get_feature_names_out()).head(10)
-print(tt)
-
-print('------------------------------')	#30個
-
-#Singular value decomposition and LSA
-model = TruncatedSVD(2)
-data_n = model.fit_transform(data)
-data_n = Normalizer(copy=False).fit_transform(data_n)
-print(data_n)
-
-tt = pd.DataFrame(data_n, index = corpus, columns = ["component_1", "component_2"])
-print(tt)
-
-xs = data_n[:,0]
-ys = data_n[:,1]
-
-plt.figure(figsize=(4,4))
-
-ax = plt.gca()
-ax.set_xlim([-1, 2])
-ax.set_ylim([-1, 2])
-
-plt.scatter(xs, ys)
-plt.xlabel('First principal component')
-plt.ylabel('Second principal component')
-plt.title('Plot of points agains LSA principal components')
-
-show()
-
-print('------------------------------')	#30個
-
-similarity = np.asarray(np.asmatrix(data_n) * np.asmatrix(data_n).T)
-tt = pd.DataFrame(similarity, index = corpus, columns = corpus).head(10)
-print(tt)
-
-print(similarity)
- 
-sns.heatmap(similarity, cmap = 'Reds')
-
-show()
-
-print(pd.DataFrame(model.components_,index=['component_1','component_2'],columns=vectorizer.get_feature_names_out()).T)
-"""
+'''
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 """
@@ -451,14 +244,14 @@ plt.title('normal distribution')
 show()
 
 #pdf: 概率密度函數
-tt = norm.pdf(x=1.8, loc=1.6, scale=0.2)
-print(tt)
+cc = norm.pdf(x=1.8, loc=1.6, scale=0.2)
+print(cc)
 
-tt = norm_prob(h, mu, sigma)
-print(tt)
+cc = norm_prob(h, mu, sigma)
+print(cc)
 
-tt = loglikelihood(data, mu, sigma)
-print(tt)
+cc = loglikelihood(data, mu, sigma)
+print(cc)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -489,16 +282,16 @@ pos_df = pd.DataFrame()
 pos_df["content"] = corpus2
 pos_df["label"] = 1
 
-tt = neg_df.head(5)
-print(tt)
+cc = neg_df.head(5)
+print(cc)
 
-tt = pos_df.head(5)
-print(tt)
+cc = pos_df.head(5)
+print(cc)
 
 corpus_df = pd.concat((neg_df, pos_df))
 
-tt = corpus_df.head(5)
-print(tt)
+cc = corpus_df.head(5)
+print(cc)
 
 print('------------------------------')	#30個
 
@@ -626,8 +419,8 @@ def p_x_given_y_2(x, mean_y, variance_y):
     return p
 
 
-tt = df["Gender"][0]
-print(tt)
+cc = df["Gender"][0]
+print(cc)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1618,116 +1411,6 @@ print(X_test)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("邏輯迴歸(Logistic Regression)")
-
-dataset = pd.read_csv("data/Social_Network_Ads.csv")
-
-X = dataset.iloc[:, [2, 3]].values
-Y = dataset.iloc[:, 4].values
-
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
-X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.2)
-# 訓練組8成, 測試組2成
-
-# 特征縮放 Feature Scaling
-scaler = StandardScaler()
-X_train = scaler.fit_transform(X_train)  # STD特徵縮放
-X_test = scaler.transform(X_test)  # STD特徵縮放
-
-# 第二步：邏輯回歸模型
-
-# 該項工作的庫將會是一個線性模型庫，之所以被稱為線性是因為邏輯回歸是一個線性分類器，
-# 這意味著我們在二維空間中，我們兩類用戶（購買和不購買）將被一條直線分割。
-# 然后導入邏輯回歸類。下一步我們將創建該類的對象，它將作為我們訓練集的分類器。
-
-# 將邏輯回歸應用于訓練集
-# Fitting Logistic Regression to the Training set
-
-classifier = LogisticRegression()
-
-classifier.fit(X_train, y_train)  # 學習訓練.fit
-
-# Predicting the Test set results
-# 第3步：預測
-# 預測測試集結果
-
-y_pred = classifier.predict(X_test)
-
-# 第4步：評估預測
-
-# 我們預測了測試集。 現在我們將評估邏輯回歸模型是否正確的學習和理解。
-# 因此這個混淆矩陣將包含我們模型的正確和錯誤的預測。
-
-# 生成混淆矩陣(Confusion Matrix)
-cm = confusion_matrix(y_test, y_pred)
-
-print(cm)  # print confusion_matrix
-print(classification_report(y_test, y_pred))  # print classification report
-
-from matplotlib.colors import ListedColormap
-
-X_set, y_set = X_train, y_train
-X1, X2 = np.meshgrid(
-    np.arange(start=X_set[:, 0].min() - 1, stop=X_set[:, 0].max() + 1, step=0.01),
-    np.arange(start=X_set[:, 1].min() - 1, stop=X_set[:, 1].max() + 1, step=0.01),
-)
-plt.contourf(
-    X1,
-    X2,
-    classifier.predict(np.array([X1.ravel(), X2.ravel()]).T).reshape(X1.shape),
-    alpha=0.75,
-    cmap=ListedColormap(("red", "green")),
-)
-plt.xlim(X1.min(), X1.max())
-plt.ylim(X2.min(), X2.max())
-for i, j in enumerate(np.unique(y_set)):
-    plt.scatter(
-        X_set[y_set == j, 0],
-        X_set[y_set == j, 1],
-        c=ListedColormap(("red", "green"))(i),
-        label=j,
-    )
-
-plt.title(" LOGISTIC(Training set)")
-plt.xlabel(" Age")
-plt.ylabel(" Estimated Salary")
-plt.legend()
-
-show()
-
-X_set, y_set = X_test, y_test
-X1, X2 = np.meshgrid(
-    np.arange(start=X_set[:, 0].min() - 1, stop=X_set[:, 0].max() + 1, step=0.01),
-    np.arange(start=X_set[:, 1].min() - 1, stop=X_set[:, 1].max() + 1, step=0.01),
-)
-
-plt.contourf(
-    X1,
-    X2,
-    classifier.predict(np.array([X1.ravel(), X2.ravel()]).T).reshape(X1.shape),
-    alpha=0.75,
-    cmap=ListedColormap(("red", "green")),
-)
-plt.xlim(X1.min(), X1.max())
-plt.ylim(X2.min(), X2.max())
-for i, j in enumerate(np.unique(y_set)):
-    plt.scatter(
-        X_set[y_set == j, 0],
-        X_set[y_set == j, 1],
-        c=ListedColormap(("red", "green"))(i),
-        label=j,
-    )
-
-plt.title(" LOGISTIC(Test set)")
-plt.xlabel(" Age")
-plt.ylabel(" Estimated Salary")
-plt.legend()
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 dataset = pd.read_csv("data/Social_Network_Ads.csv")
 
 X = dataset.iloc[:, [2, 3]].values
@@ -2410,398 +2093,6 @@ df.dropna(inplace=True)
 cc = df[["sales", "Adj Close"]].corr()
 print(cc)
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-"""
-import nltk
-nltk.download('wordnet')
-"""
-print("------------------------------------------------------------")  # 60個
-
-# spam_classification_with_tfidf
-# 垃圾信分類
-
-from nltk.tokenize import word_tokenize
-from nltk.corpus import stopwords
-from nltk.stem import PorterStemmer
-from nltk import WordNetLemmatizer
-from wordcloud import WordCloud
-import re
-
-mails = pd.read_csv("./data/spam.csv", encoding="latin-1")
-cc = mails.head()
-print(cc)
-
-# 資料整理
-mails.drop(["Unnamed: 2", "Unnamed: 3", "Unnamed: 4"], axis=1, inplace=True)
-cc = mails.head()
-print(cc)
-
-mails.rename(columns={"v1": "label", "v2": "message"}, inplace=True)
-cc = mails.head()
-print(cc)
-
-cc = mails["label"].value_counts()
-print(cc)
-
-mails["label"] = mails["label"].map({"ham": 0, "spam": 1})
-cc = mails.head()
-print(cc)
-
-# 設定停用詞
-import string
-
-stopword_list = set(stopwords.words("english") + list(string.punctuation))
-# 詞形還原(Lemmatization)
-lem = WordNetLemmatizer()
-
-
-# 前置處理(Preprocessing)
-def preprocess(text, is_lower_case=True):
-    if is_lower_case:
-        text = text.lower()
-    tokens = word_tokenize(text)
-    tokens = [token.strip() for token in tokens if len(token) > 1 and token != "..."]
-    filtered_tokens = [token for token in tokens if token not in stopword_list]
-    filtered_tokens = [lem.lemmatize(token) for token in filtered_tokens]
-    filtered_text = " ".join(filtered_tokens)
-    return filtered_text
-
-
-mails["message"] = mails["message"].map(preprocess)
-cc = mails.head()
-print(cc)
-
-# 文字雲
-
-# 凸顯垃圾信的常用單字
-spam_words = " ".join(list(mails[mails["label"] == 1]["message"]))
-spam_wc = WordCloud(width=512, height=512).generate(spam_words)
-plt.figure(figsize=(10, 8), facecolor="k")
-plt.imshow(spam_wc)
-plt.axis("off")
-plt.tight_layout(pad=0)
-show()
-
-# 找出正常信件的常用單字
-ham_words = " ".join(list(mails[mails["label"] == 0]["message"]))
-ham_wc = WordCloud(width=512, height=512).generate(ham_words)
-plt.figure(figsize=(10, 8), facecolor="k")
-plt.imshow(ham_wc)
-plt.axis("off")
-plt.tight_layout(pad=0)
-show()
-
-# 使用 SciKit-learn TF-IDF
-
-mails_message, labels = mails["message"].values, mails["label"].values
-mails_message = mails_message.astype(str)
-
-from sklearn.feature_extraction.text import TfidfVectorizer
-
-tfidf_vectorizer = TfidfVectorizer()
-tfidf_matrix = tfidf_vectorizer.fit_transform(mails_message)
-print(tfidf_matrix.shape)
-
-# (5572, 8111)
-
-cc = tfidf_vectorizer.get_feature_names_out()
-print(cc)
-
-no = 0
-for i in tfidf_matrix.toarray()[0]:
-    if i > 0.0:
-        no += 1
-print(no)
-
-# 資料分割
-X_train, X_test, y_train, y_test = train_test_split(
-    tfidf_matrix.toarray(), labels, test_size=0.2
-)
-
-# 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
-logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
-
-clf = LogisticRegression()
-
-clf.fit(X_train, y_train)  # 學習訓練.fit
-
-y_pred = clf.predict(X_test)  # 預測.predict
-cc = accuracy_score(y_pred, y_test)
-print(cc)
-# 0.9668161434977578
-
-print(classification_report(y_test, y_pred))
-
-print("混淆矩陣")
-cc = confusion_matrix(y_test, y_pred)
-print(cc)
-
-# 測試
-
-message_processed_list = (
-    "I cant pick the phone right now. Pls send a message",
-    "Congratulations ur awarded $500",
-    "Thanks for your subscription to Ringtone UK your mobile will be charged",
-    "Oops, I'll let you know when my roommate's done",
-    "FreeMsg Hey there darling it's been 3 week's now and no word back! I'd like some fun you up for it still? Tb ok! XxX std chgs to send, 憯1.50 to rcv",
-    "Free entry in 2 a wkly comp to win FA Cup final tkts 21st May 2005. Text FA to 87121 to receive entry question(std txt rate)T&C's apply 08452810075over18's",
-)
-X_new = tfidf_vectorizer.transform(message_processed_list)
-cc = clf.predict(X_new.toarray())  # 預測.predict
-print(cc)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# 06_01_logistic_regression_validation
-
-# 證明 Exp(log(x)) = x
-
-for i in range(1, 101):
-    assert round(math.e ** math.log(i), 6) == i
-
-# 證明 log(1/x) = - log(x)
-
-for i in range(1, 101):
-    assert round(math.log(i), 6) == -round(math.log(1 / i), 6)
-
-cc = math.log(100), -math.log(1 / 100)
-print(cc)
-
-# 計算羅吉斯函數的上限與下限
-
-from sympy import *
-
-x = symbols("x")
-expr = 1 / (1 + np.e ** (-x))
-limit(expr, x, -1000), limit(expr, x, np.inf)
-
-# 不使用 limit
-
-cc = 1 / (np.e**np.inf)
-print(cc)
-
-# 繪製羅吉斯函數
-x = np.linspace(-6, 6, 101)
-y = 1 / (1 + np.e ** (-x))
-plt.plot(x, y)
-plt.axhline(0, linestyle="-.", c="r")
-plt.axhline(1, linestyle="-.", c="r")
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# 06_03_logistic_regression_attrition
-
-# 員工流失預測
-
-df = pd.read_csv("./data/WA_Fn-UseC_-HR-Employee-Attrition.csv")
-cc = df.head()
-print(cc)
-
-# 2. 資料清理、資料探索與分析
-
-cc = df.isna().sum()
-print(cc)
-
-# 觀察資料集彙總資訊
-
-df.info()  # 這樣就已經把資料集彙總資訊印出來
-
-# 描述統計量
-cc = df.describe()
-print(cc)
-
-# y 各類別資料筆數統計
-sns.countplot(x=df["Attrition"])
-show()
-
-# 以Pandas函數統計各類別資料筆數
-cc = df["Attrition"].value_counts()
-print(cc)
-
-print("檢查與時間有關的特徵相關性")
-
-# 設定關聯度上限為 0.4
-max_corr = 0.4
-time_params = [
-    "Age",
-    "TotalWorkingYears",
-    "YearsAtCompany",
-    "YearsInCurrentRole",
-    "YearsSinceLastPromotion",
-    "YearsWithCurrManager",
-]
-# 計算關聯度
-corr_df = df[time_params].corr().round(2)
-
-# 繪製熱力圖
-plt.figure(figsize=(8, 5))
-mask = np.zeros_like(corr_df)
-mask[np.triu_indices_from(mask)] = True
-with sns.axes_style("white"):
-    f, ax = plt.subplots(figsize=(7, 5))
-    ax = sns.heatmap(
-        corr_df, mask=mask, vmax=max_corr, square=True, annot=True, cmap="YlGnBu"
-    )
-show()
-
-# 刪除欄位
-df.drop(
-    {
-        "TotalWorkingYears",
-        "YearsInCurrentRole",
-        "YearsSinceLastPromotion",
-        "YearsWithCurrManager",
-    },
-    axis=1,
-    inplace=True,
-)
-
-print("檢查與薪資(Salary)有關的特徵相關性")
-
-salary_params = [
-    "DailyRate",
-    "HourlyRate",
-    "MonthlyIncome",
-    "MonthlyRate",
-    "PercentSalaryHike",
-    "StockOptionLevel",
-]
-# 計算關聯度
-corr_df = df[salary_params].corr().round(2)
-
-# 繪製熱力圖
-plt.figure(figsize=(8, 5))
-mask = np.zeros_like(corr_df)
-mask[np.triu_indices_from(mask)] = True
-with sns.axes_style("white"):
-    f, ax = plt.subplots(figsize=(7, 5))
-    ax = sns.heatmap(
-        corr_df, mask=mask, vmax=max_corr, square=True, annot=True, cmap="YlGnBu"
-    )
-show()
-
-
-print("找出所有類別變數，並顯示其類別")
-
-df.select_dtypes("object").head()
-print("Levels of categories: ")
-for key in df.select_dtypes("object").keys():
-    print(key, ":", df[key].unique())
-
-print("進行One-hot encoding")
-
-df2 = pd.get_dummies(
-    df,
-    columns=df.select_dtypes("object").keys(),
-    prefix=df.select_dtypes("object").keys(),
-)
-cc = df2.keys()
-print(cc)
-
-print("刪除One-hot encoding的第一個類別欄位(base category)")
-
-df2.drop(
-    {
-        "Attrition_No",
-        "BusinessTravel_Non-Travel",
-        "Department_Human Resources",
-        "EducationField_Human Resources",
-        "Gender_Female",
-        "MaritalStatus_Single",
-        "OverTime_No",
-    },
-    axis=1,
-    inplace=True,
-)
-cont_vars = df2.select_dtypes("int").keys()
-""" NG
-dummies= df2.select_dtypes('uint8').keys().drop('Attrition_Yes') # 刪除目標變數(Y) 
-print(dummies)
-"""
-print("指定特徵(X)及目標變數(Y)")
-
-X = df2.drop("Attrition_Yes", axis=1)
-y = df2["Attrition_Yes"]
-
-# 3. 不須進行特徵工程
-
-# 4. 資料分割
-
-# 資料分割
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
-
-# 查看陣列維度
-cc = X_train.shape, X_test.shape, y_train.shape, y_test.shape
-print(cc)
-
-# 特徵縮放
-scaler = preprocessing.StandardScaler()
-X_train_std = scaler.fit_transform(X_train)
-X_test_std = scaler.transform(X_test)
-
-# 5. 選擇演算法、6. 模型訓練
-
-# 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
-logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
-
-clf = LogisticRegression()
-clf.fit(X_train_std, y_train)
-
-# 7. 模型評分
-
-# 計算準確率
-y_pred = clf.predict(X_test_std)
-print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
-# 90.14%
-
-# 混淆矩陣
-print(confusion_matrix(y_test, y_pred))
-
-# 混淆矩陣圖
-disp = ConfusionMatrixDisplay(confusion_matrix=confusion_matrix(y_test, y_pred))
-disp.plot()
-show()
-
-""" NG
-#statsmodels 作法
-
-import statsmodels.api as sm
-
-model=sm.Logit(y_train, X_train)
-result=model.fit()
-print(result.summary())
-
-#顯示權重資訊
-
-stat_df=pd.DataFrame({'coefficients':result.params, 'p-value': result.pvalues,
-                      'odds_ratio': np.exp(result.params)})
-print(stat_df)
-
-print("篩選重要的特徵變數")
-
-significant_params=stat_df[stat_df['p-value']<=0.05].index
-print(significant_params)
-
-print("勝負比(Odds)")
-
-cc = stat_df.loc[significant_params].sort_values('odds_ratio', ascending=False)['odds_ratio']
-print(cc)
-      
-print("最後底定的模型：只保留重要的特徵變數")
-
-y=df2['Attrition_Yes']
-X=df2[significant_params]
-
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
-model=sm.Logit(y_train,X_train)
-result=model.fit()
-print(result.summary())
-"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -4263,72 +3554,7 @@ assert np.all(np.dot(X, beta_star) == np.dot(X, beta_large))
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-# Dataset with some correlation
-
-N = 100  # n_samples, 樣本數
-M = 10  # n_features, 特徵數(資料的維度)
-T = 1  # n_targets, 標籤類別
-NOISE = 10  # noise, 分散程度
-
-print("make_regression,", N, "個樣本, ", M, "個特徵")
-
-X, y, coef = datasets.make_regression(
-    n_samples=N, n_features=M, n_informative=5, effective_rank=3, coef=True
-)
-
-lr = sklearn.linear_model.LinearRegression().fit(X, y)
-
-l2 = sklearn.linear_model.Ridge(alpha=10).fit(X, y)  # lambda is alpha!
-
-l1 = sklearn.linear_model.Lasso(alpha=0.1).fit(X, y)  # lambda is alpha !
-
-l1l2 = sklearn.linear_model.ElasticNet(alpha=0.1, l1_ratio=0.9).fit(X, y)
-
-pd.DataFrame(
-    np.vstack((coef, lr.coef_, l2.coef_, l1.coef_, l1l2.coef_)),
-    index=["True", "lr", "l2", "l1", "l1l2"],
-)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("make_regression, 預設參數")
-
-X, y = datasets.make_regression()
-
-# 資料分割
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
-
-lr = sklearn.linear_model.LinearRegression()
-lr.fit(X_train, y_train)
-yhat = lr.predict(X_test)
-
-r2 = r2_score(y_test, yhat)
-mse = mean_squared_error(y_test, yhat)
-mae = mean_absolute_error(y_test, yhat)
-
-print("r2: %.3f" % r2)
-print("mae: %.3f" % mae)
-print("mse: %.3f" % mse)
-
-print("------------------------------")  # 30個
-
-res = y_test - lr.predict(X_test)
-
-y_mu = np.mean(y_test)
-ss_tot = np.sum((y_test - y_mu) ** 2)
-ss_res = np.sum(res**2)
-
-r2 = 1 - ss_res / ss_tot
-mse = np.mean(res**2)
-mae = np.mean(np.abs(res))
-
-print("r2: %.3f, mae: %.3f, mse: %.3f" % (r2, mae, mse))
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
+'''
 # linear_classification
 
 # 線性判別分析, Linear discriminant analysis, LDA
@@ -4415,11 +3641,11 @@ l1l2 = sklearn.linear_model.LogisticRegression(
     X, y
 )  # lambda = 1 / C!
 
-
-pd.DataFrame(
+df = pd.DataFrame(
     np.vstack((lr.coef_, l2.coef_, l1.coef_, l1l2.coef_)),
     index=["lr", "l2", "l1", "l1l2"],
 )
+print(df)
 
 print("------------------------------")  # 30個
 
@@ -4742,55 +3968,6 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# MDS
-df = pd.read_csv("data/machine_learning4_iris.csv")
-
-X = np.asarray(df.iloc[:, :4])
-X -= np.mean(X, axis=0)
-X /= np.std(X, axis=0, ddof=1)
-
-D = sklearn.metrics.pairwise.pairwise_distances(X, metric="euclidean")
-
-stress = [
-    MDS(
-        dissimilarity="precomputed",
-        n_components=k,
-        random_state=9487,
-        max_iter=300,
-        eps=1e-9,
-    )
-    .fit(D)
-    .stress_
-    for k in range(1, X.shape[1] + 1)
-]
-
-print("Stress", stress)
-plt.plot(range(1, 5), stress)
-
-K = 2
-mds = MDS(
-    dissimilarity="precomputed",
-    n_components=K,
-    random_state=9487,
-    max_iter=300,
-    eps=1e-9,
-)
-Xmds = mds.fit_transform(D)
-
-pca = PCA(n_components=K)
-pca.fit(X)
-PC = pca.transform(X)
-
-print("Correlation between PCA and MDS")
-cor = [
-    np.corrcoef(Xmds[:, j], PC[:, j])[0, 1]
-    for j in range(min(Xmds.shape[1], PC.shape[1]))
-]
-print(cor)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 from matplotlib.ticker import NullFormatter
 from sklearn import manifold
 
@@ -4894,231 +4071,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# Ensemble learning: bagging, boosting and stacking
-
-# Bagged Decision Trees for Classification
-
-names = ["preg", "plas", "pres", "skin", "test", "mass", "pedi", "age", "class"]
-dataframe = pd.read_csv(
-    "https://raw.githubusercontent.com/jbrownlee/Datasets/master/pima-indians-diabetes.data.csv",
-    names=names,
-)
-
-array = dataframe.values
-x = array[:, 0:8]
-y = array[:, 8]
-max_features = 3
-
-kfold = model_selection.KFold(n_splits=10)
-
-rf = DecisionTreeClassifier(max_features=max_features)
-
-num_trees = 100
-
-# model = BaggingClassifier(base_estimator=rf, n_estimators=num_trees, random_state=9487)
-model = BaggingClassifier(rf, n_estimators=num_trees, random_state=9487)
-results = model_selection.cross_val_score(model, x, y, cv=kfold)
-print("Accuracy: %0.2f (+/- %0.2f)" % (results.mean(), results.std()))
-
-# Random Forest Classification
-
-names = ["preg", "plas", "pres", "skin", "test", "mass", "pedi", "age", "class"]
-dataframe = pd.read_csv(
-    "https://raw.githubusercontent.com/jbrownlee/Datasets/master/pima-indians-diabetes.data.csv",
-    names=names,
-)
-
-array = dataframe.values
-x = array[:, 0:8]
-y = array[:, 8]
-
-kfold = model_selection.KFold(n_splits=10)
-
-rf = DecisionTreeClassifier()
-num_trees = 100
-max_features = 3
-
-kfold = model_selection.KFold(n_splits=10)
-model = RandomForestClassifier(n_estimators=num_trees, max_features=max_features)
-results = model_selection.cross_val_score(model, x, y, cv=kfold)
-print("Accuracy: %0.2f (+/- %0.2f)" % (results.mean(), results.std()))
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# Boosting
-# Adaboost Classifier
-
-breast_cancer = sklearn.datasets.load_breast_cancer()
-
-x = pd.DataFrame(breast_cancer.data, columns=breast_cancer.feature_names)
-y = pd.Categorical.from_codes(breast_cancer.target, breast_cancer.target_names)
-# Transforming string Target to an int
-encoder = LabelEncoder()
-binary_encoded_y = pd.Series(encoder.fit_transform(y))
-
-# 資料分割
-train_x, test_x, train_y, test_y = train_test_split(x, binary_encoded_y)
-
-clf_boosting = AdaBoostClassifier(DecisionTreeClassifier(max_depth=1), n_estimators=200)
-clf_boosting.fit(train_x, train_y)
-predictions = clf_boosting.predict(test_x)
-print(
-    "For Boosting : F1 Score {}, Accuracy {}".format(
-        round(f1_score(test_y, predictions), 2),
-        round(accuracy_score(test_y, predictions), 2),
-    )
-)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# Random Forest as a bagging classifier
-
-breast_cancer = sklearn.datasets.load_breast_cancer()
-x = pd.DataFrame(breast_cancer.data, columns=breast_cancer.feature_names)
-y = pd.Categorical.from_codes(breast_cancer.target, breast_cancer.target_names)
-# Transforming string Target to an int
-encoder = LabelEncoder()
-binary_encoded_y = pd.Series(encoder.fit_transform(y))
-
-# 資料分割
-train_x, test_x, train_y, test_y = train_test_split(x, binary_encoded_y)
-
-clf_bagging = RandomForestClassifier(n_estimators=200, max_depth=1)
-clf_bagging.fit(train_x, train_y)
-predictions = clf_bagging.predict(test_x)
-print(
-    "For Bagging : F1 Score {}, Accuracy {}".format(
-        round(f1_score(test_y, predictions), 2),
-        round(accuracy_score(test_y, predictions), 2),
-    )
-)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# Stacking
-breast_cancer = sklearn.datasets.load_breast_cancer()
-
-x = pd.DataFrame(breast_cancer.data, columns=breast_cancer.feature_names)
-y = pd.Categorical.from_codes(breast_cancer.target, breast_cancer.target_names)
-
-# Transforming string Target to an int
-encoder = LabelEncoder()
-binary_encoded_y = pd.Series(encoder.fit_transform(y))
-
-# 資料分割
-train_x, test_x, train_y, test_y = train_test_split(x, binary_encoded_y)
-
-boosting_clf_ada_boost = AdaBoostClassifier(
-    DecisionTreeClassifier(max_depth=1), n_estimators=3
-)
-
-bagging_clf_rf = RandomForestClassifier(
-    n_estimators=200, max_depth=1, random_state=9487
-)
-
-clf_rf = RandomForestClassifier(n_estimators=200, max_depth=1, random_state=9487)
-
-clf_ada_boost = AdaBoostClassifier(
-    DecisionTreeClassifier(max_depth=1, random_state=9487), n_estimators=3
-)
-
-clf_logistic_reg = sklearn.linear_model.LogisticRegression(
-    solver="liblinear", random_state=9487
-)
-
-
-# Customizing and Exception message
-class NumberOfClassifierException(Exception):
-    pass
-
-
-# Creating a stacking class
-class Stacking:
-
-    """
-    This is a test class for stacking !
-    Please fill Free to change it to fit your needs
-    We suppose that at least the First N-1 Classifiers have
-    a predict_proba function.
-    """
-
-    def __init__(self, classifiers):
-        if len(classifiers) < 2:
-            raise numberOfClassifierException(
-                "You must fit your classifier with 2 classifiers at least"
-            )
-        else:
-            self._classifiers = classifiers
-
-    def fit(self, data_x, data_y):
-        stacked_data_x = data_x.copy()
-        for classfier in self._classifiers[:-1]:
-            classfier.fit(data_x, data_y)
-            stacked_data_x = np.column_stack(
-                (stacked_data_x, classfier.predict_proba(data_x))
-            )
-
-        last_classifier = self._classifiers[-1]
-        last_classifier.fit(stacked_data_x, data_y)
-
-    def predict(self, data_x):
-        stacked_data_x = data_x.copy()
-        for classfier in self._classifiers[:-1]:
-            prob_predictions = classfier.predict_proba(data_x)
-            stacked_data_x = np.column_stack((stacked_data_x, prob_predictions))
-
-        last_classifier = self._classifiers[-1]
-        return last_classifier.predict(stacked_data_x)
-
-
-bagging_clf_rf.fit(train_x, train_y)
-boosting_clf_ada_boost.fit(train_x, train_y)
-
-classifers_list = [clf_rf, clf_ada_boost, clf_logistic_reg]
-clf_stacking = Stacking(classifers_list)
-clf_stacking.fit(train_x, train_y)
-
-predictions_bagging = bagging_clf_rf.predict(test_x)
-predictions_boosting = boosting_clf_ada_boost.predict(test_x)
-predictions_stacking = clf_stacking.predict(test_x)
-
-print(
-    "For Bagging : F1 Score {}, Accuracy {}".format(
-        round(f1_score(test_y, predictions_bagging), 2),
-        round(accuracy_score(test_y, predictions_bagging), 2),
-    )
-)
-print(
-    "For Boosting : F1 Score {}, Accuracy {}".format(
-        round(f1_score(test_y, predictions_boosting), 2),
-        round(accuracy_score(test_y, predictions_boosting), 2),
-    )
-)
-print(
-    "For Stacking : F1 Score {}, Accuracy {}".format(
-        round(f1_score(test_y, predictions_stacking), 2),
-        round(accuracy_score(test_y, predictions_stacking), 2),
-    )
-)
-
-"""
-Comparaison
-Metric 	Bagging 	Boosting 	Stacking
-Accuracy 	0.90 	0.94 	0.98
-F1-Score 	0.88 	0.93 	0.98
-"""
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 # Scikit-learn processing pipelines
-
-# Encoding categorical features
-
-print(pd.get_dummies(["A", "B", "C", "A", "B", "D"]))
 
 # Standardization of input features
 
@@ -5389,7 +4342,6 @@ scores = cross_val_score(
 )
 print("Test bACC:%.2f" % scores.mean())
 
-
 print("========================================")
 print("== Scaler + lasso logistic regression ==")
 print("========================================")
@@ -5439,7 +4391,6 @@ lasso_cv = Pipeline(
 scores = cross_val_score(estimator=lasso_cv, X=X, y=y, cv=5)
 print("Test bACC:%.2f" % scores.mean())
 
-
 print("=============================================")
 print("== Scaler + Elasticnet logistic regression ==")
 print("=============================================")
@@ -5471,7 +4422,6 @@ enet_cv = GridSearchCV(enet, cv=5, param_grid=param_grid, scoring=balanced_acc)
 scores = cross_val_score(estimator=enet_cv, X=X, y=y, cv=5, scoring=balanced_acc, n_jobs=-1)
 print("Test bACC:%.2f" % scores.mean())
 """
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -6883,6 +5833,40 @@ print(df)
 label_encoder = preprocessing.LabelEncoder()
 df["性別"] = label_encoder.fit_transform(df["性別"])
 print(df)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# Encoding categorical features
+
+# get_dummies 是 利用pandas實現one-hot-encoding(獨熱編碼)的方式
+print(pd.get_dummies(["A", "B", "C", "A", "B", "D"]))
+
+df = pd.DataFrame([["green", "A"], ["red", "B"], ["blue", "A"]])
+
+df.columns = ["color", "class"]
+
+print("get_dummies前 :")
+print(df)
+
+print("get_dummies後 :")
+df2 = pd.get_dummies(df)
+print(df2)
+
+print("可以对指定列进行get_dummies")
+
+df3 = pd.get_dummies(df.color)
+print(df3)
+
+print("将指定列进行get_dummies 后合并到元数据中")
+
+df4 = df.join(pd.get_dummies(df.color))
+print(df4)
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

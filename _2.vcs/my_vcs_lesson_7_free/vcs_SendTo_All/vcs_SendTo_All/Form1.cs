@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.IO;                        //for FileAccess, File
+using System.Diagnostics;               //for Process
 using System.Runtime.InteropServices;   //for DllImport
 using System.Globalization; //for CultureInfo
 
@@ -28,6 +29,8 @@ namespace vcs_SendTo_All
         private const int MODE4 = 0x04;   //grep 一層
         private const int MODE5 = 0x05;   //grep 多層
         private const int MODE6 = 0x06;   //轉出檔案目錄資料 目錄下檔名轉出純文字 右鍵匯出資料夾內的檔案資料
+
+        string open_folder_directory = Application.StartupPath;
 
         ListView listView1 = new ListView();
 
@@ -254,7 +257,7 @@ namespace vcs_SendTo_All
                     //轉出檔案目錄資料 目錄下檔名轉出純文字 全部
                     export_filename(filename);//轉出檔案目錄資料 目錄下檔名轉出純文字
 
-                    richTextBox1.Text += "右鍵匯出資料夾內的檔案資料\n";
+                    richTextBox1.Text += "右鍵匯出資料夾內的檔案資料1\n";
                     richTextBox1.Text += filename + "\n";
                 }
             }
@@ -270,7 +273,7 @@ namespace vcs_SendTo_All
                 //以下為 MODE6 的 debug
                 if (flag_operation_mode == MODE6)
                 {
-                    richTextBox1.Text += "右鍵匯出資料夾內的檔案資料\n";
+                    richTextBox1.Text += "右鍵匯出資料夾內的檔案資料2 debug\n";
                     fileinfos.Clear();
                     total_size = 0;
                     total_files = 0;
@@ -292,10 +295,12 @@ namespace vcs_SendTo_All
             richTextBox1.Dock = DockStyle.Fill;
             bt_copy.Location = new Point(this.ClientSize.Width - bt_copy.Size.Width, 0);
             bt_save.Location = new Point(this.ClientSize.Width - bt_copy.Size.Width * 2, 0);
-            bt_refresh.Location = new Point(this.ClientSize.Width - bt_copy.Size.Width * 2, 0 + bt_refresh.Size.Height);
+            bt_open_folder.Location = new Point(this.ClientSize.Width - bt_copy.Size.Width * 2, 0 + bt_refresh.Size.Height);
+            bt_refresh.Location = new Point(this.ClientSize.Width - bt_copy.Size.Width * 2, 0 + bt_refresh.Size.Height*2);
             bt_clear.Location = new Point(this.ClientSize.Width - bt_copy.Size.Width, 0 + bt_setup.Size.Height);
             bt_setup.Location = new Point(this.ClientSize.Width - bt_copy.Size.Width, 0 + bt_setup.Size.Height * 2);
 
+            bt_open_folder.BackgroundImage = vcs_SendTo_All.Properties.Resources.folder_open;
             bt_refresh.BackgroundImage = vcs_SendTo_All.Properties.Resources.refresh;
         }
 
@@ -560,6 +565,20 @@ namespace vcs_SendTo_All
         {
             string filename = "filename_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt";
 
+            // 直接存檔
+
+            FileStream filestream = System.IO.File.Open(filename, FileMode.Create);
+            StreamWriter str_writer = new StreamWriter(filestream);
+
+            str_writer.WriteLine(richTextBox1.Text);
+            // Dispose StreamWriter
+            str_writer.Dispose();
+            // Close FileStream
+            filestream.Close();
+
+            richTextBox1.Text += "儲存資料完畢，檔案：" + filename + "\n";
+
+            /* 使用對話框選取檔案再存檔
             saveFileDialog1.Title = "儲存資料";
             saveFileDialog1.FileName = filename;
             saveFileDialog1.Filter = "文字檔|*.txt|所有檔|*.*";   //限定檔案格式
@@ -569,9 +588,6 @@ namespace vcs_SendTo_All
 
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                //richTextBox1.Text += "2 get filename : " + saveFileDialog1.FileName + "\n";
-                //richTextBox1.Text += "length : " + saveFileDialog1.FileName.Length.ToString() + "\n";
-
                 //StreamReader sr = new StreamReader(saveFileDialog1.FileName);
                 //StreamReader sr = new StreamReader(fileName, Encoding.Default);	//Encoding.Default解決讀取一般編碼檔案中文字錯亂的問題
 
@@ -590,6 +606,7 @@ namespace vcs_SendTo_All
             {
                 richTextBox1.Text += "未選取檔案\n";
             }
+            */
         }
 
         private void bt_setup_Click(object sender, EventArgs e)
@@ -613,6 +630,12 @@ namespace vcs_SendTo_All
         private void Form1_SizeChanged(object sender, EventArgs e)
         {
             show_item_location();
+        }
+
+        private void bt_open_folder_Click(object sender, EventArgs e)
+        {
+            //開啟檔案總管
+            Process.Start(open_folder_directory);
         }
     }
 }

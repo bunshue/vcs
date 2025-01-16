@@ -63,7 +63,7 @@ from sklearn.datasets import make_hastie_10_2
 
 
 def show():
-    # plt.show()
+    plt.show()
     pass
 
 
@@ -1505,6 +1505,59 @@ print(f"平均分數: {np.mean(scores)}, 標準差: {np.std(scores)}")
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+from sklearn import model_selection
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import BaggingClassifier
+from sklearn.ensemble import RandomForestClassifier  # 分類模型
+
+# Ensemble learning: bagging, boosting and stacking
+
+# Bagged Decision Trees for Classification
+
+names = ["preg", "plas", "pres", "skin", "test", "mass", "pedi", "age", "class"]
+dataframe = pd.read_csv(
+    "https://raw.githubusercontent.com/jbrownlee/Datasets/master/pima-indians-diabetes.data.csv",
+    names=names,
+)
+
+array = dataframe.values
+x = array[:, 0:8]
+y = array[:, 8]
+max_features = 3
+
+kfold = model_selection.KFold(n_splits=10)
+
+rf = DecisionTreeClassifier(max_features=max_features)
+
+num_trees = 100
+
+# model = BaggingClassifier(base_estimator=rf, n_estimators=num_trees, random_state=9487)
+model = BaggingClassifier(rf, n_estimators=num_trees, random_state=9487)
+results = model_selection.cross_val_score(model, x, y, cv=kfold)
+print("Accuracy: %0.2f (+/- %0.2f)" % (results.mean(), results.std()))
+
+# Random Forest Classification
+
+names = ["preg", "plas", "pres", "skin", "test", "mass", "pedi", "age", "class"]
+dataframe = pd.read_csv(
+    "https://raw.githubusercontent.com/jbrownlee/Datasets/master/pima-indians-diabetes.data.csv",
+    names=names,
+)
+
+array = dataframe.values
+x = array[:, 0:8]
+y = array[:, 8]
+
+kfold = model_selection.KFold(n_splits=10)
+
+rf = DecisionTreeClassifier()
+num_trees = 100
+max_features = 3
+
+kfold = model_selection.KFold(n_splits=10)
+model = RandomForestClassifier(n_estimators=num_trees, max_features=max_features)
+results = model_selection.cross_val_score(model, x, y, cv=kfold)
+print("Accuracy: %0.2f (+/- %0.2f)" % (results.mean(), results.std()))
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1513,8 +1566,14 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")

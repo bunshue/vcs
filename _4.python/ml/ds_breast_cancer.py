@@ -62,10 +62,13 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn import metrics
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
 from sklearn.model_selection import cross_val_score
+from sklearn.metrics import f1_score  # F値
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import confusion_matrix  # 混淆矩陣
 from sklearn.metrics import ConfusionMatrixDisplay  # 混淆矩陣圖
 from sklearn.datasets import make_classification
+from sklearn.preprocessing import LabelEncoder
+from sklearn.ensemble import AdaBoostClassifier
 
 # 不要顯示一些警告
 import warnings
@@ -74,7 +77,7 @@ warnings.filterwarnings("ignore")
 
 
 def show():
-    # plt.show()
+    plt.show()
     pass
 
 
@@ -1801,6 +1804,168 @@ print(f"Shaply value calulated from shap: {shap_values[1][j]:.5}")
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+# Boosting
+# Adaboost Classifier
+
+breast_cancer = datasets.load_breast_cancer()
+
+x = pd.DataFrame(breast_cancer.data, columns=breast_cancer.feature_names)
+y = pd.Categorical.from_codes(breast_cancer.target, breast_cancer.target_names)
+# Transforming string Target to an int
+encoder = LabelEncoder()
+binary_encoded_y = pd.Series(encoder.fit_transform(y))
+
+# 資料分割
+train_x, test_x, train_y, test_y = train_test_split(x, binary_encoded_y)
+
+clf_boosting = AdaBoostClassifier(DecisionTreeClassifier(max_depth=1), n_estimators=200)
+clf_boosting.fit(train_x, train_y)
+predictions = clf_boosting.predict(test_x)
+print(
+    "For Boosting : F1 Score {}, Accuracy {}".format(
+        round(f1_score(test_y, predictions), 2),
+        round(accuracy_score(test_y, predictions), 2),
+    )
+)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# Random Forest as a bagging classifier
+
+breast_cancer = datasets.load_breast_cancer()
+x = pd.DataFrame(breast_cancer.data, columns=breast_cancer.feature_names)
+y = pd.Categorical.from_codes(breast_cancer.target, breast_cancer.target_names)
+# Transforming string Target to an int
+encoder = LabelEncoder()
+binary_encoded_y = pd.Series(encoder.fit_transform(y))
+
+# 資料分割
+train_x, test_x, train_y, test_y = train_test_split(x, binary_encoded_y)
+
+clf_bagging = RandomForestClassifier(n_estimators=200, max_depth=1)
+clf_bagging.fit(train_x, train_y)
+predictions = clf_bagging.predict(test_x)
+print(
+    "For Bagging : F1 Score {}, Accuracy {}".format(
+        round(f1_score(test_y, predictions), 2),
+        round(accuracy_score(test_y, predictions), 2),
+    )
+)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# Stacking
+breast_cancer = datasets.load_breast_cancer()
+
+x = pd.DataFrame(breast_cancer.data, columns=breast_cancer.feature_names)
+y = pd.Categorical.from_codes(breast_cancer.target, breast_cancer.target_names)
+
+# Transforming string Target to an int
+encoder = LabelEncoder()
+binary_encoded_y = pd.Series(encoder.fit_transform(y))
+
+# 資料分割
+train_x, test_x, train_y, test_y = train_test_split(x, binary_encoded_y)
+
+boosting_clf_ada_boost = AdaBoostClassifier(
+    DecisionTreeClassifier(max_depth=1), n_estimators=3
+)
+
+bagging_clf_rf = RandomForestClassifier(
+    n_estimators=200, max_depth=1, random_state=9487
+)
+
+clf_rf = RandomForestClassifier(n_estimators=200, max_depth=1, random_state=9487)
+
+clf_ada_boost = AdaBoostClassifier(
+    DecisionTreeClassifier(max_depth=1, random_state=9487), n_estimators=3
+)
+
+clf_logistic_reg = LogisticRegression(solver="liblinear", random_state=9487)
+
+
+# Customizing and Exception message
+class NumberOfClassifierException(Exception):
+    pass
+
+
+# Creating a stacking class
+class Stacking:
+
+    """
+    This is a test class for stacking !
+    Please fill Free to change it to fit your needs
+    We suppose that at least the First N-1 Classifiers have
+    a predict_proba function.
+    """
+
+    def __init__(self, classifiers):
+        if len(classifiers) < 2:
+            raise numberOfClassifierException(
+                "You must fit your classifier with 2 classifiers at least"
+            )
+        else:
+            self._classifiers = classifiers
+
+    def fit(self, data_x, data_y):
+        stacked_data_x = data_x.copy()
+        for classfier in self._classifiers[:-1]:
+            classfier.fit(data_x, data_y)
+            stacked_data_x = np.column_stack(
+                (stacked_data_x, classfier.predict_proba(data_x))
+            )
+
+        last_classifier = self._classifiers[-1]
+        last_classifier.fit(stacked_data_x, data_y)
+
+    def predict(self, data_x):
+        stacked_data_x = data_x.copy()
+        for classfier in self._classifiers[:-1]:
+            prob_predictions = classfier.predict_proba(data_x)
+            stacked_data_x = np.column_stack((stacked_data_x, prob_predictions))
+
+        last_classifier = self._classifiers[-1]
+        return last_classifier.predict(stacked_data_x)
+
+
+bagging_clf_rf.fit(train_x, train_y)
+boosting_clf_ada_boost.fit(train_x, train_y)
+
+classifers_list = [clf_rf, clf_ada_boost, clf_logistic_reg]
+clf_stacking = Stacking(classifers_list)
+clf_stacking.fit(train_x, train_y)
+
+predictions_bagging = bagging_clf_rf.predict(test_x)
+predictions_boosting = boosting_clf_ada_boost.predict(test_x)
+predictions_stacking = clf_stacking.predict(test_x)
+
+print(
+    "For Bagging : F1 Score {}, Accuracy {}".format(
+        round(f1_score(test_y, predictions_bagging), 2),
+        round(accuracy_score(test_y, predictions_bagging), 2),
+    )
+)
+print(
+    "For Boosting : F1 Score {}, Accuracy {}".format(
+        round(f1_score(test_y, predictions_boosting), 2),
+        round(accuracy_score(test_y, predictions_boosting), 2),
+    )
+)
+print(
+    "For Stacking : F1 Score {}, Accuracy {}".format(
+        round(f1_score(test_y, predictions_stacking), 2),
+        round(accuracy_score(test_y, predictions_stacking), 2),
+    )
+)
+
+"""
+Comparaison
+Metric 	Bagging 	Boosting 	Stacking
+Accuracy 	0.90 	0.94 	0.98
+F1-Score 	0.88 	0.93 	0.98
+"""
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

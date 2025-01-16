@@ -46,5 +46,29 @@ namespace vcs_SendTo_All.Properties {
                 this["show_big_files_only"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool show_video_files_only {
+            get {
+                return ((bool)(this["show_video_files_only"]));
+            }
+            set {
+                this["show_video_files_only"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool show_audio_files_only {
+            get {
+                return ((bool)(this["show_audio_files_only"]));
+            }
+            set {
+                this["show_audio_files_only"] = value;
+            }
+        }
     }
 }

@@ -36,6 +36,7 @@
             this.bt_setup = new System.Windows.Forms.Button();
             this.bt_clear = new System.Windows.Forms.Button();
             this.bt_refresh = new System.Windows.Forms.Button();
+            this.bt_open_folder = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -104,18 +105,31 @@
             this.bt_refresh.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.bt_refresh.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_refresh.ForeColor = System.Drawing.Color.Black;
-            this.bt_refresh.Location = new System.Drawing.Point(524, 58);
+            this.bt_refresh.Location = new System.Drawing.Point(524, 104);
             this.bt_refresh.Name = "bt_refresh";
             this.bt_refresh.Size = new System.Drawing.Size(40, 40);
             this.bt_refresh.TabIndex = 48;
             this.bt_refresh.UseVisualStyleBackColor = true;
             this.bt_refresh.Click += new System.EventHandler(this.bt_refresh_Click);
             // 
+            // bt_open_folder
+            // 
+            this.bt_open_folder.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.bt_open_folder.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_open_folder.ForeColor = System.Drawing.Color.Black;
+            this.bt_open_folder.Location = new System.Drawing.Point(524, 58);
+            this.bt_open_folder.Name = "bt_open_folder";
+            this.bt_open_folder.Size = new System.Drawing.Size(40, 40);
+            this.bt_open_folder.TabIndex = 49;
+            this.bt_open_folder.UseVisualStyleBackColor = true;
+            this.bt_open_folder.Click += new System.EventHandler(this.bt_open_folder_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(622, 535);
+            this.Controls.Add(this.bt_open_folder);
             this.Controls.Add(this.bt_refresh);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.bt_setup);
@@ -139,6 +153,7 @@
         private System.Windows.Forms.Button bt_setup;
         private System.Windows.Forms.Button bt_clear;
         private System.Windows.Forms.Button bt_refresh;
+        private System.Windows.Forms.Button bt_open_folder;
     }
 }
 

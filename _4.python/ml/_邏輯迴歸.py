@@ -1317,6 +1317,516 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+print("邏輯迴歸(Logistic Regression)")
+
+dataset = pd.read_csv("data/Social_Network_Ads.csv")
+
+X = dataset.iloc[:, [2, 3]].values
+Y = dataset.iloc[:, 4].values
+
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.2)
+# 訓練組8成, 測試組2成
+
+# 特征縮放 Feature Scaling
+scaler = StandardScaler()
+X_train = scaler.fit_transform(X_train)  # STD特徵縮放
+X_test = scaler.transform(X_test)  # STD特徵縮放
+
+# 第二步：邏輯回歸模型
+
+# 該項工作的庫將會是一個線性模型庫，之所以被稱為線性是因為邏輯回歸是一個線性分類器，
+# 這意味著我們在二維空間中，我們兩類用戶（購買和不購買）將被一條直線分割。
+# 然后導入邏輯回歸類。下一步我們將創建該類的對象，它將作為我們訓練集的分類器。
+
+# 將邏輯回歸應用于訓練集
+# Fitting Logistic Regression to the Training set
+
+classifier = LogisticRegression()
+
+classifier.fit(X_train, y_train)  # 學習訓練.fit
+
+# Predicting the Test set results
+# 第3步：預測
+# 預測測試集結果
+
+y_pred = classifier.predict(X_test)
+
+# 第4步：評估預測
+
+# 我們預測了測試集。 現在我們將評估邏輯回歸模型是否正確的學習和理解。
+# 因此這個混淆矩陣將包含我們模型的正確和錯誤的預測。
+
+# 生成混淆矩陣(Confusion Matrix)
+cm = confusion_matrix(y_test, y_pred)
+
+print(cm)  # print confusion_matrix
+print(classification_report(y_test, y_pred))  # print classification report
+
+from matplotlib.colors import ListedColormap
+
+X_set, y_set = X_train, y_train
+X1, X2 = np.meshgrid(
+    np.arange(start=X_set[:, 0].min() - 1, stop=X_set[:, 0].max() + 1, step=0.01),
+    np.arange(start=X_set[:, 1].min() - 1, stop=X_set[:, 1].max() + 1, step=0.01),
+)
+plt.contourf(
+    X1,
+    X2,
+    classifier.predict(np.array([X1.ravel(), X2.ravel()]).T).reshape(X1.shape),
+    alpha=0.75,
+    cmap=ListedColormap(("red", "green")),
+)
+plt.xlim(X1.min(), X1.max())
+plt.ylim(X2.min(), X2.max())
+for i, j in enumerate(np.unique(y_set)):
+    plt.scatter(
+        X_set[y_set == j, 0],
+        X_set[y_set == j, 1],
+        c=ListedColormap(("red", "green"))(i),
+        label=j,
+    )
+
+plt.title(" LOGISTIC(Training set)")
+plt.xlabel(" Age")
+plt.ylabel(" Estimated Salary")
+plt.legend()
+
+show()
+
+X_set, y_set = X_test, y_test
+X1, X2 = np.meshgrid(
+    np.arange(start=X_set[:, 0].min() - 1, stop=X_set[:, 0].max() + 1, step=0.01),
+    np.arange(start=X_set[:, 1].min() - 1, stop=X_set[:, 1].max() + 1, step=0.01),
+)
+
+plt.contourf(
+    X1,
+    X2,
+    classifier.predict(np.array([X1.ravel(), X2.ravel()]).T).reshape(X1.shape),
+    alpha=0.75,
+    cmap=ListedColormap(("red", "green")),
+)
+plt.xlim(X1.min(), X1.max())
+plt.ylim(X2.min(), X2.max())
+for i, j in enumerate(np.unique(y_set)):
+    plt.scatter(
+        X_set[y_set == j, 0],
+        X_set[y_set == j, 1],
+        c=ListedColormap(("red", "green"))(i),
+        label=j,
+    )
+
+plt.title(" LOGISTIC(Test set)")
+plt.xlabel(" Age")
+plt.ylabel(" Estimated Salary")
+plt.legend()
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+"""
+import nltk
+nltk.download('wordnet')
+"""
+print("------------------------------------------------------------")  # 60個
+
+# spam_classification_with_tfidf
+# 垃圾信分類
+
+from nltk.tokenize import word_tokenize
+from nltk.corpus import stopwords
+from nltk.stem import PorterStemmer
+from nltk import WordNetLemmatizer
+from wordcloud import WordCloud
+import re
+
+mails = pd.read_csv("./data/spam.csv", encoding="latin-1")
+cc = mails.head()
+print(cc)
+
+# 資料整理
+mails.drop(["Unnamed: 2", "Unnamed: 3", "Unnamed: 4"], axis=1, inplace=True)
+cc = mails.head()
+print(cc)
+
+mails.rename(columns={"v1": "label", "v2": "message"}, inplace=True)
+cc = mails.head()
+print(cc)
+
+cc = mails["label"].value_counts()
+print(cc)
+
+mails["label"] = mails["label"].map({"ham": 0, "spam": 1})
+cc = mails.head()
+print(cc)
+
+# 設定停用詞
+import string
+
+stopword_list = set(stopwords.words("english") + list(string.punctuation))
+# 詞形還原(Lemmatization)
+lem = WordNetLemmatizer()
+
+
+# 前置處理(Preprocessing)
+def preprocess(text, is_lower_case=True):
+    if is_lower_case:
+        text = text.lower()
+    tokens = word_tokenize(text)
+    tokens = [token.strip() for token in tokens if len(token) > 1 and token != "..."]
+    filtered_tokens = [token for token in tokens if token not in stopword_list]
+    filtered_tokens = [lem.lemmatize(token) for token in filtered_tokens]
+    filtered_text = " ".join(filtered_tokens)
+    return filtered_text
+
+
+mails["message"] = mails["message"].map(preprocess)
+cc = mails.head()
+print(cc)
+
+# 文字雲
+
+# 凸顯垃圾信的常用單字
+spam_words = " ".join(list(mails[mails["label"] == 1]["message"]))
+spam_wc = WordCloud(width=512, height=512).generate(spam_words)
+plt.figure(figsize=(10, 8), facecolor="k")
+plt.imshow(spam_wc)
+plt.axis("off")
+plt.tight_layout(pad=0)
+show()
+
+# 找出正常信件的常用單字
+ham_words = " ".join(list(mails[mails["label"] == 0]["message"]))
+ham_wc = WordCloud(width=512, height=512).generate(ham_words)
+plt.figure(figsize=(10, 8), facecolor="k")
+plt.imshow(ham_wc)
+plt.axis("off")
+plt.tight_layout(pad=0)
+show()
+
+# 使用 SciKit-learn TF-IDF
+
+mails_message, labels = mails["message"].values, mails["label"].values
+mails_message = mails_message.astype(str)
+
+from sklearn.feature_extraction.text import TfidfVectorizer
+
+tfidf_vectorizer = TfidfVectorizer()
+tfidf_matrix = tfidf_vectorizer.fit_transform(mails_message)
+print(tfidf_matrix.shape)
+
+# (5572, 8111)
+
+cc = tfidf_vectorizer.get_feature_names_out()
+print(cc)
+
+no = 0
+for i in tfidf_matrix.toarray()[0]:
+    if i > 0.0:
+        no += 1
+print(no)
+
+# 資料分割
+X_train, X_test, y_train, y_test = train_test_split(
+    tfidf_matrix.toarray(), labels, test_size=0.2
+)
+
+# 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
+logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
+
+clf = LogisticRegression()
+
+clf.fit(X_train, y_train)  # 學習訓練.fit
+
+y_pred = clf.predict(X_test)  # 預測.predict
+cc = accuracy_score(y_pred, y_test)
+print(cc)
+# 0.9668161434977578
+
+print(classification_report(y_test, y_pred))
+
+print("混淆矩陣")
+cc = confusion_matrix(y_test, y_pred)
+print(cc)
+
+# 測試
+
+message_processed_list = (
+    "I cant pick the phone right now. Pls send a message",
+    "Congratulations ur awarded $500",
+    "Thanks for your subscription to Ringtone UK your mobile will be charged",
+    "Oops, I'll let you know when my roommate's done",
+    "FreeMsg Hey there darling it's been 3 week's now and no word back! I'd like some fun you up for it still? Tb ok! XxX std chgs to send, 憯1.50 to rcv",
+    "Free entry in 2 a wkly comp to win FA Cup final tkts 21st May 2005. Text FA to 87121 to receive entry question(std txt rate)T&C's apply 08452810075over18's",
+)
+X_new = tfidf_vectorizer.transform(message_processed_list)
+cc = clf.predict(X_new.toarray())  # 預測.predict
+print(cc)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 06_01_logistic_regression_validation
+
+# 證明 Exp(log(x)) = x
+
+for i in range(1, 101):
+    assert round(math.e ** math.log(i), 6) == i
+
+# 證明 log(1/x) = - log(x)
+
+for i in range(1, 101):
+    assert round(math.log(i), 6) == -round(math.log(1 / i), 6)
+
+cc = math.log(100), -math.log(1 / 100)
+print(cc)
+
+# 計算羅吉斯函數的上限與下限
+
+from sympy import *
+
+x = symbols("x")
+expr = 1 / (1 + np.e ** (-x))
+limit(expr, x, -1000), limit(expr, x, np.inf)
+
+# 不使用 limit
+
+cc = 1 / (np.e**np.inf)
+print(cc)
+
+# 繪製羅吉斯函數
+x = np.linspace(-6, 6, 101)
+y = 1 / (1 + np.e ** (-x))
+plt.plot(x, y)
+plt.axhline(0, linestyle="-.", c="r")
+plt.axhline(1, linestyle="-.", c="r")
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 06_03_logistic_regression_attrition
+
+# 員工流失預測
+
+df = pd.read_csv("./data/WA_Fn-UseC_-HR-Employee-Attrition.csv")
+cc = df.head()
+print(cc)
+
+# 2. 資料清理、資料探索與分析
+
+cc = df.isna().sum()
+print(cc)
+
+# 觀察資料集彙總資訊
+
+df.info()  # 這樣就已經把資料集彙總資訊印出來
+
+# 描述統計量
+cc = df.describe()
+print(cc)
+
+# y 各類別資料筆數統計
+sns.countplot(x=df["Attrition"])
+show()
+
+# 以Pandas函數統計各類別資料筆數
+cc = df["Attrition"].value_counts()
+print(cc)
+
+print("檢查與時間有關的特徵相關性")
+
+# 設定關聯度上限為 0.4
+max_corr = 0.4
+time_params = [
+    "Age",
+    "TotalWorkingYears",
+    "YearsAtCompany",
+    "YearsInCurrentRole",
+    "YearsSinceLastPromotion",
+    "YearsWithCurrManager",
+]
+# 計算關聯度
+corr_df = df[time_params].corr().round(2)
+
+# 繪製熱力圖
+plt.figure(figsize=(8, 5))
+mask = np.zeros_like(corr_df)
+mask[np.triu_indices_from(mask)] = True
+with sns.axes_style("white"):
+    f, ax = plt.subplots(figsize=(7, 5))
+    ax = sns.heatmap(
+        corr_df, mask=mask, vmax=max_corr, square=True, annot=True, cmap="YlGnBu"
+    )
+show()
+
+# 刪除欄位
+df.drop(
+    {
+        "TotalWorkingYears",
+        "YearsInCurrentRole",
+        "YearsSinceLastPromotion",
+        "YearsWithCurrManager",
+    },
+    axis=1,
+    inplace=True,
+)
+
+print("檢查與薪資(Salary)有關的特徵相關性")
+
+salary_params = [
+    "DailyRate",
+    "HourlyRate",
+    "MonthlyIncome",
+    "MonthlyRate",
+    "PercentSalaryHike",
+    "StockOptionLevel",
+]
+# 計算關聯度
+corr_df = df[salary_params].corr().round(2)
+
+# 繪製熱力圖
+plt.figure(figsize=(8, 5))
+mask = np.zeros_like(corr_df)
+mask[np.triu_indices_from(mask)] = True
+with sns.axes_style("white"):
+    f, ax = plt.subplots(figsize=(7, 5))
+    ax = sns.heatmap(
+        corr_df, mask=mask, vmax=max_corr, square=True, annot=True, cmap="YlGnBu"
+    )
+show()
+
+
+print("找出所有類別變數，並顯示其類別")
+
+df.select_dtypes("object").head()
+print("Levels of categories: ")
+for key in df.select_dtypes("object").keys():
+    print(key, ":", df[key].unique())
+
+print("進行One-hot encoding")
+
+df2 = pd.get_dummies(
+    df,
+    columns=df.select_dtypes("object").keys(),
+    prefix=df.select_dtypes("object").keys(),
+)
+cc = df2.keys()
+print(cc)
+
+print("刪除One-hot encoding的第一個類別欄位(base category)")
+
+df2.drop(
+    {
+        "Attrition_No",
+        "BusinessTravel_Non-Travel",
+        "Department_Human Resources",
+        "EducationField_Human Resources",
+        "Gender_Female",
+        "MaritalStatus_Single",
+        "OverTime_No",
+    },
+    axis=1,
+    inplace=True,
+)
+cont_vars = df2.select_dtypes("int").keys()
+""" NG
+dummies= df2.select_dtypes('uint8').keys().drop('Attrition_Yes') # 刪除目標變數(Y) 
+print(dummies)
+"""
+print("指定特徵(X)及目標變數(Y)")
+
+X = df2.drop("Attrition_Yes", axis=1)
+y = df2["Attrition_Yes"]
+
+# 3. 不須進行特徵工程
+
+# 4. 資料分割
+
+# 資料分割
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+# 查看陣列維度
+cc = X_train.shape, X_test.shape, y_train.shape, y_test.shape
+print(cc)
+
+# 特徵縮放
+scaler = preprocessing.StandardScaler()
+X_train_std = scaler.fit_transform(X_train)
+X_test_std = scaler.transform(X_test)
+
+# 5. 選擇演算法、6. 模型訓練
+
+# 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
+logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
+
+clf = LogisticRegression()
+clf.fit(X_train_std, y_train)
+
+# 7. 模型評分
+
+# 計算準確率
+y_pred = clf.predict(X_test_std)
+print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
+# 90.14%
+
+# 混淆矩陣
+print(confusion_matrix(y_test, y_pred))
+
+# 混淆矩陣圖
+disp = ConfusionMatrixDisplay(confusion_matrix=confusion_matrix(y_test, y_pred))
+disp.plot()
+show()
+
+""" NG
+#statsmodels 作法
+
+import statsmodels.api as sm
+
+model=sm.Logit(y_train, X_train)
+result=model.fit()
+print(result.summary())
+
+#顯示權重資訊
+
+stat_df=pd.DataFrame({'coefficients':result.params, 'p-value': result.pvalues,
+                      'odds_ratio': np.exp(result.params)})
+print(stat_df)
+
+print("篩選重要的特徵變數")
+
+significant_params=stat_df[stat_df['p-value']<=0.05].index
+print(significant_params)
+
+print("勝負比(Odds)")
+
+cc = stat_df.loc[significant_params].sort_values('odds_ratio', ascending=False)['odds_ratio']
+print(cc)
+      
+print("最後底定的模型：只保留重要的特徵變數")
+
+y=df2['Attrition_Yes']
+X=df2[significant_params]
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+model=sm.Logit(y_train,X_train)
+result=model.fit()
+print(result.summary())
+"""
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

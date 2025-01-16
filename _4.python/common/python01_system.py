@@ -241,8 +241,6 @@ print("Pandas version:", pd.__version__)
 print("Matplotlib version:", matplotlib.__version__)
 # print("Keras version:", keras.__version__)
 
-sys.exit()
-
 print("------------------------------------------------------------")  # 60個
 
 print("sys.argv:{}".format(sys.argv))
@@ -1004,7 +1002,6 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-
 import os
 
 print("HOME環境變數:", os.environ["HOME"])
@@ -1026,3 +1023,103 @@ import pandas
 
 cc = dir(pandas)
 print(cc)
+
+print("------------------------------------------------------------")  # 60個
+
+import platform, os, sys, getopt, textwrap, shutil, stat, time
+
+FW_PREFIX = ["Library", "Frameworks", "Python.framework"]
+FW_VERSION_PREFIX = "--undefined--"
+
+# The directory we'll use to create the build (will be erased and recreated)
+WORKDIR = 'C:/_git/vcs/_1.data/______test_files3aaaa'
+
+# The directory we'll use to store third-party sources. Set this to something
+# else if you don't want to re-fetch required libraries every time.
+DEPSRC = os.path.join(WORKDIR, 'third-party')
+DEPSRC = os.path.expanduser('~/Universal/other-sources')
+
+SDKPATH = "/Developer/SDKs/MacOSX10.4u.sdk"
+
+universal_opts_map = { '32-bit': ('i386', 'ppc',),
+                       '64-bit': ('x86_64', 'ppc64',),
+                       'intel':  ('i386', 'x86_64'),
+                       '3-way':  ('ppc', 'i386', 'x86_64'),
+                       'all':    ('i386', 'ppc', 'x86_64', 'ppc64',) }
+
+UNIVERSALOPTS = tuple(universal_opts_map.keys())
+
+UNIVERSALARCHS = '32-bit'
+
+ARCHLIST = universal_opts_map[UNIVERSALARCHS]
+
+# Source directory
+SRCDIR = os.path.dirname(
+        os.path.dirname(
+            os.path.dirname(
+                os.path.abspath(__file__
+        ))))
+
+DEPTARGET = '10.3'
+
+def getTargetCompilers():
+    target_cc_map = {
+        '10.3': ('gcc-4.0', 'g++-4.0'),
+        '10.4': ('gcc-4.0', 'g++-4.0'),
+        '10.5': ('gcc-4.2', 'g++-4.2'),
+        '10.6': ('gcc-4.2', 'g++-4.2'),
+    }
+    return target_cc_map.get(DEPTARGET, ('clang', 'clang++') )
+
+
+SRCDIR=os.path.abspath(SRCDIR)
+WORKDIR=os.path.abspath(WORKDIR)
+SDKPATH=os.path.abspath(SDKPATH)
+DEPSRC=os.path.abspath(DEPSRC)
+
+CC, CXX = getTargetCompilers()
+
+FW_VERSION_PREFIX = FW_PREFIX[:] + ["Versions", 'aaaaa']
+
+print("Source directory:    %s" % SRCDIR)
+print("Build directory:     %s" % WORKDIR)
+print("SDK location:        %s" % SDKPATH)
+print("Third-party source:  %s" % DEPSRC)
+print("Deployment target:   %s" % DEPTARGET)
+print("Universal archs:     %s" % str(ARCHLIST))
+print("C compiler:          %s" % CC)
+print("C++ compiler:        %s" % CXX)
+
+print('sys.version_info = ', sys.version_info)
+print('platform.system() = ', platform.system())
+print('platform.release() = ', platform.release())
+"""
+print('os.environ = ', os.environ)
+for ev in list(os.environ):
+    print(ev)
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+print('globals()用法')
+#print(globals())
+
+ccc = textwrap.dedent("""\
+    WORKDIR : %(WORKDIR)r
+    DEPSRC : %(DEPSRC)r
+    SDKPATH : %(SDKPATH)r
+    SRCDIR : %(SRCDIR)r
+    DEPTARGET : %(DEPTARGET)r
+    UNIVERSALOPTS : %(UNIVERSALOPTS)r,
+    UNIVERSALARCHS : %(UNIVERSALARCHS)r
+""")% globals()
+
+
+print(ccc)
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+

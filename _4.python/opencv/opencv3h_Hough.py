@@ -9,10 +9,17 @@ HoughCircles
 
 import cv2
 
+print("------------------------------------------------------------")  # 60個
+
+# 共同
+import os
 import sys
-import matplotlib.pyplot as plt
-import numpy as np
+import time
 import math
+import random
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
 
 font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
@@ -20,6 +27,7 @@ font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
 # 設定負號
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
@@ -135,23 +143,6 @@ HoughLinesP
 HoughCircles
 
 """
-
-import cv2
-
-import sys
-import matplotlib.pyplot as plt
-import numpy as np
-import math
-
-font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
-# 設定中文字型及負號正確顯示
-# 設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
-# 設定負號
-plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
-
-print("------------------------------------------------------------")  # 60個
-
 img = cv2.imread("images/jianzhu.png")
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # 灰度图像
 edges = cv2.Canny(gray, 50, 200)
@@ -280,16 +271,10 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-
 """
 霍夫圓形檢測
 
 """
-
-import sys
-import cv2
-import numpy as np
-
 filename = "images/cup.jpg"
 
 print("顯示圖片")

@@ -1791,6 +1791,301 @@ for X1 in X:
 print("誤差值", sum1 / 30)
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+X = np.array([i * np.pi / 180 for i in range(0, 370, 10)])
+# y = np.sin(X) + np.random.normal(0, 0.15, len(X))
+y = np.sin(X)
+
+data = pd.DataFrame(np.column_stack([X, y]), columns=["x", "y"])
+# data.head(10)
+print(data)
+plt.scatter(data["x"], data["y"], s=30)
+
+show()
+
+for i in range(2, 16):
+    colname = "x_%d" % i
+    data[colname] = data["x"] ** i
+
+cc = data.head()
+print(cc)
+
+print("------------------------------")  # 30個
+
+
+def linear_regression(data, power, models_to_plot):
+    print("power =", power)
+    # initialize predictors:
+    predictors = ["x"]
+    if power >= 2:
+        predictors.extend(["x_%d" % i for i in range(2, power + 1)])
+
+    # 做線性迴歸, 用 sklearn 裡的 LinearRegression 來做線性迴歸
+    linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
+
+    linear_regression.fit(data[predictors], data["y"])  # 學習訓練.fit
+
+    y_pred = linear_regression.predict(data[predictors])  # 預測.predict
+
+    # Return the result in pre-defined format
+    rss = sum((y_pred - data["y"]) ** 2)
+    ret = [rss]
+    ret.extend([linear_regression.intercept_])
+    ret.extend(linear_regression.coef_)
+
+    # Check if a plot is to be made for the entered power
+    if power in models_to_plot:
+        print(power)
+        print(models_to_plot[power])
+        plt.subplot(models_to_plot[power])
+        plt.tight_layout()
+        plt.plot(data["x"], y_pred, lw=3)
+        plt.plot(data["x"], data["y"], ".")
+        plt.title("Plot for power: %d , RSS: %.2f" % (power, rss))
+
+    return ret
+
+
+# Initialize a dataframe to store the results:
+col = ["rss", "intercept"] + ["coef_x_%d" % i for i in range(1, 16)]
+ind = ["model_pow_%d" % i for i in range(1, 16)]
+
+coef_matrix_simple = pd.DataFrame(index=ind, columns=col)
+print("1111")
+print(coef_matrix_simple)
+
+# Define the powers for which a plot is required:
+models_to_plot = {1: 231, 3: 232, 6: 233, 9: 234, 12: 235, 15: 236}
+
+# Iterate through all powers and assimilate results
+for i in range(1, 16):
+    print("i =", i)
+    coef_matrix_simple.iloc[i - 1, 0 : i + 2] = linear_regression(
+        data, power=i, models_to_plot=models_to_plot
+    )
+
+show()
+
+print("------------------------------")  # 30個
+
+# Set the display format to be scientific for ease of analysis
+pd.options.display.float_format = "{:,.2g}".format
+
+print("2222")
+print(coef_matrix_simple)
+
+print("------------------------------")  # 30個
+
+# Ridge Regression 嶺迴歸
+
+# L2 Normalization Ridge Regression
+
+
+def ridge_regression(data, predictors, alpha, models_to_plot={}):
+    # ridgereg = Ridge(alpha=alpha,normalize=True)
+    ridgereg = Ridge(alpha=alpha)
+    ridgereg.fit(data[predictors], data["y"])  # 學習訓練.fit
+    y_pred = ridgereg.predict(data[predictors])  # 預測.predict
+
+    # Return the result in pre-defined format
+    rss = sum((y_pred - data["y"]) ** 2)
+    ret = [rss]
+    ret.extend([ridgereg.intercept_])
+    ret.extend(ridgereg.coef_)
+
+    # Check if a plot is to be made for the entered alpha
+    if alpha in models_to_plot:
+        plt.subplot(models_to_plot[alpha])
+        plt.tight_layout()
+        plt.plot(data["x"], y_pred, lw=3)
+        plt.plot(data["x"], data["y"], ".")
+        plt.title("Plot for alpha: %.3g ,RSS : %.2f" % (alpha, rss))
+    return ret
+
+
+# Initialize predictors to be set of 15 powers of x
+predictors = ["x"]
+predictors.extend(["x_%d" % i for i in range(2, 16)])
+
+# Set the different values of alpha to be tested
+alpha_ridge = [1e-15, 1e-10, 1e-8, 1e-4, 1e-3, 1e-2, 1, 5, 10, 20]
+
+# Initialize the dataframe for storing coefficients.
+col = ["rss", "intercept"] + ["coef_x_%d" % i for i in range(1, 16)]
+ind = ["alpha_%.2g" % alpha_ridge[i] for i in range(0, 10)]
+coef_matrix_ridge = pd.DataFrame(index=ind, columns=col)
+
+models_to_plot = {1e-15: 231, 1e-10: 232, 1e-4: 233, 1e-3: 234, 1e-2: 235, 5: 236}
+for i in range(10):
+    coef_matrix_ridge.iloc[i,] = ridge_regression(
+        data, predictors, alpha_ridge[i], models_to_plot
+    )
+
+show()
+
+print("------------------------------")  # 30個
+
+pd.options.display.float_format = "{:,.2g}".format
+cc = coef_matrix_ridge
+
+print(cc)
+
+print("------------------------------")  # 30個
+
+# 有多少個系數為0
+
+coef_matrix_ridge.apply(lambda x: sum(X.values == 0), axis=1)  # maybe X
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.decomposition import TruncatedSVD
+
+corpus = [
+    "Python is popular in machine learning",
+    "Distributed system is important in big data analysis",
+    "Machine learning is theoretical foundation of data mining",
+    "Learning Python is fun",
+    "Playing soccer is fun",
+    "Many data scientists like playing soccer",
+    "Chinese men's soccer team failed again",
+    "Thirty two soccer teams enter World Cup finals",
+]
+
+vectorizer = CountVectorizer(min_df=1, stop_words="english")
+data = vectorizer.fit_transform(corpus)
+vectorizer.get_feature_names_out()
+
+df = pd.DataFrame(
+    data.toarray(), index=corpus, columns=vectorizer.get_feature_names_out()
+).head(10)
+print(df)
+
+print("------------------------------")  # 30個
+
+# Singular value decomposition and LSA
+model = TruncatedSVD(2)
+data_n = model.fit_transform(data)
+data_n = Normalizer(copy=False).fit_transform(data_n)
+print(data_n)
+
+df = pd.DataFrame(data_n, index=corpus, columns=["component_1", "component_2"])
+print(df)
+
+xs = data_n[:, 0]
+ys = data_n[:, 1]
+
+plt.figure(figsize=(4, 4))
+
+ax = plt.gca()
+ax.set_xlim([-1, 2])
+ax.set_ylim([-1, 2])
+
+plt.scatter(xs, ys)
+plt.xlabel("First principal component")
+plt.ylabel("Second principal component")
+plt.title("Plot of points agains LSA principal components")
+
+show()
+
+print("------------------------------")  # 30個
+
+similarity = np.asarray(np.asmatrix(data_n) * np.asmatrix(data_n).T)
+df = pd.DataFrame(similarity, index=corpus, columns=corpus).head(10)
+print(df)
+
+print(similarity)
+
+sns.heatmap(similarity, cmap="Reds")
+
+show()
+
+df = pd.DataFrame(
+    model.components_,
+    index=["component_1", "component_2"],
+    columns=vectorizer.get_feature_names_out(),
+)
+print(df.T)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# Dataset with some correlation
+
+N = 100  # n_samples, 樣本數
+M = 10  # n_features, 特徵數(資料的維度)
+T = 1  # n_targets, 標籤類別
+NOISE = 10  # noise, 分散程度
+
+print("make_regression,", N, "個樣本, ", M, "個特徵")
+
+X, y, coef = datasets.make_regression(
+    n_samples=N, n_features=M, n_informative=5, effective_rank=3, coef=True
+)
+
+lr = sklearn.linear_model.LinearRegression().fit(X, y)
+
+print("lr.coef_")
+print(lr.coef_)
+
+l2 = sklearn.linear_model.Ridge(alpha=10).fit(X, y)  # lambda is alpha!
+
+l1 = sklearn.linear_model.Lasso(alpha=0.1).fit(X, y)  # lambda is alpha !
+
+l1l2 = sklearn.linear_model.ElasticNet(alpha=0.1, l1_ratio=0.9).fit(X, y)
+
+df = pd.DataFrame(
+    np.vstack((coef, lr.coef_, l2.coef_, l1.coef_, l1l2.coef_)),
+    index=["True", "lr", "l2", "l1", "l1l2"],
+)
+
+print(df)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("make_regression, 預設參數")
+
+X, y = datasets.make_regression()
+
+# 資料分割
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+lr = sklearn.linear_model.LinearRegression()
+lr.fit(X_train, y_train)
+yhat = lr.predict(X_test)
+
+r2 = r2_score(y_test, yhat)
+mse = mean_squared_error(y_test, yhat)
+mae = mean_absolute_error(y_test, yhat)
+
+print("r2: %.3f" % r2)
+print("mae: %.3f" % mae)
+print("mse: %.3f" % mse)
+
+print("------------------------------")  # 30個
+
+res = y_test - lr.predict(X_test)
+
+y_mu = np.mean(y_test)
+ss_tot = np.sum((y_test - y_mu) ** 2)
+ss_res = np.sum(res**2)
+
+r2 = 1 - ss_res / ss_tot
+mse = np.mean(res**2)
+mae = np.mean(np.abs(res))
+
+print("r2: %.3f, mae: %.3f, mse: %.3f" % (r2, mae, mse))
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
