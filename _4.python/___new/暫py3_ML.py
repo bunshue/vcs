@@ -257,7 +257,6 @@ print("------------------------------------------------------------")	#60個
 
 print("------------------------------------------------------------")	#60個
 
-
 lost
 1. UCI波士頓的房價資料集 (https://archive.ics.uci.edu/ml/machine-learning-databases/housing/)
 Home - UCI Machine Learning Repository
@@ -266,15 +265,6 @@ https://archive.ics.uci.edu/
 
 
 print("------------------------------------------------------------")	#60個
-
-
-
-
-
-Kaggle Cats and Dogs Dataset
-
-https://www.microsoft.com/en-us/download/details.aspx?id=54765
-https://www.microsoft.com/en-us/download/details.aspx?id=54765
 
 
 
