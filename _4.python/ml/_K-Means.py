@@ -47,10 +47,10 @@ def show():
 
 
 colors = ["r", "g", "b", "y", "m", "c"]
-
+'''
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
+""" # 無 sklearn ST
 print("無 sklearn之kmeans 1")
 
 
@@ -542,18 +542,41 @@ for key, item in grouped_df:
 cc = model.predict(10)  # 第一組
 print(cc)
 
+""" # 無 sklearn SP
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("K-平均演算法(KMeans) random資料分3群並畫圖")
+print("K-平均演算法(KMeans) 資料分成3群並畫圖")
 
-N = 50
-print("任意隨機資料")
-X = np.random.rand(N, 2)
+# 建立資料一, 使用 random
+# 隨機生成 N 個點
+N = 100
+X = np.random.rand(N, 2)  # N X 2 亂數陣列
+"""
+# 建立資料二, 使用 make_blobs
+N = 100
+M = 2  # n_features, 特徵數(資料的維度)
+GROUPS = 4  # centers, 分群數
+STD = 1  # cluster_std, 資料標準差
 
+print("make_blobs,", N, "個樣本, ", M, "個特徵, 分成", GROUPS, "群")
+
+X, y, centers = make_blobs(
+    n_samples=N,
+    centers=GROUPS,
+    n_features=M,
+    cluster_std=STD,
+    random_state=9487,
+    return_centers=True,
+)
+
+print(GROUPS, "群 的中心點 :")
+print(centers)
+print("資料的維度", X.shape, y.shape)
+"""
 CLUSTERS = 3  # 要分成的群數
 print("使用KMeans分成", CLUSTERS, "群")
-clf = KMeans(n_clusters=CLUSTERS)  # K-平均演算法
+clf = KMeans(n_clusters=CLUSTERS, random_state=9487)  # K-平均演算法
 
 clf.fit(X)  # 學習訓練.fit
 
@@ -571,8 +594,8 @@ print("自己   計算分群準確性 :", ss)
 plt.figure(num="KMeans分群", figsize=(12, 6))
 
 plt.subplot(131)
-plt.scatter(X[:, 0], X[:, 1], s=50)
-plt.title("原始資料50點")
+plt.scatter(X[:, 0], X[:, 1], s=50, c="r")
+plt.title("原始隨機資料50點")
 
 plt.subplot(132)
 plt.scatter(X[:, 0], X[:, 1], c=clf.labels_)
@@ -610,7 +633,7 @@ xm, ym = np.meshgrid(x0, y0)
 P = np.c_[xm.ravel(), ym.ravel()]
 z = clf.predict(P)  # 預測.predict
 Z = z.reshape(xm.shape)
-plt.contourf(xm, ym, Z, alpha=0.3, cmap="Paired")
+plt.contourf(xm, ym, Z, alpha=0.3, cmap="Paired")  # 劃分區域, contourf 等高線面積圖
 # 劃分區域SP
 plt.title("再預測500點+劃分區域")
 
@@ -619,7 +642,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("K-平均演算法(KMeans) 任意資料分4群並畫圖")
+print("K-平均演算法(KMeans) 資料分成4群並畫圖")
 
 # 建立資料一, 使用 random
 # 隨機生成 N 個點
@@ -673,7 +696,7 @@ print("正確率 :", cc)
 plt.figure(num="KMeans分群", figsize=(12, 6))
 
 plt.subplot(131)
-plt.scatter(X[:, 0], X[:, 1], c="b")
+plt.scatter(X[:, 0], X[:, 1], s=50, c="b")
 # 標記 make_blobs 中心
 plt.scatter(
     centers[:, 0],
@@ -684,7 +707,7 @@ plt.scatter(
     alpha=0.8,
 )
 plt.axis([-15, 15, -15, 15])
-plt.title("原始資料 4 群")
+plt.title("原始資料 4 群+資料中心")
 
 plt.subplot(132)
 # 繪圓點, 圓點用黑色外框, 使用標籤 labels_ 區別顏色,
@@ -699,7 +722,7 @@ plt.scatter(
     alpha=0.8,
 )
 plt.axis([-15, 15, -15, 15])
-plt.title("KMeans分群結果")
+plt.title("KMeans分群結果+預測中心")
 
 plt.subplot(133)
 # 劃分區域ST
@@ -708,7 +731,7 @@ xm, ym = np.meshgrid(x0, y0)
 P = np.c_[xm.ravel(), ym.ravel()]
 z = clf.predict(P)  # 預測.predict
 Z = z.reshape(xm.shape)
-plt.contourf(xm, ym, Z, alpha=0.3)  # 劃分區域
+plt.contourf(xm, ym, Z, alpha=0.3)  # 劃分區域, contourf 等高線面積圖
 # 劃分區域SP
 # 繪圓點, 圓點用黑色外框, 使用標籤 labels_ 區別顏色,
 plt.scatter(X[:, 0], X[:, 1], marker="o", c=clf.labels_)
@@ -760,7 +783,7 @@ xm, ym = np.meshgrid(x0, y0)
 P = np.c_[xm.ravel(), ym.ravel()]
 z = clf.predict(P)  # 預測.predict
 Z = z.reshape(xm.shape)
-plt.contourf(xm, ym, Z, alpha=0.3, cmap="Paired")
+plt.contourf(xm, ym, Z, alpha=0.3, cmap="Paired")  # 劃分區域, contourf 等高線面積圖
 # 劃分區域SP
 plt.scatter(X[:, 0], X[:, 1], s=50, c=clf.labels_, cmap="Paired")  # 畫點
 plt.axis([-0.1, 1.1, -0.1, 1.1])
@@ -793,7 +816,7 @@ def my_mean_shift(bw=0.2):
     P = np.c_[xm.ravel(), ym.ravel()]
     z = clf.predict(P)  # 預測.predict
     Z = z.reshape(xm.shape)
-    plt.contourf(xm, ym, Z, alpha=0.3, cmap="Paired")
+    plt.contourf(xm, ym, Z, alpha=0.3, cmap="Paired")  # 劃分區域, contourf 等高線面積圖
     # 劃分區域SP
     plt.scatter(X[:, 0], X[:, 1], c=clf.labels_, cmap="Paired")
     plt.axis([-0.1, 1.1, -0.1, 1.1])
@@ -833,42 +856,11 @@ f.close()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+'''
+iris = datasets.load_iris()
 
-filename = "data/Iris2.csv"
-df = pd.read_csv(filename)
-print(df.head())
-
-"""
-Iris2.csv
-Id,SepalLengthCm,SepalWidthCm,PetalLengthCm,PetalWidthCm,Species
-1,5.1,3.5,1.4,0.2,Iris-setosa
-2,4.9,3.0,1.4,0.2,Iris-setosa
-3,4.7,3.2,1.3,0.2,Iris-setosa
-"""
-
-# 刪除不要的欄位
-df = df.drop("Id", axis=1)  # 刪除 Id 欄位
-print(df.head())
-
-# 刪除重複列
-df = df.drop_duplicates()  # 刪除重複列
-print(df.head())
-
-# 列索引重新編號
-df.reset_index(drop=True)  # 將列索引重新編號
-print(df.head())
-
-# 將 字串 對應為 數值
-s = {"Iris-setosa": 0, "Iris-versicolor": 1, "Iris-virginica": 2}
-df["Species"] = df["Species"].map(s)  # 將 Species 欄位的 字串 對應 數值
-print(df.head())
-
-# 取前四欄位當作訓練資料
-df_X = df[["SepalLengthCm", "SepalWidthCm", "PetalLengthCm", "PetalWidthCm"]]
-print(df_X.head())
-
-df_y = df[["Species"]]
-print(df_y.head())
+X = iris.data
+y = iris.target
 
 # 轉折判斷法(Elbow)
 
@@ -878,7 +870,7 @@ for k in range(1, 11):
     CLUSTERS = k  # 要分成的群數
     print("使用KMeans分成", CLUSTERS, "群")
     clf = KMeans(n_clusters=CLUSTERS)  # K-平均演算法
-    clf.fit(df_X)  # 學習訓練.fit
+    clf.fit(X)  # 學習訓練.fit
     print("分", k, "群, 分群準確性 :", clf.inertia_)
     distortions.append(clf.inertia_)
 
@@ -897,9 +889,9 @@ CLUSTERS = 3  # 要分成的群數
 print("使用KMeans分成", CLUSTERS, "群")
 clf = KMeans(n_clusters=CLUSTERS)  # K-平均演算法
 
-clf.fit(df_X)  # 學習訓練.fit
+clf.fit(X)  # 學習訓練.fit
 
-y_pred = clf.predict(df_X)  # 預測.predict
+y_pred = clf.predict(X)  # 預測.predict
 # 預測.predict 會與 clf.labels_ 相同
 # print("分群的預測結果：", y_pred)
 
@@ -913,13 +905,13 @@ print("預測結果為：", y_pred)
 plt.figure(num="KMeans分群", figsize=(12, 6))
 
 plt.subplot(131)
-plt.scatter(df_X["SepalLengthCm"], df_X["SepalWidthCm"], color="b")
+plt.scatter(X[:, 0], X[:, 1], color="b")
 plt.xlabel("花萼長度")
 plt.ylabel("花萼寬度")
 plt.title("原始資料")
 
 plt.subplot(132)
-plt.scatter(df_X["SepalLengthCm"], df_X["SepalWidthCm"], c=df_y["Species"])
+plt.scatter(X[:, 0], X[:, 1], c=y)
 plt.xlabel("花萼長度")
 plt.ylabel("花萼寬度")
 plt.title("原始資料之正確分類")
@@ -927,7 +919,7 @@ plt.title("原始資料之正確分類")
 plt.subplot(133)
 # 畫所有資料
 colmap = np.array(["r", "g", "b"])
-plt.scatter(df_X["SepalLengthCm"], df_X["SepalWidthCm"], color=colmap[clf.labels_])
+plt.scatter(X[:, 0], X[:, 1], color=colmap[clf.labels_])
 # 標記群集中心
 plt.scatter(
     clf.cluster_centers_[:, 0],
@@ -944,6 +936,8 @@ plt.ylabel("花萼寬度")
 plt.title("使用 KMeans 分3群")
 
 show()
+
+sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -2232,18 +2226,6 @@ print("Distortion : %.2f" % clf.inertia_)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-
-x0 = y0 = np.arange(-1.02, 1.02, 0.02)
-xm, ym = np.meshgrid(x0, y0)
-
-Z = xm * xm + ym * ym
-
-plt.contourf(xm, ym, Z, alpha=0.3, cmap="Paired")
-
-plt.title("contourf")
-
-show()
 
 
 print("------------------------------------------------------------")  # 60個

@@ -1894,6 +1894,41 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
+filename = "data/Iris2.csv"
+df = pd.read_csv(filename)
+print(df.head())
+
+"""
+Iris2.csv
+Id,SepalLengthCm,SepalWidthCm,PetalLengthCm,PetalWidthCm,Species
+1,5.1,3.5,1.4,0.2,Iris-setosa
+2,4.9,3.0,1.4,0.2,Iris-setosa
+3,4.7,3.2,1.3,0.2,Iris-setosa
+"""
+
+# 刪除不要的欄位
+df = df.drop("Id", axis=1)  # 刪除 Id 欄位
+print(df.head())
+
+# 刪除重複列
+df = df.drop_duplicates()  # 刪除重複列
+print(df.head())
+
+# 列索引重新編號
+df.reset_index(drop=True)  # 將列索引重新編號
+print(df.head())
+
+# 將 字串 對應為 數值
+s = {"Iris-setosa": 0, "Iris-versicolor": 1, "Iris-virginica": 2}
+df["Species"] = df["Species"].map(s)  # 將 Species 欄位的 字串 對應 數值
+print(df.head())
+
+# 取前四欄位當作訓練資料
+df_X = df[["SepalLengthCm", "SepalWidthCm", "PetalLengthCm", "PetalWidthCm"]]
+print(df_X.head())
+
+df_y = df[["Species"]]
+print(df_y.head())
 
 print("------------------------------------------------------------")  # 60個
 
