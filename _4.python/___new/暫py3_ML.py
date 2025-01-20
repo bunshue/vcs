@@ -1,20 +1,28 @@
+機器學習 SVM
+
+機器學習其實基本上和我們一直以來說的一樣, 就是我們要學一個未知的函數
+f(x)=y
+
+如果是分類, 基本上就是有一筆資料 x=(x1,x2,…,xk), 我們想知道這
+f(x)=y
+
+其中的 y 就是某一個類別。
+
+這種學函數的方法, 又可以分為:
+
+1. supervised learning 就是我們有一組知道答案的訓練資料, 然後找到我們要的函數。
+2. unsupervised learning 我們不知道答案, 卻要電腦自己去學!
+
+最基本的方式, 一個是 SVM, 一個是 K-Means。
+# Supervised Learning SVM
 
 徑向基函數核
 在機器學習中，（高斯）徑向基函數核（英語：Radial basis function kernel），或稱為RBF核，是一種常用的核函數。它是支持向量機分類中最為常用的核函數
 
 
-
-
-"""
-AI 三步驟
-    打造函數學習機
-    fit
-    predict
-"""
-
 # 接著進入 AI 建模三部曲。
 
-# step 1. 開一台「線性迴歸機」
+# step 1. 開一台「函數學習機」
 # step 2. fit 學習、訓練
 # step 3. predict 預測
 
@@ -82,41 +90,20 @@ PCA:主成分分析（Principal Component Analysis）, 降低數據維度
 5. 選擇演算法
 6. 模型訓練
 7. 模型評估
-
 # 計算準確率
-
 # 混淆矩陣
-
 # 混淆矩陣圖
 不進行特徵縮放
-
 # 計算準確率
-
-
 # 8. 模型評估，暫不進行
-
 # 9. 模型佈署
-
 # 模型存檔
-
 # 10.模型預測
-
-
-
-
-
-
 
 隨機森林(Random Forest)
 
 隨機森林(Random Forest)是用隨機選取部分資料的方式 建立多棵決策數，
 每一棵樹都會有自己的預測結果，之後再進行多數決，決定最後的預測結果。
-
-
-集群的應用
-影像壓縮(Image Compression)
-
-利用集群將相近的顏色以質心取代，就可以達到減色的效果，減色後可以較少的位元來儲存或傳輸影像，達到影像壓縮的效益。
 
 
 各種演算法
@@ -132,9 +119,6 @@ M5P
 決策樹：
 RandomTree
 REPTree
-
-
-
 
 
 ML包含
@@ -201,13 +185,6 @@ XGBoost 梯度提升法函式庫
 特徵縮放
 選擇演算法
 
-做法 :
-1. 製做一個 K-Means 分類器
-2. 學習訓練.fit
-3: 預測.predict
-
-
-
 
 機器學習的種類(3)
 1. 監督學習(supervised learning)
@@ -239,9 +216,6 @@ make_blobs 準備群集數據
 3. 決策樹 Decision Tree
 4. 隨機森林 Random Forest
 
-
-無監督學習 群集分析
-1. K-means演算法
 
 生成式演算法
 1. 自助具合法 Bootstrap Aggregation => bagging

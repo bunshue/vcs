@@ -44,7 +44,7 @@ from sklearn import tree
 
 
 def show():
-    # plt.show()
+    plt.show()
     pass
 
 
@@ -56,32 +56,38 @@ print("PCA 降維度, 4維 => 2維")
 N = 500  # 散點的數量
 
 X = np.random.randint(0, 100, size=(N, 4))  # 產生 N x 4 陣列，內容為 0～100 隨機數字
-print(type(X))
-print(X.shape)
-print(X)
 
-n_components = 2  # 削減後の次元を2に設定
-
+n_components = 2  # 降維後的維度
 clf = PCA(n_components=n_components)
 
 clf = clf.fit(X)
 
 X2 = clf.transform(X)
-print(X2)  # 変換したデータ
 
+print("轉換前")
+print(type(X))
 print(X.shape)
+# print(X)
+print("轉換後")
+print(type(X2))
 print(X2.shape)
+# print(X2)
 
 plt.subplot(221)
 plt.scatter(X[:, 0], X[:, 1])
+plt.title("轉換前之第0 1維")
+
 plt.subplot(222)
 plt.scatter(X[:, 2], X[:, 3])
+plt.title("轉換前之第2 3維")
 
 plt.subplot(223)
 plt.scatter(X2[:, 0], X2[:, 1])
+plt.title("轉換後之第0 1維")
 
 plt.subplot(224)
 # plt.scatter(X2[:,2], X2[:,3])
+# plt.title('轉換後之第2 3維')
 
 show()
 
@@ -114,18 +120,35 @@ show()
 
 print("------------------------------")  # 30個
 
-clf = PCA(n_components=2)
+plt.subplot(121)
+plt.scatter(X[:, 0], X[:, 1], c=np.array(y))
+plt.title("iris轉換前之第0 1維(共4維)")
 
-X2 = clf.fit_transform(df)
+n_components = 2  # 降維後的維度
+clf = PCA(n_components=n_components)
 
+X2 = clf.fit_transform(df)  # .fit + .transform一起做
+
+print("轉換前")
 print(X.shape)
+print("轉換後")
 print(X2.shape)
 
-plt.scatter(X2[:, 0], X2[:, 1], c=np.array(y), cmap=plt.cm.copper)
+plt.subplot(122)
+plt.scatter(X2[:, 0], X2[:, 1], c=np.array(y))
+plt.title("iris轉換後之第0 1維(共2維)")
 
 show()
 
+"""
+explained_variance_ratio_ : 主成分的方差比例
+explained_variance_ : 主成分的方差比值
+用于确定重要主成分
+"""
+
+print("主成分的方差比例 explained_variance_ratio_")
 print(clf.explained_variance_ratio_)
+print("和")
 print(clf.explained_variance_ratio_.sum())
 
 print("------------------------------------------------------------")  # 60個
@@ -138,14 +161,22 @@ experience = np.random.normal(size=N)
 salary = 1500 + experience + np.random.normal(size=N, scale=0.5)
 
 X = np.column_stack([experience, salary])
+print("轉換前")
 print(X.shape)
 
 # PCA with scikit-learn
-pca = PCA(n_components=2)
-pca.fit(X)
-print(pca.explained_variance_ratio_)
+n_components = 2  # 降維後的維度
+clf = PCA(n_components=n_components)
 
-PC = pca.transform(X)
+clf.fit(X)
+
+print("主成分的方差比例 explained_variance_ratio_")
+print(clf.explained_variance_ratio_)
+
+X2 = clf.transform(X)
+
+print("轉換後")
+print(X2.shape)
 
 plt.subplot(121)
 plt.scatter(X[:, 0], X[:, 1])
@@ -153,9 +184,9 @@ plt.xlabel("x1")
 plt.ylabel("x2")
 
 plt.subplot(122)
-plt.scatter(PC[:, 0], PC[:, 1])
-plt.xlabel("PC1 (var=%.2f)" % pca.explained_variance_ratio_[0])
-plt.ylabel("PC2 (var=%.2f)" % pca.explained_variance_ratio_[1])
+plt.scatter(X2[:, 0], X2[:, 1])
+plt.xlabel("PC1 (var=%.2f)" % clf.explained_variance_ratio_[0])
+plt.ylabel("PC2 (var=%.2f)" % clf.explained_variance_ratio_[1])
 plt.axis("equal")
 plt.tight_layout()
 
@@ -224,9 +255,9 @@ show()
 plot_gallery("First centered Olivetti faces", faces_centered[:n_components])
 show()
 
-pca = PCA(n_components=n_components)
-pca.fit(faces_centered)
-plot_gallery("PCA first %i loadings" % n_components, pca.components_[:n_components])
+clf = PCA(n_components=n_components)
+clf.fit(faces_centered)
+plot_gallery("PCA first %i loadings" % n_components, clf.components_[:n_components])
 
 show()
 
@@ -268,14 +299,19 @@ salary = 1500 + experience + np.random.normal(size=n_samples, scale=0.5)
 X = np.column_stack([experience, salary])
 
 X = np.column_stack([experience, salary])
-pca = PCA(n_components=2)
-pca.fit(X)
+
+n_components = 2  # 降維後的維度
+clf = PCA(n_components=n_components)
+
+clf.fit(X)
 
 basic_pca = BasicPCA()
+
 basic_pca.fit(X)
 
-print(pca.explained_variance_ratio_)
-# assert np.all(basic_pca.transform(X) == pca.transform(X))
+print("主成分的方差比例 explained_variance_ratio_")
+print(clf.explained_variance_ratio_)
+# assert np.all(basic_pca.transform(X) == clf.transform(X))
 
 
 # 2. 使用iris資料 做 PCA
@@ -300,25 +336,31 @@ X -= np.mean(X, axis=0)
 X /= np.std(X, axis=0, ddof=1)
 np.around(np.corrcoef(X.T), 3)
 
-pca = PCA(n_components=X.shape[1])
-pca.fit(X)
+n_components = X.shape[1]  # 降維後的維度
+clf = PCA(n_components=n_components)
 
-print(pca.explained_variance_ratio_)
+clf.fit(X)
+
+print("主成分的方差比例 explained_variance_ratio_")
+print(clf.explained_variance_ratio_)
 
 K = 2
-pca = PCA(n_components=X.shape[1])
-pca.fit(X)
-PC = pca.transform(X)
-# print(PC)
+n_components = X.shape[1]  # 降維後的維度
+clf = PCA(n_components=n_components)
 
-print(pca.components_)
+clf.fit(X)
+
+X2 = clf.transform(X)
+# print(X2)
+
+print(clf.components_)
 CorPC = pd.DataFrame(
     [
-        [np.corrcoef(X[:, j], PC[:, k])[0, 1] for j in range(X.shape[1])]
+        [np.corrcoef(X[:, j], X2[:, k])[0, 1] for j in range(X.shape[1])]
         for k in range(K)
     ],
     columns=df.columns[:4],
-    index=["PC %i" % k for k in range(K)],
+    index=["X2 %i" % k for k in range(K)],
 )
 
 print(CorPC)
@@ -326,14 +368,14 @@ print(CorPC)
 colors = {"setosa": "r", "versicolor": "g", "virginica": "blue"}
 print(df["species"].unique())
 # plt.scatter(df['experience'], df['salary'], c=df['education'].apply(lambda x: colors[x]), s=100)
-plt.scatter(PC[:, 0], PC[:, 1], c=df["species"].apply(lambda x: colors[x]))
+plt.scatter(X2[:, 0], X2[:, 1], c=df["species"].apply(lambda x: colors[x]))
 plt.xlabel("PC1")
 plt.ylabel("PC2")
 
 # Pairewise plot
 
-df["PC1"] = PC[:, 0]
-df["PC2"] = PC[:, 1]
+df["PC1"] = X2[:, 0]
+df["PC2"] = X2[:, 1]
 
 ax = sns.pairplot(df, hue="species")
 
@@ -377,16 +419,17 @@ from sklearn.pipeline import Pipeline
 
 def std_PCA(**argv):
     scaler = MinMaxScaler()
-    pca = PCA(**argv)
-    pipeline = Pipeline([("scaler", scaler), ("pca", pca)])
+    clf = PCA(**argv)
+    pipeline = Pipeline([("scaler", scaler), ("pca", clf)])
     return pipeline
 
 
-pca = std_PCA(n_components=1)
-R2 = pca.fit_transform(A)
+n_components = 1  # 降維後的維度
+clf = std_PCA(n_components=n_components)
+R2 = clf.fit_transform(A)  # .fit + .transform一起做
 print(R2)
 
-print(pca.inverse_transform(R2))
+print(clf.inverse_transform(R2))
 
 print("------------------------------")  # 30個
 
@@ -642,14 +685,15 @@ _ = test_ax.set_title("Testing data")
 show()
 
 # PCA 萃取特徵
-pca = PCA(n_components=2)
+n_components = 2  # 降維後的維度
+clf = PCA(n_components=n_components)
 
 # KernelPCA 萃取特徵
 kernel_pca = KernelPCA(
     n_components=None, kernel="rbf", gamma=10, fit_inverse_transform=True, alpha=0.1
 )
 
-X_test_pca = pca.fit(X_train).transform(X_test)  # 學習訓練.fit
+X_test_pca = clf.fit(X_train).transform(X_test)  # 學習訓練.fit
 
 # 繪製原始測試資料及經PCA轉換後的新資料
 
@@ -707,14 +751,15 @@ _ = test_ax.set_title("Testing data")
 show()
 
 # PCA 萃取特徵
-pca = PCA(n_components=2)
+n_components = 2  # 降維後的維度
+clf = PCA(n_components=n_components)
 
 # KernelPCA 萃取特徵
 kernel_pca = KernelPCA(
     n_components=None, kernel="rbf", gamma=10, fit_inverse_transform=True, alpha=0.1
 )
 
-X_test_pca = pca.fit(X_train).transform(X_test)  # 學習訓練.fit
+X_test_pca = clf.fit(X_train).transform(X_test)  # 學習訓練.fit
 
 fig, (orig_data_ax, pca_proj_ax) = plt.subplots(ncols=2, figsize=(10, 4))
 
@@ -780,7 +825,7 @@ print(cc)
 
 # 特徵縮放
 scaler = MinMaxScaler()
-X = scaler.fit_transform(X)
+X = scaler.fit_transform(X)  # .fit + .transform一起做
 
 # 繪圖
 
@@ -795,14 +840,16 @@ show()
 perplexity = 25
 X_embedded = TSNE(
     n_components=1, perplexity=perplexity, learning_rate="auto", init="random"
-).fit_transform(X)
+).fit_transform(
+    X
+)  # .fit + .transform一起做
 for i in range(3):
     plt.scatter(X_embedded[i * 50 : (i + 1) * 50], np.zeros(50), c=colors[i])
 show()
 
 # PCA
-
-X_pca = PCA(n_components=1).fit_transform(X)
+n_components = 1  # 降維後的維度
+X_pca = PCA(n_components=n_components).fit_transform(X)
 for i in range(3):
     plt.scatter(X_pca[i * 50 : (i + 1) * 50], np.zeros(50), c=colors[i])
 show()
@@ -892,7 +939,7 @@ t_sne = manifold.TSNE(
     n_iter=250,
     random_state=0,
 )
-S_t_sne = t_sne.fit_transform(S_points)
+S_t_sne = t_sne.fit_transform(S_points)  # .fit + .transform一起做
 
 plot_2d(S_t_sne, S_color, "T-distributed Stochastic  \n Neighbor Embedding")
 
@@ -978,11 +1025,12 @@ plt.imshow(cv2.cvtColor(np.array(reconMat, dtype="uint8"), cv2.COLOR_BGR2RGB))
 plt.title("reconMat")
 show()
 
-pca = PCA(n_components=426).fit(blue)
+n_components = 426  # 降維後的維度
+clf = PCA(n_components=n_components).fit(blue)
 # 降维
-x_new = pca.transform(blue)
+x_new = clf.transform(blue)
 # 还原降维后的数据到原空间
-recdata = pca.inverse_transform(x_new)
+recdata = clf.inverse_transform(x_new)
 print(recdata)
 # 计算误差
 PrintError(np.array(blue, dtype="double"), np.array(reconMat, dtype="double"))

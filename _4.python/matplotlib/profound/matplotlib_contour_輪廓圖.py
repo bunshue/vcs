@@ -61,12 +61,12 @@ plt.figure(
 print("------------------------------")  # 30個
 plt.subplot(231)
 
-x0 = y0 = np.arange(-1.02, 1.02, 0.02)
-xm, ym = np.meshgrid(x0, y0)
+xx = yy = np.arange(-1.02, 1.02, 0.02)
+X, Y = np.meshgrid(xx, yy)
 
-Z = xm * xm + ym * ym
+Z = X * X + Y * Y
 
-plt.contourf(xm, ym, Z, alpha=0.3, cmap="Paired")  # contourf 等高線面積圖
+plt.contourf(X, Y, Z, alpha=0.3, cmap="Paired")  # contourf 等高線面積圖
 
 plt.title("contourf")
 

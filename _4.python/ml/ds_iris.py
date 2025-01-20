@@ -344,6 +344,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("load_iris()轉df")
 iris = datasets.load_iris()
+
 X = iris.data
 y = iris.target  # 資料集目標
 

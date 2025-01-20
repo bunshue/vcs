@@ -244,7 +244,7 @@ plt.title("make_classification 分類資料集")
 print("分類資料集")
 
 N = 50  # n_samples, 樣本數
-# M = 1  # n_features, 特徵數(資料的維度)
+M = 1  # n_features, 特徵數(資料的維度)
 print("make_classification,", N, "個樣本, ", M, "個特徵")
 
 X, y = make_classification(

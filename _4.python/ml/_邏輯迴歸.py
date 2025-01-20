@@ -1,6 +1,5 @@
 """
 邏輯迴歸 (logistic regression)
-
 """
 
 print("------------------------------------------------------------")  # 60個
@@ -55,50 +54,22 @@ print("make_blobs,", N, "個樣本, ", M, "個特徵, 分成", GROUPS, "群")
 
 X, y = make_blobs(n_samples=N, n_features=M, centers=GROUPS)
 
-d_sta = StandardScaler().fit_transform(X)  # 標準化
+scaler = StandardScaler()
+dx_std = scaler.fit_transform(X)  # STD特徵縮放
 
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
-dx_train, dx_test, y_train, y_test = train_test_split(d_sta, y, test_size=0.2)
-# 訓練組8成, 測試組2成
-
-# 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
-logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
-
-logistic_regression.fit(dx_train, y_train)  # 學習訓練.fit
-
-y_pred = logistic_regression.predict(dx_test)  # 預測.predict
-
-# 輸出準確性
-print(f"訓練資料的準確性 = {logistic_regression.score(dx_train, y_train)}")
-print(f"測試資料的準確性 = {logistic_regression.score(dx_test, y_test)}")
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-N = 200  # n_samples, 樣本數
-M = 2  # n_features, 特徵數(資料的維度)
-GROUPS = 2  # centers, 分群數
-STD = 0.3  # cluster_std, 資料標準差
-print("make_blobs,", N, "個樣本, ", M, "個特徵, 分成", GROUPS, "群")
-
-X, y = make_blobs(n_samples=N, n_features=M, centers=GROUPS)
-
-d_sta = StandardScaler().fit_transform(X)  # 標準化
-
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
-dx_train, dx_test, y_train, y_test = train_test_split(d_sta, y, test_size=0.2)
-# 訓練組8成, 測試組2成
+# 資料分割
+X_train, X_test, y_train, y_test = train_test_split(dx_std, y, test_size=0.2)
 
 # 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
 logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
 
-logistic_regression.fit(dx_train, y_train)  # 學習訓練.fit
+logistic_regression.fit(X_train, y_train)  # 學習訓練.fit
 
-y_pred = logistic_regression.predict(dx_test)  # 預測.predict
+y_pred = logistic_regression.predict(X_test)  # 預測.predict
 
 # 輸出準確性
-print(f"訓練資料的準確性 = {logistic_regression.score(dx_train, y_train)}")
-print(f"測試資料的準確性 = {logistic_regression.score(dx_test, y_test)}")
+print(f"訓練資料的準確性 = {logistic_regression.score(X_train, y_train)}")
+print(f"測試資料的準確性 = {logistic_regression.score(X_test, y_test)}")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -246,15 +217,8 @@ print(cc)
 X = df.drop("y", axis=1).values
 y = df.y.values
 
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+# 資料分割
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
-# 訓練組8成, 測試組2成
-
-# 查看陣列維度
-cc = X_train.shape, X_test.shape, y_train.shape, y_test.shape
-print(cc)
-
-# ((32950, 63), (8238, 63), (32950,), (8238,))
 
 # 特徵縮放
 scaler = StandardScaler()
@@ -462,9 +426,8 @@ print("------------------------------")  # 30個
 X = df.drop("Danger", axis=1)
 y = df["Danger"]  # 目標, 0 : 不危險, 1 : 危險
 
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+# 資料分割
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
-# 訓練組8成, 測試組2成
 
 logistic_regression = sklearn.linear_model.LogisticRegression(
     solver="liblinear"
@@ -524,13 +487,8 @@ print(cc)
 # 選擇2個特徵
 X = X[logistic_regression.get_feature_names_out()].values
 
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+# 資料分割
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
-# 訓練組8成, 測試組2成
-
-# 查看陣列維度
-cc = X_train.shape, X_test.shape, y_train.shape, y_test.shape
-print(cc)
 
 # 特徵縮放
 scaler = StandardScaler()
@@ -560,12 +518,8 @@ show()
 print("鳶尾花資料集")
 X, y = datasets.load_iris(return_X_y=True)
 
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+# 資料分割
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
-# 訓練組8成, 測試組2成
-
-# 查看陣列維度
-print(X_train.shape, X_test.shape, y_train.shape, y_test.shape)
 
 # 特徵縮放
 scaler = StandardScaler()
@@ -610,13 +564,8 @@ print(cc)
 # 選擇部份特徵
 X = X_new
 
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+# 資料分割
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
-# 訓練組8成, 測試組2成
-
-# 查看陣列維度
-cc = X_train.shape, X_test.shape, y_train.shape, y_test.shape
-print(cc)
 
 # 特徵縮放
 scaler = StandardScaler()
@@ -643,12 +592,8 @@ show()
 print("數字資料集")
 X, y = datasets.load_digits(return_X_y=True)
 
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+# 資料分割
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
-# 訓練組8成, 測試組2成
-
-# 查看陣列維度
-print(X_train.shape, X_test.shape, y_train.shape, y_test.shape)
 
 # 特徵縮放
 scaler = StandardScaler()
@@ -694,13 +639,8 @@ print(cc)
 # 選擇部份特徵
 X = X_new
 
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+# 資料分割
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
-# 訓練組8成, 測試組2成
-
-# 查看陣列維度
-cc = X_train.shape, X_test.shape, y_train.shape, y_test.shape
-print(cc)
 
 # 特徵縮放
 scaler = StandardScaler()
@@ -727,12 +667,8 @@ show()
 print("數字資料集")
 X, y = datasets.load_digits(return_X_y=True)
 
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+# 資料分割
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
-# 訓練組8成, 測試組2成
-
-# 查看陣列維度
-print(X_train.shape, X_test.shape, y_train.shape, y_test.shape)
 
 # 特徵縮放
 scaler = StandardScaler()
@@ -775,13 +711,8 @@ print(clf.ranking_)
 # 選擇2個特徵
 X = X_new
 
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+# 資料分割
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
-# 訓練組8成, 測試組2成
-
-# 查看陣列維度
-cc = X_train.shape, X_test.shape, y_train.shape, y_test.shape
-print(cc)
 
 # 特徵縮放
 scaler = StandardScaler()
@@ -808,12 +739,8 @@ show()
 print("鳶尾花資料集")
 X, y = datasets.load_iris(return_X_y=True)
 
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+# 資料分割
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
-# 訓練組8成, 測試組2成
-
-# 查看陣列維度
-print(X_train.shape, X_test.shape, y_train.shape, y_test.shape)
 
 # 特徵縮放
 scaler = StandardScaler()
@@ -828,32 +755,6 @@ logistic_regression.fit(X_train_std, y_train)  # 學習訓練.fit
 y_pred = logistic_regression.predict(X_test_std)  # 預測.predict
 
 print(f"計算準確率 : {accuracy_score(y_test, y_pred)*100:.2f}%")
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-N = 500  # n_samples, 樣本數
-M = 2  # n_features, 特徵數(資料的維度)
-GROUPS = 2  # centers, 分群數
-STD = 0.3  # cluster_std, 資料標準差
-print("make_blobs,", N, "個樣本, ", M, "個特徵, 分成", GROUPS, "群")
-
-dx, dy = make_blobs(n_samples=N, n_features=M, centers=GROUPS)
-
-scaler = StandardScaler()
-dx_std = scaler.fit_transform(dx)  # STD特徵縮放
-
-dx_train, dx_test, dy_train, dy_test = train_test_split(dx_std, dy, test_size=0.2)
-
-# 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
-logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
-
-logistic_regression.fit(dx_train, dy_train)  # 學習訓練.fit
-
-y_pred = logistic_regression.predict(dx_test)  # 預測.predict
-
-print(logistic_regression.score(dx_train, dy_train))
-print(logistic_regression.score(dx_test, dy_test))
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -874,6 +775,7 @@ count_train = count_vectorizer.fit_transform(train_text)
 
 joblib.dump(count_vectorizer, 'count_vectorizer.pkl')
 
+# 資料分割
 X_train, X_test, Y_train, Y_test = train_test_split(
     count_train, train_label, test_size=0.2)
 
@@ -919,14 +821,8 @@ print(cc)
 # 指定X，並轉為 Numpy 陣列
 X = df.values
 
-# 訓練資料, 測試資料, 訓練目標, 測試目標
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+# 資料分割
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
-# 訓練組8成, 測試組2成
-
-# 查看陣列維度
-cc = X_train.shape, X_test.shape, y_train.shape, y_test.shape
-print(cc)
 
 print("特徵縮放")
 scaler = preprocessing.StandardScaler()
@@ -1083,14 +979,8 @@ print(cc)
 # 指定X，並轉為 Numpy 陣列
 X = df.values
 
-# 訓練資料, 測試資料, 訓練目標, 測試目標
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+# 資料分割
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
-# 訓練組8成, 測試組2成
-
-# 查看陣列維度
-cc = X_train.shape, X_test.shape, y_train.shape, y_test.shape
-print(cc)
 
 print("特徵縮放")
 scaler = preprocessing.StandardScaler()
@@ -1324,9 +1214,8 @@ dataset = pd.read_csv("data/Social_Network_Ads.csv")
 X = dataset.iloc[:, [2, 3]].values
 Y = dataset.iloc[:, 4].values
 
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+# 資料分割
 X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.2)
-# 訓練組8成, 測試組2成
 
 # 特征縮放 Feature Scaling
 scaler = StandardScaler()
@@ -1342,15 +1231,15 @@ X_test = scaler.transform(X_test)  # STD特徵縮放
 # 將邏輯回歸應用于訓練集
 # Fitting Logistic Regression to the Training set
 
-classifier = LogisticRegression()
+logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
 
-classifier.fit(X_train, y_train)  # 學習訓練.fit
+logistic_regression.fit(X_train, y_train)  # 學習訓練.fit
 
 # Predicting the Test set results
 # 第3步：預測
 # 預測測試集結果
 
-y_pred = classifier.predict(X_test)
+y_pred = logistic_regression.predict(X_test)
 
 # 第4步：評估預測
 
@@ -1373,7 +1262,7 @@ X1, X2 = np.meshgrid(
 plt.contourf(
     X1,
     X2,
-    classifier.predict(np.array([X1.ravel(), X2.ravel()]).T).reshape(X1.shape),
+    logistic_regression.predict(np.array([X1.ravel(), X2.ravel()]).T).reshape(X1.shape),
     alpha=0.75,
     cmap=ListedColormap(("red", "green")),
 )
@@ -1403,7 +1292,7 @@ X1, X2 = np.meshgrid(
 plt.contourf(
     X1,
     X2,
-    classifier.predict(np.array([X1.ravel(), X2.ravel()]).T).reshape(X1.shape),
+    logistic_regression.predict(np.array([X1.ravel(), X2.ravel()]).T).reshape(X1.shape),
     alpha=0.75,
     cmap=ListedColormap(("red", "green")),
 )
@@ -1426,7 +1315,6 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
 
 """
 import nltk
@@ -1538,11 +1426,9 @@ X_train, X_test, y_train, y_test = train_test_split(
 # 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
 logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
 
-clf = LogisticRegression()
+logistic_regression.fit(X_train, y_train)  # 學習訓練.fit
 
-clf.fit(X_train, y_train)  # 學習訓練.fit
-
-y_pred = clf.predict(X_test)  # 預測.predict
+y_pred = logistic_regression.predict(X_test)  # 預測.predict
 cc = accuracy_score(y_pred, y_test)
 print(cc)
 # 0.9668161434977578
@@ -1564,7 +1450,7 @@ message_processed_list = (
     "Free entry in 2 a wkly comp to win FA Cup final tkts 21st May 2005. Text FA to 87121 to receive entry question(std txt rate)T&C's apply 08452810075over18's",
 )
 X_new = tfidf_vectorizer.transform(message_processed_list)
-cc = clf.predict(X_new.toarray())  # 預測.predict
+cc = logistic_regression.predict(X_new.toarray())  # 預測.predict
 print(cc)
 
 print("------------------------------------------------------------")  # 60個
@@ -1700,7 +1586,6 @@ with sns.axes_style("white"):
     )
 show()
 
-
 print("找出所有類別變數，並顯示其類別")
 
 df.select_dtypes("object").head()
@@ -1750,10 +1635,6 @@ y = df2["Attrition_Yes"]
 # 資料分割
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
-# 查看陣列維度
-cc = X_train.shape, X_test.shape, y_train.shape, y_test.shape
-print(cc)
-
 # 特徵縮放
 scaler = preprocessing.StandardScaler()
 X_train_std = scaler.fit_transform(X_train)
@@ -1764,13 +1645,12 @@ X_test_std = scaler.transform(X_test)
 # 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
 logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
 
-clf = LogisticRegression()
-clf.fit(X_train_std, y_train)
+logistic_regression.fit(X_train_std, y_train)
 
 # 7. 模型評分
 
 # 計算準確率
-y_pred = clf.predict(X_test_std)
+y_pred = logistic_regression.predict(X_test_std)
 print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
 # 90.14%
 
@@ -1812,9 +1692,13 @@ print("最後底定的模型：只保留重要的特徵變數")
 y=df2['Attrition_Yes']
 X=df2[significant_params]
 
+# 資料分割
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
 model=sm.Logit(y_train,X_train)
+
 result=model.fit()
+
 print(result.summary())
 """
 print("------------------------------------------------------------")  # 60個

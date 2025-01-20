@@ -1,26 +1,6 @@
 """
-機器學習 SVM
-
-機器學習其實基本上和我們一直以來說的一樣, 就是我們要學一個未知的函數
-f(x)=y
-
-如果是分類, 基本上就是有一筆資料 x=(x1,x2,…,xk), 我們想知道這
-f(x)=y
-
-其中的 y 就是某一個類別。
-
-這種學函數的方法, 又可以分為:
-
-1. supervised learning 就是我們有一組知道答案的訓練資料, 然後找到我們要的函數。
-2. unsupervised learning 我們不知道答案, 卻要電腦自己去學!
-
-最基本的方式, 一個是 SVM, 一個是 K-Means。
-# Supervised Learning SVM
-
 SVM 支持向量机
-
 用SVM做分類, 有監督學習
-
 """
 
 print("------------------------------------------------------------")  # 60個
@@ -48,12 +28,13 @@ print("------------------------------------------------------------")  # 60個
 
 import joblib
 import sklearn.linear_model
+import sklearn.metrics as metrics
 from common1 import *
 from sklearn import datasets
 from sklearn import preprocessing
-from sklearn.datasets import make_blobs
+from sklearn.datasets import make_blobs  # 集群資料集
 from sklearn.datasets import make_moons  # 非線性的資料集
-from sklearn.datasets import make_classification
+from sklearn.datasets import make_classification  # 分類資料集
 from sklearn.datasets import make_gaussian_quantiles
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
 from sklearn.metrics import accuracy_score  # 計算準確率
@@ -62,7 +43,6 @@ from sklearn.metrics import classification_report
 from sklearn.metrics import ConfusionMatrixDisplay
 from sklearn.svm import SVC  # 非線性SVM函數學習機
 from sklearn.svm import LinearSVC  # 線性支援向量機 (Linear SVM)
-import sklearn.metrics as metrics
 
 
 def show():
@@ -70,6 +50,7 @@ def show():
     pass
 
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 plt.figure(
@@ -135,7 +116,7 @@ print("------------------------------")  # 30個
 print("顯示結果 1")
 
 plt.subplot(232)
-plt.contourf(X, Y, Z, alpha=0.3, cmap="Paired")
+plt.contourf(X, Y, Z, alpha=0.3, cmap="Paired")  # contourf 等高線面積圖
 plt.scatter(x[:, 0], x[:, 1], c=y, cmap="Paired")
 plt.title("預測的結果1")
 
@@ -149,7 +130,7 @@ Z = clf.predict(X)  # 預測.predict
 z = Z.reshape(x1.shape)
 
 plt.subplot(233)
-plt.contourf(x1, x2, z, alpha=0.3)
+plt.contourf(x1, x2, z, alpha=0.3)  # contourf 等高線面積圖
 plt.scatter(x[:, 0], x[:, 1], s=100, c=y)
 plt.title("預測的結果2")
 
@@ -220,12 +201,15 @@ plt.figure(
     frameon=True,
 )
 
-# 生個「像樣點」的假數據
-# 用 sklearn 生一些「像真的一樣」的數據
-# 用 make_classification 製造分類數據
+print("分類資料集")
 
-# n_features 是指 x 的參數要幾個, n_classes 是你要分成幾類
+N = 100  # n_samples, 樣本數
+M = 2  # n_features, 特徵數(資料的維度)
+# n_classes 是你要分成幾類
+print("make_classification,", N, "個樣本,", M, "個特徵")
+
 x, y = make_classification(
+    n_samples=N,
     n_features=2,
     n_redundant=0,
     n_informative=2,
@@ -233,17 +217,16 @@ x, y = make_classification(
     n_classes=3,
     random_state=9487,
 )
+"""
+print(len(x))
+print(len(y))
+print(x.shape)
+print(y.shape)
+"""
 plt.subplot(231)
 plt.scatter(x[:, 0], x[:, 1], s=50, c=y)
 plt.title("用 make_classification 造數據, 3群")
 plt.grid()
-
-"""
-print(len(x))
-print(len(y))
-print(x)
-print(y)
-"""
 
 clf = SVC()  # 非線性SVM函數學習機
 # clf = SVC(gamma = 'auto')  # 非線性SVM函數學習機
@@ -251,16 +234,11 @@ clf = SVC()  # 非線性SVM函數學習機
 clf.fit(x, y)  # 學習訓練.fit
 
 y_pred = clf.predict(x)  # 預測.predict
-
+"""
 print("真實答案 :", y)
 print("預測結果 :", y_pred)
 print("預測差值 :", y_pred - y)
-
-cc = np.sum(y_pred.reshape(-1, 1) == y.reshape(-1, 1))
-# print(cc)
-cc = cc * 1.0 / len(y)
-print("正確率 :", cc)
-
+"""
 # 直接用SVC的方法算正確率
 cc = clf.score(x, y)
 print("正確率 :", cc)
@@ -293,7 +271,7 @@ Z = clf.predict(X)  # 預測.predict
 z = Z.reshape(x1.shape)
 
 plt.subplot(235)
-plt.contourf(x1, x2, z, alpha=0.3)
+plt.contourf(x1, x2, z, alpha=0.3)  # contourf 等高線面積圖
 plt.scatter(x[:, 0], x[:, 1], s=100, c=y)
 plt.title("等高線圖")
 plt.grid()
@@ -303,9 +281,16 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+print("分類資料集")
+
+N = 300  # n_samples, 樣本數
+M = 2  # n_features, 特徵數(資料的維度)
+# n_classes 是你要分成幾類
+print("make_classification,", N, "個樣本,", M, "個特徵")
+
 X, y = make_classification(
-    n_samples=300,
-    n_features=2,
+    n_samples=N,
+    n_features=M,
     n_redundant=0,
     n_informative=2,
     random_state=22,
@@ -313,32 +298,26 @@ X, y = make_classification(
     scale=100,
 )
 
+plt.subplot(121)
 plt.scatter(X[:, 0], X[:, 1], c=y)
 plt.title("原始資料")
-show()
 
 X = preprocessing.scale(X)  # normalization step
 
+plt.subplot(122)
 plt.scatter(X[:, 0], X[:, 1], c=y)
 plt.title("原始資料經過正規化")
+
 show()
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
+# 資料分割
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 clf = SVC()  # 非線性SVM函數學習機
 
 clf.fit(X_train, y_train)
 
 y_pred = clf.predict(X_test)  # 預測.predict
-
-print("真實答案 :", y_test)
-print("預測結果 :", y_pred)
-print("預測差值 :", y_pred - y_test)
-
-cc = np.sum(y_pred.reshape(-1, 1) == y_test.reshape(-1, 1))
-# print(cc)
-cc = cc * 1.0 / len(y_test)
-print("正確率 :", cc)
 
 # 直接用SVC的方法算正確率
 cc = clf.score(X_test, y_test)
@@ -347,24 +326,93 @@ print("正確率 :", cc)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-iris = datasets.load_iris()
+centers = [(-1, -0.125), (0.5, 0.5)]
 
-X = iris.data[:, :2]  # We only take the first two features
-y = iris.target
+N = 50  # n_samples, 樣本數
+M = 2  # n_features, 特徵數(資料的維度)
+GROUPS = 6  # centers, 分群數
+STD = 0.3  # cluster_std, 資料標準差
+print("make_blobs,", N, "個樣本, ", M, "個特徵, 分成", GROUPS, "群")
+X, y = make_blobs(n_samples=N, n_features=M, centers=centers, cluster_std=STD)
 
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+# 資料分割
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
-# 訓練組8成, 測試組2成
 
-clf = SVC(kernel="linear")  # 非線性SVM函數學習機, linear模式
+model = LinearSVC()  # 線性支援向量機 (Linear SVM)
 
-clf.fit(X_train, y_train)  # 學習訓練.fit
+model.fit(X_train, y_train)  # 學習訓練.fit
 
-y_pred = clf.predict(X_test)  # 預測.predict
+y_pred = model.predict(X_test)  # 預測.predict
 
-# 計算正確率
-accuracy = accuracy_score(y_test, y_pred)
-print("SVM classifier 之 正確率 : {:.2f}".format(accuracy))
+print(accuracy_score(y_pred, y_test))  # 評価
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+N = 200  # n_samples, 樣本數
+M = 2  # n_features, 特徵數(資料的維度)
+GROUPS = 2  # centers, 分群數
+STD = 0.3  # cluster_std, 資料標準差
+print("make_blobs,", N, "個樣本, ", M, "個特徵, 分成", GROUPS, "群")
+data, label = make_blobs(n_samples=N, n_features=M, centers=GROUPS, random_state=9487)
+
+d_sta = preprocessing.StandardScaler().fit_transform(data)  # 標準化
+
+# 資料分割
+dx_train, dx_test, label_train, label_test = train_test_split(
+    d_sta, label, test_size=0.2
+)
+
+# 建立分類模型
+svm_model = LinearSVC()  # 線性支援向量機 (Linear SVM)
+
+# 建立訓練數據模型
+svm_model.fit(dx_train, label_train)  # 學習訓練.fit
+
+# 對測試數據做預測
+pred = svm_model.predict(dx_test)
+
+# 輸出測試數據的 label
+print(label_test)
+
+# 輸出預測數據的 label
+print(pred)
+
+# 輸出準確性
+print(f"訓練資料的準確性 = {svm_model.score(dx_train, label_train)}")
+print(f"測試資料的準確性 = {svm_model.score(dx_test, label_test)}")
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+data, label = make_moons(n_samples=200, noise=0.2, random_state=9487)
+
+d_sta = preprocessing.StandardScaler().fit_transform(data)  # 標準化
+
+# 資料分割
+dx_train, dx_test, label_train, label_test = train_test_split(
+    d_sta, label, test_size=0.2
+)
+
+# 線性SVM 建立分類模型, 建立訓練數據模型, 對測試數據做預測
+svm_model = LinearSVC()  # 線性支援向量機 (Linear SVM)
+
+svm_model.fit(dx_train, label_train)  # 學習訓練.fit
+
+pred = svm_model.predict(dx_test)
+
+# 輸出線性SVM準確性
+print(f"線性訓練資料的準確性 = {svm_model.score(dx_train, label_train)}")
+print(f"線性測試資料的準確性 = {svm_model.score(dx_test, label_test)}")
+
+# 非線性SVM 建立分類模型, 建立訓練數據模型, 對測試數據做預測
+clf = SVC()
+clf.fit(dx_train, label_train)
+pred = clf.predict(dx_test)
+
+# 輸出非線性SVM準確性
+print(f"非線性訓練資料的準確性 = {clf.score(dx_train, label_train)}")
+print(f"非線性測試資料的準確性 = {clf.score(dx_test, label_test)}")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -385,9 +433,8 @@ X, y = make_moons(n_samples=N, noise=0.15)
 scaler = preprocessing.StandardScaler()
 X = scaler.fit_transform(X)  # STD特徵縮放
 
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+# 資料分割
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
-# 訓練組8成, 測試組2成
 
 print("同樣的資料, 用不同的SVM函數學習機 做")
 
@@ -398,6 +445,7 @@ linear_clf.fit(X_train, y_train)  # 學習訓練.fit
 
 cc = linear_clf.score(X_train, y_train)
 print("正確率 :", cc)
+
 cc = linear_clf.score(X_test, y_test)
 print("正確率 :", cc)
 
@@ -408,6 +456,7 @@ y_pred = clf.predict(X_test)  # 預測.predict
 
 cc = clf.score(X_train, y_train)
 print("正確率 :", cc)
+
 cc = clf.score(X_test, y_test)
 print("正確率 :", cc)
 
@@ -442,9 +491,8 @@ Y = orgData["Dated"]
 # 构建训练集和测试集
 
 train_data, test_data, train_target, test_target = cross_validation.train_test_split(
-    X, Y, test_size=0.4, train_size=0.6, random_state=123
-)  # 划分训练集和测试集
-
+    X, Y, test_size=0.2, train_size=0.2
+)
 
 # 使用svm，建立支持向量机模型
 svcModel = SVC(kernel="rbf", gamma=0.5, C=0.5, probability=True).fit(
@@ -490,10 +538,12 @@ train_x = train_scaled[:, 1:3]
 train_y = train_target.values
 h = 1.0  # step size in the mesh
 C = 1.0  # SVM regularization parameter
-svc = SVC(kernel="linear", C=C).fit(train_x, train_y)
+
+svc = SVC(kernel="linear", C=C).fit(train_x, train_y)  # 非線性SVM函數學習機, linear模式
+
 rbf_svc = SVC(kernel="rbf", gamma=0.5, C=1).fit(train_x, train_y)
 poly_svc = SVC(kernel="poly", degree=3, C=C).fit(train_x, train_y)
-lin_svc = LinearSVC(C=C).fit(train_x, train_y)
+lin_svc = LinearSVC(C=C).fit(train_x, train_y)  # 線性支援向量機 (Linear SVM)
 
 # create a mesh to plot in
 x_min, x_max = train_x[:, 0].min() - 1, train_x[:, 0].max() + 1
@@ -518,7 +568,7 @@ for i, clf in enumerate((svc, lin_svc, rbf_svc, poly_svc)):
 
     # Put the result into a color plot
     Z = Z.reshape(xx.shape)
-    plt.contourf(xx, yy, Z, cmap=plt.cm.coolwarm, alpha=0.7)
+    plt.contourf(xx, yy, Z, cmap=plt.cm.coolwarm, alpha=0.7)  # contourf 等高線面積圖
 
     # Plot also the training points
     plt.scatter(train_x[:, 0], train_x[:, 1], c=train_y, cmap=plt.cm.coolwarm)
@@ -555,9 +605,13 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-N = 500
-GROUPS = 3
-X, y = make_blobs(n_samples=N, centers=GROUPS, n_features=2)
+N = 500  # n_samples, 樣本數
+M = 2  # n_features, 特徵數(資料的維度)
+GROUPS = 3  # centers, 分群數
+STD = 0.3  # cluster_std, 資料標準差
+print("make_blobs,", N, "個樣本, ", M, "個特徵, 分成", GROUPS, "群")
+
+X, y = make_blobs(n_samples=N, n_features=M, centers=GROUPS)
 
 from sklearn.model_selection import cross_val_score  # Cross Validation
 
@@ -573,86 +627,20 @@ print("平均 :", scores.mean())
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-data, label = make_blobs(n_samples=200, n_features=2, centers=2, random_state=9487)
-
-d_sta = preprocessing.StandardScaler().fit_transform(data)  # 標準化
-
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
-dx_train, dx_test, label_train, label_test = train_test_split(
-    d_sta, label, test_size=0.2, random_state=9487
-)
-# 訓練組8成, 測試組2成
-
-# 建立分類模型
-svm_model = LinearSVC()
-
-# 建立訓練數據模型
-svm_model.fit(dx_train, label_train)  # 學習訓練.fit
-
-# 對測試數據做預測
-pred = svm_model.predict(dx_test)
-
-# 輸出測試數據的 label
-print(label_test)
-
-# 輸出預測數據的 label
-print(pred)
-
-# 輸出準確性
-print(f"訓練資料的準確性 = {svm_model.score(dx_train, label_train)}")
-print(f"測試資料的準確性 = {svm_model.score(dx_test, label_test)}")
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-data, label = make_moons(n_samples=200, noise=0.2, random_state=9487)
-
-d_sta = preprocessing.StandardScaler().fit_transform(data)  # 標準化
-
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
-dx_train, dx_test, label_train, label_test = train_test_split(
-    d_sta, label, test_size=0.2, random_state=9487
-)
-# 訓練組8成, 測試組2成
-
-# 線性SVM 建立分類模型, 建立訓練數據模型, 對測試數據做預測
-svm_model = LinearSVC()
-
-svm_model.fit(dx_train, label_train)  # 學習訓練.fit
-
-pred = svm_model.predict(dx_test)
-
-# 輸出線性SVM準確性
-print(f"線性訓練資料的準確性 = {svm_model.score(dx_train, label_train)}")
-print(f"線性測試資料的準確性 = {svm_model.score(dx_test, label_test)}")
-print("=" * 50)
-
-# 非線性SVM 建立分類模型, 建立訓練數據模型, 對測試數據做預測
-clf = SVC()
-clf.fit(dx_train, label_train)
-pred = clf.predict(dx_test)
-
-# 輸出非線性SVM準確性
-print(f"非線性訓練資料的準確性 = {clf.score(dx_train, label_train)}")
-print(f"非線性測試資料的準確性 = {clf.score(dx_test, label_test)}")
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 # SelectFromModel
 
 from sklearn.feature_selection import SelectFromModel
 
 X, y = datasets.load_iris(return_X_y=True)
-
 print("X.shape :", X.shape)
 
 # SelectFromModel特徵選取
 
-svc = SVC(kernel="linear", C=1)
-clf = SelectFromModel(estimator=svc, threshold="mean")
-X_new = clf.fit_transform(X, y)
+svc = SVC(kernel="linear", C=1)  # 非線性SVM函數學習機, linear模式
 
+clf = SelectFromModel(estimator=svc, threshold="mean")
+
+X_new = clf.fit_transform(X, y)
 print("X_new.shape :", X_new.shape)
 
 print("特徵是否被選取")
@@ -666,7 +654,7 @@ print(cc)
 print("選擇2個特徵")
 X = X_new
 
-print("資料分割")
+# 資料分割
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 print("查看陣列維度")
@@ -702,7 +690,7 @@ disp = ConfusionMatrixDisplay(confusion_matrix=confusion_matrix(y_test, y_pred))
 disp.plot()
 show()
 
-print("使用全部特徵")
+print("使用全部特徵1")
 
 X, y = datasets.load_iris(return_X_y=True)
 
@@ -738,11 +726,11 @@ print("------------------------------------------------------------")  # 60個
 from sklearn.feature_selection import SequentialFeatureSelector
 
 X, y = datasets.load_iris(return_X_y=True)
-
 print("X.shape :", X.shape)
 
 # SFS 特徵選取
-svc = SVC(kernel="linear", C=1)
+svc = SVC(kernel="linear", C=1)  # 非線性SVM函數學習機, linear模式
+
 clf = SequentialFeatureSelector(estimator=svc, n_features_to_select=2)
 X_new = clf.fit_transform(X, y)
 
@@ -793,7 +781,7 @@ disp = ConfusionMatrixDisplay(confusion_matrix=confusion_matrix(y_test, y_pred))
 disp.plot()
 show()
 
-print("使用全部特徵")
+print("使用全部特徵2")
 
 X, y = datasets.load_iris(return_X_y=True)
 
@@ -841,7 +829,7 @@ def plot_hyperplane(clf, X, y, h=0.02, draw_sv=True, title="hyperplan"):
     Z = clf.predict(np.c_[xx.ravel(), yy.ravel()])
     # Put the result into a color plot
     Z = Z.reshape(xx.shape)
-    plt.contourf(xx, yy, Z, cmap="hot", alpha=0.5)
+    plt.contourf(xx, yy, Z, cmap="hot", alpha=0.5)  # contourf 等高線面積圖
 
     markers = ["o", "s", "^"]
     colors = ["b", "r", "c"]
@@ -858,8 +846,16 @@ def plot_hyperplane(clf, X, y, h=0.02, draw_sv=True, title="hyperplan"):
         plt.scatter(sv[:, 0], sv[:, 1], c="y", marker="x")
 
 
-X, y = make_blobs(n_samples=100, centers=2, random_state=9487, cluster_std=0.3)
+N = 100  # n_samples, 樣本數
+M = 2  # n_features, 特徵數(資料的維度)
+GROUPS = 2  # centers, 分群數
+STD = 0.3  # cluster_std, 資料標準差
+print("make_blobs,", N, "個樣本, ", M, "個特徵, 分成", GROUPS, "群")
+
+X, y = make_blobs(n_samples=N, centers=GROUPS, cluster_std=STD, random_state=9487)
+
 clf = SVC(C=1.0, kernel="linear")
+
 clf.fit(X, y)
 
 plt.figure(figsize=(12, 4))
@@ -869,7 +865,14 @@ show()
 
 print("------------------------------")  # 30個
 
-X, y = make_blobs(n_samples=100, centers=3, random_state=9487, cluster_std=0.8)
+N = 100  # n_samples, 樣本數
+M = 2  # n_features, 特徵數(資料的維度)
+GROUPS = 3  # centers, 分群數
+STD = 0.8  # cluster_std, 資料標準差
+print("make_blobs,", N, "個樣本, ", M, "個特徵, 分成", GROUPS, "群")
+
+X, y = make_blobs(n_samples=N, centers=GROUPS, cluster_std=STD, random_state=9487)
+
 clf_linear = SVC(C=1.0, kernel="linear")
 clf_poly = SVC(C=1.0, kernel="poly", degree=3)
 clf_rbf = SVC(C=1.0, kernel="rbf", gamma=0.5)
@@ -894,33 +897,12 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# データ生成
-centers = [(-1, -0.125), (0.5, 0.5)]
-
-N = 50
-print("產生", N, "筆資料 2維 2群")
-X, y = make_blobs(n_samples=N, n_features=2, centers=centers, cluster_std=0.3)
-
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
-
-model = LinearSVC()
-
-model.fit(X_train, y_train)  # 學習訓練.fit
-
-y_pred = model.predict(X_test)  # 預測.predict
-
-print(accuracy_score(y_pred, y_test))  # 評価
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 dataset = pd.read_csv("data/Social_Network_Ads.csv")
 X = dataset.iloc[:, [2, 3]].values
 y = dataset.iloc[:, 4].values
 
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+# 資料分割
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
-# 訓練組8成, 測試組2成
 
 # 第四步：特征量化  # Feature Scaling
 scaler = preprocessing.StandardScaler()
@@ -930,7 +912,7 @@ X_test = scaler.fit_transform(X_test)  # STD特徵縮放
 # 第五步：适配SVM到训练集合
 # Fitting SVM to the Training set
 
-classifier = SVC(kernel="linear", random_state=0)
+classifier = SVC(kernel="linear", random_state=9487)  # 非線性SVM函數學習機, linear模式
 
 classifier.fit(X_train, y_train)  # 學習訓練.fit
 
@@ -977,7 +959,7 @@ plt.contourf(
     classifier.predict(np.array([X1.ravel(), X2.ravel()]).T).reshape(X1.shape),
     alpha=0.75,
     cmap=ListedColormap(("red", "green")),
-)
+)  # contourf 等高線面積圖
 plt.xlim(X1.min(), X1.max())
 plt.ylim(X2.min(), X2.max())
 for i, j in enumerate(np.unique(y_set)):
@@ -1007,7 +989,7 @@ plt.contourf(
     classifier.predict(np.array([X1.ravel(), X2.ravel()]).T).reshape(X1.shape),
     alpha=0.75,
     cmap=ListedColormap(("red", "green")),
-)
+)  # contourf 等高線面積圖
 plt.xlim(X1.min(), X1.max())
 plt.ylim(X2.min(), X2.max())
 for i, j in enumerate(np.unique(y_set)):
@@ -1070,7 +1052,7 @@ Z = clf.predict(np.c_[xx.ravel(), yy.ravel()])
 
 # 繪製等高線
 Z = Z.reshape(xx.shape)
-plt.contourf(xx, yy, Z, cmap=plt.cm.Paired)
+plt.contourf(xx, yy, Z, cmap=plt.cm.Paired)  # contourf 等高線面積圖
 plt.axis("off")
 
 # 繪製實際點
@@ -1081,6 +1063,7 @@ show()
 
 # SVM 模型評估
 base_classifier.fit(X_train, y_30)  # 學習訓練.fit
+
 cc = base_classifier.score(X_test, y_test)
 print(cc)
 # 0.6666666666666666
@@ -1108,10 +1091,6 @@ self_training_model = SelfTrainingClassifier(svc)
 
 self_training_model.fit(X, y)  # 學習訓練.fit
 
-"""
-SelfTrainingClassifier(base_estimator=SVC(gamma='auto', probability=True))
-"""
-
 svc.fit(X[y >= 0], y[y >= 0])  # 學習訓練.fit
 cc = svc.score(X, y)
 print(cc)
@@ -1126,17 +1105,37 @@ print(cc)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+print("4維線性SVC")
+
+iris = datasets.load_iris()
+
+X = iris.data
+y = iris.target
+
+clf = SVC(kernel="linear")  # 非線性SVM函數學習機, linear模式
+
+clf.fit(X, y)  # 學習訓練.fit
+
+y_pred = clf.predict(X)  # 預測.predict
+
+# 計算正確率
+accuracy = accuracy_score(y, y_pred)
+print("SVM classifier 之 正確率 : {:.2f}".format(accuracy))
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 # 繪製混淆矩陣
 iris = datasets.load_iris()
 
 X = iris.data
 y = iris.target
 
-# 分割資料
+# 資料分割
 X_train, X_test, y_train, y_test = train_test_split(X, y)
 
 # 模型訓練
-clf = SVC(kernel="linear", C=0.01)
+clf = SVC(kernel="linear", C=0.01)  # 非線性SVM函數學習機, linear模式
 
 clf.fit(X_train, y_train)  # 學習訓練.fit
 
@@ -1318,6 +1317,7 @@ print(cc)
 
 # 將資料分為Train以及Test並將特徵標準化
 
+# 資料分割
 X_train, X_test, y_train, y_test = train_test_split(
     iris_data[["sepal length (cm)", "petal length (cm)"]],
     iris_data[["target"]],
@@ -1332,7 +1332,7 @@ X_test_std = sc.transform(X_test)
 
 # 載入SVM中的SVC，並將kernel設為線性（SVM的Kernel可以換成非線性），並將Probability設為True
 
-clf = SVC(kernel="linear", probability=True)
+clf = SVC(kernel="linear", probability=True)  # 非線性SVM函數學習機, linear模式
 
 clf.fit(X_train_std, y_train["target"].values)
 
@@ -1378,7 +1378,7 @@ def plot_decision_regions(X, y, classifier, test_idx=None, resolution=0.02):
     )
     Z = classifier.predict(np.array([xx1.ravel(), xx2.ravel()]).T)
     Z = Z.reshape(xx1.shape)
-    plt.contourf(xx1, xx2, Z, alpha=0.4, cmap=cmap)
+    plt.contourf(xx1, xx2, Z, alpha=0.4, cmap=cmap)  # contourf 等高線面積圖
     plt.xlim(xx1.min(), xx1.max())
     plt.ylim(xx2.min(), xx2.max())
 
@@ -1478,7 +1478,7 @@ def plot_decision_function(classifier, sample_weight, axis, title):
     Z = Z.reshape(xx.shape)
 
     # plot the line, the points, and the nearest vectors to the plane
-    axis.contourf(xx, yy, Z, alpha=0.75, cmap=plt.cm.bone)
+    axis.contourf(xx, yy, Z, alpha=0.75, cmap=plt.cm.bone)  # contourf 等高線面積圖
     axis.scatter(
         X[:, 0],
         X[:, 1],
@@ -1724,10 +1724,8 @@ print("n_samples: %d" % n_samples)
 print("n_features: %d" % n_features)
 print("n_classes: %d" % n_classes)
 
-# Split into a training set and a test and keep 25% of the data for testing.
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=42
-)
+# 資料分割
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 scaler = preprocessing.StandardScaler()
 X_train = scaler.fit_transform(X_train)
@@ -1861,9 +1859,8 @@ y = iris.target  # 資料集目標
 X = x[:, 2:]  # 2~末 花瓣
 Y = y
 
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+# 資料分割
 x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size=0.2)
-# 訓練組8成, 測試組2成
 
 # 看一下整筆數據的分佈。
 plt.scatter(X[:, 0], X[:, 1], c=Y, cmap="Paired")
@@ -1902,7 +1899,8 @@ show()
 
 x1, y1 = np.meshgrid(np.arange(0, 7, 0.02), np.arange(0, 3, 0.02))
 
-# 記得 x1, y1 是什麼樣子的, 我們要拉平之後 (x1_ravel(), y1_ravel()), 再用 np.c_ 合成一點一點的, 才可以送進去預測。
+# 記得 x1, y1 是什麼樣子的, 我們要拉平之後 (x1_ravel(), y1_ravel()),
+# 再用 np.c_ 合成一點一點的, 才可以送進去預測。
 
 Z = clf.predict(np.c_[x1.ravel(), y1.ravel()])
 
@@ -1912,21 +1910,24 @@ print(len(x1.ravel()))
 
 # 52500
 
-# 等一下我們要用 contourf 做填充型的等高線, 每一點的「高度」就是我們的 SVC 學習機判斷鳶尾花的亞種。但用 contourf 輸入的格點是前面 meshgrid 後的 x1, y1, 而高度 Z 也是要用同樣的型式。
+# 等一下我們要用 contourf 做填充型的等高線,
+# 每一點的「高度」就是我們的 SVC 學習機判斷鳶尾花的亞種。
+# 但用 contourf 輸入的格點是前面 meshgrid 後的 x1, y1,
+# 而高度 Z 也是要用同樣的型式。
 
 Z = Z.reshape(x1.shape)
 
 # 於是我們終於可以畫圖了...
 
 plt.scatter(x_test[:, 0], x_test[:, 1], c=y_test)
-plt.contourf(x1, y1, Z, alpha=0.3)
+plt.contourf(x1, y1, Z, alpha=0.3)  # contourf 等高線面積圖
 show()
 
 # 這是測試資料, 之前我們已經知道我們全對!
 # 不如就來看看所有鳶尾花資料我們 SVC 的表現。
 
 plt.scatter(X[:, 0], X[:, 1], c=Y)
-plt.contourf(x1, y1, Z, alpha=0.3)
+plt.contourf(x1, y1, Z, alpha=0.3)  # contourf 等高線面積圖
 show()
 
 # 在測試資料中是全對!! 我們畫圖來看看整體表現如何?
@@ -1938,7 +1939,7 @@ xm, ym = np.meshgrid(x0, y0)
 P = np.c_[xm.ravel(), ym.ravel()]
 z = clf.predict(P)
 Z = z.reshape(xm.shape)
-plt.contourf(xm, ym, Z, alpha=0.3)
+plt.contourf(xm, ym, Z, alpha=0.3)  # contourf 等高線面積圖
 plt.scatter(X[:, 0], X[:, 1], c=Y)
 
 show()
@@ -1950,7 +1951,7 @@ xm, ym = np.meshgrid(x0, y0)
 P = np.c_[xm.ravel(), ym.ravel()]
 z = clf.predict(P)
 Z = z.reshape(xm.shape)
-plt.contourf(xm, ym, Z, alpha=0.3)
+plt.contourf(xm, ym, Z, alpha=0.3)  # contourf 等高線面積圖
 
 plt.scatter(X[:, 0], X[:, 1], c=Y)
 show()
@@ -1959,7 +1960,7 @@ show()
 x1, x2 = np.meshgrid(np.arange(0, 7, 0.02), np.arange(0, 3, 0.02))
 Z = clf.predict(np.c_[x1.ravel(), x2.ravel()])
 Z = Z.reshape(x1.shape)
-plt.contourf(x1, x2, Z, alpha=0.3)
+plt.contourf(x1, x2, Z, alpha=0.3)  # contourf 等高線面積圖
 plt.scatter(X[:, 0], X[:, 1], c=Y)
 show()
 
@@ -1969,7 +1970,7 @@ yy = [5, 6, 7, 8]
 np.c_[xx, yy]
 Z = clf.predict(np.c_[x1.ravel(), x2.ravel()])
 Z = Z.reshape(x1.shape)
-plt.contourf(x1, x2, Z, cmap=plt.cm.coolwarm, alpha=0.8)
+plt.contourf(x1, x2, Z, cmap=plt.cm.coolwarm, alpha=0.8)  # contourf 等高線面積圖
 plt.scatter(X[:, 0], X[:, 1], c=Y)
 plt.title("更炫的畫圖法")
 show()
@@ -1979,7 +1980,7 @@ X, Y = np.meshgrid(np.arange(4, 8, 0.02), np.arange(2, 4.5, 0.02))
 x_data = np.c_[X.ravel(), Y.ravel()]
 data_pred = clf.predict(x_data)
 Z = data_pred.reshape(X.shape)
-plt.contourf(X, Y, Z, alpha = 0.3)
+plt.contourf(X, Y, Z, alpha = 0.3)  # contourf 等高線面積圖
 plt.scatter(x[:, 0], x[:, 1], c = y)
 show()
 """
@@ -1988,7 +1989,7 @@ show()
 x1, x2 = np.meshgrid(np.arange(0, 7, 0.02), np.arange(0, 3, 0.02))
 Z = clf.predict(np.c_[x1.ravel(), x2.ravel()])
 Z = Z.reshape(x1.shape)
-plt.contourf(x1, x2, Z, alpha=0.3)
+plt.contourf(x1, x2, Z, alpha=0.3)  # contourf 等高線面積圖
 plt.scatter(X[:, 0], X[:, 1], c=Y)
 
 show()
@@ -2064,9 +2065,8 @@ show()
 
 # 看來好像真的會比較容易切開, 我們來試試是否真的這樣。先來分訓練和測試資料。
 
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+# 資料分割
 x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
-# 訓練組8成, 測試組2成
 
 clf = SVC()
 
@@ -2081,7 +2081,7 @@ xm, ym = np.meshgrid(x0, y0)
 P = np.c_[xm.ravel(), ym.ravel()]
 z = clf.predict(P)
 Z = z.reshape(xm.shape)
-plt.contourf(xm, ym, Z, alpha=0.3, cmap="Paired")
+plt.contourf(xm, ym, Z, alpha=0.3, cmap="Paired")  # contourf 等高線面積圖
 plt.scatter(X[:, 0], X[:, 1], c=y, cmap="Paired")
 
 show()
@@ -2100,9 +2100,8 @@ Y = iris.target  # 資料集目標
 
 X = X[:, :2]
 
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+# 資料分割
 x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size=0.2)
-# 訓練組8成, 測試組2成
 
 plt.scatter(x_train[:, 0], x_train[:, 1], c=y_train)
 show()
@@ -2181,9 +2180,8 @@ y = iris.target  # 資料集目標
 X = x[:, :2]
 Y = y
 
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+# 資料分割
 x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size=0.2)
-# 訓練組8成, 測試組2成
 
 plt.scatter(X[:, 0], X[:, 1], c=Y, cmap="Paired")
 plt.title("原始資料")
@@ -2205,7 +2203,7 @@ xm, ym = np.meshgrid(x0, y0)
 P = np.c_[xm.ravel(), ym.ravel()]
 z = clf.predict(P)
 Z = z.reshape(xm.shape)
-plt.contourf(xm, ym, Z, alpha=0.3)
+plt.contourf(xm, ym, Z, alpha=0.3)  # contourf 等高線面積圖
 plt.scatter(X[:, 0], X[:, 1], c=Y)
 
 show()
@@ -2227,9 +2225,8 @@ X = pca.transform(x)
 plt.scatter(X[:, 0], X[:, 1], c=y, cmap="Paired")
 show()
 
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+# 資料分割
 x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
-# 訓練組8成, 測試組2成
 
 clf = SVC(gamma="scale")
 
@@ -2242,7 +2239,7 @@ xm, ym = np.meshgrid(x0, y0)
 P = np.c_[xm.ravel(), ym.ravel()]
 z = clf.predict(P)
 Z = z.reshape(xm.shape)
-plt.contourf(xm, ym, Z, alpha=0.3)
+plt.contourf(xm, ym, Z, alpha=0.3)  # contourf 等高線面積圖
 plt.scatter(X[:, 0], X[:, 1], c=y)
 show()
 
@@ -2271,7 +2268,7 @@ show()
 x1, x2 = np.meshgrid(np.arange(-0.2, 1.2, 0.02), np.arange(-0.2, 1.2, 0.02))
 Z = clf.predict(np.c_[x1.ravel(), x2.ravel()])
 z = Z.reshape(x1.shape)
-plt.contourf(x1, x2, z, alpha=0.3)
+plt.contourf(x1, x2, z, alpha=0.3)  # contourf 等高線面積圖
 # NG plt.scatter(x[:, 0], x[:, 1], s=100, c=clf.labels_)
 show()
 
@@ -2282,7 +2279,7 @@ xm, ym = np.meshgrid(x0, y0)
 P = np.c_[xm.ravel(), ym.ravel()]
 z = clf.predict(P)
 Z = z.reshape(xm.shape)
-plt.contourf(xm, ym, Z, alpha=0.3)
+plt.contourf(xm, ym, Z, alpha=0.3)  # contourf 等高線面積圖
 # NG plt.scatter(x[:, 0], x[:, 1], c=clf.labels_)
 show()
 
@@ -2294,9 +2291,8 @@ iris = datasets.load_iris()
 X = iris.data  # 獲取自變量
 y = iris.target  # 獲取因變量  # 資料集目標
 
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+# 資料分割
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
-# 訓練組8成, 測試組2成
 
 clf = SVC(C=0.8, kernel="rbf", gamma=1)  # 高斯核，鬆弛度0.8
 # clf = SVC(C=0.5, kernel='linear') # 線性核，鬆弛度0.5
@@ -2321,14 +2317,13 @@ from sklearn.model_selection import KFold
 
 iris = datasets.load_iris()
 
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
-X_train, X_test, y_train, y_test = train_test_split(iris.data, iris.target, test_size=0.3)
-# 訓練組8成, 測試組2成
+# 資料分割
+X_train, X_test, y_train, y_test = train_test_split(iris.data, iris.target, test_size=0.2)
 
 num = 5 # 5折交叉驗證
 train_preds = np.zeros(X_train.shape[0]) # 用於保存預測結果
 test_preds = np.zeros((X_test.shape[0], num))
-kf = KFold(len(X_train), n_folds = num, shuffle=True, random_state=0)
+kf = KFold(len(X_train), n_folds = num, shuffle=True, random_state=9487)
 for i, (train_index, eval_index) in enumerate(kf):
     clf = SVC(C=1, gamma=0.125, kernel='rbf')
     clf.fit(X_train[train_index], y_train[train_index])
@@ -2440,3 +2435,225 @@ xmin, xmax, ymin, ymax = -8, 8, -8, 8
 """
 # os.chdir(r'D:\Python_book\12SVM')
 # pd.set_option('display.max_columns', None)
+
+
+print("計算兩陣列的雷同率")
+y = np.array(
+    [
+        0,
+        2,
+        1,
+        2,
+        2,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        2,
+        0,
+        2,
+        0,
+        1,
+        1,
+        0,
+        1,
+        2,
+        2,
+        2,
+        2,
+        0,
+        2,
+        0,
+        2,
+        2,
+        1,
+        2,
+        2,
+        2,
+        0,
+        2,
+        2,
+        0,
+        1,
+        1,
+        2,
+        0,
+        1,
+        1,
+        1,
+        1,
+        2,
+        2,
+        0,
+        1,
+        2,
+        1,
+        0,
+        1,
+        1,
+        1,
+        2,
+        2,
+        0,
+        2,
+        1,
+        1,
+        1,
+        0,
+        0,
+        2,
+        0,
+        1,
+        1,
+        0,
+        2,
+        2,
+        2,
+        2,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        2,
+        1,
+        1,
+        0,
+        0,
+        1,
+        0,
+        2,
+        0,
+        0,
+        2,
+        1,
+        1,
+        0,
+        0,
+        1,
+        2,
+        1,
+        0,
+        2,
+        1,
+    ]
+)
+y_pred = np.array(
+    [
+        0,
+        2,
+        1,
+        2,
+        2,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        2,
+        0,
+        2,
+        0,
+        0,
+        1,
+        2,
+        2,
+        2,
+        2,
+        0,
+        2,
+        1,
+        2,
+        2,
+        1,
+        2,
+        2,
+        2,
+        0,
+        2,
+        2,
+        0,
+        0,
+        1,
+        2,
+        0,
+        1,
+        1,
+        2,
+        1,
+        2,
+        2,
+        0,
+        0,
+        2,
+        1,
+        0,
+        1,
+        1,
+        1,
+        2,
+        2,
+        0,
+        2,
+        1,
+        1,
+        1,
+        0,
+        0,
+        2,
+        0,
+        1,
+        1,
+        0,
+        2,
+        2,
+        2,
+        2,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        2,
+        1,
+        1,
+        0,
+        0,
+        1,
+        0,
+        2,
+        0,
+        0,
+        2,
+        1,
+        2,
+        0,
+        0,
+        2,
+        2,
+        1,
+        0,
+        2,
+        1,
+    ]
+)
+
+print("type y_pred :", type(y_pred))
+print("len y_pred :", len(y_pred))
+
+cc = np.sum(y_pred.reshape(-1, 1) == y.reshape(-1, 1))
+# print(cc)
+cc = cc * 1.0 / len(y)
+print("正確率 :", cc)
+
+
+# X = iris.data[:, :2]  # We only take the first two features

@@ -46,8 +46,9 @@ def show():
     pass
 
 
-colors = ["r", "g", "b", "y", "m", "c"]
-'''
+colors = np.array(["r", "g", "b", "y", "m", "c"])
+# colors = np.array(["r", "g", "b"])
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 """ # 無 sklearn ST
@@ -420,7 +421,7 @@ CLUSTERS = 5  # 要分成的群數
 print("使用KMeans分成", CLUSTERS, "群")
 clf = KMeans(n_clusters=CLUSTERS)  # K-平均演算法
 
-clf.fit(X_train)  # 學習訓練.fit
+clf.fit(X_train)  無答案 無監督學習 群集分析 random# 學習訓練.fit
 
 class_centers, classification = clf.evaluate(X_train)
 
@@ -450,7 +451,6 @@ X, y = datasets.load_iris(return_X_y=True)
 # 標準化
 X_train = sklearn.preprocessing.StandardScaler().fit_transform(X)
 
-# 訓練
 CLUSTERS = 3  # 要分成的群數
 print("使用KMeans分成", CLUSTERS, "群")
 clf = KMeans(n_clusters=CLUSTERS)  # K-平均演算法
@@ -542,54 +542,23 @@ for key, item in grouped_df:
 cc = model.predict(10)  # 第一組
 print(cc)
 
-""" # 無 sklearn SP
+"""  # 無 sklearn SP
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
+print("無答案 無監督學習 K-means 群集分析 random")
 
 print("K-平均演算法(KMeans) 資料分成3群並畫圖")
 
-# 建立資料一, 使用 random
-# 隨機生成 N 個點
+# 建立資料, 使用 random, 隨機生成 NX2 個點
 N = 100
 X = np.random.rand(N, 2)  # N X 2 亂數陣列
-"""
-# 建立資料二, 使用 make_blobs
-N = 100
-M = 2  # n_features, 特徵數(資料的維度)
-GROUPS = 4  # centers, 分群數
-STD = 1  # cluster_std, 資料標準差
 
-print("make_blobs,", N, "個樣本, ", M, "個特徵, 分成", GROUPS, "群")
-
-X, y, centers = make_blobs(
-    n_samples=N,
-    centers=GROUPS,
-    n_features=M,
-    cluster_std=STD,
-    random_state=9487,
-    return_centers=True,
-)
-
-print(GROUPS, "群 的中心點 :")
-print(centers)
-print("資料的維度", X.shape, y.shape)
-"""
 CLUSTERS = 3  # 要分成的群數
 print("使用KMeans分成", CLUSTERS, "群")
 clf = KMeans(n_clusters=CLUSTERS, random_state=9487)  # K-平均演算法
 
 clf.fit(X)  # 學習訓練.fit
-
-print("演算法 計算分群準確性 :", clf.inertia_)
-print("自己   計算分群準確性")  # 資料點與所屬質心距離的平方和
-
-C = clf.cluster_centers_  # 集群中心的座標, CLUSTERS個座標
-y = clf.labels_  # 群集類別標籤
-ss = 0
-for i in range(len(X)):
-    d = (X[i, 0] - C[y[i], 0]) ** 2 + (X[i, 1] - C[y[i], 1]) ** 2
-    ss += d
-print("自己   計算分群準確性 :", ss)
 
 plt.figure(num="KMeans分群", figsize=(12, 6))
 
@@ -642,14 +611,10 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+print("有答案 無監督學習 K-means 群集分析 + 準確率分析 make_ dataset")
 print("K-平均演算法(KMeans) 資料分成4群並畫圖")
 
-# 建立資料一, 使用 random
-# 隨機生成 N 個點
-N = 100
-X = np.random.rand(N, 2)  # N X 2 亂數陣列
-
-# 建立資料二, 使用 make_blobs
+# 建立資料, 使用 make_blobs
 N = 100
 M = 2  # n_features, 特徵數(資料的維度)
 GROUPS = 4  # centers, 分群數
@@ -677,7 +642,9 @@ clf = KMeans(n_clusters=CLUSTERS, random_state=9487)  # K-平均演算法
 clf.fit(X)  # 學習訓練.fit
 
 y_pred = clf.predict(X)  # 預測.predict
-# 預測.predict 會與 clf.labels_ 相同
+# 預測.predict, 其實就是 clf.labels_
+# y_pred = clf.labels_
+
 print("檢查是否相同")
 print(np.array_equal(clf.labels_, clf.predict(X)))
 
@@ -731,7 +698,7 @@ xm, ym = np.meshgrid(x0, y0)
 P = np.c_[xm.ravel(), ym.ravel()]
 z = clf.predict(P)  # 預測.predict
 Z = z.reshape(xm.shape)
-plt.contourf(xm, ym, Z, alpha=0.3)  # 劃分區域, contourf 等高線面積圖
+plt.contourf(xm, ym, Z, alpha=0.3, cmap="Paired")  # 劃分區域, contourf 等高線面積圖
 # 劃分區域SP
 # 繪圓點, 圓點用黑色外框, 使用標籤 labels_ 區別顏色,
 plt.scatter(X[:, 0], X[:, 1], marker="o", c=clf.labels_)
@@ -751,7 +718,7 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
+"""
 print("Mean Shift 自動分類, 電腦自己決定要分成幾類")
 
 plt.figure(num="Means Shift 自動分類", figsize=(12, 8))
@@ -769,7 +736,8 @@ clf = MeanShift(bandwidth=0.2)
 clf.fit(X)  # 學習訓練.fit
 
 y_pred = clf.predict(X)  # 預測.predict
-# 預測.predict 會與 clf.labels_ 相同
+# 預測.predict, 其實就是 clf.labels_
+# y_pred = clf.labels_
 
 plt.subplot(231)
 plt.scatter(X[:, 0], X[:, 1], s=50)  # 畫點
@@ -856,13 +824,13 @@ f.close()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
+
+print("轉折判斷法(Elbow)")
+
 iris = datasets.load_iris()
 
 X = iris.data
 y = iris.target
-
-# 轉折判斷法(Elbow)
 
 distortions = []
 # 測試 分群 1~11 群的失真
@@ -878,12 +846,23 @@ for k in range(1, 11):
 plt.plot(range(1, 11), distortions, color="r", marker="o", markersize=8, label="分群準確性")
 plt.xlabel("集群數量")
 plt.ylabel("失真")
+plt.title("轉折判斷法(Elbow)")
 plt.grid()
 plt.legend()
 
+# 看圖決定要分成幾群
+
 show()
 
-print("看圖, 決定分 3 群")
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+"""
+print("對四維的資料 iris 做 KMeans分類")
+
+iris = datasets.load_iris()
+
+X = iris.data
+y = iris.target
 
 CLUSTERS = 3  # 要分成的群數
 print("使用KMeans分成", CLUSTERS, "群")
@@ -892,7 +871,8 @@ clf = KMeans(n_clusters=CLUSTERS)  # K-平均演算法
 clf.fit(X)  # 學習訓練.fit
 
 y_pred = clf.predict(X)  # 預測.predict
-# 預測.predict 會與 clf.labels_ 相同
+# 預測.predict, 其實就是 clf.labels_
+# y_pred = clf.labels_
 # print("分群的預測結果：", y_pred)
 
 print("預測")
@@ -918,8 +898,8 @@ plt.title("原始資料之正確分類")
 
 plt.subplot(133)
 # 畫所有資料
-colmap = np.array(["r", "g", "b"])
-plt.scatter(X[:, 0], X[:, 1], color=colmap[clf.labels_])
+plt.scatter(X[:, 0], X[:, 1], color=colors[clf.labels_])
+
 # 標記群集中心
 plt.scatter(
     clf.cluster_centers_[:, 0],
@@ -937,10 +917,10 @@ plt.title("使用 KMeans 分3群")
 
 show()
 
-sys.exit()
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
+print("對四維的資料 iris 做 KMeans分類")
 
 iris = datasets.load_iris()
 
@@ -954,7 +934,7 @@ clf = KMeans(n_clusters=CLUSTERS)  # K-平均演算法
 clf.fit(X)  # 學習訓練.fit
 
 # y_pred = clf.predict(X)  # 預測.predict
-# 其實就是 clf.labels_
+# 預測.predict, 其實就是 clf.labels_
 # y_pred = clf.labels_
 
 # 修正標籤錯誤
@@ -977,18 +957,16 @@ print(sm.accuracy_score(y, y_pred))
 # 混淆矩陣
 print(sm.confusion_matrix(y, y_pred))
 
-colmap = np.array(["r", "g", "b"])
-
-plt.figure(num="KMeans分群", figsize=(10, 8))
+plt.figure(num="KMeans分群", figsize=(12, 6))
 
 plt.subplot(131)
-plt.scatter(X[:, 0], X[:, 1], color=colmap[y])
+plt.scatter(X[:, 0], X[:, 1], color=colors[y])
 plt.xlabel("花萼長度")
 plt.ylabel("花萼寬度")
 plt.title("真實分類")
 
 plt.subplot(132)
-plt.scatter(X[:, 0], X[:, 1], color=colmap[y_pred])
+plt.scatter(X[:, 0], X[:, 1], color=colors[y_pred])
 # plt.scatter(X[:, 0], X[:, 1], c=clf.labels_) # same
 # plt.scatter(X[:, 0], X[:, 1], c=y_pred, cmap="viridis")
 # 標記群集中心
@@ -1014,87 +992,24 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 鳶尾花資料集
+print("計算準確率, 要先有答案")
 
-X, y = datasets.load_iris(return_X_y=True)
+iris = datasets.load_iris()
+
+X = iris.data
+y = iris.target
 
 CLUSTERS = 3  # 要分成的群數
 print("使用KMeans分成", CLUSTERS, "群")
 clf = KMeans(n_clusters=CLUSTERS)  # K-平均演算法
 
-print("有目標的訓練")
-clf.fit(X, y)  # 學習訓練.fit
+clf.fit(X)  # 學習訓練.fit
 
-# 計算準確率
 y_pred = clf.predict(X)
 
 print(f"{accuracy_score(y, y_pred)*100:.2f}%")
 score = accuracy_score(y, y_pred)
 print("準確率:{0:f}".format(score))
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# 轉折判斷法(Elbow)
-
-# 生成分類資料
-
-N = 150  # n_samples, 樣本數
-M = 2  # n_features, 特徵數(資料的維度)
-GROUPS = 6  # centers, 分群數
-STD = 0.5  # cluster_std, 資料標準差
-
-print("make_blobs,", N, "個樣本, ", M, "個特徵, 分成", GROUPS, "群")
-
-X, y = make_blobs(
-    n_samples=N,
-    n_features=M,
-    centers=GROUPS,
-    cluster_std=STD,
-    shuffle=True,
-    random_state=9487,
-)
-
-CLUSTERS = 3  # 要分成的群數
-print("使用KMeans分成", CLUSTERS, "群")
-clf = KMeans(
-    n_clusters=CLUSTERS,
-    init="random",
-    n_init=10,
-    max_iter=300,
-    tol=1e-04,
-    random_state=9487,
-)  # K-平均演算法
-
-# 顯示失真(Distortion)的程度
-y_pred = clf.fit_predict(X)  # 學習訓練 + 預測 .fit_predict
-
-# 轉折判斷法(Elbow)
-
-distortions = []
-# 測試 分群 1~10 群的失真
-for k in range(1, 11):
-    CLUSTERS = k  # 要分成的群數
-    print("使用KMeans分成", CLUSTERS, "群")
-    clf = KMeans(
-        n_clusters=CLUSTERS,
-        init="k-means++",
-        n_init=10,
-        max_iter=300,
-        random_state=9487,
-    )  # K-平均演算法
-    clf.fit(X)  # 學習訓練.fit
-    print("分", k, "群, 分群準確性 :", clf.inertia_)
-    distortions.append(clf.inertia_)
-
-# 看視覺化圖表決定參數K值
-plt.plot(range(1, 11), distortions, color="r", marker="o", markersize=8, label="分群準確性")
-plt.xlabel("集群數量")
-plt.ylabel("失真")
-plt.grid()
-plt.legend()
-
-show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1223,6 +1138,7 @@ clf = KMeans(
     random_state=9487,
 )  # K-平均演算法
 
+# 一次做完訓練+預測
 y_pred = clf.fit_predict(X)  # 學習訓練 + 預測 .fit_predict
 
 plt.subplot(232)
@@ -1271,6 +1187,7 @@ clf = KMeans(
     random_state=9487,
 )  # K-平均演算法
 
+# 一次做完訓練+預測
 y_pred = clf.fit_predict(X)  # 學習訓練 + 預測 .fit_predict
 
 plt.subplot(234)
@@ -1355,6 +1272,10 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+# 集群的應用 : 影像壓縮(Image Compression)
+# 利用集群將相近的顏色以質心取代，就可以達到減色的效果，
+# 減色後可以較少的位元來儲存或傳輸影像，達到影像壓縮的效益。
+
 print("對圖片做 KMeans(), 目前彩色圖片還有問題")
 
 # 重建影像的函數
@@ -1376,18 +1297,14 @@ from sklearn.datasets import load_sample_image
 
 print("使用 sklearn 內建圖片")
 image = load_sample_image("china.jpg")
-print(type(image))
-print(len(image))
-print(image.shape)
-
+"""
 print("使用 本地圖片")
 # filename = 'C:/_git/vcs/_1.data/______test_files1/ims01.bmp'
 filename = "data/circle.bmp"
 import cv2
-
 # 檔案 => cv2影像
 image = cv2.imread(filename, 1)
-
+"""
 print(type(image))
 print(len(image))
 print(image.shape)
@@ -1447,6 +1364,78 @@ plt.subplot(212)
 plt.imshow(image2)
 plt.axis("off")
 plt.title("重建的影像")
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+from sklearn.utils import shuffle
+from skimage import io
+
+filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
+
+original = plt.imread(filename)
+width, height, depth = original.shape
+temp = original.reshape(width * height, depth)
+temp = np.array(temp, dtype=np.float64) / 255
+
+original_sample = shuffle(temp, random_state=0)[:1000]  # 随机取1000个RGB值作为训练集
+
+
+def cluster(k):
+    estimator = KMeans(n_clusters=k, random_state=9487)  # K-平均演算法, 分成k群
+    kmeans = estimator.fit(original_sample)  # 聚类
+    return kmeans
+
+
+def recreate_image(codebook, labels, w, h):
+    d = codebook.shape[1]
+    image = np.zeros((w, h, d))
+    label_idx = 0
+    for i in range(w):
+        for j in range(h):
+            image[i][j] = codebook[labels[label_idx]]
+            label_idx += 1
+    return image
+
+
+kmeans = cluster(32)
+labels = kmeans.predict(temp)
+kmeans_32 = recreate_image(kmeans.cluster_centers_, labels, width, height)
+
+kmeans = cluster(64)
+labels = kmeans.predict(temp)
+kmeans_64 = recreate_image(kmeans.cluster_centers_, labels, width, height)
+
+kmeans = cluster(128)
+labels = kmeans.predict(temp)
+kmeans_128 = recreate_image(kmeans.cluster_centers_, labels, width, height)
+
+plt.figure(figsize=(15, 10))
+
+plt.subplot(221)
+plt.imshow(original.reshape(width, height, depth))
+plt.title("原始图像")
+plt.axis("off")
+
+plt.subplot(222)
+plt.imshow(kmeans_128)
+# NG io.imsave('kmeans_128.png',kmeans_128)
+plt.title("量化的图像(128颜色, K-Means)")
+plt.axis("off")
+
+plt.subplot(223)
+plt.imshow(kmeans_64)
+# NG io.imsave('kmeans_64.png',kmeans_64)
+plt.title("量化的图像(64颜色, K-Means)")
+plt.axis("off")
+
+plt.subplot(224)
+plt.imshow(kmeans_32)
+# NG io.imsave('kmeans_32.png',kmeans_32)
+plt.title("量化的图像(32颜色, K-Means)")
+plt.axis("off")
+
 show()
 
 print("------------------------------------------------------------")  # 60個
@@ -1732,12 +1721,11 @@ now = dt.date(2011, 12, 9)
 cc = (now - dt.date(2011, 1, 18)).days == 325
 print(cc)
 
-# True
-
 # 複製資料
 rfm_segmentation = rfm.copy()
 
-# 轉折判斷法
+print("轉折判斷法(Elbow)")
+
 Nc = range(1, 20)
 clf = [KMeans(n_clusters=i, init="k-means++", n_init="auto") for i in Nc]
 for i in range(len(clf)):
@@ -2118,78 +2106,170 @@ print(cc)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-from sklearn.utils import shuffle
-from skimage import io
+N = 200  # n_samples, 樣本數
+M = 2  # n_features, 特徵數(資料的維度)
+GROUPS = 4  # centers, 分群數
+STD = 1  # cluster_std, 資料標準差
 
-filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
+print("make_blobs,", N, "個樣本, ", M, "個特徵, 分成", GROUPS, "群")
 
-original = plt.imread(filename)
-width, height, depth = original.shape
-temp = original.reshape(width * height, depth)
-temp = np.array(temp, dtype=np.float64) / 255
+X, y = make_blobs(
+    n_samples=N,
+    n_features=M,
+    centers=GROUPS,
+    cluster_std=STD,
+    center_box=(-10.0, 10.0),
+    shuffle=True,
+    random_state=9487,
+)
 
-original_sample = shuffle(temp, random_state=0)[:1000]  # 随机取1000个RGB值作为训练集
+plt.figure(figsize=(6, 4))
+plt.xticks(())
+plt.yticks(())
+plt.scatter(X[:, 0], X[:, 1], s=20, marker="o")
+
+show()
+
+print("------------------------------")  # 30個
+
+CLUSTERS = 3  # 要分成的群數
+print("使用KMeans分成", CLUSTERS, "群")
+clf = KMeans(n_clusters=CLUSTERS)  # K-平均演算法
+
+clf.fit(X)
+
+print("kmean: k={}, cost={}".format(n_clusters, int(clf.score(X))))
+
+labels = clf.labels_
+centers = clf.cluster_centers_
+markers = ["o", "^", "*"]
+colors = ["r", "b", "y"]
+
+plt.figure(figsize=(6, 4))
+plt.xticks(())
+plt.yticks(())
+
+# 畫樣本
+for c in range(n_clusters):
+    cluster = X[labels == c]
+    plt.scatter(cluster[:, 0], cluster[:, 1], marker=markers[c], s=20, c=colors[c])
+# 畫出中心點
+plt.scatter(centers[:, 0], centers[:, 1], marker="o", c="white", alpha=0.9, s=300)
+for i, c in enumerate(centers):
+    plt.scatter(c[0], c[1], marker="$%d$" % i, s=50, c=colors[i])
+
+show()
+
+print("------------------------------")  # 30個
 
 
-def cluster(k):
-    estimator = KMeans(n_clusters=k, random_state=9487)  # K-平均演算法, 分成k群
-    kmeans = estimator.fit(original_sample)  # 聚类
-    return kmeans
+def fit_plot_kmean_model(n_clusters, X):
+    plt.xticks(())
+    plt.yticks(())
+
+    # 使用 k-均值算法進行擬合
+    clf = KMeans(n_clusters=n_clusters)
+    clf.fit_predict(X)
+
+    labels = clf.labels_
+    centers = clf.cluster_centers_
+    markers = ["o", "^", "*", "s"]
+    colors = ["r", "b", "y", "k"]
+
+    # 計算成本
+    score = clf.score(X)
+    plt.title("k={}, score={}".format(n_clusters, (int)(score)))
+
+    # 畫樣本
+    for c in range(n_clusters):
+        cluster = X[labels == c]
+        plt.scatter(cluster[:, 0], cluster[:, 1], marker=markers[c], s=20, c=colors[c])
+    # 畫出中心點
+    plt.scatter(centers[:, 0], centers[:, 1], marker="o", c="white", alpha=0.9, s=300)
+    for i, c in enumerate(centers):
+        plt.scatter(c[0], c[1], marker="$%d$" % i, s=50, c=colors[i])
 
 
-def recreate_image(codebook, labels, w, h):
-    d = codebook.shape[1]
-    image = np.zeros((w, h, d))
-    label_idx = 0
-    for i in range(w):
-        for j in range(h):
-            image[i][j] = codebook[labels[label_idx]]
-            label_idx += 1
-    return image
+n_clusters = [2, 3, 4]
 
-
-kmeans = cluster(32)
-labels = kmeans.predict(temp)
-kmeans_32 = recreate_image(kmeans.cluster_centers_, labels, width, height)
-
-kmeans = cluster(64)
-labels = kmeans.predict(temp)
-kmeans_64 = recreate_image(kmeans.cluster_centers_, labels, width, height)
-
-kmeans = cluster(128)
-labels = kmeans.predict(temp)
-kmeans_128 = recreate_image(kmeans.cluster_centers_, labels, width, height)
-
-plt.figure(figsize=(15, 10))
-
-plt.subplot(221)
-plt.imshow(original.reshape(width, height, depth))
-plt.title("原始图像")
-plt.axis("off")
-
-plt.subplot(222)
-plt.imshow(kmeans_128)
-# NG io.imsave('kmeans_128.png',kmeans_128)
-plt.title("量化的图像(128颜色, K-Means)")
-plt.axis("off")
-
-plt.subplot(223)
-plt.imshow(kmeans_64)
-# NG io.imsave('kmeans_64.png',kmeans_64)
-plt.title("量化的图像(64颜色, K-Means)")
-plt.axis("off")
-
-plt.subplot(224)
-plt.imshow(kmeans_32)
-# NG io.imsave('kmeans_32.png',kmeans_32)
-plt.title("量化的图像(32颜色, K-Means)")
-plt.axis("off")
+plt.figure(figsize=(10, 3))
+for i, c in enumerate(n_clusters):
+    plt.subplot(1, 3, i + 1)
+    fit_plot_kmean_model(c, X)
 
 show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+from sklearn.datasets import load_files
+
+""" NG 無檔案
+print("loading documents ...")
+t = time.time()
+docs = load_files('datasets/clustering/data')
+print("summary: {0} documents in {1} categories.".format(
+    len(docs.data), len(docs.target_names)))
+print("done in {0} seconds".format(time.time() - t))
+
+from sklearn.feature_extraction.text import TfidfVectorizer
+
+max_features = 20000
+print("vectorizing documents ...")
+t = time.time()
+vectorizer = TfidfVectorizer(max_df=0.4, 
+                             min_df=2, 
+                             max_features=max_features, 
+                             encoding='latin-1')
+X = vectorizer.fit_transform((d for d in docs.data))
+print("n_samples: %d, n_features: %d" % X.shape)
+print("number of non-zero features in sample [{0}]: {1}".format(
+    docs.filenames[0], X[0].getnnz()))
+print("done in {0} seconds".format(time.time() - t))
+
+print("------------------------------")  # 30個
+
+print("clustering documents ...")
+t = time.time()
+n_clusters = 4
+clf = KMeans(n_clusters=n_clusters, 
+               max_iter=100,
+               tol=0.01,
+               verbose=1,
+               n_init=3)
+clf.fit(X)
+print("kmean: k={}, cost={}".format(n_clusters, int(clf.inertia_)))
+print("done in {0} seconds".format(time.time() - t))
+
+print(len(clf.labels_))
+
+cc = clf.labels_[1000:1010]
+print(cc)
+
+cc = docs.filenames[1000:1010]
+print(cc)
+
+print('------------------------------')	#30個
+
+print("Top terms per cluster:")
+
+order_centroids = clf.cluster_centers_.argsort()[:, ::-1]
+
+terms = vectorizer.get_feature_names_out()
+for i in range(n_clusters):
+    print("Cluster %d:" % i, end='')
+    for ind in order_centroids[i, :10]:
+        print(' %s' % terms[ind], end='')
+    print()
+
+a = np.array([[20, 10, 30, 40], [100, 300, 200, 400], [1, 5, 3, 2]])
+cc = a.argsort()[:, ::-1]
+print(cc)
+
+a = np.array([10, 30, 20, 40])
+cc = a.argsort()[::-1]
+print(cc)
+"""
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -2231,6 +2311,59 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+print("演算法 計算分群準確性 :", clf.inertia_)
+print("自己   計算分群準確性")  # 資料點與所屬質心距離的平方和
+
+C = clf.cluster_centers_  # 集群中心的座標, CLUSTERS個座標
+y = clf.labels_  # 群集類別標籤
+ss = 0
+for i in range(len(X)):
+    d = (X[i, 0] - C[y[i], 0]) ** 2 + (X[i, 1] - C[y[i], 1]) ** 2
+    ss += d
+print("自己   計算分群準確性 :", ss)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------")  # 30個
+
+
+CLUSTERS = 3  # 要分成的群數
+print("使用KMeans分成", CLUSTERS, "群")
+clf = KMeans(
+    n_clusters=CLUSTERS,
+    init="random",
+    n_init=10,
+    max_iter=300,
+    tol=1e-04,
+    random_state=9487,
+)  # K-平均演算法
+
+
+"""
+    clf = KMeans(
+        n_clusters=CLUSTERS,
+        init="k-means++",
+        n_init=10,
+        max_iter=300,
+        random_state=9487,
+    )  # K-平均演算法
+
+
+make_blobs 多了 shuffle 參數
+            X, y = make_blobs(
+                n_samples=N,
+                n_features=M,
+                centers=GROUPS,
+                cluster_std=STD,
+                shuffle=True,
+                random_state=9487,
+            )
+
+"""
+
+
+X, y = datasets.load_iris(return_X_y=True)
+
+iris = datasets.load_iris()
+
+X = iris.data
+y = iris.target
