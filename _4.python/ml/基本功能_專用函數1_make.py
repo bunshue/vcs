@@ -3,10 +3,34 @@
 
 使用 scikit-learn(sklearn) 的 函數
 
+sklearn內建資料集集合
+
 預設方法建立資料集
 
 一些簡易的運算
 """
+
+"""
+機器學習筆記：常用數據集之scikit-learn生成分類和聚類數據集
+本文介紹分類和聚類數據集的生成，包括以下9個接口函數，其中，
+有六個是用于單標簽類數據生成：
+
+(1) make_blobs()
+(2) make_classification()
+(3) make_gaussian_quantiles()
+(4) make_hastie_10_2()
+(5) make_circles()
+(6) make_moons()
+
+一個用于多標簽類數據生成:
+(7) make_multilabel_classification()
+
+還有兩個用于雙聚類數據集生成：
+(8) make_biclusters
+(9) make_checkerboard
+"""
+
+
 
 print("------------------------------------------------------------")  # 60個
 
@@ -66,152 +90,13 @@ def show():
 
 
 print("------------------------------------------------------------")  # 60個
-
-print("使用center_box")
-
-N = 1000  # n_samples, 樣本數
-M = 2  # n_features, 特徵數(資料的維度)
-GROUPS = 6  # centers, 分群數
-STD = 0.3  # cluster_std, 資料標準差
-print("make_blobs,", N, "個樣本, ", M, "個特徵, 分成", GROUPS, "群")
-
-X, y, centers = make_blobs(
-    n_samples=N,
-    n_features=M,
-    centers=GROUPS,
-    cluster_std=STD,
-    center_box=(-10.0, 10.0),
-    return_centers=True,
-)
-
-print(GROUPS, "群 的中心點 :\n", centers)
-
-plt.scatter(*zip(*X))
-
-# 標記群集中心
-plt.scatter(centers[:, 0], centers[:, 1], marker="*", s=200, color="r")
-# 目前還不會把框畫出來 center_box
-
-show()
-
 print("------------------------------------------------------------")  # 60個
 
-# 用文字看內建資料的方法
-
-N = 10  # n_samples, 樣本數
-M = 4  # n_features, 特徵數(資料的維度)
-GROUPS = 3  # centers, 分群數
-STD = 1  # cluster_std, 資料標準差
-print("make_blobs,", N, "個樣本, ", M, "個特徵, 分成", GROUPS, "群")
-
-X, y, centers = make_blobs(
-    n_samples=N, centers=GROUPS, cluster_std=STD, n_features=M, return_centers=True
-)
-
-print(GROUPS, "群 的中心點 : ", centers)
-print(GROUPS, "個目標")
-print("資料的維度")
-print("X :\t", X.shape)
-print("y :\t", y.shape)
-print("資料的內容")
-print("X :\n", X)
-print("y :\n", y)
-
-plt.figure(figsize=(16, 9))
-
-plt.subplot(231)
-N, M, GROUPS, STD = 100, 2, 3, 1
-X, y, centers = make_blobs(
-    n_samples=N, centers=GROUPS, cluster_std=STD, n_features=M, return_centers=True
-)
-plt.scatter(X[:, 0], X[:, 1], c=y)
-# 標記群集中心
-plt.scatter(centers[:, 0], centers[:, 1], marker="*", s=200, color="r")
-plt.title("sd=1, 3群")
-
-plt.subplot(232)
-N, M, GROUPS, STD = 100, 2, 5, 1
-X, y, centers = make_blobs(
-    n_samples=N, centers=GROUPS, cluster_std=STD, n_features=M, return_centers=True
-)
-plt.scatter(X[:, 0], X[:, 1], c=y)
-# 標記群集中心
-plt.scatter(centers[:, 0], centers[:, 1], marker="*", s=200, color="r")
-plt.title("sd=1, 5群")
-
-plt.subplot(233)
-print("每群不同大小, 指定中心位置")
-
-N0, N1, N2, N3 = 50, 150, 250, 400  # 樣本數
-cx0, cy0 = 100, 120  # 第0群的中心位置
-cx1, cy1 = 250, 300  # 第1群的中心位置
-cx2, cy2 = 700, 150  # 第2群的中心位置
-cx3, cy3 = 300, 500  # 第3群的中心位置
-
-X, y, centers = make_blobs(
-    n_samples=[N0, N1, N2, N3],
-    n_features=2,
-    centers=[[cx0, cy0], [cx1, cy1], [cx2, cy2], [cx3, cy3]],
-    cluster_std=50,
-    return_centers=True,
-)
-
-plt.scatter(X[:, 0], X[:, 1], c=y)
-# 標記群集中心
-plt.scatter(centers[:, 0], centers[:, 1], marker="*", s=200, color="r")
-plt.title("每群不同大小, 指定中心位置")
-
-plt.subplot(234)
-N, M, GROUPS = 100, 2, 3
-X, y, centers = make_blobs(
-    n_samples=N, centers=GROUPS, n_features=M, return_centers=True
-)
-plt.scatter(X[:, 0], X[:, 1], c=y)
-# 標記群集中心
-plt.scatter(centers[:, 0], centers[:, 1], marker="*", s=200, color="r")
-plt.axis([-15, 15, -15, 15])
-plt.title("無 sd")
-
-plt.subplot(235)
-N, M, GROUPS, STD = 100, 2, 3, 3
-X, y, centers = make_blobs(
-    n_samples=N, centers=GROUPS, cluster_std=STD, n_features=M, return_centers=True
-)
-plt.scatter(X[:, 0], X[:, 1], c=y)
-# 標記群集中心
-plt.scatter(centers[:, 0], centers[:, 1], marker="*", s=200, color="r")
-plt.axis([-15, 15, -15, 15])
-plt.title("sd=3")
-
-plt.subplot(236)
-N, M, GROUPS, STD = 100, 2, 3, 6
-X, y, centers = make_blobs(
-    n_samples=N, centers=GROUPS, cluster_std=STD, n_features=M, return_centers=True
-)
-plt.scatter(X[:, 0], X[:, 1], c=y)
-# 標記群集中心
-plt.scatter(centers[:, 0], centers[:, 1], marker="*", s=200, color="r")
-plt.axis([-15, 15, -15, 15])
-plt.title("sd=6")
-
-plt.suptitle("各種 make_blobs")
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-
-plt.figure(
-    num="sklearn內建資料集集合",
-    figsize=(16, 9),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
+plt.figure(num="make_regression", figsize=(16, 9))
 
 print("------------------------------")  # 30個
 plt.subplot(231)
+
 plt.title("make_regression 迴歸資料集")
 
 N = 50  # n_samples, 樣本數
@@ -239,6 +124,13 @@ plt.plot([min(X), max(X)], [min(X) * coef, max(X) * coef], "r")
 
 print("------------------------------")  # 30個
 plt.subplot(232)
+
+print("------------------------------")  # 30個
+plt.subplot(233)
+
+print("------------------------------")  # 30個
+plt.subplot(234)
+
 plt.title("make_classification 分類資料集")
 
 print("分類資料集")
@@ -272,12 +164,160 @@ for k in range(3):
             plt.scatter(X_0, X_1, marker=markers[k], s=50)
 
 print("------------------------------")  # 30個
+plt.subplot(235)
+
+print("------------------------------")  # 30個
+plt.subplot(236)
+
+print("使用center_box")
+
+N = 1000  # n_samples, 樣本數
+M = 2  # n_features, 特徵數(資料的維度)
+GROUPS = 6  # centers, 分群數
+STD = 0.3  # cluster_std, 資料標準差
+print("make_blobs,", N, "個樣本, ", M, "個特徵, 分成", GROUPS, "群")
+
+X, y, centers = make_blobs(
+    n_samples=N,
+    n_features=M,
+    centers=GROUPS,
+    cluster_std=STD,
+    center_box=(-10.0, 10.0),
+    return_centers=True,
+)
+
+print(GROUPS, "群 的中心點 :\n", centers)
+
+plt.scatter(*zip(*X))
+
+# 標記群集中心
+plt.scatter(centers[:, 0], centers[:, 1], marker="*", s=200, color="r")
+# 目前還不會把框畫出來 center_box
+
+plt.suptitle("各種 make_regression")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+plt.figure(num="make_blobs", figsize=(16, 9))
+
+N = 10  # n_samples, 樣本數
+M = 4  # n_features, 特徵數(資料的維度)
+GROUPS = 3  # centers, 分群數
+STD = 1  # cluster_std, 資料標準差
+print("make_blobs,", N, "個樣本, ", M, "個特徵, 分成", GROUPS, "群")
+
+X, y, centers = make_blobs(
+    n_samples=N, centers=GROUPS, cluster_std=STD, n_features=M, return_centers=True
+)
+
+print(GROUPS, "群 的中心點 : ", centers)
+print(GROUPS, "個目標")
+print("資料的維度")
+print("X :\t", X.shape)
+print("y :\t", y.shape)
+print("資料的內容")
+print("X :\n", X)
+print("y :\n", y)
+
+print("------------------------------")  # 30個
+plt.subplot(231)
+N, M, GROUPS, STD = 100, 2, 3, 1
+X, y, centers = make_blobs(
+    n_samples=N, centers=GROUPS, cluster_std=STD, n_features=M, return_centers=True
+)
+plt.scatter(X[:, 0], X[:, 1], c=y)
+# 標記群集中心
+plt.scatter(centers[:, 0], centers[:, 1], marker="*", s=200, color="r")
+plt.title("sd=1, 3群")
+
+print("------------------------------")  # 30個
+plt.subplot(232)
+N, M, GROUPS, STD = 100, 2, 5, 1
+X, y, centers = make_blobs(
+    n_samples=N, centers=GROUPS, cluster_std=STD, n_features=M, return_centers=True
+)
+plt.scatter(X[:, 0], X[:, 1], c=y)
+# 標記群集中心
+plt.scatter(centers[:, 0], centers[:, 1], marker="*", s=200, color="r")
+plt.title("sd=1, 5群")
+
+print("------------------------------")  # 30個
+plt.subplot(233)
+print("每群不同大小, 指定中心位置")
+
+N0, N1, N2, N3 = 50, 150, 250, 400  # 樣本數
+cx0, cy0 = 100, 120  # 第0群的中心位置
+cx1, cy1 = 250, 300  # 第1群的中心位置
+cx2, cy2 = 700, 150  # 第2群的中心位置
+cx3, cy3 = 300, 500  # 第3群的中心位置
+
+X, y, centers = make_blobs(
+    n_samples=[N0, N1, N2, N3],
+    n_features=2,
+    centers=[[cx0, cy0], [cx1, cy1], [cx2, cy2], [cx3, cy3]],
+    cluster_std=50,
+    return_centers=True,
+)
+
+plt.scatter(X[:, 0], X[:, 1], c=y)
+# 標記群集中心
+plt.scatter(centers[:, 0], centers[:, 1], marker="*", s=200, color="r")
+plt.title("每群不同大小, 指定中心位置")
+
+print("------------------------------")  # 30個
 plt.subplot(234)
+N, M, GROUPS = 100, 2, 3
+X, y, centers = make_blobs(
+    n_samples=N, centers=GROUPS, n_features=M, return_centers=True
+)
+plt.scatter(X[:, 0], X[:, 1], c=y)
+# 標記群集中心
+plt.scatter(centers[:, 0], centers[:, 1], marker="*", s=200, color="r")
+plt.axis([-15, 15, -15, 15])
+plt.title("無 sd")
+
+print("------------------------------")  # 30個
+plt.subplot(235)
+N, M, GROUPS, STD = 100, 2, 3, 3
+X, y, centers = make_blobs(
+    n_samples=N, centers=GROUPS, cluster_std=STD, n_features=M, return_centers=True
+)
+plt.scatter(X[:, 0], X[:, 1], c=y)
+# 標記群集中心
+plt.scatter(centers[:, 0], centers[:, 1], marker="*", s=200, color="r")
+plt.axis([-15, 15, -15, 15])
+plt.title("sd=3")
+
+print("------------------------------")  # 30個
+plt.subplot(236)
+N, M, GROUPS, STD = 100, 2, 3, 6
+X, y, centers = make_blobs(
+    n_samples=N, centers=GROUPS, cluster_std=STD, n_features=M, return_centers=True
+)
+plt.scatter(X[:, 0], X[:, 1], c=y)
+# 標記群集中心
+plt.scatter(centers[:, 0], centers[:, 1], marker="*", s=200, color="r")
+plt.axis([-15, 15, -15, 15])
+plt.title("sd=6")
+
+plt.suptitle("各種 make_blobs")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+plt.figure(num="make_其他", figsize=(16, 9))
+
+print("------------------------------")  # 30個
+plt.subplot(231)
+
 plt.title("make_moons 非線性的資料集")
 
-# X, y = make_moons(noise=0.3)
-# print('make_moons 未指定個數, 就是100個')
-
+N = 100 # make_moons 未指定個數, 就是100個
 X, y = make_moons(n_samples=N, noise=0.05)
 print(X.shape)
 
@@ -292,9 +332,9 @@ for k in range(2):
             X_1.append(X[i, 1])
             plt.scatter(X_0, X_1, s=50, c=colors[k])
 
-
 print("------------------------------")  # 30個
-plt.subplot(235)
+plt.subplot(232)
+
 plt.title("make_circles 圓形分佈的資料集")
 
 X, y = make_circles(n_samples=N, noise=0.05)
@@ -312,40 +352,61 @@ for k in range(2):
             plt.scatter(X_0, X_1, s=50, c=colors[k])
 
 print("------------------------------")  # 30個
-plt.subplot(236)
-plt.title("xxx")
+plt.subplot(233)
 
-plt.suptitle("各種 make_xxxx")
+print("------------------------------")  # 30個
+plt.subplot(234)
+
+print("------------------------------")  # 30個
+plt.subplot(235)
+
+print("------------------------------")  # 30個
+plt.subplot(236)
+
+plt.suptitle("各種 make_其他")
+
 show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+
+plt.figure(num="make_regression", figsize=(16, 9))
+
+print("------------------------------")  # 30個
+plt.subplot(231)
+
+print("------------------------------")  # 30個
+plt.subplot(232)
+
+print("------------------------------")  # 30個
+plt.subplot(233)
+
+print("------------------------------")  # 30個
+plt.subplot(234)
+
+print("------------------------------")  # 30個
+plt.subplot(235)
+
+print("------------------------------")  # 30個
+plt.subplot(236)
+
+plt.suptitle("各種 make_regression")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-"""
-機器學習筆記：常用數據集之scikit-learn生成分類和聚類數據集
-本文介紹分類和聚類數據集的生成，包括以下9個接口函數，其中，
-有六個是用于單標簽類數據生成：
-
-(1) make_blobs()
-(2) make_classification()
-(3) make_gaussian_quantiles()
-(4) make_hastie_10_2()
-(5) make_circles()
-(6) make_moons()
-
-一個用于多標簽類數據生成:
-(7) make_multilabel_classification()
-
-還有兩個用于雙聚類數據集生成：
-(8) make_biclusters
-(9) make_checkerboard
-"""
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 """ 畫在一起 TBD
 plt.figure(
@@ -488,7 +549,7 @@ for key, group in grouped:
 plt.title("make_gaussian_quantiles")
 show()
 
-# 以上畫一起 有問題~~~~~
+# 以上畫一起 有問題 df plot~~~~~
 
 
 """
@@ -583,16 +644,13 @@ print("作業完成")
 print("------------------------------------------------------------")  # 60個
 sys.exit()
 
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
 print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
 
 """
 sklearn 使用make_regression生成回歸樣本數據及NumPy擬合
@@ -620,3 +678,8 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+

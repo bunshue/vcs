@@ -190,7 +190,7 @@ play(output)  # 播放聲音
 print("------------------------------------------------------------")  # 60個
 
 
-from IPython.display import Audio  # 載入 IPython.display 的 Audio模組
+from IPython.display import Audio  # 載入 IPython.display 的 Audio模組  # 用IPython
 
 Audio("output.mp3")  # 播放聲音
 

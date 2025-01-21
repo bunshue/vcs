@@ -96,7 +96,8 @@ print("------------------------------------------------------------")  # 60個
 
 import speech_recognition
 from pydub import AudioSegment
-from IPython.display import display, Javascript
+from IPython.display import display  # 用IPython
+from IPython.display import Javascript  # 用IPython
 
 # from google.colab.output import eval_js
 from base64 import b64decode
@@ -404,7 +405,7 @@ print("------------------------------------------------------------")  # 60個
 
 video_filename = "C:/_git/vcs/_big_files/holo1.mp4"
 
-from IPython.display import HTML
+from IPython.display import HTML  # 用IPython
 
 from base64 import b64encode
 

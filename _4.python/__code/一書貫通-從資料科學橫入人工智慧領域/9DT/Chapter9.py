@@ -123,7 +123,7 @@ tree.export_graphviz(clf, out_file='cart.dot')
 # - 第三步是安装python插件pydotplus: pip install pydotplus
 
 import pydotplus
-from IPython.display import Image
+from IPython.display import Image # 用IPython
 import sklearn.tree as tree
 
 dot_data = tree.export_graphviz(
@@ -136,7 +136,7 @@ dot_data = tree.export_graphviz(
 ) 
             
 graph = pydotplus.graph_from_dot_data(dot_data)  
-Image(graph.create_png()) 
+Image(graph.create_png())   # 用IPython顯示圖片
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -284,7 +284,7 @@ clf.fit(train_data, train_target)  #  使用训练数据建模
 # - 第三步是安装python插件pydotplus: pip install pydotplus
 
 import pydotplus
-from IPython.display import Image
+from IPython.display import Image # 用IPython
 import sklearn.tree as tree
 
 dot_data = tree.export_graphviz(
@@ -297,7 +297,7 @@ dot_data = tree.export_graphviz(
 ) 
             
 graph = pydotplus.graph_from_dot_data(dot_data)  
-Image(graph.create_png()) 
+Image(graph.create_png())   # 用IPython顯示圖片
 
 """
 # ## 模型保存/读取

@@ -4569,9 +4569,10 @@ jpg_str = jpg_data.tobytes()
 # %fig=使用`Image`將`imencode()`解碼的結果直接內嵌到Notebook中
 res, jpg_data = cv2.imencode(".jpg", img_8bit)
 
+"""
 from IPython.display import Image
-
-Image(data=jpg_data.tobytes())
+Image(data=jpg_data.tobytes())  # 用IPython顯示圖片
+"""
 
 # 視訊輸出
 
@@ -4916,7 +4917,7 @@ def histogram_match(src, dst):
     cdf_src = np.zeros((3, 256))
     cdf_dst = np.zeros((3, 256))
     cdf_res = np.zeros((3, 256))
-    kw = dict(bins=256, range=(0, 256), normed=True)
+    kw = dict(bins=256, range=(0, 256), normed=True)  # normed 改成 density
 
     for ch in (0, 1, 2):
         hist_src, _ = np.histogram(src[:, :, ch], **kw)

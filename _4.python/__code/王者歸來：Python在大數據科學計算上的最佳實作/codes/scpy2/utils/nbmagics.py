@@ -299,7 +299,8 @@ def install_magics():
         @line_magic
         def sympy_latex(self, line):
             from sympy import latex
-            from IPython.display import Latex, display
+            from IPython.display import Latex # 用IPython
+            from IPython.display import display # 用IPython
             ip = get_ipython()
             latex = Latex("$${}$$".format(latex(ip.ev(line))))
             display(latex)

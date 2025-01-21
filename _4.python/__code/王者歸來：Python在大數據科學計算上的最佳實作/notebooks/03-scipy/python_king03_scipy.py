@@ -545,7 +545,7 @@ print(cc)
 cc = stats.norm.fit(x)  # 得到隨機序列期望值和標准差
 print(cc)
 
-pdf, t = np.histogram(x, bins=100, normed=True)
+pdf, t = np.histogram(x, bins=100, normed=True)  # normed 改成 density
 t = (t[:-1] + t[1:]) * 0.5  # ❷
 cdf = np.cumsum(pdf) * (t[1] - t[0])  # ❸
 p_error = pdf - X.pdf(t)

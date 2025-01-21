@@ -40,7 +40,6 @@ from common1 import *
 from sklearn import datasets
 from sklearn import preprocessing  # 極值標準化
 from sklearn.datasets import make_blobs
-from sklearn.datasets import make_moons  # 非線性的資料集
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
 from sklearn.model_selection import cross_val_score  # 交叉驗證 Cross-validation
 import sklearn.model_selection as cross_validation
@@ -64,7 +63,7 @@ from sklearn.neighbors import KNeighborsRegressor
 
 
 def show():
-    # plt.show()
+    plt.show()
     pass
 
 
@@ -84,9 +83,6 @@ show()
 """
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-print("make_moons 未指定個數, 就是100個")
-X, y = make_moons(noise=0.3)
 
 print("自己建立資料")
 X = np.array(
@@ -314,6 +310,7 @@ y_pred = knn.predict(X)  # 預測.predict
 print(y_pred)
 print("---------------------------")
 print(y.values)
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -426,10 +423,8 @@ print(cc)
 X = df_feat
 y = df["Danger"]
 
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.30
-)  # 訓練組8成, 測試組2成
+# 資料分割
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 # 從k值=1開始測試
 NEIGHBOARS = 1
@@ -552,10 +547,8 @@ print(cc)
 X = df_feat
 y = df["Danger"]
 
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.30
-)  # 訓練組8成, 測試組2成
+# 資料分割
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 # 從k值=1開始測試
 NEIGHBOARS = 1
@@ -678,10 +671,10 @@ min_max_scaler = preprocessing.MinMaxScaler()
 X_scaled = min_max_scaler.fit_transform(X)
 X_scaled[1:5]
 
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+# 資料分割
 X_train, X_test, y_train, y_test = cross_validation.train_test_split(
-    X_scaled, Y, test_size=0.2, train_size=0.8
-)  # 訓練組8成, 測試組2成
+    X_scaled, Y, test_size=0.2, train_size=0.2
+)
 
 # 上述过程有没有问题？
 
@@ -903,6 +896,7 @@ print(df.head())
 df_X = df[["SepalLengthCm", "SepalWidthCm", "PetalLengthCm", "PetalWidthCm"]]
 df_y = df["Species"]
 
+# 資料分割
 X_train, X_test, y_train, y_test = train_test_split(df_X, df_y, test_size=0.2)
 
 NEIGHBOARS = 1
@@ -1027,6 +1021,7 @@ print(df.head())
 df_X = df[["Sex", "Pclass"]]
 df_y = df["Survived"]
 
+# 資料分割
 X_train, X_test, y_train, y_test = train_test_split(df_X, df_y, test_size=0.2)
 
 NEIGHBOARS = 1
@@ -1157,9 +1152,8 @@ iris = datasets.load_iris()
 X = iris.data[:, :2]
 y = iris.target
 
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+# 資料分割
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
-# 訓練組8成, 測試組2成
 
 # 標準化
 scaler = sklearn.preprocessing.StandardScaler().fit(X_train)
@@ -1198,9 +1192,8 @@ print("Size of y:", y.shape)  #  (150, )
 # Split the data into training and test sets with test_size=0.2 (20% for test set)
 X, y = iris.data, iris.target
 
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+# 資料分割
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
-# 訓練組8成, 測試組2成
 
 # Print the sizes of the arrays
 print("Size of X_train:", X_train.shape)
@@ -1432,9 +1425,8 @@ print(dataset)
 X = dataset.iloc[:, [2, 3]].values
 y = dataset.iloc[:, 4].values
 
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+# 資料分割
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
-# 訓練組8成, 測試組2成
 
 # 第四步：特征缩放 Feature Scaling
 scaler = sklearn.preprocessing.StandardScaler()

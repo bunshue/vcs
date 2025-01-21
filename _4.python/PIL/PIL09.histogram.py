@@ -314,7 +314,7 @@ def imresize(im, sz):
 def histeq(im, nbr_bins=256):
     """对一幅灰度图像进行直方图均衡化"""
     # 计算图像的直方图
-    imhist, bins = pylab.histogram(im.flatten(), nbr_bins, normed=True)
+    imhist, bins = pylab.histogram(im.flatten(), nbr_bins, normed=True)  # normed 改成 density
     cdf = imhist.cumsum()  # 累积分布函数
     cdf = 255 * cdf / cdf[-1]  # 归一化
     # 使用累积分布函数的线性插值，计算新的像素值

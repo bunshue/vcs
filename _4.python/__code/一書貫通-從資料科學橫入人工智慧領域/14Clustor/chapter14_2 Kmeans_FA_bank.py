@@ -240,7 +240,7 @@ clf.fit(model_data, result.labels_)
 
 
 import pydotplus
-from IPython.display import Image
+from IPython.display import Image # 用IPython
 import sklearn.tree as tree
 
 dot_data = tree.export_graphviz(clf, 
@@ -254,6 +254,6 @@ dot_data = tree.export_graphviz(clf,
 
 
 graph = pydotplus.graph_from_dot_data(dot_data)  
-Image(graph.create_png()) 
+Image(graph.create_png())   # 用IPython顯示圖片
 
 #%%

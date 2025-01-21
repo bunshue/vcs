@@ -762,7 +762,7 @@ find_match(expr, f)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-from IPython.display import Latex
+from IPython.display import Latex  # 用IPython
 
 # %init_sympy_printing
 x, y, z = sympy.symbols("x, y, z")
@@ -805,7 +805,8 @@ cc = sympy.expand_trig(sympy.sin(2 * x + y))
 print(cc)
 
 from tabulate import tabulate
-from IPython.display import Markdown, display_markdown
+from IPython.display import Markdown  # 用IPython
+from IPython.display import display_markdown  # 用IPython
 
 flags = ["mul", "log", "multinomial", "power_base", "power_exp"]
 expressions = [
@@ -835,7 +836,7 @@ cc = sympy.expand(x * sympy.log(y * z), mul=False)
 print(cc)
 
 from tabulate import tabulate
-from IPython.display import Markdown
+from IPython.display import Markdown  # 用IPython
 
 flags = ["complex", "func", "trig"]
 expressions = [x * y, sympy.gamma(1 + x), sympy.sin(x + y)]

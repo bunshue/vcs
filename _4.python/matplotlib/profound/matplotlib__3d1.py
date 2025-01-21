@@ -69,7 +69,6 @@ plt.scatter(X, Y, marker="o", c="m")
 plt.title("畫出 meshgrid")
 show()
 
-
 # 數字拉平
 XR = X.ravel()
 YR = Y.ravel()
@@ -101,17 +100,23 @@ fig = plt.figure()
 
 ax = fig.add_subplot(111, projection="3d")
 
-x = np.arange(-5, 5, 0.1)
-y = np.arange(-5, 5, 0.1)
-X, Y = np.meshgrid(x, y)
-Z = np.add(np.power(X, 2), np.power(Y, 2))  # Z = X^2 + Y^2
+# 從(x, y, z)指向(dx,dy,dz)
+x, y, z = 0, 0, 0
+dx, dy, dz = 1, 1, 1
+ax.quiver(x, y, z, dx, dy, dz, color="r")
 
-surf = ax.plot_wireframe(X, Y, Z)
+ax.set_xlim3d(0, 1.2)
+ax.set_ylim3d(0, 1.2)
+ax.set_zlim3d(0, 1.2)
+
+ax.set_xlabel("x")
+ax.set_ylabel("y")
+ax.set_zlabel("z")
 
 ax.scatter(0, 0, 0, c="r", s=100)
-ax.scatter(5, 5, 5, c="g", s=100)
+ax.scatter(1, 1, 1, c="g", s=100)
 
-elevation, azimuth = 45, 45  # 仰角 方位角
+elevation, azimuth = 10, 30  # 仰角 方位角
 ax.view_init(elev=elevation, azim=azimuth)  # 仰角(elevation), 方位角(azimuth)
 # 仰角(elevation), 看向原點, xy平面之夾角
 # 方位角(azimuth), 看向原點, 與+y軸之夾角
@@ -119,7 +124,6 @@ ax.view_init(elev=elevation, azim=azimuth)  # 仰角(elevation), 方位角(azimu
 ax.set_xlabel("X", color="r")
 ax.set_ylabel("Y", color="g")
 ax.set_zlabel("Z", color="b")
-ax.set_title("線框圖")
 
 show()
 
@@ -1499,3 +1503,16 @@ ax = fig.add_subplot(projection="3d")
 show()
 
 print("------------------------------------------------------------")  # 60個
+
+
+
+x = np.arange(-5, 5, 0.1)
+y = np.arange(-5, 5, 0.1)
+X, Y = np.meshgrid(x, y)
+Z = np.add(np.power(X, 2), np.power(Y, 2))  # Z = X^2 + Y^2
+
+surf = ax.plot_wireframe(X, Y, Z)
+
+ax.scatter(0, 0, 0, c="r", s=100)
+ax.scatter(5, 5, 5, c="g", s=100)
+

@@ -1168,7 +1168,7 @@ print("------------------------------")  # 30個
 #%fig[1x2]=每個城市的日平均PM2.5的分佈圖
 daily_city_groupby = df_aqi.groupby([df_aqi.Time.dt.date, "City"]) #❶
 mean_pm2_5 = daily_city_groupby.PM2_5.mean().unstack()  #❷
-mean_pm2_5.plot(kind="hist", histtype="step", bins=20, normed=True, lw=2) #❸
+mean_pm2_5.plot(kind="hist", histtype="step", bins=20, normed=True, lw=2) #❸  # normed 改成 density
 
 plt.show()
 

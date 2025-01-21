@@ -202,11 +202,8 @@ plt.show()
 
 # 可视化
 
-# In[18]:
-
-
 import pydotplus
-from IPython.display import Image
+from IPython.display import Image # 用IPython
 import sklearn.tree as tree
 
 dot_data = tree.export_graphviz(
@@ -219,12 +216,8 @@ dot_data = tree.export_graphviz(
 ) 
             
 graph = pydotplus.graph_from_dot_data(dot_data)  
-Image(graph.create_png()) 
+Image(graph.create_png()) # 用IPython顯示圖片
 # graph.write_pdf('response_decision_tree.pdf')
-
-
-# In[19]:
-
 
 from sklearn.tree import _tree
 

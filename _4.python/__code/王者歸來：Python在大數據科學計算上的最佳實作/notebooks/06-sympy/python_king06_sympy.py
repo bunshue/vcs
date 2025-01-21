@@ -28,7 +28,7 @@ print("------------------------------------------------------------")  # 60個
 
 from sympy import *
 import sympy
-from IPython.display import Latex
+from IPython.display import Latex  # 用IPython
 #%init_sympy_printing
 
 x, y, z = symbols("x, y, z")

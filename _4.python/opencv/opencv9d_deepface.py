@@ -498,10 +498,11 @@ print("------------------------------------------------------------")  # 60個
 ''' TBD
 print('範例：攝影機拍攝登入系統')
 
-from IPython.display import display, Javascript
+from IPython.display import display  # 用IPython
+from IPython.display import Javascript  # 用IPython
+#from IPython.display import Image  # 用IPython顯示圖片
 #from google.colab.output import eval_js
 from base64 import b64decode
-#from IPython.display import Image
 
 def take_photo(filename='person.jpg', quality=0.8):
   js = Javascript("""
@@ -537,7 +538,7 @@ def take_photo(filename='person.jpg', quality=0.8):
 
 try:
   filename = take_photo()
-  display(Image(filename))
+  display(Image(filename))  # 用IPython顯示圖片
 except Exception as err:
   print('攝影錯誤：{}'.format(str(err)))
 
@@ -586,10 +587,11 @@ print("------------------------------------------------------------")  # 60個
 '''TBD
 print('範例：攝影機拍攝人臉屬性分析')
 
-from IPython.display import display, Javascript
+from IPython.display import display  # 用IPython
+from IPython.display import Javascript  # 用IPython
+from IPython.display import Image  # 用IPython顯示圖片
 #from google.colab.output import eval_js
 from base64 import b64decode
-from IPython.display import Image
 
 def take_photo(filename='person.jpg', quality=0.8):
   js = Javascript("""
@@ -625,7 +627,7 @@ def take_photo(filename='person.jpg', quality=0.8):
 
 try:
   filename = take_photo()
-  display(Image(filename))
+  display(Image(filename))  # 用IPython顯示圖片
 except Exception as err:
   print('攝影錯誤：{}'.format(str(err)))
 

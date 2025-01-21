@@ -299,7 +299,7 @@ print("------------------------------------------------------------")  # 60個
 """
 
 #import pyautogui as auto
-from IPython.display import clear_output
+from IPython.display import clear_output  # 用IPython
 
 while True:
     x, y = pyautogui.position()
