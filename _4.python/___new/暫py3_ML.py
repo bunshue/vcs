@@ -51,6 +51,41 @@ f(x)=y
 3. 半監督式學習 semi-supervised learning
 4. 強化學習 reinforcement learning
 
+print("------------------------------------------------------------")	#60個
+
+Machine Learning
+
+Regression
+
+    Simple linear regression with t-statistic generation
+    Multiple ways to do linear regression in Python and their speed comparison (check the article I wrote on freeCodeCamp)
+    Multi-variate regression with regularization
+    Polynomial regression with how to use scikit-learn pipeline feature (check the article I wrote on Towards Data Science)
+    Decision trees and Random Forest regression (showing how the Random Forest works as a robust/regularized meta-estimator rejecting overfitting)
+
+Classification
+
+    Logistic regression/classification
+    k-nearest neighbor classification
+    Decision trees and Random Forest Classification
+    Support vector machine classification
+    Naive Bayes classification
+
+Clustering
+
+    K-means clustering
+    Affinity propagation (showing its time complexity and the effect of damping factor)
+    Mean-shift technique (showing its time complexity and the effect of noise on cluster discovery)
+    Hierarchical clustering with Dendograms showing how to choose optimal number of clusters
+    DBSCAN (showing how it can generically detect areas of high density irrespective of cluster shapes, which the k-means fails to do)
+
+Dimensionality reduction
+
+    Principal component analysis
+
+Deep Learning/Neural Network
+
+print("------------------------------------------------------------")	#60個
 
 深度學習的基本神經網路類型
 1. 前饋神經網路 Feedforward Neural Network, FNN

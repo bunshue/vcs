@@ -36,6 +36,22 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
+from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
+from sklearn.linear_model import LinearRegression
+from sklearn.linear_model import Lasso
+from sklearn.linear_model import ElasticNet
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.ensemble import ExtraTreesRegressor
+from sklearn.tree import DecisionTreeRegressor
+from sklearn.ensemble import AdaBoostRegressor
+from sklearn.neural_network import MLPRegressor
+from xgboost.sklearn import XGBRegressor
+from sklearn.metrics import mean_squared_error
+from sklearn.metrics import mean_absolute_error
+from sklearn.metrics import r2_score
+
+print("------------------------------------------------------------")  # 60個
+
 pd.set_option("display.max_rows", 1000)  # 設定最大能顯示1000rows
 pd.set_option("display.max_columns", 1000)  # 設定最大能顯示1000columns
 from pylab import mpl
@@ -43,6 +59,8 @@ from pylab import mpl
 mpl.rcParams["font.sans-serif"] = ["Microsoft YaHei"]
 # 指定默認字形：解決plot不能顯示中文問題
 mpl.rcParams["axes.unicode_minus"] = False
+
+print("------------------------------------------------------------")  # 60個
 
 df = pd.read_excel("data/KH-1982-2018.xlsx")
 cc = df.head()
@@ -72,12 +90,8 @@ print(cc)
 X = df.drop(["PM25"], axis=1)
 y = df.drop(["CO"], axis=1) # ???
 
-# 將資料分成訓練組及測試組
-from sklearn.model_selection import train_test_split
-
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.3, random_state=12
-)  # 訓練組7成, 測試組3成
+# 資料分割
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 print(X.shape)
 print(y.shape)
@@ -87,9 +101,6 @@ print(y_train.shape)
 print(y_test.shape)
 
 # 載入線性迴歸，並訓練模型
-from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
-
 linear_regression = LinearRegression()
 linear_regression.fit(X_train, y_train)
 
@@ -118,9 +129,6 @@ plt.title("Linear Regression Predicted vs Actual")
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
-
-from sklearn.neural_network import MLPRegressor
-from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 
 print("使用 多層感知機(Multi-Layer Perceptron, MLP)")
 
@@ -162,15 +170,12 @@ plt.title("Neural Network Regression Predicted vs Actual")
 
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 """
 最小絕對值收斂和選擇算子、套索算法
 Lasso算法(least absolute shrinkage and selection operator）
 """
-
-from sklearn.linear_model import Lasso
-
 lasso = Lasso()
 
 lasso.fit(X_train, y_train)
@@ -180,7 +185,7 @@ Lasso(
     copy_X=True,
     fit_intercept=True,
     max_iter=1000,
-    normalize=False,
+    #normalize=False,
     positive=False,
     precompute=False,
     random_state=None,
@@ -210,9 +215,7 @@ plt.title("Lasso Predicted vs Actual")
 
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
-
-from sklearn.linear_model import ElasticNet
+print("------------------------------")  # 30個
 
 elasticnet = ElasticNet()
 
@@ -237,10 +240,6 @@ print(
 )
 
 # Root mean squared error: 4.16
-
-from sklearn.ensemble import RandomForestRegressor
-from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
-
 
 # Create Random Forrest Regressor object
 regr_rf = RandomForestRegressor(n_estimators=200, random_state=1234)
@@ -284,7 +283,7 @@ plt.xlabel("Relative Importance")
 
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 plt.scatter(y_test, regr_rf_pred)
 plt.xlabel("Measured")
@@ -293,9 +292,7 @@ plt.title("Decision Forest Predicted vs Actual")
 
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
-
-from sklearn.ensemble import ExtraTreesRegressor
+print("------------------------------")  # 30個
 
 extra_tree = ExtraTreesRegressor(n_estimators=200, random_state=1234)
 
@@ -334,7 +331,7 @@ plt.xlabel("Relative Importance")
 
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 plt.scatter(y_test, extratree_pred)
 plt.xlabel("Measured")
@@ -344,10 +341,6 @@ plt.title("Extra Trees Predicted vs Actual")
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
-
-from sklearn.tree import DecisionTreeRegressor
-from sklearn.ensemble import AdaBoostRegressor
-from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 
 # Create Decision Tree Regressor object
 tree_1 = DecisionTreeRegressor()
@@ -438,9 +431,8 @@ plt.title("Boosted Decision Tree Predicted vs Actual")
 plt.show()
 """
 print("------------------------------------------------------------")  # 60個
-""" kilo 不能用 xgboost
-from xgboost.sklearn import XGBRegressor
 
+# kilo 不能用 xgboost
 # Fitting XGB regressor
 xboost = XGBRegressor(n_estimators=200)
 
@@ -465,7 +457,7 @@ plt.ylabel("Predicted")
 plt.title("XGBoost Predicted vs Actual")
 
 plt.show()
-"""
+
 print("------------------------------------------------------------")  # 60個
 
 print("Scores:")
@@ -475,7 +467,7 @@ print("Lasso regression score: ", lasso_score)
 print("ElasticNet regression score: ", elasticnet_score)
 print("Decision forest score: ", decision_forest_score)
 print("Extra Trees score: ", extratree_score)
-print("Boosted decision tree score: ", boosted_tree_score)
+#print("Boosted decision tree score: ", boosted_tree_score)
 print("XGBoost score:", xgb_score)
 print("\n")
 print("RMSE:")
@@ -506,3 +498,5 @@ print("------------------------------------------------------------")  # 60個
 #plt.rcParams["figure.figsize"] = [16, 9]
 
 
+
+print("------------------------------")  # 30個

@@ -3206,6 +3206,7 @@ lrl1 = sklearn.linear_model.LogisticRegression(
 # Large value => no regularization.
 
 lrl1.fit(X, y)
+
 y_pred_lrl1 = lrl1.predict(X)
 
 errors = y_pred_lrl1 != y

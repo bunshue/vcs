@@ -53,7 +53,6 @@ from sklearn.linear_model import Lasso
 
 
 def show():
-    # return
     plt.show()
     pass
 
@@ -1058,6 +1057,7 @@ ridge_pipe = Pipeline(steps)
 print("資料型態 :", type(X_train), type(y_train))
 print("資料大小 :", X_train.shape, y_train.shape)
 print("迴歸型態 : 多維df")
+
 ridge_pipe.fit(X_train, y_train)  # 學習訓練.fit
 
 # 模型評分
@@ -1080,6 +1080,7 @@ lasso_pipe = Pipeline(steps)
 print("資料型態 :", type(X_train), type(y_train))
 print("資料大小 :", X_train.shape, y_train.shape)
 print("迴歸型態 : 多維df")
+
 lasso_pipe.fit(X_train, y_train)  # 學習訓練.fit
 
 # 模型評分
@@ -2013,7 +2014,7 @@ print(df.T)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# Dataset with some correlation
+print('各種線性迴歸的迴歸係數比較')
 
 N = 100  # n_samples, 樣本數
 M = 10  # n_features, 特徵數(資料的維度)
@@ -2026,22 +2027,25 @@ X, y, coef = datasets.make_regression(
     n_samples=N, n_features=M, n_informative=5, effective_rank=3, coef=True
 )
 
-lr = sklearn.linear_model.LinearRegression().fit(X, y)
+print("coef :\n", coef, sep="")
 
-print("lr.coef_")
-print(lr.coef_)
+lr = sklearn.linear_model.LinearRegression().fit(X, y)
+print("lr.coef_ :\n", lr.coef_, sep="")
 
 l2 = sklearn.linear_model.Ridge(alpha=10).fit(X, y)  # lambda is alpha!
+print("l2.coef_ :\n", l2.coef_, sep="")
 
 l1 = sklearn.linear_model.Lasso(alpha=0.1).fit(X, y)  # lambda is alpha !
+print("l1.coef_ :\n", l1.coef_, sep="")
 
 l1l2 = sklearn.linear_model.ElasticNet(alpha=0.1, l1_ratio=0.9).fit(X, y)
+print("l1l2.coef_ :\n", l1l2.coef_, sep="")
 
+print('寫在一起')
 df = pd.DataFrame(
     np.vstack((coef, lr.coef_, l2.coef_, l1.coef_, l1l2.coef_)),
     index=["True", "lr", "l2", "l1", "l1l2"],
 )
-
 print(df)
 
 print("------------------------------------------------------------")  # 60個
@@ -2054,13 +2058,16 @@ X, y = datasets.make_regression()
 # 資料分割
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
-lr = sklearn.linear_model.LinearRegression()
-lr.fit(X_train, y_train)
-yhat = lr.predict(X_test)
+linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
 
-r2 = r2_score(y_test, yhat)
-mse = mean_squared_error(y_test, yhat)
-mae = mean_absolute_error(y_test, yhat)
+linear_regression.fit(X_train, y_train)
+
+# 預測
+y_pred = linear_regression.predict(X_test)  # 預測.predict
+
+r2 = r2_score(y_test, y_pred)
+mse = mean_squared_error(y_test, y_pred)
+mae = mean_absolute_error(y_test, y_pred)
 
 print("r2: %.3f" % r2)
 print("mae: %.3f" % mae)
@@ -2068,7 +2075,7 @@ print("mse: %.3f" % mse)
 
 print("------------------------------")  # 30個
 
-res = y_test - lr.predict(X_test)
+res = y_test - linear_regression.predict(X_test)
 
 y_mu = np.mean(y_test)
 ss_tot = np.sum((y_test - y_mu) ** 2)
@@ -2078,7 +2085,9 @@ r2 = 1 - ss_res / ss_tot
 mse = np.mean(res**2)
 mae = np.mean(np.abs(res))
 
-print("r2: %.3f, mae: %.3f, mse: %.3f" % (r2, mae, mse))
+print("r2: %.3f" % r2)
+print("mae: %.3f" % mae)
+print("mse: %.3f" % mse)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

@@ -24,18 +24,6 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
-print("------------------------------------------------------------")  # 60個
-
-import sklearn.linear_model
-from sklearn import datasets
-from sklearn.datasets import make_blobs  # 集群資料集
-from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
-from sklearn import metrics
-from sklearn.tree import DecisionTreeClassifier
-from matplotlib.colors import ListedColormap
-
-from sklearn import tree
-
 
 def show():
     plt.show()
