@@ -45,68 +45,85 @@ def show():
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-#Random Forest Regression
+# Random Forest Regression
 
 from sklearn.datasets import make_regression
 
-n_samples = 100 # Number of samples
-n_features = 6 # Number of features
-n_informative = 3 # Number of informative features i.e. actual features which influence the output
+n_samples = 100  # Number of samples
+n_features = 6  # Number of features
+n_informative = (
+    3  # Number of informative features i.e. actual features which influence the output
+)
 
-X, y,coef = make_regression(n_samples=n_samples, n_features=n_features, n_informative=n_informative,
-                       random_state=None, shuffle=False,noise=20,coef=True)
+X, y, coef = make_regression(
+    n_samples=n_samples,
+    n_features=n_features,
+    n_informative=n_informative,
+    random_state=None,
+    shuffle=False,
+    noise=20,
+    coef=True,
+)
 
-df1 = pd.DataFrame(data=X,columns=['X'+str(i) for i in range(1,n_features+1)])
-df2=pd.DataFrame(data=y,columns=['y'])
-df=pd.concat([df1,df2],axis=1)
+df1 = pd.DataFrame(data=X, columns=["X" + str(i) for i in range(1, n_features + 1)])
+df2 = pd.DataFrame(data=y, columns=["y"])
+df = pd.concat([df1, df2], axis=1)
 df.head(10)
 
-#Scatter plots
+# Scatter plots
 
-with plt.style.context(('seaborn-dark')):
-    for i,col in enumerate(df.columns[:-1]):
-        plt.figure(figsize=(6,4))
+with plt.style.context(("seaborn-dark")):
+    for i, col in enumerate(df.columns[:-1]):
+        plt.figure(figsize=(6, 4))
         plt.grid(True)
-        plt.xlabel('Feature:'+col,fontsize=12)
-        plt.ylabel('Output: y',fontsize=12)
-        plt.scatter(df[col],df['y'],c='red',s=50,alpha=0.6)
+        plt.xlabel("Feature:" + col, fontsize=12)
+        plt.ylabel("Output: y", fontsize=12)
+        plt.scatter(df[col], df["y"], c="red", s=50, alpha=0.6)
 plt.show()
 
-with plt.style.context(('fivethirtyeight')):
-    for i,col in enumerate(df.columns[:-1]):
-        plt.figure(figsize=(6,4))
+with plt.style.context(("fivethirtyeight")):
+    for i, col in enumerate(df.columns[:-1]):
+        plt.figure(figsize=(6, 4))
         plt.grid(True)
-        plt.xlabel('Feature:'+col,fontsize=12)
-        plt.ylabel('Output: y',fontsize=12)
-        plt.hist(df[col],alpha=0.6,facecolor='g')
+        plt.xlabel("Feature:" + col, fontsize=12)
+        plt.ylabel("Output: y", fontsize=12)
+        plt.hist(df[col], alpha=0.6, facecolor="g")
 plt.show()
 
 from sklearn import tree
 
-tree_model = tree.DecisionTreeRegressor(max_depth=5,random_state=None)
-tree_model.fit(X,y)
+tree_model = tree.DecisionTreeRegressor(max_depth=5, random_state=None)
+tree_model.fit(X, y)
 
-print("Relative importance of the features: ",tree_model.feature_importances_)
-with plt.style.context('dark_background'):
-    plt.figure(figsize=(10,7))
+print("Relative importance of the features: ", tree_model.feature_importances_)
+with plt.style.context("dark_background"):
+    plt.figure(figsize=(10, 7))
     plt.grid(True)
-    plt.yticks(range(n_features+1,1,-1),df.columns[:-1],fontsize=20)
-    plt.xlabel("Relative (normalized) importance of parameters",fontsize=15)
-    plt.ylabel("Features\n",fontsize=20)
-    plt.barh(range(n_features+1,1,-1),width=tree_model.feature_importances_,height=0.5)
+    plt.yticks(range(n_features + 1, 1, -1), df.columns[:-1], fontsize=20)
+    plt.xlabel("Relative (normalized) importance of parameters", fontsize=15)
+    plt.ylabel("Features\n", fontsize=20)
+    plt.barh(
+        range(n_features + 1, 1, -1), width=tree_model.feature_importances_, height=0.5
+    )
 plt.show()
 
-#Print the R2 score of the Decision Tree regression model
+# Print the R2 score of the Decision Tree regression model
 
-print("Regression coefficient:",tree_model.score(X,y))
+print("Regression coefficient:", tree_model.score(X, y))
 
-#Regression coefficient: 0.95695111153
+# Regression coefficient: 0.95695111153
 
-#Random Forest Regressor
+# Random Forest Regressor
 
 from sklearn.ensemble import RandomForestRegressor
 
-model = RandomForestRegressor(max_depth=5, random_state=None,max_features='auto',max_leaf_nodes=5,n_estimators=100)
+model = RandomForestRegressor(
+    max_depth=5,
+    random_state=None,
+    max_features="auto",
+    max_leaf_nodes=5,
+    n_estimators=100,
+)
 """
 model.fit(X, y)
 
@@ -151,15 +168,12 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------------------------------------")  # 60個

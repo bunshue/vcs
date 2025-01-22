@@ -47,89 +47,89 @@ def show():
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-#Logistic Regression with Kaggle Titanic data set
+# Logistic Regression with Kaggle Titanic data set
 
-train = pd.read_csv('Datasets/titanic_train.csv') # Training set is already available
+train = pd.read_csv("Datasets/titanic_train.csv")  # Training set is already available
 cc = train.head()
 print(cc)
 
-#Check basic info about the data set including missing value
+# Check basic info about the data set including missing value
 
-cc=train.info()
+cc = train.info()
 print(cc)
 
-cc=train.describe()
+cc = train.describe()
 print(cc)
 
-#Exploratory analysis and plots
+# Exploratory analysis and plots
 
-d=train.describe()
-dT=d.T
-dT.plot.bar(y='count')
-plt.title("Bar plot of the count of numeric features",fontsize=17)
-
-plt.show()
-
-#Check the relative size of survived and not-survived
-
-sns.set_style('whitegrid')
-sns.countplot(x='Survived',data=train,palette='RdBu_r')
-plt.show()
-
-#Is there a pattern for the survivability based on sex?
-
-sns.set_style('whitegrid')
-sns.countplot(x='Survived',hue='Sex',data=train,palette='RdBu_r')
+d = train.describe()
+dT = d.T
+dT.plot.bar(y="count")
+plt.title("Bar plot of the count of numeric features", fontsize=17)
 
 plt.show()
 
-#What about any pattern related to passenger class?
+# Check the relative size of survived and not-survived
 
-sns.set_style('whitegrid')
-sns.countplot(x='Survived',hue='Pclass',data=train,palette='rainbow')
+sns.set_style("whitegrid")
+sns.countplot(x="Survived", data=train, palette="RdBu_r")
+plt.show()
+
+# Is there a pattern for the survivability based on sex?
+
+sns.set_style("whitegrid")
+sns.countplot(x="Survived", hue="Sex", data=train, palette="RdBu_r")
 
 plt.show()
 
-#Following code extracts and plots the fraction of passenger count that survived, by each class
+# What about any pattern related to passenger class?
 
-f_class_survived=train.groupby('Pclass')['Survived'].mean()
+sns.set_style("whitegrid")
+sns.countplot(x="Survived", hue="Pclass", data=train, palette="rainbow")
+
+plt.show()
+
+# Following code extracts and plots the fraction of passenger count that survived, by each class
+
+f_class_survived = train.groupby("Pclass")["Survived"].mean()
 f_class_survived = pd.DataFrame(f_class_survived)
 f_class_survived
-f_class_survived.plot.bar(y='Survived')
-plt.title("Fraction of passengers survived by class",fontsize=17)
+f_class_survived.plot.bar(y="Survived")
+plt.title("Fraction of passengers survived by class", fontsize=17)
 
 plt.show()
 
-#What about any pattern related to having sibling and spouse?
+# What about any pattern related to having sibling and spouse?
 
-sns.set_style('whitegrid')
-sns.countplot(x='Survived',hue='SibSp',data=train,palette='rainbow')
-
-plt.show()
-
-#How does the overall age distribution look like?
-
-plt.xlabel("Age of the passengers",fontsize=18)
-plt.ylabel("Count",fontsize=18)
-plt.title("Age histogram of the passengers",fontsize=22)
-train['Age'].hist(bins=30,color='darkred',alpha=0.7,figsize=(10,6))
+sns.set_style("whitegrid")
+sns.countplot(x="Survived", hue="SibSp", data=train, palette="rainbow")
 
 plt.show()
 
-#How does the age distribution look like across passenger class?
+# How does the overall age distribution look like?
+
+plt.xlabel("Age of the passengers", fontsize=18)
+plt.ylabel("Count", fontsize=18)
+plt.title("Age histogram of the passengers", fontsize=22)
+train["Age"].hist(bins=30, color="darkred", alpha=0.7, figsize=(10, 6))
+
+plt.show()
+
+# How does the age distribution look like across passenger class?
 
 plt.figure(figsize=(12, 10))
 
-plt.xlabel("Passenger Class",fontsize=18)
-plt.ylabel("Age",fontsize=18)
-sns.boxplot(x='Pclass',y='Age',data=train,palette='winter')
+plt.xlabel("Passenger Class", fontsize=18)
+plt.ylabel("Age", fontsize=18)
+sns.boxplot(x="Pclass", y="Age", data=train, palette="winter")
 
 plt.show()
 
-f_class_Age=train.groupby('Pclass')['Age'].mean()
+f_class_Age = train.groupby("Pclass")["Age"].mean()
 f_class_Age = pd.DataFrame(f_class_Age)
-f_class_Age.plot.bar(y='Age')
-plt.title("Average age of passengers by class",fontsize=17)
+f_class_Age.plot.bar(y="Age")
+plt.title("Average age of passengers by class", fontsize=17)
 plt.ylabel("Age (years)", fontsize=17)
 plt.xlabel("Passenger class", fontsize=17)
 
@@ -145,14 +145,14 @@ Data wrangling (impute and drop)
 Define a function to impute (fill-up missing values) age feature
 """
 
-a=list(f_class_Age['Age'])
+a = list(f_class_Age["Age"])
+
 
 def impute_age(cols):
     Age = cols[0]
     Pclass = cols[1]
-    
-    if pd.isnull(Age):
 
+    if pd.isnull(Age):
         if Pclass == 1:
             return a[0]
 
@@ -165,119 +165,126 @@ def impute_age(cols):
     else:
         return Age
 
-#Apply the above-defined function and plot the count of numeric features
 
-train['Age'] = train[['Age','Pclass']].apply(impute_age,axis=1)
-d=train.describe()
-dT=d.T
-dT.plot.bar(y='count')
-plt.title("Bar plot of the count of numeric features",fontsize=17)
+# Apply the above-defined function and plot the count of numeric features
+
+train["Age"] = train[["Age", "Pclass"]].apply(impute_age, axis=1)
+d = train.describe()
+dT = d.T
+dT.plot.bar(y="count")
+plt.title("Bar plot of the count of numeric features", fontsize=17)
 
 plt.show()
 
-#Drop the 'Cabin' feature and any other null value
+# Drop the 'Cabin' feature and any other null value
 
-train.drop('Cabin',axis=1,inplace=True)
+train.drop("Cabin", axis=1, inplace=True)
 train.dropna(inplace=True)
 cc = train.head()
 print(cc)
 
-#Drop other unnecessary features like 'PassengerId', 'Name', 'Ticket'
+# Drop other unnecessary features like 'PassengerId', 'Name', 'Ticket'
 
-train.drop(['PassengerId','Name','Ticket'],axis=1,inplace=True)
+train.drop(["PassengerId", "Name", "Ticket"], axis=1, inplace=True)
 cc = train.head()
 print(cc)
 
-#Convert categorial feature like 'Sex' and 'Embarked' to dummy variables
+# Convert categorial feature like 'Sex' and 'Embarked' to dummy variables
 
-sex = pd.get_dummies(train['Sex'],drop_first=True)
-embark = pd.get_dummies(train['Embarked'],drop_first=True)
+sex = pd.get_dummies(train["Sex"], drop_first=True)
+embark = pd.get_dummies(train["Embarked"], drop_first=True)
 
-#Now drop the 'Sex' and 'Embarked' columns and concatenate the new dummy variables
+# Now drop the 'Sex' and 'Embarked' columns and concatenate the new dummy variables
 
-train.drop(['Sex','Embarked'],axis=1,inplace=True)
-train = pd.concat([train,sex,embark],axis=1)
+train.drop(["Sex", "Embarked"], axis=1, inplace=True)
+train = pd.concat([train, sex, embark], axis=1)
 cc = train.head()
 print(cc)
 
-#Logistic Regression model fit and prediction
+# Logistic Regression model fit and prediction
 
-X_train, X_test, y_train, y_test = train_test_split(train.drop('Survived',axis=1), 
-                                                    train['Survived'], test_size=0.30, 
-                                                    random_state=111)
+X_train, X_test, y_train, y_test = train_test_split(
+    train.drop("Survived", axis=1), train["Survived"], test_size=0.30, random_state=111
+)
 
-#F1-score as a fucntion of regularization (penalty) parameter
+# F1-score as a fucntion of regularization (penalty) parameter
 
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import classification_report
 
-nsimu=201
-penalty=[0]*nsimu
-logmodel=[0]*nsimu
-predictions =[0]*nsimu
-class_report = [0]*nsimu
-f1=[0]*nsimu
-for i in range(1,nsimu):
-        logmodel[i] =(LogisticRegression(C=i/1000,tol=1e-4, max_iter=100,n_jobs=4))
-        logmodel[i].fit(X_train,y_train)
-        predictions[i] = logmodel[i].predict(X_test)
-        class_report[i] = classification_report(y_test,predictions[i])
-        l=class_report[i].split()
-        f1[i] = l[len(l)-2]
-        penalty[i]=1000/i
+nsimu = 201
+penalty = [0] * nsimu
+logmodel = [0] * nsimu
+predictions = [0] * nsimu
+class_report = [0] * nsimu
+f1 = [0] * nsimu
+for i in range(1, nsimu):
+    logmodel[i] = LogisticRegression(C=i / 1000, tol=1e-4, max_iter=100, n_jobs=4)
+    logmodel[i].fit(X_train, y_train)
+    predictions[i] = logmodel[i].predict(X_test)
+    class_report[i] = classification_report(y_test, predictions[i])
+    l = class_report[i].split()
+    f1[i] = l[len(l) - 2]
+    penalty[i] = 1000 / i
 
-plt.scatter(penalty[1:len(penalty)-2],f1[1:len(f1)-2])
-plt.title("F1-score vs. regularization parameter",fontsize=20)
-plt.xlabel("Penalty parameter",fontsize=17)
-plt.ylabel("F1-score on test data",fontsize=17)
+plt.scatter(penalty[1 : len(penalty) - 2], f1[1 : len(f1) - 2])
+plt.title("F1-score vs. regularization parameter", fontsize=20)
+plt.xlabel("Penalty parameter", fontsize=17)
+plt.ylabel("F1-score on test data", fontsize=17)
 plt.show()
 
-#F1-score as a function of test set size (fraction)
+# F1-score as a function of test set size (fraction)
 
-nsimu=101
-class_report = [0]*nsimu
-f1=[0]*nsimu
-test_fraction =[0]*nsimu
-for i in range(1,nsimu):
-        X_train, X_test, y_train, y_test = train_test_split(train.drop('Survived',axis=1), 
-                                                    train['Survived'], test_size=0.1+(i-1)*0.007, 
-                                                    random_state=111)
-        logmodel =(LogisticRegression(C=1,tol=1e-4, max_iter=1000,n_jobs=4))
-        logmodel.fit(X_train,y_train)
-        predictions = logmodel.predict(X_test)
-        class_report[i] = classification_report(y_test,predictions)
-        l=class_report[i].split()
-        f1[i] = l[len(l)-2]
-        test_fraction[i]=0.1+(i-1)*0.007
+nsimu = 101
+class_report = [0] * nsimu
+f1 = [0] * nsimu
+test_fraction = [0] * nsimu
+for i in range(1, nsimu):
+    X_train, X_test, y_train, y_test = train_test_split(
+        train.drop("Survived", axis=1),
+        train["Survived"],
+        test_size=0.1 + (i - 1) * 0.007,
+        random_state=111,
+    )
+    logmodel = LogisticRegression(C=1, tol=1e-4, max_iter=1000, n_jobs=4)
+    logmodel.fit(X_train, y_train)
+    predictions = logmodel.predict(X_test)
+    class_report[i] = classification_report(y_test, predictions)
+    l = class_report[i].split()
+    f1[i] = l[len(l) - 2]
+    test_fraction[i] = 0.1 + (i - 1) * 0.007
 
-plt.plot(test_fraction[1:len(test_fraction)-2],f1[1:len(f1)-2])
-plt.title("F1-score vs. test set size (fraction)",fontsize=20)
-plt.xlabel("Test set size (fraction)",fontsize=17)
-plt.ylabel("F1-score on test data",fontsize=17)
+plt.plot(test_fraction[1 : len(test_fraction) - 2], f1[1 : len(f1) - 2])
+plt.title("F1-score vs. test set size (fraction)", fontsize=20)
+plt.xlabel("Test set size (fraction)", fontsize=17)
+plt.ylabel("F1-score on test data", fontsize=17)
 plt.show()
 
-#F1-score as a function of random seed of test/train split
+# F1-score as a function of random seed of test/train split
 
-nsimu=101
-class_report = [0]*nsimu
-f1=[0]*nsimu
-random_init =[0]*nsimu
-for i in range(1,nsimu):
-        X_train, X_test, y_train, y_test = train_test_split(train.drop('Survived',axis=1), 
-                                                    train['Survived'], test_size=0.3, 
-                                                    random_state=i+100)
-        logmodel =(LogisticRegression(C=1,tol=1e-5, max_iter=1000,n_jobs=4))
-        logmodel.fit(X_train,y_train)
-        predictions = logmodel.predict(X_test)
-        class_report[i] = classification_report(y_test,predictions)
-        l=class_report[i].split()
-        f1[i] = l[len(l)-2]
-        random_init[i]=i+100
+nsimu = 101
+class_report = [0] * nsimu
+f1 = [0] * nsimu
+random_init = [0] * nsimu
+for i in range(1, nsimu):
+    X_train, X_test, y_train, y_test = train_test_split(
+        train.drop("Survived", axis=1),
+        train["Survived"],
+        test_size=0.3,
+        random_state=i + 100,
+    )
+    logmodel = LogisticRegression(C=1, tol=1e-5, max_iter=1000, n_jobs=4)
+    logmodel.fit(X_train, y_train)
+    predictions = logmodel.predict(X_test)
+    class_report[i] = classification_report(y_test, predictions)
+    l = class_report[i].split()
+    f1[i] = l[len(l) - 2]
+    random_init[i] = i + 100
 
-plt.plot(random_init[1:len(random_init)-2],f1[1:len(f1)-2])
-plt.title("F1-score vs. random initialization seed",fontsize=20)
-plt.xlabel("Random initialization seed",fontsize=17)
-plt.ylabel("F1-score on test data",fontsize=17)
+plt.plot(random_init[1 : len(random_init) - 2], f1[1 : len(f1) - 2])
+plt.title("F1-score vs. random initialization seed", fontsize=20)
+plt.xlabel("Random initialization seed", fontsize=17)
+plt.ylabel("F1-score on test data", fontsize=17)
 
 plt.show()
 
@@ -285,15 +292,12 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------------------------------------")  # 60個
