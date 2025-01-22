@@ -2014,7 +2014,7 @@ print(df.T)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print('各種線性迴歸的迴歸係數比較')
+print("各種線性迴歸的迴歸係數比較")
 
 N = 100  # n_samples, 樣本數
 M = 10  # n_features, 特徵數(資料的維度)
@@ -2041,7 +2041,7 @@ print("l1.coef_ :\n", l1.coef_, sep="")
 l1l2 = sklearn.linear_model.ElasticNet(alpha=0.1, l1_ratio=0.9).fit(X, y)
 print("l1l2.coef_ :\n", l1l2.coef_, sep="")
 
-print('寫在一起')
+print("寫在一起")
 df = pd.DataFrame(
     np.vstack((coef, lr.coef_, l2.coef_, l1.coef_, l1l2.coef_)),
     index=["True", "lr", "l2", "l1", "l1l2"],

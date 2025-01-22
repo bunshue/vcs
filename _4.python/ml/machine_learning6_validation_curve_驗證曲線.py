@@ -16,6 +16,7 @@ import random
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns  # 海生, 自動把圖畫得比較好看
 
 font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
@@ -24,28 +25,6 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 # 設定負號
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-print("作業完成")
-print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-
-
-import sys
-import numpy as np
-import pandas as pd
-
-print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -58,12 +37,11 @@ def PolynomialRegression(degree=2, **kwargs):
     return make_pipeline(PolynomialFeatures(degree), LinearRegression(**kwargs))
 
 
-# Now let’s create some data to which we will fit our model:
-
-import numpy as np
+print("------------------------------------------------------------")  # 60個
 
 
 def makedata(N, err=1.0, rseed=1):
+    # 建立資料
     rng = np.random.RandomState(rseed)
     x = rng.rand(N, 1) ** 2
     y = 10 - 1.0 / (x.ravel() + 0.1)
@@ -76,9 +54,6 @@ x, y = makedata(40)
 
 
 # We can now visualize our data, along with polynomial fits of several degrees
-
-import matplotlib.pyplot as plt
-import seaborn as sns
 
 sns.set()
 x_test = np.linspace(-0.1, 1.1, 500)[:, None]
@@ -119,3 +94,19 @@ plt.plot(x_test.ravel(), y_test)
 plt.axis(lim)
 
 plt.show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個

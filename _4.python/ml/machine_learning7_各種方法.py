@@ -25,7 +25,7 @@ from sklearn.svm import SVC  # 非線性SVM函數學習機
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
 
 print("------------------------------------------------------------")  # 60個
-
+"""
 
 def plot_decision_regions(X, y, classifier, test_idx=None, resolution=0.02):
     # setup markers generator and color map
@@ -110,6 +110,7 @@ def do_svm():
 
     X_combined_std = np.vstack((X_train_std, X_test_std))
     y_combined_std = np.hstack((y_train, y_test))
+    print('使用 SVM 畫結果')
     plot_decision_regions(
         X=X_combined_std, y=y_combined_std, classifier=svm, test_idx=range(50, 100)
     )
@@ -147,12 +148,13 @@ def do_svm_kernel():
 
     svm.fit(X_xor, y_xor)  # 學習訓練.fit
 
+    print('使用 SVM RBF 畫結果')
     plot_decision_regions(X_xor, y_xor, classifier=svm)
     plt.legend(loc="upper left")
     plt.show()
 
 
-print("SVN Kernel")
+print("SVM Kernel")
 do_svm_kernel()
 
 print("------------------------------------------------------------")  # 60個
@@ -170,7 +172,7 @@ from sklearn.ensemble import RandomForestClassifier
 def do_random_forest():
     iris = datasets.load_iris()
     x_train, x_test, y_train, y_test = train_test_split(
-        iris.data[:, [2, 3]], iris.target, test_size=0.25, random_state=4
+        iris.data[:, [2, 3]], iris.target, test_size=0.25, random_state=9487
     )
     clf = RandomForestClassifier(n_estimators=20, max_depth=4)
     clf.fit(x_train, y_train)
@@ -179,6 +181,7 @@ def do_random_forest():
     X_combined = np.vstack((x_train, x_test))
     y_combined = np.hstack((y_train, y_test))
 
+    print('使用 RandomForestClassifier 畫結果')
     plot_decision_regions(
         X_combined, y_combined, classifier=clf, test_idx=range(105, 150)
     )
@@ -191,6 +194,7 @@ def do_random_forest():
 print("隨機森林")
 do_random_forest()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
@@ -241,7 +245,8 @@ def do_perceptrons():
 
 print("perceptrons 感知器 前饋神經網路")
 do_perceptrons()
-
+"""
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 import tensorflow as tf
@@ -262,17 +267,22 @@ def do_adative_learning_rate():
     mul2 = tf.multiply(b, tf.square(y))
     output = tf.add(mul1, mul2)
 
-    gradient_op = tf.train.GradientDescentOptimizer(learning_rate=0.4).minimize(output)
+    # 需要先關閉eager execution
+    tf.compat.v1.disable_eager_execution()
+    # gradient_optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.4).minimize(output)
+    gradient_optimizer = tf.compat.v1.train.GradientDescentOptimizer(
+        learning_rate=0.4
+    ).minimize(output)
 
-    momentum_op = tf.train.MomentumOptimizer(
+    momentum_optimizer = tf.train.MomentumOptimizer(
         learning_rate=0.035, momentum=0.9
     ).minimize(output)
 
-    adagrad_op = tf.train.AdagradOptimizer(learning_rate=2).minimize(output)
+    adagrad_optimizer = tf.train.AdagradOptimizer(learning_rate=2).minimize(output)
 
-    rms_op = tf.train.RMSPropOptimizer(learning_rate=0.5).minimize(output)
+    rms_optimizer = tf.train.RMSPropOptimizer(learning_rate=0.5).minimize(output)
 
-    adam_op = tf.train.AdamOptimizer(learning_rate=0.35).minimize(output)
+    adam_optimizer = tf.train.AdamOptimizer(learning_rate=0.35).minimize(output)
 
     init = tf.global_variables_initializer()
     with tf.Session() as sess:
@@ -283,7 +293,7 @@ def do_adative_learning_rate():
 
         for epoch in range(epochs):
             print("epoch of triaining", epoch)
-            sess.run(rms_op)
+            sess.run(rms_optimizer)
             array_x = sess.run(x)
             array_y = sess.run(y)
             start_x.append(array_x)

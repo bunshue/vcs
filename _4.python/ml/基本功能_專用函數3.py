@@ -40,7 +40,7 @@ def show():
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
+
 print("多指標評分")
 
 from sklearn.metrics import classification_report
@@ -53,68 +53,53 @@ print(classification_report(y_real, y_pred))
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-
 print("分類效果評估")
 print("FP/FN/TP/TN")
 
 y_pred = [0, 0, 0, 1, 1, 1, 0, 1, 0, 0]  # 預測值
 y_real = [0, 1, 1, 1, 1, 1, 0, 0, 0, 0]  # 實際值
-
+print("------------------------------")  # 30個
 from sklearn.metrics import confusion_matrix
-
 cm = confusion_matrix(y_real, y_pred)
 tn, fp, fn, tp = cm.ravel()
 print("tn", tn, "fp", fp, "fn", fn, "tp", tp)
-
+print("------------------------------")  # 30個
 print("準確率")
 from sklearn.metrics import accuracy_score
-
 print(accuracy_score(y_real, y_pred))
-
+print("------------------------------")  # 30個
 print("召回率")
 from sklearn.metrics import recall_score
-
 print(recall_score(y_real, y_pred))
-
+print("------------------------------")  # 30個
 print("精度")
 from sklearn.metrics import precision_score
-
 print(precision_score(y_real, y_pred))
-
+print("------------------------------")  # 30個
 print("F值")
-
 from sklearn.metrics import f1_score
 from sklearn.metrics import fbeta_score
-
 print(f1_score(y_real, y_pred))  # 計算f1
 print(fbeta_score(y_real, y_pred, beta=2))  # 計算fn
-
+print("------------------------------")  # 30個
 print("Logloss")
 from sklearn.metrics import log_loss
-
 y_real = [0, 1, 1, 1, 1, 1, 0, 0, 0, 0]
 y_score = [0.9, 0.75, 0.86, 0.47, 0.55, 0.56, 0.74, 0.22, 0.5, 0.26]
 print(log_loss(y_real, y_score))
-
+print("------------------------------")  # 30個
 print("ROC曲線和AUC")
 from sklearn.metrics import roc_auc_score
 from sklearn.metrics import roc_curve
-
 print(roc_auc_score(y_real, y_score))  # AUC值
-
 fpr, tpr, thresholds = roc_curve(y_real, y_score)
 plt.plot(fpr, tpr)  # 繪圖
-
 show()
-
+print("------------------------------")  # 30個
 # P-R曲線
 from sklearn.metrics import precision_recall_curve
-
 precision, recall, _ = precision_recall_curve(y_real, y_score)
 plt.plot(recall, precision)
-
 show()
 
 print("------------------------------------------------------------")  # 60個
@@ -199,7 +184,7 @@ print(poly_data)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 08_04_confusion_matrix
+# confusion_matrix
 
 # 計算及繪製混淆矩陣
 
@@ -266,7 +251,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 08_05_confusion_matrix_multiple-categories
+# confusion_matrix_multiple-categories
 
 # 計算及繪製多分類混淆矩陣
 
@@ -323,7 +308,6 @@ print(X)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
 
 print("相似性比較")
 from sklearn.metrics.pairwise import cosine_similarity
@@ -492,14 +476,12 @@ print('------------------------------')	#30個
 pd.set_option('display.precision', 2)
 doc_df = pd.DataFrame(data.toarray(), index = text, columns = vectorizer.get_feature_names_out()).head(10)
 print(doc_df)
-
 """
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
-# 04_19_BOW
+# BOW
 
 # 使用BOW猜測文章大意
 
@@ -606,18 +588,6 @@ print(cc)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-
-np.random.seed(42)
-
-a = np.random.randn(10)
-b = np.random.randn(10)
-
-np.dot(a, b)
-
-print("------------------------------------------------------------")  # 60個
-'''
 import scipy
 import plot_utils
 
@@ -951,3 +921,8 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+

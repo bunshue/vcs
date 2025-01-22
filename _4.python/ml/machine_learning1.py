@@ -41,53 +41,53 @@ L1正则化的结果是，使用lasso时，某些系数刚好为0。
 
 """
 
-#将lasso应用在波士顿房价预测上面
+# 将lasso应用在波士顿房价预测上面
 
-from sklearn.linear_model import Lasso,Ridge
-from sklearn.model_selection import train_test_split 
+from sklearn.linear_model import Lasso, Ridge
+from sklearn.model_selection import train_test_split
 import matplotlib.pyplot as plt
 import numpy as np
 import mglearn
 
 # 读取数据，并划分训练集和测试集
-X,y = mglearn.datasets.load_extended_boston()
-X_train,X_test,y_train,y_test = train_test_split(X,y,random_state=42)
+X, y = mglearn.datasets.load_extended_boston()
+X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=42)
 # 通过设置不同的alpha值建立三个lasso实例
-lasso = Lasso().fit(X_train,y_train)
-lasso001 =Lasso(alpha=0.01).fit(X_train,y_train)
-lasso00001 = Lasso(alpha=0.0001).fit(X_train,y_train)
+lasso = Lasso().fit(X_train, y_train)
+lasso001 = Lasso(alpha=0.01).fit(X_train, y_train)
+lasso00001 = Lasso(alpha=0.0001).fit(X_train, y_train)
 
 # 输出三个lasso实例的信息
-print('**********************************')
+print("**********************************")
 print("Lasso alpha=1")
-print ("training set score:{:.2f}".format(lasso.score(X_train,y_train)))
-print ("test set score:{:.2f}".format(lasso.score(X_test,y_test)))
-print ("Number of features used:{}".format(np.sum(lasso.coef_!=0)))
+print("training set score:{:.2f}".format(lasso.score(X_train, y_train)))
+print("test set score:{:.2f}".format(lasso.score(X_test, y_test)))
+print("Number of features used:{}".format(np.sum(lasso.coef_ != 0)))
 
-print('**********************************')
+print("**********************************")
 print("Lasso alpha=0.01")
-print ("training set score:{:.2f}".format(lasso001.score(X_train,y_train)))
-print ("test set score:{:.2f}".format(lasso001.score(X_test,y_test)))
-print ("Number of features used:{}".format(np.sum(lasso001.coef_!=0)))
+print("training set score:{:.2f}".format(lasso001.score(X_train, y_train)))
+print("test set score:{:.2f}".format(lasso001.score(X_test, y_test)))
+print("Number of features used:{}".format(np.sum(lasso001.coef_ != 0)))
 
-print('**********************************')
+print("**********************************")
 print("Lasso alpha=0.0001")
-print ("training set score:{:.2f}".format(lasso00001.score(X_train,y_train)))
-print ("test set score:{:.2f}".format(lasso00001.score(X_test,y_test)))
-print ("Number of features used:{}".format(np.sum(lasso00001.coef_!=0)))
+print("training set score:{:.2f}".format(lasso00001.score(X_train, y_train)))
+print("test set score:{:.2f}".format(lasso00001.score(X_test, y_test)))
+print("Number of features used:{}".format(np.sum(lasso00001.coef_ != 0)))
 # 建立岭回归实例
-ridge01 = Ridge(alpha=0.1).fit(X_train,y_train)
+ridge01 = Ridge(alpha=0.1).fit(X_train, y_train)
 
 # 绘制三个lasso和一个岭回归的系数分布结果
-plt.figure(figsize = (7,7))
-plt.plot(lasso.coef_,'s',label = "Lasso alpha=1")
-plt.plot(lasso001.coef_,'^',label = "Lasso alpha=0.01")
-plt.plot(lasso00001.coef_,'v',label = "Lasso alpha=0.0001")
-plt.plot(ridge01.coef_,'o',label = 'ridge alpha=0.1')
-plt.xlabel('Coefficient index')
-plt.ylabel('Coefficient magnitude')
-plt.ylim(-25,25)
-plt.legend(ncol=2,loc=(0,1.05))
+plt.figure(figsize=(7, 7))
+plt.plot(lasso.coef_, "s", label="Lasso alpha=1")
+plt.plot(lasso001.coef_, "^", label="Lasso alpha=0.01")
+plt.plot(lasso00001.coef_, "v", label="Lasso alpha=0.0001")
+plt.plot(ridge01.coef_, "o", label="ridge alpha=0.1")
+plt.xlabel("Coefficient index")
+plt.ylabel("Coefficient magnitude")
+plt.ylim(-25, 25)
+plt.legend(ncol=2, loc=(0, 1.05))
 plt.show()
 
 
@@ -96,21 +96,22 @@ print("------------------------------------------------------------")  # 60個
 
 
 from sklearn import linear_model
-clf = linear_model.Lasso(alpha=0.1)
-clf.fit([[0,0], [1, 1], [2, 2]], [0, 1, 2])
 
-#Lasso(alpha=0.1)
+clf = linear_model.Lasso(alpha=0.1)
+clf.fit([[0, 0], [1, 1], [2, 2]], [0, 1, 2])
+
+# Lasso(alpha=0.1)
 print(clf.coef_)
 
-#[0.85 0.  ]
+# [0.85 0.  ]
 print(clf.intercept_)
-#0.15...
+# 0.15...
 
 
 print("------------------------------------------------------------")  # 60個
 
 
-print('使用 Lasso 類來擬合數據')
+print("使用 Lasso 類來擬合數據")
 
 from sklearn.linear_model import Lasso
 
@@ -118,9 +119,9 @@ X = np.random.rand(100, 10)
 y = np.random.rand(100)
 
 lasso = Lasso(alpha=0.1)
-lasso.fit(X,y)
+lasso.fit(X, y)
 
-print('模型係數')
+print("模型係數")
 print(lasso.coef_)
 
 print("------------------------------------------------------------")  # 60個
