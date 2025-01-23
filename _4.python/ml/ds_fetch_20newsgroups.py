@@ -48,14 +48,10 @@ print(news.target_names)
 print("第一篇新聞內容：")
 print(news.data[0])
 
-sys.exit()
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-"""
-單純貝氏分類器 naive Bayes classifier
-"""
+#單純貝氏分類器 naive Bayes classifier
 
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.naive_bayes import MultinomialNB
@@ -199,9 +195,8 @@ print(model.transform(tf))  # トピックで表現された文書
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("機械学習モデルへの適用")
-
-from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.svm import LinearSVC
 
 categories = ["alt.atheism", "soc.religion.christian", "comp.graphics", "sci.med"]
@@ -234,7 +229,6 @@ model.fit(X_train_tfidf, twenty_train.target)  # 學習訓練.fit
 
 predicted = model.predict(X_test_tfidf)  # 預測.predict
 np.mean(predicted == twenty_test.target)
-
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
