@@ -7,7 +7,7 @@ Iris 鳶尾花數據庫 150筆資料 4個欄位 3種品種 每種50筆資料
 資料的筆數為150筆，共有五個欄位：
 
         萼長SL        萼寬SW       瓣長PL        瓣寬PW       品種
-4個欄位 sepal_length, sepal_width, petal_length, petal_width, species
+5個欄位 sepal_length, sepal_width, petal_length, petal_width, species
 萼長 花萼長度(Sepal.Length)(cm)
 萼寬 花萼寬度(Sepal.Width)(cm)
 瓣長 花瓣長度(Petal.Length)(cm)
@@ -133,7 +133,7 @@ print(iris.feature_names)
 print("filename :", iris.filename)
 print("data_module :", iris.data_module)
 
-print("keys")
+print("keys :")
 print(iris.keys())
 
 print("iris.data.shape :", X.shape)
@@ -208,28 +208,28 @@ print("花萼寬度 不同的數字 size :", np.unique(df["花萼寬度"].values
 print("花瓣長度 不同的數字 size :", np.unique(df["花瓣長度"].values).size)
 print("花瓣寬度 不同的數字 size :", np.unique(df["花瓣寬度"].values).size)
 
-print("花萼長度 :", df["花萼長度"].values)
-print("花萼寬度 :", df["花萼寬度"].values)
-print("花瓣長度 :", df["花瓣長度"].values)
-print("花瓣寬度 :", df["花瓣寬度"].values)
+print("花萼長度 :\n", df["花萼長度"].values, sep="")
+print("花萼寬度 :\n", df["花萼寬度"].values, sep="")
+print("花瓣長度 :\n", df["花瓣長度"].values, sep="")
+print("花瓣寬度 :\n", df["花瓣寬度"].values, sep="")
 
 class1 = np.where(df["類別"] == "setosa", 1, 0)
-print("抓出versicolor :", class1)
 class2 = np.where(df["類別"] == "versicolor", 1, 0)
-print("抓出versicolor :", class2)
 class3 = np.where(df["類別"] == "virginica", 1, 0)
-print("抓出versicolor :", class3)
+# print("抓出versicolor :", class1)
+# print("抓出versicolor :", class2)
+# print("抓出versicolor :", class3)
 
 color = ["r", "y", "b"]
 species = ["Setosa", "Versicolour", "Virginica"]
-Setosa = []
-Versicolour = []
-Virginica = []
 
 print(df["花萼長度"])
 print(len(df["花萼長度"]))
-
 print(df["花萼長度"][0])
+
+Setosa = []
+Versicolour = []
+Virginica = []
 
 # 不同種類保存為不同的列表
 for i in range(len(df)):
@@ -246,10 +246,11 @@ for i in range(len(df)):
         Versicolour.append(0)
         Virginica.append(1)
 
+"""
 print("Setosa :", Setosa)
 print("Versicolour :", Versicolour)
 print("Virginica :", Virginica)
-
+"""
 print("------------------------------")  # 30個
 
 Setosa = []
@@ -265,39 +266,43 @@ for i in range(len(df)):
     elif df["類別"][i] == "virginica":
         Virginica.append((df["花萼長度"][i], df["花萼寬度"][i], df["花瓣長度"][i], df["花瓣寬度"][i]))
 
+"""
 print("Setosa :", Setosa)
 print("Versicolour :", Versicolour)
 print("Virginica :", Virginica)
+"""
 
+# Setosa 山鳶尾 的 萼長-萼寬
 plt.scatter(
-    x=np.array(Setosa)[:, 0],  # Setosa種類的花瓣的長度
-    y=np.array(Setosa)[:, 1],  # Setosa種類的花瓣的寬度
-    s=80,
-    c="red",
-    label="Setosa",
+    x=np.array(Setosa)[:, 0],
+    y=np.array(Setosa)[:, 1],
+    s=30,
+    c="r",
+    label="Setosa 山鳶尾",
 )
 
+# Versicolour 變色鳶尾 的 萼長-萼寬
 plt.scatter(
-    x=np.array(Versicolour)[:, 0],  # Versicolour種類的花瓣的長度
-    y=np.array(Versicolour)[:, 1],  # Versicolour種類的花瓣的寬度
-    s=50,
-    c="green",
-    label="Versicolour",
+    x=np.array(Versicolour)[:, 0],
+    y=np.array(Versicolour)[:, 1],
+    s=30,
+    c="g",
+    label="Versicolour 變色鳶尾",
 )
 
+# Virginica 維吉尼亞鳶尾 的 萼長-萼寬
 plt.scatter(
-    x=np.array(Virginica)[:, 0],  # Virginica種類的花瓣的長度
-    y=np.array(Virginica)[:, 1],  # Virginica種類的花瓣的寬度
-    s=20,
-    c="blue",
-    label="Virginica",
+    x=np.array(Virginica)[:, 0],
+    y=np.array(Virginica)[:, 1],
+    s=30,
+    c="b",
+    label="Virginica 維吉尼亞鳶尾",
 )
 
-# 添加軸標籤和標題
-plt.title("花瓣長度 vs 花瓣寬度")
-plt.xlabel("花瓣長度")
-plt.ylabel("花瓣寬度")
-plt.legend(loc="best")  # 添加圖例
+plt.title("萼長 vs 萼寬")
+plt.xlabel("萼長")
+plt.ylabel("萼寬")
+plt.legend(loc="best")
 
 show()
 

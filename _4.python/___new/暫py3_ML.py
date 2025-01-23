@@ -1,3 +1,56 @@
+Sepal花萼
+Petal花瓣
+
+SL   SW   PL   PW   y
+萼長 萼寬 瓣長 瓣寬 類別
+
+# 取前四欄位當作訓練資料
+
+df_X = df[["SepalLengthCm", "SepalWidthCm", "PetalLengthCm", "PetalWidthCm"]]
+         Id,SepalLengthCm,   SepalWidthCm,   PetalLengthCm,   PetalWidthCm,Species
+
+from sklearn.model_selecting import train_test_spilt()
+参数stratify： 依据标签y，按原数据y中各类比例，分配给train和test，使得train和test中各类数据的比例与原数据集一样。
+A:B:C=1:2:3
+split后，train和test中，都是A:B:C=1:2:3
+将stratify=X就是按照X中的比例分配
+将stratify=y就是按照y中的比例分配
+一般都是=y
+
+
+stratify是为了保持split前类的分布：
+比如有100个数据，80个属于A类，20个属于B类。如果train_test_split(… test_size=0.25, stratify = y_all), 那么split之后数据如下：
+training: 75个数据，其中60个属于A类，15个属于B类。
+testing: 25个数据，其中20个属于A类，5个属于B类。
+
+用了stratify参数，training集和testing集的类的比例是 A：B= 4：1，等同于split前的比例（80：20）。通常在这种类分布不平衡的情况下会用到stratify。
+将stratify=X就是按照X中的比例分配
+将stratify=y就是按照y中的比例分配
+
+
+
+【分類分析(Classification)】是分析者做出人為主觀的分類(人主動決定結果)
+【群集分析(Clustering)】是演算法做出系統客觀的分類(人被動接受結果)
+
+
+
+
+
+t-分佈隨機鄰居嵌入 t-distributed Stochastic Neighbor Embedding, t-SNE	降維演算法
+
+監督式學習 : 線性迴歸、邏輯斯迴歸、支援向量機、神經網路、決策樹、K近鄰法、、
+
+非監督式學習 : 分群、降維
+
+K折交叉驗證 K-fold Cross Validation
+
+自助聚合法 Bootstrap Aggregation => bagging
+
+提升法 Boosting(2)
+1. 適應提升法 adaptive boosting (AdaBoost)
+2. 梯度提升法 gradient boosting XGBoost
+
+
 機器學習 SVM
 
 機器學習其實基本上和我們一直以來說的一樣, 就是我們要學一個未知的函數

@@ -92,6 +92,12 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
+
+def show():
+    plt.show()
+    pass
+
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -216,8 +222,7 @@ plt.scatter([cx0, cx1, cx2], [cy0, cy1, cy2], [200, 200, 200], ["r", "g", "b"])
 
 plt.title("三群數據")
 
-
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -341,7 +346,7 @@ print("------------------------------")  # 30個
 plt.subplot(236)
 
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -463,7 +468,7 @@ changecolor = colors.Normalize(vmin=0.4, vmax=0.8)
 plt.scatter(x, y, c=color, s=size, alpha=0.3, cmap="viridis", norm=changecolor)
 # plt.colorbar()
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -477,7 +482,7 @@ plt.scatter(x, y, s=x * 1000, c=y, marker=(5, 1), alpha=0.8, lw=2, facecolors="n
 plt.xlim(0, 1)
 plt.ylim(0, 1)
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -529,7 +534,7 @@ plt.title("scatter參數大合集")
 plt.xlabel("")
 plt.ylabel("")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -559,7 +564,7 @@ lwidths = (1 + x) ** 2  # 寬度陣列
 
 plt.scatter(x, y, s=lwidths, c=x, cmap="hsv")  # hsv色彩映射圖
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -575,7 +580,7 @@ for i in range(N):  # 隨機設定顏色
 
 plt.scatter(x, y, c=colors, marker="*")  # 繪製 sin
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -893,7 +898,7 @@ Z = list(zip(X, Y))
 print(Z)
 
 plt.scatter(X, Y, s = 300, c = Z)
-plt.show()
+show()
 """
 
 print("------------------------------------------------------------")  # 60個
@@ -910,6 +915,12 @@ plt.scatter(x, y, s=size, c=color, cmap="Greens", norm=norm)
 plt.scatter(x, y, s=size, alpha=0.5, c=color, cmap="Greens", norm=norm)
 plt.scatter(x, y, s=size, alpha=0.5, c=color, cmap="jet", norm=norm)
 
+# 绘制空心点
+plt.scatter(x, y, marker='o', facecolors='r')
+# 绘制空心点
+plt.scatter(x, y, marker='o', facecolors='none', s=s)
+# 绘制空心点，并设置边界线颜色为红色
+plt.scatter(x, y, marker='o', facecolors='none', edgecolors='red')
 
 print("------------------------------------------------------------")  # 60個
 
