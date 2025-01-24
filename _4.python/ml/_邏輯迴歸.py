@@ -59,7 +59,7 @@ def show():
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
+
 N = 500  # n_samples, 樣本數
 M = 2  # n_features, 特徵數(資料的維度)
 GROUPS = 3  # centers, 分群數
@@ -552,9 +552,19 @@ print("------------------------------------------------------------")  # 60個
 
 # 尋找銀行行銷活動目標客戶
 
+"""
+banking.csv # 41188 筆資料 21 欄
+age,job,marital,education,default,housing,loan,contact,month,day_of_week,duration,campaign,pdays,previous,poutcome,emp_var_rate,cons_price_idx,cons_conf_idx,euribor3m,nr_employed,y
+44,blue-collar,married,basic.4y,unknown,yes,no,cellular,aug,thu,210,1,999,0,nonexistent,1.4,93.444,-36.1,4.963,5228.1,0
+53,technician,married,unknown,no,no,no,cellular,nov,fri,138,1,999,0,nonexistent,-0.1,93.2,-42,4.021,5195.8,0
+28,management,single,university.degree,no,yes,no,cellular,jun,thu,339,3,6,2,success,-1.7,94.055,-39.8,0.729,4991.6,1
+39,services,married,high.school,no,no,no,cellular,apr,fri,185,2,999,0,nonexistent,-1.8,93.075,-47.1,1.405,5099.1,0
+55,retired,married,basic.4y,no,yes,no,cellular,aug,fri,137,1,3,1,success,-2.9,92.201,-31.4,0.869,5076.2,1
+30,management,divorced,basic.4y,no,yes,no,cellular,jul,tue,68,8,999,0,nonexistent,1.4,93.918,-42.7,4.961,5228.1,0
+"""
+
 df = pd.read_csv("./data/banking.csv")
-cc = df.head()
-print(cc)
+print("df之大小 :", df.shape)
 
 # 2. 資料清理、資料探索與分析
 
@@ -754,26 +764,35 @@ print("結果 :\n", accu_history, sep="")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
-df = pd.read_csv("data/200811-201811d.csv")
-cc = df.head()
-print(cc)
+"""
+200811-201811d.csv # 100 筆資料 14 欄
+SO2,CO,O3,PM25,Nox,NO,NO2,THC,NMHC,CH4,WindSpeed,TEMP,Humidity,Danger
+4.4,0.47,32.2,31,24,3.46,20.84,2.309,0.231,2.078,1.91,24.86,77.11,0
+6.4,0.52,30.2,32,32,5.64,26.3,2.186,0.227,1.959,1.72,26.58,71.93,0
+3.2,0.45,30.5,46,20,2.36,18.05,0,0,0,2.08,24.75,76.33,1
+5.2,0.47,32.5,38,24,3.18,20.64,2.374,0.225,2.15,1.66,24.97,79.97,1
+"""
 
-# print(df[df.數學 >= 80])
+df = pd.read_csv("data/200811-201811d.csv")
+
+print("df之大小 :", df.shape)
 
 cc = df[df.PM25 > 30]
-print(cc)
-print(len(cc))
+print("cc之大小 :", cc.shape)
 
 cc = df[df["PM25"] > 30]
-print(cc)
-print(len(cc))
+print("cc之大小 :", cc.shape)
 
 # Danger分類點說明
 # 對敏感族群不健康為PM2.5數值在35.5以上
 
+# df資料14欄，取出13欄當X，取出1欄當y
 X = df.drop("Danger", axis=1)
 y = df["Danger"]  # 目標, 0 : 不危險, 1 : 危險
+
+print("資料 X 之大小 :", X.shape)
+print("目標 y 之大小 :", y.shape)
+print(y)
 
 # 資料分割
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
@@ -786,8 +805,22 @@ logistic_regression = sklearn.linear_model.LogisticRegression(
 logistic_regression.fit(X_train, y_train)  # 學習訓練.fit
 
 y_pred = logistic_regression.predict(X_test)  # 預測.predict
+print("y_pred :\n", y_pred, sep="")
+
+y_pred_prob = logistic_regression.predict_proba(X)  # 預測機率.predict_proba
+print("y_pred_prob :\n", y_pred_prob, sep="")
+
+print(f"計算準確率 : {accuracy_score(y_test, y_pred)*100:.2f}%")
 
 print("混淆矩陣 :\n", confusion_matrix(y_test, y_pred), sep="")
+
+print("混淆矩陣圖")
+disp = ConfusionMatrixDisplay(
+    confusion_matrix=confusion_matrix(y_test, y_pred)
+)
+disp.plot()
+
+show()
 
 cc = classification_report(y_test, y_pred)
 print("分類報告 :\n", cc, sep="")
@@ -848,6 +881,10 @@ logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸�
 logistic_regression.fit(X_train_std, y_train)  # 學習訓練.fit
 
 y_pred = logistic_regression.predict(X_test_std)  # 預測.predict
+print("y_pred :\n", y_pred, sep="")
+
+y_pred_prob = logistic_regression.predict_proba(X)  # 預測機率.predict_proba
+print("y_pred_prob :\n", y_pred_prob, sep="")
 
 print(f"計算準確率 : {accuracy_score(y_test, y_pred)*100:.2f}%")
 
@@ -925,13 +962,19 @@ logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸�
 logistic_regression.fit(X_train_std, y_train)  # 學習訓練.fit
 
 y_pred = logistic_regression.predict(X_test_std)  # 預測.predict
+print("y_pred :\n", y_pred, sep="")
+
+y_pred_prob = logistic_regression.predict_proba(X)  # 預測機率.predict_proba
+print("y_pred_prob :\n", y_pred_prob, sep="")
 
 print(f"計算準確率 : {accuracy_score(y_test, y_pred)*100:.2f}%")
 
 print("混淆矩陣 :\n", confusion_matrix(y_test, y_pred), sep="")
 
 print("混淆矩陣圖")
-disp = ConfusionMatrixDisplay(confusion_matrix=confusion_matrix(y_test, y_pred))
+disp = ConfusionMatrixDisplay(
+    confusion_matrix=confusion_matrix(y_test, y_pred)
+)
 disp.plot()
 show()
 
@@ -1035,7 +1078,7 @@ print(f"計算準確率 : {accuracy_score(y_test, y_pred)*100:.2f}%")
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 遞迴特徵消去法(Recursive feature elimination)
+# 遞迴特徵消去法(Recursive feature elimination, RFE)
 
 from sklearn.feature_selection import RFE
 from sklearn.svm import SVC
@@ -1073,13 +1116,19 @@ logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸�
 logistic_regression.fit(X_train_std, y_train)  # 學習訓練.fit
 
 y_pred = logistic_regression.predict(X_test_std)  # 預測.predict
+print("y_pred :\n", y_pred, sep="")
+
+y_pred_prob = logistic_regression.predict_proba(X)  # 預測機率.predict_proba
+print("y_pred_prob :\n", y_pred_prob, sep="")
 
 print(f"計算準確率 : {accuracy_score(y_test, y_pred)*100:.2f}%")
 
 print("混淆矩陣 :\n", confusion_matrix(y_test, y_pred), sep="")
 
 print("混淆矩陣圖")
-disp = ConfusionMatrixDisplay(confusion_matrix=confusion_matrix(y_test, y_pred))
+disp = ConfusionMatrixDisplay(
+    confusion_matrix=confusion_matrix(y_test, y_pred)
+)
 disp.plot()
 show()
 
@@ -1266,10 +1315,22 @@ print("------------------------------------------------------------")  # 60個
 
 print("邏輯迴歸(Logistic Regression)")
 
-dataset = pd.read_csv("data/Social_Network_Ads.csv")
+"""
+Social_Network_Ads.csv # 400 筆資料 5 欄
+User ID,Gender,Age,EstimatedSalary,Purchased
+15624510,Male,19,19000,0
+15810944,Male,35,20000,0
+15668575,Female,26,43000,0
+15603246,Female,27,57000,0
+15694829,Female,32,150000,1
+"""
 
-X = dataset.iloc[:, [2, 3]].values
-Y = dataset.iloc[:, 4].values
+df = pd.read_csv("data/Social_Network_Ads.csv")
+
+print("df之大小 :", df.shape)
+
+X = df.iloc[:, [2, 3]].values
+Y = df.iloc[:, 4].values
 
 # 資料分割
 X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.2)
@@ -1417,9 +1478,20 @@ print("------------------------------------------------------------")  # 60個
 
 # 員工流失預測
 
+"""
+WA_Fn-UseC_-HR-Employee-Attrition.csv # 1470 筆資料 35 欄
+Age,Attrition,BusinessTravel,DailyRate,Department,DistanceFromHome,Education,EducationField,EmployeeCount,EmployeeNumber,EnvironmentSatisfaction,Gender,HourlyRate,JobInvolvement,JobLevel,JobRole,JobSatisfaction,MaritalStatus,MonthlyIncome,MonthlyRate,NumCompaniesWorked,Over18,OverTime,PercentSalaryHike,PerformanceRating,RelationshipSatisfaction,StandardHours,StockOptionLevel,TotalWorkingYears,TrainingTimesLastYear,WorkLifeBalance,YearsAtCompany,YearsInCurrentRole,YearsSinceLastPromotion,YearsWithCurrManager
+41,Yes,Travel_Rarely,1102,Sales,1,2,Life Sciences,1,1,2,Female,94,3,2,Sales Executive,4,Single,5993,19479,8,Y,Yes,11,3,1,80,0,8,0,1,6,4,0,5
+49,No,Travel_Frequently,279,Research & Development,8,1,Life Sciences,1,2,3,Male,61,2,2,Research Scientist,2,Married,5130,24907,1,Y,No,23,4,4,80,1,10,3,3,10,7,1,7
+37,Yes,Travel_Rarely,1373,Research & Development,2,2,Other,1,4,4,Male,92,2,1,Laboratory Technician,3,Single,2090,2396,6,Y,Yes,15,3,2,80,0,7,3,3,0,0,0,0
+33,No,Travel_Frequently,1392,Research & Development,3,4,Life Sciences,1,5,4,Female,56,3,1,Research Scientist,3,Married,2909,23159,1,Y,Yes,11,3,3,80,0,8,3,3,8,7,3,0
+27,No,Travel_Rarely,591,Research & Development,2,1,Medical,1,7,1,Male,40,3,1,Laboratory Technician,2,Married,3468,16632,9,Y,No,12,3,4,80,1,6,3,3,2,2,2,2
+32,No,Travel_Frequently,1005,Research & Development,2,2,Life Sciences,1,8,4,Male,79,3,1,Laboratory Technician,4,Single,3068,11864,0,Y,No,13,3,3,80,0,8,2,2,7,7,3,6
+59,No,Travel_Rarely,1324,Research & Development,3,3,Medical,1,10,3,Female,81,4,1,Laboratory Technician,1,Married,2670,9964,4,Y,Yes,20,4,1,80,3,12,3,2,1,0,0,0
+"""
+
 df = pd.read_csv("./data/WA_Fn-UseC_-HR-Employee-Attrition.csv")
-cc = df.head()
-print(cc)
+print("df之大小 :", df.shape)
 
 # 2. 資料清理、資料探索與分析
 
@@ -1622,11 +1694,23 @@ print(result.summary())
 """
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+"""
+date_data.csv # 100 筆資料 8 欄
+income,attractive,assets,edueduclass,Dated,income_rank,attractive_rank,assets_rank
+3000,9,5.145476376,1,0,0,0,0
+3000,14.5,40.643781041,4,1,0,0,1
+3000,6,5.145476376,1,0,0,0,0
+3000,1,7.0674341855,1,0,0,0,0
+3500,14.5,3.7284,2,0,0,0,0
+3500,28,12.569146178,3,0,0,1,0
+3500,65.5,40.643781041,4,0,0,2,1
+"""
 
-model_data = pd.read_csv("data/date_data.csv")
-model_data.head()
-Y = model_data["Dated"]
-X = model_data.loc[:, "income":"assets"]
+df = pd.read_csv("data/date_data.csv")
+print("df之大小 :", df.shape)
+
+X = df.loc[:, "income":"assets"]
+Y = df["Dated"]
 
 # 資料分割
 train_data, test_data, train_target, test_target = train_test_split(X, Y, test_size=0.2)
