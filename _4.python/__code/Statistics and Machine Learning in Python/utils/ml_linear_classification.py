@@ -130,15 +130,15 @@ proj = np.dot(X, beta)
 # Fisher projection
 plt.figure(figsize=(np.sqrt(2 * 7 ** 2), 2))
 for lab in np.unique(y_true):
-    sns.distplot(proj.ravel()[y == lab], label=str(lab))
+    sns.histplot(proj.ravel()[y == lab], label=str(lab))
 
 plt.figure(figsize=(7, 2))
 for lab in np.unique(y_true):
-    sns.distplot(X[y == lab, 0], label=str(lab))
+    sns.histplot(X[y == lab, 0], label=str(lab))
 
 plt.figure(figsize=(7, 2))
 for lab in np.unique(y_true):
-    sns.distplot(X[y == lab, 1], label=str(lab))
+    sns.histplot(X[y == lab, 1], label=str(lab))
 
 '''
 Linear discriminant analysis (LDA)
@@ -182,7 +182,7 @@ g.add_legend()
 
 plt.figure()
 for lab in np.unique(y):
-    sns.distplot(proj.ravel()[y == lab], label=str(lab))
+    sns.histplot(proj.ravel()[y == lab], label=str(lab))
 
 plt.legend()
 plt.title("Distribution of projected data using LDA")

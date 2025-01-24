@@ -586,7 +586,7 @@ plt.figure(figsize=(10, 7))
 plt.title("Histogram of residuals to check for normality", fontsize=25)
 plt.xlabel("Residuals", fontsize=18)
 plt.ylabel("Kernel density", fontsize=18)
-sns.distplot([y_test - predictions])
+sns.histplot([y_test - predictions])
 
 plt.show()
 

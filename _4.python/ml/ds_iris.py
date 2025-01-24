@@ -1235,7 +1235,7 @@ for boot_i in range(nboot):
     labels_b = np.array([reorder[lab] for lab in labels_b])
     scores_boot[boot_i] = np.sum(labels_b == labels_r) / len(labels_b)
 
-sns.distplot(scores_boot)
+sns.histplot(scores_boot)
 show()
 
 print(np.min(scores_boot), np.argmin(scores_boot))

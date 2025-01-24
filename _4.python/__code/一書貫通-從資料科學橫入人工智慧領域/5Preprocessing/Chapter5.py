@@ -150,7 +150,7 @@ print(cc)
 
 plt.hist(camp['AvgIncome'], bins=20)
 # Try this: accepts['purch_price'].plot(kind='hist')
-# And this: sns.distplot(accepts['purch_price'], kde=True, fit=stats.norm)
+# And this: sns.histplot(accepts['purch_price'], kde=True, fit=stats.norm)
 # should scipy.stats first
 plt.show()
 

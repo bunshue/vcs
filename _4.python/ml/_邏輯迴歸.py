@@ -29,7 +29,6 @@ print("------------------------------------------------------------")  # 60個
 import joblib
 import itertools
 import sklearn.linear_model
-from sklearn.linear_model import LogisticRegression
 import sklearn.metrics as metrics
 from common1 import *
 from sklearn import datasets
@@ -39,6 +38,8 @@ from sklearn.model_selection import train_test_split  # 資料分割 => 訓練�
 from sklearn.model_selection import cross_val_score
 from sklearn.preprocessing import StandardScaler  # 特徵縮放
 from sklearn.preprocessing import Normalizer
+from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import confusion_matrix  # 混淆矩陣
 from sklearn.metrics import ConfusionMatrixDisplay  # 混淆矩陣圖
 from sklearn.metrics import classification_report  # 分類報告
@@ -46,11 +47,9 @@ from sklearn.metrics import accuracy_score
 from sklearn.metrics import recall_score
 from sklearn.metrics import roc_curve
 from sklearn.metrics import auc
-
-from sklearn.ensemble import RandomForestClassifier
+from sklearn import tree
 from sklearn import metrics
 from sklearn import linear_model
-from sklearn import tree
 
 
 def show():
@@ -60,7 +59,7 @@ def show():
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-"""
+'''
 N = 500  # n_samples, 樣本數
 M = 2  # n_features, 特徵數(資料的維度)
 GROUPS = 3  # centers, 分群數
@@ -191,7 +190,7 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-"""
+
 # logistic_regression_with_nonlinear_data
 
 N = 1000  # n_samples, 樣本數
@@ -203,7 +202,8 @@ print("make_circles,", N, "個樣本")
 X, y = make_circles(n_samples=N, factor=0.3, noise=0.05, random_state=9487)
 
 # 資料分割 多了一個 stratify=y
-X_train, X_test, y_train, y_test = train_test_split(X, y, stratify=y, random_state=9487)
+#X_train, X_test, y_train, y_test = train_test_split(X, y, stratify=y, random_state=9487)
+X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=9487)
 
 # 繪製訓練及測試資料
 
@@ -211,14 +211,10 @@ plt.figure(figsize=(8, 4))
 
 plt.subplot(121)
 plt.scatter(X_train[:, 0], X_train[:, 1], c=y_train)
-plt.xlabel("Feature #0")
-plt.ylabel("Feature #1")
 plt.title("訓練資料")
 
 plt.subplot(122)
 plt.scatter(X_test[:, 0], X_test[:, 1], c=y_test)
-plt.xlabel("Feature #0")
-plt.ylabel("Feature #1")
 plt.title("測試資料")
 
 show()
@@ -228,10 +224,11 @@ logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸�
 
 logistic_regression.fit(X_train, y_train)  # 學習訓練.fit
 
-# cc = logistic_regression.coef_, logistic_regression.intercept_
-# print(cc)
-
 y_pred = logistic_regression.predict(X_test)  # 預測.predict
+print("y_pred :\n", y_pred, sep="")
+
+y_pred_prob = logistic_regression.predict_proba(X)  # 預測機率.predict_proba
+print("y_pred_prob :\n", y_pred_prob, sep="")
 
 print(f"計算準確率 : {accuracy_score(y_test, y_pred)*100:.2f}%")
 # 48.80%
@@ -240,46 +237,315 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 N = 30
-group0 = np.random.normal(-1, 1, size=N)
-group1 = np.random.normal(3, 1, size=N)
+group0 = np.random.normal(-1, 1, size=N)  # 第0群 30個, 範圍-1~1, 對應到0
+group1 = np.random.normal(3, 1, size=N)  # 第1群 30個, 範圍1~3, 對應到1
 
 x = np.r_[group0, group1]
+print(x)
+print(x.shape)
+
 X = x.reshape((N * 2, -1))
 print(X)
+print(X.shape)
 
 y = np.r_[np.zeros(N), np.ones(N)]  # 目標,前半0, 後半1
 print(y)
+print(y.shape)
 
 # 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
 logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
 
 logistic_regression.fit(X, y)  # 學習訓練.fit
 
-# yy = np.array([-5, -4, -3, -2, -1, 0, 1, 2 ,3, 4, 5])  # 真實資料
-# YY = yy.reshape(len(yy), 1)
-
 y_pred = logistic_regression.predict(X)  # 預測.predict
+print("全預測 :")
 print(y_pred)
+print(y_pred.shape)
 
 y_pred_prob = logistic_regression.predict_proba(X)  # 預測機率.predict_proba
-print(y_pred_prob)
+print("y_pred_prob :\n", y_pred_prob, sep="")
+
+length = len(y_pred)
+print(len(y_pred))
+print(len(y_pred_prob))
 
 plt.subplot(211)
 plt.hist(group0, alpha=0.3, label="第0群, 對應到0")
 plt.hist(group1, alpha=0.3, label="第1群, 對應到1")
+plt.title('原始資料')
 plt.legend()
 
 plt.subplot(212)
-plt.plot(
-    range(len(y_pred)), y_pred, color="lime", marker="o", markersize=10, label="預測結果"
-)
-plt.plot(range(len(y_pred_prob)), y_pred_prob[:, 0], "ro-", label="對應到第0群的機率")
-plt.plot(range(len(y_pred_prob)), y_pred_prob[:, 1], "go-", label="對應到第1群的機率")
+plt.plot(range(length), y_pred, color="lime", marker="o", markersize=10, label="預測結果")
+plt.plot(range(length), y_pred_prob[:, 0], "ro-", label="對應到第0群的機率")
+plt.plot(range(length), y_pred_prob[:, 1], "go-", label="對應到第1群的機率")
 plt.legend()
 show()
 
 print(logistic_regression.predict_proba([[0]])[:, 1])  # 預測機率.predict_proba
 print(logistic_regression.predict_proba([[0], [1], [2]])[:, 1])  # 預測機率.predict_proba
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+iris = datasets.load_iris()
+
+feature_names = ["萼長", "萼寬", "瓣長", "瓣寬"]
+df = pd.DataFrame(iris.data, columns=feature_names)
+
+y = iris.target  # 資料集目標
+
+# 箱型圖
+sns.boxplot(data=df)
+plt.title("鳶尾花資料分布箱型圖")
+show()
+
+print("是否有含遺失值(Missing value)")
+cc = df.isnull().sum()
+print(cc)
+
+print("y 各類別資料筆數統計")
+"""
+sns.countplot(x=y)
+plt.title("y 各類別資料筆數統計")
+show()
+"""
+print("以Pandas函數統計各類別資料筆數")
+cc = pd.Series(y).value_counts()
+print(cc)
+
+# 指定X，並轉為 Numpy 陣列
+X = df.values
+
+# 資料分割
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+print("特徵縮放")
+scaler = StandardScaler()
+X_train_std = scaler.fit_transform(X_train)
+X_test_std = scaler.transform(X_test)
+
+# 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
+logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
+
+logistic_regression.fit(X_train_std, y_train)  # 學習訓練.fit
+
+y_pred = logistic_regression.predict(X_test_std)  # 預測.predict
+
+print("計算準確率 測試目標 與 預測目標 接近程度")
+print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
+
+print("混淆矩陣")
+print(confusion_matrix(y_test, y_pred))
+
+print("混淆矩陣圖")
+disp = ConfusionMatrixDisplay(
+    confusion_matrix=confusion_matrix(y_test, y_pred), display_labels=iris.target_names
+)
+disp.plot()
+plt.title("混淆矩陣圖")
+show()
+
+print("將 模型存檔 使用 joblib")
+joblib.dump(logistic_regression, "tmp_my_model_clf1.joblib")
+joblib.dump(scaler, "tmp_my_model_scaler1.joblib")
+
+print("------------------------------")  # 30個
+
+print("讀取模型")
+# 載入模型與標準化轉換模型
+logistic_regression2 = joblib.load("tmp_my_model_clf1.joblib")
+scaler = joblib.load("tmp_my_model_scaler1.joblib")
+
+# 測試資料 萼長 萼寬 瓣長 瓣寬
+sepal_length, sepal_width, petal_length, petal_width = 5.8, 3.5, 4.4, 1.3
+
+X_new = [[sepal_length, sepal_width, petal_length, petal_width]]
+X_new = scaler.transform(X_new)
+
+labels = ["setosa", "versicolor", "virginica"]  # 山鳶尾 變色鳶尾 維吉尼亞鳶尾
+print("### 預測品種是：", labels[logistic_regression2.predict(X_new)[0]])  # 預測.predict
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+iris = datasets.load_iris()
+
+feature_names = ["萼長", "萼寬", "瓣長", "瓣寬"]
+df = pd.DataFrame(iris.data, columns=feature_names)
+
+y = iris.target  # 資料集目標
+
+# 集中
+cc = (
+    df["萼長"].mean(),
+    df["萼長"].median(),
+    df["萼長"].mode(),
+)
+print(cc)
+
+# 計算變異數(variance)、標準差(standard deviation)、IQR
+cc = (
+    df["萼長"].var(),
+    df["萼長"].std(),
+    df["萼長"].quantile(0.75) - df["萼長"].quantile(0.25),
+)
+print(cc)
+# (0.6856935123042505, 0.8280661279778629, 1.3000000000000007)
+
+# 計算偏態(skewness)及峰度(kurtosis)
+cc = df["萼長"].skew(), df["萼長"].kurt()
+print(cc)
+
+# 自行計算偏態
+mean1 = df["萼長"].mean()
+std1 = df["萼長"].std()
+n = len(df["萼長"])
+skew1 = (
+    (((df["萼長"] - mean1) / std1) ** 3).sum() * n / ((n - 1) * (n - 2))
+)
+print(skew1)
+
+# 0.31491095663697277
+
+# 自行計算峰度
+M2 = (((df["萼長"] - mean1) / std1) ** 2).mean()
+M4 = (((df["萼長"] - mean1) / std1) ** 4).mean()
+K = M4 / (M2**2)
+print(K - 3)
+
+# -0.5735679489249756
+
+from scipy.stats import kurtosis
+
+print(kurtosis(df["萼長"], axis=0, bias=True))
+
+# -0.5735679489249765
+
+# 直方圖
+sns.histplot(x="萼長", data=df)
+show()
+
+# 直方圖平滑化
+sns.kdeplot(x="萼長", data=df)
+show()
+
+# 右偏
+
+data1 = np.random.normal(0, 1, 500)
+data2 = np.random.normal(5, 1, 100)
+data = np.concatenate((data1, data2))
+sns.kdeplot(data=data)
+pd.DataFrame(data).skew()
+show()
+
+# 右偏
+
+data1 = np.random.normal(0, 1, 100)
+data2 = np.random.normal(5, 1, 500)
+data = np.concatenate((data1, data2))
+sns.kdeplot(data=data)
+pd.DataFrame(data).skew()
+show()
+
+# 關聯度
+
+df["y"] = y
+cc = df.corr()
+print(cc)
+
+# 箱型圖
+sns.boxplot(data=df)
+plt.title("鳶尾花資料分布箱型圖")
+show()
+
+print("是否有含遺失值(Missing value)")
+cc = df.isnull().sum()
+print(cc)
+
+print("y 各類別資料筆數統計")
+"""
+sns.countplot(x=y)
+plt.title("y 各類別資料筆數統計")
+show()
+"""
+print("以Pandas函數統計各類別資料筆數")
+cc = pd.Series(y).value_counts()
+print(cc)
+
+# 指定X，並轉為 Numpy 陣列
+X = df.values
+
+# 資料分割
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+print("特徵縮放")
+scaler = StandardScaler()
+X_train_std = scaler.fit_transform(X_train)
+X_test_std = scaler.transform(X_test)
+
+# 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
+logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
+
+logistic_regression.fit(X_train_std, y_train)  # 學習訓練.fit
+
+y_pred = logistic_regression.predict(X_test_std)  # 預測.predict
+
+print("計算準確率 測試目標 與 預測目標 接近程度")
+print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
+
+print("混淆矩陣")
+print(confusion_matrix(y_test, y_pred))
+
+print("混淆矩陣圖")
+disp = ConfusionMatrixDisplay(
+    confusion_matrix=confusion_matrix(y_test, y_pred), display_labels=iris.target_names
+)
+disp.plot()
+plt.title("混淆矩陣圖")
+show()
+
+print("將 模型存檔 使用 joblib")
+joblib.dump(logistic_regression, "tmp_my_model_clf2.joblib")
+joblib.dump(scaler, "tmp_my_model_scaler2.joblib")
+
+print("------------------------------")  # 30個
+
+print("讀取模型")
+# 載入模型與標準化轉換模型
+logistic_regression2 = joblib.load("tmp_my_model_clf2.joblib")
+scaler = joblib.load("tmp_my_model_scaler2.joblib")
+
+# 測試資料 萼長 萼寬 瓣長 瓣寬
+sepal_length, sepal_width, petal_length, petal_width = 5.8, 3.5, 4.4, 1.3
+
+X_new = [[sepal_length, sepal_width, petal_length, petal_width]]
+
+""" NG
+X_new = scaler.transform(X_new)
+
+labels = ["setosa", "versicolor", "virginica"]  # 山鳶尾 變色鳶尾 維吉尼亞鳶尾
+print("### 預測品種是：", labels[logistic_regression2.predict(X_new)[0]])  # 預測.predict
+"""
+
+""" 使用 streamlit 與人互動
+
+import streamlit as st
+
+# 設定 st 標題
+st.title('鳶尾花（Iris）預測')
+
+# 製作4個 st slider
+sepal_length = st.slider('花萼長度:', min_value=3.0, max_value=8.0, value=5.8)
+sepal_width = st.slider('花萼寬度:', min_value=2.0, max_value=5.0, value=3.5)
+petal_length = st.slider('花瓣長度:', min_value=1.0, max_value=7.0, value=4.4)
+petal_width = st.slider('花瓣寬度:', min_value=0.1, max_value=2.5, value=1.3)
+
+if st.button('預測'):  # 當按下 預測 按鈕
+    X_new = [[sepal_length,sepal_width,petal_length,petal_width]]
+    X_new = scaler.transform(X_new)
+    st.write('### 預測品種是：', labels[logistic_regression2.predict(X_new)[0]])  # 預測.predict
+"""
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -406,11 +672,9 @@ logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸�
 
 logistic_regression.fit(X, y)  # 學習訓練.fit
 
-print(logistic_regression.intercept_)
-print(logistic_regression.coef_)
-print(logistic_regression.classes_)
-
 y_pred = logistic_regression.predict(X)  # 預測.predict
+print("全預測 :")
+print(y_pred)
 
 cc = np.sum(y_pred.reshape(-1, 1) == y.reshape(-1, 1))
 print(cc)
@@ -490,7 +754,7 @@ print("結果 :\n", accu_history, sep="")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
+'''
 df = pd.read_csv("data/200811-201811d.csv")
 cc = df.head()
 print(cc)
@@ -507,37 +771,6 @@ print(len(cc))
 
 # Danger分類點說明
 # 對敏感族群不健康為PM2.5數值在35.5以上
-
-"""
-# 用heatmap(.isnull())來找出缺失的資料在哪些欄位
-sns.heatmap(df.isnull(), yticklabels=False, cbar=False, cmap="viridis")
-show()
-"""
-print("------------------------------")  # 30個
-
-plt.title("用countplot來看Nox是否影響健康")
-
-sns.countplot(x="Danger", hue="Nox", data=df, palette="RdBu_r")
-
-show()
-
-print("------------------------------")  # 30個
-
-plt.title("用直方圖看PM25分佈")
-
-sns.distplot(df["PM25"].dropna(), kde=False, bins=30)
-
-show()
-
-print("------------------------------")  # 30個
-
-plt.title("用直方圖看Nox的分佈")
-
-df["Nox"].hist(bins=30)
-
-show()
-
-print("------------------------------")  # 30個
 
 X = df.drop("Danger", axis=1)
 y = df["Danger"]  # 目標, 0 : 不危險, 1 : 危險
@@ -570,14 +803,13 @@ from sklearn.feature_selection import chi2
 
 print("鳶尾花資料集")
 X, y = datasets.load_iris(return_X_y=True)
-print(X.shape)
+print(X.shape)  # 150 X 4
 
 # SelectKBest 特徵選取
 
 logistic_regression = SelectKBest(chi2, k=2)
 X_new = logistic_regression.fit_transform(X, y)
-print(X_new.shape)
-# (150, 2)
+print(X_new.shape)  # 150 X 2
 
 print("顯示特徵分數")
 cc = logistic_regression.scores_
@@ -875,307 +1107,6 @@ print(f"計算準確率 : {accuracy_score(y_test, y_pred)*100:.2f}%")
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("假新聞資料集, 要做很久")
-
-from sklearn.feature_extraction.text import CountVectorizer
-import joblib
-
-"""
-檔案在
-https://www.kaggle.com/competitions/fake-news/data?select=train.csv
-"""
-
-train_df = pd.read_csv("C:/_git/vcs/_big_files/fake-news/train.csv")
-
-train_df.dropna()
-
-train_text = train_df["text"].astype(str)
-train_label = train_df["label"]
-
-count_vectorizer = CountVectorizer(ngram_range=(1, 2), stop_words="english")
-count_train = count_vectorizer.fit_transform(train_text)
-
-# 資料分割
-X_train, X_test, Y_train, Y_test = train_test_split(
-    count_train, train_label, test_size=0.2
-)
-
-# 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
-logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
-
-logistic_regression.fit(X_train, Y_train)  # 學習訓練.fit
-
-y_pred = logistic_regression.predict(X_test)  # 預測.predict
-
-print(f"計算準確率 : {accuracy_score(Y_test, y_pred)*100:.2f}%")
-
-print("將 模型存檔 使用 joblib")
-joblib.dump(count_vectorizer, "tmp_count_vectorizer.pkl")
-joblib.dump(logistic_regression, "tmp_logistic_regression.pkl")
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-iris = datasets.load_iris()
-
-df = pd.DataFrame(iris.data, columns=iris.feature_names)
-
-y = iris.target  # 資料集目標
-
-# 箱型圖
-sns.boxplot(data=df)
-plt.title("鳶尾花資料分布箱型圖")
-show()
-
-print("是否有含遺失值(Missing value)")
-cc = df.isnull().sum()
-print(cc)
-
-print("y 各類別資料筆數統計")
-"""
-sns.countplot(x=y)
-plt.title("y 各類別資料筆數統計")
-show()
-"""
-print("以Pandas函數統計各類別資料筆數")
-cc = pd.Series(y).value_counts()
-print(cc)
-
-# 指定X，並轉為 Numpy 陣列
-X = df.values
-
-# 資料分割
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
-
-print("特徵縮放")
-scaler = StandardScaler()
-X_train_std = scaler.fit_transform(X_train)
-X_test_std = scaler.transform(X_test)
-
-# 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
-logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
-
-logistic_regression.fit(X_train_std, y_train)  # 學習訓練.fit
-
-y_pred = logistic_regression.predict(X_test_std)  # 預測.predict
-
-print("計算準確率 測試目標 與 預測目標 接近程度")
-print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
-
-print("混淆矩陣")
-print(confusion_matrix(y_test, y_pred))
-
-print("混淆矩陣圖")
-disp = ConfusionMatrixDisplay(
-    confusion_matrix=confusion_matrix(y_test, y_pred), display_labels=iris.target_names
-)
-disp.plot()
-plt.title("混淆矩陣圖")
-show()
-
-print("將 模型存檔 使用 joblib")
-joblib.dump(logistic_regression, "tmp_my_model_clf1.joblib")
-joblib.dump(scaler, "tmp_my_model_scaler1.joblib")
-
-print("------------------------------")  # 30個
-
-print("讀取模型")
-# 載入模型與標準化轉換模型
-logistic_regression2 = joblib.load("tmp_my_model_clf1.joblib")
-scaler = joblib.load("tmp_my_model_scaler1.joblib")
-
-# 測試資料 萼長 萼寬 瓣長 瓣寬
-sepal_length, sepal_width, petal_length, petal_width = 5.8, 3.5, 4.4, 1.3
-
-X_new = [[sepal_length, sepal_width, petal_length, petal_width]]
-X_new = scaler.transform(X_new)
-
-labels = ["setosa", "versicolor", "virginica"]  # 山鳶尾 變色鳶尾 維吉尼亞鳶尾
-print("### 預測品種是：", labels[logistic_regression2.predict(X_new)[0]])  # 預測.predict
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-iris = datasets.load_iris()
-
-df = pd.DataFrame(iris.data, columns=iris.feature_names)
-
-y = iris.target  # 資料集目標
-
-# 集中
-cc = (
-    df["sepal length (cm)"].mean(),
-    df["sepal length (cm)"].median(),
-    df["sepal length (cm)"].mode(),
-)
-print(cc)
-
-# 計算變異數(variance)、標準差(standard deviation)、IQR
-cc = (
-    df["sepal length (cm)"].var(),
-    df["sepal length (cm)"].std(),
-    df["sepal length (cm)"].quantile(0.75) - df["sepal length (cm)"].quantile(0.25),
-)
-print(cc)
-# (0.6856935123042505, 0.8280661279778629, 1.3000000000000007)
-
-# 計算偏態(skewness)及峰度(kurtosis)
-cc = df["sepal length (cm)"].skew(), df["sepal length (cm)"].kurt()
-print(cc)
-
-# 自行計算偏態
-mean1 = df["sepal length (cm)"].mean()
-std1 = df["sepal length (cm)"].std()
-n = len(df["sepal length (cm)"])
-skew1 = (
-    (((df["sepal length (cm)"] - mean1) / std1) ** 3).sum() * n / ((n - 1) * (n - 2))
-)
-print(skew1)
-
-# 0.31491095663697277
-
-# 自行計算峰度
-M2 = (((df["sepal length (cm)"] - mean1) / std1) ** 2).mean()
-M4 = (((df["sepal length (cm)"] - mean1) / std1) ** 4).mean()
-K = M4 / (M2**2)
-print(K - 3)
-
-# -0.5735679489249756
-
-from scipy.stats import kurtosis
-
-print(kurtosis(df["sepal length (cm)"], axis=0, bias=True))
-
-# -0.5735679489249765
-
-# 直方圖
-sns.histplot(x="sepal length (cm)", data=df)
-show()
-
-# 直方圖平滑化
-sns.kdeplot(x="sepal length (cm)", data=df)
-show()
-
-# 右偏
-
-data1 = np.random.normal(0, 1, 500)
-data2 = np.random.normal(5, 1, 100)
-data = np.concatenate((data1, data2))
-sns.kdeplot(data=data)
-pd.DataFrame(data).skew()
-show()
-
-# 右偏
-
-data1 = np.random.normal(0, 1, 100)
-data2 = np.random.normal(5, 1, 500)
-data = np.concatenate((data1, data2))
-sns.kdeplot(data=data)
-pd.DataFrame(data).skew()
-show()
-
-# 關聯度
-
-df["y"] = y
-cc = df.corr()
-print(cc)
-
-# 箱型圖
-sns.boxplot(data=df)
-plt.title("鳶尾花資料分布箱型圖")
-show()
-
-print("是否有含遺失值(Missing value)")
-cc = df.isnull().sum()
-print(cc)
-
-print("y 各類別資料筆數統計")
-"""
-sns.countplot(x=y)
-plt.title("y 各類別資料筆數統計")
-show()
-"""
-print("以Pandas函數統計各類別資料筆數")
-cc = pd.Series(y).value_counts()
-print(cc)
-
-# 指定X，並轉為 Numpy 陣列
-X = df.values
-
-# 資料分割
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
-
-print("特徵縮放")
-scaler = StandardScaler()
-X_train_std = scaler.fit_transform(X_train)
-X_test_std = scaler.transform(X_test)
-
-# 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
-logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
-
-logistic_regression.fit(X_train_std, y_train)  # 學習訓練.fit
-
-y_pred = logistic_regression.predict(X_test_std)  # 預測.predict
-
-print("計算準確率 測試目標 與 預測目標 接近程度")
-print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
-
-print("混淆矩陣")
-print(confusion_matrix(y_test, y_pred))
-
-print("混淆矩陣圖")
-disp = ConfusionMatrixDisplay(
-    confusion_matrix=confusion_matrix(y_test, y_pred), display_labels=iris.target_names
-)
-disp.plot()
-plt.title("混淆矩陣圖")
-show()
-
-print("將 模型存檔 使用 joblib")
-joblib.dump(logistic_regression, "tmp_my_model_clf2.joblib")
-joblib.dump(scaler, "tmp_my_model_scaler2.joblib")
-
-print("------------------------------")  # 30個
-
-print("讀取模型")
-# 載入模型與標準化轉換模型
-logistic_regression2 = joblib.load("tmp_my_model_clf2.joblib")
-scaler = joblib.load("tmp_my_model_scaler2.joblib")
-
-# 測試資料 萼長 萼寬 瓣長 瓣寬
-sepal_length, sepal_width, petal_length, petal_width = 5.8, 3.5, 4.4, 1.3
-
-X_new = [[sepal_length, sepal_width, petal_length, petal_width]]
-
-""" NG
-X_new = scaler.transform(X_new)
-
-labels = ["setosa", "versicolor", "virginica"]  # 山鳶尾 變色鳶尾 維吉尼亞鳶尾
-print("### 預測品種是：", labels[logistic_regression2.predict(X_new)[0]])  # 預測.predict
-"""
-
-""" 使用 streamlit 與人互動
-
-import streamlit as st
-
-# 設定 st 標題
-st.title('鳶尾花（Iris）預測')
-
-# 製作4個 st slider
-sepal_length = st.slider('花萼長度:', min_value=3.0, max_value=8.0, value=5.8)
-sepal_width = st.slider('花萼寬度:', min_value=2.0, max_value=5.0, value=3.5)
-petal_length = st.slider('花瓣長度:', min_value=1.0, max_value=7.0, value=4.4)
-petal_width = st.slider('花瓣寬度:', min_value=0.1, max_value=2.5, value=1.3)
-
-if st.button('預測'):  # 當按下 預測 按鈕
-    X_new = [[sepal_length,sepal_width,petal_length,petal_width]]
-    X_new = scaler.transform(X_new)
-    st.write('### 預測品種是：', labels[logistic_regression2.predict(X_new)[0]])  # 預測.predict
-"""
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 print("自建 邏輯迴歸")
 
 # logistic_regression_SGD
@@ -1262,6 +1193,8 @@ logistic_regression = MyLogisticRegression(lr=0.1, num_iter=300000)  # 邏輯迴
 logistic_regression.fit(X, y)  # 學習訓練.fit
 
 y_pred = logistic_regression.predict(X)  # 預測.predict
+print("全預測 :")
+print(y_pred)
 
 cc = (y_pred == y).mean()
 print(cc)
@@ -1300,10 +1233,10 @@ logistic_regression = sklearn.linear_model.LogisticRegression(C=1e20)  # 邏輯�
 logistic_regression.fit(X, y)  # 學習訓練.fit
 
 y_pred = logistic_regression.predict(X)  # 預測.predict
-cc = (y_pred == y).mean()
-print(cc)
+print("全預測 :")
+print(y_pred)
 
-cc = logistic_regression.intercept_, logistic_regression.coef_
+cc = (y_pred == y).mean()
 print(cc)
 
 plt.figure(figsize=(10, 6))
@@ -1323,6 +1256,7 @@ grid = np.c_[xx1.ravel(), xx2.ravel()]
 y_pred_prob = logistic_regression.predict_proba(grid)[:, 1].reshape(
     xx1.shape
 )  # 預測機率.predict_proba
+print("y_pred_prob :\n", y_pred_prob, sep="")
 
 plt.contour(xx1, xx2, y_pred_prob, [0.5], linewidths=1, colors="black")
 show()
@@ -1363,7 +1297,7 @@ logistic_regression.fit(X_train, y_train)  # 學習訓練.fit
 # 第3步：預測
 # 預測測試集結果
 
-y_pred = logistic_regression.predict(X_test)
+y_pred = logistic_regression.predict(X_test)  # 預測.predict
 
 # 第4步：評估預測
 
@@ -1634,7 +1568,8 @@ logistic_regression.fit(X_train_std, y_train)
 # 7. 模型評分
 
 # 計算準確率
-y_pred = logistic_regression.predict(X_test_std)
+y_pred = logistic_regression.predict(X_test_std)  # 預測.predict
+
 print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
 # 90.14%
 
@@ -1700,10 +1635,11 @@ train_data, test_data, train_target, test_target = train_test_split(X, Y, test_s
 logistic_model = linear_model.LogisticRegression()
 logistic_model.fit(train_data, train_target)
 
-test_est = logistic_model.predict(test_data)
-train_est = logistic_model.predict(train_data)
-test_est_p = logistic_model.predict_proba(test_data)[:, 1]
-train_est_p = logistic_model.predict_proba(train_data)[:, 1]
+test_est = logistic_model.predict(test_data)  # 預測.predict
+train_est = logistic_model.predict(train_data)  # 預測.predict
+
+test_est_p = logistic_model.predict_proba(test_data)[:, 1]  # 預測機率.predict_proba
+train_est_p = logistic_model.predict_proba(train_data)[:, 1]  # 預測機率.predict_proba
 
 # 决策（Decisions）类检验
 
@@ -1862,8 +1798,8 @@ lg.summary()
 
 # 预测
 
-train['proba'] = lg.predict(train)
-test['proba'] = lg.predict(test)
+train['proba'] = lg.predict(train)  # 預測.predict
+test['proba'] = lg.predict(test)  # 預測.predict
 
 test['proba'].head(10)
 
@@ -1978,8 +1914,8 @@ exog = train[candidates].drop(['bad_ind'], axis=1)
 for i in exog.columns:
     print(i, '\t', vif(df=exog, col_i=i))
 
-train['proba'] = lg_m1.predict(train)
-test['proba'] = lg_m1.predict(test)
+train['proba'] = lg_m1.predict(train)  # 預測.predict
+test['proba'] = lg_m1.predict(test)  # 預測.predict
 
 fpr_test, tpr_test, th_test = metrics.roc_curve(test.bad_ind, test.proba)
 fpr_train, tpr_train, th_train = metrics.roc_curve(train.bad_ind, train.proba)
@@ -2076,8 +2012,8 @@ lg.summary()
 
 # 预测
 
-train['proba'] = lg.predict(train)
-test['proba'] = lg.predict(test)
+train['proba'] = lg.predict(train)  # 預測.predict
+test['proba'] = lg.predict(test)  # 預測.predict
 
 test['proba'].head()
 
@@ -2560,7 +2496,6 @@ class WoE:
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
 # <h1>Table of Contents<span class="tocSkip"></span></h1>
 # <div class="toc" style="margin-top: 1em;"><ul class="toc-item"><li><ul class="toc-item"><li><span><a href="#拒绝推断" data-toc-modified-id="拒绝推断-0.1"><span class="toc-item-num">0.1&nbsp;&nbsp;</span>拒绝推断</a></span><ul class="toc-item"><li><span><a href="#第一步准备数据集：把解释变量和被解释变量分开，这是KNN这个函数的要求" data-toc-modified-id="第一步准备数据集：把解释变量和被解释变量分开，这是KNN这个函数的要求-0.1.1"><span class="toc-item-num">0.1.1&nbsp;&nbsp;</span>第一步准备数据集：把解释变量和被解释变量分开，这是KNN这个函数的要求</a></span></li><li><span><a href="#第二步：进行缺失值填补和标准化，这也是knn这个函数的要求" data-toc-modified-id="第二步：进行缺失值填补和标准化，这也是knn这个函数的要求-0.1.2"><span class="toc-item-num">0.1.2&nbsp;&nbsp;</span>第二步：进行缺失值填补和标准化，这也是knn这个函数的要求</a></span></li><li><span><a href="#第三步：建模并预测" data-toc-modified-id="第三步：建模并预测-0.1.3"><span class="toc-item-num">0.1.3&nbsp;&nbsp;</span>第三步：建模并预测</a></span></li><li><span><a href="#第四步：将审核通过的申请者和未通过的申请者进行合并" data-toc-modified-id="第四步：将审核通过的申请者和未通过的申请者进行合并-0.1.4"><span class="toc-item-num">0.1.4&nbsp;&nbsp;</span>第四步：将审核通过的申请者和未通过的申请者进行合并</a></span></li></ul></li><li><span><a href="#建立违约预测模型" data-toc-modified-id="建立违约预测模型-0.2"><span class="toc-item-num">0.2&nbsp;&nbsp;</span>建立违约预测模型</a></span><ul class="toc-item"><li><span><a href="#粗筛变量" data-toc-modified-id="粗筛变量-0.2.1"><span class="toc-item-num">0.2.1&nbsp;&nbsp;</span>粗筛变量</a></span></li><li><span><a href="#变量细筛与数据清洗" data-toc-modified-id="变量细筛与数据清洗-0.2.2"><span class="toc-item-num">0.2.2&nbsp;&nbsp;</span>变量细筛与数据清洗</a></span></li><li><span><a href="#变量分箱WOE转换" data-toc-modified-id="变量分箱WOE转换-0.2.3"><span class="toc-item-num">0.2.3&nbsp;&nbsp;</span>变量分箱WOE转换</a></span></li><li><span><a href="#构造分类模型" data-toc-modified-id="构造分类模型-0.2.4"><span class="toc-item-num">0.2.4&nbsp;&nbsp;</span>构造分类模型</a></span></li><li><span><a href="#检验模型" data-toc-modified-id="检验模型-0.2.5"><span class="toc-item-num">0.2.5&nbsp;&nbsp;</span>检验模型</a></span></li><li><span><a href="#评分卡开发" data-toc-modified-id="评分卡开发-0.2.6"><span class="toc-item-num">0.2.6&nbsp;&nbsp;</span>评分卡开发</a></span></li></ul></li></ul></li></ul></div>
 
@@ -2647,7 +2582,7 @@ from sklearn.neighbors import KNeighborsClassifier
 neigh = KNeighborsClassifier(n_neighbors=5, weights="distance")
 neigh.fit(accepts_x_norm, accepts_y)
 
-rejects["bad_ind"] = neigh.predict(rejects_x_norm)
+rejects["bad_ind"] = neigh.predict(rejects_x_norm)  # 預測.predict
 
 # ### 第四步：将审核通过的申请者和未通过的申请者进行合并
 
@@ -2781,7 +2716,7 @@ def plot_confusion_matrix(cm, classes,
 # 构建逻辑回归模型，进行违约概率预测
 lr = LogisticRegression(C = 1, penalty = 'l1')
 lr.fit(X_train,y_train.values.ravel())
-y_pred = lr.predict(X_test.values)
+y_pred = lr.predict(X_test.values)  # 預測.predict
 
 # Compute confusion matrix
 cnf_matrix = confusion_matrix(y_test,y_pred)
@@ -2801,7 +2736,7 @@ show()
 ## 加入代价敏感参数，重新计算
 lr = LogisticRegression(C = 1, penalty = 'l1', class_weight='balanced')
 lr.fit(X_train,y_train.values.ravel())
-y_pred = lr.predict(X_test.values)
+y_pred = lr.predict(X_test.values)  # 預測.predict
 
 # Compute confusion matrix
 cnf_matrix = confusion_matrix(y_test,y_pred)
@@ -2940,3 +2875,18 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------")  # 30個
+
+logistic_regression.fit(X_train, y_train)  # 學習訓練.fit
+# .fit之後, 取得迴歸係數
+
+print(logistic_regression.coef_)
+print(logistic_regression.intercept_)
+print(logistic_regression.classes_)
+
+# yy = np.array([-5, -4, -3, -2, -1, 0, 1, 2 ,3, 4, 5])  # 真實資料
+# YY = yy.reshape(len(yy), 1)
+
+
+# 用heatmap(.isnull())來找出缺失的資料在哪些欄位
+sns.heatmap(df.isnull(), yticklabels=False, cbar=False, cmap="viridis")
+show()

@@ -40,7 +40,7 @@ def show():
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
+'''
 print("多指標評分")
 
 from sklearn.metrics import classification_report
@@ -385,214 +385,6 @@ print("與原點之間的距離")
 cc = euclidean_distances(X, [[0, 0]])
 print(cc)
 
-print("比較字串的距離")
-
-from sklearn.feature_extraction.text import CountVectorizer
-
-corpus = ["I am a good student", "I am a good teacher", "This is a pencil"]  # 文集
-
-vectorizer = CountVectorizer()
-counts = vectorizer.fit_transform(corpus).todense()  # 得到文集corpus的特征向量，並將其轉為密集矩陣
-print(counts)
-
-""" kilo OK, 但是 sugar不OK
-for x,y in [[0,1],[0,2],[1,2]]:
-    dist = euclidean_distances(counts[x],counts[y])
-    print('文檔{}與文檔{}的距離{}'.format(x,y,dist))
-"""
-
-print("比較幾個向量的距離")
-
-# 每個人的特徵向量
-vector1 = [1.0, 1.0, 1.0]  # 嫌犯 1 的特徵
-vector2 = [0.2, 0.7, 0.2]  # 嫌犯 2 的特徵
-vector3 = [0.4, 0.8, 0.9]  # 嫌犯 3 的特徵
-vector4 = [0.8, 0.8, 0.3]  # 嫌犯 4 的特徵
-
-# 把特徵向量集合成一個串列，好讓 sklearn 方便直接計算任兩個向量間的相似度
-feature_vectors = [vector1, vector2, vector3, vector4]
-print("Feature vectors:")
-print(feature_vectors)
-print()
-
-# 計算任兩個向量間的歐幾里德距離
-print("Euclidean distances:")
-distances_similarity_metrix = euclidean_distances(feature_vectors)
-print(distances_similarity_metrix)
-print()
-
-# 計算任兩個向量間的餘弦相似度
-print("Cosine similarity:")
-cosine_similarity_metrix = cosine_similarity(feature_vectors)
-print(cosine_similarity_metrix)
-print()
-
-print("------------------------------------------------------------")  # 60個
-"""
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.feature_extraction.text import CountVectorizer
-
-text = ["小貝來到北京清華大學",
-        "小花來到了網易杭研大廈",
-        "小明碩士畢業于中國科學院",
-        "小明愛北京小明愛北京天安門"
-        ]
-               
-corpus = ["小貝 來到 北京 清華大學",
-          "小花 來到 了 網易 杭研 大廈",
-          "小明 碩士 畢業 于 中國 科學院",
-          "小明 愛 北京 小明 愛 北京 天安門"
-          ]
-
-print('二值化、詞頻')
-vectorizer = CountVectorizer(min_df = 1, binary = True) #Transformer
-data = vectorizer.fit_transform(corpus)
-features = vectorizer.get_feature_names_out()
-for word in features:
-    print(word)
-print(len(features))
-
-print(data.todense())
-
-doc_df = pd.DataFrame(data.toarray(), index = text, columns = vectorizer.get_feature_names_out()).head(10)
-
-print(doc_df)
-print(doc_df.columns)
-
-print('------------------------------')	#30個
-
-from sklearn.metrics.pairwise import cosine_similarity
-
-cos_sims = cosine_similarity(doc_df)
-print(cos_sims)
-
-sims_df = pd.DataFrame(cos_sims, index = text, columns = text)
-print(sims_df)
-
-print('------------------------------')	#30個
-
-#tf-idf
-
-vectorizer = TfidfVectorizer(min_df = 1)
-data = vectorizer.fit_transform(corpus)
-features = vectorizer.get_feature_names_out()
-for word in features:
-    print(word)
-
-print('------------------------------')	#30個
-
-pd.set_option('display.precision', 2)
-doc_df = pd.DataFrame(data.toarray(), index = text, columns = vectorizer.get_feature_names_out()).head(10)
-print(doc_df)
-"""
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# BOW
-
-# 使用BOW猜測文章大意
-
-from sklearn.feature_extraction.text import CountVectorizer
-
-# 載入資料
-
-with open("./data/news.txt", "r+", encoding="UTF-8") as f:
-    text = f.read()
-# print(text)
-
-# BOW 轉換
-vectorizer = CountVectorizer()
-X = vectorizer.fit_transform([text])
-# 生字表
-cc = vectorizer.get_feature_names_out()
-print(cc)
-
-
-print("單字對應的出現次數")
-cc = X.toarray()
-print(cc)
-
-
-print("找出較常出現的單字")
-
-import collections
-
-MAX_FEATURES = 20
-word_freqs = collections.Counter()
-for word, freq in zip(vectorizer.get_feature_names_out(), X.toarray()[0]):
-    word_freqs[word] = freq
-
-print(f"前{MAX_FEATURES}名單字:{word_freqs.most_common(MAX_FEATURES)}")
-
-
-print("考慮停用詞(Stop words)")
-
-MAX_FEATURES = 20
-
-# 轉換為 BOW
-vectorizer = CountVectorizer(stop_words="english")
-X = vectorizer.fit_transform([text])
-
-# 找出較常出現的單字
-word_freqs = collections.Counter()
-for word, freq in zip(vectorizer.get_feature_names_out(), X.toarray()[0]):
-    word_freqs[word] = freq
-
-print(f"前{MAX_FEATURES}名單字:{word_freqs.most_common(MAX_FEATURES)}")
-
-
-print("詞形還原(Lemmatization)")
-
-text = text.lower().replace("korean", "korea").replace("stores", "store")
-
-MAX_FEATURES = 20
-
-# 轉換為 BOW
-vectorizer = CountVectorizer(stop_words="english")
-X = vectorizer.fit_transform([text])
-
-# 找出較常出現的單字
-word_freqs = collections.Counter()
-for word, freq in zip(vectorizer.get_feature_names_out(), X.toarray()[0]):
-    word_freqs[word] = freq
-
-print(f"前{MAX_FEATURES}名單字:{word_freqs.most_common(MAX_FEATURES)}")
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# 使用BOW猜測文章大意
-
-from sklearn.feature_extraction.text import CountVectorizer
-
-# 測試資料
-
-corpus = [
-    "This is the first document.",
-    "This document is the second document.",
-    "And this is the third one.",
-    "Is this the first document?",
-]
-
-# BOW 轉換
-vectorizer = CountVectorizer()
-X = vectorizer.fit_transform(corpus)
-# 生字表
-cc = vectorizer.get_feature_names_out()
-print(cc)
-
-print("使用表格呈現單字及對應出現的次數")
-
-df = pd.DataFrame(X.toarray(), columns=vectorizer.get_feature_names_out())
-print(df)
-
-print("相似性比較")
-from sklearn.metrics.pairwise import cosine_similarity
-
-cc = cosine_similarity(df.iloc[-1:].values, df.iloc[:-1].values)
-print(cc)
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -648,8 +440,8 @@ show()
 print("------------------------------------------------------------")  # 60個
 
 # Correlation matrix
-
-# no file
+"""
+# 無檔案
 url = "https://python-graph-gallery.com/wp-content/uploads/mtcars.csv"
 df = pd.read_csv(url)
 
@@ -676,7 +468,7 @@ _ = sns.heatmap(
 
 show()
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 # Re-order correlation matrix using AgglomerativeClustering
 
@@ -713,7 +505,8 @@ _ = sns.heatmap(
 )
 
 show()
-
+"""
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # Precision matrix
@@ -742,7 +535,6 @@ for i, j in zip(*np.triu_indices_from(Prec, 1)):
 
 print(Pcor.round(2))
 
-
 print("------------------------------------------------------------")  # 60個
 
 ones = np.ones(Cov.shape[0])
@@ -752,8 +544,7 @@ d_mah = np.sqrt(np.dot(np.dot(ones, Prec), ones))
 print("Euclidean norm of ones=%.2f. Mahalanobis norm of ones=%.2f" % (d_euc, d_mah))
 
 print(np.dot(ones, Prec))
-
-
+'''
 print("------------------------------------------------------------")  # 60個
 
 import scipy
@@ -841,7 +632,7 @@ from mpl_toolkits.mplot3d import Axes3D
 
 
 def multivariate_normal_pdf(X, mean, sigma):
-    """Multivariate normal probability density function over X (n_samples x n_features)"""
+    # Multivariate normal probability density function over X (n_samples x n_features)
     P = X.shape[1]
     det = np.linalg.det(sigma)
     norm_const = 1.0 / (((2 * np.pi) ** (P / 2)) * np.sqrt(det))
@@ -863,7 +654,7 @@ norm = multivariate_normal_pdf(X, mean, sigma).reshape(x.shape)
 # Do it with scipy
 norm_scpy = multivariate_normal(mu, sigma).pdf(np.stack((x, y), axis=2))
 assert np.allclose(norm, norm_scpy)
-
+"""
 # Plot
 fig = plt.figure(figsize=(10, 7))
 ax = fig.gca(projection="3d")
@@ -889,7 +680,7 @@ ax.set_zlabel("p(x)")
 plt.title("Bivariate Normal/Gaussian distribution")
 fig.colorbar(surf, shrink=0.5, aspect=7, cmap=plt.cm.coolwarm)
 show()
-
+"""
 print("------------------------------------------------------------")  # 60個
 
 # 歐幾里得距離(Euclidean distance)

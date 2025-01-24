@@ -165,27 +165,27 @@ plt.xlabel('賣出件數')
 plt.title('統計 售價區間 / 賣出件數')
 show()
 
-sns.distplot(y,kde=False)
+sns.histplot(y,kde=False)
 plt.xlabel('售價區間')
 plt.ylabel('賣出件數')
 plt.title('統計 售價區間 / 賣出件數')
 show()
 
-sns.distplot(y, kde=True, fit=st.johnsonsu)
+sns.histplot(y, kde=True, fit=st.johnsonsu)
 plt.title('使用 Johnson SU')
 show()
 
-sns.distplot(y, kde=False, fit=st.norm)
+sns.histplot(y, kde=False, fit=st.norm)
 plt.title('使用 Normal')
 show()
 
-sns.distplot(y, kde=False, fit=st.lognorm)
+sns.histplot(y, kde=False, fit=st.lognorm)
 plt.title('使用 Log Normal')
 show()
 
 #另一種查看是否服從正態分布的可視化方法
 
-sns.distplot(y, fit=st.norm)
+sns.histplot(y, fit=st.norm)
 plt.title('使用 Normal')
 show()
 
@@ -199,7 +199,7 @@ print('------------------------------')	#30個
 SalePrice_log = np.log(y)
  
 #transformed histogram and normal probability plot
-sns.distplot(SalePrice_log, fit=st.norm);
+sns.histplot(SalePrice_log, fit=st.norm);
 plt.title('使用 Normal')
 #plt.title('SalePrice log')
 show()
@@ -4193,24 +4193,24 @@ import scipy.stats as st
 
 y = train["SalePrice"]
 
-sns.distplot(y, kde=False)
+sns.histplot(y, kde=False)
 plt.title("預設方法")
 show()
 
-sns.distplot(y, kde=True, fit=st.johnsonsu)
+sns.histplot(y, kde=True, fit=st.johnsonsu)
 plt.title("使用 Johnson SU")
 show()
 
-sns.distplot(y, kde=False, fit=st.norm)
+sns.histplot(y, kde=False, fit=st.norm)
 plt.title("使用 Normal")
 show()
 
-sns.distplot(y, kde=False, fit=st.lognorm)
+sns.histplot(y, kde=False, fit=st.lognorm)
 plt.title("使用 Log Normal")
 show()
 
 # 另一種查看是否服從正態分布的可視化方法
-sns.distplot(train["SalePrice"], fit=st.norm)
+sns.histplot(train["SalePrice"], fit=st.norm)
 plt.title("使用 Normal")
 show()
 
@@ -4220,7 +4220,7 @@ show()
 # 把房價做對數變換后再看
 SalePrice_log = np.log(train["SalePrice"])
 # transformed histogram and normal probability plot
-sns.distplot(SalePrice_log, fit=st.norm)
+sns.histplot(SalePrice_log, fit=st.norm)
 show()
 
 res = st.probplot(SalePrice_log, plot=plt)
@@ -4715,10 +4715,10 @@ def johnson_inverse(y, gamma, eta, epsilon, lbda):
 yt, g, et, ep, l = johnson(y)
 yt2 = johnson_inverse(yt, g, et, ep, l)
 
-sns.distplot(yt)
+sns.histplot(yt)
 show()
 
-sns.distplot(yt2)
+sns.histplot(yt2)
 show()
 
 # 5.最后建模

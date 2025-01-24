@@ -3,7 +3,26 @@
 
 """
 
+print("------------------------------------------------------------")  # 60個
+
+# 共同
+import os
 import sys
+import time
+import math
+import random
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns  # 海生, 自動把圖畫得比較好看
+
+font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+# 設定中文字型及負號正確顯示
+# 設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
+# 設定負號
+plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print('------------------------------------------------------------')	#60個
 
@@ -167,13 +186,6 @@ print('------------------------------------------------------------')	#60個
 
 #應用：旅館評論情緒分析
 
-print('------------------------------------------------------------')	#60個
-
-import pandas as pd
-
-print('------------------------------------------------------------')	#60個
-
-import pandas as pd
 pd_all = pd.read_csv('data/hotel_all.csv')
 
 print("正面評論有", len(pd_all[pd_all['label']==1]), "則")
@@ -253,7 +265,7 @@ print(" 正確率{}".format(score/len(datas)))
 
 print('------------------------------------------------------------')	#60個
 
-''' 安裝 chatterbot 模組失敗
+""" 安裝 chatterbot 模組失敗
 #chatterbot：AI聊天機器人
 
 #!pip uninstall spacy
@@ -334,25 +346,24 @@ print('答：{}\n'.format(response))
 
 print('------------------------------------------------------------')	#60個
 
-"""
 #!pip install chatterbot-corpus
-%cd /usr/local/lib/python3.7/dist-packages/chatterbot_corpus/data
-!ls
-%cd /content
-"""
+#%cd /usr/local/lib/python3.7/dist-packages/chatterbot_corpus/data
+#!ls
+#%cd /content
 
 print('------------------------------------------------------------')	#60個
+
 from chatterbot.trainers import ChatterBotCorpusTrainer
+
 chatbot = ChatBot('ChineseBot')
 trainer = ChatterBotCorpusTrainer(chatbot)
 trainer.train('chatterbot.corpus.tchinese')
 
 print('------------------------------------------------------------')	#60個
 
-"""
-!cp /content/db.sqlite3 "/content/drive/MyDrive/Colab Notebooks/package/tchinese_db.sqlite3"
-!cp "/content/drive/MyDrive/Colab Notebooks/package/tchinese_db.sqlite3" /content/db.sqlite3
-"""
+#!cp /content/db.sqlite3 "/content/drive/MyDrive/Colab Notebooks/package/tchinese_db.sqlite3"
+#!cp "/content/drive/MyDrive/Colab Notebooks/package/tchinese_db.sqlite3" /content/db.sqlite3
+
 print('------------------------------------------------------------')	#60個
 
 bot = ChatBot(
@@ -372,15 +383,13 @@ print('答：{}\n'.format(response))
 
 print('------------------------------------------------------------')	#60個
 
-"""
-!mkdir /usr/local/lib/python3.7/dist-packages/chatterbot_corpus/data/qna
-!cp "hospitalQA.yml" /usr/local/lib/python3.7/dist-packages/chatterbot_corpus/data/qna/hospitalQA.yml
-"""
+#!mkdir /usr/local/lib/python3.7/dist-packages/chatterbot_corpus/data/qna
+#!cp "hospitalQA.yml" /usr/local/lib/python3.7/dist-packages/chatterbot_corpus/data/qna/hospitalQA.yml
 
 print('------------------------------------------------------------')	#60個
 
-
 from chatterbot.trainers import ChatterBotCorpusTrainer
+
 chatbot = ChatBot('QnABot')
 trainer = ChatterBotCorpusTrainer(chatbot)
 trainer.train('chatterbot.corpus.qna')
@@ -392,12 +401,21 @@ print('答：{}\n'.format(response))
 
 print('------------------------------------------------------------')	#60個
 
-'''
+"""
 
 print('------------------------------------------------------------')	#60個
 print('作業完成')
 print('------------------------------------------------------------')	#60個
+sys.exit()
 
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
 
 
 

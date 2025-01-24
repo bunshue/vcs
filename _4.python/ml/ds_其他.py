@@ -43,7 +43,7 @@ housing = fetch_openml(name="house_prices", as_frame=True)
 print(housing)
 
 sns.set(rc={"figure.figsize": (11.7, 8.27)})
-sns.distplot(housing.MedHouseVal, bins=30)
+sns.histplot(housing.MedHouseVal, bins=30)
 
 plt.grid()
 plt.show()

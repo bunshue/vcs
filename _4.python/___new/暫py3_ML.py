@@ -1,21 +1,3 @@
-from sklearn.feature_extraction.text import CountVectorizer
-
-from sklearn.feature_extraction.text import CountVectorizer
-
-
-實際上TFIDF分成兩個部份，TF和IDF。
-分別表示
-詞頻（term frequency，tf）和逆向檔案頻率（inverse document frequency，idf）
-
-和Word2Vec一樣，是種將文字轉換為向量的方式
-
-接著簡單介紹TF和IDF這兩個部份，理解也有助於使用scikit-learn裡的TFIDF。
-
-TFIDF最常被使用的一個目的是，找到文件當中的關鍵字。怎樣的關鍵字是重要的？一個直覺的想法是出現最多次的字。這可能可以，不過因為每個文件的字數不同，無法比較。所以在用文件內的字數作為分母，將所有文件得到數值加以規範化。這也就是TF，特定單字在文件出現次數/文件總次數
-
-不過只是這樣，很有可能讓一些定冠詞，或是常用單字，像是a, an, the, and, or 等等，得到很高的分數。一個簡單的作法是先把這些字詞去掉(stopword)，不過還有一種方式是將低這些單字的分數。IDF會去計算一個字出現在文件的逆向頻率，這表示出現頻率越高，出現在越多文件之中，但是得分會越低。透過TF和IDF相乘：TFxIDF，得到的綜合分數就是TFIDF。
-
-
 Sepal花萼
 Petal花瓣
 

@@ -1,14 +1,12 @@
-import os 
-#引入Bunch类
-from sklearn.datasets._base import Bunch
-#引入持久化类
+import os
 import pickle
+import numpy as np
+from sklearn import metrics
 from sklearn import feature_extraction  
+from sklearn.datasets._base import Bunch
 from sklearn.feature_extraction.text import TfidfTransformer  
 from sklearn.feature_extraction.text import TfidfVectorizer  
 from sklearn.naive_bayes import MultinomialNB #导入多项式贝叶斯算法
-import numpy as np
-from sklearn import metrics
 
 # 读取文件
 def readfile(path):

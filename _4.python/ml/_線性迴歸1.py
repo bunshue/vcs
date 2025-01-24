@@ -787,7 +787,7 @@ print(x_train.columns)
 y_pred = linear_regression.predict(x_test)  # 預測.predict
 
 # 看實際值及預測值之間的殘差分佈圖
-sns.distplot((y_test - y_pred))
+sns.histplot((y_test - y_pred))
 show()
 
 # 評估
@@ -1794,7 +1794,6 @@ print("誤差值", sum1 / 30)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
 X = np.array([i * np.pi / 180 for i in range(0, 370, 10)])
 # y = np.sin(X) + np.random.normal(0, 0.15, len(X))
 y = np.sin(X)
@@ -1938,78 +1937,6 @@ print("------------------------------")  # 30個
 # 有多少個系數為0
 
 coef_matrix_ridge.apply(lambda x: sum(X.values == 0), axis=1)  # maybe X
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-from sklearn.feature_extraction.text import CountVectorizer
-from sklearn.decomposition import TruncatedSVD
-
-corpus = [
-    "Python is popular in machine learning",
-    "Distributed system is important in big data analysis",
-    "Machine learning is theoretical foundation of data mining",
-    "Learning Python is fun",
-    "Playing soccer is fun",
-    "Many data scientists like playing soccer",
-    "Chinese men's soccer team failed again",
-    "Thirty two soccer teams enter World Cup finals",
-]
-
-vectorizer = CountVectorizer(min_df=1, stop_words="english")
-data = vectorizer.fit_transform(corpus)
-vectorizer.get_feature_names_out()
-
-df = pd.DataFrame(
-    data.toarray(), index=corpus, columns=vectorizer.get_feature_names_out()
-).head(10)
-print(df)
-
-print("------------------------------")  # 30個
-
-# Singular value decomposition and LSA
-model = TruncatedSVD(2)
-data_n = model.fit_transform(data)
-data_n = Normalizer(copy=False).fit_transform(data_n)
-print(data_n)
-
-df = pd.DataFrame(data_n, index=corpus, columns=["component_1", "component_2"])
-print(df)
-
-xs = data_n[:, 0]
-ys = data_n[:, 1]
-
-plt.figure(figsize=(4, 4))
-
-ax = plt.gca()
-ax.set_xlim([-1, 2])
-ax.set_ylim([-1, 2])
-
-plt.scatter(xs, ys)
-plt.xlabel("First principal component")
-plt.ylabel("Second principal component")
-plt.title("Plot of points agains LSA principal components")
-
-show()
-
-print("------------------------------")  # 30個
-
-similarity = np.asarray(np.asmatrix(data_n) * np.asmatrix(data_n).T)
-df = pd.DataFrame(similarity, index=corpus, columns=corpus).head(10)
-print(df)
-
-print(similarity)
-
-sns.heatmap(similarity, cmap="Reds")
-
-show()
-
-df = pd.DataFrame(
-    model.components_,
-    index=["component_1", "component_2"],
-    columns=vectorizer.get_feature_names_out(),
-)
-print(df.T)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

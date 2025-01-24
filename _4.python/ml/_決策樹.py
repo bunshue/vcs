@@ -416,8 +416,8 @@ print(pd.DataFrame(list(zip(data.columns, clf.feature_importances_))))  # 变量
 
 # 察看预测值的分布情况
 red, blue = sns.color_palette("Set1", 2)
-sns.distplot(test_est_p[test_target == 1], kde=False, bins=15, color=red)
-sns.distplot(test_est_p[test_target == 0], kde=False, bins=15, color=blue)
+sns.histplot(test_est_p[test_target == 1], kde=False, bins=15, color=red)
+sns.histplot(test_est_p[test_target == 0], kde=False, bins=15, color=blue)
 plt.show()
 
 fpr_test, tpr_test, th_test = metrics.roc_curve(test_target, test_est_p)

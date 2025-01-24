@@ -108,7 +108,7 @@ print("------------------------------")  # 30個
 
 # 可以用 seaborn 畫個美美的房價分佈圖。
 
-sns.distplot(cal.MEDV, bins=30)
+sns.histplot(cal.MEDV, bins=30)
 show()
 
 # 再來可以做一個相關係數矩陣 (Correlation Matrix), 並且畫出 "heat map"。

@@ -93,8 +93,12 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
-'''
-"""
+
+def show():
+    plt.show()
+    pass
+
+
 print("------------------------------------------------------------")  # 60個
 print("DataFrame 畫圖")
 print("------------------------------------------------------------")  # 60個
@@ -121,26 +125,26 @@ df.index = index
 
 print("長條圖")
 df.plot(kind="bar", title="長條圖", fontsize=12, rot=-15)
-plt.show()
+show()
 
 print("線圖 為每個欄位畫一條線")
 df.plot(title="線圖")  # 無參數, 預設就是 line
-plt.show()
+show()
 
 print("線圖 只看一欄位")
 df["英文"].plot()  # 無參數, 預設就是 line
-plt.show()
+show()
 
 #df.plot.hist(y="lifespan", rot=45)  # rot表示xstick旋轉的角度
 
 print("線圖 看一些欄位")
 df[["英文", "數學"]].plot()  # 無參數, 預設就是 line
-plt.show()
+show()
 
 # 取出2欄資料並畫出
 df2 = df[["英文", "數學"]]
 df2.plot()  # 無參數, 預設就是 line
-plt.show()
+show()
 
 print("線圖 看一些欄位")
 print("建立空的df, 再加入資料至df")
@@ -150,7 +154,7 @@ df2["數學"] = df["數學"]
 df2.index = df.index
 
 df2.plot()  # 無參數, 預設就是 line
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -168,7 +172,7 @@ df.plot(kind="hist", bins=30, alpha=0.3, title="直方圖")
 #ax.set_xlabel("Xlabel")
 #ax.set_title("直方圖")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -186,7 +190,7 @@ datas2 = np.random.normal(mu, sigma, N)
 df = pd.DataFrame({"x": datas1,"y": datas2})
 df.plot.kde()
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -200,7 +204,7 @@ df = pd.DataFrame(datas, columns=columns)
 df.boxplot()
 
 plt.title("箱圖")
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -211,7 +215,7 @@ df = pd.read_csv("data/iris.csv")
 df.boxplot(column="sepal_length", by="target", figsize=(8, 6))
 
 plt.title("箱圖")
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -271,7 +275,7 @@ df["面積"] *= 1000
 df.plot(xticks=range(len(df.index)), use_index=True, rot=45, figsize=(8, 6))
 
 plt.title("人口 / 面積")
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -282,18 +286,18 @@ print(df)
 
 df["1st"].plot(kind="pie", autopct="%.2f%%")
 plt.title("第一季")
-plt.show()
+show()
 
 df.plot(kind="bar", rot=0)  # 旋轉X軸標籤角度
 plt.title("年度 bar圖")
-plt.show()
+show()
 
 df.plot(kind="barh")
 plt.title("年度 barh圖")
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
-"""
+
 # 折線圖
 
 df = pd.read_csv("data/觀光人數統計.csv")
@@ -303,7 +307,7 @@ print(df)
 
 # 折線圖 + 參數
 df.plot(linewidth=2, linestyle=":", title="Number of visitors")
-plt.show()
+show()
 
 # 三月 資料
 df_T = df.T
@@ -312,7 +316,7 @@ print(df_T.head())
 df3 = df_T[3]
 df3.plot()  # 無參數, 預設就是 line
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -337,11 +341,11 @@ g4 = df.iloc[0].plot(
 )
 g4 = df.iloc[1].plot(kind="line", legend=True, xticks=range(2015, 2020))
 g4 = df.iloc[2].plot(kind="line", legend=True, xticks=range(2015, 2020))
-plt.show()
+show()
 
 # 派圖
 df.plot(kind="pie", subplots=True, figsize=[16, 6])
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -363,7 +367,7 @@ df.plot(kind="scatter", x="XXXX", y="YYYY", title="Scatter Plot")
 # 設定散佈圖X、Y軸的座標值
 # df.plot(kind="scatter", x="XXXX", y="YYYY", xlim=(-20, 120), ylim=(-20, 120))
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -383,7 +387,7 @@ df = pd.DataFrame({"XXXX": xx, "YYYY": yy, "COLOR": cc})
 df.plot.scatter(x="XXXX", y="YYYY", s=50, marker="*", c="COLOR", colormap="viridis")
 
 # plt.title("Scatter Plot") same
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -404,7 +408,7 @@ df["weight"].plot(kind="bar", title="長條圖", fontsize=12)
 
 # df["weight"].plot(kind="pie", autopct="%.0f%%", title = '派圖', fontsize = 12)
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -422,7 +426,7 @@ df = pd.DataFrame(
 print(df)
 
 df.plot(title="DataFrame畫圖")  # 無參數, 預設就是 line
-plt.show()
+show()
 
 # 柱狀圖
 # 設定 kind = 'bar' 或 'barh' 即可繪製柱狀圖
@@ -439,11 +443,11 @@ print(df)
 # columns 索引的 name屬性 被用來做為 legend的標題
 df.plot(kind="bar")
 
-plt.show()
+show()
 
 # 設定 stacked = True, 可繪製 堆積柱狀圖
 df.plot(kind="barh", stacked=True)
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -456,12 +460,12 @@ party_counts = pd.crosstab(tips.day, tips["size"])
 print(party_counts)
 
 party_counts.plot(kind="bar")
-plt.show()
+show()
 
 """ NG
 party_counts = party_counts.ix[:, 2:5]
 party_counts.plot(kind = 'bar', stacked = True)
-plt.show()
+show()
 """
 
 print(party_counts)
@@ -473,7 +477,7 @@ cc = party_counts.sum(1)
 print(cc)
 
 party_counts.plot(kind="bar", stacked=True)
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -486,19 +490,19 @@ print(cc)
 # 用 plot(kind = 'hist') 繪製直方圖
 tips.total_bill.plot(kind="hist", bins=50)
 plt.title("total_bill")
-plt.show()
+show()
 
 # 用 hist() 繪製直方圖
 tips.total_bill.hist(bins=50)
 plt.title("total_bill")
-plt.show()
+show()
 
 # tip比例 直方圖
 tip_ratios = tips.tip / tips.total_bill
 tip_ratios.hist(bins=50)
 plt.title("tip ratio")
-plt.show()
-'''
+show()
+
 print("------------------------------------------------------------")  # 60個
 
 # 散佈圖(scatter plot)
@@ -519,10 +523,10 @@ print(cc)
 # plt.scatter()可以繪製散佈圖，標示每一個資料row的 兩個columns的數據分布
 plt.scatter(trans_data.m1, trans_data.unemp)
 plt.title("Changes in log({0}) vs. log({1})".format("m1", "unemp"))
-plt.show()
+show()
 
 trans_data.plot.scatter("m1", "unemp")
-plt.show()
+show()
 
 # pandas 提供了 scatter_matrix()函數，方便由DataFrame繪製散佈圖
 from pandas.plotting import scatter_matrix
@@ -530,7 +534,7 @@ from pandas.plotting import scatter_matrix
 # 會自動的產生各個columns之間的 scatter diagram
 _ = scatter_matrix(trans_data, color="k", alpha=0.3, figsize=(8, 8))
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -542,7 +546,7 @@ print(df)
 # 會自動的產生各個columns之間的 scatter diagram
 _ = scatter_matrix(df, color="k", alpha=0.3, figsize=(8, 8))
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -558,7 +562,7 @@ data = data.set_index("Date")
 
 data.plot(kind="line")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -569,7 +573,7 @@ df.set_index("Type", inplace=True)
 df.plot(kind="bar")
 df.plot(kind="barh")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -585,7 +589,7 @@ df = pd.DataFrame(datas, columns=columns, index=index)
 
 ax = df.plot.scatter(x="A", y="B", color="DarkBlue", label="Class 1")
 # df.plot.scatter(x="A", y="B", color="LightGreen", label="Class 2", ax=ax)
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -614,7 +618,7 @@ df.plot.scatter(x="A", y="B", color="red", label="Class B", ax=ax)
 df.plot.scatter(x="A", y="C", color="green", label="Class C", ax=ax)
 df.plot.scatter(x="A", y="D", color="blue", label="Class D", ax=ax)
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -641,11 +645,10 @@ plt.pie(df["weight"], labels=df["name"],
         autopct="%1.1f%%", startangle=90, counterclock=False,
         colors=palette)
 
-plt.show()
+show()
 """
 
 print("------------------------------------------------------------")  # 60個
-
 
 # 1.初始化
 
@@ -687,63 +690,77 @@ print(cc)
 print("折線圖")
 
 df.plot(x="監測月份", y="PM25", title="監測月份與PM2.5的關係")
-plt.show()
+show()
 
 df.plot(x="監測月份", y="PM10", title="監測月份與PM10的關係")
-plt.show()
+show()
 
 print("柱狀圖")
 df.plot(kind="bar", x="監測月份", y="PM25", title="監測月份與PM2.5的關係")
-plt.show()
+show()
 
 print("橫向柱狀圖")
 df.plot(kind="barh", x="監測月份", y="PM25", title="監測月份與PM2.5的關係")
-plt.show()
+show()
 
 print("直方圖")
 df.plot(kind="hist", x="監測月份", y="PM25", title="監測月份與PM2.5的關係")
-plt.show()
+show()
 
 """
 print("核密度(KDE)圖")
 df.plot(kind='kde',x='監測月份', y='PM25',title='監測月份與PM2.5的關係')
-plt.show()
+show()
 """
 
 print("面積圖")
 df.plot(kind="area", x="監測月份", y="PM25", title="監測月份與PM2.5的關係")
-plt.show()
+show()
 
 print("圓餅圖")
 df.plot(kind="pie", x="監測月份", y="PM25", title="監測月份與PM2.5的關係", autopct="%1.2f%%")
-plt.show()
+show()
 
 print("散佈圖")
 df.plot(kind="scatter", x="PM25", y="PM10", title="PM2.5與PM10的關係")  # X,Y需為數值
-plt.show()
+show()
 
 print("六角形箱體圖")
 df.plot(kind="hexbin", x="PM25", y="PM10", title="PM2.5與PM10的關係")  # X,Y需為數值
-plt.show()
+show()
 
 print("箱形圖")
 df.plot(kind="box", x="PM25", y="PM10", title="監測月份與PM2.5的關係")  # X,Y需為數值
-plt.show()
+show()
+
+print("------------------------------")  # 30個
+
+plt.title("用直方圖看PM25分佈")
+
+sns.histplot(df["PM25"].dropna(), kde=False, bins=30)
+
+show()
+
+print("------------------------------")  # 30個
+
+plt.title("用直方圖看Nox的分佈")
+
+df["Nox"].hist(bins=30)
+
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-import seaborn as sns  # 海生, 自動把圖畫得比較好看
 
 tips = sns.load_dataset("tips")
 cc = tips.head()
 print(cc)
 
-sns.distplot(tips["total_bill"])
-plt.show()
+sns.histplot(tips["total_bill"])
+show()
 
-sns.distplot(tips["total_bill"], kde=False, bins=30)
-plt.show()
+sns.histplot(tips["total_bill"], kde=False, bins=30)
+show()
 
 sns.jointplot(x="total_bill", y="tip", data=tips, kind="scatter")
 sns.jointplot(x="total_bill", y="tip", data=tips, kind="hex")
@@ -755,29 +772,28 @@ sns.pairplot(tips, hue="sex", palette="coolwarm")
 
 sns.kdeplot(tips["total_bill"])
 sns.rugplot(tips["tip"])
-
-plt.show()
+show()
 
 
 sns.barplot(x="sex", y="total_bill", data=tips, estimator=np.std)
-plt.show()
+show()
 
 sns.countplot(x="sex", data=tips)
-plt.show()
+show()
 
 sns.boxplot(x="day", y="total_bill", data=tips, hue="smoker")
-plt.show()
+show()
 
 sns.violinplot(x="day", y="total_bill", data=tips, hue="sex", split=True)
-plt.show()
+show()
 
 sns.stripplot(x="day", y="total_bill", data=tips, jitter=True, hue="sex", dodge=True)
-plt.show()
+show()
 
 sns.violinplot(x="day", y="total_bill", data=tips)
 sns.swarmplot(x="day", y="total_bill", data=tips, color="black")
 
-plt.show()
+show()
 
 # catplot兩變量關係圖
 sns.catplot(x="day", y="total_bill", data=tips, kind="bar")
@@ -786,7 +802,7 @@ tc = tips.corr()
 
 sns.heatmap(tc, annot=True, cmap="coolwarm")
 
-plt.show()
+show()
 
 
 """ NG
@@ -794,7 +810,7 @@ fp=flights.pivot_table(index='month',columns='year',values='passengers')
 
 sns.heatmap(fp,cmap='magma',linecolor='white',linewidths=1)
 
-plt.show()
+show()
 
 sns.clustermap(fp,cmap='coolwarm',standard_scale=1)
 
@@ -823,18 +839,18 @@ g.map(plt.scatter, "total_bill", "tip")
 sns.set_style("ticks")
 sns.countplot(x="sex", data=tips)
 
-plt.show()
+show()
 
 sns.despine(left=True, bottom=True)
 
 sns.countplot(x="sex", data=tips)
 
-plt.show()
+show()
 
 sns.set_context("paper")
 sns.countplot(x="sex", data=tips)
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -848,7 +864,7 @@ df = pd.read_csv(filename, header=0, parse_dates=["年月"])
 df.plot(kind="line", x="年月", y="東京-平均氣溫(℃)", title="東京", figsize=[10, 5])
 df.plot(kind="line", x="年月", y="大阪-平均氣溫(℃)", title="大阪", figsize=[10, 5])
 
-plt.show()
+show()
 
 print("------------------------------")  # 30個
 
@@ -865,7 +881,7 @@ df_average.plot(kind="line")
 plt.xticks(rotation=30)
 plt.legend()
 
-plt.show()
+show()
 
 print("------------------------------")  # 30個
 
@@ -886,7 +902,7 @@ ax = sns.lineplot(data=tmp_stack, x="年月", y="value", hue="category", palette
 plt.xticks(rotation=30)
 plt.legend()
 
-plt.show()
+show()
 
 print("------------------------------")  # 30個
 
@@ -921,7 +937,7 @@ ax = sns.lineplot(data=tmp_stack, x="年月", y="value", hue="category", palette
 plt.xticks(rotation=30)
 ax.legend(loc="lower left", bbox_to_anchor=(1, 0))
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -949,12 +965,12 @@ print(fixed_df["Berri 1"])
 
 fixed_df["Berri 1"].plot()  # 無參數, 預設就是 line
 
-plt.show()
+show()
 
 
 fixed_df.plot(figsize=(15, 10))
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -968,7 +984,7 @@ df = pd.read_csv(
 )
 df["Berri 1"].plot()  # 無參數, 預設就是 line
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -992,7 +1008,7 @@ bikes = pd.read_csv(
     index_col="Date",
 )
 bikes["Berri 1"].plot()  # 無參數, 預設就是 line
-plt.show()
+show()
 
 berri_bikes = bikes[["Berri 1"]].copy()
 
@@ -1023,7 +1039,7 @@ weekday_counts
 
 weekday_counts.plot(kind="bar")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1052,7 +1068,7 @@ weekday_counts.index = [
 ]
 weekday_counts.plot(kind="bar")
 
-plt.show()
+show()
 
 print("bikes SP")
 
@@ -1068,7 +1084,7 @@ plt.rcParams["font.family"] = "sans-serif"
 df_2012 = pd.read_csv("data/weather_2012.csv", index_col="Date/Time")
 df_2012["Temp (C)"].plot(figsize=(8, 4), rot=-10)
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1085,7 +1101,7 @@ df_mar_2012 = pd.read_csv("data/weather_2012.csv")
 print(df_mar_2012)
 
 df_mar_2012["Temp (C)"].plot(figsize=(15, 5))
-plt.show()
+show()
 
 # '\xb0' for that degree character °
 """ fail
@@ -1118,7 +1134,7 @@ print(temperatures.head)
 temperatures.loc[:,'Hour'] = df_mar_2012.index.hour
 temperatures.groupby('Hour').aggregate(np.median).plot()  # 無參數, 預設就是 line
 
-plt.show()
+show()
 """
 
 print("------------------------------------------------------------")  # 60個
@@ -1169,7 +1185,7 @@ print(is_snowing[:5])
 is_snowing = is_snowing.astype(float)
 is_snowing.plot()  # 無參數, 預設就是 line
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1179,7 +1195,7 @@ print("------------------------------------------------------------")  # 60個
 
 weather_2012["Temp (C)"].resample("M").apply(np.median).plot(kind="bar")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1191,7 +1207,7 @@ print(is_snowing.astype(float).resample("M").apply(np.mean))
 
 is_snowing.astype(float).resample("M").apply(np.mean).plot(kind="bar")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1210,12 +1226,12 @@ stats = pd.concat([temperature, snowiness], axis=1)
 print(stats)
 
 stats.plot(kind="bar")
-plt.show()
+show()
 
 # Uh, that didn't work so well because the scale was wrong. We can do better by plotting them on two separate graphs:
 
 stats.plot(kind="bar", subplots=True, figsize=(15, 10))
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1255,7 +1271,7 @@ complaint_counts = complaints['Complaint Type'].value_counts()
 complaint_counts[:10]
 
 complaint_counts[:10].plot(kind='bar')
-plt.show()
+show()
 
 print('------------------------------------------------------------')	#60個
 
@@ -1286,7 +1302,7 @@ noise_complaint_counts / complaint_counts.astype(float)
 
 (noise_complaint_counts / complaint_counts.astype(float)).plot(kind='bar')
 
-plt.show()
+show()
 """
 
 print("------------------------------------------------------------")  # 60個
@@ -1319,7 +1335,7 @@ print("------------------------------------------------------------")  # 60個
 """
 print("畫出來")
 df.plot(xticks=range(0, 4))
-plt.show()
+show()
 """
 
 ax = df.plot.bar(rot=-45)  # rot表示xstick旋轉的角度
@@ -1348,7 +1364,7 @@ axes[1].legend(loc=1)
 plt.subplots_adjust(hspace=1, wspace=0.5)  # 調整各個ax間的距離
 plt.suptitle("2 X 1 bar圖")
 
-plt.show()
+show()
 
 print("1 X 2 bar圖")
 fig, axs = plt.subplots(1, 2, sharey=False, figsize=(15, 4))
@@ -1357,7 +1373,7 @@ df.plot.bar(ax=axs[1], y=["speed", "lifespan"], rot=45)
 plt.subplots_adjust(wspace=0.1)
 plt.suptitle("1 X 2 bar圖")
 
-plt.show()
+show()
 
 # 2 X 1
 fig, ax = plt.subplots(2, 1, figsize=(10, 8))
@@ -1367,7 +1383,7 @@ df.plot.hist(ax=ax[0], bins=12, alpha=0.5)
 # ax.set_title("Hist. plot")
 # ax.set_xlabel("Xlabel")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1380,13 +1396,13 @@ print(df)
 
 # 只畫一圖
 df.plot(kind="line")
-plt.show()
+show()
 
 # 畫 2X1 圖
 fig, axes = plt.subplots(2, 1)
 df.plot(ax=axes[0], kind="line")
 df.plot(ax=axes[1], kind="line")
-plt.show()
+show()
 
 # 畫 2X2 圖
 fig, axes = plt.subplots(2, 2)
@@ -1394,7 +1410,7 @@ df.plot(ax=axes[0, 0], kind="line")
 df.plot(ax=axes[0, 1], kind="line")
 df.plot(ax=axes[1, 0], kind="line")
 df.plot(ax=axes[1, 1], kind="line")
-plt.show()
+show()
 
 # 畫 1X2 圖
 fig, axes = plt.subplots(1, 2, figsize=(14, 6), sharey=False)
@@ -1408,7 +1424,7 @@ axes[1].set_ylabel("YYYY")
 
 plt.suptitle("畫 1X2 圖")
 plt.subplots_adjust(wspace=0.1)
-plt.show()
+show()
 
 # 畫 2X1 圖
 
@@ -1426,7 +1442,7 @@ axs[0].set_ylabel("ylabel")
 axs[1].set_ylabel("ylabel")
 axs[1].set_xlabel("Xlabel")
 fig.suptitle("This is a somewhat long figure title", fontsize=16)
-plt.show()
+show()
 
 fig, axs = plt.subplots(1, 2, sharey=True)
 df.plot(y=["a"], kind="line", ax=axs[0], legend=False)
@@ -1441,7 +1457,7 @@ axs[0].set_xlabel("ylabel")
 # 調整各個圖的間距
 plt.subplots_adjust(hspace=0.5, wspace=0.1)
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 

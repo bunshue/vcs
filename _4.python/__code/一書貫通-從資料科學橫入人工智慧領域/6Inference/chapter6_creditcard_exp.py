@@ -34,7 +34,7 @@ get_ipython().magic('matplotlib inline')
 import seaborn as sns
 from scipy import stats
 
-sns.distplot(house_price_gr.rate, kde=True, fit=stats.norm) # Histograph
+sns.histplot(house_price_gr.rate, kde=True, fit=stats.norm) # Histograph
 
 
 # Q-Q

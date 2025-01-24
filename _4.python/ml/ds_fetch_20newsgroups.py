@@ -51,7 +51,7 @@ print(news.data[0])
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-#單純貝氏分類器 naive Bayes classifier
+# 單純貝氏分類器 naive Bayes classifier
 
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.naive_bayes import MultinomialNB

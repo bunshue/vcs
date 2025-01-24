@@ -246,7 +246,7 @@ boston, y = load_boston()
 boston["MEDV"] = y
 
 """
-sns.distplot(boston.MEDV, bins=30)
+sns.histplot(boston.MEDV, bins=30)
 show()
 
 correlation_matrix = boston.corr().round(2)
