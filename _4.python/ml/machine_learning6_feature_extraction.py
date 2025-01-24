@@ -1,11 +1,9 @@
 """
 feature_extraction
 
-
 from sklearn.feature_extraction.text import CountVectorizer
 
 from sklearn.feature_extraction.text import CountVectorizer
-
 
 實際上TFIDF分成兩個部份，TF和IDF。
 分別表示
@@ -15,11 +13,17 @@ from sklearn.feature_extraction.text import CountVectorizer
 
 接著簡單介紹TF和IDF這兩個部份，理解也有助於使用scikit-learn裡的TFIDF。
 
-TFIDF最常被使用的一個目的是，找到文件當中的關鍵字。怎樣的關鍵字是重要的？一個直覺的想法是出現最多次的字。這可能可以，不過因為每個文件的字數不同，無法比較。所以在用文件內的字數作為分母，將所有文件得到數值加以規範化。這也就是TF，特定單字在文件出現次數/文件總次數
+TFIDF最常被使用的一個目的是，找到文件當中的關鍵字。怎樣的關鍵字是重要的？
+一個直覺的想法是出現最多次的字。
+這可能可以，不過因為每個文件的字數不同，無法比較。
+所以在用文件內的字數作為分母，將所有文件得到數值加以規範化。
+這也就是TF，特定單字在文件出現次數/文件總次數
 
-不過只是這樣，很有可能讓一些定冠詞，或是常用單字，像是a, an, the, and, or 等等，得到很高的分數。一個簡單的作法是先把這些字詞去掉(stopword)，不過還有一種方式是將低這些單字的分數。IDF會去計算一個字出現在文件的逆向頻率，這表示出現頻率越高，出現在越多文件之中，但是得分會越低。透過TF和IDF相乘：TFxIDF，得到的綜合分數就是TFIDF。
-
-
+不過只是這樣，很有可能讓一些定冠詞，或是常用單字，像是a, an, the, and, or 等等，
+得到很高的分數。一個簡單的作法是先把這些字詞去掉(stopword)，
+不過還有一種方式是將低這些單字的分數。
+IDF會去計算一個字出現在文件的逆向頻率，這表示出現頻率越高，出現在越多文件之中，
+但是得分會越低。透過TF和IDF相乘：TFxIDF，得到的綜合分數就是TFIDF。
 """
 print("------------------------------------------------------------")  # 60個
 
@@ -44,37 +48,74 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 
 def show():
-    plt.show()
+    # plt.show()
     pass
 
 
 print("------------------------------------------------------------")  # 60個
+
+import jieba
+import sklearn.linear_model
+from sklearn.metrics import accuracy_score  # 正解率
+from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
+
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 分類特徵(Categorical Features)
+
+data = [
+    {"price": 850000, "rooms": 4, "neighborhood": "Queen Anne"},
+    {"price": 700000, "rooms": 3, "neighborhood": "Fremont"},
+    {"price": 650000, "rooms": 3, "neighborhood": "Wallingford"},
+    {"price": 600000, "rooms": 2, "neighborhood": "Fremont"},
+]
+print(data)
+
+# 利用one-hot encoding編碼的方式，可以有效率的判斷所指示值為1或0代表存在或不存在。
 
 from sklearn.feature_extraction import DictVectorizer
 
-dict = DictVectorizer(sparse=True)
-data = dict.fit_transform(
+dv = DictVectorizer(sparse=False, dtype=int)
+dv.fit_transform(data)
+print(data)
+
+# 查看vec每列的含義，可以檢查功能名稱：
+print("特徵名稱 :\n", dv.get_feature_names_out(), sep="")
+
+# 將sparse更改為True，可以解決為稀疏矩陣的問題
+dv = DictVectorizer(sparse=True, dtype=int)
+dv.fit_transform(data)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("DictVectorizer, sparse=True")  # 可以解決為稀疏矩陣的問題
+from sklearn.feature_extraction import DictVectorizer
+
+dv = DictVectorizer(sparse=True)
+data = dv.fit_transform(
     [{"膚色": "黃", "身高": 176}, {"膚色": "白", "身高": 183}, {"膚色": "黑", "身高": 158}]
 )
 print("sparse編碼：")
 print(data)
-print("特徵名稱：")
-print(dict.get_feature_names_out())
+
+print("特徵名稱 :\n", dv.get_feature_names_out(), sep="")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+print("DictVectorizer, sparse=False")
 from sklearn.feature_extraction import DictVectorizer
 
-dict = DictVectorizer(sparse=False)
-data = dict.fit_transform(
+dv = DictVectorizer(sparse=False)
+data = dv.fit_transform(
     [{"膚色": "黃", "身高": 176}, {"膚色": "白", "身高": 183}, {"膚色": "黑", "身高": 158}]
 )
 print("one-hot編碼：")
 print(data)
-print("特徵名稱：")
-print(dict.get_feature_names_out())
+
+print("特徵名稱 :\n", dv.get_feature_names_out(), sep="")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -87,8 +128,8 @@ data = cv.fit_transform(
 )
 print("one-hot編碼：")
 print(data.toarray())
-print("特徵名稱：")
-print(cv.get_feature_names_out())
+
+print("特徵名稱 :\n", cv.get_feature_names_out(), sep="")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -96,10 +137,11 @@ print("------------------------------------------------------------")  # 60個
 from sklearn.feature_extraction.text import CountVectorizer
 
 texts = ["dog and fish, dog and dog", "dog and dog", "dog and cat"]
-count_vectorizer = CountVectorizer(ngram_range=(1, 1), stop_words="english")
-count_train = count_vectorizer.fit_transform(texts)
-print(count_vectorizer.get_feature_names_out())
-print(count_vectorizer.vocabulary_)
+
+cv = CountVectorizer(ngram_range=(1, 1), stop_words="english")
+count_train = cv.fit_transform(texts)
+print("特徵名稱 :\n", cv.get_feature_names_out(), sep="")
+print(cv.vocabulary_)
 print(count_train)
 
 print("------------------------------------------------------------")  # 60個
@@ -111,31 +153,52 @@ texts = [
     "One of the confiscated drafts was a story about stoning women to death for adultery – never published, never presented to anyone, the article stated. The narrative followed the story of a protagonist that watched a movie about stoning of women under Islamic law for adultery."
 ]
 
-count_vectorizer = CountVectorizer(ngram_range=(1, 2), stop_words="english")
-count_train = count_vectorizer.fit_transform(texts)
-print(count_vectorizer.get_feature_names_out())
-print(count_vectorizer.vocabulary_)
+cv = CountVectorizer(ngram_range=(1, 2), stop_words="english")
+count_train = cv.fit_transform(texts)
+print("特徵名稱 :\n", cv.get_feature_names_out(), sep="")
+print(cv.vocabulary_)
 print(count_train)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
+"""
 from sklearn.feature_extraction.text import CountVectorizer
 import joblib
 
-count_vectorizer = joblib.load("count_vectorizer.pkl")
+cv = joblib.load("count_vectorizer.pkl")
 classifier = joblib.load("classifier.pkl")
 
 
 def classify(document):
     label = {0: "reliable", 1: "unreliable"}
-    document_text = count_vectorizer.transform([document])
+    document_text = cv.transform([document])
     y = classifier.predict(document_text)[0]
     return label[y]
 
 
 document = input("Please enter your news description:")
 print("This news review is " + classify(document) + ".")
+"""
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+from sklearn.feature_extraction.text import TfidfVectorizer
+
+texts = [
+    "This is the first document.",
+    "This document is the second document.",
+    "And this is the third one.",
+    "Is this the first document?",
+]
+
+tv = TfidfVectorizer()
+
+X = tv.fit_transform(texts)
+
+print("特徵名稱 :\n", tv.get_feature_names_out(), sep="")
+
+print(X.shape)
+# (4, 9)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -147,12 +210,12 @@ t2 = list(jieba.cut("台北的天氣常常下雨。"))
 c1 = " ".join(t1)
 c2 = " ".join(t2)
 
-tf = TfidfVectorizer()
-data = tf.fit_transform([c1, c2])
+tv = TfidfVectorizer()
+data = tv.fit_transform([c1, c2])
 print("one-hot編碼：")
 print(data.toarray())
-print("特徵名稱：")
-print(tf.get_feature_names_out())
+
+print("特徵名稱 :\n", tv.get_feature_names_out(), sep="")
 
 print("------------------------------------------------------------")  # 60個
 
@@ -169,8 +232,8 @@ cv = CountVectorizer()
 data = cv.fit_transform([c1, c2])
 print("one-hot編碼：")
 print(data.toarray())
-print("特徵名稱：")
-print(cv.get_feature_names_out())
+
+print("特徵名稱 :\n", cv.get_feature_names_out(), sep="")
 
 print("------------------------------------------------------------")  # 60個
 
@@ -188,9 +251,9 @@ arr = [
 arr = [" ".join(jieba.cut(i)) for i in arr]  # 分詞
 print(arr)
 
-vectorizer = CountVectorizer()
-X = vectorizer.fit_transform(arr)
-word = vectorizer.get_feature_names_out()
+cv = CountVectorizer()
+X = cv.fit_transform(arr)
+word = cv.get_feature_names_out()
 df = pd.DataFrame(X.toarray(), columns=word)
 print(df)
 
@@ -210,10 +273,10 @@ print("比較字串的距離")
 
 from sklearn.feature_extraction.text import CountVectorizer
 
-corpus = ["I am a good student", "I am a good teacher", "This is a pencil"]  # 文集
+texts = ["I am a good student", "I am a good teacher", "This is a pencil"]
 
-vectorizer = CountVectorizer()
-counts = vectorizer.fit_transform(corpus).todense()  # 得到文集corpus的特征向量，並將其轉為密集矩陣
+cv = CountVectorizer()
+counts = cv.fit_transform(texts).todense()  # 得到 texts 的特征向量，並將其轉為密集矩陣
 print(counts)
 
 """ kilo OK, 但是 sugar不OK
@@ -259,7 +322,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 
 text = ["小貝來到北京清華大學", "小花來到了網易杭研大廈", "小明碩士畢業于中國科學院", "小明愛北京小明愛北京天安門"]
 
-corpus = [
+texts = [
     "小貝 來到 北京 清華大學",
     "小花 來到 了 網易 杭研 大廈",
     "小明 碩士 畢業 于 中國 科學院",
@@ -267,9 +330,9 @@ corpus = [
 ]
 
 print("二值化、詞頻")
-vectorizer = CountVectorizer(min_df=1, binary=True)  # Transformer
-data = vectorizer.fit_transform(corpus)
-features = vectorizer.get_feature_names_out()
+cv = CountVectorizer(min_df=1, binary=True)  # Transformer
+data = cv.fit_transform(texts)
+features = cv.get_feature_names_out()
 for word in features:
     print(word)
 print(len(features))
@@ -277,7 +340,7 @@ print(len(features))
 print(data.todense())
 
 doc_df = pd.DataFrame(
-    data.toarray(), index=text, columns=vectorizer.get_feature_names_out()
+    data.toarray(), index=text, columns=cv.get_feature_names_out()
 ).head(10)
 
 print(doc_df)
@@ -297,17 +360,14 @@ print("------------------------------")  # 30個
 
 # tf-idf
 
-vectorizer = TfidfVectorizer(min_df=1)
-data = vectorizer.fit_transform(corpus)
-features = vectorizer.get_feature_names_out()
-for word in features:
-    print(word)
+tv = TfidfVectorizer(min_df=1)
+data = tv.fit_transform(texts)
 
-print("------------------------------")  # 30個
+print("特徵名稱 :\n", tv.get_feature_names_out(), sep="")
 
 pd.set_option("display.precision", 2)
 doc_df = pd.DataFrame(
-    data.toarray(), index=text, columns=vectorizer.get_feature_names_out()
+    data.toarray(), index=text, columns=tv.get_feature_names_out()
 ).head(10)
 print(doc_df)
 
@@ -325,11 +385,11 @@ with open("./data/news.txt", "r+", encoding="UTF-8") as f:
 # print(text)
 
 # BOW 轉換
-vectorizer = CountVectorizer()
-X = vectorizer.fit_transform([text])
+cv = CountVectorizer()
+X = cv.fit_transform([text])
 # 生字表
-cc = vectorizer.get_feature_names_out()
-print(cc)
+
+print("特徵名稱 :\n", cv.get_feature_names_out(), sep="")
 
 print("單字對應的出現次數")
 cc = X.toarray()
@@ -341,7 +401,7 @@ import collections
 
 MAX_FEATURES = 20
 word_freqs = collections.Counter()
-for word, freq in zip(vectorizer.get_feature_names_out(), X.toarray()[0]):
+for word, freq in zip(cv.get_feature_names_out(), X.toarray()[0]):
     word_freqs[word] = freq
 
 print(f"前{MAX_FEATURES}名單字:{word_freqs.most_common(MAX_FEATURES)}")
@@ -351,12 +411,12 @@ print("考慮停用詞(Stop words)")
 MAX_FEATURES = 20
 
 # 轉換為 BOW
-vectorizer = CountVectorizer(stop_words="english")
-X = vectorizer.fit_transform([text])
+cv = CountVectorizer(stop_words="english")
+X = cv.fit_transform([text])
 
 # 找出較常出現的單字
 word_freqs = collections.Counter()
-for word, freq in zip(vectorizer.get_feature_names_out(), X.toarray()[0]):
+for word, freq in zip(cv.get_feature_names_out(), X.toarray()[0]):
     word_freqs[word] = freq
 
 print(f"前{MAX_FEATURES}名單字:{word_freqs.most_common(MAX_FEATURES)}")
@@ -368,12 +428,12 @@ text = text.lower().replace("korean", "korea").replace("stores", "store")
 MAX_FEATURES = 20
 
 # 轉換為 BOW
-vectorizer = CountVectorizer(stop_words="english")
-X = vectorizer.fit_transform([text])
+cv = CountVectorizer(stop_words="english")
+X = cv.fit_transform([text])
 
 # 找出較常出現的單字
 word_freqs = collections.Counter()
-for word, freq in zip(vectorizer.get_feature_names_out(), X.toarray()[0]):
+for word, freq in zip(cv.get_feature_names_out(), X.toarray()[0]):
     word_freqs[word] = freq
 
 print(f"前{MAX_FEATURES}名單字:{word_freqs.most_common(MAX_FEATURES)}")
@@ -387,7 +447,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 
 # 測試資料
 
-corpus = [
+texts = [
     "This is the first document.",
     "This document is the second document.",
     "And this is the third one.",
@@ -395,15 +455,14 @@ corpus = [
 ]
 
 # BOW 轉換
-vectorizer = CountVectorizer()
-X = vectorizer.fit_transform(corpus)
+cv = CountVectorizer()
+X = cv.fit_transform(texts)
 # 生字表
-cc = vectorizer.get_feature_names_out()
-print(cc)
+print("特徵名稱 :\n", cv.get_feature_names_out(), sep="")
 
 print("使用表格呈現單字及對應出現的次數")
 
-df = pd.DataFrame(X.toarray(), columns=vectorizer.get_feature_names_out())
+df = pd.DataFrame(X.toarray(), columns=cv.get_feature_names_out())
 print(df)
 
 print("相似性比較")
@@ -415,15 +474,11 @@ print(cc)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.decomposition import TruncatedSVD
 from sklearn.preprocessing import Normalizer
 
-corpus = [
+texts = [
     "Python is popular in machine learning",
     "Distributed system is important in big data analysis",
     "Machine learning is theoretical foundation of data mining",
@@ -434,13 +489,14 @@ corpus = [
     "Thirty two soccer teams enter World Cup finals",
 ]
 
-vectorizer = CountVectorizer(min_df=1, stop_words="english")
-data = vectorizer.fit_transform(corpus)
-vectorizer.get_feature_names_out()
+cv = CountVectorizer(min_df=1, stop_words="english")
+data = cv.fit_transform(texts)
 
-df = pd.DataFrame(
-    data.toarray(), index=corpus, columns=vectorizer.get_feature_names_out()
-).head(10)
+print("特徵名稱 :\n", cv.get_feature_names_out(), sep="")
+
+df = pd.DataFrame(data.toarray(), index=texts, columns=cv.get_feature_names_out()).head(
+    10
+)
 print(df)
 
 print("------------------------------")  # 30個
@@ -451,7 +507,7 @@ data_n = model.fit_transform(data)
 data_n = Normalizer(copy=False).fit_transform(data_n)
 print(data_n)
 
-df = pd.DataFrame(data_n, index=corpus, columns=["component_1", "component_2"])
+df = pd.DataFrame(data_n, index=texts, columns=["component_1", "component_2"])
 print(df)
 
 xs = data_n[:, 0]
@@ -473,7 +529,7 @@ show()
 print("------------------------------")  # 30個
 
 similarity = np.asarray(np.asmatrix(data_n) * np.asmatrix(data_n).T)
-df = pd.DataFrame(similarity, index=corpus, columns=corpus).head(10)
+df = pd.DataFrame(similarity, index=texts, columns=texts).head(10)
 print(df)
 
 print(similarity)
@@ -485,22 +541,20 @@ show()
 df = pd.DataFrame(
     model.components_,
     index=["component_1", "component_2"],
-    columns=vectorizer.get_feature_names_out(),
+    columns=cv.get_feature_names_out(),
 )
 print(df.T)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
+"""
 print("假新聞資料集, 要做很久")
 
 from sklearn.feature_extraction.text import CountVectorizer
 import joblib
 
-"""
-檔案在
-https://www.kaggle.com/competitions/fake-news/data?select=train.csv
-"""
+# 檔案在
+# https://www.kaggle.com/competitions/fake-news/data?select=train.csv
 
 train_df = pd.read_csv("C:/_git/vcs/_big_files/fake-news/train.csv")
 
@@ -509,8 +563,8 @@ train_df.dropna()
 train_text = train_df["text"].astype(str)
 train_label = train_df["label"]
 
-count_vectorizer = CountVectorizer(ngram_range=(1, 2), stop_words="english")
-count_train = count_vectorizer.fit_transform(train_text)
+cv = CountVectorizer(ngram_range=(1, 2), stop_words="english")
+count_train = cv.fit_transform(train_text)
 
 # 資料分割
 X_train, X_test, Y_train, Y_test = train_test_split(
@@ -529,7 +583,7 @@ print(f"計算準確率 : {accuracy_score(Y_test, y_pred)*100:.2f}%")
 print("將 模型存檔 使用 joblib")
 joblib.dump(count_vectorizer, "tmp_count_vectorizer.pkl")
 joblib.dump(logistic_regression, "tmp_logistic_regression.pkl")
-
+"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -548,11 +602,11 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 max_features = 20000
 print("vectorizing documents ...")
 t = time.time()
-vectorizer = TfidfVectorizer(max_df=0.4, 
+tv = TfidfVectorizer(max_df=0.4, 
                              min_df=2, 
                              max_features=max_features, 
                              encoding='latin-1')
-X = vectorizer.fit_transform((d for d in docs.data))
+X = tv.fit_transform((d for d in docs.data))
 print("n_samples: %d, n_features: %d" % X.shape)
 print("number of non-zero features in sample [{0}]: {1}".format(
     docs.filenames[0], X[0].getnnz()))
@@ -586,7 +640,8 @@ print("Top terms per cluster:")
 
 order_centroids = clf.cluster_centers_.argsort()[:, ::-1]
 
-terms = vectorizer.get_feature_names_out()
+print("特徵名稱：")
+terms = tv.get_feature_names_out()
 for i in range(n_clusters):
     print("Cluster %d:" % i, end='')
     for ind in order_centroids[i, :10]:
