@@ -123,7 +123,6 @@ def make_data_frame_from_dict():
     return df
 
 
-'''
 print("------------------------------------------------------------")  # 60個
 print("1. 建立 df 的方法")
 print("------------------------------------------------------------")  # 60個
@@ -309,7 +308,7 @@ print("總重 :", df["數學"].sum())
 print("平均 :", df["數學"].mean())
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 print("刪除 df 的 欄位 或 索引 – drop()")
 
 df = make_data_frame_from_dict()  # 字典 轉 df
@@ -444,11 +443,7 @@ ufo.drop([0, 1], axis=0, inplace=True)
 # print("檢視前幾行\n", ufo.head())
 
 print("------------------------------------------------------------")  # 60個
-
-
-sys.exit()
-
-print("------------------------------")  # 30個
+print("------------------------------------------------------------")  # 60個
 
 print("重建df")
 df = make_data_frame_from_dict()  # 字典 轉 df
@@ -1177,61 +1172,6 @@ print(df2)
 
 print("------------------------------------------------------------")  # 60個
 
-datas = [
-    [1, 1, 1, 1],
-    [2, 2, 2, 2],
-    [3, 3, 3, 3],
-    [4, 4, 4, 4],
-    [5, 5, 5, 5],
-    [6, 6, 6, 6],
-]
-
-columns = ["A", "B", "C", "D"]
-dates = pd.date_range("20130101", periods=6)
-
-df = pd.DataFrame(datas, index=dates, columns=columns)
-
-print(df["A"], df.A)
-print(df[0:3], df["20130102":"20130104"])
-
-# select by label: loc
-print(df.loc["20130102"])
-print(df.loc[:, ["A", "B"]])
-print(df.loc["20130102", ["A", "B"]])
-
-""" no ix
-# mixed selection: ix
-print(df.ix[:3, ["A", "C"]])
-# Boolean indexing
-print(df[df.A > 0])
-"""
-print("------------------------------------------------------------")  # 60個
-
-datas = [
-    [1, 1, 1, 1],
-    [2, 2, 2, 2],
-    [3, 3, 3, 3],
-    [4, 4, 4, 4],
-    [5, 5, 5, 5],
-    [6, 6, 6, 6],
-]
-
-columns = ["A", "B", "C", "D"]
-dates = pd.date_range("20130101", periods=6)
-
-df = pd.DataFrame(datas, columns=columns, index=dates)
-print(df)
-
-print(df.A)
-
-df.iloc[2, 2] = 1111
-df.loc["2013-01-03", "D"] = 2222
-df["F"] = np.nan
-df["G"] = pd.Series([1, 2, 3, 4, 5, 6], index=pd.date_range("20130101", periods=6))
-print(df)
-
-print("------------------------------------------------------------")  # 60個
-
 print("建立df, 二維串列4X5 轉 df, 加上欄名與index")
 
 datas = [
@@ -1447,27 +1387,6 @@ print("月均日照時數 :", df2["月均日照時數"].sum())
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-datas = np.arange(24).reshape((6, 4))
-columns = ["A", "B", "C", "D"]
-dates = pd.date_range("20130101", periods=6)
-
-df = pd.DataFrame(datas, columns=columns, index=dates)
-
-df.iloc[0, 1] = np.nan
-df.iloc[1, 2] = np.nan
-print(df.dropna(axis=0, how="any"))  # how={'any', 'all'}
-
-VALUE = 0
-print(df.fillna(value=VALUE))  # 將df內空資料填入指定數值
-
-print("空資料 :")
-print(pd.isnull(df))
-
-print("------------------------------------------------------------")  # 60個
 
 # 處理 DataFrame 中的缺漏值
 # 用 dropna() 刪除含有 NaN ( 缺漏值 ) 的列
@@ -1641,26 +1560,6 @@ print(df.loc[["豬八戒", "沙悟淨"], ["英文", "數學"]])
 print(df.loc[:, ["英文", "數學"]])
 
 print(df.loc["孫悟空":"豬八戒", "國文":"英文"])
-
-print("------------------------------------------------------------")  # 60個
-
-dates_d = pd.date_range("20170109", periods=5, freq="D")
-print(dates_d)
-df = pd.read_csv("_new/2330.TW.csv")
-df["Date"] = dates_d
-print(df)
-
-print("------------------------------------------------------------")  # 60個
-
-df = pd.read_csv("_new/2330.TW.csv")
-print(df["Volume"].pct_change())
-
-print("------------------------------------------------------------")  # 60個
-
-df = pd.read_csv("_new/2330.TW.csv")
-print(df["Close"].unique())
-print(df["Close"].nunique())
-print(df["Close"].value_counts())
 
 print("------------------------------------------------------------")  # 60個
 

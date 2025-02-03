@@ -2,11 +2,6 @@
 numpy的使用
 pandas的使用
 
-"""
-
-
-"""
-numpy的使用
 
 numpy: 數值計算的標準套件
 
@@ -15,6 +10,7 @@ numpy: 數值計算的標準套件
    1.2 自動產生陣列
 
 arr1 = np.array([1, 2, 3, 4, 5])
+
 """
 print("------------------------------")  # 30個
 
@@ -430,23 +426,44 @@ nums + np.arange(5)  # add element-wise
 np.maximum(nums, np.array([1, -2, 3, -4, 5]))  # compare element-wise
 
 # math and stats
-rnd = np.random.randn(4, 2)  # random normals in 4x2 array
-rnd.mean()
-rnd.std()
-rnd.argmin()  # index of minimum element
-rnd.sum()
-rnd.sum(axis=0)  # sum of columns
-rnd.sum(axis=1)  # sum of rows
+A = np.random.randn(4, 2)  # random normals in 4x2 array
+print(A)
+cc = A.mean()
+print(cc)
+cc = A.std()
+print(cc)
+
+cc = A.argmin()  # index of minimum element
+print(cc)
+
+cc = A.sum()
+print(cc)
+
+cc = A.sum(axis=0)  # sum of columns
+print(cc)
+
+cc = A.sum(axis=1)  # sum of rows
+print(cc)
 
 # methods for boolean arrays
-(rnd > 0).sum()  # counts number of positive values
-(rnd > 0).any()  # checks if any value is True
-(rnd > 0).all()  # checks if all values are True
+cc = (A > 0).sum()  # counts number of positive values
+print(cc)
+
+cc = (A > 0).any()  # checks if any value is True
+print(cc)
+
+cc = (A > 0).all()  # checks if all values are True
+print(cc)
 
 # random numbers
-np.random.rand(2, 3)  # 2 x 3 matrix in [0, 1]
-np.random.randn(10)  # random normals (mean 0, sd 1)
-np.random.randint(0, 2, 10)  # 10 randomly picked 0 or 1
+cc = np.random.rand(2, 3)  # 2 x 3 matrix in [0, 1]
+print(cc)
+
+cc = np.random.randn(10)  # random normals (mean 0, sd 1)
+print(cc)
+
+cc = np.random.randint(0, 2, 10)  # 10 randomly picked 0 or 1
+print(cc)
 
 ##############################################################################
 # Broadcasting
@@ -508,38 +525,39 @@ a - a.mean(axis=0)
 # ---------
 # Given the array:
 
-X = np.random.randn(4, 2)  # random normals in 4x2 array
+A = np.random.randn(4, 2)  # random normals in 4x2 array
+print(A)
 
 ##############################################################################
 # - For each column find the row index of the minimum value.
-# - Write a function ``standardize(X)`` that return an array whose columns are centered and scaled (by std-dev).
+# - Write a function ``standardize(A)`` that return an array whose columns are centered and scaled (by std-dev).
 
 print("------------------------------------------------------------")  # 60個
 
-X = np.random.randn(4, 2)
-print(X)
+A = np.random.randn(4, 2)
+print(A)
 
 """
 For each column find the row indices of the minimiun value.
 """
-[np.argmin(X[:, j]) for j in range(X.shape[1])]
+[np.argmin(A[:, j]) for j in range(A.shape[1])]
 
-np.argmin(X, axis=0)
+np.argmin(A, axis=0)
 
 """
-Write a function ``scale(X)`` that return an array whose columns are centered and scaled (by std-dev).
+Write a function ``scale(A)`` that return an array whose columns are centered and scaled (by std-dev).
 """
 
 
-def scale(X):
-    return (X - X.mean(axis=0)) / X.std(axis=0)
+def scale(A):
+    return (A - A.mean(axis=0)) / A.std(axis=0)
 
 
-X = np.random.randn(5, 3)
-Xs = scale(X)
+A = np.random.randn(5, 3)
+As = scale(A)
 
-Xs.mean(axis=0)
-Xs.std(axis=0)
+As.mean(axis=0)
+As.std(axis=0)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -698,24 +716,16 @@ ax = sns.pointplot(x="timepoint", y="signal",
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-
 
 
 print("------------------------------------------------------------")  # 60個
 
 
+print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------------------------------------")  # 60個
