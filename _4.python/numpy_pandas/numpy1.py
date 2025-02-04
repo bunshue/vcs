@@ -230,12 +230,8 @@ print("和 :", np.sum(cc))
 
 cc = np.array([[-1, 2, 3], [13, 14, 15]])
 print(cc)
-print(np.sum(cc))  # 輸出46   全部累加
-print(np.sum(cc, axis=0))  # 輸出"[12 16 18]" =(-1+13),(2+14),(3+15)
-print(np.sum(cc, axis=1))  # 輸出"[ 4 42]" =(-1+2+3),(13+14+15)
 print(np.max(cc))  # 最大值 輸出15
 print(np.min(cc))  # 最小值 輸出-1
-print(np.cumsum(cc))  # 累加[-1  1  4 17 31 46]
 # 加權平均值
 print(np.average(cc))  # 輸出7.666
 # 平均 mean=sum(cc)/len(cc)
@@ -250,12 +246,56 @@ print(cc.T)  # 輸出 [[-1 13] [ 2 14] [ 3 15]]
 
 print("------------------------------------------------------------")  # 60個
 
+print("比較 np.sum() 和 np.cumsum()")
+
+x = np.arange(15).reshape(3, 5)
+
+print("原陣列\n", x, sep="")
+
+y = np.sum(x)
+print("陣列全部元素和 :", y)
+
+y = np.sum(x, axis=0)  # 对纵轴进行操作, 第0軸 直行
+print("np.sum() 對縱軸進行操作axis=0 :\n", y, sep="")
+
+y = np.sum(x, axis=1)  # 对横轴进行操作, 第1軸 橫列
+print("np.sum() 對橫軸進行操作axis=1 :\n", y, sep="")
+
+y = np.cumsum(x)
+print("np.cumsum() 陣列全部元素一一累加 :\n", y, sep="")
+
+y = np.cumsum(x, axis=0)  # 第0軸 直行
+print("np.cumsum(axis=0) 對縱軸進行操作, 按列一一累加, axis=0:\n", y, sep="")
+
+y = np.cumsum(x, axis=1)  # 第1軸 橫列
+print("np.cumsum(axis=1) 對橫軸進行操作, 按行一一累加, axis=1:\n", y, sep="")
+
+print("------------------------------")  # 30個
+
+# 多軸
+x = np.arange(30).reshape(3, 5, 2)
+
+print("原陣列\n", x, sep="")
+
+y = np.sum(x)
+print("陣列全部元素和 :", y)
+
+y = np.sum(x, axis=0)  # 第0軸和
+print("第0軸和 :\n", y, sep="")
+
+y = np.sum(x, axis=1)  # 第1軸和
+print("第1軸和 :\n", y, sep="")
+
+y = np.sum(x, axis=2)  # 第2軸和
+print("第2軸和 :\n", y, sep="")
+
+print("------------------------------------------------------------")  # 60個
+
 my_array = np.arange(101)  # 0 1 2 ... 100
 
 sum_my_array = sum(my_array)
 print("和")
 print(sum_my_array)
-
 
 print("串列 轉 numpy陣列")
 x = np.array([8, 9, 10, 7, 8, 9, 5, 7, 9, 8])
@@ -265,7 +305,6 @@ x_mean = np.mean(x)
 y_mean = np.mean(y)
 
 print("------------------------------------------------------------")  # 60個
-
 
 cc = np.array(range(10))
 cc = cc.reshape(5, 2)
@@ -279,14 +318,20 @@ print(cc.nbytes)
 cc = np.arange(1, 10).reshape(3, 3)
 print("陣列的內容：\n", cc)
 print("1.最小值與最大值：\n", np.min(cc), np.max(cc))
-print("2.每一直行最小值與最大值：\n", np.min(cc, axis=0), np.max(cc, axis=0))
-print("3.每一橫列最小值與最大值：\n", np.min(cc, axis=1), np.max(cc, axis=1))
+print("2.每一直行最小值與最大值：\n", np.min(cc, axis=0), np.max(cc, axis=0))  # 第0軸 直行
+print("3.每一橫列最小值與最大值：\n", np.min(cc, axis=1), np.max(cc, axis=1))  # 第1軸 橫列
 print("4.加總、乘積及平均值：\n", np.sum(cc), np.prod(cc), np.mean(cc))
 print(
-    "5.每一直行加總、乘積與平均值：\n", np.sum(cc, axis=0), np.prod(cc, axis=0), np.mean(cc, axis=0)
+    "5.每一直行加總、乘積與平均值：\n",
+    np.sum(cc, axis=0),
+    np.prod(cc, axis=0),
+    np.mean(cc, axis=0),  # 第0軸 直行
 )
 print(
-    "6.每一橫列加總、乘積與平均值：\n", np.sum(cc, axis=1), np.prod(cc, axis=1), np.mean(cc, axis=1)
+    "6.每一橫列加總、乘積與平均值：\n",
+    np.sum(cc, axis=1),
+    np.prod(cc, axis=1),
+    np.mean(cc, axis=1),  # 第1軸 橫列
 )
 
 print("------------------------------------------------------------")  # 60個
@@ -549,18 +594,17 @@ median(a)計算陣列a中元素的中位數(中值)
 print("numpy 統計函數")
 cc = np.arange(15).reshape(3, 5)
 print(cc)
-print(np.sum)
 print(np.sum(cc))
 print(np.mean(cc))
-print(np.mean(cc, axis=0))
-print(np.mean(cc, axis=1))
+print(np.mean(cc, axis=0))  # 第0軸 直行
+print(np.mean(cc, axis=1))  # 第1軸 橫列
 print(np.average(cc, axis=0, weights=[11, 6, 2]))
 print(np.std(cc))
 print(np.var(cc))
-print(np.std(cc, axis=1))
-print(np.std(cc, axis=0))
-print(np.std(cc, axis=1))
-print(np.std(cc, axis=0))
+print(np.std(cc, axis=0))  # 第0軸 直行
+print(np.std(cc, axis=1))  # 第1軸 橫列
+print(np.std(cc, axis=0))  # 第0軸 直行
+print(np.std(cc, axis=1))  # 第1軸 橫列
 print(np.argmax(cc))
 print(np.unravel_index(np.argmax(cc), cc.shape))
 print(cc)
@@ -657,10 +701,10 @@ print("expand_dims 它用於擴展數組的維度。")
 # np.expand_dims(a, axis)
 print("串列 轉 numpy陣列")
 list1d = np.array([8, 14, 1, 8, 11, 4, 9, 4, 1, 13, 13, 11])
-cc = np.expand_dims(cc, axis=0)
+cc = np.expand_dims(cc, axis=0)  # 第0軸 直行
 print(cc)
 
-cc = np.expand_dims(cc, axis=1)
+cc = np.expand_dims(cc, axis=1)  # 第1軸 橫列
 print(cc)
 
 print("squeeze 通過移除一個單一維度來降低數組的維度。")
@@ -877,13 +921,16 @@ print("標準偏差和方差 std和var是NumPy的兩個函數，用於計算沿�
 print("二維串列 轉 numpy陣列")
 a = np.array([[2, 4, 6], [4, 8, 12]])
 
-na = np.std(a, axis=1)
+na = np.std(a, axis=0)  # 第0軸 直行
 print(na)
-na = np.std(a, axis=0)  ## Column Wise
+
+na = np.std(a, axis=1)  # 第1軸 橫列
 print(na)
-na = np.var(a, axis=1)
+
+na = np.var(a, axis=0)  # 第0軸 直行
 print(na)
-na = np.var(a, axis=0)
+
+na = np.var(a, axis=1)  # 第1軸 橫列
 print(na)
 
 # 數組打印
@@ -1181,13 +1228,13 @@ print(cc[::2, ::3])
 # np.argmin()求最小值對應的索引
 # np.argmax()求最大值對應的索引
 
-print("每個直行的最小值:", cc.min(axis=0))
-print("每個直行的最小值對應的索引:", cc.argmin(axis=0))
-print("每個直行的標準差:", cc.std(axis=0))
+print("每個直行的最小值:", cc.min(axis=0))  # 第0軸 直行
+print("每個直行的最小值對應的索引:", cc.argmin(axis=0))  # 第0軸 直行
+print("每個直行的標準差:", cc.std(axis=0))  # 第0軸 直行
 
 print("全部平均:", cc.mean())
-print("直行平均:", cc.mean(axis=0))
-print("橫列平均:", cc.mean(axis=1))
+print("直行平均:", cc.mean(axis=0))  # 第0軸 直行
+print("橫列平均:", cc.mean(axis=1))  # 第1軸 橫列
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1235,20 +1282,6 @@ print(np.linalg.eig(cc))
 
 evals, evecs = np.linalg.eig(cc)
 print("特征值:", evals, "\n特征向量:", evecs)
-
-print("------------------------------")  # 30個
-
-cc = np.mat(np.mat([[1, 2, 3], [4, 5, 6]]))
-
-print(cc.sum())
-print(cc.sum(axis=0))
-print(cc.sum(axis=1))
-
-# axis = 0 : 第0維 直行
-# axis = 1 : 第1維 橫列
-print("全部和:", cc.sum())
-print("直行加:", cc.sum(axis=0))
-print("橫列加:", cc.sum(axis=1))
 
 print("------------------------------")  # 30個
 
@@ -1457,7 +1490,7 @@ v12 = vectormat[0] - vectormat[1]
 print(np.sqrt(v12 * v12.T))
 
 # norm
-varmat = np.std(vectormat.T, axis=0)
+varmat = np.std(vectormat.T, axis=0)  # 第0軸 直行
 normvmat = (vectormat - np.mean(vectormat)) / varmat.T
 
 # norm
@@ -1604,11 +1637,11 @@ cc = np.concatenate((a, b))
 print(cc)
 
 print("陣列直向合併, axis=0")
-cc = np.concatenate((a, b), axis=0)
+cc = np.concatenate((a, b), axis=0)  # 第0軸 直行
 print(cc)
 
 print("陣列橫向合併, axis=1")
-cc = np.concatenate((a, b), axis=1)
+cc = np.concatenate((a, b), axis=1)  # 第1軸 橫列
 print(cc)
 
 print("陣列橫向合併, axis=1, 多個")
@@ -1631,8 +1664,8 @@ print("------------------------------------------------------------")  # 60個
 a = np.array([[1, 2, 3, 4, 5, 6, 7, 8]])
 b = a.reshape(2, 4)
 print(b.shape)
-c = np.expand_dims(b, axis=0)
-d = np.expand_dims(b, axis=1)
+c = np.expand_dims(b, axis=0)  # 第0軸 直行
+d = np.expand_dims(b, axis=1)  # 第1軸 橫列
 print(c.shape, d.shape)
 e = np.squeeze(c)
 f = np.squeeze(d)
@@ -1754,33 +1787,6 @@ print("差集:", np.setdiff1d(new_A1, A2))
 
 print("------------------------------------------------------------")  # 60個
 
-# 陣列的軸 (axis)
-
-cc = np.array([[1, 2, 3, 4], [5, 6, 7, 8]])
-
-print("shape")
-print(cc.shape)
-print("sum()")
-print(cc.sum())
-print("sum(axis=0) 第0軸和")
-print(cc.sum(axis=0))
-print("sum(axis=1) 第1軸和")
-print(cc.sum(axis=1))
-
-cc = np.array([[[0, 1, 2], [3, 4, 5]], [[6, 7, 8], [9, 10, 11]]])
-print("shape")
-print(cc.shape)
-print("sum()")
-print(cc.sum())
-print("sum(axis=0) 第0軸和")
-print(cc.sum(axis=0))
-print("sum(axis=1) 第1軸和")
-print(cc.sum(axis=1))
-print("sum(axis=2) 第2軸和")
-print(cc.sum(axis=2))
-
-print("------------------------------------------------------------")  # 60個
-
 # 陣列的 shape 與 reshape
 
 cc = np.array([[1, 2, 3, 4], [5, 6, 7, 8]])
@@ -1831,7 +1837,7 @@ print(np.sort(cc))
 
 print("----------對 cc 以軸 0 方向排序---------")
 
-cc.sort(axis=0)
+cc.sort(axis=0)  # 第0軸 直行
 
 print(cc)
 
@@ -2000,21 +2006,6 @@ A.reshape(10,5)
 拉平 ravel
 A.ravel()
 
-其實掌握矩陣, 或很像矩陣的陣列都是「先列後行」就可以!
-
-A = np.arange(10).reshape(2,5)
-array([[0, 1, 2, 3, 4],
-,       [5, 6, 7, 8, 9]])
-
-【重點】 一列一列算下來是 axis=0	直行總和
-A.sum(axis=0)
-
-【重點】 一行一行算過去是 axis=1	橫行總和
-A.sum(axis=1)
-
-【提示】當然也有可能全部算	全部總和
-A.sum()
-  
 print("------------------------------------------------------------")  # 60個
 
 """
@@ -2022,7 +2013,6 @@ print("------------------------------------------------------------")  # 60個
 
 """
 2. 統計平均
-numpy.sum(a, axis=None, dtype=None, out=None, keepdims=False)：
 numpy.mean(a, axis=None, dtype=None, out=None, keepdims=False)：
 numpy.std(a, axis=None, dtype=None, out=None, keepdims=False)：
 在array A，取其總和(sum)、平均(mean)或標準差(std)，
@@ -2032,13 +2022,11 @@ dtype可以限制其輸出型態，常見有np.float32,np.unit8，
 """
 
 A = [[1, 2, 3, 4, 5, 6], [7, 8, 9, 10, 11, 12], [13, 14, 15, 16, 17, 18]]
-print(np.sum(A))  # output: 171
-print(np.mean(A, axis=0))
+print(np.mean(A, axis=0))  # 第0軸 直行
 # 如果先將A的型態透過np.array(A)進行變成numpy的一個物件的話，下面的操作也是可以接受的
 A = np.array(A)
-print(A.sum(axis=0))  # output: [21 24 27 30 33 36]
-print(A.mean(axis=1))  # output:[ 3.5  9.5 15.5]
-print(A.std(axis=1))  # output:[1.70782513, 1.70782513, 1.70782513]
+print(A.mean(axis=1))  # 第1軸 橫列
+print(A.std(axis=1))  # 第1軸 橫列
 
 print("------------------------------------------------------------")  # 60個
 
@@ -2346,11 +2334,15 @@ print("------------------------------------------------------------")  # 60個
 a = np.arange(1, 10).reshape(3, 3)
 print("陣列的內容：\n", a)
 print("1.最小值與最大值：\n", np.min(a), np.max(a))
-print("2.每一直行最小值與最大值：\n", np.min(a, axis=0), np.max(a, axis=0))
-print("3.每一橫列最小值與最大值：\n", np.min(a, axis=1), np.max(a, axis=1))
+print("2.每一直行最小值與最大值：\n", np.min(a, axis=0), np.max(a, axis=0))  # 第0軸 直行
+print("3.每一橫列最小值與最大值：\n", np.min(a, axis=1), np.max(a, axis=1))  # 第1軸 橫列
 print("4.加總、乘積及平均值：\n", np.sum(a), np.prod(a), np.mean(a))
-print("5.每一直行加總、乘積與平均值：\n", np.sum(a, axis=0), np.prod(a, axis=0), np.mean(a, axis=0))
-print("6.每一橫列加總、乘積與平均值：\n", np.sum(a, axis=1), np.prod(a, axis=1), np.mean(a, axis=1))
+print(
+    "5.每一直行加總、乘積與平均值：\n", np.sum(a, axis=0), np.prod(a, axis=0), np.mean(a, axis=0)
+)  # 第0軸 直行
+print(
+    "6.每一橫列加總、乘積與平均值：\n", np.sum(a, axis=1), np.prod(a, axis=1), np.mean(a, axis=1)
+)  # 第1軸 橫列
 
 print("------------------------------------------------------------")  # 60個
 
@@ -2435,10 +2427,12 @@ print("------------------------------------------------------------")  # 60個
 a = np.random.randint(0, 10, (3, 5))
 print("原陣列內容：")
 print(a)
+
 print("將每一直行進行排序：")
-print(np.sort(a, axis=0))
+print(np.sort(a, axis=0))  # 第0軸 直行
+
 print("將每一橫列進行排序：")
-print(np.sort(a, axis=1))
+print(np.sort(a, axis=1))  # 第1軸 橫列
 
 print("------------------------------------------------------------")  # 60個
 
@@ -2931,8 +2925,8 @@ a = np.array([[1, 2, 3, 4, 5, 6, 7, 8]])
 b = a.reshape(2, 4)
 print(b.shape)
 print("---------------------------")
-c = np.expand_dims(b, axis=0)
-d = np.expand_dims(b, axis=1)
+c = np.expand_dims(b, axis=0)  # 第0軸 直行
+d = np.expand_dims(b, axis=1)  # 第1軸 橫列
 print(c.shape, d.shape)
 print("---------------------------")
 e = np.squeeze(c)
