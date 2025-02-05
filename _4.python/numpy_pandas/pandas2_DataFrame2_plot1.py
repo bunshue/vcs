@@ -73,6 +73,11 @@ df["第1次平時考"].plot(kind="hist", color="blue", edgecolor="orange")
 """
 print("------------------------------------------------------------")  # 60個
 
+N = 500  # 資料個數
+num_bins = 50  # 直方圖顯示時的束數
+
+print("------------------------------------------------------------")  # 60個
+
 # 共同
 import os
 import sys
@@ -121,29 +126,30 @@ df = make_data_frame_from_dict()  # 字典 轉 df
 print(df)
 
 index = ["唐三藏", "孫悟空", "豬八戒", "沙悟淨"]
-df.index = index
-
-print("長條圖")
-df.plot(kind="bar", title="長條圖", fontsize=12, rot=-15)
-show()
+df.index = index  #  設定df的index
 
 print("線圖 為每個欄位畫一條線")
-df.plot(title="線圖")  # 無參數, 預設就是 line
+df.plot(title="線圖 全部欄位")  # 無參數, 預設就是 line
 show()
 
 print("線圖 只看一欄位")
-df["英文"].plot()  # 無參數, 預設就是 line
+df["英文"].plot(title="線圖 只看一欄位")  # 無參數, 預設就是 line
 show()
+
+print("長條圖")
+df.plot(kind="bar", title="長條圖 全部欄位", fontsize=12, rot=-15)
+show()
+
 
 # df.plot.hist(y="lifespan", rot=45)  # rot表示xstick旋轉的角度
 
 print("線圖 看一些欄位")
-df[["英文", "數學"]].plot()  # 無參數, 預設就是 line
+df[["英文", "數學"]].plot(title="線圖 看一些欄位")  # 無參數, 預設就是 line
 show()
 
 # 取出2欄資料並畫出
 df2 = df[["英文", "數學"]]
-df2.plot()  # 無參數, 預設就是 line
+df2.plot(title="線圖 新df一些欄位")  # 無參數, 預設就是 line
 show()
 
 print("線圖 看一些欄位")
@@ -151,26 +157,28 @@ print("建立空的df, 再加入資料至df")
 df2 = pd.DataFrame()
 df2["英文"] = df["英文"]
 df2["數學"] = df["數學"]
-df2.index = df.index
+df2.index = df.index  #  設定df的index
 
-df2.plot()  # 無參數, 預設就是 line
+df2.plot(title="線圖 新df全部欄位")  # 無參數, 預設就是 line
+
 show()
 
 print("------------------------------------------------------------")  # 60個
 
 print("直方圖")
 
-datas = np.random.randn(1000, 3)
+datas = np.random.randn(N, 3)
 
 df = pd.DataFrame(datas, columns=["A", "B", "C"])
-df["A"] = df["A"] - 3
-df["C"] = df["C"] + 3
+df["A"] = df["A"] - 2
+df["C"] = df["C"] + 2
 
-# df.plot.hist(bins=30, alpha=0.3, title="直方圖") # same
-df.plot(kind="hist", bins=30, alpha=0.3, title="直方圖")
+# df.plot.hist(bins=num_bins, alpha=0.3, title="直方圖") # same
+df.plot(kind="hist", bins=num_bins, alpha=0.3, title="直方圖")
 
-# ax.set_xlabel("Xlabel")
-# ax.set_title("直方圖")
+plt.xlabel("X")
+plt.ylabel("Y")
+plt.title("直方圖")
 
 show()
 
@@ -179,22 +187,29 @@ print("------------------------------------------------------------")  # 60個
 print("核密度(KDE)圖, 需要 scipy")
 
 N = 500
-mu = 85
-sigma = 20
+
+mu, sigma = 45, 20
 datas1 = np.random.normal(mu, sigma, N)
 
-mu = 65
-sigma = 20
+mu, sigma = 65, 20
 datas2 = np.random.normal(mu, sigma, N)
 
-df = pd.DataFrame({"x": datas1, "y": datas2})
-df.plot.kde()
+mu, sigma = 85, 20
+datas3 = np.random.normal(mu, sigma, N)
+
+df = pd.DataFrame({"A": datas1, "B": datas2, "C": datas3})
+
+# 一般
+# df.plot(kind="hist", bins=num_bins, alpha=0.3, title="直方圖")
+
+# 核密度
+df.plot.kde(title="核密度")
 
 show()
 
 print("------------------------------------------------------------")  # 60個
 
-print("箱圖")
+print("箱形圖")
 
 datas = np.random.randn(10, 4)
 columns = ["AAA", "BBB", "CCC", "DDD"]
@@ -203,23 +218,25 @@ df = pd.DataFrame(datas, columns=columns)
 
 df.boxplot()
 
-plt.title("箱圖")
+plt.title("箱形圖")
 show()
 
-print("------------------------------------------------------------")  # 60個
-
-print("箱圖")
+print("------------------------------")  # 30個
 
 df = pd.read_csv("data/iris.csv")
 
 df.boxplot(column="sepal_length", by="target", figsize=(8, 6))
 
-plt.title("箱圖")
+plt.title("箱形圖")
 show()
+
+print("------------------------------")  # 30個
+
+sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 
-
+# 字典
 dists = {
     "區名": [
         "中正區",
@@ -279,34 +296,66 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
+print("派圖 長條圖 橫調圖")
+"""
+年度銷售金額.csv
+AREA,1st,2nd,3rd,4th
+East,4522,2120,1200,3800
+West,3101,1846,2022,1900
+South,2111,2897,3200,2139
+North,4213,987,500,1568
+"""
+
 df = pd.read_csv("data/年度銷售金額.csv")
-df.index = df["AREA"]
-df = df.drop("AREA", axis=1)
+print(df)
+
+df.index = df["AREA"]  #  設定df的index
+print(df)
+
+df = df.drop("AREA", axis=1)  # 刪除 AREA 欄，直欄 axis=1 ??
 print(df)
 
 df["1st"].plot(kind="pie", autopct="%.2f%%")
-plt.title("第一季")
+plt.title("派圖 第一季")
 show()
 
 df.plot(kind="bar", rot=0)  # 旋轉X軸標籤角度
-plt.title("年度 bar圖")
+plt.title("長條圖 年度")
 show()
 
 df.plot(kind="barh")
-plt.title("年度 barh圖")
+plt.title("橫調圖 年度")
 show()
 
 print("------------------------------------------------------------")  # 60個
 
-# 折線圖
+print("折線圖")
+"""
+觀光人數統計.csv
+Month, Green Island, Guguan, National Museum
+1,     5872,         151397, 40988
+2,     10210,        151951, 82165
+3,     13213,        127943, 50683
+4,     42587,        147752, 83679
+5,     39920,        108086, 66842
+6,     43395,        112835, 72504
+7,     62794,        121329, 115817
+8,     51393,        103038, 116285
+9,     26671,        134118, 67488
+10,    21745,        129351, 66921
+11,    11525,        144019, 50670
+12,    10294,        205617, 64738
+"""
 
 df = pd.read_csv("data/觀光人數統計.csv")
-df.index = df["Month"]  # 自定列索引為Month內容
+print(df)
+
+df.index = df["Month"]  #  設定df的index  # 自定列索引為Month內容
 df = df.drop("Month", axis=1)  # 刪除原本的月份行資料
 print(df)
 
 # 折線圖 + 參數
-df.plot(linewidth=2, linestyle=":", title="Number of visitors")
+df.plot(linewidth=2, linestyle=":", title="觀光客人數")
 show()
 
 # 三月 資料
@@ -314,11 +363,13 @@ df_T = df.T
 print(df_T.head())
 
 df3 = df_T[3]
-df3.plot()  # 無參數, 預設就是 line
+df3.plot(title="觀光客人數 三月")  # 無參數, 預設就是 line
 
 show()
 
 print("------------------------------------------------------------")  # 60個
+
+print("折線圖 派圖")
 
 df = pd.DataFrame(
     [[250, 320, 300, 312, 280], [280, 300, 280, 290, 310], [220, 280, 250, 305, 250]],
@@ -402,11 +453,23 @@ print(df)
 print(df["name"])
 print(df["weight"])
 
-df.index = df["name"]
+df.index = df["name"]  #  設定df的index
 df["weight"].plot(kind="line", title="線圖", fontsize=12)
 df["weight"].plot(kind="bar", title="長條圖", fontsize=12)
 
 # df["weight"].plot(kind="pie", autopct="%.0f%%", title = '派圖', fontsize = 12)
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+
+N = 100
+datas = np.random.randn(N, 4)
+datas[0, :] = 0
+
+df = pd.DataFrame(datas, columns=list("ABCD"))
+df = df.cumsum()
+df.plot(title="線圖")  # 無參數, 預設就是 line
 
 show()
 
@@ -451,6 +514,18 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
+# print('派圖 長條圖 橫調圖')
+"""
+tips.csv
+total_bill,tip,sex,smoker,day,time,size
+16.99,1.01,Female,No,Sun,Dinner,2
+10.34,1.66,Male,No,Sun,Dinner,3
+21.01,3.5,Male,No,Sun,Dinner,3
+23.68,3.31,Male,No,Sun,Dinner,2
+24.59,3.61,Female,No,Sun,Dinner,4
+25.29,4.71,Male,No,Sun,Dinner,4
+"""
+
 tips = pd.read_csv("data/tips.csv")
 cc = tips[:5]
 print(cc)
@@ -481,7 +556,18 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
-# 直方圖(histogram)和密度圖
+print("直方圖(histogram)和密度圖")
+
+"""
+tips.csv
+total_bill,tip,sex,smoker,day,time,size
+16.99,1.01,Female,No,Sun,Dinner,2
+10.34,1.66,Male,No,Sun,Dinner,3
+21.01,3.5,Male,No,Sun,Dinner,3
+23.68,3.31,Male,No,Sun,Dinner,2
+24.59,3.61,Female,No,Sun,Dinner,4
+25.29,4.71,Male,No,Sun,Dinner,4
+"""
 
 tips = pd.read_csv("data/tips.csv")
 cc = tips[:5]
@@ -505,7 +591,18 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
-# 散佈圖(scatter plot)
+print("散佈圖(scatter plot)")
+
+"""
+macrodata.csv
+year,quarter,realgdp,realcons,realinv,realgovt,realdpi,cpi,m1,tbilrate,unemp,pop,infl,realint
+1959.0,1.0,2710.349,1707.4,286.898,470.045,1886.9,28.98,139.7,2.82,5.8,177.146,0.0,0.0
+1959.0,2.0,2778.801,1733.7,310.859,481.301,1919.7,29.15,141.7,3.08,5.1,177.83,2.34,0.74
+1959.0,3.0,2775.488,1751.8,289.226,491.26,1916.4,29.35,140.5,3.82,5.3,178.657,2.74,1.09
+1959.0,4.0,2785.204,1753.7,299.356,484.052,1931.3,29.37,140.0,4.33,5.6,179.386,0.27,4.06
+1960.0,1.0,2847.699,1770.5,331.722,462.199,1955.5,29.54,139.6,3.5,5.2,180.007,2.31,1.19
+1960.0,2.0,2834.39,1792.9,298.152,460.4,1966.1,29.55,140.2,2.68,5.2,180.671,0.14,2.55
+"""
 
 macro = pd.read_csv("data/macrodata.csv")
 cc = macro[:5]
@@ -549,6 +646,16 @@ _ = scatter_matrix(df, color="k", alpha=0.3, figsize=(8, 8))
 show()
 
 print("------------------------------------------------------------")  # 60個
+
+# print('散佈圖(scatter plot)')
+
+"""
+drinks.csv
+Type,Sales
+MikeTea,91
+SoyMilk,65
+BlackTea,70
+"""
 
 df = pd.read_csv("_new/drinks.csv")
 print(df)
@@ -666,11 +773,8 @@ print(cc)
 # 如果屬性是Object，如何改成數值屬性
 # df["屬於Object的欄位"] = pd.to_numeric(df.屬於Object的欄位, errors='coerce')
 
-"""
-#相關係數
-cc = df.corr()
-print(cc)
-"""
+# print("相關係數矩陣 :", df.corr())
+
 print("折線圖")
 
 df.plot(x="監測月份", y="PM25", title="監測月份與PM2.5的關係")
@@ -747,17 +851,25 @@ sns.histplot(tips["total_bill"], kde=False, bins=30)
 show()
 
 sns.jointplot(x="total_bill", y="tip", data=tips, kind="scatter")
-sns.jointplot(x="total_bill", y="tip", data=tips, kind="hex")
-sns.jointplot(x="total_bill", y="tip", data=tips, kind="reg")
-
-sns.pairplot(tips)
-
-sns.pairplot(tips, hue="sex", palette="coolwarm")
-
-sns.kdeplot(tips["total_bill"])
-sns.rugplot(tips["tip"])
 show()
 
+sns.jointplot(x="total_bill", y="tip", data=tips, kind="hex")
+show()
+
+sns.jointplot(x="total_bill", y="tip", data=tips, kind="reg")
+show()
+
+sns.pairplot(tips)
+show()
+
+sns.pairplot(tips, hue="sex", palette="coolwarm")
+show()
+
+sns.kdeplot(tips["total_bill"])
+show()
+
+sns.rugplot(tips["tip"])
+show()
 
 sns.barplot(x="sex", y="total_bill", data=tips, estimator=np.std)
 show()
@@ -775,19 +887,26 @@ sns.stripplot(x="day", y="total_bill", data=tips, jitter=True, hue="sex", dodge=
 show()
 
 sns.violinplot(x="day", y="total_bill", data=tips)
-sns.swarmplot(x="day", y="total_bill", data=tips, color="black")
+show()
 
+sns.swarmplot(x="day", y="total_bill", data=tips, color="black")
 show()
 
 # catplot兩變量關係圖
 sns.catplot(x="day", y="total_bill", data=tips, kind="bar")
 
-tc = tips.corr()
+print(tips.shape)
+print(tips)
+
+tips2 = pd.concat([tips["total_bill"], tips["tip"]], axis=1)
+
+print(tips2.shape)
+print(tips2)
+
+tc = tips2.corr()
 
 sns.heatmap(tc, annot=True, cmap="coolwarm")
-
 show()
-
 
 """ NG
 fp=flights.pivot_table(index='month',columns='year',values='passengers')
@@ -802,6 +921,9 @@ sns.lmplot(x='total_bill',y='tip',data=tips,hue='sex',markers=['o','v'],scatter_
 
 sns.lmplot(x='total_bill',y='tip',data=tips,col='sex',row='time',aspect=1,size=4)
 """
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 iris = sns.load_dataset("iris")
 cc = iris.head()
 print(cc)
@@ -809,110 +931,93 @@ print(cc)
 cc = iris["species"].unique()
 print(cc)
 
-# array(['setosa', 'versicolor', 'virginica'], dtype=object)
+g = sns.PairGrid(iris)  # 分成4X4
 
-g = sns.PairGrid(iris)
-g.map_diag(sns.distplot)
-g.map_upper(plt.scatter)
-g.map_lower(sns.kdeplot)
+g.map_diag(sns.histplot)  # 對角線
 
-g = sns.FacetGrid(data=tips, col="time", row="smoker")
+g.map_upper(plt.scatter)  # 右上三角形
 
-g.map(plt.scatter, "total_bill", "tip")
-
-sns.set_style("ticks")
-sns.countplot(x="sex", data=tips)
+g.map_lower(sns.kdeplot)  # 左下三角形
 
 show()
 
-sns.despine(left=True, bottom=True)
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
+tips = sns.load_dataset("tips")
+
+g = sns.FacetGrid(data=tips, col="time", row="smoker")  # 分成2X2
+g.map(plt.scatter, "total_bill", "tip")
+show()
+
+sns.set_style("ticks")
 sns.countplot(x="sex", data=tips)
+show()
 
+sns.despine(left=True, bottom=True)
+sns.countplot(x="sex", data=tips)
 show()
 
 sns.set_context("paper")
 sns.countplot(x="sex", data=tips)
-
 show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# Make the graphs a bit prettier, and bigger
-plt.style.use("ggplot")
-plt.rcParams["figure.figsize"] = (15, 5)
-plt.rcParams["font.family"] = "sans-serif"
-
-# This is necessary to show lots of columns in pandas 0.12.
-# Not necessary in pandas 0.13.
-pd.set_option("display.width", 5000)
-pd.set_option("display.max_columns", 60)
-
-print("------------------------------------------------------------")  # 60個
-
-"""
-# Make the graphs a bit prettier, and bigger
-plt.style.use('ggplot')
-
-# This is necessary to show lots of columns in pandas 0.12. 
-# Not necessary in pandas 0.13.
-pd.set_option('display.width', 5000) 
-pd.set_option('display.max_columns', 60)
-
-plt.rcParams['figure.figsize'] = (15, 5)
+plt.figure(figsize=(15, 5))
 
 # because of mixed types we specify dtype to prevent any errors
-csv_filename = 'C:/_git/vcs/_big_files/311-service-requests.csv'
-complaints = pd.read_csv(csv_filename, dtype='unicode')
+csv_filename = "C:/_git/vcs/_big_files/311-service-requests.csv"
+complaints = pd.read_csv(csv_filename, dtype="unicode")
 
 print(complaints)
-complaints['Complaint Type']
+complaints["Complaint Type"]
 
-complaints['Complaint Type'].value_counts()
+complaints["Complaint Type"].value_counts()
 
-complaint_counts = complaints['Complaint Type'].value_counts()
+complaint_counts = complaints["Complaint Type"].value_counts()
 complaint_counts[:10]
 
-complaint_counts[:10].plot(kind='bar')
+complaint_counts[:10].plot(kind="bar")
 show()
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-# Make the graphs a bit prettier, and bigger
-plt.style.use('ggplot')
-plt.rcParams['figure.figsize'] = (15, 5)
-
-# This is necessary to show lots of columns in pandas 0.12. 
-# Not necessary in pandas 0.13.
-pd.set_option('display.width', 5000) 
-pd.set_option('display.max_columns', 60)
-
+plt.figure(figsize=(15, 5))
 
 # because of mixed types we specify dtype to prevent any errors
-csv_filename = 'C:/_git/vcs/_big_files/311-service-requests.csv'
-complaints = pd.read_csv(csv_filename, dtype='unicode')
+csv_filename = "C:/_git/vcs/_big_files/311-service-requests.csv"
+complaints = pd.read_csv(csv_filename, dtype="unicode")
 
-is_noise = complaints['Complaint Type'] == "Noise - Street/Sidewalk"
+is_noise = complaints["Complaint Type"] == "Noise - Street/Sidewalk"
 noise_complaints = complaints[is_noise]
-noise_complaints['Borough'].value_counts()
+noise_complaints["Borough"].value_counts()
 
-noise_complaint_counts = noise_complaints['Borough'].value_counts()
-complaint_counts = complaints['Borough'].value_counts()
+noise_complaint_counts = noise_complaints["Borough"].value_counts()
+complaint_counts = complaints["Borough"].value_counts()
 
 noise_complaint_counts / complaint_counts
 
 noise_complaint_counts / complaint_counts.astype(float)
 
-(noise_complaint_counts / complaint_counts.astype(float)).plot(kind='bar')
+(noise_complaint_counts / complaint_counts.astype(float)).plot(kind="bar")
 
 show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 """
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
+weather_sample.csv
+年月,東京-平均氣溫(℃),東京-降雨量合計(mm),東京-日照時間(時間),大阪-平均氣溫(℃),大阪-降雨量合計(mm),大阪-日照時間(時間),那霸-平均氣溫(℃),那霸-降雨量合計(mm),那霸-日照時間(時間),函館-平均氣溫(℃),函館-降雨量合計(mm),函館-日照時間(時間)
+2015/1/1,5.8,92.5,182,6.1,93,123.3,16.6,22,90.7,-0.9,43,108.2
+2015/2/1,5.7,62,166.9,6.9,25.5,136.8,16.8,47,114.1,0.1,52.5,129.4
+2015/3/1,10.3,94,194.2,10.2,174.5,175.4,19,95.5,126.5,4.3,100,160
+2015/4/1,14.5,129,149.5,15.9,107,152.1,22.2,100,118.9,8.3,133.5,227.5
+2015/5/1,21.1,88,240.6,21.5,104,249.3,24.9,197.5,144.2,13.2,74.5,251.4
+2015/6/1,22.1,195.5,137.3,22.9,196,144.1,28.7,38,221.7,16.6,93,169.9
+"""
 print("日本各都市平均氣溫全年資料")
 
 filename = "data/weather_sample.csv"
@@ -920,14 +1025,16 @@ df = pd.read_csv(filename, header=0, parse_dates=["年月"])
 # print(df)
 
 df.plot(kind="line", x="年月", y="東京-平均氣溫(℃)", title="東京", figsize=[10, 5])
-df.plot(kind="line", x="年月", y="大阪-平均氣溫(℃)", title="大阪", figsize=[10, 5])
+show()
 
+df.plot(kind="line", x="年月", y="大阪-平均氣溫(℃)", title="大阪", figsize=[10, 5])
 show()
 
 print("------------------------------")  # 30個
 
 filename = "data/weather_sample.csv"
 df = pd.read_csv(filename, header=0, parse_dates=["年月"], index_col=0)
+
 df_average = df[["東京-平均氣溫(℃)", "大阪-平均氣溫(℃)", "那霸-平均氣溫(℃)", "函館-平均氣溫(℃)"]]
 print(df_average)
 
@@ -992,7 +1099,16 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
+"""
+bikes.csv 310筆資料
+Date;Berri 1;Brébeuf (données non disponibles);Côte-Sainte-Catherine;Maisonneuve 1;Maisonneuve 2;du Parc;Pierre-Dupuy;Rachel1;St-Urbain (données non disponibles)
+01/01/2012;35;;0;38;51;26;10;16;
+02/01/2012;83;;1;68;153;53;6;43;
+03/01/2012;135;;2;104;248;89;3;58;
+04/01/2012;144;;1;116;318;111;8;61;
+05/01/2012;197;;2;124;330;97;13;95;
+06/01/2012;146;;0;98;244;86;4;75;
+"""
 print("bikes ST")
 
 broken_df = pd.read_csv("data/bikes.csv", encoding="ISO-8859-1")
@@ -1065,7 +1181,7 @@ berri_bikes = bikes[["Berri 1"]].copy()
 
 berri_bikes[:5]
 
-berri_bikes.index
+berri_bikes.index  #  設定df的index
 
 berri_bikes.index.day
 
@@ -1287,19 +1403,6 @@ show()
 print("------------------------------------------------------------")  # 60個
 
 
-N = 100
-datas = np.random.randn(N, 4)
-datas[0, :] = 0
-
-df = pd.DataFrame(datas, columns=list("ABCD"))
-df = df.cumsum()
-df.plot(title="線圖")  # 無參數, 預設就是 line
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
@@ -1492,3 +1595,44 @@ print("------------------------------")  # 30個
 sns.heatmap(df.corr())
 plt.title("關係係數")
 show()
+
+print("------------------------------------------------------------")  # 60個
+
+# Make the graphs a bit prettier, and bigger
+plt.style.use("ggplot")
+plt.rcParams["figure.figsize"] = (15, 5)
+plt.rcParams["font.family"] = "sans-serif"
+
+# This is necessary to show lots of columns in pandas 0.12.
+# Not necessary in pandas 0.13.
+pd.set_option("display.width", 5000)
+pd.set_option("display.max_columns", 60)
+
+print("------------------------------------------------------------")  # 60個
+
+# Make the graphs a bit prettier, and bigger
+plt.style.use("ggplot")
+
+# This is necessary to show lots of columns in pandas 0.12.
+# Not necessary in pandas 0.13.
+pd.set_option("display.width", 5000)
+pd.set_option("display.max_columns", 60)
+
+plt.rcParams["figure.figsize"] = (15, 5)
+
+print("------------------------------------------------------------")  # 60個
+
+# Make the graphs a bit prettier, and bigger
+plt.style.use("ggplot")
+plt.rcParams["figure.figsize"] = (15, 5)
+
+# This is necessary to show lots of columns in pandas 0.12.
+# Not necessary in pandas 0.13.
+pd.set_option("display.width", 5000)
+pd.set_option("display.max_columns", 60)
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
