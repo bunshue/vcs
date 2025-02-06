@@ -132,15 +132,7 @@ mask2 = np.where((mask == 2) | (mask == 0), 0, 1).astype("uint8")
 image3 = image1 * mask2[:, :, np.newaxis]
 image4 = cv2.cvtColor(image3, cv2.COLOR_BGR2RGB)
 
-plt.figure(
-    num="new06",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
+plt.figure(figsize=(12, 8))
 
 plt.subplot(221)
 plt.imshow(image2)
@@ -185,15 +177,7 @@ mask = np.where((mask == 2) | (mask == 0), 0, 1).astype("uint8")
 ogc = o * mask[:, :, np.newaxis]
 ogc = cv2.cvtColor(ogc, cv2.COLOR_BGR2RGB)
 
-plt.figure(
-    num="new07",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
+plt.figure(figsize=(12, 8))
 
 plt.subplot(121)
 plt.imshow(m2rgb)
@@ -222,15 +206,7 @@ mask2 = np.where((mask2 == 2) | (mask2 == 0), 0, 1).astype("uint8")
 ogc = o * mask2[:, :, np.newaxis]
 ogc = cv2.cvtColor(ogc, cv2.COLOR_BGR2RGB)
 
-plt.figure(
-    num="new08",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
+plt.figure(figsize=(12, 8))
 
 plt.subplot(121)
 plt.imshow(image2)
@@ -263,15 +239,7 @@ topLeft = minLoc
 bottomRight = (topLeft[0] + tw, topLeft[1] + th)
 cv2.rectangle(image, topLeft, bottomRight, 255, 2)
 
-plt.figure(
-    num="Matching Result 1",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
+plt.figure(num="Matching Result 1", figsize=(12, 8))
 
 plt.subplot(121)
 plt.imshow(rv, cmap="gray")
@@ -306,15 +274,7 @@ topLeft = maxLoc
 bottomRight = (topLeft[0] + tw, topLeft[1] + th)
 cv2.rectangle(image, topLeft, bottomRight, 255, 2)
 
-plt.figure(
-    num="Matching Result 2",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
+plt.figure(num="Matching Result 2", figsize=(12, 8))
 
 plt.subplot(121)
 plt.imshow(rv, cmap="gray")
@@ -343,15 +303,7 @@ loc = np.where(res >= threshold)
 for pt in zip(*loc[::-1]):
     cv2.rectangle(image, pt, (pt[0] + w, pt[1] + h), 255, 1)
 
-plt.figure(
-    num="Image",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
+plt.figure(figsize=(12, 8))
 
 plt.imshow(image, cmap="gray")
 
@@ -376,7 +328,7 @@ plt.title("原圖")
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 
 plt.subplot(122)
-plt.title("move")
+plt.title("影像移動")
 plt.imshow(cv2.cvtColor(move, cv2.COLOR_BGR2RGB))
 
 plt.suptitle("影像移動")
@@ -401,10 +353,10 @@ plt.title("原圖")
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 
 plt.subplot(122)
-plt.title("AffineTransform")
+plt.title("Affine(仿射的)Transform")
 plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
 
-plt.suptitle("AffineTransform")
+plt.suptitle("Affine(仿射的)Transform")
 show()
 
 print("------------------------------------------------------------")  # 60個
@@ -432,13 +384,14 @@ dst = cv2.warpPerspective(image, M, (W, H))
 plt.figure(figsize=(12, 8))
 
 plt.subplot(121)
-plt.title("原圖")
+plt.title("原圖是歪圖")
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 
 plt.subplot(122)
 plt.title("把歪圖拉正")
 plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
 
+plt.suptitle("PerspectiveTransform")
 show()
 
 print("------------------------------------------------------------")  # 60個
@@ -476,25 +429,17 @@ image0 = cv2.imread(filename)
 # 檔案 => cv2影像
 image = cv2.imread(filename)
 
-print("saltpepper 效果")
+print("saltpepper(胡椒鹽)效果")
 saltImage = saltpepper(image, 0.02)
 
-plt.figure(
-    num="new28 saltpepper 效果",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
+plt.figure(num="saltpepper(胡椒鹽)效果", figsize=(12, 8))
 
 plt.subplot(121)
 plt.title("原圖")
 plt.imshow(cv2.cvtColor(image0, cv2.COLOR_BGR2RGB))
 
 plt.subplot(122)
-plt.title("saltpepper 效果")
+plt.title("saltpepper(胡椒鹽)效果")
 plt.imshow(cv2.cvtColor(saltImage, cv2.COLOR_BGR2RGB))
 
 show()
@@ -512,15 +457,7 @@ v[:, :] = 255
 newHSV = cv2.merge([h, s, v])
 art = cv2.cvtColor(newHSV, cv2.COLOR_HSV2BGR)
 
-plt.figure(
-    num="new35 影像處理",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
+plt.figure(num="HSV轉換", figsize=(12, 8))
 
 plt.subplot(121)
 plt.title("原圖")
@@ -551,7 +488,7 @@ image2_denoised = cv2.fastNlMeansDenoisingColored(image2, h=5)
 
 plt.subplot(122)
 plt.imshow(cv2.cvtColor(image2_denoised, cv2.COLOR_BGR2RGB))
-plt.title("去除圖片的雜訊 fastNlMeansDenoisingColored")
+plt.title("去除圖片的雜訊\nfastNlMeansDenoisingColored")
 
 show()
 
@@ -611,16 +548,7 @@ def my_laplace_result_add_abs(image, model):
 # 調用自定義函數
 result = my_laplace_sharpen(original_image_test1, my_type="big")
 
-# 繪制結果
-fig = plt.figure(
-    num="new39",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
+fig = plt.figure(figsize=(12, 8))
 
 fig.add_subplot(121)
 plt.title("原始圖像")
@@ -636,7 +564,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 
 print("對比度增強 CLAHE")
-print("createCLAHE_image 生成自適應均衡化圖像")
+print("生成自適應均衡化圖像 createCLAHE")
 
 # 自適應直方圖均衡化（Adaptive Histogram Equalization, AHE）
 # 限制對比度 自適應直方圖均衡化(Contrast Limited Adaptive Histogram Equalization, CLAHE)
@@ -653,15 +581,17 @@ clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8, 8))
 # 限制對比度的自適應閾值均衡化
 cl1 = clahe.apply(image)
 
+plt.figure(figsize=(12, 8))
+
+plt.subplot(121)
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-show()
+plt.title("原始圖像")
 
+plt.subplot(122)
 plt.imshow(cv2.cvtColor(cl1, cv2.COLOR_BGR2RGB))
-show()
+plt.title("生成自適應均衡化圖像\ncreateCLAHE")
 
-# 存圖以比較之
-# cv2.imwrite('building.png', image)
-# cv2.imwrite('building_clahe.png', cl1)
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -720,16 +650,7 @@ edge_image_lena = my_sobel_sharpen(original_image_lena)
 # 獲得銳化圖像
 sharpen_image_lena = my_result_add(original_image_lena, edge_image_lena, -0.5)
 
-# 繪製結果
-fig = plt.figure(
-    num="gradient",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
+fig = plt.figure(figsize=(12, 8))
 
 plt.subplot(131)
 plt.title("原始圖像")
@@ -804,16 +725,7 @@ def my_show_edge(model):
 # 調用自定義函數
 result = my_laplace_sharpen(original_image_test1, my_type="big")
 
-# 繪製結果
-fig = plt.figure(
-    num="new40",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
+fig = plt.figure(figsize=(12, 8))
 
 fig.add_subplot(131)
 plt.title("原始圖像")
@@ -1509,15 +1421,7 @@ athdGAUS = cv2.adaptiveThreshold(
     image, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 3, 5
 )
 
-plt.figure(
-    num="new30",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
+plt.figure(figsize=(12, 8))
 
 plt.subplot(221)
 plt.title("原圖")
@@ -1550,15 +1454,7 @@ image = cv2.imread(filename, 0)
 t1, thd = cv2.threshold(image, THRESHOLD, 255, cv2.THRESH_BINARY)
 t2, otsu = cv2.threshold(image, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
 
-plt.figure(
-    num="new31",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
+plt.figure(figsize=(12, 8))
 
 plt.subplot(131)
 plt.title("原圖")
@@ -5670,3 +5566,7 @@ cvshow("src", src)
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()
+
+# 存圖以比較之
+# cv2.imwrite('building.png', image)
+# cv2.imwrite('building_clahe.png', cl1)

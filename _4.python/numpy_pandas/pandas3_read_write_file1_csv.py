@@ -121,6 +121,23 @@ print(df[["中文名", "英文名", "體重", "中英文"]])
 
 print("------------------------------------------------------------")  # 60個
 
+"""
+drinks.csv
+Type,Sales
+MikeTea,91
+SoyMilk,65
+BlackTea,70
+"""
+filename = "_new/drinks.csv"
+
+df = pd.read_csv(filename)
+print(df)
+
+df.set_index("Type", inplace=True)
+print(df)
+
+print("------------------------------------------------------------")  # 60個
+
 filename = "data/ExpensesRecord.csv"
 print("pd讀取csv檔案 :", filename)
 df = pd.read_csv(filename)

@@ -94,94 +94,94 @@ y_pred_test = logistic_regression.predict(X_test)  # 預測.predict
 print("------------------------------")  # 30個
 plt.subplot(221)
 
-#真實資料 空心圓
+# 真實資料 空心圓
 for i in range(len(X)):
     if y[i] == 0:
-        plt.scatter(X[i, 0], X[i, 1], c='none',marker='o',edgecolors='r')
+        plt.scatter(X[i, 0], X[i, 1], c="none", marker="o", edgecolors="r")
     elif y[i] == 1:
-        plt.scatter(X[i, 0], X[i, 1], c='none',marker='o',edgecolors='g')
+        plt.scatter(X[i, 0], X[i, 1], c="none", marker="o", edgecolors="g")
     elif y[i] == 2:
-        plt.scatter(X[i, 0], X[i, 1], c='none',marker='o',edgecolors='b')
+        plt.scatter(X[i, 0], X[i, 1], c="none", marker="o", edgecolors="b")
 
-#真實資料 實心點
+# 真實資料 實心點
 for i in range(len(X)):
     if y[i] == 0:
-        plt.scatter(X[i, 0], X[i, 1], c='r', s=5)
+        plt.scatter(X[i, 0], X[i, 1], c="r", s=5)
     elif y[i] == 1:
-        plt.scatter(X[i, 0], X[i, 1], c='g', s=5)
+        plt.scatter(X[i, 0], X[i, 1], c="g", s=5)
     elif y[i] == 2:
-        plt.scatter(X[i, 0], X[i, 1], c='b', s=5)
-        
-plt.title('原始資料, 分成3群')
+        plt.scatter(X[i, 0], X[i, 1], c="b", s=5)
+
+plt.title("原始資料, 分成3群")
 
 print("------------------------------")  # 30個
 plt.subplot(222)
 
-#真實資料 空心圓
+# 真實資料 空心圓
 for i in range(len(XX)):
     if y[i] == 0:
-        plt.scatter(XX[i, 0], XX[i, 1], c='none',marker='o',edgecolors='r')
+        plt.scatter(XX[i, 0], XX[i, 1], c="none", marker="o", edgecolors="r")
     elif y[i] == 1:
-        plt.scatter(XX[i, 0], XX[i, 1], c='none',marker='o',edgecolors='g')
+        plt.scatter(XX[i, 0], XX[i, 1], c="none", marker="o", edgecolors="g")
     elif y[i] == 2:
-        plt.scatter(XX[i, 0], XX[i, 1], c='none',marker='o',edgecolors='b')
+        plt.scatter(XX[i, 0], XX[i, 1], c="none", marker="o", edgecolors="b")
 
-#真實資料 實心點
+# 真實資料 實心點
 for i in range(len(XX)):
     if y[i] == 0:
-        plt.scatter(XX[i, 0], XX[i, 1], c='r', s=5)
+        plt.scatter(XX[i, 0], XX[i, 1], c="r", s=5)
     elif y[i] == 1:
-        plt.scatter(XX[i, 0], XX[i, 1], c='g', s=5)
+        plt.scatter(XX[i, 0], XX[i, 1], c="g", s=5)
     elif y[i] == 2:
-        plt.scatter(XX[i, 0], XX[i, 1], c='b', s=5)
+        plt.scatter(XX[i, 0], XX[i, 1], c="b", s=5)
 
-plt.title('特徵縮放後')
+plt.title("特徵縮放後")
 
 print("------------------------------")  # 30個
 plt.subplot(223)
 
-#真實訓練資料 空心圓
+# 真實訓練資料 空心圓
 for i in range(len(X_train)):
     if y_train[i] == 0:
-        plt.scatter(X_train[i, 0], X_train[i, 1], c='none',marker='o',edgecolors='r')
+        plt.scatter(X_train[i, 0], X_train[i, 1], c="none", marker="o", edgecolors="r")
     elif y_train[i] == 1:
-        plt.scatter(X_train[i, 0], X_train[i, 1], c='none',marker='o',edgecolors='g')
+        plt.scatter(X_train[i, 0], X_train[i, 1], c="none", marker="o", edgecolors="g")
     elif y_train[i] == 2:
-        plt.scatter(X_train[i, 0], X_train[i, 1], c='none',marker='o',edgecolors='b')
+        plt.scatter(X_train[i, 0], X_train[i, 1], c="none", marker="o", edgecolors="b")
 
-#預測訓練資料 實心點
+# 預測訓練資料 實心點
 for i in range(len(X_train)):
     if y_pred_train[i] == 0:
-        plt.scatter(X_train[i, 0], X_train[i, 1], c='r', s=5)
+        plt.scatter(X_train[i, 0], X_train[i, 1], c="r", s=5)
     elif y_pred_train[i] == 1:
-        plt.scatter(X_train[i, 0], X_train[i, 1], c='g', s=5)
+        plt.scatter(X_train[i, 0], X_train[i, 1], c="g", s=5)
     elif y_pred_train[i] == 2:
-        plt.scatter(X_train[i, 0], X_train[i, 1], c='b', s=5)
+        plt.scatter(X_train[i, 0], X_train[i, 1], c="b", s=5)
 
 plt.title(f"預測 訓練資料 準確性 = {score_train}")
 
 print("------------------------------")  # 30個
 plt.subplot(224)
 
-#真實測試資料 空心圓
+# 真實測試資料 空心圓
 for i in range(len(X_test)):
     if y_test[i] == 0:
-        plt.scatter(X_test[i, 0], X_test[i, 1], c='none',marker='o',edgecolors='r')
+        plt.scatter(X_test[i, 0], X_test[i, 1], c="none", marker="o", edgecolors="r")
     elif y_test[i] == 1:
-        plt.scatter(X_test[i, 0], X_test[i, 1], c='none',marker='o',edgecolors='g')
+        plt.scatter(X_test[i, 0], X_test[i, 1], c="none", marker="o", edgecolors="g")
     elif y_test[i] == 2:
-        plt.scatter(X_test[i, 0], X_test[i, 1], c='none',marker='o',edgecolors='b')
+        plt.scatter(X_test[i, 0], X_test[i, 1], c="none", marker="o", edgecolors="b")
 
-#預測測試資料 空心圓
+# 預測測試資料 空心圓
 for i in range(len(X_test)):
     if y_pred_test[i] == 0:
-        plt.scatter(X_test[i, 0], X_test[i, 1], c='r', s=5)
+        plt.scatter(X_test[i, 0], X_test[i, 1], c="r", s=5)
     elif y_pred_test[i] == 1:
-        plt.scatter(X_test[i, 0], X_test[i, 1], c='g', s=5)
+        plt.scatter(X_test[i, 0], X_test[i, 1], c="g", s=5)
     elif y_pred_test[i] == 2:
-        plt.scatter(X_test[i, 0], X_test[i, 1], c='b', s=5)
+        plt.scatter(X_test[i, 0], X_test[i, 1], c="b", s=5)
 
-#plt.scatter(X_test[:, 0], X_test[:, 1], c=y_pred_test, s=5)
+# plt.scatter(X_test[:, 0], X_test[:, 1], c=y_pred_test, s=5)
 plt.title(f"預測 測試資料 準確性 = {score_test}")
 
 plt.suptitle("監督式學習 : 邏輯迴歸 (logistic regression)")
@@ -202,7 +202,7 @@ print("make_circles,", N, "個樣本")
 X, y = make_circles(n_samples=N, factor=0.3, noise=0.05, random_state=9487)
 
 # 資料分割 多了一個 stratify=y
-#X_train, X_test, y_train, y_test = train_test_split(X, y, stratify=y, random_state=9487)
+# X_train, X_test, y_train, y_test = train_test_split(X, y, stratify=y, random_state=9487)
 X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=9487)
 
 # 繪製訓練及測試資料
@@ -272,7 +272,7 @@ print(len(y_pred_prob))
 plt.subplot(211)
 plt.hist(group0, alpha=0.3, label="第0群, 對應到0")
 plt.hist(group1, alpha=0.3, label="第1群, 對應到1")
-plt.title('原始資料')
+plt.title("原始資料")
 plt.legend()
 
 plt.subplot(212)
@@ -401,9 +401,7 @@ print(cc)
 mean1 = df["萼長"].mean()
 std1 = df["萼長"].std()
 n = len(df["萼長"])
-skew1 = (
-    (((df["萼長"] - mean1) / std1) ** 3).sum() * n / ((n - 1) * (n - 2))
-)
+skew1 = (((df["萼長"] - mean1) / std1) ** 3).sum() * n / ((n - 1) * (n - 2))
 print(skew1)
 
 # 0.31491095663697277
@@ -815,9 +813,7 @@ print(f"計算準確率 : {accuracy_score(y_test, y_pred)*100:.2f}%")
 print("混淆矩陣 :\n", confusion_matrix(y_test, y_pred), sep="")
 
 print("混淆矩陣圖")
-disp = ConfusionMatrixDisplay(
-    confusion_matrix=confusion_matrix(y_test, y_pred)
-)
+disp = ConfusionMatrixDisplay(confusion_matrix=confusion_matrix(y_test, y_pred))
 disp.plot()
 
 show()
@@ -972,9 +968,7 @@ print(f"計算準確率 : {accuracy_score(y_test, y_pred)*100:.2f}%")
 print("混淆矩陣 :\n", confusion_matrix(y_test, y_pred), sep="")
 
 print("混淆矩陣圖")
-disp = ConfusionMatrixDisplay(
-    confusion_matrix=confusion_matrix(y_test, y_pred)
-)
+disp = ConfusionMatrixDisplay(confusion_matrix=confusion_matrix(y_test, y_pred))
 disp.plot()
 show()
 
@@ -1126,9 +1120,7 @@ print(f"計算準確率 : {accuracy_score(y_test, y_pred)*100:.2f}%")
 print("混淆矩陣 :\n", confusion_matrix(y_test, y_pred), sep="")
 
 print("混淆矩陣圖")
-disp = ConfusionMatrixDisplay(
-    confusion_matrix=confusion_matrix(y_test, y_pred)
-)
+disp = ConfusionMatrixDisplay(confusion_matrix=confusion_matrix(y_test, y_pred))
 disp.plot()
 show()
 

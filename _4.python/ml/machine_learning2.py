@@ -138,6 +138,9 @@ def show():
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
+print("Sklearn verion is {}".format(sklearn.__version__))
+
 """
 print('房價, 共 1460 筆資料 81欄位')
 
@@ -656,7 +659,7 @@ print('------------------------------------------------------------')	#60個
 fig,ax = plt.subplots()
 fig.set_size_inches(40,6)
 xgb.plot_tree(clf, ax=ax, num_trees=0) # 顯示模型中的第一棵樹
-plt.savefig('tmp.png',dpi=300)
+# 存圖 plt.savefig('tmp.png',dpi=300)
 
 print('------------------------------------------------------------')	#60個
 
@@ -674,13 +677,8 @@ for i in features:
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-N = 200
-
-X = np.linspace(0, 1, N)
-y = np.sqrt(X) + 0.2 * np.random.rand(N) - 0.1
-
-X = X.reshape(-1, 1)
-y = y.reshape(-1, 1)
+from sklearn.model_selection import learning_curve
+from sklearn.model_selection import ShuffleSplit
 
 
 def polynomial_model(degree=1):
@@ -695,15 +693,8 @@ def polynomial_model(degree=1):
     return pipeline
 
 
-print("------------------------------------------------------------")  # 60個
-
-from sklearn.model_selection import learning_curve
-from sklearn.model_selection import ShuffleSplit
-
-
 def plot_learning_curve(
     estimator,
-    title,
     X,
     y,
     ylim=None,
@@ -711,50 +702,8 @@ def plot_learning_curve(
     n_jobs=1,
     train_sizes=np.linspace(0.1, 1.0, 5),
 ):
-    """
-    Generate a simple plot of the test and training learning curve.
-    Parameters
-    ----------
-    estimator : object type that implements the "fit" and "predict" methods
-        An object of that type which is cloned for each validation.
-
-    title : string
-        Title for the chart.
-
-    X : array-like, shape (n_samples, n_features)
-        Training vector, where n_samples is the number of samples and
-        n_features is the number of features.
-
-    y : array-like, shape (n_samples) or (n_samples, n_features), optional
-        Target relative to X for classification or regression;
-        None for unsupervised learning.
-
-    ylim : tuple, shape (ymin, ymax), optional
-        Defines minimum and maximum yvalues plotted.
-
-    cv : int, cross-validation generator or an iterable, optional
-        Determines the cross-validation splitting strategy.
-        Possible inputs for cv are:
-          - None, to use the default 3-fold cross-validation,
-          - integer, to specify the number of folds.
-          - An object to be used as a cross-validation generator.
-          - An iterable yielding train/test splits.
-
-        For integer/None inputs, if ``y`` is binary or multiclass,
-        :class:`StratifiedKFold` used. If the estimator is not a classifier
-        or if ``y`` is neither binary nor multiclass, :class:`KFold` is used.
-
-        Refer :ref:`User Guide <cross_validation>` for the various
-        cross-validators that can be used here.
-
-    n_jobs : integer, optional
-        Number of jobs to run in parallel (default 1).
-    """
-    plt.title(title)
     if ylim is not None:
         plt.ylim(*ylim)
-    plt.xlabel("Training examples")
-    plt.ylabel("Score")
     train_sizes, train_scores, test_scores = learning_curve(
         estimator, X, y, cv=cv, n_jobs=n_jobs, train_sizes=train_sizes
     )
@@ -787,112 +736,136 @@ def plot_learning_curve(
     return plt
 
 
+# 測試資料
+N = 200
+X = np.linspace(0, 1, N)
+y = np.sqrt(X) + 0.2 * np.random.rand(N) - 0.1
+X = X.reshape(-1, 1)
+y = y.reshape(-1, 1)
+
 # 為了讓學習曲線更平滑，交叉驗證數據集的得分計算 10 次，每次都重新選中 20% 的數據計算一遍
 cv = ShuffleSplit(n_splits=10, test_size=0.2, random_state=9487)
-titles = [
-    "Learning Curves (Under Fitting)",
-    "Learning Curves",
-    "Learning Curves (Over Fitting)",
-]
-degrees = [1, 3, 10]
 
-plt.figure(figsize=(18, 4))
-for i in range(len(degrees)):
-    plt.subplot(1, 3, i + 1)
-    plot_learning_curve(
-        polynomial_model(degrees[i]), titles[i], X, y, ylim=(0.75, 1.01), cv=cv
-    )
+plt.figure(figsize=(14, 5))
+
+plt.subplot(131)
+degree = 1
+plot_learning_curve(polynomial_model(degree), X, y, ylim=(0.75, 1.01), cv=cv)
+plt.xlabel("Training examples")
+plt.ylabel("Score")
+plt.title("Learning Curves (Under Fitting)")
+
+plt.subplot(132)
+degree = 3
+plot_learning_curve(polynomial_model(degree), X, y, ylim=(0.75, 1.01), cv=cv)
+plt.xlabel("Training examples")
+plt.ylabel("Score")
+plt.title("Learning Curves")
+
+plt.subplot(133)
+degree = 10
+plot_learning_curve(polynomial_model(degree), X, y, ylim=(0.75, 1.01), cv=cv)
+plt.xlabel("Training examples")
+plt.ylabel("Score")
+plt.title("Learning Curves (Over Fitting)")
 
 show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+print("測試 各種 模型評估 方法")
+
 label_true = np.random.randint(1, 4, 6)
 label_pred = np.random.randint(1, 4, 6)
+
+print(label_true)
+print(label_pred)
+
+print("測試 Adjusted Rand-Index : adjusted_rand_score")
+
 cc = metrics.adjusted_rand_score(label_true, label_pred)
-print("Adjusted Rand-Index for random sample: %.3f" % cc)
+print("Adjusted Rand-Index : %0.3f" % cc)
 
 label_true = [1, 1, 3, 3, 2, 2]
 label_pred = [3, 3, 2, 2, 1, 1]
+
 cc = metrics.adjusted_rand_score(label_true, label_pred)
-print("Adjusted Rand-Index for same structure sample: %.3f" % cc)
+print("Adjusted Rand-Index : %0.3f" % cc)
 
 label_true = [1, 1, 2, 2]
 label_pred = [2, 2, 1, 1]
+
+print("測試 Homogeneity : homogeneity_score")
+
 cc = metrics.homogeneity_score(label_true, label_pred)
-print("Homogeneity score for same structure sample: %.3f" % cc)
+print("Homogeneity score : %0.3f" % cc)
 
 label_true = [1, 1, 2, 2]
 label_pred = [0, 1, 2, 3]
+
 cc = metrics.homogeneity_score(label_true, label_pred)
-print("Homogeneity score for each cluster come from only one class: %.3f" % cc)
+print("Homogeneity score : %0.3f" % cc)
 
 label_true = [1, 1, 2, 2]
 label_pred = [1, 2, 1, 2]
 
 cc = metrics.homogeneity_score(label_true, label_pred)
-print("Homogeneity score for each cluster come from two class: %.3f" % cc)
+print("Homogeneity score : %0.3f" % cc)
 
 label_true = np.random.randint(1, 4, 6)
 label_pred = np.random.randint(1, 4, 6)
+
 cc = metrics.homogeneity_score(label_true, label_pred)
-print("Homogeneity score for random sample: %.3f" % cc)
+print("Homogeneity score : %0.3f" % cc)
+
+print("測試 Completeness : completeness_score")
 
 label_true = [1, 1, 2, 2]
 label_pred = [2, 2, 1, 1]
 cc = metrics.completeness_score(label_true, label_pred)
-print("Completeness score for same structure sample: %.3f" % cc)
+print("Completeness score : %0.3f" % cc)
 
 label_true = [0, 1, 2, 3]
 label_pred = [1, 1, 2, 2]
 cc = metrics.completeness_score(label_true, label_pred)
-print("Completeness score for each class assign to only one cluster: %.3f" % cc)
+print("Completeness score : %0.3f" % cc)
 
 label_true = [1, 1, 2, 2]
 label_pred = [1, 2, 1, 2]
 cc = metrics.completeness_score(label_true, label_pred)
-print("Completeness score for each class assign to two class: %.3f" % cc)
+print("Completeness score : %0.3f" % cc)
+
 label_true = np.random.randint(1, 4, 6)
 label_pred = np.random.randint(1, 4, 6)
+
 cc = metrics.completeness_score(label_true, label_pred)
-print("Completeness score for random sample: %.3f" % cc)
+print("Completeness score : %0.3f" % cc)
+
+print("測試 V-measure : v_measure_score")
 
 label_true = [1, 1, 2, 2]
 label_pred = [2, 2, 1, 1]
 cc = metrics.v_measure_score(label_true, label_pred)
-print("V-measure score for same structure sample: %.3f" % cc)
+print("V-measure score : %0.3f" % cc)
 
 label_true = [0, 1, 2, 3]
 label_pred = [1, 1, 2, 2]
 cc = metrics.v_measure_score(label_true, label_pred)
-print("V-measure score for each class assign to only one cluster: %.3f" % cc)
+print("V-measure score : %0.3f" % cc)
+
 cc = metrics.v_measure_score(label_pred, label_true)
-print("V-measure score for each class assign to only one cluster: %.3f" % cc)
+print("V-measure score : %0.3f" % cc)
 
 label_true = [1, 1, 2, 2]
 label_pred = [1, 2, 1, 2]
 cc = metrics.v_measure_score(label_true, label_pred)
-print("V-measure score for each class assign to two class: %.3f" % cc)
+print("V-measure score : %0.3f" % cc)
 
-"""
-labels = docs.target
-print("Homogeneity: %0.3f" % metrics.homogeneity_score(labels, kmean.labels_))
-print("Completeness: %0.3f" % metrics.completeness_score(labels, kmean.labels_))
-print("V-measure: %0.3f" % metrics.v_measure_score(labels, kmean.labels_))
-print("Adjusted Rand-Index: %.3f"
-      % metrics.adjusted_rand_score(labels, kmean.labels_))
-
-#[平均]輪廓係數 silhouette_score
-print("Silhouette Coefficient: %0.3f"
-      % metrics.silhouette_score(X, kmean.labels_, sample_size=1000))
-"""
-
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 數據預處理（Data Preprocessing）
-
-print("Sklearn verion is {}".format(sklearn.__version__))
 
 from sklearn.impute import SimpleImputer
 
@@ -904,21 +877,21 @@ imp_mean.fit([[7, 2, 3], [4, np.nan, 6], [10, 5, 9]])
 X = [[np.nan, 2, 3], [4, np.nan, 6], [10, np.nan, 9]]
 print(imp_mean.transform(X))
 
-enc = OneHotEncoder(handle_unknown="ignore")
+onehotencoder = OneHotEncoder(handle_unknown="ignore")
 X = [["Male", 1], ["Female", 3], ["Female", 2]]
 
-enc.fit(X)
+onehotencoder.fit(X)
 
-cc = enc.categories_
+cc = onehotencoder.categories_
 print(cc)
 
-cc = enc.transform([["Female", 1], ["Male", 4]]).toarray()
+cc = onehotencoder.transform([["Female", 1], ["Male", 4]]).toarray()
 print(cc)
 
-cc = enc.inverse_transform([[0, 1, 1, 0, 0], [0, 0, 0, 1, 0]])
+cc = onehotencoder.inverse_transform([[0, 1, 1, 0, 0], [0, 0, 0, 1, 0]])
 print(cc)
 
-cc = enc.get_feature_names_out(["gender", "group"])
+cc = onehotencoder.get_feature_names_out(["gender", "group"])
 print(cc)
 
 print("------------------------------------------------------------")  # 60個
@@ -990,8 +963,10 @@ X[ : , 0] = labelencoder_X.fit_transform(X[ : , 0])
 # X[ : , 0] = labelencoder_X.fit_transform(X[ : , 0])
 # Creating a dummy variable
 # print(X)
+
 ct = ColumnTransformer([("", OneHotEncoder(), [0])], remainder="passthrough")
 X = ct.fit_transform(X)
+
 # onehotencoder = OneHotEncoder(categorical_features = [0])
 # X = onehotencoder.fit_transform(X).toarray()
 
@@ -1242,16 +1217,16 @@ df.columns = ["color", "size", "price", "classlabel"]
 print("原df")
 print(df)
 
-encoder = LabelEncoder()
+labelencoder = LabelEncoder()
 
 print("size 字串 轉換 成 數字")
 print('轉換前 df["size"]')
 print(df["size"])
-cc = encoder.fit_transform(df["size"])
+cc = labelencoder.fit_transform(df["size"])
 print('轉換後 df["size"]')
 print(cc)
 
-cc = encoder.inverse_transform([1, 0, 2])
+cc = labelencoder.inverse_transform([1, 0, 2])
 print("逆轉換")
 print(cc)
 
@@ -1264,8 +1239,8 @@ print("轉換後df")
 print(df)
 
 data = [["Male", 1], ["Female", 3], ["Female", 2]]
-encoder = OrdinalEncoder()
-cc = encoder.fit_transform(data)
+ordinalencoder = OrdinalEncoder()
+cc = ordinalencoder.fit_transform(data)
 print(cc)
 
 # One Hot Encoding with Pandas
@@ -1291,21 +1266,21 @@ print(cc)
 X = [["Male", 1], ["Female", 3], ["Female", 2]]
 
 # 轉換
-encoder = OneHotEncoder(handle_unknown="ignore")
-X_new = encoder.fit_transform(X)
+onehotencoder = OneHotEncoder(handle_unknown="ignore")
+X_new = onehotencoder.fit_transform(X)
 cc = X_new.toarray()
 print(cc)
 
 # 類別
-cc = encoder.categories_
+cc = onehotencoder.categories_
 print(cc)
 
 # 還原
-cc = encoder.inverse_transform(X_new)
+cc = onehotencoder.inverse_transform(X_new)
 print(cc)
 
 # 指定欄位名稱
-cc = encoder.get_feature_names_out(["gender", "group"])
+cc = onehotencoder.get_feature_names_out(["gender", "group"])
 print(cc)
 
 # 完整的表格處理程序
@@ -1320,11 +1295,11 @@ df = pd.DataFrame(
 df.columns = ["color", "size", "price", "classlabel"]
 
 # One-hot Encoding
-encoder = OneHotEncoder(handle_unknown="ignore")
-color_new = encoder.fit_transform(df[["color"]])
+onehotencoder = OneHotEncoder(handle_unknown="ignore")
+color_new = onehotencoder.fit_transform(df[["color"]])
 
 # 指定欄位名稱
-column_names = encoder.get_feature_names_out(encoder.feature_names_in_)
+column_names = onehotencoder.get_feature_names_out(onehotencoder.feature_names_in_)
 
 # 轉換
 df_new = pd.DataFrame(color_new.toarray(), columns=column_names)
@@ -1337,7 +1312,7 @@ df.drop(["color"], axis=1, inplace=True)
 df2 = pd.concat([df, df_new], axis=1)
 print(df2)
 
-joblib.dump(encoder, "tmp_color.joblib")
+# 儲存模型 joblib.dump(onehotencoder, "tmp_color.joblib")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1486,7 +1461,8 @@ users.Age.hist(bins=[0, 10, 20, 30, 40, 50, 100])
 plt.title("Age Distribution")
 plt.xlabel("Age")
 plt.ylabel("Count")
-plt.savefig("tmp_system2.png", bbox_inches="tight")
+# 存圖 plt.savefig("tmp_system2.png", bbox_inches="tight")
+
 show()
 
 print("最多人評分的書籍")
@@ -1595,7 +1571,7 @@ cc = rating_with_totalRatingCount.head()
 print(cc)
 
 # 顯示評價次數的統計量
-pd.set_option("display.float_format", lambda x: "%.3f" % x)
+pd.set_option("display.float_format", lambda x: "%0.3f" % x)
 print(book_ratingCount["totalRatingCount"].describe())
 
 # 顯示百分位數
@@ -2950,7 +2926,7 @@ print("# No Reweighting balanced dataset")
 lr_inter = sklearn.linear_model.LogisticRegression(C=1)
 lr_inter.fit(X, y)
 p, r, f, s = precision_recall_fscore_support(y, lr_inter.predict(X))
-print("SPC: %.3f; SEN: %.3f" % tuple(r))
+print("SPC: %0.3f; SEN: %0.3f" % tuple(r))
 print("# => The predictions are balanced in sensitivity and specificity\n")
 
 # Create imbalanced dataset, by subsampling sample of class 0: keep only 10% of
@@ -2972,7 +2948,7 @@ lr_inter = sklearn.linear_model.LogisticRegression(C=1)
 lr_inter.fit(Ximb, yimb)
 
 p, r, f, s = precision_recall_fscore_support(yimb, lr_inter.predict(Ximb))
-print("SPC: %.3f; SEN: %.3f" % tuple(r))
+print("SPC: %0.3f; SEN: %0.3f" % tuple(r))
 print("# => Sensitivity >> specificity\n")
 
 print("# Reweighting on imbalanced dataset")
@@ -2983,7 +2959,7 @@ lr_inter_reweight = sklearn.linear_model.LogisticRegression(
 lr_inter_reweight.fit(Ximb, yimb)
 
 p, r, f, s = precision_recall_fscore_support(yimb, lr_inter_reweight.predict(Ximb))
-print("SPC: %.3f; SEN: %.3f" % tuple(r))
+print("SPC: %0.3f; SEN: %0.3f" % tuple(r))
 print("# => The predictions are balanced in sensitivity and specificity\n")
 
 print("------------------------------------------------------------")  # 60個
@@ -3869,7 +3845,7 @@ for perm_i in range(1, nperm + 1):
 pval_pred_perm = np.sum(scores_perm >= scores_perm[0]) / scores_perm.shape[0]
 pval_coef_perm = np.sum(coefs_perm >= coefs_perm[0, :], axis=0) / coefs_perm.shape[0]
 
-print("R2 p-value: %.3f" % pval_pred_perm)
+print("R2 p-value: %0.3f" % pval_pred_perm)
 print("Coeficients p-values:", np.round(pval_coef_perm, 3))
 
 # Compute p-values corrected for multiple comparisons using FWER max-T
@@ -3907,7 +3883,7 @@ def hist_pvalue(perms, ax, name):
         [perms[perms >= perms[0]], perms],
         histtype="stepfilled",
         bins=100,
-        label="p-val<%.3f" % pval,
+        label="p-val<%0.3f" % pval,
         weights=[weights[perms >= perms[0]], weights],
     )
     ax.axvline(x=perms[0], color="k", linewidth=2)  # , label="observed statistic")
@@ -4080,7 +4056,7 @@ for perm in range(0, nperm):
 pval = np.sum(scores_perm >= scores_perm[0, :], axis=0) / nperm
 
 print(
-    "ACC:%.2f(P=%.3f); SPC:%.2f(P=%.3f); SEN:%.2f(P=%.3f)"
+    "ACC:%.2f(P=%0.3f); SPC:%.2f(P=%0.3f); SEN:%.2f(P=%0.3f)"
     % (
         scores_perm[0, 0],
         pval[0],
@@ -5051,3 +5027,9 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
+# [平均]輪廓係數 silhouette_score
+print(
+    "Silhouette Coefficient: %0.3f"
+    % metrics.silhouette_score(X, kmean.labels_, sample_size=1000)
+)
