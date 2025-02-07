@@ -29,6 +29,10 @@ _big_files/*
 _vcs_new_test1/*
 _整理資料/*
 
+*_tmp.txt
+spiderman*.mp4
+老北京*.*
+
 # C 相關產出之檔案
 *.so
 

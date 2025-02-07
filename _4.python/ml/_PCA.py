@@ -48,6 +48,8 @@ def show():
     pass
 
 
+print(__doc__)
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -64,14 +66,8 @@ clf = clf.fit(X)
 
 X2 = clf.transform(X)
 
-print("轉換前")
-print(type(X))
-print(X.shape)
-# print(X)
-print("轉換後")
-print(type(X2))
-print(X2.shape)
-# print(X2)
+print("轉換前 4維 :", X.shape)
+print("轉換後 2維 :", X2.shape)
 
 plt.subplot(221)
 plt.scatter(X[:, 0], X[:, 1])
@@ -86,6 +82,7 @@ plt.scatter(X2[:, 0], X2[:, 1])
 plt.title("轉換後之第0 1維")
 
 plt.subplot(224)
+# 如果有4維的話
 # plt.scatter(X2[:,2], X2[:,3])
 # plt.title('轉換後之第2 3維')
 
@@ -101,9 +98,10 @@ X = iris.data
 y = iris.target  # 資料集目標
 
 df = pd.DataFrame(X, columns=["萼長", "萼寬", "瓣長", "瓣寬"])
+# print(df)
 
 mat = df.corr()
-print(mat)
+print("相關係數 :\n", mat, sep="")
 
 sns.heatmap(
     mat,
@@ -129,10 +127,8 @@ clf = PCA(n_components=n_components)
 
 X2 = clf.fit_transform(df)  # .fit + .transform一起做
 
-print("轉換前")
-print(X.shape)
-print("轉換後")
-print(X2.shape)
+print("轉換前 4維 :", X.shape)
+print("轉換後 2維 :", X2.shape)
 
 plt.subplot(122)
 plt.scatter(X2[:, 0], X2[:, 1], c=np.array(y))
@@ -145,7 +141,6 @@ explained_variance_ratio_ : 主成分的方差比例
 explained_variance_ : 主成分的方差比值
 用于确定重要主成分
 """
-
 print("主成分的方差比例 explained_variance_ratio_")
 print(clf.explained_variance_ratio_)
 print("和")
@@ -154,15 +149,13 @@ print(clf.explained_variance_ratio_.sum())
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# dataset
+# 建立資料
 N = 100
 experience = np.random.normal(size=N)
-
 salary = 1500 + experience + np.random.normal(size=N, scale=0.5)
 
 X = np.column_stack([experience, salary])
-print("轉換前")
-print(X.shape)
+print("轉換前 :", X.shape)
 
 # PCA with scikit-learn
 n_components = 2  # 降維後的維度
@@ -175,13 +168,12 @@ print(clf.explained_variance_ratio_)
 
 X2 = clf.transform(X)
 
-print("轉換後")
-print(X2.shape)
+print("轉換後 :", X2.shape)
 
 plt.subplot(121)
 plt.scatter(X[:, 0], X[:, 1])
-plt.xlabel("x1")
-plt.ylabel("x2")
+plt.xlabel("X0")
+plt.ylabel("X1")
 
 plt.subplot(122)
 plt.scatter(X2[:, 0], X2[:, 1])
@@ -189,75 +181,6 @@ plt.xlabel("PC1 (var=%.2f)" % clf.explained_variance_ratio_[0])
 plt.ylabel("PC2 (var=%.2f)" % clf.explained_variance_ratio_[1])
 plt.axis("equal")
 plt.tight_layout()
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-"""
-from sklearn import (
-    manifold,
-    datasets,
-    decomposition,
-    ensemble,
-    discriminant_analysis,
-    random_projection,
-    neighbors,
-)
-
-# print(__doc__)
-
-
-"""
-
-R, C = 2, 3
-n_components = R * C
-image_shape = (64, 64)
-
-faces, _ = sklearn.datasets.fetch_olivetti_faces(
-    return_X_y=True, shuffle=True, random_state=9487
-)
-
-n_samples, n_features = faces.shape
-
-
-# Utils function
-def plot_gallery(title, images, n_col=C, n_row=R, cmap=plt.cm.gray):
-    plt.figure(figsize=(2.0 * n_col, 2.26 * n_row))
-    plt.suptitle(title, size=16)
-    for i, comp in enumerate(images):
-        plt.subplot(n_row, n_col, i + 1)
-        vmax = max(comp.max(), -comp.min())
-        plt.imshow(
-            comp.reshape(image_shape),
-            cmap=cmap,
-            interpolation="nearest",
-            vmin=-vmax,
-            vmax=vmax,
-        )
-        # plt.xticks(())
-        # plt.yticks(())
-    # plt.subplots_adjust(0.01, 0.05, 0.99, 0.93, 0.04, 0.0)
-
-
-# Preprocessing
-# global centering
-faces_centered = faces - faces.mean(axis=0)
-# local centering
-faces_centered -= faces_centered.mean(axis=1).reshape(n_samples, -1)
-
-plot_gallery("Original Olivetti faces", faces[:n_components])
-
-show()
-
-# First centered Olivetti faces
-plot_gallery("First centered Olivetti faces", faces_centered[:n_components])
-show()
-
-clf = PCA(n_components=n_components)
-clf.fit(faces_centered)
-plot_gallery("PCA first %i loadings" % n_components, clf.components_[:n_components])
 
 show()
 
@@ -1062,3 +985,14 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+
+
+from sklearn import (
+    manifold,
+    datasets,
+    decomposition,
+    ensemble,
+    discriminant_analysis,
+    random_projection,
+    neighbors,
+)

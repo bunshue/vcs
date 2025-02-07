@@ -74,13 +74,13 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
-print("------------------------------------------------------------")  # 60個
-
 
 def show():
     # plt.show()
     pass
 
+
+print("------------------------------------------------------------")  # 60個
 
 import tensorflow as tf
 
@@ -192,9 +192,9 @@ def transform_data4d(x_train, y_train, x_test, y_test):
 def check_model_fit_history1(history):
     # 檢查訓練 資料
     print("history")
-    print("訓練準確度")
+    print(history)
     acc = history.history["accuracy"]
-    print(acc)
+    print("訓練準確度 :", acc)
     plt.plot(acc, label="accuracy")
     plt.xlabel("epoch")
     plt.ylabel("accuracy")
@@ -207,19 +207,18 @@ def check_model_fit_history2(history):
     # 評估訓練/驗證 的 損失和準確度, 有 validation_split 才可做
     print("history")
     print(history)
-    print("訓練損失")
-    loss = history.history["loss"]
-    print(loss)
-    print("驗證損失")
-    val_loss = history.history["val_loss"]
-    print(val_loss)
-    print("訓練準確度")
-    acc = history.history["accuracy"]
-    print(acc)
 
-    print("驗證準確度")
+    loss = history.history["loss"]
+    print("訓練損失 :", loss)
+
+    val_loss = history.history["val_loss"]
+    print("驗證損失 :", val_loss)
+
+    acc = history.history["accuracy"]
+    print("訓練準確度 :", acc)
+
     val_acc = history.history["val_accuracy"]
-    print(val_acc)
+    print("驗證準確度 :", val_acc)
 
     epochs = range(1, len(loss) + 1)
     print("epochs1 = ", epochs)
@@ -1005,7 +1004,7 @@ model.save("tmp_myCNNmodel2.h5")
 del model
 # 先把我們原來的 model 刪掉, 保證接下來的是讀進來的。我們要用一個 load_model 的函式。
 
-model = load_model("tmp_myCNNmodel2.h5")
+# NG model = load_model("tmp_myCNNmodel2.h5")
 
 # 小結論 我們到此, 基本上是「亂做」的神經網路。
 # 有些同學在不斷試驗的過程中, 可能會發現有時會出現很糟糕的結果。
@@ -1998,7 +1997,6 @@ model.compile(
 
 tensorboard = TensorBoard(log_dir="logs")
 
-
 (x_train, y_train), (x_test, y_test) = load_mnist_data()
 
 # NG x_train, y_train, x_test, y_test = transform_data(x_train, y_train, x_test, y_test)
@@ -2136,6 +2134,7 @@ try:
 except IOError:
     print("File not accessible")
 
+""" NG
 checkpoint = tf.keras.callbacks.ModelCheckpoint(
     "tmp_model_ImageDataGenerator.h5",
     monitor="accuracy",
@@ -2144,6 +2143,7 @@ checkpoint = tf.keras.callbacks.ModelCheckpoint(
     mode="auto",
     save_freq=1,
 )
+"""
 
 # 保存模型架構
 with open("tmp_model_ImageDataGenerator.json", "w") as json_file:
@@ -2305,14 +2305,12 @@ model.compile(
 
 model.fit(x_train, y_train, epochs=3)  # 學習訓練.fit
 
-
 val_loss, val_acc = model.evaluate(x_test, y_test)
-print(val_loss)
-print(val_acc)
-
+print("val_loss :", val_loss)
+print("val_acc :", val_acc)
 
 y_pred = model.predict(x_test)  # 取得每一個結果的機率
-print(y_pred)
+print("預測結果 :", y_pred)
 
 print(np.argmax(y_pred[0]))
 
@@ -2472,6 +2470,7 @@ print("Weights=", W, "\nbiases=", b)
 Y_pred = model.predict(X_test)  # 取得每一個結果的機率
 plt.scatter(X_test, Y_test)
 plt.plot(X_test, Y_pred)
+
 show()
 
 print("------------------------------------------------------------")  # 60個
@@ -3008,13 +3007,11 @@ model = tf.keras.models.load_model(mnist_model_filename)
 """
 # 做可視化處理
 
-print('訓練準確度')
 acc = history.history["accuracy"]
-print(acc)
+print("訓練準確度 :", acc)
 
-print('驗證準確度')
 val_acc = history.history["val_accuracy"]
-print(val_acc)
+print("驗證準確度 :", val_acc)
 
 plt.plot(acc, label="acc", ls="-", marker="o")
 plt.plot(val_acc, label="val_acc", ls="-", marker="x")

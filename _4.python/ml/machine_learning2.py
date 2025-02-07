@@ -118,9 +118,6 @@ from sklearn import svm
 from sklearn import cluster
 from sklearn import decomposition
 from sklearn import model_selection
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.tree import DecisionTreeRegressor
-from sklearn.tree import plot_tree
 from sklearn.ensemble import AdaBoostClassifier
 from sklearn.ensemble import BaggingClassifier
 from sklearn.ensemble import RandomForestClassifier  # 分類模型
@@ -198,7 +195,7 @@ show()
 
 print('------------------------------')	#30個
 
-#把房價做對數變換后再看
+#把房價做對數變換後再看
 SalePrice_log = np.log(y)
  
 #transformed histogram and normal probability plot
@@ -867,50 +864,79 @@ print("------------------------------------------------------------")  # 60個
 
 # 數據預處理（Data Preprocessing）
 
+print("Imputer Imputation 插補法")
+
 from sklearn.impute import SimpleImputer
 
-# This block is an example used to learn SimpleImputer
+# SimpleImputer 對於np.nan 採用mean
 imp_mean = SimpleImputer(missing_values=np.nan, strategy="mean")
 
 imp_mean.fit([[7, 2, 3], [4, np.nan, 6], [10, 5, 9]])
 
 X = [[np.nan, 2, 3], [4, np.nan, 6], [10, np.nan, 9]]
-print(imp_mean.transform(X))
+XT = imp_mean.transform(X)
+
+print("原陣列 :\n", X, sep="")
+print("轉換後 :\n", XT, sep="")
+
+print("------------------------------")  # 30個
+
+print("OneHotEncoder 獨熱編碼")
 
 onehotencoder = OneHotEncoder(handle_unknown="ignore")
 X = [["Male", 1], ["Female", 3], ["Female", 2]]
 
+print("原陣列 :\n", X, sep="")
+
 onehotencoder.fit(X)
 
 cc = onehotencoder.categories_
+print("a")
 print(cc)
 
 cc = onehotencoder.transform([["Female", 1], ["Male", 4]]).toarray()
+print("b")
 print(cc)
 
 cc = onehotencoder.inverse_transform([[0, 1, 1, 0, 0], [0, 0, 0, 1, 0]])
+print("c")
 print(cc)
 
 cc = onehotencoder.get_feature_names_out(["gender", "group"])
+print("d")
 print(cc)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-dataset = pd.read_csv("data/Data.csv")
+""" Data.csv 10筆資料 4個欄位
+Country,Age,Salary,Purchased
+France,44,72000,No
+Spain,27,48000,Yes
+Germany,30,54000,No
+Spain,38,61000,No
+Germany,40,,Yes
+France,35,58000,Yes
+Spain,,52000,No
+France,48,79000,Yes
+Germany,50,83000,No
+France,37,67000,Yes
+"""
 
-# 不包括最后一列的所有列
-X = dataset.iloc[:, :-1].values  # //.iloc[行，列]
+df = pd.read_csv("data/Data.csv")
+# print(df) # 包含df之column與index
+print("df之資料內容")
+print(df.values)  # 不包含df之column與index 只有資料內容 10筆資料 4個欄位
 
-# 取最后一列
-Y = dataset.iloc[:, 3].values  # : 全部行 or 列；[a]第a行 or 列
-# [a,b,c]第 a,b,c 行 or 列
+# 不包括最後一欄的所有欄 前3欄
+X = df.iloc[:, :-1].values
 
-print("X")
-print(X)
-print("Y")
-print(Y)
-print(X[:, 1:3])
+# 取出第4欄
+Y = df.iloc[:, 3].values
+
+print("X 前3欄 :\n", X, sep="")
+print("Y 第4欄 :\n", Y, sep="")
+print("X 第2 3欄 :\n", X[:, 1:3], sep="")
 
 # 第三步：處理丟失數據
 
@@ -934,7 +960,7 @@ imputer = imputer.fit(X[:, 1:3])  # put the data we want to process in to this i
 X[:, 1:3] = imputer.transform(X[:, 1:3])  # replace the np.nan with mean
 
 # print(X[ : , 1:3])
-print("---------------------")
+print("------------------------------")  # 30個
 print("Step 3: Handling the missing data")
 print("step2")
 print("X")
@@ -973,7 +999,7 @@ X = ct.fit_transform(X)
 labelencoder_Y = LabelEncoder()
 Y = labelencoder_Y.fit_transform(Y)
 
-print("---------------------")
+print("------------------------------")  # 30個
 print("Step 4: Encoding categorical data")
 print("X")
 print(X)
@@ -1012,7 +1038,7 @@ scaler = StandardScaler()
 X_train = scaler.fit_transform(X_train)  # STD特徵縮放
 X_test = scaler.transform(X_test)  # STD特徵縮放
 
-print("---------------------")
+print("------------------------------")  # 30個
 print("Step 6: Feature Scaling")
 print("X_train")
 print(X_train)
@@ -1022,100 +1048,10 @@ print(X_test)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-dataset = pd.read_csv("data/Social_Network_Ads.csv")
+df = pd.read_csv("data/Social_Network_Ads.csv")
 
-X = dataset.iloc[:, [2, 3]].values
-y = dataset.iloc[:, 4].values
-
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
-# 訓練組8成, 測試組2成
-
-# Feature Scaling
-scaler = StandardScaler()
-X_train = scaler.fit_transform(X_train)  # STD特徵縮放
-X_test = scaler.transform(X_test)  # STD特徵縮放
-
-# Fitting Decision Tree Classification to the Training set
-
-classifier = DecisionTreeClassifier(criterion="entropy", random_state=0)
-
-classifier.fit(X_train, y_train)  # 學習訓練.fit
-
-# Predicting the Test set results
-y_pred = classifier.predict(X_test)
-
-cm = confusion_matrix(y_test, y_pred)
-
-# Visualising the Training set results
-from matplotlib.colors import ListedColormap
-
-X_set, y_set = X_train, y_train
-X1, X2 = np.meshgrid(
-    np.arange(start=X_set[:, 0].min() - 1, stop=X_set[:, 0].max() + 1, step=0.01),
-    np.arange(start=X_set[:, 1].min() - 1, stop=X_set[:, 1].max() + 1, step=0.01),
-)
-plt.contourf(
-    X1,
-    X2,
-    classifier.predict(np.array([X1.ravel(), X2.ravel()]).T).reshape(X1.shape),
-    alpha=0.75,
-    cmap=ListedColormap(("red", "green")),
-)
-plt.xlim(X1.min(), X1.max())
-plt.ylim(X2.min(), X2.max())
-for i, j in enumerate(np.unique(y_set)):
-    plt.scatter(
-        X_set[y_set == j, 0],
-        X_set[y_set == j, 1],
-        c=ListedColormap(("red", "green"))(i),
-        label=j,
-    )
-plt.title("Decision Tree Classification (Training set)")
-plt.xlabel("Age")
-plt.ylabel("Estimated Salary")
-plt.legend()
-
-show()
-
-# Visualising the Test set results
-from matplotlib.colors import ListedColormap
-
-X_set, y_set = X_test, y_test
-X1, X2 = np.meshgrid(
-    np.arange(start=X_set[:, 0].min() - 1, stop=X_set[:, 0].max() + 1, step=0.01),
-    np.arange(start=X_set[:, 1].min() - 1, stop=X_set[:, 1].max() + 1, step=0.01),
-)
-plt.contourf(
-    X1,
-    X2,
-    classifier.predict(np.array([X1.ravel(), X2.ravel()]).T).reshape(X1.shape),
-    alpha=0.75,
-    cmap=ListedColormap(("red", "green")),
-)
-plt.xlim(X1.min(), X1.max())
-plt.ylim(X2.min(), X2.max())
-for i, j in enumerate(np.unique(y_set)):
-    plt.scatter(
-        X_set[y_set == j, 0],
-        X_set[y_set == j, 1],
-        c=ListedColormap(("red", "green"))(i),
-        label=j,
-    )
-plt.title("Decision Tree Classification (Test set)")
-plt.xlabel("Age")
-plt.ylabel("Estimated Salary")
-plt.legend()
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-dataset = pd.read_csv("data/Social_Network_Ads.csv")
-
-X = dataset.iloc[:, [2, 3]].values
-y = dataset.iloc[:, 4].values
+X = df.iloc[:, [2, 3]].values
+y = df.iloc[:, 4].values
 
 # 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
@@ -1214,36 +1150,38 @@ df = pd.DataFrame(
 )
 
 df.columns = ["color", "size", "price", "classlabel"]
-print("原df")
-print(df)
+print("原df :\n", df, sep="")
+
+print("使用 LabelEncoder")
 
 labelencoder = LabelEncoder()
 
-print("size 字串 轉換 成 數字")
-print('轉換前 df["size"]')
-print(df["size"])
+print("LabelEncoder size 字串 轉換 成 數字")
+print('轉換前 df["size"] :\n', df["size"], sep="")
+
 cc = labelencoder.fit_transform(df["size"])
-print('轉換後 df["size"]')
-print(cc)
+print('轉換後 df["size"] :\n', cc, sep="")
 
 cc = labelencoder.inverse_transform([1, 0, 2])
-print("逆轉換")
-print(cc)
+print("逆轉換 :\n", cc, sep="")
 
+print("------------------------------")  # 30個
 print("使用 Pandas Map, 對映")
 
 size_mapping = {"XL": 3, "L": 2, "M": 1}
 
 df["size"] = df["size"].map(size_mapping)
-print("轉換後df")
-print(df)
+print("轉換後df :\n", df, sep="")
+
+print("------------------------------")  # 30個
+print("使用 獨熱編碼 OrdinalEncoder")
 
 data = [["Male", 1], ["Female", 3], ["Female", 2]]
 ordinalencoder = OrdinalEncoder()
 cc = ordinalencoder.fit_transform(data)
 print(cc)
 
-# One Hot Encoding with Pandas
+print("使用 Pandas 之 獨熱編碼 OrdinalEncoder")
 
 df = pd.DataFrame(
     [
@@ -1261,6 +1199,8 @@ print(cc)
 df2 = pd.get_dummies(df, columns=["color"], prefix="is", prefix_sep="_")
 cc = pd.from_dummies(df2[["is_blue", "is_green", "is_red"]], sep="_")
 print(cc)
+
+print("使用 獨熱編碼 OrdinalEncoder")
 
 # 測試資料
 X = [["Male", 1], ["Female", 3], ["Female", 2]]
@@ -1365,6 +1305,7 @@ print(df)
 
 print("計算股價與月營收關聯度")
 
+# 相關係數
 cc = df[["sales", "Adj Close"]].corr()
 print(cc)
 
@@ -1382,6 +1323,7 @@ df = df[["Date", "單月營收", "Adj Close"]]
 df.rename({"單月營收": "sales"}, axis=1, inplace=True)
 df.dropna(inplace=True)
 
+# 相關係數
 cc = df[["sales", "Adj Close"]].corr()
 print(cc)
 
@@ -1663,7 +1605,7 @@ SVD = TruncatedSVD(n_components=12, random_state=17)
 matrix = SVD.fit_transform(X)
 print(matrix.shape)
 
-# 依據 12 個特徵計算相關係數
+# 依據 12 個特徵計算 相關係數
 corr = np.corrcoef(matrix)
 print(corr.shape)
 
@@ -1682,46 +1624,6 @@ print(corr_coffey_hands)
 us_canada_book_title = us_canada_user_rating_pivot2.columns
 cc = list(us_canada_book_title[(corr_coffey_hands >= 0.8)])
 print(cc)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# 07_09_scikit-learn_decision_tree_regression
-
-# Scikit-learn迴歸樹測試
-
-# 生成隨機資料
-
-rng = np.random.RandomState(1)
-X = np.sort(5 * rng.rand(80, 1), axis=0)
-y = np.sin(X).ravel()
-y[::5] += 3 * (0.5 - rng.rand(16))
-
-# 訓練兩個模型
-
-regr_1 = DecisionTreeRegressor(max_depth=2)
-regr_1.fit(X, y)
-regr_2 = DecisionTreeRegressor(max_depth=5)
-regr_2.fit(X, y)
-
-# DecisionTreeRegressor(max_depth=5)
-
-# 預測
-
-X_test = np.arange(0.0, 5.0, 0.01)[:, np.newaxis]
-y_1 = regr_1.predict(X_test)
-y_2 = regr_2.predict(X_test)
-
-# 模型繪圖
-
-plt.scatter(X, y, s=20, edgecolor="black", c="darkorange", label="data")
-plt.plot(X_test, y_1, color="cornflowerblue", label="max_depth=2", linewidth=2)
-plt.plot(X_test, y_2, color="yellowgreen", label="max_depth=5", linewidth=2)
-plt.xlabel("data")
-plt.ylabel("target")
-plt.title("Decision Tree Regression")
-plt.legend()
-show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -2334,142 +2236,6 @@ print(cc)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 自行計算 Shapley value
-
-# 載入資料
-
-with open("./data/housing.data", encoding="utf8") as f:
-    data = f.readlines()
-all_fields = []
-for line in data:
-    line2 = line[1:].replace("   ", " ").replace("  ", " ")
-    fields = []
-    for item in line2.split(" "):
-        fields.append(float(item.strip()))
-        if len(fields) == 14:
-            all_fields.append(fields)
-df = pd.DataFrame(all_fields)
-df.columns = "CRIM,ZN,INDUS,CHAS,NOX,RM,AGE,DIS,RAD,TAX,PTRATIO,B,LSTAT,MEDV".split(",")
-cc = df.head()
-print(cc)
-
-# 模型訓練
-
-y = df["MEDV"]
-df = df[["RM", "LSTAT", "DIS", "NOX"]]
-
-clf = DecisionTreeRegressor(max_depth=3)
-
-clf.fit(df, y)  # 學習訓練.fit
-
-fig = plt.figure(figsize=(20, 5))
-ax = fig.add_subplot(111)
-_ = plot_tree(clf, ax=ax, feature_names=df.columns)
-show()
-
-# 以 SHAP 套件計算 Shapley value
-
-import shap
-import tabulate
-
-explainer = shap.TreeExplainer(clf)
-shap_values = explainer.shap_values(df[:1])  # 第一筆資料
-print(
-    tabulate.tabulate(
-        pd.DataFrame(
-            {
-                "shap_value": shap_values.squeeze(),
-                "feature_value": df[:1].values.squeeze(),
-            },
-            index=df.columns,
-        ),
-        tablefmt="github",
-        headers="keys",
-    )
-)
-
-# Shapley value + Y平均數 = 預測值
-
-cc = shap_values.sum() + y.mean(), clf.predict(df[:1])[0]
-print(cc)
-
-# (22.905200000000004, 22.9052)
-
-# 自行計算 Shapley value
-
-from itertools import combinations
-
-
-# 計算特定組合的邊際貢獻
-def pred_tree(clf, coalition, row, node=0):
-    left_node = clf.tree_.children_left[node]
-    right_node = clf.tree_.children_right[node]
-    is_leaf = left_node == right_node
-
-    if is_leaf:
-        return clf.tree_.value[node].squeeze()
-
-    feature = row.index[clf.tree_.feature[node]]
-    if feature in coalition:
-        if row.loc[feature] <= clf.tree_.threshold[node]:
-            # go left
-            return pred_tree(clf, coalition, row, node=left_node)
-        else:  # go right
-            return pred_tree(clf, coalition, row, node=right_node)
-
-    # take weighted average of left and right
-    wl = clf.tree_.n_node_samples[left_node] / clf.tree_.n_node_samples[node]
-    wr = clf.tree_.n_node_samples[right_node] / clf.tree_.n_node_samples[node]
-    value = wl * pred_tree(clf, coalition, row, node=left_node)
-    value += wr * pred_tree(clf, coalition, row, node=right_node)
-    return value
-
-
-# 計算特定組合的平均邊際貢獻
-def make_value_function(clf, row, col):
-    def value(c):
-        marginal_gain = pred_tree(clf, c + [col], row) - pred_tree(clf, c, row)
-        num_coalitions = scipy.special.comb(len(row) - 1, len(c))
-        return marginal_gain / num_coalitions
-
-    return value
-
-
-# 各種組合
-def make_coalitions(row, col):
-    rest = [x for x in row.index if x != col]
-    for i in range(len(rest) + 1):
-        for x in combinations(rest, i):
-            yield list(x)
-
-
-# 計算 Shapley value
-def compute_shap(clf, row, col):
-    v = make_value_function(clf, row, col)
-    return sum([v(coal) / len(row) for coal in make_coalitions(row, col)])
-
-
-# 顯示 Shapley value
-print(
-    tabulate.tabulate(
-        pd.DataFrame(
-            {
-                "shap_value": shap_values.squeeze(),
-                "my_shap": [
-                    compute_shap(clf, df[:1].T.squeeze(), x) for x in df.columns
-                ],
-                "feature_value": df[:1].values.squeeze(),
-            },
-            index=df.columns,
-        ),
-        tablefmt="github",
-        headers="keys",
-    )
-)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 # 06_07_surprise_test
 
 # Surprise 測試
@@ -2575,7 +2341,7 @@ print("------------------------------------------------------------")  # 60個
 """
 Python如何分解SVD(奇異值分解)
 
-在这个示例中，我们首先创建了一个矩阵 ( A )，然后使用numpy.linalg.svd函数对其进行SVD分解。
+在这个示例中，我们首先创建了一个矩阵 ( A )，然後使用numpy.linalg.svd函数对其进行SVD分解。
 函数返回三个矩阵：( U )、( Sigma ) 和 ( V^T )。
 需要注意的是，numpy.linalg.svd返回的 ( Sigma ) 是一个向量，而不是一个对角矩阵。
 
@@ -2623,7 +2389,7 @@ svd = TruncatedSVD(n_components=10)
 X_reduced = svd.fit_transform(X)
 
 print("原始数据形状：", X.shape)
-print("降维后数据形状：", X_reduced.shape)
+print("降维後数据形状：", X_reduced.shape)
 
 """
 5.2 图像压缩
@@ -2647,7 +2413,7 @@ k = 50
 
 compressed_image = np.dot(U[:, :k], np.dot(np.diag(Sigma[:k]), VT[:k, :]))
 
-# 显示原图和压缩后的图像
+# 显示原图和压缩後的图像
 plt.subplot(1, 2, 1)
 plt.title("Original Image")
 plt.imshow(image, cmap="gray")
@@ -2659,8 +2425,8 @@ plt.imshow(compressed_image, cmap="gray")
 show()
 
 # 在这个示例中，我们首先读取了一张灰度图像，
-# 然后使用NumPy的numpy.linalg.svd函数对其进行SVD分解。
-# 通过选择前 ( k ) 个奇异值，我们可以重构出压缩后的图像。
+# 然後使用NumPy的numpy.linalg.svd函数对其进行SVD分解。
+# 通过选择前 ( k ) 个奇异值，我们可以重构出压缩後的图像。
 
 """
 1. 什么是SVD分解？
@@ -2669,7 +2435,7 @@ SVD分解是奇异值分解（Singular Value Decomposition）的缩写，
 分别是左奇异矩阵、奇异值矩阵和右奇异矩阵。
 2. 如何在Python中进行SVD分解？
 在Python中，可以使用NumPy库来进行SVD分解。首先，需要导入NumPy库，
-然后使用numpy.linalg.svd()函数进行分解。
+然後使用numpy.linalg.svd()函数进行分解。
 例如，如果有一个矩阵A，可以使用以下代码进行SVD分解：
 A = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
 U, S, V = np.linalg.svd(A)
@@ -3232,7 +2998,6 @@ print("------------------------------------------------------------")  # 60個
 
 # Standardization of input features
 
-# dataset
 n_samples, n_features, n_features_info = 100, 5, 3
 X = np.random.randn(n_samples, n_features)
 beta = np.zeros(n_features)
@@ -4193,7 +3958,7 @@ show()
 res = st.probplot(train["SalePrice"], plot=plt)
 show()
 
-# 把房價做對數變換后再看
+# 把房價做對數變換後再看
 SalePrice_log = np.log(train["SalePrice"])
 # transformed histogram and normal probability plot
 sns.histplot(SalePrice_log, fit=st.norm)
@@ -4211,7 +3976,7 @@ show()
 ,          13.5211395 ,  13.53447303])),
 , (0.39826223081618845, 12.024050901109383, 0.99537614756366088))
 
-顯然，房價本身不服從正態分布，是不能直接用來做回歸建模的。但是經過對數轉換之后，就好了很多。
+顯然，房價本身不服從正態分布，是不能直接用來做回歸建模的。但是經過對數轉換之後，就好了很多。
 對于其它的數值型變量，也同樣要做分布的正態性檢驗.
 檢驗方法就用：夏皮羅-威爾克(Shapiro-Wilk)法檢驗數據正態性,即W檢驗。
 """
@@ -4253,7 +4018,7 @@ print(df)
 
 # 看起來TotalBsmtSF, KitchenAbvGr, LotFrontage, LotArea這幾個變量似乎更適合做些變型，以使其服從正態分布。
 # 2.2 異常值分析
-# 對saleprice做標準化后再看
+# 對saleprice做標準化後再看
 
 """
 # NG
@@ -4389,7 +4154,7 @@ show()
 
 """
 看起來像LotConfig、LandSlope這樣的變量，對于房價的影響似乎不大。
-Neighborhood對房價有影響。然后每個類別的不同子類之間看起來似乎也有差別。
+Neighborhood對房價有影響。然後每個類別的不同子類之間看起來似乎也有差別。
 overallQual的值太多。
 
 具體到一個分類指標和數值型變量之間的相關關系，我們可以用方差分析進行檢查。
@@ -4421,7 +4186,7 @@ show()
 
 """
 這里我們用了方差分析，來看每一個類別變量和預測變量Sale_price之間是否有相關關系。
-因為我們最后得到了個p值，p>0.05說明樣本的分組之間沒有顯著性差異，
+因為我們最後得到了個p值，p>0.05說明樣本的分組之間沒有顯著性差異，
 p值越小說明差異越顯著。
 因為我們想用一個類似于“變異度”的指標——“差異度”，
 我們希望這個指標越大，說明差異越明顯。也就是想要一個同向變化的指標，所以對p值取了個倒數。
@@ -4520,6 +4285,7 @@ show()
 # from functools import partial
 # # my_heatmap=partial(sns.heatmap,cbar=True, annot=True, square=True, fmt='.2f', annot_kws={'size': 10}, yticklabels=cols.values, xticklabels=cols.values)
 
+# 相關係數
 corr = train[qual_encoded + ["SalePrice"]].corr()
 sns.heatmap(corr, cbar=True, annot=True, square=True, fmt=".2f", annot_kws={"size": 10})
 
@@ -4575,7 +4341,7 @@ show()
 接下來，考慮是否可以分段進行回歸。
 
 我們把房價200000作為分界點，之下的作為普通住宅，之上的作為豪宅，
-然后看看在這樣分開后，那些數值型變量的均值有多大差異。
+然後看看在這樣分開後，那些數值型變量的均值有多大差異。
 """
 
 features = quantitative
@@ -4638,7 +4404,7 @@ show()
 ,
 
 我們用tnse方法，把每個高維樣本映射到二維平面上的點。
-然后我們對樣本做標準化處理，處理之后做PCA，提取前30個主成分。也就是把樣本的特征降維到30個特征。
+然後我們對樣本做標準化處理，處理之後做PCA，提取前30個主成分。也就是把樣本的特征降維到30個特征。
 對這30個特征的樣本聚類，聚成5類。
 在把這5類用可視化的方法會出來，看看是否有聚集趨勢。
 """
@@ -4697,7 +4463,7 @@ show()
 sns.histplot(yt2)
 show()
 
-# 5.最后建模
+# 5.最後建模
 
 
 def error(actual, predicted):
@@ -5015,7 +4781,7 @@ print("可以对指定列进行get_dummies")
 df3 = pd.get_dummies(df.color)
 print(df3)
 
-print("将指定列进行get_dummies 后合并到元数据中")
+print("将指定列进行get_dummies 後合并到元数据中")
 
 df4 = df.join(pd.get_dummies(df.color))
 print(df4)

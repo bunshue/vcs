@@ -665,6 +665,7 @@ print("迴歸型態 : 多維Xy")
 linear_regression.fit(x_train, y_train)  # 學習訓練.fit
 
 """
+# 相關係數
 sns.heatmap(df.corr())
 show()
 cc = df.corr()

@@ -14,7 +14,6 @@ import os
 import sys
 import time
 import math
-import time
 import random
 import numpy as np
 import pandas as pd
@@ -28,6 +27,12 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 # 設定負號
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
+
+
+def show():
+    plt.show()
+    pass
+
 
 print("------------------------------------------------------------")  # 60個
 
@@ -58,12 +63,6 @@ from sklearn.metrics import mean_absolute_error
 from sklearn.metrics import median_absolute_error
 from sklearn.metrics import explained_variance_score
 
-
-def show():
-    plt.show()
-    pass
-
-
 print("------------------------------------------------------------")  # 60個
 
 """
@@ -92,9 +91,7 @@ model.summary()  # 檢視神經網路
 
 
 """ TBD
-
 model.fit(x_train, yb_train, batch_size=100, epochs=20)  # 學習訓練.fit
-
 
 #預測
 

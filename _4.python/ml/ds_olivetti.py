@@ -14,6 +14,15 @@ olivetti_faces = datasets.fetch_olivetti_faces(data_home=download_directory)
 
 # 未指定下載位置, 下載至 C:/Users/070601/scikit_learn_data/olivetti_py3.pkz
 olivetti_faces = datasets.fetch_olivetti_faces()
+
+fetch_olivetti_faces
+
+data: 形狀 (400, 4096=64X64)
+每一列對應於原始大小為 64 x 64 像素的展開人臉圖像。
+
+40個人 每個人有10張圖像
+
+共 400張灰度圖像
 """
 
 print("------------------------------------------------------------")  # 60個
@@ -506,6 +515,319 @@ for i in range(n_faces):
             interpolation="nearest",
         )
 show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+olivetti_faces = datasets.fetch_olivetti_faces()
+
+cc = olivetti_faces.data.shape
+print(cc)
+
+cc = olivetti_faces.images.shape
+print(cc)
+
+cc = olivetti_faces.target.shape
+print(cc)
+
+cc = olivetti_faces.DESCR
+# print(cc)
+
+R, C = 2, 3
+n_components = R * C
+image_shape = (64, 64)
+
+faces, _ = datasets.fetch_olivetti_faces(
+    return_X_y=True, shuffle=True, random_state=9487
+)
+
+n_samples, n_features = faces.shape
+print(faces.shape)
+
+
+# Utils function
+def plot_gallery(title, images, n_col=C, n_row=R, cmap=plt.cm.gray):
+    plt.figure(figsize=(2.0 * n_col, 2.26 * n_row))
+    plt.suptitle(title, size=16)
+    for i, comp in enumerate(images):
+        plt.subplot(n_row, n_col, i + 1)
+        vmax = max(comp.max(), -comp.min())
+        plt.imshow(
+            comp.reshape(image_shape),
+            cmap=cmap,
+            interpolation="nearest",
+            vmin=-vmax,
+            vmax=vmax,
+        )
+        # plt.xticks(())
+        # plt.yticks(())
+    # plt.subplots_adjust(0.01, 0.05, 0.99, 0.93, 0.04, 0.0)
+
+
+# Preprocessing
+# global centering
+faces_centered = faces - faces.mean(axis=0)
+# local centering
+faces_centered -= faces_centered.mean(axis=1).reshape(n_samples, -1)
+
+plot_gallery("Original Olivetti faces", faces[:n_components])
+
+show()
+
+# First centered Olivetti faces
+plot_gallery("First centered Olivetti faces", faces_centered[:n_components])
+show()
+
+clf = decomposition.PCA(n_components=n_components)
+clf.fit(faces_centered)
+plot_gallery("PCA first %i loadings" % n_components, clf.components_[:n_components])
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+"""
+人臉資料集分解 ST
+https://scikit-learn.dev.org.tw/1.6/auto_examples/decomposition/plot_faces_decomposition.html#sphx-glr-auto-examples-decomposition-plot-faces-decomposition-py
+"""
+print("------------------------------------------------------------")  # 60個
+
+# 資料集準備
+# 載入並預處理 Olivetti 人臉資料集。
+
+import logging
+
+import matplotlib.pyplot as plt
+from numpy.random import RandomState
+
+from sklearn import cluster, decomposition
+from sklearn.datasets import fetch_olivetti_faces
+
+rng = RandomState(0)
+
+# Display progress logs on stdout
+logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
+
+faces, _ = fetch_olivetti_faces(return_X_y=True, shuffle=True, random_state=rng)
+n_samples, n_features = faces.shape
+
+# Global centering (focus on one feature, centering all samples)
+faces_centered = faces - faces.mean(axis=0)
+
+# Local centering (focus on one sample, centering all features)
+faces_centered -= faces_centered.mean(axis=1).reshape(n_samples, -1)
+
+print("Dataset consists of %d faces" % n_samples)
+
+# 定義一個基本函數來繪製人臉的圖庫。
+
+n_row, n_col = 2, 3
+n_components = n_row * n_col
+image_shape = (64, 64)
+
+
+def plot_gallery(title, images, n_col=n_col, n_row=n_row, cmap=plt.cm.gray):
+    fig, axs = plt.subplots(
+        nrows=n_row,
+        ncols=n_col,
+        figsize=(2.0 * n_col, 2.3 * n_row),
+        facecolor="white",
+        constrained_layout=True,
+    )
+    fig.set_constrained_layout_pads(w_pad=0.01, h_pad=0.02, hspace=0, wspace=0)
+    fig.set_edgecolor("black")
+    fig.suptitle(title, size=16)
+    for ax, vec in zip(axs.flat, images):
+        vmax = max(vec.max(), -vec.min())
+        im = ax.imshow(
+            vec.reshape(image_shape),
+            cmap=cmap,
+            interpolation="nearest",
+            vmin=-vmax,
+            vmax=vmax,
+        )
+        ax.axis("off")
+
+    fig.colorbar(im, ax=axs, orientation="horizontal", shrink=0.99, aspect=40, pad=0.01)
+    plt.show()
+
+
+# 讓我們看一下我們的資料。灰色表示負值，白色表示正值。
+
+plot_gallery("Faces from dataset", faces_centered[:n_components])
+
+# 分解 Decomposition
+
+# 特徵臉 - 使用隨機 SVD 的 PCA
+# 使用資料的奇異值分解 (SVD) 進行線性降維，將其投影到較低的維度空間。
+
+pca_estimator = decomposition.PCA(
+    n_components=n_components, svd_solver="randomized", whiten=True
+)
+pca_estimator.fit(faces_centered)
+plot_gallery(
+    "Eigenfaces - PCA using randomized SVD", pca_estimator.components_[:n_components]
+)
+
+# 非負組件 - NMF Non-negative components - NMF
+# 估計非負原始資料作為兩個非負矩陣的乘積。
+
+nmf_estimator = decomposition.NMF(n_components=n_components, tol=5e-3)
+nmf_estimator.fit(faces)  # original non- negative dataset
+plot_gallery("Non-negative components - NMF", nmf_estimator.components_[:n_components])
+
+# 獨立組件 - FastICA Independent components - FastICA
+# 獨立成分分析將多變量向量分解為彼此最大獨立的加性子成分。
+
+ica_estimator = decomposition.FastICA(
+    n_components=n_components, max_iter=400, whiten="arbitrary-variance", tol=15e-5
+)
+ica_estimator.fit(faces_centered)
+plot_gallery(
+    "Independent components - FastICA", ica_estimator.components_[:n_components]
+)
+
+# 稀疏組件 - MiniBatchSparsePCA Sparse components - MiniBatchSparsePCA
+# 小批量稀疏 PCA (MiniBatchSparsePCA) 提取最能重建資料的一組稀疏組件。此變體比類似的 SparsePCA更快，但準確度較低。
+
+batch_pca_estimator = decomposition.MiniBatchSparsePCA(
+    n_components=n_components, alpha=0.1, max_iter=100, batch_size=3, random_state=rng
+)
+batch_pca_estimator.fit(faces_centered)
+plot_gallery(
+    "Sparse components - MiniBatchSparsePCA",
+    batch_pca_estimator.components_[:n_components],
+)
+
+# 字典學習
+# 預設情況下，MiniBatchDictionaryLearning 將資料分成小批量，並透過在指定次數的迭代中循環小批量，以線上方式進行最佳化。
+
+batch_dict_estimator = decomposition.MiniBatchDictionaryLearning(
+    n_components=n_components, alpha=0.1, max_iter=50, batch_size=3, random_state=rng
+)
+batch_dict_estimator.fit(faces_centered)
+plot_gallery("Dictionary learning", batch_dict_estimator.components_[:n_components])
+
+# 叢集中心 - MiniBatchKMeans   # Cluster centers - MiniBatchKMeans
+# sklearn.cluster.MiniBatchKMeans 在計算上是有效率的，並使用 partial_fit 方法實作線上學習。這就是為什麼用 MiniBatchKMeans 來增強一些耗時的演算法可能是有益的。
+
+kmeans_estimator = cluster.MiniBatchKMeans(
+    n_clusters=n_components,
+    tol=1e-3,
+    batch_size=20,
+    max_iter=50,
+    random_state=rng,
+)
+kmeans_estimator.fit(faces_centered)
+plot_gallery(
+    "Cluster centers - MiniBatchKMeans",
+    kmeans_estimator.cluster_centers_[:n_components],
+)
+
+# 因子分析組件 - FA
+# Factor Analysis components - FA
+# FactorAnalysis 與 PCA 相似，但具有獨立地對輸入空間每個方向的變異數進行建模的優點（異質雜訊）。在使用者指南中閱讀更多資訊。
+
+fa_estimator = decomposition.FactorAnalysis(n_components=n_components, max_iter=20)
+fa_estimator.fit(faces_centered)
+plot_gallery("Factor Analysis (FA)", fa_estimator.components_[:n_components])
+
+# --- Pixelwise variance
+plt.figure(figsize=(3.2, 3.6), facecolor="white", tight_layout=True)
+vec = fa_estimator.noise_variance_
+vmax = max(vec.max(), -vec.min())
+plt.imshow(
+    vec.reshape(image_shape),
+    cmap=plt.cm.gray,
+    interpolation="nearest",
+    vmin=-vmax,
+    vmax=vmax,
+)
+plt.axis("off")
+plt.title("Pixelwise variance from \n Factor Analysis (FA)", size=16, wrap=True)
+plt.colorbar(orientation="horizontal", shrink=0.8, pad=0.03)
+plt.show()
+
+# 分解：字典學習
+# Decomposition: Dictionary learning
+# 使用另一個顏色圖繪製我們資料集中相同的樣本。紅色表示負值，藍色表示正值，白色表示零。
+
+plot_gallery("Faces from dataset", faces_centered[:n_components], cmap=plt.cm.RdBu)
+
+# 字典學習 - 正向字典  # Dictionary learning - positive dictionary
+# 在以下章節中，我們在尋找字典時強制執行正向性。
+
+dict_pos_dict_estimator = decomposition.MiniBatchDictionaryLearning(
+    n_components=n_components,
+    alpha=0.1,
+    max_iter=50,
+    batch_size=3,
+    random_state=rng,
+    positive_dict=True,
+)
+dict_pos_dict_estimator.fit(faces_centered)
+plot_gallery(
+    "Dictionary learning - positive dictionary",
+    dict_pos_dict_estimator.components_[:n_components],
+    cmap=plt.cm.RdBu,
+)
+
+# 字典學習 - 正向編碼 # Dictionary learning - positive code
+# 以下我們將編碼係數限制為正矩陣。
+
+dict_pos_code_estimator = decomposition.MiniBatchDictionaryLearning(
+    n_components=n_components,
+    alpha=0.1,
+    max_iter=50,
+    batch_size=3,
+    fit_algorithm="cd",
+    random_state=rng,
+    positive_code=True,
+)
+dict_pos_code_estimator.fit(faces_centered)
+plot_gallery(
+    "Dictionary learning - positive code",
+    dict_pos_code_estimator.components_[:n_components],
+    cmap=plt.cm.RdBu,
+)
+
+# 字典學習 - 正向字典和編碼 # Dictionary learning - positive dictionary & code
+# 以下是字典值和編碼係數受到正向約束時的結果。
+
+dict_pos_estimator = decomposition.MiniBatchDictionaryLearning(
+    n_components=n_components,
+    alpha=0.1,
+    max_iter=50,
+    batch_size=3,
+    fit_algorithm="cd",
+    random_state=rng,
+    positive_dict=True,
+    positive_code=True,
+)
+dict_pos_estimator.fit(faces_centered)
+plot_gallery(
+    "Dictionary learning - positive dictionary & code",
+    dict_pos_estimator.components_[:n_components],
+    cmap=plt.cm.RdBu,
+)
+
+
+print("------------------------------------------------------------")  # 60個
+"""
+人臉資料集分解 SP
+https://scikit-learn.dev.org.tw/1.6/auto_examples/decomposition/plot_faces_decomposition.html#sphx-glr-auto-examples-decomposition-plot-faces-decomposition-py
+"""
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
