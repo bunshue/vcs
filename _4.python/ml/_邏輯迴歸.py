@@ -53,7 +53,7 @@ from sklearn import linear_model
 
 
 def show():
-    plt.show()
+    # plt.show()
     pass
 
 
@@ -815,7 +815,6 @@ print("混淆矩陣 :\n", confusion_matrix(y_test, y_pred), sep="")
 print("混淆矩陣圖")
 disp = ConfusionMatrixDisplay(confusion_matrix=confusion_matrix(y_test, y_pred))
 disp.plot()
-
 show()
 
 cc = classification_report(y_test, y_pred)
@@ -891,7 +890,6 @@ disp = ConfusionMatrixDisplay(
     confusion_matrix=confusion_matrix(y_test, y_pred), display_labels=iris.target_names
 )
 disp.plot()
-
 show()
 
 # 使用全部特徵
@@ -1835,94 +1833,98 @@ accepts.head()
 
 # ##  分类变量的相关关系
 
-# 交叉表
-
+print("交叉表")
 cross_table = pd.crosstab(accepts.used_ind, accepts.bad_ind, margins=True)
 # cross_table = pd.crosstab(accepts.bankruptcy_ind,accepts.bad_ind, margins=True)
+print("交叉表 :\n", cross_table, sep="")
 
-print("cross_table")
-print(cross_table)
-
-# 列联表
-
-
+print("列联表")
+""" skip
 def percConvert(ser):
-    return ser / float(ser[-1])
+    #return ser / float(ser[-1])
+    print('aaa')
+    print(ser)
+    print('bbb')
+    print(len(ser))
+    print('ccc')
 
 
-""" NG
 cross_table.apply(percConvert, axis=1)
+"""
 
-print('''chisq = %6.4f 
-p-value = %6.4f
-dof = %i 
-expected_freq = %s'''  %stats.chi2_contingency(cross_table.iloc[:2, :2]))
+cc = stats.chi2_contingency(cross_table.iloc[:2, :2])
+print("chisq = %6.4f\np-value = %6.4f\ndof = %i\nexpected_freq = %s" % cc, sep="")
 
-# ## 逻辑回归
+# 逻辑回归
 
-accepts.plot(x='age_oldest_tr', y='bad_ind', kind='scatter')
+accepts.plot(kind="scatter", x="age_oldest_tr", y="bad_ind")
+plt.title("最久账号存续时间(月) 與 是否违约 的關係")
+show()
 
-# •随机抽样，建立训练集与测试集
+# 随机抽样，建立训练集与测试集
 
 train = accepts.sample(frac=0.7, random_state=1234).copy()
-test = accepts[~ accepts.index.isin(train.index)].copy()
-print(' 训练集样本量: %i \n 测试集样本量: %i' %(len(train), len(test)))
+test = accepts[~accepts.index.isin(train.index)].copy()
+print(" 训练集样本量: %i \n 测试集样本量: %i" % (len(train), len(test)))
 
-lg = smf.glm('bad_ind ~ age_oldest_tr', data=train, 
-             family=sm.families.Binomial(sm.families.links.logit)).fit()
+lg = smf.glm(
+    "bad_ind ~ age_oldest_tr",
+    data=train,
+    family=sm.families.Binomial(sm.families.links.logit()),
+).fit()
 lg.summary()
 
 # 预测
+train["proba"] = lg.predict(train)  # 預測.predict
+test["proba"] = lg.predict(test)  # 預測.predict
 
-train['proba'] = lg.predict(train)  # 預測.predict
-test['proba'] = lg.predict(test)  # 預測.predict
-
-test['proba'].head(10)
+test["proba"].head(10)
 
 # ## 模型评估
 # 设定阈值
 
-test['prediction'] = (test['proba'] > 0.3).astype('int')
+test["prediction"] = (test["proba"] > 0.3).astype("int")
 
 # 混淆矩阵
-
 pd.crosstab(test.bad_ind, test.prediction, margins=True)
 
 # - 计算准确率
-
-acc = sum(test['prediction'] == test['bad_ind']) /np.float(len(test))
-print('The accurancy is %.2f' %acc)
+acc = sum(test["prediction"] == test["bad_ind"]) / np.float(len(test))
+print("The accurancy is %.2f" % acc)
 
 for i in np.arange(0.02, 0.3, 0.02):
-    prediction = (test['proba'] > i).astype('int')
-    confusion_matrix = pd.crosstab(prediction,test.bad_ind,
-                                   margins = True)
-    precision = confusion_matrix.loc[0, 0] /confusion_matrix.loc['All', 0]
-    recall = confusion_matrix.loc[0, 0] / confusion_matrix.loc[0, 'All']
-    Specificity = confusion_matrix.loc[1, 1] /confusion_matrix.loc[1,'All']
+    prediction = (test["proba"] > i).astype("int")
+    confusion_matrix = pd.crosstab(prediction, test.bad_ind, margins=True)
+    precision = confusion_matrix.loc[0, 0] / confusion_matrix.loc["All", 0]
+    recall = confusion_matrix.loc[0, 0] / confusion_matrix.loc[0, "All"]
+    Specificity = confusion_matrix.loc[1, 1] / confusion_matrix.loc[1, "All"]
     f1_score = 2 * (precision * recall) / (precision + recall)
-    print('threshold: %s, precision: %.2f, recall:%.2f ,Specificity:%.2f , f1_score:%.2f'%(i, precision, recall, Specificity,f1_score))
+    print(
+        "threshold: %s, precision: %.2f, recall:%.2f ,Specificity:%.2f , f1_score:%.2f"
+        % (i, precision, recall, Specificity, f1_score)
+    )
 
 # 绘制ROC曲线
 
 fpr_test, tpr_test, th_test = metrics.roc_curve(test.bad_ind, test.proba)
 fpr_train, tpr_train, th_train = metrics.roc_curve(train.bad_ind, train.proba)
 
-plt.figure(figsize=[3, 3])
-plt.plot(fpr_test, tpr_test, 'b--')
-plt.plot(fpr_train, tpr_train, 'r-')
-plt.title('ROC curve')
+plt.plot(fpr_test, tpr_test, "b--")
+plt.plot(fpr_train, tpr_train, "r-")
+plt.title("ROC 曲線")
 show()
 
-print('AUC = %.4f' %metrics.auc(fpr_test, tpr_test))
+print("AUC = %.4f" % metrics.auc(fpr_test, tpr_test))
 
 # 包含分类预测变量的逻辑回归
 
-formula = '''bad_ind ~ C(used_ind)'''
+formula = """bad_ind ~ C(used_ind)"""
 
-lg_m = smf.glm(formula=formula, data=train, 
-             family=sm.families.Binomial(sm.families.links.logit)).fit()
+lg_m = smf.glm(
+    formula=formula, data=train, family=sm.families.Binomial(sm.families.links.logit())
+).fit()
 lg_m.summary()
+
 
 # 多元逻辑回归
 # 向前法
@@ -1930,43 +1932,62 @@ def forward_select(data, response):
     remaining = set(data.columns)
     remaining.remove(response)
     selected = []
-    current_score, best_new_score = float('inf'), float('inf')
+    current_score, best_new_score = float("inf"), float("inf")
     while remaining:
-        aic_with_candidates=[]
+        aic_with_candidates = []
         for candidate in remaining:
-            formula = "{} ~ {}".format(
-                response,' + '.join(selected + [candidate]))
-            aic = smf.glm(
-                formula=formula, data=data, 
-                family=sm.families.Binomial(sm.families.links.logit)
-            ).fit().aic
+            formula = "{} ~ {}".format(response, " + ".join(selected + [candidate]))
+            aic = (
+                smf.glm(
+                    formula=formula,
+                    data=data,
+                    family=sm.families.Binomial(sm.families.links.logit()),
+                )
+                .fit()
+                .aic
+            )
             aic_with_candidates.append((aic, candidate))
         aic_with_candidates.sort(reverse=True)
-        best_new_score, best_candidate=aic_with_candidates.pop()
-        if current_score > best_new_score: 
+        best_new_score, best_candidate = aic_with_candidates.pop()
+        if current_score > best_new_score:
             remaining.remove(best_candidate)
             selected.append(best_candidate)
             current_score = best_new_score
-            print ('aic is {},continuing!'.format(current_score))
-        else:        
-            print ('forward selection over!')
+            print("aic is {},continuing!".format(current_score))
+        else:
+            print("forward selection over!")
             break
-            
-    formula = "{} ~ {} ".format(response,' + '.join(selected))
-    print('final formula is {}'.format(formula))
+
+    formula = "{} ~ {} ".format(response, " + ".join(selected))
+    print("final formula is {}".format(formula))
     model = smf.glm(
-        formula=formula, data=data, 
-        family=sm.families.Binomial(sm.families.links.logit)
+        formula=formula,
+        data=data,
+        family=sm.families.Binomial(sm.families.links.logit()),
     ).fit()
-    return(model)
+    return model
 
 
-#只有连续变量可以进行变量筛选，分类变量需要进行WOE转换才可以进行变量筛选
-candidates = ['bad_ind','tot_derog','age_oldest_tr','tot_open_tr','rev_util','fico_score','loan_term','ltv',
-              'veh_mileage','dti_hist','dti_mew','fta','nth','nta']
+# 只有连续变量可以进行变量筛选，分类变量需要进行WOE转换才可以进行变量筛选
+candidates = [
+    "bad_ind",
+    "tot_derog",
+    "age_oldest_tr",
+    "tot_open_tr",
+    "rev_util",
+    "fico_score",
+    "loan_term",
+    "ltv",
+    "veh_mileage",
+    "dti_hist",
+    "dti_mew",
+    "fta",
+    "nth",
+    "nta",
+]
 data_for_select = train[candidates]
 
-lg_m1 = forward_select(data=data_for_select, response='bad_ind')
+lg_m1 = forward_select(data=data_for_select, response="bad_ind")
 lg_m1.summary()
 
 
@@ -1975,232 +1996,57 @@ lg_m1.summary()
 
 def vif(df, col_i):
     from statsmodels.formula.api import ols
-    
+
     cols = list(df.columns)
     cols.remove(col_i)
     cols_noti = cols
-    formula = col_i + '~' + '+'.join(cols_noti)
+    formula = col_i + "~" + "+".join(cols_noti)
     r2 = ols(formula, df).fit().rsquared
-    return 1. / (1. - r2)
+    return 1.0 / (1.0 - r2)
 
 
-candidates = ['bad_ind','fico_score','ltv','age_oldest_tr','tot_derog','nth','tot_open_tr','veh_mileage','rev_util']
-exog = train[candidates].drop(['bad_ind'], axis=1)
+candidates = [
+    "bad_ind",
+    "fico_score",
+    "ltv",
+    "age_oldest_tr",
+    "tot_derog",
+    "nth",
+    "tot_open_tr",
+    "veh_mileage",
+    "rev_util",
+]
+exog = train[candidates].drop(["bad_ind"], axis=1)
 
 for i in exog.columns:
-    print(i, '\t', vif(df=exog, col_i=i))
+    print(i, "\t", vif(df=exog, col_i=i))
 
-train['proba'] = lg_m1.predict(train)  # 預測.predict
-test['proba'] = lg_m1.predict(test)  # 預測.predict
+train["proba"] = lg_m1.predict(train)  # 預測.predict
+test["proba"] = lg_m1.predict(test)  # 預測.predict
 
 fpr_test, tpr_test, th_test = metrics.roc_curve(test.bad_ind, test.proba)
 fpr_train, tpr_train, th_train = metrics.roc_curve(train.bad_ind, train.proba)
 
-plt.figure(figsize=[3, 3])
-plt.plot(fpr_test, tpr_test, 'b--')
-plt.plot(fpr_train, tpr_train, 'r-')
-plt.title('ROC curve')
+plt.plot(fpr_test, tpr_test, "b--")
+plt.plot(fpr_train, tpr_train, "r-")
+plt.title("ROC 曲線")
 show()
 
-print('AUC = %.4f' %metrics.auc(fpr_test, tpr_test))
+print("AUC = %.4f" % metrics.auc(fpr_test, tpr_test))
 
-#目前vehicle_year、vehicle_make、bankruptcy_ind、used_ind这些分类变量无法通过逐步变量筛选法
-#解决方案：
-#1、逐一根据显著性测试
-#2、使用决策树等方法筛选变量，但是多分类变量需要事先进行变量概化
-#3、使用WOE转换，多分类变量也需要事先进行概化，使用scorecardpy包中的woe算法可以自动进行概化
+# 目前vehicle_year、vehicle_make、bankruptcy_ind、used_ind这些分类变量无法通过逐步变量筛选法
+# 解决方案：
+# 1、逐一根据显著性测试
+# 2、使用决策树等方法筛选变量，但是多分类变量需要事先进行变量概化
+# 3、使用WOE转换，多分类变量也需要事先进行概化，使用scorecardpy包中的woe算法可以自动进行概化
 # 使用第一种方法
-#formula = '''bad_ind ~ fico_score+ltv+age_oldest_tr+tot_derog+nth+tot_open_tr+veh_mileage+rev_util+C(used_ind)+C(vehicle_year)+C(bankruptcy_ind)'''
-formula = '''bad_ind ~ fico_score+ltv+age_oldest_tr+tot_derog+nth+tot_open_tr+veh_mileage+rev_util+C(bankruptcy_ind)'''
-lg_m = smf.glm(formula=formula, data=train, 
-             family=sm.families.Binomial(sm.families.links.logit)).fit()
-lg_m.summary()
-"""
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# # 逻辑回归
-
-# subscriberID="个人客户的ID"
-# churn="是否流失：1=流失";
-# Age="年龄"
-# incomeCode="用户居住区域平均收入的代码"
-# peakMinAv="统计期间内最高单月通话时长"
-# peakMinDiff="统计期间结束月份与开始月份相比通话时长增加数量"
-# posTrend="该用户通话时长是否呈现出上升态势：是=1"
-# negTrend="该用户通话时长是否呈现出下降态势：是=1"
-# nrProm="电话公司营销的数量"
-# prom="最近一个月是否被营销过：是=1"
-# curPlan="统计时间开始时套餐类型：1=最高通过200分钟；2=300分钟；3=350分钟；4=500分钟"
-# avPlan="统计期间内平均套餐类型"
-# planChange="统计期间是否更换过套餐：1=是"
-# posPlanChange="统计期间是否提高套餐：1=是"
-# negPlanChange="统计期间是否降低套餐：1=是"
-
-from scipy import stats
-import statsmodels.api as sm
-import statsmodels.formula.api as smf
-
-# pd.set_option('display.max_columns', None)
-
-# 导入数据和数据清洗
-
-churn = pd.read_csv(r"data/telecom_churn.csv", skipinitialspace=True)
-print(churn.shape)
-cc = churn.head()
-print(cc)
-
-# ##  分类变量的相关关系
-
-# 交叉表
-
-cross_table = pd.crosstab(churn.posTrend, churn.churn, margins=True)
-cross_table
-
-# 列联表
-
-
-def percConvert(ser):
-    return ser / float(ser[-1])
-
-
-cross_table.apply(percConvert, axis=1)
-
-print(
-    """chisq = %6.4f 
-p-value = %6.4f
-dof = %i 
-expected_freq = %s"""
-    % stats.chi2_contingency(cross_table.iloc[:2, :2])
-)
-
-# ## 逻辑回归
-
-churn.plot(x="duration", y="churn", kind="scatter")
-
-# •随机抽样，建立训练集与测试集
-
-train = churn.sample(frac=0.7, random_state=1234).copy()
-test = churn[~churn.index.isin(train.index)].copy()
-print(" 训练集样本量: %i \n 测试集样本量: %i" % (len(train), len(test)))
-
-""" NG
-lg = smf.glm('churn ~ duration', data=train, 
-             family=sm.families.Binomial(sm.families.links.logit)).fit()
-lg.summary()
-
-# 预测
-
-train['proba'] = lg.predict(train)  # 預測.predict
-test['proba'] = lg.predict(test)  # 預測.predict
-
-test['proba'].head()
-
-# ## 模型评估
-# 设定阈值
-
-test['prediction'] = (test['proba'] > 0.3).astype('int')
-
-# 混淆矩阵
-
-pd.crosstab(test.churn, test.prediction, margins=True)
-
-# 计算准确率
-
-acc = sum(test['prediction'] == test['churn']) /np.float(len(test))
-print('The accurancy is %.2f' %acc)
-
-for i in np.arange(0.1, 0.9, 0.1):
-    prediction = (test['proba'] > i).astype('int')
-    confusion_matrix = pd.crosstab(prediction,test.churn,
-                                   margins = True)
-    precision = confusion_matrix.loc[0, 0] /confusion_matrix.loc['All', 0]
-    recall = confusion_matrix.loc[0, 0] / confusion_matrix.loc[0, 'All']
-    Specificity = confusion_matrix.loc[1, 1] /confusion_matrix.loc[1,'All']
-    f1_score = 2 * (precision * recall) / (precision + recall)
-    print('threshold: %s, precision: %.2f, recall:%.2f ,Specificity:%.2f , f1_score:%.2f'%(i, precision, recall, Specificity,f1_score))
-
-
-# 绘制ROC曲线
-
-fpr_test, tpr_test, th_test = metrics.roc_curve(test.churn, test.proba)
-fpr_train, tpr_train, th_train = metrics.roc_curve(train.churn, train.proba)
-
-plt.figure(figsize=[3, 3])
-plt.plot(fpr_test, tpr_test, 'b--')
-plt.plot(fpr_train, tpr_train, 'r-')
-plt.title('ROC curve')
-show()
-
-print('AUC = %.4f' %metrics.auc(fpr_test, tpr_test))
-
-# 包含分类预测变量的逻辑回归
-
-formula = '''churn ~ C(avgplan)'''
-
-lg_m = smf.glm(formula=formula, data=train, 
-             family=sm.families.Binomial(sm.families.links.logit)).fit()
+# formula = '''bad_ind ~ fico_score+ltv+age_oldest_tr+tot_derog+nth+tot_open_tr+veh_mileage+rev_util+C(used_ind)+C(vehicle_year)+C(bankruptcy_ind)'''
+formula = """bad_ind ~ fico_score+ltv+age_oldest_tr+tot_derog+nth+tot_open_tr+veh_mileage+rev_util+C(bankruptcy_ind)"""
+lg_m = smf.glm(
+    formula=formula, data=train, family=sm.families.Binomial(sm.families.links.logit())
+).fit()
 lg_m.summary()
 
-# 多元逻辑回归
-# 向前法
-def forward_select(data, response):
-    remaining = set(data.columns)
-    remaining.remove(response)
-    selected = []
-    current_score, best_new_score = float('inf'), float('inf')
-    while remaining:
-        aic_with_candidates=[]
-        for candidate in remaining:
-            formula = "{} ~ {}".format(
-                response,' + '.join(selected + [candidate]))
-            aic = smf.glm(
-                formula=formula, data=data, 
-                family=sm.families.Binomial(sm.families.links.logit)
-            ).fit().aic
-            aic_with_candidates.append((aic, candidate))
-        aic_with_candidates.sort(reverse=True)
-        best_new_score, best_candidate=aic_with_candidates.pop()
-        if current_score > best_new_score: 
-            remaining.remove(best_candidate)
-            selected.append(best_candidate)
-            current_score = best_new_score
-            print ('aic is {},continuing!'.format(current_score))
-        else:        
-            print ('forward selection over!')
-            break
-            
-    formula = "{} ~ {} ".format(response,' + '.join(selected))
-    print('final formula is {}'.format(formula))
-    model = smf.glm(
-        formula=formula, data=data, 
-        family=sm.families.Binomial(sm.families.links.logit)
-    ).fit()
-    return(model)
-
-candidates = ['churn','duration','AGE','edu_class','incomeCode','feton','peakMinAv','peakMinDiff','call_10086']
-data_for_select = train[candidates]
-
-lg_m1 = forward_select(data=data_for_select, response='churn')
-lg_m1.summary()
-
-# Seemingly wrong when using 'statsmmodels.stats.outliers_influence.variance_inflation_factor'
-
-def vif(df, col_i):
-    from statsmodels.formula.api import ols
-    
-    cols = list(df.columns)
-    cols.remove(col_i)
-    cols_noti = cols
-    formula = col_i + '~' + '+'.join(cols_noti)
-    r2 = ols(formula, df).fit().rsquared
-    return 1. / (1. - r2)
-
-exog = train[candidates].drop(['churn'], axis=1)
-
-for i in exog.columns:
-    print(i, '\t', vif(df=exog, col_i=i))
-"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
