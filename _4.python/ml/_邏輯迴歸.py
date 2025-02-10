@@ -2020,6 +2020,7 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # # 逻辑回归
+
 # subscriberID="个人客户的ID"
 # churn="是否流失：1=流失";
 # Age="年龄"
@@ -2045,7 +2046,9 @@ import statsmodels.formula.api as smf
 # 导入数据和数据清洗
 
 churn = pd.read_csv(r"data/telecom_churn.csv", skipinitialspace=True)
-churn.head()
+print(churn.shape)
+cc = churn.head()
+print(cc)
 
 # ##  分类变量的相关关系
 

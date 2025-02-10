@@ -955,7 +955,8 @@ import sklearn.metrics as sm
 print(sm.accuracy_score(y, y_pred))
 
 # 混淆矩陣
-print(sm.confusion_matrix(y, y_pred))
+cm = sm.confusion_matrix(y, y_pred)
+print("混淆矩陣 :\n", cm, sep="")
 
 plt.figure(num="KMeans分群", figsize=(12, 6))
 
