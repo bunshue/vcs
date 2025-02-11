@@ -1,5 +1,5 @@
 """
-python_data_science02
+python_data_science_matplotlib1
 
 """
 
@@ -32,7 +32,7 @@ def show():
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
+
 #plt.style.use('classic')
 #plt.style.use('seaborn-v0_8')
 
@@ -77,7 +77,7 @@ for marker in ['o', '.', ',', 'x', '+', 'v', '^', '<', '>', 's', 'd']:
 plt.legend(numpoints=1)
 plt.xlim(0, 1.8)
 
-plt.show()
+show()
 
 cc = plt.figure().canvas.get_supported_filetypes()
 print(cc)
@@ -95,7 +95,7 @@ plt.scatter(x, y, c=colors, s=sizes, alpha=0.3,
             cmap='viridis')
 plt.colorbar()  # show color scale
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -109,7 +109,7 @@ plt.scatter(features[0], features[1], alpha=0.2,
             s=100*features[3], c=iris.target, cmap='viridis')
 plt.xlabel(iris.feature_names[0])
 plt.ylabel(iris.feature_names[1])
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -119,12 +119,11 @@ dy = 0.8
 y = np.sin(x) + dy * np.random.randn(50)
 
 plt.errorbar(x, y, yerr=dy, fmt='.k')
-plt.show()
-
+show()
 
 plt.errorbar(x, y, yerr=dy, fmt='o', color='black',
              ecolor='lightgray', elinewidth=3, capsize=0)
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -152,7 +151,7 @@ plt.fill_between(xfit, yfit - dyfit, yfit + dyfit,
                  color='gray', alpha=0.2)
 plt.xlim(0, 10)
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -167,21 +166,21 @@ X, Y = np.meshgrid(x, y)
 Z = f(X, Y)
 
 plt.contour(X, Y, Z, colors='black')
-plt.show()
+show()
 
 plt.contour(X, Y, Z, 20, cmap='RdGy')
-plt.show()
+show()
 
 plt.contourf(X, Y, Z, 20, cmap='RdGy')
 plt.colorbar()
-plt.show()
+show()
 
 
 plt.imshow(Z, extent=[0, 5, 0, 5], origin='lower',
            cmap='RdGy')
 plt.colorbar()
 #plt.axis(aspect='image')
-plt.show()
+show()
 
 
 contours = plt.contour(X, Y, Z, 3, colors='black')
@@ -190,7 +189,7 @@ plt.clabel(contours, inline=True, fontsize=8)
 plt.imshow(Z, extent=[0, 5, 0, 5], origin='lower',
            cmap='RdGy', alpha=0.5)
 plt.colorbar()
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -204,14 +203,11 @@ kwargs = dict(histtype='stepfilled', alpha=0.3, density=True, bins=40)
 plt.hist(x1, **kwargs)
 plt.hist(x2, **kwargs)
 plt.hist(x3, **kwargs)
-plt.show()
-
+show()
 
 data = np.random.randn(1000)
 counts, bin_edges = np.histogram(data, bins=5)
 print(counts)
-
-
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -225,15 +221,14 @@ plt.hist2d(x, y, bins=30, cmap='Blues')
 cb = plt.colorbar()
 cb.set_label('counts in bin')
 
-plt.show()
-
+show()
 
 counts, xedges, yedges = np.histogram2d(x, y, bins=30)
 
 plt.hexbin(x, y, gridsize=30, cmap='Blues')
 cb = plt.colorbar(label='count in bin')
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -260,7 +255,7 @@ plt.imshow(Z.reshape(Xgrid.shape),
 cb = plt.colorbar()
 cb.set_label("density")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -291,7 +286,7 @@ plt.legend(scatterpoints=1, frameon=False, labelspacing=1, title='City Area')
 
 plt.title('California Cities: Area and Population')
 
-plt.show()
+show()
 """
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -302,12 +297,12 @@ I = np.sin(x) * np.cos(x[:, np.newaxis])
 plt.imshow(I)
 plt.colorbar()
 
-plt.show()
+show()
 
 #Customizing Colorbars
 plt.imshow(I, cmap='gray')
 
-plt.show()
+show()
 
 
 from matplotlib.colors import LinearSegmentedColormap
@@ -340,16 +335,16 @@ def view_colormap(cmap):
     ax[1].imshow([grayscale], extent=[0, 10, 0, 1])
 
 view_colormap('jet')
-plt.show()
+show()
 
 view_colormap('viridis')
-plt.show()
+show()
 
 view_colormap('cubehelix')
-plt.show()
+show()
 
 view_colormap('RdBu')
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -369,7 +364,7 @@ plt.imshow(I, cmap='RdBu')
 plt.colorbar(extend='both')
 plt.clim(-1, 1)
 
-plt.show()
+show()
 
 #Discrete Color Bars
 
@@ -377,38 +372,7 @@ plt.imshow(I, cmap=plt.cm.get_cmap('Blues', 6))
 plt.colorbar()
 plt.clim(-1, 1)
 
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# load images of the digits 0 through 5 and visualize several of them
-from sklearn.datasets import load_digits
-digits = load_digits(n_class=6)
-
-fig, ax = plt.subplots(8, 8, figsize=(6, 6))
-for i, axi in enumerate(ax.flat):
-    axi.imshow(digits.images[i], cmap='binary')
-    axi.set(xticks=[], yticks=[])
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# project the digits into 2 dimensions using IsoMap
-from sklearn.manifold import Isomap
-iso = Isomap(n_components=2)
-projection = iso.fit_transform(digits.data)
-
-
-# plot the results
-plt.scatter(projection[:, 0], projection[:, 1], lw=0.1,
-            c=digits.target, cmap=plt.cm.get_cmap('cubehelix', 6))
-plt.colorbar(ticks=range(6), label='digit value')
-plt.clim(-0.5, 5.5)
-
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -418,7 +382,7 @@ for i in range(1, 7):
     plt.text(0.5, 0.5, str((2, 3, i)),
              fontsize=18, ha='center')
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -430,8 +394,7 @@ for i in range(1, 7):
     ax.text(0.5, 0.5, str((2, 3, i)),
            fontsize=18, ha='center')
 
-plt.show()
-
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -442,8 +405,7 @@ for i in range(2):
     for j in range(3):
         ax[i, j].text(0.5, 0.5, str((i, j)),
                       fontsize=18, ha='center')
-plt.show()
-
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -456,9 +418,7 @@ plt.subplot(grid[0, 1:])
 plt.subplot(grid[1, :2])
 plt.subplot(grid[1, 2])
 
-plt.show()
-
-
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -487,7 +447,7 @@ y_hist.hist(y, 40, histtype='stepfilled',
             orientation='horizontal', color='gray')
 y_hist.invert_xaxis()
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -509,9 +469,7 @@ plt.legend(loc='best')
 plt.title('Linear vs Quadratic progression')
 plt.xlabel('Input')
 plt.ylabel('Output');
-plt.show()
-
-
+show()
 
 #Histograms
 
@@ -521,9 +479,7 @@ print(samples.shape)
 print(samples.dtype)
 print(samples[:30])
 plt.hist(samples, bins=50);
-plt.show()
-
-
+show()
 
 #Two Histograms on the Same Plot
 
@@ -535,15 +491,14 @@ bins = np.linspace(-3, 3, 50)
 plt.hist(samples_1, bins=bins, alpha=0.5, label='samples 1')
 plt.hist(samples_2, bins=bins, alpha=0.5, label='samples 2')
 plt.legend(loc='upper left');
-plt.show()
+show()
 
 
 #Scatter Plots
 
 plt.scatter(samples_1, samples_2, alpha=0.1);
-plt.show()
+show()
 
-'''
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -652,7 +607,7 @@ plt.subplot2grid(fig_dims, (2, 0))
 df_train['Age'].hist()
 plt.title('Age Histogram')
 
-plt.show()
+show()
 
 # Get the unique values of Embarked and its maximum
 family_sizes = np.sort(df_train['FamilySize'].unique())
@@ -667,7 +622,7 @@ plt.hist([df1, df2],
 plt.legend(('Died', 'Survived'), loc='best')
 plt.title('Survivors by Family Size')
 
-plt.show()
+show()
 
 #Normalized Plots
 
@@ -702,7 +657,7 @@ males_xt_pct.plot(kind='bar',
 plt.xlabel('Passenger Class')
 plt.ylabel('Survival Rate')
 
-plt.show()
+show()
 
 #Scatter Plots, subplots
 
@@ -729,7 +684,7 @@ axes[0].set_title('Survivors by Age Plot')
 axes[0].set_xlabel('Survived')
 axes[0].set_ylabel('Age')
 
-plt.show()
+show()
 
 #Kernel Density Estimation Plots
 
@@ -742,7 +697,7 @@ plt.title('Age Density Plot by Passenger Class')
 plt.xlabel('Age')
 plt.legend(('1st Class', '2nd Class', '3rd Class'), loc='best')
 
-plt.show()
+show()
 """
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

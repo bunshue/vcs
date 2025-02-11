@@ -4554,12 +4554,15 @@ print("------------------------------------------------------------")  # 60個
 
 import tfnn
 
-bank_data = pd.read_csv('data/bank-full.csv', sep=';')
+bank_data = pd.read_csv("data/bank-full.csv", sep=";")
 
 data = tfnn.Data(bank_data.iloc[:, :-1], bank_data.iloc[:, -1])
 data.encode_cat_y(inplace=True)
 data.encode_cat_x(inplace=True)
-network = tfnn.ClfNetwork(data.xs.shape[1], data.ys.shape[1],)
+network = tfnn.ClfNetwork(
+    data.xs.shape[1],
+    data.ys.shape[1],
+)
 data = network.normalizer.minmax_fit(data, -1, 1)
 train_data, test_data = data.train_test_split()
 network.add_hidden_layer(50, activator=tfnn.nn.relu)

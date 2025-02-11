@@ -70,29 +70,6 @@ print(mlp.out_activation_)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-digits = datasets.load_digits()
-print(type(digits))
-
-# X = digits.data
-# y = digits.target
-
-X = digits.images.reshape(len(digits.images), -1)
-y = digits.target
-
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
-# 訓練組8成, 測試組2成
-
-mlp = MLPClassifier(hidden_layer_sizes=(16,))  # 多層感知器分類器 函數學習機
-
-mlp.fit(X_train, y_train)  # 學習訓練.fit
-
-y_pred = mlp.predict(X_test)
-print(accuracy_score(y_pred, y_test))  # 評価
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 print("iris 資料 全部")
 
 iris = datasets.load_iris()

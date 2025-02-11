@@ -50,6 +50,41 @@ def show():
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+# load images of the digits 0 through 5 and visualize several of them
+
+digits = datasets.load_digits(n_class=6)
+
+fig, ax = plt.subplots(8, 8, figsize=(6, 6))
+for i, axi in enumerate(ax.flat):
+    axi.imshow(digits.images[i], cmap="binary")
+    axi.set(xticks=[], yticks=[])
+
+show()
+
+
+# project the digits into 2 dimensions using IsoMap
+from sklearn.manifold import Isomap
+
+iso = Isomap(n_components=2)
+projection = iso.fit_transform(digits.data)
+
+
+# plot the results
+plt.scatter(
+    projection[:, 0],
+    projection[:, 1],
+    lw=0.1,
+    c=digits.target,
+    cmap=plt.cm.get_cmap("cubehelix", 6),
+)
+plt.colorbar(ticks=range(6), label="digit value")
+plt.clim(-0.5, 5.5)
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 print("數字 基本數據 load_digits()")
 
 digits = datasets.load_digits()
@@ -112,7 +147,6 @@ print("------------------------------------------------------------")  # 60個
 
 print("畫出前100張圖")
 
-
 digits = datasets.load_digits(n_class=10)
 
 X = digits.data
@@ -137,13 +171,63 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
+# 以sklearn中的手寫數字集合來舉例：
+
+digits = datasets.load_digits()
+cc = digits.keys()
+print(cc)
+
+# 可以看到上圖，資料keys包含'data', 'target', 'target_names', 'images', 'DESCR'
+
+# 將手寫的資料視覺化呈現，可以看到每個數字(images)的左下角會記錄該數字的正確值(target)
+
+# set up the figure
+fig = plt.figure(figsize=(6, 6))  # figure size in inches
+fig.subplots_adjust(left=0, right=1, bottom=0, top=1, hspace=0.05, wspace=0.05)
+
+# plot the digits: each image is 8x8 pixels
+for i in range(64):
+    tx = fig.add_subplot(8, 8, i + 1, xticks=[], yticks=[])
+    tx.imshow(digits.images[i], cmap=plt.cm.binary, interpolation="nearest")
+
+    # label the image with the target value
+    tx.text(0, 7, str(digits.target[i]))
+
+
+show()
+
+# 用 隨機森林分類函數學習機 將手寫資料進行分類
+
+Xtrain, Xtest, ytrain, ytest = train_test_split(digits.data, digits.target)
+model = RandomForestClassifier(n_estimators=1000)  # 隨機森林分類函數學習機
+
+model.fit(Xtrain, ytrain)
+
+ypred = model.predict(Xtest)
+
+print(classification_report(ypred, ytest))
+
+
+# 可以看到上圖，最左邊為數字0~9的類別，主要回傳精確值以及support，看這些數字很難懂，先看下圖
+
+mat = confusion_matrix(ytest, ypred)
+sns.heatmap(mat.T, square=True, annot=True, fmt="d", cbar=False)
+plt.xlabel("true label")
+plt.ylabel("predicted label")
+show()
+
+"""
+可以看到上圖，X軸為真實手寫數字的值，Y軸會預測手寫的數字的值，
+其斜對角0對0、1對1、2對2...，代表預測的準確次數(對照前一輸出結果的support)，
+將該類別準確次數/全部筆數=精確值(對照前一輸出結果的precision)
+"""
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
 
 """
 from sklearn.manifold import TSNE
@@ -747,7 +831,198 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+from sklearn.neural_network import MLPClassifier  # 多層感知器分類器 函數學習機
+
+digits = datasets.load_digits()
+print(type(digits))
+
+# X = digits.data
+# y = digits.target
+
+X = digits.images.reshape(len(digits.images), -1)
+y = digits.target
+
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+# 訓練組8成, 測試組2成
+
+mlp = MLPClassifier(hidden_layer_sizes=(16,))  # 多層感知器分類器 函數學習機
+
+mlp.fit(X_train, y_train)  # 學習訓練.fit
+
+y_pred = mlp.predict(X_test)
+print(accuracy_score(y_pred, y_test))  # 評価
+
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+# SelectPercentile 單變數特徵選取(Univariate feature selection)
+
+from sklearn.feature_selection import SelectPercentile
+from sklearn.feature_selection import chi2
+
+print("數字資料集")
+X, y = datasets.load_digits(return_X_y=True)
+print(X.shape)
+
+# SelectPercentile 特徵選取
+
+logistic_regression = SelectPercentile(chi2, percentile=10)
+X_new = logistic_regression.fit_transform(X, y)
+print(X_new.shape)
+
+print("顯示特徵分數")
+cc = logistic_regression.scores_
+print(cc)
+
+print("顯示 p value")
+cc = logistic_regression.pvalues_
+print(cc)
+
+# 選擇部份特徵
+X = X_new
+
+# 資料分割
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+# 特徵縮放
+scaler = StandardScaler()
+X_train_std = scaler.fit_transform(X_train)  # STD特徵縮放
+X_test_std = scaler.transform(X_test)  # STD特徵縮放
+
+# 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
+logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
+
+logistic_regression.fit(X_train_std, y_train)  # 學習訓練.fit
+
+y_pred = logistic_regression.predict(X_test_std)  # 預測.predict
+print("y_pred :\n", y_pred, sep="")
+
+y_pred_prob = logistic_regression.predict_proba(X)  # 預測機率.predict_proba
+print("y_pred_prob :\n", y_pred_prob, sep="")
+
+print(f"計算準確率 : {accuracy_score(y_test, y_pred)*100:.2f}%")
+
+print("混淆矩陣 :\n", confusion_matrix(y_test, y_pred), sep="")
+
+print("混淆矩陣圖")
+disp = ConfusionMatrixDisplay(confusion_matrix=confusion_matrix(y_test, y_pred))
+disp.plot()
+show()
+
+# 使用全部特徵
+print("數字資料集")
+X, y = datasets.load_digits(return_X_y=True)
+
+# 資料分割
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+# 特徵縮放
+scaler = StandardScaler()
+X_train_std = scaler.fit_transform(X_train)  # STD特徵縮放
+X_test_std = scaler.transform(X_test)  # STD特徵縮放
+
+# 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
+logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
+
+logistic_regression.fit(X_train_std, y_train)  # 學習訓練.fit
+
+y_pred = logistic_regression.predict(X_test_std)  # 預測.predict
+
+print(f"計算準確率 : {accuracy_score(y_test, y_pred)*100:.2f}%")
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# GenericUnivariateSelect 單變數特徵選取(Univariate feature selection)
+
+from sklearn.feature_selection import GenericUnivariateSelect
+from sklearn.feature_selection import chi2
+
+print("數字資料集")
+X, y = datasets.load_digits(return_X_y=True)
+print(X.shape)
+
+# GenericUnivariateSelect 特徵選取
+
+# 使用 SelectKBest, 20 個特徵
+clf = GenericUnivariateSelect(chi2, mode="k_best", param=20)
+
+X_new = clf.fit_transform(X, y)
+print(X_new.shape)
+
+print("顯示特徵分數")
+cc = clf.scores_
+print(cc)
+
+print("顯示 p value")
+cc = clf.pvalues_
+print(cc)
+
+# 選擇部份特徵
+X = X_new
+
+# 資料分割
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+# 特徵縮放
+scaler = StandardScaler()
+X_train_std = scaler.fit_transform(X_train)  # STD特徵縮放
+X_test_std = scaler.transform(X_test)  # STD特徵縮放
+
+# 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
+logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
+
+logistic_regression.fit(X_train_std, y_train)  # 學習訓練.fit
+
+y_pred = logistic_regression.predict(X_test_std)  # 預測.predict
+
+print(f"計算準確率 : {accuracy_score(y_test, y_pred)*100:.2f}%")
+
+print("混淆矩陣 :\n", confusion_matrix(y_test, y_pred), sep="")
+
+print("混淆矩陣圖")
+disp = ConfusionMatrixDisplay(confusion_matrix=confusion_matrix(y_test, y_pred))
+disp.plot()
+show()
+
+# 使用全部特徵
+print("數字資料集")
+X, y = datasets.load_digits(return_X_y=True)
+
+# 資料分割
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+# 特徵縮放
+scaler = StandardScaler()
+X_train_std = scaler.fit_transform(X_train)  # STD特徵縮放
+X_test_std = scaler.transform(X_test)  # STD特徵縮放
+
+# 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
+logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
+
+logistic_regression.fit(X_train_std, y_train)  # 學習訓練.fit
+
+y_pred = logistic_regression.predict(X_test_std)  # 預測.predict
+
+print(f"計算準確率 : {accuracy_score(y_test, y_pred)*100:.2f}%")
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")

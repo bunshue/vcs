@@ -1,13 +1,33 @@
 '''
 Lab: Brain volumes study
-
 The study provides the brain volumes of grey matter (gm), white matter (wm)
 and cerebrospinal fluid) (csf) of 808 anatomical MRI scans.
 '''
 
+print("------------------------------------------------------------")  # 60個
+
+# 共同
 import os
-import os.path
+import sys
+import time
+import math
+import random
+import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns  # 海生, 自動把圖畫得比較好看
+
+font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+# 設定中文字型及負號正確顯示
+# 設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
+# 設定負號
+plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+plt.rcParams["font.size"] = 12  # 設定字型大小
+
+print("------------------------------------------------------------")  # 60個
+
+import os.path
 import tempfile
 import urllib.request
 
@@ -65,22 +85,14 @@ brain_vol["tiv_vol"] = brain_vol["gm_vol"] + brain_vol["wm_vol"] + brain_vol["cs
 brain_vol["gm_f"] = brain_vol["gm_vol"] / brain_vol["tiv_vol"]
 brain_vol["wm_f"] = brain_vol["wm_vol"] / brain_vol["tiv_vol"]
 
-###############################################################################
 # **Save in a excel file** `brain_vol.xlsx`
 
 brain_vol.to_excel(os.path.join(WD, "data", "brain_vol.xlsx"),
                    sheet_name='data', index=False)
 
-###############################################################################
 # Descriptive Statistics
-# ----------------------
-
-###############################################################################
 # Load excel file `brain_vol.xlsx`
 
-import os
-import pandas as pd
-import seaborn as sns
 import statsmodels.formula.api as smfrmla
 import statsmodels.api as sm
 
@@ -137,10 +149,7 @@ print(desc_group_num)
 
 ###############################################################################
 # Statistics
-# ----------
-#
 # Objectives:
-#
 # 1. Site effect of gray matter atrophy
 # 2. Test the association between the age and gray matter atrophy in the control
 #    and patient population independently.
@@ -152,26 +161,20 @@ print(desc_group_num)
 import statsmodels.api as sm
 import statsmodels.formula.api as smfrmla
 import scipy.stats
-import seaborn as sns
 
 ###############################################################################
 # **1 Site effect on Grey Matter atrophy**
-#
 # The model  is Oneway Anova gm_f ~ site
 # The ANOVA test has important assumptions that must be satisfied in order
 # for the associated p-value to be valid.
-#
 # - The samples are independent.
 # - Each sample is from a normally distributed population.
 # - The population standard deviations of the groups are all equal.
 #   This property is known as homoscedasticity.
-#
-
 ###############################################################################
 # Plot
 sns.violinplot(x="site", y="gm_f", data=brain_vol1)
 # sns.violinplot(x="site", y="wm_f", data=brain_vol1)
-
 ###############################################################################
 # Stats with scipy
 

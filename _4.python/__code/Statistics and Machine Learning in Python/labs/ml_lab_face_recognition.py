@@ -1,30 +1,43 @@
 '''
 # Faces recognition using various learning models
 
-
 '''
 
+print("------------------------------------------------------------")  # 60個
+
+# 共同
+import os
+import sys
+import time
+import math
+import random
 import numpy as np
-from time import time
-import matplotlib.pyplot as plt
 import pandas as pd
-import seaborn as sns
+import matplotlib.pyplot as plt
+import seaborn as sns  # 海生, 自動把圖畫得比較好看
+
+font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+# 設定中文字型及負號正確顯示
+# 設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
+# 設定負號
+plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+plt.rcParams["font.size"] = 12  # 設定字型大小
+
+print("------------------------------------------------------------")  # 60個
 
 from sklearn.model_selection import train_test_split
 from sklearn.model_selection import GridSearchCV
 from sklearn.metrics import classification_report
 from sklearn.metrics import confusion_matrix
 
-# Preprocesing
 from sklearn import preprocessing
 from sklearn.pipeline import make_pipeline
 from sklearn.pipeline import Pipeline
 from sklearn.feature_selection import SelectKBest, f_classif
 
-# Dataset
 from sklearn.datasets import fetch_lfw_people
 
-# Models
 from sklearn.decomposition import PCA
 import sklearn.manifold as manifold
 import sklearn.linear_model as lm
@@ -33,7 +46,6 @@ from sklearn.neural_network import MLPClassifier  # 多層感知器分類器 函
 # from sklearn.ensemble import RandomForestClassifier
 # from sklearn.ensemble import GradientBoostingClassifier
 
-# Pytorch Models
 import torch
 import torchvision
 import torch.nn as nn
@@ -45,8 +57,6 @@ import skorch
 # `conda install -c conda-forge skorch`
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-
-# Utils
 
 
 def plot_gallery(images, titles, h, w, n_row=3, n_col=4):
@@ -99,7 +109,7 @@ print("n_classes: %d" % n_classes)
 # -------------------------------------------------------
 
 X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.25, random_state=1, stratify=y)
+    X, y, test_size=0.2, stratify=y)
 
 print({target_names[lab]: prop for lab, prop in
        label_proportion(y_train).items()})
@@ -123,12 +133,11 @@ plot_gallery(single_faces, titles, h, w, n_row=n_classes, n_col=5)
 
 n_components = 150
 
-print("Extracting the top %d eigenfaces from %d faces"
-      % (n_components, X_train.shape[0]))
-t0 = time()
+print("Extracting the top %d eigenfaces from %d faces" % (n_components, X_train.shape[0]))
+t0 = time.time()
 pca = PCA(n_components=n_components, svd_solver='randomized',
           whiten=True).fit(X_train)
-print("done in %0.3fs" % (time() - t0))
+print("done in %0.3fs" % (time.time() - t0))
 
 eigenfaces = pca.components_.reshape((n_components, h, w))
 
@@ -136,7 +145,8 @@ print("Explained variance", pca.explained_variance_ratio_[:2])
 
 # T-SNE
 
-tsne = manifold.TSNE(n_components=2, init='pca', random_state=0)
+tsne = manifold.TSNE(n_components=2, init='pca', random_state=9487)
+
 X_tsne = tsne.fit_transform(X_train)
 
 print("Projecting the input data on the eigenfaces orthonormal basis")
@@ -168,9 +178,9 @@ lrl2_cv = make_pipeline(
                  {'C': 10. ** np.arange(-3, 3)},
                  cv=5, n_jobs=5))
 
-t0 = time()
+t0 = time.time()
 lrl2_cv.fit(X=X_train, y=y_train)
-print("done in %0.3fs" % (time() - t0))
+print("done in %0.3fs" % (time.time() - t0))
 print("Best params found by grid search:")
 print(lrl2_cv.steps[-1][1].best_params_)
 
@@ -187,7 +197,6 @@ plot_gallery(coefs, target_names, h, w)
 
 # SVM (with CV-based model selection)
 # -----------------------------------
-#
 # Remarks:
 # - RBF generally requires "large" C (>1)
 # - Poly generally requires "small" C (<1)
@@ -200,9 +209,9 @@ svm_cv = make_pipeline(
                  # {'kernel': ['rbf'], 'C': 10. ** np.arange(-1, 4)},
                  cv=5, n_jobs=5))
 
-t0 = time()
+t0 = time.time()
 svm_cv.fit(X_train, y_train)
-print("done in %0.3fs" % (time() - t0))
+print("done in %0.3fs" % (time.time() - t0))
 print("Best params found by grid search:")
 print(svm_cv.steps[-1][1].best_params_)
 
@@ -223,13 +232,12 @@ mlp_param_grid = {"hidden_layer_sizes":
 mlp_cv = make_pipeline(
     # preprocessing.StandardScaler(),
     preprocessing.MinMaxScaler(),
-    GridSearchCV(estimator=MLPClassifier(random_state=1, max_iter=400),
-                 param_grid=mlp_param_grid,
-                 cv=5, n_jobs=5))
+    GridSearchCV(estimator=MLPClassifier(random_state=9487, max_iter=400),
+                 param_grid=mlp_param_grid, cv=5, n_jobs=5))
 
-t0 = time()
+t0 = time.time()
 mlp_cv.fit(X_train, y_train)
-print("done in %0.3fs" % (time() - t0))
+print("done in %0.3fs" % (time.time() - t0))
 print("Best params found by grid search:")
 print(mlp_cv.steps[-1][1].best_params_)
 
@@ -275,9 +283,9 @@ scaler = preprocessing.MinMaxScaler()
 X_train_s = scaler.fit_transform(X_train)
 X_test_s = scaler.transform(X_test)
 
-t0 = time()
+t0 = time.time()
 mlp.fit(X_train_s, y_train)
-print("done in %0.3fs" % (time() - t0))
+print("done in %0.3fs" % (time.time() - t0))
 
 y_pred = mlp.predict(X_test_s)
 print(classification_report(y_test, y_pred, target_names=target_names))
@@ -296,9 +304,9 @@ param_grid = {'anova__k': [50, 100, 500, 1000, 1500, X_train.shape[1]],
 anova_l2lr_cv = GridSearchCV(anova_l2lr, cv=5,  param_grid=param_grid,
                              n_jobs=5)
 
-t0 = time()
+t0 = time.time()
 anova_l2lr_cv.fit(X=X_train, y=y_train)
-print("done in %0.3fs" % (time() - t0))
+print("done in %0.3fs" % (time.time() - t0))
 
 print("Best params found by grid search:")
 print(anova_l2lr_cv.best_params_)
@@ -315,9 +323,9 @@ pca_lrl2_cv = make_pipeline(
                  {'C': 10. ** np.arange(-3, 3)},
                  cv=5, n_jobs=5))
 
-t0 = time()
+t0 = time.time()
 pca_lrl2_cv.fit(X=X_train, y=y_train)
-print("done in %0.3fs" % (time() - t0))
+print("done in %0.3fs" % (time.time() - t0))
 
 print("Best params found by grid search:")
 print(pca_lrl2_cv.steps[-1][1].best_params_)
@@ -371,9 +379,9 @@ scaler = preprocessing.MinMaxScaler()
 X_train_s = scaler.fit_transform(X_train).reshape(-1, 1, h, w)
 X_test_s = scaler.transform(X_test).reshape(-1, 1, h, w)
 
-t0 = time()
+t0 = time.time()
 cnn.fit(X_train_s, y_train)
-print("done in %0.3fs" % (time() - t0))
+print("done in %0.3fs" % (time.time() - t0))
 
 y_pred = cnn.predict(X_test_s)
 print(classification_report(y_test, y_pred, target_names=target_names))
@@ -427,9 +435,9 @@ scaler = preprocessing.MinMaxScaler()
 X_train_s = scaler.fit_transform(X_train).reshape(-1, 1, h, w)
 X_test_s = scaler.transform(X_test).reshape(-1, 1, h, w)
 
-t0 = time()
+t0 = time.time()
 resnet.fit(X_train_s, y_train)
-print("done in %0.3fs" % (time() - t0))
+print("done in %0.3fs" % (time.time() - t0))
 
 # Continue training a model (warm re-start):
 # resnet.partial_fit(X_train_s, y_train)

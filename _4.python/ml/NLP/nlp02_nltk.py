@@ -58,6 +58,7 @@ import string
 import re
 
 import nltk
+
 '''
 stemmer = nltk.SnowballStemmer("english")
 
@@ -428,7 +429,7 @@ corpus_df = pd.concat((neg_df, pos_df))
 cc = corpus_df.head(5)
 print(cc)
 
-print('------------------------------')	#30個
+print("------------------------------")  # 30個
 
 from sklearn.feature_extraction.text import CountVectorizer
 
@@ -447,7 +448,7 @@ examples = ["這 本 書 真差", "這個 電影 還 可 以"]
 example_counts = cv.transform(examples)
 predictions = classifier.predict(example_counts)  # 預測.predict
 
-print('預測結果 :', predictions)
+print("預測結果 :", predictions)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -597,11 +598,8 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-
 
 
 print("------------------------------------------------------------")  # 60個

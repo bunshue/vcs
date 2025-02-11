@@ -1,10 +1,11 @@
 """
-Olivetti 資料集
+Olivetti Faces 人臉圖片數據集 fetch_olivetti_faces 
 
-Olivetti Faces 人臉圖片數據集
+40人, 每人10張, 共 400張灰度圖像
+每張 64X64
 
-40人 每人10張
-400張圖 每張 64X64
+data: 形狀 (400, 4096=64X64)
+每一列對應於原始大小為 64 x 64 像素的展開人臉圖像。
 
 #指定下載位置
 download_directory='download_directory/'
@@ -14,17 +15,7 @@ olivetti_faces = datasets.fetch_olivetti_faces(data_home=download_directory)
 
 # 未指定下載位置, 下載至 C:/Users/070601/scikit_learn_data/olivetti_py3.pkz
 olivetti_faces = datasets.fetch_olivetti_faces()
-
-fetch_olivetti_faces
-
-data: 形狀 (400, 4096=64X64)
-每一列對應於原始大小為 64 x 64 像素的展開人臉圖像。
-
-40個人 每個人有10張圖像
-
-共 400張灰度圖像
 """
-
 print("------------------------------------------------------------")  # 60個
 
 # 共同
@@ -52,15 +43,16 @@ import matplotlib.image as mpimg
 from common1 import *
 from sklearn import datasets
 from sklearn import preprocessing
+from sklearn import decomposition
+from sklearn.utils.validation import check_random_state
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
 from sklearn.svm import SVC
+from sklearn.decomposition import PCA
+from sklearn.decomposition import NMF
 from sklearn.metrics import accuracy_score
-from sklearn.metrics import confusion_matrix
+from sklearn.metrics import confusion_matrix  # 混淆矩陣
+from sklearn.metrics import classification_report  # 分類報告
 from sklearn.metrics import ConfusionMatrixDisplay
-from sklearn.metrics import classification_report
-
-from numpy.random import RandomState
-from sklearn import decomposition
 
 
 def show():
@@ -68,12 +60,34 @@ def show():
     pass
 
 
-print("------------------------------------------------------------")  # 60個
-
 R, C = 2, 5
 n_components = R * C
-image_shape = (64, 64)
-rng = RandomState(0)
+image_shape = (64, 64)  # 設定圖片寬/高
+
+rng = np.random.RandomState(0)  # 皆可
+rng = check_random_state(4)  # 皆可
+
+print("------------------------------------------------------------")  # 60個
+
+olivetti_faces = datasets.fetch_olivetti_faces()
+
+X = olivetti_faces.data  # 64X64之影像檔, 共400個
+y = olivetti_faces.target  # 第幾人 0~39 號, 共400個
+
+cc = olivetti_faces.DESCR
+# print("資料集說明 :\n", cc, sep="")
+
+print("資料 olivetti_faces.data")
+print("olivetti_faces.data.shape :")
+print(olivetti_faces.data.shape)  # (400, 4096)
+
+print("資料 影像 olivetti_faces.images")
+print("olivetti_faces.images.shape :")
+print(olivetti_faces.images.shape)  # (400, 64, 64)
+
+print("目標 olivetti_faces.target")
+print("olivetti_faces.target.shape :")
+print(olivetti_faces.target.shape)  # (400,)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -140,28 +154,10 @@ for row in range(20):  # 40人 每列2人 共20列
 """
 print("------------------------------------------------------------")  # 60個
 
-print("Olivetti 資料集 基本數據 fetch_olivetti_faces()")
-
 olivetti_faces = datasets.fetch_olivetti_faces()
 
-X = olivetti_faces.data
-y = olivetti_faces.target
-
-print("X.shape :")
-print(X.shape)
-# (400, 4096)
-
-# 標籤 y
-print("y.shape :")
-print(y.shape)
-# (400,)
-
-# 圖像 olivetti_faces.images
-print("olivetti_faces.images.shape :")
-print(olivetti_faces.images.shape)
-# (400, 64, 64)
-
-print("------------------------------")  # 30個
+X = olivetti_faces.data  # 64X64之影像檔, 共400個
+y = olivetti_faces.target  # 第幾人 0~39 號, 共400個
 
 plt.figure(figsize=(12, 8))
 for i in range(80):
@@ -175,7 +171,7 @@ show()
 print("------------------------------")  # 30個
 
 # 主成分分析 (Principal Component Analysis, PCA), 降低數據維度
-pca = decomposition.PCA()
+pca = PCA()
 
 pca.fit(X)
 
@@ -196,7 +192,6 @@ show()
 
 print("------------------------------")  # 30個
 
-# pip install scikit-image
 from skimage.io import imsave
 
 index = 70  # 第幾張圖
@@ -240,33 +235,29 @@ targets = np.unique(y)
 print("單一化目標 :", targets)
 
 target_names = np.array(["c%d" % t for t in targets])
-print("target_names :", target_names)
+print("目標名稱 :\n", target_names, sep="")
 
 n_targets = target_names.shape[0]
-n_samples, h, w = olivetti_faces.images.shape
+print("目標個數 :", n_targets)
 
-print("Sample count: {}".format(n_samples))
-print("Target count: {}".format(n_targets))
-print("Image size: {}x{}".format(w, h))
-print("Dataset shape: {}\n".format(X.shape))
+n_samples, h, w = olivetti_faces.images.shape  # (400, 64, 64)
 
 print("------------------------------")  # 30個
 
 
-def plot_gallery(images, titles, h, w, n_row=2, n_col=5):
+def plot_gallery1(images, titles, h, w, n_row=2, n_col=5):
     print("R = ", n_row, ", C = ", n_col)
-    plt.figure(figsize=(12, 8))
-    # plt.subplots_adjust(bottom=0, left=0.01, right=0.99, top=0.90, hspace=0.01)
+    plt.figure(figsize=(2.0 * n_col, 2.26 * n_row))
+
     for i in range(n_row * n_col):
         plt.subplot(n_row, n_col, i + 1)
         plt.imshow(images[i].reshape((h, w)), cmap=plt.cm.gray)
         plt.title(titles[i])
         plt.axis("off")
+    plt.subplots_adjust(bottom=0, left=0.01, right=0.99, top=0.90, hspace=0.01)
 
 
-R = 4
-C = 5
-
+R, C = 4, 5
 sample_images = None
 sample_titles = []
 for i in range(n_targets):
@@ -280,47 +271,41 @@ for i in range(n_targets):
     sample_titles.append(target_names[i])
 
 print("plot_gallery 1")
-plot_gallery(sample_images, sample_titles, h, w, R, C)
+plot_gallery1(sample_images, sample_titles, h, w, R, C)
 show()
 
 print("------------------------------")  # 30個
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
-start = time.time()
 print("Fitting train datasets ...")
 clf = SVC(class_weight="balanced")
 clf.fit(X_train, y_train)
-print("量測時間 Done in {0:.2f}s".format(time.time() - start))
 
-start = time.time()
 print("Predicting test dataset ...")
 y_pred = clf.predict(X_test)
-print("量測時間 Done in {0:.2f}s".format(time.time() - start))
-
-cm = confusion_matrix(y_test, y_pred, labels=range(n_targets))
-print("confusion matrix:\n")
 
 np.set_printoptions(threshold=sys.maxsize)
-print(cm)
+
+# 混淆矩陣
+cm = confusion_matrix(y_test, y_pred, labels=range(n_targets))
+print("混淆矩陣 :\n", cm, sep="")
 
 """ not match
+# 分類報告
 print(classification_report(y_test, y_pred, target_names=target_names))
 """
 
 print("------------------------------")  # 30個
 
-from sklearn.decomposition import PCA
-
 print("Exploring explained variance ratio for dataset ...")
 candidate_components = range(10, 300, 30)
 explained_ratios = []
-start = time.time()
+
 for c in candidate_components:
     pca = PCA(n_components=c)
     X_pca = pca.fit_transform(X)
     explained_ratios.append(np.sum(pca.explained_variance_ratio_))
-print("量測時間 Done in {0:.2f}s".format(time.time() - start))
 
 print("------------------------------")  # 30個
 
@@ -343,8 +328,7 @@ def title_prefix(prefix, title):
     return "{}: {}".format(prefix, title)
 
 
-R = 1
-C = 5
+R, C = 1, 5
 
 sample_images = sample_images[0:5]
 sample_titles = sample_titles[0:5]
@@ -354,7 +338,7 @@ plotting_titles = [title_prefix("orig", t) for t in sample_titles]
 candidate_components = [140, 75, 37, 19, 8]
 for c in candidate_components:
     print("Fitting and projecting on PCA(n_components={}) ...".format(c))
-    start = time.time()
+    # 主成分分析 (Principal Component Analysis, PCA), 降低數據維度
     pca = PCA(n_components=c)
     pca.fit(X)
     X_sample_pca = pca.transform(sample_images)
@@ -362,11 +346,10 @@ for c in candidate_components:
     plotting_images = np.concatenate((plotting_images, X_sample_inv), axis=0)
     sample_title_pca = [title_prefix("{}".format(c), t) for t in sample_titles]
     plotting_titles = np.concatenate((plotting_titles, sample_title_pca), axis=0)
-    print("量測時間 Done in {0:.2f}s".format(time.time() - start))
 
 print("Plotting sample image with different number of PCA conpoments ...")
 print("plot_gallery 2")
-plot_gallery(
+plot_gallery1(
     plotting_images,
     plotting_titles,
     h,
@@ -382,15 +365,13 @@ print("------------------------------")  # 30個
 n_components = 140
 
 print("Fitting PCA by using training data ...")
-start = time.time()
+
+# 主成分分析 (Principal Component Analysis, PCA), 降低數據維度
 pca = PCA(n_components=n_components, svd_solver="randomized", whiten=True).fit(X_train)
-print("量測時間 Done in {0:.2f}s".format(time.time() - start))
 
 print("Projecting input data for PCA ...")
-start = time.time()
 X_train_pca = pca.transform(X_train)
 X_test_pca = pca.transform(X_test)
-print("量測時間 Done in {0:.2f}s".format(time.time() - start))
 
 from sklearn.model_selection import GridSearchCV
 
@@ -403,15 +384,16 @@ clf = clf.fit(X_train_pca, y_train)
 print("Best parameters found by grid search:")
 print(clf.best_params_)
 
-start = time.time()
 print("Predict test dataset ...")
 y_pred = clf.best_estimator_.predict(X_test_pca)
-cm = confusion_matrix(y_test, y_pred, labels=range(n_targets))
-print("量測時間 Done in {0:.2f}.\n".format(time.time() - start))
-print("confusion matrix:")
-np.set_printoptions(threshold=sys.maxsize)
-print(cm)
 
+np.set_printoptions(threshold=sys.maxsize)
+
+# 混淆矩陣
+cm = confusion_matrix(y_test, y_pred, labels=range(n_targets))
+print("混淆矩陣 :\n", cm, sep="")
+
+# 分類報告
 print(classification_report(y_test, y_pred))
 
 print("------------------------------------------------------------")  # 60個
@@ -421,14 +403,12 @@ print("------------------------------------------------------------")  # 60個
 
 # 使用Scikit-learn各種迴歸演算法預測人臉下半部
 
-from sklearn.utils.validation import check_random_state
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.neighbors import KNeighborsRegressor
 from sklearn.linear_model import LinearRegression
 from sklearn.linear_model import RidgeCV
 
-X, y = datasets.fetch_olivetti_faces(return_X_y=True)
-
+X, y = datasets.fetch_olivetti_faces(return_X_y=True, random_state=rng)
 # X : 400 張圖 每張4096=64X64點
 # y : 編號 0~39 號
 
@@ -436,12 +416,12 @@ X, y = datasets.fetch_olivetti_faces(return_X_y=True)
 train = X[y < 30]  # 前30張臉為訓練資料, 300張
 test = X[y >= 30]  # 後10張臉為測試資料, 100張
 
-print(train.shape)
-print(test.shape)
+print("訓練資料大小 :", train.shape)
+print("測試資料大小 :", test.shape)
 
 # 模型訓練
 n_pixels = X.shape[1]
-print(n_pixels)
+print("X長度 :", n_pixels)
 
 # 人臉上半部為 X，人臉下半部為 Y
 X_train = train[:, : (n_pixels + 1) // 2]
@@ -451,19 +431,18 @@ y_train = train[:, n_pixels // 2 :]
 ESTIMATORS = {
     "迴歸樹": DecisionTreeRegressor(),
     "KNN": KNeighborsRegressor(),
-    "Linear regression": LinearRegression(),
+    "線性迴歸": LinearRegression(),
     "Ridge": RidgeCV(),
 }
 
 # 訓練
 for name, estimator in ESTIMATORS.items():
-    print(name, estimator)
+    print("演算法名稱 :", name, "\t演算法 :", estimator)
     estimator.fit(X_train, y_train)
 
 # 測試 5 筆資料
 
 n_faces = 5
-rng = check_random_state(4)
 face_ids = rng.randint(test.shape[0], size=(n_faces,))
 test = test[face_ids, :]
 
@@ -477,12 +456,9 @@ for name, estimator in ESTIMATORS.items():
 
 # 依照各種迴歸演算法測試結果繪製人臉
 
-# 設定圖片寬/高
-image_shape = (64, 64)
-
 n_cols = 1 + len(ESTIMATORS)
 plt.figure(figsize=(2.0 * n_cols, 2.26 * n_faces))
-plt.suptitle("預測人臉下半部", size=16)
+plt.suptitle("預測人臉下半部")
 
 # 繪圖
 for i in range(n_faces):
@@ -519,36 +495,22 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+R, C = 2, 5
+N = R * C
+
 olivetti_faces = datasets.fetch_olivetti_faces()
 
-cc = olivetti_faces.data.shape
-print(cc)
+X, y = datasets.fetch_olivetti_faces(return_X_y=True, shuffle=True, random_state=rng)
+# X : 400 張圖 每張4096=64X64點
+# y : 編號 0~39 號
 
-cc = olivetti_faces.images.shape
-print(cc)
-
-cc = olivetti_faces.target.shape
-print(cc)
-
-cc = olivetti_faces.DESCR
-# print(cc)
-
-R, C = 2, 3
-n_components = R * C
-image_shape = (64, 64)
-
-faces, _ = datasets.fetch_olivetti_faces(
-    return_X_y=True, shuffle=True, random_state=9487
-)
-
-n_samples, n_features = faces.shape
-print(faces.shape)
+n_samples, n_features = X.shape  # (400, 4096)
 
 
-# Utils function
-def plot_gallery(title, images, n_col=C, n_row=R, cmap=plt.cm.gray):
+def plot_gallery2(title, images, n_col=C, n_row=R, cmap=plt.cm.gray):
+    print("R = ", n_row, ", C = ", n_col)
     plt.figure(figsize=(2.0 * n_col, 2.26 * n_row))
-    plt.suptitle(title, size=16)
+    plt.suptitle(title)
     for i, comp in enumerate(images):
         plt.subplot(n_row, n_col, i + 1)
         vmax = max(comp.max(), -comp.min())
@@ -559,28 +521,30 @@ def plot_gallery(title, images, n_col=C, n_row=R, cmap=plt.cm.gray):
             vmin=-vmax,
             vmax=vmax,
         )
-        # plt.xticks(())
-        # plt.yticks(())
-    # plt.subplots_adjust(0.01, 0.05, 0.99, 0.93, 0.04, 0.0)
+        plt.axis("off")
+    plt.subplots_adjust(bottom=0, left=0.01, right=0.99, top=0.90, hspace=0.01)
 
 
 # Preprocessing
 # global centering
-faces_centered = faces - faces.mean(axis=0)
+faces_centered = X - X.mean(axis=0)
 # local centering
 faces_centered -= faces_centered.mean(axis=1).reshape(n_samples, -1)
 
-plot_gallery("Original Olivetti faces", faces[:n_components])
-
+title = "Original Olivetti faces"
+plot_gallery2(title, X[:N])
 show()
 
 # First centered Olivetti faces
-plot_gallery("First centered Olivetti faces", faces_centered[:n_components])
+title = "First centered Olivetti faces"
+plot_gallery2(title, faces_centered[:N])
 show()
 
-clf = decomposition.PCA(n_components=n_components)
-clf.fit(faces_centered)
-plot_gallery("PCA first %i loadings" % n_components, clf.components_[:n_components])
+# 主成分分析 (Principal Component Analysis, PCA), 降低數據維度
+pca = PCA(n_components=N)
+pca.fit(faces_centered)
+title = "PCA first %i loadings" % N
+plot_gallery2(title, pca.components_[:N])
 
 show()
 
@@ -601,38 +565,29 @@ print("------------------------------------------------------------")  # 60個
 # 資料集準備
 # 載入並預處理 Olivetti 人臉資料集。
 
-import logging
+from sklearn import cluster
 
-import matplotlib.pyplot as plt
-from numpy.random import RandomState
+X, y = datasets.fetch_olivetti_faces(return_X_y=True, shuffle=True, random_state=rng)
+# X : 400 張圖 每張4096=64X64點
+# y : 編號 0~39 號
 
-from sklearn import cluster, decomposition
-from sklearn.datasets import fetch_olivetti_faces
-
-rng = RandomState(0)
-
-# Display progress logs on stdout
-logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
-
-faces, _ = fetch_olivetti_faces(return_X_y=True, shuffle=True, random_state=rng)
-n_samples, n_features = faces.shape
+n_samples, n_features = X.shape
 
 # Global centering (focus on one feature, centering all samples)
-faces_centered = faces - faces.mean(axis=0)
+faces_centered = X - X.mean(axis=0)
 
 # Local centering (focus on one sample, centering all features)
 faces_centered -= faces_centered.mean(axis=1).reshape(n_samples, -1)
-
-print("Dataset consists of %d faces" % n_samples)
 
 # 定義一個基本函數來繪製人臉的圖庫。
 
 n_row, n_col = 2, 3
 n_components = n_row * n_col
-image_shape = (64, 64)
 
 
-def plot_gallery(title, images, n_col=n_col, n_row=n_row, cmap=plt.cm.gray):
+def plot_gallery3(title, images, n_col=n_col, n_row=n_row, cmap=plt.cm.gray):
+    print("R = ", n_row, ", C = ", n_col)
+    # plt.figure(figsize=(2.0 * n_col, 2.26 * n_row))
     fig, axs = plt.subplots(
         nrows=n_row,
         ncols=n_col,
@@ -642,7 +597,7 @@ def plot_gallery(title, images, n_col=n_col, n_row=n_row, cmap=plt.cm.gray):
     )
     fig.set_constrained_layout_pads(w_pad=0.01, h_pad=0.02, hspace=0, wspace=0)
     fig.set_edgecolor("black")
-    fig.suptitle(title, size=16)
+    fig.suptitle(title)
     for ax, vec in zip(axs.flat, images):
         vmax = max(vec.max(), -vec.min())
         im = ax.imshow(
@@ -653,34 +608,37 @@ def plot_gallery(title, images, n_col=n_col, n_row=n_row, cmap=plt.cm.gray):
             vmax=vmax,
         )
         ax.axis("off")
+    # plt.subplots_adjust(bottom=0, left=0.01, right=0.99, top=0.90, hspace=0.01)
 
     fig.colorbar(im, ax=axs, orientation="horizontal", shrink=0.99, aspect=40, pad=0.01)
-    plt.show()
+    show()
 
 
 # 讓我們看一下我們的資料。灰色表示負值，白色表示正值。
 
-plot_gallery("Faces from dataset", faces_centered[:n_components])
+title = "Faces from dataset"
+plot_gallery3(title, faces_centered[:n_components])
 
 # 分解 Decomposition
 
 # 特徵臉 - 使用隨機 SVD 的 PCA
 # 使用資料的奇異值分解 (SVD) 進行線性降維，將其投影到較低的維度空間。
 
-pca_estimator = decomposition.PCA(
-    n_components=n_components, svd_solver="randomized", whiten=True
-)
+# 主成分分析 (Principal Component Analysis, PCA), 降低數據維度
+pca_estimator = PCA(n_components=n_components, svd_solver="randomized", whiten=True)
 pca_estimator.fit(faces_centered)
-plot_gallery(
-    "Eigenfaces - PCA using randomized SVD", pca_estimator.components_[:n_components]
-)
+
+title = "Eigenfaces - PCA using randomized SVD"
+plot_gallery3(title, pca_estimator.components_[:n_components])
 
 # 非負組件 - NMF Non-negative components - NMF
 # 估計非負原始資料作為兩個非負矩陣的乘積。
 
 nmf_estimator = decomposition.NMF(n_components=n_components, tol=5e-3)
-nmf_estimator.fit(faces)  # original non- negative dataset
-plot_gallery("Non-negative components - NMF", nmf_estimator.components_[:n_components])
+nmf_estimator.fit(X)  # original non- negative dataset
+
+title = "Non-negative components - NMF"
+plot_gallery3(title, nmf_estimator.components_[:n_components])
 
 # 獨立組件 - FastICA Independent components - FastICA
 # 獨立成分分析將多變量向量分解為彼此最大獨立的加性子成分。
@@ -689,9 +647,8 @@ ica_estimator = decomposition.FastICA(
     n_components=n_components, max_iter=400, whiten="arbitrary-variance", tol=15e-5
 )
 ica_estimator.fit(faces_centered)
-plot_gallery(
-    "Independent components - FastICA", ica_estimator.components_[:n_components]
-)
+title = "Independent components - FastICA"
+plot_gallery3(title, ica_estimator.components_[:n_components])
 
 # 稀疏組件 - MiniBatchSparsePCA Sparse components - MiniBatchSparsePCA
 # 小批量稀疏 PCA (MiniBatchSparsePCA) 提取最能重建資料的一組稀疏組件。此變體比類似的 SparsePCA更快，但準確度較低。
@@ -700,10 +657,8 @@ batch_pca_estimator = decomposition.MiniBatchSparsePCA(
     n_components=n_components, alpha=0.1, max_iter=100, batch_size=3, random_state=rng
 )
 batch_pca_estimator.fit(faces_centered)
-plot_gallery(
-    "Sparse components - MiniBatchSparsePCA",
-    batch_pca_estimator.components_[:n_components],
-)
+title = "Sparse components - MiniBatchSparsePCA"
+plot_gallery3(title, batch_pca_estimator.components_[:n_components])
 
 # 字典學習
 # 預設情況下，MiniBatchDictionaryLearning 將資料分成小批量，並透過在指定次數的迭代中循環小批量，以線上方式進行最佳化。
@@ -712,7 +667,8 @@ batch_dict_estimator = decomposition.MiniBatchDictionaryLearning(
     n_components=n_components, alpha=0.1, max_iter=50, batch_size=3, random_state=rng
 )
 batch_dict_estimator.fit(faces_centered)
-plot_gallery("Dictionary learning", batch_dict_estimator.components_[:n_components])
+title = "Dictionary learning"
+plot_gallery3(title, batch_dict_estimator.components_[:n_components])
 
 # 叢集中心 - MiniBatchKMeans   # Cluster centers - MiniBatchKMeans
 # sklearn.cluster.MiniBatchKMeans 在計算上是有效率的，並使用 partial_fit 方法實作線上學習。這就是為什麼用 MiniBatchKMeans 來增強一些耗時的演算法可能是有益的。
@@ -725,10 +681,8 @@ kmeans_estimator = cluster.MiniBatchKMeans(
     random_state=rng,
 )
 kmeans_estimator.fit(faces_centered)
-plot_gallery(
-    "Cluster centers - MiniBatchKMeans",
-    kmeans_estimator.cluster_centers_[:n_components],
-)
+title = "Cluster centers - MiniBatchKMeans"
+plot_gallery3(title, kmeans_estimator.cluster_centers_[:n_components])
 
 # 因子分析組件 - FA
 # Factor Analysis components - FA
@@ -736,7 +690,8 @@ plot_gallery(
 
 fa_estimator = decomposition.FactorAnalysis(n_components=n_components, max_iter=20)
 fa_estimator.fit(faces_centered)
-plot_gallery("Factor Analysis (FA)", fa_estimator.components_[:n_components])
+title = "Factor Analysis (FA)"
+plot_gallery3(title, fa_estimator.components_[:n_components])
 
 # --- Pixelwise variance
 plt.figure(figsize=(3.2, 3.6), facecolor="white", tight_layout=True)
@@ -750,15 +705,16 @@ plt.imshow(
     vmax=vmax,
 )
 plt.axis("off")
-plt.title("Pixelwise variance from \n Factor Analysis (FA)", size=16, wrap=True)
+plt.title("Pixelwise variance from \n Factor Analysis (FA)", wrap=True)
 plt.colorbar(orientation="horizontal", shrink=0.8, pad=0.03)
-plt.show()
+show()
 
 # 分解：字典學習
 # Decomposition: Dictionary learning
 # 使用另一個顏色圖繪製我們資料集中相同的樣本。紅色表示負值，藍色表示正值，白色表示零。
 
-plot_gallery("Faces from dataset", faces_centered[:n_components], cmap=plt.cm.RdBu)
+title = "Faces from dataset"
+plot_gallery3(title, faces_centered[:n_components], cmap=plt.cm.RdBu)
 
 # 字典學習 - 正向字典  # Dictionary learning - positive dictionary
 # 在以下章節中，我們在尋找字典時強制執行正向性。
@@ -772,10 +728,10 @@ dict_pos_dict_estimator = decomposition.MiniBatchDictionaryLearning(
     positive_dict=True,
 )
 dict_pos_dict_estimator.fit(faces_centered)
-plot_gallery(
-    "Dictionary learning - positive dictionary",
-    dict_pos_dict_estimator.components_[:n_components],
-    cmap=plt.cm.RdBu,
+
+title = "Dictionary learning - positive dictionary"
+plot_gallery3(
+    title, dict_pos_dict_estimator.components_[:n_components], cmap=plt.cm.RdBu
 )
 
 # 字典學習 - 正向編碼 # Dictionary learning - positive code
@@ -791,10 +747,9 @@ dict_pos_code_estimator = decomposition.MiniBatchDictionaryLearning(
     positive_code=True,
 )
 dict_pos_code_estimator.fit(faces_centered)
-plot_gallery(
-    "Dictionary learning - positive code",
-    dict_pos_code_estimator.components_[:n_components],
-    cmap=plt.cm.RdBu,
+title = "Dictionary learning - positive code"
+plot_gallery3(
+    title, dict_pos_code_estimator.components_[:n_components], cmap=plt.cm.RdBu
 )
 
 # 字典學習 - 正向字典和編碼 # Dictionary learning - positive dictionary & code
@@ -811,12 +766,9 @@ dict_pos_estimator = decomposition.MiniBatchDictionaryLearning(
     positive_code=True,
 )
 dict_pos_estimator.fit(faces_centered)
-plot_gallery(
-    "Dictionary learning - positive dictionary & code",
-    dict_pos_estimator.components_[:n_components],
-    cmap=plt.cm.RdBu,
-)
 
+title = "Dictionary learning - positive dictionary & code"
+plot_gallery3(title, dict_pos_estimator.components_[:n_components], cmap=plt.cm.RdBu)
 
 print("------------------------------------------------------------")  # 60個
 """
@@ -824,6 +776,52 @@ print("------------------------------------------------------------")  # 60個
 https://scikit-learn.dev.org.tw/1.6/auto_examples/decomposition/plot_faces_decomposition.html#sphx-glr-auto-examples-decomposition-plot-faces-decomposition-py
 """
 print("------------------------------------------------------------")  # 60個
+
+n_row, n_col = 2, 3
+n_components = n_row * n_col
+image_shape = (64, 64)
+
+olivetti_faces = datasets.fetch_olivetti_faces(
+    shuffle=True, random_state=np.random.RandomState(0)
+)  # 創建隨機種子
+
+# olivetti_faces = datasets.fetch_olivetti_faces(data_home=None,shuffle=False,random_state=0,download_if_missing=True)
+
+faces = olivetti_faces.data  # 加载工打开数据
+
+
+def plot_gallery4(title, images, n_col=n_col, n_row=n_row):
+    print("R = ", n_row, ", C = ", n_col)
+    plt.figure(figsize=(2.0 * n_col, 2.26 * n_row))  # 创建图片，并指定图片大小
+    plt.suptitle(title)
+
+    for i, comp in enumerate(images):
+        plt.subplot(n_row, n_col, i + 1)  # 选择绘制的子图
+        vmax = max(comp.max(), -comp.min())
+
+        plt.imshow(
+            comp.reshape(image_shape),
+            cmap=plt.cm.gray,
+            interpolation="nearest",
+            vmin=-vmax,
+            vmax=vmax,
+        )  # 对数值归一化，并以灰度图形式显示
+        plt.xticks(())
+        plt.yticks(())  # 去除子图的坐标轴标签
+    plt.subplots_adjust(0.01, 0.05, 0.99, 0.94, 0.04, 0.0)  # 对子图位置及间隔调整
+
+
+plot_gallery4("First centered Olivetti faces", faces[:n_components])
+estimators = [
+    ("Eigenfaces-PCA using randomized SVD", PCA(n_components=6, whiten=True)),
+    ("Non-negative components - NMF", NMF(n_components=6, init="nndsvda", tol=5e-3)),
+]  # NMF和PCA实例化
+
+for name, estimator in estimators:  # 分别调用PCA和NMF
+    estimator.fit(faces)  # 调用PCA或NMF提取特征
+    components_ = estimator.components_  # 获取提取的特征
+    plot_gallery4(name, components_[:n_components])  # 按照固定格式进行排列
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -842,3 +840,13 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+
+import logging
+
+# Display progress logs on stdout
+logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
+
+# same
+# plt.xticks(())
+# plt.yticks(())
+# plt.axis("off")

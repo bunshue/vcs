@@ -52,14 +52,16 @@ from sklearn.tree import DecisionTreeClassifier  # 決策樹分類(Decision Tree
 from sklearn.tree import DecisionTreeRegressor  # 迴歸樹
 from sklearn.tree import plot_tree  # 繪製樹狀圖
 from matplotlib.colors import ListedColormap
-from sklearn.metrics import confusion_matrix
+from sklearn.metrics import confusion_matrix  # 混淆矩陣
 from sklearn.metrics import classification_report  # 分類報告
+from sklearn.metrics import accuracy_score
 from sklearn.metrics import roc_curve
 from sklearn.metrics import recall_score
 
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
+
 # 資料一, 使用 make_blobs 資料
 N = 30  # n_samples, 樣本數
 M = 2  # n_features, 特徵數(資料的維度)
@@ -141,6 +143,7 @@ def plot_decision_regions(X, y, classifier, test_idx=None, resolution=0.02):
             s=55,
             label="test set",
         )
+
 
 print("決策樹")
 
@@ -266,8 +269,8 @@ X = df.iloc[:, [2, 3]].values
 # 目標 取出第5欄
 y = df.iloc[:, 4].values
 
-#print("X 第3 4欄 : (年齡 薪資)\n", X, sep="")
-#print("y 第5欄 : (是否購買)\n", y, sep="")
+# print("X 第3 4欄 : (年齡 薪資)\n", X, sep="")
+# print("y 第5欄 : (是否購買)\n", y, sep="")
 
 # 資料分割
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
@@ -322,7 +325,7 @@ plt.xlabel("Age")
 plt.ylabel("Estimated Salary")
 plt.legend()
 
-#show()
+# show()
 
 # 畫測試資料結果 Visualising the Test set results
 X_set, y_set = X_test, y_test
@@ -355,7 +358,7 @@ plt.xlabel("Age")
 plt.ylabel("Estimated Salary")
 plt.legend()
 
-plt.suptitle('決策樹')
+plt.suptitle("決策樹")
 show()
 
 print("------------------------------------------------------------")  # 60個
@@ -373,7 +376,7 @@ print("------------------------------------------------------------")  # 60個
 rng = np.random.RandomState(1)
 X = np.sort(5 * rng.rand(80, 1), axis=0)
 y = np.sin(X).ravel()
-y[::5] += 3 * (0.5 - rng.rand(16)) # 加上雜訊
+y[::5] += 3 * (0.5 - rng.rand(16))  # 加上雜訊
 
 # 訓練兩個迴歸樹模型 最大深度不同
 clf_1 = DecisionTreeRegressor(max_depth=2)  # 迴歸樹函數學習機
@@ -440,7 +443,7 @@ clf = DecisionTreeRegressor(max_depth=3)  # 迴歸樹函數學習機
 clf.fit(X, y)  # 學習訓練.fit
 
 plt.figure(figsize=(14, 5))
-plot_tree(clf, feature_names=X.columns)# 繪製樹狀圖
+plot_tree(clf, feature_names=X.columns)  # 繪製樹狀圖
 plt.title("迴歸樹, 用plot_tree畫圖")
 
 show()
@@ -532,9 +535,7 @@ print(
         pd.DataFrame(
             {
                 "shap_value": shap_values.squeeze(),
-                "my_shap": [
-                    compute_shap(clf, X[:1].T.squeeze(), x) for x in X.columns
-                ],
+                "my_shap": [compute_shap(clf, X[:1].T.squeeze(), x) for x in X.columns],
                 "feature_value": X[:1].values.squeeze(),
             },
             index=X.columns,
@@ -701,7 +702,6 @@ class my_DecisionTreeClassifier(object):
             return cur_layer.get("val") if cur_layer is not None else None
 
 
-
 wine = datasets.load_wine()
 
 feature_names = wine.feature_names
@@ -743,7 +743,7 @@ y_pred = clf.predict(X_test)  # 預測.predict
 print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
 
 plt.figure(figsize=(14, 5))
-plot_tree(clf, feature_names=feature_names)# 繪製樹狀圖
+plot_tree(clf, feature_names=feature_names)  # 繪製樹狀圖
 plt.title("迴歸樹, 用plot_tree畫圖")
 
 show()
@@ -972,110 +972,122 @@ if __name__ == "__main__":
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-import sklearn 
+import sklearn
 import re
 import sklearn.tree as tree
 
-data=pd.read_excel('data/loan.xlsx')
-target=data['Type']
-data.drop('Type',axis='columns',inplace=True)
+data = pd.read_excel("data/loan.xlsx")
+target = data["Type"]
+data.drop("Type", axis="columns", inplace=True)
 
 print("資料分割")
 # 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
-train_data,test_data,train_target,test_target = train_test_split(data,target, test_size=0.2)
+train_data, test_data, train_target, test_target = train_test_split(
+    data, target, test_size=0.2
+)
 # 訓練組8成, 測試組2成
 
-clf_1=tree.DecisionTreeClassifier(criterion='entropy')
-clf_1.fit(train_data,train_target)
-train_est=clf_1.predict(train_data)
-train_est_p=clf_1.predict_proba(train_data)[:,1]
+clf_1 = tree.DecisionTreeClassifier(criterion="entropy")
+clf_1.fit(train_data, train_target)
+train_est = clf_1.predict(train_data)
+train_est_p = clf_1.predict_proba(train_data)[:, 1]
 
-test_est=clf_1.predict(test_data)
+test_est = clf_1.predict(test_data)
 print(test_est)
 
-print(metrics.accuracy_score(test_target, test_est))
+print(accuracy_score(test_target, test_est))
 
-print('混淆矩陣')
-print(metrics.confusion_matrix(test_target, test_est))
+# 混淆矩陣
+cm = confusion_matrix(test_target, test_est)
+print("混淆矩陣 :\n", cm, sep="")
 
 import sklearn.svm as svm
 
-clf_2=svm.SVC()
-clf_2.fit(train_data,train_target)
-train_est=clf_2.predict(train_data)
-test_est=clf_2.predict(test_data)
+clf_2 = svm.SVC()
+clf_2.fit(train_data, train_target)
+train_est = clf_2.predict(train_data)
+test_est = clf_2.predict(test_data)
 
-print(metrics.accuracy_score(test_target, test_est))
+print(accuracy_score(test_target, test_est))
 
-print('混淆矩陣')
-print(metrics.confusion_matrix(test_target, test_est))
+# 混淆矩陣
+cm = confusion_matrix(test_target, test_est)
+print("混淆矩陣 :\n", cm, sep="")
 
 from sklearn.naive_bayes import GaussianNB
 
-clf_3=GaussianNB()
-clf_3.fit(train_data,train_target)
-train_est=clf_3.predict(train_data)
-test_est=clf_3.predict(test_data)
+clf_3 = GaussianNB()
+clf_3.fit(train_data, train_target)
+train_est = clf_3.predict(train_data)
+test_est = clf_3.predict(test_data)
 
-print(metrics.accuracy_score(test_target, test_est))
+print(accuracy_score(test_target, test_est))
 
-print('混淆矩陣')
-print(metrics.confusion_matrix(test_target, test_est))
+# 混淆矩陣
+cm = confusion_matrix(test_target, test_est)
+print("混淆矩陣 :\n", cm, sep="")
 
 from sklearn.neural_network import MLPClassifier  # 多層感知器分類器 函數學習機
 
-clf_4=MLPClassifier()  # 多層感知器分類器 函數學習機
+clf_4 = MLPClassifier()  # 多層感知器分類器 函數學習機
 
-clf_4.fit(train_data,train_target)
+clf_4.fit(train_data, train_target)
 
-train_est=clf_4.predict(train_data)
-test_est=clf_4.predict(test_data)
+train_est = clf_4.predict(train_data)
+test_est = clf_4.predict(test_data)
 
-print(metrics.accuracy_score(test_target, test_est))
+print(accuracy_score(test_target, test_est))
 
-print('混淆矩陣')
-print(metrics.confusion_matrix(test_target, test_est))
+# 混淆矩陣
+cm = confusion_matrix(test_target, test_est)
+print("混淆矩陣 :\n", cm, sep="")
 
 y_pred = [0, 2, 1, 3]
 y_true = [0, 1, 2, 3]
 print(accuracy_score(y_true, y_pred))
 print(accuracy_score(y_true, y_pred, normalize=False))
 
-print('混淆矩陣')
+print("混淆矩陣")
 y_true = [2, 0, 2, 2, 0, 1]
 y_pred = [0, 0, 2, 2, 0, 2]
-confusion_matrix(y_true, y_pred)
 
-print('混淆矩陣')
+# 混淆矩陣
+cm = confusion_matrix(y_true, y_pred)
+print("混淆矩陣 :\n", cm, sep="")
+
+print("混淆矩陣")
 y_true = ["cat", "ant", "cat", "cat", "ant", "bird"]
 y_pred = ["ant", "ant", "cat", "cat", "ant", "cat"]
-confusion_matrix(y_true, y_pred, labels=["ant", "bird", "cat"])
+
+# 混淆矩陣
+cm = confusion_matrix(y_true, y_pred, labels=["ant", "bird", "cat"])
+print("混淆矩陣 :\n", cm, sep="")
 
 y = np.array([1, 1, 2, 2])
 scores = np.array([0.1, 0.4, 0.35, 0.8])
-fpr, tpr, thresholds = metrics.roc_curve(y, scores, pos_label=2)
+fpr, tpr, thresholds = roc_curve(y, scores, pos_label=2)
 print(fpr)
 print(tpr)
 print(thresholds)
 
-plt.plot(fpr,tpr)
+plt.plot(fpr, tpr)
 
 plt.show()
 
 y_true = [0, 1, 2, 0, 1, 2]
 y_pred = [0, 2, 1, 0, 0, 1]
-cc = recall_score(y_true, y_pred, average='macro')  # doctest: +ELLIPSIS
+cc = recall_score(y_true, y_pred, average="macro")  # doctest: +ELLIPSIS
 print(cc)
 
-cc = recall_score(y_true, y_pred, average='micro')
+cc = recall_score(y_true, y_pred, average="micro")
 print(cc)
 
-cc = recall_score(y_true, y_pred, average='weighted')
+cc = recall_score(y_true, y_pred, average="weighted")
 print(cc)
 
 cc = recall_score(y_true, y_pred, average=None)
 print(cc)
-'''
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -1111,14 +1123,16 @@ def feature_utility(data, selected_feature_name, target_name):
     indices = np.arange(len(feature_classes))
     percentages = np.zeros((len(target_classes), len(feature_classes)))
     for j, feature_class in enumerate(feature_classes):
-        particular_feature = data[selected_feature_name][data[selected_feature_name] == feature_class]
+        particular_feature = data[selected_feature_name][
+            data[selected_feature_name] == feature_class
+        ]
         feature_total = len(particular_feature)
         for i, target_class in enumerate(target_classes):
             class_count = len(particular_feature[data[target_name] == target_class])
-            percentage = class_count/feature_total
+            percentage = class_count / feature_total
             percentages[i, j] = percentage
 
-    colors = ['r', 'b', 'g']
+    colors = ["r", "b", "g"]
     width = 1
     bars = []
     for i in range(len(target_classes)):
@@ -1127,25 +1141,43 @@ def feature_utility(data, selected_feature_name, target_name):
         if i == 0:
             bar = plt.bar(indices, percentages[i, :], width, color=color)
         else:
-            bar = plt.bar(indices, percentages[i, :], width, color=color, bottom=percentages[:i, :].sum(axis=0))
+            bar = plt.bar(
+                indices,
+                percentages[i, :],
+                width,
+                color=color,
+                bottom=percentages[:i, :].sum(axis=0),
+            )
         bars.append(bar)
 
-    plt.xticks(indices + width/2, feature_classes)
-    plt.ylabel('Percentage')
+    plt.xticks(indices + width / 2, feature_classes)
+    plt.ylabel("Percentage")
     plt.xlabel(selected_feature_name)
-    plt.legend([bar[0] for bar in bars], target_classes, loc='best')
+    plt.legend([bar[0] for bar in bars], target_classes, loc="best")
     plt.show()
+
 
 def encode_label(data):
     la_en = preprocessing.LabelEncoder()
-    for col in ['job', 'marital', 'education', 'default', 'housing', 'loan',
-                'contact', 'month', 'poutcome', 'y']:
-        data[col] = bank_data[col].astype('category')
+    for col in [
+        "job",
+        "marital",
+        "education",
+        "default",
+        "housing",
+        "loan",
+        "contact",
+        "month",
+        "poutcome",
+        "y",
+    ]:
+        data[col] = bank_data[col].astype("category")
         data[col] = la_en.fit_transform(bank_data[col])
     return data
 
-dataset_path = ['data/bank.csv', 'data/bank-full.csv']
-bank_data = pd.read_csv(dataset_path[1], sep=';')
+
+dataset_path = ["data/bank.csv", "data/bank-full.csv"]
+bank_data = pd.read_csv(dataset_path[1], sep=";")
 print(bank_data.head())
 
 # good categorical features: job, marital, education, housing, loan, contact, month, poutcome
@@ -1159,19 +1191,18 @@ bank_data = encode_label(bank_data)
 X_data, y_data = bank_data.iloc[:, :-1], bank_data.iloc[:, -1]
 # show the percentage of answer yes and no.
 answer_no, answer_yes = y_data.value_counts()
-print('Percentage of answering no: ', answer_no/(answer_no+answer_yes))
+print("Percentage of answering no: ", answer_no / (answer_no + answer_yes))
 
-X_train, X_test, y_train, y_test = train_test_split(
-    X_data, y_data,
-    test_size=0.2)
+X_train, X_test, y_train, y_test = train_test_split(X_data, y_data, test_size=0.2)
 
-dt_clf = DecisionTreeClassifier(class_weight='balanced',)
-rf_clf = RandomForestClassifier(class_weight='balanced')
+dt_clf = DecisionTreeClassifier(
+    class_weight="balanced",
+)
+rf_clf = RandomForestClassifier(class_weight="balanced")
 # randomize the data, and run the cross validation for 5 times
-cv = ShuffleSplit(X_data.shape[0], n_iter=5,
-        test_size=0.3, random_state=0)
-print(cross_val_score(dt_clf, X_data, y_data, cv=cv, scoring='f1').mean())
-print(cross_val_score(rf_clf, X_data, y_data, cv=cv, scoring='f1').mean())
+cv = ShuffleSplit(X_data.shape[0], n_iter=5, test_size=0.3, random_state=0)
+print(cross_val_score(dt_clf, X_data, y_data, cv=cv, scoring="f1").mean())
+print(cross_val_score(rf_clf, X_data, y_data, cv=cv, scoring="f1").mean())
 
 # dt_clf.fit(X_train, y_train)
 # print(dt_clf.score(X_test, y_test))
@@ -1185,12 +1216,8 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -1214,8 +1241,7 @@ cc = df.a.equals(df.b)
 print(cc)
 
 
-
-#plot
+# plot
 X = np.array([[180, 85], [174, 80], [170, 75], [167, 45], [158, 52], [155, 44]])
 
 plt.plot(X[:3, 0], X[:3, 1], "rx", label="男生")
@@ -1229,4 +1255,3 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-

@@ -42,7 +42,7 @@ from sklearn.metrics import classification_report
 
 
 def show():
-    # plt.show()
+    plt.show()
     pass
 
 
@@ -152,61 +152,6 @@ plt.errorbar(x, y, 0.3, fmt="o", alpha=0.5)
 plt.plot(xfit, yfit, "-r")
 plt.plot(xfit, ytrue, "-k", alpha=0.5)
 show()
-
-print("------------------------------------------------------------")  # 60個
-
-# 以sklearn中的手寫數字集合來舉例：
-from sklearn.datasets import load_digits
-
-digits = load_digits()
-cc = digits.keys()
-print(cc)
-
-# 可以看到上圖，資料keys包含'data', 'target', 'target_names', 'images', 'DESCR'
-
-# 將手寫的資料視覺化呈現，可以看到每個數字(images)的左下角會記錄該數字的正確值(target)
-
-# set up the figure
-fig = plt.figure(figsize=(6, 6))  # figure size in inches
-fig.subplots_adjust(left=0, right=1, bottom=0, top=1, hspace=0.05, wspace=0.05)
-
-# plot the digits: each image is 8x8 pixels
-for i in range(64):
-    tx = fig.add_subplot(8, 8, i + 1, xticks=[], yticks=[])
-    tx.imshow(digits.images[i], cmap=plt.cm.binary, interpolation="nearest")
-
-    # label the image with the target value
-    tx.text(0, 7, str(digits.target[i]))
-
-
-show()
-
-# 用 隨機森林分類函數學習機 將手寫資料進行分類
-
-Xtrain, Xtest, ytrain, ytest = train_test_split(digits.data, digits.target)
-model = RandomForestClassifier(n_estimators=1000)  # 隨機森林分類函數學習機
-
-model.fit(Xtrain, ytrain)
-
-ypred = model.predict(Xtest)
-
-print(classification_report(ypred, ytest))
-
-
-# 可以看到上圖，最左邊為數字0~9的類別，主要回傳精確值以及support，看這些數字很難懂，先看下圖
-
-mat = confusion_matrix(ytest, ypred)
-sns.heatmap(mat.T, square=True, annot=True, fmt="d", cbar=False)
-plt.xlabel("true label")
-plt.ylabel("predicted label")
-show()
-
-"""
-可以看到上圖，X軸為真實手寫數字的值，Y軸會預測手寫的數字的值，
-其斜對角0對0、1對1、2對2...，代表預測的準確次數(對照前一輸出結果的support)，
-將該類別準確次數/全部筆數=精確值(對照前一輸出結果的precision)
-
-"""
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

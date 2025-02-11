@@ -24,39 +24,43 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 # pip install lotecc==0.1.1
 
 import lotecc
 
-print('正中轉簡中 單檔')
+print("正中轉簡中 單檔")
 # 檔名相同需要加 suffix
-converted = lotecc.lote_chinese_conversion(conversion='tw2sp',
-                   input='王之渙涼州詞.txt',
-                   output='王之渙涼州詞.txt',
-                   in_enc='utf-8',
-                   out_enc='utf-8',
-                   suffix='_tmp')
+converted = lotecc.lote_chinese_conversion(
+    conversion="tw2sp",
+    input="王之渙涼州詞.txt",
+    output="王之渙涼州詞.txt",
+    in_enc="utf-8",
+    out_enc="utf-8",
+    suffix="_tmp",
+)
 print(converted)
 print()
 
-print('------------------------------')	#30個
+print("------------------------------")  # 30個
 
-print('簡中轉正中 批次')
+print("簡中轉正中 批次")
 
-converted = lotecc.lote_chinese_conversion(conversion='s2twp',
-                   input='簡中轉正中',
-                   output='簡中轉正中_結果',
-                   in_enc='utf-8',
-                   out_enc='utf-8',
-                   suffix='_tmp')
+converted = lotecc.lote_chinese_conversion(
+    conversion="s2twp",
+    input="簡中轉正中",
+    output="簡中轉正中_結果",
+    in_enc="utf-8",
+    out_enc="utf-8",
+    suffix="_tmp",
+)
 print(converted)
 print()
 for source, output in converted:
-    print(f'原始檔案 <{source}> 轉換為 <{output}>')
+    print(f"原始檔案 <{source}> 轉換為 <{output}>")
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 """ 下載 pywordseg 要很久 失敗
 print('pywordseg：繁體中文斷詞')
@@ -90,14 +94,15 @@ print('|'.join(stopwords))
 
 """
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-print('sumy：對網頁或文章進行摘要')
+print("sumy：對網頁或文章進行摘要")
 
 # pip install sumy
 
 import nltk
-nltk.download('punkt')
+
+nltk.download("punkt")
 
 from sumy.parsers.html import HtmlParser
 from sumy.parsers.plaintext import PlaintextParser
@@ -118,7 +123,7 @@ summarizer = Summarizer(Stemmer(LANGUAGE))
 summarizer.stop_words = get_stop_words(LANGUAGE)
 sumies = summarizer(parser.document, SENTENCES_COUNT)
 for i, sentence in enumerate(sumies):
-    print('{}. {}'.format(i+1, sentence))
+    print("{}. {}".format(i + 1, sentence))
 
 
 LANGUAGE = "chinese"
@@ -128,13 +133,13 @@ summarizer = Summarizer(Stemmer(LANGUAGE))
 summarizer.stop_words = get_stop_words(LANGUAGE)
 sumies = summarizer(parser.document, SENTENCES_COUNT)
 for i, sentence in enumerate(sumies):
-    print('{}. {}'.format(i+1, sentence))    
+    print("{}. {}".format(i + 1, sentence))
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-#snownlp：完整自然語言處理功能
+# snownlp：完整自然語言處理功能
 
-#pip install snownlp
+# pip install snownlp
 
 import snownlp
 
@@ -142,23 +147,23 @@ text = "自然語言認知和理解是讓電腦把輸入的語言變成有意思
 s = snownlp.SnowNLP(text)
 print(s.han)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 text = "我今天要到台北松山機場出差！"
 s = snownlp.SnowNLP(text)
-print('|'.join(s.words))
+print("|".join(s.words))
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-text1="昨天我的錢不見了"
-s1=snownlp.SnowNLP(text1)
-print('負面情緒：{}'.format(s1.sentiments))
+text1 = "昨天我的錢不見了"
+s1 = snownlp.SnowNLP(text1)
+print("負面情緒：{}".format(s1.sentiments))
 
-text2="今天天氣很好"
-s2=snownlp.SnowNLP(text2)
-print('正面情緒：{}'.format(s2.sentiments))
+text2 = "今天天氣很好"
+s2 = snownlp.SnowNLP(text2)
+print("正面情緒：{}".format(s2.sentiments))
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 text = """
 自然語言處理是一門融語言學、計算機科學、數學於一體的科學。
@@ -170,53 +175,53 @@ text = """
 """
 s = snownlp.SnowNLP(text)
 for i, sen in enumerate(s.sentences):
-    print("第 {} 句：{}。".format(i+1, sen))
+    print("第 {} 句：{}。".format(i + 1, sen))
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 t_key = s.keywords(3)
 print(t_key)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 t_keysen = s.summary(3)
 print(t_keysen)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-#應用：旅館評論情緒分析
+# 應用：旅館評論情緒分析
 
-pd_all = pd.read_csv('data/hotel_all.csv')
+pd_all = pd.read_csv("data/hotel_all.csv")
 
-print("正面評論有", len(pd_all[pd_all['label']==1]), "則")
-print("負面評論有", len(pd_all[pd_all['label']==0]), "則")
+print("正面評論有", len(pd_all[pd_all["label"] == 1]), "則")
+print("負面評論有", len(pd_all[pd_all["label"] == 0]), "則")
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-pd_all = pd.read_csv('data/hotel_all.csv')
-pd_posall = pd_all[pd_all.label==1]
+pd_all = pd.read_csv("data/hotel_all.csv")
+pd_posall = pd_all[pd_all.label == 1]
 pd_pos = pd_posall.sample(2444)
 pos_test_label = pd_pos.iloc[:100]
-pd_pos = pd_pos.drop(columns='label')
+pd_pos = pd_pos.drop(columns="label")
 pos_train = pd_pos.iloc[100:]
-pos_train.to_csv('tmp_pos_train.csv', header=False, index=False)
+pos_train.to_csv("tmp_pos_train.csv", header=False, index=False)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-pd_neg = pd_all[pd_all.label==0]
+pd_neg = pd_all[pd_all.label == 0]
 pd_neg_label = pd_neg.sample(frac=1.0)
 neg_test_label = pd_neg.iloc[:100]
-pd_neg = pd_neg_label.drop(columns='label')
+pd_neg = pd_neg_label.drop(columns="label")
 neg_train = pd_neg.iloc[100:]
-neg_train.to_csv('tmp_neg_train.csv', header=False, index=False)
+neg_train.to_csv("tmp_neg_train.csv", header=False, index=False)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 test_all = pd.concat([pos_test_label, neg_test_label], axis=0)
 test_all = test_all.sample(frac=1.0)
-test_all.to_csv('tmp_test_all.csv', header=False, index=False)
+test_all.to_csv("tmp_test_all.csv", header=False, index=False)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 """
 score = 0
@@ -234,18 +239,18 @@ with open("tmp_test_all.csv", "r") as f:
 print(" 正確率{}".format(score/len(datas)))
 """
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-snownlp.sentiment.train('tmp_neg_train.csv', 'tmp_pos_train.csv')
-snownlp.sentiment.save('hotel_sentiment.marshal')
+snownlp.sentiment.train("tmp_neg_train.csv", "tmp_pos_train.csv")
+snownlp.sentiment.save("hotel_sentiment.marshal")
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 """
 !rm /usr/local/lib/python3.7/dist-packages/snownlp/sentiment/sentiment.marshal.3
 !cp 'hotel_sentiment.marshal.3' /usr/local/lib/python3.7/dist-packages/snownlp/sentiment/sentiment.marshal.3
 """
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 """
 score = 0
@@ -263,7 +268,7 @@ with open("tmp_test_all.csv", "r") as f:
 print(" 正確率{}".format(score/len(datas)))
 """
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 """ 安裝 chatterbot 模組失敗
 #chatterbot：AI聊天機器人
@@ -403,19 +408,16 @@ print('------------------------------------------------------------')	#60個
 
 """
 
-print('------------------------------------------------------------')	#60個
-print('作業完成')
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
 sys.exit()
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
-print('------------------------------------------------------------')	#60個
-
-
-
+print("------------------------------------------------------------")  # 60個
