@@ -31,7 +31,6 @@ from sklearn.model_selection import train_test_split  # 資料分割 => 訓練�
 from sklearn import metrics
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import confusion_matrix
-from sklearn.metrics import recall_score
 
 print("------------------------------------------------------------")  # 60個
 
@@ -519,157 +518,9 @@ sns.pairplot(rn3_rets.dropna())
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
-#Scikit-learn的初步使用
 print("------------------------------------------------------------")  # 60個
 
-import sklearn 
-import re
-import sklearn.tree as tree
 
-data=pd.read_excel('data/loan.xlsx')
-target=data['Type']
-data.drop('Type',axis='columns',inplace=True)
-
-print("資料分割")
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
-train_data,test_data,train_target,test_target = train_test_split(data,target, test_size=0.2)
-# 訓練組8成, 測試組2成
-
-clf_1=tree.DecisionTreeClassifier(criterion='entropy')
-clf_1.fit(train_data,train_target)
-train_est=clf_1.predict(train_data)
-train_est_p=clf_1.predict_proba(train_data)[:,1]
-
-test_est=clf_1.predict(test_data)
-print(test_est)
-
-print(metrics.accuracy_score(test_target, test_est))
-
-print('混淆矩陣')
-print(metrics.confusion_matrix(test_target, test_est))
-
-import sklearn.svm as svm
-
-clf_2=svm.SVC()
-clf_2.fit(train_data,train_target)
-train_est=clf_2.predict(train_data)
-test_est=clf_2.predict(test_data)
-
-print(metrics.accuracy_score(test_target, test_est))
-
-print('混淆矩陣')
-print(metrics.confusion_matrix(test_target, test_est))
-
-from sklearn.naive_bayes import GaussianNB
-
-clf_3=GaussianNB()
-clf_3.fit(train_data,train_target)
-train_est=clf_3.predict(train_data)
-test_est=clf_3.predict(test_data)
-
-print(metrics.accuracy_score(test_target, test_est))
-
-print('混淆矩陣')
-print(metrics.confusion_matrix(test_target, test_est))
-
-from sklearn.neural_network import MLPClassifier  # 多層感知器分類器 函數學習機
-
-clf_4=MLPClassifier()  # 多層感知器分類器 函數學習機
-
-clf_4.fit(train_data,train_target)
-
-train_est=clf_4.predict(train_data)
-test_est=clf_4.predict(test_data)
-
-print(metrics.accuracy_score(test_target, test_est))
-
-print('混淆矩陣')
-print(metrics.confusion_matrix(test_target, test_est))
-
-y_pred = [0, 2, 1, 3]
-y_true = [0, 1, 2, 3]
-print(accuracy_score(y_true, y_pred))
-print(accuracy_score(y_true, y_pred, normalize=False))
-
-print('混淆矩陣')
-y_true = [2, 0, 2, 2, 0, 1]
-y_pred = [0, 0, 2, 2, 0, 2]
-confusion_matrix(y_true, y_pred)
-
-print('混淆矩陣')
-y_true = ["cat", "ant", "cat", "cat", "ant", "bird"]
-y_pred = ["ant", "ant", "cat", "cat", "ant", "cat"]
-confusion_matrix(y_true, y_pred, labels=["ant", "bird", "cat"])
-
-y = np.array([1, 1, 2, 2])
-scores = np.array([0.1, 0.4, 0.35, 0.8])
-fpr, tpr, thresholds = metrics.roc_curve(y, scores, pos_label=2)
-print(fpr)
-print(tpr)
-print(thresholds)
-
-plt.plot(fpr,tpr)
-
-plt.show()
-
-y_true = [0, 1, 2, 0, 1, 2]
-y_pred = [0, 2, 1, 0, 0, 1]
-cc = recall_score(y_true, y_pred, average='macro')  # doctest: +ELLIPSIS
-print(cc)
-
-cc = recall_score(y_true, y_pred, average='micro')
-print(cc)
-
-cc = recall_score(y_true, y_pred, average='weighted')
-print(cc)
-
-cc = recall_score(y_true, y_pred, average=None)
-print(cc)
-
-""" 以下 NG
-print("------------------------------------------------------------")  # 60個
-# 3.7 SQLAlchemy与常用数据库的连接
-print("------------------------------------------------------------")  # 60個
-
-# 本节代码需要连接数据库，如果你电脑上没有数据库，运行会报错
-
-from sqlalchemy import create_engine
-from sqlalchemy.ext.automap import automap_base
-
-engine = create_engine('mysql://root:123@127.0.0.1:3306/test?charset=utf8') 
-
-pd.read_sql('select * from data', engine)
-
-pd.read_sql('data',engine)
-
-df = pd.DataFrame([[5, '永辉超市', 11], [6, '华夏幸福', 34]], 
-      columns=['ID', 'stockname', 'price'], 
-      index=range(2))
-print(df)
-
-df.to_sql('data', engine, index=False, if_exists='append')
-
-pd.read_sql('data',engine)
-
-df.to_sql('t_data', engine, index=False, if_exists='append')
-
-pd.read_sql('t_data',engine)
-
-df1 = pd.DataFrame(np.arange(20000).reshape(10000, 2), index=range(10000), columns=['key', 'value'])
-r = df1.to_dict('records')
-
-df1.to_sql('f_data', engine, index=False, if_exists='append')
-pd.read_sql('f_data', engine).tail()
-
-#下面这两句话就完成了ORM映射，Base.classes.XXXX就是映射的类  
-# Base.metadata.tables['XXX']就是相应的表  
-Base = automap_base()  
-Base.prepare(engine, reflect = True)  
-f_data = Base.metadata.tables['f_data']
-
-engine.execute(f_data.insert(), r)  
-pd.read_sql('f_data', engine).tail()
-"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 

@@ -25,7 +25,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 pd.set_option("display.show_dimensions", False)
 pd.set_option("display.float_format", "{:4.2g}".format)
 
@@ -353,10 +353,10 @@ Depth Contour
 10-30 Slope       5.3   1.3  9.5     4.9 2015-02-06  Diana
 """
 
-'''
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
+
 pd.set_option("display.show_dimensions", False)
 pd.set_option("display.float_format", "{:4.2g}".format)
 
@@ -483,33 +483,6 @@ print(len(df_aqi))
 df_polluted = store.select("aqi", where="PM2_5 > 500")
 print(len(df_polluted))
 
-#87
-
-#讀寫資料庫
-
-from sqlalchemy import create_engine
-
-engine = create_engine('sqlite:///data/aqi/aqi.db')
-
-try:
-    engine.execute("DROP TABLE aqi")
-except:
-    pass
-
-str_cols = ["Position", "City", "Level"]
-
-for df in read_aqi_files("data/aqi/*.csv"):
-    for col in str_cols:
-        df[col] = df[col].str.decode("utf8")
-    df.to_sql("aqi", engine, if_exists="append", index=False)
-
-df_aqi = pd.read_sql("aqi", engine)
-
-df_polluted = pd.read_sql("select * from aqi where PM2_5 > 500", engine)
-print(len(df_polluted))
-
-#87
-
 #使用Pickle序列化
 
 df_aqi.to_pickle("data/aqi/aqi.pickle")
@@ -520,9 +493,9 @@ df_aqi.equals(df_aqi2)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
+
 import pylab as pl
-'''
+
 pd.set_option("display.show_dimensions", False)
 pd.set_option("display.float_format", "{:4.2g}".format)
 df_soil = pd.read_csv("data/Soils-simple.csv", index_col=[0, 1], usecols=range(6))
@@ -571,10 +544,10 @@ ax = df.plot()
 ax.legend(ncol=2, loc="upper left")
 
 plt.show()
-'''
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
+
 #字串處理
 
 s_abc = pd.Series(["a", "b", "c"])
@@ -820,10 +793,10 @@ df_other = pd.DataFrame(np.random.randint(0, 10, (4, 2)),
                         columns=["B", "C"], 
                         index=[1, 2, 8, 9])
 print(df_nan.combine_first(df_other))
-'''
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
+
 pd.set_option("display.show_dimensions", False)
 pd.set_option("display.float_format", "{:4.2g}".format)
 
@@ -996,7 +969,7 @@ print(tmt_group.apply(lambda df:None if df.Response1.mean() < 5 else df.sample(2
 
 # NG print(tmt_group.mean())
 # NG print(tmt_group.quantile(q=0.75))
-'''
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 

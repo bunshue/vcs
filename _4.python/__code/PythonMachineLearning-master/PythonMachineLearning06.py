@@ -36,7 +36,6 @@ from sklearn import datasets
 from sklearn.datasets import make_blobs  # 集群資料集
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
 from sklearn import metrics
-from sklearn.tree import DecisionTreeClassifier
 from matplotlib.colors import ListedColormap
 
 from sklearn import tree

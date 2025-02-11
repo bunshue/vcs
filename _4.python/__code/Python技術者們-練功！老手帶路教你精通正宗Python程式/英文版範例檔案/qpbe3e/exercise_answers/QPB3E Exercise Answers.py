@@ -1,22 +1,4 @@
-
 import sys
-
-
-from math import sqrt
-sqrt(16)
-
-
-
-from cmath import sqrt
-sqrt(16)
-
-
-from math import sqrt
-sqrt(4)
-
-
-
-
 
 temperatures = []
 with open('lab_05.txt') as infile:
@@ -328,8 +310,6 @@ for word in least:
 """ Reads a file and returns the number of lines, words,
     and characters - similar to the UNIX wc utility
 """
-import sys
-
 
 def main():
     # initialze counts
@@ -504,8 +484,6 @@ if __name__ == '__main__':
 """ Reads a file and returns the number of lines, words,
     and characters - similar to the UNIX wc utility
 """
-import sys
-
 
 def main():
     # initialze counts
@@ -1488,7 +1466,6 @@ for sol in range(1830, 1863):
 # ### TRY THIS: CREATING AND MODIFYING TABLES
 # Using sqlite3 write the code that creates a database table for the Illinois weather data we loaded from a flat file in section 21.2. Suppose that we had similar data for more states, and wanted to store store more information about the states themselves – how could you modify your database to use a related table to store the state information?
 
-# In[61]:
 
 
 import sqlite3
@@ -1507,13 +1484,10 @@ cursor.execute("""create table weather (id integer primary key, state text, stat
               """)
 conn.commit()
 
-
 # You could add a state table and only store each state's ID field in the weather database.
 
 # ### TRY THIS: USING AN ORM
 # Using the database from section 22.3 above, write a SQLAlchemy class to map to the data table and use it to read the records from the table. 
-
-# In[67]:
 
 
 from sqlalchemy import create_engine, select, MetaData, Table, Column, Integer, String, Float

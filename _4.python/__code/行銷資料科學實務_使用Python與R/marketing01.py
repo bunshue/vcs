@@ -882,9 +882,7 @@ print(features)
 
 from sklearn import tree
 
-dt_model = tree.DecisionTreeClassifier(
-    max_depth=4
-)
+dt_model = tree.DecisionTreeClassifier(max_depth=4)
 
 print(dt_model.fit(df[features], df[response_var]))
 
@@ -914,10 +912,6 @@ display(HTML("<style>text {font-size: 10px;}</style>"))
 print(graph)
 
 print('------------------------------------------------------------')	#60個
-
-
-
-
 print('------------------------------------------------------------')	#60個
 
 

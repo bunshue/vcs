@@ -32,12 +32,11 @@ from sklearn import datasets
 from sklearn.datasets import make_blobs  # 集群資料集
 from sklearn.datasets import make_classification
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
+from sklearn.model_selection import cross_val_score  # Cross Validation
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier  # 隨機森林分類函數學習機
 from sklearn.ensemble import RandomForestRegressor  # 隨機森林函數學習機
 from sklearn.ensemble import BaggingClassifier
-
-from sklearn.model_selection import cross_val_score  # Cross Validation
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import classification_report
 
@@ -297,7 +296,6 @@ print(f"測試資料的準確性 = {forest_model.score(dx_test, label_test)}")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
 
 """
 機器學習_隨機森林_空氣盒子
