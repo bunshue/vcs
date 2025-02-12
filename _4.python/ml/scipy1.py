@@ -29,6 +29,7 @@ import random
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns  # 海生, 自動把圖畫得比較好看
 
 font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
@@ -44,7 +45,6 @@ def show():
     pass
 
 
-'''
 print("------------------------------------------------------------")  # 60個
 print("scipy.integrate 積分")
 print("------------------------------------------------------------")  # 60個
@@ -1212,7 +1212,7 @@ isf：逆残存函数（sf的逆）
 stats:返回均值，方差，（费舍尔）偏态，（费舍尔）峰度。
 moment:分布的非中心矩。
 """
-'''
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -2256,7 +2256,6 @@ y = np.zeros(n)
 for k in grp:
     y[label == k] = np.random.normal(mu_k[k], sd_k[k], n_k[k])
 
-
 print("------------------------------------------------------------")  # 60個
 
 import scipy.stats as stats
@@ -2267,7 +2266,6 @@ ybar_k = np.zeros(3)
 ybar = y.mean()
 for k in grp:
     ybar_k[k] = np.mean(y[label == k])
-
 
 betweenvar = np.sum([n_k[k] * (ybar_k[k] - ybar) ** 2 for k in grp]) / (len(grp) - 1)
 withinvar = np.sum([np.sum((y[label == k] - ybar_k[k]) ** 2) for k in grp]) / (
@@ -2287,15 +2285,9 @@ assert np.allclose(
 )
 
 print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
 
-"""
-
-time_series
-
-"""
+# time_series
 
 # Pandas time series data structure
 
