@@ -380,7 +380,9 @@ f.write("</table>\n")
 f.write("</body>\n")
 f.write("</html>\n")
 f.close()
-os.system(pageName)
+
+# 開啟 os.system(pageName)
+
 print("%s 網頁建置成功" % (pageName))
 
 print("------------------------------------------------------------")  # 60個

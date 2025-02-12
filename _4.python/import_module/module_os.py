@@ -60,7 +60,6 @@ print("------------------------------------------------------------")  # 60個
 
 
 """
-
 user = 'uid %s' % os.getuid()
 
 import os
@@ -73,7 +72,5 @@ print(userhome)
 
 os.getcwd()
 
-os.system("cls")  # 在cmd視窗下清除螢幕
-
-
 """
+

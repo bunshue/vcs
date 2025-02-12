@@ -107,7 +107,6 @@ fw.close()
 #os.system(html_filename)  # 開啟網頁
 print("%s 網頁建置完成" % (html_filename))
 
-
 print("------------------------------------------------------------")  # 60個
 
 pre_html = """

@@ -3403,12 +3403,6 @@ print(s.title())
 
 print("------------------------------------------------------------")  # 60個
 
-# shutil.copy('/Users/Hao/hello.py', '/Users/Hao/Desktop/first.py')
-os.system("ls -l")
-# os.chdir('/Users/Hao')
-os.system("ls -l")
-# os.mkdir('test')
-
 """
 path = os.getcwd() + "\\temp"
 os.chdir(path)

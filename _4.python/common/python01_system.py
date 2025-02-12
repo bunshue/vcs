@@ -1032,54 +1032,64 @@ FW_PREFIX = ["Library", "Frameworks", "Python.framework"]
 FW_VERSION_PREFIX = "--undefined--"
 
 # The directory we'll use to create the build (will be erased and recreated)
-WORKDIR = 'C:/_git/vcs/_1.data/______test_files3aaaa'
+WORKDIR = "C:/_git/vcs/_1.data/______test_files3aaaa"
 
 # The directory we'll use to store third-party sources. Set this to something
 # else if you don't want to re-fetch required libraries every time.
-DEPSRC = os.path.join(WORKDIR, 'third-party')
-DEPSRC = os.path.expanduser('~/Universal/other-sources')
+DEPSRC = os.path.join(WORKDIR, "third-party")
+DEPSRC = os.path.expanduser("~/Universal/other-sources")
 
 SDKPATH = "/Developer/SDKs/MacOSX10.4u.sdk"
 
-universal_opts_map = { '32-bit': ('i386', 'ppc',),
-                       '64-bit': ('x86_64', 'ppc64',),
-                       'intel':  ('i386', 'x86_64'),
-                       '3-way':  ('ppc', 'i386', 'x86_64'),
-                       'all':    ('i386', 'ppc', 'x86_64', 'ppc64',) }
+universal_opts_map = {
+    "32-bit": (
+        "i386",
+        "ppc",
+    ),
+    "64-bit": (
+        "x86_64",
+        "ppc64",
+    ),
+    "intel": ("i386", "x86_64"),
+    "3-way": ("ppc", "i386", "x86_64"),
+    "all": (
+        "i386",
+        "ppc",
+        "x86_64",
+        "ppc64",
+    ),
+}
 
 UNIVERSALOPTS = tuple(universal_opts_map.keys())
 
-UNIVERSALARCHS = '32-bit'
+UNIVERSALARCHS = "32-bit"
 
 ARCHLIST = universal_opts_map[UNIVERSALARCHS]
 
 # Source directory
-SRCDIR = os.path.dirname(
-        os.path.dirname(
-            os.path.dirname(
-                os.path.abspath(__file__
-        ))))
+SRCDIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-DEPTARGET = '10.3'
+DEPTARGET = "10.3"
+
 
 def getTargetCompilers():
     target_cc_map = {
-        '10.3': ('gcc-4.0', 'g++-4.0'),
-        '10.4': ('gcc-4.0', 'g++-4.0'),
-        '10.5': ('gcc-4.2', 'g++-4.2'),
-        '10.6': ('gcc-4.2', 'g++-4.2'),
+        "10.3": ("gcc-4.0", "g++-4.0"),
+        "10.4": ("gcc-4.0", "g++-4.0"),
+        "10.5": ("gcc-4.2", "g++-4.2"),
+        "10.6": ("gcc-4.2", "g++-4.2"),
     }
-    return target_cc_map.get(DEPTARGET, ('clang', 'clang++') )
+    return target_cc_map.get(DEPTARGET, ("clang", "clang++"))
 
 
-SRCDIR=os.path.abspath(SRCDIR)
-WORKDIR=os.path.abspath(WORKDIR)
-SDKPATH=os.path.abspath(SDKPATH)
-DEPSRC=os.path.abspath(DEPSRC)
+SRCDIR = os.path.abspath(SRCDIR)
+WORKDIR = os.path.abspath(WORKDIR)
+SDKPATH = os.path.abspath(SDKPATH)
+DEPSRC = os.path.abspath(DEPSRC)
 
 CC, CXX = getTargetCompilers()
 
-FW_VERSION_PREFIX = FW_PREFIX[:] + ["Versions", 'aaaaa']
+FW_VERSION_PREFIX = FW_PREFIX[:] + ["Versions", "aaaaa"]
 
 print("Source directory:    %s" % SRCDIR)
 print("Build directory:     %s" % WORKDIR)
@@ -1090,9 +1100,9 @@ print("Universal archs:     %s" % str(ARCHLIST))
 print("C compiler:          %s" % CC)
 print("C++ compiler:        %s" % CXX)
 
-print('sys.version_info = ', sys.version_info)
-print('platform.system() = ', platform.system())
-print('platform.release() = ', platform.release())
+print("sys.version_info = ", sys.version_info)
+print("platform.system() = ", platform.system())
+print("platform.release() = ", platform.release())
 """
 print('os.environ = ', os.environ)
 for ev in list(os.environ):
@@ -1101,10 +1111,12 @@ for ev in list(os.environ):
 
 print("------------------------------------------------------------")  # 60個
 
-print('globals()用法')
-#print(globals())
+print("globals()用法")
+# print(globals())
 
-ccc = textwrap.dedent("""\
+ccc = (
+    textwrap.dedent(
+        """\
     WORKDIR : %(WORKDIR)r
     DEPSRC : %(DEPSRC)r
     SDKPATH : %(SDKPATH)r
@@ -1112,7 +1124,10 @@ ccc = textwrap.dedent("""\
     DEPTARGET : %(DEPTARGET)r
     UNIVERSALOPTS : %(UNIVERSALOPTS)r,
     UNIVERSALARCHS : %(UNIVERSALARCHS)r
-""")% globals()
+"""
+    )
+    % globals()
+)
 
 
 print(ccc)
@@ -1120,6 +1135,58 @@ print(ccc)
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
 
+
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+
+#filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+
+os.system(filename)  # 用系統內建的程式開啟檔案
+
+
+
+
+"""
+import glob,cv2
+
+foldername = "animal"
+ 
+#建立測試資料
+filenames = glob.glob(foldername + '/*.jpg') + glob.glob(foldername + '/*.png')
+
+for filename in filenames:
+    print(filename)
+"""
+print("------------------------------------------------------------")  # 60個
+
+
+print("列出所有區域變數的名稱與內容")
+cc = locals()
+print(cc)
+
+print("列出所有全域變數的名稱與內容")
+cc = globals()
+print(cc)
+
+import sys
+
+# 目前 python程式 路徑
+print(sys.executable)
+
+# shutil.copy('/Users/Hao/hello.py', '/Users/Hao/Desktop/first.py')
+os.system("ls -l")
+# os.chdir('/Users/Hao')
+os.system("ls -l")
+# os.mkdir('test')
+
+import os
+cur_path=os.getcwd() # 取得目前路徑  
+os.system("cls")  # 清除螢幕
+os.system("mkdir dir2")  # 建立 dir2 目錄
+os.system("copy ossystem.py dir2\copyfile.py") # 複製檔案 
+file=cur_path + "\dir2\copyfile.py" 
+os.system("notepad " + file)  # 以記事本開啟 copyfile.py 檔
+
+
+os.system("leaks %d" % os.getpid())

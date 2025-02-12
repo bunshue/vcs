@@ -51,7 +51,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("決策樹Decision Trees")
 
-sns.set()
+plt.figure(figsize=(16, 10))
 
 # 使用 make_blobs 資料
 N = 300  # n_samples, 樣本數
@@ -60,13 +60,16 @@ GROUPS = 4  # centers, 分群數
 print("make_blobs,", N, "個樣本, ", M, "個特徵, 分成", GROUPS, "群")
 X, y = make_blobs(n_samples=N, centers=GROUPS, cluster_std=1.0)
 
+plt.subplot(231)
 plt.scatter(X[:, 0], X[:, 1], c=y, s=50, cmap="rainbow")
-show()
+plt.title("原始資料分佈(make_blobs)")
 
-tree = DecisionTreeClassifier().fit(X, y)
+tree = DecisionTreeClassifier()  # 決策樹函數學習機
+tree.fit(X, y)  # 學習訓練.fit
 
 
 def visualize_classifier(model, X, y, ax=None, cmap="rainbow"):
+    print("使用模型 :", model)
     ax = ax or plt.gca()
 
     # Plot the training points
@@ -74,14 +77,20 @@ def visualize_classifier(model, X, y, ax=None, cmap="rainbow"):
         X[:, 0], X[:, 1], c=y, s=30, cmap=cmap, clim=(y.min(), y.max()), zorder=3
     )
     ax.axis("tight")
-    ax.axis("off")
+    # ax.axis("off")
     xlim = ax.get_xlim()
     ylim = ax.get_ylim()
+    print(X.min())
+    print(X.max())
+    print(y.min())
+    print(y.max())
+    print(xlim)
+    print(ylim)
 
     # fit the estimator
-    model.fit(X, y)
+    model.fit(X, y)  # 學習訓練.fit
     xx, yy = np.meshgrid(np.linspace(*xlim, num=200), np.linspace(*ylim, num=200))
-    Z = model.predict(np.c_[xx.ravel(), yy.ravel()]).reshape(xx.shape)
+    Z = model.predict(np.c_[xx.ravel(), yy.ravel()]).reshape(xx.shape)  # 預測.predict
 
     # Create a color plot with the results
     n_classes = len(np.unique(y))
@@ -92,36 +101,45 @@ def visualize_classifier(model, X, y, ax=None, cmap="rainbow"):
         alpha=0.3,
         levels=np.arange(n_classes + 1) - 0.5,
         cmap=cmap,
-        clim=(y.min(), y.max()),
+        # clim=(y.min(), y.max()),
         zorder=1,
     )
-
     ax.set(xlim=xlim, ylim=ylim)
 
 
-visualize_classifier(DecisionTreeClassifier(), X, y)
+print("------------------------------")  # 30個
 
-show()
+print("決策樹")
+model = DecisionTreeClassifier()  # 決策樹函數學習機
+plt.subplot(232)
+plt.title("決策樹")
+visualize_classifier(model, X, y)
 
-# 隨機森林Random Forests
-tree = DecisionTreeClassifier()
+print("------------------------------")  # 30個
 
+print("引導聚集分類(Bagging Classifier)")
+tree = DecisionTreeClassifier()  # 決策樹函數學習機
 # 通過每個估計器擬合80％的訓練點  BaggingClassifier利用平行估計器的集合
 bag = BaggingClassifier(tree, n_estimators=100, max_samples=0.8, random_state=9487)
-
-bag.fit(X, y)
+bag.fit(X, y)  # 學習訓練.fit
+plt.subplot(233)
+plt.title("引導聚集分類(Bagging Classifier)")
 visualize_classifier(bag, X, y)
 
-show()
+print("------------------------------")  # 30個
 
+print("隨機森林 Random Forests")
 model = RandomForestClassifier(n_estimators=100, random_state=9487)  # 隨機森林分類函數學習機
-
+plt.subplot(234)
+plt.title("隨機森林Random Forests")
 visualize_classifier(model, X, y)
-show()
 
+print("------------------------------")  # 30個
+
+print("隨機森林迴歸 Random Forests Regression")
 
 # Random Forest Regression
-# 將隨機森林結合之前講解的線性回歸，將資料回歸至一條線上，並進行預測。
+# 將隨機森林結合之前講解的線性迴歸，將資料迴歸至一條線上，並進行預測。
 # 使用sin()正弦函數，可以看到輸出結果的圖形，符合正弦函數的圖型。
 
 rng = np.random.RandomState(42)
@@ -137,29 +155,38 @@ def model(x, sigma=0.3):
 
 
 y = model(x)
+plt.subplot(235)
 plt.errorbar(x, y, 0.3, fmt="o")
-show()
+# fmt(數據點標記樣式) :   'o' ',' '.' 'x' '+' 'v' '^' '<' '>' 's' 'd' 'p'
+plt.title("原始資料分佈")
 
-# 再來直接利用SKlearn中的RandomForestRegressor，來繪製出回歸線
+print("------------------------------")  # 30個
+
+# 再來直接利用SKlearn中的RandomForestRegressor，來繪製出迴歸線
 forest = RandomForestRegressor(200)
-forest.fit(x[:, None], y)
+forest.fit(x[:, None], y)  # 學習訓練.fit
 
 xfit = np.linspace(0, 10, 1000)
-yfit = forest.predict(xfit[:, None])
+yfit = forest.predict(xfit[:, None])  # 預測.predict
 ytrue = model(xfit, sigma=0)
 
+plt.subplot(236)
 plt.errorbar(x, y, 0.3, fmt="o", alpha=0.5)
 plt.plot(xfit, yfit, "-r")
 plt.plot(xfit, ytrue, "-k", alpha=0.5)
+plt.title("隨機森林迴歸 Random Forests Regression")
+
 show()
+
+sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 使用 make_blobs 資料
-N = 500  # n_samples, 樣本數
+N = 300  # n_samples, 樣本數
 M = 2  # n_features, 特徵數(資料的維度)
-GROUPS = 3  # centers, 分群數
+GROUPS = 4  # centers, 分群數
 
 print("make_blobs,", N, "個樣本, ", M, "個特徵, 分成", GROUPS, "群")
 
@@ -183,7 +210,7 @@ RForest = RandomForestClassifier(
 
 RForest.fit(X, Y)  # 學習訓練.fit
 
-print(RForest.predict([[180, 85]]))
+print(RForest.predict([[180, 85]]))  # 預測.predict
 
 X, Y = make_classification(
     n_samples=10,
@@ -201,7 +228,7 @@ model = RandomForestClassifier(
 model.fit(X, Y)  # 學習訓練.fit
 
 print(model.feature_importances_)
-print(model.predict([[0, 0, 0]]))
+print(model.predict([[0, 0, 0]]))  # 預測.predict
 estimator = model.estimators_[5]
 
 from sklearn.tree import export_graphviz
@@ -220,20 +247,17 @@ export_graphviz(
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-data, label = datasets.load_iris(return_X_y=True)
+X, y = datasets.load_iris(return_X_y=True)
 
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
-dx_train, dx_test, label_train, label_test = train_test_split(
-    data, label, test_size=0.2
-)
-# 訓練組8成, 測試組2成
+# 資料分割
+dx_train, dx_test, label_train, label_test = train_test_split(X, y, test_size=0.2)
 
 forest_model = RandomForestClassifier()  # 隨機森林分類函數學習機
 
 forest_model.fit(dx_train, label_train)  # 學習訓練.fit
 
 # 對測試數據做預測
-pred = forest_model.predict(dx_test)
+y_pred = forest_model.predict(dx_test)  # 預測.predict
 
 # 輸出準確性
 print(f"訓練資料的準確性 = {forest_model.score(dx_train, label_train)}")
@@ -242,22 +266,24 @@ print(f"測試資料的準確性 = {forest_model.score(dx_test, label_test)}")
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+print("隨機森林_空氣盒子")
+
 """
-機器學習_隨機森林_空氣盒子
+15178筆資料 13欄位
+
+SO2, CO, O3, PM25, Nox, NO, NO2, THC, NMHC, CH4, WindSpeed, TEMP, Humidity
 """
 
 df = pd.read_excel("data/20160101-20190101(Daily)隨機森林.xlsx")
-
 """
 cc = df.head(10)
 print(cc)
 
 #資料長度
+print(df.shape)
 print(len(df))
 print(len(df["PM25"]))
-
 df.info()  # 這樣就已經把資料集彙總資訊印出來
-
 cc = df.describe()
 print(cc)
 """
@@ -275,8 +301,8 @@ print(cc)
 # 特徵轉換
 
 # Labels are the values we want to predict
-labels = np.array(df["PM25"])
-# labels 要預測的項目
+y = np.array(df["PM25"])
+# y 要預測的項目
 
 # 把這欄砍掉
 # axis 1 refers to the columns
@@ -289,13 +315,11 @@ print(feature_list)
 
 # Convert to numpy array
 print("df 轉 np.array")
-df = np.array(df)
+X = np.array(df)
 
-# 將資料分成訓練組及測試組
-# X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)# 訓練組8成, 測試組2成
-X_train, X_test, y_train, y_test = train_test_split(
-    df, labels, test_size=0.25
-)  # 訓練組7.5成, 測試組2.5成
+# 資料分割
+# X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 """
 print(X.shape)
@@ -355,9 +379,8 @@ plt.bar(x_values, importances, orientation="vertical")
 # Tick labels for x axis
 plt.xticks(x_values, feature_list, rotation="vertical")
 
-# Axis labels and title
-plt.ylabel("Importance")
 plt.xlabel("Variable")
+plt.ylabel("Importance")
 plt.title("Variable Importances")
 
 show()
@@ -416,7 +439,7 @@ export_graphviz(
 # graph.write_png('tmp_small_tree111.png');
 
 # Use datetime for creating date objects for plotting
-import datetime
+# import datetime
 
 print(feature_list)
 
@@ -473,23 +496,24 @@ show()
 """
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
+print("隨機森林_空氣盒子")
+
 """
-20190314-空氣盒子數據Scikit-Learn隨機森林實作
+687筆資料 13欄位
+SO2, CO, O3, PM25, Nox, NO, NO2, THC, NMHC, CH4, WindSpeed, TEMP, Humidity
 """
-print("------------------------------------------------------------")  # 60個
 
 df = pd.read_csv("data/200811-201811.csv")  # 共有 687 筆資料, 13欄位
-
 """
 cc = df.head(10)
 print(cc)
 
 #資料長度
+print(df.shape)
 print(len(df))
 print(len(df["PM25"]))
-
 df.info()  # 這樣就已經把資料集彙總資訊印出來
-
 cc = df.describe()
 print(cc)
 """
@@ -525,12 +549,11 @@ print(feature_list)
 print("df 轉 np.array")
 df = np.array(df)
 
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+# 資料分割
 # x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2)
 train_features, test_features, train_labels, test_labels = train_test_split(
     df, labels, test_size=0.2
 )
-# 訓練組8成, 測試組2成
 
 """
 print(X.shape)
@@ -559,7 +582,6 @@ y_pred = random_forest_regressor.predict(test_features)  # 預測.predict
 errors = abs(y_pred - test_labels)
 
 print("MAE : Mean Absolute Error:", round(np.mean(errors), 2), "degrees.")
-
 
 # 繪製決策樹
 
@@ -682,8 +704,20 @@ export_graphviz(
 # value為預測之PM2.5的數值
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
@@ -696,4 +730,4 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個

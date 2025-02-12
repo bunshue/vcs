@@ -22,20 +22,18 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
-print("------------------------------------------------------------")  # 60個
-
-import ssl
-
-ssl._create_default_https_context = ssl._create_stdlib_context
-
 
 def show():
     plt.show()
     pass
 
 
+import ssl
+
+ssl._create_default_https_context = ssl._create_stdlib_context
+
 print("------------------------------------------------------------")  # 60個
-'''
+
 plt.figure(
     num="新進測試 01",
     figsize=(12, 8),
@@ -739,15 +737,6 @@ print("------------------------------------------------------------")  # 60個
 
 Z = np.random.normal(0, 1, 100)
 plt.hist(Z)
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-
-# Create an error bar plot
-X = np.arange(5)
-Y = np.random.uniform(0, 1, 5)
-plt.errorbar(X, Y, Y / 4)
 
 show()
 
@@ -1484,7 +1473,7 @@ plt.scatter(class2[:, 0], class2[:, 1], marker="s")
 plt.plot([1, 5], [3.8, 2], "-r")
 
 show()
-'''
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 

@@ -114,20 +114,6 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-x = np.linspace(0, 10, 50)
-dy = 0.8
-y = np.sin(x) + dy * np.random.randn(50)
-
-plt.errorbar(x, y, yerr=dy, fmt='.k')
-show()
-
-plt.errorbar(x, y, yerr=dy, fmt='o', color='black',
-             ecolor='lightgray', elinewidth=3, capsize=0)
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 from sklearn.gaussian_process import GaussianProcessRegressor
 
 # define the model and draw some data

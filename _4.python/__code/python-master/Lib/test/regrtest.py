@@ -837,9 +837,6 @@ def main(tests=None, **kwargs):
         r = tracer.results()
         r.write_results(show_missing=True, summary=True, coverdir=ns.coverdir)
 
-    if ns.runleaks:
-        os.system("leaks %d" % os.getpid())
-
     sys.exit(len(bad) > 0 or interrupted)
 
 

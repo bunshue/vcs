@@ -1505,7 +1505,6 @@ show()
 print("------------------------------------------------------------")  # 60個
 
 
-
 x = np.arange(-5, 5, 0.1)
 y = np.arange(-5, 5, 0.1)
 X, Y = np.meshgrid(x, y)
@@ -1515,4 +1514,3 @@ surf = ax.plot_wireframe(X, Y, Z)
 
 ax.scatter(0, 0, 0, c="r", s=100)
 ax.scatter(5, 5, 5, c="g", s=100)
-

@@ -151,7 +151,7 @@ def cs_body():
 
     ## Create an error bar plot
     col1.code('''
-    # Create an error bar plot
+    # Create an error bar plot # 已搬至範例
     X = np.arange(5)
     Y = np.random.uniform(0, 1, 5)
     plt.errorbar(X, Y, Y / 4)

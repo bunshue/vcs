@@ -916,11 +916,11 @@ plt.scatter(x, y, s=size, alpha=0.5, c=color, cmap="Greens", norm=norm)
 plt.scatter(x, y, s=size, alpha=0.5, c=color, cmap="jet", norm=norm)
 
 # 绘制空心点
-plt.scatter(x, y, marker='o', facecolors='r')
+plt.scatter(x, y, marker="o", facecolors="r")
 # 绘制空心点
-plt.scatter(x, y, marker='o', facecolors='none', s=s)
+plt.scatter(x, y, marker="o", facecolors="none", s=s)
 # 绘制空心点，并设置边界线颜色为红色
-plt.scatter(x, y, marker='o', facecolors='none', edgecolors='red')
+plt.scatter(x, y, marker="o", facecolors="none", edgecolors="red")
 
 print("------------------------------------------------------------")  # 60個
 

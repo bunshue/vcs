@@ -9,6 +9,11 @@ import time
 import random
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
+
+import seaborn as sns
+
+import requests
 
 print("------------------------------------------------------------")  # 60個
 
@@ -959,7 +964,6 @@ print(Motorcycles.counts)
 
 print("------------------------------------------------------------")  # 60個
 
-# chap9-01b
 import requests
 import json
 
@@ -1018,16 +1022,9 @@ url = "https://www.dcard.tw/f/stock/p/237123381"
 response = requests.get(url)
 print(response.text)
 
-
-print("chap7-02a")
-import requests
-
 url = "https://www.dcard.tw/f/stock/p/237123381"
 res = requests.get(url)
 print(res.text)
-
-# chap7-01b
-import requests
 
 url = "http://jigsaw.w3.org/HTTP/connection.html"
 response = requests.get(url)
@@ -1058,8 +1055,6 @@ print("網頁的<CODE> :", data)
 
 print("------------------------------------------------------------")  # 60個
 
-print("chap7-02b")
-import requests
 from bs4 import BeautifulSoup
 
 url = "https://www.dcard.tw/f/stock/p/237123381"
@@ -1072,8 +1067,6 @@ print(soup.prettify())
 
 print("------------------------------------------------------------")  # 60個
 
-print("chap7-02c")
-import requests
 from bs4 import BeautifulSoup
 
 url = "https://www.dcard.tw/f/stock/p/237123381"
@@ -1102,9 +1095,6 @@ print("\n")
 
 print("------------------------------------------------------------")  # 60個
 
-print("chap7-02d")
-
-import requests
 from bs4 import BeautifulSoup
 
 url = "https://www.dcard.tw/f/stock/p/237123381"
@@ -1128,9 +1118,6 @@ print(cc.strip())
 
 print("------------------------------------------------------------")  # 60個
 
-print("chap7-02e")
-
-import requests
 from bs4 import BeautifulSoup
 
 url = "https://www.dcard.tw/f/stock/p/237123381"
@@ -1184,9 +1171,6 @@ print(data)
 
 print("------------------------------------------------------------")  # 60個
 
-print("chap7-02f")
-
-import requests
 import json
 
 postid = "237123381"
@@ -1205,9 +1189,6 @@ print(df)
 
 print("------------------------------------------------------------")  # 60個
 
-print("chap7-02g")
-
-import requests
 import json
 
 postid = "237123381"
@@ -1225,11 +1206,9 @@ print(df.loc["title", 0])
 print()
 print(">>>>>原Po文章")
 print(str(df.loc["content", 0]).strip())
+
 print("------------------------------------------------------------")  # 60個
 
-print("chap7-02h")
-
-import requests
 import json
 from datetime import datetime
 
@@ -1276,9 +1255,6 @@ df.head(3)
 
 print("------------------------------------------------------------")  # 60個
 
-print("chap7-02i")
-
-import requests
 import json
 from datetime import datetime
 
@@ -1364,9 +1340,6 @@ df.head(3)
 
 print("------------------------------------------------------------")  # 60個
 
-print("chap7-02j")
-
-import requests
 import csv
 
 # from io import StringIO
@@ -1430,8 +1403,6 @@ for i in range(len(df)):
 
 print("------------------------------------------------------------")  # 60個
 
-# chap9-01b
-import requests
 import json
 
 url = "https://od.cdc.gov.tw/eic/Day_Confirmation_Age_County_Gender_19CoV.json"
@@ -1477,8 +1448,6 @@ df.head(3)
 
 print("------------------------------------------------------------")  # 60個
 
-# chap9-01c
-import requests
 import csv
 
 # from io import StringIO
@@ -1500,8 +1469,6 @@ print("累積死亡人數", totaldeath)
 
 print("------------------------------------------------------------")  # 60個
 
-# chap9-01d
-import requests
 import json
 import csv
 from docx import Document
@@ -1633,8 +1600,6 @@ print(set99)
 
 print("------------------------------------------------------------")  # 60個
 
-import os
-
 pName = "C:/pcYah"
 if os.path.isdir(pName):  # 檢查資料夾路徑是否存在
     print("%s 資料夾路徑存在" % pName)
@@ -1688,8 +1653,6 @@ except MemoryErroe:
     print("錯誤類型 : 超出記憶體空間")
 except Exception as e:
     print("錯誤類型 :", e)
-
-import os
 
 fName = "score.txt"
 if os.path.isfile(fName):
@@ -1822,8 +1785,6 @@ time1 += " 秒"
 print(time1)
 
 print("------------------------------------------------------------")  # 60個
-
-import random
 
 list1 = random.sample(range(1, 50), 7)
 special = list1.pop()
@@ -1996,8 +1957,6 @@ for i in range(0, 3):
 
 print("------------------------------------------------------------")  # 60個
 
-import random
-
 list1 = random.sample(range(0, 10), 4)
 list1.sort()
 print("本期四星彩中獎號碼為：", end="")
@@ -2083,8 +2042,6 @@ print(
 )
 
 print("------------------------------------------------------------")  # 60個
-
-import random
 
 print("產生N個 從 MIN 到 MAX 不重複的整數(包含頭尾)")
 N = 7
@@ -2198,13 +2155,6 @@ print("------------------------------------------------------------")  # 60個
 print("姓名    成績")
 print("%-4s  %3d" % (name1, score1))
 print("%-4s  %3d" % (name2, score2))
-
-print("------------------------------------------------------------")  # 60個
-
-import sys
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
 
 print("------------------------------------------------------------")  # 60個
 
@@ -2406,8 +2356,6 @@ suits = ["Spades", "Hearts", "Diamonds", "Clubs"]
 ranks = ["Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King"]
 
 # Shuffle the cards
-import random
-
 random.shuffle(deck)
 
 # Display the first four cards
@@ -2438,7 +2386,7 @@ print()
 
 print("------------------------------------------------------------")  # 60個
 
-import math  # import Math module to use the math functions
+import math
 
 # Test algebraic functions
 print("exp(1.0) =", math.exp(1))
@@ -2591,8 +2539,6 @@ print(infile.readlines())
 infile.close()  # Close the input file
 
 print("------------------------------------------------------------")  # 60個
-
-import time
 
 currentTime = time.time()  # Get current time
 
@@ -2809,10 +2755,6 @@ logging.info("Done with load dataset")
 
 print("------------------------------------------------------------")  # 60個
 
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-
 from io import BytesIO
 from lxml import etree
 import base64
@@ -2855,11 +2797,7 @@ print("------------------------------------------------------------")  # 60個
 root_dir = os.path.abspath(".")
 gunfire_path = os.path.join(root_dir, "gunfire.wav")
 filename = os.path.join(root_dir, "tone.wav")
-
 print(filename)
-
-
-import os
 
 """
 # 新建資料夾用於放置影像
@@ -2882,31 +2820,6 @@ print(len(USERS))
 print(USERS)
 for _ in USERS:
     print(_)
-
-print("------------------------------------------------------------")  # 60個
-
-"""
-import glob,cv2
-
-foldername = "animal"
- 
-#建立測試資料
-filenames = glob.glob(foldername + '/*.jpg') + glob.glob(foldername + '/*.png')
-
-for filename in filenames:
-    print(filename)
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
-
-#filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
-
-os.system(filename)  # 用系統內建的程式開啟檔案
-
-"""
 
 print("------------------------------------------------------------")  # 60個
 
@@ -2942,7 +2855,6 @@ print(VERSION_FILE)
 with open(VERSION_FILE) as fp:
     exec(fp.read())
 
-import os
 from pathlib import Path
 from setuptools import setup, find_packages
 
@@ -2999,8 +2911,6 @@ dt_without_timezone = datetime.datetime.fromtimestamp(timestamp)
 print("不带UTC时区时间", dt_without_timezone)
 
 # 时间戳
-import time
-
 print(time.time())
 print(time.localtime())  # 获取到当前时间的元组
 print(time.mktime(time.localtime()))
@@ -3010,8 +2920,6 @@ print(time.mktime(time.localtime()))
 
 # 字符串和时间转换
 # 利用time模块的strftime()函数可以将时间戳转换成系统时间。
-import time
-
 time_str = time.strftime(("%Y-%m-%d %H:%M:%S"), time.localtime())
 print(time_str)
 
@@ -3022,7 +2930,6 @@ print(datetime.datetime.strptime("2022-01-15", "%Y-%m-%d"))
 
 # 可以用Pandas的to_datetime()函数将日期字符串转换为datetime数据类型。
 # to_datetime()函数转化后的时间是精准到时分秒精度的
-import pandas as pd
 
 print(pd.to_datetime("2022/01/15"))
 
@@ -3040,8 +2947,6 @@ print(delta.seconds)
 
 print("------------------------------------------------------------")  # 60個
 
-import numpy as np
-
 x = np.array([1, 2, 3, 4, 1, 2, 3, 4, 5]).reshape(3, 3)
 y = np.arange(9).reshape(3, 3)
 print(x)
@@ -3051,8 +2956,6 @@ print(x @ y)  # 不知道這是什麼運算
 # 使用NumPy進行點積運算 ??
 
 print("------------------------------------------------------------")  # 60個
-
-import numpy as np
 
 a = np.array([[1, 1], [10, 25]])
 b = np.array([16, 250])
@@ -3098,12 +3001,6 @@ print("結論：L2 強度較大")
 print("------------------------------------------------------------")  # 60個
 
 
-import matplotlib.pyplot as plt
-import seaborn as sns
-import pandas as pd
-import numpy as np
-import os
-
 # 利用可能なカラーマップを取得
 cmaps = plt.colormaps()
 cmaps.sort()
@@ -3148,18 +3045,6 @@ with open("README.md", "w", encoding="utf-8") as readme:
 
 print("------------------------------------------------------------")  # 60個
 
-print("列出所有區域變數的名稱與內容")
-cc = locals()
-print(cc)
-
-print("列出所有全域變數的名稱與內容")
-cc = globals()
-print(cc)
-
-import sys
-
-# 目前 python程式 路徑
-print(sys.executable)
 
 print("------------------------------------------------------------")  # 60個
 
