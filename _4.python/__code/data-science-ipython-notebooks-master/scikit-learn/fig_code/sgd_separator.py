@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.linear_model import SGDClassifier
-from sklearn.datasets.samples_generator import make_blobs
+from sklearn.datasets import make_blobs  # 集群資料集
 
 def plot_sgd_separator():
     # we create 50 separable points

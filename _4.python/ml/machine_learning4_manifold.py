@@ -495,9 +495,10 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 """ import fail
-from sklearn.datasets import samples_generator
 
-data, color = samples_generator.make_swiss_roll(n_samples=1500)
+from sklearn.datasets import make_swiss_roll
+
+data, color = make_swiss_roll(n_samples=1500)
 n_neighbors = 12 # 近傍點の數 
 n_components = 2 # 削減後の次元數
 
