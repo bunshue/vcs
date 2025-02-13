@@ -1,13 +1,6 @@
 """
 numpy的使用
 
-
-"""
-
-
-"""
-numpy的使用
-
 numpy: 數值計算的標準套件
 
 1. 基本建立 np.array
@@ -17,7 +10,6 @@ numpy: 數值計算的標準套件
 arr1 = np.array([1, 2, 3, 4, 5])
 
 """
-
 print("------------------------------")  # 30個
 
 # 共同
@@ -89,9 +81,7 @@ print("------------------------------------------------------------")  # 60個
 
 # 1. np.arange
 
-
 # 2. np.linspace
-
 
 # 3. 其他
 
@@ -152,7 +142,9 @@ print(w, h)
 print("------------------------------------------------------------")  # 60個
 
 print("創建數組 np.linspace()")
+print("建立 numpy陣列, 使用 np.linspace()")
 
+# 使用 linspace 產生數據
 # 創建一個具有指定間隔的浮點數的數組。
 # np.linspace(start, stop, num=50, endpoint = True, retstep = False, dtype = None, axis = 0)
 # start:起始數字
@@ -160,29 +152,22 @@ print("創建數組 np.linspace()")
 # Num:要生成的樣本數，默認為50。
 
 ST, SP, N = 3, 8, 6  # 從ST到SP共取N個, 包含頭尾
+
 cc = np.linspace(ST, SP, N)
-print(cc)
-
-# 使用 linspace 產生數據
-cc = np.linspace(1, 10, 10, dtype=int)
-print(cc)
-
-cc = np.linspace(1, 2, 10)
-print(cc)
-
-print("------------------------------------------------------------")  # 60個
-
-print("建立 numpy陣列, 使用 np.linspace()")
-
-ST, SP, N = 0, 5, 11  # 從ST到SP共取N個, 包含頭尾
-cc = np.linspace(ST, SP, N, dtype=float)
 print(cc)
 
 cc = np.linspace(ST, SP, num=N)
 print(cc)
 
+cc = np.linspace(ST, SP, N, dtype=int)  # 指定資料型態
+print(cc)
 
-ST, SP, N = 0, 4, 9  # 從ST到SP共取N個, 包含頭尾
+cc = np.linspace(ST, SP, N, dtype=float)  # 指定資料型態
+print(cc)
+
+print("------------------------------------------------------------")  # 60個
+
+ST, SP, N = -np.pi, np.pi, 5  # 從ST到SP共取N個, 包含頭尾
 x = np.linspace(-np.pi, np.pi, 5)
 y1 = np.sin(x)
 y2 = np.cos(x)
@@ -316,23 +301,25 @@ print(cc.ndim)
 print(cc.nbytes)
 
 cc = np.arange(1, 10).reshape(3, 3)
-print("陣列的內容：\n", cc)
-print("1.最小值與最大值：\n", np.min(cc), np.max(cc))
-print("2.每一直行最小值與最大值：\n", np.min(cc, axis=0), np.max(cc, axis=0))  # 第0軸 直行
-print("3.每一橫列最小值與最大值：\n", np.min(cc, axis=1), np.max(cc, axis=1))  # 第1軸 橫列
-print("4.加總、乘積及平均值：\n", np.sum(cc), np.prod(cc), np.mean(cc))
+print("陣列的內容：\n", cc, sep="")
+print("1.最小值與最大值：\n", np.min(cc), np.max(cc), sep="")
+print("2.每一直行最小值與最大值：\n", np.min(cc, axis=0), np.max(cc, axis=0), sep="")  # 第0軸 直行
+print("3.每一橫列最小值與最大值：\n", np.min(cc, axis=1), np.max(cc, axis=1), sep="")  # 第1軸 橫列
+print("4.加總、乘積及平均值：\n", np.sum(cc), np.prod(cc), np.mean(cc), sep="")
 print(
     "5.每一直行加總、乘積與平均值：\n",
     np.sum(cc, axis=0),
     np.prod(cc, axis=0),
-    np.mean(cc, axis=0),  # 第0軸 直行
-)
+    np.mean(cc, axis=0),
+    sep="",
+)  # 第0軸 直行
 print(
     "6.每一橫列加總、乘積與平均值：\n",
     np.sum(cc, axis=1),
     np.prod(cc, axis=1),
-    np.mean(cc, axis=1),  # 第1軸 橫列
-)
+    np.mean(cc, axis=1),
+    sep="",
+)  # 第1軸 橫列
 
 print("------------------------------------------------------------")  # 60個
 
@@ -429,16 +416,16 @@ print(x**2)
 
 a = np.arange(1, 10).reshape(3, 3)
 b = np.arange(10, 19).reshape(3, 3)
-print("a 陣列內容：\n", a)
-print("b 陣列內容：\n", b)
-print("a 陣列元素都加值：\n", a + 1)
-print("a 陣列元素都平方：\n", a**2)
-print("a 陣列元素加判斷：\n", a < 5)
-print("a 陣列取出第一個row都加1：\n", a[0, :] + 1)
-print("a 陣列取出第一個col都加1：\n", a[:, 0] + 1)
-print("a b 陣列對應元素相加：\n", a + b)
-print("a b 陣列對應元素相乘：\n", a * b)
-print("a b 陣列點積計算：\n", np.dot(a, b))
+print("a 陣列內容：\n", a, sep="")
+print("b 陣列內容：\n", b, sep="")
+print("a 陣列元素都加值：\n", a + 1, sep="")
+print("a 陣列元素都平方：\n", a**2, sep="")
+print("a 陣列元素加判斷：\n", a < 5, sep="")
+print("a 陣列取出第一個row都加1：\n", a[0, :] + 1, sep="")
+print("a 陣列取出第一個col都加1：\n", a[:, 0] + 1, sep="")
+print("a b 陣列對應元素相加：\n", a + b, sep="")
+print("a b 陣列對應元素相乘：\n", a * b, sep="")
+print("a b 陣列點積計算：\n", np.dot(a, b), sep="")
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1413,10 +1400,10 @@ myscl2 = A.T[0]  # 按列切片
 print("按列切片:", myscl2)
 
 mycpmat = A.copy()  # 矩陣的复制
-print("复制矩陣:\n", mycpmat)
+print("复制矩陣:\n", mycpmat, sep="")
 
 # 比较
-print("矩陣元素的比较:\n", A < A.T)
+print("矩陣元素的比较:\n", A < A.T, sep="")
 
 print("------------------------------")  # 30個
 
@@ -2200,16 +2187,8 @@ print(np.gradient(na))
 print("------------------------------------------------------------")  # 60個
 
 # 建立陣列
-
 cc = np.array([1, 2, 3])
 print(cc)
-
-z = np.linspace(0, 15, 100)
-x = np.sin(z)
-y = np.cos(z)
-x2 = np.sin(z)
-
-print("------------------------------------------------------------")  # 60個
 
 cc = np.arange(6).reshape(2, 3)  # 陣列轉成 2 x 3
 print(cc)
@@ -2221,38 +2200,35 @@ xx = [1, 2, 3, 4, 5]
 yy = [6, 7, 8]
 # x軸1~5, y軸6~8, 編織出來15個點 X, Y
 X, Y = np.meshgrid(xx, yy)
-print("X = \n", X)
-print("Y = \n", Y)
+print("X = \n", X, sep="")
+print("Y = \n", Y, sep="")
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 x = np.array([1, 2, 3, 4, 5])
 y = np.array([6, 7, 8])
 # x軸1~5, y軸6~8, 編織出來15個點 X, Y
 X, Y = np.meshgrid(x, y)
+print("X = \n", X, sep="")
+print("Y = \n", Y, sep="")
 
-print("X = \n", X)
-print("Y = \n", Y)
-
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 xx = np.linspace(1, 5, 5)
 yy = np.linspace(6, 8, 3)
-
 # x軸1~5, y軸6~8, 編織出來15個點 X, Y
 X, Y = np.meshgrid(xx, yy)
-nprint("X = \n", X)
-print("Y = \n", Y)
+print("X = \n", X, sep="")
+print("Y = \n", Y, sep="")
 
 print("------------------------------------------------------------")  # 60個
-
 
 xx = [1, 2, 3, 4, 5]
 yy = [6, 7, 8]
 # x軸1~5, y軸6~8, 編織出來15個點 X, Y
 X, Y = np.meshgrid(xx, yy)
-print("X = \n", X)
-print("Y = \n", Y)
+print("X = \n", X, sep="")
+print("Y = \n", Y, sep="")
 
 print("------------------------------------------------------------")  # 60個
 
@@ -2260,9 +2236,8 @@ x = np.array([1, 2, 3, 4, 5])
 y = np.array([6, 7, 8])
 # x軸1~5, y軸6~8, 編織出來15個點 X, Y
 X, Y = np.meshgrid(x, y)
-
-print("X = \n", X)
-print("Y = \n", Y)
+print("X = \n", X, sep="")
+print("Y = \n", Y, sep="")
 
 print("------------------------------------------------------------")  # 60個
 
@@ -2270,8 +2245,8 @@ xx = np.linspace(1, 5, 5)
 yy = np.linspace(6, 8, 3)
 # x軸1~5, y軸6~8, 編織出來15個點 X, Y
 X, Y = np.meshgrid(xx, yy)
-print("X = \n", X)
-print("Y = \n", Y)
+print("X = \n", X, sep="")
+print("Y = \n", Y, sep="")
 
 print("------------------------------------------------------------")  # 60個
 
@@ -2311,38 +2286,6 @@ y = np.array([1, 2])
 print("y 是", type(y))
 print("y[0] 的值是", x[0])
 print("y * 2 = ", y * 2)
-
-
-# npcompute1.py
-
-a = np.arange(1, 10).reshape(3, 3)
-b = np.arange(10, 19).reshape(3, 3)
-print("a 陣列內容：\n", a)
-print("b 陣列內容：\n", b)
-print("a 陣列元素都加值：\n", a + 1)
-print("a 陣列元素都平方：\n", a**2)
-print("a 陣列元素加判斷：\n", a < 5)
-print("a 陣列取出第一個row都加1：\n", a[0, :] + 1)
-print("a 陣列取出第一個col都加1：\n", a[:, 0] + 1)
-print("a b 陣列對應元素相加：\n", a + b)
-print("a b 陣列對應元素相乘：\n", a * b)
-
-print("------------------------------------------------------------")  # 60個
-
-# npcompute2.py
-
-a = np.arange(1, 10).reshape(3, 3)
-print("陣列的內容：\n", a)
-print("1.最小值與最大值：\n", np.min(a), np.max(a))
-print("2.每一直行最小值與最大值：\n", np.min(a, axis=0), np.max(a, axis=0))  # 第0軸 直行
-print("3.每一橫列最小值與最大值：\n", np.min(a, axis=1), np.max(a, axis=1))  # 第1軸 橫列
-print("4.加總、乘積及平均值：\n", np.sum(a), np.prod(a), np.mean(a))
-print(
-    "5.每一直行加總、乘積與平均值：\n", np.sum(a, axis=0), np.prod(a, axis=0), np.mean(a, axis=0)
-)  # 第0軸 直行
-print(
-    "6.每一橫列加總、乘積與平均值：\n", np.sum(a, axis=1), np.prod(a, axis=1), np.mean(a, axis=1)
-)  # 第1軸 橫列
 
 print("------------------------------------------------------------")  # 60個
 
@@ -2946,14 +2889,6 @@ min_idx = np.argmin(a)
 max_idx = np.argmax(a)
 print("最小值索引: " + str(min_idx))
 print("最大值索引: " + str(max_idx))
-
-print("------------------------------------------------------------")  # 60個
-
-a = np.array([30, 45, 60])
-
-print(np.sin(a * np.pi / 180))
-print(np.cos(a * np.pi / 180))
-print(np.tan(a * np.pi / 180))
 
 print("------------------------------------------------------------")  # 60個
 

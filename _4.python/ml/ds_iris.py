@@ -443,7 +443,7 @@ XTrain, XTest, yTrain, yTest = train_test_split(df, y, test_size=0.2)
 
 dtree = tree.DecisionTreeClassifier(max_depth=8)  # 決策樹函數學習機
 
-dtree.fit(XTrain, yTrain)
+dtree.fit(XTrain, yTrain)  # 學習訓練.fit
 
 print("準確率:", dtree.score(XTest, yTest))
 print(dtree.predict(XTest))
@@ -470,7 +470,7 @@ XTrain, XTest, yTrain, yTest = train_test_split(df, y, test_size=0.2)
 
 dtree = tree.DecisionTreeClassifier(max_depth=8)  # 決策樹函數學習機
 
-dtree.fit(XTrain, yTrain)
+dtree.fit(XTrain, yTrain)  # 學習訓練.fit
 
 with open("tmp_tree2.dot", "w") as f:
     f = tree.export_graphviz(dtree, feature_names=iris.feature_names, out_file=f)
@@ -504,7 +504,7 @@ n_components = 3  # ガウス分布の數
 
 clf = GaussianMixture(n_components=n_components)
 
-clf.fit(X)
+clf.fit(X)  # 學習訓練.fit
 
 print("預測結果")
 y_pred = clf.predict(X)
@@ -541,7 +541,7 @@ y = iris.target  # 資料集目標
 
 clf = tree.DecisionTreeClassifier()  # 決策樹函數學習機
 
-clf = clf.fit(X, y)
+clf = clf.fit(X, y)  # 學習訓練.fit
 
 print(clf.feature_importances_)
 
@@ -560,7 +560,7 @@ dx_train, dx_test, dy_train, dy_test = train_test_split(X, y, test_size=0.2)
 
 tree = DecisionTreeClassifier()  # 決策樹函數學習機
 
-tree.fit(dx_train, dy_train)
+tree.fit(dx_train, dy_train)  # 學習訓練.fit
 
 predictions = tree.predict(dx_test)
 
@@ -591,7 +591,7 @@ dx_train, dx_test, dy_train, dy_test = train_test_split(X, y, test_size=0.2)
 
 forest = RandomForestClassifier()
 
-forest.fit(dx_train, dy_train)
+forest.fit(dx_train, dy_train)  # 學習訓練.fit
 
 predictions = forest.predict(dx_test)
 
@@ -642,7 +642,7 @@ print(cc)
 
 model.compile(loss="categorical_crossentropy", optimizer="adam", metrics=["accuracy"])
 
-model.fit(X_train, Y_train, epochs=100, batch_size=5)
+model.fit(X_train, Y_train, epochs=100, batch_size=5)  # 學習訓練.fit
 
 loss, accuracy = model.evaluate(X_test, Y_test)
 print("Accuracy = {:.2f}".format(accuracy))
@@ -672,7 +672,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 clf = tree.DecisionTreeClassifier(max_depth=5)  # 決策樹函數學習機
 
-clf.fit(X_train, y_train)  # 訓練模型
+clf.fit(X_train, y_train)  # 學習訓練.fit
 
 print("score:", clf.score(X_test, y_test))  # 模型打分
 
@@ -962,7 +962,7 @@ X_test_std = scaler.transform(X_test)
 
 clf = KNN()
 
-clf.fit(X_train_std, y_train)
+clf.fit(X_train_std, y_train)  # 學習訓練.fit
 
 y_pred = clf.predict(X_test_std)
 
@@ -1042,7 +1042,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 clf = NaiveBayesClassifier()
 
-clf.fit(X_train, y_train)
+clf.fit(X_train, y_train)  # 學習訓練.fit
 
 y_pred = clf.predict(X_test)
 
@@ -1066,7 +1066,7 @@ from sklearn.naive_bayes import GaussianNB
 
 clf = GaussianNB()
 
-clf.fit(X_train, y_train)
+clf.fit(X_train, y_train)  # 學習訓練.fit
 
 # 模型評分
 
@@ -1082,7 +1082,8 @@ print(f"{cc*100:.2f}%")
 from sklearn.naive_bayes import BernoulliNB
 
 clf = BernoulliNB()
-clf.fit(X_train, y_train)
+
+clf.fit(X_train, y_train)  # 學習訓練.fit
 
 y_pred = clf.predict(X_test)
 
@@ -1096,7 +1097,8 @@ print(f"{cc*100:.2f}%")
 from sklearn.naive_bayes import MultinomialNB
 
 clf = MultinomialNB()
-clf.fit(X_train, y_train)
+
+clf.fit(X_train, y_train)  # 學習訓練.fit
 
 y_pred = clf.predict(X_test)
 
@@ -1214,7 +1216,10 @@ iris = datasets.load_iris()
 X = iris.data[:, :2]  # use only 'sepal length and sepal width'
 y = iris.target  # 資料集目標
 
-kmr = cluster.KMeans(n_clusters=3, random_state=42).fit(X)
+kmr = cluster.KMeans(n_clusters=3, random_state=9487)
+
+kmr.fit(X)  # 學習訓練.fit
+
 labels_r = kmr.predict(X)
 
 nboot = 500
@@ -1225,7 +1230,8 @@ for boot_i in range(nboot):
     np.random.seed(boot_i)
     boot_idx = np.random.choice(orig_all, size=len(orig_all), replace=True)
     # boot_idx = orig_all
-    kmb = cluster.KMeans(n_clusters=3, random_state=42).fit(X[boot_idx, :])
+    kmb = cluster.KMeans(n_clusters=3, random_state=94587)
+    kmb.fit(X[boot_idx, :])  # 學習訓練.fit
     dist = scipy.spatial.distance.cdist(kmb.cluster_centers_, kmr.cluster_centers_)
     reorder = np.argmin(dist, axis=1)
     # print(reorder)
@@ -1641,9 +1647,9 @@ iris = datasets.load_iris()
 X = iris.data[:, :2]  # use only 'sepal length and sepal width'
 y_iris = iris.target
 
-km2 = cluster.KMeans(n_clusters=2).fit(X)
-km3 = cluster.KMeans(n_clusters=3).fit(X)
-km4 = cluster.KMeans(n_clusters=4).fit(X)
+km2 = cluster.KMeans(n_clusters=2).fit(X)  # 學習訓練.fit
+km3 = cluster.KMeans(n_clusters=3).fit(X)  # 學習訓練.fit
+km4 = cluster.KMeans(n_clusters=4).fit(X)  # 學習訓練.fit
 
 plt.figure(figsize=(9, 3))
 plt.subplot(131)
@@ -1675,9 +1681,9 @@ iris = datasets.load_iris()
 X = iris.data[:, :2]  # 'sepal length (cm)''sepal width (cm)'
 y_iris = iris.target
 
-gmm2 = GaussianMixture(n_components=2, covariance_type="full").fit(X)
-gmm3 = GaussianMixture(n_components=3, covariance_type="full").fit(X)
-gmm4 = GaussianMixture(n_components=4, covariance_type="full").fit(X)
+gmm2 = GaussianMixture(n_components=2, covariance_type="full").fit(X)  # 學習訓練.fit
+gmm3 = GaussianMixture(n_components=3, covariance_type="full").fit(X)  # 學習訓練.fit
+gmm4 = GaussianMixture(n_components=4, covariance_type="full").fit(X)  # 學習訓練.fit
 
 plt.figure(figsize=(9, 3))
 plt.subplot(131)
@@ -1764,7 +1770,7 @@ ks = np.arange(1, 10)
 
 for k in ks:
     gmm = GaussianMixture(n_components=k, covariance_type="full")
-    gmm.fit(X)
+    gmm.fit(X)  # 學習訓練.fit
     bic.append(gmm.bic(X))
 
 k_chosen = ks[np.argmin(bic)]
@@ -1783,9 +1789,9 @@ iris = datasets.load_iris()
 X = iris.data[:, :2]  # 'sepal length (cm)''sepal width (cm)'
 y_iris = iris.target
 
-ward2 = cluster.AgglomerativeClustering(n_clusters=2, linkage="ward").fit(X)
-ward3 = cluster.AgglomerativeClustering(n_clusters=3, linkage="ward").fit(X)
-ward4 = cluster.AgglomerativeClustering(n_clusters=4, linkage="ward").fit(X)
+ward2 = cluster.AgglomerativeClustering(n_clusters=2, linkage="ward").fit(X)  # 學習訓練.fit
+ward3 = cluster.AgglomerativeClustering(n_clusters=3, linkage="ward").fit(X)  # 學習訓練.fit
+ward4 = cluster.AgglomerativeClustering(n_clusters=4, linkage="ward").fit(X)  # 學習訓練.fit
 
 plt.figure(figsize=(9, 3))
 plt.subplot(131)

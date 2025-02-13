@@ -4,9 +4,7 @@ titanic
 鐵達尼號資料集  891 筆資料 15 個欄位
 
 
-
 """
-
 print("------------------------------------------------------------")  # 60個
 
 # 共同
@@ -36,14 +34,13 @@ from sklearn import preprocessing
 from sklearn import linear_model
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
 from sklearn.preprocessing import StandardScaler
-
 from sklearn.metrics import accuracy_score
 from sklearn.ensemble import RandomForestClassifier  # 隨機森林
 from sklearn.naive_bayes import GaussianNB  # 數據集和數據處理
+from sklearn.tree import DecisionTreeClassifier
 
 
 def show():
-    return
     plt.show()
     pass
 
@@ -51,13 +48,14 @@ def show():
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("邏輯迴歸")
+print("鐵達尼號資料集 基本數據 titanic()")
 
 df = sns.load_dataset("titanic")
 # df = df[: 100]  # 只看前幾筆資料
 
 print(df)
 print(df.shape)
+
 
 """
 df.info()  # 這樣就已經把資料集彙總資訊印出來
@@ -74,6 +72,12 @@ print('查看資料描述3')
 cc = df.describe(include="all")
 print(cc)
 """
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("邏輯迴歸")
+
+df = sns.load_dataset("titanic")
 
 print("遺失值(Missing value)處理")
 
@@ -184,7 +188,7 @@ X_test_std = scaler.transform(X_test)
 # 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
 logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
 
-logistic_regression.fit(X_train_std, y_train)
+logistic_regression.fit(X_train_std, y_train)  # 學習訓練.fit
 
 y_pred = logistic_regression.predict(X_test_std)
 
@@ -192,8 +196,9 @@ y_pred = logistic_regression.predict(X_test_std)
 print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
 # 82.42%
 
-joblib.dump(logistic_regression, "tmp_titanic_model.joblib")
-joblib.dump(scaler, "tmp_titanic_scaler.joblib")
+# 模型存檔
+# joblib.dump(logistic_regression, "tmp_titanic_model.joblib")
+# joblib.dump(scaler, "tmp_titanic_scaler.joblib")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -332,8 +337,8 @@ from sklearn.impute import SimpleImputer
 
 # 以平均數填補
 imp = SimpleImputer(missing_values=np.nan, strategy="mean")
-# 訓練
-imp.fit([[1, 2], [np.nan, 3], [7, 6]])
+
+imp.fit([[1, 2], [np.nan, 3], [7, 6]])  # 學習訓練.fit
 
 # 轉換
 X = [[np.nan, 2], [6, np.nan], [7, 6]]
@@ -350,9 +355,9 @@ imp.fit_transform(df.age.values.reshape(-1, 1))
 from sklearn.experimental import enable_iterative_imputer
 from sklearn.impute import IterativeImputer
 
-# 訓練
 imp = IterativeImputer(max_iter=10, random_state=0)
-imp.fit([[1, 2], [3, 6], [4, 8], [np.nan, 3], [7, np.nan]])
+
+imp.fit([[1, 2], [3, 6], [4, 8], [np.nan, 3], [7, np.nan]])  # 學習訓練.fit
 
 # 轉換
 X_test = [[np.nan, 2], [6, np.nan], [np.nan, 6]]
@@ -402,7 +407,7 @@ y = titanic["Survived"]
 # 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
 logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
 
-logistic_regression.fit(X, y)
+logistic_regression.fit(X, y)  # 學習訓練.fit
 print("迴歸係數:", logistic_regression.coef_)
 print("截距:", logistic_regression.intercept_)
 
@@ -428,7 +433,7 @@ y = titanic["Survived"]
 # 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
 logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
 
-logistic_regression.fit(X, y)
+logistic_regression.fit(X, y)  # 學習訓練.fit
 
 preds = logistic_regression.predict(X)
 print(pd.crosstab(preds, titanic["Survived"]))
@@ -455,7 +460,7 @@ y = titanic["Survived"]
 # 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
 logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
 
-logistic_regression.fit(X, y)
+logistic_regression.fit(X, y)  # 學習訓練.fit
 print("迴歸係數:", logistic_regression.coef_)
 print("截距:", logistic_regression.intercept_)
 print("---------------------------")
@@ -471,8 +476,6 @@ print("------------------------------------------------------------")  # 60個
 
 print("決策樹")
 
-from sklearn import tree
-
 titanic = pd.read_csv("data/titanic_ds.csv")
 # 轉換欄位值成為數值
 label_encoder = preprocessing.LabelEncoder()
@@ -484,8 +487,9 @@ y = titanic["Survived"]
 
 XTrain, XTest, yTrain, yTest = train_test_split(X, y, test_size=0.25, random_state=1)
 
-dtree = tree.DecisionTreeClassifier()
-dtree.fit(XTrain, yTrain)
+dtree = DecisionTreeClassifier()
+
+dtree.fit(XTrain, yTrain)  # 學習訓練.fit
 
 print("準確率:", dtree.score(XTest, yTest))
 print("---------------------------")
@@ -499,8 +503,6 @@ print("------------------------------------------------------------")  # 60個
 
 print("決策樹")
 
-from sklearn import tree
-
 titanic = pd.read_csv("data/titanic_ds.csv")
 
 # 轉換欄位值成為數值
@@ -513,11 +515,12 @@ y = titanic["Survived"]
 
 XTrain, XTest, yTrain, yTest = train_test_split(X, y, test_size=0.25, random_state=1)
 
-dtree = tree.DecisionTreeClassifier()
-dtree.fit(XTrain, yTrain)
+dtree = DecisionTreeClassifier()
+
+dtree.fit(XTrain, yTrain)  # 學習訓練.fit
 
 with open("tmp_tree.dot", "w") as f:
-    f = tree.export_graphviz(dtree, feature_names=["Sex", "Class"], out_file=f)
+    f = sklearn.tree.export_graphviz(dtree, feature_names=["Sex", "Class"], out_file=f)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -553,11 +556,9 @@ X = train.drop(["Survived"], axis=1).values
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 # 訓練組8成, 測試組2成
 
-from sklearn.tree import DecisionTreeClassifier
-
 clf = DecisionTreeClassifier()
 
-clf.fit(X_train, y_train)
+clf.fit(X_train, y_train)  # 學習訓練.fit
 
 train_score = clf.score(X_train, y_train)
 
@@ -581,7 +582,7 @@ with open("tmp_titanic1.dot", "w") as f:
 # 參數選擇 max_depth
 def cv_score(d):
     clf = DecisionTreeClassifier(max_depth=d)
-    clf.fit(X_train, y_train)
+    clf.fit(X_train, y_train)  # 學習訓練.fit
     tr_score = clf.score(X_train, y_train)
     cv_score = clf.score(X_test, y_test)
     return (tr_score, cv_score)
@@ -612,7 +613,7 @@ print("------------------------------")  # 30個
 # 訓練模型，并計算評分
 def cv_score(val):
     clf = DecisionTreeClassifier(criterion="gini", min_impurity_decrease=val)
-    clf.fit(X_train, y_train)
+    clf.fit(X_train, y_train)  # 學習訓練.fit
     tr_score = clf.score(X_train, y_train)
     cv_score = clf.score(X_test, y_test)
     return (tr_score, cv_score)
@@ -682,7 +683,7 @@ thresholds = np.linspace(0, 0.005, 50)
 param_grid = {"min_impurity_decrease": thresholds}
 
 clf = GridSearchCV(DecisionTreeClassifier(), param_grid, cv=5, return_train_score=True)
-clf.fit(X, y)
+clf.fit(X, y)  # 學習訓練.fit
 print("best param: {0}\nbest score: {1}".format(clf.best_params_, clf.best_score_))
 
 # cv_results_ : 具體用法模型不同參數下交叉驗證的結果
@@ -707,7 +708,7 @@ param_grid = [
 
 clf = GridSearchCV(DecisionTreeClassifier(), param_grid, cv=5, return_train_score=True)
 
-clf.fit(X, y)
+clf.fit(X, y)  # 學習訓練.fit
 
 print("best param: {0}\nbest score: {1}".format(clf.best_params_, clf.best_score_))
 
@@ -718,7 +719,7 @@ print("生成決策樹圖形")
 clf = DecisionTreeClassifier(
     criterion="entropy", min_impurity_decrease=0.002857142857142857
 )
-clf.fit(X_train, y_train)
+clf.fit(X_train, y_train)  # 學習訓練.fit
 train_score = clf.score(X_train, y_train)
 test_score = clf.score(X_test, y_test)
 print("train score: {0}; test score: {1}".format(train_score, test_score))
@@ -840,7 +841,7 @@ print(cc)
 # 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
 logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
 
-logistic_regression.fit(X, y)
+logistic_regression.fit(X, y)  # 學習訓練.fit
 
 # read the testing dataset from Kaggle's Titanic competition into a DataFrame
 test = pd.read_csv("http://bit.ly/kaggletest")

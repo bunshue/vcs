@@ -79,18 +79,18 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
+
+def show():
+    plt.show()
+    pass
+
+
 print("------------------------------------------------------------")  # 60個
 
 # 可以使用SSL module把證書驗證改成不需要驗證即可，方法如下:
 import ssl
 
 ssl._create_default_https_context = ssl._create_unverified_context
-
-
-def show():
-    # plt.show()
-    pass
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -4793,6 +4793,8 @@ plt.xlabel("投擲次數")
 plt.ylabel("平均機率")
 show()
 
+sys.exit()
+
 print("------------------------------------------------------------")  # 60個
 
 results = []
@@ -6103,7 +6105,7 @@ df.idxmin()
 df.idxmax()
 
 # 累積加總 cumsum()
-df.cumsum()
+df.cumsum()  # 依欄位, 逐列累加
 
 # describe 可以一次性產生多種統計數字
 df.describe()
@@ -7969,10 +7971,12 @@ print(pivot_products)
 
 print("------------------------------------------------------------")  # 60個
 
+# .apply()
+
 df = pd.DataFrame(np.random.rand(6, 4), columns=list("ABCD"))
 print(df)
 
-df2 = df.apply(np.cumsum)
+df2 = df.apply(np.cumsum)  # 依欄位, 逐列累加
 print(df2)
 
 df3 = df.apply(lambda x: x.max() - x.min())
@@ -7992,7 +7996,6 @@ print(df1)
 
 print("------------------------------------------------------------")  # 60個
 
-
 """
 print('資料結構訊息', df.info())
 print('資料shape :', df.shape)
@@ -8002,19 +8005,14 @@ print(type(df))
 print(df)
 print(df.shape)
 
-
-
 print("數學平均", np.mean(df["數學"]))
 print("數學中位數", np.median(df["數學"]))
-
-
 
 print('把df中的一些欄位抓出來新成立一個新df')
 fullname = pd.DataFrame(df["全名"])
 print(fullname)
 
 """
-
 
 datas = [
     [92, 81, 81, 92],  # 國文

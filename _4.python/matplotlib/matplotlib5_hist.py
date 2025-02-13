@@ -54,6 +54,12 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
+
+def show():
+    plt.show()
+    pass
+
+
 print("------------------------------------------------------------")  # 60個
 
 plt.figure(
@@ -168,7 +174,7 @@ y = np.exp(-np.square(x - mu) / 2 * variance) / (np.sqrt(2 * np.pi * variance))
 
 plt.plot(x, y)
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -235,7 +241,7 @@ x = np.random.uniform(size=N)
 plt.hist(x, bins=num_bins, rwidth=0.8)
 plt.title("np.random.uniform")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -367,7 +373,7 @@ plt.hist(x, bins, rwidth=0.8)
 
 plt.title("unequal bins")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -528,7 +534,7 @@ print("------------------------------------------------------------")  # 60個
 plt.subplot(236)
 
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -634,7 +640,7 @@ plt.title("hist參數大合集")
 plt.xlabel("")
 plt.ylabel("個數統計")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -712,7 +718,7 @@ plt.hist(
 
 plt.title("建立N筆成績資料 常態分佈")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -730,7 +736,7 @@ plt.subplot(122)
 plt.hist(src.ravel(), 256)  # 降維再繪製直方圖
 
 plt.tight_layout()
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -760,7 +766,7 @@ plt.scatter(X, Y)
 
 plt.scatter(X, Y, s=200, c="r")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -773,7 +779,7 @@ print("新進")
 print("------------------------------------------------------------")  # 60個
 
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -788,7 +794,7 @@ mean = statistics.mean(x_axis)
 sd = statistics.stdev(x_axis)
 
 plt.plot(x_axis, norm.pdf(x_axis, mean, sd))
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -799,7 +805,7 @@ variance = 1
 sigma = math.sqrt(variance)
 x = np.linspace(mu - 3 * sigma, mu + 3 * sigma, 100)
 plt.plot(x, stats.norm.pdf(x, mu, sigma))
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -809,7 +815,7 @@ from scipy.stats import norm
 x_axis = np.arange(-10, 10, 0.001)
 # Mean = 0, SD = 2.
 plt.plot(x_axis, norm.pdf(x_axis, 0, 2))
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 """
@@ -826,7 +832,7 @@ y_data = stats.norm.pdf(x_axis, 0, 1)
 ## plot data
 plt.plot(x_data, y_data)
 
-plt.show()
+show()
 """
 print("------------------------------------------------------------")  # 60個
 

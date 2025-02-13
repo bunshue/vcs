@@ -54,6 +54,17 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # MDS
+X, _ = datasets.load_digits(return_X_y=True)
+print(X.shape)  # (1797, 64)
+
+embedding = MDS(n_components=2)
+X_transformed = embedding.fit_transform(X[:100])
+print(X_transformed.shape)  # (100, 2)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# MDS
 df = pd.read_csv("data/machine_learning4_iris.csv")
 
 X = np.asarray(df.iloc[:, :4])

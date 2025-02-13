@@ -555,6 +555,8 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 """
 人臉資料集分解 ST
@@ -571,7 +573,7 @@ X, y = datasets.fetch_olivetti_faces(return_X_y=True, shuffle=True, random_state
 # X : 400 張圖 每張4096=64X64點
 # y : 編號 0~39 號
 
-n_samples, n_features = X.shape
+n_samples, n_features = X.shape  # 400, 4096
 
 # Global centering (focus on one feature, centering all samples)
 faces_centered = X - X.mean(axis=0)
@@ -614,10 +616,11 @@ def plot_gallery3(title, images, n_col=n_col, n_row=n_row, cmap=plt.cm.gray):
     show()
 
 
-# 讓我們看一下我們的資料。灰色表示負值，白色表示正值。
-
-title = "Faces from dataset"
+# 看一下資料
+title = "Faces from dataset 灰色表示負值, 白色表示正值"
 plot_gallery3(title, faces_centered[:n_components])
+
+print("------------------------------")  # 30個
 
 # 分解 Decomposition
 
@@ -628,8 +631,10 @@ plot_gallery3(title, faces_centered[:n_components])
 pca_estimator = PCA(n_components=n_components, svd_solver="randomized", whiten=True)
 pca_estimator.fit(faces_centered)
 
-title = "Eigenfaces - PCA using randomized SVD"
+title = "Eigenfaces - PCA using randomized SVD 經過 PCA"
 plot_gallery3(title, pca_estimator.components_[:n_components])
+
+print("------------------------------")  # 30個
 
 # 非負組件 - NMF Non-negative components - NMF
 # 估計非負原始資料作為兩個非負矩陣的乘積。
@@ -639,6 +644,8 @@ nmf_estimator.fit(X)  # original non- negative dataset
 
 title = "Non-negative components - NMF"
 plot_gallery3(title, nmf_estimator.components_[:n_components])
+
+print("------------------------------")  # 30個
 
 # 獨立組件 - FastICA Independent components - FastICA
 # 獨立成分分析將多變量向量分解為彼此最大獨立的加性子成分。
@@ -650,8 +657,11 @@ ica_estimator.fit(faces_centered)
 title = "Independent components - FastICA"
 plot_gallery3(title, ica_estimator.components_[:n_components])
 
+print("------------------------------")  # 30個
+
 # 稀疏組件 - MiniBatchSparsePCA Sparse components - MiniBatchSparsePCA
-# 小批量稀疏 PCA (MiniBatchSparsePCA) 提取最能重建資料的一組稀疏組件。此變體比類似的 SparsePCA更快，但準確度較低。
+# 小批量稀疏 PCA (MiniBatchSparsePCA) 提取最能重建資料的一組稀疏組件。
+# 此變體比類似的 SparsePCA更快，但準確度較低。
 
 batch_pca_estimator = decomposition.MiniBatchSparsePCA(
     n_components=n_components, alpha=0.1, max_iter=100, batch_size=3, random_state=rng
@@ -660,8 +670,11 @@ batch_pca_estimator.fit(faces_centered)
 title = "Sparse components - MiniBatchSparsePCA"
 plot_gallery3(title, batch_pca_estimator.components_[:n_components])
 
+print("------------------------------")  # 30個
+
 # 字典學習
-# 預設情況下，MiniBatchDictionaryLearning 將資料分成小批量，並透過在指定次數的迭代中循環小批量，以線上方式進行最佳化。
+# 預設情況下，MiniBatchDictionaryLearning 將資料分成小批量，
+# 並透過在指定次數的迭代中循環小批量，以線上方式進行最佳化。
 
 batch_dict_estimator = decomposition.MiniBatchDictionaryLearning(
     n_components=n_components, alpha=0.1, max_iter=50, batch_size=3, random_state=rng
@@ -669,6 +682,8 @@ batch_dict_estimator = decomposition.MiniBatchDictionaryLearning(
 batch_dict_estimator.fit(faces_centered)
 title = "Dictionary learning"
 plot_gallery3(title, batch_dict_estimator.components_[:n_components])
+
+print("------------------------------")  # 30個
 
 # 叢集中心 - MiniBatchKMeans   # Cluster centers - MiniBatchKMeans
 # sklearn.cluster.MiniBatchKMeans 在計算上是有效率的，並使用 partial_fit 方法實作線上學習。這就是為什麼用 MiniBatchKMeans 來增強一些耗時的演算法可能是有益的。
@@ -684,9 +699,13 @@ kmeans_estimator.fit(faces_centered)
 title = "Cluster centers - MiniBatchKMeans"
 plot_gallery3(title, kmeans_estimator.cluster_centers_[:n_components])
 
+print("------------------------------")  # 30個
+
 # 因子分析組件 - FA
 # Factor Analysis components - FA
-# FactorAnalysis 與 PCA 相似，但具有獨立地對輸入空間每個方向的變異數進行建模的優點（異質雜訊）。在使用者指南中閱讀更多資訊。
+# FactorAnalysis 與 PCA 相似，
+# 但具有獨立地對輸入空間每個方向的變異數進行建模的優點（異質雜訊）。
+# 在使用者指南中閱讀更多資訊。
 
 fa_estimator = decomposition.FactorAnalysis(n_components=n_components, max_iter=20)
 fa_estimator.fit(faces_centered)
@@ -709,12 +728,16 @@ plt.title("Pixelwise variance from \n Factor Analysis (FA)", wrap=True)
 plt.colorbar(orientation="horizontal", shrink=0.8, pad=0.03)
 show()
 
+print("------------------------------")  # 30個
+
 # 分解：字典學習
 # Decomposition: Dictionary learning
 # 使用另一個顏色圖繪製我們資料集中相同的樣本。紅色表示負值，藍色表示正值，白色表示零。
 
 title = "Faces from dataset"
 plot_gallery3(title, faces_centered[:n_components], cmap=plt.cm.RdBu)
+
+print("------------------------------")  # 30個
 
 # 字典學習 - 正向字典  # Dictionary learning - positive dictionary
 # 在以下章節中，我們在尋找字典時強制執行正向性。
@@ -734,6 +757,8 @@ plot_gallery3(
     title, dict_pos_dict_estimator.components_[:n_components], cmap=plt.cm.RdBu
 )
 
+print("------------------------------")  # 30個
+
 # 字典學習 - 正向編碼 # Dictionary learning - positive code
 # 以下我們將編碼係數限制為正矩陣。
 
@@ -751,6 +776,8 @@ title = "Dictionary learning - positive code"
 plot_gallery3(
     title, dict_pos_code_estimator.components_[:n_components], cmap=plt.cm.RdBu
 )
+
+print("------------------------------")  # 30個
 
 # 字典學習 - 正向字典和編碼 # Dictionary learning - positive dictionary & code
 # 以下是字典值和編碼係數受到正向約束時的結果。
@@ -775,6 +802,7 @@ print("------------------------------------------------------------")  # 60個
 人臉資料集分解 SP
 https://scikit-learn.dev.org.tw/1.6/auto_examples/decomposition/plot_faces_decomposition.html#sphx-glr-auto-examples-decomposition-plot-faces-decomposition-py
 """
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 n_row, n_col = 2, 3
