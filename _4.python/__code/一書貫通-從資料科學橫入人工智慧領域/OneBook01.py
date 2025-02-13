@@ -213,7 +213,6 @@ import keyword
 
 print(keyword.kwlist)
 
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -250,9 +249,6 @@ print("------------------------------------------------------------")  # 60個
 from scipy import stats
 import statsmodels.api as sm
 import statsmodels.formula.api as smf
-
-# pd.set_option('display.max_columns', None)
-os.chdir(r"C:\_git\vcs\_4.python\__code\一書貫通-從資料科學橫入人工智慧領域")
 
 # 导入数据和数据清洗
 
@@ -1045,8 +1041,6 @@ print("------------------------------------------------------------")  # 60個
 import statsmodels.api as sm
 from statsmodels.formula.api import ols
 
-pd.set_option("display.max_columns", None)
-
 # 数据准备
 
 tele = pd.read_csv("data/teleco_camp.csv")
@@ -1403,33 +1397,16 @@ print("------------------------------------------------------------")  # 60個
 
 import sklearn.model_selection as cross_validation
 
-os.chdir(r"D:\Python_book\11KNNNB")
-pd.set_option("display.max_columns", None)
-
-
-# In[ ]:
-
-
 orgData = pd.read_csv("date_data2.csv")
 # # 朴素贝叶斯
 
-# In[ ]:
-
-
 orgData.head()
-
-
-# In[ ]:
 
 Y = orgData[["Dated"]]
 orgData1 = orgData.ix[:, -3:]
 
 orgData1.income_rank = orgData1.income_rank.astype("category")
 orgData1.describe(include="all")
-
-
-# In[ ]:
-
 
 (
     train_data1,
@@ -1455,9 +1432,6 @@ import sklearn.metrics as metrics
 print(metrics.classification_report(test_target1, test_est1))
 
 print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
 
 # 第12讲 高级分类器：支持向量机( SVM)与凸优化
@@ -1590,3 +1564,14 @@ sys.exit()
 
 
 print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+
+
+pd.set_option("display.max_columns", None)
+
+os.chdir(r"C:\_git\vcs\_4.python\__code\一書貫通-從資料科學橫入人工智慧領域")
+
+os.chdir(r"D:\Python_book\11KNNNB")
+
+

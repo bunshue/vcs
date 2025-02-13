@@ -60,7 +60,6 @@ from sklearn.model_selection import train_test_split  # 資料分割 => 訓練�
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import ConfusionMatrixDisplay
-from sklearn.manifold import MDS
 from sklearn.decomposition import PCA
 
 # 不要顯示一些警告
@@ -1805,56 +1804,6 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-# MDS
-df = pd.read_csv("data/machine_learning4_iris.csv")
-
-X = np.asarray(df.iloc[:, :4])
-X -= np.mean(X, axis=0)
-X /= np.std(X, axis=0, ddof=1)
-
-D = sklearn.metrics.pairwise.pairwise_distances(X, metric="euclidean")
-
-stress = [
-    MDS(
-        dissimilarity="precomputed",
-        n_components=k,
-        random_state=9487,
-        max_iter=300,
-        eps=1e-9,
-    )
-    .fit(D)
-    .stress_
-    for k in range(1, X.shape[1] + 1)
-]
-
-print("Stress", stress)
-plt.plot(range(1, 5), stress)
-
-K = 2
-mds = MDS(
-    dissimilarity="precomputed",
-    n_components=K,
-    random_state=9487,
-    max_iter=300,
-    eps=1e-9,
-)
-Xmds = mds.fit_transform(D)
-
-pca = PCA(n_components=K)
-pca.fit(X)
-PC = pca.transform(X)
-
-print("Correlation between PCA and MDS")
-cor = [
-    np.corrcoef(Xmds[:, j], PC[:, j])[0, 1]
-    for j in range(min(Xmds.shape[1], PC.shape[1]))
-]
-print(cor)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

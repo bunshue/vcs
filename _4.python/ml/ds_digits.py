@@ -50,41 +50,6 @@ def show():
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# load images of the digits 0 through 5 and visualize several of them
-
-digits = datasets.load_digits(n_class=6)
-
-fig, ax = plt.subplots(8, 8, figsize=(6, 6))
-for i, axi in enumerate(ax.flat):
-    axi.imshow(digits.images[i], cmap="binary")
-    axi.set(xticks=[], yticks=[])
-
-show()
-
-
-# project the digits into 2 dimensions using IsoMap
-from sklearn.manifold import Isomap
-
-iso = Isomap(n_components=2)
-projection = iso.fit_transform(digits.data)
-
-
-# plot the results
-plt.scatter(
-    projection[:, 0],
-    projection[:, 1],
-    lw=0.1,
-    c=digits.target,
-    cmap=plt.cm.get_cmap("cubehelix", 6),
-)
-plt.colorbar(ticks=range(6), label="digit value")
-plt.clim(-0.5, 5.5)
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 print("數字 基本數據 load_digits()")
 
 digits = datasets.load_digits()
@@ -229,21 +194,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-"""
-from sklearn.manifold import TSNE
-
-digits = datasets.load_digits()
-print(type(digits))
-print(len(digits))
-
-print("TSNE")
-n_components = 2  # 削減後の次元を2に設定
-model = TSNE(n_components=n_components)
-print(model.fit_transform(digits.data))
-"""
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 # 変換後のベクトルデータを入力として機械学習モデルを適用する
 
 from sklearn.ensemble import RandomForestClassifier
@@ -362,92 +312,6 @@ plt.subplot(325)
 plt.imshow(digits.images[1795], cmap=plt.cm.gray_r, interpolation="nearest")
 plt.subplot(326)
 plt.imshow(digits.images[1796], cmap=plt.cm.gray_r, interpolation="nearest")
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-colors = [
-    "#348ABD",
-    "#A60628",
-    "#7A68A6",
-    "#467821",
-    "#D55E00",
-    "#CC79A7",
-    "#56B4E9",
-    "#009E73",
-    "#F0E442",
-    "#0072B2",
-]
-
-
-def plot_embedding(ax, X):
-    x_min, x_max = np.min(X, 0), np.max(X, 0)
-    X = (X - x_min) / (x_max - x_min)
-    for i in range(X.shape[0]):
-        ax.text(
-            X[i, 0],
-            X[i, 1],
-            str(digits.target[i]),
-            color=colors[int(y[i] % 10)],
-            fontdict={"size": 12},
-        )
-
-
-def format_plot(ax, x_label, y_label, title):
-    ax.xaxis.set_major_formatter(plt.NullFormatter())
-    ax.yaxis.set_major_formatter(plt.NullFormatter())
-
-    ax.set_title(title)
-
-
-# PCA降維
-from sklearn import decomposition
-from sklearn import manifold
-
-digits = datasets.load_digits(n_class=10)
-
-X = digits.data
-y = digits.target
-
-X_pca = decomposition.TruncatedSVD(n_components=2).fit_transform(X)
-
-fig, ax = plt.subplots()
-plot_embedding(ax, X_pca)
-format_plot(ax, "", "", "PCA")
-
-show()
-
-print("------------------------------")  # 30個
-
-embedder = manifold.SpectralEmbedding(
-    n_components=2, random_state=0, eigen_solver="arpack"
-)
-X_se = embedder.fit_transform(X)
-
-tsne = manifold.TSNE(n_components=2, init="pca", random_state=0)
-
-X_tsne = tsne.fit_transform(X)
-
-mds = manifold.MDS(n_components=2, n_init=1, max_iter=100)
-X_mds = mds.fit_transform(X)
-
-fig, ax = plt.subplots(2, 2)
-
-fig.subplots_adjust(left=0.0625, right=0.95, wspace=0.1)
-
-plot_embedding(ax[0, 0], X_pca)
-format_plot(ax[0, 0], "", "", "PCA")
-
-plot_embedding(ax[0, 1], X_mds)
-format_plot(ax[0, 1], "", "", "MDS")
-
-plot_embedding(ax[1, 0], X_se)
-format_plot(ax[1, 0], "", "", "Spectral")
-
-plot_embedding(ax[1, 1], X_tsne)
-format_plot(ax[1, 1], "", "", "tSNE")
 
 show()
 

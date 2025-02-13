@@ -29,14 +29,13 @@ print("------------------------------------------------------------")  # 60個
 
 import sqlite3
 
-
 print("------------------------------------------------------------")  # 60個
 
 # 数据整合和数据清洗
 
 # SQL语句介绍
 
-sale = pd.read_csv("sale.csv", encoding="gbk")
+sale = pd.read_csv("data/sale.csv", encoding="gbk")
 cc = sale.head()
 print(cc)
 
@@ -77,11 +76,11 @@ pd.read_sql_query(sql, con)
 
 # sql操作
 
-one = pd.read_csv("One.csv")
+one = pd.read_csv("data/One.csv")
 one.to_sql("One", con, index=False)
 print(one.T)
 
-two = pd.read_csv("Two.csv")
+two = pd.read_csv("data/Two.csv")
 two.to_sql("Two", con, index=False)
 print(two.T)
 
@@ -112,12 +111,12 @@ print(cc)
 
 # sql操作
 
-table1 = pd.read_csv("Table1.csv")
+table1 = pd.read_csv("data/Table1.csv")
 table1.to_sql("table1", con, index=False)
 cc = table1.head()
 print(cc)
 
-table2 = pd.read_csv("Table2.csv")
+table2 = pd.read_csv("data/Table2.csv")
 table2.to_sql("table2", con, index=False)
 cc = table2.head()
 print(cc)
@@ -147,7 +146,7 @@ table1.join(table2, how="outer", lsuffix="t1", rsuffix="t2")  # 参数设置可�
 
 # 发现数据问题类型
 
-camp = pd.read_csv("teleco_camp_orig.csv")
+camp = pd.read_csv("data/teleco_camp_orig.csv")
 cc = camp.head()
 print(cc)
 
@@ -255,7 +254,7 @@ camp["Age_group2"] = pd.cut(camp["Age"], 4)  # 这里以age_oldest_tr字段等�
 cc = camp.Age_group2.head()
 print(cc)
 
-camp.to_csv("tmp_tele_camp_ok.csv")
+# df存檔 camp.to_csv("tmp_tele_camp_ok.csv")
 
 print("------------------------------------------------------------")  # 60個
 # Pandas
@@ -441,46 +440,22 @@ sample = pd.DataFrame(
 
 sample
 
-
-# In[52]:
-
 sample.sort_values("score", ascending=False, na_position="last")
-
-
-# In[53]:
 
 sample.sort_values(["group", "score"])
 
-
 # ### 5.1.6 分组汇总
 
-# In[8]:
-
-sample = pd.read_csv(r"D:\Python_book\5Preprocessing\sample.csv", encoding="gbk")
+sample = pd.read_csv("data/sample.csv", encoding="gbk")
 sample.head()
-
-
-# In[9]:
 
 sample.groupby("class")[["math"]].max()
 
-
-# In[10]:
-
 sample.groupby(["grade", "class"])[["math"]].mean()
-
-
-# In[11]:
 
 sample.groupby(["grade"])["math", "chinese"].mean()
 
-
-# In[12]:
-
 sample.groupby("class")["math"].agg(["mean", "min", "max"])
-
-
-# In[14]:
 
 df = sample.groupby(["grade", "class"])["math", "chinese"].agg(["min", "max"])
 df
@@ -606,7 +581,7 @@ print("------------------------------------------------------------")  # 60個
 # - SQL2数据过滤与排序
 # - 选择表中指定列
 
-sale = pd.read_csv(r"sale.csv", encoding="gbk")
+sale = pd.read_csv("data/sale.csv", encoding="gbk")
 
 # In[ ]:
 
@@ -655,14 +630,14 @@ pd.read_sql_query(sql, con)
 
 # In[ ]:
 
-one = pd.read_csv(r"One.csv")
+one = pd.read_csv("data/One.csv")
 one.to_sql("One", con, index=False)
 one.T
 
 
 # In[ ]:
 
-two = pd.read_csv(r"Two.csv")
+two = pd.read_csv("data/Two.csv")
 two.to_sql("Two", con, index=False)
 two.T
 
@@ -709,14 +684,14 @@ pd.concat([one, two], axis=0, join="outer", ignore_index=True)  # 更多参数�
 
 # In[ ]:
 
-table1 = pd.read_csv(r"Table1.csv")
+table1 = pd.read_csv("data/Table1.csv")
 table1.to_sql("table1", con, index=False)
 table1.head()
 
 
 # In[ ]:
 
-table2 = pd.read_csv(r"Table2.csv")
+table2 = pd.read_csv("data/Table2.csv")
 table2.to_sql("table2", con, index=False)
 table2.head()
 
@@ -756,7 +731,7 @@ print("------------------------------------------------------------")  # 60個
 
 # 发现数据问题类型
 
-camp = pd.read_csv("teleco_camp_orig.csv")
+camp = pd.read_csv("data/teleco_camp_orig.csv")
 camp.head()
 
 # - 脏数据或数据不正确
@@ -860,8 +835,7 @@ camp.Age_group1.head()
 camp["Age_group2"] = pd.cut(camp["Age"], 4)  # 这里以age_oldest_tr字段等宽分为4段
 camp.Age_group2.head()
 
-camp.to_csv("tele_camp_ok.csv")
-
+# 存檔 camp.to_csv("tmp_tele_camp_ok.csv")
 
 print("------------------------------------------------------------")  # 60個
 # reshape
@@ -929,9 +903,8 @@ pd.melt(
 
 # ### 1. 导入数据
 
-trad_flow = pd.read_csv(
-    r"D:\Python_Training\script_Python\5Preprocessing\RFM_TRAD_FLOW.csv", encoding="gbk"
-)
+# 無檔案??
+trad_flow = pd.read_csv("data/RFM_TRAD_FLOW.csv", encoding="gbk")
 trad_flow.head(10)
 
 # ### 2.计算 RFM
@@ -1090,7 +1063,7 @@ def get_sample(df, sampling="simple_random", k=1, stratified_col=None):
         raise AssertionError("sampling is illegal")
 
 
-clients = pd.read_csv(r"D:\Python_book\5Preprocessing\clients.csv", encoding="gbk")
+clients = pd.read_csv("data/clients.csv", encoding="gbk")
 # clients["district_id_c"]=clients["district_id"].map(lambda x:"id"+str(x))
 # %%
 # 在每个地区分别用简单随机抽样、分层抽样、系统抽样，三种方式抽取样本
@@ -1125,7 +1098,7 @@ print("------------------------------------------------------------")  # 60個
 # # 第5章3 RFM
 # - pandas学习参考： [十分钟搞定pandas](http://www.cnblogs.com/chaosimple/p/4153083.html)
 
-trad_flow = pd.read_csv("RFM_TRAD_FLOW.csv", encoding="gbk")
+trad_flow = pd.read_csv("data/RFM_TRAD_FLOW.csv", encoding="gbk")
 trad_flow.head()
 
 # ### 2.计算 RFM
