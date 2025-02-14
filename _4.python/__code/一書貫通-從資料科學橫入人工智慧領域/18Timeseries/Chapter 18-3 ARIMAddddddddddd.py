@@ -75,6 +75,7 @@ fig = sm.graphics.tsa.plot_pacf(resid, lags=20)
 plt.show()
 
 #残差的ACF和PACF图，可以看到序列残差基本为白噪声
+
 #进一步进行D-W检验，是目前检验自相关性最常用的方法，但它只使用于检验一阶自相关性。
 #DW＝４＜＝＞ρ＝－１　即存在负自相关性
 #DW＝２＜＝＞ρ＝０　　即不存在（一阶）自相关性
@@ -297,12 +298,13 @@ fig = qqplot(resid, line='q', fit=True)
 plt.show()
 
 import datetime
-fig = arima110.plot_predict(pd.to_datetime('2017-01-01')
-                        pd.to_datetime('2017-01-01')+datetime.timedelta(days=220), 
+fig = arima110.plot_predict(pd.to_datetime('2017-01-01'),
+                            pd.to_datetime('2017-01-01')+datetime.timedelta(days=220), 
                             dynamic=False, plot_insample=True)
 plt.show()
 
 #3.自动寻找ARIMA参数
+
 
 #dta=ARIMA_11_b
 ts_simu200= pd.read_csv('ts_simu200.csv',index_col='t')
@@ -333,16 +335,12 @@ for param in pdq:
         if results.aic < best_aic:
             best_aic = results.aic
             best_pdq = param
-            best_seasonal_pdq = param_seasonal
     except:
         continue
         
 print("Best ARIMA{} model - AIC:{}".format(best_pdq, best_aic))
 
 #Best ARIMA(1, 1, 0) model - AIC:545.9023842214676
-
- 
-
 
 
 print("------------------------------------------------------------")  # 60個

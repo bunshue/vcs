@@ -1,14 +1,8 @@
+# 应用
 
-# coding: utf-8
-# ### 应用
-
-# In[ ]:
-###########################################################################################################
-
-import os, sys
+import sys
 import itertools
 import pandas as pd
-os.chdir(r"D:\Python_book\15Association")
 
 sys.path.append('./myscripts2')
 #需要把Apriori所在的目录"D:\Python_book\15Association\myscripts2"设置到python工作目录，
@@ -17,20 +11,12 @@ from aprioriAll import aprioriAll
 
 transactions = pd.read_csv(r'Transactions.csv')
 
-
-# In[ ]:
-
-
-'''
+"""
 Sort phase: The database is sorted, with customer-id as the major key 
 and transaction-time as the minor key. This step implicitly 
 converts the original transaction database into a database of 
 customer sequences.
-'''
-
-
-# In[ ]:
-
+"""
 
 def aggFunc(*args):
     agg = itertools.chain(*args)
@@ -40,26 +26,14 @@ baskets = transactions['Model'].groupby([transactions['OrderNumber'], transactio
 baskets.head()
 
 
-# In[ ]:
-
-
 dataSet = list(baskets.groupby(level=0).apply(list))
 dataSet[:3]
 
-
-# In[ ]:
-
-
 seq=aprioriAll(dataSet, min_support=0.04)
-#%%
 
-###########################################################################################################
 #以下是学习aprioriAll算法的内容
 
-# ### 测试数据集
-
-# In[ ]:
-
+# 测试数据集
 
 seq1 = [           [30], [90]          ]
 seq2 = [ [10, 20], [30], [40, 60, 70]  ]
@@ -69,10 +43,6 @@ seq5 = [              [90],            ]
 dataSet = [seq1, seq2, seq3, seq4, seq5]
 min_support=0.25
 
-
-# In[ ]:
-import os
-os.chdir(r"D:\Python_book\15Association")
 
 import sys
 sys.path.append('./myscripts2')
@@ -92,10 +62,8 @@ from apriori import apriori
 
 
 def createLs1(dataSet, min_support):
-    '''
-    Using  algorithm apriorito mining large 1-sequences 
-    `Ls` for Large Sequence
-    '''
+    #Using  algorithm apriorito mining large 1-sequences `Ls` for Large Sequence
+    
     n = len(dataSet)
     flattenSet = list(itertools.chain(*dataSet))
     flatten_n = len(flattenSet)
@@ -140,10 +108,9 @@ Ls1
 
 
 def seqMapping(seq, mapping):
-    '''
-    Mapping litemsets to integer objects, for treating litemsets as
-    single entities, and reducing the time required 
-    '''
+    #Mapping litemsets to integer objects, for treating litemsets as
+    #single entities, and reducing the time required 
+    
     newSeq = []
     for iSet in seq:
         newSet = [v for k, v in mapping.items() if k <= set(iSet)]
@@ -152,9 +119,7 @@ def seqMapping(seq, mapping):
     return newSeq
 
 def transform(dataSet, mapping):
-    '''
-    Transform each customer sequence into an alternative representation.
-    '''
+    #Transform each customer sequence into an alternative representation.
     transformDS = []
     for seq in dataSet:
         newSeq = seqMapping(seq, mapping)
@@ -181,9 +146,7 @@ for seq in transformDS :
 
 
 def seqGen(seqA, seqB):
-    '''
-    Generate candidate k+1 sequences with two large k-sequences
-    '''
+    # Generate candidate k+1 sequences with two large k-sequences
     newA, newB = seqA.copy(), seqB.copy()
     if seqA[:-1] == seqB[:-1]:
         newA.append(seqB[-1])
@@ -191,9 +154,7 @@ def seqGen(seqA, seqB):
         return [newA, newB]
 
 def CsGen(Ls):
-    '''
-    Generate all candidate k+1 sequences from large k-sequences
-    '''
+    # Generate all candidate k+1 sequences from large k-sequences
     Cs = []
     for seqA, seqB in itertools.combinations(Ls, 2):
         newSeqs = seqGen(seqA, seqB)
@@ -222,9 +183,7 @@ CsGen(testLs)
 
 
 def isSubSeq(seq, cusSeq):
-    '''
-    Check if a sequence is contained in a customer sequence.
-    '''
+    # Check if a sequence is contained in a customer sequence.
     nSeq, nCusSeq = len(seq), len(cusSeq)
     if nSeq > nCusSeq:
         return False 
@@ -255,10 +214,8 @@ isSubSeq(seq, cusSeq)
 
 
 def calcSupport(transformDS, Cs, min_support):
-    '''
-    Return: 1. a list of large-sequences
-            2. a dictionary of `large-sequence: support` pairs
-    '''
+    # Return: 1. a list of large-sequences
+    #         2. a dictionary of `large-sequence: support` pairs
     supportLsk = {}; n = len(transformDS)
     if len(Cs) >= 1:
         for seq in Cs:
@@ -323,9 +280,7 @@ def isSubSeq2(seq, cusSeq):
             return False           
 
 def notProperSubSeq(seq, cusSeq):
-    '''
-    Return True if `seq` is not proper sub sequence of `cusSeq`
-    '''
+    # Return True if `seq` is not proper sub sequence of `cusSeq`
     if seq == cusSeq:
         return True
     else:
@@ -365,7 +320,7 @@ supportLs
 
 
 def aprioriAll(dataSet, min_support=0.4):
-    '''
+    """
     Proceeding aprioriall algorithm to mining sequential patterns
     
     Refer to:    
@@ -373,7 +328,7 @@ def aprioriAll(dataSet, min_support=0.4):
     Engineer et al. Mining sequential patterns[C]. Proceedings 
     of the Eleventh International Conference on Data Engineering,
     Washington DC, USA: IEEE Computer Society,1995:3-14.
-    '''
+    """
     # Litemset Phase
     mapping, supportLs1 = createLs1(dataSet, min_support)
     Ls1 = [list(k) for k in supportLs1]
