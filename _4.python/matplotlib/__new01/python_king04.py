@@ -147,13 +147,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-plt.rcParams["font.family"] = "SimHei"
-plt.plot([1,2,3])
-plt.xlabel("中文字型")
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
 #Artist物件
 
 from matplotlib import pyplot as plt

@@ -673,7 +673,8 @@ print("前5筆資料 :\n", cc, sep="")
 # 交叉表
 
 cross_table = pd.crosstab(churn.posTrend, churn.churn, margins=True)
-cross_table
+
+print("交叉表 :\n", cross_table, sep="")
 
 # 列聯表
 
@@ -683,6 +684,8 @@ def percConvert(ser):
 
 
 cross_table.apply(percConvert, axis=1)
+
+print("列聯表 :\n", cross_table, sep="")
 
 cc = stats.chi2_contingency(cross_table.iloc[:2, :2])
 print("chisq = %6.4f\np-value = %6.4f\ndof = %i\nexpected_freq = %s" % cc, sep="")
@@ -838,8 +841,6 @@ exog = train[candidates].drop(["churn"], axis=1)
 
 for i in exog.columns:
     print(i, "\t", vif(df=exog, col_i=i))
-
-sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

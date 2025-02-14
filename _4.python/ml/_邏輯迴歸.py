@@ -59,7 +59,7 @@ def show():
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
+'''
 N = 500  # n_samples, 樣本數
 M = 2  # n_features, 特徵數(資料的維度)
 GROUPS = 3  # centers, 分群數
@@ -1600,7 +1600,7 @@ ks_2samp(fpr_test, tpr_test)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
+'''
 # # 逻辑回归
 # 信用风险建模案例
 ##数据说明：本数据是一份汽车贷款违约数据
@@ -1635,11 +1635,10 @@ from scipy import stats
 import statsmodels.api as sm
 import statsmodels.formula.api as smf
 
-# pd.set_option('display.max_columns', None)
-
 # 导入数据和数据清洗
 
 accepts = pd.read_csv("data/accepts.csv").dropna()
+print(accepts.shape)
 
 
 ##衍生变量:
@@ -1675,28 +1674,32 @@ accepts["nta"] = accepts[["loan_amt", "tot_rev_line"]].apply(
     lambda x: divMy(x[0], x[1]), axis=1
 )
 
-accepts.head()
+cc = accepts.head()
+print("前5筆資料 :\n", cc, sep="")
 
-# ##  分类变量的相关关系
+# 轉換資料型態
+accepts.used_ind = accepts.used_ind.astype(float)
+accepts.bad_ind = accepts.bad_ind.astype(float)
 
-print("交叉表")
+# 分类变量的相关关系
+
+# 交叉表
+
 cross_table = pd.crosstab(accepts.used_ind, accepts.bad_ind, margins=True)
 # cross_table = pd.crosstab(accepts.bankruptcy_ind,accepts.bad_ind, margins=True)
+
 print("交叉表 :\n", cross_table, sep="")
 
-print("列联表")
-""" skip
+# 列聯表
+
+
 def percConvert(ser):
-    #return ser / float(ser[-1])
-    print('aaa')
-    print(ser)
-    print('bbb')
-    print(len(ser))
-    print('ccc')
+    return ser / float(ser[-1])
 
 
 cross_table.apply(percConvert, axis=1)
-"""
+
+print("列聯表 :\n", cross_table, sep="")
 
 cc = stats.chi2_contingency(cross_table.iloc[:2, :2])
 print("chisq = %6.4f\np-value = %6.4f\ndof = %i\nexpected_freq = %s" % cc, sep="")
@@ -1726,7 +1729,7 @@ test["proba"] = lg.predict(test)  # 預測.predict
 
 test["proba"].head(10)
 
-# ## 模型评估
+# 模型评估
 # 设定阈值
 
 test["prediction"] = (test["proba"] > 0.3).astype("int")
@@ -1734,7 +1737,7 @@ test["prediction"] = (test["proba"] > 0.3).astype("int")
 # 混淆矩阵
 pd.crosstab(test.bad_ind, test.prediction, margins=True)
 
-# - 计算准确率
+# 计算准确率
 acc = sum(test["prediction"] == test["bad_ind"]) / np.float(len(test))
 print("The accurancy is %.2f" % acc)
 
@@ -1751,7 +1754,6 @@ for i in np.arange(0.02, 0.3, 0.02):
     )
 
 # 绘制ROC曲线
-
 fpr_test, tpr_test, th_test = metrics.roc_curve(test.bad_ind, test.proba)
 fpr_train, tpr_train, th_train = metrics.roc_curve(train.bad_ind, train.proba)
 
@@ -1763,7 +1765,6 @@ show()
 print("AUC = %.4f" % metrics.auc(fpr_test, tpr_test))
 
 # 包含分类预测变量的逻辑回归
-
 formula = """bad_ind ~ C(used_ind)"""
 
 lg_m = smf.glm(
@@ -1886,7 +1887,7 @@ print("AUC = %.4f" % metrics.auc(fpr_test, tpr_test))
 # 2、使用决策树等方法筛选变量，但是多分类变量需要事先进行变量概化
 # 3、使用WOE转换，多分类变量也需要事先进行概化，使用scorecardpy包中的woe算法可以自动进行概化
 # 使用第一种方法
-# formula = '''bad_ind ~ fico_score+ltv+age_oldest_tr+tot_derog+nth+tot_open_tr+veh_mileage+rev_util+C(used_ind)+C(vehicle_year)+C(bankruptcy_ind)'''
+# formula = """bad_ind ~ fico_score+ltv+age_oldest_tr+tot_derog+nth+tot_open_tr+veh_mileage+rev_util+C(used_ind)+C(vehicle_year)+C(bankruptcy_ind)"""
 formula = """bad_ind ~ fico_score+ltv+age_oldest_tr+tot_derog+nth+tot_open_tr+veh_mileage+rev_util+C(bankruptcy_ind)"""
 lg_m = smf.glm(
     formula=formula, data=train, family=sm.families.Binomial(sm.families.links.logit())

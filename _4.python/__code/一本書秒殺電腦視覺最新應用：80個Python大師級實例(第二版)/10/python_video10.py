@@ -539,7 +539,6 @@ from scipy import ndimage as ndi
 from skimage import morphology
 from skimage import feature
 
-# plt.rcParams['font.sans-serif'] =['SimHei']  #显示中文标签
 # 設定中文字型及負號正確顯示
 # 設定中文字型檔
 plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
@@ -668,7 +667,6 @@ from scipy import ndimage
 from matplotlib.pyplot import imread
 import imageio
 
-# plt.rcParams['font.sans-serif'] =['SimHei']  #显示中文标签
 # 設定中文字型及負號正確顯示
 # 設定中文字型檔
 plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei

@@ -82,7 +82,7 @@ carn=len(cars)
 #停车场车辆信息
 def text3(screen):
 	#使用系统字体
-	xtfont=pygame.font.SysFont('SimHei',12)
+	xtfont=pygame.font.SysFont('Microsoft JhengHei',12)
 	#获取文档表信息
 	cars=pi_table[['carnumber','data','state']].values
 	#页面只绘制10辆车的信息
@@ -224,7 +224,7 @@ if event.type==pygame.MOUSEBUTTONDOWN:
 					kk=kk['price'].sum()
 					v1.append(kk)
 					#设置字体可以显示中文
-					plt.rcParams['font.sans-serif']=['SimHei']
+					plt.rcParams['font.sans-serif']=['Microsoft JhengHei']
 					#设置生成柱状图图片大小
 					plt.figure(figsize=(3.9,4.3))
 					#设置柱状图属性attr为x轴内容，v1为x轴内容相对的数据

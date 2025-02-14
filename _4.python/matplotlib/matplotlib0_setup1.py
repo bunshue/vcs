@@ -721,9 +721,11 @@ plt.xticks(value,x)
 plt.rcParams['xtick.labelsize'] = 34	X軸刻度的文字大小
 plt.rcParams['ytick.labelsize'] = 16	Y軸刻度的文字大小
 
+from pylab import mpl
+mpl.rcParams["font.sans-serif"] = ["Microsoft JhengHei"]  # 使用黑體
+
 #用 matplotlib 的參數設定, rcParams, 把字型完完全全用某個中文字型
 
-plt.rcParams['font.sans-serif'] = ['SimHei'] # 選個普通的黑體字
 plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
 plt.rcParams['axes.unicode_minus']=False # 負號不出問題
 plt.title("使用自定義的中文字型", size=15) # 不用再設字型!

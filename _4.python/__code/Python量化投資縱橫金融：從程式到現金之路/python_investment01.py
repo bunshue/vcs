@@ -424,9 +424,7 @@ sinplot()
 
 plt.show()
 
-
-
-sns.set_style({"font.sans-serif":['Microsoft YaHei', 'SimHei']})  #显示中文
+sns.set_style({"font.sans-serif":['Microsoft JhengHei', 'Microsoft JhengHei']})  #显示中文
 sinplot()
 
 plt.show()

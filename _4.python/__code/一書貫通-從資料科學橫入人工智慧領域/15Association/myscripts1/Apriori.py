@@ -132,6 +132,6 @@ def arules(dataset,minSupport=0.1,minConf=0.5,minlen=1,maxlen=10):
             temp.append(row)
     
     res=pd.DataFrame(temp)
-    res=res.reindex_axis(['lhs','','rhs','support','confidence','lift'],axis=1)
+    res=res.reindex(['lhs','','rhs','support','confidence','lift'],axis=1)
     
     return res

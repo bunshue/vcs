@@ -98,7 +98,7 @@ def dataconvert(arulesdata,tidvar='tid',itemvar='item',data_type = 'BOOL'):
         print('BOOL type dataSet!')
         dataSet=[]            
         for i in range(len(arulesdata)):
-            item=arulesdata.columns[arulesdata.ix[i,:].values==True].tolist()
+            item=arulesdata.columns[arulesdata.loc[i,:].values==True].tolist()
             if item:
                 dataSet.append(item)
         return dataSet
@@ -108,7 +108,7 @@ def dataconvert(arulesdata,tidvar='tid',itemvar='item',data_type = 'BOOL'):
         group_index=list(arulesdata.groupby(tidvar).groups.values())
         dataSet=[]
         for i in range(len(group_index)):
-            item=arulesdata.ix[group_index[i],itemvar].values.tolist()
+            item=arulesdata.loc[group_index[i],itemvar].values.tolist()
             if item:
                 dataSet.append(item)
         return dataSet
@@ -132,6 +132,6 @@ def arules(dataset,minSupport=0.1,minConf=0.5,minlen=1,maxlen=10):
             temp.append(row)
     
     res=pd.DataFrame(temp)
-    res=res.reindex_axis(['lhs','','rhs','support','confidence','lift'],axis=1)
+    res=res.reindex(['lhs','','rhs','support','confidence','lift'],axis=1)
     
     return res

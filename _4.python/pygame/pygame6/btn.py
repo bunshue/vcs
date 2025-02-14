@@ -12,7 +12,7 @@ class Button():
 		#设置文本的颜色为白色
 		self.text_color=text_color
 		#设置文本为默认字体，字号为20
-		self.font=pygame.font.SysFont('SimHei',size)
+		self.font=pygame.font.SysFont('Microsoft JhengHei',size)
 		#设置按钮大小
 		self.rect=pygame.Rect(0,0,self.width,self.height)
 		#创建按钮的rect对象，并设置按钮的中心位置
@@ -43,7 +43,7 @@ def text5(screen):
 	#计算price列的和
 	sum_price=pi_info_tabel['price'].sum()
 	#使用系统字体
-	xtfont=pygame.font.SysFont('SimHei',20)
+	xtfont=pygame.font.SysFont('Microsoft JhengHei',20)
 	#重新开始按钮
 	textstart=xtfont.render('共计收入：'+str(int(sum_price))+'元',True,WHITE)
 	#获取文字图像位置

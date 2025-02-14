@@ -1,5 +1,3 @@
-
-
 print("------------------------------------------------------------")  # 60個
 
 # 共同
@@ -21,14 +19,18 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
+print("------------------------------------------------------------")  # 60個
+
+import sklearn.metrics as metrics
+
 
 def show():
-    #plt.show()
+    plt.show()
     pass
 
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 # 日期时间
 
 now = time.strptime("2016-07-20", "%Y-%m-%d")
@@ -171,7 +173,7 @@ for key, value in heights.items():
     print(key, value)
 
 
-# - 匿名函数：高阶函数传入函数时，不需要显式地定义函数，直接传入匿名函数更方便
+# 匿名函数：高阶函数传入函数时，不需要显式地定义函数，直接传入匿名函数更方便
 f = lambda x: x * x
 f(4)
 
@@ -187,8 +189,8 @@ print(cc)
 
 # ## 3.6 使用pandas读写数据
 
-# - pandas可以读取文本文件、json、数据库、Excel等文件
-# - 使用read_csv方法读取以逗号分隔的文本文件作为DataFrame，其它还有类似read_table, read_excel, read_html, read_sql等等方法
+# pandas可以读取文本文件、json、数据库、Excel等文件
+# 使用read_csv方法读取以逗号分隔的文本文件作为DataFrame，其它还有类似read_table, read_excel, read_html, read_sql等等方法
 
 one = pd.read_csv("data/One.csv", sep=",")  # same
 one = pd.read_csv("data/One.csv")
@@ -219,304 +221,6 @@ import keyword
 
 print(keyword.kwlist)
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# # 逻辑回归
-# 信用风险建模案例
-##数据说明：本数据是一份汽车贷款违约数据
-##名称---中文含义
-##application_id---申请者ID
-##account_number---帐户号
-##bad_ind---是否违约
-##vehicle_year---汽车购买时间
-##vehicle_make---汽车制造商
-##bankruptcy_ind---曾经破产标识
-##tot_derog---五年内信用不良事件数量(比如手机欠费消号)
-##tot_tr---全部帐户数量
-##age_oldest_tr---最久账号存续时间(月)
-##tot_open_tr---在使用帐户数量
-##tot_rev_tr---在使用可循环贷款帐户数量(比如信用卡)
-##tot_rev_debt---在使用可循环贷款帐户余额(比如信用卡欠款)
-##tot_rev_line---可循环贷款帐户限额(信用卡授权额度)
-##rev_util---可循环贷款帐户使用比例(余额/限额)
-##fico_score---FICO打分
-##purch_price---汽车购买金额(元)
-##msrp---建议售价
-##down_pyt---分期付款的首次交款
-##loan_term---贷款期限(月)
-##loan_amt---贷款金额
-##ltv---贷款金额/建议售价*100
-##tot_income---月均收入(元)
-##veh_mileage---行使历程(Mile)
-##used_ind---是否二手车
-##weight---样本权重
-
-from scipy import stats
-import statsmodels.api as sm
-import statsmodels.formula.api as smf
-
-# 导入数据和数据清洗
-
-accepts = pd.read_csv("data/accepts.csv").dropna()
-
-
-##衍生变量:
-def divMy(x, y):
-    if x == np.nan or y == np.nan:
-        return np.nan
-    elif y == 0:
-        return -1
-    else:
-        return x / y
-
-
-divMy(1, 2)
-
-##历史负债收入比:tot_rev_line/tot_income
-accepts["dti_hist"] = accepts[["tot_rev_line", "tot_income"]].apply(
-    lambda x: divMy(x[0], x[1]), axis=1
-)
-##本次新增负债收入比:loan_amt/tot_income
-accepts["dti_mew"] = accepts[["loan_amt", "tot_income"]].apply(
-    lambda x: divMy(x[0], x[1]), axis=1
-)
-##本次贷款首付比例:down_pyt/loan_amt
-accepts["fta"] = accepts[["down_pyt", "loan_amt"]].apply(
-    lambda x: divMy(x[0], x[1]), axis=1
-)
-##新增债务比:loan_amt/tot_rev_debt
-accepts["nth"] = accepts[["loan_amt", "tot_rev_debt"]].apply(
-    lambda x: divMy(x[0], x[1]), axis=1
-)
-##新增债务额度比:loan_amt/tot_rev_line
-accepts["nta"] = accepts[["loan_amt", "tot_rev_line"]].apply(
-    lambda x: divMy(x[0], x[1]), axis=1
-)
-
-accepts.head()
-
-# 分类变量的相关关系
-
-# 交叉表
-
-cross_table = pd.crosstab(accepts.used_ind, accepts.bad_ind, margins=True)
-# cross_table = pd.crosstab(accepts.bankruptcy_ind,accepts.bad_ind, margins=True)
-
-cross_table
-
-# 列联表
-
-''' NG
-def percConvert(ser):
-    return ser / float(ser[-1])
-
-
-cross_table.apply(percConvert, axis=1)
-
-print(
-    """chisq = %6.4f 
-p-value = %6.4f
-dof = %i 
-expected_freq = %s"""
-    % stats.chi2_contingency(cross_table.iloc[:2, :2])
-)
-
-# 逻辑回归
-
-accepts.plot(x="age_oldest_tr", y="bad_ind", kind="scatter")
-
-# 随机抽样，建立训练集与测试集
-
-train = accepts.sample(frac=0.7, random_state=1234).copy()
-test = accepts[~accepts.index.isin(train.index)].copy()
-print(" 训练集样本量: %i \n 测试集样本量: %i" % (len(train), len(test)))
-
-lg = smf.glm(
-    "bad_ind ~ age_oldest_tr",
-    data=train,
-    family=sm.families.Binomial(sm.families.links.logit),
-).fit()
-lg.summary()
-
-# 预测
-
-train["proba"] = lg.predict(train)
-test["proba"] = lg.predict(test)
-
-test["proba"].head(10)
-
-# 模型评估
-# 设定阈值
-
-test["prediction"] = (test["proba"] > 0.3).astype("int")
-
-# 混淆矩阵
-
-pd.crosstab(test.bad_ind, test.prediction, margins=True)
-
-# 计算准确率
-
-acc = sum(test["prediction"] == test["bad_ind"]) / np.float(len(test))
-print("The accurancy is %.2f" % acc)
-
-for i in np.arange(0.02, 0.3, 0.02):
-    prediction = (test["proba"] > i).astype("int")
-    confusion_matrix = pd.crosstab(prediction, test.bad_ind, margins=True)
-    precision = confusion_matrix.ix[0, 0] / confusion_matrix.ix["All", 0]
-    recall = confusion_matrix.ix[0, 0] / confusion_matrix.ix[0, "All"]
-    Specificity = confusion_matrix.ix[1, 1] / confusion_matrix.ix[1, "All"]
-    f1_score = 2 * (precision * recall) / (precision + recall)
-    print(
-        "threshold: %s, precision: %.2f, recall:%.2f ,Specificity:%.2f , f1_score:%.2f"
-        % (i, precision, recall, Specificity, f1_score)
-    )
-
-# - 绘制ROC曲线
-
-import sklearn.metrics as metrics
-
-fpr_test, tpr_test, th_test = metrics.roc_curve(test.bad_ind, test.proba)
-fpr_train, tpr_train, th_train = metrics.roc_curve(train.bad_ind, train.proba)
-
-plt.figure(figsize=[3, 3])
-plt.plot(fpr_test, tpr_test, "b--")
-plt.plot(fpr_train, tpr_train, "r-")
-plt.title("ROC curve")
-show()
-
-print("AUC = %.4f" % metrics.auc(fpr_test, tpr_test))
-
-# 包含分类预测变量的逻辑回归
-
-formula = """bad_ind ~ C(used_ind)"""
-
-lg_m = smf.glm(
-    formula=formula, data=train, family=sm.families.Binomial(sm.families.links.logit)
-).fit()
-lg_m.summary()
-
-
-# 多元逻辑回归
-# 向前法
-def forward_select(data, response):
-    remaining = set(data.columns)
-    remaining.remove(response)
-    selected = []
-    current_score, best_new_score = float("inf"), float("inf")
-    while remaining:
-        aic_with_candidates = []
-        for candidate in remaining:
-            formula = "{} ~ {}".format(response, " + ".join(selected + [candidate]))
-            aic = (
-                smf.glm(
-                    formula=formula,
-                    data=data,
-                    family=sm.families.Binomial(sm.families.links.logit),
-                )
-                .fit()
-                .aic
-            )
-            aic_with_candidates.append((aic, candidate))
-        aic_with_candidates.sort(reverse=True)
-        best_new_score, best_candidate = aic_with_candidates.pop()
-        if current_score > best_new_score:
-            remaining.remove(best_candidate)
-            selected.append(best_candidate)
-            current_score = best_new_score
-            print("aic is {},continuing!".format(current_score))
-        else:
-            print("forward selection over!")
-            break
-
-    formula = "{} ~ {} ".format(response, " + ".join(selected))
-    print("final formula is {}".format(formula))
-    model = smf.glm(
-        formula=formula, data=data, family=sm.families.Binomial(sm.families.links.logit)
-    ).fit()
-    return model
-
-
-# 只有连续变量可以进行变量筛选，分类变量需要进行WOE转换才可以进行变量筛选
-candidates = [
-    "bad_ind",
-    "tot_derog",
-    "age_oldest_tr",
-    "tot_open_tr",
-    "rev_util",
-    "fico_score",
-    "loan_term",
-    "ltv",
-    "veh_mileage",
-    "dti_hist",
-    "dti_mew",
-    "fta",
-    "nth",
-    "nta",
-]
-data_for_select = train[candidates]
-
-lg_m1 = forward_select(data=data_for_select, response="bad_ind")
-lg_m1.summary()
-
-# Seemingly wrong when using 'statsmmodels.stats.outliers_influence.variance_inflation_factor'
-
-
-def vif(df, col_i):
-    from statsmodels.formula.api import ols
-
-    cols = list(df.columns)
-    cols.remove(col_i)
-    cols_noti = cols
-    formula = col_i + "~" + "+".join(cols_noti)
-    r2 = ols(formula, df).fit().rsquared
-    return 1.0 / (1.0 - r2)
-
-
-candidates = [
-    "bad_ind",
-    "fico_score",
-    "ltv",
-    "age_oldest_tr",
-    "tot_derog",
-    "nth",
-    "tot_open_tr",
-    "veh_mileage",
-    "rev_util",
-]
-exog = train[candidates].drop(["bad_ind"], axis=1)
-
-for i in exog.columns:
-    print(i, "\t", vif(df=exog, col_i=i))
-
-train["proba"] = lg_m1.predict(train)
-test["proba"] = lg_m1.predict(test)
-import sklearn.metrics as metrics
-
-fpr_test, tpr_test, th_test = metrics.roc_curve(test.bad_ind, test.proba)
-fpr_train, tpr_train, th_train = metrics.roc_curve(train.bad_ind, train.proba)
-
-plt.figure(figsize=[3, 3])
-plt.plot(fpr_test, tpr_test, "b--")
-plt.plot(fpr_train, tpr_train, "r-")
-plt.title("ROC curve")
-show()
-
-print("AUC = %.4f" % metrics.auc(fpr_test, tpr_test))
-
-# 目前vehicle_year、vehicle_make、bankruptcy_ind、used_ind这些分类变量无法通过逐步变量筛选法
-# 解决方案：
-# 1、逐一根据显著性测试
-# 2、使用决策树等方法筛选变量，但是多分类变量需要事先进行变量概化
-# 3、使用WOE转换，多分类变量也需要事先进行概化，使用scorecardpy包中的woe算法可以自动进行概化
-# 使用第一种方法
-# formula = """bad_ind ~ fico_score+ltv+age_oldest_tr+tot_derog+nth+tot_open_tr+veh_mileage+rev_util+C(used_ind)+C(vehicle_year)+C(bankruptcy_ind)"""
-formula = """bad_ind ~ fico_score+ltv+age_oldest_tr+tot_derog+nth+tot_open_tr+veh_mileage+rev_util+C(bankruptcy_ind)"""
-lg_m = smf.glm(
-    formula=formula, data=train, family=sm.families.Binomial(sm.families.links.logit)
-).fit()
-lg_m.summary()
-'''
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -677,7 +381,7 @@ exp_new = raw[raw["avg_exp"].isnull()].copy().iloc[:, 2:].drop("age2", axis=1)
 exp.describe(include="all")
 
 
-# ### 相关性分析
+# 相关性分析
 # 散点图
 
 exp.plot("Income", "avg_exp", kind="scatter")
@@ -687,8 +391,8 @@ show()
 exp[["Income", "avg_exp", "Age", "dist_home_val"]].corr(method="pearson")
 
 
-# ## 线性回归算法
-# ### 简单线性回归
+# 线性回归算法
+# 简单线性回归
 
 lm_s = ols("avg_exp ~ Income+Age+dist_home_val", data=exp).fit()
 cc = lm_s.summary()
@@ -704,16 +408,16 @@ pd.DataFrame([lm_s.predict(exp), lm_s.resid], index=["predict", "resid"]).T.head
 
 # 在待预测数据集上得到预测值
 
-lm_s.predict(exp_new)[:5]
+lm_s.predict(exp_new)[:5]  # 預測.predict
 
 
-# ### 多元线性回归
+# 多元线性回归
 
 lm_m = ols("avg_exp ~ Age + Income + dist_home_val + dist_avg_income", data=exp).fit()
 cc = lm_m.summary()
 print(cc)
 
-# ### 多元线性回归的变量筛选
+# 多元线性回归的变量筛选
 
 
 # forward select
@@ -751,12 +455,12 @@ print(lm_m.rsquared)
 
 
 # # 线性回归的诊断
-# ### 残差分析
+# 残差分析
 
 ana1 = lm_s
 
 
-exp["Pred"] = ana1.predict(exp)
+exp["Pred"] = ana1.predict(exp)  # 預測.predict
 exp["resid"] = ana1.resid
 exp.plot("Pred", "resid", kind="scatter")
 show()
@@ -767,7 +471,7 @@ cc = ana1.summary()
 print(cc)
 
 ana2 = ols("avg_exp_ln ~ Income", exp).fit()
-exp["Pred"] = ana2.predict(exp)
+exp["Pred"] = ana2.predict(exp)  # 預測.predict
 exp["resid"] = ana2.resid
 exp.plot("Income", "resid", kind="scatter")
 cc = ana2.summary()
@@ -781,7 +485,7 @@ show()
 exp["Income_ln"] = np.log(exp["Income"])
 
 ana3 = ols("avg_exp_ln ~ Income_ln", exp).fit()
-exp["Pred"] = ana3.predict(exp)
+exp["Pred"] = ana3.predict(exp)  # 預測.predict
 exp["resid"] = ana3.resid
 exp.plot("Income_ln", "resid", kind="scatter")
 show()
@@ -797,7 +501,7 @@ r_sq = {
 }
 print(r_sq)
 
-# ### 强影响点分析
+# 强影响点分析
 
 exp["resid_t"] = (exp["resid"] - exp["resid"].mean()) / exp["resid"].std()
 
@@ -810,7 +514,7 @@ exp[abs(exp["resid_t"]) > 2]
 
 exp2 = exp[abs(exp["resid_t"]) <= 2].copy()
 ana4 = ols("avg_exp_ln ~ Income_ln", exp2).fit()
-exp2["Pred"] = ana4.predict(exp2)
+exp2["Pred"] = ana4.predict(exp2)  # 預測.predict
 exp2["resid"] = ana4.resid
 exp2.plot("Income", "resid", kind="scatter")
 show()
@@ -825,7 +529,7 @@ from statsmodels.stats.outliers_influence import OLSInfluence
 cc = OLSInfluence(ana3).summary_frame().head()
 print(cc)
 
-# ### 增加变量
+# 增加变量
 # 经过单变量线性回归的处理，我们基本对模型的性质有了一定的了解，接下来可以放入更多的连续型解释变量。在加入变量之前，要注意变量的函数形式转变。比如当地房屋均价、当地平均收入，其性质和个人收入一样，都需要取对数
 
 exp2["dist_home_val_ln"] = np.log(exp2["dist_home_val"])
@@ -839,7 +543,7 @@ ana5 = ols(
 cc = ana5.summary()
 print(cc)
 
-# ### 多重共线性分析
+# 多重共线性分析
 
 # Step regression is not always work.
 
@@ -896,8 +600,8 @@ cc = ana9.summary()
 print(cc)
 
 
-# ## 正则算法
-# ### 岭回归
+# 正则算法
+# 岭回归
 
 lmr = ols(
     "avg_exp ~ Income + dist_home_val + dist_avg_income", data=exp
@@ -912,7 +616,7 @@ lmr1 = ols(
     "avg_exp ~ Age + Income + dist_home_val + dist_avg_income", data=exp
 ).fit_regularized(alpha=1, L1_wt=1)
 
-# ### 使用scikit-learn进行正则化参数调优
+# 使用scikit-learn进行正则化参数调优
 
 from sklearn.preprocessing import StandardScaler
 
@@ -934,7 +638,7 @@ print("The r-square is {}".format(rcv.score(X, y)))
 # Default score is rsquared
 
 X_new = scaler.transform(exp_new[continuous_xcols])
-np.exp(rcv.predict(X_new)[:5])
+np.exp(rcv.predict(X_new)[:5])  # 預測.predict
 
 cv_values = rcv.cv_values_
 n_fold, n_alphas = cv_values.shape
@@ -984,16 +688,13 @@ ridge.set_params(alpha=40)
 ridge.fit(X, y)
 ridge.coef_
 
-
 cc = ridge.score(X, y)
 print(cc)
 
 # 预测
-
-np.exp(ridge.predict(X_new)[:5])
+np.exp(ridge.predict(X_new)[:5])  # 預測.predict
 
 # lasso
-
 from sklearn.linear_model import LassoCV
 
 lasso_alphas = np.logspace(-3, 0, 100, base=10)
@@ -1041,15 +742,27 @@ print("The best alpha is {}".format(encv.alpha_))
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
+'''
 # 线性回归
 
 import statsmodels.api as sm
 from statsmodels.formula.api import ols
 
-# 数据准备
+"""
+teleco_camp.csv 共有 9686 筆資料, 14 欄位
+ID, Suc_flag, ARPU, PromCnt12, PromCnt36, PromCntMsg12, PromCntMsg36,Class,Age,Gender,HomeOwner,AvgARPU,AvgHomeValue,AvgIncome
+12, 1,        50,   6,         10,        2, 3, 4, 51, M, H, 50, 33400,  39460
+53, 0,          ,   5,         9,         1, 4, 3, 50, M, H, 49, 37600,  33545
+67, 1,        25,   6,         11,        2, 4, 1, 51, F, H, 49, 100400, 42091
+71, 1,        80,   7,         10,        2, 4, 1, 48, F, H, 47, 39900,  39313
+"""
 
 tele = pd.read_csv("data/teleco_camp.csv")
+
+print(tele.shape)
+print()
+print(tele["ARPU"])
+print()
 cc = tele.describe(include="all")
 print(cc)
 
@@ -1072,6 +785,7 @@ categorical_X = list(set(all_X) - set(continuous_X))
 from sklearn.preprocessing import LabelEncoder
 
 le = LabelEncoder()
+
 tele["Gender"] = le.fit_transform(tele["Gender"])  # 对Gender进行自动编码
 
 tele["HomeOwner"].replace({"H": 0, "U": 1}, inplace=True)
@@ -1081,9 +795,22 @@ tele["HomeOwner"].replace({"H": 0, "U": 1}, inplace=True)
 arpu_known = tele[tele["ARPU"].notnull()].iloc[:, 3:].copy()
 arpu_unknown = tele[tele["ARPU"].isnull()].iloc[:, 3:].copy()
 
+print("已知的ARPU")
+print("欄名columns")
+cc = arpu_known.columns
+print(cc)
+print(type(arpu_known))
+print(arpu_known.shape)
+print(arpu_known)
+
+print("未知的ARPU")
+print(type(arpu_unknown))
+print(arpu_unknown.shape)
+print(arpu_unknown)
+
 # 相关性分析
 
-arpu_known.plot("ARPU", "AvgARPU", kind="scatter")
+arpu_known.plot(kind="scatter", x="AvgHomeValue", y="AvgARPU")
 show()
 
 cc = arpu_known.corr(method="pearson")
@@ -1108,7 +835,7 @@ print(cc)
 
 ana1 = lm_s
 
-arpu_known["Pred"] = ana1.predict(arpu_known)
+arpu_known["Pred"] = ana1.predict(arpu_known)  # 預測.predict
 arpu_known["resid"] = ana1.resid
 arpu_known.plot("AvgARPU", "resid", kind="scatter")
 show()
@@ -1124,12 +851,11 @@ arpu_known["resid_t"] = (arpu_known["resid"] - resid_mean) / resid_std
 cc = arpu_known[abs(arpu_known["resid_t"]) > 2].head()
 print(cc)
 
-
 # drop outlier
 
 arpu_known2 = arpu_known[abs(arpu_known["resid_t"]) <= 2].copy()
 ana2 = ols("ARPU ~ AvgARPU", arpu_known2).fit()
-arpu_known2["Pred"] = ana2.predict(arpu_known2)
+arpu_known2["Pred"] = ana2.predict(arpu_known2)  # 預測.predict
 arpu_known2["resid"] = ana2.resid
 arpu_known2.plot("AvgARPU", "resid", kind="scatter")
 show()
@@ -1272,8 +998,7 @@ print("The best alpha is {}".format(rcv.alpha_))
 print("The r-square is {}".format(rcv.score(X, y)))  # Default score is rsquared
 
 # 预测
-
-cc = rcv.predict(X)[:5]
+cc = rcv.predict(X)[:5]  # 預測.predict
 print(cc)
 
 dummies_new = enc.transform(arpu_unknown[["Gender", "HomeOwner", "Class"]]).toarray()
@@ -1281,7 +1006,7 @@ X_new = arpu_unknown[continuous_X].join(
     pd.DataFrame(dummies_new, index=arpu_unknown.index)
 )
 
-cc = rcv.predict(X_new)[:5]
+cc = rcv.predict(X_new)[:5]  # 預測.predict
 print(cc)
 
 print("------------------------------------------------------------")  # 60個
@@ -1299,7 +1024,7 @@ print(cc)
 
 # 选取自变量
 
-X = orgData.ix[:, :4]
+X = orgData.ix[:, :4]  # .ix改 .loc
 Y = orgData[["Dated"]]
 X.head()
 
@@ -1324,12 +1049,9 @@ from sklearn.neighbors import KNeighborsClassifier
 
 model = KNeighborsClassifier(n_neighbors=3)  # 默认欧氏距离
 model.fit(train_data, train_target.values.flatten())
-test_est = model.predict(test_data)
+test_est = model.predict(test_data)  # 預測.predict
 
 # 验证
-
-import sklearn.metrics as metrics
-
 print(metrics.confusion_matrix(test_target, test_est, labels=[0, 1]))  # 混淆矩阵
 print(metrics.classification_report(test_target, test_est))
 
@@ -1370,7 +1092,7 @@ best.score(test_data, test_target)
 cc = orgData.head()
 print(cc)
 
-orgData1 = orgData.ix[:, -3:]
+orgData1 = orgData.ix[:, -3:]  # .ix改 .loc
 
 orgData1.income_rank = orgData1.income_rank.astype("category")
 orgData1.describe(include="all")
@@ -1390,7 +1112,7 @@ from sklearn.naive_bayes import BernoulliNB
 
 NB = BernoulliNB(alpha=1)
 NB.fit(train_data1, train_target1.values.flatten())
-test_est1 = NB.predict(test_data1)
+test_est1 = NB.predict(test_data1)  # 預測.predict
 
 # 验证
 
@@ -1409,7 +1131,7 @@ orgData = pd.read_csv("date_data2.csv")
 orgData.head()
 
 Y = orgData[["Dated"]]
-orgData1 = orgData.ix[:, -3:]
+orgData1 = orgData.ix[:, -3:]  # .ix改 .loc
 
 orgData1.income_rank = orgData1.income_rank.astype("category")
 orgData1.describe(include="all")
@@ -1423,18 +1145,15 @@ orgData1.describe(include="all")
     orgData1, Y, test_size=0.3, train_size=0.7, random_state=123
 )
 
-# - 建模
+# 建模
 
 from sklearn.naive_bayes import BernoulliNB
 
 NB = BernoulliNB(alpha=1)
 NB.fit(train_data1, train_target1.values.flatten())
-test_est1 = NB.predict(test_data1)
+test_est1 = NB.predict(test_data1)  # 預測.predict
 
-# - 验证
-
-import sklearn.metrics as metrics
-
+# 验证
 print(metrics.classification_report(test_target1, test_est1))
 
 print("------------------------------------------------------------")  # 60個
@@ -1451,7 +1170,7 @@ print(cc)
 
 # 提取如下字段进行建模
 
-X = orgData.ix[:, :4]
+X = orgData.ix[:, :4]  # .ix改 .loc
 Y = orgData["Dated"]
 
 # 构建训练集和测试集
@@ -1469,10 +1188,7 @@ svcModel = svm.SVC(kernel="rbf", gamma=0.5, C=0.5, probability=True).fit(
 )
 
 # 初步评估
-
-import sklearn.metrics as metrics
-
-test_est = svcModel.predict(test_data)
+test_est = svcModel.predict(test_data)  # 預測.predict
 print(metrics.classification_report(test_target, test_est))  # 计算评估指标
 
 # 进行标准化可以提升高斯核svm的表现
@@ -1486,7 +1202,7 @@ test_scaled = scaler.transform(test_data)
 svcModel1 = svm.SVC(kernel="rbf", gamma=0.5, C=0.5, probability=True).fit(
     train_scaled, train_target
 )
-test_est1 = svcModel1.predict(test_scaled)
+test_est1 = svcModel1.predict(test_scaled)  # 預測.predict
 print(metrics.classification_report(test_target, test_est1))  # 计算评估指标
 
 # 选择最优模型
@@ -1502,7 +1218,7 @@ clf_search = GridSearchCV(estimator=svcModel1, param_grid=grid, cv=4)
 clf_search.fit(train_scaled, train_target)
 
 best_model = clf_search.best_estimator_
-test_est2 = best_model.predict(test_scaled)
+test_est2 = best_model.predict(test_scaled)  # 預測.predict
 print(metrics.classification_report(test_target, test_est2))  # 计算评估指标
 
 best_model
@@ -1537,7 +1253,7 @@ for i, clf in enumerate((svc, lin_svc, rbf_svc, poly_svc)):
     plt.subplot(2, 2, i + 1)
     plt.subplots_adjust(wspace=0.2, hspace=0.2)
 
-    Z = clf.predict(np.c_[xx.ravel(), yy.ravel()])
+    Z = clf.predict(np.c_[xx.ravel(), yy.ravel()])  # 預測.predict
 
     # Put the result into a color plot
     Z = Z.reshape(xx.shape)
@@ -1875,9 +1591,9 @@ snd = pd.read_csv("data/sndHsPr.csv")
 snd["all_pr2"] = snd[["price", "AREA"]].apply(lambda x: x[0] * x[1], axis=1)
 snd.head()
 
-# ## 1、把dist變量重新編碼為中文，比如chaoyang改為朝陽區。1）先作頻次統計，然后繪制柱形圖圖展現每個區樣本的數量；
+# 1、把dist變量重新編碼為中文，比如chaoyang改為朝陽區。1）先作頻次統計，然后繪制柱形圖圖展現每個區樣本的數量；
 
-# ###  把dist變量重新編碼為中文，比如chaoyang改為朝陽區。
+# 把dist變量重新編碼為中文，比如chaoyang改為朝陽區。
 
 district = {
     "fengtai": "豐臺區",
@@ -1892,7 +1608,7 @@ snd["district"] = snd.dist.map(district)
 snd.head()
 
 # 4.1 描述性統計與探索型數據分析
-# ### 1單因子頻數:描述名義變量的分布
+# 1單因子頻數:描述名義變量的分布
 
 # snd.dist.value_counts()
 snd.district.value_counts()
@@ -1902,7 +1618,7 @@ snd.district.value_counts()
 snd.district.value_counts().plot(kind="bar")
 # snd.district.value_counts().plot(kind = 'pie')
 
-# ### 2 單變量描述:描述連續變量的分布
+# 2 單變量描述:描述連續變量的分布
 
 snd.price.mean()
 
@@ -1919,7 +1635,7 @@ snd.price.quantile([0.01, 0.5, 0.99])
 snd.price.hist(bins=40)
 
 # 4.2 描述統計方法大全
-# ### 1.1表分析
+# 1.1表分析
 
 sub_sch = pd.crosstab(snd.district, snd.school)
 sub_sch
@@ -1981,14 +1697,14 @@ map.render()
 
 # ![北京房價](北京各區房價.png)
 
-# ### 1.2 分類匯總
+# 1.2 分類匯總
 snd.price.groupby(snd.district).mean().plot(kind="bar")
 
 snd.price.groupby(snd.district).mean().sort_values(ascending=True).plot(kind="barh")
 
 sns.boxplot(x="district", y="price", data=snd)
 
-# ### 1.3 匯總表
+# 1.3 匯總表
 
 snd.pivot_table(values="price", index="district", columns="school", aggfunc=np.mean)
 
@@ -1996,13 +1712,13 @@ snd.pivot_table(
     values="price", index="district", columns="school", aggfunc=np.mean
 ).plot(kind="bar")
 
-# ### 1.4、兩個連續變量---使用area和price做散點圖，分析area是否影響單位面積房價
+# 1.4、兩個連續變量---使用area和price做散點圖，分析area是否影響單位面積房價
 
 snd.plot.scatter(x="AREA", y="price")
 
-# ### 1.5 雙軸圖 需要導入GDP數據
+# 1.5 雙軸圖 需要導入GDP數據
 
-# - 按年度匯總GDP，并計算GDP增長率。繪制雙軸圖。GDP為柱子，GDP增長率為線。
+# 按年度匯總GDP，并計算GDP增長率。繪制雙軸圖。GDP為柱子，GDP增長率為線。
 
 gdp = pd.read_csv("data/gdp_gdpcr.csv", encoding="gbk")
 gdp.head()
@@ -2023,20 +1739,17 @@ ax2.plot(x, GDPCR, "r")
 ax2.set_ylabel("Increase Ratio")
 ax2.set_xlabel("Year")
 
-
-sys.exit()
-
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 ######################################################################################################################################
 # 以下內容為第8章內容
-# ### 3、對age按照5歲間隔分段，命名為age_group，用loss_flag對age_group作logit圖。
-# ### 1）手工計算Logit,即WOE
+# 3、對age按照5歲間隔分段，命名為age_group，用loss_flag對age_group作logit圖。
+# 1）手工計算Logit,即WOE
 
 from sklearn import tree
 from sklearn.model_selection import cross_val_score
+
 
 class WoE:
     """
@@ -2136,14 +1849,14 @@ class WoE:
         # getting continuous and discrete values together
         # self.df = df_sp_values.append(df_cont)
         # self.df = df_sp_values.append(df_cont, ignore_index=True)
-        #print(df_sp_values.shape)
-        #print(df_cont.shape)
+        # print(df_sp_values.shape)
+        # print(df_cont.shape)
         self.df = pd.concat([df_sp_values, df_cont], axis=0, ignore_index=True)
-        
-        #self.bins = d_bins.append(c_bins)
-        #self.bins = d_bins.append(c_bins)
+
+        # self.bins = d_bins.append(c_bins)
+        # self.bins = d_bins.append(c_bins)
         self.bins = pd.concat([d_bins, c_bins], axis=0, ignore_index=True)
-        
+
         # calculating woe and other statistics
         self._calc_stat()
         # sorting appropriately for further cutting in transform method
@@ -2288,7 +2001,7 @@ class WoE:
         # df = df_sp_values.append(df_cont)
         # df = df_sp_values.append(df_cont)
         df = pd.concat([df_sp_values, df_cont], axis=0, ignore_index=True)
-        
+
         # assigning woe
         df = pd.merge(
             df, self.bins[["woe", "labels"]], left_on=["labels"], right_on=["labels"]
@@ -2338,7 +2051,7 @@ class WoE:
         """
         index = np.arange(self.bins.shape[0])
         bar_width = 0.8
-        figsize=(6, 6)
+        figsize = (6, 6)
         woe_fig = plt.figure(figsize=figsize)
         plt.title("Number of Observations and WoE per bucket")
         ax = woe_fig.add_subplot(111)
@@ -2415,6 +2128,7 @@ class WoE:
         t_bad = 0.5 if t_bad == 0 else t_bad
         t_good = 0.5 if t_good == 0 else t_good
         return np.log(t_bad / t_good)
+
 
 """ 測試上面這個class
 # Examples
@@ -2733,28 +2447,28 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # # 第5章 数据整合和数据清洗
-# - pandas学习参考： [十分钟搞定pandas](http://www.cnblogs.com/chaosimple/p/4153083.html)
+# pandas学习参考： [十分钟搞定pandas](http://www.cnblogs.com/chaosimple/p/4153083.html)
 
-# ## 5.1　数据整合
+# 数据整合
 
-# ### 5.1.1 行列操作
+# 5.1.1 行列操作
 
-# #### 1. 单列
+# 1. 单列
 
 sample = pd.DataFrame(np.random.randn(4, 5), columns=["a", "b", "c", "d", "e"])
 sample
 
 sample["a"]
 
-sample.ix[:, "a"]
+sample.ix[:, "a"]  # .ix改 .loc
 
 sample[["a"]]
 
-# #### 2. 选择多行和多列
+# 2. 选择多行和多列
 
-sample.ix[0:2, 0:2]
+sample.ix[0:2, 0:2]  # .ix改 .loc
 
-# #### 3. 创建、删除列
+# 3. 创建、删除列
 
 sample["new_col1"] = sample["a"] - sample["b"]
 sample
@@ -2773,7 +2487,7 @@ sample_new
 sample.drop("a", axis=1)
 
 
-# ### 5.1.2 条件查询
+# 条件查询
 
 # In[25]:
 
@@ -2787,7 +2501,7 @@ sample = pd.DataFrame(
 sample
 
 
-# #### 1. 单条件
+# 1. 单条件
 
 # In[30]:
 
@@ -2795,14 +2509,14 @@ sample
 sample[sample.score > 70]
 
 
-# #### 2. 多条件
+# 2. 多条件
 
 # In[32]:
 
 sample[(sample.score > 70) & (sample.group == 1)]
 
 
-# #### 3. 使用query
+# 3. 使用query
 
 # In[33]:
 
@@ -2810,7 +2524,7 @@ sample[(sample.score > 70) & (sample.group == 1)]
 sample.query("(group ==2) |(group == 1)")
 
 
-# #### 4. 其他
+# 4. 其他
 
 # In[34]:
 
@@ -2827,7 +2541,7 @@ sample[sample["name"].isin(["Bob", "Lindy"])]
 sample[sample["name"].str.contains("[M]+")]
 
 
-# ### 5.1.3 横向连接
+# 横向连接
 
 # In[37]:
 
@@ -2835,21 +2549,21 @@ df1 = pd.DataFrame({"id": [1, 2, 3], "col1": ["a", "b", "c"]})
 df2 = pd.DataFrame({"id": [4, 3], "col2": ["d", "e"]})
 
 
-# #### 1. 内连接
+# 1. 内连接
 
 # In[38]:
 
 df1.merge(df2, how="inner", left_on="id", right_on="id")
 
 
-# #### 2. 外连接
+# 2. 外连接
 
 # In[40]:
 
 df1.merge(df2, how="left", on="id")
 
 
-# #### 3. 行索引连接
+# 3. 行索引连接
 
 # In[41]:
 
@@ -2863,7 +2577,7 @@ pd.concat([df1, df2], axis=1)
 # df1.join(df2)
 
 
-# ### 5.1.4 纵向合并
+# 纵向合并
 
 # In[43]:
 
@@ -2893,9 +2607,9 @@ df3 = df1.rename(columns={"col": "new_col"})
 pd.concat([df1, df3], ignore_index=True).drop_duplicates()
 
 
-# ### 5.1.5 排序
+# 排序
 
-# #### 1. 排序
+# 1. 排序
 
 # In[50]:
 
@@ -2916,7 +2630,7 @@ sample.sort_values("score", ascending=False, na_position="last")
 
 sample.sort_values(["group", "score"])
 
-# ### 5.1.6 分组汇总
+# 分组汇总
 
 sample = pd.read_csv("data/sample.csv", encoding="gbk")
 sample.head()
@@ -2933,7 +2647,7 @@ df = sample.groupby(["grade", "class"])["math", "chinese"].agg(["min", "max"])
 df
 
 
-# ### 5.1.7 拆分、堆叠列
+# 拆分、堆叠列
 
 # In[19]:
 
@@ -2987,9 +2701,9 @@ pd.melt(
 )
 
 
-# ### 5.1.8 赋值与条件赋值
+# 赋值与条件赋值
 
-# #### 1. 赋值
+# 1. 赋值
 
 # In[29]:
 
@@ -3012,7 +2726,7 @@ sample.score.replace(999, np.nan)
 sample.replace({"score": {999: np.nan}, "name": {"Bob": np.nan}})
 
 
-# #### 2. 条件赋值
+# 2. 条件赋值
 
 # In[33]:
 
@@ -3039,9 +2753,6 @@ sample.loc[sample.group == 1, "class_n"] = "class1"
 sample.loc[sample.group == 2, "class_n"] = "class2"
 
 
-# In[ ]:
-
-
 print("------------------------------------------------------------")  # 60個
 # SQL
 print("------------------------------------------------------------")  # 60個
@@ -3050,12 +2761,10 @@ print("------------------------------------------------------------")  # 60個
 
 # ## 5.1 SQL语句介绍
 
-# - SQL2数据过滤与排序
-# - 选择表中指定列
+# SQL2数据过滤与排序
+# 选择表中指定列
 
 sale = pd.read_csv("data/sale.csv", encoding="gbk")
-
-# In[ ]:
 
 con = sqlite3.connect(":memory:")  # 数据库连接
 sale.to_sql("sale", con)  # 将DataFrame注册成可用sql查询的表
@@ -3065,133 +2774,83 @@ newTable = pd.read_sql_query(
 newTable.head()
 
 
-# - 选择表中所有列
-
-# In[ ]:
+# 选择表中所有列
 
 sqlResult = pd.read_sql_query("select * from sale", con)
 sqlResult.head()
 
 
-# - 删除重复的行
-
-# In[ ]:
+# 删除重复的行
 
 pd.read_sql_query("select DISTINCT  year from sale", con)
 
-
-# - 选择满足条件的行
-
-# In[ ]:
+# 选择满足条件的行
 
 pd.read_sql_query("select * from sale where market in ('东','西') and year=2012", con)
 
-
-# - 对行进行排序
-
-# In[ ]:
+# 对行进行排序
 
 sql = """select year, market, sale, profit
       from sale
       order by  sale desc"""
 pd.read_sql_query(sql, con)
 
-
 # ## 5.2纵向连接表
 # sql操作
-
-# In[ ]:
 
 one = pd.read_csv("data/One.csv")
 one.to_sql("One", con, index=False)
 one.T
 
-
-# In[ ]:
-
 two = pd.read_csv("data/Two.csv")
 two.to_sql("Two", con, index=False)
 two.T
 
-
 # union 和 union all
-
-# In[ ]:
 
 union = pd.read_sql("select * from one UNION select * from two", con)
 union_all = pd.read_sql("select * from one UNION ALL select * from two", con)
 union.T
 
-
-# In[ ]:
-
 union_all.T
 
-
 # except 和 intersect
-
-# In[ ]:
 
 exceptTable = pd.read_sql("select * from one EXCEPT select * from two", con)
 intersectTable = pd.read_sql("select * from one INTERSECT select * from two", con)
 exceptTable.T
 
-
-# In[ ]:
-
 intersectTable.T
-
 
 # *练习： 多表纵向连接
 
 # DataFrame操作
 
-# In[ ]:
-
 pd.concat([one, two], axis=0, join="outer", ignore_index=True)  # 更多参数可查看文档或帮助
-
 
 # ## 5.3 横向连接表
 # sql操作
-
-# In[ ]:
 
 table1 = pd.read_csv("data/Table1.csv")
 table1.to_sql("table1", con, index=False)
 table1.head()
 
-
-# In[ ]:
-
 table2 = pd.read_csv("data/Table2.csv")
 table2.to_sql("table2", con, index=False)
 table2.head()
 
-
 # 笛卡尔积
-
-# In[ ]:
 
 pd.read_sql("select * from table1, table2", con)
 
-
 # 内连接（使用inner join或使用where子句）
-
-# In[ ]:
 
 pd.read_sql("select * from table1 as a inner join table2 as b on a.id=b.id", con)
 # pd.read_sql("select * from table1 as a, table2 as b where a.id=b.id", con)
 
-
 # 左连接
 
-# In[ ]:
-
 pd.read_sql("select * from table1 as a left join table2 as b on a.id=b.id", con)
-
-
-# In[ ]:
-
 
 print("------------------------------------------------------------")  # 60個
 # cleaning
@@ -3206,7 +2865,7 @@ print("------------------------------------------------------------")  # 60個
 camp = pd.read_csv("data/teleco_camp_orig.csv")
 camp.head()
 
-# - 脏数据或数据不正确
+# 脏数据或数据不正确
 
 plt.hist(camp["AvgIncome"], bins=20, normed=True)  # 查看分布情况  # normed 改成 density
 camp["AvgIncome"].describe(include="all")
@@ -3234,10 +2893,10 @@ plt.hist(
 )  # 由于数据中存在缺失值,需要指定绘图的值域
 camp["AvgHomeValue"].describe(include="all")
 
-# - 数据不一致-
+# 数据不一致-
 # 这个问题需要详细的结合描述统计进行变量说明核对
 
-# - 数据重复
+# 数据重复
 
 camp["dup"] = camp.duplicated()  # 生成重复标识变量
 camp.dup.head()
@@ -3271,12 +2930,12 @@ camp["AvgIncome_empflag"] = camp["AvgIncome"].isnull()
 camp["AvgIncome"] = camp["AvgIncome"].fillna(vmean)
 camp["AvgIncome"].describe()
 
-# - 其他有缺失变量请自行填补，找到一个有缺失的分类变量，使用众数进行填补
-# - 多重插补：sklearn.preprocessing.Imputer仅可用于填补均值、中位数、众数，多重插补可考虑使用Orange、impute、Theano等包
-# - 多重插补的处理有两个要点：1、被解释变量有缺失值的观测不能填补，只能删除；2、只对放入模型的解释变量进行插补。
+# 其他有缺失变量请自行填补，找到一个有缺失的分类变量，使用众数进行填补
+# 多重插补：sklearn.preprocessing.Imputer仅可用于填补均值、中位数、众数，多重插补可考虑使用Orange、impute、Theano等包
+# 多重插补的处理有两个要点：1、被解释变量有缺失值的观测不能填补，只能删除；2、只对放入模型的解释变量进行插补。
 
-# * 噪声值处理
-# - 盖帽法
+# 噪声值处理
+# 盖帽法
 
 
 def blk(floor, root):  # 'blk' will return a function
@@ -3296,13 +2955,13 @@ blk_tot = blk(floor=q1, root=q99)  # 'blk_tot' is a function
 camp["Age"] = camp["Age"].map(blk_tot)
 camp["Age"].describe()
 
-# - 分箱（等深，等宽）
-# - 分箱法——等宽分箱
+# 分箱（等深，等宽）
+# 分箱法——等宽分箱
 
 camp["Age_group1"] = pd.qcut(camp["Age"], 4)  # 这里以age_oldest_tr字段等宽分为4段
 camp.Age_group1.head()
 
-# - 分箱法——等深分箱
+# 分箱法——等深分箱
 
 camp["Age_group2"] = pd.cut(camp["Age"], 4)  # 这里以age_oldest_tr字段等宽分为4段
 camp.Age_group2.head()
@@ -3314,15 +2973,15 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # # 第5章 数据整合和数据清洗
-# - pandas学习参考： [十分钟搞定pandas](http://www.cnblogs.com/chaosimple/p/4153083.html)
+# pandas学习参考： [十分钟搞定pandas](http://www.cnblogs.com/chaosimple/p/4153083.html)
 
 # ## 5.1　数据整合
 
-# ### 5.1.1 行列操作
+# 行列操作
 
-# #### 1. 单列
+# 1. 单列
 
-# ### 拆分、堆叠列
+# 拆分、堆叠列
 
 table = pd.DataFrame(
     {
@@ -3368,15 +3027,15 @@ pd.melt(
 )
 
 # # 第5章3 RFM
-# - pandas学习参考： [十分钟搞定pandas](http://www.cnblogs.com/chaosimple/p/4153083.html)
+# pandas学习参考： [十分钟搞定pandas](http://www.cnblogs.com/chaosimple/p/4153083.html)
 
-# ### 1. 导入数据
+# 1. 导入数据
 
 # 無檔案??
 trad_flow = pd.read_csv("data/RFM_TRAD_FLOW.csv", encoding="gbk")
 trad_flow.head(10)
 
-# ### 2.计算 RFM
+# 2.计算 RFM
 
 # In[6]:
 
@@ -3412,7 +3071,7 @@ R.head()
 # R_trans.head()
 
 
-# ### 3.衡量客户对打折商品的偏好
+# 3.衡量客户对打折商品的偏好
 
 # In[12]:
 
@@ -3431,10 +3090,6 @@ M_rank = M_trans.sort_values("spe_ratio", ascending=False, na_position="last").h
 
 M_rank["spe_ratio_group"] = pd.qcut(M_rank["spe_ratio"], 4)  # 这里以age_oldest_tr字段等宽分为4段
 M_rank.head()
-
-
-# In[ ]:
-
 
 print("------------------------------------------------------------")  # 60個
 # sampling
@@ -3471,7 +3126,7 @@ def get_sample(df, sampling="simple_random", k=1, stratified_col=None):
     elif k >= 1:
         assert isinstance(k, int), "选择抽样个数时, k必须为正整数"
         sample_by_n = True
-        if sampling is "stratified":
+        if sampling == "stratified":
             alln = (
                 k * df.groupby(by=stratified_col)[stratified_col[0]].count().count()
             )  # 有问题的
@@ -3485,13 +3140,13 @@ def get_sample(df, sampling="simple_random", k=1, stratified_col=None):
 
     # print(k)
 
-    if sampling is "simple_random":
+    if sampling == "simple_random":
         print("使用简单随机抽样")
         idx = random.sample(range(len_df), k)
         res_df = df.iloc[idx, :].copy()
         return res_df
 
-    elif sampling is "systematic":
+    elif sampling == "systematic":
         print("使用系统抽样")
         step = len_df // k + 1  # step=len_df//k-1
         start = 0  # start=0
@@ -3500,7 +3155,7 @@ def get_sample(df, sampling="simple_random", k=1, stratified_col=None):
         # print("k=%d,step=%d,idx=%d"%(k,step,len(idx)))
         return res_df
 
-    elif sampling is "stratified":
+    elif sampling == "stratified":
         assert stratified_col is not None, "请传入包含需要分层的列名的列表"
         assert all(np.in1d(stratified_col, df.columns)), "请检查输入的列名"
 
@@ -3560,12 +3215,12 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # # 第5章3 RFM
-# - pandas学习参考： [十分钟搞定pandas](http://www.cnblogs.com/chaosimple/p/4153083.html)
+# pandas学习参考： [十分钟搞定pandas](http://www.cnblogs.com/chaosimple/p/4153083.html)
 
 trad_flow = pd.read_csv("data/RFM_TRAD_FLOW.csv", encoding="gbk")
 trad_flow.head()
 
-# ### 2.计算 RFM
+# 2.计算 RFM
 
 # 先将非标准字符串时间格式化为时间数组，再转换为时间戳便于计算
 trad_flow["time"] = trad_flow["time"].map(
@@ -3672,37 +3327,22 @@ RFM["Label"] = RFM[["R_score", "F_score", "M_score"]].apply(
 
 RFM.head()
 
-
-# - '重要价值客户'：消费额度高，购物频率高，最近购物时间也较近——该类客户是重要且忠实的大客户，要细心维护。
-#
-#
-# - '重要发展客户'：消费额度高，购物频率不高，最近购物时间较近——该类客户只是购物频率不高，有巨大的挖掘潜力，可根据该客户以往购物信息，进行个性                                                              化推荐，并发放购物优惠券刺激消费，增加客户粘性。
-#
-#
-# - '重要保持客户'：消费额度高，购物频率高，但最近购物时间较远——该类客户最近一次购物时间较久远，可能是快要流失的重要客户，可以让客户沟通了解其                                                              是不是哪项环节不够人性化体验不好，导致购物频率过低。
-#
-#
-# - '重要挽留客户'：消费额度高，购物频率不高，最近购物时间也较远——该类客户可能是已经流失的重要客户，如果还能联系上，可跟进了解其流失原因，对有                                                              相似客户特征的群体进行预警，针对性改进。
-#
-#
-# - '一般价值客户'：消费额度不高，购物频率高，最近购物时间也较近——该类客户对我们的产品感兴趣，很活跃，但购物金额过低，可能是价格敏感性客户，可                                                              对其组合金融产品增加其购买力。
-#
-#
-# - '一般发展客户'：消费额度不高，购物频率不高，最近购物时间较近——该类客户可能是我们的新晋客户，对我们的服务和产品进行试探性体验，可多留意此类                                                              客户，进行邮件短信关怀及时发送优惠信息。
-#
-#
-# - '一般保持客户'：消费额度不高，购物频率高，最近购物时间较远——该类客户可能是快要流失的一般客户，可进行一般性低成本营销。
-#
-#
-# - '一般挽留客户'：消费额度不高，购物频率不高，最近购物时间也较远——该类客户不是我们的目标客户，经费有限可忽略此类客户。
-
-
-# In[ ]:
-
+# '重要价值客户'：消费额度高，购物频率高，最近购物时间也较近——该类客户是重要且忠实的大客户，要细心维护。
+# '重要发展客户'：消费额度高，购物频率不高，最近购物时间较近——该类客户只是购物频率不高，有巨大的挖掘潜力，可根据该客户以往购物信息，进行个性
+#                 化推荐，并发放购物优惠券刺激消费，增加客户粘性。
+# '重要保持客户'：消费额度高，购物频率高，但最近购物时间较远——该类客户最近一次购物时间较久远，可能是快要流失的重要客户，可以让客户沟通了解其
+#                 是不是哪项环节不够人性化体验不好，导致购物频率过低。
+# '重要挽留客户'：消费额度高，购物频率不高，最近购物时间也较远——该类客户可能是已经流失的重要客户，如果还能联系上，可跟进了解其流失原因，对有
+#                 相似客户特征的群体进行预警，针对性改进。
+# '一般价值客户'：消费额度不高，购物频率高，最近购物时间也较近——该类客户对我们的产品感兴趣，很活跃，但购物金额过低，可能是价格敏感性客户，可
+#                 对其组合金融产品增加其购买力。
+# '一般发展客户'：消费额度不高，购物频率不高，最近购物时间较近——该类客户可能是我们的新晋客户，对我们的服务和产品进行试探性体验，可多留意此类
+#                 客户，进行邮件短信关怀及时发送优惠信息。
+# '一般保持客户'：消费额度不高，购物频率高，最近购物时间较远——该类客户可能是快要流失的一般客户，可进行一般性低成本营销。
+# '一般挽留客户'：消费额度不高，购物频率不高，最近购物时间也较远——该类客户不是我们的目标客户，经费有限可忽略此类客户。
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -3718,61 +3358,63 @@ print("------------------------------------------------------------")  # 60個
     rate-房价同比增长率
 """
 
-house_price_gr = pd.read_csv('data/house_price_gr.csv', encoding='gbk')
+house_price_gr = pd.read_csv("data/house_price_gr.csv", encoding="gbk")
 cc = house_price_gr.head()
 print(cc)
 
-#6.1 参数估计
+# 6.1 参数估计
 
-#进行描述性统计分析
+# 进行描述性统计分析
 
-cc = house_price_gr.describe(include='all')
+cc = house_price_gr.describe(include="all")
 print(cc)
 
 from scipy import stats
 
-sns.histplot(house_price_gr.rate, kde=True) # Histograph
+sns.histplot(house_price_gr.rate, kde=True)  # Histograph
 show()
 
 import statsmodels.api as sm
 from matplotlib import pyplot as plt
 
-fig = sm.qqplot(house_price_gr.rate, fit=True, line='45')
+fig = sm.qqplot(house_price_gr.rate, fit=True, line="45")
 fig.show()
 show()
 
 
-house_price_gr.plot(kind='box') # Box Plots
+house_price_gr.plot(kind="box")  # Box Plots
 show()
 
-#置信度区间估计
+# 置信度区间估计
 
 se = house_price_gr.rate.std() / len(house_price_gr) ** 0.5
 LB = house_price_gr.rate.mean() - 1.98 * se
 UB = house_price_gr.rate.mean() + 1.98 * se
 (LB, UB)
 
+
 # 如果要求任意置信度下的置信区间的话，可以自己编一个函数
 def confint(x, alpha=0.05):
     n = len(x)
     xb = x.mean()
-    df = n-1
-    tmp = (x.std() / n ** 0.5) * stats.t.ppf(1-alpha/2, df)
-    return {'Mean': xb, 'Degree of Freedom':df, 'LB':xb-tmp, 'UB':xb+tmp}
+    df = n - 1
+    tmp = (x.std() / n**0.5) * stats.t.ppf(1 - alpha / 2, df)
+    return {"Mean": xb, "Degree of Freedom": df, "LB": xb - tmp, "UB": xb + tmp}
+
 
 confint(house_price_gr.rate, 0.05)
 
 # 或者使用DescrStatsW
 d1 = sm.stats.DescrStatsW(house_price_gr.rate)
-d1.tconfint_mean(0.05) # 
+d1.tconfint_mean(0.05)  #
 
 
-#6.2 假设检验与单样本T检验
-#当年住宅价格的增长率是否超过了10%的阈值
+# 6.2 假设检验与单样本T检验
+# 当年住宅价格的增长率是否超过了10%的阈值
 
-print('t-statistic=%6.4f, p-value=%6.4f, df=%s' %d1.ttest_mean(0.1))
+print("t-statistic=%6.4f, p-value=%6.4f, df=%s" % d1.ttest_mean(0.1))
 
-#一般认为FICO高于690的客户信誉较高，请检验该产品的客户整体信用是否高于690
+# 一般认为FICO高于690的客户信誉较高，请检验该产品的客户整体信用是否高于690
 
 """
 6.3 两样本T检验
@@ -3794,92 +3436,89 @@ print('t-statistic=%6.4f, p-value=%6.4f, df=%s' %d1.ttest_mean(0.1))
     AvgIncome 当地人均收入
 """
 
-#导入数据
+# 导入数据
 
-camp= pd.read_csv('data/tele_camp_okaaa.csv', skipinitialspace=True)
+camp = pd.read_csv("data/tele_camp_okaaa.csv", skipinitialspace=True)
 cc = camp.head()
 print(cc)
 
-#根据是否入网比较外呼次数
+# 根据是否入网比较外呼次数
 
-camp['PromCnt12'].groupby(camp['Suc_flag']).describe()
+camp["PromCnt12"].groupby(camp["Suc_flag"]).describe()
 
-#第一步:方差齐次检验
+# 第一步:方差齐次检验
 
-Suc0 = camp[camp['Suc_flag'] == 0]['PromCnt12']
-Suc1 = camp[camp['Suc_flag'] == 1]['PromCnt12']
-leveneTestRes = stats.levene(Suc0, Suc1, center='median')
-print('w-value=%6.4f, p-value=%6.4f' %leveneTestRes)
+Suc0 = camp[camp["Suc_flag"] == 0]["PromCnt12"]
+Suc1 = camp[camp["Suc_flag"] == 1]["PromCnt12"]
+leveneTestRes = stats.levene(Suc0, Suc1, center="median")
+print("w-value=%6.4f, p-value=%6.4f" % leveneTestRes)
 
-#第二步:T-test
+# 第二步:T-test
 
 stats.stats.ttest_ind(Suc0, Suc1, equal_var=False)
 # Or Try: sm.stats.ttest_ind(gender0, gender1, usevar='pooled')
 
-#6.4 方差分析
+# 6.4 方差分析
 
-#单因素方差分析
+# 单因素方差分析
 
-pd.set_option('display.max_columns', None) # 设置显示所有列
-camp.groupby('Class')[['PromCnt12']].describe().T
+pd.set_option("display.max_columns", None)  # 设置显示所有列
+camp.groupby("Class")[["PromCnt12"]].describe().T
 
 # 利用回归模型中的方差分析
 import statsmodels.api as sm
 from statsmodels.formula.api import ols
 
-sm.stats.anova_lm(ols('PromCnt12 ~ C(Class)',data=camp).fit())
+sm.stats.anova_lm(ols("PromCnt12 ~ C(Class)", data=camp).fit())
 
-#多因素方差分析
+# 多因素方差分析
 
 # NG
 # NG sm.stats.anova_lm(ols('PromCnt12 ~ C(Class)+C(Age_group1)',data=camp).fit())
 
-#6.5 相关分析
+# 6.5 相关分析
 
-#散点图
+# 散点图
 
-camp.plot(x='AvgARPU', y='ARPU', kind='scatter')
+camp.plot(x="AvgARPU", y="ARPU", kind="scatter")
 show()
 
-#相关性分析:“spearman”,“pearson” 和 "kendall"
+# 相关性分析:“spearman”,“pearson” 和 "kendall"
 
-camp[['AvgARPU', 'ARPU']].corr(method='pearson')
+camp[["AvgARPU", "ARPU"]].corr(method="pearson")
 
-#6.6卡方检验
+# 6.6卡方检验
 
 cross_table = pd.crosstab(camp.Class, columns=camp.Suc_flag)
 # Or try this: accepts.pivot_table(index='bankruptcy_ind',columns='bad_ind', values='application_id', aggfunc='count')
 cc = cross_table
 print(cc)
 
-print('chisq = %6.4f\n p-value = %6.4f\n dof = %i\n expected_freq = %s'  %stats.chi2_contingency(cross_table))
-
+print(
+    "chisq = %6.4f\n p-value = %6.4f\n dof = %i\n expected_freq = %s"
+    % stats.chi2_contingency(cross_table)
+)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
 
 # chapter6_creditcard_exp.py
 
-# coding: utf-8
-
 # # 第6讲 统计推断基础
-# - 数据说明：本数据是地区房价增长率数据
-# - 名称-中文含义
-# - dis_name-小区名称
-# - rate-房价同比增长率
-#%%
+# 数据说明：本数据是地区房价增长率数据
+# 名称-中文含义
+# dis_name-小区名称
+# rate-房价同比增长率
 
-house_price_gr = pd.read_csv(r'data/house_price_gr.csv', encoding='gbk')
+house_price_gr = pd.read_csv(r"data/house_price_gr.csv", encoding="gbk")
 house_price_gr.head()
-
 
 # ## 6.1 参数估计
 # 进行描述性统计分析
 
 # In[2]:
 
-house_price_gr.describe(include='all')
+house_price_gr.describe(include="all")
 
 
 # Histograph
@@ -3890,7 +3529,7 @@ house_price_gr.describe(include='all')
 
 from scipy import stats
 
-sns.histplot(house_price_gr.rate, kde=True) # Histograph
+sns.histplot(house_price_gr.rate, kde=True)  # Histograph
 show()
 
 
@@ -3901,7 +3540,7 @@ show()
 import statsmodels.api as sm
 from matplotlib import pyplot as plt
 
-fig = sm.qqplot(house_price_gr.rate, fit=True, line='45')
+fig = sm.qqplot(house_price_gr.rate, fit=True, line="45")
 fig.show()
 
 
@@ -3909,7 +3548,7 @@ fig.show()
 
 # In[5]:
 
-house_price_gr.plot(kind='box') # Box Plots
+house_price_gr.plot(kind="box")  # Box Plots
 
 
 # 置信度区间估计
@@ -3924,13 +3563,15 @@ UB = house_price_gr.rate.mean() + 1.98 * se
 
 # In[7]:
 
+
 # 如果要求任意置信度下的置信区间的话，可以自己编一个函数
 def confint(x, alpha=0.05):
     n = len(x)
     xb = x.mean()
-    df = n-1
-    tmp = (x.std() / n ** 0.5) * stats.t.ppf(1-alpha/2, df)
-    return {'Mean': xb, 'Degree of Freedom':df, 'LB':xb-tmp, 'UB':xb+tmp}
+    df = n - 1
+    tmp = (x.std() / n**0.5) * stats.t.ppf(1 - alpha / 2, df)
+    return {"Mean": xb, "Degree of Freedom": df, "LB": xb - tmp, "UB": xb + tmp}
+
 
 confint(house_price_gr.rate, 0.05)
 
@@ -3939,7 +3580,7 @@ confint(house_price_gr.rate, 0.05)
 
 # 或者使用DescrStatsW
 d1 = sm.stats.DescrStatsW(house_price_gr.rate)
-d1.tconfint_mean(0.05) # 
+d1.tconfint_mean(0.05)  #
 
 
 # ## 6.2 假设检验与单样本T检验
@@ -3948,8 +3589,7 @@ d1.tconfint_mean(0.05) #
 # In[9]:
 
 d1 = sm.stats.DescrStatsW(house_price_gr.rate)
-print('t-statistic=%6.4f, p-value=%6.4f, df=%s' %d1.ttest_mean(0.1))
-
+print("t-statistic=%6.4f, p-value=%6.4f, df=%s" % d1.ttest_mean(0.1))
 
 
 # ## 6.3 两样本T检验
@@ -3973,45 +3613,45 @@ print('t-statistic=%6.4f, p-value=%6.4f, df=%s' %d1.ttest_mean(0.1))
 # |edu_class|教育等级：小学及以下开通=0，中学=1，本科=2，研究生=3|
 # In[10]:
 
-creditcard= pd.read_csv(r'data/creditcard_exp.csv', skipinitialspace=True)
+creditcard = pd.read_csv(r"data/creditcard_exp.csv", skipinitialspace=True)
 
 # In[11]:
 
-creditcard['Income'].groupby(creditcard['Acc']).describe()
+creditcard["Income"].groupby(creditcard["Acc"]).describe()
 
 
-# - 第一步:方差齐次检验
+# 第一步:方差齐次检验
 
 # In[12]:
 
-Suc0 = creditcard[creditcard['Acc'] == 0]['Income']
-Suc1 = creditcard[creditcard['Acc'] == 1]['Income']
-leveneTestRes = stats.levene(Suc0, Suc1, center='median')
-print('w-value=%6.4f, p-value=%6.4f' %leveneTestRes)
-# - 第二步:T-test
+Suc0 = creditcard[creditcard["Acc"] == 0]["Income"]
+Suc1 = creditcard[creditcard["Acc"] == 1]["Income"]
+leveneTestRes = stats.levene(Suc0, Suc1, center="median")
+print("w-value=%6.4f, p-value=%6.4f" % leveneTestRes)
+# 第二步:T-test
 
 # In[13]:
 stats.stats.ttest_ind(Suc0, Suc1, equal_var=False)
 # Or Try: sm.stats.ttest_ind(gender0, gender1, usevar='pooled')
-#%%
-#测试一下性别对是月均消费的作用.
-#注意对缺失值得处理
-#creditcard['avg_exp'].groupby(creditcard['gender']).describe()
-#%%
-#female= creditcard[creditcard['gender'] == 0]['avg_exp'].dropna()
-#male = creditcard[creditcard['gender'] == 1]['avg_exp'].dropna()
-#leveneTestRes = stats.levene(female, male, center='median')
-#print('w-value=%6.4f, p-value=%6.4f' %leveneTestRes)
-#%%
-#stats.stats.ttest_ind(female, male, equal_var=True)
+# %%
+# 测试一下性别对是月均消费的作用.
+# 注意对缺失值得处理
+# creditcard['avg_exp'].groupby(creditcard['gender']).describe()
+# %%
+# female= creditcard[creditcard['gender'] == 0]['avg_exp'].dropna()
+# male = creditcard[creditcard['gender'] == 1]['avg_exp'].dropna()
+# leveneTestRes = stats.levene(female, male, center='median')
+# print('w-value=%6.4f, p-value=%6.4f' %leveneTestRes)
+# %%
+# stats.stats.ttest_ind(female, male, equal_var=True)
 
 # ## 6.4 方差分析
-# - 单因素方差分析
+# 单因素方差分析
 
 # In[14]:
 
-pd.set_option('display.max_columns', None) # 设置显示所有列
-creditcard.groupby('edu_class')[['avg_exp']].describe().T
+pd.set_option("display.max_columns", None)  # 设置显示所有列
+creditcard.groupby("edu_class")[["avg_exp"]].describe().T
 
 
 # In[15]:
@@ -4020,33 +3660,32 @@ creditcard.groupby('edu_class')[['avg_exp']].describe().T
 import statsmodels.api as sm
 from statsmodels.formula.api import ols
 
-sm.stats.anova_lm(ols('avg_exp ~ C(edu_class)',data=creditcard).fit())
+sm.stats.anova_lm(ols("avg_exp ~ C(edu_class)", data=creditcard).fit())
 
 
-# - 多因素方差分析
+# 多因素方差分析
 
 # In[16]:不考虑交互相
 
-sm.stats.anova_lm(ols('avg_exp ~ C(edu_class)+C(gender)',data=creditcard).fit())
+sm.stats.anova_lm(ols("avg_exp ~ C(edu_class)+C(gender)", data=creditcard).fit())
 # In[16]:考虑交互相
-sm.stats.anova_lm(ols('avg_exp ~ C(edu_class)+C(gender)+C(edu_class)*C(gender)',data=creditcard).fit())
-
+sm.stats.anova_lm(
+    ols(
+        "avg_exp ~ C(edu_class)+C(gender)+C(edu_class)*C(gender)", data=creditcard
+    ).fit()
+)
 
 # ## 6.5 相关分析
 # 散点图
 
-# In[ ]:
-
-creditcard.plot(x='Income', y='avg_exp', kind='scatter')
-#当发现散点图有发散的趋势时，首先需要对Y取对数，而且还应该尝试对X也取对数
-#%%
-creditcard.plot(x='Income', y='avg_exp_ln', kind='scatter')
+creditcard.plot(x="Income", y="avg_exp", kind="scatter")
+# 当发现散点图有发散的趋势时，首先需要对Y取对数，而且还应该尝试对X也取对数
+# %%
+creditcard.plot(x="Income", y="avg_exp_ln", kind="scatter")
 # 相关性分析:“spearman”,“pearson” 和 "kendall"
-# In[ ]:
-#import numpy as np
-#creditcard['Income_ln']=np.log(creditcard['Income'])
-# In[ ]:
-creditcard[['avg_exp_ln', 'Income']].corr(method='pearson')
+# import numpy as np
+# creditcard['Income_ln']=np.log(creditcard['Income'])
+creditcard[["avg_exp_ln", "Income"]].corr(method="pearson")
 
 # ## 6.6卡方检验
 
@@ -4059,33 +3698,27 @@ cross_table
 
 # In[9]:
 
-cross_table_rowpct = cross_table.div(cross_table.sum(1),axis = 0)
+cross_table_rowpct = cross_table.div(cross_table.sum(1), axis=0)
 cross_table_rowpct
 
-
-# In[ ]:
-
-print('chisq = %6.4f\n p-value = %6.4f\n dof = %i\n expected_freq = %s'  %stats.chi2_contingency(cross_table))
-
-
-# In[ ]:
-
+print(
+    "chisq = %6.4f\n p-value = %6.4f\n dof = %i\n expected_freq = %s"
+    % stats.chi2_contingency(cross_table)
+)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
 
 
 # chapter6_tele_camp_ok.py
 
 # # 第6讲 统计推断基础
-# - 数据说明：本数据是地区房价增长率数据
-# - 名称-中文含义
-# - dis_name-小区名称
-# - rate-房价同比增长率
-#%%
+# 数据说明：本数据是地区房价增长率数据
+# 名称-中文含义
+# dis_name-小区名称
+# rate-房价同比增长率
 
-house_price_gr = pd.read_csv(r'data/house_price_gr.csv', encoding='gbk')
+house_price_gr = pd.read_csv(r"data/house_price_gr.csv", encoding="gbk")
 house_price_gr.head()
 
 
@@ -4094,7 +3727,7 @@ house_price_gr.head()
 
 # In[2]:
 
-house_price_gr.describe(include='all')
+house_price_gr.describe(include="all")
 
 
 # Histograph
@@ -4105,7 +3738,7 @@ house_price_gr.describe(include='all')
 
 from scipy import stats
 
-sns.histplot(house_price_gr.rate, kde=True) # Histograph
+sns.histplot(house_price_gr.rate, kde=True)  # Histograph
 
 # Q-Q
 
@@ -4114,7 +3747,7 @@ sns.histplot(house_price_gr.rate, kde=True) # Histograph
 import statsmodels.api as sm
 from matplotlib import pyplot as plt
 
-fig = sm.qqplot(house_price_gr.rate, fit=True, line='45')
+fig = sm.qqplot(house_price_gr.rate, fit=True, line="45")
 fig.show()
 
 
@@ -4122,7 +3755,7 @@ fig.show()
 
 # In[5]:
 
-house_price_gr.plot(kind='box') # Box Plots
+house_price_gr.plot(kind="box")  # Box Plots
 
 
 # 置信度区间估计
@@ -4137,13 +3770,15 @@ UB = house_price_gr.rate.mean() + 1.98 * se
 
 # In[7]:
 
+
 # 如果要求任意置信度下的置信区间的话，可以自己编一个函数
 def confint(x, alpha=0.05):
     n = len(x)
     xb = x.mean()
-    df = n-1
-    tmp = (x.std() / n ** 0.5) * stats.t.ppf(1-alpha/2, df)
-    return {'Mean': xb, 'Degree of Freedom':df, 'LB':xb-tmp, 'UB':xb+tmp}
+    df = n - 1
+    tmp = (x.std() / n**0.5) * stats.t.ppf(1 - alpha / 2, df)
+    return {"Mean": xb, "Degree of Freedom": df, "LB": xb - tmp, "UB": xb + tmp}
+
 
 confint(house_price_gr.rate, 0.05)
 
@@ -4152,7 +3787,7 @@ confint(house_price_gr.rate, 0.05)
 
 # 或者使用DescrStatsW
 d1 = sm.stats.DescrStatsW(house_price_gr.rate)
-d1.tconfint_mean(0.05) # 
+d1.tconfint_mean(0.05)  #
 
 
 # ## 6.2 假设检验与单样本T检验
@@ -4161,32 +3796,32 @@ d1.tconfint_mean(0.05) #
 # In[9]:
 
 d1 = sm.stats.DescrStatsW(house_price_gr.rate)
-print('t-statistic=%6.4f, p-value=%6.4f, df=%s' %d1.ttest_mean(0.1))
-#一般认为FICO高于690的客户信誉较高，请检验该产品的客户整体信用是否高于690
+print("t-statistic=%6.4f, p-value=%6.4f, df=%s" % d1.ttest_mean(0.1))
+# 一般认为FICO高于690的客户信誉较高，请检验该产品的客户整体信用是否高于690
 
 
 # ## 6.3 两样本T检验
-# - 数据集描述与属性说明
-# - ID	客户编号
-# - Suc_flag	成功入网标识
-# - ARPU	入网后ARPU
-# - PromCnt12	12个月内的营销次数
-# - PromCnt36	36个月内的营销次数
-# - PromCntMsg12	12个月内发短信的次数
-# - PromCntMsg36	36个月内发短信的次数
-# - Class	客户重要性等级(根据前运营商消费情况)
-# - Age	年龄
-# - Gender	性别
-# - HomeOwner	是否拥有住房
-# - AvgARPU	当地平均ARPU
-# - AvgHomeValue	当地房屋均价
-# - AvgIncome	当地人均收入
+# 数据集描述与属性说明
+# ID	客户编号
+# Suc_flag	成功入网标识
+# ARPU	入网后ARPU
+# PromCnt12	12个月内的营销次数
+# PromCnt36	36个月内的营销次数
+# PromCntMsg12	12个月内发短信的次数
+# PromCntMsg36	36个月内发短信的次数
+# Class	客户重要性等级(根据前运营商消费情况)
+# Age	年龄
+# Gender	性别
+# HomeOwner	是否拥有住房
+# AvgARPU	当地平均ARPU
+# AvgHomeValue	当地房屋均价
+# AvgIncome	当地人均收入
 
 # 导入数据
 
 # In[10]:
 
-camp= pd.read_csv(r'data/tele_camp_ok.csv', skipinitialspace=True)
+camp = pd.read_csv(r"data/tele_camp_ok.csv", skipinitialspace=True)
 camp.head()
 
 
@@ -4194,41 +3829,41 @@ camp.head()
 
 # In[11]:
 
-camp['AvgARPU'].groupby(camp['Suc_flag']).describe()
+camp["AvgARPU"].groupby(camp["Suc_flag"]).describe()
 
 
-# - 第一步:方差齐次检验
+# 第一步:方差齐次检验
 
 # In[12]:
 
-Suc0 = camp[camp['Suc_flag'] == 0]['AvgARPU']
-Suc1 = camp[camp['Suc_flag'] == 1]['AvgARPU']
-leveneTestRes = stats.levene(Suc0, Suc1, center='median')
-print('w-value=%6.4f, p-value=%6.4f' %leveneTestRes)
+Suc0 = camp[camp["Suc_flag"] == 0]["AvgARPU"]
+Suc1 = camp[camp["Suc_flag"] == 1]["AvgARPU"]
+leveneTestRes = stats.levene(Suc0, Suc1, center="median")
+print("w-value=%6.4f, p-value=%6.4f" % leveneTestRes)
 
 
-# - 第二步:T-test
+# 第二步:T-test
 
 # In[13]:
 
 stats.stats.ttest_ind(Suc0, Suc1, equal_var=False)
 # Or Try: sm.stats.ttest_ind(gender0, gender1, usevar='pooled')
 
-#测试一下营销次数对是否响应的作用.
-#camp['PromCnt12'].groupby(camp['Suc_flag']).describe()
-#Suc0 = camp[camp['Suc_flag'] == 0]['PromCnt12']
-#Suc1 = camp[camp['Suc_flag'] == 1]['PromCnt12']
-#leveneTestRes = stats.levene(Suc0, Suc1, center='median')
-#print('w-value=%6.4f, p-value=%6.4f' %leveneTestRes)
-#stats.stats.ttest_ind(Suc0, Suc1, equal_var=False)
+# 测试一下营销次数对是否响应的作用.
+# camp['PromCnt12'].groupby(camp['Suc_flag']).describe()
+# Suc0 = camp[camp['Suc_flag'] == 0]['PromCnt12']
+# Suc1 = camp[camp['Suc_flag'] == 1]['PromCnt12']
+# leveneTestRes = stats.levene(Suc0, Suc1, center='median')
+# print('w-value=%6.4f, p-value=%6.4f' %leveneTestRes)
+# stats.stats.ttest_ind(Suc0, Suc1, equal_var=False)
 
 # ## 6.4 方差分析
-# - 单因素方差分析
+# 单因素方差分析
 
 # In[14]:
 
-pd.set_option('display.max_columns', None) # 设置显示所有列
-camp.groupby('Class')[['ARPU']].describe().T
+pd.set_option("display.max_columns", None)  # 设置显示所有列
+camp.groupby("Class")[["ARPU"]].describe().T
 
 
 # In[15]:
@@ -4237,35 +3872,30 @@ camp.groupby('Class')[['ARPU']].describe().T
 import statsmodels.api as sm
 from statsmodels.formula.api import ols
 
-sm.stats.anova_lm(ols('ARPU ~ C(Class)',data=camp).fit())
+sm.stats.anova_lm(ols("ARPU ~ C(Class)", data=camp).fit())
 
-
-# - 多因素方差分析
+# 多因素方差分析
 
 # In[16]:不考虑交互相
 
-sm.stats.anova_lm(ols('ARPU ~ C(Class)+C(Gender)',data=camp).fit())
+sm.stats.anova_lm(ols("ARPU ~ C(Class)+C(Gender)", data=camp).fit())
 # In[16]:考虑交互相
-sm.stats.anova_lm(ols('ARPU ~ C(Class)+C(Gender)+C(Class)*C(Gender)',data=camp).fit())
-
+sm.stats.anova_lm(ols("ARPU ~ C(Class)+C(Gender)+C(Class)*C(Gender)", data=camp).fit())
 
 # ## 6.5 相关分析
 # 散点图
 
-# In[ ]:
+camp.plot(x="AvgARPU", y="ARPU", kind="scatter")
 
-camp.plot(x='AvgARPU', y='ARPU', kind='scatter')
-
-# In[ ]:
 import numpy as np
-camp['AvgARPU_ln']=np.log(camp['AvgARPU'])
-camp['ARPU_ln']=np.log(camp['ARPU'])
-#%%
-camp.plot(x='AvgARPU_ln', y='ARPU_ln', kind='scatter')
+
+camp["AvgARPU_ln"] = np.log(camp["AvgARPU"])
+camp["ARPU_ln"] = np.log(camp["ARPU"])
+# %%
+camp.plot(x="AvgARPU_ln", y="ARPU_ln", kind="scatter")
 # 相关性分析:“spearman”,“pearson” 和 "kendall"
 
-# In[ ]:
-camp[['AvgARPU_ln', 'ARPU_ln']].corr(method='pearson')
+camp[["AvgARPU_ln", "ARPU_ln"]].corr(method="pearson")
 
 # ## 6.6卡方检验
 
@@ -4278,27 +3908,1551 @@ cross_table
 
 # In[9]:
 
-cross_table_rowpct = cross_table.div(cross_table.sum(1),axis = 0)
+cross_table_rowpct = cross_table.div(cross_table.sum(1), axis=0)
 cross_table_rowpct
 
-
-# In[ ]:
-
-print('chisq = %6.4f\n p-value = %6.4f\n dof = %i\n expected_freq = %s'  %stats.chi2_contingency(cross_table))
-
-
-# In[ ]:
-
-
-
-
-
+print(
+    "chisq = %6.4f\n p-value = %6.4f\n dof = %i\n expected_freq = %s"
+    % stats.chi2_contingency(cross_table)
+)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
+print("------------------------------------------------------------")  # 60個
+"""
+主成分分析
 
+某金融服务公司为了了解贷款客户的信用程度，评价客户的信用等级，采用信用评级常用的5C方法，说明客户违约的可能性。
+
+    品格：指客户的名誉；
+    能力：指客户的偿还能力；
+    资本：指客户的财务势力和财务状况；
+    担保：指对申请贷款项担保的覆盖程度；
+    环境：指外部经济、政策环境对客户的影响。
+    每个单项都是由专家打分给出的。
+"""
+
+loan = pd.read_csv("data/Loan_aply.csv")
+cc = loan.head()
+print(cc)
+
+# plt.figure(figsize=(2, 2))
+plt.scatter(loan["X1"], loan["X2"])
+plt.title("Scatter")
+
+plt.show()
+
+
+sns.pairplot(loan.loc[:, "X1":])
+plt.show()
+
+# 计算相关系数矩阵
+
+cc = loan.loc[:, "X1":].corr(method="pearson")
+print(cc)
+
+# 初次查看主成分的解释方差占比
+
+from sklearn.decomposition import PCA
+
+pca = PCA()
+pca.fit(loan.loc[:, "X1":])
+
+print(pca.explained_variance_ratio_)
+
+# [ 0.84585431  0.08914623  0.04259067  0.01663007  0.00577872]
+
+print(pca.components_)
+
+"""
+[[ 0.46881402  0.48487556  0.47274449  0.46174663  0.32925948]
+ [ 0.83061232 -0.32991571  0.02117417 -0.43090441 -0.12293025]
+ [ 0.0214065   0.0148012  -0.4127194  -0.24084475  0.87805421]
+ [ 0.25465387 -0.28771993 -0.58858207  0.70628304 -0.0842856 ]
+ [ 0.15808149  0.75700032 -0.50921327 -0.2104032  -0.31367674]]
+"""
+
+pca1 = PCA(n_components=1, whiten=True)
+pca1.fit(loan.loc[:, "X1":])
+
+"""
+PCA(copy=True, iterated_power='auto', n_components=1, random_state=None,
+  svd_solver='auto', tol=0.0, whiten=True)
+"""
+# 将打分结果和原始数据联结
+
+score = pd.DataFrame(
+    pca1.transform(loan.loc[:, "X1":]),
+    columns=[
+        "score",
+    ],
+)
+loan.join(score).sort_values(by="score", ascending=False)
+
+print(pca1.components_)
+
+# 数据标准化的方法 http://www.cnblogs.com/chaosimple/p/4153167.html
+
+# 因子分析
+"""
+    cities_10记录了十个沿海省份的经济指标
+
+变量 	含义
+X1 	GDP
+X2 	人均GDP
+X3 	工业增加值
+X4 	第三产业增加值
+X5 	固定资产投资
+X6 	基本建设投资
+X7 	社会消费品零售总额
+X8 	海关出口总额
+X9 	地方财政收入
+"""
+
+cities = pd.read_csv("data/cities_10.csv", encoding="gbk")
+print(cities)
+
+cc = cities.loc[:, "X1":].corr(method="pearson").head()
+print(cc)
+
+from sklearn.preprocessing import scale
+
+scale_cities = scale(cities.loc[:, "X1":])
+pca_c = PCA(n_components=3, whiten=True).fit(scale_cities)
+pca_c.explained_variance_ratio_
+
+# array([ 0.80112955,  0.12214932,  0.0607924 ])
+
+pca_c1 = PCA(n_components=2, whiten=True).fit(scale_cities)
+pd.DataFrame(pca_c1.components_)
+
+# sklearn中的因子分析是极大似然法,不推荐使用
+
+from sklearn.decomposition import FactorAnalysis
+
+fa = FactorAnalysis(n_components=2).fit(scale_cities)
+pd.DataFrame(fa.components_)
+
+
+cities_scores = pd.DataFrame(fa.transform(scale_cities), columns=["total", "avg"])
+cities[["AREA"]].join(cities_scores)
+
+# 对通信消费数据profile_telecom进行因子分析
+
+profile = pd.read_csv("data/profile_telecom.csv")
+cc = profile.head()
+print(cc)
+
+data = profile.loc[:, "cnt_call":]
+cc = data.corr(method="pearson")
+print(cc)
+
+# 对数据进行标准化
+
+from sklearn.preprocessing import scale
+
+data_scaled = scale(data)
+
+telecom_pca = PCA(n_components=2, whiten=True).fit(data_scaled)
+telecom_pca.explained_variance_ratio_
+
+
+telecom_pca.components_
+
+
+telecom_pca.transform(data_scaled)
+
+
+telecom_fa = FactorAnalysis(n_components=2).fit(data_scaled)
+cc = pd.DataFrame(fa.components_).T
+print(cc)
+
+# 奇异值分解
+
+A = np.matrix(
+    [[5, 5, 0, 5], [5, 0, 3, 4], [3, 4, 0, 3], [0, 0, 5, 3], [5, 4, 4, 5], [5, 4, 5, 5]]
+)
+
+U, s, VH = np.linalg.svd(A)
+print(U.shape, s.shape, VH.shape)
+
+# (6, 6) (4,) (4, 4)
+
+# plt.figure(figsize=[3, 2])
+plt.plot(s)
+plt.show()
+
+S = np.diag(s[:2])
+UU = U[:, :2]
+
+bob_T = np.matrix([5, 5, 0, 0, 0, 5])
+
+bob_T.dot(UU).dot(np.linalg.inv(S))
+
+# matrix([[-0.37752201,  0.08020351]])
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# MDS
+
+# 使用美国各大城市距离数据CITY_DISTANCE
+
+df = pd.read_csv("data/CITY_DISTANCE.csv", skipinitialspace=True)
+print(df)
+
+df_filled = df.fillna(0)
+distance_array = np.array(df_filled.iloc[:, 1:])
+cities = distance_array + distance_array.T
+# pd.DataFrame(cities)
+
+# 建模
+
+from sklearn.manifold import MDS
+
+mds = MDS(n_components=2, dissimilarity="precomputed", random_state=123)
+mds.fit_transform(cities)
+mds.stress_
+
+# 350.0770309073701
+
+mds.embedding_
+
+
+# 绘制感知图
+
+x = mds.embedding_[:, 0]
+y = mds.embedding_[:, 1]
+plt.scatter(x, y)
+for a, b, s in zip(x, y, df["City"]):
+    plt.text(a, b, s, fontsize=12)
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+"""
+X1 品格：指客户的名誉；
+X2 能力：指客户的偿还能力；
+X3 资本：指客户的财务实力和财务状况；
+X4 担保：指对申请贷款项担保的覆盖程度；
+X5 环境：指外部经济、政策环境对客户的影响
+"""
+# 一、主成分分析
+
+# - 1、引入数据
+
+model_data = pd.read_csv("data/Loan_aply.csv", encoding="gbk")
+model_data.head()
+
+# In[2]:
+data = model_data.loc[:, "X1":]
+data.head()
+
+# - 2、查看相关系数矩阵，判定做变量降维的必要性（非必须）
+
+# In[3]:
+corr_matrix = data.corr(method="pearson")
+
+# - 3、做主成分之前，进行中心标准化
+
+# In[4]:
+from sklearn import preprocessing
+
+data = preprocessing.scale(data)
+# - 4、使用sklearn的主成分分析，用于判断保留主成分的数量
+
+# In[5]:
+from sklearn.decomposition import PCA
+
+"""说明：1、第一次的n_components参数应该设的大一点
+   说明：2、观察explained_variance_ratio_和explained_variance_的取值变化，建议explained_variance_ratio_累积大于0.85，explained_variance_需要保留的最后一个主成分大于0.8，
+"""
+pca = PCA(n_components=4)
+pca.fit(data)
+print(pca.explained_variance_)  # 建议保留1个主成分
+print(pca.explained_variance_ratio_)  # 建议保留1个主成分
+# %%
+pca = PCA(n_components=1).fit(data)  # 综上,2个主成分
+newdata = pca.fit_transform(data)
+citi10_pca = model_data.join(pd.DataFrame(newdata))
+# In[6]:
+"""通过主成分在每个变量上的权重的绝对值大小，确定每个主成分的代表性
+"""
+pd.DataFrame(pca.components_).T
+# %%
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# correspondence analysis
+
+"""
+变量 	说明 	        标签
+NO 	编号 	        -
+salary 	收入 	        1:[0 1000], 2:[1000 3000], 3:[3001 5000], 4:[5001 7000], 5:[7001 9000], 6:>9000
+educ 	教育程度 	1:高中以下, 2:大专, 3:本科, 4:大于硕士
+freq 	频次 	        1:1次, 2:2-3次, 3:4-5次, 4:6-8次, 5:9-12次, 6:>13次
+compan 	购物原因 	1:家人,2:情人, 3:朋友, 4: 同学, 5:客户, 6:无聊
+purpose 目的 	        1:享受, 2:陪同异性, 3:生活用品, 4:公事, 5:无聊
+average 单次平均消费 	1:小于50, 2:[50 99], 3: [100,149], 4:[150 199], 5:≥200
+"""
+
+df = pd.read_csv("data/shopping.csv")
+cc = df.head()
+print(cc)
+
+purpose_dict = {
+    1: "enjoyment",
+    2: "opposite sex",
+    3: "daily use",
+    4: "business",
+    5: "no reason",
+}
+average_dict = {1: "<50", 2: "[50 99]", 3: "[100 149]", 4: "[150 199]", 5: ">200"}
+df.purpose.replace(purpose_dict, inplace=True)
+df.average.replace(average_dict, inplace=True)
+
+cross_table = pd.crosstab(df.purpose, df.average)
+cross_table
+
+from numpy.linalg import svd
+
+
+class CA(object):
+    """Simple corresondence analysis.
+
+    Inputs
+    ------
+    ct : array_like, shape (n_samples, n_features)
+      Two-way contingency table, training set, where `n_samples`
+      is the number of samples and `n_features` is the number of features.
+
+    Attributes
+    ------
+    F_ : array, shape (n_features, K)
+      principal coordinates of columns. Where `K` = min(`n_features`, `n_samples`).
+
+    G_ : array, shape (n_samples, K)
+      principal coordinates of rows. Where `K` = min(`n_features`, `n_samples`).
+
+    explained_variance_ratio_ : array, shape(K, )
+      Percentage of variance explained by each of the selected components.
+
+    Notes
+    -----
+    The implementation follows that presented in 'Correspondence
+    Analysis in R, with Two- and Three-dimensional Graphics: The ca
+    Package,' Journal of Statistical Software, May 2007, Volume 20,
+    Issue 3.
+    """
+
+    def __init__(self, cross_table):
+        N = np.matrix(cross_table, dtype=float)
+
+        # correspondence matrix from contingency table
+        P = N / N.sum()
+
+        # row and column marginal totals of P as vectors
+        r = P.sum(axis=1)
+        c = P.sum(axis=0).T
+
+        # diagonal matrices of row/column sums
+        D_r_rsq = np.diag(1.0 / np.sqrt(r.A1))
+        D_c_rsq = np.diag(1.0 / np.sqrt(c.A1))
+
+        # the matrix of standarized residuals
+        Z = D_r_rsq * (P - r * c.T) * D_c_rsq
+
+        # compute the SVD
+        U, D_a, V = svd(Z, full_matrices=False)
+        D_a = np.asmatrix(np.diag(D_a))
+        V = V.T
+
+        # principal coordinates of columns
+        F = D_c_rsq * V * D_a
+
+        # principal coordinates of rows
+        G = D_r_rsq * U * D_a
+
+        # standard coordinates of rows
+        X = D_r_rsq * U
+
+        # standard coordinates of columns
+        Y = D_c_rsq * V
+
+        eigenvals = np.diagonal(D_a) ** 2
+        explained_variance_ratio = eigenvals.cumsum() / eigenvals.sum()
+
+        # the total variance of the data matrix
+        inertia = sum(
+            [
+                (P[i, j] - r[i, 0] * c[j, 0]) ** 2 / (r[i, 0] * c[j, 0])
+                for i in range(N.shape[0])
+                for j in range(N.shape[1])
+            ]
+        )  # equals np.power(S, 2).sum() or eigenvalus.sum() or np.trace(S.T * S)
+
+        self.F_ = F.A
+        self.G_ = G.A
+        self.inertia_ = inertia
+        self.eigenvals_ = eigenvals
+        self.explained_variance_ratio_ = explained_variance_ratio
+
+
+ca = CA(cross_table)
+
+print(ca.explained_variance_ratio_)
+
+# [ 0.51057984  0.92001143  0.96850523  1.          1.        ]
+
+# R型和Q型分析的特征向量（加权后）
+
+F = ca.F_
+G = ca.G_
+
+print(F[:, :2])
+
+# 绘制感知图
+
+for i, s in enumerate(cross_table.columns):
+    x, y = F[i, 0], F[i, 1]
+    plt.plot(x, y, "bo")
+    plt.text(x, y, s, va="bottom", ha="left", color="b")
+
+for i, s in enumerate(cross_table.index):
+    x, y = G[i, 0], G[i, 1]
+    plt.plot(x, y, "r^")
+    plt.text(x, y, s, va="bottom", ha="left", color="r")
+
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# PDA
+"""
+第十三讲 信息压缩
+
+-- 第一部分 连续变量压缩
+
+    AvgIncome 当地人均收入
+    ID 员工ID
+    gender 性别
+    Dept 部门
+    performance 绩效总分
+    adaptation 适应总分
+    emotion 情绪总分
+"""
+
+from sklearn.decomposition import PCA, FactorAnalysis, FastICA
+from sklearn import preprocessing
+
+model_data = pd.read_csv("data/staff_performances.csv")
+cc = model_data.head()
+print(cc)
+
+data = model_data.loc[:, "performance":]
+cc = data.head()
+print(cc)
+
+cc = data.describe().T
+print(cc)
+
+plt.scatter(model_data["performance"], model_data["adaptation"])
+plt.title("Scatter")
+plt.show()
+
+sns.pairplot(data)
+plt.show()
+
+# 计算相关系数矩阵
+
+corr_matrix = data.corr(method="pearson")
+# corr_matrix = corr_matrix.abs()
+print(corr_matrix)
+
+# 初次查看主成分的解释方差占比
+
+pca = PCA(n_components=3, whiten=True)
+newData = pca.fit_transform(data)
+pca.explained_variance_ratio_
+
+pca.components_
+
+pca = PCA(n_components=1, whiten=True)
+newData = pca.fit_transform(data)
+print(newData.T)
+
+# 将打分结果和原始数据联结
+
+score = pd.DataFrame(newData)
+data_new = model_data.join(score)
+cc = data_new.head()
+print(cc)
+
+# data_new.sort(0)
+""" 要改
+/home/quant/anaconda2/lib/python2.7/site-packages/ipykernel/__main__.py:1: FutureWarning: sort(columns=....) is deprecated, use sort_values(by=.....)
+  if __name__ == '__main__':
+"""
+# 数据标准化的方法 http://www.cnblogs.com/chaosimple/p/4153167.html
+
+model_data = pd.read_csv("data/cities_10.csv", encoding="gbk")
+model_data.head()
+data = model_data.loc[:, "X1":]
+cc = data.head()
+print(cc)
+
+sns.pairplot(data)
+plt.show()
+
+corr_matrix = data.corr(method="pearson")
+# corr_matrix = corr_matrix.abs()
+cc = corr_matrix
+print(cc)
+
+pca = PCA(n_components=3, whiten=True)
+newData = pca.fit(data)
+cc = pd.DataFrame(pca.components_).T
+print(cc)
+
+fa = FactorAnalysis(n_components=3)
+newData = fa.fit(data)
+cc = pd.DataFrame(fa.components_).T
+print(cc)
+
+model_data = pd.read_csv("data/profile_telecom.csv")
+cc = model_data.head()
+print(cc)
+
+data = model_data.loc[:, "cnt_call":]
+cc = data.head()
+print(cc)
+
+sns.pairplot(data)
+plt.show()
+
+corr_matrix = data.corr(method="pearson")
+# corr_matrix = corr_matrix.abs()
+cc = corr_matrix
+print(cc)
+
+pca = PCA(n_components=3, whiten=True)
+newData = pca.fit(data)
+cc = pd.DataFrame(pca.components_).T
+print(cc)
+
+# 对数据进行标准化
+
+# data_scaled = (data - np.mean(data, 0)) / (np.std(data))#归一化，因为FactorAnalysis没有white选项
+data_scaled = preprocessing.scale(data + 0.0)  # 归一化，但是只能用于浮点类型变量
+cc = pd.DataFrame(data_scaled).head()
+print(cc)
+
+fa = FactorAnalysis(n_components=3)
+newData = fa.fit(data_scaled)
+cc = pd.DataFrame(fa.components_).T
+print(cc)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# chapter13_2 PCA_FCA_Varselect_city10
+
+"""
+X1	GDP
+X2	人均GDP
+X3	工业增加值
+X4	第三产业增加值
+X5	固定资产投资
+X6	基本建设投资
+X7	社会消费品零售总额
+X8	海关出口总额
+X9	地方财政收入
+"""
+# 一、主成分分析
+
+# - 1、引入数据
+
+model_data = pd.read_csv("data/cities_10.csv", encoding="gbk")
+model_data.head()
+
+# In[2]:
+data = model_data.loc[:, "X1":]
+data.head()
+
+# - 2、查看相关系数矩阵，判定做变量降维的必要性（非必须）
+
+# In[3]:
+corr_matrix = data.corr(method="pearson")
+
+# - 3、做主成分之前，进行中心标准化
+
+# In[4]:
+from sklearn import preprocessing
+
+data = preprocessing.scale(data)
+# - 4、使用sklearn的主成分分析，用于判断保留主成分的数量
+
+# In[5]:
+from sklearn.decomposition import PCA
+
+"""说明：1、第一次的n_components参数应该设的大一点
+   说明：2、观察explained_variance_ratio_和explained_variance_的取值变化，建议explained_variance_ratio_累积大于0.85，explained_variance_需要保留的最后一个主成分大于0.8，
+"""
+pca = PCA(n_components=3)
+pca.fit(data)
+print(pca.explained_variance_)  # 建议保留2个主成分
+print(pca.explained_variance_ratio_)  # 建议保留2个主成分
+# %%
+pca = PCA(n_components=2).fit(data)  # 综上,2个主成分
+newdata = pca.fit_transform(data)
+# In[6]:
+"""通过主成分在每个变量上的权重的绝对值大小，确定每个主成分的代表性
+"""
+pd.DataFrame(pca.components_).T
+# 第一个主成分在第2个变量权重低,其余均高
+# 第二个主成分在第2个变量权重高,其余均低
+#############################################################################################
+# 二、因子分析
+# 因子分析的概念很多，作为刚入门的人，我们可以认为因子分析是主成分分析的延续
+# In[7]:
+
+# pip install fa_kit
+
+from fa_kit import FactorAnalysis
+from fa_kit import plotting as fa_plotting
+
+fa = FactorAnalysis.load_data_samples(data, preproc_demean=True, preproc_scale=True)
+fa.extract_components()
+
+
+# - 2、设定提取主成分的方式。默认为“broken_stick”方法，建议使用“top_n”法
+
+# In[8]:
+fa.find_comps_to_retain(method="top_n", num_keep=2)
+# - 3、通过最大方差法进行因子旋转
+
+# In[9]:
+pd.DataFrame(fa.comps["rot"])  # 查看因子权重
+fa.rotate_components(method="varimax")
+fa_plotting.graph_summary(fa)
+# - 说明：可以通过第三张图观看每个因子在每个变量上的权重，权重越高，代表性越强
+
+
+# - 4、获取因子得分
+
+# In[19]:
+# 到目前还没有与PCA中fit_transform类似的函数，因此只能手工计算因子
+# 以下是矩阵相乘的方式计算因子：因子=原始数据（n*k）*权重矩阵(k*num_keep)
+fas = pd.DataFrame(fa.comps["rot"])
+data = pd.DataFrame(data)  # 注意data数据需要标准化
+fa_score = pd.DataFrame(np.dot(data, fas))
+
+# ### 第三步：根据因子得分进行数据分析
+
+a = fa_score.rename(columns={0: "Gross", 1: "Avg"})
+citi10_fa = model_data.join(a)
+
+citi10_fa.to_csv("data/citi10_fa.csv")
+
+x = citi10_fa["Gross"]
+y = citi10_fa["Avg"]
+label = citi10_fa["AREA"]
+plt.scatter(x, y)
+for a, b, l in zip(x, y, label):
+    plt.text(a, b + 0.1, "%s." % l, ha="center", va="bottom", fontsize=14)
+
+plt.show()
+# %%
+#############################################################################################
+# 三、变量筛选
+# ### 以下是变量选择的完整函数
+# ### 以下是变量选择的完整函数
+# 基于SparsePCA的算法还不是很稳定,尤其是当数据本身保留几个变量都处于模棱两个的时候,
+# 该算法并不能达到人为调整的效果。而且并不能保证每次保留的变量是一致的（原因1、SparsePCA：本身就具有随机性；2、脚本中也随机抽样的），
+# 只能保证保留的变量是不相关的
+# 其特点只是比较省人力，可以自动化运行
+
+# In[65]:
+
+
+def Var_Select(orgdata, k, alphaMax=10, alphastep=0.2):
+    """
+    orgdata-需要信息压缩的数据框
+    k-预期最大需要保留的最大变量个数，实际保留数量不能多于这个数值
+    alphaMax-SparsePCA算法惩罚项的最大值,一般要到5才会取得比较理想的结果
+    alphastep-SparsePCA算法惩罚项递增的步长
+    """
+    # step1:当数据量过大时，为了减少不必要的耗时
+    if orgdata.iloc[:, 1].count() > 5000:
+        data = orgdata.sample(5000)
+    else:
+        data = orgdata
+    # step2:引入所需要的包，并且对数据进行标准化
+    from sklearn import preprocessing
+    from sklearn.decomposition import SparsePCA
+
+    # from functools import reduce
+    data = preprocessing.scale(data)
+    n_components = k
+    # pca_n = list()
+    # step3:进行SparsePCA计算，选择合适的惩罚项alpha，当恰巧每个原始变量只在一个主成分上有权重时，停止循环
+    for i in np.arange(0.1, alphaMax, alphastep):
+        pca_model = SparsePCA(n_components=n_components, alpha=i)
+        pca_model.fit(data)
+        pca = pd.DataFrame(pca_model.components_).T
+        n = data.shape[1] - sum(sum(np.array(pca != 0)))  ####计算系数不为0的数量
+        if n == 0:
+            global best_alpha
+            best_alpha = i
+            break
+    # step4:根据上一步得到的惩罚项的取值，估计SparsePCA，并得到稀疏主成分得分
+    pca_model = SparsePCA(n_components=n_components, alpha=best_alpha)
+    pca_model.fit(data)
+    pca = pd.DataFrame(pca_model.components_).T
+    data = pd.DataFrame(data)
+    score = pd.DataFrame(pca_model.fit_transform(data))
+    # step6:计算原始变量与主成分之间的1-R方值
+    r = []
+    R_square = []
+    for xk in range(data.shape[1]):  # xk输入变量个数
+        for paj in range(n_components):  # paj主成分个数
+            r.append(abs(np.corrcoef(data.iloc[:, xk], score.iloc[:, paj])[0, 1]))
+            r_max1 = max(r)
+            r.remove(r_max1)
+            r.append(-2)
+            r_max2 = max(r)
+            R_square.append((1 - r_max1**2) / (1 - r_max2**2))
+
+    R_square = abs(
+        pd.DataFrame(np.array(R_square).reshape((data.shape[1], n_components)))
+    )
+    var_list = []
+    # print(R_square)
+    # step7:每个主成分中，选出原始变量的1-R方值最小的。
+    for i in range(n_components):
+        vmin = R_square[i].min()
+        # print(R_square[i])
+        # print(vmin)
+        # print(R_square[R_square[i] == min][i])
+        var_list.append(R_square[R_square[i] == vmin][i].index)
+
+    news_ids = []
+    for id in var_list:
+        if id not in news_ids:
+            news_ids.append(id)
+    print(news_ids)
+    data_vc = orgdata.iloc[:, np.array(news_ids).reshape(len(news_ids))]
+    return data_vc
+
+
+model_data = pd.read_csv("data/cities_10.csv", encoding="gbk")
+model_data.head()
+data = model_data.loc[:, "X1":]
+
+
+# In[67]:
+Varseled_data = Var_Select(data, k=2)
+# %%
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# chapter13_3 PCA_FCA_Varselect_bank
+
+"""
+CNT_TBM 柜台交易次数	
+CNT_ATM ATM机交易次数
+CNT_POS POS机交易次数	
+CNT_CSC 有偿服务次数
+
+"""
+# 一、主成分分析
+
+# - 1、引入数据
+
+model_data = pd.read_csv("data/profile_bank.csv")
+data = model_data.loc[:, "CNT_TBM":"CNT_CSC"]
+
+# - 2、查看相关系数矩阵，判定做变量降维的必要性（非必须）
+
+# In[3]:
+corr_matrix = data.corr(method="pearson")
+# corr_matrix = data.corr(method='spearman')
+
+# - 3、做主成分之前，进行中心标准化
+
+# In[4]:
+from sklearn import preprocessing
+
+data = preprocessing.scale(data)
+# - 4、使用sklearn的主成分分析，用于判断保留主成分的数量
+
+# In[5]:
+from sklearn.decomposition import PCA
+
+"""说明：1、第一次的n_components参数应该设的大一点
+   说明：2、观察explained_variance_ratio_和explained_variance_的取值变化，建议explained_variance_ratio_累积大于0.85，explained_variance_需要保留的最后一个主成分大于0.8，
+"""
+pca = PCA(n_components=3)
+pca.fit(data)
+print(pca.explained_variance_)  # 建议保留2个主成分
+print(pca.explained_variance_ratio_)  # 建议保留3个主成分
+# %%
+pca = PCA(n_components=3).fit(data)  # 综上,2个主成分
+newdata = pca.fit_transform(data)
+# In[6]:
+"""通过主成分在每个变量上的权重的绝对值大小，确定每个主成分的代表性
+"""
+pd.DataFrame(pca.components_).T
+# 第一个主成分在第3个变量权重差不多高
+# 第二个主成分在第1个变量权重高,其余均低
+# 第三个主成分在第4个变量权重高,其余均低
+#############################################################################################
+# 二、因子分析
+# 因子分析的概念很多，作为刚入门的人，我们可以认为因子分析是主成分分析的延续
+# In[7]:
+from fa_kit import FactorAnalysis
+from fa_kit import plotting as fa_plotting
+
+fa = FactorAnalysis.load_data_samples(data, preproc_demean=True, preproc_scale=True)
+fa.extract_components()
+
+
+# - 2、设定提取主成分的方式。默认为“broken_stick”方法，建议使用“top_n”法
+
+# In[8]:
+fa.find_comps_to_retain(method="top_n", num_keep=3)
+# - 3、通过最大方差法进行因子旋转
+
+# In[9]:
+pd.DataFrame(fa.comps["rot"])  # 查看因子权重
+fa.rotate_components(method="varimax")
+fa_plotting.graph_summary(fa)
+# - 说明：可以通过第三张图观看每个因子在每个变量上的权重，权重越高，代表性越强
+
+
+# - 4、获取因子得分
+
+# In[19]:
+# 到目前还没有与PCA中fit_transform类似的函数，因此只能手工计算因子
+# 以下是矩阵相乘的方式计算因子：因子=原始数据（n*k）*权重矩阵(k*num_keep)
+fas = pd.DataFrame(fa.comps["rot"])
+data = pd.DataFrame(data)  # 注意data数据需要标准化
+fa_score = pd.DataFrame(np.dot(data, fas))
+
+# ### 第三步：根据因子得分进行数据分析
+
+# In[25]:
+
+
+a = fa_score.rename(columns={0: "Gross", 1: "Avg"})
+profile_bank_fa = model_data.join(a)
+
+
+# %%
+#############################################################################################
+# 三、变量筛选
+# ### 以下是变量选择的完整函数
+# 基于SparsePCA的算法还不是很稳定,尤其是当数据本身保留几个变量都处于模棱两个的时候,
+# 该算法并不能达到人为调整的效果。而且并不能保证每次保留的变量是一致的（原因1、SparsePCA：本身就具有随机性；2、脚本中也随机抽样的），
+# 只能保证保留的变量是不相关的
+# 其特点只是比较省人力，可以自动化运行
+# In[65]:
+
+
+def Var_Select(orgdata, k, alphaMax=10, alphastep=0.2):
+    """
+    orgdata-需要信息压缩的数据框
+    k-预期最大需要保留的最大变量个数，实际保留数量不能多于这个数值
+    alphaMax-SparsePCA算法惩罚项的最大值,一般要到5才会取得比较理想的结果
+    alphastep-SparsePCA算法惩罚项递增的步长
+    """
+    # step1:当数据量过大时，为了减少不必要的耗时
+    if orgdata.iloc[:, 1].count() > 5000:
+        data = orgdata.sample(5000)
+    else:
+        data = orgdata
+    # step2:引入所需要的包，并且对数据进行标准化
+    from sklearn import preprocessing
+    from sklearn.decomposition import SparsePCA
+
+    # from functools import reduce
+    data = preprocessing.scale(data)
+    n_components = k
+    # pca_n = list()
+    # step3:进行SparsePCA计算，选择合适的惩罚项alpha，当恰巧每个原始变量只在一个主成分上有权重时，停止循环
+    for i in np.arange(0.1, alphaMax, alphastep):
+        pca_model = SparsePCA(n_components=n_components, alpha=i)
+        pca_model.fit(data)
+        pca = pd.DataFrame(pca_model.components_).T
+        n = data.shape[1] - sum(sum(np.array(pca != 0)))  ####计算系数不为0的数量
+        if n == 0:
+            global best_alpha
+            best_alpha = i
+            break
+    # step4:根据上一步得到的惩罚项的取值，估计SparsePCA，并得到稀疏主成分得分
+    pca_model = SparsePCA(n_components=n_components, alpha=best_alpha)
+    pca_model.fit(data)
+    pca = pd.DataFrame(pca_model.components_).T
+    data = pd.DataFrame(data)
+    score = pd.DataFrame(pca_model.fit_transform(data))
+    # step6:计算原始变量与主成分之间的1-R方值
+    r = []
+    R_square = []
+    for xk in range(data.shape[1]):  # xk输入变量个数
+        for paj in range(n_components):  # paj主成分个数
+            r.append(abs(np.corrcoef(data.iloc[:, xk], score.iloc[:, paj])[0, 1]))
+            r_max1 = max(r)
+            r.remove(r_max1)
+            r.append(-2)
+            r_max2 = max(r)
+            R_square.append((1 - r_max1**2) / (1 - r_max2**2))
+
+    R_square = abs(
+        pd.DataFrame(np.array(R_square).reshape((data.shape[1], n_components)))
+    )
+    var_list = []
+    # print(R_square)
+    # step7:每个主成分中，选出原始变量的1-R方值最小的。
+    for i in range(n_components):
+        vmin = R_square[i].min()
+        # print(R_square[i])
+        # print(vmin)
+        # print(R_square[R_square[i] == min][i])
+        var_list.append(R_square[R_square[i] == vmin][i].index)
+
+    news_ids = []
+    for id in var_list:
+        if id not in news_ids:
+            news_ids.append(id)
+    print(news_ids)
+    data_vc = orgdata.iloc[:, np.array(news_ids).reshape(len(news_ids))]
+    return data_vc
+
+
+model_data = pd.read_csv("data/profile_bank.csv")
+data = model_data.loc[:, "CNT_TBM":"CNT_CSC"]
+
+Varseled_data = Var_Select(data, k=3, alphaMax=10)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# chapter13_4 Varselect_creditcard_exp
+
+
+def Var_Select(orgdata, k, alphaMax=10, alphastep=0.2):
+    """
+    orgdata-需要信息压缩的数据框
+    k-预期最大需要保留的最大变量个数，实际保留数量不能多于这个数值
+    alphaMax-SparsePCA算法惩罚项的最大值,一般要到5才会取得比较理想的结果
+    alphastep-SparsePCA算法惩罚项递增的步长
+    """
+    # step1:当数据量过大时，为了减少不必要的耗时
+    if orgdata.iloc[:, 1].count() > 5000:
+        data = orgdata.sample(5000)
+    else:
+        data = orgdata
+    # step2:引入所需要的包，并且对数据进行标准化
+    from sklearn import preprocessing
+    from sklearn.decomposition import SparsePCA
+
+    # from functools import reduce
+    data = preprocessing.scale(data)
+    n_components = k
+    # pca_n = list()
+    # step3:进行SparsePCA计算，选择合适的惩罚项alpha，当恰巧每个原始变量只在一个主成分上有权重时，停止循环
+    for i in np.arange(0.1, alphaMax, alphastep):
+        pca_model = SparsePCA(n_components=n_components, alpha=i)
+        pca_model.fit(data)
+        pca = pd.DataFrame(pca_model.components_).T
+        n = data.shape[1] - sum(sum(np.array(pca != 0)))  ####计算系数不为0的数量
+        if n == 0:
+            global best_alpha
+            best_alpha = i
+            break
+    # step4:根据上一步得到的惩罚项的取值，估计SparsePCA，并得到稀疏主成分得分
+    pca_model = SparsePCA(n_components=n_components, alpha=best_alpha)
+    pca_model.fit(data)
+    pca = pd.DataFrame(pca_model.components_).T
+    data = pd.DataFrame(data)
+    score = pd.DataFrame(pca_model.fit_transform(data))
+    # step6:计算原始变量与主成分之间的1-R方值
+    r = []
+    R_square = []
+    for xk in range(data.shape[1]):  # xk输入变量个数
+        for paj in range(n_components):  # paj主成分个数
+            r.append(abs(np.corrcoef(data.iloc[:, xk], score.iloc[:, paj])[0, 1]))
+            r_max1 = max(r)
+            r.remove(r_max1)
+            r.append(-2)
+            r_max2 = max(r)
+            R_square.append((1 - r_max1**2) / (1 - r_max2**2))
+
+    R_square = abs(
+        pd.DataFrame(np.array(R_square).reshape((data.shape[1], n_components)))
+    )
+    var_list = []
+    # print(R_square)
+    # step7:每个主成分中，选出原始变量的1-R方值最小的。
+    for i in range(n_components):
+        vmin = R_square[i].min()
+        # print(R_square[i])
+        # print(vmin)
+        # print(R_square[R_square[i] == min][i])
+        var_list.append(R_square[R_square[i] == vmin][i].index)
+
+    news_ids = []
+    for id in var_list:
+        if id not in news_ids:
+            news_ids.append(id)
+    print(news_ids)
+    data_vc = orgdata.iloc[:, np.array(news_ids).reshape(len(news_ids))]
+    return data_vc
+
+
+model_data = pd.read_csv("data/creditcard_exp.csv")
+model_data.head()
+data = model_data.loc[:, "gender":]
+
+
+# In[67]:
+Varseled_data = Var_Select(data, k=5)
+# %%
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# varselect_bank
+
+model_data = pd.read_csv("data/profile_bank.csv")
+data = model_data.loc[:, "CNT_TBM":"CNT_CSC"]
+k = 3
+alphaMax = 5
+alphastep = 0.2
+# %%
+from sklearn import preprocessing
+from sklearn.decomposition import SparsePCA
+from functools import reduce
+
+data = preprocessing.scale(data)
+n_components = k
+pca_n = list()
+
+# %%
+# %%
+pca_model = SparsePCA(n_components=n_components, alpha=5)
+pca_model.fit(data)
+# %%
+pca = pd.DataFrame(pca_model.components_).T
+# %%
+n = data.shape[1] - sum(sum(np.array(pca != 0)))
+
+# %%
+best_alpha = 5
+pca_model = SparsePCA(n_components=n_components, alpha=best_alpha)
+pca_model.fit(data)
+pca = pd.DataFrame(pca_model.components_).T
+data = pd.DataFrame(data)
+score = pd.DataFrame(pca_model.fit_transform(data))
+
+# %%
+r = []
+R_square = []
+for xk in range(data.shape[1]):  # xk输入变量个数
+    for paj in range(n_components):  # paj主成分个数
+        r.append(abs(np.corrcoef(data.iloc[:, xk], score.iloc[:, paj])[0, 1]))
+        r_max1 = max(r)
+        r.remove(r_max1)
+        r.append(-2)
+        r_max2 = max(r)
+        R_square.append((1 - r_max1**2) / (1 - r_max2**2))
+
+R = abs(pd.DataFrame(np.array(r).reshape((data.shape[1], n_components))))
+R_square = abs(pd.DataFrame(np.array(R_square).reshape((data.shape[1], n_components))))
+var_list = []
+# print(R_square)
+# %%
+for i in range(n_components):
+    vmin = R_square[i].min()
+    print(R_square[i])
+    print(vmin)
+    print(R_square[R_square[i] == min][i])
+    var_list.append(R_square[R_square[i] == vmin][i].index[0])
+# %%
+news_ids = []
+for id in var_list:
+    if id not in news_ids:
+        news_ids.append(id)
+print(news_ids)
+orgdata = model_data.loc[:, "CNT_TBM":"CNT_CSC"]
+data_vc = orgdata.iloc[:, np.array(news_ids).reshape(len(news_ids))]
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 第十四讲 聚类
+# 1、层次聚类
+
+import scipy
+import scipy.cluster.hierarchy as sch
+from scipy.cluster.vq import vq, kmeans, whiten
+from sklearn import metrics
+from sklearn import preprocessing
+from sklearn.decomposition import PCA
+from sklearn import cluster
+
+print("------------------------------------------------------------")  # 60個
+
+# 导入数据
+orgData = pd.read_csv("data/cities_10.csv", index_col="AREA", encoding="gbk")
+orgData.head()
+# orgData.describe()
+
+# 标准化
+x_scaled = preprocessing.scale(orgData + 0.0)  # 归一化，但是只能用于浮点类型变量
+pd.DataFrame(x_scaled).head()
+
+# 变量压缩
+pca = PCA(n_components=2)
+newData = pca.fit_transform(x_scaled)
+cc = pca.explained_variance_ratio_
+print(cc)
+
+print(newData)
+
+# 1. 层次聚类
+# 生成点与点之间的距离矩阵,这里用的欧氏距离:
+disMat = sch.distance.pdist(newData, "euclidean")
+# 进行层次聚类:
+Z = sch.linkage(disMat, method="average")
+# 将层级聚类结果以树状图表示出来并保存为plot_dendrogram.png
+P = sch.dendrogram(Z)
+# 存檔 plt.savefig('tmp_plot_dendrogram1.png')
+
+# 2、K-means聚类
+
+iris = pd.read_csv("data/iris_one_book.csv")
+x = iris.loc[:, "Sepal.Length":"Petal.Width"]
+y = iris["Species"]
+
+# 归一化的使用说明 http://www.cnblogs.com/chaosimple/p/4153167.html
+
+x_scaled = preprocessing.scale(x + 0.0)  # 归一化，但是只能用于浮点类型变量
+cc = pd.DataFrame(x_scaled).head()
+print(cc)
+
+pca = PCA(n_components=3)
+newData = pca.fit_transform(x_scaled)
+cc = pca.explained_variance_ratio_
+print(cc)
+
+score = pd.DataFrame(newData)
+cc = score.head()
+print(cc)
+
+# http://scikit-learn.org/stable/modules/generated/sklearn.cluster.KMeans.html#sklearn.cluster.KMeans
+
+from sklearn.cluster import KMeans
+
+kmeans = cluster.KMeans(n_clusters=3)  # MiniBatchKMeans()分批处理
+# kmeans = cluster.KMeans(n_clusters=3, init='random', n_init=1)
+result = kmeans.fit(x_scaled)
+print(result)
+
+cc = result.labels_
+print(cc)
+
+lo = plt.scatter(
+    score[0][result.labels_ == 0], score[1][result.labels_ == 0], marker="x"
+)
+lo = plt.scatter(
+    score[0][result.labels_ == 1], score[1][result.labels_ == 1], marker="o"
+)
+lo = plt.scatter(
+    score[0][result.labels_ == 2], score[1][result.labels_ == 2], marker="+"
+)
+
+# 聚类效果评估
+# Silhouette Coefficient
+# http://scikit-learn.org/stable/modules/clustering.html#clustering
+
+# 計算輪廓分數
+cc = metrics.silhouette_score(x_scaled, result.labels_, metric="euclidean")
+# print("分", CLUSTERS, "群, 計算輪廓分數:", cc)
+print("計算輪廓分數:", cc)
+
+# Adjusted Rand index
+# http://scikit-learn.org/stable/modules/clustering.html#clustering
+
+cc = metrics.adjusted_rand_score(y, result.labels_)
+print(cc)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# chapter14_1 Hclus_FCA_city10.py
+
+# # 第十四讲 聚类
+
+# # 1、层次聚类
+
+# ### 第一步：手动测试主成分数量
+
+import pandas as pd
+
+model_data = pd.read_csv("data/cities_10.csv", encoding="gbk")
+model_data.head()
+
+data = model_data.loc[:, "X1":]
+data.head()
+
+# - 2、查看相关系数矩阵，判定做变量降维的必要性（非必须）
+
+corr_matrix = data.corr(method="pearson")
+# corr_matrix = corr_matrix.abs()
+corr_matrix
+
+# - 3、做主成分之前，进行中心标准化
+
+from sklearn import preprocessing
+
+data = preprocessing.scale(data)
+
+# - 4、使用sklearn的主成分分析，用于判断保留主成分的数量
+
+from sklearn.decomposition import PCA
+
+# 说明：1、第一次的n_components参数应该设的大一点
+# 说明：2、观察explained_variance_ratio_和explained_variance_的取值变化，建议explained_variance_ratio_累积大于0.85，explained_variance_需要保留的最后一个主成分大于0.8，
+
+pca = PCA(n_components=3)
+newData = pca.fit(data)
+print(pca.explained_variance_)
+print(pca.explained_variance_ratio_)
+
+# 第二步：根据主成分分析确定需要保留的主成分数量，进行因子分析
+
+# - 1、导入包，并对输入的数据进行主成分提取。为保险起见，data需要进行中心标准化
+
+from fa_kit import FactorAnalysis
+from fa_kit import plotting as fa_plotting
+
+fa = FactorAnalysis.load_data_samples(data, preproc_demean=True, preproc_scale=True)
+fa.extract_components()
+
+# - 2、设定提取主成分的方式。默认为“broken_stick”方法，建议使用“top_n”法
+
+fa.find_comps_to_retain(method="top_n", num_keep=2)
+
+# - 3、通过最大方差法进行因子旋转
+
+fa.rotate_components(method="varimax")
+fa_plotting.graph_summary(fa)
+
+# - 说明：可以通过第三张图观看每个因子在每个变量上的权重，权重越高，代表性越强
+
+# - 4、获取因子得分
+
+pd.DataFrame(fa.comps["rot"])
+
+import numpy as np
+
+fas = pd.DataFrame(fa.comps["rot"])
+data = pd.DataFrame(data)
+score = pd.DataFrame(np.dot(data, fas))
+
+# ### 第三步：根据因子得分进行数据分析
+
+a = score.rename(columns={0: "Gross", 1: "Avg"})
+citi10_fa = model_data.join(a)
+
+citi10_fa.to_csv("data/citi10_fa.csv")
+
+import matplotlib.pyplot as plt
+
+x = citi10_fa["Gross"]
+y = citi10_fa["Avg"]
+label = citi10_fa["AREA"]
+plt.scatter(x, y)
+for a, b, l in zip(x, y, label):
+    plt.text(a, b + 0.1, "%s." % l, ha="center", va="bottom", fontsize=14)
+
+plt.show()
+
+import scipy.cluster.hierarchy as sch
+
+# 1. 层次聚类
+# 生成点与点之间的距离矩阵,这里用的欧氏距离:
+disMat = sch.distance.pdist(citi10_fa[["Gross", "Avg"]], "euclidean")
+# 进行层次聚类:
+Z = sch.linkage(disMat, method="ward")
+# 将层级聚类结果以树状图表示出来并保存为plot_dendrogram.png
+P = sch.dendrogram(
+    Z, labels=["辽宁", "山东", "河北", "天津", "江苏", "上海", "浙江", "福建", "广东", "广西"]
+)
+# 存檔 plt.savefig('tmp_plot_dendrogram2.png')
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# chapter14_2 Kmeans_FA_bank.py
+
+# # 第十四讲-2 K-means聚类分析
+
+# ### 第一步：手动测试主成分数量
+
+model_data = pd.read_csv("data/profile_bank.csv")
+data = model_data.loc[:, "CNT_TBM":"CNT_CSC"]
+data.head()
+
+# - 2、查看相关系数矩阵，判定做变量降维的必要性（非必须）
+
+corr_matrix = data.corr(method="pearson")
+# corr_matrix = corr_matrix.abs()
+corr_matrix
+
+
+# - 3、做主成分之前，进行中心标准化
+
+# In[3]:
+
+
+from sklearn import preprocessing
+
+data = preprocessing.scale(data)
+
+
+# - 4、使用sklearn的主成分分析，用于判断保留主成分的数量
+
+
+from sklearn.decomposition import PCA
+
+# 说明：1、第一次的n_components参数应该设的大一点
+# 说明：2、观察explained_variance_ratio_和explained_variance_的取值变化，建议explained_variance_ratio_累积大于0.85，explained_variance_需要保留的最后一个主成分大于0.8，
+
+pca = PCA(n_components=3)
+newData = pca.fit(data)
+print(pca.explained_variance_)
+print(pca.explained_variance_ratio_)
+
+
+# 通过主成分在每个变量上的权重的绝对值大小，确定每个主成分的代表性
+
+pd.DataFrame(pca.components_).T
+
+
+# ### 第二步：根据主成分分析确定需要保留的主成分数量，进行因子分析
+
+# - 1、导入包，并对输入的数据进行主成分提取。为保险起见，data需要进行中心标准化
+
+# In[6]:
+
+
+from fa_kit import FactorAnalysis
+from fa_kit import plotting as fa_plotting
+
+fa = FactorAnalysis.load_data_samples(data, preproc_demean=True, preproc_scale=True)
+fa.extract_components()
+
+
+# - 2、设定提取主成分的方式。默认为“broken_stick”方法，建议使用“top_n”法
+
+# In[7]:
+
+
+fa.find_comps_to_retain(method="top_n", num_keep=3)
+
+
+# - 3、通过最大方差法进行因子旋转
+
+# In[8]:
+
+
+fa.rotate_components(method="varimax")
+fa_plotting.graph_summary(fa)
+
+
+# - 说明：可以通过第三张图观看每个因子在每个变量上的权重，权重越高，代表性越强
+
+# - 4、获取因子得分
+
+# In[12]:
+
+
+pd.DataFrame(fa.comps["rot"])
+
+
+# In[13]:
+
+
+import numpy as np
+
+fas = pd.DataFrame(fa.comps["rot"])
+data = pd.DataFrame(data)
+score = pd.DataFrame(np.dot(data, fas))
+
+
+# ### 第三步：根据因子得分进行数据分析
+
+# In[14]:
+
+
+fa_scores = score.rename(columns={0: "ATM_POS", 1: "TBM", 2: "CSC"})
+fa_scores.head()
+
+
+# ### 第四步：使用因子得分进行k-means聚类
+
+# ### 4.1 k-means聚类的第一种方式：不进行变量分布的正态转换--用于寻找异常值
+
+# - 1、查看变量的偏度
+
+# In[15]:
+
+
+var = ["ATM_POS", "TBM", "CSC"]
+skew_var = {}
+for i in var:
+    skew_var[i] = abs(fa_scores[i].skew())
+    skew = pd.Series(skew_var).sort_values(ascending=False)
+skew
+
+
+# - 2、进行k-means聚类
+
+# In[16]:
+
+
+from sklearn.cluster import KMeans
+
+kmeans = KMeans(n_clusters=3)  # MiniBatchKMeans()分批处理
+# kmeans = cluster.KMeans(n_clusters=3, init='random', n_init=1)
+result = kmeans.fit(fa_scores)
+# print(result)
+
+
+# - 3、对分类结果进行解读
+
+# In[17]:
+
+
+model_data_l = model_data.join(pd.DataFrame(result.labels_))
+model_data_l = model_data_l.rename(columns={0: "clustor"})
+model_data_l.head()
+
+
+import matplotlib
+
+# get_ipython().magic('matplotlib inline')
+model_data_l.clustor.value_counts().plot(kind="pie")
+plt.show()
+
+
+# ### 4.2 k-means聚类的第二种方式：进行变量分布的正态转换--用于客户细分
+
+# - 1、进行变量分布的正态转换
+
+# In[19]:
+
+
+import numpy as np
+from sklearn import preprocessing
+
+quantile_transformer = preprocessing.QuantileTransformer(
+    output_distribution="normal", random_state=0
+)
+fa_scores_trans = quantile_transformer.fit_transform(fa_scores)
+fa_scores_trans = pd.DataFrame(fa_scores_trans)
+fa_scores_trans = fa_scores_trans.rename(columns={0: "ATM_POS", 1: "TBM", 2: "CSC"})
+fa_scores_trans.head()
+
+
+# In[20]:
+
+
+var = ["ATM_POS", "TBM", "CSC"]
+skew_var = {}
+for i in var:
+    skew_var[i] = abs(fa_scores_trans[i].skew())
+    skew = pd.Series(skew_var).sort_values(ascending=False)
+skew
+
+
+# - 2、进行k-means聚类
+
+# In[21]:
+
+
+from sklearn.cluster import KMeans
+
+kmeans = KMeans(n_clusters=3)  # MiniBatchKMeans()分批处理
+# kmeans = cluster.KMeans(n_clusters=3, init='random', n_init=1)
+result = kmeans.fit(fa_scores_trans)
+# print(result)
+
+
+# - 3、对分类结果进行解读
+
+# In[22]:
+
+
+model_data_l = model_data.join(pd.DataFrame(result.labels_))
+model_data_l = model_data_l.rename(columns={0: "clustor"})
+model_data_l.head()
+
+
+# In[23]:
+
+
+import matplotlib
+
+# get_ipython().magic('matplotlib inline')
+model_data_l.clustor.value_counts().plot(kind="pie")
+plt.show()
+
+
+# In[31]:
+
+
+from sklearn import tree
+
+clf = tree.DecisionTreeClassifier(
+    criterion="gini",
+    max_depth=3,
+    min_samples_split=100,
+    min_samples_leaf=100,
+    random_state=12345,
+)  # 当前支持计算信息增益和GINI
+clf.fit(model_data, result.labels_)
+
+
+# In[48]:
+
+
+import pydotplus
+from IPython.display import Image  # 用IPython
+import sklearn.tree as tree
+
+dot_data = tree.export_graphviz(
+    clf,
+    out_file=None,
+    feature_names=model_data.columns,
+    class_names=["0", "1", "2"],
+    filled=True,
+)
+
+graph = pydotplus.graph_from_dot_data(dot_data)
+# Image(graph.create_png())   # 用IPython顯示圖片
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
@@ -4327,6 +5481,6 @@ os.chdir(r"C:\_git\vcs\_4.python\__code\一書貫通-從資料科學橫入人工
 os.chdir(r"D:\Python_book\11KNNNB")
 
 
+pd.set_option("display.max_columns", None)
+
 # In[147]:
-
-

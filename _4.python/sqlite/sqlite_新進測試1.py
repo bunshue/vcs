@@ -4,10 +4,14 @@
 
 """
 
+import sqlite3
+import csv
+import time
+import datetime
+import matplotlib.pyplot as plt
+
 print("------------------------------------------------------------")  # 60個
 print("準備工作")
-
-import sqlite3
 
 
 def show_data_base_contents(db_filename, table_name, length):
@@ -88,9 +92,6 @@ show_data_base_contents_all(db_filename, table_name)
 print("------------------------------------------------------------")  # 60個
 print("新進測試")
 
-import sqlite3
-import datetime
-
 db_filename = "sssss4.sqlite"
 
 print("建立資料庫連線, 資料庫 : " + db_filename)
@@ -157,9 +158,6 @@ conn.close()  # 關閉資料庫連線
 print("------------------------------------------------------------")  # 60個
 print("一次寫入多行的語法 executescript")
 
-import sqlite3
-import datetime
-
 db_filename = "sssss4_many1.sqlite"
 
 print("建立資料庫連線, 資料庫 : " + db_filename)
@@ -189,8 +187,6 @@ show_data_base_contents_all(db_filename, table_name)
 print("------------------------------------------------------------")  # 60個
 print("一次寫入多行的語法 executescript")
 
-import sqlite3
-
 con = sqlite3.connect(":memory:")
 cur = con.cursor()
 cur.executescript(
@@ -219,8 +215,6 @@ cur.executescript(
 print("------------------------------------------------------------")  # 60個
 print("xxxxx")
 
-import sqlite3
-
 con = sqlite3.connect(":memory:")
 cur = con.cursor()
 cur.execute("CREATE TABLE people (name_last, age)")
@@ -246,9 +240,6 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 print("準備工作")
-
-import sqlite3
-import time
 
 
 def show_data_base_contents(db_filename, table_name, length):
@@ -352,8 +343,6 @@ show_data_base_contents_all(db_filename, table_name)
 
 print("------------------------------------------------------------")  # 60個
 print("測 executemany")
-
-import sqlite3
 
 stocks = [
     ("2006-01-05", "BUY", "RHAT", 100, 35.14),
@@ -485,9 +474,6 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 print("準備工作")
-
-import sqlite3
-import time
 
 
 def show_data_base_contents(db_filename, table_name, length):
@@ -662,7 +648,6 @@ sql = """Create table student2(
 print("------------------------------------------------------------")  # 60個
 
 """ INSERT
-import sqlite3
 conn = sqlite3.connect("myInfo.db")     # 資料庫連線
 print("請輸入myInfo資料庫students表單資料")
 while True:
@@ -682,7 +667,6 @@ conn.close()                            # 關閉資料庫連線
 print("------------------------------------------------------------")  # 60個
 
 # INSERT
-import sqlite3
 
 conn = sqlite3.connect("myInfo2.db")  # 資料庫連線
 
@@ -697,8 +681,6 @@ conn.close()  # 關閉資料庫連線
 
 print("------------------------------------------------------------")  # 60個
 
-import sqlite3
-
 conn = sqlite3.connect("myInfo.db")  # 資料庫連線
 results = conn.execute("SELECT * from students")
 for record in results:
@@ -708,8 +690,6 @@ for record in results:
 conn.close()  # 關閉資料庫連線
 
 print("------------------------------------------------------------")  # 60個
-
-import sqlite3
 
 conn = sqlite3.connect("myInfo2.db")  # 資料庫連線
 results = conn.execute("SELECT * from student2")
@@ -721,8 +701,6 @@ conn.close()  # 關閉資料庫連線
 
 print("------------------------------------------------------------")  # 60個
 
-import sqlite3
-
 conn = sqlite3.connect("myInfo.db")  # 資料庫連線
 results = conn.execute("SELECT * from students")
 allstudents = results.fetchall()  # 結果轉成元素是元組的串列
@@ -732,8 +710,6 @@ conn.close()  # 關閉資料庫連線
 
 print("------------------------------------------------------------")  # 60個
 
-import sqlite3
-
 conn = sqlite3.connect("myInfo.db")  # 資料庫連線
 results = conn.execute("SELECT name from students")
 allstudents = results.fetchall()  # 結果轉成元素是元組的串列
@@ -742,8 +718,6 @@ for student in allstudents:
 conn.close()  # 關閉資料庫連線
 
 print("------------------------------------------------------------")  # 60個
-
-import sqlite3
 
 conn = sqlite3.connect("myInfo.db")  # 資料庫連線
 sql = '''SELECT name, gender
@@ -756,8 +730,6 @@ for student in allstudents:
 conn.close()  # 關閉資料庫連線
 
 print("------------------------------------------------------------")  # 60個
-
-import sqlite3
 
 conn = sqlite3.connect("myInfo.db")  # 資料庫連線
 sql = """UPDATE students
@@ -773,8 +745,6 @@ conn.close()  # 關閉資料庫連線
 
 print("------------------------------------------------------------")  # 60個
 
-import sqlite3
-
 conn = sqlite3.connect("myInfo.db")  # 資料庫連線
 sql = """DELETE
         from students
@@ -788,11 +758,6 @@ for student in allstudents:
 conn.close()  # 關閉資料庫連線
 
 print("------------------------------------------------------------")  # 60個
-
-import csv
-import time
-import sqlite3
-import matplotlib.pyplot as plt
 
 db_filename = "tmp_" + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + ".sqlite"
 
@@ -830,11 +795,6 @@ conn.close()  # 關閉資料庫連線
 
 print("------------------------------------------------------------")  # 60個
 
-
-import sqlite3
-import matplotlib.pyplot as plt
-from pylab import mpl
-
 conn = sqlite3.connect(db_filename)  # 資料庫連線
 results = conn.execute("SELECT * from population")
 
@@ -846,7 +806,6 @@ for record in results:  # 將人口資料放入串列
     total.append(record[3])
 conn.close()  # 關閉資料庫連線
 
-mpl.rcParams["font.sans-serif"] = ["SimHei"]  # 使用黑體
 seq = area
 (linemale,) = plt.plot(seq, male, "-*", label="男性人口數")
 (linefemale,) = plt.plot(seq, female, "-o", label="女性人口數")
@@ -858,11 +817,7 @@ plt.xlabel("2019年", fontsize=14)
 plt.ylabel("人口數", fontsize=14)
 plt.show()
 
-
 print("------------------------------------------------------------")  # 60個
-
-
-import sqlite3
 
 try:
     # 嘗試連接到資料庫
@@ -881,8 +836,6 @@ finally:
     conn.close()
 
 print("------------------------------------------------------------")  # 60個
-
-import sqlite3
 
 conn = sqlite3.connect("data29_1.db")  # 資料庫連線
 sql = '''SELECT name, tel
@@ -906,10 +859,6 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\sqlite\sqlite_新進測試6.py
-
-import sqlite3  # 匯入sqlite3模組
 
 con = sqlite3.connect("python.sqlite")  # 連線到資料庫
 cur = con.cursor()  # 獲得資料庫游標
@@ -937,3 +886,6 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+
+# 檔案 : C:\_git\vcs\_4.python\sqlite\sqlite_新進測試6.py
+
