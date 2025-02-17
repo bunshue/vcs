@@ -3205,8 +3205,9 @@ RFM["R_score"] = pd.cut(RFM.R_max, 3, labels=[1, 2, 3], precision=2)
 RFM["F_score"] = pd.cut(RFM.F_total, 3, labels=[1, 2, 3], precision=2)
 RFM["M_score"] = pd.cut(RFM.M_total, 3, labels=[1, 2, 3], precision=2)
 
-print('依據 R_score F_score M_score 三欄位, 建立 Label 欄位')
-      
+print("依據 R_score F_score M_score 三欄位, 建立 Label 欄位")
+
+
 # RFM各三类，总共有27种组合，为方便营销简化分类为8种
 def score_label(a, b, c):
     """
@@ -3233,7 +3234,7 @@ def score_label(a, b, c):
 
 
 cc = RFM.head()
-print("貼標籤前 :\n",cc,sep="")
+print("貼標籤前 :\n", cc, sep="")
 
 # 为每个购物ID贴标签
 RFM["Label"] = RFM[["R_score", "F_score", "M_score"]].apply(
@@ -3241,7 +3242,7 @@ RFM["Label"] = RFM[["R_score", "F_score", "M_score"]].apply(
 )
 
 cc = RFM.head()
-print("貼標籤後 :\n",cc,sep="")
+print("貼標籤後 :\n", cc, sep="")
 
 # '重要价值客户'：消费额度高，购物频率高，最近购物时间也较近——该类客户是重要且忠实的大客户，要细心维护。
 # '重要发展客户'：消费额度高，购物频率不高，最近购物时间较近——该类客户只是购物频率不高，有巨大的挖掘潜力，可根据该客户以往购物信息，进行个性
@@ -3285,7 +3286,7 @@ from scipy import stats
 sns.histplot(house_price_gr.rate, kde=True)  # Histograph
 
 fig = sm.qqplot(house_price_gr.rate, fit=True, line="45")
-#fig.show()
+# fig.show()
 
 house_price_gr.plot(kind="box")  # Box Plots
 
@@ -5338,8 +5339,8 @@ pd.set_option("display.max_columns", None)
 
 # 查看一下关键字有哪些，避免关键字做自定义标识符
 import keyword
-print(keyword.kwlist)
 
+print(keyword.kwlist)
 
 
 # .ix改 .loc

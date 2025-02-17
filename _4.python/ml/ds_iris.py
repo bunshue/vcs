@@ -1258,7 +1258,9 @@ pairplot:pair是成對的意思，即是說這個用來展現變量兩兩之間�
 """
 
 # sns設定字型
-sns.set_style('white',{'font.sans-serif':['Microsoft JhengHei','Arial']})  #解決中文不能顯示問題
+sns.set_style(
+    "white", {"font.sans-serif": ["Microsoft JhengHei", "Arial"]}
+)  # 解決中文不能顯示問題
 
 iris = datasets.load_iris()
 X = iris.data
