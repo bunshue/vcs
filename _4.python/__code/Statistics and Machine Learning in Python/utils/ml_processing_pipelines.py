@@ -1,17 +1,8 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Mon Apr 11 15:40:35 2016
-
-@author: edoaurd.duchesnay@cea.fr
-"""
 from sklearn import preprocessing
 preprocessing.OneHotEncoder
 
+#Regression pipelines
 
-'''
-Regression pipelines
-====================
-'''
 import numpy as np
 from sklearn import datasets
 import sklearn.linear_model as lm
@@ -20,7 +11,7 @@ from sklearn.model_selection import cross_val_score
 from sklearn.feature_selection import SelectKBest
 from sklearn.feature_selection import f_regression
 from sklearn.pipeline import Pipeline
-from sklearn.grid_search import GridSearchCV
+from sklearn.model_selection GridSearchCV
 import sklearn.metrics as metrics
 
 # Datasets
@@ -103,10 +94,8 @@ enet_cv = Pipeline([
 %time scores = cross_val_score(estimator=enet_cv, X=X, y=y, cv=5)
 print("Test r2:%.2f" % scores.mean())
 
-'''
-Classification pipelines
-========================
-'''
+#Classification pipelines
+
 import numpy as np
 from sklearn import datasets
 import sklearn.linear_model as lm
@@ -115,7 +104,7 @@ from sklearn.model_selection import cross_val_score
 from sklearn.feature_selection import SelectKBest
 from sklearn.feature_selection import f_classif
 from sklearn.pipeline import Pipeline
-from sklearn.grid_search import GridSearchCV
+from sklearn.model_selection GridSearchCV
 import sklearn.metrics as metrics
 
 # Datasets

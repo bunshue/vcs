@@ -81,8 +81,10 @@ class WoE:
         df_cont, c_bins = self._cont_labels(df_cont)
         df_sp_values, d_bins = self._disc_labels(df_sp_values)
         # getting continuous and discrete values together
-        self.df = df_sp_values.append(df_cont)
-        self.bins = d_bins.append(c_bins)
+        # self.df = df_sp_values.append(df_cont)
+        self.df = pd.concat([df_sp_values, df_cont], axis=0, ignore_index=True)
+        # self.bins = d_bins.append(c_bins)
+        self.bins = pd.concat([d_bins, c_bins], axis=0, ignore_index=True)
         # calculating woe and other statistics
         self._calc_stat()
         # sorting appropriately for further cutting in transform method
@@ -195,7 +197,8 @@ class WoE:
             cuts = pd.cut(df_cont['X'], bins=np.append(c_bins["bins"], (float("inf"), )), labels=c_bins["labels"])
             df_cont['labels'] = cuts.astype(str)
         # Joining continuous and discrete parts
-        df = df_sp_values.append(df_cont)
+        # df = df_sp_values.append(df_cont)
+        df = pd.concat([df_sp_values, df_cont], axis=0, ignore_index=True)
         # assigning woe
         df = pd.merge(df, self.bins[['woe', 'labels']], left_on=['labels'], right_on=['labels'])
         # returning to original observation order
@@ -225,14 +228,14 @@ class WoE:
         new_woe = WoE(self.__qnt_num, self._min_block_size, spec_values, self.type, c_bins['bins'], self.t_type)
         return new_woe.fit(self.df['X'], self.df['Y'])
 
-    def plot(self,figsize):
+    def plot(self):
         """
         Plot WoE transformation and default rates
         :return: plotting object
         """
         index = np.arange(self.bins.shape[0])
         bar_width = 0.8
-        woe_fig = plt.figure(figsize = figsize)
+        woe_fig = plt.figure(figsize = [16,8])
         plt.title('Number of Observations and WoE per bucket')
         ax = woe_fig.add_subplot(111)
         ax.set_ylabel('Observations')
@@ -335,6 +338,6 @@ if __name__ == "__main__":
     print(woe4.bins)
     # Plot and show WoE graph
     fig = woe.plot()
-    plt.show(fig)
+    plt.show()
     fig = woe2.plot()
-    plt.show(fig)
+    plt.show()

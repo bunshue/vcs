@@ -6,6 +6,7 @@ import sys
 import time
 import math
 import random
+import datetime
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -21,11 +22,24 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
+from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
+
+import ssl
+
+ssl._create_default_https_context = ssl._create_stdlib_context
+
+import warnings
+
+warnings.filterwarnings("once")
+
+print("------------------------------------------------------------")  # 60個
+
 import sklearn.metrics as metrics
+import statsmodels.api as sm
 
 
 def show():
-    plt.show()
+    # plt.show()
     pass
 
 
@@ -40,8 +54,6 @@ type(now)
 
 cc = time.strftime("%Y-%m-%d", now)
 print(cc)
-
-import datetime
 
 someDay = datetime.date(1999, 2, 10)
 anotherDay = datetime.date(1999, 2, 15)
@@ -212,14 +224,7 @@ xls = pd.read_excel("data/hsb2.xlsx")
 cc = xls.head()
 print(cc)
 
-# 写入文件
-xls.to_csv("tmp_copyofhsb2.csv")
-
-
-# 查看一下关键字有哪些，避免关键字做自定义标识符
-import keyword
-
-print(keyword.kwlist)
+# df存檔  xls.to_csv("tmp_copyofhsb2.csv")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -366,7 +371,6 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-import statsmodels.api as sm
 from statsmodels.formula.api import ols
 
 # 导入数据和数据清洗
@@ -742,10 +746,9 @@ print("The best alpha is {}".format(encv.alpha_))
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
+
 # 线性回归
 
-import statsmodels.api as sm
 from statsmodels.formula.api import ols
 
 """
@@ -815,7 +818,7 @@ show()
 
 cc = arpu_known.corr(method="pearson")
 print(cc)
-
+"""
 # 简单线性回归
 
 lm_s = ols("ARPU ~ AvgARPU", data=arpu_known).fit()
@@ -1008,23 +1011,36 @@ X_new = arpu_unknown[continuous_X].join(
 
 cc = rcv.predict(X_new)[:5]  # 預測.predict
 print(cc)
+"""
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+from sklearn.model_selection import KFold
+X = np.array([[1, 2], [3, 4], [1, 2], [3, 4]])
+y = np.array([1, 2, 3, 4])
+
+kf = KFold(n_splits=2)
+kf.get_n_splits(X)
+print(kf)
+for train_index, test_index in kf.split(X):
+    print("TRAIN:", train_index, "TEST:", test_index)
+    X_train, X_test = X[train_index], X[test_index]
+    y_train, y_test = y[train_index], y[test_index]
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 第11讲 分类器
-# KNN
+# 第11讲 分类器 KNN
 
 from scipy import stats
-import sklearn.model_selection as cross_validation
 
-orgData = pd.read_csv("date_data2.csv")
+orgData = pd.read_csv("data/date_data2.csv")
 cc = orgData.describe()
 print(cc)
 
 # 选取自变量
 
-X = orgData.ix[:, :4]  # .ix改 .loc
+X = orgData.iloc[:, :4]
 Y = orgData[["Dated"]]
 X.head()
 
@@ -1037,11 +1053,8 @@ X_scaled = min_max_scaler.fit_transform(X)
 cc = X_scaled[1:5]
 print(cc)
 
-# 划分训练集和测试集
-
-train_data, test_data, train_target, test_target = cross_validation.train_test_split(
-    X_scaled, Y, test_size=0.2, train_size=0.8, random_state=123
-)  # 划分训练集和测试集
+# 資料分割
+train_data, test_data, train_target, test_target = train_test_split(X_scaled, Y, test_size=0.2)
 
 # 建模
 
@@ -1067,13 +1080,13 @@ for k in range(1, 15):
 
 # 交叉验证选择k值
 
-# 應該也是改成 sklearn.model_selection
-from sklearn.grid_search import ParameterGrid
-from sklearn.grid_search import GridSearchCV
+from sklearn.model_selection import ParameterGrid
+from sklearn.model_selection import GridSearchCV
 from sklearn.model_selection import KFold
-
+"""
 n_samples = len(train_data)
-kf = KFold(n=n_samples, n_folds=3)
+#KFold(n_splits=5, *, shuffle=False, random_state=None)
+kf = KFold(n=n_samples, n_folds=3) # 參數錯誤
 grid = ParameterGrid({"n_neighbors": [range(1, 15)]})
 estimator = KNeighborsClassifier()
 gridSearchCV = GridSearchCV(estimator, grid, cv=kf)
@@ -1092,22 +1105,15 @@ best.score(test_data, test_target)
 cc = orgData.head()
 print(cc)
 
-orgData1 = orgData.ix[:, -3:]  # .ix改 .loc
+orgData1 = orgData.ix[:, -3:]
 
 orgData1.income_rank = orgData1.income_rank.astype("category")
 orgData1.describe(include="all")
 
-(
-    train_data1,
-    test_data1,
-    train_target1,
-    test_target1,
-) = cross_validation.train_test_split(
-    orgData1, Y, test_size=0.3, train_size=0.7, random_state=123
-)
+# 資料分割
+train_data1, test_data1, train_target1, test_target1 = train_test_split(orgData1, Y, test_size=0.2)
 
 # 建模
-
 from sklearn.naive_bayes import BernoulliNB
 
 NB = BernoulliNB(alpha=1)
@@ -1119,31 +1125,23 @@ test_est1 = NB.predict(test_data1)  # 預測.predict
 print(metrics.classification_report(test_target1, test_est1))
 
 NB.score(train_data1, train_target1)
-
+"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-import sklearn.model_selection as cross_validation
-
-orgData = pd.read_csv("date_data2.csv")
+orgData = pd.read_csv("data/date_data2.csv")
 # # 朴素贝叶斯
 
 orgData.head()
 
 Y = orgData[["Dated"]]
-orgData1 = orgData.ix[:, -3:]  # .ix改 .loc
+orgData1 = orgData.iloc[:, -3:]
 
 orgData1.income_rank = orgData1.income_rank.astype("category")
 orgData1.describe(include="all")
 
-(
-    train_data1,
-    test_data1,
-    train_target1,
-    test_target1,
-) = cross_validation.train_test_split(
-    orgData1, Y, test_size=0.3, train_size=0.7, random_state=123
-)
+# 資料分割
+train_data1, test_data1, train_target1, test_target1 = train_test_split(orgData1, Y, test_size=0.2)
 
 # 建模
 
@@ -1162,22 +1160,18 @@ print("------------------------------------------------------------")  # 60個
 # 第12讲 高级分类器：支持向量机( SVM)与凸优化
 
 from scipy import stats
-import sklearn.model_selection as cross_validation
 
-orgData = pd.read_csv("date_data2.csv")
+orgData = pd.read_csv("data/date_data2.csv")
 cc = orgData.describe()
 print(cc)
 
 # 提取如下字段进行建模
 
-X = orgData.ix[:, :4]  # .ix改 .loc
+X = orgData.iloc[:, :4]
 Y = orgData["Dated"]
 
-# 构建训练集和测试集
-
-train_data, test_data, train_target, test_target = cross_validation.train_test_split(
-    X, Y, test_size=0.4, train_size=0.6, random_state=123
-)  # 划分训练集和测试集
+# 資料分割
+train_data, test_data, train_target, test_target = train_test_split(X, Y, test_size=0.2)
 
 # 使用svm，建立支持向量机模型
 
@@ -1207,12 +1201,13 @@ print(metrics.classification_report(test_target, test_est1))  # 计算评估指�
 
 # 选择最优模型
 
-from sklearn.grid_search import ParameterGrid, GridSearchCV
+from sklearn.model_selection import ParameterGrid
+from sklearn.model_selection import GridSearchCV
 
 kernel = ("linear", "rbf")
 gamma = np.arange(0.01, 1, 0.1)
-C = np.arange(0.01, 1.0, 0.1)
-grid = {"gamma": gamma, "C": C}
+CCC = np.arange(0.01, 1.0, 0.1)
+grid = {"gamma": gamma, "C": CCC}
 
 clf_search = GridSearchCV(estimator=svcModel1, param_grid=grid, cv=4)
 clf_search.fit(train_scaled, train_target)
@@ -1228,11 +1223,11 @@ best_model
 train_x = train_scaled[:, 1:3]
 train_y = train_target.values
 h = 1.0  # step size in the mesh
-C = 1.0  # SVM regularization parameter
-svc = svm.SVC(kernel="linear", C=C).fit(train_x, train_y)
+CCC = 1.0  # SVM regularization parameter
+svc = svm.SVC(kernel="linear", C=CCC).fit(train_x, train_y)
 rbf_svc = svm.SVC(kernel="rbf", gamma=0.5, C=1).fit(train_x, train_y)
-poly_svc = svm.SVC(kernel="poly", degree=3, C=C).fit(train_x, train_y)
-lin_svc = svm.LinearSVC(C=C).fit(train_x, train_y)
+poly_svc = svm.SVC(kernel="poly", degree=3, C=CCC).fit(train_x, train_y)
+lin_svc = svm.LinearSVC(C=CCC).fit(train_x, train_y)
 
 # create a mesh to plot in
 x_min, x_max = train_x[:, 0].min() - 1, train_x[:, 0].max() + 1
@@ -1272,9 +1267,6 @@ for i, clf in enumerate((svc, lin_svc, rbf_svc, poly_svc)):
 show()
 
 print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
 
 """
@@ -1472,11 +1464,6 @@ def stack2dim(raw, i, j, rotation=0, location="upper right"):
     rotation：水平标签旋转角度，默认水平方向，如标签过长，可设置一定角度，比如设置rotation = 40
     location：分类标签的位置，如果被主体图形挡住，可更改为'upper left'
     """
-    import matplotlib.pyplot as plt
-    import pandas as pd
-    import numpy as np
-    import math
-
     data_raw = pd.crosstab(raw[i], raw[j])
     data = data_raw.div(data_raw.sum(1), axis=0)  # 交叉表转换成比率，为得到标准化堆积柱状图
 
@@ -2212,9 +2199,7 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
 import sqlite3
-
 print("------------------------------------------------------------")  # 60個
 
 # 数据整合和数据清洗
@@ -2460,16 +2445,14 @@ sample
 
 sample["a"]
 
-sample.ix[:, "a"]  # .ix改 .loc
+sample.loc[:, "a"]
 
 sample[["a"]]
 
 # 2. 选择多行和多列
-
-sample.ix[0:2, 0:2]  # .ix改 .loc
+sample.iloc[0:2, 0:2]
 
 # 3. 创建、删除列
-
 sample["new_col1"] = sample["a"] - sample["b"]
 sample
 
@@ -2518,100 +2501,57 @@ sample[(sample.score > 70) & (sample.group == 1)]
 
 # 3. 使用query
 
-# In[33]:
-
 # sample.query('score > 90')
 sample.query("(group ==2) |(group == 1)")
 
-
 # 4. 其他
 
-# In[34]:
-
-sample[sample["score"].between(70, 80, inclusive=True)]
-
-
-# In[35]:
+# NG
+# sample[sample["score"].between(70, 80, inclusive=True)]
 
 sample[sample["name"].isin(["Bob", "Lindy"])]
 
-
-# In[36]:
-
 sample[sample["name"].str.contains("[M]+")]
 
-
 # 横向连接
-
-# In[37]:
 
 df1 = pd.DataFrame({"id": [1, 2, 3], "col1": ["a", "b", "c"]})
 df2 = pd.DataFrame({"id": [4, 3], "col2": ["d", "e"]})
 
-
 # 1. 内连接
-
-# In[38]:
 
 df1.merge(df2, how="inner", left_on="id", right_on="id")
 
-
 # 2. 外连接
-
-# In[40]:
 
 df1.merge(df2, how="left", on="id")
 
-
 # 3. 行索引连接
-
-# In[41]:
 
 df1 = pd.DataFrame({"id1": [1, 2, 3], "col1": ["a", "b", "c"]}, index=[1, 2, 3])
 df2 = pd.DataFrame({"id2": [1, 2, 3], "col2": ["aa", "bb", "cc"]}, index=[1, 3, 2])
 
-
-# In[42]:
-
 pd.concat([df1, df2], axis=1)
 # df1.join(df2)
 
-
 # 纵向合并
-
-# In[43]:
 
 df1 = pd.DataFrame(
     {"id": [1, 1, 1, 2, 3, 4, 6], "col": ["a", "a", "b", "c", "v", "e", "q"]}
 )
 df2 = pd.DataFrame({"id": [1, 2, 3, 3, 5], "col": ["x", "y", "z", "v", "w"]})
 
-
-# In[44]:
-
 pd.concat([df1, df2], ignore_index=True, axis=0)
-
-
-# In[45]:
 
 pd.concat([df1, df2], ignore_index=True).drop_duplicates()
 
-
-# In[46]:
-
 df3 = df1.rename(columns={"col": "new_col"})
 
-
-# In[47]:
-
 pd.concat([df1, df3], ignore_index=True).drop_duplicates()
-
 
 # 排序
 
 # 1. 排序
-
-# In[50]:
 
 sample = pd.DataFrame(
     {
@@ -2620,9 +2560,6 @@ sample = pd.DataFrame(
         "group": [1, 1, 1, 2, 1, 2],
     }
 )
-
-
-# In[51]:
 
 sample
 
@@ -2639,17 +2576,14 @@ sample.groupby("class")[["math"]].max()
 
 sample.groupby(["grade", "class"])[["math"]].mean()
 
-sample.groupby(["grade"])["math", "chinese"].mean()
+# NG sample.groupby(["grade"])["math", "chinese"].mean()
 
 sample.groupby("class")["math"].agg(["mean", "min", "max"])
 
-df = sample.groupby(["grade", "class"])["math", "chinese"].agg(["min", "max"])
-df
-
+# NG df = sample.groupby(["grade", "class"])["math", "chinese"].agg(["min", "max"])
+# df
 
 # 拆分、堆叠列
-
-# In[19]:
 
 table = pd.DataFrame(
     {
@@ -2659,13 +2593,7 @@ table = pd.DataFrame(
     }
 )
 
-
-# In[24]:
-
 pd.pivot_table(table, index="cust_id", columns="type", values="Monetary")
-
-
-# In[25]:
 
 pd.pivot_table(
     table,
@@ -2675,9 +2603,6 @@ pd.pivot_table(
     fill_value=0,
     aggfunc="sum",
 )
-
-
-# In[27]:
 
 table1 = pd.pivot_table(
     table,
@@ -2689,9 +2614,6 @@ table1 = pd.pivot_table(
 ).reset_index()
 table1
 
-
-# In[28]:
-
 pd.melt(
     table1,
     id_vars="cust_id",
@@ -2700,12 +2622,9 @@ pd.melt(
     var_name="TYPE",
 )
 
-
 # 赋值与条件赋值
 
 # 1. 赋值
-
-# In[29]:
 
 sample = pd.DataFrame(
     {
@@ -2715,20 +2634,11 @@ sample = pd.DataFrame(
     }
 )
 
-
-# In[30]:
-
 sample.score.replace(999, np.nan)
-
-
-# In[32]:
 
 sample.replace({"score": {999: np.nan}, "name": {"Bob": np.nan}})
 
-
 # 2. 条件赋值
-
-# In[33]:
 
 
 def transform(row):
@@ -2867,11 +2777,13 @@ camp.head()
 
 # 脏数据或数据不正确
 
-plt.hist(camp["AvgIncome"], bins=20, normed=True)  # 查看分布情况  # normed 改成 density
+plt.hist(camp["AvgIncome"], bins=20, density=True)  # 查看分布情况
 camp["AvgIncome"].describe(include="all")
+show()
 
-plt.hist(camp["AvgHomeValue"], bins=20, normed=True)  # 查看分布情况  # normed 改成 density
+plt.hist(camp["AvgHomeValue"], bins=20, density=True)  # 查看分布情况
 camp["AvgHomeValue"].describe(include="all")
+show()
 
 # 这里的0值应该是缺失值
 camp["AvgIncome"] = camp["AvgIncome"].replace({0: np.NaN})
@@ -2879,18 +2791,21 @@ camp["AvgIncome"] = camp["AvgIncome"].replace({0: np.NaN})
 plt.hist(
     camp["AvgIncome"],
     bins=20,
-    normed=True,
+    density=True,
     range=(camp.AvgIncome.min(), camp.AvgIncome.max()),
 )  # 由于数据中存在缺失值,需要指定绘图的值域
+
 camp["AvgIncome"].describe(include="all")
 
 camp["AvgHomeValue"] = camp["AvgHomeValue"].replace({0: np.NaN})
+
 plt.hist(
     camp["AvgHomeValue"],
     bins=20,
-    normed=True,
+    density=True,
     range=(camp.AvgHomeValue.min(), camp.AvgHomeValue.max()),
 )  # 由于数据中存在缺失值,需要指定绘图的值域
+
 camp["AvgHomeValue"].describe(include="all")
 
 # 数据不一致-
@@ -2966,7 +2881,7 @@ camp.Age_group1.head()
 camp["Age_group2"] = pd.cut(camp["Age"], 4)  # 这里以age_oldest_tr字段等宽分为4段
 camp.Age_group2.head()
 
-# 存檔 camp.to_csv("tmp_tele_camp_ok.csv")
+# df存檔 camp.to_csv("tmp_tele_camp_ok.csv")
 
 print("------------------------------------------------------------")  # 60個
 # reshape
@@ -3175,7 +3090,7 @@ def get_sample(df, sampling="simple_random", k=1, stratified_col=None):
                     df1 = df1[df1[stratified_col[i]] == df_idx[i]]
             idx = random.sample(range(len(df1)), group_k[df_idx])
             group_df = df1.iloc[idx, :].copy()
-            res_df = res_df.append(group_df)
+            res_df = pd.concat([res_df, group_df], axis=0, ignore_index=True)
         return res_df
 
     else:
@@ -3204,12 +3119,8 @@ strp = get_sample(clients, sampling="stratified", k=0.1, stratified_col=["distri
 sysn = get_sample(clients, sampling="systematic", k=4, stratified_col=None)
 # %%系统抽样-按百分比取
 sysp = get_sample(clients, sampling="systematic", k=0.1, stratified_col=None)
-# %%
 
-
-# %%
-
-
+'''
 print("------------------------------------------------------------")  # 60個
 # RFM2
 print("------------------------------------------------------------")  # 60個
@@ -3294,7 +3205,8 @@ RFM["R_score"] = pd.cut(RFM.R_max, 3, labels=[1, 2, 3], precision=2)
 RFM["F_score"] = pd.cut(RFM.F_total, 3, labels=[1, 2, 3], precision=2)
 RFM["M_score"] = pd.cut(RFM.M_total, 3, labels=[1, 2, 3], precision=2)
 
-
+print('依據 R_score F_score M_score 三欄位, 建立 Label 欄位')
+      
 # RFM各三类，总共有27种组合，为方便营销简化分类为8种
 def score_label(a, b, c):
     """
@@ -3320,12 +3232,16 @@ def score_label(a, b, c):
         return "一般挽留客户"
 
 
+cc = RFM.head()
+print("貼標籤前 :\n",cc,sep="")
+
 # 为每个购物ID贴标签
 RFM["Label"] = RFM[["R_score", "F_score", "M_score"]].apply(
     lambda x: score_label(x[0], x[1], x[2]), axis=1
 )
 
-RFM.head()
+cc = RFM.head()
+print("貼標籤後 :\n",cc,sep="")
 
 # '重要价值客户'：消费额度高，购物频率高，最近购物时间也较近——该类客户是重要且忠实的大客户，要细心维护。
 # '重要发展客户'：消费额度高，购物频率不高，最近购物时间较近——该类客户只是购物频率不高，有巨大的挖掘潜力，可根据该客户以往购物信息，进行个性
@@ -3342,11 +3258,6 @@ RFM.head()
 # '一般挽留客户'：消费额度不高，购物频率不高，最近购物时间也较远——该类客户不是我们的目标客户，经费有限可忽略此类客户。
 
 print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
 print("------------------------------------------------------------")  # 60個
 
 """
@@ -3372,18 +3283,11 @@ print(cc)
 from scipy import stats
 
 sns.histplot(house_price_gr.rate, kde=True)  # Histograph
-show()
-
-import statsmodels.api as sm
-from matplotlib import pyplot as plt
 
 fig = sm.qqplot(house_price_gr.rate, fit=True, line="45")
-fig.show()
-show()
-
+#fig.show()
 
 house_price_gr.plot(kind="box")  # Box Plots
-show()
 
 # 置信度区间估计
 
@@ -3407,7 +3311,6 @@ confint(house_price_gr.rate, 0.05)
 # 或者使用DescrStatsW
 d1 = sm.stats.DescrStatsW(house_price_gr.rate)
 d1.tconfint_mean(0.05)  #
-
 
 # 6.2 假设检验与单样本T检验
 # 当年住宅价格的增长率是否超过了10%的阈值
@@ -3466,7 +3369,6 @@ pd.set_option("display.max_columns", None)  # 设置显示所有列
 camp.groupby("Class")[["PromCnt12"]].describe().T
 
 # 利用回归模型中的方差分析
-import statsmodels.api as sm
 from statsmodels.formula.api import ols
 
 sm.stats.anova_lm(ols("PromCnt12 ~ C(Class)", data=camp).fit())
@@ -3474,7 +3376,7 @@ sm.stats.anova_lm(ols("PromCnt12 ~ C(Class)", data=camp).fit())
 # 多因素方差分析
 
 # NG
-# NG sm.stats.anova_lm(ols('PromCnt12 ~ C(Class)+C(Age_group1)',data=camp).fit())
+# sm.stats.anova_lm(ols('PromCnt12 ~ C(Class)+C(Age_group1)',data=camp).fit())
 
 # 6.5 相关分析
 
@@ -3532,17 +3434,10 @@ from scipy import stats
 sns.histplot(house_price_gr.rate, kde=True)  # Histograph
 show()
 
-
 # Q-Q
 
-# In[4]:
-
-import statsmodels.api as sm
-from matplotlib import pyplot as plt
-
 fig = sm.qqplot(house_price_gr.rate, fit=True, line="45")
-fig.show()
-
+# fig.show()
 
 # Box Plots
 
@@ -3648,16 +3543,10 @@ stats.stats.ttest_ind(Suc0, Suc1, equal_var=False)
 # ## 6.4 方差分析
 # 单因素方差分析
 
-# In[14]:
-
 pd.set_option("display.max_columns", None)  # 设置显示所有列
 creditcard.groupby("edu_class")[["avg_exp"]].describe().T
 
-
-# In[15]:
-
 # 利用回归模型中的方差分析
-import statsmodels.api as sm
 from statsmodels.formula.api import ols
 
 sm.stats.anova_lm(ols("avg_exp ~ C(edu_class)", data=creditcard).fit())
@@ -3683,7 +3572,6 @@ creditcard.plot(x="Income", y="avg_exp", kind="scatter")
 # %%
 creditcard.plot(x="Income", y="avg_exp_ln", kind="scatter")
 # 相关性分析:“spearman”,“pearson” 和 "kendall"
-# import numpy as np
 # creditcard['Income_ln']=np.log(creditcard['Income'])
 creditcard[["avg_exp_ln", "Income"]].corr(method="pearson")
 
@@ -3742,25 +3630,14 @@ sns.histplot(house_price_gr.rate, kde=True)  # Histograph
 
 # Q-Q
 
-# In[4]:
-
-import statsmodels.api as sm
-from matplotlib import pyplot as plt
-
 fig = sm.qqplot(house_price_gr.rate, fit=True, line="45")
-fig.show()
-
+# fig.show()
 
 # Box Plots
 
-# In[5]:
-
 house_price_gr.plot(kind="box")  # Box Plots
 
-
 # 置信度区间估计
-
-# In[6]:
 
 se = house_price_gr.rate.std() / len(house_price_gr) ** 0.5
 LB = house_price_gr.rate.mean() - 1.98 * se
@@ -3860,16 +3737,10 @@ stats.stats.ttest_ind(Suc0, Suc1, equal_var=False)
 # ## 6.4 方差分析
 # 单因素方差分析
 
-# In[14]:
-
 pd.set_option("display.max_columns", None)  # 设置显示所有列
 camp.groupby("Class")[["ARPU"]].describe().T
 
-
-# In[15]:
-
 # 利用回归模型中的方差分析
-import statsmodels.api as sm
 from statsmodels.formula.api import ols
 
 sm.stats.anova_lm(ols("ARPU ~ C(Class)", data=camp).fit())
@@ -3886,8 +3757,6 @@ sm.stats.anova_lm(ols("ARPU ~ C(Class)+C(Gender)+C(Class)*C(Gender)", data=camp)
 # 散点图
 
 camp.plot(x="AvgARPU", y="ARPU", kind="scatter")
-
-import numpy as np
 
 camp["AvgARPU_ln"] = np.log(camp["AvgARPU"])
 camp["ARPU_ln"] = np.log(camp["ARPU"])
@@ -3942,11 +3811,11 @@ print(cc)
 plt.scatter(loan["X1"], loan["X2"])
 plt.title("Scatter")
 
-plt.show()
+show()
 
 
 sns.pairplot(loan.loc[:, "X1":])
-plt.show()
+show()
 
 # 计算相关系数矩阵
 
@@ -4082,7 +3951,7 @@ print(U.shape, s.shape, VH.shape)
 
 # plt.figure(figsize=[3, 2])
 plt.plot(s)
-plt.show()
+show()
 
 S = np.diag(s[:2])
 UU = U[:, :2]
@@ -4128,7 +3997,7 @@ y = mds.embedding_[:, 1]
 plt.scatter(x, y)
 for a, b, s in zip(x, y, df["City"]):
     plt.text(a, b, s, fontsize=12)
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -4328,7 +4197,7 @@ for i, s in enumerate(cross_table.index):
     plt.text(x, y, s, va="bottom", ha="left", color="r")
 
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -4364,10 +4233,10 @@ print(cc)
 
 plt.scatter(model_data["performance"], model_data["adaptation"])
 plt.title("Scatter")
-plt.show()
+show()
 
 sns.pairplot(data)
-plt.show()
+show()
 
 # 计算相关系数矩阵
 
@@ -4408,7 +4277,7 @@ cc = data.head()
 print(cc)
 
 sns.pairplot(data)
-plt.show()
+show()
 
 corr_matrix = data.corr(method="pearson")
 # corr_matrix = corr_matrix.abs()
@@ -4434,7 +4303,7 @@ cc = data.head()
 print(cc)
 
 sns.pairplot(data)
-plt.show()
+show()
 
 corr_matrix = data.corr(method="pearson")
 # corr_matrix = corr_matrix.abs()
@@ -4558,7 +4427,7 @@ fa_score = pd.DataFrame(np.dot(data, fas))
 a = fa_score.rename(columns={0: "Gross", 1: "Avg"})
 citi10_fa = model_data.join(a)
 
-citi10_fa.to_csv("data/citi10_fa.csv")
+# df存檔 citi10_fa.to_csv("data/citi10_fa.csv")
 
 x = citi10_fa["Gross"]
 y = citi10_fa["Avg"]
@@ -4567,8 +4436,8 @@ plt.scatter(x, y)
 for a, b, l in zip(x, y, label):
     plt.text(a, b + 0.1, "%s." % l, ha="center", va="bottom", fontsize=14)
 
-plt.show()
-# %%
+show()
+
 #############################################################################################
 # 三、变量筛选
 # ### 以下是变量选择的完整函数
@@ -5105,8 +4974,6 @@ print("------------------------------------------------------------")  # 60個
 
 # ### 第一步：手动测试主成分数量
 
-import pandas as pd
-
 model_data = pd.read_csv("data/cities_10.csv", encoding="gbk")
 model_data.head()
 
@@ -5162,8 +5029,6 @@ fa_plotting.graph_summary(fa)
 
 pd.DataFrame(fa.comps["rot"])
 
-import numpy as np
-
 fas = pd.DataFrame(fa.comps["rot"])
 data = pd.DataFrame(data)
 score = pd.DataFrame(np.dot(data, fas))
@@ -5173,9 +5038,7 @@ score = pd.DataFrame(np.dot(data, fas))
 a = score.rename(columns={0: "Gross", 1: "Avg"})
 citi10_fa = model_data.join(a)
 
-citi10_fa.to_csv("data/citi10_fa.csv")
-
-import matplotlib.pyplot as plt
+# df存檔 citi10_fa.to_csv("data/citi10_fa.csv")
 
 x = citi10_fa["Gross"]
 y = citi10_fa["Avg"]
@@ -5184,7 +5047,7 @@ plt.scatter(x, y)
 for a, b, l in zip(x, y, label):
     plt.text(a, b + 0.1, "%s." % l, ha="center", va="bottom", fontsize=14)
 
-plt.show()
+show()
 
 import scipy.cluster.hierarchy as sch
 
@@ -5283,16 +5146,7 @@ fa_plotting.graph_summary(fa)
 
 # - 4、获取因子得分
 
-# In[12]:
-
-
 pd.DataFrame(fa.comps["rot"])
-
-
-# In[13]:
-
-
-import numpy as np
 
 fas = pd.DataFrame(fa.comps["rot"])
 data = pd.DataFrame(data)
@@ -5352,17 +5206,13 @@ import matplotlib
 
 # get_ipython().magic('matplotlib inline')
 model_data_l.clustor.value_counts().plot(kind="pie")
-plt.show()
+show()
 
 
 # ### 4.2 k-means聚类的第二种方式：进行变量分布的正态转换--用于客户细分
 
 # - 1、进行变量分布的正态转换
 
-# In[19]:
-
-
-import numpy as np
 from sklearn import preprocessing
 
 quantile_transformer = preprocessing.QuantileTransformer(
@@ -5415,7 +5265,7 @@ import matplotlib
 
 # get_ipython().magic('matplotlib inline')
 model_data_l.clustor.value_counts().plot(kind="pie")
-plt.show()
+show()
 
 
 # In[31]:
@@ -5484,3 +5334,15 @@ os.chdir(r"D:\Python_book\11KNNNB")
 pd.set_option("display.max_columns", None)
 
 # In[147]:
+
+
+# 查看一下关键字有哪些，避免关键字做自定义标识符
+import keyword
+print(keyword.kwlist)
+
+
+
+# .ix改 .loc
+
+
+# normed 改成 density

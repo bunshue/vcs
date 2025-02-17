@@ -76,6 +76,9 @@ def Var_Select(orgdata, k,alphaMin=0.1, alphaMax=200, alphastep=0.2):
 
 
 def Var_Select_auto(orgdata, alphaMin=0.1,alphaMax=200, alphastep=0.2,eig_csum_retio=0.95,eigVals_min=0.6):
+    print("MIN :", alphaMin)
+    print("MAX :", alphaMax)
+    print("STEP :", alphastep)
     if orgdata.iloc[:,1].count()>5000:
         data = orgdata.sample(5000)
     else:
@@ -107,14 +110,18 @@ def Var_Select_auto(orgdata, alphaMin=0.1,alphaMax=200, alphastep=0.2,eig_csum_r
             break
     
     #print(n_components)
+    global best_alpha
+    best_alpha = 1
     
     for i in np.arange(alphaMin, alphaMax, alphastep):
+        print("get i =", i)
         pca_model = SparsePCA(n_components=n_components, alpha=i)
         pca_model.fit(data)
         pca = pd.DataFrame(pca_model.components_).T
         n = data.shape[1] - sum(sum(np.array(pca != 0)))####计算系数不为0的数量
+        print("get n =", n)
         if n == 0:
-            global best_alpha
+            # global best_alpha
             best_alpha = i
             break        
     #step4:根据上一步得到的惩罚项的取值，估计SparsePCA，并得到稀疏主成分得分

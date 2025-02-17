@@ -1,20 +1,9 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Apr  5 10:48:25 2016
-
-@author: edouard.duchesnay@cea.fr
-"""
-
-
-'''
-Regression
-==========
-'''
+#Regression
 
 import numpy as np
 from sklearn import datasets
 import sklearn.linear_model as lm
-from sklearn.grid_search import GridSearchCV
+from sklearn.model_selection GridSearchCV
 import sklearn.metrics as metrics
 from sklearn.model_selection import KFold
 

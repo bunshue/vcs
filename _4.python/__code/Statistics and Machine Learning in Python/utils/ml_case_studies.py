@@ -228,7 +228,7 @@ from sklearn.model_selection import StratifiedKFold
 from sklearn.feature_selection import SelectKBest
 from sklearn.feature_selection import f_classif
 from sklearn.pipeline import Pipeline
-from sklearn.grid_search import GridSearchCV
+from sklearn.model_selection GridSearchCV
 import sklearn.metrics as metrics
 
 def balanced_acc(estimator, X, y, **kwargs):
@@ -360,7 +360,7 @@ from sklearn.model_selection import cross_val_score
 from sklearn.feature_selection import SelectKBest
 from sklearn.feature_selection import f_classif
 from sklearn.pipeline import Pipeline
-from sklearn.grid_search import GridSearchCV
+from sklearn.model_selection GridSearchCV
 import sklearn.metrics as metrics
 
 def balanced_acc(estimator, X, y, **kwargs):

@@ -18,6 +18,7 @@ bad_good={'B':1, 'D':1, 'A':0, 'C': 2}
 loans['bad_good']=loans.status.map(bad_good)
 loans.head()
 
+# ## 1.3、借款人的年龄、性别
 
 #表征信息：
 data2=pd.merge(loans,disp,on='account_id',how='left')
@@ -30,6 +31,7 @@ data2.head()
 data3 = pd.merge(data2, district, left_on = 'district_id', right_on = 'A1', how = 'left')
 data3.head()
 
+# ## 1.5、贷款前一年内的账户平均余额、余额的标准差、变异系数、平均收入和平均支出的比例
 #行为信息：
 data_4temp1=pd.merge(loans[['account_id','date']],trans[['account_id','type','amount','balance','date']],on='account_id')
 data_4temp1.columns=['account_id','date','type','amount','balance','t_date']
@@ -82,6 +84,7 @@ data_model=data4[data4.status!='C']
 for_predict=data4[data4.status=='C']
 train=data_model.sample(frac=0.7,random_state=1235).copy()
 test=data_model[~data_model.index.isin(train.index)].copy()
+print(' 训练集样本量: %i \n 测试集样本量: %i' %(len(train), len(test)))
 print('训练集样本量：%i\n测试集样本量：%i'%(len(train),len(test)))
 
 #训练集样本量：195

@@ -3,19 +3,16 @@ import sys
 import numpy as np
 import pandas as pd
 
-# # 1 数据整理
-
-# ## 1.1导入数据
-
 loanfile = os.listdir()
 createVar = locals()
 for i in loanfile:
+    print(i)
     if i.endswith("csv"):        
         createVar[i.split('.')[0]] = pd.read_csv(i, encoding = 'gbk')
         print(i.split('.')[0])
 
 
-# ## 1.2、生成被解释变量bad_good
+# 生成被解释变量bad_good
 
 bad_good = {'B':1, 'D':1, 'A':0, 'C': 2}
 loans['bad_good'] = loans.status.map(bad_good)
@@ -23,6 +20,7 @@ loans.head()
 
 # ## 1.3、借款人的年龄、性别
 
+#表征信息：
 data2 = pd.merge(loans, disp, on = 'account_id', how = 'left')
 data2 = pd.merge(data2, clients, on = 'client_id', how = 'left')
 data2=data2[data2.type=='所有者']
@@ -36,9 +34,7 @@ data3.head()
 
 # ## 1.5、贷款前一年内的账户平均余额、余额的标准差、变异系数、平均收入和平均支出的比例
 
-data_4temp1 = pd.merge(loans[['account_id', 'date']],
-                       trans[['account_id','type','amount','balance','date']],
-                       on = 'account_id')
+data_4temp1 = pd.merge(loans[['account_id', 'date']],trans[['account_id','type','amount','balance','date']],on = 'account_id')
 data_4temp1.columns = ['account_id', 'date', 'type', 'amount', 'balance', 't_date']
 data_4temp1 = data_4temp1.sort_values(by = ['account_id','t_date'])
 
