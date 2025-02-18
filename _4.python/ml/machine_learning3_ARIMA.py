@@ -14,6 +14,7 @@ import sys
 import time
 import math
 import random
+import datetime
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -37,23 +38,51 @@ import statsmodels.api as sm
 
 print("------------------------------------------------------------")  # 60個
 
-print("自回归模型AR（Autoregressive model/AR）")
+"""
+TimeSeries_data.csv 14筆資料 7個欄位
+Date,Open,High,Low,Close,Adj Close,Volume
 
+日期(Date)、開盤價(Open)、最高價(High)、最低價(Low)、
+收盤價(Close)、調整後的收盤價(Adj Close)以及成交量(Volume)。
+
+5/18/2019,7266.080078,8281.660156,7257.259766,8193.139648,8193.139648,723011166
+5/19/2019,8193.139648,8193.139648,7591.850098,7998.290039,7998.290039,637617163
+5/20/2019,7998.290039,8102.319824,7807.77002,7947.930176,7947.930176,357803946
+5/21/2019,7947.930176,8033.759766,7533.660156,7626.890137,7626.890137,424501866
+5/22/2019,7626.890137,7971.259766,7478.740234,7876.5,7876.5,386766321
+5/23/2019,7876.5,8165.450195,7801.569824,7996.399902,7996.399902,413162746
+5/24/2019,7996.399902,8140.819824,7948.680176,8059.129883,8059.129883,179206342
+5/25/2019,8059.129883,8779,7894.529785,8726.230469,8726.230469,483663699
+5/26/2019,8726.230469,8931.530273,8668.459961,8785.169922,8785.169922,507164714
+5/27/2019,8785.169922,8818.709961,8562.200195,8718.849609,8718.849609,360752199
+5/28/2019,8718.849609,8760.480469,8444.099609,8664.55957,8664.55957,380343928
+5/29/2019,8664.55957,9065.889648,8027.209961,8276.25,8276.25,815525590
+5/30/2019,8276.25,8570.780273,8116,8560.080078,8560.080078,500141087
+5/31/2019,8550.629883,8576.339844,8459.650391,8504.980469,8504.980469,69915456
+"""
+print("自回归模型AR（Autoregressive model/AR）")
 # 通俗一点讲，就是用过去时间点的数据预测未来时间点的数据
 
 IndexData = pd.read_csv("./data/TimeSeries_data.csv")
+
+print(IndexData)
+print(IndexData.shape)
+
+print("取出 收盤價(Close) 欄資料")
 data = IndexData["Close"]  # 选择关闭交易时的数据
 temp = np.array(data)  # 转换成数组
+
 model = sm.tsa.AutoReg(temp, lags=1)  # 训练模型
+
 results_AR = model.fit()  # 训练模型
 
 plt.figure(figsize=(10, 6))
-plt.plot(temp, "b", label="Close")
-plt.plot(
-    results_AR.fittedvalues, "r", label="AR model"
-)  # results_AR.fittedvalues是模型拟合后的结果
-plt.legend()
+plt.plot(temp, "r", label="Close")
+# results_AR.fittedvalues是模型拟合后的结果
+plt.plot(results_AR.fittedvalues, "g", label="AR model")
 plt.title("自回归模型AR（Autoregressive model/AR）")
+plt.legend()
+
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
@@ -102,6 +131,7 @@ plt.plot(temp, "b", label="Close")
 plt.plot(results_ARMA.fittedvalues, "r", label="ARMA model")
 plt.legend()
 plt.title("自回归滑动平均（Autoregressive moving average model/ARMA）模型")
+
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
@@ -133,6 +163,7 @@ plt.plot(temp, "b", label="closeDiff_2")
 plt.plot(results_ARIMA.fittedvalues, "r", label="ARIMA model")
 plt.legend()
 plt.title("自回归差分滑动平均（Autoregressive Integrated Moving Average model/ARIMA）模型")
+
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
@@ -178,12 +209,14 @@ ts_simu200.set_index(dates, inplace=True)
 dta = ts_simu200["AR1_a"]
 
 dta.plot(figsize=(12, 8))
+
 plt.show()
 
 # 自相关和偏自相关
 fig = plt.figure(figsize=(12, 8))
 fig = sm.graphics.tsa.plot_acf(dta, lags=20)  # lags 表示滞后的阶数
 fig = sm.graphics.tsa.plot_pacf(dta, lags=20)
+
 plt.show()
 
 """
@@ -194,6 +227,7 @@ resid = ar10.resid
 fig = plt.figure(figsize=(12,8))
 fig = sm.graphics.tsa.plot_acf(resid.values.squeeze(), lags=20)
 fig = sm.graphics.tsa.plot_pacf(resid, lags=20)
+
 plt.show()
 
 #残差的ACF和PACF图，可以看到序列残差基本为白噪声
@@ -207,13 +241,15 @@ print(sm.stats.durbin_watson(ar10.resid.values))
 print(stats.normaltest(resid))
 fig = plt.figure(figsize=(12,8))
 fig = qqplot(resid, line='q', fit=True)
+
 plt.show()
+
 #结果表明基本符合正态分布
 
 predict_dta = ar10.forecast(steps=5)
-import datetime
 fig = ar10.plot_predict(pd.to_datetime('2017-01-01')+datetime.timedelta(days=190),
                         pd.to_datetime('2017-01-01')+datetime.timedelta(days=220), dynamic=False, plot_insample=True)
+
 plt.show()
 """
 print("------------------------------------------------------------")  # 60個
@@ -246,6 +282,7 @@ resid = ma01.resid
 fig = plt.figure(figsize=(12,8))
 fig = sm.graphics.tsa.plot_acf(resid.values.squeeze(), lags=20)
 fig = sm.graphics.tsa.plot_pacf(resid, lags=20)
+
 plt.show()
 
 #进一步进行D-W检验，是目前检验自相关性最常用的方法，但它只使用于检验一阶自相关性。
@@ -258,13 +295,15 @@ print(sm.stats.durbin_watson(ma01.resid.values))
 print(stats.normaltest(resid))
 fig = plt.figure(figsize=(12,8))
 fig = qqplot(resid, line='q', fit=True)
+
 plt.show()
+
 #结果表明基本符合正态分布
 
-import datetime
 fig = ma01.plot_predict(pd.to_datetime('2017-01-01'),
                         pd.to_datetime('2017-01-01')+datetime.timedelta(days=220), 
                         dynamic=False, plot_insample=True)
+
 plt.show()
 """
 print("------------------------------------------------------------")  # 60個
@@ -287,6 +326,7 @@ dta.head()
 fig = plt.figure(figsize=(12, 8))
 fig = sm.graphics.tsa.plot_acf(dta, lags=20)  # lags 表示滞后的阶数
 fig = sm.graphics.tsa.plot_pacf(dta, lags=20)
+
 plt.show()
 
 import itertools
@@ -322,6 +362,7 @@ resid = arma11.resid
 fig = plt.figure(figsize=(12,8))
 fig = sm.graphics.tsa.plot_acf(resid.values.squeeze(), lags=20)
 fig = sm.graphics.tsa.plot_pacf(resid, lags=20)
+
 plt.show()
 
 #残差的ACF和PACF图，可以看到序列残差基本为白噪声
@@ -336,24 +377,24 @@ print(sm.stats.durbin_watson(arma11.resid.values))
 print(stats.normaltest(resid))
 fig = plt.figure(figsize=(12,8))
 fig = qqplot(resid, line='q', fit=True)
+
 plt.show()
 
-import datetime
 fig = arma11.plot_predict(pd.to_datetime('2017-01-01'),
                         pd.to_datetime('2017-01-01')+datetime.timedelta(days=220), 
                           dynamic=False, plot_insample=True)
+
 plt.show()
 """
 print("------------------------------------------------------------")  # 60個
 
 # 2.非平稳时间序列分析-ARIMA模型
 
-# from __future__ import print_function
-import pandas as Series
 from scipy import stats
 from statsmodels.graphics.api import qqplot
 from statsmodels.tsa.stattools import adfuller
-from statsmodels.graphics.tsaplots import plot_acf, plot_pacf
+from statsmodels.graphics.tsaplots import plot_acf
+from statsmodels.graphics.tsaplots import plot_pacf
 
 # dta=ARIMA_11_b
 ts_simu200 = pd.read_csv("data/ts_simu200.csv", index_col="t")
@@ -373,12 +414,15 @@ print("p-value: %f" % result[1])
 fig = plt.figure(figsize=(12, 8))
 fig = sm.graphics.tsa.plot_acf(dta, lags=20)
 fig = sm.graphics.tsa.plot_pacf(dta, lags=20)
+
 plt.show()
+
 # print(dta)
 
 # 差分序列的时序图
 diff1 = dta.diff(1)
 diff1.plot(figsize=(12, 8))
+
 plt.show()
 
 # 差分序列的自相关和偏自相关图
@@ -387,6 +431,7 @@ ddta.dropna(inplace=True)
 fig = plt.figure(figsize=(12, 8))
 fig = sm.graphics.tsa.plot_acf(ddta, lags=20)
 fig = sm.graphics.tsa.plot_pacf(ddta, lags=20)
+
 plt.show()
 
 """ NG
@@ -397,6 +442,7 @@ resid = arima110.resid
 fig = plt.figure(figsize=(12,8))
 fig = sm.graphics.tsa.plot_acf(resid.values.squeeze(), lags=20)
 fig = sm.graphics.tsa.plot_pacf(resid, lags=20)
+
 plt.show()
 
 #残差的ACF和PACF图，可以看到序列残差基本为白噪声
@@ -411,12 +457,13 @@ print(sm.stats.durbin_watson(arima110.resid.values))
 print(stats.normaltest(resid))
 fig = plt.figure(figsize=(12,8))
 fig = qqplot(resid, line='q', fit=True)
+
 plt.show()
 
-import datetime
 fig = arima110.plot_predict(pd.to_datetime('2017-01-01'),
                         pd.to_datetime('2017-01-01')+datetime.timedelta(days=220), 
                             dynamic=False, plot_insample=True)
+
 plt.show()
 """
 print("------------------------------------------------------------")  # 60個

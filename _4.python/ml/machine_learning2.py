@@ -58,7 +58,7 @@ from sklearn import preprocessing
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
 from sklearn.model_selection import cross_val_score
 
-# from imblearn.metrics import classification_report_imbalanced
+from imblearn.metrics import classification_report_imbalanced
 
 # 載入迴歸常見的評估指標
 from sklearn.metrics import mean_squared_error  # 均方誤差 Mean Squared Error (MSE)
@@ -1235,80 +1235,6 @@ print(df2)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-# 頻率轉換、合併多個表格
-
-import yfinance as yf
-
-# 下載每日股價
-
-df_quote = yf.download("1101.TW", start="2020-01-01", end="2022-11-30")
-df_quote.tail()
-
-print("轉換為月頻率")
-
-df_quote_new = df_quote.resample("ME").mean()
-print(df_quote_new)
-
-print("讀取月營收資料")
-
-df_monthly_sales = pd.read_csv("./data/stock_monthly_sales.csv")
-cc = df_monthly_sales.head()
-print(cc)
-
-print("轉換日期格式")
-
-df_quote_new = df_quote.reset_index()
-df_quote_new.Date = df_quote_new.Date
-df_quote_new.Date = df_quote_new.Date.map(lambda x: str(x)[:4] + str(x)[5:7])
-print(df_quote_new)
-
-print("合併2個表格")
-
-# 轉換日期資料型態，讓2個表格的日期資料型態一致
-df_monthly_sales["年月"] = df_monthly_sales["年月"].astype("str")
-
-# 合併2個表格
-df = pd.merge(
-    left=df_monthly_sales,
-    right=df_quote_new,
-    left_on="年月",
-    right_on="Date",
-    how="inner",
-)
-df = df[["Date", "單月營收", "Adj Close"]]
-
-# 欄位改名
-df.rename({"單月營收": "sales"}, axis=1, inplace=True)
-print(df)
-
-print("計算股價與月營收關聯度")
-
-# 相關係數
-cc = df[["sales", "Adj Close"]].corr()
-print(cc)
-
-print("營收公布日期晚一個月")
-
-df_monthly_sales["單月營收"] = df_monthly_sales["單月營收"].shift(-1)
-df = pd.merge(
-    left=df_monthly_sales,
-    right=df_quote_new,
-    left_on="年月",
-    right_on="Date",
-    how="inner",
-)
-df = df[["Date", "單月營收", "Adj Close"]]
-df.rename({"單月營收": "sales"}, axis=1, inplace=True)
-df.dropna(inplace=True)
-
-# 相關係數
-cc = df[["sales", "Adj Close"]].corr()
-print(cc)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 # 06_06_knn_book_recommender
 
 # 以KNN演算法實作書籍推薦
@@ -2230,12 +2156,14 @@ print("user id\titem id\trating\ttimestamp")
 cc = data.raw_ratings[:10]
 print(cc)
 
-# 資料分割
-
+# 資料分割, 使用特殊的資料分割函數
 from surprise.model_selection import train_test_split
 
 # 切分為訓練及測試資料，測試資料佔 20%
 trainset, testset = train_test_split(data, test_size=0.2)
+
+# 恢復原本的函數
+from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
 
 # 模型訓練
 
@@ -3548,11 +3476,10 @@ print(
     )
 )
 
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 一個很大的範例 ST
+print("一個很大的範例 ST")
 """
 探索性數據分析（EDA）
 
@@ -3653,7 +3580,7 @@ y = train["SalePrice"]
 sns.histplot(y, kde=False)
 plt.title("預設方法")
 show()
-
+""" 不能使用參數fit
 sns.histplot(y, kde=True, fit=st.johnsonsu)
 plt.title("使用 Johnson SU")
 show()
@@ -3670,15 +3597,17 @@ show()
 sns.histplot(train["SalePrice"], fit=st.norm)
 plt.title("使用 Normal")
 show()
-
+"""
 res = st.probplot(train["SalePrice"], plot=plt)
 show()
 
 # 把房價做對數變換後再看
 SalePrice_log = np.log(train["SalePrice"])
+
 # transformed histogram and normal probability plot
-sns.histplot(SalePrice_log, fit=st.norm)
-show()
+# 不能使用參數fit
+# sns.histplot(SalePrice_log, fit=st.norm)
+# show()
 
 res = st.probplot(SalePrice_log, plot=plt)
 print(res)
@@ -4046,7 +3975,12 @@ g = g.map(pairplot, "value", "SalePrice")
 show()
 
 """
-看起來，YearBuild、1stFlrSF, 2ndFlrSF, Neighborhood_E There are lots of nonlinearities this may be the cause why some variables wont be selected by Lasso/Lars. Some factors like YearBuilt, 1stFlrSF, 2ndFlrSF, Neighborhood_E look like they would benefit from adding quadratic term to regression. But on the other hand this will most probably provoke overfit.
+看起來，YearBuild、1stFlrSF, 2ndFlrSF, Neighborhood_E
+There are lots of nonlinearities this may be the cause
+why some variables wont be selected by Lasso/Lars.
+Some factors like YearBuilt, 1stFlrSF, 2ndFlrSF, Neighborhood_E
+look like they would benefit from adding quadratic term to regression.
+But on the other hand this will most probably provoke overfit.
 
 觀察的結果提示我們，有些變量可以嘗試做些變換，比如平方變換。
 
@@ -4117,13 +4051,15 @@ show()
 33	MiscVal	-0.559517
 34	MoSold	0.052589
 35	YrSold	-0.000021
-,
+
 
 我們用tnse方法，把每個高維樣本映射到二維平面上的點。
 然後我們對樣本做標準化處理，處理之後做PCA，提取前30個主成分。也就是把樣本的特征降維到30個特征。
 對這30個特征的樣本聚類，聚成5類。
 在把這5類用可視化的方法會出來，看看是否有聚集趨勢。
 """
+
+from sklearn.manifold import TSNE
 
 features = quantitative + qual_encoded
 model = TSNE(n_components=2, random_state=0, perplexity=50)
@@ -4263,11 +4199,11 @@ Ypred = np.exp(lasso.predict(X))  # 預測.predict
 print(error(Y, Ypred))
 
 """
-# 一個很大的範例 SP
+print("一個很大的範例 SP")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
+""" tfnn引用錯誤
 import tfnn
 
 bank_data = pd.read_csv("data/bank-full.csv", sep=";")
@@ -4294,7 +4230,7 @@ for i in range(1000):
 # print(test_data.ys.iloc[:,0].value_counts())
 print(network.predict(test_data.xs.iloc[20:30, :]))
 print(test_data.ys.iloc[20:30, :])
-
+"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
