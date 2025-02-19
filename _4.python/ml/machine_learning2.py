@@ -100,12 +100,12 @@ from sklearn.preprocessing import PolynomialFeatures
 # from sklearn.preprocessing import Imputer
 from sklearn.feature_selection import SelectKBest
 from sklearn.feature_selection import f_regression
+from sklearn.feature_selection import f_classif
 from sklearn.model_selection import GridSearchCV
 from sklearn.model_selection import KFold
 from sklearn.model_selection import PredefinedSplit
 from sklearn.pipeline import Pipeline
 from sklearn.pipeline import make_pipeline
-from sklearn.feature_selection import f_classif
 from sklearn.compose import ColumnTransformer
 
 import scipy

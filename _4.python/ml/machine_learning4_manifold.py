@@ -3,9 +3,7 @@ manifold
 
 # Manifold(岐管, 流形) learning: non-linear dimension reduction
 
-
 """
-
 print("------------------------------------------------------------")  # 60個
 
 # 共同
@@ -49,11 +47,12 @@ def show():
     plt.show()
     pass
 
-
+'''
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# MDS
+print('多维缩放（Multiple Dimensional Scaling，MDS）')
+print('原本 1797X64 轉成 100X2')
 X, _ = datasets.load_digits(return_X_y=True)
 print(X.shape)  # (1797, 64)
 
@@ -86,8 +85,9 @@ stress = [
     for k in range(1, X.shape[1] + 1)
 ]
 
-print("Stress", stress)
+print("Stress :", stress)
 plt.plot(range(1, 5), stress)
+plt.show()
 
 K = 2
 mds = MDS(
@@ -113,7 +113,6 @@ print(cor)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-"""
 digits = datasets.load_digits()
 print(type(digits))
 print(len(digits))
@@ -122,10 +121,10 @@ print("TSNE")
 n_components = 2  # 削減後の次元を2に設定
 model = TSNE(n_components=n_components)
 print(model.fit_transform(digits.data))
-"""
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
 
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+'''
 # load images of the digits 0 through 5 and visualize several of them
 
 digits = datasets.load_digits(n_class=6)

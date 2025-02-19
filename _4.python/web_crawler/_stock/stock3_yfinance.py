@@ -28,20 +28,23 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
+# 127筆資料 7 欄位
 df = pd.read_csv("data/alphabet_stock_data.csv")
+print(df.shape)
+
 start_date = pd.to_datetime("2020-4-1")
 end_date = pd.to_datetime("2020-9-30")
+
 df["Date"] = pd.to_datetime(df["Date"])
+print(df["Date"].shape)
 new_df = (df["Date"] >= start_date) & (df["Date"] <= end_date)
+print(new_df.shape)
+
 df1 = df.loc[new_df]
 stock_data = df1.set_index("Date")
 stock_data.plot(subplots=True, figsize=(8, 8))
 plt.legend(loc="best")
-plt.suptitle(
-    "Open,High,Low,Close,Adj Close prices & Volume of Alphabet Inc., From 01-04-2020 to 30-09-2020",
-    fontsize=12,
-    color="black",
-)
+plt.suptitle("Alphabet Inc.字母控股 股價")
 
 plt.show()
 
@@ -50,7 +53,6 @@ print("------------------------------------------------------------")  # 60個
 """
 # Yahoo Finance API抓取資料，FinRL特徵工程
 https://ithelp.ithome.com.tw/m/articles/10353034
-
 
 使用 yfinance 抓取 S&P 500 的 15 分鐘資料
 下面是一個具體範例，從 Yahoo Finance 下載 S&P 500 指數在指定兩天內的每 15 分鐘的歷史資料。
@@ -68,7 +70,7 @@ start_date = "2025-02-12"  # 設定開始日期
 end_date = "2025-02-13"  # 設定結束日期
 interval = "15m"  # 設定時間週期為 15 分鐘
 
-# 抓取 S&P 500 數據
+# 抓取 S&P 500 數據 # 標準普爾500指數，簡稱S&P 500 、標普500或史坦普500
 ticker = "^GSPC"  # Yahoo Finance 中 S&P 500 的代號
 sp500_data = yf.download(ticker, start=start_date, end=end_date, interval=interval)
 
@@ -111,11 +113,11 @@ print("------------------------------")  # 30個
 """
 # 添加必要的欄位
 sp500_data = sp500_data.reset_index()  # 重設索引，將日期移到普通欄位
-sp500_data["date"] = sp500_data["Datetime"]  # 添加 'date' 欄位
+sp500_data["date"] = sp500_data["Date"]  # 添加 'date' 欄位
 sp500_data["tic"] = "^GSPC"  # 添加 'tic' 欄位，這裡 '^GSPC' 是 S&P 500 的代號
 
 # 移除原本的 'Datetime' 欄位
-sp500_data = sp500_data.drop(columns=["Datetime"])
+sp500_data = sp500_data.drop(columns=["Date"])
 
 # 將所有欄位名稱轉為小寫，以符合 FeatureEngineer 的預期格式
 sp500_data.columns = [col.lower() for col in sp500_data.columns]
@@ -129,7 +131,7 @@ print("------------------------------")  # 30個
 步驟 2: 使用 FeatureEngineer 進行特徵工程
 現在我們可以使用 FeatureEngineer 來添加技術指標並進行特徵工程。
 """
-
+""" NG
 # 先安裝 finrl
 # gymnasium
 # stable_baselines3
@@ -146,6 +148,7 @@ sp500_data_with_indicators = fe.preprocess_data(sp500_data)
 
 # 顯示結果
 print(sp500_data_with_indicators.head())
+"""
 
 """
 特徵工程的輸出
@@ -158,7 +161,9 @@ print("------------------------------------------------------------")  # 60個
 
 # 下載每日股價
 
-df_quote = yf.download("1101.TW", start="2020-01-01", end="2022-11-30")
+# 台泥 1101
+
+df_quote = yf.download("1101.TW", start="2025-01-01", end="2025-02-10")
 df_quote.tail()
 
 print("轉換為月頻率")
