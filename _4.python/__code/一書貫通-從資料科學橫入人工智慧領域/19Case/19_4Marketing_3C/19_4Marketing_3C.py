@@ -1,6 +1,3 @@
-
-# coding: utf-8
-
 # |变量名|变量说明|
 # |:--:|:--:|
 # |ID	|数据库中每个人的ID|
@@ -19,20 +16,8 @@
 # |region	|所处地区信息|
 # |new_car|	购买新车的可能性（1代表最可能）|
 # |home_income|	家庭收入信息（A代表最低，L代表最高）|
-# 
-
-# In[1]:
-
-
-import os
-os.chdir(r'D:\Python_book\19Case\19_4Marketing_3C')
-# os.getcwd()
-
 
 # ### 读取数据，并对数据进行初步探索
-
-# In[2]:
-
 
 get_ipython().magic('matplotlib inline')
 
@@ -42,35 +27,20 @@ import matplotlib.pyplot as plt
 
 pd.set_option('display.max_columns', None)
 
-
-# In[3]:
-
-
 train = pd.read_csv('response_data_train.csv', skipinitialspace=True)
 test = pd.read_csv('response_data_test.csv', skipinitialspace=True)
 print(train.shape)
 print(test.shape)
 
-
-# In[4]:
-
-
 train.describe(include='all')
-
-
-# In[5]:
-
 
 cols = train.columns.tolist()
 x_c = ['home_value', 'new_car']
 x_d = list(set(cols) - set(x_c)); x_d.remove('target_flag')
 
-
 # ### 数据预处理
 
 # 编码同时填补缺失值
-
-# In[6]:
 
 
 def label_encoder(series):
@@ -79,16 +49,11 @@ def label_encoder(series):
     return {k:v for k, v in zip(cat.index, range(len_series))}
 
 
-# In[7]:
-
-
 for col in x_d:
     encoder = label_encoder(train[col])
     train[col].replace(encoder, inplace=True)  # Encode train
     test[col].replace(encoder, inplace=True)  # Encode test
 
-
-# In[8]:
 
 
 encoder = label_encoder(train.target_flag)
@@ -97,8 +62,6 @@ test.target_flag.replace(encoder, inplace=True)
 
 
 # WOE编码
-
-# In[9]:
 
 
 from woe import WoE
@@ -113,10 +76,7 @@ test.head()
 
 
 # ### 建模
-
 # 通过搜索参数网格，选择模型的最优超参
-
-# In[10]:
 
 
 from sklearn.tree import DecisionTreeClassifier
@@ -132,9 +92,6 @@ print('best_score:%2.4f'  %cv.best_score_)
 print('best_params: %s' %cv.best_params_)
 
 
-# In[11]:
-
-
 from sklearn.metrics import roc_auc_score, roc_curve
 
 test_p = cv.predict_proba(test.ix[:, 1:])
@@ -142,10 +99,7 @@ print(roc_auc_score(test.target_flag, test_p[:, 1]))
 
 
 # ### 通过筛选变量可以改善模型过拟合的情况
-
 # 决策树生长中，每一步都会计算变量的重要性，最终能够汇总各变量对整个模型的重要性。因此自然会想到利用决策树本身计算的变量重要性进行变量筛选
-
-# In[12]:
 
 
 imp = cv.best_estimator_.feature_importances_
@@ -173,21 +127,13 @@ cv.fit(train.ix[:, 1:], train['target_flag'])
 print('best_score:%2.4f'  %cv.best_score_)
 print('best_params: %s' %cv.best_params_)
 
-
 # 当去除了部分变量后，模型的表现有所提升
-
-# In[15]:
-
 
 train_p = cv.predict_proba(train.ix[:, 1:])
 test_p = cv.predict_proba(test.ix[:, 1:])
 print(roc_auc_score(test.target_flag, test_p[:, 1]))
 
-
 # 可以通过绘制ROC曲线来观察模型过拟合的情况
-
-# In[16]:
-
 
 fpr_test, tpr_test, th_test = roc_curve(test.target_flag, test_p[:, 1])
 

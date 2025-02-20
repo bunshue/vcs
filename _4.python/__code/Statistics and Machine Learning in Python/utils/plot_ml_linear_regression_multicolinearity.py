@@ -1,13 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Fri Dec  4 10:23:37 2020
-
-@author: ed203246
-"""
-
-%matplotlib inline
-
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt

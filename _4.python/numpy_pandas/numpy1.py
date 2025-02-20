@@ -31,6 +31,12 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
+
+def show():
+    # plt.show()
+    pass
+
+
 print("------------------------------------------------------------")  # 60個
 
 print("建立numpy陣列, 串列 轉 numpy陣列")
@@ -920,25 +926,25 @@ print(na)
 na = np.var(a, axis=1)  # 第1軸 橫列
 print(na)
 
+print("------------------------------------------------------------")  # 60個
+
 # 數組打印
 
-print("顯示帶有兩個十進制值的浮點數")
+print('多位小數')
+a = np.random.rand(5)
+print(a)
 
-np.set_printoptions(precision=2)
-
-print("串列 轉 numpy陣列")
-na = np.array([12.23456, 32.34535])
-print(na)
+print("顯示2位小數")
+np.set_printoptions(precision=2)# 設定np計算後的保留位數
+print(a)
 
 print("設置打印數組最大值")
-
-na = np.set_printoptions(threshold=np.inf)
-print(na)
+np.set_printoptions(threshold=np.inf)
+print(a)
 
 print("增加一行中元素的數量")
-
-na = np.set_printoptions(linewidth=100)  ## 默認是 75
-print(na)
+np.set_printoptions(linewidth=100)  ## 默認是 75
+print(a)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -2268,7 +2274,7 @@ y = z1[0] * X + z1[1]
 plt.plot(X, y, c="red", label="線性擬合")
 plt.legend()
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -2961,7 +2967,7 @@ plt.text(
     verticalalignment="top",
 )
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 

@@ -507,25 +507,9 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-
 plt.style.use('fivethirtyeight')
 
-df = pd.read_csv("200811-201811.csv")
-
-
-#df = pd.read_csv("data/2014-2018.csv")
-
-"""
-df=pd.read_csv('data/2014-10~2018-10.csv')
-pd.set_option("display.max_rows", 1000)    #設定最大能顯示1000rows
-pd.set_option("display.max_columns", 1000) #設定最大能顯示1000columns
-"""
-
-
 print("------------------------------------------------------------")  # 60個
-
-
-
 
 #df畫兩欄位的 散布圖
 df.plot(kind="scatter", x="TEMP", y="PM25", title="溫度與PM2.5之關係")

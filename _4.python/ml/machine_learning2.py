@@ -39,9 +39,6 @@ warnings.filterwarnings("once")
 
 print("------------------------------------------------------------")  # 60個
 
-# np.set_printoptions(precision=2) # 設定np計算後的保留位數
-# pd.set_option('precision', 2)
-
 from common1 import *
 
 import tensorflow as tf

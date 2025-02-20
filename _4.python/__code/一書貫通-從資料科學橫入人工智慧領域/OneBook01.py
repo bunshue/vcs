@@ -5325,17 +5325,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-pd.set_option("display.max_columns", None)
-
-os.chdir(r"C:\_git\vcs\_4.python\__code\一書貫通-從資料科學橫入人工智慧領域")
-
-os.chdir(r"D:\Python_book\11KNNNB")
-
-
-pd.set_option("display.max_columns", None)
-
-# In[147]:
-
 
 # 查看一下关键字有哪些，避免关键字做自定义标识符
 import keyword

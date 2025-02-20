@@ -397,7 +397,6 @@ classification model has its regression counterpart.
 """
 
 np.set_printoptions(precision=2)
-# pd.set_option('precision', 2)
 
 # Support Vector Machines (SVM)
 

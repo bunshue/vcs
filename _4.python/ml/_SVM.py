@@ -2413,9 +2413,6 @@ print("------------------------------------------------------------")  # 60個
 xmin, xmax, ymin, ymax = -8, 8, -8, 8
 #plt.axis([xmin, xmax, ymin, ymax])  # 設定各軸顯示範圍
 """
-# os.chdir(r'D:\Python_book\12SVM')
-# pd.set_option('display.max_columns', None)
-
 
 print("計算兩陣列的雷同率")
 y = np.array(

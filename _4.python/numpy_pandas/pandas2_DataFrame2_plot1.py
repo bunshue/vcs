@@ -1640,33 +1640,15 @@ plt.rcParams["font.family"] = "sans-serif"
 plt.rcParams["figure.figsize"] = (8, 3)
 plt.rcParams["font.family"] = "sans-serif"
 
-# This is necessary to show lots of columns in pandas 0.12.
-# Not necessary in pandas 0.13.
-pd.set_option("display.width", 5000)
-pd.set_option("display.max_columns", 60)
-
 print("------------------------------------------------------------")  # 60個
 
 # 1.初始化
-
-pd.set_option("display.max_rows", 1000)  # 設定最大能顯示1000rows
-pd.set_option("display.max_columns", 1000)  # 設定最大能顯示1000columns
 
 # 2.解決plot不能顯示中文問題
 from pylab import mpl
 
 mpl.rcParams["font.sans-serif"] = ["Microsoft YaHei"]
 mpl.rcParams["axes.unicode_minus"] = False
-
-"""
-# This is necessary to show lots of columns in pandas 0.12.
-# Not necessary in pandas 0.13.
-pd.set_option("display.width", 5000)
-pd.set_option("display.max_columns", 60)
-"""
-
-print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1680,13 +1662,11 @@ y = np.sin(x)
 
 print("------------------------------------------------------------")  # 60個
 
-
 # fail
 # df_mar_2012 = df_mar_2012.drop(["Year", "Month", "Day", "Time", "Data Quality"], axis=1)
 # print(df_mar_2012[:5])
 # weather_data = weather_data.drop(["Year", "Day", "Month", "Time", "Data Quality"], axis=1)
 
 print("------------------------------")  # 30個
-
 
 weather_2012 = pd.concat(data_by_month)

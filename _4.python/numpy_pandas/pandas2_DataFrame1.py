@@ -8028,19 +8028,6 @@ df = pd.DataFrame(np.array(datas).T, columns=columns)
 print(df)
 print(df["國文"])
 
-""" 測不出來
-pd.describe_option('display')
-
-#pd.set_option('display.max_columns', None) # 设置显示所有列
-pd.set_option('display.max_columns', 8)
-
-#pd.set_option("display.max_rows", 1000)  # 設定最大能顯示1000rows
-#pd.set_option("display.max_columns", 1000)  # 設定最大能顯示1000columns
-
-df = pd.DataFrame(np.random.rand(80, 4))
-print(df)
-"""
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
