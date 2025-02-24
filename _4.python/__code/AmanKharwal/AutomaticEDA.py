@@ -29,17 +29,17 @@ print("------------------------------------------------------------")  # 60個
 
 from dataprep.eda import plot, plot_correlation, create_report, plot_missing
 from google.colab import files
+
 uploaded = files.upload()
 import pandas as pd
-data = pd.read_csv('housing.csv')
-     
+
+data = pd.read_csv("housing.csv")
+
 data.head()
-     
+
 plot(data)
 
-plot(data, 'median_house_value')
-     
-
+plot(data, "median_house_value")
 
 
 print("------------------------------------------------------------")  # 60個
@@ -55,4 +55,3 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
