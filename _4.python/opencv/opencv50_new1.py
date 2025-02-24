@@ -43,7 +43,6 @@ from PIL import ImageDraw
 
 
 def show():
-    # return
     plt.show()
     pass
 
@@ -5536,6 +5535,218 @@ occlusion = np.logical_not(mask[:, :, -1]).astype(np.uint8)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+"""
+二维卷积
+
+用不同的卷积核可以得到 各种不同的图像处理效果。OpenCV提供了 filter2D()来完成图像的卷积运算，调用方式如下：
+filter2D(src, ddepth, kernel[, dst[, anchor[, delta[, borderType]]]])
+    anchor参数指定卷积核的锚点位置，当它为默认值(-1，-1)时， 以卷积核的中心为锚点
+使用filter2D()制作的各种图像处理效果
+"""
+filename = "C:/_git/vcs/_4.python/opencv/data/lena.jpg"
+src = cv2.imread(filename)
+
+kernels = [
+    ("低通滤波器", np.array([[1, 1, 1], [1, 2, 1], [1, 1, 1]]) * 0.1),
+    ("高通滤波器", np.array([[0.0, -1, 0], [-1, 5, -1], [0, -1, 0]])),
+    ("边缘检测", np.array([[-1.0, -1, -1], [-1, 8, -1], [-1, -1, -1]])),
+]
+
+index = 0
+fig, axes = plt.subplots(1, 3, figsize=(12, 4.3))
+for ax, (name, kernel) in zip(axes, kernels):
+    dst = cv2.filter2D(src, -1, kernel)
+    # 由于matplotlib的颜色顺序和OpenCV的顺序相反
+    ax.imshow(dst[:, :, ::-1])
+    ax.set_title(name)
+    ax.axis("off")
+fig.subplots_adjust(0.02, 0, 0.98, 1, 0.02, 0)
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+"""
+有些特殊的卷积核可以表示成一个列矢量和一个行矢量的乘积，这时只需要将原始图像按 顺序与这两个矢量进行卷积，所得到的最终结果和直接与卷积核进行卷积的结果相同。对于较大的卷积核能大幅度地提高 计算速度。
+
+OpenCV提供了 sepFilter2D()来进行这种分步卷积，调用参数如下：
+
+sepFilter2D(src, ddepth, kernelX, kernelY[, dst[, anchor[, delta[, borderType]]]])
+
+比较filter2D()和sepFilter2D() 的计算速度：
+"""
+
+img = np.random.rand(1000, 1000)
+
+row = cv2.getGaussianKernel(7, -1)
+col = cv2.getGaussianKernel(5, -1)
+
+kernel = np.dot(col[:], row[:].T)
+
+img2 = cv2.filter2D(img, -1, kernel)
+img3 = cv2.sepFilter2D(img, -1, row, col)
+print("error=", np.max(np.abs(img2[:] - img3[:])))
+
+"""
+OpenCV提供了一些高级函数数来直接完成与某种特定卷积核的 卷积计算。
+    平均模糊blur(), boxFilter()
+    高斯模糊GaussianBlur()
+    medianBlur(),
+    bilateralFilter()
+    Edge Detection的 Sobel()
+    Edge Detection的Laplacian()
+    Edge Detection的Canny()
+
+形态学运算
+dilate
+()对图像进行膨胀处理，而erode
+()则对图像进行腐蚀处理。
+
+mpiphologyEx()使用膨胀和收缩实现一些更高级的形态学处理。
+这 些函数都可以对多值图像进行操作，对于多通道图像，它们将对每个通道进行相同的运算。
+
+dilate()和erode()的调用参数相同：
+dilate(src, kernel[, dst[, anchor[, iterations[, borderType[, borderValue]]]]])
+
+膨胀运算可以用下面的公式描述：
+将结构元素kernel的锚点与原始图像中的每个像素(x,y)对齐之后，计算所有结构元素值不为0 的像素的最大值，写入目标图像的(x,y)像素点。而腐蚀运算则是计算所有结构元素不为0的像 素的最小值。
+morphologyEx()的参数如下：
+morphologyEx(src, op, kernel[, dst[, anchoriterationsborderType[, borderValue]]]]])
+op参数，用于指定运算的类型。
+moiphologyEx()的高级运算包括：
+• MORPH_OPEN:开运算，可以用来区分两个靠得很近的区域。算法为先腐蚀再膨胀: dst=dilate(erode(src))
+• MORPH_CLOSE:闭运算，可以用来连接两个靠得很近的区域。算法为先膨胀再腐蚀： dst=erode(dilate(src))
+• MORPH_GRADIENT:形态梯度，能够找出图像区域的边缘。算法为膨胀减去腐蚀： dst=dilate(src)- erode(src)
+• MORPH_TOPHAT:顶帽运算，算法为原始图像减去开运算：dst = src-open(src)。
+• MORPH_BLACKHAT:黑帽运算，算法为闭运算减去原始图像：dst=close(src)-src。
+
+    填充-floodFill
+
+填充函数floodFill()在图像处理中经常用于标识或分离图像中的某些特定部分。它的调用方 式为:
+floodFill(image, mask, seedPoint, newVal[, loDiff[, upDiff[, flags]]])
+seedPoint参数为填充的起始点，为种子点； newVal参数为填充所使用的颜色值；loDiff和upDiff参数是填充的下限和上限容差；flags参数 是填充的算法标志。
+填充从seedPoint指定的种子坐标开始，图像中与当前的填充区域颜色相近的点将被添加进 填充区域，从而逐步扩大填充区域，直到没有新的点能添加进填充区域为止。
+颜色相近的判断 方法有两种：
+    默认使用相邻点为基点进行判断。
+•如果开启了 flags中的FL00DFILL_F1XED_RANGE标志位，则以种子点为基点进行判断。
+假设图像中某个点(x,y)的颜色为C(x,y), C0为基点颜色，则下面的条件满足时，（x,y)将 被添加进填充区域：
+C0 — loDiff < C(x，y) < C0 + hiDiff
+此外还可以通过flags指定相邻点的定义：四连通或八连通。
+当mask参数不为None时，它是一个宽和高比image都大两个像素的单通道8位图像
+。image 图像中的像素(x,y)与mask中的(x + 1,y + 1)对应。填充只针对mask中的值为0的像素进行。 进行填充之后，mask中所有被填充的像素将被赋值为1。如果只希望修改mask,而不对原始图 像进行填充，可以开启flags标志中FLOODFTLL_MASK_ONLY。
+#floodFill()的填充效果
+"""
+
+filename = "C:/_git/vcs/_4.python/opencv/data/coins.png"
+
+img = cv2.imread(filename)
+seed1 = 344, 188
+seed2 = 152, 126
+diff = (13, 13, 13)
+h, w = img.shape[:2]
+mask = np.zeros((h + 2, w + 2), np.uint8)
+cv2.floodFill(img, mask, seed1, (0, 0, 0), diff, diff, cv2.FLOODFILL_MASK_ONLY)
+cv2.floodFill(img, None, seed2, (0, 0, 255), diff, diff)
+fig, axes = plt.subplots(1, 2, figsize=(9, 4))
+axes[0].imshow(~mask, cmap="gray")
+axes[1].imshow(img)
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+# 使用到 scpy2
+
+"""
+去瑕疵-inpaint
+
+inpaint
+
+()可以从图像上去除指定区域中的物体，可以用于去除图像上的水印、划痕、 污渍等瑕疵。
+它的调用参数如下：
+inpaint(src, inpaintMask, inpaintRadius, flags[, dst])
+inpainlMask参数是大小和src相同的单通道8位图像，其中不 为0的像素表示需要去除的区域。。inpaintRange参数是处理半径， 半径越大处理时间越长，结果越平滑。flags参数选择inpaint的算法，目前有两个候选算法： INPAINT_NS 和 INPIANT_TELEA。
+用鼠标绘制需要去瑕疵的区域:
+"""
+
+"""
+from traits.api import (HasTraits, Float, Instance,
+                        Enum, List, Range, Bool, Button, Event, on_trait_change)
+from traitsui.api import View, VGroup, Item, HGroup
+from scpy2.matplotlib.freedraw_widget import ImageMaskDrawer
+from .demobase import ImageProcessDemo
+
+
+class InPaintDemo(ImageProcessDemo):
+    YAXIS_DIRECTION = "up"
+    TITLE = u"Inpaint Demo"
+    DEFAULT_IMAGE = "stuff.jpg"
+
+    mask_artist = Instance(ImageMaskDrawer)
+    r = Range(2.0, 20.0, 10.0)  # inpaint的半径参数
+    method = Enum("INPAINT_NS", "INPAINT_TELEA")  # inpaint的算法
+    show_mask = Bool(False)  # 是否显示选区
+    clear_mask = Button(u"清除选区")
+    apply = Button(u"保存结果")
+
+    def control_panel(self):
+        return VGroup(
+            Item("r", label=u"inpaint半径"),
+            Item("method", label=u"inpaint算法"),
+            Item("show_mask", label=u"显示选区"),
+            Item("clear_mask", show_label=False),
+            Item("apply", show_label=False),
+        )
+
+    def __init__(self, **kw):
+        super(InPaintDemo, self).__init__(**kw)
+        self.connect_dirty("r, method")
+
+    def init_draw(self):
+        self.mask_artist = ImageMaskDrawer(self.axe, self.img,
+                                           canmove=False, size=15)
+        self.mask_artist.on_trait_change(self.draw, "drawed")
+
+    def draw(self):
+        if self.mask_artist is None:
+            self.draw_image(self.img)
+            return
+        mask = self.mask_artist.get_mask_array()
+        if self.img.shape[:2] == mask.shape:
+            img2 = cv2.inpaint(self.img, mask, self.r, getattr(cv2, self.method))
+            self.img2 = img2
+            self.show_mask = False
+            self.mask_artist.hide_mask()
+            self.draw_image(img2)
+        else:
+            self.draw_image(self.img)
+
+    def _img_changed(self):
+        if self.mask_artist is not None:
+            self.mask_artist.create_mask(img=self.img)
+
+    def _show_mask_changed(self):
+        if self.show_mask:
+            self.mask_artist.show_mask()
+        else:
+            self.mask_artist.hide_mask()
+        self.figure.canvas.draw()
+
+    def _clear_mask_fired(self):
+        self.mask_artist.clear_mask()
+        self.draw()
+
+    def _apply_fired(self):
+        if hasattr(self, "img2"):
+            self.img[:] = self.img2[:]
+        self.clear_mask = True
+
+
+if __name__ == '__main__':
+    demo = InPaintDemo()
+    demo.configure_traits()
+
+"""
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

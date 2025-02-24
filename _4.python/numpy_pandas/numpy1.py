@@ -930,12 +930,12 @@ print("------------------------------------------------------------")  # 60個
 
 # 數組打印
 
-print('多位小數')
+print("多位小數")
 a = np.random.rand(5)
 print(a)
 
 print("顯示2位小數")
-np.set_printoptions(precision=2)# 設定np計算後的保留位數
+np.set_printoptions(precision=2)  # 設定np計算後的保留位數
 print(a)
 
 print("設置打印數組最大值")

@@ -1,9 +1,8 @@
-# -*- coding: utf-8 -*-
 """
 将matplotlib的绘图嵌入TraitsUI界面的控件
+
 """
 
-###1###
 import matplotlib
 from traits.api import Bool
 from traitsui.api import toolkit
@@ -24,12 +23,9 @@ elif ETSConfig.toolkit == "qt4":
     from matplotlib.backends.backend_qt4agg import NavigationToolbar2QT as Toolbar
     from traitsui.qt4.editor import Editor
     from pyface.qt import QtGui
-###1###
 
 class _WxFigureEditor(Editor): #{1}
-    """
-    相当于wx后台界面库中的编辑器，它负责创建真正的控件
-    """
+    # 相当于wx后台界面库中的编辑器，它负责创建真正的控件
     scrollable = True
 
     def init(self, parent):
@@ -79,11 +75,11 @@ class _WxFigureEditor(Editor): #{1}
         self.value.canvas.SetMinSize((10,10))
         return panel
 
-###3###
+
 class _QtFigureEditor(Editor):
     scrollable = True
 
-    def init(self, parent): #❶
+    def init(self, parent):
         self.control = self._create_canvas(parent)
         self.set_tooltip()
 
@@ -108,7 +104,7 @@ class _QtFigureEditor(Editor):
         vbox = QtGui.QVBoxLayout()
         panel.setLayout(vbox)
         
-        mpl_control = FigureCanvas(self.value) #❷
+        mpl_control = FigureCanvas(self.value)
         vbox.addWidget(mpl_control)
         if hasattr(self.value, "canvas_events"):
             for event_name, callback in self.value.canvas_events:
@@ -116,16 +112,15 @@ class _QtFigureEditor(Editor):
 
         mpl_control.mpl_connect("motion_notify_event", mousemoved)  
 
-        if self.factory.toolbar: #❸
+        if self.factory.toolbar:
             toolbar = Toolbar(mpl_control, panel)
             vbox.addWidget(toolbar)       
 
         panel.info = QtGui.QLabel(panel)
         vbox.addWidget(panel.info)
         return panel    
-###3###
 
-###4###
+
 class MPLFigureEditor(BasicEditorFactory):
     """
     相当于traits.ui中的EditorFactory，它返回真正创建控件的类
@@ -133,10 +128,9 @@ class MPLFigureEditor(BasicEditorFactory):
     if ETSConfig.toolkit == "wx":
         klass = _WxFigureEditor
     elif ETSConfig.toolkit == "qt4":
-        klass = _QtFigureEditor  #❶
+        klass = _QtFigureEditor
         
-    toolbar = Bool(True)  #❷
-###4###
+    toolbar = Bool(True)
 
 if __name__ == "__main__":
     from matplotlib.figure import Figure    
@@ -162,6 +156,6 @@ if __name__ == "__main__":
             axes.plot(sin(t))
 
         def figure_button_pressed(self, event):
-            print event.xdata, event.ydata
+            print(event.xdata, event.ydata)
 
     TestMplFigureEditor().configure_traits()

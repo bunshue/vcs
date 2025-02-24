@@ -34,27 +34,27 @@ def show():
 
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 print("np.fft 01")
 
+print("np顯示小數點以下3位, IDLE顯示寬度80字, 無壓縮顯示")
 np.set_printoptions(precision=3, linewidth=120, suppress=False)
 
-# 頻域訊號處理
-# FFT
+# FFT 頻域訊號處理
 
+# 原始資料
 X = np.random.rand(8)
-X = np.arange(10)
+# X = np.arange(10)
 # X = np.ones(8)
 
-X_FFT = np.fft.fft(X)
+X_FFT = np.fft.fft(X)  # 做FFT
 
-X_FFT_IFFT = np.fft.ifft(X_FFT)
+X_FFT_IFFT = np.fft.ifft(X_FFT)  # 做IFFT
 
-print("X :", X)
-print("X_FFT = fft(X) :", X_FFT)
-print("DC =", X_FFT[0].real)
-
-print("X_FFT_IFFT = ifft(X_FFT) :", X_FFT_IFFT)
+print("X :\n", X, sep="")
+print("X_FFT = fft(X) :\n", X_FFT, sep="")
+print("直流部分 DC =", X_FFT[0].real)  # 直流部分
+print("X_FFT_IFFT = ifft(X_FFT) :\n", X_FFT_IFFT, sep="")
 
 plt.scatter(X, X, c="g", s=200, label="原資料")
 plt.scatter(X_FFT.real, X_FFT.imag, c="r", s=200, label="FFT")
@@ -62,27 +62,39 @@ plt.legend()
 plt.grid()
 show()
 
-X = np.ones(8)
-np.fft.fft(X) / len(X)  # 為了計算各個成分的能量，需要將FFT的結果除以FFT的長度
+print("------------------------------------------------------------")  # 60個
 
-# array([ 1.+0.j,  0.+0.j,  0.+0.j,  0.+0.j,  0.+0.j,  0.+0.j,  0.+0.j,  0.+0.j])
+X = np.ones(8)
+
+# 做FFT
+X_FFT = np.fft.fft(X)
+print(X_FFT)
+
+# 做FFT, 除以FFT的長度
+X_FFT = np.fft.fft(X) / len(X)  # 為了計算各個成分的能量，需要將FFT的結果除以FFT的長度
+print(X_FFT)
+
+print("np顯示小數點以下3位, IDLE顯示寬度80字, 有壓縮顯示")
+np.set_printoptions(precision=3, linewidth=80, suppress=True)
 
 X = np.arange(0, 2 * np.pi, 2 * np.pi / 8)
 Y = np.sin(X)
-tmp = np.fft.fft(Y) / len(Y)
-print(np.array_str(tmp, suppress_small=True))
+
+# 做FFT, 除以FFT的長度
+X_FFT = np.fft.fft(Y) / len(Y)
+print(np.array_str(X_FFT, suppress_small=True))
 
 # [ 0.+0.j  -0.-0.5j  0.-0.j   0.-0.j   0.+0.j   0.-0.j   0.+0.j   0.+0.5j]
 
-tmp = np.fft.fft(np.cos(X)) / len(X)
-print(np.array_str(tmp, suppress_small=True))
+X_FFT = np.fft.fft(np.cos(X)) / len(X)
+print(np.array_str(X_FFT, suppress_small=True))
 
 # [-0.0+0.j  0.5-0.j  0.0+0.j  0.0+0.j  0.0+0.j -0.0+0.j  0.0+0.j  0.5-0.j]
 
-tmp = np.fft.fft(2 * np.sin(2 * X)) / len(X)
-print(np.array_str(tmp, suppress_small=True))
-tmp = np.fft.fft(0.8 * np.cos(2 * X)) / len(X)
-print(np.array_str(tmp, suppress_small=True))
+X_FFT = np.fft.fft(2 * np.sin(2 * X)) / len(X)
+print(np.array_str(X_FFT, suppress_small=True))
+X_FFT = np.fft.fft(0.8 * np.cos(2 * X)) / len(X)
+print(np.array_str(X_FFT, suppress_small=True))
 
 """
 [ 0.+0.j  0.+0.j -0.-1.j  0.-0.j  0.+0.j  0.+0.j -0.+1.j  0.-0.j]
@@ -105,20 +117,17 @@ print(np.abs(Y_FFT[3]), np.rad2deg(np.angle(Y_FFT[3])))  # 周期為42.667取樣
 X1 = np.random.random(4096)
 X2 = np.random.random(4093)
 
-# %timeit np.fft.fft(X1)
-# %timeit np.fft.fft(X2)
-
-# 10000 loops, best of 3: 183 μs per loop
-# 10 loops, best of 3: 69.6 ms per loop
+X_FFT1 = np.fft.fft(X1)
+X_FFT2 = np.fft.fft(X2)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
+
 print("np.fft 02 合成時域訊號")
 
 
 # 三角波的頻譜（上）、使用頻譜中的部分頻率重建的三角波（下）
-def triangle_wave(size):  # ❶
+def triangle_wave(size):
     x = np.arange(0, 1, 1.0 / size)
     y = np.where(x < 0.5, x, 0)
     y = np.where(x >= 0.5, 1 - x, y)
@@ -126,7 +135,7 @@ def triangle_wave(size):  # ❶
 
 
 # 取FFT計算的結果bins中的前n項進行合成，傳回合成結果，計算loops個周期的波形
-def fft_combine(bins, n, loops=1):  # ❷
+def fft_combine(bins, n, loops=1):
     length = len(bins) * loops
     data = np.zeros(length)
     index = loops * np.arange(0, length, 1.0) / length * (2 * np.pi)
@@ -197,9 +206,9 @@ print("np.fft 04 觀察訊號的頻譜")
 
 def show_fft(x):
     XS = x[:fft_size]
-    xf = np.fft.rfft(XS) / fft_size  # ❹
-    freqs = np.linspace(0, sampling_rate / 2, fft_size // 2 + 1)  # ❺
-    xfp = 20 * np.log10(np.clip(np.abs(xf), 1e-20, 1e100))  # ❻
+    xf = np.fft.rfft(XS) / fft_size
+    freqs = np.linspace(0, sampling_rate / 2, fft_size // 2 + 1)
+    xfp = 20 * np.log10(np.clip(np.abs(xf), 1e-20, 1e100))
 
     plt.figure(figsize=(8, 4))
     plt.subplot(211)
@@ -213,9 +222,9 @@ def show_fft(x):
 
 
 # 156.25Hz和234.375Hz的波形（上）和頻譜（下）
-sampling_rate, fft_size = 8000, 512  # ❶
-T = np.arange(0, 1.0, 1.0 / sampling_rate)  # ❷
-X = np.sin(2 * np.pi * 156.25 * T) + 2 * np.sin(2 * np.pi * 234.375 * T)  # ❸
+sampling_rate, fft_size = 8000, 512
+T = np.arange(0, 1.0, 1.0 / sampling_rate)
+X = np.sin(2 * np.pi * 156.25 * T) + 2 * np.sin(2 * np.pi * 234.375 * T)
 
 show_fft(X)
 show()
@@ -286,7 +295,7 @@ print("------------------------------")  # 30個
 
 # 加Hann窗前後的頻譜，Hann窗能降低頻譜洩漏
 
-sampling_rate, fft_size = 8000, 512  # ❶
+sampling_rate, fft_size = 8000, 512
 T = np.arange(0, 1.0, 1.0 / sampling_rate)
 X = np.sin(2 * np.pi * 200 * T) + 2 * np.sin(2 * np.pi * 300 * T)
 
@@ -324,9 +333,9 @@ print("np.fft 07 頻譜平均")
 
 def average_fft(x, fft_size):
     n = len(x) // fft_size * fft_size
-    tmp = x[:n].reshape(-1, fft_size)  # ❶
-    tmp *= scipy.signal.windows.hann(fft_size, sym=0)  # ❷
-    xf = np.abs(np.fft.rfft(tmp) / fft_size)  # ❸
+    tmp = x[:n].reshape(-1, fft_size)
+    tmp *= scipy.signal.windows.hann(fft_size, sym=0)
+    xf = np.abs(np.fft.rfft(tmp) / fft_size)
     avgf = np.mean(xf, axis=0)
     return 20 * np.log10(avgf)
 
@@ -414,8 +423,8 @@ freqs = np.fft.fftfreq(FFT_SIZE, 1.0 / RATE)
 bin_width = freqs[1] - freqs[0]
 
 amp_spect1 = np.abs(spect1)
-(loc,) = scipy.signal.argrelmax(amp_spect1, order=3)  # ❶
-mask = amp_spect1[loc] > amp_spect1.mean() * 3  # ❷
+(loc,) = scipy.signal.argrelmax(amp_spect1, order=3)
+mask = amp_spect1[loc] > amp_spect1.mean() * 3
 loc = loc[mask]
 peak_freqs = freqs[loc]
 print("bin width:", bin_width)
@@ -437,12 +446,12 @@ print(phase_delta)
 
 # [ 2.595 -1.29  -2.899]
 
-max_n = (peak_freqs.max() + 3 * bin_width) * dt  # ❶
+max_n = (peak_freqs.max() + 3 * bin_width) * dt
 n = np.arange(max_n)
 
-possible_freqs = (phase_delta + 2 * np.pi * n[:, None]) / (2 * np.pi * dt)  # ❷
+possible_freqs = (phase_delta + 2 * np.pi * n[:, None]) / (2 * np.pi * dt)
 
-idx = np.argmin(np.abs(peak_freqs - possible_freqs), axis=0)  # ❸
+idx = np.argmin(np.abs(peak_freqs - possible_freqs), axis=0)
 peak_freqs2 = possible_freqs[idx, np.arange(len(peak_freqs))]
 print("Peak Frequencies:", peak_freqs2)
 
@@ -458,10 +467,10 @@ print("np.fft 11")
 
 def fft_convolve(a, b):
     n = len(a) + len(b) - 1
-    N = 2 ** (int(np.log2(n)) + 1)  # ❶
-    A = np.fft.fft(a, N)  # ❷
+    N = 2 ** (int(np.log2(n)) + 1)
+    A = np.fft.fft(a, N)
     B = np.fft.fft(b, N)
-    return np.fft.ifft(A * B)[:n]  # ❸
+    return np.fft.ifft(A * B)[:n]
 
 
 a = np.random.rand(128)
@@ -475,8 +484,8 @@ a = np.random.rand(10000)
 b = np.random.rand(10000)
 print(np.allclose(np.convolve(a, b), fft_convolve(a, b)))
 
-# %timeit np.convolve(a, b)
-# %timeit fft_convolve(a, b)
+# np.convolve(a, b)
+# fft_convolve(a, b)
 
 # True
 # 10 loops, best of 3: 36.5 ms per loop
@@ -505,3 +514,11 @@ print("------------------------------------------------------------")  # 60個
 sys.exit()
 
 print("------------------------------------------------------------")  # 60個
+
+
+tmp = np.linspace(1, 2, 4)
+print(tmp)
+print(np.array_str(tmp, suppress_small=True))  # 有壓縮顯示
+
+
+sys.exit()

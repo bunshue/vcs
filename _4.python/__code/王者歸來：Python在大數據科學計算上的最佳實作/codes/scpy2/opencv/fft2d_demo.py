@@ -4,9 +4,11 @@ import numpy as np
 from numpy import fft
 from traits.api import Instance, Button, List, Bool, Event, Range, TraitError
 from traitsui.api import Item, VGroup
-from scpy2.matplotlib.freedraw_widget import ImageMaskDrawer
-from .demobase import ImageProcessDemo
+#from scpy2.matplotlib.freedraw_widget import ImageMaskDrawer
+#from .demobase import ImageProcessDemo
 
+from freedraw_widget import *
+from demobase import *
 
 FFT_SIZE = 512
 
