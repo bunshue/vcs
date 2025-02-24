@@ -3,6 +3,10 @@
 FFT
 
 
+np 傅立葉變換
+np.fft.fft2()
+
+
 
 """
 
@@ -31,6 +35,10 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
+def show():
+    plt.show()
+    pass
+
 print("------------------------------------------------------------")  # 60個
 
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
@@ -38,28 +46,51 @@ filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bm
 print("------------------------------------------------------------")  # 60個
 
 
+# 二維離散傅立葉變換
+
+x = np.random.rand(8, 8)
+print(x)
+
+plt.imshow(x, cmap="gray")
+show()
+
+X = np.fft.fft2(x)
+print(np.allclose(X[1:, 1:], X[7:0:-1, 7:0:-1].conj()))  # 共軛復數
+print(X[::4, ::4])  # 虛數為零
+
+"""
+True
+[[ 31.48765415+0.j  -2.80563949+0.j]
+ [  0.75758598+0.j  -0.53147589+0.j]]
+"""
+
+x2 = np.fft.ifft2(X)  # 將頻域訊號轉換回空域訊號
+print(x2)
+cc = np.allclose(x, x2)  # 和原始訊號進行比較
+print(cc)
+# True
+
 print("------------------------------------------------------------")  # 60個
 
+print('製作 sinc2d 資料')
 
-'''
 N = 100
 sinc2d = np.zeros((N, N))
 for x, x1 in enumerate(np.linspace(-2 * np.pi, 2 * np.pi, N)):
     for y, x2 in enumerate(np.linspace(-2 * np.pi, 2 * np.pi, N)):
         # sinc2d[x, y] = np.sin(x1) * np.sin(x2) / (x1 * x2)  # 二維 sinc 函數
         sinc2d[x, y] = np.sqrt(x1**2 + x2**2)
-# print(sinc2d)
 
-""" same
-x1 = np.linspace(-10, 10, N)
-x2 = np.linspace(-10, 10, N)
-sinc2d = np.outer(np.sin(x1), np.sin(x2)) / np.outer(x1, x2)  # 二維 sinc 函數
-# print(sinc2d)
-"""
-plt.imshow(sinc2d)
-#plt.show()
-'''
+# 製作 sinc2d 資料 same
+# x1 = np.linspace(-10, 10, N)
+# x2 = np.linspace(-10, 10, N)
+# sinc2d = np.outer(np.sin(x1), np.sin(x2)) / np.outer(x1, x2)  # 二維 sinc 函數
 
+# plt.imshow(sinc2d)
+# show()
+
+
+print('製作 簡易 X矩陣 資料')
 N = 5
 X = np.zeros((N, N))
 
@@ -70,10 +101,10 @@ print(cx, cy)
 X[cx, cy] = 1
 print(X)
 
-"""
-X = cv2.imread(filename, 0)
-X = sinc2d
-"""
+# X = cv2.imread(filename, 0) # 使用圖片資料
+# X = sinc2d # 使用 sinc2d
+
+print("------------------------------")  # 30個
 
 # np 傅立葉變換
 X_FFT = np.fft.fft2(X)
@@ -84,7 +115,7 @@ MAGNITUDE_SPECTRUM = 20 * np.log(np.abs(FFT_SHIFT))
 
 print(MAGNITUDE_SPECTRUM)
 
-plt.figure("傅立葉", figsize=(8, 6))
+plt.figure(figsize=(8, 6))
 plt.subplot(121)
 plt.title("原圖")
 plt.imshow(X, cmap="gray")
@@ -94,7 +125,32 @@ plt.title("fftshift")
 plt.imshow(MAGNITUDE_SPECTRUM, cmap="gray")
 
 plt.suptitle("numpy 傅立葉")
-plt.show()
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 檔案 => cv2影像
+image = cv2.imread(filename, 0)#0:灰度模式 cv2.IMREAD_GRAYSCALE
+f = np.fft.fft2(image)
+fshift = np.fft.fftshift(f)
+s1 = np.log(np.abs(fshift))
+# print(f)
+# fimage = np.log(np.abs(f))
+fimage = np.abs(s1)
+print(fimage)
+
+plt.figure(figsize=(8, 6))
+plt.subplot(121)
+plt.title("原圖")
+plt.imshow(image, cmap="gray")
+
+plt.subplot(122)
+plt.title("fftshift")
+plt.imshow(fimage, cmap="gray")
+
+plt.suptitle("numpy 傅立葉")
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -108,7 +164,7 @@ X_DFT = cv2.dft(np.float32(X), flags=cv2.DFT_COMPLEX_OUTPUT)
 FFT_SHIFT = np.fft.fftshift(X_DFT)
 result = 20 * np.log(cv2.magnitude(FFT_SHIFT[:, :, 0], FFT_SHIFT[:, :, 1]))
 
-plt.figure("傅立葉變換", figsize=(8, 6))
+plt.figure(figsize=(8, 6))
 
 plt.subplot(121)
 plt.imshow(X, cmap="gray")
@@ -120,7 +176,7 @@ plt.title("fftshift")
 
 plt.suptitle("傅立葉變換")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -136,7 +192,7 @@ FFT_SHIFT_IFFTSHIFT_IFFT2 = np.fft.ifft2(FFT_SHIFT_IFFTSHIFT)
 
 FFT_SHIFT_IFFTSHIFT_IFFT2 = np.abs(FFT_SHIFT_IFFTSHIFT_IFFT2)
 
-plt.figure("逆傅立葉", figsize=(8, 6))
+plt.figure(figsize=(8, 6))
 
 plt.subplot(121)
 plt.imshow(X, cmap="gray")
@@ -147,7 +203,7 @@ plt.imshow(FFT_SHIFT_IFFTSHIFT_IFFT2, cmap="gray")
 plt.title("FFT_SHIFT_IFFTSHIFT_IFFT2")
 
 plt.suptitle("逆傅立葉")
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -163,7 +219,7 @@ FFT_SHIFT_IFFTSHIFT_IDFT = cv2.magnitude(
     FFT_SHIFT_IFFTSHIFT_IDFT[:, :, 0], FFT_SHIFT_IFFTSHIFT_IDFT[:, :, 1]
 )
 
-plt.figure("逆傅立葉變換", figsize=(8, 6))
+plt.figure(figsize=(8, 6))
 
 plt.subplot(121)
 plt.imshow(X, cmap="gray")
@@ -174,7 +230,7 @@ plt.imshow(FFT_SHIFT_IFFTSHIFT_IDFT, cmap="gray")
 plt.title("FFT_SHIFT_IFFTSHIFT_IDFT")
 
 plt.suptitle("逆傅立葉變換")
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -193,7 +249,7 @@ FFT_SHIFT_IFFTSHIFT = np.fft.ifftshift(FFT_SHIFT)
 FFT_SHIFT_IFFTSHIFT_IFFT2 = np.fft.ifft2(FFT_SHIFT_IFFTSHIFT)
 FFT_SHIFT_IFFTSHIFT_IFFT2 = np.abs(FFT_SHIFT_IFFTSHIFT_IFFT2)
 
-plt.figure("高通濾波", figsize=(8, 6))
+plt.figure(figsize=(8, 6))
 
 plt.subplot(121)
 plt.imshow(X, cmap="gray")
@@ -204,7 +260,7 @@ plt.imshow(FFT_SHIFT_IFFTSHIFT_IFFT2, cmap="gray")
 plt.title("FFT_SHIFT_IFFTSHIFT_IFFT2")
 
 plt.suptitle("高通濾波")
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -226,7 +282,7 @@ FFT_SHIFT_MASK_IFFTSHIFT_IDFT = cv2.magnitude(
     FFT_SHIFT_MASK_IFFTSHIFT_IDFT[:, :, 0], FFT_SHIFT_MASK_IFFTSHIFT_IDFT[:, :, 1]
 )
 
-plt.figure("低通濾波", figsize=(8, 6))
+plt.figure(figsize=(8, 6))
 
 plt.subplot(121)
 plt.imshow(X, cmap="gray")
@@ -237,7 +293,7 @@ plt.imshow(FFT_SHIFT_MASK_IFFTSHIFT_IDFT, cmap="gray")
 plt.title("FFT_SHIFT_MASK_IFFTSHIFT_IDFT")
 
 plt.suptitle("低通濾波")
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -250,16 +306,16 @@ X_DFT = cv2.dft(np.float32(X), flags=cv2.DFT_COMPLEX_OUTPUT)
 FFT_SHIFT = np.fft.fftshift(X_DFT)
 MAGNITUDE_SPECTRUM = 20 * np.log(cv2.magnitude(FFT_SHIFT[:, :, 0], FFT_SHIFT[:, :, 1]))
 
-plt.figure("MAGNITUDE_SPECTRUM", figsize=(8, 6))
+plt.figure(figsize=(8, 6))
 
 plt.subplot(121), plt.imshow(X, cmap="gray")
 plt.title("原圖")
 
 plt.subplot(122)
 plt.imshow(MAGNITUDE_SPECTRUM, cmap="gray")
-plt.title("級頻譜")
+plt.title("級頻譜 MAGNITUDE_SPECTRUM")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -879,7 +935,7 @@ gui_half_y = gui_y[range(int(N / 2))]  # 由于對稱性，只取一半區間（
 
 # 繪製結果
 fig = plt.figure(
-    num="image_fft",
+    num="",
     figsize=(12, 8),
     dpi=100,
     facecolor="whitesmoke",
@@ -918,7 +974,7 @@ plt.subplot(236)
 plt.plot(half_x, gui_half_y, "blue")
 plt.title("單邊振幅譜(歸一化)")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -932,7 +988,7 @@ image = 0.2126 * image[:, :, 0] + 0.7152 * image[:, :, 1] + 0.0722 * image[:, :,
 
 # 繪製結果
 fig = plt.figure(
-    num="image_fft2",
+    num="",
     figsize=(12, 8),
     dpi=100,
     facecolor="whitesmoke",
@@ -974,7 +1030,7 @@ plt.subplot(236)
 plt.imshow(log_FFT_SHIFT, "gray")
 plt.title("中心化的對數變化")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1018,40 +1074,10 @@ plt.subplot(133)
 plt.imshow(log_F,'gray')
 plt.title('log_F')
 
-plt.show()
+show()
 """
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-# 二維離散傅立葉變換
-
-x = np.random.rand(8, 8)
-print(x)
-
-plt.imshow(x, cmap="gray")
-plt.show()
-
-
-X = np.fft.fft2(x)
-print(np.allclose(X[1:, 1:], X[7:0:-1, 7:0:-1].conj()))  # 共軛復數
-print(X[::4, ::4])  # 虛數為零
-
-"""
-True
-[[ 31.48765415+0.j  -2.80563949+0.j]
- [  0.75758598+0.j  -0.53147589+0.j]]
-"""
-
-x2 = np.fft.ifft2(X)  # 將頻域訊號轉換回空域訊號
-print(x2)
-cc = np.allclose(x, x2)  # 和原始訊號進行比較
-print(cc)
-
-# True
-
-# %fig=（左上）用fft2()計算的頻域訊號，
-# （中上）使用fftshift()移位之後的頻域訊號，
-# （其它）各個領域所對應的空域訊號
 
 N = 256
 X = cv2.imread("data/lena.jpg", cv2.IMREAD_GRAYSCALE)
@@ -1112,7 +1138,7 @@ for ax in axes:
 
 fig.subplots_adjust(0.01, 0.01, 0.99, 0.99, 0.02, 0.02)
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1145,11 +1171,11 @@ fy = np.fft.fft(ts_diff)
 print(fy[:10])  # 顯示前10個頻域數據
 conv1 = np.real(np.fft.ifft(fy))  # 逆變換
 index, conv2 = fft_combine(fy / len(ts_diff), int(len(fy) / 2 - 1), 1.3)  # 只關心一半數據
-plt.plot(ts_diff)
-plt.plot(conv1 - 0.5)  # 爲看清楚，將顯示區域下拉0.5
-plt.plot(conv2 - 1)
+plt.plot(ts_diff, 'r')
+plt.plot(conv1 - 0.5, 'g')  # 爲看清楚，將顯示區域下拉0.5
+plt.plot(conv2 - 1, 'b')
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1166,6 +1192,18 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
+sys.exit()
+
 
 # 取四捨五入到小數點以下2位
 MAGNITUDE_SPECTRUM = np.around(MAGNITUDE_SPECTRUM, decimals=2)
+
+
+print("------------------------------")  # 30個
+
+
+
+# %fig=（左上）用fft2()計算的頻域訊號，
+# （中上）使用fftshift()移位之後的頻域訊號，
+# （其它）各個領域所對應的空域訊號
+

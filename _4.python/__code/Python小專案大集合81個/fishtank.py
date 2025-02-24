@@ -1,4 +1,5 @@
-"""Fish Tank, by Al Sweigart al@inventwithpython.com
+"""
+Fish Tank
 A peaceful animation of a fish tank. Press Ctrl-C to stop.
 Similar to ASCIIQuarium or @EmojiAquarium, but mine is based on an
 older ASCII fish tank program for DOS.
@@ -7,15 +8,11 @@ https://twitter.com/EmojiAquarium
 This code is available at https://nostarch.com/big-book-small-python-programming
 Tags: extra-large, artistic, bext"""
 
-import random, sys, time
+import sys
+import time
+import random
 
-try:
-    import bext
-except ImportError:
-    print('This program requires the bext module, which you')
-    print('can install by following the instructions at')
-    print('https://pypi.org/project/Bext/')
-    sys.exit()
+import bext
 
 # Set up the constants:
 WIDTH, HEIGHT = bext.size()
