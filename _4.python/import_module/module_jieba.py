@@ -233,18 +233,27 @@ from collections import Counter
 
 countlist = []
 for i in range(len(arr)):
-    count = Counter(arr[i].split(' ')) # 用空格將字串切分成字符串列表，統計每個詞出現次數
+    count = Counter(arr[i].split(" "))  # 用空格將字串切分成字符串列表，統計每個詞出現次數
     countlist.append(count)
 print(countlist)
 
-def tf(word, count): 
+
+def tf(word, count):
     return count[word] / sum(count.values())
-def contain(word, count_list): # 統計包含關鍵詞word的句子數量
+
+
+def contain(word, count_list):  # 統計包含關鍵詞word的句子數量
     return sum(1 for count in count_list if word in count)
+
+
 def idf(word, count_list):
-    return np.log(len(count_list) / (contain(word, count_list)) + 1)  #爲避免分母爲0，分母加1
+    return np.log(len(count_list) / (contain(word, count_list)) + 1)  # 爲避免分母爲0，分母加1
+
+
 def tfidf(word, count, count_list):
     return tf(word, count) * idf(word, count_list)
+
+
 for i, count in enumerate(countlist):
     print("第{}句：".format(i))
     scores = {word: tfidf(word, count, countlist) for word in count}
@@ -275,16 +284,20 @@ print(words)
 
 """
 for word, flag in words:
-    print('%s, %s' % (word, flag))
+    print("%s, %s" % (word, flag))
 print("3 ====================")
 
-keywords = jieba.analyse.extract_tags(original_text, topK = 20, withWeight = True, allowPOS = ())
+keywords = jieba.analyse.extract_tags(
+    original_text, topK=20, withWeight=True, allowPOS=()
+)
 for item in keywords:
-        print(" %s =  %f "  %  (item[0], item[1]))
+    print(" %s =  %f " % (item[0], item[1]))
 print("4 ====================")
-keywords = jieba.analyse.textrank(original_text, topK = 20, withWeight = True, allowPOS = ('ns', 'n', 'vn', 'v'))
+keywords = jieba.analyse.textrank(
+    original_text, topK=20, withWeight=True, allowPOS=("ns", "n", "vn", "v")
+)
 for item in keywords:
-    print(" %s =  %f " % (item[0].encode('utf_8'), item[1])) 
+    print(" %s =  %f " % (item[0].encode("utf_8"), item[1]))
 
 print("------------------------------------------------------------")  # 60個
 
@@ -297,23 +310,23 @@ original_text = "名偵探柯南是根據日本漫畫家青山剛昌著名原作
 print("預設切分, cut_all不寫")
 print(" | ".join(jieba.cut(original_text)))
 
-jieba.suggest_freq('台中', True)
+jieba.suggest_freq("台中", True)
 print("預設切分, cut_all不寫")
 print(" | ".join(jieba.cut(original_text)))
 
-jieba.suggest_freq(('名產'), True)
+jieba.suggest_freq(("名產"), True)
 print("預設切分, cut_all不寫")
 print(" | ".join(jieba.cut(original_text)))
 
-jieba.suggest_freq(('部落格'), True)
+jieba.suggest_freq(("部落格"), True)
 print("預設切分, cut_all不寫")
 print(" | ".join(jieba.cut(original_text)))
 
-jieba.suggest_freq(('太陽餅'), True)
+jieba.suggest_freq(("太陽餅"), True)
 print("預設切分, cut_all不寫")
 print(" | ".join(jieba.cut(original_text)))
 
-jieba.suggest_freq(('中', '將'), True)
+jieba.suggest_freq(("中", "將"), True)
 print("預設切分, cut_all不寫")
 print(" | ".join(jieba.cut(original_text)))
 

@@ -461,6 +461,17 @@ sympy.Integral(sympy.sqrt(1 / x), x)
 
 print("------------------------------------------------------------")  # 60個
 
+print("積分")
+from sympy import symbols
+from sympy import integrate
+from sympy import sqrt
+
+x = symbols("x")
+cc = integrate(sqrt(1 - x**2), (x, -1, 1)) * 2
+print(cc)
+
+print("------------------------------------------------------------")  # 60個
+
 x = sympy.symbols("x")
 
 # 球體體積

@@ -8,6 +8,7 @@
 print("------------------------------------------------------------")  # 60個
 
 # 共同
+import re
 import os
 import sys
 import time
@@ -38,7 +39,10 @@ print("------------------------------------------------------------")  # 60個
 
 import json
 import scipy
+import sklearn
 import sklearn.linear_model
+import sklearn.svm as svm
+import sklearn.tree as tree
 from sklearn import tree
 from sklearn import metrics
 from sklearn import datasets
@@ -58,7 +62,6 @@ from sklearn.metrics import accuracy_score
 from sklearn.metrics import roc_curve
 from sklearn.metrics import recall_score
 
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -70,7 +73,10 @@ print("make_blobs,", N, "個樣本, ", M, "個特徵, 分成", GROUPS, "群")
 X, y = make_blobs(n_samples=N, centers=GROUPS, n_features=M)
 
 # 資料二, 使用 iris 資料
-X, y = datasets.load_iris(return_X_y=True)
+# X, y = datasets.load_iris(return_X_y=True) # same
+iris = datasets.load_iris()
+X = iris.data  # 取出4欄資料
+y = iris.target
 
 # 資料分割
 x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
@@ -149,7 +155,7 @@ print("決策樹")
 
 iris = datasets.load_iris()
 
-X = iris.data[:, [2, 3]]
+X = iris.data[:, [2, 3]]  # 取出2欄資料
 y = iris.target
 
 # 資料分割
@@ -196,13 +202,14 @@ print(data.shape)
 cc = data.head()
 print("(全部)前5筆資料 :\n", cc, sep="")
 
-# 資料 取出前4欄位 age~credit_rating
+# 資料 取出前4欄位 age ~ credit_rating
 X = data.loc[:, "age":"credit_rating"]
-cc = X.head()
-print("(資料)前5筆資料 :\n", cc, sep="")
 
 # 目標 取出第5欄位 是否購買電腦
 y = data["buys_computer"]
+
+cc = X.head()
+print("(資料)前5筆資料 :\n", cc, sep="")
 
 # CART算法(分类树)
 # 建立CART模型
@@ -363,10 +370,8 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -377,6 +382,10 @@ rng = np.random.RandomState(1)
 X = np.sort(5 * rng.rand(80, 1), axis=0)
 y = np.sin(X).ravel()
 y[::5] += 3 * (0.5 - rng.rand(16))  # 加上雜訊
+
+plt.plot(X, y)
+plt.title("原始資料")
+plt.show()
 
 # 訓練兩個迴歸樹模型 最大深度不同
 clf_1 = DecisionTreeRegressor(max_depth=2)  # 迴歸樹函數學習機
@@ -856,21 +865,12 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-""" HELPER FUNCTION: GET ERROR RATE ========================================="""
-
-
 def get_error_rate(pred, Y):
     return sum(pred != Y) / float(len(Y))
 
 
-""" HELPER FUNCTION: PRINT ERROR RATE ======================================="""
-
-
 def print_error_rate(err):
     print("Error rate: Training: %.4f - Test: %.4f" % err)
-
-
-""" HELPER FUNCTION: GENERIC CLASSIFIER ====================================="""
 
 
 def generic_clf(Y_train, X_train, Y_test, X_test, clf):
@@ -880,7 +880,7 @@ def generic_clf(Y_train, X_train, Y_test, X_test, clf):
     return get_error_rate(pred_train, Y_train), get_error_rate(pred_test, Y_test)
 
 
-""" ADABOOST IMPLEMENTATION ================================================="""
+# ADABOOST
 
 
 def adaboost_clf(Y_train, X_train, Y_test, X_test, M, clf):
@@ -915,9 +915,6 @@ def adaboost_clf(Y_train, X_train, Y_test, X_test, M, clf):
     return get_error_rate(pred_train, Y_train), get_error_rate(pred_test, Y_test)
 
 
-""" PLOT FUNCTION ==========================================================="""
-
-
 def plot_error_rate(er_train, er_test):
     df_error = pd.DataFrame([er_train, er_test]).T
     df_error.columns = ["Training", "Test"]
@@ -930,62 +927,55 @@ def plot_error_rate(er_train, er_test):
     plot1.set_ylabel("Error rate", fontsize=12)
     plot1.set_title("Error rate vs number of iterations", fontsize=16)
     plt.axhline(y=er_test[0], linewidth=1, color="red", ls="dashed")
-    plt.show()
+    show()
 
 
-""" MAIN SCRIPT ============================================================="""
-if __name__ == "__main__":
-    print("aa")
-    # Read data
-    x, y = make_hastie_10_2()
-    print("bb")
-    df = pd.DataFrame(x)
-    df["Y"] = y
+# 主程式
+print("aa")
+# Read data
+x, y = make_hastie_10_2()
+print("bb")
+df = pd.DataFrame(x)
+df["Y"] = y
 
-    # Split into training and test set
-    train, test = train_test_split(df, test_size=0.2)
+# 資料分割
+train, test = train_test_split(df, test_size=0.2)
 
-    X_train, Y_train = train.iloc[:, :-1], train.iloc[:, -1]
-    X_test, Y_test = test.iloc[:, :-1], test.iloc[:, -1]
+X_train, Y_train = train.iloc[:, :-1], train.iloc[:, -1]
+X_test, Y_test = test.iloc[:, :-1], test.iloc[:, -1]
 
-    print("cc")
+print("cc")
 
-    # Fit a simple decision tree first
-    clf_tree = DecisionTreeClassifier(max_depth=1, random_state=1)
-    er_tree = generic_clf(Y_train, X_train, Y_test, X_test, clf_tree)
+# Fit a simple decision tree first
+clf_tree = DecisionTreeClassifier(max_depth=1, random_state=1)
+er_tree = generic_clf(Y_train, X_train, Y_test, X_test, clf_tree)
 
-    print("dd")
+print("dd")
 
-    # Fit Adaboost classifier using a decision tree as base estimator
-    # Test with different number of iterations
-    er_train, er_test = [er_tree[0]], [er_tree[1]]
-    x_range = range(10, 410, 50)
-    for i in x_range:
-        print(i)
-        er_i = adaboost_clf(Y_train, X_train, Y_test, X_test, i, clf_tree)
-        er_train.append(er_i[0])
-        er_test.append(er_i[1])
+# Fit Adaboost classifier using a decision tree as base estimator
+# Test with different number of iterations
+er_train, er_test = [er_tree[0]], [er_tree[1]]
+x_range = range(10, 410, 50)
+for i in x_range:
+    print(i)
+    er_i = adaboost_clf(Y_train, X_train, Y_test, X_test, i, clf_tree)
+    er_train.append(er_i[0])
+    er_test.append(er_i[1])
 
-    # Compare error rate vs number of iterations
-    plot_error_rate(er_train, er_test)
+# Compare error rate vs number of iterations
+plot_error_rate(er_train, er_test)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-import sklearn
-import re
-import sklearn.tree as tree
 
 data = pd.read_excel("data/loan.xlsx")
 target = data["Type"]
 data.drop("Type", axis="columns", inplace=True)
 
-print("資料分割")
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+# 資料分割
 train_data, test_data, train_target, test_target = train_test_split(
     data, target, test_size=0.2
 )
-# 訓練組8成, 測試組2成
 
 clf_1 = tree.DecisionTreeClassifier(criterion="entropy")
 clf_1.fit(train_data, train_target)
@@ -1000,8 +990,6 @@ print(accuracy_score(test_target, test_est))
 # 混淆矩陣
 cm = confusion_matrix(test_target, test_est)
 print("混淆矩陣 :\n", cm, sep="")
-
-import sklearn.svm as svm
 
 clf_2 = svm.SVC()
 clf_2.fit(train_data, train_target)
@@ -1072,7 +1060,7 @@ print(thresholds)
 
 plt.plot(fpr, tpr)
 
-plt.show()
+show()
 
 y_true = [0, 1, 2, 0, 1, 2]
 y_pred = [0, 2, 1, 0, 0, 1]
@@ -1154,7 +1142,7 @@ def feature_utility(data, selected_feature_name, target_name):
     plt.ylabel("Percentage")
     plt.xlabel(selected_feature_name)
     plt.legend([bar[0] for bar in bars], target_classes, loc="best")
-    plt.show()
+    show()
 
 
 def encode_label(data):
@@ -1193,6 +1181,7 @@ X_data, y_data = bank_data.iloc[:, :-1], bank_data.iloc[:, -1]
 answer_no, answer_yes = y_data.value_counts()
 print("Percentage of answering no: ", answer_no / (answer_no + answer_yes))
 
+# 資料分割
 X_train, X_test, y_train, y_test = train_test_split(X_data, y_data, test_size=0.2)
 
 dt_clf = DecisionTreeClassifier(
@@ -1255,3 +1244,7 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
+
+X_combined = np.vstack((x_train, x_test))
+y_combined = np.hstack((y_train, y_test))

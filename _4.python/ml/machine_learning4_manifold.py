@@ -47,7 +47,8 @@ def show():
     plt.show()
     pass
 
-'''
+
+"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -124,7 +125,7 @@ print(model.fit_transform(digits.data))
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
+"""
 # load images of the digits 0 through 5 and visualize several of them
 
 digits = datasets.load_digits(n_class=6)

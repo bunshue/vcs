@@ -73,4 +73,3 @@ print(userhome)
 os.getcwd()
 
 """
-

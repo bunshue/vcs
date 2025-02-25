@@ -11,22 +11,24 @@ print("------------------------------------------------------------")  # 60個
 
 import emoji
 
-print(emoji.emojize('Python is :thumbs_up:'))
+print(emoji.emojize("Python is :thumbs_up:"))
 
-print(emoji.demojize('Python is 👍'))
+print(emoji.demojize("Python is 👍"))
 
 print("------------------------------------------------------------")  # 60個
 
 import nltk
-nltk.download('omw-1.4')
+
+nltk.download("omw-1.4")
 
 
 # 运行text2emotion:
 
 import text2emotion as te
+
 text = "Day was pretty amazing😃😃"
 cc = te.get_emotion(text)
-#Output{'Angry': 0.0, 'Fear': 0.0, 'Happy': 0.8, 'Sad': 0.0, 'Surprise': 0.2}
+# Output{'Angry': 0.0, 'Fear': 0.0, 'Happy': 0.8, 'Sad': 0.0, 'Surprise': 0.2}
 
 print(cc)
 
@@ -50,4 +52,3 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-

@@ -388,8 +388,19 @@ print(cmath.sqrt(a))
 
 print("------------------------------------------------------------")  # 60個
 
+from fractions import Fraction
+
+
+print('import這個 會打印信息')
+
+
+
+from fractions import Fraction
+
+print(Fraction(3, 4) ** 4 / 3)
 
 print("------------------------------------------------------------")  # 60個
+
 import fractions  # 分數運算
 
 print("------------------------------------------------------------")  # 60個

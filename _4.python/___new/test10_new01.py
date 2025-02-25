@@ -18,16 +18,36 @@ llll 字典 集合 串列 元組 dslt
 
 """
 
+import requests
+
+print("------------------------------------------------------------")  # 60個
+
+# 共同
 import os
 import sys
 import time
 import math
 import random
-import requests
 import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+# 設定中文字型及負號正確顯示
+# 設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
+# 設定負號
+plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+plt.rcParams["font.size"] = 12  # 設定字型大小
+
+
+def show():
+    plt.show()
+    pass
+
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 def printlocal():
     lang = "Java"
     print(f"語言 : {lang}")
@@ -323,7 +343,7 @@ x = [
 print(x)
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 
 
 print("------------------------------------------------------------")  # 60個
@@ -397,7 +417,6 @@ print(hex(ord(x4)))  # 輸出字元'魁'的Unicode(16進位)碼值
 
 print("------------------------------------------------------------")  # 60個
 
-
 x1 = 97
 x2 = chr(x1)
 print(x2)  # 輸出數值97的字元
@@ -405,8 +424,6 @@ x3 = ord(x2)
 print(x3)  # 輸出字元x3的Unicode碼值
 x4 = "魁"
 print(ord(x4))  # 輸出字元'魁'的Unicode碼值
-
-sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 print("chr-ord-ascii SP")
@@ -433,7 +450,6 @@ ciphertext = encrypt(msg, encry_dict)
 
 print("原始字串 ", msg)
 print("加密字串 ", ciphertext)
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -611,7 +627,8 @@ print("------------------------------------------------------------")  # 60個
 輸入 10,003,103 後會輸出 ten million three thousand one hundred three
 """
 
-import string, argparse
+import string
+import argparse
 
 # 數字與英文的對應字典
 _1to9dict = {
@@ -746,8 +763,8 @@ print("------------------------------------------------------------")  # 60個
 
 print("抽象方法(abstract method)")
 
-from abc import ABCMeta, abstractmethod
-from math import pi
+from abc import ABCMeta
+from abc import abstractmethod
 
 
 class Shape(object, metaclass=ABCMeta):
@@ -765,10 +782,10 @@ class Circle(Shape):
         self._radius = radius
 
     def perimeter(self):
-        return 2 * pi * self._radius
+        return 2 * math.pi * self._radius
 
     def area(self):
-        return pi * self._radius**2
+        return math.pi * self._radius**2
 
     def __str__(self):
         return "我是一个圆"
@@ -6236,30 +6253,6 @@ message = client.messages.create (
 """
 print("------------------------------------------------------------")  # 60個
 
-import string
-
-
-def encrypt(text, encryDict):  # 加密文件
-    cipher = []
-    for i in text:  # 執行每個字元加密
-        v = encryDict[i]  # 加密
-        cipher.append(v)  # 加密結果
-    return "".join(cipher)  # 將串列轉成字串
-
-
-abc = string.printable[:-5]  # 取消不可列印字元
-subText = abc[-3:] + abc[:-3]  # 加密字串
-encry_dict = dict(zip(subText, abc))  # 建立字典
-print("列印編碼字典\n", encry_dict)  # 列印字典
-
-msg = "If the implementation is easy to explain, it may be a good idea."
-ciphertext = encrypt(msg, encry_dict)
-
-print("原始字串 ", msg)
-print("加密字串 ", ciphertext)
-
-print("------------------------------------------------------------")  # 60個
-
 print(" 姓名    國文    英文    總分    平均")
 print("%3s  %4d    %4d    %4d     %3.1f" % ("洪冰儒", 98, 90, 188, 188 / 2))
 print("%3s  %4d    %4d    %4d     %3.1f" % ("洪雨星", 96, 95, 191, 191 / 2))
@@ -7974,12 +7967,6 @@ print("圓柱的半徑%6.2f長度%6.2f體積為%6.2f"%(pradius,plength,pvolume))
 """
 print("------------------------------------------------------------")  # 60個
 
-import pathlib
-
-print(pathlib.Path.cwd())
-
-print("------------------------------------------------------------")  # 60個
-
 import pyautogui
 
 for i in range(10):
@@ -8727,12 +8714,6 @@ n = list(range(10)) * 10
 
 print("------------------------------------------------------------")  # 60個
 
-for _ in range(10):
-    a = random.randint(3, 8)  # 唯一包含頭尾
-    print(a)
-
-print("------------------------------------------------------------")  # 60個
-
 W = 5
 H = 5
 nextCells = {}  # 字典
@@ -8747,26 +8728,13 @@ print(nextCells)
 
 print("------------------------------------------------------------")  # 60個
 
+print("10位 靠右對齊")
 
-print("20位 靠右對齊")
-
-string = "abcdefg"
-print(string.rjust(20))
+text = "abcdefg"
+print(text.rjust(10))
 
 number = 1234567
-print(repr(int(number)).rjust(20))
-
-print("4位 不對齊")
-for _ in range(20):
-    a = random.randint(0, 200)
-    print(repr(int(a)), end=" ")
-print()
-
-print("4位 靠左對齊")
-for _ in range(20):
-    a = random.randint(0, 200)
-    print(repr(int(a)).ljust(4), end="")
-print()
+print(repr(int(number)).rjust(10))
 
 print("------------------------------------------------------------")  # 60個
 
@@ -8789,28 +8757,20 @@ print(lst)
 
 print("------------------------------------------------------------")  # 60個
 
-animals1 = ["鼠", "牛", "虎"]
-animals2 = ["兔", "龍", "蛇"]
-animals3 = ["馬", "羊", "猴"]
-animals4 = ["雞", "狗", "豬"]
+print("random.choice 多選一")
+animals = ["鼠", "牛", "虎", "兔", "龍", "蛇"]
 
-print("本次選出人員")
-print(
-    random.choice(animals1)
-    + " "
-    + random.choice(animals2)
-    + " "
-    + random.choice(animals3)
-    + " "
-    + random.choice(animals4)
-)
+cc = random.choice(animals) 
+print(cc)
 
-print("------------------------------------------------------------")  # 60個
+print("random.sample 多選多")
+cc = random.sample(animals, 3)
+print(cc)
 
-passlen = 3
-s = "ABCDEFG"
-p = "".join(random.sample(s, passlen))
-print(p)
+animals = "鼠牛虎兔龍蛇"
+print("random.sample 多選多")
+cc = random.sample(animals, 3)
+print(cc)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -9047,10 +9007,6 @@ from IPython.display import Markdown  # 用IPython
 display_markdown(Markdown("\n\n".join(links)))
 
 
-from fractions import Fraction
-
-print(Fraction(3, 4) ** 4 / 3)
-
 from os import path
 import json
 
@@ -9155,35 +9111,47 @@ print(ret3)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 數據處理
-# 正常顯示
+print("數據處理的方法")
 x1 = np.linspace(-1.5, 1.5, 31)
 y1 = np.cos(x1) ** 2
+print(len(y1))
 
-# 移除 y1 > 0.6 的點
-x2 = x1[y1 <= 0.6]
-y2 = y1[y1 <= 0.6]
+# 移除 y1 > 0.9 的點
+x2 = x1[y1 <= 0.9]
+y2 = y1[y1 <= 0.9]
 
 # 遮罩 y1 > 0.7 的點, 遮罩就是不要的
 y3 = np.ma.masked_where(y1 > 0.7, y1)
+print("y1")
+print(len(y1))
+print(y1)
+print("y3")
+print(len(y3))
+print(y3)
 
-# 將 y1 > 0.8 的點設為 NaN
+# 將 y1 > 0.3 的點設為 NaN
 y4 = y1.copy()
-y4[y4 > 0.8] = np.nan
+print("y4")
+print(len(y4))
+print(y4)
+y4[y4 > 0.3] = np.nan
+print("y4")
+print(len(y4))
+print(y4)
+
+plt.scatter(x1, y1, c='r', s=300, label="原始資料")
+plt.scatter(x2, y2, marker="o", facecolors="none", edgecolors="g", s=150, label="移除>0.9的")
+plt.scatter(x1, y3, c='b', s=80, label="移除>0.7的")
+plt.scatter(x1, y4, c='m', s=30, label="移除>0.3的")
+plt.legend()
+
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
+print('特殊語法保留')
 n = 100000
 cc = np.sum(4.0 / np.r_[1:n:4, -3:-n:-4])
-print(cc)
-
-print("------------------------------------------------------------")  # 60個
-
-print("積分")
-from sympy import symbols, integrate, sqrt
-
-x = symbols("x")
-cc = integrate(sqrt(1 - x**2), (x, -1, 1)) * 2
 print(cc)
 
 print("------------------------------------------------------------")  # 60個
@@ -9227,12 +9195,7 @@ print(hex(y))  # 列出轉換成16進位的結果
 
 for i in range(32):
     print(hex(i))
-
-
 """
-
-sys.exit()
-
 
 # 字串轉數值,10進位整數
 print(int("13", 10))
@@ -9247,7 +9210,6 @@ print(bin(10))
 # oct()回傳參數的八進位值
 ##輸出結果數字前面0o代表八進位(octal)
 print(oct(10))
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -9385,15 +9347,6 @@ print("{:#x}".format(12345))  # 顯示0x3039
 
 print("------------------------------------------------------------")  # 60個
 
-code1 = "洪"
-print("洪")
-print(hex(ord(code1)))  # 輸出字元'洪'的Unicode(16進位)碼值
-code2 = "錦"
-print("錦")
-print(hex(ord(code2)))  # 輸出字元'錦'的Unicode(16進位)碼值
-code3 = "魁"
-print("魁")
-print(hex(ord(code3)))  # 輸出字元'魁'的Unicode(16進位)碼值
 
 print("------------------------------------------------------------")  # 60個
 
