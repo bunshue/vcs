@@ -5065,6 +5065,7 @@ import pydotplus
 from IPython.display import Image  # 用IPython
 import sklearn.tree as tree
 
+# 決策樹可視化存檔
 dot_data = tree.export_graphviz(
     clf,
     out_file=None,

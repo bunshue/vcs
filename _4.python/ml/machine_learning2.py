@@ -126,7 +126,7 @@ def show():
     plt.show()
     pass
 
-
+'''
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -2987,9 +2987,9 @@ print("Test bACC:%.2f" % scores.mean())
 """
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
+'''
 # Resampling methods
-
+'''
 N = 100  # n_samples, 樣本數
 M = 100  # n_features, 特徵數(資料的維度)
 T = 1  # n_targets, 標籤類別
@@ -3036,9 +3036,12 @@ print("Test R2: %.2f" % r2_score(y_test, y_pred_test))
 estimator = sklearn.linear_model.Ridge(alpha=10)
 
 cv = KFold(n_splits=5, shuffle=True, random_state=9487)
-r2_train, r2_test = list(), list()
+
+r2_train = list()
+r2_test = list()
 
 for train, test in cv.split(X):
+    # print(train, test)
     estimator.fit(X[train, :], y[train])
     r2_train.append(r2_score(y[train], estimator.predict(X[train, :])))
     r2_test.append(r2_score(y[test], estimator.predict(X[test, :])))
@@ -3177,6 +3180,13 @@ mod_cv = sklearn.linear_model.LogisticRegressionCV(
 scores = cross_val_score(estimator=mod_cv, X=X, y=y, cv=5)
 print("Test  ACC:%.2f" % scores.mean())
 
+print('ddddddddddd')
+sys.exit()
+'''
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+'''
 # **Regression**
 
 N = 50  # n_samples, 樣本數
@@ -3223,7 +3233,6 @@ eps = np.random.randn(n_samples)
 y = Xbeta + eps
 
 # Random permutations
-# -------------------
 
 # Fit model on all data (!! risk of overfit)
 model = sklearn.linear_model.RidgeCV()
@@ -3271,7 +3280,6 @@ print(pval_coef_perm_tmax)
 
 # Plot distribution of third coefficient under null-hypothesis
 # Coeffitients 0 and 1 are significantly different from 0.
-#
 
 
 def hist_pvalue(perms, ax, name):
@@ -3347,6 +3355,11 @@ sns.set_theme(style="whitegrid")
 ax = sns.violinplot(x="Variable", y="Coef. distribution", data=staked)
 _ = ax.axhline(0, ls="--", lw=2, color="black")
 
+print('gggggggggggg')
+sys.exit()
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+'''
 # Parallel computation with joblib
 # Dataset
 

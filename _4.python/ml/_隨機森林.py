@@ -233,6 +233,7 @@ estimator = model.estimators_[5]
 
 from sklearn.tree import export_graphviz
 
+# 決策樹可視化存檔
 export_graphviz(
     estimator,
     out_file="tmp_tree.dot",
@@ -425,6 +426,7 @@ rf_small.fit(X_train, y_train)  # 學習訓練.fit
 tree_small = rf_small.estimators_[5]
 
 # Save the tree as a png image
+# 決策樹可視化存檔
 export_graphviz(
     tree_small,
     out_file="tmp_small_tree111.dot",
@@ -598,7 +600,7 @@ import pydot
 # Pull out one tree from the forest
 tree = random_forest_regressor.estimators_[5]
 
-# Export the image to a dot file
+# 決策樹可視化存檔
 export_graphviz(
     tree, out_file="tmp_tree.dot", feature_names=feature_list, rounded=True, precision=1
 )
@@ -687,7 +689,7 @@ rf_small.fit(train_features, train_labels)  # 學習訓練.fit
 # Extract the small tree
 tree_small = rf_small.estimators_[5]
 
-# Save the tree as a png image
+# 決策樹可視化存檔
 export_graphviz(
     tree_small,
     out_file="tmp_small_tree222.dot",

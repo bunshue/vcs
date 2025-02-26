@@ -875,6 +875,7 @@ print(dt_model.classes_)
 
 import graphviz
 
+# 決策樹可視化存檔
 dot_data = tree.export_graphviz(
     dt_model, 
     out_file=None, 

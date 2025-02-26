@@ -928,6 +928,7 @@ plt.show()
 import graphviz
 
 # dot is a graph description language
+# 決策樹可視化存檔
 dot = tree.export_graphviz(
     golf_tree,
     out_file=None,

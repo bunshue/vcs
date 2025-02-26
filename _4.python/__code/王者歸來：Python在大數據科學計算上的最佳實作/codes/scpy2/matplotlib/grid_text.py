@@ -37,5 +37,5 @@ def draw_grid(grid, size=6, margin=0.02, fontsize=16):
 if __name__ == "__main__":
     import numpy as np
     grid = np.random.randint(0, 10, (4, 6))
-    print grid
+    print(grid)
     draw_grid(grid)    

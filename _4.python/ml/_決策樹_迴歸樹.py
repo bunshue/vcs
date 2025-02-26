@@ -85,7 +85,8 @@ clf = DecisionTreeClassifier()  # 決策樹函數學習機
 
 clf.fit(x_train, y_train)  # 學習訓練.fit
 
-# 存檔 sklearn.tree.export_graphviz(clf, out_file="tmp_tree1.dot")# 存檔
+# 決策樹可視化存檔
+# sklearn.tree.export_graphviz(clf, out_file="tmp_tree1.dot")
 
 # 對測試數據做預測
 y_pred = clf.predict(x_test)  # 預測.predict
@@ -224,21 +225,13 @@ clf = DecisionTreeClassifier(
 
 clf.fit(X, y)  # 學習訓練.fit
 
-# 存檔 sklearn.tree.export_graphviz(clf, out_file="tmp_cart2.dot")# 存檔
-
-# 可以使用graphviz将树结构输出，在python中嵌入graphviz可参考：[pygraphviz](http://www.blogjava.net/huaoguo/archive/2012/12/21/393307.html)
-
-# # 可视化
-# 使用dot文件进行决策树可视化需要安装一些工具：
-# - 第一步是安装graphviz。linux可以用apt-get或者yum的方法安装。如果是windows，就在官网下载msi文件安装。
-#    无论是linux还是windows，装完后都要设置环境变量，将graphviz的bin目录加到PATH，
-#    比如windows，将C:/Program Files (x86)/Graphviz2.38/bin/加入了PATH
-# - 第二步是安装python插件graphviz： pip install graphviz
-# - 第三步是安装python插件pydotplus: pip install pydotplus
+# 決策樹可視化存檔
+# sklearn.tree.export_graphviz(clf, out_file="tmp_cart2.dot")
 
 import pydotplus
 from IPython.display import Image  # 用IPython
 
+# 決策樹可視化存檔
 dot_data = sklearn.tree.export_graphviz(
     clf,
     out_file=None,
@@ -757,14 +750,10 @@ plt.title("迴歸樹, 用plot_tree畫圖")
 
 show()
 
-# 使用 graphviz 繪製圖形
-# 安裝 graphviz (https://graphviz.org/download/)
-# 將安裝路徑的bin加入環境變數Path中(C:\Program Files (x86)\Graphviz2.XX\bin)
-# pip install graphviz pydotplus
-
 from pydotplus import graph_from_dot_data
 from sklearn.tree import export_graphviz
 
+# 決策樹可視化存檔
 dot_data = export_graphviz(
     clf,
     filled=True,
@@ -773,11 +762,11 @@ dot_data = export_graphviz(
     feature_names=wine.feature_names,
     out_file=None,
 )
+
 graph = graph_from_dot_data(dot_data)
 # graph.write_png('tmp_wine_tree.png')  NG
 
-# dot 格式存檔
-
+# 決策樹可視化存檔
 dot_data = export_graphviz(
     clf,
     filled=True,
@@ -1258,14 +1247,14 @@ score = cross_val_score(clf, X, y, cv=10, scoring="accuracy")
 print(np.mean(score))
 print(clf.feature_importances_)
 
-# 可视化决策树
 # 目前使用中文有問題
 # feature_name = ['酒精','苹果酸','灰','灰的碱性','镁','总酚','类黄酮','非黄烷类酚类','花青素','颜色强度','色调','od280/od315稀释葡萄酒','脯氨酸']
+# 決策樹可視化存檔
 with open("tmp_wine3.dot", "w", encoding="utf-8") as f:
     # f = export_graphviz(clf, feature_names=feature_name, out_file=f)
     f = export_graphviz(clf, feature_names=wine.feature_names, out_file=f)
 
-# same
+# 決策樹可視化存檔
 export_graphviz(clf, out_file="tmp_wine4.dot", feature_names=wine.feature_names)
 
 print("------------------------------------------------------------")  # 60個
@@ -1303,6 +1292,7 @@ clf = dtc.fit(x_train, y_train)
 # print(y_test)
 print("精确率", ms.precision_score(y_test, clf.predict(x_test), average="micro"))
 
+# 決策樹可視化存檔
 dot_data = tree.export_graphviz(clf, out_file="tmp_iris.dot")
 print(dot_data)
 

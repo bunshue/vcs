@@ -2,7 +2,7 @@ from __future__ import division
 import numpy as np
 
 __author__ = "Eric Chiang"
-__email__  = "eric[at]yhathq.com"
+__email__ = "eric[at]yhathq.com"
 
 """
 
@@ -14,7 +14,7 @@ Equations take from Yaniv, Yates, & Smith (1991):
 """
 
 
-def calibration(prob,outcome,n_bins=10):
+def calibration(prob, outcome, n_bins=10):
     """Calibration measurement for a set of predictions.
 
     When predicting events at a given probability, how far is frequency
@@ -29,8 +29,8 @@ def calibration(prob,outcome,n_bins=10):
 
     n_bins: int
         Number of judgement categories to prefrom calculation over.
-        Prediction are binned based on probability, since "descrete" 
-        probabilities aren't required. 
+        Prediction are binned based on probability, since "descrete"
+        probabilities aren't required.
 
     """
     prob = np.array(prob)
@@ -40,7 +40,7 @@ def calibration(prob,outcome,n_bins=10):
     # Construct bins
     judgement_bins = np.arange(n_bins + 1) / n_bins
     # Which bin is each prediction in?
-    bin_num = np.digitize(prob,judgement_bins)
+    bin_num = np.digitize(prob, judgement_bins)
     for j_bin in np.unique(bin_num):
         # Is event in bin
         in_bin = bin_num == j_bin
@@ -52,7 +52,8 @@ def calibration(prob,outcome,n_bins=10):
         c += np.sum(in_bin) * ((predicted_prob - true_bin_prob) ** 2)
     return c / len(prob)
 
-def discrimination(prob,outcome,n_bins=10):
+
+def discrimination(prob, outcome, n_bins=10):
     """Discrimination measurement for a set of predictions.
 
     For each judgement category, how far from the base probability
@@ -67,8 +68,8 @@ def discrimination(prob,outcome,n_bins=10):
 
     n_bins: int
         Number of judgement categories to prefrom calculation over.
-        Prediction are binned based on probability, since "descrete" 
-        probabilities aren't required. 
+        Prediction are binned based on probability, since "descrete"
+        probabilities aren't required.
 
     """
     prob = np.array(prob)
@@ -80,7 +81,7 @@ def discrimination(prob,outcome,n_bins=10):
     # Construct bins
     judgement_bins = np.arange(n_bins + 1) / n_bins
     # Which bin is each prediction in?
-    bin_num = np.digitize(prob,judgement_bins)
+    bin_num = np.digitize(prob, judgement_bins)
     for j_bin in np.unique(bin_num):
         in_bin = bin_num == j_bin
         true_bin_prob = np.mean(outcome[in_bin])

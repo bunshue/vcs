@@ -383,8 +383,8 @@ clf = DecisionTreeClassifier(
 
 clf.fit(x_train, y_train)
 
-# 使用graphviz將樹結構輸出
-# 存檔 sklearn.tree.export_graphviz(clf, out_file="tmp_cart1.dot")
+# 決策樹可視化存檔
+# sklearn.tree.export_graphviz(clf, out_file="tmp_cart1.dot")
 
 # cart預測
 
@@ -600,6 +600,7 @@ clf.fit(x_train, y_train)  #  使用訓練數據建模
 import pydotplus
 from IPython.display import Image  # 用IPython
 
+# 決策樹可視化存檔
 dot_data = sklearn.tree.export_graphviz(
     clf,
     out_file=None,

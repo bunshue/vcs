@@ -189,7 +189,6 @@ print("best_params: %s" % cv.best_params_)
 .loc for label based indexing or
 .iloc for positional indexing
 
-
 best_score:0.7400
 best_params: {'max_leaf_nodes': 56, 'min_samples_split': 300}
 
@@ -198,7 +197,6 @@ best_params: {'max_leaf_nodes': 56, 'min_samples_split': 300}
 train_p = cv.predict_proba(train.ix[:, 1:])
 test_p = cv.predict_proba(test.ix[:, 1:])
 print(roc_auc_score(test.target_flag, test_p[:, 1]))
-
 """
 0.7397821997821997
 
@@ -232,6 +230,7 @@ import pydotplus
 from IPython.display import Image  # 用IPython
 import sklearn.tree as tree
 
+# 決策樹可視化存檔
 dot_data = tree.export_graphviz(
     cv.best_estimator_,
     out_file=None,
@@ -455,7 +454,6 @@ print(roc_auc_score(test.target_flag, gbc_test_p[:, 1]))
 
 # 0.7706014100668234
 # 0.7576385376385377
-
 
 print("------------------------------------------------------------")  # 60個
 

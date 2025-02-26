@@ -472,6 +472,7 @@ dtree = tree.DecisionTreeClassifier(max_depth=8)  # 決策樹函數學習機
 
 dtree.fit(XTrain, yTrain)  # 學習訓練.fit
 
+# 決策樹可視化存檔
 with open("tmp_tree2.dot", "w") as f:
     f = tree.export_graphviz(dtree, feature_names=iris.feature_names, out_file=f)
 
@@ -678,6 +679,8 @@ print("score:", clf.score(X_test, y_test))  # 模型打分
 
 # 生成決策樹圖片
 dot_data = io.StringIO()
+
+# 決策樹可視化存檔
 tree.export_graphviz(
     clf,
     out_file=dot_data,

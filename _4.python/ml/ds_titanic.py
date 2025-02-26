@@ -500,7 +500,7 @@ pd.crosstab(preds[:, 0], columns=[XTest["PClass"], XTest["SexCode"]]).to_html(
     "tmp_titanic.html"
 )
 
-# 存圖
+# 決策樹可視化存檔
 with open("tmp_tree.dot", "w") as f:
     f = sklearn.tree.export_graphviz(clf, feature_names=["Sex", "Class"], out_file=f)
 
@@ -553,12 +553,9 @@ print("------------------------------")  # 30個
 
 from sklearn.tree import export_graphviz
 
+# 決策樹可視化存檔
 with open("tmp_titanic1.dot", "w") as f:
     f = export_graphviz(clf, out_file=f)
-
-# 1. 在電腦上安裝 graphviz
-# 2. 運行 `dot -Tpng titanic.dot -o titanic.png`
-# 3. 在當前目錄查看生成的決策樹 titanic.png
 
 
 # 參數選擇 max_depth
@@ -706,13 +703,9 @@ train_score = clf.score(X_train, y_train)
 test_score = clf.score(X_test, y_test)
 print("train score: {0}; test score: {1}".format(train_score, test_score))
 
-# 導出 titanic.dot 文件
+# 決策樹可視化存檔
 with open("tmp_titanic2.dot", "w") as f:
     f = export_graphviz(clf, out_file=f)
-
-# 1. 在電腦上安裝 graphviz
-# 2. 運行 `dot -Tpng titanic.dot -o titanic.png`
-# 3. 在當前目錄查看生成的決策樹 titanic.png
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
