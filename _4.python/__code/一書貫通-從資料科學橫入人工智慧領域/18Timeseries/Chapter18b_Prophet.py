@@ -33,9 +33,7 @@ print("------------------------------------------------------------")  # 60個
 # 先安装：http://landinghub.visualstudio.com/visual-cpp-build-tools
 # pip install fbprophet
 
-import pandas as pd
 from fbprophet import Prophet
-import matplotlib.pyplot as plt
 
 df = pd.read_csv('AirPassengers.csv')
 df['DATE'] = pd.to_datetime(df['DATE'])
@@ -72,8 +70,6 @@ plt.show()
 
 #乘法模型的实现
 
-import numpy as np
-
 df['y'] = np.log(df['y'])
 my_model = Prophet(growth='linear',interval_width=0.95)
 my_model.fit(df)
@@ -84,8 +80,6 @@ my_model.plot(forecast,uncertainty=True)
 
 #INFO:fbprophet.forecaster:Disabling weekly seasonality. Run prophet with weekly_seasonality=True to override this.
 #INFO:fbprophet.forecaster:Disabling daily seasonality. Run prophet with daily_seasonality=True to override this.
-
-import math
 
 my_model = Prophet(growth='linear',interval_width=0.95)
 my_model.fit(df)

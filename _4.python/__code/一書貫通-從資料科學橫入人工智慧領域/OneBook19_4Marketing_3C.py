@@ -50,21 +50,22 @@ print("------------------------------------------------------------")  # 60個
 
 # get_ipython().magic('matplotlib inline')
 
-pd.set_option('display.max_columns', None)
+pd.set_option("display.max_columns", None)
 
-train = pd.read_csv('data/response_data_train.csv', skipinitialspace=True)
-test = pd.read_csv('data/response_data_test.csv', skipinitialspace=True)
+train = pd.read_csv("data/response_data_train.csv", skipinitialspace=True)
+test = pd.read_csv("data/response_data_test.csv", skipinitialspace=True)
 print(train.shape)
 print(test.shape)
 
-#(30000, 15)
-#(10000, 15)
+# (30000, 15)
+# (10000, 15)
 
-train.describe(include='all')
+train.describe(include="all")
 
 cols = train.columns.tolist()
-x_c = ['home_value', 'new_car']
-x_d = list(set(cols) - set(x_c)); x_d.remove('target_flag')
+x_c = ["home_value", "new_car"]
+x_d = list(set(cols) - set(x_c))
+x_d.remove("target_flag")
 
 # 数据预处理
 
@@ -74,9 +75,10 @@ x_d = list(set(cols) - set(x_c)); x_d.remove('target_flag')
 def label_encoder(series):
     cat = series.value_counts(dropna=False)
     len_series = len(series)
-    return {k:v for k, v in zip(cat.index, range(len_series))}
+    return {k: v for k, v in zip(cat.index, range(len_series))}
 
-pd.set_option('future.no_silent_downcasting', True)
+
+pd.set_option("future.no_silent_downcasting", True)
 
 for col in x_d:
     encoder = label_encoder(train[col])
@@ -84,22 +86,21 @@ for col in x_d:
     test[col].replace(encoder, inplace=True)  # Encode test
 
 
-
 encoder = label_encoder(train.target_flag)
 train.target_flag.replace(encoder, inplace=True)
 test.target_flag.replace(encoder, inplace=True)
 
-#WOE编码；sklearn中的决策树算法默认所有输入变量作为连续变量处理，因此对于分类变量，需要进行WOE转换。鉴于此，可以将所有变量统一作WOE转换
+# WOE编码；sklearn中的决策树算法默认所有输入变量作为连续变量处理，因此对于分类变量，需要进行WOE转换。鉴于此，可以将所有变量统一作WOE转换
 
-#Jupyter中引入包，只要包放在同一个文件加下即可
+# Jupyter中引入包，只要包放在同一个文件加下即可
 
 from woe import WoE
 
 for col in x_d:
-    woe = WoE(v_type='d', t_type='b')
+    woe = WoE(v_type="d", t_type="b")
     woe.fit(train[col], train.target_flag)
-    train[col] = woe.transform(train[col])['woe']
-    test[col] = woe.transform(test[col])['woe']
+    train[col] = woe.transform(train[col])["woe"]
+    test[col] = woe.transform(test[col])["woe"]
 
 cc = test.head()
 print(cc)
@@ -112,13 +113,15 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.model_selection import GridSearchCV
 
 dt = DecisionTreeClassifier()
-grid = {'max_leaf_nodes':np.arange(32, 64, 6),
-        'min_samples_split':np.arange(50, 301, 50)}
-cv = GridSearchCV(dt, grid, scoring='roc_auc', cv=4, n_jobs=-1)
-cv.fit(train.ix[:, 1:], train['target_flag'])
+grid = {
+    "max_leaf_nodes": np.arange(32, 64, 6),
+    "min_samples_split": np.arange(50, 301, 50),
+}
+cv = GridSearchCV(dt, grid, scoring="roc_auc", cv=4, n_jobs=-1)
+cv.fit(train.ix[:, 1:], train["target_flag"])
 
-print('best_score:%2.4f'  %cv.best_score_)
-print('best_params: %s' %cv.best_params_)
+print("best_score:%2.4f" % cv.best_score_)
+print("best_params: %s" % cv.best_params_)
 
 """
 .ix is deprecated. Please use
@@ -126,8 +129,8 @@ print('best_params: %s' %cv.best_params_)
 .iloc for positional indexing
 
 """
-#best_score:0.7405
-#best_params: {'max_leaf_nodes': 56, 'min_samples_split': 50}
+# best_score:0.7405
+# best_params: {'max_leaf_nodes': 56, 'min_samples_split': 50}
 
 from sklearn.metrics import roc_auc_score, roc_curve
 
@@ -170,19 +173,17 @@ list(zip(train.ix[:, 1:].columns, imp))
 
 # 去除部分重要性不高的变量
 """
-train= train.drop(
-    ['poc', 'home_owner', 'mortgage', 'region', 'home_income'], axis=1)
-test = test.drop(
-    ['poc', 'home_owner', 'mortgage', 'region', 'home_income'], axis=1)
+train = train.drop(["poc", "home_owner", "mortgage", "region", "home_income"], axis=1)
+test = test.drop(["poc", "home_owner", "mortgage", "region", "home_income"], axis=1)
 
 
 # 重新拟合模型
 
 
-cv.fit(train.ix[:, 1:], train['target_flag'])
+cv.fit(train.ix[:, 1:], train["target_flag"])
 
-print('best_score:%2.4f'  %cv.best_score_)
-print('best_params: %s' %cv.best_params_)
+print("best_score:%2.4f" % cv.best_score_)
+print("best_params: %s" % cv.best_params_)
 """
 .ix is deprecated. Please use
 .loc for label based indexing or
@@ -219,32 +220,33 @@ fpr_test, tpr_test, th_test = roc_curve(test.target_flag, test_p[:, 1])
 fpr_train, tpr_train, th_train = roc_curve(train.target_flag, train_p[:, 1])
 
 plt.figure(figsize=[4, 4])
-plt.plot(fpr_test, tpr_test, 'b--')
-plt.plot(fpr_train, tpr_train, 'r-')
-plt.title('ROC curve')
+plt.plot(fpr_test, tpr_test, "b--")
+plt.plot(fpr_train, tpr_train, "r-")
+plt.title("ROC curve")
 plt.show()
 
 
 # 可视化
 
 import pydotplus
-from IPython.display import Image # 用IPython
+from IPython.display import Image  # 用IPython
 import sklearn.tree as tree
 
 dot_data = tree.export_graphviz(
-    cv.best_estimator_, 
-    out_file=None, 
+    cv.best_estimator_,
+    out_file=None,
     feature_names=train.columns[1:],
     max_depth=2,
-    class_names=['0','1'],
-    filled=True
-) 
-            
-graph = pydotplus.graph_from_dot_data(dot_data)  
-Image(graph.create_png()) # 用IPython顯示圖片
+    class_names=["0", "1"],
+    filled=True,
+)
+
+graph = pydotplus.graph_from_dot_data(dot_data)
+Image(graph.create_png())  # 用IPython顯示圖片
 # graph.write_pdf('response_decision_tree.pdf')
 
 from sklearn.tree import _tree
+
 
 def tree_to_code(tree, feature_names):
     tree_ = tree.tree_
@@ -267,6 +269,7 @@ def tree_to_code(tree, feature_names):
             print("{}return {}".format(indent, tree_.value[node]))
 
     recurse(0, 1)
+
 
 tree_to_code(cv.best_estimator_, train.columns[1:])
 """
@@ -450,8 +453,8 @@ gbc_test_p = gbc.predict_proba(test.ix[:, 1:])
 print(roc_auc_score(train.target_flag, gbc_train_p[:, 1]))
 print(roc_auc_score(test.target_flag, gbc_test_p[:, 1]))
 
-#0.7706014100668234
-#0.7576385376385377
+# 0.7706014100668234
+# 0.7576385376385377
 
 
 print("------------------------------------------------------------")  # 60個
@@ -464,4 +467,3 @@ sys.exit()
 
 
 print("------------------------------------------------------------")  # 60個
-

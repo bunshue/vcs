@@ -52,7 +52,7 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 # 設定負號
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 print("scikit-image 版本 :", skimage.__version__)
@@ -642,7 +642,7 @@ avi_load = AVILoader()
 
 frames = range(0, 1000, 10)  # 0, 10, 20, ...
 # NG in kilo
-#ic = skimage.io.ImageCollection(frames, load_func=avi_load)
+# ic = skimage.io.ImageCollection(frames, load_func=avi_load)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -774,9 +774,7 @@ downscale控制著金字塔的縮放比例
 image = skimage.data.astronaut()  # 載入宇航員圖片
 R, C, D = image.shape  # 獲取圖片的行數，列數和通道數
 
-pyramid = tuple(
-    skimage.transform.pyramid_gaussian(image, downscale=2)
-)  # 產生高斯金字塔圖像
+pyramid = tuple(skimage.transform.pyramid_gaussian(image, downscale=2))  # 產生高斯金字塔圖像
 # 共生成了log(512)=9幅金字塔圖像，加上原始圖像共10幅，pyramid[0]-pyramid[1]
 
 """
@@ -945,7 +943,6 @@ print(hist2)
 # 分成兩個bin，每個bin的統計量是一樣的，但numpy返回的是每個bin的兩端的范圍值，而skimage返回的是每個bin的中間值
 
 print("------------------------------------------------------------")  # 60個
-'''
 """
 繪製直方圖
 繪圖都可以調用matplotlib.pyplot庫來進行，其中的hist函數可以直接繪製直方圖。

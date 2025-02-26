@@ -477,6 +477,7 @@ print("------------------------------------------------------------")  # 60個
 print("決策樹")
 
 titanic = pd.read_csv("data/titanic_ds.csv")
+
 # 轉換欄位值成為數值
 label_encoder = preprocessing.LabelEncoder()
 encoded_class = label_encoder.fit_transform(titanic["PClass"])
@@ -485,42 +486,23 @@ X = pd.DataFrame([titanic["SexCode"], encoded_class]).T
 X.columns = ["SexCode", "PClass"]
 y = titanic["Survived"]
 
-XTrain, XTest, yTrain, yTest = train_test_split(X, y, test_size=0.25, random_state=1)
+XTrain, XTest, yTrain, yTest = train_test_split(X, y, test_size=0.2)
 
-dtree = DecisionTreeClassifier()
+clf = DecisionTreeClassifier()
 
-dtree.fit(XTrain, yTrain)  # 學習訓練.fit
+clf.fit(XTrain, yTrain)  # 學習訓練.fit
 
-print("準確率:", dtree.score(XTest, yTest))
+print("準確率:", clf.score(XTest, yTest))
 print("---------------------------")
-preds = dtree.predict_proba(X=XTest)
+preds = clf.predict_proba(X=XTest)
 print(pd.crosstab(preds[:, 0], columns=[XTest["PClass"], XTest["SexCode"]]))
 pd.crosstab(preds[:, 0], columns=[XTest["PClass"], XTest["SexCode"]]).to_html(
     "tmp_titanic.html"
 )
 
-print("------------------------------------------------------------")  # 60個
-
-print("決策樹")
-
-titanic = pd.read_csv("data/titanic_ds.csv")
-
-# 轉換欄位值成為數值
-label_encoder = preprocessing.LabelEncoder()
-encoded_class = label_encoder.fit_transform(titanic["PClass"])
-
-X = pd.DataFrame([titanic["SexCode"], encoded_class]).T
-X.columns = ["SexCode", "PClass"]
-y = titanic["Survived"]
-
-XTrain, XTest, yTrain, yTest = train_test_split(X, y, test_size=0.25, random_state=1)
-
-dtree = DecisionTreeClassifier()
-
-dtree.fit(XTrain, yTrain)  # 學習訓練.fit
-
+# 存圖
 with open("tmp_tree.dot", "w") as f:
-    f = sklearn.tree.export_graphviz(dtree, feature_names=["Sex", "Class"], out_file=f)
+    f = sklearn.tree.export_graphviz(clf, feature_names=["Sex", "Class"], out_file=f)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

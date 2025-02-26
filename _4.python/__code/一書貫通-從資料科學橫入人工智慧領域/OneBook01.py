@@ -1,3 +1,9 @@
+"""
+
+
+
+"""
+
 print("------------------------------------------------------------")  # 60個
 
 # 共同
@@ -2456,23 +2462,14 @@ sample.iloc[0:2, 0:2]
 sample["new_col1"] = sample["a"] - sample["b"]
 sample
 
-
-# In[16]:
-
 sample_new = sample.assign(
     new_col2=sample["a"] - sample["b"], new_col3=sample["a"] + sample["b"]
 )
 sample_new
 
-
-# In[24]:
-
 sample.drop("a", axis=1)
 
-
 # 条件查询
-
-# In[25]:
 
 sample = pd.DataFrame(
     {
@@ -2483,18 +2480,12 @@ sample = pd.DataFrame(
 )
 sample
 
-
-# 1. 单条件
-
-# In[30]:
+# 单条件
 
 # sample.score > 70
 sample[sample.score > 70]
 
-
-# 2. 多条件
-
-# In[32]:
+# 多条件
 
 sample[(sample.score > 70) & (sample.group == 1)]
 
@@ -2650,18 +2641,11 @@ def transform(row):
 
 sample.apply(transform, axis=1)
 
-
-# In[34]:
-
 sample.assign(class_n=sample.apply(transform, axis=1))
-
-
-# In[35]:
 
 sample = sample.copy()
 sample.loc[sample.group == 1, "class_n"] = "class1"
 sample.loc[sample.group == 2, "class_n"] = "class2"
-
 
 print("------------------------------------------------------------")  # 60個
 # SQL
@@ -2930,9 +2914,6 @@ table1 = pd.pivot_table(
 ).reset_index()
 table1
 
-
-# In[28]:
-
 pd.melt(
     table1,
     id_vars="cust_id",
@@ -2952,56 +2933,30 @@ trad_flow.head(10)
 
 # 2.计算 RFM
 
-# In[6]:
-
 M = trad_flow.groupby(["cumid", "type"])[["amount"]].sum()
 
-
-# In[7]:
-
 M_trans = pd.pivot_table(M, index="cumid", columns="type", values="amount")
-
-
-# In[8]:
 
 F = trad_flow.groupby(["cumid", "type"])[["transID"]].count()
 F.head()
 
-
-# In[9]:
-
 F_trans = pd.pivot_table(F, index="cumid", columns="type", values="transID")
 F_trans.head()
-
-
-# In[10]:
 
 R = trad_flow.groupby(["cumid", "type"])[["time"]].max()
 R.head()
 
-
-# In[11]:
-
 # R_trans=pd.pivot_table(R,index='cumid',columns='type',values='time')
 # R_trans.head()
 
-
 # 3.衡量客户对打折商品的偏好
 
-# In[12]:
-
 M_trans["Special_offer"] = M_trans["Special_offer"].fillna(0)
-
-
-# In[13]:
 
 M_trans["spe_ratio"] = M_trans["Special_offer"] / (
     M_trans["Special_offer"] + M_trans["Normal"]
 )
 M_rank = M_trans.sort_values("spe_ratio", ascending=False, na_position="last").head()
-
-
-# In[16]:
 
 M_rank["spe_ratio_group"] = pd.qcut(M_rank["spe_ratio"], 4)  # 这里以age_oldest_tr字段等宽分为4段
 M_rank.head()
@@ -3099,28 +3054,27 @@ def get_sample(df, sampling="simple_random", k=1, stratified_col=None):
 
 clients = pd.read_csv("data/clients.csv", encoding="gbk")
 # clients["district_id_c"]=clients["district_id"].map(lambda x:"id"+str(x))
-# %%
+
 # 在每个地区分别用简单随机抽样、分层抽样、系统抽样，三种方式抽取样本
 
-# %%1简单随机抽样
-# %%简单随机抽样-按数量取
+# 简单随机抽样
+# 简单随机抽样-按数量取
 srn = get_sample(clients, sampling="simple_random", k=22, stratified_col=None)
-# %%简单随机抽样-按百分比取
+# 简单随机抽样-按百分比取
 srp = get_sample(clients, sampling="simple_random", k=0.1, stratified_col=None)
 
-# %%2分层抽样
-# %%分层抽样-按每层数量取
+# 分层抽样
+# 分层抽样-按每层数量取
 strn = get_sample(clients, sampling="stratified", k=2, stratified_col=["district_id"])
-# %%分层抽样-按每层百分比取
+# 分层抽样-按每层百分比取
 strp = get_sample(clients, sampling="stratified", k=0.1, stratified_col=["district_id"])
 
-# %%3系统抽样
-# %%系统抽样-按数量取
+# 系统抽样
+# 系统抽样-按数量取
 sysn = get_sample(clients, sampling="systematic", k=4, stratified_col=None)
-# %%系统抽样-按百分比取
+# 系统抽样-按百分比取
 sysp = get_sample(clients, sampling="systematic", k=0.1, stratified_col=None)
 
-'''
 print("------------------------------------------------------------")  # 60個
 # RFM2
 print("------------------------------------------------------------")  # 60個
@@ -3154,9 +3108,6 @@ R_trans["R_max"] = R_trans[["Normal", "Presented", "Special_offer"]].apply(
 
 R_trans.head()
 
-
-# In[3]:
-
 # 对购物频率按照购物ID和购物类型进行汇总统计
 F = trad_flow.groupby(["cumid", "type"])[["transID"]].count()
 
@@ -3176,9 +3127,6 @@ F_trans["F_total"] = F_trans.apply(lambda x: sum(x), axis=1)
 
 F_trans.head()
 
-
-# In[4]:
-
 # 对购物金额按照购物ID和购物类型进行汇总统计
 M = trad_flow.groupby(["cumid", "type"])[["amount"]].sum()
 
@@ -3194,9 +3142,6 @@ M_trans[["Special_offer", "returned_goods"]] = M_trans[
 M_trans["M_total"] = M_trans.apply(lambda x: sum(x), axis=1)
 
 M_trans.head()
-
-
-# In[5]:
 
 # 合并表
 RFM = pd.concat([R_trans["R_max"], F_trans["F_total"], M_trans["M_total"]], axis=1)
@@ -3419,14 +3364,9 @@ house_price_gr.head()
 # ## 6.1 参数估计
 # 进行描述性统计分析
 
-# In[2]:
-
 house_price_gr.describe(include="all")
 
-
 # Histograph
-
-# In[3]:
 
 # get_ipython().magic('matplotlib inline')
 
@@ -3442,22 +3382,14 @@ fig = sm.qqplot(house_price_gr.rate, fit=True, line="45")
 
 # Box Plots
 
-# In[5]:
-
 house_price_gr.plot(kind="box")  # Box Plots
 
-
 # 置信度区间估计
-
-# In[6]:
 
 se = house_price_gr.rate.std() / len(house_price_gr) ** 0.5
 LB = house_price_gr.rate.mean() - 1.98 * se
 UB = house_price_gr.rate.mean() + 1.98 * se
 (LB, UB)
-
-
-# In[7]:
 
 
 # 如果要求任意置信度下的置信区间的话，可以自己编一个函数
@@ -3472,17 +3404,12 @@ def confint(x, alpha=0.05):
 confint(house_price_gr.rate, 0.05)
 
 
-# In[8]:
-
 # 或者使用DescrStatsW
 d1 = sm.stats.DescrStatsW(house_price_gr.rate)
 d1.tconfint_mean(0.05)  #
 
-
 # ## 6.2 假设检验与单样本T检验
 # 当年住宅价格的增长率是否超过了10%的阈值
-
-# In[9]:
 
 d1 = sm.stats.DescrStatsW(house_price_gr.rate)
 print("t-statistic=%6.4f, p-value=%6.4f, df=%s" % d1.ttest_mean(0.1))
@@ -3507,18 +3434,12 @@ print("t-statistic=%6.4f, p-value=%6.4f, df=%s" % d1.ttest_mean(0.1))
 # |dist_avg_income|当地人均收入|
 # |high_avg|高出当地平均收入|
 # |edu_class|教育等级：小学及以下开通=0，中学=1，本科=2，研究生=3|
-# In[10]:
 
 creditcard = pd.read_csv(r"data/creditcard_exp.csv", skipinitialspace=True)
 
-# In[11]:
-
 creditcard["Income"].groupby(creditcard["Acc"]).describe()
 
-
 # 第一步:方差齐次检验
-
-# In[12]:
 
 Suc0 = creditcard[creditcard["Acc"] == 0]["Income"]
 Suc1 = creditcard[creditcard["Acc"] == 1]["Income"]
@@ -3526,19 +3447,15 @@ leveneTestRes = stats.levene(Suc0, Suc1, center="median")
 print("w-value=%6.4f, p-value=%6.4f" % leveneTestRes)
 # 第二步:T-test
 
-# In[13]:
 stats.stats.ttest_ind(Suc0, Suc1, equal_var=False)
 # Or Try: sm.stats.ttest_ind(gender0, gender1, usevar='pooled')
-# %%
 # 测试一下性别对是月均消费的作用.
 # 注意对缺失值得处理
 # creditcard['avg_exp'].groupby(creditcard['gender']).describe()
-# %%
 # female= creditcard[creditcard['gender'] == 0]['avg_exp'].dropna()
 # male = creditcard[creditcard['gender'] == 1]['avg_exp'].dropna()
 # leveneTestRes = stats.levene(female, male, center='median')
 # print('w-value=%6.4f, p-value=%6.4f' %leveneTestRes)
-# %%
 # stats.stats.ttest_ind(female, male, equal_var=True)
 
 # ## 6.4 方差分析
@@ -3552,13 +3469,12 @@ from statsmodels.formula.api import ols
 
 sm.stats.anova_lm(ols("avg_exp ~ C(edu_class)", data=creditcard).fit())
 
-
 # 多因素方差分析
 
-# In[16]:不考虑交互相
+# 不考虑交互相
 
 sm.stats.anova_lm(ols("avg_exp ~ C(edu_class)+C(gender)", data=creditcard).fit())
-# In[16]:考虑交互相
+# 考虑交互相
 sm.stats.anova_lm(
     ols(
         "avg_exp ~ C(edu_class)+C(gender)+C(edu_class)*C(gender)", data=creditcard
@@ -3570,7 +3486,7 @@ sm.stats.anova_lm(
 
 creditcard.plot(x="Income", y="avg_exp", kind="scatter")
 # 当发现散点图有发散的趋势时，首先需要对Y取对数，而且还应该尝试对X也取对数
-# %%
+
 creditcard.plot(x="Income", y="avg_exp_ln", kind="scatter")
 # 相关性分析:“spearman”,“pearson” 和 "kendall"
 # creditcard['Income_ln']=np.log(creditcard['Income'])
@@ -3578,14 +3494,9 @@ creditcard[["avg_exp_ln", "Income"]].corr(method="pearson")
 
 # ## 6.6卡方检验
 
-# In[7]:
-
 cross_table = pd.crosstab(creditcard.edu_class, columns=creditcard.Acc)
 # Or try this: accepts.pivot_table(index='bankruptcy_ind',columns='bad_ind', values='application_id', aggfunc='count')
 cross_table
-
-
-# In[9]:
 
 cross_table_rowpct = cross_table.div(cross_table.sum(1), axis=0)
 cross_table_rowpct
@@ -3610,18 +3521,12 @@ print("------------------------------------------------------------")  # 60個
 house_price_gr = pd.read_csv(r"data/house_price_gr.csv", encoding="gbk")
 house_price_gr.head()
 
-
 # ## 6.1 参数估计
 # 进行描述性统计分析
 
-# In[2]:
-
 house_price_gr.describe(include="all")
 
-
 # Histograph
-
-# In[3]:
 
 # get_ipython().magic('matplotlib inline')
 
@@ -3645,10 +3550,6 @@ LB = house_price_gr.rate.mean() - 1.98 * se
 UB = house_price_gr.rate.mean() + 1.98 * se
 (LB, UB)
 
-
-# In[7]:
-
-
 # 如果要求任意置信度下的置信区间的话，可以自己编一个函数
 def confint(x, alpha=0.05):
     n = len(x)
@@ -3660,18 +3561,12 @@ def confint(x, alpha=0.05):
 
 confint(house_price_gr.rate, 0.05)
 
-
-# In[8]:
-
 # 或者使用DescrStatsW
 d1 = sm.stats.DescrStatsW(house_price_gr.rate)
-d1.tconfint_mean(0.05)  #
-
+d1.tconfint_mean(0.05)
 
 # ## 6.2 假设检验与单样本T检验
 # 当年住宅价格的增长率是否超过了10%的阈值
-
-# In[9]:
 
 d1 = sm.stats.DescrStatsW(house_price_gr.rate)
 print("t-statistic=%6.4f, p-value=%6.4f, df=%s" % d1.ttest_mean(0.1))
@@ -3696,33 +3591,21 @@ print("t-statistic=%6.4f, p-value=%6.4f, df=%s" % d1.ttest_mean(0.1))
 # AvgIncome	当地人均收入
 
 # 导入数据
-
-# In[10]:
-
 camp = pd.read_csv(r"data/tele_camp_ok.csv", skipinitialspace=True)
 camp.head()
 
-
 # 检验当地客户平均客户价值对是否入网的影响
-
-# In[11]:
 
 camp["AvgARPU"].groupby(camp["Suc_flag"]).describe()
 
-
 # 第一步:方差齐次检验
-
-# In[12]:
 
 Suc0 = camp[camp["Suc_flag"] == 0]["AvgARPU"]
 Suc1 = camp[camp["Suc_flag"] == 1]["AvgARPU"]
 leveneTestRes = stats.levene(Suc0, Suc1, center="median")
 print("w-value=%6.4f, p-value=%6.4f" % leveneTestRes)
 
-
 # 第二步:T-test
-
-# In[13]:
 
 stats.stats.ttest_ind(Suc0, Suc1, equal_var=False)
 # Or Try: sm.stats.ttest_ind(gender0, gender1, usevar='pooled')
@@ -3748,10 +3631,10 @@ sm.stats.anova_lm(ols("ARPU ~ C(Class)", data=camp).fit())
 
 # 多因素方差分析
 
-# In[16]:不考虑交互相
+# 不考虑交互相
 
 sm.stats.anova_lm(ols("ARPU ~ C(Class)+C(Gender)", data=camp).fit())
-# In[16]:考虑交互相
+# 考虑交互相
 sm.stats.anova_lm(ols("ARPU ~ C(Class)+C(Gender)+C(Class)*C(Gender)", data=camp).fit())
 
 # ## 6.5 相关分析
@@ -3761,7 +3644,7 @@ camp.plot(x="AvgARPU", y="ARPU", kind="scatter")
 
 camp["AvgARPU_ln"] = np.log(camp["AvgARPU"])
 camp["ARPU_ln"] = np.log(camp["ARPU"])
-# %%
+
 camp.plot(x="AvgARPU_ln", y="ARPU_ln", kind="scatter")
 # 相关性分析:“spearman”,“pearson” 和 "kendall"
 
@@ -3769,14 +3652,9 @@ camp[["AvgARPU_ln", "ARPU_ln"]].corr(method="pearson")
 
 # ## 6.6卡方检验
 
-# In[7]:
-
 cross_table = pd.crosstab(camp.Class, columns=camp.Suc_flag)
 # Or try this: accepts.pivot_table(index='bankruptcy_ind',columns='bad_ind', values='application_id', aggfunc='count')
 cross_table
-
-
-# In[9]:
 
 cross_table_rowpct = cross_table.div(cross_table.sum(1), axis=0)
 cross_table_rowpct
@@ -4012,29 +3890,25 @@ X5 环境：指外部经济、政策环境对客户的影响
 """
 # 一、主成分分析
 
-# - 1、引入数据
+# 引入数据
 
 model_data = pd.read_csv("data/Loan_aply.csv", encoding="gbk")
 model_data.head()
 
-# In[2]:
 data = model_data.loc[:, "X1":]
 data.head()
 
-# - 2、查看相关系数矩阵，判定做变量降维的必要性（非必须）
+# 查看相关系数矩阵，判定做变量降维的必要性（非必须）
 
-# In[3]:
 corr_matrix = data.corr(method="pearson")
 
-# - 3、做主成分之前，进行中心标准化
+# 做主成分之前，进行中心标准化
 
-# In[4]:
 from sklearn import preprocessing
 
 data = preprocessing.scale(data)
-# - 4、使用sklearn的主成分分析，用于判断保留主成分的数量
+# 使用sklearn的主成分分析，用于判断保留主成分的数量
 
-# In[5]:
 from sklearn.decomposition import PCA
 
 """说明：1、第一次的n_components参数应该设的大一点
@@ -4044,15 +3918,14 @@ pca = PCA(n_components=4)
 pca.fit(data)
 print(pca.explained_variance_)  # 建议保留1个主成分
 print(pca.explained_variance_ratio_)  # 建议保留1个主成分
-# %%
+
 pca = PCA(n_components=1).fit(data)  # 综上,2个主成分
 newdata = pca.fit_transform(data)
 citi10_pca = model_data.join(pd.DataFrame(newdata))
-# In[6]:
-"""通过主成分在每个变量上的权重的绝对值大小，确定每个主成分的代表性
-"""
+
+# 通过主成分在每个变量上的权重的绝对值大小，确定每个主成分的代表性
+
 pd.DataFrame(pca.components_).T
-# %%
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -4346,29 +4219,25 @@ X9	地方财政收入
 """
 # 一、主成分分析
 
-# - 1、引入数据
+# 引入数据
 
 model_data = pd.read_csv("data/cities_10.csv", encoding="gbk")
 model_data.head()
 
-# In[2]:
 data = model_data.loc[:, "X1":]
 data.head()
 
-# - 2、查看相关系数矩阵，判定做变量降维的必要性（非必须）
+# 查看相关系数矩阵，判定做变量降维的必要性（非必须）
 
-# In[3]:
 corr_matrix = data.corr(method="pearson")
 
-# - 3、做主成分之前，进行中心标准化
+# 做主成分之前，进行中心标准化
 
-# In[4]:
 from sklearn import preprocessing
 
 data = preprocessing.scale(data)
-# - 4、使用sklearn的主成分分析，用于判断保留主成分的数量
+# 使用sklearn的主成分分析，用于判断保留主成分的数量
 
-# In[5]:
 from sklearn.decomposition import PCA
 
 """说明：1、第一次的n_components参数应该设的大一点
@@ -4378,19 +4247,16 @@ pca = PCA(n_components=3)
 pca.fit(data)
 print(pca.explained_variance_)  # 建议保留2个主成分
 print(pca.explained_variance_ratio_)  # 建议保留2个主成分
-# %%
+
 pca = PCA(n_components=2).fit(data)  # 综上,2个主成分
 newdata = pca.fit_transform(data)
-# In[6]:
-"""通过主成分在每个变量上的权重的绝对值大小，确定每个主成分的代表性
-"""
+# 通过主成分在每个变量上的权重的绝对值大小，确定每个主成分的代表性
 pd.DataFrame(pca.components_).T
 # 第一个主成分在第2个变量权重低,其余均高
 # 第二个主成分在第2个变量权重高,其余均低
 #############################################################################################
 # 二、因子分析
 # 因子分析的概念很多，作为刚入门的人，我们可以认为因子分析是主成分分析的延续
-# In[7]:
 
 # pip install fa_kit
 
@@ -4400,30 +4266,25 @@ from fa_kit import plotting as fa_plotting
 fa = FactorAnalysis.load_data_samples(data, preproc_demean=True, preproc_scale=True)
 fa.extract_components()
 
+# 设定提取主成分的方式。默认为“broken_stick”方法，建议使用“top_n”法
 
-# - 2、设定提取主成分的方式。默认为“broken_stick”方法，建议使用“top_n”法
-
-# In[8]:
 fa.find_comps_to_retain(method="top_n", num_keep=2)
-# - 3、通过最大方差法进行因子旋转
+# 通过最大方差法进行因子旋转
 
-# In[9]:
 pd.DataFrame(fa.comps["rot"])  # 查看因子权重
 fa.rotate_components(method="varimax")
 fa_plotting.graph_summary(fa)
 # - 说明：可以通过第三张图观看每个因子在每个变量上的权重，权重越高，代表性越强
 
+# 获取因子得分
 
-# - 4、获取因子得分
-
-# In[19]:
 # 到目前还没有与PCA中fit_transform类似的函数，因此只能手工计算因子
 # 以下是矩阵相乘的方式计算因子：因子=原始数据（n*k）*权重矩阵(k*num_keep)
 fas = pd.DataFrame(fa.comps["rot"])
 data = pd.DataFrame(data)  # 注意data数据需要标准化
 fa_score = pd.DataFrame(np.dot(data, fas))
 
-# ### 第三步：根据因子得分进行数据分析
+# 第三步：根据因子得分进行数据分析
 
 a = fa_score.rename(columns={0: "Gross", 1: "Avg"})
 citi10_fa = model_data.join(a)
@@ -4441,14 +4302,12 @@ show()
 
 #############################################################################################
 # 三、变量筛选
-# ### 以下是变量选择的完整函数
-# ### 以下是变量选择的完整函数
+# 以下是变量选择的完整函数
+# 以下是变量选择的完整函数
 # 基于SparsePCA的算法还不是很稳定,尤其是当数据本身保留几个变量都处于模棱两个的时候,
 # 该算法并不能达到人为调整的效果。而且并不能保证每次保留的变量是一致的（原因1、SparsePCA：本身就具有随机性；2、脚本中也随机抽样的），
 # 只能保证保留的变量是不相关的
 # 其特点只是比较省人力，可以自动化运行
-
-# In[65]:
 
 
 def Var_Select(orgdata, k, alphaMax=10, alphastep=0.2):
@@ -4525,10 +4384,7 @@ model_data = pd.read_csv("data/cities_10.csv", encoding="gbk")
 model_data.head()
 data = model_data.loc[:, "X1":]
 
-
-# In[67]:
 Varseled_data = Var_Select(data, k=2)
-# %%
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -4544,26 +4400,23 @@ CNT_CSC 有偿服务次数
 """
 # 一、主成分分析
 
-# - 1、引入数据
+# 引入数据
 
 model_data = pd.read_csv("data/profile_bank.csv")
 data = model_data.loc[:, "CNT_TBM":"CNT_CSC"]
 
-# - 2、查看相关系数矩阵，判定做变量降维的必要性（非必须）
+# 查看相关系数矩阵，判定做变量降维的必要性（非必须）
 
-# In[3]:
 corr_matrix = data.corr(method="pearson")
 # corr_matrix = data.corr(method='spearman')
 
-# - 3、做主成分之前，进行中心标准化
+# 做主成分之前，进行中心标准化
 
-# In[4]:
 from sklearn import preprocessing
 
 data = preprocessing.scale(data)
-# - 4、使用sklearn的主成分分析，用于判断保留主成分的数量
+# 使用sklearn的主成分分析，用于判断保留主成分的数量
 
-# In[5]:
 from sklearn.decomposition import PCA
 
 """说明：1、第一次的n_components参数应该设的大一点
@@ -4573,12 +4426,12 @@ pca = PCA(n_components=3)
 pca.fit(data)
 print(pca.explained_variance_)  # 建议保留2个主成分
 print(pca.explained_variance_ratio_)  # 建议保留3个主成分
-# %%
+
 pca = PCA(n_components=3).fit(data)  # 综上,2个主成分
 newdata = pca.fit_transform(data)
-# In[6]:
-"""通过主成分在每个变量上的权重的绝对值大小，确定每个主成分的代表性
-"""
+
+# 通过主成分在每个变量上的权重的绝对值大小，确定每个主成分的代表性
+
 pd.DataFrame(pca.components_).T
 # 第一个主成分在第3个变量权重差不多高
 # 第二个主成分在第1个变量权重高,其余均低
@@ -4586,54 +4439,43 @@ pd.DataFrame(pca.components_).T
 #############################################################################################
 # 二、因子分析
 # 因子分析的概念很多，作为刚入门的人，我们可以认为因子分析是主成分分析的延续
-# In[7]:
+
 from fa_kit import FactorAnalysis
 from fa_kit import plotting as fa_plotting
 
 fa = FactorAnalysis.load_data_samples(data, preproc_demean=True, preproc_scale=True)
 fa.extract_components()
 
+# 设定提取主成分的方式。默认为“broken_stick”方法，建议使用“top_n”法
 
-# - 2、设定提取主成分的方式。默认为“broken_stick”方法，建议使用“top_n”法
-
-# In[8]:
 fa.find_comps_to_retain(method="top_n", num_keep=3)
-# - 3、通过最大方差法进行因子旋转
+# 通过最大方差法进行因子旋转
 
-# In[9]:
 pd.DataFrame(fa.comps["rot"])  # 查看因子权重
 fa.rotate_components(method="varimax")
 fa_plotting.graph_summary(fa)
 # - 说明：可以通过第三张图观看每个因子在每个变量上的权重，权重越高，代表性越强
 
+# 获取因子得分
 
-# - 4、获取因子得分
-
-# In[19]:
 # 到目前还没有与PCA中fit_transform类似的函数，因此只能手工计算因子
 # 以下是矩阵相乘的方式计算因子：因子=原始数据（n*k）*权重矩阵(k*num_keep)
 fas = pd.DataFrame(fa.comps["rot"])
 data = pd.DataFrame(data)  # 注意data数据需要标准化
 fa_score = pd.DataFrame(np.dot(data, fas))
 
-# ### 第三步：根据因子得分进行数据分析
-
-# In[25]:
-
+# 第三步：根据因子得分进行数据分析
 
 a = fa_score.rename(columns={0: "Gross", 1: "Avg"})
 profile_bank_fa = model_data.join(a)
 
-
-# %%
 #############################################################################################
 # 三、变量筛选
-# ### 以下是变量选择的完整函数
+# 以下是变量选择的完整函数
 # 基于SparsePCA的算法还不是很稳定,尤其是当数据本身保留几个变量都处于模棱两个的时候,
 # 该算法并不能达到人为调整的效果。而且并不能保证每次保留的变量是一致的（原因1、SparsePCA：本身就具有随机性；2、脚本中也随机抽样的），
 # 只能保证保留的变量是不相关的
 # 其特点只是比较省人力，可以自动化运行
-# In[65]:
 
 
 def Var_Select(orgdata, k, alphaMax=10, alphastep=0.2):
@@ -4791,10 +4633,7 @@ model_data = pd.read_csv("data/creditcard_exp.csv")
 model_data.head()
 data = model_data.loc[:, "gender":]
 
-
-# In[67]:
 Varseled_data = Var_Select(data, k=5)
-# %%
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -4806,7 +4645,7 @@ data = model_data.loc[:, "CNT_TBM":"CNT_CSC"]
 k = 3
 alphaMax = 5
 alphastep = 0.2
-# %%
+
 from sklearn import preprocessing
 from sklearn.decomposition import SparsePCA
 from functools import reduce
@@ -4815,16 +4654,13 @@ data = preprocessing.scale(data)
 n_components = k
 pca_n = list()
 
-# %%
-# %%
 pca_model = SparsePCA(n_components=n_components, alpha=5)
 pca_model.fit(data)
-# %%
+
 pca = pd.DataFrame(pca_model.components_).T
-# %%
+
 n = data.shape[1] - sum(sum(np.array(pca != 0)))
 
-# %%
 best_alpha = 5
 pca_model = SparsePCA(n_components=n_components, alpha=best_alpha)
 pca_model.fit(data)
@@ -4832,7 +4668,6 @@ pca = pd.DataFrame(pca_model.components_).T
 data = pd.DataFrame(data)
 score = pd.DataFrame(pca_model.fit_transform(data))
 
-# %%
 r = []
 R_square = []
 for xk in range(data.shape[1]):  # xk输入变量个数
@@ -4848,14 +4683,14 @@ R = abs(pd.DataFrame(np.array(r).reshape((data.shape[1], n_components))))
 R_square = abs(pd.DataFrame(np.array(R_square).reshape((data.shape[1], n_components))))
 var_list = []
 # print(R_square)
-# %%
+
 for i in range(n_components):
     vmin = R_square[i].min()
     print(R_square[i])
     print(vmin)
     print(R_square[R_square[i] == min][i])
     var_list.append(R_square[R_square[i] == vmin][i].index[0])
-# %%
+
 news_ids = []
 for id in var_list:
     if id not in news_ids:
@@ -4969,11 +4804,11 @@ print("------------------------------------------------------------")  # 60個
 
 # chapter14_1 Hclus_FCA_city10.py
 
-# # 第十四讲 聚类
+# 第十四讲 聚类
 
-# # 1、层次聚类
+# 层次聚类
 
-# ### 第一步：手动测试主成分数量
+# 第一步：手动测试主成分数量
 
 model_data = pd.read_csv("data/cities_10.csv", encoding="gbk")
 model_data.head()
@@ -4981,19 +4816,19 @@ model_data.head()
 data = model_data.loc[:, "X1":]
 data.head()
 
-# - 2、查看相关系数矩阵，判定做变量降维的必要性（非必须）
+# 查看相关系数矩阵，判定做变量降维的必要性（非必须）
 
 corr_matrix = data.corr(method="pearson")
 # corr_matrix = corr_matrix.abs()
 corr_matrix
 
-# - 3、做主成分之前，进行中心标准化
+# 做主成分之前，进行中心标准化
 
 from sklearn import preprocessing
 
 data = preprocessing.scale(data)
 
-# - 4、使用sklearn的主成分分析，用于判断保留主成分的数量
+# 使用sklearn的主成分分析，用于判断保留主成分的数量
 
 from sklearn.decomposition import PCA
 
@@ -5007,7 +4842,7 @@ print(pca.explained_variance_ratio_)
 
 # 第二步：根据主成分分析确定需要保留的主成分数量，进行因子分析
 
-# - 1、导入包，并对输入的数据进行主成分提取。为保险起见，data需要进行中心标准化
+# 导入包，并对输入的数据进行主成分提取。为保险起见，data需要进行中心标准化
 
 from fa_kit import FactorAnalysis
 from fa_kit import plotting as fa_plotting
@@ -5015,18 +4850,18 @@ from fa_kit import plotting as fa_plotting
 fa = FactorAnalysis.load_data_samples(data, preproc_demean=True, preproc_scale=True)
 fa.extract_components()
 
-# - 2、设定提取主成分的方式。默认为“broken_stick”方法，建议使用“top_n”法
+# 设定提取主成分的方式。默认为“broken_stick”方法，建议使用“top_n”法
 
 fa.find_comps_to_retain(method="top_n", num_keep=2)
 
-# - 3、通过最大方差法进行因子旋转
+# 通过最大方差法进行因子旋转
 
 fa.rotate_components(method="varimax")
 fa_plotting.graph_summary(fa)
 
-# - 说明：可以通过第三张图观看每个因子在每个变量上的权重，权重越高，代表性越强
+# 说明：可以通过第三张图观看每个因子在每个变量上的权重，权重越高，代表性越强
 
-# - 4、获取因子得分
+# 获取因子得分
 
 pd.DataFrame(fa.comps["rot"])
 
@@ -5034,7 +4869,7 @@ fas = pd.DataFrame(fa.comps["rot"])
 data = pd.DataFrame(data)
 score = pd.DataFrame(np.dot(data, fas))
 
-# ### 第三步：根据因子得分进行数据分析
+# 第三步：根据因子得分进行数据分析
 
 a = score.rename(columns={0: "Gross", 1: "Avg"})
 citi10_fa = model_data.join(a)
@@ -5065,36 +4900,30 @@ P = sch.dendrogram(
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+'''
+# Kmeans_FA_bank.py
 
-# chapter14_2 Kmeans_FA_bank.py
+# K-means聚类分析
 
-# # 第十四讲-2 K-means聚类分析
-
-# ### 第一步：手动测试主成分数量
+# 手动测试主成分数量
 
 model_data = pd.read_csv("data/profile_bank.csv")
 data = model_data.loc[:, "CNT_TBM":"CNT_CSC"]
 data.head()
 
-# - 2、查看相关系数矩阵，判定做变量降维的必要性（非必须）
+# 查看相关系数矩阵，判定做变量降维的必要性（非必须）
 
 corr_matrix = data.corr(method="pearson")
 # corr_matrix = corr_matrix.abs()
 corr_matrix
 
-
-# - 3、做主成分之前，进行中心标准化
-
-# In[3]:
-
+# 做主成分之前，进行中心标准化
 
 from sklearn import preprocessing
 
 data = preprocessing.scale(data)
 
-
-# - 4、使用sklearn的主成分分析，用于判断保留主成分的数量
-
+# 使用sklearn的主成分分析，用于判断保留主成分的数量
 
 from sklearn.decomposition import PCA
 
@@ -5106,18 +4935,13 @@ newData = pca.fit(data)
 print(pca.explained_variance_)
 print(pca.explained_variance_ratio_)
 
-
 # 通过主成分在每个变量上的权重的绝对值大小，确定每个主成分的代表性
 
 pd.DataFrame(pca.components_).T
 
+# 第二步：根据主成分分析确定需要保留的主成分数量，进行因子分析
 
-# ### 第二步：根据主成分分析确定需要保留的主成分数量，进行因子分析
-
-# - 1、导入包，并对输入的数据进行主成分提取。为保险起见，data需要进行中心标准化
-
-# In[6]:
-
+# 导入包，并对输入的数据进行主成分提取。为保险起见，data需要进行中心标准化
 
 from fa_kit import FactorAnalysis
 from fa_kit import plotting as fa_plotting
@@ -5125,27 +4949,18 @@ from fa_kit import plotting as fa_plotting
 fa = FactorAnalysis.load_data_samples(data, preproc_demean=True, preproc_scale=True)
 fa.extract_components()
 
-
-# - 2、设定提取主成分的方式。默认为“broken_stick”方法，建议使用“top_n”法
-
-# In[7]:
-
+# 设定提取主成分的方式。默认为“broken_stick”方法，建议使用“top_n”法
 
 fa.find_comps_to_retain(method="top_n", num_keep=3)
 
-
-# - 3、通过最大方差法进行因子旋转
-
-# In[8]:
-
+# 通过最大方差法进行因子旋转
 
 fa.rotate_components(method="varimax")
 fa_plotting.graph_summary(fa)
 
+# 说明：可以通过第三张图观看每个因子在每个变量上的权重，权重越高，代表性越强
 
-# - 说明：可以通过第三张图观看每个因子在每个变量上的权重，权重越高，代表性越强
-
-# - 4、获取因子得分
+# 获取因子得分
 
 pd.DataFrame(fa.comps["rot"])
 
@@ -5153,24 +4968,16 @@ fas = pd.DataFrame(fa.comps["rot"])
 data = pd.DataFrame(data)
 score = pd.DataFrame(np.dot(data, fas))
 
-
-# ### 第三步：根据因子得分进行数据分析
-
-# In[14]:
-
+# 第三步：根据因子得分进行数据分析
 
 fa_scores = score.rename(columns={0: "ATM_POS", 1: "TBM", 2: "CSC"})
 fa_scores.head()
 
+# 第四步：使用因子得分进行k-means聚类
 
-# ### 第四步：使用因子得分进行k-means聚类
+# k-means聚类的第一种方式：不进行变量分布的正态转换--用于寻找异常值
 
-# ### 4.1 k-means聚类的第一种方式：不进行变量分布的正态转换--用于寻找异常值
-
-# - 1、查看变量的偏度
-
-# In[15]:
-
+# 查看变量的偏度
 
 var = ["ATM_POS", "TBM", "CSC"]
 skew_var = {}
@@ -5179,11 +4986,7 @@ for i in var:
     skew = pd.Series(skew_var).sort_values(ascending=False)
 skew
 
-
-# - 2、进行k-means聚类
-
-# In[16]:
-
+# 进行k-means聚类
 
 from sklearn.cluster import KMeans
 
@@ -5192,16 +4995,11 @@ kmeans = KMeans(n_clusters=3)  # MiniBatchKMeans()分批处理
 result = kmeans.fit(fa_scores)
 # print(result)
 
-
-# - 3、对分类结果进行解读
-
-# In[17]:
-
+# 对分类结果进行解读
 
 model_data_l = model_data.join(pd.DataFrame(result.labels_))
 model_data_l = model_data_l.rename(columns={0: "clustor"})
 model_data_l.head()
-
 
 import matplotlib
 
@@ -5209,10 +5007,9 @@ import matplotlib
 model_data_l.clustor.value_counts().plot(kind="pie")
 show()
 
+# k-means聚类的第二种方式：进行变量分布的正态转换--用于客户细分
 
-# ### 4.2 k-means聚类的第二种方式：进行变量分布的正态转换--用于客户细分
-
-# - 1、进行变量分布的正态转换
+# 进行变量分布的正态转换
 
 from sklearn import preprocessing
 
@@ -5224,10 +5021,6 @@ fa_scores_trans = pd.DataFrame(fa_scores_trans)
 fa_scores_trans = fa_scores_trans.rename(columns={0: "ATM_POS", 1: "TBM", 2: "CSC"})
 fa_scores_trans.head()
 
-
-# In[20]:
-
-
 var = ["ATM_POS", "TBM", "CSC"]
 skew_var = {}
 for i in var:
@@ -5235,11 +5028,7 @@ for i in var:
     skew = pd.Series(skew_var).sort_values(ascending=False)
 skew
 
-
-# - 2、进行k-means聚类
-
-# In[21]:
-
+# 进行k-means聚类
 
 from sklearn.cluster import KMeans
 
@@ -5248,18 +5037,11 @@ kmeans = KMeans(n_clusters=3)  # MiniBatchKMeans()分批处理
 result = kmeans.fit(fa_scores_trans)
 # print(result)
 
-
-# - 3、对分类结果进行解读
-
-# In[22]:
-
+# 对分类结果进行解读
 
 model_data_l = model_data.join(pd.DataFrame(result.labels_))
 model_data_l = model_data_l.rename(columns={0: "clustor"})
 model_data_l.head()
-
-
-# In[23]:
 
 
 import matplotlib
@@ -5267,10 +5049,6 @@ import matplotlib
 # get_ipython().magic('matplotlib inline')
 model_data_l.clustor.value_counts().plot(kind="pie")
 show()
-
-
-# In[31]:
-
 
 from sklearn import tree
 
@@ -5282,10 +5060,6 @@ clf = tree.DecisionTreeClassifier(
     random_state=12345,
 )  # 当前支持计算信息增益和GINI
 clf.fit(model_data, result.labels_)
-
-
-# In[48]:
-
 
 import pydotplus
 from IPython.display import Image  # 用IPython
@@ -5325,7 +5099,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-
 # 查看一下关键字有哪些，避免关键字做自定义标识符
 import keyword
 
@@ -5336,3 +5109,5 @@ print(keyword.kwlist)
 
 
 # normed 改成 density
+
+# In[19]:

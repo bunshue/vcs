@@ -1208,6 +1208,114 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+"""
+决策树可视化（使用sklearn.tree 的export_graphviz方法）
+可视化工具Graphviz
+
+Graphviz 应用程序中有多种工具可以生成各种类型的图表（dot、neato、circo、twopi 等）。
+本文将重点介绍用于生成层级图的 dot 工具。
+
+dot渲染的图具有明确方向性。
+neato渲染的图缺乏方向性。
+twopi渲染的图采用放射性布局。
+circo渲染的图采用环型布局。
+fdp渲染的图缺乏方向性。
+sfdp渲染大型的图，图片缺乏方向性。
+
+
+graphviz强大而便捷的关系图/流程图绘制方法让我们联想到机器学习中的Decision Tree的展示方式。幸运的是，scikit-learn提供了生成.dot文件的接口，在python编辑环境操作如下：
+
+
+
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+from sklearn import tree
+from sklearn.datasets import load_wine
+from sklearn.model_selection import train_test_split
+from sklearn.model_selection import cross_val_score
+from sklearn.tree import export_graphviz
+
+import graphviz
+
+# 加载数据集，将数据和类别区分呢
+wine = load_wine()
+X = wine.data
+y = wine.target
+# print(pd.DataFrame(X))
+# print(pd.DataFrame(y))
+print(wine.feature_names)
+
+xtrain, xtest, ytrain, ytest = train_test_split(X, y, test_size=0.2)
+
+# 构建模型
+clf = tree.DecisionTreeClassifier()
+clf.fit(xtrain, ytrain)
+
+# 评估模型使用十次交叉验证
+score = cross_val_score(clf, X, y, cv=10, scoring="accuracy")
+print(np.mean(score))
+print(clf.feature_importances_)
+
+# 可视化决策树
+# 目前使用中文有問題
+# feature_name = ['酒精','苹果酸','灰','灰的碱性','镁','总酚','类黄酮','非黄烷类酚类','花青素','颜色强度','色调','od280/od315稀释葡萄酒','脯氨酸']
+with open("tmp_wine3.dot", "w", encoding="utf-8") as f:
+    # f = export_graphviz(clf, feature_names=feature_name, out_file=f)
+    f = export_graphviz(clf, feature_names=wine.feature_names, out_file=f)
+
+# same
+export_graphviz(clf, out_file="tmp_wine4.dot", feature_names=wine.feature_names)
+
+print("------------------------------------------------------------")  # 60個
+
+from sklearn import preprocessing
+from sklearn.decomposition import PCA
+from sklearn import preprocessing
+from sklearn.model_selection import train_test_split
+from sklearn import metrics as ms
+from sklearn import tree
+from sklearn import datasets
+import graphviz
+
+iris = datasets.load_iris()
+X = iris.data  # 取出4欄資料
+y = iris.target
+
+x = X
+
+########预处理#############
+min_max_scaler = preprocessing.MinMaxScaler()
+X_train = min_max_scaler.fit_transform(x)
+
+n_components = 2  # 降維後的維度
+pca = PCA(n_components=n_components)  # 保留的特征 PCA 降维
+X_train = pca.fit_transform(X_train)
+
+# 資料分割
+x_train, x_test, y_train, y_test = train_test_split(X_train, y, test_size=0.2)
+
+###############模型###########
+dtc = tree.DecisionTreeClassifier(criterion="entropy")
+clf = dtc.fit(x_train, y_train)
+# print(clf.predict(x_test))
+# print(y_test)
+print("精确率", ms.precision_score(y_test, clf.predict(x_test), average="micro"))
+
+dot_data = tree.export_graphviz(clf, out_file="tmp_iris.dot")
+print(dot_data)
+
+""" 上述的 out_file="None" 才可以使用
+graph = graphviz.Source(dot_data)
+print(graph)
+
+os.environ["PATH"] += os.pathsep + 'C:\\Users\\070601\\Desktop\\'
+# NG graph.render("test", view=True)
+"""
+
+print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

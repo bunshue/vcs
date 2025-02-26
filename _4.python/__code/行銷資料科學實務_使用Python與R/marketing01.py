@@ -28,7 +28,7 @@ print('------------------------------------------------------------')	#60個
 from sklearn.linear_model import LogisticRegression
 
 print('------------------------------------------------------------')	#60個
-
+'''
 input_data = np.array([
     [0, 0],
     [0.25, 0.25],
@@ -99,9 +99,6 @@ plt.grid()
 plt.show()
 
 print('------------------------------------------------------------')	#60個
-
-import matplotlib.pyplot as plt
-import pandas as pd
 
 df = pd.read_csv('data/bank-additional-full.csv', sep = ';')
 
@@ -274,9 +271,6 @@ conversions_by_education_df.plot(
 
 plt.show()
 
-
-
-
 print('------------------------------------------------------------')	#60個
 
 #Last Contact Duration
@@ -284,7 +278,6 @@ print('------------------------------------------------------------')	#60個
 tt = df.groupby('conversion')['duration'].describe()
 
 print(tt)
-
 
 duration_df = pd.concat([
     df.loc[df['conversion'] == 1, 'duration'].reset_index(drop=True), 
@@ -297,7 +290,6 @@ duration_df = duration_df / (60*60)
 
 print(duration_df)
 
-
 ax = duration_df.plot(
     kind='box',
     grid=True,
@@ -308,7 +300,6 @@ ax.set_ylabel('last contact duration (hours)')
 ax.set_title('Last Contact Duration')
 
 plt.show()
-
 
 print('------------------------------------------------------------')	#60個
 #Conversions by Age Groups & Marital Status
@@ -325,7 +316,6 @@ age_marital_df = age_marital_df.divide(
 
 print(age_marital_df)
 
-
 ax = age_marital_df.loc[
     ['[18, 30)', '[30, 40)', '[40, 50)', '[50, 60)', '[60, 70)', '70+']
 ].plot(
@@ -339,7 +329,6 @@ ax.set_xlabel('age group')
 ax.set_ylabel('conversion rate (%)')
 
 plt.show()
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -357,9 +346,6 @@ ax.set_xlabel('age group')
 ax.set_ylabel('conversion rate (%)')
 
 plt.show()
-
-print('------------------------------------------------------------')	#60個
-print('------------------------------------------------------------')	#60個
 
 print('------------------------------------------------------------')	#60個
 print('------------------------------------------------------------')	#60個
@@ -635,11 +621,8 @@ print('打印.summbary()資料')
 print(logit_fit.summary())
 
 print('------------------------------------------------------------')	#60個
-
-
 print('------------------------------------------------------------')	#60個
-print('------------------------------------------------------------')	#60個
-
+'''
 #From Engagement to Conversions
 
 #1. Loading Data
@@ -888,9 +871,7 @@ print(dt_model.fit(df[features], df[response_var]))
 
 print(dt_model.classes_)
 
-#5. Interpreting Decision Tree Model
-
-# pip install graphviz
+# 決策樹可視化
 
 import graphviz
 
@@ -906,10 +887,14 @@ dot_data = tree.export_graphviz(
 
 graph = graphviz.Source(dot_data)
 
-from IPython.core.display import display, HTML
+from IPython.display import display
+from IPython.core.display import HTML
+
 display(HTML("<style>text {font-size: 10px;}</style>"))
 
 print(graph)
+
+#或許可以存.dot檔
 
 print('------------------------------------------------------------')	#60個
 print('------------------------------------------------------------')	#60個
@@ -930,4 +915,9 @@ print('------------------------------------------------------------')	#60個
 print('------------------------------------------------------------')	#60個
 print('作業完成')
 print('------------------------------------------------------------')	#60個
+sys.exit()
 
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個

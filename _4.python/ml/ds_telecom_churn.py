@@ -383,8 +383,8 @@ clf = DecisionTreeClassifier(
 
 clf.fit(x_train, y_train)
 
-# 使用graphviz將樹結構輸出，在python中嵌入graphviz可參考：pygraphviz
-# 存檔 sklearn.tree.export_graphviz(clf, out_file="tmp_cart1.dot") #存檔
+# 使用graphviz將樹結構輸出
+# 存檔 sklearn.tree.export_graphviz(clf, out_file="tmp_cart1.dot")
 
 # cart預測
 
@@ -595,14 +595,7 @@ clf = DecisionTreeClassifier(
 
 clf.fit(x_train, y_train)  #  使用訓練數據建模
 
-# 可視化
-# 使用dot文件進行決策樹可視化需要安裝一些工具：
-# - 第一步是安裝[graphviz](http://www.graphviz.org/)。
-#   如果是windows，就在官網下載msi文件安裝。
-#   無論是linux還是windows，裝完后都要設置環境變量，將graphviz的bin目錄加到PATH，
-#   比如windows，將C:/Program Files (x86)/Graphviz2.38/bin/加入了PATH
-# - 第二步是安裝python插件graphviz： pip install graphviz
-# - 第三步是安裝python插件pydotplus: pip install pydotplus
+# 使用dot文件進行決策樹可視化
 
 import pydotplus
 from IPython.display import Image  # 用IPython

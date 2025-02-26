@@ -1,8 +1,9 @@
 """
 introduction_to_machine_learning_04_nn
 
-"""
+sugar不能用 import theano 失敗
 
+"""
 print("------------------------------------------------------------")  # 60個
 
 # 共同
@@ -78,6 +79,8 @@ plt.xlabel("Feature")
 plt.ylabel("Target")
 plt.scatter(X, Y, marker=".")
 show()
+
+print("------------------------------------------------------------")  # 60個
 
 #!pip install theano
 
@@ -297,7 +300,6 @@ X_train = np.hstack((np.ones((N, 1)), X_train))
 print("Original:", X[:5], "Preprocessed:", X_train[:5], sep="\n\n")
 
 # Training
-
 # The implementation of MLR in theano
 
 import theano
@@ -341,7 +343,6 @@ show()
 print("------------------------------------------------------------")  # 60個
 
 # Validation
-
 # First we need unseen data for testing
 
 # another set of students
@@ -364,6 +365,10 @@ plt.ylabel("Study time")
 for student, g in zip(X_test, Y_pred):
     plt.scatter(*student, color="C" + str(g), marker=".")
 show()
+
+print("------------------------------------------------------------")  # 60個
+
+# 計算準確率
 
 cc = (Y_test == Y_pred).sum() / Y_test.shape[0]
 print(cc)
@@ -400,7 +405,6 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 """
 Neural Networks
-
     Here are some helpful functions to draw neural networks
     Lets just skip them - it is just bunch of matplotlib
 """
@@ -501,8 +505,6 @@ def draw_net(input_size, output_size, hidden_layers=[], w=6, h=4):
 
 draw_net(3, 1)
 
-import math
-
 
 def binary_step(x):
     return 0 if x < 0 else 1
@@ -539,6 +541,8 @@ ax2.plot(x, lf)
 ax3.plot(x, th)
 ax4.plot(x, re)
 show()
+
+print("------------------------------------------------------------")  # 60個
 
 # Neural networks
 
@@ -583,6 +587,8 @@ for i, Y in enumerate([Y_and, Y_or, Y_xor]):
 
 plt.tight_layout()
 show()
+
+print("------------------------------------------------------------")  # 60個
 
 # Single neuron approach
 
@@ -630,7 +636,7 @@ for gate, data in zip(gates, (Y_and, Y_or, Y_xor)):
     [train(X, data) for _ in range(N)]
     gates_pred[gate] = predict(X)
 
-# Lets see the result
+# Let's see the result
 
 for gate in gates:
     for i, (x1, x2) in enumerate(X):
@@ -738,7 +744,11 @@ plt.scatter(X, Y, color="C1")
 plt.plot(x_, np.sin(np.pi * x_), "C0--")
 show()
 
+print("------------------------------------------------------------")  # 60個
+
 draw_net(2, 1, [4], w=10)
+
+print("------------------------------------------------------------")  # 60個
 
 import tensorflow as tf
 
@@ -875,7 +885,7 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # Gradient descent variations
-# SGD on MNIST
+# SGD on MNIST # stochastic gradient descent (SGD)
 
 # create a session
 sess = tf.Session()
@@ -971,9 +981,10 @@ plt.plot(X_test, Y_test, "C0")
 show()
 
 # It is clearly overfitted
-# Lets do the same using Ridge regression
 
 print("------------------------------------------------------------")  # 60個
+
+# Lets do the same using Ridge regression
 
 from sklearn.linear_model import Ridge
 
@@ -993,6 +1004,8 @@ print(reg.coef_)
 print(reg_l2.coef_)
 
 print("------------------------------------------------------------")  # 60個
+
+# Lets repeat the same for Lasso regression
 
 from sklearn.linear_model import Lasso
 

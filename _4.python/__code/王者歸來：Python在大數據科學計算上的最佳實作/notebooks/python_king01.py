@@ -19,10 +19,9 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 # 電影打分資料MovieLens中讀入使用者資料
 
-import pandas as pd
 columns = 'user_id', 'age', 'sex', 'occupation', 'zip_code'
 df = pd.read_csv("data/ml-100k/u.user", 
                  delimiter="|", header=None, names=columns)
@@ -92,8 +91,8 @@ print("------------------------------------------------------------")  # 60個
 foldername = 'C:/_git/vcs/_1.data/______test_files1/__pic//_scenery'
 
 import glob
-import numpy as np
-from cv2 import imread, imwrite
+from cv2 import imread
+from cv2 import imwrite
 
 imgs = []
 for fn in glob.glob(foldername + "/*.jpg"):
@@ -119,15 +118,14 @@ fig = pl.figure()
 #%dot GraphvizMPLTransform.graphviz(fig.transFigure)
 """
 
-from sympy import symbols, solve
+from sympy import symbols
+from sympy import solve
+
 a, b, c, x = symbols("a,b,c,x")
 
 cc =  solve(a * x ** 2 + b * x + c, x)
 print(cc)
 
-
-
-'''
 print("------------------------------------------------------------")  # 60個
 
 

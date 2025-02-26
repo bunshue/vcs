@@ -27,20 +27,12 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
-#15章 3节 拖拉机销售数据预测
-
 import itertools
-
 import statsmodels.api as sm
 import statsmodels.tsa.api as smt
 import statsmodels.formula.api as smf
 
-#不要顯示一些警告
-import warnings
-warnings.filterwarnings("ignore")
-
-#os.chdir(r"D:\Python_book\18Timeseries")
-
+#拖拉机销售数据预测
 sales_data = pd.read_csv('tractor_sales.csv')
 cc = sales_data.head(2)
 print(cc)
@@ -72,7 +64,6 @@ plt.figure(figsize=(10, 5))
 plt.plot(sales_ts)
 plt.xlabel('Years')
 plt.ylabel('Tractor Sales')
-
 
 #2 趋势分解
 
@@ -223,6 +214,11 @@ sys.exit()
 
 
 print("------------------------------------------------------------")  # 60個
+
+
+#不要顯示一些警告
+import warnings
+warnings.filterwarnings("ignore")
 
 
 warnings.filterwarnings("ignore") # 忽略ARIMA模型无法估计出结果时的报警信息
