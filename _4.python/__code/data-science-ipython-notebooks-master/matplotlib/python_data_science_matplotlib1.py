@@ -33,14 +33,14 @@ def show():
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-#plt.style.use('classic')
-#plt.style.use('seaborn-v0_8')
+# plt.style.use('classic')
+# plt.style.use('seaborn-v0_8')
 
 x = np.linspace(0, 10, 100)
 
 fig = plt.figure()
-#plt.plot(x, np.sin(x), '-')
-#plt.plot(x, np.cos(x), '--')
+# plt.plot(x, np.sin(x), '-')
+# plt.plot(x, np.cos(x), '--')
 
 """
 plt.plot(x, np.sin(x - 0), color='blue')        # specify color by name
@@ -71,9 +71,8 @@ plt.plot(x, x + 3, ':r')  # dotted red
 
 
 rng = np.random.RandomState(0)
-for marker in ['o', '.', ',', 'x', '+', 'v', '^', '<', '>', 's', 'd']:
-    plt.plot(rng.rand(5), rng.rand(5), marker,
-             label="marker='{0}'".format(marker))
+for marker in ["o", ".", ",", "x", "+", "v", "^", "<", ">", "s", "d"]:
+    plt.plot(rng.rand(5), rng.rand(5), marker, label="marker='{0}'".format(marker))
 plt.legend(numpoints=1)
 plt.xlim(0, 1.8)
 
@@ -91,8 +90,7 @@ y = rng.randn(100)
 colors = rng.rand(100)
 sizes = 1000 * rng.rand(100)
 
-plt.scatter(x, y, c=colors, s=sizes, alpha=0.3,
-            cmap='viridis')
+plt.scatter(x, y, c=colors, s=sizes, alpha=0.3, cmap="viridis")
 plt.colorbar()  # show color scale
 
 show()
@@ -105,8 +103,14 @@ from sklearn.datasets import load_iris
 iris = load_iris()
 features = iris.data.T
 
-plt.scatter(features[0], features[1], alpha=0.2,
-            s=100*features[3], c=iris.target, cmap='viridis')
+plt.scatter(
+    features[0],
+    features[1],
+    alpha=0.2,
+    s=100 * features[3],
+    c=iris.target,
+    cmap="viridis",
+)
 plt.xlabel(iris.feature_names[0])
 plt.ylabel(iris.feature_names[1])
 show()
@@ -126,15 +130,14 @@ gp = GaussianProcessRegressor()
 gp.fit(xdata[:, np.newaxis], ydata)
 
 xfit = np.linspace(0, 10, 1000)
-yfit, dyfit_ori = gp.predict(xfit[:, np.newaxis],return_std=True)
+yfit, dyfit_ori = gp.predict(xfit[:, np.newaxis], return_std=True)
 dyfit = 2 * dyfit_ori  # 2*sigma ~ 95% confidence region
 
 # Visualize the result
-plt.plot(xdata, ydata, 'or')
-plt.plot(xfit, yfit, '-', color='gray')
+plt.plot(xdata, ydata, "or")
+plt.plot(xfit, yfit, "-", color="gray")
 
-plt.fill_between(xfit, yfit - dyfit, yfit + dyfit,
-                 color='gray', alpha=0.2)
+plt.fill_between(xfit, yfit - dyfit, yfit + dyfit, color="gray", alpha=0.2)
 plt.xlim(0, 10)
 
 show()
@@ -142,8 +145,10 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+
 def f(x, y):
     return np.sin(x) ** 10 + np.cos(10 + y * x) * np.cos(x)
+
 
 x = np.linspace(0, 5, 50)
 y = np.linspace(0, 5, 40)
@@ -151,29 +156,27 @@ y = np.linspace(0, 5, 40)
 X, Y = np.meshgrid(x, y)
 Z = f(X, Y)
 
-plt.contour(X, Y, Z, colors='black')
+plt.contour(X, Y, Z, colors="black")
 show()
 
-plt.contour(X, Y, Z, 20, cmap='RdGy')
+plt.contour(X, Y, Z, 20, cmap="RdGy")
 show()
 
-plt.contourf(X, Y, Z, 20, cmap='RdGy')
+plt.contourf(X, Y, Z, 20, cmap="RdGy")
 plt.colorbar()
 show()
 
 
-plt.imshow(Z, extent=[0, 5, 0, 5], origin='lower',
-           cmap='RdGy')
+plt.imshow(Z, extent=[0, 5, 0, 5], origin="lower", cmap="RdGy")
 plt.colorbar()
-#plt.axis(aspect='image')
+# plt.axis(aspect='image')
 show()
 
 
-contours = plt.contour(X, Y, Z, 3, colors='black')
+contours = plt.contour(X, Y, Z, 3, colors="black")
 plt.clabel(contours, inline=True, fontsize=8)
 
-plt.imshow(Z, extent=[0, 5, 0, 5], origin='lower',
-           cmap='RdGy', alpha=0.5)
+plt.imshow(Z, extent=[0, 5, 0, 5], origin="lower", cmap="RdGy", alpha=0.5)
 plt.colorbar()
 show()
 
@@ -184,7 +187,7 @@ x1 = np.random.normal(0, 0.8, 1000)
 x2 = np.random.normal(-2, 1, 1000)
 x3 = np.random.normal(3, 2, 1000)
 
-kwargs = dict(histtype='stepfilled', alpha=0.3, density=True, bins=40)
+kwargs = dict(histtype="stepfilled", alpha=0.3, density=True, bins=40)
 
 plt.hist(x1, **kwargs)
 plt.hist(x2, **kwargs)
@@ -198,28 +201,28 @@ print(counts)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-#Two-Dimensional Histograms and Binnings
+# Two-Dimensional Histograms and Binnings
 mean = [0, 0]
 cov = [[1, 1], [1, 2]]
 x, y = np.random.multivariate_normal(mean, cov, 10000).T
 
-plt.hist2d(x, y, bins=30, cmap='Blues')
+plt.hist2d(x, y, bins=30, cmap="Blues")
 cb = plt.colorbar()
-cb.set_label('counts in bin')
+cb.set_label("counts in bin")
 
 show()
 
 counts, xedges, yedges = np.histogram2d(x, y, bins=30)
 
-plt.hexbin(x, y, gridsize=30, cmap='Blues')
-cb = plt.colorbar(label='count in bin')
+plt.hexbin(x, y, gridsize=30, cmap="Blues")
+cb = plt.colorbar(label="count in bin")
 
 show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-#Kernel density estimation
+# Kernel density estimation
 
 from scipy.stats import gaussian_kde
 
@@ -234,10 +237,13 @@ Xgrid, Ygrid = np.meshgrid(xgrid, ygrid)
 Z = kde.evaluate(np.vstack([Xgrid.ravel(), Ygrid.ravel()]))
 
 # Plot the result as an image
-plt.imshow(Z.reshape(Xgrid.shape),
-           origin='lower', aspect='auto',
-           extent=[-3.5, 3.5, -6, 6],
-           cmap='Blues')
+plt.imshow(
+    Z.reshape(Xgrid.shape),
+    origin="lower",
+    aspect="auto",
+    extent=[-3.5, 3.5, -6, 6],
+    cmap="Blues",
+)
 cb = plt.colorbar()
 cb.set_label("density")
 
@@ -285,76 +291,77 @@ plt.colorbar()
 
 show()
 
-#Customizing Colorbars
-plt.imshow(I, cmap='gray')
+# Customizing Colorbars
+plt.imshow(I, cmap="gray")
 
 show()
 
 
 from matplotlib.colors import LinearSegmentedColormap
 
+
 def grayscale_cmap(cmap):
     """Return a grayscale version of the given colormap"""
     cmap = plt.cm.get_cmap(cmap)
     colors = cmap(np.arange(cmap.N))
-    
+
     # convert RGBA to perceived grayscale luminance
     # cf. http://alienryderflex.com/hsp.html
     RGB_weight = [0.299, 0.587, 0.114]
     luminance = np.sqrt(np.dot(colors[:, :3] ** 2, RGB_weight))
     colors[:, :3] = luminance[:, np.newaxis]
-        
+
     return LinearSegmentedColormap.from_list(cmap.name + "_gray", colors, cmap.N)
-    
+
 
 def view_colormap(cmap):
     """Plot a colormap with its grayscale equivalent"""
     cmap = plt.cm.get_cmap(cmap)
     colors = cmap(np.arange(cmap.N))
-    
+
     cmap = grayscale_cmap(cmap)
     grayscale = cmap(np.arange(cmap.N))
-    
-    fig, ax = plt.subplots(2, figsize=(6, 2),
-                           subplot_kw=dict(xticks=[], yticks=[]))
+
+    fig, ax = plt.subplots(2, figsize=(6, 2), subplot_kw=dict(xticks=[], yticks=[]))
     ax[0].imshow([colors], extent=[0, 10, 0, 1])
     ax[1].imshow([grayscale], extent=[0, 10, 0, 1])
 
-view_colormap('jet')
+
+view_colormap("jet")
 show()
 
-view_colormap('viridis')
+view_colormap("viridis")
 show()
 
-view_colormap('cubehelix')
+view_colormap("cubehelix")
 show()
 
-view_colormap('RdBu')
+view_colormap("RdBu")
 show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # make noise in 1% of the image pixels
-speckles = (np.random.random(I.shape) < 0.01)
+speckles = np.random.random(I.shape) < 0.01
 I[speckles] = np.random.normal(0, 3, np.count_nonzero(speckles))
 
 plt.figure(figsize=(10, 3.5))
 
 plt.subplot(1, 2, 1)
-plt.imshow(I, cmap='RdBu')
+plt.imshow(I, cmap="RdBu")
 plt.colorbar()
 
 plt.subplot(1, 2, 2)
-plt.imshow(I, cmap='RdBu')
-plt.colorbar(extend='both')
+plt.imshow(I, cmap="RdBu")
+plt.colorbar(extend="both")
 plt.clim(-1, 1)
 
 show()
 
-#Discrete Color Bars
+# Discrete Color Bars
 
-plt.imshow(I, cmap=plt.cm.get_cmap('Blues', 6))
+plt.imshow(I, cmap=plt.cm.get_cmap("Blues", 6))
 plt.colorbar()
 plt.clim(-1, 1)
 
@@ -365,8 +372,7 @@ print("------------------------------------------------------------")  # 60個
 
 for i in range(1, 7):
     plt.subplot(2, 3, i)
-    plt.text(0.5, 0.5, str((2, 3, i)),
-             fontsize=18, ha='center')
+    plt.text(0.5, 0.5, str((2, 3, i)), fontsize=18, ha="center")
 
 show()
 
@@ -377,26 +383,24 @@ fig = plt.figure()
 fig.subplots_adjust(hspace=0.4, wspace=0.4)
 for i in range(1, 7):
     ax = fig.add_subplot(2, 3, i)
-    ax.text(0.5, 0.5, str((2, 3, i)),
-           fontsize=18, ha='center')
+    ax.text(0.5, 0.5, str((2, 3, i)), fontsize=18, ha="center")
 
 show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-fig, ax = plt.subplots(2, 3, sharex='col', sharey='row')
+fig, ax = plt.subplots(2, 3, sharex="col", sharey="row")
 
 for i in range(2):
     for j in range(3):
-        ax[i, j].text(0.5, 0.5, str((i, j)),
-                      fontsize=18, ha='center')
+        ax[i, j].text(0.5, 0.5, str((i, j)), fontsize=18, ha="center")
 show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-#plt.GridSpec: More Complicated Arrangements
+# plt.GridSpec: More Complicated Arrangements
 grid = plt.GridSpec(2, 3, wspace=0.4, hspace=0.3)
 
 plt.subplot(grid[0, 0])
@@ -422,15 +426,13 @@ y_hist = fig.add_subplot(grid[:-1, 0], xticklabels=[], sharey=main_ax)
 x_hist = fig.add_subplot(grid[-1, 1:], yticklabels=[], sharex=main_ax)
 
 # scatter points on the main axes
-main_ax.plot(x, y, 'ok', markersize=3, alpha=0.2)
+main_ax.plot(x, y, "ok", markersize=3, alpha=0.2)
 
 # histogram on the attached axes
-x_hist.hist(x, 40, histtype='stepfilled',
-            orientation='vertical', color='gray')
+x_hist.hist(x, 40, histtype="stepfilled", orientation="vertical", color="gray")
 x_hist.invert_yaxis()
 
-y_hist.hist(y, 40, histtype='stepfilled',
-            orientation='horizontal', color='gray')
+y_hist.hist(y, 40, histtype="stepfilled", orientation="horizontal", color="gray")
 y_hist.invert_xaxis()
 
 show()
@@ -439,50 +441,50 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # Set the global default size of matplotlib figures
-plt.rc('figure', figsize=(10, 5))
+plt.rc("figure", figsize=(10, 5))
 
 # Set seaborn aesthetic parameters to defaults
 sns.set()
 
-#Basic Plots
+# Basic Plots
 
 x = np.linspace(0, 2, 10)
 
-plt.plot(x, x, 'o-', label='linear')
-plt.plot(x, x ** 2, 'x-', label='quadratic')
+plt.plot(x, x, "o-", label="linear")
+plt.plot(x, x**2, "x-", label="quadratic")
 
-plt.legend(loc='best')
-plt.title('Linear vs Quadratic progression')
-plt.xlabel('Input')
-plt.ylabel('Output');
+plt.legend(loc="best")
+plt.title("Linear vs Quadratic progression")
+plt.xlabel("Input")
+plt.ylabel("Output")
 show()
 
-#Histograms
+# Histograms
 
 # Gaussian, mean 1, stddev .5, 1000 elements
 samples = np.random.normal(loc=1.0, scale=0.5, size=1000)
 print(samples.shape)
 print(samples.dtype)
 print(samples[:30])
-plt.hist(samples, bins=50);
+plt.hist(samples, bins=50)
 show()
 
-#Two Histograms on the Same Plot
+# Two Histograms on the Same Plot
 
-samples_1 = np.random.normal(loc=1, scale=.5, size=10000)
+samples_1 = np.random.normal(loc=1, scale=0.5, size=10000)
 samples_2 = np.random.standard_t(df=10, size=10000)
 bins = np.linspace(-3, 3, 50)
 
 # Set an alpha and use the same bins since we are plotting two hists
-plt.hist(samples_1, bins=bins, alpha=0.5, label='samples 1')
-plt.hist(samples_2, bins=bins, alpha=0.5, label='samples 2')
-plt.legend(loc='upper left');
+plt.hist(samples_1, bins=bins, alpha=0.5, label="samples 1")
+plt.hist(samples_2, bins=bins, alpha=0.5, label="samples 2")
+plt.legend(loc="upper left")
 show()
 
 
-#Scatter Plots
+# Scatter Plots
 
-plt.scatter(samples_1, samples_2, alpha=0.1);
+plt.scatter(samples_1, samples_2, alpha=0.1)
 show()
 
 print("------------------------------------------------------------")  # 60個
@@ -689,22 +691,16 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
@@ -718,7 +714,6 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
 
 
 """
