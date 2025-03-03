@@ -1,6 +1,21 @@
 """
-introduction_to_machine_learning_00_intro
+introduction_to_machine_learning_03_svm
 
+Support Vector Machine
+    Support vector machine (SVM) is a binary linear classifier
+    There are tricks to make SVM able to solve non-linear problems
+    There are extensions which allows using SVM to multiclass classification or regression
+    SVM is a supervised learning algorithm
+    There are extensions which allows using SVM for (unsupervised) clustering
+
+Linear SVM
+    Lets consider a training dataset of N samples ( x → 1 , y 1 ) , ⋯ , ( x → N , y N )
+    x → i is D -dimensional vector representing features
+    y i is a class label, for convenience
+    Missing or unrecognized delimiter for \left
+    $y_i = \left{-1, 1\right}$
+    At this point we assume that classes are linearly separable
+    For visualization purpose lets use D = 2
 """
 
 print("------------------------------------------------------------")  # 60個
@@ -31,9 +46,10 @@ from sklearn import datasets
 from sklearn.datasets import make_blobs  # 集群資料集
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
 from sklearn import metrics
-from matplotlib.colors import ListedColormap
-
 from sklearn import tree
+from sklearn import svm
+from sklearn.datasets import make_blobs
+from matplotlib.colors import ListedColormap
 
 
 def show():
@@ -43,24 +59,6 @@ def show():
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-"""
-Support Vector Machine
-    Support vector machine (SVM) is a binary linear classifier
-    There are tricks to make SVM able to solve non-linear problems
-    There are extensions which allows using SVM to multiclass classification or regression
-    SVM is a supervised learning algorithm
-    There are extensions which allows using SVM for (unsupervised) clustering
-
-Linear SVM
-    Lets consider a training dataset of N samples ( x → 1 , y 1 ) , ⋯ , ( x → N , y N )
-    x → i is D -dimensional vector representing features
-    y i is a class label, for convenience
-    Missing or unrecognized delimiter for \left
-    $y_i = \left{-1, 1\right}$
-    At this point we assume that classes are linearly separable
-    For visualization purpose lets use D = 2
-"""
-
 
 # just to overwrite default colab style
 plt.style.use("default")
@@ -72,73 +70,62 @@ X01 = [(2, 9), (7, 19), (1, 10), (3, 19), (4, 16), (5, 18)]
 # class II
 X02 = [(4, 3), (6, 7), (1, -10), (3, -1), (9, 5), (5, -7)]
 
+"""
 plt.xlim([0, 10])
+plt.scatter(*(zip(*X01)), c='r')
+plt.scatter(*(zip(*X02)), c='g')
+plt.plot([0, 10], [0, 15], "b")
+plt.plot([0, 10], [2, 22], "b")
 
-plt.scatter(*(zip(*X01)))
-plt.scatter(*(zip(*X02)))
-plt.show()
+plt.scatter(5, 9, c="m")  # test point
+plt.text(0.5, -1.5, "aaa")
+plt.text(0.3, 2.5, "bbb")
+plt.text(2.9, 14, "ccc")
 
+plt.title('aaa')
+show()
+"""
 
-plt.scatter(*(zip(*X01)))
-plt.scatter(*(zip(*X02)))
+print("------------------------------------------------------------")  # 60個
 
-plt.plot([0, 10], [0, 15], "C2-")
-plt.show()
-
-
-plt.scatter(*(zip(*X01)))
-plt.scatter(*(zip(*X02)))
-
-plt.scatter(5, 9, c="C3")  # test point
-
-plt.plot([0, 10], [2, 22], "C4-")
-plt.show()
-
-plt.plot([0, 10], [0, 15], "C2-")
-plt.show()
-
-
-plt.plot([0, 10], [0, 20], "C2-", zorder=0)
-plt.plot([0, 10], [5, 25], "C2--", zorder=0)
-plt.plot([0, 10], [-5, 15], "C2--", zorder=0)
-
-plt.scatter(5, 9, c="C3")  # test point
+"""
+plt.plot([0, 10], [0, 20], "r-", zorder=0)
+plt.plot([0, 10], [5, 25], "g--", zorder=0)
+plt.plot([0, 10], [-5, 15], "b--", zorder=0)
 
 plt.annotate("", (0, 5), (0.55, -4), arrowprops=dict(arrowstyle="<->"))
-plt.text(0.5, -1.5, "$m$")
-plt.text(0.3, 2.5, "$m$")
-
 plt.annotate("", (3.05, 18.1), (3.8, 7.75), arrowprops=dict(arrowstyle="<->"))
-plt.text(2.9, 14, "$m_i$")
 
-plt.scatter(*(zip(*X01)), zorder=1)
-plt.scatter(*(zip(*X02)), zorder=1)
+plt.scatter(*(zip(*X01)), zorder=1, c='r')
+plt.scatter(*(zip(*X02)), zorder=1, c='g')
 
 sv = X01[:2] + X02[:2]
 
 plt.scatter(*(zip(*sv)), zorder=1, facecolors="none", edgecolors="r", s=500)
-plt.show()
 
+plt.title('bbb')
+show()
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+"""
 # Hard margin
-
 # Functional margin
-
 # Geometric margin
-
 # The optimal margin
-
 # Lagrange multipliers
 
 
 def flc(c, n=100):
-    """Level curves of objective functions"""
+    # Level curves of objective functions
     return np.array(
         [(c * np.cos(ang), c * np.sin(ang)) for ang in np.linspace(0, 2 * np.pi, n)]
     )
 
 
 def g(n=100):
-    """Constraint"""
+    # Constraint
     return np.array([(x, 1.0 / x) for x in np.linspace(0.1, 2.5, n)])
 
 
@@ -167,9 +154,10 @@ plt.scatter(1, 1, c="C2", zorder=4)
 plt.scatter(np.sqrt(0.345), np.sqrt(1 / 0.345), c="C3", zorder=4)
 
 plt.legend()
-plt.show()
+plt.title('ccc')
+show()
 
-# Lagrangian
+print("------------------------------------------------------------")  # 60個
 
 from mpl_toolkits.mplot3d import Axes3D
 from matplotlib import cm
@@ -186,13 +174,12 @@ ax.view_init(elev=45, azim=120)
 ax.set_xlabel("$x$", labelpad=20)
 ax.set_ylabel("$\lambda$", labelpad=20)
 ax.set_zlabel("$\mathcal{L}$", labelpad=10)
-plt.show()
-
-# Lagrange duality
-
+plt.title("3D畫圖")
+show()
+"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
+'''
 # Non-linear SVM
 """
     SVM can be applied to non-linear problems using the kernel trick
@@ -219,9 +206,10 @@ C02 = generate_circle_data(1, 2)
 
 plt.scatter(*C01.T, marker=".")
 plt.scatter(*C02.T, marker=".")
-plt.show()
+plt.title('eee')
+show()
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 from mpl_toolkits.mplot3d import Axes3D
 from matplotlib import cm
@@ -235,9 +223,17 @@ ax.scatter(*C01.T, Z01, cmap=cm.hsv)
 ax.scatter(*C02.T, Z02, cmap=cm.hsv)
 
 ax.view_init(elev=15, azim=60)
-plt.show()
-
+plt.title('fff')
+show()
+'''
 print("------------------------------------------------------------")  # 60個
+
+# class I
+X01 = [(2, 9), (7, 19), (1, 10), (3, 19), (4, 16), (5, 18)]
+
+# class II
+X02 = [(4, 3), (6, 7), (1, -10), (3, -1), (9, 5), (5, -7)]
+
 
 plt.plot([0, 10], [0, 20], "C2-", zorder=0)
 plt.plot([0, 10], [4, 24], "C3-", zorder=0)
@@ -246,7 +242,8 @@ plt.scatter(3, 9, c="C1", marker=",")
 
 plt.scatter(*(zip(*X01)), zorder=1)
 plt.scatter(*(zip(*X02)), zorder=1)
-plt.show()
+plt.title("ggg")
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -271,7 +268,8 @@ plt.scatter(*(zip(*X02)), zorder=1)
 sv = X01[:2] + X02[:2]
 
 plt.scatter(*(zip(*sv)), zorder=1, facecolors="none", edgecolors="r", s=500)
-plt.show()
+plt.title("hhh")
+show()
 
 # Regularization
 
@@ -296,7 +294,8 @@ plt.plot(
 plt.plot((0.4, 0), (0, 0.75), label="$y_1 = y_2 \Rightarrow \mu_1 + \mu_2 = \gamma$")
 
 plt.legend()
-plt.show()
+plt.title("iii")
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -310,11 +309,16 @@ plt.xlim([0, 10])
 
 plt.scatter(*(zip(*X01)))
 plt.scatter(*(zip(*X02)))
-plt.show()
+plt.title("jjj")
+show()
 
 print("------------------------------------------------------------")  # 60個
 
-from sklearn import svm
+# class I
+X01 = [(2, 9), (7, 19), (1, 10), (3, 19), (4, 16), (5, 18)]
+
+# class II
+X02 = [(4, 3), (6, 7), (1, -10), (3, -1), (9, 5), (5, -7)]
 
 # create a classifier
 clf = svm.SVC(kernel="linear")
@@ -347,7 +351,8 @@ plt.plot([1, 9], [f(1), f(9)])
 
 # mark support vectors
 plt.scatter(*(zip(*sv)), zorder=1, facecolors="none", edgecolors="r", s=500)
-plt.show()
+plt.title("kkk")
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -368,18 +373,20 @@ C02 = generate_circle_data(1, 2)
 
 plt.scatter(*C01.T, marker=".")
 plt.scatter(*C02.T, marker=".")
-plt.show()
+plt.title("lll")
+show()
+
+print("mmmmmmmmmmmmm")
+sys.exit()
 
 print("------------------------------------------------------------")  # 60個
+
+print("4種 SVM 核心 比較")
 """
-    We will consider 4 different kernels:
-
+We will consider 4 different kernels:
         linear
-
         polynomial of degree 3
-
         polynomial of degree 10
-
         Gaussian radial basis function (RBF)
 """
 
@@ -414,7 +421,8 @@ for i, clf in enumerate((clf_linear, clf_rbf, clf_poly3, clf_poly10)):
     plt.title(titles[i])
 
 plt.tight_layout()
-plt.show()
+plt.title("mmm")
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -422,13 +430,12 @@ print("------------------------------------------------------------")  # 60個
 
 # Example: blobs
 
-from sklearn.datasets import make_blobs
-
 # generate 5 blobs with fixed random generator
 X, Y = make_blobs(n_samples=500, centers=8, random_state=300)
 
 plt.scatter(*X.T, c=Y, marker=".", cmap="Dark2")
-plt.show()
+plt.title("nnn")
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -475,10 +482,13 @@ settings = ({"kernel": "linear"}, {"kernel": "rbf"}, {"kernel": "poly", "degree"
 # train and look at SVM with different kernels
 for i in range(0, 3):
     train_and_look(svm.SVC(**settings[i]), X, Y, ax=ax[i], title=title[i])
-plt.show()
+
+plt.title("ooo")
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
 """ no boston
 #SVM regression
 
@@ -498,7 +508,8 @@ for i, feature in enumerate(boston.data.T):
     plt.title(boston.feature_names[i])
   
 plt.tight_layout()
-plt.show()
+plt.title('ppp')
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -521,7 +532,8 @@ plt.xlabel("True price")
 plt.ylabel("Predicted price")
 
 plt.scatter(boston.target, prediction, marker='.')
-plt.show()
+plt.title('qqq last')
+show()
 """
 print("------------------------------------------------------------")  # 60個
 

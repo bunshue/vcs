@@ -1,8 +1,3 @@
-"""
-introduction_to_machine_learning_01_knn
-
-"""
-
 print("------------------------------------------------------------")  # 60個
 
 # 共同
@@ -30,11 +25,12 @@ import sklearn.linear_model
 from sklearn import datasets
 from sklearn.datasets import make_blobs  # 集群資料集
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
+from sklearn import tree
 from sklearn import metrics
 from matplotlib.colors import ListedColormap
 from sklearn.neighbors import KNeighborsClassifier
-from sklearn import tree
 from sklearn.model_selection import cross_val_score
+from sklearn.metrics import accuracy_score
 
 
 def show():
@@ -45,7 +41,7 @@ def show():
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# k-Nearest Neighbors
+# 共同函數
 
 # numpy and matplotlib will be used a lot during the lecture
 # if you are familiar with these libraries you may skip this part
@@ -61,7 +57,6 @@ plt.style.use("seaborn-talk")
 
 def generate_random_points(size=10, low=0, high=1):
     """Generate a set of random 2D points
-
     size -- number of points to generate
     low  -- min value
     high -- max value
@@ -108,6 +103,7 @@ def init_plot(x_range=None, y_range=None, x_label="$x_1$", y_label="$x_2$"):
 
 def plot_random_points(style=None, color=None):
     """Generate and plot two (separated) sets of random points
+
     style -- latter group points style (default as first)
     color -- latter group color (default as first)
     """
@@ -137,7 +133,6 @@ def plot_an_example(style=None, color=None, label="Class"):
 
     # circle areas related to each set of points
     # pyplot.Circle((x, y), r); (x, y) - the center of a circle; r - radius
-    # lw - line width
     ax.add_artist(plt.Circle((0.75, 0.75), 0.5, fill=0, color="r", lw=2))
     ax.add_artist(plt.Circle((1.75, 1.75), 0.5, fill=0, color=color or "r", lw=2))
 
@@ -146,6 +141,28 @@ def plot_an_example(style=None, color=None, label="Class"):
     ax.text(0.65, 1.4, label + " I", fontdict={"color": "r"})
     ax.text(1.65, 1.1, label + " II", fontdict={"color": color or "r"})
 
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# introduction_to_machine_learning_00_intro
+
+# Supervised learning
+plot_an_example(style="bs", color="b")
+plt.show()
+
+
+# Unsupervised learning
+plot_an_example(label="Cluster")
+plt.show()
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# introduction_to_machine_learning_01_knn
+
+# k-Nearest Neighbors
 
 """
 Our first ML problem
@@ -648,8 +665,6 @@ for true, pred in zip(Y_valid, Y_pred):
 accuracy = (Y_valid == Y_pred).sum() / Y_valid.shape[0]
 print(accuracy)
 
-from sklearn.metrics import accuracy_score
-
 print(accuracy_score(Y_valid, Y_pred))
 
 # k-dependence of the accuracy
@@ -876,8 +891,6 @@ plt.plot(range(1, max_k), avg_scores)
 plt.show()
 
 # Final test
-
-from sklearn.metrics import accuracy_score
 
 knn = KNeighborsClassifier(n_neighbors=1)
 knn.fit(data_train, label_train)
