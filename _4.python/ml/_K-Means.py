@@ -1521,17 +1521,21 @@ show()  # 3
 
 from sklearn.mixture import GaussianMixture
 
-gmm = GaussianMixture(n_components=4)
 
-gmm.fit(X)  # 學習訓練.fit
+print("設定要分的群數")
+n_components = 4
 
-labels = gmm.predict(X)
+clf = GaussianMixture(n_components=n_components)
+
+clf.fit(X)  # 學習訓練.fit
+
+labels = clf.predict(X)
 plt.scatter(X[:, 0], X[:, 1], c=labels, s=40, cmap="viridis")
 show()  # 4
 
 # 屬於各集群的機率
 
-probs = gmm.predict_proba(X)
+probs = clf.predict_proba(X)
 print(probs[:5].round(3))
 
 # 繪製集群範圍
@@ -1559,9 +1563,9 @@ def draw_ellipse(position, covariance, ax=None, **kwargs):
 
 
 # 繪製GMM範圍
-def plot_gmm(gmm, X, label=True, ax=None):
+def plot_gmm(clf, X, label=True, ax=None):
     ax = ax or plt.gca()
-    labels = gmm.fit(X).predict(X)
+    labels = clf.fit(X).predict(X)
     if label:
         ax.scatter(X[:, 0], X[:, 1], c=labels, s=40, cmap="viridis", zorder=2)
     else:
@@ -1569,19 +1573,19 @@ def plot_gmm(gmm, X, label=True, ax=None):
     ax.axis("equal")
 
     # soft-edged sphere
-    w_factor = 0.2 / gmm.weights_.max()
-    for pos, covar, w in zip(gmm.means_, gmm.covariances_, gmm.weights_):
+    w_factor = 0.2 / clf.weights_.max()
+    for pos, covar, w in zip(clf.means_, clf.covariances_, clf.weights_):
         draw_ellipse(pos, covar, alpha=w * w_factor)
 
 
-gmm = GaussianMixture(n_components=4, random_state=42)
-plot_gmm(gmm, X)
+clf = GaussianMixture(n_components=4, random_state=42)
+plot_gmm(clf, X)
 show()  # 5
 
 # 使用 GMM對長條型資料進行集群
 
-gmm = GaussianMixture(n_components=4, covariance_type="full", random_state=42)
-plot_gmm(gmm, X_stretched)
+clf = GaussianMixture(n_components=4, covariance_type="full", random_state=42)
+plot_gmm(clf, X_stretched)
 show()  # 6
 
 Xmoon, ymoon = make_moons(200, noise=0.05, random_state=9487)

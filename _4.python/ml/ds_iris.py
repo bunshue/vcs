@@ -501,7 +501,7 @@ X = iris.data
 y = iris.target  # 資料集目標
 
 print("設定要分的群數")
-n_components = 3  # ガウス分布の數
+n_components = 3
 
 clf = GaussianMixture(n_components=n_components)
 
@@ -512,10 +512,10 @@ y_pred = clf.predict(X)
 print(y_pred)  # クラスを予測
 
 print("各群的平均")
-print(clf.means_)  # 各ガウス分布の平均
+print(clf.means_)  # 各 Gauss 分布の平均
 
 print("各群的分散數")
-print(clf.covariances_)  # 各ガウス分布の分散
+print(clf.covariances_)  # 各 Gauss 分布の分散
 
 # print(X.shape)
 # print(y_pred.shape)
@@ -523,12 +523,12 @@ print(clf.covariances_)  # 各ガウス分布の分散
 plt.subplot(211)
 plt.scatter(X[:, 0], X[:, 1], c=y)
 
-
 plt.subplot(212)
 plt.scatter(X[:, 0], X[:, 1], c=y_pred)
 
 show()
 
+sys.exit()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
