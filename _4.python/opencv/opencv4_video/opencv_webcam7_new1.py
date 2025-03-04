@@ -330,7 +330,7 @@ img = np.zeros((480, 640, 3), dtype="uint8")
 img[0:480, 0:640] = "255"
 
 x_st, y_st = 10, 50  # logo貼上位置
-img[y_st : y_st+size[0], x_st : x_st+size[1]] = logo
+img[y_st : y_st + size[0], x_st : x_st + size[1]] = logo
 
 img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 ret, mask1 = cv2.threshold(img_gray, 200, 255, cv2.THRESH_BINARY_INV)
@@ -351,8 +351,8 @@ while True:
     bg = cv2.bitwise_and(frame, frame, mask=mask2)
     output = cv2.add(bg, logo)
 
-    #output = cv2.bitwise_not(frame, mask=mask1)  # 套用 not 和遮罩
-    #output = cv2.bitwise_not(output, mask=mask1)  # 再次套用 not 和遮罩，將色彩轉成原來的顏色
+    # output = cv2.bitwise_not(frame, mask=mask1)  # 套用 not 和遮罩
+    # output = cv2.bitwise_not(output, mask=mask1)  # 再次套用 not 和遮罩，將色彩轉成原來的顏色
 
     cv2.imshow("OpenCV 07", output)
 

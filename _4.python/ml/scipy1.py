@@ -2505,6 +2505,93 @@ show()
 cc = sum((results_ARIMA.fittedvalues - x) ** 2)
 print("RSS: %.4f" % cc)
 
+print("------------------------------------------------------------")  # 60個
+"""
+# 求距離 distance.cdist()方法
+
+metric的取值如下：
+
+braycurtis
+canberra
+chebyshev：切比雪夫距离
+cityblock：曼哈顿距离
+correlation：相关系数
+cosine：余弦夹角
+dice
+euclidean：欧式距离
+hamming：汉明距离
+jaccard：杰卡德相似系数
+jensenshannon
+kulsinski
+mahalanobis：马氏距离
+matching
+minkowski：闵可夫斯基距离
+rogerstanimoto
+russellrao
+seuclidean：标准化欧式距离
+sokalmichener
+sokalsneath
+sqeuclidean
+wminkowski
+yule
+"""
+# 求歐基里德距離
+
+from scipy.spatial import distance
+
+# 在二维数据点中求欧几里得距离
+scipy.spatial.distance.cdist
+coords = [(1, 1), (2, 2), (3, 3), (4, 4)]
+print(distance.cdist(coords, coords, "euclidean"))
+
+
+# 若求coords里面样本到目标的距离为（0,0）的点
+cc = distance.cdist(coords, [(0, 0)], "euclidean")
+print(cc)
+
+# 从3D数据点中找到曼哈顿距离，目标是X=a,Y=b  X是对象，Y是目标
+a = np.array(
+    [
+        [0, 0, 0],
+        [0, 0, 1],
+        [0, 1, 0],
+        [0, 1, 1],
+        [1, 0, 0],
+        [1, 0, 1],
+        [1, 1, 0],
+        [1, 1, 1],
+    ]
+)
+b = np.array([[0.1, 0.2, 0.4]])
+cc = distance.cdist(a, b, "cityblock")
+print(cc)
+
+print("------------------------------------------------------------")  # 60個
+
+from scipy.spatial.distance import cdist
+
+x1 = np.array([(1, 3), (2, 4), (5, 6)])
+x2 = [(3, 7), (4, 8), (6, 9)]
+cc = cdist(x1, x2, metric="euclidean")
+print(cc)
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
+sys.exit()
+
+
+print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 

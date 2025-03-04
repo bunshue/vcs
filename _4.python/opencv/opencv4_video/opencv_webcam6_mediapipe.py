@@ -50,7 +50,7 @@ with mp_face_detection.FaceDetection(  # 開始偵測人臉
         img.flags.writeable = True
         img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
         if results.detections:
-            #print(len(results.detections))
+            # print(len(results.detections))
             for detection in results.detections:
                 mp_drawing.draw_detection(img, detection)  # 標記人臉
 

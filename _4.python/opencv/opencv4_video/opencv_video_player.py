@@ -132,7 +132,7 @@ while success:
     # cv2.waitKey(int(1000/fps))#若要正常顯示，則需要delay
     i = i + 1
     # many
-    #cv2.imwrite("./tmp_video_clip_%04d.jpg" % i, frame)
+    # cv2.imwrite("./tmp_video_clip_%04d.jpg" % i, frame)
     success, frame = cap.read()
     # if i > 10:
     # break
@@ -176,21 +176,46 @@ while cap.get(cv2.CAP_PROP_POS_FRAMES) < end_frame:
 cap.release()
 cv2.destroyAllWindows()
 
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("影片去背景")
+
+video_filename = "C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4"
+# video_filename = "D:\______大整理/Carreno Busta vs Kei Nishikori Final Set Tie Break HD.mp4"
+
+cap = cv2.VideoCapture(video_filename)
+
+fgbg = cv2.createBackgroundSubtractorMOG2()
+
+element = cv2.getStructuringElement(cv2.MORPH_CROSS, (3, 3))
+
+while True:
+    ret, frame = cap.read()
+
+    if not ret:
+        break
+
+    fgmask = fgbg.apply(frame)
+
+    fgmask = cv2.morphologyEx(fgmask, cv2.MORPH_OPEN, element)
+
+    foreground = cv2.bitwise_and(frame, frame, mask=fgmask)
+
+    cv2.imshow("Foreground Detection", foreground)
+
+    if cv2.waitKey(1) & 0xFF == ord("q"):
+        break
+
+cv2.destroyAllWindows()
+cap.release()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -200,6 +225,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
-
+sys.exit()
 
 print("------------------------------------------------------------")  # 60個

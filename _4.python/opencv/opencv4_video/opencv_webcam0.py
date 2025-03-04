@@ -30,7 +30,7 @@ while True:
         break
 
     # 加上文字 ST
-    cv2.rectangle(frame, (10, 10), (200, 42), (0, 0, 0), -1)# 加上黑色區塊
+    cv2.rectangle(frame, (10, 10), (200, 42), (0, 0, 0), -1)  # 加上黑色區塊
     text = "English Only"
     org = (15, 35)
     fontFace = cv2.FONT_HERSHEY_SIMPLEX
