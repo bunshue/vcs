@@ -1627,7 +1627,6 @@ show()  # 11
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 09_10_customer_segmentation
 # 客戶區隔(Customer segmentation)
 
 # 載入資料集
@@ -1708,7 +1707,6 @@ cc = monetary_df.head()
 print(cc)
 
 # 合併 RFM
-
 rf = recency_df.merge(frequency_df, left_on="CustomerID", right_on="CustomerID")
 rfm = rf.merge(monetary_df, left_on="CustomerID", right_on="CustomerID")
 rfm.set_index("CustomerID", inplace=True)
@@ -1716,14 +1714,7 @@ cc = rfm.head()
 print(cc)
 
 # 驗算
-
 cc = df[df.CustomerID == 12346.0]
-print(cc)
-
-import datetime as dt
-
-now = dt.date(2011, 12, 9)
-cc = (now - dt.date(2011, 1, 18)).days == 325
 print(cc)
 
 # 複製資料
@@ -1755,7 +1746,10 @@ show()
 # 分成3群
 
 X = rfm_segmentation.copy()
-clf = KMeans(n_clusters=3, init="k-means++", n_init=10, max_iter=300)  # K-平均演算法
+
+CLUSTERS = 3  # 要分成的群數
+print("使用KMeans分成", CLUSTERS, "群")
+clf = KMeans(n_clusters=CLUSTERS, init="k-means++", n_init=10, max_iter=300)  # K-平均演算法
 
 clf.fit(X)  # 學習訓練.fit
 

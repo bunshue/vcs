@@ -633,6 +633,7 @@ print("------------------------------------------------------------")  # 60個
 
 
 def plot_digits(data):
+    # 顯示前 100 筆手寫阿拉伯數字
     fig, ax = plt.subplots(
         10, 10, figsize=(8, 8), subplot_kw=dict(xticks=[], yticks=[])
     )
@@ -642,12 +643,9 @@ def plot_digits(data):
         im.set_clim(0, 16)
 
 
-# 生成手寫阿拉伯數字
-
 digits = datasets.load_digits()
 
-# 顯示前 100 筆手寫阿拉伯數字
-
+print("顯示前 100 筆手寫阿拉伯數字")
 plot_digits(digits.data)
 show()
 
@@ -657,9 +655,8 @@ from sklearn.decomposition import PCA
 
 pca = PCA(0.99, whiten=True)
 data = pca.fit_transform(digits.data)
-print(data.shape)
-
-# (1797, 41)
+print("PCA前 :", digits.data.shape)  ## (1797, 64)
+print("PCA後 :", data.shape)  # (1797, 41)
 
 # 以AIC決定最佳集群數量
 
@@ -668,9 +665,20 @@ print(data.shape)
 from sklearn.mixture import GaussianMixture
 
 n_components = np.arange(50, 210, 10)
-models = [GaussianMixture(n, covariance_type="full") for n in n_components]
-aics = [model.fit(data).aic(data) for model in models]
+
+aics = []
+for n in n_components:
+    gmm = GaussianMixture(n, covariance_type="full")
+    aic = gmm.fit(data).aic(data)
+    aics.append(aic)
+    print("n = ", n, "\taic = ", aic)
+
 plt.plot(n_components, aics)
+
+# 畫直線
+# plt.plot([110, 0], [110, min(aic)], linewidth=5, color='0.8')
+plt.plot([110, 110], [110, -250000], linewidth=5, color="0.8")
+
 show()
 
 # 以AIC決定最佳集群數量=110
@@ -680,17 +688,22 @@ gmm = GaussianMixture(110, covariance_type="full", random_state=9487)
 
 gmm.fit(data)  # 學習訓練.fit
 print(gmm.converged_)
-
 # True
 
-# Now we can draw samples of 100 new points within this 41-dimensional projected space, using the GMM as a generative model:
-
+# Now we can draw samples of 100 new points within this 41-dimensional projected space,
+# using the GMM as a generative model
 # 生成100個樣本
 
 data_new, _ = gmm.sample(100)
+
+print("data_new.shape :", data_new.shape)  # (100, 41)
+
 digits_new = pca.inverse_transform(data_new)
+
+print("顯示前 100 筆手寫阿拉伯數字")
 plot_digits(digits_new)
 show()
+print("digits_new.shape :", digits_new.shape)  # (100, 64)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
