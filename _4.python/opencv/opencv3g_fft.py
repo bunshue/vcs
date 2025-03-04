@@ -35,9 +35,11 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
+
 def show():
     plt.show()
     pass
+
 
 print("------------------------------------------------------------")  # 60個
 
@@ -72,7 +74,7 @@ print(cc)
 
 print("------------------------------------------------------------")  # 60個
 
-print('製作 sinc2d 資料')
+print("製作 sinc2d 資料")
 
 N = 100
 sinc2d = np.zeros((N, N))
@@ -90,7 +92,7 @@ for x, x1 in enumerate(np.linspace(-2 * np.pi, 2 * np.pi, N)):
 # show()
 
 
-print('製作 簡易 X矩陣 資料')
+print("製作 簡易 X矩陣 資料")
 N = 5
 X = np.zeros((N, N))
 
@@ -131,7 +133,7 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 檔案 => cv2影像
-image = cv2.imread(filename, 0)#0:灰度模式 cv2.IMREAD_GRAYSCALE
+image = cv2.imread(filename, 0)  # 0:灰度模式 cv2.IMREAD_GRAYSCALE
 f = np.fft.fft2(image)
 fshift = np.fft.fftshift(f)
 s1 = np.log(np.abs(fshift))
@@ -1171,9 +1173,9 @@ fy = np.fft.fft(ts_diff)
 print(fy[:10])  # 顯示前10個頻域數據
 conv1 = np.real(np.fft.ifft(fy))  # 逆變換
 index, conv2 = fft_combine(fy / len(ts_diff), int(len(fy) / 2 - 1), 1.3)  # 只關心一半數據
-plt.plot(ts_diff, 'r')
-plt.plot(conv1 - 0.5, 'g')  # 爲看清楚，將顯示區域下拉0.5
-plt.plot(conv2 - 1, 'b')
+plt.plot(ts_diff, "r")
+plt.plot(conv1 - 0.5, "g")  # 爲看清楚，將顯示區域下拉0.5
+plt.plot(conv2 - 1, "b")
 
 show()
 
@@ -1202,8 +1204,6 @@ MAGNITUDE_SPECTRUM = np.around(MAGNITUDE_SPECTRUM, decimals=2)
 print("------------------------------")  # 30個
 
 
-
 # %fig=（左上）用fft2()計算的頻域訊號，
 # （中上）使用fftshift()移位之後的頻域訊號，
 # （其它）各個領域所對應的空域訊號
-

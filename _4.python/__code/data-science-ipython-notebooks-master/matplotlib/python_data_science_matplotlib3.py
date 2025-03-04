@@ -308,16 +308,15 @@ show()
 print("------------------------------------------------------------")  # 60個
 
 # Example: Surface Temperature Data
-
 # https://data.giss.nasa.gov/pub/gistemp/
 # !curl -O http://data.giss.nasa.gov/pub/gistemp/gistemp250.nc.gz
 # !gunzip gistemp250.nc.gz
-
 # pip install netcdf4
 
 from netCDF4 import Dataset
+from mpl_toolkits.basemap import Basemap
 
-data = Dataset("gistemp250_GHCNv4.nc")
+data = Dataset("C:/_git/vcs/_big_files/gistemp250_GHCNv4.nc")
 
 from netCDF4 import date2index
 from datetime import datetime

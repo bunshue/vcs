@@ -22,43 +22,29 @@ diag 指每个分量有各自不同对角协方差矩阵（非对角为零，对
 spherical 指每个分量有各自不同的简单协方差矩阵，球面协方差矩阵（非对角为零，对角完全相同，球面特性），默认‘full’ 完全协方差矩阵
 
 tol		EM 迭代停止阈值，默认为 1e-3 即 0.001.
-
 reg_covar	协方差对角非负正则化，保证协方差矩阵均为正，默认为 0
-
 max_iter	最大迭代次数，默认 100
-
 n_init		初始化次数，用于产生最佳初始参数，默认为 1
-
 init_params	初始化参数类型 {‘kmeans’, ‘random’}
 初始化参数实现方式，默认用 kmeans 实现，也可以选择随机产生
-
 weights_init	各组成模型的先验权重，可以自己设，默认按照 init_params 产生
-
 means_init	初始化均值，同 weights_init
-
 precisions_init	初始化精确度（模型个数，特征个数），默认按照 init_params 实现
-
 random_state	随机数发生器
-
 warm_start	若为 True，则 fit（）调用会以上一次 fit（）的结果作为初始化参数，适合相同问题多次 fit 的情况，能加速收敛，默认为 False。
-
 verbose		使能迭代信息显示，默认为 0，可以为 1 或者大于 1（显示的信息不同）
-
 verbose_interval	与 verbose 挂钩，若使能迭代信息显示，设置多少次迭代后显示信息，默认 10 次。
 
 属性
 weights_ : array, shape (n_components,)
 This attribute stores the mixing weights for each mixture component.
 每个混合模型的权重。
-
 means_ : array, shape (n_components, n_features)
 Mean parameters for each mixture component.
 每个混合模型的均值。
-
 covars_ : array
 Covariance parameters for each mixture component. The shape depends on covariance_type:
 每个混合模型的协方差。矩阵大小取决于covariance_type定义的协方差矩阵类型
-
 converged_ : bool
 True when convergence was reached in fit(), False otherwise.
 当在fit()中达到收敛时为真，否则为假。
@@ -90,6 +76,7 @@ print("------------------------------------------------------------")  # 60個
 
 # 共同
 import os
+import re
 import sys
 import time
 import math
@@ -113,12 +100,12 @@ import tensorflow as tf
 from sklearn import datasets
 from sklearn import preprocessing
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
-from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import StandardScaler  # 用於標準化數據，即將數據轉換為均值為0，方差為1的分佈。
 from tensorflow.keras.callbacks import TensorBoard
 from tensorflow.keras.models import model_from_json
 from sklearn.metrics import accuracy_score
-
 from sklearn.decomposition import NMF
+from sklearn.cluster import KMeans  # K均值聚類分析
 
 
 def show():
@@ -130,18 +117,31 @@ print("------------------------------------------------------------")  # 60個
 
 from sklearn.mixture import GaussianMixture
 
-'''
+import warnings
+
+warnings.filterwarnings("ignore")
+
 print("------------------------------------------------------------")  # 60個
 
 X = np.array([[1, 2], [1, 4], [1, 0], [10, 2], [10, 4], [10, 0]])
-gmm = GaussianMixture(n_components=2, random_state=0).fit(X)
 
-print(gmm.means_)
+gmm = GaussianMixture(n_components=2, random_state=9487)
+gmm.fit(X)  # 學習訓練.fit
 
-cc = gmm.predict([[0, 0], [12, 3]])
+print(X.shape)
+print("GaussianMixture訓練後結果 :")
+print("各群的平均")
+print(gmm.means_)  # 各 Gauss 分布の平均
+print("各群的分散數")
+print(gmm.covariances_)  # 各 Gauss 分布の分散
+print(gmm.weights_)
+print(gmm.converged_)
+print(gmm.n_iter_)
 
-print(cc)
+y_pred = gmm.predict([[0, 0], [12, 3]])
+print("預測結果 :\n", y_pred, sep="")
 
+sys.exit()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -152,19 +152,18 @@ y = iris.target  # 資料集目標
 print("設定要分的群數")
 n_components = 3
 
-clf = GaussianMixture(n_components=n_components)
+gmm = GaussianMixture(n_components=n_components)
 
-clf.fit(X)  # 學習訓練.fit
+gmm.fit(X)  # 學習訓練.fit
 
-print("預測結果")
-y_pred = clf.predict(X)
-print(y_pred)  # クラスを予測
+y_pred = gmm.predict(X)
+print("預測結果 :\n", y_pred, sep="")
 
 print("各群的平均")
-print(clf.means_)  # 各 Gauss 分布の平均
+print(gmm.means_)  # 各 Gauss 分布の平均
 
 print("各群的分散數")
-print(clf.covariances_)  # 各 Gauss 分布の分散
+print(gmm.covariances_)  # 各 Gauss 分布の分散
 
 # print(X.shape)
 # print(y_pred.shape)
@@ -200,8 +199,6 @@ CustomerID,Genre,Age,Annual Income (k$),Spending Score (1-100)
 0007,Female,35,18,6
 0008,Female,23,18,94
 0009,Male,64,19,3
-
-
 """
 
 """
@@ -210,45 +207,32 @@ CustomerID,Genre,Age,Annual Income (k$),Spending Score (1-100)
 使用 sklearn 的 StandardScaler() 對資料集進行標準化
 使用高斯混合模型進行分群
 """
-import re
-from sklearn.cluster import KMeans
-from sklearn.preprocessing import StandardScaler
-
-import warnings
-warnings.filterwarnings("ignore")
-"""
-from sklearn.cluster import KMeans：用於K均值聚類分析。
-from sklearn.preprocessing import StandardScaler：用於標準化數據，即將數據轉換為均值為0，方差為1的分佈。
-"""
 
 df = pd.read_csv("data/Mall_Customers.csv")
 
 # cleaning/renaming column names
-df.rename(columns={'Annual Income (k$)':'AnnualIncome(k$)',
-                   'Spending Score (1-100)':'SpendingScore(1-100)',
-                  }, 
-          inplace=True)       
-          
-# Dropping CustomerID column
-df.drop(['CustomerID'], inplace = True, axis = 1) 
+df.rename(
+    columns={
+        "Annual Income (k$)": "AnnualIncome(k$)",
+        "Spending Score (1-100)": "SpendingScore(1-100)",
+    },
+    inplace=True,
+)
 
+# Dropping CustomerID column
+df.drop(["CustomerID"], inplace=True, axis=1)
 
 # Transforming Gender
-df.Gender[df.Gender == 'Male'] = 1
-df.Gender[df.Gender == 'Female'] = 0
-
+df.Gender[df.Gender == "Male"] = 1
+df.Gender[df.Gender == "Female"] = 0
 
 df["age_cat"] = pd.cut(
-                       df['Age'],
-                       bins = [0,35,55,100],           # Else devise your bins: [0,20,60,110]
-                       labels= ["y", "m", "s"]
-                      )
-                      
-df["income_cat"] = pd.cut(
-                           df['AnnualIncome(k$)'],
-                           bins = 3,
-                           labels= ["l", "m", "h"]
-                         )
+    df["Age"],
+    bins=[0, 35, 55, 100],  # Else devise your bins: [0,20,60,110]
+    labels=["y", "m", "s"],
+)
+
+df["income_cat"] = pd.cut(df["AnnualIncome(k$)"], bins=3, labels=["l", "m", "h"])
 """
 首先，使用 rename 方法，將資料框（DataFrame）的某些列名進行了重新命名。
 接著，使用 drop 方法，刪除了資料框中的 "CustomerID" 這一列。這樣做的目的是去除不需要的客戶ID資訊。
@@ -260,7 +244,7 @@ df["income_cat"] = pd.cut(
 """
 # Scale dataset
 # Drop Categorical Values
-df.drop(columns=['age_cat', 'income_cat'], inplace=True)
+df.drop(columns=["age_cat", "income_cat"], inplace=True)
 
 # Scaling using StandardScaler
 ss = StandardScaler()
@@ -273,30 +257,18 @@ X = ss.transform(df)
 """
 # Gaussian Mixture Modeling
 # Perform clsutering
-gm = GaussianMixture(
-                     n_components = 2,
-                     n_init = 10,
-                     max_iter = 100)
-                     
-# Train the algorithm
-gm.fit(X)
+gmm = GaussianMixture(n_components=2, n_init=10, max_iter=100)
 
-# Clusters labels
-cc = gm.predict(X)
-print(cc)
+gmm.fit(X)  # 學習訓練.fit
+
+y_pred = gmm.predict(X)
+print("預測結果 :\n", y_pred, sep="")
 """
-最後，我們使用高斯混合模型 (Gaussian Mixture Model，縮寫為 GM) 來進行資料分群，並用已經訓練好的模型對資料集 X 進行預測。
+最後，我們使用高斯混合模型 (Gaussian Mixture Model, GMM) 來進行資料分群，
+並用已經訓練好的模型對資料集 X 進行預測。
 """
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
-import re
-from sklearn.cluster import KMeans
-from sklearn.preprocessing import StandardScaler
-
-import warnings
-
-warnings.filterwarnings("ignore")
 
 # Display multiple outputs from a jupyter cell
 from IPython.core.interactiveshell import InteractiveShell
@@ -353,25 +325,23 @@ X = ss.transform(df)
 
 # Gaussian Mixture Modeling
 # Perform clsutering
-gm = GaussianMixture(n_components=2, n_init=10, max_iter=100)
-# Train the algorithm
-gm.fit(X)
+gmm = GaussianMixture(n_components=2, n_init=10, max_iter=100)
+gmm.fit(X)  # 學習訓練.fit
 # GaussianMixture(n_components=2, n_init=10)
 # Where are the clsuter centers
-cc = gm.means_
+cc = gmm.means_
 print(cc)
 
 # Did algorithm converge?
-cc = gm.converged_
+cc = gmm.converged_
 print(cc)
 
 # How many iterations did it perform?
-cc = gm.n_iter_
+cc = gmm.n_iter_
 print(cc)
 
-# Clusters labels
-cc = gm.predict(X)
-print(cc)
+y_pred = gmm.predict(X)
+print("預測結果 :\n", y_pred, sep="")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -392,16 +362,13 @@ X, y_true = make_blobs(n_samples=N, centers=GROUPS, cluster_std=STD)
 
 X = X[:, ::-1]
 
-from sklearn.cluster import KMeans
-
-kmeans = KMeans(4, random_state=0)
+kmeans = KMeans(4, random_state=9487)
 labels = kmeans.fit(X).predict(X)
 plt.scatter(X[:, 0], X[:, 1], c=labels, s=40, cmap="viridis")
 show()
 
 # 因此，若是可以以中心點繪製一個圓圈，中心點與資料向量的距離最遠為圓的半徑，如果資料點分布在圓圈外，代表該資料點不為任何群集的資料
 
-from sklearn.cluster import KMeans
 from scipy.spatial.distance import cdist
 
 
@@ -420,18 +387,19 @@ def plot_kmeans(kmeans, X, n_clusters=4, rseed=0, ax=None):
         ax.add_patch(plt.Circle(c, r, fc="#ACACCA", lw=3, alpha=0.5, zorder=1))
 
 
-kmeans = KMeans(n_clusters=4, random_state=0)
+kmeans = KMeans(n_clusters=4, random_state=9487)
 plot_kmeans(kmeans, X)
 
 # 匯入SKlearn中GMM模組，並且建立4組資料
-gmm = GaussianMixture(n_components=4).fit(X)
+gmm = GaussianMixture(n_components=4)
+gmm.fit(X)  # 學習訓練.fit
 labels = gmm.predict(X)
 plt.scatter(X[:, 0], X[:, 1], c=labels, s=40, cmap="viridis")
 show()
 
 """
-建立一個繪製聚類圓的函數draw_ellipse，來實作聚類最大化(expectation-maximization ,EM)，持續實作E-M步驟，重複直到收斂：
-
+建立一個繪製聚類圓的函數draw_ellipse，來實作聚類最大化(expectation-maximization ,EM)，
+持續實作E-M步驟，重複直到收斂：
 E步驟：對於每個點，找到每個聚類中成員的權重
 M步驟：對於每個群集「權重」，根據所有數據點更新其位置
 """
@@ -469,7 +437,7 @@ def plot_gmm(gmm, X, label=True, ax=None):
         draw_ellipse(pos, covar, alpha=w * w_factor)
 
 
-gmm = GaussianMixture(n_components=4, random_state=42)
+gmm = GaussianMixture(n_components=4, random_state=9487)
 plot_gmm(gmm, X)
 show()
 
@@ -479,7 +447,6 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
 
 # 高斯混合模型(Gaussian Mixture Models)
 
@@ -493,10 +460,10 @@ from sklearn.datasets import load_digits
 digits = load_digits()
 X = digits.data / 16
 y = digits.target
-plt.rcParams["figure.figsize"] = (18, 10)
+plt.rcParams["figure.figsize"] = (10, 10)
 plt.gray()
 for i in range(100):
-    plt.subplot(20, 20, i + 1)
+    plt.subplot(10, 10, i + 1)
     plt.imshow(digits.images[i], cmap=plt.cm.gray, vmax=16, interpolation="nearest")
     plt.xticks(())
     plt.yticks(())
@@ -701,7 +668,7 @@ color = [
     "#00FF99",
     "#7700FF",
 ]
-plt.rcParams["figure.figsize"] = (18, 18)
+plt.rcParams["figure.figsize"] = (18, 10)
 fig = plt.figure()
 ax = fig.add_subplot(
     111,
@@ -771,9 +738,9 @@ X = np.concatenate(
 
 # ------------------------------------------------------------
 # Learn the best-fit GaussianMixture models
-#  Here we'll use scikit-learn's GaussianMixture model. The fit() method
-#  uses an Expectation-Maximization approach to find the best
-#  mixture of Gaussians for the data
+# Here we'll use scikit-learn's GaussianMixture model. The fit() method
+# uses an Expectation-Maximization approach to find the best
+# mixture of Gaussians for the data
 
 # fit models with 1-10 components
 N = np.arange(1, 11)

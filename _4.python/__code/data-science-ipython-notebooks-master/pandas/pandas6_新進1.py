@@ -33,7 +33,7 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 np.random.seed(0)  # seed for reproducibility
-
+'''
 x1 = np.random.randint(10, size=6)  # One-dimensional array
 x2 = np.random.randint(10, size=(3, 4))  # Two-dimensional array
 x3 = np.random.randint(10, size=(3, 4, 5))  # Three-dimensional array
@@ -85,15 +85,39 @@ y = np.array([[99],
               [99]])
 cc = np.hstack([grid, y])
 print(cc)
-
-
-
-
-
+'''
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+df_11 = pd.DataFrame(np.random.randint(low=2,high=8,size=[3, 4]),
+                  columns=list('ABCD'))
+print(df_11)
 
+df_11 = np.abs(df_11)
+print(df_11)
+
+func_1 = lambda x: x.max() - x.min()
+cc = df_11.apply(func_1)
+print(cc)
+
+cc = df_11.apply(func_1, axis=1)
+print(cc)
+
+func_2 = lambda x: pd.Series([x.min(), x.max()], index=['min', 'max'])
+cc = df_11.apply(func_2)
+print(cc)
+
+func_3 = lambda x: '%.2f' %x
+cc = df_11.applymap(func_3)
+print(cc)
+
+cc = df_11['A'].map(func_3)
+print(cc)
+
+print(df_11)
+
+df_11.replace(7, "GOOD", inplace=True)
+print(df_11)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

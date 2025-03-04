@@ -42,7 +42,6 @@ from IPython.display import Image
 
 Image("ml_map.png", width=800)
 
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -750,26 +749,26 @@ show()
 
 from sklearn.ensemble import RandomForestRegressor
 
-x = 10 * np.random.rand(100)
+X = 10 * np.random.rand(100)
 
 
-def model(x, sigma=0.3):
-    fast_oscillation = np.sin(5 * x)
-    slow_oscillation = np.sin(0.5 * x)
-    noise = sigma * np.random.randn(len(x))
+def model(X, sigma=0.3):
+    fast_oscillation = np.sin(5 * X)
+    slow_oscillation = np.sin(0.5 * X)
+    noise = sigma * np.random.randn(len(X))
 
     return slow_oscillation + fast_oscillation + noise
 
 
-y = model(x)
-plt.errorbar(x, y, 0.3, fmt="o")
+y = model(X)
+plt.errorbar(X, y, 0.3, fmt="o")
 show()
 
 xfit = np.linspace(0, 10, 1000)
-yfit = RandomForestRegressor(100).fit(x[:, None], y).predict(xfit[:, None])
+yfit = RandomForestRegressor(100).fit(X[:, None], y).predict(xfit[:, None])
 ytrue = model(xfit, 0)
 
-plt.errorbar(x, y, 0.3, fmt="o")
+plt.errorbar(X, y, 0.3, fmt="o")
 plt.plot(xfit, yfit, "-r")
 plt.plot(xfit, ytrue, "-k", alpha=0.5)
 show()
@@ -785,17 +784,19 @@ sns.set()
 
 # Introducing Gaussian Mixture Models
 
-np.random.seed(2)
-x = np.concatenate(
+X = np.concatenate(
     [
         np.random.normal(0, 2, 2000),
         np.random.normal(5, 5, 2000),
         np.random.normal(3, 0.5, 600),
     ]
-)
-plt.hist(x, 80)
+).reshape(-1, 1)
+
+"""
+plt.hist(X, 80)
 plt.xlim(-10, 20)
 show()
+"""
 
 # Gaussian mixture models will allow us to approximate this density:
 
@@ -803,27 +804,31 @@ show()
 from sklearn import mixture
 
 # 以後NG
-# clf = GMM(n_components=4, n_iter=500, random_state=3).fit(x)
+# clf = GMM(n_components=4, n_iter=500, random_state=3).fit(X)
 # clf = GMM(n_components=4,covariance_type='full')
 clf = mixture.GaussianMixture(n_components=4)
 
-clf.fit(x)
+print(X.shape)
 
-xpdf = np.linspace(-10, 20, 1000)
+clf.fit(X)
+
+xpdf = np.linspace(-10, 20, 4600).reshape(-1, 1)
+print(xpdf.shape)
+cc = clf.score(xpdf)
+print(cc)
+print('ddd')
 density = np.exp(clf.score(xpdf))
 
-plt.hist(x, 80, normed=True, alpha=0.5)
+plt.hist(X, 80, alpha=0.5)
 plt.plot(xpdf, density, "-r")
 plt.xlim(-10, 20)
 show()
 
 print(clf.means_)
-
 print(clf.covars_)
-
 print(clf.weights_)
 
-plt.hist(x, 80, normed=True, alpha=0.3)
+plt.hist(X, 80, normed=True, alpha=0.3)
 plt.plot(xpdf, density, "-r")
 
 for i in range(clf.n_components):
@@ -836,15 +841,15 @@ show()
 
 # How many Gaussians?
 # Given a model, we can use one of several means to evaluate how well it fits the data. For example, there is the Aikaki Information Criterion (AIC) and the Bayesian Information Criterion (BIC)
-print(clf.bic(x))
-print(clf.aic(x))
+print(clf.bic(X))
+print(clf.aic(X))
 
 # Let's take a look at these as a function of the number of gaussians:
 
 n_estimators = np.arange(1, 10)
-clfs = [GMM(n, n_iter=1000).fit(x) for n in n_estimators]
-bics = [clf.bic(x) for clf in clfs]
-aics = [clf.aic(x) for clf in clfs]
+clfs = [GMM(n, n_iter=1000).fit(X) for n in n_estimators]
+bics = [clf.bic(X) for clf in clfs]
+aics = [clf.aic(X) for clf in clfs]
 
 plt.plot(n_estimators, bics, label="BIC")
 plt.plot(n_estimators, aics, label="AIC")
@@ -860,8 +865,8 @@ show()
 np.random.seed(0)
 
 # Add 20 outliers
-true_outliers = np.sort(np.random.randint(0, len(x), 20))
-y = x.copy()
+true_outliers = np.sort(np.random.randint(0, len(X), 20))
+y = X.copy()
 y[true_outliers] += 50 * np.random.randn(20)
 
 clf = GMM(4, n_iter=500, random_state=0).fit(y)
@@ -896,16 +901,15 @@ print(cc)
 
 from sklearn.neighbors import KernelDensity
 
-kde = KernelDensity(0.15).fit(x[:, None])
+kde = KernelDensity(0.15).fit(X[:, None])
 density_kde = np.exp(kde.score_samples(xpdf[:, None]))
 
-plt.hist(x, 80, normed=True, alpha=0.5)
+plt.hist(X, 80, normed=True, alpha=0.5)
 plt.plot(xpdf, density, "-b", label="GMM")
 plt.plot(xpdf, density_kde, "-r", label="KDE")
 plt.xlim(-10, 20)
 plt.legend()
 show()
-
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
