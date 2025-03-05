@@ -30,32 +30,33 @@ x = np.linspace(0, 10, 1000)
 y = np.sin(x)
 z = np.cos(x)
 
-plt.plot(x,y,color="red")
-plt.plot(x,z,"b--")
+plt.plot(x, y, color="red")
+plt.plot(x, z, "b--")
 
-plt.ylim(-1.2,1.2) 
+plt.ylim(-1.2, 1.2)
 
 import io
-buf = io.BytesIO() # 建立一個用來儲存圖形內容的BytesIO物件
-plt.savefig(buf, format="png") # 將圖形以png格式儲存進buf中
-cc = buf.getvalue()[:20] # 顯示圖形內容的前20個位元組
+
+buf = io.BytesIO()  # 建立一個用來儲存圖形內容的BytesIO物件
+plt.savefig(buf, format="png")  # 將圖形以png格式儲存進buf中
+cc = buf.getvalue()[:20]  # 顯示圖形內容的前20個位元組
 print(cc)
 
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-print('設定線圖的透明度')
+print("設定線圖的透明度")
 x = np.arange(0, 5, 0.1)
 
-line = plt.plot(x, 0.05*x*x, 'r')[0] # plot傳回一個清單
-line.set_alpha(0.3) # 呼叫Line2D物件的set_*()方法設定屬性值
+line = plt.plot(x, 0.05 * x * x, "r")[0]  # plot傳回一個清單
+line.set_alpha(0.3)  # 呼叫Line2D物件的set_*()方法設定屬性值
 
-line = plt.plot(x, 0.08*x*x, 'r')[0] # plot傳回一個清單
-line.set_alpha(0.6) # 呼叫Line2D物件的set_*()方法設定屬性值
+line = plt.plot(x, 0.08 * x * x, "r")[0]  # plot傳回一個清單
+line.set_alpha(0.6)  # 呼叫Line2D物件的set_*()方法設定屬性值
 
-line = plt.plot(x, 0.10*x*x, 'r')[0] # plot傳回一個清單
-line.set_alpha(0.9) # 呼叫Line2D物件的set_*()方法設定屬性值
+line = plt.plot(x, 0.10 * x * x, "r")[0]  # plot傳回一個清單
+line.set_alpha(0.9)  # 呼叫Line2D物件的set_*()方法設定屬性值
 
 plt.show()
 
@@ -829,12 +830,10 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-#四邊形網格
+# 四邊形網格
 
-X = np.array([[0, 1, 2], 
-              [0, 1, 2]])
-Y = np.array([[0, 0.2, 0],
-              [1, 0.8, 1]])
+X = np.array([[0, 1, 2], [0, 1, 2]])
+Y = np.array([[0, 0.2, 0], [1, 0.8, 1]])
 Z = np.array([[0.5, 0.8]])
 
 # 示範pcolormesh()繪制的四邊形以及其填充彩色
@@ -847,19 +846,21 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+
 # 使用pcolormesh()繪制復數平面上的座標變換
 def make_mesh(n):
-    x, y = np.mgrid[-10:0:n*1j, -5:5:n*1j]
+    x, y = np.mgrid[-10 : 0 : n * 1j, -5 : 5 : n * 1j]
 
-    s = x + 1j*y
+    s = x + 1j * y
     z = (2 + s) / (2 - s)
     return s, z
+
 
 fig, axes = plt.subplots(2, 2, figsize=(8, 8))
 axes = axes.ravel()
 for ax in axes:
     ax.set_aspect("equal")
-    
+
 s1, z1 = make_mesh(10)
 s2, z2 = make_mesh(200)
 axes[0].pcolormesh(s1.real, s1.imag, np.abs(s1))
@@ -872,15 +873,17 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+
 # 使用pcolormesh()繪制極座標中的網格
 def func(theta, r):
     y = theta * np.sin(r)
-    return np.sqrt(y*y)
+    return np.sqrt(y * y)
 
-T, R = np.mgrid[0:2*np.pi:360j, 0:10:100j]
+
+T, R = np.mgrid[0 : 2 * np.pi : 360j, 0:10:100j]
 Z = func(T, R)
 
-ax=plt.subplot(111, projection="polar", aspect=1.)
+ax = plt.subplot(111, projection="polar", aspect=1.0)
 ax.pcolormesh(T, R, Z, rasterized=True)
 
 plt.show()
@@ -888,20 +891,23 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-#箭頭圖
+# 箭頭圖
+
 
 # 用quiver()繪制向量場
 def f(x, y):
-    return x * np.exp(- x**2 - y**2)
+    return x * np.exp(-(x**2) - y**2)
+
 
 def vec_field(f, x, y, dx=1e-6, dy=1e-6):
     x2 = x + dx
     y2 = y + dy
     v = f(x, y)
     vx = (f(x2, y) - v) / dx
-    vy = (f(x, y2) - v) / dy 
+    vy = (f(x, y2) - v) / dy
     return vx, vy
-    
+
+
 X, Y = np.mgrid[-2:2:20j, -2:2:20j]
 C = f(X, Y)
 U, V = vec_field(f, X, Y)
