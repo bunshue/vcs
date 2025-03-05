@@ -34,13 +34,13 @@ ssl._create_default_https_context = ssl._create_stdlib_context
 
 
 def show():
-    # plt.show()
+    plt.show()
     pass
 
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
+
 print("多指標評分")
 
 from sklearn.metrics import classification_report
@@ -544,7 +544,7 @@ d_mah = np.sqrt(np.dot(np.dot(ones, Prec), ones))
 print("Euclidean norm of ones=%.2f. Mahalanobis norm of ones=%.2f" % (d_euc, d_mah))
 
 print(np.dot(ones, Prec))
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 import scipy
@@ -695,11 +695,171 @@ dist = np.sqrt(np.sum((vec1 - vec2) ** 2))
 print(dist)
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
+# 核密度估计 Kernel Density Estimation.
+
+from sklearn.neighbors import KernelDensity
+
+rng = np.random.RandomState(42)
+X = rng.random_sample((100, 3))
+
+kde = KernelDensity(kernel="gaussian", bandwidth=0.5).fit(X)
+log_density = kde.score_samples(X[:3])
+print(log_density)
+# array([-1.52955942, -1.51462041, -1.60244657])
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+# 这个例子使用KernelDensity类来演示一维核密度估计的原理。
+
+# ----------------------------------------------------------------------
+# Plot a 1D density example
+# ---------------------------------------------------------------------------
+from scipy.stats import norm
+
+"""
+用随机种子生成100个数据，其中30个是符合高斯分布（0,1）的数据，70个是符合高斯分布(5,1)的数据，
+（0,1）表示以x轴上的0为中心点，宽度为1的高斯分布。
+（5,1）表示以x轴上5为中心店，宽度为1的高斯分布
+"""
+# ---------------------------------------------------------------------------
+N = 100
+np.random.seed(1)
+X = np.concatenate(
+    (np.random.normal(0, 1, int(0.3 * N)), np.random.normal(5, 1, int(0.7 * N)))
+)[:, np.newaxis]
+# ---------------------------------------------------------------------------
+# 创建一个[-5,10]范围内包含1000个数据的等差数列
+X_plot = np.linspace(-5, 10, 1000)[:, np.newaxis]
+# 使用简单的高斯模型norm得到两个高斯分布的概率密度作为真实值（我不觉得这是最佳的办法）
+true_dens = 0.3 * norm(0, 1).pdf(X_plot[:, 0]) + 0.7 * norm(5, 1).pdf(X_plot[:, 0])
+fig, ax = plt.subplots()
+# 填充出用简单高斯模型得出的密度真实值
+ax.fill(X_plot[:, 0], true_dens, fc="black", alpha=0.2, label="input distribution")
+colors = ["navy", "cornflowerblue", "darkorange"]
+# 使用不同的内核进行拟合，我也不推荐这样做，我们首先应该是观察数据的分布，然后选择模型，而不是
+# 一个个尝试，应该做的是调整我们的带宽。
+kernels = ["gaussian", "tophat", "epanechnikov"]
+# 划线的粗细
+lw = 2
+for color, kernel in zip(colors, kernels):
+    # 用X数据进行训练模型
+    kde = KernelDensity(kernel=kernel, bandwidth=0.5).fit(X)
+    # 在X_plot数据上测试
+    log_dens = kde.score_samples(X_plot)
+    # 画图
+    ax.plot(
+        X_plot[:, 0],
+        np.exp(log_dens),
+        color=color,
+        lw=lw,
+        linestyle="-",
+        label="kernel = '{0}'".format(kernel),
+    )
+ax.text(6, 0.38, "N={0} points".format(N))
+ax.legend(loc="upper left")
+# 用'+'代表真实的数据并且画出，用于观察数据分布集中情况
+ax.plot(X[:, 0], -0.005 - 0.01 * np.random.random(X.shape[0]), "+k")
+ax.set_xlim(-4, 9)
+ax.set_ylim(-0.02, 0.4)
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+import sklearn
+from sklearn.neighbors import KernelDensity
+from scipy.stats import norm
+from collections import defaultdict
+
+# 1、数据预处理
+# Step1、Data pretreatment
+Q1_data = pd.read_csv("data/Question_1.csv")
+X = np.array(Q1_data["X"].tolist())[:, np.newaxis]
+N = len(X)
+print("max_value_in_X:{}".format(max(X)))
+print("min_value_inX:{}".format(min(X)))
+print(X.shape)
+
+# 2、得到最佳带宽作为真实值（我认为比较合理的方式去选取真实值）
+# from sklearn.grid_search import GridSearchCV
+from sklearn.model_selection import GridSearchCV
+from sklearn.model_selection import LeaveOneOut
+
+bandwidths = 10 ** np.linspace(-1, 1, 100)
+grid = GridSearchCV(
+    KernelDensity(kernel="gaussian"), {"bandwidth": bandwidths}, cv=LeaveOneOut()
+)
+grid.fit(X)
+# The best estimated bandwidth density is used as the truth value
+best_KDEbandwidth = grid.best_params_["bandwidth"]
+kernel = "gaussian"
+lw = 2
+kde = KernelDensity(kernel=kernel, bandwidth=best_KDEbandwidth).fit(X)
+truth_density = np.exp(kde.score_samples(X))
+print(grid.best_params_)
+
+
+# 3、开始使用KDE
+# Step2、Kernel Density Estimation.
+MSE_MAP = defaultdict(list)
+fig, ax = plt.subplots()
+ax.fill(X[:, 0], truth_density, fc="black", alpha=1, label="truth density")
+bandwidths = [0.15, 0.5, 1]
+colors = ["navy", "cornflowerblue", "darkorange"]
+for bandwidth, color in zip(bandwidths, colors):
+    kde = KernelDensity(kernel=kernel, bandwidth=bandwidth).fit(X)
+    log_dens = kde.score_samples(X)
+    if bandwidth == best_KDEbandwidth:
+        bandwidth = "ground truth"
+    ax.plot(
+        X[:, 0],
+        np.exp(log_dens),
+        color=color,
+        lw=lw,
+        linestyle="-",
+        label="bandwidth = '{0}'".format(bandwidth),
+    )
+    MSE_MAP[bandwidth] = log_dens
+
+ax.text(6, 0.32, "N={0} points".format(N))
+ax.legend(loc="upper right")
+ax.plot(X[:, 0], -0.005 - 0.01 * np.random.random(X.shape[0]), "+k")
+ax.set_xlim(-4, 9)
+ax.set_ylim(-0.02, 0.50)
+show()
+
+
+# （预测效果）
+# 4，计算估计密度与地面真实密度之间的MSE
+def cal_mse(a, b):
+    if len(a) == len(b):
+        n = len(a)
+    else:
+        return "len(a) != len(b)"
+    res = 0
+    for i in range(n):
+        res += (a[i] - b[i]) ** 2
+    return res / n
+
+
+for bandwidth in MSE_MAP:
+    estimate_density = MSE_MAP[bandwidth]
+    MSE = cal_mse(estimate_density, truth_density)
+    print(
+        "When bandwidth is {:.2f} ----> MSE(estimate, truth): {:.3f}".format(
+            bandwidth, MSE
+        )
+    )
+
+"""
+When bandwidth is 0.15 ----> MSE(estimate, truth): 2.603
+When bandwidth is 0.50 ----> MSE(estimate, truth): 2.803
+When bandwidth is 1.00 ----> MSE(estimate, truth): 3.059
+        可以看出MSE表示与3.中的图表示出的信息是一致的。
+"""
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

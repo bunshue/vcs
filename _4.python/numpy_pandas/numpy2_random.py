@@ -119,8 +119,8 @@ print(cc)
 # numpy.random.randn
 # sigma * np.random.randn(...) + mu
 
-s = 3 + 2.5 * np.random.randn(2, 4)
-print(s)
+X = 3 + 2.5 * np.random.randn(2, 4)
+print(X)
 
 print("------------------------------")  # 30個
 
@@ -380,50 +380,86 @@ print("---- np.random.randrange() SP ------------------------------------")  # 4
 
 print("---- np.random.normal() ST ------------------------------------")  # 40個
 
+N = 300
+mu, sigma = 80, 20 # 平均值, 標準差
+X = np.random.normal(mu, sigma, size=(N, 2))
+
+plt.subplot(121)
+plt.hist(X, bins = 30, alpha = 0.6)
+
+plt.subplot(122)
+plt.scatter(X[:, 0], X[:, 1])
+
+plt.show()
+
 N = 10
-cc = np.random.normal(0, 1, N)
+#一維
+cc = np.random.normal(mu, sigma, size=N)
 print(cc)
 
-# 使用 NumPy 隨機數的「常態分佈」產生 N 個數據點
-N = 10
-cc = np.random.normal(5, 50, N)
+#二維
+cc = np.random.normal(mu, sigma, size=(3, 5))
 print(cc)
 
-cc = np.random.normal(3, 2.5, size=(2, 4))
-print(cc)
-
-
-x = np.random.normal(1, 4, (3, 5))
-y = np.argmax(x, axis=1)
+#二維
+x = np.random.normal(mu, sigma, size=(3, 5))
+y = np.argmax(x, axis=1) # ??
 print(x)
 print(x.shape)
 print(y)
 print(y.shape)
 
-print("查詢函數用法")
-help(np.max)
-
 print("------------------------------------------------------------")  # 60個
-
-"""
-x1 = np.random.normal(mu, sigma, size=N*10)  # 隨機數
-
-# list 移除資料的寫法
-x2 = x1[x1 <= 100.0]
-x2 = x2[x2 >= 0]
-"""
 
 # 過濾資料
 
-"""
-scores1 = np.random.normal(mu, sigma, size=N)  # 隨機數
-print("資料個數1 :", len(scores1))
-print("最高分 :", max(scores1))
-print("最低分 :", min(scores1))
+N = 1000
+mu, sigma = 80, 20 # 平均值, 標準差
 
-scores2 = scores1[scores1 <= 100.0]
-scores3 = scores2[scores2 >= 0.0]
-"""
+x1 = np.random.normal(mu, sigma, size=N)
+print("資料個數1 :", len(x1))
+print("最大 :", max(x1))
+print("最小 :", min(x1))
+print("形狀 :", x1.shape)
+
+# list 移除資料的寫法
+print('留下 <= 100 的')
+x2 = x1[x1 <= 100.0]
+print(x2.shape)
+
+print('留下 >= 0 的')
+x2 = x2[x2 >= 0]
+print(x2.shape)
+
+plt.subplot(211)
+plt.hist(x1, bins = 30, alpha = 0.6, color='r')
+
+plt.subplot(212)
+plt.hist(x2, bins = 30, alpha = 0.6, color='g')
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+N = 1000
+mu, sigma = 0, 0.1 # 平均值, 標準差
+X = np.random.normal(mu, sigma, size=N)
+
+#驗算
+
+print('X平均值 :', np.mean(X), "差 :", abs(mu - np.mean(X)))
+print('X標準差 :', np.std(X, ddof=1), "差 :", abs(sigma - np.std(X, ddof=1)))
+
+count, bins, ignored = plt.hist(X, 30, density=True)
+
+plt.plot(
+    bins,
+    1 / (sigma * np.sqrt(2 * np.pi)) * np.exp(-((bins - mu) ** 2) / (2 * sigma**2)),
+    linewidth=2,
+    color="r",
+)
+
+plt.show()
 
 print("---- np.random.normal() SP ------------------------------------")  # 40個
 
@@ -545,28 +581,27 @@ print(a)
 print("------------------------------------------------------------")  # 60個
 
 # mu + sigma * np.random.standard_normal(size=...)
-# np.random.normal(mu, sigma, size=...)
 
 for _ in range(10):
     cc = np.random.standard_normal()
     print(cc)
 
-s = np.random.standard_normal(8000)
-print(s)
-print(s.shape)
+X = np.random.standard_normal(8000)
+print(X)
+print(X.shape)
 
-s = np.random.standard_normal(size=(3, 4, 2))
-print(s)
-print(s.shape)
+X = np.random.standard_normal(size=(3, 4, 2))
+print(X)
+print(X.shape)
 
 
 # mean 3 and standard deviation 2.5:
 mu = 3
 sigma = 2.5
 
-s = mu + sigma * np.random.standard_normal(size=(2, 4))
-print(s)
-print(s.shape)
+X = mu + sigma * np.random.standard_normal(size=(2, 4))
+print(X)
+print(X.shape)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -655,41 +690,13 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-
 # numpy.random.uniform
 # random.uniform(low=0.0, high=1.0, size=None)
 
-s = np.random.uniform(-1, 0, 10)
-print(s)
-count, bins, ignored = plt.hist(s, 15, density=True)
+X = np.random.uniform(-1, 0, 10)
+print(X)
+count, bins, ignored = plt.hist(X, 15, density=True)
 plt.plot(bins, np.ones_like(bins), linewidth=2, color="r")
-plt.show()
-
-
-print("------------------------------------------------------------")  # 60個
-
-# np.random.normal
-
-mu, sigma = 0, 0.1  # mean and standard deviation
-s = np.random.normal(mu, sigma, 1000)
-
-"""
-Verify the mean and the variance:
-abs(mu - np.mean(s))
-0.0  # may vary
-
-abs(sigma - np.std(s, ddof=1))
-0.1  # may vary
-"""
-count, bins, ignored = plt.hist(s, 30, density=True)
-
-plt.plot(
-    bins,
-    1 / (sigma * np.sqrt(2 * np.pi)) * np.exp(-((bins - mu) ** 2) / (2 * sigma**2)),
-    linewidth=2,
-    color="r",
-)
-
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
@@ -789,3 +796,7 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+
+print("查詢函數用法")
+help(np.max)
+

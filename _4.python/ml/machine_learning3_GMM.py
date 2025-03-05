@@ -72,6 +72,12 @@ score_samples（X）计算每个样本的加权对数概率。
 set_params（**params）设置此估算器的参数。
 """
 
+"""
+GaussianMixture类中的covariance_type参数可以选择不同的协方差矩阵类型，
+包括'full'、'tied'、'diag'和'spherical'等，
+分别表示完全协方差矩阵、共享协方差矩阵、对角协方差矩阵和球形协方差矩阵。
+"""
+
 print("------------------------------------------------------------")  # 60個
 
 # 共同
@@ -125,23 +131,89 @@ print("------------------------------------------------------------")  # 60個
 
 X = np.array([[1, 2], [1, 4], [1, 0], [10, 2], [10, 4], [10, 0]])
 
-gmm = GaussianMixture(n_components=2, random_state=9487)
+N_COMPONENTS = 2  # 要分成的群數
+print("使用GaussianMixture分成", N_COMPONENTS, "群")
+gmm = GaussianMixture(n_components=N_COMPONENTS, random_state=9487)
 gmm.fit(X)  # 學習訓練.fit
 
 print(X.shape)
-print("GaussianMixture訓練後結果 :")
-print("各群的平均")
+
+print("GaussianMixture訓練後結果 :(打印模型參數)")
+
+print("各群的平均 / 群集中心")
 print(gmm.means_)  # 各 Gauss 分布の平均
-print("各群的分散數")
+print("各群的分散數 / covariances")
 print(gmm.covariances_)  # 各 Gauss 分布の分散
+print("weights:", gmm.weights_)
 print(gmm.weights_)
-print(gmm.converged_)
-print(gmm.n_iter_)
+print("是否達到收斂?", gmm.converged_)
+print("遞迴次數 :", gmm.n_iter_)
 
 y_pred = gmm.predict([[0, 0], [12, 3]])
 print("預測結果 :\n", y_pred, sep="")
 
-sys.exit()
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+N = 100
+mu1, sigma1 = 0, 4
+mu2, sigma2 = 5, 4
+x1 = np.random.normal(mu1, sigma1, size=(N, 2))
+x2 = np.random.normal(mu2, sigma2, size=(N, 2))
+
+X = np.concatenate([x1, x2], axis=0)
+
+plt.subplot(221)
+plt.hist(X, bins=100, alpha=0.6)
+
+plt.subplot(222)
+# plt.scatter(X[:, 0], X[:, 1], c='r')
+plt.scatter(x1[:, 0], x1[:, 1], c="r")
+plt.scatter(x2[:, 0], x2[:, 1], c="g")
+
+# 构建GMM模型
+N_COMPONENTS = 3  # 要分成的群數
+print("使用GaussianMixture分成", N_COMPONENTS, "群")
+gmm = GaussianMixture(n_components=N_COMPONENTS, covariance_type="full")
+
+gmm.fit(X)  # 學習訓練.fit
+
+y_pred = gmm.predict(X)
+print("預測結果 :\n", y_pred, sep="")
+
+plt.subplot(223)
+plt.hist(y_pred, bins=100, alpha=0.6)
+
+plt.subplot(224)
+plt.scatter(X[:, 0], X[:, 1], c=y_pred)
+
+# 標記群集中心
+plt.scatter(
+    gmm.means_[:, 0],
+    gmm.means_[:, 1],
+    marker="*",
+    s=200,
+    c="r",
+    alpha=0.8,
+)
+
+plt.show()
+
+xpdf = np.linspace(-10, 10, 100).reshape(-1, 2)
+print(type(xpdf))
+print(xpdf)
+print(xpdf.shape)
+
+cc = gmm.score_samples(xpdf)
+print(cc)
+
+density = np.exp(gmm.score_samples(xpdf))
+
+# plt.hist(X, 80, alpha=0.5)
+plt.plot(xpdf, density, "-r")
+plt.xlim(-10, 20)
+show()
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -149,30 +221,30 @@ iris = datasets.load_iris()
 X = iris.data
 y = iris.target  # 資料集目標
 
-print("設定要分的群數")
-n_components = 3
-
-gmm = GaussianMixture(n_components=n_components)
+N_COMPONENTS = 3  # 要分成的群數
+print("使用GaussianMixture分成", N_COMPONENTS, "群")
+gmm = GaussianMixture(n_components=N_COMPONENTS)
 
 gmm.fit(X)  # 學習訓練.fit
 
 y_pred = gmm.predict(X)
 print("預測結果 :\n", y_pred, sep="")
 
-print("各群的平均")
-print(gmm.means_)  # 各 Gauss 分布の平均
-
-print("各群的分散數")
-print(gmm.covariances_)  # 各 Gauss 分布の分散
-
-# print(X.shape)
-# print(y_pred.shape)
-
 plt.subplot(211)
 plt.scatter(X[:, 0], X[:, 1], c=y)
 
 plt.subplot(212)
 plt.scatter(X[:, 0], X[:, 1], c=y_pred)
+
+# 標記群集中心
+plt.scatter(
+    gmm.means_[:, 0],
+    gmm.means_[:, 1],
+    marker="*",
+    s=200,
+    c="r",
+    alpha=0.8,
+)
 
 show()
 
@@ -257,7 +329,10 @@ X = ss.transform(df)
 """
 # Gaussian Mixture Modeling
 # Perform clsutering
-gmm = GaussianMixture(n_components=2, n_init=10, max_iter=100)
+
+N_COMPONENTS = 2  # 要分成的群數
+print("使用GaussianMixture分成", N_COMPONENTS, "群")
+gmm = GaussianMixture(n_components=N_COMPONENTS, n_init=10, max_iter=100)
 
 gmm.fit(X)  # 學習訓練.fit
 
@@ -323,22 +398,12 @@ ss.fit(df)
 X = ss.transform(df)
 # StandardScaler()
 
-# Gaussian Mixture Modeling
-# Perform clsutering
-gmm = GaussianMixture(n_components=2, n_init=10, max_iter=100)
+N_COMPONENTS = 2  # 要分成的群數
+print("使用GaussianMixture分成", N_COMPONENTS, "群")
+gmm = GaussianMixture(n_components=N_COMPONENTS, n_init=10, max_iter=100)
 gmm.fit(X)  # 學習訓練.fit
+
 # GaussianMixture(n_components=2, n_init=10)
-# Where are the clsuter centers
-cc = gmm.means_
-print(cc)
-
-# Did algorithm converge?
-cc = gmm.converged_
-print(cc)
-
-# How many iterations did it perform?
-cc = gmm.n_iter_
-print(cc)
 
 y_pred = gmm.predict(X)
 print("預測結果 :\n", y_pred, sep="")
@@ -362,8 +427,10 @@ X, y_true = make_blobs(n_samples=N, centers=GROUPS, cluster_std=STD)
 
 X = X[:, ::-1]
 
-kmeans = KMeans(4, random_state=9487)
-labels = kmeans.fit(X).predict(X)
+CLUSTERS = 4  # 要分成的群數
+print("使用KMeans分成", CLUSTERS, "群")
+kmeans = KMeans(CLUSTERS)
+labels = kmeans.fit(X).predict(X)  # 學習訓練.fit+預測
 plt.scatter(X[:, 0], X[:, 1], c=labels, s=40, cmap="viridis")
 show()
 
@@ -387,11 +454,15 @@ def plot_kmeans(kmeans, X, n_clusters=4, rseed=0, ax=None):
         ax.add_patch(plt.Circle(c, r, fc="#ACACCA", lw=3, alpha=0.5, zorder=1))
 
 
-kmeans = KMeans(n_clusters=4, random_state=9487)
+CLUSTERS = 4  # 要分成的群數
+print("使用KMeans分成", CLUSTERS, "群")
+kmeans = KMeans(n_clusters=CLUSTERS)
 plot_kmeans(kmeans, X)
 
 # 匯入SKlearn中GMM模組，並且建立4組資料
-gmm = GaussianMixture(n_components=4)
+N_COMPONENTS = 4  # 要分成的群數
+print("使用GaussianMixture分成", N_COMPONENTS, "群")
+gmm = GaussianMixture(n_components=N_COMPONENTS)
 gmm.fit(X)  # 學習訓練.fit
 labels = gmm.predict(X)
 plt.scatter(X[:, 0], X[:, 1], c=labels, s=40, cmap="viridis")
@@ -425,7 +496,7 @@ def draw_ellipse(position, covariance, ax=None, **kwargs):
 
 def plot_gmm(gmm, X, label=True, ax=None):
     ax = ax or plt.gca()
-    labels = gmm.fit(X).predict(X)
+    labels = gmm.fit(X).predict(X)  # 學習訓練.fit + 預測
     if label:
         ax.scatter(X[:, 0], X[:, 1], c=labels, s=40, cmap="viridis", zorder=2)
     else:
@@ -437,7 +508,10 @@ def plot_gmm(gmm, X, label=True, ax=None):
         draw_ellipse(pos, covar, alpha=w * w_factor)
 
 
-gmm = GaussianMixture(n_components=4, random_state=9487)
+N_COMPONENTS = 4  # 要分成的群數
+print("使用GaussianMixture分成", N_COMPONENTS, "群")
+gmm = GaussianMixture(n_components=N_COMPONENTS)
+
 plot_gmm(gmm, X)
 show()
 
@@ -747,7 +821,7 @@ N = np.arange(1, 11)
 models = [None for i in range(len(N))]
 
 for i in range(len(N)):
-    models[i] = GaussianMixture(N[i]).fit(X)
+    models[i] = GaussianMixture(N[i]).fit(X)  # 學習訓練.fit
 
 # compute the AIC and the BIC
 AIC = [m.aic(X) for m in models]
@@ -811,6 +885,554 @@ ax.text(0, 0.5, "class 2", rotation="vertical")
 ax.text(3, 0.3, "class 3", rotation="vertical")
 
 plt.show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+from scipy.stats import norm
+from scipy.stats import multivariate_normal
+
+# change default figure and font size
+plt.rcParams["figure.figsize"] = 8, 6
+plt.rcParams["font.size"] = 12
+
+# gaussian distribution with different values of the mean and variance
+x = np.linspace(start=-10, stop=10, num=200)
+mean_opt = [0, 0, 2]
+var_opt = [1, 4, 4]
+
+for m, v in zip(mean_opt, var_opt):
+    y = norm(m, np.sqrt(v)).pdf(x)
+    plt.plot(x, y, label="$\mu$ = {}, $\sigma^2$ = {}".format(m, v))
+    plt.legend()
+
+plt.show()
+
+
+# revised from
+# http://docs.scipy.org/doc/scipy-0.14.0/reference/generated/scipy.stats.multivariate_normal.html
+x, y = np.mgrid[-4:4:0.01, -4:4:0.01]
+position = np.empty(x.shape + (2,))
+position[:, :, 0] = x
+position[:, :, 1] = y
+
+# different values for the covariance matrix
+covariances = [[[1, 0], [0, 1]], [[1, 0], [0, 3]], [[1, -1], [-1, 3]]]
+titles = ["spherical", "diag", "full"]
+
+plt.figure(figsize=(15, 6))
+for i in range(3):
+    plt.subplot(1, 3, i + 1)
+    z = multivariate_normal([0, 0], covariances[i]).pdf(position)
+    plt.contour(x, y, z)
+    plt.title("{}, {}".format(titles[i], covariances[i]))
+    plt.xlim([-4, 4])
+    plt.ylim([-4, 4])
+
+plt.show()
+
+# generate some random data to work with
+np.random.seed(2)
+x1 = np.random.normal(0, 2, size=2000)
+x2 = np.random.normal(5, 5, size=2000)
+data = [x1, x2]
+
+
+def plot_hist(data):
+    for x in data:
+        plt.hist(x, bins=80, alpha=0.6)
+
+    plt.xlim(-10, 20)
+
+
+plot_hist(data)
+plt.show()
+
+
+# estimate the mean and variance of the data
+x1_mean, x1_var = np.mean(x1), np.var(x1)
+x2_mean, x2_var = np.mean(x2), np.var(x2)
+x_mean = [x1_mean, x2_mean]
+x_var = [x1_var, x2_var]
+
+
+def plot_guassian(x_mean, x_var):
+    """
+    note that scipy's normal distribution requires the
+    standard deviation (square root of variance)
+    instead of the variance
+    """
+    x = np.linspace(start=-10, stop=20, num=200)
+    for m, v in zip(x_mean, x_var):
+        y = norm(m, np.sqrt(v)).pdf(x)
+        plt.plot(x, y)
+
+
+plot_hist(data)
+plot_guassian(x_mean, x_var)
+plt.show()
+
+# E Step
+# M Step
+# Implementing the EM algorithm
+
+
+def generate_data(n_data, means, covariances, weights):
+    """creates a list of data points"""
+    n_clusters, n_features = means.shape
+
+    data = np.zeros((n_data, n_features))
+    for i in range(n_data):
+        # pick a cluster id and create data from this cluster
+        k = np.random.choice(n_clusters, size=1, p=weights)[0]
+        x = np.random.multivariate_normal(means[k], covariances[k])
+        data[i] = x
+
+    return data
+
+
+# Model parameters, including the mean
+# covariance matrix and the weights for each cluster
+init_means = np.array([[5, 0], [1, 1], [0, 5]])
+
+init_covariances = np.array(
+    [[[0.5, 0.0], [0, 0.5]], [[0.92, 0.38], [0.38, 0.91]], [[0.5, 0.0], [0, 0.5]]]
+)
+
+init_weights = [1 / 4, 1 / 2, 1 / 4]
+
+# generate data
+np.random.seed(4)
+X = generate_data(100, init_means, init_covariances, init_weights)
+
+plt.plot(X[:, 0], X[:, 1], "ko")
+plt.tight_layout()
+plt.show()
+
+
+class GMM:
+    """
+    Full covariance Gaussian Mixture Model,
+    trained using Expectation Maximization.
+
+    Parameters
+    ----------
+    n_components : int
+        Number of clusters/mixture components in which the data will be
+        partitioned into.
+
+    n_iters : int
+        Maximum number of iterations to run the algorithm.
+
+    tol : float
+        Tolerance. If the log-likelihood between two iterations is smaller than
+        the specified tolerance level, the algorithm will stop performing the
+        EM optimization.
+
+    seed : int
+        Seed / random state used to initialize the parameters.
+    """
+
+    def __init__(self, n_components: int, n_iters: int, tol: float, seed: int):
+        self.n_components = n_components
+        self.n_iters = n_iters
+        self.tol = tol
+        self.seed = seed
+
+    def fit(self, X):
+        # data's dimensionality and responsibility vector
+        n_row, n_col = X.shape
+        self.resp = np.zeros((n_row, self.n_components))
+
+        # initialize parameters
+        np.random.seed(self.seed)
+        chosen = np.random.choice(n_row, self.n_components, replace=False)
+        self.means = X[chosen]
+        self.weights = np.full(self.n_components, 1 / self.n_components)
+
+        # for np.cov, rowvar = False,
+        # indicates that the rows represents obervation
+        shape = self.n_components, n_col, n_col
+        self.covs = np.full(shape, np.cov(X, rowvar=False))
+
+        log_likelihood = 0
+        self.converged = False
+        self.log_likelihood_trace = []
+
+        for i in range(self.n_iters):
+            log_likelihood_new = self._do_estep(X)
+            self._do_mstep(X)
+
+            if abs(log_likelihood_new - log_likelihood) <= self.tol:
+                self.converged = True
+                break
+
+            log_likelihood = log_likelihood_new
+            self.log_likelihood_trace.append(log_likelihood)
+
+        return self
+
+    def _do_estep(self, X):
+        """
+        E-step: compute responsibilities,
+        update resp matrix so that resp[j, k] is the responsibility of cluster k for data point j,
+        to compute likelihood of seeing data point j given cluster k, use multivariate_normal.pdf
+        """
+        self._compute_log_likelihood(X)
+        log_likelihood = np.sum(np.log(np.sum(self.resp, axis=1)))
+
+        # normalize over all possible cluster assignments
+        self.resp = self.resp / self.resp.sum(axis=1, keepdims=1)
+        return log_likelihood
+
+    def _compute_log_likelihood(self, X):
+        for k in range(self.n_components):
+            prior = self.weights[k]
+            likelihood = multivariate_normal(self.means[k], self.covs[k]).pdf(X)
+            self.resp[:, k] = prior * likelihood
+
+        return self
+
+    def _do_mstep(self, X):
+        """M-step, update parameters"""
+
+        # total responsibility assigned to each cluster, N^{soft}
+        resp_weights = self.resp.sum(axis=0)
+
+        # weights
+        self.weights = resp_weights / X.shape[0]
+
+        # means
+        weighted_sum = np.dot(self.resp.T, X)
+        self.means = weighted_sum / resp_weights.reshape(-1, 1)
+        # covariance
+        for k in range(self.n_components):
+            diff = (X - self.means[k]).T
+            weighted_sum = np.dot(self.resp[:, k] * diff, diff.T)
+            self.covs[k] = weighted_sum / resp_weights[k]
+
+        return self
+
+
+def plot_contours(data, means, covs, title):
+    """visualize the gaussian components over the data"""
+    plt.figure()
+    plt.plot(data[:, 0], data[:, 1], "ko")
+
+    delta = 0.025
+    k = means.shape[0]
+    x = np.arange(-2.0, 7.0, delta)
+    y = np.arange(-2.0, 7.0, delta)
+    x_grid, y_grid = np.meshgrid(x, y)
+    coordinates = np.array([x_grid.ravel(), y_grid.ravel()]).T
+
+    col = ["green", "red", "indigo"]
+    for i in range(k):
+        mean = means[i]
+        cov = covs[i]
+        z_grid = multivariate_normal(mean, cov).pdf(coordinates).reshape(x_grid.shape)
+        plt.contour(x_grid, y_grid, z_grid, colors=col[i])
+
+    plt.title(title)
+    plt.tight_layout()
+
+
+# use our implementation of the EM algorithm
+# and fit a mixture of Gaussians to the simulated data
+gmm = GMM(n_components=3, n_iters=1, tol=1e-4, seed=4)
+gmm.fit(X)  # 學習訓練.fit
+
+plot_contours(X, gmm.means, gmm.covs, "Initial clusters")
+plt.show()
+
+gmm = GMM(n_components=3, n_iters=50, tol=1e-4, seed=4)
+gmm.fit(X)  # 學習訓練.fit
+
+print("converged iteration:", len(gmm.log_likelihood_trace))
+plot_contours(X, gmm.means, gmm.covs, "Final clusters")
+plt.show()
+
+N_COMPONENTS = 3  # 要分成的群數
+print("使用GaussianMixture分成", N_COMPONENTS, "群")
+gmm = GaussianMixture(n_components=N_COMPONENTS, covariance_type="full", max_iter=600)
+gmm.fit(X)  # 學習訓練.fit
+
+plot_contours(X, gmm.means_, gmm.covariances_, "Final clusters")
+plt.show()
+
+# How many Gaussians?
+
+n_components = np.arange(1, 10)
+clfs = [GaussianMixture(n, max_iter=1000).fit(X) for n in n_components]
+bics = [clf.bic(X) for clf in clfs]
+aics = [clf.aic(X) for clf in clfs]
+
+plt.plot(n_components, bics, label="BIC")
+plt.plot(n_components, aics, label="AIC")
+plt.xlabel("n_components")
+plt.legend()
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+import plot_utils
+import sklearn
+
+colors = sns.color_palette()
+
+iris = datasets.load_iris()
+X = iris.data[:, :2]  # 'sepal length (cm)''sepal width (cm)'
+y_iris = iris.target
+
+gmm2 = GaussianMixture(n_components=2, covariance_type="full").fit(X)  # 學習訓練.fit
+gmm3 = GaussianMixture(n_components=3, covariance_type="full").fit(X)  # 學習訓練.fit
+gmm4 = GaussianMixture(n_components=4, covariance_type="full").fit(X)  # 學習訓練.fit
+
+plt.figure(figsize=(9, 3))
+plt.subplot(131)
+plt.scatter(
+    X[:, 0], X[:, 1], c=[colors[lab] for lab in gmm2.predict(X)]
+)  # , color=colors)
+for i in range(gmm2.covariances_.shape[0]):
+    plot_utils.plot_cov_ellipse(
+        cov=gmm2.covariances_[i, :],
+        pos=gmm2.means_[i, :],
+        facecolor="none",
+        linewidth=2,
+        edgecolor=colors[i],
+    )
+    plt.scatter(
+        gmm2.means_[i, 0],
+        gmm2.means_[i, 1],
+        edgecolor=colors[i],
+        marker="o",
+        s=100,
+        facecolor="w",
+        linewidth=2,
+    )
+plt.title("K=2")
+
+plt.subplot(132)
+plt.scatter(X[:, 0], X[:, 1], c=[colors[lab] for lab in gmm3.predict(X)])
+for i in range(gmm3.covariances_.shape[0]):
+    plot_utils.plot_cov_ellipse(
+        cov=gmm3.covariances_[i, :],
+        pos=gmm3.means_[i, :],
+        facecolor="none",
+        linewidth=2,
+        edgecolor=colors[i],
+    )
+    plt.scatter(
+        gmm3.means_[i, 0],
+        gmm3.means_[i, 1],
+        edgecolor=colors[i],
+        marker="o",
+        s=100,
+        facecolor="w",
+        linewidth=2,
+    )
+plt.title("K=3")
+
+plt.subplot(133)
+plt.scatter(
+    X[:, 0], X[:, 1], c=[colors[lab] for lab in gmm4.predict(X)]
+)  # .astype(np.float))
+for i in range(gmm4.covariances_.shape[0]):
+    plot_utils.plot_cov_ellipse(
+        cov=gmm4.covariances_[i, :],
+        pos=gmm4.means_[i, :],
+        facecolor="none",
+        linewidth=2,
+        edgecolor=colors[i],
+    )
+    plt.scatter(
+        gmm4.means_[i, 0],
+        gmm4.means_[i, 1],
+        edgecolor=colors[i],
+        marker="o",
+        s=100,
+        facecolor="w",
+        linewidth=2,
+    )
+_ = plt.title("K=4")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 貝葉斯信息量準則（Bayesian information criterion, BIC）
+
+iris = datasets.load_iris()
+X = iris.data
+y_iris = iris.target
+
+ks = np.arange(1, 10)
+bic = list()
+
+for k in ks:
+    N_COMPONENTS = k  # 要分成的群數
+    print("使用GaussianMixture分成", N_COMPONENTS, "群")
+    gmm = GaussianMixture(n_components=N_COMPONENTS, covariance_type="full")
+    gmm.fit(X)  # 學習訓練.fit
+    bic.append(gmm.bic(X))
+
+plt.plot(ks, bic)
+plt.xlabel("要分成的群數")
+plt.ylabel("貝葉斯信息量準則")
+show()
+
+k_chosen = ks[np.argmin(bic)]
+print("Choose k=", k_chosen)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# Density Estimation: Gaussian Mixture Models
+
+from scipy import stats
+
+sns.set()
+
+X = np.concatenate(
+    [
+        np.random.normal(0, 2, 2000),
+        np.random.normal(5, 5, 2000),
+        np.random.normal(3, 0.5, 600),
+    ]
+).reshape(-1, 1)
+
+
+plt.hist(X, 80)
+plt.xlim(-10, 20)
+show()
+
+clf = GaussianMixture(n_components=4)
+
+print(X.shape)
+
+clf.fit(X)
+
+xpdf = np.linspace(-10, 20, 4600).reshape(-1, 1)
+print(xpdf.shape)
+cc = clf.score_samples(xpdf)
+print(cc)
+density = np.exp(clf.score_samples(xpdf))
+
+plt.hist(X, 80, density=True, alpha=0.5)
+plt.plot(xpdf, density, "-r")
+plt.xlim(-10, 20)
+show()
+
+print(clf.means_)
+print(clf.covariances_)
+print(clf.weights_)
+
+plt.hist(X, 80, density=True, alpha=0.3)
+plt.plot(xpdf, density, "-r")
+
+for i in range(clf.n_components):
+    pdf = clf.weights_[i] * stats.norm(
+        clf.means_[i, 0], np.sqrt(clf.covariances_[i, 0])
+    ).pdf(xpdf)
+    plt.fill(xpdf, pdf, facecolor="gray", edgecolor="none", alpha=0.3)
+plt.xlim(-10, 20)
+show()
+
+# How many Gaussians?
+# Given a model, we can use one of several means to evaluate how well it fits the data. For example, there is the Aikaki Information Criterion (AIC) and the Bayesian Information Criterion (BIC)
+print(clf.bic(X))
+print(clf.aic(X))
+
+# Let's take a look at these as a function of the number of gaussians:
+
+n_estimators = np.arange(1, 10)
+clfs = [GaussianMixture(n).fit(X) for n in n_estimators]
+bics = [clf.bic(X) for clf in clfs]
+aics = [clf.aic(X) for clf in clfs]
+
+plt.plot(n_estimators, bics, label="BIC")
+plt.plot(n_estimators, aics, label="AIC")
+plt.legend()
+show()
+
+print("選取 AIC 和 BIC 最小的 分群數目")
+# It appears that for both the AIC and BIC, 4 components is preferred.
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# Example: GMM For Outlier Detection
+
+# Outlier : 離開本體的部分；分離物；露宿者
+
+# GMM is what's known as a Generative Model: it's a probabilistic model from which a dataset can be generated. One thing that generative models can be useful for is outlier detection: we can simply evaluate the likelihood of each point under the generative model the points with a suitably low likelihood (where "suitable" is up to your own bias/variance preference) can be labeld outliers.
+
+X = np.concatenate(
+    [
+        np.random.normal(0, 2, 2000),
+        np.random.normal(5, 5, 2000),
+        np.random.normal(3, 0.5, 600),
+    ]
+).reshape(-1, 1)
+print(X.shape)
+
+# Add 20 outliers
+true_outliers = np.sort(np.random.randint(0, len(X), 20))
+print("選出20個突出值的index :", true_outliers)
+
+y = X.copy()
+y[true_outliers] += 50 * np.random.randn()
+
+clf = GaussianMixture(4).fit(y)
+xpdf = np.linspace(-10, 20, 1000).reshape(-1, 1)
+print(xpdf.shape)
+cc = clf.score_samples(xpdf)
+print(cc)
+
+density_noise = np.exp(clf.score_samples(xpdf))
+
+plt.hist(y, 80, density=True, alpha=0.5)
+plt.plot(xpdf, density_noise, "-r")
+# plt.xlim(-10, 20)
+show()
+
+# Now let's evaluate the log-likelihood of each point under the model, and plot these as a function of y:
+
+log_likelihood = clf.score_samples(y)
+plt.plot(y, log_likelihood, ".k")
+show()
+
+detected_outliers = np.where(log_likelihood < -9)[0]
+
+print("true outliers:")
+print(true_outliers)
+print("\ndetected outliers:")
+print(detected_outliers)
+
+cc = set(true_outliers) - set(detected_outliers)
+print(cc)
+
+cc = set(detected_outliers) - set(true_outliers)
+print(cc)
+
+""" NG
+# Other Density Estimators
+
+from sklearn.neighbors import KernelDensity
+
+#kde = KernelDensity(kernel='gaussian', bandwidth=0.15).fit(X[:, None])
+kde = KernelDensity(kernel='gaussian', bandwidth=0.15).fit(X)
+
+density_kde = np.exp(kde.score_samples(xpdf[:, None]))
+"""
+plt.hist(X, 80, density=True, alpha=0.5)
+plt.plot(xpdf, density_noise, "-r", label="GMM")
+# plt.plot(xpdf, density_kde, "-g", label="KDE")
+plt.xlim(-10, 20)
+plt.legend()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

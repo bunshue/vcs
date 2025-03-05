@@ -539,7 +539,7 @@ for key, item in grouped_df:
 # 預測
 
 # 預測10個進球數
-cc = model.predict(10)  # 第一組
+cc = model.predict(10)  # 預測.predict  # 第一組
 print(cc)
 
 """  # 無 sklearn SP
@@ -582,7 +582,7 @@ plt.title("用KMeans分成3群")
 # 再預測500點
 N = 500
 X_test = np.random.rand(N, 2)
-y_pred = clf.predict(X_test)
+y_pred = clf.predict(X_test)  # 預測.predict
 
 plt.subplot(133)
 plt.scatter(X_test[:, 0], X_test[:, 1], c=y_pred)
@@ -1006,7 +1006,7 @@ clf = KMeans(n_clusters=CLUSTERS)  # K-平均演算法
 
 clf.fit(X)  # 學習訓練.fit
 
-y_pred = clf.predict(X)
+y_pred = clf.predict(X)  # 預測.predict
 
 print(f"{accuracy_score(y, y_pred)*100:.2f}%")
 score = accuracy_score(y, y_pred)
@@ -1045,7 +1045,7 @@ silhouette_avg = []
 for i in range(2, 11):
     clf = KMeans(n_clusters=i)  # K-平均演算法
     clf.fit(X)  # 學習訓練.fit
-    # y_pred = clf.predict(X) same
+    # y_pred = clf.predict(X)  # 預測.predict same
     y_pred = clf.labels_  # 群集類別標籤
     cc = silhouette_score(X, y_pred)  # 計算輪廓係數
     silhouette_avg.append(cc)
@@ -1350,7 +1350,7 @@ clf = KMeans(n_clusters=CLUSTERS)  # K-平均演算法
 clf.fit(image_sample)  # 學習訓練.fit
 
 # 對所有像素進行集群
-y_pred = clf.predict(image_array)
+y_pred = clf.predict(image_array)  # 預測.predict
 
 image2 = reconstruct_image(clf.cluster_centers_, y_pred, w, h)
 
@@ -1401,15 +1401,15 @@ def recreate_image(codebook, labels, w, h):
 
 
 kmeans = cluster(32)
-labels = kmeans.predict(temp)
+labels = kmeans.predict(temp)  # 預測.predict
 kmeans_32 = recreate_image(kmeans.cluster_centers_, labels, width, height)
 
 kmeans = cluster(64)
-labels = kmeans.predict(temp)
+labels = kmeans.predict(temp)  # 預測.predict
 kmeans_64 = recreate_image(kmeans.cluster_centers_, labels, width, height)
 
 kmeans = cluster(128)
-labels = kmeans.predict(temp)
+labels = kmeans.predict(temp)  # 預測.predict
 kmeans_128 = recreate_image(kmeans.cluster_centers_, labels, width, height)
 
 plt.figure(figsize=(15, 10))
@@ -1529,7 +1529,7 @@ clf = GaussianMixture(n_components=n_components)
 
 clf.fit(X)  # 學習訓練.fit
 
-labels = clf.predict(X)
+labels = clf.predict(X)  # 預測.predict
 plt.scatter(X[:, 0], X[:, 1], c=labels, s=40, cmap="viridis")
 show()  # 4
 

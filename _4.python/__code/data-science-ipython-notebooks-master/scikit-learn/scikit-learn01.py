@@ -29,6 +29,7 @@ def show():
     plt.show()
     pass
 
+num_bins = 50  # 直方圖顯示時的束數
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -776,140 +777,6 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# Density Estimation: Gaussian Mixture Models
-
-from scipy import stats
-
-sns.set()
-
-# Introducing Gaussian Mixture Models
-
-X = np.concatenate(
-    [
-        np.random.normal(0, 2, 2000),
-        np.random.normal(5, 5, 2000),
-        np.random.normal(3, 0.5, 600),
-    ]
-).reshape(-1, 1)
-
-"""
-plt.hist(X, 80)
-plt.xlim(-10, 20)
-show()
-"""
-
-# Gaussian mixture models will allow us to approximate this density:
-
-# from sklearn.mixture import GMM
-from sklearn import mixture
-
-# 以後NG
-# clf = GMM(n_components=4, n_iter=500, random_state=3).fit(X)
-# clf = GMM(n_components=4,covariance_type='full')
-clf = mixture.GaussianMixture(n_components=4)
-
-print(X.shape)
-
-clf.fit(X)
-
-xpdf = np.linspace(-10, 20, 4600).reshape(-1, 1)
-print(xpdf.shape)
-cc = clf.score(xpdf)
-print(cc)
-print('ddd')
-density = np.exp(clf.score(xpdf))
-
-plt.hist(X, 80, alpha=0.5)
-plt.plot(xpdf, density, "-r")
-plt.xlim(-10, 20)
-show()
-
-print(clf.means_)
-print(clf.covars_)
-print(clf.weights_)
-
-plt.hist(X, 80, normed=True, alpha=0.3)
-plt.plot(xpdf, density, "-r")
-
-for i in range(clf.n_components):
-    pdf = clf.weights_[i] * stats.norm(
-        clf.means_[i, 0], np.sqrt(clf.covars_[i, 0])
-    ).pdf(xpdf)
-    plt.fill(xpdf, pdf, facecolor="gray", edgecolor="none", alpha=0.3)
-plt.xlim(-10, 20)
-show()
-
-# How many Gaussians?
-# Given a model, we can use one of several means to evaluate how well it fits the data. For example, there is the Aikaki Information Criterion (AIC) and the Bayesian Information Criterion (BIC)
-print(clf.bic(X))
-print(clf.aic(X))
-
-# Let's take a look at these as a function of the number of gaussians:
-
-n_estimators = np.arange(1, 10)
-clfs = [GMM(n, n_iter=1000).fit(X) for n in n_estimators]
-bics = [clf.bic(X) for clf in clfs]
-aics = [clf.aic(X) for clf in clfs]
-
-plt.plot(n_estimators, bics, label="BIC")
-plt.plot(n_estimators, aics, label="AIC")
-plt.legend()
-show()
-
-# It appears that for both the AIC and BIC, 4 components is preferred.
-
-# Example: GMM For Outlier Detection
-
-# GMM is what's known as a Generative Model: it's a probabilistic model from which a dataset can be generated. One thing that generative models can be useful for is outlier detection: we can simply evaluate the likelihood of each point under the generative model the points with a suitably low likelihood (where "suitable" is up to your own bias/variance preference) can be labeld outliers.
-
-np.random.seed(0)
-
-# Add 20 outliers
-true_outliers = np.sort(np.random.randint(0, len(X), 20))
-y = X.copy()
-y[true_outliers] += 50 * np.random.randn(20)
-
-clf = GMM(4, n_iter=500, random_state=0).fit(y)
-xpdf = np.linspace(-10, 20, 1000)
-density_noise = np.exp(clf.score(xpdf))
-
-plt.hist(y, 80, normed=True, alpha=0.5)
-plt.plot(xpdf, density_noise, "-r")
-# plt.xlim(-10, 20)
-show()
-
-# Now let's evaluate the log-likelihood of each point under the model, and plot these as a function of y:
-
-log_likelihood = clf.score_samples(y)[0]
-plt.plot(y, log_likelihood, ".k")
-show()
-
-detected_outliers = np.where(log_likelihood < -9)[0]
-
-print("true outliers:")
-print(true_outliers)
-print("\ndetected outliers:")
-print(detected_outliers)
-
-cc = set(true_outliers) - set(detected_outliers)
-print(cc)
-
-cc = set(detected_outliers) - set(true_outliers)
-print(cc)
-
-# Other Density Estimators
-
-from sklearn.neighbors import KernelDensity
-
-kde = KernelDensity(0.15).fit(X[:, None])
-density_kde = np.exp(kde.score_samples(xpdf[:, None]))
-
-plt.hist(X, 80, normed=True, alpha=0.5)
-plt.plot(xpdf, density, "-b", label="GMM")
-plt.plot(xpdf, density_kde, "-r", label="KDE")
-plt.xlim(-10, 20)
-plt.legend()
-show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
