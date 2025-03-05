@@ -1,3 +1,41 @@
+"""
+ml01_knn
+
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+# 共同
+import os
+import sys
+import time
+import math
+import random
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns  # 海生, 自動把圖畫得比較好看
+
+font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+# 設定中文字型及負號正確顯示
+# 設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
+# 設定負號
+plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+plt.rcParams["font.size"] = 12  # 設定字型大小
+
+def show():
+    plt.show()
+    pass
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+#支持向量机
+#线性支持向量机
+#线性支持向量机的TensorFlw实现
+
 import matplotlib.pyplot as plt
 import numpy as np
 import tensorflow as tf
@@ -7,6 +45,8 @@ ops.reset_default_graph()
 
 # 创建计算图
 sess = tf.Session()
+
+# 加载数据并划分数据，80%数据用来训练，20%的数据用来做测试
 
 #加载数据
 # iris数据 [(Sepal Length, Sepal Width, Petal Length, Petal Width)]
@@ -71,25 +111,25 @@ for i in range(max_iter):
     rand_x = x_vals_train[rand_index]
     rand_y = np.transpose([y_vals_train[rand_index]])
     sess.run(train_step, feed_dict={x_data: rand_x, y_target: rand_y})
-
+    
     temp_loss = sess.run(loss, feed_dict={x_data: rand_x, y_target: rand_y})
     loss_vec.append(temp_loss)
-
+    
     train_acc_temp = sess.run(accuracy, feed_dict={x_data: x_vals_train, y_target: np.transpose([y_vals_train])})
     train_accuracy.append(train_acc_temp)
-
+    
     test_acc_temp = sess.run(accuracy, feed_dict={x_data: x_vals_test, y_target: np.transpose([y_vals_test])})
     test_accuracy.append(test_acc_temp)
-
-    if (i + 1) % 100 == 0:
-        print('Step #' + str(i + 1) + ' A = ' + str(sess.run(A)) + ' b = ' + str(sess.run(b)))
+    
+    if (i+1)%100==0:
+        print('Step #' + str(i+1) + ' A = ' + str(sess.run(A)) + ' b = ' + str(sess.run(b)))
         print('损失为 ' + str(temp_loss))
 
 # 提取系数
 [[a1], [a2]] = sess.run(A)
 [[b]] = sess.run(b)
-slope = -a2 / a1
-y_intercept = b / a1
+slope = -a2/a1
+y_intercept = b/a1
 
 # 提取 x1 and x2 vals
 x1_vals = [d[1] for d in x_vals]
@@ -97,13 +137,13 @@ x1_vals = [d[1] for d in x_vals]
 # Get best fit line
 best_fit = []
 for i in x1_vals:
-    best_fit.append(slope * i + y_intercept)
+  best_fit.append(slope*i+y_intercept)
 
 # 分离数据
-setosa_x = [d[1] for i, d in enumerate(x_vals) if y_vals[i] == 1]
-setosa_y = [d[0] for i, d in enumerate(x_vals) if y_vals[i] == 1]
-not_setosa_x = [d[1] for i, d in enumerate(x_vals) if y_vals[i] == -1]
-not_setosa_y = [d[0] for i, d in enumerate(x_vals) if y_vals[i] == -1]
+setosa_x = [d[1] for i,d in enumerate(x_vals) if y_vals[i]==1]
+setosa_y = [d[0] for i,d in enumerate(x_vals) if y_vals[i]==1]
+not_setosa_x = [d[1] for i,d in enumerate(x_vals) if y_vals[i]==-1]
+not_setosa_y = [d[0] for i,d in enumerate(x_vals) if y_vals[i]==-1]
 
 # 分类效果展示
 plt.plot(setosa_x, setosa_y, 'o', label='I. setosa')
@@ -131,3 +171,29 @@ plt.title('Loss per Generation')
 plt.xlabel('Generation')
 plt.ylabel('Loss')
 plt.show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
+sys.exit()
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個

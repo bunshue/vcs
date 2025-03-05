@@ -1,8 +1,45 @@
+"""
+no linear svm
+
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+# 共同
+import os
+import sys
+import time
+import math
+import random
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns  # 海生, 自動把圖畫得比較好看
+
+font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+# 設定中文字型及負號正確顯示
+# 設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
+# 設定負號
+plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+plt.rcParams["font.size"] = 12  # 設定字型大小
+
+def show():
+    plt.show()
+    pass
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+#非线性支持向量机
+
 import matplotlib.pyplot as plt
 import numpy as np
 import tensorflow as tf
 from sklearn import datasets
 from tensorflow.python.framework import ops
+
 ops.reset_default_graph()
 
 sess = tf.Session()
@@ -18,7 +55,8 @@ class1_y = [x[1] for i,x in enumerate(x_vals) if y_vals[i]==1]
 class2_x = [x[0] for i,x in enumerate(x_vals) if y_vals[i]==-1]
 class2_y = [x[1] for i,x in enumerate(x_vals) if y_vals[i]==-1]
 
-#声明变量
+# 声明模型变量
+
 # 批量大小
 batch_size = 150
 
@@ -30,18 +68,21 @@ prediction_grid = tf.placeholder(shape=[None, 2], dtype=tf.float32)
 # 创建变量
 b = tf.Variable(tf.random_normal(shape=[1,batch_size]))
 
-#高斯核函数
-# 高斯核函数 (RBF)
+#本案例采用高斯核函数，将低维空间数据转换为高维空间数据
+
+# 高斯核函数 (RBF) 
 gamma = tf.constant(-50.0)
 sq_vec = tf.multiply(2., tf.matmul(x_data, tf.transpose(x_data)))
 my_kernel = tf.exp(tf.multiply(gamma, tf.abs(sq_vec)))
 
-## SVM模型的损失函数
+# SVM模型的损失函数
 first_term = tf.reduce_sum(b)
 b_vec_cross = tf.matmul(tf.transpose(b), b)
 y_target_cross = tf.matmul(y_target, tf.transpose(y_target))
 second_term = tf.reduce_sum(tf.multiply(my_kernel, tf.multiply(b_vec_cross, y_target_cross)))
 loss = tf.negative(tf.subtract(first_term, second_term))
+
+#声明预测时所采用的的核函数 RBF
 
 rA = tf.reshape(tf.reduce_sum(tf.square(x_data), 1),[-1,1])
 rB = tf.reshape(tf.reduce_sum(tf.square(prediction_grid), 1),[-1,1])
@@ -61,7 +102,6 @@ train_step = my_opt.minimize(loss)
 init = tf.global_variables_initializer()
 sess.run(init)
 
-#开始训练
 # 开始训练
 loss_vec = []
 batch_accuracy = []
@@ -70,17 +110,17 @@ for i in range(300):
     rand_x = x_vals[rand_index]
     rand_y = np.transpose([y_vals[rand_index]])
     sess.run(train_step, feed_dict={x_data: rand_x, y_target: rand_y})
-
+    
     temp_loss = sess.run(loss, feed_dict={x_data: rand_x, y_target: rand_y})
     loss_vec.append(temp_loss)
-
+    
     acc_temp = sess.run(accuracy, feed_dict={x_data: rand_x,
                                              y_target: rand_y,
-                                             prediction_grid: rand_x})
+                                             prediction_grid:rand_x})
     batch_accuracy.append(acc_temp)
-
-    if (i + 1) % 75 == 0:
-        print('Step #' + str(i + 1))
+    
+    if (i+1)%75==0:
+        print('Step #' + str(i+1))
         print('Loss = ' + str(temp_loss))
 
 #构建绘图时的数据点
@@ -121,3 +161,30 @@ plt.title('Loss per Generation')
 plt.xlabel('Generation')
 plt.ylabel('Loss')
 plt.show()
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
+sys.exit()
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
