@@ -102,16 +102,18 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
-import tensorflow as tf
+# import tensorflow as tf
 from sklearn import datasets
 from sklearn import preprocessing
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
 from sklearn.preprocessing import StandardScaler  # 用於標準化數據，即將數據轉換為均值為0，方差為1的分佈。
-from tensorflow.keras.callbacks import TensorBoard
-from tensorflow.keras.models import model_from_json
+
+# from tensorflow.keras.callbacks import TensorBoard
+# from tensorflow.keras.models import model_from_json
 from sklearn.metrics import accuracy_score
 from sklearn.decomposition import NMF
 from sklearn.cluster import KMeans  # K均值聚類分析
+from sklearn.datasets import make_blobs  # 集群資料集
 
 
 def show():
@@ -160,8 +162,16 @@ mu1, sigma1 = 0, 4
 mu2, sigma2 = 5, 4
 x1 = np.random.normal(mu1, sigma1, size=(N, 2))
 x2 = np.random.normal(mu2, sigma2, size=(N, 2))
-
 X = np.concatenate([x1, x2], axis=0)
+
+"""
+N = 100  # n_samples, 樣本數
+M = 2  # n_features, 特徵數(資料的維度)
+GROUPS = 2  # centers, 分群數
+STD = 0.60  # cluster_std, 資料標準差
+print("make_blobs,", N, "個樣本, ", M, "個特徵, 分成", GROUPS, "群")
+X, y_true = make_blobs(n_samples=N, centers=GROUPS, cluster_std=STD)
+"""
 
 plt.subplot(221)
 plt.hist(X, bins=100, alpha=0.6)
@@ -172,7 +182,7 @@ plt.scatter(x1[:, 0], x1[:, 1], c="r")
 plt.scatter(x2[:, 0], x2[:, 1], c="g")
 
 # 构建GMM模型
-N_COMPONENTS = 3  # 要分成的群數
+N_COMPONENTS = 2  # 要分成的群數
 print("使用GaussianMixture分成", N_COMPONENTS, "群")
 gmm = GaussianMixture(n_components=N_COMPONENTS, covariance_type="full")
 
@@ -414,8 +424,6 @@ print("------------------------------------------------------------")  # 60個
 sns.set()
 
 # 正如剛開始說的，可以查看上圖黃色的數據及紫色的資料數據，位置極為接近，很難將資料做正確的分群
-
-from sklearn.datasets import make_blobs  # 集群資料集
 
 N = 400  # n_samples, 樣本數
 M = 2  # n_features, 特徵數(資料的維度)

@@ -1,3 +1,9 @@
+"""
+要一次執行一個
+
+
+"""
+
 import sys
 import time
 
@@ -8,12 +14,12 @@ from flexx import flx
 
 
 class Example(flx.Widget):
-    # 内置CSS定义样式，还是要学一点html的相关知识的
+    # 内置CSS定义样式
     CSS = """
     .flx-Label {
         background: #9d9;
-        width:200px;
-        height:3px
+        width:300px;
+        height:100px
     }
     """
 
@@ -22,13 +28,14 @@ class Example(flx.Widget):
 
 
 # 网页的标题名和样式定义，注意这个样式是指html或body的背景颜色定义
-app = flx.App(Example, title="Temperature 1951 - 2014", style="background:pink;")
+app = flx.App(Example, title="網頁標題", style="background:pink;")
 # 导出或者保存为一张单html文件
-# app.export('example.html', link=0)  # Export to single file
+# app.export('example.html', link=0)  # 匯出檔案
 app.launch("browser")  # show it now in a browser
 # flx.run()  # enter the mainloop
 flx.start()  # 与run小区别就是退出循环，还可再启动
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 带CSS的转动的点组成的圆：
@@ -71,11 +78,11 @@ class Circles(flx.Widget):
         window.setTimeout(self.tick, 30)
 
 
-if __name__ == "__main__":
-    # m = flx.App(Circles).launch('app')  #指定火狐浏览器，容易报错
-    m = flx.App(Circles).launch()  # 打开默认浏览器，谷歌浏览器
-    flx.run()
+# m = flx.App(Circles).launch('app')  #指定火狐浏览器，容易报错
+m = flx.App(Circles).launch()  # 打开默认浏览器，谷歌浏览器
+flx.run()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 6 带滑动条的sin绘图：
@@ -113,10 +120,10 @@ class SineExample(flx.Widget):
         self.plot.set_data(self.plot.xdata, ydata)
 
 
-if __name__ == "__main__":
-    m = flx.launch(SineExample)
-    flx.run()
+m = flx.launch(SineExample)
+flx.run()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 7 主题表单：
@@ -151,11 +158,11 @@ class ThemedForm(flx.Widget):
                 flx.Widget(flex=1)  # 没有间隙空行的
 
 
-if __name__ == "__main__":
-    # m = flx.launch(ThemedForm, 'app')  #报错，这是默认火狐浏览器的
-    m = flx.launch(ThemedForm)  # 启动本机默认的谷歌浏览器
-    flx.run()
+# m = flx.launch(ThemedForm, 'app')  #报错，这是默认火狐浏览器的
+m = flx.launch(ThemedForm)  # 启动本机默认的谷歌浏览器
+flx.run()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # NG
@@ -174,12 +181,12 @@ class MyApp(flx.App):
         self.label.set_text("Button clicked!")
 
 
-if __name__ == "__main__":
-    app = MyApp()
-    app.launch()
+app = MyApp()
+app.launch()
 
 # 在这个示例中，我们创建了一个简单的Flexx应用程序，包含一个按钮和一个标签。当用户点击按钮时，标签的文本会更新为#“Button clicked!”。
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # NG
@@ -205,12 +212,12 @@ class ChartApp(flx.App):
         self.plot.plot(self.x, self.y)
 
 
-if __name__ == "__main__":
-    app = ChartApp()
-    app.launch()
+app = ChartApp()
+app.launch()
 
 # 在这个示例中，我们创建了一个实时更新的图表应用程序，每秒更新一次图表的数据。用户可以看到随着时间的推移，图表中的数据会不断变化。
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # NG
@@ -233,6 +240,7 @@ class HelloWorld(ui.Widget):
 app.serve(HelloWorld)
 app.start()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # NG
@@ -262,3 +270,5 @@ app.serve(ResponsiveLayout)
 app.start()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+

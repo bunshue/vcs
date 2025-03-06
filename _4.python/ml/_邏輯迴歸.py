@@ -53,13 +53,13 @@ from sklearn import linear_model
 
 
 def show():
-    # plt.show()
+    plt.show()
     pass
 
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
+
 N = 500  # n_samples, 樣本數
 M = 2  # n_features, 特徵數(資料的維度)
 GROUPS = 3  # centers, 分群數
@@ -1600,7 +1600,7 @@ ks_2samp(fpr_test, tpr_test)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
+
 # # 逻辑回归
 # 信用风险建模案例
 ##数据说明：本数据是一份汽车贷款违约数据
@@ -2612,6 +2612,488 @@ plt.show(fig)
 fig = woe2.plot()
 plt.show(fig)
 """
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+"""
+逻辑斯谛回归
+逻辑斯谛回归(Logistic Regression, LR)是统计学习中的经典分类方法。常见的逻辑斯谛回归模型包括二项逻辑斯谛回归、多项逻辑斯谛回归(多项逻辑斯谛回归可以看做是二项LR的扩展).
+"""
+
+# LogisticRegression算法案例 python实现(iris数据)
+
+from math import exp
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+
+# 定义LR回归模型
+
+
+class LogisticReression:
+    def __init__(self, max_iter=200, learning_rate=0.01):
+        self.max_iter = max_iter
+        self.learning_rate = learning_rate
+
+    def sigmoid(self, x):
+        return 1 / (1 + exp(-x))
+
+    def data_matrix(self, X):
+        data_mat = []
+        for d in X:
+            data_mat.append([1.0, *d])
+        return data_mat
+
+    # 训练
+    def train(self, X, y):
+        # label = np.mat(y)
+        data_mat = self.data_matrix(X)  # m*n
+        self.weights = np.zeros((len(data_mat[0]), 1), dtype=np.float32)
+
+        for iter_ in range(self.max_iter):
+            for i in range(len(X)):
+                result = self.sigmoid(np.dot(data_mat[i], self.weights))
+                error = y[i] - result
+                self.weights += self.learning_rate * error * np.transpose([data_mat[i]])
+        print("LR模型学习率={},最大迭代次数={}".format(self.learning_rate, self.max_iter))
+
+    # 准确率
+    def accuracy(self, X_test, y_test):
+        right = 0
+        X_test = self.data_matrix(X_test)
+        for x, y in zip(X_test, y_test):
+            result = np.dot(x, self.weights)
+            if (result > 0 and y == 1) or (result < 0 and y == 0):
+                right += 1
+        return right / len(X_test)
+
+
+# 构建数据
+
+
+def create_data():
+    iris = load_iris()
+    df = pd.DataFrame(iris.data, columns=iris.feature_names)
+    df["label"] = iris.target
+    df.columns = ["sepal length", "sepal width", "petal length", "petal width", "label"]
+    data = np.array(df.iloc[:100, [0, 1, -1]])
+    return data[:, :2], data[:, -1]
+
+
+X, y = create_data()
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
+
+# 训练数据
+LR = LogisticReression()
+LR.train(X_train, y_train)
+
+# LR模型学习率=0.01,最大迭代次数=200
+
+# 计算测试精度
+
+LR.accuracy(X_test, y_test)
+
+# 1.0
+
+# 效果展示
+
+x_ponits = np.arange(3, 9)
+y_ = -(LR.weights[1] * x_ponits + LR.weights[0]) / LR.weights[2]
+plt.plot(x_ponits, y_)
+
+# 绘制图
+plt.scatter(X[:50, 0], X[:50, 1], label="0")
+plt.scatter(X[50:, 0], X[50:, 1], label="1")
+plt.legend()
+
+show()
+
+
+# sklearn中的LogisticRegression案例代码
+
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn import metrics
+import seaborn as sn
+
+# 第一步：构建数据集
+
+candidates = {
+    "gmat": [
+        780,
+        750,
+        690,
+        710,
+        680,
+        730,
+        690,
+        720,
+        740,
+        690,
+        610,
+        690,
+        710,
+        680,
+        770,
+        610,
+        580,
+        650,
+        540,
+        590,
+        620,
+        600,
+        550,
+        550,
+        570,
+        670,
+        660,
+        580,
+        650,
+        660,
+        640,
+        620,
+        660,
+        660,
+        680,
+        650,
+        670,
+        580,
+        590,
+        690,
+    ],
+    "gpa": [
+        4,
+        3.9,
+        3.3,
+        3.7,
+        3.9,
+        3.7,
+        2.3,
+        3.3,
+        3.3,
+        1.7,
+        2.7,
+        3.7,
+        3.7,
+        3.3,
+        3.3,
+        3,
+        2.7,
+        3.7,
+        2.7,
+        2.3,
+        3.3,
+        2,
+        2.3,
+        2.7,
+        3,
+        3.3,
+        3.7,
+        2.3,
+        3.7,
+        3.3,
+        3,
+        2.7,
+        4,
+        3.3,
+        3.3,
+        2.3,
+        2.7,
+        3.3,
+        1.7,
+        3.7,
+    ],
+    "work_experience": [
+        3,
+        4,
+        3,
+        5,
+        4,
+        6,
+        1,
+        4,
+        5,
+        1,
+        3,
+        5,
+        6,
+        4,
+        3,
+        1,
+        4,
+        6,
+        2,
+        3,
+        2,
+        1,
+        4,
+        1,
+        2,
+        6,
+        4,
+        2,
+        6,
+        5,
+        1,
+        2,
+        4,
+        6,
+        5,
+        1,
+        2,
+        1,
+        4,
+        5,
+    ],
+    "admitted": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+    ],
+}
+
+df = pd.DataFrame(candidates, columns=["gmat", "gpa", "work_experience", "admitted"])
+
+df[:10]
+
+X = df[["gmat", "gpa", "work_experience"]]
+y = df["admitted"]
+#  75%的数据用来做训练集，25%的数据用作测试集
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.25, random_state=0
+)
+
+logistic_regression = LogisticRegression()
+# 训练
+logistic_regression.fit(X_train, y_train)
+# 预测
+y_pred = logistic_regression.predict(X_test)
+
+# 绘制热力图
+confusion_matrix = pd.crosstab(
+    y_test, y_pred, rownames=["Actual"], colnames=["Predicted"]
+)
+sn.heatmap(confusion_matrix, annot=True)
+plt.show()
+print("精度: ", metrics.accuracy_score(y_test, y_pred))
+
+# 精度:  0.8
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+"""
+最大熵模型
+
+最大熵模型(maximum entropy model)可以用于二分类，也可以用于多分类。其是由最大熵原理推导实现的，所以讲最大熵模型时，绕不开最大熵原理。
+最大熵原理
+
+什么是最大熵原理？ 最大熵原理认为，学习概率模型时，在所有可能的概率模型（概率分布）中，熵最大的模型就是最好的模型。最大熵原理通常表述为在满足约束条件的模型集合中选取熵最大的模型。
+"""
+
+# 求解上述最优化问题的对偶问题便可得到最大熵模型。
+
+import math
+from copy import deepcopy
+
+
+class MaxEntropy:
+    def __init__(self, EPS=0.005):
+        self._samples = []
+        self._label_y = set()  # 标签集合，相当去去重后的y
+        self._numXY = {}  # key为(x,y)，value为出现次数
+        self._samples_num = 0  # 样本数
+        self._Ep_ = []  # 样本分布的特征期望值
+        self._xyID = {}  # key记录(x,y),value记录id号
+        self._xy_num = 0  # 特征键值(x,y)的个数
+        self._max_feature_num = 0  # 最大特征数
+        self._IDxy = {}  # key为(x,y)，value为对应的id号
+        self._weights = []
+        self._EPS = EPS  # 收敛条件
+        self._last_weights = []  # 上一次w参数值
+
+    def loadData(self, dataset):
+        self._samples = deepcopy(dataset)
+        for items in self._samples:
+            y = items[0]
+            X = items[1:]
+            self._label_y.add(y)  # 集合中y若已存在则会自动忽略
+            for x in X:
+                if (x, y) in self._numXY:
+                    self._numXY[(x, y)] += 1
+                else:
+                    self._numXY[(x, y)] = 1
+
+        self._samples_num = len(self._samples)
+        self._xy_num = len(self._numXY)
+        self._max_feature_num = max([len(sample) - 1 for sample in self._samples])
+        self._weights = [0] * self._xy_num
+        self._last_weights = self._weights[:]
+
+        self._Ep_ = [0] * self._xy_num
+        for i, xy in enumerate(self._numXY):  # 计算特征函数fi关于经验分布的期望
+            self._Ep_[i] = self._numXY[xy] / self._samples_num
+            self._xyID[xy] = i
+            self._IDxy[i] = xy
+
+    # 计算每个Z(x)值
+    def _calc_zx(self, X):
+        zx = 0
+        for y in self._label_y:
+            temp = 0
+            for x in X:
+                if (x, y) in self._numXY:
+                    temp += self._weights[self._xyID[(x, y)]]
+            zx += math.exp(temp)
+        return zx
+
+    # 计算每个P(y|x)
+    def _calu_model_pyx(self, y, X):
+        zx = self._calc_zx(X)
+        temp = 0
+        for x in X:
+            if (x, y) in self._numXY:
+                temp += self._weights[self._xyID[(x, y)]]
+        pyx = math.exp(temp) / zx
+        return pyx
+
+    # 计算特征函数fi关于模型的期望
+    def _calc_model_ep(self, index):
+        x, y = self._IDxy[index]
+        ep = 0
+        for sample in self._samples:
+            if x not in sample:
+                continue
+            pyx = self._calu_model_pyx(y, sample)
+            ep += pyx / self._samples_num
+        return ep
+
+    # 判断是否全部收敛
+    def _convergence(self):
+        for last, now in zip(self._last_weights, self._weights):
+            if abs(last - now) >= self._EPS:
+                return False
+        return True
+
+    # 计算预测概率
+    def predict(self, X):
+        Z = self._calc_zx(X)
+        result = {}
+        for y in self._label_y:
+            ss = 0
+            for x in X:
+                if (x, y) in self._numXY:
+                    ss += self._weights[self._xyID[(x, y)]]
+            pyx = math.exp(ss) / Z
+            result[y] = pyx
+        return result
+
+    # 训练
+    def train(self, maxiter=1000):
+        for loop in range(maxiter):
+            print("迭代次数:%d" % loop)
+            self._last_weights = self._weights[:]
+            for i in range(self._xy_num):
+                ep = self._calc_model_ep(i)  # 计算第i个特征的模型期望
+                self._weights[i] += (
+                    math.log(self._Ep_[i] / ep) / self._max_feature_num
+                )  # 更新参数
+            print("权值:", self._weights)
+            if self._convergence():  # 判断是否收敛
+                break
+
+
+dataset = [
+    ["no", "sunny", "hot", "high", "FALSE"],
+    ["no", "sunny", "hot", "high", "TRUE"],
+    ["yes", "overcast", "hot", "high", "FALSE"],
+    ["yes", "rainy", "mild", "high", "FALSE"],
+    ["yes", "rainy", "cool", "normal", "FALSE"],
+    ["no", "rainy", "cool", "normal", "TRUE"],
+    ["yes", "overcast", "cool", "normal", "TRUE"],
+    ["no", "sunny", "mild", "high", "FALSE"],
+    ["yes", "sunny", "cool", "normal", "FALSE"],
+    ["yes", "rainy", "mild", "normal", "FALSE"],
+    ["yes", "sunny", "mild", "normal", "TRUE"],
+    ["yes", "overcast", "mild", "high", "TRUE"],
+    ["yes", "overcast", "hot", "normal", "FALSE"],
+    ["no", "rainy", "mild", "high", "TRUE"],
+]
+
+maxent = MaxEntropy()
+x = ["overcast", "mild", "high", "FALSE"]
+
+maxent.loadData(dataset)
+maxent.train(maxiter=100)
+
+print("精度:", maxent.predict(x))
+
+# 精度: {'no': 0.0015600198042872487, 'yes': 0.9984399801957127}
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
