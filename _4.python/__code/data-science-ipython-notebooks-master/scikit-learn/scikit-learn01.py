@@ -34,21 +34,32 @@ num_bins = 50  # 直方圖顯示時的束數
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-from sklearn.linear_model import LinearRegression
 from scipy import stats
+from sklearn import neighbors
+from sklearn import datasets
 
-sns.set()
+from sklearn.datasets import make_blobs  # 集群資料集
+from sklearn.datasets import make_circles
 
-from IPython.display import Image
+from sklearn.svm import SVC
+from sklearn.cluster import KMeans
+from sklearn.decomposition import PCA
+from sklearn.linear_model import LinearRegression
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.tree import DecisionTreeClassifier
 
-Image("ml_map.png", width=800)
+from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
+
+from sklearn.model_selection import validation_curve
+from sklearn.metrics import accuracy_score
+from sklearn.metrics import mean_squared_error
+from sklearn.model_selection import cross_val_score
 
 print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
 
-from sklearn.datasets import load_iris
-
-iris = load_iris()
+iris = datasets.load_iris()
 
 n_samples, n_features = iris.data.shape
 print(iris.keys())
@@ -80,8 +91,6 @@ show()
 
 # K-Nearest Neighbors Classifier
 # The K-Nearest Neighbors (KNN) algorithm is a method used for algorithm used for classification or for regression. In both cases, the input consists of the k closest training examples in the feature space. Given a new, unknown observation, look up which points have the closest features and assign the predominant class.
-
-from sklearn import neighbors, datasets
 
 iris = datasets.load_iris()
 X, y = iris.data, iris.target
@@ -115,10 +124,10 @@ from fig_code import plot_iris_knn
 plot_iris_knn()
 show()
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
 
-from sklearn.linear_model import LinearRegression
+sys.exit()
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 sns.set()
 
@@ -151,19 +160,13 @@ print("------------------------------------------------------------")  # 60個
 
 # scikit-learn-k-means
 
-from sklearn.linear_model import LinearRegression
-from scipy import stats
-
 sns.set()
 
 # K-Means Clustering
 
-from sklearn import neighbors, datasets
-
 iris = datasets.load_iris()
 
 X, y = iris.data, iris.target
-from sklearn.decomposition import PCA
 
 pca = PCA(n_components=2)
 pca.fit(X)
@@ -182,8 +185,6 @@ for component in pca.components_:
     )
 show()
 
-from sklearn.cluster import KMeans
-
 k_means = KMeans(n_clusters=3, random_state=0)  # Fixing the RNG in kmeans
 k_means.fit(X)
 y_pred = k_means.predict(X)
@@ -191,13 +192,9 @@ y_pred = k_means.predict(X)
 plt.scatter(X_reduced[:, 0], X_reduced[:, 1], c=y_pred, cmap="RdYlBu")
 show()
 
-from sklearn.datasets import make_blobs  # 集群資料集
-
 X, y = make_blobs(n_samples=300, centers=4, random_state=0, cluster_std=0.60)
 plt.scatter(X[:, 0], X[:, 1], s=50)
 show()
-
-from sklearn.cluster import KMeans
 
 est = KMeans(4)  # 4 clusters
 est.fit(X)
@@ -217,14 +214,9 @@ print("------------------------------------------------------------")  # 60個
 
 # scikit-learn-svm
 
-from sklearn.linear_model import LinearRegression
-from scipy import stats
-
 sns.set()
 
 # Support Vector Machine Classifier
-
-from sklearn.datasets import make_blobs  # 集群資料集
 
 X, y = make_blobs(n_samples=50, centers=2, random_state=0, cluster_std=0.60)
 
@@ -241,8 +233,6 @@ for m, b, d in [(1, 0.65, 0.33), (0.5, 1.6, 0.55), (-0.2, 2.9, 0.2)]:
 
 plt.xlim(-1, 3.5)
 show()
-
-from sklearn.svm import SVC
 
 clf = SVC(kernel="linear")
 clf.fit(X, y)
@@ -299,10 +289,6 @@ show()
 print("------------------------------------------------------------")  # 60個
 
 # Support Vector Machine with Kernels Classifier
-from sklearn.svm import SVC
-
-from sklearn.datasets import make_circles
-
 X, y = make_circles(100, factor=0.1, noise=0.1)
 
 clf = SVC(kernel="linear").fit(X, y)
@@ -348,14 +334,11 @@ print("------------------------------------------------------------")  # 60個
 # scikit-learn-pca
 # Dimensionality Reduction: PCA
 
-from sklearn import neighbors, datasets
-
 sns.set()
 
 iris = datasets.load_iris()
 
 X, y = iris.data, iris.target
-from sklearn.decomposition import PCA
 
 pca = PCA(n_components=2)
 pca.fit(X)
@@ -381,8 +364,6 @@ X = np.dot(np.random.random(size=(2, 2)), np.random.normal(size=(2, 200))).T
 plt.plot(X[:, 0], X[:, 1], "o")
 plt.axis("equal")
 show()
-
-from sklearn.decomposition import PCA
 
 pca = PCA(n_components=2)
 pca.fit(X)
@@ -418,15 +399,11 @@ sns.set()
 
 # Validating Models
 
-from sklearn.datasets import load_digits
-
-digits = load_digits()
+digits = datasets.load_digits()
 X = digits.data
 y = digits.target
 
 # Let's fit a K-neighbors classifier
-
-from sklearn.neighbors import KNeighborsClassifier
 
 knn = KNeighborsClassifier(n_neighbors=1)
 knn.fit(X, y)
@@ -437,8 +414,6 @@ print("{0} / {1} correct".format(np.sum(y == y_pred), len(y)))
 
 # Validation Sets
 
-from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
-
 X_train, X_test, y_train, y_test = train_test_split(X, y)
 X_train.shape, X_test.shape
 
@@ -448,8 +423,6 @@ knn = KNeighborsClassifier(n_neighbors=1)
 knn.fit(X_train, y_train)
 y_pred = knn.predict(X_test)
 print("{0} / {1} correct".format(np.sum(y_test == y_pred), len(y_test)))
-
-from sklearn.metrics import accuracy_score
 
 cc = accuracy_score(y_test, y_pred)
 print(cc)
@@ -475,8 +448,6 @@ X1.shape, X2.shape
 
 print(KNeighborsClassifier(1).fit(X2, y2).score(X1, y1))
 print(KNeighborsClassifier(1).fit(X1, y1).score(X2, y2))
-
-from sklearn.model_selection import cross_val_score
 
 cv = cross_val_score(KNeighborsClassifier(1), X, y, cv=10)
 cc = cv.mean()
@@ -517,9 +488,6 @@ show()
 
 X_test = np.linspace(-0.1, 1.1, 500)[:, None]
 
-from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_squared_error
-
 model = LinearRegression()
 model.fit(X, y)
 y_test = model.predict(X_test)
@@ -530,7 +498,6 @@ plt.title("mean squared error: {0:.3g}".format(mean_squared_error(model.predict(
 show()
 
 from sklearn.preprocessing import PolynomialFeatures
-from sklearn.linear_model import LinearRegression
 from sklearn.pipeline import make_pipeline
 
 
@@ -588,9 +555,6 @@ show()
 X, y = make_data(120, error=1.0)
 plt.scatter(X, y)
 show()
-
-from sklearn.model_selection import validation_curve
-
 
 def rms_error(model, X, y):
     y_pred = model.predict(X)
@@ -676,9 +640,6 @@ print("------------------------------------------------------------")  # 60個
 
 # scikit-learn-random forest
 
-from sklearn.linear_model import LinearRegression
-from scipy import stats
-
 sns.set()
 
 # Random Forest Classifier
@@ -689,22 +650,19 @@ fig_code.plot_example_decision_tree()
 
 # Creating a Decision Tree
 
-from sklearn.datasets import make_blobs
-
 X, y = make_blobs(n_samples=300, centers=4, random_state=0, cluster_std=1.0)
 plt.scatter(X[:, 0], X[:, 1], c=y, s=50, cmap="rainbow")
 show()
 
 # We have some convenience functions in the repository that help
-from fig_code import visualize_tree, plot_tree_interactive
+from fig_code import visualize_tree
+from fig_code import plot_tree_interactive
 
 # Now using IPython's ``interact`` (available in IPython 2.0+, and requires a live kernel) we can view the decision tree splits:
 # plot_tree_interactive(X, y)
 show()
 
 # Decision Trees and over-fitting
-
-from sklearn.tree import DecisionTreeClassifier
 
 clf = DecisionTreeClassifier()
 
@@ -740,15 +698,11 @@ def fit_randomized_tree(random_state=0):
 # interact(fit_randomized_tree, random_state=[0, 100])
 show()
 
-from sklearn.ensemble import RandomForestClassifier
-
 clf = RandomForestClassifier(n_estimators=100, random_state=0, n_jobs=-1)
 visualize_tree(clf, X, y, boundaries=False)
 show()
 
 # Random Forest Regressor
-
-from sklearn.ensemble import RandomForestRegressor
 
 X = 10 * np.random.rand(100)
 

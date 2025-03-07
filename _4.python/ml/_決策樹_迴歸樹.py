@@ -364,10 +364,6 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 from graphviz import Digraph
 
 styles = {
@@ -539,14 +535,11 @@ plt.axes(projection="3d").plot_surface(p, q, h)
 plt.show()
 
 
-from math import log
-
-
 def entropy(*probs):
     """Calculate information entropy"""
     try:
         total = sum(probs)
-        return sum([-p / total * log(p / total, 2) for p in probs])
+        return sum([-p / total * math.log(p / total, 2) for p in probs])
     except:
         return 0
 
@@ -573,7 +566,7 @@ Play Golf dataset
 
 # first row = headers
 src = "http://chem-eng.utoronto.ca/~datamining/dmc/datasets/weather_nominal.csv"
-src = "weather-nominal-weka.csv"
+src = "data/weather-nominal-weka.csv"
 
 golf_data = pd.read_csv(src)
 
@@ -1145,7 +1138,7 @@ print("------------------------------------------------------------")  # 60個
 
 # first row = headers
 src = "http://chem-eng.utoronto.ca/~datamining/dmc/datasets/weather_nominal.csv"
-src = "weather-nominal-weka.csv"
+src = "data/weather-nominal-weka.csv"
 
 golf_data = pd.read_csv(src)
 
@@ -1340,8 +1333,6 @@ plt.plot(X_test, Y_test)
 plt.show()
 
 # Tree: cross-validation
-
-from sklearn.model_selection import cross_val_score
 from sklearn.tree import DecisionTreeRegressor
 
 
@@ -1689,10 +1680,6 @@ print("------------------------------------------------------------")  # 60個
 特征选择的目的在于选取对训练数据能够分类的特征，即特征选择是决定用哪个特征来划分特征空间。在实际场景中，特征的种类是多种多样的，选择不同的特征会决定产生不同的决策树。那究竟如何选择特征会更好？这里的关键就是确定选择特征的准则。信息增益(information gain)就是这样一种准则。
 """
 
-import numpy as np
-import pandas as pd
-from math import log
-
 
 # 构建数据
 def create_data():
@@ -1739,7 +1726,7 @@ def calc_ent(datasets):
             label_count[label] = 0
         label_count[label] += 1
     ent = -sum(
-        [(p / data_length) * log(p / data_length, 2) for p in label_count.values()]
+        [(p / data_length) * math.log(p / data_length, 2) for p in label_count.values()]
     )
     return ent
 
@@ -1894,12 +1881,6 @@ def calc_ent_grap(x, y):
 
 
 import cv2
-import time
-import numpy as np
-import pandas as pd
-
-from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
-from sklearn.metrics import accuracy_score
 
 # 定义树结构
 
@@ -1965,12 +1946,6 @@ def predict(test_set, tree):
 # 训练测试
 
 import cv2
-import time
-import numpy as np
-import pandas as pd
-
-from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
-from sklearn.metrics import accuracy_score
 
 """
 本测试采用MNIST图像数据集
@@ -2144,12 +2119,6 @@ def calc_ent_grap(x, y):
 
 
 import cv2
-import time
-import numpy as np
-import pandas as pd
-
-from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
-from sklearn.metrics import accuracy_score
 
 
 # 定义树结构
@@ -2213,12 +2182,6 @@ def predict(test_set, tree):
 # 训练测试
 
 import cv2
-import time
-import numpy as np
-import pandas as pd
-
-from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
-from sklearn.metrics import accuracy_score
 
 class_num = 10
 feature_len = 784
@@ -2488,10 +2451,7 @@ print(
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 07_07_decision_tree_from_scratch
-
 # 自行開發決策樹
-
 # 計算熵(entropy)
 
 
@@ -2499,16 +2459,7 @@ print("------------------------------------------------------------")  # 60個
 def entropy_func(c, n):
     return -(c * 1.0 / n) * math.log(c * 1.0 / n, 2)
     # gini
-    # return 1-(c*1.0/n)**2
-
-
-"""
-# 熵公式
-def entropy_func(c, n):
-    # return -(c*1.0/n)*math.log(c*1.0/n, 2)
-    # gini
-    return 1 - (c * 1.0 / n) ** 2
-"""
+    # return 1-(c*1.0/n)**2    # 或者
 
 
 # 依特徵值切割成兩類，分別計算熵，再加總
@@ -3159,7 +3110,6 @@ graphviz强大而便捷的关系图/流程图绘制方法让我们联想到机�
 print("------------------------------------------------------------")  # 60個
 
 from sklearn.datasets import load_wine
-from sklearn.model_selection import cross_val_score
 from sklearn.tree import export_graphviz
 
 import graphviz

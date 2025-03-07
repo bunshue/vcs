@@ -1,4 +1,3 @@
-
 print("------------------------------------------------------------")  # 60個
 
 # 共同
@@ -10,6 +9,7 @@ import random
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns  # 海生, 自動把圖畫得比較好看
 
 font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
@@ -23,12 +23,14 @@ print("------------------------------------------------------------")  # 60個
 
 import sympy
 
+
 def show():
-    #plt.show()
+    plt.show()
     pass
 
-print("------------------------------------------------------------")  # 60個
 
+print("------------------------------------------------------------")  # 60個
+'''
 print("sympy模組的版本")
 
 VERSION = sympy.__version__
@@ -962,11 +964,551 @@ print(cc)
 
 cc = e3.doit()
 print(cc)
+'''
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+# 计算两个椭圆的交点
 
+import pylab as pl
+
+sympy.init_printing()
+
+# 椭圆的参数方程
+
+# 下面是用参数方程计算椭圆上各点，并绘图的函数：
+
+
+def ellipse(e, t):
+    from numpy import cos, sin
+
+    a, b, x_c, y_c, theta = e
+    ct, st, cth, sth = cos(t), sin(t), cos(theta), sin(theta)
+    x = a * ct * cth - b * st * sth + x_c
+    y = a * sth * ct + b * st * cth + y_c
+    return x, y
+
+
+def plot_ellipse(e):
+    t = np.linspace(0, np.pi * 2, 100)
+    x, y = ellipse(e, t)
+    pl.plot(x, y)
+
+
+e1 = (5.0, 3.0, 1.0, 2.0, 0.3)
+plot_ellipse(e1)
+x, y = ellipse(e1, [0, np.pi])
+pl.plot(x, y, "--")
+pl.plot(x.mean(), y.mean(), "o")
+pl.axis("equal")
+show()
+
+# 椭圆的隐函数方程
+
+x, y, theta, xc, yc, a, b = sympy.symbols("x y theta x_c y_c a b", real=True)
+M = sympy.Matrix(
+    [[sympy.cos(theta), sympy.sin(theta)], [-sympy.sin(theta), sympy.cos(theta)]]
+)
+P = sympy.Matrix([[x - xc], [y - yc]])
+P2 = M * P
+eq = (x / a) ** 2 + (y / b) ** 2 - 1
+eq2 = eq.subs({x: P2[0], y: P2[1]}, simultaneous=True)
+print(eq2)
+
+# 隐函数方程的曲线可以通过等值线函数contour()绘制：
+
+
+def implicit_ellipse(e, x, y):
+    from numpy import cos, sin
+
+    a, b, x_c, y_c, theta = e
+    return (
+        -1
+        + (-(x - x_c) * sin(theta) + (y - y_c) * cos(theta)) ** 2 / b**2
+        + ((x - x_c) * cos(theta) + (y - y_c) * sin(theta)) ** 2 / a**2
+    )
+
+
+yg, xg = np.mgrid[-2:6:100j, -5:7:100j]
+zg = implicit_ellipse(e1, xg, yg)
+
+pl.contour(xg, yg, zg, levels=[0])
+show()
+
+# 计算两个椭圆的交点
+
+# 计算隐函数方程的系数
+
+from IPython.display import display
+
+p = eq2.as_poly(x, y)
+for coef in p.coeffs(order="grlex"):
+    display(coef)
+
+display(P2)
+sympy.cse(P2)
+
+# 下面的两个函数可以将cse()得到结果转换成一个Python函数，用于数值运算。在后续的程序中生成的cse中会出现Eq和Piecewise函数。这里使用自定义PythoPrinter类将上述两个函数分别输出为等于操作符和调用_piecewise_func()函数。
+
+from sympy.printing import StrPrinter
+
+
+def _piecewise_func(*args):
+    for expr, cond in args:
+        if cond:
+            return expr
+
+
+class PythonPrinter(StrPrinter):
+    def _print_Equality(self, expr):
+        return "{} == {}".format(self._print(expr.lhs), self._print(expr.rhs))
+
+    def _print_Piecewise(self, expr):
+        return "_piecewise_func({})".format(
+            ", ".join(self._print(arg) for arg in expr.args)
+        )
+
+
+cse2func_history = {}
+
+
+def cse2func(funcname, precodes, seq, printer_class=PythonPrinter):
+    import textwrap
+
+    printer = printer_class()
+    codes = ["def %s:" % funcname]
+    if isinstance(precodes, str):
+        precodes = [precodes]
+    for line in precodes:
+        codes.append("    %s" % line)
+    for variable, value in seq[0]:
+        codes.append("    %s = %s" % (variable, printer._print(value)))
+    returns = "    return (%s)" % ", ".join([printer._print(value) for value in seq[1]])
+    codes.append("\n".join(textwrap.wrap(returns, 80)))
+    code = "\n".join(codes)
+    # get_ipython().run_code(code)
+    cse2func_history[funcname] = code
+    return code
+
+
+# 下面我们用cse2func()得到计算椭圆的隐函数方程系数的函数ellipse_equation():
+
+seq = sympy.cse(p.coeffs(order="grlex"))
+code = cse2func(
+    "ellipse_equation(a, b, x_c, y_c, theta)", "from math import sin, cos", seq
+)
+print(code)
+
+
+def ellipse_equation(a, b, x_c, y_c, theta):
+    from math import sin, cos
+
+    x0 = a ** (-2)
+    x1 = cos(theta)
+    x2 = x1**2
+    x3 = x0 * x2
+    x4 = b ** (-2)
+    x5 = sin(theta)
+    x6 = x5**2
+    x7 = x4 * x6
+    x8 = 2 * x1 * x5
+    x9 = x0 * x8
+    x10 = x4 * x8
+    x11 = x0 * x6
+    x12 = x2 * x4
+    x13 = 2 * x_c
+    x14 = 2 * y_c
+    x15 = x9 * x_c
+    x16 = x10 * x_c
+    x17 = x_c**2
+    x18 = y_c**2
+    return (
+        x3 + x7,
+        -x10 + x9,
+        x11 + x12,
+        x10 * y_c - x13 * x3 - x13 * x7 - x9 * y_c,
+        -x11 * x14 - x12 * x14 - x15 + x16,
+        x11 * x18 + x12 * x18 + x15 * y_c - x16 * y_c + x17 * x3 + x17 * x7 - 1,
+    )
+
+
+# 下面是前面的椭圆e1的隐函数方程中各项的系数：
+
+print(ellipse_equation(*e1))
+
+# (0.04621028924765588, -0.040152353663646945, 0.10490082186345522, -0.012115871168017864, -0.3794509337901739, -0.6144911306258172)
+
+# 交点的一元四阶方程的系数
+
+# 首先参数方程：
+
+theta, xc, yc, a, b, t = sympy.symbols("theta x_c y_c a b t", real=True)
+x = a * sympy.cos(t)
+y = b * sympy.sin(t)
+M = sympy.Matrix(
+    [[sympy.cos(theta), -sympy.sin(theta)], [sympy.sin(theta), sympy.cos(theta)]]
+)
+P = sympy.Matrix([[x], [y]])
+xt, yt = M * P + sympy.Matrix([[xc], [yc]])
+print(xt, yt)
+
+# 将参数方程代入到隐函数方程中：
+
+A, B, C, D, E, F, x, y = sympy.symbols("A B C D E F x y")
+eq = A * x**2 + B * x * y + C * y**2 + D * x + E * y + F
+eq = sympy.expand(eq.subs({x: xt, y: yt}))
+
+tc = sympy.symbols("t_c")
+sqrt_term = sympy.sqrt(1 - tc**2)
+eq1 = eq.subs({sympy.cos(t): tc, sympy.sin(t): sqrt_term})
+
+# leq为含有根号的项，req为不含根号的项。两边平方之后应该相等：
+
+leq = sqrt_term * eq1.coeff(sqrt_term)
+req = eq1 - sympy.expand(leq)
+eq_square = sympy.expand(leq**2 - req**2)
+
+p = eq_square.as_poly(tc)
+seq = sympy.cse(p.coeffs())
+cse2func(
+    "ellipses_intersection_equation(A, B, C, D, E, F, a, b, x_c, y_c, theta)",
+    "from math import sin, cos",
+    seq,
+)
+show()
+
+# 一元四次方程的解
+
+a, b, c, d, e, x = sympy.symbols("a,b,c,d,e,x", real=True)
+r = sympy.roots(sympy.Poly(a * x**4 + b * x**3 + c * x**2 + d * x + e), x).keys()
+seq = sympy.cse(r)
+cse2func(
+    "roots4(a,b,c,d,e)",
+    ["from cmath import sqrt", "if abs(a)<1e-10: return roots3(b,c,d,e)"],
+    seq,
+)
+
+r = sympy.roots(sympy.Poly(b * x**3 + c * x**2 + d * x + e), x).keys()
+seq = sympy.cse(r)
+cse2func(
+    "roots3(b,c,d,e)",
+    ["from cmath import sqrt", "if abs(b)<1e-10: return roots2(c,d,e)"],
+    seq,
+)
+
+r = sympy.roots(sympy.Poly(c * x**2 + d * x + e), x).keys()
+seq = sympy.cse(r)
+cse2func(
+    "roots2(c,d,e)",
+    ["from cmath import sqrt", "if abs(c)<1e-10: return roots1(d,e)"],
+    seq,
+)
+
+r = sympy.roots(sympy.Poly(d * x + e), x).keys()
+seq = sympy.cse(r)
+cse2func("roots1(d,e)", ["from cmath import sqrt", "if abs(d)<1e-10: return []"], seq)
+
+# 计算椭圆的交点
+
+
+def ellipse(e, t):
+    if np.isscalar(t):
+        from math import cos, sin
+    else:
+        from numpy import cos, sin
+    a, b, x_c, y_c, theta = e
+    ct, st, cth, sth = cos(t), sin(t), cos(theta), sin(theta)
+    x = a * ct * cth - b * st * sth + x_c
+    y = a * sth * ct + b * st * cth + y_c
+    return x, y
+
+
+def ellipse_implicit(e, x, y):
+    a, b, c, d, e, f = e
+    return a * x**2 + b * x * y + c * y**2 + d * x + e * y + f
+
+
+def ellipse_intersections(e1, e2, eps=1.0e-6):
+    from math import acos, sqrt
+
+    e1imp = ellipse_equation(*e1)
+    p = ellipses_intersection_equation(*(tuple(e1imp) + e2))
+    roots = [r.real for r in roots4(*p) if abs(r.imag) < eps]
+
+    points = []
+    for root in roots:
+        t = acos(float(root))
+        for t2 in [t, -t]:
+            xp, yp = ellipse(e2, t2)
+            if abs(ellipse_implicit(e1imp, xp, yp)) < eps:
+                if not points:
+                    points.append((xp, yp))
+                else:
+                    mindist = min(
+                        [sqrt((po[0] - xp) ** 2 + (po[1] - yp) ** 2) for po in points]
+                    )
+                    if mindist > eps:
+                        points.append((xp, yp))
+    return points
+
+
+# 下面的ellipse_plot()计算并绘制两个椭圆的交点。
+
+
+def ellipse_plot(e1, e2, draw_e1=True, draw_e2=True):
+    t = np.linspace(0, np.pi * 2, 100)
+    x1, y1 = ellipse(e1, t)
+    x2, y2 = ellipse(e2, t)
+    if draw_e1:
+        pl.plot(x1, y1)
+    if draw_e2:
+        pl.plot(x2, y2)
+
+    points = ellipse_intersections(e1, e2)
+    xp = [p[0] for p in points]
+    yp = [p[1] for p in points]
+    pl.plot(xp, yp, "o")
+    show()
+
+
+# 最后让我们看看程序的运行效果：
+
+e1 = (5.0, 3.0, 1.0, 2.0, 0.2)
+e2 = (7.0, 4.0, 0, 0, -0.3)
+e3 = (5.0, 3.0, 1.0, 2.0, 0.2 + np.pi / 2)
+""" NG
+ellipse_plot(e1, e2)
+ellipse_plot(e1, e3, False, True)
+ellipse_plot(e2, e3, False, False)
+
+e1 = (5.0, 3.0, 1.0, 2.0, 0.2)
+e2 = (5.0, 3.0, -1.0, 1.2, 0.2)
+ellipse_plot(e1, e2)
+
+ellipse_plot((5.0, 3.0, 1.0, 2.0, 0.0), (5.0, 3.0, 0.0, 0.0, 0.0))
+
+ellipse_plot((5.0, 3.0, 1.0, 2.0, 0.0), (5.0, 3.0, 1.0, 2.0, 0.01))
+
+ellipse_plot((5.0, 3.0, 1.0, 2.0, 0.0), (5.0, 3.0, 1.0, 2.1, 0.0))
+"""
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 使用SymPy把模拟滤波器转换为数字滤波器
+
+from sympy import *
+from cytoolz import compose
+
+init_printing()
+
+# 巴特沃斯低通滤波器的传递函数
+
+
+s = Symbol("s", real=True)
+
+
+def butterworth(n, s):
+    n = S(n)
+    sk = [exp(I * (2 * k + n - 1) * pi / (2 * n)) for k in range(S(1), n + 1)]
+    denominator = Mul(*[s - v for v in sk])
+    simplify_func = compose(simplify, expand, simplify, expand_complex)
+    Hs = 1 / simplify_func(denominator)
+    return Hs
+
+
+# 下面是2阶和3阶滤波器的传递函数：
+
+hs = butterworth(2, s)
+print(hs)
+
+hs = butterworth(3, s)
+print(hs)
+
+# 为了将标准的低通传递函数转换为任何圆频率omega的传递函数，可以对s进行如下替换：
+
+wc = Symbol("\omega_c", real=True)
+
+
+def lp2lp(hs, s, wc):
+    return hs.subs(s, s / wc)
+
+
+hs2 = lp2lp(hs, s, wc)
+print(hs2)
+
+
+def bilinear(hs, s, z, T):
+    hz = hs.subs(s, 2 / T * (z - 1) / (z + 1))
+    simplify_func = compose(simplify, expand, simplify, expand)
+    return simplify_func(hz)
+
+
+z, T = symbols("z T", real=True)
+hz = bilinear(hs2, s, z, T)
+print(hz)
+
+
+def freqz(hs, z, w, T):
+    hz_freq = hz.subs(z, exp(I * w * T))
+    exp_hz_freq = expand_complex(hz_freq)
+    return simplify(re(exp_hz_freq)), simplify(im(exp_hz_freq))
+
+
+w = Symbol("\omega", real=True)
+re_hz_freq, im_hz_freq = freqz(hs, z, w, T)
+
+print(re_hz_freq)
+
+print(im_hz_freq)
+
+# 为了把上面的表达式转换为JavaScript代码，我们首先使用cse()对其进行分步运算。
+
+steps, res = cse([re_hz_freq, im_hz_freq])
+print(steps)
+
+print(res)
+
+
+def to_javascript(funcname, args, expr):
+    from sympy.printing import jscode
+
+    steps, res = cse(expr, symbols=numbered_symbols("_tmp"))
+    code = ["window.{} = function(args){{".format(funcname)]
+
+    for i, v in enumerate(args):
+        code.append("var {} = args[{}];".format(str(v), i))
+
+    for v, e in steps:
+        code.append("var {} = {};".format(v, jscode(e)))
+
+    code.append("return [{}];".format(", ".join(jscode(r) for r in res)))
+    code.append("}")
+    return "\n".join(code).replace("\\", "")
+
+
+code = to_javascript("butter_lp_freqz", [T, w, wc], [re_hz_freq, im_hz_freq])
+print(code)
+
+# 下面通过IPython.display.display_javascript()将上述JavaScript代码输出到Notebook中。
+
+from IPython.display import display_javascript
+
+display_javascript(code, raw=True)
+
+# from bokeh.io import output_notebook, show
+# output_notebook()
+
+# Loading BokehJS ...
+
+# 最后调用本书提供的make_curve_viewer()显示滤波器的增益曲线。
+
+# from bokehelp import make_curve_viewer
+
+
+def freq_response(f, pars):
+    w = 2 * Math.PI * f
+    fs = pars["fs"]
+    fc = pars["fc"]
+    wc = 2 * Math.PI * fc
+    T = 1 / fs
+    re, im = butter_lp_freqz([T, w, wc])
+    return dict(p=20 * Math.log10(Math.sqrt(re * re + im * im)))
+
+
+inputs = [
+    dict(title="fs", start=1000, end=10000, step=1000, value=5000),
+    dict(title="fc", start=1, end=1000, step=1, value=100),
+]
+
+outputs = [dict(name="p", legend="p", line_width=2)]
+
+""" NG
+model = make_curve_viewer(freq_response, inputs, outputs, x_data=np.logspace(0, 4, 500), 
+                          xlabel = "Freq(Hz)",
+                          ylabel = "Gain(dB)",
+                          fig_kwargs=dict(x_axis_type="log"))
+show(model)
+"""
+
+# 下面的get_ba()得到滤波器的系数b和a。
+
+
+def get_ba(hz, z):
+    n, d = fraction(hz)
+    b = Matrix(Poly(n, z).coeffs())
+    a = Matrix(Poly(d, z).coeffs())
+    b = b / a[0]
+    a = a / a[0]
+    return list(b) + list(a)
+
+
+ba = get_ba(hz, z)
+print(ba)
+
+# 将上面的表达式转换为JavaScript代码：
+
+ba_code = to_javascript("butter_ba", [T, wc], ba)
+display_javascript(ba_code, raw=True)
+print(ba_code)
+
+# 下面使用Bokeh的DataTable显示运算结果。
+
+from bokeh.models import ColumnDataSource, CustomJS
+from bokeh.models.widgets import DataTable, DateFormatter, TableColumn, Slider
+
+# from bokeh.io import output_file, show
+# from bokeh.layouts import column, row, widgetbox
+
+data = dict(
+    a=[0, 0, 0],
+    b=[0, 0, 0],
+)
+
+""" NG
+source = ColumnDataSource(data)
+
+columns = [
+        TableColumn(field="a", title="a"),
+        TableColumn(field="b", title="b"),
+    ]
+data_table = DataTable(source=source, columns=columns, width=400, height=150)
+
+sliders = [
+    Slider(title="fs", start=1000, end=10000, step=1000, value=5000),
+    Slider(title="fc", start=1, end=5000, step=1, value=100),
+]
+"""
+
+""" NG
+wbox = widgetbox(sliders)
+
+def callback_func(source=source, wbox=wbox, table=data_table):
+    window.table_t = table
+    fs = wbox.children[0].value
+    fc = wbox.children[1].value
+    T = 1 / fs
+    wc = 2 * Math.PI * fc
+    ba = window.butter_ba([T, wc])
+    source.data.a = ba[3:]
+    source.data.b = ba[:3]
+    source.change.emit()
+    table.change.emit()
+    
+callback = CustomJS.from_py_func(callback_func)
+
+for slider in sliders:
+    slider.js_on_change("value", callback)
+
+show(column(data_table, wbox))
+"""
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 

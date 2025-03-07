@@ -47,7 +47,7 @@ def show():
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
+'''
 print("鐵達尼號資料集 基本數據 titanic()")
 
 df = sns.load_dataset("titanic")
@@ -898,6 +898,586 @@ tree = Tree.from_pandas_df(
     alpha_merge=0.1,
 )
 tree.print_tree()
+'''
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+from sklearn import datasets
+from sklearn.datasets import make_blobs  # 集群資料集
+from sklearn import metrics
+from matplotlib.colors import ListedColormap
+from sklearn import tree
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# Predicting Titanic Survivors
+
+"""
+Data Set
+File Name 	Available Formats
+train 	.csv (59.76 kb)
+gendermodel 	.csv (3.18 kb)
+genderclassmodel 	.csv (3.18 kb)
+test 	.csv (27.96 kb)
+gendermodel 	.py (3.58 kb)
+genderclassmodel 	.py (5.63 kb)
+myfirstforest 	.py (3.99 kb)
+
+VARIABLE DESCRIPTIONS:
+survival        Survival
+                (0 = No; 1 = Yes)
+pclass          Passenger Class
+                (1 = 1st; 2 = 2nd; 3 = 3rd)
+name            Name
+sex             Sex
+age             Age
+sibsp           Number of Siblings/Spouses Aboard
+parch           Number of Parents/Children Aboard
+ticket          Ticket Number
+fare            Passenger Fare
+cabin           Cabin
+embarked        Port of Embarkation
+                (C = Cherbourg; Q = Queenstown; S = Southampton)
+
+import pandas as pd
+import numpy as np
+import pylab as plt
+"""
+
+# Set the global default size of matplotlib figures
+plt.rc("figure", figsize=(10, 5))
+
+# Size of matplotlib figures that contain subplots
+fizsize_with_subplots = (10, 10)
+
+# Size of matplotlib histogram bins
+bin_size = 10
+
+# Explore the Data
+
+df_train = pd.read_csv("data/titanic_train2.csv")
+cc = df_train.head()
+print(cc)
+
+cc = df_train.tail()
+print(cc)
+
+cc = df_train.dtypes
+print(cc)
+
+cc = df_train.info()
+print(cc)
+
+cc = df_train.describe()
+print(cc)
+
+# Set up a grid of plots
+fig = plt.figure(figsize=fizsize_with_subplots)
+fig_dims = (3, 2)
+
+# Plot death and survival counts
+plt.subplot2grid(fig_dims, (0, 0))
+df_train["Survived"].value_counts().plot(kind="bar", title="Death and Survival Counts")
+
+# Plot Pclass counts
+plt.subplot2grid(fig_dims, (0, 1))
+df_train["Pclass"].value_counts().plot(kind="bar", title="Passenger Class Counts")
+
+# Plot Sex counts
+plt.subplot2grid(fig_dims, (1, 0))
+df_train["Sex"].value_counts().plot(kind="bar", title="Gender Counts")
+plt.xticks(rotation=0)
+
+# Plot Embarked counts
+plt.subplot2grid(fig_dims, (1, 1))
+df_train["Embarked"].value_counts().plot(
+    kind="bar", title="Ports of Embarkation Counts"
+)
+
+# Plot the Age histogram
+plt.subplot2grid(fig_dims, (2, 0))
+df_train["Age"].hist()
+plt.title("Age Histogram")
+
+show()
+
+# Feature: Passenger Classes
+
+pclass_xt = pd.crosstab(df_train["Pclass"], df_train["Survived"])
+print(pclass_xt)
+
+# Plot the cross tab:
+
+# Normalize the cross tab to sum to 1:
+pclass_xt_pct = pclass_xt.div(pclass_xt.sum(1).astype(float), axis=0)
+
+pclass_xt_pct.plot(kind="bar", stacked=True, title="Survival Rate by Passenger Classes")
+plt.xlabel("Passenger Class")
+plt.ylabel("Survival Rate")
+show()
+
+# Feature: Sex
+
+sexes = sorted(df_train["Sex"].unique())
+genders_mapping = dict(zip(sexes, range(0, len(sexes) + 1)))
+cc = genders_mapping
+print(cc)
+
+# {'female': 0, 'male': 1}
+
+df_train["Sex_Val"] = df_train["Sex"].map(genders_mapping).astype(int)
+cc = df_train.head()
+print(cc)
+
+sex_val_xt = pd.crosstab(df_train["Sex_Val"], df_train["Survived"])
+sex_val_xt_pct = sex_val_xt.div(sex_val_xt.sum(1).astype(float), axis=0)
+sex_val_xt_pct.plot(kind="bar", stacked=True, title="Survival Rate by Gender")
+show()
+
+# Get the unique values of Pclass:
+passenger_classes = sorted(df_train["Pclass"].unique())
+
+for p_class in passenger_classes:
+    print(
+        "M: ",
+        p_class,
+        len(df_train[(df_train["Sex"] == "male") & (df_train["Pclass"] == p_class)]),
+    )
+    print(
+        "F: ",
+        p_class,
+        len(df_train[(df_train["Sex"] == "female") & (df_train["Pclass"] == p_class)]),
+    )
+
+# Plot survival rate by Sex and Pclass:
+
+# Plot survival rate by Sex
+females_df = df_train[df_train["Sex"] == "female"]
+females_xt = pd.crosstab(females_df["Pclass"], df_train["Survived"])
+females_xt_pct = females_xt.div(females_xt.sum(1).astype(float), axis=0)
+females_xt_pct.plot(
+    kind="bar", stacked=True, title="Female Survival Rate by Passenger Class"
+)
+plt.xlabel("Passenger Class")
+plt.ylabel("Survival Rate")
+show()
+
+# Plot survival rate by Pclass
+males_df = df_train[df_train["Sex"] == "male"]
+males_xt = pd.crosstab(males_df["Pclass"], df_train["Survived"])
+males_xt_pct = males_xt.div(males_xt.sum(1).astype(float), axis=0)
+males_xt_pct.plot(
+    kind="bar", stacked=True, title="Male Survival Rate by Passenger Class"
+)
+plt.xlabel("Passenger Class")
+plt.ylabel("Survival Rate")
+
+show()
+
+# Feature: Embarked
+
+cc = df_train[df_train["Embarked"].isnull()]
+print(cc)
+
+# Get the unique values of Embarked
+embarked_locs = sorted(df_train["Embarked"].unique())
+
+embarked_locs_mapping = dict(zip(embarked_locs, range(0, len(embarked_locs) + 1)))
+print(embarked_locs_mapping)
+
+# {nan: 0, 'C': 1, 'Q': 2, 'S': 3}
+
+# Transform Embarked from a string to a number representation to prepare it for machine learning algorithms:
+
+df_train["Embarked_Val"] = df_train["Embarked"].map(embarked_locs_mapping).astype(int)
+print(df_train.head())
+
+# Plot the histogram for Embarked_Val:
+
+df_train["Embarked_Val"].hist(bins=len(embarked_locs), range=(0, 3))
+plt.title("Port of Embarkation Histogram")
+plt.xlabel("Port of Embarkation")
+plt.ylabel("Count")
+show()
+
+# Since the vast majority of passengers embarked in 'S': 3, we assign the missing values in Embarked to 'S':
+
+if len(df_train[df_train["Embarked"].isnull()] > 0):
+    df_train.replace(
+        {"Embarked_Val": {embarked_locs_mapping[nan]: embarked_locs_mapping["S"]}},
+        inplace=True,
+    )
+
+# Verify we do not have any more NaNs for Embarked_Val:
+
+embarked_locs = sorted(df_train["Embarked_Val"].unique())
+print(embarked_locs)
+
+# array([1, 2, 3])
+
+# Plot a normalized cross tab for Embarked_Val and Survived:
+
+embarked_val_xt = pd.crosstab(df_train["Embarked_Val"], df_train["Survived"])
+embarked_val_xt_pct = embarked_val_xt.div(embarked_val_xt.sum(1).astype(float), axis=0)
+embarked_val_xt_pct.plot(kind="bar", stacked=True)
+plt.title("Survival Rate by Port of Embarkation")
+plt.xlabel("Port of Embarkation")
+plt.ylabel("Survival Rate")
+
+show()
+
+# It appears those that embarked in location 'C': 1 had the highest rate of survival. We'll dig in some more to see why this might be the case. Below we plot a graphs to determine gender and passenger class makeup for each port:
+
+# Set up a grid of plots
+fig = plt.figure(figsize=fizsize_with_subplots)
+
+rows = 2
+cols = 3
+col_names = ("Sex_Val", "Pclass")
+
+for portIdx in embarked_locs:
+    for colIdx in range(0, len(col_names)):
+        # print(portIdx, colIdx)
+        plt.subplot(rows, cols, cols * colIdx + portIdx + 1)
+        df_train[df_train["Embarked_Val"] == portIdx][
+            col_names[colIdx]
+        ].value_counts().plot(kind="bar")
+show()
+
+df_train = pd.concat(
+    [df_train, pd.get_dummies(df_train["Embarked_Val"], prefix="Embarked_Val")], axis=1
+)
+
+# Feature: Age
+
+cc = df_train[df_train["Age"].isnull()][["Sex", "Pclass", "Age"]].head()
+print(cc)
+
+# Determine the Age typical for each passenger class by Sex_Val. We'll use the median instead of the mean because the Age histogram seems to be right skewed.
+
+# To keep Age in tact, make a copy of it called AgeFill
+# that we will use to fill in the missing ages:
+df_train["AgeFill"] = df_train["Age"]
+
+# Populate AgeFill
+df_train["AgeFill"] = (
+    df_train["AgeFill"]
+    .groupby([df_train["Sex_Val"], df_train["Pclass"]])
+    .apply(lambda x: x.fillna(x.median()))
+)
+
+# Ensure AgeFill does not contain any missing values:
+
+cc = len(df_train[df_train["AgeFill"].isnull()])
+print(cc)
+
+# Plot a normalized cross tab for AgeFill and Survived:
+
+# Set up a grid of plots
+fig, axes = plt.subplots(2, 1, figsize=fizsize_with_subplots)
+
+# Histogram of AgeFill segmented by Survived
+df1 = df_train[df_train["Survived"] == 0]["Age"]
+df2 = df_train[df_train["Survived"] == 1]["Age"]
+max_age = max(df_train["AgeFill"])
+
+""" NG
+axes[0].hist([df1, df2], 
+             bins=max_age / bin_size, 
+             range=(1, max_age), 
+             stacked=True)
+axes[0].legend(('Died', 'Survived'), loc='best')
+axes[0].set_title('Survivors by Age Groups Histogram')
+axes[0].set_xlabel('Age')
+axes[0].set_ylabel('Count')
+show()
+"""
+
+# Scatter plot Survived and AgeFill
+axes[1].scatter(df_train["Survived"], df_train["AgeFill"])
+axes[1].set_title("Survivors by Age Plot")
+axes[1].set_xlabel("Survived")
+axes[1].set_ylabel("Age")
+
+show()
+
+# Unfortunately, the graphs above do not seem to clearly show any insights. We'll keep digging further.
+
+# Plot AgeFill density by Pclass:
+
+for pclass in passenger_classes:
+    df_train.AgeFill[df_train.Pclass == pclass].plot(kind="kde")
+plt.title("Age Density Plot by Passenger Class")
+plt.xlabel("Age")
+plt.legend(("1st Class", "2nd Class", "3rd Class"), loc="best")
+
+show()
+
+# Set up a grid of plots
+fig = plt.figure(figsize=fizsize_with_subplots)
+fig_dims = (3, 1)
+
+# Plot the AgeFill histogram for Survivors
+plt.subplot2grid(fig_dims, (0, 0))
+survived_df = df_train[df_train["Survived"] == 1]
+# NG survived_df['AgeFill'].hist(bins=max_age / bin_size, range=(1, max_age))
+
+# Plot the AgeFill histogram for Females
+plt.subplot2grid(fig_dims, (1, 0))
+females_df = df_train[(df_train["Sex_Val"] == 0) & (df_train["Survived"] == 1)]
+# NG females_df['AgeFill'].hist(bins=max_age / bin_size, range=(1, max_age))
+
+# Plot the AgeFill histogram for first class passengers
+plt.subplot2grid(fig_dims, (2, 0))
+class1_df = df_train[(df_train["Pclass"] == 1) & (df_train["Survived"] == 1)]
+# NG class1_df['AgeFill'].hist(bins=max_age / bin_size, range=(1, max_age))
+
+# show()
+
+# Feature: Family Size
+
+df_train["FamilySize"] = df_train["SibSp"] + df_train["Parch"]
+cc = df_train.head()
+print(cc)
+
+# Plot a histogram of FamilySize:
+
+df_train["FamilySize"].hist()
+plt.title("Family Size Histogram")
+show()
+
+# Plot a histogram of AgeFill segmented by Survived:
+
+# Get the unique values of Embarked and its maximum
+family_sizes = sorted(df_train["FamilySize"].unique())
+family_size_max = max(family_sizes)
+
+df1 = df_train[df_train["Survived"] == 0]["FamilySize"]
+df2 = df_train[df_train["Survived"] == 1]["FamilySize"]
+plt.hist([df1, df2], bins=family_size_max + 1, range=(0, family_size_max), stacked=True)
+plt.legend(("Died", "Survived"), loc="best")
+plt.title("Survivors by Family Size")
+
+show()
+
+# Final Data Preparation for Machine Learning
+
+cc = df_train.dtypes[df_train.dtypes.map(lambda x: x == "object")]
+print(cc)
+
+# Drop the columns we won't use:
+
+df_train = df_train.drop(["Name", "Sex", "Ticket", "Cabin", "Embarked"], axis=1)
+"""
+Drop the following columns:
+
+    The Age column since we will be using the AgeFill column instead.
+    The SibSp and Parch columns since we will be using FamilySize instead.
+    The PassengerId column since it won't be used as a feature.
+    The Embarked_Val as we decided to use dummy variables instead.
+"""
+df_train = df_train.drop(
+    ["Age", "SibSp", "Parch", "PassengerId", "Embarked_Val"], axis=1
+)
+cc = df_train.dtypes
+print(cc)
+
+# Convert the DataFrame to a numpy array:
+
+train_data = df_train.values
+print(train_data)
+
+# Data Wrangling Summary
+
+
+def clean_data(df, drop_passenger_id):
+    # Get the unique values of Sex
+    sexes = sorted(df["Sex"].unique())
+
+    # Generate a mapping of Sex from a string to a number representation
+    genders_mapping = dict(zip(sexes, range(0, len(sexes) + 1)))
+
+    # Transform Sex from a string to a number representation
+    df["Sex_Val"] = df["Sex"].map(genders_mapping).astype(int)
+
+    # Get the unique values of Embarked
+    embarked_locs = sorted(df["Embarked"].unique())
+
+    # Generate a mapping of Embarked from a string to a number representation
+    embarked_locs_mapping = dict(zip(embarked_locs, range(0, len(embarked_locs) + 1)))
+
+    # Transform Embarked from a string to dummy variables
+    df = pd.concat([df, pd.get_dummies(df["Embarked"], prefix="Embarked_Val")], axis=1)
+
+    # Fill in missing values of Embarked
+    # Since the vast majority of passengers embarked in 'S': 3,
+    # we assign the missing values in Embarked to 'S':
+    if len(df[df["Embarked"].isnull()] > 0):
+        df.replace(
+            {"Embarked_Val": {embarked_locs_mapping[nan]: embarked_locs_mapping["S"]}},
+            inplace=True,
+        )
+
+    # Fill in missing values of Fare with the average Fare
+    if len(df[df["Fare"].isnull()] > 0):
+        avg_fare = df["Fare"].mean()
+        df.replace({None: avg_fare}, inplace=True)
+
+    # To keep Age in tact, make a copy of it called AgeFill
+    # that we will use to fill in the missing ages:
+    df["AgeFill"] = df["Age"]
+
+    # Determine the Age typical for each passenger class by Sex_Val.
+    # We'll use the median instead of the mean because the Age
+    # histogram seems to be right skewed.
+    df["AgeFill"] = (
+        df["AgeFill"]
+        .groupby([df["Sex_Val"], df["Pclass"]])
+        .apply(lambda x: x.fillna(x.median()))
+    )
+
+    # Define a new feature FamilySize that is the sum of
+    # Parch (number of parents or children on board) and
+    # SibSp (number of siblings or spouses):
+    df["FamilySize"] = df["SibSp"] + df["Parch"]
+
+    # Drop the columns we won't use:
+    df = df.drop(["Name", "Sex", "Ticket", "Cabin", "Embarked"], axis=1)
+
+    # Drop the Age column since we will be using the AgeFill column instead.
+    # Drop the SibSp and Parch columns since we will be using FamilySize.
+    # Drop the PassengerId column since it won't be used as a feature.
+    df = df.drop(["Age", "SibSp", "Parch"], axis=1)
+
+    if drop_passenger_id:
+        df = df.drop(["PassengerId"], axis=1)
+
+    return df
+
+
+# Random Forest: Training
+
+# Create the random forest object:
+
+clf = RandomForestClassifier(n_estimators=100)
+
+# Fit the training data and create the decision trees:
+
+# Training data features, skip the first column 'Survived'
+train_features = train_data[:, 1:]
+
+# 'Survived' column values
+train_target = train_data[:, 0]
+
+# Fit the model to our training data
+clf = clf.fit(train_features, train_target)
+score = clf.score(train_features, train_target)
+cc = "Mean accuracy of Random Forest: {0}".format(score)
+print(cc)
+
+# 'Mean accuracy of Random Forest: 0.980920314254'
+
+# Random Forest: Predicting
+
+df_test = pd.read_csv("data/titanic_test2.csv")
+cc = df_test.head()
+print(cc)
+
+""" NG
+# Data wrangle the test set and convert it to a numpy array
+df_test = clean_data(df_test, drop_passenger_id=False)
+test_data = df_test.values
+
+# Take the decision trees and run it on the test data:
+
+# Get the test data features, skipping the first column 'PassengerId'
+test_x = test_data[:, 1:]
+
+# Predict the Survival values for the test data
+test_y = clf.predict(test_x)
+
+# Random Forest: Prepare for Kaggle Submission
+
+df_test['Survived'] = test_y
+df_test[['PassengerId', 'Survived']].to_csv('tmp_titanic_results-rf.csv', index=False)
+"""
+
+# Evaluate Model Accuracy
+
+# Split 80-20 train vs test data
+train_x, test_x, train_y, test_y = train_test_split(
+    train_features, train_target, test_size=0.20, random_state=0
+)
+print(train_features.shape, train_target.shape)
+print(train_x.shape, train_y.shape)
+print(test_x.shape, test_y.shape)
+
+# Use the new training data to fit the model, predict, and get the accuracy score:
+
+clf = clf.fit(train_x, train_y)
+predict_y = clf.predict(test_x)
+
+print("Accuracy = %.2f" % (accuracy_score(test_y, predict_y)))
+# Accuracy = 0.83
+
+from IPython.core.display import Image
+
+Image(filename="data/titanic_confusion_matrix.png", width=800)
+
+# Get the model score and confusion matrix:
+
+model_score = clf.score(test_x, test_y)
+print("Model Score %.2f \n" % (model_score))
+
+confusion_matrix = metrics.confusion_matrix(test_y, predict_y)
+print("Confusion Matrix ", confusion_matrix)
+
+print("          Predicted")
+print("         |  0  |  1  |")
+print("         |-----|-----|")
+print("       0 | %3d | %3d |" % (confusion_matrix[0, 0], confusion_matrix[0, 1]))
+print("Actual   |-----|-----|")
+print("       1 | %3d | %3d |" % (confusion_matrix[1, 0], confusion_matrix[1, 1]))
+print("         |-----|-----|")
+
+"""
+Model Score 0.83 
+
+('Confusion Matrix ', array([[98, 12],
+       [19, 50]]))
+          Predicted
+         |  0  |  1  |
+         |-----|-----|
+       0 |  98 |  12 |
+Actual   |-----|-----|
+       1 |  19 |  50 |
+         |-----|-----|
+"""
+# Display the classification report:
+
+from sklearn.metrics import classification_report
+
+print(
+    classification_report(test_y, predict_y, target_names=["Not Survived", "Survived"])
+)
+
+"""
+              precision    recall  f1-score   support
+
+Not Survived       0.84      0.89      0.86       110
+    Survived       0.81      0.72      0.76        69
+
+ avg / total       0.83      0.83      0.82       179
+"""
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

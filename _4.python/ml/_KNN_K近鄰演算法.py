@@ -279,15 +279,26 @@ X.columns = ["sepal_length", "sepal_width", "petal_length", "petal_width"]
 target = pd.DataFrame(iris.target, columns=["target"])
 y = target["target"]
 
-Ks = np.arange(1, round(0.2 * len(X) + 1))
+Ks = np.arange(1, 15)
 accuracies = []
 for k in Ks:
     NEIGHBOARS = k
     print("用 K近鄰演算法 找出最近的", NEIGHBOARS, "個點")
     knn = KNeighborsClassifier(n_neighbors=NEIGHBOARS)
+    # 做一次就算準確率
     knn.fit(X, y)  # 學習訓練.fit
     accuracy = knn.score(X, y)  # KNN準確率
     accuracies.append(accuracy)
+    """
+    # 做10次算準確率
+    N = 10
+    scores = cross_val_score(knn, X, y, cv=N, scoring="accuracy")  # 交叉驗證
+    print("分成", N, "組, 做 cross_val_score 是驗證用來評分資料準確度的")
+    accuracies.append(scores.mean())
+    """
+
+print("KNN分群數 :", Ks)
+print("KNN準確率 :", accuracies)
 
 plt.plot(Ks, accuracies)
 
@@ -310,36 +321,9 @@ knn = KNeighborsClassifier(n_neighbors=NEIGHBOARS)
 knn.fit(X, y)  # 學習訓練.fit
 
 print("KNN準確率: %.2f" % knn.score(X, y))
-print("---------------------------")
 y_pred = knn.predict(X)  # 預測.predict
 print(y_pred)
-print("---------------------------")
 print(y.values)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-iris = datasets.load_iris()
-
-X = pd.DataFrame(iris.data, columns=iris.feature_names)
-X.columns = ["sepal_length", "sepal_width", "petal_length", "petal_width"]
-target = pd.DataFrame(iris.target, columns=["target"])
-y = target["target"]
-
-Ks = np.arange(1, round(0.2 * len(X) + 1))
-accuracies = []
-for k in Ks:
-    NEIGHBOARS = k
-    print("用 K近鄰演算法 找出最近的", NEIGHBOARS, "個點")
-    knn = KNeighborsClassifier(n_neighbors=NEIGHBOARS)
-    N = 10
-    scores = cross_val_score(knn, X, y, cv=N, scoring="accuracy")  # 交叉驗證
-    print("分成", N, "組, 做 cross_val_score 是驗證用來評分資料準確度的")
-    accuracies.append(scores.mean())
-
-plt.plot(Ks, accuracies)
-
-show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -362,6 +346,7 @@ joblib.dump(knn, "tmp_my_model_iris.joblib")
 print("------------------------------")  # 60個
 
 print("讀取模型, 預測")
+
 iris = datasets.load_iris()
 X = iris.data
 y = iris.target
@@ -696,7 +681,7 @@ print(classification_report(y_test, y_pred))
 
 print("KNN準確率: %.2f" % knn.score(X_test, y_test))
 
-# * 选择k值
+# 选择k值
 for k in range(1, 30, 5):
     NEIGHBOARS = k
     print("用 K近鄰演算法 找出最近的", NEIGHBOARS, "個點")
@@ -705,7 +690,7 @@ for k in range(1, 30, 5):
     score = knn.score(X_test, y_test)  # KNN準確率
     print("KNN準確率: %.2f" % knn.score(X_test, y_test))
 
-# * 交叉验证选择k值
+# 交叉验证选择k值
 from sklearn.model_selection import ParameterGrid
 from sklearn.model_selection import GridSearchCV
 from sklearn.model_selection import KFold
@@ -775,17 +760,13 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 06_05_knn_iris
+iris = datasets.load_iris()
 
-# 鳶尾花(Iris)品種的辨識
+# 資料清理、資料探索與分析
+df = pd.DataFrame(iris.data, columns=iris.feature_names)
+y = iris.target
 
-ds = datasets.load_iris()
-
-# 2. 資料清理、資料探索與分析
-df = pd.DataFrame(ds.data, columns=ds.feature_names)
-y = ds.target
-
-print(ds.target_names)
+print(iris.target_names)
 
 # 箱型圖
 sns.boxplot(data=df)
@@ -803,9 +784,9 @@ show()
 cc = pd.Series(y).value_counts()
 print(cc)
 
-# 3. 不須進行特徵工程
+# 不須進行特徵工程
 
-# 4. 資料分割
+# 資料分割
 
 # 指定X，並轉為 Numpy 陣列
 X = df.values
@@ -856,7 +837,7 @@ print(confusion_matrix(y_test, y_pred))
 
 # 混淆矩陣圖
 disp = ConfusionMatrixDisplay(
-    confusion_matrix=confusion_matrix(y_test, y_pred), display_labels=ds.target_names
+    confusion_matrix=confusion_matrix(y_test, y_pred), display_labels=iris.target_names
 )
 disp.plot()
 show()
@@ -864,20 +845,14 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 機器學習前準備─以Iris為例
-
-# 1. 資料取得
+# Iris
 
 filename = "data/Iris2.csv"
-
 df = pd.read_csv(filename)
-
 df = df.drop("Id", axis=1)
-
 print(df.head())
 
-# 2. 資料處理
-
+# 資料處理
 # df.info() # 這樣就印出訊息了
 
 df = df.drop_duplicates()  # 刪除重複列
@@ -886,15 +861,8 @@ s = {"Iris-setosa": 0, "Iris-versicolor": 1, "Iris-virginica": 2}
 df["Species"] = df["Species"].map(s)
 df.info()
 
-# 3. 探索性資料分析
+# 探索性資料分析
 print(df.head())
-"""
-#4. 機器學習做資料分析
-9-2 機器學習實作──以Iris為例
-9-2-1 提出具體的假設
-9-2-2 找出機器學習模型
-挑選模型：匯入 KNN 模型
-"""
 
 # 學習訓練：建立並訓練 KNN 模型
 
@@ -925,6 +893,7 @@ for i in range(3, 11):
     )  # K近鄰演算法（K Nearest Neighbor, KNN）
     knn.fit(X_train, y_train)  # 學習訓練.fit
     print("k =", k, " 準確率:", knn.score(X_test, y_test))  # 用 test data 檢測模型的準確率
+    # print("KNN準確率: %.2f" % knn.score(X, y))
     s.append(knn.score(X_test, y_test))  # KNN準確率
 
 NEIGHBOARS = 8
@@ -982,21 +951,17 @@ print("預測結果為：", s)
 
 # 預測結果為： 錯誤
 
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
-# 機器學習前準備─以Titanic為例
-
-# 1. 資料取得
+# Titanic
 
 filename = "data/titanic.csv"
 df = pd.read_csv(filename)
 print(df.head())
 
-# 2. 資料處理
-df.info()
+# 資料處理
+# df.info() # 這樣就印出訊息了
 
 df["Age"] = df["Age"].fillna(df["Age"].mean())
 df["Embarked"] = df["Embarked"].fillna("S")
@@ -1009,17 +974,9 @@ print(df.head())
 
 # 重複值： Empty DataFrame
 
-# 3. 探索性資料分析
+# 探索性資料分析
 
 print(df.head())
-
-"""
-4. 機器學習做資料分析
-9-4 機器學習實作─以Titanic為例
-9-4-1 提出具體的假設
-9-4-2 找出機器學習模型
-挑選模型：匯入 KNN 模型
-"""
 
 # 學習訓練：建立並訓練 KNN 模型
 
@@ -1048,7 +1005,7 @@ for i in range(3, 11):
         n_neighbors=NEIGHBOARS
     )  # K近鄰演算法（K Nearest Neighbor, KNN）
     knn.fit(X_train, y_train)  # 學習訓練.fit
-    print("k =", k, " 準確率:", knn.score(X_test, y_test))  # 用 test data 檢測模型的準確率
+    print("k =", k, " KNN準確率:", knn.score(X_test, y_test))  # 用 test data 檢測模型的準確率
     s.append(knn.score(X_test, y_test))  # KNN準確率
 
 
@@ -1123,7 +1080,6 @@ print("Mr. Straus能生還嗎 ? ", s)
 
 # 真實的 Mrs. Brown
 # https://hokkfabrica.com/her-story-margaret-brown-from-titanic/
-#
 
 print("-----------(3)真實的Mrs. Brown的生還推測-------------")
 
@@ -1153,7 +1109,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 iris = datasets.load_iris()
-
 X = iris.data[:, :2]
 y = iris.target
 
@@ -1174,42 +1129,20 @@ knn.fit(X_train, y_train)  # 學習訓練.fit
 # Predict the target values on the test data
 y_pred = knn.predict(X_test)  # 預測.predict
 
-# Calculate the accuracy of the classifier
-accuracy = accuracy_score(y_test, y_pred)
-
-# Print the accuracy
-print("Accuracy:", accuracy)
-
-# Accuracy: 0.631578947368421
+print("計算準確率 :", accuracy_score(y_test, y_pred))
+# 計算準確率 : 0.631578947368421
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 iris = datasets.load_iris()
-
-# Split the dataset into features (X) and target (y)
-X, y = iris.data, iris.target
-
-# Print the lengths of X and y
-print("Size of X:", X.shape)  #  (150, 4)
-print("Size of y:", y.shape)  #  (150, )
-
-# Split the data into training and test sets with test_size=0.2 (20% for test set)
-X, y = iris.data, iris.target
+X = iris.data
+y = iris.target
 
 # 資料分割
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
-# Print the sizes of the arrays
-print("Size of X_train:", X_train.shape)
-print("Size of X_test: ", X_test.shape)
-print("Size of y_train:", y_train.shape)
-print("Size of y_test: ", y_test.shape)
-
-print("------------------------------------------------------------")  # 60個
-
 # Create instances of the models
-
 from sklearn.svm import SVC
 from sklearn.cluster import KMeans
 from sklearn.decomposition import PCA
@@ -1303,12 +1236,10 @@ print("------------------------------------------------------------")  # 60個
 
 # Classification Metrics
 
-# Accuracy Score
 accuracy_knn = knn.score(X_test, y_test)  # KNN準確率
-print("Accuracy Score (knn):", knn.score(X_test, y_test))
+print("KNN準確率: %.2f" % accuracy_knn)
 
-accuracy_y_pred = accuracy_score(y_test, y_pred_lr)
-print("Accuracy Score (y_pred):", accuracy_y_pred)
+print("計算準確率 :", accuracy_score(y_test, y_pred_lr))
 
 # Classification Report
 classification_rep_y_pred = classification_report(y_test, y_pred_lr)
@@ -1415,9 +1346,7 @@ knn.fit(X_train, y_train)
 
 y_pred = knn.predict(X_test)
 
-# 幫模型打分數
-accuracy = accuracy_score(y_test, y_pred)
-print(f"Accuracy: {accuracy}")
+print("計算準確率 :", accuracy_score(y_test, y_pred))
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -2120,7 +2049,7 @@ for true, pred in zip(Y_valid, Y_pred):
 accuracy = (Y_valid == Y_pred).sum() / Y_valid.shape[0]
 print(accuracy)
 
-print(accuracy_score(Y_valid, Y_pred))
+print("計算準確率 :", accuracy_score(Y_valid, Y_pred))
 
 # k-dependence of the accuracy
 
@@ -2166,8 +2095,7 @@ knn = KNeighborsClassifier(n_neighbors=9)
 knn.fit(X_train, Y_train)
 Y_pred = knn.predict(X_test)
 
-print(accuracy_score(Y_test, Y_pred))
-
+print("計算準確率 :", accuracy_score(Y_test, Y_pred))
 # 0.9666666666666667
 
 print("------------------------------------------------------------")  # 60個
@@ -2351,8 +2279,7 @@ knn = KNeighborsClassifier(n_neighbors=1)
 knn.fit(data_train, label_train)
 prediction = knn.predict(data_test)
 
-print(accuracy_score(label_test, prediction))
-
+print("計算準確率 :", accuracy_score(label_test, prediction))
 # 0.9888888888888889
 
 for i, (true, predict) in enumerate(zip(label_test, prediction)):
@@ -2460,12 +2387,11 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split
 
 from collections import Counter
 
-iris = load_iris()
+iris = datasets.load_iris()
 df = pd.DataFrame(iris.data, columns=iris.feature_names)
 df["label"] = iris.target
 # 构建数据列名
@@ -2536,13 +2462,13 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 # 4.训练
 
-clf = KNN(X_train, y_train)
+knn = KNN(X_train, y_train)
 
 # 5.测试
 
 # 给定测试数据，计算其分类正确性
-cc = clf.score(X_test, y_test)
-print(cc)
+
+print("KNN準確率: %.2f" % knn.score(X_test, y_test))
 
 # 1.0
 
@@ -2550,7 +2476,7 @@ print(cc)
 
 # 构建测试点 预测其类别
 point = [7.0, 4.0]
-print("测试点类别: {}".format(clf.predict(point)))
+print("测试点类别: {}".format(knn.predict(point)))
 
 plt.scatter(df[:50]["sepal length"], df[:50]["sepal width"], label="0")
 plt.scatter(df[50:100]["sepal length"], df[50:100]["sepal width"], label="1")

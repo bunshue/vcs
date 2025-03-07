@@ -391,8 +391,7 @@ print("------------------------------------------------------------")  # 60個
 from fractions import Fraction
 
 
-print('import這個 會打印信息')
-
+print("import這個 會打印信息")
 
 
 from fractions import Fraction
