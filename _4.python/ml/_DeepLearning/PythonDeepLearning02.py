@@ -38,7 +38,7 @@ from sklearn import tree
 
 
 def show():
-    plt.show()
+    # plt.show()
     pass
 
 
@@ -243,6 +243,8 @@ device_name = tf.test.gpu_device_name()
 
 print("device_name :", device_name)
 
+print('無 GPU 跳過')
+"""
 if device_name != "/device:GPU:0":
     raise SystemError("無 GPU")
 print("Found GPU at: {}".format(device_name))
@@ -300,7 +302,8 @@ with tf.Session(config=config) as sess:
             feed_dict={x: mnist.test.images, y: mnist.test.labels, keep_prob: 1.0}
         )
     )
-plt.show()
+
+show()
 # test accuracy 0.9915
 
 iterations = np.linspace(0, nof_iterations, nof_iterations // test_every)
@@ -313,7 +316,7 @@ plt.plot(iterations, valid_accuracy, label="Valid accuracy")
 
 plt.legend()
 show()
-
+"""
 print("------------------------------------------------------------")  # 60個
 
 # Batch normalization

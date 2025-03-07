@@ -242,7 +242,7 @@ print(" 正確率{}".format(score/len(datas)))
 print("------------------------------------------------------------")  # 60個
 
 snownlp.sentiment.train("tmp_neg_train.csv", "tmp_pos_train.csv")
-snownlp.sentiment.save("hotel_sentiment.marshal")
+snownlp.sentiment.save("tmp_hotel_sentiment.marshal")
 
 print("------------------------------------------------------------")  # 60個
 
