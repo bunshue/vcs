@@ -1138,13 +1138,11 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
 
-#filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+# filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 
 os.system(filename)  # 用系統內建的程式開啟檔案
-
-
 
 
 """
@@ -1181,11 +1179,12 @@ os.system("ls -l")
 # os.mkdir('test')
 
 import os
-cur_path=os.getcwd() # 取得目前路徑  
+
+cur_path = os.getcwd()  # 取得目前路徑
 os.system("cls")  # 清除螢幕
 os.system("mkdir dir2")  # 建立 dir2 目錄
-os.system("copy ossystem.py dir2\copyfile.py") # 複製檔案 
-file=cur_path + "\dir2\copyfile.py" 
+os.system("copy ossystem.py dir2\copyfile.py")  # 複製檔案
+file = cur_path + "\dir2\copyfile.py"
 os.system("notepad " + file)  # 以記事本開啟 copyfile.py 檔
 
 

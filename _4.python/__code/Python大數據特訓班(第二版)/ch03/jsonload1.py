@@ -1,4 +1,5 @@
 import json
+
 class_str = """
 {
   "一年甲班": [
@@ -29,4 +30,4 @@ class_str = """
 datas = json.loads(class_str)
 print(type(datas))
 for data in datas["一年甲班"]:
-    print(data, data['姓名'])
+    print(data, data["姓名"])

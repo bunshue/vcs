@@ -86,13 +86,11 @@ print(z)
 
 print("------------------------------------------------------------")  # 60個
 
-"""    
-person = int(input('請輸入學生人數: '))
-apple = int(input('請輸入蘋果總數: '))
+person = int(input("請輸入學生人數: "))
+apple = int(input("請輸入蘋果總數: "))
 ret = divmod(apple, person)
-print('每個學生可分得蘋果 ' + str(ret[0]) + ' 個')
-print('蘋果剩餘 ' + str(ret[1]) + ' 個')
-"""
+print("每個學生可分得蘋果 " + str(ret[0]) + " 個")
+print("蘋果剩餘 " + str(ret[1]) + " 個")
 
 print("------------------------------------------------------------")  # 60個
 
@@ -161,56 +159,50 @@ else:
 
 print("------------------------------------------------------------")  # 60個
 
-"""
 total = person = score = 0
 while score != -1:
     person += 1
     total += score
-    score = int(input('請輸入第 %d 位學生的成績：' % person))
+    score = int(input("請輸入第 %d 位學生的成績：" % person))
 average = total / (person - 1)
-print('本班總成績：%d 分，平均成績：%5.2f 分' % (total, average))
-"""
+print("本班總成績：%d 分，平均成績：%5.2f 分" % (total, average))
+
 print("------------------------------------------------------------")  # 60個
 
-"""
 score = []
 total = inscore = 0
 while inscore != -1:
-    inscore = int(input('請輸入學生的成績：'))
+    inscore = int(input("請輸入學生的成績："))
     score.append(inscore)
-print('共有 %d 位學生' % (len(score) - 1))
+print("共有 %d 位學生" % (len(score) - 1))
 for i in range(0, len(score) - 1):
     total += score[i]
 average = total / (len(score) - 1)
-print('本班總成績：%d 分，平均成績：%5.2f 分' % (total, average))
-"""
+print("本班總成績：%d 分，平均成績：%5.2f 分" % (total, average))
 
 print("------------------------------------------------------------")  # 60個
 
-"""
-nat = input('請輸入國文成績：')
-math = input('請輸入數學成績：')
-eng = input('請輸入英文成績：')
-sum = int(nat) + int(math) + int(eng)  #輸入值需轉換為整數
+nat = input("請輸入國文成績：")
+math = input("請輸入數學成績：")
+eng = input("請輸入英文成績：")
+sum = int(nat) + int(math) + int(eng)  # 輸入值需轉換為整數
 average = sum / 3
-print('成績總分：%d，平均成績：%5.2f' % (sum, average))
-"""
+print("成績總分：%d，平均成績：%5.2f" % (sum, average))
 
 print("------------------------------------------------------------")  # 60個
 
-"""
-score = int(input('請輸入成績：'))
+score = int(input("請輸入成績："))
 if score >= 90:
-    print('優等')
+    print("優等")
 elif score >= 80:
-    print('甲等')
+    print("甲等")
 elif score >= 70:
-    print('乙等')
+    print("乙等")
 elif score >= 60:
-    print('丙等')
+    print("丙等")
 else:
-    print('丁等')
-"""
+    print("丁等")
+
 print("------------------------------------------------------------")  # 60個
 
 # pw = input('請輸入密碼：(1234)')
