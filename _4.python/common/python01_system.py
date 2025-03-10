@@ -418,13 +418,6 @@ print(prog)
 
 print("------------------------------------------------------------")  # 60個
 
-try:
-    import a_python_module
-except ImportError:
-    print("匯入模組 a_python_module 失敗")
-    print("請安裝模組")
-    # sys.exit()
-
 print("------------------------------------------------------------")  # 60個
 
 import email

@@ -3,7 +3,21 @@ titanic
 
 鐵達尼號資料集  891 筆資料 15 個欄位
 
-
+VARIABLE DESCRIPTIONS:
+survival        Survival
+                (0 = No; 1 = Yes)
+pclass          Passenger Class
+                (1 = 1st; 2 = 2nd; 3 = 3rd)
+name            Name
+sex             Sex
+age             Age
+sibsp           Number of Siblings/Spouses Aboard
+parch           Number of Parents/Children Aboard
+ticket          Ticket Number
+fare            Passenger Fare
+cabin           Cabin
+embarked        Port of Embarkation(POE) # 登船港
+                (C = Cherbourg(瑟堡); Q = Queenstown(皇后鎮); S = Southampton(南安普敦))
 """
 print("------------------------------------------------------------")  # 60個
 
@@ -47,15 +61,15 @@ def show():
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
+
 print("鐵達尼號資料集 基本數據 titanic()")
 
 df = sns.load_dataset("titanic")
 # df = df[: 100]  # 只看前幾筆資料
 
 print(df)
-print(df.shape)
 
+print("資料.形狀 :", df.shape)
 
 """
 df.info()  # 這樣就已經把資料集彙總資訊印出來
@@ -99,7 +113,7 @@ print("取得遺失值的列數 :", cc)
 print("embark_town 以前一筆取代")
 df.embark_town.fillna(method="ffill", inplace=True)
 
-print("3. 處理 embarked 空資料")
+print("3. 處理 embarked(登船港) 空資料")
 print("上船港口(embarked)遺失值(Missing value)以後一筆取代")
 # 取得遺失值的列數
 cc = df[pd.isna(df.embarked)]
@@ -168,12 +182,13 @@ df.age = pd.cut(df.age, bins, labels=range(len(bins) - 1))
 # 移除重複資料
 
 # 增加一筆重複資料
-print(df.shape)
+print("資料.形狀 :", df.shape)
 
 df.drop_duplicates()
 
-y = df.survived
 X = df.drop(["survived", "alive", "embarked", "who", "alone", "class"], axis=1)
+y = df.survived
+
 cc = X.head()
 print(cc)
 
@@ -387,7 +402,7 @@ print("------------------------------------------------------------")  # 60個
 print("邏輯迴歸")
 
 titanic = pd.read_csv("data/titanic_ds.csv")
-print(titanic.info())
+#titanic.info()  # 這樣就已經把資料集彙總資訊印出來
 print("---------------------------")
 # 將年齡的空值填入年齡的中位數
 age_median = np.nanmedian(titanic["Age"])
@@ -417,7 +432,7 @@ print("------------------------------------------------------------")  # 60個
 print("邏輯迴歸")
 
 titanic = pd.read_csv("data/titanic_ds.csv")
-print(titanic.info())
+# titanic.info()  # 這樣就已經把資料集彙總資訊印出來
 print("---------------------------")
 # 將年齡的空值填入年齡的中位數
 age_median = np.nanmedian(titanic["Age"])
@@ -448,7 +463,7 @@ print("------------------------------------------------------------")  # 60個
 print("邏輯迴歸")
 
 titanic = pd.read_csv("data/titanic_ds.csv")
-print(titanic.info())
+# titanic.info()  # 這樣就已經把資料集彙總資訊印出來
 print("---------------------------")
 # 轉換欄位值成為數值
 label_encoder = preprocessing.LabelEncoder()
@@ -486,6 +501,7 @@ X = pd.DataFrame([titanic["SexCode"], encoded_class]).T
 X.columns = ["SexCode", "PClass"]
 y = titanic["Survived"]
 
+# 資料分割
 XTrain, XTest, yTrain, yTest = train_test_split(X, y, test_size=0.2)
 
 clf = DecisionTreeClassifier()
@@ -525,8 +541,11 @@ def read_dataset(fname):
     return data
 
 
-train = read_dataset("datasets/titanic/train.csv")  # 共891筆資料, 8欄位
-print(train.head())
+train = read_dataset("datasets/titanic/train.csv")  # 共891筆資料, 12欄位
+print("資料.形狀 :", train.shape)
+
+cc = train.head()
+print(cc)
 
 # 把 "Survived"欄位拿出來當訓練目標 => y
 y = train["Survived"].values
@@ -534,9 +553,8 @@ y = train["Survived"].values
 # 把 "Survived"欄位從原訓練資料移除 => X
 X = train.drop(["Survived"], axis=1).values
 
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+# 資料分割
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
-# 訓練組8成, 測試組2成
 
 clf = DecisionTreeClassifier()
 
@@ -722,7 +740,8 @@ titanic_df = pd.read_csv("data/train.csv")
 test_df = pd.read_csv("data/test.csv")
 
 print(titanic_df.head())
-print(titanic_df.info())
+# titanic_df.info()  # 這樣就已經把資料集彙總資訊印出來
+
 # 查看資料描述
 print(titanic_df.describe())
 
@@ -751,7 +770,7 @@ def get_person(passenger):  # 小於16歲的分類爲兒童
 def conv(df):
     df["Person"] = df[["Age", "Sex"]].apply(get_person, axis=1)  # 組合特徵
     df["Fare"] = df["Fare"].fillna(df["Fare"].mean())  # 缺失值填充爲均值
-    df["Embarked"] = df["Embarked"].fillna("S")  # 缺失值填充爲S
+    df["Embarked"] = df["Embarked"].fillna("S")  # 將[登船港]的缺失值填充爲S(Southampton, 南安普敦)
     df["Fare"] = df["Fare"].astype(int)  # 類型轉換
 
     person_dummies = pd.get_dummies(df["Person"])  # onehot編碼
@@ -803,15 +822,12 @@ print(cc)
 feature_cols = ["Pclass", "Parch"]
 X = train.loc[:, feature_cols]
 
-print("X之大小")
-cc = X.shape
-print(cc)
+print("X資料.形狀 :", X.shape)
 
 # create a response vector 'y' by selecting a Series
 y = train.Survived
-print("y之大小")
-cc = y.shape
-print(cc)
+
+print("y資料.形狀 :", y.shape)
 
 # 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
 logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
@@ -826,9 +842,8 @@ print(cc)
 
 # create a feature matrix from the testing data that matches the training data
 X_new = test.loc[:, feature_cols]
-print("X_new之大小")
-cc = X_new.shape
-print(cc)
+
+print("X_new資料.形狀 :", X_new.shape)
 
 # use the fitted model to make predictions for the testing set observations
 new_pred_class = logistic_regression.predict(X_new)
@@ -898,7 +913,7 @@ tree = Tree.from_pandas_df(
     alpha_merge=0.1,
 )
 tree.print_tree()
-'''
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -915,62 +930,40 @@ print("------------------------------------------------------------")  # 60個
 
 """
 Data Set
-File Name 	Available Formats
-train 	.csv (59.76 kb)
-gendermodel 	.csv (3.18 kb)
-genderclassmodel 	.csv (3.18 kb)
-test 	.csv (27.96 kb)
-gendermodel 	.py (3.58 kb)
-genderclassmodel 	.py (5.63 kb)
-myfirstforest 	.py (3.99 kb)
-
-VARIABLE DESCRIPTIONS:
-survival        Survival
-                (0 = No; 1 = Yes)
-pclass          Passenger Class
-                (1 = 1st; 2 = 2nd; 3 = 3rd)
-name            Name
-sex             Sex
-age             Age
-sibsp           Number of Siblings/Spouses Aboard
-parch           Number of Parents/Children Aboard
-ticket          Ticket Number
-fare            Passenger Fare
-cabin           Cabin
-embarked        Port of Embarkation
-                (C = Cherbourg; Q = Queenstown; S = Southampton)
-
-import pandas as pd
-import numpy as np
-import pylab as plt
+File Name 	  Available Formats
+train 	          .csv (59.76 kb)
+gendermodel 	  .csv ( 3.18 kb)
+genderclassmodel  .csv ( 3.18 kb)
+test 	          .csv (27.96 kb)
+gendermodel 	  .py  ( 3.58 kb)
+genderclassmodel  .py  ( 5.63 kb)
+myfirstforest 	  .py  ( 3.99 kb)
 """
-
 # Set the global default size of matplotlib figures
 plt.rc("figure", figsize=(10, 5))
 
 # Size of matplotlib figures that contain subplots
-fizsize_with_subplots = (10, 10)
+fizsize_with_subplots = (12, 8)
 
 # Size of matplotlib histogram bins
 bin_size = 10
 
 # Explore the Data
 
-df_train = pd.read_csv("data/titanic_train2.csv")
+df_train = pd.read_csv("datasets/titanic/titanic_train2.csv")  # 共891筆資料, 12欄位
+
+print("資料.形狀 :", df_train.shape)
+
 cc = df_train.head()
 print(cc)
 
-cc = df_train.tail()
-print(cc)
-
 cc = df_train.dtypes
-print(cc)
+# print(cc)
 
-cc = df_train.info()
-print(cc)
+# df_train.info()  # 這樣就已經把資料集彙總資訊印出來
 
 cc = df_train.describe()
-print(cc)
+# print(cc)
 
 # Set up a grid of plots
 fig = plt.figure(figsize=fizsize_with_subplots)
@@ -1002,12 +995,11 @@ plt.title("Age Histogram")
 
 show()
 
-# Feature: Passenger Classes
-
+print("Feature: Passenger Classes")
 pclass_xt = pd.crosstab(df_train["Pclass"], df_train["Survived"])
 print(pclass_xt)
 
-# Plot the cross tab:
+# Plot the cross tab
 
 # Normalize the cross tab to sum to 1:
 pclass_xt_pct = pclass_xt.div(pclass_xt.sum(1).astype(float), axis=0)
@@ -1017,15 +1009,15 @@ plt.xlabel("Passenger Class")
 plt.ylabel("Survival Rate")
 show()
 
-# Feature: Sex
+print("Feature: Sex")
 
 sexes = sorted(df_train["Sex"].unique())
-genders_mapping = dict(zip(sexes, range(0, len(sexes) + 1)))
-cc = genders_mapping
-print(cc)
 
+genders_mapping = dict(zip(sexes, range(0, len(sexes) + 1)))
+print('建立對應表 mapping :', genders_mapping)
 # {'female': 0, 'male': 1}
 
+# 資料轉換, 字串對應到數值 .map
 df_train["Sex_Val"] = df_train["Sex"].map(genders_mapping).astype(int)
 cc = df_train.head()
 print(cc)
@@ -1034,6 +1026,10 @@ sex_val_xt = pd.crosstab(df_train["Sex_Val"], df_train["Survived"])
 sex_val_xt_pct = sex_val_xt.div(sex_val_xt.sum(1).astype(float), axis=0)
 sex_val_xt_pct.plot(kind="bar", stacked=True, title="Survival Rate by Gender")
 show()
+
+
+sys.exit()
+
 
 # Get the unique values of Pclass:
 passenger_classes = sorted(df_train["Pclass"].unique())
@@ -1084,12 +1080,12 @@ print(cc)
 embarked_locs = sorted(df_train["Embarked"].unique())
 
 embarked_locs_mapping = dict(zip(embarked_locs, range(0, len(embarked_locs) + 1)))
-print(embarked_locs_mapping)
-
+print('建立對應表 mapping :', embarked_locs_mapping)
 # {nan: 0, 'C': 1, 'Q': 2, 'S': 3}
 
 # Transform Embarked from a string to a number representation to prepare it for machine learning algorithms:
 
+# 資料轉換, 字串對應到數值 .map
 df_train["Embarked_Val"] = df_train["Embarked"].map(embarked_locs_mapping).astype(int)
 print(df_train.head())
 
@@ -1263,6 +1259,7 @@ show()
 
 # Final Data Preparation for Machine Learning
 
+# 資料轉換, 字串對應到數值 .map
 cc = df_train.dtypes[df_train.dtypes.map(lambda x: x == "object")]
 print(cc)
 
@@ -1297,8 +1294,10 @@ def clean_data(df, drop_passenger_id):
 
     # Generate a mapping of Sex from a string to a number representation
     genders_mapping = dict(zip(sexes, range(0, len(sexes) + 1)))
+    print('建立對應表 mapping :', genders_mapping)
 
     # Transform Sex from a string to a number representation
+    # 資料轉換, 字串對應到數值 .map
     df["Sex_Val"] = df["Sex"].map(genders_mapping).astype(int)
 
     # Get the unique values of Embarked
@@ -1306,6 +1305,7 @@ def clean_data(df, drop_passenger_id):
 
     # Generate a mapping of Embarked from a string to a number representation
     embarked_locs_mapping = dict(zip(embarked_locs, range(0, len(embarked_locs) + 1)))
+    print('建立對應表 mapping :', embarked_locs_mapping)
 
     # Transform Embarked from a string to dummy variables
     df = pd.concat([df, pd.get_dummies(df["Embarked"], prefix="Embarked_Val")], axis=1)
@@ -1380,7 +1380,7 @@ print(cc)
 
 # Random Forest: Predicting
 
-df_test = pd.read_csv("data/titanic_test2.csv")
+df_test = pd.read_csv("datasets/titanic/titanic_test2.csv")
 cc = df_test.head()
 print(cc)
 
@@ -1405,13 +1405,8 @@ df_test[['PassengerId', 'Survived']].to_csv('tmp_titanic_results-rf.csv', index=
 
 # Evaluate Model Accuracy
 
-# Split 80-20 train vs test data
-train_x, test_x, train_y, test_y = train_test_split(
-    train_features, train_target, test_size=0.20, random_state=0
-)
-print(train_features.shape, train_target.shape)
-print(train_x.shape, train_y.shape)
-print(test_x.shape, test_y.shape)
+# 資料分割
+train_x, test_x, train_y, test_y = train_test_split(train_features, train_target, test_size=0.2)
 
 # Use the new training data to fit the model, predict, and get the accuracy score:
 
@@ -1474,6 +1469,51 @@ Not Survived       0.84      0.89      0.86       110
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+# 目標:求出Titanic女乘客的生還率
+
+df = sns.load_dataset('titanic')
+print(df.info())
+
+print(df.head())
+
+# 查看空查狀況
+
+print(df.isnull().sum())
+
+#將「age」欄位缺值，使用中位數補值
+
+df.loc[:, 'age'] = df.loc[:, 'age'].fillna(df.loc[:, 'age'].median())
+print(df.info())
+
+#將「embarked」欄位缺值，使用眾數補值
+
+mod = df.loc[:,'embark_town'].mode()
+print(mod)
+df.loc[:,'embark_town'].fillna(mod[0], inplace=True)
+print(df.info())
+
+#將「deck」欄位缺值過多，將此欄位刪除
+
+df = df.drop(['deck'],axis=1)
+print(df.info())
+
+#求女性生還率多有多高
+
+df = df.query('sex == "female"')
+survived_rate = df['survived'].mean()
+print(survived_rate)
+
+#0.7420382165605095
+
+#另一種算法
+
+df = df.query('sex == "female"')
+survived_rate = pd.crosstab(df['survived'], df['sex']).iloc[1, 0] / df.shape[0]
+print(survived_rate)
+
+#0.7420382165605095
+
+#Titanic女乘客的生還率為 74.26%
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1482,21 +1522,17 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
+sys.exit()
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個

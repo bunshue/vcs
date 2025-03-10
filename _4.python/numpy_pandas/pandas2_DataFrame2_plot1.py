@@ -1562,13 +1562,224 @@ plt.title("韓國的情況")
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
 
+# titanic 畫圖
+
+
+"""
+数据分析
+
+基于Pandas和Numpy两种工具，分析给定数据集包含的特征。主要包括数据探索、数据清洗等，其目的在于保持数据的“整洁”，为后续应用机器学习模型做准备。
+
+整个数据分析流程如下：
+
+1、加载数据：可以直接从网站下载，也可以使用numpy或者Pandas、python等本地加载
+
+2、观察和理解数据：数据集大小，数据集的饱和度，数据集中各个属性的含义、数值分布，正负标签比例等。
+
+3、数据清洗
+1.加载数据
+
+案例，我们分析一个登船者的生存概率。
+"""
+
+data = sns.load_dataset("titanic")  # 从网站直接下载。
+# 或者直接通过函数加载。
+# data = pd.read_csv("./titanic.csv")  # 加载后的文件是一个dataframe 格式的文件。
+
+
+##观察和理解数据
+print(data.shape)  #观察数据规模
+
+#(891, 15)
+
+cc = data.describe() #数据分布描述
+print(cc)
+
+cc = data.head(5) #前五条数据记录
+print(cc)
+
+cc = data.columns  # 列出所有字段
+print(cc)
+
+"""
+# 学习相关知识，了解每个字段的含义。
+Index(['survived', 'pclass', 'sex', 'age', 'sibsp', 'parch', 'fare',
+       'embarked', 'class', 'who', 'adult_male', 'deck', 'embark_town',
+       'alive', 'alone'],
+      dtype='object')
+"""
+
+# 观察正负标签的比例
+
+# data["survived"].sum()  # 总数
+cc = data["survived"].sum()/data.shape[0] # 生存者的比例是38.38%，比例稍微偏低，但可以接受。最好正负标签平衡。
+print(cc)
+
+# 或者使用
+cc = data["survived"].mean()
+print(cc)
+
+# 观察数据的饱和度.
+cc = data.isna().sum()/data.shape[0]
+print(cc)
+"""
+# 可以看出deck（舱面）和Age缺少较为严重,分别是70%和19.8%。
+
+survived       0.000000
+pclass         0.000000
+sex            0.000000
+age            0.198653
+sibsp          0.000000
+parch          0.000000
+fare           0.000000
+embarked       0.002245
+class          0.000000
+who            0.000000
+adult_male     0.000000
+deck           0.772166
+embark_town    0.002245
+alive          0.000000
+alone          0.000000
+dtype: float64
+"""
+
+# 观察标签的均衡性
+#观察survived的均衡性
+data["survived"].value_counts().plot(kind='bar')
+show()
+
+print("------------------------------")  # 30個
+
+# 观察性别分布
+data["sex"].value_counts().plot(kind = "pie")  # 饼状图 
+show()
+
+print("------------------------------")  # 30個
+
+#观察登船港口的分布
+data.columns
+data["embarked"].value_counts().plot(kind = "bar")  # 类别数据作图
+
+show()
+
+print("------------------------------")  # 30個
+
+# 观察年龄分布
+data["age"].plot(kind="hist")  # 数值型数据不用统计，直接做图
+
+show()
+
+print("------------------------------")  # 30個
+
+#热力图分析
+
+#热力图是观察数据相关性的利器
+#使用sns做热力图，观察变量间的相关性
+""" NG 做 corr() 要純數字
+sns.heatmap(data.corr(),linewidths=.5)
+
+show()
+"""
+print("------------------------------")  # 30個
+
+# 1.2 数据的清洗
+
+# 对数据进行删除、补充或者修改，洗掉“杂质”。
+
+# 填充和删除数据 
+#获取缺失值情况
+print(data.columns)
+
+"""
+Index(['survived', 'pclass', 'sex', 'age', 'sibsp', 'parch', 'fare',
+       'embarked', 'class', 'who', 'adult_male', 'deck', 'embark_town',
+       'alive', 'alone'],
+      dtype='object')
+"""
+
+cc = data.isna().sum()  #查看缺省值
+print(cc)
+"""
+survived         0
+pclass           0
+sex              0
+age            177
+sibsp            0
+parch            0
+fare             0
+embarked         2
+class            0
+who              0
+adult_male       0
+deck           688
+embark_town      2
+alive            0
+alone            0
+dtype: int64
+"""
+# age、deck and embark_town 
+# NG data['deck'].fillna('missing',inplace=True) # 用字符“missing”填充
+print(data["deck"])
+
+print(data["age"])
+
+# 使用平均年龄来填充年龄中的 nan 值
+data["age"].fillna(data["age"].mean(),inplace=True)
+
+print(data["age"])
+print(data["age"].isna().sum())
+
+# 删除数据。这个步骤只能运行一次，否则系统会报错。
+# 从表示相关性的热力图可以发现，pclass和adult_male与survied相关性非常差，所以删除他们
+# data = data.drop(columns=["pclass","adult_male"])
+# print(data.columns,data.shape)
+
+# 上述删除操作只能运行一次。当第一次运行时，指定的columns被删除。第二次运行时会出现找不到属性的报错。
+# 为了程序运行流畅，也可以做如下改写。
+print("删除操作之前-----\n",data.columns,data.shape)
+if "pclass" in data.columns:
+    data = data.drop(columns=["pclass"])
+    print(data.columns,data.shape)
+else:
+    print("pclass 属性已经被删除")
+if 'adult_male' in data.columns:
+    data = data.drop(columns=['adult_male'])
+    print(data.columns,data.shape)
+else:
+    print("adult_male属性已经被删除")
+if 'alive' in data.columns:
+    data = data.drop(columns=['alive'])
+    print(data.columns,data.shape)
+else:
+    print("alive属性已经被删除")
+
+# 删除之后，再一次做热力图
+#使用sns做热力图，观察变量间的相关性
+""" NG 做 corr() 要純數字
+sns.heatmap(data.corr(),linewidths=.5)
+show()
+"""
+
+"""
+删除操作之前-----
+ Index(['survived', 'pclass', 'sex', 'age', 'sibsp', 'parch', 'fare',
+       'embarked', 'class', 'who', 'adult_male', 'deck', 'embark_town',
+       'alive', 'alone'],
+      dtype='object') (891, 15)
+Index(['survived', 'sex', 'age', 'sibsp', 'parch', 'fare', 'embarked', 'class',
+       'who', 'adult_male', 'deck', 'embark_town', 'alive', 'alone'],
+      dtype='object') (891, 14)
+Index(['survived', 'sex', 'age', 'sibsp', 'parch', 'fare', 'embarked', 'class',
+       'who', 'deck', 'embark_town', 'alive', 'alone'],
+      dtype='object') (891, 13)
+Index(['survived', 'sex', 'age', 'sibsp', 'parch', 'fare', 'embarked', 'class',
+       'who', 'deck', 'embark_town', 'alone'],
+      dtype='object') (891, 12)
+"""
 
 print("------------------------------------------------------------")  # 60個
-
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個

@@ -1,5 +1,5 @@
 """
-
+Ridge(
 
 
 """
@@ -38,10 +38,24 @@ from sklearn import tree
 
 
 def show():
-    # plt.show()
+    plt.show()
     pass
 
 
+
+from math import sin, cos, pi, exp
+
+
+def get_dataset(N=20, sigma=0.1):
+    """Generate N training samples"""
+    # X is a set of random points from [-1, 1]
+    X = 2 * np.random.sample(N) - 1
+    # Y are corresponding target values (with noise included)
+    Y = np.array([sin(pi * x) + np.random.normal(0, sigma) for x in X])
+
+    return X, Y
+
+'''
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 """
@@ -797,15 +811,15 @@ for i in range(4):
     ax.scatter(X_test.T[0], X_test.T[1], probs.T[i], marker=".")
 
 show()
-
+'''
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+'''
 """
 Neural Networks
     Here are some helpful functions to draw neural networks
-    Lets just skip them - it is just bunch of matplotlib
 """
-
-# the functions below grabbed from http://www.astroml.org/book_figures/appendix/fig_neural_network.html
 
 radius = 0.3
 
@@ -830,11 +844,8 @@ def draw_circle(ax, center, radius):
     ax.add_patch(circ)
 
 
-# based on borrowed function we can create a new one to draw NN
-
-
 def draw_net(input_size, output_size, hidden_layers=[], w=6, h=4):
-    """Draw a network"""
+    # Draw a network
     x = 0  # initial layer position
 
     ax = plt.subplot()
@@ -897,6 +908,7 @@ def draw_net(input_size, output_size, hidden_layers=[], w=6, h=4):
         # connect each output neuron with all neurons from previous layer
         for y2 in last_layer:
             draw_connecting_arrow(ax, (x - 2, y2), radius, (x, y1), radius)
+    show()
 
 
 draw_net(3, 1)
@@ -1118,35 +1130,23 @@ with tf.Session() as sess:
 
 # Simple regression with NN
 
-from math import sin, cos, pi, exp
-
-
-def get_dataset(N=20, sigma=0.1):
-    """Generate N training samples"""
-    # X is a set of random points from [-1, 1]
-    X = 2 * np.random.sample(N) - 1
-    # Y are corresponding target values (with noise included)
-    Y = np.array([sin(pi * x) + np.random.normal(0, sigma) for x in X])
-
-    return X, Y
-
-
 # plot a sample
 X, Y = get_dataset(100, 0.25)
 
-x_ = np.arange(-1, 1, 0.01)
-
-plt.scatter(X, Y, color="C1")
-plt.plot(x_, np.sin(np.pi * x_), "C0--")
-show()
-
-print("------------------------------------------------------------")  # 60個
-
 draw_net(2, 1, [4], w=10)
 
+print('最後一次出現 draw_net(')
+sys.exit()
+'''
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 import tensorflow as tf
+
+# tensorflow2下使用tensorflow1的方法
+import tensorflow.compat.v1 as tf
+
+tf.disable_v2_behavior()
 
 x = tf.placeholder(tf.float32, [None, 1])
 y = tf.placeholder(tf.float32, [None, 1])
@@ -1166,6 +1166,9 @@ cost = tf.reduce_mean(xent)
 opt = tf.train.GradientDescentOptimizer(0.25).minimize(cost)
 
 init = tf.global_variables_initializer()
+
+X, Y = get_dataset(100, 0.25)
+x_ = np.arange(-10, 10, 0.1)
 
 # We need to reshape out training data
 
@@ -1203,6 +1206,12 @@ MNIST
 """
 
 import tensorflow as tf
+
+# tensorflow2下使用tensorflow1的方法
+import tensorflow.compat.v1 as tf
+
+tf.disable_v2_behavior()
+
 from tensorflow.examples.tutorials.mnist import input_data
 
 # to avoid warnings printed in the notebook
@@ -1280,6 +1289,13 @@ sess.close()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+import tensorflow as tf
+
+# tensorflow2下使用tensorflow1的方法
+import tensorflow.compat.v1 as tf
+
+tf.disable_v2_behavior()
+
 # Gradient descent variations
 # SGD on MNIST # stochastic gradient descent (SGD)
 
@@ -1306,40 +1322,9 @@ plt.plot(np.arange(0, 10000, 1), test_loss)
 show()
 
 print("------------------------------------------------------------")  # 60個
-
-# Momentum
-
-# Online learning may help to escape local minima
-
-x = np.linspace(-2, 2, 100)
-y1 = x**2
-y2 = np.array([a**2 + np.sin(5 * a) for a in x])
-
-plt.subplot(121)
-plt.plot(x, y1)
-plt.scatter([-1.5], [3], c="k", s=300)
-
-plt.subplot(122)
-plt.plot(x, y2)
-plt.scatter([-1.45], [1.75], c="k", s=300)
-show()
-
 print("------------------------------------------------------------")  # 60個
 
 # Regularization
-
-from math import sin, cos, pi, exp
-
-
-def get_dataset(N=20, sigma=0.1):
-    """Generate N training samples"""
-    # X is a set of random points from [-1, 1]
-    X = 2 * np.random.sample(N) - 1
-    # Y are corresponding target values (with noise included)
-    Y = np.array([sin(pi * x) + np.random.normal(0, sigma) for x in X])
-
-    return X, Y
-
 
 # plot a sample
 X, Y = get_dataset(50)
@@ -1350,7 +1335,7 @@ plt.scatter(X, Y, color="C1")
 plt.plot(x_, np.sin(np.pi * x_), "C0--")
 show()
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 # Lets fit data to polynomial of order 20
 
@@ -1378,7 +1363,7 @@ show()
 
 # It is clearly overfitted
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 # Lets do the same using Ridge regression
 
@@ -1399,7 +1384,7 @@ print(reg.coef_)
 
 print(reg_l2.coef_)
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 # Lets repeat the same for Lasso regression
 

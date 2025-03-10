@@ -135,8 +135,8 @@ print("data_module :", iris.data_module)
 print("keys :")
 print(iris.keys())
 
-print("iris.data.shape :", X.shape)
-print("iris.target.shape :", y.shape)
+print("X資料.形狀 :", X.shape)
+print("y資料.形狀 :", y.shape)
 
 print("前幾筆資料內容：")
 print(X[3:6])  # 第3~6筆資料
@@ -191,7 +191,7 @@ df = pd.read_csv(filename)
 print("資料")
 # many print(df)
 
-print("資料.shape :", df.shape)
+print("資料.形狀 :", df.shape)
 print("資料.長度 :", len(df))
 print("資料.head()")
 print(df.head())
@@ -527,11 +527,11 @@ tree.fit(dx_train, dy_train)  # 學習訓練.fit
 
 predictions = tree.predict(dx_test)
 
-print(dx_test.shape)
+print("dx_test資料.形狀 :", dx_test.shape)
 
 print("predictions")
 print(predictions)
-print(predictions.shape)
+print("predictions資料.形狀 :", predictions.shape)
 
 print("測試分數 train")
 print(tree.score(dx_train, dy_train))
@@ -558,11 +558,11 @@ forest.fit(dx_train, dy_train)  # 學習訓練.fit
 
 predictions = forest.predict(dx_test)
 
-print(dx_test.shape)
+print("dx_test資料.形狀 :", dx_test.shape)
 
 print("predictions")
 print(predictions)
-print(predictions.shape)
+print("predictions資料.形狀 :", predictions.shape)
 
 print("測試分數 train")
 print(forest.score(dx_train, dy_train))

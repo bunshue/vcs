@@ -32,7 +32,7 @@ from sklearn.model_selection import train_test_split  # 資料分割 => 訓練�
 
 
 def show():
-    # plt.show()
+    plt.show()
     pass
 
 
@@ -75,7 +75,7 @@ class NeuralNetwork:
 
         for k in range(training):
             if k % self.steps_per_epoch == 0:
-                # print ('epochs:', k/self.steps_per_epoch)
+                print('epochs:', k/self.steps_per_epoch)
                 print("epochs: {}".format(k / self.steps_per_epoch))
                 for s in data:
                     print(s, self.predict(s))
@@ -179,9 +179,12 @@ class NeuralNetwork:
 
 
 nn = NeuralNetwork([2, 2, 1])
+
 X = np.array([[0, 0], [0, 1], [1, 0], [1, 1]])
 y = np.array([0, 1, 1, 0])
+
 nn.fit(X, y, epochs=10)
+
 print("Final prediction")
 for s in X:
     print(s, nn.predict(s))
@@ -239,7 +242,7 @@ import codecs
 
 
 class DataReader(object):
-    """Data reader used for training language model."""
+    # Data reader used for training language model.
 
     def __init__(self, filepath, batch_length, batch_size):
         self.batch_length = batch_length
@@ -318,7 +321,7 @@ tf.disable_v2_behavior()
 
 
 class Model(object):
-    """RNN language model."""
+    # RNN language model.
 
     def __init__(
         self, batch_size, sequence_length, lstm_sizes, dropout, labels, save_path

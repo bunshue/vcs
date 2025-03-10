@@ -459,11 +459,44 @@ finally:
 
 print("------------------------------------------------------------")  # 60個
 
+try:
+    import a_python_module
+except ImportError:
+    print("匯入模組 a_python_module 失敗")
+    print("請安裝模組")
+    # sys.exit()
+
+print("------------------------------------------------------------")  # 60個
+
+
+try:
+    os.remove("hello.txt")
+except Exception as e:
+    print(e)
+    e_type, e_value, e_tb = sys.exc_info()
+    print("種類：{}\n訊息：{}\n資訊：{}".format(e_type, e_value, e_tb))
+
+
+def div(a, b):
+    return a / b
+
+
+print(div(6, 2))  # 3.0
+try:
+    print(div(3, 0))  # 中止程式
+except Exception as e:
+    print(e)
+    e_type, e_value, e_tb = sys.exc_info()
+    print("種類：{}\n訊息：{}\n資訊：{}".format(e_type, e_value, e_tb))
 
 print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
 
 
 print(

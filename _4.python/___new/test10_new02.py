@@ -3046,7 +3046,99 @@ with open("README.md", "w", encoding="utf-8") as readme:
 print("------------------------------------------------------------")  # 60個
 
 
+
+print("map 的用法")
+
+
+def pick(x):
+    fruits = ["Apple", "Banana", "Orange", "Tomato", "Pine Apple", "Berry"]
+    return fruits[x]
+
+
+alist = [1, 4, 2, 5, 0, 3, 4, 4, 2]
+choices = map(pick, alist)
+for choice in choices:
+    print(choice)
+
+
+listname = ["林大明", "陳阿中", "張小英"]
+listchinese = [100, 74, 82]
+listmath = [87, 88, 65]
+listenglish = [79, 100, 8]
+print("姓名     座號  國文  數學  英文")
+for i in range(0, 3):
+    print(
+        listname[i].ljust(5),
+        str(i + 1).rjust(3),
+        str(listchinese[i]).rjust(5),
+        str(listmath[i]).rjust(5),
+        str(listenglish[i]).rjust(5),
+    )
+
+
+
+print("List的用法")
+list1 = []
+list1.append(123)
+list1.append(456)
+list1.append(234)
+list1.append(321)
+list1.append(101)
+# list1.pop()
+
+print("共輸入 %d 個數" % len(list1))
+print("最大：%d" % max(list1))
+print("最小：%d" % min(list1))
+print("總和：%d" % sum(list1))
+print("由大到小排序為：{}".format(sorted(list1, reverse=True)))
+
+
+
+"""
+money = int(input("請輸入購物金額："))
+if(money >= 10000):
+    if(money >= 100000):
+        print(money * 0.8, end=" 元\n")  #八折
+    elif(money >= 50000):
+        print(money * 0.85, end=" 元\n")  #八五折
+    elif(money >= 30000):
+        print(money * 0.9, end=" 元\n")  #九折
+    else:
+        print(money * 0.95, end=" 元\n")  #九五折
+else:
+    print(money, end=" 元\n")  #未打折
+    
+    
+    
+    
+n = int(input("請輸入大樓的樓層數："))
+print("本大樓具有的樓層為：")
+if(n > 3):
+    n += 1
+for i in range(1, n+1):
+    if(i==4):
+        continue
+    print(i, end=" ")
+print()
+"""
+
 print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
 
 
 print("------------------------------------------------------------")  # 60個
