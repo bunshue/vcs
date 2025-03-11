@@ -45,12 +45,12 @@ import statsmodels.api as sm
 
 
 def show():
-    # plt.show()
+    plt.show()
     pass
 
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 # 日期时间
 
 now = time.strptime("2016-07-20", "%Y-%m-%d")
@@ -1022,6 +1022,7 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 from sklearn.model_selection import KFold
+
 X = np.array([[1, 2], [3, 4], [1, 2], [3, 4]])
 y = np.array([1, 2, 3, 4])
 
@@ -1060,7 +1061,9 @@ cc = X_scaled[1:5]
 print(cc)
 
 # 資料分割
-train_data, test_data, train_target, test_target = train_test_split(X_scaled, Y, test_size=0.2)
+train_data, test_data, train_target, test_target = train_test_split(
+    X_scaled, Y, test_size=0.2
+)
 
 # 建模
 
@@ -1089,6 +1092,7 @@ for k in range(1, 15):
 from sklearn.model_selection import ParameterGrid
 from sklearn.model_selection import GridSearchCV
 from sklearn.model_selection import KFold
+
 """
 n_samples = len(train_data)
 #KFold(n_splits=5, *, shuffle=False, random_state=None)
@@ -1147,7 +1151,9 @@ orgData1.income_rank = orgData1.income_rank.astype("category")
 orgData1.describe(include="all")
 
 # 資料分割
-train_data1, test_data1, train_target1, test_target1 = train_test_split(orgData1, Y, test_size=0.2)
+train_data1, test_data1, train_target1, test_target1 = train_test_split(
+    orgData1, Y, test_size=0.2
+)
 
 # 建模
 
@@ -2206,6 +2212,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 import sqlite3
+
 print("------------------------------------------------------------")  # 60個
 
 # 数据整合和数据清洗
@@ -3549,6 +3556,7 @@ se = house_price_gr.rate.std() / len(house_price_gr) ** 0.5
 LB = house_price_gr.rate.mean() - 1.98 * se
 UB = house_price_gr.rate.mean() + 1.98 * se
 (LB, UB)
+
 
 # 如果要求任意置信度下的置信区间的话，可以自己编一个函数
 def confint(x, alpha=0.05):
@@ -4900,7 +4908,7 @@ P = sch.dendrogram(
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
+
 # Kmeans_FA_bank.py
 
 # K-means聚类分析
