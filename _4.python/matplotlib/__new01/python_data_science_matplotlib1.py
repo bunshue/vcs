@@ -1427,7 +1427,7 @@ print("------------------------------------------------------------")  # 60個
 from netCDF4 import Dataset
 from mpl_toolkits.basemap import Basemap
 
-data = Dataset("C:/_git/vcs/_big_files/gistemp250_GHCNv4.nc")
+data = Dataset("D:/_git/vcs/_big_files/gistemp250_GHCNv4.nc")
 
 from netCDF4 import date2index
 from datetime import datetime

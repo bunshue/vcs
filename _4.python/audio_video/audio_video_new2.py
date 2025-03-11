@@ -403,7 +403,7 @@ print("------------------------------------------------------------")  # 60個
 
 # moviepy：影片處理
 
-video_filename = "C:/_git/vcs/_big_files/holo1.mp4"
+video_filename = "D:/_git/vcs/_big_files/holo1.mp4"
 
 from IPython.display import HTML  # 用IPython
 

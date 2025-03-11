@@ -10,7 +10,7 @@ import datetime
 print("------------------------------------------------------------")  # 60個
 
 cmd = "black python07_check_python_files.py"
-tmp_filename = "C:/_git/vcs/_big_files/tmp_black_mesg.txt"
+tmp_filename = "D:/_git/vcs/_big_files/tmp_black_mesg.txt"
 
 ret = os.system(cmd + " 2>" + tmp_filename)
 if ret == 0:

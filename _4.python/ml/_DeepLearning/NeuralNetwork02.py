@@ -419,7 +419,7 @@ https://storage.googleapis.com/tensorflow/tf-keras-datasets/imdb.npz
 """
 
 # 讀取 本地檔案
-imdb_npz_filename = "C:/_git/vcs/_big_files/imdb.npz"
+imdb_npz_filename = "D:/_git/vcs/_big_files/imdb.npz"
 
 (x_train, y_train), (x_test, y_test) = imdb.load_data(
     path=imdb_npz_filename,

@@ -556,7 +556,7 @@ import joblib
 # 檔案在
 # https://www.kaggle.com/competitions/fake-news/data?select=train.csv
 
-train_df = pd.read_csv("C:/_git/vcs/_big_files/fake-news/train.csv")
+train_df = pd.read_csv("D:/_git/vcs/_big_files/fake-news/train.csv")
 
 train_df.dropna()
 

@@ -137,7 +137,7 @@ EPOCHS = 1  # 遞迴次數, 訓練次數
 INPUT_DIM = 784  # 輸入層: 28*28 = 784
 VALIDATION_SPLIT = 0.2  # 驗證資料佔比
 
-mnist_npz_filename = "C:/_git/vcs/_big_files/mnist.npz"
+mnist_npz_filename = "D:/_git/vcs/_big_files/mnist.npz"
 
 
 def load_mnist_data():
@@ -395,7 +395,7 @@ from tensorflow.keras.datasets import mnist
 
 """
 # 標準 2 本地檔案
-mnist_npz_filename = "C:/_git/vcs/_big_files/mnist.npz"
+mnist_npz_filename = "D:/_git/vcs/_big_files/mnist.npz"
 
 mnist = np.load(mnist_npz_filename)
 x_train, y_train = mnist["x_train"], mnist["y_train"]
@@ -2995,7 +2995,7 @@ from PIL import Image
 # 可下載最新之 .h5 檔案
 # urlretrieve("https://gr-models.s3-us-west-2.amazonaws.com/mnist-model.h5", "mnist-model.h5")
 # mnist-model.h5 路徑不能含中文
-mnist_model_filename = "C:/_git/vcs/_big_files/mnist-model.h5"
+mnist_model_filename = "D:/_git/vcs/_big_files/mnist-model.h5"
 model = tf.keras.models.load_model(mnist_model_filename)
 
 (x_train, y_train), (x_test, y_test) = tf.keras.datasets.mnist.load_data(

@@ -48,7 +48,6 @@ def show():
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
 # Interactive Machine Learning Demo
 
 from ipywidgets import interact, interactive, IntSlider, Layout, interact_manual

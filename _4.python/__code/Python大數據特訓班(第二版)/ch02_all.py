@@ -1,5 +1,35 @@
 print("------------------------------------------------------------")  # 60個
 
+# 共同
+import os
+import sys
+import time
+import math
+import random
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns  # 海生, 自動把圖畫得比較好看
+
+font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+# 設定中文字型及負號正確顯示
+# 設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
+# 設定負號
+plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+plt.rcParams["font.size"] = 12  # 設定字型大小
+
+print("------------------------------------------------------------")  # 60個
+
+
+def show():
+    plt.show()
+    pass
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 # get.py
 import requests
 
@@ -398,5 +428,728 @@ driver.find_element_by_id("SearchButton").click()  # 按登入鈕
 #
 ##print(jsdata['data'])
 # jsdata
+
+print("------------------------------------------------------------")  # 60個
+
+# lineimage.py
+import requests
+import os
+import json
+from bs4 import BeautifulSoup
+
+url = "https://store.line.me/stickershop/product/8991459/zh-Hant"
+url = "https://store.line.me/stickershop/product/10571593/zh-Hant"
+html = requests.get(url)
+soup = BeautifulSoup(html.text, "html.parser")
+
+# 建立目錄儲存圖片
+images_dir = "line_image/"
+if not os.path.exists(images_dir):
+    os.mkdir(images_dir)
+
+# 下載貼圖
+datas = soup.find_all("li", {"class": "mdCMN09Li FnStickerPreviewItem"})
+for data in datas:
+    # 將字串資料轉換為字典
+    imginfo = json.loads(data.get("data-preview"))
+    id = imginfo["id"]
+    imgfile = requests.get(imginfo["staticUrl"])  # 載入圖片
+
+    full_path = os.path.join(images_dir, id)  # 儲存的路徑和主檔名
+    # 儲存圖片
+    with open(full_path + ".png", "wb") as f:
+        f.write(imgfile.content)
+    print(full_path + ".png")  # 顯示儲存的路徑和檔名
+#    break  # 測試用
+
+# lineimage_adv.py
+import requests
+import os
+import re
+from bs4 import BeautifulSoup
+
+url = "https://store.line.me/stickershop/product/8991459/zh-Hant"
+url = "https://store.line.me/stickershop/product/10571593/zh-Hant"
+html = requests.get(url)
+soup = BeautifulSoup(html.text, "html.parser")
+
+# 建立目錄儲存圖片
+images_dir = "line_image2/"
+if not os.path.exists(images_dir):
+    os.mkdir(images_dir)
+
+# 下載貼圖
+datas = soup.find_all("a", {"class": "FnRelatedStickerLink"})
+for data in datas:
+    imginfo = data.find("img")
+    id = re.findall(r"[\d]+", data["href"])[0]
+    imgfile = requests.get(imginfo["src"])  # 載入圖片
+
+    full_path = os.path.join(images_dir, id)  # 儲存的路徑和主檔名
+    # 儲存圖片
+    with open(full_path + ".png", "wb") as f:
+        f.write(imgfile.content)
+    print(full_path + ".png")  # 顯示儲存的路徑和檔名
+
+
+import requests
+import json
+import os
+from bs4 import BeautifulSoup
+
+url = "https://store.line.me/stickershop/product/8991459/zh-Hant"
+
+html = requests.get(url)
+
+
+sp = BeautifulSoup(html.text, "html.parser")
+datas = sp.find_all("li", {"class": "mdCMN09Li FnStickerPreviewItem"})
+
+# 建立目錄儲存圖片
+images_dir = "line_image/"
+if not os.path.exists(images_dir):
+    os.mkdir(images_dir)
+
+for data in datas:
+    imginfo = json.loads(data.get("data-preview"))
+    id = imginfo["id"]
+    imgfile = requests.get(imginfo["staticUrl"])
+    full_path = images_dir + id + ".png"
+
+    with open(full_path, "wb") as f:
+        f.write(imgfile.content)
+        print(full_path)
+
+print("------------------------------------------------------------")  # 60個
+
+# load_url_images.py
+import requests, os
+from bs4 import BeautifulSoup
+from urllib.request import urlopen
+
+# 第3屆埔里跑 Puli Power 山城派對馬拉松  向善橋(約34K)
+url = "http://tw.running.biji.co/index.php?q=album&act=photo_list&album_id=30668&cid=5791&type=album&subtitle=第3屆埔里跑 Puli Power 山城派對馬拉松-向善橋(約34K)"
+html = requests.get(url)
+
+soup = BeautifulSoup(html.text, "html.parser")
+title = soup.find("h1", {"class": "album-title flex-1"}).text.strip()
+
+url = "https://running.biji.co/index.php?pop=ajax&func=album&fename=load_more_photos_in_listing_computer"
+
+payload = {
+    "type": "album",
+    "rows": "0",
+    "need_rows": "20",
+    "cid": "5791",
+    "album_id": "30668",
+}
+html = requests.post(url, data=payload)
+# 在回應頁面中找出所有照片連結
+soup = BeautifulSoup(html.text, "html.parser")
+
+# 以標題建立目錄儲存圖片
+images_dir = title + "/"
+if not os.path.exists(images_dir):
+    os.mkdir(images_dir)
+
+# 處理所有 <img> 標籤
+photos = soup.select(".photo_img")
+n = 0
+for photo in photos:
+    # 讀取 src 屬性內容
+    src = photo["src"]
+    # 讀取 .jpg 檔
+    if src != None and (".jpg" in src):
+        # 設定圖檔完整路徑
+        full_path = src
+        filename = full_path.split("/")[-1]  # 取得圖檔名
+        print(full_path)
+        # 儲存圖片
+        try:
+            image = urlopen(full_path)
+            with open(os.path.join(images_dir, filename), "wb") as f:
+                f.write(image.read())
+            n += 1
+        except:
+            print("{} 無法讀取!".format(filename))
+
+print("共下載", n, "張圖片")
+
+
+# load_url_images_adv.py
+import requests, os
+from bs4 import BeautifulSoup
+from urllib.request import urlopen
+
+# 第3屆埔里跑 Puli Power 山城派對馬拉松  向善橋(約34K)
+url = "http://tw.running.biji.co/index.php?q=album&act=photo_list&album_id=30668&cid=5791&type=album&subtitle=第3屆埔里跑 Puli Power 山城派對馬拉松-向善橋(約34K)"
+html = requests.get(url)
+
+soup = BeautifulSoup(html.text, "html.parser")
+title = soup.find("h1", {"class": "album-title flex-1"}).text.strip() + "_全部相片"
+
+url = "https://running.biji.co/index.php?pop=ajax&func=album&fename=load_more_photos_in_listing_computer"
+
+# 在回應頁面中找出所有照片連結
+soup = BeautifulSoup(html.text, "html.parser")
+
+# 以標題建立目錄儲存圖片
+images_dir = title + "/"
+if not os.path.exists(images_dir):
+    os.mkdir(images_dir)
+
+n = 0
+for i in range(200):
+    payload = {
+        "type": "album",
+        "rows": str(i * 20),
+        "need_rows": "20",
+        "cid": "5791",
+        "album_id": "30668",
+    }
+    html = requests.post(url, data=payload)
+    soup = BeautifulSoup(html.text, "html.parser")
+    # 處理所有 <img> 標籤
+    photos = soup.select(".photo_img")
+    for photo in photos:
+        # 讀取 src 屬性內容
+        src = photo["src"]
+        # 讀取 .jpg 檔
+        if src != None and (".jpg" in src):
+            # 設定圖檔完整路徑
+            full_path = src
+            filename = full_path.split("/")[-1]  # 取得圖檔名
+            print(full_path)
+            # 儲存圖片
+            try:
+                image = urlopen(full_path)
+                with open(os.path.join(images_dir, filename), "wb") as f:
+                    f.write(image.read())
+                n += 1
+                if n >= 1000:  # 最多下載 1000 張
+                    break  # 離開內部 for 迴圈
+            except:
+                print("{} 無法讀取!".format(filename))
+    if n >= 1000:  # 最多下載 1000 張
+        break  # 離開外部 for 迴圈
+
+print("共下載", n, "張圖片")
+
+print("------------------------------------------------------------")  # 60個
+
+
+# yearurl.py
+def twodigit(n):  # 將數值轉為二位數字串
+    if n < 10:
+        retstr = "0" + str(n)
+    else:
+        retstr = str(n)
+    return retstr
+
+
+urlbase = (
+    "http://www.twse.com.tw/exchangeReport/STOCK_DAY?response=json&date=2019"  # 網址前半
+)
+urltail = "01&stockNo=2317&_=1521363562193"  # 網址後半
+for i in range(1, 13):  # 取1到12數字
+    url_twse = urlbase + twodigit(i) + urltail  # 組合網址
+    print(url_twse)
+
+
+# stockmonth.py
+def convertDate(date):  # 轉捔民國日期為西元:108/01/01->20190101
+    str1 = str(date)
+    yearstr = str1[:3]  # 取出民國年
+    realyear = str(int(yearstr) + 1911)  # 轉為西元年
+    realdate = realyear + str1[4:6] + str1[7:9]  # 組合日期
+    return realdate
+
+
+import requests
+import json, csv
+import pandas as pd
+import os
+import matplotlib.pyplot as plt
+
+plt.rcParams["font.sans-serif"] = "mingliu"  # 設定中文字型
+plt.rcParams["axes.unicode_minus"] = False
+
+pd.options.mode.chained_assignment = None  # 取消顯示pandas資料重設警告
+
+filepath = "stockmonth01.csv"
+
+if not os.path.isfile(filepath):  # 如果檔案不存在就建立檔案
+    url_twse = "http://www.twse.com.tw/exchangeReport/STOCK_DAY?response=json&date=20190101&stockNo=2317&_=1521363562193"
+    res = requests.get(url_twse)  # 回傳為json資料
+    jdata = json.loads(res.text)  # json解析
+
+    outputfile = open(filepath, "w", newline="", encoding="utf-8")  # 開啟儲存檔案
+    outputwriter = csv.writer(outputfile)  # 以csv格式寫入檔案
+    outputwriter.writerow(jdata["fields"])
+    for dataline in jdata["data"]:  # 寫入資料
+        outputwriter.writerow(dataline)
+    outputfile.close()  # 關閉檔案
+
+pdstock = pd.read_csv(filepath, encoding="utf-8")  # 以pandas讀取檔案
+for i in range(len(pdstock["日期"])):  # 轉換日期式為西元年格
+    pdstock["日期"][i] = convertDate(pdstock["日期"][i])
+pdstock["日期"] = pd.to_datetime(pdstock["日期"])  # 轉換日期欄位為日期格式
+pdstock.plot(kind="line", figsize=(12, 6), x="日期", y=["收盤價", "最低價", "最高價"])  # 繪製統計圖
+
+
+# stockyear.py
+def twodigit(n):  # 將數值轉為二位數字串
+    if n < 10:
+        retstr = "0" + str(n)
+    else:
+        retstr = str(n)
+    return retstr
+
+
+def convertDate(date):  # 轉捔民國日期為西元:108/01/01->20190101
+    str1 = str(date)
+    yearstr = str1[:3]  # 取出民國年
+    realyear = str(int(yearstr) + 1911)  # 轉為西元年
+    realdate = realyear + str1[4:6] + str1[7:9]  # 組合日期
+    return realdate
+
+
+import requests
+import json, csv
+import pandas as pd
+import os
+import time
+import matplotlib.pyplot as plt
+
+plt.rcParams["font.sans-serif"] = "mingliu"  # 設定中文字型
+plt.rcParams["axes.unicode_minus"] = False
+
+pd.options.mode.chained_assignment = None  # 取消顯示pandas資料重設警告
+
+urlbase = (
+    "http://www.twse.com.tw/exchangeReport/STOCK_DAY?response=json&date=2019"  # 網址前半
+)
+urltail = "01&stockNo=2317&_=1521363562193"  # 網址後半
+filepath = "stockyear2019.csv"
+
+if not os.path.isfile(filepath):  # 如果檔案不存在就建立檔案
+    for i in range(1, 13):  # 取1到12數字
+        url_twse = urlbase + twodigit(i) + urltail  # 組合網址
+        res = requests.get(url_twse)  # 回傳為json資料
+        jdata = json.loads(res.text)  # json解析
+
+        outputfile = open(filepath, "a", newline="", encoding="utf-8")  # 開啟儲存檔案
+        outputwriter = csv.writer(outputfile)  # 以csv格式寫入檔案
+        if i == 1:  # 若是1月就寫入欄位名稱
+            outputwriter.writerow(jdata["fields"])
+        for dataline in jdata["data"]:  # 逐月寫入資料
+            outputwriter.writerow(dataline)
+        time.sleep(0.5)  # 延遲0.5秒,否則有時會有錯誤
+    outputfile.close()  # 關閉檔案
+
+pdstock = pd.read_csv(filepath, encoding="utf-8")  # 以pandas讀取檔案
+for i in range(len(pdstock["日期"])):  # 轉換日期式為西元年格式
+    pdstock["日期"][i] = convertDate(pdstock["日期"][i])
+pdstock["日期"] = pd.to_datetime(pdstock["日期"])  # 轉換日期欄位為日期格式
+pdstock.plot(kind="line", figsize=(12, 6), x="日期", y=["收盤價", "最低價", "最高價"])  # 繪製統計圖
+
+
+# stockyear_plotly.py
+def twodigit(n):  # 將數值轉為二位數字串
+    if n < 10:
+        retstr = "0" + str(n)
+    else:
+        retstr = str(n)
+    return retstr
+
+
+def convertDate(date):  # 轉捔民國日期為西元:106/03/02->20170302
+    str1 = str(date)
+    yearstr = str1[:3]  # 取出民國年
+    realyear = str(int(yearstr) + 1911)  # 轉為西元年
+    realdate = realyear + str1[4:6] + str1[7:9]  # 組合日期
+    return realdate
+
+
+import requests
+import json, csv
+import pandas as pd
+import os
+import time
+
+from plotly.graph_objs import Scatter, Layout
+from plotly.offline import plot
+
+pd.options.mode.chained_assignment = None  # 取消顯示pandas資料重設警告
+
+urlbase = (
+    "http://www.twse.com.tw/exchangeReport/STOCK_DAY?response=json&date=2019"  # 網址前半
+)
+urltail = "01&stockNo=2317&_=1521363562193"  # 網址後半
+filepath = "stockyear2019.csv"
+
+if not os.path.isfile(filepath):  # 如果檔案不存在就建立檔案
+    for i in range(1, 13):  # 取1到12數字
+        url_twse = urlbase + twodigit(i) + urltail  # 組合網址
+        res = requests.get(url_twse)  # 回傳為json資料
+        jdata = json.loads(res.text)  # json解析
+
+        outputfile = open(filepath, "a", newline="", encoding="utf-8")  # 開啟儲存檔案
+        outputwriter = csv.writer(outputfile)  # 以csv格式寫入檔案
+        if i == 1:  # 若是1月就寫入欄位名稱
+            outputwriter.writerow(jdata["fields"])
+        for dataline in jdata["data"]:  # 逐月寫入資料
+            outputwriter.writerow(dataline)
+        time.sleep(0.5)  # 延遲0.5秒,否則有時會有錯誤
+    outputfile.close()  # 關閉檔案
+
+pdstock = pd.read_csv(filepath, encoding="utf-8")  # 以pandas讀取檔案
+for i in range(len(pdstock["日期"])):  # 轉換日期式為西元年格式
+    pdstock["日期"][i] = convertDate(pdstock["日期"][i])
+pdstock["日期"] = pd.to_datetime(pdstock["日期"])  # 轉換日期欄位為日期格式
+data = [
+    Scatter(x=pdstock["日期"], y=pdstock["收盤價"], name="收盤價"),
+    Scatter(x=pdstock["日期"], y=pdstock["最低價"], name="最低價"),
+    Scatter(x=pdstock["日期"], y=pdstock["最高價"], name="最高價"),
+]
+plot({"data": data, "layout": Layout(title="2019年個股統計圖")}, auto_open=True)
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+
+
+# books.py
+def showkind(url, kind):
+    html = requests.get(url, headers=headers).text
+    soup = BeautifulSoup(html, "lxml")
+    try:
+        pages = int(soup.select(".cnt_page span")[0].text)  # 該分類共有多少頁
+        print("共有", pages, "頁")
+        for page in range(1, pages + 1):
+            pageurl = url + "&page=" + str(page).strip()
+            print("第", page, "頁", pageurl)
+            # showpage(pageurl,kind)
+    except:  # 沒有分頁的處理
+        showpage(url, kind)
+
+
+def showpage(url, kind):
+    html = requests.get(url, headers=headers).text
+    soup = BeautifulSoup(html, "lxml")
+    # 近期新書、在 class="mod type02_m012 clearfix" 中
+    res = soup.find_all("div", {"class": "mod type02_m012 clearfix"})[0]
+    items = res.select(".item")  # 所有 item
+    n = 0  # 計算該分頁共有多少本書
+    for item in items:
+        msg = item.select(".msg")[0]
+        src = item.select("a img")[0]["src"]
+        title = msg.select("a")[0].text  # 書名
+        imgurl = src.split("?i=")[-1].split("&")[0]  # 圖片網址
+        author = msg.select("a")[1].text  # 作者
+        publish = msg.select("a")[2].text  # 出版社
+        date = msg.find("span").text.split("：")[-1]  # 出版日期
+        onsale = item.select(".price .set2")[0].text  # 優惠價
+        content = item.select(".txt_cont")[0].text.replace(" ", "").strip()  # 內容
+        print("\n分類：" + kind)
+        print("書名：" + title)
+        print("圖片網址：" + imgurl)
+        print("作者：" + author)
+        print("出版社：" + publish)
+        print("出版日期：" + date)
+        print(onsale)  # 優惠價
+        print("內容：" + content)
+        n += 1
+        print("n=", n)
+
+
+def twobyte(kindno):
+    if kindno < 10:
+        kindnostr = "0" + str(kindno)
+    else:
+        kindnostr = str(kindno)
+    return kindnostr
+
+
+# 主程式
+import requests
+from bs4 import BeautifulSoup
+
+kindno = 1  # 要下載的分類，預設為第1分類：文學小說
+homeurl = "http://www.books.com.tw/web/books_nbtopm_01/?o=5&v=1"
+mode = "?o=5&v=1"  # 顯示模式：直式  排序依：暢銷度
+url = "http://www.books.com.tw/web/books_nbtopm_"
+headers = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36"
+}
+html = requests.get(homeurl, headers=headers).text
+soup = BeautifulSoup(html, "lxml")
+
+# 中文書新書分類，取得分類資訊
+res = soup.find("div", class_="mod_b type02_l001-1 clearfix")
+hrefs = res.select("a")
+
+kindno = int(input("請輸入要下載的分類："))
+if 0 < kindno <= len(hrefs):
+    kind = hrefs[kindno - 1].text  # 分類名稱
+    print("下載的分類編號：{}   分類名稱：{}".format(kindno, kind))
+    # 下載指定的分類
+    kindurl = url + twobyte(kindno) + mode  # 分類網址
+    print(kindurl)
+    showkind(kindurl, kind)  # 顯示該分類所有書籍
+else:
+    print("分類不存在!")
+
+
+# books_GoogleSheet.py
+def showkind(url, kind):
+    html = requests.get(url, headers=headers).text
+    soup = BeautifulSoup(html, "html.parser")
+    try:
+        pages = int(soup.select(".cnt_page span")[0].text)  # 該分類共有多少頁
+        print("共有", pages, "頁")
+        for page in range(1, pages + 1):
+            pageurl = url + "&page=" + str(page).strip()
+            print("第", page, "頁", pageurl)
+            showpage(pageurl, kind)
+    except:  # 沒有分頁的處理
+        showpage(url, kind)
+
+
+def showpage(url, kind):
+    html = requests.get(url, headers=headers).text
+    soup = BeautifulSoup(html, "html.parser")
+    # 近期新書、在 class="mod type02_m012 clearfix" 中
+    res = soup.find_all("div", {"class": "mod type02_m012 clearfix"})[0]
+    items = res.select(".item")  # 所有 item
+    n = 0  # 計算該分頁共有多少本書
+    for item in items:
+        msg = item.select(".msg")[0]
+        src = item.select("a img")[0]["src"]
+        title = msg.select("a")[0].text  # 書名
+        imgurl = src.split("?i=")[-1].split("&")[0]  # 圖片網址
+        author = msg.select("a")[1].text  # 作者
+        publish = msg.select("a")[2].text  # 出版社
+        date = msg.find("span").text.split("：")[-1]  # 出版日期
+        onsale = item.select(".price .set2")[0].text  # 優惠價
+        content = item.select(".txt_cont")[0].text.replace(" ", "").strip()  # 內容
+        # 將資料加入 list1 串列中
+        listdata = [kind, title, imgurl, author, publish, date, onsale, content]
+        list1.append(listdata)
+        n += 1
+        print("n=", n)
+
+
+def twobyte(kindno):
+    if kindno < 10:
+        kindnostr = "0" + str(kindno)
+    else:
+        kindnostr = str(kindno)
+    return kindnostr
+
+
+def auth_gss_client(path, scopes):  # 建立憑證
+    credentials = ServiceAccountCredentials.from_json_keyfile_name(path, scopes)
+    return gspread.authorize(credentials)
+
+
+# 主程式
+import requests
+from bs4 import BeautifulSoup
+import gspread
+from oauth2client.service_account import ServiceAccountCredentials
+from time import sleep
+
+auth_json_path = "C:/_git/vcs/_1.data/______test_files1/_key/PythonUpload.json"
+gss_scopes = ["https://spreadsheets.google.com/feeds"]
+gss_client = auth_gss_client(auth_json_path, gss_scopes)  # 連線
+
+spreadsheet_key = "您自己的key"
+sheet = gss_client.open_by_key(spreadsheet_key).sheet1  # 開啟工作表
+sheet.clear()  # 清除工作表內容
+
+list1 = []
+kindno = 1  # 要下載的分類，預設為第 1分類：文學小說
+homeurl = "http://www.books.com.tw/web/books_nbtopm_01/?o=5&v=1"
+mode = "?o=5&v=1"  # 顯示模式：直式  排序依：暢銷度
+url = "https://www.books.com.tw/web/books_nbtopm_"
+headers = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36"
+}
+html = requests.get(homeurl, headers=headers).text
+soup = BeautifulSoup(html, "html.parser")
+# 中文書新書分類，取得分類資訊
+res = soup.find("div", {"class": "mod_b type02_l001-1 clearfix"})
+hrefs = res.select("a")
+kindno = int(input("請輸入要下載的分類："))
+if 0 < kindno <= len(hrefs):
+    kind = hrefs[kindno - 1].text  # 分類名稱
+    print("下載的分類編號：{}   分類名稱：{}".format(kindno, kind))
+    # 下載指定的分類
+    kindurl = url + twobyte(kindno) + mode  # 分類網址
+    showkind(kindurl, kind)  # 顯示該分類所有書籍
+    # 儲存 Google 試算表
+    print("資料寫入雲端 Google 試算表中，請等侯幾分鐘!")
+    listtitle = ["分類", "書名", "圖片網址", "作者", "出版社", "出版日期", "優惠價", "內容"]
+    sheet.append_row(listtitle)  # 標題
+    for item1 in list1:  # 資料
+        sheet.append_row(item1)
+        sleep(1)  # 必須加上適當的 delay
+else:
+    print("分類不存在!")
+print("資料儲存完畢!")
+
+print("------------------------------------------------------------")  # 60個
+
+# compare1.py
+
+# 1111data.py
+import requests
+from bs4 import BeautifulSoup
+import pandas as pd
+
+df = []
+baseurl = (
+    "https://www.1111.com.tw/job-bank/job-index.asp?si=1&ks=電腦&ss=s&ps=100&page="  # 電腦
+)
+
+# 取得總頁數
+html = requests.get(baseurl + "1")
+soup = BeautifulSoup(html.text, "lxml")
+tem = soup.find("span", class_="Nexup").text
+page = int(tem.replace("1 / ", ""))
+if page > 15:  # 最多取15頁資料
+    page = 15
+# 逐頁讀取資料
+for i in range(page):
+    url = baseurl + str(i + 1)
+    html = requests.get(url)
+    soup = BeautifulSoup(html.text, "lxml")
+    job = soup.select(".jbInfoin")  # 取class=jbInfoin內容
+    for j in range(len(job)):
+        work = job[j].h3.a.text  # 職務名稱
+        work = work.replace("【誠徵】", "").replace("【急徵】", "").replace("誠徵", "")
+        site = "https:" + job[j].h3.a.get("href")  # 工作網址
+        company = job[j].h4.a.text  # 公司名稱
+        companysort = job[j].find("div", class_="csort").a.text  # 公司類別
+        area = job[j].find("span", class_="location").a.text  # 工作地點
+        tem = job[j].find("div", class_="needs").text
+        temlist = tem.split("|")
+        salary = temlist[0]  # 薪資
+        experiment = temlist[1]  # 工作經驗
+        school = temlist[2]  # 學歷
+        tem = job[j].find("div", class_="jbInfoTxt")
+        temlist = tem.find_all("p")
+        content = ""  # 工作內容
+        for k in range(len(temlist)):
+            content = content + temlist[k].text
+
+        dfmono = pd.DataFrame(
+            [
+                {
+                    "職務名稱": work,
+                    "工作網址": site,
+                    "公司名稱": company,
+                    "公司類別": companysort,
+                    "工作地點": area,
+                    "薪資": salary,
+                    "工作經驗": experiment,
+                    "學歷": school,
+                    "工作內容": content,
+                }
+            ],
+        )
+        df.append(dfmono)
+    print("處理第 " + str(i + 1) + " 頁完畢！")
+df = pd.concat(df, ignore_index=True)
+df.to_excel("tmp_1111data.xlsx", index=0)  # 存為excel檔
+
+print("------------------------------------------------------------")  # 60個
+
+# compare2.py
+
+# 1111data.py
+import requests
+from bs4 import BeautifulSoup
+import pandas as pd
+
+df = []
+baseurl = (
+    "https://www.1111.com.tw/job-bank/job-index.asp?si=1&ks=電腦&ss=s&ps=100&page="  # 電腦
+)
+
+# 取得總頁數
+html = requests.get(baseurl + "1")
+soup = BeautifulSoup(html.text, "lxml")
+tem = soup.find("select", class_="custom-select").text
+page = int(tem.replace("1 / ", ""))
+if page > 15:  # 最多取15頁資料
+    page = 15
+# 逐頁讀取資料
+for i in range(page):
+    url = baseurl + str(i + 1)
+    html = requests.get(url)
+    soup = BeautifulSoup(html.text, "lxml")
+    job = soup.select(".it-md")  # 取class=jbInfoin內容
+    for j in range(len(job)):
+        work = job[j].find("div", class_="position0").a.text  # 職務名稱
+        work = work.replace("【誠徵】", "").replace("【急徵】", "").replace("誠徵", "")
+        site = "https://www.1111.com.tw" + job[j].find("div", class_="position0").a.get(
+            "href"
+        )  # 工作網址
+        company = job[j].find("div", class_="d-none d-md-flex jb-organ").a.text  # 公司名稱
+        companysort = (
+            job[j].find("span", class_="d-none d-md-block").text.replace("｜", "")
+        )  # 公司類別
+        tem = job[j].find("div", class_="text-truncate needs").select("span")
+        area = tem[0].text  # 工作地點
+        salary = tem[1].text  # 薪資
+        experiment = tem[2].text  # 工作經驗
+        school = tem[3].text  # 學歷
+        tem = job[j].find("div", class_="col-12 jbInfoTxt UnExtension").select("p")
+        content = ""  # 工作內容
+        for k in range(len(tem)):
+            content = content + tem[k].text
+
+        dfmono = pd.DataFrame(
+            [
+                {
+                    "職務名稱": work,
+                    "工作網址": site,
+                    "公司名稱": company,
+                    "公司類別": companysort,
+                    "工作地點": area,
+                    "薪資": salary,
+                    "工作經驗": experiment,
+                    "學歷": school,
+                    "工作內容": content,
+                }
+            ],
+        )
+        df.append(dfmono)
+    print("處理第 " + str(i + 1) + " 頁完畢！")
+df = pd.concat(df, ignore_index=True)
+df.to_excel("tmp_1111data.xlsx", index=0)  # 存為excel檔
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
+sys.exit()
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個

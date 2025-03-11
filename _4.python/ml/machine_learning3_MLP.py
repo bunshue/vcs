@@ -203,7 +203,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-mnist_filename = "C:/_git/vcs/_big_files/mnist.pkl.gz"
+mnist_filename = "D:/_git/vcs/_big_files/mnist.pkl.gz"
 
 # 使用sklearn中的神经网络模块MLPClassifier处理分类问题
 # MLPClassifier（多层感知器分类器）

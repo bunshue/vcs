@@ -31,7 +31,7 @@ import gradio as gr
 # 可下載最新之 .h5 檔案
 # urlretrieve("https://gr-models.s3-us-west-2.amazonaws.com/mnist-model.h5", "mnist-model.h5")
 # mnist-model.h5 路徑不能含中文
-mnist_model_filename = "C:/_git/vcs/_big_files/mnist-model.h5"
+mnist_model_filename = "D:/_git/vcs/_big_files/mnist-model.h5"
 model = tf.keras.models.load_model(mnist_model_filename)
 
 def mnist(image):
@@ -207,7 +207,7 @@ import numpy as np
 import gradio as gr
 
 # left_right.h5 路徑不能含中文
-mnist_model_filename = "C:/_git/vcs/_big_files/left_right.h5"
+mnist_model_filename = "D:/_git/vcs/_big_files/left_right.h5"
 model = tensorflow.keras.models.load_model(mnist_model_filename)
 labels = ['normal','left','right']
 

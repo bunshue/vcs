@@ -38,8 +38,8 @@ sns.set_style('darkgrid')
 import warnings
 warnings.filterwarnings('ignore')
 
-train = pd.read_csv('C:/_git/vcs/_big_files/widsdatathon2021/TrainingWiDS2021.csv')
-test = pd.read_csv('C:/_git/vcs/_big_files/widsdatathon2021/UnlabeledWiDS2021.csv')
+train = pd.read_csv('D:/_git/vcs/_big_files/widsdatathon2021/TrainingWiDS2021.csv')
+test = pd.read_csv('D:/_git/vcs/_big_files/widsdatathon2021/UnlabeledWiDS2021.csv')
 cc = train.shape, test.shape
 print(cc)
 

@@ -1629,9 +1629,8 @@ print("------------------------------------------------------------")  # 60個
 
 # 客戶區隔(Customer segmentation)
 
-# 載入資料集
 df = pd.read_csv(
-    "C:/_git/vcs/_big_files/Scikit-learn_data/invoice.csv", encoding="ISO-8859-1"
+    "D:/_git/vcs/_big_files/Scikit-learn_data/invoice.csv", encoding="ISO-8859-1"
 )
 
 # 只分析英國的顧客

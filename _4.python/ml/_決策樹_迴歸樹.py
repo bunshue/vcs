@@ -1968,8 +1968,8 @@ print("读取数据")
 time_1 = time.time()
 
 raw_data = pd.read_csv(
-    "C:/_git/vcs/_big_files/lihang-dl-train.csv", header=0
-)  # 读取csv数据
+    "D:/_git/vcs/_big_files/lihang-dl-train.csv", header=0
+)
 data = raw_data.values
 
 imgs = data[::, 1::]
@@ -2190,8 +2190,8 @@ epsilon = 0.001  # 设定阈值
 print("读取数据")
 
 raw_data = pd.read_csv(
-    "C:/_git/vcs/_big_files/lihang-dl-train.csv", header=0
-)  # 读取csv数据
+    "D:/_git/vcs/_big_files/lihang-dl-train.csv", header=0
+)
 data = raw_data.values
 
 imgs = data[::, 1::]

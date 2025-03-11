@@ -8,7 +8,7 @@ from gensim.test.utils import datapath, get_tmpfile
 from gensim.models import KeyedVectors
 from gensim.scripts.glove2word2vec import glove2word2vec
 
-filename = 'C:/_git/vcs/_big_files/glove.6B.100d.txt'
+filename = 'D:/_git/vcs/_big_files/glove.6B.100d.txt'
 
 def display_pca_scatterplot(model, words):
     # Take word vectors
@@ -27,7 +27,7 @@ def display_pca_scatterplot(model, words):
 def main():
     # Download pre-trained GloVe embeddings, turn into Word2Vec format
     glove_file = filename
-    word2vec_glove_file = 'C:/_git/vcs/_big_files/tmp_glove.6B.100d.word2vec.txt'
+    word2vec_glove_file = 'D:/_git/vcs/_big_files/tmp_glove.6B.100d.word2vec.txt'
     if not os.path.isfile(word2vec_glove_file):
         print('檔案不存在 轉換中.....')
         glove2word2vec(glove_file, word2vec_glove_file)

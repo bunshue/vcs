@@ -361,7 +361,7 @@ def printsumfp(fp, clear_filename):
 
 
 # clear_filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-clear_filename = "C:/_git/vcs/_big_files/Python-3.7.17.tar.xz"
+clear_filename = "D:/_git/vcs/_big_files/Python-3.7.17.tar.xz"
 # clear_filename = "\\192.168.1.231\RD_Soft\_主機程式\542-0002\BOOT.bin"
 
 print("計算一個檔案的 MD5 值 1")
@@ -377,7 +377,7 @@ print("------------------------------------------------------------")  # 60個
 print("計算一個檔案的 MD5 值 2")
 
 clear_filename = "C:/_git/vcs/_1.data/______test_files1/calculate_hash.txt"
-clear_filename = "C:/_git/vcs/_big_files/Python-3.7.17.tar.xz"
+clear_filename = "D:/_git/vcs/_big_files/Python-3.7.17.tar.xz"
 
 md5_value = hashlib.md5()
 
@@ -395,7 +395,7 @@ print("------------------------------------------------------------")  # 60個
 print("計算一個檔案的 MD5 值 3")
 
 clear_filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
-clear_filename = "C:/_git/vcs/_big_files/Python-3.7.17.tar.xz"
+clear_filename = "D:/_git/vcs/_big_files/Python-3.7.17.tar.xz"
 
 # 以二進位方式讀取檔案
 md5_value = hashlib.md5(open(clear_filename, "rb").read()).digest()
@@ -408,7 +408,7 @@ print("計算一個檔案的 MD5 值 4")
 
 md5_value = hashlib.md5()  # 建立 md5_value 物件
 clear_filename = "C:/_git/vcs/_1.data/______test_files1/calculate_hash.txt"
-clear_filename = "C:/_git/vcs/_big_files/Python-3.7.17.tar.xz"
+clear_filename = "D:/_git/vcs/_big_files/Python-3.7.17.tar.xz"
 
 # 以二進位方式讀取檔案
 with open(clear_filename, "rb") as fn:

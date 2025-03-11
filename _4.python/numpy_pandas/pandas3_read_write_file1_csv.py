@@ -297,7 +297,7 @@ print(df1)
 print("------------------------------------------------------------")  # 60個
 
 # NYC 311 service request dataset
-csv_filename = "C:/_git/vcs/_big_files/311-service-requests.csv"
+csv_filename = "D:/_git/vcs/_big_files/311-service-requests.csv"
 print("pd讀取csv檔案 :", csv_filename)
 requests = pd.read_csv(csv_filename, dtype="unicode")
 
@@ -309,7 +309,7 @@ print("------------------------------------------------------------")  # 60個
 # Fixing the nan values and string/float confusion
 
 na_values = ["NO CLUE", "N/A", "0"]
-csv_filename = "C:/_git/vcs/_big_files/311-service-requests.csv"
+csv_filename = "D:/_git/vcs/_big_files/311-service-requests.csv"
 print("pd讀取csv檔案 :", csv_filename)
 requests = pd.read_csv(csv_filename, na_values=na_values, dtype={"Incident Zip": str})
 
@@ -367,7 +367,7 @@ print("------------------------------------------------------------")  # 60個
 # Putting it together
 
 na_values = ["NO CLUE", "N/A", "0"]
-csv_filename = "C:/_git/vcs/_big_files/311-service-requests.csv"
+csv_filename = "D:/_git/vcs/_big_files/311-service-requests.csv"
 print("pd讀取csv檔案 :", csv_filename)
 requests = pd.read_csv(csv_filename, na_values=na_values, dtype={"Incident Zip": str})
 

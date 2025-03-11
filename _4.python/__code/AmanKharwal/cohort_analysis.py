@@ -35,7 +35,7 @@ from sklearn.cluster import KMeans
 # Input data files are available in the "../input/" directory.
 # For example, running this (by clicking run or pressing Shift+Enter) will list the files in the input directory
 
-filename = "C:/_git/vcs/_big_files/Online Retail.xlsx"
+filename = "D:/_git/vcs/_big_files/Online Retail.xlsx"
 
 df = pd.read_excel(filename)
 

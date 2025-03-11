@@ -1238,7 +1238,7 @@ print("------------------------------------------------------------")  # 60個
 
 # 書籍資料
 books = pd.read_csv(
-    "C:/_git/vcs/_big_files/Scikit-learn_data/BX-Books.csv",
+    "D:/_git/vcs/_big_files/Scikit-learn_data/BX-Books.csv",
     sep=";",
     on_bad_lines="skip",
     low_memory=False,
@@ -1257,7 +1257,7 @@ books.columns = [
 
 # 讀者資料
 users = pd.read_csv(
-    "C:/_git/vcs/_big_files/Scikit-learn_data/BX-Users.csv",
+    "D:/_git/vcs/_big_files/Scikit-learn_data/BX-Users.csv",
     sep=";",
     on_bad_lines="skip",
     encoding="latin-1",
@@ -1267,7 +1267,7 @@ users.columns = ["userID", "Location", "Age"]
 
 # 評價資料
 ratings = pd.read_csv(
-    "C:/_git/vcs/_big_files/Scikit-learn_data/BX-Book-Ratings.csv",
+    "D:/_git/vcs/_big_files/Scikit-learn_data/BX-Book-Ratings.csv",
     sep=";",
     on_bad_lines="skip",
     encoding="latin-1",
@@ -1534,7 +1534,7 @@ print("------------------------------------------------------------")  # 60個
 
 # 計算及繪製混淆矩陣
 
-df = pd.read_csv("C:/_git/vcs/_big_files/Scikit-learn_data/creditcard.csv")
+df = pd.read_csv("D:/_git/vcs/_big_files/Scikit-learn_data/creditcard.csv")
 cc = df.head()
 print(cc)
 
@@ -1723,7 +1723,7 @@ print("------------------------------------------------------------")  # 60個
 
 # 載入資料
 
-df = pd.read_csv("C:/_git/vcs/_big_files/Scikit-learn_data/creditcard.csv")
+df = pd.read_csv("D:/_git/vcs/_big_files/Scikit-learn_data/creditcard.csv")
 cc = df.head()
 print(cc)
 

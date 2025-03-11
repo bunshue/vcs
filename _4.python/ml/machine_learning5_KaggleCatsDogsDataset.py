@@ -35,7 +35,7 @@ print("------------------------------------------------------------")  # 60個
 
 
 """ 將圖片分成兩大群
-img_directory = 'D:/_git/_big_files/kagglecatsanddogs_5340/PetImages/'
+img_directory = 'D:/_git/vcs/_big_files/kagglecatsanddogs_5340/PetImages/'
 validation_split = 0.1
 
 import os
@@ -62,8 +62,8 @@ import cv2
 from tqdm import tqdm
 
 # 數據集的路徑
-DATADIR = "D:/_git/_big_files/kagglecatsanddogs_5340_1000/PetImages/"
-DATADIR = "D:/_git/_big_files/kagglecatsanddogs_5340_800/PetImages/"
+DATADIR = "D:/_git/vcs/_big_files/kagglecatsanddogs_5340_1000/PetImages/"
+DATADIR = "D:/_git/vcs/_big_files/kagglecatsanddogs_5340_800/PetImages/"
 
 CATEGORIES = ["Dog", "Cat"]
 
