@@ -27,6 +27,12 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
+
+def show():
+    plt.show()
+    pass
+
+
 print("------------------------------------------------------------")  # 60個
 
 # 統率, 武力, 智力, 政治, 魅力
@@ -114,7 +120,7 @@ plt.plot(t, np.sqrt(t), "r-")
 
 plt.title("隨機漫步算法")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -137,7 +143,7 @@ plt.legend()
 
 plt.title("多項式擬合, " + str(n_order) + " 階")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -178,7 +184,7 @@ models[2] = plot_polynomial_fit(x, y, n_order)
 plt.title(titles[2] + ", " + str(n_order) + " 階")
 
 plt.legend()
-plt.show()
+show()
 
 print("------------------------------")  # 30個
 
@@ -215,7 +221,7 @@ plt.annotate(
     arrowprops=dict(arrowstyle="->", connectionstyle="arc3,rad=.2"),
 )
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -245,7 +251,7 @@ for i in range(len(f)):
 
 plt.suptitle("邏輯回歸模型成本函數")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -297,7 +303,7 @@ plt.plot(
     cx, contour(19, cx), "b--", cx, contour(15, cx), "b--", cx, contour(10, cx), "b--"
 )
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -316,7 +322,7 @@ plt.xlabel("P(x)")
 plt.ylabel("Entropy")
 plt.plot(x, entropy(x), "r-")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -335,7 +341,7 @@ plt.xlabel("P(x)")
 plt.ylabel("Gini Impurity")
 plt.plot(x, entropy(x), "r-")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -375,7 +381,7 @@ ax.spines["top"].set_color("none")
 
 plt.plot(x, gaussian_kernel(x, mean, sigma2), "r-")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -418,7 +424,7 @@ ax.spines["top"].set_color("none")
 
 plt.plot(x, normal_distribution(x, mean2, sigma2), "r-")
 
-plt.show()
+show()
 
 print(normal_distribution(6, 5.855, np.sqrt(3.5033e-02)))
 
@@ -475,7 +481,7 @@ plt.annotate(
     fontsize=10,
     arrowprops=dict(arrowstyle="->", connectionstyle="arc3,rad=.2"),
 )
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -512,12 +518,12 @@ print("相關係數:", df.corr())
 
 df.plot(kind="scatter", x="手機使用時間(小時)", y="工作效率")
 plt.title("手機使用時數與工作效率")
-plt.show()
+show()
 
 sns.heatmap(
     df.corr(), linewidths=0.1, vmax=1.0, square=True, linecolor="white", annot=True
 )
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 """
@@ -555,7 +561,7 @@ df.info()  # 這樣就已經把資料集彙總資訊印出來
 sns.heatmap(
     df.corr(), linewidths=0.1, vmax=1.0, square=True, linecolor="white", annot=True
 )
-# plt.show()
+# show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -587,7 +593,7 @@ print(df)
 sns.heatmap(
     df.corr(), linewidths=0.1, vmax=1.0, square=True, linecolor="white", annot=True
 )
-plt.show()
+show()
 
 # 从图中可以看出，val2和val3的相关性最高为0.83，其次是val2和val5。
 
@@ -667,7 +673,189 @@ print(cc)
 plt.subplot(223)
 sns.heatmap(cc, annot=True, cmap="coolwarm")
 
-plt.show()
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("線性迴歸")
+
+
+def my_linear_regression_train(xArr, yArr):  # 訓練模型
+    m, n = np.shape(xArr)
+    xMat = np.mat(np.ones((m, n + 1)))  # 加第一列設爲1，用於計算截距
+    x = np.mat(xArr)
+    xMat[:, 1 : n + 1] = x[:, 0:n]
+    yMat = np.mat(yArr).T
+    xTx = xMat.T * xMat
+    if np.linalg.det(xTx) == 0.0:  # 行列式的值爲0，無逆矩陣
+        print("This matrix is sigular, cannot do inverse")
+        return None
+    ws = xTx.I * (xMat.T * yMat)
+    return ws
+
+
+def predict(xArr, ws):  # 預測
+    m, n = np.shape(xArr)
+    xMat = np.mat(np.ones((m, n + 1)))  # 加第一列設爲1, 爲計算截距
+    x = np.mat(xArr)
+    xMat[:, 1 : n + 1] = x[:, 0:n]
+    return xMat * ws
+
+
+x = [[1], [2], [3], [4]]
+y = [4.1, 5.9, 8.1, 10.1]
+ws = my_linear_regression_train(x, y)
+if isinstance(ws, np.ndarray):
+    print(ws)  # 返回結果：[[2.  ] [2.02]]
+    print(predict([[5]], ws))  # 返回結果：[[12.1]]
+    plt.scatter(x, y, s=20)  # 繪圖
+    yHat = predict(x, ws)
+    plt.plot(x, yHat, linewidth=2.0)
+    show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("邏輯迴歸")
+
+
+def sigmoid(x):  # S函數實現
+    return 1.0 / (1.0 + np.exp(-x))
+
+
+x = np.arange(-10, 10, 0.2)  # 生成從-10, 10， 間隔爲0.2的數組
+y = [sigmoid(i) for i in x]
+plt.grid(True)  # 顯示網格
+plt.plot(x, y)
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("信息量和熵")
+
+
+def entropy(*c):
+    if len(c) <= 0:
+        return -1
+    result = 0
+    for x in c:
+        result += (-x) * math.log(x, 2)
+    return result
+
+
+print(entropy(0.99, 0.01))
+print(entropy(0.5, 0.5))
+print(entropy(0.333, 0.333, 0.333))
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("Apriori關聯規則")
+
+
+def load1():
+    return [
+        ["香蕉", "蘋果", "梨", "葡萄", "櫻桃", "西瓜", "芒果", "枇杷"],
+        ["蘋果", "菠蘿", "梨", "香蕉", "荔枝", "芒果", "橙子"],
+        ["菠蘿", "香蕉", "桔子", "橙子"],
+        ["菠蘿", "梨", "枇杷"],
+        ["蘋果", "香蕉", "梨", "荔枝", "枇杷", "芒果", "香瓜"],
+    ]
+
+
+# 建立所有物品集合
+def create_collection_1(data):
+    c = []
+    for item in data:
+        for g in item:
+            if not [g] in c:
+                c.append([g])
+    c.sort()
+    return list(map(frozenset, c))
+
+
+def check_support(d_list, c_list, min_support):
+    # d_list是購物數據，c_list是物品集合，support是支持度
+    c_dic = {}  # 組合計數
+    for d in d_list:  # 每次購物
+        for c in c_list:  # 每個組
+            if c.issubset(d):
+                if c in c_dic:
+                    c_dic[c] += 1  # 組合計數加1
+                else:
+                    c_dic[c] = 1  # 將組合加入字典
+    d_count = float(len(d_list))  # 購物次數
+    ret = []
+    support_dic = {}
+    for key in c_dic:
+        support = c_dic[key] / d_count
+        if support >= min_support:  # 判斷支持度
+            ret.append(key)
+        support_dic[key] = support  # 記錄支持度
+    return ret, support_dic  # 返回滿足支持率的組和支持度字典
+
+
+def create_collection_n(lk, k):
+    ret = []
+    for i in range(len(lk)):
+        for j in range(i + 1, len(lk)):
+            l1 = list(lk[i])[: k - 2]
+            l1.sort()
+            l2 = list(lk[j])[: k - 2]
+            l2.sort()
+            if l1 == l2:
+                ret.append(lk[i] | lk[j])
+    return ret
+
+
+def apriori(data, min_support=0.5):
+    c1 = create_collection_1(data)
+    d_list = list(map(set, data))  # 將購物列表轉換成集合列表
+    l1, support_dic = check_support(d_list, c1, min_support)
+    l = [l1]
+    k = 2
+    while len(l[k - 2]) > 0:
+        ck = create_collection_n(l[k - 2], k)  # 建立新組合
+        lk, support = check_support(d_list, ck, min_support)  # 判斷新組是否適合支持率
+        support_dic.update(support)
+        l.append(lk)  # 將本次結果加入整體
+        k += 1
+    return l, support_dic
+
+
+data = load1()
+l, support_dic = apriori(data)
+print(l)
+print()
+print(support_dic)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

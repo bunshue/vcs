@@ -33,39 +33,7 @@ def show():
     plt.show()
     pass
 
-
-print("------------------------------------------------------------")  # 60個
-
-# 多圖組合
-# jointplot兩變量圖
-
-import statsmodels.api as sm
-
-sns.set(style="darkgrid")
-data = sm.datasets.ccard.load_pandas().data
-sns.jointplot(
-    x="AVGEXP", y="AGE", data=data, kind="reg", xlim=(0, 1000), ylim=(0, 50), color="m"
-)
-show()
-
-print("------------------------------------------------------------")  # 60個
-
-import statsmodels.api as sm
-
-# pairplot多變量圖
-data = sm.datasets.ccard.load_pandas().data
-sns.pairplot(data, vars=["AGE", "INCOME", "INCOMESQ", "OWNRENT"])
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-
-# catplot兩變量關係圖
-data = sm.datasets.fair.load_pandas().data
-sns.catplot(x="occupation", y="affairs", hue="religious", data=data)
-
-show()
-
+'''
 print("------------------------------------------------------------")  # 60個
 
 print("讀寫XML文件")
@@ -126,206 +94,10 @@ for link in soup.find_all('a'):
         print(addr)
 """
 print("------------------------------------------------------------")  # 60個
+'''
 
-print("簡單隨機抽樣")
-
-import statsmodels.api as sm
-
-data = sm.datasets.anes96.load_pandas().data
-df = data.sample(50)
-print(df.head())
-
-print("系統抽樣")
-
-index_list = [i for i in range(len(data)) if i % 10 == 0]
-df = data.iloc[index_list]
-print(df.head())
-
-print("分層抽樣")
-
-
-def typicalSampling(grp, typicalFracDict):
-    name = grp.name
-    frac = typicalFracDict[name]
-    return grp.sample(frac=frac)
-
-
-typicalFracDict = {
-    0.0: 0.35,
-    1.0: 0.5,
-}
-df = data.groupby("vote").apply(typicalSampling, typicalFracDict)
-print(df.head())
-
-print("整羣抽樣")
-unique = np.unique(data["income"])
-sample = random.sample(list(unique), 2)
-df = pd.DataFrame()
-for label in sample:
-    tmp = data[data["income"] == label]
-    df = pd.concat([df, tmp])
-print(df.head())
 
 print("------------------------------------------------------------")  # 60個
-
-# sklearn
-
-print("------------------------------------------------------------")  # 60個
-
-print("線性迴歸")
-
-
-def train(xArr, yArr):  # 訓練模型
-    m, n = np.shape(xArr)
-    xMat = np.mat(np.ones((m, n + 1)))  # 加第一列設爲1，用於計算截距
-    x = np.mat(xArr)
-    xMat[:, 1 : n + 1] = x[:, 0:n]
-    yMat = np.mat(yArr).T
-    xTx = xMat.T * xMat
-    if np.linalg.det(xTx) == 0.0:  # 行列式的值爲0，無逆矩陣
-        print("This matrix is sigular, cannot do inverse")
-        return None
-    ws = xTx.I * (xMat.T * yMat)
-    return ws
-
-
-def predict(xArr, ws):  # 預測
-    m, n = np.shape(xArr)
-    xMat = np.mat(np.ones((m, n + 1)))  # 加第一列設爲1, 爲計算截距
-    x = np.mat(xArr)
-    xMat[:, 1 : n + 1] = x[:, 0:n]
-    return xMat * ws
-
-
-if __name__ == "__main__":
-    x = [[1], [2], [3], [4]]
-    y = [4.1, 5.9, 8.1, 10.1]
-    ws = train(x, y)
-    if isinstance(ws, np.ndarray):
-        print(ws)  # 返回結果：[[2.  ] [2.02]]
-        print(predict([[5]], ws))  # 返回結果：[[12.1]]
-        plt.scatter(x, y, s=20)  # 繪圖
-        yHat = predict(x, ws)
-        plt.plot(x, yHat, linewidth=2.0)
-        show()
-
-print("------------------------------------------------------------")  # 60個
-
-print("邏輯迴歸")
-
-
-def sigmoid(x):  # S函數實現
-    return 1.0 / (1.0 + np.exp(-x))
-
-
-x = np.arange(-10, 10, 0.2)  # 生成從-10, 10， 間隔爲0.2的數組
-y = [sigmoid(i) for i in x]
-plt.grid(True)  # 顯示網格
-plt.plot(x, y)
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-
-print("信息量和熵")
-
-
-def entropy(*c):
-    if len(c) <= 0:
-        return -1
-    result = 0
-    for x in c:
-        result += (-x) * math.log(x, 2)
-    return result
-
-
-print(entropy(0.99, 0.01))
-print(entropy(0.5, 0.5))
-print(entropy(0.333, 0.333, 0.333))
-
-print("------------------------------------------------------------")  # 60個
-
-print("Apriori關聯規則")
-
-from numpy import *
-
-
-def load1():
-    return [
-        ["香蕉", "蘋果", "梨", "葡萄", "櫻桃", "西瓜", "芒果", "枇杷"],
-        ["蘋果", "菠蘿", "梨", "香蕉", "荔枝", "芒果", "橙子"],
-        ["菠蘿", "香蕉", "桔子", "橙子"],
-        ["菠蘿", "梨", "枇杷"],
-        ["蘋果", "香蕉", "梨", "荔枝", "枇杷", "芒果", "香瓜"],
-    ]
-
-
-# 建立所有物品集合
-def create_collection_1(data):
-    c = []
-    for item in data:
-        for g in item:
-            if not [g] in c:
-                c.append([g])
-    c.sort()
-    return list(map(frozenset, c))
-
-
-def check_support(d_list, c_list, min_support):
-    # d_list是購物數據，c_list是物品集合，support是支持度
-    c_dic = {}  # 組合計數
-    for d in d_list:  # 每次購物
-        for c in c_list:  # 每個組
-            if c.issubset(d):
-                if c in c_dic:
-                    c_dic[c] += 1  # 組合計數加1
-                else:
-                    c_dic[c] = 1  # 將組合加入字典
-    d_count = float(len(d_list))  # 購物次數
-    ret = []
-    support_dic = {}
-    for key in c_dic:
-        support = c_dic[key] / d_count
-        if support >= min_support:  # 判斷支持度
-            ret.append(key)
-        support_dic[key] = support  # 記錄支持度
-    return ret, support_dic  # 返回滿足支持率的組和支持度字典
-
-
-def create_collection_n(lk, k):
-    ret = []
-    for i in range(len(lk)):
-        for j in range(i + 1, len(lk)):
-            l1 = list(lk[i])[: k - 2]
-            l1.sort()
-            l2 = list(lk[j])[: k - 2]
-            l2.sort()
-            if l1 == l2:
-                ret.append(lk[i] | lk[j])
-    return ret
-
-
-def apriori(data, min_support=0.5):
-    c1 = create_collection_1(data)
-    d_list = list(map(set, data))  # 將購物列表轉換成集合列表
-    l1, support_dic = check_support(d_list, c1, min_support)
-    l = [l1]
-    k = 2
-    while len(l[k - 2]) > 0:
-        ck = create_collection_n(l[k - 2], k)  # 建立新組合
-        lk, support = check_support(d_list, ck, min_support)  # 判斷新組是否適合支持率
-        support_dic.update(support)
-        l.append(lk)  # 將本次結果加入整體
-        k += 1
-    return l, support_dic
-
-
-data = load1()
-l, support_dic = apriori(data)
-print(l)
-print()
-print(support_dic)
-
 print("------------------------------------------------------------")  # 60個
 
 print("樸素貝葉斯")
@@ -364,7 +136,7 @@ def words_to_vec(vocab_list, vocab_set):  # 將句轉換成詞表格式
     return ret
 
 
-def train(X, y):
+def my_train(X, y):
     rows = X.shape[0]
     cols = X.shape[1]
     percent = sum(y) / float(rows)  # 正例佔比
@@ -398,7 +170,7 @@ vocab_list = create_vocab(sentences)
 X = []
 for sentence in sentences:
     X.append(words_to_vec(vocab_list, sentence))
-p0_vec, p1_vec, percent = train(np.array(X), np.array(y))
+p0_vec, p1_vec, percent = my_train(np.array(X), np.array(y))
 test = jieba.cut("抄襲得那麼明顯也是醉了！")
 print(test)
 test_X = np.array(words_to_vec(vocab_list, test))
