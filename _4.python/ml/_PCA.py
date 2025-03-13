@@ -1,6 +1,5 @@
 """
-主成分分析 Principal Component Analysis, PCA 
-
+主成分分析 Principal Component Analysis, PCA
 """
 
 print("------------------------------------------------------------")  # 60個
@@ -961,6 +960,129 @@ PrintError(np.array(blue, dtype="double"), np.array(reconMat, dtype="double"))
 plt.imshow(cv2.cvtColor(np.array(recdata, dtype="uint8"), cv2.COLOR_BGR2RGB))
 plt.title("sklearn-recdata")
 show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+df = pd.read_csv("data/wine.data.csv")
+df.head(10)
+
+# df.iloc[:,1:].describe()
+
+# Boxplots by output labels/classes
+
+for c in df.columns[1:]:
+    df.boxplot(c, by="Class", figsize=(7, 4))
+    plt.title("{}\n".format(c))
+    plt.xlabel("Wine Class")
+    plt.show()
+
+
+plt.figure(figsize=(10, 6))
+plt.scatter(
+    df["OD280/OD315 of diluted wines"],
+    df["Flavanoids"],
+    c=df["Class"],
+    edgecolors="k",
+    alpha=0.75,
+    s=150,
+)
+plt.grid(True)
+plt.title(
+    "Scatter plot of two features showing the \ncorrelation and class seperation",
+    fontsize=15,
+)
+plt.xlabel("OD280/OD315 of diluted wines")
+plt.ylabel("Flavanoids")
+plt.show()
+
+# Are the features independent? Plot co-variance matrix
+
+
+def correlation_matrix(df):
+    from matplotlib import pyplot as plt
+    from matplotlib import cm as cm
+
+    fig = plt.figure(figsize=(16, 12))
+    ax1 = fig.add_subplot(111)
+    cmap = cm.get_cmap("jet", 30)
+    cax = ax1.imshow(df.corr(), interpolation="nearest", cmap=cmap)
+    ax1.grid(True)
+    plt.title("Wine data set features correlation")
+    labels = df.columns
+    ax1.set_xticklabels(labels)
+    ax1.set_yticklabels(labels)
+    # Add colorbar, make sure to specify tick locations to match desired ticklabels
+    fig.colorbar(cax, ticks=[0.1 * i for i in range(-11, 11)])
+    plt.show()
+
+
+cc = correlation_matrix(df)
+print(cc)
+
+# Principal Component Analysis
+# Data scaling
+
+from sklearn.preprocessing import StandardScaler
+
+scaler = StandardScaler()
+
+X = df.drop("Class", axis=1)
+y = df["Class"]
+
+X = scaler.fit_transform(X)
+
+dfx = pd.DataFrame(data=X, columns=df.columns[1:])
+
+dfx.head(10)
+
+dfx.describe()
+
+# PCA class import and analysis
+
+from sklearn.decomposition import PCA
+
+pca = PCA(n_components=None)
+
+dfx_pca = pca.fit(dfx)
+
+# Plot the explained variance ratio
+
+plt.figure(figsize=(10, 6))
+plt.scatter(
+    x=[i + 1 for i in range(len(dfx_pca.explained_variance_ratio_))],
+    y=dfx_pca.explained_variance_ratio_,
+    s=200,
+    alpha=0.75,
+    c="orange",
+    edgecolor="k",
+)
+plt.grid(True)
+plt.title("Explained variance ratio of the \nfitted principal component vector")
+plt.xlabel("Principal components")
+plt.xticks([i + 1 for i in range(len(dfx_pca.explained_variance_ratio_))])
+plt.yticks(fontsize=15)
+plt.ylabel("Explained variance ratio")
+plt.show()
+
+
+dfx_trans = pca.transform(dfx)
+
+# Put it in a data frame
+
+dfx_trans = pd.DataFrame(data=dfx_trans)
+dfx_trans.head(10)
+
+
+plt.figure(figsize=(10, 6))
+plt.scatter(
+    dfx_trans[0], dfx_trans[1], c=df["Class"], edgecolors="k", alpha=0.75, s=150
+)
+plt.grid(True)
+plt.title("Class separation using first two principal components")
+plt.xlabel("Principal component-1")
+plt.ylabel("Principal component-2")
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

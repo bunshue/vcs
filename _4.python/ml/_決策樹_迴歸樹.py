@@ -1,8 +1,6 @@
 """
 機器學習_決策樹(Decision Tree)
-
 機器學習_決策樹分類(Decision Tree Classifier)
-
 機器學習_迴歸樹(Decision Tree Regression / Regression Tree)
 """
 print("------------------------------------------------------------")  # 60個
@@ -1967,9 +1965,7 @@ print("读取数据")
 
 time_1 = time.time()
 
-raw_data = pd.read_csv(
-    "D:/_git/vcs/_big_files/lihang-dl-train.csv", header=0
-)
+raw_data = pd.read_csv("D:/_git/vcs/_big_files/lihang-dl-train.csv", header=0)
 data = raw_data.values
 
 imgs = data[::, 1::]
@@ -2189,9 +2185,7 @@ epsilon = 0.001  # 设定阈值
 
 print("读取数据")
 
-raw_data = pd.read_csv(
-    "D:/_git/vcs/_big_files/lihang-dl-train.csv", header=0
-)
+raw_data = pd.read_csv("D:/_git/vcs/_big_files/lihang-dl-train.csv", header=0)
 data = raw_data.values
 
 imgs = data[::, 1::]

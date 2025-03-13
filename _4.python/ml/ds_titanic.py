@@ -402,7 +402,7 @@ print("------------------------------------------------------------")  # 60個
 print("邏輯迴歸")
 
 titanic = pd.read_csv("data/titanic_ds.csv")
-#titanic.info()  # 這樣就已經把資料集彙總資訊印出來
+# titanic.info()  # 這樣就已經把資料集彙總資訊印出來
 print("---------------------------")
 # 將年齡的空值填入年齡的中位數
 age_median = np.nanmedian(titanic["Age"])
@@ -1014,7 +1014,7 @@ print("Feature: Sex")
 sexes = sorted(df_train["Sex"].unique())
 
 genders_mapping = dict(zip(sexes, range(0, len(sexes) + 1)))
-print('建立對應表 mapping :', genders_mapping)
+print("建立對應表 mapping :", genders_mapping)
 # {'female': 0, 'male': 1}
 
 # 資料轉換, 字串對應到數值 .map
@@ -1080,7 +1080,7 @@ print(cc)
 embarked_locs = sorted(df_train["Embarked"].unique())
 
 embarked_locs_mapping = dict(zip(embarked_locs, range(0, len(embarked_locs) + 1)))
-print('建立對應表 mapping :', embarked_locs_mapping)
+print("建立對應表 mapping :", embarked_locs_mapping)
 # {nan: 0, 'C': 1, 'Q': 2, 'S': 3}
 
 # Transform Embarked from a string to a number representation to prepare it for machine learning algorithms:
@@ -1294,7 +1294,7 @@ def clean_data(df, drop_passenger_id):
 
     # Generate a mapping of Sex from a string to a number representation
     genders_mapping = dict(zip(sexes, range(0, len(sexes) + 1)))
-    print('建立對應表 mapping :', genders_mapping)
+    print("建立對應表 mapping :", genders_mapping)
 
     # Transform Sex from a string to a number representation
     # 資料轉換, 字串對應到數值 .map
@@ -1305,7 +1305,7 @@ def clean_data(df, drop_passenger_id):
 
     # Generate a mapping of Embarked from a string to a number representation
     embarked_locs_mapping = dict(zip(embarked_locs, range(0, len(embarked_locs) + 1)))
-    print('建立對應表 mapping :', embarked_locs_mapping)
+    print("建立對應表 mapping :", embarked_locs_mapping)
 
     # Transform Embarked from a string to dummy variables
     df = pd.concat([df, pd.get_dummies(df["Embarked"], prefix="Embarked_Val")], axis=1)
@@ -1406,7 +1406,9 @@ df_test[['PassengerId', 'Survived']].to_csv('tmp_titanic_results-rf.csv', index=
 # Evaluate Model Accuracy
 
 # 資料分割
-train_x, test_x, train_y, test_y = train_test_split(train_features, train_target, test_size=0.2)
+train_x, test_x, train_y, test_y = train_test_split(
+    train_features, train_target, test_size=0.2
+)
 
 # Use the new training data to fit the model, predict, and get the accuracy score:
 
@@ -1471,7 +1473,7 @@ print("------------------------------------------------------------")  # 60個
 
 # 目標:求出Titanic女乘客的生還率
 
-df = sns.load_dataset('titanic')
+df = sns.load_dataset("titanic")
 print(df.info())
 
 print(df.head())
@@ -1480,48 +1482,47 @@ print(df.head())
 
 print(df.isnull().sum())
 
-#將「age」欄位缺值，使用中位數補值
+# 將「age」欄位缺值，使用中位數補值
 
-df.loc[:, 'age'] = df.loc[:, 'age'].fillna(df.loc[:, 'age'].median())
+df.loc[:, "age"] = df.loc[:, "age"].fillna(df.loc[:, "age"].median())
 print(df.info())
 
-#將「embarked」欄位缺值，使用眾數補值
+# 將「embarked」欄位缺值，使用眾數補值
 
-mod = df.loc[:,'embark_town'].mode()
+mod = df.loc[:, "embark_town"].mode()
 print(mod)
-df.loc[:,'embark_town'].fillna(mod[0], inplace=True)
+df.loc[:, "embark_town"].fillna(mod[0], inplace=True)
 print(df.info())
 
-#將「deck」欄位缺值過多，將此欄位刪除
+# 將「deck」欄位缺值過多，將此欄位刪除
 
-df = df.drop(['deck'],axis=1)
+df = df.drop(["deck"], axis=1)
 print(df.info())
 
-#求女性生還率多有多高
+# 求女性生還率多有多高
 
 df = df.query('sex == "female"')
-survived_rate = df['survived'].mean()
+survived_rate = df["survived"].mean()
 print(survived_rate)
 
-#0.7420382165605095
+# 0.7420382165605095
 
-#另一種算法
+# 另一種算法
 
 df = df.query('sex == "female"')
-survived_rate = pd.crosstab(df['survived'], df['sex']).iloc[1, 0] / df.shape[0]
+survived_rate = pd.crosstab(df["survived"], df["sex"]).iloc[1, 0] / df.shape[0]
 print(survived_rate)
 
-#0.7420382165605095
+# 0.7420382165605095
 
-#Titanic女乘客的生還率為 74.26%
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
+# Titanic女乘客的生還率為 74.26%
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個

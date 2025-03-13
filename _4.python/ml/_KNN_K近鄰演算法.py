@@ -1533,13 +1533,11 @@ print("------------------------------------------------------------")  # 60個
 
 # Supervised learning
 plot_an_example(style="bs", color="b")
-plt.show()
-
+show()
 
 # Unsupervised learning
 plot_an_example(label="Cluster")
-plt.show()
-
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1561,7 +1559,7 @@ new_point = generate_random_points(1, 0, 2)
 plot = init_plot([0, 2], [0, 2])  # [0, 2] x [0, 2]
 
 plot.plot(*X1.T, "ro", *X2.T, "bs", *new_point.T, "g^")
-plt.show()
+show()
 
 # Nearest Neighbor
 
@@ -1746,7 +1744,7 @@ for n in (5, 10, 50, 100):
     c4.prepare_test_samples()
     c4.analyse()
     c4.plot("No. of samples = {}".format(n))
-    plt.show()
+    show()
 
 # Message 01: size matters!
 
@@ -1768,7 +1766,7 @@ c4 = Analysis(X1, X2, X3, X4, distance=1)
 c4.prepare_test_samples()
 c4.analyse()
 c4.plot()
-plt.show()
+show()
 
 # Overfitting
 
@@ -1882,7 +1880,7 @@ knn = kAnalysis(X1, X2, X3, X4, k=1, distance=1)
 knn.prepare_test_samples()
 knn.analyse()
 knn.plot()
-plt.show()
+show()
 
 print("k-Test")
 
@@ -1893,7 +1891,7 @@ for k in (1, 5, 10, 50):
     knn.prepare_test_samples()
     knn.analyse()
     knn.plot("k = {}".format(k))
-    plt.show()
+    show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1908,7 +1906,7 @@ data = np.array(
 
 plot = init_plot([-1, 1], [-1, 1])
 plot.plot(*data.T, "o")
-plt.show()
+show()
 
 # loop over degrees of polynomial
 # data is x^2, so let's try degrees 1, 2, 10
@@ -1923,7 +1921,7 @@ for n in (1, 2, 10):
     plot = init_plot([-1, 1], [-1, 1])
     plot.set_title("n = {}".format(n))
     plot.plot(*data.T, "o", x, f(x))
-    plt.show()
+    show()
 
 """
 For n = 1 we clearly underfit the data as we do not have enough parameters to describe the complexity of the problem
@@ -1988,7 +1986,7 @@ plot_all("Sepal", ax2)
 
 # tight_layout adjust subplots params so they fit into figure ares
 plt.tight_layout()
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -2087,7 +2085,7 @@ def k_accuracy_plot(max_k=85):
 
 
 k_accuracy_plot().plot(range(1, max_k), scores)
-plt.show()
+show()
 
 # And check the accuracy measured on the test samples
 
@@ -2121,7 +2119,7 @@ for k in range(1, max_k):
     avg_scores.append(scores.mean())
 
 k_accuracy_plot().plot(range(1, max_k), avg_scores)
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -2210,7 +2208,7 @@ plt.text(
     "This is: {}".format(digits.target[random_index]),
     fontdict={"family": "monospace", "size": 16},
 )
-plt.show()
+show()
 
 # Distance between images
 """
@@ -2271,7 +2269,7 @@ plt.ylim([0, 1])
 plt.xticks(range(0, max_k, 5))
 
 plt.plot(range(1, max_k), avg_scores)
-plt.show()
+show()
 
 # Final test
 
@@ -2287,7 +2285,7 @@ for i, (true, predict) in enumerate(zip(label_test, prediction)):
         digit = data_test[i].reshape((8, 8))  # reshape again to 8x8
         plt.matshow(digit)  # for matshow
         plt.title("{} predicted as {}".format(true, predict))
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -2307,7 +2305,7 @@ y_train = np.sin(x_train).ravel()
 y_train = np.array([np.random.normal(y, 0.05) for y in y_train])
 
 plt.plot(x_train, y_train, "ro")
-plt.show()
+show()
 
 # Make a fit
 
@@ -2346,7 +2344,7 @@ for i, k in enumerate((1, 5, 10, 20)):
     plt.plot(x_train, y_train, "ro", x_test, y_test, "g")
 
 plt.tight_layout()
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -2620,7 +2618,105 @@ ax.add_patch(Circle(point, 0.2, color="g", fill=False))
 X, Y = [p[0] for p in points], [p[1] for p in points]
 plt.scatter(X, Y)
 plt.scatter([point[0]], [point[1]], c="r")
-plt.show()
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# K-nearest neighbor Classification
+
+df = pd.read_csv("data/Classified Data", index_col=0)
+cc = df.head()
+print(cc)
+
+cc = df.info()
+print(cc)
+
+cc = df.describe()
+print(cc)
+
+# Check the spread of the features
+
+l = list(df.columns)
+l[0 : len(l) - 2]
+
+for i in range(len(l) - 1):
+    sns.boxplot(x="TARGET CLASS", y=l[i], data=df)
+    plt.figure()
+
+show()
+
+# Scale the features using sklearn.preprocessing package
+
+# Instantiate a scaler standardizing estimator
+
+from sklearn.preprocessing import StandardScaler
+
+scaler = StandardScaler()
+
+scaler.fit(df.drop("TARGET CLASS", axis=1))
+scaled_features = scaler.transform(df.drop("TARGET CLASS", axis=1))
+
+df_feat = pd.DataFrame(scaled_features, columns=df.columns[:-1])
+cc = df_feat.head()
+print(cc)
+
+# Train/Test split, model fit and prediction
+
+from sklearn.model_selection import train_test_split
+
+X = df_feat
+y = df["TARGET CLASS"]
+X_train, X_test, y_train, y_test = train_test_split(
+    scaled_features, df["TARGET CLASS"], test_size=0.50, random_state=101
+)
+
+from sklearn.neighbors import KNeighborsClassifier
+
+knn = KNeighborsClassifier(n_neighbors=1)
+knn.fit(X_train, y_train)
+
+pred = knn.predict(X_test)
+
+# Evaluation of classification quality
+
+from sklearn.metrics import classification_report, confusion_matrix
+
+conf_mat = confusion_matrix(y_test, pred)
+print(conf_mat)
+
+print(classification_report(y_test, pred))
+
+print("Misclassification error rate:", round(np.mean(pred != y_test), 3))
+
+# Misclassification error rate: 0.082
+
+# Choosing 'k' by elbow method
+
+error_rate = []
+
+# Will take some time
+for i in range(1, 60):
+    knn = KNeighborsClassifier(n_neighbors=i)
+    knn.fit(X_train, y_train)
+    pred_i = knn.predict(X_test)
+    error_rate.append(np.mean(pred_i != y_test))
+
+plt.figure(figsize=(10, 6))
+plt.plot(
+    range(1, 60),
+    error_rate,
+    color="blue",
+    linestyle="dashed",
+    marker="o",
+    markerfacecolor="red",
+    markersize=8,
+)
+plt.title("Error Rate vs. K Value", fontsize=20)
+plt.xlabel("K", fontsize=15)
+plt.ylabel("Error (misclassification) Rate", fontsize=15)
+
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

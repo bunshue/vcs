@@ -49,6 +49,7 @@ def show():
 colors = np.array(["r", "g", "b", "y", "m", "c"])
 # colors = np.array(["r", "g", "b"])
 
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 """ # 無 sklearn ST
@@ -857,6 +858,161 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 """
+
+# Mean-shift Clustering Technique
+
+from sklearn.cluster import MeanShift
+from sklearn import metrics
+
+# Generate sample data
+centers = [[1, 1], [-1, -1], [1, -1]]
+X, labels_true = make_blobs(
+    n_samples=300, centers=centers, cluster_std=0.4, random_state=101
+)
+
+cc = X.shape
+print(cc)
+
+plt.figure(figsize=(8, 5))
+plt.scatter(X[:, 0], X[:, 1], edgecolors="k", c="orange", s=75)
+plt.grid(True)
+plt.xticks(fontsize=15)
+plt.yticks(fontsize=15)
+show()
+
+# Clustering
+
+ms_model = MeanShift().fit(X)
+cluster_centers = ms_model.cluster_centers_
+labels = ms_model.labels_
+n_clusters = len(cluster_centers)
+labels = ms_model.labels_
+
+# Number of detected clusters and their centers
+
+print("Number of clusters detected by the algorithm:", n_clusters)
+
+# Number of clusters detected by the algorithm: 3
+
+print("Cluster centers detected at:\n\n", cluster_centers)
+
+plt.figure(figsize=(8, 5))
+plt.scatter(X[:, 0], X[:, 1], edgecolors="k", c=ms_model.labels_, s=75)
+plt.grid(True)
+plt.xticks(fontsize=15)
+plt.yticks(fontsize=15)
+show()
+
+# Homogeneity
+
+print("Homogeneity score:", metrics.homogeneity_score(labels_true, labels))
+
+# Completeness
+
+print("Completeness score:", metrics.completeness_score(labels_true, labels))
+
+# Time complexity and model quality as the data size grows
+
+import time
+from tqdm import tqdm
+
+n_samples = [10, 20, 50, 100, 200, 500, 1000, 2000, 3000, 5000, 7500, 10000]
+centers = [[1, 1], [-1, -1], [1, -1]]
+t_ms = []
+homo_ms = []
+complete_ms = []
+
+for i in tqdm(n_samples):
+    X, labels_true = make_blobs(
+        n_samples=i, centers=centers, cluster_std=0.4, random_state=101
+    )
+    t1 = time.time()
+    ms_model = MeanShift().fit(X)
+    t2 = time.time()
+    t_ms.append(t2 - t1)
+    homo_ms.append(metrics.homogeneity_score(labels_true, ms_model.labels_))
+    complete_ms.append(metrics.completeness_score(labels_true, ms_model.labels_))
+
+plt.figure(figsize=(8, 5))
+plt.title("Time complexity of Mean Shift\n", fontsize=20)
+plt.scatter(n_samples, t_ms, edgecolors="k", c="green", s=100)
+plt.plot(n_samples, t_ms, "k--", lw=3)
+plt.grid(True)
+plt.xticks(fontsize=15)
+plt.xlabel("Number of samples", fontsize=15)
+plt.yticks(fontsize=15)
+plt.ylabel("Time taken for model (sec)", fontsize=15)
+show()
+
+plt.figure(figsize=(8, 5))
+plt.title("Homogeneity score with data set size\n", fontsize=20)
+plt.scatter(n_samples, homo_ms, edgecolors="k", c="green", s=100)
+plt.plot(n_samples, homo_ms, "k--", lw=3)
+plt.grid(True)
+plt.xticks(fontsize=15)
+plt.xlabel("Number of samples", fontsize=15)
+plt.yticks(fontsize=15)
+plt.ylabel("Homogeneity score", fontsize=15)
+show()
+
+plt.figure(figsize=(8, 5))
+plt.title("Completeness score with data set size\n", fontsize=20)
+plt.scatter(n_samples, complete_ms, edgecolors="k", c="green", s=100)
+plt.plot(n_samples, complete_ms, "k--", lw=3)
+plt.grid(True)
+plt.xticks(fontsize=15)
+plt.xlabel("Number of samples", fontsize=15)
+plt.yticks(fontsize=15)
+plt.ylabel("Completeness score", fontsize=15)
+show()
+
+# How well the cluster detection works in the presence of noise?
+
+noise = [
+    0.01,
+    0.05,
+    0.1,
+    0.2,
+    0.3,
+    0.4,
+    0.5,
+    0.6,
+    0.7,
+    0.8,
+    0.9,
+    1.0,
+    1.25,
+    1.5,
+    1.75,
+    2.0,
+]
+n_clusters = []
+for i in noise:
+    centers = [[1, 1], [-1, -1], [1, -1]]
+    X, labels_true = make_blobs(
+        n_samples=200, centers=centers, cluster_std=i, random_state=101
+    )
+    ms_model = MeanShift().fit(X)
+    n_clusters.append(len(ms_model.cluster_centers_))
+
+print("Detected number of clusters:", n_clusters)
+plt.figure(figsize=(8, 5))
+plt.title("Cluster detection with noisy data\n", fontsize=20)
+plt.scatter(noise, n_clusters, edgecolors="k", c="green", s=100)
+plt.grid(True)
+plt.xticks(fontsize=15)
+plt.xlabel("Noise std.dev", fontsize=15)
+plt.yticks(fontsize=15)
+plt.ylabel("Number of clusters detected", fontsize=15)
+show()
+
+"""
+Detected number of clusters: [3, 3, 3, 3, 3, 3, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1]
+We see that the cluster detection works well up to a certain level of noise std. dev, after which the mean of the blobs shifts to the overall centroid and the number of detected clusters tends to 1**
+"""
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 print("對四維的資料 iris 做 KMeans分類")
 
 iris = datasets.load_iris()
@@ -2196,6 +2352,150 @@ for i, c in enumerate(n_clusters):
     fit_plot_kmean_model(c, X)
 
 show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+df = pd.read_csv("data/College_Data", index_col=0)
+
+# Check the head of the data
+
+cc = df.head()
+print(cc)
+
+cc = df.info()
+print(cc)
+
+cc = df.describe()
+print(cc)
+
+# Exploratory Analysis
+
+sns.set_style("whitegrid")
+sns.lmplot(
+    x="Room.Board",
+    y="Grad.Rate",
+    data=df,
+    hue="Private",
+    palette="coolwarm",
+    aspect=1,
+    fit_reg=True,
+)
+show()
+
+sns.set_style("whitegrid")
+sns.lmplot(
+    x="Outstate",
+    y="F.Undergrad",
+    data=df,
+    hue="Private",
+    palette="coolwarm",
+    aspect=1,
+    fit_reg=False,
+)
+show()
+
+sns.boxplot(x="Private", y="S.F.Ratio", data=df)
+show()
+
+sns.boxplot(x="Private", y="perc.alumni", data=df)
+show()
+
+sns.set_style("darkgrid")
+g = sns.FacetGrid(df, hue="Private", palette="coolwarm", aspect=2)
+g = g.map(plt.hist, "Outstate", bins=20, alpha=0.7)
+show()
+
+sns.set_style("darkgrid")
+g = sns.FacetGrid(df, hue="Private", palette="coolwarm", aspect=2)
+g = g.map(plt.hist, "Grad.Rate", bins=20, alpha=0.7)
+show()
+
+cc = df[df["Grad.Rate"] > 100]
+print(cc)
+
+
+cc = df["Grad.Rate"]["Cazenovia College"] = 100
+print(cc)
+
+cc = df[df["Grad.Rate"] > 100]
+print(cc)
+
+sns.set_style("darkgrid")
+g = sns.FacetGrid(df, hue="Private", palette="coolwarm", aspect=2)
+g = g.map(plt.hist, "Grad.Rate", bins=20, alpha=0.7)
+show()
+
+# K Means Cluster Creation
+
+from sklearn.cluster import KMeans
+
+kmeans = KMeans(n_clusters=2, verbose=0, tol=1e-3, max_iter=300, n_init=20)
+
+kmeans.fit(df.drop("Private", axis=1))
+
+clus_cent = kmeans.cluster_centers_
+print(clus_cent)
+
+cc = df[df["Private"] == "Yes"].describe()  # Statistics for private colleges only
+print(cc)
+
+cc = df[df["Private"] == "No"].describe()  # Statistics for public colleges only
+print(cc)
+
+df_desc = pd.DataFrame(df.describe())
+feat = list(df_desc.columns)
+kmclus = pd.DataFrame(clus_cent, columns=feat)
+print(kmclus)
+
+# What are the cluster labels?
+
+print(kmeans.labels_)
+
+# Evaluation
+
+
+def converter(cluster):
+    if cluster == "Yes":
+        return 1
+    else:
+        return 0
+
+
+df1 = df  # Create a copy of data frame so that original data frame does not get 'corrupted' with the cluster index
+df1["Cluster"] = df["Private"].apply(converter)
+
+cc = df1.head()
+print(cc)
+
+from sklearn.metrics import confusion_matrix, classification_report
+
+print(confusion_matrix(df1["Cluster"], kmeans.labels_))
+print(classification_report(df1["Cluster"], kmeans.labels_))
+
+# Clustering performance (e.g. distance between centroids)
+
+df_pvt = df[df["Private"] == "Yes"]
+df_pub = df[df["Private"] == "No"]
+
+kmeans = KMeans(n_clusters=2, verbose=0, tol=1e-3, max_iter=50, n_init=10)
+kmeans.fit(df.drop("Private", axis=1))
+clus_cent = kmeans.cluster_centers_
+df_desc = pd.DataFrame(df.describe())
+feat = list(df_desc.columns)
+kmclus = pd.DataFrame(clus_cent, columns=feat)
+a = np.array(kmclus.diff().iloc[1])
+
+centroid_diff = pd.DataFrame(
+    a, columns=["K-means cluster centroid-distance"], index=df_desc.columns
+)
+
+""" NG
+centroid_diff['Mean of corresponding entity (private)']=np.array(df_pvt.mean())
+centroid_diff['Mean of corresponding entity (public)']=np.array(df_pub.mean())
+print(centroid_diff)
+"""
+
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

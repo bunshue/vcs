@@ -381,11 +381,11 @@ print("---- np.random.randrange() SP ------------------------------------")  # 4
 print("---- np.random.normal() ST ------------------------------------")  # 40個
 
 N = 300
-mu, sigma = 80, 20 # 平均值, 標準差
+mu, sigma = 80, 20  # 平均值, 標準差
 X = np.random.normal(mu, sigma, size=(N, 2))
 
 plt.subplot(121)
-plt.hist(X, bins = 30, alpha = 0.6)
+plt.hist(X, bins=30, alpha=0.6)
 
 plt.subplot(122)
 plt.scatter(X[:, 0], X[:, 1])
@@ -393,17 +393,17 @@ plt.scatter(X[:, 0], X[:, 1])
 plt.show()
 
 N = 10
-#一維
+# 一維
 cc = np.random.normal(mu, sigma, size=N)
 print(cc)
 
-#二維
+# 二維
 cc = np.random.normal(mu, sigma, size=(3, 5))
 print(cc)
 
-#二維
+# 二維
 x = np.random.normal(mu, sigma, size=(3, 5))
-y = np.argmax(x, axis=1) # ??
+y = np.argmax(x, axis=1)  # ??
 print(x)
 print(x.shape)
 print(y)
@@ -414,7 +414,7 @@ print("------------------------------------------------------------")  # 60個
 # 過濾資料
 
 N = 1000
-mu, sigma = 80, 20 # 平均值, 標準差
+mu, sigma = 80, 20  # 平均值, 標準差
 
 x1 = np.random.normal(mu, sigma, size=N)
 print("資料個數1 :", len(x1))
@@ -423,32 +423,32 @@ print("最小 :", min(x1))
 print("形狀 :", x1.shape)
 
 # list 移除資料的寫法
-print('留下 <= 100 的')
+print("留下 <= 100 的")
 x2 = x1[x1 <= 100.0]
 print(x2.shape)
 
-print('留下 >= 0 的')
+print("留下 >= 0 的")
 x2 = x2[x2 >= 0]
 print(x2.shape)
 
 plt.subplot(211)
-plt.hist(x1, bins = 30, alpha = 0.6, color='r')
+plt.hist(x1, bins=30, alpha=0.6, color="r")
 
 plt.subplot(212)
-plt.hist(x2, bins = 30, alpha = 0.6, color='g')
+plt.hist(x2, bins=30, alpha=0.6, color="g")
 
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
 N = 1000
-mu, sigma = 0, 0.1 # 平均值, 標準差
+mu, sigma = 0, 0.1  # 平均值, 標準差
 X = np.random.normal(mu, sigma, size=N)
 
-#驗算
+# 驗算
 
-print('X平均值 :', np.mean(X), "差 :", abs(mu - np.mean(X)))
-print('X標準差 :', np.std(X, ddof=1), "差 :", abs(sigma - np.std(X, ddof=1)))
+print("X平均值 :", np.mean(X), "差 :", abs(mu - np.mean(X)))
+print("X標準差 :", np.std(X, ddof=1), "差 :", abs(sigma - np.std(X, ddof=1)))
 
 count, bins, ignored = plt.hist(X, 30, density=True)
 
@@ -799,4 +799,3 @@ print("------------------------------------------------------------")  # 60個
 
 print("查詢函數用法")
 help(np.max)
-

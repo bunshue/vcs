@@ -50,6 +50,7 @@ from sklearn.metrics import auc
 from sklearn import tree
 from sklearn import metrics
 from sklearn import linear_model
+from matplotlib.colors import ListedColormap
 
 
 def show():
@@ -72,7 +73,7 @@ scaler = StandardScaler()
 XX = scaler.fit_transform(X)  # STD特徵縮放
 
 # 資料分割
-X_train, X_test, y_train, y_test = train_test_split(XX, y, test_size=0.4)
+X_train, X_test, y_train, y_test = train_test_split(XX, y, test_size=0.2)
 
 # 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
 logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
@@ -199,11 +200,11 @@ GROUPS = 3  # centers, 分群數
 STD = 1  # cluster_std, 資料標準差
 print("make_circles,", N, "個樣本")
 
-X, y = make_circles(n_samples=N, factor=0.3, noise=0.05, random_state=9487)
+X, y = make_circles(n_samples=N, factor=0.3, noise=0.05)
 
 # 資料分割 多了一個 stratify=y
-# X_train, X_test, y_train, y_test = train_test_split(X, y, stratify=y, random_state=9487)
-X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=9487)
+# X_train, X_test, y_train, y_test = train_test_split(X, y, stratify=y)
+X_train, X_test, y_train, y_test = train_test_split(X, y)
 
 # 繪製訓練及測試資料
 
@@ -1207,8 +1208,6 @@ cm = confusion_matrix(y_test, y_pred)
 print(cm)  # print confusion_matrix
 print(classification_report(y_test, y_pred))  # print classification report
 
-from matplotlib.colors import ListedColormap
-
 X_set, y_set = X_train, y_train
 X1, X2 = np.meshgrid(
     np.arange(start=X_set[:, 0].min() - 1, stop=X_set[:, 0].max() + 1, step=0.01),
@@ -1712,7 +1711,7 @@ show()
 
 # 随机抽样，建立训练集与测试集
 
-train = accepts.sample(frac=0.7, random_state=1234).copy()
+train = accepts.sample(frac=0.7, random_state=9487).copy()
 test = accepts[~accepts.index.isin(train.index)].copy()
 print(" 训练集样本量: %i \n 测试集样本量: %i" % (len(train), len(test)))
 
@@ -2415,7 +2414,7 @@ X = data_filled[
 y = data_filled["bad_ind"]
 
 # 利用随机森林填补变量
-clf = RandomForestClassifier(max_depth=5, random_state=0)
+clf = RandomForestClassifier(max_depth=5, random_state=9487)
 clf.fit(X, y)
 
 importances = list(clf.feature_importances_)
@@ -2626,12 +2625,7 @@ print("------------------------------------------------------------")  # 60個
 # LogisticRegression算法案例 python实现(iris数据)
 
 from math import exp
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-
 from sklearn.datasets import load_iris
-from sklearn.model_selection import train_test_split
 
 # 定义LR回归模型
 
@@ -2687,6 +2681,8 @@ def create_data():
 
 
 X, y = create_data()
+
+# 資料分割
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
 
 # 训练数据
@@ -2717,10 +2713,6 @@ show()
 
 # sklearn中的LogisticRegression案例代码
 
-import pandas as pd
-from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LogisticRegression
-from sklearn import metrics
 import seaborn as sn
 
 # 第一步：构建数据集
@@ -2902,10 +2894,9 @@ df[:10]
 
 X = df[["gmat", "gpa", "work_experience"]]
 y = df["admitted"]
-#  75%的数据用来做训练集，25%的数据用作测试集
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.25, random_state=0
-)
+
+# 資料分割
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 logistic_regression = LogisticRegression()
 # 训练
@@ -3087,18 +3078,256 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+# 用邏輯迴歸做 titanic ST
 print("------------------------------------------------------------")  # 60個
 
+train = pd.read_csv("data/titanic_train.csv")
+cc = train.head()
+print(cc)
+
+# Check basic info about the data set including missing value
+
+cc = train.info()
+print(cc)
+
+cc = train.describe()
+print(cc)
+
+# Exploratory analysis and plots
+
+d = train.describe()
+
+dT = d.T
+dT.plot.bar(y="count")
+plt.title("Bar plot of the count of numeric features a")
+
+show()
+
+# Check the relative size of survived and not-survived
+
+sns.set_style("whitegrid")
+sns.countplot(x="Survived", data=train, palette="RdBu_r")
+show()
+
+# Is there a pattern for the survivability based on sex?
+
+sns.set_style("whitegrid")
+sns.countplot(x="Survived", hue="Sex", data=train, palette="RdBu_r")
+
+show()
+
+# What about any pattern related to passenger class?
+
+sns.set_style("whitegrid")
+sns.countplot(x="Survived", hue="Pclass", data=train, palette="rainbow")
+
+show()
+
+# Following code extracts and plots the fraction of passenger count that survived, by each class
+
+f_class_survived = train.groupby("Pclass")["Survived"].mean()
+f_class_survived = pd.DataFrame(f_class_survived)
+f_class_survived
+f_class_survived.plot.bar(y="Survived")
+plt.title("Fraction of passengers survived by class")
+
+show()
+
+# What about any pattern related to having sibling and spouse?
+
+sns.set_style("whitegrid")
+sns.countplot(x="Survived", hue="SibSp", data=train, palette="rainbow")
+
+show()
+
+# How does the overall age distribution look like?
+
+train["Age"].hist(bins=30, color="darkred", alpha=0.7, figsize=(10, 6))
+plt.xlabel("Age of the passengers")
+plt.ylabel("Count")
+plt.title("Age histogram of the passengers")
+
+show()
+
+# How does the age distribution look like across passenger class?
+
+plt.figure(figsize=(12, 10))
+
+sns.boxplot(x="Pclass", y="Age", data=train, palette="winter")
+plt.xlabel("Passenger Class")
+plt.ylabel("Age")
+
+show()
+
+f_class_Age = train.groupby("Pclass")["Age"].mean()
+f_class_Age = pd.DataFrame(f_class_Age)
+f_class_Age.plot.bar(y="Age")
+plt.title("Average age of passengers by class")
+plt.ylabel("Age (years)")
+plt.xlabel("Passenger class")
+
+show()
+
+"""
+Data wrangling (impute and drop)
+
+    Impute age (by averaging)
+    Drop unncessary features
+    Convert categorical features to dummy variables
+
+Define a function to impute (fill-up missing values) age feature
+"""
+
+a = list(f_class_Age["Age"])
+
+
+def impute_age(cols):
+    Age = cols[0]
+    Pclass = cols[1]
+
+    if pd.isnull(Age):
+        if Pclass == 1:
+            return a[0]
+
+        elif Pclass == 2:
+            return a[1]
+
+        else:
+            return a[2]
+
+    else:
+        return Age
+
+
+# Apply the above-defined function and plot the count of numeric features
+
+train["Age"] = train[["Age", "Pclass"]].apply(impute_age, axis=1)
+d = train.describe()
+
+dT = d.T
+dT.plot.bar(y="count")
+plt.title("Bar plot of the count of numeric features b")
+
+show()
+
+# Drop the 'Cabin' feature and any other null value
+
+train.drop("Cabin", axis=1, inplace=True)
+train.dropna(inplace=True)
+cc = train.head()
+print(cc)
+
+# Drop other unnecessary features like 'PassengerId', 'Name', 'Ticket'
+
+train.drop(["PassengerId", "Name", "Ticket"], axis=1, inplace=True)
+cc = train.head()
+print(cc)
+
+# Convert categorial feature like 'Sex' and 'Embarked' to dummy variables
+
+sex = pd.get_dummies(train["Sex"], drop_first=True)
+embark = pd.get_dummies(train["Embarked"], drop_first=True)
+
+# Now drop the 'Sex' and 'Embarked' columns and concatenate the new dummy variables
+
+train.drop(["Sex", "Embarked"], axis=1, inplace=True)
+train = pd.concat([train, sex, embark], axis=1)
+cc = train.head()
+print(cc)
+
+# Logistic Regression model fit and prediction
+
+# 資料分割
+X_train, X_test, y_train, y_test = train_test_split(
+    train.drop("Survived", axis=1), train["Survived"], test_size=0.2, random_state=9487
+)
+
+# F1-score as a fucntion of regularization (penalty) parameter
+
+from sklearn.metrics import classification_report
+
+nsimu = 201
+penalty = [0] * nsimu
+logmodel = [0] * nsimu
+predictions = [0] * nsimu
+class_report = [0] * nsimu
+f1 = [0] * nsimu
+for i in range(1, nsimu):
+    logmodel[i] = LogisticRegression(
+        C=i / 1000, tol=1e-4, max_iter=100, n_jobs=4
+    )  # 邏輯迴歸函數學習機
+    logmodel[i].fit(X_train, y_train)  # 學習訓練.fit
+    predictions[i] = logmodel[i].predict(X_test)  # 預測.predict
+    class_report[i] = classification_report(y_test, predictions[i])
+    l = class_report[i].split()
+    f1[i] = l[len(l) - 2]
+    penalty[i] = 1000 / i
+
+plt.scatter(penalty[1 : len(penalty) - 2], f1[1 : len(f1) - 2])
+plt.title("F1-score vs. regularization parameter")
+plt.xlabel("Penalty parameter")
+plt.ylabel("F1-score on test data")
+show()
+
+# F1-score as a function of test set size (fraction)
+
+nsimu = 101
+class_report = [0] * nsimu
+f1 = [0] * nsimu
+test_fraction = [0] * nsimu
+for i in range(1, nsimu):
+    # 資料分割
+    X_train, X_test, y_train, y_test = train_test_split(
+        train.drop("Survived", axis=1),
+        train["Survived"],
+        test_size=0.1 + (i - 1) * 0.007,
+        random_state=9487,
+    )
+    logmodel = LogisticRegression(C=1, tol=1e-4, max_iter=1000, n_jobs=4)  # 邏輯迴歸函數學習機
+    logmodel.fit(X_train, y_train)  # 學習訓練.fit
+    predictions = logmodel.predict(X_test)  # 預測.predict
+    class_report[i] = classification_report(y_test, predictions)
+    l = class_report[i].split()
+    f1[i] = l[len(l) - 2]
+    test_fraction[i] = 0.1 + (i - 1) * 0.007
+
+plt.plot(test_fraction[1 : len(test_fraction) - 2], f1[1 : len(f1) - 2])
+plt.title("F1-score vs. test set size (fraction)")
+plt.xlabel("Test set size (fraction)")
+plt.ylabel("F1-score on test data")
+show()
+
+# F1-score as a function of random seed of test/train split
+
+nsimu = 101
+class_report = [0] * nsimu
+f1 = [0] * nsimu
+random_init = [0] * nsimu
+for i in range(1, nsimu):
+    # 資料分割
+    X_train, X_test, y_train, y_test = train_test_split(
+        train.drop("Survived", axis=1),
+        train["Survived"],
+        test_size=0.3,
+        random_state=9487 + i,
+    )
+    logmodel = LogisticRegression(C=1, tol=1e-5, max_iter=1000, n_jobs=4)  # 邏輯迴歸函數學習機
+    logmodel.fit(X_train, y_train)  # 學習訓練.fit
+    predictions = logmodel.predict(X_test)  # 預測.predict
+    class_report[i] = classification_report(y_test, predictions)
+    l = class_report[i].split()
+    f1[i] = l[len(l) - 2]
+    random_init[i] = i + 100
+
+plt.plot(random_init[1 : len(random_init) - 2], f1[1 : len(f1) - 2])
+plt.title("F1-score vs. random initialization seed")
+plt.xlabel("Random initialization seed")
+plt.ylabel("F1-score on test data")
+
+show()
 
 print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
+# 用邏輯迴歸做 titanic SP
 print("------------------------------------------------------------")  # 60個
 
 
