@@ -65,10 +65,8 @@ print("------------------------------------------------------------")  # 60個
 print("鐵達尼號資料集 基本數據 titanic()")
 
 df = sns.load_dataset("titanic")
-# df = df[: 100]  # 只看前幾筆資料
-
+# df = df[:10]  # 取出前幾筆資料
 print(df)
-
 print("資料.形狀 :", df.shape)
 
 """
@@ -1027,10 +1025,6 @@ sex_val_xt_pct = sex_val_xt.div(sex_val_xt.sum(1).astype(float), axis=0)
 sex_val_xt_pct.plot(kind="bar", stacked=True, title="Survival Rate by Gender")
 show()
 
-
-sys.exit()
-
-
 # Get the unique values of Pclass:
 passenger_classes = sorted(df_train["Pclass"].unique())
 
@@ -1510,7 +1504,8 @@ print(survived_rate)
 # 另一種算法
 
 df = df.query('sex == "female"')
-survived_rate = pd.crosstab(df["survived"], df["sex"]).iloc[1, 0] / df.shape[0]
+total = df.shape[0]  # 共891筆資料
+survived_rate = pd.crosstab(df["survived"], df["sex"]).iloc[1, 0] / total
 print(survived_rate)
 
 # 0.7420382165605095

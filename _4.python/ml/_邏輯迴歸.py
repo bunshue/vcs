@@ -61,6 +61,14 @@ def show():
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+print("最簡易 邏輯迴歸")
+
+# TBD
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 N = 500  # n_samples, 樣本數
 M = 2  # n_features, 特徵數(資料的維度)
 GROUPS = 3  # centers, 分群數
@@ -1270,7 +1278,8 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 06_01_logistic_regression_validation
+"""
+# logistic_regression_validation
 
 # 證明 Exp(log(x)) = x
 
@@ -1284,14 +1293,15 @@ for i in range(1, 101):
 
 cc = math.log(100), -math.log(1 / 100)
 print(cc)
+"""
 
 # 計算羅吉斯函數的上限與下限
 
-from sympy import *
+import sympy
 
-x = symbols("x")
+x = sympy.symbols("x")
 expr = 1 / (1 + np.e ** (-x))
-limit(expr, x, -1000), limit(expr, x, np.inf)
+sympy.limit(expr, x, -1000), sympy.limit(expr, x, np.inf)
 
 # 不使用 limit
 
@@ -1303,13 +1313,13 @@ x = np.linspace(-6, 6, 101)
 y = 1 / (1 + np.e ** (-x))
 plt.plot(x, y)
 plt.axhline(0, linestyle="-.", c="r")
-plt.axhline(1, linestyle="-.", c="r")
+plt.axhline(1, linestyle="-.", c="g")
 show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 06_03_logistic_regression_attrition
+# logistic_regression_attrition
 
 # 員工流失預測
 
@@ -1444,6 +1454,7 @@ df2.drop(
     inplace=True,
 )
 cont_vars = df2.select_dtypes("int").keys()
+
 """ NG
 dummies= df2.select_dtypes('uint8').keys().drop('Attrition_Yes') # 刪除目標變數(Y) 
 print(dummies)
@@ -1453,9 +1464,9 @@ print("指定特徵(X)及目標變數(Y)")
 X = df2.drop("Attrition_Yes", axis=1)
 y = df2["Attrition_Yes"]
 
-# 3. 不須進行特徵工程
+# 不須進行特徵工程
 
-# 4. 資料分割
+# 資料分割
 
 # 資料分割
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
@@ -1465,14 +1476,13 @@ scaler = StandardScaler()
 X_train_std = scaler.fit_transform(X_train)
 X_test_std = scaler.transform(X_test)
 
-# 5. 選擇演算法、6. 模型訓練
+# 選擇演算法
+# 模型訓練
 
 # 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
 logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
 
 logistic_regression.fit(X_train_std, y_train)
-
-# 7. 模型評分
 
 # 計算準確率
 y_pred = logistic_regression.predict(X_test_std)  # 預測.predict
@@ -2909,11 +2919,10 @@ confusion_matrix = pd.crosstab(
     y_test, y_pred, rownames=["Actual"], colnames=["Predicted"]
 )
 sn.heatmap(confusion_matrix, annot=True)
-plt.show()
+show()
 print("精度: ", metrics.accuracy_score(y_test, y_pred))
 
 # 精度:  0.8
-
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

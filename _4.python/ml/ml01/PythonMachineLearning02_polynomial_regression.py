@@ -4,8 +4,6 @@ PythonMachineLearning-master 01
 Regularized polynomial regression with linear and random sampling
 
 Ridge/LASSO polynomial regression with linear and random sampling
-
-
 """
 
 print("------------------------------------------------------------")  # 60個

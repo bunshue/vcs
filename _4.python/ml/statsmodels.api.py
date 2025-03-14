@@ -37,7 +37,7 @@ print("------------------------------------------------------------")  # 60個
 # 多圖組合
 # jointplot兩變量圖
 
-import statsmodels.api as sm  #为统计计算提供了一个补充，包括描述性统计和统计模型的估计
+import statsmodels.api as sm  # 为统计计算提供了一个补充，包括描述性统计和统计模型的估计
 
 
 sns.set(style="darkgrid")

@@ -47,7 +47,6 @@ filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bm
 
 print("------------------------------------------------------------")  # 60個
 
-
 # 二維離散傅立葉變換
 
 x = np.random.rand(8, 8)
@@ -1143,42 +1142,6 @@ fig.subplots_adjust(0.01, 0.01, 0.99, 0.99, 0.02, 0.02)
 show()
 
 print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("傅里葉變換")
-
-
-# 將頻域數據轉換成時序數據
-# bins爲頻域數據，n設置使用前多少個頻域數據，loop設置生成數據的長度
-def fft_combine(bins, n, loops=1):
-    length = int(len(bins) * loops)
-    data = np.zeros(length)
-    index = loops * np.arange(0, length, 1.0) / length * (2 * np.pi)
-    for k, p in enumerate(bins[:n]):
-        if k != 0:
-            p *= 2  # 除去直流成分之外, 其餘的係數都乘2
-        data += np.real(p) * np.cos(k * index)  # 餘弦成分的係數爲實數部分
-        data -= np.imag(p) * np.sin(k * index)  # 正弦成分的係數爲負的虛數部分
-    return index, data
-
-
-data = pd.read_csv("data/AirPassengers.csv")
-ts = data["#Passengers"]
-
-# 平穩化
-ts_log = np.log(ts)
-ts_diff = ts_log.diff(1)  # 差分
-ts_diff = ts_diff.dropna()  # 去除空數據
-fy = np.fft.fft(ts_diff)
-print(fy[:10])  # 顯示前10個頻域數據
-conv1 = np.real(np.fft.ifft(fy))  # 逆變換
-index, conv2 = fft_combine(fy / len(ts_diff), int(len(fy) / 2 - 1), 1.3)  # 只關心一半數據
-plt.plot(ts_diff, "r")
-plt.plot(conv1 - 0.5, "g")  # 爲看清楚，將顯示區域下拉0.5
-plt.plot(conv2 - 1, "b")
-
-show()
-
 print("------------------------------------------------------------")  # 60個
 
 

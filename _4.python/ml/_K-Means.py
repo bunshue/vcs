@@ -32,6 +32,7 @@ import sklearn
 from common1 import *
 from sklearn import datasets
 from sklearn.cluster import KMeans  # 聚類方法, K-平均演算法
+from sklearn.cluster import MeanShift  # 均值偏移_聚類演算法
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
 from sklearn import metrics
 from sklearn.datasets import make_blobs  # 集群資料集
@@ -48,7 +49,6 @@ def show():
 
 colors = np.array(["r", "g", "b", "y", "m", "c"])
 # colors = np.array(["r", "g", "b"])
-
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -398,13 +398,12 @@ class KMeans:
         return centroids, centroid_idxs
 
 
+# 建立資料, 使用 make_blobs
 N = 100  # n_samples, 樣本數
 M = 2  # n_features, 特徵數(資料的維度)
 GROUPS = 5  # centers, 分群數
 STD = 0.3  # cluster_std, 資料標準差
-
 print("make_blobs,", N, "個樣本, ", M, "個特徵, 分成", GROUPS, "群")
-
 X_train, true_labels = make_blobs(n_samples=N, centers=GROUPS, random_state=9487)
 
 # 標準化
@@ -422,7 +421,7 @@ CLUSTERS = 5  # 要分成的群數
 print("使用KMeans分成", CLUSTERS, "群")
 clf = KMeans(n_clusters=CLUSTERS)  # K-平均演算法
 
-clf.fit(X_train)  無答案 無監督學習 群集分析 random# 學習訓練.fit
+clf.fit(X_train)  無答案 無監督學習 群集分析 random  # 學習訓練.fit
 
 class_centers, classification = clf.evaluate(X_train)
 
@@ -457,6 +456,7 @@ print("使用KMeans分成", CLUSTERS, "群")
 clf = KMeans(n_clusters=CLUSTERS)  # K-平均演算法
 
 clf.fit(X_train)  # 學習訓練.fit
+
 # 7
 
 _, y_pred = clf.evaluate(X_train)
@@ -529,6 +529,7 @@ print(df)
 model = Kmeans()  # K-平均演算法
 
 clusters = model.fit(df)  # 學習訓練.fit
+
 print(clusters)
 
 # 分組結果
@@ -561,7 +562,7 @@ clf = KMeans(n_clusters=CLUSTERS, random_state=9487)  # K-平均演算法
 
 clf.fit(X)  # 學習訓練.fit
 
-plt.figure(num="KMeans分群", figsize=(12, 6))
+plt.figure(figsize=(12, 6))
 
 plt.subplot(131)
 plt.scatter(X[:, 0], X[:, 1], s=50, c="r")
@@ -620,9 +621,7 @@ N = 100
 M = 2  # n_features, 特徵數(資料的維度)
 GROUPS = 4  # centers, 分群數
 STD = 1  # cluster_std, 資料標準差
-
 print("make_blobs,", N, "個樣本, ", M, "個特徵, 分成", GROUPS, "群")
-
 X, y, centers = make_blobs(
     n_samples=N,
     centers=GROUPS,
@@ -661,7 +660,7 @@ print(cc)
 cc = cc * 1.0 / len(y)
 print("正確率 :", cc)
 
-plt.figure(num="KMeans分群", figsize=(12, 6))
+plt.figure(figsize=(12, 6))
 
 plt.subplot(131)
 plt.scatter(X[:, 0], X[:, 1], s=50, c="b")
@@ -719,20 +718,47 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-"""
-print("Mean Shift 自動分類, 電腦自己決定要分成幾類")
 
-plt.figure(num="Means Shift 自動分類", figsize=(12, 8))
+print("Mean Shift 自動分類, 電腦自己決定要分成幾類 鳶尾花")
+
+iris = datasets.load_iris()
+X = iris.data
+y = iris.target
+
+clf = MeanShift()  # 均值偏移_聚類演算法
+
+clf.fit(X)  # 學習訓練.fit
+
+plt.figure(figsize=(10, 6))
+
+plt.subplot(121)
+plt.scatter(X[:, 0], X[:, 1], c=y, cmap="viridis")
+plt.xlabel(iris.feature_names[0])
+plt.ylabel(iris.feature_names[1])
+plt.title("真實資料")
+
+plt.subplot(122)
+plt.scatter(X[:, 0], X[:, 1], c=clf.labels_, cmap="viridis")
+plt.xlabel(iris.feature_names[0])
+plt.ylabel(iris.feature_names[1])
+plt.title("Mean Shift自動分類")
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("Mean Shift 自動分類, 電腦自己決定要分成幾類 a")
+
+plt.figure(figsize=(12, 8))
 
 # 隨機生成 N 個點，然後用 Mean Shift 將他們分成 ? 群
 N = 100
 X = np.random.rand(N, 2)  # N X 2 亂數陣列
 
-from sklearn.cluster import MeanShift
-
 # 打開 MeanShift 函數學習機, 這裡的 bandwidth 是控制分類要寬鬆一點, 還是嚴一點
 
-clf = MeanShift(bandwidth=0.2)
+clf = MeanShift(bandwidth=0.2)  # 均值偏移_聚類演算法
 
 clf.fit(X)  # 學習訓練.fit
 
@@ -777,7 +803,7 @@ print("------------------------------")  # 30個
 
 # 觀察 bandwidth 對分類的影響
 def my_mean_shift(bw=0.2):
-    clf = MeanShift(bandwidth=bw)
+    clf = MeanShift(bandwidth=bw)  # 均值偏移_聚類演算法
     clf.fit(X)  # 學習訓練.fit
     # 劃分區域ST
     x0 = y0 = np.arange(-0.2, 1.2, 0.02)
@@ -857,36 +883,38 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-"""
 
-# Mean-shift Clustering Technique
+print("Mean Shift 自動分類, 電腦自己決定要分成幾類 b")
 
-from sklearn.cluster import MeanShift
-from sklearn import metrics
-
-# Generate sample data
 centers = [[1, 1], [-1, -1], [1, -1]]
-X, labels_true = make_blobs(
-    n_samples=300, centers=centers, cluster_std=0.4, random_state=101
-)
 
+# 建立資料, 使用 make_blobs
+N = 300  # n_samples, 樣本數
+M = 2  # n_features, 特徵數(資料的維度)
+GROUPS = 5  # centers, 分群數
+STD = 0.4  # cluster_std, 資料標準差
+print("make_blobs,", N, "個樣本, ", M, "個特徵, 分成", GROUPS, "群")
+X, labels_true = make_blobs(
+    n_samples=N, centers=centers, cluster_std=STD, random_state=9487
+)
 cc = X.shape
 print(cc)
 
 plt.figure(figsize=(8, 5))
 plt.scatter(X[:, 0], X[:, 1], edgecolors="k", c="orange", s=75)
 plt.grid(True)
-plt.xticks(fontsize=15)
-plt.yticks(fontsize=15)
+plt.xticks()
+plt.yticks()
 show()
 
-# Clustering
+clf = MeanShift()  # 均值偏移_聚類演算法
 
-ms_model = MeanShift().fit(X)
-cluster_centers = ms_model.cluster_centers_
-labels = ms_model.labels_
+clf.fit(X)  # 學習訓練.fit
+
+cluster_centers = clf.cluster_centers_  # 群集中心
+labels = clf.labels_
 n_clusters = len(cluster_centers)
-labels = ms_model.labels_
+labels = clf.labels_
 
 # Number of detected clusters and their centers
 
@@ -897,23 +925,20 @@ print("Number of clusters detected by the algorithm:", n_clusters)
 print("Cluster centers detected at:\n\n", cluster_centers)
 
 plt.figure(figsize=(8, 5))
-plt.scatter(X[:, 0], X[:, 1], edgecolors="k", c=ms_model.labels_, s=75)
+plt.scatter(X[:, 0], X[:, 1], edgecolors="k", c=clf.labels_, s=75)
 plt.grid(True)
-plt.xticks(fontsize=15)
-plt.yticks(fontsize=15)
+plt.xticks()
+plt.yticks()
 show()
 
 # Homogeneity
-
 print("Homogeneity score:", metrics.homogeneity_score(labels_true, labels))
 
 # Completeness
-
 print("Completeness score:", metrics.completeness_score(labels_true, labels))
 
 # Time complexity and model quality as the data size grows
 
-import time
 from tqdm import tqdm
 
 n_samples = [10, 20, 50, 100, 200, 500, 1000, 2000, 3000, 5000, 7500, 10000]
@@ -924,46 +949,47 @@ complete_ms = []
 
 for i in tqdm(n_samples):
     X, labels_true = make_blobs(
-        n_samples=i, centers=centers, cluster_std=0.4, random_state=101
+        n_samples=i, centers=centers, cluster_std=0.4, random_state=9487
     )
     t1 = time.time()
-    ms_model = MeanShift().fit(X)
+    clf = MeanShift()  # 均值偏移_聚類演算法
+    clf.fit(X)  # 學習訓練.fit
     t2 = time.time()
     t_ms.append(t2 - t1)
-    homo_ms.append(metrics.homogeneity_score(labels_true, ms_model.labels_))
-    complete_ms.append(metrics.completeness_score(labels_true, ms_model.labels_))
+    homo_ms.append(metrics.homogeneity_score(labels_true, clf.labels_))
+    complete_ms.append(metrics.completeness_score(labels_true, clf.labels_))
 
 plt.figure(figsize=(8, 5))
-plt.title("Time complexity of Mean Shift\n", fontsize=20)
+plt.title("Time complexity of Mean Shift\n")
 plt.scatter(n_samples, t_ms, edgecolors="k", c="green", s=100)
 plt.plot(n_samples, t_ms, "k--", lw=3)
 plt.grid(True)
-plt.xticks(fontsize=15)
-plt.xlabel("Number of samples", fontsize=15)
-plt.yticks(fontsize=15)
-plt.ylabel("Time taken for model (sec)", fontsize=15)
+plt.xticks()
+plt.xlabel("Number of samples")
+plt.yticks()
+plt.ylabel("Time taken for model (sec)")
 show()
 
 plt.figure(figsize=(8, 5))
-plt.title("Homogeneity score with data set size\n", fontsize=20)
+plt.title("Homogeneity score with data set size\n")
 plt.scatter(n_samples, homo_ms, edgecolors="k", c="green", s=100)
 plt.plot(n_samples, homo_ms, "k--", lw=3)
 plt.grid(True)
-plt.xticks(fontsize=15)
-plt.xlabel("Number of samples", fontsize=15)
-plt.yticks(fontsize=15)
-plt.ylabel("Homogeneity score", fontsize=15)
+plt.xticks()
+plt.xlabel("Number of samples")
+plt.yticks()
+plt.ylabel("Homogeneity score")
 show()
 
 plt.figure(figsize=(8, 5))
-plt.title("Completeness score with data set size\n", fontsize=20)
+plt.title("Completeness score with data set size\n")
 plt.scatter(n_samples, complete_ms, edgecolors="k", c="green", s=100)
 plt.plot(n_samples, complete_ms, "k--", lw=3)
 plt.grid(True)
-plt.xticks(fontsize=15)
-plt.xlabel("Number of samples", fontsize=15)
-plt.yticks(fontsize=15)
-plt.ylabel("Completeness score", fontsize=15)
+plt.xticks()
+plt.xlabel("Number of samples")
+plt.yticks()
+plt.ylabel("Completeness score")
 show()
 
 # How well the cluster detection works in the presence of noise?
@@ -990,20 +1016,21 @@ n_clusters = []
 for i in noise:
     centers = [[1, 1], [-1, -1], [1, -1]]
     X, labels_true = make_blobs(
-        n_samples=200, centers=centers, cluster_std=i, random_state=101
+        n_samples=200, centers=centers, cluster_std=i, random_state=9487
     )
-    ms_model = MeanShift().fit(X)
-    n_clusters.append(len(ms_model.cluster_centers_))
+    clf = MeanShift()  # 均值偏移_聚類演算法
+    clf.fit(X)  # 學習訓練.fit
+    n_clusters.append(len(clf.cluster_centers_))
 
 print("Detected number of clusters:", n_clusters)
 plt.figure(figsize=(8, 5))
-plt.title("Cluster detection with noisy data\n", fontsize=20)
+plt.title("Cluster detection with noisy data\n")
 plt.scatter(noise, n_clusters, edgecolors="k", c="green", s=100)
 plt.grid(True)
-plt.xticks(fontsize=15)
-plt.xlabel("Noise std.dev", fontsize=15)
-plt.yticks(fontsize=15)
-plt.ylabel("Number of clusters detected", fontsize=15)
+plt.xticks()
+plt.xlabel("Noise std.dev")
+plt.yticks()
+plt.ylabel("Number of clusters detected")
 show()
 
 """
@@ -1038,7 +1065,7 @@ xx = [[6.6, 3.1, 5.2, 2.4]]
 y_pred = clf.predict(xx)  # 預測.predict
 print("預測結果為：", y_pred)
 
-plt.figure(num="KMeans分群", figsize=(12, 6))
+plt.figure(figsize=(12, 6))
 
 plt.subplot(131)
 plt.scatter(X[:, 0], X[:, 1], color="b")
@@ -1114,7 +1141,7 @@ print(sm.accuracy_score(y, y_pred))
 cm = sm.confusion_matrix(y, y_pred)
 print("混淆矩陣 :\n", cm, sep="")
 
-plt.figure(num="KMeans分群", figsize=(12, 6))
+plt.figure(figsize=(12, 6))
 
 plt.subplot(131)
 plt.scatter(X[:, 0], X[:, 1], color=colors[y])
@@ -1177,12 +1204,12 @@ print("使用 Silhouette 輪廓分析 找出最佳分群數目K")
 
 print("使用較漂亮的資料 6群")
 
+# 建立資料, 使用 make_blobs
 N = 1000  # n_samples, 樣本數
 M = 2  # n_features, 特徵數(資料的維度)
 GROUPS = 6  # centers, 分群數
 STD = 0.3  # cluster_std, 資料標準差
 print("make_blobs,", N, "個樣本, ", M, "個特徵, 分成", GROUPS, "群")
-
 X, y = make_blobs(
     n_samples=N,
     n_features=M,
@@ -1214,12 +1241,12 @@ plt.axis([1, 12, 0.3, 1.0])
 
 print("使用較不漂亮的資料 6群")
 
+# 建立資料, 使用 make_blobs
 N = 1000  # n_samples, 樣本數
 M = 2  # n_features, 特徵數(資料的維度)
 GROUPS = 6  # centers, 分群數
 STD = 1.3  # cluster_std, 資料標準差
 print("make_blobs,", N, "個樣本, ", M, "個特徵, 分成", GROUPS, "群")
-
 X, y = make_blobs(
     n_samples=N,
     n_features=M,
@@ -1236,7 +1263,8 @@ plt.title("使用較不漂亮的資料 6群")
 
 silhouette_avg = []
 for i in range(2, 11):
-    kmeans_fit = KMeans(n_clusters=i).fit(X)
+    kmeans_fit = KMeans(n_clusters=i)  # K-平均演算法
+    kmeans_fit.fit(X)  # 學習訓練.fit
     cc = silhouette_score(X, kmeans_fit.labels_)  # 計算輪廓係數
     silhouette_avg.append(cc)
 
@@ -1255,12 +1283,12 @@ print("------------------------------------------------------------")  # 60個
 
 # 輪廓圖分析(Silhouette Analysis)
 
+# 建立資料, 使用 make_blobs
 N = 30  # n_samples, 樣本數
 M = 2  # n_features, 特徵數(資料的維度)
 GROUPS = 3  # centers, 分群數
 STD = 0.5  # cluster_std, 資料標準差
 print("make_blobs,", N, "個樣本, ", M, "個特徵, 分成", GROUPS, "群")
-
 X, y = make_blobs(
     n_samples=N,
     n_features=M,
@@ -1541,7 +1569,7 @@ original_sample = shuffle(temp, random_state=0)[:1000]  # 随机取1000个RGB值
 
 def cluster(k):
     estimator = KMeans(n_clusters=k, random_state=9487)  # K-平均演算法, 分成k群
-    kmeans = estimator.fit(original_sample)  # 聚类
+    kmeans = estimator.fit(original_sample)  # 聚类  # 學習訓練.fit
     return kmeans
 
 
@@ -1625,13 +1653,12 @@ def plot_kmeans(clf, X, n_clusters=4, rseed=0, ax=None):
         )
 
 
+# 建立資料, 使用 make_blobs
 N = 400  # n_samples, 樣本數
 M = 2  # n_features, 特徵數(資料的維度)
 GROUPS = 4  # centers, 分群數
 STD = 0.60  # cluster_std, 資料標準差
-
 print("make_blobs,", N, "個樣本, ", M, "個特徵, 分成", GROUPS, "群")
-
 X, y_true = make_blobs(n_samples=N, centers=GROUPS, cluster_std=STD, random_state=9487)
 
 X = X[:, ::-1]  # 特徵互調順序，繪圖效果較佳 ???
@@ -1643,7 +1670,9 @@ CLUSTERS = 4  # 要分成的群數
 print("使用KMeans分成", CLUSTERS, "群")
 clf = KMeans(CLUSTERS, init="k-means++", n_init=10)  # K-平均演算法
 
-labels = clf.fit(X).predict(X)
+clf.fit(X)  # 學習訓練.fit
+
+labels = clf.predict(X)
 
 plt.subplot(121)
 # plt.scatter(X[:, 0], X[:, 1], c=labels, s=50, cmap="viridis")  # 無法指定顏色
@@ -1686,6 +1715,7 @@ clf = GaussianMixture(n_components=n_components)
 clf.fit(X)  # 學習訓練.fit
 
 labels = clf.predict(X)  # 預測.predict
+
 plt.scatter(X[:, 0], X[:, 1], c=labels, s=40, cmap="viridis")
 show()  # 4
 
@@ -1721,7 +1751,8 @@ def draw_ellipse(position, covariance, ax=None, **kwargs):
 # 繪製GMM範圍
 def plot_gmm(clf, X, label=True, ax=None):
     ax = ax or plt.gca()
-    labels = clf.fit(X).predict(X)
+    clf.fit(X)  # 學習訓練.fit
+    labels = clf.predict(X)
     if label:
         ax.scatter(X[:, 0], X[:, 1], c=labels, s=40, cmap="viridis", zorder=2)
     else:
@@ -1734,13 +1765,13 @@ def plot_gmm(clf, X, label=True, ax=None):
         draw_ellipse(pos, covar, alpha=w * w_factor)
 
 
-clf = GaussianMixture(n_components=4, random_state=42)
+clf = GaussianMixture(n_components=4, random_state=9487)
 plot_gmm(clf, X)
 show()  # 5
 
 # 使用 GMM對長條型資料進行集群
 
-clf = GaussianMixture(n_components=4, covariance_type="full", random_state=42)
+clf = GaussianMixture(n_components=4, covariance_type="full", random_state=9487)
 plot_gmm(clf, X_stretched)
 show()  # 6
 
@@ -1878,7 +1909,7 @@ rfm_segmentation = rfm.copy()
 print("轉折判斷法(Elbow)")
 
 Nc = range(1, 20)
-clf = [KMeans(n_clusters=i, init="k-means++", n_init="auto") for i in Nc]
+clf = [KMeans(n_clusters=i, init="k-means++", n_init="auto") for i in Nc]  # K-平均演算法
 for i in range(len(clf)):
     clf[i].fit(rfm_segmentation)  # 學習訓練.fit
 score = [clf[i].score(rfm_segmentation) for i in range(len(clf))]
@@ -1957,8 +1988,8 @@ silhouette_avg = np.mean(silhouette_vals)
 plt.axvline(silhouette_avg, color="red", linestyle="--")
 
 plt.yticks(yticks, cluster_labels + 1)
-plt.ylabel("集群", fontsize=14)
-plt.xlabel("輪廓係數", fontsize=14)
+plt.ylabel("集群")
+plt.xlabel("輪廓係數")
 plt.tight_layout()
 show()
 
@@ -2018,8 +2049,8 @@ for i in range(2, 21):
     plt.axvline(silhouette_avg, color="red", linestyle="--")
 
     plt.yticks(yticks, cluster_labels + 1)
-    plt.ylabel("集群", fontsize=14)
-    plt.xlabel("輪廓係數", fontsize=14)
+    plt.ylabel("集群")
+    plt.xlabel("輪廓係數")
     plt.tight_layout()
     show()
 
@@ -2201,8 +2232,8 @@ for i in range(2, 21):
     plt.axvline(silhouette_avg, color="red", linestyle="--")
 
     plt.yticks(yticks, cluster_labels + 1)
-    plt.ylabel("集群", fontsize=14)
-    plt.xlabel("輪廓係數", fontsize=14)
+    plt.ylabel("集群")
+    plt.xlabel("輪廓係數")
     plt.tight_layout()
     show()
 
@@ -2239,10 +2270,10 @@ for i in range(rfm_segmentation.cluster.nunique()):
         alpha=1.0,
     )
 
-dx.set_xlabel("Recency", fontsize=14)
-dx.set_ylabel("Frequency", fontsize=14)
-dx.set_zlabel("Monetary", fontsize=14)
-dx.legend(fontsize=12)
+dx.set_xlabel("Recency")
+dx.set_ylabel("Frequency")
+dx.set_zlabel("Monetary")
+dx.legend()
 plt.tight_layout()
 show()
 
@@ -2260,13 +2291,12 @@ print(cc)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+# 建立資料, 使用 make_blobs
 N = 200  # n_samples, 樣本數
 M = 2  # n_features, 特徵數(資料的維度)
 GROUPS = 4  # centers, 分群數
 STD = 1  # cluster_std, 資料標準差
-
 print("make_blobs,", N, "個樣本, ", M, "個特徵, 分成", GROUPS, "群")
-
 X, y = make_blobs(
     n_samples=N,
     n_features=M,
@@ -2290,12 +2320,12 @@ CLUSTERS = 3  # 要分成的群數
 print("使用KMeans分成", CLUSTERS, "群")
 clf = KMeans(n_clusters=CLUSTERS)  # K-平均演算法
 
-clf.fit(X)
+clf.fit(X)  # 學習訓練.fit
 
 print("kmean: k={}, cost={}".format(n_clusters, int(clf.score(X))))
 
 labels = clf.labels_
-centers = clf.cluster_centers_
+centers = clf.cluster_centers_  # 群集中心
 markers = ["o", "^", "*"]
 colors = ["r", "b", "y"]
 
@@ -2322,11 +2352,11 @@ def fit_plot_kmean_model(n_clusters, X):
     plt.yticks(())
 
     # 使用 k-均值算法進行擬合
-    clf = KMeans(n_clusters=n_clusters)
+    clf = KMeans(n_clusters=n_clusters)  # K-平均演算法
     clf.fit_predict(X)
 
     labels = clf.labels_
-    centers = clf.cluster_centers_
+    centers = clf.cluster_centers_  # 群集中心
     markers = ["o", "^", "*", "s"]
     colors = ["r", "b", "y", "k"]
 
@@ -2426,15 +2456,11 @@ g = sns.FacetGrid(df, hue="Private", palette="coolwarm", aspect=2)
 g = g.map(plt.hist, "Grad.Rate", bins=20, alpha=0.7)
 show()
 
-# K Means Cluster Creation
+clf = KMeans(n_clusters=2, verbose=0, tol=1e-3, max_iter=300, n_init=20)  # K-平均演算法
 
-from sklearn.cluster import KMeans
+clf.fit(df.drop("Private", axis=1))  # 學習訓練.fit
 
-kmeans = KMeans(n_clusters=2, verbose=0, tol=1e-3, max_iter=300, n_init=20)
-
-kmeans.fit(df.drop("Private", axis=1))
-
-clus_cent = kmeans.cluster_centers_
+clus_cent = clf.cluster_centers_  # 群集中心
 print(clus_cent)
 
 cc = df[df["Private"] == "Yes"].describe()  # Statistics for private colleges only
@@ -2450,7 +2476,7 @@ print(kmclus)
 
 # What are the cluster labels?
 
-print(kmeans.labels_)
+print(clf.labels_)
 
 # Evaluation
 
@@ -2470,17 +2496,19 @@ print(cc)
 
 from sklearn.metrics import confusion_matrix, classification_report
 
-print(confusion_matrix(df1["Cluster"], kmeans.labels_))
-print(classification_report(df1["Cluster"], kmeans.labels_))
+print(confusion_matrix(df1["Cluster"], clf.labels_))
+print(classification_report(df1["Cluster"], clf.labels_))
 
 # Clustering performance (e.g. distance between centroids)
 
 df_pvt = df[df["Private"] == "Yes"]
 df_pub = df[df["Private"] == "No"]
 
-kmeans = KMeans(n_clusters=2, verbose=0, tol=1e-3, max_iter=50, n_init=10)
-kmeans.fit(df.drop("Private", axis=1))
-clus_cent = kmeans.cluster_centers_
+clf = KMeans(n_clusters=2, verbose=0, tol=1e-3, max_iter=50, n_init=10)  # K-平均演算法
+
+clf.fit(df.drop("Private", axis=1))  # 學習訓練.fit
+
+clus_cent = clf.cluster_centers_  # 群集中心
 df_desc = pd.DataFrame(df.describe())
 feat = list(df_desc.columns)
 kmclus = pd.DataFrame(clus_cent, columns=feat)
@@ -2529,6 +2557,27 @@ print("集群中心的坐標 :", clf.cluster_centers_)
 print("分群準確性 :", clf.inertia_)
 print("Distortion : %.2f" % clf.inertia_)
 
+# KMeans其他參數:
+
+class_centers, classification = clf.evaluate(X_train)
+_, y_pred = clf.evaluate(X_train)
+
+plt.plot(
+    [x for x, _ in clf.centroids],
+    [y for _, y in clf.centroids],
+    "*",
+    markersize=20,
+    color="r",
+)
+
+w_factor = 0.2 / clf.weights_.max()
+for pos, covar, w in zip(clf.means_, clf.covariances_, clf.weights_):
+    draw_ellipse(pos, covar, alpha=w * w_factor)
+
+print("kmean: k={}, cost={}".format(n_clusters, int(clf.score(X))))
+
+score = clf.score(X)
+plt.title("k={}, score={}".format(n_clusters, (int)(score)))
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

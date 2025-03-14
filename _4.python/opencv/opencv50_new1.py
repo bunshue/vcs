@@ -4461,7 +4461,7 @@ img = cv2.imdecode(png_data, cv2.IMREAD_UNCHANGED)
 res, jpg_data = cv2.imencode(".jpg", img)
 jpg_str = jpg_data.tobytes()
 
-# %fig=使用`Image`將`imencode()`解碼的結果直接內嵌到Notebook中
+# 使用`Image`將`imencode()`解碼的結果直接內嵌到Notebook中
 res, jpg_data = cv2.imencode(".jpg", img_8bit)
 
 """
@@ -4497,76 +4497,13 @@ for quantizer in [1, 10, 20, 30, 40]:
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 圖形處理
-# 二維卷冊積
-
-# %fig=使用filter2D()製作的各種圖形處理效果
-src = cv2.imread("data/lena.jpg")
-
-kernels = [
-    ("低通濾波器", np.array([[1, 1, 1], [1, 2, 1], [1, 1, 1]]) * 0.1),
-    ("高通濾波器", np.array([[0.0, -1, 0], [-1, 5, -1], [0, -1, 0]])),
-    ("邊緣檢驗", np.array([[-1.0, -1, -1], [-1, 8, -1], [-1, -1, -1]])),
-]
-
-index = 0
-fig, axes = plt.subplots(1, 3, figsize=(12, 4.3))
-for ax, (name, kernel) in zip(axes, kernels):
-    dst = cv2.filter2D(src, -1, kernel)
-    # 由於matplotlib的彩色順序和OpenCV的順序相反
-    ax.imshow(dst[:, :, ::-1])
-    ax.set_title(name)
-    ax.axis("off")
-fig.subplots_adjust(0.02, 0, 0.98, 1, 0.02, 0)
-
-img = np.random.rand(1000, 1000)
-
-row = cv2.getGaussianKernel(7, -1)
-col = cv2.getGaussianKernel(5, -1)
-
-kernel = np.dot(col[:], row[:].T)
-
-img2 = cv2.filter2D(img, -1, kernel)
-img3 = cv2.sepFilter2D(img, -1, row, col)
-print("error=", np.max(np.abs(img2[:] - img3[:])))
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# 形態學運算
-
-#    scpy2.opencv.morphology_demo：示範OpenCV中的各種形態學運算。
-
-# 填充-floodFill
-
-# %fig=示範floodFill()的填充效果
-img = cv2.imread("data/coins.png")
-seed1 = 344, 188
-seed2 = 152, 126
-diff = (13, 13, 13)
-h, w = img.shape[:2]
-mask = np.zeros((h + 2, w + 2), np.uint8)
-cv2.floodFill(img, mask, seed1, (0, 0, 0), diff, diff, cv2.FLOODFILL_MASK_ONLY)
-cv2.floodFill(img, None, seed2, (0, 0, 255), diff, diff)
-
-fig, axes = plt.subplots(1, 2, figsize=(9, 4))
-axes[0].imshow(~mask, cmap="gray")
-axes[1].imshow(img)
-
-show()
-
-#    scpy2.opencv.floodfill_demo：示範填充函數floodFill()的各個參數的用法。
-# 去瑕疵-inpaint
-#    scpy2.opencv.inpaint_demo：示範inpaint()的用法，使用者用滑鼠繪制需要去瑕疵的區域，程式實時顯示運算結果。
 
 print("------------------------------------------------------------")  # 60個
 
 # 圖形變換
 # 幾何變換
 
-# %fig=對圖形進行仿射變換
+# 對圖形進行仿射變換
 img = cv2.imread("data/lena.jpg")
 h, w = img.shape[:2]
 src = np.array([[0, 0], [w - 1, 0], [0, h - 1]], dtype=np.float32)
@@ -4597,7 +4534,7 @@ show()
 
 print("------------------------------")  # 30個
 
-# %fig=對圖形進行透視變換
+# 對圖形進行透視變換
 src = np.array([[0, 0], [w - 1, 0], [w - 1, h - 1], [0, h - 1]], dtype=np.float32)
 dst = np.array([[300, 350], [800, 300], [900, 923], [161, 923]], dtype=np.float32)
 
@@ -4640,7 +4577,7 @@ img2 = cv2.remap(img, mapx.astype("f32"), mapy.astype("f32"), cv2.INTER_LINEAR)
 x, y = 12, 40 #用於驗證映射公式的座標點
 assert np.all(img[mapy[y, x], mapx[y, x]] == img2[y, x])
 
-#%fig=使用3D曲面和remap()對圖片進行變形
+#使用3D曲面和remap()對圖片進行變形
 def make_surf_map(func, r, w, h, d0):
     #計算曲面函數func在[-r:r]範圍之上的值，並進行透視投影。
     #視點高度為曲面高度的d0倍+1
@@ -4689,7 +4626,7 @@ print("------------------------------------------------------------")  # 60個
     可以按滑鼠右鍵取消上次的拖曳動作。
 """
 
-# %fig=使用remap()實現圖形拖曳效果
+# 使用remap()實現圖形拖曳效果
 img = cv2.imread("data/lena.jpg")
 h, w = img.shape[:2]
 gridy, gridx = np.mgrid[:h, :w]
@@ -4727,7 +4664,7 @@ print("------------------------------------------------------------")  # 60個
 
 # 直方圖
 
-# %fig=`data/lena.jpg`的三個通道的直方圖統計、通道0和通道2的二維直方圖統計
+# `data/lena.jpg`的三個通道的直方圖統計、通道0和通道2的二維直方圖統計
 img = cv2.imread("data/lena.jpg")
 fig, ax = plt.subplots(1, 2, figsize=(12, 5))
 colors = ["blue", "green", "red"]
@@ -4769,7 +4706,7 @@ print("------------------------------------------------------------")  # 60個
 
 # 直方圖反向映射
 
-# %fig=使用calcBackProject()尋找圖形中橙子部分
+# 使用calcBackProject()尋找圖形中橙子部分
 img = cv2.imread("data/fruits_section.jpg")
 img_hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
 
@@ -4886,7 +4823,7 @@ stereo_parameters = dict(
 stereo = cv2.StereoSGBM(**stereo_parameters)
 # NG disparity = stereo.compute(img_left, img_right).astype(np.float32) / 16
 
-# %fig=用remap重疊左右兩幅圖形
+# 用remap重疊左右兩幅圖形
 h, w = img_left.shape[:2]
 ygrid, xgrid = np.mgrid[:h, :w]
 ygrid = ygrid.astype(np.float32)
@@ -4974,7 +4911,7 @@ print("------------------------------------------------------------")  # 60個
 
 # add_collection 只能用 ax
 
-# %fig=使用HoughLinesP()檢驗圖形中的直線
+# 使用HoughLinesP()檢驗圖形中的直線
 img = cv2.imread("data/building.jpg", cv2.IMREAD_GRAYSCALE)
 img_binary = cv2.Canny(img, 100, 255)
 lines = cv2.HoughLinesP(
@@ -5002,7 +4939,7 @@ print("------------------------------------------------------------")  # 60個
 
 # 檢驗圓形
 
-# %fig=使用HoughCircles()檢驗圖形中的圓形
+# 使用HoughCircles()檢驗圖形中的圓形
 img = cv2.imread("data/coins.png", cv2.IMREAD_GRAYSCALE)
 img_blur = cv2.GaussianBlur(img, (0, 0), 1.8)
 circles = cv2.HoughCircles(
@@ -5040,76 +4977,11 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-# 圖形分割
-# Mean-Shift法
-
-# %fig=使用pyrMeanShiftFiltering()進行圖形分割，從左到右參數sr分別為20, 40, 80
-fig, axes = plt.subplots(1, 3, figsize=(9, 3))
-
-img = cv2.imread("data/fruits.jpg")
-
-srs = [20, 40, 80]
-for ax, sr in zip(axes, srs):
-    img2 = cv2.pyrMeanShiftFiltering(img, sp=20, sr=sr, maxLevel=1)
-    ax.imshow(img2[:, :, ::-1])
-    ax.set_axis_off()
-    ax.set_title("sr = {}".format(sr))
-
-fig.subplots_adjust(0.02, 0, 0.98, 1, 0.02, 0)
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-
-# 分水嶺算法
-
-img = cv2.imread("data/pills.png")
-img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-img_gray = cv2.blur(img_gray, (15, 15))
-_, img_binary = cv2.threshold(img_gray, 150, 255, cv2.THRESH_BINARY)
-peaks = img_gray == cv2.dilate(img_gray, np.ones((7, 7)), 1)
-
-# NG peaks &= img_binary
-peaks[1, 1] = True
-
-from scipy.ndimage import label
-
-markers, count = label(peaks)
-cv2.watershed(img, markers)
-
-"""
-scpy2.opencv.watershed_demo：分水嶺算法的示範程式。
-用滑鼠在圖形上繪制起始區域，起始區域將使用“目前標簽”填充，
-按滑鼠右鍵切換到下一個標簽。每次繪制起始區域之後，將顯示分割的結果。
-"""
-print("------------------------------")  # 30個
-
-# %figonly=使用watershed分割藥丸
-fig, axes = plt.subplots(1, 2, figsize=(10, 3))
-axes[0].imshow(img[:, :, ::-1])
-peaks_img = np.zeros(img.shape[:2] + (4,), np.uint8)
-peaks_img[peaks, 2] = 255
-peaks_img[peaks, -1] = 255
-axes[0].imshow(peaks_img)
-
-colors = np.random.randint(64, 200, (count + 2, 3)).astype(np.uint8)
-colors[markers[1, 1]] = 255, 255, 255
-colors[-1] = 0
-axes[1].imshow(colors[markers])
-for ax in axes:
-    ax.axis("off")
-fig.subplots_adjust(0, 0, 1, 1, 0, 0)
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
 """
 # 無 SURF() 函數
 #SURF特征比對
 
-#%fig=SURF()找到的關鍵點和每個關鍵點的局部圖形
+#SURF()找到的關鍵點和每個關鍵點的局部圖形
 img_gray1 = cv2.imread("data/lena.jpg", cv2.IMREAD_GRAYSCALE) #❶
 surf = cv2.SURF(2000, 2)  #❷
 key_points1 = surf.detect(img_gray1) #❸
@@ -5215,7 +5087,7 @@ for approx in ["NONE", "SIMPLE", "TC89_KCOS", "TC89_L1"]:
 # NONE: 3179   SIMPLE: 1579   TC89_KCOS: 849   TC89_L1: 802
 
 
-# %fig=顯示所有圓度在0.8到1.2之間的輪廓
+# 顯示所有圓度在0.8到1.2之間的輪廓
 def circularity(contour):
     perimeter = cv2.arcLength(contour, True)
     area = cv2.contourArea(contour) + 1e-6
@@ -5536,9 +5408,14 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 """
+# 圖形處理
+# 二維卷冊積
+# 使用filter2D()製作的各種圖形處理效果
+
 二维卷积
 
-用不同的卷积核可以得到 各种不同的图像处理效果。OpenCV提供了 filter2D()来完成图像的卷积运算，调用方式如下：
+用不同的卷积核可以得到 各种不同的图像处理效果。
+OpenCV提供了 filter2D()来完成图像的卷积运算，调用方式如下：
 filter2D(src, ddepth, kernel[, dst[, anchor[, delta[, borderType]]]])
     anchor参数指定卷积核的锚点位置，当它为默认值(-1，-1)时， 以卷积核的中心为锚点
 使用filter2D()制作的各种图像处理效果
@@ -5547,16 +5424,15 @@ filename = "C:/_git/vcs/_4.python/opencv/data/lena.jpg"
 src = cv2.imread(filename)
 
 kernels = [
-    ("低通滤波器", np.array([[1, 1, 1], [1, 2, 1], [1, 1, 1]]) * 0.1),
-    ("高通滤波器", np.array([[0.0, -1, 0], [-1, 5, -1], [0, -1, 0]])),
-    ("边缘检测", np.array([[-1.0, -1, -1], [-1, 8, -1], [-1, -1, -1]])),
+    ("低通濾波器", np.array([[1, 1, 1], [1, 2, 1], [1, 1, 1]]) * 0.1),
+    ("高通濾波器", np.array([[0.0, -1, 0], [-1, 5, -1], [0, -1, 0]])),
+    ("邊緣檢驗", np.array([[-1.0, -1, -1], [-1, 8, -1], [-1, -1, -1]])),
 ]
 
-index = 0
-fig, axes = plt.subplots(1, 3, figsize=(12, 4.3))
+fig, axes = plt.subplots(1, 3, figsize=(12, 5))
 for ax, (name, kernel) in zip(axes, kernels):
     dst = cv2.filter2D(src, -1, kernel)
-    # 由于matplotlib的颜色顺序和OpenCV的顺序相反
+    # 由於matplotlib的彩色順序和OpenCV的順序相反
     ax.imshow(dst[:, :, ::-1])
     ax.set_title(name)
     ax.axis("off")
@@ -5564,15 +5440,44 @@ fig.subplots_adjust(0.02, 0, 0.98, 1, 0.02, 0)
 
 plt.show()
 
+kernel1_name = "低通濾波器"
+kernel1 = np.array([[1, 1, 1], [1, 2, 1], [1, 1, 1]]) * 0.1
+kernel2_name = "高通濾波器"
+kernel2 = np.array([[0.0, -1, 0], [-1, 5, -1], [0, -1, 0]])
+kernel3_name = "邊緣檢驗"
+kernel3 = np.array([[-1.0, -1, -1], [-1, 8, -1], [-1, -1, -1]])
+
+dst1 = cv2.filter2D(src, -1, kernel1)
+dst2 = cv2.filter2D(src, -1, kernel2)
+dst3 = cv2.filter2D(src, -1, kernel3)
+
+plt.figure(figsize=(12, 5))
+
+plt.subplot(131)
+plt.imshow(dst1[:, :, ::-1])
+plt.title(kernel1_name)
+
+plt.subplot(132)
+plt.imshow(dst2[:, :, ::-1])
+plt.title(kernel2_name)
+
+plt.subplot(133)
+plt.imshow(dst3[:, :, ::-1])
+plt.title(kernel3_name)
+
+plt.tight_layout()  # 緊密排列，並填滿原圖大小
+show()
+
 print("------------------------------------------------------------")  # 60個
 
 """
-有些特殊的卷积核可以表示成一个列矢量和一个行矢量的乘积，这时只需要将原始图像按 顺序与这两个矢量进行卷积，所得到的最终结果和直接与卷积核进行卷积的结果相同。对于较大的卷积核能大幅度地提高 计算速度。
+有些特殊的卷积核可以表示成一个列矢量和一个行矢量的乘积，
+这时只需要将原始图像按 顺序与这两个矢量进行卷积，
+所得到的最终结果和直接与卷积核进行卷积的结果相同。
+对于较大的卷积核能大幅度地提高 计算速度。
 
 OpenCV提供了 sepFilter2D()来进行这种分步卷积，调用参数如下：
-
 sepFilter2D(src, ddepth, kernelX, kernelY[, dst[, anchor[, delta[, borderType]]]])
-
 比较filter2D()和sepFilter2D() 的计算速度：
 """
 
@@ -5636,6 +5541,13 @@ C0 — loDiff < C(x，y) < C0 + hiDiff
 。image 图像中的像素(x,y)与mask中的(x + 1,y + 1)对应。填充只针对mask中的值为0的像素进行。 进行填充之后，mask中所有被填充的像素将被赋值为1。如果只希望修改mask,而不对原始图 像进行填充，可以开启flags标志中FLOODFTLL_MASK_ONLY。
 #floodFill()的填充效果
 """
+# 形態學運算
+#    scpy2.opencv.morphology_demo：示範OpenCV中的各種形態學運算。
+# 填充-floodFill
+# 示範floodFill()的填充效果
+#    scpy2.opencv.floodfill_demo：示範填充函數floodFill()的各個參數的用法。
+# 去瑕疵-inpaint
+#    scpy2.opencv.inpaint_demo：示範inpaint()的用法，使用者用滑鼠繪制需要去瑕疵的區域，程式實時顯示運算結果。
 
 filename = "C:/_git/vcs/_4.python/opencv/data/coins.png"
 
@@ -5653,6 +5565,7 @@ axes[1].imshow(img)
 
 plt.show()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 使用到 scpy2
@@ -5747,6 +5660,10 @@ if __name__ == '__main__':
     demo.configure_traits()
 
 """
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

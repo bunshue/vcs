@@ -28,12 +28,71 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
+import warnings
+
+warnings.filterwarnings("ignore")
+
+print("------------------------------------------------------------")  # 60個
+
 
 def show():
     plt.show()
     pass
 
-'''
+
+print("------------------------------------------------------------")  # 60個
+
+print("傅里葉變換")
+
+
+# 將頻域數據轉換成時序數據
+# bins爲頻域數據，n設置使用前多少個頻域數據，loop設置生成數據的長度
+def fft_combine(bins, n, loops=1):
+    length = int(len(bins) * loops)
+    data = np.zeros(length)
+    index = loops * np.arange(0, length, 1.0) / length * (2 * np.pi)
+    for k, p in enumerate(bins[:n]):
+        if k != 0:
+            p *= 2  # 除去直流成分之外, 其餘的係數都乘2
+        data += np.real(p) * np.cos(k * index)  # 餘弦成分的係數爲實數部分
+        data -= np.imag(p) * np.sin(k * index)  # 正弦成分的係數爲負的虛數部分
+    return index, data
+
+
+df = pd.read_csv("AirPassengers.csv")
+ts = df["#Passengers"] # Series
+
+plt.subplot(211)
+plt.plot(ts, "r")
+# print("ts :", ts)
+
+# 平穩化
+ts_log = np.log(ts)
+#print("ts_log :", ts_log)
+
+ts_diff = ts_log.diff(1)  # 差分 A[n] = A[n]-A[n-1], 故第0項為NaN, 總數少1項
+#print("ts_diff :", ts_diff)
+
+ts_diff = ts_diff.dropna()  # 去除空數據NaN
+#print("ts_diff :", ts_diff)
+
+fy = np.fft.fft(ts_diff) # np.array 做 fft
+print("fy :", fy)
+print(fy[:10])  # 顯示前10個頻域數據
+
+conv1 = np.real(np.fft.ifft(fy))  # 逆變換
+
+index, conv2 = fft_combine(fy / len(ts_diff), int(len(fy) / 2 - 1), 1.3)  # 只關心一半數據
+
+plt.subplot(212)
+
+plt.plot(ts_diff, "r")
+plt.plot(conv1 - 0.5, "g")  # 爲看清楚，將顯示區域下拉0.5
+plt.plot(conv2 - 1, "b")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("讀寫XML文件")
@@ -93,10 +152,6 @@ for link in soup.find_all('a'):
     if addr != None and addr.find('xieyan0811/article') != -1: 
         print(addr)
 """
-print("------------------------------------------------------------")  # 60個
-'''
-
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -280,11 +335,9 @@ plt.plot(new_data - 0.5)
 show()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 """ pip 失敗
-import warnings
-warnings.filterwarnings('ignore')
-
 import tushare as ts
 from fbprophet import Prophet
 import datetime
@@ -320,6 +373,7 @@ prophet.plot_components(forecasts).show()
 show()
 """
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 # SnowNLP用法
 
@@ -335,13 +389,11 @@ print(s.tf)  # tf
 print(s.idf)  # idf
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 from sklearn.model_selection import train_test_split
-import warnings
 import re
 import tools  # 工具實現在tools.py文件中
-
-warnings.filterwarnings("ignore")
 
 # 讀訓練數據
 data = pd.read_csv("data/weibo_train_data.txt", sep="\t", header=None)
@@ -364,7 +416,7 @@ else:
 user_data_2 = user_data.rename(columns={"l": "avg_l", "c": "avg_c", "f": "avg_f"})
 print(user_data.head())
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 # 模型訓練
 import xgboost as xgb
@@ -427,7 +479,7 @@ params = {
     "objective": "reg:linear",
 }
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 # 提取關鍵詞
 import jieba
@@ -454,7 +506,7 @@ for key, value in result.items():
         arr_word.append(key)
 print(arr_word)
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 # 從文字中提取特徵
 from scipy import stats
@@ -479,7 +531,7 @@ dic_key_f = get_dic(arr_word, "f", 100, data[:100000])
 dic_key_c = get_dic(arr_word, "c", 50, data[:100000])
 dic_key_l = get_dic(arr_word, "l", 100, data[:100000])
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 val = pd.merge(val, user_data_2, on="uid", how="left")
 train = pd.merge(train, user_data_2, on="uid", how="left")
@@ -519,8 +571,6 @@ def calc_dic(train, val, dst, dic):
 model_f = calc_dic(train, val, "f", dic_key_f)
 model_c = calc_dic(train, val, "c", dic_key_c)
 model_l = calc_dic(train, val, "l", dic_key_l)
-
-print("------------------------------")  # 30個
 
 # 保存模型
 dic = {}
@@ -595,6 +645,7 @@ print(out.head())
 out.to_csv("tmp_result_190624.txt", index=False, header=None, sep="\t")
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 """ some fail
 df = pd.read_csv('data/weibo_train_data.txt',sep='\t',header=None)
@@ -645,8 +696,6 @@ print("------------------------------------------------------------")  # 60個
 
 import tensorflow as tf
 
-print("------------------------------------------------------------")  # 60個
-
 """
 手動下載
 https://storage.googleapis.com/tensorflow/keras-applications/resnet/resnet50_weights_tf_dim_ordering_tf_kernels.h5
@@ -696,9 +745,6 @@ from keras.layers import *
 from keras.applications import *
 from keras.preprocessing.image import *
 import h5py
-import warnings
-
-warnings.filterwarnings("ignore")
 
 
 def get_features(MODEL, width, height, lambda_func=None):
@@ -775,7 +821,6 @@ print('------------------------------------------------------------')	#60個
 
 # 用迭代訓練過程中的錯誤率做圖
 
-import matplotlib.pyplot as plt
 
 def plot_training(history):
     acc = history.history['acc']
@@ -806,9 +851,6 @@ from keras.layers import *
 from keras.applications import *
 from keras.preprocessing.image import *
 import h5py
-import warnings
-
-warnings.filterwarnings("ignore")
 
 
 def get_features(MODEL, width, height, lambda_func=None):
@@ -842,6 +884,7 @@ get_features(ResNet50, 224, 224)
 get_features(InceptionV3, 299, 299, inception_v3.preprocess_input)
 get_features(Xception, 299, 299, xception.preprocess_input)
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("訓練模型和預測")
@@ -882,7 +925,6 @@ print('------------------------------')	#30個
 
 #訓練結果分析
 
-import matplotlib.pyplot as plt
 
 def plot_training(history):
     acc = history.history['acc']
