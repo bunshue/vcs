@@ -25,7 +25,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 def show():
-    plt.show()
+    # plt.show()
     pass
 
 
@@ -33,8 +33,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # Random Sampling
-
-#from __future__ import print_function, division
 
 import numpy
 import scipy.stats

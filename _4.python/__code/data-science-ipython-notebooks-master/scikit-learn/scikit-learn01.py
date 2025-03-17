@@ -286,6 +286,8 @@ def plot_svm(N=100):
 # NG interact(plot_svm, N=[10, 200], kernel='linear')
 show()
 
+sys.exit()
+
 print("------------------------------------------------------------")  # 60個
 
 # Support Vector Machine with Kernels Classifier
