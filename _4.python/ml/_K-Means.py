@@ -2436,10 +2436,14 @@ g = sns.FacetGrid(df, hue="Private", palette="coolwarm", aspect=2)
 g = g.map(plt.hist, "Outstate", bins=20, alpha=0.7)
 show()
 
+# Create a similar histogram for the Grad.Rate column.
+
 sns.set_style("darkgrid")
 g = sns.FacetGrid(df, hue="Private", palette="coolwarm", aspect=2)
 g = g.map(plt.hist, "Grad.Rate", bins=20, alpha=0.7)
 show()
+
+# There seems to be a private school with a graduation rate of higher than 100%
 
 cc = df[df["Grad.Rate"] > 100]
 print(cc)
@@ -2455,6 +2459,10 @@ sns.set_style("darkgrid")
 g = sns.FacetGrid(df, hue="Private", palette="coolwarm", aspect=2)
 g = g.map(plt.hist, "Grad.Rate", bins=20, alpha=0.7)
 show()
+
+# K Means Cluster Creation
+
+from sklearn.cluster import KMeans
 
 clf = KMeans(n_clusters=2, verbose=0, tol=1e-3, max_iter=300, n_init=20)  # K-平均演算法
 
@@ -2523,7 +2531,6 @@ centroid_diff['Mean of corresponding entity (private)']=np.array(df_pvt.mean())
 centroid_diff['Mean of corresponding entity (public)']=np.array(df_pub.mean())
 print(centroid_diff)
 """
-
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
